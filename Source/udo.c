@@ -1007,6 +1007,7 @@ GLOBAL BOOLEAN str_for_desttype ( const char *s )
 		case TOTVH:	flag= (strstr(s, "tvh")!=NULL);		break;
 		case TOUDO:	flag= (strstr(s, "udo")!=NULL);		break;
 		case TOKPS:	flag= (strstr(s, "ps")!=NULL);		break;
+		case TOLDS:	flag= (strstr(s, "ldoc")!=NULL);	break;
 	}
 		
 	if (strstr(s, "all")!=NULL)		flag= TRUE;
