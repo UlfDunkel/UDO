@@ -110,7 +110,7 @@ const char *UDO2PS=
 	"% Extract from Antiword by Adri van Os\n"
 	"/newcodes	% ISO-8859-1 character encodings\n"
 	"[\n"
-	"128/Euro 140/ellipsis 141/trademark 142/perthousand 143/bullet\n"
+	"128/Euro 129/ring 140/ellipsis 141/trademark 142/perthousand 143/bullet\n"
 	"144/quoteleft 145/quoteright 146/guilsinglleft 147/guilsinglright\n"
 	"148/quotedblleft 149/quotedblright 150/quotedblbase 151/endash 152/emdash\n"
 	"153/minus 154/OE 155/oe 156/dagger 157/daggerdbl 158/fi 159/fl\n"

@@ -1406,6 +1406,9 @@ GLOBAL void node2postscript ( char *s, int text )
 			/* Changed in V6.4.1 [NHz] */
 			qreplace_all(s, "(", 1, "\\(", 2);
 			qreplace_all(s, ")", 1, "\\)", 2);
+			/* Changed: Fixed bug #0000062 in V6.4.1 [NHz] */
+			qreplace_all(s, "[", 1, "\\[", 2);
+			qreplace_all(s, "]", 1, "\\]", 2);
 			break;
 		
 		case KPS_CONTENT:
@@ -1805,13 +1808,13 @@ LOCAL void specials2ps ( char *s )
 {
 	qreplace_all(s, "(---)", 5, TEMPO_S, TEMPO_S_LEN);
 	qreplace_all(s, "(--)", 4, TEMPO_S2, TEMPO_S2_LEN);
-	qreplace_all(s, "---", 3, "\\075", 4);
-	qreplace_all(s, "--", 2, "\\262", 4);
+	qreplace_all(s, "---", 3, "\\230", 4);
+	qreplace_all(s, "--", 2, "\\227", 4);
 	qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "---", 3);
 	qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "--", 2);
 
 	/* Changed in V6.4.1 [NHz] */
-	qreplace_all(s, "!..", 3, "\\140", 4);	/* according to table in ud2ps.h */
+	qreplace_all(s, "!..", 3, "\\214", 4);	/* according to table in ud2ps.h */
 	qreplace_all(s, COPY_S, COPY_S_LEN, "\\251", 4);
 }
 
