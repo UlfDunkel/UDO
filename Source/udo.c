@@ -723,18 +723,21 @@ GLOBAL void *um_realloc(void *block, size_t size)
 			}
 			else
 			{
-				/* reallocate memory */
-				buffer=realloc(tanker->block, size);
-				/* Was this successfull? */
-				if (buffer != NULL)
+				if (tanker->block==block) /* v6.3.6: checken, ob das aktuelle Element der gesuchte Block ist [vj] */
 				{
-					/* We need to save the new buffer */
-					tanker->block=buffer;
-					tanker->endmark=(char *)buffer+size-endstring_len;
-					/* Copy ending string */
-					strcpy(tanker->endmark, endstring);
+					/* reallocate memory */
+					buffer=realloc(tanker->block, size);
+					/* Was this successfull? */
+					if (buffer != NULL)
+					{
+						/* We need to save the new buffer */
+						tanker->block=buffer;
+						tanker->endmark=(char *)buffer+size-endstring_len;
+						/* Copy ending string */
+						strcpy(tanker->endmark, endstring);
+					}
+					lauf=0; /* exit loop */
 				}
-				lauf=0; /* exit loop */
 			}
 		} while ((tanker != NULL)&&(lauf==1));
 
@@ -4835,10 +4838,10 @@ GLOBAL size_t toklen ( char *s )
 	String an, getrennt durch ein Leerzeichen.
         maxlen gibt die maximale Größe des Puffers in s an
 	------------------------------------------------------------	*/
-GLOBAL void tokcat ( char *s, int maxlen )
+GLOBAL void tokcat ( char *s, size_t maxlen )
 {
 	register int i;
-	int m=0; /* Länge des bisherigen Strings mitzählen */
+	size_t m=0; /* Länge des bisherigen Strings mitzählen */
 
 	for (i=1; i<token_counter; i++)
 	{       /* Hier wird auf m die Länge des neues Token addiert, plus
@@ -4870,7 +4873,7 @@ GLOBAL void tokcat ( char *s, int maxlen )
 	token[0] alle Tokens, die durch Leerzeichen getrennt wurden.
         maxlen gibt die maximale Größe des Puffers in s an
 	------------------------------------------------------------	*/
-GLOBAL void tokcpy2 ( char *s, int maxlen )
+GLOBAL void tokcpy2 ( char *s, size_t maxlen )
 {
 	s[0]= EOS;
 	tokcat(s, maxlen);

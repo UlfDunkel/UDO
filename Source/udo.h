@@ -370,8 +370,8 @@ GLOBAL void c_include ( void );
 	############################################################	*/
 GLOBAL void str2tok ( char *s );
 GLOBAL size_t toklen ( char *s );
-GLOBAL void tokcat ( char *s, int maxlen );
-GLOBAL void tokcpy2 ( char *s, int maxlen );
+GLOBAL void tokcat ( char *s, size_t maxlen );
+GLOBAL void tokcpy2 ( char *s, size_t maxlen );
 GLOBAL void token_reset ( void );
 GLOBAL void token_output ( BOOLEAN reset_internals );
 GLOBAL void tokenize ( char *s);
