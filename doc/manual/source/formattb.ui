@@ -1,9 +1,61 @@
 # doc/manual/source/format-table.ui
-# letzte Änderungen: 20.12.2003 / last changes: Dec 20, 2003
+# letzte Änderungen: 28.01.2004 / last changes: Jan 28, 2004
 
 !iflang [german]
 !index Kürzel
-#Ausgabe-Formate
+
+!begin_table [|l|l|l|c|] !hline
+(!B)Kürzel(!b) !! (!B)Format-Name(!b) !! (!B)Erläuterung(!b) !! (!B)Plattform(en)(!b)
+!hline
+amg !! AmigaGuide !! Hypertext-System, vorwiegend zur Dokumentation von Amiga-Programmen !! Commodore Amiga
+!hline
+aqv !!Apple QuickView !! älteres Hypertext-Format unter MacOS !! Apple
+!hline
+asc !!ASCII !! "Plain" Text !! alle
+!hline
+drc !! David's Readme Compiler !! DOS-Programm zur Erzeugung menügesteuerter ReadMe's als EXE-Datei  !! MS-DOS
+!hline
+helptag !! HP-Helptag-SGML !! SGML-basiertes Hypertext-Hilfesystem für kommerzielle Unixe (HP-UX, Sun Solaris, IBM AIX) !! Unix
+!hline
+html !! HTML (Hypertext Markup Language) !! Seitenauszeichnungssprache, u.a. für Webseiten, Dokumentationen etc. !! plattformunabhängig
+!hline
+hh !! HTMLHelp !! zur Erzeugung von HTML-Help-Dateien unter Windows (HTML-Variante mit Erweiterungen) !! Win32
+!hline
+tex !! (!LaTeX) 2.09, (!LaTeX)2e !! Satzsystem, insbesondere für wissenschaftliche Publikationen !! zahlreiche Plattformen
+!hline
+ipf !! OS/2 IPF !! SGML-basiertes Textformat zur Erzeugung von Hilfedateien (INF, HLP) unter OS/2 !! OS/2
+!hline
+linuxdoc !! Linuxdoc-SGML !! Linuxdoc-SGML (neuerdings: SGMLtools) ist genau wie UDO ein Multiformat-Konverter, der sein eigenes Format in LaTeX, Manualpage, RTF, HTML, Texinfo etc. umwandeln kann !! Unix/Linux
+!hline
+lyx !! LyX !! (!LaTeX)-verwandtes Dokumentenverarbeitungsprogramm !! Unix/Linux
+!hline
+man !! Manualpage !! Unix-/Linux-Hilfeseiten für Kommandozeilenprogramme/-aufrufe !! Unix/Linux
+!hline
+nroff !! NROFF !!  Unix-/Linux-Hilfeseiten für Kommandozeilenprogramme/-aufrufe !! Unix/Linux
+!hline
+pdflatex !! PDF(!LaTeX) !! zur Erzeugung von PDF-Dateien aus (!LaTeX) !! diverse
+!hline
+ps !! PostScript !!  geräteunabhängige Seitenbeschreibungssprache, z.B. zur Ansteuerung von Druckern; kann zur Erstellung von PDF-Dateien genutzt werden (Ghostscript, Adobe Distiller) !! diverse
+!hline
+pchelp !! Pure-C-Help !! Hilfesystem für den Pure C-Compiler !!  Atari ST
+!hline
+rtf !! RTF (Rich Text Format) !! Textformat für den Textaustausch zwischen verschiedenen Textverarbeitungsprogrammen  !! diverse
+!hline
+c, pascal !! Sourcecode (C und Pascal) !! Die UDO-Quelldatei wird in Sourcecode umgewandelt, d.h. normaler Text wird Kommentar, der Inhalt der Sourcecode-Umgebung wird C- bzw. Pascal-Source. !! diverse
+!hline
+stg !! ST-Guide !! Hypertextsystem !! Atari ST
+!hline
+info !! GNU Texinfo !! zur Erzeugung von Online-Dokumentationen mit dem Kommandozeilen-Aufruf (!T)info 'command'(!t) !! Linux, MiNTNet
+!hline
+v !! Turbo-Vision-Help !! zur Erstellung von  Onlinehilfen für DOS-Programme, die mit Borlands Turbo Vision-Library geschrieben wurden !! MS-DOS
+!hline
+udo !! UDO !! führt alle UDO-Eingabedateien in eine einzige zusammen !! alle von UDO unterstützten
+!hline
+win, wh4 !! Windows-Help, WinHelp4 !! RTF-Variante zur Erzeugung von Win-Help-Dateien unter Windows !! Windows (Win16, Win32)
+!hline
+!end_table
+
+!begin_ignore
 !begin_xlist [nroff] !short
 !item [amg]   AmigaGuide
 !item [aqv]   Apple-QuickView
@@ -31,11 +83,65 @@
 !item [wh4]   WinHelp4
 !item [win]   WinHelp
 !end_xlist
+!end_ignore
+
 !endif
 
 !iflang [english]
 !index Abbreviations
-#Ausgabe-Formate
+
+!begin_table [|l|l|l|c|] !hline
+(!B)Abbrevation(!b) !! (!B)Format Name(!b) !! (!B)Description(!b) !! (!B)Platform(s)(!b)
+!hline
+amg !! AmigaGuide !! hypertext system, used for documentation of Amiga programs !! Commodore Amiga
+!hline
+aqv !!Apple QuickView !! old hypertext format for MacOS !! Apple
+!hline
+asc !!ASCII !! "plain" text !! all
+!hline
+drc !! David's Readme Compiler !! DOS program for creating menu-driven ReadMe's as EXE-programs !! MS-DOS
+!hline
+helptag !! HP-Helptag-SGML !! SGML-based hypertext helpsystem for commercial Unices (HP-UX, Sun Solaris, IBM AIX) !! Unix
+!hline
+html !! HTML (Hypertext Markup Language) !! page description language -- for websites, documentations and more !! platform-independent
+!hline
+hh !! HTMLHelp !! HTML-related format, for creation of HTML-Help files under windows !! Win32
+!hline
+tex !! (!LaTeX) 2.09, (!LaTeX)2e !! typesetting system, especially for scientific publications !! many platforms
+!hline
+ipf !! OS/2 IPF !! SGML-based text format for creating help files (INF, HLP) under OS/2 !! OS/2
+!hline
+linuxdoc !! Linuxdoc-SGML !! Linuxdoc-SGML (recently: SGMLtools) is -- like UDO -- a multiformat converter which converts its own format to LaTeX, Manualpage, RTF, HTML, Texinfo... !! Unix/Linux
+!hline
+lyx !! LyX !! a (!LaTeX)-related document processor !! Unix/Linux
+!hline
+man !! Manualpage !! Unix-/Linux-help pages for commandline programs !! Unix/Linux
+!hline
+nroff !! NROFF !! Unix-/Linux-help pages for commandline programs !! Unix/Linux
+!hline
+pdflatex !! PDF(!LaTeX) !! for producing PDF files from (!LaTeX) !! several
+!hline
+ps !! PostScript !!  device-independent page description language, e.g. for printers; can also be used for producing PDF files (Ghostscript, Adobe Distiller) !! several
+!hline
+pchelp !! Pure-C-Help !! help system for the Pure C compiler !!  Atari ST
+!hline
+rtf !! RTF (Rich Text Format) !! for exchanging text between different programs and platforms !! several
+!hline
+c, pascal !! Sourcecode (C and Pascal) !! the UDO source file will be converted to sourcecode, meaning normal text becomes comment, the content of the sourcecode environment becomes C-/Pascal-sourcecode !! several
+!hline
+stg !! ST-Guide !! a hypertext system !! Atari ST
+!hline
+info !! GNU Texinfo !! for making online documentations, started with (!T)info 'command'(!t) !! Linux, MiNTNet
+!hline
+v !! Turbo-Vision-Help !! creating online helpfiles for DOS programs written with Borland's Turbo Vision-Library !! MS-DOS
+!hline
+udo !! UDO !! merges all UDO input files into one big file !! all platforms with UDO-support
+!hline
+win, wh4 !! Windows-Help, WinHelp4 !! RTF-derived format for producing WinHelp files under Windows !! Windows (Win16, Win32)
+!hline
+!end_table
+
+!begin_ignore
 !begin_xlist [htag] !short
 !item [amg]   AmigaGuide
 !item [aqv]   Apple-QuickView
@@ -63,4 +169,6 @@
 !item [wh4]   WinHelp4
 !item [win]   WinHelp
 !end_xlist
+!end_ignore
+
 !endif
