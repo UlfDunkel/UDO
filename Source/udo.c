@@ -6713,7 +6713,8 @@ LOCAL void output_preamble ( void )
 			
 		case TOLYX:
 			voutlnf("# This file was created by UDO Version %s.%s.%s", UDO_REL, UDO_SUBVER, UDO_PL);
-			outln("# UDO (C) 1995-1999 by Dirk Hagedorn (info@dirk-hagedorn.de)");
+			outln("# UDO (C) 1995-2001 by Dirk Hagedorn (info@dirk-hagedorn.de)");
+			outln("# UDO (C) 2001-2004 by The UDO Community (www.udo-open-source.org)");
 			outln("\\lyxformat 2.10");
 			voutlnf("\\textclass %s", (use_style_book) ? "book" : "article");
 			outln("\\inputencoding latin1");
@@ -10726,6 +10727,7 @@ LOCAL void init_lang ( void )
 		    strcpy(lang.see,        "zie");
 		    strcpy(lang.also,       "zie ook");
 		    strcpy(lang.by,         "door");
+		    strcpy(lang.fur,        "for"); /* New in V6.5.2 [NHz] */
 		    strcpy(lang.up,         "&Omhoog");
 		    strcpy(lang.exit,       "Be	i&ndigen");
 		    strcpy(lang.unknown,    "Onbekend");
@@ -10755,6 +10757,7 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.see,		"see");
 		  	strcpy(lang.also,		"see also");
 		  	strcpy(lang.by,			"by");
+		    strcpy(lang.fur,    "for"); /* New in V6.5.2 [NHz] */
 		  	strcpy(lang.up,			"&Up");
 		  	strcpy(lang.exit,		"E&xit");
 		  	strcpy(lang.unknown,	"Unknown");
@@ -10784,6 +10787,7 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.see,		"voir");
 		  	strcpy(lang.also,		"voir aussi");
 		  	strcpy(lang.by,			"de");
+		    strcpy(lang.fur,    "for"); /* New in V6.5.2 [NHz] */
 		  	strcpy(lang.up,			"&Haut");
 		  	strcpy(lang.exit,		"&Fin");
 		  	strcpy(lang.unknown,	"Inconnu");
@@ -10819,6 +10823,7 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.see,		"vedere");
 		  	strcpy(lang.also,		"vedere anche");
 		  	strcpy(lang.by,			"da");
+		    strcpy(lang.fur,    "for"); /* New in V6.5.2 [NHz] */
 		  	strcpy(lang.up,			"S&u");
 		  	strcpy(lang.exit,		"Uscita");
 		  	strcpy(lang.unknown,	"Ignoto");
@@ -10848,6 +10853,7 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.see,		"ver");
 		  	strcpy(lang.also,		"ver tambi(!`e)n");
 		  	strcpy(lang.by,			"de");
+		    strcpy(lang.fur,    "for"); /* New in V6.5.2 [NHz] */
 		  	strcpy(lang.up,			"Elevado");
 		  	strcpy(lang.exit,		"Terminar");
 		  	strcpy(lang.unknown,	"Desconocido");
@@ -10885,6 +10891,7 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.see,		"se");
 		  	strcpy(lang.also,		"se (!\"a)ven");
 		  	strcpy(lang.by,			"av");
+		    strcpy(lang.fur,    "for"); /* New in V6.5.2 [NHz] */
 		  	strcpy(lang.up,			"&Upp");
 		  	strcpy(lang.exit,		"Avsluta");
 		  	strcpy(lang.unknown,	"Unknown");
@@ -10919,6 +10926,7 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.see,		"siehe");
 		  	strcpy(lang.also,		"siehe auch");
 		  	strcpy(lang.by,			"von");
+		    strcpy(lang.fur,    "f(!\"u)r"); /* New in V6.5.2 [NHz] */
 		  	strcpy(lang.up,			"&Hoch");
 		  	strcpy(lang.exit,		"Bee&nden");
 		  	strcpy(lang.unknown,	"Unbekannt");
@@ -10932,6 +10940,7 @@ LOCAL void init_lang ( void )
 				strcpy(lang.html_lang,	"de");
 				strcpy(lang.html_start,	"Beginn des Dokumentes");
 		  	
+		  	uni2ascii(lang.fur); /* New in V6.5.2 [NHz] */
 		  	uni2ascii(lang.update);
 		  	break;
 	}
