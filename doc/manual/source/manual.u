@@ -1,7 +1,7 @@
 ################################################################################
 # doc/manual/source/manual.u
 # Hauptfile der Anleitung zu UDO / udo manual main page
-# letzte Änderungen: 17.01.2004 / last changes: Jan 17, 2004
+# letzte Änderungen: 24.01.2004 / last changes: Jan 24, 2004
 ################################################################################
 # In diesem File befindet sich kein Text! Alle Texte werden nachgeladen
 # This file doesn't contain any text! Any text will be included from other files.
@@ -64,15 +64,15 @@
 !include lang.ui
 
 # ------------------------------------------------------------------------------
-# Die deutschen Trennregeln befinden sich in der Datei hyphen-de.ui
+# Die deutschen Trennregeln befinden sich in der Datei hyph-de.ui
 # ------------------------------------------------------------------------------
-# The english syllabification patterns are inside the file hyphen-en.ui
+# The english syllabification patterns are inside the file hyph-en.ui
 # ------------------------------------------------------------------------------
 !iflang [german]
-!include hyphen-de.ui
+!include hyph-de.ui
 !endif
 !iflang [english]
-!include hyphen-en.ui
+!include hyph-en.ui
 !endif
 
 # ------------------------------------------------------------------------------
@@ -368,7 +368,7 @@
 
 # Einführung / Introduction
 !ifnset [NoIntro]
-!include introduction.ui
+!include intro.ui
 !endif
 
 # Installation

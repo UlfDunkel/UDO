@@ -1,5 +1,5 @@
 # doc/manual/source/history.ui
-# letzte Änderungen: 17.01.2004 / last changes: Jan 17, 2004
+# letzte Änderungen: 24.01.2004 / last changes: Jan 24, 2004
 
 
 !iflang [german]
@@ -1838,7 +1838,7 @@ a change of the syntax of some commands.
           flexibleren Kommandos (!KW [ifdest]), (!KW [else]) und (!KW [endif]) erstellt
           werden.
 
-	  !include history_begin_asc_de.ui
+	  !include begascde.ui
 	!end_itemize
 !endif
 !iflang [english]
@@ -1850,7 +1850,7 @@ a change of the syntax of some commands.
 			have to be made with the more flexible commands
 			(!KW [ifdest]), (!KW [else]) and (!KW [endif]).
 
-	!include history_begin_asc_en.ui
+	!include begascen.ui
 	!end_itemize
 !endif
 
