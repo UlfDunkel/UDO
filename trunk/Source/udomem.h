@@ -27,13 +27,13 @@
 /* define or undef this symbol, to get or don't get call-messages */
 #undef UM_DEBUG_SHOW_CALLS
 /* define or undefine this symbol, to get or don't get a stat of malloc/free calls */
-#define UM_DEBUG_SHOW_STATS
+#undef UM_DEBUG_SHOW_STATS
 /* define or undef to get more debug messages */
-#define UM_DEBUG_SHOW_MSGS
+#undef UM_DEBUG_SHOW_MSGS
 /* define or undef to say um_free to print the block start and end on an
  * "memory block end check broken" error
  */
-#define UM_DEBUG_SHOW_BUFFER_ON_FREE_ERROR
+#undef UM_DEBUG_SHOW_BUFFER_ON_FREE_ERROR
 /*
  * For gcc the um_free and um_realloc methods use %ld instead of %d in some printf
  * statements, to get rid of some compiler warnings. This tests if Linux is used,
