@@ -2,4 +2,5 @@
 cd ./input/bergpano/
 chmod 700 bergpano
 chmod 700 debug
+./bergpano
 cd ../..
