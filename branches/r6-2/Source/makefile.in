@@ -50,6 +50,11 @@ tp$(O):	$(HEAD) tp.h commands.h chr.h env.h file.h img.h msg.h \
 udo$(O):	$(HEAD) udo.h abo.h cfg.h chr.h env.h file.h img.h msg.h \
 		par.h str.h sty.h tab.h toc.h tp.h gui.h
 
+install::	udo$(X)
+		install -d $(BIN)
+		install ./udo $(BIN)
+
 clean::
 	$(RM) *$(O)
 	$(RM) udo$(X)
+
