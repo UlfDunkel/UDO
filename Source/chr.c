@@ -1375,25 +1375,36 @@ GLOBAL void node2pchelp ( char *s )
 	Postscript mag keine Leerzeichen und anderes
 	<->	s:	String, der als Label oder Node benutzt werden soll.
 	------------------------------------------------------------	*/
-/* New in r6pl15 [NHz] */
-GLOBAL void node2postscript ( char *s, BOOLEAN text )
+/* Changed in r6pl16 [NHz] */
+GLOBAL void node2postscript ( char *s, int text )
 {
-	if(text)
+	switch(text)
 	{
-		qreplace_all(s, ")", 1, "\\)", 2);
-		qreplace_all(s, "(", 1, "\\(", 2);
-	}
-	else
-	{
-		qreplace_all(s, " ", 1, "_", 1);
-		qdelete_all(s, ";", 1);
-		qdelete_all(s, ":", 1);
-		qdelete_all(s, "\\(", 2);
-		qdelete_all(s, "(", 1);
-		qdelete_all(s, "\\)", 2);
-		qdelete_all(s, ")", 1);
-		qdelete_all(s, "-", 1);
-		qdelete_last(s, "_", 1);
+		case KPS_CONTENT:
+			qreplace_all(s, "/", 1, "\\/", 2);
+			break;
+
+		case KPS_BOOKMARK:
+			if(strlen(s) > 32L)
+			{
+				s[32] = EOS;
+				if(s[31] == '\\')
+					s[31] = '';
+			}
+			qreplace_all(s, "/", 1, "\\/", 2);
+			break;
+		
+		case KPS_NAMEDEST:
+			qreplace_all(s, " ", 1, "_", 1);
+			qdelete_all(s, ";", 1);
+			qdelete_all(s, ":", 1);
+			qdelete_all(s, "/", 1);
+			qdelete_all(s, "\\(", 2);
+			qdelete_all(s, "(", 1);
+			qdelete_all(s, "\\)", 2);
+			qdelete_all(s, ")", 1);
+			qdelete_all(s, "-", 1);
+			qdelete_last(s, "_", 1);
 	}
 }	/* node2postscript */
 
@@ -2012,6 +2023,18 @@ GLOBAL void c_vars ( char *s )
 		case TOMHH:
 			c_quotes_apostrophes(s, "`", "'", "&quot;", "&quot;");
 			qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "&quot;&quot;", 12);
+			qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
+			break;
+		/* New in r6pl16 [NHz] */
+		case TOKPS:
+			{	switch (destlang)
+				{	case TOGER:	c_quotes_apostrophes(s, ") udoshow /quotesinglbase glyphshow (", ") udoshow /quoteleft glyphshow ( ", ") udoshow /quotedblbase glyphshow (", ") udoshow /quotedblleft glyphshow ( ");	break;
+					case TOFRA:	c_quotes_apostrophes(s, ") udoshow /guilsinglleft glyphshow (", ") udoshow /guilsinglright glyphshow ( ", "\\253", "\\273");	break;
+					case TONOR:	c_quotes_apostrophes(s, "\\<", "\\>", "\\\\\\(", "\\\\\\(");	break;
+					default:	c_quotes_apostrophes(s, ") udoshow /quotesingle glyphshow (", ") udoshow /quotesingle glyphshow (", "\\042", "\\042");	break;
+				}
+			}
+			qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "\"\"", 2);
 			qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
 			break;
 		default:
