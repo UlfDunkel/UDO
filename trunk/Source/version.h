@@ -65,227 +65,241 @@
 	Compiler- und system abhaengige Dinge setzen
 	------------------------------------------------------------	*/
 #ifdef __TOS__
-#define	UDO_OS			"TOS"
-#define	USE_SLASH			0
+#define	UDO_OS					"TOS"
+#define	USE_SLASH				0
 #define	USE_LONG_FILENAMES	0
 #define	USE_LATIN1_CHARSET	0
-#define	SYSTEM_CHARSET		CODE_TOS
-#define	HAVE_STRUPR			1
-#define	HAVE_STRLWR			1
-#define	HAVE_STRICMP		1
+#define	SYSTEM_CHARSET			CODE_TOS
+#define	HAVE_STRUPR				1
+#define	HAVE_STRLWR				1
+#define	HAVE_STRICMP			1
+#define	HAVE_STRNICMP			1
 #define	HAVE_STRCASECMP		0
-#define	HAVE_SYS_ERRLIST	1
-#define	HAVE_STRERROR		1
+#define	HAVE_SYS_ERRLIST		1
+#define	HAVE_STRERROR			1
 #define	USE_SETFILETYPE		0
-#define	HAVE_TMPNAM			0
+#define	HAVE_TMPNAM				0
 #endif
 
 #ifdef __MSDOS__
-#define	UDO_OS			"DOS"
-#define	USE_SLASH			0
+#define	UDO_OS					"DOS"
+#define	USE_SLASH				0
 #define	USE_LONG_FILENAMES	0
 #define	USE_LATIN1_CHARSET	0
-#define	SYSTEM_CHARSET		CODE_437
-#define	HAVE_STRUPR			1
-#define	HAVE_STRLWR			1
-#define	HAVE_STRICMP		1
+#define	SYSTEM_CHARSET			CODE_437
+#define	HAVE_STRUPR				1
+#define	HAVE_STRLWR				1
+#define	HAVE_STRICMP			1
+#define	HAVE_STRNICMP			1
 #define	HAVE_STRCASECMP		0
-#define	HAVE_SYS_ERRLIST	1
-#define	HAVE_STRERROR		1
+#define	HAVE_SYS_ERRLIST		1
+#define	HAVE_STRERROR			1
 #define	USE_SETFILETYPE		0
-#define	HAVE_TMPNAM			1
+#define	HAVE_TMPNAM				1
 #endif
 
 #ifdef __MSDOS850__
-#define	UDO_OS			"DOS"
-#define	USE_SLASH			0
+#define	UDO_OS					"DOS"
+#define	USE_SLASH				0
 #define	USE_LONG_FILENAMES	0
 #define	USE_LATIN1_CHARSET	0
-#define	SYSTEM_CHARSET		CODE_850
-#define	HAVE_STRUPR			1
-#define	HAVE_STRLWR			1
-#define	HAVE_STRICMP		1
+#define	SYSTEM_CHARSET			CODE_850
+#define	HAVE_STRUPR				1
+#define	HAVE_STRLWR				1
+#define	HAVE_STRICMP			1
+#define	HAVE_STRNICMP			1
 #define	HAVE_STRCASECMP		0
-#define	HAVE_SYS_ERRLIST	1
-#define	HAVE_STRERROR		1
+#define	HAVE_SYS_ERRLIST		1
+#define	HAVE_STRERROR			1
 #define	USE_SETFILETYPE		0
-#define	HAVE_TMPNAM			1
+#define	HAVE_TMPNAM				1
 #endif
 
 #ifdef __WIN32__
-#define	UDO_OS			"Win32"
-#define	USE_SLASH			0
+#define	UDO_OS					"Win32"
+#define	USE_SLASH				0
 #define	USE_LONG_FILENAMES	1
 #define	USE_LATIN1_CHARSET	1
-#define	SYSTEM_CHARSET		CODE_LAT1
-#define	HAVE_STRUPR			1
-#define	HAVE_STRLWR			1
-#define	HAVE_STRICMP		1
+#define	SYSTEM_CHARSET			CODE_LAT1
+#define	HAVE_STRUPR				1
+#define	HAVE_STRLWR				1
+#define	HAVE_STRICMP			1
+#define	HAVE_STRNICMP			1
 #define	HAVE_STRCASECMP		0
-#define	HAVE_SYS_ERRLIST	1
-#define	HAVE_STRERROR		1
+#define	HAVE_SYS_ERRLIST		1
+#define	HAVE_STRERROR			1
 #define	USE_SETFILETYPE		0
-#define	HAVE_TMPNAM			1
+#define	HAVE_TMPNAM				1
 #endif
 
 #ifdef __LINUX__
-#define	UDO_OS			"Linux"
-#define	USE_SLASH			1
+#define	UDO_OS					"Linux"
+#define	USE_SLASH				1
 #define	USE_LONG_FILENAMES	1
 #define	USE_LATIN1_CHARSET	1
-#define	SYSTEM_CHARSET		CODE_LAT1
-#define	HAVE_STRUPR			0
-#define	HAVE_STRLWR			0
-#define	HAVE_STRICMP		0
+#define	SYSTEM_CHARSET			CODE_LAT1
+#define	HAVE_STRUPR				0
+#define	HAVE_STRLWR				0
+#define	HAVE_STRICMP			0
+#define	HAVE_STRNICMP			0
 #define	HAVE_STRCASECMP		1
-#define	HAVE_SYS_ERRLIST	1
-#define	HAVE_STRERROR		1
+#define	HAVE_SYS_ERRLIST		1
+#define	HAVE_STRERROR			1
 #define	USE_SETFILETYPE		0
-#define	HAVE_TMPNAM			1
+#define	HAVE_TMPNAM				1
 #endif
 
 #ifdef __AMIGA__
-#define	UDO_OS			"Amiga"
-#define	USE_SLASH			1
+#define	UDO_OS					"Amiga"
+#define	USE_SLASH				1
 #define	USE_LONG_FILENAMES	1
 #define	USE_LATIN1_CHARSET	1
-#define	SYSTEM_CHARSET		CODE_LAT1
-#define	HAVE_STRUPR			0
-#define	HAVE_STRLWR			0
-#define	HAVE_STRICMP		0
+#define	SYSTEM_CHARSET			CODE_LAT1
+#define	HAVE_STRUPR				0
+#define	HAVE_STRLWR				0
+#define	HAVE_STRICMP			0
+#define	HAVE_STRNICMP			1
 #define	HAVE_STRCASECMP		1
-#define	HAVE_SYS_ERRLIST	1
-#define	HAVE_STRERROR		1
+#define	HAVE_SYS_ERRLIST		1
+#define	HAVE_STRERROR			1
 #define	USE_SETFILETYPE		0
-#define	HAVE_TMPNAM			1
+#define	HAVE_TMPNAM				1
 #endif
 
 #ifdef __SINIX__
-#define	UDO_OS			"Sinix"
-#define	USE_SLASH			1
+#define	UDO_OS					"Sinix"
+#define	USE_SLASH				1
 #define	USE_LONG_FILENAMES	1
 #define	USE_LATIN1_CHARSET	1
-#define	SYSTEM_CHARSET		CODE_LAT1
-#define	HAVE_STRUPR			1
-#define	HAVE_STRLWR			1
-#define	HAVE_STRICMP		0
+#define	SYSTEM_CHARSET			CODE_LAT1
+#define	HAVE_STRUPR				1
+#define	HAVE_STRLWR				1
+#define	HAVE_STRICMP			0
+#define	HAVE_STRNICMP			1
 #define	HAVE_STRCASECMP		0
-#define	HAVE_SYS_ERRLIST	0
-#define	HAVE_STRERROR		1
+#define	HAVE_SYS_ERRLIST		0
+#define	HAVE_STRERROR			1
 #define	USE_SETFILETYPE		0
-#define	HAVE_TMPNAM			1
+#define	HAVE_TMPNAM				1
 #endif
 
 #ifdef __SUNOS__
-#define	UDO_OS			"SunOS"
-#define	USE_SLASH			1
+#define	UDO_OS					"SunOS"
+#define	USE_SLASH				1
 #define	USE_LONG_FILENAMES	1
 #define	USE_LATIN1_CHARSET	1
-#define	SYSTEM_CHARSET		CODE_LAT1
-#define	HAVE_STRUPR			0
-#define	HAVE_STRLWR			0
-#define	HAVE_STRICMP		0
+#define	SYSTEM_CHARSET			CODE_LAT1
+#define	HAVE_STRUPR				0
+#define	HAVE_STRLWR				0
+#define	HAVE_STRICMP			0
+#define	HAVE_STRNICMP			1
 #define	HAVE_STRCASECMP		0
-#define	HAVE_SYS_ERRLIST	1
-#define	HAVE_STRERROR		1
+#define	HAVE_SYS_ERRLIST		1
+#define	HAVE_STRERROR			1
 #define	USE_SETFILETYPE		0
-#define	HAVE_TMPNAM			1
+#define	HAVE_TMPNAM				1
 #endif
 
 #ifdef __IRIX__
-#define	UDO_OS			"IRIX"
-#define	USE_SLASH			1
+#define	UDO_OS					"IRIX"
+#define	USE_SLASH				1
 #define	USE_LONG_FILENAMES	1
 #define	USE_LATIN1_CHARSET	1
-#define	SYSTEM_CHARSET		CODE_LAT1
-#define	HAVE_STRUPR			0
-#define	HAVE_STRLWR			0
-#define	HAVE_STRICMP		0
+#define	SYSTEM_CHARSET			CODE_LAT1
+#define	HAVE_STRUPR				0
+#define	HAVE_STRLWR				0
+#define	HAVE_STRICMP			0
+#define	HAVE_STRNICMP			1
 #define	HAVE_STRCASECMP		1
-#define	HAVE_SYS_ERRLIST	1
-#define	HAVE_STRERROR		1
+#define	HAVE_SYS_ERRLIST		1
+#define	HAVE_STRERROR			1
 #define	USE_SETFILETYPE		0
-#define	HAVE_TMPNAM			1
+#define	HAVE_TMPNAM				1
 #endif
 
 #ifdef __HPUX_ISO__
-#define	UDO_OS			"HP-UX"
-#define	USE_SLASH			1
+#define	UDO_OS					"HP-UX"
+#define	USE_SLASH				1
 #define	USE_LONG_FILENAMES	1
 #define	USE_LATIN1_CHARSET	1
-#define	SYSTEM_CHARSET		CODE_LAT1
-#define	HAVE_STRUPR			1
-#define	HAVE_STRLWR			0
-#define	HAVE_STRICMP		0
+#define	SYSTEM_CHARSET			CODE_LAT1
+#define	HAVE_STRUPR				1
+#define	HAVE_STRLWR				0
+#define	HAVE_STRICMP			0
+#define	HAVE_STRNICMP			1
 #define	HAVE_STRCASECMP		1
-#define	HAVE_SYS_ERRLIST	0
-#define	HAVE_STRERROR		1
+#define	HAVE_SYS_ERRLIST		0
+#define	HAVE_STRERROR			1
 #define	USE_SETFILETYPE		0
-#define	HAVE_TMPNAM			1
+#define	HAVE_TMPNAM				1
 #endif
 
 #ifdef __HPUX_ROMAN8__
-#define	UDO_OS			"HP-UX"
-#define	USE_SLASH			1
+#define	UDO_OS					"HP-UX"
+#define	USE_SLASH				1
 #define	USE_LONG_FILENAMES	1
 #define	USE_LATIN1_CHARSET	0
-#define	SYSTEM_CHARSET		CODE_HP8
-#define	HAVE_STRUPR			1
-#define	HAVE_STRLWR			1
-#define	HAVE_STRICMP		0
+#define	SYSTEM_CHARSET			CODE_HP8
+#define	HAVE_STRUPR				1
+#define	HAVE_STRLWR				1
+#define	HAVE_STRICMP			0
+#define	HAVE_STRNICMP			1
 #define	HAVE_STRCASECMP		1
-#define	HAVE_SYS_ERRLIST	0
-#define	HAVE_STRERROR		1
+#define	HAVE_SYS_ERRLIST		0
+#define	HAVE_STRERROR			1
 #define	USE_SETFILETYPE		0
-#define	HAVE_TMPNAM			1
+#define	HAVE_TMPNAM				1
 #endif
 
 #ifdef __MACOS__
-#define	UDO_OS			"MacOS"
-#define	USE_SLASH			0
+#define	UDO_OS					"MacOS"
+#define	USE_SLASH				0
 #define	USE_LONG_FILENAMES	1
 #define	USE_LATIN1_CHARSET	0
-#define	SYSTEM_CHARSET		CODE_MAC
-#define	HAVE_STRUPR			0
-#define	HAVE_STRLWR			0
-#define	HAVE_STRICMP		0
+#define	SYSTEM_CHARSET			CODE_MAC
+#define	HAVE_STRUPR				0
+#define	HAVE_STRLWR				0
+#define	HAVE_STRICMP			0
+#define	HAVE_STRNICMP			1
 #define	HAVE_STRCASECMP		0
-#define	HAVE_SYS_ERRLIST	0
-#define	HAVE_STRERROR		1
+#define	HAVE_SYS_ERRLIST		0
+#define	HAVE_STRERROR			1
 #define	USE_SETFILETYPE		1
-#define	HAVE_TMPNAM			1
+#define	HAVE_TMPNAM				1
 #endif
 
 #ifdef __NEXTSTEP__
-#define	UDO_OS			"NeXTStep"
-#define	USE_SLASH			1
+#define	UDO_OS					"NeXTStep"
+#define	USE_SLASH				1
 #define	USE_LONG_FILENAMES	1
 #define	USE_LATIN1_CHARSET	0
-#define	SYSTEM_CHARSET		CODE_NEXT
-#define	HAVE_STRUPR			1
-#define	HAVE_STRLWR			1
-#define	HAVE_STRICMP		0
+#define	SYSTEM_CHARSET			CODE_NEXT
+#define	HAVE_STRUPR				1
+#define	HAVE_STRLWR				1
+#define	HAVE_STRICMP			0
+#define	HAVE_STRNICMP			1
 #define	HAVE_STRCASECMP		0
-#define	HAVE_SYS_ERRLIST	1
-#define	HAVE_STRERROR		1
+#define	HAVE_SYS_ERRLIST		1
+#define	HAVE_STRERROR			1
 #define	USE_SETFILETYPE		0
-#define	HAVE_TMPNAM			1
+#define	HAVE_TMPNAM				1
 #endif
 
 #ifdef __BEOS__
-#define	UDO_OS			"BeOS"
-#define	USE_SLASH			1
+#define	UDO_OS					"BeOS"
+#define	USE_SLASH				1
 #define	USE_LONG_FILENAMES	1
 #define	USE_LATIN1_CHARSET	0
-#define	SYSTEM_CHARSET		CODE_UTF8
-#define	HAVE_STRUPR			0
-#define	HAVE_STRLWR			0
-#define	HAVE_STRICMP		0
+#define	SYSTEM_CHARSET			CODE_UTF8
+#define	HAVE_STRUPR				0
+#define	HAVE_STRLWR				0
+#define	HAVE_STRICMP			0
+#define	HAVE_STRNICMP			1
 #define	HAVE_STRCASECMP		0
-#define	HAVE_SYS_ERRLIST	0
-#define	HAVE_STRERROR		1
+#define	HAVE_SYS_ERRLIST		0
+#define	HAVE_STRERROR			1
 #define	USE_SETFILETYPE		1
-#define	HAVE_TMPNAM			1
+#define	HAVE_TMPNAM				1
 #endif
 
 #endif	/* VERSION_H */
@@ -325,6 +339,10 @@
 
 #ifndef	HAVE_STRICMP
 #error	"HAVE_STRICMP not defined!"
+#endif
+
+#ifndef	HAVE_STRNICMP
+#error	"HAVE_STRNICMP not defined!"
 #endif
 
 #ifndef	HAVE_STRCASECMP
