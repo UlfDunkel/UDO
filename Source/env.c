@@ -2364,8 +2364,9 @@ GLOBAL void c_item ( void )
 		 		case ENV_ENUM:
 					enum_count[iEnvLevel]++;
 					itoenum(iEnumLevel, &(enum_count[iEnvLevel]), s);
-					sprintf(token[0], ")\n(%d.) off%d writeBeforeLeft\n(",
-						enum_count[iEnvLevel], iEnvLevel);
+					/* Changed in V6.4.1 [NHz] */
+					sprintf(token[0], "%s\n%s%d.%s off%d writeBeforeLeft\n%s", KPSPC_S, KPSPO_S,
+						enum_count[iEnvLevel], KPSPC_S, iEnvLevel, KPSPO_S);
 					break;
 				/* New in r6pl15 [NHz] */
 				case ENV_DESC:
@@ -2390,7 +2391,8 @@ GLOBAL void c_item ( void )
 
 						delete_once(token[0], "[");
 						delete_last(token[0], "]");
-	 					sprintf(s, ") udoshow Bon (%s) offDesc writeBeforeLeft Boff (", token[0]);
+						/* Changed in V6.4.1 [NHz] */
+	 					sprintf(s, "%s udoshow Bon %s%s%s offDesc writeBeforeLeft Boff %s", KPSPC_S, KPSPO_S, token[0], KPSPC_S, KPSPO_S);
 
 						um_strcpy(token[0], s, MAX_TOKEN_LEN+1, "c_item[42]");
 						um_strcat(token[0], sAdd, MAX_TOKEN_LEN+1, "c_item[43]");
@@ -2438,27 +2440,20 @@ GLOBAL void c_item ( void )
 					switch(env_kind[iEnvLevel])
 		 			{
 		 				case LIST_BOLD:
-							/* Changed in r6pl15 [NHz] */
-
-/*		 					sprintf(s, " %s%s%s%s%s", li, BOLD_ON, token[0], BOLD_OFF, ri);*/
-		 					sprintf(s, ") udoshow Bon (%s) offList offCountS get writeBeforeLeft Boff (", token[0]);
+							/* Changed in V6.4.1 [NHz] */
+		 					sprintf(s, "%s udoshow Bon %s%s%s offList offCountS get writeBeforeLeft Boff %s", KPSPC_S, KPSPO_S, token[0], KPSPC_S, KPSPO_S);
 		 					break;
 		 				case LIST_ITALIC:
-							/* Changed in r6pl15 [NHz] */
-
-/*		 					sprintf(s, " %s%s%s%s%s", li, ITALIC_ON, token[0], ITALIC_OFF, ri);*/
-		 					sprintf(s, ") udoshow %s Ion (%s) offList offCountS get writeBeforeLeft Ioff %s (", li, token[0], ri);
+							/* Changed in V6.4.1 [NHz] */
+		 					sprintf(s, "%s udoshow Ion %s%s%s offList offCountS get writeBeforeLeft Ioff %s", KPSPC_S, KPSPO_S, token[0], KPSPC_S, KPSPO_S);
 		 					break;
 		 				case LIST_TYPEWRITER:
-							/* New in r6pl15 [NHz] */
-
-		 					sprintf(s, ") udoshow %s Von (%s) offList offCountS get writeBeforeLeft Voff %s (", li, token[0], ri);
+							/* Changed in V6.4.1 [NHz] */
+		 					sprintf(s, "%s udoshow Von %s%s%s offList offCountS get writeBeforeLeft Voff  %s", KPSPC_S, KPSPO_S, token[0], KPSPC_S, KPSPO_S);
 		 					break;
 		 				default:
-							/* Changed in r6pl15 [NHz] */
-
-/*		 					sprintf(s, " %s%s%s", li, token[0], ri);*/
-		 					sprintf(s, ") udoshow %s (%s) offList offCountS get writeBeforeLeft %s (", li, token[0], ri);
+							/* Changed in V6.4.1 [NHz] */
+		 					sprintf(s, "%s udoshow %s%s%s offList offCountS get writeBeforeLeft %s", KPSPC_S, KPSPO_S, token[0], KPSPC_S, KPSPO_S);
 		 					break;
 		 			}
 

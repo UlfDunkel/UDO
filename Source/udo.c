@@ -458,7 +458,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!html_favicon_name",		"",			c_tunix,	TRUE,	CMD_ALWAYS	}, /* New in r6pl15 [NHz] */
 	{ "!html_button_alignment",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_switch_language",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
-	{ "!html_use_hyphenation",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	}, /* Fixed Bug #0000048 [NHz] */
+	{ "!html_use_hyphenation",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	}, /* Fixed Bug #0000048 in V6.4.1 [NHz] */
 	{ "!html_transparent_buttons",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_use_folders",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!rtf_propfont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
@@ -2560,20 +2560,18 @@ LOCAL void c_heading ( void )
 			if (inside_center)	strcpy(align, "\\qc");
 			if (inside_right)	strcpy(align, "\\qr");
 			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + 14, name);
-/*			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize + 14, align, name);*/
 			break;
 		case TOKPS:
 			outln("newline");
 			/* Changed in r6pl16 [NHz] */
 			voutlnf("%d changeFontSize", laydat.node1size);
+			/* Changed in V6.4.1 [NHz] */
+			node2postscript(name, KPS_CONTENT);
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
 			outln("Boff");
 			/* Changed in r6pl15 [NHz] */
 			voutlnf("%d changeFontSize", laydat.propfontsize);
-			/*outln("11 changeFontSize");*/
-			/* Deleted in r6pl15 [NHz] */
-			/* outln("changeBaseFont"); */
 			outln("newline");
 			break;
 		case TOHTM:
@@ -2690,14 +2688,13 @@ LOCAL void c_subheading ( void )
 			outln("newline");
 			/* Changed in r6pl16 [NHz] */
 			voutlnf("%d changeFontSize", laydat.node2size);
+			/* Changed in V6.4.1 [NHz] */
+			node2postscript(name, KPS_CONTENT);
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
 			outln("Boff");
 			/* Changed in r6pl15 [NHz] */
 			voutlnf("%d changeFontSize", laydat.propfontsize);
-			/*outln("11 changeFontSize");*/
-			/* Deleted in r6pl15 [NHz] */
-			/* outln("changeBaseFont"); */
 			outln("newline");
 			break;
 		case TOHTM:
@@ -2812,6 +2809,8 @@ LOCAL void c_subsubheading ( void )
 			outln("newline");
 			/* Changed in r6pl16 [NHz] */
 			voutlnf("%d changeFontSize", laydat.node3size);
+			/* Changed in V6.4.1 [NHz] */
+			node2postscript(name, KPS_CONTENT);
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
 			outln("Boff");
@@ -2930,6 +2929,8 @@ LOCAL void c_subsubsubheading ( void )
 			outln("newline");
 			/* Fixed bug #0000047 [NHz] */
 			voutlnf("%d changeFontSize", laydat.node4size);
+			/* Changed in V6.4.1 [NHz] */
+			node2postscript(name, KPS_CONTENT);
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
 			outln("Boff");
@@ -5381,7 +5382,9 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 						break;
 					case TOKPS:
 						um_strcpy(token[i], ") udoshow newline\n(", MAX_TOKEN_LEN+1, "token_output[3]");
-
+						/* Changed in V6.4.1 [NHz] */
+						replace_all(token[i], ")", KPSPC_S);
+						replace_all(token[i], "(", KPSPO_S);
 						break;
 					case TONRO:
 						um_strcpy(token[i], ".br\n", MAX_TOKEN_LEN+1, "token_output[4]");
@@ -5436,6 +5439,18 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 				}/*switch*/
 			}/*if*/
 		}/*if*/
+		
+		/* Changed in V6.4.1 [NHz] */
+		switch (desttype)
+		{	case TOKPS:
+							replace_all(token[i], "[", "\\[");
+							replace_all(token[i], "]", "\\]");
+							replace_all(token[i], "(", "\\(");
+							replace_all(token[i], ")", "\\)");
+							qreplace_all(token[i], KPSPC_S, KPSPC_S_LEN, ")", 1);
+							qreplace_all(token[i], KPSPO_S, KPSPO_S_LEN, "(", 1);
+							break;
+		}	/*switch*/
 		
 		if (use_token)
 		{
@@ -9084,7 +9099,8 @@ LOCAL BOOLEAN pass2 (char *datei)
 					if (no_umlaute) umlaute2ascii(zeile);
 					auto_quote_chars(zeile, FALSE);
 
-					c_commands_inside(zeile, TRUE);
+					/* Changed in V6.4.1 [NHz] */
+					c_commands_inside(zeile, FALSE);
 
 					replace_macros(zeile);
 					c_divis(zeile);
