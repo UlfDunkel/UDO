@@ -6,7 +6,7 @@ CC = gcc
 O=.o
 X=
 
-CFLAGS = -O2 -Wall -D__LINUX__ $(XCFLAGS)
+CFLAGS = -ggdb -O2 -Wall -D__LINUX__ $(XCFLAGS)
 
 #CFLAGS =	-g -O2 -D__LINUX__ \
 #-Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations \
