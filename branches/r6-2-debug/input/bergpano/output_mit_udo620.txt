@@ -1,0 +1,118 @@
+
+This is UDO Release 6.2 Patchlevel 0 for Linux
+Copyright (c) 1995-2001 by Dirk Hagedorn.
+UDO is Open Source (see http://www.udo-open-source.org for further information).
+
+Pass 1:
+Checking nodes, labels and aliases...
+Checking HTML file names...
+Pass 2...
+
+  0% (bergpano.txt) (../www.txt) (../counter.txt) [A] [A.1] [] (../material/gebiete.txt) 
+  1% [A.1.2] (../material/gebiete.txt) 
+  2% [A.1.3] (../material/gebiete.txt) 
+  3% [A.1.4] (../material/gebiete.txt) 
+  4% [A.1.5] (../material/gebiete.txt) 
+  5% [A.1.6] (../material/gebiete.txt) 
+  6% [A.1.7] (../material/gebiete.txt) 
+  7% [A.1.8] (../material/gebiete.txt) 
+  8% [A.1.9] (../material/gebiete.txt) 
+  9% [A.1.9.1] [A.1.9.2] [A.1.9.3] [A.1.9.4] [A.1.10] (../material/gebiete.txt) 
+ 10% [] (../material/gebiete.txt) 
+ 11% [A.1.12] (../material/gebiete.txt) 
+ 12% [A.1.13] (../material/gebiete.txt) 
+ 13% [] (../material/gebiete.txt) 
+ 14% [] (../material/gebiete.txt) 
+ 15% [A.1.16] (../material/gebiete.txt) 
+ 16% [A.1.17] (../material/gebiete.txt) 
+ 17% [] (../material/gebiete.txt) 
+ 18% [A.1.19] (../material/gebiete.txt) 
+ 19% [] (../material/gebiete.txt) 
+ 20% [A.1.21] (../material/gebiete.txt) 
+ 21% [] (../material/gebiete.txt) 
+ 22% [] (../material/gebiete.txt) 
+ 23% [A.1.24] (../material/gebiete.txt) 
+ 24% 
+ 25% [] (../material/gebiete.txt) 
+ 26% [] (../material/gebiete.txt) 
+ 27% [] (../material/gebiete.txt) 
+ 28% [A.2] [A.2.1] (../material/gebiete.txt) 
+ 29% [A.2.2] (../material/gebiete.txt) 
+ 30% [] (../material/gebiete.txt) 
+ 31% [A.2.4] (../material/gebiete.txt) 
+ 32% [A.2.5] (../material/gebiete.txt) 
+ 33% [A.2.6] (../material/gebiete.txt) 
+ 34% [A.2.7] (../material/gebiete.txt) 
+ 35% [A.2.8] (../material/gebiete.txt) 
+ 36% [A.2.9] (../material/gebiete.txt) 
+ 37% [A.2.10] (../material/gebiete.txt) 
+ 38% [A.2.11] (../material/gebiete.txt) 
+ 39% [A.2.12] (../material/gebiete.txt) 
+ 40% [A.2.13] (../material/gebiete.txt) 
+ 41% [A.2.14] (../material/gebiete.txt) 
+ 42% [A.2.15] (../material/gebiete.txt) 
+ 43% [A.2.16] (../material/gebiete.txt) 
+ 44% [A.2.17] (../material/gebiete.txt) 
+ 45% [] (../material/gebiete.txt) 
+ 46% [A.2.19] (../material/gebiete.txt) 
+ 47% [] (../material/gebiete.txt) 
+ 48% [A.2.21] (../material/gebiete.txt) 
+ 49% [A.2.22] (../material/gebiete.txt) 
+ 50% 
+ 51% [] (../material/gebiete.txt) 
+ 52% [] (../material/gebiete.txt) 
+ 53% [A.2.25] (../material/gebiete.txt) 
+ 54% [A.2.26] (../material/gebiete.txt) 
+ 55% [A.2.27] (../material/gebiete.txt) 
+ 56% [A.3] [] (../material/gebiete.txt) 
+ 57% [] (../material/gebiete.txt) 
+ 58% [A.3.3] (../material/gebiete.txt) 
+ 59% [] (../material/gebiete.txt) 
+ 60% [] (../material/gebiete.txt) 
+ 61% [] (../material/gebiete.txt) 
+ 62% [A.3.7] (../material/gebiete.txt) 
+ 63% [A.3.7.1] [A.3.7.2] [A.3.8] (../material/gebiete.txt) 
+ 64% [] (../material/gebiete.txt) 
+ 65% [A.3.10] (../material/gebiete.txt) 
+ 66% [A.3.11] (../material/gebiete.txt) 
+ 67% [] (../material/gebiete.txt) 
+ 68% [] (../material/gebiete.txt) 
+ 69% [] (../material/gebiete.txt) 
+ 70% [] (../material/gebiete.txt) 
+ 71% [A.4] [] (../material/gebiete.txt) 
+ 72% [] (../material/gebiete.txt) 
+ 73% [A.4.3] (../material/gebiete.txt) 
+ 74% [A.4.4] (../material/gebiete.txt) 
+ 75% [A.4.5] (../material/gebiete.txt) 
+ 76% [A.4.6] (../material/gebiete.txt) 
+ 77% 
+ 78% [B] [B.1] [] (../material/gebiete.txt) 
+ 79% [B.1.2] (../material/gebiete.txt) 
+ 80% [B.1.3] (../material/gebiete.txt) 
+ 81% [B.1.4] (../material/gebiete.txt) 
+ 82% [B.1.5] (../material/gebiete.txt) 
+ 83% [B.1.6] (../material/gebiete.txt) 
+ 84% [] (../material/gebiete.txt) 
+ 85% [] (../material/gebiete.txt) 
+ 86% [B.2] [B.2.1] (../material/gebiete.txt) 
+ 87% [B.2.2] (../material/gebiete.txt) 
+ 88% [B.2.3] (../material/gebiete.txt) 
+ 89% [] (../material/gebiete.txt) 
+ 90% [] (../material/gebiete.txt) 
+ 91% [B.2.6] (../material/gebiete.txt) 
+ 92% [B.2.7] (../material/gebiete.txt) 
+ 93% [B.2.8] (../material/gebiete.txt) 
+ 94% [B.2.9] (../material/gebiete.txt) 
+ 95% [B.2.10] (../material/gebiete.txt) 
+ 96% [B.2.11] (../material/gebiete.txt) 
+ 97% [B.2.12] (../material/gebiete.txt) 
+ 98% [B.2.13] (../material/gebiete.txt) 
+ 99% [C] [D] (../material/politisch.txt) [E] [F] [] 
+100% 
+Checking usage of labels and aliases...
+
+
+Output written to ../../HTML-Out/bergpano/index.html
+
+
+Notes:    3

@@ -1,0 +1,466 @@
+# politisch.txt
+# letzte Änderungen: 02.11.2003
+
+!ifset bergpano
+(!B)Hinweis(!b): Hier sind nur diejenigen Gebirgsgruppen aufgeführt, zu denen Panoramen vorhanden sind,
+d.h. es handelt sich nicht um eine (!I)vollständige(!i) politische Zuordnung aller Gebirgsgruppen.
+!endif
+
+
+!begin_itemize !short
+!item (!B)Deutschland(!b)
+   !begin_itemize !short
+   !item (!www [Bayern] [http://www.bayern.de/])
+       !begin_itemize !short
+!ifset bergcam
+       !item (2) (!link [Allgäuer Alpen] [bergcam_o02]) (RegBez. Schwaben; Lkr.~Lindau, Oberallgäu, Ostallgäu)
+       !item (4) (!link [Wettersteingebirge und Mieminger Kette] [bergcam_o04]) (RegBez. Oberbayern; Lkr.~Garmisch-Partenkirchen)
+       !item (5) (!link [Karwendel] [bergcam_o05]) (RegBez. Oberbayern; Lkr. Bad Tölz-Wolfratshausen und Garmisch-Partenkirchen)
+       !item (7a) (!link [Ammergauer Alpen] [bergcam_o07a]) (RegBez. Oberbayern; Lkr. Garmisch-Partenkirchen und Weilheim-Schongau; RegBez. Schwaben, Lkr. Ostallgäu)
+       !item (7b) (!link [Bayerische Voralpen] [bergcam_o07b]) (RegBez. Oberbayern; Lkr. Garmisch-Partenkirchen, Bad Tölz-Wolfratshausen, Miesbach, Rosenheim)
+       !item (10) (!link [Berchtesgadener Alpen] [bergcam_o10]) (RegBez. Oberbayern; Lkr. Berchtesgadener Land)
+       !item (11) (!link [Chiemgauer Alpen] [bergcam_o11]) (RegBez. Oberbayern; Lkr. Rosenheim, Traunstein, Berchtesgadener Land)
+!endif
+!ifset bergpano
+       !item (2) (!link [Allgäuer Alpen] [bergpano_o02]) (RegBez. Schwaben; Lkr.~Lindau, Oberallgäu, Ostallgäu)
+       !item (4) (!link [Wettersteingebirge und Mieminger Kette] [bergpano_o04]) (RegBez. Oberbayern; Lkr.~Garmisch-Partenkirchen)
+       !item (5) (!link [Karwendel] [bergpano_o05]) (RegBez. Oberbayern; Lkr. Bad Tölz-Wolfratshausen und Garmisch-Partenkirchen)
+       !item (7a) (!link [Ammergauer Alpen] [bergpano_o07a]) (RegBez. Oberbayern; Lkr. Garmisch-Partenkirchen und Weilheim-Schongau; RegBez. Schwaben, Lkr. Ostallgäu)
+       !item (7b) (!link [Bayerische Voralpen] [bergpano_o07b]) (RegBez. Oberbayern; Lkr. Garmisch-Partenkirchen, Bad Tölz-Wolfratshausen, Miesbach, Rosenheim)
+       !item (10) (!link [Berchtesgadener Alpen] [bergpano_o10]) (RegBez. Oberbayern; Lkr. Berchtesgadener Land)
+       !item (11) (!link [Chiemgauer Alpen] [bergpano_o11]) (RegBez. Oberbayern; Lkr. Rosenheim, Traunstein, Berchtesgadener Land)
+!endif
+!ifset stempel
+!endif
+       !end_itemize
+   !end_itemize
+!item (!B)Österreich(!b)
+   !begin_itemize !short
+   !item Vorarlberg
+      !begin_itemize !short
+!ifset bergcam
+      !item (1) (!link [Bregenzer Wald] [bergcam_o01])
+      !item (2) (!link [Allgäuer Alpen] [bergcam_o02])
+      !item (3a) (!link [Lechquellen-Gebirge] [bergcam_o03a])
+      !item (3b) (!link [Lechtaler Alpen] [bergcam_o03b])
+      !item (25) (!link [Rätikon] [bergcam_o25])
+      !item (26) (!link [Silvretta] [bergcam_o26])
+      !item (28) (!link [Verwall-Gruppe] [bergcam_o28])
+!endif
+!ifset bergpano
+      !item (1) (!link [Bregenzer Wald] [bergpano_o01])
+      !item (2) (!link [Allgäuer Alpen] [bergpano_o02])
+#      !item (3a) (!link [Lechquellen-Gebirge] [bergpano_o03a])
+      !item (3b) (!link [Lechtaler Alpen] [bergpano_o03b])
+#      !item (25) (!link [Rätikon] [bergpano_o25])
+      !item (26) (!link [Silvretta] [bergpano_o26])
+      !item (28) (!link [Verwall-Gruppe] [bergpano_o28])
+!endif
+!ifset stempel
+!endif
+      !end_itemize
+   !item Tirol (mit Osttirol)
+      !begin_itemize !short
+!ifset bergcam
+      !item (2) (!link [Allgäuer Alpen] [bergcam_o02])
+      !item (3b) (!link [Lechtaler Alpen] [bergcam_o03b])
+      !item (4) (!link [Wettersteingebirge und Mieminger Kette] [bergcam_o04])
+      !item (5) (!link [Karwendel] [bergcam_o05])
+      !item (6) (!link [Brandenberger Alpen] [bergcam_o06]) (Rofangebirge)
+      !item (7a) (!link [Ammergauer Alpen] [bergcam_o07a])
+      !item (7b) (!link [Bayerische Voralpen] [bergcam_o07b])
+      !item (8) (!link [Kaisergebirge] [bergcam_o08])
+      !item (9) (!link [Loferer und Leoganger Steinberge] [bergcam_o09])
+      !item (11) (!link [Chiemgauer Alpen] [bergcam_o11])
+      !item (26) (!link [Silvretta] [bergcam_o26])
+      !item (27) (!link [Samnaun-Gruppe] [bergcam_o27])
+      !item (28) (!link [Verwall-Gruppe] [bergcam_o28])
+      !item (30) (!link [Ötztaler Alpen] [bergcam_o30])
+      !item (31) (!link [Stubaier Alpen] [bergcam_o31])
+      !item (33) (!link [Tuxer Alpen] [bergcam_o33])
+      !item (34) (!link [Kitzbüheler Alpen] [bergcam_o34])
+      !item (35) (!link [Zillertaler Alpen] [bergcam_o35])
+      !item (36) (!link [Venedigergruppe] [bergcam_o36]) (zu Osttirol) (Hohe Tauern)
+      !item (37) (!link [Rieserfernergruppe] [bergcam_o37]) (zu Osttirol) (Hohe Tauern)
+      !item (38) (!link [Villgratner Berge] [bergcam_o38]) (zu Osttirol) (Hohe Tauern)
+      !item (39) (!link [Granatspitzgruppe] [bergcam_o39]) (zu Osttirol) (Hohe Tauern)
+      !item (40) (!link [Glockner-Gruppe] [bergcam_o40]) (zu Osttirol) (Hohe Tauern)
+      !item (41) (!link [Schober-Gruppe] [bergcam_o41]) (zu Osttirol) (Hohe Tauern)
+      !item (56) (!link [Gailtaler Alpen] [bergcam_o56]) (zu Osttirol)
+      !item (57a) (!link [Karnischer Hauptkamm] [bergcam_o57a]) (zu Osttirol)
+!endif
+!ifset bergpano
+      !item (2) (!link [Allgäuer Alpen] [bergpano_o02])
+      !item (3b) (!link [Lechtaler Alpen] [bergpano_o03b])
+      !item (4) (!link [Wettersteingebirge und Mieminger Kette] [bergpano_o04])
+      !item (5) (!link [Karwendel] [bergpano_o05])
+      !item (6) (!link [Brandenberger Alpen] [bergpano_o06]) (Rofangebirge)
+      !item (7a) (!link [Ammergauer Alpen] [bergpano_o07a])
+      !item (7b) (!link [Bayerische Voralpen] [bergpano_o07b])
+      !item (8) (!link [Kaisergebirge] [bergpano_o08])
+#      !item (9) (!link [Loferer und Leoganger Steinberge] [bergpano_o09])
+      !item (11) (!link [Chiemgauer Alpen] [bergpano_o11])
+      !item (26) (!link [Silvretta] [bergpano_o26])
+#      !item (27) (!link [Samnaun-Gruppe] [bergpano_o27])
+      !item (28) (!link [Verwall-Gruppe] [bergpano_o28])
+      !item (30) (!link [Ötztaler Alpen] [bergpano_o30])
+      !item (31) (!link [Stubaier Alpen] [bergpano_o31])
+      !item (33) (!link [Tuxer Alpen] [bergpano_o33])
+      !item (34) (!link [Kitzbüheler Alpen] [bergpano_o34])
+      !item (35) (!link [Zillertaler Alpen] [bergpano_o35])
+      !item (36) (!link [Venedigergruppe] [bergpano_o36]) (zu Osttirol) (Hohe Tauern)
+      !item (37) (!link [Rieserfernergruppe] [bergpano_o37]) (zu Osttirol) (Hohe Tauern)
+      !item (38) (!link [Villgratner Berge] [bergpano_o38]) (zu Osttirol) (Hohe Tauern)
+      !item (39) (!link [Granatspitzgruppe] [bergpano_o39]) (zu Osttirol) (Hohe Tauern)
+      !item (40) (!link [Glockner-Gruppe] [bergpano_o40]) (zu Osttirol) (Hohe Tauern)
+#      !item (41) (!link [Schober-Gruppe] [bergpano_o41]) (zu Osttirol) (Hohe Tauern)
+      !item (56) (!link [Gailtaler Alpen] [bergpano_o56]) (zu Osttirol)
+      !item (57a) (!link [Karnischer Hauptkamm] [bergpano_o57a]) (zu Osttirol)
+!endif
+!ifset stempel
+!endif
+      !end_itemize
+   !item (!www [Land Salzburg] [http://www.salzburg.gv.at/])
+      !begin_itemize !short
+!ifset bergcam
+      !item (9) (!link [Loferer und Leoganger Steinberge] [bergcam_o09])
+      !item (10) (!link [Berchtesgadener Alpen] [bergcam_o10])
+      !item (11) (!link [Chiemgauer Alpen] [bergcam_o11])
+      !item (12) (!link [Salzburger Schieferalpen] [bergcam_o12])
+      !item (13) (!link [Tennen-Gebirge] [bergcam_o13])
+      !item (14) (!link [Dachstein-Gebirge] [bergcam_o14])
+      !item (17a) (!link [Salzkammergut-Berge] [bergcam_o17a])
+      !item (34) (!link [Kitzbüheler Alpen] [bergcam_o34])
+      !item (35) (!link [Zillertaler Alpen] [bergcam_o35])
+      !item (36) (!link [Venedigergruppe] [bergcam_o36]) (Hohe Tauern)
+      !item (39) (!link [Granatspitzgruppe] [bergcam_o39]) (Hohe Tauern)
+      !item (40) (!link [Glockner-Gruppe] [bergcam_o40]) (Hohe Tauern)
+      !item (42) (!link [Goldberg-Gruppe] [bergcam_o42]) (Hohe Tauern)
+      !item (44) (!link [Ankogel-Gruppe] [bergcam_o44]) (Hohe Tauern)
+      !item (45a) (!link [Radstädter Tauern] [bergcam_o45a]) (Niedere Tauern)
+      !item (45b) (!link [Schladminger Tauern] [bergcam_o45b]) (Niedere Tauern)
+!endif
+!ifset bergpano
+#      !item (9) (!link [Loferer und Leoganger Steinberge] [bergpano_o09])
+      !item (10) (!link [Berchtesgadener Alpen] [bergpano_o10])
+      !item (11) (!link [Chiemgauer Alpen] [bergpano_o11])
+      !item (12) (!link [Salzburger Schieferalpen] [bergpano_o12])
+#      !item (13) (!link [Tennen-Gebirge] [bergpano_o13])
+      !item (14) (!link [Dachstein-Gebirge] [bergpano_o14])
+      !item (17a) (!link [Salzkammergut-Berge] [bergpano_o17a])
+      !item (34) (!link [Kitzbüheler Alpen] [bergpano_o34])
+      !item (35) (!link [Zillertaler Alpen] [bergpano_o35])
+      !item (36) (!link [Venedigergruppe] [bergpano_o36]) (Hohe Tauern)
+      !item (39) (!link [Granatspitzgruppe] [bergpano_o39]) (Hohe Tauern)
+      !item (40) (!link [Glockner-Gruppe] [bergpano_o40]) (Hohe Tauern)
+#      !item (42) (!link [Goldberg-Gruppe] [bergpano_o42]) (Hohe Tauern)
+#      !item (44) (!link [Ankogel-Gruppe] [bergpano_o44]) (Hohe Tauern)
+      !item (45a) (!link [Radstädter Tauern] [bergpano_o45a]) (Niedere Tauern)
+      !item (45b) (!link [Schladminger Tauern] [bergpano_o45b]) (Niedere Tauern)
+!endif
+!ifset stempel
+!endif
+      !end_itemize
+   !item Oberösterreich
+      !begin_itemize !short
+!ifset bergcam
+      !item (14) (!link [Dachstein-Gebirge] [bergcam_o14])
+      !item (15) (!link [Totes Gebirge] [bergcam_o15])
+      !item (16) (!link [Ennstaler Alpen] [bergcam_o16])
+      !item (17a) (!link [Salzkammergut-Berge] [bergcam_o17a])
+      !item (17b) (!link [Oberösterreichische Voralpen] [bergcam_o17b])
+      !item (21) (!link [Ybbstaler Alpen] [bergcam_o21])
+!endif
+!ifset bergpano
+      !item (14) (!link [Dachstein-Gebirge] [bergpano_o14])
+      !item (15) (!link [Totes Gebirge] [bergpano_o15])
+#      !item (16) (!link [Ennstaler Alpen] [bergpano_o16])
+      !item (17a) (!link [Salzkammergut-Berge] [bergpano_o17a])
+#      !item (17b) (!link [Oberösterreichische Voralpen] [bergpano_o17b])
+      !item (21) (!link [Ybbstaler Alpen] [bergpano_o21])
+!endif
+!ifset stempel
+!endif
+      !end_itemize
+   !item Niederösterreich
+      !begin_itemize !short
+!ifset bergcam
+      !item (19) (!link [Mürzsteger Alpen] [bergcam_o19])
+      !item (20) (!link [Rax und Schneeberg-Gruppe] [bergcam_o20])
+      !item (21) (!link [Ybbstaler Alpen] [bergcam_o21])
+      !item (22) (!link [Türnitzer Alpen] [bergcam_o22])
+      !item (23) (!link [Gutensteiner Alpen] [bergcam_o23])
+      !item (24) (!link [Wienerwald] [bergcam_o24])
+      !item (47) (!link [Randgebirge östlich der Mur] [bergcam_o47])
+!endif
+!ifset bergpano
+#      !item (19) (!link [Mürzsteger Alpen] [bergpano_o19])
+#      !item (20) (!link [Rax und Schneeberg-Gruppe] [bergpano_o20])
+      !item (21) (!link [Ybbstaler Alpen] [bergpano_o21])
+#      !item (22) (!link [Türnitzer Alpen] [bergpano_o22])
+#      !item (23) (!link [Gutensteiner Alpen] [bergpano_o23])
+#      !item (24) (!link [Wienerwald] [bergpano_o24])
+      !item (47) (!link [Randgebirge östlich der Mur] [bergpano_o47])
+!endif
+!ifset stempel
+!endif
+      !end_itemize
+   !item Steiermark
+      !begin_itemize !short
+!ifset bergcam
+      !item (14) (!link [Dachstein-Gebirge] [bergcam_o14])
+      !item (15) (!link [Totes Gebirge] [bergcam_o15])
+      !item (16) (!link [Ennstaler Alpen] [bergcam_o16])
+      !item (18) (!link [Hochschwab-Gruppe] [bergcam_o18])
+      !item (19) (!link [Mürzsteger Alpen] [bergcam_o19])
+      !item (20) (!link [Rax und Schneeberg-Gruppe] [bergcam_o20])
+      !item (45b) (!link [Schladminger Tauern] [bergcam_o45b]) (Niedere Tauern)
+      !item (45c) (!link [Rottenmanner und Wölzer Tauern] [bergcam_o45c]) (Niedere Tauern)
+      !item (45d) (!link [Seckauer Tauern] [bergcam_o45d]) (Niedere Tauern)
+      !item (46a) (!link [Nockberge] [bergcam_o46a])
+      !item (46b) (!link [Lavanttaler Alpen] [bergcam_o46b])
+      !item (47) (!link [Randgebirge östlich der Mur] [bergcam_o47])
+!endif
+!ifset bergpano
+      !item (14) (!link [Dachstein-Gebirge] [bergpano_o14])
+      !item (15) (!link [Totes Gebirge] [bergpano_o15])
+#      !item (16) (!link [Ennstaler Alpen] [bergpano_o16])
+      !item (18) (!link [Hochschwab-Gruppe] [bergpano_o18])
+#      !item (19) (!link [Mürzsteger Alpen] [bergpano_o19])
+#      !item (20) (!link [Rax und Schneeberg-Gruppe] [bergpano_o20])
+      !item (45b) (!link [Schladminger Tauern] [bergpano_o45b]) (Niedere Tauern)
+#      !item (45c) (!link [Rottenmanner und Wölzer Tauern] [bergpano_o45c]) (Niedere Tauern)
+#      !item (45d) (!link [Seckauer Tauern] [bergpano_o45d]) (Niedere Tauern)
+      !item (46a) (!link [Nockberge] [bergpano_o46a])
+      !item (46b) (!link [Lavanttaler Alpen] [bergpano_o46b])
+      !item (47) (!link [Randgebirge östlich der Mur] [bergpano_o47])
+!endif
+!ifset stempel
+!endif
+      !end_itemize
+   !item Kärnten
+      !begin_itemize !short
+!ifset bergcam
+      !item (41) (!link [Schober-Gruppe] [bergcam_o41]) (Hohe Tauern)
+      !item (42) (!link [Goldberg-Gruppe] [bergcam_o42]) (Hohe Tauern)
+      !item (43) (!link [Kreuzeck-Gruppe] [bergcam_o43]) (Hohe Tauern)
+      !item (44) (!link [Ankogel-Gruppe] [bergcam_o44]) (Hohe Tauern)
+      !item (46a) (!link [Nockberge] [bergcam_o46a])
+      !item (46b) (!link [Lavanttaler Alpen] [bergcam_o46b])
+      !item (56) (!link [Gailtaler Alpen] [bergcam_o56])
+      !item (57a) (!link [Karnischer Hauptkamm] [bergcam_o57a])
+      !item (59) (!link [Karawanken und Bachergebirge] [bergcam_o59])
+      !item (60) (!link [Steiner Alpen] [bergcam_o60])
+!endif
+!ifset bergpano
+      !item (41) (!link [Schober-Gruppe] [bergpano_o41]) (Hohe Tauern)
+#      !item (42) (!link [Goldberg-Gruppe] [bergpano_o42]) (Hohe Tauern)
+      !item (43) (!link [Kreuzeck-Gruppe] [bergpano_o43]) (Hohe Tauern)
+#      !item (44) (!link [Ankogel-Gruppe] [bergpano_o44]) (Hohe Tauern)
+      !item (46a) (!link [Nockberge] [bergpano_o46a])
+      !item (46b) (!link [Lavanttaler Alpen] [bergpano_o46b])
+      !item (56) (!link [Gailtaler Alpen] [bergpano_o56])
+      !item (57a) (!link [Karnischer Hauptkamm] [bergpano_o57a])
+#      !item (59) (!link [Karawanken und Bachergebirge] [bergpano_o59])
+#      !item (60) (!link [Steiner Alpen] [bergpano_o60])
+!endif
+!ifset stempel
+!endif
+      !end_itemize
+# Burgenland: nicht mehr alpinrelevant!
+   !end_itemize
+!item (!B)Slowenien(!b)
+   !begin_itemize !short
+!ifset bergcam
+   !item (58) (!link [Julische Alpen] [bergcam_o58])
+   !item (59) (!link [Karawanken und Bachergebirge] [bergcam_o59])
+   !item (60) (!link [Steiner Alpen] [bergcam_o60])
+!endif
+!ifset bergpano
+#   !item (58) (!link [Julische Alpen] [bergpano_o58])
+#   !item (59) (!link [Karawanken und Bachergebirge] [bergpano_o59])
+#   !item (60) (!link [Steiner Alpen] [bergpano_o60])
+!endif
+!ifset stempel
+!endif
+   !end_itemize
+!item (!B)Italien(!b)
+   !begin_itemize !short
+!ifset bergcam
+   !item (29) (!link [Sesvenna-Gruppe] [bergcam_o29]) (Südtirol)
+   !item (30) (!link [Ötztaler Alpen] [bergcam_o30]) (Südtirol)
+   !item (31) (!link [Stubaier Alpen] [bergcam_o31]) (Südtirol)
+   !item (32) (!link [Sarntaler Alpen] [bergcam_o32]) (Südtirol)
+   !item (35) (!link [Zillertaler Alpen] [bergcam_o35]) (Südtirol)
+   !item (36) (!link [Venedigergruppe] [bergcam_o36]) (Südtirol)
+   !item (37) (!link [Rieserfernergruppe] [bergcam_o37]) (Südtirol)
+   !item (38) (!link [Villgratner Berge] [bergcam_o38]) (Südtirol)
+   !item (48a) (!link [Ortler-Alpen] [bergcam_o48a]) (Lombardei/Prov. Brescia? + Trentino)
+   !item (48b) (!link [Sobretta-Gavia-Gruppe] [bergcam_o48b]) (Prov. Sondrio + Prov. Brescia)
+   !item (48c) (!link [Nonsberg-Gruppe] [bergcam_o48c]) (Südtirol + Trentino)
+   !item (49) (!link [Adamello-Presanella-Alpen] [bergcam_o49]) (Lombardei/Prov. Brescia? + Trentino)
+   !item (50) (!link [Gardasee-Berge] [bergcam_o50]) (Trentino + Prov. Brescia)
+   !item (51) (!link [Brenta-Gruppe] [bergcam_o51]) (Trentino)
+   !item (52) (!link [Dolomiten] [bergcam_o52]) (Südtirol + Trentino)
+   !item (53) (!link [Fleimstaler Alpen] [bergcam_o53]) (Südtirol + Trentino)
+   !item (54) (!link [Vizentiner Alpen] [bergcam_o54]) (Prov. Vicenza, evtl. weitere?)
+   !item (58) (!link [Julische Alpen] [bergcam_o58]) (Prov. Friaul)
+   !item (66) (!link [Bernina-Alpen] [bergcam_o66]) (Prov. Sondrio)
+   !item (67) (!link [Livigno-Alpen] [bergcam_o67]) (Prov. Sondrio)
+   !item (68) (!link [Bergamasker Alpen] [bergcam_o68]) (Prov. Bergamo)
+   !item (82) (!link [Adula-Alpen] [bergcam_w82]) (Prov. Bergamo)
+   !item (83) (!link [Tessiner Alpen] [bergcam_w83])
+   !item (86) (!link [Walliser Alpen] [bergcam_w86])
+   !item (87) (!link [Mont-Blanc-Gruppe] [bergcam_w87])
+   !item (88) (!link [Grajische Alpen] [bergcam_w88])
+   !item (90) (!link [Cottische Alpen] [bergcam_w90])
+   !item (91) (!link [Meeralpen] [bergcam_w91])
+   !item (92) (!link [Ligurische Alpen] [bergcam_w92])
+!endif
+!ifset bergpano
+   !item (29) (!link [Sesvenna-Gruppe] [bergpano_o29]) (Südtirol)
+   !item (30) (!link [Ötztaler Alpen] [bergpano_o30]) (Südtirol)
+   !item (31) (!link [Stubaier Alpen] [bergpano_o31]) (Südtirol)
+   !item (32) (!link [Sarntaler Alpen] [bergpano_o32]) (Südtirol)
+   !item (35) (!link [Zillertaler Alpen] [bergpano_o35]) (Südtirol)
+   !item (36) (!link [Venedigergruppe] [bergpano_o36]) (Südtirol)
+   !item (37) (!link [Rieserfernergruppe] [bergpano_o37]) (Südtirol)
+   !item (38) (!link [Villgratner Berge] [bergpano_o38]) (Südtirol)
+#   !item (48a) (!link [Ortler-Alpen] [bergpano_o48a]) (Lombardei/Prov. Brescia? + Trentino)
+#   !item (48b) (!link [Sobretta-Gavia-Gruppe] [bergpano_o48b]) (Prov. Sondrio + Prov. Brescia)
+   !item (48c) (!link [Nonsberg-Gruppe] [bergpano_o48c]) (Südtirol + Trentino)
+#   !item (49) (!link [Adamello-Presanella-Alpen] [bergpano_o49]) (Lombardei/Prov. Brescia? + Trentino)
+#   !item (50) (!link [Gardasee-Berge] [bergpano_o50]) (Trentino + Prov. Brescia)
+#   !item (51) (!link [Brenta-Gruppe] [bergpano_o51]) (Trentino)
+   !item (52) (!link [Dolomiten] [bergpano_o52]) (Südtirol + Trentino)
+   !item (53) (!link [Fleimstaler Alpen] [bergpano_o53]) (Südtirol + Trentino)
+#   !item (54) (!link [Vizentiner Alpen] [bergpano_o54]) (Prov. Vicenza, evtl. weitere?)
+#   !item (58) (!link [Julische Alpen] [bergpano_o58]) (Prov. Friaul)
+#   !item (66) (!link [Bernina-Alpen] [bergpano_o66]) (Prov. Sondrio)
+   !item (67) (!link [Livigno-Alpen] [bergpano_o67]) (Prov. Sondrio)
+   !item (68) (!link [Bergamasker Alpen] [bergpano_o68]) (Prov. Bergamo)
+#   !item (82) (!link [Adula-Alpen] [bergpano_w82]) (Prov. Bergamo)
+   !item (83) (!link [Tessiner Alpen] [bergpano_w83])
+   !item (86) (!link [Walliser Alpen] [bergpano_w86])
+   !item (87) (!link [Mont-Blanc-Gruppe] [bergpano_w87])
+   !item (88) (!link [Grajische Alpen] [bergpano_w88])
+   !item (90) (!link [Cottische Alpen] [bergpano_w90])
+#   !item (91) (!link [Meeralpen] [bergpano_w91])
+#   !item (92) (!link [Ligurische Alpen] [bergpano_w92])
+!endif
+!ifset stempel
+!endif
+   !end_itemize
+!item (!B)Liechtenstein(!b)
+   !begin_itemize !short
+!ifset bergcam
+   !item (25) (!link [Rätikon] [bergcam_o25])
+!endif
+!ifset bergpano
+#   !item (25) (!link [Rätikon] [bergpano_o25])
+!endif
+!ifset stempel
+!endif
+   !end_itemize
+!ifset bergcam
+!item (!B)Schweiz(!b)
+!endif
+!ifset bergpano
+!item (!B)Schweiz(!b)
+!endif
+   !begin_itemize !short
+!ifset bergcam
+   !item (25) (!link [Rätikon] [bergcam_o25]) (Kanton Graubünden)
+   !item (26) (!link [Silvretta] [bergcam_o26]) (Kanton Graubünden)
+   !item (27) (!link [Samnaun-Gruppe] [bergcam_o27]) (Kanton Graubünden)
+   !item (29) (!link [Sesvenna-Gruppe] [bergcam_o29]) (Kanton Graubünden)
+   !item (48a) (!link [Ortler-Alpen] [bergcam_o48a]) (Kanton Graubünden)
+   !item (63) (!link [Plessur-Alpen] [bergcam_o63]) (Kanton Graubünden)
+   !item (64) (!link [Oberhalbsteiner Alpen] [bergcam_o64]) (Plattagruppe) (Kanton Graubünden)
+   !item (65) (!link [Albula-Alpen] [bergcam_o65]) (Kanton Graubünden)
+   !item (66) (!link [Bernina-Alpen] [bergcam_o66]) (Kanton Graubünden)
+   !item (67) (!link [Livigno-Alpen] [bergcam_o67]) (Kanton Graubünden)
+   !item (70) (!link [Appenzeller Alpen] [bergcam_w70])
+   !item (71) (!link [Schweizer Mittelland] [bergcam_w71])
+   !item (72) (!link [Jura] [bergcam_w72])
+   !item (73) (!link [Zentralschweizerische Voralpen] [bergcam_w73])
+#   !item (74) (!link [Berner Voralpen] [bergcam_w74])
+   !item (75) (!link [Freiburger Voralpen] [bergcam_w75])
+   !item (76) (!link [Chablais-Alpen] [bergcam_w76])
+   !item (80) (!link [Glarner Alpen] [bergcam_w80])
+   !item (81) (!link [Urner Alpen] [bergcam_w81])
+   !item (82) (!link [Adula-Alpen] [bergcam_w82])
+   !item (83) (!link [Tessiner Alpen] [bergcam_w83])
+   !item (84) (!link [Berner Alpen] [bergcam_w84])
+   !item (86) (!link [Walliser Alpen] [bergcam_w86])
+   !item (87) (!link [Mont-Blanc-Gruppe] [bergcam_w87])
+!endif
+!ifset bergpano
+#   !item (25) (!link [Rätikon] [bergpano_o25]) (Kanton Graubünden)
+   !item (26) (!link [Silvretta] [bergpano_o26]) (Kanton Graubünden)
+#   !item (27) (!link [Samnaun-Gruppe] [bergpano_o27]) (Kanton Graubünden)
+   !item (29) (!link [Sesvenna-Gruppe] [bergpano_o29]) (Kanton Graubünden)
+#   !item (48a) (!link [Ortler-Alpen] [bergpano_o48a]) (Kanton Graubünden)
+#   !item (63) (!link [Plessur-Alpen] [bergpano_o63]) (Kanton Graubünden)
+#   !item (64) (!link [Oberhalbsteiner Alpen] [bergpano_o64]) (Plattagruppe) (Kanton Graubünden)
+   !item (65) (!link [Albula-Alpen] [bergpano_o65]) (Kanton Graubünden)
+   !item (66) (!link [Bernina-Alpen] [bergpano_o66]) (Kanton Graubünden)
+   !item (67) (!link [Livigno-Alpen] [bergpano_o67]) (Kanton Graubünden)
+   !item (70) (!link [Appenzeller Alpen] [bergpano_w70])
+   !item (71) (!link [Schweizer Mittelland] [bergpano_w71])
+   !item (72) (!link [Jura] [bergpano_w72])
+#   !item (73) (!link [Zentralschweizerische Voralpen] [bergpano_w73])
+#   !item (74) (!link [Berner Voralpen] [bergpano_w74])
+#   !item (75) (!link [Freiburger Voralpen] [bergpano_w75])
+   !item (76) (!link [Chablais-Alpen] [bergpano_w76])
+   !item (80) (!link [Glarner Alpen] [bergpano_w80])
+   !item (81) (!link [Urner Alpen] [bergpano_w81])
+#   !item (82) (!link [Adula-Alpen] [bergpano_w82])
+   !item (83) (!link [Tessiner Alpen] [bergpano_w83])
+   !item (84) (!link [Berner Alpen] [bergpano_w84])
+   !item (86) (!link [Walliser Alpen] [bergpano_w86])
+   !item (87) (!link [Mont-Blanc-Gruppe] [bergpano_w87])
+!endif
+!ifset stempel
+!endif
+   !end_itemize
+!ifset bergcam
+!item (!B)Frankreich(!b)
+!endif
+!ifset bergpano
+!item (!B)Frankreich(!b)
+!endif
+   !begin_itemize !short
+!ifset bergcam
+   !item (72) (!link [Jura] [bergcam_w72])
+   !item (76) (!link [Chablais-Alpen] [bergcam_w76])
+   !item (77) (!link [Savoyer Kalkalpen] [bergcam_w77])
+   !item (78) (!link [Französische Kalkalpen] [bergcam_w78])
+   !item (79) (!link [Provençalische Alpen] [bergcam_w79])
+   !item (87) (!link [Mont-Blanc-Gruppe] [bergcam_w87])
+   !item (88) (!link [Grajische Alpen] [bergcam_w88])
+   !item (89) (!link [Dauphiné-Alpen] [bergcam_w89])
+   !item (90) (!link [Cottische Alpen] [bergcam_w90])
+   !item (91) (!link [Meeralpen] [bergcam_w91])
+!endif
+!ifset bergpano
+   !item (72) (!link [Jura] [bergpano_w72])
+   !item (76) (!link [Chablais-Alpen] [bergpano_w76])
+   !item (77) (!link [Savoyer Kalkalpen] [bergpano_w77])
+   !item (78) (!link [Französische Kalkalpen] [bergpano_w78])
+   !item (79) (!link [Provençalische Alpen] [bergpano_w79])
+   !item (87) (!link [Mont-Blanc-Gruppe] [bergpano_w87])
+   !item (88) (!link [Grajische Alpen] [bergpano_w88])
+   !item (89) (!link [Dauphiné-Alpen] [bergpano_w89])
+   !item (90) (!link [Cottische Alpen] [bergpano_w90])
+#   !item (91) (!link [Meeralpen] [bergpano_w91])
+!endif
+!ifset stempel
+!endif
+   !end_itemize
+!end_itemize
+RegBez. = Regierungsbezirk; Lkr. = Landkreis
+
+Anmerkung: Wenn eine Gebirgsgruppe mehreren Ländern angehört, taucht sie auch entsprechend mehrfach auf.
+
+Die Zuordnung zu den italienischen Provinzen bzw. Regionen ist noch rudimentär; wer kann helfen?
