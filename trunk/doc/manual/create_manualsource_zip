@@ -1,4 +1,4 @@
 #!/bin/sh
 # alles unterhalb von "source" listen, ausgenommen '*CVS*' und an 'zip' uebergeben
 # list everything under "source" except and submit to 'zip'
-find source -path '*CVS*' -prune -o -print | zip udomanualsource.zip -@
+find source -path '*CVS*' -prune -o -print | zip udo-manual-source.zip -@
