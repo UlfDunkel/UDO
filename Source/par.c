@@ -1247,7 +1247,7 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 		/* Wird ein leerer Parameter benutzt, den	*/
 		/* den ersten auch als zweiten verwenden.	*/
 		if (Param[2][0]==EOS)
-		{	strcpy(Param[2], Param[1]);
+		{	um_strcpy(Param[2], Param[1], 1024, "c_url[1]");
 		}
 
 		if (inside_b4_macro)
@@ -1270,7 +1270,7 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 				case TOMHH:
  					convert_tilde(Param[1]);
 					if (Param[2][0]==EOS)
-					{	strcpy(Param[2], Param[1]);
+					{	um_strcpy(Param[2], Param[1], 1024, "c_url[TOHTM|1]");
 					}
 					replace_udo_quotes(Param[2]);	/* r6pl2 */
 					replace_udo_quotes(Param[1]);	/* r6pl2 */
@@ -1279,6 +1279,10 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 					}
 					else
 					{	sprintf(s_entry, "<a href=\"%s\">%s</a>", Param[2], Param[1]);
+					}
+					if (strlen(s_entry)>=4096) /* vj: For debugging reasons */
+					{
+						printf("c_url: s_entry buffer overrus after sprintf\n");
 					}
  					linkerror= !insert_placeholder(s, Param[0], s_entry, Param[1]);
  					break;
