@@ -451,6 +451,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!html_frames_alinkcolor",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_frames_vlinkcolor",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_frames_backimage",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
+	{ "!html_doctype",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},	/* New in r6pl16 [NHz] */
 	{ "!html_style_name",		"",			c_tunix,	TRUE,	CMD_ALWAYS	}, /* New in r6pl15 [NHz] */
 	{ "!html_script_name",		"",			c_tunix,	TRUE,	CMD_ALWAYS	}, /* New in r6pl15 [NHz] */
 	{ "!html_favicon_name",		"",			c_tunix,	TRUE,	CMD_ALWAYS	}, /* New in r6pl15 [NHz] */
@@ -2308,9 +2309,9 @@ LOCAL void c_heading ( void )
 			if (inside_center)	strcpy(align, "\\qc");
 			if (inside_right)	strcpy(align, "\\qr");
 			/* Bug -> Corrected in r6pl15 [NHz] */
-
-			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + 14, name);
-/*			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize + 14, align, name);*/
+/*			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + 14, name);*/
+			/* Changed in r6pl16 [NHz] */
+			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, laydat.node1size, name);
 			break;
 		case TOWIN:
 		case TOWH4:
@@ -2325,7 +2326,7 @@ LOCAL void c_heading ( void )
 		case TOKPS:
 			outln("newline");
 			/* Changed in r6pl16 [NHz] */
-			voutlnf("%d changeFontSize", iDocNode1fontSize);
+			voutlnf("%d changeFontSize", laydat.node1size);
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
 			outln("Boff");
@@ -2431,7 +2432,9 @@ LOCAL void c_subheading ( void )
 			align[0]= EOS;
 			if (inside_center)	strcpy(align, "\\qc");
 			if (inside_right)	strcpy(align, "\\qr");
-			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + 6, name);
+			/* Changed in r6pl16 [NHz] */
+			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, laydat.node2size, name);
+/*			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + 6, name);*/
 			break;
 		case TOWIN:
 		case TOWH4:
@@ -2447,7 +2450,7 @@ LOCAL void c_subheading ( void )
 		case TOKPS:
 			outln("newline");
 			/* Changed in r6pl16 [NHz] */
-			voutlnf("%d changeFontSize", iDocNode2fontSize);
+			voutlnf("%d changeFontSize", laydat.node2size);
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
 			outln("Boff");
@@ -2551,7 +2554,9 @@ LOCAL void c_subsubheading ( void )
 			align[0]= EOS;
 			if (inside_center)	strcpy(align, "\\qc");
 			if (inside_right)	strcpy(align, "\\qr");
-			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);
+			/* Changed in r6pl16 [NHz] */
+			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, laydat.node3size, name);
+/*			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);*/
 			break;
 		case TOWIN:
 		case TOWH4:
@@ -2567,7 +2572,7 @@ LOCAL void c_subsubheading ( void )
 		case TOKPS:
 			outln("newline");
 			/* Changed in r6pl16 [NHz] */
-			voutlnf("%d changeFontSize", iDocNode3fontSize);
+			voutlnf("%d changeFontSize", laydat.node3size);
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
 			outln("Boff");
@@ -2668,7 +2673,9 @@ LOCAL void c_subsubsubheading ( void )
 			align[0]= EOS;
 			if (inside_center)	strcpy(align, "\\qc");
 			if (inside_right)	strcpy(align, "\\qr");
-			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);
+			/* Changed in r6pl16 [NHz] */
+			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, laydat.node4size, name);
+/*			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);*/
 			break;
 		case TOWIN:
 		case TOWH4:
@@ -2684,7 +2691,9 @@ LOCAL void c_subsubsubheading ( void )
 		case TOKPS:
 			outln("newline");
 			/* Changed in r6pl16 [NHz] */
-			voutlnf("%d changeFontSize", iDocNode4fontSize);
+			/* Changed in r6pl16 [NHz] */
+			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, laydat.node4size, name);
+/*			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);*/
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
 			outln("Boff");
@@ -2972,7 +2981,7 @@ GLOBAL void c_newpage( void )
 			break;
 		/* New in r6pl16 [NHz] */
 		case TOHTM:
-			outln("<span style=\"page-break-after:always;\"></span>");
+			outln("<span class=\"page-break\"></span>");
 			break;
 	}
 	
@@ -5429,7 +5438,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 					break;
 				case TOKPS:
 					/* Deleted in r6pl16 [NHz] */
-/*					strcat(z, " \\");*/
+					/* No special line end within a paragraph  for PS anymore */
 					break;
 			}
 			
@@ -7334,6 +7343,11 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			/* New in r6pl16 [NHz] */
 			if ( strcmp(token[0], "!html_use_hyphenation")==0 )
 			{	html_use_hyphenation = TRUE;
+				return TRUE;
+			}
+			/* New in r6pl16 [NHz] */
+			if ( strcmp(token[0], "!html_doctype")==0 )
+			{	set_html_doctype();
 				return TRUE;
 			}
 			break;
@@ -10900,6 +10914,7 @@ GLOBAL void init_vars ( void )
 	iDocHtmlSwitchLanguage=		-1;			/*r6pl12*/
 	html_transparent_buttons=	FALSE;		/*r6pl12*/
 	html_use_hyphenation=	FALSE;		/* New in r6pl16 [NHz] */
+	html_doctype= HTML_TRANS;	/* New in r6pl16 [NHz] */
 	
 	html_ignore_p= 				FALSE;
 
@@ -10950,11 +10965,6 @@ GLOBAL void init_vars ( void )
 	sDocMonofont[0]=		EOS;
 	sDocPropfontSize[0]=	EOS;
 	sDocMonofontSize[0]=	EOS;
-	/* New in r6pl16 [NHz] */
-	sDocNode1fontSize[0]=	EOS;
-	sDocNode2fontSize[0]=	EOS;
-	sDocNode3fontSize[0]=	EOS;
-	sDocNode4fontSize[0]=	EOS;
 
 	/* New in r6pl16 [NHz] */
 	set_mainlayout();
