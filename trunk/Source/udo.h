@@ -244,10 +244,10 @@ GLOBAL BOOLEAN			html_use_hyphenation;		/* Lange Woerter sollen durch (!-) getre
 GLOBAL int			html_doctype;		/* Welche DTD soll benutzt werden? */
 /* New feature #0000054 in V6.5.2 [NHz] */
 GLOBAL BOOLEAN			html_header_date;		/* Ausgabe des Datums im Element <meta> */
-GLOBAL char			html_header_date_zone[6];	/* Zone fÅr das Datum */
+GLOBAL char			html_header_date_zone[10];	/* Zone fÅr das Datum */
 /* New feature #0000053 in V6.5.2 [NHz] */
 GLOBAL BOOLEAN			html_header_links;		/* Ausgabe der Daten im Element <link> */
-GLOBAL char			html_header_links_kind[40];	/* Welche Links sollen ausgegeben werden? */
+GLOBAL char			html_header_links_kind[50];	/* Welche Links sollen ausgegeben werden? */
 
 GLOBAL int			image_alignment;			/* Ausrichtung der Bilder		*/
 GLOBAL int			table_alignment;			/* Ausrichtung der Tabellen		*/
