@@ -834,7 +834,8 @@ LOCAL BOOLEAN convert_link_pdf ( char *s, const char *p0, char *p1, char *p2, co
 		else
 		{	dest= li;
 		}
-		sprintf(s_entry, "{\\leavevmode\\pdfannotlink goto num %d\n%s\\pdfendlink}",
+		/* Changed in r6.2pl1 [NHz] */
+		sprintf(s_entry, "{\\pdfstartlink goto num %d\n%s\\pdfendlink}",
 			dest, p1);
 	}
 	else
@@ -1232,8 +1233,8 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 	/* Changed in r6pl17 [NHz] / s_entry (1024 to 4096 bytes), url_rtf (512 to 2048 bytes) */
 	char s_entry[4096], url_rtf[2048], rtf0[4];
 
-	char rtf1[]="00d0c9ea79f9bace118c8200aa004ba90b0200000017000000";
-	char rtf2[]="0000e0c9ea79f9bace118c8200aa004ba90b";
+	char rtf1[]="00d0c9ea79f9bace118c8200aa004ba90b0200000003000000";
+	char rtf2[]="e0c9ea79f9bace118c8200aa004ba90b";
 	char rtf3[]="000000";
 	char rtf4[]="0000";
 	BOOLEAN linkerror= FALSE;
@@ -1319,24 +1320,21 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 					replace_udo_quotes(Param[2]);
 					replace_udo_quotes(Param[1]);
 
-
-					url_len = (int)strlen(Param[2]);
+					/* Changed in r6.2pl1 [NHz] */ 					auto_quote_chars(Param[2], TRUE); 					url_len = (int)strlen(Param[2]);
 
 					rtf0[0]=EOS;
-
 					url_rtf[0]=EOS;
 
 					for(i=0;i<url_len;i++)
-
-					{	sprintf(rtf0, "%x", (int)Param[2][i]);
-
+					{	if(Param[2][i] == '\\') 						{	i += 2;
+							rtf0[0]=EOS;
+							strncpy(rtf0, Param[2]+i, 2);
+							i++; 						} 						else 							sprintf(rtf0, "%x", (int)Param[2][i]); 
 						strcat(url_rtf, rtf0);
-
 						strcat(url_rtf, "00");
-
 					}
 
-					sprintf(s_entry, "{\\field{\\*\\fldinst {HYPERLINK \"%s\"}{{\\*\\datafield %s%x%s%s%s%x%s%s%s}}}\n{\\fldrslt {\\cs15\\ul\\cf2 %s}}}", Param[2], rtf1, url_len+1, rtf3, url_rtf, rtf2, (url_len+2)*2, rtf3, url_rtf, rtf4, Param[1]);
+					sprintf(s_entry, "{\\field{\\*\\fldinst {HYPERLINK \"%s\"}{{\\*\\datafield %s%s%x%s%s%s}}}\n{\\fldrslt {\\cs15\\ul\\cf2 %s}}}", Param[2], rtf1, rtf2, (url_len+1)*2, rtf3, url_rtf, rtf4, Param[1]);
 
    				linkerror= !insert_placeholder(s, Param[0], s_entry, Param[1]);
 					break;

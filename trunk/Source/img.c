@@ -1369,7 +1369,8 @@ GLOBAL void c_png_output ( const char *name, const char *caption, const char *su
 #endif
 
 	outln("\\mbox{");
-	voutlnf("\\pdfimage %s", datei);
+	/* Changed in r6.2pl1 [NHz] */
+	voutlnf("\\pdfximage{%s}\\pdfrefximage", datei);
 	outln("}");
 
 	if ( caption[0]!=EOS )

@@ -2889,11 +2889,16 @@ GLOBAL void c_begin_document ( void )
 	switch (desttype)
 	{
 		case TOPDL:
-			if (titdat.author!=NULL || titdat.title!=NULL || titdat.program!=NULL )
-			{	outln("\\pdfinfo");
-				if (titdat.author!=NULL)	voutlnf("\tauthor {%s}", titdat.author);
-				if (titdat.title!=NULL)		voutlnf("\ttitle {%s}", titdat.title);
-				if (titdat.program!=NULL)	voutlnf("\tsubject {%s}", titdat.program);
+			/* Changed in r6.2pl1 [NHz] */ 			if (titdat.author!=NULL || titdat.title!=NULL || titdat.program!=NULL )
+			{	outln("\\pdfinfo {");
+				if (titdat.title!=NULL) voutlnf("  /Title (%s)", titdat.title);
+				if (titdat.author!=NULL) voutlnf("  /Author (%s)", titdat.author);
+				voutlnf("  /Creator (UDO Release %s Patchlevel %s for %s)", UDO_REL, UDO_PL, UDO_OS);
+				voutlnf("  /CreationDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
+				voutlnf("  /ModDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
+				if (titdat.description!=NULL) voutlnf("  /Subject (%s)", titdat.description);
+				if (titdat.keywords!=NULL) voutlnf("  /Keywords (%s)", titdat.keywords); /* Set by !docinfo [keywords] foo */
+				outln("}");
 			}
 			output_tex_environments();
 			break;
