@@ -85,6 +85,12 @@ const char *id_chr_c= "@(#) chr.c       22.04.1999";
 #include	"mac2iso.h"
 #endif
 
+#if __MACOSX__
+#include	"chr_mac.h"
+#else
+#include	"mac2iso.h"
+#endif
+
 #if	USE_LATIN1_CHARSET
 #include	"chr_iso.h"
 #endif
@@ -133,7 +139,7 @@ LOCAL void uni2misc ( char *s );
 LOCAL void iso2system ( char *s );
 LOCAL void iso2sys ( char *s );
 
-#ifndef __MACOS__
+#if !defined(__MACOS__) && !defined(__MACOSX__)
 LOCAL void mac2iso ( char *s );
 #endif
 
@@ -347,7 +353,7 @@ LOCAL void iso2sys ( char *s )
 	#
 	############################################################	*/
 
-#ifndef __MACOS__
+#if !defined(__MACOS__) && !defined(__MACOSX__)
 
 LOCAL void mac2iso ( char *s )
 {
@@ -666,7 +672,7 @@ GLOBAL void recode ( char *zeile, int char_set )	/* PL6 */
 			break;
 #endif
 
-#ifndef __MACOS__
+#if !defined (__MACOS__) && !defined(__MACOSX__)
 		case CODE_MAC:
 			ptr= get_8bit_ptr(zeile);
 			if (ptr)
@@ -760,7 +766,7 @@ LOCAL void recode_allways ( char *zeile, int char_set )	/* PL8 */
 			break;
 #endif
 
-#ifndef __MACOS__
+#if !defined(__MACOS__) && !defined(__MACOSX__)
 		case CODE_MAC:
 			mac2iso(zeile);
 			iso2system(zeile);

@@ -474,7 +474,7 @@ extern const char *id_charset_h;
 extern const char *id_hp82iso_h;
 #endif
 
-#ifndef __MACOS__
+#if !defined(__MACOS__) && !defined(__MACOSX__)
 extern const char *id_mac2iso_h;
 #endif
 
@@ -515,7 +515,7 @@ LOCAL void show_ident ( void )
 	fprintf(stdout, "%s\n", id_hp82iso_h+5);
 #endif
 
-#ifndef __MACOS__
+#if !defined(__MACOS__) && !defined(__MACOSX__)
 	fprintf(stdout, "%s\n", id_mac2iso_h+5);
 #endif
 

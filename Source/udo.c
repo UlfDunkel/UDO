@@ -1087,6 +1087,10 @@ LOCAL BOOLEAN str_for_os ( const char *s )
 	flag |= (strstr(s, "macos")!=NULL);
 #endif
 
+#ifdef __MACOSX__
+	flag |= (strstr(s, "macosx")!=NULL);
+#endif
+
 #ifdef __MSDOS__
 	flag |= (strstr(s, "dos")!=NULL);
 #endif

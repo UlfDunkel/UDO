@@ -383,7 +383,7 @@
 #endif	/* __MSDOS__ */
 
 
-#if defined(__MACOS__) || defined(__BEOS__)
+#if defined(__MACOS__) || defined(__MACOSX__) || defined(__BEOS__)
 	#define	BETA_C		'\247'		/* kein Beta, daher sz nehmen */
 	#define	BETA_S		"\247"
 	#define	BETA_S_LEN	1

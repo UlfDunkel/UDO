@@ -268,6 +268,23 @@
 #define	HAVE_TMPNAM				1
 #endif
 
+#ifdef __MACOSX__
+#define	UDO_OS			"MacOSX"
+#define	USE_SLASH			1
+#define	USE_LONG_FILENAMES	1
+#define	USE_LATIN1_CHARSET	0
+#define	SYSTEM_CHARSET		CODE_MAC
+#define	HAVE_STRUPR			0
+#define	HAVE_STRLWR			0
+#define	HAVE_STRICMP		0
+#define	HAVE_STRNICMP			0
+#define	HAVE_STRCASECMP		1
+#define	HAVE_SYS_ERRLIST	1
+#define	HAVE_STRERROR		1
+#define	USE_SETFILETYPE		0
+#define	HAVE_TMPNAM				1
+#endif
+
 #ifdef __NEXTSTEP__
 #define	UDO_OS					"NeXTStep"
 #define	USE_SLASH				1
