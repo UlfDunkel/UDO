@@ -1,0 +1,7 @@
+@rem dieses Batchfile fuer Win32 + OS/2 konvertiert das UDO-Handbuch in Deutsch nach HTML
+@rem this batch file for Win32 + OS/2 converts the german UDO manual to HTML
+udo --html --verbose --force-long -D LANG_DE --tree -o ../html-de/index.html manual.u
+copy ..\html-de\index.ulh ..\manual-de.ulh
+copy ..\html-de\index.uth ..\manual-de.uth
+del ..\html-de\index.ulh
+del ..\html-de\index.uth
