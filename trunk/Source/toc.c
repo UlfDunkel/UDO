@@ -9634,7 +9634,7 @@ GLOBAL void set_html_keywords ( void )
 	if (toc[p1_toc_counter]->keywords!=NULL)
 	{	/* r6pl5: Keywords bereits vorhanden, neue anhaengen */
 		oldptr= toc[p1_toc_counter]->keywords;
-		um_strcpy(oldk, oldptr, HTML_KW_SIZE, "set_html_keywords [1]");
+		um_strcpy(oldk, oldptr, HTML_KW_SIZE, "\n!html_keywords too long in this line\nset_html_keywords [1]");
 		newsize= strlen(oldk) + strlen(k) + 3;
 
 		ptr= (char *) um_realloc(oldptr, newsize);
