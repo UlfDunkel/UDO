@@ -492,6 +492,11 @@ GLOBAL void error_unknown_color ( const char *s )
 {	error_msg_para("unknown color: %s", s);
 }
 
+/* New feature #0000053 in V6.5.2 [NHz] */
+GLOBAL void error_empty_header_links ( void )
+{	error_msg_solo("empty !html_header_links");
+}
+
 GLOBAL void error_error ( const char *s )	/*r6pl4*/
 {	error_msg_solo(s);
 }
