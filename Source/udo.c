@@ -791,6 +791,10 @@ GLOBAL void um_free(void *memblock)
 						if (um_free_endbroken_count==0)
 						{
 							printf("Warning: um_free: memory block end check broken\n");
+#ifdef UM_DEBUG_SHOW_BUFFER_ON_FREE_ERROR
+							printf("Bufferstart: \"%s\"\n", tanker->block);
+							printf("Bufferende : \"%s\"\n", tanker->endmark);
+#endif
 						}
 						um_free_endbroken_count++;
 					}
