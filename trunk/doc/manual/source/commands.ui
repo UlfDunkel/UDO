@@ -1,5 +1,5 @@
 # doc/manual/source/commands.ui
-# letzte Änderungen: 20.12.2003 / last changes: Dec 20, 2003
+# letzte Änderungen: 21.12.2003 / last changes: Dec 21, 2003
 # ------------------------------------------------------------------------------
 # Diese Datei enthält den alphabetischen Befehlsindex.
 # Die Ausgabe für nicht mehr existente Befehle erfolgt nur dann, wenn "OldKeywords" gesetzt ist.
@@ -6428,6 +6428,9 @@ several times inside a node.
 !end_node
 
 ################################################################################
+!begin_ignore
+# auskommentiert 21.12.2003 - Ulrich Kretschmer (diese Funktion steht derzeit nicht zur Verfügung)
+# Achtung, Link von !html_name und !html_name_prefix auf !html_dirname ist ebenfalls auskommentiert
 !begin_node (!kw [html_dirname])
 !html_name cmd_html_dirname.html
 
@@ -6468,6 +6471,7 @@ where the HTML file will be created.
 !end_xlist
 
 !end_node
+!end_ignore
 
 ################################################################################
 !begin_node (!kw [html_frames_alignment])
@@ -7860,7 +7864,8 @@ paragraph, ""<file>"" is used as the name of the HTML file instead of
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~13
 
 !item [(!SEEALSO)]
-(!KW [html_name_prefix]), (!KW [html_dirname])
+(!KW [html_name_prefix])
+# , (!KW [html_dirname])
 
 !end_xlist
 
@@ -7897,8 +7902,10 @@ all filenames that are generated during output will get the specified prefix.
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~12
 
 !item [(!SEEALSO)]
-(!KW [html_name]), (!KW [html_dirname])
-# U.K. 7.12.03: hier gehört ein Beispiel hin. Beschreibung unklar.
+(!KW [html_name])
+# , (!KW [html_dirname])
+
+# ToDo: U.K. 7.12.03: hier gehört ein Beispiel hin. Beschreibung unklar.
 
 !end_xlist
 
@@ -8187,6 +8194,8 @@ will use smaller and transparent for the navigation links.
 !end_node
 
 ################################################################################
+!begin_ignore
+# auskommentiert 21.12.2003 - Ulrich Kretschmer (diese Funktion steht derzeit nicht zur Verfügung)
 !begin_node (!kw [html_use_folders])
 !html_name cmd_html_use_folders.html
 
@@ -8223,6 +8232,7 @@ the directory names set with (!KW [html_dirname]) will be used.
 !end_xlist
 
 !end_node
+!end_ignore
 
 ################################################################################
 !ifset OldKeywords
