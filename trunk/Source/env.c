@@ -3153,17 +3153,23 @@ GLOBAL void c_begin_document ( void )
 			outln("}");
 			outln("\\paperw11904\\paperh16836");
 			outln("\\margl1134\\margr1134\\margt1984\\margb1984");
-			/* New '\widowctrl' in r6pl15 [NHz] */
 
+			/* New '\widowctrl' in r6pl15 [NHz] */
 			outln("\\pgnstart1\\ftnbj\\ftnrestart\\facingp\\margmirror\\makeback\\widowctrl");
 			outln("\\sectd\\pgndec\\headery1134\\footery1134\\cols1\\colsx567\\pgndec");
+			voutlnf("{\\*\\revtbl {Unknown;}{UDO Version %s.%s.%s;}}", UDO_REL, UDO_SUBVER, UDO_PL); /* New in V6.5.9 [NHz] */
 
 			voutlnf("\\f0\\fs%d", iDocPropfontSize);	
 
-			if (titleprogram[0]!=EOS)
-			{	if (!no_headlines)	/* r6pl6*/
-				{	voutlnf("{\\headerl\\pard\\plain\\pard\\tqr\\tx9636\\f0\\fs%d {\\i %s \\chpgn\\tab %s}\\par}", iDocPropfontSize, lang.page, titleprogram);
-					voutlnf("{\\headerr\\pard\\plain\\pard\\tqr\\tx9636\\f0\\fs%d {\\i %s\\tab %s \\chpgn}\\par}", iDocPropfontSize, titleprogram, lang.page);
+			if(!check_output_raw_header()) /* New in V6.5.9 [NHz];
+			hier muss auch der Fussteil Åbergeben werden, sonst
+			funktioniert es in RTF nicht? */
+			{
+				if (titleprogram[0]!=EOS)
+				{	if (!no_headlines)	/* r6pl6*/
+					{	voutlnf("{\\headerl\\pard\\plain\\pard\\tqr\\tx9636\\f0\\fs%d {\\i %s \\chpgn\\tab %s}\\par}", iDocPropfontSize, lang.page, titleprogram);
+						voutlnf("{\\headerr\\pard\\plain\\pard\\tqr\\tx9636\\f0\\fs%d {\\i %s\\tab %s \\chpgn}\\par}", iDocPropfontSize, titleprogram, lang.page);
+					}
 				}
 			}
 			
@@ -3238,7 +3244,6 @@ GLOBAL void c_begin_document ( void )
 				iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin);
 			outln("  {\\version1}{\\nofpages0}{\\nofwords0}{\\nofchars0}{\\edmins0}");
 			outln("}");
-
 
 			outln(rtf_pardplain);
 			voutlnf("%s\\fs%d", rtf_norm, iDocPropfontSize);
