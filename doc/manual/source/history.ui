@@ -357,9 +357,203 @@ In this chapter you will find a short summary of all the changes in the past.
 ################################################################################
 !iflang [german]
 !begin_node Änderungen von Release 6 Patchlevel 14 nach 15
+!subheading Allgemeines
+!begin_itemize
+!item Alle Indexeinträge bis zur vierten Stufe werden in die
+      Projektdatei (*.upr) geschrieben.
+!item Die Einträge für (!T)!/label(!t) und (!T)!/alias(!t) werden
+      in die Projektdatei (!*.upr) geschrieben.
+!item Alle Heading-Einträge werden in die Projektdatei (*.upr) geschrieben.
+!item Außerdem werden die entsprechenden Zeilennummern geschrieben.
+!end_itemize
+!subheading Postscript
+!begin_itemize
+!item Die Ausgabe in abo.c kann derzeit von der Postscript-Ausgabe nicht
+      benutzt werden, da diese keine zentrierte bzw. rechts!-bündige
+      Ausgabe zulässt. Deshalb wird die Standard!-ausgabe verhindert
+      und statt!-dessen eine eigene Ausgabe formuliert. Die Ausgabe erfolgt
+      in deutsch, wenn Deutsch gesetzt ist, ansonsten in englisch.
+!item Neue Funktion, um einige Zeichen, die ein Post!-script-Inter!-preter
+      als Teil des Codes inter!-pretieren würde, abzufangen.
+!item Neues Kommando für das Dokumentenlayout: (!nl)
+      (!T)!/doclayout [ps] [paper] foo(!t) (!nl)
+      Möglich Angaben für foo sind A3PORTRAIT, A3LANDSCAPE, A4PORTRAIT,
+      A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE.
+      
+      (!T)!/doclayout [ps] [openMode] foo(!t) (!nl)
+      Mögliche Angaben stehen in der Dokumentation zu den pdf-marks.
+      
+      (!T)!/doclayout [ps] [propfontname] foo(!t) (!nl)
+      Mögliche Angaben für foo sind Zeichensatznamen, z.~B. Arial,
+      Times New Roman, sans oder sans-serif. (!nl)
+      (!B)Hinweis:(!b) Für die Postscriptausgabe gilt, daß für Helvetica,
+      Arial oder sans-serif immer Helvetica gesetzt wird, ansonsten
+      Times New Roman.
+      
+      (!T)!/doclayout [ps] [propfontsize] foo(!t) (!nl)
+      Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+!item (!T)!/docinfo [keywords] foo(!t) (!nl)
+      Ersatz und Erweiterung für (!T)!/html_keywords(!t) (funkioniert
+      derzeit nur für Postscript).
+!item (!T)!/docinfo [description] foo(!t) (!nl)
+      Ersatz und Erweiterung für (!T)!/html_description(!t) (funktioniert
+      derzeit nur für Postscript)
+!item Für die Postscript-Ausgabe wird jetzt auch eine Titelseite erzeugt.
+!item Für die Standard-Kopfzeile wird aus ""Titel"" und ""Programm""
+      (!T)(!/docinfo)(!t) ein Text erstellt.
+!item Für die Standard-Fusszeile wird aus ""Author"" (!T)(!/docinfo)(!t)
+      ein Text erstellt.
+!item Aus den Angaben aus (!T)(!/docinfo)(!t) werden die Angaben für die
+      Dokumenten!-informationen einer PDF-Datei zusammen!-gestellt.
+!item Die Description- und Listumgebungen werden für Postscript
+      unterstützt.
+!item Neue Aufzählungszeichen für die Itemize-Umgebung.
+!item Der Zeichensatz ""Symbol"" kann benutzt werden.
+!item Interne Links (!T)(!/link ...)(!t), externe Links (!T)(!/xlink ...)(!t)
+      und (!T)(!/url ...)(!t) werden für PDF (via Postscript) umgesetzt.
+!item Fußnoten werden für die Postscriptausgabe umgesetzt.
+!item Die Tabellen werden jetzt leserlich mit monospaced Zeichen umgesetzt.
+!item Die Kommandos (!T)!/bigskip(!t), (!T)!/medskip(!t) und (!T)!/smallskip(!t)
+      werden jetzt leserlich umgesetzt.
+!item Alle Nodes werden für die Postscript-Ausgabe als ""Named Destination""
+      angelegt. Es kann also von außerhalb auf jedes Kapitel einer PDF-Datei
+      verwiesen werden.
+!item Aus allen Nodes wird ein Bookmark-Verzeichnis für PDF-Dateien erzeugt.
+!item Wenn (!T)!/tableofcontents(!t) gesetzt ist, wird ein Inhaltsverzeichnis
+      ausgegeben.
+!item Für (!T)!/label(!t) wird ein ""Named Destination"" gesetzt.
+!end_itemize
+!subheading Hypertext Markup Language
+!begin_itemize
+!item Neue Kommandos für die HTML-Ausgabe: (!nl)
+      (!T)!/html_style_name foo(!t) (!nl)
+      Zum Setzen eines externen Stylesheets für alle Dateien eines Projektes.
+
+      (!T)!/html_script_name foo(!t) (!nl)
+      Zum Setzen eines externen Scriptes für alle Dateien eines Projektes.
+
+      (!T)!/html_favicon_name foo(!t) (!nl)
+      Zum Setzen eines Faforiten-Icons für alle Dateien eines Projektes.
+      
+      (!B)Achtung:(!b) Möglicherweise werden die Kommandos nochmal
+      geändert.
+!item Trennzeichen (!T)&shy;(!t) für die Worttrennung in HTML eingefügt
+!item Die Gedankenstriche (!T)&ndash;(!t) und (!T)&mdash;(!t) sowie
+      die drei Auslassungspunkte (!T)&hellip;(!t) werden für HTML gesetzt.
+!item Setzen der Links für die Navigation über das Element (!T)<link>(!t).
+      Folgende Attribute werden unterstützt: (!T)contents, start, first,
+      previous, prev, next, last(!t) und (!T)copyright(!t) (!nl)
+      Die Links für (!T)first(!t) und (!T)last(!t) sowie (!T)previous(!t)
+      gelten nur für CAB (evtl. iCab). Der Link für (!T)copyright(!t)
+      zeigt auf aboutudo und wird auch nur dann angelegt. (!nl)
+      CAB unterstützt beim Element (!T)<link>(!t) leider nicht das Attribut
+      (!T)target(!t). Daher funktionieren die Links bei der Benutzung
+      von Frames nicht so schön.
+!item Werden bei der HTML-Ausgabe Frames erzeugt, wird zusätzlich ein Bereich
+      <noframes></noframes> mit Inhaltsverzeichnis gesetzt, damit auch
+      Browser, die gar keine Frames kennen/können (z.~B. beim Vorlesen)
+      an das Inhalts!-ver!-zeichnis kommen.
+!end_itemize
+!subheading Richtext Format
+!begin_itemize
+!item Absatzkontrolle (Orphans & Widows) wird für die RTF-Ausgabe
+      standard!-mäßig eingeschaltet.
+!end_itemize
 !endif
 !iflang [english]
 !begin_node Changes from Release 6 Patchlevel 14 to 15
+!subheading General
+!begin_itemize
+!item All index entrys up to forth degree will be written in the
+      projekt file (*.upr)
+!item The entrys for (!T)!/label(!t) and (!T)!/alias(!t) will
+      be written in the projekt file (!*.upr).
+!item All heading entrys will be written in the projekt file (*.upr).
+!item For all entrys the line number will be written.
+!end_itemize
+!subheading Postscript
+!begin_itemize
+!item The standard ouput of ""about udo"" can't be used for postscript,
+      so there is a special. The output will be done in german if
+      ""german"" ist set, otherwise in english
+!item New function for postscript output included, to hide characters
+      which can be interpreted as postscript code
+!item New command for the document layout (!nl)
+      (!T)!/doclayout [ps] [paper] foo(!t) (!nl)
+      Possible values for foo: A3PORTRAIT, A3LANDSCAPE, A4PORTRAIT,
+      A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE.
+      
+      (!T)!/doclayout [ps] [openMode] foo(!t) (!nl)
+      You can find possible values for foo in the pdfmark primer.
+      
+      (!T)!/doclayout [ps] [propfontname] foo(!t) (!nl)
+      Possible value for foo are fontnames like Arial, Times New Roman,
+      ans or sans serif (!nl)
+      (!B)Hint:(!b) For postscript output will be set Helvetica if
+      helvetica, Arial or sans serif is set, otherwise times New Roman
+      
+      (!T)!/doclayout [ps] [propfontsize] foo(!t) (!nl)
+      Possible values for foo are fontsizes with unit pt
+!item (!T)!/docinfo [keywords] foo(!t) (!nl)
+      Replacement for (!T)!/html_keywords(!t) (works only for postscript)
+!item (!T)!/docinfo [description] foo(!t) (!nl)
+      Replacement for (!T)!/html_description(!t) (works only for postscript)
+!item There is built a titlepage for postscript output now.
+!item For the standard heading line the title and programm items are
+      extracted from (!T)(!/docinfo)(!t)
+!item For the standard footer line the author item is extracted from
+      (!T)(!/docinfo)(!t)
+!item The document info of a PDF file is build from the values of
+      the (!T)(!/docinfo)(!t)
+!item Description- and list environments are supported for postscript
+!item New characters for the itemize environment
+!item The font ""Symbol"" can be used.
+!item Interal links (!T)(!/link ...)(!t), external links (!T)(!/xlink ...)(!t)
+      und (!T)(!/url ...)(!t) are transposed for PDF (via Postscript)
+!item Footnotes are transposed for postscript
+!item Tables are transposed legible with monospaced characters
+!item Commands (!T)!/bigskip(!T), (!T)!/medskip(!t) and (!T)!/smallskip(!t)
+      are transposed legible now.
+!item All nodes are set as ""Named Destination"", so it is possible to
+      link from outside directly to every node of a pdf file.
+!item With data from all nodes is built a bookmark content table
+!item Table of contents will be put out, if (!T)!/tableofcontents(!t) is set
+!item (!T)!/label(!t) will be transposed to a ""Named Destination""
+!end_itemize
+!subheading Hypertext Markup Language
+!begin_itemize
+!item New commands for the HTML output: (!nl)
+      (!T)!/html_style_name foo(!t) (!nl)
+      Sets an external stylesheet for all files of a project
+
+      (!T)!/html_script_name foo(!t) (!nl)
+      Sets an external script for all files of a project
+
+      (!T)!/html_favicon_name foo(!t) (!nl)
+      Sets an favicon for all files of a project
+      
+      (!B)Important:(!b) This commands may be changed in future possibly.
+!item Character (!T)&shy;(!t) for hyphenation in HTML included
+!item The characters (!T)&ndash;(!t), (!T)&mdash;(!t) and (!T)&hellip;(!t)
+      are used for HTML
+!item Setting links for the navigation through a project of HTML sites
+      via the element (!T)<link>(!t).
+      The following attributes are suppoerted: (!T)contents, start, first,
+      previous, prev, next, last(!t) and (!T)copyright(!t) (!nl)
+      The links for (!T)first(!t), (!T)last(!t) and (!T)previous(!t)
+      are only vaild for CAB (perhaps iCab). The link for (!T)copyright(!t)
+      introduces a link to aboutudo and in this case will be built. (!nl)
+      CAB doesn't support the attribute (!T)target(!t), when using the
+      element (!T)<link>(!t). Therfore this link-Element doesn't work so
+      properly if frames are used.
+!item If frames are built for HTML output, there will be built a
+      <noframes></noframes> area with a table of contents too. Therefor
+      browser, which doesn't knows frames, can read the content.
+!end_itemize
+!subheading Richtext Format
+!begin_itemize
+!item Paragraph check for orphans and widows are used now.
+!end_itemize
 !endif
 !html_name history_release_6_PL14_to_15.html
 
@@ -407,7 +601,6 @@ In this chapter you will find a short summary of all the changes in the past.
 # 	!end_itemize
 !endif
 !end_description
-
 
 !end_node
 
