@@ -850,6 +850,7 @@ LOCAL void table_output_tex ( void )
 				replace_placeholders(f);
 				replace_udo_tilde(f);
 				replace_udo_nbsp(f);
+				indent2space(f);
 				out(f);
 			}
 			if (x!=tab_w)
