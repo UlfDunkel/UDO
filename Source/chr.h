@@ -38,6 +38,10 @@
 #define KPS_CONTENT	0
 #define KPS_BOOKMARK	1
 #define KPS_NAMEDEST	2
+/* New: Fixed bug #0000040 in r6.2pl2 [NHz] */
+#define KPS_PS2DOCINFO	3
+#define KPS_DOCINFO2PS	4
+#define KPS_NODENAME	5
 
 #endif	/* __UDOCHR__ */
 
