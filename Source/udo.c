@@ -10514,29 +10514,29 @@ LOCAL BOOLEAN check_modules_pass2 ( void )
 	----------------------------------------------------------------------	*/
 LOCAL int getMonth( const char *date_string )
 {
-	if( strnicmp(date_string, "Jan", 3)==0 )
+	if( strncmp(date_string, "Jan", 3)==0 )
 		return 1;
-	if( strnicmp(date_string, "Feb", 3)==0 )
+	if( strncmp(date_string, "Feb", 3)==0 )
 		return 2;
-	if( strnicmp(date_string, "Mar", 3)==0 )
+	if( strncmp(date_string, "Mar", 3)==0 )
 		return 3;
-	if( strnicmp(date_string, "Apr", 3)==0 )
+	if( strncmp(date_string, "Apr", 3)==0 )
 		return 4;
-	if( strnicmp(date_string, "May", 3)==0 )
+	if( strncmp(date_string, "May", 3)==0 )
 		return 5;
-	if( strnicmp(date_string, "Jun", 3)==0 )
+	if( strncmp(date_string, "Jun", 3)==0 )
 		return 6;
-	if( strnicmp(date_string, "Jul", 3)==0 )
+	if( strncmp(date_string, "Jul", 3)==0 )
 		return 7;
-	if( strnicmp(date_string, "Aug", 3)==0 )
+	if( strncmp(date_string, "Aug", 3)==0 )
 		return 8;
-	if( strnicmp(date_string, "Sep", 3)==0 )
+	if( strncmp(date_string, "Sep", 3)==0 )
 		return 9;
-	if( strnicmp(date_string, "Oct", 3)==0 )
+	if( strncmp(date_string, "Oct", 3)==0 )
 		return 10;
-	if( strnicmp(date_string, "Nov", 3)==0 )
+	if( strncmp(date_string, "Nov", 3)==0 )
 		return 11;
-	if( strnicmp(date_string, "Dec", 3)==0 )
+	if( strncmp(date_string, "Dec", 3)==0 )
 		return 12;
 	return 0;
 }
