@@ -418,6 +418,11 @@ GLOBAL void c_maketitle ( void )
 						c_msp_output(titdat.programimage, "", FALSE);
 						c_end_center();
 						break;
+					case TEX_TETEX:
+						c_begin_center();
+						c_eps_output(titdat.programimage, "", ".eps", FALSE);
+						c_end_center();
+						break;
 				}
 			}
 			else
@@ -450,6 +455,11 @@ GLOBAL void c_maketitle ( void )
 					case TEX_EMTEX:
 						c_begin_center();
 						c_msp_output(titdat.authorimage, "", FALSE);
+						c_end_center();
+						break;
+					case TEX_TETEX:
+						c_begin_center();
+						c_eps_output(titdat.authorimage, "", ".eps", FALSE);
 						c_end_center();
 						break;
 				}

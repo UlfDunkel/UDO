@@ -920,7 +920,8 @@ GLOBAL void c_bmp_output ( const char *name, const char *caption, const BOOLEAN 
 			/* eingetragen werden */
 			
 			if (iTexVersion==TEX_EMTEX)
-			{	replace_char(datei, "\\", "/");
+			{	
+				replace_char(datei, "\\", "/");
 				outln("");
 
 				uc4ToInt(bmpheader.biWidth, &width);
@@ -1236,30 +1237,39 @@ GLOBAL void c_eps_output ( const char *name, const char *caption, const char *su
 #else
 	replace_char(datei, "\\", "/");
 #endif
-
-	outln("\\begin_float fig");
-	outln("\\layout LaTeX");
-	outln("\\align center");
-	outln("");
-	outln("\\begin_inset Latex \\epsfig{");
-	outln("");	
-	outln("\\end_inset");
-	outln("");
-	voutlnf("file=%s", datei);
-	outln("\\begin_inset Latex }");
-	outln("");
-	outln("\\end_inset");
-	outln("");
-	outln("");
-	if (caption[0]!=EOS)
-	{	outln("\\layout Caption");
+	switch (desttype)
+	{
+	case TOLYX:
+		outln("\\begin_float fig");
+		outln("\\layout LaTeX");
+		outln("\\align center");
 		outln("");
-		outln(caption);
+		outln("\\begin_inset Latex \\epsfig{");
+		outln("");	
+		outln("\\end_inset");
 		outln("");
+		voutlnf("file=%s", datei);
+		outln("\\begin_inset Latex }");
+		outln("");
+		outln("\\end_inset");
+		outln("");
+		outln("");
+		if (caption[0]!=EOS)
+		{	outln("\\layout Caption");
+			outln("");
+			outln(caption);
+			outln("");
+		}
+		outln("\\end_float");
+		outln("");
+		break;
+	case TOTEX:
+		voutlnf("\\includegraphics{%s}", datei);
+		if (caption[0]!=EOS)
+		{	voutlnf("\\caption{%s}", caption);
+		}
+		break;
 	}
-	outln("\\end_float");
-	outln("");
-
 	UNUSED(visible);
 
 }	/* c_eps_output */
