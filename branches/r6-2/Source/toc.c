@@ -9608,7 +9608,7 @@ GLOBAL void set_html_favicon ( void )
 
 GLOBAL void set_html_keywords ( void )
 {
-	char k[1024], *ptr, oldk[1024], *oldptr;
+	char k[2048], *ptr, oldk[2048], *oldptr; /* Changed buffer from 1024 to 2048 Bytes 6.2.1 [vj] */
 	size_t newsize;
 
 	if (p1_toc_counter<0)	return;

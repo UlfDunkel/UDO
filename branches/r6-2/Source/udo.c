@@ -9631,6 +9631,15 @@ GLOBAL BOOLEAN udo (char *datei)
 			if ( !bBreakHappened && !bBreakInside)	/*r6pl4: && !bBreakInside */
 			{
 				show_status_pass("Pass 2...");
+				/* Die folgende if-Abfrage ist nur ein Workaround,
+                                   damit -vor allem bei der HTML-Ausgabe- die
+                                   Kapitelnummern stimmen und die Unterinhalts-
+                                   verzeichnisse erzeugt werden [vj]6.2.1 */
+                                if (bInsideAppendix)
+                                {
+                                        bInsideAppendix=FALSE;
+                                        printf("Warning: bInsideAppendix=TRUE - fixed it\n");
+                                }
 				clear_if_stack();
 				output_preamble();
 				iUdopass= PASS2;
