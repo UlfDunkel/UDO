@@ -1235,7 +1235,7 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 	char rtf1[]="00d0c9ea79f9bace118c8200aa004ba90b0200000017000000";
 	char rtf2[]="0000e0c9ea79f9bace118c8200aa004ba90b";
 	char rtf3[]="000000";
-	char rtf4[]="2f000000";
+	char rtf4[]="0000";
 	BOOLEAN linkerror= FALSE;
 
 	while ( !linkerror && ((pnr=get_parameters(s, "url", 2))==2) )
