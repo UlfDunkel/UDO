@@ -237,6 +237,7 @@ GLOBAL int			html_button_alignment;			/* Ausrichtung der Buttons		*/
 GLOBAL char			html_name_prefix[512];			/* Prefix fuer HTML-Dateinamen	*/
 /* New in r6pl16 [NHz] */
 GLOBAL BOOLEAN			html_use_hyphenation;		/* Lange Woerter sollen durch (!-) getrennt werden */
+GLOBAL int			html_doctype;		/* Welche DTD soll benutzt werden? */
 
 GLOBAL int			image_alignment;			/* Ausrichtung der Bilder		*/
 GLOBAL int			table_alignment;			/* Ausrichtung der Tabellen		*/
