@@ -2281,7 +2281,7 @@ LOCAL void c_heading ( void )
 			align[0]= EOS;
 			if (inside_center)	strcpy(align, "\\qc");
 			if (inside_right)	strcpy(align, "\\qr");
-			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize + 14, align, name);
+			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + 14, name);
 			break;
 		case TOWIN:
 		case TOWH4:
@@ -2290,7 +2290,7 @@ LOCAL void c_heading ( void )
 			align[0]= EOS;
 			if (inside_center)	strcpy(align, "\\qc");
 			if (inside_right)	strcpy(align, "\\qr");
-			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize + 14, align, name);
+			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + 14, name);
 			break;
 		case TOKPS:
 			outln("newline");
