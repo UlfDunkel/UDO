@@ -129,6 +129,31 @@ GLOBAL void del_internal_styles ( char *s )
 	qdelete_all(ptr, TWRITER_OFF, STYLELEN);
 	qdelete_all(ptr, VERB_ON, STYLELEN);
 	qdelete_all(ptr, VERB_OFF, STYLELEN);
+
+	/* New in V6.5.9 [NHz] */	
+	qdelete_all(ptr, INSERT_ON, STYLELEN);
+	qdelete_all(ptr, INSERT_OFF, STYLELEN);
+	qdelete_all(ptr, DELETED_ON, STYLELEN);
+	qdelete_all(ptr, DELETED_OFF, STYLELEN);
+
+	/* New in V6.5.9 [NHz] */
+	qdelete_all(ptr, COLOR_BLACK, STYLELEN);
+	qdelete_all(ptr, COLOR_SILVER, STYLELEN);
+	qdelete_all(ptr, COLOR_GRAY, STYLELEN);
+	qdelete_all(ptr, COLOR_WHITE, STYLELEN);
+	qdelete_all(ptr, COLOR_MAROON, STYLELEN);
+	qdelete_all(ptr, COLOR_RED, STYLELEN);
+	qdelete_all(ptr, COLOR_PURPLE, STYLELEN);
+	qdelete_all(ptr, COLOR_FUCHSIA, STYLELEN);
+	qdelete_all(ptr, COLOR_GREEN, STYLELEN);
+	qdelete_all(ptr, COLOR_LIME, STYLELEN);
+	qdelete_all(ptr, COLOR_OLIVE, STYLELEN);
+	qdelete_all(ptr, COLOR_YELLOW, STYLELEN);
+	qdelete_all(ptr, COLOR_NAVY, STYLELEN);
+	qdelete_all(ptr, COLOR_BLUE, STYLELEN);
+	qdelete_all(ptr, COLOR_TEAL, STYLELEN);
+	qdelete_all(ptr, COLOR_AQUA, STYLELEN);
+	qdelete_all(ptr, COLOR_OFF, STYLELEN);
 	
 }	/* del_internal_styles */
 
@@ -186,6 +211,25 @@ GLOBAL void c_rtf_styles ( char *s )
 	qreplace_all(ptr, DELETED_ON, STYLELEN, time_delete, 39);
 	qreplace_all(ptr, DELETED_OFF, STYLELEN, "}", 1);
 
+	/* New in V6.5.9 [NHz] */
+	qreplace_all(ptr, COLOR_BLACK, STYLELEN, "{\\cf1 ", 6);
+	qreplace_all(ptr, COLOR_SILVER, STYLELEN, "{\\cf2 ", 6);
+	qreplace_all(ptr, COLOR_GRAY, STYLELEN, "{\\cf3 ", 6);
+	qreplace_all(ptr, COLOR_WHITE, STYLELEN, "{\\cf4 ", 6);
+	qreplace_all(ptr, COLOR_MAROON, STYLELEN, "{\\cf5 ", 6);
+	qreplace_all(ptr, COLOR_RED, STYLELEN, "{\\cf6 ", 6);
+	qreplace_all(ptr, COLOR_PURPLE, STYLELEN, "{\\cf7 ", 6);
+	qreplace_all(ptr, COLOR_FUCHSIA, STYLELEN, "{\\cf8 ", 6);
+	qreplace_all(ptr, COLOR_GREEN, STYLELEN, "{\\cf9 ", 6);
+	qreplace_all(ptr, COLOR_LIME, STYLELEN, "{\\cf10 ", 7);
+	qreplace_all(ptr, COLOR_OLIVE, STYLELEN, "{\\cf11 ", 7);
+	qreplace_all(ptr, COLOR_YELLOW, STYLELEN, "{\\cf12 ", 7);
+	qreplace_all(ptr, COLOR_NAVY, STYLELEN, "{\\cf13 ", 7);
+	qreplace_all(ptr, COLOR_BLUE, STYLELEN, "{\\cf14 ", 7);
+	qreplace_all(ptr, COLOR_TEAL, STYLELEN, "{\\cf15 ", 7);
+	qreplace_all(ptr, COLOR_AQUA, STYLELEN, "{\\cf16 ", 7);
+	qreplace_all(ptr, COLOR_OFF, STYLELEN, "}", 1);
+
 	del_internal_styles(s);
 }	/* c_rtf_styles */
 
@@ -214,6 +258,25 @@ GLOBAL void c_win_styles ( char *s )
 	qreplace_all(ptr, TWRITER_OFF, STYLELEN, "}", 1);
 
 	footnote2ascii(s);
+
+	/* New in V6.5.8 [NHz] [Colour] */
+	qreplace_all(ptr, COLOR_BLACK, STYLELEN, "{\\cf1 ", 6);
+	qreplace_all(ptr, COLOR_SILVER, STYLELEN, "{\\cf2 ", 6);
+	qreplace_all(ptr, COLOR_GRAY, STYLELEN, "{\\cf3 ", 6);
+	qreplace_all(ptr, COLOR_WHITE, STYLELEN, "{\\cf4 ", 6);
+	qreplace_all(ptr, COLOR_MAROON, STYLELEN, "{\\cf5 ", 6);
+	qreplace_all(ptr, COLOR_RED, STYLELEN, "{\\cf6 ", 6);
+	qreplace_all(ptr, COLOR_PURPLE, STYLELEN, "{\\cf7 ", 6);
+	qreplace_all(ptr, COLOR_FUCHSIA, STYLELEN, "{\\cf8 ", 6);
+	qreplace_all(ptr, COLOR_GREEN, STYLELEN, "{\\cf9 ", 6);
+	qreplace_all(ptr, COLOR_LIME, STYLELEN, "{\\cf10 ", 7);
+	qreplace_all(ptr, COLOR_OLIVE, STYLELEN, "{\\cf11 ", 7);
+	qreplace_all(ptr, COLOR_YELLOW, STYLELEN, "{\\cf12 ", 7);
+	qreplace_all(ptr, COLOR_NAVY, STYLELEN, "{\\cf13 ", 7);
+	qreplace_all(ptr, COLOR_BLUE, STYLELEN, "{\\cf14 ", 7);
+	qreplace_all(ptr, COLOR_TEAL, STYLELEN, "{\\cf15 ", 7);
+	qreplace_all(ptr, COLOR_AQUA, STYLELEN, "{\\cf16 ", 7);
+	qreplace_all(ptr, COLOR_OFF, STYLELEN, "}", 1);
 
 	del_internal_styles(s);
 }	/* c_win_styles */
@@ -344,6 +407,26 @@ GLOBAL void c_internal_styles ( char *s )
 			qreplace_all(ptr, UNDER_ON, STYLELEN,	sDrcUcolor, 2);
 			qreplace_all(ptr, UNDER_OFF, STYLELEN,	"\003@", 2);
 			footnote2ascii(s);
+
+			/* New in V6.5.9 [NHz] */
+			qreplace_all(ptr, COLOR_BLACK, STYLELEN, "", 0);
+			qreplace_all(ptr, COLOR_SILVER, STYLELEN, "\003G", 2);
+			qreplace_all(ptr, COLOR_GRAY, STYLELEN, "\003H", 2);
+			qreplace_all(ptr, COLOR_WHITE, STYLELEN, "\003O", 2);
+			qreplace_all(ptr, COLOR_MAROON, STYLELEN, "\003D", 2);
+			qreplace_all(ptr, COLOR_RED, STYLELEN, "\003L", 2);
+			qreplace_all(ptr, COLOR_PURPLE, STYLELEN, "\003E", 2);
+			qreplace_all(ptr, COLOR_FUCHSIA, STYLELEN, "\003M", 2);
+			qreplace_all(ptr, COLOR_GREEN, STYLELEN, "\003B", 2);
+			qreplace_all(ptr, COLOR_LIME, STYLELEN, "\003J", 2);
+			qreplace_all(ptr, COLOR_OLIVE, STYLELEN, "\003J", 2);
+			qreplace_all(ptr, COLOR_YELLOW, STYLELEN, "\003N", 2);
+			qreplace_all(ptr, COLOR_NAVY, STYLELEN, "\003A", 2);
+			qreplace_all(ptr, COLOR_BLUE, STYLELEN, "\003I", 2);
+			qreplace_all(ptr, COLOR_TEAL, STYLELEN, "\003B", 2);
+			qreplace_all(ptr, COLOR_AQUA, STYLELEN, "\003C", 2);
+			qreplace_all(ptr, COLOR_OFF, STYLELEN, "\003@", 7);
+
 			del_internal_styles(s);
 			break;
 		case TOSRC:
@@ -462,6 +545,48 @@ GLOBAL void c_internal_styles ( char *s )
 			qreplace_all(ptr, DELETED_ON, STYLELEN, time_delete, lang_delete);
 			qreplace_all(ptr, DELETED_OFF, STYLELEN, "</del>", 6);
 		
+			/* New in V6.5.9 [NHz] */
+			if(html_doctype==HTML_OLD)
+			{
+				qreplace_all(ptr, COLOR_BLACK, STYLELEN, "<font color=\"#000000\">", 22);
+				qreplace_all(ptr, COLOR_SILVER, STYLELEN, "<font color=\"#C0C0C0\">", 22);
+				qreplace_all(ptr, COLOR_GRAY, STYLELEN, "<font color=\"#808080\">", 22);
+				qreplace_all(ptr, COLOR_WHITE, STYLELEN, "<font color=\"#FFFFFF\">", 22);
+				qreplace_all(ptr, COLOR_MAROON, STYLELEN, "<font color=\"#800000\">", 22);
+				qreplace_all(ptr, COLOR_RED, STYLELEN, "<font color=\"#FF0000\">", 22);
+				qreplace_all(ptr, COLOR_PURPLE, STYLELEN, "<font color=\"#800080\">", 22);
+				qreplace_all(ptr, COLOR_FUCHSIA, STYLELEN, "<font color=\"#FF00FF\">", 22);
+				qreplace_all(ptr, COLOR_GREEN, STYLELEN, "<font color=\"#008000\">", 22);
+				qreplace_all(ptr, COLOR_LIME, STYLELEN, "<font color=\"#00FF00\">", 22);
+				qreplace_all(ptr, COLOR_OLIVE, STYLELEN, "<font color=\"#808000\">", 22);
+				qreplace_all(ptr, COLOR_YELLOW, STYLELEN, "<font color=\"#FFFF00\">", 22);
+				qreplace_all(ptr, COLOR_NAVY, STYLELEN, "<font color=\"#000080\">", 22);
+				qreplace_all(ptr, COLOR_BLUE, STYLELEN, "<font color=\"#0000FF\">", 22);
+				qreplace_all(ptr, COLOR_TEAL, STYLELEN, "<font color=\"#008080\">", 22);
+				qreplace_all(ptr, COLOR_AQUA, STYLELEN, "<font color=\"#00FFFF\">", 22);
+				qreplace_all(ptr, COLOR_OFF, STYLELEN, "</font>", 7);
+			}
+			else
+			{
+				qreplace_all(ptr, COLOR_BLACK, STYLELEN, "<span style=\"color: black;\">", 28);
+				qreplace_all(ptr, COLOR_SILVER, STYLELEN, "<span style=\"color: silver;\">", 29);
+				qreplace_all(ptr, COLOR_GRAY, STYLELEN, "<span style=\"color: gray;\">", 27);
+				qreplace_all(ptr, COLOR_WHITE, STYLELEN, "<span style=\"color: white;\">", 28);
+				qreplace_all(ptr, COLOR_MAROON, STYLELEN, "<span style=\"color: maroon;\">", 29);
+				qreplace_all(ptr, COLOR_RED, STYLELEN, "<span style=\"color: red;\">", 26);
+				qreplace_all(ptr, COLOR_PURPLE, STYLELEN, "<span style=\"color: purple;\">", 29);
+				qreplace_all(ptr, COLOR_FUCHSIA, STYLELEN, "<span style=\"color: fuchsia;\">", 30);
+				qreplace_all(ptr, COLOR_GREEN, STYLELEN, "<span style=\"color: green;\">", 28);
+				qreplace_all(ptr, COLOR_LIME, STYLELEN, "<span style=\"color: lime;\">", 27);
+				qreplace_all(ptr, COLOR_OLIVE, STYLELEN, "<span style=\"color: olive;\">", 28);
+				qreplace_all(ptr, COLOR_YELLOW, STYLELEN, "<span style=\"color: yellow;\">", 29);
+				qreplace_all(ptr, COLOR_NAVY, STYLELEN, "<span style=\"color: navy;\">", 27);
+				qreplace_all(ptr, COLOR_BLUE, STYLELEN, "<span style=\"color: blue;\">", 27);
+				qreplace_all(ptr, COLOR_TEAL, STYLELEN, "<span style=\"color: teal;\">", 27);
+				qreplace_all(ptr, COLOR_AQUA, STYLELEN, "<span style=\"color: aqua;\">", 27);
+				qreplace_all(ptr, COLOR_OFF, STYLELEN, "</span>", 7);
+			}
+
 			del_internal_styles(s);
 			break;
 		case TOHPH:
@@ -517,6 +642,26 @@ GLOBAL void c_internal_styles ( char *s )
 			qreplace_all(ptr, FOOT_ON, STYLELEN,		") udoshow (", 11);
 			qreplace_all(ptr, FOOT_OFF, STYLELEN,		") footnote (", 12);
 /*			footnote2ascii(s);*/
+
+			/* New in V6.5.8 [NHz] */
+			qreplace_all(ptr, COLOR_BLACK, STYLELEN, ") udoshow 0 0 0 setrgbcolor (", 29);
+			qreplace_all(ptr, COLOR_SILVER, STYLELEN, ") udoshow 0 0 0 setrgbcolor (", 29);
+			qreplace_all(ptr, COLOR_GRAY, STYLELEN, ") udoshow 0 0 0 setrgbcolor (", 29);
+			qreplace_all(ptr, COLOR_WHITE, STYLELEN, ") udoshow 1 1 1 setrgbcolor (", 29);
+			qreplace_all(ptr, COLOR_MAROON, STYLELEN, ") udoshow 1 0 0.3 setrgbcolor (", 31);
+			qreplace_all(ptr, COLOR_RED, STYLELEN, ") udoshow 1 0 0 setrgbcolor (", 29);
+			qreplace_all(ptr, COLOR_PURPLE, STYLELEN, ") udoshow 1 0 1 setrgbcolor (", 29);
+			qreplace_all(ptr, COLOR_FUCHSIA, STYLELEN, ") udoshow 1 0 1 setrgbcolor (", 29);
+			qreplace_all(ptr, COLOR_GREEN, STYLELEN, ") udoshow 0 1 0 setrgbcolor (", 29);
+			qreplace_all(ptr, COLOR_LIME, STYLELEN, ") udoshow 0 0.7 0 setrgbcolor (", 31);
+			qreplace_all(ptr, COLOR_OLIVE, STYLELEN, ") udoshow 1 1 0.5 setrgbcolor (", 31);
+			qreplace_all(ptr, COLOR_YELLOW, STYLELEN, ") udoshow 1 1 0 setrgbcolor (", 29);
+			qreplace_all(ptr, COLOR_NAVY, STYLELEN, ") udoshow 0 0 1 setrgbcolor (", 29);
+			qreplace_all(ptr, COLOR_BLUE, STYLELEN, ") udoshow 0 0 1 setrgbcolor (", 29);
+			qreplace_all(ptr, COLOR_TEAL, STYLELEN, ") udoshow 0 0.3 1 setrgbcolor (", 31);
+			qreplace_all(ptr, COLOR_AQUA, STYLELEN, ") udoshow 0 1 1 setrgbcolor (", 29);
+			qreplace_all(ptr, COLOR_OFF, STYLELEN, ") udoshow bcr bcg bcb setrgbcolor (", 35);
+
 			del_internal_styles(s);
 			break;
 	}
@@ -550,7 +695,25 @@ GLOBAL void c_styles ( char *s )
 	qreplace_all(ptr, CMD_INSERT_OFF, 6,	INSERT_OFF, STYLELEN);
 	qreplace_all(ptr, CMD_DELETED_ON, 6, 	DELETED_ON, STYLELEN);
 	qreplace_all(ptr, CMD_DELETED_OFF, 6,	DELETED_OFF, STYLELEN);
-	
+	/* New in V6.5.9 [NHz] */	
+	qreplace_all(ptr, CMD_COLOR_BLACK, 8, 	COLOR_BLACK, STYLELEN);
+	qreplace_all(ptr, CMD_COLOR_SILVER, 9, 	COLOR_SILVER, STYLELEN);
+	qreplace_all(ptr, CMD_COLOR_GRAY, 7, 	COLOR_GRAY, STYLELEN);
+	qreplace_all(ptr, CMD_COLOR_WHITE, 8, 	COLOR_WHITE, STYLELEN);
+	qreplace_all(ptr, CMD_COLOR_MAROON, 9, 	COLOR_MAROON, STYLELEN);
+	qreplace_all(ptr, CMD_COLOR_RED, 6, 	COLOR_RED, STYLELEN);
+	qreplace_all(ptr, CMD_COLOR_PURPLE, 9, 	COLOR_PURPLE, STYLELEN);
+	qreplace_all(ptr, CMD_COLOR_FUCHSIA, 10, 	COLOR_FUCHSIA, STYLELEN);
+	qreplace_all(ptr, CMD_COLOR_GREEN, 8, 	COLOR_GREEN, STYLELEN);
+	qreplace_all(ptr, CMD_COLOR_LIME, 7, 	COLOR_LIME, STYLELEN);
+	qreplace_all(ptr, CMD_COLOR_OLIVE, 8, 	COLOR_OLIVE, STYLELEN);
+	qreplace_all(ptr, CMD_COLOR_YELLOW, 9, 	COLOR_YELLOW, STYLELEN);
+	qreplace_all(ptr, CMD_COLOR_NAVY, 7, 	COLOR_NAVY, STYLELEN);
+	qreplace_all(ptr, CMD_COLOR_BLUE, 7, 	COLOR_BLUE, STYLELEN);
+	qreplace_all(ptr, CMD_COLOR_TEAL, 7, 	COLOR_TEAL, STYLELEN);
+	qreplace_all(ptr, CMD_COLOR_AQUA, 7, 	COLOR_AQUA, STYLELEN);
+	qreplace_all(ptr, CMD_COLOR_OFF, 9, 	COLOR_OFF, STYLELEN);
+
 }	/* c_styles */
 
 
@@ -649,6 +812,30 @@ GLOBAL void check_styles ( char *s )
 				if (!styleflag.deleted)		error_not_active(CMD_DELETED_ON);
 				styleflag.deleted= FALSE;
 				break;
+			/* New in V6.5.9 [NHz] */
+			case C_COLOR_BLACK:
+			case C_COLOR_SILVER:
+			case C_COLOR_GRAY:
+			case C_COLOR_WHITE:
+			case C_COLOR_MAROON:
+			case C_COLOR_RED:
+			case C_COLOR_PURPLE:
+			case C_COLOR_FUCHSIA:
+			case C_COLOR_GREEN:
+			case C_COLOR_LIME:
+			case C_COLOR_OLIVE:
+			case C_COLOR_YELLOW:
+			case C_COLOR_NAVY:
+			case C_COLOR_BLUE:
+			case C_COLOR_TEAL:
+			case C_COLOR_AQUA:
+				if (styleflag.colour)		error_still_active("Farbe");
+				styleflag.colour= TRUE;
+				break;
+			case C_COLOR_OFF:
+				if (!styleflag.colour)		error_not_active("Farbe");
+				styleflag.colour= FALSE;
+				break;
 		}	/* switch ptr[0] */
 
 		found= strstr(ptr+1, STYLEMAGIC);
@@ -670,6 +857,8 @@ GLOBAL void check_styleflags ( void )
 	/* New in V6.5.9 [NHz] */
 	if (styleflag.insert)		error_still_active(CMD_INSERT_ON);
 	if (styleflag.deleted)		error_still_active(CMD_DELETED_ON);
+	/* New in V6.5.9 [NHz] */
+	if (styleflag.colour)		error_still_active(CMD_COLOR_OFF);
 
 }	/* check_styleflags */
 
@@ -731,6 +920,24 @@ GLOBAL void init_module_sty ( void )
 	sprintf(INSERT_OFF,	"%s%c\033", ESC_STYLE_MAGIC, C_INSERT_OFF);
 	sprintf(DELETED_ON,		"%s%c\033", ESC_STYLE_MAGIC, C_DELETED_ON);
 	sprintf(DELETED_OFF,	"%s%c\033", ESC_STYLE_MAGIC, C_DELETED_OFF);
+	/* New in V6.5.9 [NHz] */
+	sprintf(COLOR_BLACK,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_BLACK);
+	sprintf(COLOR_SILVER,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_SILVER);
+	sprintf(COLOR_GRAY,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_GRAY);
+	sprintf(COLOR_WHITE,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_WHITE);
+	sprintf(COLOR_MAROON,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_MAROON);
+	sprintf(COLOR_RED,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_RED);
+	sprintf(COLOR_PURPLE,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_PURPLE);
+	sprintf(COLOR_FUCHSIA,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_FUCHSIA);
+	sprintf(COLOR_GREEN,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_GREEN);
+	sprintf(COLOR_LIME,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_LIME);
+	sprintf(COLOR_OLIVE,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_OLIVE);
+	sprintf(COLOR_YELLOW,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_YELLOW);
+	sprintf(COLOR_NAVY,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_NAVY);
+	sprintf(COLOR_BLUE,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_BLUE);
+	sprintf(COLOR_TEAL,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_TEAL);
+	sprintf(COLOR_AQUA,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_AQUA);
+	sprintf(COLOR_OFF,	"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_OFF);
 
 	strcpy(sDrcBcolor, "\003O");
 	strcpy(sDrcIcolor, "\003O");

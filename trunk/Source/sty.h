@@ -41,6 +41,8 @@ typedef struct _styleflag
 	/* New in V6.5.9 [NHz] */
 	BOOLEAN insert;
 	BOOLEAN deleted;
+	/* New in V6.5.9 [NHz] */
+	BOOLEAN colour;
 }	STYLEFLAG;
 
 #endif /* UDO_STY_H */
@@ -72,7 +74,24 @@ typedef struct _styleflag
 #define	C_INSERT_OFF	'\020'
 #define	C_DELETED_ON	'\021'
 #define	C_DELETED_OFF	'\022'
-
+/* New in V6.5.9 [NHz] */
+#define	C_COLOR_BLACK	'\023'
+#define	C_COLOR_SILVER	'\024'
+#define	C_COLOR_GRAY	'\026'
+#define	C_COLOR_WHITE	'\028'
+#define	C_COLOR_MAROON	'\029'
+#define	C_COLOR_RED	'\031'
+#define	C_COLOR_PURPLE	'\032'
+#define	C_COLOR_FUCHSIA	'\033'
+#define	C_COLOR_GREEN	'\034'
+#define	C_COLOR_LIME	'\035'
+#define	C_COLOR_OLIVE	'\036'
+#define	C_COLOR_YELLOW	'\037'
+#define	C_COLOR_NAVY	'\040'
+#define	C_COLOR_BLUE	'\041'
+#define	C_COLOR_TEAL	'\043'
+#define	C_COLOR_AQUA	'\044'
+#define	C_COLOR_OFF	'\045'
 
 
 /*	############################################################
@@ -89,6 +108,13 @@ GLOBAL char UNDER_ON[8],	UNDER_OFF[8];
 /* New in V6.5.9 [NHz] */
 GLOBAL char INSERT_ON[8],	INSERT_OFF[8];
 GLOBAL char DELETED_ON[8],	DELETED_OFF[8];
+/* New in V6.5.9 [NHz] */
+GLOBAL char COLOR_BLACK[8],	COLOR_SILVER[8],
+COLOR_GRAY[8],	COLOR_WHITE[8],	COLOR_MAROON[8],
+COLOR_RED[8],	COLOR_PURPLE[8],	COLOR_FUCHSIA[8],
+COLOR_GREEN[8],	COLOR_LIME[8],	COLOR_OLIVE[8],
+COLOR_YELLOW[8],	COLOR_NAVY[8],	COLOR_BLUE[8],
+COLOR_TEAL[8],	COLOR_AQUA[8],	COLOR_OFF[8];
 
 
 /*	############################################################
