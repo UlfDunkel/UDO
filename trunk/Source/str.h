@@ -25,7 +25,7 @@
 	############################################################	*/
 
 /* New in r6pl15 [NHz] */
-typedef struct size_brackets
+struct size_brackets
 {
 	size_t format;
 	size_t content;
