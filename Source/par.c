@@ -1305,6 +1305,8 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 					/* Changed in V6.4.1 [NHz] */
 					c_divis(Param[1]);
 					c_vars(Param[1]);
+					/* Changed in V6.4.1 [NHz] */
+					auto_quote_chars(Param[1], TRUE);
 					replace_all(Param[1], KPSPO_S, "(");
 					replace_all(Param[1], KPSPC_S, ")");
 					sprintf(s_entry, ") udoshow (%s) (%s) 0 0 255 WebLink (", Param[1], Param[2]);
@@ -1506,6 +1508,10 @@ LOCAL void c_xlink ( char *s, BOOLEAN inside_b4_macro )
 						}
 						replace_udo_quotes(Param[2]);	/* r6pl2 */
 						replace_udo_quotes(Param[1]);	/* r6pl2 */
+						/* Changed in V6.4.1 [NHz] */
+						c_divis(Param[1]);
+						c_vars(Param[1]);
+						auto_quote_chars(Param[1], TRUE);
 						sprintf(s_entry, ") udoshow (%s) (%s) %s 255 0 0 FileLink (", Param[1], Param[2], "/Null");
    					linkerror= !insert_placeholder(s, Param[0], s_entry, Param[1]);
 						break;
