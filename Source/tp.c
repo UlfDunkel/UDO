@@ -1301,6 +1301,9 @@ GLOBAL void c_maketitle ( void )
 
 		case TOHTM:
 		case TOMHH:
+			/* New in V6.5.9 [NHz] */
+			outln("<div id=\"udo_titlepage\">");
+			
 			if ( has_title )
 			{	voutlnf("<h2 align=\"center\">%s</h2>", titdat.title);
 			}
@@ -1364,6 +1367,9 @@ GLOBAL void c_maketitle ( void )
 			{	outln(HTML_HR);
 			}
 
+			/* New in V6.5.9 [NHz] */
+			outln("</div>");
+			
 			break;
 
 		case TOTVH:
