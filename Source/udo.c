@@ -9665,7 +9665,7 @@ LOCAL void show_udo_intro ( void )
 	show_status_info("");
 	sprintf(sInfMsg, "This is UDO Release %s.%s Patchlevel %s for %s", UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
 	show_status_loginfo(sInfMsg);
-	show_status_loginfo("Copyright (c) 1995-2001 by Dirk Hagedorn.");
+	show_status_loginfo(COPYRIGHT);
 	sprintf(sInfMsg, "UDO is Open Source (see %s for further information).", UDO_URL);
 	show_status_loginfo(sInfMsg);
 	show_status_loginfo("");
