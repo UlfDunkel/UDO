@@ -719,7 +719,8 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 			strcpy(n, l->name);
 			replace_udo_tilde(n);
 			replace_udo_nbsp(n);
-			/* Changed in r6.2pl1 [NHz] */ 			sprintf(ref, "{\\pdfstartlink goto num %d\n%s\\pdfendlink}",
+			/* Changed in r6.2pl1 [NHz] */
+			sprintf(ref, "{\\pdfstartlink goto num %d\n%s\\pdfendlink}",
 				l->labindex, n);
 			break;
 
@@ -6265,7 +6266,9 @@ LOCAL void toc_link_output ( const int depth )
 						if ( toc[i]->toctype==TOC_NODE2 )
 						{	/* Ein Unterkapitel */	
 
-							if(toc[toc[i]->up_n1_index]->nr1+toc_offset == toc[last_n1_index]->nr1+toc_offset)
+							/* Changed in r6.2pl1 [NHz]; I'm not sure, if this makes sense, but it doesn't disturb */
+							if((toc[toc[i]->up_n1_index]->nr1+toc_offset == toc[last_n1_index]->nr1+toc_offset) &&
+									(toc[i]->up_n1_index == last_n1_index))
 							{
 								sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
 								htmlfilename= hfn;
@@ -6288,7 +6291,9 @@ LOCAL void toc_link_output ( const int depth )
 						if ( toc[i]->toctype==TOC_NODE3 )
 						{	/* Ein Unterunterkapitel */	
 
-							if(toc[toc[i]->up_n2_index]->nr2+subtoc_offset == toc[last_n2_index]->nr2+subtoc_offset)
+							/* Changed in r6.2pl1 [NHz] */
+							if((toc[toc[i]->up_n2_index]->nr2+subtoc_offset == toc[last_n2_index]->nr2+subtoc_offset) &&
+									(toc[i]->up_n2_index == last_n2_index))
 							{
 								sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
 								htmlfilename= hfn;
