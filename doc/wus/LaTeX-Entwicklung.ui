@@ -1,5 +1,5 @@
 !subsubnode Allgemeiner Hinweis
-Fr diesen Bereich ist die Hilfe der (!TeX)-niker besonders gefragt.
+Für diesen Bereich ist die Hilfe der (!TeX)-niker besonders gefragt.
 
 !smallskip
 !hline
@@ -16,7 +16,7 @@ Fr diesen Bereich ist die Hilfe der (!TeX)-niker besonders gefragt.
 !end_verbatim
 
 Welcher (!TeX)-Kundige zeigt bitte auf, welche Formate in (!LaTeX)
-m”glich sind?
+möglich sind?
 
 !smallskip
 !hline
@@ -31,6 +31,6 @@ Welcher (!TeX)-Kundige kann hier mal ein Beispiel geben?
 !hline
 !subsubnode Ungeordnet (LaTeX)
 !begin_itemize
-!item Verhinderung von Texteinrckungen bei LaTeX ~~(Stefan Kuhr) (!nl)
+!item Verhinderung von Texteinrückungen bei LaTeX ~~(Stefan Kuhr) (!nl)
       \noindent
 !end_itemize

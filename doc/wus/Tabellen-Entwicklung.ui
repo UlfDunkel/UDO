@@ -2,17 +2,17 @@ Damit die Tabellen in den Zielformaten besser aussehen bzw. handhabbar sind,
 ist eine Erweiterung der vorhandenen oder eine neue Tabellenstruktur
 notwendig.
 
-Einen neue Tabellenstruktur hat den Vorteil, da alte Texte ohne nderung
-mit neuen UDO-Versionen bersetzt werden k”nnen. Auerdem braucht man
-keinen Handstand bei den Zielformaten zu machen, die sowas nicht untersttzen.
-Nachteil ist, da man u.U. zwei verschiedene Tabellen pflegen mu fr eine
-Sache, die eigentlich auch UDO erledigen k”nnte.
+Einen neue Tabellenstruktur hat den Vorteil, daß alte Texte ohne Änderung
+mit neuen UDO-Versionen übersetzt werden können. Außerdem braucht man
+keinen Handstand bei den Zielformaten zu machen, die sowas nicht unterstützen.
+Nachteil ist, daß man u.U. zwei verschiedene Tabellen pflegen muß für eine
+Sache, die eigentlich auch UDO erledigen könnte.
 
-Folgende Features sollten untersttzt werden, soweit das Zielformat es
-zul„sst (Kursiv gesetzte Sachen sind IMHO nicht so wichtig):
+Folgende Features sollten unterstützt werden, soweit das Zielformat es
+zulässt (Kursiv gesetzte Sachen sind IMHO nicht so wichtig):
 !begin_itemize
 !item Breite von Zellen
-!item (!I)H”he von Zellen(!i)
+!item (!I)Höhe von Zellen(!i)
 !item Spalten (Zellen) verbinden
 !item Zeilen (Zellen) verbinden
 !item Zeilenumbruch in Zellen
@@ -23,14 +23,14 @@ zul„sst (Kursiv gesetzte Sachen sind IMHO nicht so wichtig):
 !end_itemize
 
 (!U)Ich habe hier mal eine Struktur entworfen, gebt mal Euren Kommentar dazu ab.(!u)
-Die Rahmen (aussen und innen) sollten ausschlielich durch die HTML-Elemente
-definiert werden. Fr besondere ""Rahmenbedingungen"" k”nnten Angaben
-innerhalb von Style-Bereichen durchgefhrt werden. Diese Stylebereiche
-k”nnen dann auch in anderen Zielformaten umgesetzt werden. Das bliche Setzen
+Die Rahmen (aussen und innen) sollten ausschließlich durch die HTML-Elemente
+definiert werden. Für besondere ""Rahmenbedingungen"" könnten Angaben
+innerhalb von Style-Bereichen durchgeführt werden. Diese Stylebereiche
+können dann auch in anderen Zielformaten umgesetzt werden. Das übliche Setzen
 durch (!V)!/hline(!v) bzw. die senkrechten Striche ((!V)|(!v)) kann erhalten
 bleiben.
 
-Erstmal die ursprngliche Tabellenstruktur:
+Erstmal die ursprüngliche Tabellenstruktur:
 !begin_verbatim
 !table_caption foo
 !begin_table [l|l|l|l] !hline
@@ -43,77 +43,77 @@ C1 !! C2 !! C3 !! C4
 Und jetzt eine Erweiterung der alten Tabellenstruktur:
 !begin_verbatim
 !table_caption foo
-!table_summary Dies ist eine Zusammenfassung fr nicht-visuelle Medien
+!table_summary Dies ist eine Zusammenfassung für nicht-visuelle Medien
 !begin_table [l50|l|l25%|l] [BGC=text,BGI=text,B=x,F=text,CS=x,CP=x,R=text,H=x,W=x]
  [BGC=text,BGI=text,HA=x,VA=x,ABBR=text] !? A1 !! A2 !! A4
- (!label [B1] [Verweis]) !! B2 !! Die ist ein etwas l„ngerer Text, den !\
- ich hier in dieser Zeile fortfhren m”chte !! B4
+ (!label [B1] [Verweis]) !! B2 !! Die ist ein etwas längerer Text, den !\
+ ich hier in dieser Zeile fortführen möchte !! B4
 (!rows [BGC=text,BGI=text,HA=text,VA=text]) C1 !! [COLS=x] C2 !! C4
 !end_table
 !end_verbatim
 
 !begin_blist [hallo]
-!item [!?] Hier f„ngt der eigentliche Zelleninhalt an.
+!item [!?] Hier fängt der eigentliche Zelleninhalt an.
 !item [!\] Hier ist die Tabellenzeile noch (!U)nicht(!u) zu Ende (!nl)
-      (!I)Dieses Zeichen sollte man auch fr mehrzeilige šberschriften
+      (!I)Dieses Zeichen sollte man auch für mehrzeilige Überschriften
       etc. benutzen(!i)
-!item [B] Breite des Auenrahmens
-!item [F] Bezeichnung fr Frames (Auenrahmen)
-!item [CS] Wert fr Cellspacing
-!item [CP] Wert fr Cellpadding
-!item [R] Bezeichnung fr Rules (Innenrahmen)
+!item [B] Breite des Außenrahmens
+!item [F] Bezeichnung für Frames (Außenrahmen)
+!item [CS] Wert für Cellspacing
+!item [CP] Wert für Cellpadding
+!item [R] Bezeichnung für Rules (Innenrahmen)
 !item [W] Breite
-!item [H] H”he
+!item [H] Höhe
 !item [HA] Horizontale Ausrichtung
 !item [VA] Vertikale Ausrichtung
 !item [BGC] Hintergrundfarbe
 !item [BGI] Hintergrundbild (Kein HTML-Standard!)
 !item [COLS] Spalten verbinden
 !item [ROWS] Zeilen verbinden
-!item [ABBR] (!nolink [Hinweis]) fr nicht-visuelle Medien
+!item [ABBR] (!nolink [Hinweis]) für nicht-visuelle Medien
 !item [HEAD] Kopfzeile einer Tabelle, die auf jeder Seite wiederholt wird
 !item [S] Stylebereich innerhalb einer Zelle
 !end_blist
 
-Die Breite und H”he von einzelnen Zellen sollte nicht unbedingt w„hlbar sein,
-schlielich sollten alle Spalten gleich breit bzw. alle Zeilen gleich hoch
+Die Breite und Höhe von einzelnen Zellen sollte nicht unbedingt wählbar sein,
+schließlich sollten alle Spalten gleich breit bzw. alle Zeilen gleich hoch
 sein.
 
-Auf Angaben fr ganze Zeilen sollte verzichtet werden, denn die einzige
-M”glichkeit ist die Angabe der Hinter!-grund!-farbe, die auch fr jede Zelle
+Auf Angaben für ganze Zeilen sollte verzichtet werden, denn die einzige
+Möglichkeit ist die Angabe der Hinter!-grund!-farbe, die auch für jede Zelle
 einzeln angegeben werden kann.
 
 !label Summary
-Als zus„tzliches Attribut fr Tabellen (HTML) sollte das Summary- und das
-Abreviation-Attribut eingefhrt werden fr nicht-visuelle Medien.
+Als zusätzliches Attribut für Tabellen (HTML) sollte das Summary- und das
+Abreviation-Attribut eingeführt werden für nicht-visuelle Medien.
 
 !subsubsubheading Hier folgt jetzt ein Beispiel...
 
 !begin_verbatim
 !table_caption Autoren von UDO
-!table_summary Dies ist eine šbersicht ber die Autoren von UDO und die !\
+!table_summary Dies ist eine Übersicht über die Autoren von UDO und die !\
  jeweiligen Fachgebiete, die sie betreuen
 !begin_table [l100|l|l25%|l] [B=3,F=void,CS=3,CP=3,R=rows,W=100%]
 [HEAD] !? Programmierer !! Formate !! Systeme !! Sonstiges
 [BGC=floralwhite] !? Ulf Dunkel !! ASC, HTML, PS, RTF, STG, WinHelp, XML !\
  !! TOS, Windows, Mac, MagiCMac !!
-(!label [Martin Els„sser] [Martin]) !! HTML, LaTeX, STG !! TOS !!
-[ABBR=Alles ber mich?] !? Norbert Hanz !! HTML, PS, RTF, STG, WinHelp, XML !\
+(!label [Martin Elsässer] [Martin]) !! HTML, LaTeX, STG !! TOS !!
+[ABBR=Alles über mich?] !? Norbert Hanz !! HTML, PS, RTF, STG, WinHelp, XML !\
  !! TOS !! [VA=bottom,ROWS=2] !? WEB-Seite, Dokumentation
 Volker Janzen !! HTML !! [BGC=navajowhite] !? Windows, Linux, MagicPC
 Ulrich Kretschmer !! [HA=center,COLS=3] !? Dokumentation
-Christian Krger !! [HA=right] !? Postscript !! !!
+Christian Krüger !! [HA=right] !? Postscript !! !!
 (!rows [BGC=lime]) Uwe Mindrup !! HTML, XML, PHP !! !! Linux-Shell
 Tobias Jung !! !! !! [BGI=./images/back.gif] !? WEB-Seite
 !end_table
 !end_verbatim
 
 !medskip
-!subsubsubheading ...und das Ergebniss fr HTML ohne CSS
+!subsubsubheading ...und das Ergebniss für HTML ohne CSS
 
 !begin_verbatim
 <table border="3" cellpadding="3" cellspacing="3" width="100%"
- frame="void" rules="rows" summary="Dies ist eine šbersicht ber die
+ frame="void" rules="rows" summary="Dies ist eine Übersicht über die
  Autoren von UDO und die jeweiligen Fachgebiete, die sie betreuen">
  <caption>Autoren von UDO</caption>
  <colgroup>
@@ -176,10 +176,10 @@ Tobias Jung !! !! !! [BGI=./images/back.gif] !? WEB-Seite
 </table>
 !end_verbatim
 !smallskip
-Fr das Ergebniss im ""Klartext"" bitte (!xlink [hier] [Tabelle.htm]) klicken.
+#Für das Ergebniss im ""Klartext"" bitte (!xlink [hier] [Tabelle.htm]) klicken.
 
 !medskip
-!subsubsubheading ...und das Ergebniss fr RTF
+!subsubsubheading ...und das Ergebniss für RTF
 
 !begin_verbatim
 {\keep
@@ -214,7 +214,7 @@ Fr das Ergebniss im ""Klartext"" bitte (!xlink [hier] [Tabelle.htm]) klicken.
 \clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx6300
 \clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx11400
 \intbl
-\ql Martin Els„sser\cell
+\ql Martin Elsässer\cell
 \ql HTML, LaTeX, STG\cell
 \ql TOS\cell
 \ql \cell
@@ -230,7 +230,7 @@ Fr das Ergebniss im ""Klartext"" bitte (!xlink [hier] [Tabelle.htm]) klicken.
 {\*\atnid NHz}{\*\atnauthor UDO Release 7 Patchlevel 0}\chatn
 {\*\annotation{\*\atnref 1}\pard\plain \s16\fs20 
 {\field{\*\fldinst {PAGE \\# "'Seite: '#'\line '"}}{\fldrslt }}
-{\chatn }{Alles ber mich?}}}\cell
+{\chatn }{Alles über mich?}}}\cell
 \ql HTML, PS, RTF, STG, WinHelp, XML\cell
 \ql TOS\cell
 \ql WEB-Seite, Dokumentation\cell
@@ -266,7 +266,7 @@ Fr das Ergebniss im ""Klartext"" bitte (!xlink [hier] [Tabelle.htm]) klicken.
 \clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx6300
 \clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx11400
 \intbl
-\ql Christian Krger\cell
+\ql Christian Krüger\cell
 \qr Postscript\cell
 \ql \cell
 \ql \cell
@@ -299,13 +299,13 @@ Fr das Ergebniss im ""Klartext"" bitte (!xlink [hier] [Tabelle.htm]) klicken.
 }
 !end_verbatim
 
-!smallskip
-Fr das Ergebniss im ""Klartext"" bitte (!xlink [hier] [Tabelle.rtf]) klicken.
+#!smallskip
+#Für das Ergebniss im ""Klartext"" bitte (!xlink [hier] [Tabelle.rtf]) klicken.
 !medskip
 
-Es empfiehlt sich, keine Rahmenformatierungen fr ganze Zeilen durchzufhren,
+Es empfiehlt sich, keine Rahmenformatierungen für ganze Zeilen durchzuführen,
 sondern immer einzelne Zellen zu formatieren. Das ist zwar etwas mehr
-Quelltext, aber es mu nicht zwischen Zell- und Zeilenformatierung
+Quelltext, aber es muß nicht zwischen Zell- und Zeilenformatierung
 unterschieden werden.
 !begin_itemize
 !item Zellen
@@ -313,7 +313,7 @@ unterschieden werden.
 !item [\cellx] Rechte Grenze der Zelle
 !item [\clmgf] Die erste Zelle in der Zeile soll verbunden werden
 !item [\clmrg] Die Zelle soll mit der vorhergehenden verbunden werden
-!item [\trrhN] (!I)H”he einer Zeile(!i)
+!item [\trrhN] (!I)Höhe einer Zeile(!i)
 !end_blist
 !medskip
 !item Rahmen
@@ -352,7 +352,7 @@ unterschieden werden.
 !medskip
 !item Sonstige Eigenschaften
 !begin_blist [\xxxxxx] !short
-!item [\brspN] Wert fr CP, Abstand Text zu Rahmen
+!item [\brspN] Wert für CP, Abstand Text zu Rahmen
 !item [\brdrcfN] (!I)Farbe des Rahmens(!i)
 !item [\trhdr] Kopfzeile der Tabelle, die auf jeder Seite wiederholt wird
 !item [\trgaphN] Abstand der Zellen untereinander, cellspacing?
@@ -364,14 +364,14 @@ unterschieden werden.
 !hline
 !subsubheading Ungeordnet (Tabellen)
 !begin_itemize
-!item vernnftige Tabellen ;-) ~~(Norbert Hanz)
+!item vernünftige Tabellen ;-) ~~(Norbert Hanz)
 !begin_itemize !short
 !item Zellen verbinden (zeilenweise, spaltenweise)
-!item H”hen und Breiten von Zellen vorgeben
-!item Farbe fr Tabelle und/oder Zellen
-!item Zus„tzliche Attribute fr Zellen (Farbe)
-!item Tabellenzeilen ber mehrere Quelltextzeilen verteilen ~~(Thomas Kerkloh) (!nl)
-      !\ fr mehrzeilige Tabellenzeilen
+!item Höhen und Breiten von Zellen vorgeben
+!item Farbe für Tabelle und/oder Zellen
+!item Zusätzliche Attribute für Zellen (Farbe)
+!item Tabellenzeilen über mehrere Quelltextzeilen verteilen ~~(Thomas Kerkloh) (!nl)
+      !\ für mehrzeilige Tabellenzeilen
 !item !/label in Tabellen
 !end_itemize
 !end_itemize

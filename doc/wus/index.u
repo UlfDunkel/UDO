@@ -1,15 +1,16 @@
 ########################################
 # @(#) UDO - Wunschliste               #
 #                                      #
-# bersetzt mit UDO Version 6.4.1      #
+# übersetzt mit UDO Version 6.4.1      #
 ########################################
 #
-!docinfo [title] Wunschliste und Sammlung fr
+!code [iso]
+!docinfo [title] Wunschliste und Sammlung für
 !docinfo [program] UDO
 !docinfo [version] Version 10
 !docinfo [date] (!today)
 !docinfo [author] Norbert Hanz
-!docinfo [address] fr UDO-OPEN-SOURCE
+!docinfo [address] für UDO-OPEN-SOURCE
 !docinfo [address] Norbert Hanz @ DO
 !docinfo [address] norbert@familie-hanz.de
 !docinfo [webmasteremail] norbert@familie-hanz.de
@@ -26,7 +27,6 @@
 #!raw [tex] \documentstyle[11pt,din_a4,makeidx]{article}
 #!raw [tex] \makeindex
 #!raw [tex] %format latex
-!code [tos]
 !docinfo [stgdatabase] UDO-Weiterentwicklung
 !raw [stg] @subject "UDO/Wunsch"
 !ifdest [html]
@@ -35,8 +35,8 @@
 !macro BILDPATH .
 !endif
 #
-!include d:/udo-tool/macros.ui
-!include d:/udo-tool/colour.ui
+!include ./macros.ui
+!include ./colour.ui
 #
 #!language french
 !use_auto_helpids [win,wh4]
@@ -76,14 +76,14 @@
 #!html_merge_subsubnodes
 #!html_merge_subnodes
 #!html_merge_nodes
-!html_backpage http://www.udo-open-source.org 'Zurck zu UDO-Open-Source'
+!html_backpage http://www.udo-open-source.org 'Zurück zu UDO-Open-Source'
 !html_use_hyphenation
 !html_use_folders
 !use_raw_header udo.css
 !use_short_tocs [all]
 !html_style_name wus.css
 !html_doctype XHTML Transitional
-!docinfo [keywords] UDO, UDO-Shell, šbersetzung, Converter
+!docinfo [keywords] UDO, UDO-Shell, Übersetzung, Converter
 !docinfo [description] Beschreibung der Bedienung der UDO-Shell
 #!doclayout [ps,rtf] [node1size] 12
 #!doclayout [ps,rtf] [node2size] 18
@@ -100,23 +100,23 @@
 !listoffigures
 !listoftables
 
-!node Einfhrung
+!node Einführung
 Dieser Bereich soll die (!index [Weiterentwicklung]) von UDO dokumentieren. Zur Zeit
 ist es noch ein rechtes Durcheinander, das sich hoffentlich mit der Zeit
-etwas legt. Ich habe natr!-lich mit den Sachen, die mich am meisten
+etwas legt. Ich habe natür!-lich mit den Sachen, die mich am meisten
 interessieren, angefangen.
 
-Im Bereich ""Entwicklung und Bugs"" sollen die Erweiterungen sowohl fr die
+Im Bereich ""Entwicklung und Bugs"" sollen die Erweiterungen sowohl für die
 einzelnen Zielformate als auch Allgemeines dokumentiert werden.
-Hier m”chte ich auch gerne die ''Ergebnisse''
-der Wnsche im Zielformat niederlegen.
-Zum einen m”chte ich nicht alles selber ausprobieren mssen, zum anderen
-kenne ich einige Zielformate gar nicht so gut. Die Eintr„ge~sind nach
-Wichtigkeit und Durch!-fhr!-barkeit gekenn!-zeichnet.
+Hier möchte ich auch gerne die ''Ergebnisse''
+der Wünsche im Zielformat niederlegen.
+Zum einen möchte ich nicht alles selber ausprobieren müssen, zum anderen
+kenne ich einige Zielformate gar nicht so gut. Die Einträge~sind nach
+Wichtigkeit und Durch!-führ!-barkeit gekenn!-zeichnet.
 
 Dieser Bereich soll die (!index [Weiterentwicklung]) von UDO dokumentieren. Zur Zeit
 ist es noch ein rechtes Durcheinander, das sich hoffentlich mit der Zeit
-etwas legt. Ich habe natrlich mit den Sachen, die mich am meisten
+etwas legt. Ich habe natürlich mit den Sachen, die mich am meisten
 interessieren, angefangen.
 
 !begin_flushleft
@@ -128,7 +128,7 @@ interessieren, angefangen.
 !hline
 !end_table
 !smallskip
-!table_caption Durchfhrbarkeit
+!table_caption Durchführbarkeit
 !begin_table [cc] !hline
 ~(!img [(!BILDPATH)/gelb3] [Leicht])~ !! ~Leicht~
 ~(!img [(!BILDPATH)/gelb2] [Schwierig])~ !! ~Schwierig~
@@ -137,9 +137,9 @@ interessieren, angefangen.
 !end_table
 !end_flushleft
 
-Im Bereich Organisation sind die beteiligten Entwickler aufgefhrt.
+Im Bereich Organisation sind die beteiligten Entwickler aufgeführt.
 
-Die Wunschliste habe ich aufgel”st. Alle Wnsche sind in den einzelnen
+Die Wunschliste habe ich aufgelöst. Alle Wünsche sind in den einzelnen
 Kapiteln enthalten.
 Unter Adressen findet man die Namen der Beteiligten.
 
@@ -149,9 +149,9 @@ Unter Adressen findet man die Namen der Beteiligten.
 !html_name Entwickl
 !subtoc [hh,html,stg]
 
-!subnode Entwicklung formatunabh„ngig
+!subnode Entwicklung formatunabhängig
 !html_name E-Allgem
-#Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Allgemeines">Norbert Hanz</a>])
+#Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Allgemeines">Norbert Hanz</a>])
 !smallskip
 !subsubtoc [hh,html,stg]
 !hline
@@ -162,12 +162,12 @@ Unter Adressen findet man die Namen der Beteiligten.
 !html_name E-Amiga
 Derzeit noch nicht belegt.
 
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Amiga Guide">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Amiga Guide">Norbert Hanz</a>])
 
 !newpage
 !subnode Apple Quickview
 !html_name E-Quick
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Apple QuickView">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Apple QuickView">Norbert Hanz</a>])
 !hline
 Derzeit nicht belegt.
 #!include AppleQuickview-Entwicklung.ui
@@ -176,7 +176,7 @@ Derzeit nicht belegt.
 !newpage
 !subnode ASCII
 !html_name E-ASCII
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=ASCII">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=ASCII">Norbert Hanz</a>])
 !hline
 !include ASCII-Entwicklung.ui
 
@@ -186,7 +186,7 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=A
 !html_name E-C
 Derzeit noch nicht belegt.
 
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=C-Source">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=C-Source">Norbert Hanz</a>])
 
 
 !newpage
@@ -194,13 +194,13 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=C
 !html_name E-DRC
 Derzeit noch nicht belegt.
 
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=David's Readme Compiler">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=David's Readme Compiler">Norbert Hanz</a>])
 
 
 !newpage
 !subnode GNU-Texinfo
 !html_name E-GNU
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=GNU-Texinfo">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=GNU-Texinfo">Norbert Hanz</a>])
 !hline
 Derzeit nicht belegt.
 #!include Texinfo-Entwicklung.ui
@@ -209,7 +209,7 @@ Derzeit nicht belegt.
 !newpage
 !subnode Hypertext Markup Language
 !html_name E-HTML
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=HTML">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=HTML">Norbert Hanz</a>])
 !smallskip
 !subsubtoc [hh,html,stg]
 !hline
@@ -221,7 +221,7 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=H
 !html_name E-HHelp
 Derzeit noch nicht belegt.
 
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=HTML-Help">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=HTML-Help">Norbert Hanz</a>])
 
 
 !newpage
@@ -229,13 +229,13 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=H
 !html_name E-IPF
 Derzeit noch nicht belegt.
 
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=OS/2 IPF">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=OS/2 IPF">Norbert Hanz</a>])
 
 
 !newpage
 !subnode (!LaTeX)
 !html_name E-LaTeX
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=LaTeX">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=LaTeX">Norbert Hanz</a>])
 !hline
 !include LaTeX-Entwicklung.ui
 
@@ -245,7 +245,7 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=L
 !html_name E-SGML
 Derzeit noch nicht belegt.
 
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Linuxdoc SGML">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Linuxdoc SGML">Norbert Hanz</a>])
 
 
 !newpage
@@ -253,7 +253,7 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=L
 !html_name E-LyX
 Derzeit noch nicht belegt.
 
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=LyX">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=LyX">Norbert Hanz</a>])
 
 
 !newpage
@@ -261,7 +261,7 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=L
 !html_name E-Manual
 Derzeit noch nicht belegt.
 
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Manualpage">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Manualpage">Norbert Hanz</a>])
 
 
 !newpage
@@ -269,7 +269,7 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=M
 !html_name E-NROFF
 Derzeit noch nicht belegt.
 
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=NROFF">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=NROFF">Norbert Hanz</a>])
 
 
 !newpage
@@ -277,13 +277,13 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=N
 !html_name E-Pascal
 Derzeit noch nicht belegt.
 
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Pascal-Source">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Pascal-Source">Norbert Hanz</a>])
 
 
 !newpage
 !subnode PDF-LaTeX
 !html_name E-PDFTeX
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=PDF-LaTeX">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=PDF-LaTeX">Norbert Hanz</a>])
 !hline
 !include PDFLATEX-Entwicklung.ui
 
@@ -291,7 +291,7 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=P
 !newpage
 !subnode Postscript
 !html_name E-PS
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Postscript">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Postscript">Norbert Hanz</a>])
 !hline
 !include Postscript-Entwicklung.ui
 
@@ -299,7 +299,7 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=P
 !newpage
 !subnode PureC Help
 !html_name E-PureC
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=PureC-Help">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=PureC-Help">Norbert Hanz</a>])
 !hline
 !include PureC-Entwicklung.ui
 
@@ -307,7 +307,7 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=P
 !newpage
 !subnode Rich Text Format
 !html_name E-RTF
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=RTF">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=RTF">Norbert Hanz</a>])
 !smallskip
 !subsubtoc [hh,html,stg]
 !hline
@@ -317,7 +317,7 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=R
 !newpage
 !subnode ST-Guide
 !html_name E-STGuid
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=ST-Guide">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=ST-Guide">Norbert Hanz</a>])
 !hline
 !include STGuide-Entwicklung.ui
 
@@ -327,7 +327,7 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=S
 !html_name E-TVHelp
 Derzeit noch nicht belegt.
 
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=TurboVision-Help">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=TurboVision-Help">Norbert Hanz</a>])
 
 
 !newpage
@@ -335,13 +335,13 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=T
 !html_name E-UDO
 Derzeit noch nicht belegt.
 
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=UDO-Code">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=UDO-Code">Norbert Hanz</a>])
 
 
 !newpage
 !subnode WinHelp
 !html_name E-WHelp
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=WinHelp3">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=WinHelp3">Norbert Hanz</a>])
 !hline
 !include WinHelp-Entwicklung.ui
 
@@ -349,7 +349,7 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=W
 !newpage
 !subnode WinHelp 4
 !html_name E-WHelp4
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=WinHelp4">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=WinHelp4">Norbert Hanz</a>])
 !hline
 !include WinHelp4-Entwicklung.ui
 
@@ -357,7 +357,7 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=W
 !newpage
 !subnode Extensible Markup Language
 !html_name E-XML
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=XML">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=XML">Norbert Hanz</a>])
 !hline
 !include XML-Entwicklung.ui
 
@@ -365,7 +365,7 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=X
 !newpage
 !subnode Neue Listenstruktur
 !html_name E-List
-Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Listen">Norbert Hanz</a>])
+Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Listen">Norbert Hanz</a>])
 !hline
 !include Listen-Entwicklung.ui
 
@@ -384,8 +384,8 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=L
 !item (!B)Ulf Dunkel(!b) (!nl)
 #      (!url [dunkel@calamus.net] [mailto:dunkel@calamus.net?subject=UDO-OpenSource])
 !smallskip
-!label Martin Els„sser
-!item (!B)Martin Els„sser(!b) (!nl)
+!label Martin Elsässer
+!item (!B)Martin Elsässer(!b) (!nl)
 #      (!url [Martin.Elsaesser@t-online.de] [mailto:Martin.Elsaesser@t-online.de?subject=UDO-OpenSource]) (!nl)
 #      (!url [Martin_elsaesser@ll.maus.de] [mailto:Martin_elsaesser@ll.maus.de?subject=UDO-OpenSource])
 !smallskip
@@ -397,8 +397,8 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=L
 !item (!B)Dirk Hagedorn(!b) (!nl)
 #      (!url [info@dirk-hagedorn.de] [mailto:info@dirk-hagedorn.de?subject=UDO-OpenSource])
 !smallskip
-!label Gnter Hanke
-!item (!B)Gnter Hanke(!b) (!nl)
+!label Günter Hanke
+!item (!B)Günter Hanke(!b) (!nl)
 #      (!url [hanke@guentel.de] [mailto:hanke@guentel.de?subject=UDO-OpenSource])
 !smallskip
 !label Norbert Hanz
@@ -427,8 +427,8 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=L
 !item (!B)Ulrich Kretschmer(!b) (!nl)
 #      (!url [Kretschm.Ulr@planet-interkom.de] [mailto:Kretschm.Ulr@planet-interkom.de?subject=UDO-OpenSource])
 !smallskip
-!label Christian Krger
-!item (!B)Christian ""Chrisker"" Krger(!b) (!nl)
+!label Christian Krüger
+!item (!B)Christian ""Chrisker"" Krüger(!b) (!nl)
 #      (!url [chris@pace.de] [mailto:chris@pace.de?subject=UDO-OpenSource])
 !smallskip
 !label Stefan Kuhr
@@ -463,6 +463,6 @@ Wnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=L
 !newpage
 !node Hinweis
 !html_name Hinweis
-Erstellt wurde dieser Hypertext natrlich mit UDO6.
+Erstellt wurde dieser Hypertext natürlich mit UDO6.
 
 !end_document
