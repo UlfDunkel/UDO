@@ -3,10 +3,8 @@
 # @(#) Dirk Hagedorn (udo@dirk-hagedorn.de), 1998/05/25
 # ###################################################################
 
-CSRC =	abo.c cfg.c chr.c env.c file.c img.c msg.c par.c str.c sty.c \
-		tab.c toc.c tp.c udo.c
-
-OSRC =	$(CSRC:.c=$(O))
+OSRC =	abo$(O) cfg$(O) chr$(O) env$(O) file$(O) img$(O) msg$(O) par$(O) str$(O) sty$(O) \
+		tab$(O) toc$(O) tp$(O) udo$(O)
 
 HEAD = portab.h version.h constant.h udo_type.h
 
