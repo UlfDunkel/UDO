@@ -458,8 +458,10 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!html_favicon_name",		"",			c_tunix,	TRUE,	CMD_ALWAYS	}, /* New in r6pl15 [NHz] */
 	{ "!html_button_alignment",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_switch_language",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
+	{ "!html_use_hyphenation",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	}, /* Fixed Bug #0000048 [NHz] */
 	{ "!html_transparent_buttons",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_use_folders",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
+	{ "!html_header_date",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	}, /* New feature #0000054 in V6.5.2 [NHz] */
 	{ "!rtf_propfont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!rtf_monofont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!rtf_propfont_size",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
@@ -2913,7 +2915,6 @@ LOCAL void c_subsubsubheading ( void )
 			if (inside_right)	strcpy(align, "\\qr");
 			/* Changed in r6pl16 [NHz] */
 			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, laydat.node4size, name);
-/*			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);*/
 			break;
 		case TOWIN:
 		case TOWH4:
@@ -2928,10 +2929,8 @@ LOCAL void c_subsubsubheading ( void )
 			break;
 		case TOKPS:
 			outln("newline");
-			/* Changed in r6pl16 [NHz] */
-			/* Changed in r6pl16 [NHz] */
-			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, laydat.node4size, name);
-/*			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);*/
+			/* Fixed bug #0000047 [NHz] */
+			voutlnf("%d changeFontSize", laydat.node4size);
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
 			outln("Boff");
@@ -7622,6 +7621,11 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			{	set_html_doctype();
 				return TRUE;
 			}
+			/* New feature #0000054 in V6.5.2 [NHz] */
+			if ( strcmp(token[0], "!html_header_date")==0 )
+			{	set_html_header_date();
+				return TRUE;
+			}
 			break;
 	}	/* switch */
 
@@ -11211,6 +11215,8 @@ GLOBAL void init_vars ( void )
 	html_transparent_buttons=	FALSE;		/*r6pl12*/
 	html_use_hyphenation=	FALSE;		/* New in r6pl16 [NHz] */
 	html_doctype= HTML_TRANS;	/* New in r6pl16 [NHz] */
+	html_header_date = FALSE;	/* New feature #0000054 in V6.5.2 [NHz] */
+	html_header_date_zone[0] = EOS;	/* New feature #0000054 in V6.5.2 [NHz] */
 	
 	html_ignore_p= 				FALSE;
 
