@@ -1,0 +1,7 @@
+[ch5test.u]
+!include header.ui
+!begin_document
+!maketitle
+!tableofcontents
+!include chapter5.ui
+!end_document

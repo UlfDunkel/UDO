@@ -1,0 +1,19 @@
+!iflang [german]
+	!subnode PL0 vom 02.01.1997
+!else
+	!subnode PL0, January 2nd 1997
+!endif
+!html_name pl_06_00
+
+############################################################
+(!B)(!ALL):(!b)
+!include inc6-7/pl0/all.(!SUF)
+
+############################################################
+(!B)LyX:(!b)
+!include inc6-7/pl0/lyx.(!SUF)
+
+############################################################
+(!B)ST-Guide:(!b)
+!include inc6-7/pl0/stg.(!SUF)
+

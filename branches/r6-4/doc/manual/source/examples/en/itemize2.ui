@@ -1,0 +1,12 @@
+!begin_itemize
+!item This is the first item of the outer
+      itemize environment.
+!item This is the second item of the outer
+      itemize environment.
+      !begin_itemize
+      !item This is the 1st item of the inner one.
+      !item This is the 2nd item of the inner one.
+      !end_itemize
+!item This is the third item of the outer
+      itemize environment.
+!end_itemize

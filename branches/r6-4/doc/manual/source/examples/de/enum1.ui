@@ -1,0 +1,8 @@
+UDO stellt folgende Aufzählungsumgebungen zur Verfügung:
+!begin_enumerate
+!item itemize-Umgebung
+!item enumerate-Umgebung (das ist die Umgebung, die in
+      diesem Abschnitt beschrieben wird)
+!item description-Umgebung
+!item xlist-Umgebung
+!end_enumerate

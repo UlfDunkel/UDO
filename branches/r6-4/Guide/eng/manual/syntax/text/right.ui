@@ -1,0 +1,44 @@
+!subsubnode Right justified text
+!alias flushright environment
+
+Lines that are part of a flushright environment will be displayed right
+justified if the destination format supports right justified text.
+
+You can use the flushright environment inside other environments. You can also
+use it inside another flushright environment, even this may be senseless.
+
+If you use other environments inside a flushright environment they will be
+layouted like in all other cases. Only when the flushright environment is the
+active one text will be printed right justified.
+
+If the following example isn't printed right justified the current
+documentation format doesn't allow it to use right justified text.
+
+!begin_quote
+!begin_verbatim
+!begin_flushright
+A right justified line.
+
+A right justified paragraph
+with two source lines.
+
+The Guide to (!nl)
+UDO
+!end_flushright
+!end_verbatim
+!end_quote
+
+!.. will be printed in this way:
+
+!begin_flushright
+A right justified line.
+
+A right justified paragraph
+with two source lines.
+
+The Guide to (!nl)
+UDO
+!end_flushright
+
+You see that UDO layouts paragraphs of a flushright environment, too. To
+insert a manual line break use the (!I)(!/nl)(!i) command.

@@ -1,0 +1,84 @@
+!subnode PL11 vom 17.09.1996
+!html_name r5_pl11
+
+!begin_description
+
+!item [(!ALL):] ~
+
+!begin_itemize
+
+!index !/italian
+
+!item	Neu: Italienisch kann als Sprache benutzt werden (Schalter
+!/italian). Vielen Dank an Alexander Clauss und Heiko Schäfer.
+
+!index !/if
+!index !/ifdest
+!index !/iflang
+!index !/ifdef
+
+!item	Neu: Allgemeiner Abfragebefehl (!I)!/if(!i). Dieser Befehle vereint die
+Befehle (!I)!/ifdest(!i), (!I)!/iflang(!i) und (!I)!/ifdef(!i) (Martin
+Osieka). Anmerkung: Es stellt sich mir die Frage, ob die speziellen
+Abfragebefehle beibehalten werden sollen.
+
+!index !/begin_right
+!index !/end_right
+!index !/begin_flushright
+!index !/end_flushright
+
+!item	Änderung: Es heißt jetzt doch ""flushright-Umgebung"". Sie
+wird entsprechend mit (!I)!/begin_flushright(!i) und
+(!I)!/end_flushright(!i) geklammert.
+
+!item	Bugfix: Wurden in einem Item manuelle Links verwendet, erzeugte UDO
+fehlerhafte Dateien. Dies wurde durch eine interne Änderung in PL10
+verursacht.
+
+!item	Bugfix: Bei fehlerhafter Syntax für externe Links für WinHelp geriet
+UDO in eine Endlosschleife.
+
+!item	Bugfix: Im ersten Durchgang wurden verbatim-Includes nicht
+mitgezählt, wodurch später die Prozentangaben daneben waren (Frank
+Röske).
+
+!end_itemize
+
+!item [HTML:] ~
+
+!begin_itemize
+
+!item	Bugfix: Beim Mischen von Kapiteln traten Fehler bei der
+Ausgabe der Kopf- und Fußzeilen auf (Patrick Jerchel).
+
+!item	Bugfix: Bei der Ausgabe eines !/subsubtoc im Anhang fehlte
+manchmal ein (!V)</ul>(!v).
+
+
+!index HTML !! empty filename
+!index empty filename
+!item	Erfolgt die Ausgabe der HTML-Datei auf die Standardausgabe,
+wird für die Links (!V)stdout.htm(!v) verwendet und nicht mehr die
+Fehlermeldung ""empty filename"" ausgegeben.
+
+!end_itemize
+
+
+!item [RTF:] ~
+
+!begin_itemize
+
+!index RTF !! Node1*
+!index Node1*
+!item	Die Kapitel, die nicht im Inhaltsverzeichnis erscheinen
+sollen, haben ein eigenes Absatzformat erhalten. Dadurch kann man
+diese Kapitel auch bei Erstellung eines Inhaltsverzeichnisses außen
+vor lassen. Die Namen der zugehörigen Absatzformate enden mit einem
+''*'' (z.B. ""Node1*""):
+
+!end_itemize
+
+
+
+!end_description
+

@@ -1,0 +1,19 @@
+# doc/manual/source/lang.ui
+# letzte Änderungen: 20.12.2003 / last changes: Dec 20, 2003
+
+
+!ifset LANG_DE
+# udo -D LANG_DE ...
+!language german
+!unset LANG_DE
+!endif
+!ifset LANG_EN
+# udo -D LANG_EN ...
+!language english
+!unset LANG_EN
+!endif
+# falls die UDO-Doku künftig in weiteren Sprachen existiert: in folgender Abfrage hinzufügen:
+# if the UDO manual exists in more languages (in future): add in following query
+!ifnlang [english]
+!language german
+!endif

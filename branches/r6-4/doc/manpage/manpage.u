@@ -1,0 +1,51 @@
+############################################################
+# doc/manpage/manpage.u
+# Die Manualpage zur Kommandozeilenversion
+# letzte Änderungen: 21.12.2003 / last changes: Dec 21, 2003
+############################################################
+# Mit "udo --nroff -o udo.1 manpage.u"
+# oder "udo --man -o udo.man manpage.u" uebersetzen
+# testen mittels: "man -l udo.1" bzw. "man -l udo.man"
+############################################################
+
+!tex_2e
+!raw [tex] \parindent0cm \parskip2pt
+
+!docinfo [program]	udo
+!docinfo [author]	webmaster@udo-open-source.org
+!docinfo [webmasterurl] http://www.udo-open-source.org
+
+!man_type 1
+!nroff_type 1
+
+# !no_umlaute [man]
+#!sloppy
+
+!include ../manual/source/lang.ui
+!include ../manual/source/version.ui
+
+!macro  KW   (!I)(!1)(!i)
+
+# für korrekte Pfade in eingebundener running_cmdline.ui
+!set manpage_mode
+
+
+
+!begin_document
+
+!include ../manual/source/running_cmdline.ui
+
+
+!iflang [german]
+!subheading Autor
+!endif
+!iflang [english]
+!subheading Author
+!endif
+
+!autoref [off]
+Copyright (!copyright) 1995-2001 by Dirk Hagedorn, (!nl)
+Copyright (!copyright) 2001-2004 by The UDO community ((!url [http://www.udo-open-source.org] []))
+!autoref [on]
+
+!end_document

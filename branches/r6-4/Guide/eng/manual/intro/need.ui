@@ -1,0 +1,38 @@
+!subnode	Do you need UDO?
+
+If you can answer one or more of the following question with ""Yes"" UDO
+should be worth to take a look at. If can't answer any question with ""Yes""
+it's quite possible that you don't need UDO and that you can stop reading
+this manual right here.
+
+!begin_itemize
+
+!item	Have you written a text with a general contents and do you want to
+let some people, that don't run the same operating system, read it?
+
+!item	Are you a programmer and do you want to distribute your software with
+an ASCII manual and an online manual for Windows, Turbo Vision, GNU Info or
+ST-Guide?
+
+!item	Are you a programmer and do you want to print out the manual with
+(!LaTeX) or a text processor that can import the Rich Text Format?
+
+!item	Do you only need an ASCII manual but you always get rid of checking
+the line breaks, chapter numbers and the table of contents?
+
+!item	Do you want to publish a hypertext inside the World Wide Web but you
+don't own a powerful HTML editor that can enter links, convert special
+characters or split up the document into different files automatically?
+
+!item	Do you want to make an online manual for a Windows software but you
+don't want to pay a lot of money for a software that costs more than 20
+times the price of UDO but can do only a little bit more?
+
+!item	Are you the author of a Pure C library for the Atari computers and
+you need a descriptions of the library routines  for Pure C Help and
+ST-Guide?
+
+!end_itemize
+
+Did you answer any question with ""Yes""? Fine! You didn't? Then read the
+questions once more. (!grin)

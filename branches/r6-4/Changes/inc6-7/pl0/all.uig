@@ -1,0 +1,63 @@
+!begin_itemize
+
+!index !/use_mirrored_indices
+!item	Neu: Schalter (!I)!/use_mirrored_indices~[~](!i). Wird dieser
+Schalter benutzt, so legt UDO beim Befehl (!I)!/index(!i) oder bei der
+Platzhalterversion (!I)(!/idx!..)(!i) auch die ""gespiegelten"" Einträge an,
+falls man einen Doppeleintrag vornimmt. Falls man also diesen Schalter
+benutzt, dann kann man sich bei der Angabe von
+
+!begin_quote
+!begin_verbatim
+!index A !! B
+!end_verbatim
+!end_quote
+
+die folgende Zeile sparen:
+
+!begin_quote
+!begin_verbatim
+!index B !! A
+!end_verbatim
+!end_quote
+
+!index Flushleft-Umgebung
+!item	Neu: flushleft-Umgebung ((!I)!/begin_flushleft(!i),
+(!I)!/end_flushleft(!i)). Hiermit kann man den Blocksatz partiell
+ausschalten.
+
+!index Fehlermeldungen
+!item	Änderung: Falls eine Datei nicht geöffent werden konnte, wird nur
+noch eine Zeile im Logfile ausgegeben.
+
+!item	Änderung: Die Fehlermeldungen bezüglich der Umgebungen wurden etwas
+verfeinert. So werden nun auch fehlende (!I)!/end_flushright(!i) und
+(!I)!/end_flushleft(!i) bemängelt.
+
+!index !/break
+!item	Änderung: (!I)!/break(!i) ist nun ein Kommando wie alle anderen auch
+und kann daher auch in Abfragen auftauchen. Es wird  nun weder in
+verbatim- und raw-Umgebungen noch in Tabellen beachtet.
+
+!index !/table_caption*
+!item	Neu: Mit dem Befehl (!I)!/table_caption*(!i) kann man einen
+Tabellentitel ohne die Angabe von ""Tabelle #"" erzeugen (Christian
+Goßlar).
+
+!index !/image*
+!item	Neu: Mit dem Befehl (!I)!/image*(!i) kann man ein Bild
+ausgeben, wobei die Bildunterschrift ohne ""Abbildung #"" erzeugt wird
+(Christian Goßlar).
+
+!item	Bugfix: Spezialbefehle wie (!I)!/stg(!i), (!I)!/html(!i) etc.
+beachteten nicht die if-else-Zweige (Christian Goßlar).
+
+!index	!/use_justified
+!index	!/use_justification
+!item	Änderung: Der Schalter für den Blocksatz heißt nun
+(!I)!/use_justification(!i) anstatt (!T)!/use_justified(!t).
+
+!item	Änderung: Es sind nun 3000 Kapitel benutzbar.
+
+!end_itemize
+

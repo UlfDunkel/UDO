@@ -1,0 +1,214 @@
+!subnode	0.48 vom 08.04.1996
+!html_name	r4_v048
+
+Diese Version wurde als Release 5 für TOS und DOS veröffentlicht.
+
+!begin_description
+
+###########################################################
+
+!item	[Allgemein] ~
+
+!begin_itemize
+
+!item (!B)Wichtige Syntaxänderungen(!b)!!!
+
+	!begin_enumerate
+
+	!item (!I)(!/img ...)(!i) ersetzt den Platzhalter (!/image~...).
+	!item (!I)(!/idx ...)(!i) ersetzt den Platzhalter (!/index~...).
+	!item (!I)!/index(!i) ersetzt das Kommando !/keyword.
+
+	!end_enumerate
+
+	Dies hat interne Gründe, deren Schilderung hier den Rahmen
+	sprengen würde. Mit einem Editor lassen sich die nötigen
+	Anpassungen aber innerhalb von Minuten erledigen. Dazu einfach
+	folgendermaßen vorgehen:
+
+!begin_verbatim
+ersetze "(!image"  durch "(!img"
+ersetze "(!index"  durch "(!idx"
+ersetze "!keyowrd" durch "!index
+!end_verbatim
+
+
+!item Will man doppelte Anführungszeichen oder Apostrophe im Quelltext
+angeben, so muß man nun die Zeichenfolge (!T)((""))(!t) bzw.
+(!T)((''))(!t) angeben. Die alte Version mit dem eingefügten
+Ausrufezeichen führte nur zu Problemen.
+
+
+!item Doppelte Anführungszeichen direkt (!I)nach(!i) einer Fußnote
+oder Schriftumschaltung wurden falsch umgewandelt.
+
+!item Wegen fehlenden Linuxdoc-SGML-Eintrag in der Konfigurations-
+Datei waren die externen Programme der GEM-Version ""verschoben"".
+
+!item (!I)!/ifdest(!i) und (!I)!/iflang(!i) sollten nun verschachtelt
+benutzt werden können.
+
+!item Die Kommandozeilenversion meckert jetzt, falls Quell- und
+Zieldatei identisch sind. Grrr, da habe ich mir doch glatt ein
+wichtiges (!TeX)-File zerschossen!..
+
+!item Der Schalter (!I)!/code_universal(!i) existiert nicht mehr.
+Dafür springt nun der Schalter (!I)!/universal_charset(!i) ein, mit
+dem man die Anpassung der systemunabhängigen Zeichen anpassen kann.
+Bisher werden lediglich die wichtigsten Zeichen unterstützt. Welche,
+das findet man in der neuen Doku in der Historie unter ""In letzter
+Minute"".
+
+!end_itemize
+
+
+###########################################################
+
+!item	[ASCII] ~
+
+!begin_itemize
+
+!item	Kapitelüberschriften werden bei (!I)!/use_style_book(!i)
+nochmals anders ausgegeben. Bald habe ich es heraus, wie es am besten
+aussieht.
+
+!end_itemize
+
+
+###########################################################
+
+!item	[HTML] ~
+
+!begin_itemize
+
+!item Bei Tabellen wird nur noch ein Rahmen dargestellt, falls in der
+Zeile mit (!I)!/begin_table(!i) der Befehl (!I)!/hline(!i) angegeben
+wird. Dann gibt UDO (!T)<table border=1 frame=box>(!t) aus, ansonsten
+lediglich (!T)<table>(!t).
+
+!end_itemize
+
+
+###########################################################
+
+!item	[Linuxdoc-SGML] ~
+
+!begin_itemize
+
+!item (!T)<article>(!t) und (!T)<book>(!t) waren vertauscht.
+
+!item Am Ende wurde immer (!T)</article>(!t) ausgegeben, auch wenn
+(!I)!/use_style_book(!i) verwendet wurde.
+
+!item Sonderzeichen werden wie bei HTML angepaßt, bis ich die
+Unterschiede herausgefunden habe.
+
+!item (!I)!/hline(!i) wurde fälschlicherweise unterstützt.
+
+!end_itemize
+
+###########################################################
+
+!item	[Manualpage] ~
+
+!begin_itemize
+
+!item (!I)!/hline(!i) wurde fälschlicherweise unterstützt.
+
+!end_itemize
+
+
+###########################################################
+
+!item	[RTF] ~
+
+!begin_itemize
+
+!item (!I)!/use_style_book~[rtf](!i) wird unterstützt. Vor jedem
+Kapitel wird darüber hinaus noch autmoatisch ein (!I)!/newpage(!i)
+ausgeführt.
+
+!item (!I)!/hline(!i) wurde fälschlicherweise unterstützt.
+
+!end_itemize
+
+###########################################################
+
+!item	[ST-Guide] ~
+
+!begin_itemize
+
+!item	(!I)!/index(!i) (ehemals !/keyword) wird unterstützt und als
+(!T)@index(!t) ausgegeben.
+
+!item ""Normale"" Tabellen werden nun auch für den ST-Guide wieder
+richtig erzeugt. In der 0.47 wurde statt eine Linienbefhls am Ende der
+Tabelle Schrott ausgegeben.
+
+!item Anführungsstriche in Kapitelnamen werden nicht mehr durch
+Apostrophe ersetzt, sondern durch einen Backslah gequotet.
+
+!item Beim Alias werden jetzt wieder Anführungsstriche benutzt. Durch
+die Sourcecode-Herumkopiererei von DOSe<->MegaSTE<->TT war die Änderung
+verschütt gegangen.
+
+!end_itemize
+
+###########################################################
+
+!item	[(!TeX)] ~
+
+!begin_itemize
+
+!item (!I)!/hline(!i) wurde fälschlicherweise unterstützt.
+
+!item ''"'' wird durch (!V){\symbol{34}}(!v) ersetzt, statt durch (''),
+da es sonst zu Fehlern bei der Umsetzung der doppelten Apostrophe
+kommen konnte.
+
+!item ''`'' wird durch (!V){\symbol{96}}(!v) ersetzt, da es sonst zu
+Problemen mit der Zeichenfolge (!V)!`(!v) kommt.
+
+!end_itemize
+
+###########################################################
+
+!item	[Texinfo] ~
+
+!begin_itemize
+
+!item Die center-Umgebung wurde falsch ausgegeben.
+
+!end_itemize
+
+###########################################################
+
+!item	[WinHelp] ~
+
+!begin_itemize
+
+!item Vor der Nummer eines Kapitels fehlte ein Leerzeichen, falls
+(!I)!/use_style_book~[win](!i) verwendet wurde.
+
+!item Die verbatim-Umgebung wird mit (!T)\keep(!t) ausgegeben. WinHelp
+erzeugt dann bei der Anzeige keinen Zeilenumbruch mehr, falls das
+Fenster zu schmal ist.
+
+!item	Tabellen werden nun mit RTF-Befehlen erzeugt. Das sieht zwar
+nicht besonders toll aus, aber immer noch besser als diese ASCII-
+Versionen der Tabellen. Wird in der Zeile mit (!I)!/begin_table(!i)
+der Befehl (!I)!/hline(!i) angegeben, so werden (!I)alle(!i) Zellen
+der Tabelle umrahmt dargestellt, sonst keine. Die Darstellung von
+variablen horizontalen und vertikalen Linien ist nicht möglich.
+
+!item	Bei Labels wird bei den RTF-Befehlen kein CR mehr ausgegeben.
+Damit sind vielleicht die Probleme bei Links, daß zur Stelle oberhalb
+des Labels verzeigt wird, erledigt.
+
+!end_itemize
+
+
+###########################################################
+
+!end_description
+

@@ -1,0 +1,347 @@
+################################################################################
+# doc/manual/source/manual.u
+# Hauptfile der Anleitung zu UDO / udo manual main page
+# letzte Änderungen: 21.12.2003 / last changes: Dec 21, 2003
+################################################################################
+# In diesem File befindet sich kein Text! Alle Texte werden nachgeladen
+# This file doesn't contain any text! Any text will be included from other files.
+################################################################################
+
+# ------------------------------------------------------------------------------
+# Die Doku wurde in Windows-ANSI erstellt.
+# Der ISO-Zeichensatz ist ein Untermenge davon.
+# ------------------------------------------------------------------------------
+# The source files were written using the Windows-ANSI charset.
+# The ISO-charset is a subset of this charset.
+# ------------------------------------------------------------------------------
+!code [iso]
+
+# ------------------------------------------------------------------------------
+# Spracheinstellung für dieses Dokument / Language of this document
+# ------------------------------------------------------------------------------
+!include lang.ui
+
+# ------------------------------------------------------------------------------
+# Die deutschen Trennregeln befinden sich in der Datei hyphen-de.ui
+# ------------------------------------------------------------------------------
+# The english syllabification patterns are inside the file hyphen-en.ui
+# ------------------------------------------------------------------------------
+!iflang [german]
+!include hyphen-de.ui
+!endif
+!iflang [english]
+!include hyphen-en.ui
+!endif
+
+# ------------------------------------------------------------------------------
+# Sprachabhängige Makros / Language-dependent macros
+# ------------------------------------------------------------------------------
+!ifdest [html,hh,stg]
+!macro IMAGES
+!endif
+
+!ifnset IMAGES
+!macro IMAGES images/
+!endif
+
+!iflang [german]
+!macro EXAMPLES ./examples/de/
+!macro EXAMPLES_DIST ../../examples/de/
+!endif
+!iflang [english]
+!macro EXAMPLES ./examples/en/
+!macro EXAMPLES_DIST ../../examples/en/
+!endif
+
+# ------------------------------------------------------------------------------
+# Die zahlreichen Schalter befinden sich in einer eigenen Datei namens header.ui
+# ------------------------------------------------------------------------------
+# The unnumerous switches are part of header.ui
+# ------------------------------------------------------------------------------
+!include header.ui
+
+# ------------------------------------------------------------------------------
+# Titel formatabhängig setzen
+# ------------------------------------------------------------------------------
+# The title of this documentation depends on the destination format
+# ------------------------------------------------------------------------------
+!iflang [german]
+!ifdest [stg]
+!docinfo [title] Der Hypertext zu
+!else
+!ifdest [win,wh4,hh]
+!docinfo [title] Die Windows-Hilfe zu
+!else
+!ifdest [rtf]
+!docinfo [title] Das Handbuch zu
+!else
+!docinfo [title] Die Anleitung zu
+# end: rtf:
+!endif
+# end: win, wh4, hh:
+!endif
+# end: stg:
+!endif
+# end: german:
+!endif
+!iflang [english]
+!ifdest [stg]
+!docinfo [title] The hypertext of
+!else
+!ifdest [win,wh4,hh]
+!docinfo [title] The Windows help of
+!else
+!ifdest [rtf]
+!docinfo [title] The book of
+!else
+!docinfo [title] The guide of
+# end: rtf:
+!endif
+# end: win, wh4, hh:
+!endif
+# end: stg:
+!endif
+# end: english
+!endif
+!docinfo [program] UDO
+
+
+!include version.ui
+
+# ------------------------------------------------------------------------------
+# Subject für den ST-Guide setzen / Set the subject for the ST-Guide
+# ------------------------------------------------------------------------------
+!iflang [german]
+!raw [stg] @subject "Dokumentation/Utilities"
+!endif
+!iflang [english]
+!raw [stg] @subject "Documentation/Utilities"
+!endif
+
+# ------------------------------------------------------------------------------
+# Typ für Manualpage setzen  / Set the type of the manual page
+# ------------------------------------------------------------------------------
+!man_type 1
+!nroff_type 1
+
+# ------------------------------------------------------------------------------
+# Makros / Set some macros
+# ------------------------------------------------------------------------------
+
+!macro UDOR udo(!RELEASE)
+
+!macro a !]
+!define x !(!1)
+!macro  X !
+!macro  KW   (!I)(!link [!(!1) (!2)] [!(!1)])(!i)
+!macro  K1   (!I)(!link [!(!1) (!2)] [!(!1)])(!i)
+!macro  KKW  (!I)(!link [(!(!1)!)] [(!/(!1)!)])(!i)
+!macro  KK2W (!I)(!link [(!(!1) (!2)!)] [(!/(!1)!)])(!i)
+!macro  KKKW (!I)(!link [(!(!1)!)...(!(!2)!)] [(!(!1)!)...(!(!2)!)])(!i)
+!macro  KK1  (!I)(!link [((!X)(!1)!)] [((!X)/(!1)!)])(!i)
+!macro  kw   !(!1)
+!define k1   !(!1)
+!define kkw  (!/(!1))
+!define kkkw (!/(!1))...(!/(!2))
+!define kk1  (!(!1))
+
+!iflang [german]
+!macro	MISS   (!idx [Hier fehlt noch etwas])!..
+!macro  HINT   (!B)Hinweis:(!b)
+!macro  HINTS  (!B)Hinweise:(!b)
+!ifdest [win,wh4]
+!macro  FORMAT (!link [<k\'FCrzel>] [Ausgabeformat])
+!else
+!ifdest [hh,html]
+!macro  FORMAT (!link [&lt;k&uuml;rzel&gt;] [Ausgabeformat])
+!else
+!macro  FORMAT (!link [<kürzel>] [Ausgabeformat])
+# end: hh, html:
+!endif
+# end: win, wh4:
+!endif
+!ifdest [hh,html]
+!macro  COLOR    (!link [&lt;farbe&gt;] [Farben])
+!macro  LANGUAGE (!link [&lt;sprache&gt;] [Sprache])
+!macro  OS       (!link [&lt;system&gt;] [Betriebssystem])
+!macro  CODE     (!link [&lt;zeichensatz&gt;] [Code])
+!else
+!macro  COLOR    (!link [<farbe>] [Farben])
+!macro  LANGUAGE (!link [<sprache>] [Sprache])
+!macro  OS       (!link [<system>] [Betriebssystem])
+!macro  CODE     (!link [<zeichensatz>] [Code])
+# end: hh, html:
+!endif
+# end: german:
+!endif
+
+!iflang [english]
+!macro	MISS   (!idx [Something's still missing here])!..
+!macro  HINT   (!B)Please note:(!b)
+!macro  HINTS  (!B)Please note:(!b)
+!ifdest [win,wh4]
+!macro  FORMAT (!link [<abbreviations>] [Abbreviations])
+!else
+!ifdest [hh,html]
+!macro  FORMAT (!link [&lt;abbreviations&gt;] [Abbreviations])
+!else
+!macro  FORMAT (!link [<abbreviations>] [Abbreviations])
+# end: hh, html:
+!endif
+# end: win, wh4:
+!endif
+!ifdest [hh,html]
+!macro  COLOR    (!link [&lt;color&gt;] [Colors])
+!macro  LANGUAGE (!link [&lt;language&gt;] [Language])
+!macro  OS       (!link [&lt;system&gt;] [Operating systems])
+!macro  CODE     (!link [&lt;charset&gt;] [Code])
+!else
+!macro  COLOR    (!link [<color>] [Colors])
+!macro  LANGUAGE (!link [<language>] [Language])
+!macro  OS       (!link [<system>] [Operating systems])
+!macro  CODE     (!link [<charset>] [Code])
+# end: hh, html
+!endif
+# end: english
+!endif
+
+# Sprachabhängige Textbausteine für den Befehlsindex (alphabetisch geordnet)
+# language-dependent text parts for the command index (in alphabetical order)
+# hinzugefügt 14.12.2003 / added Dec 14th, 2003 / Ulrich Kretschmer
+!iflang [german]
+!macro ABBREV Dies ist eine Abkürzung für das Kommando
+!macro CHAR zeichen
+!macro COMMAND Kommando
+!macro COMMANDABBREV Kommando-Abkürzung
+!macro DESCRIPTION Beschreibung:
+!macro EXAMPLE Beispiel:
+!macro EXAMPLE2 Beispiel:
+!macro EXISTSSINCE Existiert seit:
+!macro EXISTEDUNTIL Existierte bis:
+!macro FILE datei
+!macro MAINPART Hauptteil
+!macro NOTEXISTING Dieser Befehl existiert nicht mehr.
+!macro PLACEHOLDER Platzhalter
+!macro PREAMBLE Vorspann
+!macro RENAMEDTO Dieses Kommando (!1) wurde umbenannt zu
+!macro SEEALSO Siehe auch:
+!macro SPECIALCHAR Sonderzeichen
+!macro SWITCH Schalter
+!macro SYNTAX Syntax:
+!macro TEXT text
+!macro TYPEPOSITION Typ & Position:
+!macro USEINSTEAD Benutzen Sie stattdessen (!1)
+!macro VALUE wert
+!endif
+!iflang [english]
+!macro ABBREV This is an abbreviation of the command
+!macro CHAR char
+!macro COMMAND command
+!macro COMMANDABBREV command abbreviation
+!macro DESCRIPTION Description:
+!macro EXAMPLE Example:
+!macro EXAMPLE2 Examples:
+!macro EXISTSSINCE Exists since:
+!macro EXISTEDUNTIL Existed until:
+!macro FILE file
+!macro MAINPART main part
+!macro NOTEXISTING This command does not exist anymore.
+!macro PLACEHOLDER placeholder
+!macro PREAMBLE preamble
+!macro RENAMEDTO This command has been renamed to
+!macro SEEALSO See also:
+!macro SPECIALCHAR special character
+!macro SWITCH switch
+!macro SYNTAX Syntax:
+!macro TEXT text
+!macro TYPEPOSITION Type & position:
+!macro USEINSTEAD Use (!1) instead
+!macro VALUE value
+!endif
+
+
+!define MAXLINK         200
+!define MAXMACRO       1000
+!define MAXDEFINE       128
+!define MAXSYMLEN        32
+
+# ------------------------------------------------------------------------------
+# Symbole / Set some symbols
+# ------------------------------------------------------------------------------
+
+# Wenn dieses Symbol nicht gesetzt ist, werden Kommandos, die
+# nicht mehr unterstützt werden, aus dem Index entfernt
+# if this symbols is not set, commands that are not supported
+# any longer are remove from the command index
+!set OldKeywords
+
+################################################################################
+# Jetzt geht's lohooos...
+# Man kann durch Benutzung der -D Option kleinere Anleitungen
+# erstellen. Beispiel fuer eine Anleitung ohne Installationsanweisungen:
+# $ udo --win -o ! -D NoInstall udo.u
+################################################################################
+# 10, 9, 8, 7, 6, ignition sequence started, ...
+# Using the option -D you can make smaller manuals. If you
+# e.g. want a manual without installation hints and shareware
+# notes for Windows call UOD like this:
+# $ udo --win -o ! -D NoShareware -D NoInstall udo.u
+################################################################################
+
+!begin_document
+
+# !html_description
+!html_keywords UDO, Universal Document
+# !html_keywords Atari
+# !html_keywords Windows
+
+!raw [tex] \sloppy
+
+# erzeuge Titelseite + Inhaltsverzeichnis / create title page + table of contents
+!maketitle
+# !ifdest [win,wh4,html,hh,stg,amg,pch,tvh,aqv]
+# !tableofcontents !depth 1
+# # für Hypertextformate auf Depth 1 reduziert: 20.12.2003 - Ulrich Kretschmer
+# !else
+!tableofcontents !depth 2
+# !endif
+
+# Einführung / Introduction
+!ifnset [NoIntro]
+!include introduction.ui
+!endif
+
+# Installation
+!ifnset [NoInstall]
+!include install.ui
+!endif
+
+# Bedienung / Running
+!ifnset [NoRunning]
+!include running.ui
+!endif
+
+# UDO-Syntax
+!ifnset [NoSyntax]
+!include syntax.ui
+!endif
+
+# Ausgabeformate / Output formats
+!ifnset [NoFormats]
+!include formats.ui
+!endif
+
+# Praktische Arbeit / Working with UDO
+!ifnset [NoWorking]
+!include working.ui
+!endif
+
+################################################################################
+# Anhang / Appendix
+################################################################################
+
+!ifnset [NoAppendix]
+!include appendix.ui
+!endif
+
+!end_document

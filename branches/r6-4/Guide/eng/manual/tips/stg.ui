@@ -1,0 +1,43 @@
+!subnode Tips & tricks according to ST-Guide
+!ignore_links
+
+
+#################################################
+
+!subsubnode A user-defined title page for ST-Guide
+!ignore_links
+
+If you don't like the layout of the title page UDO will make with
+(!I)!/maketitle(!i) you can make your own title page with some commands:
+
+The following example shows how to make your own title page but only for the
+ST-Guide. It's used a ""hidden"" node that contains the word ""Contents"" at
+the end. The ST-Guide will insert a link to the table of contents due to
+this word.
+
+!autoref [off]
+!begin_quote
+!vinclude examples/stg/title.u
+!end_quote
+!autoref [on]
+
+
+#################################################
+
+!subsubnode Don't use justified text
+!ignore_links
+
+""Why that?"" you might ask. Well, Martin Osieka has written a program
+called Hyperion for the Apple Macintosh that can display ST-Guide
+hypertexts.
+
+In contrast to ST-Guide Hyperion can display hypertexts with proportional
+fonts but only if you don't use justified text.
+
+Thus you should don't use the justification if you want that Macintosh users
+shall also read your hypertext without any problems.
+
+If you have written a system specific hypertext that is only interesting for
+Atari users you can use justification without any doubts.
+
+#################################################

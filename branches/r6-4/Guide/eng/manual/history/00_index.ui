@@ -1,0 +1,14 @@
+############################################################
+# @(#) UDO-History
+############################################################
+
+!node History
+
+In this chapter you will find a short summary of all the changes in the
+past.
+
+!include history/last.ui
+!include history/rel6.ui
+!include history/rel5.ui
+!include history/rel4.ui
+!include history/rel3.ui

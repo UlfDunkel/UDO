@@ -1,0 +1,17 @@
+!begin_itemize
+
+!item Bugfix: Alle Umgebungen sollten nun wieder ordentlich aussehen.
+UDO erzeugt nun etwas veränderten HTML-Code.
+
+!item Änderung: In den auf dem (!V)<ul>(!v)-Tag basierenden
+Inhaltsverzeichnissen wird nun zu jedem (!V)<li>(!v) auch ein
+(!V)</li>(!v) ausgegeben.
+
+!item Änderung: Wird bei (!I)!/html_modern_column_width(!i) bzw.
+(!I)!/html_frames_column_width(!i) statt eines dezimalen Wertes nun ein
+Prozentwert angegeben, so gibt UDO nun auch einen Prozentwert aus. Die
+Angabe von dezimalen Werten ist natürlich weiterhin möglich (Patrick
+Jerchel).
+
+!end_itemize
+

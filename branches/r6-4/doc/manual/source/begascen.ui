@@ -1,0 +1,23 @@
+# doc/manual/source/history_begin_asc_en.ui
+# letzte Änderungen: 21.12.2003 / last changes: Dec 21, 2003
+
+# es funktioniert technisch nicht, diese Datei mit der deutschen Version
+# zusammenzufassen und mittels iflang die unterschiedlichen Texte zu erzeugen.
+
+Instead of!..
+!begin_verbatim
+!begin_asc
+[...]
+!else_asc
+[...]
+!end_asc
+!end_verbatim
+
+!.. you now have to use this construction:
+!begin_verbatim
+!ifdest [asc]
+[...]
+!else
+[...]
+!endif
+!end_verbatim

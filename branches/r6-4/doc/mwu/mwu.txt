@@ -1,0 +1,435 @@
+# mwu.txt
+# Zeichensatz: ANSI
+# letzte Änderungen: 29.12.2003
+
+# Spracheinstellung (Symbole über Kommandozeilenoptionen setzen!)
+!ifset lang_en
+!language [english]
+!endif
+!ifset lang_de
+!language [german]
+!endif
+
+
+!docinfo [title] "Made with UDO"
+# !docinfo [htmltitle]
+# !docinfo [webmastername]
+# !docinfo [webmasteremail]
+# !docinfo [webmasterurl]
+!iflang [german]
+!docinfo [date] Letzte Aktualisierung am (!today)
+!else
+!docinfo [date] Last update on (!today)
+# Datum kommt automatisch im richtigen (englischen) Format!
+!endif
+!code [iso]
+
+# !html_propfont_name Helvetica,Arial
+# !html_monofont_name Courier
+
+!image_alignment [left]
+!table_alignment [left]
+
+# !html_backcolor white
+
+!no_numbers [html,win]
+# !use_auto_subtocs [html,win] !depth 2
+# !use_auto_subsubtocs [html,win] !depth 2
+# !use_auto_subsubsubtocs [html,win] !depth 2
+# !use_auto_toptocs [html,win]
+
+# spezielle Farbeinstellungen für UDO-Website
+!html_backcolor #FFFAF0
+!html_linkcolor #0000FF
+!html_alinkcolor #008000
+!html_vlinkcolor #FF0000
+
+# Kopf- und Fußzeilen (Navigationsbuttons) unterdrücken
+!no_headlines [html]
+!no_bottomlines [html]
+
+# nur eine einzige Ausgabedatei erzeugen
+!html_merge_nodes
+
+# Makros für GIF-Dateien mit Landesflaggen (Sprachkennzeichnung)
+!ifdest [html,hh]
+!macro CZ (!img [./flag_cz] [tschechisch/czech])
+!macro DE (!img [./flag_de] [deutsch/german])
+!macro EN (!img [./flag_en] [englisch/english])
+!macro NL (!img [./flag_nl] [niederländisch/dutch])
+!macro PL (!img [./flag_pl] [polnisch/polish])
+!else
+!macro CZ
+!macro DE
+!macro EN
+!macro NL
+!macro PL
+!endif
+
+#############################################################################################################
+!begin_document
+!autoref [off]
+
+!maketitle
+
+!iflang [german]
+!html_name index.html.de
+!html_description "Made with UDO": Referenzliste von mit UDO erstellten Webseiten, Projekten, Dokumentation etc.
+
+UDO wurde primär zur Software-Dokumentation entwickelt und wird für
+diesen Zweck auch reichlich eingesetzt. Mit UDO ist es jedoch auch
+sehr leicht möglich, ansprechend gestaltete HTML-Dateien zu erzeugen.
+Diesen Vorteil haben schon einige Personen erkannt und bieten die
+folgenden, mit UDO gestalteten Seiten an.
+
+!ifdest [html]
+!begin_flushright
+This page (!url [in English] [./index.html.en])~(!EN)
+!end_flushright
+!endif
+
+!else
+!html_name index.html.en
+!html_description "Made with UDO": reference list of UDO-made web pages, manuals/documentations, projects...
+
+UDO has been primarily developed to enable authors to publish software
+manuals or online documentations from a single source file. In addition
+to this it is possible to design some nice web pages with UDO. Some of
+the UDO users have already noticed that and offer the following web
+pages.
+
+!ifdest [html]
+!begin_flushright
+Diese Seite (!url [in Deutsch] [./index.html.de])~(!DE)
+!end_flushright
+!endif
+
+!endif
+
+# ###################################################################
+!iflang [german]
+!node Kommerzielle Homepages
+!else
+!node Commercial web sites
+!endif
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# !item (!DE) (!xlink [2B Home][http://home.t-online.de/home/ToBeHome/homepage.html])
+# (Behne & Behne Systemsoftware GbR)
+# aktuelle URL: http://www.nvdi.de/ (Stand 1999; Layout sieht zwar UDO-artig aus,
+# aber unklar, ob wirklich mit UDO erzeugt
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 19.08.2002
+!item (!DE) (!xlink [Das Entwicklungs-System ACS Pro] [http://acspro.atari.org/])
+((!xlink [Martin Elsässer] [http://home.t-online.de/home/martin.elsaesser/]))
+# alt: http://www.atari-computer.de/martin_elsaesser/index.html
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 19.09.2002:
+!iflang [german]
+!item (!DE) (!xlink [die TAPIR Homepage] [http://www.tapir-online.de/]) (Günter Hanke) (!nl)
+Hier geht es darum, mit Hilfe eines Programms namens TAPIR die Vorteile von ISDN auch als Blinder
+oder Sehbehinderter nutzen zu können.
+!else
+!item (!DE) (!xlink [the TAPIR Homepage] [http://www.tapir-online.de/english/]) (Günter Hanke) (!nl)
+Here you will find information about using the advantages of ISDN telephones as a blind.
+!endif
+# alte URL: http://www.guentel.de/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+# ###################################################################
+!iflang [german]
+!node Universitäre Homepages
+!else
+!node University web pages
+!endif
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 19.08.2002:
+!iflang [german]
+!item (!DE) Universität (!xlink [Bayreuth] [http://www.bayreuth.de/]):
+!else
+!item (!DE) University of (!xlink [Bayreuth] [http://www.bayreuth.de/]):
+!endif
+!begin_itemize !short
+# 31.7.03: unklar, ob das folgende wirklich noch mit UDO erstellt wurde:
+!item Physik an der Universitaet Bayreuth -- Studium und Forschungsaktivitäten (!nl)
+(!xlink [http://www.uni-bayreuth.de/departments/physik/physbros/][])
+!item Promotionsordnung  für die Fakultät für Mathematik und Physik (!nl)
+(!xlink [http://www.uni-bayreuth.de/departments/physik/fakultat/promord/][]) (Stand Okt.~1998)
+!item Prüfungs- und Studienordnungen für Physik-Studiengänge:
+(!nl) (!xlink [http://www.uni-bayreuth.de/departments/physik/teaching/dpo-phys/][]) (Stand Jan.~2001)
+(!nl) (!xlink [http://www.uni-bayreuth.de/departments/physik/teaching/so-phys/][]) (Stand Jan.~2001)
+(!nl) (!xlink [http://www.uni-bayreuth.de/departments/physik/teaching/dpo-tp/][]) (Stand Jan.~2001)
+(!nl) (!xlink [http://www.uni-bayreuth.de/departments/physik/teaching/so-tp/][]) (Stand Jan.~2001)
+!end_itemize
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+# ###################################################################
+!iflang [german]
+!node FAQ's und Online-Dokumentationen
+!else
+!node FAQ's and online manuals
+!endif
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 19.08.2002:
+!item (!DE) (!xlink [Deutsche Novell-FAQ][http://www.braunstein.de/netware/faq/]) (Stefan Braunstein)
+# alt: http://www.braunstein.de/novell/faq/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 19.08.2002
+!item (!DE) (!xlink [EasyGEM-Library, Anleitung][http://www.voja.de/easygem/egdoc/index.html]) (Volker Janzen) (Stand Juli~1998)
+# alt: http://www.voja-online.de
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# auskommentiert 19.08.2002: scheint nicht mehr mit UDO erstellt zu sein!
+# !item (!DE) (!xlink [Politologie-FAQ][http://homepages.uni-tuebingen.de/juergen.plieninger/polfaq/polfaq.htm])
+# (Jürgen Plieninger)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# !item (!DE) (!xlink [Schulnetz-FAQ][http://www.fsn.by.schule.de/sn/faq/snfaq.html]) (Philipp Flesch)
+# neue URL: http://schul-netz.schule.de/faq1.phtml (nicht mehr mit UDO erzeugt)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# auskommentiert 19.08.2002: scheint nicht mehr mit UDO erstellt zu sein!
+# !item (!DE) (!xlink [Homepage Martin Rost] [http://www.NetzService.de/Home/maro/]):
+# (!xlink [Publikationen] [http://www.NetzService.de/Home/maro/mr_titel.html])
+# !item (!DE) (!xlink [Soziologie-FAQ][http://www.netuse.de/~maro/sozfaq.html]) (Martin Rost)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 19.08.2002
+!item (!xlink [Jörg Hahne] [http://sites.inka.de/hahne/]):
+!begin_itemize !short
+!item (!DE) (!xlink [Knut, Die Anleitung][http://sites.inka.de/hahne/TOS/Programme/Knut/Knut.html])
+# alt: http://www.uni-karlsruhe.de/~unn9/TOS/Programme/Knut/Knut.html
+# ........................................................
+!item (!DE) (!xlink [Democheats][http://sites.inka.de/hahne/TOS/Texte/Democheats/Democheats.html])
+# alt: http://www.uni-karlsruhe.de/~unn9/TOS/Texte/Democheats/Democheats.html
+# ........................................................
+!item (!DE) (!xlink [Dokumentation des SIRCS-Protokolls][http://sites.inka.de/hahne/TOS/Texte/SIRCS-Protokoll/SIRCS.html])
+# alt: http://www.uni-karlsruhe.de/~unn9/TOS/Texte/SIRCS-Protokoll/SIRCS.html
+!end_itemize
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 19.08.2002
+!item (!xlink [Thomas Much] [http://www.muchsoft.com/]):
+!begin_itemize !short
+!item (!DE) (!xlink [Die Dokumentation zu ObjectGEM][http://www.uni-karlsruhe.de/~Thomas.Much/OGEM/online/index.html]) (Stand Sept.~1997)
+!item (!DE) (!xlink [Object Linking for GEM Applications][http://www.uni-karlsruhe.de/~Thomas.Much/OLGA/online/olga.html]) (Stand Juni~1998)
+# !item (!DE) (!xlink [Die Onlinehilfe zu COPS][http://www.uni-karlsruhe.de/~Thomas.Much/COPS/cops.html])
+# vorstehender URL existiert nicht mehr
+!item (!DE) (!xlink [Die Onlinehilfe zu Start Me Up!/][http://www.uni-karlsruhe.de/~Thomas.Much/starthyp/start.htm]) (Stand Feb.~1996)
+!item (!EN) (!xlink [A communication protocol for GEM applications: XAcc][http://www.uni-karlsruhe.de/~Thomas.Much/xacc/xacc.htm]) (Stand Juli~1996)
+!item (!DE) (!xlink [Zeichentabellenumwandlung mit Keytab][http://www.rz.uni-karlsruhe.de/~Thomas.Much/keyhyp/keytab.html]) (Stand April~1998)
+!end_itemize
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 19.08.2002
+!iflang [german]
+!item (!DE) (!xlink [invers Software] [http://www.calamus.net/]) (Ulf Dunkel):
+(!DE)(!EN)(!CZ) (!xlink [Das Calamus Handbuch] [http://www.calamus.net/man/])
+!else
+!item (!DE) (!xlink [invers Software] [http://www.calamus.net/]) (Ulf Dunkel):
+(!DE)(!EN)(!CZ) (!xlink [The Calamus Manual] [http://www.calamus.net/man/])
+!endif
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 19.08.2002
+!iflang [german]
+!item (!DE) (!xlink [FRANK AUDIODATA] [http://www.audiodata.de/]): Elektronische Hilfsmittel für Blinde und Sehbehinderte
+!begin_itemize !short
+!item (!xlink [Produkt-Dokumentationen] [http://www.audiodata.de/doku/]) (Günter Hanke)
+!end_itemize
+!else
+!item (!DE) (!xlink [FRANK AUDIODATA] [http://www.audiodata.de/]): electronic aids for blind and visually handicapped persons
+!begin_itemize !short
+!item (!xlink [Product documentations] [http://www.audiodata.de/doku/]) (Günter Hanke)
+!end_itemize
+!endif
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt und überprüft 19.08.2002 (E-Mail von G.D. vom 5.12.2001)
+!item (!DE) (!xlink [Online-Doku für das Kontenverwaltungsprogramm ACCount-MANager] [http://www.uni-hohenheim.de/~gdietze/accman/handbuch.html])
+((!xlink [Gerald Dietze] [http://gerald-dietze.de]))
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+# ###################################################################
+!iflang [german]
+!node Private Homepages
+!else
+!node Private web sites
+!endif
+
+# alphabetisch nach Nachnamen sortiert
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 19.08.2002:
+!item (!DE) (!xlink [Die Ordnung der Primaten][http://home.t-online.de/home/othmar.bahner/Primats/system.htm])
+(Dr. Othmar Bahner)
+# alt: http://home.t-online.de/home/othmar.bahner/system.htm
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 19.08.2002
+!item (!NL)(!PL) (!xlink [Rein Bakhuizen van den Brink] [http://www.xs4all.ch/~dziewon/])
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 19.08.2002
+!item (!DE) (!xlink [Martin und Simone Elsässer] [http://home.t-online.de/home/martin.elsaesser/])
+# (Stand Juli~1998)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 29.12.2003 (Teilnehmer der UDO-Mailingliste)
+!item (!DE) (!xlink [Bernd Fritzsche] [http://www.bernd-fritzsche.de/])
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# nicht mehr mit UDO erstellt
+# !item (!DE) (!xlink [Götz Hoffart][http://www.hoffart.de])
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# !item (!DE) (!xlink [Christian Huch][http://www.netcologne.de/~nc-huchch])
+# neue URL: http://www.huch-online.de/ (nicht mehr mit UDO erstellt)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 31.07.2003 (mit google gefunden)
+!item (!DE) (!xlink [Patrick, Evelin & Paul Jerchel] [http://www.jerchel.de/])
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 19.08.2002
+!item (!DE) (!xlink [Tobias Jung] [http://www.tobias-jung.de/])
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 19.08.2002
+!item (!DE) (!xlink [Ulrich Kretschmer] [http://www.bergruf.de/])
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# !item (!DE) (!xlink [Frank Röske][http://www.student.uni-kl.de/~roeske/])
+# URL existiert nicht mehr; siehe auch http://www.asta.uni-kl.de/referenten/frank_roeske.html
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!begin_ignore
+# war schon in Dirk Hagedorns Homepage-UDO-Code auskommentiert!
+# neue URL: http://www.doitarchive.de/ (unklar, ob dies mit UDO erstellt ist)
+!item (!DE)
+(!xlink [DOITF030][http://www.rhein-main.de/people/robert/homepage.htm])
+(Robert Schaffner)
+
+!iflang [german]
+""DOITF030 ist eine Sammlung von Tips & Tricks rund um Atari Falcon. Sie
+werden in DOITF030 alle Kabel- und Schnittstellenbelegungen neben den
+Custom Chips und ihrer Beschreibung finden. Auch viele Bau- und
+Umbauanleitungen zum Atari Falcon F030. Insidertips und auch komplette
+Reparaturanleitungen runden das Angebot ab.""
+
+Roberts Homepage wurde (warum auch immer) nicht mit UDO erstellt, dafür
+aber der DOITF030-ST-Guide-Hypertext, dessen Existenz deshalb hier nicht
+verschwiegen werden soll.
+
+!else
+""DOITF030 is a collection of tips and tricks about the Atari Falcon.""
+
+Robert's homepage wasn't made with UDO but the DOITF030 ST-Guide
+hypertext was. Thus I don't want to say nothing about it.
+!endif
+!end_ignore
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# !item (!DE) (!xlink [Softwareschmiede Duisburg] [http://www.online-club.de/~tuebben/index.html]) (Peter Tübben)
+# neue URL (ergänzt 19.08.2002)
+!item (!DE) (!xlink [Peter Tübben] [http://www.tuebben.de/peter/])
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# !item (!EN) (!xlink [Mark Wherry][http://www.cix.co.uk/~mark_wherry/])
+# diese URL existiert noch, aber ohne Inhalt
+# ein Unterverzeichnis wie http://www.cix.co.uk/~mark_wherry/sscript/ existiert noch (Stand 1999)
+# siehe auch: http://www.gemtrade3.co.uk/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+# ###################################################################
+!iflang [german]
+!node Diverse Homepages
+!else
+!node Miscellaneous web sites
+!endif
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# !item (!DE) (!xlink [Anyway-Infoseiten][http://www.rhrk.uni-kl.de/~hherzog/anyway/]) (Holger Herzog)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 19.08.2002
+!iflang [german]
+!item (!DE) (!xlink [ATOS-Magazin][http://www.atos-magazin.de/]) --
+  (!xlink [Interview] [http://www.mindrup.de/atos/news/news20001025-02.html]) mit Norbert Hanz, dem Autor der
+  UDO-Shell (!nl)
+# alt:http://atos.home.pages.de
+Das (!I)ATOS-Magazin(!i) ist ein von einer Vielzahl (im positiven Sinne)
+unverbesserlichen Atarianern zusammengestelltes Online-Computermagazin (eingestellt seit 01.07.2002).
+# welches Dank UDO parallel im World Wide Web und als ST-Guide-Hypertext publiziert wird.
+!else
+!item (!DE) (!xlink [ATOS-Magazine][http://www.atos-magazin.de/]) --
+  (!xlink [Interview] [http://www.mindrup.de/atos/news/news20001025-02.html]) with Norbert Hanz, author of the
+  "UDO-Shell" (!nl)
+The (!I)ATOS magazine(!i) is a German online computer magazine from and for Atari users (discontinued since July 1st, 2002).
+# parallely published in the World Wide Web and as an ST-Guide hypertext.
+!endif
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# existiert nicht mehr
+# !item (!DE) (!xlink [Maus OF2 Homepage][http://www.tu-darmstadt.de/~st000655/maus/mausof2.html])
+# http://www.federico.hernandez.org/maus_of2 -> existiert nicht
+# http://www.federico.hernandez.org/ -> leere Domain
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 19.08.2002 // auskommentiert 31.7.03, nicht mehr mit UDO erstellt!
+# !item (!DE) (!xlink [Christlicher Entwicklungsdienst][http://www.ced-online.de])
+# (Martin Elsässer)
+# alt: http://www.atari-computer.de/martin_elsaesser/CED/index.html
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# existiert nicht mehr
+# !item (!DE) (!xlink [Einführung in Java][http://wwwdce.rz.uni-karlsruhe.de/~waifbt02/index.html])
+# (Jens Scheffler, Michael Ohr, Oliver Wagner, Thomas Much)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 19.08.2002
+!item (!DE) (!xlink [Ein Buch über Tee][http://www.teebuch.de/]) (Andreas Walter)
+# alt: http://www.bawue.de/~awalter/Wissen/Tee/teebuch.htm
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 19.08.2002
+# auskommentiert 31.07.2003, existiert nicht mehr
+!begin_ignore
+!item (!DE) (!xlink [Who-is-Who Fido.GFABASIC.GER][http://www.student.uni-kl.de/~hherzog/gfawiw/GFAWIW.htm])
+(Holger Herzog)
+!iflang [german]
+Einige Who-is-Who-Seiten von den Lesern der ins Mausnet importierten
+Fidogruppe Fido.GFABASIC.GER. Erstellt von Holger Herzog. (Stand 1997)
+!else
+Some who-is-who-pages from readers of fido group Fido.GFABASIC.GER which was imported into Mausnet.
+Made by Holger Herzog. (Last update 1997)
+!endif
+!end_ignore
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# existiert nicht mehr
+# !item (!DE) (!xlink [United 3 Homepage] [http://wipux2.wifo.uni-mannheim.de/~son01087/united_3.html])
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft und aktualisiert 19.08.2002
+!iflang [german]
+!item (!DE) (!xlink [Bundesfachgruppe~IT] [http://www.bfg-it.de/]) (Günter Hanke) (!nl)
+# alt: http://www.arbeitskreis-edv.de/
+Homepage der (!I)Bundesfachgruppe~IT(!i) im deutschen Blinden- und Sehbehindertenverband e.V.: Informationen
+für Blinde und hochgradig Sehbehinderte InformatikerInnen, ProgrammiererInnen, DV-Kaufleute
+und andere in der EDV tätige Personen.
+!begin_itemize !short
+!item (!DE) (!xlink [Windows-Programmierung mit Delphi für Blinde] [http://www.arbeitskreis-edv.de/delphi/])
+(Ralf Schulz/Günter Hanke)
+!end_itemize
+!else
+!item (!DE) (!xlink [Bundesfachgruppe~IT] [http://www.bfg-it.de/]) (Günter Hanke) (!nl)
+"computer working comitee" homepage, from the (!I)Blinden- und Sehbehindertenverband e.V.(!i)
+(german association of blind and eyesight-handicapped persons).
+!begin_itemize !short
+!item (!DE) (!xlink [Programming Windows with Delphi for Blinds] [http://www.arbeitskreis-edv.de/delphi/])
+(Ralf Schulz/Günter Hanke)
+!end_itemize
+!endif
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+#############################################################################################################
+
+!hline
+!ifdest [html]
+!iflang [german]
+!begin_center
+(!url [Zurück zur Hauptseite] [../])
+!end_center
+!else
+!begin_center
+(!url [Back to the Main Page] [../])
+!end_center
+!endif
+!endif
+
+# !autoref [on]
+!end_document

@@ -1,0 +1,4 @@
+#!/bin/sh
+udo --html --verbose --force-long -D LANG_EN --tree -o ../html-en/index.html ./manual.u
+mv ../html-en/index.ulh ../manual-en.ulh
+mv ../html-en/index.uth ../manual-en.uth
