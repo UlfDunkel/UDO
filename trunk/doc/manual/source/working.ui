@@ -456,6 +456,9 @@ gestellten Fragen samt der passenden Antwort.
 
 ############################################################
 !iflang [german]
+!ifdest [html]
+!hline
+!endif
 !item [Wieso heißt UDO ''UDO''?]
 
 Als ich mit der Programmierung von UDO begann, brauchte ich einen
@@ -476,6 +479,9 @@ By the way: The author's first name isn't Udo, he's called Dirk!
 !endif
 
 ############################################################
+!ifdest [html]
+!hline
+!endif
 !iflang [german]
 !item [Wie spricht man ''UDO'' aus?]
 
@@ -491,6 +497,9 @@ Please don't pronounce it like ''You do''.
 !endif
 
 ############################################################
+!ifdest [html]
+!hline
+!endif
 !iflang [german]
 !item [Woher bekomme ich die aktuellen Versionen?]
 
@@ -618,6 +627,9 @@ The Unix version may have longer names like (!V)(!UDOR)_ger_linux.tar.gz(!v) or
 !endif
 
 ############################################################
+!ifdest [html]
+!hline
+!endif
 !iflang [german]
 !item [Wird es Portierungen auf andere Systeme geben?]
 
@@ -667,6 +679,9 @@ If you would like to port UDO to a system which isn't listed above, please (!lin
 !endif
 
 ############################################################
+!ifdest [html]
+!hline
+!endif
 !iflang [german]
 !item [Können auch ''systemfremde'' Formate erzeugt werden?]
 
@@ -694,6 +709,9 @@ charsets are not the same.
 !endif
 
 ############################################################
+!ifdest [html]
+!hline
+!endif
 !iflang [german]
 !item [Kann man Texte ""hier"" schreiben und ""dort"" konvertieren?]
 
@@ -719,49 +737,9 @@ or (!KW [code] [[mac!!]]).
 !endif
 
 ############################################################
-# ToDo: dieser Abschnitt ist überholt!
-
-!iflang [german]
-!item [Kommen in Zukunft weitere Ausgabeformate hinzu?]
-
-Ich plane, die folgenden Formate in Zukunft zu unterstützen:
-
-!begin_itemize !short
-!item Apple Guide
-!item HP-Helptag-SGML
-!item OS/2-Hilfe
-!item Portable Document Format ''PDF'', Adobe Acrobat Reader
-!item PostScript
-!end_itemize
-
-Die Unterstützung dieser Formate scheitert bisher teils an
-fehlender Dokumentation, teils an der Komplexität (z.B. vom PDF),
-teils auch daran, daß ich nicht weiß, ob man für ein Format
-Lizenzgebühren bezahlen muß.
-
-!endif
-# ------------------------------------------------------------------------------
-!iflang [english]
-!item [Do you want to support other destination formats in the future?] ~
-
-Yes, I want to support the following formats if I will get any information
-about them and if I'm allowed to generate them without paying any licences
-to anybody:
-
-!begin_itemize !short
-!item	Apple Guide
-!item	HP HelpTag SGML
-!item	OS/2-Help
-!item	Portable Document Format ''PDF'', Adobe Acrobat Reader
-!item	Postscript
-!end_itemize
-!endif
-
 !ifdest [html]
-!smallskip
+!hline
 !endif
-
-############################################################
 !iflang [german]
 !item [Kann sich die UDO-Syntax noch ändern?]
 
@@ -791,6 +769,9 @@ to get to know about the changes in the past.
 !endif
 
 ############################################################
+!ifdest [html]
+!hline
+!endif
 !iflang [german]
 !item [Wie funktioniert UDO?]
 
@@ -826,6 +807,9 @@ on reading the source file.
 !endif
 
 ############################################################
+!ifdest [html]
+!hline
+!endif
 !iflang [german]
 !item [Wie referenziert UDO?]
 
@@ -857,6 +841,9 @@ references until you use the switch (!KW [autoref] [[on!!]]).
 !endif
 
 ############################################################
+!ifdest [html]
+!hline
+!endif
 !iflang [german]
 !item [Wie verweist man auf Stellen des aktuellen Kapitels?]
 
@@ -896,6 +883,9 @@ placeholder. An example:
 !endif
 
 ############################################################
+!ifdest [html]
+!hline
+!endif
 !iflang [german]
 !item [Wie bekomme ich Bilder in ein Inhaltsverzeichnis?]
 
@@ -919,6 +909,8 @@ sonst auch benutzen. Beispiel:
 !endif
 # ------------------------------------------------------------------------------
 !iflang [english]
+!item [How can I get pictures into a table of content?]
+
 You have to make your own table of contents, that means you have to leave
 the (!KW [tableofcontents]) command. An example:
 
@@ -933,6 +925,78 @@ the (!KW [tableofcontents]) command. An example:
 !node First chapter
 !end_verbatim
 !end_quote
+!endif
+
+############################################################
+!ifdest [html]
+!hline
+!endif
+!iflang [german]
+!item [Welchen Editor kann ich für UDO verwenden?]
+
+Hier einige Vorschläge:
+
+!begin_table [|l|c|c|] !hline
+"e" (e.exe) !! OS/2 !! Bestandteil des Systems
+!hline
+(!url [Kate, KEdit, KWrite] [http://kate.kde.org/]) !! Linux/KDE !! Open Source
+!hline
+(!url [NotePad++] [http://www.froeb-software.de/]) !! Windows !! Freeware
+!hline
+(!url [Pepper] [http://www.slacksolutions.com/]) !! Linux, Mac, Windows !! kommerziell
+!hline
+(!url [SciTe] [http://www.scintilla.org/]) !! Linux, Windows !! Open Source
+!hline
+(!url [SuperEdi] [http://www.wolosoft.com/]) !! Windows !! Freeware
+!hline
+(!url [TextPad] [http://www.texpad.com/]) !! Windows !! Freeware
+!hline
+(!url [UltraEdit32] [http://www.ultraedit.com/]) !! Windows !! kommerziell
+!hline
+!end_table
+
+# Bemerkungen 11.05.2005 - Ulrich Kretschmer:
+# Auswahl-/Testkriterien:
+# a) kommt unter Windows mit Unix/Linux-Zeilenumbrüchen zurecht
+# b) kann überlange Zeilen am Bildschirm umbrechen (word wrap)
+# c) Zeilennummern-Darstellung auf Basis der Datei-Zeilenumbrüche, nicht auf Basis der Bildschirmanzeige
+# Ergebnisse:
+# * BEditor, www.ubesoft.de: (c) funktioniert nicht; eher einfacher Editor
+# * iEdit, www.bitshape.com: kann keine Umbrüche, d.h. (b) nicht erfüllt
+# * Boxer Text Editor, www.boxersoftwae.com: Situation bzgl. Umbrüchen unklar
+# * FoldMaster, www.foldmaster.de: kann keine Umbrüche; "Falteneditor" = interessantes Konzept
+# * NaSTex, www.saschaseidel.de, Freeware: (c) nicht erfüllt; aber (b) einfach umschaltbar
+# * NotePro, www.crystaloffice.com: (a) nicht erfüllt, (b) ja, (c) nicht erfüllt
+# * NoteTab light, www.notetab.com: (c) nicht erfüllt
+# * Pepper:
+# * PFE Programmer's File Editor, www.lancs.ac.uk/people/cpaap/pfe, kann keine Umbrüche, Stand 1999
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!item [Which editor can I use for UDO?]
+
+Here are some suggestions:
+
+!begin_table [|l|c|c|] !hline
+"e" (e.exe) !! OS/2 !! part of the system
+!hline
+(!url [Kate, KEdit, KWrite] [http://kate.kde.org/])  !! Linux/KDE !! Open Source
+!hline
+(!url [NotePad++] [http://www.froeb-software.de/]) !! Windows !! Freeware
+!hline
+(!url [Pepper] [http://www.slacksolutions.com/]) !! Linux, Mac, Windows !! commercial
+!hline
+(!url [SciTe] [http://www.scintilla.org/]) !! Linux, Windows !! Open Source
+!hline
+(!url [SuperEdi] [http://www.wolosoft.com/]) !! Windows !! Freeware
+!hline
+(!url [TextPad] [http://www.texpad.com/]) !! Windows !! Freeware
+!hline
+(!url [UltraEdit32] [http://www.ultraedit.com/]) !! Windows !! commercial
+!hline
+!end_table
+
 !endif
 
 !end_description
