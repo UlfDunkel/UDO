@@ -7460,7 +7460,7 @@ LOCAL BOOLEAN pass1 (char *datei)
 		uiCurrFileLine= uiFileLines[iFilesOpened];
 
 		lPass1Lines++;
-
+		
 		if ( break_action() )
 		{	iFilesOpened--;
 			myTextClose(file);
@@ -9185,7 +9185,11 @@ GLOBAL BOOLEAN udo (char *datei)
 
 	if (desttype==TOHTM || desttype==TOMHH)
 	{
-		memcpy(&old_outfile, &outfile, sizeof(MYFILE));
+		strcpy(old_outfile.full, outfile.full);
+		strcpy(old_outfile.driv, outfile.driv);
+		strcpy(old_outfile.path, outfile.path);
+		strcpy(old_outfile.name, outfile.name);
+		strcpy(old_outfile.suff, outfile.suff);
 	}
 	
 	init_vars_spec();
@@ -9348,7 +9352,12 @@ GLOBAL BOOLEAN udo (char *datei)
 
 
 	if (desttype==TOHTM || desttype==TOMHH)	/* Alten Filenamen zurueckholen */
-	{	memcpy(&outfile, &old_outfile, sizeof(MYFILE));
+	{
+		strcpy(outfile.full, old_outfile.full);
+		strcpy(outfile.driv, old_outfile.driv);
+		strcpy(outfile.path, old_outfile.path);
+		strcpy(outfile.name, old_outfile.name);
+		strcpy(outfile.suff, old_outfile.suff);
 		sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, outfile.suff);
 	}	
 
@@ -9473,7 +9482,7 @@ GLOBAL BOOLEAN udo (char *datei)
 	}
 
 	init_vars();
-
+	
 	return ret;
 }	/* udo */
 
@@ -9754,7 +9763,12 @@ GLOBAL BOOLEAN udo2udo (char *datei)
 
 	if (desttype==TOHTM || desttype==TOMHH)
 	{
-		memcpy(&old_outfile, &outfile, sizeof(MYFILE));
+		strcpy(outfile.full, old_outfile.full);
+		strcpy(outfile.driv, old_outfile.driv);
+		strcpy(outfile.path, old_outfile.path);
+		strcpy(outfile.name, old_outfile.name);
+		strcpy(outfile.suff, old_outfile.suff);
+		sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, outfile.suff);
 	}
 	
 	init_vars_spec();
@@ -10748,4 +10762,3 @@ GLOBAL void dest_adjust ( void )
 /*	######################################################################
 	# udo.c
 	######################################################################	*/
-
