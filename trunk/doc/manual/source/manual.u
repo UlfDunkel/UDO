@@ -17,6 +17,11 @@
 !code [iso]
 
 # ------------------------------------------------------------------------------
+# Spracheinstellung für dieses Dokument / Language of this document
+# ------------------------------------------------------------------------------
+!include lang.ui
+
+# ------------------------------------------------------------------------------
 # Die deutschen Trennregeln befinden sich in der Datei hyphen-de.ui
 # ------------------------------------------------------------------------------
 # The english syllabification patterns are inside the file hyphen-en.ui
