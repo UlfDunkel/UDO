@@ -1,7 +1,7 @@
 ################################################################################
 # doc/manual/source/manual.u
 # Hauptfile der Anleitung zu UDO / udo manual main page
-# letzte Änderungen: 29.01.2004 / last changes: Jan 29, 2004
+# letzte Änderungen: 02.02.2004 / last changes: Feb 2, 2004
 ################################################################################
 # In diesem File befindet sich kein Text! Alle Texte werden nachgeladen
 # This file doesn't contain any text! Any text will be included from other files.
@@ -49,7 +49,6 @@
 #    Documentation with special HTML parameters for the UDO website (see below):
 #       $ udo ... -D UseForWeb ...
 ################################################################################
-
 
 # ------------------------------------------------------------------------------
 # Die Doku-Quellen wurden im Zeichensatz ISO-8859-1 erstellt.
@@ -271,14 +270,10 @@
 !iflang [german]
 !macro DocumentationWorkInProgress Die UDO-Anleitung ist im Moment in Überarbeitung. Zwischenstände stehen auf der UDO-Website derzeit nur zum Online-Lesen zur Verfügung, aber nicht zum Download.
 !macro FollowingOutdated (!I)Die nachfolgenden Textpassagen sind z.T. nicht mehr aktuell und sind zur Überarbeitung vorgesehen.(!i)
-# wird in history.txt verwendet:
-!macro PUBLISHED (!1) wurde am (!2) veröffentlicht.
 !endif
 !iflang [english]
 !macro DocumentationWorkInProgress The UDO Guide is actually in revision. Intermediate versions are currently only available on the UDO website for online-reading, but not for download.
-!macro (!I)FollowingOutdated The following text passages are partly outdated and will be revised.(!i)
-# used in history.txt:
-!macro PUBLISHED (!1) was published on (!2).
+!macro FollowingOutdated (!I)The following text passages are partly outdated and will be revised.(!i)
 !endif
 
 
@@ -289,12 +284,14 @@
 !macro CHANGES Änderungen
 !macro GENERAL Allgemeines
 !macro NEWS Neuheiten
+!macro PUBLISHED (!1) wurde am (!2) veröffentlicht.
 !endif
 !iflang [english]
 !macro BUGFIXES Bugfixes
 !macro CHANGES Changes
 !macro GENERAL General
 !macro NEWS News
+!macro PUBLISHED (!1) was published on (!2).
 !endif
 
 
