@@ -341,7 +341,9 @@ GLOBAL BOOLEAN set_docinfo ( void )
 	size_t contlen;
 
 	tokcpy2(s, 512);
-	
+	/* New: Fixed bug #0000040 in r6.3pl16 [NHz] */
+	node2postscript(s, KPS_PS2DOCINFO);
+
 	contlen= get_brackets_ptr(s, &cont, &data);
 	
 	if (contlen==0 || cont==NULL || data==NULL)
@@ -353,6 +355,9 @@ GLOBAL BOOLEAN set_docinfo ( void )
 	strncpy(inhalt, cont, contlen);
 	inhalt[contlen]= EOS;
 	del_whitespaces(inhalt);
+
+	/* New: Fixed Bug #0000040 in r6.3pl16 [NHz] */
+	node2postscript(data, KPS_DOCINFO2PS);
 
 	if (strcmp(inhalt, "authorimage")==0)
 	{	del_whitespaces(data);
@@ -1337,6 +1342,8 @@ GLOBAL void c_maketitle ( void )
 				outln("newline");
 			}
 			c_newpage();
+			/* New: Fixed bug #0000040 in r6.3pl16 [NHz] */
+			outln("newline");
 			break;
 
 	}
