@@ -1952,12 +1952,7 @@ GLOBAL void c_vars ( char *s )
 			qreplace_all(s, "(!laugh)", 8, "\\verb/:-)/", 10);
 			qreplace_all(s, "(!TeX)", 6, "\\TeX{}", 6);
 			qreplace_all(s, "(!LaTeX)", 8, "\\LaTeX{}", 8);
-			if (bTex2e)
-			{	qreplace_all(s, "(!LaTeXe)", 9, "\\LaTeXe{}", 9);
-			}
-			else
-			{	qreplace_all(s, "(!LaTeXe)", 9, "\\LaTeX{}2${}_{\\textstyle\\varepsilon}$", 37);
-			}
+			qreplace_all(s, "(!LaTeXe)", 9, "\\LaTeXe{}", 9);
 			qreplace_all(s, "(!copyright)", 12, "\\copyright{}", 12);
 			qreplace_all(s, "(!alpha)", 8, "$\\alpha$", 8);
 			qreplace_all(s, "(!beta)", 7, "$\\beta$", 7);

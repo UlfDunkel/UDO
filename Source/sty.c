@@ -211,28 +211,14 @@ GLOBAL void c_internal_styles ( char *s )
 	{
 		case TOTEX:
 		case TOPDL:
-			if (bTex2e)
-			{
-				qreplace_all(ptr, BOLD_ON, STYLELEN, "\\textbf{", 8);
-				qreplace_all(ptr, BOLD_OFF, STYLELEN, "}", 1);
-				qreplace_all(ptr, ITALIC_ON, STYLELEN, "\\textit{", 8);
-				qreplace_all(ptr, ITALIC_OFF, STYLELEN, "}", 1);
-				qreplace_all(ptr, TWRITER_ON, STYLELEN, "\\texttt{", 8);
-				qreplace_all(ptr, TWRITER_OFF, STYLELEN, "}", 1);
-				qreplace_all(ptr, UNDER_ON, STYLELEN, "", 0);
-				qreplace_all(ptr, UNDER_OFF, STYLELEN, "", 0);
-			}
-			else
-			{
-				qreplace_all(ptr, BOLD_ON, STYLELEN, "{\\bf ", 5);
-				qreplace_all(ptr, BOLD_OFF, STYLELEN, "}", 1);
-				qreplace_all(ptr, ITALIC_ON, STYLELEN, "{\\it ", 5);
-				qreplace_all(ptr, ITALIC_OFF, STYLELEN, "}", 1);
-				qreplace_all(ptr, TWRITER_ON, STYLELEN, "{\\tt ", 5);
-				qreplace_all(ptr, TWRITER_OFF, STYLELEN, "}", 1);
-				qreplace_all(ptr, UNDER_ON, STYLELEN, "\\underline{", 11);
-				qreplace_all(ptr, UNDER_OFF, STYLELEN, "}", 1);
-			}
+			qreplace_all(ptr, BOLD_ON, STYLELEN, "\\textbf{", 8);
+			qreplace_all(ptr, BOLD_OFF, STYLELEN, "}", 1);
+			qreplace_all(ptr, ITALIC_ON, STYLELEN, "\\textit{", 8);
+			qreplace_all(ptr, ITALIC_OFF, STYLELEN, "}", 1);
+			qreplace_all(ptr, TWRITER_ON, STYLELEN, "\\texttt{", 8);
+			qreplace_all(ptr, TWRITER_OFF, STYLELEN, "}", 1);
+			qreplace_all(ptr, UNDER_ON, STYLELEN, "\\underline{", 11);
+			qreplace_all(ptr, UNDER_OFF, STYLELEN, "}", 1);
 			sprintf(tex_verb_on, "\\verb%c", cTexVerb);
 			sprintf(tex_verb_off, "%c", cTexVerb);
 			replace_all(ptr, VERB_ON, tex_verb_on);
