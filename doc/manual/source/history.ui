@@ -1,5 +1,5 @@
 # doc/manual/source/history.ui
-# letzte Änderungen: 13.01.2004 / last change: Jan 13, 2004
+# letzte Änderungen: 14.01.2004 / last changes: Jan 14, 2004
 
 
 !iflang [german]
@@ -505,7 +505,7 @@ wird unterstützt.
       (!T)!/doclayout [ps] [paper] foo(!t) (!nl)
       Möglich Angaben für foo sind A3PORTRAIT, A3LANDSCAPE, A4PORTRAIT,
       A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE.
-      
+
       (!T)!/doclayout [ps] [openMode] foo(!t) (!nl)
       Mögliche Angaben stehen in der Dokumentation zu den pdf-marks.
       
@@ -638,7 +638,7 @@ wird unterstützt.
       und (!T)(!/url ...)(!t) are transposed for PDF (via Postscript)
 !item Footnotes are transposed for postscript
 !item Tables are transposed legible with monospaced characters
-!item Commands (!T)!/bigskip(!T), (!T)!/medskip(!t) and (!T)!/smallskip(!t)
+!item Commands (!T)!/bigskip(!t), (!T)!/medskip(!t) and (!T)!/smallskip(!t)
       are transposed legible now.
 !item All nodes are set as ""Named Destination"", so it is possible to
       link from outside directly to every node of a pdf file.
