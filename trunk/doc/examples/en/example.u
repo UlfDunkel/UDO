@@ -1,0 +1,53 @@
+########################################
+# @(#) An example for UDO
+# @(#) Dirk Hagedorn, 1996/04/16
+########################################
+
+!raw [stg] @subject "Documentation/Utilities"
+
+!docinfo [title]   A short example for
+!docinfo [program] UDO
+!docinfo [date]    (!today)
+!docinfo [author]  Dirk Hagedorn
+
+!use_auto_subtocs    [info,html,stg,tvh,win,aqv]
+!use_auto_subsubtocs [info,html,stg,tvh,win,aqv]
+!no_effects          [asc]
+!use_justification   [asc]
+
+########################################
+
+!begin_document
+!maketitle
+!tableofcontents
+
+!node Automatic layout
+
+UDO layouts the source file automatically. You don't have
+to take care about spaces between
+two                           words
+because UDO enters line breaks on its own.
+
+
+
+Further more it doesn't make sense but doesn't disturb UDO
+if you enter more than one empty line between to
+paragraphs.
+
+Paragraphs are split by using empty lines or commands.
+
+
+!node A chapter
+This is the text of this chapter.
+
+Due to the switches inside the preamble it follows a
+table-of-contents-like list of all sections of this chapter.
+
+!subnode A section
+This is the text of this section. A ""subsubtoc"" will
+follow due to the switches inside the preamble, too.
+
+!subsubnode A subsection
+This is the text of this subsection.
+
+!end_document
