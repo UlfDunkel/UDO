@@ -1,0 +1,30 @@
+!subsubnode Ausgabe von Bilddateinamen (Ulf Dunkel)
+(!img [rot2] [Wichtig])~~|~~(!img [gelb2] [Schwierig])
+Ausgabe von Bilddateinamen (optional), damit diese ggf. von Hand
+eingefgt werden k”nnen. (!nl)
+(!U)Hintergrund:(!u) Wir verwenden die RTF- und ASCII-Ausgabe, um unsere
+Calamus-Handbcher aus UDo-Code zu erzeugen, indem wir die Texte nur
+noch in UDo-Dateien pflegen und dann ausgeben.
+Die Bilder werden momentan noch "von Hand" dann in den 
+Calamus-Dokumenten plaziert.
+
+
+Beispiel:
+!begin_verbatim
+(im Definitions-Teil:)
+!image_path_output[asc,rtf]
+
+!ifdest[asc,rtf]
+!image ..\..\foo
+!image images\foo2
+!endif
+!end_verbatim
+
+Beispiel fr den zu erzeugenden Ausgabe-Text in ASCII und RTF:
+!begin_verbatim
+[IMAGE ..\..\foo]
+[IMAGE images\foo2]
+!end_verbatim
+
+(Wenn dann mit der M”glichkeit den ALT-Text wahlweise mit auszugeben
+und auch wahlweise nur den Dateinamen oder mit Pfad.)

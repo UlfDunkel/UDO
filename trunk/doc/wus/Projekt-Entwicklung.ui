@@ -1,0 +1,284 @@
+In diesem Kapitel soll alles aufgefÅhrt werden, was auf irgendeine Weise
+mit Mehr!-sprachig!-keit zu tun hat. Besonderes Augen!-merk ist dabei
+sicher!-lich auf die HTML-Ausgabe zu richten, da diese hÑufig benutzt
+wird und AFAIK die meisten Mîglich!-keiten bietet. Das ganze ist noch
+ziemlich chaotisch aufgefÅhrt, viele Sachen weiû ich auch noch nicht.
+Wichtig ist sicherlich erstmal die Umsetzung der Problematik mit den
+unterschiedlichen Codepages. Die UnterstÅtzung von mehrsprachigen
+Dokumenten ist wohl erstmal schmÅckendes Beiwerk.
+
+GrundsÑtzlich mÅssen wohl zwei Bereiche betrachtet werden:
+!begin_itemize !short
+!item die Eingabe des UDO-Quelltextes
+!item die Ausgabe der Zieldateien
+!end_itemize
+
+!medskip
+!subsubsubnode Eingabe
+Bei der Eingabe des Quelltextes in einem Editor tauchen prinzipiell
+zwei Probleme auf. Unter!-schiede zwischen den Betriebs!-systemen und
+den ver!-schie!-denen Sprachen.
+
+Damit die Erzeugung der Zieldateien nicht in ein Chaos ausartet, ist die
+Pflege der ver!-schiedenen Sprachen in einem Projekt wohl not!-wendig.
+Das hat den Vor!-teil, daû auch gemischte Texte erzeugt werden kînnen.
+Man hat z.~B. nur den wich!-tigsten Teil eines Dokumentes Åber!-setzt
+und kann trotz!-dem eine voll!-stÑndige (!nolink [Dokumen!-tation])
+erzeugen. GrundsÑtzlich sollte den Nodes (Subnodes etc.) eine Sprache
+zugeordnet sein.
+
+Derzeit werden folgende Codepages von UDO unterstÅtzt:
+!begin_itemize !short
+!item Atari ST (!V)(!/code [tos])(!v)
+!item Apple Macintosh (!V)(!/code [mac])(!v)
+!item HP Roman 8 (!V)(!/code [hp8])(!v) (!B)braucht die jemand?(!b)
+!item IBM-PC (!V)(!/code [dos])(!v)
+!item IBM-PC (!V)(!/code [cp437])(!v)
+!item ISO Latin 1, Windows ANSI (!V)(!/code [iso])(!v)
+!item ISO Latin 1, Windows ANSI (!V)(!/code [latin1])(!v)
+!item ISO Latin 1, Windows ANSI (!V)(!/code [iso-8859-1])(!v)
+!item OS/2 (!V)(!/code [os2])(!v)
+!item OS/2 (!V)(!/code [cp850])(!v)
+!item NeXT (!V)(!/code [next])(!v)
+!end_itemize
+
+Im Sinne einer UnterstÅtzung von Standards schlage ich vor, die
+weiteren ISO Latin Codepages zu unterstÅtzen, also
+!begin_itemize !short
+!item (!B)ISO Latin 2(!b) (!nl)
+      fÅr Kroatisch, Polnisch, RumÑnisch, Slowakisch, Slowenisch,
+      Tschechisch, Ungarisch
+!item (!B)ISO Latin 3(!b) (!nl)
+      fÅr Experanto, Galizisch, Maltesisch, TÅrkisch
+!item (!B)ISO Latin 4(!b) (!nl)
+      fÅr Estonisch, Lettisch, Litauisch
+!item (!B)ISO Latin 5(!b) (!nl)
+      fÅr Bulgarisch, Mazedonisch, Russisch, Serbisch, Ukrainisch
+!item (!B)ISO Latin 6(!b) (!nl)
+      fÅr Arabisch (!B)(kann wohl erstmal wegfallen wegen der
+      verkehrten Schreibweise)(!b)
+!item (!B)ISO Latin 7(!b) (!nl)
+      fÅr Neugriechisch
+!item (!B)ISO Latin 8(!b) (!nl)
+      fÅr HebrÑisch (!B)(kann wohl erstmal wegfallen wegen der
+      verkehrten Schreibweise)(!b)
+!item (!B)ISO Latin 9(!b) (!nl)
+      fÅr TÅrkisch
+!item (!B)ISO Latin 10(!b) (!nl)
+      fÅr GrînlÑndisch (Inuit) und LÑppisch (Sami)
+!end_itemize
+
+Wenn mîglich (BrowserunterstÅtzung?) sollten wir auf Windows-Codepages
+verzichten und die ISO-ZeichensÑtze benutzen. (!B)Wer weiû, ob z.~B.
+die Codepages cp852 und windows 1252 und ISO Latin 2 alle den gleichen
+Inhalt haben?(!b)
+
+Ulrich Kretschmer schlug vor, fÅr die Umsetzung von verschiedenen
+Codepages das GNU recode Programm zu benutzen.
+
+!medskip
+Hier habe ich folgenden Vorschlag zur Erweiterung der Projektdatei
+zu machen. Die Projekt!-datei fristet ja mangels Unter!-stÅtzung
+zur Zeit eher ein Mauer!-blÅmchen!-dasein, da die UDO-Shell fÅr GEM
+die einzige ist, die sie unter!-stÅtzt. Die Projekt!-datei kînnte
+aber in vieler Hinsicht hilf!-reich sein, denn durch sie kînnte
+eine Shell bestimmte Text!-stellen im Editor direkt anspringen,
+z.~B. Nodes, Bilder, Labels, Indizes, etc.. Auûer!-dem kann die
+Projekt!-datei mehr!-sprachige Texte unter!-stÅtzen, in dem auch
+diese direkt ange!-sprungen werden kînnen.
+
+FÅr die Projektdatei schlage ich daher folgendes vor, um die
+énderungen nicht zu umfang!-reich zu machen und kompatibel
+zur alten Projekt!-datei zu bleiben:
+
+Erweiterung des Eintrages Node um die Sprache~~
+(!V)node <level> <file> <line> <caption> <lang>(!v)
+
+!begin_verbatim
+langon
+node	1	index.u	123	Gedanken zum Buchstaben A	de
+node	1	index.u	140	Impression to letter A	en
+langoff
+!end_verbatim
+
+Zugegebenermaûen ist das nicht gerade besonders toll, wie
+die Projekt!-datei aufgebaut ist, aber ich will nichts
+groû!-artiges Ñndern, bevor andere potentielle Shell-Ersteller
+nicht mitziehen.
+
+Die Nodes (Subnodes, etc.) mÅssen dann auch entsprechend
+gekennzeichnet sein.
+
+!begin_ignore
+
+!begin_verbatim
+<?xml standalone="yes"?>
+<udoproject>
+ <main>
+  <node name="Gedanken zum Buchstaben A" lang ="de">
+   <subnode name="Gedanken zum Buchstaben é" lang="de">
+    <index name="éhnliches" />
+   </subnode>
+  </node>
+  <node name="Gedanken zum Buchstaben B" lang="de">
+   <image ref="b.gif" alt="Ein schînes Bild vom B"/>
+  </node>
+  <node name="Gedanken zum Buchstaben C" lang="de">
+   ...
+  </node>
+  <node name="Impression to letter C" lang="en">
+   ...
+  </node>
+  ...
+ </main>
+ <appendix>
+  <node name="Gedanken zum Alphabet">
+   ...
+  </node>
+ </appendix>
+</udoproject>
+!end_verbatim
+
+Wie ihr seht, habe ich die Nodes etc. als Bereiche definiert,
+die einen Anfang und ein Ende haben. Ob es not!-wendig ist,
+daû die Shell weiû, wo ein Node zu Ende ist, weiû ich nicht.
+Es kînnte aber vielleicht mal spÑter von Bedeutung werden.
+
+Bilder und Index (Labels) habe ich als leere Elemente definiert,
+da diese ja an einer bestimmten Stelle im Text stehen.
+!end_ignore
+
+
+!medskip
+!subsubsubnode Ausgabe
+Bei der Ausgabe in die Formate, die keine besondere SprachunterstÅtzung
+bieten ist es nur wichtig, daû die richtigen Teile des Quell!-textes
+Åber!-setzt werden.
+
+Bei den Zielformaten, die nicht mehr von einem Anwendungsprogramm
+interpretiert werden (z.B. ASCII) muû der Benutzer die Ziel-Codepage
+wÑhlen kînnen, damit z.~B. auch auf einem Atari ein Windows-Text
+erzeugt werden kann. Bei allen anderen Zielformaten muû im einzelnen
+geprÅft werden, ob die gewÅnschte Codepage unterstÅtzt wird.
+
+Folgende Formate werden in Bezug auf Sonderzeichen nicht mehr
+interpretiert:
+!begin_itemize !short
+!item Amiga Guide
+!item ASCII
+!item C-Source (!grin)
+!item Pascal-Source (!grin)
+!item ST-Guide
+!end_itemize
+
+Die folgenden Formate werden bedingt auf Sonderzeichen interpretiert:
+!begin_itemize !short
+!item Apple Quickview
+!item Rich Text Format
+!item WinHelp 3 und 4
+!end_itemize
+
+Die Hypertext Markup Language hat die meisten Mîglichkeiten in
+Bezug auf die Interpretation verschiedene Sprachen und Codepages.
+
+!medskip
+(!B)Wer kann etwas zu folgenden Ausgabeformaten sagen?(!b)
+!begin_itemize !short
+!item DRC (Sonderzeichen werden nicht speziell gekennzeichnet)
+!item Texinfo (Umlaute werden zu ae, oe ue umgesetzt)
+!item OS/2 IPF (Sonderzeichen werden entsprechend der Quell-Codepage
+      gesetzt)
+!item Linuxdoc SGML (Umlaute werden HTML-kodiert; Ausgabe ist wohl
+      ISO Latin-1)
+!item LyX (Sonderzeichen werden entsprechend der Quell-Codepage
+      gesetzt)
+!item Manualpage (Sonderzeichen werden entsprechend der Quell-Codepage
+      gesetzt)
+!item NROFF (Umlaute werden zu ae, oe ue umgesetzt)
+!item Postscript (Umlaute werden oktal umgesetzt, Codepage ist wohl
+      Windows ANSI)
+!item PureC-Help (Sonderzeichen werden entsprechend der Quell-Codepage
+      gesetzt)
+!item Turbovision-Help (Sonderzeichen werden entsprechend der
+      Quell-Codepage gesetzt)
+!end_itemize
+
+!medskip
+(!B)Wer weiû, welche Browser welche Codepages unterstÅtzen?(!b)
+!begin_itemize !short
+!item CAB (anscheinend nur ISO 8859-1)?
+!item iCab (Westeuropa/USA, Mitteleuropa, Griechisch, TÅrkisch, Kyrillisch,
+      Baltisch, Arabisch, HebrÑisch, Japanisch, Koreanisch, Chinesich Big5,
+      Chinesisch GB 2312, Devanagari, Gurmukhi, Gujarati, ThailÑndisch,
+      Symbol, Dingbats)
+!item MSIE <= 4
+!item MSIE >= 5
+!item Netscape 4
+!item Netscape 6
+!item Opera
+!item Konqueror (ISO 8859-1 bis ISO 8859-9 ISO 8859-13, ISO 8859-15
+      (wichtig fÅr den Euro &euro;), ISO-10646-UCS-2, big5, cp 1250, cp 1252,
+      cp 1253, cp 1254, cp 1255, eucjp, euckr, gb2312, gbk, ibm852,
+      jis7, skis, utf16, utf8)
+!item Lynx (alle ISO Latin 8859-1 bis 8859-10; windows 1250, 1251,
+      1252, 1253, 1255, 1356, 1257; cp 437, cp737, cp755, cp850,
+      cp852, cp862, cp864, cp866, cp869; utf-8; us-ascii; euc-cn,
+      euc-kr, euc-jp; next; macintosh; und einige mehr)
+!item Light of Adamas
+!item ...
+!end_itemize
+
+!medskip
+RTF Version 1.5 unterstÅtzt die ""wichtigen"" Codepages 437 (US-IBM),
+819 (Windows 3.1 US und Westeuropa), 852 (OsteuropÑisch), 860
+(Portugiesisch), 862 (HebrÑisch), 863 (Franz.-Kanadisch), 864
+(Arabisch), 865 (Norwegisch), 866 (Sowjetisch?), 932 (Japanisch),
+1250 (Windows 3.1 OsteuropÑisch), 1251 (Kyrillisch)
+
+!medskip
+(!TeX)/(!LaTeX) unterstÅtzt die Codepages ascii, ISO Latin-1,
+ISO Latin-2, ISO Latin-3, ISO Latin-5, IBM 850, IBM 852, IBM 865,
+IBM 437, IBM 437de, Macintosh, Next, Windows 3.1 ANSI, Windows 1252,
+Windows 1250; DEC Multinational
+
+(!B)Kann hier ein (!TeX)-Kundiger mal was zu sagen.(!b) FÅr pdf(!TeX)
+gilt wohl das gleiche wie fÅr (!TeX).
+
+!medskip
+!label HTML und Sprachen
+FÅr HTML bieten sich vielfÑltige Mîglichkeiten zur Darstellung
+unterschiedlicher Sprachen. Existieren z.~B. zusÑtzlich zu einem
+deutschen Dokument (""Leben unter Grund"") auch ein englisches
+und ein franzîsisches Dokument, so kann man innerhalb der
+HTML-Datei darauf aufmerksam machen.
+!begin_verbatim
+<link rel="alternate" href="mydoc.en.html" lang="en" title="Underground life">
+<link rel="alternate" href="mydoc.fr.html" lang="fr" title="La vie souterrainne">
+!end_verbatim
+Entsprechend kann man das englisch und franzîsische Dokument
+kennzeichnen. Ich weiû aber nicht, ob schon irgendein Browser
+darauf reagiert. Nichts desto trotz kann UDO aber automatisch
+entsprechende Links mit Flaggen-Bildern auf die anderen Dokumente
+machen.
+
+Ebenso kînnen die Dokumente im (!V)<head>(!v)-Bereich entsprechend
+gekennzeichnet werden.
+!begin_verbatim
+<meta http-equiv=Content-Language content="de">
+!end_verbatim
+
+!medskip
+Durch Content Negotiation (type var oder multiviews) kann der
+Browser angeben, welche Sprache er bevorzugt empfangen mîchte.
+UDO kînnte aus einer entsprechend gestalteten Datei mehrsprachige
+Dokumente erstellen, die der Apache sofort verwalten kînnte.
+
+Zu diesem Zweck mÅssen die Nodes (Subnodes, etc.) entsprechend
+der verwendeten Sprache gekennzeichnet sein. Auûerdem lassen
+sich dann Subnodes unter UmstÑnden nicht mehr zusammen!-fassen,
+wenn nicht fÅr alle Unter-Nodes getrennte Sprachen existieren.
+Hier mÅûte sich der Benutzer also vor Aufbau eines Projektes
+entsprechende Gedanken machen.
+
+
+ 

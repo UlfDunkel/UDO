@@ -1,0 +1,316 @@
+!subsubnode Neue Tabellenstruktur
+!html_name E-Tabell
+(!img [rot3] [Sehr wichtig])~~|~~(!img [gelb1] [sehr schwierig])
+!include Tabellen-Entwicklung.ui
+
+!smallskip
+!hline
+!newpage
+!subsubnode Mehrsprachigkeit
+!html_name E-Proj
+(!img [rot3] [sehr wichtig])~~|~~(!img [gelb2] [schwierig])
+!include Projekt-Entwicklung.ui
+
+!smallskip
+!newpage
+!hline
+!subsubnode Hierarchiestufen (Ulf Dunkel)
+(!img [rot2] [wichtig])~~|~~(!img [gelb3] [leicht]) (!nl)
+Erweiterung der Hierarchiestufen auf 7 Stufen, damit Vorschlag fr
+folgende Kommandos:
+!begin_itemize !short
+!item !/subsubsubsubnode
+!item !/ssssn
+!item !/ssssn*
+!item !/subsubsubsubsubnode
+!item !/sssssn
+!item !/sssssn*
+!item !/subsubsubsubsubsubnode
+!item !/ssssssn
+!item !/ssssssn*
+!end_itemize
+Da sowohl (!TeX)/(!LaTeX) als auch HTML nur 6~Hierarchiestufen anbieten,
+w„re es vielleicht von Vorteil nur sechs Stufen festzulegen.
+
+!smallskip
+!hline
+!subsubnode Mehrzeilige Makros bzw. Defines (Martin Els„sser, Norbert Hanz)
+(!img [rot2] [wichtig])~~|~~(!img [gelb2] [schwierig]) (!nl)
+Damit mehrzeilige Makros von UDO erkannt werden k”nnen, mu das Ende
+des Makros eindeutig identifizierbar sein. Aus diesem Grund folgender
+Vorschlag:
+!begin_verbatim
+ !\
+ 
+ !macro UOS UDO-Open-Source (Die Weiterentwicklung von UDO als !\
+ Open-Source-Projekt)
+!end_verbatim
+am Ende einer Zeile, wenn eine weitere Zeile folgt.
+
+!smallskip
+!hline
+!subsubnode Mehrzeilige šberschriften (Axel Mohr)
+(!img [rot2] [wichtig])~~|~~(!img [gelb2] [schwierig]) (!nl)
+Damit mehrzeilige Makros von UDO erkannt werden k”nnen, mu das Ende
+des Makros eindeutig identifizierbar sein. Aus diesem Grund folgender
+Vorschlag:
+!begin_verbatim
+ !\
+ 
+ !/subnode Dies ist eine lange, sehr lange, berlange šberschrift !\
+ die in dieser Zeile weitergeht
+!end_verbatim
+am Ende einer Zeile, wenn eine weitere Zeile folgt.
+
+!smallskip
+!hline
+!label Label
+!subsubnode Setzen von Sprungzielen
+(!img [rot1] [Wenig wichtig])~~|~~(!img [gelb2] [schwierig]) (!nl)
+Manchmal m”chte man Sprungziele an Begriffe/Orte setzen, die mit dem
+Kommando (!V)!/label(!v) nicht zug„nglich sind, da diese nur alleine
+in einer Zeile benutzt werden kann bzw. weil das Zielformat eine
+genau Kennzeichnung erfordert (Sprungziel in Tabellen bei HTML).
+Deshalb schlage ich folgende Syntaxerweiterung vor:
+!begin_verbatim
+...blabla (!label [Text] [Verweisziel]) blabla...
+!end_verbatim
+Damit lassen sich auch Label exakt an Items in Umgebungen knpfen
+und mssen nicht mehr irgendwo in der Luft h„ngen.
+
+
+!smallskip
+!hline
+!subsubnode Kommandozeile (Norbert Hanz)
+(!img [rot2] [wichtig])~~|~~(!img [gelb3] [leicht]) (!nl)
+Bisher erzeugt UDO die Projektdatei (*.upr) nur beim šbersetzen
+eines Projektes. Das kann je nach Umfang eines Projektes hinl„nglich
+dauern. Daher schlage ich vor einen weiteren Parameter fr die
+Kommando!-zeile festzulegen, der nur die Projektdatei erzeugt.
+
+(!V)(--)update(!v)
+
+F„llt jemandem vielleicht ein besseres Kommando ein?
+
+Wenn UDO einen Zielordner setzt, sollte gleichzeitig durch eine
+Shell das Symbol 'UseFolders' gesetzt werden. Das heit, dieses
+Symbol ist ansonsten Tabu. Daher sollte fr UDO intern die Anzahl
+der Symbole auf x+1 (derzeit dann 16+1=17) gesetzt werden, damit
+fr den Benutzer keine Zweifel ber die Anzahl der Symbole aufkommt.
+
+
+!smallskip
+!hline
+!subsubnode Bilder in UDO
+(!img [rot3] [Sehr wichtig])~~|~~(!img [gelb2] [schwierig]) (!nl)
+Bisher wurden Bilder auf folgende Art und Weise eingebunden:
+!begin_itemize !short
+!item (!V)!/image <datei> <titel>(!v) (!lra) ein Zeilenbild
+!item (!V)(!/img [<file>] [<text>])(!v) (!lra) ein Bild im Text
+!end_itemize
+!smallskip
+Folgende Punkte sollten, vor allem in Hinsicht auf HTML und RTF,
+erg„nzt werden:
+!begin_itemize !short
+!item Gr”e
+!item Abstand
+!item Textumflu
+!end_itemize
+!smallskip
+Um kompatibel zu den alten Angaben zu sein, sollten die zus„tzlichen
+Angaben entsprechend hinten an abgelegt werden. Eine weitere
+m”glichkeit w„re die Einfhrung von neuen Kommandos.
+
+
+!smallskip
+!hline
+!subsubnode Textfarben (Norbert Hanz)
+(!img [rot2] [wichtig])~~|~~(!img [gelb3] [leicht]) (!nl)
+Festlegung von 16 Textfarben als allgemeiner Standard. Die folgenden
+Makros fr HTML, HTML-Help, Postscript, RTF und WinHelp k”nnten
+dann in UDO bernommen werden, fr die anderen Formate wrden die
+Angaben entsprechend ignoriert. (!B)Gibt es fr andere Zielformate
+auch die M”glichkeit farbige Texte bzw. ganz allgemein Farben mit
+einzubringen?(!b)
+
+Die Makros sind bewusst mit ”ffnendem und schlieendem Teil angelegt,
+da so farbige Texte auch ber mehrere Zeilen angelegt werden k”nnen.
+
+!vinclude d:/udo-tool/colour.ui
+
+!smallskip
+Statt des (!V)style(!v)-Attributes bei HTML kann auch das
+(!V)class(!v)-Attribut eingesetzt werden und die Farbangaben
+ber eine CSS-Datei angegeben werden.
+
+!medskip
+Fr (!TeX) k”nnten die Farben folgendermaen umgesetzt werden:
+!begin_verbatim
+% Farbbefehl bereitstellen
+\newcommand{\color}[1]
+  {\special{ps: #1 setrgbcolor
+   gsave newpath 0 0 moveto 1 0 rlineto stroke grestore}}
+
+% Farbige Quadrate
+\newcommand{\colorsquare}[1]
+  {\color{#1}\rule{1em}{1em}\color{\black}}
+
+% Einige Farben definieren
+\newcommand{\red}{1 0 0}   \newcommand{\white}{1 1 1}
+\newcommand{\yellow}{1 1 0}\newcommand{\blue}{0 0 1}
+\newcommand{\green}{0 1 0} \newcommand{\black}{0 0 0}
+\newcommand{\violet}{1 0 1}\newcommand{\cyan}{0 1 1}
+!end_verbatim
+
+Das erfordert aber die Ausgabe ber einen Postscripttreiber, ist also
+mit den ""normalen"" DVI-Treibern nicht machbar.
+
+(!U)Frage an die (!TeX)-/(!LaTeX)-Kundigen:(!u) Gibt es eine bessere
+M”glichkeit Texte und andere Gebilde (z.B. Tabellenhintergrund) farbig
+auszugeben? (!V)\usepackage{colortbl}(!v)
+
+!smallskip
+!hline
+!subsubnode Erweiterung der Enumerate-Umgebung
+(!img [rot1] [Weniger wichtig])~~|~~(!img [gelb3] [leicht]) (!nl)
+Um die Enumerate-Umgebung und vor allem die einzelnen Eintr„ge
+besser hervorheben zu k”nnen, sollte diese Umgebung folgender!-maen
+erweitert werden:
+!begin_verbatim
+!begin_benumerate fr hervorgehobene Zahlen
+!begin_ienumerate fr kursive Zahlen
+!begin_xenumerate fr „quidistante Zahlen
+!end_verbatim
+Die entsprechenden Gegenstcke fr das Ende sollten dann
+(!V)!/end_benumerate(!v) etc. lauten. Die Steuerung sollte
+sich nur auf die Zahl beziehen. Fr die richtige Formatierung
+der Abs„tze eines Items ist der Benutzer zust„ndig. Dadurch
+kann zum Beispiel nur der erste Absatz fett gesetzt werden.
+
+Zus„tzlich k”nnte die Enumerate-Umgebung auch alternativ Klammern
+statt Punkte hinter der Zahl ausgeben.
+
+!smallskip
+!hline
+!subsubnode Icons zur Navigation
+(!img [rot1] [Weniger wichtig])~~|~~(!img [gelb2] [schwierig]) (!nl)
+Hinzufgen von eigenen Icons, die besser zum jeweiligen Layout passen.
+
+!smallskip
+!hline
+!subsubnode Neue Variablen, Platzhalter
+(!img [rot1] [Weniger wichtig])~~|~~(!img [gelb3] [leicht]) (!nl)
+Die Daten aus !/docinfo sollten als Platzhalter zur Verfgung stehen.
+
+!smallskip
+!hline
+!subsubnode Spalten in Dokumenten
+(!img [rot1] [Weniger wichtig])~~|~~(!img [gelb2] [schwierig]) (!nl)
+Manche Dokumente sollen vielleicht in zwei oder mehreren Spalten
+als durchflieender Text angeordnet werden. Dazu bieten einige
+Formate eine Hilfe an, so da UDO hierfr nichts weiter tun
+mu, als einige Kommandos zu setzen.
+
+Grunds„tzlich gibt es zwei verschiedene Formen der Benutzung:
+!begin_itemize !short
+!item Das ganze Dokument ist in gleichviele Spalten aufgeteilt.
+!item Im Dokument „ndert sich von Seite zu Seite (Datei zu
+Datei) die Anzahl der Spalten.
+!end_itemize
+
+Da fr die Spalten nicht unendlich viel Platz zur Verfgung steht,
+denke ich ist eine Begrenzung auf maximal 3~Spalten sinnvoll.
+N„heres zur Ausfhrung in den einzelnen Kapiteln der Zielformate:
+!begin_itemize !short
+!item (!link [RTF] [RTF-Spalten])
+!item (!link [(!LaTeX)] [LaTeX-Spalten])
+!item (PDF-LaTeX)
+!end_itemize
+
+!smallskip
+!label Sonderzeichen
+!include Sonderzeichen.ui
+
+!subsubnode Kommentarzeichen
+(!img [rot3] [Sehr wichtig])~~|~~(!img [gelb3] [Leicht]) (!nl)
+Damit das Kommentarzeichen (!V)#(!v) zuknftig nicht mehr nur am
+Anfang stehen mu und trotzdem benutzt werden kann, sollte es, wie
+andere Zeichen auch, maskiert werden durch (!V)(!/#)(!v).
+Kommentar!-zeichen sollten dann auch in Tabellen erlaubt sein.
+
+!subsubnode Ausgabe in beliebige Textdateien w„hrend des šbersetzungslaufes
+(!img [rot2] [wichtig])~~|~~(!img [gelb3] [Leicht]) (!nl)
+Einbau von Kommandos zum Schreiben auf Textdateien
+
+Anwendungsm”glichkeiten sind die Erzeugung von beliebigen Indizes und
+Verzeichnissen, wie z.~B. Endnoten, Stichwort!-verzeichnisse, etc.
+
+(!/open_file [filename] [dateiname] [modus]) (!nl)
+(!V)filename(!v) ist der logische NAme, unter dem die externe Datei innerhalb
+von UDO angesprochen wird. (!V)dateiname(!v) ist der externe Dateiname.
+(!V)modus = write|append(!v) (bei write wird die evtl. schon bestehende Datei
+berschrieben, bei append wird der Inhalt angehangen).
+
+(!/write_file [filename] [text]) (!nl)
+(!V)text(!v) ist eine Zeile. Am Schlu wird eine Zeilenschaltung erzeugt
+(Achtung: Je nach Betriebssystem unterschiedlich, Unix <-> DOS/Windows)
+
+!/begin_write_file [filename] (!nl)
+!/end_write_file (!nl)
+um gr”ere Mengen Text (mehrzeilig) zu schreiben.
+
+(!/close_file [filename]) (!nl)
+schliet die Datei. Notfalls mu UDO selbst„ndig aufpassen und nicht
+geschlossene Dateien beim Beenden des šber!-setzungs!-laufes schlieen.
+
+!/if file_exist (!nl)
+zum Testen, ob eine Datei bereits existiert.
+
+Frage: Sollten die Kommandos eher als Makros (!...) oder als
+Einzelzeilen-Befehle definiert werden?
+
+
+!medskip
+!hline
+!subsubnode Ungeordnet (Allgemein)
+!begin_itemize
+!item Erweiterung des universellen Zeichensatzes fr alle Sonderzeichen,
+      die nicht auf der Tastatur vorkommen (Ulrich Kretschmer)
+!item Anpassung der sprachabh„ngigen Texte (z.~B. Inhaltsverzeichnis) evtl.
+      durch Makros (Ulrich Kretschmer)
+!item Zulassung von Links in den (!V)!/docinfo [](!v) Definitionen (Ulrich Kretschmer)
+!item Untersttzung von relativen Pfaden fr die HTML-Ausgabe durch z.~B.
+      (!V)!/html_path(!v). Schwierigkeiten wird nur die Link!-verwaltung
+      bringen (Ulrich Kretschmer) (!nl)
+      (!B)Geht das vielleicht mit (!V)!/html_dirname(!v) und
+      (!V)!/html_use_folders(!v)?(!b)
+!item Zus„tzliche Schriftarten wie Kapit„lchen u.„. (Ulrich Kretschmer)
+!item Erweiterung von (!V)!/html_counter_command(!v), damit auch (!V)(!/nl)(!v),
+      (!V)(!/url [] [])(!v) und (!V)(!/link [] [])(!v) umgesetzt werden (Ulrich Kretschmer)
+!item Umbennung vieler unterschiedlicher Formatbefehle in ein strukturiertes
+      (!V)!/doclayout [] [](!v) (Dirk Hagedorn)
+!item Fehlermeldung, wenn Zieldatei schreibgeschtzt ist mit Halte-Taste (!nl)
+      (Norbert Hanz)
+!item Angleichung vorhandener Features an alle Formate ~~(Norbert Hanz) (!nl)
+      (z.B. (!V)endash(!v), (!V)emdash(!v), (!V)(!/img [] [])(!v), etc.)
+!end_itemize
+
+
+!subsubnode Bugs (formatunabh„ngig)
+!begin_itemize
+!item UDO schreibt in die Projektdatei (*.upr) die kleinen UDO-Bildchen
+      doppelt rein (Ausnahme: udo_mw.gif)
+!item Umlaute und Paragraphen innerhalb von Links in Tabellen funktionieren
+      nicht -- scheint aber vom Zeichensatz abh„ngig zu sein
+!item Beim Frames-Layout und der Benutzung von (!V)!/html_propfont_name(!v)
+      wird im Navigationsframe (00toc.html) die Schriftformatierung nicht
+      bercksichtigt, da die Formatierung nicht in den Tabellenzellen selbst
+      gesetzt wird.
+!item UDO strzt bei šberschreitung der L„nge von 1024 Zeichen bei
+      (!V)!/html_keywords(!v) ab. Fehlerbehandlung notwendig und Erh”hung
+      der Speichergr”e
+!item Die Kommandofolge (!V)!)(!v) dient eigentlich zur Kennzeichnung von
+      sich schlieenden Klammern, die eine inhaltliche Bedeutung haben und
+      nicht zur Syntax der UDO-Kommandos geh”ren. Offensichtlich setzt
+      dieses Kommando jedoch andere Kommandos auer Gefecht.
+!end_itemize

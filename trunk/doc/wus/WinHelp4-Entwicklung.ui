@@ -1,0 +1,12 @@
+!smallskip
+!hline
+!subsubnode Ungeordnet (WinHelp4)
+!begin_itemize
+!item Fuž- und Endnoten auch bei WinHelp4
+!end_itemize
+
+!medskip
+!hline
+!subsubnode Bugs (WinHelp4)
+Das Kommando (!V)(!/url [] [])(!v) wird von UDO offensichtlich nicht
+richtig umgesetzt. Der Compiler bricht den šbersetzungsvorgang ab.
