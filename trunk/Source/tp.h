@@ -103,6 +103,11 @@ typedef struct				/* ---- Layoutinfos ----		*/
 	unsigned int		propfontsize;
 	char	*monofontname;
 	unsigned int		monofontsize;
+	/* New in r6pl16 [NHz] */
+	unsigned int		node1size;
+	unsigned int		node2size;
+	unsigned int		node3size;
+	unsigned int		node4size;
 }	LAYOUTDATA;
 
 
