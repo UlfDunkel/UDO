@@ -56,6 +56,7 @@ const char *id_toc_c= "@(#) toc.c       12.06.1999";
 
 #include "export.h"
 #include "toc.h"
+#include "udomem.h"
 
 
 /*	############################################################

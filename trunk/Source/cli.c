@@ -35,6 +35,7 @@ const char *id_cli_c= "@(#) cli.c       21.08.1998";
 #include	"cfg.h"
 #include	"msg.h"
 #include	"udo.h"
+#include        "udomem.h"
 
 #ifdef __TOS__
 	#ifdef USE_PCTOS

@@ -45,7 +45,7 @@ const char *id_tab_c= "@(#) tab.c       10.07.1999";
 
 #include "export.h"
 #include "tab.h"
-
+#include "udomem.h"
 
 /*	############################################################
 	# lokale Variablen

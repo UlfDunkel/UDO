@@ -137,10 +137,6 @@ GLOBAL BOOLEAN	tokens_contain_item;
 GLOBAL char		udosymbol[MAX_UDOSYMBOLS][MAX_UDOSYMBOL_LEN+1];
 GLOBAL int		udosymbol_counter;
 
-/* vj: This vars are used to count memory reservations and frees */
-int um_malloc_count;
-int um_free_count;
-
 extern char compile_date[11];
 extern char compile_time[9];
 
@@ -432,7 +428,3 @@ GLOBAL void init_vars ( void );
 GLOBAL void dest_special_adjust ( void );
 GLOBAL void dest_adjust ( void );
 
-/* vj: New in 6.3.3 Memory Managment */
-
-GLOBAL void *um_malloc(size_t size);
-GLOBAL void um_free(void *memblock);

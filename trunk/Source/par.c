@@ -42,7 +42,7 @@ const char *id_par_c= "@(#) par.c       19.07.1999";
 
 #include "export.h"
 #include "par.h"
-
+#include "udomem.h"
 
 
 /*	############################################################
