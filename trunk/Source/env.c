@@ -3117,6 +3117,30 @@ GLOBAL void c_begin_document ( void )
 			{	voutlnf("  {\\title %s}", titleprogram);
 			}
 
+			/* New in V6.5.2 [NHz] */
+			/* ---- \description ---- */
+			if (titdat.description[0]!=EOS)
+			{	voutlnf("  {\\subject %s}", titdat.description);
+			}
+
+			/* New in V6.5.2 [NHz] */
+			/* ---- \keywords ---- */
+			if (titdat.keywords[0]!=EOS)
+			{	voutlnf("  {\\keywords %s}", titdat.keywords);
+			}
+
+			/* New in V6.5.2 [NHz] */
+			/* ---- \company ---- */
+			if (titdat.company[0]!=EOS)
+			{	voutlnf("  {\\*\\company %s}", titdat.company);
+			}
+
+			/* New in V6.5.2 [NHz] */
+			/* ---- \category ---- */
+			if (titdat.category[0]!=EOS)
+			{	voutlnf("  {\\*\\category %s}", titdat.category);
+			}
+
 			/* ---- Ueber UDO ---- */
 			voutlnf("  {\\doccomm UDO Version %s.%s.%s}", UDO_REL, UDO_SUBVER, UDO_PL);
 
