@@ -26,7 +26,7 @@ main dialog you choose the source file, the destination file and the
 destination format. By pressing the ""Convert"" button you start the
 conversion.
 
-!image ../images/main
+!image images/main
 
 The items of the menu bar open other dialogs in most cases. If not you
 can guess the sense of them by simply reading the menu item text. Two
@@ -54,7 +54,7 @@ appears. The sense of each button you can see in this dialog will be
 described now.
 
 !begin_center
-!image ../images/settings
+!image images/settings
 !end_center
 
 !begin_itemize
@@ -138,7 +138,7 @@ the conversion. You can insert the text and choose which symbol has to
 be used by clicking the buttons on the left side.
 
 !begin_center
-!image ../images/symbols
+!image images/symbols
 !end_center
 
 If an entry is checked UDO will use the text as a predefined symbol.
@@ -155,7 +155,7 @@ viewing the source files and destination files or for converting the
 destination files.
 
 !begin_center
-!image ../images/extern
+!image images/extern
 !end_center
 
 Please select the destination format in the upper half.
