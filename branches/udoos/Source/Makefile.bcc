@@ -1,0 +1,21 @@
+###########################################################
+# @(#) Makefile fuer Borland-C
+# @(#) Thorsten Otto, 30.10.2001
+###########################################################
+CC = bcc32
+RM=del
+
+O=.obj
+X=.exe
+
+CFLAGS =
+
+LDFLAGS = 
+
+!include makefile.in
+
+
+udo$(X):	$(OSRC) cli$(O)
+		$(CC) @&&|
+	-e$@ $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS)
+|
