@@ -5,9 +5,9 @@
 
 !docinfo [program]	UDO Developer's Guide
 !docinfo [version]	Version 6
-!docinfo [date]		11.12.2003
+!docinfo [date]		12.12.2003
 
-!docinfo [author]	Dirk Hagedorn, Volker Janzen und andere
+!docinfo [author]	Dirk Hagedorn, Volker Janzen und anderen
 !docinfo [address]	http://www.udo-open-source.org/
 
 !use_short_tocs			[stg,win,aqv,info,html]
@@ -21,8 +21,14 @@
 !raw [tex] \parindent 0pt
 !raw [tex] \parskip 4pt
 
+!html_backpage http://www.udo-open-source.org/dev/
+!html_style_name http://www.udo-open-source.org/udo.css
+
 !begin_document
 !maketitle
+
+Dieses Dokument erfährt gerade eine Überarbeitung.
+
 !tableofcontents
 !raw [tex] \sloppy
 
