@@ -2974,7 +2974,7 @@ GLOBAL void c_begin_document ( void )
 			}
 
 			/* ---- Ueber UDO ---- */
-			voutlnf("  {\\doccomm UDO Release %s Patchlevel %s}", UDO_REL, UDO_PL);
+			voutlnf("  {\\doccomm UDO Release %s Patchlevel %s, %s %s}", UDO_REL, UDO_PL, compile_date, compile_time);
 
 			/* ---- Erstellungsdatum & Sonstiges ---- */
 			voutlnf("  {\\creatim\\yr%d\\mo%d\\dy%d\\hr%d\\min%d}",
@@ -3203,8 +3203,8 @@ GLOBAL void c_end_document ( void )
 				memset(n, '#', 62);	n[62]= EOS;
 				outln("");
 				voutlnf("%s  %s", sSrcRemOn, n);
-				voutlnf("    # @(#) %s%s - made with UDO Release %s Patchlevel %s for %s",
-					outfile.name, outfile.suff, UDO_REL, UDO_PL, UDO_OS);
+				voutlnf("    # @(#) %s%s - made with UDO Release %s Patchlevel %s for %s, %s %s",
+					outfile.name, outfile.suff, UDO_REL, UDO_PL, UDO_OS, compile_date, compile_time);
 				voutlnf("    %s %s", n, sSrcRemOff);
 			}
 			break;
