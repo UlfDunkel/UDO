@@ -1,15 +1,15 @@
 !subsubheading Eine angepasste Doku ~~(Thorsten Otto, Thomas Kerkloh)
 
-Die erste Spalte der Liste sagt aus, ob das Kommando noch untersttzt
+Die erste Spalte der Liste sagt aus, ob das Kommando noch unterstützt
 wird, bzw. durch welches andere Kommando es ersetzt wurde (bei einigen
-steht ein A fr Alias). Die zweite Spalte sagt, ob es schon eine
+steht ein A für Alias). Die zweite Spalte sagt, ob es schon eine
 entsprechende Beschreibung in dem vorhandenen Hypertext gibt. Ein (!B)*(!b)
-hier steht dafr, da zwar eine Beschreibung vorhanden ist, sie aber
-erg„nzt/ge„ndert werden muss.
+hier steht dafür, daß zwar eine Beschreibung vorhanden ist, sie aber
+ergänzt/geändert werden muss.
 
 !begin_flushleft
 !begin_table [lll] !hline
- !! Untersttzt !! Beschrieben
+ !! Unterstützt !! Beschrieben
 !hline
 !/=aqv                       !! ifdest        !! * 
 !/=asc                       !! ifdest        !! * 

@@ -1,27 +1,27 @@
 !subsubnode Postscript-Erweiterung (Norbert Hanz)
 (!img [rot2] [Wichtig])~~|~~(!img [gelb2] [Schwierig])
 
-Die Postcript-Ausgabe von UDO war bisher eher rudiment„r vorhanden und
+Die Postcript-Ausgabe von UDO war bisher eher rudimentär vorhanden und
 aufgrund eines simplen aber wirkungsvollen Fehlers quasi unbrauchbar.
 
 UDO gibt Klammern [(] direkt aus. Klammern werden aber von Postscript-Codes
-interpretiert und mssen daher maskiert werden [\(]. Da Klammern recht
-h„ufig benutzt werden, ist jeder Quell!-text in dem eine Klammer vorkommt
+interpretiert und müssen daher maskiert werden [\(]. Da Klammern recht
+häufig benutzt werden, ist jeder Quell!-text in dem eine Klammer vorkommt
 nicht richtig inter!-pretierbar. Der Adobe Distiller z.B. bricht den
-šber!-setzungs!-vorgang einfach ab.
+Über!-setzungs!-vorgang einfach ab.
 
-Die nun folgende Erg„nzung des Postscriptcodes geht in erster Linie
+Die nun folgende Ergänzung des Postscriptcodes geht in erster Linie
 auf Erweiterungen ein, die gebraucht werden, wenn man den
-Postscript-Text in eine PDF-Datei bersetzen will.
+Postscript-Text in eine PDF-Datei übersetzen will.
 
-Die Funktionen erkl„ren sich soweit eigentlich selbst mit den
-ent!-sprechenden ein!-fhrenden Kommen!-taren.
+Die Funktionen erklären sich soweit eigentlich selbst mit den
+ent!-sprechenden ein!-führenden Kommen!-taren.
 
-Eine (!xlink [genauere Erkl„rung] [postscript.pdf]) zu den
+Eine (!xlink [genauere Erklärung] [postscript.pdf]) zu den
 Postscript-Erweiterungen gibt es als PDF-Datei.
 
-Zum Schlu folgen die Postscript-Erweiterungen nochmal als
-(!link [Quelltext] [PS-Quelltext]).
+#Zum Schluß folgen die Postscript-Erweiterungen nochmal als
+#(!link [Quelltext] [PS-Quelltext]).
 
 !smallskip
 !hline
@@ -44,14 +44,14 @@ Zum Schlu folgen die Postscript-Erweiterungen nochmal als
 
 !smallskip
 !hline
-!subsubnode Titel fr Datei (Postscript)
+!subsubnode Titel für Datei (Postscript)
 (!img [rot3] [Sehr wichtig])~~|~~(!img [gelb1] [Leicht])
-Die Angabe des Titels einer Seite sollte zuknftig folgendermaen
-angegeben werden (siehe auch (!link [Erkl„rung bei RTF] [Title-RTF])):
+Die Angabe des Titels einer Seite sollte zukünftig folgendermaßen
+angegeben werden (siehe auch (!link [Erklärung bei RTF] [Title-RTF])):
 
-In Postscript wird es folgendermaen umgesetzt:
+In Postscript wird es folgendermaßen umgesetzt:
 !begin_verbatim
-!docinfo [ps] [title] Ein Buch ber UDO
+!docinfo [ps] [title] Ein Buch über UDO
 !end_verbatim
 ergibt
 !begin_verbatim

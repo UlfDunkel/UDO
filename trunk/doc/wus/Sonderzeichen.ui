@@ -1,8 +1,8 @@
 !hline
 !subsubnode Sonderzeichen und ihre Darstellungsweise
 
-Die Liste dieser Sonderzeichen ist rein willkÅrlich und kann erweitert oder
-eingeschrÑnkt werden. (!nl)
+Die Liste dieser Sonderzeichen ist rein willk¸rlich und kann erweitert oder
+eingeschr‰nkt werden. (!nl)
 (!B)(!T)CAB(!t)(!b) bedeutet, das Sonderzeichen wird auch von (!T)CAB(!t)
 angezeigt.
 
@@ -11,11 +11,11 @@ angezeigt.
 Name !! Darstellung !! ANSI !! Unicode !! (!nolink [Postscript]) !! RTF !! HTML !! Bemerkungen
 Ungleich !! (!raw [html] [&ne;]) !! ~ !! 8800 0x2260 !! ~ !! ~ !! &ne; !! ~
 Kleiner gleich !! (!raw [html] [&le;]) !! 243 !! 8804 0x2264 !! lessequal !! ~ !! &le; !! ~
-Grîûer gleich !! (!raw [html] [&ge;]) !! 242 !! 8805 0x2265 !! greaterequal !! ~ !! &ge; !! ~
+Grˆﬂer gleich !! (!raw [html] [&ge;]) !! 242 !! 8805 0x2265 !! greaterequal !! ~ !! &ge; !! ~
 Equivalent !! (!raw [html] [&equiv;]) !! 240 !! 8801 0x2261 !! equivalence !! ~ !! &equiv; !! ~
 Plusminus !! (!raw [html] [&plusmn;]) !! 241 !! 0177 0x00B1 !! plusminus !! ~ !! &plusmn; !! CAB
 Geteilt !! (!raw [html] [&divide;]) !! 246 !! 0247 0x00F7 !! divide !! ~ !! &divide; !! CAB
-éhnlich !! (!raw [html] [&sim;]) !! 247 !! 8776 0x2248 !! approxequal !! ~ !! &sim; !! ~
+ƒhnlich !! (!raw [html] [&sim;]) !! 247 !! 8776 0x2248 !! approxequal !! ~ !! &sim; !! ~
 Unendlich !! (!raw [html] [&infin;]) !! 223 !! 8734 0x221E !! infinity !! ~ !! &infin; !! ~
 Grad !! (!raw [html] [&deg;]) !! 248 !! 0176 0x00B0 !! degree !! ~ !! &deg; !! CAB
 Copyright !! (!raw [html] [&copy;]) !! 189 !! 0169 0x00A9 !! copyright !! ~ !! &copy; !! CAB
@@ -23,11 +23,11 @@ Registered !! (!raw [html] [&reg;]) !! 190 !! 0174 0x00AE !! registered !! ~ !! 
 Trademark !! (!raw [html] [&trade;]) !! 191 !! 8483 0x2122 !! trademark !! ~ !! &trade; !! CAB
 Promille !! (!raw [html] [&permil;]) !! 222 !! 8240 0x2030 !! perthousand !! ~ !! &permil; !! ~
 Punkt, Punkt, Punkt !! (!raw [html] [&hellip;]) !! ~ !! 8230 0x2026 !! ~ !! ~ !! &hellip; !! ~
-AnfÅhrungszeichen unten !! (!raw [html] [&bdquo;]) !! 207 !! 8222 0x201E !! quotedblbase !! \ldblquote !! &bdquo; !! ~
-AnfÅhrungszeichen oben !! (!raw [html] [&ldquo;]) !! 208 !! 8220 0x201C !! quotedblleft !!  !! &ldquo; !! ~
-AnfÅhrungszeichen ende !! (!raw [html] [&rdquo;]) !! 209 !! 8221 0x201D !! quotedblright !! \rdblquote !! &rdquo; !! ~
-AnfÅhrungszeichen fr. Anfang !! (!raw [html] [&laquo;]) !! 174 !! 0171 0x00AB !! guillemotleft !!  !! &laquo; !! CAB
-AnfÅhrungszeichen fr. Ende !! (!raw [html] [&raquo;]) !! 175 !! 0187 0x00BB !! guillemotright !!  !! &raquo; !! CAB
+Anf¸hrungszeichen unten !! (!raw [html] [&bdquo;]) !! 207 !! 8222 0x201E !! quotedblbase !! \ldblquote !! &bdquo; !! ~
+Anf¸hrungszeichen oben !! (!raw [html] [&ldquo;]) !! 208 !! 8220 0x201C !! quotedblleft !!  !! &ldquo; !! ~
+Anf¸hrungszeichen ende !! (!raw [html] [&rdquo;]) !! 209 !! 8221 0x201D !! quotedblright !! \rdblquote !! &rdquo; !! ~
+Anf¸hrungszeichen fr. Anfang !! (!raw [html] [&laquo;]) !! 174 !! 0171 0x00AB !! guillemotleft !!  !! &laquo; !! CAB
+Anf¸hrungszeichen fr. Ende !! (!raw [html] [&raquo;]) !! 175 !! 0187 0x00BB !! guillemotright !!  !! &raquo; !! CAB
 kurzer Strich !! (!raw [html] [&ndash;]) !! 214 !! 8211 0x2013 !! endash !! \endash !! &ndash; !! CAB
 langer Strich !! (!raw [html] [&mdash;]) !! 215 !! 8212 0x2014 !! emdash !! \emdash !! &mdash; !! CAB
 Pfeil rechts !! (!raw [html] [&rarr;]) !! 219 !! 8594 0x2192 !! arrowright !! ~ !! &rarr; !! ~
@@ -48,7 +48,7 @@ Sigma !! (!raw [html] [&sigma;]) !! 229 !! 0963 0x03C3 !! sigma !! ~ !! &sigma; 
 Tau !! (!raw [html] [&tau;]) !! 231 !! 0964 0x03C4 !! tau !!  !! &tau; !! CAB
 Theta !! (!raw [html] [&theta;]) !! ~ !! ~ !! ~ !! ~ !! &theta; !! ~
 Omega !! (!raw [html] [&omega;]) !! ~ !! ~ !! ~ !! ~ !! &omega; !! ~
-Griechische Buchstaben (groû) !! ~ !! ~ !! ~ !! ~ !! ~ !! ~ !! ~
+Griechische Buchstaben (groﬂ) !! ~ !! ~ !! ~ !! ~ !! ~ !! ~ !! ~
 Alpha !! (!raw [html] [&Alpha;]) !! ~ !! ~ !! Alpha !! ~ !! &Alpha; !! ~
 Beta !! (!raw [html] [&Beta;]) !! ~ !! ~ !! Beta !! ~ !! &Beta; !! ~
 Gamma !! (!raw [html] [&Gamma;]) !! 226 !! 0915 0x0393 !! Gamma !! ~ !! &Gamma; !! CAB

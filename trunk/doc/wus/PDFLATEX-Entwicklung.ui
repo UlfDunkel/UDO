@@ -2,9 +2,9 @@
 (!img [rot3] [Sehr wichtig])~~|~~(!img [gelb2] [Schwierig])
 Die allgemeine Umsetzung von URLs entsprechend folgendem Beispiel
 !begin_verbatim
-...und das (!url [alles ber UDO] [http://www.udo-open-source.de]) steht...
+...und das (!url [alles über UDO] [http://www.udo-open-source.de]) steht...
 !end_verbatim
-...ergibt fr pdflatex
+...ergibt für pdflatex
 !begin_verbatim
 
 !end_verbatim

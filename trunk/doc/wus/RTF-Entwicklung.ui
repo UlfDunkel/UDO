@@ -1,11 +1,11 @@
 !subsubnode Weitere Sonderzeichen
 
-In RTF k”nnen weitere Sonderzeichen ber Unicode verwirklicht werden.
+In RTF können weitere Sonderzeichen über Unicode verwirklicht werden.
 
 !smallskip
 !hline
 !subsubnode Farben
-Fr ""sch”nere"" Tabellen etc. sollte evtl. eine gr”ere (!V)\colortbl(!v)
+Für ""schönere"" Tabellen etc. sollte evtl. eine größere (!V)\colortbl(!v)
 eingebunden werden.
 
 !smallskip
@@ -13,7 +13,7 @@ eingebunden werden.
 !subsubnode Horizontale Linie
 (!img [rot1] [Weniger wichtig])~~|~~(!img [gelb3] [Leicht])
 Bisher wurde das Kommando (!V)!/hline(!v) bei der Ausgabe nach RTF
-nicht beachtet. Dies l„t sich aber sehr einfach umsetzen mit
+nicht beachtet. Dies läßt sich aber sehr einfach umsetzen mit
 folgendem Codeschnipsel:
 !begin_verbatim
 {\*\do\dobxcolumn\dopypara\dodhgt8192\dpline
@@ -21,17 +21,17 @@ folgendem Codeschnipsel:
  \dpx0\dpy-150\dpxsize9638\dpysize0
  \dplinew15\dplinecor0\dplinecog0\dplinecb0}
 !end_verbatim
-Dieses Beispiel zeigt eine schwarze durchgezogene Linie fr ein
-Layout im DIN~A4-Format. Fr andere Formate msste entsprechend
-die L„nge der Linie ((!T)\dpxsize(!t) und (!T)\dpptxN(!t))
+Dieses Beispiel zeigt eine schwarze durchgezogene Linie für ein
+Layout im DIN~A4-Format. Für andere Formate müsste entsprechend
+die Länge der Linie ((!T)\dpxsize(!t) und (!T)\dpptxN(!t))
 angepasst werden. (!nl)
-Papyrus untersttzt diese RTF-Kommandos leider nicht.
+Papyrus unterstützt diese RTF-Kommandos leider nicht.
 
 !smallskip
 !hline
 !subsubnode Bookmarks & Verweise auf Seiten (Norbert Hanz)
 (!img [rot1] [Weniger wichtig])~~|~~(!img [gelb2] [Schwierig])
-Labels sollten auer als Index auch als Bookmarks in RTF umgesetzt werden,
+Labels sollten außer als Index auch als Bookmarks in RTF umgesetzt werden,
 damit man in RTF-Dokumenten
 !begin_itemize !short
 !item in der Textverarbeitung danach suchen kann und
@@ -39,13 +39,13 @@ damit man in RTF-Dokumenten
 !end_itemize
 
 !smallskip
-Die beiden Kommandos fr Label wrden folgendermaen umgesetzt:
+Die beiden Kommandos für Label würden folgendermaßen umgesetzt:
 !begin_itemize
 !item (!V)!/label(!v)
 !begin_verbatim
 !label Verweisziel
 !end_verbatim
-...ergibt fr RTF
+...ergibt für RTF
 !begin_verbatim
 {\*\bkmkstart Verweisziel} {\bkmkend Verweisziel}
 !end_verbatim
@@ -54,23 +54,23 @@ Die beiden Kommandos fr Label wrden folgendermaen umgesetzt:
 !item (!V)(!/label [] [])(!v)
 !smallskip
 !begin_verbatim
-...dies ist ein (!label [Beispiel] [Verweisziel]) fr...
+...dies ist ein (!label [Beispiel] [Verweisziel]) für...
 !end_verbatim
-...ergibt fr RTF
+...ergibt für RTF
 !begin_verbatim
-...dies ist ein {\*\bkmkstart Verweisziel} Beispiel{\bkmkend Verweisziel} fr...
+...dies ist ein {\*\bkmkstart Verweisziel} Beispiel{\bkmkend Verweisziel} für...
 !end_verbatim
 !end_itemize
 
 !medskip
-Fr die (!LaTeX)-Ausgabe besteht die M”glichkeit Verweise direkt
+Für die (!LaTeX)-Ausgabe besteht die Möglichkeit Verweise direkt
 auf Seitenzahlen zu beziehen. Dies geschieht mit dem Kommando
-(!V)(!/plink [] [])(!v) und sollte auch fr RTF umgesetzt werden.
+(!V)(!/plink [] [])(!v) und sollte auch für RTF umgesetzt werden.
 
 !begin_verbatim
 ...sehen Sie im (!plink [Vorwort] [Verweisziel]) des Buches...
 !end_verbatim
-...ergibt dann fr RTF
+...ergibt dann für RTF
 !begin_verbatim
 ...sehen Sie im Vorwort (siehe Seite }{\field{\*\fldinst { PAGEREF Verweisziel }}
 {\fldrslt {\lang1024 8}}}{) des Buches...
@@ -81,26 +81,26 @@ Leider funktioniert das nicht in Papyrus.
 
 !smallskip
 !hline
-!subsubnode nderungskennzeichnung
+!subsubnode Änderungskennzeichnung
 (!img [rot3] [Sehr wichtig])~~|~~(!img [gelb3] [Leicht])
-Zum Anzeigen von nderungen ist folgender Eintrag im Kopfbereich der
-RTF-Datei n”tig:
+Zum Anzeigen von Änderungen ist folgender Eintrag im Kopfbereich der
+RTF-Datei nötig:
 !begin_verbatim
 {\*\revtbl{Author1;Author2;...}}
 \revprot\revision
 !end_verbatim
-Standardm„ig sollte ""Author1"" folgenden Inhalt haben: (!nl)
+Standardmäßig sollte ""Author1"" folgenden Inhalt haben: (!nl)
 (!B)UDO Release 7 Patchlevel x(!b)
 
-(!V)\revision(!v) schaltet die nderungsmakierung an. (!nl)
-(!V)\revprot(!v) schtzt das Dokument davor, das das ""Revision marking""
+(!V)\revision(!v) schaltet die Änderungsmakierung an. (!nl)
+(!V)\revprot(!v) schützt das Dokument davor, das das ""Revision marking""
 abgeschaltet wird.
 
 !smallskip
 !hline
 !subsubnode Papierformat (RTF)
 (!img [rot1] [Weniger wichtig])~~|~~(!img [gelb2] [Schwierig])
-Untersttzte Formate
+Unterstützte Formate
 !begin_itemize !short
 !item DIN A3 (Portrait/Landscape)
 !item DIN A4 (Portrait/Landscape)
@@ -108,7 +108,7 @@ Untersttzte Formate
 !item Gerade/Ungerade Seiten
 !end_itemize
 
-Vorschlag fr den (!nolink [UDO-Code])
+Vorschlag für den (!nolink [UDO-Code])
 !begin_verbatim
 !doclayout [rtf] [paper] A3PORTRAIT
 !doclayout [rtf] [paper] A3LANDSCAPE
@@ -118,7 +118,7 @@ Vorschlag fr den (!nolink [UDO-Code])
 !doclayout [rtf] [paper] A5LANDSCAPE
 !end_verbatim
 
-Umsetzung fr RTF:
+Umsetzung für RTF:
 !begin_itemize
 !item DIN A3 Portrait
 !begin_verbatim
@@ -133,14 +133,14 @@ Umsetzung fr RTF:
 \sectd\lndscpsxn
 !end_verbatim
 
-(!xlink [Testdatei] [A3quer.rtf]) zum A3-Querformat
+#(!xlink [Testdatei] [A3quer.rtf]) zum A3-Querformat
 
 !item DIN A5 Portrait
 !begin_verbatim
 \paperw8392\paperh11907
 !end_verbatim
 
-(!xlink [Testdatei] [A5portrait.rtf]) zum A5-Format
+#(!xlink [Testdatei] [A5portrait.rtf]) zum A5-Format
 
 !item DIN A5 Landscape
 !begin_verbatim
@@ -154,24 +154,24 @@ Umsetzung fr RTF:
 !label RTF-Spalten
 !subsubnode Spalten in RTF
 (!img [rot1] [Weniger wichtig])~~|~~(!img [gelb2] [Schwierig])
-Ein Dokument mit 2 Spalten ber das ganze Dokument wrde folgendermaen
+Ein Dokument mit 2 Spalten über das ganze Dokument würde folgendermaßen
 angegeben.
 !begin_verbatim
 !doclayout [rtf] [column] 2
 !doclayout [rtf] [colwidth] 709
 !doclayout [rtf] [colline] true
 !end_verbatim
-...ergibt fr RTF
+...ergibt für RTF
 !begin_verbatim
 \sectd\cols2\colsx709\linebetcol
 !end_verbatim
 
-(!xlink [Testdatei] [Spalten2.rtf]) fr ein durchgehendes
-2-spaltiges Dokument.
+#(!xlink [Testdatei] [Spalten2.rtf]) für ein durchgehendes
+#2-spaltiges Dokument.
 
 !medskip
 Ein Dokument mit verschiedenen Sektionen (erste und letzte Seite
-einspaltig, alle anderen Seiten zweispaltig) wrde so aussehen:
+einspaltig, alle anderen Seiten zweispaltig) würde so aussehen:
 !begin_verbatim
 ...
 !newsect
@@ -187,7 +187,7 @@ oder
 !sectlayout [2,567,true]
 ...
 !end_verbatim
-...ergibt fr RTF
+...ergibt für RTF
 !begin_verbatim
 \sectd\cols1\colsx567
 ...
@@ -197,30 +197,30 @@ oder
 !end_verbatim
 !smallskip
 Dokumente mit verschiedenen Sektionen kann Papyrus nicht (Falls
-doch, m”ge man mich berichtigen).
+doch, möge man mich berichtigen).
 
-(!xlink [Testdatei] [Spalten1-2-1.rtf]) fr ein Dokument mit
+(!xlink [Testdatei] [Spalten1-2-1.rtf]) für ein Dokument mit
 mehreren Sektionen (einspaltig -- zweispaltig -- einspaltig).
 
 !smallskip
 !hline
-!subsubnode Kopf- und Fuzeilen
+!subsubnode Kopf- und Fußzeilen
 (!img [rot3] [Sehr wichtig])~~|~~(!img [gelb2] [Schwierig])
-Richtige Kopf- und Fuzeilen fr RTF wie bei !use_raw_header
+Richtige Kopf- und Fußzeilen für RTF wie bei !use_raw_header
 
 !smallskip
 !hline
 !subsubnode Bilder
 (!img [rot3] [Sehr wichtig])~~|~~(!img [gelb1] [Sehr schwierig])
-(!B)Zeilenbilder(!b) k”nnen wie die normalen Bilder mitten im Text
-eingebunden werden. Dies empfiehlt sich jedoch nur fr Bilder, die
-ungef„hr so hoch wie die Zeile sind.
+(!B)Zeilenbilder(!b) können wie die normalen Bilder mitten im Text
+eingebunden werden. Dies empfiehlt sich jedoch nur für Bilder, die
+ungefähr so hoch wie die Zeile sind.
 
-Um Bilder einzubinden, die vom Text umflossen werden sollen, ist es n”tig
+Um Bilder einzubinden, die vom Text umflossen werden sollen, ist es nötig
 Tags aus der RTF-Spezifikation 1.5 zu benutzen (Shapes). Diese Variante
-l„t sich dann auch fr jede andere Art von Objekten in RTF benutzen.
+läßt sich dann auch für jede andere Art von Objekten in RTF benutzen.
 
-Ein Bild wrde folgendermaen eingebunden:
+Ein Bild würde folgendermaßen eingebunden:
 !begin_verbatim
 {\shp{\*\shpinst\shpleftN\shptopN\shprightN\shpbottomN
  \shpfhdrN\
@@ -241,15 +241,15 @@ Ein Bild wrde folgendermaen eingebunden:
 !end_verbatim
 Der Bereich mit (!V)\shprslt(!v) wird nicht unbedingt gebraucht.
 
-Es sollten auch Metafiles (WMF und EMF) eingebunden werden k”nnen. Die
+Es sollten auch Metafiles (WMF und EMF) eingebunden werden können. Die
 Bilder sollten sich skalieren lassen.
 
 !begin_ignore
 !smallskip
 !hline
-!subsubnode Fu- und Endnoten
+!subsubnode Fuß- und Endnoten
 (!img [rot1] [Weniger wichtig])~~|~~(!img [gelb2] [Schwierig])
-Diese ist eine Funote(!N)Warum keine Endnote?(!n) und keine Endnote.
+Diese ist eine Fußnote(!N)Warum keine Endnote?(!n) und keine Endnote.
 !end_ignore
 
 !smallskip
@@ -257,9 +257,9 @@ Diese ist eine Funote(!N)Warum keine Endnote?(!n) und keine Endnote.
 !subsubnode Ausgabe von Bilddateinamen
 (!img [rot2] [Wichtig])~~|~~(!img [gelb3] [Leicht])
 Ausgabe von Bilddateinamen (optional), damit diese ggf. von Hand
-eingefgt werden k”nnen. (!nl)
+eingefügt werden können. (!nl)
 (!U)Hintergrund:(!u) Wir verwenden die RTF- und ASCII-Ausgabe, um unsere
-Calamus-Handbcher aus UDO-Code zu erzeugen, indem wir die Texte nur
+Calamus-Handbücher aus UDO-Code zu erzeugen, indem wir die Texte nur
 noch in UDo-Dateien pflegen und dann ausgeben.
 Die Bilder werden momentan noch "von Hand" dann in den 
 Calamus-Dokumenten plaziert.
@@ -276,7 +276,7 @@ Beispiel:
 !endif
 !end_verbatim
 
-Beispiel fr den zu erzeugenden Ausgabe-Text in ASCII und RTF:
+Beispiel für den zu erzeugenden Ausgabe-Text in ASCII und RTF:
 !begin_verbatim
 [IMAGE ..\..\foo]
 [IMAGE images\foo2]
@@ -285,24 +285,24 @@ Beispiel fr den zu erzeugenden Ausgabe-Text in ASCII und RTF:
 !smallskip
 !hline
 !label Title-RTF
-!subsubnode Titel fr Datei (RTF)
+!subsubnode Titel für Datei (RTF)
 (!img [rot2] [Wichtig])~~|~~(!img [gelb3] [Leicht])
-hnlich dem Title-Tag in HTML (<title>) kann man den RTF-Dateien
+Ähnlich dem Title-Tag in HTML (<title>) kann man den RTF-Dateien
 einen Titel mitgeben, der statt des Dateinamens angezeigt wird.
 Da das in PDF-Dateien auch geht, schlage ich ein allgemeines Kommando
-zum Ersatz fr (!T)!/html_title(!t) vor: (!nl)
+zum Ersatz für (!T)!/html_title(!t) vor: (!nl)
 !/docinfo [<kuerzel>] [<title>] foo
 
-In RTF wird es folgendermaen umgesetzt:
+In RTF wird es folgendermaßen umgesetzt:
 !begin_verbatim
-!docinfo [rtf] [title] Ein Buch ber UDO
+!docinfo [rtf] [title] Ein Buch über UDO
 !end_verbatim
 ergibt
 !begin_verbatim
 {\windowcaption Ein Buch \'FCber UDO}
 !end_verbatim
 
-(!U)Achtung:(!u) Da Papyrus ber (!T)\windowcaption(!t) stolpert, mu
+(!U)Achtung:(!u) Da Papyrus über (!T)\windowcaption(!t) stolpert, muß
 es hinter das erste (!V)\sectd(!v) gesetzt werden, Word kommt damit
 trotzdem zurecht.
 
@@ -310,23 +310,23 @@ trotzdem zurecht.
 !hline
 !subsubnode Inhaltsverzeichnis (RTF)
 (!img [rot1] [Weniger wichtig])~~|~~(!img [gelb2] [Schwierig])
-Fr Word besteht die M”glichkeit das Inhaltsverzeichnis ber ein
-Feld vor zu definieren. Wahrscheinlich ist es spezifisch fr Word,
+Für Word besteht die Möglichkeit das Inhaltsverzeichnis über ein
+Feld vor zu definieren. Wahrscheinlich ist es spezifisch für Word,
 Papyrus kann es nicht, wie es bei anderen Text!-verar!-beitungen
-aussieht, wei ich nicht.
+aussieht, weiß ich nicht.
 
-Die Umsetzung sieht folgendermaen aus:
+Die Umsetzung sieht folgendermaßen aus:
 !begin_verbatim
 {\field{\*\fldinst {TOC \\t "Node1;1;Node2;2;Node3;3;Node4;4" }}{\fldrslt {Bitte erneuern!}}}
 !end_verbatim
-Auf die gleiche Weise l„t sich wahrscheinlich auch ein Indexverzeichnis
+Auf die gleiche Weise läßt sich wahrscheinlich auch ein Indexverzeichnis
 erstellen.
 
 Wenn die Nodes, Subnodes, etc. mit dem Tag (!V)\tc(!v) gekennzeichnet
-sind, kann Papyrus aus den Eintr„gen ein Inhalts!-verzeichnis mit
-Seiten!-zahlen erstellen und die Kapitel selbst„ndig im Text numerieren.
-Word fhrt die automatische Nummerierung nicht durch, erkennt jedoch
-solche Abs„tze als šberschriften.
+sind, kann Papyrus aus den Einträgen ein Inhalts!-verzeichnis mit
+Seiten!-zahlen erstellen und die Kapitel selbständig im Text numerieren.
+Word führt die automatische Nummerierung nicht durch, erkennt jedoch
+solche Absätze als Überschriften.
 
 
 !medskip
@@ -334,22 +334,22 @@ solche Abs„tze als šberschriften.
 !subsubnode Ungeordnet (RTF)
 !begin_itemize
 !item Umsetzung von (!V)!/programmimage(!v) und (!V)!/authorimage(!v)
-      fr RTF.
-!item Absatzkontrolle fr das gesamte Dokument einschalten durch
+      für RTF.
+!item Absatzkontrolle für das gesamte Dokument einschalten durch
       (!V)\widowctrl(!v) im Kopf der RTF-Datei (!nl)
       (!B)Erledigt in r6pl15.(!b) (!nl)
-      Sp„ter kann man noch ber (!V)\nowidctlpar(!v) und
+      Später kann man noch über (!V)\nowidctlpar(!v) und
       (!V)\widctlpar(!v) nachdenken (Norbert Hanz)
 !item Bei description-Umgebungen sollte hinter das Item ein Linefeed,
       damit die (!nolink [Ausgabe]) genauso aussieht wie bei HTML
       (Norbert Hanz)
-!item šberschriften an den folgenden Absatz binden oder an die
-      rangniedrigere šberschrift (Norbert Hanz)
-!item Titelzeile einer Tabelle festlegen k”nnen (Norbert Hanz)
-!item (!V)(!/img [] [])(!v) auch fr RTF ~~(Thomas Kerkloh) (!nl)
+!item Überschriften an den folgenden Absatz binden oder an die
+      rangniedrigere Überschrift (Norbert Hanz)
+!item Titelzeile einer Tabelle festlegen können (Norbert Hanz)
+!item (!V)(!/img [] [])(!v) auch für RTF ~~(Thomas Kerkloh) (!nl)
       (!B)Achtung bei absoluten Pfaden:(!b) UDO macht alles richtig
       gibt aber eine (unsinnige) Fehlermeldung aus
-!item Freie Wahl ob Funoten oder Endnoten ~~(Norbert Hanz)
+!item Freie Wahl ob Fußnoten oder Endnoten ~~(Norbert Hanz)
 !item eingebette Bilder ~~(Thomas Kerkloh)
 !end_itemize
 
@@ -357,10 +357,10 @@ solche Abs„tze als šberschriften.
 !hline
 !subsubnode Bugs (RTF)
 !begin_itemize
-!item Fehlerhafte Ausgabe, wenn Anfhrungszeichen innerhalb von
+!item Fehlerhafte Ausgabe, wenn Anführungszeichen innerhalb von
       (!V)(!/xlink ...)(!v) oder (!V)(!/url ...)(!v) benutzt wird.
-!item Bei der Benutzung von Anfhrungszeichen innerhalb von
-      (!V)(!/url [""...""] [...])(!v) wird das fhrende Anfhrungs!-zeichen
+!item Bei der Benutzung von Anführungszeichen innerhalb von
+      (!V)(!/url [""...""] [...])(!v) wird das führende Anführungs!-zeichen
       und Teile des Textes verschluckt.
 !item Festes Leerzeichen in (!V)(!/link [...!~...] [...])(!v) wird bei der
       RTF-Ausgabe zu (!V)\\!~(!v) ausgegeben, also zu (!V)\!~(!v) umgesetzt.

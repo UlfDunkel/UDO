@@ -2,26 +2,26 @@
 !subsubnode Bugs (ST-Guide)
 !begin_itemize
 !item Tabellen (Tobias Jung)
-Bei groen Tabellen, die viele Hyperlinks enthalten, treten beim
-ST-Guide-Export irgendwann "Mllzeichen" in der Tabelle auf.
+Bei großen Tabellen, die viele Hyperlinks enthalten, treten beim
+ST-Guide-Export irgendwann "Müllzeichen" in der Tabelle auf.
 
 BEISPIEL
 UDO-Quelltext:
 !begin_verbatim
 !begin_table [|l|l|c|c|c|] !hline
-(!B)Eins(!b) !! (!B)Zwei(!b) !! (!B)Drei(!b) !! (!B)Vier(!b) !! (!B)Fnf(!b)
- 1 !! Diese !! (!link [Tabelle][Krampf]) !! (!link [enth„lt][Sprungziel]) !! nur Bl”dsinn
- 2 !! Diese !! (!link [Tabelle][Krampf]) !! (!link [enth„lt][Sprungziel]) !! nur Bl”dsinn
- 3 !! Diese !! (!link [Tabelle][Krampf]) !! (!link [enth„lt][Sprungziel]) !! nur Bl”dsinn
- 4 !! Diese !! (!link [Tabelle][Krampf]) !! (!link [enth„lt][Sprungziel]) !! nur Bl”dsinn
- 5 !! Diese !! (!link [Tabelle][Krampf]) !! (!link [enth„lt][Sprungziel]) !! nur Bl”dsinn [...]
+(!B)Eins(!b) !! (!B)Zwei(!b) !! (!B)Drei(!b) !! (!B)Vier(!b) !! (!B)Fünf(!b)
+ 1 !! Diese !! (!link [Tabelle][Krampf]) !! (!link [enthält][Sprungziel]) !! nur Blödsinn
+ 2 !! Diese !! (!link [Tabelle][Krampf]) !! (!link [enthält][Sprungziel]) !! nur Blödsinn
+ 3 !! Diese !! (!link [Tabelle][Krampf]) !! (!link [enthält][Sprungziel]) !! nur Blödsinn
+ 4 !! Diese !! (!link [Tabelle][Krampf]) !! (!link [enthält][Sprungziel]) !! nur Blödsinn
+ 5 !! Diese !! (!link [Tabelle][Krampf]) !! (!link [enthält][Sprungziel]) !! nur Blödsinn [...]
 !end_table
 !end_verbatim
 
-in der stg-Datei finden sich dann pl”tzlich solche Sachen: 
-14    Diese  @{"Tabelle" link "Krampf"}  @{"enth„lt" link "Sprungziel"}  nur Bl”dsinn  
-15    Diese  @{"Tabelle" link "Krampf"}  @{"enth„lt" link "Sprungziel"}  nur Bl”dsinn  
-16    Diese  @{"Tabelle" link "Krampf"}    @@   nur Bl”dsinn 
+in der stg-Datei finden sich dann plötzlich solche Sachen: 
+14    Diese  @{"Tabelle" link "Krampf"}  @{"enthält" link "Sprungziel"}  nur Blödsinn  
+15    Diese  @{"Tabelle" link "Krampf"}  @{"enthält" link "Sprungziel"}  nur Blödsinn  
+16    Diese  @{"Tabelle" link "Krampf"}    @@   nur Blödsinn 
 
 
 Dieser Fehler ist reproduzierbar.
