@@ -8743,48 +8743,49 @@ LOCAL void save_winhelp_project ( void )
 	fprintf(hpjfile, "\n[CONFIG]\n");
 
 	if (!no_buttons)	/* r6pl7 */
-	{	if (desttype==TOAQV)
-		{	fprintf(hpjfile, "Std20Menus()\n");		/* Defaultmenuezeile anzeigen */
-			fprintf(hpjfile, "Std20Buttons()\n");	/* Defaultbuttons anzeigen */
-		}
-		else
-		{	fprintf(hpjfile, "BrowseButtons()\n");	/* << und >> anzeigen */
-		}
-
-		if (desttype==TOAQV)
-		{	sprintf(n, "CreateButton(\"BTN_UP\", \"%s\", \"JumpID(%s, `%s')\")",
-				"&Up", hlp_name, WIN_TITLE_NODE_NAME);	/* immer "Up" bei QuickView */
-			fprintf(hpjfile, "%s\n", n);
-		}
-		else
-		{	sprintf(n, "CreateButton(\"BTN_UP\", \"%s\", \"JumpID(%s, `%s')\")",
-				lang.up, hlp_name, WIN_TITLE_NODE_NAME);
-			fprintf(hpjfile, "%s\n", n);
+	{
+		if (get_toc_counter() > 1 ||
+			(get_toc_counter() > 0 && called_tableofcontents))
+		{
+			if (desttype==TOAQV)
+			{	fprintf(hpjfile, "Std20Menus()\n");		/* Defaultmenuezeile anzeigen */
+				fprintf(hpjfile, "Std20Buttons()\n");	/* Defaultbuttons anzeigen */
+			}
+			else
+			{	fprintf(hpjfile, "BrowseButtons()\n");	/* << und >> anzeigen */
+			}
+	
+			if (desttype==TOAQV)
+			{	sprintf(n, "CreateButton(\"BTN_UP\", \"%s\", \"JumpID(%s, `%s')\")",
+					"&Up", hlp_name, WIN_TITLE_NODE_NAME);	/* immer "Up" bei QuickView */
+				fprintf(hpjfile, "%s\n", n);
+			}
+			else
+			{	sprintf(n, "CreateButton(\"BTN_UP\", \"%s\", \"JumpID(%s, `%s')\")",
+					lang.up, hlp_name, WIN_TITLE_NODE_NAME);
+				fprintf(hpjfile, "%s\n", n);
 #if 0
-			/* WinHelp: Knopf zum Beenden einbauen */
-			sprintf(n, "CreateButton(\"BTN_EXIT\", \"%s\", \"Exit()\")",
-				lang.exit);
-			fprintf(hpjfile, "%s\n", n);
+				/* WinHelp: Knopf zum Beenden einbauen */
+				sprintf(n, "CreateButton(\"BTN_EXIT\", \"%s\", \"Exit()\")",
+					lang.exit);
+				fprintf(hpjfile, "%s\n", n);
 #endif
-		}
+			}
 
+			if ( called_tableofcontents )
+			{	node2NrWinhelp(bc, 0);
+				sprintf(n, "ChangeButtonBinding(\"BTN_CONTENTS\", \"JumpID(%s, `%s')\")",
+					hlp_name, bc);
+				fprintf(hpjfile, "%s\n", n);
+			}
+		}
+				
 		if (use_about_udo)
 		{	/*r6pl5: Button fÅr UDO einbauen */
 			sprintf(n, "CreateButton(\"BTN_UDO\", \"UDO%s\", \"JumpID(%s, `%s')\")",
 				UDO_REL, hlp_name, WIN_UDO_NODE_NAME);
 			fprintf(hpjfile, "%s\n", n);
-		}
 
-
-		if ( called_tableofcontents )
-		{	node2NrWinhelp(bc, 0);
-			sprintf(n, "ChangeButtonBinding(\"BTN_CONTENTS\", \"JumpID(%s, `%s')\")",
-				hlp_name, bc);
-			fprintf(hpjfile, "%s\n", n);
-		}
-		
-		if ( use_about_udo )
-		{
 			if (desttype==TOAQV)	/* AQV kann kein zweites Fenster */
 			{	sprintf(n, "AppendItem(\"mnu_help\", \"item_udoinfo\", \"&UDO%s...\", \"JumpID(%s, `%s')\")",
 					UDO_REL, hlp_name, WIN_UDO_NODE_NAME);
@@ -8874,12 +8875,16 @@ LOCAL void save_winhelp4_project ( void )
 
 	if (!no_buttons)	/* r6pl7 */
 	{
-		fprintf(hpjfile, "BrowseButtons()\n");	/* << und >> anzeigen */
+		if (get_toc_counter() > 1 ||
+			(get_toc_counter() > 0 && called_tableofcontents))
+		{
+			fprintf(hpjfile, "BrowseButtons()\n");	/* << und >> anzeigen */
 
-		sprintf(n, "CreateButton(\"BTN_UP\", \"%s\", \"JumpID(%s, `%s')\")",
-			lang.up, hlp_name, WIN_TITLE_NODE_NAME);
-		fprintf(hpjfile, "%s\n", n);
-
+			sprintf(n, "CreateButton(\"BTN_UP\", \"%s\", \"JumpID(%s, `%s')\")",
+				lang.up, hlp_name, WIN_TITLE_NODE_NAME);
+			fprintf(hpjfile, "%s\n", n);
+		}
+			
 		if (use_about_udo)
 		{	/*r6pl5: Button fÅr UDO einbauen */
 			sprintf(n, "CreateButton(\"BTN_UDO\", \"UDO%s\", \"JumpID(`%s.hlp>win1', `%s')\")",

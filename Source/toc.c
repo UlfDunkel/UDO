@@ -9920,6 +9920,12 @@ GLOBAL int is_current_node(int tocindex)
 }
 
 
+GLOBAL int get_toc_counter(void)
+{
+	return p2_toc_counter;
+}
+
+
 /*	############################################################
 	#
 	#	Dateien mit den Jump-IDs ausgeben fuer C und Pascal
