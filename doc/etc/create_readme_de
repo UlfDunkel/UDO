@@ -1,2 +1,4 @@
 #!/bin/sh
 udo --asc --verbose --force-long -D LANG_DE -o LIESMICH.txt readme.u
+# das folgende ist vorläufig!
+cp LIESMICH.txt ../../LIESMICH
