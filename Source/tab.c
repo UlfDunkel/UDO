@@ -995,7 +995,12 @@ LOCAL void table_output_ipf ( void )
 
 	f[0]= EOS;
 	for (i=0; i<=tab_w; i++)
-	{	sprintf(cx, "%lu ", tab_cell_w[i]);
+	{
+#ifdef UM_PRINTF_USE_LD
+		sprintf(cx, "%u ", tab_cell_w[i]);
+#else
+		sprintf(cx, "%lu ", tab_cell_w[i]);
+#endif
 		strcat(f, cx);
 	}
 	del_whitespaces(f);
