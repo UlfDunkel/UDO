@@ -9008,7 +9008,7 @@ LOCAL void show_udo_intro ( void )
 
 }	/* show_udo_intro */
 
-int call_dummy ( void )
+LOCAL int call_dummy ( void )
 {
 	int i=42;
 
