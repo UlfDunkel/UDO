@@ -1,5 +1,5 @@
 # doc/manual/source/appendix.ui
-# letzte Änderungen: 15.01.2004 / last changes: Jan 15, 2004
+# letzte Änderungen: 03.02.2004 / last changes: Feb 2, 2004
 
 
 ################################################################################
@@ -25,7 +25,7 @@ Folgende Maximalwerte müssen Sie beim Erstellen der Quelltexte beachten:
 # bitte die nachfolgenden Zahlen auf den aktuellen Stand bringen
 # d.h. wo Du bei Deiner Aktion mit meinen Testdateien die verschiedenen Parameter hochgedreht hast
 # Parameter, die hier evtl. fehlen, bitte ergänzen
-# für jeden Wert als Kommentar dazuschreiben, ab welchem Release usw. der Wert geht
+# für jeden Wert als Kommentar dazuschreiben, ab welchem Release usw. der Wert gilt
 # tunlichst hier auch vermerken, wo im Code diese Limitierungen zu finden sind,
 # damit bei Bedarf diese Doku anhand des Codes überprüft werden kann
 
