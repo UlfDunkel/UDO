@@ -36,6 +36,7 @@ Dieses Dokument erfährt gerade eine Überarbeitung.
 # 
 ############################################################
 !node Einführung
+!html_name einfuehrung
 
 Diese Informationen wurden erstellt, um die Portierung von UDO zu 
 erleichtern und um einen kleinen Einblick in die Funktionsweise von 
@@ -69,6 +70,7 @@ werde versuchen, diesem Text in Zukunft auf dem laufenden zu halten.
 # 
 ############################################################
 !node Was muß angepaßt werden?
+!html_name anpassen
 
 Hier eine kleine Aufstellung der Routinen und Konstanten, die 
 unbedingt angepaßt werden müssen. Findet Ihr bereits einen für Euch 
@@ -102,6 +104,7 @@ abgenommen.
 ############################################################
 
 !node	Makros
+!html_name makros
 
 Ich beginne mal mit den wichtigsten Dingen, die unbedingt beachtet 
 werden sollten. Für (!V)#ifdef(!v)'s sind folgende Makros vorgesehen:
@@ -132,11 +135,13 @@ Bezeichner im Makefile gesetzt werden!
 # 
 ############################################################
 !node Headerfiles
+!html_name headerfiles
 
 #-----------------------------------------------------------
 # 
 #-----------------------------------------------------------
 !subnode	import.h & export.h
+!html_name import_export
 
 (!V)import.h(!v) beinhaltet folgendes:
 
@@ -198,6 +203,7 @@ verzichten.
 # 
 #-----------------------------------------------------------
 !subnode	portab.h
+!html_name portab
 
 In (!V)portab.h(!v) werden derzeit nur grundlegende Dinge festgelegt. 
 Zum einen die boolschen Konstanten, EOS (end of string),
@@ -213,6 +219,7 @@ die Header der Grafikformate auszulesen.
 # 
 #-----------------------------------------------------------
 !subnode	version.h
+!html_name version
 
 In diesem File werden ein paar Konstanten für Versionsnummern gesetzt. 
 Aber was viel wichtiger ist: Auch hier werden systemabhängige Makros 
@@ -262,6 +269,7 @@ darüber zu informieren!
 # 
 #-----------------------------------------------------------
 !subnode commands.h
+!html_name commands
 
 Hier werden einige Befehle als Makros hinterlegt. Ich gebe zu, daß man 
 besser ein eigenes Modul benutzen sollte, in dem die Befehle als 
@@ -272,6 +280,7 @@ und UDOs Binary etwas kleiner wird.
 # 
 #-----------------------------------------------------------
 !subnode udo_type.h
+!html_name udo_type
 
 Hier werden ein paar Typen deklariert, die modulübergreifen verwendet 
 werden. Das Headerfile ist gut kommentiert und sollte weitestgehend selbsterklärend sein.
@@ -281,6 +290,7 @@ werden. Das Headerfile ist gut kommentiert und sollte weitestgehend selbsterklär
 # 
 #-----------------------------------------------------------
 !subnode	constant.h
+!html_name constant
 
 Hier werden wichtige Konstanten für den internen Gebrauch gesetzt. Um
 die meisten braucht Ihr Euch nicht zu kümmern.
@@ -299,9 +309,11 @@ anzugeben:
 # 
 ############################################################
 !node C-Files
+!html_name c-files
 
 #-----------------------------------------------------------
 !subnode	abo.c
+!html_name abo
 
 Dieses Modul erzeugt eine kleine Werbeseite für UDO, falls in 
 UDO-Quelltexten der Schalter ''(!T)!/ude_about_udo(!t)'' verwendet 
@@ -309,6 +321,7 @@ wird.
 
 #-----------------------------------------------------------
 !subnode	cfg.c
+!html_name cfg
 
 Die Routine liest die Datei namens (!V)udo.ini(!v) aus
 (!V)$HOME(!v), (!V)$UDOPATH(!v) oder dem aktuellen Verzeichnis.
@@ -328,6 +341,7 @@ kommentiert ist.
 
 #-----------------------------------------------------------
 !subnode	chr.c
+!html_name chr
 
 Hier sind alle Routinen untergebracht, die sich um die Umsetzung der 
 Son!-der!-zei!-chen und um spezielle Platzhalter kümmern.
@@ -342,6 +356,7 @@ von mir auf den neuesten Stand gebracht wird.
 
 #-----------------------------------------------------------
 !subnode	cli.c
+!html_name cli
 
 Dies ist die Benutzerschnittstelle der Kommandozeilenversionen. Möchte 
 man eine eigene Schnittstelle oder Oberfläche schreiben, muß dieses 
@@ -349,6 +364,7 @@ Files quasi ersetzt werden.
 
 #-----------------------------------------------------------
 !subnode	env.c
+!html_name env
 
 Dieses Modul verwaltet alle Umgebungen und sorgt durch Berechnung von 
 Einrückungen dafür, daß Umgebungen später richtig formatiert 
@@ -360,6 +376,7 @@ werden. Diese Zeichen sind teils zeichensatzabhänig!
 
 #-----------------------------------------------------------
 !subnode	file.c
+!html_name file
 
 Die Funktion (!V)fsplit()(!v) sorgt für die Aufsplittung einer 
 Pfadangabe in Laufwerk (z.B. (!V)D:(!v), Pfad (z.B. (!V)\BIN(!v)), 
@@ -374,6 +391,7 @@ weitere Funktionen.
 
 #-----------------------------------------------------------
 !subnode	img.c
+!html_name img
 
 Diese Routine kümmert sich um Aufgaben, die mit Grafiken 
 zusammenhängen. Generell werden nur die Grafikheader ausgelesen und in 
@@ -387,12 +405,14 @@ mir diese Infos zukommen zu lassen.
 
 #-----------------------------------------------------------
 !subnode	msg.c
+!html_name msg
 
 Dieses Modul kümmert sich um die Ausgabe von Fehlermeldungen ins 
 Logfile bzw. auf die Standardausgabe.
 
 #-----------------------------------------------------------
 !subnode	par.c
+!html_name par
 
 Dieses Modul kümmert sich um die Bearbeitung von Platzhaltern, also 
 Befehlen, bei denen Parameter benutzt werden.
@@ -403,6 +423,7 @@ verwaltet.
 
 #-----------------------------------------------------------
 !subnode	str.c
+!html_name str
 
 Hier werden Funktionen zur Stringbehandlung bereitgestellt. Da 
 intensiv von Funktionen wie (!V)replace_all()(!v) gemacht wird, bin 
@@ -411,18 +432,21 @@ Routinen nennen kann.
 
 #-----------------------------------------------------------
 !subnode	sty.c
+!html_name sty
 
 Dieses Modul kümmert sich um die Ersetzung und Überprüfung der
 ver!-schie!-de!-nen Texteffekte.
 
 #-----------------------------------------------------------
 !subnode	tab.c
+!html_name tab
 
 (!T)tab.c(!t) beinhaltet alle Routinen, die für den Tabellensatz 
 zuständig sind.
 
 #-----------------------------------------------------------
 !subnode	toc.c
+!html_name toc
 
 Dieses etwas großgeratene Modul hat einen etwas verwirrenden Namen. 
 Denn es kümmert sich nicht nur um die Ausgabe eines Inhaltsverzeichnis 
@@ -436,12 +460,14 @@ fast komplett neu programmiert.
 
 #-----------------------------------------------------------
 !subnode	tp.c
+!html_name tp
 
 Hier werden lediglich die Titelseiten für die jeweiligen Formate
 erzeugt.
 
 #-----------------------------------------------------------
 !subnode	udo.c
+!html_name udo
 
 (!T)udo.c(!t) ist praktisch das Hauptmodul, das alle anderen Module 
 kontrolliert. In diesem Modul werden Zeilen eingelesen, abgefragt, 
@@ -453,6 +479,7 @@ die obigen Module verzweigt.
 # 
 ############################################################
 !node UDOs grobe Funktionsweise
+!html_name funktionsweise
 
 Hier werde ich versuche, die Funktionsweise von UDO in Grundzügen 
 dar!-zu!-stel!-len. Ob mir das gelungen ist, müßt Ihr entscheiden, aber 
@@ -543,6 +570,7 @@ Funktionen (!V)c_macros(!v), (!V)auto_quote_chars(!v),
 # 
 ############################################################
 !node	Eigene Benutzerschnittstellen
+!html_name benutzerschnittstellen
 
 UDO ist nicht zwingend als Kommandozeilenversion ausgelegt. Dies zeigt 
 auch, daß es eine GEM-Version von UDO gibt.
@@ -560,6 +588,7 @@ ausführlich in (!V)cli.c(!v) anschauen.
 
 #-----------------------------------------------------------
 !subnode Flags
+!html_name flags
 
 Die Hauptfunktion (!V)udo()(!v) kann man durch folgende Flags 
 beeinflussen. Man erhält Zugriff auf diese Flags, wenn man 
@@ -612,6 +641,7 @@ dann sollte es losgehen.
 
 #-----------------------------------------------------------
 !subnode Callbacks
+!html_name callbacks
 
 Will man eine eigene Benutzerschnittstelle schreiben, müssen die in 
 (!V)gui.h(!v) deklarierten Funktionen angeboten werden. Diese werden 
@@ -694,8 +724,10 @@ Oberflächen sollte immer (!V)FALSE(!v) zurückgeben.
 # 
 ############################################################
 !node Distribution vorbereiten
+!html_name distribution
 
 !subnode Makefiles
+!html_name makefiles
 
 Den Sourcecodes liegen vorgefertigte Makefiles bei, die man zur
 Compilierung verwenden sollte. Hier die passenden Make-Aufrufe für die
@@ -728,6 +760,7 @@ Quelltextverzeichnis kopiert hat:
 
 
 !subnode Doku und Manualpage umwandeln
+!html_name doku_manpage
 
 Nachdem UDO compiliert wurde, sollte man die Dokumentation und die Installationsanweisungen
 ins ASCII-Format umwandeln und die Manualpage erzeugen:
@@ -753,6 +786,7 @@ Danach hat man also --- jeweils in deutscher und englischer Sprache
 Diese werden gleich benötigt.
 
 !subnode FILE_ID.DIZ anpassen
+!html_name file_id_diz
 
 In (!T)manual/(!t) befinden sich die Dateien (!V)file_id.diz(!v) und
 (!V)file_id.ger(!v). In diesen Dateien müssen noch das jeweilige
@@ -762,6 +796,7 @@ Nein, UDO gibt es nicht für den ZX Spectrum (!grin)
 
 
 !subnode Archiv erstellen und packen
+!html_name archiv-erstellen
 
 UDO und die Anleitungen sind nun komplett. Bitte erzeugt auf den
 Unix-Systemen Archive mit folgendem Aufbau:
