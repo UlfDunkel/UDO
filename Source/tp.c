@@ -116,7 +116,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
 	char *page, page2[2];
 	struct size_brackets contlen;
 
-	tokcpy2(s);
+	tokcpy2(s, 512);
 	
 	contlen= get_two_brackets_ptr(s, &cont_format, &cont_content, &data);
 	
@@ -336,7 +336,7 @@ GLOBAL BOOLEAN set_docinfo ( void )
 	char sDriv[512], sPath[512], sFile[512], sSuff[512];
 	size_t contlen;
 
-	tokcpy2(s);
+	tokcpy2(s, 512);
 	
 	contlen= get_brackets_ptr(s, &cont, &data);
 	
