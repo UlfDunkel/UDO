@@ -1,18 +1,60 @@
 ################################################################################
 # doc/manual/source/manual.u
 # Hauptfile der Anleitung zu UDO / udo manual main page
-# letzte Änderungen: 13.01.2004 / last changes: Jan 13, 2004
+# letzte Änderungen: 15.01.2004 / last changes: Jan 15, 2004
 ################################################################################
 # In diesem File befindet sich kein Text! Alle Texte werden nachgeladen
 # This file doesn't contain any text! Any text will be included from other files.
 ################################################################################
 
+
+################################################################################
+# ~~~ KOMMANDOZEILENPARAMETER / COMMAND LINE PARAMETERS: ~~~
+# Durch Benutzung der Option -D lassen sich "kleinere" Anleitungen erstellen:
+# Using the option -D you can make smaller manuals:
+# 1) ohne Kapitel "Einführung" / without chapter "Introduction":
+#    $ udo ... -o ! -D NoIntro manual.u
+# 2) ohne Kapitel "Installation" / without chapter "Installation":
+#    $ udo ... -D NoInstall ...
+# 3) ohne Kapitel "Bedienung" / without chapter "Running":
+#    $ udo ... -D NoRunning ...
+# 4) ohne Kapitel "Syntax" / without chapter "Syntax":
+#    $ udo ... -D NoSyntax ...
+# 5) ohne Kapitel "Ausgabeformate" / without chapter "Output Formats":
+#    $ udo ... -D NoFormats ...
+# 6) ohne Kapitel "Praktische Arbeit" / without chapter "Working with UDO":
+#    $ udo ... -D NoIntro ...
+# 7) ohne Anhang / without Appendix:
+#    $ udo ... -D NoAppendix ...
+# 8) Anhang wird ohne Kapitel "Historie" erzeugt / Appendix without chapter "History":
+#    $ udo ... -D NoHistory ...
+# 9) Anhang wird ohne Befehlsindex erzeugt / Appendix without Command index:
+#    $ udo ... -D NoIndex ...
+# Per Voreinstellung wird eine vollständige Dokumentation erzeugt.
+# By default a complete documentation will be produced.
+# Die verschiedenen Schalter können selbstverständlich kombiniert werden.
+# You can combine these switches.
+# ~~~ PARAMETER FÜR SPRACHE / PARAMETER FOR DOCUMENTATION LANGUAGE: ~~~
+# $ udo ... -D LANG_DE ... => diese Dokumentation wird in Deutsch erzeugt
+# $ udo ... -D LANG_EN ... => this documentation will be produced in English
+# Parameter "LANG_DE" und "LANG_EN" fehlen beide => Deutsch (siehe lang.ui)
+# Parameter "LANG_DE" and "LANG_EN" are both missing => german (see lang.ui)
+# ~~~ WEITERE PARAMETER / MORE PARAMETERS: ~~~
+# 1) Befehlsindex *ohne* nicht mehr unterstützte Kommandos erzeugen:
+#    Remove no longer supported commands from command index:
+#       $ udo ... -D NoOldKeywords ...
+#    Voreinstellung: Befehlsindex wird *mit* diesen Kommandos erstellt.
+#    Default: having command index *with* that commands.
+# 2) Dokumentation mit speziellen HTML-Einstellungen für die UDO-Website (siehe weiter unten):
+#    Documentation with special HTML parameters for the UDO website (see below):
+#       $ udo ... -D UseForWeb ...
+################################################################################
+
+
 # ------------------------------------------------------------------------------
-# Die Doku wurde in Windows-ANSI erstellt.
-# Der ISO-Zeichensatz ist ein Untermenge davon.
+# Die Doku-Quellen wurden im Zeichensatz ISO-8859-1 erstellt.
 # ------------------------------------------------------------------------------
-# The source files were written using the Windows-ANSI charset.
-# The ISO-charset is a subset of this charset.
+# The source files were written using the ISO-8859-1 charset.
 # ------------------------------------------------------------------------------
 !code [iso]
 
@@ -125,10 +167,30 @@
 !nroff_type 1
 
 # ------------------------------------------------------------------------------
+# HTML-Spezialitäten / do some special things for HTML
+# ------------------------------------------------------------------------------
+!ifset [UseForWeb]
+# Dokumentation zur Veröffentlichung auf der UDO-Website:
+# Documentation will be published at UDO website:
+!html_use_style /udo.css
+!iflang [german]
+!html_backpage http://www.udo-open-source.org/ 'Zurück zu UDO Open Source (Home)'
+!endif
+!iflang [english]
+!html_backpage http://www.udo-open-source.org/ 'Back to UDO Open Source (Home)'
+!endif
+!else
+# Dokumentation für den "normalen" Anwender...
+# Documentation for "normal" User...
+!html_use_style ./udo.css
+!endif
+
+# ------------------------------------------------------------------------------
 # Makros / Set some macros
 # ------------------------------------------------------------------------------
 
 !macro UDOR udo(!RELEASE)
+# "RELEASE" ist in der Datei "version.ui" definiert.
 
 !macro a !]
 !define x !(!1)
@@ -276,27 +338,11 @@
 !define MAXDEFINE       128
 !define MAXSYMLEN        32
 
-# ------------------------------------------------------------------------------
-# Symbole / Set some symbols
-# ------------------------------------------------------------------------------
-
-# Wenn dieses Symbol nicht gesetzt ist, werden Kommandos, die
-# nicht mehr unterstützt werden, aus dem Index entfernt
-# if this symbols is not set, commands that are not supported
-# any longer are remove from the command index
-!set OldKeywords
 
 ################################################################################
 # Jetzt geht's lohooos...
-# Man kann durch Benutzung der -D Option kleinere Anleitungen
-# erstellen. Beispiel fuer eine Anleitung ohne Installationsanweisungen:
-# $ udo --win -o ! -D NoInstall udo.u
 ################################################################################
 # 10, 9, 8, 7, 6, ignition sequence started, ...
-# Using the option -D you can make smaller manuals. If you
-# e.g. want a manual without installation hints and shareware
-# notes for Windows call UOD like this:
-# $ udo --win -o ! -D NoShareware -D NoInstall udo.u
 ################################################################################
 
 !begin_document
