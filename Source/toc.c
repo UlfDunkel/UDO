@@ -3477,6 +3477,7 @@ GLOBAL BOOLEAN save_htmlhelp_index ( const char* filename )
 {
 	FILE *file;
 	size_t i;
+	int j;
 	size_t num_index;
 	HTML_IDX *html_index;
 	char htmlname[512];
@@ -3491,8 +3492,8 @@ GLOBAL BOOLEAN save_htmlhelp_index ( const char* filename )
 			num_index++;
 	}
 #endif
-	for (i = 1; i <= p1_lab_counter; i++)
-		if (lab[i] != NULL)
+	for (j = 1; j <= p1_lab_counter; j++)
+		if (lab[j] != NULL)
 			num_index++;
 	
 	if (num_index == 0)
@@ -3529,24 +3530,24 @@ GLOBAL BOOLEAN save_htmlhelp_index ( const char* filename )
 	/* array aufbauen.. */
 	num_index = 0;
 #if 0
-	for (i = 1; i <= p1_toc_counter; i++)
+	for (j = 1; j <= p1_toc_counter; j++)
 	{
-		if (toc[i] != NULL && !toc[i]->invisible)
+		if (toc[j] != NULL && !toc[j]->invisible)
 		{
-			convert_toc_item(toc[i]);
-			html_index[num_index].toc_index = i;
-			strcpy(html_index[num_index].tocname, toc[i]->name);
+			convert_toc_item(toc[j]);
+			html_index[num_index].toc_index = j;
+			strcpy(html_index[num_index].tocname, toc[j]->name);
 			num_index++;
 		}
 	}
 #endif
-	for (i = 1; i <= p1_lab_counter; i++)
+	for (j = 1; j <= p1_lab_counter; j++)
 	{
-		if (lab[i] != NULL)
+		if (lab[j] != NULL)
 		{
-			html_index[num_index].toc_index = lab[i]->tocindex;
+			html_index[num_index].toc_index = lab[j]->tocindex;
 			tocname = html_index[num_index].tocname;
-			strcpy(tocname, lab[i]->name);
+			strcpy(tocname, lab[j]->name);
 			replace_macros(tocname);
 			c_internal_styles(tocname);
 			/* replace_udo_quotes(tocname); */
