@@ -1320,23 +1320,16 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 					replace_udo_quotes(Param[2]);
 					replace_udo_quotes(Param[1]);
 
-					/* Changed in r6.2pl1 [NHz] */
-					auto_quote_chars(Param[2], TRUE);
-					url_len = (int)strlen(Param[2]);
+					/* Changed in r6.2pl1 [NHz] */ 					auto_quote_chars(Param[2], TRUE); 					url_len = (int)strlen(Param[2]);
 
 					rtf0[0]=EOS;
 					url_rtf[0]=EOS;
 
 					for(i=0;i<url_len;i++)
-					{	if(Param[2][i] == '\\')
-						{	i += 2;
+					{	if(Param[2][i] == '\\') 						{	i += 2;
 							rtf0[0]=EOS;
 							strncpy(rtf0, Param[2]+i, 2);
-							i++;
-						}
-						else
-							sprintf(rtf0, "%x", (int)Param[2][i]);
-
+							i++; 						} 						else 							sprintf(rtf0, "%x", (int)Param[2][i]); 
 						strcat(url_rtf, rtf0);
 						strcat(url_rtf, "00");
 					}
