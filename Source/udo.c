@@ -3786,6 +3786,7 @@ LOCAL void convert_image ( const BOOLEAN visible )
 		case TOPDL:
 			c_internal_styles(caption);
 			/* build_image_filename(filename, ".png");	*/
+			qreplace_all(filename, "\\_", 2, "_", 1);
 			c_png_output(filename, caption, ".png", visible);
 			break;
 		case TOLYX:
