@@ -6685,6 +6685,8 @@ LOCAL void output_preamble ( void )
 				if (s[0]!= EOS)
 				{	voutlnf("\\usepackage{%s}", s);
 				}
+				/* New in V6.5.8 [NHz] */
+				outln("\\usepackage{eurosym}");
 				if (desttype==TOPDL)	/* r6pl8*/
 				{	outln("\\pdfoutput=1\\relax");
 					if (bDocMediumCompression)
