@@ -749,6 +749,10 @@ GLOBAL void *um_realloc(void *block, size_t size)
 					}
 					lauf=0; /* exit loop */
 				}
+				else
+				{
+					tanker=tanker->next; /* v6.3.12 [vj] Of course, we need this! */
+				}
 			}
 		} while ((tanker != NULL)&&(lauf==1));
 
