@@ -432,14 +432,16 @@ GLOBAL BOOLEAN break_action ( void )
 	# Programm-Informationen und Fehlermeldungen
 	#
 	######################################################################	*/
+
+
 /*	----------------------------------------------------------------------
 	show_version() zeigt die Versionsnummer dieses Programms
 	----------------------------------------------------------------------	*/
 LOCAL void show_version ( void )
 {
 	fprintf(stdout, "\n%s\n", strPrgname);
-	fprintf(stdout, "Release %s Patchlevel %s for %s, %s\n",
-				UDO_REL, UDO_PL, UDO_OS, __DATE__);
+	fprintf(stdout, "Release %s Patchlevel %s for %s, %s %s\n",
+				UDO_REL, UDO_PL, UDO_OS, compile_date, compile_time);
 	fprintf(stdout, "%s\n", COPYRIGHT);
 }
 

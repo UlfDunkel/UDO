@@ -591,6 +591,8 @@ LOCAL const UDOCHARSET udocharset[MAXCHARSET]=
 	{ "win",		CODE_LAT1		},
 };
 
+GLOBAL char compile_date[11] = "\0";
+GLOBAL char compile_time[9]  = "\0";
 
 
 /*	######################################################################
@@ -10506,6 +10508,38 @@ LOCAL BOOLEAN check_modules_pass2 ( void )
 }	/* check_modules_pass2 */
 
 
+/*	----------------------------------------------------------------------
+	getMonth() extrahiert aus Datums-String im __DATE__-Format
+	den Monat als int
+	----------------------------------------------------------------------	*/
+LOCAL int getMonth( const char *date_string )
+{
+	if( strnicmp(date_string, "Jan", 3)==0 )
+		return 1;
+	if( strnicmp(date_string, "Feb", 3)==0 )
+		return 2;
+	if( strnicmp(date_string, "Mar", 3)==0 )
+		return 3;
+	if( strnicmp(date_string, "Apr", 3)==0 )
+		return 4;
+	if( strnicmp(date_string, "May", 3)==0 )
+		return 5;
+	if( strnicmp(date_string, "Jun", 3)==0 )
+		return 6;
+	if( strnicmp(date_string, "Jul", 3)==0 )
+		return 7;
+	if( strnicmp(date_string, "Aug", 3)==0 )
+		return 8;
+	if( strnicmp(date_string, "Sep", 3)==0 )
+		return 9;
+	if( strnicmp(date_string, "Oct", 3)==0 )
+		return 10;
+	if( strnicmp(date_string, "Nov", 3)==0 )
+		return 11;
+	if( strnicmp(date_string, "Dec", 3)==0 )
+		return 12;
+	return 0;
+}
 
 /*	--------------------------------------------------------------
 	Default-Werte setzen
@@ -10653,6 +10687,25 @@ GLOBAL void init_vars ( void )
 	uses_toplink= FALSE;
 
 	cursor_active();
+
+	/*	--------------------------------------------------- */
+	/*	Variablen für Compile-Zeit und Datum initialisieren */
+	/*	--------------------------------------------------- */
+	
+	if( compile_date[0]=='\0' )
+	{
+		char date[11] = __DATE__;
+		
+		if( date[4]==' ' )
+			date[4] = '0';
+
+		sprintf(compile_date, "%c%c%c%c-%02i-%c%c", date[7], date[8], date[9], date[10],
+			getMonth(date), date[4], date[5]);
+	}
+	if( compile_time[0]=='\0' )
+	{
+		strcpy(compile_time, __TIME__);
+	}
 
 }	/*init_vars*/
 
