@@ -1,5 +1,5 @@
 # doc/manual/source/formats.ui
-# letzte Änderungen: 22.12.2003 / last changes: Dec 22, 2003
+# letzte Änderungen: 03.02.2004 / last changes: Feb 3, 2004
 
 
 ################################################################################
@@ -13,7 +13,7 @@
 
 # 10.01.1996: Erweiterungen
 # 25.01.1996: Anderer Aufbau und weitere Fragen
-# 20.10.2001: Zusammengefasst mit Fragen aus Anhang
+# 20.10.2001: Zusammengefaßt mit Fragen aus Anhang
 # 20.12.2003: eigenes Kapitel "Ausgabeformate"
 
 ################################################################################
@@ -25,7 +25,62 @@
 !endif
 !html_name format_amg.html
 
-(!MISS)
+!iflang [german]
+AmigaGuide ist ein Hypertext-System, das von Commodore definiert wurde.
+AmigaGuide ist das Standard-Format für Online-Dokumentationen auf dem Amiga-Computer (unter AmigaOS).
+Für andere Plattformen, wie Windows oder Linux, stehen AmigaGuide-Betrachter zur Verfügung.
+
+!autoref [off]
+Weiterführende Informationen (alle in englischer Sprache):
+
+!begin_itemize
+
+!item allgemeiner Überblick zum Amiga-Computer: (!url [http://www.tutorgig.com/encyclopedia/getdefn.jsp?keywords=Amiga] [])
+
+!item AmigaGuide: A Hypertext Documentation System: (!url [http://www.reality-check-inc.com/aguide.htm] []) (Funktionsüberblick)
+
+!item AmigaGuide (allgemeiner Überblick mit Links zu Viewern für andere Betriebssysteme):
+(!url [http://www.tutorgig.com/encyclopedia/getdefn.jsp?keywords=Amigaguide] [])
+
+!item The AmigaGuide Manual. The (!I)complete(!i) documentation of AmigaGuide commands. Von Aric R.~Caley (1995): (!url [http://www.lysator.liu.se/amiga/code/guide/amigaguide.guide] []) (ausführliche Beschreibung des AmigaGuide-Formats)
+
+!item AmigaGuide Tags and Commands: (!url [http://www.safalra.com/hypertext/amigaguide/] []) (Übersicht zum AmigaGuide-Format)
+
+!item How To Write an AmigaGuide: (!url [http://ale.emuunlim.com/write-amigaguide.htm] [])
+
+!end_itemize
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+AmigaGuide is a hypertext system created by Commodore. AmigaGuide is the standard format for
+online documentations on Amiga computer (running under AmigaOS).
+AmigaGuide viewers are also available for other platforms, like Windows or Linux.
+
+!autoref [off]
+More information can be found on:
+
+!begin_itemize
+
+!item General Overview on Amiga Computer: (!url [http://www.tutorgig.com/encyclopedia/getdefn.jsp?keywords=Amiga] [])
+
+!item AmigaGuide: A Hypertext Documentation System: (!url [http://www.reality-check-inc.com/aguide.htm] []) (functional overview)
+
+!item AmigaGuide (general overviews with links to AmigaGuide viewers for other operating systems):
+(!url [http://www.tutorgig.com/encyclopedia/getdefn.jsp?keywords=Amigaguide] [])
+
+!item The AmigaGuide Manual. The (!I)complete(!i) documentation of AmigaGuide commands. By Aric R.~Caley (1995): (!url [http://www.lysator.liu.se/amiga/code/guide/amigaguide.guide] []) (detailed AmigaGuide format description)
+
+!item AmigaGuide Tags and Commands: (!url [http://www.safalra.com/hypertext/amigaguide/] []) (AmigaGuide format overview)
+
+!item How To Write an AmigaGuide: (!url [http://ale.emuunlim.com/write-amigaguide.htm] [])
+
+!end_itemize
+
+!endif
+
+!autoref [on]
+
 !end_node
 
 ################################################################################
@@ -38,7 +93,20 @@
 !alias Apple QuickView
 !html_name format_aqv.html
 
-(!MISS)
+!iflang [german]
+Apple QuickView ist ein Hypertext-Format, das unter älteren MacOS-Versionen verwendet wurde.
+Es wurde von der Firma Altura ((!url [http://www.altura.com] [http://www.altura.com/])) definiert.
+
+Eine Spezifikation des Formats ist derzeit nicht verfügbar.
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+Apple QuickView is an hypertext format running under older MacOS versions.
+Is was defined by Altura ((!url [http://www.altura.com] [http://www.altura.com/])).
+
+Actually, there is no format specification available.
+!endif
+
 !end_node
 
 ################################################################################
@@ -50,105 +118,66 @@
 !endif
 !html_name format_asc.html
 
-!begin_description
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !iflang [german]
-!item [Ist eine Aufteilung in mehrere Dateien geplant?]
+Das Ausgabeformat "ASCII" erzeugt eine Ausgabe in Form einer einzigen Textdatei ("reiner" Text).
 
-Bisher hat erst ein (unregistrierter) Benutzer den Wunsch
-geäußert, daß UDO wie bei HTML Kapitel etc. in eigene Dateien
-ausgeben soll. Da dieser Wunsch bisher einmalig war, bin ich ihm
-nicht nachgekommen.
+!smallskip
+!subsubheading Besonderheiten und nützliche Hinweise
+!begin_itemize
+!item Es ist keine Möglichkeit vorgesehen, die Ausgabe -- analog zu HTML -- in mehrere Dateien aufzuteilen.
 
-Sollte jedoch der Bedarf vorhanden sein, bin ich gerne bereit,
-eine solche Option in UDO einzubauen. Die Routinen zur (!idx [Aufteilung])
-von Dateien sind quasi fertig und müssen nur noch für ASCII
-angepaßt werden.
+!item Die (!idx [Zeilenbreite]) ist standardmäßig auf 70~Zeichen eingestellt und kann
+mit dem Befehl (!KW [parwidth]) verändert werden.
+
+!item Beim Ausgabeformat "ASCII" werden Texthervorhebungen wie Fettschrift, kursive oder unterstrichene Wörter mittels (!T)*(!t), (!T)/(!t) und (!T)_(!t) dargestellt, wie sie im Usenet üblich sind. (!nl)
+Da einige Druckprogramme(!N)z.B. IdeaList für den Atari~ST(!n) diese Hervorhebungen in Druckerbefehle umwandeln können bzw. einige Frontends diese Hervorhebungen unterstützen, zählt UDO diese
+Zeichen bei der Längenermittlung (!I)nicht(!i) mit. Somit können Zeilen, die diese Formatierungen enthalten,
+die eingestellte Zeilenbreite überschreiten. (!nl)
+Möchten Sie auf die Ausgabe der oben genannten Zeichen verzichten, so geben Sie im Vorspann eines Quelltextes den Schalter (!KW [no_effects] [[asc!!]]) an.
+
+!autoref [off]
+!item UDO erzeugt ASCII-Dateien, die den jeweiligen Systemzeichensatz verwenden. Unter Windows
+wird jedoch (!I)nicht(!i) der Windows-ANSI-Zeichensatz, sondern der DOS-Zeichensatz verwendet,
+d.h. wenn Sie die von UDO erzeugte ASCII-Datei z.B. mit dem Windows-Editor öffnen,
+stimmen scheinbar die Umlaute (und andere Sonderzeichen) nicht.
+!autoref [on]
+
+!item Mit (!KW [no_umlaute] [[asc!!]]) können Sie die Verwendung von Umlauten deaktivieren.
+
+!end_itemize
+
 !endif
-
+# ------------------------------------------------------------------------------
 !iflang [english]
-!item [Do you plan to split up ASCII manuals into separate files?] ~
+The "ascii" output generates a single text file with "plain" text.
 
-Only one (unregistered) user has wished yet that UDO should output chapters
-etc. to separate files as it does for HTML. Because no one else has asked me
-to do this yet I haven't implemented this feature.
+!smallskip
+!subsubheading Specialities and useful hints
+!begin_itemize
+!item It's not possible to split the output into more than one single file (like HTML).
 
-But if there's a need for this feature I will implement it. The functions
-still exist and have only to be adapted for ASCII.
-!endif
+!item The paragraph width can be changed with the (!KW [parwidth]) command.
+UDO uses a value of 70~characters by default.
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!iflang [german]
-!item [Manche Zeilen sind länger als 70 Zeichen, warum?]
-
-Dies sind die Zeilen, in denen Sie Texthervorhebungen wie
-Fettschrift, kursive oder unterstrichene Wörter benutzt haben.
-Diese Hervorhebungen werden durch die Zeichen (!T)*(!t), (!T)/(!t) und (!T)_(!t)
-geschaffen, wie sie in der DFÜ üblich sind.
-
-Da einige Druckprogramme(!N)z.B. IdeaList für den Atari ST(!n) diese
-Hervorhebungen in Druckerbefehle umwandeln können bzw. einige
-Frontends diese Hervorhebungen unterstützen, zählt UDO diese
-Zeichen bei der Längenermittlung nicht mit.
-
-Möchten Sie auf die Ausgabe der oben genannten Zeichen verzichten, so geben Sie im Vorspann eines Quelltextes den Schalter
-(!KW [no_effects] [[asc!!]]) an.
-!endif
-
-!iflang [english]
-!item [Some lines are larger than 70 characters, why?] ~
-
-These are the lines that contain bold, italic or underlined words. These
-text styles are generated with the characters (!T)*(!t), (!T)/(!t) and
-(!T)_(!t) like in Usenet.
-
-Because of the existence of some print tools(!N)e.g. IdeaList for Atari
-ST(!n) and newsreaders know these text styles UDO doesn't count these
-special characters.
-
+!item Text styles like bold, italic or underlined are generated with the characters (!T)*(!t), (!T)/(!t) and
+(!T)_(!t) (as common in the Usenet). (!nl)
+Because of the existence of some print tools(!N)e.g. IdeaList for Atari~ST(!n)
+and newsreaders knowing these text styles UDO doesn't count these special characters. Lines containing such formatting characters can become longer than the specified paragraph width. (!nl)
 If you want to suppress the output of these characters you can use the
 switch (!KW [no_effects] [[asc!!]]) inside the preamble.
+
+!autoref [off]
+!item UDO generates ASCII files using the actual system charset.
+Running UDO under Windows, not the Windows-ANSI charset but the DOS charset will be used.
+Opening an UDO-generated text file with an Windows editor, umlauts and other
+special characters seems to wrong.
+!autoref [on]
+
+!item Using (!KW [no_umlaute] [[asc!!]]), you can switch off umlauts and special characters.
+
+!end_itemize
+
 !endif
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!iflang [german]
-!item [Die Umlaute in der ASCII-Datei stimmen unter Windows nicht!?]
-
-UDO erzeugt jeweils ASCII-Dateien, die den Systemzeichensatz
-verwenden. UDO ist allerdings ein DOS-Programm, kein Windowsprogramm! Daher wird auch der DOS- und nicht der Windows-ANSI-Zeichensatz für die Erzeugung der ASCII-Dateien verwendet.
-
-Schauen Sie sich die ASCII-Dateien mal mit dem System- oder
-Terminal-Font an. Sie werden dann sehen und mir glauben, daß die
-Umlaute stimmen.
-!endif
-
-!iflang [english]
-!item [8bit characters are wrong when viewing an ASCII file with Windows!?] ~
-
-UDO saves ASCII files that use the system charset of your operating system.
-UDO is a DOS software, not a Windows software. So it will use the IBM-PC
-charset and not the Windows ANSI charset.
-
-Just view the ASCII files with the System font or Terminal font and you will
-believe me that the 8bit characters aren't wrong.
-!endif
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!iflang [german]
-!item [Wie kann man die Zeilenbreite ändern?]
-
-Die (!idx [Zeilenbreite]) kann mit dem Befehl (!KW [parwidth]) verändert werden.
-!endif
-
-!iflang [english]
-!item [How can I change the paragraph width?] ~
-
-The paragraph width can be changed with the (!KW [parwidth]) command.
-!endif
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-!end_description
 
 !end_node
 
@@ -161,7 +190,30 @@ The paragraph width can be changed with the (!KW [parwidth]) command.
 !endif
 !html_name format_drc.html
 
-(!MISS)
+# Kurz-Info: http://www.palmtoppaper.com/ptphtml/43/43c00021.htm
+
+# von http://home.att.net/~short.stop/freesoft/txtvw01.htm
+# DRC converts a source text file into an executable viewing application that can be accessed via a
+# multilayered menu structure. Multi-language support. Unlike simple TXT2EXE converters, DRC requires
+# insertion of formatting codes within source files.
+
+!iflang [german]
+David's Readme Compiler ist ein von David Harris (dem Autor des E-Mail-Programms "Pegasus")
+geschriebenes, frei verfügbares MS-DOS-Programm. Es konvertiert einen mit Formatierungsbefehlen
+versehenen Text (=~DRC-Format) in ein ausführbares Viewer-Programm.
+
+Sie können David's Readme Compiler von (!url [http://risc.ua.edu/pegasus/other/drc21.zip] []) oder
+(!url [http://public.planetmirror.com/pub/pegasus/other/drc21.zip] []) herunterladen.
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+David's Readme Compiler is a free MS-DOS program written by David Harris (author of the
+Pegasus E-Mail program). It converts a text file with formatting codes into an viewer application.
+
+You can download David's Readme Compiler on (!url [http://risc.ua.edu/pegasus/other/drc21.zip] []) or
+(!url [http://public.planetmirror.com/pub/pegasus/other/drc21.zip] []).
+!endif
+
 !end_node
 
 ################################################################################
@@ -173,7 +225,41 @@ The paragraph width can be changed with the (!KW [parwidth]) command.
 !endif
 !html_name format_htag.html
 
-(!MISS)
+!iflang [german]
+HP-Helptag-SGML ist ein SGML-basiertes Hypertext-Hilfesystem für kommerzielle Unices (HP-UX, Sun Solaris, IBM AIX).
+
+Weiterführende Informationen:
+!autoref [off]
+
+!begin_itemize
+
+!item Common Desktop Environment (CDE) Help System: (!url [http://www.oasis-open.org/cover/gen-apps.html#cde] []) (allgemeiner Überblick, mit weiteren Links)
+
+!item "Common Desktop Environment: Help System Author's and Programmer's Guide": (!url [http://h71000.www7.hp.com/doc/73final/helpguide/helpguide_5.html] [])
+
+!end_itemize
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+HP-Helptag-SGML is a SGML-based hypertext help-system for commercial Unices (HP-UX, Sun Solaris, IBM AIX).
+
+More information:
+!autoref [off]
+
+!begin_itemize
+!item Common Desktop Environment (CDE) Help System: (!url [http://www.oasis-open.org/cover/gen-apps.html#cde] []) (general overview, with some more links)
+
+!item "Common Desktop Environment: Help System Author's and Programmer's Guide": (!url [http://h71000.www7.hp.com/doc/73final/helpguide/helpguide_5.html] []).
+
+!end_itemize
+
+!endif
+!autoref [on]
+
+# siehe auch: Studienarbeit, Vergleich bestehender Online-Helpsysteme:
+# http://w3studi.informatik.uni-stuttgart.de/~maiersn/uni/hd/sa/ausarbeitung/ausarbeitung-9.html
+
 !end_node
 
 ################################################################################
@@ -533,6 +619,13 @@ all links will be wrong.
 !html_name format_hh.html
 
 (!MISS)
+
+!iflang [german]
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!endif
+
 !end_node
 
 ################################################################################
@@ -892,7 +985,16 @@ Add the following line to (!V)/usr/lib/linuxdoc-sgml/rep/html/general(!v):
 !endif
 !html_name format_lyx.html
 
-(!MISS)
+!iflang [german]
+LyX ist ein (!LaTeX)-verwandtes Dokumentenverarbeitungsprogramm.
+Siehe (!url [http://www.lyx.org] [http://www.lyx.org/]).
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+LyX is a (!LaTeX)-related document processor.
+See (!url [http://www.lyx.org] [http://www.lyx.org/]).
+!endif
+
 !end_node
 
 ################################################################################
@@ -984,6 +1086,13 @@ don't make sense, too.
 !html_name format_nroff.html
 
 (!MISS)
+
+!iflang [german]
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!endif
+
 !end_node
 
 ################################################################################
@@ -995,7 +1104,14 @@ don't make sense, too.
 !endif
 !html_name format_pas.html
 
-(!MISS)
+!iflang [german]
+Bei diesem Ausgabeformat wird die UDO-Quelldatei in Sourcecode umgewandelt, d.h. normaler Text wird Kommentar, der Inhalt der Sourcecode-Umgebung wird Pascal-Source.
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+Using the Pascal-sourcecode output, the UDO source file will be converted to sourcecode, meaning normal text becomes comment, the content of the sourcecode environment becomes Pascal-sourcecode.
+!endif
+
 !end_node
 
 ################################################################################
@@ -1189,6 +1305,13 @@ help file to (!V)USR.HLP(!v) and copy it to the Pure C directory.
 !html_name format_pdf.html
 
 (!MISS)
+
+!iflang [german]
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!endif
+
 !end_node
 
 ################################################################################
@@ -1201,6 +1324,13 @@ help file to (!V)USR.HLP(!v) and copy it to the Pure C directory.
 !html_name format_ps.html
 
 (!MISS)
+
+!iflang [german]
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!endif
+
 !end_node
 
 ################################################################################
@@ -1212,6 +1342,8 @@ help file to (!V)USR.HLP(!v) and copy it to the Pure C directory.
 !endif
 !label RTF
 !html_name format_rtf.html
+
+# RTF 1.2 weit verbreitet; RTF 1.5 wird nur von MS-Word gut unterstützt
 
 !iflang [german]
 Das Rich Text Format (kurz: RTF) dient zum systemweiten Austausch von
@@ -1474,7 +1606,15 @@ Because WordPad cannot display tables. Use the switch
 !endif
 !html_name format_src.html
 
-(!MISS)
+!iflang [german]
+Bei diesem Ausgabeformat wird die UDO-Quelldatei in Sourcecode umgewandelt, d.h. normaler Text wird Kommentar, der Inhalt der Sourcecode-Umgebung wird C-Source.
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+Using the C-sourcecode output, the UDO source file will be converted to sourcecode, meaning normal text becomes comment, the content of the sourcecode environment becomes C-sourcecode.
+!endif
+
+
 !end_node
 
 ################################################################################
@@ -1740,7 +1880,7 @@ this word.
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !iflang [german]
-!item [Warum ist es besser auf Blocksatz zu verzichten?]
+!item [Warum ist es besser, auf Blocksatz zu verzichten?]
 
 ""Warum das denn?"", werden Sie sich vielleicht fragen. Nun, mit
 Hyperion/HypC gibt es von Martin Osieka ein Programmpaket für den
@@ -2095,7 +2235,14 @@ converting the source file instead of printing an error message.
 !alias UDO-Output
 !html_name format_udo.html
 
-(!MISS)
+!iflang [german]
+Das Ausgabeformat "UDO" führt alle UDO-Eingabedateien in eine einzige zusammen.
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+This output format merges all UDO input files into one big file.
+!endif
+
 !end_node
 
 ################################################################################
@@ -2516,15 +2663,22 @@ the upper switches.
 
 ################################################################################
 !iflang [german]
-!begin_node Windows Help Vs. 4 (WinHelp4)
+!begin_node Windows Help Vs.~4 (WinHelp4)
 !endif
 !iflang [english]
-!begin_node Windows Help Vs. 4 (WinHelp4)
+!begin_node Windows Help Vs.~4 (WinHelp4)
 !endif
 !label WinHelp4
 !html_name format_wh4.html
 
 (!MISS)
+
+!iflang [german]
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!endif
+
 !end_node
 
 ################################################################################
