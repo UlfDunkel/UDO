@@ -1,0 +1,72 @@
+UL {
+font-size : 12pt;
+font-family : Verdana, Arial, sans-serif;
+background-color : #FFFAF0;
+color : black;
+}
+TD {
+font-size : 12pt;
+font-family : Verdana, Arial, sans-serif;
+background-color : #FFFAF0;
+color : black;
+}
+SMALL {
+font-size : 8pt;
+font-family : Arial, sans-serif;
+}
+PRE {
+font-size : 10pt;
+}
+P {
+font-size : 12pt;
+font-family : Verdana, Arial, sans-serif;
+background-color : #FFFAF0;
+color : black;
+}
+H3 {
+font-size : 12pt;
+font-family : Verdana, Arial, sans-serif;
+background-color : #FFFAF0;
+color : black;
+}
+H2 {
+font-size : 14pt;
+font-family : Verdana, Arial, sans-serif;
+color : black;
+background-color : #FFFAF0;
+}
+H1 {
+font-size : 18pt;
+font-family : Verdana, Arial, sans-serif;
+color : black;
+background-color : #FFFAF0;
+}
+DD {
+font-size : 12pt;
+font-family : Verdana, Arial, sans-serif;
+color : black;
+background-color : #FFFAF0;
+}
+BODY {
+font-size : 12pt;
+font-family : Verdana, Arial, sans-serif;
+color : black;
+background-color : #FFFAF0;
+}
+A:link {
+   color: #0000FF;
+   background-color : #FFFAF0;
+}
+A:visited {
+   color: #0000FF;
+   background-color : #FFFAF0;
+}
+A:active  {
+   color: #008000;
+   background-color : #FFFAF0;
+}
+A:hover {
+   color : #ff8000;
+   background-color : #FFFAF0;
+
+}
