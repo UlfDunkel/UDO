@@ -43,6 +43,7 @@
 const char *id_fsplit_c= "@(#) file.c      02.09.1998";
 #endif
 
+extern UINT uiMultiLines;
 
 LOCAL char *strmir ( char *s );
 
@@ -169,6 +170,9 @@ GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf )
 	size_t sl;
 	BOOLEAN cont;
 
+	/* This indicates how many lines have been added with \! to the current line */
+	uiMultiLines=-1; /* 0=Es wurden keine Zeilen zusammengefügt, 1=Es wurde eine Zeile angehängt, 2=Es wurden zwei Zeilen angehängt, ...*/
+
 	do {
 		cont=FALSE;
 		/* Auf normale Routine zurueckgreifen und Endekennung entfernen */
@@ -177,6 +181,7 @@ GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf )
 			return NULL;
 		}
 
+		uiMultiLines++;
 		sl= strlen(string);
 		while (sl>0 && (string[sl-1]=='\n' || string[sl-1]=='\r'))
 		{

@@ -99,11 +99,24 @@ GLOBAL void logln ( const char *s )
 GLOBAL void loglnposprintf ( const char *we, const char *msg )
 {
 	char z[512];
+	char lineinfo[100];
+	UINT realstart;
+	/* New in v6.5.5 to get a proper message with multilines */
+	if (uiMultiLines>0)
+	{
+		/* Special: we are on a multiline */
+		realstart=uiCurrFileLine-uiMultiLines;
+		sprintf(lineinfo, "%u-%u", realstart, uiCurrFileLine);
+	}
+	else
+	{
+		sprintf(lineinfo, "%u", uiCurrFileLine);
+	}
 	
-	sprintf(z, "%s: %s %u: %s",
+	sprintf(z, "%s: %s %s: %s",
 		we,
 		sCurrFileName,
-		uiCurrFileLine,
+		lineinfo,
 		msg
 	);
 	logln(z);
@@ -122,11 +135,24 @@ GLOBAL void loglnposprintf ( const char *we, const char *msg )
 LOCAL void loglnpos ( const char *we, const char *msg )
 {
 	char z[512];
+	char lineinfo[100];
+	UINT realstart;
+	/* New in v6.5.5 to get a proper message with multilines */
+	if (uiMultiLines>0)
+	{
+		/* Special: we are on a multiline */
+		realstart=uiCurrFileLine-uiMultiLines;
+		sprintf(lineinfo, "%u-%u", realstart, uiCurrFileLine);
+	}
+	else
+	{
+		sprintf(lineinfo, "%u", uiCurrFileLine);
+	}
 	
-	sprintf(z, "%s: %s %u: %s",
+	sprintf(z, "%s: %s %s: %s",
 		we,
 		sCurrFileName,
-		uiCurrFileLine,
+		lineinfo,
 		msg
 	);
 	logln(z);
