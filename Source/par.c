@@ -3219,7 +3219,14 @@ GLOBAL void init_module_par ( void )
 
 GLOBAL void exit_module_par ( void )
 {
-	int	i;
+	/*
+        r6.3.19[vj]: Der folgende Code wurde auskommentiert, um zu überprüfen,
+        ob sich hieraus ein Geschwindigkeitsvorteil erlangen läßt. Wird der
+        Speicher hier nicht freigegeben, wird das später um_exit tun,
+        das die Speicherbereiche viel effizienter freigeben kann.
+        Bitte nicht löschen, da er später vielleicht wieder rein kommt!
+
+        int	i;
 
 	for (i=MAXMACROS-1; i>=0; i--)
 	{	if (macros[i]!=NULL)
@@ -3237,7 +3244,7 @@ GLOBAL void exit_module_par ( void )
 	{	if (hyphen[i]!=NULL)
 		{	um_free(hyphen[i]);
 		}
-	}
+	}*/
 
 	reset_placeholders();
 
