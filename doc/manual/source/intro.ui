@@ -1,5 +1,5 @@
 # doc/manual/source/introduction.ui
-# letzte Änderungen: 24.01.2004 / last changes: Jan 24, 2004
+# letzte Änderungen: 28.01.2004 / last changes: Jan 28, 2004
 
 
 ################################################################################
@@ -124,6 +124,9 @@ Verfassen von HTML- oder (!LaTeX)-Dateien besitzen müssen.
 
 Haben Sie einen Quelltext erstellt, so können Sie diesen in folgende Formate umwandeln:
 
+!include formattb.ui
+
+!begin_ignore
 #Ausgabe-Formate
 !begin_enumerate !short
   !item AmigaGuide
@@ -150,9 +153,10 @@ Haben Sie einen Quelltext erstellt, so können Sie diesen in folgende Formate umw
   !item UDO (Universal Document)
   !item Windows-Help
 !end_enumerate
+!end_ignore
 
-Einige Formate sind system-/plattformübergreifend austauschbar, einige sind nur auf
-bestimmten Systemen/Plattformen von Interesse.
+# Einige Formate sind system-/plattformübergreifend austauschbar, einige sind nur auf
+# bestimmten Systemen/Plattformen von Interesse.
 
 UDO erzeugt größtenteils keine `fertigen' Dokumente. In aller Regel
 müssen die von UDO erzeugten Dateien erst noch durch weitere Programme
@@ -246,6 +250,9 @@ to learn when you try to learn (!LaTeX) or HTML.
 
 Having written an UDO source file, you can convert it into the following formats:
 
+!include formattb.ui
+
+!begin_ignore
 #Ausgabe-Formate
 !begin_enumerate !short
   !item AmigaGuide
@@ -276,6 +283,7 @@ Having written an UDO source file, you can convert it into the following formats
 As you can see some formats are just interesting for specific systems/platforms,
 but you can also see that the list contains come formats that can be used
 on nearly any existing system/platform.
+!end_ignore
 
 In most cases UDO doesn't make files that are ready to use because have to
 run a further software to view, print or convert the document. E.g. you have
