@@ -1029,7 +1029,8 @@ LOCAL BOOLEAN convert_link_etc ( char *s, const char *p0, char *p1, char *p2, co
 	replace_udo_tilde(p2);
 	replace_udo_nbsp(p2);
 
-	convert_tilde(p1);
+	/* Deleted in r6.2pl1 [NHz] / Bug #00000030 */
+	/* 	convert_tilde(p1); */
 	replace_udo_quotes(p1);
 
 	if (flag)
