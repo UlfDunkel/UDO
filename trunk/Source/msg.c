@@ -329,11 +329,11 @@ GLOBAL void logln_interrupted ( void )
 	logln("interruption");
 }
 
-GLOBAL void logln_file_generated ( const char *kind, const char *filename )
+GLOBAL void logln_file_generated ( const char *kind, const char *filename, const char *suff )
 {
 	char m[512];
 
-	sprintf(m, "%s written to %s", kind, filename);
+	sprintf(m, "%s written to %s%s", kind, filename, suff);
 	logln(m);
 }
 
