@@ -614,10 +614,10 @@ GLOBAL char compile_time[9]  = "\0";
  * Use um_malloc instead of malloc, um_realloc instead of realloc and um_free instead of free.
  * Please don't use malloc, realloc or free in UDO.
  */
-size_t um_malloc_count;
-size_t um_free_count;
-size_t um_free_error_count;
-size_t um_free_endbroken_count;
+long um_malloc_count;
+long um_free_count;
+long um_free_error_count;
+long um_free_endbroken_count;
 int memory_error;
 char endstring[]=UM_END_STRING;
 size_t endstring_len;
@@ -792,7 +792,7 @@ GLOBAL void um_free(void *memblock)
 						{
 							printf("Warning: um_free: memory block end check broken\n");
 #ifdef UM_DEBUG_SHOW_BUFFER_ON_FREE_ERROR
-							printf("Bufferstart: \"%s\"\n", tanker->block);
+							printf("Bufferstart: \"%s\"\n", (char *)tanker->block);
 							printf("Bufferende : \"%s\"\n", tanker->endmark);
 #endif
 						}
