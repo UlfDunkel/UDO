@@ -1,0 +1,71 @@
+!code [iso]
+
+!ifset [English]
+!language english
+!endif
+
+!tex_miktex
+
+!docinfo	[date]		(!today)
+
+!docinfo	[author]	Dirk Hagedorn
+!docinfo	[address]	Asmecke 1
+!docinfo	[address]	59846 Sundern
+
+!iflang [german]
+	!docinfo	[program]	UDO-Historie
+	!docinfo	[address]	Deutschland
+!else
+	!docinfo	[program]	UDO History
+	!docinfo	[address]	Germany
+!endif
+
+!docinfo	[address]	E-Mail: info@dirk-hagedorn.de
+!docinfo	[address]	Aktuelle Version: Release 6 Patchlevel 14
+!docinfo	[webmastername]		Dirk Hagedorn
+!docinfo	[webmasteremail]	info@dirk-hagedorn.de
+!docinfo	[webmasterurl]		http://www.dirk-hagedorn.de
+
+
+!iflang [german]
+	!macro	ALL	Allgemeines
+	!macro	SUF	uig
+!else
+	!macro	ALL	General changes
+	!macro	SUF	uie
+!endif
+
+!ifset [IntoFolder]
+	!macro PATH ..
+!else
+	!ifset [NotIntoFolder]
+		!macro PATH .
+	!else
+		!macro PATH ..
+	!endif
+!endif
+
+!ifdest [win,wh4]
+!docinfo	[authorimage]	(!PATH)/inc/dh
+!endif
+
+!no_umlaute	[asc]
+
+!no_numbers				[win,wh4,html,stg,pch,hh]
+!no_effects				[asc]
+!use_auto_subtocs		[win,wh4,stg,html,tvh,hh]		!depth 1
+!use_auto_subsubtocs	[win,wh4,stg,html,pch,tvh,hh]	!depth 1
+!use_style_book			[rtf]
+!use_nodes_inside_index [all]
+
+!drc_flags 6
+!win_medium_compression
+!wh4_high_compression
+!pdf_high_compression
+
+!html_backpage http://www.dirk-hagedorn.de/udokb/index.html
+!html_backcolor white
+!hh_backcolor white
+!use_auto_toptocs [all]
+
+!use_udo_index [hh]

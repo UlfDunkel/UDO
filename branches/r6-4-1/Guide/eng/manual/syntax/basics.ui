@@ -1,0 +1,143 @@
+############################################################
+# @(#) basics.ui, Dirk Hagedorn, 1996/04/16
+############################################################
+
+!subnode Basics
+
+!subsubnode Let's talk about text, Baby!
+
+!index Text file
+!index Linefeed
+!index Carriage return
+
+UDO expects a text file that you can edit with every ASCII editor. You
+should use only printable characters. That means you shouldn't use any
+characters below ""space"" except ASCII~9 (tab), ASCII~10 (line feed) and
+ASCII~13 (carriage return). A line of a source file shouldn't contain more
+than 512 characters.
+
+UDO layouts the destination file itself. That means that it fills in spaces
+between words and lines between paragraphs:
+
+!begin_description
+
+!index word
+!item [Words] are characters that are divided by one or more blank or tab.
+UDO prints words divided by one blank.
+
+!index paragraph
+!item [Paragraphs] consist of words. Paragraphs are divided by one or more
+empty line(s) or UDO commands. UDO divides paragraphs by one empty line when
+printing the destination file.
+
+!end_description
+
+!index Character set
+
+You can compose the source file using different charsets. UDO supports the
+following character sets:
+
+!begin_itemize !short
+!item	Atari ST ((!idx [!/code_tos]))
+!item	Apple Macintosh ((!idx [!/code_mac]))
+!item	HP Roman 8 ((!idx [!/code_hp8]))
+!item	IBM PC ((!idx [!/code_dos]))
+!item	ISO Latin 1, Windows ANSI ((!idx [!/code_iso]))
+!end_itemize
+
+When UDO starts the conversion it excepts the character set that is used on
+the current operating system. If you want to convert source files that use
+characters from a different operating system you have to tell it to UDO by
+using the upper commands. Additional information can be found in the chapter
+""Special characters"".
+
+#-----------------------------------------------------------
+
+!subsubnode Commands, switches and placeholders
+
+!begin_xlist [Placeholders:]
+!index Command
+!item [Commands:]
+An UDO command begins with a single ""!"" at the beginning of a line, it may be
+indented by spaces or tabs. A command tells UDO to do something where you
+used it e.g. to output the table of contents with
+(!I)!/tableofcontents(!i).
+
+!index Swicth
+!item	[Switches:]
+An UDO switch begins with a single ""!"" at the beginning of a line, it may be
+indented by spaces or tabs. A switch tells UDO how to handle some commands
+e.g. (!I)!/language english(!i) that switches the language of the destination file to
+English so that UDO will print ""Appendix"" instead of ""Anhang"".
+
+!index Placeholder
+!item [Placeholders:]
+An UDO placeholder begins with a ""(!"" and ends with a single "")"". A
+placeholder is replaced by certain characters e.g. ''(!/B)'' by ''{\bf'' for
+(!LaTeX). You can use placeholders wherever you want.
+
+!end_xlist
+
+#-----------------------------------------------------------
+!subsubnode Comments
+
+A source file can contain comments. UDO ignores a line if the first
+character of a line is a ''#''. This character mustn't be indented
+by spaces or tabs!
+
+Inside a verbatim environment or raw environment you cannot use comments
+because UDO prints every line of such an environment.
+
+#-----------------------------------------------------------
+
+!subsubnode Preamble and main part
+
+!index Preamble
+!index Main Part
+
+Each source file has to contain a preamble and a main part.
+
+!index !/begin_document
+
+In the preamble you define general information about the source file like
+information for the title page or the switches that tell UDO how to convert
+the source file. The preamble ends with the command
+(!I)!/begin_document(!i).
+
+!index !/end_document
+
+The main part contains the text structured into chapters, sections or
+subsections. The main part ends with the command (!I)!/end_document(!i).
+
+#-----------------------------------------------------------
+
+!subsubnode Environments
+
+An environment is a part of a source file that has to be converted in a
+special way. Environments will be started with (!I)!/begin_(!i) and finished
+with (!I)!/end_(!i). The commands have to be the first words of a line. They
+may be indented by spaces or tabs.
+
+UDO offers you a large range of environments that will help you to layout
+your text and to insert special commands:
+
+!begin_xlist [description environment:] !short
+
+!item	[appendix environment:]		appendix
+!item	[center environment:]		centred text
+!item	[description environment:]	descriptions
+!item	[document environment:]		documentation contents
+!item	[enumerate environment:]	enumerations
+!item	[flushleft environment:]	left justified text
+!item	[flushright environment:]	right justified text
+!item	[itemize environment:]		itemizations
+!item	[quote environment:]		indented text
+!item	[raw environment:]			special commands for the destination format
+!item	[table environment:]		tables
+!item	[verbatim environment:]		preformatted text
+!item	[xlist environment:]		lists
+
+!end_xlist
+
+How the text of an environment is formatted you can find in the according
+sections.

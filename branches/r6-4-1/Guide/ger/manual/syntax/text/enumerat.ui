@@ -1,0 +1,93 @@
+!subsubnode Numerierungen
+!alias enumerate-Umgebung
+
+Die enumerate-Umgebung ist ebenso wie die itemize-Umgebung dafür geeignet,
+schnell und komfortabel durchnumerierte Aufzählungen zu erstellen, bei denen
+die Aufzählungspunkte durch Zahlen oder Buchstaben gekennzeichnet werden.
+
+Eine enumerate-Umgebung wird mit (!I)!/begin_enumerate(!i) eingeleitet und mit
+(!I)!/end_enumerate(!i) beendet. Die einzelnen Aufzählungspunkte werden
+jeweils mit dem Kommando (!I)!/item(!i) gekennzeichnet.
+
+Die enumerate-Umgebung ist auch mehrfach schachtelbar und mit anderen Umgebungen
+kombinierbar. Hier ein kleines, unverschachteltes Beispiel: Aus!..
+
+!autoref [off]
+!begin_quote
+!begin_verbatim
+UDO stellt folgende Aufzählungsumgebungen zur Verfügung:
+!begin_enumerate
+!item itemize-Umgebung
+!item enumerate-Umgebung (das ist die Umgebung, die in
+      diesem Abschnitt beschrieben wird)
+!item description-Umgebung
+!item xlist-Umgebung
+!end_enumerate
+!end_verbatim
+!end_quote
+
+!.. wird:
+
+UDO stellt folgende Aufzählungsumgebungen zur Verfügung:
+!begin_enumerate
+!item itemize-Umgebung
+!item enumerate-Umgebung (das ist die Umgebung, die in
+      diesem Abschnitt beschrieben wird)
+!item description-Umgebung
+!item xlist-Umgebung
+!end_enumerate
+
+
+Und aus diesem kleinen Beispiel, in dem die enumerate-Umgebung
+verschachtelt und mit dem Schalter (!I)!/short(!i) benutzt wird,!..
+
+!begin_quote
+!begin_verbatim
+!begin_enumerate !short
+!item Dies ist Punkt 1 der äußeren enumerate-Umgebung.
+!item Dies ist Punkt 2 der äußeren enumerate-Umgebung.
+      !begin_enumerate
+      !item Dies ist Punkt 1 der inneren Umgebung.
+      !item Dies ist Punkt 2 der inneren Umgebung.
+      !end_enumerate
+!item Dies ist Punkt 3 der äußeren enumerate-Umgebung.
+!end_enumerate
+!end_verbatim
+!end_quote
+
+!..erhält man
+
+!begin_enumerate !short
+!item Dies ist Punkt 1 der äußeren enumerate-Umgebung.
+!item Dies ist Punkt 2 der äußeren enumerate-Umgebung.
+      !begin_enumerate
+      !item Dies ist Punkt 1 der inneren Umgebung.
+      !item Dies ist Punkt 2 der inneren Umgebung.
+      !end_enumerate
+!item Dies ist Punkt 3 der äußeren enumerate-Umgebung.
+!end_enumerate
+!autoref [on]
+
+
+(!HINTS)
+
+!begin_enumerate
+
+!item Bei den Formaten, die von Hause aus eine vergleichbare Umgebung
+anbieten (z.B. HTML) werden die Punkte nicht von UDO numeriert. Daher
+sollte man vorsichtig mit Angaben wie ""siehe Punkt 1"" oder
+""vergleiche Punkt b)"" sein.
+
+!item Die dritte Ebene dieser Umgebung wird relativ gesehen etwas
+weiter eingerückt, da die Numerierung durch römische Zahlen mehr
+Platz benötigt.
+
+!item Bei vielen Punkten sollte man aufpassen, nicht die Grenzen zu
+überschreiten. Wird eine Eben mit Buchstaben numeriert, sollte man
+nicht mehr als 26 Aufzählungspunkte benutzen.
+
+!item Eine ausführliche Erläuterung des Schalters (!I)!/short(!i) finden Sie
+in der Beschreibung zur itemize-Umgebung.
+
+!end_enumerate
+

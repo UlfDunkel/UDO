@@ -1,0 +1,17 @@
+############################################################
+# @(#) UDO-Historie
+############################################################
+
+!node Historie
+
+!html_name history
+
+An dieser Stelle findet man eine kurze Beschreibung der Änderungen,
+die zwischen den einzelnen Versionen von UDO aufgetreten sind.
+
+!include history/last.ui
+!include history/rel6.ui
+!include history/rel5.ui
+!include history/rel4.ui
+!include history/rel3.ui
+

@@ -1,0 +1,67 @@
+!begin_itemize
+
+!index !/html_modern_alignment
+!index !/html_frames_alignment
+!item Neu: Mit Hilfe des Schalters (!I)!/html_modern_alignment~left|center|right(!i)
+bzw. (!I)!/html_modern_alignment~left|center|right(!i)
+kann man die Ausrichtung der Links im linken Teil der Seite bzw. dem linken Frame bestimmen.
+Default ist wie bisher ""center"" (Stefan Kuhr).
+
+!index Toptocs
+!index Top-Tocs
+!index !/use_auto_toptocs
+!index !/html_merge_nodes
+!index !/html_merge_subnodes
+!index !/html_merge_subsubnodes
+!index !/html_merge_subsubsubnodes
+!item Änderung: Die ""Top-Tocs"" werden nun auch dann korrekt ausgegeben, wenn man
+Nodes merged, sprich (!I)!/html_merge_nodes(!i) etc. verwendet.
+
+!index Frames
+!index !/html_frames_layout
+!index !/html_backpage
+!item Bugfix: Beim Einsatz von Frames und (!I)!/html_backpage(!i) wurde
+beim Link in den Navigationsleisten kein ""(!V)target=_top(!v)""
+angegeben.
+
+!index Frames
+!index !/html_frames_layout
+!item Bugfix: Das Head-Tag war bei der Frameset-Datei an falscher
+Position gesetzt.
+
+!index !/html_modern_layout
+!item Bugfix: Ein Font-Tag war beim (!I)!/html_modern_layout(!i) falsch gesetzt (Klaus Vogler).
+
+!index Listen
+!item Bugfix: Nach dem letzten Item in Listen fehlten die abschließenden
+TD- und TR-Tags.
+
+!index (!/ilink)
+!item Änderung: Für Bilder, die mit (!I)(!/ilink!..)(!i) ausgegeben werden, wird
+nun kein Rahmen mehr ausgegeben ((!V)border=0(!v)) (Norbert Hanz).
+
+!index HTML-DTD
+!item Änderung: UDO gibt nun immer DTD 3.2 im Header aus.
+
+!index HTML !! Ankernamen
+!index HTML !! URLs
+!index URLs
+!item Bugfix: Die bisher von UDO automatisch erzeugten URLs und
+Ankernamen waren genau dann nicht der HTML-Spezifikation entsprechend,
+wenn Sonderzeichen angepaßt wurden (Wilfried Behne). UDO benutzt für
+Sonderzeichen nun nicht mehr die Zeichenfolge ""%XX"", sondern ""_XX"",
+wobei ""XX"" dem Hexcode des Sonderzeichens entspricht. Beginnt eine URL
+nicht mit einem Buchstaben, wird automatisch ""UDO_"" vorangestellt. Aus
+""42 Fragen"" macht UDO dann also ""UDO_42_20Fragen"".
+
+!index !/html_merge_nodes
+!index !/html_merge_subnodes
+!index !/html_merge_subsubnodes
+!index !/html_merge_subsubsubnodes
+!index (--)check
+!item Bugfix: Benutze man die Option (!V)(--)check(!v) bei
+gleichzeitiger Verwendung von (!I)!/html_merge_...nodes(!i), dann
+erzeugte UDO einen Haufen unsinniger Fehlermeldungen wegen angeblich
+doppelt vergebener Dateinamen (Markus Schwaiger).
+
+!end_itemize

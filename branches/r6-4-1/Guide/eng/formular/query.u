@@ -1,0 +1,223 @@
+!code_iso
+!no_umlaute [asc]
+
+!macro r		(~)
+!macro c		[~]
+!macro nr		___
+!macro punkt	........................................
+!macro edit		(!punkt) (!nl) (!punkt) (!nl) (!punkt) (!nl) (!punkt)
+
+!begin_document
+
+Ich möchte Sie an dieser Stelle bitten, die folgenden Fragen zu
+beantworten, damit ich einen Überblick erhalten kann, auf welche
+Bereiche ich mich bei der Weiterentwicklung von UDO in Zukunft
+konzentrieren sollte.
+
+Alle Angaben sind freiwilliger Art. Falls Sie eine Frage nicht
+beantworten wollen, so lassen Sie es einfach.
+
+Den ausgefüllten Fragebogen können Sie mir per Post oder Email
+zusenden. Ich möchte mich dafür bereits im Voraus bei Ihnen
+bedanken.
+
+
+############################################################
+!begin_enumerate
+
+########################################
+!item	Wie finden Sie UDO?
+	
+	!begin_xlist [(!r)] !short
+	!item [(!r)] sehr gut
+	!item [(!r)] gut
+	!item [(!r)] befriedigend
+	!item [(!r)] ausreichend
+	!item [(!r)] mangelhaft
+	!item [(!r)] ungenügend
+	!end_xlist
+
+!item	Was gefällt Ihnen an UDO besonders?
+
+	(!edit)
+
+!item	Was mißfällt Ihnen an UDO besonders?
+
+	(!edit)
+
+########################################
+!item Wie beurteilen Sie den Preis von UDO in Höhe von 50 DM für private
+Benutzer?
+
+	!begin_xlist [(!r)] !short
+	!item [(!r)] viel zu niedrig
+	!item [(!r)] zu niedrig
+	!item [(!r)] angemessen
+	!item [(!r)] zu hoch
+	!item [(!r)] viel zu hoch
+	!end_xlist
+
+!item Wie beurteilen Sie den Preis für die erste Nutzungslizenz in Höhe von
+150 DM für kommerzielle Benutzer?
+
+	!begin_xlist [(!r)] !short
+	!item [(!r)] viel zu niedrig
+	!item [(!r)] zu niedrig
+	!item [(!r)] angemessen
+	!item [(!r)] zu hoch
+	!item [(!r)] viel zu hoch
+	!end_xlist
+
+########################################
+!item Ich bin!..
+
+	!begin_xlist [(!r)] !short
+	!item [(!r)] privater Benutzer
+	!item [(!r)] kommerzieller Benutzer
+	!end_xlist	
+
+########################################
+!item	Welche Formate erzeugen Sie mit UDO? Geben Sie bitte
+eine Zahl zwischen 0 (gar nicht) und 6 (nur dieses) an.
+
+	!begin_tlist [(!nr)] !short
+	!item [(!nr)] Apple QuickView
+	!item [(!nr)] ASCII
+	!item [(!nr)] HTML
+	!item [(!nr)] (!LaTeX)
+	!item [(!nr)] Linuxdoc-SGML
+	!item [(!nr)] LyX
+	!item [(!nr)] Manualpage
+	!item [(!nr)] Pure-C-Help
+	!item [(!nr)] RTF
+	!item [(!nr)] ST-Guide
+	!item [(!nr)] Texinfo
+	!item [(!nr)] Turbo-Vision-Help
+	!item [(!nr)] Windows-Help
+	!end_tlist
+
+########################################
+!item	Auf welchem System setzen Sie UDO hauptsächlich ein?
+
+	!begin_xlist [(!r)] !short
+	!item [(!r)] BeOS
+	!item [(!r)] DOS, Windows, OS/2
+	!item [(!r)] HP-UX
+	!item [(!r)] Linux
+	!item [(!r)] MacOS
+	!item [(!r)] NeXTStep
+	!item [(!r)] SINIX
+	!item [(!r)] TOS
+	!end_xlist
+
+########################################
+!item	Gab es auf diesem System irgendwelche Probleme bei der Installation?
+
+	!begin_xlist [(!r)] !short
+	!item [(!r)] ja, und zwar diese: (!nl) (!edit)
+	!item [(!r)] nein
+	!end_xlist
+
+########################################
+!item	Welche Version benutzen Sie derzeit?
+
+	Release (!nr) Patchlevel (!nr)
+
+
+########################################
+!item	Wie gefällt Ihnen die Anleitung von UDO?
+
+	!begin_xlist [(!r)] !short
+	!item [(!r)] sehr gut
+	!item [(!r)] gut
+	!item [(!r)] befriedigend
+	!item [(!r)] ausreichend
+	!item [(!r)] mangelhaft
+	!item [(!r)] ungenügend
+	!end_xlist
+
+!item	Auf welche Themen sollte man noch ausführlicher in der Anleitung
+eingehen?
+
+	(!edit)
+	
+!item	Welche Themen sind zu ausführlich beschrieben und sollten demnächst
+weniger ausführlich behandelt werden?
+
+	(!edit)
+
+########################################
+!item	Haben Sie etwas an der Bedienung der Kommandozeilenfunktion
+auszusetzen?
+
+	!begin_xlist [(!r)] !short
+	!item [(!r)] ja, und zwar dies: (!nl) (!edit)
+	!item [(!r)] nein
+	!end_xlist
+	
+########################################
+!item	Verwenden Sie die jeweils aktuelle Betaversion oder warten Sie immer
+auf eine neue öffentliche Release?
+
+	!begin_xlist [(!r)] !short
+	!item [(!r)] aktuelle Betaversion
+	!item [(!r)] öffentliche Release
+	!end_xlist
+
+!item	Falls Sie die jeweils aktuelle Betaversion benutzen, wie beschaffen
+Sie sich diese?
+
+	!begin_xlist [(!r)] !short
+	!item [(!r)] per Modem aus der Maus MK2
+	!item [(!r)] per FTP/WWW
+	!item [(!r)] per Diskette
+	!end_xlist
+
+########################################
+!item	Falls Sie mich bereits einmal um Rat bezüglich eines Problems mit
+UDO gebeten haben, wie zufriedenstellend waren die Antworten?
+
+	!begin_xlist [(!r)] !short
+	!item [(!r)] immer zufriedenstellend
+	!item [(!r)] größtenteils zufriedenstellend
+	!item [(!r)] mal so, mal so
+	!item [(!r)] selten zufriedenstellend
+	!item [(!r)] nie zufriedenstellend
+	!item [(!r)] ich hatte noch nie Fragen
+	!end_xlist
+
+########################################
+!item	Sind Ihnen bei der Benutzung von UDO irgendwelche Fehler
+aufgetreten, die Sie mir noch nicht mitgeteilt haben?
+
+	!begin_xlist [(!r)] !short
+	!item [(!r)] ja, ich habe sie am Ende dieses Fragebogens notiert.
+	!item [(!r)] nein
+	!end_xlist
+	
+########################################
+!item	Gibt es irgendeine Funktion bzw. Formaterweiterung, die ich Ihrer
+Meinung nach noch unbedingt einbauen sollte?
+
+	!begin_xlist [(!r)] !short
+	!item [(!r)] ja, ich habe sie am Ende dieses Fragebogens notiert
+	!item [(!r)] nein
+	!end_xlist
+
+########################################
+!item	Würden Sie UDO weiterempfehlen?
+
+	!begin_xlist [(!r)] !short
+	!item [(!r)]	ja, unbedingt
+	!item [(!r)]	ich glaube schon
+	!item [(!r)]	das kommt darauf an
+	!item [(!r)]	nein, ich denke nicht
+	!end_xlist
+
+
+########################################
+!end_enumerate
+
+############################################################
+
+!end_document

@@ -1,0 +1,18 @@
+!begin_itemize
+
+!index !/html_modern_column_width
+!item	Neu: (!I)!/html_modern_column_width~<wert>(!i). <wert> gibt
+an, wie breit die linke Spalte der Tabelle sein soll.
+
+!index !/html_modern_column_color
+!item	Neu: (!I)!/html_modern_column_color~<farbe>(!i). <farbe> darf
+Werte wie bei (!I)!/html_backcolor(!i) annehmen und bestimmt die
+Hintergrundfarbe der linken Spalte.
+
+!index !/html_modern_layout
+!item	Änderungen: Am ""Modern Layout"" wurde gefeilt. Die Ergebnisse
+sollten nun mit Internet Explorer, Navigator und Communicator
+ordentlich aussehen.
+
+!end_itemize
+

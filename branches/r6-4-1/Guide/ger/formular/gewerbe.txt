@@ -1,0 +1,58 @@
+Herrn
+Dirk Hagedorn                   Telefax: +49 2933 77979
+Asmecke 1                       Email: info@dirk-hagedorn.de
+59846 Sundern
+Deutschland
+
+Absender (bitte leserlich schreiben):
+
+Firma:    ..................................................
+Strasse:  ..................................................
+PLZ/Ort:  ..................................................
+Land:     ..................................................
+Telefon:  ..................................................
+Telefax:  ..................................................
+Ihr Name: ..................................................
+Email:    ..................................................
+
+
+Sehr geehrter Herr Hagedorn,               Datum: ..........
+
+
+Hiermit moechten wir uns als gewerbliche Nutzer fuer UDO
+Release 6 registrieren lassen.
+
+Fuer die folgenden Betriebssysteme moechten wir die
+angegebene Anzahl an Nutzungslizenzen erwerben und
+benoetigen die Schluessel, um die Einschraenkungen der
+Shareware-Version aufheben zu koennen:
+
+    [ ] ..... Atari-TOS, MagiC, MagiC-Mac, MagiC-PC
+    [ ] ..... BeOS
+    [ ] ..... HP-UX
+    [ ] ..... Linux i86
+    [ ] ..... MacOS
+    [ ] ..... MS-DOS (Windows 3.x, OS/2)
+    [ ] ..... NeXTStep/OpenStep
+    [ ] ..... SINIX
+    [ ] ..... Win32 (Windows 95/NT)
+
+Summe:  ..... (x)
+
+Die Sharewargebuehr in Hoehe von (150+(x-1)*50) DM
+
+    ( ) haben wir am .......... auf Ihr Bankkonto 3 561 164
+        bei der Sparkasse Arnsberg-Sundern (BLZ 466 500 05)
+        ueberwiesen
+
+    ( ) haben wir diesem Schreiben in Form
+        ( ) eines Verrechnungsschecks
+        ( ) eines Euroschecks
+        beigefuegt.
+
+
+Mit freundlichen Gruessen,
+
+
+
+(Firmenstempel und/oder Unterschrift)
