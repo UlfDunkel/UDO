@@ -7951,7 +7951,9 @@ LOCAL BOOLEAN pass1 (char *datei)
 
 	while ( (!bBreakHappened) && (!bBreakInside) && (!bFatalErrorDetected) && (myTextGetline(zeile, LINELEN, file)) )
 	{
-		uiFileLines[iFilesOpened]++;
+		/* Here we need to add possible splitted line numbers
+		uiFileLines[iFilesOpened]++; v6.5.5 [vj]*/
+		uiFileLines[iFilesOpened]=uiFileLines[iFilesOpened]+1+uiMultiLines;
 		uiCurrFileLine= uiFileLines[iFilesOpened];
 
 		lPass1Lines++;
@@ -8035,7 +8037,7 @@ LOCAL BOOLEAN pass1 (char *datei)
 
 
 
-									uiFileLines[iFilesOpened]++;
+									uiFileLines[iFilesOpened]=uiFileLines[iFilesOpened]+1+uiMultiLines; /* v6.5.5 [vj] */
 									uiCurrFileLine= uiFileLines[iFilesOpened];
 
 									lPass1Lines++;
@@ -8068,7 +8070,7 @@ LOCAL BOOLEAN pass1 (char *datei)
 
 
 
-									uiFileLines[iFilesOpened]++;
+									uiFileLines[iFilesOpened]=uiFileLines[iFilesOpened]+1+uiMultiLines; /* v6.5.5 [vj] */
 									uiCurrFileLine= uiFileLines[iFilesOpened];
 
 									lPass1Lines++;
@@ -9042,7 +9044,7 @@ LOCAL BOOLEAN pass2 (char *datei)
 
 	while ( (!bBreakHappened) && (!bBreakInside) && (!bFatalErrorDetected) && (myTextGetline(zeile, LINELEN, file)) )
 	{
-		uiFileLines[iFilesOpened]++;
+		uiFileLines[iFilesOpened]=uiFileLines[iFilesOpened]+1+uiMultiLines; /* v6.5.5 [vj] */
 		uiCurrFileLine= uiFileLines[iFilesOpened];
 		lPass2Lines++;
 		show_status_percent(lPass1Lines, lPass2Lines);
@@ -10223,7 +10225,7 @@ LOCAL BOOLEAN passU (char *datei)
 
 	while ( (!bBreakHappened) && (!bBreakInside) && (!bFatalErrorDetected) && (myTextGetline(zeile, LINELEN, file)) )
 	{
-		uiFileLines[iFilesOpened]++;
+		uiFileLines[iFilesOpened]=uiFileLines[iFilesOpened]+1+uiMultiLines; /* v6.5.5 [vj] */
 		uiCurrFileLine= uiFileLines[iFilesOpened];
 
 		if ( break_action() )
