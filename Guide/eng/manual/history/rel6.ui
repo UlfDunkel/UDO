@@ -1,0 +1,231 @@
+##################################################
+# @(#) UDO5 <-> UDO6
+##################################################
+!subnode Release 6
+!ignore_links
+
+UDO6 was released on January 3rd, 1997.
+
+You will find here a very compressed list of the major changes of the
+last eight months. UDO supports now more destination formats, it
+supports new features and there were fixed a lot of bugs. In some
+cases it was impossible not to change the syntax of some commands.
+
+!begin_description
+
+!item [New destination formats:] ~
+
+	!begin_itemize !short
+	!item	Apple QuickView
+	!item	HP-HelpTag-SGML (rudimentär)
+	!item	LyX
+	!item	(!link [C and Pascal source code] [Last minute changes])
+	!item	(!link [NROFF] [Last minute changes])
+	!end_itemize
+
+
+!item [New commands:] ~
+
+	!begin_itemize	!short
+	
+	!item	(!I)!/autoref_items~[off|on](!i): Shall UDO insert links
+	in items of descriptions and lists?
+			
+	!item	(!I)!/code_mac(!i), (!I)!/code_hp8(!i), (!I)!/code_iso(!i),
+			(!I)!/code_dos(!i) and (!I)!/code_tos(!i): UDO understands
+			now the character sets of other operating systems.
+
+	!item	(!I)!/country(!i): Additional title page information.
+
+	!item	(!I)!/html_backpage(!i): For a back-link on the HTML title
+			page.
+
+	!item	(!I)!/html_keywords(!i): For HTML meta information.
+
+	!item	(!I)!/html_img_suffix(!i): To enable you to use JPEG
+			images etc.
+
+	!item	(!I)!/html_nodesize(!i): For changing the font size of
+			HTML headlines.
+
+	!item	(!I)!/ifos(!i) und (!I)!/ifnos(!i): For checking the
+			operatin system.
+
+	!item	(!I)!/ignore_headline(!i), (!I)!/ignore_bottomline(!i):
+			For suppressing the headline or the bottomline of a
+			specific node.
+			
+	!item	(!I)!/ignore_subtoc(!i) und Verwandte: For suppressing the
+			sub-table of contents inside a specific node.
+
+	!item	(!I)!/ignore_links(!i): For suppressing links to a
+			specific node.
+
+	!item	(!I)!/image*(!i): For printing image captions without
+			""Figure #:"".
+
+	!item	(!I)!/image_counter(!i): For changing the image counter.
+
+	!item	(!I)!/no_index(!i): For suppressing index command
+			conversion.
+	
+	!item	(!I)!/no_toc_subnodes(!i), (!I)!/no_toc_subsubnodes(!i),
+			(!I)!/no_toc_subsubsubnodes(!i): For making the table of
+			contents smaller.
+
+	!item	(!I)!/no_preamble(!i): Useful if you want to write your
+			own preamble.
+	
+	!item	(!I)!/parwidth(!i): For changing the paragraph width of
+			the destination file.
+
+	!item	(!I)!/rtf_charwidth(!i): For changing the value UDO uses
+			for calulating indents and cell widths.
+
+	!item	(!I)!/set(!i), (!I)!/unset(!i), (!I)!/ifset(!i),
+			(!I)!/ifnset(!i): For setting and checking symbols.
+
+	!item	(!I)!/sort_hyphen_file(!i): Shall UDO sort the hyphen file
+			and delete duplicates?
+			
+	!item	(!I)!/subsubsubnode(!i) und Verwandte: A fourth layer.
+
+	!item	(!I)!/table_counter(!i): For changing the table counter.
+	
+	!item	(!I)!/table_caption*(!i): For printing table captions without
+			""Table #:"".
+			
+	!item	(!I)!/tabwidth(!i): For setting the tabulator width for
+			verbatim environments.
+
+	!item	(!I)!/use_justification(!i): Shall UDO generate
+			justification?
+	
+	!item	(!I)!/use_nodes_inside_index(!i),
+			(!I)!/use_alias_inside_index(!i),
+			(!I)!/use_label_inside_index(!i): For appending nodes,
+			aliases and labels to the index.
+
+	!item	(!I)!/use_output_buffer(!i): Shall UDO use a buffer to
+			make the referencation more perfectly for HTML and Windows Help?
+
+	!item	(!I)!/use_short_envs(!i): For printing always compressed
+			environments.
+
+	!item	(!I)!/verbatimsize(!i): For changing the font size of
+			verbatim environments.
+
+	!item	(!I)!/win_background(!i): For changing the background
+			colour for Windows Help.
+			
+	!item	(!I)!/win_high_compression(!i),
+			(!I)!/win_medium_compression(!i): For setting the
+			compression rate for Windows Help.
+
+	!item	(!I)!/win_inline_bitmaps(!i): Shall UDO use special RTF
+			commands for using inline bitmaps?
+
+	!item	(!I)!/win_charwidth(!i): For changing the value UDO uses
+			for calulating indents and cell widths.
+
+	!end_itemize
+
+
+!item [News: ]~
+
+	!begin_itemize	!short
+
+	!item	You can use four layers now for structuring your text.
+
+	!item	Justification
+
+	!item	Macros and definitions can contain parameters. Thus, you
+			can write your own commands in most cases.
+
+	!item	blist environment, ilist environment and
+			tlist environment
+
+	!item	right justified text (flushright environment)
+
+	!item	left justfied text (flushleft environment) for suppressing
+			the justification
+
+	!item	You can use up to four E-Mail addresses on the title page
+			now.
+
+	!item	UDO supports Italian ((!I)!/language italian(!i)), Spanisch
+			((!I)!/language spanish(!i)) and Swedish ((!I)!/language
+			swedish(!i)) now.
+
+	!item	UDO can sort the hyphen file and delete duplicates.
+
+	!item	(!I)!/no_umlaute(!i) converts now all international
+			characters, not only the German umlauts.
+	
+	!item	The source code was optimized. Although UDO supports lots
+			of new commands this version of UDO runs faster than the
+			old one.
+			
+	!end_itemize
+
+
+!item [Changes:] ~
+
+	!begin_itemize	!short
+	
+	!item	The RTF output was programmed completely new. You can
+			import UDO's RTF files without problems in WinWord.
+
+	!item	UDO saves a preamble for (!LaTeX) 2.09 and (!LaTeXe) on
+			its own (you can switch it off, if you want).
+
+	!item	UDO allows you to use many more nodes, table rows, hyphens
+			etc.
+
+	!item	UDO checks the source files more pedantically.
+
+	!item	Images are positioned like the outer text. To center an
+			image you have to use the (!I)!/image(!i) command inside a
+			center environment. Thus, you can print left and right
+			justified images, too.
+
+	!item	The suffix for ASCII files is now (!V).txt(!v).
+
+	!item	UDO doesn't break line between (!V)\verb(!v) when
+			converting to (!LaTeX).
+
+	!item	Graphic characters of the IBM PC character set will be
+			replaced by ''+'', ''-'' and ''|'' for Windows Help.
+			
+	!end_itemize
+
+
+!item [Syntax changes:] ~
+
+	!begin_itemize	!short
+	
+	!item	(!I)!/no_verbatim_umlaute(!i) replaces the switch
+			(!V)!/verbatim_no_umlaute(!v)
+
+	!item	The switch (!V)!/list_parsep(!v) doesn't exist anymore.
+			You can print ""compressed"" environment easier with
+			(!I)!/short(!i) now.
+
+	!item	The language of the destination file has to be set with
+			the (!I)!/language(!i) command now.
+			(!I)!/language~english(!i) replaces the command
+			(!V)!/endlish(!v).
+
+	!item	You can pass three index entries with one (!I)!/index(!i) 
+			command now.
+
+	!item	(!V)!/win_html_look(!v) doesn't exist anymore.
+
+	!item	Shdowed, hollow, outlined and framed text isn't supported
+			anymore. But you can define your own commands with
+			definitions if you need these text styles.
+	
+	!end_itemize
+	
+!end_description
+

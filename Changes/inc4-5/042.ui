@@ -1,0 +1,38 @@
+!subnode	0.42 vom 25.01.1996
+!html_name	r4_v042
+
+!begin_description
+
+###########################################################
+
+!item	[Allgemein] ~
+
+!begin_itemize
+
+!item	Bei !/ifdest kann man als Parameter nun auch [none] angeben, und
+		damit größere Passagen auskommentieren.
+  
+		(!T)!/ifdest [none](!t)							(!nl)
+		(!T)Diese Zeile wird von UDO nie bearbeitet(!t)	(!nl)
+		(!T)!/endif(!t)
+  
+		[none] kann auch bei Schaltern benutzt werden.
+		!/no_headlines [html,none] schaltet die Kopfzeilen für HTML
+		jedoch nicht aus, da [none] die höchste Priorität hat, auch eine
+		größere als [all]
+
+!item Erste Anfänge der Implementierung einer Umgebung für Tabellen.
+	Wie diese benutzt werden, sieht man in ""table.u"". Wenn man
+	""tabtest.u"" uebersetzt, dann sieht man, was noch alles schief geht.
+  
+	Diese Umsetzung in Tabellen ist lediglich vorläufig und ich bitte
+	darum, Vorschläge zu machen, wie man es besser machen könnte.
+	Zu lösende Probleme sind die Ausrichtung der einzelnen Felder
+	sowie ob, wie und wann Linien benutzt werden sollen.
+
+!end_itemize
+
+###########################################################
+
+!end_description
+

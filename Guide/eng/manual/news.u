@@ -1,0 +1,7 @@
+!no_numbers [asc]
+!no_effects [asc]
+!sloppy
+
+!begin_document
+!include history/rel6.ui
+!end_document

@@ -1,0 +1,107 @@
+############################################################
+# @(#) Makros, Dirk Hagedorn, 07.11.1995
+# 31.12.1995: Vorformatierte Makros
+# 14.07.1996: Makros mit Parametern
+############################################################
+
+!subsubnode Makros
+
+Makros sind benutzerdefinierte Platzhalter, die sich für die
+verschiedensten Dinge eignen.
+
+!index !/macro
+Beim Befehl (!I)!/macro(!i) geben Sie zunächst den Bezeichner des
+Makros an, dem sich der Ersetzungstext anschließt. Letzterer kann auch
+leer sein.
+
+Um im Quelltext später den Inhalt eines Makros ausgeben zu lassen,
+geben Sie den Bezeichner der Makros mit einem führenden
+Ausrufezeichen und eingeschlossen in runde Klammern an.
+
+Auch hier zunächst ein paar Beispiele:
+
+!begin_quote
+!begin_verbatim
+!macro HTML Hypertext Markup Language
+!macro UDO  (!B)U(!b)niversal (!B)Do(!b)cument
+!macro TOSG (!T)UDO6GDOS.LZH(!t)
+!ifdest [html]
+  !macro PICPATH gif/
+!else
+  !macro PICPATH img/
+!endif
+[...]
+Die (!HTML) ...
+Das (!UDO) Format ...
+Das Archiv (!DOSG) ...
+!image (!PICPATH)/tiger
+!end_verbatim
+!end_quote
+
+!index !/include
+Diese Makros könnten dazu benutzt werden, sich lästige Tipparbeit zu sparen
+oder Änderungen zu beschleunigen. Ein weiteres Anwendungsgebiet ist das
+Erstellen von standardisierten Texten, deren Inhalt durch Makros an den
+jeweiligen Quelltext angepaßt wird. Im folgenden Beispiel wird der
+Programmname in einen Disclaimer eingebaut, der per (!I)!/include(!i)
+eingebunden wird:
+
+!begin_quote
+!begin_verbatim
+[doku.u]
+!macro PRG Windows95
+[disclaim.u]
+(!PRG) wurde umfangreichen Tests unterzogen.
+Die Benutzung erfolgt auf eigene Gefahr!
+!end_verbatim
+!end_quote
+
+
+!smallskip
+
+!index Makros !! Parameter
+!index Parameter !! Makros
+
+Seit UDO Release 6 können Makros auch Parameter übergeben werden. Bei der
+Erzeugung eines Makros geben Sie dazu mit ''(!T)(!/1)(!t)'',
+''(!T)(!/2)(!t)'' bis ''(!T)(!/9)(!t)'' die Position der Parameter an. Um
+den Makros im Text die Parameter zu übergeben, setzen Sie diese in eckige
+Klammern.
+
+Hier ein kleines Beispiel, bei dem ein Makro für die Ausgabe von
+gleichzeitig fettem und kursiven Text definiert wird und später mit
+nur einem Parameter aufgerufen wird:
+
+!begin_quote
+!begin_verbatim
+!macro BI (!B)(!I)(!1)(!i)(!b)
+...
+Dieser Text ist (!BI [fett und kursiv]).
+!end_verbatim
+!end_quote
+
+Die Worte ""fett und kursiv"" werden bei der Ausgabe dann an die
+Stelle von (!/1) gesetzt. Das Beispiel ist zugegebenermaßen nicht
+gerade glücklich gewählt, da man mit Schriftarten möglichst sparsam
+umgehen sollte, zeigt aber hier auf einfache Weise, wie man Makros
+einsetzen könnte.
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate
+
+!item Bei der Namensvergabe der Makros sollte man möglichst darauf achten, diese
+nicht wie bereits existente Befehle oder Platzhalter zu benennen. So sollten
+sie ein Makro nicht ""B"" oder ""nl"" benennen, da dann die Umschaltung in
+Fettschrift ((!/B)) oder ein erzwungener Zeilenumbruch nicht mehr
+funktionieren.
+
+!item Die Benutzung von Makros sollte nicht übertrieben werden. UDO erlaubt zwar
+die Benutzung von bis zu (!MAXMACRO) Makros, jedoch verlangsamt jedes
+zusätzliche Makro die Umwandlung der Quelldatei, da jede Zeile nach allen
+Makros durchsucht werden muß.
+
+!end_enumerate
+

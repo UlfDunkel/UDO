@@ -1,0 +1,317 @@
+!subnode	PL9 vom 17.08.1996
+!html_name	r5_pl9
+
+Viele Kinderkrankheiten wurden beseitigt.
+
+Ich erkenne aber gerade ein
+neues(?) Problem: Manchmal, für mich ohne ersichtlichen Grund, wird ---
+zumindest bei einer xlist-Umgebung --- das dem !/item direkt folgende Wort
+nicht referenziert. Ich bin noch auf der Suche!..
+
+!begin_description
+
+#####################################################################
+!item	[(!ALL)] ~
+
+!begin_itemize
+
+!index Sonderzeichen !! Makroparameter
+!item	Bugfix: Sonderzeichen in Makroparametern wurden nicht angepaßt
+(Patrick Jerchel).
+
+!index Anmerkungen !! Makros
+!index Anmerkungen !! Definitionen
+!item	Anmerkungen zu den Makros und Definitionen:
+
+Es ist nicht möglich, leere Makros zu benutzen, wenn diesen
+Parameter übergeben werden. Folgendes Makro wird UDO nicht anpassen:
+
+!index !/macro
+
+!begin_quote
+!begin_verbatim
+!macro Leer
+...
+Ich sehe nichts (!Leer [echt nicht]).
+!end_verbatim
+!end_quote
+	
+Will man ein Makro nur für ein Format expandieren und soll bei
+den anderen Formaten nichts ausgegeben werden, so macht man folgendes:
+
+!begin_quote
+!begin_verbatim
+!ifdest [stg]
+!macro 4stg (!1)
+!else
+!macro 4stg (!2)
+!endif
+...
+Blubber fasel (!4stg [tolle Sache] [])...
+!end_verbatim
+!end_quote
+
+In diesem Beispiel wird für den ST-Guide ""tolle Sache"" ausgegeben,
+für alle anderen Formate nichts.
+
+!index Referenzierung
+!item	UDO kam bei der Referenzierung nicht mit Nodes klar, deren
+Titel nur aus einem Zeichen bestand. Es wurden interne Sequenzen
+zerstümmelt und dadurch Schrott ausgegeben (Joachim Hurst).
+
+!index Referenzierung !! Alias
+!item	Aliase wurden teilweise nicht referenziert, da ein internes
+Flag nicht zurückgesetzt wurde.
+
+!index Links auf Kapitel mit ! am Ende des Namens
+!item	Manuelle Links auf Kapitel, deren Titel mit einem Ausrufungszeichen
+enden, sind nun auch möglich, indem die Quotefunktion des ""!""
+aufgehoben wird.
+
+!begin_verbatim
+(!link [Ab geht die Post] [Spitze!/]).
+!end_verbatim
+
+!index Tilden
+!item	Die Umsetzung der Tilden wurde komplett neu programmiert (was'n Streß).
+Im letzten Patchlevel funktionierte es halt doch nicht immer.
+
+!index !/no_index
+!item	(!I)!/no_index(!i) verhindert nun auch die Umsetzung von
+(!I)(!/idx)(!i).
+
+!index Fehlermeldungen
+!item	Bei den Fehlermeldungen tauchten nach Includes falsche
+Dateinamen auf.
+
+!index !/italian
+!index !/spanish
+!index !/swedish
+!item	Befehle für Italienisch ((!I)!/italian(!i)), Spanisch
+((!I)!/spanish(!i)) und Schwedisch ((!I)!/swedish(!i)) werden nun
+angeboten. Allerdings fehlen noch alle Begriffe in den jeweiligen
+Sprachen.
+
+!index GEM-Version
+!item	Wenn man in der GEM-Version kein Logfile anlegen ließ und sich
+keine Statusmeldungen ausgeben ließ, wurden Fehlermeldungen auf den
+Bildschirm geschrieben (Patrick Jerchel). Da in Gemini diese Meldungen
+ins Console-Fenster gehen, ist mir das nie aufgefallen.
+
+!end_itemize
+
+
+
+#####################################################################
+!item	[ASCII] ~
+
+!begin_itemize
+
+!index ASCII !! Links
+!item	Bei manuellen Links wird nun der Name des Kapitels und nicht
+mehr der des Labels oder Alias angegeben. Darüber hinaus wird geprüft,
+ob das Linkziel überhaupt definiert ist.
+
+!end_itemize
+
+
+#####################################################################
+!item	[HTML] ~
+
+!begin_itemize
+
+!index HTML !! Alias
+!item	Die IDs der Aliase werden nun gleich zu Beginn einer Seite ausgegeben,
+so daß bei Links auf einen Alias auch zum Seitenanfang gesprungen wird
+(Patrick Jerchel).
+
+!item	Nodes im Anhang erzeugen nun einen mit (!V)_(!v) beginnenden
+Dateinamen. Andernfalls konnte es passieren, daß bereits gesicherte
+Kapitel wieder überschrieben wurden, da für verschiedene Kapitel
+gleiche Dateinamen verwendet wurden (Patrick Jerchel).
+
+!index !/html_use_xlist
+!item	(!I)!/html_use_xlist(!i) wurde fälschlicherweise als
+unbekanntes Kommando bemängelt (Patrick Jerchel).
+
+!item	Wurde (!I)!/html_use_xlist(!i) eingesetzt, so wurde
+(!I)(!/nl)(!i) nicht entfernt (Patrick Jerchel).
+
+!item	Die Einrückungen in einer xlist-Umgebung unter Verwendung von
+(!I)!/html_use_xlist(!i) waren falsch.
+
+!index HTML !! Referenzierung
+!item	Bugfix: Es wurden HTML-Tags wie (!V)li(!v) referenziert,
+wodurch das HTML-File ziemlich unbrauchbar war.
+
+!end_itemize
+
+
+#####################################################################
+!item	[(!LaTeX)] ~
+
+!begin_itemize
+
+!index (!LaTeX) !! Alias
+!item	(!I)!/alias(!i) wird nun auch für (!LaTeX) unterstützt. Aliase
+werden als Labels unterhalb einer Kapitelüberschrift ausgegeben und können
+somit auch mit (!I)(!/link)(!i) und (!I)(!/plink)(!i) referenziert werden.
+
+!index odd number of !! (!LaTeX)
+!item	Umlaute in Indizes werden nun ""normal"" umgewandelt. Bisher
+lief dann noch die Anpassung doppelter Anführungszeichen über die
+Indizes, was zu komischen Umlauten im Index und der Fehlermeldung
+""odd number of!.."" führte.
+
+!end_itemize
+
+
+#####################################################################
+!item	[Linuxdoc-SGML] ~
+
+!begin_itemize
+
+!index Linuxdoc-SGML !! (!/ilink)
+!item (!I)(!/ilink)(!i) wurde nicht umgewandelt.
+
+!index Linuxdoc-SGML !! Tabellen
+!item Tabellen wurden nicht mit (!V)<verb></verb>(!v) geklammert.
+
+!item In Tabellen wurden manuelle Links nicht umgesetzt.
+
+!end_itemize
+
+
+#####################################################################
+!item	[Pure-C-Help] ~
+
+!begin_itemize
+
+!index Pure-C-Help !! (!/link)
+!item	(!I)(!/link)(!i) wird nun unterstützt. Es ist manchmal
+doch ganz gut, wenn man mal einen Blick in ein Handbuch wirft.
+
+!item 	Bugfix: UDO stürzte fast immer ab, sobald das letzte Kapitel
+umgewandelt wurde (Christian Goßlar).
+
+!end_itemize
+
+
+#####################################################################
+!item	[RTF] ~
+
+Da ich neulich die Möglichkeit hatte, die UDOs RTF-Dateien in
+WinWord~6.0 zu importieren, sind mir ein paar kleinere Fehler
+aufgefallen.
+
+Falls Fußnoten, Kapitelüberschriften und Tabellen bei
+WinWord~7.0 nicht korrekt dargestellt werden sollten, bitte ich um
+eine kurze Nachricht darüber, was genau schiefläuft. Ein kleiner
+Screenshot wäre dazu sehr hilfreich (bitte vorher in ein monochromes
+Format umwandeln!), damit ich sehen kann, wie WinWord etwas darstellt.
+
+
+!begin_itemize
+
+!index RTF !! !/use_style_book
+!item	Kapitel werden bei Verwendung von (!I)!/use_style_book(!i) in
+25pt ausgegeben. Außerdem werden sie nun komptibel zu WinWord ausgegeben.
+
+!index RTF !! Tabellen
+!item	Horizontale und vertikale Linien bei Tabellen werden nun auch beim RTF
+erzeugt. War gar nicht so schwer. Man muß nur halt wissen, wie's geht.
+(!laugh)
+
+!index RTF !! Infoblock
+!item	Ein Infoblock samt Namen des (!I)!/author(!i) wird ausgegeben.
+Wird (!I)!/author(!i) nicht gesetzt, wird der Name ausgegeben, auf den
+UDO registriert ist.
+
+!index RTF !! Fußnoten
+!item	Fußnoten werden korrekt ausgegeben. Im Fußnotentext erscheint
+zwischen Fußnotennummer und -text ein Leerzeichen. Der Fußnotentext
+wird in 7pt ausgegeben.
+
+!index RTF !! !/index
+!index RTF !! (!/idx~[~])
+!item	(!I)!/index(!i) und (!I)(!/idx)(!i) werden unterstützt.
+
+!index RTF !! verbatim-Umgebung
+!item	Bugfix: Nach einer verbatim-Umgebung wurde ein 12pt-Font statt
+eines 11pt-Fonts eingestellt.
+
+!end_itemize
+
+
+#####################################################################
+!item	[ST-Guide] ~
+
+!begin_itemize
+
+!index ST-Guide !! !/label
+!item	Ein Label wird nur noch in (!V)@symbol ar(!v) umgewandelt.
+Labels erscheinen daher nicht mehr im Index des ST-Guide. Dafür gibt
+es ja schlielich (!I)!/index(!i).
+
+!index ST-Guide !! (!/idx~[~])
+!item	(!I)(!/idx~!..)(!i) wird nun unterstützt. Die Indexbefehle
+werden oberhalb des Absatzes, in dem sie gesetzt wurden, ausgegeben.
+
+!index ST-Guide !! Links
+!index (!/link)
+!item	Bugfix: Manuelle Links auf ein Label wurden falsch umgesetzt (Patrick
+Jerchel). Warum hat das denn bloß keiner früher gemerkt? Das machte
+UDO ja seit der Release 1 falsch!? (!grin)
+
+!item	Bugfix: Enthielt ein Node im Titel ein (!V)@(!v), so wurden
+fehlerhafte (!V)@toc(!v)-Befehle erzeugt (Martin Osieka).
+
+!end_itemize
+
+
+#####################################################################
+!item	[Texinfo] ~
+
+!begin_itemize
+
+!index Texinfo !! !/index
+!item Bugfix: Bei (!I)!/index(!i) wurden einige Sonderzeichen nicht
+umgewandelt.
+
+!index Texinfo !! (!/idx~[~])
+!item Für Texinfo wird nun auch (!I)(!/idx~!..)(!i) unterstützt.
+
+!item Werden Index-Befehle benutzt, erzeugt UDO die zur Ausgabe des
+Indexregisters nötigen Befehle.
+
+!end_itemize
+
+
+#####################################################################
+!item	[WinHelp] ~
+
+!begin_itemize
+
+!index WinHelp !! Umlaute
+!item	Es werden nun nicht nur die deutschen Umlaute, sondern alle
+Sonderzeichen korrekt für die HPJ-Option ""Title"" umgewandelt.
+
+!index WinHelp !! !/label
+!index WinHelp !! !/index
+!item	Ein Label gelangt nicht mehr in den Index (Suchen-Dialog).
+Dafür gibt es (!I)!/index(!i).
+
+!index WinHelp !! (!/idx~[~])
+!item	(!I)(!/idx ...)(!i) wird nun unterstützt.
+
+!index Referenzierung !! WinHelp
+!item	Bugfix: WinHelp-Kommandos wie (!V)footnote(!v), (!V)plain(!v),
+(!V)par(!v) etc. werden nicht mehr referenziert. Das war natürlich
+ein Bug der ganz üblen Sorte.
+
+!end_itemize
+
+
+#####################################################################
+!end_description
+

@@ -1,0 +1,51 @@
+!iflang [german]
+	!subnode PL4 vom 25.06.1997
+!else
+	!subnode PL4, June 25th 1997
+!endif
+!html_name pl_06_04
+
+!iflang [german]
+
+Ich hoffe, ich habe alle Änderungen notiert. (!grin)
+
+Zum ersten Mal gibt es eine Version für Win32 (Windows 95 und NT)
+nebst neuer, besserer Shell. Beide Programme mit Debug-Informationen
+ausgeliefert, deshalb benötigt man folgende DLLs:
+
+!else
+
+I hope I have included all changes. (!grin)
+
+For the first time a version for Win32 (Win 95/NT) is available next
+to a new shell. Both programs are debug version thus you need the
+following DLL's to run them:
+
+!endif
+
+!begin_enumerate !short
+!item MFC40D.DLL
+!item MSVCRT40.DLL
+!item MSVCR40D.DLL
+!end_enumerate
+
+############################################################
+(!B)(!ALL):(!b)
+!include inc6-7/pl4/all.(!SUF)
+
+############################################################
+(!B)HTML:(!b)
+!include inc6-7/pl4/html.(!SUF)
+
+############################################################
+(!B)ST-Guide:(!b)
+!include inc6-7/pl4/stg.(!SUF)
+
+############################################################
+(!B)GEM-Version:(!b)
+!include inc6-7/pl4/gem.(!SUF)
+
+############################################################
+(!B)Win32-Shell:(!b)
+!include inc6-7/pl4/udosh32.(!SUF)
+

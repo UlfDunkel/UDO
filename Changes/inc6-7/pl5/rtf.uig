@@ -1,0 +1,27 @@
+!begin_itemize
+
+!index Farben
+!item Neu: Im RTF-Header wird nun auch eine Colortable ausgegeben. Das
+bedeutet, daß man nun auch in RTF Farben verwenden kann.
+
+!index !/-
+!item Neu: Trennvorschläge mittels ""(!I)!/-(!i)""
+(z.B. ""Ur!/-instinkt"") werden für RTF übernommen (Stefan
+Braunstein).
+
+!index linedraw-Umgebung
+!index !/ldinclude
+!index !/linedrawsize
+!item Neu: Mittels der linedraw-Umgebung ist es nun möglich, in einem
+RTF-File ""DOS-Screenshots"" oder sonstige Texte, die die
+DOS-Grafikzeichen verwenden, zu erstellen. Dazu muß der Zeichensatz
+""MS LineDraw"" installiert sein. Word für Windows zeigt die Passagen
+korrekt an, WordPad95 hingegen nicht (warum auch immer). Analog zu
+(!I)!/vinclude(!i) funktioniert (!I)!/ldinclude(!i): Es wird eine
+komplette Datei eingelesen und in einer linedraw-Umgebung dargestellt.
+Ebenfalls analog zu (!I)!/verbatimsize(!i) funktioniert
+(!I)!/linedrawsize(!i), womit die Zeichensatzgröße bestimmt werden
+kann (Andreas Swazinna).
+
+!end_itemize
+
