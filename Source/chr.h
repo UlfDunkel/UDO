@@ -34,6 +34,10 @@
 #define	TTF_10PT	0
 #define	TTF_11PT	1
 
+#define KPS_CONTENT	0
+#define KPS_BOOKMARK	1
+#define KPS_NAMEDEST	2
+
 #endif	/* __UDOCHR__ */
 
 
