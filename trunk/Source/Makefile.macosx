@@ -7,14 +7,14 @@ CC = gcc
 O=.o
 X=
 
-CFLAGS = -O3 -Wall -D__MACOSX__ $(XCFLAGS)
+CFLAGS = -fwritable-strings $(CPROJECTFLAGS) -D__MACOSX__ $(XCFLAGS)
 
 #CFLAGS =	-g -O2 -D__MACOSX__ \
 #-Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations \
 #-Wshadow -Wwrite-strings -Wbad-function-cast -Wcast-qual \
 #-Wconversion -pedantic 
 
-LDFLAGS = -s
+LDFLAGS = $(LDPROJECTFLAGS)
 
 include makefile.in
 
