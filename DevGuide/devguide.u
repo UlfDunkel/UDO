@@ -113,7 +113,8 @@ werden sollten. Für (!V)#ifdef(!v)'s sind folgende Makros vorgesehen:
 !item	[HP-UX:]		(!V)__HPUX_ISO__(!v) bzw. 
 						(!V)__HPUX_ROMAN__(!v), je nachdem, welchen Zeichensatz das System 
 						verwendet (ISO-Latin-1 oder HP-Roman-8).
-!item	[Macintosh:]	(!V)__MACOS__(!v)
+!item	[Macintosh:]	(!V)__MACOS__(!v) fŸr das klassische Mac OS bis Version  9 
+                        bzw. (!V)__MACOSX__(!v) fŸr das Mac OS X ab Version 10
 !item	[NeXTStep:]		(!V)__NEXTSTEP__(!v)
 !item	[Sinix:]		(!V)__SINIX__(!v)
 !item	[SunOS:]		(!V)__SUNOS__(!v)
