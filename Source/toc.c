@@ -1920,7 +1920,7 @@ LOCAL BOOLEAN html_make_file ( void )
 
 LOCAL void output_html_meta ( BOOLEAN keywords )
 {
-	int ti, i, li;
+	int ti=0, i, li;
 
 	char s[512], htmlname[512], sTarget[512]="\0";
 
@@ -6016,6 +6016,7 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 											'A'-1+toc[i]->nr1+toc_offset,
 											toc[i]->nr2+subtoc_offset,
 											toc[i]->nr3+subsubtoc_offset,
+											toc[i]->nr4+subsubsubtoc_offset,
 											lab[li]->name, s);
 					}/* TOC_NODE4 */
 
