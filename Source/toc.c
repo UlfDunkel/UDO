@@ -1008,6 +1008,9 @@ LOCAL BOOLEAN output_raw_file ( const char *filename )
 		{	s[len-1]= EOS;
 			len--;
 		}
+		/* New in V6.5.9 [NHz] */
+		replace_macros(s);
+
 		outln(s);
 	}
 
@@ -1018,27 +1021,30 @@ LOCAL BOOLEAN output_raw_file ( const char *filename )
 }	/* output_raw_file */
 
 
-GLOBAL void check_output_raw_header ( void )
+/* Changed in V6.5.9 [NHz] */
+GLOBAL BOOLEAN check_output_raw_header ( void )
 {
 	if (!toc[p2_toc_counter]->ignore_raw_header)
 	{
 		if (toc[p2_toc_counter]->raw_header_filename!=NULL)
 		{
-			output_raw_file(toc[p2_toc_counter]->raw_header_filename);
+			return(output_raw_file(toc[p2_toc_counter]->raw_header_filename));
 		}
 		else
 		{
 			if (sDocRawHeaderFilename[0]!=EOS)
 			{
-				output_raw_file(sDocRawHeaderFilename);
+				return(output_raw_file(sDocRawHeaderFilename));
 			}
 		}
 	}
+	return(FALSE);
 
 }	/* check_output_raw_header */
 
 
-GLOBAL void check_output_raw_footer ( BOOLEAN lastNode )
+/* Changed in V6.5.9 [NHz] */
+GLOBAL BOOLEAN check_output_raw_footer ( BOOLEAN lastNode )
 {
 	int offset= 1;
 
@@ -1055,16 +1061,17 @@ GLOBAL void check_output_raw_footer ( BOOLEAN lastNode )
 	{
 		if (toc[p2_toc_counter-offset]->raw_footer_filename!=NULL)
 		{
-			output_raw_file(toc[p2_toc_counter-offset]->raw_footer_filename);
+			return(output_raw_file(toc[p2_toc_counter-offset]->raw_footer_filename));
 		}
 		else
 		{
 			if (sDocRawFooterFilename[0]!=EOS)
 			{
-				output_raw_file(sDocRawFooterFilename);
+				return(output_raw_file(sDocRawFooterFilename));
 			}
 		}
 	}
+	return(FALSE);
 
 }	/* check_output_raw_footer */
 
@@ -2290,12 +2297,12 @@ LOCAL void output_html_doctype ( void )
 			break;
 		case XHTML_STRICT:
 			outln("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>");
-			outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"");
+			outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"");
 		 	outln("        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
 			break;
 		case XHTML_TRANS:
 			outln("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>");
-			outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"");
+			outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"");
 		 	outln("        \"http://www.w3.org/TR/xhtml1/DTD/xhtm1-transitional.dtd\">");
 			break;
 	}
@@ -3241,7 +3248,7 @@ GLOBAL void html_save_frameset ( void )
 	/* New in r6pl16 [NHz] */
 	if(html_doctype >= XHTML_STRICT)
 	{
-		outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Frameset//EN\"");
+		outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Frameset//EN\"");
  		outln("        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd\">");
 		voutlnf("<html lang=\"%s\" xml:lang=\"%s\">", lang.html_lang, lang.html_lang);
 	}
