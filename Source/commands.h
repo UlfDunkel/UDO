@@ -48,6 +48,28 @@
 #define	CMD_DELETED_OFF			"(!del)"
 
 /*	--------------------------------------------------	*/
+/* Farben */
+/*	--------------------------------------------------	*/
+/* New in V6.5.9 [NHz] */
+#define	CMD_COLOR_BLACK			"(!black)"
+#define	CMD_COLOR_SILVER		"(!silver)"
+#define	CMD_COLOR_GRAY			"(!gray)"
+#define	CMD_COLOR_WHITE			"(!white)"
+#define	CMD_COLOR_MAROON		"(!maroon)"
+#define	CMD_COLOR_RED				"(!red)"
+#define	CMD_COLOR_PURPLE		"(!purple)"
+#define	CMD_COLOR_FUCHSIA		"(!fuchsia)"
+#define	CMD_COLOR_GREEN			"(!green)"
+#define	CMD_COLOR_LIME			"(!lime)"
+#define	CMD_COLOR_OLIVE			"(!olive)"
+#define	CMD_COLOR_YELLOW		"(!yellow)"
+#define	CMD_COLOR_NAVY			"(!navy)"
+#define	CMD_COLOR_BLUE			"(!blue)"
+#define	CMD_COLOR_TEAL			"(!teal)"
+#define	CMD_COLOR_AQUA			"(!aqua)"
+#define	CMD_COLOR_OFF				"(!coloff)"
+
+/*	--------------------------------------------------	*/
 /* Umgebungen */
 /*	--------------------------------------------------	*/
 #define CMD_BEGIN_APPENDIX		"!begin_appendix"
