@@ -1,5 +1,5 @@
 # doc/manual/source/commands.ui
-# letzte Änderungen: 12.01.2004 / last changes: Jan 12, 2004
+# letzte Änderungen: 15.01.2004 / last changes: Jan 15, 2004
 # ------------------------------------------------------------------------------
 # Diese Datei enthält den alphabetischen Befehlsindex.
 # Die Ausgabe für nicht mehr existente Befehle erfolgt nur dann, wenn "OldKeywords" gesetzt ist.
@@ -7,6 +7,21 @@
 # This file contains the command index (in alphabetical ordner).
 # Output for commands which are no longer existing will be created only if "OldKeywords" was set.
 # ------------------------------------------------------------------------------
+
+
+
+# Wenn "OldKeywords" *nicht* gesetzt ist, erscheinen Kommandos, die
+# nicht mehr unterstützt werden, nicht im Befehlsindex.
+# If "OldKeywords" is *not* set, commands that are not supported
+# any longer are removed from the command index.
+
+# Default
+!set OldKeywords
+# evtl. als Kommandozeilenparameter? / maybe as commandline parameter?
+!ifset NoOldKeywords
+!unset OldKeywords
+!endif
+
 
 ################################################################################
 ################################################################################
