@@ -171,6 +171,10 @@ GLOBAL void c_pch_styles ( char *s )
 	delete_all(s, VERB_OFF);
 #endif
 	
+	/* New in V6.5.9 [NHz] */
+	qreplace_all(s, DELETED_ON, STYLELEN, "[", 1);
+	qreplace_all(s, DELETED_OFF, STYLELEN, "]", 1);
+
 	del_internal_styles(s);
 
 }	/* c_pch_styles */
@@ -259,7 +263,13 @@ GLOBAL void c_win_styles ( char *s )
 
 	footnote2ascii(s);
 
-	/* New in V6.5.8 [NHz] [Colour] */
+	/* New in V6.5.9 [NHz] */
+	qreplace_all(ptr, INSERT_ON, STYLELEN, "{\\cf6 ", 6);
+	qreplace_all(ptr, INSERT_OFF, STYLELEN, "}", 1);
+	qreplace_all(ptr, DELETED_ON, STYLELEN, "{\\strike ", 9);
+	qreplace_all(ptr, DELETED_OFF, STYLELEN, "}", 1);
+
+	/* New in V6.5.8 [NHz] */
 	qreplace_all(ptr, COLOR_BLACK, STYLELEN, "{\\cf1 ", 6);
 	qreplace_all(ptr, COLOR_SILVER, STYLELEN, "{\\cf2 ", 6);
 	qreplace_all(ptr, COLOR_GRAY, STYLELEN, "{\\cf3 ", 6);
@@ -319,6 +329,12 @@ GLOBAL void c_internal_styles ( char *s )
 			replace_all(ptr, VERB_OFF, tex_verb_off);
 			replace_all(ptr, FOOT_ON, "\\footnote{");
 			replace_all(ptr, FOOT_OFF, "}");
+
+			/* New in V6.5.9 [NHz], fuer TeX gibt es vielleicht eine bessere
+			Moeglichkeit eingefuegte und geloeschte Text zu kennzeichnen */
+			qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
+			qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
+
 			del_internal_styles(s);
 			break;
 		case TOLYX:
@@ -334,6 +350,11 @@ GLOBAL void c_internal_styles ( char *s )
 			replace_all(ptr, VERB_OFF, "\\family"INDENT_S"default"INDENT_S);
 			replace_all(ptr, FOOT_ON, "\n\\begin_float"INDENT_S"footnote\n\\layout"INDENT_S"Standard\n\n");
 			replace_all(ptr, FOOT_OFF, "\n\\end_float\n\\layout"INDENT_S"Standard\n");
+
+			/* New in V6.5.9 [NHz] */
+			qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
+			qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
+
 			del_internal_styles(s);
 			break;
 		case TOINF:
@@ -347,6 +368,11 @@ GLOBAL void c_internal_styles ( char *s )
 			qreplace_all(ptr, TWRITER_OFF, STYLELEN,	"}",			1);
 			qreplace_all(ptr, VERB_ON, STYLELEN,		"@code{",		6);
 			qreplace_all(ptr, VERB_OFF, STYLELEN,		"}",			1);
+
+			/* New in V6.5.9 [NHz] */
+			qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
+			qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
+
 			del_internal_styles(s);
 			break;
 		case TOTVH:
@@ -355,6 +381,11 @@ GLOBAL void c_internal_styles ( char *s )
 			delete_all(s, VERB_OFF);
 #endif
 			footnote2ascii(s);
+
+			/* New in V6.5.9 [NHz] */
+			qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
+			qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
+
 			del_internal_styles(s);
 			break;
 		case TOSTG:
@@ -369,6 +400,11 @@ GLOBAL void c_internal_styles ( char *s )
 			delete_all(s, VERB_OFF);
 #endif
 			footnote2ascii(s);
+
+			/* New in V6.5.9 [NHz] */
+			qreplace_all(ptr, DELETED_ON, STYLELEN, "@{G}", 4);
+			qreplace_all(ptr, DELETED_OFF, STYLELEN, "@{g}", 4);
+
 			del_internal_styles(s);
 			break;
 		case TOAMG:
@@ -383,6 +419,11 @@ GLOBAL void c_internal_styles ( char *s )
 			delete_all(s, VERB_OFF);
 #endif
 			footnote2ascii(s);
+
+			/* New in V6.5.9 [NHz] */
+			qreplace_all(ptr, DELETED_ON, STYLELEN, "@{G}", 4);
+			qreplace_all(ptr, DELETED_OFF, STYLELEN, "@{UG}", 5);
+
 			del_internal_styles(s);
 			break;
 		case TOASC:
@@ -397,6 +438,11 @@ GLOBAL void c_internal_styles ( char *s )
 			delete_all(s, VERB_OFF);
 #endif
 			footnote2ascii(s);
+
+			/* New in V6.5.9 [NHz] */
+			qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
+			qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
+
 			del_internal_styles(s);
 			break;
 		case TODRC:
@@ -407,6 +453,10 @@ GLOBAL void c_internal_styles ( char *s )
 			qreplace_all(ptr, UNDER_ON, STYLELEN,	sDrcUcolor, 2);
 			qreplace_all(ptr, UNDER_OFF, STYLELEN,	"\003@", 2);
 			footnote2ascii(s);
+
+			/* New in V6.5.9 [NHz] */
+			qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
+			qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
 
 			/* New in V6.5.9 [NHz] */
 			qreplace_all(ptr, COLOR_BLACK, STYLELEN, "", 0);
@@ -432,6 +482,11 @@ GLOBAL void c_internal_styles ( char *s )
 		case TOSRC:
 		case TOSRP:
 			footnote2ascii(s);
+
+			/* New in V6.5.9 [NHz] */
+			qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
+			qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
+
 			del_internal_styles(s);
 			break;
 		case TOMAN:
@@ -441,6 +496,11 @@ GLOBAL void c_internal_styles ( char *s )
 			delete_all(s, VERB_OFF);
 #endif
 			footnote2ascii(s);
+
+			/* New in V6.5.9 [NHz] */
+			qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
+			qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
+
 			del_internal_styles(s);
 			break;
 		case TONRO:
@@ -449,6 +509,11 @@ GLOBAL void c_internal_styles ( char *s )
 			qreplace_all(ptr, ITALIC_ON, STYLELEN, "\n.I ", 4);
 			qreplace_all(ptr, ITALIC_OFF, STYLELEN, "\n", 1);
 			footnote2ascii(s);
+
+			/* New in V6.5.9 [NHz] */
+			qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
+			qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
+
 			del_internal_styles(s);
 			break;
 		case TOPCH:
@@ -457,6 +522,11 @@ GLOBAL void c_internal_styles ( char *s )
 			delete_all(s, VERB_OFF);
 #endif
 			footnote2ascii(s);
+
+			/* New in V6.5.9 [NHz] */
+			qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
+			qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
+
 			del_internal_styles(s);
 			break;
 		case TOHTM:
@@ -597,6 +667,11 @@ GLOBAL void c_internal_styles ( char *s )
 			replace_all(s, TWRITER_ON, "<ex>");
 			replace_all(s, TWRITER_OFF, "<\\ex>");
 			footnote2ascii(s);
+
+			/* New in V6.5.9 [NHz] */
+			qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
+			qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
+
 			del_internal_styles(s);
 			break;
 		case TOLDS:
@@ -611,6 +686,11 @@ GLOBAL void c_internal_styles ( char *s )
 			qreplace_all(ptr, FOOT_ON, STYLELEN,		"<footnote>", 10);
 			qreplace_all(ptr, FOOT_OFF, STYLELEN,		"</footnote>", 11);
 			footnote2ascii(s);
+
+			/* New in V6.5.9 [NHz] */
+			qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
+			qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
+
 			del_internal_styles(s);
 			break;
 
@@ -624,6 +704,11 @@ GLOBAL void c_internal_styles ( char *s )
 			qreplace_all(ptr, UNDER_ON, STYLELEN, ":hp5.", 5);
 			qreplace_all(ptr, UNDER_OFF, STYLELEN, ":ehp5.", 6);
 			footnote2ascii(s);
+
+			/* New in V6.5.9 [NHz] */
+			qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
+			qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
+
 			del_internal_styles(s);
 			break;
 			
@@ -642,6 +727,12 @@ GLOBAL void c_internal_styles ( char *s )
 			qreplace_all(ptr, FOOT_ON, STYLELEN,		") udoshow (", 11);
 			qreplace_all(ptr, FOOT_OFF, STYLELEN,		") footnote (", 12);
 /*			footnote2ascii(s);*/
+
+			/* New in V6.5.9 [NHz] */
+			qreplace_all(ptr, INSERT_ON, STYLELEN, ") udoshow currentrgbcolor 1 0 0 setrgbcolor (", 45);
+			qreplace_all(ptr, INSERT_OFF, STYLELEN, ") udoshow setrgbcolor (", 23);
+			qreplace_all(ptr, DELETED_ON, STYLELEN, ") udoshow Son (", 15);
+			qreplace_all(ptr, DELETED_OFF, STYLELEN, ") udoshow Soff (", 16);
 
 			/* New in V6.5.8 [NHz] */
 			qreplace_all(ptr, COLOR_BLACK, STYLELEN, ") udoshow 0 0 0 setrgbcolor (", 29);
