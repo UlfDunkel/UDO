@@ -874,6 +874,9 @@ int main ( int argc, const char *argv[] )
 		}
 	}
 		
+	/* Added Debug information of Memory Management */
+	printf("Memory statistic: %d malloc, %d free\n", um_malloc_count, um_free_count);
+
 	wait_on_keypress();
 	
 	if (!cliok || bErrorDetected || get_error_counter() > 0)
