@@ -1583,7 +1583,7 @@ LOCAL void win_headline ( char *name, BOOLEAN popup )
 
 	do_toptoc(toc[ti]->toctype);	/*r6pl5*/
 
-	strcpy(fs, (desttype==TOWH4) ? "\\fs28" : "\\fs36");
+	sprintf(fs, "\\fs%d", iDocPropfontSize + 14);
 
 	if (popup)
 	{	voutlnf("{%s{\\b %s}}\\par\\pard\\par", fs, name);
@@ -3928,7 +3928,7 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 		
 			outln(rtf_pardpar);
 			
-			/* r6pl6: Indizes fr RTF */
+			/* r6pl6: Indizes fuer RTF */
 			if (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index)
 			{	strcpy(n, name);
 				winspecials2ascii(n);
@@ -3940,18 +3940,18 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 			if (use_style_book)
 			{	if (bInsideAppendix)
 				{	if (invisible)
-					{	voutlnf("%s%s %s\\par %s%s\\par\\pard", rtf_inv_chapt, lang.appendix, numbers, rtf_inv_chapt, name);
+					{	voutlnf("%s\\fs%d %s %s\\par %s\\fs%d %s\\par\\pard", rtf_inv_chapt, iDocPropfontSize + 28, lang.appendix, numbers, rtf_inv_chapt, iDocPropfontSize + 28, name);
 					}
 					else
-					{	voutlnf("%s%s %s\\par %s%s\\par\\pard", rtf_inv_chapt, lang.appendix, numbers, rtf_chapt, name);
+					{	voutlnf("%s\\fs%d %s %s\\par %s\\fs%d %s\\par\\pard", rtf_inv_chapt, iDocPropfontSize + 28, lang.appendix, numbers, rtf_chapt, iDocPropfontSize + 28, name);
 					}
 				}
 				else
 				{	if (invisible)
-					{	voutlnf("%s%s %s\\par %s%s\\par\\pard", rtf_inv_chapt, lang.chapter, numbers, rtf_inv_chapt, name);
+					{	voutlnf("%s\\fs%d %s %s\\par %s\\fs%d %s\\par\\pard", rtf_inv_chapt, iDocPropfontSize + 28, lang.chapter, numbers, rtf_inv_chapt, iDocPropfontSize + 28, name);
 					}
 					else
-					{	voutlnf("%s%s %s\\par %s%s\\par\\pard", rtf_inv_chapt, lang.chapter, numbers, rtf_chapt, name);
+					{	voutlnf("%s\\fs%d %s %s\\par %s\\fs%d %s\\par\\pard", rtf_inv_chapt, iDocPropfontSize + 28, lang.chapter, numbers, rtf_chapt, iDocPropfontSize + 28, name);
 					}
 				}
 			}
@@ -3959,22 +3959,22 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 			{
 				if (numbers[0]==EOS)
 				{	if (invisible)
-					{	voutlnf("%s %s%s%s", rtf_plain, rtf_inv_node1, name, rtf_parpard);
+					{	voutlnf("%s %s\\fs%d %s%s", rtf_plain, rtf_inv_node1, iDocPropfontSize + 14, name, rtf_parpard);
 					}
 					else
-					{	voutlnf("%s %s%s%s", rtf_plain, rtf_node1, name, rtf_parpard);
+					{	voutlnf("%s %s\\fs%d %s%s", rtf_plain, rtf_node1, iDocPropfontSize + 14, name, rtf_parpard);
 					}
 				}
 				else
 				{	if (invisible)
-					{	voutlnf("%s %s%s  %s%s", rtf_plain, rtf_inv_node1, numbers, name, rtf_parpard);
+					{	voutlnf("%s %s\\fs%d %s  %s%s", rtf_plain, rtf_inv_node1, iDocPropfontSize + 14, numbers, name, rtf_parpard);
 					}
 					else
-					{	voutlnf("%s %s%s  %s%s", rtf_plain, rtf_node1, numbers, name, rtf_parpard);
+					{	voutlnf("%s %s\\fs%d %s  %s%s", rtf_plain, rtf_node1, iDocPropfontSize + 14, numbers, name, rtf_parpard);
 					}
 				}
 			}
-			voutlnf("%s %s %s", rtf_plain, rtf_norm, rtf_par);
+			voutlnf("%s %s\\fs%d %s", rtf_plain, rtf_norm, iDocPropfontSize, rtf_par);
 
 			break;
 
@@ -4411,19 +4411,27 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 			}
 
 			if (use_style_book)
-			{	(invisible) ? strcpy(n, rtf_inv_node1) : strcpy(n, rtf_node1);
+			{
+				if (invisible)
+					sprintf(n, "%s\\fs%d", rtf_inv_node1, iDocPropfontSize + 14);
+				else
+					sprintf(n, "%s\\fs%d", rtf_node1, iDocPropfontSize + 14);
 			}
 			else
-			{	(invisible) ? strcpy(n, rtf_inv_node2) : strcpy(n, rtf_node2);
+			{
+				if (invisible)
+					sprintf(n, "%s\\fs%d", rtf_inv_node2, iDocPropfontSize + 6);
+				else
+					sprintf(n, "%s\\fs%d", rtf_node2, iDocPropfontSize + 6);
 			}
 
 			if (numbers[0]==EOS)
-			{	voutlnf("%s %s%s%s", rtf_plain, n, name, rtf_parpard);
+			{	voutlnf("%s %s %s%s", rtf_plain, n, name, rtf_parpard);
 			}
 			else
-			{	voutlnf("%s %s%s  %s%s", rtf_plain, n, numbers, name, rtf_parpard);
+			{	voutlnf("%s %s %s  %s%s", rtf_plain, n, numbers, name, rtf_parpard);
 			}
-			voutlnf("%s %s %s", rtf_plain, rtf_norm, rtf_par);	/* r5pl6 */
+			voutlnf("%s %s\\fs%d %s", rtf_plain, rtf_norm, iDocPropfontSize, rtf_par);	/* r5pl6 */
 			break;
 
 		case TOWIN:
@@ -4849,19 +4857,27 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			}
 
 			if (use_style_book)
-			{	(invisible) ? strcpy(n, rtf_inv_node2) : strcpy(n, rtf_node2);
+			{
+				if (invisible)
+					sprintf(n, "%s\\fs%d", rtf_inv_node2, iDocPropfontSize + 6);
+				else
+					sprintf(n, "%s\\fs%d", rtf_node2, iDocPropfontSize + 6);
 			}
 			else
-			{	(invisible) ? strcpy(n, rtf_inv_node3) : strcpy(n, rtf_node3);
+			{
+				if (invisible)
+					sprintf(n, "%s\\fs%d", rtf_inv_node3, iDocPropfontSize);
+				else
+					sprintf(n, "%s\\fs%d", rtf_node3, iDocPropfontSize);
 			}
 			if (numbers[0]==EOS)
-			{	voutlnf("%s %s%s%s", rtf_plain, n, name, rtf_parpard);
+			{	voutlnf("%s %s %s%s", rtf_plain, n, name, rtf_parpard);
 			}
 			else
-			{	voutlnf("%s %s%s  %s%s", rtf_plain, n, numbers, name, rtf_parpard);
+			{	voutlnf("%s %s %s  %s%s", rtf_plain, n, numbers, name, rtf_parpard);
 			}
 
-			voutlnf("%s %s %s", rtf_plain, rtf_norm, rtf_par);	/* r5pl6 */
+			voutlnf("%s %s\\fs%d %s", rtf_plain, rtf_norm, iDocPropfontSize, rtf_par);	/* r5pl6 */
 			break;
 
 		case TOWIN:
@@ -5286,19 +5302,27 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			}
 
 			if (use_style_book)
-			{	(invisible) ? strcpy(n, rtf_inv_node3) : strcpy(n, rtf_node3);
+			{
+				if (invisible)
+					sprintf(n, "%s\\fs%d", rtf_inv_node3, iDocPropfontSize);
+				else
+					sprintf(n, "%s\\fs%d", rtf_node3, iDocPropfontSize);
 			}
 			else
-			{	(invisible) ? strcpy(n, rtf_inv_node4) : strcpy(n, rtf_node4);
+			{
+				if (invisible)
+					sprintf(n, "%s\\fs%d", rtf_inv_node4, iDocPropfontSize);
+				else
+					sprintf(n, "%s\\fs%d", rtf_node4, iDocPropfontSize);
 			}
 
 			if (numbers[0]==EOS)
-			{	voutlnf("%s %s%s%s", rtf_plain, n, name, rtf_parpard);
+			{	voutlnf("%s %s %s%s", rtf_plain, n, name, rtf_parpard);
 			}
 			else
-			{	voutlnf("%s %s%s  %s%s", rtf_plain, n, numbers, name, rtf_parpard);
+			{	voutlnf("%s %s %s  %s%s", rtf_plain, n, numbers, name, rtf_parpard);
 			}
-			voutlnf("%s %s %s", rtf_plain, rtf_norm, rtf_par);	/* r5pl6 */
+			voutlnf("%s %s\\fs%d %s", rtf_plain, rtf_norm, iDocPropfontSize, rtf_par);	/* r5pl6 */
 			break;
 
 		case TOWIN:
@@ -7683,7 +7707,7 @@ GLOBAL void c_tableofcontents ( void )
 			
 			if (toc_available)
 			{	outln("\\keepn");	/* r6pl11*/
-				strcpy(n, (desttype==TOWH4) ? "\\fs28" : "\\fs36");
+				sprintf(n, "\\fs%d", iDocPropfontSize + 14);
 				voutlnf("{%s\\b %s}\\par\\pard\\par", n, lang.contents);
 				toc_output(depth);
 			}

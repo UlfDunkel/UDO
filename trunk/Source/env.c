@@ -422,24 +422,14 @@ GLOBAL void output_begin_verbatim ( void )
 			break;
 		case TOAQV:
 		case TOWIN:
+		case TOWH4:
 			out(win_verb_on);
 			switch (iDocVerbatimSize)
-			{	case VERB_TINY:		out("\\fs12");	break;
-				case VERB_SMALL:	out("\\fs16");	break;
-				case VERB_NORMAL:	out("\\fs20");	break;
-				case VERB_LARGE:	out("\\fs24");	break;
-				case VERB_HUGE:		out("\\fs28");	break;
-			}
-			out(" ");
-			break;
-		case TOWH4:	/* <???> */
-			out(win_verb_on);
-			switch (iDocVerbatimSize)
-			{	case VERB_TINY:		out("\\fs8");	break;
-				case VERB_SMALL:	out("\\fs12");	break;
-				case VERB_NORMAL:	out("\\fs16");	break;
-				case VERB_LARGE:	out("\\fs20");	break;
-				case VERB_HUGE:		out("\\fs24");	break;
+			{	case VERB_TINY:		voutf("\\fs%d", iDocMonofontSize - 10);	break;
+				case VERB_SMALL:	voutf("\\fs%d", iDocMonofontSize - 6);	break;
+				case VERB_NORMAL:	voutf("\\fs%d", iDocMonofontSize - 2);	break;
+				case VERB_LARGE:	voutf("\\fs%d", iDocMonofontSize + 2);	break;
+				case VERB_HUGE:		voutf("\\fs%d", iDocMonofontSize + 6);	break;
 			}
 			out(" ");
 			break;
@@ -447,10 +437,11 @@ GLOBAL void output_begin_verbatim ( void )
 			out(rtf_pardplain);
 			out(rtf_verb);
 			switch (iDocVerbatimSize)
-			{	case VERB_TINY:		out("\\fs14 ");	break;
-				case VERB_SMALL:	out("\\fs18 ");	break;
-				case VERB_LARGE:	out("\\fs26 ");	break;
-				case VERB_HUGE:		out("\\fs30 ");	break;
+			{	case VERB_TINY:		voutf("\\fs%d ", iDocMonofontSize - 8);	break;
+				case VERB_SMALL:	voutf("\\fs%d ", iDocMonofontSize - 4);	break;
+				case VERB_NORMAL:	voutf("\\fs%d ", iDocMonofontSize);	break;
+				case VERB_LARGE:	voutf("\\fs%d ", iDocMonofontSize + 4);	break;
+				case VERB_HUGE:		voutf("\\fs%d ", iDocMonofontSize + 8);	break;
 			}
 			break;
 		case TOHTM:
@@ -506,7 +497,7 @@ GLOBAL void output_end_verbatim ( void )
 			break;
 		case TORTF:
 			outln(rtf_pardplain);
-			outln(rtf_norm);
+			voutlnf("%s\\fs%d", rtf_norm, iDocPropfontSize);
 			break;
 		case TOHTM:
 		case TOMHH:
@@ -556,10 +547,11 @@ GLOBAL void output_begin_linedraw ( void )
 	out(rtf_linedraw);
 
 	switch (iDocLinedrawSize)
-	{	case VERB_TINY:		out("\\fs14 ");	break;
-		case VERB_SMALL:	out("\\fs18 ");	break;
-		case VERB_LARGE:	out("\\fs26 ");	break;
-		case VERB_HUGE:		out("\\fs30 ");	break;
+	{	case VERB_TINY:		voutf("\\fs%d ", iDocMonofontSize - 8);	break;
+		case VERB_SMALL:	voutf("\\fs%d ", iDocMonofontSize - 4);	break;
+		case VERB_NORMAL:	voutf("\\fs%d ", iDocMonofontSize);	break;
+		case VERB_LARGE:	voutf("\\fs%d ", iDocMonofontSize + 4);	break;
+		case VERB_HUGE:		voutf("\\fs%d ", iDocMonofontSize + 8);	break;
 	}
 
 }	/*output_begin_linedraw*/
@@ -2917,19 +2909,29 @@ GLOBAL void c_begin_document ( void )
 			voutlnf("{\\rtf1\\ansi{\\fonttbl{\\f0\\froman %s;}{\\f1\\fswiss %s;}{\\f2\\fmodern MS LineDraw;}}", sDocPropfont, sDocMonofont);
 			out("{\\stylesheet");
 
-			voutlnf("{%s\\snext0 Normal;}",		rtf_norm);
-			voutlnf("{%s\\snext1 Verbatim;}",	rtf_verb);
-			voutlnf("{%s\\snext2 Chapter;}",	rtf_chapt);
-			voutlnf("{%s\\snext3 Node1;}",		rtf_node1);
-			voutlnf("{%s\\snext4 Node2;}",		rtf_node2);
-			voutlnf("{%s\\snext5 Node3;}",		rtf_node3);
-			voutlnf("{%s\\snext6 Node4;}",		rtf_node4);
-			voutlnf("{%s\\snext7 Chapter*;}",	rtf_inv_chapt);
-			voutlnf("{%s\\snext8 Node1*;}",		rtf_inv_node1);
-			voutlnf("{%s\\snext9 Node2*;}",		rtf_inv_node2);
-			voutlnf("{%s\\snext10 Node3*;}",	rtf_inv_node3);
-			voutlnf("{%s\\snext12 Node4*;}",	rtf_inv_node4);
-			voutlnf("{%s\\snext13 LineDraw;}",	rtf_linedraw);
+			if (sDocPropfontSize[0] != EOS)
+				iDocPropfontSize = atoi(sDocPropfontSize) * 2;
+			else
+				iDocPropfontSize = 11 * 2;/* Times New Roman 11pt */
+
+			if (sDocMonofontSize[0] != EOS)
+				iDocMonofontSize = atoi(sDocMonofontSize) * 2;
+			else
+				iDocMonofontSize = 10 * 2;/* Courier New 10pt */
+
+			voutlnf("{%s\\fs%d\\snext0 Normal;}",	rtf_norm, iDocPropfontSize);
+			voutlnf("{%s\\fs%d\\snext1 Verbatim;}",	rtf_verb, iDocMonofontSize);
+			voutlnf("{%s\\fs%d\\snext2 Chapter;}",	rtf_chapt, iDocPropfontSize + 28);
+			voutlnf("{%s\\fs%d\\snext3 Node1;}",		rtf_node1, iDocPropfontSize + 14);
+			voutlnf("{%s\\fs%d\\snext4 Node2;}",		rtf_node2, iDocPropfontSize + 6);
+			voutlnf("{%s\\fs%d\\snext5 Node3;}",		rtf_node3, iDocPropfontSize);
+			voutlnf("{%s\\fs%d\\snext6 Node4;}",		rtf_node4, iDocPropfontSize);
+			voutlnf("{%s\\fs%d\\snext7 Chapter*;}",	rtf_inv_chapt, iDocPropfontSize + 28);
+			voutlnf("{%s\\fs%d\\snext8 Node1*;}",		rtf_inv_node1, iDocPropfontSize + 14);
+			voutlnf("{%s\\fs%d\\snext9 Node2*;}",		rtf_inv_node2, iDocPropfontSize + 6);
+			voutlnf("{%s\\fs%d\\snext10 Node3*;}",	rtf_inv_node3, iDocPropfontSize);
+			voutlnf("{%s\\fs%d\\snext12 Node4*;}",	rtf_inv_node4, iDocPropfontSize);
+			voutlnf("{%s\\fs%d\\snext13 LineDraw;}",	rtf_linedraw, iDocMonofontSize);
 
 			output_rtf_colortbl();
 
@@ -2939,10 +2941,12 @@ GLOBAL void c_begin_document ( void )
 			outln("\\pgnstart1\\ftnbj\\ftnrestart\\facingp\\margmirror\\makeback");
 			outln("\\sectd\\pgndec\\headery1134\\footery1134\\cols1\\colsx567\\pgndec");
 
+			voutlnf("\\f0\\fs%d", iDocPropfontSize);	
+
 			if (titleprogram[0]!=EOS)
 			{	if (!no_headlines)	/* r6pl6*/
-				{	voutlnf("{\\headerl\\pard\\plain\\pard\\tqr\\tx9636\\f0\\fs22 {\\i %s \\chpgn\\tab %s}\\par}", lang.page, titleprogram);
-					voutlnf("{\\headerr\\pard\\plain\\pard\\tqr\\tx9636\\f0\\fs22 {\\i %s\\tab %s \\chpgn}\\par}", titleprogram, lang.page);
+				{	voutlnf("{\\headerl\\pard\\plain\\pard\\tqr\\tx9636\\f0\\fs%d {\\i %s \\chpgn\\tab %s}\\par}", iDocPropfontSize, lang.page, titleprogram);
+					voutlnf("{\\headerr\\pard\\plain\\pard\\tqr\\tx9636\\f0\\fs%d {\\i %s\\tab %s \\chpgn}\\par}", iDocPropfontSize, titleprogram, lang.page);
 				}
 			}
 			
@@ -2980,7 +2984,7 @@ GLOBAL void c_begin_document ( void )
 
 
 			outln(rtf_pardplain);
-			outln(rtf_norm);
+			voutlnf("%s\\fs%d", rtf_norm, iDocPropfontSize);
 			break;
 			
 		case TOWIN:
@@ -2996,15 +3000,23 @@ GLOBAL void c_begin_document ( void )
 			outln("{\\fonttbl");
 			voutlnf(" {\\f0\\fswiss %s;}", sDocPropfont);
 
-			outln(" {\\f1\\fswiss Courier New;}{\\f2\\ftech Symbol;}");
+			voutlnf(" {\\f1\\fswiss %s;}", sDocMonofont);
+			outln(" {\\f2\\ftech Symbol;}");
 			outln("}");
 			output_rtf_colortbl();
-			if (desttype==TOWH4)
-			{	out("\\f0\\fs16");	/* MS Sans Serif 8pt */
-			}
+			if (sDocPropfontSize[0] != EOS)
+				iDocPropfontSize = atoi(sDocPropfontSize) * 2;
+			else if (desttype==TOWH4)
+				iDocPropfontSize = 8 * 2;/* MS Sans Serif 8pt */
 			else
-			{	out("\\f0\\fs22");	/* Times New Roman 11pt */
-			}
+				iDocPropfontSize = 11 * 2;/* Times New Roman 11pt */
+			voutlnf("\\f0\\fs%d", iDocPropfontSize);	
+
+			if (sDocMonofontSize[0] != EOS)
+				iDocMonofontSize = atoi(sDocMonofontSize) * 2;
+			else
+				iDocMonofontSize = 10 * 2;/* Courier New 10pt */
+
 			outln(sDocTextColor);
 			break;
 

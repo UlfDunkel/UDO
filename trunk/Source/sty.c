@@ -144,6 +144,8 @@ GLOBAL void c_pch_styles ( char *s )
 GLOBAL void c_rtf_styles ( char *s )
 {
 	char *ptr;
+	char fs[20];
+	int l;
 
 	if ( (ptr=strstr(s, STYLEMAGIC))==NULL )
 	{	return;
@@ -155,9 +157,11 @@ GLOBAL void c_rtf_styles ( char *s )
 	qreplace_all(ptr, ITALIC_OFF, STYLELEN, "}", 1);
 	qreplace_all(ptr, UNDER_ON, STYLELEN, "{\\ul ", 5);
 	qreplace_all(ptr, UNDER_OFF, STYLELEN, "}", 1);
-	qreplace_all(ptr, VERB_ON, STYLELEN, "{\\f1 ", 5);
+	sprintf(fs, "{\\f1\\fs%d ", iDocMonofontSize);
+	l = (int) strlen(fs);
+	qreplace_all(ptr, VERB_ON, STYLELEN, fs, l);
 	qreplace_all(ptr, VERB_OFF, STYLELEN, "}", 1);
-	qreplace_all(ptr, TWRITER_ON, STYLELEN, "{\\f1 ", 5);
+	qreplace_all(ptr, TWRITER_ON, STYLELEN, fs, l);
 	qreplace_all(ptr, TWRITER_OFF, STYLELEN, "}", 1);
 	qreplace_all(ptr, FOOT_ON, STYLELEN, "{\\chftn{\\footnote\\chftn{\\fs14  ", 31);	/* r5pl9 */
 	qreplace_all(ptr, FOOT_OFF, STYLELEN, "}}}", 3);
@@ -169,7 +173,9 @@ GLOBAL void c_rtf_styles ( char *s )
 GLOBAL void c_win_styles ( char *s )
 {
 	char *ptr;
-
+	char fs[20];
+	int l;
+	
 	if ( (ptr=strstr(s, STYLEMAGIC))==NULL )
 	{	return;
 	}
@@ -180,9 +186,11 @@ GLOBAL void c_win_styles ( char *s )
 	qreplace_all(ptr, ITALIC_OFF, STYLELEN, "}", 1);
 	qreplace_all(ptr, UNDER_ON, STYLELEN, "{\\ul ", 5);
 	qreplace_all(ptr, UNDER_OFF, STYLELEN, "}", 1);
-	qreplace_all(ptr, VERB_ON, STYLELEN, "{\\f1\\fs20 ", 10);
+	sprintf(fs, "{\\f1\\fs%d ", iDocMonofontSize);
+	l = (int) strlen(fs);
+	qreplace_all(ptr, VERB_ON, STYLELEN, fs, l);
 	qreplace_all(ptr, VERB_OFF, STYLELEN, "}", 1);
-	qreplace_all(ptr, TWRITER_ON, STYLELEN, "{\\f1\\fs20 ", 10);
+	qreplace_all(ptr, TWRITER_ON, STYLELEN, fs, l);
 	qreplace_all(ptr, TWRITER_OFF, STYLELEN, "}", 1);
 
 	footnote2ascii(s);

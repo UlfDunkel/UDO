@@ -194,22 +194,22 @@
 #define rtf_pardplain "\\pard\\plain"
 #define rtf_parplain  "\\par\\plain"
 
-#define rtf_norm		"\\s1\\qj\\f0\\fs22 "
-#define rtf_verb		"\\s2\\ql\\f1\\fs22 "
+#define rtf_norm		"\\s1\\qj\\f0"
+#define rtf_verb		"\\s2\\ql\\f1"
 
-#define rtf_chapt		"\\s3\\ql\\b\\f0\\fs50 "
-#define rtf_node1		"\\s4\\ql\\b\\f0\\fs36\\li567\\fi-567 "
-#define rtf_node2		"\\s5\\ql\\b\\f0\\fs28\\li907\\fi-907 "
-#define rtf_node3		"\\s6\\ql\\b\\f0\\fs22\\li1134\\fi-1134 "
-#define rtf_node4		"\\s7\\ql\\b\\f0\\fs22\\li1248\\fi-1248 "
+#define rtf_chapt		"\\s3\\ql\\b\\f0"
+#define rtf_node1		"\\s4\\ql\\b\\f0\n\li567\\fi-567"
+#define rtf_node2		"\\s5\\ql\\b\\f0\\li907\\fi-907"
+#define rtf_node3		"\\s6\\ql\\b\\f0\\li1134\\fi-1134"
+#define rtf_node4		"\\s7\\ql\\b\\f0\\li1248\\fi-1248"
 
-#define rtf_inv_chapt	"\\s8\\ql\\b\\f0\\fs50 "
-#define rtf_inv_node1	"\\s9\\ql\\b\\f0\\fs36 "
-#define rtf_inv_node2	"\\s10\\ql\\b\\f0\\fs28 "
-#define rtf_inv_node3	"\\s11\\ql\\b\\f0\\fs22 "
-#define rtf_inv_node4	"\\s12\\ql\\b\\f0\\fs22 "
+#define rtf_inv_chapt	"\\s8\\ql\\b\\f0"
+#define rtf_inv_node1	"\\s9\\ql\\b\\f0"
+#define rtf_inv_node2	"\\s10\\ql\\b\\f0"
+#define rtf_inv_node3	"\\s11\\ql\\b\\f0"
+#define rtf_inv_node4	"\\s12\\ql\\b\\f0"
 
-#define rtf_linedraw	"\\s13\\ql\\f2\\fs22 "
+#define rtf_linedraw	"\\s13\\ql\\f2"
 
 /*	--------------------------------------------------	*/
 /*	WinHelp-Kommandos									*/
