@@ -8456,7 +8456,6 @@ LOCAL BOOLEAN pass2 (char *datei)
 	show_status_percent(lPass1Lines, lPass2Lines);
 	if (bVerbose)
 	{	show_status_file_2(tmp_datei);
-		show_status_errors();
 	}
 	
 	iFilesOpened++;
@@ -9486,15 +9485,15 @@ GLOBAL BOOLEAN udo (char *datei)
 
 	if ( (val=get_warning_counter())>0)
 	{	sprintf(sInfMsg, "Warnings: %d", val);
-		show_status_info(sInfMsg);
+		show_status_errors(sInfMsg);
 	}
 	if ( (val=get_note_counter())>0)
 	{	sprintf(sInfMsg, "Notes:    %d", val);
-		show_status_info(sInfMsg);
+		show_status_errors(sInfMsg);
 	}
 	if ( (val=get_error_counter())>0)
 	{	sprintf(sInfMsg, "Errors:   %d", val);
-		show_status_info(sInfMsg);
+		show_status_errors(sInfMsg);
 	}
 
 	call_dummy();
@@ -9573,7 +9572,6 @@ LOCAL BOOLEAN passU (char *datei)
 
 	if (bVerbose)
 	{	show_status_udo2udo(tmp_datei);
-		show_status_errors();
 	}
 	
 	iFilesOpened++;
@@ -9946,15 +9944,15 @@ GLOBAL BOOLEAN udo2udo (char *datei)
 
 	if ( (val=get_warning_counter())>0)
 	{	sprintf(sInfMsg, "Warnings: %d", val);
-		show_status_info(sInfMsg);
+		show_status_errors(sInfMsg);
 	}
 	if ( (val=get_note_counter())>0)
 	{	sprintf(sInfMsg, "Notes:    %d", val);
-		show_status_info(sInfMsg);
+		show_status_errors(sInfMsg);
 	}
 	if ( (val=get_error_counter())>0)
 	{	sprintf(sInfMsg, "Errors:   %d", val);
-		show_status_info(sInfMsg);
+		show_status_errors(sInfMsg);
 	}
 	
 	if (bLogopened && fLogfile!=NULL)

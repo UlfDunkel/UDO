@@ -361,8 +361,12 @@ GLOBAL void show_status_percent ( unsigned long Pass1Lines, unsigned long Pass2L
 	}
 }
 
-GLOBAL void show_status_errors ( void )
-{	/* Dummy-Routine */
+GLOBAL void show_status_errors ( const char *s )
+{
+	if ( (bOutOpened || bTestmode) && !bBeQuiet )
+	{
+		fprintf(stdout, "%s\n", s);
+	}
 }
 
 
