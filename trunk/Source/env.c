@@ -3275,7 +3275,11 @@ GLOBAL void c_begin_document ( void )
 			outln("basefont setBaseFont");
 			
 			voutlnf("/Titeltext (%s %s) def", titdat.title, titdat.program);
-			voutlnf("/FootAuthor (\\251 %s) def", titdat.author);
+			/* Changed: Fixed bug #0000040 in r6.3pl16 [NHz] */
+			if(titdat.author)
+				voutlnf("/FootAuthor (\\251 %s) def", titdat.author);
+			else
+				outln("/FootAuthor () def");
 			
 			/* Document info */
 			voutlnf("[ /Title (%s %s)", titdat.title, titdat.program);
