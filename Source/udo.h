@@ -235,6 +235,8 @@ GLOBAL char			html_frames_vlinkcolor[16];		/* Linkfarbe der linken Spalte	*/
 GLOBAL char			html_frames_backimage[512];		/* Image des linken Frames		*/
 GLOBAL int			html_button_alignment;			/* Ausrichtung der Buttons		*/
 GLOBAL char			html_name_prefix[512];			/* Prefix fuer HTML-Dateinamen	*/
+/* New in r6pl16 [NHz] */
+GLOBAL char			html_default_hyphenation;		/* Lange W”rter sollen durch (!-) getrennt werden */
 
 GLOBAL int			image_alignment;			/* Ausrichtung der Bilder		*/
 GLOBAL int			table_alignment;			/* Ausrichtung der Tabellen		*/
