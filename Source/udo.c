@@ -2970,6 +2970,10 @@ GLOBAL void c_newpage( void )
 		case TOKPS:
 			outln("newpage");
 			break;
+		/* New in r6pl16 [NHz] */
+		case TOHTM:
+			outln("<span style=\"page-break-after:always;\"></span>");
+			break;
 	}
 	
 }	/*c_newpage*/
@@ -7327,6 +7331,11 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			{	set_html_switch_language();
 				return TRUE;
 			}
+			/* New in r6pl16 [NHz] */
+			if ( strcmp(token[0], "!html_default_hyphenation")==0 )
+			{	html_default_hyphenation = TRUE;
+				return TRUE;
+			}
 			break;
 	}	/* switch */
 
@@ -10869,6 +10878,7 @@ GLOBAL void init_vars ( void )
 	sDocHtmlSwitchLanguage[0]=	EOS;		/*r6pl12*/
 	iDocHtmlSwitchLanguage=		-1;			/*r6pl12*/
 	html_transparent_buttons=	FALSE;		/*r6pl12*/
+	html_default_hyphenation=	FALSE;		/* New in r6pl16 [NHz] */
 	
 	html_ignore_p= 				FALSE;
 
