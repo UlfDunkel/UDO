@@ -67,6 +67,7 @@ LOCAL BOOLEAN	bShowArgs;
 LOCAL BOOLEAN   bShowHelp;
 LOCAL BOOLEAN   bShowVersion;
 LOCAL BOOLEAN	bShowIdent;
+LOCAL int last_percent;
 
 #define	PRGNAME		"udo"
 #define	COPYRIGHT	"Copyright (c) 1995-2001 by Dirk Hagedorn (UDO is Open Source)"
@@ -339,15 +340,24 @@ GLOBAL void show_status_file_2 ( const char *s )
 	}
 }
 
-GLOBAL void show_status_percent ( const int percent )
+GLOBAL void show_status_percent ( unsigned long Pass1Lines, unsigned long Pass2Lines )
 {
-	if ( (bOutOpened || bTestmode) && !bBeQuiet )
+	int percent;
+	
+	percent= 0;
+	if (Pass1Lines>0)
+	{	percent= (int) ((100*Pass2Lines)/Pass1Lines);
+	}
+	
+	if ( (bOutOpened || bTestmode) && !bBeQuiet && percent != last_percent)
 	{	if (bVerbose)
 		{	fprintf(stdout, "\n%3d%% ", percent);
 		}
 		else
 		{	fprintf(stdout, "%3d%%\010\010\010\010", percent);
 		}
+		fflush(stdout);
+		last_percent = percent;
 	}
 }
 
@@ -759,6 +769,7 @@ int main ( int argc, const char *argv[] )
 	bShowVersion = FALSE;
 	bShowHelp = FALSE;
 	bShowIdent = FALSE;
+	last_percent = -1;
 	
 	outfile.full[0]= EOS;
 	infile.full[0]= EOS;

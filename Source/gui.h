@@ -36,7 +36,7 @@ GLOBAL void show_status_loginfo ( const char *s);
 GLOBAL void show_status_node ( const char *s );
 GLOBAL void show_status_file_1 ( const char *s );
 GLOBAL void show_status_file_2 ( const char *s );
-GLOBAL void show_status_percent ( const int percent );
+GLOBAL void show_status_percent ( unsigned long Pass1Lines, unsigned long Pass2Lines );
 GLOBAL void show_status_pass ( const char *s );
 GLOBAL void show_status_udo2udo ( const char *s );
 GLOBAL void show_status_errors ( void );
