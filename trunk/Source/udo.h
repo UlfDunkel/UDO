@@ -254,6 +254,9 @@ GLOBAL char			sDocNroffType[32];			/* dito fuer nroff					*/
 
 GLOBAL char			sDocImgSuffix[32];			/* gif, jpg, jpeg, ...		*/
 GLOBAL char			sDocBackImage[128];			/*r6pl5*/
+GLOBAL char			sDocStyle[128];					/* r6pl15 [NHz] */
+GLOBAL char			sDocScript[128];				/* r6pl15 [NHz] */
+GLOBAL char			sDocFavIcon[128];				/* r6pl15 [NHz] */
 GLOBAL char			sDocBackColor[32];
 GLOBAL char			sDocTextColor[32];
 GLOBAL char			sDocLinkColor[32];
@@ -401,7 +404,15 @@ GLOBAL BOOLEAN udo2udo (char *datei);
 GLOBAL void save_upr_entry_infile ( const char *filename );
 GLOBAL void save_upr_entry_outfile ( const char *filename );
 GLOBAL void save_upr_entry_image ( const char *filename );
-GLOBAL void save_upr_entry_node ( const int level, const char *filename, const char *title );
+/* Changed in r6pl15 [NHz] */
+
+/* Extra parameter line */
+
+GLOBAL void save_upr_entry_node ( const int level, const char *filename, const char *title, const long line );
+GLOBAL void save_upr_entry_heading ( const int level, const char *filename, const char *title, const long line ); /* New in r6pl15 [NHz] */
+GLOBAL void save_upr_entry_alias ( const char *filename, const char *title, const long line ); /* New in r6pl15 [NHz] */
+GLOBAL void save_upr_entry_label ( const char *filename, const char *title, const long line ); /* New in r6pl15 [NHz] */
+GLOBAL void save_upr_entry_index ( const int level, const char *filename, const char *title, const long line ); /* New in r6pl15 [NHz] */
 
 
 /*	############################################################

@@ -130,7 +130,7 @@ LOCAL void output_about_udo_ger ( FILE *f )
 	fprintf(f, "\n");
 	fprintf(f, "(!B)UDO(!b)\t(!nl)\n");
 	fprintf(f, "Release %s Patchlevel %s\t(!nl)\n", UDO_REL, UDO_PL);
-	fprintf(f, "%s, %s %s\n", UDO_OS, compile_date, compile_time);
+	fprintf(f, "%s\n", UDO_OS);
 	fprintf(f, "\n");
 	fprintf(f, "Copyright (!copyright) 1995-2001 by Dirk Hagedorn\t(!nl)\n");
 	fprintf(f, "UDO ist Open Source\t(!nl)\n");
@@ -160,7 +160,7 @@ LOCAL void output_about_udo_eng ( FILE *f )
 	fprintf(f, "\n");
 	fprintf(f, "(!B)UDO(!b)\t(!nl)\n");
 	fprintf(f, "Release %s Patchlevel %s\t(!nl)\n", UDO_REL, UDO_PL);
-	fprintf(f, "%s, %s %s\n", UDO_OS, compile_date, compile_time);
+	fprintf(f, "%s\n", UDO_OS);
 	fprintf(f, "\n");
 	fprintf(f, "Copyright (!copyright) 1995-2001 by Dirk Hagedorn\t(!nl)\n");
 	fprintf(f, "UDO is Open Source\t(!nl)\n");
@@ -184,7 +184,8 @@ GLOBAL void output_about_udo ( void )
 {
 	FILE *uif;
 	
-	if (desttype==TOSRC || desttype==TOSRP)
+	/* supplied TOKPS in r6pl15 [NHz] */
+	if (desttype==TOSRC || desttype==TOSRP || desttype==TOKPS)
 	{	/* nur eine kurze Info in c_end_document ausgeben */
 		return;
 	}

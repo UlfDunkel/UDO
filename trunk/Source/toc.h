@@ -86,6 +86,12 @@ typedef struct _tocitem
 	char	modern_alinkcolor[MAX_COLOR_LEN+1];	/* HTML <BODY ALINK=...>		*/	/* r6pl12 */
 	char	modern_vlinkcolor[MAX_COLOR_LEN+1];	/* HTML <BODY VLINK=...>		*/	/* r6pl12 */
 	char	backimage[MAX_IMAGE_LEN+1];		/* HTML <BODY BACKGROUND=...>		*/	/* r6pl1 */
+	char	style_name[MAX_IMAGE_LEN+1]; 			/* HTML <STYLE> r6pl15 [NHz] */
+
+	char	script_name[MAX_IMAGE_LEN+1]; 		/* HTML <SCRIPT> r6pl15 [NHz] */
+
+	char	favicon_name[MAX_IMAGE_LEN+1]; 		/* HTML <FAVICON> r6pl15 [NHz] */
+
 	char	*image;							/* Grafik anstelle Kapitelnamen		*/
 	unsigned int uiImageWidth;				/* Breite und Hoehe des Bildes		*/ 
 	unsigned int uiImageHeight;
@@ -157,6 +163,8 @@ GLOBAL BOOLEAN	called_subsubsubnode;
 
 GLOBAL BOOLEAN	uses_tableofcontents;	/* !tableofcontents wird benutzt */
 
+
+GLOBAL char		current_node_name_sys[MAX_NODE_LEN+1]; /* New in r6pl15 [NHz] */
 GLOBAL char		current_chapter_name[MAX_NODE_LEN+1];
 GLOBAL char		current_chapter_nr[32];
 
@@ -244,6 +252,7 @@ GLOBAL void c_listoffigures ( void );
 GLOBAL void c_listoftables ( void );
 GLOBAL void c_tableofcontents ( void );
 
+GLOBAL BOOLEAN bookmarks_ps ( void );
 
 /*	############################################################
 	# Ein Label im zweiten Durchgang ausgeben
@@ -292,6 +301,9 @@ GLOBAL void set_html_color ( const int which );
 	GLOBAL void set_html_vlinkcolor ( void );
 #endif
 GLOBAL void set_html_backimage ( void );
+GLOBAL void set_html_style ( void );
+GLOBAL void set_html_script ( void );
+GLOBAL void set_html_favicon ( void );
 GLOBAL void set_html_special_color ( char *hc );
 GLOBAL void set_html_modern_width ( void );
 GLOBAL void set_html_modern_alignment ( void );

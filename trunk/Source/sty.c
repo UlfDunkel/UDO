@@ -417,7 +417,10 @@ GLOBAL void c_internal_styles ( char *s )
 			qreplace_all(ptr, VERB_OFF, STYLELEN,		") udoshow Voff (", 16);
 			qreplace_all(ptr, TWRITER_ON, STYLELEN,		") udoshow Von (", 15);
 			qreplace_all(ptr, TWRITER_OFF, STYLELEN,	") udoshow Voff (", 16);
-			footnote2ascii(s);
+			/* New in r6pl15 */
+			qreplace_all(ptr, FOOT_ON, STYLELEN,		") udoshow (", 11);
+			qreplace_all(ptr, FOOT_OFF, STYLELEN,		") footnote (", 12);
+/*			footnote2ascii(s);*/
 			del_internal_styles(s);
 			break;
 	}

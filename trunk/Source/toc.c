@@ -709,6 +709,28 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 				l->labindex, n);
 			break;
 
+		/* New in r6pl15 [NHz] */
+		case TOKPS:
+			strcpy(n, l->name);
+			replace_udo_tilde(n);
+			replace_udo_nbsp(n);
+
+			if ( strpbrk(n, " :;\\()")!=NULL )
+			{	strcpy(s, n);
+				node2postscript(s, FALSE);
+				sprintf(ref, " (%s) /%s 0 0 0 Link", n, s);
+			}
+			else
+			{	sprintf(ref, " (%s) /%s 0 0 0 Link", n, n);
+			}
+
+			if (!for_toc)
+			{	/* r5pl10: Referenz als Platzhalter anlegen, damit der */
+				/* Blocksatz korrekt wird. */
+				insert_placeholder(ref, ref, ref, n);
+			}
+			break;
+
 		default:
 			strcpy(ref, l->name);
 			replace_udo_tilde(ref);
@@ -1898,16 +1920,18 @@ LOCAL BOOLEAN html_make_file ( void )
 
 LOCAL void output_html_meta ( BOOLEAN keywords )
 {
-	int ti;
+	int ti, i, li;
+
+	char s[512], htmlname[512], sTarget[512]="\0";
 
 	if (!html_ignore_8bit)
 	{	outln("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=iso-8859-1\">");
 	}
 
-	voutlnf("<meta name=\"Generator\" content=\"UDO%s PL%s for %s, %s %s\">",
+	voutlnf("<meta name=\"Generator\" content=\"UDO%s PL%s for %s\">",
 			UDO_REL,
 			UDO_PL,
-			UDO_OS, compile_date, compile_time);
+			UDO_OS);
 
 	if (titdat.author!=NULL)
 	{	voutlnf("<meta name=\"Author\" content=\"%s\">", titdat.author);
@@ -1935,10 +1959,29 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		voutlnf("<link rev=made href=\"mailto:%s\" title=\"E-Mail\">", titdat.webmasteremail);
 	}
 
+
+	/* New in r6pl15 [NHz] */
+
+	if (html_frames_layout)
+	{	sprintf(sTarget, "target=\"UDOcon\"");
+	}
+
+
+
 	if (old_outfile.name[0]!=EOS)
-	{	voutlnf("<link rel=home href=\"%s%s\" title=\"Homepage\">", old_outfile.name, outfile.suff);
+	{	/* New in r6pl15 [NHz] */
+
+		voutlnf("<link rel=\"start\" href=\"%s%s\" title=\"Homepage\">", old_outfile.name, outfile.suff);
+		/* Special for CAB */
+
+		voutlnf("<link rel=\"home\" href=\"%s%s\" title=\"Homepage\">", old_outfile.name, outfile.suff);
 		if (uses_tableofcontents)
-		{	voutlnf("<link rel=toc href=\"%s%s\" title=\"%s\">", old_outfile.name, outfile.suff, lang.contents);
+		{	/* New in r6pl15 [NHz] */
+
+			voutlnf("<link rel=\"contents\" href=\"%s%s#UDOTOC\" title=\"%s\">", old_outfile.name, outfile.suff, lang.contents);
+			/* Special for CAB */
+
+			voutlnf("<link rel=\"toc\" href=\"%s%s#UDOTOC\" title=\"%s\">", old_outfile.name, outfile.suff, lang.contents);
 		}
 	}
 
@@ -1952,6 +1995,134 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 	* <link rel=help href="hilfe.htm" title="Orientierungshilfe">
 	* <link rel=bookmark href="hinweis.htm" title="Neuorientierung">
 	*/
+
+
+	/* New in r6pl15 [NHz] */
+
+	/* Output of Link-Rel 'first' */
+
+
+	i= toc[ti]->prev_index;
+
+
+	if (i>0)
+
+	{	/* First Node -> No Link */
+		li= toc[1]->labindex;
+
+
+
+		strcpy(s, lab[li]->name);
+		get_html_filename(lab[li]->tocindex, htmlname);
+
+		/* Special for CAB */
+
+		voutlnf("<link rel=\"first\" href=\"%s%s\" title=\"%s\">", htmlname, outfile.suff, s);
+	}
+
+
+	/* New in r6pl15 [NHz] */
+
+	/* Output of Link-Rel 'prev' */
+
+
+	if (i>0)
+	{
+		li= toc[i]->labindex;
+		strcpy(s, lab[li]->name);
+		get_html_filename(lab[li]->tocindex, htmlname);
+
+
+		voutlnf("<link rel=\"prev\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+		/* Special for CAB */
+
+		voutlnf("<link rel=\"previous\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+	}
+
+
+
+	/* Output of Link-Rel 'next' */
+
+
+
+	i= toc[ti]->next_index;
+
+	if (i>1)
+	{
+		li= toc[i]->labindex;
+		strcpy(s, lab[li]->name);
+		get_html_filename(lab[li]->tocindex, htmlname);
+
+		voutlnf("<link rel=\"next\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+	}
+
+
+
+	/* New in r6pl15 [NHz] */
+
+	/* Output of Link-Rel 'last' */
+
+
+	if (i>1)
+	{
+		if(use_about_udo)
+
+		{
+
+			li= toc[p1_toc_counter]->labindex;
+
+			li--;
+		}
+
+		else
+
+			li= toc[p1_toc_counter]->labindex;
+		strcpy(s, lab[li]->name);
+		get_html_filename(lab[li]->tocindex, htmlname);
+
+		/* Special for CAB */
+
+		voutlnf("<link rel=\"last\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+	}
+
+
+
+	/* New in r6pl15 [NHz] */
+
+	/* Output of Link-Rel 'copyright' */
+
+	/* Link shows to 'About UDO'; maybe changed in future times */
+
+
+	if(use_about_udo)
+
+	{
+
+		li= toc[p1_toc_counter]->labindex;
+
+		strcpy(s, lab[li]->name);
+		get_html_filename(lab[li]->tocindex, htmlname);
+
+		voutlnf("<link rel=\"copyright\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+	}
+
+
+
+	/* New in r6pl15 [NHz] */
+	/* Link for overall stylesheet-file */
+	if(sDocStyle[0] != EOS)	
+		voutlnf("<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\">", sDocStyle);
+	/* Link for overall javascript-file */
+	if(sDocScript[0] != EOS)
+	{
+		voutlnf("<script language=\"JavaScript\" src=\"%s\" type=\"text/javascript\">", sDocScript);
+		outln("</script>");
+	}
+
+	/* New in r6pl15 [NHz] */
+	/* Link for overall FavIcon */
+	if(sDocFavIcon[0] != EOS)	
+		voutlnf("<link rel=\"shortcut icon\" href=\"%s\">", sDocFavIcon);
 
 }	/* output_html_meta */
 
@@ -2198,6 +2369,7 @@ LOCAL void html_index_giflink ( const int idxEnabled, const int idxDisabled, con
 		}
 		else
 		{
+
 			get_giflink_data(idxEnabled, sGifName, &uiW, &uiH);
 			sGifSize[0]= EOS;
 			if (uiW!=0 && uiH!=0)
@@ -2897,6 +3069,23 @@ GLOBAL void html_save_frameset ( void )
 	}
 
 	outln("</frameset>");
+
+	/* New in r6pl15 [NHz] */
+
+	/* Noframes for browsers who do not know frames */
+	outln("<noframes>");
+	c_maketitle();
+
+	c_tableofcontents();
+
+	/* Set both to FALSE in order that the title page and the
+
+			table of contents will be written in the frame again */
+
+	called_maketitle= FALSE;
+
+	called_tableofcontents= FALSE;
+	outln("</noframes>");
 	outln("</html>");
 
 	/* Das Inhaltverzeichnis fr den linken Frame ausgeben */
@@ -3358,8 +3547,8 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 	fprintf(file, "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n");
 	fprintf(file, "<HTML>\n");
 	fprintf(file, "<HEAD>\n");
-	fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Release %s Patchlevel %s for %s, %s %s\">\n",
-						UDO_REL, UDO_PL, UDO_OS, compile_date, compile_time); 
+	fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Release %s Patchlevel %s for %s\">\n",
+						UDO_REL, UDO_PL, UDO_OS); 
 	fprintf(file, "<!-- Sitemap 1.0 -->\n");
 	fprintf(file, "</HEAD><BODY>\n");
 	fprintf(file, "<UL>\n");
@@ -3519,8 +3708,8 @@ GLOBAL BOOLEAN save_htmlhelp_index ( const char* filename )
 	fprintf(file, "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n");
 	fprintf(file, "<HTML>\n");
 	fprintf(file, "<HEAD>\n");
-	fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Release %s Patchlevel %s for %s, %s %s\">\n",
-						UDO_REL, UDO_PL, UDO_OS, compile_date, compile_time); 
+	fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Release %s Patchlevel %s for %s\">\n",
+						UDO_REL, UDO_PL, UDO_OS); 
 	if (titdat.author != NULL)
 		fprintf(file, "<meta name=\"Author\" content=\"%s\">\n", titdat.author);
 	fprintf(file, "<!-- Sitemap 1.0 -->\n");
@@ -3867,13 +4056,16 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 				sprintf(n, "%s%s", numbers, name);
 				outln("18 changeFontSize");
 			}
+			node2postscript(name, FALSE); /* New in r6pl15 [NHz] */
+			voutlnf("/NodeName (%s %s) def", lang.chapter, n); /* New in r6pl15 [NHz] */
 			outln("newline");
+			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
 			outln("Bon");
 			voutlnf("(%s) udoshow", n);
 			outln("Boff");
-			outln("11 changeFontSize");
-			outln("changeBaseFont");
 			outln("newline");
+			voutlnf("%d changeFontSize", laydat.propfontsize); /* Changed in r6pl15 [NHz] */
+/*			outln("changeBaseFont");*/
 			break;
 
 		case TODRC:
@@ -4365,12 +4557,14 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 				outln("14 changeFontSize");
 			}
 			outln("newline");
+			node2postscript(name, FALSE); /* New in r6pl15 [NHz] */
+			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
 			outln("Bon");
 			voutlnf("(%s) udoshow", n);
 			outln("Boff");
-			outln("11 changeFontSize");
-			outln("changeBaseFont");
 			outln("newline");
+			voutlnf("%d changeFontSize", laydat.propfontsize); /* Changed in r6pl15 [NHz] */
+/*			outln("changeBaseFont");*/
 			break;
 
 		case TODRC:
@@ -4813,12 +5007,14 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 				outln("11 changeFontSize");
 			}
 			outln("newline");
+			node2postscript(name, FALSE); /* New in r6pl15 [NHz] */
+			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
 			outln("Bon");
 			voutlnf("(%s) udoshow", n);
 			outln("Boff");
-			outln("11 changeFontSize");
-			outln("changeBaseFont");
 			outln("newline");
+			voutlnf("%d changeFontSize", laydat.propfontsize); /* Changed in r6pl15 [NHz] */
+/*			outln("changeBaseFont");*/
 			break;
 
 		case TODRC:
@@ -5262,13 +5458,15 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 				sprintf(n, "%s%s", numbers, name);
 				outln("11 changeFontSize");
 			}
+			node2postscript(name, FALSE); /* New in r6pl15 [NHz] */
+			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
 			outln("newline");
 			outln("Bon");
 			voutlnf("(%s) udoshow", n);
 			outln("Boff");
-			outln("11 changeFontSize");
-			outln("changeBaseFont ");
 			outln("newline");
+			voutlnf("%d changeFontSize", laydat.propfontsize); /* Changed in r6pl15 [NHz] */
+/*			outln("changeBaseFont ");*/
 			break;
 
 		case TODRC:
@@ -5600,10 +5798,10 @@ LOCAL void tocline_make_bold ( char *s, const int depth )
 				c_win_styles(s);
 				break;
 			
-			case TOKPS:
+/*			case TOKPS:
 				strinsert(s, "14 changeFontSize Bon ");
 				strcat(s, " Boff 11 changeFontSize changeBaseFont");
-				break;
+				break;*/
 		}
 	}
 
@@ -5644,6 +5842,195 @@ LOCAL void convert_toc_item ( TOCITEM *t )
 	}
 
 }	/* convert_toc_name */
+
+
+/* New in r6pl15 [NHz] */
+/* Output of bookmarks for postscript/PDF */
+GLOBAL BOOLEAN bookmarks_ps ( void )
+{
+	register int i;
+	int li, apxstart;
+	char s[128];
+
+	if (p1_toc_counter<=0)
+	{	return FALSE;
+	}
+
+	apxstart= 1;
+
+	for (i=1; i<=p1_toc_counter; i++)
+	{
+		if (toc[i]!=NULL && !toc[i]->invisible)
+		{
+			convert_toc_item(toc[i]);
+
+			if ( toc[i]->appendix )
+			{
+				apxstart= i;	/* fuer unten merken */
+				break;			/* r5pl6: Es kann nur einen Anhang geben */
+			}
+			else
+			{	if ( toc[i]->n1 != 0 )
+				{
+					if ( toc[i]->toctype==TOC_NODE1 )
+					{	/* Ein Kapitel */	
+
+						li= toc[i]->labindex;
+
+						strcpy(s, lab[li]->name);
+/*						node2postscript(lab[li]->name, TRUE);*/
+						node2postscript(s, FALSE);
+						voutlnf("(%d %s) /%s %d Bookmarks",
+											toc[i]->nr1+toc_offset,
+											lab[li]->name, s,
+											toc[i]->count_n2);
+					}/* TOC_NODE1 */
+					
+					
+					if ( toc[i]->toctype==TOC_NODE2 )
+					{	/* Ein Abschnitt */
+
+						li= toc[i]->labindex;
+
+						strcpy(s, lab[li]->name);
+						node2postscript(lab[li]->name, TRUE);
+						node2postscript(s, FALSE);
+						voutlnf("(%d.%d %s) /%s %d Bookmarks",
+											toc[i]->nr1+toc_offset,
+											toc[i]->nr2+subtoc_offset,
+											lab[li]->name, s,
+											toc[i]->count_n3);
+					}/* TOC_NODE2 */
+					
+					if ( toc[i]->toctype==TOC_NODE3 )
+					{	/* Ein Unterabschnitt */
+
+						li= toc[i]->labindex;
+
+						strcpy(s, lab[li]->name);
+						node2postscript(lab[li]->name, TRUE);
+						node2postscript(s, FALSE);
+						voutlnf("(%d.%d.%d %s) /%s %d Bookmarks",
+											toc[i]->nr1+toc_offset,
+											toc[i]->nr2+subtoc_offset,
+											toc[i]->nr3+subsubtoc_offset,
+											lab[li]->name, s,
+											toc[i]->count_n4);
+					}/* TOC_NODE3 */
+				
+					if ( toc[i]->toctype==TOC_NODE4 )
+					{	/* Ein Paragraph */
+
+						li= toc[i]->labindex;
+
+						strcpy(s, lab[li]->name);
+						node2postscript(lab[li]->name, TRUE);
+						node2postscript(s, FALSE);
+						voutlnf("(%d.%d.%d.%d %s) /%s Bookmarks",
+											toc[i]->nr1+toc_offset,
+											toc[i]->nr2+subtoc_offset,
+											toc[i]->nr3+subsubtoc_offset,
+											toc[i]->nr4+subsubsubtoc_offset,
+											lab[li]->name, s);
+					}/* TOC_NODE4 */
+
+
+				}/* toc[i]->n1 > 0 */
+
+			}/* !toc[i]->appendix */
+
+		}/* toc[i]!=NULL && !toc[i]->invisible */
+
+	}/* for */
+
+	if (!apx_available)
+	{
+		return TRUE;
+	}
+
+	for (i=apxstart; i<=p1_toc_counter; i++)
+	{
+		if (toc[i]!=NULL && !toc[i]->invisible)
+		{
+			convert_toc_item(toc[i]);
+
+			if ( toc[i]->appendix )
+			{
+				if ( toc[i]->n1 != 0 )
+				{
+					if ( toc[i]->toctype==TOC_NODE1 )
+					{	/* Ein Kapitel */	
+
+						li= toc[i]->labindex;
+
+						strcpy(s, lab[li]->name);
+						node2postscript(lab[li]->name, TRUE);
+						node2postscript(s, FALSE);
+						voutlnf("(%c %s) /%s %d Bookmarks",
+											'A'-1+toc[i]->nr1+toc_offset,
+											lab[li]->name, s,
+											toc[i]->count_n2);
+					}/* TOC_NODE1 */
+					
+					
+					if ( toc[i]->toctype==TOC_NODE2 )
+					{	/* Ein Abschnitt */
+
+						li= toc[i]->labindex;
+
+						strcpy(s, lab[li]->name);
+						node2postscript(lab[li]->name, TRUE);
+						node2postscript(s, FALSE);
+						voutlnf("(%c.%2d %s) /%s %d Bookmarks",
+											'A'-1+toc[i]->nr1+toc_offset,
+											toc[i]->nr2+subtoc_offset,
+											lab[li]->name, s,
+											toc[i]->count_n3);
+					}/* TOC_NODE2 */
+					
+					if ( toc[i]->toctype==TOC_NODE3 )
+					{	/* Ein Unterabschnitt */
+
+						li= toc[i]->labindex;
+
+						strcpy(s, lab[li]->name);
+						node2postscript(lab[li]->name, TRUE);
+						node2postscript(s, FALSE);
+						voutlnf("(%c.%2d.%2d %s) /%s %d Bookmarks",
+											'A'-1+toc[i]->nr1+toc_offset,
+											toc[i]->nr2+subtoc_offset,
+											toc[i]->nr3+subsubtoc_offset,
+											lab[li]->name, s,
+											toc[i]->count_n4);
+					}/* TOC_NODE3 */
+				
+					if ( toc[i]->toctype==TOC_NODE4 )
+					{	/* Ein Paragraph */
+
+						li= toc[i]->labindex;
+
+						strcpy(s, lab[li]->name);
+						node2postscript(lab[li]->name, TRUE);
+						node2postscript(s, FALSE);
+						voutlnf("(%c.%2d.%2d.%2d %s) /%s 0 Bookmarks",
+											'A'-1+toc[i]->nr1+toc_offset,
+											toc[i]->nr2+subtoc_offset,
+											toc[i]->nr3+subsubtoc_offset,
+											lab[li]->name, s);
+					}/* TOC_NODE4 */
+
+				}/* toc[i]->n1 > 0 */
+
+			}/* !toc[i]->appendix */
+
+		}/* toc[i]!=NULL && !toc[i]->invisible */
+
+	}/* for */
+
+	outln("");
+
+	return TRUE;
+}	/* bookmarks_ps */
 
 
 LOCAL void toc_output ( const int depth )
@@ -7768,7 +8155,24 @@ GLOBAL void c_tableofcontents ( void )
 			break;	/* r5pl4 */
 		
 		case TOKPS:
-			check_endnode();
+			/* New in r6pl15 [NHz] */
+			if (toc_available)
+			{	outln("newline");
+
+				voutlnf("/NodeName (%s) def", lang.contents);
+				voutlnf("20 changeFontSize (%s) udoshow newline %d changeFontSize", lang.contents, laydat.propfontsize); /* Changed in r6pl15 [NHz] */
+				toc_output(depth);
+			}
+
+			if (apx_available)
+			{	output_appendix_line();
+				apx_output(depth);
+			}
+			
+			if (toc_available)
+				c_newpage();
+
+/*			check_endnode();
 
 			output_helpid(0);
 			if (toc_available)
@@ -7783,7 +8187,7 @@ GLOBAL void c_tableofcontents ( void )
 				output_appendix_line();
 				apx_output(depth);
 			}
-			c_newpage();
+			c_newpage();*/
 			break;
 		
 		case TOLDS:
@@ -7879,6 +8283,13 @@ GLOBAL void c_label ( void )
 			{	voutf("{\\xe\\v %s}", sLabel);
 			}
 			break;
+
+		/* New in r6pl15 [NHz] */
+		case TOKPS:
+			node2postscript(sLabel, FALSE);
+			voutlnf("/%s NameDest", sLabel);
+			/* Must be changed if (!label ...) is possible */
+			break;
 	}
 
 }	/* c_label */
@@ -7925,6 +8336,14 @@ GLOBAL int add_label ( const char *label, const BOOLEAN isn, const BOOLEAN isp )
 	{	error_malloc_failed();
 		return FALSE;
 	}
+
+	/* New in r6pl15 [NHz] */
+
+	/* Set label in project file */
+
+	if(!isn) /* Only labels which aren't nodes */
+
+		save_upr_entry_label (sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine );
 
 	p1_lab_counter++;
 	lab[p1_lab_counter]= labptr;
@@ -7994,6 +8413,12 @@ GLOBAL BOOLEAN add_alias ( const char *alias, const BOOLEAN isp )
 	{	error_malloc_failed();
 		return FALSE;
 	}
+
+	/* New in r6pl15 [NHz] */
+
+	/* Set alias in project file */
+
+	save_upr_entry_alias (sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine );
 
 	p1_lab_counter++;
 	lab[p1_lab_counter]= labptr;
@@ -8677,6 +9102,143 @@ GLOBAL void set_html_backimage ( void )
 }	/* set_html_backimage */
 
 
+
+/* New in r6pl15 [NHz] */
+GLOBAL void set_html_style ( void )
+{
+	char *ptr, *dest;
+	char sTemp[512];
+
+	if (p1_toc_counter<0)	return;
+	if (toc[p1_toc_counter]==NULL)	return;
+	if (token[1][0]==EOS)	return;
+
+	if (p1_toc_counter==0)
+	{	dest= sDocStyle;
+	}
+	else
+	{	dest= toc[p1_toc_counter]->style_name;
+	}
+
+
+	if (token[1][0]=='\"')
+	{
+		tokcpy2(sTemp);
+		ptr= strchr(sTemp+1, '\"');		/* zweites " suchen */
+
+		if (ptr)
+		{	ptr[0]= EOS;
+			strcpy(dest, sTemp+1);
+		}
+		else
+		{	strcpy(dest, sTemp);
+		}
+	}
+	else
+	{
+		strcpy(dest, token[1]);
+	}
+
+	/* dest[0]= EOS;	*/
+	/* strncat(dest, sTemp, MAX_IMAGE_LEN);	*/
+
+	/* Hier muessen immer / benutzt werden! */
+	replace_char(dest, "\\", "/");
+
+}	/* set_html_style */
+
+
+/* New in r6pl15 [NHz] */
+GLOBAL void set_html_script ( void )
+{
+	char *ptr, *dest;
+	char sTemp[512];
+
+	if (p1_toc_counter<0)	return;
+	if (toc[p1_toc_counter]==NULL)	return;
+	if (token[1][0]==EOS)	return;
+
+	if (p1_toc_counter==0)
+	{	dest= sDocScript;
+	}
+	else
+	{	dest= toc[p1_toc_counter]->script_name;
+	}
+
+
+	if (token[1][0]=='\"')
+	{
+		tokcpy2(sTemp);
+		ptr= strchr(sTemp+1, '\"');		/* zweites " suchen */
+
+		if (ptr)
+		{	ptr[0]= EOS;
+			strcpy(dest, sTemp+1);
+		}
+		else
+		{	strcpy(dest, sTemp);
+		}
+	}
+	else
+	{
+		strcpy(dest, token[1]);
+	}
+
+	/* dest[0]= EOS;	*/
+	/* strncat(dest, sTemp, MAX_IMAGE_LEN);	*/
+
+	/* Hier muessen immer / benutzt werden! */
+	replace_char(dest, "\\", "/");
+
+}	/* set_html_script */
+
+
+
+/* New in r6pl15 [NHz] */
+GLOBAL void set_html_favicon ( void )
+{
+	char *ptr, *dest;
+	char sTemp[512];
+
+	if (p1_toc_counter<0)	return;
+	if (toc[p1_toc_counter]==NULL)	return;
+	if (token[1][0]==EOS)	return;
+
+	if (p1_toc_counter==0)
+	{	dest= sDocFavIcon;
+	}
+	else
+	{	dest= toc[p1_toc_counter]->favicon_name;
+	}
+
+
+	if (token[1][0]=='\"')
+	{
+		tokcpy2(sTemp);
+		ptr= strchr(sTemp+1, '\"');		/* zweites " suchen */
+
+		if (ptr)
+		{	ptr[0]= EOS;
+			strcpy(dest, sTemp+1);
+		}
+		else
+		{	strcpy(dest, sTemp);
+		}
+	}
+	else
+	{
+		strcpy(dest, token[1]);
+	}
+
+	/* dest[0]= EOS;	*/
+	/* strncat(dest, sTemp, MAX_IMAGE_LEN);	*/
+
+	/* Hier muessen immer / benutzt werden! */
+	replace_char(dest, "\\", "/");
+
+}	/* set_html_favicon */
+
+
 GLOBAL void set_html_keywords ( void )
 {
 	char k[1024], *ptr, oldk[1024], *oldptr;
@@ -9284,6 +9846,13 @@ LOCAL TOCITEM *init_new_toc_entry ( const int toctype, const BOOLEAN invisible )
 		return NULL;
 	}
 
+
+	/* New in r6pl15 [NHz] */
+
+	/* Set node in project file */
+
+	save_upr_entry_node (toctype, sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine );
+
 #if 1
 	c_styles(tocptr->name);
 
@@ -9505,6 +10074,7 @@ GLOBAL BOOLEAN add_node_to_toc ( const BOOLEAN popup, const BOOLEAN invisible )
 	if (li>=0)
 	{	tocptr->labindex= li;
 	}
+
 
 	return TRUE;	
 }	/*add_node_to_toc*/
@@ -10522,7 +11092,32 @@ LOCAL void init_toc_forms_numbers ( void )
 			strcpy(form_a4_n4, form_t1_n4);
 			break;
 		
+		/* New in r6pl15 [NHz] */
 		case TOKPS:
+			strcpy(form_t1_n1, "(%2d ) udoshow %s newline");
+			strcpy(form_t1_n2, "(   %2d.%d ) udoshow %s newline");
+			strcpy(form_t1_n3, "(         %2d.%d.%d ) udoshow  %s newline");
+			strcpy(form_t1_n4, "(               %2d.%d.%d.%d ) udoshow %s newline");
+			strcpy(form_t2_n2, "(%2d.%d ) udoshow %s newline");
+			strcpy(form_t2_n3, "(      %2d.%d.%d ) udoshow %s newline");
+			strcpy(form_t2_n4, "(            %2d.%d.%d.%d ) udoshow %s newline");
+			strcpy(form_t3_n3, "(%2d.%d.%d ) udoshow %s newline");
+			strcpy(form_t3_n4, "(         %2d.%d.%d.%d ) udoshow %s newline");
+			strcpy(form_t4_n4, "(%2d.%d.%d.%d ) udoshow %s newline");
+
+			strcpy(form_a1_n1, "( %c ) udoshow %s newline");
+			strcpy(form_a1_n2, "(    %c.%d ) udoshow %s newline");
+			strcpy(form_a1_n3, "(         %c.%d.%d ) udoshow  %s newline");
+			strcpy(form_a1_n4, "(                 %c.%d.%d.%d ) udoshow %s newline");
+			strcpy(form_a2_n2, "( %c.%d ) udoshow %s newline");
+			strcpy(form_a2_n3, "(      %c.%d.%d ) udoshow %s newline");
+			strcpy(form_a2_n4, "(              %c.%d.%d.%d ) udoshow %s newline");
+			strcpy(form_a3_n3, "( %c.%d.%d ) udoshow %s newline");
+			strcpy(form_a3_n4, "(         %c.%d.%d.%d ) udoshow %s newline");
+			strcpy(form_a4_n4, "( %c.%d.%d.%d ) udoshow %s newline");
+			break;
+		
+/*		case TOKPS:
 			strcpy(form_t1_n1, "(%2d  %s) show newline");
 			strcpy(form_t1_n2, "(   %2d.%d  %s) show newline");
 			strcpy(form_t1_n3, "(        %2d.%d.%d  %s) show newline");
@@ -10545,7 +11140,7 @@ LOCAL void init_toc_forms_numbers ( void )
 			strcpy(form_a3_n4, "(        %c.%d.%d.%d  %s) show newline");
 			strcpy(form_a4_n4, "( %c.%d.%d.%d  %s) show newline");
 			break;
-
+*/
 		default:
 			strcpy(form_t1_n1, "%2d  %s");
 			strcpy(form_t1_n2, "   %2d.%d  %s");
@@ -10683,6 +11278,31 @@ LOCAL void init_toc_forms_no_numbers ( void )
 			strcpy(form_a3_n3, s);
 			strcpy(form_a3_n4, s);
 			strcpy(form_a4_n4, s);
+			break;
+		
+		/* New in r6pl15 [NHz] */
+		case TOKPS:
+			strcpy(form_t1_n1, " %s newline");
+			strcpy(form_t1_n2, "    %s newline");
+			strcpy(form_t1_n3, "       %s newline");
+			strcpy(form_t1_n4, "          %s newline");
+			strcpy(form_t2_n2, " %s newline");
+			strcpy(form_t2_n3, "    %s newline");
+			strcpy(form_t2_n4, "       %s newline");
+			strcpy(form_t3_n3, " %s newline");
+			strcpy(form_t3_n4, "    %s newline");
+			strcpy(form_t4_n4, " %s newline");
+
+			strcpy(form_a1_n1, " %s newline");
+			strcpy(form_a1_n2, "    %s newline");
+			strcpy(form_a1_n3, "       %s newline");
+			strcpy(form_a1_n4, "          %s newline");
+			strcpy(form_a2_n2, " %s newline");
+			strcpy(form_a2_n3, "    %s newline");
+			strcpy(form_a2_n4, "       %s newline");
+			strcpy(form_a3_n3, " %s newline");
+			strcpy(form_a3_n4, "    %s newline");
+			strcpy(form_a4_n4, " %s newline");
 			break;
 		
 		default:

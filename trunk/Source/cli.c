@@ -212,7 +212,7 @@ LOCAL const char	*Prog_Help[]=
 	"       --test          Testmodus (kein Outfile erzeugen)\n"
 	"-t,    --tex           ins LaTeX-Format konvertieren\n"
 	"       --tree          Include-Baum (.ut?) ausgeben\n"
-    "       --verbose       ausfuehrliche Konvertierungs-Infos anzeigen\n"
+  "       --verbose       ausfuehrliche Konvertierungs-Infos anzeigen\n"
 	"-u,    --udo           Dateien sammeln und in einer UDO-Datei sichern\n"
 	"-v,    --vision        ins Turbo-Vision-Help-Format konvertieren\n"
 	"-w,    --win           ins WinHelp-Quelltextformat konvertieren\n"
@@ -222,7 +222,9 @@ LOCAL const char	*Prog_Help[]=
 	"-y,    --no-hypfile    kein Hyphenfile (.uh?) anlegen\n"
 	"-@ F                   Optionen aus der Datei F lesen\n"
 	"       --help          diese Informationen anzeigen und beenden\n"
-    "       --version       Versionsinformationen anzeigen und beenden",
+  "       --version       Versionsinformationen anzeigen und beenden",
+
+
 
 
 	"-a,    --asc           convert to ASCII\n"
@@ -262,7 +264,7 @@ LOCAL const char	*Prog_Help[]=
 	"-t,    --tex           convert to LaTeX\n"
 	"       --tree          generate tree file (.ut?)\n"
 	"-u,    --udo           collect all files and save in UDO format\n"
-    "       --verbose       verbose mode\n"
+  "       --verbose       verbose mode\n"
 	"-v,    --vision        convert to Turbo Vision Help\n"
 	"-w,    --win           convert to WinHelp\n"
 	"-w4,   --win4          convert to WinHelp4\n"
@@ -271,7 +273,7 @@ LOCAL const char	*Prog_Help[]=
 	"-y,    --no-hypfile    don't generate hyphen file (.uh?)\n"
 	"-@ F                   read options from file F\n"
 	"       --help          show this helppage and exit\n"
-    "       --version       show version of UDO and exit\n"
+  "       --version       show version of UDO and exit\n"
 };
 
 LOCAL const char *No_Option[]=
