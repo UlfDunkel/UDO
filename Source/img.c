@@ -835,7 +835,11 @@ GLOBAL void c_bmp_output ( const char *name, const char *caption, const BOOLEAN 
 	{
 		case TORTF:	/*r6pl6*/
 			if ( !get_bmpheader(datei, &bmpheader) )
-			{	error_read_bmp(datei);
+			{	/* Fixed bug #0000017 in V6.5.2 [NHz] */
+				if(strstr(datei, BMP_MW_NAME) != NULL)
+					error_read_bmp(BMP_MW_NAME);
+				else
+					error_read_bmp(datei);
 				bErrorDetected= TRUE;
 				return;
 			}
