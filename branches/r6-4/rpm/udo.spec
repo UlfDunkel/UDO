@@ -60,7 +60,7 @@ strip $RPM_BUILD_ROOT%{_bindir}/udo
 %{_mandir}/man1/*
 
 %changelog
-* Sat Dec 27 2003 Martin Tarenskeen <m.tarenskeen@zonnet.nl>
-- revised specfile
 * Wed Jan 07 2004 Volker Janzen <webmaster@udo-open-source.org>
 - new manpage is used now
+* Sat Dec 27 2003 Martin Tarenskeen <m.tarenskeen@zonnet.nl>
+- revised specfile
