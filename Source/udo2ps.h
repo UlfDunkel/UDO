@@ -51,46 +51,29 @@ const char *UDO2PS=
 	"/actx           0       def\n"
 	"/acty           0       def\n"
 	"/underline      false   def\n"
-
 	"/bold           false   def\n"
-
 	"/descript       false   def\n"
 	"/NodeName       ()      def\n"
-
 	"/FootAuthor     ()      def\n"
-
 	"\n"
 	"/offCount       -1      def\n"
-
 	"/offCountS      0       def\n"
-
 	"/offList\n"
-
 	"[/offList1 /offList2 /offList3 /offList4 () () () ()]\n"
-
 	"def\n"
-
 	"\n"
 /* need for future use
-
 	"100 string\n"
-
 	"/oString exch def\n"
-
 	"/oIndex 0 def\n"
-
 	"100 string\n"
-
 	"/Reset exch def\n"
-
 	"/pAlign 0 def\n"
-
 	"\n"*/
 	"/UdoFonts\n"
 	"[/UdoSwiss /UdoSwissItalic /UdoSwissBold /UdoSwissBoldItalic\n"
 	" /UdoTimes /UdoTimesItalic /UdoTimesBold /UdoTimesBoldItalic\n"
 	" /UdoCourier /UdoCourierItalic /UdoCourierBold /UdoCourierBoldItalic\n"
-
 	" /UdoSymbol]\n"
 	"def\n"
 	"\n"
@@ -108,36 +91,21 @@ const char *UDO2PS=
 	"}\n"
 	"bind def\n"
 	"\n"
-
 /* Adobe Distiller doesn't konow anything about SymbolEncoding
-
    Smbols must done by Glyphs
-
 	"%%-- for Symbol-Font\n"
 	"/makeisomapSymbol          %% PRIVATE!\n"
-
 	"{\n"
-
 	"   findfont\n"
-
 	"   dup length dict begin\n"
-
 	"     {1 index /FID ne {def} {pop pop} ifelse} forall\n"
-
 	"     /Encoding SymbolEncoding def\n"
-
 	"     currentdict\n"
-
 	"   end\n"
-
 	"   definefont pop\n"
-
 	"}\n"
-
 	"bind def\n"
-
 	"\n"*/
-
 	"%%--------------------\n"
 	"\n"
 	"/setup               %% In: void\n"
@@ -168,87 +136,48 @@ const char *UDO2PS=
 	"/newpage           %% In: void\n"
 	"{\n"
 	"  /fontmerk fontsize def\n"
-
 	"  11 changeFontSize\n"
-
 	"  bold true eq\n"
-
 	"  { Boff\n"
-
 	"   /Bmerk true def\n"
-
 	"  } if\n"
-
 	"\n"
-
 	"  footout\n"
-
 	"  /footnumbers 0 def\n"
-
 	"  /lowermargin cclowermargin def\n"
-
 	"  /Bmerk false def\n"
-
 	"\n"
-
 	"  ccleftmargin 2 sub cclowermargin 15 sub moveto\n"
-
 	"  ccrightmargin cclowermargin 15 sub lineto\n"
-
 	"  stroke\n"
-
 	"\n"
-
 	"  ccleftmargin cclowermargin 30 sub moveto\n"
-
 	"  Ion NodeName udoshow\n"
-
 	"  ccrightmargin FootAuthor stringwidth pop sub cclowermargin 30 sub moveto\n"
-
 	"  FootAuthor udoshow Ioff\n"
-
 	"\n"
-
 	"  /strlen 0 def\n"
 	"  /acty topmargin def\n"
 	"  /actx leftmargin def\n"
 	"  actx acty moveto\n"
 	"\n"
-
 	"  ccleftmargin cctopmargin moveto\n"
-
 	"  /pagenumber pagenumber 1 add def\n"
-
 	"  /Seite (Seite    ) def\n"
-
 	"  Seite 6 pagenumber (xx) cvs putinterval\n"
-
 	"  Ion Titeltext udoshow Seite Right setAlign Ioff\n"
-
 	"\n"
-
 	"  ccleftmargin 2 sub cctopmargin 5 sub moveto\n"
-
 	"  ccrightmargin cctopmargin 5 sub lineto\n"
-
 	"  stroke\n"
-
 	"\n"
-
 	"  /topmargin cctopmargin 30 sub def\n"
-
 	"  Bmerk true eq\n"
-
 	"  { Bon\n"
-
 	"    /Bmerk false def\n"
-
 	"  } if\n"
-
 	"  fontmerk changeFontSize\n"
-
 	"\n"
-
 	"  showpage\n"
 	"}\n"
 	"bind def\n"
@@ -259,17 +188,11 @@ const char *UDO2PS=
 	"{\n"
 	"  /strlen 0 def                %% akt. Ausgabelaenge = 0\n"
 	"	 foot\n"
-
 	"  {\n"
-
 	"  	/actx ccleftmargin 10 add def\n"
-
 	"  	/acty acty fontsize sub def\n"
-
 	"  }\n"
-
 	"  {\n"
-
 	"    /actx leftmargin def\n"
 	"    /acty acty fontsize linespacing mul sub def\n"
 	"    acty lowermargin lt\n"
@@ -277,7 +200,6 @@ const char *UDO2PS=
 	"      newpage\n"
 	"    }\n"
 	"    if\n"
-
 	"  } ifelse\n"
 	"  actx acty moveto\n"
 	"}\n"
@@ -1814,285 +1736,145 @@ const char *UDO2PS=
 	"\n"
 
 	"\n"*/
-
 	"% ----------------------------------------------------------------------\n"
-
 	"\n"
-
 	"%% öbergabe der Fuûnoten\n"
-
 	"\n"
-
 	"/footnote          % Text footnote -\n"
-
 	"{\n"
-
 	"  /localstring ( ) def\n"
-
 	"\n"
-
 	"  /footlines 1 def\n"
-
 	"  /Text exch def\n"
-
 	"  Text udofoot\n"
-
 	"  /lowermargin lowermargin fontsize footlines 1 add mul add def\n"
-
 	"  /footnumbers footnumbers 1 add def\n"
-
 	"\n"
-
 	"  fontsize\n"
-
 	"  9 changeFontSize\n"
-
 	"  currentpoint\n"
-
 	"  /fy exch 5 add def\n"
-
 	"  fy moveto\n"
-
 	"  footnumbers localstring cvs udoshow\n"
-
 	"  currentpoint\n"
-
 	"  /fy exch 5 sub def\n"
-
 	"  fy moveto\n"
-
 	"  changeFontSize\n"
-
 	"  footnotetext footnumbers Text put\n"
-
 	"} bind def\n"
-
 	"\n"
-
 	"% ----------------------------------------------------------------------\n"
-
 	"\n"
-
 	"%% Ausgabe der Fuûnoten\n"
-
 	"\n"
-
 	"/footout\n"
-
 	"{\n"
-
 	"  footnumbers 0 gt\n"
-
 	"  {\n"
-
 	"    /foot true def\n"
-
 	"    /counter 0 def\n"
-
 	"    /localstring (  ) def\n"
-
 	"\n"
-
 	"    ccleftmargin lowermargin 15 sub moveto\n"
-
 	"    ccleftmargin 80 add lowermargin 15 sub lineto\n"
-
 	"    stroke\n"
-
 	"    ccleftmargin lowermargin 20 sub moveto\n"
-
 	"\n"
-
 	"    footnumbers\n"
-
 	"    {\n"
-
 	"      /counter counter 1 add def\n"
-
 	"      currentpoint\n"
-
 	"      /acty exch fontsize 1.5 mul sub def\n"
-
 	"      pop\n"
-
 	"      ccleftmargin acty moveto\n"
-
 	"      fontsize dup\n"
-
 	"      exch 2 sub changeFontSize\n"
-
 	"      currentpoint\n"
-
 	"      /acty exch 4 add def\n"
-
 	"      acty moveto\n"
-
 	"      counter localstring cvs udoshow\n"
-
 	"      currentpoint\n"
-
 	"      /acty exch 4 sub def\n"
-
 	"      pop\n"
-
 	"      /actx ccleftmargin 10 add def\n"
-
 	"      actx acty moveto\n"
-
 	"      changeFontSize\n"
-
 	"      footnotetext counter get udoshow\n"
-
 	"      /strlen 0 def\n"
-
 	"    } repeat\n"
-
 	"  } if\n"
-
 	"  /foot false def\n"
-
 	"  /footlines 1 def\n"
-
 	"} bind def\n"
-
 	"\n"
-
 	"% ----------------------------------------------------------------------\n"
-
 	"\n"
-
 	"%% Hilfsfunktionen fÅr Fuûnoten\n"
-
 	"\n"
-
 	"/calcwordlenfoot        %% PRIVATE!\n"
-
 	"{\n"
-
 	"    /wordlentest\n"
-
 	"    exch\n"
-
 	"    stringwidth pop def\n"
-
 	"}\n"
-
 	"bind def\n"
-
 	"\n"
-
 	"\n"
-
 	"/wordtest            %% PRIVATE!\n"
-
 	"{\n"
-
 	"  exch\n"
-
 	"  dup\n"
-
 	"  () ne    %%-- Leere Strings ignorieren...\n"
-
 	"  {\n"
-
 	"    /strlentest strlentest wordlentest add def\n"
-
 	"    strlentest linelen gt\n"
-
 	"    {\n"
-
 	"      /footlines footlines 1 add def\n"
-
 	"      /strlentest wordlentest def\n"
-
 	"    } if\n"
-
 	"%    showout     %% -- Wort ausgeben\n"
-
 	"     pop\n"
-
 	"  }\n"
-
 	"  {\n"
-
 	"    pop  %%-- Leerstring entfernen\n"
-
 	"  } ifelse\n"
-
 	"\n"
-
 	"  {             %% Spaceflag auswerten...\n"
-
 	"%    showout   %% -- Space ausgeben\n"
-
 	"     pop\n"
-
 	"    /strlentest strlentest spacewidth add def\n"
-
 	"  } if\n"
-
 	"}\n"
-
 	"bind def\n"
-
 	"\n"
-
 	"%%--------------------\n"
-
 	"\n"
-
 	"/udofoot            %% In: (String)\n"
-
 	"{\n"
-
 	"  /linelen rightmargin 90 sub def\n"
-
 	"  /spacewidth ( ) stringwidth pop def\n"
-
 	"\n"
-
 	"  {\n"
-
 	"    ( ) search      %%--- Spaces suchen\n"
-
 	"    {               %%--- gefunden\n"
-
 	"        dup            %%--- Wort duplizieren\n"
-
 	"        calcwordlenfoot\n"
-
 	"        true        %%--- 2 x show (mit Space)\n"
-
 	"        wordtest\n"
-
 	"    }\n"
-
 	"    {               %%--- kein Space gefunden\n"
-
 	"        dup\n"
-
 	"        calcwordlenfoot\n"
-
 	"        false       %%--- 1 x show\n"
-
 	"        wordtest\n"
-
 	"        exit\n"
-
 	"    }\n"
-
 	"    ifelse\n"
-
 	"  }\n"
-
 	"  loop\n"
-
 	"}\n"
-
 	"bind def\n"
-
 	"\n"
-
 	"%%----------------------------------------------------------------\n"
 	"%%--- This part is generated by UDO:\n";
 
