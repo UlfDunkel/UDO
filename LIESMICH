@@ -1,13 +1,52 @@
-Dieses Archiv enthaelt die originalen Quelltexte und Dokumentation von UDO.
+                             LIESMICH zu
 
-Stand: Release 6 Patchlevel 14 vom 27. Oktober 2001.
+                       UDO - Universal DOcument
 
-Mit grosser Wahrscheinlichkeit existiert bereits eine neuere Version und
-Dokumentation von UDO.
+                       Release 6 Patchlevel 14
+                              22.07.1999
 
-Besuchen Sie http://www.udo-open-source.de, um die aktuellsten Versionen
-herunterzuladen oder aktiv an der Entwicklung von UDO mitzuarbeiten.
 
-Dirk Hagedorn
-udo@dirk-hagedorn.de
-http://www.dirk-hagedorn.de
+Copyright (c) 1995-2001 by Dirk Hagedorn
+Copyright (c) 2001-2004 by The UDO community
+(http://www.udo-open-source.org)
+
+
+
+Allgemein
+*********
+
+UDO wandelt Dateien vom eigenen UDO-Format in folgende Formate um:
+AmigaGuide, Apple QuickView, ASCII, David's Readme-Compiler, HP-
+Helptag-SGML, HTML, HTML-Help, OS/2 IPF, LaTeX, Linuxdoc-SGML, LyX,
+Manualpage, Nroff, Pure-C-Help, PDFLaTeX, PostScript, RTF, ST-Guide-
+Quelltext, Texinfo, Turbo-Vision-Help-Quelltext, UDO und WinHelp/
+WinHelp4-Quelltext.
+
+Die Installation von UDO ist in der Datei INSTALL.txt (oder im
+Handbuch) beschrieben.
+
+Weitere Informationen finden Sie auf http://www.udo-open-source.org.
+Hier koennen Sie die jeweils aktuelle Version des Programms und der
+Dokumentation herunterladen.
+
+
+
+Copyright
+*********
+
+Dieses Programm ist freie Software. Sie koennen es unter den
+Bedingungen der GNU General Public License, wie von der Free Software
+Foundation veroeffentlicht, weitergeben und/oder modifizieren,
+entweder gemaess Version 2 der Lizenz oder (nach Ihrer Option) jeder
+spaeteren Version.
+
+Die Veroeffentlichung dieses Programms erfolgt in der Hoffnung, dass
+es Ihnen von Nutzen sein wird, aber OHNE IRGENDEINE GARANTIE, sogar
+ohne die implizite Garantie der MARKTREIFE oder der VERWENDBARKEIT
+FUeR EINEN BESTIMMTEN ZWECK. Details finden Sie in der GNU General
+Public License.
+
+Sie sollten eine Kopie der GNU General Public License zusammen mit
+diesem Programm erhalten haben. Falls nicht, schreiben Sie an die Free
+Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+02111-1307, USA.
