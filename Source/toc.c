@@ -96,6 +96,10 @@ LOCAL LABEL		*lab[MAXLABELS];			/* Array mit Zeigern auf Labels		*/
 LOCAL int		p1_lab_counter;				/* Zaehler							*/
 LOCAL int		p2_lab_counter;				/* Zaehler, 2. Durchgang			*/
 
+/* New in V6.5.9 [NHz] */
+LOCAL STYLE		*style[MAXSTYLES];		/* Array mit Zeigern auf Stylesheets		*/
+LOCAL int		p1_style_counter;				/* Zaehler							*/
+
 LOCAL REFERENCE	refs[MAXREFERENCES+1];		/* Referenzen	*/
 LOCAL int		refs_counter;				/* Zaehler		*/
 
@@ -1982,7 +1986,8 @@ LOCAL BOOLEAN html_make_file ( void )
 
 LOCAL void output_html_meta ( BOOLEAN keywords )
 {
-	int ti=0, i, li;
+	int ti=0, i, li, j;
+	STYLE *styleptr;
 
 	char s[512], htmlname[512], sTarget[512]="\0";
 	char backpage[256], href[256], alt[256], *tok;
@@ -2261,9 +2266,37 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 	}
 
 	/* New in r6pl15 [NHz] */
-	/* Link for overall stylesheet-file */
-	if(sDocStyle[0] != EOS)	
-		voutlnf("<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\" />", sDocStyle);
+	/* Link for overall and file-related stylesheet-file */
+	/* Changed in V6.5.9 [NHz] */
+	for (j=1; j<p1_style_counter; j++)
+	{
+		styleptr= style[j];
+		if(styleptr->href != NULL && (styleptr->tocindex == 0 || styleptr->tocindex == p2_toc_counter))
+		{
+			char this_style[512];
+
+			strcpy(this_style, "<link rel=\"");
+			if(styleptr->alternate == TRUE)
+				strcat(this_style, "alternate ");
+			strcat(this_style, "stylesheet\" type=\"text/css\" href=\"");
+			strcat(this_style, styleptr->href);
+			if(styleptr->media[0] != EOS)
+			{
+				strcat(this_style, "\" media=\"");
+				strcat(this_style, styleptr->media);
+			}
+			if(styleptr->title[0] != EOS)
+			{
+				strcat(this_style, "\" title=\"");
+				strcat(this_style, styleptr->title);
+			}
+			strcat(this_style, "\" />");
+			outln(this_style);
+		}
+	}
+/*	if(sDocStyle[0] != EOS)	
+		voutlnf("<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\" />", sDocStyle);*/
+
 	/* Link for overall javascript-file */
 	if(sDocScript[0] != EOS)
 	{
@@ -9664,45 +9697,95 @@ GLOBAL void set_html_backimage ( void )
 /* New in r6pl15 [NHz] */
 GLOBAL void set_html_style ( void )
 {
-	char *ptr, *dest;
-	char sTemp[512];
+	STYLE *styleptr;
+	char sTemp[512], *ptr;
+	int i;
+	long lang;
 
 	if (p1_toc_counter<0)	return;
 	if (toc[p1_toc_counter]==NULL)	return;
 	if (token[1][0]==EOS)	return;
 
-	if (p1_toc_counter==0)
-	{	dest= sDocStyle;
+	/* Changed in V6.5.9 [NHz] */
+	if (p1_style_counter+1>=MAXSTYLES)	/* Noch Platz in der Liste? */
+	{	error_too_many_label();
+		return;
+	}
+
+	styleptr= (STYLE *) um_malloc(sizeof(STYLE)+1);
+	
+	if (styleptr==NULL)					/* Kein Speicher mehr frei? */
+	{	error_malloc_failed();
+		return;
+	}
+
+	/* Set style in project file (not yet) */
+
+/*	if(!isn)*/ /* Only labels which aren't nodes */
+/*		save_upr_entry_label (sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine );
+*/
+
+	p1_style_counter++;
+	style[p1_style_counter]= styleptr;
+	styleptr->href[0]=EOS;
+	styleptr->media[0]=EOS;
+	styleptr->title[0]=EOS;
+	styleptr->alternate=FALSE;
+
+	tokcpy2(sTemp, 512);
+
+	if(sTemp[0]=='\'')
+	{
+		lang = strcspn(sTemp+1, "'");
+		strncpy(styleptr->href, sTemp+1, lang);
+		styleptr->href[lang] = EOS;
+
+		/* Hier muessen immer / benutzt werden! */
+		replace_char(styleptr->href, "\\", "/");
 	}
 	else
-	{	dest= toc[p1_toc_counter]->style_name;
+		strcpy(styleptr->href, token[1]);
+
+	for(i=1;i<p1_style_counter;i++)
+	{
+		if(!strcmp(styleptr->href, style[i]->href))
+		{
+			p1_style_counter--;
+			return;
+		}
 	}
 
-
-	if (token[1][0]=='\"')
+	ptr = strstr(sTemp, "media=");
+	if(ptr != NULL)
 	{
-		tokcpy2(sTemp, 512);
-		ptr= strchr(sTemp+1, '\"');		/* zweites " suchen */
-
-		if (ptr)
-		{	ptr[0]= EOS;
-			strcpy(dest, sTemp+1);
+		lang = strcspn(ptr+6, " \0");
+		strncpy(styleptr->media, ptr+6, lang);
+		styleptr->media[lang] = EOS;
+	}
+	ptr = strstr(sTemp, "title=");
+	if(ptr != NULL)
+	{
+		if(strchr(ptr+6, '\''))
+		{
+			lang = strcspn(ptr+7, "'");
+			strncpy(styleptr->title, ptr+7, lang);
 		}
 		else
-		{	strcpy(dest, sTemp);
+		{
+			lang = strcspn(ptr+6, " \0");
+			strncpy(styleptr->title, ptr+6, lang);
 		}
+		styleptr->title[lang] = EOS;
 	}
+	ptr = strstr(sTemp, "alternate");
+	if(ptr != NULL)
+		styleptr->alternate = TRUE;
 	else
-	{
-		strcpy(dest, token[1]);
-	}
-
-	/* dest[0]= EOS;	*/
-	/* strncat(dest, sTemp, MAX_IMAGE_LEN);	*/
-
-	/* Hier muessen immer / benutzt werden! */
-	replace_char(dest, "\\", "/");
-
+		styleptr->alternate = FALSE;
+	
+	styleptr->styleindex= p1_style_counter;
+	styleptr->tocindex= p1_toc_counter;
+			
 }	/* set_html_style */
 
 
@@ -12391,6 +12474,15 @@ GLOBAL void exit_module_toc ( void )
 		if (lab[i]!=NULL)
 		{
 			um_free(lab[i]);
+		}
+	}
+
+	/ New in V6.5.9 [NHz] /
+	for (i=MAXSTYLES-1; i>=0; i--)
+	{
+		if (style[i]!=NULL)
+		{
+			um_free(style[i]);
 		}
 	}*/
 
