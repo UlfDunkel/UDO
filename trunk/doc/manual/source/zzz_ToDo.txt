@@ -12,15 +12,9 @@ viele in die Doku-Quellen eingestreute ToDo-Kommentare abarbeiten
 
 Formatierungen in history.ui verbessern, HTML schaut nicht gut aus
 
-die Beispieldateien im Exemples-Verzeichnis überprüfen + ggf. aktualisieren (Syntax überall aktuell?)
-
-ist die Installationsanleitung bzgl. Windows noch aktuell?
-Einsatz von emx/rsj nur bei GCC-Compiler??
+die Beispieldateien im Examples-Verzeichnis überprüfen + ggf. aktualisieren (Syntax überall aktuell?)
 
 Doku der GEM-Version noch aktuell?
-
-Installationsanleitung Unix/Linux bzgl. deb- und rpm-Paket erweitern
-(erst dann, wenn auch Doku-rpm zur Verfügung stehen)
 
 commands.ui: Satzbau USEINSTEAD engl. überprüfen
 
