@@ -556,15 +556,20 @@ typedef struct _udolanguage		/* ---- Sprachentabelle ----	*/
 	int	langval;			/* zugehoerige Sprache			*/
 }	UDOLANGUAGE;
 
-#define	MAXLANGUAGE	7
+/* Changed in r6pl16 [NHz] */
+#define	MAXLANGUAGE	11
 
 LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE]=
 {
+	{ "danish",			TODAN	},
 	{ "dutch",		TODUT	},
 	{ "english",	TOENG	},
+	{ "finnish",		TOFIN	},
 	{ "french",		TOFRA	},
 	{ "german",		TOGER	},
 	{ "italian",	TOITA	},
+	{ "norwegian",	TONOR	},
+	{ "portuguese",	TOPOR	},
 	{ "spanish",	TOSPA	},
 	{ "swedish",	TOSWE	},
 };
@@ -2319,11 +2324,11 @@ LOCAL void c_heading ( void )
 			break;
 		case TOKPS:
 			outln("newline");
-			outln("18 changeFontSize");
+			/* Changed in r6pl16 [NHz] */
+			voutlnf("%d changeFontSize", iDocNode1fontSize);
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
 			outln("Boff");
-
 			/* Changed in r6pl15 [NHz] */
 			voutlnf("%d changeFontSize", laydat.propfontsize);
 			/*outln("11 changeFontSize");*/
@@ -2441,7 +2446,8 @@ LOCAL void c_subheading ( void )
 			break;
 		case TOKPS:
 			outln("newline");
-			outln("14 changeFontSize");
+			/* Changed in r6pl16 [NHz] */
+			voutlnf("%d changeFontSize", iDocNode2fontSize);
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
 			outln("Boff");
@@ -2560,18 +2566,13 @@ LOCAL void c_subsubheading ( void )
 			break;
 		case TOKPS:
 			outln("newline");
-			/* Changed in r6pl15 [NHz] */
-			voutlnf("%d changeFontSize", laydat.propfontsize);
-			/*outln("11 changeFontSize");*/
+			/* Changed in r6pl16 [NHz] */
+			voutlnf("%d changeFontSize", iDocNode3fontSize);
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
 			outln("Boff");
 			/* Changed in r6pl15 [NHz] */
 			voutlnf("%d changeFontSize", laydat.propfontsize);
-			/*outln("11 changeFontSize");*/
-
-			/* Deleted in r6pl15 [NHz] */
-			/* outln("changeBaseFont");*/
 			outln("newline");
 			break;
 		case TOHTM:
@@ -2682,17 +2683,13 @@ LOCAL void c_subsubsubheading ( void )
 			break;
 		case TOKPS:
 			outln("newline");
-			/* Changed in r6pl15 [NHz] */
-			voutlnf("%d changeFontSize", laydat.propfontsize);
-			/*outln("11 changeFontSize");*/
+			/* Changed in r6pl16 [NHz] */
+			voutlnf("%d changeFontSize", iDocNode4fontSize);
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
 			outln("Boff");
 			/* Changed in r6pl15 [NHz] */
 			voutlnf("%d changeFontSize", laydat.propfontsize);
-			/*outln("11 changeFontSize");*/
-			/* Deleted in r6pl15 [NHz] */
-			/* outln("changeBaseFont"); */
 			outln("newline");
 			break;
 		case TOHTM:
@@ -5427,9 +5424,8 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 					qreplace_all(z, "\n\n", 2, "\n", 1);
 					break;
 				case TOKPS:
-					/* Changed in r6pl15 [NHz] */
-					strcat(z, " \\");
-/*					strcat(z, ") udoshow (");*/
+					/* Deleted in r6pl16 [NHz] */
+/*					strcat(z, " \\");*/
 					break;
 			}
 			
@@ -10923,6 +10919,14 @@ GLOBAL void init_vars ( void )
 	sDocMonofont[0]=		EOS;
 	sDocPropfontSize[0]=	EOS;
 	sDocMonofontSize[0]=	EOS;
+	/* New in r6pl16 [NHz] */
+	sDocNode1fontSize[0]=	EOS;
+	sDocNode2fontSize[0]=	EOS;
+	sDocNode3fontSize[0]=	EOS;
+	sDocNode4fontSize[0]=	EOS;
+
+	/* New in r6pl16 [NHz] */
+	set_mainlayout();
 
 	justify_from_right= FALSE;
 
