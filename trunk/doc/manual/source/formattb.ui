@@ -1,5 +1,5 @@
 # doc/manual/source/format-table.ui
-# letzte Änderungen: 28.01.2004 / last changes: Jan 28, 2004
+# letzte Änderungen: 29.01.2004 / last changes: Jan 29, 2004
 
 !iflang [german]
 !index Kürzel
@@ -15,7 +15,7 @@ asc !!ASCII !! "Plain" Text !! alle
 !hline
 drc !! David's Readme Compiler !! DOS-Programm zur Erzeugung menügesteuerter ReadMe's als EXE-Datei  !! MS-DOS
 !hline
-helptag !! HP-Helptag-SGML !! SGML-basiertes Hypertext-Hilfesystem für kommerzielle Unixe (HP-UX, Sun Solaris, IBM AIX) !! Unix
+helptag !! HP-Helptag-SGML !! SGML-basiertes Hypertext-Hilfesystem für kommerzielle Unices (HP-UX, Sun Solaris, IBM AIX) !! Unix
 !hline
 html !! HTML (Hypertext Markup Language) !! Seitenauszeichnungssprache, u.a. für Webseiten, Dokumentationen etc. !! plattformunabhängig
 !hline
