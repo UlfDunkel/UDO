@@ -1527,34 +1527,27 @@ LOCAL void c_begin_list ( int listkind )
 			char space[50];
 			int i;
 		
+			/* Changed in r6pl16 [NHz] */
+			space[0] = EOS;
 			ll= (int) strlen(sWidth);
 			iEnvIndent[iEnvLevel]= (int) strlen(sWidth) + 3;
 			for(i=0;i<iEnvIndent[iEnvLevel];i++)
 				strcat(space, "0");
 
 			if(desttype == TOKPS)
-
 			{
-
 				switch(listkind)
-
 				{
-
 					case LIST_BOLD:			outln("Bon");	break;
 					case LIST_ITALIC:		outln("Ion");	break;
 					case LIST_TYPEWRITER:	outln("Von");	break;
 				}
 /*				voutlnf("/offList (%s00) addStrSpaceLeft", space);*/
 				outln("/offCount offCount 1 add def");
-
 				outln("/offCountS offCount 4 add def");
-
 				voutlnf("offList offCount get (%s00) addStrSpaceLeft", space);
-
 				switch(listkind)
-
 				{
-
 					case LIST_BOLD:			outln("Boff");	break;
 					case LIST_ITALIC:		outln("Ioff");	break;
 					case LIST_TYPEWRITER:	outln("Voff");	break;
@@ -3201,7 +3194,30 @@ GLOBAL void c_begin_document ( void )
 			}
 			break;
 		case TOKPS:
+			/* New in r6pl16 [NHz] */
+			/* Size of nodes */
+			if (sDocNode1fontSize[0] != EOS)
+				iDocNode1fontSize = atoi(sDocNode1fontSize);
+			else
+				iDocNode1fontSize = laydat.propfontsize + 7;
+
+			if (sDocNode2fontSize[0] != EOS)
+				iDocNode2fontSize = atoi(sDocNode2fontSize);
+			else
+				iDocNode2fontSize = laydat.propfontsize + 3;
+
+			if (sDocNode3fontSize[0] != EOS)
+				iDocNode3fontSize = atoi(sDocNode3fontSize);
+			else
+				iDocNode3fontSize = laydat.propfontsize;
+
+			if (sDocNode4fontSize[0] != EOS)
+				iDocNode4fontSize = atoi(sDocNode4fontSize);
+			else
+				iDocNode4fontSize = laydat.propfontsize;
+
 			outln(UDO2PS);	/* in udo2ps.h definiert (c) by Christian Krueger und Norbert Hanz */
+			outln(UDO2PDF);	/* in udo2pdf.h definiert (c) by Norbert Hanz */
 
 			if(laydat.paper != NULL)
 			{
