@@ -469,7 +469,7 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 	char	s[512], n[512], sNoSty[512], hfn[512], sGifSize[80];
 	int		ti, ui;
 	BOOLEAN	same_file= FALSE;
-	char 	*htmlfilename;
+	char 	*htmlfilename, suff[MYFILE_SUFF_LEN+1];
 
 	ref[0]= EOS;
 	
@@ -1965,6 +1965,7 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 	int ti=0, i, li;
 
 	char s[512], htmlname[512], sTarget[512]="\0";
+	char backpage[256], href[256], alt[256], *tok;
 
 	if (!html_ignore_8bit)
 	{	outln("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=iso-8859-1\">");
@@ -2560,7 +2561,7 @@ LOCAL void html_home_giflink ( const int idxEnabled, const int idxDisabled, cons
 
 LOCAL void html_back_giflink ( const int idxEnabled, const int idxDisabled, const char *sep )
 {
-	char target[64];
+	char target[64], backpage[256], href[256], alt[256], *tok;
 	char sGifSize[128], sGifName[256];
 	unsigned int uiW, uiH;
 
@@ -3148,7 +3149,7 @@ GLOBAL void html_save_frameset ( void )
 	{
 		outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Frameset//EN\"");
  		outln("        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd\">");
-		voutlnf("<html lang=\"%s\" xml:lang=\"%s\">", lang.html_lang, lang.html_lang");
+		voutlnf("<html lang=\"%s\" xml:lang=\"%s\">", lang.html_lang, lang.html_lang);
 	}
 	else
 	{
@@ -6013,7 +6014,7 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 {
 	register int i;
 	int li, apxstart;
-	char s[128];
+	char s[128], n[128];
 
 	if (p1_toc_counter<=0)
 	{	return FALSE;

@@ -55,6 +55,7 @@ const char *id_env_c= "@(#) env.c       16.07.1998";
 #include "export.h"
 #include "env.h"
 #include "udo2ps.h"
+#include "udo2pdf.h"
 
 
 /*	############################################################

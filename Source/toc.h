@@ -284,6 +284,7 @@ GLOBAL void set_ignore_subtoc ( void );
 GLOBAL void set_ignore_popup_title ( void );
 GLOBAL void set_helpid ( void );
 GLOBAL void set_mapping ( void );
+GLOBAL void set_html_doctype ( void );	/* New in r6pl16 [NHz] */
 GLOBAL void set_html_frames_layout ( void );
 GLOBAL void set_html_filename ( void );
 GLOBAL void set_html_switch_language ( void );
