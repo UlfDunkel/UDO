@@ -20,7 +20,7 @@
 	############################################################	*/
 #ifndef ID_CHARS_C
 #define	ID_CHARS_C
-const char *id_chr_c= "@(#) chr.c       22.04.1999";
+const char *id_chr_c= "@(#) chr.c       05.02.2004";
 #endif
 
 #include "import.h"
@@ -2783,19 +2783,18 @@ GLOBAL void auto_quote_chars ( char *s, BOOLEAN all )
 						ptr_quoted= s_temp;
 					}
 				}
-#if 1
+/* Changed in V6.5.5 [NHz] */
+#if 0
 				else
 				{
 					LOCAL QUOTEINFO const ps7bit[]=
 					{
-						/* Changed in V6.5.5 [NHz] */
-/*						{	'[',		"\\["	},
+						{	'[',		"\\["	},
 						{	']',		"\\]"	},
 
 						{	'(',		"\\("	},
 						{	')',		"\\)"	},
-						{	'\\',		"\\\\"	}*/
-						{	'',		""	}
+						{	'\\',		"\\\\"	}
 					};
 					
 					for (i=0; i<sizeof(ps7bit)/sizeof(ps7bit[0]); i++)
