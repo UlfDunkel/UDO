@@ -2929,8 +2929,8 @@ GLOBAL void add_hyphen ( void )
 		return;
 	}
 
-	tokcpy2(p->hyphen);
-	tokcpy2(p->solo);
+	tokcpy2(p->hyphen, 129);
+	tokcpy2(p->solo, 129);
 
 	if (desttype==TOTEX || desttype==TOPDL)
 	{	/* Die Tokens sind leider vorher schon durch c_vars gelaufen */

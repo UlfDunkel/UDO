@@ -1457,7 +1457,7 @@ LOCAL void c_begin_list ( int listkind )
 
 	sShort[0]= EOS;
 	token[0][0]= EOS;
-	tokcpy2(sWidth);
+	tokcpy2(sWidth, 256);
 	delete_once(sWidth, "[");
 	delete_last(sWidth, "]");
 
@@ -1718,8 +1718,17 @@ GLOBAL void c_item ( void )
 	char	sBig[1024], sTemp[1024], sAdd[128];
 	size_t	tl, sl, i;
 	int		ll, lp;
-	
-	
+
+	/* VJD */
+	int l;
+	l=strlen(token[0]);
+	if (l>128)
+	{
+		printf("strlen(token[0]): %d\n", strlen(token[0]));
+		printf("%s\n", token[0]);
+		//gets(s);
+	}
+
 	if ( (iItemLevel==0) && (iEnumLevel==0) && (iDescLevel==0) && (iListLevel==0) )
 	{	error_item_outside_env();
 	}
