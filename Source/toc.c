@@ -248,6 +248,7 @@ GLOBAL BOOLEAN is_node_link ( const char *link, char *node, int *ti, BOOLEAN *is
 			}
 			*li= i;
 			*ti= lab[i]->tocindex;
+			lab[i]->referenced = TRUE;
 			strcpy(node, toc[*ti]->name);
 			ret= TRUE;
 			break;
