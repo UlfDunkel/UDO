@@ -1,0 +1,21 @@
+###########################################################
+# @(#) Makefile fuer Microsoft Visual C
+# @(#) Thorsten Otto, 30.10.2001
+###########################################################
+CC = cl
+RM=del
+
+O=.obj
+X=.exe
+
+CFLAGS = -D__WIN32__
+
+LDFLAGS = 
+
+include makefile.in
+
+
+udo$(X):	$(OSRC) cli$(O)
+		$(CC) @<<
+	-Fo$@ $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS)
+<<NOKEEP
