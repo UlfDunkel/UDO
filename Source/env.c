@@ -2184,7 +2184,7 @@ GLOBAL void c_item ( void )
 						}
 						c_internal_styles(sBig);
 						strinsert(sBig, sHtmlPropfontStart);
-			 			strinsert(sBig, "<tr><td nowrap valign=\"top\">");
+			 			strinsert(sBig, "<tr><td nowrap=\"nowrap\" valign=\"top\">");
 						strcat(sBig, sHtmlPropfontEnd);
 						strcat(sBig, "</td><td valign=\"top\">");
 						strcat(sBig, sHtmlPropfontStart);
