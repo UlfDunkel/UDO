@@ -1,5 +1,5 @@
 # doc/manual/source/header.ui
-# letzte Änderungen: 20.12.2003 / last changes: Dec 20, 2003
+# letzte Änderungen: 01.02.2004 / last changes: Feb 1, 2004
 
 
 # ----------------------------------------------------------
@@ -109,6 +109,9 @@
 #!html_merge_subsubnodes
 #!html_modern_layout
 #!html_switch_language english ../eng/udo.html
+
+# MEZ = UTC + 1 h
+!html_header_date +01:00
 
 # ----------------------------------------------------------------
 # Allgemeine Infos / General Infos
