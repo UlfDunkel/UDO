@@ -1558,7 +1558,7 @@ GLOBAL void replace_udo_tilde ( char * s)
 			qreplace_all(s, TILDE_S, TILDE_S_LEN, "\\symbol{126}", 12);
 			break;
 		case TOLYX:
-			qreplace_all(s, TILDE_S, TILDE_S_LEN, "~", 7);
+			qreplace_all(s, TILDE_S, TILDE_S_LEN, "~", 1);
 			break;
 		case TOLDS:
 			qreplace_all(s, TILDE_S, TILDE_S_LEN, "&tilde;", 7);
