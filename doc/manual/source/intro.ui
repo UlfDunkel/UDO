@@ -1,5 +1,5 @@
 # doc/manual/source/introduction.ui
-# letzte Änderungen: 20.12.2003 / last changes: Dec 20, 2003
+# letzte Änderungen: 17.01.2004 / last changes: Jan 17, 2004
 
 
 ################################################################################
@@ -23,10 +23,6 @@
 !iflang [german]
 Willkommen zu UDO!
 
-Vor Ihnen liegt (oder flimmert) die wieder einmal ziemlich überarbeitete
-Dokumentation zum ziemlich überarbeiteten Programm namens UDO,
-geschrieben von einem immer noch völlig überarbeiteten Autor.
-
 UDO ist ein mächtiges und vielseitiges Werkzeug zur Erstellung von
 Anleitungen oder sonstigen Textdateien, die in einem oder mehreren
 Formaten benötigt werden. Trotz der Vielseitigkeit ist UDO leicht zu
@@ -35,50 +31,29 @@ bedienen und die UDO-Syntax leicht zu erlernen.
 UDOs Vielseitigkeit drückt sich dadurch aus, daß diese Anleitung
 ziemlich umfangreich ist. Dieser Umfang schreckt viele Leute ab, die
 Anleitung einmal komplett durchzulesen. Genau diese Leute sind es aber
-später, die mich mit Fragen bombardieren, die diese Anleitung fast
-alle erklären kann.
+später, die viele Fragen stellen, die diese Anleitung fast alle erklären kann.
 
-Aus diesem Grunde möchte ich gleich zu Beginn darauf hinweisen, daß
+Aus diesem Grunde sei gleich zu Beginn darauf hingewiesen, daß
 Sie UDO nur dann effizient einsetzen können, wenn Sie die Anleitung
 einmal komplett durchlesen/überfliegen und mit den mitgelieferten
 Beispielen ein wenig herumexperimentieren.
 
-Nehmen Sie sich daher bitte die eine Stunde Zeit, diese Anleitung vom
+Nehmen Sie sich daher bitte die Zeit, diese Anleitung vom
 Anfang bis zum Ende durchzublättern. Viele Dinge bleiben dann bereits
 in Ihrem Gedächtnis hängen. Außerdem wissen Sie dann später sofort, wo
 Sie etwas nachschlagen können, falls Ihnen der Sinn eines Befehls
 wieder entfallen ist.
 
 Falls Sie dabei Stellen entdecken, in denen Dinge zu kurz, falsch oder
-mißverständlich beschrieben worden sind, so teilen Sie mir dies bitte
-mit. UDO ist "mein Kind" und daher ist die Gefahr groß, daß mir
-selbstverständliche Teile unzureichend erklärt worden sind. Auch
-Hinweise auf Rechtschreibfehler nehme ich gerne entgegen.
+mißverständlich beschrieben worden sind, so (!link [teilen Sie dies bitte mit] [Mailingliste]).
 
-#Bitte beachten Sie, daß UDO als Shareware vertrieben wird und ich sehr
-#darauf angewiesen bin, daß die Arbeit, die ich in meiner Freizeit in
-#dieses Projekt stecke, honoriert wird. Falls Sie UDO also nutzen
-#möchten, bitte ich Sie, sich für UDO auch registrieren zu lassen.
-
-In der Hoffnung, daß UDO für Sie genau wie für mich selbst eine
-unverzichtbare Hilfe wird und Sie mehr Zeit für die wesentlichen Dinge
-bekommen,
-
-!raw [tex] \vfill
-
-Dirk Hagedorn
-
-Sundern, den 10. Dezember 1996
+In der Hoffnung, daß UDO für Sie eine unverzichtbare Hilfe wird und Sie
+mehr Zeit für die wesentlichen Dinge bekommen.
 
 !endif
 # ------------------------------------------------------------------------------
 !iflang [english]
 Welcome to UDO!
-
-You are reading the revised documentation of the revised program called UDO
-written by a quite overworked author that still is hoping that anybody
-outside there understands his quite unrevised knowledge of writing English
-documentations.
 
 UDO is a powerful and multipurpose utility for making a documentation or any
 other text file that is needed in one text format or more. Though UDO is
@@ -91,7 +66,7 @@ Unfortunately, exactly these people will ask lots of questions later on
 without knowing that their questions could be answered by simply reading
 this documentation.
 
-Due to this fact I want to note at the beginning of this documentation that
+Due to this fact it must be noted at the beginning of this documentation that
 you will only be able to use UDO in an efficient way if you read the
 complete documentation one time at least and if you experiment with the
 added examples.
@@ -102,28 +77,13 @@ everything by heart but you should be able to find things quickly if there
 will be questions later on.
 
 If you will detect parts where things are described in a too short, wrong or
-misleading way: please let me know! UDO is ""my little child"" and it
-wouldn't be the first time that an author has forgotten to describe some
-important parts.
+misleading way: please (!link [report] [mailing list])!
 
-And if you have any problems with my English: please let me know, too! I did
-what I can but you without any doubts you will find some awful parts.
+And if you have any problems with the English: please report, too!
 
-!begin_center
+The UDO Community hopes that UDO will become an unrenounceable utility for you
+and you will have more time for the really important things.
 
-Please note that UDO is Shareware. I have been spending a lot of my spare
-time for this project. If you want to use UDO please register for it.
-
-!end_center
-
-I hope that UDO will become an unrenounceable utility for you and you will
-have more time for the really important things.
-
-!raw [tex] \vfill
-
-Dirk Hagedorn
-
-Sundern, December 10th 1996
 !endif
 
 !end_node
@@ -141,36 +101,34 @@ Sundern, December 10th 1996
 !iflang [german]
 UDO wurde ursprünglich entwickelt, um die Erstellung von Anleitungen
 zu Computerprogrammen oder vergleichbaren Dokumentationen zu
-vereinfachen, die in mehr als einem Format benötigt werden.
+vereinfachen, die in (!I)mehreren(!i) Formaten benötigt werden.
 
-Seit einiger Zeit leistet UDO aber auch gute Dienste, falls man nur
-ein Format erzeugen will. So ist es für Anfänger sicherlich einfacher,
+UDO leistet aber auch gute Dienste, falls man nur
+(!I)ein(!i) Format erzeugen will. So ist es für Anfänger sicherlich einfacher,
 die Syntax von UDO zu begreifen als die von HTML oder (!LaTeX), denn bei
-letzteren muß man beispielsweise höllisch aufpassen, daß man nicht
+letzterem muß man beispielsweise höllisch aufpassen, daß man nicht
 unerlaubte Zeichen im Quelltext einbaut, wogegen UDO auch mit
 Sonderzeichen klarkommt und diese automatisch an das jeweilige Ausgabeformat
 anpaßt. Sprich, selbst wenn man nur HTML oder nur (!LaTeX) erzeugen will,
 kann UDO sehr gute Dienste leisten.
 
-Bei alledem ist UDO multilingual, d.h. Sie können deutsche, englische,
-französische, italienische und schwedische Texte erzeugen, und UDO
-wird dabei die jeweils passenden Begriffe für "Inhaltsverzeichnis",
-"Anhang", "Abbildung" oder "Tabelle" ausgeben oder das Datum im Format
-der gewählten Sprache darstellen.
+Bei alledem ist UDO multilingual, d.h. Sie können Texte in verschiedenen Sprachen erzeugen,
+und UDO wird dabei für die unterstützten Sprachen die jeweils passenden Begriffe für
+"Inhaltsverzeichnis", "Anhang", "Abbildung" oder "Tabelle" ausgeben oder das Datum
+im jeweiligen Format darstellen.
 
 Die Syntax von UDO ist sehr leicht zu erlernen. Zur Erstellung
 einfacher Dateien muß man lediglich Kenntnis von etwa zehn bis
 fünfzehn Befehlen besitzen, also in etwa so viel, wie Sie auch beim
 Verfassen von HTML- oder (!LaTeX)-Dateien besitzen müssen.
 
-Haben Sie einen Quelltext erstellt, so können Sie diesen in folgende,
-alphabetisch sortierten Formate umwandeln:
+Haben Sie einen Quelltext erstellt, so können Sie diesen in folgende Formate umwandeln:
 
 #Ausgabe-Formate
 !begin_enumerate !short
   !item AmigaGuide
   !item Apple QuickView
-  !item ASCII
+  !item ASCII (Text)
   !item DRC (David's Readme Compiler)
   !item HP-Helptag-SGML
   !item HTML (Hypertext Markup Language)
@@ -189,17 +147,17 @@ alphabetisch sortierten Formate umwandeln:
   !item ST-Guide
   !item Texinfo
   !item Turbo-Vision-Help
-  !item UDO
+  !item UDO (Universal Document)
   !item Windows-Help
 !end_enumerate
 
-Einige Formate sind systemweit austauschbar, einige sind nur auf
-bestimmten System von Interesse.
+Einige Formate sind system-/plattformübergreifend austauschbar, einige sind nur auf
+bestimmten Systemen/Plattformen von Interesse.
 
 UDO erzeugt größtenteils keine `fertigen' Dokumente. In aller Regel
 müssen die von UDO erzeugten Dateien erst noch durch weitere Programme
 bearbeitet werden. So müssen Windows-Help-Quelltexte erst noch durch
-den Hypertext-Compiler HC.EXE bearbeitet werden, RTF-Dateien mit einer
+den Hypertext-Compiler (!V)HC.EXE(!v) bearbeitet werden, RTF-Dateien mit einer
 Textverarbeitung ausgegeben werden, etc.
 
 UDO versucht, dem Verfasser des Textes soviel Arbeit wie möglich
@@ -218,7 +176,7 @@ und sonstigen (!link [Sonderzeichen] [Sonderzeichen]),
 !item umfangreiche Formatierungsmöglichkeiten mit Erstellung von
 (!link [Aufzählungen] [Aufzählungen]),
 (!link [Listen] [Listen]),
-#TODO Blocksatz???
+# 17.01.2004 U.K.: Blocksatz anscheinend nur bei bestimmten Ausgabeformaten (ASCII, STG)
 Blocksatz,
 (!link [zentriertem] [Zentrieren von Zeilen]),
 (!link [rechtsbündigem] [Rechtsbündiger Text]) oder
@@ -229,72 +187,45 @@ Blocksatz,
 
 !smallskip
 
-UDO hat so seine Stärken und Schwächen. Die Umwandlung ins ASCII-,
-ST-Guide-, HTML-, (!LaTeX)- und WinHelp-Format gehören - historisch
-bedingt - sicherlich zu den Stärken dieses Programms. Ausgabeformate
+UDO hat so seine Stärken und Schwächen. Die Umwandlung ins ASCII-Text-,
+ST-Guide-, HTML-, (!LaTeX)- und WinHelp-Format gehören -- historisch
+bedingt -- sicherlich zu den Stärken dieses Programms. Ausgabeformate
 Linuxdoc-SGML und LyX werden erst seit kurzer Zeit angeboten und
-wurden von mir nicht ausreichend getestet; hier gibt es sicherlich
-noch ein paar Dinge, die demnächst geändert werden (müssen).
+wurden noch nicht ausreichend getestet; hier gibt es sicherlich
+noch ein paar Dinge, die geändert werden (müssen).
 
-Einige Dinge stehen bei mir und sicherlich auch bei etlichen Benutzern
-ganz oben auf der Wunschliste. Einige dieser Dinge werden sicherlich
-bald unterstützt, wie z.B. die automatische Erzeugung eines
-Stichwortverzeichnisses sowie die Ausgabe eines Abbildungs- und
+Einige Dinge stehen ganz oben auf der Wunschliste, wie z.B. die automatische Erzeugung
+eines Stichwortverzeichnisses sowie die Ausgabe eines Abbildungs- und
 Tabellenverzeichnisses.
 
 !smallskip
 
 Die Erstellung von komplexen Dokumenten wie Zeitschriften ist mit UDO
 nicht möglich, da z.B. Bilder nicht frei positioniert oder von Text
-umflossen werden können und UDO keinen Spaltensatz erzeugen kann. Zudem
-besitzt UDO keine eingebaute automatische Silbentrennung.
+umflossen werden können und UDO keinen Spaltensatz erzeugen kann.
+Dies sind Funktionen, die zum Desktop Publishing gehören und in einem Programm
+wie UDO nichts zu suchen haben.
 
-UDO ist nur ein Textkonverter "in eine Richtung". UDO selbst kann
-beispielsweise keine vorhandenen WinHelp-, (!LaTeX)- oder
-ST-Guide-Quelltexte in das UDO-Format umwandeln.
+UDO besitzt keine eingebaute automatische Silbentrennung, sondern bietet nur
+die Möglichkeit, Wörter an vom Autor markierten Stellen zu trennen.
+# Auf eine automatische Silbentrennung wird verzichtet, da dies nur
+# für bestimmte Ausgabeformate relevant wäre.
 
-# auskommentiert 20.12.2003 - Ulrich Kretschmer
-!begin_ignore
-Bald werden aber zumindest Programme erscheinen, die HTML- oder Linuxdoc-SGML-Dateien
-ins UDO-Format umwandeln können.
-!end_ignore
+UDO ist nur ein Textkonverter "in eine Richtung", kann also nur das eigene Format
+in die oben aufgelisteten Formate umwandeln.
+UDO kann keines dieser Formate in das eigene Format umwandeln.
 
-Zusammenfassend kann gesagt werden, daß UDO folgende Dinge nicht kann
-und in absehbarer Zukunft auch nicht können wird:
-
-!begin_enumerate !short
-
-!item UDO kann nur das eigene Format in die oben aufgelisteten Formate
-umwandeln. UDO kann keines dieser Formate in das eigene Format
-umwandeln.
-# auskommentiert 20.12.2003 - Ulrich Kretschmer
-Hierfür sind Zusatzprogramme nötig, die bald erhältlich sein werden.
-
-!item UDO kann keine Binärformate (z.B. WinWord-Dateien) erzeugen,
-sondern nur ASCII-Formate, also solche, die man mit einem üblichen
-Editor bearbeiten kann.
-
-!item UDO besitzt keine automatische Silbentrennung, sondern bietet nur
-die Möglichkeit, Wörter an vom Autor markierten Stellen zu trennen. Auf
-eine automatische Silbentrennung wird verzichtet, da der überwiegende
-Teil keine Silbentrennung benötigt und UDO sonst nur größer, träger
-sowie teurer würde.
-
-!item UDO kann Bilder und Tabellen nicht von Text umfließen lassen. UDO
-kann auch keinen Spaltensatz erzeugen. Dies sind Funktionen, die zum
-Desktop Publishing gehören und in einem Programm wie UDO nichts zu
-suchen haben.
-
-!end_enumerate
+# UDO kann keine Binärformate (z.B. WinWord-Dateien) erzeugen, sondern nur Textformate,
+# also solche, die man mit einem üblichen Editor bearbeiten kann.
 
 !endif
 # ------------------------------------------------------------------------------
 !iflang [english]
 UDO has been originally developed to make it easier for you to write
 software documentations or other kinds of text files that have to be
-available in more than one format.
+available (!I)in more than one(!i) format.
 
-UDO can be a great help if you want to make a single destination format,
+UDO can be a great help if you want to make a (!I)single(!i) destination format,
 too. A beginner will have less problems when learning the UDO syntax instead
 of learning (!LaTeX) or HTML. So if you want to make (!LaTeX) or HTML files
 it should be easier to get to know how to make them using UDO instead of
@@ -304,23 +235,22 @@ comparison to that UDO will convert these special characters for you when
 converting the source file to (!LaTeX) or HTML. But this is not the only
 thing UDO can do for you.
 
-UDO is a multilingual program. You can make German, English, French, Italian
-and Swedish texts. UDO knows how ""Table of contents"", ""Appendix"",
-""Figure"" or ""Table"" is called in the other countries. The date is
-also printed out in the right way depended of the selected language.
+UDO is a multilingual program. You can make texts in different languages.
+UDO knows how ""Table of contents"", ""Appendix"", ""Figure"" or ""Table""
+is called in the other supported languages.
+The date is also printed out in the right way depended of the selected language.
 
 The syntax of UDO is easy to learn. To make some small documentations you
 just have to learn about ten to fifteen commands; as many as you have
 to learn when you try to learn (!LaTeX) or HTML.
 
-When you have written an UDO source file you can convert it into the
-following formats:
+Having written an UDO source file, you can convert it into the following formats:
 
 #Ausgabe-Formate
 !begin_enumerate !short
   !item AmigaGuide
   !item Apple QuickView
-  !item ASCII
+  !item ASCII (Text)
   !item DRC (David's Readme Compiler)
   !item HP-Helptag-SGML
   !item HTML (Hypertext Markup Language)
@@ -339,13 +269,13 @@ following formats:
   !item ST-Guide
   !item Texinfo
   !item Turbo-Vision-Help
-  !item UDO
+  !item UDO (Universal Document)
   !item Windows-Help
 !end_enumerate
 
-As you can see some formats are just interesting for specific operating
-systems, but you can also see that the list contains come formats that can
-be used on nearly any existing operating system.
+As you can see some formats are just interesting for specific systems/platforms,
+but you can also see that the list contains come formats that can be used
+on nearly any existing system/platform.
 
 In most cases UDO doesn't make files that are ready to use because have to
 run a further software to view, print or convert the document. E.g. you have
@@ -382,54 +312,31 @@ text with a (!link [right alignment] [Right justified text]),
 
 !smallskip
 
-UDO is not the perfect program for all purposes. The conversion into ASCII,
+UDO is not the perfect program for all purposes. The conversion to ASCII-text,
 ST-Guide, HTML, (!LaTeX) and Windows Help is nearly perfect. Some formats
 (like Linuxdoc-SGML and LyX) are quite young and haven't been tested enough.
-You will surely find some aspects that have to be changed in the near
-future.
+You will surely find some aspects that have to be changed in the future.
 
-There are some points that UDO can't manage yet but will be implemented in
-the very near future: a automatically generated index, list of figures and
-list of tables. Just wait some months and you will get UDO Release 7 with
-all these features.
+There are some points that UDO can't manage yet but will be found on the wishlist:
+an automatically generated index, list of figures and list of tables.
+# auskommentiert 17.01.2004 - Ulrich Kretschmer
+# Just wait some months and you will get UDO Release~7 with all these features.
 
 !smallskip
 
-To make complex files like newspapers that is impossible with UDO because it
-can't wrap text around images and it can't generated files with two or more
-text columns. In addition to that UDO hasn't got an implemented automatic
-syllabification.
+To make complex files like newspapers is impossible with UDO because it
+can't wrap text around images and it can't generate files with two or more
+text columns.
+These functions are part of desktop publishing and not of a software like UDO.
 
-UDO is just a ""one way"" converter. UDO can't convert (!LaTeX), HTML or RTF
-to the UDO format. It is only able to convert the UDO format into (!LaTeX)
-etc.
+UDO doesn't support an automatic syllabification.
+You have to tell UDO explicitely where it is allowed to split up words.
+# There are only some formats that would profit from an automatic syllabification.
 
-# auskommentiert 20.12.2003 - Ulrich Kretschmer
-# Maybe there will be a HTML2UDO or SGML2UDO converter in the near future.
+UDO is just a ""one way"" converter which converts it's own format into the formats listed above.
+UDO can't convert them into its own format.
 
-To sum it up it can be said that UDO can't manage the following things and
-won't be able to manage them in the future:
-
-!begin_enumerate !short
-
-!item	UDO can only convert its format into the upper standing formats. UDO
-can't convert them into its own format.
-# auskommentiert 20.12.2003 - Ulrich Kretschmer
-# Maybe there will be some other converters in the near future.
-
-!item	UDO can't make binary formats (like WinWord documents). It can only
-make formats that are based on ASCII.
-
-!item	UDO doesn't support an automatic syllabification. You have to tell
-UDO explicitely where it is allowed to split up words. I don't want to
-implement an automatic syllabification because there are only some formats
-that would profit from it.
-
-!item	UDO can't wrap text around images. UDO can't save multi-columned
-texts, too. These functions are part of desktop publishing and not of a
-software like UDO.
-
-!end_enumerate
+# UDO can't make binary formats (like WinWord documents). It can only make text formats.
 !endif
 
 !end_node
@@ -458,7 +365,7 @@ diesen auch Personen zugänglich machen, die nicht das Betriebssystem
 benutzen, welches Sie selbst einsetzen?
 
 !item Sie programmieren und benötigen neben der obligatorischen
-ASCII-Anleitung noch eine Online-Hilfe oder ein Online-Handbuch in Form
+Text-Anleitung (ASCII) noch eine Online-Hilfe oder ein Online-Handbuch in Form
 einer Hilfedatei für Windows, einer HTML-Help Datei,
 einer Dokumentation im HTML-Format, eines ST-Guide/Hyperion-Hypertextes,
 einer Hilfe-Datei für Borlands Turbo-Vision oder einer Hilfedatei bzw.
@@ -484,9 +391,8 @@ eine automatische Referenzierung, Umlautwandlung oder die kapitelweise
 Aufteilung des Hypertextes kümmern kann?
 
 !item Sie möchten einen Hilfstext für ein Windows-Programm anbieten,
-haben aber keine Lust, den zwanzigfachen Preis für ein Tool zu
-bezahlen, das nur wenig mehr kann als UDO, dafür aber wesentlich mehr
-Ressourcen verbraucht und/oder noch Microsofts Word für Windows
+haben aber keine Lust, für ein Tool zu bezahlen, das nur wenig mehr kann als UDO,
+dafür aber wesentlich mehr Ressourcen verbraucht und/oder noch Microsofts Word für Windows
 benötigt?
 
 !item Sie sind der Autor einer Library für Pure-C auf dem Atari und
@@ -502,7 +408,7 @@ Lesen Sie sich die Fragen noch einmal durch. (!grin)
 # ------------------------------------------------------------------------------
 !iflang [english]
 If you can answer one or more of the following question with ""Yes"" UDO
-should be worth to take a look at. If can't answer any question with ""Yes""
+should be worth to take a look at. If you can't answer any question with ""Yes""
 it's quite possible that you don't need UDO and that you can stop reading
 this manual right here.
 
@@ -512,13 +418,13 @@ this manual right here.
 let some people, that don't run the same operating system, read it?
 
 !item	Are you a programmer and do you want to distribute your software with
-an ASCII manual and an online manual for Windows, Turbo Vision, GNU Info or
+an plain text manual (ASCII) and an online manual for Windows, Turbo Vision, GNU Info or
 ST-Guide?
 
 !item	Are you a programmer and do you want to print out the manual with
-(!LaTeX) or a text processor that can import the Rich Text Format?
+(!LaTeX) or with a text processor that can import the Rich Text Format?
 
-!item	Do you only need an ASCII manual but you always get rid of checking
+!item	Do you only need an plain text (ASCII) manual but you always get rid of checking
 the line breaks, chapter numbers and the table of contents?
 
 !item	Do you want to publish a hypertext inside the World Wide Web but you
@@ -526,11 +432,10 @@ don't own a powerful HTML editor that can enter links, convert special
 characters or split up the document into different files automatically?
 
 !item	Do you want to make an online manual for a Windows software but you
-don't want to pay a lot of money for a software that costs more than 20
-times the price of UDO but can do only a little bit more?
+don't want to pay for a software that can do only a little bit more than UDO?
 
-!item	Are you the author of a Pure C library for the Atari computers and
-you need a descriptions of the library routines  for Pure C Help and
+!item	Are you the author of a Pure~C library for the Atari computers and
+you need a descriptions of the library routines  for Pure~C Help and
 ST-Guide?
 
 !end_itemize
@@ -552,6 +457,9 @@ questions once more. (!grin)
 !html_name introduction_history.html
 
 !iflang [german]
+Dirk Hagedorn, der "Begründer" von UDO, berichtet:
+
+!begin_quote
 Irgendwann im Herbst 1994 hatte ich mehrere kleinere Programme
 geschrieben, für die ich je eine ASCII-Anleitung, eine Online-Hilfe und
 ein gedrucktes Handbuch benötigte.
@@ -579,8 +487,8 @@ wurden, ins ASCII- ST-Guide- und (!LaTeX)-Format umwandeln konnte: UDO war
 geboren!
 
 UDO konnte zu diesem Zeitpunkt noch nicht besonders viel. Das Format
-enthielt vielleicht gerade einmal 10 Befehle und der Sourcecode war
-vielleicht 10 KB groß. UDO war damals eigentlich nur ein übler Hack,
+enthielt vielleicht gerade einmal 10~Befehle und der Sourcecode war
+vielleicht 10~kB groß. UDO war damals eigentlich nur ein übler Hack,
 aber dennoch leistete es schon sehr gute Dienste und das oben
 beschriebene Horrorszenario gehörte endgültig der Vergangenheit an.
 
@@ -590,14 +498,19 @@ kamen hinzu, UDO wurde auf weitere Betriebssysteme portiert, der Umfang
 des Sourcecodes und der Dokumentation hat sich mehr als
 verhundertfacht.
 
-UDO hat sich in diesen zwei Jahren zu einem plattformunabhängigen,
+UDO hat sich seither zu einem plattformunabhängigen,
 äußerst leistungsfähigen und sprichwörtlich universellen Werkzeug entwickelt.
+
+!end_quote
 
 # ergänzt 20.12.2003 - Ulrich Kretschmer
 UDO ist seit dem 27.10.2001 Open Source.
 !endif
 # ------------------------------------------------------------------------------
 !iflang [english]
+Dirk Hagedorn, the UDO "founder", reports:
+
+!begin_quote
 It was autumn 1994 when I wrote some little programs for which I needed an
 ASCII manual, an online help and a printed documentation.
 
@@ -621,7 +534,7 @@ that was able to convert this new text format into ASCII, ST-Guide and
 (!LaTeX): UDO was born!
 
 At this time UDO was really a small program with only some features. The
-syntax contained about 10 commands and the source code was about 10~KB
+syntax contained about 10~commands and the source code was about 10~kB
 large. Nevertheless this small hack was of a great help for myself and the
 upper described horror scenario was history.
 
@@ -630,8 +543,10 @@ different text formats, it offers a large variety of layouting commands,
 it's available for different operating system and the size of its source code
 and documentation is now a hundred times larger than it was in former days.
 
-In these two years UDO has become to an operating system independent, very
-powerful and --- proverbially said --- universal tool.
+UDO has become to an operating system independent, very powerful and
+--- proverbially said --- universal tool.
+
+!end_quote
 
 # ergänzt 20.12.2003 - Ulrich Kretschmer
 UDO ist Open Source since October 27, 2001.
@@ -643,11 +558,11 @@ UDO ist Open Source since October 27, 2001.
 ################################################################################
 !iflang [german]
 !begin_node Die UDO-Gemeinde
-!label UDO-Gemeinde
+!alias UDO-Gemeinde
 !endif
 !iflang [english]
 !begin_node The UDO community
-!label UDO community
+!alias UDO community
 !endif
 !html_name introduction_community.html
 
@@ -670,7 +585,7 @@ Am UDO-Projekt beteiligte Personen (in alphabetischer Reihenfolge):
   !item [Martin Loos] Verwaltung der alten Mailingliste (bis ca. 1999)
   !item [Martin Osieka] Portierung auf MacOS (bis ca. 1999)
   !item [Thorsten Otto] Pflege der Dokumentation (2001)
-  !item [Rainer Riedl] für die Erstellung der BeOS-Version (bis ca. 2001)
+  !item [Rainer Riedl] Erstellung der BeOS-Version (bis ca. 2001)
   !item [Tom Thomason] Support in Schweden (bis ca. 2001)
 !end_description
 !endif
@@ -705,13 +620,13 @@ Persons working on the UDO project (in alphabetical ordner):
 ################################################################################
 !iflang [german]
 !begin_node Kontakt zur UDO-Gemeinde
-!label Kontaktadresse
-!label Mailingliste
+!alias Kontaktadresse
+!alias Mailingliste
 !endif
 !iflang [english]
 !begin_node Contact the UDO community
-!label Contact addresses
-!label mailing list
+!alias Contact addresses
+!alias mailing list
 !endif
 # neue Überschrift seit 20.12.2003 - Ulrich Kretschmer
 
@@ -740,7 +655,7 @@ Auf der UDO-Website (!url [http://www.udo-open-source.org] [http://www.udo-open-
 Zum Kontakt zwischen den UDO-Anwendern stehen folgende (!B)Mailinglisten(!b) zur Verfügung:
 
 !begin_blist [UDO-Bugtracker] !short
-!item [UDO-Announce] Ankündigung rund um UDO (z.B. neue Versionen)
+!item [UDO-Announce] Ankündigungen rund um UDO (z.B. neue Versionen)
 !item [UDO-Discussion] In dieser Mailingliste können Fragen rund um UDO gestellt werden und es wird allgemein über UDO diskutiert. Melden Sie sich hier, wenn Sie ein Problem mit UDO haben.
 !item [UDO-Entwickler] Mailingliste für die UDO-Entwickler.
 !item [UDO-Bugtracker] In dieser Mailingliste bekommen Sie die Bugmeldungen und Feature-Wünsche von UDO angezeigt, die im (!url [Bugtracker-System] [http://bugtracker.udo-open-source.org/]) eingetragen werden.
@@ -839,71 +754,6 @@ Mail discussions are mostly in german, but feel free to ask in English.
 !end_ignore
 
 ################################################################################
-# auskommentiert 20.12.2003 - Ulrich Kretschmer
-# Texte wurden z.T. in den Abschnitt "Die UDO-Gemeinde" übernommen
-
-!begin_ignore
-
-!iflang [german]
-!begin_node Danksagung
-!endif
-!iflang [english]
-!begin_node Thanks
-!endif
-!html_name introduction_community.html
-
-!iflang [german]
-Ich möchte mich an dieser Stelle bei folgenden, namentlich sortierten
-Personen bedanken, ohne deren tatkräftige Unterstützung UDO nie zu dem
-geworden wäre, was es heute ist.
-
-Vielen Dank daher an!..
-
-!begin_description
-  !item [Denesh Bhabuta], für den Support in England
-  !item [Alexander Clauss], für die Erstellung der HP-UX-300/400-Version
-  !item [Dirk Haun], einem der Geburtsväter von UDO
-  !item [Patrick Jerchel], für die Verwaltung der Mailingliste
-  !item [Peter Klasen], der als erster registrierter Benutzer in die Geschichte von UDO eingehen wird
-  !item [Martin Loos], für die aufwendige Verwaltung der alten Mailingliste
-  !item [Martin Osieka], für die aufwendige Portierung auf MacOS
-  !item [Rainer Riedl], für die Erstellung der BeOS-Version
-  !item [Tom Thomason], für den Support in Schweden
-!end_description
-
-Außerdem möchte ich mich bei all denjenigen bedanken, die durch ihren
-unermüdlichen Einsatz dazu beigetragen haben, daß UDO fehlerfreier und
-leistungsfähiger denn je ist.
-
-!endif
-!iflang [english]
-At this point I want to say ""Thank you"" to the following people
-because of their effective help. Without this help UDO wouldn't be like
-it is today.
-
-Thank you
-
-!begin_description
-  !item [Denesh Bhabuta], for supporting UDO in Great Britain
-  !item [Alexander Clauss], for compiling the HP-UX 300/400 version
-  !item [Dirk Haun], one of the fathers of UDO
-  !item [Patrick Jerchel], for managing the mailing list
-  !item [Peter Klasen], the first registered user of UDO
-  !item [Martin Loos], for managing the old mailing list
-  !item [Martin Osieka], for porting UDO to MacOS
-  !item [Rainer Riedl], for compiling the BeOS version
-  !item [Tom Thomason], for supporting UDO in Sweden
-!end_description
-
-In addition to that I want to thank all users of UDO for their
-indefatigable efforts to make UDO better and better.
-!endif
-
-!end_node
-
-!end_ignore
-
-################################################################################
 !begin_node Copyright
 !html_name introduction_copyright.html
 
@@ -922,31 +772,28 @@ indefatigable efforts to make UDO better and better.
 !html_name introduction_disclaimer.html
 
 !iflang [german]
-Trotz sorgfältiger Entwicklung und umfangreichen Tests kann keine
-Gewährleistung für die einwandfreie Funktion von ""UDO"" und die
+Es kann keine Gewährleistung für die einwandfreie Funktion von ""UDO"" und die
 Richtigkeit des Inhalts dieser Dokumentation übernommen werden.
 
-Der Autor kann keine Haftung für irgendwelche direkten oder indirekten
-Schäden --- einschließlich aber nicht beschränkt auf materielle oder
+Die Autoren können keine Haftung für irgendwelche direkten oder indirekten
+Schäden --- einschließlich, aber nicht beschränkt auf materielle oder
 finanzielle --- übernehmen, die durch die Benutzung von ""UDO"" oder dessen
 Untauglichkeit für einen bestimmten Zweck entstehen.
 
-Für Hinweise auf Fehler und für Verbesserungsvorschläge ist der Autor
-dankbar.
+Für (!link [Hinweise] [Kontaktadresse]) auf Fehler und für Verbesserungsvorschläge
+ist die UDO-Gemeinde dankbar.
 
 !endif
 # ------------------------------------------------------------------------------
 !iflang [english]
-Though UDO has been developed thoroughly and has been tested for a long
-period of time there is no warranty for the program or the contents of this
-documentation.
+There is no warranty for the program or the contents of this documentation.
 
 UDO is provided ""as is"" without warranty of any kind, including but not
 limited to, the implied warranties of merchantability and fitness for a
 particular purpose. The entire risk is with you. Should UDO prove defective
 you assume the cost of all necessary servicing, repair or correction.
 
-Nevertheless the author will be glad if you send him bug reports.
+Nevertheless the UDO Community will be glad if you (!link [send bug reports] [Contact addresses]).
 !endif
 
 !end_node
@@ -979,11 +826,17 @@ von Digital Research.
 Mac, Macintosh und MacOS sind eingetragene Warenzeichen von Apple
 Computer Inc.
 
-MS-DOS, Windows, Windows 95 und Windows NT sind eingetragene
+MS-DOS, Windows, Windows~95 und Windows~NT sind eingetragene
 Warenzeichen der Microsoft Corporation.
 
 Unix ist ein eingetragenes Warenzeichen von X/Open Company Ltd.
 
+Linux ist ein eingetragenes Warenzeichen von Linus Torvalds.
+
+SUSE und Yast sind eingetragene Warenzeichen der SUSE AG.
+
+Andere, in dieser Dokumentation genannte Produkte können eingetragene Warenzeichen
+ihrer jeweiligen Hersteller sein.
 !endif
 # ------------------------------------------------------------------------------
 !iflang [english]
@@ -1003,10 +856,16 @@ Digital Research.
 Mac, Macintosh and MacOS are registered trademarks of Apple Computer
 Inc.
 
-MS-DOS, Windows, Windows 95 and Windows NT are registered trademarks of
+MS-DOS, Windows, Windows~95 and Windows~NT are registered trademarks of
 Microsoft Corporation.
 
 Unix is a registered trademark of X/Open Company Ltd.
+
+Linux is a registered trademark of Linus Torvalds.
+
+SUSE and Yast are registered trademarks of the SUSE AG.
+
+Other products mentioned in this documentation may be registered trademarks of their manufacturers.
 !endif
 
 !end_node
