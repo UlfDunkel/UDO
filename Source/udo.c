@@ -5056,9 +5056,9 @@ GLOBAL void str2tok ( char *s )
 		tok= strtok(NULL, sep);
 	}
 
-	if (token_counter<MAX_TOKENS) /* [vj] new in v6.3.7: warning if tokens exceeded */
+	if (token_counter>=MAX_TOKENS) /* [vj] new in v6.3.7: warning if tokens exceeded */
 	{
-		loglnposprintf("Error", "str2tok: maximum token number exceeded");
+		loglnposprintf("Error", "str2tok: maximum token number exceeded without further checking");
 	}
 }	/*str2tok*/
 
