@@ -3934,7 +3934,7 @@ LOCAL void set_inside_node1 ( void )
 LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 {
 	char 	n[512], name[512], stgname[512], numbers[512], nameNoSty[512];
-	char	map[64], sGifSize[80];
+	char	map[64], sGifSize[80], nodename[512];
 	int		ti, chapter, nr1;
 	BOOLEAN	flag;
 	BOOLEAN	do_index;
@@ -4209,7 +4209,11 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 				voutlnf("%d changeFontSize", laydat.node1size);
 			}
 			node2postscript(name, KPS_NAMEDEST); /* Changed in r6pl16 [NHz] */
-			voutlnf("/NodeName (%s %.*s) def", lang.chapter, (int)(75L-strlen(titdat.author)), n); /* Changed in r6pl16 [NHz] */
+			/* Changed: Fixed bug #0000040 in r6.3pl16 [NHz] */
+			um_strcpy(nodename, n, 511, "make_node TOKPS");
+			node2postscript(nodename, KPS_NODENAME);
+			voutlnf("/NodeName (%s %s) def", lang.chapter, nodename);
+/*			voutlnf("/NodeName (%s %.*s) def", lang.chapter, (int)(75L-strlen(titdat.author)), n); /* Changed in r6pl16 [NHz] */*/
 			outln("newline");
 			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
 			outln("Bon");
