@@ -1,5 +1,5 @@
 # doc/manual/source/syntax.ui
-# letzte Änderungen: 12.01.2004 / last changes: Jan 12, 2004
+# letzte Änderungen: 14.01.2004 / last changes: Jan 14, 2004
 
 
 ################################################################################
@@ -3377,11 +3377,38 @@ Zeichensätzen erstellt wurden. Und um es richtig komfortabel zu machen,
 können Quelltexte sogar aus einem Mischmasch von benutzten
 Zeichensätzen bestehen.
 
-Sie müssen UDO lediglich mit Befehlen mitteilen, mit welchem
-Zeichensatz die folgenden Zeilen erstellt wurden. Folgende Befehle
-stehen zur Verfügung, in den Klammern sehen Sie die Bezeichnung des
-jeweiligen Zeichensatzes:
+Sie müssen UDO lediglich mittels (!T)!/code [(!CODE)](!t) mitteilen, mit welchem
+Zeichensatz die folgenden Zeilen erstellt wurden.
 
+Hier eine Übersicht, welches Kürzel für den Zeichensatz benutzt werden kann:
+
+!index (!kw [code])
+!index DOS-Zeichensatz
+!index Zeichensatz !! DOS
+!index OS/2-Zeichensatz
+!index Zeichensatz !! OS/2
+!index HP-Roman-8-Zeichensatz
+!index Zeichensatz !! HP-Roman-
+!index ANSI-Zeichensatz
+!index ISO-Latin1-Zeichensatz
+!index Windows-Zeichensatz
+!index Zeichensatz !! ANSI
+!index Zeichensatz !! ISO Latin 1
+!index Zeichensatz !! Windows
+!index Macintosh-Zeichensatz
+!index Zeichensatz !! Macintosh
+!index Atari-Zeichensatz
+!index Zeichensatz !! Atari
+!index NeXT-Zeichensatz
+!index Zeichensatz !! NeXT
+
+!include charsets.ui
+
+!begin_ignore
+# auskommentiert 14.01.2003 - Ulrich Kretschmer (stattdessen include-Datei)
+
+Folgende Befehle stehen zur Verfügung, in den Klammern sehen Sie die Bezeichnung des
+jeweiligen Zeichensatzes:
 !begin_xlist [code [dos:!]] !short
 
 !index DOS-Zeichensatz
@@ -3431,6 +3458,7 @@ Atari ST
 NeXT
 
 !end_xlist
+!end_ignore
 
 !smallskip
 
@@ -3461,9 +3489,8 @@ sollten dann auf die Verwendung dieser Zeichen verzichten.
 
 (!HINT)
 
-Es kann durchaus sein, daß mir das eine oder andere Zeichen ""durch die
-Lappen"" gegangen ist oder Zeichen falsch umgesetzt werden. Sollten Sie
-auf solche Zeichen stoßen, so melden Sie (!link [mir] [Kontaktadresse]) dies bitte unverzüglich.
+Es kann durchaus sein, daß das eine oder andere Zeichen fehlt oder Zeichen falsch umgesetzt werden.
+Sollten Sie auf solche Zeichen stoßen, so (!link [melden] [Kontaktadresse]) Sie dies bitte unverzüglich.
 Vielen Dank!
 
 !endif
@@ -3482,8 +3509,34 @@ computer UDO will expect the TOS character set by default.
 
 But UDO can manage file that are written with another character set, too.
 You have simply to tell UDO which character set your source file uses with
-the following commands:
+(!T)!/code [(!CODE)](!t).
 
+Below is an overview of the character sets UDO knows about:
+
+!index DOS character set
+!index Character set !! DOS
+!index OS/2 character set
+!index Character set !! OS/2
+!index HP-Roman-8 character set
+!index Character set !! HP-Roman-8
+!index ANSI character sect
+!index ISO-Latin1 character set
+!index Windows character set
+!index Character set !! ANSI
+!index Character set !! ISO Latin 1
+!index Character set !! Windows
+!index Macintosh character set
+!index Character set !! Macintosh
+!index Atari character set
+!index Character set !! Atari
+!index NeXT character set
+!index Character set !! NeXT
+
+!include charsets.ui
+
+# the following commands:
+
+!begin_ignore
 !begin_xlist [code [dos:!]] !short
 
 !index DOS character set
@@ -3533,6 +3586,7 @@ Atari ST
 NeXT
 
 !end_xlist
+!end_ignore
 
 !smallskip
 
@@ -3554,8 +3608,8 @@ error message.
 
 (!HINT)
 
-If I've forgotten any character or a character is converted in
-a wrong way please send a bug report!
+If any character was forgotten or a character is converted in
+a wrong way please (!link [send a bug report] [Contact addresses])!
 !endif
 
 !end_node
