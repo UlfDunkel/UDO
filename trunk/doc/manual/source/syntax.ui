@@ -1,5 +1,5 @@
 # doc/manual/source/syntax.ui
-# letzte Änderungen: 20.12.2003 / last changes: Dec 20, 2003
+# letzte Änderungen: 12.01.2004 / last changes: Jan 12, 2004
 
 
 ################################################################################
@@ -2429,8 +2429,8 @@ Steht eine linedraw-Umgebung allerdings in einer anderen Umgebung, so
 wird der vorformatierte Text zusätzlich eingerückt.
 
 Bei Nicht-RTF-Formaten wird auf den DOS-Zeichensatz umgeschaltet,
-bei RTF wird der Zeichensatz ""MS Linedraw"" benutzt.
-Bei der Ausgabe ins (!LaTeX)-Format werden die Befehle
+bei RTF wird der Zeichensatz ""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm])""
+benutzt. Bei der Ausgabe ins (!LaTeX)-Format werden die Befehle
 (!V)\begin{verbatim}(!v) und (!V)\end{verbatim}(!v) ausgegeben, bei den
 anderen Formaten wird (falls nötig) ein nichtproportionaler Font
 eingestellt und Sonderzeichen automatisch angepaßt.
@@ -2479,8 +2479,8 @@ No UDO commands(!N)except
 (!KW [end_linedraw])(!n) or placeholders will be converted. Text
 inside this environment will be indented like normal text.
 
-When converting into RTF the font ""MS Linedraw"" will be used,
-other formats will use the DOS character set.
+When converting into RTF, the font ""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm])""
+will be used, other formats will use the DOS character set.
 When converting into (!LaTeX) the commands of UDO will be just
 replaced by the (!LaTeX) commands (!V)\begin{verbatim}(!v) and
 (!V)\end{verbatim}(!v). When converting to another format UDO adjusts
