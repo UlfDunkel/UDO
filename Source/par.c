@@ -992,6 +992,12 @@ LOCAL BOOLEAN convert_link_ps ( char *s, const char *p0, char *p1, char *p2, con
 		}
 		replace_udo_quotes(p2);	/* r6pl2 */
 		replace_udo_quotes(p1);	/* r6pl2 */
+		/* Changed in V6.5.3 [NHz] */
+		replace_all(p1, "(", "\\(");
+		replace_all(p1, ")", "\\)");
+		c_vars(p1);
+		qreplace_all(p1, KPSPC_S, KPSPC_S_LEN, ")", 1);
+		qreplace_all(p1, KPSPO_S, KPSPO_S_LEN, "(", 1);
 		sprintf(s_entry, ") udoshow (%s) /%s 0 255 0 Link (", p1, p2);
 	}
 
@@ -1296,6 +1302,11 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 					}
 					replace_udo_quotes(Param[2]);
 					replace_udo_quotes(Param[1]);
+					/* Changed in V6.5.5 [NHz] */
+					c_divis(Param[1]);
+					c_vars(Param[1]);
+					replace_all(Param[1], KPSPO_S, "(");
+					replace_all(Param[1], KPSPC_S, ")");
 					sprintf(s_entry, ") udoshow (%s) (%s) 0 0 255 WebLink (", Param[1], Param[2]);
    				linkerror= !insert_placeholder(s, Param[0], s_entry, Param[1]);
 					break;
@@ -1670,6 +1681,10 @@ LOCAL void c_ilink ( char *s, const BOOLEAN inside_b4_macro )
 				break;
 			case TOTVH:
 				linkerror= !convert_link_tvh(s, Param[0], Param[2], Param[3]);
+				break;
+			/* New in V6.5.5 [NHz] */
+			case TOKPS:
+				linkerror= !convert_link_ps(s, Param[0], Param[2], Param[3], link);
 				break;
 			default:
 				linkerror= !convert_link_etc(s, Param[0], Param[2], Param[3], link);
@@ -2735,6 +2750,14 @@ LOCAL void c_internal_image ( char *s, const BOOLEAN inside_b4_macro )
 			/* New in r6.3pl3 [NHz] */
 			case TORTF:
 				strcpy(s_entry, "");
+				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
+				break;
+			/* New in V6.5.5 [NHz] */
+			case TOKPS:
+				strcpy(s_entry, Param[2]);
+				c_vars(s_entry);
+				replace_all(s_entry, KPSPC_S, ")");
+				replace_all(s_entry, KPSPO_S, "(");
 				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
 				break;
 			default:

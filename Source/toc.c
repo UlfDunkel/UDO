@@ -4283,10 +4283,11 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 			um_strcpy(nodename, n, 511, "make_node TOKPS");
 			node2postscript(nodename, KPS_NODENAME);
 			voutlnf("/NodeName (%s %s) def", lang.chapter, nodename);
-/*			voutlnf("/NodeName (%s %.*s) def", lang.chapter, (int)(75L-strlen(titdat.author)), n);*/
 			outln("newline");
 			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
 			outln("Bon");
+			/* Changed in V6.5.5 [NHz] */
+			node2postscript(n, KPS_CONTENT);
 			voutlnf("(%s) udoshow", n);
 			outln("Boff");
 			outln("newline");
@@ -4794,6 +4795,8 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 			node2postscript(name, KPS_NAMEDEST); /* Changed in r6pl16 [NHz] */
 			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
 			outln("Bon");
+			/* New in V6.5.5 [NHz] */
+			node2postscript(n, KPS_CONTENT);
 			voutlnf("(%s) udoshow", n);
 			outln("Boff");
 			outln("newline");
@@ -5250,6 +5253,8 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			node2postscript(name, KPS_NAMEDEST); /* Changed in r6pl16 [NHz] */
 			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
 			outln("Bon");
+			/* New in V6.5.5 [NHz] */
+			node2postscript(n, KPS_CONTENT);
 			voutlnf("(%s) udoshow", n);
 			outln("Boff");
 			outln("newline");
@@ -5708,6 +5713,8 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
 			outln("newline");
 			outln("Bon");
+			/* New in V6.5.5 [NHz] */
+			node2postscript(n, KPS_CONTENT);
 			voutlnf("(%s) udoshow", n);
 			outln("Boff");
 			outln("newline");

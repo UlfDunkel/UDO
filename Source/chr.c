@@ -1403,10 +1403,18 @@ GLOBAL void node2postscript ( char *s, int text )
 					s[79L-strlen(titdat.author)] = EOS;
 				strcat(s, "...\0");
 			}
+			/* Changed in V6.5.5 [NHz] */
+			qreplace_all(s, "(", 1, "\\(", 2);
+			qreplace_all(s, ")", 1, "\\)", 2);
 			break;
 		
 		case KPS_CONTENT:
 			qreplace_all(s, "/", 1, "\\/", 2);
+			/* Changed in V6.5.5 [NHz] */
+			qreplace_all(s, "(", 1, "\\(", 2);
+			qreplace_all(s, ")", 1, "\\)", 2);
+			qreplace_all(s, "[", 1, "\\[", 2);
+			qreplace_all(s, "]", 1, "\\]", 2);
 			break;
 
 		case KPS_BOOKMARK:
@@ -1417,6 +1425,11 @@ GLOBAL void node2postscript ( char *s, int text )
 					s[31] = EOS;
 			}
 			qreplace_all(s, "/", 1, "\\/", 2);
+			/* Changed in V6.5.5 [NHz] */
+			qreplace_all(s, "(", 1, "\\(", 2);
+			qreplace_all(s, ")", 1, "\\)", 2);
+			qreplace_all(s, "[", 1, "\\[", 2);
+			qreplace_all(s, "]", 1, "\\]", 2);
 			break;
 		
 		case KPS_NAMEDEST:
@@ -1790,15 +1803,16 @@ LOCAL void specials2html ( char *s )
 	------------------------------------------------------------	*/
 LOCAL void specials2ps ( char *s )
 {
-	qreplace_all(s, "!..", 3, " ) udoshow ellipsis ( ", 22);
-
-	
 	qreplace_all(s, "(---)", 5, TEMPO_S, TEMPO_S_LEN);
 	qreplace_all(s, "(--)", 4, TEMPO_S2, TEMPO_S2_LEN);
 	qreplace_all(s, "---", 3, "\\075", 4);
 	qreplace_all(s, "--", 2, "\\262", 4);
 	qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "---", 3);
 	qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "--", 2);
+
+	/* Changed in V6.5.5 [NHz] */
+	qreplace_all(s, "!..", 3, "\033\007\004\033 udoshow /ellipsis glyphshow \033\007\003\033 ", 38);
+	qreplace_all(s, COPY_S, COPY_S_LEN, "\\251", 4);
 }
 
 /*	------------------------------------------------------------
@@ -2059,14 +2073,32 @@ GLOBAL void c_vars ( char *s )
 			qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "&quot;&quot;", 12);
 			qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
 			break;
-		/* New in r6pl16 [NHz] */
+		/* Changed in V6.5.5 [NHz] */
 		case TOKPS:
-			{	switch (destlang)
-				{	case TOGER:	c_quotes_apostrophes(s, ") udoshow /quotesinglbase glyphshow (", ") udoshow /quoteleft glyphshow ( ", ") udoshow /quotedblbase glyphshow (", ") udoshow /quotedblleft glyphshow ( ");	break;
-					case TOFRA:	c_quotes_apostrophes(s, ") udoshow /guilsinglleft glyphshow (", ") udoshow /guilsinglright glyphshow ( ", "\\253", "\\273");	break;
-					case TONOR:	c_quotes_apostrophes(s, "\\<", "\\>", "\\\\\\(", "\\\\\\(");	break;
-					default:	c_quotes_apostrophes(s, ") udoshow /quotesingle glyphshow (", ") udoshow /quotesingle glyphshow (", "\\042", "\\042");	break;
+			{	char aon[512], aoff[512], qon[512], qoff[512];
+				switch (destlang)
+				{	case TOGER:	sprintf(aon,  "%s udoshow /quotesinglbase glyphshow %s", KPSPC_S, KPSPO_S);
+											sprintf(aoff, "%s udoshow /quoteleft glyphshow %s ", KPSPC_S, KPSPO_S);
+											sprintf(qon,  "%s udoshow /quotedblbase glyphshow %s", KPSPC_S, KPSPO_S);
+											sprintf(qoff, "%s udoshow /quotedblleft glyphshow %s ", KPSPC_S, KPSPO_S);
+											break;
+					case TOFRA:	sprintf(aon,  "%s udoshow /guilsinglleft glyphshow %s", KPSPC_S, KPSPO_S);
+											sprintf(aoff, "%s udoshow /guilsinglright glyphshow %s ", KPSPC_S, KPSPO_S);
+											sprintf(qon,  "\\253");
+											sprintf(qoff, "\\273");
+											break;
+					case TONOR:	sprintf(aon,  "\\<");
+											sprintf(aoff, "\\>");
+											sprintf(qon,  "\\\\\\(");
+											sprintf(qoff, "\\\\\\)");
+											break;
+					default:		sprintf(aon,  "%s udoshow /quotesingle glyphshow %s", KPSPC_S, KPSPO_S);
+											sprintf(aoff, "%s udoshow /quotesingle glyphshow %s ", KPSPC_S, KPSPO_S);
+											sprintf(qon,  "\\042");
+											sprintf(qoff, "\\042");
+											break;
 				}
+				c_quotes_apostrophes(s, aon, aoff, qon, qoff);
 			}
 			qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "\"\"", 2);
 			qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
@@ -2130,8 +2162,9 @@ GLOBAL void c_vars ( char *s )
 /*			qreplace_all(s, "\\(--\\)", 6, "--", 2);*/
 			/* For future use, but commented because of some problems */
 
-			/* specials2ps(s);*/
-			specials2ascii(s);
+			/* Changed in V6.5.5 [NHz] */
+			specials2ps(s);
+			/*specials2ascii(s);*/
 			texvar2ascii(s);
 			break;
 		case TOASC:
@@ -2755,13 +2788,14 @@ GLOBAL void auto_quote_chars ( char *s, BOOLEAN all )
 				{
 					LOCAL QUOTEINFO const ps7bit[]=
 					{
-						/* New: Fixed Bug #0000040 in r6.3pl16 [NHz] */
-						{	'[',		"\\["	},
+						/* Changed in V6.5.5 [NHz] */
+/*						{	'[',		"\\["	},
 						{	']',		"\\]"	},
 
 						{	'(',		"\\("	},
 						{	')',		"\\)"	},
-						{	'\\',		"\\\\"	}
+						{	'\\',		"\\\\"	}*/
+						{	'',		""	}
 					};
 					
 					for (i=0; i<sizeof(ps7bit)/sizeof(ps7bit[0]); i++)
