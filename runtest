@@ -1,0 +1,5 @@
+#!/bin/bash
+cd ./input/bergpano/
+chmod 700 bergpano
+chmod 700 debug
+cd ../..
