@@ -737,6 +737,10 @@ int main ( int argc, const char *argv[] )
 	char	nam[32], *ptr;
 	BOOLEAN cliok;
 
+        /* One of the first things to do: init UDO memory management,
+        else um_malloc can not be called. */
+        init_um();
+
 	/* ---Programmnamen ermitteln--- */
 #ifdef __TOS__
 	Pdomain(1);
@@ -754,7 +758,7 @@ int main ( int argc, const char *argv[] )
 	init_module_config("udo.ini", nam, UDO_OS);
 #endif
 	read_profile();
-	
+
 	outfile.file= stdout;
 	infile.file= stdin;
 
@@ -783,11 +787,11 @@ int main ( int argc, const char *argv[] )
 	bShowHelp = FALSE;
 	bShowIdent = FALSE;
 	last_percent = -1;
-	
+
 	outfile.full[0]= EOS;
 	infile.full[0]= EOS;
 	sLogfull[0]= EOS;
-	
+
 	no_stderr_output= FALSE;		/* r5pl9 */
 
 	if ( (ptr=getenv("LANG"))!=NULL )
@@ -801,7 +805,7 @@ int main ( int argc, const char *argv[] )
 		{	eLanguage=DEUTSCH;
 		}
 	}
-	
+
 	if ( (ptr=getenv("LC_MESSAGES"))!=NULL )
 	{	if ( strstr(ptr, "german") )
 		{	eLanguage=DEUTSCH;
@@ -849,7 +853,7 @@ int main ( int argc, const char *argv[] )
 		else
 		{
 			fsplit(infile.full, infile.driv, infile.path, infile.name, infile.suff);
-	
+
 			if (outfile.full[0]!=EOS)
 			{	fsplit(outfile.full, outfile.driv, outfile.path, outfile.name, outfile.suff);
 				if ( strcmp(outfile.name, "!")==0 )
@@ -863,20 +867,19 @@ int main ( int argc, const char *argv[] )
 			{	bNoLogfile= TRUE;
 				bNoHypfile= TRUE;
 			}
-	
+
 			if (desttype==TOUDO)
 			{
 				udo2udo(infile.full);
 			}
 			else
-			{	
+			{
 				udo(infile.full);	/* <???> informativeren Exitcode ermitteln */
 			}
 		}
 	}
-		
-	/* Added Debug information of Memory Management */
-	printf("Memory statistic: %d malloc, %d free\n", um_malloc_count, um_free_count);
+
+	exit_um(); /* Call memory management to clean up memory allocated */
 
 	wait_on_keypress();
 	
