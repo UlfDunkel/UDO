@@ -43,7 +43,7 @@
 #define	CFG_MAX_SYMBOL		8
 #define	CFG_MAX_SYMBOL_LEN	32
 
-typedef struct
+typedef struct _appcfg
 {
 	char	strApp[CFG_MAX_FILE_LEN+1];
 	char	strOpt[CFG_MAX_OPT_LEN+1];
@@ -51,7 +51,7 @@ typedef struct
 	BOOLEAN	bTos;
 }	APPCFG;
 
-typedef struct
+typedef struct _config
 {
 	BOOLEAN	bRegistered;
 	char	strUserName[CFG_MAX_USER_LEN+1];

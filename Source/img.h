@@ -27,7 +27,7 @@
 #ifndef UDO_IMG_H
 #define	UDO_IMG_H
 
-typedef struct
+typedef struct _imgheader
 {
 	unsigned char	im_version[2];
 	unsigned char	im_headerlength[2]; /* Laenge des Headers in Words */
@@ -44,7 +44,7 @@ typedef struct
 } IMGHEADER;
 
 
-typedef struct
+typedef struct _bmpheader
 {
 	unsigned char	bfType[2];			/*  0 */	/* File ID ('BM') */
 	unsigned char	bfSize[4];			/*  2 */	/* File size */
@@ -65,7 +65,7 @@ typedef struct
 } BMPHEADER;
 
 
-typedef struct
+typedef struct _mspheader
 {
 	unsigned char	msp_res[4];		/*  0 */	/* Magic 'LinS' */
 	unsigned char	msp_width_lo;	/*  4 */	/* Breite */
@@ -75,7 +75,7 @@ typedef struct
 } MSPHEADER;
 
 
-typedef struct
+typedef struct _pcxheader
 {
 	unsigned char	pcx_res[4];		/*  0 */
 	unsigned char	pcx_left_lo;	unsigned char	pcx_left_hi;
@@ -85,7 +85,7 @@ typedef struct
 } PCXHEADER;
 
 
-typedef struct
+typedef struct _gifheader
 {
 	unsigned char	gif_signature[3];	/* GIF */
 	unsigned char	gif_version[3];		/* 87a oder 89a */
@@ -96,13 +96,13 @@ typedef struct
 } GIFHEADER;
 
 
-typedef struct
+typedef struct _jpgheader
 {
 	unsigned char	jpg_unknown[2];		/* ??? */
 } JPGHEADER;
 
 
-typedef struct
+typedef struct _pngheader
 {
 	unsigned char	png_res1[1];		/* 0x89 */
 	unsigned char	png_signature[3];	/* PNG */

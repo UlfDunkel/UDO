@@ -86,14 +86,14 @@ LOCAL int getcliopt ( int *counter, const char *arg, const char *argnext, const 
 /*	############################################################
 	# Optionen
 	############################################################	*/
-typedef struct
+typedef struct _cliopt
 {
-	const char		longname[16];	/* lange Option								*/
-	const char		shortname[6];	/* kurze Option								*/
-	const char		type;			/* Typ: b=Boolean, c=char[]					*/
-	const BOOLEAN	needs2;			/* folgt der Option ein Parameter?			*/
+	char		longname[16];		/* lange Option								*/
+	char		shortname[6];		/* kurze Option								*/
+	char		type;				/* Typ: b=Boolean, c=char[]					*/
+	BOOLEAN	needs2;					/* folgt der Option ein Parameter?			*/
 	void			*var;			/* Variable, die geaendert wird				*/
-	const int		val;			/* Wert, der bei Benutzung zugewiesen wird	*/
+	int			val;				/* Wert, der bei Benutzung zugewiesen wird	*/
 }	CLIOPT;
 
 

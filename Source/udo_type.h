@@ -28,7 +28,7 @@
 /*	--------------------------------------------------
 	diverse Flags fuer pass1() und pass2()
 	--------------------------------------------------	*/
-typedef struct
+typedef struct _passflags
 {
 	BOOLEAN	inside_apx;			/* !begin_appendix aktiv?	*/
 
@@ -43,7 +43,7 @@ typedef struct
 /*	--------------------------------------------------
 	Sprachstrings
 	--------------------------------------------------	*/
-typedef struct
+typedef struct _lang
 {
 	char	preface[32];			/* Vorwort					*/
 	char	chapter[32];			/* Kapitel					*/
@@ -88,7 +88,7 @@ typedef struct
 #define	MYFILE_NAME_LEN	256
 #define	MYFILE_SUFF_LEN	32
 
-typedef struct
+typedef struct _myfile
 {
 	FILE	*file;						/* Stream					*/
 	char	full[MYFILE_FULL_LEN+1];	/* Kompletter Zugriffspfad	*/

@@ -9861,7 +9861,7 @@ GLOBAL void toc_end_node (void)
 	#	Dateien mit den Jump-IDs ausgeben fuer C und Pascal
 	#
 	############################################################	*/
-typedef struct
+typedef struct _tWinMapData
 {
 	char remOn[16], remOff[16];
 	char cmd[32];					/* #define			const		*/

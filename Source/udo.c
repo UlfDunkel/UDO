@@ -176,7 +176,7 @@ LOCAL char	sFileNames[MAXFILECOUNTER][512+1];	/* Namen geoeffneter Files		*/
 #define	IF_SET		4
 #define	IF_OS		5
 
-typedef struct
+typedef struct _if_stack_item
 {	int		kind;
 	BOOLEAN	ignore;
 	char	filename[512];
@@ -194,23 +194,23 @@ LOCAL long		lPass1Lines, lPass2Lines;			/* fuer die Prozentangabe */
 
 /*	------------------------------------------------------------------------	*/
 
-typedef struct hyplist_struct
+typedef struct _hyplist
 {
 	char	data[128];
-	struct hyplist_struct	*next;
+	struct _hyplist	*next;
 }	HYPLIST;
 
 LOCAL HYPLIST *hyplist;
 
 /*	------------------------------------------------------------------------	*/
 
-typedef struct idxlist_struct
+typedef struct _idxlist
 {
 	char	letter;						/* Hier soll der Eintrag einsortiert werden */
 	int		depth;						/* Indextiefe: 1, 2 oder 3 */
 	char	chapter[MAX_NODE_LEN+1];	/* In diesem Kapitel gesetzt */
 	char	idx[3][128];				/* Die Index-Daten */
-	struct idxlist_struct	*next;
+	struct _idxlist	*next;
 }	IDXLIST;
 
 LOCAL IDXLIST *idxlist;
@@ -241,12 +241,12 @@ LOCAL IDXLIST *idxlist;
 
 typedef	void (*CMDPROC)(void);
 
-typedef struct					/* ---- Funktionentabelle ----		*/
-{	const char		magic[30];	/* UDO-Kommando						*/
-	const char		macut[8];	/* Shortcut des Kommandos			*/
-	const CMDPROC	proc;		/* zugehoerige Routine				*/
-	const BOOLEAN	reset;		/* Tokens danach loeschen?			*/
-	const int		pos;		/* Erlaubnis Vorspann/Hauptteil		*/
+typedef struct _udocommand		/* ---- Funktionentabelle ----		*/
+{	char		magic[30];	/* UDO-Kommando						*/
+	char		macut[8];	/* Shortcut des Kommandos			*/
+	CMDPROC	proc;			/* zugehoerige Routine				*/
+	BOOLEAN	reset;			/* Tokens danach loeschen?			*/
+	int		pos;			/* Erlaubnis Vorspann/Hauptteil		*/
 }	UDOCOMMAND;
 
 LOCAL const UDOCOMMAND udoCmdSeq[]=
@@ -535,9 +535,9 @@ LOCAL const UDOSWITCH udoswitch[MAXSWITCH+1]=
 };
 
 
-typedef struct					/* ---- Sprachentabelle ----	*/
-{	const char	magic[25];		/* UDO-Kommando					*/
-	const int	langval;		/* zugehoerige Sprache			*/
+typedef struct _udolanguage		/* ---- Sprachentabelle ----	*/
+{	char	magic[25];		/* UDO-Kommando					*/
+	int	langval;			/* zugehoerige Sprache			*/
 }	UDOLANGUAGE;
 
 #define	MAXLANGUAGE	7
@@ -555,9 +555,9 @@ LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE]=
 
 
 
-typedef struct					/* ---- Zeichensatztabelle ----	*/
-{	const char	magic[16];		/* code-Parameter				*/
-	const int	codepage;		/* zugehoeriger Zeichensatz		*/
+typedef struct _udocharset		/* ---- Zeichensatztabelle ----	*/
+{	char	magic[16];			/* code-Parameter				*/
+	int	codepage;				/* zugehoeriger Zeichensatz		*/
 }	UDOCHARSET;
 
 #define	MAXCHARSET	15
@@ -1108,14 +1108,14 @@ LOCAL BOOLEAN str_for_os ( const char *s )
 	#
 	############################################################	*/
 
-typedef struct
-{	const int val;
-	const char name[20];
-	const char html[8];
-	const char drc[3];
-	const char wintext[32];
-	const char winback[32];
-	const char wh4back[32];
+typedef struct _udocolor
+{	int val;
+	char name[20];
+	char html[8];
+	char drc[3];
+	char wintext[32];
+	char winback[32];
+	char wh4back[32];
 }	UDOCOLOR;
 
 #define	MAX_UDOCOLOR	17

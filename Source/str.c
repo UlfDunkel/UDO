@@ -415,35 +415,35 @@ GLOBAL int qreplace_all (	char *source,
 	# Loeschen von Strings
 	#
 	############################################################	*/
-GLOBAL int delete_once ( char *source, const char *delete )
+GLOBAL int delete_once ( char *source, const char *to_delete )
 {
-	return(replace_once (source, delete, ""));
+	return(replace_once (source, to_delete, ""));
 }
 
-GLOBAL int delete_last ( char *source, const char *delete )
+GLOBAL int delete_last ( char *source, const char *to_delete )
 {
-	return(replace_last (source, delete, ""));
+	return(replace_last (source, to_delete, ""));
 }
 
-GLOBAL int delete_all ( char *source, const char *delete )
+GLOBAL int delete_all ( char *source, const char *to_delete )
 {
-	return(replace_all (source, delete, ""));
+	return(replace_all (source, to_delete, ""));
 }
 
 
-GLOBAL int qdelete_once ( char *source, const char *delete, const size_t dlen )
+GLOBAL int qdelete_once ( char *source, const char *to_delete, const size_t dlen )
 {
-	return ( qreplace_once (source, delete, dlen, "", 0) );
+	return ( qreplace_once (source, to_delete, dlen, "", 0) );
 }
 
-GLOBAL int qdelete_last ( char *source, const char *delete, const size_t dlen )
+GLOBAL int qdelete_last ( char *source, const char *to_delete, const size_t dlen )
 {
-	return ( qreplace_last (source, delete, dlen, "", 0) );
+	return ( qreplace_last (source, to_delete, dlen, "", 0) );
 }
 
-GLOBAL int qdelete_all ( char *source, const char *delete, const size_t dlen )
+GLOBAL int qdelete_all ( char *source, const char *to_delete, const size_t dlen )
 {
-	return ( qreplace_all (source, delete, dlen, "", 0) );
+	return ( qreplace_all (source, to_delete, dlen, "", 0) );
 }
 
 

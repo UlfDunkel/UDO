@@ -46,11 +46,11 @@ const char *id_cfg_c= "@(#) cfg.c       17.04.1998";
 	# lokale Variablen
 	############################################################	*/
 
-typedef struct
-{	const char		key[32];
-	const char		type;
-	void			*val;	/* nicht const, da gecastet wird */
-	const size_t	maxlen;
+typedef struct _profile
+{	char		key[32];
+	char		type;
+	void		*val;	/* nicht const, da gecastet wird */
+	size_t	maxlen;
 }	PROFILE;
 
 LOCAL const PROFILE profile[]=

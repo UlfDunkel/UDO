@@ -45,7 +45,7 @@ const char *id_charset_h= "@(#) chr_iso.h   16.07.1998";
 	# in chars.c nicht unnoetige Abfragen erfolgen muessen.
 	############################################################	*/
 
-typedef struct
+typedef struct _iso2sys
 {	unsigned char	iso;
 	unsigned char	sys;
 }	ISO2SYS;
@@ -189,9 +189,9 @@ LOCAL const ISO2SYS iso2sys_item[128]=
 	# Systemzeichensatz in andere Zeichensaetze umwandeln
 	############################################################	*/
 
-typedef struct
+typedef struct _chartable
 {
-	const unsigned char	system;
+	unsigned char	system;
 	char ascii[16];
 	char ansi[16];
 	char tex[16];
@@ -336,10 +336,10 @@ LOCAL /*const*/ CHARTABLE chrtab[128]=
 /*	############################################################
 	# universellen Zeichensatz in ASCII-Zeichensatz umsetzen
 	############################################################	*/
-typedef struct
+typedef struct _uni2systab
 {
-	const char			uni[8];
-	const unsigned char	system[2];
+	char			uni[8];
+	unsigned char	system[2];
 }	UNI2SYSTAB;
 
 #define	UNI2SYSTABSIZE	64

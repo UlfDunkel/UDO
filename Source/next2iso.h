@@ -33,7 +33,7 @@ const char *id_next2iso_h= "@(#) next2iso.h  10.02.1996";
 #endif
 
 
-typedef struct
+typedef struct _next2iso
 {	unsigned char	next;
 	unsigned char	iso;
 }	NEXT2ISO;

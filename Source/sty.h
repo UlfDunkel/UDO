@@ -30,7 +30,7 @@
 /*	--------------------------------------------------
 	diverse Flags fuer die Stilueberpruefung
 	--------------------------------------------------	*/
-typedef struct
+typedef struct _styleflag
 {
 	BOOLEAN bold;
 	BOOLEAN	footnote;

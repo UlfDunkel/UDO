@@ -32,7 +32,7 @@ const char *id_tos2iso_h= "@(#) tos2iso.h   11.07.1996";
 #endif
 
 
-typedef struct
+typedef struct _tos2iso
 {
 	unsigned char	tos;
 	unsigned char	iso;

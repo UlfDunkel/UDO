@@ -33,7 +33,7 @@ const char *id_ansi2dos_h= "@(#) ansi2dos.h  14.10.1996";
 #endif
 
 
-typedef struct
+typedef struct _ansi2dos
 {
 	unsigned char	ansi;
 	unsigned char	dos;

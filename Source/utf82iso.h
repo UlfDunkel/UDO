@@ -31,7 +31,7 @@ const char *id_utf82iso_h= "@(#) utf82iso.h   01.01.1999";
 #endif
 
 
-typedef struct
+typedef struct _utf82iso
 {
 	unsigned char	utf8[3];
 	unsigned char	latin1;

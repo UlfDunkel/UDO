@@ -32,7 +32,7 @@
 /*	--------------------------------------------------
 	Titelseite
 	--------------------------------------------------	*/
-typedef struct				/* ---- Titelseiteninfos ----		*/
+typedef struct _titledata			/* ---- Titelseiteninfos ----		*/
 {
 	char	*title;					/* Titelzeile		*/
 	char	*program;				/* Programmname		*/

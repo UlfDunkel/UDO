@@ -31,7 +31,7 @@
 	--------------------------------------------------	*/
 #define	HYPHEN_LEN	128
 
-typedef struct
+typedef struct _hyphen
 {
 	char	hyphen[HYPHEN_LEN+1];	/* Wort mit Trennstrichen drin	*/
 	char	solo[HYPHEN_LEN+1];		/* gleiches Wort, aber ohne !-	*/
@@ -44,7 +44,7 @@ typedef struct
 #define	MACRO_NAME_LEN	32
 #define	MACRO_CONT_LEN	256
 
-typedef struct
+typedef struct _macros
 {
 	char	name[MACRO_NAME_LEN+1];		/* Der Name des Makros		*/
 	char	entry[MACRO_CONT_LEN+1];	/* Der Inhalt des Makros	*/
@@ -58,7 +58,7 @@ typedef struct
 #define	DEFINE_NAME_LEN	32
 #define	DEFINE_CONT_LEN	256
 
-typedef struct
+typedef struct _defs
 {
 	char name[DEFINE_NAME_LEN+1];		/* Der Name der Definition	*/
 	char entry[DEFINE_CONT_LEN+1];		/* Der Inhalt				*/
@@ -69,7 +69,7 @@ typedef struct
 /*	--------------------------------------------------
 	Allgemeiner Platzhalter
 	--------------------------------------------------	*/
-typedef struct				
+typedef struct _placeholder				
 {
 	char	magic[6];	/* Eine Steuermarke <ESC><0xB0+nr>	*/
 	char	*entry;		/* Das komplette Kommando			*/
@@ -81,7 +81,7 @@ typedef struct
 /*	--------------------------------------------------
 	Spezielle Platzhalter fuer Formatbefehle
 	--------------------------------------------------	*/
-typedef struct				
+typedef struct _speccmd
 {
 	char	magic[6];	/* Eine Steuermarke <ESC><0xB0+nr>	*/
 	char	*entry;		/* Das komplette Kommando			*/

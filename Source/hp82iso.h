@@ -30,7 +30,7 @@ const char *id_hp82iso_h= "@(#) hp82iso.h   26.06.1996";
 #endif
 
 
-typedef struct
+typedef struct _hp82iso
 {	unsigned char	hp8;
 	unsigned char	iso;
 }	HP82ISO;
