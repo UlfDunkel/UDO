@@ -414,8 +414,14 @@ GLOBAL void error_read_img ( const char *s )
 }
 
 GLOBAL void error_read_bmp ( const char *s )
-{	error_msg_para("couldn't read BMP header of <%s>", s);
-	errno_logln(s);
+{	/* Fixed bug #0000017 in V6.5.2 [NHz] */
+	if(strcmp(s, BMP_MW_NAME) == 0)
+		note_msg_solo("Image for UDO link generated (see below), please translate again to complete");
+	else
+	{
+		error_msg_para("couldn't read BMP header of <%s>", s);
+		errno_logln(s);
+	}
 }
 
 GLOBAL void error_read_pcx ( const char *s )

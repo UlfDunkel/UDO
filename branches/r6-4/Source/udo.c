@@ -458,6 +458,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!html_favicon_name",		"",			c_tunix,	TRUE,	CMD_ALWAYS	}, /* New in r6pl15 [NHz] */
 	{ "!html_button_alignment",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_switch_language",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
+	{ "!html_use_hyphenation",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	}, /* Fixed Bug #0000048 [NHz] */
 	{ "!html_transparent_buttons",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_use_folders",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!rtf_propfont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
@@ -2913,7 +2914,6 @@ LOCAL void c_subsubsubheading ( void )
 			if (inside_right)	strcpy(align, "\\qr");
 			/* Changed in r6pl16 [NHz] */
 			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, laydat.node4size, name);
-/*			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);*/
 			break;
 		case TOWIN:
 		case TOWH4:
@@ -2928,10 +2928,8 @@ LOCAL void c_subsubsubheading ( void )
 			break;
 		case TOKPS:
 			outln("newline");
-			/* Changed in r6pl16 [NHz] */
-			/* Changed in r6pl16 [NHz] */
-			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, laydat.node4size, name);
-/*			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);*/
+			/* Fixed bug #0000047 [NHz] */
+			voutlnf("%d changeFontSize", laydat.node4size);
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
 			outln("Boff");
@@ -3698,7 +3696,8 @@ GLOBAL void c_udolink ( void )
 
 		case TORTF:
 			if (!no_images)
-			{	c_bmp_output(BMP_MW_NAME, "", TRUE);
+			{	/* Fixed bug #0000017 in V6.4.1 [NHz] */
+				c_bmp_output(sBmpMwFull, "", TRUE);
 			}
 			break;
 

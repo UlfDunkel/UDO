@@ -3698,7 +3698,8 @@ GLOBAL void c_udolink ( void )
 
 		case TORTF:
 			if (!no_images)
-			{	c_bmp_output(BMP_MW_NAME, "", TRUE);
+			{	/* Fixed bug #0000017 in V6.4.1 [NHz] */
+				c_bmp_output(sBmpMwFull, "", TRUE);
 			}
 			break;
 
