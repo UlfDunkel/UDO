@@ -4,4 +4,8 @@
 !item Neu: Mit dem Kommando !/wh4_monofont kann man den Fontnamen
 für WinHelp4 (analog zu !/rtf_monofont) bestimmen.
 
+!index !/wh4_medium_compression
+!item Neu: Mit dem Kommando !/wh4_medium_compression kann man
+mittlere Kompressionsrate für WinHelp4 festlegen
+
 !end_itemize
