@@ -1997,6 +1997,7 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 	*/
 
 
+	/* New in r6pl16 [NHz] */
 	/* New in r6pl15 [NHz] */
 
 	/* Output of Link-Rel 'first' */
