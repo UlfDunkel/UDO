@@ -1047,7 +1047,7 @@ LOCAL BOOLEAN convert_link_etc ( char *s, const char *p0, char *p1, char *p2, co
 		}
 		else
 		{	if (desttype==TORTF)	/*r6pl6: die richtigen benutzen */
-			{	strcpy(lq, "\\ldblquote");
+			{	strcpy(lq, "\\ldblquote ");
 				strcpy(rq, "\\rdblquote");
 			}
 			else
