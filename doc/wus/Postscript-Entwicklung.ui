@@ -67,8 +67,8 @@ ergibt
 /PUT pdfmark
 !end_verbatim
 
-!ifndest [ps]
-!hline
-!label PS-Quelltext
-!vinclude ./postscript.ui
-!endif
+#!ifndest [ps]
+#!hline
+#!label PS-Quelltext
+#!vinclude ./postscript.ui
+#!endif
