@@ -1,0 +1,74 @@
+# doc/manual/file_id.u
+# zur Erzeugung von file_id.diz (deutsch/englisch)
+# for creating file_id.diz (german/english)
+# letzte Änderungen: 21.12.2003 / last changes: Dec 21, 2003
+
+!code [iso]
+
+!ifndest [asc]
+!error Only for ASCII
+!endif
+
+!include ../manual/source/version.ui
+
+!macro UDOR UDO(!RELEASE)
+
+!no_numbers [asc]
+!no_umlaute [asc]
+!no_effects [asc]
+
+!include ../manual/source/lang.ui
+
+!parwidth 40
+!sloppy
+
+# ggf. nach Bedarf erweitern:
+!iflang [german]
+!ifset [fordos]
+!macro DISTRIBUTION Version für MS-DOS
+!endif
+!ifset [forwin]
+!macro DISTRIBUTION Version für Windows
+!endif
+!ifset [fordoswinos2]
+!macro DISTRIBUTION Version für MS-DOS, Windows und OS/2
+!endif
+!endif
+!iflang [english]
+!ifset [fordos]
+!macro DISTRIBUTION Version for MS-DOS
+!endif
+!ifset [forwin]
+!macro DISTRIBUTION Version for Windows
+!endif
+!ifset [fordoswinos2]
+!macro DISTRIBUTION Version for MS-DOS, Windows and OS/2
+!endif
+!endif
+
+
+!begin_document
+
+!iflang [german]
+(!UDOR) vom (!DATE) (!nl)
+# was UDO tut:
+!include ../manual/source/udowork.ui
+Homepage: http://www.udo-open-source.org
+
+Lizenz: GPL
+
+(!DISTRIBUTION)
+!endif
+
+!iflang [english]
+(!UDOR) from (!DATE) (!nl)
+# what UDO does:
+!include ../manual/source/udowork.ui
+Homepage: http://www.udo-open-source.org
+
+License: GPL
+
+(!DISTRIBUTION)
+!endif
+
+!end_document

@@ -1,0 +1,2 @@
+#!/bin/sh
+udo --asc --verbose --force-long -o file_id.diz -D LANG_DE $* file_id.u
