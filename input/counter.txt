@@ -1,0 +1,10 @@
+# zuletzt geändert 07.07.2002
+
+# Parameter1 = individuelle Nr. (wird bei Counter-Anlage vergeben), Parameter2=Startdatum des Counters,
+# Parameter3 = Bereichskennung (für "alt"-Text)
+# Aufruf-Beispiel: (!bergrufcounter [2950302] [29.05.2002] [www.bergruf.de/bergcam/])
+!ifdest [html]
+!define bergrufcounter <div align=right><img src="/cgi-sys/Count.cgi?df=bergr-(!1)&dd=B&ft=0" alt="Z&auml;hler f&uuml;r (!3)">&nbsp;Aufrufe seit (!2)</div>
+ !else
+!define bergrufcounter
+!endif

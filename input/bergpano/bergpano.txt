@@ -1,0 +1,2881 @@
+# bergpano.txt
+# Zeichensatz: ANSI
+# angelegt am 02.08.2002
+# letzte Änderungen: 02.11.2003
+
+# 18./19.05.2003: alle Links komplett überprüft!
+# 01.11.2003: Linkchecker über alles laufen lassen, diverse tote Links bereinigt
+
+!set bergpano
+
+# für korrekte Pfade
+!set ebene2
+
+
+!docinfo [title] Gebirgs-Panoramen
+!docinfo [htmltitle] Gebirgs-Panoramen
+!docinfo [webmastername] http://www.bergruf.de/bergpano/
+# !docinfo [webmasteremail] <nospam>bergcam@bergruf.de</nospam>
+!docinfo [webmasterurl] ../allgemeines.html
+# !docinfo [webmasteremail] bergcam@bergruf.de
+# !docinfo [date] Letzte Aktualisierung am (!today)
+!code [iso]
+
+# !rtf_propfont Arial
+# !win_propfont Arial
+# !html_propfont_name Helvetica,Arial
+# !html_monofont_name Courier
+
+!html_backpage ../
+
+!image_alignment [left]
+!table_alignment [left]
+
+!html_backcolor white
+# !html_modern_layout
+# !html_modern_column_width 200
+# !html_frames_layout
+
+!no_numbers [html,win]
+!use_auto_subtocs [html,win] !depth 2
+!use_auto_subsubtocs [html,win] !depth 1
+!use_auto_subsubsubtocs [html,win] !depth 1
+!use_auto_toptocs [html,win]
+
+# !use_about_udo [html]
+
+# !include ../mailto.txt
+!include ../www.txt
+# !include ../gaestebuch.txt
+!include ../counter.txt
+
+# Headerzeilen für HTML einbinden
+!ifdest [html]
+!use_raw_header header.txt
+!endif
+
+# Variante vom Vorhergehenden - für Bergpanorama-Links
+# Beispiel (!pano [Name] [URL])
+!ifdest [html]
+!define ExternPano <a href="(!1)"><img src="../bilder/minicam.gif" alt="(!1)" border=0></a>
+!macro pano (!ExternPano [(!2)])~(!url [(!1)] [(!2)])
+!else
+!macro pano (!1) ((!2))
+!endif
+# Achtung, Bild ist stellenweise auch "hart" verlinkt!!
+
+#############################################################################################################
+!begin_document
+!autoref [off]
+!html_name index.html
+!html_keywords Panorama, Gebirgs-Panorama, Panoramen
+!html_description Linksammlung von Gebirgs-Panoramen (hauptsächlich Alpen)
+!maketitle
+
+Die folgenden Seiten sind als "Ableger" meiner (!url [Linksammlung zu alpinen Webcams] [../bergcam/])
+entstanden. Weitere Informationen, etwa zur (!url [Gliederung] [../bergcam/vorwort.html]), sind dort zu finden.
+# Für Mitteilungen verwenden Sie bitte das (!url [Kontaktformular] [../kontakt.html]).
+# Ulrich Kretschmer
+
+(!bergrufcounter [0848402] [08.08.2002] [www.bergruf.de/bergpano/])
+# <img src="/cgi-sys/Count.cgi?df=bergr-0848402&dd=B&ft=0&md=6">
+
+# kommt ohne Text "Inhaltsverzeichnis"
+!toc [all] !depth 1
+
+# !begin_flushright
+# siehe auch: (!Gaestebuch)
+# (!link [Link-Partner] [linkpartner]) --
+# !end_flushright
+
+
+#############################################################################################################
+!node Ostalpen
+!alias bergpano_ostalpen
+!html_name ostalpen.html
+!html_keywords Ostalpen
+!html_description Gebirgs-Panorama-Links Ostalpen
+
+
+!subnode Nördliche Ostalpen
+!html_name ostalpen-noerdlich.html
+!html_description Gebirgs-Panorama-Links Nördliche Ostalpen
+
+##############################################################################################################
+!subsubnode* (1) Bregenzer Wald {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o01
+!html_name bregenzer_wald.html
+# !html_keywords Bregenzer Wald, Panorama, Panoramen
+# !html_description Panorama-Links Bregenzer Wald
+!set o01
+!include ../material/gebiete.txt
+!unset o01
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+!begin_ignore
+# auskommentiert 18.05.2003, existiert nicht mehr
+# aktualisiert 05.05.2002, überprüft 05.08.2002:
+!item (!pano [360°-Panoramabild] [http://www.diedamskopf.at/winter/livecam/livecam.htm])
+vom (!www [Diedamskopf] [http://www.diedamskopf.at/]), bei
+Au/(!www [Schoppernau] [http://www.schoppernau.at/]), Vorarlberg
+# simple JPG-Datei mit Schieber, zylindrisch
+!end_ignore
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (2) Allgäuer Alpen
+!alias bergpano_o02
+!html_name allgaeuer_alpen.html
+!html_keywords Allgäu, Allgäuer Alpen, Tannheimer Berge, Panorama, Panoramen
+!html_description Panorama-Links Allgäuer Alpen
+!set o02
+!include ../material/gebiete.txt
+!unset o02
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 15.06.2002
+!item (!pano [Panoramen] [http://www.kanzelwandbahn.de/sommer/1_bilder.htm]) von der
+(!www [Kanzelwandbahn] [http://www.kanzelwandbahn.de/]) in Riezlern und Walmendingerhornbahn
+in Mittelberg (Kleinwalsertal) (Java erforderlich)
+# die Beschriftung "Zoom"-Plugin ist falsch, Zoom-Viewer = Java-Applet
+# jeweils 1x Sommer, 1x Winter, also 4 insgesamt
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 05.05.2002:
+!item (!pano [Panorama-Bilder] [http://www.oberstdorf.de/index.shtml?panoramen]) rund um
+(!www [Oberstdorf] [http://www.oberstdorf.de/]) (u.a. vom Nebelhorn) (Java erforderlich; alternativ
+sind die Panoramen auch als JPG-Bilder verfügbar)
+# alte URL: http://www.oberstdorf.de/de/impressionen/
+# Gästebuch: http://www.oberstdorf.de/gaestebuch.shtml
+# 05.08.2002: 4x Sommer, 2x Herbst, 4x Winter
+# basiert auf Zoom-Viewer (Java-Applet); Netscape schmiert damit z.T. ab
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 28.09.2002
+!item (!pano [Gipfelpanorama] [http://www.bergsucht.de/galerie/trettach_images/image03.htm])
+von der Trettachspitze (von (!www [Samuel Brüggemeier] [http://www.bergsucht.de/]))
+# JPG-Bild, ohne Java
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 06.10.2002
+!item (!pano [Panoramen] [http://www.Tourplaner-Online.de/panoramenu.html#allgaeu]) von Andreas Wieneke
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 01.11.2002
+!item (!pano [Panorama] [http://www.geocities.com/SiliconValley/Orchard/8550/Hochvogel/Panorama.html])
+vom Hochvogel, von Bernhard Fischer (Java erforderlich)
+# zylindrisch mit Java-Applet, Grenzen der Einzelbilder allerdings deutlich sichtbar
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 26.05.2003
+!item (!pano [Panorama] [http://www.gipfelstuermer.de/galerie/index.html#panoholzgauerwetterspitze])
+von der Holzgauer Wetterspitze, von Thorsten Liborius
+# zylindrisch, zusammengesetzte Einzelbilder, jpg
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+# Panoramen (nicht so toll, als daß sich das Verlinken rentiert) -- Flash-Plugin erforderlich
+# http://www.rosenalp.de/deutsch/inhaltsseiten/panorama/pano.html
+# Gartenpanorama http://www.rosenalp.de/deutsch/inhaltsseiten/panorama/garten.html
+
+##############################################################################################################
+!subsubnode (3a) Lechquellen-Gebirge
+!alias bergpano_o03a
+!html_name lechquellengebirge.html
+!html_keywords Lechquellen-Gebirge, Panorama, Panoramen
+!html_description Panorama-Links Lechquellen-Gebirge
+!set o03a
+!include ../material/gebiete.txt
+!unset o03a
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 19.05.2003
+!item verschiedene zylindrische (!pano [360°-Panoramen] [http://www.alpenpanorama.net/]) von Bruno Stark
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (3b) Lechtaler Alpen
+!alias bergpano_o03b
+!html_name lechtaler_alpen.html
+!html_keywords Lechtaler Alpen, Panorama, Panoramen
+!html_description Panorama-Links Lechtaler Alpen
+!set o03b
+!include ../material/gebiete.txt
+!unset o03b
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 19.05.2003
+!item verschiedene zylindrische (!pano [360°-Panoramen] [http://www.alpenpanorama.net/]) von Bruno Stark
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 10.05.2002; auch bei (4) aufgeführt; überprüft 05.08.2002
+!item zahlreiche zylindrische (!pano [360°-Panoramen] [http://www.zugspitzarena.com/de/pano.htm]) aus der
+Region Ehrwald/Lermoos und Umgebung (auch Lähn, Wengle, Heiterwang), u.a. Häberjoch, Seebensee,
+Heiterwangersee, Gipfelblick von der Sonnenspitze (Java erforderlich)
+# zylindrisch (nicht alle angeschaut)
+# Sonnenspitze: Linux-Netscape meldet "not enough memory"; IE unter Win geht
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 01.11.2002
+!item (!pano [Panorama] [http://www.geocities.com/SiliconValley/Orchard/8550/Gallery/]) vom Daniel
+(2346~m; bei Lermoos/Ehrwald), von Bernhard Fischer (Java erforderlich)
+# zylindrisch mit Java-Applet, Grenzen der Einzelbilder allerdings deutlich sichtbar
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (4) Wettersteingebirge und Mieminger Kette
+!alias bergpano_o04
+!html_name wetterstein.html
+!html_keywords Wettersteingebirge, Mieminger Kette, Arnspitzstock, Tschirgant-Simmering-Kamm, Panorama, Panoramen
+!html_description Panorama-Links Wettersteingebirge und Mieminger Kette
+!set o04
+!include ../material/gebiete.txt
+!unset o04
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 10.05.2002; auch bei (3b) aufgeführt; überprüft 05.08.2002
+!item zahlreiche zylindrische (!pano [360°-Panoramen] [http://www.zugspitzarena.com/de/pano.htm]) aus der
+Region Ehrwald/Lermoos und Umgebung (auch Lähn, Wengle, Heiterwang), u.a. Häberjoch, Seebensee,
+Heiterwangersee, Gipfelblick von der Sonnenspitze (Java erforderlich)
+# zylindrisch (nicht alle angeschaut)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 05.08.2002
+!item (!pano [Panorama-Bilder] [http://www.alpspitze.de/panoramen/index.html]) von Florian Breunig:
+Park von Schloß Linderhof, Park von Schloß Herrenchiemsee, Eibsee, Kankertal, Reintal (Java erforderlich)
+# Reintal getestet, ist teilweise sphärisch, aber nur Kreisausschnitt
+# lt. Angabe ist auch Quicktime nötig, das scheint aber nicht der Realität zu entsprechen
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 27.08.2002
+!item (!pano [Aussichtspanorama von der Zugspitze] [http://www.zugspitze.at/zugspitze.com/aussicht.htm])
+(Java erforderlich)
+# alt: http://www.zugspitze.at/tzb/aussicht/index.html
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.08.2002 (auch unter (7b) Bayer. Voralpen aufgeführt)
+# aktualisiert 01.11.2003
+!item verschiedene (!pano [Sommer] [http://www.videopano.com/gapa/gapa/1g_garmisch_wank.htm])-
+  und (!pano [Winter] [http://www.videopano.com/gapa/gapa/1l_wank_winter.htm])panoramen
+  vom Wank bei Garmisch-Partenkirchen (Java erforderlich)
+# www.panopix.at; zylindrisch
+# alt: http://www.videopano.com/garmisch_wank/index_berg.htm
+# alt: http://www.videopano.com/garmisch_wank_winter/index.htm
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 10.05.2002:
+# auskommentiert 01.11.2003, Website funzt nur noch mit Flash, mag aber meine Version nicht
+!begin_ignore
+!item Panorama vom (!www [Hotel Karwendel] [http://www.karwendel.at/]),
+(!www [Leutasch] [http://www.leutasch.com/]),
+(!pano [Sommer] [http://gallerie.netwing.at/karwendel/panorama/pan2h.htm]) und
+(!pano [Winter] [http://gallerie.netwing.at/karwendel/panorama/pan8h.htm]): Blick zur Hohen Munde, Gaistal,
+Wetterstein (Java erforderlich)
+!end_ignore
+# zylindrische Panoramen, eher einfach (aber JPG immerhin progressiv oder wie das heißt)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 27.08.2002
+!item sphärische Panoramen vom
+(!pano [Schachen-Aussichtspavillon] [http://horst.wiesers.net/alpen/schachen08pano.html]),
+vom (!pano [Bergrücken] [http://horst.wiesers.net/alpen/schachen09pano.html])
+oberhalb der Schachenhäuser und aus dem (!pano [Talkessel] [http://horst.wiesers.net/alpen/schachen10pano.html])
+östlich vom Schachenhaus (Java erforderlich; die Panoramen stehen wahlweise auch als QuickTime-Version zur
+Verfügung; von Horst Wieser)
+# Dersch-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 27.08.2002
+!item sphärisches Panorama vom (!pano [Hohen Kranzberg] [http://horst.wiesers.net/alpen/kranzberg05pano.html])
+bei Mittenwald (Java erforderlich; von Horst Wieser)
+# Dersch-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 01.11.2002
+!item (!pano [Panorama] [http://www.geocities.com/SiliconValley/Orchard/8550/Gallery/Sonnenspitze.html])
+von der Sonnenspitze (2417~m; Mieminger Kette; Java erforderlich) und
+(!pano [Winter-Blick] [http://www.geocities.com/SiliconValley/Orchard/8550/Gallery/]) vom Hochplattig
+(Mieminger Kette), von Bernhard Fischer (3D-Bild, Rot-Grün-Brille erforderlich)
+# zylindrisch mit Java-Applet, Grenzen der Einzelbilder allerdings deutlich sichtbar
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 17.11.2002, aktualisiert 18.05.2003
+!item (!pano [Panorama] [http://www.gaehnchen.de/alpin/wetterstein/0108-alpspitze/0108-alpspitze.htm#panorama])
+von der Alpspitze (von Sascha Sauer)
+# alt: http://home.arcor.de/gaehnchen/alpin/wetterstein/0108-alpspitze/0108-alpspitze.htm#panorama
+# JPG-Bild
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (5) Karwendel
+!alias bergpano_o05
+!html_name karwendel.html
+!html_keywords Karwendel, Karwendelgebirge, Panorama, Panoramen
+!html_description Panorama-Links Karwendel
+!set o05
+!include ../material/gebiete.txt
+!unset o05
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 30.05.2002, aktualisiert 01.11.2003
+!item (!pano [Panoramabilder] [http://www.videopano.com/mittenwald/index.htm]) in und um Mittenwald, u.a. von der Bergstation der Karwendelbahn (Java erforderlich)
+# alt: http://www.panopix.at/mittenwald/
+# Dersch-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.08.2002 (ist nur teilweise oben mit enthalten) // auskommentiert 01.11.2003
+# !item weitere (!pano [Panoramen] [http://www383.ws1.inname.net/karwendelbahn/]) von der Karwendelbahn
+# bei Mittenwald (Java erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 01.11.2003
+!item (!pano [Panoramen] [http://www.panopixvideotrips.com/ibkland/scharnitz/index_scharnitz.htm]) von der Pleisenhütte bei Scharnitz (und weitere Panoramen in und um Scharnitz)
+# alt: http://austria360.com/scharnitz_all/
+# alt: http://tirol360.com/scharnitz_all
+# ganz alt: http://www.panopixvideotrips.com/scharnitz_all/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 14.08.2002:
+!item zylindrische (!pano [360°-Panoramen] [http://www.rundum.com/regionen/achensee/])
+aus der Achensee-Region, u.a. vom Zwölferkopf bei Pertisau und von der Bergstation der
+Rofan-Seilbahn bei Maurach (Java erforderlich)
+# Dersch-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 30.05.2002
+!item zylindrischer (!pano [Panorama-Rundblick] [http://www2.uibk.ac.at/ipoint/panorama.html]) vom
+"GeiWi"-Turm der (!www [Universität Innsbruck] [http://www.uibk.ac.at/]) (QuickTime-Plugin erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 14.08.2002 (auch bei 33 aufgeführt)
+!item zylindrische (!pano [360°-Panoramen] [http://www.rundum.com/regionen/innsbruck/]) aus Innsbruck
+und Umgebung, u.a. von der Seegrube und vom Patscherkofel (Java erforderlich)
+# Dersch-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 22.03.2003
+!item 3~(!pano [Panoramen] [http://www.hausinnsbruck.net/rahmenpanorama.htm]) aus Innbruck und Umgebung
+ (Blick vom Stadtturm sowie vom Bergisel)
+# jpg-Dateien
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 21.03.2003, aktualisiert 18.05.2003
+!item zylindrisches (!pano [360°-Panorama] [http://www.mmmm.cc/panorama/]) von Lans
+ (südlich von Innsbruck), u.a. mit Karwendel-Nordkette, Patscherkofel, Nockspitze (Java erforderlich)
+# alt: http://www.mmmm.cc/panorama/special_panorama.htm
+# .ivr-Datei
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 14.08.2002
+!item sphärische (!pano [360°-Panoramen] [http://www.rundum.com/regionen/hall/]) aus Hall in Tirol,
+u.a. Rundblick vom Turm der Pfarrkirche (Java erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 14.08.2002
+!item zylindrische (!pano [360°-Panoramen] [http://www.rundum.com/regionen/innsbruck/]) aus Seefeld/Mösern
+und Umgebung (Java erforderlich)
+# Dersch-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 18.07.2002, aktualisiert 11.01.2003
+!item (!pano [Panorama] [http://www.steinmandl.de/Panorama_vom_Schafreuter.jpg])
+vom Scharfreiter-Gipfel (Vorkarwendel), mit bezeichneten Gipfeln; zur Verfügung gestellt von
+(!www [Luidger Röckrath] [http://www.steinmandl.de/]), aufgenommen am 1.6.2002
+(Achtung, Dateigröße ca. 695~kB)
+# alt: http://home.arcor.de/luidger/Panorama_vom_Schafreuter.jpg
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.10.2002
+!item zylindrische (!pano [360°-Panoramen] [http://www.panopix.at/vomp/]) von Vomp, Hinterriss, Eng; u.a.
+Engalmen, Großer Ahornboden, Vomperberg (Java erforderlich)
+# http://www.hinterriss.info/ -> Panorama Großer Ahornboden (Eng)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 06.10.2002
+!item (!pano [Karwendel-Panoramen] [http://www.Tourplaner-Online.de/panoramenu.html#karwendel])
+von Andreas Wieneke
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 20.10.2003
+!item (!pano [Panorama] [http://www.binsalm.at/Sites/Panorama_Einstieg.html]) vom Gramaijoch (2017~m), westlich vom Alpengasthof Eng/oberhalb Bins-Alm (Flash-Plugin erforderlich)
+# anscheinend irgendwie nur eingescannt, nicht besonders toll, aber immerhin sind die Gipfel alle bezeichnet
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (6) Brandenberger Alpen (Rofangebirge)
+!alias bergpano_o06
+!html_name rofan.html
+!html_keywords Brandenberger Alpen, Rofangebirge, Rofanstock, Unnützstock, Guffertstock, Schneidjoch- und Ragstattkamm, Angerbergkamm, Panorama, Panoramen
+!html_description Panorama-Links Brandenberger Alpen (Rofangebirge)
+!set o06
+!include ../material/gebiete.txt
+!unset o06
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 01.11.2003:
+!item diverse (!pano [Panoramen] [http://www.panopixvideotrips.com/schwaz/rofan/index_rofan.htm]) aus dem Rofangebirge (Java erforderlich)
+# alt: http://tirol360.com/rofan/
+# ganz alt: http://www.videopano.com/rofan/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 14.08.2002:
+!item zylindrische (!pano [360°-Panoramen] [http://www.rundum.com/regionen/achensee/])
+aus der Achensee-Region, u.a. vom Zwölferkopf bei Pertisau und von der Bergstation der
+Rofan-Seilbahn bei Maurach (Java erforderlich)
+# Dersch-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 01.11.2003
+!item einige zylindrische (!pano [360°-Panoramen] [http://www.achenseebahn.at/d/panor.htm]) von der (!www [Zahnradbahn] [http://www.achenseebahn.at/]) Jenbach-Achensee
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (7a) Ammergauer Alpen
+!alias bergpano_o07a
+!html_name ammergauer_alpen.html
+!html_keywords Ammergauer Alpen
+!html_description Panorama-Links Ammergauer Alpen, Panorama, Panoramen
+!set o07a
+!include ../material/gebiete.txt
+!unset o07a
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 07.08.2002
+!item sphärisches (!pano [360°-Panorama] [http://www.panacircle.de/tools/Panoramen/beispiele/pavt_da1_lab.htm])
+vom Laberberg, zwischen (!www [Oberammergau] [http://www.oberammergau.de/]) und
+(!www [Ettal] [http://www.ettal.de/]) (Java erforderlich)
+# http://www.panacircle.de/tools/Panoramen/beispiele/pavt_1brun.htm Pano Ogau Ortsmitte
+# sphärisch, arbeiten mit Dersch-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 20.06.2002
+!item sphärisches 360°-Panorama von Tegelberg (Java erforderlich)
+!begin_itemize !short
+!item (!pano [kleinere Modem-Version] [http://www.panacircle.de/tools/Panoramen/beispiele/panw_nat1.htm])
+!item (!pano [größere ISDN-Version] [http://www.panacircle.de/tools/Panoramen/beispiele/panw_nat2.htm])
+!end_itemize
+# sphärisch, Dersch-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 07.08.2002
+!item (!pano [Panoramen] [http://www.ettal-online.de/]) in und um (!www [Ettal] [http://www.ettal.de/]),
+u.a. Gipfel-Rundblick von der Ziegelspitze, vom Laber und vom Kofel (Java erforderlich)
+# arbeiten mit ipix-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 27.08.2002
+!item sphärische Panoramen vom (!pano [Anstieg] [http://horst.wiesers.net/alpen/hochplatte04pano.html]) zur
+Hochplatte sowie vom (!pano [Gipfel] [http://horst.wiesers.net/alpen/hochplatte07.html]) (und
+(!pano [nochmal] [http://horst.wiesers.net/alpen/hochplatte08pano.html])) (Java erforderlich; die Panoramen
+stehen wahlweise auch als QuickTime-Version zur Verfügung; von Horst Wieser)
+# Dersch-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 18.05.2003
+!item (!pano [Panorama] [http://www.gaehnchen.de/alpin/ammergauer/0302-daniel/0302-daniel.htm#pan-ups-spitze])
+von der Ups-Spitze (von Sascha Sauer)
+# einfache JPG-Datei
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 06.10.2002
+!item (!pano [360°-Panoramen] [http://www.schwangau.de/index.php?id=380]) aus Schwangau und Umgebung,
+u.a. Bergstation am Tegelberg, Marienbrücke (Pöllatschlucht) bei Schloß Neuschwanstein
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (7b) Bayerische Voralpen
+!alias bergpano_o07b
+!html_name bay_voralpen.html
+!html_keywords Bayerische Voralpen, Voralpen, Estergebirge, Mangfallgebirge, Werdenfelser Land, Isarwinkel, Mangfallgebirge, Panorama, Panoramen
+!html_description Panorama-Links Bayerische Voralpen
+!set o07b
+!include ../material/gebiete.txt
+!unset o07b
+
+# in Einzelseiten aufgespaltet 02.11.2003
+!subsubsubnode Gebirgsblicke aus dem Voralpenland
+# !alias Voralpenland-Gebirgsblicke
+!html_name bay_voralpen_voralpenland-gebirgsblicke.html
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/bay_voralpen_voralpenland-gebirgsblicke.html])
+!end_flushright
+!endif
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 20.05.2003
+!item virtuelles (!pano [Panorama] [http://www.geocities.com/bfisch.geo/Muenchen/]) vom Olympiaturm in München
+ (von Bernhard Fischer)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 07.08.2002
+!item (!pano [Panorama] [http://www.lbs-bayern.de/Internet/Aktuelles/Webcam/panorama.html]) vom Gebäude der
+(!www [Bayerischen Landesbausparkasse] [http://www.lbs-bayern.de/]) in München (Arnulfstraße, Nähe Hauptbahnhof)
+# direkt: http://www.lbs-bayern.de/Internet/Aktuelles/pix/panorama.jpg
+# zylindrisch, JPG-Datei
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 14.11.2002
+!item (!pano [Panorama] [http://www.baycom.org/gunnar/panorama.htm]) von Agfa-Hochhaus in München
+# nur aneinandergefügte JPG's
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+!subsubsubnode Werdenfelser Land (Region Garmisch-Partenkirchen -- Mittenwald)
+# !alias BayVoralpen_WerdenfelserLand
+!html_name bay_voralpen_werdenfelserland.html
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/bay_voralpen_werdenfelserland.html])
+!end_flushright
+!endif
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.08.2002 (auch unter (4) Wetterstein aufgeführt)
+# aktualisiert 01.11.2003
+!item verschiedene (!pano [Sommer] [http://www.videopano.com/gapa/gapa/1g_garmisch_wank.htm])-
+  und (!pano [Winter] [http://www.videopano.com/gapa/gapa/1l_wank_winter.htm])panoramen
+  vom Wank bei Garmisch-Partenkirchen (Java erforderlich)
+# www.panopix.at; zylindrisch
+# alt: http://www.videopano.com/garmisch_wank/index_berg.htm
+# alt: http://www.videopano.com/garmisch_wank_winter/index.htm
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+!subsubsubnode Isarwinkel (Region Bad Tölz -- Lenggries -- Jachenau)
+# !alias BayVoralpen_Isarwinkel
+!html_name bay_voralpen_isarwinkel.html
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/bay_voralpen_isarwinkel.html])
+!end_flushright
+!endif
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 18.05.2003
+!item Winter-Panoramen vom
+(!pano [Martinskopf] [http://www.gaehnchen.de/alpin/bayrische-voralpen/0301-herzogstand/0301-herzogstand.htm#pan-martinskopf]),
+(!pano [Herzogstand] [http://www.gaehnchen.de/alpin/bayrische-voralpen/0301-herzogstand/0301-herzogstand.htm#pan-herzogstand]) und
+(!pano [Heimgarten] [http://www.gaehnchen.de/alpin/bayrische-voralpen/0301-herzogstand/0301-herzogstand.htm#pan-heimgarten])
+(von Sascha Sauer)
+# einfache JPG-Dateien
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 27.08.2002
+!item sphärische Panoramen vom
+(!pano [Heimgarten-Gipfel] [http://horst.wiesers.net/alpen/heimgarten03pano.html])
+(und (!pano [nochmal] [http://horst.wiesers.net/alpen/heimgarten04pano.html]) mit etwas verändertem Standpunkt),
+vom (!pano [Herzogstand-Gipfel] [http://horst.wiesers.net/alpen/heimgarten05pano.html])
+(Java erforderlich; die Panoramen stehen wahlweise auch als QuickTime-Version zur Verfügung; von Horst Wieser)
+# Dersch-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 07.11.2002, aktualisiert 18.05.2003
+!item (!pano [360°-Panorama] [http://www.gaehnchen.de/alpin/bayrische-voralpen/0201-simetsberg/0201-simetsberg.htm#panorama])
+vom Simetsberg (von Sascha Sauer)
+# alt: http://home.arcor.de/gaehnchen/alpin/bayrische-voralpen/0201-simetsberg/0201-simetsberg.htm#panorama
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 23.12.2002
+!item sphärische Panoramen vom
+(!pano [Simetsberg-Anstieg] [http://horst.wiesers.net/alpen/simetsberg04pano.html]) (ca. 20~min unterhalb
+des Gipfels) und (!pano [Simetsberg-Gipfel] [http://horst.wiesers.net/alpen/simetsberg05pano.html])
+(Java erforderlich; die Panoramen stehen wahlweise auch als QuickTime-Version zur Verfügung; von Horst Wieser)
+# Dersch-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 03.08.2002
+!item (!pano [Bergpanorama] [http://www.alpinerskiclub.de/brauneck/Brauneckpanorama01.html]) vom Brauneckhaus
+(vom Mangfallgebirge im Osten, über Rofan und Karwendel bis zum Wetterstein im Südwesten; alle Gipfel sind
+bezeichnet)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+!subsubsubnode Mangfallgebirge (Region Tegernsee -- Schliersee -- Spitzingsee)
+# !alias BayVoralpen_Mangfallgebirge
+!html_name bay_voralpen_mangfallgebirge.html
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/bay_voralpen_mangfallgebirge.html])
+!end_flushright
+!endif
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 10.06.2002
+!item sphärisches (!pano [360°-Winterpanorama] [http://www.alpinpanorama.de/cards/Tegernsee/panoramen/java/Wallberg_am_Tegernsee.htm])
+vom (!www [Wallberg-Restaurant] [http://www.wallberg-restaurant.de/]) am Tegernsee (Java erforderlich)
+# ipix-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 07.08.2002
+!item 360°-Panoramen von der (!www [Schliersbergalm] [http://www.schliersbergalm.de/])
+ (am Schliersee, Mangfallgebirge):
+ (!pano [Sommer] [http://www.schliersbergalm.de/Panorama/pic.htm]) und
+ (!pano [Winter] [http://www.schliersbergalm.de/Panorama/winterpan.htm])
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 01.11.2002
+!item (!pano [Panorama] [http://www.geocities.com/SiliconValley/Orchard/8550/Schildenstein/Panorama.html])
+vom Schildenstein (bei Kreuth), von Bernhard Fischer (Java erforderlich)
+# zylindrisch mit Java-Applet, Grenzen der Einzelbilder allerdings deutlich sichtbar
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 01.11.2003
+!item zylindrisches (!pano [360°-Panorama] [http://www.wendelsteinbahn.de/seiten/panorama/index.htm]) vom Wendelstein
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 01.11.2003
+!item zwei weitere (!www [Wendelstein-Panoramen] [http://www.kaunzinger.de/Panorama/panorama.html]), davon eines mit bezeichneten Gipfeln (von Michael Kaunzinger)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (!www [Bayrischzell] [http://www.bayrischzell.de/]): verschiedene zylindrische
+(Berg-)(!pano [Panoramen] [http://www.bayrischzell.de/panoramas/panoramas.htm]) (Sommer/Winter),
+u.a. vom Aiplspitz, Benzingspitz, Hinteres Sonnwendjoch, Trainsjoch, Veitsberg, Wendelstein, Wildalpjoch
+(wahlweise mit Plugin oder Java-Applet);
+(!www [Dia-Schau] [http://www.bayrischzell.de/gemeinde/diashow/autodiashow1.htm])
+# mit Linux-Netscape: "not enough memory"?! - im IE unter Win geht es
+# System LivePicture
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 16.03.2003
+!item zylindrisches (!pano [360°-Winterpanorama] [http://us.share.geocities.com/bfisch.geo/Trainsjoch/PanoSmall.html])
+vom Trainsjoch (bei Bayrischzell), von Bernhard Fischer (580~kB; Javascript erforderlich)
+# aneinandergefügte jpg-Dateien
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 01.11.2003
+!item sphärische Panoramen
+aus dem (!pano [Schinderkar] [http://horst.wiesers.net/alpen/schinder04pano01.html]),
+am (!pano [Schindertor] [http://horst.wiesers.net/alpen/schinder06pano02.html])
+und vom Gipfel des (!pano [Österreichischen Schinders] [http://horst.wiesers.net/alpen/schinder07pano03.html])
+(Java erforderlich; die Panoramen stehen wahlweise auch als QuickTime-Version zur
+Verfügung; von Horst Wieser)
+# Dersch-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 15.04.2003 (auch bei 11, Chiemgauer Alpen)
+!item (!pano [Homepage Florian Benda] [http://www.ro-panorama.de.vu/]): zylindrische Panoramen von Rosenheim
+und Umgebung (u.a. Irschenberg, Hochsalwand) (Flash-Plugin erforderlich)
+# auch: http://home.arcor.de/f.benda/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (8) Kaisergebirge
+!alias bergpano_o08
+!html_name kaisergebirge.html
+!html_keywords Kaisergebirge, Wilder Kaiser, Zahmer Kaiser, Panorama, Panoramen
+!html_description Panorama-Links Kaisergebirge
+!set o08
+!include ../material/gebiete.txt
+!unset o08
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 18.05.2003
+!item diverse zylindrische (!pano [360°-Panoramen] [http://www.panopix.at/koessen/]) vom
+# !item zylindrisches (!pano [Sommerpanorama] [http://www.bergbahnen-koessen.at/sommer/panorama_2.htm]) und
+#   (!pano [Winterpanorama] [http://www.bergbahnen-koessen.at/sommer/panorama_3.htm])
+  vom (!www [Unterberghorn] [http://www.bergbahnen-koessen.at/]) (1773~m) bei
+  (!www [Kössen] [http://www.koessen.at/]) (Java erforderlich)
+# existiert nicht mehr: http://www.videopano.com/koessen_unterberg/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (9) Loferer und Leoganger Steinberge {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o09
+!html_name loferer_leoganger_steinberge.html
+# !html_keywords Loferer Steinberge, Leoganger Steinberge, Panorama, Panoramen
+!html_description Panorama-Links Loferer und Leoganger Steinberge
+!set o09
+!include ../material/gebiete.txt
+!unset o09
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (10) Berchtesgadener Alpen
+!alias bergpano_o10
+!html_name berchtesgadener_alpen.html
+!html_keywords Berchtesgadener Alpen, Steinernes Meer, Hochkönig, Hagengebirge, Lattengebirge, Panorama, Panoramen
+!html_description Panorama-Links Berchtesgadener Alpen
+!set o10
+!include ../material/gebiete.txt
+!unset o10
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 01.11.2003
+!item Winter-(!pano [Panoramen] [http://www.videopano.com/berchtesgaden/index_berchtesgaden.htm]) bei
+(!www [Berchtesgaden] [http://www.berchtesgadener-land.com/])
+# alt: http://www383.ws1.inname.net/berchtesgaden/
+# zylindrisch
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 07.08.2002:
+!item zylindrisches (!pano [Sommer-Panorama 360°] [http://www.alpenhof.de/panorama/pano-sommer.htm]) bzw.
+(!pano [Winter-Panorama 270°] [http://www.alpenhof.de/panorama/pano-winter.htm]) vom
+(!www [Hotel Alpenhof] [http://www.alpenhof.de/]) in (!www [Schönau] [http://www.koenigssee.de/])
+am Königssee (Java erforderlich)
+# LivePicture-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (11) Chiemgauer Alpen
+!alias bergpano_o11
+!html_name chiemgauer_alpen.html
+!html_keywords Chiemgauer Alpen, Panorama, Panoramen
+!html_description Panorama-Links Chiemgauer Alpen
+!set o11
+!include ../material/gebiete.txt
+!unset o11
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (!pano [360°-Panoramen] [http://www.chiemsee-gast.de/webcam/web_cam_frame.html])
+1) Hittenkirchen (nordwestlich von Bernau am Chiemsee); 2) (!www [Bad~Endorf] [http://www.bad-endorf.de/])
+(Java bzw. QuickTime-Plugin erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 15.04.2003 (auch bei 7b, Bayerische Voralpen)
+!item (!pano [Homepage Florian Benda] [http://www.ro-panorama.de.vu/]): zylindrische Panoramen von Rosenheim
+und Umgebung (u.a. Gebiet Rohrdorf-Riedering/Samerberg) (Flash-Plugin erforderlich)
+# auch: http://home.arcor.de/f.benda/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (12) Salzburger Schieferalpen {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o12
+!html_name salzburger_schieferalpen.html
+# !html_keywords Salzburger Schieferalpen, Dientener Berge, Fritztaler Berge, Hochgründeck, Rossbrandstock, Panorama, Panoramen
+# !html_description Panorama-Links Salzburger Schieferalpen
+!set o12
+!include ../material/gebiete.txt
+!unset o12
+
+!begin_itemize !short
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!begin_ignore
+# überprüft 07.08.2002:
+# auskommentiert 19.05.2003, existiert nicht mehr
+!item zylindrisches (!pano [360°-Panorama] [http://www.hochkoenig.at/hochkoenig_homepage/winter/pages/pano2.htm])
+von der Bergstation (1600~m) der Gondelbahn zur Karbachalm bei (!www [Mühlbach] [http://www.hochkoenig.at/])
+am Hochkönig (Java erforderlich)
+# Linux-Netscape: not enough memory?! - mit IE unter Win ohne Probleme
+# LivePicture-System
+!end_ignore
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (13) Tennengebirge {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o13
+!html_name tennengebirge.html
+# !html_keywords Tennengebirge, Panorama, Panoramen
+!html_description Panorama-Links Tennengebirge
+!set o13
+!include ../material/gebiete.txt
+!unset o13
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (14) Dachstein-Gebirge
+!alias bergpano_o14
+!html_name dachstein.html
+!html_keywords Dachstein, Dachsteinstock, Gosaukamm, Grimming, Sarstein, Panorama, Panoramen
+!html_description Panorama-Links Dachstein
+!set o14
+!include ../material/gebiete.txt
+!unset o14
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item sphärisches (!pano [360°-Panorama] [http://www.filzmoos.at/ipix_dachsteingletscher.htm]) vom 
+Dachsteingletscher (Java erforderlich)
+# Linux-Netscape: not enough memory?!
+# ipix-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (15) Totes Gebirge
+!alias bergpano_o15
+!html_name totes_gebirge.html
+!html_keywords Totes Gebirge, Sengsengebirge, Eisenwurzen, Panorama, Panoramen
+!html_description Panorama-Links Totes Gebirge
+!set o15
+!include ../material/gebiete.txt
+!unset o15
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 07.08.2002:
+!item Sommer-/Winter-(!pano [Panorama] [http://www.loser.at/panoramablick.htm]) vom (!www [Loser] [http://www.loser.at/]) (1550~m)
+bei (!www [Altaussee] [http://www.altaussee.at/])
+((!www [Ausseerland] [http://www.ausseerland.at/])/Steirisches Salzkammergut)
+# einfache JPG-Datei
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (!pano [Panoramablick] [http://www.bad-mitterndorf.at/panorama/Panorama_Kampl.htm]) vom Kampl, 1681~m,
+bei (!www [Pichl-Kainisch] [http://www.pichl-kainisch.at/]) (Java erforderlich)
+# Zoom-Viewer, www.mgisoft.com
+# scheint mit Linux-Netscape nicht zu funktionieren?!
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 19.05.2003
+!item diverse Winter-(!pano [Panoramabilder] [http://www383.ws1.inname.net/hinterstoder/])
+(!www [Höss-Bergbahn] [http://www.hiwu.at/]) bei
+(!www [Hinterstoder] [http://www.hinterstoder.at/]), Region Pyhrn-Eisenwurzen (Oberösterreich)
+(Java erforderlich)
+# alt: http://www.panopixvideotrips.com/hinterstoder/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 07.08.2002:
+!item zylindrisches (!pano [Winter-Panoramabild] [http://www.panopix.at/bergbahnen_wurzeralm_winter/1a_wurzeralm.htm])
+ und (!pano [Sommer-Panoramabild] [http://www.panopix.at/bergbahnen_wurzeralm/]) von der
+ (!www [Wurzeralmbahn] [http://www.hiwu.at/]) (1430~m) bei
+ (!www [Spital] [http://www.tiscover.at/at/guide/5,de/objectId,RGN105699at/home.html])
+ am Pyhrn (Java erforderlich)
+# Dersch-Viewer
+!begin_itemize !short
+!item weitere (!pano [Panoramen] [http://www383.ws1.inname.net/wurzeralm/]) von der Wurzeralm
+!end_itemize
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (16) Ennstaler Alpen {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o16
+!html_name ennstaler_alpen.html
+# !html_keywords Ennstaler Alpen, Gesäuse, Eisenerzer Alpen, Haller Mauern, Obersteirische Schieferalpen, Panorama, Panoramen
+!html_description Panorama-Links Ennstaler Alpen
+!set o16
+!include ../material/gebiete.txt
+!unset o16
+
+!begin_itemize !short
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (17a) Salzkammergut-Berge
+!alias bergpano_o17a
+!html_name salzkammergut-berge.html
+!html_keywords Salzkammergut, Osterhorngruppe, Panorama, Panoramen
+!html_description Panorama-Links Salzkammergut
+!set o17a
+!include ../material/gebiete.txt
+!unset o17a
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 31.05.2003
+!item zylindrisches (!pano [360°-Panorama] [http://www.gaisberg.at/gaisberg/fotogalerie.htm]) vom Gaisberg
+(östlich von Salzburg) (JavaScript und Java erforderlich) -- und weitere Fotos
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (17b) Oberösterreichische Voralpen {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o17b
+!html_name oberoesterr_voralpen.html
+# !html_keywords Oberösterreichische Voralpen, Traunstein, Kasbergstock, Falken- und Kremsmauer, Sengsengebirge, Reichraminger Hintergebirge, Panorama, Panoramen
+!html_description Panorama-Links Oberösterreichische Voralpen
+!set o17b
+!include ../material/gebiete.txt
+!unset o17b
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (18) Hochschwab-Gruppe
+!alias bergpano_o18
+!html_name hochschwab.html
+!html_keywords Hochschwab, Panorama, Panoramen
+!html_description Panorama-Links Hochschwab-Gruppe
+!set o18
+!include ../material/gebiete.txt
+!unset o18
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 08.08.2002:
+!item zylindrisches (!pano [360°-Panorama] [http://www.steiermark.at/cms/ziel/430847/DE/]) vom
+(!www [Leopoldsteiner See] [http://www.aeiou.at/aeiou.encyclop.l/l558333.htm]) (Java erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (19) Mürzsteger Alpen {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o19
+!html_name muerzsteger_alpen.html
+# !html_keywords Mürzsteger Alpen, Veitschalpe, Tonionalpe, Schneealpe, Göller, Gippel, Panorama, Panoramen
+!html_description Panorama-Links Mürzsteger Alpen
+!set o19
+!include ../material/gebiete.txt
+!unset o19
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (20) Rax und Schneeberg-Gruppe {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o20
+!html_name rax_schneeberg.html
+# !html_keywords Rax, Schneeberg, Panorama, Panoramen
+!html_description Panorama-Links Rax und Schneeberg-Gruppe
+!set o20
+!include ../material/gebiete.txt
+!unset o20
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (21) Ybbstaler Alpen
+!alias bergpano_o21
+!html_name ybbstaler_alpen.html
+!html_keywords Ybbstaler Alpen, Hochkar, Dürrenstein, Zellerhüte, Ötscherberge, Oistaler Alpen, Lunzer Berge, Panorama, Panoramen
+!html_description Panorama-Links Ybbstaler Alpen
+!set o21
+!include ../material/gebiete.txt
+!unset o21
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 07.08.2002:
+!item zylindrisches (!pano [360°-Panorama] [http://www.panopix.at/bergbahnen_oetscher/])
+vom (!www [Ötscher] [http://www.oetscher.at/]) (Mostviertel/Niederösterreich) (Java erforderlich)
+# Dersch-Viewer
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 07.08.2002:
+!item weitere Sommer- und Winter-(!pano [Panoramen] [http://www.panopixvideotrips.com/oetschergebiet/])
+vom Ötscher
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (22) Türnitzer Alpen {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o22
+!html_name tuernitzer_alpen.html
+# !html_keywords Türnitzer Alpen, Panorama, Panoramen
+!html_description Panorama-Links Türnitzer Alpen
+!set o22
+!include ../material/gebiete.txt
+!unset o22
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (23) Gutensteiner Alpen {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o23
+!html_name gutensteiner_alpen.html
+# !html_keywords Gutensteiner Alpen, Hohe Wand, Dürre Wand, Triesting- und Pliestingtalberge, Panorama, Panoramen
+!html_description Panorama-Links Gutensteiner Alpen
+!set o23
+!include ../material/gebiete.txt
+!unset o23
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (24) Wienerwald {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o24
+!html_name wienerwald.html
+# !html_keywords Wienerwald, Panorama, Panoramen
+!html_description Panorama-Links Wienerwald
+!set o24
+!include ../material/gebiete.txt
+!unset o24
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+##############################################################################################################
+!subnode Zentrale Ostalpen
+!html_name ostalpen-zentral.html
+!html_description Gebirgs-Panorama-Links Zentrale Ostalpen
+
+
+!subsubnode (25) Rätikon
+!alias bergpano_o25
+!html_name raetikon.html
+!html_keywords Rätikon, Panorama, Panoramen
+!html_description Panorama-Links Rätikon
+!set o25
+!include ../material/gebiete.txt
+!unset o25
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 19.05.2003
+!item verschiedene zylindrische (!pano [360°-Panoramen] [http://www.alpenpanorama.net/]) von Bruno Stark
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (26) Silvretta
+!alias bergpano_o26
+!html_name silvretta.html
+!html_keywords Silvretta, Panorama, Panoramen
+!html_description Panorama-Links Silvretta
+!set o26
+!include ../material/gebiete.txt
+!unset o26
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 01.11.2003
+!item (!pano [Panoramen] [http://www.videopano.com/silvrettastrasse/index_silvretta.htm]) von der Silvretta-Hochalpenstraße (Vermunt)
+# alt: http://www.videopano.com/silvretta_strasse/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 19.05.2003
+!item verschiedene zylindrische (!pano [360°-Panoramen] [http://www.alpenpanorama.net/]) von Bruno Stark
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (27) Samnaun-Gruppe
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o27
+!html_name samnaungruppe.html
+# !html_keywords Samnaun-Gruppe, Panorama, Panoramen
+!html_description Panorama-Links Samnaun-Gruppe
+!set o27
+!include ../material/gebiete.txt
+!unset o27
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item zylindrische (!pano [360°-Panoramen] [http://www.samnaun.ch/winter/wi_panoramakarte.htm]) vom Samnaun 
+ und Umgebung (Java erforderlich)
+# von www.sehenswert.ch
+# direkt: http://www.samnaun.ch/panoramabilder/01_samnaun.htm, 04_samnaun.htm, 08_samnaun4.htm, 06_samnaun.htm,
+# 10_samnaun.htm
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (28) Verwall-Gruppe
+!alias bergpano_o28
+!html_name verwallgruppe.html
+!html_keywords Verwall-Gruppe, Ferwall-Gruppe, Panorama, Panoramen
+!html_description Panorama-Links Verwall-Gruppe
+!set o28
+!include ../material/gebiete.txt
+!unset o28
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.08.2002, aktualisiert 01.11.2003
+!item zahlreiche (!pano [Panoramen] [http://www.tirol360.com/landeck/paznaun/index_paznaun.htm]) vom Paznauntal
+# alt: http://www.videopano.com/paznaun/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (29) Sesvenna-Gruppe
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o29
+!html_name sesvennagruppe.html
+# !html_keywords Sesvenna-Gruppe, Panorama, Panoramen
+!html_description Panorama-Links Sesvenna-Gruppe
+!set o29
+!include ../material/gebiete.txt
+!unset o29
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 11.08.2002
+!item (!pano [Panorama] [http://www.altana.ch/german/pan.html]) von Dach des
+(!www [Hotels Altana] [http://www.altana.ch/]) in (!www [Scuol] [http://www.scuol.ch/]) (Unterengadin)
+# einfaches JPG-Bild, ohne Java
+# auch etwas Blick nach N in die Silvrettagruppe, aber nicht weiter erwähnenswert
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (30) Ötztaler Alpen
+!alias bergpano_o30
+!html_name oetztaler_alpen.html
+!html_keywords Ötztaler Alpen, Texelgruppe, Panorama, Panoramen
+!html_description Panorama-Links Ötztaler Alpen
+!set o30
+!include ../material/gebiete.txt
+!unset o30
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 07.08.2002
+!item zylindrisches (!pano [360°-Winterpanorama vom Wurmkogel] [http://www.obergurgl.at/content.pl/de/pisten.htm?menu=aktuelles])
+und (!pano [360°-Winterpanorama vom "Topexpress"] [http://www.obergurgl.at/content.pl/de/pisten2.htm?menu=winter])
+bei (!www [Obergurgl] [http://www.obergurgl.at/]) (Flash-Plugin erforderlich)
+# geht gut mit Linux-Netscape; einfaches Applet ohne Zoom usw.
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 01.11.2003
+!item zahlreiche (!pano [Panoramen] [http://tirol360.com/imst/rifflsee/index_rifflsee.htm]) am Riffelsee im hinteren Pitztal
+# alt: http://tirol360.com/rifflsee/index.htm
+# alt: http://www.videopano.com/rifflsee/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 14.08.2002
+!item zylindrische (!pano [360°-Panoramen] [http://www.rundum.com/panoramen.htm]) vom Pitztaler Gletscher
+# Dersch-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 01.11.2003 (auch bei 31, Stubaier Alpen)
+!item verschiedene (!pano [Panoramen] [http://www.tirol360.com/imst/timmelsjoch/index_timmelsjoch.htm])
+von der Timmelsjoch-Hochalpenstraße
+# alt: http://www.videopano.com/timmelsjoch/index_bike.htm
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 19.05.2003
+!item zylindrisches (!pano [360°-Panorama] [http://www.alpenpanorama.net/]) von der Wildspitze (von Bruno Stark)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 06.10.2002
+!item (!pano [Panoramen] [http://www.Tourplaner-Online.de/panoramenu.html#oeztaler]) von Andreas Wieneke
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 02.11.2003
+!item zylindrische (!pano [360°-Panoramen] [http://www.pitztaler-info.at/pano/pan2h.htm]) vom Hinteren Brunnenkogel, vom Geigenkamm und vom Taschachhaus (Java erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (31) Stubaier Alpen
+!alias bergpano_o31
+!html_name stubaier_alpen.html
+!html_keywords Stubaier Alpen, Panorama, Panoramen
+!html_description Panorama-Links Stubaier Alpen
+!set o31
+!include ../material/gebiete.txt
+!unset o31
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.08.2002, aktualisiert 01.11.2003
+!item (!pano [Panoramen] [http://www.tirol360.com/imst/kuehtai_strasse/index.htm]) vom
+Kühtai-Gebiet (Java erforderlich)
+# alt: http://www.videopano.com/kuehtai_videotrip/index_bike.htm
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 07.08.2002
+# auskommentiert 19.05.2003; www-Server nicht erreichbar/nicht existent?
+!begin_ignore
+!item ? (!pano [Panoramen] [http://www.stubai.gletscher.com/_docs/pics360.htm])
+(!www [Stubaier Gletscherbahn] [http://www.stubai.gletscher.com/]), u.a. Eisjochferner, Windachferner,
+Daunferner (Java erforderlich)
+# ipix-System; Linux-Netscape hängt sich damit auf
+!end_ignore
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 07.08.2002:
+!item zylindrisches (!pano [Winter-Panorama] [http://www.netwing.at/business/serleslift/serleslifte/pano/pano.htm])
+von den Serlesliften (Bergstation Koppeneck) bei (!www [Mieders] [http://www.mieders.at/]) im
+(!www [Stubaital] [http://www.stubai.at/]) (Java erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.08.2002, aktualisiert 01.11.2003
+!item (!pano [Panoramen] [http://www.panopixvideotrips.com/ibkland/neustift_elfer/index_ort.htm])
+von der (!www [Elferhütte] [http://www.elferhuette.at/]) bei Neustift im Stubaital
+# alt: http://tirol360.com/neustift_elfer/index.htm
+# alt: http://www.videopano.com/neustift_elfer/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 01.11.2003 (auch bei 30, Ötztaler Alpen)
+!item (!pano [Panoramen] [http://www.tirol360.com/imst/timmelsjoch/index_timmelsjoch.htm])
+von der Timmelsjoch-Hochalpenstraße
+# alt: http://www.videopano.com/timmelsjoch/index_bike.htm
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.08.2002, aktualisiert 01.11.2003 (auch bei 32, Sarntaler Alpen)
+!item (!pano [Panoramen] [http://www.videopano.com/suedtirol/jaufenpass/index_jaufenpass.htm]) vom Jaufenpaß (Passo Giovo)
+# alt: http://www.videopano.com/jaufenpass/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 08.08.2002
+!item (!pano [Panoramen] [http://www.panopix.at/panos/wipptal/]) aus dem Wipptal
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 06.10.2002
+!item (!pano [Panoramen] [http://www.Tourplaner-Online.de/panoramenu.html#stubai]) von Andreas Wieneke
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 17.11.2002, aktualisiert 18.05.2003
+!item (!pano [Panorama] [http://www.gaehnchen.de/alpin/stubai/0208-regensburger/0208-regensburger.htm#panorama])
+ von der Östlichen Seespitze (von Sascha Sauer)
+# alt: http://home.arcor.de/gaehnchen/alpin/stubai/0208-regensburger/0208-regensburger.htm#panorama
+# einfache JPG-Datei
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (32) Sarntaler Alpen
+!alias bergpano_o32
+!html_name sarntaler_alpen.html
+!html_keywords Sarntaler Alpen, Panorama, Panoramen
+!html_description Panorama-Links Sarntaler Alpen
+!set o32
+!include ../material/gebiete.txt
+!unset o32
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.08.2002, aktualisiert 01.11.2003 (auch bei 31, Stubaier Alpen)
+!item (!pano [Panoramen] [http://www.videopano.com/suedtirol/jaufenpass/index_jaufenpass.htm]) vom Jaufenpaß (Passo Giovo)
+# alt: http://www.videopano.com/jaufenpass/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.08.2002
+!item (!pano [Panoramen] [http://www.videopano.com/suedtirol/penserjoch/index_penserjoch.htm]) vom Penserjoch (Passo Pennes)
+# alt: http://www.videopano.com/penserjoch/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 11.06.2002 (die Zuordnung zu 32 ist in diesem Fall relativ willkürlich):
+!item (!pano [Panorama] [http://www.st24.tv/de/Sterzing.html])
+(!www [Sterzing] [http://www.sterzing-und-umgebung.de/]) (Vipiteno)
+(QuickTime-Plugin erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 11.06.2002
+!item (!pano [Panorama] [http://www.st24.tv/de/Passeier.html]) St.~Leonhard in Passeier
+(QuickTime-Plugin erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 11.06.2002
+!item (!pano [Panorama] [http://www.st24.tv/de/GolfplatzPasseier.html])
+(!www [Golfclub] [http://www.golfpasseier.com/]) Passeier, bei St.~Leonhard
+# nach Südwesten (die Berge im Hintergrund gehören zu den (!link [Ötztaler Alpen] [bergpano_o30]))
+(QuickTime-Plugin erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 11.06.2002
+!item (!pano [Panorama] [http://www.st24.tv/de/Quellenhof.html])
+(!www [Golfclub Quellenhof] [http://www.quellenhof.it/golf.html]), bei St.~Martin in Passeier
+(QuickTime-Plugin erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item zylindrische 360°-Panoramen von (!www [Schenna] [http://www.schenna.com/]) bei
+(!www [Meran] [http://www.meraninfo.it/])
+   !begin_itemize !short
+   !item (!pano [Panorama] [http://www.schenna.com/cms-htdocs/index.php?rep_id=73]) Dorf Tirol Richtung Schenna
+   !item (!pano [Panorama] [http://www.schenna.com/cms-htdocs/index.php?rep_id=76]) Schenna-Dorf
+   !end_itemize
+# alt: http://www.schenna.com/360/panorama.htm bzw. http://www.schenna.com/360_2/panorama.htm
+# alt: Linux-Netscape liefert Java-error; mit IE unter Win ohne Probleme
+# System: www.pixaround.com
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 10.08.2002
+!item zylindrisches (!pano [Panorama] [http://www.st24.tv/de/Sarnthein.html]) von Sarnthein, Blick über
+den Ort in Richtung Bozen, in südlicher Richtung (QuickTime-Plugin erforderlich)
+# kein 360°-Panorama, nur Teilkreis
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 06.10.2002
+!item (!pano [Panoramen] [http://www.Tourplaner-Online.de/panoramenu.html#sarntal]) von Andreas Wieneke
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (33) Tuxer Alpen
+!alias bergpano_o33
+!html_name tuxer_alpen.html
+!html_keywords Tuxer Alpen, Panorama, Panoramen
+!html_description Panorama-Links Tuxer Alpen
+!set o33
+!include ../material/gebiete.txt
+!unset o33
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 14.08.2002 (auch bei 5 aufgeführt)
+!item zylindrische 360°-Panoramen aus (!www [Innsbruck] [http://www.rundum.com/regionen/innsbruck/])
+und (!www [Umgebung] [http://www.rundum.com/regionen/umgebung/]), u.a. von der Seegrube und vom Patscherkofel
+# Dersch-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 08.08.2002:
+!item (!pano [360°-Panoramen] [http://www.grafenast.at/panoramen.html])
+vom (!www [Hotel Grafenast] [http://www.grafenast.at/]) (1330~m, Hochpillberg bei Schwaz),
+u.a. Blick ins Karwendel und in die Tuxer Alpen
+(QuickTime-Plugin erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.08.2002, aktualisiert 01.11.2003
+!item (!pano [Panoramen] [http://www.panopixvideotrips.com/schwaz/hoehenstrasse/index_hoehenstrasse.htm]) von der Zillertaler Höhenstraße
+# alt: http://www.videopano.com/zillertaler_hoehenstrasse/index_bike.htm
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (34) Kitzbüheler Alpen
+!alias bergpano_o34
+!html_name kitzbueheler_alpen.html
+!html_keywords Kitzbüheler Alpen, Panorama, Panoramen
+!html_description Panorama-Links Kitzbüheler Alpen
+!set o34
+!include ../material/gebiete.txt
+!unset o34
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 08.08.2002:
+!item zylindrisches (!pano [360°-Panorama] [http://www.zellamsee-kaprun.at/panoramas/schmittenblick_Java/schmittenblick.html])
+von Thumersbach am (!B)Zeller See(!b), Blick auf den See mit (!www [Zell am See] [http://www.zellamsee-kaprun.at/])
+(auf Landzunge) und Schüttdorf (Ortschaft links von (!www [Zell am See] [http://www.zellamsee.or.at/]),
+dahinter (im Süden) Glocknergruppe) sowie (!www [Schmittenhöhe] [http://www.schmitten.at/])
+(Berg gleich links von der Fichte) (Java erforderlich)
+# LivePicture-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 01.11.2003
+!item Königsleiten-Bergbahnen (2285~m) bei (!www [Wald/Königsleiten] [http://www.salzburgerland.com/wald/]) im
+Pinzgau, nördlich des Gerlospasses ((!www [Zillertal-Arena] [http://www.zillertalarena.at/])
+Zell-Gerlos-Königsleiten/Wald)
+   !begin_itemize !short
+   !item zylindrisches (!pano [360°-Winterpanorama Königsleiten] [http://www.zillertalarena.at/2003/de/360grad_koenig.php])
+# alt: http://www.zillertalarena.com/2001w/de/360grad_koenig.shtml
+# alt: http://www.zillertalarena.com/2001w/de/360grad_koenig.shtml
+(Java erforderlich)
+# ............................................................................................................
+   !item zylindrisches (!pano [360°-Winterpanorama Kreuzjoch] [http://zillertalarena.at/2003/de/360grad_kreuz.php])
+(2559~m; zwischen Gerlos und Zell im Zillertal) (Java erforderlich)
+# alt: http://www.zillertalarena.com/2001w/de/360grad_kreuz.shtm
+   !end_itemize
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# 08.08.2002: existiert nicht mehr/in Überarbeitung, gelegentlich überprüfen
+!begin_ignore
+!item (!www [Wildkogelbahnen] [http://www.wildkogelbahnen.at/]) bei
+(!www [Neukirchen] [http://www.neukirchen.at/])/Pinzgau
+   !begin_itemize !short
+   !item (!pano [Panoramablick] [http://www.wildkogelbahnen.at/wi_natpark.htm]) vom Wildkogel nach Süden in
+die Hohen Tauern
+# ............................................................................................................
+   !item (!pano [Blick] [http://www.wildkogelbahnen.at/wi_rettenstein.htm]) vom Wildkogel zum Großen
+Rettenstein (2360~m)
+   !end_itemize
+!end_ignore
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.08.2002, aktualisiert 01.11.2003 (auch bei 35)
+!item (!pano [Panoramen] [http://www.videopano.com/gerlosstrasse/index_gerlosstrasse.htm]) von der
+(!www [Gerlosstraße] [http://www.gerlosstrasse.at/])
+# alt: http://www.panopixvideotrips.com/gerlosstrasse/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (35) Zillertaler Alpen
+!alias bergpano_o35
+!html_name zillertaler_alpen.html
+!html_keywords Zillertaler Alpen, Tuxer Hauptkamm, Zillertaler Hauptkamm, Pfunderer Berge, Gerlosgruppe, Panorama, Panoramen
+!html_description Panorama-Links Zillertaler Alpen
+!set o35
+!include ../material/gebiete.txt
+!unset o35
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.08.2002, aktualisiert 01.11.2003 (auch bei 34)
+!item (!pano [Panoramen] [http://www.videopano.com/gerlosstrasse/index_gerlosstrasse.htm]) von der (!www [Gerlosstraße] [http://www.gerlosstrasse.at/])
+# alt: http://www.panopixvideotrips.com/gerlosstrasse/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (36) Venedigergruppe
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o36
+!html_name venedigergruppe.html
+# !html_keywords Venedigergruppe, Durreckgruppe, Rötgruppe, Schlößkamm, Froßnitzgruppe, Lasörlinggruppe, Panorama, Panoramen
+!html_description Panorama-Links Venedigergruppe
+!set o36
+!include ../material/gebiete.txt
+!unset o36
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 02.11.2002
+!item (!pano [Panoramen] [http://www.stadt-lienz.at/bergrettunglienz/lageplan/webcam/webcam.htm]) rund um
+Lienz (Gailtaler Alpen/Lienzer Dolomiten, Schobergruppe, Kreuzeck-Gruppe, Villgratner Berge,
+Rieserfernergruppe, Venedigergruppe, Granatspitzgruppe, Glockner-Gruppe) (Flash-Plugin + Java erforderlich)
+# 56, 41, 43, 38, 37, 36, 39, 40
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (37) Rieserfernergruppe
+!alias bergpano_o37
+!html_name rieserfernergruppe.html
+!html_keywords Rieserfernergruppe, Panorama, Panoramen
+!html_description Panorama-Links Rieserfernergruppe
+!set o37
+!include ../material/gebiete.txt
+!unset o37
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.08.2002 (auch 38, Villgratner Berge)
+!item (!pano [Panoramen] [http://www.tirol360.com/osttirol/stallersattel/index_stallersattel.htm])
+   Staller Sattel (Passo Stalle)
+# alt: http://www.panopixvideotrips.com/osttirol_stallersattel/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 02.11.2002
+!item (!pano [Panoramen] [http://www.stadt-lienz.at/bergrettunglienz/lageplan/webcam/webcam.htm]) rund um
+Lienz (Gailtaler Alpen/Lienzer Dolomiten, Schobergruppe, Kreuzeck-Gruppe, Villgratner Berge,
+Rieserfernergruppe, Venedigergruppe, Granatspitzgruppe, Glockner-Gruppe) (Flash-Plugin + Java erforderlich)
+# 56, 41, 43, 38, 37, 36, 39, 40
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (38) Villgratner Berge
+!alias bergpano_o38
+!html_name villgratner_berge.html
+!html_keywords Villgratner Berge, Panorama, Panoramen
+!html_description Panorama-Links Villgratner Berge
+!set o38
+!include ../material/gebiete.txt
+!unset o38
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.08.2002 (auch 37, Rieserfernergruppe)
+!item (!pano [Panoramen] [http://www.tirol360.com/osttirol/stallersattel/index_stallersattel.htm])
+   Staller Sattel (Passo Stalle)
+# alt: http://www.panopixvideotrips.com/osttirol_stallersattel/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 02.11.2002
+!item (!pano [Panoramen] [http://www.stadt-lienz.at/bergrettunglienz/lageplan/webcam/webcam.htm]) rund um
+Lienz (Gailtaler Alpen/Lienzer Dolomiten, Schobergruppe, Kreuzeck-Gruppe, Villgratner Berge,
+Rieserfernergruppe, Venedigergruppe, Granatspitzgruppe, Glockner-Gruppe) (Flash-Plugin + Java erforderlich)
+# 56, 41, 43, 38, 37, 36, 39, 40
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (39) Granatspitzgruppe
+!alias bergpano_o39
+!html_name granatspitzgruppe.html
+!html_keywords Granatspitzgruppe, Panorama, Panoramen
+!html_description Panorama-Links Granatspitzgruppe
+!set o39
+!include ../material/gebiete.txt
+!unset o39
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# auskommentiert 19.05.2003 - existiert nicht mehr
+# ergänzt 08.08.2002 (das pano-Makro kann mit der langen URL nicht richtig umgehen!)
+# auch bei 40, Glocknergruppe, eingetragen
+!begin_ignore
+!item (!img [../bilder/minicam.gif] [])
+(!url [Panorama] [http://www.hohetauern.at/phpdocs/menue/html.php3?p=panorama&u=&h=1&kat=alle&lang=1&flash=])
+von der Bergstation Glocknerblick, bei Großdorf (Nähe Kals)
+!end_ignore
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 02.11.2002
+!item (!pano [Panoramen] [http://www.stadt-lienz.at/bergrettunglienz/lageplan/webcam/webcam.htm]) rund um
+Lienz (Gailtaler Alpen/Lienzer Dolomiten, Schobergruppe, Kreuzeck-Gruppe, Villgratner Berge,
+Rieserfernergruppe, Venedigergruppe, Granatspitzgruppe, Glockner-Gruppe) (Flash-Plugin + Java erforderlich)
+# 56, 41, 43, 38, 37, 36, 39, 40
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (40) Glockner-Gruppe
+!alias bergpano_o40
+!html_name glocknergruppe.html
+!html_keywords Glockner-Gruppe, Großglockner, Hüttenstempel, Stempel
+!html_description Hüttenstempel Glockner-Gruppe
+!set o40
+!include ../material/gebiete.txt
+!unset o40
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 08.08.2002
+!item (!pano [Panorama] [http://www.videopano.com/grossglockner/])
+(!www [Großglockner-Hochalpenstraße] [http://www.grossglockner.at/])
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# auskommentiert 19.05.2003 - existiert nicht mehr
+# ergänzt 08.08.2002 (das pano-Makro kann mit der langen URL nicht richtig umgehen!)
+# auch bei 39, Granatspitzgruppe, eingetragen
+!begin_ignore
+!item (!img [../bilder/minicam.gif] [])
+(!url [Panorama] [http://www.hohetauern.at/phpdocs/menue/html.php3?p=panorama&u=&h=1&kat=alle&lang=1&flash=])
+von der Bergstation Glocknerblick, bei Großdorf (Nähe Kals)
+!end_ignore
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 19.08.2002
+!item zylindrisches (!pano [360°-Panorama] [http://www.taurerwirt.at/pages/virt-rundgang.htm]) vom
+(!www [Hotel Taurerwirt] [http://www.taurerwirt.at/pages/virt-rundgang.htm]) bei
+(!www [Kals] [http://www.kals.at/]) (Java erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 02.11.2002
+!item (!pano [Panoramen] [http://www.stadt-lienz.at/bergrettunglienz/lageplan/webcam/webcam.htm]) rund um
+Lienz (Gailtaler Alpen/Lienzer Dolomiten, Schobergruppe, Kreuzeck-Gruppe, Villgratner Berge,
+Rieserfernergruppe, Venedigergruppe, Granatspitzgruppe, Glockner-Gruppe) (Flash-Plugin + Java erforderlich)
+# 56, 41, 43, 38, 37, 36, 39, 40
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (41) Schober-Gruppe
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o41
+!html_name schobergruppe.html
+!html_keywords Schober-Gruppe, Panorama, Panoramen
+!html_description Panorama-Links Schober-Gruppe
+!set o41
+!include ../material/gebiete.txt
+!unset o41
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 06.10.2002
+!item (!pano [Panoramen] [http://www.Tourplaner-Online.de/panoramenu.html#schober]) von Andreas Wieneke
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 02.11.2002
+!item (!pano [Panoramen] [http://www.stadt-lienz.at/bergrettunglienz/lageplan/webcam/webcam.htm]) rund um
+Lienz (Gailtaler Alpen/Lienzer Dolomiten, Schobergruppe, Kreuzeck-Gruppe, Villgratner Berge,
+Rieserfernergruppe, Venedigergruppe, Granatspitzgruppe, Glockner-Gruppe) (Flash-Plugin + Java erforderlich)
+# 56, 41, 43, 38, 37, 36, 39, 40
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (42) Goldberg-Gruppe {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o42
+!html_name goldberggruppe.html
+# !html_keywords Goldberg-Gruppe, Panorama, Panoramen
+!html_description Panorama-Links Goldberg-Gruppe
+!set o42
+!include ../material/gebiete.txt
+!unset o42
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (43) Kreuzeck-Gruppe
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o43
+!html_name kreuzeckgruppe.html
+# !html_keywords Kreuzeck-Gruppe, Panorama, Panoramen
+!html_description Panorama-Links Kreuzeck-Gruppe
+!set o43
+!include ../material/gebiete.txt
+!unset o43
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 02.11.2002
+!item (!pano [Panoramen] [http://www.stadt-lienz.at/bergrettunglienz/lageplan/webcam/webcam.htm]) rund um
+Lienz (Gailtaler Alpen/Lienzer Dolomiten, Schobergruppe, Kreuzeck-Gruppe, Villgratner Berge,
+Rieserfernergruppe, Venedigergruppe, Granatspitzgruppe, Glockner-Gruppe) (Flash-Plugin + Java erforderlich)
+# 56, 41, 43, 38, 37, 36, 39, 40
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (44) Ankogel-Gruppe {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o44
+!html_name ankogelgruppe.html
+# !html_keywords Ankogel, Ankogel-Gruppe, Hochalmspitze-Ankogelkamm, Gamskarkogelkamm, Reißeck- und Hafnergruppe, Panorama, Panoramen
+!html_description Panorama-Links Ankogel-Gruppe
+!set o44
+!include ../material/gebiete.txt
+!unset o44
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (45a) Radstädter Tauern
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o45a
+!html_name radstaedter_tauern.html
+# !html_keywords Niedere Tauern, Radstädter Tauern, Panorama, Panoramen
+!html_description Panorama-Links Radstädter Tauern (Niedere Tauern)
+!set o45a
+!include ../material/gebiete.txt
+!unset o45a
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (!www [360°-Rundblick über Altenmarkt] [http://www.altenmarkt-zauchensee.at/360/360_unten.htm])
+(Java erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (!www [360°-Rundblick Zauchensee] [http://www.altenmarkt-zauchensee.at/360/360_zauchensee.htm])
+(dito)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (45b) Schladminger Tauern
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o45b
+!html_name schladminger_tauern.html
+# !html_keywords Niedere Tauern, Schladminger Tauern, Panorama, Panoramen
+!html_description Panorama-Links Schladminger Tauern (Niedere Tauern)
+!set o45b
+!include ../material/gebiete.txt
+!unset o45b
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (!www [Obertauern] [http://www.obertauern.com/]) (Pongau):
+  (!pano [3D-Welt] [http://www.tauernrunde.at/ot_3d.htm]) (Java und CosmoPlayer-Plugin erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (45c) Rottenmanner und Wölzer Tauern {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o45c
+!html_name rottenmanner_woelzer_tauern.html
+!html_keywords Niedere Tauern, Rottenmanner Tauern, Wölzer Tauern, Panorama, Panoramen
+!html_description Panorama-Links Rottenmanner und Wölzer Tauern (Niedere Tauern)
+!set o45c
+!include ../material/gebiete.txt
+!unset o45c
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (45d) Seckauer Tauern {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o45d
+!html_name seckauer_tauern.html
+# !html_keywords Niedere Tauern, Seckauer Tauern, Panorama, Panoramen
+!html_description Panorama-Links Seckauer Tauern (Niedere Tauern)
+!set o45d
+!include ../material/gebiete.txt
+!unset o45d
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (46a) Nockberge
+!alias bergpano_o46a
+!html_name nockberge.html
+!html_keywords Nockberge, Gurktaler Alpen, Norische Alpen, Panorama, Panoramen
+!html_description Panorama-Links Nockberge
+!set o46a
+!include ../material/gebiete.txt
+!unset o46a
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 27.01.2003:
+!item (!www [Skigebiet] [http://www.innerkrems.at/]) Innerkrems: zylindrisches
+(!pano [360°-Winterpanorama] [http://www.innerkrems.at/panorama.htm]) (Java erforderlich)
+# Zoomviewer http://www.mgisoft.com/ - geht ausnahmsweise gut mit Modem
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (46b) Lavanttaler Alpen
+!alias bergpano_o46b
+!html_name lavanttaler_alpen.html
+!html_keywords Lavanttaler Alpen, Seetaler Alpen, Saualpe, Hochalpe, Koralpe, Stubalpe, Gleinalpe, Packalpe, Posruck, Norische Alpen, Panorama, Panoramen
+!html_description Panorama-Links Lavanttaler Alpen
+!set o46b
+!include ../material/gebiete.txt
+!unset o46b
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 08.08.2002:
+!item (!pano [360°-Panoramen] [http://www.steiermark.at/cms/ziel/430847/DE/]) in Graz mit Blick auf die
+umliegenden Berge (Java erforderlich)
+# -- in (!pano [niedriger] [http://www.steiermark.at/panorama/hochaus2.htm])
+# oder (!pano [höherer] [http://www.steiermark.at/panorama/hochaus1.htm]) Auflösung
+# System: LivePicture
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (47) Randgebirge östlich der Mur
+!alias bergpano_o47
+!html_name randgebirge_oestlich_mur.html
+!html_keywords Randgebirge östlich der Mur, Cetische Alpen, Wechsel, Stuhleck, Semmering, Fischbacher Alpen, Pretulalpe, Rennfeld, Hochlantsch, Schöckel, Bucklige Welt, Rosaliengebirge, Leithagebirge, Panorama, Panoramen
+!html_description Panorama-Links Randgebirge östlich der Mur
+!set o47
+!include ../material/gebiete.txt
+!unset o47
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 08.08.2002:
+!item zylindrisches (!pano [360°-Panorama] [http://www.steiermark.at/cms/ziel/430847/DE/]) von der
+Burg (!www [Kapfenberg] [http://www.kapfenberg.at/]) (Java erforderlich)
+# in der linken oberen Ecke von 47, nördlich von Graz, Mürztal
+# angrenzend 18 (Hochschwab), 19 (Mürzsteger Alpen) -- wird wohl auch noch auf dem Pano zu sehen sein
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# auskommentiert 10.08.2002 (Server liefert Timeout)
+# !item (!pano [360°-Panorama] [http://www.noe.co.at/winter/ipix/Semmering/FENSTER_JAV_01.htm])
+# vom (!www [Hirschenkogel] [http://www.hirschenkogel.at/]) (1360~m)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 08.08.2002:
+!item zylindrisches (!pano [360°-Panorama] [http://www.steiermark.at/cms/ziel/430847/DE/]) südsteirische
+Weinstraße (Java erforderlich)
+# System: LivePicture
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+##############################################################################################################
+!subnode Südliche Ostalpen
+!html_name ostalpen-suedlich.html
+!html_description Gebirgs-Panorama-Links Südliche Ostalpen
+
+
+!subsubnode* (48a) Ortler-Alpen {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o48a
+!html_name ortler.html
+# !html_keywords Ortler-Alpen, Ortler, Panorama, Panoramen
+!html_description Panorama-Links Ortler-Alpen
+!set o48a
+!include ../material/gebiete.txt
+!unset o48a
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (48b) Sobretta-Gavia-Gruppe {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o48b
+!html_name sobretta-gavia-gruppe.html
+# !html_keywords Sobretta-Gavia-Gruppe, Panorama, Panoramen
+!html_description Panorama-Links Sobretta-Gavia-Gruppe
+!set o48b
+!include ../material/gebiete.txt
+!unset o48b
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (48c) Nonsberg-Gruppe
+!alias bergpano_o48c
+!html_name nonsbergggruppe.html
+!html_keywords Nonsberg-Gruppe, Mendelkamm, Panorama, Panoramen
+!html_description Panorama-Links Nonsberg-Gruppe
+!set o48c
+!include ../material/gebiete.txt
+!unset o48c
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 11.06.2002:
+!item Panoramen vom (!www [Golfclub] [http://www.golfclublana.com/]) Lana (südlich von Meran):
+(!pano [Panorama~1] [http://www.st24.tv/de/GolfplatzLana1.html]) --
+(!pano [Panorama~2] [http://www.st24.tv/de/GolfplatzLana2.html])
+(QuickTime-Plugin erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 08.08.2002:
+!item zylindrische (!pano [360°-Panoramabilder] [http://www.kalterersee.com/panorama/uebersicht.htm])
+vom Kalterer See und Umgebung
+(und (!www [weitere] [http://www.kalterersee.com/content/siteSLdeSLe2wSLcategory.phpQMQidEQQ46.html]))
+# System LivePicture
+#  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (49) Adamello-Presanella-Alpen {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o49
+!html_name adamello_presanella.html
+# !html_keywords Adamellogruppe, Presanellagruppe, Adamello-Presanella-Gruppe, Adamello-Presanella-Alpen, Panorama, Panoramen
+!html_description Panorama-Links Adamello-Presanella-Alpen
+!set o49
+!include ../material/gebiete.txt
+!unset o49
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (50) Gardasee-Berge {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o50
+!html_name gardaseeberge.html
+# !html_keywords Gardasee-Berge, Monte Baldo, Panorama, Panoramen
+!html_description Panorama-Links Gardasee-Berge
+!set o50
+!include ../material/gebiete.txt
+!unset o50
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (51) Brenta-Gruppe {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o51
+!html_name brenta.html
+!html_keywords Brenta-Gruppe, Panorama, Panoramen
+!html_description Panorama-Links Brenta-Gruppe
+!set o51
+!include ../material/gebiete.txt
+!unset o51
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (52) Dolomiten
+!alias bergpano_o52
+!html_name dolomiten.html
+!html_keywords Dolomiten, Dolomiti, Panorama, Panoramen
+!html_description Panorama-Links Dolomiten
+!set o52
+!include ../material/gebiete.txt
+!unset o52
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 14.08.2002
+!item zylindrische (!pano [360°-Panoramen] [http://www.rundum.com/regionen/suedtirol/]) aus den Dolomiten
+(Gadertal/Val Badia, Grödner Tal/Val Gardena, Region Bozen/Bolzano; ferner Eisacktal/Valle Isarco)
+# Eisacktal - hier: Gossensaß -> gehört eigentlich nicht zu den Dolomiten (aber der Einfachkeit halber)
+# Dersch-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+!hline
+
+!subsubsubnode Westliche Dolomiten
+!html_name dolomiten-westlich.html
+!html_keywords Puez-Geisler-Gruppe, Langkofel, Schlern, Rosengarten, Catinaccio, Latemar, Sella, Pala-Gruppe, Pale di San Martino, Panorama
+!html_description Gebirgs-Panoramen Westliche Dolomiten
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# aktualisiert 08.08.2002:
+!item (!pano [Panoramen] [http://www.panopixvideotrips.com/wuerzjoch/]) vom Würzjoch (Passo dell'Erbe), u.a.
+mit Peitlerkofel (Sass de Putia; Pütia) (Java erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 08.08.2002:
+!item zylindrisches (!pano [360°-Panorama] [http://www.lajen.com/panorama.htm]) (Sommer/Winter)
+von Lajen/Laión (Grödner Tal/Val Gardena) (Java erforderlich)
+# System: esual
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 08.08.2002:
+!item (!www [Grödner Tal] [http://www.val-gardena.com/index-de.htm])/Val Gardena:
+   !begin_itemize !short
+   !item zylindrische (!pano [360°-Panoramen Winter] [http://www.val-gardena.com/360/index-de.htm]) (Danterceppies, Ciampinoi, Seceda)
+   !item zylindrische (!pano [360°-Panoramen Sommer] [http://www.val-gardena.com/360/index-s-de.htm]) (Daunëi, Stevia,
+Danterceppies, Ciampinoi)
+   !end_itemize
+# System: Zoom Viewer, http://www.3d-pixel.com/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 16.11.2002
+!item Panoramen vom Sass Pordoi (Sellagruppe; Bergstation (2950~m) der Seilbahn vom Pordoijoch/Passo Pordoi)):
+!begin_itemize !short
+!item (!pano [Panorama] [http://kaeferteam-nuernberg.de/unterwegs/alpentour_2002/114-1447.html]) von
+Nordwest über Nord, Ost bis Süd (Sellagruppe mit Piz Boë (3152~m), Marmolada usw.)
+!item (!pano [Panorama] [http://kaeferteam-nuernberg.de/unterwegs/alpentour_2002/114-1475.html]) nach Süd
+bis Südwest (Marmolada bis Fassatal/Val di Fassa)
+!end_itemize
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 06.10.2002
+!item (!pano [Rosengarten-Panoramen] [http://www.Tourplaner-Online.de/panoramenu.html#rosengarten]) und
+(!pano [Sella-Panoramen] [http://www.Tourplaner-Online.de/panoramenu.html#sella]) von Andreas Wieneke
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+
+!subsubsubnode Östliche Dolomiten
+!html_name dolomiten-oestlich.html
+!html_keywords Sextener Dolomiten, Dolomiti di Sesto, Pragser Dolomiten, Dolomiti di Braies, Fanes, Panorama
+# + Sorapis, Marmarole, Antelao, Pelmo, Civetta, Moiazza ???
+# Unter-Gebirgsgruppen wohl nicht vollständig? (oder Liste schon wieder zu detailliert???)
+!html_description Gebirgs-Panoramen Östliche Dolomiten
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 17.11.2002
+!item sphärische (!pano [Panoramen] [http://www.dolomiten.net/de_09_2002/panoramen/klein/de_360gradpanoramen_dolomitennet.htm]) 
+aus der Region Toblach-Innichen (u.a. Drei Zinnen, Innichen mit Blick auf den Haunold, Plätzwiese, 
+Pragser Wildsee, Kreuzbergpaß)
+# System: http://WebsUnlimited.com
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+
+##############################################################################################################
+!subsubnode (53) Fleimstaler Alpen
+!alias bergpano_o53
+!html_name fleimstaler_alpen.html
+!html_keywords Fleimstaler Alpen, Jochgrimmgruppe, Hornspitzkamm, Lagoraikette, Cima d'Asta-Gruppe, Panorama, Panoramen
+!html_description Panorama-Links Fleimstaler Alpen
+!set o53
+!include ../material/gebiete.txt
+!unset o53
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 08.08.2002
+!item Folgarìa (südlich von Trient/östlich von Rovereto)
+ (!pano [www.folgariaski.com] [http://www.folgariaski.com/]) -- die Seite zeigt ein zylindrisches
+ 360°-Winter- und Sommerpanorama (Flash-Plugin erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (54) Vizentiner Alpen {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o54
+!html_name vizentiner_alpen.html
+# !html_keywords Vizentiner Alpen, Panorama, Panoramen
+!html_description Panorama-Links Vizentiner Alpen
+!set o54
+!include ../material/gebiete.txt
+!unset o54
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (56) Gailtaler Alpen
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o56
+!html_name gailtaler_alpen.html
+# !html_keywords Gailtaler Alpen, Lienzer Dolomiten, Jaukengruppe, Weißenseer Berge, Latschurgruppe, Bleiberger Gruppe, Villacher Alpe, Panorama, Panoramen
+!html_description Panorama-Links Gailtaler Alpen
+!set o56
+!include ../material/gebiete.txt
+!unset o56
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 02.11.2002
+!item (!pano [Panoramen] [http://www.stadt-lienz.at/bergrettunglienz/lageplan/webcam/webcam.htm]) rund um
+Lienz (Gailtaler Alpen/Lienzer Dolomiten, Schobergruppe, Kreuzeck-Gruppe, Villgratner Berge,
+Rieserfernergruppe, Venedigergruppe, Granatspitzgruppe, Glockner-Gruppe) (Flash-Plugin + Java erforderlich)
+# 56, 41, 43, 38, 37, 36, 39, 40
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (57a) Karnischer Hauptkamm
+!alias bergpano_o57a
+!html_name karnischer_hauptkamm.html
+!html_keywords Karnischer Hauptkamm, Karnische Alpen, Panorama, Panoramen
+!html_description Panorama-Links Karnischer Hauptkamm (Karnische Alpen)
+!set o57a
+!include ../material/gebiete.txt
+!unset o57a
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item sphärisches (!pano [360°-Panorama] [http://www.skiarena.at/ipix/panorama.html])
+ (!www [Naßfeld] [http://www.skiarena.at/]) (Kärnten) (Standort wohl Treßdorfer Höhe?; Java erforderlich)
+# ipix-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (57b) Südliche Karnische Alpen {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o57b
+!html_name karnische_alpen_suedlich.html
+# !html_keywords Karnische Alpen, Südliche Karnische Alpen, Panorama, Panoramen
+!html_description Panorama-Links Südliche Karnische Alpen
+!set o57b
+!include ../material/gebiete.txt
+!unset o57b
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (58) Julische Alpen {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o58
+!html_name julische_alpen.html
+# !html_keywords Julische Alpen, Juliske Alpe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Julische Alpen
+!set o58
+!include ../material/gebiete.txt
+!unset o58
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (59) Karawanken und Bachergebirge {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o59
+!html_name karawanken_bachergebirge.html
+# !html_keywords Karawanken, Bachergebirge, Pohorje, Panorama, Panoramen
+!html_description Panorama-Links Karawanken und Bachergebirge
+!set o59
+!include ../material/gebiete.txt
+!unset o59
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (60) Steiner Alpen {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o60
+!html_name steiner_alpen.html
+# !html_keywords Steiner Alpen, Kamniske Alpe, Panorama, Panoramen
+!html_description Panorama-Links Steiner Alpen
+!set o60
+!include ../material/gebiete.txt
+!unset o60
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+##############################################################################################################
+!subnode Westliche Ostalpen
+!html_name ostalpen-westlich.html
+!html_description Gebirgs-Panorama-Links Westliche Ostalpen
+
+
+!subsubnode* (63) Plessur-Alpen {0}
+!html_name plessur_alpen.html
+!html_keywords Plessur-Alpen, Panorama, Panoramen
+!html_description Panorama-Links Plessur-Alpen
+!alias bergpano_o63
+!set o63
+!include ../material/gebiete.txt
+!unset o63
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (64) Oberhalbsteiner Alpen (Plattagruppe) {0}
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o64
+!html_name oberhalbsteiner_alpen.html
+# !html_keywords Oberhalbstein, Oberhalbsteiner Alpen, Plattagruppe, Panorama, Panoramen
+!html_description Panorama-Links Oberhalbsteiner Alpen (Platta-Gruppe)
+!set o64
+!include ../material/gebiete.txt
+!unset o64
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (65) Albula-Alpen
+!alias bergpano_o65
+!html_name albula-alpen.html
+# !html_keywords Albula-Alpen, Panorama, Panoramen
+!html_description Panorama-Links Albula-Alpen
+!set o65
+!include ../material/gebiete.txt
+!unset o65
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 30.08.2002 (auch bei 66/Bernina + 67/Livigno-Alpen)
+!item div. zylindrische (!pano [Panoramen] [http://www.engadin-portal.ch/cgi-bin/panomap.cgi?cap=yes])
+Oberengadin (Javascript erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (66) Bernina-Alpen
+!alias bergpano_o66
+!html_name bernina.html
+# !html_keywords Bernina-Alpen, Bernina-Gruppe, Bergeller Berge, Bergell, Val Bregaglia, Panorama, Panoramen
+!html_description Panorama-Links Bernina-Alpen
+!set o66
+!include ../material/gebiete.txt
+!unset o66
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 30.08.2002 (auch bei 65/Albula-Alpen + 67/Livigno-Alpen)
+!item div. zylindrische (!pano [Panoramen] [http://www.engadin-portal.ch/cgi-bin/panomap.cgi?cap=yes])
+Oberengadin (Javascript erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 06.10.2002
+!item (!pano [Panoramen] [http://www.Tourplaner-Online.de/panoramenu.html#bernina]) von Andreas Wieneke
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (67) Livigno-Alpen
+!alias bergpano_o67
+!html_name livigno-alpen.html
+!html_keywords Livigno-Alpen, Panorama, Panoramen
+!html_description Panorama-Links Livigno-Alpen
+!set o67
+!include ../material/gebiete.txt
+!unset o67
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 30.08.2002 (auch bei 65/Albula-Alpen + 67/Livigno-Alpen)
+!item div. zylindrische (!pano [Panoramen] [http://www.engadin-portal.ch/cgi-bin/panomap.cgi?cap=yes])
+Oberengadin (Javascript erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# überprüft 08.08.2002:
+!item zylindrisches (!pano [Winter-Panorama] [http://www.valtline.it/bormio_inv/bor_nv.htm]) und
+(!pano [Sommer-Panorama] [http://www.valtline.it/bormio_inv/estate.htm]) Bormio-Talkessel
+(Alta (!www [Valtellina] [http://www.valtline.it/]) = Hochveltlin) (Java erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!begin_ignore
+# auskommentiert 19.05.2003: URL existiert zwar noch, aber anderes Foto. Letztlich für diese
+# Panorama-Linksammlung als Einzelfoto entbehrlich.
+!item (!pano [Foto] [http://www.valtline.it/panorama.htm]): winterlicher Blick über den Talkessel von
+Bormio ins (!link [Ortlergebiet] [bergpano_o48a]) und zum Monte Vallecetta
+((!www [Skigebiet] [http://www.sib.bormio.it/]); (!link [Sobretta-Gavia-Gruppe] [bergpano_o48b]))
+!end_ignore
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (68) Bergamasker Alpen
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_o68
+!html_name bergamasker_alpen.html
+!html_keywords Bergamasker Alpen, Alpi Orobie, Panorama, Panoramen
+!html_description Panorama-Links Bergamasker Alpen
+!set o68
+!include ../material/gebiete.txt
+!unset o68
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item zylindrisches (!pano [360°-Panorama] [http://www.aprica.it/ita/360/giochi.htm]) von (!www [Aprica] [http://www.apricaonline.it/])-Magnolta (Java erforderlich)
+# Dersch-System; das Bild zeigt den Kinderspielplatz mit umgebender Ortschaft + etwas Landschaft
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+##############################################################################################################
+!node Westalpen
+!alias bergpano_westalpen
+!html_name westalpen.html
+!html_description Gebirgs-Panorama-Links Westalpen
+
+##############################################################################################################
+!subnode Innerer (östlicher bis südlicher) Alpenbogen (Hauptkamm)
+!html_name westalpen_oestlich_suedlich.html
+
+
+!subsubnode* (82) Adula-Alpen
+# wenn hier Panoramen hinzukommen, in gebiete.txt die Links von den Webcams nach hier ent-auskommentieren
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_w82
+!html_name adula-alpen.html
+# !html_keywords Adula-Alpen, Taminagebirge, Cenerigruppe, Panorama, Panoramen
+!html_description Panorama-Links Adula-Alpen (mit Taminagebirge, Cenerigruppe)
+!set w82
+!include ../material/gebiete.txt
+!unset w82
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (83) Tessiner Alpen
+!alias bergpano_w83
+!html_name tessiner_alpen.html
+!html_keywords Tessiner Alpen, Misoxer Alpen, Vareser Voralpen, Panorama, Panoramen
+!html_description Panorama-Links Tessiner Alpen (mit Misoxer Alpen, Vareser Voralpen)
+!set w83
+!include ../material/gebiete.txt
+!unset w83
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 13.11.2002
+!item (!pano [Panoramen] [http://www.jo-sac.ch/rotondo/panorma.html]) von der
+(!www [Rotondohütte] [http://www.jo-sac.ch/rotondo/rotondo.html]) (südlich vom Furkapaß)
+# einfache JPG-Datei (Teilpanorama zylindrisch), aber mit Dersch-Tools erstellt
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 05.10.2002
+!item (!pano [360°-Panorama] [http://www.ticino-tourism.ch/webtsi/pan/ssalv.html]) vom Monte San~Salvatore
+(oberhalb von Lugano) (QuickTime-Plugin erforderlich)
+# .QT-Datei
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 05.10.2002
+# auskommentiert 19.05.2003 (dieser Link falsch; richtiger nicht auffindbar)
+# !item (!pano [360°-Panorama] [http://www.ticino-tourism.ch/webtsi/pan/ssalv.html]) von Cardada-Cimetta
+# (oberhalb von Locarno) (QuickTime-Plugin erforderlich)
+# .QT-Datei
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 07.06.2003
+!item (!pano [360°-Panoramen] [http://www.campofelice.ch/web_quick.htm]) vom
+(!www [Campingplatz Campo Felice] [http://www.campofelice.ch/]) bei Tenero (östlich von Locarno)
+(QuickTime-Plugin erforderlich)
+# .MOV-Dateien; zylindrisch
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (86) Walliser Alpen
+!alias bergpano_w86
+!html_name walliser_alpen.html
+!html_keywords Walliser Alpen, Wallis, Valais, Panorama, Panoramen
+!html_description Panorama-Links Walliser Alpen
+!set w86
+!include ../material/gebiete.txt
+!unset w86
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 24.08.2002
+!item (!pano [360°-Panoramen] [http://www.zermatt.ch/d/panorama/]) von Zermatt und Umgebung (Gandegghütte,
+Riffelberg, Mettelhorn) (QuickTime-Plugin erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 13.08.2002
+!item (!pano [360°-Panorama] [http://www.saas-fee.ch/panorama.htm]) von der Bergstation Mittelallalin,
+südwestlich von (!www [Saas-Fee] [http://www.saas-fee.ch/]) (QuickTime-Plugin erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 06.10.2002 (zu 86, Walliser Alpen)
+!item (!pano [Wallis-Panoramen] [http://www.Tourplaner-Online.de/panoramenu.html#wallis]) von Andreas Wieneke
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 05.10.2002, aktualisiert 19.05.2003
+!item (!pano [Panoramen] [http://www.valaispano.ch/]) aus den Walliser Alpen (sehr umfangreich)
+(Java erforderlich)
+# alt: http://www.chez.com/panoramas/
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (87) Mont-Blanc-Gruppe
+!alias bergpano_w87
+!html_name mont-blanc-gruppe.html
+!html_keywords Mont-Blanc, Panorama, Panoramen
+!html_description Panorama-Links Mont-Blanc-Gruppe
+!set w87
+!include ../material/gebiete.txt
+!unset w87
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 16.02.2003
+!item (!link [Panorama] [BelchenSchwarzwald]) vom Belchen im Schwarzwald u.a. mit Blick zur Mont-Blanc-Gruppe
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 13.10.2002 (sowohl bei 87, Mont-Blanc-Gruppe - als auch bei 77, Savoyer Kalkalpen)
+!item (!pano [Panoramen] [http://www.megeve.com/hiver/comme_si/vue360/vue360.htm]) rund um Megève
+(Mont-Blanc-Gruppe) (QuickTime-Plugin erforderlich)
+# .MOV-Dateien
+# Village, Pré-Rossét, Mont d'Arbois, Jaillet
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 02.03.2003, aktualisiert 01.11.2003
+!item (!pano [180°-Panorama] [http://www.annecybernard.com/v2/panoramique/pano-chamonix.html])
+  Chamonix-Monenvers: Mer de Glace
+# einfache jpg-Datei
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (88) Grajische Alpen
+!alias bergpano_w88
+!html_name grajische_alpen.html
+!html_keywords Grajische Alpen, Paradiso, Rutor, Vanoise, Charbonnel, Savoier Alpen, Savoyen, Panorama, Panoramen
+!html_description Panorama-Links Grajische Alpen
+!set w88
+!include ../material/gebiete.txt
+!unset w88
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 02.03.2003, aktualisiert 01.11.2003
+!item (!pano [Panorama-Blick] [http://www.annecybernard.com/v2/panoramique/pano-bourgstmaurice.html]) über
+ das Tal von Bourg St.-Maurice und Les Arcs
+# einfache jpg-Datei
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 13.10.2002
+!item zylindrische (!pano [360°-Panoramen] [http://www.ski-lesarcs.com/frameset.php?url=/gb/panorama360.php])
+aus dem (!www [Skigebiet] [http://www.ski-lesarcs.com/]) Les Arcs (südöstlich von Bourg St.-Maurice)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 13.10.2002
+!item (!pano [Panoramen] [http://www.meribel.net/promo/360-a.htm]) aus dem Skigebiet von Meribel (Vanoise)
+# Mittelstation Burgin-Saulire-Gondelbahn (2100 m)
+# Sessellift-Bergstation Roc de Fer (2294 m)
+# Cote Brune Sessellift/Mont de la Chambre (2850 m)
+# als JPG's
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 20.06.2003
+# Belledonne/Oisans/Serre Chevalier/Alpe d'Huez = 89, Vercors = 78, Vanoise = 88
+!item (!pano [Panoramen] [http://www.sztucki.de/]) von Michael Sztucki (Java erforderlich)
+# System Livepicture, zylindrisch, (meist?) 360°
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 05.08.2003
+!item zylindrische (!pano [360°-Panoramen] [http://www.valdisere.com/fr_ete/montagne/webcam/panorama.php]) Val d'Isère (Java erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (90) Cottische Alpen
+!alias bergpano_w90
+!html_name cottische_alpen.html
+!html_keywords Cottische Alpen, Queyras, Parpaillon, Panorama, Panoramen
+!html_description Panorama-Links Cottische Alpen
+!set w90
+!include ../material/gebiete.txt
+!unset w90
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 13.10.2002
+!item zylindrisches (!pano [360°-Panorama] [http://www.vars-ski.com/hiver/webcam.asp]) aus dem Skigebiet Vars
+(nördlich von Barcelonnette, südlich von Guillestre) (Java erforderlich)
+# System www.previsite.com
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (91) Meeralpen {0}
+# wenn hier Panoramen hinzukommen, in gebiete.txt die Links von den Webcams nach hier ent-auskommentieren
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_w91
+!html_name meeralpen.html
+# !html_keywords Meeralpen, Seealpen, Alpi Marittime, Panorama, Panoramen
+!html_description Panorama-Links Meeralpen (Seealpen)
+!set w91
+!include ../material/gebiete.txt
+!unset w91
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (92) Ligurische Alpen {0}
+# wenn hier Panoramen hinzukommen, in gebiete.txt die Links von den Webcams nach hier ent-auskommentieren
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_w92
+!html_name ligurische_alpen.html
+# !html_keywords Ligurische Alpen, Panorama, Panoramen
+!html_description Panorama-Links Ligurische Alpen
+!set w92
+!include ../material/gebiete.txt
+!unset w92
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+##############################################################################################################
+!subnode Äußerer (westlicher bis nördlicher) Alpenbogen
+!html_name westalpen_westlich_noerdlich.html
+
+##############################################################################################################
+!subsubnode (70) Appenzeller Alpen
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_w70
+!html_name appenzeller_alpen.html
+!html_keywords Appenzeller Alpen, Toggenburg, Panorama, Panoramen
+!html_description Panorama-Links Appenzeller Alpen
+!set w70
+!include ../material/gebiete.txt
+!unset w70
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 13.11.2002
+!item Erik Krause: (!pano [Panorama] [http://www.erik-krause.de/bilder/index.htm#Churfirsten])-Blick von der
+der Tannenbodenalp Richtung Churfirsten (Blickrichtung Norden)
+# es heißt "die" Churfirsten
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (71) Schweizer Mittelland
+!alias bergpano_w71
+!html_name schweizer_mittelland.html
+!html_keywords Schweizer Mittelland, Panorama, Panoramen
+!html_description Panorama-Links Schweizer Mittelland
+!set w71
+!include ../material/gebiete.txt
+!unset w71
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 18.09.2002, aktualisiert 19.05.2003
+!item (!pano [Panoramen] [http://www.rigipano.ch/Rigi%20Panorama.htm]) vom (!www [Rigi] [http://www.rigi.ch/])
+# wohl identisch: http://www.rigi.ch/website/deutsch/bilder/panorama_so_d.html
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (72) Jura
+!alias bergpano_w72
+!html_name jura.html
+!html_keywords Jura, Schweizer Jura, Französischer Jura, Panorama, Panoramen
+!html_description Panorama-Links Jura (Schweizer Jura, Französischer Jura)
+!set w72
+!include ../material/gebiete.txt
+!unset w72
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 16.02.2003
+!item (!link [Panorama] [BelchenSchwarzwald]) vom Belchen im Schwarzwald u.a. mit Blick über den Jura zum
+Alpenhauptkamm
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode* (73) Zentralschweizerische Voralpen {0}
+# wenn hier Panoramen hinzukommen, in gebiete.txt die Links von den Webcams nach hier ent-auskommentieren
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_w73
+!html_name zentralschweizerische_voralpen.html
+# !html_keywords Zentralschweizerische Voralpen, Panorama, Panoramen
+!html_description Panorama-Links Zentralschweizerische Voralpen
+!set w73
+!include ../material/gebiete.txt
+!unset w73
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!begin_ignore
+# Entscheidung: wird zu den Freiburger Voralpen mit dazugenommen
+!subnode (74) Berner Voralpen
+!alias bergpano_w74
+!html_name berner_voralpen.html
+!html_keywords Berner Voralpen, Panorama, Panoramen
+!html_description Panorama-Links Berner Voralpen
+!set w74
+!include ../material/gebiete.txt
+!unset w74
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+!end_ignore
+
+##############################################################################################################
+!subsubnode* (75) Freiburger Voralpen und Berner Voralpen {0}
+# wenn hier Panoramen hinzukommen, in gebiete.txt die Links von den Webcams nach hier ent-auskommentieren
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_w75
+!html_name freiburger_voralpen.html
+# !html_keywords Freiburger Voralpen, Freiburger Alpen, Berner Voralpen, Panorama, Panoramen
+!html_description Panorama-Links Freiburger Voralpen (mit Berner Voralpen)
+!set w75
+!include ../material/gebiete.txt
+!unset w75
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (keine Panoramen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (76) Chablais-Alpen
+!alias bergpano_w76
+!html_name chablais-alpen.html
+!html_keywords Chablais-Alpen, Panorama, Panoramen
+!html_description Panorama-Links Chablais-Alpen
+!set w76
+!include ../material/gebiete.txt
+!unset w76
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 21.09.2002 (Zuordnung ist etwas willkürlich, naja)
+!item verschiedene (!pano [Panoramen] [http://www.eyesonsky.com/panoprev.php]) von Préverenges (westlich
+von Lausanne); u.a. Lac Léman/Genfer See, Dent d'Oche (Chablais-Alpen), Blick zum Montblanc
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 30.03.2003
+!item zylindrisches (!pano [360°-Panorama] [http://www.isis-distribution.com/meteo/vue-360.htm]) vom Dach 
+eines Hochhauses in Genf
+# einfache jpg-Datei
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 01.11.2002
+!item diverse (!pano [Panoramen] [http://www.stella-galaxy.com/360/index.html]) rund um die Ortschaft
+(!I)Les Gets(!i) (nordöstlich von Taninges) (QuickTime-Plugin erforderlich)
+# .MOV-Dateien
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (77) Savoyer Kalkalpen
+!alias bergpano_w77
+!html_name savoyer_kalkalpen.html
+!html_keywords Savoyer Kalkalpen, Panorama, Panoramen
+!html_description Panorama-Links Savoyer Kalkalpen
+!set w77
+!include ../material/gebiete.txt
+!unset w77
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 13.10.2002 (sowohl bei 87, Mont-Blanc-Gruppe - als auch bei 77, Savoyer Kalkalpen)
+!item (!pano [Panoramen] [http://www.megeve.com/hiver/comme_si/vue360/vue360.htm]) rund um Megève
+(Mont-Blanc-Gruppe) (QuickTime-Plugin erforderlich)
+# .MOV-Dateien
+# Village, Pré-Rossét, Mont d'Arbois, Jaillet
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 01.11.2002, aktualisiert 19.05.2003
+!item verschiedene (!pano [360°-Panoramen] [http://www.lac-annecy.net/fr/panoramas.html])
+rund um den Lac d'Annecy (südlich von Genf) (Java erforderlich)
+# alt: http://www.lac-annecy.net/360/index.htm
+# System www.pixaround.com
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 02.03.2003, aktualisiert 01.11.2003
+!item (!pano [Panorama] [http://www.annecybernard.com/v2/panoramique/pano-toit.html]) mit den Dächern von
+ Annecy, im Hintergrund die Berge
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 02.03.2003
+!item (!pano [Panorama] [http://www.village-vacances.com/index.php?lang=fr&rub=panoramique_fr]) von Sévrier
+ (am West-Ufer des Lac d'Annecy gelegen)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 02.03.2003, aktualisiert 01.11.2003
+!item (!pano [Panorama-Blick] [http://www.annecybernard.com/v2/panoramique/pano-forclaz.html]) über den
+ Lac d'Annecy, vom Col de la Forclaz (Montmin)
+# oberhalb des Sees an der Ostseite gelegen
+# einfache jpg-Datei
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 02.03.2003, aktualisiert 01.11.2003
+!item (!pano [Panorama-Blick] [http://www.annecybernard.com/v2/salle/talloiresbay.html]) über den Lac d'Annecy,
+ von der Bucht von Talloires (Ost-Ufer)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 02.03.2003, aktualisiert 01.11.2003
+!item (!pano [180°-Panorama] [http://www.annecybernard.com/v2/panoramique/pano-semnoz.html]) aus den
+(!I)Montagne du Semnoz(!i), Blick zum Lac d'Annecy, im Hintergrund das Montblanc-Massiv
+# einfache jpg-Datei
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 02.03.2003, aktualisiert 01.11.2003
+!item (!pano [180°-Winter-Panorama] [http://www.annecybernard.com/v2/panoramique/pano-aillons.html])
+ (!www [Aillons-Tal] [http://www.lesaillons.com/]) (Massif des Bauges; südlich von Annecy, nordöstlich von
+ Chambéry)
+# einfache jpg-Datei
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (78) Französische Kalkalpen
+# wenn hier Panoramen hinzukommen, in gebiete.txt die Links von den Webcams nach hier ent-auskommentieren
+# Hinweis: wenn hier Panoramen dazukommen, zugehörige Einträge in Datei "politisch.txt" ent-auskommentieren
+!alias bergpano_w78
+!html_name franzoesische_kalkalpen.html
+!html_keywords Französische Kalkalpen, Bornes, Bauget, Chartreuse, Vercors, Désert, Ventoux, Luberon, Panorama, Panoramen
+!html_description Panorama-Links Procençalische Alpen
+!set w78
+!include ../material/gebiete.txt
+!unset w78
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 20.06.2003
+# Belledonne/Oisans/Serre Chevalier/Alpe d'Huez = 89, Vercors = 78, Vanoise = 88
+!item (!pano [Panoramen] [http://www.sztucki.de/]) von Michael Sztucki (Java erforderlich)
+# System Livepicture, zylindrisch, (meist?) 360°
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (79) Provençalische Alpen
+!alias bergpano_w79
+!html_name provencalische_alpen.html
+!html_keywords Provençalische Alpen, Provence, Panorama, Panoramen
+!html_description Panorama-Links Provençalische Alpen
+!set w79
+!include ../material/gebiete.txt
+!unset w79
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 17.11.2002
+!item sphärisches (!pano [Panorama] [http://www.erik-krause.de/bilder/index.htm#Verdon]) aus dem
+Grand Canyon du (!www [Verdon] [http://www.verdon.com/]), bei La-Palus-sur-Verdon (von Erik Krause)
+# aufgenommen in der zweiten Serpentine der Route de Crete ab La Palud, 2 Meter außerhalb der Brüstung
+# Dersch-System
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (80) Glarner Alpen
+!alias bergpano_w80
+!html_name glarner_alpen.html
+!html_keywords Glarner Alpen, Glarus, Panorama, Panoramen
+!html_description Panorama-Links Glarner Alpen
+!set w80
+!include ../material/gebiete.txt
+!unset w80
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 16.02.2003
+!item (!link [Panorama] [BelchenSchwarzwald]) vom Belchen im Schwarzwald u.a. mit Blick zu den Glarner Alpen
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (81) Urner Alpen
+!alias bergpano_w81
+!html_name urner_alpen.html
+!html_keywords Urner Alpen, Uri, Vierwaldstätter Alpen, Panorama, Panoramen
+!html_description Panorama-Links Urner und Vierwaldstätter Alpen
+!set w81
+!include ../material/gebiete.txt
+!unset w81
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 16.02.2003
+!item (!link [Panorama] [BelchenSchwarzwald]) vom Belchen im Schwarzwald u.a. mit Blick zu den Urner Alpen
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (84) Berner Alpen
+!alias bergpano_w84
+!html_name berner_alpen.html
+!html_keywords Berner Alpen, Diableretsgruppe, Panorama, Panoramen
+!html_description Panorama-Links Berner Alpen
+!set w84
+!include ../material/gebiete.txt
+!unset w84
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 16.02.2003
+!item (!link [Panorama] [BelchenSchwarzwald]) vom Belchen im Schwarzwald u.a. mit Blick zu den Glarner Alpen
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 13.08.2002
+!item (!pano [Panoramen] [http://www.bettmeralp.ch/qtvr/]) von der
+(!www [Bettmeralp] [http://www.bettmeralp.ch/qtvr/]) (nördlich von Brig im Rhônetal),
+u.a. Bettmersee, Bettmerhorn (QuickTime-Plugin erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 18.09.2002
+!item zahlreiche (!pano [Panoramen] [http://www.grindelwald.ch/karte/virtuell.htm]) in und um
+Grindelwald (Java erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 05.10.2002
+!item (!pano [360°-Panoramen] [http://www.wettercam24.ch/d/channel3/konkordiahuette/panorama/index.shtml]) von
+der Konkordiahütte und Umgebung (Konkordiaplatz, Jungfraufirn, Jungfraujoch) (QuickTime-Plugin erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.10.2002
+!item (!pano [360°-Panoramen] [http://www.webcam24.ch/d/channel1/fiesch/panorama/]) Fiesch, Fiescheralp,
+Eggishorn, Aletschgletscher (QuickTime-Plugin erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.10.2002
+!item (!pano [360°-Panoramen] [http://www.webcam24.ch/d/channel1/bellwald/panorama/]) Bellwald, Gassen,
+Fleschen, Furggulti (QuickTime-Plugin erforderlich)
+# Rottental/Goms
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.10.2002
+!item (!pano [Panoramen Belalp] [http://www.belalp.ch/qtvr/]), bei Brig
+(QuickTime-Plugin erforderlich)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 05.10.2002
+!item zylindrische (!pano [Panoramen] [http://www.wengen-muerren.ch/seiten/360g/sightseeing.htm])
+rund um Wengen/Mürren im Lauterbrunnental (Java erforderlich)
+# System: www.cuva.de
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+##############################################################################################################
+!subsubnode (89) Dauphiné-Alpen
+!alias bergpano_w89
+!html_name dauphine-alpen.html
+!html_keywords Dauphiné, Belledonne, Oisans, Pelvoux, Ecrins, Panorama, Panoramen
+!html_description Panorama-Links Dauphiné-Alpen
+!set w89
+!include ../material/gebiete.txt
+!unset w89
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# hinzugefügt 20.06.2003
+# Belledonne/Oisans/Serre Chevalier/Alpe d'Huez = 89, Vercors = 78, Vanoise = 88
+!item (!pano [Panoramen] [http://www.sztucki.de/]) von Michael Sztucki (Java erforderlich)
+# System Livepicture, zylindrisch, (meist?) 360°
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_itemize
+
+
+##############################################################################################################
+#############################################################################################################
+!node Einige außeralpine Gebirgs-Panoramen
+# Achtung, hart verlinkt von Webcams-Schwarzwald!!
+!html_name ausseralpin.html
+!html_description Gebirgs-Panorama-Links Außeralpin
+
+# ...naja oder zumindest wo ein paar größere Erhebungen sind, auch wenn's zum Gebirge nicht reicht...
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams außeralpin] [../bergcam/ausseralpin.html])
+!end_flushright
+!endif
+
+!begin_itemize !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (!B)Deutschland(!b)
+   !begin_itemize !short
+# ............................................................................................................
+!label BelchenSchwarzwald
+# hinzugefügt Nov. 2002, aktualisiert 16.02.2003
+!item Erik Krause: (!pano [Panorama] [http://www.erik-krause.de/bilder/index.htm#Alpen]) vom Belchen
+(Schwarzwald), Blick von den (!link [Glarner Alpen] [bergpano_w80]) über die (!link [Urner] [bergpano_w81]) und
+(!link [Berner Alpen] [bergpano_w84]) bis zur (!link [Mont-Blanc-Gruppe] [bergpano_w87])
+# ist bei den hier aufgeführten Gebirgsgruppen verlinkt!
+# ............................................................................................................
+# hinzugefügt 16.02.2003
+!item verschiedene (!pano [Panoramen] [http://www.schwarzwald360.de/main.php]) aus dem Schwarzwald
+   !end_itemize
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (!B)Österreich(!b)
+   !begin_itemize !short
+   !item (!pano [Panorama] [http://www383.ws1.inname.net/hochficht_ski/])
+   (!www [Hochficht] [http://www.hochficht.at/]) (bei
+   (!www [Klaffer] [http://www.tiscover.com/klaffer.hochficht]) am Hochficht; Mühlviertel/Böhmerwald,
+   Oberösterreich)
+# ............................................................................................................
+   !item (!pano [Panorama] [http://www.videopano.com/suedsteir_weinstr/index_bike.htm])
+   Südsteirische Weinstraße
+   !end_itemize
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!item (!B)Italien(!b)
+   !begin_itemize !short
+   !item (noch leer)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   !end_itemize
+!end_itemize
+
+#############################################################################################################
+!node "Politische" Gliederung der Bergpanorama-Linksammlung
+!alias bergpano-politisch
+!html_name bergpano-politisch.html
+!html_description Gebirgs-Panorama-Links Deutschland, Italien, Österreich, Schweiz, Liechtenstein, Slowenien, Frankreich
+
+!include ../material/politisch.txt
+
+#############################################################################################################
+!node Ausgewählte Links
+!html_name links.html
+
+!smallskip
+!subsubheading Panorama-Technik
+!begin_itemize !short
+# ergänzt 05.08.2002
+!item (!www [www.panoguide.com] [http://www.panoguide.com/]) (engl.)
+# ergänzt 05.08.2002
+!item (!www [www.panoramic.net] [http://www.panoramic.net/]) (Portalseite zur Panoramafotografie; engl.)
+# ergänzt 05.08.2002
+!item Panorama-Tools von Helmut Dersch (freie Software; für Windows/Mac/Linux)
+!begin_itemize !short
+!item auf den (!www [Webseiten von Helmut Dersch] [http://www.fh-furtwangen.de/!~dersch]) stehen diese leider nicht mehr zum Download, aber dafür gibt es verschiedene (!B)Mirrors(!b), beispielsweise...
+!item ...(!www [diesen hier] [http://home.no.net/dmaurer/!~dersch/index_deutsch.html]) vom Juni~2001
+# hinzugefügt 19.05.2003
+!item (!www [Max~Lyons~Seiten] [http://www.tawbaware.com/maxlyons/pano12ml.htm]) zur Helmut Dersch's Panorama-Tools
+!end_itemize
+# hinzugefügt 31.08.2002 // auskommentiert 19.05.2003, Rechner unbekannt (???)
+# !item (!www [The Art and Science of Spherical Panoramas] [http://www.bigbenpublishing.com.au/360/docs/]) (mit Tutorial)
+!end_itemize
+
+!hline
+!subsubheading Weitere Panorama-Bilder
+!begin_itemize !short
+# ergänzt 05.08.2002
+!item (!www [www.naturepanoramas.com] [http://www.naturepanoramas.com/]) und
+   (!www [www.carlheilman.com] [http://www.carlheilman.com/]): Natur-Panoramen von Carl Heilman II (u.a.
+   US-Nationalparks)
+# ergänzt 05.08.2002
+!item (!www [historische Panoramen] [http://www.archives.gov/exhibit_hall/panoramic_photography/panoramic_home.html])
+   aus den US-Nationalparks (NARA = US National Archives und Records Administration)
+# ergänzt 01.11.2003
+!item zylindrische (!www [Panoramen] [http://milos-greece.com/panorama/panorama.html]) von der Insel Milos (Kykladen, Griechenland; von Immo Schröter)
+# ergänzt 01.11.2003
+!item (!www [www.stadtpanoramen.de] [http://www.stadtpanoramen.de/]) (deutsche Städte und Links weltweit)
+!end_itemize
+
+#############################################################################################################
+!begin_ignore
+!node* Link-Partner
+!alias linkpartner
+!html_name link-partner.html
+
+Folgende Websites haben einen Link auf diese Bergpanorama-Linkliste gesetzt:
+
+# vorerst in chronologischer Reihenfolge
+!begin_itemize !short
+!end_itemize
+!end_ignore
+
+#############################################################################################################
+!node Gesamt-Inhaltsverzeichnis
+!html_name inhalt-gesamt.html
+
+# ... sorry, hier ist leider noch der berühmte "Wurm" drin... (da das Verzeichnis von meinem
+# HTML-Programm nur unvollständig erzeugt wird -- wahrscheinlich ein Programmfehler)
+
+# kommt ohne Text "Inhaltsverzeichnis"
+!toc [all]
+# !tableofcontents [all]
+
+#############################################################################################################
+# mit dieser Dummy-Seite wird die vorangehende Seite korrekt erzeugt (22.03.2003)
+!node* Dummy
+!html_name dummy.html
+Dies ist eine aus EDV-technischen Gründen erforderliche Seite ohne sinnvollen Inhalt...
+
+# !autoref [on]
+!end_document

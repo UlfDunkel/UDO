@@ -1,0 +1,4579 @@
+# gebiete.txt
+# angelegt am 02.08.2002
+# letzte Änderungen 02.11.2003
+
+# Link-Hinzufügung zu Gebietsumgrenzungen: weiter bei 17a Gmunden
+
+#############################################################################################################
+## (1) Bregenzer Wald
+!ifset o01
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Bregenzer Wald, Webcam
+!html_description Gebirgs-Webcam-Links Bregenzer Wald
+!endif
+!ifset bergpano
+!html_keywords Bregenzer Wald, Panorama, Panoramen
+!html_description Panorama-Links Bregenzer Wald
+!endif
+!ifset stempel
+!html_keywords Bregenzer Wald, Hüttenstempel, Stempel
+!html_description Hüttenstempel Bregenzer Wald
+!endif
+!end_ignore
+
+Umgrenzung: Bodensee -- Bregenzer Ache -- Subersach -- Schönenbach -- Osterguntenbach -- Stogger Sattel --
+Rehmerbach -- (!www [Au] [http://www.tiscover.at/guide/5,de,SCH1/objectId,RGN295at,curr,EUR,season,at2/home.html]) 
+-- Argenbach -- Jochbach --
+(!img [../bilder/extern.gif] [(externer Link)])~(!url [Faschinajoch] [http://www.quaeldich.de/Bilder.pl?Aktion=Detail&Pass=Faschinajoch&Region=Alpen&Unterregion=Vorarlberg&Staat=%D6sterreich&Output=Standalone&Target=P%E4sselexikon%7CFaschinajoch]) --
+Faschinabach -- Lutz -- Ill -- Rhein -- Bodensee
+
+!ifset bergcam
+Angrenzende Gebiete: NO bis O:~(!link [Allgäuer Alpen] [bergcam_o02]);
+SO:~(!link [Lechquellengebirge] [bergcam_o03a]); S:~(!link [Rätikon] [bergcam_o25]);
+W:~(!link [Appenzeller Alpen] [bergcam_w70]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/bregenzer_wald.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: NO bis O:~(!link [Allgäuer Alpen] [bergpano_o02]);
+SO:~(!link [Lechquellengebirge] [bergpano_o03a]); S:~(!link [Rätikon] [bergpano_o25]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/bregenzer_wald.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (2) Allgäuer Alpen
+!ifset o02
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Allgäu, Allgäuer Alpen, Tannheimer Berge, Webcam
+!html_description Gebirgs-Webcam-Links Allgäuer Alpen
+!endif
+!ifset bergpano
+!html_keywords Allgäu, Allgäuer Alpen, Tannheimer Berge, Panorama, Panoramen
+!html_description Panorama-Links Allgäuer Alpen
+!endif
+!ifset stempel
+!html_keywords Allgäu, Allgäuer Alpen, Tannheimer Berge, Hüttenstempel, Stempel
+!html_description Hüttenstempel Allgäuer Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Alpenvorland -- Lech bis (!www [Warth] [http://www.warth.at/]) -- Krumbach --
+(!www [Hochtannbergpaß] [http://www.tourenland.de/paesse/hochtann.htm]) -- Seebach -- Bregenzer Ache
+bis Rehmen -- Rehmerbach -- Stogger Sattel -- Osterguntenbach -- Schönenbach -- Subersach -- Bregenzer Ache --
+Alpenvorland
+
+!ifset bergcam
+Angrenzende Gebiete: W:~(!link [Bregenzer Wald] [bergcam_o01]);
+SW:~(!link [Lechquellengebirge] [bergcam_o03a]); S bis SO:~(!link [Lechtaler Alpen] [bergcam_o03b]);
+O:~(!link [Ammergauer Alpen] [bergcam_o07a]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/allgaeuer_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: W:~(!link [Bregenzer Wald] [bergpano_o01]);
+SW:~(!link [Lechquellengebirge] [bergpano_o03a]); S bis SO:~(!link [Lechtaler Alpen] [bergpano_o03b]);
+O:~(!link [Ammergauer Alpen] [bergpano_o07a]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/allgaeuer_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (3a) Lechquellen-Gebirge
+!ifset o03a
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Lechquellen-Gebirge, Webcam
+!html_description Gebirgs-Webcam-Links Lechquellen-Gebirge
+!endif
+!ifset bergpano
+!html_keywords Lechquellen-Gebirge, Panorama, Panoramen
+!html_description Panorama-Links Lechquellen-Gebirge
+!endif
+!ifset stempel
+!html_keywords Lechquellen-Gebirge, Hüttenstempel, Stempel
+!html_description Hüttenstempel Lechquellen-Gebirge
+!endif
+!end_ignore
+
+Umgrenzung: Ill -- Lutz -- Faschinabach --
+(!img [../bilder/extern.gif] [(externer Link)])~
+(!url [Faschinajoch] [http://www.quaeldich.de/Bilder.pl?Aktion=Detail&Pass=Faschinajoch&Region=Alpen&Unterregion=Vorarlberg&Staat=%D6sterreich&Output=Standalone&Target=P%E4sselexikon%7CFaschinajoch])
+-- Jochbach -- Argenbach -- Bregenzer Ache -- Seebach --
+(!www [Hochtannbergpaß] [http://www.tourenland.de/paesse/hochtann.htm]) -- Krumbach --
+Lech bis (!www [Lech] [http://www.lech-zuers.at/]) -- Zürser Bach --
+(!www [Flexenpaß] [http://www.alpenbiker.de/PASS_018.HTM]) -- Aflenz
+((!www [Klostertal] [http://www.klostertal.com/])) -- Ill
+
+!ifset bergcam
+Angrenzende Gebiete: NW:~(!link [Bregenzer Wald] [bergcam_o01]); NO:~(!link [Allgäuer Alpen] [bergcam_o02]);
+O:~(!link [Lechtaler Alpen] [bergcam_o03b]); S:~(!link [Verwallgruppe] [bergcam_o28]);
+SW:~(!link [Rätikon] [bergcam_o25]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/lechquellengebirge.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: NW:~(!link [Bregenzer Wald] [bergpano_o01]); NO:~(!link [Allgäuer Alpen] [bergpano_o02]);
+O:~(!link [Lechtaler Alpen] [bergpano_o03b]); S:~(!link [Verwallgruppe] [bergpano_o28]);
+SW:~(!link [Rätikon] [bergpano_o25]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/lechquellengebirge.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (3b) Lechtaler Alpen
+!ifset o03b
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Lechtaler Alpen, Webcam
+!html_description Gebirgs-Webcam-Links Lechtaler Alpen
+!endif
+!ifset bergpano
+!html_keywords Lechtaler Alpen, Panorama, Panoramen
+!html_description Panorama-Links Lechtaler Alpen
+!endif
+!ifset stempel
+!html_keywords Lechtaler Alpen, Hüttenstempel, Stempel
+!html_description Hüttenstempel Lechtaler Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Lech von (!www [Lech] [http://www.lech-zuers.at/]) bis (!www [Reutte] [http://www.tiscover.at/reutte]) --
+Porta Claudia -- (!www [Zwischentoren] [http://www.zugspitzarena.com/de/hauptseite.htm])-Grundbach bis
+(!www [Lermoos] [http://www.lermoos.com/]) -- Fernpaß --
+(!www [Nassereith] [http://www.nassereith.com/]) -- Gurglbach --
+Inn bis (!www [Landeck] [http://www.tvblandeck.at/]) -- Sanna --
+Rosanna bis (!www [St.~Anton] [http://www.stantonamarlberg.com/]) --
+(!www [Arlbergpaß] [http://www.alpenrennradtouren.de/bildoes/arlp.html]) -- Rauzbach bis
+(!www [Stuben] [http://www.stuben.com/]) -- (!www [Flexenpaß] [http://www.alpenbiker.de/PASS_018.HTM]) --
+Zürser Bach -- Lech
+
+!ifset bergcam
+Angrenzende Gebiete: W:~(!link [Lechquellengebirge] [bergcam_o03a]); N:~(!link [Allgäuer Alpen] [bergcam_o02]);
+NO:~(!link [Ammergauer Alpen] [bergcam_o07a]);
+W:~(!link [Wettersteingebirge und Mieminger Kette] [bergcam_o04]); S:~(!link [Ötztaler Alpen] [bergcam_o30]),
+(!link [Samnaungruppe] [bergcam_o27]); SW:~(!link [Verwallgruppe] [bergcam_o28]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/lechtaler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: W:~(!link [Lechquellengebirge] [bergpano_o03a]); N:~(!link [Allgäuer Alpen] [bergpano_o02]);
+NO:~(!link [Ammergauer Alpen] [bergpano_o07a]);
+W:~(!link [Wettersteingebirge und Mieminger Kette] [bergpano_o04]); S:~(!link [Ötztaler Alpen] [bergpano_o30]),
+(!link [Samnaungruppe] [bergpano_o27]); SW:~(!link [Verwallgruppe] [bergpano_o28]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/lechtaler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (4) Wettersteingebirge und Mieminger Kette
+!ifset o04
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Wettersteingebirge, Mieminger Kette, Arnspitzstock, Tschirgant-Simmering-Kamm, Webcam
+!html_description Gebirgs-Webcam-Links Wettersteingebirge und Mieminger Kette
+!endif
+!ifset bergpano
+!html_keywords Wettersteingebirge, Mieminger Kette, Arnspitzstock, Tschirgant-Simmering-Kamm, Panorama, Panoramen
+!html_description Panorama-Links Wettersteingebirge und Mieminger Kette
+!endif
+!ifset stempel
+!html_keywords Wettersteingebirge, Mieminger Kette, Arnspitzstock, Tschirgant-Simmering-Kamm, Hüttenstempel, Stempel
+!html_description Hüttenstempel Wettersteingebirge und Mieminger Kette
+!endif
+!end_ignore
+
+Umgrenzung: Loisach bis (!www [Garmisch-Partenkirchen] [http://www.garmisch-partenkirchen.de/]) --
+Kankerbach -- Kranzbach -- Isar bis (!www [Scharnitz] [http://www.tiscover.at/scharnitz/]) -- Drahnbach --
+(!www [Seefelder Sattel] [http://www.tourenland.de/paesse/zirl.htm]) -- Niederbach -- Inn --
+Gurglbach -- (!www [Nassereith] [http://www.nassereith.com/]) -- Fernpaß --
+(!www [Ehrwald] [http://www.tiscover.at/ehrwald/]) -- Loisach
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Ammergauer Alpen] [bergcam_o07a]);
+NO:~(!link [Bayerische Voralpen] [bergcam_o07b]); W:~(!link [Karwendel] [bergcam_o05]);
+S:~(!link [Stubaier Alpen] [bergcam_o31]); SW:~(!link [Ötztaler Alpen] [bergcam_o31]);
+W:~(!link [Lechtaler Alpen] [bergcam_o03b]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/wetterstein.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Ammergauer Alpen] [bergpano_o07a]);
+NO:~(!link [Bayerische Voralpen] [bergpano_o07b]); W:~(!link [Karwendel] [bergpano_o05]);
+S:~(!link [Stubaier Alpen] [bergpano_o31]); SW:~(!link [Ötztaler Alpen] [bergpano_o31]);
+W:~(!link [Lechtaler Alpen] [bergpano_o03b]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/wetterstein.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (5) Karwendel
+!ifset o05
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Karwendel, Karwendelgebirge, Webcam
+!html_description Gebirgs-Webcam-Links Karwendel
+!endif
+!ifset bergpano
+!html_keywords Karwendel, Karwendelgebirge, Panorama, Panoramen
+!html_description Panorama-Links Karwendel
+!endif
+!ifset stempel
+!html_keywords Karwendel, Karwendelgebirge, Hüttenstempel, Stempel
+!html_description Hüttenstempel Karwendel
+!endif
+!end_ignore
+
+Umgrenzung: Isar von (!www [Scharnitz] [http://www.tiscover.at/scharnitz/]) bis Fall -- Walchen --
+Achenbach -- (!www [Achensee] [http://www.achensee.com/]) -- Käsbach -- Inn von
+(!www [Jenbach] [http://www.tiscover.at/jenbach/])
+bis (!www [Zirl] [http://www.tiscover.at/zirl/]) (Einmündung Niederbach) --
+(!www [Seefelder Sattel] [http://www.tourenland.de/paesse/zirl.htm]) --
+Drahnbach -- Isar bis Scharnitz
+
+!ifset bergcam
+Angrenzende Gebiete: N: (!link [Bayerische Voralpen] [bergcam_o07b]);
+O:~(!link [Brandenberger Alpen] [bergcam_o06]) (Rofangebirge);
+S:~(!link [Tuxer Alpen] [bergcam_o33]); SW:~(!link [Stubaier Alpen] [bergcam_o31]);
+W:~(!link [Wettersteingebirge und Mieminger Kette] [bergcam_o04])
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/karwendel.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N: (!link [Bayerische Voralpen] [bergpano_o07b]);
+O:~(!link [Brandenberger Alpen] [bergpano_o06]) (Rofangebirge);
+S:~(!link [Tuxer Alpen] [bergpano_o33]); SW:~(!link [Stubaier Alpen] [bergpano_o31]);
+W:~(!link [Wettersteingebirge und Mieminger Kette] [bergpano_o04])
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/karwendel.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (6) Brandenberger Alpen (Rofangebirge)
+!ifset o06
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Brandenberger Alpen, Rofangebirge, Rofanstock, Unnützstock, Gufferstock, Schneidjoch- und Ragstattkamm, Angerbergkamm, Webcam
+!html_description Gebirgs-Webcam-Links Brandenberger Alpen (Rofangebirge)
+!endif
+!ifset bergpano
+!html_keywords Brandenberger Alpen, Rofangebirge, Rofanstock, Unnützstock, Gufferstock, Schneidjoch- und Ragstattkamm, Angerbergkamm, Panorama, Panoramen
+!html_description Panorama-Links Brandenberger Alpen (Rofangebirge)
+!endif
+!ifset stempel
+!html_keywords Brandenberger Alpen, Rofangebirge, Rofanstock, Unnützstock, Gufferstock, Schneidjoch- und Ragstattkamm, Angerbergkamm, Hüttenstempel, Stempel
+!html_description Hüttenstempel Brandenberger Alpen (Rofangebirge)
+!endif
+!end_ignore
+
+Umgrenzung: Ampelsbach -- Filzmoosbach --
+(!www [Gufferthütte] [http://www.mucl.de/!~davgarch/webpages/auskuenfte/huetten/huetten-g/huetten-gu.htm#guf])
+(Ludwig-Aschenbrenner-Hütte) -- Sattelbach --
+Baierache --
+(!www [Erzherzog-Johann-Klause] [http://www.mucl.de/!~davgarch/webpages/auskuenfte/huetten/huetten-e/huetten-er.htm#erz])
+-- Brandenberger Ache bis
+(!www [Kaiserhaus] [http://www.mucl.de/!~davgarch/webpages/auskuenfte/huetten/huetten-k/huetten-kai.htm#kais]) --
+Ellbach -- Glemmbach --
+Klausbach -- Inn von (!www [Kiefersfelden] [http://www.kiefersfelden.de/]) bis
+(!www [Jenbach] [http://www.tiscover.at/jenbach/]) -- Käsbach -- (!www [Achensee] [http://www.achensee.com/]) --
+Achenbach bis Einmündung Ampelsbach
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Bayerische Voralpen] [bergcam_o07b]);
+O:~(!link [Kaisergebirge] [bergcam_o08]); SO bis S:~(!link [Kitzbüheler Alpen] [bergcam_o34]);
+S bis SW:~(!link [Tuxer Alpen] [bergcam_o33]); W:~(!link [Karwendel] [bergcam_o05]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/rofan.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Bayerische Voralpen] [bergpano_o07b]);
+O:~(!link [Kaisergebirge] [bergpano_o08]); SO bis S:~(!link [Kitzbüheler Alpen] [bergpano_o34]);
+S bis SW:~(!link [Tuxer Alpen] [bergpano_o33]); W:~(!link [Karwendel] [bergpano_o05]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/rofan.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (7a) Ammergauer Alpen
+!ifset o07a
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Ammergauer Alpen
+!html_description Gebirgs-Webcam-Links Ammergauer Alpen, Webcam
+!endif
+!ifset bergpano
+!html_keywords Ammergauer Alpen
+!html_description Panorama-Links Ammergauer Alpen, Panorama, Panoramen
+!endif
+!ifset stempel
+!html_keywords Ammergauer Alpen
+!html_description Hüttenstempel Ammergauer Alpen, Hüttenstempel, Stempel
+!endif
+!end_ignore
+
+Umgrenzung: Voralpengebiet von (!www [Füssen] [http://www.fuessen.de/]) über
+(!www [Steingaden] [http://www.steingaden.de/]) --
+(!www [Echels] [http://www.hochtief.de/hochtief/hochtief?id=111])(!url [bacher] [http://www.pfaffenwinkel.net/impress/grafik005.htm])
+(!url [Brücke] [http://members.gaponline.de/bayersoien/bilder/ansicht2.htm]) --
+(!www [Bad Bayersoien] [http://www.bad-bayersoien.de/]) --
+(!www [Bad Kohlgrub] [http://www.bad-kohlgrub.de/]) bis (!www [Murnau] [http://www.murnau.de/]) --
+Loisach bis (!www [Lermoos] [http://www.lermoos.com/]) --
+Grundbach/(!www [Zwischentoren] [http://www.zugspitzarena.com/de/hauptseite.htm]) -- Porta Claudia --
+Lech bis Füssen
+
+!ifset bergcam
+Angrenzende Gebiete: O:~(!link [Bayerische Voralpen] [bergcam_o07b]);
+S:~(!link [Wettersteingebirge und Mieminger Kette] [bergcam_o04]);
+SW:~(!link [Lechtaler Alpen] [bergcam_o03b]); W:~(!link [Allgäuer Alpen] [bergcam_o02]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/ammergauer_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: O:~(!link [Bayerische Voralpen] [bergpano_o07b]);
+S:~(!link [Wettersteingebirge und Mieminger Kette] [bergpano_o04]);
+SW:~(!link [Lechtaler Alpen] [bergpano_o03b]); W:~(!link [Allgäuer Alpen] [bergpano_o02]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/ammergauer_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (7b) Bayerische Voralpen
+!ifset o07b
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Bayerische Voralpen, Voralpen, Estergebirge, Mangfallgebirge, Werdenfelser Land, Isarwinkel, Mangfallgebirge, Webcam
+!html_description Gebirgs-Webcam-Links Bayerische Voralpen (einschließlich Gebirgsblicke aus dem Voralpenland)
+!endif
+!ifset bergpano
+!html_keywords Bayerische Voralpen, Voralpen, Estergebirge, Mangfallgebirge, Werdenfelser Land, Isarwinkel, Mangfallgebirge, Panorama, Panoramen
+!html_description Panorama-Links Bayerische Voralpen
+!endif
+!ifset stempel
+!html_keywords Bayerische Voralpen, Voralpen, Estergebirge, Mangfallgebirge, Werdenfelser Land, Isarwinkel, Mangfallgebirge, Hüttenstempel, Stempel
+!html_description Hüttenstempel Bayerische Voralpen
+!endif
+!end_ignore
+
+Umgrenzung: Voralpengebiet von Murnau über (!www [Benediktbeuern] [http://www.benediktbeuern.de/]) --
+(!www [Bad Tölz] [http://www.bad-toelz.de/]) bis (!www [Rosenheim] [http://www.rosenheim.de/]) -- Inn bis
+(!www [Kiefersfelden] [http://www.kiefersfelden.de/])
+-- Klausbach -- Glemmbach -- Ellbach --
+(!www [Kaiserhaus] [http://www.mucl.de/!~davgarch/webpages/auskuenfte/huetten/huetten-k/huetten-kai.htm#kais]) --
+Brandenberger Ache --
+(!www [Erzherzog-Johann-Klause] [http://www.mucl.de/!~davgarch/webpages/auskuenfte/huetten/huetten-e/huetten-er.htm#erz])
+-- Sattelbach -- Ampelsbach -- Achenbach -- Walchen -- Isar bis (!www [Krün] [http://www.kruen.de/]) --
+Kranzbach -- Kankerbach -- (!www [Garmisch-Partenkirchen] [http://www.garmisch-partenkirchen.de/]) --
+Loisach bis (!www [Murnau] [http://www.murnau.de/])
+
+!ifset bergcam
+Angrenzende Gebiete: O:~(!link [Chiemgauer Alpen] [bergcam_o11]);
+O bis SO:~(!link [Kaisergebirge] [bergcam_o08]); S:~(!link [Brandenberger Alpen] [bergcam_o06])
+(Rofangebirge), (!link [Karwendelgebirge] [bergcam_o05]);
+SW:~(!link [Wettersteingebirge und Mieminger Kette] [bergcam_o04]);
+W:~(!link [Ammergauer Alpen] [bergcam_o07a]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/bay_voralpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: O:~(!link [Chiemgauer Alpen] [bergpano_o11]);
+O bis SO:~(!link [Kaisergebirge] [bergpano_o08]); S:~(!link [Brandenberger Alpen] [bergpano_o06])
+(Rofangebirge), (!link [Karwendelgebirge] [bergpano_o05]);
+SW:~(!link [Wettersteingebirge und Mieminger Kette] [bergpano_o04]);
+W:~(!link [Ammergauer Alpen] [bergpano_o07a]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/bay_voralpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (8) Kaisergebirge
+!ifset o08
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Kaisergebirge, Wilder Kaiser, Zahmer Kaiser, Webcam
+!html_description Gebirgs-Webcam-Links Kaisergebirge
+!endif
+!ifset bergpano
+!html_keywords Kaisergebirge, Wilder Kaiser, Zahmer Kaiser, Panorama, Panoramen
+!html_description Panorama-Links Kaisergebirge
+!endif
+!ifset stempel
+!html_keywords Kaisergebirge, Wilder Kaiser, Zahmer Kaiser, Hüttenstempel, Stempel
+!html_description Hüttenstempel Kaisergebirge
+!endif
+!end_ignore
+
+Umgrenzung: Jennbach -- Achentaler Bach -- Durchholzen --
+(!www [Walchsee] [http://www.tiscover.at/walchsee/]) -- Weißenbach -- Kössener Ache bis
+(!www [St.~Johann i.T.] [http://www.st.johann.tirol.at/]) -- Reitner Ache -- Ellmau -- Weißache --
+Glemmache -- Inn von
+(!www [Kuf] [http://www.tourismus-tirol.com/kufstein/index.shtml])(!url [stein] [http://www.tiscover.at/kufstein/]) bis zur Einmündung des Jennbachs
+
+!ifset bergcam
+Angrenzende Gebiete: N bis NO:~(!link [Chiemgauer Alpen] [bergcam_o11]);
+O:~(!link [Loferer und Leoganger Steinberge] [bergcam_o09]);
+S:~(!link [Kitzbüheler Alpen] [bergcam_o34]); W:~(!link [Brandenberger Alpen] [bergcam_o06]) (Rofangebirge),
+(!link [Bayerische Voralpen] [bergcam_o07b]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/kaisergebirge.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N bis NO:~(!link [Chiemgauer Alpen] [bergpano_o11]);
+O:~(!link [Loferer und Leoganger Steinberge] [bergpano_o09]);
+S:~(!link [Kitzbüheler Alpen] [bergpano_o34]); W:~(!link [Brandenberger Alpen] [bergpano_o06]) (Rofangebirge),
+(!link [Bayerische Voralpen] [bergpano_o07b]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/kaisergebirge.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (9) Loferer und Leoganger Steinberge
+!ifset o09
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Loferer Steinberge, Leoganger Steinberge, Webcam
+!html_description Gebirgs-Webcam-Links Loferer und Leoganger Steinberge
+!endif
+!ifset bergpano
+!html_keywords Loferer Steinberge, Leoganger Steinberge, Panorama, Panoramen
+!html_description Panorama-Links Loferer und Leoganger Steinberge
+!endif
+!ifset stempel
+!html_keywords Loferer Steinberge, Leoganger Steinberge, Hüttenstempel, Stempel
+!html_description Hüttenstempel Loferer und Leoganger Steinberge
+!endif
+!end_ignore
+
+Umgrenzung: (!www [Erpfendorf] [http://www.erpfendorf.at/]) -- Griesbach --
+(!www [Waidring] [http://www.waidring-tirol.at/]) -- Strubache --
+Saalach bis Einmündung Leoganger Ache --
+(!www [Hochfilzen] [http://www.hochfilzen-info.at/]) -- Rothache -- Pillersee-Ache --
+(!www [St.~Johann i.T.] [http://www.st.johann.tirol.at/]) -- Kössener Ache bis Erpfendorf
+
+!ifset bergcam
+Angrenzende Gebiete: NW:~(!link [Kaisergebirge] [bergcam_o08]); N:~(!link [Chiemgauer Alpen] [bergcam_o11]);
+O:~(!link [Berchtesgadener Alpen] [bergcam_o11]); S bis W:~(!link [Kitzbüheler Alpen] [bergcam_o34]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/loferer_leoganger_steinberge.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: NW:~(!link [Kaisergebirge] [bergpano_o08]); N:~(!link [Chiemgauer Alpen] [bergpano_o11]);
+O:~(!link [Berchtesgadener Alpen] [bergpano_o11]); S bis W:~(!link [Kitzbüheler Alpen] [bergpano_o34]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/loferer_leoganger_steinberge.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (10) Berchtesgadener Alpen
+!ifset o10
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Berchtesgadener Alpen, Steinernes Meer, Hochkönig, Hagengebirge, Lattengebirge, Webcam
+!html_description Gebirgs-Webcam-Links Berchtesgadener Alpen
+!endif
+!ifset bergpano
+!html_keywords Berchtesgadener Alpen, Steinernes Meer, Hochkönig, Hagengebirge, Lattengebirge, Panorama, Panoramen
+!html_description Panorama-Links Berchtesgadener Alpen
+!endif
+!ifset stempel
+!html_keywords Berchtesgadener Alpen, Steinernes Meer, Hochkönig, Hagengebirge, Lattengebirge, Hüttenstempel, Stempel
+!html_description Hüttenstempel Berchtesgadener Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Salzach von (!www [Salzburg] [http://www.salzburg.com/]) bis
+(!www [Bischofshofen] [http://www.bischofshofen.com/]) --
+(!www [Mühlbach] [http://www.salzburgerland.com/muehlbach/]) -- Trockenbach -- Dientner Sattel --
+Filzensattel -- Hintertal -- Urslau -- Saalach bis Salzburg
+# Urslau = Gewässer
+# Dientner Sattel, Filzensattel: kein vernünftiges Internet-Linkziel zu finden
+
+!ifset bergcam
+Angrenzende Gebiete: NW:~(!link [Chiemgauer Alpen] [bergcam_o11]);
+NO:~(!link [Salzkammergut-Berge] [bergcam_o17a]); O:~(!link [Tennengebirge] [bergcam_o13]);
+S:~(!link [Salzburger Schieferalpen] [bergcam_o12]); SW:~(!link [Kitzbüheler Alpen] [bergcam_o34]);
+W:~(!link [Loferer und Leoganger Steinberge] [bergcam_o09]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/berchtesgadener_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: NW:~(!link [Chiemgauer Alpen] [bergpano_o11]);
+NO:~(!link [Salzkammergut-Berge] [bergpano_o17a]); O:~(!link [Tennengebirge] [bergpano_o13]);
+S:~(!link [Salzburger Schieferalpen] [bergpano_o12]); SW:~(!link [Kitzbüheler Alpen] [bergpano_o34]);
+W:~(!link [Loferer und Leoganger Steinberge] [bergpano_o09]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/berchtesgadener_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (11) Chiemgauer Alpen
+!ifset o11
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Chiemgauer Alpen
+!html_description Gebirgs-Webcam-Links Chiemgauer Alpen, Webcam
+!endif
+!ifset bergpano
+!html_keywords Chiemgauer Alpen, Panorama, Panoramen
+!html_description Panorama-Links Chiemgauer Alpen
+!endif
+!ifset stempel
+!html_keywords Chiemgauer Alpen
+!html_description Hüttenstempel Chiemgauer Alpen, Hüttenstempel, Stempel
+!endif
+!end_ignore
+
+Umgrenzung: Voralpengebiet von (!www [Rosenheim] [http://www.rosenheim.de/]) über Chiemsee --
+(!www [Traunstein] [http://www.traunstein.de/]) -- (!www [Teisendorf] [http://www.teisendorf.de/]) bis
+(!www [Bad Reichenhall] [http://www.bad-reichenhall.de/]) --
+Saalach bis (!www [Lofer] [http://www.lofer.com/]) -- Strubache --
+(!www [Waidring] [http://www.waidring-tirol.at/]) -- Griesbach --
+(!www [Erpfendorf] [http://www.erpfendorf.at/]) -- Kössener Ache bis
+(!www [Kössen] [http://www.koessen.at/]) -- Weißenbach --
+(!www [Walchsee] [http://www.tiscover.at/walchsee/]) -- (!www [Durchholzen] [http://www.durchholzen.at/])
+-- Achentaler Bach -- Jennbach -- Inn bis Rosenheim
+
+!ifset bergcam
+Angrenzende Gebiete: O:~(!link [Salzkammergut-Berge] [bergcam_o17a]);
+SO:~(!link [Berchtesgadener Alpen] [bergcam_o10]);
+S:~(!link [Loferer und Leoganger Steinberge] [bergcam_o09]), (!link [Kaisergebirge] [bergcam_o08]);
+W:~(!link [Bayerische Voralpen] [bergcam_o07b]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/chiemgauer_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: O:~(!link [Salzkammergut-Berge] [bergpano_o17a]);
+SO:~(!link [Berchtesgadener Alpen] [bergpano_o10]);
+S:~(!link [Loferer und Leoganger Steinberge] [bergpano_o09]), (!link [Kaisergebirge] [bergpano_o08]);
+W:~(!link [Bayerische Voralpen] [bergpano_o07b]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/chiemgauer_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (12) Salzburger Schieferalpen
+!ifset o12
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Salzburger Schieferalpen, Dientener Berge, Fritztaler Berge, Hochgründeck, Rossbrandstock, Webcam
+!html_description Gebirgs-Webcam-Links Salzburger Schieferalpen
+!endif
+!ifset bergpano
+!html_keywords Salzburger Schieferalpen, Dientener Berge, Fritztaler Berge, Hochgründeck, Rossbrandstock, Panorama, Panoramen
+!html_description Panorama-Links Salzburger Schieferalpen
+!endif
+!ifset stempel
+!html_keywords Salzburger Schieferalpen, Dientener Berge, Fritztaler Berge, Hochgründeck, Rossbrandstock, Hüttenstempel, Stempel
+!html_description Hüttenstempel Salzburger Schieferalpen
+!endif
+!end_ignore
+
+Umgrenzung: (!www [Saalfelden] [http://www.saalfelden.at/]) -- Urslau -- Hintertal -- Filzensattel --
+Dientner Sattel -- Trockenbach -- Mühlbach -- Salzach bis Einmündung Fritzbach -- Fritzbach -- Martinsbach --
+(!www [St.~Martin] [http://www.sanktmartin.at/]) -- Karbach --
+(!www [Lungötz] [http://www.annaberg-lungoetz.at/]) -- Neubach -- Linbach -- Fritzbach --
+Marcheggsattel -- Warme (!www [Mandling] [http://www.aeiou.at/aeiou.encyclop.m/m086624.htm]) -- Kalte Mandling --
+Schildlehenbach -- Ramsaubach -- Weißenbach -- Enns bis Einmündung Litzlingbach -- Litzlingbach --
+Wagrainer Höhe -- Wagrainer Bach -- Salzbach bis Bruck -- Zeller See -- Salzach bis Saalfelden
+# St. Martin bei Lofer = http://www.stmartin.at/
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Berchtesgadener Alpen] [bergcam_o10]),
+(!link [Tennengebirge] [bergcam_o13]); N bis NO:~(!link [Dachsteingebirge] [bergcam_o14]);
+SO:~(!link [Schladminger Tauern] [bergcam_o45b]); SW:~(!link [Radstädter Tauern] [bergcam_o45a]);
+S:~(!link [Ankogelgruppe] [bergcam_o44]), (!link [Goldberggruppe] [bergcam_o42]);
+SW:~(!link [Glocknergruppe] [bergcam_o40]); W:~(!link [Kitzbüheler Alpen] [bergcam_o34]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/salzburger_schieferalpen.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Berchtesgadener Alpen] [bergpano_o10]),
+(!link [Tennengebirge] [bergpano_o13]); N bis NO:~(!link [Dachsteingebirge] [bergpano_o14]);
+SO:~(!link [Schladminger Tauern] [bergpano_o45b]); SW:~(!link [Radstädter Tauern] [bergpano_o45a]);
+S:~(!link [Ankogelgruppe] [bergpano_o44]), (!link [Goldberggruppe] [bergpano_o42]);
+SW:~(!link [Glocknergruppe] [bergpano_o40]); W:~(!link [Kitzbüheler Alpen] [bergpano_o34]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/salzburger_schieferalpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (13) Tennengebirge
+!ifset o13
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Tennengebirge, Webcam
+!html_description Gebirgs-Webcam-Links Tennengebirge
+!endif
+!ifset bergpano
+!html_keywords Tennengebirge, Panorama, Panoramen
+!html_description Panorama-Links Tennengebirge
+!endif
+!ifset stempel
+!html_keywords Tennengebirge, Hüttenstempel, Stempel
+!html_description Hüttenstempel Tennengebirge
+!endif
+!end_ignore
+
+Umgrenzung: (!www [Golling] [http://www.salzburg.com/tourismus/orte/golling/]) --
+Lammer bis (!www [Lungötz] [http://www.annaberg-lungoetz.at/])
+-- Karbach -- (!www [St.~Martin] [http://www.sanktmartin.at/]) -- Martinsbach -- Fritzbach -- Salzach
+bis Golling
+# St. Martin bei Lofer = http://www.stmartin.at/
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Salzkammergut-Berge] [bergcam_o17a]);
+O:~(!link [Dachsteingebirge] [bergcam_o14]); SO bis SW:~(!link [Salzburger Schieferalpen] [bergcam_o11]);
+W:~(!link [Berchtesgadener Alpen] [bergcam_o10]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/tennengebirge.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Salzkammergut-Berge] [bergpano_o17a]);
+O:~(!link [Dachsteingebirge] [bergpano_o14]); SO bis SW:~(!link [Salzburger Schieferalpen] [bergpano_o11]);
+W:~(!link [Berchtesgadener Alpen] [bergpano_o10]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/tennengebirge.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (14) Dachstein
+!ifset o14
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Dachstein, Dachsteinstock, Gosaukamm, Grimming, Sarstein, Webcam
+!html_description Gebirgs-Webcam-Links Dachstein
+!endif
+!ifset bergpano
+!html_keywords Dachstein, Dachsteinstock, Gosaukamm, Grimming, Sarstein, Panorama, Panoramen
+!html_description Panorama-Links Dachstein
+!endif
+!ifset stempel
+!html_keywords Dachstein, Dachsteinstock, Gosaukamm, Grimming, Sarstein, Hüttenstempel, Stempel
+!html_description Hüttenstempel Dachstein
+!endif
+!end_ignore
+
+Umgrenzung: Rußbach --
+(!www [Paß Gschütt] [http://www.alpineroads.com/images/photos/dachstein/gschutt.htm]) --
+(!www [Gosau] [http://www.gosau.at/]) -- Gosaubach --
+(!www [Hallstätter See] [http://www.aeiou.at/aeiou.encyclop.h/h117525.htm]) -- Pötschenhöhe --
+(!www [Bad Aussee] [http://www.badaussee.at/]) -- Kainisch-Traun --
+(!www [Bad Mitterndorf] [http://www.bad-mitterndorf.at/]) -- Klachau -- Grimmingbach -- Enns bis Einmündung
+Weißenbach -- Ramsaubach -- Schildlehenbach --
+Kalte (!www [Mandling] [http://www.aeiou.at/aeiou.encyclop.m/m086624.htm]) -- Warme Mandling --
+Marcheggsattel -- Fritzbach --
+Linbach -- Neubach -- (!www [Lungötz] [http://www.annaberg-lungoetz.at/]) -- Lammer bis Einmündung Rußbach
+
+!ifset bergcam
+Angrenzende Gebiete: NW:~(!link [Salzkammergut-Berge] [bergcam_o17a]);
+NO:~(!link [Totes Gebirge] [bergcam_o15]); O bis SO:~(!link [Rottenmanner und Wölzer Tauern] [bergcam_o45c]);
+S:~(!link [Schladminger Tauern] [bergcam_o45b]); SW:~(!link [Salzburger Schieferalpen] [bergcam_o11]);
+W:~(!link [Tennengebirge] [bergcam_o13]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/dachstein.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: NW:~(!link [Salzkammergut-Berge] [bergpano_o17a]);
+NO:~(!link [Totes Gebirge] [bergpano_o15]); O bis SO:~(!link [Rottenmanner und Wölzer Tauern] [bergpano_o45c]);
+S:~(!link [Schladminger Tauern] [bergpano_o45b]); SW:~(!link [Salzburger Schieferalpen] [bergpano_o11]);
+W:~(!link [Tennengebirge] [bergpano_o13]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/dachstein.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (15) Totes Gebirge
+!ifset o15
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Totes Gebirge, Sengsengebirge, Eisenwurzen, Webcam
+!html_description Gebirgs-Webcam-Links Totes Gebirge
+!endif
+!ifset bergpano
+!html_keywords Totes Gebirge, Sengsengebirge, Eisenwurzen, Panorama, Panoramen
+!html_description Panorama-Links Totes Gebirge
+!endif
+!ifset stempel
+!html_keywords Totes Gebirge, Sengsengebirge, Eisenwurzen, Hüttenstempel, Stempel
+!html_description Hüttenstempel Totes Gebirge
+!endif
+!end_ignore
+
+Umgrenzung: Offenseebach -- Grießeneckbach -- Moosau -- Habernau -- Hetzau --
+# alter Link Ödseen: 
+# http://www.ooe.gv.at/umwelt/wasser/badeseen/ooe_badeseen/Seenbezeichnung/Gro%DFer%20%D6dsee.htm
+Ödseen -- Bernerau --
+Weißenbach bis Einmündung in die Steyr -- Steyr bis Einmündung Teichl -- Teichl --
+(!www [Pyhrnpaß] [http://www.sattledt.oevp.at/ooe/pyhrn1.htm]) -- Enns von
+(!www [Liezen] [http://www.liezen.at/]) bis (!www [Trautenfels] [http://www.museumtrautenfels.at/]) --
+Klachau -- (!www [Bad Mitterndorf] [http://www.bad-mitterndorf.at/]) -- Kainisch-Traun --
+(!www [Bad Aussee] [http://www.badaussee.at/]) --
+Pötschenhöhe -- (!www [Bad Goisern] [http://www.demregio.at/goisern1.html]) --
+Traun bis Einmündung Offenseebach
+
+!ifset bergcam
+Angrenzende Gebiete: NW:~(!link [Salzkammergut-Berge] [bergcam_o17a]);
+NO:~(!link [Oberösterreichische Voralpen] [bergcam_o17b]); O:~(!link [Ennstaler Alpen] [bergcam_o16]);
+S:~(!link [Rottenmanner und Wölzer Tauern] [bergcam_o45c]); SW:~(!link [Dachsteingebirge] [bergcam_o14]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/totes_gebirge.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: NW:~(!link [Salzkammergut-Berge] [bergpano_o17a]);
+NO:~(!link [Oberösterreichische Voralpen] [bergpano_o17b]); O:~(!link [Ennstaler Alpen] [bergpano_o16]);
+S:~(!link [Rottenmanner und Wölzer Tauern] [bergpano_o45c]); SW:~(!link [Dachsteingebirge] [bergpano_o14]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/totes_gebirge.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (16) Ennstaler Alpen
+!ifset o16
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Ennstaler Alpen, Gesäuse, Eisenerzer Alpen, Haller Mauern, Obersteirische Schieferalpen, Webcam
+!html_description Gebirgs-Webcam-Links Ennstaler Alpen
+!endif
+!ifset bergpano
+!html_keywords Ennstaler Alpen, Gesäuse, Eisenerzer Alpen, Haller Mauern, Obersteirische Schieferalpen, Panorama, Panoramen
+!html_description Panorama-Links Ennstaler Alpen
+!endif
+!ifset stempel
+!html_keywords Ennstaler Alpen, Gesäuse, Eisenerzer Alpen, Haller Mauern, Obersteirische Schieferalpen, Hüttenstempel, Stempel
+!html_description Hüttenstempel Ennstaler Alpen
+!endif
+!end_ignore
+
+Umgrenzung: (!www [Windischgarsten] [http://www.wdg.at/]) -- Dambach -- Hengstpaß --
+(!www [Laussa] [http://www.tiscover.at/laussa]) -- Enns bis (!www [Hieflau] [http://www.tiscover.at/hieflau])
+-- Erzbach -- (!www [Präbichl] [http://www.praebichl.at/]) -- Vordernberger Bach -- Mur von
+(!www [Leoben] [http://www.leoben.at/]) bis (!www [St.~Michael] [http://www.st-michael.steiermark.at/]) --
+Liesing/(!www [Paltental] [http://www.aeiou.at/aeiou.encyclop.p/p047546.htm]) bis Einmündung Enns --
+(!www [Liezen] [http://www.liezen.at/]) -- (!www [Pyhrnpaß] [http://www.sattledt.oevp.at/ooe/pyhrn1.htm])
+-- Windischgarsten
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Oberösterreichische Voralpen] [bergcam_o17b]);
+NO:~(!link [Ybbstaler Alpen] [bergcam_o21]); O:~(!link [Hochschwabgruppe] [bergcam_o18]);
+SO:~(!link [Lavanttaler Alpen] [bergcam_o46b]); S:~(!link [Seckauer Tauern] [bergcam_o45d]);
+SW:~(!link [Rottenmanner und Wölzer Tauern] [bergcam_o45c]); W:~(!link [Totes Gebirge] [bergcam_o15]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/ennstaler_alpen.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Oberösterreichische Voralpen] [bergpano_o17b]);
+NO:~(!link [Ybbstaler Alpen] [bergpano_o21]); O:~(!link [Hochschwabgruppe] [bergpano_o18]);
+SO:~(!link [Lavanttaler Alpen] [bergpano_o46b]); S:~(!link [Seckauer Tauern] [bergpano_o45d]);
+SW:~(!link [Rottenmanner und Wölzer Tauern] [bergpano_o45c]); W:~(!link [Totes Gebirge] [bergpano_o15]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/ennstaler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (17a) Salzkammergut-Berge
+!ifset o17a
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Salzkammergut, Osterhorngruppe, Webcam
+!html_description Gebirgs-Webcam-Links Salzkammergut
+!endif
+!ifset bergpano
+!html_keywords Salzkammergut, Osterhorngruppe, Panorama, Panoramen
+!html_description Panorama-Links Salzkammergut
+!endif
+!ifset stempel
+!html_keywords Salzkammergut, Osterhorngruppe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Salzkammergut
+!endif
+!end_ignore
+
+Umgrenzung: Alpenvorland von (!www [Salzburg] [http://www.salzburg.com/]) bis Gmunden -- Traunsee -- Traun
+bis (!www [Hallstätter See] [http://www.aeiou.at/aeiou.encyclop.h/h117525.htm]) -- Gosaubach bis
+(!www [Gosau] [http://www.gosau.at/]) --
+(!www [Paß Gschütt] [http://www.alpineroads.com/images/photos/dachstein/gschutt.htm]) -
+Rußbach -- Lammer -- Salzach bis Salzburg
+
+!ifset bergcam
+Angrenzende Gebiete: O:~(!link [Oberösterreichische Voralpen] [bergcam_o17b]);
+SO:~(!link [Totes Gebirge] [bergcam_o15]); S:~(!link [Dachsteingebirge] [bergcam_o14]);
+(!link [Berchtesgadener Alpen] [bergcam_o10]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/salzkammergut-berge.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: O:~(!link [Oberösterreichische Voralpen] [bergpano_o17b]);
+SO:~(!link [Totes Gebirge] [bergpano_o15]); S:~(!link [Dachsteingebirge] [bergpano_o14]);
+(!link [Berchtesgadener Alpen] [bergpano_o10]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/salzkammergut-berge.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (17b) Oberösterreichische Voralpen
+!ifset o17b
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Oberösterreichische Voralpen, Traunstein, Kasbergstock, Falken- und Kremsmauer, Sengsengebirge, Reichraminger Hintergebirge, Webcam
+!html_description Gebirgs-Webcam-Links Oberösterreichische Voralpen
+!endif
+!ifset bergpano
+!html_keywords Oberösterreichische Voralpen, Traunstein, Kasbergstock, Falken- und Kremsmauer, Sengsengebirge, Reichraminger Hintergebirge, Panorama, Panoramen
+!html_description Panorama-Links Oberösterreichische Voralpen
+!endif
+!ifset stempel
+!html_keywords Oberösterreichische Voralpen, Traunstein, Kasbergstock, Falken- und Kremsmauer, Sengsengebirge, Reichraminger Hintergebirge, Hüttenstempel, Stempel
+!html_description Hüttenstempel Oberösterreichische Voralpen
+!endif
+!end_ignore
+
+Umgrenzung: Alpenvorland von Gmunden bis Waidhofen a.d. Ybbs -- Gaflenz -- Enns bis Altenmarkt -- Laussa --
+Hengstpaß -- Dambach -- Windischgarsten -- Teichl -- Steyr -- Weißenbach -- Bernerau -- Ödseen -- Hetzau --
+Habernau -- Moosau -- Grießeneckbach -- Offenseebach -- Traun -- Traunsee
+
+!ifset bergcam
+Angrenzende Gebiete: O:~(!link [Ybbstaler Alpen] [bergcam_o21]);
+S:~(!link [Ennstaler Alpen] [bergcam_o16]), (!link [Totes Gebirge] [bergcam_o15]);
+W:~(!link [Salzkammergut-Berge] [bergcam_o17a]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/oberoesterr_voralpen.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: O:~(!link [Ybbstaler Alpen] [bergpano_o21]);
+S:~(!link [Ennstaler Alpen] [bergpano_o16]), (!link [Totes Gebirge] [bergpano_o15]);
+W:~(!link [Salzkammergut-Berge] [bergpano_o17a]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/oberoesterr_voralpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (18) Hochschwab-Gruppe
+!ifset o18
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Hochschwab, Webcam
+!html_description Gebirgs-Webcam-Links Hochschwab-Gruppe
+!endif
+!ifset bergpano
+!html_keywords Hochschwab, Panorama, Panoramen
+!html_description Panorama-Links Hochschwab-Gruppe
+!endif
+!ifset stempel
+!html_keywords Hochschwab, Hüttenstempel, Stempel
+!html_description Hüttenstempel Hochschwab-Gruppe
+!endif
+!end_ignore
+
+Umgrenzung: Großreifling -- Salza -- Gußwerk -- Wegscheid -- Seebergsattel -- Seegraben -- Stübmingbach --
+Thörlbach bis Einmündung Mürz -- Mürz bis Einmündung Mur -- Mur bis Leoben -- Vordernberger Bach --
+Präbichl -- Erzbach -- Hieflau -- Enns bis Großreifling
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Ybbstaler Alpen] [bergcam_o21]);
+O:~(!link [Mürzsteger Alpen] [bergcam_o19]); SO:~(!link [Randgebirge östlich der Mur] [bergcam_o47]);
+S:~(!link [Lavanttaler Alpen] [bergcam_o46b]); S bis W:~(!link [Ennstaler Alpen] [bergcam_o16]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/hochschwab.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Ybbstaler Alpen] [bergpano_o21]);
+O:~(!link [Mürzsteger Alpen] [bergpano_o19]); SO:~(!link [Randgebirge östlich der Mur] [bergpano_o47]);
+S:~(!link [Lavanttaler Alpen] [bergpano_o46b]); S bis W:~(!link [Ennstaler Alpen] [bergpano_o16]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/hochschwab.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (19) Mürzsteger Alpen
+!ifset o19
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Mürzsteger Alpen, Veitschalpe, Tonionalpe, Schneealpe, Göller, Gippel, Webcam
+!html_description Gebirgs-Webcam-Links Mürzsteger Alpen
+!endif
+!ifset bergpano
+!html_keywords Mürzsteger Alpen, Veitschalpe, Tonionalpe, Schneealpe, Göller, Gippel, Panorama, Panoramen
+!html_description Panorama-Links Mürzsteger Alpen
+!endif
+!ifset stempel
+!html_keywords Mürzsteger Alpen, Veitschalpe, Tonionalpe, Schneealpe, Göller, Gippel, Hüttenstempel, Stempel
+!html_description Hüttenstempel Mürzsteger Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Mariazell -- Halltal -- Terz -- Knollenhals -- Kernhof -- St.~Ägyd am Neuwalde -- Seebach --
+Wassertal -- Trauchbach -- Tiefentalerbach -- Schwarza bis Singerin -- Naßbach -- Naßkamm -- Altenbergtal --
+Kapellen -- Mürz bis Kapfenberg -- Thörlbach -- Stübmingbach -- Seegraben -- Seebergsattel -- Wegscheid --
+Gußwerk -- Salza -- Mariazell
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Türnitzer Alpen] [bergcam_o22]);
+NO:~(!link [Gutensteiner Alpen] [bergcam_o23]); O:~(!link [Rax und Schneeberggruppe] [bergcam_o20]);
+SO bis S:~(!link [Randgebirge östlich der Mur] [bergcam_o47]); W:~(!link [Hochschwabgruppe] [bergcam_o18]);
+NW:~(!link [Ybbstaler Alpen] [bergcam_o21]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/muerzsteger_alpen.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Türnitzer Alpen] [bergpano_o22]);
+NO:~(!link [Gutensteiner Alpen] [bergpano_o23]); O:~(!link [Rax und Schneeberggruppe] [bergpano_o20]);
+SO bis S:~(!link [Randgebirge östlich der Mur] [bergpano_o47]); W:~(!link [Hochschwabgruppe] [bergpano_o18]);
+NW:~(!link [Ybbstaler Alpen] [bergpano_o21]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/muerzsteger_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (20) Rax und Schneeberg-Gruppe
+!ifset o20
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Rax, Schneeberg, Webcam
+!html_description Gebirgs-Webcam-Links Rax und Schneeberg-Gruppe
+!endif
+!ifset bergpano
+!html_keywords Rax, Schneeberg, Panorama, Panoramen
+!html_description Panorama-Links Rax und Schneeberg-Gruppe
+!endif
+!ifset stempel
+!html_keywords Rax, Schneeberg, Hüttenstempel, Stempel
+!html_description Hüttenstempel Rax und Schneeberg-Gruppe
+!endif
+!end_ignore
+
+Umgrenzung: Naßkamm -- Naßbach -- Schwarza -- Voisbach -- Klostertaler Gscheid -- Klausgraben -- Mamauwiese --
+Sebastiansbach -- Puchberg -- Sierning -- Ternitz -- Schwarza bei Gloggnitz -- Schottwien -- Semmering --
+Mürzzuschlag -- Mürz bis Kapellen -- Altenbergtal -- Naßkamm
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Gutensteiner Alpen] [bergcam_o23]);
+O bis SW:~(!link [Randgebirge östlich der Mur] [bergcam_o47]; W:~(!link [Mürzsteger Alpen] [bergcam_o19]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/rax_schneeberg.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Gutensteiner Alpen] [bergpano_o23]);
+O bis SW:~(!link [Randgebirge östlich der Mur] [bergpano_o47]; W:~(!link [Mürzsteger Alpen] [bergpano_o19]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/rax_schneeberg.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (21) Ybbstaler Alpen
+!ifset o21
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Ybbstaler Alpen, Hochkar, Dürrenstein, Zellerhüte, Ötscherberge, Oistaler Alpen, Lunzer Berge, Webcam
+!html_description Gebirgs-Webcam-Links Ybbstaler Alpen
+!endif
+!ifset bergpano
+!html_keywords Ybbstaler Alpen, Hochkar, Dürrenstein, Zellerhüte, Ötscherberge, Oistaler Alpen, Lunzer Berge, Panorama, Panoramen
+!html_description Panorama-Links Ybbstaler Alpen
+!endif
+!ifset stempel
+!html_keywords Ybbstaler Alpen, Hochkar, Dürrenstein, Zellerhüte, Ötscherberge, Oistaler Alpen, Lunzer Berge, Hüttenstempel, Stempel
+!html_description Hüttenstempel Ybbstaler Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Alpenvorland von Amstetten bis Wieselburg -- Erlauf bis Mariazell -- Gußwerk -- Salza bis
+Einmündung Enns -- Enns bis Kastenreith -- Gaflenzbach -- Waidhofenbach -- Waidhofen a.d. Ybbs --
+Ybbs bis Amstetten
+
+!ifset bergcam
+Angrenzende Gebiete: O:~(!link [Türnitzer Alpen] [bergcam_o22]); SO:~(!link [Mürzsteger Alpen] [bergcam_o19]);
+S:~(!link [Hochschwabgruppe] [bergcam_o18]); SW:~(!link [Ennstaler Alpen] [bergcam_o16]);
+W:~(!link [Oberösterreichische Voralpen] [bergcam_o17b]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/ybbstaler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+S:~(!link [Hochschwabgruppe] [bergpano_o18]); SW:~(!link [Ennstaler Alpen] [bergpano_o16]);
+W:~(!link [Oberösterreichische Voralpen] [bergpano_o17b]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/ybbstaler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (22) Türnitzer Alpen
+!ifset o22
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Türnitzer Alpen, Webcam
+!html_description Gebirgs-Webcam-Links Türnitzer Alpen
+!endif
+!ifset bergpano
+!html_keywords Türnitzer Alpen, Panorama, Panoramen
+!html_description Panorama-Links Türnitzer Alpen
+!endif
+!ifset stempel
+!html_keywords Türnitzer Alpen, Hüttenstempel, Stempel
+!html_description Hüttenstempel Türnitzer Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Alpenvorland von Wieselburg bis St.~Pölten -- Traisen bis Freiland -- Unrecht-Traisen --
+St.~Ägyd am Neuwalde -- Keertal -- Knollenhals -- Halltal -- Mariazell -- Erlauf bis Wieselburg
+
+!ifset bergcam
+Angrenzende Gebiete: O:~(!link [Wienerwald] [bergcam_o24]);
+O bis SO:~(!link [Gutensteiner Alpen] [bergcam_o23]); S:~(!link [Mürzsteger Alpen] [bergcam_o19]);
+W:~(!link [Ybbstaler Alpen] [bergcam_o21]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/tuernitzer_alpen.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: O:~(!link [Wienerwald] [bergpano_o24]);
+O bis SO:~(!link [Gutensteiner Alpen] [bergpano_o23]); S:~(!link [Mürzsteger Alpen] [bergpano_o19]);
+W:~(!link [Ybbstaler Alpen] [bergpano_o21]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/tuernitzer_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (23) Gutensteiner Alpen
+!ifset o23
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Gutensteiner Alpen, Hohe Wand, Dürre Wand, Triesting- und Pliestingtalberge, Webcam
+!html_description Gebirgs-Webcam-Links Gutensteiner Alpen
+!endif
+!ifset bergpano
+!html_keywords Gutensteiner Alpen, Hohe Wand, Dürre Wand, Triesting- und Pliestingtalberge, Panorama, Panoramen
+!html_description Panorama-Links Gutensteiner Alpen
+!endif
+!ifset stempel
+!html_keywords Gutensteiner Alpen, Hohe Wand, Dürre Wand, Triesting- und Pliestingtalberge, Hüttenstempel, Stempel
+!html_description Hüttenstempel Gutensteiner Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Gölsen -- Hainfeld -- Gerstbach -- Kaumberg -- Kaumbergbach -- Triesting -- Steinfeld --
+Neunkirchen -- Ternitz -- Sierning -- Puchberg -- Sebastiansbach -- Mamauwiese -- Klausgaben --
+Klostertaler Gscheid -- Voisbach -- Schwarza -- Tiesentalerbach - Trauchbach -- Wassertal -- Seebach --
+St.~Ägyd am Neuwalde -- Unrecht-Traisen -- Traisen bis Einmündung Gölsen
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Wienerwald] [bergcam_o24]);
+O bis S:~(!link [Randgebirge östlich der Mur] [bergcam_o47]);
+S:~(!link [Rax und Schneeberggruppe] [bergcam_o20]); SW:~(!link [Mürzsteger Alpen] [bergcam_o19]);
+W:~(!link [Türnitzer Alpen] [bergcam_o22]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/gutensteiner_alpen.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Wienerwald] [bergpano_o24]);
+O bis S:~(!link [Randgebirge östlich der Mur] [bergpano_o47]);
+S:~(!link [Rax und Schneeberggruppe] [bergpano_o20]); SW:~(!link [Mürzsteger Alpen] [bergpano_o19]);
+W:~(!link [Türnitzer Alpen] [bergpano_o22]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/gutensteiner_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (24) Wienerwald
+!ifset o24
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Wienerwald, Webcam
+!html_description Gebirgs-Webcam-Links Wienerwald
+!endif
+!ifset bergpano
+!html_keywords Wienerwald, Panorama, Panoramen
+!html_description Panorama-Links Wienerwald
+!endif
+!ifset stempel
+!html_keywords Wienerwald, Hüttenstempel, Stempel
+!html_description Hüttenstempel Wienerwald
+!endif
+!end_ignore
+
+Umgrenzung: Donau von Traismauer bis Wien -- Baden -- Leobersdorf -- Triesting -- Kaumbergbach --
+Kaumberg -- Gerstbach -- Hainfeld - Gölsen bis Einmündung Traisen -- Traisen bis Einmündung Donau
+
+!ifset bergcam
+Angrenzende Gebiete: SO bis S:~(!link [Gutensteiner Alpen] [bergcam_o23]);
+W:~(!link [Türnitzer Alpen] [bergcam_o22]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/wienerwald.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: SO bis S:~(!link [Gutensteiner Alpen] [bergpano_o23]);
+W:~(!link [Türnitzer Alpen] [bergpano_o22])
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/wienerwald.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (25) Rätikon
+!ifset o25
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Rätikon, Webcam
+!html_description Gebirgs-Webcam-Links Rätikon
+!endif
+!ifset bergpano
+!html_keywords Rätikon, Panorama, Panoramen
+!html_description Panorama-Links Rätikon
+!endif
+!ifset stempel
+!html_keywords Rätikon, Hüttenstempel, Stempel
+!html_description Hüttenstempel Rätikon
+!endif
+!end_ignore
+
+Umgrenzung: Ill von der Einmündung in den Rhein bis St.~Gallenkirch -- Gargellental -- Valzifenzbach --
+Schlappiner Joch -- Schlappinbach bis Einmündung in die Landquart -- Landquart bis Einmündung in den Rhein --
+Rhein bis Einmündung der Ill
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Bregenzer Wald] [bergcam_o01]);
+NO:~(!link [Lechquellengebirge] [bergcam_o03a]); O:~(!link [Verwallgruppe] [bergcam_o28]),
+(!link [Silvretta] [bergcam_o26]); S:~(!link [Plessur-Alpen] [bergcam_o63]);
+NW bis W:~(!link [Appenzeller Alpen] [bergcam_w70]); W bis SW:~(!link [Glarner Alpen] [bergcam_w80]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/raetikon.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Bregenzer Wald] [bergpano_o01]);
+NO:~(!link [Lechquellengebirge] [bergpano_o03a]); O:~(!link [Verwallgruppe] [bergpano_o28]),
+(!link [Silvretta] [bergpano_o26]); S:~(!link [Plessur-Alpen] [bergpano_o63]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/raetikon.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (26) Silvretta
+!ifset o26
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Silvretta, Webcam
+!html_description Gebirgs-Webcam-Links Silvretta
+!endif
+!ifset bergpano
+!html_keywords Silvretta, Panorama, Panoramen
+!html_description Panorama-Links Silvretta
+!endif
+!ifset stempel
+!html_keywords Silvretta, Hüttenstempel, Stempel
+!html_description Hüttenstempel Silvretta
+!endif
+!end_ignore
+
+Umgrenzung: St.~Gallenkirch -- Ill bis Partenen -- Zeinisjoch -- Zeinisbach -- Paznauntal bis Ischgl --
+Fimbertal -- Fimberpaß -- Val Chöglias -- Val Sinestra -- Inn von Einmündung des Branclabaches bis
+Einmündung der Susasca -- Val Susasca -- Flüelapaß -- Davos -- Wolfgang -- Laretbach -- Klosters --
+Schlappinbach -- Schlappiner Joch -- Valzifenzbach -- Gargellental -- St.~Gallenkirch
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Verwallgruppe] [bergcam_o28]); O:~(!link [Samnaungruppe] [bergcam_o27]);
+SO bis S:~(!link [Sesvennagruppe] [bergcam_o29]); S bis SW:~(!link [Albula-Alpen] [bergcam_o65]);
+W:~(!link [Plessur-Alpen] [bergcam_o63]); NW:~(!link [Rätikon] [bergcam_o25]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/silvretta.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Verwallgruppe] [bergpano_o28]); O:~(!link [Samnaungruppe] [bergpano_o27]);
+SO bis S:~(!link [Sesvennagruppe] [bergpano_o29]); S bis SW:~(!link [Albula-Alpen] [bergpano_o65]);
+W:~(!link [Plessur-Alpen] [bergpano_o63]); NW:~(!link [Rätikon] [bergpano_o25]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/silvretta.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (27) Samnaun-Gruppe
+!ifset o27
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Samnaun-Gruppe, Webcam
+!html_description Gebirgs-Webcam-Links Samnaun-Gruppe
+!endif
+!ifset bergpano
+!html_keywords Samnaun-Gruppe, Panorama, Panoramen
+!html_description Panorama-Links Samnaun-Gruppe
+!endif
+!ifset stempel
+!html_keywords Samnaun-Gruppe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Samnaun-Gruppe
+!endif
+!end_ignore
+
+Umgrenzung: Paznauntal von Ischgl bis Wiesberg -- Sanna bis Landeck -- Inn bis Einmündung Brancla --
+Val Sinestra -- Val Chöglias - Fimberpaß -- Fimbertal -- Ischgl
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Lechtaler Alpen] [bergcam_o03b]); O:~(!link [Ötztaler Alpen] [bergcam_o30]);
+S:~(!link [Sesvennagruppe] [bergcam_o29]); W:~(!link [Silvretta] [bergcam_o26]);
+NW bis N:~(!link [Verwallgruppe] [bergcam_o28]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/samnaungruppe.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Lechtaler Alpen] [bergpano_o03b]); O:~(!link [Ötztaler Alpen] [bergpano_o30]);
+S:~(!link [Sesvennagruppe] [bergpano_o29]); W:~(!link [Silvretta] [bergpano_o26]);
+NW bis N:~(!link [Verwallgruppe] [bergpano_o28]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/samnaungruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (28) Verwall-Gruppe
+!ifset o28
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Verwall-Gruppe, Ferwall-Gruppe, Webcam
+!html_description Gebirgs-Webcam-Links Verwall-Gruppe
+!endif
+!ifset bergpano
+!html_keywords Verwall-Gruppe, Ferwall-Gruppe, Panorama, Panoramen
+!html_description Panorama-Links Verwall-Gruppe
+!endif
+!ifset stempel
+!html_keywords Verwall-Gruppe, Ferwall-Gruppe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Verwall-Gruppe
+!endif
+!end_ignore
+
+auch: Ferwall-Gruppe
+# die ursprüngliche AVE-Veröffentlichung erklärt "Ferwall" für richtig(er)?!
+
+Umgrenzung: Bludenz -- Klostertal -- Stuben -- Arlbergpaß -- Stanzer Tal bis Wiesberg -- Paznauntal --
+Zeinisbach -- Zeinisjoch -- Partenen -- Ill bis Bludenz
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Lechquellengebirge] [bergcam_o03a]), (!link [Lechtaler Alpen] [bergcam_o03b]);
+SO:~(!link [Samnaungruppe] [bergcam_o27]); S:~(!link [Silvretta] [bergcam_o26]);
+W:~(!link [Rätikon] [bergcam_o25]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/verwallgruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Lechquellengebirge] [bergpano_o03a]), (!link [Lechtaler Alpen] [bergpano_o03b]);
+SO:~(!link [Samnaungruppe] [bergpano_o27]); S:~(!link [Silvretta] [bergpano_o26]);
+W:~(!link [Rätikon] [bergpano_o25]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/verwallgruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (29) Sesvenna-Gruppe
+!ifset o29
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Sesvenna-Gruppe, Webcam
+!html_description Gebirgs-Webcam-Links Sesvenna-Gruppe
+!endif
+!ifset bergpano
+!html_keywords Sesvenna-Gruppe, Panorama, Panoramen
+!html_description Panorama-Links Sesvenna-Gruppe
+!endif
+!ifset stempel
+!html_keywords Sesvenna-Gruppe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Sesvenna-Gruppe
+!endif
+!end_ignore
+
+Umgrenzung: Inn von Susch bis Finstermünzpaß -- Reschenpaß -- Obervinschgau bis Glurns -- Rambach -- Taufers --
+Münstertal -- Ofenpaß -- Ova del Fuorn -- Spöl -- Zernez -- Inn bis Susch
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Silvretta] [bergcam_o26]), (!link [Samnaungruppe] [bergcam_o27]);
+O:~(!link [Ötztaler Alpen] [bergcam_o30]); S:~(!link [Ortler-Alpen] [bergcam_o48a]);
+SW:~(!link [Livigno-Alpen] [bergcam_o67]); W:~(!link [Albula-Alpen] [bergcam_o65]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/sesvennagruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Silvretta] [bergpano_o26]), (!link [Samnaungruppe] [bergpano_o27]);
+O:~(!link [Ötztaler Alpen] [bergpano_o30]); S:~(!link [Ortler-Alpen] [bergpano_o48a]);
+SW:~(!link [Livigno-Alpen] [bergpano_o67]); W:~(!link [Albula-Alpen] [bergpano_o65]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/sesvennagruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (30) Ötztaler Alpen
+!ifset o30
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Ötztaler Alpen, Texelgruppe, Webcam
+!html_description Gebirgs-Webcam-Links Ötztaler Alpen
+!endif
+!ifset bergpano
+!html_keywords Ötztaler Alpen, Texelgruppe, Panorama, Panoramen
+!html_description Panorama-Links Ötztaler Alpen
+!endif
+!ifset stempel
+!html_keywords Ötztaler Alpen, Texelgruppe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Ötztaler Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Inn von Landeck bis Einmündung Ötztaler Ache -- Ötztal bis Zwieselstein -- Gurgler Ache bis
+Einmündung Timmelsbach - Timmelsbach -- (!www [Timmelsjoch] [http://www.timmelsjoch-hochalpenstrasse.at/]) --
+Schönauer Alm -- Passeiertal bis Meran -- Etschtal -- Reschenpaß -- Inn von Finstermünz bis Landeck
+
+!ifset bergcam
+Angrenzende Gebiete: NW bis N:~(!link [Lechtaler Alpen] [bergcam_o03b]);
+N bis NO:~(!link [Wettersteingebirge und Mieminger Kette] [bergcam_o04]);
+O:~(!link [Stubaier Alpen] [bergcam_o31]); SO:~(!link [Sarntaler Alpen] [bergcam_o32]);
+S:~(!link [Ortler-Alpen] [bergcam_o48a]); W:~(!link [Sesvennagruppe] [bergcam_o29]);
+W bis NW:~(!link [Samnaungruppe] [bergcam_o27]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/oetztaler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: NW bis N:~(!link [Lechtaler Alpen] [bergpano_o03b]);
+N bis NO:~(!link [Wettersteingebirge und Mieminger Kette] [bergpano_o04]);
+O:~(!link [Stubaier Alpen] [bergpano_o31]); SO:~(!link [Sarntaler Alpen] [bergpano_o32]);
+S:~(!link [Ortler-Alpen] [bergpano_o48a]); W:~(!link [Sesvennagruppe] [bergpano_o29]);
+W bis NW:~(!link [Samnaungruppe] [bergpano_o27]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/oetztaler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (31) Stubaier Alpen
+!ifset o31
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Stubaier Alpen, Webcam
+!html_description Gebirgs-Webcam-Links Stubaier Alpen
+!endif
+!ifset bergpano
+!html_keywords Stubaier Alpen, Panorama, Panoramen
+!html_description Panorama-Links Stubaier Alpen
+!endif
+!ifset stempel
+!html_keywords Stubaier Alpen, Hüttenstempel, Stempel
+!html_description Hüttenstempel Stubaier Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Inn von Einmündung Ötztaler Ache bis Innsbruck -- Sill (Wipptal) -- Brenner -- Eisack bis Sterzing
+-- Jaufental -- Jaufenpaß -- St.~Leonhard -- Passeiertal -- Schönauer Alm --
+(!www [Timmels] [http://www.tourenland.de/paesse/timmel.htm])(!url [joch] [http://www.matthias-jung.de/timmelsjoch.htm]) -- Timmelsbach --
+Gurgler Ache -- Ötztaler Ache bis Einmündung in den Inn
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Wettersteingebirge und Mieminger Kette] [bergcam_o04]);
+NO:~(!link [Karwendel] [bergcam_o05]); O:~(!link [Tuxer Alpen] [bergcam_o33]),
+(!link [Zillertaler Alpen] [bergcam_o35]); S:~(!link [Sarntaler Alpen] [bergcam_o32]);
+SO bis O:~(!link [Ötztaler Alpen] [bergcam_o30]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/stubaier_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Wettersteingebirge und Mieminger Kette] [bergpano_o04]);
+NO:~(!link [Karwendel] [bergpano_o05]); O:~(!link [Tuxer Alpen] [bergpano_o33]),
+(!link [Zillertaler Alpen] [bergpano_o35]); S:~(!link [Sarntaler Alpen] [bergpano_o32]);
+SO bis O:~(!link [Ötztaler Alpen] [bergpano_o30]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/stubaier_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (32) Sarntaler Alpen
+!ifset o32
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Sarntaler Alpen, Webcam
+!html_description Gebirgs-Webcam-Links Sarntaler Alpen
+!endif
+!ifset bergpano
+!html_keywords Sarntaler Alpen, Panorama, Panoramen
+!html_description Panorama-Links Sarntaler Alpen
+!endif
+!ifset stempel
+!html_keywords Sarntaler Alpen, Hüttenstempel, Stempel
+!html_description Hüttenstempel Sarntaler Alpen
+!endif
+!end_ignore
+
+Umgrenzung: St.~Leonhard -- Jaufenpaß -- Jaufental -- Sterzing -- Eisack bis Einmündung in die Etsch --
+Etsch bis Meran -- Passeiertal bis St.~Leonhard
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Stubaier Alpen] [bergcam_o31]); NO:~(!link [Zillertaler Alpen] [bergcam_o35]);
+O:~(!link [Dolomiten] [bergcam_o52]); S:~(!link [Fleimstaler Alpen] [bergcam_o53]);
+SW:~(!link [Nonsberg-Gruppe] [bergcam_o48c]); W:~(!link [Ortler-Alpen] [bergcam_o48a]);
+W bis NW:~(!link [Ötztaler Alpen] [bergcam_o30]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/sarntaler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Stubaier Alpen] [bergpano_o31]); NO:~(!link [Zillertaler Alpen] [bergpano_o35]);
+O:~(!link [Dolomiten] [bergpano_o52]); S:~(!link [Fleimstaler Alpen] [bergpano_o53]);
+SW:~(!link [Nonsberg-Gruppe] [bergpano_o48c]); W:~(!link [Ortler-Alpen] [bergpano_o48a]);
+W bis NW:~(!link [Ötztaler Alpen] [bergpano_o30]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/sarntaler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (33) Tuxer Alpen
+!ifset o33
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Tuxer Alpen, Webcam
+!html_description Gebirgs-Webcam-Links Tuxer Alpen
+!endif
+!ifset bergpano
+!html_keywords Tuxer Alpen, Panorama, Panoramen
+!html_description Panorama-Links Tuxer Alpen
+!endif
+!ifset stempel
+!html_keywords Tuxer Alpen, Hüttenstempel, Stempel
+!html_description Hüttenstempel Tuxer Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Inn von Innsbruck bis Einmündung Ziller -- Zillertal bis Mayrhofen -- Tuxer Tal bis Hintertux --
+Tuxer Joch -- Kasererbach -- Schmirnbach -- Wipptal -- Innsbruck
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Karwendel] [bergcam_o05]), (!link [Brandenberger Alpen] [bergcam_o06])
+(Rofangebirge); O:~(!link [Kitzbüheler Alpen] [bergcam_o34]); S:~(!link [Zillertaler Alpen] [bergcam_o35]);
+W:~(!link [Stubaier Alpen] [bergcam_o31]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/tuxer_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Karwendel] [bergpano_o05]), (!link [Brandenberger Alpen] [bergpano_o06])
+(Rofangebirge); O:~(!link [Kitzbüheler Alpen] [bergpano_o34]); S:~(!link [Zillertaler Alpen] [bergpano_o35]);
+W:~(!link [Stubaier Alpen] [bergpano_o31]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/tuxer_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (34) Kitzbüheler Alpen
+!ifset o34
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Kitzbüheler Alpen, Webcam
+!html_description Gebirgs-Webcam-Links Kitzbüheler Alpen
+!endif
+!ifset bergpano
+!html_keywords Kitzbüheler Alpen, Panorama, Panoramen
+!html_description Panorama-Links Kitzbüheler Alpen
+!endif
+!ifset stempel
+!html_keywords Kitzbüheler Alpen, Hüttenstempel, Stempel
+!html_description Hüttenstempel Kitzbüheler Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Inn von Einmündung Ziller bis Kufstein -- Weißachgraben -- Ellmau -- St.~Johann i.T. --
+Fieberbrunn -- Hochfilzen -- Saalfelden -- Zell am See -- Salzach -- Gerlospaß -- Gerlostal --
+Zell am Ziller -- Ziller bis Einmündung in den Inn
+
+!ifset bergcam
+Angrenzende Gebiete: NW bis N:~(!link [Brandenberger Alpen] [bergcam_o06]) (Rofangebirge);
+N:~(!link [Kaisergebirge] [bergcam_o08]); NO:~(!link [Loferer und Leoganger Steinberge] [bergcam_o09]);
+W:~(!link [Salzburger Schieferalpen] [bergcam_o12]); SO:~(!link [Glocknergruppe] [bergcam_o40]);
+S:~(!link [Granatspitzgruppe] [bergcam_o39]), (!link [Venedigergruppe] [bergcam_o36]);
+S bis SW:~(!link [Zillertaler Alpen] [bergcam_o35]); W:~(!link [Tuxer Alpen] [bergcam_o33]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/kitzbueheler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: NW bis N:~(!link [Brandenberger Alpen] [bergpano_o06]) (Rofangebirge);
+N:~(!link [Kaisergebirge] [bergpano_o08]); NO:~(!link [Loferer und Leoganger Steinberge] [bergpano_o09]);
+W:~(!link [Salzburger Schieferalpen] [bergpano_o12]); SO:~(!link [Glocknergruppe] [bergpano_o40]);
+S:~(!link [Granatspitzgruppe] [bergpano_o39]), (!link [Venedigergruppe] [bergpano_o36]);
+S bis SW:~(!link [Zillertaler Alpen] [bergpano_o35]); W:~(!link [Tuxer Alpen] [bergpano_o33]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/kitzbueheler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (35) Zillertaler Alpen
+!ifset o35
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Zillertaler Alpen, Tuxer Hauptkamm, Zillertaler Hauptkamm, Pfunderer Berge, Gerlosgruppe, Webcam
+!html_description Gebirgs-Webcam-Links Zillertaler Alpen
+!endif
+!ifset bergpano
+!html_keywords Zillertaler Alpen, Tuxer Hauptkamm, Zillertaler Hauptkamm, Pfunderer Berge, Gerlosgruppe, Panorama, Panoramen
+!html_description Panorama-Links Zillertaler Alpen
+!endif
+!ifset stempel
+!html_keywords Zillertaler Alpen, Tuxer Hauptkamm, Zillertaler Hauptkamm, Pfunderer Berge, Gerlosgruppe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Zillertaler Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Zell am Ziller -- Gerlostal -- Gerlospaß -- Salzach bis Einmündung Krimmler Ache --
+Krimmler Tal -- Birnlücke -- Prettau -- Ahrntal -- Tauferer Tal -- Bruneck -- Rienz bis Einmündung in den
+Eisack -- Eisack -- Brenner -- Wipptal bis Einmündung Schmirnbach -- Schmirntal -- Kasererbach --
+Tuxer Joch -- Tuxer Tal bis Mayrhofen -- Zillertal bis Zell am Ziller
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Tuxer Alpen] [bergcam_o33]), (!link [Kitzbüheler Alpen] [bergcam_o34]);
+O:~(!link [Venedigergruppe] [bergcam_o36]); SO:~(!link [Rieserfernergruppe] [bergcam_o37]);
+S:~(!link [Dolomiten] [bergcam_o52]); SW:~(!link [Sarntaler Alpen] [bergcam_o32]);
+W:~(!link [Stubaier Alpen] [bergcam_o31]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/zillertaler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Tuxer Alpen] [bergpano_o33]), (!link [Kitzbüheler Alpen] [bergpano_o34]);
+O:~(!link [Venedigergruppe] [bergpano_o36]); SO:~(!link [Rieserfernergruppe] [bergpano_o37]);
+S:~(!link [Dolomiten] [bergpano_o52]); SW:~(!link [Sarntaler Alpen] [bergpano_o32]);
+W:~(!link [Stubaier Alpen] [bergpano_o31]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/zillertaler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (36) Venedigergruppe
+!ifset o36
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Venedigergruppe, Durreckgruppe, Rötgruppe, Schlößkamm, Froßnitzgruppe, Lasörlinggruppe, Webcam
+!html_description Gebirgs-Webcam-Links Venedigergruppe
+!endif
+!ifset bergpano
+!html_keywords Venedigergruppe, Durreckgruppe, Rötgruppe, Schlößkamm, Froßnitzgruppe, Lasörlinggruppe, Panorama, Panoramen
+!html_description Panorama-Links Venedigergruppe
+!endif
+!ifset stempel
+!html_keywords Venedigergruppe, Durreckgruppe, Rötgruppe, Schlößkamm, Froßnitzgruppe, Lasörlinggruppe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Venedigergruppe
+!endif
+!end_ignore
+
+# Schreibweise Felbertauern oder Felber Tauern??
+Umgrenzung: Krimml -- Salzach bis Mittersill -- Felberbach -- Felbertauern -- Tauernbach --
+Matrei in Osttirol -- Isel bis Huben -- Schwarzach -- Jagdhausalm -- Klammljoch -- Klammlbach --
+Sand in Taufers -- Ahrntal -- Prettau -- Birnlücke -- Krimmler Achental -- Krimml
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Kitzbüheler Alpen] [bergcam_o34]);
+O:~(!link [Granatspitzgruppe] [bergcam_o39]); S:~(!link [Villgratner Berge] [bergcam_o38]);
+SW:~(!link [Rieserfernergruppe] [bergcam_o37]); W:~(!link [Zillertaler Alpen] [bergcam_o35]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/venedigergruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Kitzbüheler Alpen] [bergpano_o34]);
+O:~(!link [Granatspitzgruppe] [bergpano_o39]); S:~(!link [Villgratner Berge] [bergpano_o38]);
+SW:~(!link [Rieserfernergruppe] [bergpano_o37]); W:~(!link [Zillertaler Alpen] [bergpano_o35]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/venedigergruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (37) Rieserfernergruppe
+!ifset o37
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Rieserfernergruppe, Webcam
+!html_description Gebirgs-Webcam-Links Rieserfernergruppe
+!endif
+!ifset bergpano
+!html_keywords Rieserfernergruppe, Panorama, Panoramen
+!html_description Panorama-Links Rieserfernergruppe
+!endif
+!ifset stempel
+!html_keywords Rieserfernergruppe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Rieserfernergruppe
+!endif
+!end_ignore
+
+Umgrenzung: Klammljoch -- Jagdhausalm -- Schwarzach -- Einmündung Staller Almbach -- Staller Almbach --
+Staller Sattel -- Antholzer Tal -- Olang -- Rienz bis Bruneck -- Tauferer Tal -- Sand in Taufers --
+Raintal -- Knuttental -- Klammljoch
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Venedigergruppe] [bergcam_o36]); O:~(!link [Villgratner Berge] [bergcam_o38]);
+S:~(!link [Dolomiten] [bergcam_o52]); W:~(!link [Zillertaler Alpen] [bergcam_o35]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/rieserfernergruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Venedigergruppe] [bergpano_o36]); O:~(!link [Villgratner Berge] [bergpano_o38]);
+S:~(!link [Dolomiten] [bergpano_o52]); W:~(!link [Zillertaler Alpen] [bergpano_o35]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/rieserfernergruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (38) Villgratner Berge
+!ifset o38
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Villgratner Berge, Webcam
+!html_description Gebirgs-Webcam-Links Villgratner Berge
+!endif
+!ifset bergpano
+!html_keywords Villgratner Berge, Panorama, Panoramen
+!html_description Panorama-Links Villgratner Berge
+!endif
+!ifset stempel
+!html_keywords Villgratner Berge, Hüttenstempel, Stempel
+!html_description Hüttenstempel Villgratner Berge
+!endif
+!end_ignore
+
+Umgrenzung:~Staller Sattel -- Staller Almbach -- Schwarzbach bis Einmündung in die Isel -- Isel bis Lienz --
+Drautal -- Toblach -- Rienz bis Olang -- Antholzer Tal -- Staller Sattel
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Venedigergruppe] [bergcam_o36]), (!link [Granatspitzgruppe] [bergcam_o39]);
+NO:~(!link [Schobergruppe] [bergcam_o41]); SO:~(!link [Gailtaler Alpen] [bergcam_o56]);
+S:~(!link [Karnischer Hauptkamm] [bergcam_o57a]); S bis SW:~(!link [Dolomiten] [bergcam_o52]);
+W:~(!link [Rieserfernergruppe] [bergcam_o37]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/villgratner_berge.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Venedigergruppe] [bergpano_o36]), (!link [Granatspitzgruppe] [bergpano_o39]);
+NO:~(!link [Schobergruppe] [bergpano_o41]); SO:~(!link [Gailtaler Alpen] [bergpano_o56]);
+S:~(!link [Karnischer Hauptkamm] [bergpano_o57a]); S bis SW:~(!link [Dolomiten] [bergpano_o52]);
+W:~(!link [Rieserfernergruppe] [bergpano_o37]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/villgratner_berge.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (39) Granatspitzgruppe
+!ifset o39
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Granatspitzgruppe, Webcam
+!html_description Gebirgs-Webcam-Links Granatspitzgruppe
+!endif
+!ifset bergpano
+!html_keywords Granatspitzgruppe, Panorama, Panoramen
+!html_description Panorama-Links Granatspitzgruppe
+!endif
+!ifset stempel
+!html_keywords Granatspitzgruppe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Granatspitzgruppe
+!endif
+!end_ignore
+
+Umgrenzung: Salzbach von Mittersill bis Uttendorf -- Stubachtal -- Enzingerboden -- Grünsee -- Weißenbach --
+Weißsee -- Kalser Tauern -- Dorfer See -- Dorfer Tal -- Kals -- Kalserbach bis Einmündung in die Isel --
+Isel bis Matrei in Osttirol -- Tauernbach -- Felbertauern -- Felbertal -- Mittersill
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Kitzbüheler Alpen] [bergcam_o34]); O:~(!link [Glocknergruppe] [bergcam_o40]);
+SO:~(!link [Schobergruppe] [bergcam_o41]); SW:~(!link [Villgratner Berge] [bergcam_o38]);
+W:~(!link [Venedigergruppe] [bergcam_o36]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/granatspitzgruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Kitzbüheler Alpen] [bergpano_o34]); O:~(!link [Glocknergruppe] [bergpano_o40]);
+SO:~(!link [Schobergruppe] [bergpano_o41]); SW:~(!link [Villgratner Berge] [bergpano_o38]);
+W:~(!link [Venedigergruppe] [bergpano_o36]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/granatspitzgruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (40) Glockner-Gruppe
+!ifset o40
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Glockner-Gruppe, Großglockner, Webcam
+!html_description Gebirgs-Webcam-Links Glockner-Gruppe
+!endif
+!ifset bergpano
+!html_keywords Glockner-Gruppe, Großglockner, Panorama, Panoramen
+!html_description Panorama-Links Glockner-Gruppe
+!endif
+!ifset stempel
+!html_keywords Glockner-Gruppe, Großglockner, Hüttenstempel, Stempel
+!html_description Hüttenstempel Glockner-Gruppe
+!endif
+!end_ignore
+
+Umgrenzung: Salzbach von Uttendorf bis Taxenbach -- Rauriser Tal bis Wörth -- Seidlwinkltal -- Hochtor --
+Tauernbach -- Möll bis Einmündung Leiterbach -- Leitertal bis Einmündung Moosbach -- Moosbach --
+Peischlachtörl -- Peischlachbach -- Kals -- Kalser Bach -- Dorfer Tal -- Dorfer See -- Kalser Tauern --
+Weißsee -- Weißenbach -- Grünsee -- Enzingerboden -- Stubachtal -- Uttendorf
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Kitzbüheler Alpen] [bergcam_o34]);
+NO:~(!link [Berchtesgadener Alpen] [bergcam_o10]); O:~(!link [Goldberggruppe] [bergcam_o42]);
+S:~(!link [Schobergruppe] [bergcam_o41]); W:~(!link [Granatspitzgruppe] [bergcam_o39]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/glocknergruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Kitzbüheler Alpen] [bergpano_o34]);
+NO:~(!link [Berchtesgadener Alpen] [bergpano_o10]); O:~(!link [Goldberggruppe] [bergpano_o42]);
+S:~(!link [Schobergruppe] [bergpano_o41]); W:~(!link [Granatspitzgruppe] [bergpano_o39]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/glocknergruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (41) Schober-Gruppe
+!ifset o41
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Schober-Gruppe, Webcam
+!html_description Gebirgs-Webcam-Links Schober-Gruppe
+!endif
+!ifset bergpano
+!html_keywords Schober-Gruppe, Panorama, Panoramen
+!html_description Panorama-Links Schober-Gruppe
+!endif
+!ifset stempel
+!html_keywords Schober-Gruppe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Schober-Gruppe
+!endif
+!end_ignore
+
+Umgrenzung: Möll von Einmündung Leiterbach bis Winklern -- Iselsberg -- Iseltal von Lienz bis Huben --
+Kalser Bach bis Kals -- Ködnitzbach -- Peischlachbach -- Peischlachtörl -- Moosbach -- Leiterbach bis
+Einmündung in die Möll
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Glocknergruppe] [bergcam_o40]);
+NO bis O:~(!link [Goldberggruppe] [bergcam_o42]); SO:~(!link [Kreuzeckgruppe] [bergcam_o43]);
+S:~(!link [Karnischer Hauptkamm] [bergcam_o57a]); SW bis W:~(!link [Villgratner Berge] [bergcam_o38]);
+NW:~(!link [Granatspitzgruppe] [bergcam_o39]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/schobergruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Glocknergruppe] [bergpano_o40]);
+NO bis O:~(!link [Goldberggruppe] [bergpano_o42]); SO:~(!link [Kreuzeckgruppe] [bergpano_o43]);
+S:~(!link [Karnischer Hauptkamm] [bergpano_o57a]); SW bis W:~(!link [Villgratner Berge] [bergpano_o38]);
+NW:~(!link [Granatspitzgruppe] [bergpano_o39]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/schobergruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (42) Goldberg-Gruppe
+!ifset o42
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Goldberg-Gruppe, Webcam
+!html_description Gebirgs-Webcam-Links Goldberg-Gruppe
+!endif
+!ifset bergpano
+!html_keywords Goldberg-Gruppe, Panorama, Panoramen
+!html_description Panorama-Links Goldberg-Gruppe
+!endif
+!ifset stempel
+!html_keywords Goldberg-Gruppe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Goldberg-Gruppe
+!endif
+!end_ignore
+
+Umgrenzung: Salzach von Taxenbach bis Einmündung Gasteiner Ache -- Gasteiner Ache -- Naßfeld --
+Niederer Tauern -- Mallnitzbach bis Einmündung in die Möll -- Mölltal bis Heiligenblut -- Tauernbach --
+Hochtor -- Seidlwinkltal -- Rauriser Tal -- Taxenbach
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Salzburger Schieferalpen] [bergcam_o12]);
+O:~(!link [Ankogelgruppe] [bergcam_o44]); S:~(!link [Kreuzeckgruppe] [bergcam_o43]);
+W:~(!link [Schobergruppe] [bergcam_o41]), (!link [Glocknergruppe] [bergcam_o40]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/goldberggruppe.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Salzburger Schieferalpen] [bergpano_o12]);
+O:~(!link [Ankogelgruppe] [bergpano_o44]); S:~(!link [Kreuzeckgruppe] [bergpano_o43]);
+W:~(!link [Schobergruppe] [bergpano_o41]), (!link [Glocknergruppe] [bergpano_o40]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/goldberggruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (43) Kreuzeck-Gruppe
+!ifset o43
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Kreuzeck-Gruppe, Webcam
+!html_description Gebirgs-Webcam-Links Kreuzeck-Gruppe
+!endif
+!ifset bergpano
+!html_keywords Kreuzeck-Gruppe, Panorama, Panoramen
+!html_description Panorama-Links Kreuzeck-Gruppe
+!endif
+!ifset stempel
+!html_keywords Kreuzeck-Gruppe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Kreuzeck-Gruppe
+!endif
+!end_ignore
+
+Umgrenzung: Möll von Winklern bis Sachsenburg -- Drau von Sachsenburg bis Lienz -- Iselsberg -- Winklern
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Goldberggruppe] [bergcam_o42]); NO:~(!link [Ankogelgruppe] [bergcam_o44]);
+S:~(!link [Gailtaler Alpen] [bergcam_o56]); NW:~(!link [Schobergruppe] [bergcam_o41]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/kreuzeckgruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Goldberggruppe] [bergpano_o42]); NO:~(!link [Ankogelgruppe] [bergpano_o44]);
+S:~(!link [Gailtaler Alpen] [bergpano_o56]); NW:~(!link [Schobergruppe] [bergpano_o41]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/kreuzeckgruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (44) Ankogel-Gruppe
+!ifset o44
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Ankogel, Ankogel-Gruppe, Hochalmspitze-Ankogelkamm, Gamskarkogelkamm, Reißeck- und Hafnergruppe, Webcam
+!html_description Gebirgs-Webcam-Links Ankogel-Gruppe
+!endif
+!ifset bergpano
+!html_keywords Ankogel, Ankogel-Gruppe, Hochalmspitze-Ankogelkamm, Gamskarkogelkamm, Reißeck- und Hafnergruppe, Panorama, Panoramen
+!html_description Panorama-Links Ankogel-Gruppe
+!endif
+!ifset stempel
+!html_keywords Ankogel, Ankogel-Gruppe, Hochalmspitze-Ankogelkamm, Gamskarkogelkamm, Reißeck- und Hafnergruppe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Ankogel-Gruppe
+!endif
+!end_ignore
+
+Umgrenzung: Salzach von Einmündung Gasteiner Ache bis Einmündung Großarlbach -- Großarlbach bis Einmündung
+Kreealpenbach -- Murtörl -- Mur bis St.~Michael -- Klausgraben -- Katschberghöhe -- Katschbach --
+Lieser bis Einmündung in die Drau -- Drau bis Einmündung Möll -- Mölltal bis Einmündung Mallnitzbach --
+Mallnitzbach -- Niederer Tauern -- Gasteiner Ache bis Einmündung in die Salzach
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Salzburger Schieferalpen] [bergcam_o12]);
+NO:~(!link [Radstädter Tauern] [bergcam_o45a]); O:~(!link [Nockberge] [bergcam_o46a]);
+S:~(!link [Gailtaler Alpen] [bergcam_o56]); SW:~(!link [Kreuzeckgruppe] [bergcam_o43]);
+W:~(!link [Goldberggruppe] [bergcam_o42]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/ankogelgruppe.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Salzburger Schieferalpen] [bergpano_o12]);
+NO:~(!link [Radstädter Tauern] [bergpano_o45a]); O:~(!link [Nockberge] [bergpano_o46a]);
+S:~(!link [Gailtaler Alpen] [bergpano_o56]); SW:~(!link [Kreuzeckgruppe] [bergpano_o43]);
+W:~(!link [Goldberggruppe] [bergpano_o42]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/ankogelgruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (45a) Radstädter Tauern
+!ifset o45a
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Niedere Tauern, Radstädter Tauern, Webcam
+!html_description Gebirgs-Webcam-Links Radstädter Tauern (Niedere Tauern)
+!endif
+!ifset bergpano
+!html_keywords Niedere Tauern, Radstädter Tauern, Panorama, Panoramen
+!html_description Panorama-Links Radstädter Tauern (Niedere Tauern)
+!endif
+!ifset stempel
+!html_keywords Niedere Tauern, Radstädter Tauern, Hüttenstempel, Stempel
+!html_description Hüttenstempel Radstädter Tauern (Niedere Tauern)
+!endif
+!end_ignore
+
+Umgrenzung: Wagrainer Bach von der Einmündung in die Salzach -- Wagrainer Höhe -- Litzlingbach bis
+Einmündung in die Enns -- Enns bis Radstadt -- nördliches Taurachtal -- Obertauern -- südliches Taurachtal --
+Mauterndorf -- Neuseß -- Mur -- Murtörl -- Kreealpenbach -- Großarlbach bis Einmündung in die Salzach --
+Salzach bis Einmündung Wagrainer Bach
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Salzburger Schieferalpen] [bergcam_o12]);
+O:~(!link [Schladminger Tauern] [bergcam_o45b]); SO:~(!link [Nockberge] [bergcam_o46a]);
+S bis O:~(!link [Ankogelgruppe] [bergcam_o44]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/radstaedter_tauern.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Salzburger Schieferalpen] [bergpano_o12]);
+O:~(!link [Schladminger Tauern] [bergpano_o45b]); SO:~(!link [Nockberge] [bergpano_o46a]);
+S bis O:~(!link [Ankogelgruppe] [bergpano_o44]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/radstaedter_tauern.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (45b) Schladminger Tauern
+!ifset o45b
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Niedere Tauern, Schladminger Tauern, Webcam
+!html_description Gebirgs-Webcam-Links Schladminger Tauern (Niedere Tauern)
+!endif
+!ifset bergpano
+!html_keywords Niedere Tauern, Schladminger Tauern, Panorama, Panoramen
+!html_description Panorama-Links Schladminger Tauern (Niedere Tauern)
+!endif
+!ifset stempel
+!html_keywords Niedere Tauern, Schladminger Tauern, Hüttenstempel, Stempel
+!html_description Hüttenstempel Schladminger Tauern (Niedere Tauern)
+!endif
+!end_ignore
+
+Umgrenzung: Enns von Radstadt bis Einmündung Großsölkbach -- Großsölkbach -- Sölker Paß -- Katschbach bis
+Einmündung in die Mur - Mur bis Oberbaierdorf -- Neuseß -- Mauterndorf -- südliches Taurachtal --
+nördliches Taurachtal -- Radstadt
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Salzburger Schieferalpen] [bergcam_o12]),
+(!link [Dachsteingebirge] [bergcam_o14]); O:~(!link [Rottenmanner und Wölzer Tauern] [bergcam_o45c]);
+S:~(!link [Nockberge] [bergcam_o46a]); W:~(!link [Radstädter Tauern] [bergcam_o45a]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/schladminger_tauern.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Salzburger Schieferalpen] [bergpano_o12]),
+(!link [Dachsteingebirge] [bergpano_o14]); O:~(!link [Rottenmanner und Wölzer Tauern] [bergpano_o45c]);
+S:~(!link [Nockberge] [bergpano_o46a]); W:~(!link [Radstädter Tauern] [bergpano_o45a]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/schladminger_tauern.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (45c) Rottenmanner und Wölzer Tauern
+!ifset o45c
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Niedere Tauern, Rottenmanner Tauern, Wölzer Tauern, Webcam
+!html_description Gebirgs-Webcam-Links Rottenmanner und Wölzer Tauern (Niedere Tauern)
+!endif
+!ifset bergpano
+!html_keywords Niedere Tauern, Rottenmanner Tauern, Wölzer Tauern, Panorama, Panoramen
+!html_description Panorama-Links Rottenmanner und Wölzer Tauern (Niedere Tauern)
+!endif
+!ifset stempel
+!html_keywords Niedere Tauern, Rottenmanner Tauern, Wölzer Tauern, Hüttenstempel, Stempel
+!html_description Hüttenstempel Rottenmanner und Wölzer Tauern (Niedere Tauern)
+!endif
+!end_ignore
+
+Umgrenzung: Enns von Einmündung Großsölkbach bis Einmündung Paltenbach -- Paltenbach bis Trieben -- Triebenbach
+bis Einmündung Tauernbach - Hohentauern -- Pölsbach bis Einmündung in die Mur -- Mur bis Einmündung Katschbach
+-- Katschbach -- Sölker Paß -- Großsölkbach bis Einmündung in die Enns
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Dachsteingebirge] [bergcam_o14]), (!link [Totes Gebirge] [bergcam_o15]);
+N bis NO:~(!link [Ennstaler Alpen] [bergcam_o16]); O:~(!link [Seckauer Tauern] [bergcam_o45d]);
+SO:~(!link [Lavanttaler Alpen] [bergcam_o46b]); S bis SW:~(!link [Nockberge] [bergcam_o46a]);
+W:~(!link [Schladminger Tauern] [bergcam_o45b]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/rottenmanner_woelzer_tauern.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Dachsteingebirge] [bergpano_o14]), (!link [Totes Gebirge] [bergpano_o15]);
+N bis NO:~(!link [Ennstaler Alpen] [bergpano_o16]); O:~(!link [Seckauer Tauern] [bergpano_o45d]);
+SO:~(!link [Lavanttaler Alpen] [bergpano_o46b]); S bis SW:~(!link [Nockberge] [bergpano_o46a]);
+W:~(!link [Schladminger Tauern] [bergpano_o45b]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/rottenmanner_woelzer_tauern.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (45d) Seckauer Tauern
+!ifset o45d
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Niedere Tauern, Seckauer Tauern, Webcam
+!html_description Gebirgs-Webcam-Links Seckauer Tauern (Niedere Tauern)
+!endif
+!ifset bergpano
+!html_keywords Niedere Tauern, Seckauer Tauern, Panorama, Panoramen
+!html_description Panorama-Links Seckauer Tauern (Niedere Tauern)
+!endif
+!ifset stempel
+!html_keywords Niedere Tauern, Seckauer Tauern, Hüttenstempel, Stempel
+!html_description Hüttenstempel Seckauer Tauern (Niedere Tauern)
+!endif
+!end_ignore
+
+Umgrenzung: Paltenbach von Trieben bis Schoberpaß -- Liesingbach bis Einmündung in die Mur -- Mur von
+St.~Michael bis Einmündung Pölsbach -- Pölstal -- Hohentauern -- Tauernbach -- Triebenbach -- Trieben
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Ennstaler Alpen] [bergcam_o16]);
+SO bis S:~(!link [Lavanttaler Alpen] [bergcam_o46b]);
+W:~(!link [Rottenmanner und Wölzer Tauern] [bergcam_o45c]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/seckauer_tauern.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Ennstaler Alpen] [bergpano_o16]);
+SO bis S:~(!link [Lavanttaler Alpen] [bergpano_o46b]);
+W:~(!link [Rottenmanner und Wölzer Tauern] [bergpano_o45c]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/seckauer_tauern.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (46a) Nockberge
+!ifset o46a
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Nockberge, Gurktaler Alpen, Norische Alpen, Webcam
+!html_description Gebirgs-Webcam-Links Nockberge
+!endif
+!ifset bergpano
+!html_keywords Nockberge, Gurktaler Alpen, Norische Alpen, Panorama, Panoramen
+!html_description Panorama-Links Nockberge
+!endif
+!ifset stempel
+!html_keywords Nockberge, Gurktaler Alpen, Norische Alpen, Hüttenstempel, Stempel
+!html_description Hüttenstempel Nockberge
+!endif
+!end_ignore
+
+Umgrenzung: Mur von St.~Michael bis Teufenbach -- Neumarkter Sattel -- Neumarkt i.St. --
+Olsabach bis Einmündung in die Metznitz - Metznitz bis Einmündung in die Gurk -- Gurk bis Einmündung in die
+Drau -- Drau bis Einmündung der Lieser -- Lieser bis Einmündung Katschbach -- Katschbach -- Katschbergpaß --
+Klausgraben -- Mur
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Schladminger Tauern] [bergcam_o45b]);
+O:~(!link [Lavanttaler Alpen] [bergcam_o46b]); S:~(!link [Karawanken und Bachergebirge] [bergcam_o59]);
+SW:~(!link [Gailtaler Alpen] [bergcam_o56]); W:~(!link [Ankogelgruppe] [bergcam_o44]);
+NW:~(!link [Radstädter Tauern] [bergcam_o45a]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/nockberge.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Schladminger Tauern] [bergpano_o45b]);
+O:~(!link [Lavanttaler Alpen] [bergpano_o46b]); S:~(!link [Karawanken und Bachergebirge] [bergpano_o59]);
+SW:~(!link [Gailtaler Alpen] [bergpano_o56]); W:~(!link [Ankogelgruppe] [bergpano_o44]);
+NW:~(!link [Radstädter Tauern] [bergpano_o45a]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/nockberge.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (46b) Lavanttaler Alpen
+!ifset o46b
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Lavanttaler Alpen, Seetaler Alpen, Saualpe, Hochalpe, Koralpe, Stubalpe, Gleinalpe, Packalpe, Posruck, Norische Alpen, Webcam
+!html_description Gebirgs-Webcam-Links Lavanttaler Alpen
+!endif
+!ifset bergpano
+!html_keywords Lavanttaler Alpen, Seetaler Alpen, Saualpe, Hochalpe, Koralpe, Stubalpe, Gleinalpe, Packalpe, Posruck, Norische Alpen, Panorama, Panoramen
+!html_description Panorama-Links Lavanttaler Alpen
+!endif
+!ifset stempel
+!html_keywords Lavanttaler Alpen, Seetaler Alpen, Saualpe, Hochalpe, Koralpe, Stubalpe, Gleinalpe, Packalpe, Posruck, Norische Alpen, Hüttenstempel, Stempel
+!html_description Hüttenstempel Lavanttaler Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Mur von Teufenbach bis Spielfeld -- Marburg (Maribor) -- Drau bis Einmündung Gurk --
+Gurk bis Einmündung Metnitz -- Metnitz bis Einmündung Olsabach -- Neumarkt i.St. -- Neumarkter Sattel --
+Teufenbach
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Seckauer Tauern] [bergcam_o45d]), (!link [Ennstaler Alpen] [bergcam_o16]),
+(!link [Hochschwabgruppe] [bergcam_o18]); O:~(!link [Randgebirge östlich der Mur] [bergcam_o47]);
+S:~(!link [Karawanken und Bachergebirge] [bergcam_o59]); W:~(!link [Nockberge] [bergcam_o46a]);
+NO bis N:~(!link [Rottenmanner und Wölzer Tauern] [bergcam_o45c]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/lavanttaler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Seckauer Tauern] [bergpano_o45d]), (!link [Ennstaler Alpen] [bergpano_o16]),
+(!link [Hochschwabgruppe] [bergpano_o18]); O:~(!link [Randgebirge östlich der Mur] [bergpano_o47]);
+S:~(!link [Karawanken und Bachergebirge] [bergpano_o59]); W:~(!link [Nockberge] [bergpano_o46a]);
+NO bis N:~(!link [Rottenmanner und Wölzer Tauern] [bergpano_o45c]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/lavanttaler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (47) Randgebirge östlich der Mur
+!ifset o47
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Randgebirge östlich der Mur, Cetische Alpen, Wechsel, Stuhleck, Semmering, Fischbacher Alpen, Pretulalpe, Rennfeld, Hochlantsch, Schöckel, Bucklige Welt, Rosaliengebirge, Leithagebirge, Webcam
+!html_description Gebirgs-Webcam-Links Randgebirge östlich der Mur
+!endif
+!ifset bergpano
+!html_keywords Randgebirge östlich der Mur, Cetische Alpen, Wechsel, Stuhleck, Semmering, Fischbacher Alpen, Pretulalpe, Rennfeld, Hochlantsch, Schöckel, Bucklige Welt, Rosaliengebirge, Leithagebirge, Panorama, Panoramen
+!html_description Panorama-Links Randgebirge östlich der Mur
+!endif
+!ifset stempel
+!html_keywords Randgebirge östlich der Mur, Cetische Alpen, Wechsel, Stuhleck, Semmering, Fischbacher Alpen, Pretulalpe, Rennfeld, Hochlantsch, Schöckel, Bucklige Welt, Rosaliengebirge, Leithagebirge, Hüttenstempel, Stempel
+!html_description Hüttenstempel Randgebirge östlich der Mur
+!endif
+!end_ignore
+
+Umgrenzung: Bruck an der Mur -- Mürz bis Mürzzuschlag -- Semmering -- Schottwien -- Gloggnitz --
+Neunkirchen -- Steinfeld -- Wiener Becken -- Bruck a.d. Leitha -- Neusiedler See -- Ungarische Tiefebene --
+Mur bis Einmündung der Mürz
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Mürzsteger Alpen] [bergcam_o19]),
+(!link [Rax und Schneeberggruppe] [bergcam_o20], (!link [Gutensteiner Alpen] [bergcam_o23]);
+W:~(!link [Lavanttaler Alpen] [bergcam_o46b]); NW:~(!link [Hochschwabgruppe] [bergcam_o18]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/randgebirge_oestlich_mur.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Mürzsteger Alpen] [bergpano_o19]),
+(!link [Rax und Schneeberggruppe] [bergpano_o20], (!link [Gutensteiner Alpen] [bergpano_o23]);
+W:~(!link [Lavanttaler Alpen] [bergpano_o46b]); NW:~(!link [Hochschwabgruppe] [bergpano_o18]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/randgebirge_oestlich_mur.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (48a) Ortler-Alpen
+!ifset o48a
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Ortler-Alpen, Ortler, Webcam
+!html_description Gebirgs-Webcam-Links Ortler-Alpen
+!endif
+!ifset bergpano
+!html_keywords Ortler-Alpen, Ortler, Panorama, Panoramen
+!html_description Panorama-Links Ortler-Alpen
+!endif
+!ifset stempel
+!html_keywords Ortler-Alpen, Ortler, Hüttenstempel, Stempel
+!html_description Hüttenstempel Ortler-Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Meran -- Lana -- Ultental -- Einmündung Maraunbach in Valschauer Bach -- Hofmahd -- Lederbach --
+Proveis -- Val di Pescara -- Lago di San~Giustina -- Male -- Nocetal (Val di Sole) -- Tonalepaß --
+Ponte di Legno -- Gaviapaß -- Bormio -- Valle di Fraele -- Passo di Fraele -- Valle del Gallo -- Spöltal
+bis Einmündung Ova dal Fuorn -- Ofenpaß -- Münstertal bis Einmündung Rambach in die Etsch -- Etsch bis Meran
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Sesvennagruppe] [bergcam_o29]), (!link [Ötztaler Alpen] [bergcam_o30]);
+O:~(!link [Sarntaler Alpen] [bergcam_o32]), (!link [Nonsberg-Gruppe] [bergcam_o48c]);
+S:~(!link [Brenta-Gruppe] [bergcam_o51]), (!link [Adamello-Presanella-Alpen] [bergcam_o49]);
+W:~(!link [Sobretta-Gavia-Gruppe] [bergcam_o48b]), (!link [Livigno-Alpen] [bergcam_o67]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/ortler.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Sesvennagruppe] [bergpano_o29]), (!link [Ötztaler Alpen] [bergpano_o30]);
+O:~(!link [Sarntaler Alpen] [bergpano_o32]), (!link [Nonsberg-Gruppe] [bergpano_o48c]);
+S:~(!link [Brenta-Gruppe] [bergpano_o51]), (!link [Adamello-Presanella-Alpen] [bergpano_o49]);
+W:~(!link [Sobretta-Gavia-Gruppe] [bergpano_o48b]), (!link [Livigno-Alpen] [bergpano_o67]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/ortler.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (48b) Sobretta-Gavia-Gruppe
+!ifset o48b
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Sobretta-Gavia-Gruppe, Webcam
+!html_description Gebirgs-Webcam-Links Sobretta-Gavia-Gruppe
+!endif
+!ifset bergpano
+!html_keywords Sobretta-Gavia-Gruppe, Panorama, Panoramen
+!html_description Panorama-Links Sobretta-Gavia-Gruppe
+!endif
+!ifset stempel
+!html_keywords Sobretta-Gavia-Gruppe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Sobretta-Gavia-Gruppe
+!endif
+!end_ignore
+
+Umgrenzung: Tresenda -- Adda bis Bormio -- Gaviapaß -- Ponte di Legno -- Oglio bis Tresenda
+
+!ifset bergcam
+Angrenzende Gebiete: N bis O:~(!link [Ortler-Alpen] [bergcam_o48a]);
+S:~(!link [Adamello-Presanella-Alpen] [bergcam_o49]); S bis SW: (!link [Bergamasker Alpen] [bergcam_o68]);
+W bis NW:~(!link [Livigno-Alpen] [bergcam_o67]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/sobretta-gavia-gruppe.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N bis O:~(!link [Ortler-Alpen] [bergpano_o48a]);
+S:~(!link [Adamello-Presanella-Alpen] [bergpano_o49]); S bis SW: (!link [Bergamasker Alpen] [bergpano_o68]);
+W bis NW:~(!link [Livigno-Alpen] [bergpano_o67]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/sobretta-gavia-gruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (48c) Nonsberg-Gruppe
+!ifset o48c
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Nonsberg-Gruppe, Mendelkamm, Webcam
+!html_description Gebirgs-Webcam-Links Nonsberg-Gruppe
+!endif
+!ifset bergpano
+!html_keywords Nonsberg-Gruppe, Mendelkamm, Panorama, Panoramen
+!html_description Panorama-Links Nonsberg-Gruppe
+!endif
+!ifset stempel
+!html_keywords Nonsberg-Gruppe, Mendelkamm, Hüttenstempel, Stempel
+!html_description Hüttenstempel Nonsberg-Gruppe
+!endif
+!end_ignore
+
+Umgrenzung: Meran -- Etsch bis Mezzocorona -- Nocetal (Val di Sole) -- Lago di San~Giustina -- Val di Pescara --
+Proveis -- Lederbach -- Hofmahd -- Maraunbach bis Einmündung in den Valschauer Bach -- Ultental -- Lana -- Meran
+
+!ifset bergcam
+Angrenzende Gebiete: NO:~(!link [Sarntaler Alpen] [bergcam_o32]); O:~(!link [Fleimstaler Alpen] [bergcam_o53]);
+W:~(!link [Brenta-Gruppe] [bergcam_o51]), (!link [Ortler-Alpen] [bergcam_o48a]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/nonsbergggruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: NO:~(!link [Sarntaler Alpen] [bergpano_o32]); O:~(!link [Fleimstaler Alpen] [bergpano_o53]);
+W:~(!link [Brenta-Gruppe] [bergpano_o51]), (!link [Ortler-Alpen] [bergpano_o48a]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/nonsbergggruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (49) Adamello-Presanella-Alpen
+!ifset o49
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Adamellogruppe, Presanellagruppe, Adamello-Presanella-Gruppe, Adamello-Presanella-Alpen, Webcam
+!html_description Gebirgs-Webcam-Links Adamello-Presanella-Alpen
+!endif
+!ifset bergpano
+!html_keywords Adamellogruppe, Presanellagruppe, Adamello-Presanella-Gruppe, Adamello-Presanella-Alpen, Panorama, Panoramen
+!html_description Panorama-Links Adamello-Presanella-Alpen
+!endif
+!ifset stempel
+!html_keywords Adamellogruppe, Presanellagruppe, Adamello-Presanella-Gruppe, Adamello-Presanella-Alpen, Hüttenstempel, Stempel
+!html_description Hüttenstempel Adamello-Presanella-Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Iseosee -- Oglio -- Tonalepaß -- Vermigliotal -- Dimaro -- Madonna di Campiglio -- Pinzolo --
+Tione -- Creto -- Caffaro -- Bagolino -- Passo di Maniva -- Val Trompia -- Col di San Zeno -- Iseosee
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Sobretta-Gavia-Gruppe] [bergcam_o48b]), (!link [Ortler-Alpen] [bergcam_o48a]);
+O:~(!link [Brenta-Gruppe] [bergcam_o51]), (!link [Gardaseeberge] [bergcam_o50]);
+W:~(!link [Bergamasker Alpen] [bergcam_o68]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/adamello_presanella.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Sobretta-Gavia-Gruppe] [bergpano_o48b]), (!link [Ortler-Alpen] [bergpano_o48a]);
+O:~(!link [Brenta-Gruppe] [bergpano_o51]), (!link [Gardaseeberge] [bergpano_o50]);
+W:~(!link [Bergamasker Alpen] [bergpano_o68]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/adamello_presanella.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (50) Gardasee-Berge
+!ifset o50
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Gardasee-Berge, Monte Baldo, Webcam
+!html_description Gebirgs-Webcam-Links Gardasee-Berge
+!endif
+!ifset bergpano
+!html_keywords Gardasee-Berge, Monte Baldo, Panorama, Panoramen
+!html_description Panorama-Links Gardasee-Berge
+!endif
+!ifset stempel
+!html_keywords Gardasee-Berge, Monte Baldo, Hüttenstempel, Stempel
+!html_description Hüttenstempel Gardasee-Berge
+!endif
+!end_ignore
+
+Umgrenzung: Iseosee -- Col di San~Zeno -- Val Trompia -- Passo di Maniva -- Bagolino -- Storo -- Tione --
+Vezzano -- Trient -- Etschtal -- Verona -- Brescia -- Iseosee
+
+!ifset bergcam
+Angrenzende Gebiete: W bis NW:~(!link [Adamello-Presanella-Alpen] [bergcam_o49]),
+N:~(!link [Brenta-Gruppe] [bergcam_o51]), O:~(!link [Vizentiner Alpen] [bergcam_o54]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpanogardaseeberge.html/])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: W bis NW:~(!link [Adamello-Presanella-Alpen] [bergpano_o49]),
+N:~(!link [Brenta-Gruppe] [bergpano_o51]), O:~(!link [Vizentiner Alpen] [bergpano_o54]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/gardaseeberge.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (51) Brenta-Gruppe
+!ifset o51
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Brenta-Gruppe, Webcam
+!html_description Gebirgs-Webcam-Links Brenta-Gruppe
+!endif
+!ifset bergpano
+!html_keywords Brenta-Gruppe, Panorama, Panoramen
+!html_description Panorama-Links Brenta-Gruppe
+!endif
+!ifset stempel
+!html_keywords Brenta-Gruppe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Brenta-Gruppe
+!endif
+!end_ignore
+
+Umgrenzung: Trient -- Tione -- Valle Rendena -- Madonna di Campiglio -- Passo Carlo Magno -- Dimaro --
+Val di Sole bis Einmündung des Noce in die Etsch bis Mezzocorona -- Etsch bis Trient
+
+!ifset bergcam
+Angrenzende Gebiete: W:~(!link [Adamello-Presanella-Alpen] [bergcam_o49]),
+NW bis N:~(!link [Ortler-Alpen] [bergcam_o48a]); NO bis O:~(!link [Nonsberg-Gruppe] [bergcam_o48c]);
+O:~(!link [Fleimstaler Alpen] [bergcam_o53]), S:~(!link [Gardaseeberge] [bergcam_o50]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/brenta.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: W:~(!link [Adamello-Presanella-Alpen] [bergpano_o49]),
+NW bis N:~(!link [Ortler-Alpen] [bergpano_o48a]); NO bis O:~(!link [Nonsberg-Gruppe] [bergpano_o48c]);
+O:~(!link [Fleimstaler Alpen] [bergpano_o53]), S:~(!link [Gardaseeberge] [bergpano_o50]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/brenta.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (52) Dolomiten
+!ifset o52
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Dolomiten, Dolomiti, Webcam
+!html_description Gebirgs-Webcam-Links Dolomiten
+!endif
+!ifset bergpano
+!html_keywords Dolomiten, Dolomiti, Panorama, Panoramen
+!html_description Panorama-Links Dolomiten
+!endif
+!ifset stempel
+!html_keywords Dolomiten, Dolomiti, Hüttenstempel, Stempel
+!html_description Hüttenstempel Dolomiten
+!endif
+!end_ignore
+
+Umgrenzung: Bozen -- Eisack bis Einmündung Rienz -- Pustertal bis Innichen -- Sextental -- Kreuzbergpaß --
+Padolatal -- San~Stefano -- Piave bis oberitalienische Tiefebene -- Bassano -- Brenta -- Val~Sugana bis Strigno
+-- Pieve Tesino -- Passo di Brocon -- Passo di Góbbera -- Val~Cismon bis Mezzano -- Rollepaß (Passo di Rolle)
+-- Paneveggio -- Predazzo -- Satteljoch -- Eggental -- Bozen
+
+!ifset bergcam
+Angrenzende Gebiete: NW:~(!link [Sarntaler Alpen] [bergcam_o32]);
+N:~(!link [Zillertaler Alpen] [bergcam_o35]), (!link [Rieserfernergruppe] [bergcam_o37]),
+(!link [Villgratner Berge] [bergcam_o38]); NO:~(!link [Karnischer Hauptkamm] [bergcam_o57a]);
+O:~(!link [Südliche Karnische Alpen] [bergcam_o57b]);
+SW:~(!link [Vizentiner Alpen] [bergcam_o54]), SW bis W:~(!link [Fleimstaler Alpen] [bergcam_o53]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/dolomiten.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: NW:~(!link [Sarntaler Alpen] [bergpano_o32]);
+N:~(!link [Zillertaler Alpen] [bergpano_o35]), (!link [Rieserfernergruppe] [bergpano_o37]),
+(!link [Villgratner Berge] [bergpano_o38]); NO:~(!link [Karnischer Hauptkamm] [bergpano_o57a]);
+O:~(!link [Südliche Karnische Alpen] [bergpano_o57b]);
+SW:~(!link [Vizentiner Alpen] [bergpano_o54]), SW bis W:~(!link [Fleimstaler Alpen] [bergpano_o53]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/dolomiten.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (53) Fleimstaler Alpen
+!ifset o53
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Fleimstaler Alpen, Jochgrimmgruppe, Hornspitzkamm, Lagoraikette, Cima d'Asta-Gruppe, Webcam
+!html_description Gebirgs-Webcam-Links Fleimstaler Alpen
+!endif
+!ifset bergpano
+!html_keywords Fleimstaler Alpen, Jochgrimmgruppe, Hornspitzkamm, Lagoraikette, Cima d'Asta-Gruppe, Panorama, Panoramen
+!html_description Panorama-Links Fleimstaler Alpen
+!endif
+!ifset stempel
+!html_keywords Fleimstaler Alpen, Jochgrimmgruppe, Hornspitzkamm, Lagoraikette, Cima d'Asta-Gruppe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Fleimstaler Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Bozen -- Eggental -- Zangenjoch -- Satteljoch -- Predazzo -- Paneveggio -- Rollepaß (Passo di Rolle)
+-- Val Cismon bis Mezzano -- Passo di Góbbera -- Passo di Brocon -- Pieve Tesino -- Strigno -- Val~Sugana --
+Fersental (Val~Pergine) -- Trient -- Etsch bis Bozen
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Sarntaler Alpen] [bergcam_o32]); NO:~(!link [Dolomiten] [bergcam_o52]);
+S:~(!link [Vizentiner Alpen] [bergcam_o54]); SW:~(!link [Brenta-Gruppe] [bergcam_o51]);
+W:~(!link [Nonsberg-Gruppe] [bergcam_o48c]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/fleimstaler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Sarntaler Alpen] [bergpano_o32]); NO:~(!link [Dolomiten] [bergpano_o52]);
+S:~(!link [Vizentiner Alpen] [bergpano_o54]); SW:~(!link [Brenta-Gruppe] [bergpano_o51]);
+W:~(!link [Nonsberg-Gruppe] [bergpano_o48c]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/fleimstaler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (54) Vizentiner Alpen
+!ifset o54
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Vizentiner Alpen, Webcam
+!html_description Gebirgs-Webcam-Links Vizentiner Alpen
+!endif
+!ifset bergpano
+!html_keywords Vizentiner Alpen, Panorama, Panoramen
+!html_description Panorama-Links Vizentiner Alpen
+!endif
+!ifset stempel
+!html_keywords Vizentiner Alpen, Hüttenstempel, Stempel
+!html_description Hüttenstempel Vizentiner Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Verona -- Etsch bis Trient -- Fersental (Val~Pergine) -- Val~Sugana -- Brenta bis Bassano --
+oberitalienische Tiefebene -- Verona
+
+!ifset bergcam
+Angrenzende Gebiete: W:~(!link [Gardaseeberge] [bergcam_o50]); N:~(!link [Fleimstaler Alpen] [bergcam_o53]);
+NO bis O:~(!link [Dolomiten] [bergcam_o52]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/vizentiner_alpen.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: W:~(!link [Gardaseeberge] [bergpano_o50]); N:~(!link [Fleimstaler Alpen] [bergpano_o53]);
+NO bis O:~(!link [Dolomiten] [bergpano_o52]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/vizentiner_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (56) Gailtaler Alpen
+!ifset o56
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Gailtaler Alpen, Lienzer Dolomiten, Jaukengruppe, Weißenseer Berge, Latschurgruppe, Bleiberger Gruppe, Villacher Alpe, Webcam
+!html_description Gebirgs-Webcam-Links Gailtaler Alpen
+!endif
+!ifset bergpano
+!html_keywords Gailtaler Alpen, Lienzer Dolomiten, Jaukengruppe, Weißenseer Berge, Latschurgruppe, Bleiberger Gruppe, Villacher Alpe, Panorama, Panoramen
+!html_description Panorama-Links Gailtaler Alpen
+!endif
+!ifset stempel
+!html_keywords Gailtaler Alpen, Lienzer Dolomiten, Jaukengruppe, Weißenseer Berge, Latschurgruppe, Bleiberger Gruppe, Villacher Alpe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Gailtaler Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Drau von Einmündung Gailbach bis zur Einmündung der Gail -- Gail -- Kartitscher Sattel --
+Gailbach bis Einmündung in die Drau
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Schobergruppe] [bergcam_o41]), (!link [Kreuzeck-Gruppe] [bergcam_o43]),
+(!link [Ankogelgruppe] [bergcam_o44]); NO:~(!link [Nockberge] [bergcam_o46a]);
+SO:~(!link [Julische Alpen] [bergcam_o58]);
+S:~(!link [Karnischer Hauptkamm] [bergcam_o57a]); NW:~(!link [Villgratner Berge] [bergcam_o38]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/gailtaler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Schobergruppe] [bergpano_o41]), (!link [Kreuzeck-Gruppe] [bergpano_o43]),
+(!link [Ankogelgruppe] [bergpano_o44]); NO:~(!link [Nockberge] [bergpano_o46a]);
+SO:~(!link [Julische Alpen] [bergpano_o58]);
+S:~(!link [Karnischer Hauptkamm] [bergpano_o57a]); NW:~(!link [Villgratner Berge] [bergpano_o38]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/gailtaler_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (57a) Karnischer Hauptkamm
+!ifset o57a
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Karnischer Hauptkamm, Karnische Alpen, Webcam
+!html_description Gebirgs-Webcam-Links Karnischer Hauptkamm (Karnische Alpen)
+!endif
+!ifset bergpano
+!html_keywords Karnischer Hauptkamm, Karnische Alpen, Panorama, Panoramen
+!html_description Panorama-Links Karnischer Hauptkamm (Karnische Alpen)
+!endif
+!ifset stempel
+!html_keywords Karnischer Hauptkamm, Karnische Alpen, Hüttenstempel, Stempel
+!html_description Hüttenstempel Karnischer Hauptkamm (Karnische Alpen)
+!endif
+!end_ignore
+
+Umgrenzung: Innichen (San Candido) -- Drau bis Einmündung Gailbach -- Gailbach -- Kartitscher Sattel --
+Gail bis Einmündung Gailitz -- Tarvis -- Kanaltal -- Pontebba -- Frattengraben -- Forca Pradulina --
+Rio Turrico -- Paularo -- Ligosullo -- Paluzza -- Val Calda -- Comeglians - Deganotal (Canale di Gorto) --
+Forni Avoltri -- Sappada -- Piave -- San~Stefano di Cadore -- Padolatal -- Kreuzbergpaß -- Innichen
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Gailtaler Alpen] [bergcam_o56]);
+O:~(!link [Karawanken und Bachergebirge] [bergcam_o59]); O bis SO:~(!link [Julische Alpen] [bergcam_o58]);
+S:~(!link [Südliche Karnische Alpen] [bergcam_o57b]); W:~(!link [Dolomiten] [bergcam_o52]);
+NW:~(!link [Villgratner Berge] [bergcam_o38]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/karnischer_hauptkamm.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Gailtaler Alpen] [bergpano_o56]);
+O:~(!link [Karawanken und Bachergebirge] [bergpano_o59]); O bis SO:~(!link [Julische Alpen] [bergpano_o58]);
+S:~(!link [Südliche Karnische Alpen] [bergpano_o57b]); W:~(!link [Dolomiten] [bergpano_o52]);
+NW:~(!link [Villgratner Berge] [bergpano_o38]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/karnischer_hauptkamm.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (57b) Südliche Karnische Alpen
+!ifset o57b
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Karnische Alpen, Südliche Karnische Alpen, Webcam
+!html_description Gebirgs-Webcam-Links Südliche Karnische Alpen
+!endif
+!ifset bergpano
+!html_keywords Karnische Alpen, Südliche Karnische Alpen, Panorama, Panoramen
+!html_description Panorama-Links Südliche Karnische Alpen
+!endif
+!ifset stempel
+!html_keywords Karnische Alpen, Südliche Karnische Alpen, Hüttenstempel, Stempel
+!html_description Hüttenstempel Südliche Karnische Alpen
+!endif
+!end_ignore
+
+Umgrenzung: San Stefano di Cadore -- Piave -- Sappada -- Forni Avoltri -- Deganotal (Canale di Gorto) --
+Comeglians -- Val Calda -- Paluzzo -- Ligosullo -- Paularo -- Rio Turrico -- Forca Pradulina -- Frattengraben
+-- Pontebba -- Fellatal -- Tagliamento -- oberitalienische Tiefebene -- Piave -- San~Stefano di Cadore
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Karnischer Hauptkamm] [bergcam_o57a]);
+O:~(!link [Julische Alpen] [bergcam_o58]); W:~(!link [Dolomiten] [bergcam_o52]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/karnische_alpen_suedlich.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Karnischer Hauptkamm] [bergpano_o57a]);
+O:~(!link [Julische Alpen] [bergpano_o58]); W:~(!link [Dolomiten] [bergpano_o52]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/karnische_alpen_suedlich.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (58) Julische Alpen
+!ifset o58
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Julische Alpen, Juliske Alpe, Webcam
+!html_description Gebirgs-Webcam-Links Julische Alpen
+!endif
+!ifset bergpano
+!html_keywords Julische Alpen, Juliske Alpe, Panorama, Panoramen
+!html_description Panorama-Links Julische Alpen
+!endif
+!ifset stempel
+!html_keywords Julische Alpen, Juliske Alpe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Julische Alpen
+!endif
+!end_ignore
+
+# Ratece: eigentlich Rate?e (aber wie geht das in HTML? kann UDO jedenfalls nicht umwandeln)
+Umgrenzung: Pontebba -- Kanaltal -- Tarvis -- Weißenfels (Fusine) -- Ratschach (Ratece) -- Save bis Einmündung
+Polj.~Sora -- Bischoflaak (Skofja Loka) -- Pöllandtal (Polj.~Sora) -- Kirchheimer (Cerkno-)Sattel --
+Idrijca -- Isonzo (Soca) -- Görz (Goricia) -- Udine -- Tagliamento -- Fellatal -- Pontebba
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Karnischer Hauptkamm] [bergcam_o57a]);
+N bis NO:~(!link [Karawanken und Bachergebirge] [bergcam_o59]), (!link [Steiner Alpen] [bergcam_o60]);
+W:~(!link [Südliche Karnische Alpen] [bergcam_o57b]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/julische_alpen.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Karnischer Hauptkamm] [bergpano_o57a]);
+N bis NO:~(!link [Karawanken und Bachergebirge] [bergpano_o59]), (!link [Steiner Alpen] [bergpano_o60]);
+W:~(!link [Südliche Karnische Alpen] [bergpano_o57b])
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/julische_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (59) Karawanken und Bachergebirge
+!ifset o59
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Karawanken, Bachergebirge, Pohorje, Webcam
+!html_description Gebirgs-Webcam-Links Karawanken und Bachergebirge
+!endif
+!ifset bergpano
+!html_keywords Karawanken, Bachergebirge, Pohorje, Panorama, Panoramen
+!html_description Panorama-Links Karawanken und Bachergebirge
+!endif
+!ifset stempel
+!html_keywords Karawanken, Bachergebirge, Pohorje, Hüttenstempel, Stempel
+!html_description Hüttenstempel Karawanken und Bachergebirge
+!endif
+!end_ignore
+
+Bachergebirge: (!I)slowenisch(!i) Pohorje
+
+# korrekte Schreibweisen mit "ctrichter" (aber wie in HTML erzeugen?): Poljcane, Kucnik, Ratece
+Umgrenzung: Gail von der Einmündung der Gailitz bis zur Einmündung in die Drau -- Drau bis Marburg (Maribor) --
+sl.~Bistrica -- Zg.-Poljcane -- Cilli (Celj) -- Velenje -- Paktal -- Savinja bis Einmündung Kucnik --
+Paulitschsattel -- Vellach bis Einmündung Steinerbach -- Seebergsattel -- Kokra -- Kranj -- Save -- Ratece --
+Fusine -- Tarvis -- Gailitz bis Einmündung in die Gail
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Nockberge] [bergcam_o46a]), (!link [Lavanttaler Alpen] [bergcam_o46b]);
+S:~(!link [Steiner Alpen] [bergcam_o60]), (!link [Julische Alpen] [bergcam_o58]);
+W:~(!link [Karnischer Hauptkamm] [bergcam_o57a]); NW:~(!link [Gailtaler Alpen] [bergcam_o56]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/karawanken_bachergebirge.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Nockberge] [bergpano_o46a]), (!link [Lavanttaler Alpen] [bergpano_o46b]);
+S:~(!link [Steiner Alpen] [bergpano_o60]), (!link [Julische Alpen] [bergpano_o58]);
+W:~(!link [Karnischer Hauptkamm] [bergpano_o57a]); NW:~(!link [Gailtaler Alpen] [bergpano_o56]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/karawanken_bachergebirge.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (60) Steiner Alpen
+!ifset o60
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Steiner Alpen, Kamniske Alpe, Webcam
+!html_description Gebirgs-Webcam-Links Steiner Alpen
+!endif
+!ifset bergpano
+!html_keywords Steiner Alpen, Kamniske Alpe, Panorama, Panoramen
+!html_description Panorama-Links Steiner Alpen
+!endif
+!ifset stempel
+!html_keywords Steiner Alpen, Kamniske Alpe, Hüttenstempel, Stempel
+!html_description Hüttenstempel Steiner Alpen
+!endif
+!end_ignore
+
+Steiner Alpen: (!I)slowenisch(!i) Kamniske Alpe
+
+# korrekte Schreibweisen mit "ctrichter" (aber wie in HTML erzeugen?): Rucnik
+Umgrenzung: Seebergsattel -- Steinerbach bis Einmündung in die Vellach -- Vellach bis P.~715 -- Paulitschsattel
+-- Rucnik bis Einmündung in die Savinje -- Ljubno -- Gornji grad -- Tschernasattel -- Stein (Kamnik) --
+Krainer Ebene -- Kranj -- Kokra -- Seebergsattel
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Karawanken und Bachergebirge] [bergcam_o59])
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/steiner_alpen.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Karawanken und Bachergebirge] [bergpano_o59])
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/steiner_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (63) Plessur-Alpen
+!ifset o63
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Plessur-Alpen, Webcam
+!html_description Gebirgs-Webcam-Links Plessur-Alpen
+!endif
+!ifset bergpano
+!html_keywords Plessur-Alpen, Panorama, Panoramen
+!html_description Panorama-Links Plessur-Alpen
+!endif
+!ifset stempel
+!html_keywords Plessur-Alpen, Hüttenstempel, Stempel
+!html_description Hüttenstempel Plessur-Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Landquart -- Prättigau -- Klosters -- Wolfgang -- Davos -- Landwasser -- Albula -- Hinterrhein
+-- Rhein bis Landquart
+
+!ifset bergcam
+Angrenzende Gebiete: N bis NO:~(!link [Rätikon] [bergcam_o25]); O:~(!link [Silvretta] [bergcam_o26]);
+S:~(!link [Albula-Alpen] [bergcam_o65]), (!link [Oberhalbsteiner Alpen] [bergcam_o64]) (Platta-Gruppe);
+W:~(!link [Adula-Alpen] [bergcam_w82]); NW:~(!link [Glarner Alpen] [bergcam_w80]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/plessur-alpen.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N bis NO:~(!link [Rätikon] [bergpano_o25]); O:~(!link [Silvretta] [bergpano_o26]);
+S:~(!link [Albula-Alpen] [bergpano_o65]), (!link [Oberhalbsteiner Alpen] [bergpano_o64]) (Platta-Gruppe).
+(nach W unvollständig!!)
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/plessur-alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (64) Oberhalbsteiner Alpen (Platta-Gruppe)
+!ifset o64
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Oberhalbstein, Oberhalbsteiner Alpen, Plattagruppe, Webcam
+!html_description Gebirgs-Webcam-Links Oberhalbsteiner Alpen (Platta-Gruppe)
+!endif
+!ifset bergpano
+!html_keywords Oberhalbstein, Oberhalbsteiner Alpen, Plattagruppe, Panorama, Panoramen
+!html_description Panorama-Links Oberhalbsteiner Alpen (Platta-Gruppe)
+!endif
+!ifset stempel
+!html_keywords Oberhalbstein, Oberhalbsteiner Alpen, Plattagruppe, Hüttenstempel, Stempel
+!html_description Gebirgs-Webcam-Links Oberhalbsteiner Alpen (Platta-Gruppe)
+!endif
+!end_ignore
+
+Umgrenzung: Einmündung der Albula in den Hinterrhein bis Thusis -- Albula bis Tiefencastel -- Oberhalbstein
+bis Bivio -- Septimerpaß (Pass da Sett) -- Casaccia -- Bergell -- Chiavenna -- Liro -- Splügen -- Hinterrhein 
+bis Einmündung der Albula
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Plessur-Alpen] [bergcam_o63]); NO bis O:~(!link [Albula-Alpen] [bergcam_o65]);
+S:~(!link [Bernina-Alpen] [bergcam_o66]); SW:~(!link [Tessiner Alpen] [bergcam_w83]);
+W:~(!link [Adula-Alpen] [bergcam_w82]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/oberhalbsteiner_alpen.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Plessur-Alpen] [bergpano_o63]); NO bis O:~(!link [Albula-Alpen] [bergpano_o65]);
+S:~(!link [Bernina-Alpen] [bergpano_o66]); nach W unvollständig!!
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/oberhalbsteiner_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (65) Albula-Alpen
+!ifset o65
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Albula-Alpen, Webcam
+!html_description Gebirgs-Webcam-Links Albula-Alpen
+!endif
+!ifset bergpano
+!html_keywords Albula-Alpen, Panorama, Panoramen
+!html_description Panorama-Links Albula-Alpen
+!endif
+!ifset stempel
+!html_keywords Albula-Alpen, Hüttenstempel, Stempel
+!html_description Hüttenstempel Albula-Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Tiefencastel -- Landwasser -- Davos -- Flüelabach -- Flüelapaß -- Susasca -- Susch -- Engadin --
+Malojapaß -- Casaccia -- Septimerpaß (Pass da Sett) -- Oberhalbstein bis Tiefencastel
+
+!ifset bergcam
+Angrenzende Gebiete: W:~(!link [Oberhalbsteiner Alpen] [bergcam_o64]) (Platta-Gruppe);
+NW:~(!link [Plessur-Alpen] [bergcam_o63]); NO:~(!link [Silvretta] [bergcam_o26]);
+O:~(!link [Sesvennagruppe] [bergcam_o29]); SO:~(!link [Livigno-Alpen] [bergcam_o67]);
+S:~(!link [Bernina-Alpen] [bergcam_o66]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/albula-alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: W:~(!link [Oberhalbsteiner Alpen] [bergpano_o64]) (Platta-Gruppe);
+NW:~(!link [Plessur-Alpen] [bergpano_o63]); NO:~(!link [Silvretta] [bergpano_o26]);
+O:~(!link [Sesvennagruppe] [bergpano_o29]); SO:~(!link [Livigno-Alpen] [bergpano_o67]);
+S:~(!link [Bernina-Alpen] [bergpano_o66]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/albula-alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (66) Bernina-Alpen
+!ifset o66
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Bernina-Alpen, Bernina-Gruppe, Bergeller Berge, Bergell, Val Bregaglia, Webcam
+!html_description Gebirgs-Webcam-Links Bernina-Alpen
+!endif
+!ifset bergpano
+!html_keywords Bernina-Alpen, Bernina-Gruppe, Bergeller Berge, Bergell, Val Bregaglia, Panorama, Panoramen
+!html_description Panorama-Links Bernina-Alpen
+!endif
+!ifset stempel
+!html_keywords Bernina-Alpen, Bernina-Gruppe, Bergeller Berge, Bergell, Val Bregaglia, Hüttenstempel, Stempel
+!html_description Hüttenstempel Bernina-Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Samedan -- Berninabach -- Berninapaß -- Val di Poschiavo (Puschlav) -- Tirano -- Adda bis Comer See
+-- Mera bis Chiavenna -- Bergell -- Malojapaß -- Engadin bis Samedan
+
+!ifset bergcam
+Angrenzende Gebiete: NW:~(!link [Oberhalbsteiner Alpen] [bergcam_o64]) (Platta-Gruppe);
+N:~(!link [Albula-Alpen] [bergcam_o65]); NO bis O:~(!link [Livigno-Alpen] [bergcam_o67]);
+S:~(!link [Bergamasker Alpen] [bergcam_o68]); W:~(!link [Tessiner Alpen] [bergcam_w83]);
+NW:~(!link [Adula-Alpen] [bergcam_w82]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/bernina.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: NW:~(!link [Oberhalbsteiner Alpen] [bergpano_o64]) (Platta-Gruppe);
+N:~(!link [Albula-Alpen] [bergpano_o65]); NO bis O:~(!link [Livigno-Alpen] [bergpano_o67]);
+S:~(!link [Bergamasker Alpen] [bergpano_o68]). (nach W unvollständig!!)
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/bernina.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (67) Livigno-Alpen
+!ifset o67
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Livigno-Alpen, Webcam
+!html_description Gebirgs-Webcam-Links Livigno-Alpen
+!endif
+!ifset bergpano
+!html_keywords Livigno-Alpen, Panorama, Panoramen
+!html_description Panorama-Links Livigno-Alpen
+!endif
+!ifset stempel
+!html_keywords Livigno-Alpen, Hüttenstempel, Stempel
+!html_description Hüttenstempel Livigno-Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Samedan -- Engadin bis Zernez -- Val da Spöl bis Punt da Gall -- Valle del Gallo -- Passo di
+Fraele -- Valle di Fraele -- Adda bis Tirano -- Val di Poschiavo (Puschlav) -- Berninapaß -- Berninabach --
+Samedan
+
+!ifset bergcam
+Angrenzende Gebiete: NO:~(!link [Sesvennagruppe] [bergcam_o29]); O:~(!link [Ortler-Alpen] [bergcam_o48a]);
+O bis SO:~(!link [Sobretta-Gavia-Gruppe] [bergcam_o48b]); SW bis W:~(!link [Bernina-Alpen] [bergcam_o66]);
+W bis NW:~(!link [Albula-Alpen] [bergcam_o65]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/livigno-alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: NO:~(!link [Sesvennagruppe] [bergpano_o29]); O:~(!link [Ortler-Alpen] [bergpano_o48a]);
+O bis SO:~(!link [Sobretta-Gavia-Gruppe] [bergpano_o48b]); SW bis W:~(!link [Bernina-Alpen] [bergpano_o66]);
+W bis NW:~(!link [Albula-Alpen] [bergpano_o65]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/livigno-alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (68) Bergamasker Alpen
+!ifset o68
+
+!begin_ignore
+!ifset bergcam
+!html_keywords Bergamasker Alpen, Webcam
+!html_description Gebirgs-Webcam-Links Bergamasker Alpen
+!endif
+!ifset bergpano
+!html_keywords Bergamasker Alpen, Panorama, Panoramen
+!html_description Panorama-Links Bergamasker Alpen
+!endif
+!ifset stempel
+!html_keywords Bergamasker Alpen, Hüttenstempel, Stempel
+!html_description Hüttenstempel Bergamasker Alpen
+!endif
+!end_ignore
+
+Umgrenzung: Comer See -- Adda bis Tresenda -- Apricapaß -- Ogliola -- Edolo -- Oglio -- Iseo-See --
+oberitalienische Tiefebene -- Comer See
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Bernina-Alpen] [bergcam_o66]);
+NW:~(!link [Sobretta-Gavia-Gruppe] [bergcam_o48b]); O:~(!link [Adamello-Presanella-Alpen] [bergcam_o49]);
+W:~(!link [Tessiner Alpen] [bergcam_w83]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/bergamasker_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Bernina-Alpen] [bergpano_o66]);
+NW:~(!link [Sobretta-Gavia-Gruppe] [bergpano_o48b]); O:~(!link [Adamello-Presanella-Alpen] [bergpano_o49]).
+(nach W unvollständig!!)
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/bergamasker_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+#############################################################################################################
+# ab hier Westalpen
+
+#############################################################################################################
+## (70) Appenzeller Alpen
+!ifset w70
+
+# ab 11.8.02 abschließend überprüft, okay
+# ab Zürichsee leicht abweichend von Rother-Einteilung; kompatibel mit Einteilung von Mathias Zeiring
+Umgrenzung: Konstanz -- Bodensee -- Rheinmündung bei Bregenz -- rheinaufwärts bis Sargans -- Seex --
+Walenstadt -- Walensee -- Linthkanal -- Zürichsee bis Zürich -- Limmat -- Aare bis zur Mündung in den Rhein
+# Obersee (Zürichsee) bis Rapperswil -- Wetzikon -- Pfäffikon (ZH) -- Volketswil -- Winterthur --
+# Frauenfeld -- Konstanz
+
+!ifset bergcam
+Angrenzende Gebiete: O:~(!link [Bregenzer Wald] [bergcam_o01]); SO:~(!link [Rätikon] [bergcam_o25]);
+S:~(!link [Glarner Alpen] [bergcam_w80]); W:~(!link [Schweizer Mittelland] [bergcam_w71]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/appenzeller_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: O:~(!link [Bregenzer Wald] [bergpano_o01]); SO:~(!link [Rätikon] [bergpano_o25]);
+S:~(!link [Glarner Alpen] [bergpano_w80]); W:~(!link [Schweizer Mittelland] [bergpano_w71]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/appenzeller_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (71) Schweizer Mittelland
+!ifset w71
+# soweit okay 11.8.02
+Umgrenzung: Genf (Genève) -- Col de la Faucille -- Col du Marchairuz -- Yverdon -- Lac de Neuchâtel --
+# evtl. besser: Genfer See (Lac Léman) bis Lausanne ?? (Rother-Linie geht am Bergkamm entlang)
+# Col... = Paß
+Biel (Bienne) -- Aare (über Solothurn -- Olten -- Aarau -- Brugg) bis zur Einmündung der Limmat --
+Limmat -- Zürich -- Zürichsee -- Pfäffikon (SZ) -- Schwyz -- Urner See -- Vierwaldstätter See -- Luzern --
+Wolhusen -- Entlebuch -- Langnau im Emmental -- Bern -- Fribourg (Freiburg) -- Vevey --
+Genfer See  (Lac Léman) -- Genf
+
+!ifset bergcam
+Angrenzende Gebiete: W bis N:~Französischer und Schweizer (!link [Jura] [bergcam_w72]);
+NO bis O:~(!link [Appenzeller Alpen] [bergcam_w70]); O bis SO:~(!link [Glarner Alpen] [bergcam_w80]);
+S:~(!link [Urner Alpen] [bergcam_w81]), (!link [Zentralschweizerische Voralpen] [bergcam_w73]),
+# (!link [Berner Voralpen] [bergcam_w74]),
+(!link [Freiburger Voralpen] [bergcam_w75]); SW:~(!link [Chablais-Alpen] [bergcam_w76]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/schweizer_mittelland.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: W bis N:~Französischer und Schweizer (!link [Jura] [bergpano_w72]);
+NO bis O:~(!link [Appenzeller Alpen] [bergpano_w70]); O bis SO:~(!link [Glarner Alpen] [bergpano_w80]);
+S:~(!link [Urner Alpen] [bergpano_w81]), (!link [Zentralschweizerische Voralpen] [bergpano_w73]),
+# (!link [Berner Voralpen] [bergpano_w74]),
+(!link [Freiburger Voralpen] [bergpano_w75]); SW:~(!link [Chablais-Alpen] [bergpano_w76]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/schweizer_mittelland.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (72) Jura
+!ifset w72
+# am 11.8.02 abschließend überprüft, okay
+Umgrenzung: Rhone bis Genf (Genève) -- Col de la Faucille -- Col du Marchairuz -- Yverdon -- Lac de
+Neuchâtel -- Biel (Bienne) -- Aare (über Solothurn -- Olten -- Aarau -- Brugg) bis zur Mündung in den Rhein
+
+!ifset bergcam
+Angrenzende Gebiete: SW bis S:~(!link [Savoyer Kalkalpen] [bergcam_w77]);
+S:~(!link [Chablais-Alpen] [bergcam_w76]), (!link [Schweizer Mittelland] [bergcam_w71]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/jura.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: SW bis S:~(!link [Savoyer Kalkalpen] [bergpano_w77]);
+S:~(!link [Chablais-Alpen] [bergpano_w76]), (!link [Schweizer Mittelland] [bergpano_w71]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/jura.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (73) Zentralschweizerische Voralpen
+
+!ifset w73
+auch: Emmentaler Alpen
+
+# Emmentaler Alpen bei Matthias Zeiring
+Umgrenzung: Bern -- Aare -- Thuner See -- Interlaken -- Brienzer See -- Brünig-Paß -- Sarnen --
+Vierwaldstätter See -- Luzern -- Wolhusen -- Entlebuch -- Langnau im Emmental -- Bern
+# die Abgrenzung nach N ist relativ willkürlich, man könnte genauso noch mehr dazunehmen, aber
+# dann bleibt vom Schweizer Mittelland nicht mehr viel übrig
+# am 11.8.02 abschließend überprüft, okay
+
+!ifset bergcam
+Angrenzende Gebiete: W:~(!link [Freiburger Voralpen] [bergcam_w75]);
+# W:~(!link [Berner Voralpen] [bergcam_w74]).
+N:~(!link [Schweizer Mittelland] [bergcam_w71]);
+O:~(!link [Urner Alpen] [bergcam_w81]); S:~(!link [Berner Alpen] [bergcam_w84]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/zentralschweizerische_voralpen.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: W:~(!link [Freiburger Voralpen] [bergpano_w75]);
+# W:~(!link [Berner Voralpen] [bergpano_w74]).
+N:~(!link [Schweizer Mittelland] [bergpano_w71]);
+O:~(!link [Urner Alpen] [bergpano_w81]); S:~(!link [Berner Alpen] [bergpano_w84]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/zentralschweizerische_voralpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (74) Berner Voralpen
+!ifset w74
+# in der Rother- Einteilung nicht beschrieben, die Abgrenzung zwischen Freiburger und Berner Voralpen
+# verläuft vom Simmental westlich nach Bulle
+# Entscheidung 11.8.2002: eine derartige Unterteilung ist entbehrlich
+Umgrenzung:
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Schweizer Mittelland] [bergcam_w71]);
+NO:~(!link [Zentralschweizerische Voralpen] [bergcam_w73]); S:~(!link [Berner Alpen] [bergcam_w84]);
+# W:~(!link [Diableretsgruppe] [bergcam_w85]);
+N:~(!link [Freiburger Voralpen] [bergcam_w75]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/berner_voralpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Schweizer Mittelland] [bergpano_w71]);
+NO:~(!link [Zentralschweizerische Voralpen] [bergpano_w73]); S:~(!link [Berner Alpen] [bergpano_w84]);
+# W:~(!link [Diableretsgruppe] [bergpano_w85]);
+N:~(!link [Freiburger Voralpen] [bergpano_w75]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/berner_voralpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (75) Freiburger Voralpen
+!ifset w75
+# bei Mathias Zeiring: Freiburger Alpen
+Umgrenzung: Genfer See (Lac Léman) -- Montreux -- Vevey -- Fribourg (Freiburg) -- Bern -- Aare --
+Thuner See -- Spiez -- Simmental -- Gstaad -- Saane -- Col du Pillon -- Le Sepey -- Rhonetal -- Genfer See
+# Rother: Zweisimmen -- Saanen -- Châteaux-d'Oex -- Genfer See
+# Zeiring-Einteilung geht hier weiter südlich, ist m.E. logischer
+# Linie Châteaux-d'Oex -- Montreux ist in der Rother-Einteilung nur grob beschrieben; mögliche Verfeinerung:
+# Lac de l'Hongrin -- Rhone von Roche (VD) bis zur Mündung in den Genfer See (Lac Léman) -- Montreux
+# vorläufig jedoch kein Bedarf für genauere Festlegung
+
+# (!I)Anmerkung: der östliche Teil des Gebietes wird auch als (!i)Berner Voralpen(!I) (74) bezeichnet. (!i)
+
+!ifset bergcam
+Angrenzende Gebiete: W:~(!link [Chablais-Alpen] [bergcam_w76]);
+N:~(!link [Schweizer Mittelland] [bergcam_w71]);
+O:~(!link [Zentralschweizerischen Voralpen] [bergcam_w73]);
+S:~(!link [Berner Alpen] [bergcam_w84]).
+# O:~(!link [Berner Voralpen] [bergcam_w74]); S: (!link [Diableretsgruppe] [bergcam_w85])
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/freiburger_voralpen.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: W:~(!link [Chablais-Alpen] [bergpano_w76]);
+N:~(!link [Schweizer Mittelland] [bergpano_w71]);
+O:~(!link [Zentralschweizerischen Voralpen] [bergpano_w73]);
+S:~(!link [Berner Alpen] [bergpano_w84]).
+# O:~(!link [Berner Voralpen] [bergpano_w74]); S: (!link [Diableretsgruppe] [bergpano_w85])
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/freiburger_voralpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (76) Chablais-Alpen
+
+!ifset w76
+Umgrenzung: Genf (Genève) -- Genfer See (Lac Léman) -- Rhone -- Vernayaz (bei Martigny) -- Le Trient
+# -- Lac d'Emosson -- Griffetal bis Taninges -- Cluses -- Arvetal bis Genf
+-- Col des Montets -- Argentière -- Chamonix -- L'Arve -- Bonneville -- Genf
+# die Linie Lac d'Emosson -- Griffetal ist m.E. relativ willkürlich; genauso könnte man den Bergstock
+# nördlich von Chamonix hier noch mit dazunehmen (so bei Mathias Zeiring) -> okay, so besser! (11.8.02)
+
+(!I)Anmerkung: Gelegentlich wird der südliche Teil der (!i)Chablais-Alpen(!I)
+(Linie Taninges -- Lac d'Emosson) der (!i)Mont-Blanc-Gruppe(!I) (87) zugerechnet. (!i)
+
+!ifset bergcam
+Angrenzende Gebiete: NW:~Französischer (!link [Jura] [bergcam_w72]);
+NO:~(!link [Schweizer Mittelland] [bergcam_w71]), (!link [Freiburger Voralpen] [bergcam_w75]);
+# O:~(!link [Diableretsgruppe] [bergcam_w85]);
+O:~(!link [Berner Alpen] [bergcam_w84]);
+S:~(!link [Mont-Blanc-Gruppe] [bergcam_w87]); SW:~(!link [Savoyer Kalkalpen] [bergcam_w77]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/chablais-alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: NW:~Französischer (!link [Jura] [bergpano_w72]);
+NO:~(!link [Schweizer Mittelland] [bergpano_w71]), (!link [Freiburger Voralpen] [bergpano_w75]);
+# O:~(!link [Diableretsgruppe] [bergpano_w85]);
+O:~(!link [Berner Alpen] [bergpano_w84]);
+S:~(!link [Mont-Blanc-Gruppe] [bergpano_w87]); SW:~(!link [Savoyer Kalkalpen] [bergpano_w77]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/chablais-alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (77) Savoyer Kalkalpen
+!ifset w77
+Umgrenzung: Genf (Genève) -- Rhone -- Lac du Bourget -- Chambéry -- Montmélian --
+Val d'Isère -- Albertville -- Arlytal -- Ugine -- L'Arve -- Genf
+
+!ifset bergcam
+Angrenzende Gebiete: W bis N:~Französischer (!link [Jura] [bergcam_w72]);
+NO:~(!link [Chablais-Alpen] [bergcam_w76]); SO:~(!link [Mont-Blanc-Gruppe] [bergcam_w87]);
+S:~(!link [Grajische Alpen] [bergcam_w88]); SW:~(!link [Französische Kalkalpen] [bergcam_w78]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/savoyer_kalkalpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: W bis N:~Französischer (!link [Jura] [bergpano_w72]);
+NO:~(!link [Chablais-Alpen] [bergpano_w76]); SO:~(!link [Mont-Blanc-Gruppe] [bergpano_w87]);
+S:~(!link [Grajische Alpen] [bergpano_w88]); SW:~(!link [Französische Kalkalpen] [bergpano_w78]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/savoyer_kalkalpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (78) Französische Kalkalpen
+!ifset w78
+# bei Mathias Zeiring - von N nach S aufgezählt - weiter untergliedert (riesiges Gebiet!)
+# Bornes-Alpen, Bauget-Alpen, Chartreuse-Gruppe, Vercors-Gruppe, Désert-Gruppe, Ventoux-Gruppe, Luberon-Grp.
+# (letztere endet im S mit der Durance, die abweichende Rother-Gliederung hier angepaßt)
+Umgrenzung: Rhone -- Lac du Bourget -- Chambéry -- Montmélian -- Val d'Isère -- Grenoble -- La Mure --
+Drac -- Gap -- Durance -- Sisteron -- Châteaux-Arnoux -- Durance -- Avignon
+# Drac, Durance = Fluß;
+# westliche Grenze ist die Rhone (hier zunächst nicht erwähnenswert), noch weiter westlich: Zentralmassiv
+
+!ifset bergcam
+Angrenzende Gebiete: NO:~(!link [Savoyer Kalkalpen] [bergcam_w77]); O:~(!link [Dauphiné-Alpen] [bergcam_w89]);
+O bis SO:~(!link [Provençalische Alpen] [bergcam_w79]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/franzoesische_kalkalpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: NO:~(!link [Savoyer Kalkalpen] [bergpano_w77]); O:~(!link [Dauphiné-Alpen] [bergpano_w89]);
+O bis SO:~(!link [Provençalische Alpen] [bergpano_w79]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/franzoesische_kalkalpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (79) Provençalische Alpen
+!ifset w79
+Umgrenzung: Marseille -- Aix-en-Provence -- Durance -- Châteaux-Arnoux -- Sisteron -- Durance --
+Tallard -- Lac de Serre-Ponçon -- Ubaye -- Barcelonnette -- Col d'Allos -- Allos -- Verdon -- Colmars --
+Thoranne-Haute -- Annot -- Entrevaux -- Villars -- Nizza (Nice)
+# Col d'Allos = Paß; Ubaye, Durance = Flüsse
+# Rother-Abgrenzung verläuft nach Cannes zur Küste = offensichtlich falsch!!
+
+(!I)Anmerkung: Das Gebiet südlich einer Linie Aix-en-Provence -- Fréjus wird auch als
+(!i)Provençalische Voralpen(!I) bezeichnet. (!i)
+
+!ifset bergcam
+Angrenzende Gebiete: W:~(!link [Französische Kalkalpen] [bergcam_w78]);
+N:~(!link [Dauphiné-Alpen] [bergcam_w89]); N bis NO:~(!link [Cottische Alpen] [bergcam_w90]);
+O:~(!link [Meeralpen] [bergcam_w91]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/provencalische_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: W:~(!link [Französische Kalkalpen] [bergpano_w78]);
+N:~(!link [Dauphiné-Alpen] [bergpano_w89]); N bis NO:~(!link [Cottische Alpen] [bergpano_w90]);
+O:~(!link [Meeralpen] [bergpano_w91]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/provencalische_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (80) Glarner Alpen
+!ifset w80
+# nach der Einteilung von Mathias Zeiring gehen die Glarner Alpen im N nur bis zum Klausenpaß, dann
+# schließen sich noch die Schwyzer Alpen an
+# an sich kann man das aber hier jetzt so lassen (11.8.02)
+Umgrenzung: Sargans -- Seex -- Walenstadt -- Walensee -- Linthkanal -- Zürichsee -- Pfäffikon (SZ)
+-- Schwyz -- Urner See -- Altdorf (UR) -- Reuss (über Erstfeld und Amsteg) -- Andermatt --
+Oberalppaß -- Vorderrhein -- Chur -- Sargans
+
+(!I)Anmerkung: Das Gebiet nördlich des Klausenpasses wird auch als (!i)Schwyzer Alpen(!I) bezeichnet. (!i)
+
+!ifset bergcam
+Angrenzende Gebiete: NW:~(!link [Schweizer Mittelland] [bergcam_w71]);
+N:~(!link [Appenzeller Alpen] [bergcam_w70]); NO:~(!link [Rätikon] [bergcam_o25]);
+SO:~(!link [Plessur-Alpen] [bergcam_o63]); S:~(!link [Adula-Alpen] [bergcam_w82]);
+SW:~(!link [Tessiner Alpen] [bergcam_w83]); W:~(!link [Urner Alpen] [bergcam_w81]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/glarner_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: NW:~(!link [Schweizer Mittelland] [bergpano_w71]);
+N:~(!link [Appenzeller Alpen] [bergpano_w70]); NO:~(!link [Rätikon] [bergpano_o25]);
+SO:~(!link [Plessur-Alpen] [bergpano_o63]); S:~(!link [Adula-Alpen] [bergpano_w82]);
+SW:~(!link [Tessiner Alpen] [bergpano_w83]); W:~(!link [Urner Alpen] [bergpano_w81]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/glarner_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (81) Urner Alpen (auch: Vierwaldstätter Alpen)
+!ifset w81
+# NW-Grenze nach Einteilung von Mathias Zeiring, die Rother-Einteilung geht noch bis Wolhusen - Entlebuch
+# Brienzer See -- Interlaken; dies ist aber m.E. relativ willkürlich und unsystematisch
+Umgrenzung: Vierwaldstätter See (bei Luzern) -- Urner See -- Altdorf (UR) -- Reuss -- Göschenen --
+Andermatt -- Furkapaß -- Grimselpaß -- Haslital -- Meiringen -- Aare -- Brünig-Paß -- Sarnen
+-- Vierwaldstätter See
+# soweit okay 11.8.02
+!ifset bergcam
+Angrenzende Gebiete: W:~(!link [Zentralschweizerische Voralpen] [bergcam_w73]);
+N:~(!link [Schweizer Mittelland] [bergcam_w71]); O:~(!link [Glarner Alpen] [bergcam_w80]);
+O bis SO:~(!link [Adula-Alpen] [bergcam_w82]); S:~(!link [Tessiner Alpen] [bergcam_w83]);
+SW:~(!link [Berner Alpen] [bergcam_w84]).
+# W:~(!link [Berner Voralpen] [bergcam_w74]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/urner_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: W:~(!link [Zentralschweizerische Voralpen] [bergpano_w73]);
+N:~(!link [Schweizer Mittelland] [bergpano_w71]); O:~(!link [Glarner Alpen] [bergpano_w80]);
+O bis SO:~(!link [Adula-Alpen] [bergpano_w82]); S:~(!link [Tessiner Alpen] [bergpano_w83]);
+SW:~(!link [Berner Alpen] [bergpano_w84]).
+# W:~(!link [Berner Voralpen] [bergpano_w74]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/urner_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (82) Adula-Alpen
+!ifset w82
+Umgrenzung: -- Andermatt -- Oberalppaß -- Vorderrhein -- Reichenau -- Hinterrhein -- Splügen --
+Splügenpaß (Passo dello Spluga) --  Val San~Giacomo -- Chiavenna -- Comer See (Lago di Como) --
+Passo San~Jorio -- Bellinzona -- Valle Leventina -- St.~Gotthard-Paß (Passo del San~Gottardo)
+-- Andermatt
+# abweichende Einteilung bei Mathias Zeiring: Adulagruppe statt -alpen;
+# Cenerigruppe und Vareser Voralpen eigenständig.
+# Vareser Voralpen = Gebiet zwischen Lago Maggiore und Lago Como
+# Cenerigruppe = Gebiet zwischen Splügenpaß und San Bernadinopaß nach Süden
+# bei mir ist die Abgrenzung am Passo San Jorio (südlich davon zu Tessiner Alpen).
+# In der Karte aus dem Rother-Prospekt "Taminagebirge und Adula-Alpen", doch wo eigentlich
+# das Taminagebirge ist, ist mir unklar (aus meinen Karten nicht ersichtlich).
+# In der Rother-Einteilung wird das Gebiet nach S durch die Linie Chiavenna-Bellinzona begrenzt,
+# der südliche Rest gehört zu den Tessiner Alpen (83).
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Glarner Alpen] [bergcam_w80]); O:~(!link [Plessur-Alpen] [bergcam_o63]),
+(!link [Oberhalbsteiner Alpen] [bergcam_o64]) (Platta-Gruppe), (!link [Bergamasker Alpen] [bergcam_o68]);
+SO bis O:~(!link [Tessiner Alpen] [bergcam_w83]); NW: (!link [Urner Alpen] [bergcam_w81]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/adula-alpen.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Glarner Alpen] [bergpano_w80]); O:~(!link [Plessur-Alpen] [bergpano_o63]),
+(!link [Oberhalbsteiner Alpen] [bergpano_o64]) (Platta-Gruppe), (!link [Bergamasker Alpen] [bergpano_o68]);
+SO bis O:~(!link [Tessiner Alpen] [bergpano_w83]); NW: (!link [Urner Alpen] [bergpano_w81])
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/adula-alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (83) Tessiner Alpen
+!ifset w83
+Umgrenzung: Lago Maggiore -- Toce -- Domodossola -- Simplonpaß -- Brig -- Rhonetal -- Furkapaß --
+Andermatt -- St.~Gotthard-Paß (Passo del San~Gottardo) -- Valle Leventina -- Bellinzona --
+Passo San~Jorio -- Comer See (Lago di Como) -- Lago di Lecco -- Lecco
+# südliche Abgrenzung weggelassen: Lecco -- Como -- Varese -- Lago Maggiore
+# Toce = Fluß
+
+!ifset bergcam
+Angrenzende Gebiete: W:~(!link [Walliser Alpen] [bergcam_w86]); NW:~(!link [Berner Alpen] [bergcam_w84]);
+N:~(!link [Urner Alpen] [bergcam_w81]); NO:~(!link [Glarner Alpen] [bergcam_w80]);
+O:~(!link [Adula-Alpen] [bergcam_w82]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/tessiner_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: W:~(!link [Walliser Alpen] [bergpano_w86]); NW:~(!link [Berner Alpen] [bergpano_w84]);
+N:~(!link [Urner Alpen] [bergpano_w81]); NO:~(!link [Glarner Alpen] [bergpano_w80]);
+O:~(!link [Adula-Alpen] [bergpano_w82]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/tessiner_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (84) Berner Alpen
+!ifset w84
+Umgrenzung: Rhone (südlich vom Genfer See) -- Le Sepey -- Col du Pillon -- Saane -- Gstaad -- Simmental
+-- Spiez -- Thuner See -- Interlaken -- Brienzer See -- Aare -- Haslital -- Grimselpaß
+-- Rhonetal -- Brig -- Sierre -- Sion -- Martigny -- Rhone
+# siehe Bemerkungen bei (75) Freiburger Voralpen; die Rother-Einteilung geht hier noch etwas weiter
+# nördlich, bis Châteaux-d'Oex; auf eigenständige Diableretsgruppe wird hier verzichtet (11.8.02)
+# Montreux (am Genfer See/Lac Léman) -- Châteaux-d'Oex -- Saanen -- Simmental über Zweisimmen
+# bis Spiez -- Thuner See -- Interlaken -- Brienzer See -- Aaretal -- Meiringen -- Haslital -- Grimselpaß
+# -- Rhonetal -- Brig -- Sierre -- Sion -- Martigny -- Montreux
+
+# (!I)Anmerkung: Der westlichste Teil der Berner Alpen wird auch als "Diableretsgruppe" (85) bezeichnet. (!i)
+
+!ifset bergcam
+Angrenzende Gebiete:
+# N:~(!link [Berner Voralpen] [bergcam_w74]),
+N:~(!link [Zentralschweizerische Voralpen] [bergcam_w73]); NO:~(!link [Urner Alpen] [bergcam_w81]);
+SO:~(!link [Tessiner Alpen] [bergcam_w83]); S:~(!link [Walliser Alpen] [bergcam_w86]);
+# W:~(!link [Diableretsgruppe] [bergcam_w85]).
+SW:~(!link [Mont-Blanc-Gruppe] [bergcam_w87]); W:~(!link [Chablais-Gruppe] [bergcam_w76]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/berner_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete:
+# N:~(!link [Berner Voralpen] [bergpano_w74]),
+N:~(!link [Zentralschweizerische Voralpen] [bergpano_w73]); NO:~(!link [Urner Alpen] [bergpano_w81]);
+SO:~(!link [Tessiner Alpen] [bergpano_w83]); S:~(!link [Walliser Alpen] [bergpano_w86]);
+# W:~(!link [Diableretsgruppe] [bergpano_w85]).
+SW:~(!link [Mont-Blanc-Gruppe] [bergpano_w87]); W:~(!link [Chablais-Gruppe] [bergpano_w76]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/berner_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (85) Diableretsgruppe
+!ifset w85
+# Festlegung 11.8.02: wird den Berner Alpen (84) zugerechnet, keine eigenständige Unterteilung
+# (so auch bei Mathias Zeiring)
+Umgrenzung: Montreux (am Genfer See/Lac Léman) -- Châteaux-d'Oex -- Saanen -- Simmental über Zweisimmen
+bis Spiez -- ??
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Freiburger Voralpen] [bergcam_w75]);
+# O:~(!link [Berner Voralpen] [bergcam_w74]),
+O:~(!link [Berner Alpen] [bergcam_w84]);
+S:~(!link [Walliser Alpen] [bergcam_w86]); SO:~(!link [Mont-Blanc-Gruppe] [bergcam_w87]);
+W:~(!link [Chablais-Alpen] [bergcam_w76]).
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Freiburger Voralpen] [bergpano_w75]);
+# O:~(!link [Berner Voralpen] [bergpano_w74]),
+O:~(!link [Berner Alpen] [bergpano_w84]);
+S:~(!link [Walliser Alpen] [bergpano_w86]); SO:~(!link [Mont-Blanc-Gruppe] [bergpano_w87]);
+W:~(!link [Chablais-Alpen] [bergpano_w76]).
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (86) Walliser Alpen
+!ifset w86
+Umgrenzung: Ivrea (nördlich von Turin/Torino) -- Aostatal (Vallée d'Aoste/Val d'Aosta) -- Courmayeur --
+Entrevés -- Val Ferret (I) -- Col Ferret -- Val Ferret (CH) -- Orsières -- Martigny -- Sion --
+Sierre -- Brig -- Simplonpaß -- Domodóssola -- Toce -- Lago Maggiore
+# Toce = Fluß; südliche Abgrenzung der Rother-Einteilung weggelassen
+# die Rother-Einteilung geht außerdem von Omegna nach S; das Gebiet zwischen Omegna und Lago Maggiore
+# ist nicht eindeutig zugeordnet. (12.8.02)
+# weitere Untergliederung der Walliser Alpen bei Matthias Zeiring, hier vorerst nicht erforderlich.
+
+(!I)Anmerkung: Der oftmals den Walliser Alpen zugeordnete schweizerische Teil der Leone-Gruppe, vom Simplon-
+bis zum Nufenenpaß mit dem Rhonetal als Nordgrenze, wird hier den Tessiner Alpen zugerechnet.(!i)
+
+!ifset bergcam
+Angrenzende Gebiete: S bis SW:~(!link [Grajische Alpen] [bergcam_w88]);
+W:~(!link [Mont-Blanc-Gruppe] [bergcam_w87]); NW:~(!link [Chablais-Alpen] [bergcam_w76]);
+# N:~(!link [Diableretsgruppe] [bergcam_w85]),
+N:~(!link [Berner Alpen] [bergcam_w84]); O:~(!link [Tessiner Alpen] [bergcam_w83]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/walliser_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: S bis SW:~(!link [Grajische Alpen] [bergpano_w88]);
+W:~(!link [Mont-Blanc-Gruppe] [bergpano_w87]); NW:~(!link [Chablais-Alpen] [bergpano_w76]);
+# N:~(!link [Diableretsgruppe] [bergpano_w85]),
+N:~(!link [Berner Alpen] [bergpano_w84]); O:~(!link [Tessiner Alpen] [bergpano_w83]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/walliser_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (87) Mont-Blanc-Gruppe
+!ifset w87
+# in Abweichung von der Rother-Einteilung den südlichen Teil der Chablais-Alpen (76) *nicht* der
+# Mont-Blanc-Gruppe zugerechnet!! (11.8.02)
+# Cluses -- Taninges -- Griffetal -- Lac d'Emosson --
+Umgrenzung: L'Arve -- Chamonix -- Argentière -- Col de Montets -- Le Trient -- Vernayaz -- Orsieres --
+Val Ferret (CH) -- Col Ferret -- Val Ferret (I) -- Entrevés -- Courmayeur -- Pré-St.~Didier --
+Kleiner St.~Bernhard-Paß (Col du Petit St.~Bernard) -- Bourg-St.-Maurice -- Val d'Isère -- Moutiers
+-- Albertville -- Ugine -- Megève -- L'Arve
+# eigentlich: Moûtiers (das û wird von UDO nicht korrekt dargestellt; Bug)
+
+(!I)Anmerkung: Zum Teil wird der südliche Teil der (76) (!i)Chablais-Alpen(!I)
+(Linie Taninges -- Lac d'Emosson) noch der (!i)Mont-Blanc-Gruppe(!I) zugerechnet. (!i)
+
+!ifset bergcam
+Angrenzende Gebiete: W bis NW:~(!link [Savoyer Kalkalpen] [bergcam_w77]);
+N:~(!link [Chablais-Alpen] [bergcam_w76]);
+# (!link [Diableretsgruppe] [bergcam_w85]);
+O:~(!link [Walliser Alpen] [bergcam_w86]); S:~(!link [Grajische Alpen] [bergcam_w88]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/mont-blanc-gruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: W bis NW:~(!link [Savoyer Kalkalpen] [bergpano_w77]);
+N:~(!link [Chablais-Alpen] [bergpano_w76]);
+# (!link [Diableretsgruppe] [bergpano_w85]);
+O:~(!link [Walliser Alpen] [bergpano_w86]); S:~(!link [Grajische Alpen] [bergpano_w88]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/mont-blanc-gruppe.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (88) Grajische Alpen
+!ifset w88
+# bei Matthias Zeiring unterteilt in Paradiso-Gruppe, Rutor-Gruppe, Vanoise, Charbonnel-Gruppe
+# außerdem Teile von Vanoise (nicht deckungsgleich)
+
+(!I)italien.(!i) Alpi Graie
+
+Umgrenzung: Turin (Torino) -- Val di Susa -- Ulzio (Oulx) -- Bardonécchia -- Modane -- Arc --
+Einmündung der Arc in den Isère -- Albertville -- Val d'Isère -- Moutiers -- Bourg-St.-Maurice --
+Kleiner St.~Bernhard-Paß (Col du Petit St.~Bernard) -- Pré-St.~Didier --
+Aostatal (Vallée d'Aoste/Val d'Aosta) -- Ivrea (nördlich von Turin)
+# Arc = Fluß; Col... = Paß
+# eigentlich: Moûtiers (das û wird von UDO nicht korrekt dargestellt; Bug)
+
+!ifset bergcam
+Angrenzende Gebiete: S:~(!link [Cottische Alpen] [bergcam_w90]);
+SW bis W:~(!link [Dauphiné-Alpen] [bergcam_w89]); NW:~(!link [Savoyer Alpen] [bergcam_w77]);
+N:~(!link [Mont-Blanc-Gruppe] [bergcam_w87]); N bis NO:~(!link [Walliser Alpen] [bergcam_w86]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/grajische_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: S:~(!link [Cottische Alpen] [bergpano_w90]);
+SW bis W:~(!link [Dauphiné-Alpen] [bergpano_w89]); NW:~(!link [Savoyer Alpen] [bergpano_w77]);
+N:~(!link [Mont-Blanc-Gruppe] [bergpano_w87]); N bis NO:~(!link [Walliser Alpen] [bergpano_w86]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/grajische_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (89) Dauphiné-Alpen
+!ifset w89
+# bei Matthias Zeiring z.T. anders gegliedert (nicht voll deckungsgleich):
+# Vanoise, Thabor-Gruppe, Belledonne-Gruppe, (eigentl.) Dauphiné
+Umgrenzung: Grenoble -- Val d'Isère -- Mündung des Arc in die Isère -- St.-Jean-d'Maurienne --
+Modane -- Bardonécchia -- Ulzio (Oulx) -- Cesana di Torinese -- Briançon -- Durance -- Embrun --
+Lac de Serre-Ponçon -- Gap -- Drac -- La Mure -- Grenoble
+# Durance, Drac = Fluß
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Savoyer Kalkalpen] [bergcam_w77]); NO:~(!link [Grajische Alpen] [bergcam_w88]);
+O bis SO:~(!link [Cottische Alpen] [bergcam_w90]); S:~(!link [Provençalische Alpen] [bergcam_w79]);
+W:~(!link [Französische Kalkalpen] [bergcam_w78]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/dauphine-alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Savoyer Kalkalpen] [bergpano_w77]); NO:~(!link [Grajische Alpen] [bergpano_w88]);
+O bis SO:~(!link [Cottische Alpen] [bergpano_w90]); S:~(!link [Provençalische Alpen] [bergpano_w79]);
+W:~(!link [Französische Kalkalpen] [bergpano_w78]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/dauphine-alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (90) Cottische Alpen
+!ifset w90
+Umgrenzung: Cúneo (südlich von Turin) -- Valle di Stura -- Col de Larche -- Barcelonnette -- Ubaye --
+-- Lac de Serre-Ponçon -- Embrun -- Durance -- Briançon -- Cesana di Torinese -- Ulzio (Oulx) --
+Val di Susa -- Turin (Torino)
+# Colle di Larche = Paß; Ubaye, Durance = Fluß
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Grajische Alpen] [bergcam_w88]); W:~(!link [Dauphiné-Alpen] [bergcam_w89]);
+SW:~(!link [Provençalische Alpen] [bergcam_w79]); S:~(!link [Meeralpen] [bergcam_w91]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Panoramen] [../bergpano/cottische_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Grajische Alpen] [bergpano_w88]); W:~(!link [Dauphiné-Alpen] [bergpano_w89]);
+SW:~(!link [Provençalische Alpen] [bergpano_w79]); S:~(!link [Meeralpen] [bergpano_w91]).
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/cottische_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (91) Meeralpen
+!ifset w91
+auch: See-Alpen; (!I)italien.(!i) Alpi Marittime
+
+Umgrenzung: Nizza (Nice) -- Villars -- Entrevaux -- Annot -- Thoranne-Haute -- Colmars -- Verdon -- Allos
+-- Col d'Allos -- Barcelonnette -- Col de Larche -- Valle di Stura -- Cúneo (südlich von Turin) --
+Limone/Piemonte -- Col de Tende (Colle di Tenda) -- Tende -- Breil (Breglio) -- Roya -- Ventimiglia (Küste)
+# Verdon, Roya = Fluß; Col... = Paß
+
+!ifset bergcam
+Angrenzende Gebiete: N:~(!link [Cottische Alpen] [bergcam_w90]);
+W:~(!link [Provençalische Alpen] [bergcam_w79]); O:~(!link [Ligurische Alpen] [bergcam_w92]).
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/meeralpen.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: N:~(!link [Cottische Alpen] [bergpano_w90]);
+W:~(!link [Provençalische Alpen] [bergpano_w79]); O:~(!link [Ligurische Alpen] [bergpano_w92])
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/meeralpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
+
+#############################################################################################################
+## (92) Ligurische Alpen
+!ifset w92
+# deckungsgleich mit Einteilung von Mathias Zeiring
+Umgrenzung: Ventimiglia (Küste) -- Roya -- Breil (Breglio) -- Tende -- Col de Tende (Colle di Tende)
+-- Limone/Piemonte -- Cúneo (südlich von Turin) -- Mondovì -- Ceva -- Millésimo -- Cárcare  --
+Cadibona -- Savona (Küste)
+
+!ifset bergcam
+Angrenzende Gebiete: W:~(!link [Meeralpen] [bergcam_w91]); NW:~(!link [Cottische Alpen] [bergcam_w90]);
+O: Ligurischer Apennin.
+# !ifdest [html]
+# !begin_flushright
+# siehe auch: (!url [Panoramen] [../bergpano/ligurische_alpen.html])
+# !end_flushright
+# !endif
+!endif
+!ifset bergpano
+Angrenzende Gebiete: W:~(!link [Meeralpen] [bergpano_w91]); NW:~(!link [Cottische Alpen] [bergpano_w90]);
+O: Ligurischer Apennin.
+!ifdest [html]
+!begin_flushright
+siehe auch: (!url [Webcams] [../bergcam/ligurische_alpen.html])
+!end_flushright
+!endif
+!endif
+!ifset stempel
+!endif
+
+!endif
