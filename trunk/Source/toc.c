@@ -29,7 +29,7 @@
 
 #ifndef ID_TOC_C
 #define ID_TOC_C
-const char *id_toc_c= "@(#) toc.c       12.06.1999";
+const char *id_toc_c= "@(#) toc.c       01.02.2004";
 #endif
 
 #include "import.h"
@@ -326,11 +326,11 @@ LOCAL void output_aliasses ( void )
 	/* Fuer Pure C Help und Turbo Vision Help werden die Aliasse zusammen */
 	/* mit *nodes ausgegeben */
 
-#if 1
+/*#if 1*/
 	start= toc[p2_toc_counter]->labindex;	/* r6pl2 */
-#else
+/*#else
 	start= 1;
-#endif
+#endif*/
 
 	if (start<=0)
 	{	return;
@@ -627,12 +627,12 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 			}
 			else
 			{
-#if 1
+/*#if 1*/
 				sprintf(hfn, "%s%s", html_name_prefix, toc[ui]->filename);
 				htmlfilename= hfn;
-#else
+/*#else
 				htmlfilename= toc[ui]->filename;
-#endif
+#endif*/
 			}
 
 			/* Feststellen, ob die Referenz im gleichen File liegt */
@@ -936,9 +936,9 @@ GLOBAL void check_endnode ( void )
 				break;
 		}
 
-#if 0
+/*#if 0*/
 		about_unregistered();	/* wird nun am Anfang eines jeden Nodes ausgegeben */
-#endif
+/*#endif*/
 
 		switch (desttype)
 		{
@@ -1378,11 +1378,11 @@ LOCAL void output_pch_header ( const char *numbers, const char *name )
 	outln("");
 	outln("screen(");
 
-#if 1
+/*#if 1*/
 	start= toc[p2_toc_counter]->labindex;
-#else
+/*#else
 	start= 1;
-#endif
+#endif*/
 
 	for (i=start; i<MAXLABELS; i++)
 	{	if ( lab[i]!=NULL )
@@ -1776,8 +1776,8 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 		else
 		{
 			ti= tocindex;					/* default */
-
-#if 0	/* Nur zum Debuggen */
+/* Nur zum Debuggen */
+/*#if 0
 			if (ti<0)
 			{	fprintf(stderr, "ti<0\n");
 			}
@@ -1787,7 +1787,7 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 			if (toc[tocindex]==NULL)
 			{	fprintf(stderr, "toc[tocindex]==NULL\n");
 			}
-#endif
+#endif*/
 			switch (toc[tocindex]->toctype)
 			{
 				case TOC_NODE4:
@@ -1845,11 +1845,11 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 				}
 			}
 		}
-#if 0
+/*#if 0
 		sprintf(s, "%s%s%s%s%s", html_name_prefix, tmp_n1, tmp_n2, tmp_n3, tmp_n4);
-#else
+#else*/
 		sprintf(s, "%s%s%s%s", tmp_n1, tmp_n2, tmp_n3, tmp_n4);
-#endif
+/*#endif*/
 	}
 	else
 	{
@@ -1898,9 +1898,9 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 	############################################################	*/
 LOCAL BOOLEAN html_make_file ( void )
 {
-#if 0
+/*#if 0
 	int ti= p2_toc_counter;
-#endif
+#endif*/
 
 	if (outfile.name[0]==EOS)
 	{	return FALSE;
