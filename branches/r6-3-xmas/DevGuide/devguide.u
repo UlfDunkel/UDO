@@ -1,0 +1,856 @@
+!code [iso]
+!sloppy
+!no_umlaute [all]
+!no_effects [asc]
+
+!docinfo [program]	UDO Developer's Guide
+!docinfo [version]	Version 6
+!docinfo [date]		12.12.2003
+
+!docinfo [author]	Dirk Hagedorn, Volker Janzen und anderen
+!docinfo [address]	http://www.udo-open-source.org/
+
+!use_short_tocs			[stg,win,aqv,info,html]
+!use_auto_subtocs		[stg,win,aqv,info,html]
+!use_auto_subsubtocs		[stg,win,aqv,info,html]
+!use_justification		[asc,stg]
+
+!macro MISS	Hier fehlt noch etwas!..
+
+!tex_2e
+!raw [tex] \parindent 0pt
+!raw [tex] \parskip 4pt
+
+!html_backpage http://www.udo-open-source.org/dev/
+!html_style_name http://www.udo-open-source.org/udo.css
+
+!begin_document
+!maketitle
+
+Dieses Dokument erfährt gerade eine Überarbeitung.
+
+!tableofcontents
+!raw [tex] \sloppy
+
+############################################################
+# 
+############################################################
+!node Einführung
+!html_name einfuehrung
+
+Diese Informationen wurden erstellt, um die Portierung von UDO zu 
+erleichtern und um einen kleinen Einblick in die Funktionsweise von 
+UDO zu geben, welche der Fehlersuche dienlich sein kann.
+
+Ursprünglich war der Sourcecode nur dazu ausgelegt, das UDO-Format ins 
+ST-Guide-, ASCII- und (!LaTeX)-Format umzuwandeln. Der Sourcecode ist 
+nun in mehr als eineinhalb Jahr stark angewachsen und ziemlich 
+undurchsichtig geworden. Sehr oft habe ich ohne große Überlegungen 
+irgendwo Dinge hinein!-ge!-bas!-telt, obwohl sie eigentlich dort nichts zu 
+suchen haben. Na ja, es läuft halt.
+
+An vielen Stellen könnten eigentlich Optimierungen vorgenommen werden, 
+allerdings ist dies eine zeitaufwendige Sache, da Optimierungen für 
+ein Format sich negativ auf die Übersetzungszeit bei andere Formaten 
+auswirken könnten. Und um dies zu testen, fehlte mir letztens einfach 
+die Zeit.
+
+Was auffallen wird, das sind die kurzen Namen der C-Files. Dies hat 
+folgenden Grund: Unter MS-DOS kann der GCC dem Linker eine 
+Kommandozeile von maximal 254 Zeichen übergeben. Hätten die C-Files 
+längere Namen, könnte kein Binary mehr gelinked werden.
+
+Ich möchte nun versuchen, ein paar Dinge zu beschreiben, die man bei 
+einer Portierung unbedingt beachten sollte. Dies wird mir nicht immer 
+auf Anhieb gelingen, daher betrachtet diesen Text nur als Versuch. Ich 
+werde versuchen, diesem Text in Zukunft auf dem laufenden zu halten.
+
+
+############################################################
+# 
+############################################################
+!node Was muß angepaßt werden?
+!html_name anpassen
+
+Hier eine kleine Aufstellung der Routinen und Konstanten, die 
+unbedingt angepaßt werden müssen. Findet Ihr bereits einen für Euch 
+zuständigen (!V)#ifdef(!v), so habe ich Euch bereits die Arbeit 
+abgenommen.
+
+!begin_tlist [constant.h:]
+
+!item	[portab.h]		WORD und UWORD definieren
+
+!item	[constant.h]	Deutsche Umlaute definieren.
+
+!item	[version.h]		Hier müssen Strings für die Infoseite gesetzt 
+						werden. Darüber hinaus werden weitere system- 
+						und compilerabhängige Makros gesetzt.
+
+!item	[udo.c]			in (!V)udo()(!v) sollte ein spezielles Zeichen 
+						für die erste Ebene der itemize-Umgebung 
+						angegeben werden ((!V)itemchar[1](!v)).
+
+!item	[chr_*.h]		Hier sind Tabellen für die Umsetzung des 
+						Zeichensatzes definiert.
+
+!item	[chr.c]			Hier muß die passende (!V)chr_*.h(!v) 
+						sowie (!V)???2iso.h(!v) eingebunden werden.
+!end_tlist
+
+
+############################################################
+# 
+############################################################
+
+!node	Makros
+!html_name makros
+
+Ich beginne mal mit den wichtigsten Dingen, die unbedingt beachtet 
+werden sollten. Für (!V)#ifdef(!v)'s sind folgende Makros vorgesehen:
+
+!begin_xlist [NeXTStep-:]
+!item	[Amiga:]		(!V)__AMIGA__(!v)
+!item	[Atari:]		(!V)__TOS__(!v)
+!item	[BeOS:]			(!V)__BEOS__(!v)
+!item	[EMX:]			(!V)__MSDOS__(!v)
+!item	[Linux:]		(!V)__LINUX__(!v)
+!item	[Linux 68k:]	(!V)__LINUX68K__(!v)
+!item	[HP-UX:]		(!V)__HPUX_ISO__(!v) bzw. 
+						(!V)__HPUX_ROMAN__(!v), je nachdem, welchen Zeichensatz das System 
+						verwendet (ISO-Latin-1 oder HP-Roman-8).
+!item	[Macintosh:]	(!V)__MACOS__(!v) fŸr das klassische Mac OS bis Version  9 
+                        bzw. (!V)__MACOSX__(!v) fŸr das Mac OS X ab Version 10
+!item	[NeXTStep:]		(!V)__NEXTSTEP__(!v)
+!item	[Sinix:]		(!V)__SINIX__(!v)
+!item	[SunOS:]		(!V)__SUNOS__(!v)
+!end_xlist
+
+Bis auf (!V)__TOS__(!v) (von Pure C vordefiniert) sollten alle 
+Bezeichner im Makefile gesetzt werden!
+
+
+
+############################################################
+# 
+############################################################
+!node Headerfiles
+!html_name headerfiles
+
+#-----------------------------------------------------------
+# 
+#-----------------------------------------------------------
+!subnode	import.h & export.h
+!html_name import_export
+
+(!V)import.h(!v) beinhaltet folgendes:
+
+!begin_quote
+!begin_verbatim
+#ifdef GLOBAL
+#undef GLOBAL
+#endif
+
+#define GLOBAL extern
+!end_verbatim
+!end_quote
+
+(!V)export.h(!v) beinhaltet folgendes:
+
+!begin_quote
+!begin_verbatim
+#ifdef GLOBAL
+#undef GLOBAL
+#endif
+
+#define GLOBAL
+!end_verbatim
+!end_quote
+
+
+Module stellen globale Funktionen und Variablen in ihrem Headerfile 
+zur Verfügung. Lokale Funktionen und Variablen werden im C-File 
+deklariert.
+
+Beispiel:
+
+!begin_quote
+!begin_verbatim
+#include "import.h"
+#include "that.h"
+#include "export.h"
+#include "this.h"
+!end_verbatim
+!end_quote
+
+
+Modul ''(!V)this.c(!v)'' greift auf Funktionen und/oder Variablen des 
+Moduls ''(!V)that.c(!v)'' zurück. Nachdem ''(!V)import.h(!v)'' 
+eingelesen wurde, ist (!V)GLOBAL(!v) als (!V)extern(!v) definiert, was 
+dazu führt, daß die Funktionen und Variablen aus ''(!V)that.h(!v)'' 
+für ''(!V)this.c(!v)'' ebenfalls als (!V)extern(!v) deklariert sind.
+
+Nach ''(!V)export.h(!v)'' wird (!V)GLOBAL(!v) umdefiniert und 
+beinhaltet nichts. Die eigenen Funktionen und Variablen aus 
+''(!V)this.h(!v)'' werden für ''(!V)this.c(!v)'' also nicht als 
+(!V)extern(!v) deklariert.
+
+Diese Vorgehensweise erlaubt es, auf die unübersichtlichen und zudem 
+feh!-ler!-an!-fäl!-li!-gen expliziten (!T)extern(!t)-Deklarationen zu 
+verzichten.
+
+#-----------------------------------------------------------
+# 
+#-----------------------------------------------------------
+!subnode	portab.h
+!html_name portab
+
+In (!V)portab.h(!v) werden derzeit nur grundlegende Dinge festgelegt. 
+Zum einen die boolschen Konstanten, EOS (end of string),
+(!V)USE_ISO_CHARSET(!v) sowie (!V)WORD(!v) und (!V)UWORD(!v).
+
+(!V)USE_ISO_CHARSET(!v) sollte auf 1 gesetzt werde, falls das 
+Betriebssystem den ISO-Latin-1-Zeichensatz benutzt, andernfalls auf 0.
+
+(!V)WORD(!v) und (!V)UWORD(!v) werde nur in (!V)img.c(!v) benutzt um 
+die Header der Grafikformate auszulesen.
+
+#-----------------------------------------------------------
+# 
+#-----------------------------------------------------------
+!subnode	version.h
+!html_name version
+
+In diesem File werden ein paar Konstanten für Versionsnummern gesetzt. 
+Aber was viel wichtiger ist: Auch hier werden systemabhängige Makros 
+definiert:
+
+!begin_xlist [HAVE_STRICMP:]
+!item	[OSUDO:]	Ein String, der für den ""Werbetext"" für 
+''!/use_about_udo'' eingesetzt wird.
+
+!item	[USE_SLASH:]	Soll als Pfadtrenner ein ''/'' verwendet 
+werden? Falls ja, als 1 defnieren. Für Unix ist dies immer der Fall.
+
+!item	[USE_LNAME:]	Werden lange Dateinamen standardmäßig 
+unterstützt? Falls ja, dann mit 1 definieren. UDO legt dann z.B. 
+Dateien mit der Endung (!V).html(!v) statt (!V).htm(!v) an.(!N)Obwohl 
+weder DOS noch GEMDOS etwas dagegen haben, wenn man versucht, eine 
+Datei mit einer überlangen Endung zu öffnen, sollte man hier eine 0 
+setzen. Grund: UDO benutzt die Endungen auch für die Referenzen. 
+Erstellt man nun zuhause ein HTML-File, kopiert den ganzen Krempel auf 
+den Uniserver, so hätten die Files die Endung (!T).htm(!t), die 
+Referenzen würden aber auf (!T).html(!t) lauten und schon würden die 
+Files unter Unix nicht mehr gefunden.(!n)
+
+!item	[HAVE_STRUPR:]	Falls der benutze Compiler kein (!V)strupr()(!v) 
+anbietet, dann sollte hier eine 0 eingetragen werden. UDO benutzt dann 
+seine eigene Funktion.
+
+!item	[HAVE_STRLWR:]	Falls der benutze Compiler kein (!V)strlwr()(!v) 
+anbietet, dann sollte hier eine 0 eingetragen werden. UDO benutzt dann 
+seine eigene Funktion.
+
+!item	[HAVE_STRICMP:]	Falls der benutze Compiler kein (!V)stricmp()(!v) 
+anbietet, dann sollte hier eine 0 eingetragen werden. UDO benutzt dann 
+(!V)strcmp()(!v).
+
+!item	[HAVE_STRCASECMP:]	Falls der benutze Compiler kein (!V)stricmp()(!v) 
+jedoch (!V)strcasecmp()(!v) anbietet, dann sollte hier eine 1 eingetragen werden.
+
+!end_xlist
+
+
+Um die Makros, die sonst noch gesetzt werden, solltet Ihr Euch nicht 
+kümmern. Auch solltet Ihr hier keine Änderungen vornehmen, ohne mich
+darüber zu informieren!
+
+#-----------------------------------------------------------
+# 
+#-----------------------------------------------------------
+!subnode commands.h
+!html_name commands
+
+Hier werden einige Befehle als Makros hinterlegt. Ich gebe zu, daß man 
+besser ein eigenes Modul benutzen sollte, in dem die Befehle als 
+(!T)const char(!t) benutzt werden, damit der Präprozessor entlastet 
+und UDOs Binary etwas kleiner wird.
+
+#-----------------------------------------------------------
+# 
+#-----------------------------------------------------------
+!subnode udo_type.h
+!html_name udo_type
+
+Hier werden ein paar Typen deklariert, die modulübergreifen verwendet 
+werden. Das Headerfile ist gut kommentiert und sollte weitestgehend selbsterklärend sein.
+
+
+#-----------------------------------------------------------
+# 
+#-----------------------------------------------------------
+!subnode	constant.h
+!html_name constant
+
+Hier werden wichtige Konstanten für den internen Gebrauch gesetzt. Um
+die meisten braucht Ihr Euch nicht zu kümmern.
+
+Wichtig: Hier sind für jedes System die Lage einiger Sonderzeichen
+anzugeben:
+
+!begin_xlist [ALPHA_S:] !short
+!item	[BETA_C:]	Griechisches Beta als unsigned char
+!item	[BETA_S:]	Griechisches Beta als unsigned char[2]
+!item	[ALPHA_S:]	Griechisches Alpha als unsigned char[2]
+!end_xlist
+
+
+############################################################
+# 
+############################################################
+!node C-Files
+!html_name c-files
+
+#-----------------------------------------------------------
+!subnode	abo.c
+!html_name abo
+
+Dieses Modul erzeugt eine kleine Werbeseite für UDO, falls in 
+UDO-Quelltexten der Schalter ''(!T)!/ude_about_udo(!t)'' verwendet 
+wird.
+
+#-----------------------------------------------------------
+!subnode	cfg.c
+!html_name cfg
+
+Die Routine liest die Datei namens (!V)udo.ini(!v) aus
+(!V)$HOME(!v), (!V)$UDOPATH(!v) oder dem aktuellen Verzeichnis.
+Die Kommandozeilen-Version benutzt lediglich die
+Registrierungsdaten. Die Atari-GEM-Version benutzt auch die anderen
+Einträge und sichert die Einstellungen auch wieder.
+
+Wer eine grafische Benutzeroberfläche schreiben möchte, aus der man
+for!-mat!-zu!-ge!-hö!-ri!-ge Programme aufrufen kann, der sollte sich einmal die
+Struktur (!V)APPCFG(!v), die in (!V)cfg.h(!v) definiert ist, ansehen.
+Dort kann man die Pfade der Programme und die passenden Optionen
+ablegen.
+
+In der Struktur (!V)CONFIG(!v) werden auch einige weitere Flags
+abgelegt. Fragt mich bitte, falls der Zweck dieser Flags nicht
+kommentiert ist.
+
+#-----------------------------------------------------------
+!subnode	chr.c
+!html_name chr
+
+Hier sind alle Routinen untergebracht, die sich um die Umsetzung der 
+Son!-der!-zei!-chen und um spezielle Platzhalter kümmern.
+
+Zu Beginn müssen systemabhängig die Übersetzungstabellen, die in 
+(!V)chr_*.h(!v) deklariert werden, eingebunden werden.
+
+Dieses File ist und bleibt eine große Baustelle. Gerade neulich habe 
+ich erst den ""universellen Zeichensatz"" angeboten und die zugehörige 
+Routine eingebaut, die noch erschrecken langsam funktioniert und bald 
+von mir auf den neuesten Stand gebracht wird.
+
+#-----------------------------------------------------------
+!subnode	cli.c
+!html_name cli
+
+Dies ist die Benutzerschnittstelle der Kommandozeilenversionen. Möchte 
+man eine eigene Schnittstelle oder Oberfläche schreiben, muß dieses 
+Files quasi ersetzt werden.
+
+#-----------------------------------------------------------
+!subnode	env.c
+!html_name env
+
+Dieses Modul verwaltet alle Umgebungen und sorgt durch Berechnung von 
+Einrückungen dafür, daß Umgebungen später richtig formatiert 
+ausgegeben werden.
+
+In (!V)env.c(!v) werden auch die Zeichen initialisiert, die für die 
+Markierung der Items der itemize- und enumerate-Umgebungen verwendet 
+werden. Diese Zeichen sind teils zeichensatzabhänig!
+
+#-----------------------------------------------------------
+!subnode	file.c
+!html_name file
+
+Die Funktion (!V)fsplit()(!v) sorgt für die Aufsplittung einer 
+Pfadangabe in Laufwerk (z.B. (!V)D:(!v), Pfad (z.B. (!V)\BIN(!v)), 
+Dateiname (z.B. (!V)foo(!v)) und -endung (z.B. (!V).bar(!v)).
+
+Der Routine ist es egal, ob Pfade durch einen Slash oder Backslash 
+voneinander getrennt sind. Die Routine wurde noch nicht überprüft,
+ob sie auch mit Leerzeichen im übergebenen String zurechtkommt.
+
+Für Filesysteme wie die des Mac oder der BeBox stehen hier ein paar
+weitere Funktionen.
+
+#-----------------------------------------------------------
+!subnode	img.c
+!html_name img
+
+Diese Routine kümmert sich um Aufgaben, die mit Grafiken 
+zusammenhängen. Generell werden nur die Grafikheader ausgelesen und in 
+einer Struktur (!V)udo.c: c_image()(!v) die Informationen zur 
+Verfügung gestellt. Danach werden dann passende Befehle ausgegeben, so
+daß das Zielformat die Grafiken anzeigt.
+
+Wichtig: Für RTF werden noch keine Bilder ausgegeben. Falls jemand
+weiß, wie man die Bilddaten im RTF verschlüsseln muß, bitte ich darum,
+mir diese Infos zukommen zu lassen.
+
+#-----------------------------------------------------------
+!subnode	msg.c
+!html_name msg
+
+Dieses Modul kümmert sich um die Ausgabe von Fehlermeldungen ins 
+Logfile bzw. auf die Standardausgabe.
+
+#-----------------------------------------------------------
+!subnode	par.c
+!html_name par
+
+Dieses Modul kümmert sich um die Bearbeitung von Platzhaltern, also 
+Befehlen, bei denen Parameter benutzt werden.
+
+Auch werden hier die Trennvorschläge (''(!T)!/hyphen(!t)''), Makros 
+(''(!T)!/macro(!t)'' und Definitionen (''(!T)!/define(!t)'') 
+verwaltet.
+
+#-----------------------------------------------------------
+!subnode	str.c
+!html_name str
+
+Hier werden Funktionen zur Stringbehandlung bereitgestellt. Da 
+intensiv von Funktionen wie (!V)replace_all()(!v) gemacht wird, bin 
+ich sehr angetan, falls mir jemand schnellere aber genauso portable 
+Routinen nennen kann.
+
+#-----------------------------------------------------------
+!subnode	sty.c
+!html_name sty
+
+Dieses Modul kümmert sich um die Ersetzung und Überprüfung der
+ver!-schie!-de!-nen Texteffekte.
+
+#-----------------------------------------------------------
+!subnode	tab.c
+!html_name tab
+
+(!T)tab.c(!t) beinhaltet alle Routinen, die für den Tabellensatz 
+zuständig sind.
+
+#-----------------------------------------------------------
+!subnode	toc.c
+!html_name toc
+
+Dieses etwas großgeratene Modul hat einen etwas verwirrenden Namen. 
+Denn es kümmert sich nicht nur um die Ausgabe eines Inhaltsverzeichnis 
+(''table of contents''), sondern beinhaltet alle Routinen, die 
+irgendwie mit Gliederungsbefehlen (''(!T)!/node(!t)'' etc.), 
+Sprungmarken (''(!T)!/label(!t)''), Zweitnamen (''(!T)!/alias(!t)'') 
+oder der automatischen Referenzierung zu tun haben.
+
+Dieses Modul wurde zwischen Release 5 Patchlevel 5 und Patchlevel 6 
+fast komplett neu programmiert.
+
+#-----------------------------------------------------------
+!subnode	tp.c
+!html_name tp
+
+Hier werden lediglich die Titelseiten für die jeweiligen Formate
+erzeugt.
+
+#-----------------------------------------------------------
+!subnode	udo.c
+!html_name udo
+
+(!T)udo.c(!t) ist praktisch das Hauptmodul, das alle anderen Module 
+kontrolliert. In diesem Modul werden Zeilen eingelesen, abgefragt, 
+gepuffert und formatiert ausgegeben. Zwischendurch wird andauernd in 
+die obigen Module verzweigt.
+
+
+############################################################
+# 
+############################################################
+!node UDOs grobe Funktionsweise
+!html_name funktionsweise
+
+Hier werde ich versuche, die Funktionsweise von UDO in Grundzügen 
+dar!-zu!-stel!-len. Ob mir das gelungen ist, müßt Ihr entscheiden, aber 
+sicherlich ist diese kurze Auflistung besser als nichts.
+
+Dreh- und Angelpunkt sind eigentlich genau sieben Routinen:
+
+!begin_enumerate
+
+!item	(!V)init_vars()(!v) (!nl)
+		Hier werden interne Variablen auf 
+		ihre Defaultwerte zurückgesetzt und die Sprachstrings auf Deutsch 
+		voreingestellt.
+
+!item	(!V)init_modules()(!v) (!nl)
+		Alle Module werden initialisiert.
+		
+!item	(!V)udo()(!v) (!nl)
+		Das Herzstück, was alles weitere veranlaßt, 
+		also das Überprüfen, ob die Quelldatei vorhanden ist, das 
+		Anlegen von Logfiles, der Aufruf von (!V)pass1()(!v) und 
+		(!V)pass2()(!v) sowie das Schließen aller geöffneten 
+		Dateien am Ende der Übersetzung.
+
+!item	(!V)pass1()(!v) (!nl)
+		Im ersten Durchlauf werden alle Kapitel, 
+		Labels, Aliase, Makros und Definitionen ermittelt, die für
+		den zweiten Durchgang von eminenter Wichtigkeit sind, sei 
+		es für die Ausgabe der Inhaltsverzeichnisse oder die 
+		automatische Referenzierung.
+
+!item	(!V)pass2()(!v) (!nl)
+		Im zweiten Durchlauf erfolgt die 
+		eigentliche Umsetzung des Textes. Die vielen Anfragen sind 
+		bedingt durch die hier berücksichtigten verbatim-, raw- 
+		und table-Umgebungen sowie die speziellen Umgebungen 
+		mittels !/ifdest.
+
+!item	(!V)tokenize()(!v) (!nl)
+		Eine Zeile wird in Tokens zerlegt. 
+		Falls das erste Token ein Kommando enthält, wird die 
+		entsprechende Funktion aufgerufen. Welche, das wird vorher 
+		in einer Tabelle festgelegt. Die aufgerufenen Routinen 
+		haben alle den Namen ''(!V)c_(!v)''(!N)sie lauteten mal alle 
+		''(!T)convert_(!t)'', aber aus Faulheit habe ich da eine 
+		kleine Kürzung vorgenommen(!n). Ist kein Kommando am 
+		Anfang des Absatzes, werden die Wörter der Zeile in einen 
+		internen Puffer aufgenommen, der momentan statisch 
+		verwaltet wird und  auf 800 Worte ausgelegt ist.
+
+!item	(!V)token_output()(!v) (!nl)
+		Hier wird ein kompletter Absatz ausgegeben. Dies ist eine 
+		verdammt kniffelige Angelegenheit. Versucht bitte nicht zu 
+		verstehen, was in dieser Routine alles abgefragt wird.
+
+!item	(!V)exit_vars(!v)	(!nl)
+		Hier werden  alle benötigten Variablen 
+		wieder zurücksetzt sprich der während der Überstzung 
+		alloziierte Speicher freigegeben.
+
+!end_enumerate
+
+Dies sieht im ersten Moment ziemlich einfach aus. Die ganze Sache wäre 
+auch recht einfach, wenn man nicht zwischendurch noch genau 
+berücksichtigen müßte, wann und vor allen Dingen in welcher 
+Reihenfolge
+
+!begin_itemize
+!item	Sonderzeichen,
+!item	Schriftarten,
+!item	Trennungsregeln,
+!item	Referenzen,
+!item	Makros und Definitionen sowie
+!item	spezielle Platzhalter
+!end_itemize
+
+angepaßt werden müssen. Eine Änderung der Aufrufreihenfolge der 
+Funktionen (!V)c_macros(!v), (!V)auto_quote_chars(!v), 
+(!V)auto_references(!v), (!V)c_divis(!v), (!V)c_tilde(!v), 
+(!V)c_vars(!v) etc. hat mir schon manche schlaflose Nacht bereitet.
+
+############################################################
+# 
+############################################################
+!include um.ui
+
+############################################################
+# 
+############################################################
+!node	Eigene Benutzerschnittstellen
+!html_name benutzerschnittstellen
+
+UDO ist nicht zwingend als Kommandozeilenversion ausgelegt. Dies zeigt 
+auch, daß es eine GEM-Version von UDO gibt.
+
+Um verschiedene Benutzerschnittstellen zu ermöglichen, läßt sich UDO 
+über das Setzen einiger Flags fernsteuern. Desweiteren muß eine 
+Routine be!-reit!-ge!-stellt werden, die Informationen ausgeben kann.
+
+Welche Routinen genau zur Verfügung gestellt werden müssen, findet man 
+in (!V)gui.h(!v)
+
+Wie dies bei der Kommandozeilenversion realisiert ist, kann man sich 
+ausführlich in (!V)cli.c(!v) anschauen.
+
+
+#-----------------------------------------------------------
+!subnode Flags
+!html_name flags
+
+Die Hauptfunktion (!V)udo()(!v) kann man durch folgende Flags 
+beeinflussen. Man erhält Zugriff auf diese Flags, wenn man 
+(!V)udo.h(!v) folgendermaßen einbindet:
+
+!begin_quote
+!begin_verbatim
+#include "import.h"
+#include "udo.h"
+#include "export.h"
+#include "gui.h"
+!end_verbatim
+!end_quote
+
+!begin_description
+
+!item	[desttype:]	Dieser Integer-Wert enthält einen Wert, anhand 
+dessen hun!-dert!-fach entschieden wird, in welches Format der gelesene 
+Text umgewandelt werden soll. Die Konstanten, mit denen diese Variable 
+belegt werden, sind in (!V)constant.h(!v) definiert und lauten 
+(!V)TOASC(!v), (!V)TOTEX(!v) etc.
+
+!item	[no_logfile:] TRUE, falls UDO kein Logfile anzeigen soll.
+
+!item	[no_hypfile:] TRUE, falls UDO keine Datei mit Trennvorschlägen 
+bei den ASCII-Formaten anlegen soll.
+
+!item	[verbose:]	TRUE, wenn UDO ausführliche Statusmeldungen 
+während der Konvertierung ausgeben soll. Dazu wird später die Routine 
+(!V)infout()(!v) aufgerufen, die von der jeweiligen Oberfläche zur 
+Verfügung gestellt werden muß (siehe (!V)cli.c(!v)).
+
+!item	[be_quiet:]	TRUE, wenn UDO überhaupt keine Statusmeldungen 
+ausgeben soll.
+
+!item	[no_check:] TRUE, falls keine Überprüfung der Schriftarten 
+vorgenommen werden soll. Habe ich irgendwann mal aus 
+Geschwindigkeitsgründen eingebaut.
+
+!item	[testmode:] TRUE, wenn UDO keine Zieldatei, sondern nur Logile 
+und Hyphenfile erzeugen soll.
+
+!item	[use_treefile:]	TRUE, wenn UDO einen ""Include-Baum"" ausgeben 
+soll.
+
+!end_description
+
+Schließlich übergibt man (!V)udo()(!v) den Namen der Quelldatei und 
+dann sollte es losgehen.
+
+#-----------------------------------------------------------
+!subnode Callbacks
+!html_name callbacks
+
+Will man eine eigene Benutzerschnittstelle schreiben, müssen die in 
+(!V)gui.h(!v) deklarierten Funktionen angeboten werden. Diese werden 
+vom Modul (!V)udo.c(!v) aufgerufen.
+
+
+!begin_itemize
+
+!item	(!V)show_status_* ( ... )(!v)	(!nl)
+Es sollen Statusinformationen ausgegeben werden, falls 
+(!T)be_quiet==FALSE(!t) ist. UDO gibt Zeichenketten aus, in denen man 
+den aktuellen Stand der Konvertierung anlesen kann.
+
+!item	(!V)void warning_err_logfile ( void )(!v)	(!nl)
+Es wird eine Fehlermeldung ausgegeben, daß das Logfile nicht angelegt 
+werden konnte.
+
+Hier kann man eine Dialogbox öffnen oder aber die in 
+(!V)msg.c(!v) angebotene Funktion (!V)error_open_logfile()(!v) 
+verwenden.
+
+Der Name des Logfiles befindet sich in (!V)logfull(!v).
+
+
+!item	(!V)void warning_err_treefile ( void )(!v)	(!nl)
+Es wird eine Fehlermeldung ausgegeben, daß das Treefile nicht angelegt 
+werden konnte. Ins Treefile wird ein ""include""-Baum ausgegeben.
+
+Hier kann man eine Dialogbox öffnen oder aber die in 
+(!V)msg.c(!v) angebotene Funktion (!V)error_open_treefile()(!v) 
+verwenden.
+
+Der Name des Treefiles befindet sich in (!V)treefull(!v).
+
+!item	(!V)void warning_err_hypfile ( void )(!v)	(!nl)
+Es wird eine Fehlermeldung ausgegeben, daß das Hyphenfile nicht 
+angelegt werden konnte. In diese Datei gelangen die Trennvorschläge  
+für die ASCII-Formate.
+
+Hier kann man eine Dialogbox öffnen oder aber die in 
+(!V)msg.c(!v) angebotene Funktion (!V)error_open_hypfile()(!v) 
+verwenden.
+
+Der Name des Hyphenfiles befindet sich in (!V)hypfull(!v).
+
+
+!item	(!V)void warning_err_destination ( void )(!v)	(!nl)
+Es wird eine Fehlermeldung ausgegeben, daß die Zieldatei nicht 
+angelegt werden konnte.
+
+!item	(!V)void multitasking_interrupt ( void )(!v)	(!nl)
+Diese Routine wird aufgerufen, um bei kooperativem Multitasking andere 
+Prozesse zum Zug kommen zu lassen. Bei der GEM-Version werden z.B. an 
+dieser Stelle Events bearbeitet, die zwischendurch an!-ge!-fal!-len sind.
+
+!item	(!V)void unregistered_copyright ( void )(!v)	(!nl)
+Wird nicht mehr unterstützt. Falls der Linker eine Fehlermeldung 
+ausgeben sollte, sollte man einfach eine leere Funktion einbauen, wie 
+dies auch in (!V)cli.c(!v) gemacht wird.
+
+!item	(!V)void cursor_working ( void )(!v)	(!nl)
+Hier sollte man den Mauszeiger als Biene oder Sanduhr darstellen, um 
+dem Benutzer anzuzeigen, daß UDO gerade am Werkeln ist. Bei 
+textorientierten Oberflächen ist diese Routine leer ausgelegt.
+
+!item	(!V)void cursor_active ( void )(!v)	(!nl)
+Hier sollten Funktionen eingebaut werden, um den Mauszeiger wieder als 
+Pfeil darzustellen.
+
+!item	(!V)BOOLEAN break_action ( void )(!v)	(!nl)
+Die Routine sollte (!V)TRUE(!v) zurückgeben, falls der Benutzer den 
+Über!-set!-zungs!-vor!-gang abgebrochen hat. In der GEM-Version geschieht dies 
+durch gleichzeitiges Drücken beider Shifttasten. Textorientierte 
+Oberflächen sollte immer (!V)FALSE(!v) zurückgeben.
+
+!end_itemize
+
+
+############################################################
+# 
+############################################################
+!node Distribution vorbereiten
+!html_name distribution
+
+!subnode Makefiles
+!html_name makefiles
+
+Den Sourcecodes liegen vorgefertigte Makefiles bei, die man zur
+Compilierung verwenden sollte. Hier die passenden Make-Aufrufe für die
+verschiedenen Systeme, nachdem man das passende Makefile in das
+Quelltextverzeichnis kopiert hat:
+
+!begin_xlist [WWWWW:]
+
+!item	[BeOS:]  (!T)make -f makefile.bos(!t)
+!item	[DOS:]   (!T)make -f makefile.emx(!t)
+!item	[HP-UX:] ~
+
+		Hier muß das Makefile abhängig vom zu verwendenden Zeichensatz
+		gewählt werden. Vor einem Make sollte man die alten
+		Objectfiles löschen ((!T)make clean(!t)):
+		
+		!begin_xlist [ISO Latin 1:]
+		!item [ISO Latin 1:] (!T)make -f makefile.hpi(!t) (!nl)
+							 es wird (!T)udo-iso(!t) erzeugt.
+		!item [Roman 8:]    (!T)make -f makefile.hp8(!t) (!nl)
+							 es wird (!T)udo-hp8(!t) erzeugt.
+		!end_xlist
+		
+!item	[Linux:] (!T)make -f makefile.lin(!t)
+!item	[NeXT:]  (!T)make -f makefile.nex(!t)
+!item	[Sinix:] (!T)make -f makefile.snx(!t)
+!item	[SunOS:] (!T)make -f makefile.sun(!t)
+
+!end_xlist
+
+
+!subnode Doku und Manualpage umwandeln
+!html_name doku_manpage
+
+Nachdem UDO compiliert wurde, sollte man die Dokumentation und die Installationsanweisungen
+ins ASCII-Format umwandeln und die Manualpage erzeugen:
+
+!begin_verbatim
+$ cd ger/manual
+$ udo -o udo.txt udo.u
+$ udo -o install.txt install.u
+$ udo -o news.txt news.u
+$ udo --man -o udo.man manpage.u
+$ udo --nroff -o udo.1 manpage.u
+$ cd ../../eng/manual
+$ udo -o udo.txt udo.u
+$ udo -o install.txt install.u
+$ udo -o news.txt news.u
+$ udo --man -o udo.man manpage.u
+$ udo --nroff -o udo.1 manpage.u
+!end_verbatim
+
+Danach hat man also --- jeweils in deutscher und englischer Sprache
+--- folgende Dateien erhalten: (!T)udo.txt(!t), (!T)install.txt(!t),
+(!T)news.txt(!t), (!T)udo.man(!t) und (!T)udo.1(!t).
+Diese werden gleich benötigt.
+
+!subnode FILE_ID.DIZ anpassen
+!html_name file_id_diz
+
+In (!T)manual/(!t) befinden sich die Dateien (!V)file_id.diz(!v) und
+(!V)file_id.ger(!v). In diesen Dateien müssen noch das jeweilige
+Betriebssystem, die Releasenummer und das Datum angepaßt werden.
+
+Nein, UDO gibt es nicht für den ZX Spectrum (!grin)
+
+
+!subnode Archiv erstellen und packen
+!html_name archiv-erstellen
+
+UDO und die Anleitungen sind nun komplett. Bitte erzeugt auf den
+Unix-Systemen Archive mit folgendem Aufbau:
+
+!begin_verbatim
+UDO6G???.TAR.GZ:
+
+copying.ger
+copying.eng
+file_id.diz
+bin/udo
+doc/examples/*    ( <-- ger/examples/* )
+doc/formular/*    ( <-- ger/formular/* )
+doc/install.txt
+doc/news.txt
+doc/udo6ger.txt
+man/man1/udo.1    ( <-- ger/manual/udo.man)
+man/cat1/udo.1    ( <-- ger/manual/udo.1)
+
+
+UDO6E???.TAR.GZ:
+
+copying.ger
+copying.eng
+file_id.diz
+bin/udo
+doc/examples/*    ( <-- eng/examples/* )
+doc/formular/*    ( <-- eng/formular/* )
+doc/install.txt
+doc/news.txt
+doc/udo6eng.txt
+man/man1/udo.1    ( <-- eng/manual/udo.man)
+man/cat1/udo.1    ( <-- eng/manual/udo.1)
+!end_verbatim
+
+Auf den anderen Systemen (MacOS) sollte eine ähnliche
+Verzeichnisstruktur gewählt werden.
+
+(!B)Wichtig:(!b) Das Binary sollte zuvor gestripped werden, da in den
+Makefiles grundsätzlich mit Debuginformationen compilert wird!
+
+In das Archiv sollten nicht die Quelltexte der Doku gepackt werden!
+Die Quelltexte werde ich in ein spezielles Archiv packen und uploaden,
+da sie für alle Betriebssysteme gleichsam verwendet werden können.
+
+Nachdem die obige Verzeichnisstruktur erstellt wurde, packt Ihr es
+bitte mit dem auf dem System gebräuchlichsten Packer. Auf
+Unix-Systemen sollten Tar-Compress-Archive bzw. Tar-GZip-Archive
+benutzt werden.
+
+
+############################################################
+# 
+############################################################
+
+!end_document
+
