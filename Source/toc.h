@@ -314,6 +314,7 @@ GLOBAL BOOLEAN add_subsubsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN inv
 
 GLOBAL BOOLEAN toc_begin_node (const BOOLEAN popup, const BOOLEAN invisible);
 GLOBAL void toc_end_node (void);
+GLOBAL int is_current_node(int tocindex);
 
 
 

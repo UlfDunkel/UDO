@@ -9854,6 +9854,11 @@ GLOBAL void toc_end_node (void)
 }	/* toc_end_node */
 
 
+GLOBAL int is_current_node(int tocindex)
+{
+	return tocindex == p2_toc_counter;
+}
+
 
 /*	############################################################
 	#
