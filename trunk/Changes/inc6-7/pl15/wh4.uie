@@ -4,4 +4,8 @@
 !item New: New command !/wh4_monofont to set the fontname
 used for monospaced text (like !/rtf_monofont).
 
+!index !/wh4_medium_compression
+!item New: New command !/wh4_medium_compression to
+specify a medium compression rate for WinHelp4.
+
 !end_itemize

@@ -472,6 +472,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!wh4_background",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!wh4_inline_bitmaps",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!wh4_high_compression",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
+	{ "!wh4_medium_compression",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!wh4_old_keywords",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!win_prefix_helpids",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!wh4_prefix_helpids",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
@@ -6987,6 +6988,11 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 				bDocMediumCompression= FALSE;
 				return TRUE;
 			}
+			if (strcmp(token[0], "!wh4_medium_compression")==0)
+			{	bDocHighCompression= FALSE;
+				bDocMediumCompression= TRUE;
+				return TRUE;
+			}
 			if (strcmp(token[0], "!wh4_propfont")==0)
 			{	tokcpy2(sDocPropfont);
 				return TRUE;
@@ -8868,6 +8874,9 @@ LOCAL void save_winhelp4_project ( void )
 
 	if (bDocHighCompression)
 	{	fprintf(hpjfile, "COMPRESS=12 Hall Zeck\n");
+	}
+	if (bDocMediumCompression)
+	{	fprintf(hpjfile, "COMPRESS=8 Zeck\n");
 	}
 
 
