@@ -73,12 +73,18 @@ In this chapter you will find a short summary of all the changes in the past.
 Es steht jetzt für !html_ignore_8bit ein optionaler Parameter bereit.
 UDO gibt (falls der Parameter vorhanden ist) in den Ziel-HTML-Dateien
 einen passenden Eintrag aus. Beispiel:
-
 !html_ignore_8bit ISO-8859-2
-
 ergibt in den HTML-Dateien
-
 <meta http-equiv="content-type" content="text/html;charset=ISO-8859-2">
+> was passiert, wenn der übergebene Text länger als 20 Zeichen ist?
+> Wird das Überstehende kommentarlos abgeschnitten? Kommt eine Warnmeldung?
+> Passiert ein Pufferüberlauf?
+da um_strcpy benutzt wird, wird der Überlauf verhindert, eine
+entsprechende Meldung ausgegeben und das Ausgabecharset ist leer...
+20 Zeichen sollten aber wirklich ausreichen, ich habe mir die
+Codierungen von GNU Recode angesehen und die ISO-Codes. Eigentlich
+dürften die noch nichtmal länger als 10 Zeichen werden... :-)
+http://www.w3.org/TR/1999/REC-html401-19991224/charset.html#doc-char-set
 
 Die OS/2 Version sollte sich jetzt als "UDO for OS/2".
 
