@@ -324,7 +324,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!html_alinkcolor",			"",			c_tunix,				TRUE,	CMD_ALWAYS			},
 	{ "!html_vlinkcolor",			"",			c_tunix,				TRUE,	CMD_ALWAYS			},
 	{ "!html_verbatim_backcolor",	"",			c_verbatim_backcolor,	TRUE,	CMD_ALWAYS			},
-	{ "!html_counter_command",		"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	},
+	{ "!html_counter_command",		"",			c_tunix,				TRUE,	CMD_ALWAYS	},	/* Changed in V6.5.9 */
 	{ "!html_javascript",			"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!hh_backimage",				"",			c_tunix,				TRUE,	CMD_ALWAYS			},
 	{ "!hh_backcolor",				"",			c_tunix,				TRUE,	CMD_ALWAYS			},
@@ -7653,6 +7653,11 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			/* New feature #0000053 in V6.5.2 [NHz] */
 			if ( strcmp(token[0], "!html_header_links")==0 )
 			{	set_html_header_links();
+				return TRUE;
+			}
+			/* New in V6.5.9 [NHz] */
+			if ( strcmp(token[0], "!html_counter_command")==0 )
+			{	set_html_counter_command();
 				return TRUE;
 			}
 			break;
