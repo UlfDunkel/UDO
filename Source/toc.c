@@ -3590,20 +3590,26 @@ GLOBAL void html_bottomline ( void )
 GLOBAL void html_footer ( void )
 {
 	BOOLEAN has_name, has_email, has_url, has_mailurl;
-	BOOLEAN has_counter;
+	BOOLEAN has_counter, has_main_counter;
 	char s[512];
 
-	if (no_footers || toc[p2_toc_counter]->ignore_footer)
-	{	return;
+	/* Changed in V6.5.9 [NHz] */
+	has_counter=	(toc[p2_toc_counter]->counter_command!=NULL);
+	has_main_counter=	(sCounterCommand!=NULL);
+
+	if(!has_counter && !has_main_counter)
+	{
+		if (no_footers || toc[p2_toc_counter]->ignore_footer)
+		{	return;
+		}
 	}
 
-	has_counter=	(toc[p2_toc_counter]->counter_command!=NULL);
 	has_name=		(titdat.webmastername!=NULL);
 	has_email=		(titdat.webmasteremail!=NULL);
 	has_url=		(titdat.webmasterurl!=NULL);
 	has_mailurl=	(titdat.webmastermailurl!=NULL);
 
-	if (has_counter || has_name || has_email || has_url || has_mailurl)
+	if (has_counter || has_main_counter || has_name || has_email || has_url || has_mailurl)
 	{	outln(HTML_HR);
 	}
 
@@ -3612,6 +3618,16 @@ GLOBAL void html_footer ( void )
 	{
 		outln(toc[p2_toc_counter]->counter_command);
 	}
+	/* New in V6.5.9 [NHz] */
+	else if(has_main_counter)
+	{
+		outln(sCounterCommand);
+	}
+
+	/* New in V6.5.9 [NHz] */
+	if(no_footers)
+		return;
+
 
 	if (footer_buffer[0]!=EOS)
 	{	outln(footer_buffer);
@@ -9250,6 +9266,12 @@ GLOBAL void set_html_counter_command ( void )
 	if (token[1][0]==EOS)	return;
 
 	tokcpy2(k, 512);
+
+	/* New in V6.5.9 [NHz] */
+	if (p1_toc_counter==0)
+	{	strcpy(sCounterCommand, k);
+		return;
+	}
 
 	ptr= (char *) um_malloc(1+strlen(k)*sizeof(char));
 	

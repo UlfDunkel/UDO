@@ -214,6 +214,7 @@ GLOBAL char			html_ignore_8bit_charset[20];	/* v6.5.0[vj] Charset for html_ignor
 
 GLOBAL char			sDocHtmlSwitchLanguage[256];	/* Links zum Wechseln?			*/
 GLOBAL int			iDocHtmlSwitchLanguage;			/* ... und der Wert der Sprache */
+GLOBAL char			sCounterCommand[512];				/* CounterCommand fr alle Dateien V6.5.9 */
 
 GLOBAL int			html_nodesize;					/* Default: 1 -> <H1>			*/
 GLOBAL char			sDocHtmlBackpage[512];			/* Ruecksprung im Index 		*/
