@@ -19,6 +19,13 @@
 	############################################################	*/
 
 /*
+ * Defines the check codes..
+ */
+#define UM_CHECK_HEAD_START     "UDo\0"
+#define UM_CHECK_HEAD_START_LEN 4
+#define UM_CHECK_FOOTER_STR     "You've a buffer overflow"
+#define UM_CHECK_FOOTER_STR_LEN 26
+/*
  * Declarations for vars that keep memory management information
  */
 extern int um_malloc_count;
@@ -26,6 +33,9 @@ extern int um_free_count;
 /*
  * This is the UDO memory interface. Use it instead of malloc or mfree!
  */
+GLOBAL void init_um();
+GLOBAL void exit_um();
 GLOBAL void *um_malloc(size_t size);
+GLOBAL void *um_realloc(void *block, size_t size);
 GLOBAL void um_free(void *memblock);
 

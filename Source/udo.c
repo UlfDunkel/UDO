@@ -60,6 +60,7 @@ const char *id_udo_c= "@(#) udo.c       09.10.2001";
 
 #include "export.h"
 #include "udo.h"		/* globale Prototypen				*/
+#include "udomem.h"             /* Memory-Management */
 
 
 
@@ -616,16 +617,74 @@ GLOBAL char compile_time[9]  = "\0";
 int um_malloc_count;
 int um_free_count;
 
+/*
+ * init_um() sets up the Memory-Layer
+ */
+GLOBAL void init_um()
+{
+        um_malloc_count=0;
+        um_free_count=0;
+}
+/*
+ * exit_um() frees all memory alocated by um_mallocs and makes consistency
+ * checks on the memory blocks.
+ */
+GLOBAL void exit_um()
+{
+        /* Added Debug information of Memory Management */
+        printf("Memory statistic: %d malloc, %d free\n", um_malloc_count, um_free_count);
+}
+
 GLOBAL void *um_malloc(size_t size)
 {
-	um_malloc_count++;
-	return malloc(size);
+        void *buf;
+		char *footer;
+
+        um_malloc_count++; /* Count um_malloc call */
+        size=size+UM_CHECK_HEAD_START_LEN+UM_CHECK_FOOTER_STR_LEN; /* We need also some more buffer for the checks */
+        buf=malloc(size); /* allocate memory from os */
+        strcpy(buf, UM_CHECK_HEAD_START); /* Copy string as header */
+		/*footer=((char *)buf)[size-UM_CHECK_HEAD_START_LEN];
+        strcpy(footer, UM_CHECK_FOOTER_STR);*/ /* Copy footer */
+        return (char *)buf+UM_CHECK_HEAD_START_LEN; /* Return memory after our check */
+}
+
+GLOBAL void *um_realloc(void *block, size_t size)
+{
+        void *buf;
+		/*char *footer;*/
+
+        size=size+UM_CHECK_HEAD_START_LEN+UM_CHECK_FOOTER_STR_LEN; /* We need also some more buffer for the checks */
+        buf=(char *)block-UM_CHECK_HEAD_START_LEN;
+        buf=realloc(buf, size);
+        strcpy(buf, UM_CHECK_HEAD_START); /* Copy string as header */
+		/*footer=(char *)buf;
+        strcpy(&footer[size+UM_CHECK_HEAD_START_LEN], UM_CHECK_FOOTER_STR);*/ /* Copy footer */
+        return (char *)buf+UM_CHECK_HEAD_START_LEN; /* Return memory after our check */
 }
 
 GLOBAL void um_free(void *memblock)
 {
-	um_free_count++;
-	free(memblock);
+        void *buf;
+
+        um_free_count++;
+        buf=(char *)memblock-UM_CHECK_HEAD_START_LEN;
+        if (strcmp(buf, UM_CHECK_HEAD_START)==0)
+        {
+				free(buf);
+                /*if (strcmp(buf, UM_CHECK_FOOTER_STR)==0)
+                {
+                        free(buf);
+                }
+                else
+                {
+                        printf("Warning: um_free: Buffer overrun detected\n");
+                }*/
+        }
+        else
+        {
+                printf("Warning: um_free: Buffer start corupted\n");
+        }
 }
 
 /*	######################################################################
@@ -10890,9 +10949,6 @@ GLOBAL void init_vars ( void )
 	/*	--------------------------------------------------	*/
 	
 	bNopDetected= FALSE;
-
-	um_malloc_count=0;
-	um_free_count=0;
 
 	lPass1Lines=		0;
 	lPass2Lines=		0;
