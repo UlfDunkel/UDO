@@ -22,9 +22,8 @@
 			buildRules = (
 			);
 			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				CPROJECTFLAGS = "-g";
-				LDPROJECTFLAGS = "";
+				CPROJECTFLAGS = "-g -Wall";
+				LDPROJECTFLAGS = " ";
 			};
 			isa = PBXBuildStyle;
 			name = Development;
@@ -33,7 +32,6 @@
 			buildRules = (
 			);
 			buildSettings = {
-				COPY_PHASE_STRIP = YES;
 				CPROJECTFLAGS = "-O3 -Wall";
 				LDPROJECTFLAGS = "-s";
 			};

@@ -1,9 +1,0 @@
-!begin_itemize
-
-!index !/begin_verbatim
-!index verbatim-Umgebung
-
-!item Bugfix: Ein sz in einer verbatim-Umgebung wird nun nicht mehr
-durch ein Beta ersetzt (Dietmar Hollenberg).
-
-!end_itemize

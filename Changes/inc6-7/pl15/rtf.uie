@@ -1,8 +1,0 @@
-!begin_itemize
-
-!index !/rtf_propfont_size
-!index !/rtf_monofont_size
-!item New: New commands !/rtf_propfont_size and !/rtf_monofont_size
-to change base font size.
-
-!end_itemize

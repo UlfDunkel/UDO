@@ -228,12 +228,8 @@ GLOBAL BOOLEAN table_add_line ( char *s )
 
 	del_whitespaces(s);
 
-        /* Leerzeilen  und Kommentare nicht bearbeiten */
-        /* [GS] r6pl17 Start */
-        if ( s[0]==EOS || s[0] == '#')
-        /* Ende; alt:
-        if ( s[0]==EOS )
-        */
+	/* Leerzeilen nicht bearbeiten */
+	if ( s[0]==EOS )
 	{	return TRUE;
 	}
 
