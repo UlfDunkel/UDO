@@ -446,8 +446,8 @@ GLOBAL BOOLEAN break_action ( void )
 LOCAL void show_version ( void )
 {
 	fprintf(stdout, "\n%s\n", strPrgname);
-	fprintf(stdout, "Release %s Patchlevel %s for %s, %s %s\n",
-				UDO_REL, UDO_PL, UDO_OS, compile_date, compile_time);
+	fprintf(stdout, "Release %s.%s Patchlevel %s for %s, %s %s\n",
+				UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS, compile_date, compile_time);
 	fprintf(stdout, "%s\n", COPYRIGHT);
 }
 

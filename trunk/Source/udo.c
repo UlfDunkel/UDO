@@ -6449,7 +6449,7 @@ LOCAL void output_preamble ( void )
 			break;
 			
 		case TOLYX:
-			voutlnf("# This file was created by UDO Release %s Patchlevel %s", UDO_REL, UDO_PL);
+			voutlnf("# This file was created by UDO Release %s.%s Patchlevel %s", UDO_REL, UDO_SUBVER, UDO_PL);
 			outln("# UDO (C) 1995-1999 by Dirk Hagedorn (info@dirk-hagedorn.de)");
 			outln("\\lyxformat 2.10");
 			voutlnf("\\textclass %s", (use_style_book) ? "book" : "article");
@@ -6508,7 +6508,7 @@ LOCAL void output_preamble ( void )
 				{	voutlnf("Copyright (c) by %s", titdat.author);
 				}
 				else
-				{	voutlnf("Made with UDO Release %s Patchlevel %s", UDO_REL, UDO_PL);
+				{	voutlnf("Made with UDO Release %s.%s Patchlevel %s", UDO_REL, UDO_SUBVER, UDO_PL);
 				}
 			}
 			
@@ -9396,7 +9396,7 @@ LOCAL void set_format_flags ( void )
 LOCAL void show_udo_intro ( void )
 {
 	show_status_info("");
-	sprintf(sInfMsg, "This is UDO Release %s Patchlevel %s for %s", UDO_REL, UDO_PL, UDO_OS);
+	sprintf(sInfMsg, "This is UDO Release %s.%s Patchlevel %s for %s", UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
 	show_status_loginfo(sInfMsg);
 	show_status_loginfo("Copyright (c) 1995-2001 by Dirk Hagedorn.");
 	sprintf(sInfMsg, "UDO is Open Source (see %s for further information).", UDO_URL);

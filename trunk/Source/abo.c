@@ -129,7 +129,7 @@ LOCAL void output_about_udo_ger ( FILE *f )
 	fprintf(f, "Dieser Text wurde erzeugt mit\n");
 	fprintf(f, "\n");
 	fprintf(f, "(!B)UDO(!b)\t(!nl)\n");
-	fprintf(f, "Release %s Patchlevel %s\t(!nl)\n", UDO_REL, UDO_PL);
+	fprintf(f, "Release %s.%s Patchlevel %s\t(!nl)\n", UDO_REL, UDO_SUBVER, UDO_PL);
 	fprintf(f, "%s\n", UDO_OS);
 	fprintf(f, "\n");
 	fprintf(f, "Copyright (!copyright) 1995-2001 by Dirk Hagedorn\t(!nl)\n");
@@ -159,7 +159,7 @@ LOCAL void output_about_udo_eng ( FILE *f )
 	fprintf(f, "This text was made with\n");
 	fprintf(f, "\n");
 	fprintf(f, "(!B)UDO(!b)\t(!nl)\n");
-	fprintf(f, "Release %s Patchlevel %s\t(!nl)\n", UDO_REL, UDO_PL);
+	fprintf(f, "Release %s.%s Patchlevel %s\t(!nl)\n", UDO_REL, UDO_SUBVER, UDO_PL);
 	fprintf(f, "%s\n", UDO_OS);
 	fprintf(f, "\n");
 	fprintf(f, "Copyright (!copyright) 1995-2001 by Dirk Hagedorn\t(!nl)\n");
