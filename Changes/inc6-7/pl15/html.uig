@@ -1,4 +1,19 @@
 !begin_itemize
-
+!item Trennzeichen ((!V)&shy;(!v)) für die Worttrennung in HTML eingefügt
+!item Gedankenstriche (mdash, ndash) und die drei Auslassungspunkte werden
+      jetzt gesetzt.
+!item Setzen eines allgemeinen Stylesheets
+!item Setzen eines allgemeinen Links auf eine JavaScript-Datei
+!item Setzen eines Links auf ein allgemeines Favoriten-Icon
+!item Setzen der Links für (!T)contents, start, first, previous, prev, next, last(!t)
+      und (!T)copyright(!t) (!nl)
+      Die Links für (!T)first(!t) und (!T)last(!t) sowie (!T)previous(!t) gelten
+      nur für CAB (evtl. iCab). Der Link für (!T)copyright(!t) zeigt auf aboutudo
+      und wird auch nur dann angelegt. (!nl)
+      CAB unterstützt beim Tag (!v)<link>(!v) leider nicht das Attribut (!v)target(!v).
+      Daher funktionieren die Links bei der Benutzung von Frames nicht so schön. (!nl)
+      Diese Links werden ja auch von Mozilla unterstützt.
+!item Bei der benutzung von Frames wird jetzt auch ein Bereich mit <noframes>
+      erzeugt.
 !end_itemize
 
