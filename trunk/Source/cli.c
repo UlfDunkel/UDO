@@ -62,8 +62,11 @@ typedef enum
 LOCAL char		strPrgname[33];	/* der Name dieses Programms */
 LOCAL t_lang	eLanguage;		/* Sprache */
 
-LOCAL BOOLEAN	bHoldKey= FALSE;
-LOCAL BOOLEAN	bShowArgs= FALSE;
+LOCAL BOOLEAN	bHoldKey;
+LOCAL BOOLEAN	bShowArgs;
+LOCAL BOOLEAN   bShowHelp;
+LOCAL BOOLEAN   bShowVersion;
+LOCAL BOOLEAN	bShowIdent;
 
 #define	PRGNAME		"udo"
 #define	COPYRIGHT	"Copyright (c) 1995-2001 by Dirk Hagedorn (UDO is Open Source)"
@@ -108,9 +111,11 @@ LOCAL const CLIOPT cliopt[]=
 	{	"--force-long",		"",			'b',	FALSE,	&bForceLong,		TRUE	},
 	{	"--force-short",	"",			'b',	FALSE,	&bForceShort,		TRUE	},
 	{	"--hold",			"-H",		'b',	FALSE,	&bHoldKey,			TRUE	},
+	{	"--help",			"",			'b',	FALSE,	&bShowHelp,			TRUE	},
 	{	"--helptag",		"-g",		'b',	FALSE,	&desttype,			TOHPH	},
 	{	"--html",			"-h",		'b',	FALSE,	&desttype,			TOHTM	},
 	{	"--htmlhelp",		"-hh",		'b',	FALSE,	&desttype,			TOMHH	},
+	{	"--ident",			"",			'b',	FALSE,	&bShowIdent,		TRUE	},
 	{	"--info",			"-i",		'b',	FALSE,	&desttype,			TOINF	},
 	{	"--ipf",			"",			'b',	FALSE,	&desttype,			TOIPF	},
 	{	"--linuxdoc",		"-x",		'b',	FALSE,	&desttype,			TOLDS	},
@@ -141,6 +146,7 @@ LOCAL const CLIOPT cliopt[]=
 	{	"--tree",			"",			'b',	FALSE,	&bUseTreefile,		TRUE	},
 	{	"--udo",			"-u",		'b',	FALSE,	&desttype,			TOUDO	},
 	{	"--verbose",		"",			'b',	FALSE,	&bVerbose,			TRUE	},
+	{	"--version",		"",			'b',	FALSE,	&bShowVersion,		TRUE	},
 	{	"--vision",			"-v",		'b',	FALSE,	&desttype,			TOTVH	},
 	{	"--win",			"-w",		'b',	FALSE,	&desttype,			TOWIN	},
 	{	"--win4",			"-4",		'b',	FALSE,	&desttype,			TOWH4	},
@@ -650,18 +656,6 @@ LOCAL BOOLEAN getcliopt ( int *counter, const char *arg, const char *argnext, co
 
 	if (!found)
 	{
-		if ( strcmp(arg, "--help")==0 )
-		{	show_help();
-			exit(0);
-		}
-		if ( strcmp(arg, "--version")==0 )
-		{	show_version();
-			exit(0);
-		}
-		if ( strcmp(arg, "--ident")==0 )
-		{	show_ident();
-			exit(0);
-		}
 		if ( arg[0]!='-' )
 		{	strcpy(infile.full, arg);
 			found= TRUE;
@@ -691,7 +685,6 @@ LOCAL BOOLEAN getcliopt ( int *counter, const char *arg, const char *argnext, co
 			}
 			else
 			{	show_unknown(arg);
-				exit(1);
 			}
 		}
 	}
@@ -751,6 +744,11 @@ int main ( int argc, const char *argv[] )
 	bForceLong= FALSE;
 	bForceShort= FALSE;
 	bCheckMisc= FALSE;
+	bHoldKey = FALSE;
+	bShowArgs = FALSE;
+	bShowVersion = FALSE;
+	bShowHelp = FALSE;
+	bShowIdent = FALSE;
 	
 	outfile.full[0]= EOS;
 	infile.full[0]= EOS;
@@ -797,46 +795,55 @@ int main ( int argc, const char *argv[] )
 			fprintf(stdout, "%2d: %s\n", i, argv[i]);
 			i++;
 		}	/*while*/
-		return 0;
-	}
-
-	if ( i==1 || infile.full[0]==EOS )
-	{	/* Leere Kommandozeile uebergeben oder kein Infile*/
-		show_version();
-		show_usage();
-		show_use_help();
-	}
-	else
+	} else if (bShowHelp)
 	{
-		fsplit(infile.full, infile.driv, infile.path, infile.name, infile.suff);
-
-		if (outfile.full[0]!=EOS)
-		{	fsplit(outfile.full, outfile.driv, outfile.path, outfile.name, outfile.suff);
-			if ( strcmp(outfile.name, "!")==0 )
-			{	dest_adjust();
+		show_help();
+	} else if (bShowVersion)
+	{
+		show_version();
+	} else if (bShowIdent)
+	{
+		show_ident();
+	} else
+	{
+		if ( i==1 || infile.full[0]==EOS )
+		{	/* Leere Kommandozeile uebergeben oder kein Infile*/
+			show_version();
+			show_usage();
+			show_use_help();
+		}
+		else
+		{
+			fsplit(infile.full, infile.driv, infile.path, infile.name, infile.suff);
+	
+			if (outfile.full[0]!=EOS)
+			{	fsplit(outfile.full, outfile.driv, outfile.path, outfile.name, outfile.suff);
+				if ( strcmp(outfile.name, "!")==0 )
+				{	dest_adjust();
+				}
+				else
+				{	dest_special_adjust();
+				}
 			}
 			else
-			{	dest_special_adjust();
+			{	bNoLogfile= TRUE;
+				bNoHypfile= TRUE;
+			}
+	
+			if (desttype==TOUDO)
+			{
+				udo2udo(infile.full);
+			}
+			else
+			{	
+				udo(infile.full);	/* <???> informativeren Exitcode ermitteln */
 			}
 		}
-		else
-		{	bNoLogfile= TRUE;
-			bNoHypfile= TRUE;
-		}
-
-		if (desttype==TOUDO)
-		{
-			udo2udo(infile.full);
-		}
-		else
-		{	
-			udo(infile.full);	/* <???> informativeren Exitcode ermitteln */
-		}
 	}
-
+		
 	wait_on_keypress();
 	
-	if (bErrorDetected || get_error_counter() > 0)
+	if (!cliok || bErrorDetected || get_error_counter() > 0)
 	{	return 1;
 	}
 
