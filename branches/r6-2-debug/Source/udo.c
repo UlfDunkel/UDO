@@ -4630,8 +4630,7 @@ GLOBAL void tokcat ( char *s, int maxlen )
 {	/* VJD - diverse Änderungen */
 	register int i;
 	int m=0; /* Länge des bisherigen Strings */
-	char tmp[50];
-
+	
 	for (i=1; i<token_counter; i++)
 	{	/* VJD */
 		m+=strlen(token[i]);
@@ -4645,9 +4644,7 @@ GLOBAL void tokcat ( char *s, int maxlen )
 	}
 	if (m>=maxlen)
 	{
-		printf("Pufferueberlauf erkannt (tokcat): %d>=%d\n", m, maxlen);
-		printf("Press [Enter]\n");
-		gets(tmp);
+			printf("Pufferueberlauf erkannt (tokcat): %d>=%d\n", m, maxlen);
 	}
 }	/*tokcat*/
 
