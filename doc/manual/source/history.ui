@@ -408,6 +408,67 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 
 (!MISS)
 
+!begin_ignore
+!heading Postscript
+# ------------------------------------------------------------------------------
+!begin_description
+#!item [(!NEWS)]
+#!begin_itemize !short
+# ..............................................................................
+#!iflang [german]
+#!item
+#!endif
+# ..............................................................................
+#!iflang [english]
+#!item
+#!endif
+# ..............................................................................
+#!end_itemize
+# ------------------------------------------------------------------------------
+#!smallskip
+#!item [(!CHANGES)]
+#!begin_itemize !short
+# ..............................................................................
+#!iflang [german]
+#!item
+#!endif
+# ..............................................................................
+#!iflang [english]
+#!item
+#!endif
+# ..............................................................................
+#!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize !short
+# ..............................................................................
+!iflang [german]
+!item Bug #0000040 in Version 6.2.2 beseitigt (!nl)
+      Beseitigung mehrerer kleiner Fehler in der Postscript-Ausgabe.
+      Unter anderem wird in der Fußzeile keine Copyright-Zeichen
+      mehr ausgegeben, wenn kein Author gesetzt ist. Die eckigen
+      Klammern werden jetzt gequoted (\[ und \] statt [ und ]).
+      Das Standard-Seitenformat war nicht gesetzt. Für Named Destination
+      wurde der String nicht richtig an die entsprechende Funktion
+      übergeben.
+!endif
+# ..............................................................................
+!iflang [english]
+!item Fixed bug #0000040 in version 6.2.2 (!nl)
+      Fixed many little bugs for postscript output. Among other things
+      the won't be written a copyright sign any longer if there is no
+      author set in !docinfo. The brackets are quoted now (\[ and \]
+      instead of [ and ]). The standard page layout wasn't set. The
+      string for Named Destination wasn't submitted in the right way
+      to a function.
+!endif
+# ..............................................................................
+!end_itemize
+
+!end_description
+!end_ignore
+
 !begin_description
 !iflang [german]
 # !item [Neue Formate:]
@@ -425,9 +486,8 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 # !item [Syntaxänderungen:]
 # 	!begin_itemize !short
 # 	!end_itemize
-# !item [Fehlerbehebungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
+#!item [Bugfixes:]
+#!end_itemize
 !endif
 
 !iflang [english]
@@ -470,47 +530,130 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 (!PUBLISHED [Version~6.2.1] [Dec 9, 2003])
 !endif
 
+!begin_ignore
+!heading PDF-(!LaTeX)
 !begin_description
+# ------------------------------------------------------------------------------
+#!item [(!NEWS)]
+#!begin_itemize !short
+# ..............................................................................
+#!iflang [german]
+#!item 
+#!endif
+# ..............................................................................
+#!iflang [english]
+#!item
+#!endif
+#!end_itemize
+# ------------------------------------------------------------------------------
+#!smallskip
+#!item [(!CHANGES)]
+#!begin_itemize !short
+# ..............................................................................
+#!iflang [german]
+#!item 
+#!endif
+# ..............................................................................
+#!iflang [english]
+#!item
+#!endif
+#!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize !short
+# ..............................................................................
 !iflang [german]
- !item [Fehlerbehebungen:]
- 	!begin_itemize !short
- 	 !item Bug #0000024 in Version 6.2.1 beseitigt (!nl)
- 	       In den <link>-Elementen wurde alle Subsubnodes aus anderen Subnodes
- 	       mit aufgeführt
- 	 !item Bug #0000025 in Version 6.2.1 beseitigt (!nl)
- 	       UDO stürzte ab, wenn Umlaute im Dateinamen oder Domain einer URL
- 	       im Kommando (!/url !..) vorkamen.
- 	 !item Bug #0000029 in Version 6.2.1 beseitigt (!nl)
- 	       Bei (!/url !..) wurde bei der RTF-Ausgabe das führende
- 	       Anführungszeichen und das folgende Wort verschluckt, weil ein
- 	       Leerzeichen fehlte.
- 	 !item Bug #0000030 in Version 6.2.1 beseitigt (!nl)
- 	       Feste Leerzeichen in Links wurden bei der RTF-Ausgabe falsch
- 	       umgesetzt (\\~ statt \~).
-   !item Bug #0000039 in Version 6.2.1 beseitigt (!nl)
-         Obwohl !html_name_prefix gesetzt war, fehlte der entsprechende
-         Zusatz in den <link>-Elementen zur Navigation.
- 	!end_itemize
+!item Wenn PDF-(!LaTeX) als Zielformat gesetzt wird, wird die (!TeX)-Version
+      nicht mehr auf Mik-(!TeX) gesetzt.
+!item Umsetzung der Links für die PDF-(!LaTeX)-Ausgabe geändert.
+!item Umsetzung der PDF-(!LaTeX)-Ausgabe für Bilder geändert.
+!item Die Informationen von (!KW [docinfo]) werden jetzt richtig übergeben für
+      die PDF-(!LaTeX)-Ausgabe.
 !endif
-
+# ..............................................................................
 !iflang [english]
- !item [Bugfixes:]
- 	!begin_itemize !short
-   !item Fixed bug #0000024 in version 6.2.1 (!nl)
-         In the <link> elements are listed all subsubnodes of other subnodes
-   !item Fixed bug #0000025 in version 6.2.1 (!nl)
-         UDO chrashed, when umlauts are used in the filename or domain in
-         the command (!/url !..).
-   !item Fixed bug #0000029 in version 6.2.1 (!nl)
-         By using (!/url !..) for RTF output, the opening quote and the
-         following word were swallowed because of missing blanks.
-   !item Fixed bug #0000030 in version 6.2.1 (!nl)
-         Nonbreaking blanks are converted wrong, when used in a link and for
-         RTF output (\\~ instead of \~).
-   !item Fixed bug #0000039 in version 6.2.1 (!nl)
-         Although !html_name_prefix was set, the prefix was missed in the
-         <link> elements for navigation.
- 	!end_itemize
+!item If the destination is pdf(!LaTeX), the (!TeX) version isn't set to
+      Mik(!TeX) any longer.
+!item Made changes for links and URLs for pdf(!LaTeX) output.
+!item Made changes for images for pdf(!LaTeX) output.
+!item The information of (!KW [docinfo]) ist submitted correct for
+      pdf(!LaTeX) output.
+!endif
+# ..............................................................................
+!end_itemize
+# ------------------------------------------------------------------------------
+!end_description
+
+!heading Richtext Format RTF
+!begin_description
+# ------------------------------------------------------------------------------
+#!item [(!NEWS)]
+#!begin_itemize !short
+# ..............................................................................
+#!iflang [german]
+#!item 
+#!endif
+# ..............................................................................
+#!iflang [english]
+#!item
+#!endif
+#!end_itemize
+# ------------------------------------------------------------------------------
+#!smallskip
+#!item [(!CHANGES)]
+#!begin_itemize !short
+# ..............................................................................
+#!iflang [german]
+#!item 
+#!endif
+# ..............................................................................
+#!iflang [english]
+#!item
+#!endif
+#!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize !short
+# ..............................................................................
+!iflang [german]
+!item Bug #0000024 in Version 6.2.1 beseitigt (!nl)
+      In den <link>-Elementen wurde alle Subsubnodes aus anderen Subnodes
+      mit aufgeführt
+!item Bug #0000025 in Version 6.2.1 beseitigt (!nl)
+      UDO stürzte ab, wenn Umlaute im Dateinamen oder Domain einer URL
+      im Kommando (!/url !..) vorkamen.
+!item Bug #0000029 in Version 6.2.1 beseitigt (!nl)
+      Bei (!/url !..) wurde bei der RTF-Ausgabe das führende
+      Anführungszeichen und das folgende Wort verschluckt, weil ein
+      Leerzeichen fehlte.
+!item Bug #0000030 in Version 6.2.1 beseitigt (!nl)
+      Feste Leerzeichen in Links wurden bei der RTF-Ausgabe falsch
+      umgesetzt (\\~ statt \~).
+!item Bug #0000039 in Version 6.2.1 beseitigt (!nl)
+      Obwohl !html_name_prefix gesetzt war, fehlte der entsprechende
+      Zusatz in den <link>-Elementen zur Navigation.
+!endif
+# ..............................................................................
+!iflang [english]
+!item Fixed bug #0000024 in version 6.2.1 (!nl)
+      In the <link> elements are listed all subsubnodes of other subnodes
+!item Fixed bug #0000025 in version 6.2.1 (!nl)
+      UDO chrashed, when umlauts are used in the filename or domain in
+      the command (!/url !..).
+!item Fixed bug #0000029 in version 6.2.1 (!nl)
+      By using (!/url !..) for RTF output, the opening quote and the
+      following word were swallowed because of missing blanks.
+!item Fixed bug #0000030 in version 6.2.1 (!nl)
+      Nonbreaking blanks are converted wrong, when used in a link and for
+      RTF output (\\~ instead of \~).
+!item Fixed bug #0000039 in version 6.2.1 (!nl)
+      Although !html_name_prefix was set, the prefix was missed in the
+      <link> elements for navigation.
+!endif
+# ..............................................................................
+!end_itemize
 !endif
 !end_description
 
@@ -534,6 +677,52 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 
 (!MISS)
 
+!begin_ignore
+!heading [(!GENERAL)]
+!begin_description !short
+# ------------------------------------------------------------------------------
+!item [(!NEWS)]
+#!begin_itemize !short
+# ..............................................................................
+#!iflang [german]
+#!item 
+#!endif
+# ..............................................................................
+#!iflang [english]
+#!item
+#!endif
+#!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!CHANGES)]
+#!begin_itemize !short
+# ..............................................................................
+#!iflang [german]
+#!item 
+#!endif
+# ..............................................................................
+#!iflang [english]
+#!item
+#!endif
+#!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+#!begin_itemize
+# ..............................................................................
+#!iflang [german]
+#!item 
+#!endif
+# ..............................................................................
+#!iflang [english]
+#!item 
+#!endif
+# ..............................................................................
+#!end_itemize
+# ------------------------------------------------------------------------------
+!end_description
+!end_ignore
+
 !begin_description
 !iflang [german]
 # !item [Neue Formate:]
@@ -577,7 +766,6 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 # 	!end_itemize
 !endif
 !end_description
-
 
 !end_node
 
@@ -599,6 +787,102 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 
 (!MISS)
 
+!begin_ignore
+!heading [(!GENERAL)]
+!begin_description !short
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!NEWS)]
+#!begin_itemize !short
+# ..............................................................................
+#!iflang [german]
+#!item 
+#!endif
+# ..............................................................................
+#!iflang [english]
+#!item
+#!endif
+#!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!CHANGES)]
+#!begin_itemize !short
+# ..............................................................................
+#!iflang [german]
+#!item 
+#!endif
+# ..............................................................................
+#!iflang [english]
+#!item
+#!endif
+#!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize
+# ..............................................................................
+!iflang [german]
+!item Bug #0000003 in Release 6 Patchlevel 17 beseitigt (!nl)
+      Die Meldung ""Letzte Änderung am!.."" kommt jetzt mit den richtigen
+      französischen Umlauten.
+!endif
+# ..............................................................................
+!iflang [english]
+!item Fixed bug #0000003 in release 6 patchlevel 17 (!nl)
+      The update message ""Last updated on!.."" has the correct french
+      umlauts.
+!endif
+# ..............................................................................
+!end_itemize
+!end_description
+!medskip
+!heading Richtext Format RTF
+!begin_description !short
+# ------------------------------------------------------------------------------
+!item [(!NEWS)]
+#!begin_itemize !short
+# ..............................................................................
+#!iflang [german]
+#!item 
+#!endif
+# ..............................................................................
+#!iflang [english]
+#!item
+#!endif
+#!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!CHANGES)]
+#!begin_itemize !short
+# ..............................................................................
+#!iflang [german]
+#!item 
+#!endif
+# ..............................................................................
+#!iflang [english]
+#!item
+#!endif
+#!end_itemize
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize
+# ..............................................................................
+!iflang [german]
+!item Speicherbedarf von URLs bei der RTF-Ausgabe auf 4096 Zeichen intern
+      (d.h. 1024 Zeichen können vom Benutzer angegeben werden) erhöht.
+!endif
+# ..............................................................................
+!iflang [english]
+!item Memory for URL's increased up to 4096 internally (i.e. the user can
+      put 1024 characters) for RTF output.
+!endif
+# ..............................................................................
+!end_itemize
+!end_description
+!end_ignore
+
 !begin_description
 !iflang [german]
 # !item [Neue Formate:]
@@ -642,7 +926,6 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 # 	!end_itemize
 !endif
 !end_description
-
 
 !end_node
 
