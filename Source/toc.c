@@ -11069,6 +11069,12 @@ LOCAL BOOLEAN save_the_map ( const char *filename, const char *suffix, tWinMapDa
 	if (!file)
 	{	return FALSE;
 	}
+	/* v6.9.10 [me] Einen Puffer zur Beschleunigung zuordnen */
+
+	if( file!=NULL )
+
+		setvbuf(file, NULL, _IOFBF, 8192);
+
 
 	save_upr_entry_outfile(f);
 	

@@ -99,7 +99,7 @@ GLOBAL MYTEXTFILE *myTextOpen ( const char *filename )
 	/*             wenn diese gem. den Konventionen einer anderen   */
 	/*             Plattform codiert sind. Daher Ausweichen auf     */
 	/*             fread und selbst '\n' und '\r' erkennen. Dazu    */
-	/*             muž hier di datei bin„r ge”ffnet werden!         */
+	/*             muž hier die Datei bin„r ge”ffnet werden!         */
 	/*tf->file= fopen(filename, "r");*/
 	tf->file= fopen(filename, "rb");
 
@@ -108,6 +108,9 @@ GLOBAL MYTEXTFILE *myTextOpen ( const char *filename )
 		um_free(tf);
 		tf= NULL;
 	}
+
+	setvbuf(tf->file, NULL, _IOFBF, 8192);
+
 
 #endif
 
@@ -188,16 +191,17 @@ GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf )
 		/*             Plattform codiert sind. Daher Ausweichen auf     */
 		/*             fread und selbst '\n' und '\r' erkennen.         */
 		/* if (fgets(string, n, tf->file) == NULL)*/
-		sl = fread(string, sizeof(*string), n, tf->file);
+		sl = fread(string, sizeof(*string), n - 1, tf->file);
 		if( sl<1 )
 		{
 			return NULL;
 		}
 		string[sl] = '\0';
 		
-		/* v6.5.8 [me] den String am Ende der Zeile krzen und */
+		/* v6.5.9 [me] den String am Ende der Zeile krzen und */
 		/*             die passende Anzahl von Zeichen wieder  */
 		/*             in den Input-Stream stellen.            */
+
 		for( s_ptr=string ; *s_ptr!='\n' && *s_ptr!='\r' && *s_ptr!='\0' ; s_ptr++ )
 		{
 			/* Reine Z„hlschleife, daher gibt es hier nichts zu tun */
@@ -207,13 +211,16 @@ GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf )
 		if( *s_ptr=='\n' || *s_ptr=='\r' )
 		{
 			/* Den zu verarbeitenden String abteilen */
+
+			char ch = *s_ptr;
 			*(s_ptr++) = '\0';
 			
-			/* Das n„chste zu lesende Zeichend er neuen Zeile suchen */
-			for( ; *s_ptr=='\n' || *s_ptr=='\r' ; s_ptr++ )
-			{
-				/* Reine Z„hlschleife, daher gibt es hier nichts zu tun */
-			}
+			/* Das n„chste zu lesende Zeichen der neuen Zeile suchen */
+
+			if( (*s_ptr=='\n' || *s_ptr=='\r') && *s_ptr!=ch )
+
+				s_ptr++;
+
 			
 			/* Nun genau so viele Zeichen zurckgeben, wie nun in s_ptr zu viel gelesen wurden */
 			fseek(tf->file, -strlen(s_ptr), SEEK_CUR);
@@ -467,6 +474,13 @@ GLOBAL FILE * myFwopen ( const char *filename, const int filetype )
 #else
 	UNUSED(filetype);
 #endif
+	/* v6.9.10 [me] Einen Puffer zur Beschleunigung zuordnen */
+
+	if( file!=NULL )
+
+		setvbuf(file, NULL, _IOFBF, 8192);
+
+	
 
 	return file;
 }	/* myFwopen */
@@ -485,6 +499,12 @@ GLOBAL FILE * myFwbopen ( const char *filename, const int filetype )
 #else
 	UNUSED(filetype);
 #endif
+	/* v6.9.10 [me] Einen Puffer zur Beschleunigung zuordnen */
+
+	if( file!=NULL )
+
+		setvbuf(file, NULL, _IOFBF, 8192);
+
 
 	return file;
 }	/* myFwbopen */
