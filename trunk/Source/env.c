@@ -3319,8 +3319,11 @@ GLOBAL void c_begin_document ( void )
 			/* Document info */
 			voutlnf("[ /Title (%s %s)", titdat.title, titdat.program);
 			voutlnf("  /Author (%s)", titdat.author);
-			voutlnf("  /Subject (%s)", titdat.description);
-			voutlnf("  /Keywords (%s)", titdat.keywords); /* Set by !docinfo [keywords] foo */
+			/* Changed: Fixed bug #0000062 in V6.5.8 [NHz] */
+			if(titdat.description)
+				voutlnf("  /Subject (%s)", titdat.description);
+			if(titdat.keywords)
+				voutlnf("  /Keywords (%s)", titdat.keywords); /* Set by !docinfo [keywords] foo */
 			voutlnf("  /Creator (UDO Version %s.%s.%s for %s)", UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
 			voutlnf("  /CreationDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
 			voutlnf("  /ModDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
