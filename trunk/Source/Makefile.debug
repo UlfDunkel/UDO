@@ -1,12 +1,14 @@
 ###########################################################
-# @(#) Makefile fuer Debian
-# @(#) Volker Janzen 08.11.03
+# @(#) Makefile fuer Linux (i86)
+# @(#) Dirk Hagedorn, 27.06.1996
 ###########################################################
 CC = gcc 
 O=.o
 X=
 
-CFLAGS = -O2 -Wall -D__LINUX__ $(XCFLAGS)
+# For debugging reasons -ggdb is added to get full debug info for ddd
+# (added by voja)
+CFLAGS = -ggdb -O2 -Wall -D__LINUX__ $(XCFLAGS)
 
 #CFLAGS =	-g -O2 -D__LINUX__ \
 #-Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations \
@@ -14,10 +16,6 @@ CFLAGS = -O2 -Wall -D__LINUX__ $(XCFLAGS)
 #-Wconversion -pedantic 
 
 LDFLAGS = 
-
-# For Debian: Where to put binary on 'make install'?
-DESTDIR =
-BIN     = $(DESTDIR)/usr/bin
 
 include makefile.in
 
