@@ -1,4 +1,5 @@
-ToDo:
+ToDo: [[diese Datei gehört nicht in die UDO-Distribution]]
+====
 
 die Doku für möglichst viele verschiedene Ausgabeformate zum Laufen bringen
 
@@ -11,3 +12,5 @@ viele in den Doku-Text eingestreute ToDo-Kommentare abarbeiten
 Formatierungen in history.ui verbessern, HTML schaut nicht gut aus
 
 die Beispieldateien im Exemples-Verzeichnis überprüfen + ggf. aktualisieren
+
+Installationsanleitung Unix/Linux bzgl. deb- und rpm-Paket erweitern
