@@ -1933,6 +1933,33 @@ LOCAL BOOLEAN html_make_file ( void )
 	}
 #endif
 
+/* [vj] 6.3-xmas mein neuer Code dafür... */
+#ifdef USE_HTML_FOLDERS
+	if (html_use_folders)
+	{
+		if (toc[p2_toc_counter]->dirname[0]!=EOS)
+		{
+			sprintf(outfile.path, "%s%s", old_outfile.path, toc[p2_toc_counter]->dirname);
+		
+			if (toc[p2_toc_counter]->toctype==TOC_NODE1)
+			{	/* Verzeichnis anlegen, falls nicht vorhanden */
+				if (toc[p2_toc_counter]->n2==0 && toc[p2_toc_counter]->n3==0 && toc[p2_toc_counter]->n4==0)
+				{	char sDir[512];
+					sprintf(sDir, "%s%s", outfile.driv, outfile.path);
+					my_mkdir(sDir); /* Funktioniert für Linux nicht richtig */
+				}
+			}
+
+			if (outfile.path[0]!=EOS)
+			{
+				strcat(outfile.path, "/"); /* Hier muß das noch OS-Unabhängig gemacht werden */
+			}
+		
+			printf("Name: %s, Pfad: %s\nOut: %s\n", toc[p2_toc_counter]->name, toc[p2_toc_counter]->dirname, outfile.path);
+		}
+	}
+#endif
+
 	/* New in r6pl16 [NHz] */
 	{
 		char dummy[MAX_TMP_NX], name[MAX_TMP_NX], suff[MAX_TMP_NX]; /* v6.3.12 [vj] See constant definition in get_html_filename */
