@@ -3526,7 +3526,7 @@ GLOBAL void init_env_itemchar ( void )
 				strcpy(itemchar[1], "\374");
 #endif
 
-#if defined(__MACOS__) || defined(__BEOS__)
+#if defined(__MACOS__) || defined(__MACOSX__) || defined(__BEOS__)
 				strcpy(itemchar[1], "\245");
 #endif
 

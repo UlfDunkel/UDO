@@ -97,7 +97,12 @@
 /*	--------------------------------------------------------------	*/
 
 #ifdef __MACOS__
-	#define __AddLFToNL__ 0	/* solange es keinen HCP auf dem Mac gibt notwendig */
+#define __AddLFToNL__ 0	/* solange es keinen HCP auf dem Mac gibt notwendig */
+#endif
+
+/*	--------------------------------------------------------------	*/
+
+#ifdef __MACOSX__
 #endif
 
 /*	--------------------------------------------------------------	*/
