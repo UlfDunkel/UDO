@@ -1229,7 +1229,8 @@ LOCAL void c_link ( char *s, BOOLEAN inside_b4_macro )
 LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 {
 	int pnr=0, url_len, i;
-	char s_entry[1024], url_rtf[512], rtf0[4];
+	/* Changed in r6pl17 [NHz] / s_entry (1024 to 4096 bytes), url_rtf (512 to 2048 bytes) */
+	char s_entry[4096], url_rtf[2048], rtf0[4];
 
 	char rtf1[]="00d0c9ea79f9bace118c8200aa004ba90b0200000017000000";
 	char rtf2[]="0000e0c9ea79f9bace118c8200aa004ba90b";
