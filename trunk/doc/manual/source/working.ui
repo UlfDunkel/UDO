@@ -1,5 +1,5 @@
 # doc/manual/source/working.ui
-# letzte Änderungen: 04.01.2004 / last changes: Jan 4, 2004
+# letzte Änderungen: 11.05.2004 / last changes: May 11, 2004
 
 
 ################################################################################
@@ -625,20 +625,20 @@ Von UDO existieren momentan Versionen für folgende Systeme:
 
 !begin_itemize !short
 !item Atari TOS
+# !item	BeOS
 !item DOS, OS/2, Windows
-!item HP-UX 9.x auf HP-Rechnern der 300/400er und 700/800er Baureihe
-!item Linux i86
+# !item HP-UX 9.x auf HP-Rechnern der 300/400er und 700/800er Baureihe
+!item Linux x86
 !item MacOS
-!item NeXTStep
-!item Sinix
-!item SunOS 5.5
+# !item NeXTStep
+# !item Sinix
+# !item SunOS 5.5
 !end_itemize
 
 UDO wurde komplett in C geschrieben, verzichtet vollkommen auf
-betriebssystemspezifische Routinen. Dadurch könnte die Kommandozeilenversion von UDO theoretisch auf jedes beliebige System
-portiert werden, für das ein ANSI-C-Compiler existiert.
+betriebssystemspezifische Routinen. Dadurch könnte die Kommandozeilenversion von UDO theoretisch auf jedes beliebige System portiert werden, für das ein ANSI-C-Compiler existiert.
 
-Wenn Sie an einer Portierung auf ein bestimmtes System interessiert sind und einen Compiler für dieses System besitzen, so schreiben Sie (!link [mir] [Kontaktadresse]) einfach mal.
+Wenn Sie an einer Portierung auf ein bestimmtes System interessiert sind und einen Compiler für dieses System besitzen, so (!link [kontaktieren] [Kontaktadresse]) Sie bitte die UDO-Entwickler.
 
 !endif
 # ------------------------------------------------------------------------------
@@ -649,18 +649,21 @@ At the moment UDO is available for the following operating systems:
 
 !begin_itemize !short
 !item	Atari TOS
-!item	BeOS
+# !item	BeOS
 !item	DOS, OS/2, Windows
-!item	HP-UX 9.x for 300/400 and 700/800 models
-!item	Linux i86
+# !item	HP-UX 9.x for 300/400 and 700/800 models
+!item	Linux x86
 !item	MacOS
-!item	NeXTStep
-!item	SINIX
+# !item	NeXTStep
+# !item	SINIX
+# !item SunOS 5.5
 !end_itemize
 
 UDO was completely written in highly portable C. The source code doesn't
 call any system specific functions. Due to this fact UDO could be ported to
 any operating system a C compiler is existing for.
+
+If you would like to port UDO to a system which isn't listed above, please (!link [contact] [Contact addresses]) the UDO developer team.
 !endif
 
 ############################################################
