@@ -695,6 +695,93 @@ LOCAL void table_output_win ( void )
 }	/* table_output_win */
 
 
+
+LOCAL void test_for_addition(char *cell)
+
+{
+
+	char *found2 = NULL, *tok = NULL;
+
+
+
+/*		found2 = strstr(tab_cell[y][x], "COLS=");
+
+		if(found2 != NULL)
+
+		{	strcat(addition, " colspan=\"");
+
+			strncat(addition, found2+5, 1L);
+
+			strcat(addition, "\"");
+
+			col=TRUE;
+
+		}
+
+*/
+
+puts(cell);
+
+
+
+	tok = strtok(cell, " , ");
+
+	while(tok)
+
+	{
+
+puts(tok);
+
+		found2 = strstr(tok, "COLS=");
+
+		if(found2 != NULL)
+
+		{	strcat(addition, " colspan=\"");
+
+			strncat(addition, found2+5, 1L);
+
+			strcat(addition, "\"");
+
+		}
+
+
+
+		found2 = strstr(tok, "BGC=");
+
+		if(found2 != NULL)
+
+		{	strcat(addition, " bgcolor=\"");
+
+			strcat(addition, found2+4);
+
+			strcat(addition, "\"");
+
+		}
+
+
+
+		found2 = strstr(tok, "HA=");
+
+		if(found2 != NULL)
+
+		{	strcat(addition, " align=\"");
+
+			strcat(addition, found2+3);
+
+			strcat(addition, "\"");
+
+		}
+
+
+
+		tok = strtok(NULL, ",");
+
+	}
+
+
+
+}	/* test_for_addition */
+
 LOCAL void table_output_html ( void )
 {
 	int		y, x;
@@ -740,12 +827,35 @@ LOCAL void table_output_html ( void )
 	for (y=0; y<=tab_h; y++)
 	{	outln("<tr>");
 		for (x=0; x<=tab_w; x++)
-		{	switch(tab_just[x])
+		{	/* New in r6pl16 [NHz] */
+
+			char *found = NULL, *token = NULL;
+
+			addition[0] = EOS;
+
+			found = strstr(tab_cell[y][x], "!?");
+
+			if(found != NULL)
+
+			{	strncpy(token, tab_cell[y][x], strcspn(tab_cell[y][x], "!"));
+
+				test_for_addition(token);
+
+				tab_cell[y][x] = found+2;
+
+			}
+
+			switch(tab_just[x])
+			{	case TAB_CENTER:	voutf("  <td align=\"center\" valign=\"top\"%s>", addition);	break;
+				case TAB_RIGHT:		voutf("  <td align=\"right\" valign=\"top\"%s>", addition);	break;
+				default:			voutf("  <td align=\"left\" valign=\"top\"%s>", addition);	break;
+			}
+/*			switch(tab_just[x])
 			{	case TAB_CENTER:	out("  <td align=center valign=top>");	break;
 				case TAB_RIGHT:		out("  <td align=right valign=top>");	break;
 				default:			out("  <td align=left valign=top>");	break;
 			}
-			out(sHtmlPropfontStart);
+*/			out(sHtmlPropfontStart);
 			if ( tab_cell[y][x]!=NULL )
 			{	strcpy(f, tab_cell[y][x]);
 				auto_quote_chars(f, FALSE);
@@ -940,18 +1050,41 @@ LOCAL void table_output_ipf ( void )
 
 LOCAL void table_output_general ( void )
 {
-	int		y, x, i, offset;
+	int		y, x, i, j, offset, indent;
 	char	s[512], f[512], stg_vl[32];
-	char	hl[3][512];
+	char	hl[3][512], space[50];
 	char	hl_l[3][2], hl_c[3][2], hl_v[3][2], hl_r[3][2];
 	char	vc_l[2], vc_m[2], vc_r[2];
 	size_t	tl, add, twidth, toffset, isl;
 	BOOLEAN	tortf, tosrc, ansichars, align_caption;
 	BOOLEAN inside_center, inside_right, inside_left;
 
+
 	inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);
 	inside_right= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_RIGH);
 	inside_left= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_LEFT);
+
+
+	/* New in r6pl15 [NHz] */
+	for(j=1;j<=iEnvLevel;j++)
+
+	{
+
+		if(iEnvType[j] == ENV_CENT)
+
+			inside_center = TRUE;
+
+		if(iEnvType[j] == ENV_RIGH)
+
+			inside_right = TRUE;
+
+		if(iEnvType[j] == ENV_LEFT)
+
+			inside_left = TRUE;
+
+	}
+
+
 
 	if (!inside_center && !inside_right && !inside_left)
 	{
@@ -961,8 +1094,17 @@ LOCAL void table_output_general ( void )
 				inside_center= TRUE;	break;
 			case ALIGN_RIGH:
 				inside_right= TRUE;		break;
+			default:
+
+				indent=strlen_indent();	break;
 		}
 	}
+
+	/* New in r6pl15 [NHz] */
+	else if(inside_left == TRUE)
+
+		indent=strlen_indent();
+
 
 	
 	/* PL7: MAXZEILE durch zDocParwidth ersetzt */
@@ -1071,13 +1213,35 @@ LOCAL void table_output_general ( void )
 			strcpy(vc_r, "|");
 		}
 
+		/* New in r6pl15 [NHz] */
+
+		/* If the table is inside an environment */
+		space[0] = EOS;
+
+		if(indent > 0)
+
+		{
+
+			for(i=0;i<indent;i++)
+				strcat(space, " ");
+
+		}
+
+
+
 		/* ----------------------------- */
 		/* Trennlinie(n) zusammenstellen */
 		/* 0= top, 1=middle, 2=bottom    */
 		/* ----------------------------- */
 
 		for (y=0; y<3; y++)
-		{	hl[y][0]= EOS;
+		{	
+
+			hl[y][0]= EOS;
+
+			/* New in r6pl15 [NHz] */
+			strcat(hl[y], space);
+
 
 			/* New in r6pl15 [NHz] */
 			/* Begin of a table-line in postscript */
@@ -1146,6 +1310,10 @@ LOCAL void table_output_general ( void )
 
 	for (y=0; y<=tab_h; y++)
 	{	s[0]= EOS;
+
+		/* New in r6pl15 [NHz] */
+		strcat(s, space);
+
 
 		/* New in r6pl15 [NHz] */
 		/* Begin of a table-line in postscript */
