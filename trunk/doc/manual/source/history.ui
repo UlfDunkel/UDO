@@ -1,5 +1,5 @@
 # doc/manual/source/history.ui
-# letzte Änderungen: 24.01.2004 / last changes: Jan 24, 2004
+# letzte Änderungen: 29.01.2004 / last changes: Jan 29, 2004
 
 
 !iflang [german]
@@ -17,54 +17,6 @@ die zwischen den einzelnen Versionen von UDO aufgetreten sind.
 !iflang [english]
 In this chapter you will find a short summary of all the changes in the past.
 !endif
-
-#### ************** Leerstruktur für Release-/Versions-Abschnitt (Kopiervorlage)
-# Kommentarzeichen vor jeweils benötigten Zeilen dann nach Bedarf entfernen
-!begin_ignore
-!begin_description
-!iflang [german]
-# !item [Neue Formate:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Neue Befehle:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Neuheiten:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Änderungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Syntaxänderungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Fehlerbehebungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
-!endif
-
-!iflang [english]
-# !item [New destination formats:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [New commands:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [News:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Changes:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Syntax changes:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Bugfixes:]
-# 	!begin_itemize !short
-# 	!end_itemize
-!endif
-!end_description
-!end_ignore
 
 ################################################################################
 !begin_ignore
@@ -111,127 +63,214 @@ wird unterstützt.
 !html_name history_6-4-0_to_6-6-0.html
 
 !iflang [german]
-(!PUBLISHED [Version~6.6.0] [unveröffentlicht])
+Die Produktionsversion 6.6.0 wurde noch nicht veröffentlicht. Die in diesem Abschnitt beschriebenen
+Änderungen stehen derzeit nur in den jeweiligen Entwicklerversionen zur Verfügung.
+# (!PUBLISHED [Version~6.6.0] [unveröffentlicht])
 !endif
+# ------------------------------------------------------------------------------
 !iflang [english]
-(!PUBLISHED [Version~6.6.0] [unpublished])
+The (stable) production version 6.6.0 wasn't released yet.
+The changes which are documented in this section are currently only available in the apropriate
+developer versions.
+# (!PUBLISHED [Version~6.6.0] [unpublished])
 !endif
 
-(!MISS)
 
-!begin_description
+# Anmerkung U.K. 29.1.04: ich möchte hier den deutschen und den englischen Text
+# zwecks Textvergleich/Übersetzung möglichst nahe beinander stehen haben.
+# Allerdings wird es mit den verschachtelten Umgebungen strukturell arg unübersichtlich.
+
+
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+!heading (!GENERAL)
+!begin_description !short
+# ------------------------------------------------------------------------------
+!begin_ignore
+!item [(!NEWS)]
+!begin_itemize !short
+# ..............................................................................
+# ..............................................................................
+!end_itemize
+!end_ignore
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!CHANGES)]
+!begin_itemize !short
+# ..............................................................................
 !iflang [german]
-# !item [Neue Formate:]
-# 	!begin_itemize !short
-# 	!end_itemize
- !item [Neue Befehle:]
- 	!begin_itemize !short
-   !item (!T)!/html_header_links <text>(!t) (!nl)
-         Ist dieser Schalter gesetzt werden je nach Vorgabe die <link>-Elemente
-         erzeugt. Beinhaltet <text> ""navigation"" werden die Links zur
-         Navigation erzeugt. Beinhaltet <text> ""chapter"", werden alle Links
-         zu den Kapiteln erzeugt.
-   !item (!T)!/html_header_date <text>(!t) (!nl)
-         Wenn dieser Schalter gesetzt ist, wird ein META-Tag für das
-         Erzeugungsdatum erzeugt. Ist <text> leer, wird für den
-         Zeitzonenunterschied ""+00:00"" gesetzt. Ansonsten kann der
-         Benutzer für <text> den gewünschten Unterschied in der
-         Zeitzone setzen.
- 	!end_itemize
- !item [Neuheiten:]
- 	!begin_itemize !short
-   !item Die UDO Community ist im Werbeblock ergänzt worden (About UDO).
- 	!end_itemize
- !item [Änderungen:]
- 	!begin_itemize !short
-   !item Die Bezeichnung der einzelnen Version wurde geändert. Es heißt
-         jetzt nicht mehr "Release 6.x Patchlevel xx" sondern "Version 6.4.x".
-   !item Feature #0000053 in Version 6.5.2 implementiert (!nl)
-         Die <link>-Elemente für Navigation und Kapitel werden nicht mehr
-         automatisch sondern nur auf Anforderung erzeugt (siehe Neue Befehle).
-   !item Feature #0000054 in Version 6.5.2 implementiert (!nl)
-         Es wird ein META-Tag für das Erzeugungsdatum geschrieben (siehe
-         Neue Befehle).
- 	!end_itemize
-# !item [Syntaxänderungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
- !item [Fehlerbehebungen:]
- 	!begin_itemize !short
- 	 !item Bug #0000044 in Version 6.4.1 beseitigt (!nl)
- 	       Wenn !no_numbers gesetzt ist, werden jetzt keine Nummern mehr vor
- 	       die Kapitel innerhalb des <link>-Elementes geschrieben.
-   !item Bug #0000048 in Version 6.4.1 beseitigt (!nl)
-         Kommando fehlte in der Kommandoliste.
-   !item Bug #0000056 in Version 6.4.1 beseitigt (!nl)
-         Versehentlich wurde dem Parameter "Höhe" auch die Breite übergeben.
-   !item Bug #0000017 in Version 6.4.1 beseitigt (!nl)
-         Wenn beim ersten Übersetzungslauf nach RTF das UDO-Link Bild noch
-         nicht vorhanden ist, wird jetzt ein Hinweis ausgegeben statt des
-         Fehlers, der darauf hinweist, mit der Bitte, das Dokument ein
-         weiteres Mal zu übersetzen. (!nl)
-         Das UDO-Bild wird jetzt auch auf TOS-kompatiblen Computern gefunden.
-   !item Bug #0000055 in Version ? beseitigt (!nl)
-         Umlaute, die in eingebetteten Bildern (!/img !...) oder Bildlinks
-         (!/ilink !..) vorkommen, wurden nicht richtig umgesetzt.
- 	!end_itemize
+!item Die "UDO Community" ist im Werbeblock ergänzt worden (About UDO).
+# U.K. 28.1.04: bitte verständlich ausdrücken. Unklar, was gemeint ist?
+# anscheinend der bei !use_about_udo ausgegebene Texte ?!
 !endif
-
 !iflang [english]
-# !item [New destination formats:]
-# 	!begin_itemize !short
-# 	!end_itemize
- !item [New commands:]
- 	!begin_itemize !short
-   !item (!T)!/html_header_links <text>(!t) (!nl)
-         If this command is set, several <link> elements are generated.
-         if <text> contains ""navigation"", links for navigation are
-         generated. If <text> contains ""chapter"", links for all nodes
-         are generated.
-   !item (!T)!/html_header_date <text>(!t) (!nl)
-         If this command is set, a meta element for the bulding date is
-         generated. Is <text> empty, the value for the delta of the time
-         zone is set to ""+00:00"". Otherwise the user can set the time
-         zone himself.
- 	!end_itemize
- !item [News:]
- 	!begin_itemize !short
-   !item The UDO Community is added to the advertisement (About UDO).
- 	!end_itemize
- !item [Changes:]
- 	!begin_itemize !short
-   !item The nomenclature of UDO was changed. It's called "Version 6.4.x"
-         instead of "Release 6.x Patchlevel xx" now.
-   !item Feature #0000053 implemented in Version 6.5.2 (!nl)
-         The <link> elements for navigation and chapters are not generated
-         automatically any longer but on demand (see new commands).
-   !item Feature #0000054 implemented in Version 6.5.2 (!nl)
-         There will be generated a META-Tag for the build date (see
-         new commands).
- 	!end_itemize
-# !item [Syntax changes:]
-# 	!begin_itemize !short
-# 	!end_itemize
- !item [Bugfixes:]
- 	!begin_itemize !short
- 	 !item Fixed bug #0000044 in version 6.4.1 (!nl)
- 	       If !no_numbers is set, there won't be print numbers in front of a
- 	       node in <link> elements any longer
- 	 !item Fixed bug #0000048 in version 6.4.1 (!nl)
- 	       Command wasn't listed in the command list.
-   !item Fixed bug #0000056 in version 6.4.1 (!nl)
-         By an inadvertance the parameter "height" was covered with the width
-   !item Fixed bug #0000017 in version 6.4.1 (!nl)
-         When a documented is translated to RTF for the first time and the
-         UDO link image doesn't exist, there will be a note in the logfile,
-         that the user might translate the document again to complete it. (!nl)
-         The image will be found now on TOS compatible computers too.         
-   !item Fixed bug #0000055 in version ? (!nl)
-         Umlauts, which are used in embedded images (!/img !..) or image
-         links (!/ilink !..), were not converted in the right way.
- 	!end_itemize
+!item The UDO Community is added to the advertisement (About UDO).
 !endif
+# ..............................................................................
+!iflang [german]
+!item Die Bezeichnung der einzelnen Versionen wurde geändert. Es heißt
+jetzt nicht mehr "Release 6.x Patchlevel yy" sondern "Version 6.x.y"
+(x gerade für Produktionsversionen bzw. ungerade für Entwicklerversionen von UDO).
+!endif
+!iflang [english]
+!item The nomenclature of UDO was changed. It's called "Version 6.4.x"
+         instead of "Release 6.x Patchlevel xx" now.
+# U.K. engl. Texte noch ergänzen
+!endif
+# ..............................................................................
+!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize !short
+# ..............................................................................
+!iflang [german]
+!item Bug #0000055 in Version ..?.. beseitigt (!nl)
+    Umlaute, die in eingebetteten Bildern (!/img !...) oder Bildlinks
+    (!/ilink !..) vorkamen, wurden nicht richtig umgesetzt.
+!endif
+!iflang [english]
+!item Fixed bug #0000055 in version ..?.. (!nl)
+    Umlauts, which are used in embedded images (!/img !..) or image
+    links (!/ilink !..), were not converted in the right way.
+!endif
+# ..............................................................................
+!iflang [german]
+!item Bug #0000048 in Version~6.4.1 beseitigt (!nl)
+   Kommando fehlte in der Kommandoliste.
+!endif
+!iflang [english]
+!item Fixed bug #0000048 in version~6.4.1 (!nl)
+    Command wasn't listed in the command list.
+!endif
+# ..............................................................................
+!iflang [german]
+!item Bug #0000056 in Version~6.4.1 beseitigt (!nl)
+   Versehentlich wurde dem Parameter "Höhe" die Breite übergeben.
+!endif
+!iflang [english]
+!item Fixed bug #0000056 in version~6.4.1 (!nl)
+   By an inadvertance the parameter "height" was covered with the width.
+!endif
+# ..............................................................................
+!end_itemize
 !end_description
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+!medskip
+!heading Hypertext Markup Language (HTML)
+!begin_description !short
+# ------------------------------------------------------------------------------
+!item [(!NEWS)]
+!begin_itemize !short
+# ..............................................................................
+!iflang [german]
+!item (!T)!/html_header_links <text>(!t) (!nl)
+   Ist dieser Schalter gesetzt, so werden je nach Vorgabe
+   (!T)<link>(!t)-Elemente im HTML-Header erzeugt.
+   Beinhaltet (!T)<text>(!t) ""navigation"", werden die Links zur Navigation erzeugt.
+   Beinhaltet (!T)<text>(!t) ""chapter"", werden alle Links zu den Kapiteln erzeugt. (!nl)
+# U.K. 28.1.04: Beispiele (aus der UDO-HTML-Doku) bringen. Erklären, was erzeugt wird, wenn
+# !html_header_links *nicht* gesetzt ist (+ Beispiel).
+# Schalter nur im Vorspann zulässig? (anhand Maildebatte ergänzen)
+   Die <link>-Elemente für Navigation und Kapitel werden nicht mehr automatisch,
+   sondern nur auf Anforderung erzeugt. Dadurch entstehen kleinere HTML-Dateien. (!nl)
+   Dieser Feature-Wunsch #0000053 ist seit Version 6.5.2 implementiert.
+!endif
+!iflang [english]
+!item (!T)!/html_header_links <text>(!t) (!nl)
+   If this command is set, several <link> elements are generated.
+   if <text> contains ""navigation"", links for navigation are generated.
+   If <text> contains ""chapter"", links for all nodes are generated. (!nl)
+   This feature wish #0000053 has been implemented since version 6.5.2.
+!endif
+# ..............................................................................
+!iflang [german]
+!item (!T)!/html_header_date <text>(!t) (!nl)
+   Wenn dieser Schalter gesetzt ist, wird im HTML-Header ein META-Tag für das
+   Erzeugungsdatum erzeugt (anstatt des bisherigen Kommentars mit dem Erzeugungsdatum).
+   Ist <text> leer, wird für den Zeitzonenunterschied ""+00:00"" gesetzt. Ansonsten kann der
+   Benutzer für <text> den gewünschten Unterschied in der Zeitzone setzen. (!nl)
+   Dieser Feature-Wunsch #0000054 ist seit Version~6.5.2 implementiert.
+!endif
+!iflang [english]
+!item (!T)!/html_header_date <text>(!t) (!nl)
+   If this switch is set, a META element for the building date is generated in the HTML Header.
+   If <text> is empty, the value for the delta of the time zone is set to ""+00:00"".
+   Otherwise the user can set the time zone on its own. (!nl)
+   This feature wish #0000054 has been implemented since version 6.5.2.
+!endif
+# ..............................................................................
+!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!CHANGES)]
+!begin_itemize !short
+# ..............................................................................
+!iflang [german]
+!item Die <link>-Elemente für die Navigation werden nicht mehr automatisch, sondern
+   nur noch auf Anforderung in den HTML-Header geschrieben (siehe oben).
+!item Datum/Uhrzeit der Erzeugung der HTML-Datei wird nicht mehr als Kommentar, sondern
+als META-Tag in den HTML-Header geschrieben (siehe oben).
+!endif
+!iflang [english]
+!item Creation date/time of the HTML file will be written as META Tag into the HTML header
+(instead of the former comment). See above.
+!item The <link> elements for navigation and chapters are not generated
+    automatically any longer but on demand (see above).
+!endif
+# ..............................................................................
+!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize !short
+# ..............................................................................
+!iflang [german]
+!item Bug #0000044 in Version~6.4.1 beseitigt (!nl)
+   Wenn !no_numbers gesetzt ist, werden keine Nummern mehr vor
+   die Kapitel innerhalb des <link>-Elementes im HTML-Header geschrieben.
+!endif
+!iflang [english]
+!item Fixed bug #0000044 in version 6.4.1 (!nl)
+   If !no_numbers is set, there won't be printed numbers in front of a
+   node in HTML header <link> elements any longer.
+!endif
+# ..............................................................................
+!end_itemize
+!end_description
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+!medskip
+!heading Rich Text Format (RTF)
+!begin_description !short
+# ------------------------------------------------------------------------------
+!item [(!BUGFIXES)]
+!begin_itemize !short
+# ..............................................................................
+!iflang [german]
+!item Bug #0000017 in Version 6.4.1 beseitigt (!nl)
+   Wenn beim ersten Übersetzungslauf nach RTF das UDO-Link Bild noch
+   nicht vorhanden ist, wird jetzt ein Hinweis ausgegeben statt des
+   Fehlers, der darauf hinweist, mit der Bitte, das Dokument ein
+   weiteres Mal zu übersetzen. (!nl)
+   Das UDO-Bild wird jetzt auch auf TOS-kompatiblen Computern gefunden.
+# U.K. 29.1.04: Beschreibung unklar. Alter Zustand: eine Fehlermeldung kam.
+# neuer Zustand: nur noch ein Hinweis. (U.K. im Bugtracker nachlesen, um es zu verstehen)
+!endif
+!iflang [english]
+!item Fixed bug #0000017 in version~6.4.1 (!nl)
+   When a documented is translated to RTF for the first time and the
+   UDO link image doesn't exist, there will written be a note in the logfile,
+   that the user might translate the document again to complete it. (!nl)
+   The image will be found now on TOS compatible computers too.
+!endif
+# ..............................................................................
+!end_itemize
+
+!end_description
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 !end_node
 
@@ -315,25 +354,8 @@ wird unterstützt.
 (!PUBLISHED [Version~6.2.1] [Dec 9, 2003])
 !endif
 
-(!MISS)
-
 !begin_description
 !iflang [german]
-# !item [Neue Formate:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Neue Befehle:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Neuheiten:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Änderungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Syntaxänderungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
  !item [Fehlerbehebungen:]
  	!begin_itemize !short
  	 !item Bug #0000024 in Version 6.2.1 beseitigt (!nl)
@@ -356,21 +378,6 @@ wird unterstützt.
 !endif
 
 !iflang [english]
-# !item [New destination formats:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [New commands:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [News:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Changes:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Syntax changes:]
-# 	!begin_itemize !short
-# 	!end_itemize
  !item [Bugfixes:]
  	!begin_itemize !short
    !item Fixed bug #0000024 in version 6.2.1 (!nl)
@@ -599,18 +606,9 @@ wird unterstützt.
    !item Die Bilder werden jetzt bei der Ausgabe nach RTF innerhalb
          von Umgebungen mit eingerückt.
  	!end_itemize
-# !item [Syntaxänderungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Fehlerbehebungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
 !endif
 
 !iflang [english]
-# !item [New destination formats:]
-# 	!begin_itemize !short
-# 	!end_itemize
  !item [New commands:]
  	!begin_itemize !short
    !item (!T)!/html_default_hyphenation(!t) (!nl)
@@ -662,12 +660,6 @@ wird unterstützt.
    !item The images will be shifted with the text too, if they are in a
          special environment.
  	!end_itemize
-# !item [Syntax changes:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Bugfixes:]
-# 	!begin_itemize !short
-# 	!end_itemize
 !endif
 !end_description
 
@@ -889,7 +881,7 @@ wird unterstützt.
 
 !subheading Rich Text Format (RTF)
 !begin_itemize
-!item Paragraph check for orphans and widows are used now.
+!item Paragraph checks for orphans and widows are used now.
 !end_itemize
 !endif
 
