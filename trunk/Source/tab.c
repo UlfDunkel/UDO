@@ -805,22 +805,22 @@ LOCAL void table_output_html ( void )
 	if (inside_center)	strcpy(alignOn, "center");
 	if (inside_right)	strcpy(alignOn, "right");
 
-	voutf("<div align=%s>", alignOn);
+	voutf("<div align=\"%s\">", alignOn);
 
 	if (tab_toplines>0)
-	{	outln("<table border=1 frame=box>");
+	{	outln("<table border=\"1\" frame=\"box\">");
 	}
 	else
-	{	outln("<table border=0>");
+	{	outln("<table border=\"0\">");
 	}
 
 	if (tab_caption[0]!=EOS)
 	{
 		if (tab_caption_visible)
-		{	voutlnf("<caption align=bottom>%s %d: %s</caption>", lang.table, tab_counter, tab_caption);
+		{	voutlnf("<caption align=\"bottom\">%s %d: %s</caption>", lang.table, tab_counter, tab_caption);
 		}
 		else
-		{	voutlnf("<caption align=bottom>%s</caption>", tab_caption);
+		{	voutlnf("<caption align=\"bottom\">%s</caption>", tab_caption);
 		}
 	}
 

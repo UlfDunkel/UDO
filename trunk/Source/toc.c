@@ -665,12 +665,12 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 					{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 					}
 					if (l->is_node || l->is_alias)
-					{	sprintf(ref, "<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" border=0%s></a>",
+					{	sprintf(ref, "<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s></a>",
 							/* Changed in r6pl16 [NHz] */
 							htmlfilename, suff, html_target, pic, n, sGifSize);
 					}
 					else
-					{	sprintf(ref, "<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" border=0%s></a>",
+					{	sprintf(ref, "<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s></a>",
 							/* Changed in r6pl16 [NHz] */
 							htmlfilename, suff, sNoSty, html_target, pic, n, sGifSize);
 					}
@@ -2483,7 +2483,7 @@ LOCAL void html_index_giflink ( const int idxEnabled, const int idxDisabled, con
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" border=0%s></a>",
+			voutlnf("<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s></a>",
 						sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents,
 						sGifSize);
 		}
@@ -2500,7 +2500,7 @@ LOCAL void html_index_giflink ( const int idxEnabled, const int idxDisabled, con
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("<img src=\"%s\" border=0%s>", sGifName, sGifSize);
+			voutlnf("<img src=\"%s\" border=\"0\"%s>", sGifName, sGifSize);
 		}
 	}
 
@@ -2533,7 +2533,7 @@ LOCAL void html_home_giflink ( const int idxEnabled, const int idxDisabled, cons
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("<img src=\"%s\" alt=\"%s\" border=0%s>", sGifName, lang.html_home, sGifSize);	
+			voutlnf("<img src=\"%s\" alt=\"%s\" border=\"0\"%s>", sGifName, lang.html_home, sGifSize);
 		}
 	}
 	else
@@ -2557,7 +2557,7 @@ LOCAL void html_home_giflink ( const int idxEnabled, const int idxDisabled, cons
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" border=0%s></a>",
+			voutlnf("<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s></a>",
 						sFile, outfile.suff, sTarget, sGifName, lang.html_home, sGifSize);
 		}
 	}
@@ -2622,7 +2622,7 @@ LOCAL void html_back_giflink ( const int idxEnabled, const int idxDisabled, cons
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("<img src=\"%s\" border=0%s>", sGifName, sGifSize);	
+			voutlnf("<img src=\"%s\" border=\"0\"%s>", sGifName, sGifSize);
 		}
 	}
 
@@ -2705,7 +2705,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 		if (colptr[0]!=EOS)
 		{	sprintf(s, " bgcolor=\"%s\"", colptr);
 		}
-		voutlnf("<table border=0 cellpadding=0 cellspacing=0 width=\"100%%\"%s><tr><td valign=top>", s);
+		voutlnf("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%%\"%s><tr><td valign=\"top\">", s);
 	}
 #endif
 
@@ -2734,7 +2734,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 				if (uiW!=0 && uiH!=0)
 				{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 				}
-				voutlnf("<img src=\"%s\" border=0%s>", s, sGifSize);	
+				voutlnf("<img src=\"%s\" border=\"0\"%s>", s, sGifSize);
 			}
 #else
 			/* Verweis auf index.htm erzeugen */
@@ -2816,7 +2816,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("<img src=\"%s\" border=0%s>", s, sGifSize);	
+			voutlnf("<img src=\"%s\" border=\"0\"%s>", s, sGifSize);
 		}
 #else
 		html_back_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ");
@@ -2862,7 +2862,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 					if (uiW!=0 && uiH!=0)
 					{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 					}
-					voutlnf("<img src=\"%s\" border=0%s>", s, sGifSize);	
+					voutlnf("<img src=\"%s\" border=\"0\"%s>", s, sGifSize);
 				}
 #else
 				/* Frueher Link auf die Startseite */
@@ -2938,7 +2938,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("<img src=\"%s\" border=0%s>", s, sGifSize);	
+			voutlnf("<img src=\"%s\" border=\"0\"%s>", s, sGifSize);
 		}
 	}
 
@@ -2947,7 +2947,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 		if (iDocHtmlSwitchLanguage>=0 && sDocHtmlSwitchLanguage[0]!=EOS)
 		{
 #if 1
-			outln("</td><td valign=top align=right>");
+			outln("</td><td valign=\"top\" align=\"right\">");
 #endif
 			if (no_images)
 			{
@@ -3026,7 +3026,7 @@ LOCAL void html_node_bar_modern ( void )
 	sGifSize[0]= EOS;
 
 #if 1
-	voutlnf("<table border=0 cellpadding=0 cellspacing=0 width=\"%s\">", html_modern_width);
+	voutlnf("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"%s\">", html_modern_width);
 	switch (html_modern_alignment)
 	{
 		case ALIGN_LEFT:
@@ -3034,11 +3034,11 @@ LOCAL void html_node_bar_modern ( void )
 			sprintf(sAlignOff, "%s</td></tr>", sHtmlPropfontEnd);
 			break;
 		case ALIGN_CENT:
-			sprintf(sAlignOn, "<tr><td align=center>%s", sHtmlPropfontStart);
+			sprintf(sAlignOn, "<tr><td align=\"center\">%s", sHtmlPropfontStart);
 			sprintf(sAlignOff, "%s</td></tr>", sHtmlPropfontEnd);
 			break;
 		case ALIGN_RIGH:
-			sprintf(sAlignOn, "<tr><td align=right>%s", sHtmlPropfontStart);
+			sprintf(sAlignOn, "<tr><td align=\"right\">%s", sHtmlPropfontStart);
 			sprintf(sAlignOff, "%s</td></tr>", sHtmlPropfontEnd);
 			break;
 	}
@@ -3054,7 +3054,7 @@ LOCAL void html_node_bar_modern ( void )
 			if (titdat.authoriconActiveWidth!=0 && titdat.authoriconActiveHeight!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconActiveWidth, titdat.authoriconActiveHeight);
 			}
-			voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=0%s></a>%s",
+			voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=\"0\"%s></a>%s",
 				sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon_active, sGifSize, sAlignOff);
 	}
 	else
@@ -3064,7 +3064,7 @@ LOCAL void html_node_bar_modern ( void )
 			if (titdat.authoriconWidth!=0 && titdat.authoriconHeight!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconWidth, titdat.authoriconHeight);
 			}
-			voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=0%s></a>%s",
+			voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=\"0\"%s></a>%s",
 				sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon, sGifSize, sAlignOff);
 		}
 	}
@@ -3090,7 +3090,7 @@ LOCAL void html_node_bar_modern ( void )
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=0%s></a>%s",
+			voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=\"0\"%s></a>%s",
 				sAlignOn, old_outfile.name, outfile.suff, ptrImg, sGifSize, sAlignOff);	/*r6pl13*/
 		}
 	}
@@ -3299,16 +3299,16 @@ LOCAL void html_node_bar_frames ( void )
 					sprintf(alignOff, "%s</td></tr>", sHtmlPropfontEnd);
 					break;
 				case ALIGN_CENT:
-					sprintf(alignOn, "<tr><td align=center>%s", sHtmlPropfontStart);
+					sprintf(alignOn, "<tr><td align=\"center\">%s", sHtmlPropfontStart);
 					sprintf(alignOff, "%s</td></tr>", sHtmlPropfontEnd);
 					break;
 				case ALIGN_RIGH:
-					sprintf(alignOn, "<tr><td align=right>%s", sHtmlPropfontStart);
+					sprintf(alignOn, "<tr><td align=\"right\">%s", sHtmlPropfontStart);
 					sprintf(alignOff, "%s</td></tr>", sHtmlPropfontEnd);
 					break;
 			}
 			outln(divOn);
-			outln("<table border=0 cellpadding=0 cellspacing=0 width=\"100%\">");
+			outln("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">");
 			outln(rowOn);
 			break;
 		default:
@@ -3323,16 +3323,16 @@ LOCAL void html_node_bar_frames ( void )
 					divOff[0]= EOS;
 					break;
 				case ALIGN_CENT:
-					strcpy(divOn, "<div align=center>");
+					strcpy(divOn, "<div align=\"center\">");
 					strcpy(divOff, "</div>");
 					break;
 				case ALIGN_RIGH:
-					strcpy(divOn, "<div align=right>");
+					strcpy(divOn, "<div align=\"right\">");
 					strcpy(divOff, "</div>");
 					break;
 			}
 			outln(divOn);
-			outln("<table border=0 cellpadding=0 cellspacing=0>");
+			outln("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
 			outln(rowOn);
 			break;
 	}
@@ -3344,7 +3344,7 @@ LOCAL void html_node_bar_frames ( void )
 		if (titdat.authoriconWidth!=0 && titdat.authoriconHeight!=0)
 		{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconWidth, titdat.authoriconHeight);
 		}
-		voutlnf("%s<a href=\"%s%s%s\" target=\"%s\"><img src=\"%s%s\" alt=\"\" border=0%s></a>%s",
+		voutlnf("%s<a href=\"%s%s%s\" target=\"%s\"><img src=\"%s%s\" alt=\"\" border=\"0\"%s></a>%s",
 			alignOn, html_name_prefix, FRAME_FILE_CON, outfile.suff,
 			FRAME_NAME_CON, titdat.authoricon, "" /*sDocImgSuffix*/, sGifSize, alignOff);
 	}
@@ -3416,23 +3416,23 @@ GLOBAL void html_headline ( void )
 		if (html_modern_backimage[0]!=EOS)
 		{	sprintf(bgCmd, " background=\"%s\"", html_modern_backimage);
 		}
-		outln("<table border=0 cellspacing=0 cellpadding=0 width=\"100%\">");
+		outln("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">");
 		outln("<tr>");
 		if (html_modern_backcolor[0]!=EOS)
-		{	voutlnf("<td valign=top width=\"%s\" bgcolor=\"%s\"%s>%s",
+		{	voutlnf("<td valign=\"top\" width=\"%s\" bgcolor=\"%s\"%s>%s",
 				html_modern_width, html_modern_backcolor, bgCmd,
 				sHtmlPropfontStart);
 		}
 		else
-		{	voutlnf("<td valign=top width=\"%s\"%s>%s", html_modern_width, bgCmd,
+		{	voutlnf("<td valign=\"top\" width=\"%s\"%s>%s", html_modern_width, bgCmd,
 						sHtmlPropfontStart);
 		}
 		html_node_bar_modern();
 		voutlnf("%s</td>", sHtmlPropfontEnd);
 #if 0
-		outln("<td valign=top width=\"8\">&nbsp;</td>");	/*r6pl3*/
+		outln("<td valign=\"top\" width=\"8\">&nbsp;</td>");	/*r6pl3*/
 #endif
-		voutlnf("<td valign=top width=\"100%%\">%s", sHtmlPropfontStart);
+		voutlnf("<td valign=\"top\" width=\"100%%\">%s", sHtmlPropfontStart);
 	}
 
 	if (!no_headlines)
@@ -3442,8 +3442,8 @@ GLOBAL void html_headline ( void )
 #if 1
 	if (html_modern_layout || html_frames_layout)
 	{
-		outln("<table border=0 cellpadding=0 cellspacing=0 width=\"100%\"><tr>");
-		voutlnf("<td valign=top width=\"8\">&nbsp;</td><td valign=top width=\"100%%\">%s", sHtmlPropfontStart);
+		outln("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\"><tr>");
+		voutlnf("<td valign=\"top\" width=\"8\">&nbsp;</td><td valign=\"top\" width=\"100%%\">%s", sHtmlPropfontStart);
 	}
 #endif
 }	/* html_headline */
@@ -4367,7 +4367,7 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 					{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"",
 							toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
 					}
-					voutlnf("<h%d><p align=center>", html_nodesize);	/* r5pl4 */
+					voutlnf("<h%d><p align=\"center\">", html_nodesize);	/* r5pl4 */
 					voutlnf("<img src=\"%s%s\" alt=\"%s%s\"%s>",
 						toc[ti]->image, sDocImgSuffix, numbers, name, sGifSize);
 					voutlnf("</p></h%d>", html_nodesize);				/* r5pl4 */
@@ -4831,7 +4831,7 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 					{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"",
 							toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
 					}
-					voutlnf("%s<p align=center>", hx_start);
+					voutlnf("%s<p align=\"center\">", hx_start);
 					voutlnf("<img src=\"%s%s\" alt=\"%s%s\"%s>",
 						toc[ti]->image, sDocImgSuffix, numbers, name, sGifSize);
 					voutlnf("</p>%s", hx_end);
@@ -5286,7 +5286,7 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 					{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"",
 							toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
 					}
-					voutlnf("%s<p align=center>", hx_start);
+					voutlnf("%s<p align=\"center\">", hx_start);
 					voutlnf("<img src=\"%s%s\" alt=\"%s%s\"%s>",
 						toc[ti]->image, sDocImgSuffix, numbers, name, sGifSize);
 					voutlnf("</p>%s", hx_end);
@@ -5739,7 +5739,7 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 					{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"",
 							toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
 					}
-					voutlnf("%s<p align=center>", hx_start);
+					voutlnf("%s<p align=\"center\">", hx_start);
 					voutlnf("<img src=\"%s%s\" alt=\"%s%s\"%s>",
 						toc[ti]->image, sDocImgSuffix, numbers, name, sGifSize);
 					voutlnf("</p>%s", hx_end);

@@ -1167,7 +1167,7 @@ GLOBAL void c_maketitle ( void )
 		case TOHTM:
 		case TOMHH:
 			if ( has_title )
-			{	voutlnf("<h2 align=center>%s</h2>", titdat.title);
+			{	voutlnf("<h2 align=\"center\">%s</h2>", titdat.title);
 			}
 			
 			if ( has_programimage )
@@ -1177,12 +1177,12 @@ GLOBAL void c_maketitle ( void )
 			}
 			else
 			{	if ( has_program )
-				{	voutlnf("<h1 align=center>%s</h1>", titdat.program);
+				{	voutlnf("<h1 align=\"center\">%s</h1>", titdat.program);
 				}
 			}
 
 			if (has_version || has_date || has_author || has_address)
-			{	outln("<p align=center>");
+			{	outln("<p align=\"center\">");
 			}
 
 			if ( has_version )
@@ -1199,7 +1199,7 @@ GLOBAL void c_maketitle ( void )
 				c_gif_output(titdat.authorimage, "", sDocImgSuffix, 0);
 				c_end_center();
 				if (has_author || has_address)
-				{	outln("<p align=center>");
+				{	outln("<p align=\"center\">");
 				}
 			}
 			if ( has_author )
