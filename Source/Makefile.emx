@@ -6,7 +6,7 @@ CC = gcc
 O=.o
 X=
 
-CFLAGS = -O2 -Wall -D__MSDOS__
+CFLAGS = -O2 -Wall -D__MSDOS__ $(XCFLAGS)
 
 LDFLAGS = 
 
@@ -14,4 +14,4 @@ include makefile.in
 
 
 udo$(X):	$(OSRC) cli$(O)
-		$(CC) $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) -o $@
+		$(CC) $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) $(XLDFLAGS) -o $@

@@ -6,7 +6,7 @@ CC = gcc
 O=.o
 X=
 
-CFLAGS = -O2 -Wall -Wstrict-prototypes -Wmissing-prototypes -D__WIN32__ -mno-cygwin
+CFLAGS = -O2 -Wall -Wstrict-prototypes -Wmissing-prototypes -D__WIN32__ -mno-cygwin $(XCFLAGS)
 
 LDFLAGS = 
 
@@ -14,4 +14,4 @@ include makefile.in
 
 
 udo$(X):	$(OSRC) cli$(O)
-		$(CC) $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) -o $@
+		$(CC) $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) $(XLDFLAGS) -o $@
