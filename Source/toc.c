@@ -637,16 +637,24 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 			{	same_file= TRUE;
 			}
 			
+			/* New in r6pl16 [NHz] */
+				if(strchr(htmlfilename, '.') != NULL)
+					strcpy(suff, "");
+				else
+					strcpy(suff, outfile.suff);
+			
 			if (pic[0]!=EOS)
 			{	/* Fuer Kopf- oder Fusszeile */
 				if (no_images)	/*r6pl2*/
 				{	if (l->is_node || l->is_alias)
 					{	sprintf(ref, "<a href=\"%s%s\"%s>%s</a>",
-							htmlfilename, outfile.suff, html_target, n);
+							/* Changed in r6pl16 [NHz] */
+							htmlfilename, suff, html_target, n);
 					}
 					else
 					{	sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",
-							htmlfilename, outfile.suff, sNoSty, html_target, n);
+							/* Changed in r6pl16 [NHz] */
+							htmlfilename, suff, sNoSty, html_target, n);
 					}
 				}
 				else
@@ -657,11 +665,13 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 					}
 					if (l->is_node || l->is_alias)
 					{	sprintf(ref, "<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" border=0%s></a>",
-							htmlfilename, outfile.suff, html_target, pic, n, sGifSize);
+							/* Changed in r6pl16 [NHz] */
+							htmlfilename, suff, html_target, pic, n, sGifSize);
 					}
 					else
 					{	sprintf(ref, "<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" border=0%s></a>",
-							htmlfilename, outfile.suff, sNoSty, html_target, pic, n, sGifSize);
+							/* Changed in r6pl16 [NHz] */
+							htmlfilename, suff, sNoSty, html_target, pic, n, sGifSize);
 					}
 				}
 			}
@@ -680,17 +690,20 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 							||	(html_merge_node4 && toc[ti]->n4>0)
 							)
 						{	sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",
-								htmlfilename, outfile.suff, sNoSty, html_target, n);
+								/* Changed in r6pl16 [NHz] */
+								htmlfilename, suff, sNoSty, html_target, n);
 						}
 						else
 						{	sprintf(ref, "<a href=\"%s%s\"%s>%s</a>",
-								htmlfilename, outfile.suff, html_target, n);
+								/* Changed in r6pl16 [NHz] */
+								htmlfilename, suff, html_target, n);
 						}
 					}
 				}
 				else
 				{	sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",
-						htmlfilename, outfile.suff, sNoSty, html_target, n);
+						/* Changed in r6pl16 [NHz] */
+						htmlfilename, suff, sNoSty, html_target, n);
 				}
 			}
 			break;
@@ -1779,7 +1792,20 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 			}
 
 			if (toc[ti]->filename[0]!=EOS)
-			{	strcpy(tmp_n1, toc[ti]->filename);
+			{	
+				/* New in r6pl16 [NHz] */
+				{
+					char dummy[50], name[50], suff[10];
+				
+					fsplit(toc[ti]->filename, dummy, dummy, name, suff);
+		
+					if(strcmp(suff, ""))
+						sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, name, suff);
+					else
+						sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, outfile.suff);
+				}
+
+				strcpy(tmp_n1, toc[ti]->filename);
 			}
 			else
 			{	if (toc[ti]->appendix)
@@ -1895,7 +1921,21 @@ LOCAL BOOLEAN html_make_file ( void )
 	}
 #endif
 
-	sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, outfile.suff);
+	/* New in r6pl16 [NHz] */
+	{
+		char dummy[50], name[50], suff[10];
+
+		strcpy(name, outfile.name);
+		fsplit(outfile.name, dummy, dummy, name, suff);
+
+		if(strcmp(suff, ""))
+		{
+			sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, name, suff);
+		}
+		else
+			sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, outfile.suff);
+	}
+/*	sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, outfile.suff);*/
 
 	if (!bTestmode)	
 	{	outfile.file= myFwopen(outfile.full, TOHTM);
@@ -1957,16 +1997,14 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 	/*r6pl5: <link>-Tag */
 	if (titdat.webmasteremail!=NULL)
 	{	voutlnf("<meta name=\"Email\" content=\"%s\">", titdat.webmasteremail);
-		voutlnf("<link rev=made href=\"mailto:%s\" title=\"E-Mail\">", titdat.webmasteremail);
+		voutlnf("<link rev=\"made\" href=\"mailto:%s\" title=\"E-Mail\">", titdat.webmasteremail);
 	}
 
 
 	/* New in r6pl15 [NHz] */
-
 	if (html_frames_layout)
 	{	sprintf(sTarget, "target=\"UDOcon\"");
 	}
-
 
 
 	if (old_outfile.name[0]!=EOS)
@@ -1974,14 +2012,11 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 
 		voutlnf("<link rel=\"start\" href=\"%s%s\" title=\"Homepage\">", old_outfile.name, outfile.suff);
 		/* Special for CAB */
-
 		voutlnf("<link rel=\"home\" href=\"%s%s\" title=\"Homepage\">", old_outfile.name, outfile.suff);
 		if (uses_tableofcontents)
 		{	/* New in r6pl15 [NHz] */
-
 			voutlnf("<link rel=\"contents\" href=\"%s%s#UDOTOC\" title=\"%s\">", old_outfile.name, outfile.suff, lang.contents);
 			/* Special for CAB */
-
 			voutlnf("<link rel=\"toc\" href=\"%s%s#UDOTOC\" title=\"%s\">", old_outfile.name, outfile.suff, lang.contents);
 		}
 	}
@@ -1999,34 +2034,51 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 
 
 	/* New in r6pl16 [NHz] */
+	/* Output of Link-Rel 'up' */
+	/* is going to same place than !html_backpage */
+
+	if(sDocHtmlBackpage[0] != EOS)
+	{
+		strcpy(backpage, sDocHtmlBackpage);
+		tok = strtok(backpage, "\'");
+		strcpy(href, tok);
+		del_right_spaces(href);
+		tok = strtok(NULL, "\'");
+		if(tok != NULL)
+		{
+			strcpy(alt, tok);
+			auto_quote_chars(alt, TRUE);
+		}
+		else
+			strcpy(alt, href);
+
+		/* Special for CAB */
+		voutlnf("<link rel=\"up\" href=\"%s\" title=\"%s\">", href, alt);
+	}
+
 	/* New in r6pl15 [NHz] */
-
 	/* Output of Link-Rel 'first' */
-
 
 	i= toc[ti]->prev_index;
 
-
 	if (i>0)
-
 	{	/* First Node -> No Link */
 		li= toc[1]->labindex;
-
-
 
 		strcpy(s, lab[li]->name);
 		get_html_filename(lab[li]->tocindex, htmlname);
 
 		/* Special for CAB */
-
-		voutlnf("<link rel=\"first\" href=\"%s%s\" title=\"%s\">", htmlname, outfile.suff, s);
+		/* Changed in r6pl16 [NHz] */
+		if(strchr(htmlname, '.') != NULL)
+			voutlnf("<link rel=\"first\" href=\"%s\" title=\"%s\">", htmlname, s);
+		else
+			voutlnf("<link rel=\"first\" href=\"%s%s\" title=\"%s\">", htmlname, outfile.suff, s);
 	}
 
 
 	/* New in r6pl15 [NHz] */
-
 	/* Output of Link-Rel 'prev' */
-
 
 	if (i>0)
 	{
@@ -2034,18 +2086,22 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		strcpy(s, lab[li]->name);
 		get_html_filename(lab[li]->tocindex, htmlname);
 
-
-		voutlnf("<link rel=\"prev\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
-		/* Special for CAB */
-
-		voutlnf("<link rel=\"previous\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+		/* Changed in r6pl16 [NHz] */
+		if(strchr(htmlname, '.') != NULL)
+		{
+			voutlnf("<link rel=\"prev\" href=\"%s\" %s title=\"%s\">", htmlname, sTarget, s);
+			/* Special for CAB */
+			voutlnf("<link rel=\"previous\" href=\"%s\" %s title=\"%s\">", htmlname, sTarget, s);
+		}
+		else
+		{
+			voutlnf("<link rel=\"prev\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+			/* Special for CAB */
+			voutlnf("<link rel=\"previous\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+		}
 	}
 
-
-
 	/* Output of Link-Rel 'next' */
-
-
 
 	i= toc[ti]->next_index;
 
@@ -2055,60 +2111,48 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		strcpy(s, lab[li]->name);
 		get_html_filename(lab[li]->tocindex, htmlname);
 
-		voutlnf("<link rel=\"next\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+		/* Changed in r6pl16 [NHz] */
+		if(strchr(htmlname, '.') != NULL)
+			voutlnf("<link rel=\"next\" href=\"%s\" %s title=\"%s\">", htmlname, sTarget, s);
+		else
+			voutlnf("<link rel=\"next\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
 	}
 
-
-
 	/* New in r6pl15 [NHz] */
-
 	/* Output of Link-Rel 'last' */
-
 
 	if (i>1)
 	{
 		if(use_about_udo)
-
 		{
-
 			li= toc[p1_toc_counter]->labindex;
-
 			li--;
 		}
-
 		else
-
 			li= toc[p1_toc_counter]->labindex;
 		strcpy(s, lab[li]->name);
 		get_html_filename(lab[li]->tocindex, htmlname);
 
 		/* Special for CAB */
-
-		voutlnf("<link rel=\"last\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+		/* Changed in r6pl16 [NHz] */
+		if(strchr(htmlname, '.') != NULL)
+			voutlnf("<link rel=\"last\" href=\"%s\" %s title=\"%s\">", htmlname, sTarget, s);
+		else
+			voutlnf("<link rel=\"last\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
 	}
 
-
-
 	/* New in r6pl15 [NHz] */
-
 	/* Output of Link-Rel 'copyright' */
-
 	/* Link shows to 'About UDO'; maybe changed in future times */
 
-
 	if(use_about_udo)
-
 	{
-
 		li= toc[p1_toc_counter]->labindex;
-
 		strcpy(s, lab[li]->name);
 		get_html_filename(lab[li]->tocindex, htmlname);
 
 		voutlnf("<link rel=\"copyright\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
 	}
-
-
 
 	/* New in r6pl15 [NHz] */
 	/* Link for overall stylesheet-file */
@@ -2249,6 +2293,10 @@ GLOBAL void output_html_header ( const char *t )
 	outln("<title>");
 	outln(t);
 	outln("</title>");
+
+	/* New in r6pl16 [NHz] */
+	outln("<meta name=\"AppleTitle\" content=\"JobTimer Help\">");
+
 	output_html_meta(TRUE);	/*r6pl5: auch Keywords auf der ersten Seite erlauben */
 	outln("</head>");
 
@@ -2469,14 +2517,33 @@ LOCAL void html_back_giflink ( const int idxEnabled, const int idxDisabled, cons
 
 	if (sDocHtmlBackpage[0]!=EOS)
 	{
+		/* New in r6pl16 [NHz] */
+		strcpy(backpage, sDocHtmlBackpage);
+		tok = strtok(backpage, "\'");
+		strcpy(href, tok);
+		del_right_spaces(href);
+		tok = strtok(NULL, "\'");
+		if(tok != NULL)
+		{
+			strcpy(alt, tok);
+			auto_quote_chars(alt, TRUE);
+		}
+		else
+			strcpy(alt, href);
+
 		if (html_frames_layout)
 		{	sprintf(target, " target=\"_top\"");
 		}
 
-		if (no_images)	/*r6pl2*/
+		/* Changed in r6pl16 [NHz] */
+		/*		if (no_images)	/*r6pl2*/
 		{	voutlnf("%s<a href=\"%s\"%s>^^^</a>",
 						sep, sDocHtmlBackpage, target);
-		}
+		}*/
+		if (no_images)
+		{	voutlnf("%s<a href=\"%s\"%s>%s</a>",
+						sep, href, target, alt);
+		} /* changed */
 		else
 		{
 			get_giflink_data(idxEnabled, sGifName, &uiW, &uiH);
@@ -2484,8 +2551,9 @@ LOCAL void html_back_giflink ( const int idxEnabled, const int idxDisabled, cons
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"%s\" border=0%s></a>",
-						sDocHtmlBackpage, target, sGifName, sDocHtmlBackpage, sGifSize);
+			/* Changed in r6pl16 [NHz] */
+			voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s></a>",
+						href, target, sGifName, alt, sGifSize);
 		}
 	}
 	else
@@ -2851,7 +2919,8 @@ LOCAL void html_hb_line ( BOOLEAN head )
 						if (uiW!=0 && uiH!=0)
 						{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 						}
-						voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"Deutsch\" border=0%s></a>",
+						/* Changed in r6pl16 [NHz] */
+						voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"Deutsch\" title=\"To the german version of this document\" border=\"0\"%s></a>",
 							sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize);
 						break;
 					case TOENG:
@@ -2859,7 +2928,8 @@ LOCAL void html_hb_line ( BOOLEAN head )
 						if (uiW!=0 && uiH!=0)
 						{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 						}
-						voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"English\" border=0%s></a>",
+						/* Changed in r6pl16 [NHz] */
+						voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"English\" title=\"Zur englischen Version dieses Dokumentes\" border=\"0\"%s></a>",
 								sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize);
 						break;
 				}
@@ -8770,6 +8840,10 @@ GLOBAL void set_html_filename ( void )
 	/* Nur den Dateinamen benutzen, nicht den Pfad! */
 	strncat(ptr, tmp_name, MAX_FILENAME_LEN);
 
+	/* New in r6pl16 [NHz] */
+	if(strcmp(tmp_suff, ""))
+		strncat(ptr, tmp_suff, 6);
+
 }	/* set_html_filename */
 
 
@@ -11400,7 +11474,8 @@ GLOBAL void init_module_toc_pass2 ( void )
 	{
 		case TOHTM:
 		case TOMHH:
-			strcpy(toc_list_top,	"<ul>");
+			/* Changed in r6pl16 [NHz] */
+			strcpy(toc_list_top,	"<ul class=\"content\">");
 			strcpy(toc_list_end,	"</ul>");
 			use_toc_list_commands= TRUE;
 			break;
