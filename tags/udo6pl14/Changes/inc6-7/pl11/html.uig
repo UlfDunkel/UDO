@@ -1,0 +1,19 @@
+!begin_itemize
+
+!index HTML !! !/table_caption
+!item Änderung: Die Tabellen-Caption wird nun direkt hinter dem
+(!V)<table>(!v)-Tag ausgegeben (Wilfried Behne, Alexander Clauss). CAB
+erzeugte sonst eine Fehlermeldung.
+
+!index HTML !! Footer
+!item Änderung: Statt ""(!V)<i>(!v)"" wird im Footer nun
+""(!V)<address>(!v)"" verwendet (Stefan Braunstein).
+
+!index !/smallskip
+!index !/medskip
+!index !/bigskip
+!item Änderung: Für die Kommandos (!I)!/smallskip(!i), (!I)!/medskip(!i)
+und (!I)!/bigskip(!i) wird  wieder nur ""(!V)<br>(!v)"" ausgegeben
+(Norbert Hanz).
+
+!end_itemize

@@ -1,0 +1,10 @@
+!begin_itemize
+
+!item Neu: (!I)(---)(!i) wird in (!V)\emdash(!v), (!I)(--)(!i) in
+(!V)\endash(!v) umgewandelt (Norbert Hanz).
+
+!item Bugfix: Wurden typographische Anführungszeichen in
+(!I)!/table_caption(!i) verwendet, so erschien die Überschrift
+verstümmelt (fehlende Leerzeichen nach den RTF-Tags) (Norbert Hanz).
+
+!end_itemize

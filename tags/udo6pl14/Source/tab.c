@@ -1,0 +1,1392 @@
+/*	############################################################
+	# @(#) tab.c
+	# @(#)
+	# @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
+	# @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)
+	#
+	# This program is free software; you can redistribute it and/or
+	# modify it under the terms of the GNU General Public License
+	# as published by the Free Software Foundation; either version 2
+	# of the License, or (at your option) any later version.
+	# 
+	# This program is distributed in the hope that it will be useful,
+	# but WITHOUT ANY WARRANTY; without even the implied warranty of
+	# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	# GNU General Public License for more details.
+	# 
+	# You should have received a copy of the GNU General Public License
+	# along with this program; if not, write to the Free Software
+	# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+	############################################################	*/
+
+#ifndef ID_TAB_C
+#define ID_TAB_C
+const char *id_tab_c= "@(#) tab.c       10.07.1999";
+#endif
+
+#include "import.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "portab.h"
+#include "version.h"
+#include "constant.h"
+#include "udo_type.h"
+#include "commands.h"
+#include "chr.h"
+#include "env.h"
+#include "msg.h"
+#include "par.h"
+#include "str.h"
+#include "sty.h"
+#include "toc.h"
+#include "udo.h"
+#include "gui.h"
+
+#include "export.h"
+#include "tab.h"
+
+
+/*	############################################################
+	# lokale Variablen
+	############################################################	*/
+#define	MAX_CELLS_LEN	1024	/* max. Zeichenanzahl einer Zelle */
+
+#define MAX_TAB_H		512		/* max. Hoehe einer Tabelle */
+#define MAX_TAB_W		64		/* max. Breite einer Tabelle */
+#define	TAB_LEFT		0		/* Spalte linksbuendig */
+#define	TAB_CENTER		1		/* Spalte zentriert */
+#define	TAB_RIGHT		2		/* Spalte rechtsbuendig */
+
+#define	MAXTABCAPTION	1024	/* max. Laenge einer Ueberschrift */
+
+LOCAL int		tab_counter;						/* Tabellen-Zaehler			*/
+LOCAL int		tab_w, tab_h;						/* Spalten und Zeilen		*/
+LOCAL char		tab_caption[MAXTABCAPTION+1];		/* Tabellen-Ueberschrift	*/
+LOCAL BOOLEAN	tab_caption_visible;				/* Im Tabellenverzeichnis?	*/
+LOCAL char		*tab_cell[MAX_TAB_H+1][MAX_TAB_W+1]; /* Zeiger auf Feldtext		*/
+LOCAL size_t	tab_cell_w[MAX_TAB_W+1];			/* Breiten der Spalten		*/
+LOCAL int		tab_vert[MAX_TAB_W+1];				/* Vertikale Linien, wo?	*/
+LOCAL int		tab_hori[MAX_TAB_H+1];				/* Horiz. Linien, wo?		*/
+LOCAL int		tab_just[MAX_TAB_H+1];				/* Spaltenausrichtung		*/
+LOCAL int		tab_toplines;						/* Oben Linie(n)?			*/
+
+LOCAL char		cells[MAX_TAB_W+1][MAX_CELLS_LEN];	/* Puffer fuer Zellen		*/
+LOCAL int		cells_counter;						/* Anzahl Zellen von Zeilen	*/
+
+/*	############################################################
+	# lokale Prototypen
+	############################################################	*/
+LOCAL void cells_reset ( void );
+
+LOCAL void convert_table_caption ( const BOOLEAN visible );
+LOCAL void table_output_lyx ( void );
+LOCAL void table_output_ipf ( void );
+LOCAL void table_output_win ( void );
+LOCAL void table_output_rtf ( void );
+LOCAL void table_output_html ( void );
+LOCAL void table_output_tex ( void );
+LOCAL void table_output_general ( void );
+
+
+/*	############################################################
+	#
+	#
+	# Tabellensatz (seit Release 4 Version 0.42)
+	#
+	#
+	############################################################	*/
+/*	------------------------------------------------------------
+	cells_reset() loescht das cells[]-Feld.
+	------------------------------------------------------------	*/
+LOCAL void cells_reset ( void )
+{
+	register int i;
+
+	for (i=0; i<=cells_counter; cells[i++][0]= EOS) ;
+	cells_counter= 0;
+}	/*cells_reset*/
+
+
+GLOBAL void table_reset ( void )
+{
+	int x, y;
+	
+	tab_w= -1;
+	tab_h= -1;
+	
+	for (y=0; y<MAX_TAB_H; y++)
+	{	for (x=0; x<MAX_TAB_W; x++)
+		{	if (tab_cell[y][x]!=NULL)
+			{	free(tab_cell[y][x]);
+				tab_cell[y][x]= NULL;
+			}
+		}
+		tab_hori[y]= 0;
+		tab_just[y]= TAB_LEFT;
+	}
+	
+	for (x=0; x<MAX_TAB_W; x++)
+	{	tab_cell_w[x]= 0;
+		tab_vert[x]= 0;
+	}
+	
+	tab_toplines= 0;
+	
+}	/* table_reset */
+
+
+LOCAL void convert_table_caption ( const BOOLEAN visible )
+{
+	char n[512];
+	
+	tokcpy2(n);
+
+	tab_caption[0]= EOS;	
+	strncat(tab_caption, n, MAXTABCAPTION);
+
+	convert_tilde(tab_caption);
+	delete_all_divis(tab_caption);
+	replace_udo_quotes(tab_caption);
+	replace_placeholders(tab_caption);
+	
+	tab_caption_visible= visible;
+		
+}	/* convert_table_caption */
+
+
+GLOBAL void c_table_caption ( void )
+{
+	convert_table_caption(TRUE);
+}
+
+GLOBAL void c_table_caption_nonr ( void )
+{
+	convert_table_caption(FALSE);
+}
+
+GLOBAL void table_get_header ( char *s )
+{
+	size_t	i;
+	int column, t;
+	char n[128];		/* beinhaltet [|l|l] etc. */
+	
+	str2tok(s);
+	
+	if (token_counter>0)
+	{	strcpy(n, token[1]);
+	}
+	
+	tab_toplines= 0;
+	if (token_counter>1 && !no_table_lines)
+	{	for (t=2; t<token_counter; t++)
+		if (strcmp(token[2], "!hline")==0)
+		{	tab_toplines++;
+		}
+	}
+	
+	token_reset();
+
+	qdelete_all(n, "[", 1);
+	qdelete_all(n, "]", 1);
+
+	if (n[0]==EOS)
+	{	return;
+	}
+
+	column= 0;
+	for (i=0; i<strlen(n); i++)
+	{	if (n[i]=='|' && !no_table_lines)
+		{	tab_vert[column]++;
+		}	else
+		if (n[i]=='l')
+		{	tab_just[column]= TAB_LEFT;
+			column++;
+		}	else
+		if (n[i]=='c')
+		{	tab_just[column]= TAB_CENTER;
+			column++;
+		}	else
+		if (n[i]=='r')
+		{	tab_just[column]= TAB_RIGHT;
+			column++;
+		}
+	}
+	
+}	/* table_get_header */
+
+
+GLOBAL BOOLEAN table_add_line ( char *s )
+{
+	char	*ptr;
+	int		i, x;
+	size_t	sl, tl;		/* strlen & toklen */
+
+	del_whitespaces(s);
+
+	/* Leerzeilen nicht bearbeiten */
+	if ( s[0]==EOS )
+	{	return TRUE;
+	}
+
+	if ( tab_h >= MAX_TAB_H )
+	{	error_table_height();
+		s[0]= EOS;
+		return FALSE;
+	}
+	
+	/* Alte Zellen leeren */
+	cells_reset();
+
+	/* Zeile enthaelt nur !hline */
+	if (strcmp(s, "!hline")==0)
+	{	if (!no_table_lines)
+		{	tab_hori[tab_h]++;
+		}
+		return TRUE;
+	}
+
+
+	/* Nun aus der Zeile die Felder auslesen */
+	replace_char(s, "\t", " ");
+	qdelete_all(s, "!-", 2);
+
+	if (no_umlaute) umlaute2ascii(s);
+	replace_macros(s);
+		
+	if (desttype!=TOTEX && desttype!=TOPDL)
+	{	c_styles(s);
+		check_styles(s);
+	}
+
+	switch (desttype)
+	{
+		case TOASC:
+		case TODRC:
+		case TOPCH:
+		case TOMAN:
+		case TOSTG:
+		case TOAMG:
+		case TOTVH:
+		case TOSRC:
+		case TOSRP:
+		case TOIPF:
+			c_commands_inside(s, FALSE);
+			c_vars(s);
+			replace_defines(s);
+#if 0
+			replace_udo_quotes(s);
+#endif
+			break;
+	}
+		
+	c_tilde(s);
+
+	ptr= s;
+	cells_counter= 0;
+	sl= 0;
+	
+	while ( ptr[0]!=EOS )
+	{
+		if (ptr[0]=='!' && ptr[1]=='!')
+		{
+			cells_counter++;
+			ptr++;		/* PL14: +=1 statt += 2 */
+			sl= 0;
+		}
+		else
+		{
+			if (sl+1<MAX_CELLS_LEN)
+			{
+				chrcat(cells[cells_counter], ptr[0]);
+				sl++;
+			}
+			else
+			{
+				error_table_cell_width();	/*r6pl2: Laenge testen und meckern */
+				return FALSE;
+			}
+		}
+		ptr++;
+	}
+
+	for (i=0; i<=cells_counter; i++) del_whitespaces(cells[i]) ;	
+	
+	if ( cells_counter > MAX_TAB_W )
+	{	error_table_width();
+	}
+	
+	if ( cells_counter > tab_w )
+	{	tab_w= cells_counter;
+	}
+
+	/* Zeilenzaehler hochsetzen */
+	tab_h++;
+
+	for (x=0; x<MAX_TAB_W; x++)
+	{	if (x<=cells_counter)
+		{
+			tl= toklen(cells[x]);
+			sl= strlen(cells[x]);
+			if (tl>tab_cell_w[x])
+			{	tab_cell_w[x]= tl;
+			}
+	
+			ptr= (char *) (malloc(sl+2));
+			if (ptr==NULL)
+			{	error_malloc_failed();
+				return FALSE;
+			}
+			strcpy(ptr, cells[x]);
+			tab_cell[tab_h][x]= ptr;
+		}
+	}
+	
+	cells_reset();
+
+	return TRUE;
+}	/* table_add_line */
+
+
+
+LOCAL void table_output_lyx ( void )
+{
+	int		y, x, i;
+	BOOLEAN	bl, bt, bb, br;				/* Flags fuer Linien */
+	char f[512], alignOn[64];
+	BOOLEAN inside_center, inside_right, inside_left;
+
+	inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);
+	inside_right= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_RIGH);
+	inside_left= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_LEFT);
+
+	if (!inside_center && !inside_right && !inside_left)
+	{
+		switch (table_alignment)	/*r6pl9*/
+		{
+			case ALIGN_CENT:
+				inside_center= TRUE;	break;
+			case ALIGN_RIGH:
+				inside_right= TRUE;		break;
+		}
+	}
+
+	alignOn[0]= EOS;
+	if (inside_center)	strcpy(alignOn, " center");
+	if (inside_right)	strcpy(alignOn, " right");
+
+	outln("\\layout Standard");
+	voutlnf("\\added_space_top 0.30 \\added_space_bottom 0.30 \\align %s \\LyXTable", alignOn);
+	outln("multicol2");
+	voutlnf("%d %d", tab_h+1, tab_w+1);
+
+	/* Fuer jede Tabellenzeile eine Zeile ausgeben, in der Flags stehen,	*/
+	/* die angeben, ob dort obere und untere Linien benutzt werden.			*/
+
+	for (y=0; y<=tab_h; y++)
+	{
+		if ( y==0 )
+		{	bt= (tab_toplines>0);
+			bb= (tab_hori[0]>0);
+		}
+		else
+		{	bt= (tab_hori[y-1]>0);
+			bb= (tab_hori[y]>0);
+		}
+
+		voutlnf("%d %d", bt, bb);
+	}
+	
+	/*	Pro Spalte eine Zeile ausgeben. Beispiel:
+		8 1 1
+	        +---- rechts eine Linie?
+		  +------ links eine Linie?
+		+-------- Ausrichtung? (2=links, 8=zentriert, 4=rechts)
+	*/
+	
+	for (x=0; x<=tab_w; x++)
+	{
+		bl= (tab_vert[x]>0);
+
+		if (x==tab_w)
+		{	br= (tab_vert[x+1]>0);
+		}
+		else
+		{	br= FALSE;
+		}
+	
+		switch(tab_just[x])
+		{	case TAB_CENTER:	i= 8;	break;
+			case TAB_RIGHT:		i= 4;	break;
+			default:			i= 2;	break;
+		}
+		
+		voutlnf("%d %d %d", i, bl, br);
+	}
+	
+	/*	Pro Spalte eine Zeile ausgeben. Beispiel:
+		0 8 1 1
+		      +---- rechts eine Linie?
+		    +------ links eine Linie?
+		  +-------- Ausrichtung? (2=links, 8=zentriert, 4=rechts)
+		+---------- immer 0
+	*/
+	
+	for (x=0; x<=tab_w; x++)
+	{
+		switch(tab_just[x])
+		{	case TAB_CENTER:	i= 8;	break;
+			case TAB_RIGHT:		i= 4;	break;
+			default:			i= 2;	break;
+		}
+		
+		voutlnf("0 %d 1 1", i);
+	}
+
+#if 0
+	/* Jetzt noch fuer jede Spalte 0 8 1 1 ausgeben, warum auch immer */
+	for (x=0; x<=tab_w; x++)
+	{	outln("0 8 1 1");
+	}
+#endif
+	
+	for (y=0; y<=tab_h; y++)
+	{
+		for (x=0; x<=tab_w; x++)
+		{
+			if ( tab_cell[y][x]!=NULL )
+			{	strcpy(f, tab_cell[y][x]);
+				auto_quote_chars(f, FALSE);
+				c_vars(f);
+				c_commands_inside(f, FALSE);
+				replace_defines(f);
+				replace_udo_quotes(f);
+				replace_udo_tilde(f);
+				replace_udo_nbsp(f);
+				c_internal_styles(f);
+				replace_placeholders(f);
+				indent2space(f);
+				out(f);
+			}
+			
+			if ( y!=tab_h || x!=tab_w)
+			{	outln("\\newline");
+			}
+		}
+	}
+	
+	if (tab_caption[0]!=EOS)
+	{	outln("\\layout Standard");
+		outln("\\align center");
+		if (tab_caption_visible)
+		{	sprintf(f, "%s %d: %s", lang.table, tab_counter, tab_caption);
+		}
+		else
+		{	sprintf(f, "%s", tab_caption);
+		}
+    	outln(f);
+    	outln("\\layout Standard");
+    	outln("");
+    }
+                                	
+}	/* table_output_lyx */
+
+
+LOCAL void table_output_rtf ( void )
+{
+	int		y, x, i, cellx, indent, charw;
+	char	f[512], cx[512];
+
+	indent=strlen_indent();
+
+	if (bDocRtfKeepTablesOn)
+	{	outln("{\\keep\\keepn");
+	}
+	else
+	{	outln("{\\keep");
+	}
+
+	charw= iDocCharwidth;
+
+	for (y=0; y<=tab_h; y++)
+	{
+		outln("\\trowd");
+		cellx= 0;
+		if (indent>0)
+		{	cellx= indent;
+			voutlnf("\\cellx%d", cellx);
+		}
+
+		for (i=0; i<=tab_w; i++)
+		{	f[0]= EOS;
+			if (tab_vert[i]>0)
+			{	strcat(f, "\\clbrdrl\\brdrs");
+			}
+			if ( tab_vert[i+1]>0 )
+			{	strcat(f, "\\clbrdrr\\brdrs");
+			}
+
+			if (tab_hori[y]>0)
+			{	strcat(f, "\\clbrdrb\\brdrs");
+			}
+			
+			if ( (y==0 && tab_toplines>0) || (y>0 && tab_hori[y-1]>0) )
+			{	strcat(f, "\\clbrdrt\\brdrs");
+			}
+			
+			cellx+= ( (int) tab_cell_w[i] * charw );
+			sprintf(cx, "\\cellx%d", cellx);
+			voutlnf("%s%s", f, cx);
+		}
+
+		out("\\intbl");
+		if (indent>0)
+		{	out("\\ql \\cell");
+		}
+
+		for (x=0; x<=tab_w; x++)
+		{	switch(tab_just[x])
+			{	case TAB_CENTER:	out("\\qc ");	break;
+				case TAB_RIGHT:		out("\\qr ");	break;
+				default:			out("\\ql ");	break;
+			}
+			if ( tab_cell[y][x]!=NULL )
+			{	strcpy(f, tab_cell[y][x]);
+				auto_quote_chars(f, FALSE);
+				c_vars(f);
+				c_commands_inside(f, FALSE);
+				replace_defines(f);
+				replace_udo_quotes(f);
+				replace_udo_tilde(f);
+				replace_udo_nbsp(f);
+				c_rtf_styles(f);
+				replace_placeholders(f);
+				c_rtf_quotes(f);
+				out(f);
+			}
+			out("\\cell");
+		}
+		outln("\\row");
+	}
+	
+	outln("\\trowd\\pard");
+	outln("}\\par\\pard");
+
+	if (tab_caption[0]!=EOS)
+	{	c_rtf_quotes(tab_caption);	/* r6pl7 */
+		out("{\\keep\\trowd");
+		if (indent>0)
+		{	voutlnf("\\cellx%d", indent);
+		}
+		outln(cx);	/* Noch von oben definiert */
+		out("\\intbl");
+		if (indent>0)
+		{	out("\\ql \\cell");
+		}
+		if (tab_caption_visible)
+		{	sprintf(f, "\\qc %s %d: %s\\cell\\row\\pard",
+							lang.table, tab_counter, tab_caption);
+		}
+		else
+		{	sprintf(f, "\\qc %s\\cell\\row\\pard", tab_caption);
+		}
+		outln(f);
+		outln("\\trowd\\pard");
+		outln("}\\par\\pard");
+	}
+
+}	/* table_output_rtf */
+
+
+
+LOCAL void table_output_win ( void )
+{
+	int		y, x, i, cellx, indent, charw;
+	char	f[512], cx[512], ci[512];
+
+	indent=strlen_indent();
+	cellx= 0;
+	outln("{\\keep\\trowd");
+
+	charw= iDocCharwidth;
+
+	if (indent>0)
+	{	cellx= indent;
+		sprintf(ci, "\\cellx%d", cellx);	/* ci wird unten noch benoetigt! */
+		outln(ci);
+	}
+
+	for (i=0; i<=tab_w; i++)
+	{	cellx+= ( (int) tab_cell_w[i] * charw );
+		sprintf(cx, "\\cellx%d", cellx);	/* cx wird unten noch benoetig! */
+		outln(cx);
+	}
+
+
+	for (y=0; y<=tab_h; y++)
+	{
+		out("\\intbl");
+		if (indent>0)
+		{	out("\\ql \\cell");
+		}
+		if (tab_toplines>0)
+		{	out("{\\box");
+		}
+		for (x=0; x<=tab_w; x++)
+		{	switch(tab_just[x])
+			{	case TAB_CENTER:	out("\\qc ");	break;
+				case TAB_RIGHT:		out("\\qr ");	break;
+				default:			out("\\ql ");	break;
+			}
+			if ( tab_cell[y][x]!=NULL )
+			{	strcpy(f, tab_cell[y][x]);
+				auto_quote_chars(f, FALSE);
+				c_vars(f);
+				c_commands_inside(f, FALSE);
+				replace_defines(f);
+				replace_udo_quotes(f);
+				replace_udo_tilde(f);
+				replace_udo_nbsp(f);
+				c_win_styles(f);
+				auto_references(f, FALSE, "", 0, 0);
+				replace_placeholders(f);
+				out(f);
+			}
+			out("\\cell");
+		}
+
+		if (tab_toplines>0)
+		{	outln("\\row\\pard}");
+		}
+		else
+		{	outln("\\row");
+		}
+	}
+	
+	outln("\\trowd\\pard");
+	outln("}\\par\\pard");
+
+	if (tab_caption[0]!=EOS)
+	{	out("{\\keep\\trowd");
+		if (indent>0)
+		{	out(ci);	/* Noch von oben definiert */
+		}
+		outln(cx);	/* Noch von oben definiert */
+		out("\\intbl");
+		if (indent>0)
+		{	out("\\ql \\cell");
+		}
+		if (tab_caption_visible)
+		{	sprintf(f, "\\qc %s %d: %s\\cell\\row\\pard",
+							lang.table, tab_counter, tab_caption);
+		}
+		else
+		{	sprintf(f, "\\qc %s\\cell\\row\\pard", tab_caption);
+		}
+		outln(f);
+		outln("\\trowd\\pard");
+		outln("}\\par\\pard");
+	}
+
+}	/* table_output_win */
+
+
+
+LOCAL void table_output_html ( void )
+{
+	int		y, x;
+	char	f[512], alignOn[64];
+	BOOLEAN inside_center, inside_right, inside_left;
+
+	inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);
+	inside_right= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_RIGH);
+	inside_left= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_LEFT);
+
+	if (!inside_center && !inside_right && !inside_left)
+	{
+		switch (table_alignment)	/*r6pl9*/
+		{
+			case ALIGN_CENT:	inside_center= TRUE;	break;
+			case ALIGN_RIGH:	inside_right= TRUE;		break;
+		}
+	}
+
+	strcpy(alignOn, "left");
+	if (inside_center)	strcpy(alignOn, "center");
+	if (inside_right)	strcpy(alignOn, "right");
+
+	voutf("<div align=%s>", alignOn);
+
+	if (tab_toplines>0)
+	{	outln("<table border=1 frame=box>");
+	}
+	else
+	{	outln("<table border=0>");
+	}
+
+	if (tab_caption[0]!=EOS)
+	{
+		if (tab_caption_visible)
+		{	voutlnf("<caption align=bottom>%s %d: %s</caption>", lang.table, tab_counter, tab_caption);
+		}
+		else
+		{	voutlnf("<caption align=bottom>%s</caption>", tab_caption);
+		}
+	}
+
+	for (y=0; y<=tab_h; y++)
+	{	outln("<tr>");
+		for (x=0; x<=tab_w; x++)
+		{	switch(tab_just[x])
+			{	case TAB_CENTER:	out("  <td align=center valign=top>");	break;
+				case TAB_RIGHT:		out("  <td align=right valign=top>");	break;
+				default:			out("  <td align=left valign=top>");	break;
+			}
+			out(sHtmlPropfontStart);
+			if ( tab_cell[y][x]!=NULL )
+			{	strcpy(f, tab_cell[y][x]);
+				auto_quote_chars(f, FALSE);
+				replace_defines(f);
+				c_commands_inside(f, FALSE);
+				replace_udo_quotes(f);
+				c_vars(f);
+				c_internal_styles(f);
+				auto_references(f, FALSE, "", 0, 0);	/* PL7 <???> */
+				replace_placeholders(f);
+				replace_udo_tilde(f);
+				replace_udo_nbsp(f);
+				out(f);
+			}
+			out(sHtmlPropfontEnd);
+			outln("</td>");	/* PL14: "</td>" statt " " */
+		}
+		outln("</tr>");		/* PL14: "</tr>" statt "" */
+	}
+
+
+	outln("</table></div>");
+
+}	/* table_output_html */
+
+
+LOCAL void table_output_tex ( void )
+{
+	int		y, x, i;
+	char	f[512], alignOn[64], alignOff[64];
+	BOOLEAN inside_center, inside_right, inside_left;
+
+	inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);
+	inside_right= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_RIGH);
+	inside_left= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_LEFT);
+
+	if (!inside_center && !inside_right && !inside_left)
+	{
+		switch (table_alignment)	/*r6pl9*/
+		{
+			case ALIGN_CENT:
+				inside_center= TRUE;	break;
+			case ALIGN_RIGH:
+				inside_right= TRUE;		break;
+		}
+	}
+
+	alignOn[0]= alignOff[0]= EOS;
+	if (inside_center)
+	{
+		strcpy(alignOn, "\\begin{center}");
+		strcpy(alignOff, "\\end{center}");
+	}
+	if (inside_right)
+	{
+		strcpy(alignOn, "\\begin{flushright}");
+		strcpy(alignOff, "\\end{flushright}");
+	}
+
+#if 1
+	if (tab_caption[0]!=EOS)	/* PL7 */
+	{	outln("\\begin{table}[htb]");
+	}
+#else
+	outln("\\begin{table}[htb]");
+#endif
+	
+	outln(alignOn);
+
+	out("\\begin{tabular}{");
+	for (x=0; x<=tab_w; x++)
+	{	if (tab_vert[x]>0)
+		{	for (i=1; i<=tab_vert[x]; i++) out("|") ;
+		}
+		switch(tab_just[x])
+		{	case TAB_CENTER:	out("c");	break;
+			case TAB_RIGHT:		out("r");	break;
+			default:			out("l");	break;
+		}
+	}
+	if (tab_vert[tab_w+1]>0)
+	{	for (i=1; i<=tab_vert[tab_w+1]; i++) out("|") ;
+	}
+	out("}");
+
+	if (tab_toplines>0)	
+	{	for (y=1; y<=tab_toplines; y++)
+		{	out(" \\hline");
+		}
+	}
+	outln("");
+
+	for (y=0; y<=tab_h; y++)
+	{	for (x=0; x<=tab_w; x++)
+		{	if ( tab_cell[y][x]!=NULL )
+			{	strcpy(f, tab_cell[y][x]);
+				auto_quote_chars(f, FALSE);
+				c_styles(f);
+				check_styles(f);
+				replace_defines(f);
+				c_commands_inside(f, FALSE);
+				c_vars(f);
+				replace_udo_quotes(f);
+				c_internal_styles(f);
+				replace_placeholders(f);
+				replace_udo_tilde(f);
+				replace_udo_nbsp(f);
+				out(f);
+			}
+			if (x!=tab_w)
+			{	out(" & ");
+			}
+		}
+		out(" \\\\");
+		if (tab_hori[y]>0)
+		{	out(" \\hline");
+		}
+		outln("");
+	}
+
+	outln("\\end{tabular}");
+
+	if (tab_caption[0]!=EOS)
+	{	voutlnf("\\caption{%s}", tab_caption);
+	}
+
+	outln(alignOff);
+
+#if 1
+	if (tab_caption[0]!=EOS)	/* PL7 */
+	{	outln("\\end{table}");
+	}
+#else
+	outln("\\end{table}");
+#endif
+
+}	/* table_output_tex */
+
+
+LOCAL void table_output_ipf ( void )
+{
+	int		y, x, i/*, cellx, indent, charw*/;
+	char	f[512], cx[512]/*, ci[512]*/;
+
+	f[0]= EOS;
+	for (i=0; i<=tab_w; i++)
+	{	sprintf(cx, "%d ", tab_cell_w[i]);
+		strcat(f, cx);
+	}
+	del_whitespaces(f);
+	voutlnf(":table cols='%s'.", f);
+
+
+	for (y=0; y<=tab_h; y++)
+	{
+		outln(":row.");
+		for (x=0; x<=tab_w; x++)
+		{
+#if 0
+			switch(tab_just[x])
+			{	case TAB_CENTER:	out("\\qc ");	break;
+				case TAB_RIGHT:		out("\\qr ");	break;
+				default:			out("\\ql ");	break;
+			}
+#endif
+			if ( tab_cell[y][x]!=NULL )
+			{	strcpy(f, tab_cell[y][x]);
+				auto_quote_chars(f, FALSE);
+				replace_defines(f);
+				c_commands_inside(f, FALSE);
+				replace_udo_quotes(f);
+				c_vars(f);
+				c_internal_styles(f);
+				auto_references(f, FALSE, "", 0, 0);
+				replace_placeholders(f);
+				replace_udo_tilde(f);
+				replace_udo_nbsp(f);
+				voutlnf(":c.%s", f);
+			}
+			else
+			{	outln(":c.");
+			}
+		}
+
+	}
+
+	outln(":etable.");
+	
+}	/* table_output_ipf */
+
+
+LOCAL void table_output_general ( void )
+{
+	int		y, x, i, offset;
+	char	s[512], f[512], stg_vl[32];
+	char	hl[3][512];
+	char	hl_l[3][2], hl_c[3][2], hl_v[3][2], hl_r[3][2];
+	char	vc_l[2], vc_m[2], vc_r[2];
+	size_t	tl, add, twidth, toffset, isl;
+	BOOLEAN	tortf, tosrc, ansichars, align_caption;
+	BOOLEAN inside_center, inside_right, inside_left;
+
+	inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);
+	inside_right= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_RIGH);
+	inside_left= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_LEFT);
+
+	if (!inside_center && !inside_right && !inside_left)
+	{
+		switch (table_alignment)	/*r6pl9*/
+		{
+			case ALIGN_CENT:
+				inside_center= TRUE;	break;
+			case ALIGN_RIGH:
+				inside_right= TRUE;		break;
+		}
+	}
+
+	
+	/* PL7: MAXZEILE durch zDocParwidth ersetzt */
+	
+
+	tortf= (desttype==TORTF || desttype==TOWIN || desttype==TOWH4 || desttype==TOAQV);
+	tosrc= (desttype==TOSRC || desttype==TOSRP);
+
+
+	ansichars= FALSE;
+
+	if (use_ansi_tables)
+	{	if (desttype!=TOWIN && desttype!=TOWH4 && desttype!=TOAQV && desttype!=TORTF && desttype!=TOINF)
+		{	ansichars= TRUE;
+		}
+	}
+	
+	if (tortf || desttype==TOINF || desttype==TOLDS)
+	{	output_begin_verbatim();
+	}
+
+	outln("");
+	
+	if (tosrc)
+	{	outln(sSrcRemOn);
+	}
+
+	if ((desttype==TOSTG || desttype==TOAMG) && !ansichars)
+	{	/* Tabellenbreite fuer den ST-Guide berechnen und in <hl[1]> */
+		/* den Befehl zum Zeichnen von horizontalen Linien einsetzen */
+		twidth= 0;
+		toffset= 1;
+		for (x=0; x<=tab_w; x++)	twidth+= ((int) tab_cell_w[x]+2) ;
+		if (twidth<=zDocParwidth)
+		{
+			if (inside_center)
+			{	toffset= (zDocParwidth-twidth)/2 + 1;
+			}
+			if (inside_right)
+			{	toffset= zDocParwidth-twidth+1;
+			}
+		}
+		sprintf(hl[1], "@line %d %d 0", (int) toffset, (int) twidth);
+		strcpy(hl[0], hl[1]);
+		strcpy(hl[2], hl[1]);
+
+		/* Befehle fuer vertikale Linien erzeugen */
+		offset= (int) toffset;
+		for (x=0; x<=tab_w; x++)
+		{	if (tab_vert[x]>0)
+			{	sprintf(stg_vl, "@line %d 0 %d", offset, tab_h+1);
+				outln(stg_vl);
+			}
+			offset+= (int) tab_cell_w[x];
+			offset+= 2;
+		}
+		if (tab_vert[tab_w+1]>0)
+		{	sprintf(stg_vl, "@line %d 0 %d", offset, tab_h+1);
+			outln(stg_vl);
+		}
+		strcpy(vc_l, "");
+		strcpy(vc_m, "");
+		strcpy(vc_r, "");
+		if (tab_toplines>0)
+		{	outln(hl[1]);
+		}
+	}
+	else
+	{	/* Zeichen fuer die Trennlinie(n) setzen		*/
+		/* Bei MSDOS wird der Grafikzeichensatz benutzt	*/
+
+		if (ansichars)
+		{	strcpy(hl_l[0], "\311");	/*	||=	*/	/* Top */
+			strcpy(hl_r[0], "\273");	/*  =||	*/
+			strcpy(hl_v[0], "\321");	/*	=|=	*/
+			strcpy(hl_c[0], "\315");	/*	=	*/
+			strcpy(hl_l[1], "\307");	/* ||-	*/	/* Middle */
+			strcpy(hl_r[1], "\266");	/* -||	*/
+			strcpy(hl_v[1], "\305");	/*	-|-	*/
+			strcpy(hl_c[1], "\304");	/*	-	*/
+			strcpy(hl_l[2], "\310");	/* ||=	*/	/* Bottom */
+			strcpy(hl_r[2], "\274");	/* =||	*/
+			strcpy(hl_v[2], "\317");	/*	=|=	*/
+			strcpy(hl_c[2], "\315");	/*	=	*/
+
+			strcpy(vc_l, "\272");
+			strcpy(vc_m, "\263");
+			strcpy(vc_r, "\272");
+		}
+		else
+		{	strcpy(hl_l[0], "+");	/* Top */
+			strcpy(hl_r[0], "+");
+			strcpy(hl_v[0], "+");
+			strcpy(hl_c[0], "-");
+			strcpy(hl_l[1], "+");	/* Middle */
+			strcpy(hl_r[1], "+");
+			strcpy(hl_v[1], "+");
+			strcpy(hl_c[1], "-");
+			strcpy(hl_l[2], "+");	/* Bottom */
+			strcpy(hl_r[2], "+");
+			strcpy(hl_v[2], "+");
+			strcpy(hl_c[2], "-");
+
+			strcpy(vc_l, "|");
+			strcpy(vc_m, "|");
+			strcpy(vc_r, "|");
+		}
+
+		/* ----------------------------- */
+		/* Trennlinie(n) zusammenstellen */
+		/* 0= top, 1=middle, 2=bottom    */
+		/* ----------------------------- */
+
+		for (y=0; y<3; y++)
+		{	hl[y][0]= EOS;
+			for (x=0; x<=tab_w; x++)
+			{	if (tab_vert[x]>0)
+				{	if (x==0)
+					{	for (i=1; i<=tab_vert[x]; i++)
+						{	strcat(hl[y], hl_l[y]);
+						}
+					}
+					else
+					{	for (i=1; i<=tab_vert[x]; i++)
+						{	strcat(hl[y], hl_v[y]);
+						}
+					}
+				}
+				strcat(hl[y], hl_c[y]);
+				for (isl=1; isl<=tab_cell_w[x]; isl++)
+				{	strcat(hl[y], hl_c[y]);
+				}
+				strcat(hl[y], hl_c[y]);
+			}
+			if (tab_vert[tab_w+1]>0)
+			{	for (i=1; i<=tab_vert[tab_w+1]; i++)
+				{	if (i==tab_vert[tab_w+1])
+					{	strcat(hl[y], hl_r[y]);
+					}
+					else
+					{	strcat(hl[y], hl_v[y]);
+					}
+				}
+			}
+			
+			if (inside_center)
+			{	stringcenter(hl[y], zDocParwidth);	/* Linie fuer den Rest zentrieren */
+			}
+			if (inside_right)
+			{	strright(hl[y], zDocParwidth);		/* Linie fuer den Rest ausrichten */
+			}
+			if (tortf)	strcat(hl[y], "\\par");
+			if (tosrc)	strinsert(hl[y], "    ");
+		}
+
+
+		/* obere Tabellenlinien ausgeben */		
+		if (tab_toplines>0)
+		{	for (i=1; i<=tab_toplines; i++)
+			{	if (i==1)
+				{	outln(hl[0]);
+				}
+				else
+				{	outln(hl[1]);
+				}
+			}
+		}
+	}
+	
+
+	for (y=0; y<=tab_h; y++)
+	{	s[0]= EOS;
+		for (x=0; x<=tab_w; x++)
+		{
+			if (tab_vert[x]>0)
+			{	for (i=1; i<=tab_vert[x]; i++)
+				{	(x==0) ? strcat(s, vc_l) : strcat(s, vc_m);
+				}
+			}
+
+			strcat(s, " ");
+
+			f[0]= EOS;
+			if (tab_cell[y][x]!=NULL)
+			{	strcpy(f, tab_cell[y][x]);
+			}
+
+			add= 0;
+
+			switch(tab_just[x])
+			{	case TAB_CENTER:
+					stringcenter(f, ((int) tab_cell_w[x]) );
+					strcat(s, f);
+					tl= toklen(f);
+					if (tab_cell_w[x] > tl)	add=tab_cell_w[x]-tl;
+					if (add>0)	for (isl=0; isl<add; isl++) strcat(s, " ") ;
+					break;
+				case TAB_RIGHT:
+					tl=toklen(f);
+					if (tab_cell_w[x] > tl)	add=tab_cell_w[x]-tl;
+					if (add>0)	for (isl=0; isl<add; isl++) strcat(s, " ") ;
+					strcat(s, f);
+					break;
+				default:	/* TAB_LEFT */
+					strcat(s, f);
+					tl=toklen(f);
+					if (tab_cell_w[x] > tl)	add=tab_cell_w[x]-tl;
+					if (add>0)	for (isl=0; isl<add; isl++) strcat(s, " ") ;
+					break;
+			}
+			
+			strcat(s, " ");
+		}	/* for x */
+		
+		if (tab_vert[tab_w+1]>0)
+		{	for (i=1; i<=tab_vert[tab_w+1]; i++)
+			{	(i==tab_vert[tab_w+1]) ? strcat(s, vc_r) : strcat(s, vc_m);
+			}
+		}
+
+		if (inside_center)
+		{	stringcenter(s, zDocParwidth);
+		}
+
+		if (inside_right)
+		{	strright(s, zDocParwidth);
+		}
+
+		auto_quote_chars(s, FALSE);
+		switch(desttype)
+		{
+			case TOWIN:
+			case TOWH4:
+			case TOAQV:
+			case TORTF:
+			case TOLDS:	/* PL8 */
+				c_vars(s);
+				c_commands_inside(s, FALSE);
+				break;
+		}
+		replace_defines(s);
+		replace_udo_quotes(s);
+		switch (desttype)
+		{	case TOWIN:
+			case TOWH4:
+			case TOAQV:	c_win_styles(s);		break;
+			case TORTF:	c_rtf_styles(s);		break;
+			case TOLDS:	del_internal_styles(s);	break;	/* PL15*/
+			default:	c_internal_styles(s);
+		}
+		replace_placeholders(s);
+		replace_udo_tilde(s);
+		replace_udo_nbsp(s);
+
+		if (tortf)	strcat(s, "\\par");
+		if (tosrc)	strinsert(s, "    ");
+
+		outln(s);
+		
+		if (tab_hori[y]>0)
+		{	for (i=1; i<=tab_hori[y]; i++)
+			{	if (y==tab_h && i==tab_hori[y])
+				{	outln(hl[2]);
+				}
+				else
+				{	outln(hl[1]);
+				}
+			}
+		}
+	}	/* for y */
+
+	if (tosrc)
+	{	outln(sSrcRemOff);
+	}
+
+	if (tab_caption[0]!=EOS)
+	{	if (tortf)
+		{	outln(rtf_par);
+		}
+		else
+		{	outln("");
+		}
+		
+		/* PL7: Caption wird wie bei LaTeX nur zentriert, wenn sie	*/
+		/* kuerzer als die Absatzbreite ist.						*/
+		
+		token_reset();
+		align_caption= (strlen(tab_caption)<zDocParwidth);
+
+		if (align_caption)
+		{	s[0]= EOS;
+			if (inside_center)	strcpy(s, CMD_BEGIN_CENTER);
+			if (inside_right)	strcpy(s, CMD_BEGIN_RIGHT);
+			tokenize(s);
+			if (tab_caption_visible)
+			{	sprintf(s, "%s %d: %s", lang.table, tab_counter, tab_caption);
+			}
+			else
+			{	strcpy(s, tab_caption);
+			}
+			tokenize(s);
+			s[0]= EOS;
+			if (inside_center)	strcpy(s, CMD_END_CENTER);
+			if (inside_right)	strcpy(s, CMD_END_RIGHT);
+			tokenize(s);
+			token_output(TRUE);
+		}
+		else
+		{
+			if (tab_caption_visible)
+			{	sprintf(s, "%s %d: %s", lang.table, tab_counter, tab_caption);
+			}
+			else
+			{	strcpy(s, tab_caption);
+			}
+			tokenize(s);
+			token_output(TRUE);
+		}
+	}
+
+	if (tortf)
+	{	outln(rtf_par);
+	}
+
+	if (tortf || desttype==TOINF || desttype==TOLDS)
+	{	output_end_verbatim();
+	}
+
+}	/* table_output_general */
+
+
+
+GLOBAL void table_output ( void )
+{
+	tab_counter++;
+	
+	switch (desttype)
+	{	case TOHTM:
+		case TOMHH:
+			table_output_html();
+			break;
+		case TOTEX:
+		case TOPDL:
+			table_output_tex();	
+			break;
+		case TOAQV:
+		case TOWIN:
+		case TOWH4:
+			table_output_win();
+			break;
+		case TORTF:
+			if (bDocNoTables)
+			{	table_output_general();
+			}
+			else
+			{	table_output_rtf();
+			}
+			break;
+		case TOLYX:
+			table_output_lyx();
+			break;
+		case TOIPF:
+			table_output_ipf();
+			break;
+		default:
+			table_output_general();
+			break;
+	}
+	
+	table_reset();
+	tab_caption[0]= EOS;
+	tab_caption_visible= FALSE;
+	token_reset();
+	check_styleflags();
+
+}	/* table_output */
+
+
+/*	############################################################
+	# Tabellen-Zaehler veraendern
+	############################################################	*/
+GLOBAL void set_table_counter ( const int i )
+{
+	tab_counter= i-1;
+	if (tab_counter<0)
+	{	tab_counter= 0;
+	}
+}
+
+
+/*	############################################################
+	# Diverses
+	############################################################	*/
+GLOBAL void set_table_alignment ( void )
+{
+	char s[256];
+
+	tokcpy2(s);
+
+	if (strstr(s, "center")!=NULL)
+	{	table_alignment= ALIGN_CENT;
+		return;
+	}
+
+	if (strstr(s, "left")!=NULL)
+	{	table_alignment= ALIGN_LEFT;
+		return;
+	}
+
+	if (strstr(s, "right")!=NULL)
+	{	table_alignment= ALIGN_RIGH;
+		return;
+	}
+
+}	/* set_table_alignment */
+
+
+/*	############################################################
+	# Modulinit
+	############################################################	*/
+
+GLOBAL void init_module_tab ( void )
+{
+	tab_counter=		0;
+	tab_caption[0]=		EOS;
+	tab_caption_visible= FALSE;
+}
+
+/*	############################################################
+	# tab.c
+	############################################################	*/

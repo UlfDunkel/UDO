@@ -1,0 +1,528 @@
+!subsubnode !/begin_appendix
+
+Anhang einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/begin_appendix(!t)
+
+!item [Beschreibung:] 
+	Leitet den Anhang ein. Kapitel werden im Anhang mit Buchstaben        
+	gekennzeichnet. UDO unterstützt nur einen Anhang pro Quelltext!       
+
+
+!item [Siehe auch:] (!I)!/end_appendix(!i), Anhang
+
+!end_xlist
+#------------------------------
+!subsubnode !/begin_blist
+
+Eine ""fette"" Liste einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/begin_blist [<text>](!t)
+
+!item [Beschreibung:] 
+	Leitet eine neue Listen-Umgebung ein. Diese Umgebung muß mit          
+	(!I)!/end_blist(!i) beendet werden. Die Länge von (!T)<text>(!t)      
+	definiert die Tiefe der Einrückung der Aufzählungspunkte. Diese       
+	Umgebung läßt sich mit anderen Umgebungen kombiniert verwenden. Die   
+	Texte, die man mit (!I)!/item~[~](!i) angibt, werden fett dargestellt.
+
+
+!item [Siehe auch:] (!I)!/end_blist(!i), (!I)!/item~[~](!i), (!I)!/begin_ilist(!i), (!I)!/begin_tlist(!i), (!I)!/begin_xlist(!i), Listen
+
+!end_xlist
+#------------------------------
+!subsubnode !/begin_center
+
+Text zentriert ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/begin_center(!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando öffnet eine (neue) center-Umgebung. Zeilen, die       
+	innerhalb dieser Umgebung stehen, werden zentriert ausgegeben, bis    
+	das Kommando (!I)!/end_center(!i) angegeben wird. UDO formatiert auch 
+	die Zeilen dieser Umgebung, daher sollte man auch hier notfalls       
+	manuelle Zeilenumbrüche mit (!I)(!/nl)(!i) einfügen.                  
+
+
+!item [Siehe auch:] (!I)!/end_center(!i), (!I)(!/nl)(!i), Texthervorhebungen
+
+!end_xlist
+#------------------------------
+!subsubnode !/begin_comment
+
+
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/begin_comment(!t)
+
+!item [Beschreibung:] 
+	(!MISS)                                                               
+
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/begin_description
+
+Neue Beschreibung einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/begin_description(!t)
+
+!item [Beschreibung:] 
+	Leitet eine (weitere) description-Umgebung ein. Diese Umgebung muß    
+	mit (!I)!/end_description(!i) beendet werden. Die                     
+	description-Umgebung kann mehrfach verschachtelt benutzt oder mit     
+	anderen Umgebungen kombiniert werden. Aufzählungspunkte werden bei    
+	der description-Umgebung mit (!I)!/item~[~](!i) eingeleitet. Der      
+	Text, der dann hier in eckigen Klammern angegeben wird, wird in       
+	Fettschrift ausgegeben, sofern das Ausgabeformat Fettschrift          
+	unterstützt.                                                          
+
+
+!item [Siehe auch:] (!I)!/end_description(!i), (!I)!/item~[~](!i), Beschreibungen, (!I)!/short(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/begin_document
+
+Hauptteil des Dokumentes einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/begin_document(!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando (!B)muß(!b) in jedem Quelltext vorhanden sein. Es     
+	trennt den Vorspann des Quelltextes vom Hauptteil.                    
+
+
+!item [Siehe auch:] (!I)!/end_document(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/begin_enumerate
+
+Neue Numerierung einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/begin_enumerate(!t)
+
+!item [Beschreibung:] 
+	Leitet eine (weitere) enumerate-Umgebung ein. Diese Umgebung muß mit  
+	(!I)!/end_enumerate(!i) beendet werden. Die enumerate-Umgebung können 
+	Sie mehrfach verschachtelt und auch mit anderen Umgebungen kombiniert 
+	benutzen. Aufzählungspunkte einer enumerate-Umgebung werden mit       
+	(!I)!/item(!i) eingeleitet und mit alphanumerischen Zeichen markiert. 
+
+
+!item [Siehe auch:] (!I)!/end_enumerate(!i), (!I)!/item(!i), Numerierungen, (!I)!/short(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/begin_flushleft
+
+Umgebung für linksbündigen Text öffnen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/begin_flushleft(!t)
+
+!item [Beschreibung:] 
+	Zeilen, die in einer flushleft-Umgebung stehen, werden immer          
+	linksbündig, d.h. ohne Blocksatz, ausgegeben.                         
+
+
+!item [Siehe auch:] Texthervorhebungen, (!I)!/end_flushleft(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/begin_flushright
+
+Umgebung für rechtsbündigen Text öffnen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/begin_flushright(!t)
+
+!item [Beschreibung:] 
+	Zeilen, die in einer flushright-Umgebung stehen, werden rechtsbündig  
+	ausgegeben.                                                           
+
+
+!item [Siehe auch:] Texthervorhebungen, (!I)!/end_flushright(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/begin_ilist
+
+Eine ""kursive"" Liste einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/begin_ilist [<text>](!t)
+
+!item [Beschreibung:] 
+	Leitet eine neue Listen-Umgebung ein. Diese Umgebung muß mit          
+	(!I)!/end_ilist(!i) beendet werden. Die Länge von ""<text>""          
+	definiert die Tiefe der Einrückung der Aufzählungspunkte. Sie können  
+	diese Umgebung auch mit anderen Umgebungen kombinieren.. Die          
+	Aufzählungspunkte, die man mit (!I)!/item~[~](!i) einleitet, werden   
+	kursiv dargestellt.                                                   
+
+
+!item [Siehe auch:] (!I)!/end_ilist(!i), (!I)!/item~[~](!i), (!I)!/begin_blist(!i), (!I)!/begin_xlist(!i), (!I)!/begin_tlist(!i), Listen
+
+!end_xlist
+#------------------------------
+!subsubnode !/begin_itemize
+
+Neue Aufzählung einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/begin_itemize(!t)
+
+!item [Beschreibung:] 
+	Leitet eine (weitere) itemize-Umgebung ein. Diese Umgebung muß mit    
+	(!I)!/end_itemize(!i) beendet werden. Die itemize-Umgebung können Sie 
+	mehrfach und auch mit anderen Umgebungen kombiniert einsetzen.        
+	Aufzählungspunkte, die mit (!I)!/item(!i) eingeleitet werden, werden  
+	mit Punkten und Strichen markiert.                                    
+
+
+!item [Siehe auch:] (!I)!/end_itemize(!i), (!I)!/item(!i), Aufzählungen, (!I)!/short(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/begin_quote
+
+Umgebungstext eingerückt darstellen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/begin_quote(!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando leitet eine (weitere) quote-Umgebung ein. Text, der   
+	zwischen diesem und (!I)!/end_quote(!i) angegeben ist, wird           
+	eingerückt dargestellt. Sie können die Umgebung mehrfach und          
+	kombiniert mit anderen Umgebungen benutzen.                           
+
+
+!item [Siehe auch:] (!I)!/end_quote(!i), Einrücken von Absätzen
+
+!end_xlist
+#------------------------------
+!subsubnode !/begin_raw
+
+raw-Umgebung einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/begin_raw(!t)
+
+!item [Beschreibung:] 
+	Dieser Befehl leitet eine raw-Umgebung ein. Diese Umgebung muß mit    
+	(!I)!/end_raw(!i) beendet werden. Jede Zeile innerhalb dieser         
+	Umgebung wird direkt, also ohne jegliche Umwandlung, Zentrierung oder 
+	Einrückung ausgegeben. Die Umgebung dient daher zur Einbindung        
+	spezieller Befehle für die Ausgabeformate.                            
+
+
+!item [Siehe auch:] (!I)!/end_raw(!i), raw-Umgebung, (!I)!/rinclude(!i), (!I)!/ifdest(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/begin_sourcecode
+
+Eine Sourcecode-Umgebung einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/begin_sourcecode(!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando leitet eine sourcecode-Umgebung ein. Diese Umgebung   
+	muß mit (!I)!/end_sourcecode(!i) beendet werden. Zeilen die in einer  
+	solchen Umgebung angegeben sind, werden für die Sourcecode-Formate    
+	ohne Anpassung ausgegeben. Bei allen ""normalen"" Formaten erfolgt    
+	die Ausgabe der Zeilen, als ob sie innerhalb einer verbatim-Umgebung  
+	stehen, welche sich wiederum innerhalb einer quote-Umgebung befindet. 
+
+
+!item [Siehe auch:] (!I)!/end_sourcecode(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/begin_table
+
+Eine Tabelle beginnen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/begin_table [<format>] {!/hline}(!t)
+
+!item [Beschreibung:] 
+	Mit diesem Kommando wird eine Tabelle eingeleitet. Für ''<format>''   
+	geben Sie an, wie die Spalten der Tabelle ausgerichtet werden sollen  
+	und vor bzw. nach welcher Spalte vertikale Linien gezogen werden      
+	sollen. Wird zum Schluß noch (!I)!/hline(!i) angegeben, so beginnt    
+	die Tabelle mit einer horizontalen Linie. Im Beispiel sehen Sie eine  
+	Tabelle, die mit links, rechts und oben mit einer Linie versehen ist  
+	und die Spalten linksbündig, zentriert und rechtsbündig ausgerichtet  
+	werden.                                                               
+
+!item [Beispiel:] (!T)!/begin_table [|lcr|] !/hline(!t)
+
+!item [Siehe auch:] (!I)!/hline(!i), (!I)!/end_table(!i), Tabellen
+
+!end_xlist
+#------------------------------
+!subsubnode !/begin_tlist
+
+Eine ""nichtproportionale"" Liste einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/begin_tlist [<text>](!t)
+
+!item [Beschreibung:] 
+	Leitet eine neue Listen-Umgebung ein. Diese Umgebung muß mit          
+	(!I)!/end_ilist(!i) beendet werden. Die Länge von ""<text>""          
+	definiert die Tiefe der Einrückung der Aufzählungspunkte. Sie können  
+	diese Umgebung auch mit anderen Umgebungen kombinieren.. Die          
+	Aufzählungspunkte, die man mit (!I)!/item~[~](!i) einleitet, werden   
+	nichtproportional dargestellt.                                        
+
+
+!item [Siehe auch:] (!I)!/end_tlist(!i), (!I)!/item~[~](!i), (!I)!/begin_blist(!i), (!I)!/begin_ilist(!i), (!I)!/begin_xlist(!i), Listen
+
+!end_xlist
+#------------------------------
+!subsubnode !/begin_verbatim
+
+Eine verbatim-Umgebung einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/begin_verbatim(!t)
+
+!item [Beschreibung:] 
+	Leitet eine verbatim-Umgebung ein. Diese Umgebung muß mit             
+	(!I)!/end_verbatim(!i) beendet werden. Text einer verbatim-Umgebung   
+	wird 1:1 ausgegeben, es werden keine UDO-Kommandos umgewandelt! Auch  
+	die Wirkung von etwaigen Zielformatbefehlen wird aufgehoben. Bei der  
+	Ausgabe werden Einrückungen beachtet.                                 
+
+
+!item [Siehe auch:] (!I)!/end_verbatim(!i), Vorformatierter Text, (!I)!/vinclude(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/begin_xlist
+
+Eine Liste einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/begin_xlist [<text>](!t)
+
+!item [Beschreibung:] 
+	Leitet eine neue Listen-Umgebung ein. Diese Umgebung muß mit          
+	(!I)!/end_xlist(!i) beendet werden. Die Länge von ""<text>""          
+	definiert die Tiefe der Einrückung der Aufzählungspunkte. Diese       
+	Umgebung läßt sich mit anderen Umgebungen kombiniert verwenden. Die   
+	Texte, die man mit (!I)!/item~[~](!i) angibt, werden normal           
+	dargestellt.                                                          
+
+
+!item [Siehe auch:] (!I)!/end_xlist(!i), (!I)!/item~[~](!i), (!I)!/begin_blist(!i), (!I)!/begin_ilist(!i), (!I)!/begin_tlist(!i), Listen
+
+!end_xlist
+#------------------------------
+!subsubnode !/bigskip
+
+Drei zusätzliche Leerzeilen einfügen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/bigskip(!t)
+
+!item [Beschreibung:] 
+	Dieser Befehl sorgt für die Ausgabe von drei zusätzlichen Leerzeilen  
+	und dient dazu, Absätze deutlicher voneinander abzuheben. Bei der     
+	Umwandlung ins (!LaTeX)-Format werden keine drei Leerzeilen sondern   
+	''(!V)\bigskip(!v)'' ausgegeben.                                      
+
+
+!item [Siehe auch:] (!I)!/smallskip(!i), (!I)!/medskip(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/break
+
+Umwandlung vorzeitig unterbrechen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/break(!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando kann man benutzen, um die Umwandlung des Quelltextes  
+	vorzeitig zu beenden. Alles, was nach (!I)!/break(!i) folgt, wird     
+	nicht mehr beachtet. UDO führt noch automatisch ein                   
+	(!I)!/end_appendix(!i) und (!I)!/end_document(!i) aus, bevor die      
+	Umwandlung unterbrochen wird.                                         
+
+
+
+!end_xlist
+#------------------------------
+!subsubnode (!/B)...(!/b)
+
+Fettschrift
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Platzhalter, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)(!/B)<text>(!/b)(!t)
+
+!item [Beschreibung:] 
+	(!V)<text>(!v) wird fett dargestellt, falls möglich.                  
+
+!item [Beispiel:] (!T)(!/B)fett(!/b)(!t)
+
+!item [Siehe auch:] Texthervorhebungen
+
+!end_xlist
+#------------------------------
+!subsubnode (!/beta)
+
+
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Platzhalter, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)(!/beta)(!t)
+
+!item [Beschreibung:] 
+	Dieser Platzhalter wird durch (!beta) ersetzt.                        
+
+!item [Beispiel:] (!T)(!/beta)(!t) wird zu (!beta)
+
+!item [Siehe auch:] (!I)(!/alpha)(!i), Sonderzeichen
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

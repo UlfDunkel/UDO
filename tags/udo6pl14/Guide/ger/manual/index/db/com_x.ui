@@ -1,0 +1,66 @@
+!subsubnode (!/xlink~!..)
+
+Verweis auf externe Daten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Platzhalter, Hauptteil
+
+!item [Syntax:] 
+	(!T)(!/xlink [<text>] [<link>])(!t)
+
+!item [Beschreibung:] 
+	Dient zum Erzeugen von Verweisen auf externe Dokumente. Im            
+	Unterschied zu (!I)(!/link~!..)(!i) werden Sonderzeichen innerhalb    
+	(!V)<link>(!v) nicht umgewandelt. Im Beispiel würde bei einem         
+	HTML-File ein Querverweis auf die Seite der Deutschen Telekom         
+	erzeugt. (!V)<link>(!v) kann auch leer sein, dann wird für            
+	(!V)<link>(!v) der Inhalt von (!V)<text>(!v) ausgegeben.              
+
+!item [Beispiel:] (!T)(!/xlink [Deutsche Telekom] [http://www.dtag.de])(!t)
+
+!item [Siehe auch:] (!I)(!/link~!..)(!i), (!I)(!/plink~!..)(!i), (!I)!/no_xlinks(!i), Querverweise
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

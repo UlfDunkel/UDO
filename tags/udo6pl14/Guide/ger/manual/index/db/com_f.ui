@@ -1,0 +1,66 @@
+!subsubnode !/fussy
+
+Warnmeldungen für kurze Zeilen einschalten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/fussy(!t)
+
+!item [Beschreibung:] 
+	Schaltet die Warnung vor kurzen Zeilen wieder ein. Bei der Umwandlung 
+	ins (!LaTeX)-Format erfolgt (!B)keine(!b) Umsetzung in                
+	''(!V)\fussy(!v)''!                                                   
+
+
+!item [Siehe auch:] (!I)!/sloppy(!i), Fehlermeldungen, Silbentrennung
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

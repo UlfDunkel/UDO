@@ -1,0 +1,330 @@
+!subsubnode !!~
+
+Tilde
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Sonderzeichen, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!!~(!t)
+
+!item [Beschreibung:] 
+	Diese Zeichenfolge wird nach der Umwandlung als Tilde dargestellt.    
+	Beachten Sie, daß eine einzige Tilde als festes Leerzeichen           
+	interpretiert wird.                                                   
+
+!item [Beispiel:] Aus (!V)!!~(!v) wird (!T)!~(!t)
+
+!item [Siehe auch:] (!I)!~(!i), Feste Leerzeichen
+
+!end_xlist
+#------------------------------
+!subsubnode !/-
+
+Marke für eine mögliche Trennstelle
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Sonderzeichen, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/-(!t)
+
+!item [Beschreibung:] 
+	Hiermit können Sie Stellen in einem Wort markieren, an denen UDO das  
+	Wort trennen darf. Das Beispiel zeigt, wie man die Stellen des Wortes 
+	""Silbentrennung"" markieren könnte.                                  
+
+!item [Beispiel:] (!V)Sil!/-ben!/-tren!/-nung(!v)
+
+!item [Siehe auch:] (!I)!/hyphen(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/!/
+
+
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Sonderzeichen, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/!/(!t)
+
+!item [Beschreibung:] 
+	Ein doppeltes Ausrufungszeichen trennt die Zellen einer Tabellenzeile 
+	sowie Indexeinträge.                                                  
+
+!item [Beispiel:] (!T)!/index Ebene 1 !/!/ Ebene 2(!t)
+
+!item [Siehe auch:] Tabellen, Indizes
+
+!end_xlist
+#------------------------------
+!subsubnode !/..
+
+Typographische drei Punkte ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Sonderzeichen, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/..(!t)
+
+!item [Beschreibung:] 
+	Ein Ausrufungszeichen, gefolgt von zwei Punkten, wandelt UDO in       
+	typographische drei Punkte um, sofern das Ausgabeformat diese         
+	anzeigen kann. Ansonsten wandelt UDO (!I)!/..(!i) in drei normale     
+	Punkte um.                                                            
+
+!item [Beispiel:] Aus (!T)!/..(!t) wird !..
+
+
+!end_xlist
+#------------------------------
+!subsubnode !~
+
+Festes Leerzeichen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Sonderzeichen, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!~(!t)
+
+!item [Beschreibung:] 
+	Die Tilde gilt in der UDO-Syntax als festes Leerzeichen. Wörter,      
+	zwischen denen ein festes Leerzeichen steht, werden nicht durch einen 
+	Zeilenumbruch voneinander getrennt. Beim  Blocksatz werden an der     
+	Einsatzstelle auch keine Leerzeichen eingefügt.                       
+
+!item [Beispiel:] (!T)42!~DM(!t), (!T)Dr.!~Sommer(!t)
+
+!item [Siehe auch:] (!I)!!~(!i), Feste Leerzeichen
+
+!end_xlist
+#------------------------------
+!subsubnode ("")
+
+Typographisches Anführungszeichen ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Sonderzeichen, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)("")(!t)
+
+!item [Beschreibung:] 
+	Zwei aufeinanderfolgende Anführungszeichen werden von UDO in die      
+	typographischen Anführungszeichen der benutzten Sprache umgewandelt,  
+	sofern das Ausgabeformat diese anzeigen kann. Andernfalls werden      
+	doppelte Anführungszeichen durch einfache ersetzt.                    
+
+!item [Beispiel:] ""Typographische Anführungszeichen""
+
+!item [Siehe auch:] (!I)((""))(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode ((""))
+
+Zwei Anführungszeichen ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Sonderzeichen, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)((""))(!t)
+
+!item [Beschreibung:] 
+	Wollen Sie zwei Anführungszeichen ausgeben, so müssen Sie diese       
+	klammern. Andernfalls würde UDO diese in typographische               
+	Anführungszeichen umwandeln.                                          
+
+
+!item [Siehe auch:] (!I)("")(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode ((''))
+
+Zwei Apostophe ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Sonderzeichen, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)((''))(!t)
+
+!item [Beschreibung:] 
+	Wollen Sie zwei Apostrophe ausgeben, so müssen Sie diese klammern.    
+	Andernfalls würde UDO diese in typographische Apostrophe umwandeln.   
+
+
+!item [Siehe auch:] (!I)('')(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode ((--))
+
+Zwei Minuszeichen ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Sonderzeichen, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)((--))(!t)
+
+!item [Beschreibung:] 
+	Wenn Sie zwei Minuszeichen ausgegeben wollen, so müssen Sie diese     
+	Klammern. Andernfalls würde UDO diese beiden Minuszeichen in einen    
+	kurzen Gedankenstrich umwandeln.                                      
+
+!item [Beispiel:] (!T)((--))outfile(!t)
+
+!item [Siehe auch:] (!I)(--)(!i), (!I)((---))(!i), Gedankenstriche
+
+!end_xlist
+#------------------------------
+!subsubnode ((---))
+
+Drei Minuszeichen ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Sonderzeichen, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)((---))(!t)
+
+!item [Beschreibung:] 
+	Wenn Sie drei Minuszeichen ausgegeben wollen, so müssen Sie diese     
+	Klammern. Andernfalls würde UDO diese drei Minuszeichen in einen      
+	langen Gedankenstrich umwandeln.                                      
+
+
+!item [Siehe auch:] (!I)(---)(!i), (!I)((--))(!i), Gedankenstriche
+
+!end_xlist
+#------------------------------
+!subsubnode ('')
+
+Typographisches Apostroph ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Sonderzeichen, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)('')(!t)
+
+!item [Beschreibung:] 
+	Zwei aufeinanderfolgende Apopstrophe werden von UDO in die            
+	typographischen Apostrophe der benutzten Sprache umgewandelt, sofern  
+	das Ausgabeformat diese anzeigen kann. Andernfalls werden doppelte    
+	Apostrophe durch einfache ersetzt.                                    
+
+!item [Beispiel:] ''Typographische Apostrophe''
+
+!item [Siehe auch:] (!I)((''))(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode (--)
+
+Kurzen Gedankenstrich ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Sonderzeichen, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)(--)(!t)
+
+!item [Beschreibung:] 
+	Zwei aufeinanderfolgende Minuszeichen werden von UDO in einen kurzen  
+	Gedankenstrich umgewandelt, sofern das Ausgabeformat Gedankenstriche  
+	anzeigen kann. Andernfalls werden die beiden Minuszeichen durch eines 
+	ersetzt.                                                              
+
+!item [Beispiel:] Ein kurzer -- ähm, achso -- Gedankenstrich
+
+!item [Siehe auch:] (!I)((--))(!i), Gedankenstriche
+
+!end_xlist
+#------------------------------
+!subsubnode (---)
+
+Langen Gedankenstrich ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Sonderzeichen, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)(---)(!t)
+
+!item [Beschreibung:] 
+	Drei aufeinanderfolgende Minuszeichen werden von UDO in einen langen  
+	Gedankenstrich umgewandelt, sofern das Ausgabeformat Gedankenstriche  
+	anzeigen kann. Andernfalls werden die beiden Minuszeichen durch eines 
+	ersetzt.                                                              
+
+!item [Beispiel:] Ein langer --- ähm, achso --- Gedankenstrich
+
+!item [Siehe auch:] (!I)((---))(!i), Gedankenstriche
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

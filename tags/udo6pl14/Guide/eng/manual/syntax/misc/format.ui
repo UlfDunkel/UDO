@@ -1,0 +1,97 @@
+############################################################
+# @(#) Special commands, Dirk Hagedorn, 1996/04/17
+############################################################
+
+!subsubnode Special commands
+
+UDO offers you two commands and an environment for every destination
+format that you can use to insert special commands for this format. So
+you are able to insert small passages or huge blocks written in the
+destination format (like special tables for (!LaTeX) or HTML).
+
+You have to use abbreviations of the destination formates if you want
+to use these special commands:
+
+!include syntax/misc/_dest.ui
+
+For every destination format UDO offers a command to insert a line
+with commands for the current destination format, and a command to
+insert a line for all different formats. The commands are built by a
+''!'' and the abbreviations or ''!/='' plus the abbreviation.
+
+The next example shows how to insert a line that will only be printed
+for the ASCII format:
+
+!begin_quote
+!begin_verbatim
+!asc This line appears only in ASCII.
+!end_verbatim
+!end_quote
+
+The next example shows how to insert a line that appears in all formats
+except ASCII:
+
+!begin_quote
+!begin_verbatim
+!=asc This line doesn't appear in ASCII.
+!end_verbatim
+!end_quote
+
+The contents of the line will be printed without the command and
+without converting the text of the line. These commands split up text
+into different paragraphs like all the other UDO commands. So these
+commands aren't useful to insert a line into a paragraph!
+
+You can use these commands to insert special commands like parts of
+the preamble for (!LaTeX):
+
+!begin_quote
+!begin_verbatim
+!tex \documentstyle[11pt,makeidx]{article}
+!tex \makeindex
+[...]
+!tex \printindex
+!end_verbatim
+!end_quote
+
+!label raw environment
+!subsubheading The raw environment
+
+But it happens that you want to insert large passages only for one
+format with special commands. You could add one of the upper commands
+at the beginning of each line, sure. But to make it easier for you to insert
+these passages UDO has a special environment for this case: the raw
+environment.
+
+Together with the possibility to check the current destination format you
+can e.g. insert complex tables for (!LaTeX) or forms for HTML with the raw
+environment. The following example shows how to enter HTML forms to your
+source code:
+
+!index HTML !! <FORM>
+!index <FORM>
+
+!begin_quote
+!begin_verbatim
+!ifdest [html]
+!begin_raw
+<FORM method=post action="mailto:DirkHage@aol.com">
+<PRE>
+<p>    Name:  <INPUT name="Name" size=60>
+<p>
+<p>           <INPUT type=submit value="Send">
+<p>           <INPUT type=reset value="Reset">
+</PRE>
+</FORM>
+!end_raw
+!else
+The HTML version will display a form here.
+!endif
+!end_verbatim
+!end_quote
+
+To say it once more: Text that is part of a raw environment is printed ""as
+is"". That means that it's not converted and not indented. If you will
+insert the upper form source code into a verbatim environment you will
+see the source code in an HTML browser. But if you insert it inside a raw
+environment you will see the form!

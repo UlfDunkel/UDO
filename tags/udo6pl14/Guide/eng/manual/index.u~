@@ -1,0 +1,170 @@
+########################################
+# @(#) main documentation file
+# This file doesn't contain any text!
+# Any text will be included from other
+# files.
+########################################
+
+!language english
+
+# ---------------------------------------------
+# The syllabification pattern are saved using
+# the DOS characterset and are inside the file
+# hyphen.ui
+# ---------------------------------------------
+!include	hyphen.ui
+
+# ---------------------------------------------
+# The rest of the source files were written
+# using a Windows editor and the ANSI charset
+# ---------------------------------------------
+!code iso
+
+# ---------------------------------------------
+# The unnumerous switches are part of header.ui
+# ---------------------------------------------
+!include	header.ui
+
+# ---------------------------------------------
+# Set some macros
+# ---------------------------------------------
+!macro	MISS		(!idx [Something's still missing here])!..
+!macro	HINTS		(!B)Please note:(!b)
+!macro	HINT		(!B)Please note:(!b)
+!macro	MAXLINK 	200
+!macro	MAXMACRO 	128
+
+
+# ---------------------------------------------
+# The title of this documentation depends on
+# the destination format
+# ---------------------------------------------
+!ifdest [stg]
+!docinfo	[title]	The hypertext of
+!endif
+
+!ifdest [win]
+!docinfo	[title]	The Windows Help of
+!endif
+
+!ifndest [stg,win]
+!docinfo	[title]	The guide to
+!endif
+
+
+# ---------------------------------------------
+# Set the still missing information for the
+# title page
+# ---------------------------------------------
+!docinfo	[program]		UDO
+!docinfo	[version]		Release 6 Patchlevel 14
+!docinfo	[date]			October 27, 2001
+
+!docinfo	[author]		Dirk Hagedorn
+!docinfo	[address]		Asmecke 1
+!docinfo	[address]		59846 Sundern
+!docinfo	[address]		Germany
+!docinfo	[address]		E-Mail: udo@dirk-hagedorn.de
+
+
+# If you convert to HTML it makes sense to
+# make a directory called html\ and to start
+# udo with the option --outfile html\index.htm
+# But then you have to adjust the paths of
+# the images used inside the documentation
+
+!ifdest [html]
+!docinfo	[authorimage]	..\images\dh
+!else
+!docinfo	[authorimage]	..\images\dh
+!endif
+
+#############################################################
+# 10, 9, 8, 7, 6, ignition sequence started, ...
+# Using the option -D you can make smaller manuals. If you
+# e.g. want a manual without installation hints and tips
+# for Windows call UOD like this:
+# $ udo --win -o ! -D NoTips -D NoInstall udo.u
+#############################################################
+!begin_document
+!raw [tex] \sloppy
+#!sloppy
+
+!maketitle
+!tableofcontents !depth 1
+
+# Introduction
+!ifnset [NoIntro]
+!include intro/00_index.ui
+!endif
+
+# Open Source
+!ifnset [NoOpenSource]
+!include opensrc/00_index.ui
+!endif
+
+# Installation
+!ifnset [NoInstall]
+!include install/00_index.ui
+!endif
+
+# Usage
+!ifnset [NoUsage]
+!include usage/00_index.ui
+!endif
+
+# UDO syntax
+!ifnset [NoSyntax]
+!include syntax/00_index.ui
+!endif
+
+# Tips & tricks
+!ifnset [NoTips]
+!include tips/00_index.ui
+!endif
+
+
+###########
+# Appendix
+###########
+
+!ifnset [NoAppendix]
+
+!begin_appendix
+!newpage
+
+# FAQ
+!ifnset [NoFaq]
+!include faq/00_index.ui
+!endif
+
+# Known bugs
+!ifnset [NoBugs]
+!include general/bugs.ui
+!endif
+
+# Error messages
+!ifnset [NoErrors]
+!include general/errors.ui
+!endif
+
+# Facts
+!ifnset [NoFacts]
+!include general/facts.ui
+!endif
+
+# History
+!ifnset [NoHistory]
+!include history/00_index.ui
+!endif
+
+# Command index
+!ifnset [NoIndex]
+!include index/00_index.ui
+!endif
+
+!end_appendix
+
+!endif
+
+!end_document

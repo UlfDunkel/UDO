@@ -1,0 +1,33 @@
+#############################################################
+# @(#) Fehlermeldungen, Dirk Hagedorn, 26.09.1995
+# @(#) Meldungen werden nun mit Phoenix verwaltet, 22.08.1996
+#############################################################
+
+!node Error messages
+
+UDO prints all error messages, warnings and hints that appear when
+converting the source file to files with the suffix
+(!V).ul?(!v). Each message is constructed the following way:
+
+!autoref [off]
+
+!begin_quote
+!begin_verbatim
+  Error: <file> <line number>: <text>
+Warning: <file> <line number>: <text>
+   Hint: <file> <line number>: <text>
+!end_verbatim
+!end_quote
+
+!autoref [on]
+
+If you want to avoid these errors, warnings and hints open the printed file,
+go to the printed line and try to find the error. Start with the first
+printed error and convert your source file once again. A lot of messages
+will disappear because they depend on earlier errors.
+
+!begin_description
+
+!include general/db_error.ui
+
+!end_description

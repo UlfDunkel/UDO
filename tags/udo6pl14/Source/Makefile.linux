@@ -1,0 +1,17 @@
+###########################################################
+# @(#) Makefile fuer Linux (i86)
+# @(#) Dirk Hagedorn, 27.06.1996
+###########################################################
+CC = gcc 
+
+CFLAGS = -g -O2 -Wall -D__LINUX__
+
+#CFLAGS =	-g -O2 -D__LINUX__ \
+#-Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations \
+#-Wshadow -Wwrite-strings -Wbad-function-cast -Wcast-qual \
+#-Wconversion -pedantic 
+
+LDFLAGS = -s
+
+include makefile.in
+

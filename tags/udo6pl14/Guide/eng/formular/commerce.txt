@@ -1,0 +1,54 @@
+Mr.
+Dirk Hagedorn                        Telefax: +49 2933 77979
+Asmecke 1                            Email: DirkHage@aol.com
+59846 Sundern
+Germany
+
+Sender's address (please write legibly):
+
+Company:  ..................................................
+Street:   ..................................................
+Town:     ..................................................
+Country:  ..................................................
+Phone:    ..................................................
+Fax:      ..................................................
+Your name:..................................................
+E-Mail:   ..................................................
+
+
+Dear Mr. Hagedorn,                          Date: ..........
+
+
+I want to register for UDO Release 6 as a commercial user.
+
+I want to purchase the following number of licences for the
+marked operating systems. Please send me the keycodes to
+let me disable the limitation of the shareware version:
+
+    [ ] ..... Atari-TOS, MagiC, MagiC-Mac, MagiC-PC
+    [ ] ..... BeOS
+    [ ] ..... HP-UX
+    [ ] ..... Linux i86
+    [ ] ..... MacOS
+    [ ] ..... MS-DOS (Windows, OS/2)
+    [ ] ..... NeXTStep/OpenStep
+    [ ] ..... SINIX
+
+  Sum:  ..... (x)
+
+The shareware fee of (150+(x-1)*50) DM
+
+    ( ) has been transferred to your bank account (Account
+        number: 3 561 164, Bank: Sparkasse Arnsberg-Sundern,
+        Germany, Bank code: 466 500 05) on .................
+
+    ( ) has been sent to you with this letter as 
+        ( ) a cheque
+        ( ) an Eurocheque
+
+
+Regards,
+
+
+
+(Sign)
