@@ -3236,7 +3236,7 @@ LOCAL void html_node_bar_modern ( void )
 
 GLOBAL void html_save_frameset ( void )
 {
-	char add[1024], add2[128], s[512], f1[512], f2[512];
+	char add[1024], add2[256], s[512], f1[512], f2[512];
 
 	/* New in r6pl16 [NHz] */
 	if(html_doctype >= XHTML_STRICT)
@@ -3267,7 +3267,7 @@ GLOBAL void html_save_frameset ( void )
 	if (html_frames_noborder)	strcat(add, " border=\"0\" frameborder=\"0\" framespacing=\"0\"");
 
 	add2[0]= EOS;
-	if (html_frames_noresize)	strcat(add2, " noresize");
+	if (html_frames_noresize)	strcat(add2, " noresize=\"noresize\"");
 	if (html_frames_noscroll)	strcat(add2, " scrolling=\"no\"");
 	sprintf(f1, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\"%s />",
 			html_name_prefix, FRAME_FILE_TOC, outfile.suff, FRAME_NAME_TOC, add2);
@@ -3404,7 +3404,7 @@ LOCAL void html_node_bar_frames ( void )
 			outln(rowOn);
 			break;
 		default:
-			sprintf(alignOn, "<td nowrap>%s", sHtmlPropfontStart);
+			sprintf(alignOn, "<td nowrap=\"nowrap\" >%s", sHtmlPropfontStart);
 			sprintf(alignOff, "%s</td>", sHtmlPropfontEnd);
 			strcpy(rowOn, "<tr>");
 			strcpy(rowOff, "</tr>");
@@ -9219,7 +9219,7 @@ GLOBAL void set_html_frames_layout ( void )
 
 	tokcpy2(s, 512);
 
-	if (strstr(s, "noresize")!=NULL)
+	if (strstr(s, "noresize=\"noresize\"")!=NULL)
 	{	html_frames_noresize= TRUE;
 	}
 
