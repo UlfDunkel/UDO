@@ -1,5 +1,5 @@
 # doc/manual/source/history.ui
-# letzte Änderungen: 03.01.2004 / last change: Jan 3, 2004
+# letzte Änderungen: 10.01.2004 / last change: Jan 10, 2004
 
 
 !iflang [german]
@@ -41,7 +41,7 @@ In this chapter you will find a short summary of all the changes in the past.
 # !item [Fehlerbehebungen:]
 # 	!begin_itemize !short
 # 	!end_itemize
-# !endif
+!endif
 
 !iflang [english]
 # !item [New destination formats:]
@@ -97,7 +97,7 @@ In this chapter you will find a short summary of all the changes in the past.
 # !item [Fehlerbehebungen:]
 # 	!begin_itemize !short
 # 	!end_itemize
-# !endif
+!endif
 
 !iflang [english]
 # !item [New destination formats:]
@@ -154,7 +154,7 @@ In this chapter you will find a short summary of all the changes in the past.
 # !item [Fehlerbehebungen:]
 # 	!begin_itemize !short
 # 	!end_itemize
-# !endif
+!endif
 
 !iflang [english]
 # !item [New destination formats:]
@@ -211,7 +211,7 @@ In this chapter you will find a short summary of all the changes in the past.
 # !item [Fehlerbehebungen:]
 # 	!begin_itemize !short
 # 	!end_itemize
-# !endif
+!endif
 
 !iflang [english]
 # !item [New destination formats:]
@@ -269,7 +269,7 @@ In this chapter you will find a short summary of all the changes in the past.
 # !item [Fehlerbehebungen:]
 # 	!begin_itemize !short
 # 	!end_itemize
-# !endif
+!endif
 
 !iflang [english]
 # !item [New destination formats:]
@@ -327,7 +327,7 @@ In this chapter you will find a short summary of all the changes in the past.
 # !item [Fehlerbehebungen:]
 # 	!begin_itemize !short
 # 	!end_itemize
-# !endif
+!endif
 
 !iflang [english]
 # !item [New destination formats:]
@@ -384,7 +384,7 @@ In this chapter you will find a short summary of all the changes in the past.
 # !item [Fehlerbehebungen:]
 # 	!begin_itemize !short
 # 	!end_itemize
-# !endif
+!endif
 
 !iflang [english]
 # !item [New destination formats:]
