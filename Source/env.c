@@ -1645,7 +1645,7 @@ LOCAL void add_description ( void )
 	
 	if ( sl>1 && token[1][sl-1]==']' && token[1][sl-2]!='!' )
 	{	replace_all(token[1], "!]", "]");
-		strcat(token[0], token[1]);
+		um_strcat(token[0], token[1], MAX_TOKEN_LEN+1, "add_description [1]");
 		token[1][0]= EOS;
 		return;
 	}
@@ -1663,8 +1663,8 @@ LOCAL void add_description ( void )
 		{
 			if ( (found=strchr(token[i], ']'))==NULL )
 			{
-				strcat(token[0], token[i]);	/* <???> Ueberlauf moeglich! */
-				strcat(token[0], " ");
+				um_strcat(token[0], token[i], MAX_TOKEN_LEN+1, "add_description [2]");
+				um_strcat(token[0], " ", MAX_TOKEN_LEN+1, "add_description [3]");
 				token[i][0]= EOS;
 				i++;
 			}
@@ -1679,13 +1679,13 @@ LOCAL void add_description ( void )
 					
 				if (found==NULL)
 				{	/* wie oben */
-					strcat(token[0], token[i]);	/* <???> Ueberlauf moeglich! */
-					strcat(token[0], " ");
+					um_strcat(token[0], token[i], MAX_TOKEN_LEN+1, "add_description [4]");
+					um_strcat(token[0], " " , MAX_TOKEN_LEN+1, "add_description [5]");
 					token[i][0]= EOS;
 					i++;
 				}
 				else
-				{	strcat(token[0], token[i]);
+				{	um_strcat(token[0], token[i], MAX_TOKEN_LEN+1, "add_description [6]");
 					token[i][0]= EOS;
 					finished= TRUE;
 					no_bracket= FALSE;
@@ -1733,7 +1733,7 @@ GLOBAL void c_item ( void )
 	{
 		case TOTEX:
 		case TOPDL:
-			strcpy(token[0], "\\item");
+			um_strcpy(token[0], "\\item", MAX_TOKEN_LEN+1, "c_item [1]");
 			switch(iEnvType[iEnvLevel])
 			{	case ENV_DESC:
 				case ENV_LIST:
@@ -1786,11 +1786,11 @@ GLOBAL void c_item ( void )
 					{
 						case LIST_BOLD:
 							strinsert(token[0], "\\series bold ");
-							strcat(token[0], "\\series default ");
+							um_strcat(token[0], "\\series default ", MAX_TOKEN_LEN+1, "c_item[2]");
 							break;
 						case LIST_ITALIC:
 							strinsert(token[0], "\\shape italic ");
-							strcat(token[0], "\\shape default ");
+							um_strcat(token[0], "\\shape default ", MAX_TOKEN_LEN+1, "c_item[3]");
 							break;
 					}
 					break;
@@ -1798,7 +1798,7 @@ GLOBAL void c_item ( void )
 			break;	/* TOLYX */
 			
 		case TOINF:
-			strcpy(token[0], "@item ");
+			um_strcpy(token[0], "@item ", MAX_TOKEN_LEN+1, "c_item[4]");
 			switch(iEnvType[iEnvLevel])
 			{	case ENV_DESC:
 				case ENV_LIST:
@@ -1807,7 +1807,7 @@ GLOBAL void c_item ( void )
 						delete_once(token[0], "[");
 						delete_last(token[0], "]");
 					}
-					strcat(token[0], "\n");
+					um_strcat(token[0], "\n", MAX_TOKEN_LEN+1, "c_item[5]");
 					break;
 			}
 			break;
@@ -1828,7 +1828,7 @@ GLOBAL void c_item ( void )
 					{
 						memset(sAdd, ' ', (size_t) (tl-1) );
 						sAdd[tl-1]= EOS;
-						strcat(token[0], sAdd);
+						um_strcat(token[0], sAdd, MAX_TOKEN_LEN+1, "c_item[6]");
 						token[0][tl-2]= itemchar[iItemLevel][0];
 					}
 					break;
@@ -1843,7 +1843,7 @@ GLOBAL void c_item ( void )
 					{
 						memset(sAdd, ' ', (size_t) (tl-1) );
 						sAdd[tl-1]= EOS;
-						strcat(token[0], sAdd);
+						um_strcat(token[0], sAdd, MAX_TOKEN_LEN+1, "c_item[7]");
 						for (i=0; i<sl; i++)
 						{	token[0][tl-sl-1+i]= s[i];
 						}
@@ -1863,7 +1863,7 @@ GLOBAL void c_item ( void )
 							delete_once(token[0], "[");
 							delete_last(token[0], "]");
 							del_internal_styles(token[0]);
-							strcpy(sTemp, token[0]);
+							um_strcpy(sTemp, token[0], 1024, "c_item[8]");
 							replace_all(sTemp, "\"", "\\\"");
 							replace_2at_by_1at(sTemp);	/* r6pl1 */
 							sprintf(sBig, "@{B}@{\"%s\" ignore}@{b}", sTemp);
@@ -1883,7 +1883,7 @@ GLOBAL void c_item ( void )
 						}
 					}
 #else		/* Alte Version, ohne !autoref_items-Unterstuetzung */
-					strcpy(token[0], " ");
+					um_strcpy(token[0], " ", MAX_TOKEN_LEN+1, "c_item[9]");
 					strcat_prev_indent(token[0]);
 					if (token[1][0]=='[')
 					{
@@ -1908,7 +1908,7 @@ GLOBAL void c_item ( void )
 
 					/* PL16: Das leidige @@-Problem beim ST-Guide */
 					if (desttype==TOSTG)
-					{	strcpy(sBig, token[0]);
+					{	um_strcpy(sBig, token[0], 1024, "c_item[10]");
 						replace_2at_by_1at(sBig);
 						tl= toklen(sBig);
 					}
@@ -1930,7 +1930,7 @@ GLOBAL void c_item ( void )
 					if (desttype==TOSTG && bDocAutorefItemsOff)
 					{
 						del_internal_styles(token[0]);
-						strcpy(sTemp, token[0]);
+						um_strcpy(sTemp, token[0], 1024, "c_item[11]");
 						replace_all(sTemp, "\"", "\\\"");
 						sprintf(sBig, "@{\"%s\" ignore}", sTemp);
 						switch (env_kind[iEnvLevel])
@@ -1956,7 +1956,7 @@ GLOBAL void c_item ( void )
 						{	token[0][0]= EOS;
 						}
 						
-						strcpy(token[0], sBig);
+						um_strcpy(token[0], sBig, 1024, "c_item[12]");
 					}
 					else
 					{
@@ -1973,8 +1973,8 @@ GLOBAL void c_item ( void )
 			 					break;
 			 			}
 
-						strcpy(token[0], s);
-						strcat(token[0], sAdd);
+						um_strcpy(token[0], s, MAX_TOKEN_LEN+1, "c_item[13]");
+						um_strcat(token[0], sAdd, MAX_TOKEN_LEN+1, "c_item[14]");
 					}
 
 					break;
@@ -1991,7 +1991,7 @@ GLOBAL void c_item ( void )
 			switch (iEnvType[iEnvLevel])
 			{
 				case ENV_ITEM:
-					strcpy(token[0], ".TP\n.B o\n");
+					um_strcpy(token[0], ".TP\n.B o\n", MAX_TOKEN_LEN+1, "c_item[15]");
 					break;
 				case ENV_ENUM:
 					enum_count[iEnvLevel]++;
@@ -1999,7 +1999,7 @@ GLOBAL void c_item ( void )
 					sprintf(token[0], ".TP\n.B %s\n", s);
 					break;
 				case ENV_DESC:
-					strcpy(token[0], ".TP\n");
+					um_strcpy(token[0], ".TP\n", MAX_TOKEN_LEN+1, "c_item[16]");
 					if (token[1][0]=='[')
 					{	add_description();
 						replace_once(token[0], "[", ".B ");
@@ -2032,7 +2032,7 @@ GLOBAL void c_item ( void )
 					{	add_description();
 						replace_once(token[0], "[", BOLD_ON);
 						replace_last(token[0], "]", BOLD_OFF);
-						strcpy(sBig, token[0]);
+						um_strcpy(sBig, token[0], 1024, "c_item[17]");
 						if (desttype==TORTF)
 						{	c_rtf_styles(sBig);
 							c_rtf_quotes(sBig);
@@ -2057,7 +2057,7 @@ GLOBAL void c_item ( void )
 					{	add_description();
 						delete_once(token[0], "[");
 						delete_last(token[0], "]");
-						strcpy(sBig, token[0]);
+						um_strcpy(sBig, token[0], 1024, "c_item[18]");
 						if (desttype==TORTF)
 						{	c_rtf_styles(sBig);
 							c_rtf_quotes(sBig);
@@ -2109,7 +2109,7 @@ GLOBAL void c_item ( void )
 			}
 			
 			if ( insert_placeholder(sBig, sBig, sBig, sBig) )
-			{	strcpy(token[0], sBig);
+			{	um_strcpy(token[0], sBig, MAX_TOKEN_LEN+1, "c_item[19]");
 			}
 			else
 			{	token[0][0]= EOS;
@@ -2135,17 +2135,17 @@ GLOBAL void c_item ( void )
 					{	add_description();
 						replace_once(token[0], "[", BOLD_ON);
 						replace_last(token[0], "]", BOLD_OFF);
-						strcpy(sBig, token[0]);
+						um_strcpy(sBig, token[0], 1024, "c_item[20]");
 						replace_udo_quotes(sBig);
 						if (!bDocAutorefItemsOff)
 						{	auto_references(sBig, FALSE, "", 0, 0);
 						}
 						c_internal_styles(sBig);
 			 			strinsert(sBig, "<dt>");
-						strcat(sBig, "</dt><dd>");
+						um_strcat(sBig, "</dt><dd>", 1024, "c_item[21]");
 					}
 					else
-					{	strcpy(sBig, "<dt>&nbsp;</dt><dd>");
+					{	um_strcpy(sBig, "<dt>&nbsp;</dt><dd>", 1024, "c_item[22]");
 					}
 					break;
 
@@ -2177,7 +2177,7 @@ GLOBAL void c_item ( void )
 								break;
 								
 						}
-						strcpy(sBig, token[0]);
+						um_strcpy(sBig, token[0], 1024, "c_item[23]");
 						replace_udo_quotes(sBig);
 						if (!bDocAutorefItemsOff)
 						{	auto_references(sBig, FALSE, "", 0, 0);
@@ -2202,7 +2202,7 @@ GLOBAL void c_item ( void )
 			}
 			
 			if ( insert_placeholder(sBig, sBig, sBig, sBig) )
-			{	strcpy(token[0], sBig);
+			{	um_strcpy(token[0], sBig, MAX_TOKEN_LEN+1, "c_item[24]");
 			}
 			else
 			{	token[0][0]= EOS;
@@ -2215,7 +2215,7 @@ GLOBAL void c_item ( void )
 		 	{
 		 		case ENV_ITEM:
 				case ENV_ENUM:
-		 		{	strcpy(token[0], "<item>");
+		 		{	um_strcpy(token[0], "<item>", MAX_TOKEN_LEN+1, "c_item[25]");
 					break;
 		 		}
 		 		
@@ -2226,16 +2226,16 @@ GLOBAL void c_item ( void )
 						delete_once(token[0], "[");
 						delete_last(token[0], "]");
 						strinsert(token[0], "<tag>");
-						strcat(token[0], "</tag>");
+						um_strcat(token[0], "</tag>", MAX_TOKEN_LEN+1, "c_item[26]");
 					}
 					else
-					{	strcpy(token[0], "<tag> </tag>");
+					{	um_strcpy(token[0], "<tag> </tag>", MAX_TOKEN_LEN+1, "c_item[27]");
 					}
 					break;
 		 		}	/* TOLDS: ENV_DESC */
 		 		
 				case ENV_LIST:	/* Hier genau wie bei ASCII */
-				{	strcpy(token[0], " ");
+				{	um_strcpy(token[0], " ", MAX_TOKEN_LEN+1, "c_item[28]");
 					
 					if (token[1][0]=='[')
 					{	add_description();
@@ -2246,13 +2246,13 @@ GLOBAL void c_item ( void )
 					ll= iEnvIndent[iEnvLevel]-2;	/* Die 2 Leerzeichen Ausgleich oben hier beruecksichtigen! */
 					tl= toklen(token[0]);
 					while ( (int) tl <= ll)
-					{	strcat(token[0], " ");
+					{	um_strcat(token[0], " ", MAX_TOKEN_LEN+1, "c_item[29]");
 						tl++;
 					}
 
 					strcpy_prev_indent(li);
 					sprintf(s, "%s%s", li, token[0]);
-					strcpy(token[0], s);
+					um_strcpy(token[0], s, MAX_TOKEN_LEN+1, "c_item[30]");
 					break;
 				}	/* TOLDS: ENV_LIST */
 			}
@@ -2264,25 +2264,25 @@ GLOBAL void c_item ( void )
 		 	{
 		 		case ENV_ITEM:
 				case ENV_ENUM:
-		 		{	strcpy(token[0], "<item>");
+		 		{	um_strcpy(token[0], "<item>", MAX_TOKEN_LEN+1, "c_item[31]");
 					break;
 		 		}
 		 		
 				case ENV_DESC:
-		 		{	strcpy(token[0], "<item>");
+		 		{	um_strcpy(token[0], "<item>", MAX_TOKEN_LEN+1, "c_item[32]");
 					if (token[1][0]=='[')
 					{	add_description();
 						replace_once(token[0], "[", "<emph>");
 						replace_last(token[0], "]", "<\\emph>");
 					}
 					else
-					{	strcpy(token[0], "<item>");
+					{	um_strcpy(token[0], "<item>", MAX_TOKEN_LEN+1, "c_item[33]");
 					}
 					break;
 		 		}	/* TOHPH: ENV_DESC */
 		 		
 				case ENV_LIST:	/* Hier genau wie bei ASCII */
-				{	strcpy(token[0], " ");
+				{	um_strcpy(token[0], " ", MAX_TOKEN_LEN+1, "c_item[34]");
 					
 					if (token[1][0]=='[')
 					{	add_description();
@@ -2293,13 +2293,13 @@ GLOBAL void c_item ( void )
 					ll= iEnvIndent[iEnvLevel]-2;	/* Die 2 Leerzeichen Ausgleich oben hier beruecksichtigen! */
 					tl= toklen(token[0]);
 					while ( (int) tl <= ll )
-					{	strcat(token[0], " ");
+					{	um_strcat(token[0], " ", MAX_TOKEN_LEN+1, "c_item[35]");
 						tl++;
 					}
 
 					strcpy_prev_indent(li);
 					sprintf(s, "%s%s", li, token[0]);
-					strcpy(token[0], s);
+					um_strcpy(token[0], s, MAX_TOKEN_LEN+1, "c_item[36]");
 					break;
 				}	/* TOHPH: ENV_LIST */
 			}
@@ -2315,18 +2315,18 @@ GLOBAL void c_item ( void )
 		 		}
 		 		
 				case ENV_DESC:
-				{	strcpy(token[0], ":dt.");
+				{	um_strcpy(token[0], ":dt.", MAX_TOKEN_LEN+1, "c_item[37]");
 					if (token[1][0]=='[')
 					{	add_description();
 						replace_once(token[0], "[", BOLD_ON);
 						replace_last(token[0], "]", BOLD_OFF);
 					}
-					strcat(token[0], "\n:dd.");
+					um_strcat(token[0], "\n:dd.", MAX_TOKEN_LEN+1, "c_item[38]");
 					break;
 				}
 
 				case ENV_LIST:
-				{	strcpy(token[0], ":dt.");
+				{	um_strcpy(token[0], ":dt.", MAX_TOKEN_LEN+1, "c_item[39]");
 					if (token[1][0]=='[')
 					{	add_description();
 						switch(env_kind[iEnvLevel])
@@ -2349,7 +2349,7 @@ GLOBAL void c_item ( void )
 								break;
 						}
 					}
-					strcat(token[0], "\n:dd.");
+					um_strcat(token[0], "\n:dd.", MAX_TOKEN_LEN+1, "c_item[40]");
 					break;
 				}
 			}
@@ -2359,7 +2359,7 @@ GLOBAL void c_item ( void )
 			switch(iEnvType[iEnvLevel])
 		 	{
 		 		case ENV_ITEM:
-					strcpy(token[0], itemchar[iItemLevel]);
+					um_strcpy(token[0], itemchar[iItemLevel], MAX_TOKEN_LEN+1, "c_item[41]");
 					break;
 		 		case ENV_ENUM:
 					enum_count[iEnvLevel]++;
@@ -2392,8 +2392,8 @@ GLOBAL void c_item ( void )
 						delete_last(token[0], "]");
 	 					sprintf(s, ") udoshow Bon (%s) offDesc writeBeforeLeft Boff (", token[0]);
 
-						strcpy(token[0], s);
-						strcat(token[0], sAdd);
+						um_strcpy(token[0], s, MAX_TOKEN_LEN+1, "c_item[42]");
+						um_strcat(token[0], sAdd, MAX_TOKEN_LEN+1, "c_item[43]");
 
 					}
 					break;
@@ -2462,8 +2462,8 @@ GLOBAL void c_item ( void )
 		 					break;
 		 			}
 
-					strcpy(token[0], s);
-					strcat(token[0], sAdd);
+					um_strcpy(token[0], s, MAX_TOKEN_LEN+1, "c_item[44]");
+					um_strcat(token[0], sAdd, MAX_TOKEN_LEN+1, "c_item[45]");
 
 					break;
 			}

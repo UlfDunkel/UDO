@@ -92,6 +92,29 @@ GLOBAL void logln ( const char *s )
 	fprintf(fLogfile, "%s\n", s);
 }	/* logln */
 
+/*	----------------------------------------------------------------------
+	Ausgabe ins Logfile und via printf inklusive Datei und Zeilennummer
+	[vj] v6.3.7 hinzugefügt zu debuggingzwecken
+	----------------------------------------------------------------------	*/
+GLOBAL void loglnposprintf ( const char *we, const char *msg )
+{
+	char z[512];
+	
+	sprintf(z, "%s: %s %u: %s",
+		we,
+		sCurrFileName,
+		uiCurrFileLine,
+		msg
+	);
+	logln(z);
+
+#ifdef USE_LOGLNPOSPRINTF
+	printf("%s\n", z);
+#else
+	show_logln_message(z);	/* r6pl12: Ausgabe ans GUI weiterreichen */
+#endif
+	
+}	/* loglnpos */
 
 /*	----------------------------------------------------------------------
 	Ausgabe ins Logfile inklusive Datei und Zeilennummer

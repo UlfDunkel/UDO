@@ -45,6 +45,7 @@ const char *id_abo_c= "@(#) abo.c       02.10.2001";
 
 #include "export.h"
 #include "abo.h"
+#include "str.h"
 
 
 /*	############################################################
@@ -216,8 +217,8 @@ GLOBAL void output_about_udo ( void )
 	fclose(uif);
 
 	token_reset();
-	strcpy(token[0], "!include");
-	strcpy(token[1], udofile.full);
+	strcpy(token[0], "!include"); /* sollte safe sein, da ein Token auf jeden Fall so lang werden kann :-) [vj] */
+	um_strcpy(token[1], udofile.full, MAX_TOKEN_LEN+1, "output_about_udo");
 	token_counter= 2;
 	
 	c_include();	

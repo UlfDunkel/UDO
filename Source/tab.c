@@ -178,7 +178,7 @@ GLOBAL void table_get_header ( char *s )
 	str2tok(s);
 	
 	if (token_counter>0)
-	{	strcpy(n, token[1]);
+	{	um_strcpy(n, token[1], 128, "table_get_header[1]");
 	}
 	
 	tab_toplines= 0;

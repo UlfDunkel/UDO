@@ -614,8 +614,10 @@ GLOBAL char compile_time[9]  = "\0";
  * Use um_malloc instead of malloc, um_realloc instead of realloc and um_free instead of free.
  * Please don't use malloc, realloc or free in UDO.
  */
-int um_malloc_count;
-int um_free_count;
+size_t um_malloc_count;
+size_t um_free_count;
+size_t um_free_error_count;
+size_t um_free_endbroken_count;
 int memory_error;
 char endstring[]=UM_END_STRING;
 size_t endstring_len;
@@ -624,13 +626,15 @@ MEMLIST *anker; /* This is the anchor of our memory-usage list */
 /*
  * init_um() sets up the Memory-Layer
  */
-GLOBAL void init_um()
+GLOBAL void init_um(void)
 {
 	/* Initialize Counters, anchor for memory-usage list, memory error indicator and the
 	 * lenght of the ending string
 	 */
 	um_malloc_count=0;
 	um_free_count=0;
+	um_free_error_count=0;
+	um_free_endbroken_count=0;
 	anker=NULL;
 	memory_error=0;
 	endstring_len=strlen(endstring)+1; /* plus 1 for the ending null-byte! */
@@ -639,23 +643,30 @@ GLOBAL void init_um()
  * exit_um() frees all memory alocated by um_mallocs and makes consistency
  * checks on the memory blocks.
  */
-GLOBAL void exit_um()
+GLOBAL void exit_um(void)
 {
 #ifdef UM_DEBUG_SHOW_STATS
 	/* Added Debug information of Memory Management */
-	printf("Memory statistic: %d malloc, %d free\n", um_malloc_count, um_free_count);
+#ifdef UM_PRINTF_USE_LD
+	printf("Memory statistic: %ld malloc, %ld free, %ld bad checks, %ld bad ends\n", um_malloc_count, um_free_count, um_free_error_count, um_free_endbroken_count);
+#else
+	printf("Memory statistic: %d malloc, %d free, %d bad checks, %d bad ends\n", um_malloc_count, um_free_count, um_free_error_count, um_free_endbroken_count);
+#endif
 #endif
 	/* Falls es jetzt noch belegten Speicher gibt, räumen wir den auf */
 	if (anker != NULL)
 	{
-#ifdef UM_DEBUG_SHOW_CALLS
+		/* Hier wird die Speicherliste entlang gelaufen */
+#ifdef UM_DEBUG_SHOW_MSGS
 		printf("exit_um: Cleaning up\n");
 #endif
-		/* Hier wird die Speicherliste entlang gelaufen */
 		while ((memory_error==0)&&(anker != NULL))
 		{
 			um_free(anker->block); /* Wir geben den in der Liste gefundenen Speicherblock frei */
 		}
+#ifdef UM_DEBUG_SHOW_MSGS
+		printf("exit_um: done\n");
+#endif
 	}
 }
 
@@ -760,11 +771,15 @@ GLOBAL void um_free(void *memblock)
 				/* Speicherfehler: unsere Checksumme wurde überschrieben! */
 				lauf=0; /* Abbrechen, wenn die Zeiger überschrieben sind, könnte es krachen */
 				memory_error=42; /* Speicherfehler Flag setzen */
+				if (um_free_error_count==0)
+				{
 #ifdef UM_PRINTF_USE_LD
-				printf("Fatal error: um_free failed: checksum broken: %ld != %ld\n", tanker->check, UM_LONG_CHECK);
+					printf("Fatal error: um_free failed: checksum broken: %ld != %ld\n", tanker->check, UM_LONG_CHECK);
 #else
-				printf("Fatal error: um_free failed: checksum broken: %d != %d\n", tanker->check, UM_LONG_CHECK);
+					printf("Fatal error: um_free failed: checksum broken: %d != %d\n", tanker->check, UM_LONG_CHECK);
 #endif
+				}
+				um_free_error_count++;
 			}
 			else
 			{
@@ -773,7 +788,11 @@ GLOBAL void um_free(void *memblock)
 				{
 					if (strcmp(tanker->endmark, endstring)!=0)
 					{
-						printf("Warning: um_free: memory block end check broken\n");
+						if (um_free_endbroken_count==0)
+						{
+							printf("Warning: um_free: memory block end check broken\n");
+						}
+						um_free_endbroken_count++;
 					}
 					um_free_count++;
 					free(tanker->block); /* Speicher freigeben */
@@ -3511,7 +3530,7 @@ LOCAL void c_verbatim_backcolor ( void )
 	color[0]= EOS;
 
 	if (token[1][0]=='#')
-	{	strcpy(color, token[1]);
+	{	um_strcpy(color, token[1], 256, "c_verbatim_backcolor[1]");
 		ret= TRUE;
 	}
 	else
@@ -3780,7 +3799,7 @@ LOCAL void c_rtf_charwidth ( void )
 LOCAL void c_html_img_suffix ( void )
 {
 	sDocImgSuffix[0]= EOS;
-	strncat(sDocImgSuffix, token[1], 16);
+	um_strncat(sDocImgSuffix, token[1], 16, 32, "c_html_img_suffix[1]");
 
 	if (sDocImgSuffix[0]!=EOS)
 	{	if (sDocImgSuffix[0]!='.')
@@ -3820,7 +3839,7 @@ LOCAL void c_html_nodesize ( void )
 LOCAL void c_htag_img_suffix ( void )
 {
 	sDocImgSuffix[0]= EOS;
-	strncat(sDocImgSuffix, token[1], 16);
+	um_strncat(sDocImgSuffix, token[1], 16, 32, "c_htag_img_suffix");
 
 	if (sDocImgSuffix[0]!=EOS)
 	{	if (sDocImgSuffix[0]!='.')
@@ -4045,7 +4064,7 @@ LOCAL void convert_image ( const BOOLEAN visible )
 	}
 	else
 	{
-		strcpy(filename, token[1]);
+		um_strcpy(filename, token[1], 512, "convert_image[1]");
 		token[1][0]= EOS;
 		tokcpy2(caption, 512);
 		del_whitespaces(caption);
@@ -4164,7 +4183,7 @@ GLOBAL void c_include ( void )
 			qdelete_last(name, "\"", 1);
 		}
 		else
-		{	strcpy(name, token[1]);
+		{	um_strcpy(name, token[1], 512, "c_include[1]");
 		}
 
 		b1stQuote= TRUE;
@@ -4195,7 +4214,7 @@ LOCAL void c_include_verbatim ( void )
 			qdelete_last(name, "\"", 1);
 		}
 		else
-		{	strcpy(name, token[1]);
+		{	um_strcpy(name, token[1], 512, "c_include_verbatim[1]");
 		}
 		token_reset();
 		replace_macros(name);
@@ -4239,7 +4258,7 @@ LOCAL void c_include_preformatted ( void )
 			qdelete_last(name, "\"", 1);
 		}
 		else
-		{	strcpy(name, token[1]);
+		{	um_strcpy(name, token[1], 512, "c_include_preformatted[1]");
 		}
 		token_reset();
 		replace_macros(name);
@@ -4283,7 +4302,7 @@ LOCAL void c_include_linedraw ( void )
 			qdelete_last(name, "\"", 1);
 		}
 		else
-		{	strcpy(name, token[1]);
+		{	um_strcpy(name, token[1], 512, "c_include_linedraw[1]");
 		}
 		token_reset();
 		replace_macros(name);
@@ -4327,7 +4346,7 @@ LOCAL void c_include_raw ( void )
 			qdelete_last(name, "\"", 1);
 		}
 		else
-		{	strcpy(name, token[1]);
+		{	um_strcpy(name, token[1], 512, "c_include_raw[1]");
 		}
 
 		token_reset();
@@ -4365,7 +4384,7 @@ LOCAL void c_include_src ( void )
 			qdelete_last(name, "\"", 1);
 		}
 		else
-		{	strcpy(name, token[1]);
+		{	um_strcpy(name, token[1], 512, "c_include_src[1]");
 		}
 
 		token_reset();
@@ -4410,7 +4429,7 @@ LOCAL void c_include_comment ( void )
 			qdelete_last(name, "\"", 1);
 		}
 		else
-		{	strcpy(name, token[1]);
+		{	um_strcpy(name, token[1], 512, "c_include_comment[1]");
 		}
 
 		token_reset();
@@ -4841,6 +4860,7 @@ GLOBAL size_t toklen ( char *s )
 GLOBAL void tokcat ( char *s, size_t maxlen )
 {
 	register int i;
+	char errbuf[128];
 	size_t m=0; /* Länge des bisherigen Strings mitzählen */
 
 	for (i=1; i<token_counter; i++)
@@ -4863,7 +4883,8 @@ GLOBAL void tokcat ( char *s, size_t maxlen )
            werden */
 	if (m>=maxlen)
 	{
-                printf("Warning: Buffer overrun prevented (tokcat): %d>=%d\n", m, maxlen);
+                sprintf(errbuf, "Buffer overrun prevented (tokcat): %d>=%d", m, maxlen);
+				loglnposprintf ("Warning", errbuf);
 	}
 }	/*tokcat*/
 
@@ -5025,16 +5046,20 @@ GLOBAL void str2tok ( char *s )
 		return;
 	}
 
-	strcpy(tmp, s);
+	um_strcpy(tmp, s, LINELEN+1, "str2tok[1]");
 
 	tok= strtok(tmp, sep);
 	
 	while ( (tok!=NULL) && (token_counter<MAX_TOKENS) )
-	{	strcpy(token[token_counter], tok);
+	{	um_strcpy(token[token_counter], tok, MAX_TOKEN_LEN+1, "str2tok[2]");
 		token_counter++;
 		tok= strtok(NULL, sep);
 	}
 
+	if (token_counter<MAX_TOKENS) /* [vj] new in v6.3.7: warning if tokens exceeded */
+	{
+		loglnposprintf("Error", "str2tok: maximum token number exceeded");
+	}
 }	/*str2tok*/
 
 
@@ -5342,20 +5367,20 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 				{	
 					case TOTEX:
 					case TOPDL:
-						strcpy(token[i], "\\\\");
+						um_strcpy(token[i], "\\\\", MAX_TOKEN_LEN+1, "token_output[1]");
 						break;
 					case TOLYX:
-						strcpy(token[i], "\n\\newline\n");
+						um_strcpy(token[i], "\n\\newline\n", MAX_TOKEN_LEN+1, "token_output[2]");
 						break;
 					case TOKPS:
-						strcpy(token[i], ") udoshow newline\n(");
+						um_strcpy(token[i], ") udoshow newline\n(", MAX_TOKEN_LEN+1, "token_output[3]");
 
 						break;
 					case TONRO:
-						strcpy(token[i], ".br\n");
+						um_strcpy(token[i], ".br\n", MAX_TOKEN_LEN+1, "token_output[4]");
 						break;
 					case TOIPF:
-						strcpy(token[i], ".br\n");	/*r6pl3*/
+						um_strcpy(token[i], ".br\n", MAX_TOKEN_LEN+1, "token_output[5]");	/*r6pl3*/
 						break;
 					case TOINF:
 						token[i][0]= EOS;
@@ -5369,34 +5394,34 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 							switch(iEnvType[iEnvLevel])
 							{	case ENV_ITEM:
 								case ENV_ENUM:
-									strcpy(token[i], "\\par\\tab\\tab ");
+									um_strcpy(token[i], "\\par\\tab\\tab ", MAX_TOKEN_LEN+1, "token_output[6]");
 									break;
 								case ENV_DESC:
 								case ENV_LIST:
-									strcpy(token[i], "\\par\\tab ");
+									um_strcpy(token[i], "\\par\\tab ", MAX_TOKEN_LEN+1, "token_output[7]");
 									break;
 								default:
-									strcpy(token[i], "\\par ");
+									um_strcpy(token[i], "\\par ", MAX_TOKEN_LEN+1, "token_output[8]");
 									break;
 							}
 						}
 						else
-						{	strcpy(token[i], "\\par ");
+						{	um_strcpy(token[i], "\\par ", MAX_TOKEN_LEN+1, "token_output[9]");
 						}
 						break;
 					case TOWIN:
 					case TOWH4:
 					case TOAQV:
-						strcpy(token[i], "\\line ");
+						um_strcpy(token[i], "\\line ", MAX_TOKEN_LEN+1, "token_output[10]");
 						insert_speccmd(token[i], token[i], token[i]);
 						break;
 					case TOHTM:
 					case TOMHH:
-						strcpy(token[i], HTML_BR);
+						um_strcpy(token[i], HTML_BR, MAX_TOKEN_LEN+1, "token_output[11]");
 						break;
 					case TOLDS:
 					case TOHPH:
-						strcpy(token[i], "<newline>");
+						um_strcpy(token[i], "<newline>", MAX_TOKEN_LEN+1, "token_output[12]");
 						break;
 					default:
 						token[i][0]= EOS;
@@ -5483,7 +5508,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 								/* naechste Token uebertragen */
 								token[i][0]= EOS;
 								for (j=silb; j<=silben_counter; j++)
-								{	strcat(token[i], silbe[j]);
+								{	um_strcat(token[i], silbe[j], MAX_TOKEN_LEN+1, "token_output[14]");
 								}
 								delete_all_divis(token[i]);
 							
