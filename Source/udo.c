@@ -455,6 +455,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!rtf_monofont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!rtf_no_tables",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!win_propfont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
+	{ "!win_monofont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!win_backcolor",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!win_textcolor",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!win_linkcolor",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
@@ -464,6 +465,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!win_medium_compression",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!win_old_keywords",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!wh4_propfont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
+	{ "!wh4_monofont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!wh4_backcolor",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!wh4_textcolor",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!wh4_background",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
@@ -6877,6 +6879,10 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			{	tokcpy2(sDocPropfont);
 				return TRUE;
 			}
+			if (strcmp(token[0], "!win_monofont")==0)
+			{	tokcpy2(sDocMonofont);
+				return TRUE;
+			}
 			if (strcmp(token[0], "!win_background")==0)
 			{	c= get_color();
 				set_win_backcolor(sDocBackColor, c);
@@ -6919,6 +6925,10 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			}
 			if (strcmp(token[0], "!wh4_propfont")==0)
 			{	tokcpy2(sDocPropfont);
+				return TRUE;
+			}
+			if (strcmp(token[0], "!wh4_monofont")==0)
+			{	tokcpy2(sDocMonofont);
 				return TRUE;
 			}
 			if (strcmp(token[0], "!wh4_background")==0)

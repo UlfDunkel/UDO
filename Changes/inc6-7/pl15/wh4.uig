@@ -1,0 +1,7 @@
+!begin_itemize
+
+!index !/wh4_monofont
+!item Neu: Mit dem Kommando !/wh4_monofont kann man den Fontnamen
+für WinHelp4 (analog zu !/rtf_monofont) bestimmen.
+
+!end_itemize
