@@ -890,7 +890,7 @@ LOCAL void table_output_ipf ( void )
 
 	f[0]= EOS;
 	for (i=0; i<=tab_w; i++)
-	{	sprintf(cx, "%d ", tab_cell_w[i]);
+	{	sprintf(cx, "%d ", (int) tab_cell_w[i]);
 		strcat(f, cx);
 	}
 	del_whitespaces(f);

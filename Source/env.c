@@ -335,6 +335,9 @@ LOCAL void end_env_output_line ( const int el )
 			case TOIPF:
 				/* Hier keine Leerzeile */
 				break;
+			case TOKPS:
+				outln("newline");
+				break;
 			default:
 				outln("");
 				break;
@@ -469,6 +472,9 @@ GLOBAL void output_begin_verbatim ( void )
 		case TOHPH:
 			outln("<ex>");
 			break;
+		case TOKPS:
+			outln("Von");
+			break;
 	}
 }	/* output_begin_verbatim */
 
@@ -520,6 +526,9 @@ GLOBAL void output_end_verbatim ( void )
 			break;
 		case TOHPH:
 			outln("<\\ex>");
+			break;
+		case TOKPS:
+			outln("Voff");
 			break;
 		default:
 			break;
@@ -1499,15 +1508,16 @@ LOCAL void c_begin_list ( int listkind )
 		case TOMAN:
 		case TOPCH:
 		case TOTVH:
+		case TOKPS:
 			ll= (int) strlen(sWidth);
 			iEnvIndent[iEnvLevel]= ll + 3;	/*r6pl2 +3 statt +2 */
 			break;
 		case TOIPF:
 			if (bEnvShort[iEnvLevel])
-			{	voutlnf(":dl compact break=none tsize=%d.", strlen(sWidth)+4);
+			{	voutlnf(":dl compact break=none tsize=%d.", (int)strlen(sWidth)+4);
 			}
 			else
-			{	voutlnf(":dl break=none tsize=%d.", strlen(sWidth)+4);
+			{	voutlnf(":dl break=none tsize=%d.", (int)strlen(sWidth)+4);
 			}
 			break;
 		case TORTF:
@@ -2300,6 +2310,7 @@ GLOBAL void c_item ( void )
 				}
 			}
 			break;
+		
 		case TOKPS:
 			switch(iEnvType[iEnvLevel])
 		 	{
@@ -2312,7 +2323,65 @@ GLOBAL void c_item ( void )
 					sprintf(token[0], ")\n(%d.) off%d writeBeforeLeft\n(",
 						enum_count[iEnvLevel], iEnvLevel);
 					break;
+				case ENV_DESC:
+					token[0][0]= EOS;
+					strcpy_prev_indent(li);
+					if (token[1][0]=='[')
+					{
+						add_description();
+						replace_once(token[0], "[", BOLD_ON);
+						replace_last(token[0], "]", BOLD_OFF);
+						strinsert(token[0], li);
+						strinsert(token[0], " ");
+					}
+					break;
+
+				case ENV_LIST:
+					token[0][0]= EOS;
+					
+					if (token[1][0]=='[')
+					{	add_description();
+						delete_once(token[0], "[");
+						delete_last(token[0], "]");
+					}
+
+					ri[0]= EOS;
+					ll= iEnvIndent[iEnvLevel]-2;
+
+					tl= toklen(token[0]);
+
+					sAdd[0]= EOS;
+					if ( ((int) tl) < ll )
+					{
+						memset(sAdd, ' ', (size_t) (ll-tl) );
+						sAdd[ll-tl]= EOS;
+						/* sAdd wird weiter unten hinzugefuegt */
+					}
+
+					strcpy_prev_indent(li);
+
+					switch(env_kind[iEnvLevel])
+		 			{
+		 				case LIST_BOLD:
+		 					sprintf(s, " %s%s%s%s%s", li, BOLD_ON, token[0], BOLD_OFF, ri);
+		 					break;
+		 				case LIST_ITALIC:
+		 					sprintf(s, " %s%s%s%s%s", li, ITALIC_ON, token[0], ITALIC_OFF, ri);
+		 					break;
+		 				default:
+		 					sprintf(s, " %s%s%s", li, token[0], ri);
+		 					break;
+		 			}
+
+					strcpy(token[0], s);
+					strcat(token[0], sAdd);
+
+					break;
 			}
+			if (use_justification)
+			{	space2indent(token[0]);
+			}
+			
 			break;
 	}
 	
@@ -2676,6 +2745,29 @@ LOCAL void output_tex_environments(void)
 }
 
 
+LOCAL void output_rtf_colortbl(void)
+{
+	outln("{\\colortbl;");
+	outln("\\red0\\green0\\blue0;");		/* \cf1:	black	*/	/*r6pl5: siehe HTML 3.2 DTD */
+	outln("\\red192\\green192\\blue192;");	/* \cf2:	silver	*/
+	outln("\\red128\\green128\\blue128;");	/* \cf3:	gray	*/
+	outln("\\red255\\green255\\blue255;");	/* \cf4:	white	*/
+	outln("\\red128\\green0\\blue0;");		/* \cf5:	maroon	*/
+	outln("\\red255\\green0\\blue0;");		/* \cf6:	red		*/
+	outln("\\red128\\green0\\blue128;");	/* \cf7:	purple	*/
+	outln("\\red255\\green0\\blue255;");	/* \cf8:	fuchsia	*/
+	outln("\\red0\\green128\\blue0;");		/* \cf9:	green	*/
+	outln("\\red0\\green255\\blue0;");		/* \cf10:	lime	*/
+	outln("\\red128\\green128\\blue0;");	/* \cf11:	olive	*/
+	outln("\\red255\\green255\\blue0;");	/* \cf12:	yellow	*/
+	outln("\\red0\\green0\\blue128;");		/* \cf13:	navy	*/
+	outln("\\red0\\green0\\blue255;");		/* \cf14:	blue	*/
+	outln("\\red0\\green128\\blue128;");	/* \cf15:	teal	*/
+	outln("\\red0\\green255\\blue255;");	/* \cf16:	aqua	*/
+	outln("}");
+}
+
+
 /*	############################################################
 	# begin/end_document
 	############################################################	*/
@@ -2839,27 +2931,7 @@ GLOBAL void c_begin_document ( void )
 			voutlnf("{%s\\snext12 Node4*;}",	rtf_inv_node4);
 			voutlnf("{%s\\snext13 LineDraw;}",	rtf_linedraw);
 
-			out("{\\colortbl;");
-			out("\\red0\\green0\\blue0;");			/* \cf1:	black	*/	/*r6pl5: siehe HTML 3.2 DTD */
-			out("\\red192\\green192\\blue192;");	/* \cf2:	silver	*/
-			out("\\red128\\green128\\blue128;");	/* \cf3:	gray	*/
-			out("\\red255\\green255\\blue255;");	/* \cf4:	white	*/
-			outln("");
-			out("\\red128\\green0\\blue0;");		/* \cf5:	maroon	*/
-			out("\\red255\\green0\\blue0;");		/* \cf6:	red		*/
-			out("\\red128\\green0\\blue128;");		/* \cf7:	purple	*/
-			out("\\red255\\green0\\blue255;");		/* \cf8:	fuchsia	*/
-			outln("");
-			out("\\red0\\green128\\blue0;");		/* \cf9:	green	*/
-			out("\\red0\\green255\\blue0;");		/* \cf10:	lime	*/
-			out("\\red128\\green128\\blue0;");		/* \cf11:	olive	*/
-			out("\\red255\\green255\\blue0;");		/* \cf12:	yellow	*/
-			outln("");
-			out("\\red0\\green0\\blue128;");		/* \cf13:	navy	*/
-			out("\\red0\\green0\\blue255;");		/* \cf14:	blue	*/
-			out("\\red0\\green128\\blue128;");		/* \cf15:	teal	*/
-			out("\\red0\\green255\\blue255;");		/* \cf16:	aqua	*/
-			outln("}");
+			output_rtf_colortbl();
 
 			outln("}");
 			outln("\\paperw11904\\paperh16836");
@@ -2926,24 +2998,7 @@ GLOBAL void c_begin_document ( void )
 
 			outln(" {\\f1\\fswiss Courier New;}{\\f2\\ftech Symbol;}");
 			outln("}");
-			outln("{\\colortbl;");
-			outln("\\red0\\green0\\blue0;");		/* \cf1:	black	*/	/*r6pl5: siehe HTML 3.2 DTD */
-			outln("\\red192\\green192\\blue192;");	/* \cf2:	silver	*/
-			outln("\\red128\\green128\\blue128;");	/* \cf3:	gray	*/
-			outln("\\red255\\green255\\blue255;");	/* \cf4:	white	*/
-			outln("\\red128\\green0\\blue0;");		/* \cf5:	maroon	*/
-			outln("\\red255\\green0\\blue0;");		/* \cf6:	red		*/
-			outln("\\red128\\green0\\blue128;");	/* \cf7:	purple	*/
-			outln("\\red255\\green0\\blue255;");	/* \cf8:	fuchsia	*/
-			outln("\\red0\\green128\\blue0;");		/* \cf9:	green	*/
-			outln("\\red0\\green255\\blue0;");		/* \cf10:	lime	*/
-			outln("\\red128\\green128\\blue0;");	/* \cf11:	olive	*/
-			outln("\\red255\\green255\\blue0;");	/* \cf12:	yellow	*/
-			outln("\\red0\\green0\\blue128;");		/* \cf13:	navy	*/
-			outln("\\red0\\green0\\blue255;");		/* \cf14:	blue	*/
-			outln("\\red0\\green128\\blue128;");	/* \cf15:	teal	*/
-			outln("\\red0\\green255\\blue255;");	/* \cf16:	aqua	*/
-			outln("}");
+			output_rtf_colortbl();
 			if (desttype==TOWH4)
 			{	out("\\f0\\fs16");	/* MS Sans Serif 8pt */
 			}

@@ -2342,8 +2342,6 @@ LOCAL void html_hb_line ( BOOLEAN head )
 	BOOLEAN	for_main_file;
 	unsigned int uiW, uiH;
 
-	old_autorefoff= bDocAutorefOff;
-	bDocAutorefOff= FALSE;
 	/* Herausfinden, fuer welchen Node die Kopf- und Fusszeile	*/
 	/* ausgegeben werden soll. Beim mergen ist der Index nicht	*/
 	/* immer gleich dem Nodezaehler im 2. Durchlauf!			*/
@@ -2385,6 +2383,9 @@ LOCAL void html_hb_line ( BOOLEAN head )
 	if (!head && toc[ti]->ignore_bottomline)	/* r5pl12 */
 	{	return;
 	}
+
+	old_autorefoff= bDocAutorefOff;
+	bDocAutorefOff= FALSE;
 
 	if (!head)
 	{
@@ -3632,7 +3633,7 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 		case TOWH4:
 		case TOAQV:	c_win_styles(name);	break;
 		case TORTF:	c_rtf_styles(name);	c_rtf_quotes(name);	break;
-		default:	c_internal_styles(name);
+		default:	c_internal_styles(name); break;
 	}
 	replace_udo_quotes(name);
 	delete_all_divis(name);
@@ -4135,7 +4136,7 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 		case TOWH4:
 		case TOAQV:	c_win_styles(name);	break;
 		case TORTF:	c_rtf_styles(name);	c_rtf_quotes(name);	break;
-		default:	c_internal_styles(name);
+		default:	c_internal_styles(name); break;
 	}
 	replace_udo_quotes(name);
 	delete_all_divis(name);
@@ -4575,7 +4576,7 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 		case TOWH4:
 		case TOAQV:	c_win_styles(name);	break;
 		case TORTF:	c_rtf_styles(name);	c_rtf_quotes(name);	break;
-		default:	c_internal_styles(name);
+		default:	c_internal_styles(name); break;
 	}
 	replace_udo_quotes(name);
 	delete_all_divis(name);
@@ -5018,7 +5019,7 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 		case TOWH4:
 		case TOAQV:	c_win_styles(name);	break;
 		case TORTF:	c_rtf_styles(name);	c_rtf_quotes(name);	break;
-		default:	c_internal_styles(name);
+		default:	c_internal_styles(name); break;
 	}
 	replace_udo_quotes(name);
 	delete_all_divis(name);
@@ -5250,7 +5251,7 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			voutlnf("(%s) udoshow", n);
 			outln("Boff");
 			outln("11 changeFontSize");
-			outln("changeBaseFont");
+			outln("changeBaseFont ");
 			outln("newline");
 			break;
 
@@ -5574,6 +5575,11 @@ LOCAL void tocline_make_bold ( char *s, const int depth )
 				strcat(s, BOLD_OFF);
 				c_win_styles(s);
 				break;
+			
+			case TOKPS:
+				strinsert(s, "14 changeFontSize Bon ");
+				strcat(s, " Boff 11 changeFontSize changeBaseFont");
+				break;
 		}
 	}
 
@@ -5629,9 +5635,6 @@ LOCAL void toc_output ( const int depth )
 	BOOLEAN	first= TRUE;
 	BOOLEAN old;
 	
-	old= bDocAutorefOff;
-	bDocAutorefOff= FALSE;
-
 	if (desttype==TOLYX)
 	{	return;
 	}
@@ -5639,6 +5642,9 @@ LOCAL void toc_output ( const int depth )
 	if (p1_toc_counter<=0)
 	{	return;
 	}
+
+	old= bDocAutorefOff;
+	bDocAutorefOff= FALSE;
 
 	for (i=1; i<=p1_toc_counter; i++)
 	{
@@ -5664,7 +5670,7 @@ LOCAL void toc_output ( const int depth )
 								case TOMHH:	outln("<br>&nbsp;");	break;
 								case TOTEX:
 								case TOPDL:	break;
-								default:	outln("");
+								default:	outln(""); break;
 							}
 							/* leerzeile= FALSE; */
 						}
@@ -5882,9 +5888,6 @@ LOCAL void apx_output ( const int depth )
 
 	BOOLEAN old;
 	
-	old= bDocAutorefOff;
-	bDocAutorefOff= FALSE;
-
 	if (desttype==TOLYX)
 	{	return;
 	}
@@ -5896,6 +5899,9 @@ LOCAL void apx_output ( const int depth )
 	if (!apx_available)		/* r5pl16 */
 	{	return;
 	}
+
+	old= bDocAutorefOff;
+	bDocAutorefOff= FALSE;
 
 	for (i=1; i<=p1_toc_counter; i++)
 	{
@@ -5921,7 +5927,7 @@ LOCAL void apx_output ( const int depth )
 								case TOAQV:	outln(rtf_par);	break;
 								case TOTEX:
 								case TOPDL:	break;
-								default:	outln("");
+								default:	outln(""); break;
 							}
 							/* leerzeile= FALSE; */
 						}
@@ -6114,9 +6120,6 @@ LOCAL void subtoc_output ( const int depth )
 	BOOLEAN first= TRUE;
 	BOOLEAN old;
 	
-	old= bDocAutorefOff;
-	bDocAutorefOff= FALSE;
-
 	if (desttype==TOLYX)
 	{	return;
 	}
@@ -6128,6 +6131,9 @@ LOCAL void subtoc_output ( const int depth )
 	if ( toc[p2_toc_counter]->ignore_subtoc )	/* r5pl6 */
 	{	return;
 	}
+
+	old= bDocAutorefOff;
+	bDocAutorefOff= FALSE;
 
 	for (i=last_n1_index; i<=p1_toc_counter; i++)
 	{
@@ -6290,6 +6296,7 @@ LOCAL void subtoc_output ( const int depth )
 				break;
 			default:
 				outln("");
+				break;
 		}
 	}
 
@@ -6311,9 +6318,6 @@ LOCAL void subapx_output ( const int depth )
 
 	BOOLEAN old;
 	
-	old= bDocAutorefOff;
-	bDocAutorefOff= FALSE;
-
 	if (desttype==TOLYX)
 	{	return;
 	}
@@ -6325,6 +6329,9 @@ LOCAL void subapx_output ( const int depth )
 	if ( toc[p2_toc_counter]->ignore_subtoc )	/* r5pl6 */
 	{	return;
 	}
+
+	old= bDocAutorefOff;
+	bDocAutorefOff= FALSE;
 
 	for (i=last_n1_index; i<=p1_toc_counter; i++)
 	{
@@ -6480,6 +6487,7 @@ LOCAL void subapx_output ( const int depth )
 				break;
 			default:
 				outln("");
+				break;
 		}
 	}
 
@@ -6498,9 +6506,6 @@ LOCAL void subsubtoc_output ( const int depth )
 	BOOLEAN first= TRUE;
 	BOOLEAN old;
 	
-	old= bDocAutorefOff;
-	bDocAutorefOff= FALSE;
-
 	if (desttype==TOLYX)
 	{	return;
 	}
@@ -6516,6 +6521,9 @@ LOCAL void subsubtoc_output ( const int depth )
 	if ( last_n2_index==0 )	/* r5pl6 */
 	{	return;				/* Wer benutzt !subsubtoc in einem Node? */
 	}
+
+	old= bDocAutorefOff;
+	bDocAutorefOff= FALSE;
 
 	for (i=last_n2_index; i<=p1_toc_counter; i++)
 	{
@@ -6636,6 +6644,7 @@ LOCAL void subsubtoc_output ( const int depth )
 				break;
 			default:
 				outln("");
+				break;
 		}
 	}
 	
@@ -6655,9 +6664,6 @@ LOCAL void subsubapx_output ( const int depth )
 	BOOLEAN first= TRUE;
 	BOOLEAN old;
 	
-	old= bDocAutorefOff;
-	bDocAutorefOff= FALSE;
-
 	if (desttype==TOLYX)
 	{	return;
 	}
@@ -6673,6 +6679,9 @@ LOCAL void subsubapx_output ( const int depth )
 	if ( last_n2_index==0 )	/* r5pl6 */
 	{	return;				/* Wer benutzt !subsubtoc in einem Node? */
 	}
+
+	old= bDocAutorefOff;
+	bDocAutorefOff= FALSE;
 
 	for (i=last_n2_index; i<=p1_toc_counter; i++)
 	{
@@ -6786,6 +6795,7 @@ LOCAL void subsubapx_output ( const int depth )
 				break;
 			default:
 				outln("");
+				break;
 		}
 	}
 	
@@ -6802,9 +6812,6 @@ LOCAL void subsubsubtoc_output ( void )
 	BOOLEAN first= TRUE;
 	BOOLEAN old;
 	
-	old= bDocAutorefOff;
-	bDocAutorefOff= FALSE;
-
 	if (desttype==TOLYX)
 	{	return;
 	}
@@ -6824,6 +6831,9 @@ LOCAL void subsubsubtoc_output ( void )
 	if ( last_n3_index==0 )	/* r5pl6 */
 	{	return;				/* Wer benutzt !subsubsubtoc in einem Subnode? */
 	}
+
+	old= bDocAutorefOff;
+	bDocAutorefOff= FALSE;
 
 	for (i=last_n3_index; i<=p1_toc_counter; i++)
 	{
@@ -6910,6 +6920,7 @@ LOCAL void subsubsubtoc_output ( void )
 				break;
 			default:
 				outln("");
+				break;
 		}
 	}
 	
@@ -6930,9 +6941,6 @@ LOCAL void subsubsubapx_output ( void )
 	{	return;
 	}
 
-	old= bDocAutorefOff;
-	bDocAutorefOff= FALSE;
-
 	if ( p1_toc_counter<=0 )
 	{	return;
 	}
@@ -6948,6 +6956,9 @@ LOCAL void subsubsubapx_output ( void )
 	if ( last_n3_index==0 )	/* r5pl6 */
 	{	return;				/* Wer benutzt !subsubsubtoc in einem Subnode? */
 	}
+
+	old= bDocAutorefOff;
+	bDocAutorefOff= FALSE;
 
 	for (i=last_n3_index; i<=p1_toc_counter; i++)
 	{
@@ -7030,6 +7041,7 @@ LOCAL void subsubsubapx_output ( void )
 				break;
 			default:
 				outln("");
+				break;
 		}
 	}
 	
@@ -7500,10 +7512,10 @@ GLOBAL void c_tableofcontents ( void )
 	{
 		case TOTEX:
 		case TOPDL:
-			outln("\\newpage");
+			c_newpage();
 			output_helpid(0);
 			outln("\\tableofcontents");
-			outln("\\newpage");
+			c_newpage();
 			break;
 		case TOLYX:
 			outln("\\layout LaTeX");
@@ -7730,6 +7742,25 @@ GLOBAL void c_tableofcontents ( void )
 			}
 			outln(HTML_BR);
 			break;	/* r5pl4 */
+		
+		case TOKPS:
+			check_endnode();
+
+			output_helpid(0);
+			if (toc_available)
+			{
+				outln("18 changeFontSize");
+				voutlnf("(%s) show newline", lang.contents);
+				outln("11 changeFontSize changeBaseFont");
+				toc_output(depth);
+			}
+			if (apx_available)
+			{
+				output_appendix_line();
+				apx_output(depth);
+			}
+			c_newpage();
+			break;
 		
 		case TOLDS:
 			output_helpid(0);
@@ -10465,6 +10496,30 @@ LOCAL void init_toc_forms_numbers ( void )
 			strcpy(form_a4_n4, form_t1_n4);
 			break;
 		
+		case TOKPS:
+			strcpy(form_t1_n1, "(%2d  %s) show newline");
+			strcpy(form_t1_n2, "(   %2d.%d  %s) show newline");
+			strcpy(form_t1_n3, "(        %2d.%d.%d  %s) show newline");
+			strcpy(form_t1_n4, "(               %2d.%d.%d.%d  %s) show newline");
+			strcpy(form_t2_n2, "(%2d.%d  %s) show newline");
+			strcpy(form_t2_n3, "(     %2d.%d.%d  %s) show newline");
+			strcpy(form_t2_n4, "(            %2d.%d.%d.%d  %s) show newline");
+			strcpy(form_t3_n3, "(%2d.%d.%d  %s) show newline");
+			strcpy(form_t3_n4, "(       %2d.%d.%d.%d  %s) show newline");
+			strcpy(form_t4_n4, "(%2d.%d.%d.%d  %s) show newline");
+
+			strcpy(form_a1_n1, "( %c  %s) show newline");
+			strcpy(form_a1_n2, "(    %c.%d  %s) show newline");
+			strcpy(form_a1_n3, "(         %c.%d.%d  %s) show newline");
+			strcpy(form_a1_n4, "(                %c.%d.%d.%d  %s) show newline");
+			strcpy(form_a2_n2, "( %c.%d  %s) show newline");
+			strcpy(form_a2_n3, "(    %c.%d.%d  %s) show newline");
+			strcpy(form_a2_n4, "(           %c.%d.%d.%d  %s) show newline");
+			strcpy(form_a3_n3, "( %c.%d.%d  %s) show newline");
+			strcpy(form_a3_n4, "(        %c.%d.%d.%d  %s) show newline");
+			strcpy(form_a4_n4, "( %c.%d.%d.%d  %s) show newline");
+			break;
+
 		default:
 			strcpy(form_t1_n1, "%2d  %s");
 			strcpy(form_t1_n2, "   %2d.%d  %s");
