@@ -189,6 +189,7 @@ LOCAL void tocline_make_bold ( char *s, const int depth );
 LOCAL void tocline_handle_1st ( BOOLEAN *f );
 LOCAL void convert_toc_item ( TOCITEM *t );
 LOCAL void output_appendix_line ( void );
+LOCAL void toc_link_output ( const int depth ); /* New in r6pl16 [NHz] */
 LOCAL void toc_output ( const int depth );
 LOCAL void apx_output ( const int depth );
 LOCAL void subtoc_output ( const int depth );
@@ -1969,6 +1970,8 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 	{	outln("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=iso-8859-1\">");
 	}
 
+/* New in r6pl16 [NHz] */
+LOCAL void toc_link_output ( const int depth );
 	voutlnf("<meta name=\"Generator\" content=\"UDO%s PL%s for %s\">",
 			UDO_REL,
 			UDO_PL,
@@ -1998,26 +2001,36 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 	if (titdat.webmasteremail!=NULL)
 	{	voutlnf("<meta name=\"Email\" content=\"%s\">", titdat.webmasteremail);
 		voutlnf("<link rev=\"made\" href=\"mailto:%s\" title=\"E-Mail\">", titdat.webmasteremail);
+		/* New in r6pl16 [NHz] */
+		voutlnf("<link rel=\"author\" href=\"mailto:%s\" title=\"E-Mail\">", titdat.webmasteremail);
 	}
 
 
 	/* New in r6pl15 [NHz] */
 	if (html_frames_layout)
-	{	sprintf(sTarget, "target=\"UDOcon\"");
+	{	sprintf(sTarget, " target=\"UDOcon\"");
 	}
 
+	/* New in r6pl16 [NHz] */
+	toc_link_output(1);
+	toc_link_output(2);
+	toc_link_output(3);
+	toc_link_output(4);
 
 	if (old_outfile.name[0]!=EOS)
-	{	/* New in r6pl15 [NHz] */
-
-		voutlnf("<link rel=\"start\" href=\"%s%s\" title=\"Homepage\">", old_outfile.name, outfile.suff);
-		/* Special for CAB */
-		voutlnf("<link rel=\"home\" href=\"%s%s\" title=\"Homepage\">", old_outfile.name, outfile.suff);
-		if (uses_tableofcontents)
-		{	/* New in r6pl15 [NHz] */
-			voutlnf("<link rel=\"contents\" href=\"%s%s#UDOTOC\" title=\"%s\">", old_outfile.name, outfile.suff, lang.contents);
+	{	/* Changed in r6pl16 [NHz] */
+		/* Feststellen, ob die Referenz im gleichen File liegt */
+		if (strcmp(old_outfile.name, outfile.name)!=0)
+		{
+			voutlnf("<link rel=\"start\" href=\"%s%s\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.html_start);
 			/* Special for CAB */
-			voutlnf("<link rel=\"toc\" href=\"%s%s#UDOTOC\" title=\"%s\">", old_outfile.name, outfile.suff, lang.contents);
+			voutlnf("<link rel=\"home\" href=\"%s%s\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.html_start);
+			if (uses_tableofcontents)
+			{	/* New in r6pl15 [NHz] */
+				voutlnf("<link rel=\"contents\" href=\"%s%s#UDOTOC\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.contents);
+				/* Special for CAB */
+				voutlnf("<link rel=\"toc\" href=\"%s%s#UDOTOC\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.contents);
+			}
 		}
 	}
 
@@ -2071,9 +2084,9 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		/* Special for CAB */
 		/* Changed in r6pl16 [NHz] */
 		if(strchr(htmlname, '.') != NULL)
-			voutlnf("<link rel=\"first\" href=\"%s\" title=\"%s\">", htmlname, s);
+			voutlnf("<link rel=\"first\" href=\"%s\"%s title=\"%s\">", htmlname, sTarget, s);
 		else
-			voutlnf("<link rel=\"first\" href=\"%s%s\" title=\"%s\">", htmlname, outfile.suff, s);
+			voutlnf("<link rel=\"first\" href=\"%s%s\"%s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
 	}
 
 
@@ -2089,15 +2102,15 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		/* Changed in r6pl16 [NHz] */
 		if(strchr(htmlname, '.') != NULL)
 		{
-			voutlnf("<link rel=\"prev\" href=\"%s\" %s title=\"%s\">", htmlname, sTarget, s);
+			voutlnf("<link rel=\"prev\" href=\"%s\"%s title=\"%s\">", htmlname, sTarget, s);
 			/* Special for CAB */
-			voutlnf("<link rel=\"previous\" href=\"%s\" %s title=\"%s\">", htmlname, sTarget, s);
+			voutlnf("<link rel=\"previous\" href=\"%s\"%s title=\"%s\">", htmlname, sTarget, s);
 		}
 		else
 		{
-			voutlnf("<link rel=\"prev\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+			voutlnf("<link rel=\"prev\" href=\"%s%s\"%s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
 			/* Special for CAB */
-			voutlnf("<link rel=\"previous\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+			voutlnf("<link rel=\"previous\" href=\"%s%s\"%s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
 		}
 	}
 
@@ -2113,9 +2126,9 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 
 		/* Changed in r6pl16 [NHz] */
 		if(strchr(htmlname, '.') != NULL)
-			voutlnf("<link rel=\"next\" href=\"%s\" %s title=\"%s\">", htmlname, sTarget, s);
+			voutlnf("<link rel=\"next\" href=\"%s\"%s title=\"%s\">", htmlname, sTarget, s);
 		else
-			voutlnf("<link rel=\"next\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+			voutlnf("<link rel=\"next\" href=\"%s%s\"%s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
 	}
 
 	/* New in r6pl15 [NHz] */
@@ -2136,9 +2149,9 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		/* Special for CAB */
 		/* Changed in r6pl16 [NHz] */
 		if(strchr(htmlname, '.') != NULL)
-			voutlnf("<link rel=\"last\" href=\"%s\" %s title=\"%s\">", htmlname, sTarget, s);
+			voutlnf("<link rel=\"last\" href=\"%s\"%s title=\"%s\">", htmlname, sTarget, s);
 		else
-			voutlnf("<link rel=\"last\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+			voutlnf("<link rel=\"last\" href=\"%s%s\"%s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
 	}
 
 	/* New in r6pl15 [NHz] */
@@ -2151,7 +2164,8 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		strcpy(s, lab[li]->name);
 		get_html_filename(lab[li]->tocindex, htmlname);
 
-		voutlnf("<link rel=\"copyright\" href=\"%s%s\" %s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+		if(strcmp(htmlname, outfile.name)!=0) /* Changed in r6pl16 [NHz] */
+			voutlnf("<link rel=\"copyright\" href=\"%s%s\"%s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
 	}
 
 	/* New in r6pl15 [NHz] */
@@ -2211,7 +2225,9 @@ LOCAL BOOLEAN html_new_file ( void )
 
 	/* Header anlegen, Aktueller Node ist bekannt */
 	
-	outln("<html>");
+	/* Changed in r6pl16 [NHz] */
+	voutlnf("<html lang=\"%s\">", lang.html_lang);
+/*	outln("<html>");*/
 	outln("<head>");
 	outln("<title>");
 
@@ -2288,7 +2304,9 @@ GLOBAL void output_html_header ( const char *t )
 	/* Wird nur fuer die Titelseite/Inhaltsverzeichnis benutzt */
 	
 	output_html_doctype();	/* r6pl2 */
-	outln("<html>");
+	/* Changed in r6pl16 [NHz] */
+	voutlnf("<html lang=\"%s\">", lang.html_lang);
+/*	outln("<html>");*/
 	outln("<head>");
 	outln("<title>");
 	outln(t);
@@ -6121,6 +6139,127 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 
 	return TRUE;
 }	/* bookmarks_ps */
+
+
+/* New in r6pl16 [NHz] */
+LOCAL void toc_link_output ( const int depth )
+{
+	register int i;
+	char	*htmlfilename, hfn[512], suff[12], sTarget[512]="\0";
+
+	if (html_frames_layout)
+	{	sprintf(sTarget, " target=\"UDOcon\"");
+	}
+	
+	if (p1_toc_counter<=0)
+	{	return;
+	}
+
+	for (i=1; i<=p1_toc_counter; i++)
+	{
+		if (toc[i]!=NULL && !toc[i]->invisible)
+		{
+			convert_toc_item(toc[i]);
+
+			if ( toc[i]->n1 != 0 )
+			{
+				switch (depth)
+				{
+					case 1:
+						if (( toc[i]->toctype==TOC_NODE1 ) && !(toc[i]->appendix ))
+						{	/* Ein Kapitel */	
+		
+							sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
+							htmlfilename= hfn;
+
+							/* Feststellen, ob die Referenz im gleichen File liegt */
+							if ((html_merge_node1==FALSE) && (strcmp(htmlfilename, outfile.name)!=0))
+							{
+								if(strchr(htmlfilename, '.') != NULL)
+									strcpy(suff, "");
+								else
+									strcpy(suff, outfile.suff);
+
+								voutlnf("<link rel=\"chapter\" href=\"%s%s\"%s title=\"%d %s\">", htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->name);
+							}
+						}/* TOC_NODE1 */
+						break;
+				
+					case 2:
+						if ( toc[i]->toctype==TOC_NODE2 )
+						{	/* Ein Unterkapitel */	
+
+							if(toc[toc[i]->up_n1_index]->nr1+toc_offset == toc[last_n1_index]->nr1+toc_offset)
+							{
+								sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
+								htmlfilename= hfn;
+
+								/* Feststellen, ob die Referenz im gleichen File liegt */
+								if ((html_merge_node2==FALSE) && (strcmp(htmlfilename, outfile.name)!=0))
+								{
+									if(strchr(htmlfilename, '.') != NULL)
+										strcpy(suff, "");
+									else
+										strcpy(suff, outfile.suff);
+
+									voutlnf("<link rel=\"section\" href=\"%s%s\"%s title=\"%d.%d %s\">", htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->nr2+subtoc_offset, toc[i]->name);
+								}
+							}
+						}/* TOC_NODE2 */
+						break;
+				
+					case 3:
+						if ( toc[i]->toctype==TOC_NODE3 )
+						{	/* Ein Unterunterkapitel */	
+
+							if(toc[toc[i]->up_n2_index]->nr2+subtoc_offset == toc[last_n2_index]->nr2+subtoc_offset)
+							{
+								sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
+								htmlfilename= hfn;
+
+								/* Feststellen, ob die Referenz im gleichen File liegt */
+								if ((html_merge_node3==FALSE) && (strcmp(htmlfilename, outfile.name)!=0))
+								{
+									if(strchr(htmlfilename, '.') != NULL)
+										strcpy(suff, "");
+									else
+										strcpy(suff, outfile.suff);
+
+									voutlnf("<link rel=\"subsection\" href=\"%s%s\"%s title=\"%d.%d.%d %s\">", htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->nr2+subtoc_offset, toc[i]->nr3+subsubtoc_offset, toc[i]->name);
+								}
+							}
+						}/* TOC_NODE3 */
+						break;
+
+					case 4:
+						if (( toc[i]->toctype==TOC_NODE1 ) && ( toc[i]->appendix ))
+						{	/* Ein Unterunterunterkapitel */	
+
+							sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
+							htmlfilename= hfn;
+
+							/* Feststellen, ob die Referenz im gleichen File liegt */
+							if ((html_merge_node1==FALSE) && (strcmp(htmlfilename, outfile.name)!=0))
+							{
+								if(strchr(htmlfilename, '.') != NULL)
+									strcpy(suff, "");
+								else
+									strcpy(suff, outfile.suff);
+
+								voutlnf("<link rel=\"appendix\" href=\"%s%s\"%s title=\"%c %s\">", htmlfilename, suff, sTarget, 'A'-1+toc[i]->nr1, toc[i]->name);
+							}
+						}/* TOC_NODE1 */
+						break;
+				
+				}/* switch */
+
+			}/* toc[i]->n1 > 0 */
+
+		}/* toc[i]!=NULL && !toc[i]->invisible */
+
+	}/* for */
+
+}	/* toc_link_output */
 
 
 LOCAL void toc_output ( const int depth )
