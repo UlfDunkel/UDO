@@ -1,0 +1,21 @@
+!begin_itemize
+
+!index !/docinfo [stg_database]
+!item	Neu: Mittels (!I)!/docinfo [stg_database](!i) kann man
+angeben, was UDO für die (!V)@database(!v)-Zeile ausgeben soll. Die
+alte, umständliche Lösung mittles (!V)!/stg_no_database(!v) und
+(!I)!/raw~[stg]~@database(!i) ist demnach nicht mehr nötig. Wird
+(!I)!/docinfo [stg_database](!i) nicht verwendet, so erzeugt UDO wie
+gehabt eine Zeile, gebildet aus (!I)!/docinfo~[title](!i) und
+(!I)!/docinfo~[program](!i).
+
+!index !/stg_no_database
+!item	Änderung: Der Schalter (!V)!/stg_no_database(!v) existiert
+nicht mehr.
+
+!index !/docinfo [program]
+!item	Bugfix: Wurde in PL2 kein (!I)!/docinfo [program](!i) benutzt,
+so wurde in der Kopfzeile Murks ausgegeben.
+
+!end_itemize
+

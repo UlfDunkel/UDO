@@ -1,0 +1,66 @@
+!subsubnode (!/xlink~!..)
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	placeholder, main part
+
+!item [Syntax:]
+	(!T)(!/xlink [<text>] [<link>])(!t)
+
+!item [Description:]
+	Useful for references to external documents like other hypertexts ore 
+	WWW-pages. In contrast to (!I)(!/link~!..)(!i) (!V)<link>(!v) will    
+	not be converted! The example shows how to make a link to a popular   
+	magazine in a HTML file. If (!V)<link>(!v) is empty the contents of   
+	(!V)<text>(!v) is used.                                               
+
+!item [Example:] (!T)(!/xlink [Playboy] [http://www.playboy.com])(!t)
+
+!item [See:] (!I)(!/link~!..)(!i), (!I)(!/plink~!..)(!i), (!I)!/no_xlinks(!i), Links
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

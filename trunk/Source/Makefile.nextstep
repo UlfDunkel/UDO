@@ -1,0 +1,11 @@
+###########################################################
+# @(#) Makefile fuer NeXTStep
+# @(#) Dirk Hagedorn, 30.07.1996
+###########################################################
+CC = cc 
+CFLAGS = -g -O2 -Wall -D__NEXTSTEP__
+
+LDFLAGS = 
+
+include makefile.in
+
