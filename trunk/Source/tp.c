@@ -342,7 +342,8 @@ GLOBAL BOOLEAN set_docinfo ( void )
 
 	tokcpy2(s, 512);
 	/* New: Fixed bug #0000040 in r6.3pl16 [NHz] */
-	node2postscript(s, KPS_PS2DOCINFO);
+	if(desttype==TOKPS)
+		node2postscript(s, KPS_PS2DOCINFO);
 
 	contlen= get_brackets_ptr(s, &cont, &data);
 	
@@ -357,7 +358,8 @@ GLOBAL BOOLEAN set_docinfo ( void )
 	del_whitespaces(inhalt);
 
 	/* New: Fixed Bug #0000040 in r6.3pl16 [NHz] */
-	node2postscript(data, KPS_DOCINFO2PS);
+	if(desttype==TOKPS)
+		node2postscript(data, KPS_DOCINFO2PS);
 
 	if (strcmp(inhalt, "authorimage")==0)
 	{	del_whitespaces(data);
@@ -526,6 +528,18 @@ GLOBAL BOOLEAN set_docinfo ( void )
 		return TRUE;
 	}
 
+	/* New in V6.5.2 [NHz] */
+	if (strcmp(inhalt, "company")==0)
+	{	init_docinfo_data(data, &(titdat.company), FALSE);
+		return TRUE;
+	}
+
+	/* New in V6.5.2 [NHz] */
+	if (strcmp(inhalt, "category")==0)
+	{	init_docinfo_data(data, &(titdat.category), FALSE);
+		return TRUE;
+	}
+
 	/* Spezialitaeten fuer ST-Guide */
 	if (strcmp(inhalt, "stgdatabase")==0)	/*r6pl4*/
 	{	init_docinfo_data(data, &(titdat.stg_database), TRUE);
@@ -598,7 +612,8 @@ GLOBAL void c_maketitle ( void )
 			has_date,
 			has_authorimage,
 			has_programimage,
-			has_address;
+			has_address,
+			has_company;	/* New in V6.5.2 [NHz] */
 
 	if (called_maketitle)
 	{	error_called_twice("!maketitle");	/*r6pl2*/
@@ -615,6 +630,7 @@ GLOBAL void c_maketitle ( void )
 	has_date= 			(titdat.date!=NULL);
 	has_authorimage=	(titdat.authorimage!=NULL);
 	has_programimage= 	(titdat.programimage!=NULL);
+	has_company= 		(titdat.company!=NULL);	/* New in V6.5.2 [NHz] */
 
 	if ( !(	has_author ||
 			has_program ||
@@ -623,7 +639,8 @@ GLOBAL void c_maketitle ( void )
 			has_date ||
 			has_authorimage ||
 			has_programimage ||
-			has_address)
+			has_address ||
+			has_company) /* New in V6.5.2 [NHz] */
 		)
 	{
 		error_missing_title_data();	/* r6pl2 */
@@ -706,6 +723,13 @@ GLOBAL void c_maketitle ( void )
 			{	voutlnf("%s \\\\", titdat.author);
 			}
 
+			/* New in V6.5.2 [NHz] */
+			if (has_company)
+			{	auto_quote_chars(lang.fur, FALSE);
+				voutlnf("\\vfill\n%s\\\\\n\\medskip", lang.fur);
+				voutlnf("%s \\\\", titdat.company);
+			}
+
 			if (has_address)
 			{	for (i=1; i<=address_counter; i++)
 				{	if (titdat.address[i]!=NULL)
@@ -737,6 +761,11 @@ GLOBAL void c_maketitle ( void )
 			if (has_author)
 			{	voutlnf("\\fill_bottom\n\\layout Subsubsection*\n\\align center\n\n%s\n", lang.by);
 				voutlnf("\\layout Subsection*\n\\align center\n\n%s\n", titdat.author);
+			}
+			/* New in V6.5.2 [NHz] */
+			if (has_company)
+			{	voutlnf("\\fill_bottom\n\\layout Subsubsection*\n\\align center\n\n%s\n", lang.fur);
+				voutlnf("\\layout Subsection*\n\\align center\n\n%s\n", titdat.company);
 			}
 			if (has_address)
 			{	for (i=1; i<=address_counter; i++)
@@ -771,6 +800,13 @@ GLOBAL void c_maketitle ( void )
 				voutlnf("@center %s", lang.by);
 				outln("@sp 1");
 				voutlnf("@center %s", titdat.author);
+			}
+			/* New in V6.5.2 [NHz] */
+			if (has_company)
+			{	outln("@sp 10");
+				voutlnf("@center %s", lang.fur);
+				outln("@sp 1");
+				voutlnf("@center %s", titdat.company);
 			}
 			if (has_address)
 			{	for (i=1; i<=address_counter; i++)
@@ -829,6 +865,14 @@ GLOBAL void c_maketitle ( void )
 				outlncenter(titdat.author);
 			}
 
+			/* New in V6.5.2 [NHz] */
+			if ( has_company )
+			{	outln("");
+				outlncenter(lang.fur);
+				outln("");
+				outlncenter(titdat.company);
+			}
+
 			if ( has_address )
 			{	for (i=1; i<=address_counter; i++)
 				{	if (titdat.address[i]!=NULL)
@@ -871,6 +915,14 @@ GLOBAL void c_maketitle ( void )
 				outlncenter(lang.by);
 				outln("");
 				outlncenter(titdat.author);
+			}
+
+			/* New in V6.5.2 [NHz] */
+			if ( has_company )
+			{	outln("");
+				outlncenter(lang.fur);
+				outln("");
+				outlncenter(titdat.company);
 			}
 
 			if ( has_address )
@@ -929,6 +981,14 @@ GLOBAL void c_maketitle ( void )
 				outlncenterfill(titdat.author);
 			}
 
+			/* New in V6.5.2 [NHz] */
+			if ( has_company )
+			{	outln("");
+				outlncenterfill(lang.fur);
+				outln("");
+				outlncenterfill(titdat.company);
+			}
+
 			if ( has_address )
 			{	for (i=1; i<=address_counter; i++)
 				{	if (titdat.address[i]!=NULL)
@@ -958,6 +1018,14 @@ GLOBAL void c_maketitle ( void )
 				outlncenter(lang.by);
 				outln("");
 				outlncenter(titdat.author);
+			}
+
+			/* New in V6.5.2 [NHz] */
+			if ( has_company )
+			{	outln("");
+				outlncenter(lang.fur);
+				outln("");
+				outlncenter(titdat.company);
 			}
 
 			if ( has_address )
@@ -1011,6 +1079,17 @@ GLOBAL void c_maketitle ( void )
 				stringcenter(s1, 60);
 				voutlnf("    # %s", s1);
 			}
+			/* New in V6.5.2 [NHz] */
+			if ( has_company )
+			{	outln("    #");
+				strcpy(s1, lang.fur);
+				stringcenter(s1, 60);
+				voutlnf("    # %s", s1);
+				outln("    #");
+				strcpy(s1, titdat.company);
+				stringcenter(s1, 60);
+				voutlnf("    # %s", s1);
+			}
 
 			if ( has_address )
 			{	for (i=1; i<=address_counter; i++)
@@ -1041,12 +1120,22 @@ GLOBAL void c_maketitle ( void )
 			{	voutlnf("{\\fs%d %s}%s", iDocPropfontSize + 6, titdat.date, rtf_par);
 			}
 			if ( has_author || has_address )
-			{	for (i=0; i<(25-address_counter); i++) out(rtf_par) ;
+			{	/* New in V6.5.2 [NHz] */
+				if(has_company)
+					for (i=0; i<(22-address_counter); i++) out(rtf_par);
+				else
+					for (i=0; i<(25-address_counter); i++) out(rtf_par);
 				outln(rtf_par);
 			}
 			if (has_author)
 			{	voutlnf("%s%s%s", lang.by, rtf_par, rtf_par);
 				voutlnf("%s%s", titdat.author, rtf_par);
+			}
+			/* New in V6.5.2 [NHz] */
+			if (has_company)
+			{	auto_quote_chars(lang.fur, FALSE);
+				voutlnf("%s %s%s%s", rtf_par, lang.fur, rtf_par, rtf_par);
+				voutlnf("%s%s", titdat.company, rtf_par);
 			}
 			if ( has_address )
 			{	for (i=1; i<=address_counter; i++)
@@ -1105,6 +1194,13 @@ GLOBAL void c_maketitle ( void )
 
 			if ( has_author )
 			{	voutlnf("\\qc{%s}\\par\\pard", titdat.author);
+			}
+
+			/* New in V6.5.2 [NHz] */
+			if ( has_company )
+			{	auto_quote_chars(lang.fur, FALSE);
+				voutlnf("\\par\\qc{%s}\\par\\pard", lang.fur);
+				voutlnf("\\qc{%s}\\par\\pard", titdat.company);
 			}
 
 			if ( has_address )
@@ -1171,6 +1267,13 @@ GLOBAL void c_maketitle ( void )
 			{	voutlnf("\\qc %s\\par\\pard", titdat.author);
 			}
 
+			/* New in V6.5.2 [NHz] */
+			if ( has_company )
+			{	auto_quote_chars(lang.fur, FALSE);
+				voutlnf("\\par\\qc %s\\par\\pard", lang.fur);
+				voutlnf("\\qc %s\\par\\pard", titdat.company);
+			}
+
 			if ( has_address )
 			{	for (i=1; i<=address_counter; i++)
 				{	if (titdat.address[i]!=NULL)
@@ -1228,6 +1331,13 @@ GLOBAL void c_maketitle ( void )
 			{	voutlnf("%s<br>", titdat.author);
 			}
 			
+			/* New in V6.5.2 [NHz] */
+			if ( has_company )
+			{	auto_quote_chars(lang.fur, FALSE);
+				voutlnf("<br>%s<br>", lang.fur);
+				voutlnf("%s<br>", titdat.company);
+			}
+			
 			if ( has_address )
 			{	for (i=1; i<=address_counter; i++)
 				{	if (titdat.address[i]!=NULL)
@@ -1269,6 +1379,14 @@ GLOBAL void c_maketitle ( void )
 				outlncenter(lang.by);
 				outln("");
 				outlncenter(titdat.author);
+			}
+
+			/* New in V6.5.2 [NHz] */
+			if ( has_company )
+			{	outln("");
+				outlncenter(lang.fur);
+				outln("");
+				outlncenter(titdat.company);
 			}
 
 			if (address_counter>0)
@@ -1332,6 +1450,14 @@ GLOBAL void c_maketitle ( void )
 				voutlnf("(%s) Center setAlign", titdat.author);
 			}
 
+			/* New in V6.5.2 [NHz] */
+			if ( has_company )
+			{	outln("newline");
+				auto_quote_chars(lang.fur, FALSE);
+				voutlnf("(%s) Center setAlign newline", lang.fur);
+				voutlnf("(%s) Center setAlign", titdat.company);
+			}
+
 			if ( has_address )
 			{	outln("newline");
 				for (i=1; i<=address_counter; i++)
@@ -1380,6 +1506,14 @@ GLOBAL void pch_titlepage ( void )
 		outlncenter(titdat.author);
 	}
 
+	/* New in V6.5.2 [NHz] */
+	if ( titdat.company!=NULL )
+	{	outln("");
+		outlncenter(lang.fur);
+		outln("");
+		outlncenter(titdat.company);
+	}
+
 	if (address_counter>0)
 	{	for (i=1; i<=address_counter; i++)
 		{	if (titdat.address[i]!=NULL)
@@ -1413,6 +1547,8 @@ LOCAL void init_titdat ( void )
 	
 	titdat.keywords= NULL; /* New in r6pl15 [NHz] */
 	titdat.description= NULL; /* New in r6pl15 [NHz] */
+	titdat.company= NULL; /* New in V6.5.2 [NHz] */
+	titdat.category= NULL; /* New in V6.5.2 [NHz] */
 	titdat.htmltitle= NULL;
 	titdat.webmastername= NULL;
 	titdat.webmasteremail= NULL;
@@ -1486,6 +1622,8 @@ GLOBAL void exit_module_tp ( void )
 	
 	free_titdat(&(titdat.keywords)); /* New in r6pl15 [NHz] */
 	free_titdat(&(titdat.description)); /* New in r6pl15 [NHz] */
+	free_titdat(&(titdat.company)); /* New in V6.5.2 [NHz] */
+	free_titdat(&(titdat.category)); /* New in V6.5.2 [NHz] */
 	free_titdat(&(titdat.htmltitle));
 	free_titdat(&(titdat.webmastername));
 	free_titdat(&(titdat.webmasteremail));
