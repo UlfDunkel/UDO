@@ -1960,7 +1960,7 @@ GLOBAL void print_index ( void )
 		case TOASC:
 			sort_idxlist();
 			print_ascii_index();
-
+			break;
 	}
 
 #if USE_RAW_INDEX
@@ -3256,6 +3256,9 @@ LOCAL void output_empty_lines ( const int count )
 				case TOMHH:
 					outln("<br>");
 					/* outln("<br>&nbsp;"); */
+					break;
+				case TOKPS:
+					outln("newline");
 					break;
 				default:
 					outln("");
@@ -4966,6 +4969,15 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 			}
 			break;
 		case TOKPS:
+			if (inside_env)
+			{
+				if (bEnv1stPara[iEnvLevel])
+				{	bEnv1stPara[iEnvLevel]= FALSE;
+				}
+				else
+				{	outln(" newline");
+				}
+			}
 			out("(");
 			break;
 		default:
@@ -5525,7 +5537,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 
 	check_verb_style();	/* r5pl16 */
 
-	/* Leerzielen dann ausgeben, wenn der Absatz sich nicht in einer	*/
+	/* Leerzeilen dann ausgeben, wenn der Absatz sich nicht in einer	*/
 	/* komprimierten Umgebung befindet.									*/
 
 	if ( inside_short )
@@ -5547,6 +5559,9 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 			case TOTEX:
 			case TOPDL:
 				outln("");
+				break;
+			case TOKPS:
+				outln("newline");
 				break;
 		}
 	}
@@ -5611,7 +5626,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 			case TOIPF:
 				break;
 			case TOKPS:
-				outln("newline");
+				outln("newline newline");
 				break;
 			default:
 				outln("");
@@ -8012,6 +8027,11 @@ LOCAL void output_verbatim_line ( char *zeile )
 			indent[0]= EOS;	/* <???> */
 			auto_quote_chars(zeile, TRUE);
 			auto_references(zeile, FALSE, "", 0, 0);
+			break;
+		case TOKPS:
+			auto_quote_chars(zeile, TRUE);
+			strinsert(indent, "(");
+			strcat(zeile, ") show newline");
 			break;
 	}
 
@@ -10765,7 +10785,7 @@ GLOBAL void dest_adjust ( void )
 		case TOINF:	strcpy(outfile.suff, texi_suff);	break;
 		case TOIPF:	strcpy(outfile.suff, ".ipf");		break;
 		case TORTF:	strcpy(outfile.suff, ".rtf");		break;
-		case TOAQV:
+		case TOAQV: strcpy(outfile.suff, ".rtf");		break;
 		case TOWIN:	strcpy(outfile.suff, ".rtf");		break;
 		case TOWH4:	strcpy(outfile.suff, ".rtf");		break;
 		case TOPCH:	strcpy(outfile.suff, ".scr");		break;
