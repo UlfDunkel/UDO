@@ -479,6 +479,9 @@ GLOBAL void output_begin_verbatim ( void )
 		case TOKPS:
 			outln("Von");
 			break;
+		case TOOO:	/* r6-3-xmas */
+			out("<text:p text:style-name=\"Source Text\">");
+			break;
 	}
 }	/* output_begin_verbatim */
 
@@ -533,6 +536,9 @@ GLOBAL void output_end_verbatim ( void )
 			break;
 		case TOKPS:
 			outln("Voff");
+			break;
+		case TOOO:
+			outln("</text:p>");
 			break;
 		default:
 			break;
@@ -953,6 +959,9 @@ GLOBAL void c_begin_center ( void )
 			break;
 		case TOLYX:	/* <???> */
 			break;
+		case TOOO:	/* r6-3-xmas */
+			outln("<text:p text:style-name=\"P02\">");
+			break;
 	}
 
 }	/*c_begin_center*/
@@ -985,6 +994,9 @@ GLOBAL void c_end_center ( void )
 			outln(":elines.");	/* r6pl7*/
 			break;
 		case TOLYX:	/* <???> */
+			break;
+		case TOOO:	/* r6-3-xmas */
+			outln("</text:p>");
 			break;
 	}
 	
@@ -1034,6 +1046,9 @@ GLOBAL void c_begin_flushright ( void )
 		case TOIPF:
 			outln(":lines align=right.");	/* r6pl7*/
 			break;
+		case TOOO:	/* r6-3-xmas */
+			outln("<text:p text:style-name=\"P01\">");
+			break;
 	}
 
 }	/*c_begin_flushright*/
@@ -1070,6 +1085,9 @@ GLOBAL void c_end_flushright ( void )
 			break;
 		case TOIPF:
 			outln(":elines.");	/* r6pl7*/
+			break;
+		case TOOO:	/* r6-3-xmas */
+			outln("</text:p>");
 			break;
 	}
 	
@@ -1118,6 +1136,9 @@ GLOBAL void c_begin_flushleft ( void )
 		case TOIPF:
 			outln(":lines align=left.");	/* r6pl7*/
 			break;
+		case TOOO:	/* r6-3-xmas */
+			outln("<text:p>");
+			break;
 	}
 
 }	/*c_begin_flushleft*/
@@ -1154,6 +1175,9 @@ GLOBAL void c_end_flushleft ( void )
 			break;
 		case TOIPF:
 			outln(":elines.");	/* r6pl7*/
+			break;
+		case TOOO:	/* r6-3-xmas */
+			outln("</text:p>");
 			break;
 	}
 	
@@ -1223,6 +1247,9 @@ GLOBAL void c_begin_itemize ( void )
 			break;
 		case TOKPS:
 			voutlnf("/off%d (000) addStrSpaceLeft", iEnvLevel);
+			break;
+		case TOOO:
+			outln("<text:unordered-list>");
 			break;
 	}
 	
@@ -1321,6 +1348,9 @@ GLOBAL void c_begin_enumerate ( void )
 			break;
 		case TOKPS:
 			voutlnf("/off%d (000) addStrSpaceLeft", iEnvLevel);
+			break;
+		case TOOO:
+			outln("<text:ordered-list>");
 			break;
 	}
 
@@ -2472,6 +2502,16 @@ GLOBAL void c_item ( void )
 			}
 			
 			break;
+		case TOOO: /* r6-3-xmas */
+			if (!bEnv1stItem[iEnvLevel])
+			{
+				outln("\t\t</text:p>");
+				outln("\t</text:list-item>");
+			}
+		 	outln("\t<text:list-item>");
+			outln("\t\t<text:p>");
+			token[0][0]=EOS; /* Damit der Text !item nicht ausgegeben wird */
+			break;
 	}
 	
 	bEnv1stItem[iEnvLevel]= FALSE;
@@ -2728,6 +2768,11 @@ GLOBAL void c_end_enumerate ( void )
 			voutlnf("off%d subOffFromLeft", iEnvLevel+1);
 			outln("newline");
 			break;
+		case TOOO:
+			outln("\t\t</text:p>");
+			outln("\t</text:list-item>");
+			outln("</text:ordered-list>");
+			break;
 	}
 
 	end_env_output_line(iEnvLevel+1);
@@ -2794,6 +2839,11 @@ GLOBAL void c_end_itemize ( void )
 		case TOKPS:
 			voutlnf("off%d subOffFromLeft", iEnvLevel+1);
 			outln("newline");
+			break;
+		case TOOO:
+			outln("\t\t</text:p>");
+			outln("\t</text:list-item>");
+			outln("</text:unordered-list>");
 			break;
 	}
 
@@ -3309,8 +3359,17 @@ GLOBAL void c_begin_document ( void )
 			outln("<!DOCTYPE office:document-content PUBLIC \"-//OpenOffice.org//DTD OfficeDocument 1.0//EN\" \"office.dtd\">");
 			outln("<office:document-content xmlns:office=\"http://openoffice.org/2000/office\" xmlns:style=\"http://openoffice.org/2000/style\" xmlns:text=\"http://openoffice.org/2000/text\" xmlns:table=\"http://openoffice.org/2000/table\" xmlns:draw=\"http://openoffice.org/2000/drawing\" xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:number=\"http://openoffice.org/2000/datastyle\" xmlns:svg=\"http://www.w3.org/2000/svg\" xmlns:chart=\"http://openoffice.org/2000/chart\" xmlns:dr3d=\"http://openoffice.org/2000/dr3d\" xmlns:math=\"http://www.w3.org/1998/Math/MathML\" xmlns:form=\"http://openoffice.org/2000/form\" xmlns:script=\"http://openoffice.org/2000/script\" office:class=\"text\" office:version=\"1.0\">");
 			outln("<office:script/>");
+			outln("<office:automatic-styles>");
+			/* Der Style P01 ist für rechtsbündige Absätze */
+			outln("<style:style style:name=\"P01\" style:family=\"paragraph\">");
+			outln("\t<style:properties fo:text-align=\"end\" style:justify-single-word=\"false\" style:parent-style-name=\"Standard\"/>");
+			outln("</style:style>");
+			/* Der Style P02 ist für zentrierten Text */
+			outln("<style:style style:name=\"P02\" style:family=\"paragraph\">");
+			outln("\t<style:properties fo:text-align=\"center\" style:justify-single-word=\"false\" style:parent-style-name=\"Standard\"/>");
+			outln("</style:style>");
+			outln("</office:automatic-styles>");
 			outln("<office:body>");
-
 			break;
 	}
 	
