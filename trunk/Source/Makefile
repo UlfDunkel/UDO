@@ -1,4 +1,4 @@
-default:
+all::
 	@echo
 	@echo "Call make -f Makefile.[system] to make UDO"
 	@echo
@@ -7,6 +7,6 @@ default:
 	@ls Makefile.*
 	@echo
 
-clean:
-	rm *.o *~ 2>/dev/null
+clean::
+	$(RM) *.o *~ 2>/dev/null
 

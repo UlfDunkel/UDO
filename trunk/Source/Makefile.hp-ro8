@@ -4,8 +4,10 @@
 ###########################################################
 
 CC =	gcc
+O=.o
+X=
 
-CFLAGS =	-g -O2 -D__HPUX_ROMAN8__ -Wall
+CFLAGS =	-O2 -D__HPUX_ROMAN8__ -Wall
 
 #CFLAGS =	-g -O2 -D__HPUX_ROMAN8__ \
 #-Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations \
@@ -16,3 +18,6 @@ LDFLAGS =	-lgcc
 
 include makefile.in
 
+
+udo$(X):	$(OSRC) cli$(O)
+		$(CC) $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) -o $@

@@ -3,8 +3,10 @@
 # @(#) Dirk Hagedorn, 05.08.1998
 ###########################################################
 CC = amigcc
+O=.o
+X=
 
-CFLAGS = -g -O2 -Wall -D__AMIGA__
+CFLAGS = -O2 -Wall -D__AMIGA__
 
 #CFLAGS =	-g -O2 -D__AMIGA__ \
 #-Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations \
@@ -14,3 +16,6 @@ CFLAGS = -g -O2 -Wall -D__AMIGA__
 LDFLAGS = -s
 
 include makefile.in
+
+udo$(X):	$(OSRC) cli$(O)
+		$(CC) $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) -o $@
