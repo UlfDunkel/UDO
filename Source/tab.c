@@ -1063,7 +1063,7 @@ LOCAL void table_output_general ( void )
 
     char    vc_l[2], vc_m[2], vc_r[2];
 
-    size_t  tl, add, twidth, toffset, isl;
+    size_t  tl, add, twidth, toffset=1, isl;
 
     BOOLEAN tortf, tosrc, ansichars, align_caption;
 
