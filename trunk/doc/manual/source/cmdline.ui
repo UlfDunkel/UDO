@@ -1,5 +1,5 @@
 # doc/manual/source/running_cmdline.ui
-# letzte Änderungen: 26.12.2003 / last changes: Dec 26, 2003
+# letzte Änderungen: 10.01.2004 / last changes: Jan 10, 2004
 
 
 ################################################################################
@@ -136,6 +136,8 @@ lange Dateinamen zu erzeugen (Endung .html anstatt .htm).
 !item [-n, (--)nroff] Die (!U)Quelldatei(!u) wird ins Nroff-Format umgewandelt.
 
 !item [-o F, (--)outfile F]  (!B)UDO(!b) schreibt seine Ausgaben in die Datei namens "F".
+# ergänzt 10.01.2004 - Ulrich Kretschmer
+Mit (!T)-o !(!t) wird als Ausgabedateiname der Name der Quelldatei plus neuer Extension verwendet (z.B. (!T)file.u(!t) wird zu (!T)file.stg(!t)).
 
 !item [-p, (--)pchelp] Die (!U)Quelldatei(!u) wird ins Pure-C-Help-Quelltextformat umgewandelt.
 
@@ -250,6 +252,9 @@ operating systems that normally do not support them.
 !item [-n, (--)nroff] The (!U)source file(!u) will be converted to Nroff.
 
 !item [-o F, (--)outfile F]  (!B)UDO(!b) writes the output into the file named ""F"".
+# ergänzt 10.01.2004 - Ulrich Kretschmer
+With (!T)-o !(!t), the output filename will be the source filename with new extension
+(e.g. (!T)file.u(!t) becomes (!T)file.stg(!t)).
 
 !item [-p, (--)pchelp] The (!U)source file(!u) will be converted to Pure C Help.
 
