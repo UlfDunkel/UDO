@@ -1,0 +1,13 @@
+ToDo:
+
+die Doku für möglichst viele verschiedene Ausgabeformate zum Laufen bringen
+
+neue Features dokumentieren (auch History)
+
+formatspezifische Abschnitte ergänzen/überarbeiten
+
+viele in den Doku-Text eingestreute ToDo-Kommentare abarbeiten
+
+Formatierungen in history.ui verbessern, HTML schaut nicht gut aus
+
+die Beispieldateien im Exemples-Verzeichnis überprüfen + ggf. aktualisieren

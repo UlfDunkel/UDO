@@ -1,0 +1,2489 @@
+# doc/manual/source/formats.ui
+# letzte Änderungen: 20.12.2003 / last changes: Dec 20, 2003
+
+
+################################################################################
+!iflang [german]
+!begin_node Ausgabeformate
+!endif
+!iflang [english]
+!begin_node Output Formats
+!endif
+!html_name formatspecific.html
+
+# 10.01.1996: Erweiterungen
+# 25.01.1996: Anderer Aufbau und weitere Fragen
+# 20.10.2001: Zusammengefasst mit Fragen aus Anhang
+# 20.12.2003: eigenes Kapitel "Ausgabeformate"
+
+################################################################################
+!iflang [german]
+!begin_node AmigaGuide
+!endif
+!iflang [english]
+!begin_node AmigaGuide
+!endif
+!html_name format_amg.html
+
+(!MISS)
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node Apple-QuickView
+!endif
+!iflang [english]
+!begin_node Apple-QuickView
+!endif
+!html_name format_aqv.html
+
+(!MISS)
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node ASCII
+!endif
+!iflang [english]
+!begin_node ASCII
+!endif
+!html_name format_asc.html
+
+!begin_description
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Ist eine Aufteilung in mehrere Dateien geplant?]
+
+Bisher hat erst ein (unregistrierter) Benutzer den Wunsch
+geäußert, daß UDO wie bei HTML Kapitel etc. in eigene Dateien
+ausgeben soll. Da dieser Wunsch bisher einmalig war, bin ich ihm
+nicht nachgekommen.
+
+Sollte jedoch der Bedarf vorhanden sein, bin ich gerne bereit,
+eine solche Option in UDO einzubauen. Die Routinen zur (!idx [Aufteilung])
+von Dateien sind quasi fertig und müssen nur noch für ASCII
+angepaßt werden.
+!endif
+
+!iflang [english]
+!item [Do you plan to split up ASCII manuals into separate files?] ~
+
+Only one (unregistered) user has wished yet that UDO should output chapters
+etc. to separate files as it does for HTML. Because no one else has asked me
+to do this yet I haven't implemented this feature.
+
+But if there's a need for this feature I will implement it. The functions
+still exist and have only to be adapted for ASCII.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Manche Zeilen sind länger als 70 Zeichen, warum?]
+
+Dies sind die Zeilen, in denen Sie Texthervorhebungen wie
+Fettschrift, kursive oder unterstrichene Wörter benutzt haben.
+Diese Hervorhebungen werden durch die Zeichen (!T)*(!t), (!T)/(!t) und (!T)_(!t)
+geschaffen, wie sie in der DFÜ üblich sind.
+
+Da einige Druckprogramme(!N)z.B. IdeaList für den Atari ST(!n) diese
+Hervorhebungen in Druckerbefehle umwandeln können bzw. einige
+Frontends diese Hervorhebungen unterstützen, zählt UDO diese
+Zeichen bei der Längenermittlung nicht mit.
+
+Möchten Sie auf die Ausgabe der oben genannten Zeichen verzichten, so geben Sie im Vorspann eines Quelltextes den Schalter
+(!KW [no_effects] [[asc!!]]) an.
+!endif
+
+!iflang [english]
+!item [Some lines are larger than 70 characters, why?] ~
+
+These are the lines that contain bold, italic or underlined words. These
+text styles are generated with the characters (!T)*(!t), (!T)/(!t) and
+(!T)_(!t) like in Usenet.
+
+Because of the existence of some print tools(!N)e.g. IdeaList for Atari
+ST(!n) and newsreaders know these text styles UDO doesn't count these
+special characters.
+
+If you want to suppress the output of these characters you can use the
+switch (!KW [no_effects] [[asc!!]]) inside the preamble.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Die Umlaute in der ASCII-Datei stimmen unter Windows nicht!?]
+
+UDO erzeugt jeweils ASCII-Dateien, die den Systemzeichensatz
+verwenden. UDO ist allerdings ein DOS-Programm, kein Windowsprogramm! Daher wird auch der DOS- und nicht der Windows-ANSI-Zeichensatz für die Erzeugung der ASCII-Dateien verwendet.
+
+Schauen Sie sich die ASCII-Dateien mal mit dem System- oder
+Terminal-Font an. Sie werden dann sehen und mir glauben, daß die
+Umlaute stimmen.
+!endif
+
+!iflang [english]
+!item [8bit characters are wrong when viewing an ASCII file with Windows!?] ~
+
+UDO saves ASCII files that use the system charset of your operating system.
+UDO is a DOS software, not a Windows software. So it will use the IBM-PC
+charset and not the Windows ANSI charset.
+
+Just view the ASCII files with the System font or Terminal font and you will
+believe me that the 8bit characters aren't wrong.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie kann man die Zeilenbreite ändern?]
+
+Die (!idx [Zeilenbreite]) kann mit dem Befehl (!KW [parwidth]) verändert werden.
+!endif
+
+!iflang [english]
+!item [How can I change the paragraph width?] ~
+
+The paragraph width can be changed with the (!KW [parwidth]) command.
+!endif
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+!end_description
+
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node David's Readme Compiler
+!endif
+!iflang [english]
+!begin_node David's Readme Compiler
+!endif
+!html_name format_drc.html
+
+(!MISS)
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node HP-Helptag-SGML
+!endif
+!iflang [english]
+!begin_node HP-Helptag-SGML
+!endif
+!html_name format_htag.html
+
+(!MISS)
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node Hypertext Markup Language (HTML)
+!endif
+!iflang [english]
+!begin_node HTML
+!endif
+!label HTML
+!html_name format_html.html
+
+!begin_description
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!index Aufteilung
+!index HTML !! Aufteilung
+!item [Wie kann man die Aufteilung in mehrere Dateien unterbinden?]
+
+Im Gegensatz zu den anderen Formaten erzeugt UDO standardmäßig
+mehrere Dateien, die miteinander verknüpft sind. Für jedes
+Kapitel, jeden Abschnitt und Unterabschnitt wird eine eigene
+Datei mit der Endung (!T).htm[l](!t) angelegt. Die Namen der einzelnen
+Dateien richten sich nach der Nummer und der Position des
+jeweiligen Kapitel. Inhaltsverzeichnis und Titelseite gelangen in
+die Datei, die Sie UDO per Kommandozeile als (!T)(--)outfile(!t) übergeben.
+
+!index !html_merge_nodes
+!index !html_merge_subnodes
+!index !html_merge_subsubnodes
+!index !html_merge_subsubsubnodes
+Mit den Schaltern (!KW [html_merge_nodes]), (!KW [html_merge_subnodes]),
+(!KW [html_merge_subsubnodes]) oder (!KW [html_merge_subsubsubnodes]) können
+Sie die Aufteilung in mehrere Dateien unterbinden.
+
+Wird im Vorspann (!KW [html_merge_nodes]) benutzt, so wird das gesamte
+Dokument in einer Datei gesichert. Dies empfiehlt sich lediglich
+bei kleinen Dokumenten, die kleiner als 16 KB sind.
+
+(!KW [html_merge_subnodes]) sorgt dafür, daß alle Abschnitte eines
+Kapitels in der Datei angegeben werden, in dem sich auch das
+Kapitel selbst befindet.
+
+Der Schalter (!KW [html_merge_subsubnodes]) sorgt dafür, daß alle
+Unterabschnitte im gleichen File wie der übergeordnete Abschnitt
+untergebracht werden.
+
+Der Schalter (!KW [html_merge_subsubsubnodes]) schließlich sorgt dafür,
+daß alle Paragraphen im gleichen File wie der übergeordnete
+Unterabschnitt untergebracht werden.
+
+!endif
+
+!iflang [english]
+!item	[How can I tell UDO not make files for each chapter?] ~
+
+In contrast to the other formats UDO saves a separate HTML file for each
+chapter by default. UDO names these files by using the chapter numbers. The
+title page and the table of contents will be saved in the file you passed in
+the command line.
+
+!index !/html_merge_nodes
+!index !/html_merge_subnodes
+!index !/html_merge_subsubnodes
+!index !/html_merge_subsubsubnodes
+
+Using the switches
+(!KW [html_merge_nodes]),
+(!KW [html_merge_subnodes]),
+(!KW [html_merge_subsubnodes]) or
+(!KW [html_merge_subsubsubnodes])
+you can tell UDO not to save a file for each chapter.
+
+If you use (!KW [html_merge_nodes]) inside the preamble UDO will save only
+one HTML file that contains the whole text. You should use this option only
+for small source files.
+
+If you use (!KW [html_merge_subnodes]) UDO will save separate files only
+for chapters. All sections, subsections and paragraphs of a chapter will be
+saved inside this file, too.
+
+If you use (!KW [html_merge_subsubnodes]) UDO will save separate files for
+chapters and sections. The subsections and paragraphs of a section will be
+saved in the file that contains the text of the upper section.
+
+Finally if you use (!KW [html_merge_subsubsubnodes]) the paragraphs of a
+subsection will be saved in the file that contains the text of the
+subsection. UDO will save separate files for chapters, sections and
+subsections.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!index Dateinamen
+!index HTML !! Dateinamen
+!item [Mir gefallen die Dateinamen bei der HTML-Ausgabe nicht!/]
+
+!index !html_name
+Durch den Befehl (!KW [html_name]) können Sie einem Kapitel einen
+bestimmten Namen zuweisen, den UDO für die jeweilige Datei
+anstelle der etwas kryptischen Namen wie etwa ""0a1009.htm""
+benutzt.
+!endif
+
+!iflang [english]
+!index HTML !! Filenames
+!index !/html_name
+
+!item [I don't like the names of the HTML files! ] ~
+
+Using the command (!KW [html_name]) inside a chapter, section, subsection
+or paragraph you can tell UDO which filename it shall use instead of using
+a filename like "01020304.html".
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!index HTML !! Kopfzeile
+!index udo_lf.gif
+!index udo_rg.gif
+!index udo_up.gif
+!item [Wie bekommt man diese scheußlichen Kopfzeilen weg?]
+
+UDO erzeugt standardmäßig auf jeder HTML-Seite eine Kopfzeile,
+anhand derer man das Thema (gebildet aus den Daten von (!KW [docinfo] [[title!!]]) und
+(!KW [docinfo] [[program!!]])) des Hypertextes erkennen kann. Desweiteren werden Links
+zu der vorgehenden, nachfolgenden und/oder übergeordneten Seite
+angelegt. Dazu werden GIFs benutzt, die UDO automatisch erzeugt.
+Die Dateinamen dieser GIFs lauten (!T)udo_lf.gif(!t), (!T)udo_rg.gif(!t) und
+(!T)udo_up.gif(!t).
+
+!index !no_headlines
+Durch den Schalter (!KW [no_headlines] [[html!!]]) kann die Ausgabe der
+Kopfzeilen und der Grafiken unterbunden werden.
+!endif
+
+!iflang [english]
+!item [How can I suppress these ugly headlines?] ~
+
+!index	udo_rg.gif
+!index	udo_lf.gif
+!index	udo_up.gif
+!index	HTML !! Headlines
+
+UDO will print on every HTML page a headline that contains the title of the
+documentation and hypertext links to the previous, next and upper page.
+UDO uses GIF's for these links that are saved by UDO automatically. The
+filenames of these GIF's are (!V)udo_lf.gif(!v), (!V)udo_rg.gif(!v) and
+(!V)udo_up.gif(!v).
+
+!index (!kw [no_headlines])
+
+Using the switch (!KW [no_headlines] [[html!!]]) inside the preamble you can
+tell UDO not to generate these headlines.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie kann man bequem eigene Kopf- und Fußzeilen erzeugen?]
+
+Um eigene (!idx [Kopfzeilen]) und (!idx [Fußzeilen]) zu erzeugen, kann man Makros
+benutzen, die man jeweils am Anfang und Ende eines Kapitels
+angibt. Der Inhalt dieser Kapitel erscheint dabei jedoch
+unterhalb der Überschrift. Auf folgende Art und Weise wurden
+beispielsweise Kopf- und Fußzeilen meiner WWW-Homepage angelegt,
+in der es Kapitel namens ""Software"", ""Kontaktadressen"" und
+""Links"" gibt:
+
+!begin_description
+!item [Hauptdatei:]
+
+!vinclude (!EXAMPLES)html/headfoot.ui
+
+!item [software.ui:]
+
+!vinclude (!EXAMPLES)html/software.ui
+!end_description
+
+Wird nun nach HTML umgewandelt, so werden die jeweiligen Kopf- und
+Fußzeilen ausgegeben. Durch die Referenzierung von UDO werden
+automatisch Links auf die anderen Kapitel angelegt.
+
+Wandelt man nicht nach HTML um, so werden leere Definitionen und
+Makros erzeugt, wodurch keine Kopf- und Fußzeilen ausgegeben
+werden.
+
+Eine andere Möglichkeit, Kopf- bzw. Fußzeilen zu erzeugen, ist die
+Verwendung von (!KW [use_raw_header]) bzw. (!KW [use_raw_footer]).
+!endif
+
+!iflang [english]
+!item [How can I easily make my own headlines or bottomlines?] ~
+
+!index Headlines
+!index Bottomlines
+
+If you want to make your own headlines or bottomlines you can use macros
+at the beginning of each chapter. The following example shows how I added
+bottomlines to my WWW pages. These pages contain links to the chapters that
+contain my address, the descriptions of my software and links to other web
+sites.
+
+!begin_description
+!item [Main file:]
+
+!vinclude (!EXAMPLES)html/headfoot.ui
+
+!item [software.ui:]
+
+!vinclude (!EXAMPLES)html/software.ui
+!end_description
+
+If you convert the source file to HTML UDO expands the macros that contain
+the text of the headlines and bottomlines. Because UDO insert links
+automatically you can jump to the other pages by clicking the entries of the
+bottomline.
+
+If you don't convert to HTML empty macros are used so that nothing will
+appear when using (!V)(!/HEAD)(!v) or (!V)(!/FOOT)(!v).
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!index HTML !! Tabellen
+!index Umrahmung
+!index Rahmen
+!index Tabelle
+!item [Mal wird eine Tabelle umrahmt dargestellt, mal nicht!?]
+
+Bei HTML kann man leider nur angeben, ob die gesamte Tabelle
+umrahmt werden soll oder ob sie gar nicht mit einem Rahmen
+dargestellt werden soll.
+
+Um eine Tabelle mit Rahmen darzustellen, müssen Sie bei
+(!KW [begin_table]) den Befehle (!KW [hline]) angeben. Fehlt (!KW [hline]) bei diesem
+Befehl, wird die Tabelle ohne Rahmen dargestellt.
+!endif
+
+!iflang [english]
+!index	HTML !! Table frames
+
+!item [Sometimes a table has a frame, sometimes it hasn't!?] ~
+
+Unfortunately HTML only allows to use tables with or without frames. You
+cannot use table lines where you want to.
+
+To print a table with a frame you have to add (!I)!/hline(!i) to the line
+that contains (!KW [begin_table]). If you don't want a frame don't use
+(!KW [hline]). That's all.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!index HTML !! Dateiendungen
+!item [Wie legt UDO die Endungen der Dateiendungen fest?]
+
+UDO benutzt als Endung für die HTML-Dateien immer die Endung des
+in der Kommandozeile mit der Option (!T)(--)outfile(!t) bzw. (!T)-o(!t) übergebenen
+Dateinamens:
+
+!begin_tlist [-o INDEX.HTML] !short
+!item [-o index.htm]  .htm
+!item [-o index.html] .html
+!item [-o INDEX.HTML] .HTML
+!end_tlist
+
+Wenn Sie stattdessen die Option (!T)-o~!(!t) verwenden, benutzt UDO für
+8+3-Dateisysteme immer die Endung (!T).htm(!t), bei Dateisystemen, die
+lange Namen erlauben, hingegen immer die Endung (!T).html(!t).
+!endif
+
+!iflang [english]
+!index	HTML !! Suffixes
+
+!item [Which suffixes does UDO use for HTML files?] ~
+
+By default UDO uses the suffix of the (!V)(--)outfile(!v) you used in the
+command line:
+
+!begin_tlist [-o INDEX.HTML] !short
+!item [-o index.htm]	(!V).htm(!v)
+!item [-o index.html]	(!V).html(!v)
+!item [-o INDEX.HTML]	(!V).HTML(!v)
+!end_tlist
+
+If you use the option (!T)-o~!(!t) UDO uses ''(!V).htm(!v)'' on operating
+systems with 8+3-filenames and ''(!V).html(!v)'' on operating systems with
+long filenames.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Die Dateinamen bei den Querverweisen stimmen nicht!?]
+
+Falls Sie HTML-Dateien auf einem Betriebssystem erstellen, daß
+keine langen Namen zuläßt, Sie als Endung (!T).html(!t) vorgegeben haben
+und Sie diese Dateien dann auf einem Web-Server ablegen, so
+müssen Sie folgendes beachten:
+
+!begin_enumerate
+!item UDO versucht zwar, (!T)foo.html(!t) zu sichern, TOS und DOS sichern
+die Datei jedoch nur als (!T)foo.htm(!t).
+
+!item UDO benutzt für alle Querverweise die Endung (!T).html(!t). Wenn nun
+ein HTML-Browser unter TOS und DOS versucht, (!T)foo.html(!t) zu
+öffnen, öffnet dieser anstandslos (!T)foo.htm(!t).
+
+!item Nach dem Kopieren der Dateien auf den Web-Server *müssen*
+die Endungen der Dateien von (!T).htm(!t) auf (!T).html(!t) angepaßt werden.
+Hier wird (!T)foo.htm(!t) nicht geöffnet, wenn auf (!T)foo.html(!t)
+zugegriffen werden soll!
+!end_enumerate
+
+!endif
+
+
+!iflang [english]
+!item [The filenames of the URL's are wrong!?] ~
+
+If you use UDO on an operating system that doesn't support long filenames
+but you have used ''(!V)(--)outfile index.html(!v)'' and you copy the saved
+''(!V).htm(!v)'' files to a web server, remember this:
+
+!begin_enumerate
+!item	UDO will try to save ''(!V)index.html(!v)'' but TOS and DOS will
+name it ''(!V)index.htm(!v)''.
+
+!item	UDO will use for all hypertext links the suffix ''(!V).html(!v)''
+because of the suffix of the ''outfile''. If you use a HTML browser for TOS
+or DOS this browser will open ''(!V)index.html(!v)'' without any problems
+even if there's only a file named ''(!V)index.htm(!v)''.
+
+!item	When copying the files to a web server you have to change the
+suffixes from ''(!V).htm(!v)'' to ''(!V).html(!v)''. If you will forget this
+all links will be wrong.
+!end_enumerate
+
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+!end_description
+
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node HTML-Help
+!endif
+!iflang [english]
+!begin_node HTML-Help
+!endif
+!label HTMLhelp
+!label HtmlHelp
+!html_name format_hh.html
+
+(!MISS)
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node Information Presentation Facility (IPF)
+!endif
+!iflang [english]
+!begin_node Questions concerning the IPF format
+!endif
+!label IPF
+!html_name format_ipf.html
+
+!iflang [german]
+(!B)IPF(!b) steht für "(!B)Information Presentation Facility(!b)" und
+ist das Ausgangsformat für die Hilfedateien unter dem Betriebssystem
+OS/2~Warp von IBM (sowie für IBM PC-DOS~7).
+
+Das IPF-Format ist ein Textformat. Es ist dokumentiert im "IBM
+OS/2~Warp IPF~Programming Guide" (Publication Number G25H-7110-00).
+Diese Dokumentation ist online auf
+(!url [http://publibfp.boulder.ibm.com/cgi-bin/bookmgr/books/ej6c2b00] [http://publibfp.boulder.ibm.com/cgi-bin/bookmgr/books/ej6c2b00])
+verfügbar oder downloadbar via
+(!url [http://publibfp.boulder.ibm.com/epubs/book/ej6c2b00.boo] [http://publibfp.boulder.ibm.com/epubs/book/ej6c2b00.boo])
+(im Bookmanager-Format; kostenlose Viewer erhältlich unter
+(!url [http://booksrv2.raleigh.ibm.com/homepage/ilrserv.html] [http://booksrv2.raleigh.ibm.com/homepage/ilrserv.html])).
+Eine IPF-Dokumentation ist außerdem in der Online-Hilfe des IPFC-Programms
+enthalten.
+
+Um aus den IPF-Dateien die eigentlichen Hilfedateien zu erzeugen,
+benötigt man den IPF-Compiler (IPFC.EXE). Dieser ist Bestandteil von
+(kommerziellen) IBM-Entwicklerprodukten (z.B. (!I)OS/2~Developers Toolkit(!i),
+(!I)Visual-Age(!i) Compiler), zum Herunterladen (als
+OS/2-Version) findet er sich auf
+(!url [http://www.m-petz.de/Download/Download.htm] [http://www.m-petz.de/Download/Download.htm])
+(unter "IPFC-Zubehör").
+
+Hilfedateien existieren unter OS/2 als HLP- oder INF-Dateien.
+HLP-Dateien werden nur zusammen mit ausführbaren Programmen verwendet,
+INF-Dateien können eigenständig betrachtet werden, entweder durch
+Doppelklick auf der Arbeitsoberfläche (Workplace Shell) oder auf der
+Kommandozeile mit VIEW.
+
+Achtung: Das Dateiformat von HLP-Dateien unter OS/2 hat nichts mit dem
+von HLP-Dateien unter Windows zu tun!
+
+Für Windows gibt es einen (älteren) 16-bit-Viewer für INF- und HLP-Dateien, der
+Bestandteil des "Just Add Warp"-Paketes ist (downloadbar via
+(!url [ftp://ftp.software.ibm.com/ps/products/os2/tools/jaow/jaow.zip] [ftp://ftp.software.ibm.com/ps/products/os2/tools/jaow/jaow.zip])
+oder
+(!url [ftp://ftp.leo.org/pub/comp/os/os2/leo/windows/justaddwarp.zip] [ftp://ftp.leo.org/pub/comp/os/os2/leo/windows/justaddwarp.zip]))
+(ca. 3,4~MB). Nach dem Installieren werden folgende Dateien aus den
+Verzeichnis \JUST_ADD benötigt: IPF.DLL, LIBIPX.DLL und .LIB, VIEW.EXE,
+VIEWH.HLP sowie XVIEW.PAL (der Rest des Softwarepaketes ist irrelevant).
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+(!MISS)
+!endif
+
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node (!LaTeX)
+!endif
+!iflang [english]
+!begin_node (!LaTeX)
+!endif
+!html_name format_latex.html
+
+!begin_description
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie erzeugt UDO die (!LaTeX)-Präambel?]
+
+UDO ""weiß"", in welcher Sprache und mit welchem Dokumentstil die
+Datei gesetzt und ob Indizes benutzt werden sollen. Anhand dieser
+bekannten Informationen bastelt UDO dann die Präambel für
+(!LaTeX)~2.09 bzw. (!LaTeX2e) zusammen.
+!endif
+
+!iflang [english]
+!item [How does UDO create the (!LaTeX) preamble?] ~
+
+UDO knows which language and which document style you use. Furthermore UDO
+knows if you are using indices or not. So UDO knows enough to create the
+(!LaTeX) preamble on its own.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie werden Dateien für (!LaTeX2e) erzeugt?]
+
+Standardmäßig erzeugt UDO Dateien für (!LaTeX)~2.09. Durch den
+Schalter (!KW [tex_2e]) können Sie UDO mitteilen, Befehle für (!LaTeX2e) zu
+erzeugen.
+!endif
+
+!iflang [english]
+!item [How can I make files for (!LaTeXe)?] ~
+
+By default UDO saves files for (!LaTeX) 2.09. If you use the switch
+(!KW [tex_2e]) inside the preamble UDO will save a preamble and other
+special commands for (!LaTeXe).
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Ich benötige eine eigene Präambel, was muß ich tun?]
+
+Im Gegensatz zu den vorherigen UDO-Versionen erzeugt UDO(!RELEASE) automatisch
+passende (!LaTeX)-Präambeln für (!LaTeX)~2.09 und (!LaTeX2e).
+
+Falls Ihnen diese automatisch generierten Präambeln nicht gefallen,
+können Sie UDO mit der Angabe des Schalters (!KW [no_preamble] [[tex!!]]) im
+Vorspann dazu bewegen, die Präambel nicht zu erzeugen.
+
+In dem Falle können Sie mit dem Befehl (!KW [raw] [[tex!!]]) oder der raw-Umgebung zu
+Beginn des Quelltextes die eigene Präambel verfassen.
+
+Das folgende Beispiel zeigt, wie das funktioniert:
+
+!begin_quote
+!vinclude (!EXAMPLES)latex/preamble.u
+!end_quote
+
+!endif
+
+
+!iflang [english]
+!item [I want to use a userdefined preamble!?] ~
+
+In contrast to the previous UDO version UDO Release 6 will save a (!LaTeX)
+preamble automatically for (!LaTeX)~2.09 or (!LaTeXe).
+
+If you don't like the automatically generated preambles you tell UDO not to
+save them by using the switch (!KW [no_preamble] [[tex!!]]) inside the
+preamble of your UDO source file.
+
+In this case you can enter the special (!LaTeX) commands at the beginning of
+the UDO source file with (!KW [raw] [[tex!!]]) or a raw environment.
+
+The following example shows how you can do this:
+
+!begin_quote
+!vinclude (!EXAMPLES)latex/preamble.u
+!end_quote
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie baue ich Formeln in den Quelltext ein?]
+
+Benutzen Sie dazu die raw-Umgebung für ganze Absätze oder
+Definitionen für Formeln, die im Fließtext erscheinen sollen.
+Beispiel:
+
+!begin_quote
+!begin_verbatim
+!ifdest [tex]
+!define ab2 $(a+b)^2 = a^2 + 2ab + b^2$
+!else
+!macro  ab2 (a + b)^2 = a^2 + 2ab + b^2
+!endif
+...
+Die erste binomische Formel lautet: (!ab2)
+!end_verbatim
+!end_quote
+
+!endif
+
+
+!iflang [english]
+!item [How can I use (!LaTeX) formulas inside the text?] ~
+
+Use a raw environment for complete paragraphs or definitions for floating
+text. An example:
+
+!autoref [off]
+!begin_verbatim
+!ifdest [tex]
+!define ab2 $(a+b)^2 = a^2 + 2ab + b^2$
+!else
+!macro  ab2 (a + b)^2 = a^2 + 2ab + b^2
+!endif
+...
+The first binomial theorem: (!ab2)
+!end_verbatim
+!autoref [on]
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie werden Sonderzeichen in Indizes angepaßt?]
+
+Sonderzeichen in Indizes werden speziell für makeindex angepaßt.
+Es sind also keine zusätzlichen Anpassungen des von UDO erzeugten (!LaTeX)-Files nötig.
+!endif
+
+!iflang [english]
+!item [How does UDO translate special chars in indices?] ~
+
+Special characters are translated especially for (!V)makeindex(!v).
+It's not necessary to adjust the UDO-generated (!LaTeX) files.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Geschweifte Klammern im Indexeintrag erzeugt (!LaTeX)-Fehler!?]
+
+Laut Kopka ist es zwingend erforderlich, daß jede öffnende
+geschweifte Klammer in einem Indexeintrag eine passende
+schließende geschweifte Klammer erhält. (!KW [index] [{]) ist demnach
+nicht möglich, nur (!KW [index] [{...}]) funktioniert.
+!endif
+
+!iflang [english]
+You have to use a ''(!V)}(!v)'' for any ''(!V){(!v)'' inside an index entry
+and vice versa. Otherwise (!LaTeX) will print an error message.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+!end_description
+
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node Linuxdoc-SGML
+!endif
+!iflang [english]
+!begin_node Linuxdoc-SGML
+!endif
+!html_name format_ldoc.html
+
+!iflang [german]
+Dieses Format war mir bis Mitte März 1996 völlig unbekannt. Dann fand
+ich darüber einen Artikel in der Zeitschrift ""iX"", habe diesen kurz
+durchgelesen, habe mir das Archiv gesaugt, die Dokumentation
+durchgelesen (zu einer Installation ist es mangels Linux-Rechner nicht
+gekommen) und dieses Format binnen zwei Stunden eingebaut. Mangels
+Testmöglichkeiten war es mir nicht möglich, zu überprüfen, ob UDO
+richtiges Linuxdoc-SGML erzeugt, ich habe mich allerdings strikt an
+die Vorgaben des User's Guide gehalten.
+
+Linuxdoc-SGML ist genau wie UDO ein Multiformat-Konverter, das auch
+sein eigenes Format in (!LaTeX), Manualpage, RTF, HTML, Texinfo etc.
+umwandeln kann. Nicht ganz ohne Stolz möchte ich aber darauf
+hinweisen, daß UDO gegenüber Linuxdoc-SGML 1.5 leistungsfähiger und
+auch leichter zu begreifen ist. Allerdings kann sich das hier gesagte
+bei dem Entwicklungstempo, was man von der Linux-Szene kennt, sehr
+schnell ändern.
+!endif
+
+!iflang [english]
+In March 1996 I found an article in the German Unix magazine ""iX"" about
+Linuxdoc-SGML. It took two hours to download the Linuxdoc-SGML archive and
+to implement this format into UDO. Unfortunately I didn't own a Linux
+computer and so I wasn't able to test UDO's output.
+
+Linuxdoc-SGML is a multiformat converter like UDO. With Linuxdoc-SGML you
+can convert SGML files into (!LaTeX), RTF, HTML, Texinfo and manpages. But
+it's not a lie if I say that UDO is more powerful than Linuxdoc-SGML 1.5.
+!endif
+
+!begin_description
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Die xlist-Umgebung wird als description-Umgebung ausgegeben!?]
+
+Beim Linuxdoc-SGML-Format ist eine xlist-Umgebung nicht vorgesehen.
+Daher wird diese Umgebung hier als description-Umgebung behandelt,
+welche der xlist-Umgebung am ähnlichsten ist.
+!endif
+
+!iflang [english]
+!item [The xlist environment is handled like a description environment!?] ~
+
+Linuxdoc-SGML doesn't offer an environment like UDO's xlist environment. So
+UDO is forced to handle it like a description environment.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Linuxdoc-SGML bemängelt (!V)&Aring;(!v)!?]
+
+Fügen Sie in der Datei (!V)/usr/lib/linuxdoc-sgml/rep/html/general(!v)
+folgende Zeile ein:
+!endif
+
+!iflang [english]
+!item [Linuxdoc-SGML doesn't know (!V)&Aring;(!v), why?] ~
+
+Add the following line to (!V)/usr/lib/linuxdoc-sgml/rep/html/general(!v):
+!endif
+
+!begin_quote
+!begin_verbatim
+<!entity Aring sdata "&Aring;" >
+!end_verbatim
+!end_quote
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+!end_description
+
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node LyX
+!endif
+!iflang [english]
+!begin_node LyX
+!endif
+!html_name format_lyx.html
+
+(!MISS)
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node Manualpage
+!endif
+!iflang [english]
+!begin_node Manualpage
+!endif
+!html_name format_manpage.html
+
+!iflang [german]
+Das Manualpage-Format ist ein ASCII-Format, bei dem
+lediglich Schriftarten durch Backspace-Sequenzen erzeugt werden. Es
+findet seinen Einsatz zur kurzen Beschreibung von Programmen für
+Unix-/Linux-Betriebssysteme. Für längere Anleitungen sollte man nicht
+Manualpages erstellen, sondern das Texinfo-Format vorziehen.
+!endif
+
+!iflang [english]
+The Manualpage is an ASCII format where text styles are made by inserting
+backspace sequences. It's used for short software descriptions for Unix
+systems. For longer descriptions you should use the GNU Texinfo format.
+!endif
+
+!begin_description
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie kann man die Seitenlänge der Manualpages einstellen?]
+
+Mit dem Schalter (!KW [man_lpp] [xx]) können Sie die Anzahl der Zeilen
+(xx) pro Seite angeben.
+!endif
+
+!iflang [english]
+!item [How can I set the page length for manpages?] ~
+
+You can set the lines each page of a manpage should have with the command
+(!KW [man_lpp]) (""lpp"" means ""lines per page"").
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie kann man den Programmtyp für die Kopfzeilen setzen]
+
+Dafür gibt es den Schalter (!KW [man_type] [X]). ""X"" wird in der/den
+Kopfzeile/n in runden Klammern dargestellt.
+!endif
+
+!iflang [english]
+!item [How can I set the program type for manpages?] ~
+
+Use the switch (!KW [man_type] [X]) where ""X"" is displayed inside brackets
+in the headlines of the manpage.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wieso gibt UDO kein Inhaltsverzeichnis aus?]
+
+Inhaltsverzeichnisse sind in Manualpages sind mehr als unüblich. Bei
+kurzen Beschreibungen --- und dafür sind Manualpages gedacht --- sind
+auch keine Inhaltsverzeichnisse nötig.
+!endif
+
+!iflang [english]
+!item [Why does'nt UDO create a table of contents?] ~
+
+It's very unusual to use a table of contents in a manpage. For short program
+description --- you only should use manpages for --- tables of contents
+don't make sense, too.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+!end_description
+
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node Nroff
+!endif
+!iflang [english]
+!begin_node Nroff
+!endif
+!html_name format_nroff.html
+
+(!MISS)
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node Pascal-Sourcecode
+!endif
+!iflang [english]
+!begin_node Pascal-Sourcecode
+!endif
+!html_name format_pas.html
+
+(!MISS)
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node Pure-C-Help
+!endif
+!iflang [english]
+!begin_node Pure-C-Help
+!endif
+!html_name format_pch.html
+
+!iflang [german]
+Das Pure-C-Help-Format wird lediglich für Pure~C, einem Compiler für
+den Atari ST, als Hilfesystem verwendet. Ansonsten hat es keine
+Bedeutung mehr für diesen Rechner.
+!endif
+
+!iflang [english]
+The Pure C Help format is only useful for the Pure C compiler on Atari ST
+for displaying online library descriptions. The format isn't used for any
+other purposes neither on this nor on other computers.
+!endif
+
+!begin_description
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie erzeugt UDO hier Titelseite und Inhaltsverzeichnis?]
+
+UDO erzeugt eine Seite mit den Titelangaben und dem Inhaltsverzeichnis. Da diese Seite bei umfangreicheren Dokumenten ziemlich lang werden kann, empfiehlt es sich, den Schalter
+(!KW [use_short_tocs] [[pch!!]]) im Zusammenhang mit den Schaltern
+(!KW [use_auto_subtocs] [[pch!!]]) und (!KW [use_auto_subsubtocs] [[pch!!]]) zu
+benutzen, damit auch Programmierer mit kleinen Bildschirmen nicht
+den Überblick auf dieser Seite zu verlieren.
+!endif
+
+!iflang [english]
+!item [How produces UDO the title page and the table of contents?]
+
+UDO prints a single page that contains both the title page and the table of
+contents. Because this page can get very long you should use the switch
+(!KW [use_short_tocs] [[pch!!]]).
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie kann ich bei Pure-C-Help die Kopfzeilen entfernen?]
+
+UDO erzeugt auf jeder Seite automatisch (!idx [Kopfzeilen]), gebildet aus
+der Überschrift der jeweiligen Seite sowie des Titels der
+Hilfedatei. Durch Anklicken des Titels kann man zur Titelseite
+bzw. zum Inhaltsverzeichnis verzweigen.
+
+Durch den Schalter (!KW [no_headlines] [[pch!!]]) läßt sich die Ausgabe
+dieser Kopfzeilen unterbinden.
+!endif
+
+!iflang [english]
+!item [How can I suppress the headlines?] ~
+
+UDO prints a (!idx [headline]) on each page automatically. Headlines contain the
+name of the current chapter and the title of the source file. By clicking
+the title you can jump to the title page or the table of contents.
+
+Using the switch (!KW [no_headlines] [[pch!!]]) you can suppress the output of
+these headlines.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Und wie die Fußzeilen?]
+
+UDO erzeugt auf jeder Seite automatisch (!idx [Fußzeilen]), in denen
+Verweise auf das vorherige, nachfolgende und/oder übergeordnete
+Kapitel zu finden sind. Diese ermöglichen dem Leser, direkt zu
+anderen Kapiteln des Textes zu verzweigen.
+
+Durch den Schalter (!KW [no_bottomlines] [[pch!!]]) läßt sich die Ausgabe
+dieser Kopfzeilen unterbinden.
+!endif
+
+!iflang [english]
+!item [How can I suppress the bottomlines?] ~
+
+UDO prints a bottomline on each page automatically that contain links to the
+previous page, next page and upper page. Thus the reader of the online
+manual is enabled to jump directly to other pages without returning to the
+table of contents.
+
+Using the switch (!KW [no_bottomlines] [[pch!!]]) you can suppress the output
+of these bottomlines.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wofür ist diese Datei mit der Endung (!T).cmd(!t)?]
+
+UDO legt während der Umwandlung eine Kommandodatei für den
+Helpcompiler von Pure~C an, welche an diesen zur Erzeugung der
+Helpdatei als Kommando übergeben werden muß.
+
+UDO überschreibt diese Kommandodatei ohne Rückfrage. Um manuelle
+Änderungen an dieser Datei zu bewahren, müssen Sie die Datei
+schreibschützen.
+!endif
+
+!iflang [english]
+!item [What can I do with the file with the suffix (!T).cmd(!t)?] ~
+
+UDO saves a command file for the Pure C Help compiler (!V)HC.TTP(!v). You
+have to call the HC by passing the name of this command file to get a
+compiled help file.
+
+UDO always overwrites this file. You have to switch in write protection if
+you want to protect your own changes to this file.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie erzeuge ich eine Hilfedatei für Pure~C?]
+
+Bei der Umwandlung des Quelltextes (!T)foo.u(!t) erzeugt UDO die Dateien
+(!T)foo.scr(!t) und (!T)foo.cmd(!t).
+
+Um eine Hilfedatei für Pure~C zu erhalten, müssen Sie (!T)HC.TTP(!t)
+starten und diesem Programm die Kommandodatei (!T)foo.cmd(!t) übergeben:
+
+!begin_quote
+!begin_verbatim
+$ e:\purec\hc.ttp foo.cmd
+!end_verbatim
+!end_quote
+
+Unter GEM ziehen Sie einfach die Datei (!T)foo.cmd(!t) auf (!T)HC.TTP(!t).
+!endif
+
+!iflang [english]
+!item [How do I build a help file for Pure~C?] ~
+
+UDO saves two file when converting the source fie (!V)foo.u(!v):
+(!V)foo.scr(!v) and (!V)foo.cmd(!v).
+
+To get a Pure C Help file you have to call (!V)HC.TTP(!v) by passing the
+command file (!V)foo.cmd(!v):
+
+!begin_quote
+!begin_verbatim
+$ e:\purec\hc.ttp foo.cmd
+!end_verbatim
+!end_quote
+
+Using GEM just drag (!V)foo.cmd(!v) onto (!V)HC.TTP(!v) to start the conversion.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie benutzt ich die Hilfedatei mit Pure~C?]
+
+Pure~C erlaubt (leider) nur die Einbindung einer einzigen
+benutzerdefinierten Hilfedatei. Diese trägt den Namen (!T)USR.HLP(!t) und
+befindet sich im Pure-C-Ordner.
+
+Um eine eigene Hilfedatei zu benutzen, sichern Sie die alte
+Hilfedatei (z.B. durch Umbenennen in (!T)USR.HLX(!t)) und kopieren Sie
+die eigene, in (!T)USR.HLP(!t) umbenannte Hilfedatei in den Pure-C-Ordner.
+!endif
+
+!iflang [english]
+!item [How can I install this help file?] ~
+
+Pure C can display on user defined help file. This file has to be named
+(!V)USR.HLP(!v) and it has to be placed inside the Pure C directory.
+
+To install your help file backup the original (!V)USR.HLP(!v), rename your
+help file to (!V)USR.HLP(!v) and copy it to the Pure C directory.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+!end_description
+
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node PDF(!LaTeX)
+!endif
+!iflang [english]
+!begin_node PDF(LaTeX)
+!endif
+!html_name format_pdf.html
+
+(!MISS)
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node PostScript
+!endif
+!iflang [english]
+!begin_node PostScript
+!endif
+!html_name format_ps.html
+
+(!MISS)
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node Rich Text-Format (RTF)
+!endif
+!iflang [english]
+!begin_node Rich Text Format (RTF)
+!endif
+!label RTF
+!html_name format_rtf.html
+
+!iflang [german]
+Das Rich Text Format (kurz: RTF) dient zum systemweiten Austausch von
+Texten. Dieses Format hat eine klare Definition und kann laufend um
+neue Kommandos erweitert werden. Trifft ein Programm auf einen
+unbekannten RTF-Befehl, so ist dieser zu ignorieren.
+
+Leider handeln nicht alle Programme so, sondern interpretieren
+irgendwelchen Unsinn. Selbst Microsoft Word scheint das im eigenen
+Hause entwickelte Format nicht ganz zu verstehen.
+
+Somit kann durchaus gesagt werden, daß das RTF das am meisten
+mißverstandende Format ist, daß derzeit existiert!
+!endif
+
+!iflang [english]
+The Rich Text Format (RTF) is used for the system wide exchange of text
+files. This format has a strict definition. New commands can be added every
+time. If a RTF software reads in an unknown command it has to ignore it.
+
+Unfortunately not all the existing software ignore unknown RTF commands,
+some are interpreting some senseless stuff. Microsoft Word doesn't
+interpret the RTF correctly in all cases, even if Microsoft has developed
+the Rich Text Format.
+
+It's not wrong if I say that RTF is the most misinterpreted format ever
+known.
+!endif
+
+
+!begin_description
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wieso erzeugt UDO beim RTF kein Inhaltsverzeichnis?]
+
+Sicherlich möchten Sie oder jemand anderes die RTF-Datei mit
+einer Textverarbeitung ausdrucken und dann auch wissen, auf
+welcher Seite ein Kapitel zu finden ist.
+
+Und weil UDO nicht wissen kann, auf welcher Seite später ein
+Kapitel zu finden ist, erzeugt es kein Inhaltsverzeichnis.
+
+Sicher, es wäre kein Problem, dieses auszugeben, allerdings
+würden dann die Seitennummern fehlen, und ich kann mir kaum
+vorstellen, daß dies gewünscht wird.
+!endif
+
+!iflang [english]
+!item [Why doesn't UDO print a table of contents?] ~
+
+I think the reader of your documentation wants to print it out with
+a text processor. And it's for sure that you want the correct page numbers
+inside the table of contents.
+
+But UDO cannot know on which page a chapter will be printed. Thus it doesn't
+print a table of contents when converting to RTF.
+
+OK, it wouldn't be a problem to print it but I think you don't want a table
+of contents without page numbers.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Meine Textverarbeitung zeigt nur Müll an!?]
+
+Tja, dann haben Sie halt Pech gehabt, denn UDO erzeugt RTF-Dateien, die
+sich strikt an die RTF-Definition halten. Falls es möglich ist, Kontakt
+zu den Autoren der Textverarbeitung aufzunehmen, schicken Sie denen die
+RTF-Datei und verlangen Sie Besserung.
+
+!begin_ignore
+# auskommentiert 13.12.2003 - Ulrich Kretschmer
+Übrigens: Dies habe ich schon selbst versucht, aber bis auf Herrn
+Christian Nieber von R.O.M.-Logicware (Papyrus) hat mir niemand
+Beachtung geschenkt. Traurig!
+!end_ignore
+!endif
+
+!iflang [english]
+!item [The output of my text processor is horrible, why?] ~
+
+Bad luck. You own a text processor that cannot import RTF correctly. UDO
+strictly pays attention to the RTF definition. If it's possible for you to
+contact the authors of your text processor send them your RTF file.
+
+!begin_ignore
+# auskommentiert 13.12.2003 - Ulrich Kretschmer
+By the way: I also tried to get contact to authors of text processors but
+only one author (Christian Nieber, R.O.M. logicware, Papyrus) answered my
+emails. Can you imagine that?
+!end_ignore
+
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Die Umlaute kommen beim RTF nicht richtig an?]
+
+UDO erzeugt RTF-Dateien, die den Windows-ANSI-Zeichensatz
+benutzen. Jede Textverarbeitung sollte mit Dateien klarkommen,
+die im PC-, ANSI- und Mac-Zeichensatz erstellt wurden. Dies ist
+kein Problem von UDO, sondern ebenfalls von der benutzten
+Textverarbeitung.
+!endif
+
+!iflang [english]
+!item [8-bit characters aren't imported correctly!?] ~
+
+UDO saves RTF files that use the Windows ANSI character set. Every text
+processor should be able to import RTF files that use the IBM-PC
+character set, the Macintosh character set and the Windows ANSI character set.
+If some 8-bit characters are displayed incorrectly it's a problem of your
+text processor and not a bug of UDO.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Die Anführungszeichen werden falsch dargestellt?]
+
+UDO benutzt zur Darstellung der doppelten Anführungszeichen und
+Apostrophe die RTF-Befehle (!V)\lquote(!v), (!V)\rquote(!v), (!V)\rdblquote(!v) und
+(!V)\ldblquote(!v). Die Textverarbeitung ist für die Umsetzung dieser gebräuchlichen RTF-Befehle in die korrekten Zeichen zuständig.
+
+Falls Ihre Textverarbeitung diese Befehle nicht kennt, so können
+Sie die Benutzung dieser Befehle bei der Konvertierung durch den
+Schalter (!KW [no_quotes] [[rtf!!]]) unterbinden.
+!endif
+
+!iflang [english]
+!item [Quotes aren't imported correctly, why?] ~
+
+UDO uses the RTF commands (!V)\lquote(!v), (!V)\rquote(!v),
+(!V)\rdblquote(!v) and (!V)\ldblquote(!v) for displaying the typographical
+quotes and apostrophes. Your text processor has to know these common RTF
+commands.
+
+If it doesn't want to import these RTF commands or the quotes and
+apostrophes are displayed incorrectly you can tell UDO not to use these RTF
+commands by inserting the switch (!KW [no_quotes] [[rtf!!]]) inside the
+preamble of the UDO source file.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Meine Textverarbeitung stellt Tabellen nicht dar?]
+
+Falls Ihre Textverarbeitung keine RTF-Tabellen-Befehle kennt,
+können Sie mit dem Schalter (!KW [rtf_no_tables]) dafür sorgen, daß
+UDO die Tabellen wie beim ASCII-Format ausgibt.
+!endif
+
+!iflang [english]
+!item [My text processor cannot import tables. What can I do?] ~
+
+Use the switch (!KW [rtf_no_tables]) inside the preamble of your UDO
+source file to tell UDO that it shall print tables without RTF commands like
+in the ASCII format.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [StarWriter 3.0 meldet einen RTF-Fehler!?]
+
+StarWriter 3.0 scheint nicht alle RTF-Befehle zu kennen und
+bemängelt sogar korrekte RTF-Tags.
+# auskommentiert 13.12.2003 - Ulrich Kretschmer
+# Setzen Sie sich mit Star Division in Verbindung.
+!endif
+
+!iflang [english]
+!item [StarWriter 3.0 prints an RTF error!?] ~
+
+It seems to be that StarWriter 3.0 doesn't know all RTF commands and
+furthermore it faults correct RTF commands.
+# auskommentiert 13.12.2003 - Ulrich Kretschmer
+# Please contact Star Division.
+
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Die Indizes werden nicht von StarWriter 3.0 importiert!?]
+
+StarWriter 3.0 versteht das RTF-Tag (!V)\xe(!v) nicht, welches für das
+Einbauen von Indizes zuständig ist.
+!endif
+
+!iflang [english]
+!item [Indices aren't imported into StarWriter!?] ~
+
+StarWriter 3.0 ignores the RTF command ''(!V)\xe(!v)'' which is used for
+indices.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Lotus WordPro plaziert Kapitelnummern außerhalb des Textrahmens!?]
+
+Tja, wenn ich wüßte, was WordPro sich dabei denkt, dann könnte
+ich etwas dazu sagen. Andere Textverarbeitungen stellen die
+Kapitelnummern korrekt dar.
+!endif
+
+!iflang [english]
+!item [Lotus WordPro places chapter numbers outside the text frame!?] ~
+
+I'm sorry but I have no idea why it does this. Other text processors display
+the chapter numbers correctly.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Lotus WordPro formatiert Tabellen und folgenden Text falsch!?]
+
+Lotus WordPro bekommt aus mir unerfindlichen Gründen das Ende
+einer Tabelle nicht mit. Die Tabelle selbst wird ebenso nicht
+korrekt dargestellt.
+
+Abhilfe: Verwenden Sie den Schalter (!KW [rtf_no_tables]).
+# auskommentiert 13.12.2003 - Ulrich Kretschmer
+# und wenden sie sich an Lotus.
+!endif
+
+!iflang [english]
+!item [Lotus WordPro doesn't display tables correctly!?] ~
+
+I don't know why Lotus WordPro doesn't recognize the ending of a table. The
+table itself will be displayed incorrectly, too. Please use the switch
+(!KW [rtf_no_tables]) inside the preamble of your UDO source file.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Das WordPad von Win95 stellt Tabellen nicht dar!?]
+
+WordPad kann keine Tabellen darstellen. Verwenden Sie den
+Schalter (!KW [rtf_no_tables]).
+!endif
+
+!iflang [english]
+!item [WordPad doesn't display tables, why?] ~
+
+Because WordPad cannot display tables. Use the switch
+(!KW [rtf_no_tables]) inside the preamble of your UDO source file.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+!end_description
+
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node C-Sourcecode
+!endif
+!iflang [english]
+!begin_node C-Sourcecode
+!endif
+!html_name format_src.html
+
+(!MISS)
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node ST-Guide
+!endif
+!iflang [english]
+!begin_node ST-Guide
+!endif
+!html_name format_stg.html
+
+!begin_description
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Warum erscheinen Bilder bei mir nicht zentriert?]
+
+Beschaffen Sie sich die aktuelle ST-Guide-Version. ST-Guide Release 15
+kann Bilder selbständig zentrieren.
+!endif
+
+!iflang [english]
+!item [Images aren't displayed centred?] ~
+
+Get the current ST-Guide version. Since Release 15 the ST-Guide can center
+images itself.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie werden die Titelseite und das Inhaltsverzeichnis erzeugt?]
+
+Titelseite und Inhaltsverzeichnis werden jeweils auf einer
+eigenen Seite dargestellt. Die Titelseite hat dabei den Namen
+""Titel"", dem Inhaltsverzeichnis wird dabei der primäre Name
+""Main"" zugewiesen.
+
+Um den ST-Guide die erste Seite des Hypertextes (was meistens die
+Titelseite sein wird) darstellen zu lassen, übergibt man einfach
+den Namen des erzeugten Hypertextes. Um das Inhaltsverzeichnis
+darzustellen, übergibt man zusätzlich ""Main"". Wie man dem ST-Guide mitteilt, welche Seite welchen Hypertextes anzuzeigen ist, findet man in der Beschreibung zum HCP.
+!endif
+
+!iflang [english]
+!item [How does UDO create the title page and the table of contents?] ~
+
+The title page and the table of contents are displayed inside a special
+node. The title page node is named ""Title"". The node that contains the
+table of contents is named ""Main"".
+
+To let the ST-Guide display the first page of the hypertext (this will be
+the title page in most cases) just pass the name of the hypertext. To let
+the ST-Guide display the table of contents pass the node name ""Main"". How
+you can call the ST-Guide from programs you can read in the HCP hypertext.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie entferne ich die Kopfzeilen?]
+
+UDO erzeugt standardmäßig auf jeder Seite eine Kopfzeile,
+gebildet aus dem Titel und dem Namen des im Hypertext besprochenen Programms. Die Kopfzeilen werden unterstrichen dargestellt.
+
+Durch den Schalter (!KW [no_headlines] [[stg!!]]) läßt sich die Ausgabe
+dieser Kopfzeilen unterbinden.
+!endif
+
+!iflang [english]
+!item [How can I suppress the headlines?] ~
+
+UDO prints a headline in every page by default. The headline contains the
+current node name and the title of the hypertext. The headline will be
+displayed underlined.
+
+Using the switch (!KW [no_headlines] [[stg!!]]) inside the preamble you tell
+UDO not to create these headlines.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie wird beim ST-Guide referenziert?]
+
+Die Referenzierung wird fast komplett dem HCP des ST-Guide
+überlassen.
+
+Lediglich bei den manuell gesetzten Links durch die Befehle
+(!KKW [link]) und (!KKW [xlink]) setzt UDO explizite Querverweise auf
+andere Kapitel oder Labels.
+!endif
+
+!iflang [english]
+!item [How does UDO insert hypertext links?] ~
+
+UDO just insert hypertext links when you use (!KKW [link]) and
+(!KKW [xlink]). All the other hypertext links will be inserted by the
+HCP.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie werden Labels umgesetzt?]
+
+UDOs Befehl (!KW [label]) wird in den HCP-Befehl ""(!T)@symbol ari(!t)""
+umgesetzt. Dabei ist zu beachten, daß noch kein anderes Kapitel
+oder Label mit gleichem Namen existiert, da der HCP dies
+bemängeln würde.
+
+Labels werden (wie bei den anderen Formaten auch) automatisch
+referenziert und gelangen darüber hinaus auch in den Index des
+Hypertextes.
+!endif
+
+!iflang [english]
+!item [How does UDO convert labels?] ~
+
+The UDO command (!KW [label]) will be replaced by the HCP command
+""(!T)@symbol ari(!t)"". You have to check yourself if there's a node
+or a label existing with the same name.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie können Popup-Nodes erzeugt werden?]
+Durch die Befehle (!KW [pnode]) etc. können Kapitel im ST-Guide als
+Popups dargestellt werden. Dabei ist folgendes zu beachten:
+
+Beim ST-Guide dürfen in einem Popup lediglich 12 Zeilen mit
+maximal 60 Zeichen stehen. Außerdem dürfen in einem Popup keine
+Bilder oder Verweise benutzt werden.
+
+UDO bricht Zeilen eines Popup-Nodes auf 60 Zeichen um, achtet
+aber nicht darauf, ob man zuviele Zeilen, Verweise oder Bilder
+benutzt hat.
+!endif
+
+!iflang [english]
+!item [How can I make popup nodes?] ~
+
+Using the (!KW [pnode]) and the familiar commands you can tell the
+ST-Guide to display the contents of the node inside a dialog box instead of
+a window.
+
+But you have to remember that text inside a popup node may have up to 12
+lines of text with 60 characters per line only. Furthermore no images and
+links are allowed inside a popup node.
+
+UDO breaks line after 60 characters but it doesn't print an error message if
+you use more than 12 lines, images or links inside a popup node.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [In den Popup-Nodes steht am Ende immer eine Leerzeile, wieso?]
+
+UDO bearbeitet einen Quelltext Zeile für Zeile. Beim Auftreten
+einer Leerzeile oder eines Kommandos wird der letzte Absatz samt
+einer zusätzlichen Leerzeile ausgegeben.
+
+Dies ist auch bei den Popup-Nodes nicht anders. Das Problem läßt
+sich leider nicht lösen.
+!endif
+
+!iflang [english]
+!item [There's always an empty line at the end of a popup node, why?] ~
+
+UDO reads in the source file line by line. If an empty line appears UDO will
+print the last paragraph and an empty line for separation.
+
+UDO does the same when printing the text of a popup node. The problem cannot
+be solved, I'm sorry.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [In Tabellen sind manche Zellen verschoben, warum?]
+
+Der ST-Guide besitzt eine eingebaute Italic-Korrektur, die leider
+auch bei Tabellen zuschlägt und Leerzeichen einfügt. Das ist ein
+Problem des ST-Guide und kann nur von dessen Autor, Holger Weets,
+geändert werden.
+
+Man sollte daher bei Tabellen, die für den ST-Guide eingesetzt
+werden, möglichst auf Kursivschrift verzichten, solange es keine
+neuere ST-Guide-Version gibt.
+!endif
+
+!iflang [english]
+!item [Some cells of my table are too wide, why?] ~
+
+The ST-Guide has a built-in italic correction which is active in tables,
+too. Unfortunately the ST-Guide adds a blank when it reads an italic-off
+command. This problem can only be solved by Holger Weets, the author of
+ST-Guide.
+
+Thus you shouldn't use italic text inside tables when converting to ST-Guide
+until Holger doesn't offer a command for disabling the italic correction.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Der HCP meldet mir den Fehler ""please add...""?]
+
+Falls der HCP die Fehlermeldung ""please add a @subject-command
+to this text"" am Ende der Übersetzung des erzeugten ST-Guide-Quelltextes erzeugt, so haben Sie vergessen, im Vorspann des UDO-Quelltextes folgenden ST-Guide-Spezialbefehl anzugeben:
+
+!begin_quote
+!begin_verbatim
+!stg @subject ""...""
+!end_verbatim
+!end_quote
+
+Anstelle der Punkte müssen Sie die Rubriken angegeben werden, in die ein Hypertext eingeordnet werden kann. Bei einem kleinen Tool geben Sie z.B. ""Dokumentation/Utilities"" an. Weitere Informationen zu diesem Thema findet man in der Dokumentation des ST-Guide.
+!endif
+
+!iflang [english]
+!item [The HCP prints the error message ""please add!.."", why?] ~
+
+If the HCP prints the error message ""please add a @subject-command to this
+text"" at the end of converting the STG file you have forgotten to insert
+a line like the following one at the beginning of your UDO source file:
+
+!begin_quote
+!begin_verbatim
+!stg @subject "Documentation/Utilities"
+!end_verbatim
+!end_quote
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie erzeuge ich eine eigene Titelseite?]
+
+Falls Ihnen das Layout der Titelseite, die UDO mit (!KW [maketitle]) erzeugen
+kann, nicht gefällt, so können Sie sich mit nur wenigen Handgriffen
+Ihre eigene Titelseite erzeugen.
+
+Im folgenden Beispiel wird nach (!KW [begin_document]) nur für den ST-Guide
+eine eigene Titelseite mittels eines Kapitels erzeugt, welches nicht
+im Inhaltsverzeichnis erscheint. Am Ende der Titelseite wird das Wort
+""Inhaltsverzeichnis"" angegeben, so daß ein Link zu eben diesem vom
+ST-Guide erzeugt wird.
+
+!begin_quote
+!vinclude (!EXAMPLES)stg/title.ui
+!end_quote
+!endif
+
+!iflang [english]
+!item [How can i create a user-defined title page for ST-Guide?]
+
+If you don't like the layout of the title page UDO will make with
+(!KW [maketitle]) you can make your own title page with some commands:
+
+The following example shows how to make your own title page but only for the
+ST-Guide. It uses a ""hidden"" node that contains the word ""Contents"" at
+the end. The ST-Guide will insert a link to the table of contents due to
+this word.
+
+!begin_quote
+!vinclude (!EXAMPLES)stg/title.ui
+!end_quote
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Warum ist es besser auf Blocksatz zu verzichten?]
+
+""Warum das denn?"", werden Sie sich vielleicht fragen. Nun, mit
+Hyperion/HypC gibt es von Martin Osieka ein Programmpaket für den
+Apple Macintosh, mit dem man ST-Guide-Hypertexte auch hier schreiben,
+umwandeln und darstellen kann.
+
+Im Gegensatz zum ST-Guide können jedoch mit Hyperion auch Hypertexte
+vernünftig mit proportionalen Zeichensätzen dargestellt werden, falls
+kein Blocksatz benutzt wird.
+
+Sie sollten daher Hypertexte mit allgemeinem Inhalt nicht mit
+Blocksatz erstellen, denn interessierte Hyperion-Benutzer würden es
+Ihnen verübeln.
+
+Bei Hypertexten, die nur auf dem Atari Sinn machen (z.B. für ein
+Programm), können Sie natürlich ruhigen Gewissens Blocksatz verwenden.
+!endif
+
+!iflang [english]
+!item [Why it is better not to use justified text?]
+
+""Why that?"" you might ask. Well, Martin Osieka has written a program
+called Hyperion for the Apple Macintosh that can display ST-Guide
+hypertexts.
+
+In contrast to ST-Guide Hyperion can display hypertexts with proportional
+fonts but only if you don't use justified text.
+
+Thus you should don't use the justification if you want that Macintosh users
+shall also read your hypertext without any problems.
+
+If you have written a system specific hypertext that is only interesting for
+Atari users you can use justification without any doubts.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+!end_description
+
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node Texinfo
+!endif
+!iflang [english]
+!begin_node Texinfo
+!endif
+!html_name format_texinfo.html
+
+!iflang [german]
+Texinfo hat in der GNU-Welt eine größere Bedeutung. Texte, die im
+Texinfo-Format erstellt werden, können mit Plain-(!TeX) als sauber
+gesetzte Anleitung ausgedruckt werden bzw. mit ''Makeinfo'' in einen
+Hypertext umgewandelt werden, welchen man sich mit ''Info'' anzeigen
+kann.
+
+UDO erzeugt auf Systemen, auf denen nur ein 8+3-Dateisystem zur
+Verfügung steht, die Dateiendung .tex. Stehen lange Dateinamen zur
+Verfügung, wird .texi benutzt.
+!endif
+
+!iflang [english]
+GNU Texinfo is used on many Unix systems to offer the user an online
+hypertext manual and a printed documentation that can be made with
+''Makeinfo'' or plain (!TeX). Online manuals can be displayed with ''Info''.
+
+On systems with 8+3-filenames UDO saves files with the suffix (!V).tex(!v).
+If the operating systems supports long filenames UDO uses the suffix
+(!V).texi(!v) instead.
+!endif
+
+!begin_description
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Warum werden bei Texinfo die Kapitelnamen verändert?]
+
+Makeinfo oder Info bekommen Probleme, falls im Namen eines Kapitels
+Sonderzeichen wie Klammern, Kommata oder (Doppel-)Punkte auftauchen.
+UDO entfernt daher diese Sonderzeichen. Falls ein Kapitelname nur
+Sonderzeichen enthält, so werden die Zeichen des Namens in kodierter
+Form ausgegeben.
+
+Formatiert man das Texinfo-File mit (!TeX), so tauchen diese
+Sonderzeichen in den Kapitelüberschiften selbstverständlich auf.
+!endif
+
+!iflang [english]
+!item [Why does UDO change the chapter names?] ~
+
+Makeinfo and/or Info get problems if a chapter names contains brackets,
+commas or colons. UDO is forced to delete these characters so that you will
+be able to convert the output with Makeinfo without any problems. If a
+chapter name contains only forbidden characters UDO encodes them.
+
+You will only see the changed chapter names inside the Info headlines and
+Info menus. If you convert the Texinfo file with (!TeX) you will get your
+original chapter names.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Warum werden Umgebungen nicht ""komprimierte"" dargestellt?]
+
+Der Parameter (!KW [short]) kann bei Texinfo nicht funktionieren, da es
+bei Texinfo nicht möglich ist, die Zwischenräume in Umgebungen zu
+unterdrücken.
+!endif
+
+!iflang [english]
+!item [Why doesn't Texinfo display the environments in ""compressed"" form?] ~
+
+Using Texinfo it's impossible to smaller the paragraph separation. Thus the
+parameter (!KW [short]) is useless when converting to Texinfo
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+!end_description
+
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node Turbo-Vision-Help
+!endif
+!iflang [english]
+!begin_node Turbo-Vision-Help
+!endif
+!html_name format_tvh.html
+
+!iflang [german]
+Dieses Format wird benutzt, um Onlinehilfen für DOS-Programme zu
+erstellen, die mit Borlands Turbo-Vision-Library geschrieben wurden.
+Zuständiger Konverter ist das Programm (!V)TVHC.EXE(!v), das den
+Entwicklungssystemen auch im Sourcecode beiliegt.
+
+Da das Turbo-Vision-Help-Format wohl nur für Programmierer interessant
+sein dürfte, werden hier auch einige Tips gegeben, wie man den TVHC
+patchen sollte.
+
+Nichtprogrammierer sollten dieses Format meiden, sprich Ihre Hypertexte
+nicht in diesem Format weitergeben, da es außerhalb der Erstellung von
+Onlinehilfen für eigene Programme keine Bedeutung hat.
+!endif
+
+!iflang [english]
+This format is used to make online manuals for DOS programs that are
+compiled with Borland's Turbo Vision library. UDO's output has to be
+converted with (!V)TVHC.EXE(!v). The source code of (!V)TVHC.EXE(!v) is
+available and you have to change some parts because it contains some bugs.
+
+If you aren't an author that programs software that uses the Turbo Vision
+library you shouldn't use this format.
+!endif
+
+!begin_description
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [TVHC meldet den Fehler ""Unterminated topic reference""!?]
+
+Der mir vorliegende TVHC Version 1.0 beinhaltet einen bösen Fehler, der
+dazu führt, daß die Quotefunktion --- das Aufheben der Funktion der
+geschweiften Klammer durch doppelte Angabe --- nicht funktioniert.
+Falls der TVHC Ihnen die obige Fehlermeldung präsentiert, so ändern Sie
+die Funktion scanForCrossRefs() in tvhc.cpp folgendermaßen um:
+
+!begin_description
+!item [Original:]
+
+!begin_quote
+!begin_verbatim
+if (line[i+1] == begXRef)
+{
+    strdel(line, i, 1);
+        ++i;
+}
+!end_verbatim
+!end_quote
+
+!item [Patch:]
+
+!begin_quote
+!begin_verbatim
+if (line[i] == begXRef)    // [i] statt [i+1]
+{
+    strdel(line, i, 1);
+        ++i;
+}
+!end_verbatim
+!end_quote
+!end_description
+
+Nach dieser Änderung sollten Sie den TVHC neu übersetzen, um die
+Änderungen wirksam werden zu lassen.
+!endif
+
+
+!iflang [english]
+!item [TVHC prints the error message ""Unterminated topic reference""!?] ~
+
+My TVHC version 1.0 contains an ugly bug. Due to this bug you cannot quote
+brackets by using them twice. If your TVHC prints the upper error message
+look for the function (!V)scanForCrossRefs()(!v) in (!V)tvhc.cpp(!v) and
+patch it like this:
+
+!begin_description
+!item [Original Version:]
+
+!begin_quote
+!begin_verbatim
+if (line[i+1] == begXRef)
+{
+    strdel(line, i, 1);
+        ++i;
+}
+!end_verbatim
+!end_quote
+
+!item [Patched version:]
+
+!begin_quote
+!begin_verbatim
+if (line[i] == begXRef)    // [i] statt [i+1]
+{
+    strdel(line, i, 1);
+        ++i;
+}
+!end_verbatim
+!end_quote
+!end_description
+
+After having changed the source code you should recompile TVHC to enable the changes.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [TVHC meldet den Fehler ""Text too long""!?]
+
+In der Datei tvhc.h legt eine Konstante namens bufferSize die Größe des
+Textpuffers fest, den der TVHC als Zwischenspeicher währen der
+Übersetzung benutzt. Der Puffer ist ziemlich klein dimensioniert, falls
+Sie obige Fehlermeldung erhalten.
+
+Legen Sie einen ausreichen großen Puffer (z.B. 32 KB) an, so daß auch
+größere Texte problemlos übersetzt werden.
+
+!begin_quote
+!begin_verbatim
+const bufferSize = 32768;
+!end_verbatim
+!end_quote
+
+Nach dieser Änderung sollten Sie den TVHC neu übersetzen, um die
+Änderung wirksam werden zu lassen.
+!endif
+
+
+!iflang [english]
+!item [TVHC prints the error message ""Text too long""!?] ~
+
+The file (!V)tvhc.h(!v) contains a constant number named (!V)bufferSize(!v)
+that defines the maximum size of the text buffer. This text buffer is a
+little bit small. You should increase the buffer size e.g. to 32~KB to
+suppress the upper error message:
+
+!begin_quote
+!begin_verbatim
+const bufferSize = 32768;
+!end_verbatim
+!end_quote
+
+After having changed the buffer size you should recompile TVHC to enable the
+changes.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [TVHC meldet den Fehler ""TOPIC expected""!?]
+
+Dieser Fehler tritt auf, sobald eine Zeile mit einem Punkt --- dem
+""commandChar"" --- beginnt. Die mir vorliegende Version bricht darauf
+die Umwandlung ab.
+
+Dieser Abbruch ist jedoch unnötig, weshalb ich meinen TVHC gepatched
+habe. Falls Sie den Sourcecode vorliegen haben, suchen Sie nach
+
+!begin_quote
+!begin_verbatim
+error("TOPIC expected");
+!end_verbatim
+!end_quote
+
+und ersetzen Sie es durch
+
+!begin_quote
+!begin_verbatim
+warning("TOPIC expected");
+!end_verbatim
+!end_quote
+
+Nach einer Neuübersetzung des TVHC bricht dieser die Umwandlung nicht
+mehr ab, sondern gibt lediglich eine Warnmeldung aus, die Sie
+ignorieren können.
+!endif
+
+
+!iflang [english]
+!item [TVHC prints the error message ""TOPIC expected""!?] ~
+
+This error message is printed if a line starts with a point. The point is a
+special character in Turbo Vision Help if it is the first character of a
+line. My TVHC stops if it reads such a line.
+
+But there's no need to stop the conversion. Thus I have patched my TVHC. I
+have replaced this line
+
+!begin_quote
+!begin_verbatim
+error("TOPIC expected");
+!end_verbatim
+!end_quote
+
+with
+
+!begin_quote
+!begin_verbatim
+warning("TOPIC expected");
+!end_verbatim
+!end_quote
+
+If you recompile the TVHC it will print a warning and it will go on
+converting the source file instead of printing an error message.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+!end_description
+
+!end_node
+
+
+################################################################################
+!iflang [german]
+!begin_node UDO (Universal Document)
+!endif
+!iflang [english]
+!begin_node UDO (Universal Document)
+!endif
+!html_name format_udo.html
+
+(!MISS)
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node Windows Help (WinHelp)
+!endif
+!iflang [english]
+!begin_node Windows Help (WinHelp)
+!endif
+!label WinHelp
+!html_name format_winhelp.html
+
+!begin_description
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [WinHelp meint, daß *.rtf und *.hpj keine Hilfedatei sei?]
+
+Weder die eine noch die andere Datei ist eine fertige Hilfedatei
+für Windows. UDO erzeugt lediglich die Quelltexte einer
+Hilfedatei, welche noch mit einem Hypertext-Compiler (HC.EXE,
+HC31.EXE, HCP.EXE) übersetzt werden muß.
+!endif
+
+!iflang [english]
+!item [WinHelp says that the RTF-File isn't a Windows Help file. Why?] ~
+
+The RTF file UDO saves isn't a Windows Help file. It's just the source code
+of a Windows Help file! You have to convert this source code with the
+Microsoft Helpcompiler to get a Windows Help file.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ToDo: Text aktualisieren
+!iflang [german]
+!item [Woher bekomme ich den Hypertext-Compiler?]
+
+# Den Hypertext-Compiler HC31.EXE bekommen Sie überall dort, wo es auch UDO gibt (siehe Bezugsquellen).
+# Sie finden ihn auch auf dem FTP-Server von Microsoft (ftp.microsoft.com).
+# 13.12.2003: neuer Text - Ulrich Kretschmer
+Den Hypertext-Compiler HC31.EXE können Sie kostenlos vom FTP-Server von Microsoft (ftp.microsoft.com) herunterladen.
+!endif
+
+!iflang [english]
+!item [Where can I get the Microsoft Helpcompiler?] ~
+
+You can download the Microsoft Helpcompiler (!V)HC31.EXE(!v) from
+Microsoft's FTP server (ftp.microsoft.com) free of charge.
+# Satz auskommentiert 13.12.2003 - Ulrich Kretschmer
+# You shall find the HC where UDO is available, too.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Warum will der HC einfach keine HLP-Datei erzeugen?]
+
+Dafür kann es zwei Gründe geben:
+
+!begin_enumerate
+
+!item Der UDO-Quelltext beinhaltet Fehler. Schauen Sie sich also
+zunächst die Fehlermeldungen von UDO in der Datei mit der Endung
+(!V).ulw(!v) an, beseitigen Sie etwaige Fehler und konvertieren Sie
+dann den UDO-Quelltext neu. Falls UDO keine Fehlermeldungen ausgibt, so
+kann es dennoch sein, daß der Quelltext Fehler enthält, UDO diese
+Fehler aber nicht erkannt hat.
+
+!item Der HC macht Murks. Beachten Sie das Errorfile mit der Endung
+(!V).err(!v), welches vom HC angelegt wird. Leider kann ich keine
+Hilfestellung zu den Fehlermeldungen des HC geben, da ich in den
+meisten Fällen selbst nicht weiß, was da schiefläuft.
+!end_enumerate
+!endif
+
+
+!iflang [english]
+!item [Why doesn't want the HC to compile UDO's output?] ~
+
+This can have two reasons:
+
+!begin_enumerate
+
+!item	The UDO source file contains errors. Please take a look at UDO's log
+file (suffix ''(!V).ulw(!v)'') and correct the errors you will find there.
+If the log file doesn't contain any error messages your source file may
+contain errors UDO hasn't detected.
+
+!item	The HC is working incorrectly. Take a look at the HC's error file
+(suffix ''(!V).err(!v)''). Unfortunately I can't tell you the sense of the
+errors printed in the error file in most cases.
+
+!end_enumerate
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wofür ist die Datei mit der Endung ''hpj''?]
+
+UDO erzeugt automatisch eine zum Hypertext gehörende Projektdatei mit
+der Endung (!V).hpj(!v), die dem HC übergeben werden muß, um aus dem
+Quelltext eine fertige WinHelp-Datei zu erstellen.
+
+In dieser Projektdatei befinden sich Informationen wie der Titel des
+Hypertextes, die zusätzlichen Schaltflächen, die Ausmaße des Fensters
+nach dem Öffnen des Hypertextes etc.
+
+UDO überschreibt vorhandene Projektdateien ohne Rückfrage. Wenn Sie
+manuelle Änderungen an einer Projektdatei vorgenommen haben und diese
+beibehalten möchten, so schreibschützen Sie die Projektdatei.
+!endif
+
+
+!iflang [english]
+!item	[What is the file ''(!V).hpj(!v)'' good for?] ~
+
+When converting to Windows Help UDO will save an RTF file and a project file
+for the Microsoft Helpcompiler named ''(!V).hpj(!v)''. You have to start the
+HC by passing the name of this project file to get a Windows Help file.
+
+This project file contains several information e.g. the title of the help
+file, code for adding additional buttons, the size of the main window when
+opening the help file.
+
+UDO will overwrite this project file without previously asking you if you
+want it. So, if you have changed the project file and you want to protect
+your changes you have to write protect the project file.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie werden hier die Kopfzeilen erzeugt?]
+
+UDO erzeugt auf jeder Seite (mit Ausnahme der Titelseite und des
+Inhaltsverzeichnisses) eine Kopfzeile. In dieser befindet sich der Name
+des jeweiligen Kapitels. Kopfzeilen werden als
+""non-scrolling-regions"" angelegt, so daß man auch nach dem Scrollen
+der Seite immer noch den Kapitelnamen erkennen kann.
+
+Durch den Schalter ""(!KW [no_headlines] [[win!!]])"" wird die Ausgabe
+von Kopfzeilen unterdrückt.
+!endif
+
+
+!iflang [english]
+!item	[How does UDO generate headlines?] ~
+
+UDO prints on every page (without the title page and the table of contents) a
+headline. In this headline the chapter name is printed inside a
+non-scrolling region. Thus you can see always the chapter name  even if you
+scroll the text.
+
+If you use the switch (!KW [no_headlines] [[win!!]]) inside the preamble no
+headlines will be printed.
+
+If you use the command (!KW [ignore_headline]) inside a chapter in this
+chapter no headline will be printed.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie werden die Kontextstrings ermittelt?]
+
+Falls Sie von anderen WinHelp-Files auf ein mit UDO erzeugtes
+WinHelp-File verzweigen möchten, müssen Sie den Kontextstring des
+Kapitels kennen.
+
+WinHelp erlaubt in Kontextstrings keine Sonderzeichen. UDO wandelt
+daher die Namen der Kapitel folgendermaßen in Kontext-strings um:
+
+!begin_enumerate
+!item Zunächst werden wie sonst auch Sonderzeichen durch die
+RTF-Schreibweise ersetzt.
+
+!item Leerzeichen werden in Unterstriche umgewandelt.
+
+!item Alle anderen Zeichen (ausgenommen Ziffern und die Buchstaben des
+Alphabets) werden durch Ihren hexadezimalen Wert in großer Schreibweise
+mit einem vorangehenden Unterstrich ersetzt.
+!end_enumerate
+
+Ein Beispiel:
+
+!begin_quote
+!begin_verbatim
+UDO:     !node LaTeX-Einführung Teil 1
+WinHelp: #{footnote # LaTeX_2DEinf_5C_27FChrung_Teil_1}
+!end_verbatim
+!end_quote
+
+Erläuterungen:
+
+!begin_enumerate
+!item Das Minuszeichen entspricht ASCII ""0x2D"", daher wird es durch
+""_2D"" ersetzt.
+
+!item Das ""ü"" in Einführung lautet in RTF-Schreibweise
+""(!T)\'FC(!t)."" ""\"" entspricht ""0x5C"", wird also durch ""_5C""
+ersetzt. ""'"" enspricht ""0x27"", wird also durch ""_27"" ersetzt.
+
+!item Die Leerzeichen werden durch ""_"" ersetzt.
+!end_enumerate
+
+Sie sehen, daß aus einem ""ü"" die ziemlich lange Zeichenfolge
+""_5C_27FC"" wird. Dies scheint auf den ersten Blick mehr als
+umständlich und ""doppelt gemoppelt"" zu sein, bringt aber den Vorteil,
+daß die Vergabe von gleichen Kontextstrings bei ähnlichen Kapitelnamen
+ziemlich unwahrscheinlich wird. Würde aus dem ""ü"" lediglich ""FC""
+gemacht, wären Probleme vorprogrammiert.
+!endif
+
+
+!iflang [english]
+!item	[How does UDO create the context strings?] ~
+
+If you want to create a link from another help file or a program to a help
+file that was made with UDO you have to know how UDO creates the context
+strings.
+
+Windows Help doesn't allow to use special characters inside context strings.
+UDO creates the context strings in the following way:
+
+!begin_enumerate
+
+!item	Special characters are printed in RTF form.
+
+!item	Blanks will be replaced by underscores.
+
+!item	All other characters except numbers and letters will be replaced by
+their hexadecimal value with a leading underscore.
+
+!end_enumerate
+
+An example with German words:
+
+!begin_quote
+!begin_verbatim
+UDO:     !node LaTeX-Einführung Teil 1
+WinHelp: #{footnote # LaTeX_2DEinf_5C_27FChrung_Teil_1}
+!end_verbatim
+!end_quote
+
+Description:
+
+!begin_enumerate
+
+!item	The hexadecimal ASCII code of the dash is ''(!T)0x2D(!t)''. The dash
+will be replaced by ''(!T)_2D(!t)''.
+
+!item	The ''ü'' inside ''Einführung'' is printed in RTF files like
+''(!T)\'FC(!t)''. The ASCII code of the backslash (''\'') is
+''(!T)0x5C(!t)'', so the backslash will be replaced by ''(!T)_5C(!t)''. The
+ASCII code of ''(!T)'(!t)'' is ''(!T)0x27(!t)'', so the apostrophe will be
+replaced by ''(!T)_27(!t)''.
+
+!item	The blanks will be replaced by ''(!T)_(!t)''
+
+!end_enumerate
+
+Thus the single letter ""ü"" will be replaced by the really long string
+''(!T)_5C_27FC(!t)'' wird. Maybe you want to say that this is quite awkward
+but if UDO would simply replace the ""ü"" by ""FC"" problems would appear
+very soon. Using the upper way the chance that UDO creates a context string
+that is already used is very small.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Warum werden Tabellen nicht zentriert?]
+
+Entweder ist dies wirklich nicht möglich, Tabellen zentriert
+auszugeben, oder aber ich habe bei meiner viertägigen Suche die
+entscheidende Möglichkeit übersehen.
+!endif
+
+!iflang [english]
+!item [Why doesn't UDO center tables?] ~
+
+It's impossible to center tables in Windows Help
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Warum werden in Tabellen keine Linien angezeigt?]
+
+Die Tabellenfunktionen von WinHelp sind ziemlich mager. So ist es
+unmöglich, Linien frei in einer Tabelle zu plazieren. Es ist nur
+möglich, jede Tabellenzelle mit oder ohne Rahmen darzustellen.
+!endif
+
+!iflang [english]
+!item [Why are there no lines inside tables?] ~
+
+Windows Help doesn't allow it to layout complex tables like in RTF. It's
+impossible to tell Windows Help where to draw lines. It's only possible to
+tell Windows Help to print table cells with or without frames.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Warum sind die Einrückungen bei Listen und Tabellen so groß?]
+
+UDO kennt die Zeichenbreiten der benutzten Zeichensätze nicht. Daher
+benutzt es einen konstanten Wert für jedes Zeichen. Damit ist die
+Einrückung auch bei kursiver fetter Großschrift passend, bei reiner
+Proportionalschrift ist die Einrückung und auch die Breite der
+Tabellenspalten etwas zu groß, was jedoch eher zu verschmerzen ist, als
+eine zu geringe Einrückung oder Spaltenbreite.
+!endif
+
+!iflang [english]
+!item [Indents in lists and cells in tables are too wide, why?] ~
+
+UDO doesn't know the width of the characters you use inside lists and
+tables. Thus UDO is forced to calculate with values so that even bold and
+italic capital letters will fit the cells. I think that it's better to have
+cells with a width that is too large than too small.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Wie kann ich DOS-Grafikzeichen darstellen?]
+
+Leider gar nicht.
+
+WinHelp weigert sich, die Fonts ""Terminal"" und ""MS LineDraw"" zur
+Anzeige des Textes zu verwenden. Stattdessen benutzt WinHelp einen
+Ersatzfont aus der Roman-, Script- oder Symbol-Familie, die leider alle
+keine DOS-Grafikzeichen enthalten.
+
+UDO ersetzt daher DOS-Grafikzeichen durch die ASCII-Zeichen ""+"",
+""-"" und ""|"", um z.B. DOS-Screenshots halbwegs realistisch
+darzustellen.
+!endif
+
+!iflang [english]
+!item [How can I print graphic characters from the IBM-PC character set?] ~
+
+Sorry, there's no way to print them.
+
+I don't know the reason but Windows Help won't use the fonts ""Terminal"" or
+""MS~LineDraw"". Windows Help will always use another font if you want to
+use the upper fonts that contain the graphic characters.
+
+Thus UDO will replace the graphic characters of the IBM-PC character set by
+""+"", ""-"" or ""|"".
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Warum sollte ich die Quelltexte mit einem Windows-Editor schreiben?]
+
+Sie können die Laufzeit von UDO positiv beinflussen, wenn Sie
+Quelltexte für eine Windows-Hilfe gleich im Windows-Zeichensatz
+schreiben. UDO braucht in dem Falle keine aufwendige
+Zeichensatzkonvertierung vornehmen.
+
+Achten Sie hierbei darauf, daß Sie den Schalter (!KW [code] [[iso!!]]) benutzen, um
+UDO anzuzeigen, daß die Texte nicht im DOS-Zeichensatz erstellt
+wurden.
+
+!begin_ignore
+# auskommentiert 13.12.2003 - Ulrich Kretschmer
+Tip: Als Editor empfehle ich den ""Programmer's File Editor"" (kurz: PFE)
+von Alan Phillips, einen grandiosen Freeware-Editor, der in einer 16-
+und 32-Bit-Version verfügbar ist. Man findet Ihn auf vielen CD-ROMs und
+natürlich auf fast jedem FTP-Server.
+!end_ignore
+!endif
+
+
+!iflang [english]
+!item [Why should I write the source files with a Windows editor?]
+
+You can speed up the conversion if you write the source files with a Windows
+editor. In this case UDO doesn't have to convert the characters from the IBM
+PC character set into the Windows ANSI character set.
+
+If you write source file with a Windows Editor you have to insert the switch
+(!KW [code] [[iso!!]]) inside the preamble of your source file. If you forget to
+do this UDO will think that the source file was written with the IBM PC
+character set.
+
+!begin_ignore
+# auskommentiert 13.12.2003 - Ulrich Kretschmer
+Tip: I recommend to use the ""Programmer's File Editor"" (PFE) written by
+Alan Phillips, a really great freeware editor that is available both for
+Windows 3.11 and Windows95/NT.
+!end_ignore
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!item [Warum sollte ich die WinHelp-Dateien komprimieren?]
+
+Mit den Schaltern (!KW [win_medium_compression]) und (!KW [win_high_compression])
+sorgen Sie dafür, daß der Help-Compiler die WinHelp-Datei komprimiert.
+Dadurch können Sie die Größe der Datei bis zu 50~% verringern, wobei
+sich allerdings die Laufzeit des Help-Compilers, besonders bei der
+hohen Komprimierungsrate, verlängert.
+!endif
+
+
+!iflang [english]
+!item [Why should i compress the Windows Help files?]
+
+Using the switch (!KW [win_medium_compression]) or
+(!KW [win_high_compression]) you can tell the help compiler to
+compress the final Windows Help file up to 50~%. The help compiler
+will need a little bit more time to convert the RTF source file if you use
+the upper switches.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!end_description
+
+!end_node
+
+################################################################################
+!iflang [german]
+!begin_node Windows Help Vs. 4 (WinHelp4)
+!endif
+!iflang [english]
+!begin_node Windows Help Vs. 4 (WinHelp4)
+!endif
+!label WinHelp4
+!html_name format_wh4.html
+
+(!MISS)
+!end_node
+
+################################################################################
+!end_node
+# Ende: Ausgabeformate
