@@ -719,7 +719,8 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 			strcpy(n, l->name);
 			replace_udo_tilde(n);
 			replace_udo_nbsp(n);
-			sprintf(ref, "{\\leavevmode\\pdfannotlink goto num %d\n%s\\pdfendlink}",
+			/* Changed in r6.2pl1 [NHz] */
+			sprintf(ref, "{\\pdfstartlink goto num %d\n%s\\pdfendlink}",
 				l->labindex, n);
 			break;
 
