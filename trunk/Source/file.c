@@ -109,7 +109,7 @@ GLOBAL MYTEXTFILE *myTextOpen ( const char *filename )
 }	/* myTextOpen */
 
 
-GLOBAL char *myTextGetline ( char *string, int n, MYTEXTFILE *tf )
+GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf )
 {
 #if USE_MYTEXTFILE
 	size_t sl;
