@@ -10101,285 +10101,281 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
 
 	cntfile= myFwopen(sCntfull, FTCNT);
 	
-	if (p1_toc_counter<=0)
-	{	return FALSE;
-	}
-
-	if (!cntfile)
+	if (cntfile == NULL)
 	{	return FALSE;
 	}
 
 	save_upr_entry_outfile(sCntfull);
 
-	fprintf(cntfile, ":Base %s.hlp>main\n", outfile.name);
-	fprintf(cntfile, ":Index %s.hlp\n", outfile.name);
-
-	strcpy(sMisc, titleprogram);
-	win2sys(sMisc);
-	if (sMisc[0]!=EOS)
-	{	fprintf(cntfile, ":Title %s\n", sMisc);
-	}
-
-	if (uses_tableofcontents)
-	{	node2NrWinhelp(sMisc, 0);
-		fprintf(cntfile, "1 %s=%s\n", lang.contents, sMisc);
+	if (p1_toc_counter > 0)
+	{
+		fprintf(cntfile, ":Base %s.hlp>main\n", outfile.name);
+		fprintf(cntfile, ":Index %s.hlp\n", outfile.name);
+	
+		strcpy(sMisc, titleprogram);
+		win2sys(sMisc);
+		if (sMisc[0]!=EOS)
+		{	fprintf(cntfile, ":Title %s\n", sMisc);
+		}
+	
+		if (uses_tableofcontents)
+		{	node2NrWinhelp(sMisc, 0);
+			fprintf(cntfile, "1 %s=%s\n", lang.contents, sMisc);
+		}
+		
+		apxstart= 1;
+	
+		for (i=1; i<=p1_toc_counter; i++)
+		{
+			if (toc[i]!=NULL && !toc[i]->invisible)
+			{
+				convert_toc_item(toc[i]);
+	
+				if ( toc[i]->appendix )
+				{
+					apxstart= i;	/* fuer unten merken */
+					break;			/* r5pl6: Es kann nur einen Anhang geben */
+				}
+				else
+				{	if ( toc[i]->n1 != 0 )
+					{
+						if ( toc[i]->toctype==TOC_NODE1 )
+						{	/* Ein Kapitel */	
+	
+							li= toc[i]->labindex;
+							node2NrWinhelp(sID, li);
+							if (no_numbers)
+							{	strcpy(sName, toc[i]->name);
+							}
+							else
+							{	sprintf(sName, "[%d] %s",
+									toc[i]->nr1+toc_offset,
+									toc[i]->name);
+							}
+							win2sys(sName);
+							if (n1HadChildren || toc[i]->has_children)
+							{	fprintf(cntfile, "1 %s\n", sName);
+								fprintf(cntfile, "2 %s=%s\n", sName, sID);
+								n1HadChildren= TRUE;
+							}
+							else
+							{	fprintf(cntfile, "1 %s=%s\n", sName, sID);
+							}
+	
+							n2HadChildren= FALSE;
+							n3HadChildren= FALSE;
+						}/* TOC_NODE1 */
+						
+						
+						if ( toc[i]->toctype==TOC_NODE2 )
+						{	/* Ein Abschnitt */
+							li= toc[i]->labindex;
+							node2NrWinhelp(sID, li);
+							if (no_numbers)
+							{	strcpy(sName, toc[i]->name);
+							}
+							else
+							{	sprintf(sName, "[%d.%d] %s",
+									toc[i]->nr1+toc_offset,
+									toc[i]->nr2+subtoc_offset,
+									toc[i]->name);
+							}
+							win2sys(sName);
+							if (n2HadChildren || toc[i]->has_children)
+							{	fprintf(cntfile, "2 %s\n", sName);
+								fprintf(cntfile, "3 %s=%s\n", sName, sID);
+								n2HadChildren= TRUE;
+							}
+							else
+							{	fprintf(cntfile, "2 %s=%s\n", sName, sID);
+							}
+	
+							n3HadChildren= FALSE;
+						}/* TOC_NODE2 */
+						
+						if ( toc[i]->toctype==TOC_NODE3 )
+						{	/* Ein Unterabschnitt */
+							li= toc[i]->labindex;
+							node2NrWinhelp(sID, li);
+							if (no_numbers)
+							{	strcpy(sName, toc[i]->name);
+							}
+							else
+							{	sprintf(sName, "[%d.%d.%d] %s",
+									toc[i]->nr1+toc_offset,
+									toc[i]->nr2+subtoc_offset,
+									toc[i]->nr3+subsubtoc_offset,
+									toc[i]->name);
+							}
+							win2sys(sName);
+							if (n3HadChildren || toc[i]->has_children)
+							{	fprintf(cntfile, "3 %s\n", sName);
+								fprintf(cntfile, "4 %s=%s\n", sName, sID);
+								n3HadChildren= TRUE;
+							}
+							else
+							{	fprintf(cntfile, "3 %s=%s\n", sName, sID);
+							}
+						}/* TOC_NODE3 */
+					
+						if ( toc[i]->toctype==TOC_NODE4 )
+						{	/* Ein Paragraph */
+							li= toc[i]->labindex;
+							node2NrWinhelp(sID, li);
+							if (no_numbers)
+							{	strcpy(sName, toc[i]->name);
+							}
+							else
+							{	sprintf(sName, "[%d.%d.%d.%d] %s",
+									toc[i]->nr1+toc_offset,
+									toc[i]->nr2+subtoc_offset,
+									toc[i]->nr3+subsubtoc_offset,
+									toc[i]->nr4+subsubsubtoc_offset,
+									toc[i]->name);
+							}
+							win2sys(sName);
+							fprintf(cntfile, "4 %s=%s\n", sName, sID);
+						}/* TOC_NODE4 */
+	
+	
+					}/* toc[i]->n1 > 0 */
+	
+				}/* !toc[i]->appendix */
+	
+			}/* toc[i]!=NULL && !toc[i]->invisible */
+	
+		}/* for */
+	
+	
+		if (apx_available)
+		{
+			n1HadChildren= FALSE;
+			n2HadChildren= FALSE;
+			n3HadChildren= FALSE;
+		
+			fprintf(cntfile, "1 %s\n", lang.appendix);
+		
+			for (i=apxstart; i<=p1_toc_counter; i++)
+			{
+				if (toc[i]!=NULL && !toc[i]->invisible)
+				{
+					convert_toc_item(toc[i]);
+		
+					if ( toc[i]->appendix )
+					{
+						if ( toc[i]->n1 != 0 )
+						{
+							if ( toc[i]->toctype==TOC_NODE1 )
+							{	/* Ein Kapitel */	
+		
+								li= toc[i]->labindex;
+								node2NrWinhelp(sID, li);
+								if (no_numbers)
+								{	strcpy(sName, toc[i]->name);
+								}
+								else
+								{	sprintf(sName, "[%c] %s",
+										'A'-1+toc[i]->nr1,
+										toc[i]->name);
+								}
+								win2sys(sName);
+								if (n1HadChildren || toc[i]->has_children)
+								{	fprintf(cntfile, "2 %s\n", sName);
+									fprintf(cntfile, "3 %s=%s\n", sName, sID);
+									n1HadChildren= TRUE;
+								}
+								else
+								{	fprintf(cntfile, "2 %s=%s\n", sName, sID);
+								}
+		
+								n2HadChildren= FALSE;
+								n3HadChildren= FALSE;
+		
+							}/* TOC_NODE1 */
+							
+							
+							if ( toc[i]->toctype==TOC_NODE2 )
+							{	/* Ein Abschnitt */
+								li= toc[i]->labindex;
+								node2NrWinhelp(sID, li);
+								if (no_numbers)
+								{	strcpy(sName, toc[i]->name);
+								}
+								else
+								{	sprintf(sName, "[%c.%d] %s",
+										'A'-1+toc[i]->nr1,
+										toc[i]->nr2,
+										toc[i]->name);
+								}
+								win2sys(sName);
+								if (n2HadChildren || toc[i]->has_children)
+								{	fprintf(cntfile, "3 %s\n", sName);
+									fprintf(cntfile, "4 %s=%s\n", sName, sID);
+									n2HadChildren= TRUE;
+								}
+								else
+								{	fprintf(cntfile, "3 %s=%s\n", sName, sID);
+								}
+		
+								n3HadChildren= FALSE;
+		
+							}/* TOC_NODE2 */
+							
+							if ( toc[i]->toctype==TOC_NODE3 )
+							{	/* Ein Unterabschnitt */
+								li= toc[i]->labindex;
+								node2NrWinhelp(sID, li);
+								if (no_numbers)
+								{	strcpy(sName, toc[i]->name);
+								}
+								else
+								{	sprintf(sName, "[%c.%d.%d] %s",
+										'A'-1+toc[i]->nr1,
+										toc[i]->nr2,
+										toc[i]->nr3,
+										toc[i]->name);
+								}
+								win2sys(sName);
+								if (n3HadChildren || toc[i]->has_children)
+								{	fprintf(cntfile, "4 %s\n", sName);
+									fprintf(cntfile, "5 %s=%s\n", sName, sID);
+									n3HadChildren= TRUE;
+								}
+								else
+								{	fprintf(cntfile, "4 %s=%s\n", sName, sID);
+								}
+							}/* TOC_NODE3 */
+						
+							if ( toc[i]->toctype==TOC_NODE4 )
+							{	/* Ein Paragraph */
+								li= toc[i]->labindex;
+								node2NrWinhelp(sID, li);
+								if (no_numbers)
+								{	strcpy(sName, toc[i]->name);
+								}
+								else
+								{	sprintf(sName, "[%c.%d.%d.%d] %s",
+										'A'-1+toc[i]->nr1,
+										toc[i]->nr2,
+										toc[i]->nr3,
+										toc[i]->nr4,
+										toc[i]->name);
+								}
+								win2sys(sName);
+								fprintf(cntfile, "5 %s=%s\n", sName, sID);
+							}/* TOC_NODE4 */
+		
+		
+						}/* toc[i]->n1 > 0 */
+		
+					}/* !toc[i]->appendix */
+		
+				}/* toc[i]!=NULL && !toc[i]->invisible */
+		
+			}/* for */
+		}
 	}
 	
-	apxstart= 1;
-
-	for (i=1; i<=p1_toc_counter; i++)
-	{
-		if (toc[i]!=NULL && !toc[i]->invisible)
-		{
-			convert_toc_item(toc[i]);
-
-			if ( toc[i]->appendix )
-			{
-				apxstart= i;	/* fuer unten merken */
-				break;			/* r5pl6: Es kann nur einen Anhang geben */
-			}
-			else
-			{	if ( toc[i]->n1 != 0 )
-				{
-					if ( toc[i]->toctype==TOC_NODE1 )
-					{	/* Ein Kapitel */	
-
-						li= toc[i]->labindex;
-						node2NrWinhelp(sID, li);
-						if (no_numbers)
-						{	strcpy(sName, toc[i]->name);
-						}
-						else
-						{	sprintf(sName, "[%d] %s",
-								toc[i]->nr1+toc_offset,
-								toc[i]->name);
-						}
-						win2sys(sName);
-						if (n1HadChildren || toc[i]->has_children)
-						{	fprintf(cntfile, "1 %s\n", sName);
-							fprintf(cntfile, "2 %s=%s\n", sName, sID);
-							n1HadChildren= TRUE;
-						}
-						else
-						{	fprintf(cntfile, "1 %s=%s\n", sName, sID);
-						}
-
-						n2HadChildren= FALSE;
-						n3HadChildren= FALSE;
-					}/* TOC_NODE1 */
-					
-					
-					if ( toc[i]->toctype==TOC_NODE2 )
-					{	/* Ein Abschnitt */
-						li= toc[i]->labindex;
-						node2NrWinhelp(sID, li);
-						if (no_numbers)
-						{	strcpy(sName, toc[i]->name);
-						}
-						else
-						{	sprintf(sName, "[%d.%d] %s",
-								toc[i]->nr1+toc_offset,
-								toc[i]->nr2+subtoc_offset,
-								toc[i]->name);
-						}
-						win2sys(sName);
-						if (n2HadChildren || toc[i]->has_children)
-						{	fprintf(cntfile, "2 %s\n", sName);
-							fprintf(cntfile, "3 %s=%s\n", sName, sID);
-							n2HadChildren= TRUE;
-						}
-						else
-						{	fprintf(cntfile, "2 %s=%s\n", sName, sID);
-						}
-
-						n3HadChildren= FALSE;
-					}/* TOC_NODE2 */
-					
-					if ( toc[i]->toctype==TOC_NODE3 )
-					{	/* Ein Unterabschnitt */
-						li= toc[i]->labindex;
-						node2NrWinhelp(sID, li);
-						if (no_numbers)
-						{	strcpy(sName, toc[i]->name);
-						}
-						else
-						{	sprintf(sName, "[%d.%d.%d] %s",
-								toc[i]->nr1+toc_offset,
-								toc[i]->nr2+subtoc_offset,
-								toc[i]->nr3+subsubtoc_offset,
-								toc[i]->name);
-						}
-						win2sys(sName);
-						if (n3HadChildren || toc[i]->has_children)
-						{	fprintf(cntfile, "3 %s\n", sName);
-							fprintf(cntfile, "4 %s=%s\n", sName, sID);
-							n3HadChildren= TRUE;
-						}
-						else
-						{	fprintf(cntfile, "3 %s=%s\n", sName, sID);
-						}
-					}/* TOC_NODE3 */
-				
-					if ( toc[i]->toctype==TOC_NODE4 )
-					{	/* Ein Paragraph */
-						li= toc[i]->labindex;
-						node2NrWinhelp(sID, li);
-						if (no_numbers)
-						{	strcpy(sName, toc[i]->name);
-						}
-						else
-						{	sprintf(sName, "[%d.%d.%d.%d] %s",
-								toc[i]->nr1+toc_offset,
-								toc[i]->nr2+subtoc_offset,
-								toc[i]->nr3+subsubtoc_offset,
-								toc[i]->nr4+subsubsubtoc_offset,
-								toc[i]->name);
-						}
-						win2sys(sName);
-						fprintf(cntfile, "4 %s=%s\n", sName, sID);
-					}/* TOC_NODE4 */
-
-
-				}/* toc[i]->n1 > 0 */
-
-			}/* !toc[i]->appendix */
-
-		}/* toc[i]!=NULL && !toc[i]->invisible */
-
-	}/* for */
-
-
-	if (!apx_available)
-	{
-		fclose(cntfile);
-		return TRUE;
-	}
-
-	n1HadChildren= FALSE;
-	n2HadChildren= FALSE;
-	n3HadChildren= FALSE;
-
-	fprintf(cntfile, "1 %s\n", lang.appendix);
-
-	for (i=apxstart; i<=p1_toc_counter; i++)
-	{
-		if (toc[i]!=NULL && !toc[i]->invisible)
-		{
-			convert_toc_item(toc[i]);
-
-			if ( toc[i]->appendix )
-			{
-				if ( toc[i]->n1 != 0 )
-				{
-					if ( toc[i]->toctype==TOC_NODE1 )
-					{	/* Ein Kapitel */	
-
-						li= toc[i]->labindex;
-						node2NrWinhelp(sID, li);
-						if (no_numbers)
-						{	strcpy(sName, toc[i]->name);
-						}
-						else
-						{	sprintf(sName, "[%c] %s",
-								'A'-1+toc[i]->nr1,
-								toc[i]->name);
-						}
-						win2sys(sName);
-						if (n1HadChildren || toc[i]->has_children)
-						{	fprintf(cntfile, "2 %s\n", sName);
-							fprintf(cntfile, "3 %s=%s\n", sName, sID);
-							n1HadChildren= TRUE;
-						}
-						else
-						{	fprintf(cntfile, "2 %s=%s\n", sName, sID);
-						}
-
-						n2HadChildren= FALSE;
-						n3HadChildren= FALSE;
-
-					}/* TOC_NODE1 */
-					
-					
-					if ( toc[i]->toctype==TOC_NODE2 )
-					{	/* Ein Abschnitt */
-						li= toc[i]->labindex;
-						node2NrWinhelp(sID, li);
-						if (no_numbers)
-						{	strcpy(sName, toc[i]->name);
-						}
-						else
-						{	sprintf(sName, "[%c.%d] %s",
-								'A'-1+toc[i]->nr1,
-								toc[i]->nr2,
-								toc[i]->name);
-						}
-						win2sys(sName);
-						if (n2HadChildren || toc[i]->has_children)
-						{	fprintf(cntfile, "3 %s\n", sName);
-							fprintf(cntfile, "4 %s=%s\n", sName, sID);
-							n2HadChildren= TRUE;
-						}
-						else
-						{	fprintf(cntfile, "3 %s=%s\n", sName, sID);
-						}
-
-						n3HadChildren= FALSE;
-
-					}/* TOC_NODE2 */
-					
-					if ( toc[i]->toctype==TOC_NODE3 )
-					{	/* Ein Unterabschnitt */
-						li= toc[i]->labindex;
-						node2NrWinhelp(sID, li);
-						if (no_numbers)
-						{	strcpy(sName, toc[i]->name);
-						}
-						else
-						{	sprintf(sName, "[%c.%d.%d] %s",
-								'A'-1+toc[i]->nr1,
-								toc[i]->nr2,
-								toc[i]->nr3,
-								toc[i]->name);
-						}
-						win2sys(sName);
-						if (n3HadChildren || toc[i]->has_children)
-						{	fprintf(cntfile, "4 %s\n", sName);
-							fprintf(cntfile, "5 %s=%s\n", sName, sID);
-							n3HadChildren= TRUE;
-						}
-						else
-						{	fprintf(cntfile, "4 %s=%s\n", sName, sID);
-						}
-					}/* TOC_NODE3 */
-				
-					if ( toc[i]->toctype==TOC_NODE4 )
-					{	/* Ein Paragraph */
-						li= toc[i]->labindex;
-						node2NrWinhelp(sID, li);
-						if (no_numbers)
-						{	strcpy(sName, toc[i]->name);
-						}
-						else
-						{	sprintf(sName, "[%c.%d.%d.%d] %s",
-								'A'-1+toc[i]->nr1,
-								toc[i]->nr2,
-								toc[i]->nr3,
-								toc[i]->nr4,
-								toc[i]->name);
-						}
-						win2sys(sName);
-						fprintf(cntfile, "5 %s=%s\n", sName, sID);
-					}/* TOC_NODE4 */
-
-
-				}/* toc[i]->n1 > 0 */
-
-			}/* !toc[i]->appendix */
-
-		}/* toc[i]!=NULL && !toc[i]->invisible */
-
-	}/* for */
-
 	fclose(cntfile);
 	return TRUE;
 }	/* save_winhelp4_cnt */
