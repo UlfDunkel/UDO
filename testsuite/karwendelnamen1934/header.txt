@@ -1,0 +1,11 @@
+<!-- header.txt // Stand 03.08.2003 --><TABLE CELLPADDING=4>
+<TR VALIGN=TOP>
+<TD><SMALL><B>[</B><A HREF="./">Startseite</A><B>]</B></SMALL></TD>
+<TD><SMALL><B>[</B><A HREF="./vorbemerkung.html">Vorbemerkung</A><B>]</B></SMALL></TD>
+<TD><SMALL><B>[</B><A HREF="../../search/">Volltextsuche</A><B>]</B></SMALL></TD>
+<TD><SMALL><B>[</B><A HREF="../../gb/">Gästebuch</A><B>]</B></SMALL></TD>
+<TD><SMALL><B>[</B><A HREF="../../impressum.html">Impressum</A><B>]</B></SMALL></TD>
+<TD><SMALL><B>[</B><A HREF="../../kontakt.html">Kontakt</A><B>]</B></SMALL></TD>
+</TR>
+</TABLE><!-- Header-Ende -->
+
