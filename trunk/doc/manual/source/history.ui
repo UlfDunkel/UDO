@@ -90,6 +90,20 @@ developer versions.
 !item [(!NEWS)]
 !begin_itemize !short
 # ..............................................................................
+!iflang [german]
+!item (!T)!/docinfo(!t) hat zwei neue Argumente (!nl)
+    (!T)company(!t) bezeichnet die Firma, für die ein Dokument erstellt wird.
+    Wenn (!T)company(!t) benutzt wird, wird auf der Titelseite unter Autor
+    ""für (!I)company(!i)"" eingefügt. (!nl)
+    (!T)category(!t) bezeichnet eine Kategorie, zu der das Dokument gehört.
+!endif
+!iflang [english]
+!item (!T)!/docinfo(!t) has two arguments more (!nl)
+    (!T)company(!t) marks a company, for whom the document is made. If
+    (!T)company(!t) is used, the title page is supplied by ""for
+    (!I)company(!i)"" after the author entry. (!nl)
+    (!T)category(!t) marks a category, to which the document belongs.
+!endif
 # ..............................................................................
 !end_itemize
 !end_ignore
@@ -99,12 +113,15 @@ developer versions.
 !begin_itemize !short
 # ..............................................................................
 !iflang [german]
-!item Die "UDO Community" ist im Werbeblock ergänzt worden (About UDO).
+!item Die "UDO Community" ist im Werbeblock ergänzt worden, wenn
+    (!T)!/use_about_udo(!t) benutzt wird.
 # U.K. 28.1.04: bitte verständlich ausdrücken. Unklar, was gemeint ist?
 # anscheinend der bei !use_about_udo ausgegebene Texte ?!
+# NHz 29.01.04: Ist es jetzt klarer?
 !endif
 !iflang [english]
-!item The UDO Community is added to the advertisement (About UDO).
+!item The UDO Community is added to the advertisement, if
+    (!T)!/use_about_udo(!t) is used.
 !endif
 # ..............................................................................
 !iflang [german]
@@ -172,6 +189,7 @@ jetzt nicht mehr "Release 6.x Patchlevel yy" sondern "Version 6.x.y"
    Beinhaltet (!T)<text>(!t) ""chapter"", werden alle Links zu den Kapiteln erzeugt. (!nl)
 # U.K. 28.1.04: Beispiele (aus der UDO-HTML-Doku) bringen. Erklären, was erzeugt wird, wenn
 # !html_header_links *nicht* gesetzt ist (+ Beispiel).
+# NHz 29.01.04: Beispiel -> !html_header_links navigation chapter (siehe meine Mail vom 29.01.04)
 # Schalter nur im Vorspann zulässig? (anhand Maildebatte ergänzen)
    Die <link>-Elemente für Navigation und Kapitel werden nicht mehr automatisch,
    sondern nur auf Anforderung erzeugt. Dadurch entstehen kleinere HTML-Dateien. (!nl)
@@ -245,6 +263,23 @@ als META-Tag in den HTML-Header geschrieben (siehe oben).
 !heading Rich Text Format (RTF)
 !begin_description !short
 # ------------------------------------------------------------------------------
+!item [(!NEWS)]
+!begin_itemize !short
+# ..............................................................................
+!iflang [german]
+!item Die (!T)!/docinfo(!t)-Einträge (!T)subject(!t), (!T)keywords(!t),
+    (!T)company(!t) und (!T)category(!t) werden in die Info-Einträge der
+    RTF-Datei geschrieben.
+!endif
+!iflang [english]
+!item The (!T)!/docinfo(!t) entries (!T)subject(!t), (!T)keywords!(t),
+   (!T)company(!t) and (!T)category(!t) are written in the info values
+   of RTF files.
+!endif
+# ..............................................................................
+!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
 !item [(!BUGFIXES)]
 !begin_itemize !short
 # ..............................................................................
