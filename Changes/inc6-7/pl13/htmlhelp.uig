@@ -1,8 +1,0 @@
-!begin_itemize
-
-!index HTML-Help !! Inhaltsverzeichnis
-!index Inhaltsverzeichnis !! HTML-Help
-!item Bugfix: Bei HTML-Help fehlte im Tree-View der komplette Anhang
-(Markus Schwaiger).
-
-!end_itemize
