@@ -57,6 +57,38 @@ LOCAL BOOLEAN init_docinfo_data ( char *data, char **var, int allow_empty );
 LOCAL void init_titdat ( void );
 LOCAL void free_titdat ( char **var );
 
+/* New in r6pl16 [NHz] */
+/*	############################################################
+	#
+	# Main-Layout
+	#
+	############################################################	*/
+/*	--------------------------------------------------------------
+	set_mainlayout()
+	Setzen von Informationen fuer das Layout (neue Version)
+	Die Daten stehen in token[]. Ich habe die Funktion hier herein
+	gepackt, da ich keine neue C-Datei eroeffnen wollte.
+	Hier werden Vorgaben gemacht, wenn der Nutzer keine Angaben zum
+	Layout macht.
+	<-	TRUE:	OK
+		sonst:	Fehler
+	--------------------------------------------------------------	*/
+GLOBAL BOOLEAN set_mainlayout ( void )
+{
+	init_docinfo_data("Times New Roman", &(laydat.propfontname), FALSE);
+	laydat.propfontsize = 11;
+	init_docinfo_data("Courier New", &(laydat.monofontname), FALSE);
+	laydat.monofontsize = 11;
+	init_docinfo_data("/UseNone", &(laydat.pagemode), FALSE);
+	init_docinfo_data("/SinglePage", &(laydat.viewerpreferences), FALSE);
+	init_docinfo_data("false", &(laydat.fitwindow), FALSE);
+	init_docinfo_data("1", &(laydat.openpage), FALSE);
+	init_docinfo_data("false", &(laydat.hidetoolbar), FALSE);
+	init_docinfo_data("false", &(laydat.hidemenubar), FALSE);
+
+	return TRUE;
+}
+
 
 /* New in r6pl15 [NHz] */
 /*	############################################################
@@ -68,7 +100,7 @@ LOCAL void free_titdat ( char **var );
 	set_doclayout()
 	Setzen von Informationen fuer das Layout (neue Version)
 	Die Daten stehen in token[]. Ich habe die Funktion hier herein
-	gepackt, da ich keine neue C-Datei er”ffnen wollte.
+	gepackt, da ich keine neue C-Datei eroeffnen wollte.
 	!doclayout [format] [foo]".
 	<-	TRUE:	OK
 		sonst:	Fehler
