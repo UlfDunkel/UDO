@@ -37,7 +37,11 @@ const char *id_cli_c= "@(#) cli.c       21.08.1998";
 #include	"udo.h"
 
 #ifdef __TOS__
-#include	<mintbind.h>
+	#ifdef USE_PCTOS
+		#include <tos.h>
+	#else
+		#include	<mintbind.h>
+	#endif
 #endif
 
 #include	"export.h"
