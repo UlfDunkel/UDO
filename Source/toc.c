@@ -9626,19 +9626,27 @@ GLOBAL void set_html_keywords ( void )
 
 	if (toc[p1_toc_counter]->keywords!=NULL)
 	{	/* r6pl5: Keywords bereits vorhanden, neue anhaengen */
+		/* VJD */
 		oldptr= toc[p1_toc_counter]->keywords;
-		strcpy(oldk, oldptr);
-		newsize= strlen(oldk) + strlen(k) + 3;
+		if (strlen(oldptr)<1024)
+		{
+			strcpy(oldk, oldptr);
+			newsize= strlen(oldk) + strlen(k) + 3;
 
-		ptr= (char *) realloc(oldptr, newsize);
-		if (!ptr)
-		{	error_malloc_failed();
-			bFatalErrorDetected= TRUE;
+			ptr= (char *) realloc(oldptr, newsize);
+			if (!ptr)
+			{	error_malloc_failed();
+				bFatalErrorDetected= TRUE;
+			}
+			else
+			{	
+				sprintf(ptr, "%s, %s", oldk, k);
+				toc[p1_toc_counter]->keywords= ptr;
+			}
 		}
 		else
-		{	
-			sprintf(ptr, "%s, %s", oldk, k);
-			toc[p1_toc_counter]->keywords= ptr;
+		{
+			printf("Pufferueberlauf festgestellt (html_keywords zu lang)\n");
 		}
 	}
 	else
