@@ -1,6 +1,6 @@
 # mwu.txt
 # Zeichensatz: ANSI
-# letzte Änderungen: 17.12.2003
+# letzte Änderungen: 29.12.2003
 
 # Spracheinstellung (Symbole über Kommandozeilenoptionen setzen!)
 !ifset lang_en
@@ -271,6 +271,9 @@ Here you will find information about using the advantages of ISDN telephones as 
 # überprüft 19.08.2002
 !item (!DE) (!xlink [Martin und Simone Elsässer] [http://home.t-online.de/home/martin.elsaesser/])
 # (Stand Juli~1998)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ergänzt 29.12.2003 (Teilnehmer der UDO-Mailingliste)
+!item (!DE) (!xlink [Bernd Fritzsche] [http://www.bernd-fritzsche.de/])
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # nicht mehr mit UDO erstellt
 # !item (!DE) (!xlink [Götz Hoffart][http://www.hoffart.de])
