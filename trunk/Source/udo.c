@@ -8088,7 +8088,8 @@ LOCAL BOOLEAN pass1 (char *datei)
 
 						/*if((strstr(zeile, "node")!=NULL) || (strstr(zeile, "heading")!=NULL))*/
 
-							strcpy(current_node_name_sys, zeile);
+						/* 6.3.10 [vj]: used um_strcpy to prevent buffer overrun known as the "bInsideAppendix-Bug" */
+							um_strcpy(current_node_name_sys, zeile, MAX_NODE_LEN+1, "pass1: current_node_name_sys");
 
 
 
