@@ -8,7 +8,7 @@ build: build-stamp
 build-stamp:
 	dh_testdir
 
-	$(MAKE) -C Source
+	$(MAKE) -C Source -f Makefile.debian
 
 	mkdir -p debian/tmp
 	mkdir -p debian/tmp/eng
@@ -22,7 +22,7 @@ clean:
 	dh_testroot
 	rm -f build-stamp 
 
-	-$(MAKE) -C Source clean
+	-$(MAKE) -C Source -f Makefile.debian clean
 
 	rm -rf debian/tmp
 
@@ -34,7 +34,7 @@ install: build
 	dh_testroot
 	dh_installdirs
 
-	$(MAKE) -C Source install DESTDIR=$(CURDIR)/debian/udo
+	$(MAKE) -C Source -f Makefile.debian install DESTDIR=$(CURDIR)/debian/udo
 
 # Here udo docs need to be build
 binary-indep: build install
