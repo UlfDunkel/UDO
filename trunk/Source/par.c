@@ -1076,7 +1076,7 @@ LOCAL BOOLEAN convert_link_etc ( char *s, const char *p0, char *p1, char *p2, co
 
 LOCAL void c_link ( char *s, BOOLEAN inside_b4_macro )
 {
-	int pnr;
+	int pnr=0;
 	char s_entry[1024], old_entry[1024], link[1024];
 	char *ptr;
 	BOOLEAN linkerror;
@@ -1228,7 +1228,7 @@ LOCAL void c_link ( char *s, BOOLEAN inside_b4_macro )
 
 LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 {
-	int pnr, url_len, i;
+	int pnr=0, url_len, i;
 	char s_entry[1024], url_rtf[512], rtf0[4];
 
 	char rtf1[]="00d0c9ea79f9bace118c8200aa004ba90b0200000017000000";
@@ -1365,7 +1365,7 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 
 LOCAL void c_xlink ( char *s, BOOLEAN inside_b4_macro )
 {
-	int pnr;
+	int pnr=0;
 	char s_entry[1024];
 	char wnode[1024], wfile[1024], *ptr;
 	BOOLEAN linkerror= FALSE;
@@ -1526,7 +1526,7 @@ LOCAL void c_xlink ( char *s, BOOLEAN inside_b4_macro )
 	--------------------------------------------------------------	*/
 LOCAL void c_ilink ( char *s, const BOOLEAN inside_b4_macro )
 {
-	int pnr;
+	int pnr=0;
 	char s_entry[1024], img_entry[1024], old_entry[1024], link[1024];
 	char *ptr;
 	BOOLEAN flag;
@@ -1685,7 +1685,7 @@ LOCAL void c_ilink ( char *s, const BOOLEAN inside_b4_macro )
 
 LOCAL void c_plink ( char *s, const BOOLEAN inside_b4_macro )
 {
-	int pnr;
+	int pnr=0;
 	char s_entry[1024];
 	BOOLEAN linkerror= FALSE;
 
@@ -1738,7 +1738,7 @@ LOCAL void c_plink ( char *s, const BOOLEAN inside_b4_macro )
 
 LOCAL void c_nolink ( char *s, const BOOLEAN inside_b4_macro )
 {
-	int pnr;
+	int pnr=0;
 	char s_entry[1024];
 	BOOLEAN linkerror= FALSE;
 
@@ -1789,7 +1789,7 @@ LOCAL void c_nolink ( char *s, const BOOLEAN inside_b4_macro )
 
 LOCAL void c_comment ( char *s, const BOOLEAN inside_b4_macro )
 {
-	int pnr;
+	int pnr=0;
 	char s_entry[1024];
 	BOOLEAN linkerror= FALSE;
 
@@ -2627,7 +2627,7 @@ GLOBAL void c_internal_index ( char *s, const BOOLEAN inside_b4_macro )
 
 LOCAL void c_internal_image ( char *s, const BOOLEAN inside_b4_macro )
 {
-	int pnr;
+	int pnr=0;
 	char s_entry[1024], sGifSize[80], sGifName[512];
 	BOOLEAN flag;
 	unsigned int uiW, uiH;
