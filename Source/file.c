@@ -36,6 +36,7 @@
 #include	"export.h"
 #include	"file.h"
 #include	"udo_type.h"
+#include        "udomem.h"
 
 #ifndef ID_FSPLIT_C
 #define	ID_FSPLIT_C

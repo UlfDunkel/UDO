@@ -613,6 +613,9 @@ GLOBAL char compile_time[9]  = "\0";
  * Use um_malloc instead of malloc and um_free instead of free.
  * Please don't use malloc or free in UDO.
  */
+int um_malloc_count;
+int um_free_count;
+
 GLOBAL void *um_malloc(size_t size)
 {
 	um_malloc_count++;

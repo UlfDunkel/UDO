@@ -44,6 +44,7 @@ const char *id_tp_c= "@(#) tp.c        11.02.1999";
 
 #include "export.h"
 #include "tp.h"
+#include "udomem.h"
 
 
 /*	############################################################
