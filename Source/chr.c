@@ -1389,7 +1389,7 @@ GLOBAL void node2postscript ( char *s, int text )
 			{
 				s[32] = EOS;
 				if(s[31] == '\\')
-					s[31] = '';
+					s[31] = EOS;
 			}
 			qreplace_all(s, "/", 1, "\\/", 2);
 			break;
