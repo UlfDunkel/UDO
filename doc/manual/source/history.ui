@@ -103,6 +103,91 @@ wird unterstützt.
 
 ################################################################################
 !iflang [german]
+!begin_node Änderungen von Version 6.4.0 nach 6.6.0
+!endif
+!iflang [english]
+!begin_node Changes from version 6.4.0 to 6.6.0
+!endif
+!html_name history_6-4-0_to_6-6-0.html
+
+!iflang [german]
+(!PUBLISHED [Version~6.6.0] [unveröffentlicht])
+!endif
+!iflang [english]
+(!PUBLISHED [Version~6.6.0] [unpublished])
+!endif
+
+(!MISS)
+
+!begin_description
+!iflang [german]
+# !item [Neue Formate:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !item [Neue Befehle:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !item [Neuheiten:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !item [Änderungen:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !item [Syntaxänderungen:]
+# 	!begin_itemize !short
+# 	!end_itemize
+ !item [Fehlerbehebungen:]
+ 	!begin_itemize !short
+   !item Bug #0000056 in Version 6.4.1 beseitigt (!nl)
+         Versehentlich wurde dem Parameter "Höhe" auch die Breite übergeben.
+   !item Bug #0000017 in Version 6.4.1 beseitigt (!nl)
+         Wenn beim ersten Übersetzungslauf nach RTF das UDO-Link Bild noch
+         nicht vorhanden ist, wird jetzt ein Hinweis ausgegeben statt des
+         Fehlers, der darauf hinweist, mit der Bitte, das Dokument ein
+         weiteres Mal zu übersetzen. (!nl)
+         Das UDO-Bild wird jetzt auch auf TOS-kompatiblen Computern gefunden.
+   !item Bug #0000055 in Version ? beseitigt (!nl)
+         Umlaute, die in eingebetteten Bildern (!/img !...) oder Bildlinks
+         (!/ilink !..) vorkommen, wurden nicht richtig umgesetzt.
+ 	!end_itemize
+!endif
+
+!iflang [english]
+# !item [New destination formats:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !item [New commands:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !item [News:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !item [Changes:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !item [Syntax changes:]
+# 	!begin_itemize !short
+# 	!end_itemize
+ !item [Bugfixes:]
+ 	!begin_itemize !short
+   !item Fixed bug #0000056 in version 6.4.1 (!nl)
+         By an inadvertance the parameter "height" was covered with the width
+   !item Fixed bug #0000017 in version 6.4.1 (!nl)
+         When a documented is translated to RTF for the first time and the
+         UDO link image doesn't exist, there will be a note in the logfile,
+         that the user might translate the document again to complete it. (!nl)
+         The image will be found now on TOS compatible computers too.         
+   !item Fixed bug #0000055 in version ? (!nl)
+         Umlauts, which are used in embedded images (!/img !..) or image
+         links (!/ilink !..), were not converted in the right way.
+ 	!end_itemize
+!endif
+!end_description
+
+!end_node
+
+################################################################################
+!iflang [german]
 !begin_node Änderungen von Version 6.2.1 nach 6.4.0
 !endif
 !iflang [english]
@@ -385,20 +470,20 @@ wird unterstützt.
          umgesetzt.
    !item (!T)!/node1_size foo(!t) (!nl)
           Mit diesem Kommando (Vorspann) kann die Größe der Nodes und Headings
-          bei der Postscript-Ausgabe festgelegt werden (foo: Zeichensatzgr”e
+          bei der Postscript-Ausgabe festgelegt werden (foo: Zeichensatzgröße
           in pt).
    !item (!T)!/node2_size foo(!t) (!nl)
          Mit diesem Kommando (Vorspann) kann die Größe der Subnodes und
          Subheadings bei der Postscript-Ausgabe festgelegt werden (foo:
-         Zeichensatzgr”e in pt).
+         Zeichensatzgröße in pt).
    !item (!T)!/node3_size foo(!t) (!nl)
           Mit diesem Kommando (Vorspann) kann die Größe der Subsubnodes und
           Subsubheadings bei der Postscript-Ausgabe festgelegt werden
-          (foo: Zeichensatzgr”e in pt).
+          (foo: Zeichensatzgröße in pt).
    !item (!T)!/node4_size foo(!t) (!nl)
          Mit diesem Kommando (Vorspann) kann die Größe der Subsubsubnodes
          und Subsubsubheadings bei der Postscript-Ausgabe festgelegt
-         werden (foo: Zeichensatzgr”e in pt).
+         werden (foo: Zeichensatzgröße in pt).
  	!end_itemize
  !item [Neuheiten:]
  	!begin_itemize !short
@@ -420,13 +505,13 @@ wird unterstützt.
    !item Für RTF wird jetzt eine einzelne Seite erzeugt, die ein
          Ab!-bildungs!-ver!-zeichnis enthält, wenn (!T)!/listoffigures(!t)
          gesetzt ist. Dieses muß nur aktualisiert werden.
-   !item Es werden Vorgaben fr das Layout fr die Postscript-Ausgabe
-         gemacht: Art und Gr”e des proportionalen und „quidistanten
-         Zeichensatzes sowie die ™ffnungsparameter fr PDF-Dateien.
+   !item Es werden Vorgaben für das Layout für die Postscript-Ausgabe
+         gemacht: Art und Größe des proportionalen und äquidistanten
+         Zeichensatzes sowie die Öffnungsparameter für PDF-Dateien.
  	!end_itemize
  !item [Änderungen:]
  	!begin_itemize !short
- 	 !item (!T)!/html_backpage ../index.html ''Zurck zu UDO-Open-Source''(!t) (!nl)
+ 	 !item (!T)!/html_backpage ../index.html ''Zurück zu UDO-Open-Source''(!t) (!nl)
  	       Jetzt kann zusätzlich ein Text übergeben werden, der statt
          des Links in das alt-Attribut eingetragen wird. Der Text muß
          in einfachen Anführungszeichen stehen (''foo'')
