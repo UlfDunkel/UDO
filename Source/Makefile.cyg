@@ -1,0 +1,17 @@
+###########################################################
+# @(#) Makefile fuer GCC/Win32
+# @(#) Thorsten Otto, 30.10.2001
+###########################################################
+CC = gcc
+O=.o
+X=
+
+CFLAGS = -O2 -Wall -Wstrict-prototypes -Wmissing-prototypes -D__WIN32__ -mno-cygwin
+
+LDFLAGS = 
+
+include makefile.in
+
+
+udo$(X):	$(OSRC) cli$(O)
+		$(CC) $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) -o $@
