@@ -264,6 +264,49 @@ GLOBAL int getLabelIndexFromTocIndex ( int *li, const int ti )
 }
 
 
+LOCAL void output_helpid(int tocindex)
+{
+	char	s[256];
+	
+	s[0] = '\0';
+	if ( toc[tocindex]->helpid!=NULL )
+	{
+		strcpy(s, toc[tocindex]->helpid);
+	} else if (use_auto_helpids)
+	{
+		node2WinAutoID(s, toc[tocindex]->name);
+	}
+	if (s[0] != '\0')
+	{
+		switch(desttype)
+		{
+			case TOSTG:
+			case TOAMG:
+				voutlnf("@alias \"%s\"", s);
+				break;	
+			case TOWIN:
+			case TOWH4:
+			case TOAQV:
+				voutlnf("#{\\footnote # %s}", s);
+				break;
+			case TOHTM:
+			case TOMHH:
+				label2html(s);	/*r6pl2*/
+				voutlnf("<a name=\"%s\"></a>", s);
+				break;	
+			case TOLDS:
+				voutlnf("<label id=\"%s\">", s);
+				break;	
+			case TOTEX:	/* r5pl9 */
+			case TOPDL:
+				voutlnf("\\label{%s}", s);
+				break;
+			case TOLYX:	/* <???> */
+				break;
+		}
+	}
+}
+
 /*	############################################################
 	#
 	# Aliasse eines Kapitels ausgeben. Diese muessen nach der
@@ -357,38 +400,7 @@ LOCAL void output_aliasses ( void )
 	}
 
 	/* r6pl2: Jump-ID ausgeben */
-
-	if ( toc[p2_toc_counter]->helpid!=NULL )
-	{
-		strcpy(s, toc[p2_toc_counter]->helpid);
-	
-		switch(desttype)
-		{
-			case TOSTG:
-			case TOAMG:
-				voutlnf("@alias \"%s\"", s);
-				break;	
-			case TOWIN:
-			case TOWH4:
-			case TOAQV:
-				voutlnf("#{\\footnote # %s}", s);
-				break;
-			case TOHTM:
-			case TOMHH:
-				label2html(s);	/*r6pl2*/
-				voutlnf("<a name=\"%s\"></a>", s);
-				break;	
-			case TOLDS:
-				voutlnf("<label id=\"%s\">", s);
-				break;	
-			case TOTEX:	/* r5pl9 */
-			case TOPDL:
-				voutlnf("\\label{%s}", s);
-				break;
-			case TOLYX:	/* <???> */
-				break;
-		}
-	}
+	output_helpid(p2_toc_counter);
 
 }	/* output_aliasses */
 
@@ -7487,6 +7499,7 @@ GLOBAL void c_tableofcontents ( void )
 		case TOTEX:
 		case TOPDL:
 			outln("\\newpage");
+			output_helpid(0);
 			outln("\\tableofcontents");
 			outln("\\newpage");
 			break;
@@ -7504,6 +7517,7 @@ GLOBAL void c_tableofcontents ( void )
 				node2texinfo(name);
 				sprintf(n, "@node Top, %s, (dir), (dir)", name);
 			}
+			output_helpid(0);
 			outln(n);
 			
 			if (called_maketitle)
@@ -7561,6 +7575,7 @@ GLOBAL void c_tableofcontents ( void )
 			if (called_maketitle)
 			{	voutlnf("@toc \"%s\"", lang.title);
 			}
+			output_helpid(0);
 			stg_headline("", lang.contents);
 
 			if (toc_available)
@@ -7577,6 +7592,7 @@ GLOBAL void c_tableofcontents ( void )
 		case TOTVH:
 			outln("");
 			voutlnf(".topic %s", lang.contents);
+			output_helpid(0);
 			strcpy(n, lang.contents);
 			out("  ");	outln(n);
 			out("  ");	output_ascii_line("=", strlen(n));
@@ -7627,9 +7643,10 @@ GLOBAL void c_tableofcontents ( void )
 			outln("{");
 			node2NrWinhelp(n, 0);
 			voutlnf("#{\\footnote # %s}", n);
+			output_helpid(0);
 			voutlnf("${\\footnote $ %s}", lang.contents);
 			voutlnf("K{\\footnote K %s}", lang.contents);
-
+			
 			if (!no_buttons)	/* r6pl8 */
 			{	outln(win_browse);
 			
@@ -7674,6 +7691,7 @@ GLOBAL void c_tableofcontents ( void )
 			{	voutlnf("screen(capsensitive(\"%s\"), capsensitive(\"%s\"))",
 							lang.unknown, lang.contents);
 			}
+			output_helpid(0);
 			pch_headline(lang.contents);
 			outln("");
 			if (uses_maketitle)
@@ -7697,6 +7715,7 @@ GLOBAL void c_tableofcontents ( void )
 
 		case TOHTM:
 		case TOMHH:
+			output_helpid(0);
 			if (toc_available)
 			{	voutlnf("<h1><a name=\"%s\">%s</a></h1>", HTML_LABEL_CONTENTS, lang.contents);
 				toc_output(depth);
@@ -7711,6 +7730,7 @@ GLOBAL void c_tableofcontents ( void )
 			break;	/* r5pl4 */
 		
 		case TOLDS:
+			output_helpid(0);
 			outln("<toc>");
 			break;
 	}
@@ -9167,12 +9187,19 @@ LOCAL BOOLEAN add_toc_to_toc ( void )
 	tocptr->prev_index=		0;
 	tocptr->next_index=		1;
 
+	tocptr->mapping = -1;
+	
 	toc[0]= tocptr;
 
 	return TRUE;
 
 }	/* add_toc_to_toc */
 
+
+GLOBAL void toc_init_lang(void)
+{
+	strcpy(toc[0]->name, lang.contents);
+}
 
 
 LOCAL TOCITEM *init_new_toc_entry ( const int toctype, const BOOLEAN invisible )
