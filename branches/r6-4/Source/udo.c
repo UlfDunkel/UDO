@@ -5716,6 +5716,8 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 				case TOKPS:
 					/* Deleted in r6pl16 [NHz] */
 					/* No special line end within a paragraph  for PS anymore */
+					/* Changed in V6.4.1 [NHz] */
+					strcat(z, " ");
 					break;
 			}
 			
