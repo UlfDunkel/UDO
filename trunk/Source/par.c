@@ -1554,10 +1554,11 @@ LOCAL void c_ilink ( char *s, const BOOLEAN inside_b4_macro )
 		
 		if (inside_b4_macro)
 		{
-			if (desttype!=TOSTG)
+			/* Fixed bug #0000055 in V6.5.2 [NHz] */
+			/*if (desttype!=TOSTG)
 			{	auto_quote_chars(Param[2], TRUE);	
 				auto_quote_chars(Param[3], TRUE);	
-			}
+			}*/
 		
 			adjust_params_inside(Param[1]);
 			adjust_params_inside(Param[2]);
@@ -2645,9 +2646,10 @@ LOCAL void c_internal_image ( char *s, const BOOLEAN inside_b4_macro )
 	{
 		if (inside_b4_macro)
 		{
-			if (desttype!=TOSTG)
+			/* Fixed bug #0000055 in V6.5.2 [NHz] */
+			/*if (desttype!=TOSTG)
 			{	auto_quote_chars(Param[2], TRUE);	
-			}
+			}*/
 		
 			adjust_params_inside(Param[1]);
 			adjust_params_inside(Param[2]);
