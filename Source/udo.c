@@ -9357,7 +9357,7 @@ GLOBAL BOOLEAN udo (char *datei)
 							case TOWH4:
 								if (desttype==TOWH4)
 								{	save_winhelp4_project();
-									save_winhelp4_cnt();
+									bCntSaved = save_winhelp4_cnt();
 								}
 								else
 								{	save_winhelp_project();
