@@ -8163,6 +8163,11 @@ GLOBAL void c_listoftables ( void )
 			outln("\\begin_inset LatexDel \\listoftables");
 			outln("\\end_inset");
 			break;
+		/* New in r6.3pl3 [NHz] */
+		case TORTF:
+			voutlnf("\\page\n%s\\fs36 %s\\par\\par", rtf_node1, lang.listtable);
+			voutlnf("{\\field\\fldedit{\\*\\fldinst {TOC \\\\c \"Tabelle\" }}{\\fldrslt %s not actual}}", lang.listtable);
+			break;
 	}
 }	/* c_listoftables */
 
