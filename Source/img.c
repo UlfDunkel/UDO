@@ -779,13 +779,13 @@ GLOBAL void c_gif_output ( const char *name, const char *caption, const char *su
 		}
 	}
 
-	if ( caption[0]==EOS ) /* r6pl17: deleted <br> at the end of the string next line [voja] */
-	{	sprintf(n, "%s<img src=\"%s\" border=\"%d\"%s%s></p>", align, datei, border, sWidth, sHeight);	/* r6pl3 */
+	if ( caption[0]==EOS ) /* r6pl17: deleted <br /> at the end of the string next line [voja] */
+	{	sprintf(n, "%s<img src=\"%s\" border=\"%d\"%s%s /></p>", align, datei, border, sWidth, sHeight);	/* r6pl3 */
 		outln(n);
 	}
 	else
-	{	image_counter++; /* r6pl17: deleted <br> at the end of the string next line [voja] */
-		sprintf(n, "%s<img src=\"%s\" alt=\"%s\" border=\"%d\"%s%s></p>",
+	{	image_counter++; /* r6pl17: deleted <br /> at the end of the string next line [voja] */
+		sprintf(n, "%s<img src=\"%s\" alt=\"%s\" border=\"%d\"%s%s /></p>",
 					 align, datei, caption, border, sWidth, sHeight);
 		outln(n);
 	}

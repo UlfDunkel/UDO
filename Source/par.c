@@ -1614,7 +1614,7 @@ LOCAL void c_ilink ( char *s, const BOOLEAN inside_b4_macro )
 					{	strcpy(img_entry, Param[2]);
 					}
 					else
-					{	sprintf(img_entry, "<img src=\"%s\" alt=\"%s\" border=\"0\">",
+					{	sprintf(img_entry, "<img src=\"%s\" alt=\"%s\" border=\"0\" />",
 							Param[1], Param[2]);
 					}
 					flag= replace_once(ptr, old_entry, img_entry);
@@ -2707,7 +2707,7 @@ LOCAL void c_internal_image ( char *s, const BOOLEAN inside_b4_macro )
 				{	strcpy(s_entry, Param[2]);
 				}
 				else
-				{	sprintf(s_entry, "<img src=\"%s\" alt=\"%s\"%s>",
+				{	sprintf(s_entry, "<img src=\"%s\" alt=\"%s\"%s />",
 						Param[1], Param[2], sGifSize);
 				}
 				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
