@@ -325,6 +325,16 @@
 #define	TEMPO_S_LEN		4
 #define	TEMPO_S2_LEN	4
 
+/* New in V6.4.1 [NHz] */
+#define KPSPO_S		"\033\007\003\033"		/* Parenthis for Postscript */
+#define KPSPO_S_LEN		4
+#define KPSPC_S		"\033\007\004\033"
+#define KPSPC_S_LEN		4
+#define KPSEO_S		"\033\007\005\033"
+#define KPSEO_S_LEN		4
+#define KPSEC_S		"\033\007\006\033"
+#define KPSEC_S_LEN		4
+
 #define	NBSP_C			'\027'		/* internes festes Leerzeichen	*/
 #define	NBSP_S			"\027"
 #define	NBSP_S_LEN		1
