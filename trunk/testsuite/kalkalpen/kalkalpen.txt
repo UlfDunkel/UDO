@@ -1,7 +1,7 @@
 # kalkalpen.txt
 # Zeichensatz: ANSI
 # angelegt am 22.12.2002
-# letzte Änderungen: 22.11.2003
+# letzte Änderungen: 24.03.2004
 
 # Umrechnung: 1' (Fuß) = 0,318 m
 
@@ -68,8 +68,9 @@
 !define Bild <p><a href="(!1).png"><img src="(!1)-k.png" alt="(!2)" border=0></a></p>
 !endif
 !else
-# dieser Zweig ist ungetestet!
+!ifnset NoPics
 !define Bild !image (!1)
+!endif
 !endif
 
 # Hinweistext für Abbildungen (korrespondiert mit obiger Definition für Bilder-Einbindung)
