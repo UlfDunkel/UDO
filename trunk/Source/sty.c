@@ -99,6 +99,15 @@ GLOBAL void del_html_styles ( char *s )
 	qdelete_all(s, "</u>", 4);
 	qdelete_all(s, "<tt>", 4);
 	qdelete_all(s, "</tt>", 5);
+	/* New in V6.5.9 [NHz] */
+	qdelete_all(s, "<strong>", 8);
+	qdelete_all(s, "</strong>", 9);
+	qdelete_all(s, "<em>", 4);
+	qdelete_all(s, "</em>", 5);
+	qdelete_all(s, "<kbd>", 5);
+	qdelete_all(s, "</kbd>", 6);
+	qdelete_all(s, "<span style=\"text-decoration: underline;\">", 42);
+	qdelete_all(s, "</span>", 7);
 }
 
 GLOBAL void del_internal_styles ( char *s )
@@ -355,16 +364,33 @@ GLOBAL void c_internal_styles ( char *s )
 			break;
 		case TOHTM:
 		case TOMHH:
-			qreplace_all(ptr, BOLD_ON, STYLELEN,		"<b>", 3);
-			qreplace_all(ptr, BOLD_OFF, STYLELEN,		"</b>", 4);
-			qreplace_all(ptr, ITALIC_ON, STYLELEN,	"<i>", 3);
-			qreplace_all(ptr, ITALIC_OFF, STYLELEN,	"</i>", 4);
-			qreplace_all(ptr, UNDER_ON, STYLELEN,		"<u>", 3);
-			qreplace_all(ptr, UNDER_OFF, STYLELEN,	"</u>", 4);
-			qreplace_all(ptr, VERB_ON, STYLELEN,		"<tt>", 4);
-			qreplace_all(ptr, VERB_OFF, STYLELEN,		"</tt>", 5);
-			qreplace_all(ptr, TWRITER_ON, STYLELEN,	"<tt>", 4);
-			qreplace_all(ptr, TWRITER_OFF, STYLELEN,	"</tt>", 5);
+			/* Changed in V6.5.9 [NHz] */
+			if(html_doctype >= XHTML_STRICT)
+			{
+				qreplace_all(ptr, BOLD_ON, STYLELEN,		"<strong>", 8);
+				qreplace_all(ptr, BOLD_OFF, STYLELEN,		"</strong>", 9);
+				qreplace_all(ptr, ITALIC_ON, STYLELEN,	"<em>", 4);
+				qreplace_all(ptr, ITALIC_OFF, STYLELEN,	"</em>", 5);
+				qreplace_all(ptr, UNDER_ON, STYLELEN,		"<span style=\"text-decoration: underline;\">", 42);
+				qreplace_all(ptr, UNDER_OFF, STYLELEN,	"</span>", 7);
+				qreplace_all(ptr, VERB_ON, STYLELEN,		"<kbd>", 5);
+				qreplace_all(ptr, VERB_OFF, STYLELEN,		"</kbd>", 6);
+				qreplace_all(ptr, TWRITER_ON, STYLELEN,	"<kbd>", 5);
+				qreplace_all(ptr, TWRITER_OFF, STYLELEN,	"</kbd>", 6);
+			}
+			else
+			{
+				qreplace_all(ptr, BOLD_ON, STYLELEN,		"<b>", 3);
+				qreplace_all(ptr, BOLD_OFF, STYLELEN,		"</b>", 4);
+				qreplace_all(ptr, ITALIC_ON, STYLELEN,	"<i>", 3);
+				qreplace_all(ptr, ITALIC_OFF, STYLELEN,	"</i>", 4);
+				qreplace_all(ptr, UNDER_ON, STYLELEN,		"<u>", 3);
+				qreplace_all(ptr, UNDER_OFF, STYLELEN,	"</u>", 4);
+				qreplace_all(ptr, VERB_ON, STYLELEN,		"<tt>", 4);
+				qreplace_all(ptr, VERB_OFF, STYLELEN,		"</tt>", 5);
+				qreplace_all(ptr, TWRITER_ON, STYLELEN,	"<tt>", 4);
+				qreplace_all(ptr, TWRITER_OFF, STYLELEN,	"</tt>", 5);
+			}
 			footnote2ascii(s);
 			del_internal_styles(s);
 			break;
