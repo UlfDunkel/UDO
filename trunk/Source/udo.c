@@ -611,19 +611,26 @@ GLOBAL char compile_time[9]  = "\0";
  * New UDO Memory-Layer (new in 6.3.3)
  * Written by vj
  *
- * Use um_malloc instead of malloc and um_free instead of free.
- * Please don't use malloc or free in UDO.
+ * Use um_malloc instead of malloc, um_realloc instead of realloc and um_free instead of free.
+ * Please don't use malloc, realloc or free in UDO.
  */
 int um_malloc_count;
 int um_free_count;
+int memory_error;
+char endstring[]=UM_END_STRING;
+size_t endstring_len;
+MEMLIST *anker;
 
 /*
  * init_um() sets up the Memory-Layer
  */
 GLOBAL void init_um()
 {
-        um_malloc_count=0;
-        um_free_count=0;
+	um_malloc_count=0;
+	um_free_count=0;
+	anker=NULL;
+	memory_error=0;
+	endstring_len=strlen(endstring)+1;
 }
 /*
  * exit_um() frees all memory alocated by um_mallocs and makes consistency
@@ -631,60 +638,148 @@ GLOBAL void init_um()
  */
 GLOBAL void exit_um()
 {
-        /* Added Debug information of Memory Management */
-        printf("Memory statistic: %d malloc, %d free\n", um_malloc_count, um_free_count);
+#ifdef UM_DEBUG_SHOW_STATS
+	/* Added Debug information of Memory Management */
+	printf("Memory statistic: %d malloc, %d free\n", um_malloc_count, um_free_count);
+#endif
+	/* Falls es jetzt noch belegten Speicher gibt, räumen wir den auf */
+	if (anker != NULL)
+	{
+#ifdef UM_DEBUG_SHOW_CALLS
+		printf("exit_um: Cleaning up\n");
+#endif
+		while ((memory_error==0)&&(anker != NULL))
+		{
+			um_free(anker->block);
+		}
+	}
 }
 
 GLOBAL void *um_malloc(size_t size)
 {
-        void *buf;
-		char *footer;
-
-        um_malloc_count++; /* Count um_malloc call */
-        size=size+UM_CHECK_HEAD_START_LEN+UM_CHECK_FOOTER_STR_LEN; /* We need also some more buffer for the checks */
-        buf=malloc(size); /* allocate memory from os */
-        strcpy(buf, UM_CHECK_HEAD_START); /* Copy string as header */
-		/*footer=((char *)buf)[size-UM_CHECK_HEAD_START_LEN];
-        strcpy(footer, UM_CHECK_FOOTER_STR);*/ /* Copy footer */
-        return (char *)buf+UM_CHECK_HEAD_START_LEN; /* Return memory after our check */
+	void *buffer;
+	MEMLIST *mptr;
+	buffer=NULL;
+	
+	size+=endstring_len;
+	
+	buffer=malloc(size); /* Allocate Memory */
+	if (buffer != NULL)
+	{
+		mptr=malloc(sizeof(MEMLIST)); /* Speicher für Verwaltungsinformationen anfordern */
+		if (mptr != NULL)
+		{
+			um_malloc_count++;
+			mptr->check=UM_LONG_CHECK; /* Checksumme initialisieren */
+			mptr->block=buffer; /* Dieser Puffer gehört zu unserer Verwaltungseinheit */
+			mptr->endmark=(char *)buffer+size-endstring_len;
+			strcpy(mptr->endmark, endstring);
+			/* Wir hängen uns vorne an die Liste an */
+			mptr->next=anker;
+			anker=mptr;
+#ifdef UM_DEBUG_SHOW_CALLS
+			printf("1 MEMLIST node created: %d\n", mptr->check, UM_LONG_CHECK);
+#endif
+		}
+		else
+		{
+			/* Konnte keinen Speicher für Verwaltungsinformationen anlegen */
+			free(buffer); /* buffer wieder freigeben */
+			buffer=NULL; /* Wir melden keinen freien Speicher zurück */
+		}
+	}
+	return buffer;
 }
 
 GLOBAL void *um_realloc(void *block, size_t size)
 {
-        void *buf;
-		/*char *footer;*/
+	int lauf=1;
+	void *buffer;
+	MEMLIST *tanker;
+	buffer=NULL;
 
-        size=size+UM_CHECK_HEAD_START_LEN+UM_CHECK_FOOTER_STR_LEN; /* We need also some more buffer for the checks */
-        buf=(char *)block-UM_CHECK_HEAD_START_LEN;
-        buf=realloc(buf, size);
-        strcpy(buf, UM_CHECK_HEAD_START); /* Copy string as header */
-		/*footer=(char *)buf;
-        strcpy(&footer[size+UM_CHECK_HEAD_START_LEN], UM_CHECK_FOOTER_STR);*/ /* Copy footer */
-        return (char *)buf+UM_CHECK_HEAD_START_LEN; /* Return memory after our check */
+	tanker=anker;
+	
+	size+=endstring_len;
+
+	if ((tanker!=NULL)&&(memory_error==0))
+	{
+		do
+		{
+			if (tanker->check != UM_LONG_CHECK)
+			{
+				/* Speicherfehler: unsere Checksumme wurde überschrieben! */
+				lauf=0; /* Abbrechen, wenn die Zeiger überschrieben sind, könnte es krachen */
+				memory_error=42; /* Speicherfehler Flag setzen */
+				printf("Fatal error: um_realloc failed: checksum broken: %d != %d\n", tanker->check, UM_LONG_CHECK);
+			}
+			else
+			{
+				buffer=realloc(tanker->block, size);
+				if (buffer != NULL)
+				{
+					tanker->block=buffer;
+					tanker->endmark=(char *)buffer+size-endstring_len;
+					strcpy(tanker->endmark, endstring);
+				}
+				lauf=0;
+			}
+		} while ((tanker != NULL)&&(lauf==1));
+
+	}
+	return buffer;	
 }
 
 GLOBAL void um_free(void *memblock)
 {
-        void *buf;
+	int lauf=1;
+	MEMLIST *tanker=anker;
+	MEMLIST *last=NULL;
 
-        um_free_count++;
-        buf=(char *)memblock-UM_CHECK_HEAD_START_LEN;
-        if (strcmp(buf, UM_CHECK_HEAD_START)==0)
-        {
-				free(buf);
-                /*if (strcmp(buf, UM_CHECK_FOOTER_STR)==0)
-                {
-                        free(buf);
-                }
-                else
-                {
-                        printf("Warning: um_free: Buffer overrun detected\n");
-                }*/
-        }
-        else
-        {
-                printf("Warning: um_free: Buffer start corupted\n");
-        }
+	if ((tanker!=NULL)&&(memory_error==0))
+	{
+		do
+		{
+			if (tanker->check != UM_LONG_CHECK)
+			{
+				/* Speicherfehler: unsere Checksumme wurde überschrieben! */
+				lauf=0; /* Abbrechen, wenn die Zeiger überschrieben sind, könnte es krachen */
+				memory_error=42; /* Speicherfehler Flag setzen */
+				printf("Fatal error: um_free failed: checksum broken: %d != %d\n", tanker->check, UM_LONG_CHECK);
+			}
+			else
+			{
+				/* Soll der aktuelle Eintrag freigegeben werden? */
+				if (memblock==tanker->block)
+				{
+					if (strcmp(tanker->endmark, endstring)!=0)
+					{
+						printf("Warning: um_free: memory block end check broken\n");
+					}
+					um_free_count++;
+					free(tanker->block); /* Speicher freigeben */
+					/* Verwaltungselement aus der Kette aushängen */
+					if (last==NULL)
+					{
+						/* Wurzel neu setzen, da wir das erste Element der Liste freigeben */
+						anker=tanker->next;
+					}
+					else
+					{
+						/* Beim Vorgänger setzen wir nun den Next-Pointer auf unseren Nachfolger */
+						last->next=tanker->next;
+					}
+					free(tanker); /* Verwaltungsobjekt freigeben */
+					lauf=0;
+				}
+				else
+				{
+					last=tanker;
+					tanker=tanker->next;
+				}
+			}
+		} while ((tanker != NULL)&&(lauf==1));
+	}
 }
 
 /*	######################################################################
