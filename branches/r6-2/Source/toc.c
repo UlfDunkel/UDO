@@ -1726,7 +1726,16 @@ LOCAL void output_win_header ( const char *name, const BOOLEAN invisible )
 	########################################################################	*/
 LOCAL char *get_html_filename ( const int tocindex, char *s )
 {	
-	char tmp_n1[17], tmp_n2[17], tmp_n3[17], tmp_n4[17];
+	/*
+		The buffer in tmp_n? is with 17 chars a bit small.
+		I inserted the following constant to easier use.
+		The buffer increase was neccesary because it of
+		bug #0000026 and perhaps #0000004.
+		Perhaps its better to check if this buffer is big
+		enough! Will try this later [vj]
+	*/
+	#define	MAX_TMP_NX	50
+	char tmp_n1[MAX_TMP_NX], tmp_n2[MAX_TMP_NX], tmp_n3[MAX_TMP_NX], tmp_n4[MAX_TMP_NX];
 	int ti;
 	int hexwidth;	/* r6pl2 */
 
