@@ -1304,7 +1304,7 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 					}
 					replace_udo_quotes(Param[2]);
 					replace_udo_quotes(Param[1]);
-					sprintf(s_entry, "{\ul (%s)}{\v !ExecFile((%s))}", Param[1], Param[2]);
+					sprintf(s_entry, "{\\ul (%s)}{\\v !ExecFile((%s))}", Param[1], Param[2]);
    				linkerror= !insert_placeholder(s, Param[0], s_entry, Param[1]);
 					break;
 
