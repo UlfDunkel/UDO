@@ -3697,7 +3697,7 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 	fprintf(file, "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n");
 	fprintf(file, "<HTML>\n");
 	fprintf(file, "<HEAD>\n");
-	fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Release %s.%s Patchlevel %s for %s\">\n",
+	fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Version %s.%s.%s for %s\">\n",
 						UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
 	fprintf(file, "<!-- Sitemap 1.0 -->\n");
 	fprintf(file, "</HEAD><BODY>\n");
@@ -3858,7 +3858,7 @@ GLOBAL BOOLEAN save_htmlhelp_index ( const char* filename )
 	fprintf(file, "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n");
 	fprintf(file, "<HTML>\n");
 	fprintf(file, "<HEAD>\n");
-	fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Release %s.%s Patchlevel %s for %s\">\n",
+	fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Version %s.%s.%s for %s\">\n",
 						UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
 	if (titdat.author != NULL)
 		fprintf(file, "<meta name=\"Author\" content=\"%s\">\n", titdat.author);

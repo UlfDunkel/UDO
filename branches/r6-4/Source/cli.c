@@ -444,8 +444,8 @@ GLOBAL BOOLEAN break_action ( void )
 	----------------------------------------------------------------------	*/
 LOCAL void show_version ( void )
 {
-	fprintf(stdout, "\n%s\n", strPrgname);
-	fprintf(stdout, "Release %s.%s Patchlevel %s for %s, %s %s\n",
+	/* fprintf(stdout, "\n%s\n", strPrgname); v6.4.1[vj]: commented out (wished by Ulrich Kretschmer) */
+	fprintf(stdout, "UDO Version %s.%s.%s for %s, %s %s\n",
 				UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS, compile_date, compile_time);
 	fprintf(stdout, "%s\n", COPYRIGHT);
 	sprintf(sInfMsg, "UDO is Open Source (see %s for further information).\n", UDO_URL);
@@ -751,7 +751,7 @@ int main ( int argc, const char *argv[] )
 
 	/* globale Variablen initialisieren */
 	init_vars();
-	sprintf(nam, "UDO Release %s", UDO_REL);
+	sprintf(nam, "UDO Version %s", UDO_REL);
 #ifdef __WIN32__
 	init_module_config("udo32.ini", nam, UDO_OS);
 #else
