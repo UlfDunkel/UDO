@@ -1,5 +1,5 @@
 # doc/manual/source/install.ui
-# letzte Änderungen: 10.01.2004 / last changes: Jan 10, 2004
+# letzte Änderungen: 13.01.2004 / last changes: Jan 13, 2004
 
 
 ################################################################################
@@ -34,11 +34,14 @@ Falls Sie das TTP bevorzugen und mit einem Kommandozeileninterpreter
 verschieben Sie `udo.ttp' in eines der in (!T)$PATH(!t) angegebenen
 Verzeichnisse (z.B. ''(!V)\usr\bin(!v)'').
 
+!begin_ignore
+# auskommentiert 13.01.2004 - Ulrich Kretschmer
 Falls Sie den ST-Guide installiert haben, so sollten Sie `(!UDOR)ger.hyp'
 und ''(!V)(!UDOR)ger.ref(!v)'' in Ihr Verzeichnis kopieren oder verschieben, in dem
 Sie auch alle anderen Hypertexte aufbewahren. Nur dann können auch
 andere Hypertexte oder Programme (z.B. ein Editor) auf den
 UDO-Hypertext zugreifen.
+!end_ignore
 
 !endif
 # ------------------------------------------------------------------------------
@@ -55,11 +58,15 @@ If you prefer the TTP version and you are using a command line shell (e.g.
 Mupfel by Stefan Eissing) copy or move ''(!V)udo.ttp(!v)'' to one of the
 directories that is part of (!T)$PATH(!t) (e.g. ''(!V)\usr\bin(!v)'').
 
+!begin_ignore
+# auskommentiert 13.01.2004 - Ulrich Kretschmer
 If you have installed the ST-Guide you should copy or move UDO's hypertext
 ((!V)(!UDOR)eng.hyp(!v) and (!V)(!UDOR)eng.ref(!v)) to the directory that contains
 all your other hypertexts.
+!end_ignore
 !endif
 
+(!DocumentationWorkInProgress)
 !end_node
 # Ende: Installation TOS/GEM (Atari)
 
@@ -76,7 +83,7 @@ all your other hypertexts.
 !iflang [german]
 !begin_itemize !short
 !item Laden Sie sich das entsprechende ZIP-File von der UDO-Homepage herunter.
-!item Entpacken Sie das ZIP-File in ein beliebiges Verzeichnis).
+!item Entpacken Sie das ZIP-File in ein beliebiges Verzeichnis.
 !item Nehmen Sie das Verzeichnis, in dem sich die ausführbare Datei (!T)udo.exe(!t) befindet, in Ihre PATH-Liste (DOS: siehe (!T)autoexec.bat(!t); Windows: siehe....?) auf, oder kopieren Sie diese Datei in ein Verzeichnis, das sich bereits in der PATH-Liste befindet.
 !end_itemize
 Da die DOS-Version einen DOS-Extender verwendet wird, benötigen Sie mindestens eine 80386-CPU.
@@ -95,6 +102,7 @@ Running the DOS version, your computer must have a 80386 CPU (or higher).
 Older UDO versions needed the installation of RSJ and EMX. This software is no longer necessary.
 !endif
 
+(!DocumentationWorkInProgress)
 !end_node
 # Ende Installation DOS + Win32
 
@@ -125,6 +133,7 @@ Die für frühere UDO-Versionen nötige Installation von EMX ist nicht mehr erforde
 Older UDO versions needed the installation of EMX. This software is no longer necessary.
 !endif
 
+(!DocumentationWorkInProgress)
 !end_node
 # Ende: Installation OS/2
 
@@ -165,6 +174,7 @@ a PowerPC Macintosh. If you want to save some disk space you may be smaller
 the program with a certain software.
 !endif
 
+(!DocumentationWorkInProgress)
 !end_node
 # Ende: Installation Macintosh (MacOS 9)
 
@@ -178,13 +188,23 @@ the program with a certain software.
 !endif
 !html_name installation_mac_x.html
 
-(!MISS)
 !iflang [german]
+!begin_itemize !short
+!item Laden Sie sich das entsprechende ZIP-File von der UDO-Homepage herunter.
+!item Packen Sie das ZIP-File aus und kopieren Sie die ausführbare Datei ''(!T)udo(!t)'' nach (!T)/usr/bin(!t).
+!end_itemize
 !endif
+Anmerkung: Eine manpage ist derzeit nicht Teil der MacOS X Distribution.
 # ------------------------------------------------------------------------------
 !iflang [english]
+!begin_itemize !short
+!item Download the appropriate ZIP archive from (!url [http://www.udo-open-source.org/] [http://www.udo-open-source.org])
+!item Unpack the ZIP archiv and copy the executable file ''(!T)udo(!t)'' to (!T)/usr/bin(!t).
+!end_itemize
+Please note: a manpage is currently not part of the MacOS X Distribution.
 !endif
 
+(!DocumentationWorkInProgress)
 !end_node
 # Ende: Installation Macintosh (MacOS X)
 
@@ -216,6 +236,7 @@ or if you have an older UDO-rpm installed: (!T)rpm -U (!t)(!I)file(!i)(!T).rpm(!
 !end_itemize
 !endif
 
+(!DocumentationWorkInProgress)
 !end_node
 # Ende: Installation FreeMiNT
 
@@ -249,6 +270,7 @@ or if you have an older UDO-rpm installed: (!T)rpm -U (!t)(!I)file(!i)(!T).rpm(!
 Or use your favorite rpm shell (e.g. kpackage, krpmview, yast).
 !endif
 
+(!DocumentationWorkInProgress)
 !end_node
 # Ende: Installation Linux-rpm
 
@@ -266,20 +288,27 @@ Or use your favorite rpm shell (e.g. kpackage, krpmview, yast).
 !begin_itemize !short
 !item Laden Sie sich das entsprechende deb-Paket von (!url [http://www.debian.org] [http://www.debian.org/]) herunter.
 !item Melden Sie sich als (!T)root(!t) an.
-!item Neuinstallation: (!T)dpkg -i (!t)(!I)file(!i)(!T).deb(!t);
-???oder wenn bereits ein älteres UDO-Paket installiert war: (!T)dpkg -U (!t)(!I)file(!i)(!T).deb(!t)
+!item (!T)dpkg -i (!t)(!I)file(!i)(!T).deb(!t)
 !end_itemize
-???Bei Internetverbindung und unstable/testing Zweig: apt-get install udo
+Oder (bei Internetverbindung): (!T)apt-get install udo(!t)
+
+Der Paketname für die englische Dokumentation lautet (!T)udo-doc(!t),
+für die deutsche Doku (!T)udo-doc-ger(!t).
+
+Die Dokumentation befindet sich derzeit in Überarbeitung und ist z.T. nicht auf dem aktuellen Stand.
 !endif
 # ------------------------------------------------------------------------------
 !iflang [english]
 !begin_itemize !short
 !item Download the appropriate deb-package from (!url [http://www.debian.org] [http://www.debian.org/]).
 !item Log in as (!T)root(!t)
-!item first installation: (!T)dpkg -i (!t)(!I)file(!i)(!T).deb(!t);
-???or if you have an older UDO package installed: (!T)dpkg -U (!t)(!I)file(!i)(!T).deb(!t)
+!item (!T)dpkg -i (!t)(!I)file(!i)(!T).deb(!t)
 !end_itemize
-(!MISS)
+Or (with Internet connection): (!T)apt-get install udo(!t)
+
+The package name for the english documentation is (!T)udo-doc(!t).
+
+The documentation is currently in revision (outdated in parts).
 !endif
 
 !end_node
@@ -303,7 +332,7 @@ Or use your favorite rpm shell (e.g. kpackage, krpmview, yast).
 !item (!T)make -f Makefile.linux(!t)
 !item Kopieren Sie die ausführbare UDO-Datei nach (!V)/usr/local/bin(!v) oder in eines der Verzeichnisse Ihres (!T)$PATH(!t)'s.
 !item wechseln Sie ins Verzeichnis (!T)doc/manpage(!t) und starten Sie das Skript (!T)create_manpage_de(!t) oder (!T)create_manpage_en(!t). Kopieren Sie dann die UDO-Manualpage (!V)udo.1(!v) nach (!V)/usr/man/man1/(!v).
-!item Um die UDO-Dokumentation ins HTML-Format zu konvertieren, wechseln Sie ins Verzeichnis (!T)doc/manual/source(!t) und starten Sie das Skript (!T)create_manual_de_html(!t). Die Dokumentation wird ins Verzeichnis (!T)doc/manual/html-de(!t) geschrieben.
+!item Um die UDO-Dokumentation ins HTML-Format zu konvertieren, wechseln Sie ins Verzeichnis (!T)doc/manual/source(!t) und starten Sie das Skript (!T)create_manual_de_html(!t) -- die Dokumentation wird ins Verzeichnis (!T)doc/manual/html-de(!t) geschrieben.
 !end_itemize
 
 !begin_ignore
@@ -344,6 +373,7 @@ einen Blick in die FAQ in der Mitte dieser Anleitung, falls
 Linuxdoc-SGML Fehlermeldungen erzeugen sollte.
 !end_ignore
 
+Die Dokumentation befindet sich derzeit in Überarbeitung und ist z.T. nicht auf dem aktuellen Stand.
 !endif
 # ------------------------------------------------------------------------------
 !iflang [english]
@@ -354,7 +384,7 @@ Linuxdoc-SGML Fehlermeldungen erzeugen sollte.
 !item (!T)make -f Makefile.linux(!t)
 !item copy the UDO executable to (!V)/usr/local/bin(!v) or into any other directory of your (!T)$PATH(!t).
 !item (!T)chdir(!t) to directory (!T)doc/manpage(!t) and run the shell script (!T)create_manpage_en(!t). Copy the UDO manualpage (!V)udo.1(!v) to (!V)/usr/man/man1/(!v).
-!item For converting the UDO manual to HTML, (!T)chdir(!t) to (!T)doc/manual/source(!t) and run the shellscript (!T)create_manual_en_html(!t). Documentation will be written to (!T)doc/manual/html-en(!t).
+!item For converting the UDO manual to HTML, (!T)chdir(!t) to (!T)doc/manual/source(!t) and run the shellscript (!T)create_manual_en_html(!t) -- documentation will be written to (!T)doc/manual/html-en(!t).
 !end_itemize
 
 !begin_ignore
@@ -389,6 +419,7 @@ this documentation if Linuxdoc-SGML prints an error message.
 !end_ignore
 !endif
 
+The documentation is currently in revision (outdated in parts).
 !end_node
 # Ende: Installation Linux Source
 
