@@ -36,6 +36,7 @@ const char *id_toc_c= "@(#) toc.c       12.06.1999";
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "portab.h"
 #include "version.h"
 #include "constant.h"
