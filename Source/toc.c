@@ -56,7 +56,6 @@ const char *id_toc_c= "@(#) toc.c       12.06.1999";
 
 #include "export.h"
 #include "toc.h"
-#include "udomem.h"
 
 
 /*	############################################################
@@ -1141,7 +1140,7 @@ GLOBAL void stg_headline ( const char *numbers, const char *nodename )
 	}
 	
 	if (nodename[0]==EOS)
-	{	tokcat(s, 512);
+	{	tokcat(s);
 	}
 	else
 	{	strcat(s, nodename);
@@ -3845,7 +3844,7 @@ GLOBAL BOOLEAN save_htmlhelp_index ( const char* filename )
 	{
 		return FALSE;
 	}
-	html_index = (HTML_IDX *)um_malloc(num_index * sizeof(HTML_IDX));
+	html_index = (HTML_IDX *)malloc(num_index * sizeof(HTML_IDX));
 	if (html_index == NULL)
 	{
 		fclose(file);
@@ -3915,7 +3914,7 @@ GLOBAL BOOLEAN save_htmlhelp_index ( const char* filename )
 	fprintf(file, "</HTML>\n");
 	fclose(file);
 	
-	um_free((void *) html_index);
+	free((void *) html_index);
 	
 	return TRUE;
 }	/* save_htmlhelp_index */
@@ -3944,7 +3943,7 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 		return;
 	}
 
-	tokcpy2(name, 512);
+	tokcpy2(name);
 	strcpy(stgname, name);	/* r5pl14 */
 
 	if (name[0]==EOS)
@@ -4459,7 +4458,7 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 		return;
 	}
 
-	tokcpy2(name, 512);
+	tokcpy2(name);
 	strcpy(stgname, name);
 
 	if (name[0]==EOS)
@@ -4915,7 +4914,7 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 		return;
 	}
 
-	tokcpy2(name, 512);
+	tokcpy2(name);
 	strcpy(stgname, name);	/* r5pl14 */
 
 	if (name[0]==EOS)
@@ -5374,7 +5373,7 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 		return;
 	}
 
-	tokcpy2(name, 512);
+	tokcpy2(name);
 	strcpy(stgname, name);	/* r5pl14 */
 
 	if (name[0]==EOS)
@@ -8163,11 +8162,6 @@ GLOBAL void c_listoftables ( void )
 			outln("\\begin_inset LatexDel \\listoftables");
 			outln("\\end_inset");
 			break;
-		/* New in r6.3pl3 [NHz] */
-		case TORTF:
-			voutlnf("\\page\n%s\\fs36 %s\\par\\par", rtf_node1, lang.listtable);
-			voutlnf("{\\field\\fldedit{\\*\\fldinst {TOC \\\\c \"Tabelle\" }}{\\fldrslt %s not actual}}", lang.listtable);
-			break;
 	}
 }	/* c_listoftables */
 
@@ -8550,7 +8544,7 @@ GLOBAL void c_label ( void )
 	char 	sLabel[512], sTemp[512];
 
 	/* Tokens umkopieren */
-	tokcpy2(sLabel, 512);
+	tokcpy2(sLabel);
 
 	if (sLabel[0]==EOS)
 	{	error_missing_parameter(CMD_LABEL);
@@ -8669,7 +8663,7 @@ GLOBAL int add_label ( const char *label, const BOOLEAN isn, const BOOLEAN isp )
 	}
 #endif
 	
-	labptr= (LABEL *) um_malloc(sizeof(LABEL)+1);
+	labptr= (LABEL *) malloc(sizeof(LABEL)+1);
 	
 	if (labptr==NULL)					/* Kein Speicher mehr frei? */
 	{	error_malloc_failed();
@@ -8746,7 +8740,7 @@ GLOBAL BOOLEAN add_alias ( const char *alias, const BOOLEAN isp )
 	}
 #endif
 
-	labptr= (LABEL *) um_malloc(sizeof(LABEL)+1);
+	labptr= (LABEL *) malloc(sizeof(LABEL)+1);
 	
 	if (labptr==NULL)					/* Kein Speicher mehr frei? */
 	{	error_malloc_failed();
@@ -8837,7 +8831,7 @@ GLOBAL void set_raw_header_filename ( void )
 	}
 	else
 	{
-		ptr= (char *) um_malloc(1+strlen(s)*sizeof(char));
+		ptr= (char *) malloc(1+strlen(s)*sizeof(char));
 		if (!ptr)
 		{	error_malloc_failed();
 			bFatalErrorDetected= TRUE;
@@ -8868,7 +8862,7 @@ GLOBAL void set_raw_footer_filename ( void )
 	}
 	else
 	{
-		ptr= (char *) um_malloc(1+strlen(s)*sizeof(char));
+		ptr= (char *) malloc(1+strlen(s)*sizeof(char));
 		if (!ptr)
 		{	error_malloc_failed();
 			bFatalErrorDetected= TRUE;
@@ -8981,7 +8975,7 @@ GLOBAL void set_helpid ( void )
 	
 	/* <???> Hier pruefen, ob nur A-Z, a-z, 0-9 und _ benutzt werden */
 
-	ptr= (char *) um_malloc(1+strlen(id)*sizeof(char));
+	ptr= (char *) malloc(1+strlen(id)*sizeof(char));
 	
 	if (!ptr)
 	{	error_malloc_failed();
@@ -9030,7 +9024,7 @@ GLOBAL void set_html_doctype ( void )
 {
 	char s[512];
 
-	tokcpy2(s, 512);
+	tokcpy2(s);
 
 	if (strcmp(s, "Old")==0)
 	{	html_doctype= HTML_OLD;
@@ -9061,7 +9055,7 @@ GLOBAL void set_html_frames_layout ( void )
 
 	html_frames_layout= TRUE;
 
-	tokcpy2(s, 512);
+	tokcpy2(s);
 
 	if (strstr(s, "noresize")!=NULL)
 	{	html_frames_noresize= TRUE;
@@ -9086,9 +9080,9 @@ GLOBAL void set_html_counter_command ( void )
 	if (toc[p1_toc_counter]==NULL)	return;
 	if (token[1][0]==EOS)	return;
 
-	tokcpy2(k, 512);
+	tokcpy2(k);
 
-	ptr= (char *) um_malloc(1+strlen(k)*sizeof(char));
+	ptr= (char *) malloc(1+strlen(k)*sizeof(char));
 	
 	if (!ptr)
 	{	error_malloc_failed();
@@ -9187,7 +9181,7 @@ GLOBAL void set_html_switch_language ( void )
 	if (iDocHtmlSwitchLanguage>=0)
 	{
 		token[1][0]= EOS;
-		tokcpy2(sDocHtmlSwitchLanguage, 256);
+		tokcpy2(sDocHtmlSwitchLanguage);
 	}
 
 }	/* set_html_switch_language */
@@ -9450,7 +9444,7 @@ GLOBAL void set_html_backimage ( void )
 
 	if (token[1][0]=='\"')
 	{
-		tokcpy2(sTemp, 512);
+		tokcpy2(sTemp);
 		ptr= strchr(sTemp+1, '\"');		/* zweites " suchen */
 
 		if (ptr)
@@ -9496,7 +9490,7 @@ GLOBAL void set_html_style ( void )
 
 	if (token[1][0]=='\"')
 	{
-		tokcpy2(sTemp, 512);
+		tokcpy2(sTemp);
 		ptr= strchr(sTemp+1, '\"');		/* zweites " suchen */
 
 		if (ptr)
@@ -9541,7 +9535,7 @@ GLOBAL void set_html_script ( void )
 
 	if (token[1][0]=='\"')
 	{
-		tokcpy2(sTemp, 512);
+		tokcpy2(sTemp);
 		ptr= strchr(sTemp+1, '\"');		/* zweites " suchen */
 
 		if (ptr)
@@ -9587,7 +9581,7 @@ GLOBAL void set_html_favicon ( void )
 
 	if (token[1][0]=='\"')
 	{
-		tokcpy2(sTemp, 512);
+		tokcpy2(sTemp);
 		ptr= strchr(sTemp+1, '\"');		/* zweites " suchen */
 
 		if (ptr)
@@ -9614,15 +9608,14 @@ GLOBAL void set_html_favicon ( void )
 
 GLOBAL void set_html_keywords ( void )
 {
-#define HTML_KW_SIZE    2048
-	char k[HTML_KW_SIZE], *ptr, oldk[HTML_KW_SIZE], *oldptr; /* Buffer increased from 1kB to 2kB */
+	char k[2048], *ptr, oldk[2048], *oldptr; /* Changed buffer from 1024 to 2048 Bytes 6.2.1 [vj] */
 	size_t newsize;
 
 	if (p1_toc_counter<0)	return;
 	if (toc[p1_toc_counter]==NULL)	return;
 	if (token[1][0]==EOS)	return;
 
-	tokcpy2(k, HTML_KW_SIZE);
+	tokcpy2(k);
 	c_vars(k);
 	qdelete_all(k, "!-", 2);
 
@@ -9647,7 +9640,7 @@ GLOBAL void set_html_keywords ( void )
 		}
 	}
 	else
-	{	ptr= (char *) um_malloc(1+strlen(k)*sizeof(char));
+	{	ptr= (char *) malloc(1+strlen(k)*sizeof(char));
 	
 		if (!ptr)
 		{	error_malloc_failed();
@@ -9671,7 +9664,7 @@ GLOBAL void set_html_description ( void )
 	if (toc[p1_toc_counter]==NULL)	return;
 	if (token[1][0]==EOS)	return;
 
-	tokcpy2(d, 1024);
+	tokcpy2(d);
 	c_vars(d);
 	qdelete_all(d, "!-", 2);
 
@@ -9696,7 +9689,7 @@ GLOBAL void set_html_description ( void )
 		}
 	}
 	else
-	{	ptr= (char *) um_malloc(1+strlen(d)*sizeof(char));
+	{	ptr= (char *) malloc(1+strlen(d)*sizeof(char));
 	
 		if (!ptr)
 		{	error_malloc_failed();
@@ -9773,7 +9766,7 @@ GLOBAL void set_html_modern_alignment ( void )
 {
 	char s[256];
 
-	tokcpy2(s, 256);
+	tokcpy2(s);
 
 	if (strstr(s, "center")!=NULL)
 	{	html_modern_alignment= ALIGN_CENT;
@@ -9805,7 +9798,7 @@ GLOBAL void set_html_modern_backimage ( void )
 
 	if (token[1][0]=='\"')
 	{
-		tokcpy2(sTemp, 512);
+		tokcpy2(sTemp);
 		ptr= strchr(sTemp+1, '\"');		/* zweites " suchen */
 
 		if (ptr)
@@ -9906,7 +9899,7 @@ GLOBAL void set_html_frames_alignment ( void )
 {
 	char s[256];
 
-	tokcpy2(s, 256);
+	tokcpy2(s);
 
 	if (strstr(s, "center")!=NULL)
 	{	html_frames_alignment= ALIGN_CENT;
@@ -9937,7 +9930,7 @@ GLOBAL void set_html_frames_backimage ( void )
 
 	if (token[1][0]=='\"')
 	{
-		tokcpy2(sTemp, 512);
+		tokcpy2(sTemp);
 		ptr= strchr(sTemp+1, '\"');		/* zweites " suchen */
 
 		if (ptr)
@@ -9963,7 +9956,7 @@ GLOBAL void set_html_button_alignment ( void )
 {
 	char s[256];
 
-	tokcpy2(s, 256);
+	tokcpy2(s);
 
 	if (strstr(s, "center")!=NULL)
 	{	html_button_alignment= ALIGN_CENT;
@@ -9998,7 +9991,7 @@ GLOBAL void set_chapter_image ( void )
 	{	replace_char(s, "\\", "/");	/*r6pl4*/
 	}
 
-	ptr= (char *) um_malloc(1+strlen(s)*sizeof(char));
+	ptr= (char *) malloc(1+strlen(s)*sizeof(char));
 	
 	if (!ptr)
 	{	error_malloc_failed();
@@ -10044,7 +10037,7 @@ GLOBAL void set_chapter_icon ( void )
 	{	replace_char(s, "\\", "/");	/*r6pl4*/
 	}
 
-	ptr= (char *) um_malloc(1+strlen(s)*sizeof(char));
+	ptr= (char *) malloc(1+strlen(s)*sizeof(char));
 	
 	if (!ptr)
 	{	error_malloc_failed();
@@ -10103,7 +10096,7 @@ GLOBAL void set_chapter_icon_active ( void )
 	{	replace_char(s, "\\", "/");	/*r6pl4*/
 	}
 
-	ptr= (char *) um_malloc(1+strlen(s)*sizeof(char));
+	ptr= (char *) malloc(1+strlen(s)*sizeof(char));
 	
 	if (!ptr)
 	{	error_malloc_failed();
@@ -10140,10 +10133,10 @@ GLOBAL void set_chapter_icon_text ( void )
 	if (toc[p1_toc_counter]==NULL)	return;
 	if (token[1][0]==EOS)	return;
 
-	tokcpy2(s, 512);
+	tokcpy2(s);
 	auto_quote_chars(s, TRUE);
 	
-	ptr= (char *) um_malloc(1+strlen(s)*sizeof(char));
+	ptr= (char *) malloc(1+strlen(s)*sizeof(char));
 	
 	if (!ptr)
 	{	error_malloc_failed();
@@ -10163,7 +10156,7 @@ LOCAL BOOLEAN add_toc_to_toc ( void )
 {
 	TOCITEM	*tocptr;
 
-	tocptr= (TOCITEM *) um_malloc(sizeof(TOCITEM));
+	tocptr= (TOCITEM *) malloc(sizeof(TOCITEM));
 	
 	if (tocptr==NULL)
 	{	return FALSE;
@@ -10205,18 +10198,18 @@ LOCAL TOCITEM *init_new_toc_entry ( const int toctype, const BOOLEAN invisible )
 		return NULL;
 	}
 
-	tocptr= (TOCITEM *) um_malloc(sizeof(TOCITEM));
+	tocptr= (TOCITEM *) malloc(sizeof(TOCITEM));
 	
 	if (tocptr==NULL)
 	{	return NULL;
 	}
 	
-	tokcpy2(tocptr->name, MAX_NODE_LEN+1);
+	tokcpy2(tocptr->name);
 	
 	if (tocptr->name[0]==EOS)			/* r5pl14 */
 	{	error_fatal_error("missing node name");
 		bFatalErrorDetected= TRUE;
-		um_free(tocptr);
+		free(tocptr);
 		return NULL;
 	}
 
@@ -12157,7 +12150,7 @@ GLOBAL void init_module_toc ( void )
 LOCAL void free_toc_data ( char **var )
 {
 	if (*var!=NULL)
-	{	um_free(*var);
+	{	free(*var);
 		*var= NULL;
 	}
 }
@@ -12181,7 +12174,7 @@ GLOBAL void exit_module_toc ( void )
 			free_toc_data( &(toc[i]->icon_text) );
 			free_toc_data( &(toc[i]->raw_header_filename) );
 			free_toc_data( &(toc[i]->raw_footer_filename) );
-			um_free(toc[i]);
+			free(toc[i]);
 			toc[i]= NULL;
 		}
 	}
@@ -12190,7 +12183,7 @@ GLOBAL void exit_module_toc ( void )
 	{
 		if (lab[i]!=NULL)
 		{
-			um_free(lab[i]);
+			free(lab[i]);
 		}
 	}
 

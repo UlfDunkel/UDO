@@ -36,7 +36,6 @@
 #include	"export.h"
 #include	"file.h"
 #include	"udo_type.h"
-#include        "udomem.h"
 
 #ifndef ID_FSPLIT_C
 #define	ID_FSPLIT_C
@@ -55,7 +54,7 @@ GLOBAL MYTEXTFILE *myTextOpen ( const char *filename )
 {
 	MYTEXTFILE *tf;
 
-	tf= (MYTEXTFILE *) um_malloc (sizeof(*tf));
+	tf= (MYTEXTFILE *) malloc (sizeof(*tf));
 
 	if (tf == NULL)
 	{
@@ -69,7 +68,7 @@ GLOBAL MYTEXTFILE *myTextOpen ( const char *filename )
 
 	if (tf->file == NULL)
 	{
-		um_free(tf);
+		free(tf);
 		return NULL;
 	}
 
@@ -80,7 +79,7 @@ GLOBAL MYTEXTFILE *myTextOpen ( const char *filename )
 
 	if (tf->filelen>0)
 	{
-		tf->buffer= (char *) um_malloc ((size_t) tf->filelen);
+		tf->buffer= (char *) malloc ((size_t) tf->filelen);
 
 		if (tf->buffer != NULL)
 		{
@@ -98,7 +97,7 @@ GLOBAL MYTEXTFILE *myTextOpen ( const char *filename )
 
 	if (tf->file == NULL)
 	{
-		um_free(tf);
+		free(tf);
 		tf= NULL;
 	}
 
@@ -197,11 +196,11 @@ GLOBAL int myTextClose ( MYTEXTFILE *tf )
 
 	if (tf->buffer != NULL)
 	{
-		um_free(tf->buffer);
+		free(tf->buffer);
 	}
 
 	fclose(tf->file);
-	um_free(tf);
+	free(tf);
 
 	return 0;
 
@@ -440,7 +439,7 @@ LOCAL MYFILE *my_new_myfile ( void )
 {
 	MYFILE *myfile;
 
-	myfile = (MYFILE *)um_malloc(sizeof(MYFILE));
+	myfile = (MYFILE *)malloc(sizeof(MYFILE));
 
 	if (myfile!=NULL)
 	{
@@ -454,7 +453,7 @@ LOCAL BOOLEAN my_free_myfile ( MYFILE *myfile )
 {
 	if (myfile!=NULL)
 	{
-		um_free(myfile);
+		free(myfile);
 		return TRUE;
 	}
 

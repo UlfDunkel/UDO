@@ -42,7 +42,7 @@ const char *id_par_c= "@(#) par.c       19.07.1999";
 
 #include "export.h"
 #include "par.h"
-#include "udomem.h"
+
 
 
 /*	############################################################
@@ -384,7 +384,7 @@ GLOBAL void reset_speccmds ( void )
 		for (i=0; i<speccmd_counter; i++)
 		{
 			if ( speccmd[i].entry!=NULL )
-			{	um_free(speccmd[i].entry);
+			{	free(speccmd[i].entry);
 				speccmd[i].entry= NULL;
 			}
 			
@@ -408,7 +408,7 @@ GLOBAL BOOLEAN add_speccmd ( char *entry )
 		speccmd_counter++;
 
 		sl= strlen(entry);
-		ptr= (char *) ( um_malloc(sl*sizeof(char)+1) );
+		ptr= (char *) ( malloc(sl*sizeof(char)+1) );
 		if (ptr==NULL)
 		{	error_malloc_failed();
 			speccmd_counter--;
@@ -499,12 +499,12 @@ GLOBAL void reset_placeholders ( void )
 		for (i=0; i<phold_counter; i++)
 		{
 			if ( phold[i].entry!=NULL )
-			{	um_free(phold[i].entry);
+			{	free(phold[i].entry);
 				phold[i].entry= NULL;
 			}
 			
 			if ( phold[i].text!=NULL )
-			{	um_free(phold[i].text);
+			{	free(phold[i].text);
 				phold[i].text= NULL;
 			}
 			
@@ -528,7 +528,7 @@ GLOBAL BOOLEAN add_placeholder ( char *entry, char *rawtext )
 		phold_counter++;
 
 		el= strlen(entry);
-		eptr= (char *) ( um_malloc(el*sizeof(char)+1) );
+		eptr= (char *) ( malloc(el*sizeof(char)+1) );
 		if (eptr==NULL)
 		{	error_malloc_failed();
 			phold_counter--;
@@ -536,10 +536,10 @@ GLOBAL BOOLEAN add_placeholder ( char *entry, char *rawtext )
 		}
 		
 		tl= strlen(rawtext);
-		tptr= (char *) ( um_malloc (tl*sizeof(char)+1) );
+		tptr= (char *) ( malloc (tl*sizeof(char)+1) );
 		if (tptr==NULL)
 		{	error_malloc_failed();
-			um_free(eptr);
+			free(eptr);
 			phold_counter--;
 			return FALSE;
 		}
@@ -2726,11 +2726,6 @@ LOCAL void c_internal_image ( char *s, const BOOLEAN inside_b4_macro )
 				}
 				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
 				break;
-			/* New in r6.3pl3 [NHz] */
-			case TORTF:
-				strcpy(s_entry, "");
-				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
-				break;
 			default:
 				strcpy(s_entry, Param[2]);
 				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
@@ -2927,15 +2922,15 @@ GLOBAL void add_hyphen ( void )
 		return;
 	}
 	
-	p= (HYPHEN *) um_malloc(sizeof(HYPHEN));
+	p= (HYPHEN *) malloc(sizeof(HYPHEN));
 	
 	if (p==NULL)
 	{	error_malloc_failed();
 		return;
 	}
 
-	tokcpy2(p->hyphen, HYPHEN_LEN+1);
-	tokcpy2(p->solo, HYPHEN_LEN+1);
+	tokcpy2(p->hyphen);
+	tokcpy2(p->solo);
 
 	if (desttype==TOTEX || desttype==TOPDL)
 	{	/* Die Tokens sind leider vorher schon durch c_vars gelaufen */
@@ -3027,7 +3022,7 @@ GLOBAL BOOLEAN add_macro ( void )
 		return FALSE;
 	}
 
-	p= (MACROS *) um_malloc(sizeof(MACROS));
+	p= (MACROS *) malloc(sizeof(MACROS));
 	
 	if (p==NULL)
 	{	error_malloc_failed();
@@ -3055,7 +3050,7 @@ GLOBAL BOOLEAN add_macro ( void )
 	/* PL10: Inhalt zu lang? */
 	if (strlen(entry)>MACRO_CONT_LEN)
 	{	error_long_macro_cont(MACRO_CONT_LEN);
-		um_free(p);
+		free(p);
 		return FALSE;
 	}
 
@@ -3134,7 +3129,7 @@ GLOBAL BOOLEAN add_define ( void )
 	}
 
 
-	p= (DEFS *) um_malloc(sizeof(DEFS));
+	p= (DEFS *) malloc(sizeof(DEFS));
 	
 	if (p==NULL)
 	{	error_malloc_failed();
@@ -3155,7 +3150,7 @@ GLOBAL BOOLEAN add_define ( void )
 	/* PL10: Inhalt zu lang? */
 	if (strlen(entry)>DEFINE_CONT_LEN)
 	{	error_long_define_cont(DEFINE_CONT_LEN);
-		um_free(p);
+		free(p);
 		return FALSE;
 	}
 	
@@ -3219,19 +3214,19 @@ GLOBAL void exit_module_par ( void )
 
 	for (i=MAXMACROS-1; i>=0; i--)
 	{	if (macros[i]!=NULL)
-		{	um_free(macros[i]);
+		{	free(macros[i]);
 		}
 	}
 
 	for (i=MAXDEFS-1; i>=0; i--)
 	{	if (defs[i]!=NULL)
-		{	um_free(defs[i]);
+		{	free(defs[i]);
 		}
 	}
 
 	for (i=MAXHYPHEN-1; i>=0; i--)
 	{	if (hyphen[i]!=NULL)
-		{	um_free(hyphen[i]);
+		{	free(hyphen[i]);
 		}
 	}
 

@@ -35,7 +35,7 @@ Der Name der Quelldatei muß als letzter Parameter übergeben werden.
 
 	!begin_tlist [-o F, (--)outfile F---]
 
-	!item	[-a, (--)asc]
+	!item	[-a, (--)ascii]
 			Die (!U)Quelldatei(!u) wird ins ASCII-Format umgewandelt.
 
 	!item	[-D symbol]

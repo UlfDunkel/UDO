@@ -1,9 +1,10 @@
-udo (6.2.0-2) unstable; urgency=low
+udo (6.2.1-1) unstable; urgency=low
 
+  * New upstream release
   * Fixed rules file for Debian package build
   * Package sponsored by joergland
 
- -- Volker Janzen <douglas@voja.org>  Tue, 04 Nov 2003 16:00:00 +0200
+ -- Volker Janzen <douglas@voja.org>  Tue, 04 Nov 2003 13:56:00 +0200
 
 udo (6.2.0-1) unstable; urgency=low
 

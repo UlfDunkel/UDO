@@ -43,10 +43,10 @@
 	Release-Nummer und Patchlevel setzen
 	------------------------------------------------------------	*/
 #define	UDO_REL		"6"
-#define UDO_SUBVER	"3"
-#define	UDO_PL		"3"
+#define	UDO_SUBVER		"2"
+#define	UDO_PL		"1"
 #define	UDO_URL		"http://www.udo-open-source.org"
-#define	UDO_MADE	"Made with UDO"
+#define	UDO_MADE		"Made with UDO"
 
 
 /*	------------------------------------------------------------
@@ -56,7 +56,7 @@
 #define	CODE_DOS			1		/* IBM PC							*/
 #define	CODE_437			1		/* DOS Codepage 437 (wie IBM PC)	*/
 #define	CODE_TOS			2		/* Atari ST							*/
-#define CODE_HP8			3		/* HP-Roman-8						*/
+#define	CODE_HP8			3		/* HP-Roman-8						*/
 #define	CODE_MAC			4		/* Apple Macintosh					*/
 #define	CODE_NEXT		5		/* NextSTep							*/
 #define	CODE_850			6		/* DOS Codepage 850					*/

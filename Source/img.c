@@ -912,8 +912,8 @@ GLOBAL void c_bmp_output ( const char *name, const char *caption, const BOOLEAN 
 					/* sprintf(n, "%s %d: %s", lang.figure, image_counter, caption); */
 					/* removed parenthesis */
 
-					/* Changed in r6.3pl3 [NHz] */
-					sprintf(n, "{{\\*\\bkmkstart _tocimg%d}%s }{\\field{\\*\\fldinst {SEQ %s \\\\* ARABIC }}: %s{\\fldrslt %d: %s}}{\\*\\bkmkend _Tocimg%d}", image_counter, lang.figure, lang.figure, caption, image_counter, caption, image_counter);
+					/* New in r6pl16 [NHz] */
+					sprintf(n, "{{\\*\\bkmkstart _tocimg%d}%s }{\\field{\\*\\fldinst {SEQ %s \\\\* ARABIC }}: %s{\\fldrslt %d: %s{\\*\\bkmkend _Tocimg%d}}}", image_counter, lang.figure, lang.figure, caption, image_counter, caption, image_counter);
 				}
 				else
 				{	/* Changed in r6pl16 [NHz] */
@@ -1404,7 +1404,7 @@ GLOBAL void set_image_alignment ( void )
 {
 	char s[256];
 
-	tokcpy2(s, 256);
+	tokcpy2(s);
 
 	if (strstr(s, "center")!=NULL)
 	{	image_alignment= ALIGN_CENT;

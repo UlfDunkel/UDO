@@ -45,7 +45,7 @@ const char *id_tab_c= "@(#) tab.c       10.07.1999";
 
 #include "export.h"
 #include "tab.h"
-#include "udomem.h"
+
 
 /*	############################################################
 	# lokale Variablen
@@ -122,7 +122,7 @@ GLOBAL void table_reset ( void )
 	for (y=0; y<MAX_TAB_H; y++)
 	{	for (x=0; x<MAX_TAB_W; x++)
 		{	if (tab_cell[y][x]!=NULL)
-			{	um_free(tab_cell[y][x]);
+			{	free(tab_cell[y][x]);
 				tab_cell[y][x]= NULL;
 			}
 		}
@@ -144,7 +144,7 @@ LOCAL void convert_table_caption ( const BOOLEAN visible )
 {
 	char n[512];
 	
-	tokcpy2(n, 512);
+	tokcpy2(n);
 
 	tab_caption[0]= EOS;	
 	strncat(tab_caption, n, MAXTABCAPTION);
@@ -228,12 +228,8 @@ GLOBAL BOOLEAN table_add_line ( char *s )
 
 	del_whitespaces(s);
 
-        /* Leerzeilen  und Kommentare nicht bearbeiten */
-        /* [GS] r6pl17 Start */
-        if ( s[0]==EOS || s[0] == '#')
-        /* Ende; alt:
-        if ( s[0]==EOS )
-        */
+	/* Leerzeilen nicht bearbeiten */
+	if ( s[0]==EOS )
 	{	return TRUE;
 	}
 
@@ -340,7 +336,7 @@ GLOBAL BOOLEAN table_add_line ( char *s )
 			{	tab_cell_w[x]= tl;
 			}
 	
-			ptr= (char *) (um_malloc(sl+2));
+			ptr= (char *) (malloc(sl+2));
 			if (ptr==NULL)
 			{	error_malloc_failed();
 				return FALSE;
@@ -592,9 +588,9 @@ LOCAL void table_output_rtf ( void )
 		{	out("\\ql \\cell");
 		}
 		if (tab_caption_visible)
-		/* Changed in r6.3pl3 [NHz] */
-		{	sprintf(f, "\\qc %s {\\field{\\*\\fldinst { SEQ Tabelle \\\\* ARABIC }}{\\fldrslt %d}}: %s\\cell\\row\\pard",
+		{	sprintf(f, "\\qc %s %d: %s\\cell\\row\\pard",
 							lang.table, tab_counter, tab_caption);
+		}
 		else
 		{	sprintf(f, "\\qc %s\\cell\\row\\pard", tab_caption);
 		}
@@ -1573,7 +1569,7 @@ GLOBAL void set_table_alignment ( void )
 {
 	char s[256];
 
-	tokcpy2(s, 256);
+	tokcpy2(s);
 
 	if (strstr(s, "center")!=NULL)
 	{	table_alignment= ALIGN_CENT;
