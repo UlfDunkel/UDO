@@ -42,12 +42,18 @@
  * Note: at the moment I don't know for which compiler this will be need, so its
  * always undef
  */
-#undef UM_PRINTF_USE_LD
+#undef	UM_PRINTF_USE_LD
+#ifdef	__TOS__
+#define	UM_PRINTF_USE_LD
+#endif
+#ifdef	__LINUX__
+#define	UM_PRINTF_USE_LD
+#endif
 /*
  * Declarations for vars that keep memory management information
  */
-extern size_t um_malloc_count;	/* This counts the number of um_malloc calls */
-extern size_t um_free_count;	/* Counts the um_free calls */
+extern long um_malloc_count;	/* This counts the number of um_malloc calls */
+extern long um_free_count;	/* Counts the um_free calls */
 extern int memory_error;	/* This indicates a broken memory management */
 extern char endstring[];	/* This is the const string, that holds the ending string of memory blocks */
 extern size_t endstring_len; /* For better performance this var saves the string length of endstring */
