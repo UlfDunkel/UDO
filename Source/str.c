@@ -404,7 +404,7 @@ GLOBAL int qreplace_all (	char *source,
 		}
 		
 	}
-	
+
 	return 1;
 }	/* qreplace_all */
 
@@ -541,6 +541,65 @@ GLOBAL size_t get_brackets_ptr ( char *s, char **cont, char **data )
 	return 0;	
 	
 }	/* get_brackets_ptr */
+
+
+/* New since r6pl15 [NHz] */
+/*	--------------------------------------------------------------
+	get_two_brackets_ptr()
+	Ermittelt aus einem String wie "!doclayout [ ps, rtf ] [paper] foo bar"
+	die Zeiger auf die ersten Zeichen hinter den ersten [ und die
+	Anzahl der Zeichen, die bis zur ersten ] folgen.
+	->	s:		Der zu untersuchende String
+	<-	cont_format:	Zeiger auf das erste Zeichen der Formate
+	    cont_content: Zeiger auf das erste Zeichen des Inhalts
+		data:	Zeiger auf das erste Zeichen der Daten
+		0:		fehlerhafte Syntax (keine [ und ] gefunden)
+		sonst:	Laenge des Inhaltes
+	--------------------------------------------------------------	*/
+GLOBAL struct size_brackets get_two_brackets_ptr ( char *s, char **cont_format, char **cont_content, char **data )
+{
+	char *ptr;
+	struct size_brackets len;
+	BOOLEAN firstend;
+	
+	ptr= s;
+	*cont_format= NULL;
+	*cont_content= NULL;
+	*data= NULL;
+	len.format= 0;
+	len.content= 0;
+	
+	firstend = FALSE;
+
+	while (*ptr!=EOS)
+	{
+		if ((*ptr=='[') && (!firstend))
+		{	*cont_format= ptr+1;
+		}
+		
+		else if ((*ptr==']') && (!firstend))
+		{	firstend = TRUE;
+			len.format= ptr - *cont_format;
+		}
+		
+		else if ((*ptr=='[') && (firstend))
+		{	*cont_content= ptr+1;
+		}
+
+		else if ((*ptr==']') && (firstend))
+		{	if (*cont_content!=NULL)
+			{	*data= ptr+1;
+				len.content= ptr - *cont_content;
+			}
+			return len;
+		}
+		
+		ptr++;
+	}
+
+	return len;	
+	
+}	/* get_two_brackets_ptr */
 
 
 /*	--------------------------------------------------------------

@@ -82,6 +82,7 @@ GLOBAL void alias2NrIPF ( char *s, int i);
 GLOBAL void label2NrIPF ( char *s, int i);
 
 GLOBAL void node2pchelp (char *n);
+GLOBAL void node2postscript ( char *s, BOOLEAN text );
 
 GLOBAL void node2stg(char *s);
 GLOBAL void index2stg(char *s);

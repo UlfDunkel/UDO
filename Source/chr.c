@@ -1364,6 +1364,34 @@ GLOBAL void node2pchelp ( char *s )
 }	/* node2pchelp */
 
 
+/*	------------------------------------------------------------
+	node2postscript()
+	Postscript mag keine Leerzeichen und anderes
+	<->	s:	String, der als Label oder Node benutzt werden soll.
+	------------------------------------------------------------	*/
+/* New in r6pl15 [NHz] */
+GLOBAL void node2postscript ( char *s, BOOLEAN text )
+{
+	if(text)
+	{
+		qreplace_all(s, ")", 1, "\\)", 2);
+		qreplace_all(s, "(", 1, "\\(", 2);
+	}
+	else
+	{
+		qreplace_all(s, " ", 1, "_", 1);
+		qdelete_all(s, ";", 1);
+		qdelete_all(s, ":", 1);
+		qdelete_all(s, "\\(", 2);
+		qdelete_all(s, "(", 1);
+		qdelete_all(s, "\\)", 2);
+		qdelete_all(s, ")", 1);
+		qdelete_all(s, "-", 1);
+		qdelete_last(s, "_", 1);
+	}
+}	/* node2postscript */
+
+
 
 /*	------------------------------------------------------------
 	node2stg() / index2stg()
@@ -1649,6 +1677,13 @@ GLOBAL void c_divis ( char *s )
 		case TOSRP:
 			qreplace_all(s, "!-", 2, DIVIS_S, DIVIS_S_LEN);
 			break;
+
+		/* New in r6pl15 [NHz] */
+
+		case TOHTM:
+
+			qreplace_all(s, "!-", 2, "&shy;", 5);
+			break;
 		default:
 			qdelete_all(s, "!-", 2);
 			break;
@@ -1670,6 +1705,47 @@ LOCAL void specials2ascii ( char *s )
 	qreplace_all(s, "(--)", 4, TEMPO_S2, TEMPO_S2_LEN);
 	qreplace_all(s, "---", 3, "-", 1);
 	qreplace_all(s, "--", 2, "-", 1);
+	qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "---", 3);
+	qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "--", 2);
+}
+
+
+/* New function in r6pl15 [NHz] */
+/*	------------------------------------------------------------
+	specials2html()
+	Ersetzen von UDO-Spezialbefehlen durch HTML-Versionen
+	<->	s:	String
+	------------------------------------------------------------	*/
+LOCAL void specials2html ( char *s )
+{
+	qreplace_all(s, "!..", 3, "...", 3);
+
+	/* Doesn't work in CAB :-( */
+/*	qreplace_all(s, "!..", 3, "&hellip;", 8);*/
+	
+	qreplace_all(s, "(---)", 5, TEMPO_S, TEMPO_S_LEN);
+	qreplace_all(s, "(--)", 4, TEMPO_S2, TEMPO_S2_LEN);
+	qreplace_all(s, "---", 3, "&mdash;", 7);
+	qreplace_all(s, "--", 2, "&ndash;", 7);
+	qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "---", 3);
+	qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "--", 2);
+}
+
+/* New function in r6pl15 [NHz] */
+/*	------------------------------------------------------------
+	specials2ps()
+	Ersetzen von UDO-Spezialbefehlen durch PS-Versionen
+	<->	s:	String
+	------------------------------------------------------------	*/
+LOCAL void specials2ps ( char *s )
+{
+	qreplace_all(s, "!..", 3, " ) udoshow ellipsis ( ", 22);
+
+	
+	qreplace_all(s, "(---)", 5, TEMPO_S, TEMPO_S_LEN);
+	qreplace_all(s, "(--)", 4, TEMPO_S2, TEMPO_S2_LEN);
+	qreplace_all(s, "---", 3, "\\075", 4);
+	qreplace_all(s, "--", 2, "\\262", 4);
 	qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "---", 3);
 	qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "--", 2);
 }
@@ -1984,10 +2060,14 @@ GLOBAL void c_vars ( char *s )
 			break;
 		case TOKPS:
 			qreplace_all(s, "(!copyright)", 12, COPY_S, COPY_S_LEN);
-			qreplace_all(s, "(!grin)", 7, ";-\\)", 4);
+			qreplace_all(s, "(!grin)", 7, ";-\\)", 4); /* New in r6pl15 [NHz] */
 			qreplace_all(s, "(!laugh)", 8, ":-\\)", 4);
 			qreplace_all(s, "(!alpha)", 8, ALPHA_S, ALPHA_S_LEN);
 			qreplace_all(s, "(!beta)", 7, BETA_S, BETA_S_LEN);
+/*			qreplace_all(s, "\\(--\\)", 6, "--", 2);*/
+			/* For future use, but commented because of some problems */
+
+			/* specials2ps(s);*/
 			specials2ascii(s);
 			texvar2ascii(s);
 			break;
@@ -2046,7 +2126,12 @@ GLOBAL void c_vars ( char *s )
 			qreplace_all(s, "(!grin)", 7, "<TT>;-)</TT>", 12);
 			qreplace_all(s, "(!laugh)", 8, "<TT>:-)</TT>", 12);
 			qreplace_all(s, "(!copyright)", 12, "&copy;", 6);
-			specials2ascii(s);
+
+			/* Changed in r6pl15 [NHz] */
+
+			specials2html(s);
+
+/*			specials2ascii(s);*/
 			texvar2ascii(s);
 			break;
 		case TOLDS:
@@ -2063,7 +2148,6 @@ GLOBAL void c_vars ( char *s )
 			break;
 	}
 }	/* c_vars */
-
 
 
 /*	############################################################

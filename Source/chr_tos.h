@@ -194,7 +194,11 @@ typedef struct _chartable
 LOCAL /* const */ CHARTABLE chrtab[128]=
 {
 	{	'\200',	"C",	"\\'C7",		"\\c{C}",			"&Ccedil;",	"\\307"	},
+#ifdef __TOS__ /* Changed in r6pl15 [NHz] */
+	{	'\201',	"ue",	"\\'FC",		"{\\\"u}",			"&uuml;",	"\\374"	},
+#else
 	{	'\201',	"ue",	"\\'FC",		"{\\\"u}",			"&uuml;",	"\\371"	},
+#endif
 	{	'\202',	"e",	"\\'E9",		"\\'{e}",			"&eacute;",	"\\351"	},
 	{	'\203',	"a",	"\\'E2",		"\\^{a}",			"&acirc;",	"\\342"	},
 	{	'\204',	"ae",	"\\'E4",		"{\\\"a}",			"&auml;",	"\\344"	},

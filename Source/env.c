@@ -78,6 +78,18 @@ LOCAL BOOLEAN	bCalledEndAppendix;
 LOCAL int		pre_linedraw_charset;
 
 
+/* New in r6pl15 [NHz] */
+LOCAL const PAPERFORMAT paperSize[MAXPAPERSIZE]=
+{
+	{ "A3PORTRAIT", 297, 420, 842, 1191, 1136, 85, 780, 72, 0, 0, FALSE },
+	{ "A3LANDSCAPE", 420, 297, 1191, 842, 780, 72, 1119, 72, 0, 0, TRUE },
+	{ "A4PORTRAIT",	210, 297, 595, 842, 780, 85, 540, 72, 0, 0, FALSE },
+	{ "A4LANDSCAPE", 297, 210, 842, 595, 530, 72, 770, 72, 0, 0, TRUE },
+	{ "A5PORTRAIT", 148.5, 210, 421, 595, 530, 85, 366, 72, 0, 0, FALSE },
+	{ "A5LANDSCAPE", 210, 148.5, 595, 421, 356, 72, 523, 72, 0, 0, TRUE },
+};
+
+
 /*	############################################################
 	# lokale Prototypen
 	############################################################	*/
@@ -1382,6 +1394,15 @@ GLOBAL void c_begin_description ( void )
 			{	outln(":dl break=none tsize=4.");
 			}
 			break;
+		/* New in r6pl15 [NHz] */
+		case TOKPS:
+		{
+			outln("Bon");
+			outln("/offDesc (000000) addStrSpaceLeft");
+			outln("Boff");
+			outln("description");
+			break;
+		}
 	}
 
 	switch(desttype)
@@ -1501,9 +1522,27 @@ LOCAL void c_begin_list ( int listkind )
 		case TOPCH:
 		case TOTVH:
 		case TOKPS:
+		{
+			/* Changed in r6pl15 [NHz] */
+			char space[50];
+			int i;
+		
 			ll= (int) strlen(sWidth);
-			iEnvIndent[iEnvLevel]= ll + 3;	/*r6pl2 +3 statt +2 */
+			iEnvIndent[iEnvLevel]= (int) strlen(sWidth);
+			for(i=0;i<iEnvIndent[iEnvLevel];i++)
+				strcat(space, "0");
+
+			outln("Bon");
+/*			voutlnf("/offList (%s00) addStrSpaceLeft", space);*/
+			outln("/offCount offCount 1 add def");
+
+			outln("/offCountS offCount 4 add def");
+
+			voutlnf("offList offCount get (%s00) addStrSpaceLeft", space);
+
+			outln("Boff");
 			break;
+		}
 		case TOIPF:
 			if (bEnvShort[iEnvLevel])
 			{	voutlnf(":dl compact break=none tsize=%d.", (int)strlen(sWidth)+4);
@@ -2315,7 +2354,38 @@ GLOBAL void c_item ( void )
 					sprintf(token[0], ")\n(%d.) off%d writeBeforeLeft\n(",
 						enum_count[iEnvLevel], iEnvLevel);
 					break;
+				/* New in r6pl15 [NHz] */
 				case ENV_DESC:
+					token[0][0]= EOS;
+					strcpy_prev_indent(li);
+					if (token[1][0]=='[')
+					{
+						add_description();
+
+						ri[0]= EOS;
+						ll= iEnvIndent[iEnvLevel]-2;
+	
+						tl= toklen(token[0]);
+	
+						sAdd[0]= EOS;
+						if ( ((int) tl) < ll )
+						{
+							memset(sAdd, ' ', (size_t) (ll-tl) );
+							sAdd[ll-tl]= EOS;
+							/* sAdd wird weiter unten hinzugefuegt */
+						}
+
+						delete_once(token[0], "[");
+						delete_last(token[0], "]");
+	 					sprintf(s, ") udoshow Bon (%s) offDesc writeBeforeLeft Boff (", token[0]);
+
+						strcpy(token[0], s);
+						strcat(token[0], sAdd);
+
+					}
+					break;
+/* substituted by code above
+					case ENV_DESC:
 					token[0][0]= EOS;
 					strcpy_prev_indent(li);
 					if (token[1][0]=='[')
@@ -2327,7 +2397,7 @@ GLOBAL void c_item ( void )
 						strinsert(token[0], " ");
 					}
 					break;
-
+*/
 				case ENV_LIST:
 					token[0][0]= EOS;
 					
@@ -2355,13 +2425,27 @@ GLOBAL void c_item ( void )
 					switch(env_kind[iEnvLevel])
 		 			{
 		 				case LIST_BOLD:
-		 					sprintf(s, " %s%s%s%s%s", li, BOLD_ON, token[0], BOLD_OFF, ri);
+							/* Changed in r6pl15 [NHz] */
+
+/*		 					sprintf(s, " %s%s%s%s%s", li, BOLD_ON, token[0], BOLD_OFF, ri);*/
+		 					sprintf(s, ") udoshow Bon (%s) offList offCountS get writeBeforeLeft Boff (", token[0]);
 		 					break;
 		 				case LIST_ITALIC:
-		 					sprintf(s, " %s%s%s%s%s", li, ITALIC_ON, token[0], ITALIC_OFF, ri);
+							/* Changed in r6pl15 [NHz] */
+
+/*		 					sprintf(s, " %s%s%s%s%s", li, ITALIC_ON, token[0], ITALIC_OFF, ri);*/
+		 					sprintf(s, ") udoshow %s Ion (%s) offList offCountS get writeBeforeLeft Ioff %s (", li, token[0], ri);
+		 					break;
+		 				case LIST_TYPEWRITER:
+							/* New in r6pl15 [NHz] */
+
+		 					sprintf(s, ") udoshow %s Von (%s) offList offCountS get writeBeforeLeft Voff %s (", li, token[0], ri);
 		 					break;
 		 				default:
-		 					sprintf(s, " %s%s%s", li, token[0], ri);
+							/* Changed in r6pl15 [NHz] */
+
+/*		 					sprintf(s, " %s%s%s", li, token[0], ri);*/
+		 					sprintf(s, ") udoshow %s (%s) offList offCountS get writeBeforeLeft %s (", li, token[0], ri);
 		 					break;
 		 			}
 
@@ -2473,6 +2557,16 @@ LOCAL void c_end_list ( int listkind )
 		case TOIPF:	/*r6pl3*/
 			outln(":edl.");
 			break;
+		/* New in r6pl15 [NHz] */
+		case TOKPS:
+/*			outln("offList subOffFromLeft");*/
+			outln("offList offCountS get subOffFromLeft");
+
+			outln("/offCount offCount 1 sub def");
+
+			outln("/offCountS offCount 4 add def");
+
+			break;
 	}
 	
 	end_env_output_line(iEnvLevel+1);
@@ -2550,6 +2644,10 @@ GLOBAL void c_end_description ( void )
 			break;
 		case TOIPF:	/*r6pl3*/
 			outln(":edl.");
+			break;
+		case TOKPS:	/* New in r6pl15 [NHz] */
+			outln("description");
+			outln("offDesc subOffFromLeft");
 			break;
 	}
 
@@ -2896,7 +2994,9 @@ GLOBAL void c_begin_document ( void )
 				{	output_html_header(lang.unknown);
 				}
 			}
+
 			html_headline();
+
 			break;
 		case TORTF:
 			/* RTF-HEADER */
@@ -2938,7 +3038,9 @@ GLOBAL void c_begin_document ( void )
 			outln("}");
 			outln("\\paperw11904\\paperh16836");
 			outln("\\margl1134\\margr1134\\margt1984\\margb1984");
-			outln("\\pgnstart1\\ftnbj\\ftnrestart\\facingp\\margmirror\\makeback");
+			/* New '\widowctrl' in r6pl15 [NHz] */
+
+			outln("\\pgnstart1\\ftnbj\\ftnrestart\\facingp\\margmirror\\makeback\\widowctrl");
 			outln("\\sectd\\pgndec\\headery1134\\footery1134\\cols1\\colsx567\\pgndec");
 
 			voutlnf("\\f0\\fs%d", iDocPropfontSize);	
@@ -2974,7 +3076,7 @@ GLOBAL void c_begin_document ( void )
 			}
 
 			/* ---- Ueber UDO ---- */
-			voutlnf("  {\\doccomm UDO Release %s Patchlevel %s, %s %s}", UDO_REL, UDO_PL, compile_date, compile_time);
+			voutlnf("  {\\doccomm UDO Release %s Patchlevel %s}", UDO_REL, UDO_PL);
 
 			/* ---- Erstellungsdatum & Sonstiges ---- */
 			voutlnf("  {\\creatim\\yr%d\\mo%d\\dy%d\\hr%d\\min%d}",
@@ -3080,13 +3182,65 @@ GLOBAL void c_begin_document ( void )
 			}
 			break;
 		case TOKPS:
-			outln(UDO2PS);	/* in udo2ps.h definiert (c) by Christian Krueger */
-			outln("/topmargin    792 def");
+			outln(UDO2PS);	/* in udo2ps.h definiert (c) by Christian Krueger und Norbert Hanz */
+
+			if(laydat.paper != NULL)
+			{
+				int i;
+
+				for (i=0; i<MAXPAPERSIZE; i++)
+				{	if ( strcmp(laydat.paper, paperSize[i].paper)==0 )
+					{	voutlnf("<< /PageSize [ %d %d ] >> setpagedevice", paperSize[i].width_pt, paperSize[i].height_pt);
+						voutlnf("/cctopmargin   %d def", paperSize[i].margintop_pt);
+						voutlnf("/ccleftmargin  %d def", paperSize[i].marginleft_pt);
+						voutlnf("/ccrightmargin %d def", paperSize[i].marginright_pt);
+						voutlnf("/cclowermargin %d def", paperSize[i].marginbottom_pt);
+						outln("/topmargin      cctopmargin 20 sub def");
+						outln("/lowermargin    cclowermargin def");
+						outln("/rightmargin    ccrightmargin def");
+						outln("/leftmargin     ccleftmargin def");
+					}
+				}
+			}
+
+/*			outln("/topmargin    792 def");
 			outln("/lowermargin   72 def");
 			outln("/rightmargin  540 def");
-			outln("/leftmargin    90 def");
+			outln("/leftmargin    90 def");*/
 			outln("/linespacing  1.5 def");
+			outln("0 0 0 setBaseColor"); /* New in r6pl15 [NHz] */
 			outln("setup");
+
+			/* New in r6pl15 [NHz] */
+			if ((strstr(laydat.propfontname, "Helvetica")) || (strstr(laydat.propfontname, "Arial")) || (strstr(laydat.propfontname, "sans-serif")))
+				voutlnf("/basefont %d def", 1);
+			voutlnf("/fontsize %d def", laydat.propfontsize);
+			outln("basefont setBaseFont");
+			
+			voutlnf("/Titeltext (%s %s) def", titdat.title, titdat.program);
+			voutlnf("/FootAuthor (\\251 %s) def", titdat.author);
+			
+			/* Document info */
+			voutlnf("[ /Title (%s %s)", titdat.title, titdat.program);
+			voutlnf("  /Author (%s)", titdat.author);
+			voutlnf("  /Subject (%s)", titdat.description);
+			voutlnf("  /Keywords (%s)", titdat.keywords); /* Set by !docinfo [keywords] foo */
+			voutlnf("  /Creator (UDO Release %s Patchlevel %s for %s)", UDO_REL, UDO_PL, UDO_OS);
+			voutlnf("  /CreationDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
+			voutlnf("  /ModDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
+			outln("/DOCINFO pdfmark\n");
+
+			/* How to open a PDF-document */
+			voutlnf("%s %s %s %s %s %s HowToOpen\n",
+							 laydat.pagemode,
+							 laydat.openpage,
+							 laydat.hidetoolbar,
+							 laydat.hidemenubar,
+							 laydat.viewerpreferences,
+							 laydat.fitwindow);
+
+			bookmarks_ps();
+
 			break;
 	}
 	
@@ -3203,8 +3357,8 @@ GLOBAL void c_end_document ( void )
 				memset(n, '#', 62);	n[62]= EOS;
 				outln("");
 				voutlnf("%s  %s", sSrcRemOn, n);
-				voutlnf("    # @(#) %s%s - made with UDO Release %s Patchlevel %s for %s, %s %s",
-					outfile.name, outfile.suff, UDO_REL, UDO_PL, UDO_OS, compile_date, compile_time);
+				voutlnf("    # @(#) %s%s - made with UDO Release %s Patchlevel %s for %s",
+					outfile.name, outfile.suff, UDO_REL, UDO_PL, UDO_OS);
 				voutlnf("    %s %s", n, sSrcRemOff);
 			}
 			break;
@@ -3216,6 +3370,18 @@ GLOBAL void c_end_document ( void )
 			break;			
 		case TOKPS:
 			outln("newpage");
+			/* New in r6pl15 [NHz] */
+			if(use_about_udo)
+			{
+				outln("/NodeName (About UDO) def");
+				outln("/acty acty 50 sub def");
+				outln("actx acty moveto");
+				if(destlang == TOGER)
+					voutlnf("(Release %s Patchlevel %s) (%s) (%s) aboutUDO_ger", UDO_REL, UDO_PL, UDO_OS, UDO_URL);
+				else
+					voutlnf("(Release %s Patchlevel %s) (%s) (%s) aboutUDO_eng", UDO_REL, UDO_PL, UDO_OS, UDO_URL);
+				outln("newpage");
+			}
 			break;
 	}
 
@@ -3388,9 +3554,13 @@ GLOBAL void init_env_itemchar ( void )
 
 		case TOKPS:
 			strcpy(itemchar[1], ")\n/bullet off1 writeBulletLeft\n(");
-			strcpy(itemchar[2], ")\n/dagger off2 writeBulletLeft\n(");
-			strcpy(itemchar[3], ")\n/bullet off3 writeBulletLeft\n(");
-			strcpy(itemchar[4], ")\n/bullet off4 writeBulletLeft\n(");
+			/* Changed in r6pl15 [NHz] */
+/*			strcpy(itemchar[2], ")\n/dagger off2 writeBulletLeft\n(");*/
+			strcpy(itemchar[2], ")\n/endash off2 writeBulletLeft\n(");
+/*			strcpy(itemchar[3], ")\n/bullet off3 writeBulletLeft\n(");*/
+			strcpy(itemchar[3], ")\n/asterix off3 writeBulletLeft\n(");
+/*			strcpy(itemchar[4], ")\n/bullet off4 writeBulletLeft\n(");*/
+			strcpy(itemchar[4], ")\n/periodcentered off4 writeBulletLeft\n(");
 			strcpy(itemchar[5], itemchar[1]);
 			strcpy(itemchar[6], itemchar[2]);
 			break;

@@ -74,6 +74,10 @@ LOCAL int		tab_toplines;						/* Oben Linie(n)?			*/
 LOCAL char		cells[MAX_TAB_W+1][MAX_CELLS_LEN];	/* Puffer fuer Zellen		*/
 LOCAL int		cells_counter;						/* Anzahl Zellen von Zeilen	*/
 
+
+LOCAL char addition[512]="";
+
+
 /*	############################################################
 	# lokale Prototypen
 	############################################################	*/
@@ -691,7 +695,6 @@ LOCAL void table_output_win ( void )
 }	/* table_output_win */
 
 
-
 LOCAL void table_output_html ( void )
 {
 	int		y, x;
@@ -1075,6 +1078,12 @@ LOCAL void table_output_general ( void )
 
 		for (y=0; y<3; y++)
 		{	hl[y][0]= EOS;
+
+			/* New in r6pl15 [NHz] */
+			/* Begin of a table-line in postscript */
+			if (desttype==TOKPS)
+				strcat(hl[y], "Von (");
+
 			for (x=0; x<=tab_w; x++)
 			{	if (tab_vert[x]>0)
 				{	if (x==0)
@@ -1105,6 +1114,11 @@ LOCAL void table_output_general ( void )
 				}
 			}
 			
+			/* New in r6pl15 [NHz] */
+			/* Conclusion of a table-line in postscript */
+			if (desttype==TOKPS)
+				strcat(hl[y], ") udoshow newline Voff");
+
 			if (inside_center)
 			{	stringcenter(hl[y], zDocParwidth);	/* Linie fuer den Rest zentrieren */
 			}
@@ -1132,6 +1146,12 @@ LOCAL void table_output_general ( void )
 
 	for (y=0; y<=tab_h; y++)
 	{	s[0]= EOS;
+
+		/* New in r6pl15 [NHz] */
+		/* Begin of a table-line in postscript */
+		if (desttype==TOKPS)
+			strcat(s, "Von (");
+
 		for (x=0; x<=tab_w; x++)
 		{
 			if (tab_vert[x]>0)
@@ -1174,6 +1194,11 @@ LOCAL void table_output_general ( void )
 			strcat(s, " ");
 		}	/* for x */
 		
+		/* New in r6pl15 [NHz] */
+		/* Conclusion of a table-line in postscript */
+		if (desttype==TOKPS)
+			strcat(s, ") udoshow newline Voff");
+
 		if (tab_vert[tab_w+1]>0)
 		{	for (i=1; i<=tab_vert[tab_w+1]; i++)
 			{	(i==tab_vert[tab_w+1]) ? strcat(s, vc_r) : strcat(s, vc_m);
@@ -1188,7 +1213,13 @@ LOCAL void table_output_general ( void )
 		{	strright(s, zDocParwidth);
 		}
 
-		auto_quote_chars(s, FALSE);
+/* Changed in r6pl15 [NHz] */
+
+/* Parenthesis of table lines would be quoted \( */
+
+		if(desttype != TOKPS)
+
+			auto_quote_chars(s, FALSE);
 		switch(desttype)
 		{
 			case TOWIN:

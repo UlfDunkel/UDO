@@ -53,8 +53,141 @@ const char *id_tp_c= "@(#) tp.c        11.02.1999";
 /*	############################################################
 	# lokale Prototypen
 	############################################################	*/
+LOCAL BOOLEAN init_docinfo_data ( char *data, char **var, int allow_empty );
 LOCAL void init_titdat ( void );
 LOCAL void free_titdat ( char **var );
+
+
+/* New in r6pl15 [NHz] */
+/*	############################################################
+	#
+	# Doc-Layout
+	#
+	############################################################	*/
+/*	--------------------------------------------------------------
+	set_doclayout()
+	Setzen von Informationen fuer das Layout (neue Version)
+	Die Daten stehen in token[]. Ich habe die Funktion hier herein
+	gepackt, da ich keine neue C-Datei er”ffnen wollte.
+	!doclayout [format] [foo]".
+	<-	TRUE:	OK
+		sonst:	Fehler
+	--------------------------------------------------------------	*/
+GLOBAL BOOLEAN set_doclayout ( void )
+{
+	char s[512], *cont_format, *cont_content, *data, format[512], content[512];
+	char *page, page2[2];
+	struct size_brackets contlen;
+
+	tokcpy2(s);
+	
+	contlen= get_two_brackets_ptr(s, &cont_format, &cont_content, &data);
+	
+	if (contlen.format==0 || contlen.content==0 || cont_content==NULL || cont_format==NULL || data==NULL)
+	{	error_syntax_error();
+		return FALSE;
+	}
+
+	format[0]= EOS;	
+	strncpy(format, cont_format, contlen.format);
+	format[contlen.format]= EOS;
+	del_whitespaces(format);
+
+	content[0]= EOS;	
+	strncpy(content, cont_content, contlen.content);
+	content[contlen.content]= EOS;
+	del_whitespaces(content);
+
+	if (strcmp(content, "paper")==0)
+	{	if ( str_for_desttype(format) )
+		{	/* Layout festlegen */
+			init_docinfo_data(data, &(laydat.paper), FALSE);
+		}
+		return TRUE;
+	}
+	
+	if (strcmp(content, "propfontname")==0)
+	{	if ( str_for_desttype(format) )
+		{	/* Proportionalfont festlegen */
+			init_docinfo_data(data, &(laydat.propfontname), FALSE);
+		}
+		return TRUE;
+	}
+	
+	if (strcmp(content, "propfontsize")==0)
+	{	if ( str_for_desttype(format) )
+		{	/* Gr”že des Proportionalfonts festlegen */
+			laydat.propfontsize = atoi(data);
+		}
+		return TRUE;
+	}
+
+	if (strcmp(content, "monofontname")==0)
+	{	if ( str_for_desttype(format) )
+		{	/* Žquidistanten Font festlegen */
+			init_docinfo_data(data, &(laydat.monofontname), FALSE);
+		}
+		return TRUE;
+	}
+	
+	if (strcmp(content, "monofontsize")==0)
+	{	if ( str_for_desttype(format) )
+		{	/* Gr”že des „quidistanten Fonts festlegen */
+			laydat.monofontsize = atoi(data);
+		}
+		return TRUE;
+	}
+	
+	/* Specialities for Postscript */
+	if (strcmp(content, "openMode")==0)
+	{	if (strstr(data, "Outlines"))
+			init_docinfo_data("/UseOutlines", &(laydat.pagemode), FALSE);
+		else if (strstr(data, "Thumbs"))
+			init_docinfo_data("/UseThumbs", &(laydat.pagemode), FALSE);
+		else if (strstr(data, "Fullscreen"))
+			init_docinfo_data("/FullScreen", &(laydat.pagemode), FALSE);
+		else
+			init_docinfo_data("/UseNone", &(laydat.pagemode), FALSE);
+
+		page = strstr(data, "Page=");
+		if (page != NULL)
+		{
+			page2[0] = *(page+5);
+			page2[1] = EOS;
+			init_docinfo_data(page2, &(laydat.openpage), FALSE);
+		}
+		else
+			init_docinfo_data("1", &(laydat.openpage), FALSE);
+
+		if (strstr(data, "HideToolbar"))
+			init_docinfo_data("true", &(laydat.hidetoolbar), FALSE);
+		else
+			init_docinfo_data("false", &(laydat.hidetoolbar), FALSE);
+
+		if (strstr(data, "HideMenubar"))
+			init_docinfo_data("true", &(laydat.hidemenubar), FALSE);
+		else
+			init_docinfo_data("false", &(laydat.hidemenubar), FALSE);
+
+		if (strstr(data, "OneColumn"))
+			init_docinfo_data("/OneColumn", &(laydat.viewerpreferences), FALSE);
+		else if (strstr(data, "ColumnLeft"))
+			init_docinfo_data("/TwoColumnLeft", &(laydat.viewerpreferences), FALSE);
+		else if (strstr(data, "ColumnRight"))
+			init_docinfo_data("/TwoColumnRight", &(laydat.viewerpreferences), FALSE);
+		else
+			init_docinfo_data("/SinglePage", &(laydat.viewerpreferences), FALSE);
+		
+		if (strstr(data, "Title"))
+			init_docinfo_data("true", &(laydat.fitwindow), FALSE);
+		else
+			init_docinfo_data("false", &(laydat.fitwindow), FALSE);
+		return TRUE;
+	}
+
+	return FALSE;
+
+}	/* set_doclayout */
 
 
 /*	############################################################
@@ -286,6 +419,18 @@ GLOBAL BOOLEAN set_docinfo ( void )
 		{	address_counter++;
 			init_docinfo_data(data, &(titdat.address[address_counter]), FALSE);
 		}
+		return TRUE;
+	}
+
+	/* New in r6pl15 [NHz] */
+	if (strcmp(inhalt, "keywords")==0)
+	{	init_docinfo_data(data, &(titdat.keywords), FALSE);
+		return TRUE;
+	}
+
+	/* New in r6pl15 [NHz] */
+	if (strcmp(inhalt, "description")==0)
+	{	init_docinfo_data(data, &(titdat.description), FALSE);
 		return TRUE;
 	}
 
@@ -1057,6 +1202,56 @@ GLOBAL void c_maketitle ( void )
 			outln("");
 			break;
 		
+		/* New in r6pl15 [NHz] */
+		/* Title-Page for Postscript */
+		case TOKPS:
+			outln("/acty acty 50 sub def");
+			outln("newline");
+			if ( has_title )
+			{	outln("14 changeFontSize");
+				voutlnf("(%s) Center setAlign", titdat.title);
+			}
+			if ( has_program )
+			{	outln("22 changeFontSize");
+				outln("newline");
+				voutlnf("(%s) Center setAlign", titdat.program);
+			}
+			if ( has_version )
+			{	outln("14 changeFontSize");
+				outln("newline");
+				voutlnf("(%s) Center setAlign", titdat.version);
+			}
+			if ( has_date )
+			{	outln("newline");
+				voutlnf("(%s) Center setAlign", titdat.date);
+				outln("11 changeFontSize");
+			}
+
+			if ( has_author )
+			{	outln("currentpoint exch pop lowermargin 125 add lt");
+				outln("{");
+				outln("  /acty lowermargin 125 add def");
+				outln("}");
+				outln("{");
+				outln("  /acty lowermargin 200 add def");
+				outln("} ifelse");
+				outln("newline");
+				voutlnf("(%s) Center setAlign newline", lang.by);
+				voutlnf("(%s) Center setAlign", titdat.author);
+			}
+
+			if ( has_address )
+			{	outln("newline");
+				for (i=1; i<=address_counter; i++)
+				{	if (titdat.address[i]!=NULL)
+					{	voutlnf("(%s) Center setAlign newline", titdat.address[i]);
+					}
+				}
+				outln("newline");
+			}
+			c_newpage();
+			break;
+
 	}
 	
 }	/*c_maketitle*/
@@ -1122,6 +1317,8 @@ LOCAL void init_titdat ( void )
 	{	titdat.address[i]= NULL;
 	}
 	
+	titdat.keywords= NULL; /* New in r6pl15 [NHz] */
+	titdat.description= NULL; /* New in r6pl15 [NHz] */
 	titdat.htmltitle= NULL;
 	titdat.webmastername= NULL;
 	titdat.webmasteremail= NULL;
@@ -1193,6 +1390,8 @@ GLOBAL void exit_module_tp ( void )
 	{	free_titdat(&(titdat.address[i]));
 	}
 	
+	free_titdat(&(titdat.keywords)); /* New in r6pl15 [NHz] */
+	free_titdat(&(titdat.description)); /* New in r6pl15 [NHz] */
 	free_titdat(&(titdat.htmltitle));
 	free_titdat(&(titdat.webmastername));
 	free_titdat(&(titdat.webmasteremail));

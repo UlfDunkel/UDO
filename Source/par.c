@@ -972,6 +972,46 @@ LOCAL BOOLEAN convert_link_ipf ( char *s, const char *p0, char *p1, char *p2, co
 }	/* convert_link_ipf */
 
 
+/* New in r6pl15 [NHz] */
+LOCAL BOOLEAN convert_link_ps ( char *s, const char *p0, char *p1, char *p2, const char *link )
+{
+	char nodename[256], s_entry[256];
+	int ti, li;
+	BOOLEAN isnode;
+	BOOLEAN flag;
+
+	/* Internal Link for Postscript */
+	flag= is_node_link(p2, nodename, &ti, &isnode, &li);
+
+
+	convert_tilde(p1);
+	if (flag)
+	{	if (p2[0]==EOS)
+		{	strcpy(p2, Param[1]);
+		}
+		replace_udo_quotes(p2);	/* r6pl2 */
+		replace_udo_quotes(p1);	/* r6pl2 */
+		sprintf(s_entry, ") udoshow (%s) /%s 0 255 0 Link (", p1, p2);
+	}
+
+	else
+
+	{	/* Node, Alias oder Label nicht definiert */
+		error_undefined_link(link);
+		strcpy(s_entry, p1);
+	}
+
+	
+
+	if ( insert_placeholder(s, p0, s_entry, p1) )
+	{	return(TRUE);
+	}
+
+	return FALSE;
+
+}	/* convert_link_ps */
+
+
 LOCAL BOOLEAN convert_link_etc ( char *s, const char *p0, char *p1, char *p2, const char *link )
 {
 	char nodename[256], s_entry[256];
@@ -1160,6 +1200,13 @@ LOCAL void c_link ( char *s, BOOLEAN inside_b4_macro )
 			case TOIPF:
 				linkerror= !convert_link_ipf(s, Param[0], Param[1], Param[2], link);
 				break;
+
+			/* New in r6pl15 [NHz] */
+			/* Internal Link for Postscript */
+			case TOKPS:
+				linkerror= !convert_link_ps(s, Param[0], Param[1], Param[2], link);
+				break;
+
 			default:
 				linkerror= !convert_link_etc(s, Param[0], Param[1], Param[2], link);
 				break;
@@ -1181,8 +1228,13 @@ LOCAL void c_link ( char *s, BOOLEAN inside_b4_macro )
 
 LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 {
-	int pnr;
-	char s_entry[1024];
+	int pnr, url_len, i;
+	char s_entry[1024], url_rtf[512], rtf0[4];
+
+	char rtf1[]="00d0c9ea79f9bace118c8200aa004ba90b0200000017000000";
+	char rtf2[]="0000e0c9ea79f9bace118c8200aa004ba90b";
+	char rtf3[]="000000";
+	char rtf4[]="2f000000";
 	BOOLEAN linkerror= FALSE;
 
 	while ( !linkerror && ((pnr=get_parameters(s, "url", 2))==2) )
@@ -1209,11 +1261,11 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 		}
 		else
 		{
-   			switch(desttype)
-   			{
-   				case TOHTM:
+ 			switch(desttype)
+ 			{
+ 				case TOHTM:
 				case TOMHH:
-   					convert_tilde(Param[1]);
+ 					convert_tilde(Param[1]);
 					if (Param[2][0]==EOS)
 					{	strcpy(Param[2], Param[1]);
 					}
@@ -1225,14 +1277,75 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 					else
 					{	sprintf(s_entry, "<a href=\"%s\">%s</a>", Param[2], Param[1]);
 					}
-   					linkerror= !insert_placeholder(s, Param[0], s_entry, Param[1]);
-   					break;
-   				default:
-   					convert_tilde(Param[1]);
+ 					linkerror= !insert_placeholder(s, Param[0], s_entry, Param[1]);
+ 					break;
+
+					/* New in r6pl15 [NHz] */
+					/* Weblink for Postscript/PDF */
+				case TOKPS:
+  				convert_tilde(Param[1]);
+					if (Param[2][0]==EOS)
+					{	strcpy(Param[2], Param[1]);
+					}
+					replace_udo_quotes(Param[2]);
+					replace_udo_quotes(Param[1]);
+					sprintf(s_entry, ") udoshow (%s) (%s) 0 0 255 WebLink (", Param[1], Param[2]);
+   				linkerror= !insert_placeholder(s, Param[0], s_entry, Param[1]);
+					break;
+
+					/* New in r6pl15 [NHz] */
+					/* Weblink for WinHelp */
+				case TOWIN:
+
+				case TOWH4:
+  				convert_tilde(Param[1]);
+					if (Param[2][0]==EOS)
+					{	strcpy(Param[2], Param[1]);
+					}
+					replace_udo_quotes(Param[2]);
+					replace_udo_quotes(Param[1]);
+					sprintf(s_entry, "{\ul (%s)}{\v !ExecFile((%s))}", Param[1], Param[2]);
+   				linkerror= !insert_placeholder(s, Param[0], s_entry, Param[1]);
+					break;
+
+					/* New in r6pl15 [NHz] */
+					/* Weblink for Richtext Format */
+				case TORTF:
+  				convert_tilde(Param[1]);
+					if (Param[2][0]==EOS)
+					{	strcpy(Param[2], Param[1]);
+					}
+					replace_udo_quotes(Param[2]);
+					replace_udo_quotes(Param[1]);
+
+
+					url_len = (int)strlen(Param[2]);
+
+					rtf0[0]=EOS;
+
+					url_rtf[0]=EOS;
+
+					for(i=0;i<url_len;i++)
+
+					{	sprintf(rtf0, "%x", (int)Param[2][i]);
+
+						strcat(url_rtf, rtf0);
+
+						strcat(url_rtf, "00");
+
+					}
+
+					sprintf(s_entry, "{\\field{\\*\\fldinst {HYPERLINK \"%s\"}{{\\*\\datafield %s%x%s%s%s%x%s%s%s}}}\n{\\fldrslt {\\cs15\\ul\\cf2 %s}}}", Param[2], rtf1, url_len+1, rtf3, url_rtf, rtf2, (url_len+2)*2, rtf3, url_rtf, rtf4, Param[1]);
+
+   				linkerror= !insert_placeholder(s, Param[0], s_entry, Param[1]);
+					break;
+
+   			default:
+   				convert_tilde(Param[1]);
 					replace_udo_quotes(Param[1]);	/* r6pl2 */
 					replace_udo_quotes(Param[2]);	/* r6pl2 */
 					linkerror= !insert_placeholder(s, Param[0], Param[1], Param[1]);
-   					break;
+ 					break;
    			}	/*switch*/
    		}	/* if (no_urls) */
 
@@ -1363,12 +1476,26 @@ LOCAL void c_xlink ( char *s, BOOLEAN inside_b4_macro )
 	   				{	error_xlink_win_syntax();
 	   					linkerror= !replace_once(s, Param[0], Param[1]);
 	   				}
-   					break;
+  					break;
+
+					/* New in r6pl15 [NHz] */
+					/* Filelink for Postscript */
+					case TOKPS:
+   					convert_tilde(Param[1]);
+						if (Param[2][0]==EOS)
+						{	strcpy(Param[2], Param[1]);
+						}
+						replace_udo_quotes(Param[2]);	/* r6pl2 */
+						replace_udo_quotes(Param[1]);	/* r6pl2 */
+						sprintf(s_entry, ") udoshow (%s) (%s) %s 255 0 0 FileLink (", Param[1], Param[2], "/Null");
+   					linkerror= !insert_placeholder(s, Param[0], s_entry, Param[1]);
+						break;
+
    				default:
    					convert_tilde(Param[1]);
-					replace_udo_quotes(Param[1]);	/* r6pl2 */
-					replace_udo_quotes(Param[2]);	/* r6pl2 */
-					linkerror= !insert_placeholder(s, Param[0], Param[1], Param[1]);
+						replace_udo_quotes(Param[1]);	/* r6pl2 */
+						replace_udo_quotes(Param[2]);	/* r6pl2 */
+						linkerror= !insert_placeholder(s, Param[0], Param[1], Param[1]);
    					break;
    			}	/*switch*/
    		}	/* if (no_xlinks) */
@@ -1740,7 +1867,7 @@ LOCAL void c_comment ( char *s, const BOOLEAN inside_b4_macro )
 
 LOCAL BOOLEAN c_index ( char *s, const BOOLEAN inside_b4_macro )
 {
-	char s_tidx[256], s_entry[256];
+	char s_tidx[256], s_entry[256], upr_entry[512];
 	char keyword[256];
 	BOOLEAN ret= TRUE;
 
@@ -1757,6 +1884,14 @@ LOCAL BOOLEAN c_index ( char *s, const BOOLEAN inside_b4_macro )
 		
 			adjust_params_inside(Param[1]);
 		}
+
+		/* New in r6pl15 [NHz] */
+
+		/* Set index in project file */
+
+		sprintf(upr_entry, "%s", Param[1]); 
+
+		save_upr_entry_index ( 1, sCurrFileName, upr_entry, uiCurrFileLine );
 
 		if (no_index)
 		{	ret= replace_once(s, Param[0], Param[1]);
@@ -1775,7 +1910,13 @@ LOCAL BOOLEAN c_index ( char *s, const BOOLEAN inside_b4_macro )
 					break;
 				case TORTF:
 					sprintf(s_entry, "{\\xe\\v %s}", Param[1]);
-					ret= delete_once(s, Param[0]);
+					/* Changed in r6pl15 [NHz] */
+
+					if ( !insert_placeholder(s, Param[0], s_entry, s_entry) )
+					{	ret= FALSE;
+						replace_once(s, Param[0], s_entry);
+					}
+					/* ret= delete_once(s, Param[0]);*/
 					break;
 				case TOWIN:
 				case TOWH4:
@@ -1857,7 +1998,7 @@ LOCAL BOOLEAN c_index ( char *s, const BOOLEAN inside_b4_macro )
 
 LOCAL BOOLEAN c_single_index ( char *s, const BOOLEAN inside_b4_macro )
 {
-	char s_tidx[256], s_entry[256];
+	char s_tidx[256], s_entry[256], upr_entry[512];
 	char keyword[256];
 	BOOLEAN ret= TRUE;
 
@@ -1874,6 +2015,14 @@ LOCAL BOOLEAN c_single_index ( char *s, const BOOLEAN inside_b4_macro )
 		
 			adjust_params_inside(Param[1]);
 		}
+
+		/* New in r6pl15 [NHz] */
+
+		/* Set index in project file */
+
+		sprintf(upr_entry, "%s", Param[1]); 
+
+		save_upr_entry_index ( 1, sCurrFileName, upr_entry, uiCurrFileLine );
 
 		if (no_index)
 		{	ret= replace_once(s, Param[0], Param[1]);
@@ -1968,7 +2117,7 @@ LOCAL BOOLEAN c_single_index ( char *s, const BOOLEAN inside_b4_macro )
 
 LOCAL BOOLEAN c_double_index ( char *s, const BOOLEAN inside_b4_macro )
 {
-	char s_entry[1024];
+	char s_entry[1024], upr_entry[512];
 	BOOLEAN ret= TRUE;
 
 	if ( get_parameters(s, "idx", 2) )
@@ -1984,6 +2133,14 @@ LOCAL BOOLEAN c_double_index ( char *s, const BOOLEAN inside_b4_macro )
 			adjust_params_inside(Param[1]);
 			adjust_params_inside(Param[2]);
 		}
+
+		/* New in r6pl15 [NHz] */
+
+		/* Set index in project file */
+
+		sprintf(upr_entry, "%s:%s", Param[1], Param[2]); 
+
+		save_upr_entry_index ( 2, sCurrFileName, upr_entry, uiCurrFileLine );
 
 		if (no_index)
 		{	ret= replace_once(s, Param[0], Param[1]);
@@ -2086,7 +2243,7 @@ LOCAL BOOLEAN c_double_index ( char *s, const BOOLEAN inside_b4_macro )
 
 LOCAL BOOLEAN c_tripple_index ( char *s, const BOOLEAN inside_b4_macro )
 {
-	char s_entry[1024];
+	char s_entry[1024], upr_entry[512];
 	BOOLEAN ret= TRUE;
 
 	if ( get_parameters(s, "idx", 3) )
@@ -2103,6 +2260,14 @@ LOCAL BOOLEAN c_tripple_index ( char *s, const BOOLEAN inside_b4_macro )
 			adjust_params_inside(Param[2]);
 			adjust_params_inside(Param[3]);
 		}
+
+		/* New in r6pl15 [NHz] */
+
+		/* Set index in project file */
+
+		sprintf(upr_entry, "%s:%s:%s", Param[1], Param[2], Param[3]); 
+
+		save_upr_entry_index ( 3, sCurrFileName, upr_entry, uiCurrFileLine );
 
 		if (no_index)
 		{	ret= replace_once(s, Param[0], Param[1]);
@@ -2248,7 +2413,7 @@ LOCAL BOOLEAN c_tripple_index ( char *s, const BOOLEAN inside_b4_macro )
 
 LOCAL BOOLEAN c_quadruple_index ( char *s, const BOOLEAN inside_b4_macro )
 {
-	char s_entry[1024];
+	char s_entry[1024], upr_entry[512];
 	BOOLEAN ret= TRUE;
 
 	if ( get_parameters(s, "idx", 4) )
@@ -2267,6 +2432,14 @@ LOCAL BOOLEAN c_quadruple_index ( char *s, const BOOLEAN inside_b4_macro )
 			adjust_params_inside(Param[3]);
 			adjust_params_inside(Param[4]);
 		}
+
+		/* New in r6pl15 [NHz] */
+
+		/* Set index in project file */
+
+		sprintf(upr_entry, "%s:%s:%s:%s", Param[1], Param[2], Param[3], Param[4]); 
+
+		save_upr_entry_index ( 4, sCurrFileName, upr_entry, uiCurrFileLine );
 
 		if (no_index)
 		{	ret= replace_once(s, Param[0], Param[1]);
@@ -2398,6 +2571,7 @@ GLOBAL void c_internal_index ( char *s, const BOOLEAN inside_b4_macro )
 	int nr;
 	BOOLEAN flag;
 	BOOLEAN has_idx, has_index;
+
 	
 	has_idx = (strstr(s, "(!idx")!=NULL);
 	has_index = (strstr(s, "(!index")!=NULL);
