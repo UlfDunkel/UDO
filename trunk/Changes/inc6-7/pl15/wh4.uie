@@ -1,0 +1,7 @@
+!begin_itemize
+
+!index !/wh4_monofont
+!item New: New command !/wh4_monofont to set the fontname
+used for monospaced text (like !/rtf_monofont).
+
+!end_itemize

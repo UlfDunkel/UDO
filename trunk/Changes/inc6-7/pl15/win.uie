@@ -1,0 +1,7 @@
+!begin_itemize
+
+!index !/win_monofont
+!item New: New command !/win_monofont to set the fontname
+used for monospaced text (like !/rtf_monofont).
+
+!end_itemize
