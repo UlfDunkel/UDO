@@ -833,10 +833,11 @@ LOCAL void table_output_html ( void )
 
 			addition[0] = EOS;
 
-			found = strstr(tab_cell[y][x], "!?");
+			/* some tables have empty cells, so always check befor using tab_cell entries */
+			if (tab_cell[y][x]!=NULL)
+			    found = strstr(tab_cell[y][x], "!?");
 
 			if(found != NULL)
-
 			{	strncpy(token, tab_cell[y][x], strcspn(tab_cell[y][x], "!"));
 
 				test_for_addition(token);
