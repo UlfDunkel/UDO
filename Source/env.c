@@ -3118,7 +3118,7 @@ GLOBAL void c_begin_document ( void )
 			}
 
 			/* ---- Ueber UDO ---- */
-			voutlnf("  {\\doccomm UDO Release %s.%s Patchlevel %s}", UDO_REL, UDO_SUBVER, UDO_PL);
+			voutlnf("  {\\doccomm UDO Version %s.%s.%s}", UDO_REL, UDO_SUBVER, UDO_PL);
 
 			/* ---- Erstellungsdatum & Sonstiges ---- */
 			voutlnf("  {\\creatim\\yr%d\\mo%d\\dy%d\\hr%d\\min%d}",
@@ -3286,7 +3286,7 @@ GLOBAL void c_begin_document ( void )
 			voutlnf("  /Author (%s)", titdat.author);
 			voutlnf("  /Subject (%s)", titdat.description);
 			voutlnf("  /Keywords (%s)", titdat.keywords); /* Set by !docinfo [keywords] foo */
-			voutlnf("  /Creator (UDO Release %s.%s Patchlevel %s for %s)", UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
+			voutlnf("  /Creator (UDO Version %s.%s.%s for %s)", UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
 			voutlnf("  /CreationDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
 			voutlnf("  /ModDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
 			outln("/DOCINFO pdfmark\n");
@@ -3418,7 +3418,7 @@ GLOBAL void c_end_document ( void )
 				memset(n, '#', 62);	n[62]= EOS;
 				outln("");
 				voutlnf("%s  %s", sSrcRemOn, n);
-				voutlnf("    # @(#) %s%s - made with UDO Release %s.%s Patchlevel %s for %s",
+				voutlnf("    # @(#) %s%s - made with UDO Version %s.%s.%s for %s",
 					outfile.name, outfile.suff, UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
 				voutlnf("    %s %s", n, sSrcRemOff);
 			}
@@ -3438,9 +3438,9 @@ GLOBAL void c_end_document ( void )
 				outln("/acty acty 50 sub def");
 				outln("actx acty moveto");
 				if(destlang == TOGER)
-					voutlnf("(Release %s.%s Patchlevel %s) (%s) (%s) aboutUDO_ger", UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS, UDO_URL);
+					voutlnf("(Version %s.%s.%s) (%s) (%s) aboutUDO_ger", UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS, UDO_URL);
 				else
-					voutlnf("(Release %s.%s Patchlevel %s) (%s) (%s) aboutUDO_eng", UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS, UDO_URL);
+					voutlnf("(Version %s.%s.%s) (%s) (%s) aboutUDO_eng", UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS, UDO_URL);
 				outln("newpage");
 			}
 			break;
