@@ -17,7 +17,7 @@
 Summary: Universal DOcument (UDO) - text processing utility
 Name: udo
 Version: 6.2.0
-Release: 2
+Release: 3
 Copyright: GPL
 Group: Applications/Text
 Source: http://www.udo-open-source.org/download/sources/udo_6.2.0_src.tar.gz
@@ -38,7 +38,9 @@ tar xzf $RPM_SOURCE_DIR/udo_6.2.0_src.tar.gz
 %build
 make -C udo_6.2.0/Source -f Makefile.linux
 chmod 755 udo_6.2.0/Source/udo
-$RPM_BUILD_DIR/udo_6.2.0/Source/udo --nroff -q -o /usr/share/man/man1/udo.1 $RPM_BUILD_DIR/udo_6.2.0/Guide/eng/manual/manpage.u
+mkdir -p /usr/local/man/man1
+$RPM_BUILD_DIR/udo_6.2.0/Source/udo --nroff -q -o /usr/local/man/man1/udo.1 $RPM_BUILD_DIR/udo_6.2.0/Guide/eng/manual/manpage.u
+gzip -9 /usr/local/man/man1/udo.1
 
 %install
 strip udo_6.2.0/Source/udo
@@ -49,4 +51,4 @@ cp $RPM_BUILD_DIR/udo_6.2.0/README /usr/share/doc/udo
 %files
 %doc /usr/share/doc/udo/README
 /usr/local/bin/udo
-/usr/share/man/man1/udo.1
+/usr/local/man/man1/udo.1.gz
