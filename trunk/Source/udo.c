@@ -1174,7 +1174,7 @@ LOCAL int get_color ( void )
 	char n[1024];
 	register int i;
 
-	tokcpy2(n);
+	tokcpy2(n, 1024);
 
 	for (i=0; i<MAX_UDOCOLOR; i++)
 	{	if ( strstr(n, udocolor[i].name)!=NULL )
@@ -1229,7 +1229,7 @@ LOCAL void c_drc_bcolor ( void )
 {
 	char color[256];
 	
-	tokcpy2(color);
+	tokcpy2(color, 256);
 	get_drc_color(color, sDrcBcolor);
 
 }	/* c_drc_bcolor */
@@ -1239,7 +1239,7 @@ LOCAL void c_drc_icolor ( void )
 {
 	char color[256];
 	
-	tokcpy2(color);
+	tokcpy2(color, 256);
 	get_drc_color(color, sDrcIcolor);
 
 }	/* c_drc_icolor */
@@ -1249,7 +1249,7 @@ LOCAL void c_drc_ucolor ( void )
 {
 	char color[256];
 	
-	tokcpy2(color);
+	tokcpy2(color, 256);
 	get_drc_color(color, sDrcUcolor);
 
 }	/* c_drc_ucolor */
@@ -1258,7 +1258,7 @@ LOCAL void c_drc_flags ( void )
 {
 	char s[256];
 	
-	tokcpy2(s);
+	tokcpy2(s, 256);
 	iDrcFlags= atoi(s);
 
 	if (iDrcFlags<0 || iDrcFlags>64)
@@ -1336,7 +1336,7 @@ LOCAL void set_wh4_linkcolor (char *s, const int c)
 LOCAL BOOLEAN check_on ( void )
 {
 	char n[512];
-	tokcpy2(n);
+	tokcpy2(n, 512);
 	return ( strstr(n, "on")!=NULL );
 }	/* check_on */
 
@@ -1344,7 +1344,7 @@ LOCAL BOOLEAN check_on ( void )
 LOCAL BOOLEAN check_off ( void )
 {
 	char n[512];
-	tokcpy2(n);
+	tokcpy2(n, 512);
 	return ( strstr(n, "off")!=NULL );
 }	/* check_off */
 
@@ -1420,7 +1420,7 @@ LOCAL void c_set ( void )
 {
 	char s[512];
 	
-	tokcpy2(s);
+	tokcpy2(s, 512);
 	add_udosymbol(s);
 }
 
@@ -1428,7 +1428,7 @@ LOCAL void c_unset ( void )
 {
 	char s[512];
 	
-	tokcpy2(s);
+	tokcpy2(s, 512);
 	del_udosymbol(s);
 }
 
@@ -2041,7 +2041,7 @@ LOCAL void c_index ( void )
 	}
 
 	/* Tokens umkopieren */
-	tokcpy2(idx);
+	tokcpy2(idx, 512);
 
 	if (idx[0]==EOS)
 	{	error_missing_parameter(CMD_INDEX);
@@ -2272,7 +2272,7 @@ LOCAL void c_heading ( void )
 	char name[512], n[512], align[64];
 	BOOLEAN inside_center, inside_right;
 
-	tokcpy2(name);
+	tokcpy2(name, 512);
 	
 	if (name[0]==EOS)
 	{	error_missing_parameter(CMD_HEADING);
@@ -2394,7 +2394,7 @@ LOCAL void c_subheading ( void )
 	char name[512], n[512], align[64];
 	BOOLEAN inside_center, inside_right;
 
-	tokcpy2(name);
+	tokcpy2(name, 512);
 	
 	if (name[0]==EOS)
 	{	error_missing_parameter(CMD_SUBHEADING);
@@ -2516,7 +2516,7 @@ LOCAL void c_subsubheading ( void )
 	char name[512], n[512], align[64];
 	BOOLEAN inside_center, inside_right;
 
-	tokcpy2(name);
+	tokcpy2(name, 512);
 	
 	if (name[0]==EOS)
 	{	error_missing_parameter(CMD_SUBSUBHEADING);
@@ -2635,7 +2635,7 @@ LOCAL void c_subsubsubheading ( void )
 	char name[512], n[512], align[64];
 	BOOLEAN inside_center, inside_right;
 
-	tokcpy2(name);
+	tokcpy2(name, 512);
 	
 	if (name[0]==EOS)
 	{	error_missing_parameter(CMD_SUBSUBSUBHEADING);
@@ -2756,7 +2756,7 @@ LOCAL void c_listheading ( void )
 	BOOLEAN inside_center, inside_right;
 	int iSize;
 
-	tokcpy2(name);
+	tokcpy2(name, 512);
 	
 	if (name[0]==EOS)
 	{	error_missing_parameter(CMD_HEADING);
@@ -2804,7 +2804,7 @@ LOCAL void c_listsubheading ( void )
 	BOOLEAN inside_center, inside_right;
 	int iSize;
 
-	tokcpy2(name);
+	tokcpy2(name, 512);
 	
 	if (name[0]==EOS)
 	{	error_missing_parameter(CMD_HEADING);
@@ -2851,7 +2851,7 @@ LOCAL void c_listsubsubheading ( void )
 	BOOLEAN inside_center, inside_right;
 	int iSize;
 
-	tokcpy2(name);
+	tokcpy2(name, 512);
 	
 	if (name[0]==EOS)
 	{	error_missing_parameter(CMD_HEADING);
@@ -2898,7 +2898,7 @@ LOCAL void c_listsubsubsubheading ( void )
 	BOOLEAN inside_center, inside_right;
 	int iSize;
 
-	tokcpy2(name);
+	tokcpy2(name, 512);
 	
 	if (name[0]==EOS)
 	{	error_missing_parameter(CMD_HEADING);
@@ -3045,7 +3045,7 @@ LOCAL void c_break ( void )
 LOCAL void c_error ( void )
 {
 	char e[512];
-	tokcpy2(e);
+	tokcpy2(e, 512);
 	error_error(e);
 
 	bBreakInside= TRUE;
@@ -3082,16 +3082,16 @@ LOCAL void c_code ( void )
 {
 	char s[256];
 	int i;
-	
+
 	/* r6pl2: Neue Version "!code iso"	*/
 	/* vorher: "!code_iso" etc.			*/
-	
+
 	if (token[1][0]==EOS)
 	{	error_missing_parameter("!code");
 		return;
 	}
-	
-	tokcpy2(s);
+
+	tokcpy2(s, 256);
 
 #if 1
 	for (i=0; i<MAXCHARSET; i++)
@@ -3419,7 +3419,7 @@ GLOBAL void c_udolink ( void )
 	inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);	/*r6pl5*/
 	inside_right= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_RIGH);	/*r6pl5*/
 
-	tokcpy2(nodename);
+	tokcpy2(nodename, 512);
 
 	switch (desttype)
 	{
@@ -3818,7 +3818,7 @@ LOCAL void convert_image ( const BOOLEAN visible )
 
 	if (token[1][0]=='\"')
 	{
-		tokcpy2(sTemp);
+		tokcpy2(sTemp, 1024);
 		ptr= strchr(sTemp+1, '\"');		/* zweites " suchen */
 
 		if (ptr)
@@ -3836,7 +3836,7 @@ LOCAL void convert_image ( const BOOLEAN visible )
 	{
 		strcpy(filename, token[1]);
 		token[1][0]= EOS;
-		tokcpy2(caption);
+		tokcpy2(caption, 512);
 		del_whitespaces(caption);
 	}
 
@@ -3948,7 +3948,7 @@ GLOBAL void c_include ( void )
 	if ( token[1][0]!=EOS )
 	{
 		if (token[1][0]=='\"')	/*r6pl2*/
-		{	tokcpy2(name);
+		{	tokcpy2(name, 512);
 			qdelete_once(name, "\"", 1);
 			qdelete_last(name, "\"", 1);
 		}
@@ -3979,7 +3979,7 @@ LOCAL void c_include_verbatim ( void )
 	if ( token[1][0]!=EOS )
 	{
 		if (token[1][0]=='\"')	/*r6pl2*/
-		{	tokcpy2(name);
+		{	tokcpy2(name, 512);
 			qdelete_once(name, "\"", 1);
 			qdelete_last(name, "\"", 1);
 		}
@@ -4023,7 +4023,7 @@ LOCAL void c_include_preformatted ( void )
 	if ( token[1][0]!=EOS )
 	{
 		if (token[1][0]=='\"')	/*r6pl2*/
-		{	tokcpy2(name);
+		{	tokcpy2(name, 512);
 			qdelete_once(name, "\"", 1);
 			qdelete_last(name, "\"", 1);
 		}
@@ -4067,7 +4067,7 @@ LOCAL void c_include_linedraw ( void )
 	if ( token[1][0]!=EOS )
 	{
 		if (token[1][0]=='\"')
-		{	tokcpy2(name);
+		{	tokcpy2(name, 512);
 			qdelete_once(name, "\"", 1);
 			qdelete_last(name, "\"", 1);
 		}
@@ -4111,7 +4111,7 @@ LOCAL void c_include_raw ( void )
 	if ( token[1][0]!=EOS )
 	{
 		if (token[1][0]=='\"')	/*r6pl2*/
-		{	tokcpy2(name);
+		{	tokcpy2(name, 512);
 			qdelete_once(name, "\"", 1);
 			qdelete_last(name, "\"", 1);
 		}
@@ -4149,7 +4149,7 @@ LOCAL void c_include_src ( void )
 	if ( token[1][0]!=EOS )
 	{
 		if (token[1][0]=='\"')	/*r6pl2*/
-		{	tokcpy2(name);
+		{	tokcpy2(name, 512);
 			qdelete_once(name, "\"", 1);
 			qdelete_last(name, "\"", 1);
 		}
@@ -4194,7 +4194,7 @@ LOCAL void c_include_comment ( void )
 	if ( token[1][0]!=EOS )
 	{
 		if (token[1][0]=='\"')	/*r6pl2*/
-		{	tokcpy2(name);
+		{	tokcpy2(name, 512);
 			qdelete_once(name, "\"", 1);
 			qdelete_last(name, "\"", 1);
 		}
@@ -4256,7 +4256,7 @@ LOCAL void c_input ( void )
 	if ( token[1][0]!=EOS )
 	{
 		if (token[1][0]=='\"')	/*r6pl2*/
-		{	tokcpy2(name);
+		{	tokcpy2(name, 512);
 			qdelete_once(name, "\"", 1);
 			qdelete_last(name, "\"", 1);
 		}
@@ -4625,29 +4625,47 @@ GLOBAL size_t toklen ( char *s )
 	tokcat()
 	tokcat haengt alle ab dem zweiten Token (token[1]) an einen
 	String an, getrennt durch ein Leerzeichen.
+        maxlen gibt die maximale Größe des Puffers in s an
 	------------------------------------------------------------	*/
-GLOBAL void tokcat ( char *s )
+GLOBAL void tokcat ( char *s, int maxlen )
 {
 	register int i;
+	int m=0; /* Länge des bisherigen Strings mitzählen */
 
 	for (i=1; i<token_counter; i++)
-	{	strcat(s, token[i]);
-		if (i<token_counter-1)
-		{	strcat(s, " ");
+	{       /* Hier wird auf m die Länge des neues Token addiert, plus
+                   1 Byte für das abschließende Nullbyte, sowie auch das evtl.
+                   eingefügte Leerzeichen */
+                m+=strlen(token[i])+2;
+                /* Wenn die neue Größe unterhalb der Puffergröße bleibt,
+                   ist ja alles okay */
+		if (m<maxlen)
+		{
+			strcat(s, token[i]);
+			if (i<token_counter-1)
+			{	strcat(s, " ");
+			}
 		}
 	}
-
+        /* Wenn die Puffergrenze überschritten oder erreicht wurde,
+           wird die Warnung ausgegeben. Ggf. sollte hier auch UDO abgebrochen
+           werden */
+	if (m>=maxlen)
+	{
+                printf("Warning: Buffer overrun prevented (tokcat): %d>=%d\n", m, maxlen);
+	}
 }	/*tokcat*/
 
 /*	------------------------------------------------------------
 	tokcpy2() leert den String und ruft tokcat auf. In <s>
 	befinden sich alle danach mit Ausnahme des Kommandos aus
 	token[0] alle Tokens, die durch Leerzeichen getrennt wurden.
+        maxlen gibt die maximale Größe des Puffers in s an
 	------------------------------------------------------------	*/
-GLOBAL void tokcpy2 ( char *s )
+GLOBAL void tokcpy2 ( char *s, int maxlen )
 {
 	s[0]= EOS;
-	tokcat(s);
+	tokcat(s, maxlen);
 }	/*tokcpy2*/
 
 
@@ -6903,7 +6921,7 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 
 
 	if ( strcmp(token[0], "!language")==0 )
-	{	tokcpy2(s);	/* r6pl2: str... auf s statt token[1] */
+	{	tokcpy2(s, 256);	/* r6pl2: str... auf s statt token[1] */
 		for (i=0; i<MAXLANGUAGE; i++)
 		{	if (strstr(s, udolanguage[i].magic)!=NULL)	/* r6pl2: strstr statt strcmp */
 			{	destlang= udolanguage[i].langval;
@@ -7004,14 +7022,14 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 				return TRUE;
 			}
 			if (strcmp(token[0], "!man_type")==0)
-			{	tokcpy2(sDocManType);
+			{	tokcpy2(sDocManType, 32);
 				return TRUE;
 			}
 			break;
 
 		case TONRO:
 			if (strcmp(token[0], "!nroff_type")==0)
-			{	tokcpy2(sDocNroffType);
+			{	tokcpy2(sDocNroffType, 32);
 				return TRUE;
 			}
 			break;
@@ -7054,19 +7072,19 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 				return TRUE;
 			}
 			if (strcmp(token[0], "!win_propfont")==0)
-			{	tokcpy2(sDocPropfont);
+			{	tokcpy2(sDocPropfont, MAXZEILE+1);
 				return TRUE;
 			}
 			if (strcmp(token[0], "!win_monofont")==0)
-			{	tokcpy2(sDocMonofont);
+			{	tokcpy2(sDocMonofont, MAXZEILE+1);
 				return TRUE;
 			}
 			if (strcmp(token[0], "!win_propfont_size")==0)
-			{	tokcpy2(sDocPropfontSize);
+			{	tokcpy2(sDocPropfontSize, 16);
 				return TRUE;
 			}
 			if (strcmp(token[0], "!win_monofont_size")==0)
-			{	tokcpy2(sDocMonofontSize);
+			{	tokcpy2(sDocMonofontSize, 16);
 				return TRUE;
 			}
 			if (strcmp(token[0], "!win_background")==0)
@@ -7079,7 +7097,7 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 				return TRUE;
 			}
 			if (strcmp(token[0], "!win_prefix_helpids")==0)
-			{	tokcpy2(sDocWinPrefixID);
+			{	tokcpy2(sDocWinPrefixID, 64);
 				return TRUE;
 			}
 			break;
@@ -7115,19 +7133,19 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 				return TRUE;
 			}
 			if (strcmp(token[0], "!wh4_propfont")==0)
-			{	tokcpy2(sDocPropfont);
+			{	tokcpy2(sDocPropfont, MAXZEILE+1);
 				return TRUE;
 			}
 			if (strcmp(token[0], "!wh4_monofont")==0)
-			{	tokcpy2(sDocMonofont);
+			{	tokcpy2(sDocMonofont, MAXZEILE+1);
 				return TRUE;
 			}
 			if (strcmp(token[0], "!wh4_propfont_size")==0)
-			{	tokcpy2(sDocPropfontSize);
+			{	tokcpy2(sDocPropfontSize, 16);
 				return TRUE;
 			}
 			if (strcmp(token[0], "!wh4_monofont_size")==0)
-			{	tokcpy2(sDocMonofontSize);
+			{	tokcpy2(sDocMonofontSize, 16);
 				return TRUE;
 			}
 			if (strcmp(token[0], "!wh4_background")==0)
@@ -7140,7 +7158,7 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 				return TRUE;
 			}
 			if (strcmp(token[0], "!wh4_prefix_helpids")==0)
-			{	tokcpy2(sDocWinPrefixID);
+			{	tokcpy2(sDocWinPrefixID, 64);
 				return TRUE;
 			}
 			break;
@@ -7151,19 +7169,19 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 				return TRUE;
 			}
 			if (strcmp(token[0], "!rtf_monofont")==0)
-			{	tokcpy2(sDocMonofont);
+			{	tokcpy2(sDocMonofont, MAXZEILE+1);
 				return TRUE;
 			}
 			if (strcmp(token[0], "!rtf_propfont")==0)
-			{	tokcpy2(sDocPropfont);
+			{	tokcpy2(sDocPropfont, MAXZEILE+1);
 				return TRUE;
 			}
 			if (strcmp(token[0], "!rtf_monofont_size")==0)
-			{	tokcpy2(sDocMonofontSize);
+			{	tokcpy2(sDocMonofontSize, 16);
 				return TRUE;
 			}
 			if (strcmp(token[0], "!rtf_propfont_size")==0)
-			{	tokcpy2(sDocPropfontSize);
+			{	tokcpy2(sDocPropfontSize, 16);
 				return TRUE;
 			}
 			break;
@@ -7211,7 +7229,7 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 				return TRUE;
 			}
 			if (strcmp(token[0], "!html_backpage")==0)
-			{	tokcpy2(sDocHtmlBackpage);
+			{	tokcpy2(sDocHtmlBackpage, 512);
 				return TRUE;
 			}
 			if ( strcmp(token[0], "!html_backcolor")==0 )
@@ -7318,19 +7336,19 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 				return TRUE;
 			}
 			if (strcmp(token[0], "!html_propfont_name")==0)
-			{	tokcpy2(sDocHtmlPropfontName);
+			{	tokcpy2(sDocHtmlPropfontName, 64);
 				return TRUE;
 			}
 			if (strcmp(token[0], "!html_propfont_size")==0)
-			{	tokcpy2(sDocHtmlPropfontSize);
+			{	tokcpy2(sDocHtmlPropfontSize, 16);
 				return TRUE;
 			}
 			if (strcmp(token[0], "!html_monofont_name")==0)
-			{	tokcpy2(sDocHtmlMonofontName);
+			{	tokcpy2(sDocHtmlMonofontName, 64);
 				return TRUE;
 			}
 			if (strcmp(token[0], "!html_monofont_size")==0)
-			{	tokcpy2(sDocHtmlMonofontSize);
+			{	tokcpy2(sDocHtmlMonofontSize, 16);
 				return TRUE;
 			}
 			if ( strcmp(token[0], "!html_name_prefix")==0 )
@@ -7802,7 +7820,7 @@ LOCAL BOOLEAN pass1 (char *datei)
 						{	token_reset();
 							str2tok(zeile);
 							zeile[0]= EOS;
-							tokcpy2(zeile);
+							tokcpy2(zeile, LINELEN);
 							add_udosymbol(zeile);
 							zeile[0]= EOS;
 						}
@@ -7811,7 +7829,7 @@ LOCAL BOOLEAN pass1 (char *datei)
 						{	token_reset();
 							str2tok(zeile);
 							zeile[0]= EOS;
-							tokcpy2(zeile);
+							tokcpy2(zeile, LINELEN);
 							del_udosymbol(zeile);
 							zeile[0]= EOS;
 						}
@@ -7956,7 +7974,7 @@ LOCAL BOOLEAN pass1 (char *datei)
 						{	save_upr_entry_heading (4, sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine );
 						}	else
 						if ( strcmp(token[0], "!alias")==0 || strcmp(token[0], "!a")==0)
-						{	tokcpy2(tmp);
+						{	tokcpy2(tmp, 512);
 							add_alias(tmp, bInsidePopup);
 						}	else
 						if ( strcmp(token[0], "!index")==0 || strcmp(token[0], "!x")==0)
@@ -8074,7 +8092,7 @@ LOCAL BOOLEAN pass1 (char *datei)
 						}	else
 #endif
 						if ( strcmp(token[0], "!label")==0 || strcmp(token[0], "!l")==0)
-						{	tokcpy2(tmp);
+						{	tokcpy2(tmp, 512);
 							replace_udo_quotes(tmp);
 							add_label(tmp, FALSE, bInsidePopup);
 						}	else
@@ -8389,7 +8407,7 @@ LOCAL void c_comment ( void )
 {
 	char s[512];
 
-	tokcpy2(s);
+	tokcpy2(s, 512);
 	output_comment_line(s);
 
 }	/* c_comment */
@@ -9631,14 +9649,27 @@ GLOBAL BOOLEAN udo (char *datei)
 			if ( !bBreakHappened && !bBreakInside)	/*r6pl4: && !bBreakInside */
 			{
 				show_status_pass("Pass 2...");
+				/* Die folgende if-Abfrage ist nur ein Workaround,
+                                   damit -vor allem bei der HTML-Ausgabe- die
+                                   Kapitelnummern stimmen und die Unterinhalts-
+                                   verzeichnisse erzeugt werden */
+                                if (bInsideAppendix)
+                                {
+                                        bInsideAppendix=FALSE;
+                                        printf("Warning: bInsideAppendix=TRUE - fixed it\n");
+                                }
+                                else
+                                {
+                                        printf("Note: bInsideAppendix NOT fixed :-)\n");
+                                }
 				clear_if_stack();
 				output_preamble();
 				iUdopass= PASS2;
-	
+
 				if (desttype==TOHTM && html_frames_layout )
 				{	html_save_frameset();
 				}
-					
+
 				if ( pass2(datei) )
 				{
 					if (bCalledBeginDocument && !bCalledEndDocument)

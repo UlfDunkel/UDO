@@ -1457,7 +1457,7 @@ LOCAL void c_begin_list ( int listkind )
 
 	sShort[0]= EOS;
 	token[0][0]= EOS;
-	tokcpy2(sWidth);
+	tokcpy2(sWidth, 256);
 	delete_once(sWidth, "[");
 	delete_last(sWidth, "]");
 

@@ -144,7 +144,7 @@ LOCAL void convert_table_caption ( const BOOLEAN visible )
 {
 	char n[512];
 	
-	tokcpy2(n);
+	tokcpy2(n, 512);
 
 	tab_caption[0]= EOS;	
 	strncat(tab_caption, n, MAXTABCAPTION);
@@ -1573,7 +1573,7 @@ GLOBAL void set_table_alignment ( void )
 {
 	char s[256];
 
-	tokcpy2(s);
+	tokcpy2(s, 256);
 
 	if (strstr(s, "center")!=NULL)
 	{	table_alignment= ALIGN_CENT;
