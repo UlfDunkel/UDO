@@ -37,6 +37,7 @@ const char *id_tp_c= "@(#) tp.c        11.02.1999";
 #include "file.h"
 #include "img.h"
 #include "msg.h"
+#include "par.h"
 #include "str.h"
 #include "sty.h"
 #include "toc.h"
@@ -339,8 +340,17 @@ GLOBAL BOOLEAN set_docinfo ( void )
 	char s[512], *cont, *data, inhalt[512], *buffer;
 	char sDriv[512], sPath[512], sFile[512], sSuff[512];
 	size_t contlen;
+	char udo_macro[]="UDO_", macro_tmp[512];	/* V6.5.9 */
 
 	tokcpy2(s, 512);
+
+	/* New in V6.5.9 [NHz] */
+	contlen = strlen(token[1]);
+	um_strncpy(macro_tmp, token[1]+1, contlen-2, 500, "set_docinfo[1]");
+	um_strncpy(token[1], udo_macro, 5, 10, "set_docinfo[2]");
+	um_strncat(token[1], macro_tmp, (long)(contlen-2L), 500, "set_docinfo[3]");
+	add_define();
+	
 	/* New: Fixed bug #0000040 in r6.3pl16 [NHz] */
 	if(desttype==TOKPS)
 		node2postscript(s, KPS_PS2DOCINFO);
