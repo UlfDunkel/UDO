@@ -2893,7 +2893,7 @@ GLOBAL void c_begin_document ( void )
 			{	outln("\\pdfinfo {");
 				if (titdat.title!=NULL) voutlnf("  /Title (%s)", titdat.title);
 				if (titdat.author!=NULL) voutlnf("  /Author (%s)", titdat.author);
-				voutlnf("  /Creator (UDO Release %s Patchlevel %s for %s)", UDO_REL, UDO_PL, UDO_OS);
+				voutlnf("  /Creator (UDO Version %s.%s.%s for %s)", UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
 				voutlnf("  /CreationDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
 				voutlnf("  /ModDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
 				if (titdat.description!=NULL) voutlnf("  /Subject (%s)", titdat.description);
