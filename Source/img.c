@@ -912,8 +912,8 @@ GLOBAL void c_bmp_output ( const char *name, const char *caption, const BOOLEAN 
 					/* sprintf(n, "%s %d: %s", lang.figure, image_counter, caption); */
 					/* removed parenthesis */
 
-					/* New in r6pl16 [NHz] */
-					sprintf(n, "{{\\*\\bkmkstart _tocimg%d}%s }{\\field{\\*\\fldinst {SEQ %s \\\\* ARABIC }}: %s{\\fldrslt %d: %s{\\*\\bkmkend _Tocimg%d}}}", image_counter, lang.figure, lang.figure, caption, image_counter, caption, image_counter);
+					/* Changed in r6.3pl3 [NHz] */
+					sprintf(n, "{{\\*\\bkmkstart _tocimg%d}%s }{\\field{\\*\\fldinst {SEQ %s \\\\* ARABIC }}: %s{\\fldrslt %d: %s}}{\\*\\bkmkend _Tocimg%d}", image_counter, lang.figure, lang.figure, caption, image_counter, caption, image_counter);
 				}
 				else
 				{	/* Changed in r6pl16 [NHz] */
