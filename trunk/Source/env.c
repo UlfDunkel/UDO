@@ -1528,7 +1528,7 @@ LOCAL void c_begin_list ( int listkind )
 			int i;
 		
 			ll= (int) strlen(sWidth);
-			iEnvIndent[iEnvLevel]= (int) strlen(sWidth);
+			iEnvIndent[iEnvLevel]= (int) strlen(sWidth) + 3;
 			for(i=0;i<iEnvIndent[iEnvLevel];i++)
 				strcat(space, "0");
 
