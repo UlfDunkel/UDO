@@ -1,5 +1,5 @@
 # doc/manual/source/syntax.ui
-# letzte Änderungen: 14.01.2004 / last changes: Jan 14, 2004
+# letzte Änderungen: 17.01.2004 / last changes: Jan 17, 2004
 
 
 ################################################################################
@@ -6249,6 +6249,7 @@ Ausgabe der Zieldatei verwendet wird. Hierbei gelten folgende Zeichenketten:
 
 !index Sprache
 !label Sprache
+!label Sprachen
 !begin_xlist [swedish:] !short
 !item [dutch:]   Holländisch
 !item [english:] Englisch
@@ -6310,6 +6311,8 @@ the destination file. Use the following words to test the language:
 
 !index Language
 !label Language
+!label language
+!label languages
 !begin_xlist [swedish:] !short
 !item [dutch:]   Dutch
 !item [english:] English
