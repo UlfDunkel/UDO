@@ -1,5 +1,5 @@
 # doc/manual/source/syntax.ui
-# letzte Änderungen: 28.01.2004 / last changes: Jan 28, 2004
+# letzte Änderungen: 02.02.2004 / last changes: Feb 2, 2004
 
 
 ################################################################################
@@ -5285,6 +5285,27 @@ man beispielsweise eine Library oder eine Programmiersprache
 beschreiben möchte.
 !end_enumerate
 
+# hinzugefügt 02.02.2004 - Ulrich Kretschmer
+(!B)Achtung(!b): Vermeiden Sie Konstruktionen wie
+!begin_xlist !short
+!item [a.ui:] (!V)!include b.ui(!v)
+!item [b.ui:] (!V)!include a.ui(!v)
+!end_xlist
+oder auch
+!begin_xlist !short
+!item [a.ui:] (!V)!include b.ui(!v)
+	!begin_xlist !short
+	!item [b.ui:] (!V)!include c.ui(!v)
+		!begin_xlist !short
+		!item [c.ui:] (!V)!include a.ui(!v)
+		!end_xlist
+	!end_xlist
+!end_xlist
+die zu Endlos-Schleifen führen!
+
+UDO kann derartige Über-Kreuz-Verweise nicht abfangen und liefert als Fehlermeldung
+lediglich "memory allocation failed".
+
 !endif
 # ------------------------------------------------------------------------------
 !iflang [english]
@@ -5339,6 +5360,28 @@ code to your documentation. This is great for a documentation of a source
 code or a library.
 
 !end_enumerate
+
+# hinzugefügt 02.02.2004 - Ulrich Kretschmer
+(!B)Warning(!b): Avoid constructions like
+!begin_xlist !short
+!item [a.ui:] (!V)!include b.ui(!v)
+!item [b.ui:] (!V)!include a.ui(!v)
+!end_xlist
+or
+!begin_xlist !short
+!item [a.ui:] (!V)!include b.ui(!v)
+	!begin_xlist !short
+	!item [b.ui:] (!V)!include c.ui(!v)
+		!begin_xlist !short
+		!item [c.ui:] (!V)!include a.ui(!v)
+		!end_xlist
+	!end_xlist
+!end_xlist
+which cause infinite loops!
+
+UDO can't recognize such overcross references. You get only a (less informative)
+error message "memory allocation failed".
+
 !endif
 
 !end_node
