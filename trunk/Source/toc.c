@@ -212,7 +212,7 @@ LOCAL int get_toccmd_depth ( void );
 LOCAL TOCITEM *init_new_toc_entry ( const int toctype, const BOOLEAN invisible );
 LOCAL BOOLEAN add_toc_to_toc ( void );
 
-LOCAL void free_toc_data ( char **var );
+/*LOCAL void free_toc_data ( char **var );*/
 
 /*	------------------------------------------------------------------	*/
 
@@ -12172,7 +12172,9 @@ GLOBAL void init_module_toc ( void )
 
 }	/* init_module_toc */
 
-
+/*
+v6.5.0 [vj] auskommentiert, um eine Compilerwarnung zu entfernen
+Diese Methode wird im Moment nicht mehr benötigt (siehe exit_module_toc)
 LOCAL void free_toc_data ( char **var )
 {
 	if (*var!=NULL)
@@ -12180,7 +12182,7 @@ LOCAL void free_toc_data ( char **var )
 		*var= NULL;
 	}
 }
-
+*/
 
 GLOBAL void exit_module_toc ( void )
 {
@@ -12226,4 +12228,5 @@ GLOBAL void exit_module_toc ( void )
 /*	############################################################
 	# toc.c
 	############################################################	*/
+
 

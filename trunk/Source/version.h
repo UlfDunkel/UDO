@@ -87,6 +87,11 @@
 #define	HAVE_TMPNAM				0
 #endif
 
+/* OS/2 Support: OS/2 verhält sich wie DOS */
+#ifdef __OS2__
+#define __MSDOS__
+#endif
+
 #ifdef __MSDOS__
 #define	UDO_OS					"DOS"
 #define	USE_SLASH				0
@@ -102,6 +107,11 @@
 #define	HAVE_STRERROR			1
 #define	USE_SETFILETYPE		0
 #define	HAVE_TMPNAM				1
+#endif
+
+#ifdef __OS2__
+#undef UDO_OS
+#define	UDO_OS          "OS/2"
 #endif
 
 #ifdef __MSDOS850__
