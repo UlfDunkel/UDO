@@ -19,41 +19,6 @@ In this chapter you will find a short summary of all the changes in the past.
 !endif
 
 ################################################################################
-!begin_ignore
-Änderungen von Entwicklerversion 6.5.0 auf 6.5.1 (13.1.04 U.K.)
-================================================
-Es steht jetzt für !html_ignore_8bit ein optionaler Parameter bereit.
-UDO gibt (falls der Parameter vorhanden ist) in den Ziel-HTML-Dateien
-einen passenden Eintrag aus. Beispiel:
-!html_ignore_8bit ISO-8859-2
-ergibt in den HTML-Dateien
-<meta http-equiv="content-type" content="text/html;charset=ISO-8859-2">
-> was passiert, wenn der übergebene Text länger als 20 Zeichen ist?
-> Wird das Überstehende kommentarlos abgeschnitten? Kommt eine Warnmeldung?
-> Passiert ein Pufferüberlauf?
-da um_strcpy benutzt wird, wird der Überlauf verhindert, eine
-entsprechende Meldung ausgegeben und das Ausgabecharset ist leer...
-20 Zeichen sollten aber wirklich ausreichen, ich habe mir die
-Codierungen von GNU Recode angesehen und die ISO-Codes. Eigentlich
-dürften die noch nichtmal länger als 10 Zeichen werden... :-)
-http://www.w3.org/TR/1999/REC-html401-19991224/charset.html#doc-char-set
-
-Die OS/2 Version sollte sich jetzt als "UDO for OS/2".
-
-Eine Compilerwarnung wurde beseitigt.
-
-Die Startupmeldungen wurden angepasst (gewünscht von Ulrich)
-Release heißt jetzt durchgängig Version
-
-!code [utf8]
-oder
-!code [utf-8]
-wird unterstützt.
-
-!end_ignore
-
-
-################################################################################
 !iflang [german]
 !begin_node Änderungen von Version 6.4.0 nach 6.6.0
 !endif
@@ -86,53 +51,63 @@ developer versions.
 !heading (!GENERAL)
 !begin_description !short
 # ------------------------------------------------------------------------------
-!begin_ignore
 !item [(!NEWS)]
 !begin_itemize !short
 # ..............................................................................
 !iflang [german]
-!item (!T)!/docinfo(!t) hat zwei neue Argumente (!nl)
+!item (!KW [docinfo]) hat zwei neue Argumente: (!nl)
     (!T)company(!t) bezeichnet die Firma, für die ein Dokument erstellt wird.
     Wenn (!T)company(!t) benutzt wird, wird auf der Titelseite unter Autor
     ""für (!I)company(!i)"" eingefügt. (!nl)
     (!T)category(!t) bezeichnet eine Kategorie, zu der das Dokument gehört.
 !endif
 !iflang [english]
-!item (!T)!/docinfo(!t) has two arguments more (!nl)
+!item (!KW [docinfo]) has two new arguments: (!nl)
     (!T)company(!t) marks a company, for whom the document is made. If
-    (!T)company(!t) is used, the title page is supplied by ""for
-    (!I)company(!i)"" after the author entry. (!nl)
-    (!T)category(!t) marks a category, to which the document belongs.
+    (!T)company(!t) is used, the title page will be supplemented with
+    ""for (!I)company(!i)"" after the author entry. (!nl)
+    (!T)category(!t) describes a category to which the document belongs.
 !endif
 # ..............................................................................
 !end_itemize
-!end_ignore
 # ------------------------------------------------------------------------------
 !smallskip
 !item [(!CHANGES)]
 !begin_itemize !short
 # ..............................................................................
 !iflang [german]
-!item Die "UDO Community" ist im Werbeblock ergänzt worden, wenn
-    (!T)!/use_about_udo(!t) benutzt wird.
-# U.K. 28.1.04: bitte verständlich ausdrücken. Unklar, was gemeint ist?
-# anscheinend der bei !use_about_udo ausgegebene Texte ?!
-# NHz 29.01.04: Ist es jetzt klarer?
+!item Die "UDO Community" ist in dem Text ergänzt worden, der von
+    (!KW [use_about_udo]) ausgegeben wird.
 !endif
 !iflang [english]
-!item The UDO Community is added to the advertisement, if
-    (!T)!/use_about_udo(!t) is used.
+!item The UDO Community was added to output of (!KW [use_about_udo]).
 !endif
 # ..............................................................................
 !iflang [german]
 !item Die Bezeichnung der einzelnen Versionen wurde geändert. Es heißt
-jetzt nicht mehr "Release 6.x Patchlevel yy" sondern "Version 6.x.y"
+jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 (x gerade für Produktionsversionen bzw. ungerade für Entwicklerversionen von UDO).
 !endif
 !iflang [english]
-!item The nomenclature of UDO was changed. It's called "Version 6.4.x"
-         instead of "Release 6.x Patchlevel xx" now.
-# U.K. engl. Texte noch ergänzen
+!item UDO's version nomenclature was changed. It's called "Version~6.x.y"
+   instead of "Release~6.x Patchlevel~yy" now (x is even for (stable) production versions
+   and odd für developer versions).
+!endif
+# ..............................................................................
+!iflang [german]
+!item Die OS/2-Version von UDO sollte sich seit Version~6.5.1 als "UDO for OS/2" melden.
+!endif
+!iflang [english]
+!item UDO for OS/2 should identify itself with "UDO for OS/2" (since version~6.5.1).
+!item
+!endif
+# ..............................................................................
+!iflang [german]
+!item (!T)!/code [utf8](!t) oder (!T)!/code [utf-8](!t) wird jetzt unterstützt (seit Version~6.5.1).
+!endif
+!iflang [english]
+!item (!T)!/code [utf8](!t) (same as (!T)!/code [utf-8](!t)) will be supported now (since version~6.5.1).
+!item
 !endif
 # ..............................................................................
 !end_itemize
@@ -143,32 +118,30 @@ jetzt nicht mehr "Release 6.x Patchlevel yy" sondern "Version 6.x.y"
 # ..............................................................................
 !iflang [german]
 !item Bug #0000055 in Version ..?.. beseitigt (!nl)
-    Umlaute, die in eingebetteten Bildern (!/img !...) oder Bildlinks
-    (!/ilink !..) vorkamen, wurden nicht richtig umgesetzt.
+    Umlaute, die in (!KKW [img]) oder (!KKW [ilink]) im zweiten Parameter vorkamen,
+    wurden nicht richtig umgesetzt.
 !endif
+# U.K. an N.H.: ist der Text mit dem 2. Parameter so okay?
 !iflang [english]
 !item Fixed bug #0000055 in version ..?.. (!nl)
-    Umlauts, which are used in embedded images (!/img !..) or image
-    links (!/ilink !..), were not converted in the right way.
+    Umlauts used in the second parameter of (!KKW [img]) or (!KKW [ilink])
+    were not converted in the right way.
 !endif
+# http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000055
+# behoben 25.01.2004 -> welche Version war zu diesem Zeitpunkt?
 # ..............................................................................
 !iflang [german]
 !item Bug #0000048 in Version~6.4.1 beseitigt (!nl)
-   Kommando fehlte in der Kommandoliste.
+   Fehlermeldung "unknown command: !html_use_hyphenation".
+   Ursache: Kommando fehlte in der Kommandoliste.
 !endif
 !iflang [english]
 !item Fixed bug #0000048 in version~6.4.1 (!nl)
-    Command wasn't listed in the command list.
+    Error message "unknown command: !html_use_hyphenation".
+    Reason: command wasn't present in the command list.
 !endif
-# ..............................................................................
-!iflang [german]
-!item Bug #0000056 in Version~6.4.1 beseitigt (!nl)
-   Versehentlich wurde dem Parameter "Höhe" die Breite übergeben.
-!endif
-!iflang [english]
-!item Fixed bug #0000056 in version~6.4.1 (!nl)
-   By an inadvertance the parameter "height" was covered with the width.
-!endif
+# http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000048
+# behoben 25.01.2004
 # ..............................................................................
 !end_itemize
 !end_description
@@ -179,45 +152,83 @@ jetzt nicht mehr "Release 6.x Patchlevel yy" sondern "Version 6.x.y"
 !begin_description !short
 # ------------------------------------------------------------------------------
 !item [(!NEWS)]
-!begin_itemize !short
+!begin_itemize
 # ..............................................................................
 !iflang [german]
-!item (!T)!/html_header_links <text>(!t) (!nl)
+!item Neuer Schalter (nur für Vorspann): (!T)!/html_header_links <text>(!t) (!nl)
    Ist dieser Schalter gesetzt, so werden je nach Vorgabe
-   (!T)<link>(!t)-Elemente im HTML-Header erzeugt.
-   Beinhaltet (!T)<text>(!t) ""navigation"", werden die Links zur Navigation erzeugt.
-   Beinhaltet (!T)<text>(!t) ""chapter"", werden alle Links zu den Kapiteln erzeugt. (!nl)
+   (!T)<link>(!t)-Elemente im HTML-Header erzeugt:
+   !begin_itemize !short
+   !item Beinhaltet (!T)<text>(!t) ""navigation"", werden die Links zur Navigation erzeugt
+   (<link rel="start" href="index.html" title="Beginn des Dokumentes">, ebenso
+   <link rel="home"!.., "contents", "toc", "first", "prev", "previous", "next", "last").
+   !item Beinhaltet (!T)<text>(!t) ""chapter"", werden alle Links zu den Kapiteln erzeugt
+   (<link rel="chapter" href="!.." title="!..">, ebenso für "section").
+   !end_itemize
 # U.K. 28.1.04: Beispiele (aus der UDO-HTML-Doku) bringen. Erklären, was erzeugt wird, wenn
 # !html_header_links *nicht* gesetzt ist (+ Beispiel).
 # NHz 29.01.04: Beispiel -> !html_header_links navigation chapter (siehe meine Mail vom 29.01.04)
-# Schalter nur im Vorspann zulässig? (anhand Maildebatte ergänzen)
-   Die <link>-Elemente für Navigation und Kapitel werden nicht mehr automatisch,
-   sondern nur auf Anforderung erzeugt. Dadurch entstehen kleinere HTML-Dateien. (!nl)
-   Dieser Feature-Wunsch #0000053 ist seit Version 6.5.2 implementiert.
+# U.K. 29.1.04: die Frage nach dem Beispiel war mißverständlich. Sind obige Klammerzusätze korrekt??
+   Dadurch, daß die Link-Elemente nicht mehr automatisch, sondern nur noch auf Anforderung
+   erzeugt werden, entstehen kleinere HTML-Dateien. (!nl)
+   Dieser Feature-Wunsch #0000053 ist seit Version~6.5.2 implementiert.
+# Beispiel-Aufruf für spätere Kommando-Doku: !html_header_links chapter, navigation
 !endif
 !iflang [english]
-!item (!T)!/html_header_links <text>(!t) (!nl)
-   If this command is set, several <link> elements are generated.
-   if <text> contains ""navigation"", links for navigation are generated.
-   If <text> contains ""chapter"", links for all nodes are generated. (!nl)
-   This feature wish #0000053 has been implemented since version 6.5.2.
+!item New Switch (preamble only): (!T)!/html_header_links <text>(!t) (!nl)
+   If this switch is set, several (!T)<link>(!t) elements are generated in the HTML header as following:
+   !begin_itemize !short
+   !item If <text> contains ""navigation"", links for navigation are generated
+   (<link rel="start" href="index.html" title="Begin of the document">, just as
+   <link rel="home"!.., "contents", "toc", "first", "prev", "previous", "next", "last").
+   !item If <text> contains ""chapter"", links for all nodes are generated
+   (<link rel="chapter" href="!.." title="!..">, same for "section").
+   !end_itemize
+   In the past, these link elements were produced automatically. Now, you get the link elements only
+   if you really want them. This makes smaller HTML files. (!nl)
+   This feature wish #0000053 has been implemented since version~6.5.2.
 !endif
 # ..............................................................................
 !iflang [german]
-!item (!T)!/html_header_date <text>(!t) (!nl)
-   Wenn dieser Schalter gesetzt ist, wird im HTML-Header ein META-Tag für das
-   Erzeugungsdatum erzeugt (anstatt des bisherigen Kommentars mit dem Erzeugungsdatum).
-   Ist <text> leer, wird für den Zeitzonenunterschied ""+00:00"" gesetzt. Ansonsten kann der
-   Benutzer für <text> den gewünschten Unterschied in der Zeitzone setzen. (!nl)
+!item Neuer Schalter (nur für Vorspann): (!T)!/html_header_date [<text>](!t) (!nl)
+   Bisher wurde zu Beginn jeder HTML-Datei ein Kommentar mit dem Datum der Datei-Erzeugung eingefügt,
+   z.B. (!T)<!-- last modified on 29.01.2004 -->(!t). (!nl)
+   Nunmehr wird, wenn dieser Schalter gesetzt ist, im HTML-Header ein META-Tag für
+   Datum/Uhrzeit der Datei-Erzeugung erzeugt,
+   z.B. (!T)<META name="date" content="2004-01-29T08:49:37+00:00">(!t). (!nl)
+   Dabei ist "+00:00" der Unterschied von der lokalen Zeit zu UTC (Coordinated Universal Time, vormals GMT).
+   Mit dem optionalen Parameter <text> kann ein Wert für diese Zeitdifferenz
+   übergeben werden, z.B. (!T)!/html_header_date +02:00(!t).
+# max. 6 Zeichen für <text>
+   Für <text> werden von UDO keine Überprüfungen durchgeführt; der Autor ist selbst
+   dafür verantwortlich, einen korrekten Wert zu übergeben.
+   Ist <text> leer, wird für den Zeitzonenunterschied ""+00:00"" gesetzt. (!nl)
    Dieser Feature-Wunsch #0000054 ist seit Version~6.5.2 implementiert.
 !endif
+# Datumsformat gemäß http://www.w3.org/TR/html401/types.html#type-datetime
 !iflang [english]
-!item (!T)!/html_header_date <text>(!t) (!nl)
-   If this switch is set, a META element for the building date is generated in the HTML Header.
-   If <text> is empty, the value for the delta of the time zone is set to ""+00:00"".
-   Otherwise the user can set the time zone on its own. (!nl)
+!item New Switch (preamble only): (!T)!/html_header_date [<text>](!t) (!nl)
+   Until now, UDO inserted near to the beginning of every HTML file the building date,
+   e.g. (!T)<!-- last modified on 2004/01/29 -->(!t). (!nl)
+   Now, only if this switch is set, a META element for the building date/time is generated
+   in the HTML Header, e.g. (!T)<META name="date" content="2004-01-29T08:49:37+00:00">(!t). (!nl)
+   "+00:00" means the difference from local time to UTC (Coordinated Universal Time, former GMT).
+   Using the optional parameter <text>, you can specify a value for this time difference,
+   e.g. (!T)!/html_header_date +02:00(!t).
+# up to 6 characters for <text>
+   There are no verifications on <text>. You are responsible for using a legal value.
+   If <text> is empty, the value for the time difference is set to ""+00:00"". (!nl)
    This feature wish #0000054 has been implemented since version 6.5.2.
 !endif
+!begin_ignore
+# # für die künftige, endgültige Doku an anderer Stelle:
+UTC = Coordinated Universal Time, entspricht der vormaligen Greenwich Mean Time (GMT).
+übersichtliche Umrechungstabelle (wohl am wichtigsten für die praktische
+UDO-Anwendung): http://setiathome.ssl.berkeley.edu/utc.html
+umfassend (mit weiteren Links):
+http://de.wikipedia.org/wiki/UTC bzw. http://en2.wikipedia.org/wiki/UTC,
+http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
+!end_ignore
 # ..............................................................................
 !end_itemize
 # ------------------------------------------------------------------------------
@@ -228,14 +239,28 @@ jetzt nicht mehr "Release 6.x Patchlevel yy" sondern "Version 6.x.y"
 !iflang [german]
 !item Die <link>-Elemente für die Navigation werden nicht mehr automatisch, sondern
    nur noch auf Anforderung in den HTML-Header geschrieben (siehe oben).
-!item Datum/Uhrzeit der Erzeugung der HTML-Datei wird nicht mehr als Kommentar, sondern
-als META-Tag in den HTML-Header geschrieben (siehe oben).
+!item Datum/Uhrzeit der Erzeugung der HTML-Datei wird nicht mehr automatisch als Kommentar,
+  sondern nur noch auf Anforderung als META-Tag in den HTML-Header geschrieben (siehe oben).
 !endif
 !iflang [english]
-!item Creation date/time of the HTML file will be written as META Tag into the HTML header
-(instead of the former comment). See above.
 !item The <link> elements for navigation and chapters are not generated
-    automatically any longer but on demand (see above).
+    automatically any longer but only on demand (see above).
+!item Creation date/time of the HTML file will be written only on demand
+   as META Tag into the HTML header (instead of the former comment). See above.
+!endif
+# ..............................................................................
+!iflang [german]
+!item Bei (!KW [html_ignore_8bit]) kann nun ein optionaler Parameter <text> für die Codepage
+   übergeben werden. Zum Beispiel wird mit (!T)!/html_ignore_8bit ISO-8859-2(!t) in die HTML-Header
+   folgendes geschrieben: (!T)<meta http-equiv="content-type" content="text/html;charset=ISO-8859-2">(!t).
+# <text> kann max. 20 Zeichen haben.
+# siehe auch: http://www.w3.org/TR/1999/REC-html401-19991224/charset.html#doc-char-set
+!endif
+!iflang [english]
+!item While using (!KW [html_ignore_8bit]), you can use now an optional parameter <text>
+  for the codepage. For example, if you use (!T)!/html_ignore_8bit ISO-8859-2(!t), you will
+  get HTML headers with
+  (!T)<meta http-equiv="content-type" content="text/html;charset=ISO-8859-2">(!t).
 !endif
 # ..............................................................................
 !end_itemize
@@ -246,13 +271,13 @@ als META-Tag in den HTML-Header geschrieben (siehe oben).
 # ..............................................................................
 !iflang [german]
 !item Bug #0000044 in Version~6.4.1 beseitigt (!nl)
-   Wenn !no_numbers gesetzt ist, werden keine Nummern mehr vor
-   die Kapitel innerhalb des <link>-Elementes im HTML-Header geschrieben.
+   Wenn (!KW [no_numbers]) gesetzt ist, werden keine Nummern mehr vor
+   die Kapitelnamen innerhalb des <link>-Elementes im HTML-Header geschrieben.
 !endif
 !iflang [english]
 !item Fixed bug #0000044 in version 6.4.1 (!nl)
-   If !no_numbers is set, there won't be printed numbers in front of a
-   node in HTML header <link> elements any longer.
+   If (!KW [no_numbers]) is set, there won't any longer printed numbers in front of the
+   node names in the HTML header <link> elements.
 !endif
 # ..............................................................................
 !end_itemize
@@ -270,10 +295,11 @@ als META-Tag in den HTML-Header geschrieben (siehe oben).
 !item Die (!T)!/docinfo(!t)-Einträge (!T)subject(!t), (!T)keywords(!t),
     (!T)company(!t) und (!T)category(!t) werden in die Info-Einträge der
     RTF-Datei geschrieben.
+# U.K. an N.H.: sind mit "Info-Einträge" die Dokument-Eigenschaften gemeint?
 !endif
 !iflang [english]
-!item The (!T)!/docinfo(!t) entries (!T)subject(!t), (!T)keywords!(t),
-   (!T)company(!t) and (!T)category(!t) are written in the info values
+!item The (!T)!/docinfo(!t) entries (!T)subject(!t), (!T)keywords!(!t),
+   (!T)company(!t) and (!T)category(!t) are written into the info values
    of RTF files.
 !endif
 # ..............................................................................
@@ -283,23 +309,38 @@ als META-Tag in den HTML-Header geschrieben (siehe oben).
 !item [(!BUGFIXES)]
 !begin_itemize !short
 # ..............................................................................
+# zu RTF
+!iflang [german]
+!item Bug #0000056 in Version~6.4.1 beseitigt (!nl)
+   Falsche Berechnung der Ausmaße von Bildern bei der RTF-Ausgabe.
+   Versehentlich wurde dem Parameter "Höhe" die Breite übergeben.
+!endif
+!iflang [english]
+!item Fixed bug #0000056 in version~6.4.1 (!nl)
+   Wrong calculation of pictures sizes using the RTF output.
+   By an inadvertance, the parameter "height" was covered with the width.
+!endif
+# http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000056
+# behoben 25.01.2004
+# ..............................................................................
 !iflang [german]
 !item Bug #0000017 in Version 6.4.1 beseitigt (!nl)
-   Wenn beim ersten Übersetzungslauf nach RTF das UDO-Link Bild noch
-   nicht vorhanden ist, wird jetzt ein Hinweis ausgegeben statt des
-   Fehlers, der darauf hinweist, mit der Bitte, das Dokument ein
-   weiteres Mal zu übersetzen. (!nl)
+   Fehlermeldung: ""couldn't read BMP header of <udo_mw.bmp>. No such file or directory."" (!nl)
+   Neuer Zustand: Wenn beim ersten Übersetzungslauf nach RTF das UDO-Link-Bild (!T)udo_mw.bmp(!t) noch
+   nicht vorhanden ist, wird jetzt ein Hinweis ausgegeben, das Dokument ein
+   weiteres Mal zu übersetzen, um es zu vervollständigen. (!nl)
    Das UDO-Bild wird jetzt auch auf TOS-kompatiblen Computern gefunden.
-# U.K. 29.1.04: Beschreibung unklar. Alter Zustand: eine Fehlermeldung kam.
-# neuer Zustand: nur noch ein Hinweis. (U.K. im Bugtracker nachlesen, um es zu verstehen)
 !endif
 !iflang [english]
 !item Fixed bug #0000017 in version~6.4.1 (!nl)
-   When a documented is translated to RTF for the first time and the
-   UDO link image doesn't exist, there will written be a note in the logfile,
-   that the user might translate the document again to complete it. (!nl)
+   Error message: ""couldn't read BMP header of <udo_mw.bmp>. No such file or directory."" (!nl)
+   New behavior: If you convert a document to RTF for the first time and the
+   UDO link image (!T)udo_mw.bmp(!t) doesn't exist, there will be given a note,
+   that you may translate the document again to complete it. (!nl)
    The image will be found now on TOS compatible computers too.
 !endif
+# http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000017
+# Fehler erledigt 25.01.2004
 # ..............................................................................
 !end_itemize
 
