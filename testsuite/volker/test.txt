@@ -1,1 +1,59 @@
+# Sonderzeichen "unendlich" (ab HTML 4.0)
+# nach Tests: &infin; funktioniert nicht zuverlässig mit allen Browsern
+!ifdest [html]
+# !define infin &infin;
+# !define infin mit
+!define infin oo
+!else
+!define infin mit
+# alternativ: "verheiratet mit" (nur "mit" ist aber wohl besser)
+!endif
+
+!set nurUmwelt
+
+!ifset nurUmwelt
+!set ebene2
+!else
+!set ebene1
+!endif
+!ifdest [html]
+!ifset ebene1
+!define ExternWWW &nbsp;<a href="(!1)"><img src="./bilder/extern.gif"  alt="(!1)" border=0></A>
+!endif
+!ifset ebene2
+!define ExternWWW &nbsp;<a href="(!1)"><img src="../bilder/extern.gif" alt="(!1)" border=0></A>
+!endif
+!ifset ebene3
+!define ExternWWW &nbsp;<a href="(!1)"><img src="../../bilder/extern.gif" alt="(!1)" border=0></A>
+!endif
+!ifset ebene4
+!define ExternWWW &nbsp;<a href="(!1)"><img src="../../../bilder/extern.gif" alt="(!1)" border=0></A>
+!endif
+!macro www (!ExternWWW [(!2)])~(!url [(!1)] [(!2)])
+!else
+!macro www (!1) ((!2))
+!endif
+
+!begin_document
+
 !node test
+
+!item ~(!img [../bilder/extern.gif] [])~(!url [Hessische Emissionsklärungs-VO Abwasser] [http://www.hessenrecht.hessen.de/gvbl/gesetze/85_Wasserwirtschaft_Wasserrecht/85-55-EmissionserklaerungsVO/EmissionserklaerungsVO.htm])
+
+!subnode Subtest
+
+Subnode
+
+!subsubnode SubSubTest
+
+SubSubNode
+
+!subsubsubnode Anlagen zu Tafel~II: Erste Generation der Nachkommen der Anna Margarethe Scherdel (!infin) Georg Friedrich Karl Giegold
+
+SubSubSubNode
+
+!subsubsubnode Anlagen zu Tafel~II: Zweite Generation der Nachkommen der Anna Margarethe Scherdel (!infin) Georg Friedrich Karl Giegold
+
+Hier steht kein Text, hier steht kein Text!
+
+!end_document
