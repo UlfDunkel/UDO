@@ -717,6 +717,8 @@ GLOBAL void c_gif_output ( const char *name, const char *caption, const char *su
 
 	change_sep_suffix(datei, suffix);	/* PL6 */
 
+	save_upr_entry_image(datei);
+	
 #if __MACOS__
 	if (*datei == ':') datei++;
 	replace_char(datei, ":", "/");
@@ -770,7 +772,6 @@ GLOBAL void c_gif_output ( const char *name, const char *caption, const char *su
 
 			if (flag)
 			{
-				save_upr_entry_image(gifdatei);	/*r6pl12*/
 				calc_gifsize(&uiWidth, &uiHeight, &gifhead);
 				sprintf(sWidth, " width=\"%u\"", uiWidth);
 				sprintf(sHeight, " height=\"%u\"", uiHeight);
@@ -1231,6 +1232,8 @@ GLOBAL void c_eps_output ( const char *name, const char *caption, const char *su
 
 	change_sep_suffix(datei, suffix);
 
+	save_upr_entry_image(datei);
+	
 #if __MACOS__
 	if (*datei == ':') datei++;
 	replace_char(datei, ":", "/");
@@ -1294,12 +1297,7 @@ GLOBAL void c_png_output ( const char *name, const char *caption, const char *su
 
 	change_sep_suffix(datei, suffix);
 
-#if __MACOS__
-	if (*datei == ':') datei++;
-	replace_char(datei, ":", "/");
-#else
-	replace_char(datei, "\\", "/");
-#endif
+	save_upr_entry_image(datei);	/*r6pl12*/
 
 	inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);
 	inside_right= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_RIGH);
@@ -1348,7 +1346,12 @@ GLOBAL void c_png_output ( const char *name, const char *caption, const char *su
 	voutlnf("%%     height: %u", uiHeight);
 #endif
 
-	save_upr_entry_image(pngdatei);	/*r6pl12*/
+#if __MACOS__
+	if (*datei == ':') datei++;
+	replace_char(datei, ":", "/");
+#else
+	replace_char(datei, "\\", "/");
+#endif
 
 	outln("\\mbox{");
 	voutlnf("\\pdfimage %s", datei);
