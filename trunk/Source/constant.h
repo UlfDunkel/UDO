@@ -117,6 +117,7 @@
 #define	TEX_STRUNK		2		/* CS-TeX (Atari)		*/
 #define	TEX_EMTEX		3		/* emTeX (DOS, OS/2)	*/
 #define	TEX_MIKTEX		4		/* MikTeX (Win32)		*/
+#define	TEX_TETEX		5		/* teTeX (UN*X)			*/
 
 #define	ALIGN_CENT		0		/* alignment-Befehle	*/
 #define	ALIGN_LEFT		1

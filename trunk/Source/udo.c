@@ -418,6 +418,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!tex_strunk",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!tex_emtex",					"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!tex_miktex",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
+	{ "!tex_tetex",					"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!tex_2e",					"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_name_prefix",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_no_xlist",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
@@ -3761,6 +3762,7 @@ LOCAL void convert_image ( const BOOLEAN visible )
 		case TOTEX:
 			qreplace_all(filename, "$\\backslash$", 12, "\\", 1);
 			c_internal_styles(caption);
+			qreplace_all(filename, "\\_", 2, "_", 1);
 			build_image_filename(filename, ".img");
 			switch (iTexVersion)
 			{	case TEX_LINDNER:
@@ -3774,6 +3776,9 @@ LOCAL void convert_image ( const BOOLEAN visible )
 					break;
 				case TEX_MIKTEX:
 					/* <???> */
+					break;
+				case TEX_TETEX:
+					c_eps_output(filename, caption, ".eps", visible);
 					break;
 			}
 			break;
@@ -6234,6 +6239,12 @@ LOCAL void output_preamble ( void )
 					}
 					strcat(s, "makeidx");
 				}
+				if (!no_images && iTexVersion == TEX_TETEX)
+				{	if (s[0]!= EOS)
+					{	strcat(s, ",");
+					}
+					strcat(s, "graphicx");
+				}
 				if (s[0]!= EOS)
 				{	voutlnf("\\usepackage{%s}", s);
 				}
@@ -6795,6 +6806,11 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			}
 			if (strcmp(token[0], "!tex_miktex")==0)
 			{	iTexVersion= TEX_MIKTEX;
+				bTex2e= TRUE;
+				return TRUE;
+			}
+			if (strcmp(token[0], "!tex_tetex")==0)
+			{	iTexVersion= TEX_TETEX;
 				bTex2e= TRUE;
 				return TRUE;
 			}
