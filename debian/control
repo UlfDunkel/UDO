@@ -14,18 +14,20 @@ Description: Universal DOcument (UDO) - text processing utility
  be converted to ASCII, HTML, LaTeX, nroff, PostScript, RTF and many more.
  Though UDO is powerful, it's quite easy to understand and to use.
 
-Package: udo-doc
+Package: udo-doc-en
 Section: doc
 Architecture: all
 Suggests: udo, www-browser, editor
+Replaces: udo-doc
 Description: Universal DOcument (UDO) - English documentation
  This package provides the complete documentation of UDO in the following
  formats: HTML, txt, udo 
 
-Package: udo-doc-ger
+Package: udo-doc-de
 Section: doc
 Architecture: all
 Suggests: udo, www-browser, editor
+Replaces: udo-doc-ger
 Description: Universal DOcument (UDO) - German documentation
  This package provides the complete documentation of UDO in the following
  formats: HTML, txt, udo
