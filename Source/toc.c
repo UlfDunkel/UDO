@@ -29,7 +29,7 @@
 
 #ifndef ID_TOC_C
 #define ID_TOC_C
-const char *id_toc_c= "@(#) toc.c       01.02.2004";
+const char *id_toc_c= "@(#) toc.c       04.02.2004";
 #endif
 
 #include "import.h"
@@ -37,6 +37,7 @@ const char *id_toc_c= "@(#) toc.c       01.02.2004";
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <ctype.h>
 #include "portab.h"
 #include "version.h"
 #include "constant.h"
@@ -2003,23 +2004,42 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 	/* New feature #0000054 in V6.5.2 [NHz] */
 	if(html_header_date)
 	{
-		char zone[6];
+		char zone[10]="+00:00";
 		time_t uhrzeit;
-		int hour_local, min_local, min_utc, hour_utc;
+		int hour_local, min_local, mday_local, min_utc, hour_utc, mday_utc;
+		int hours, minutes;
 	
-		if(!strcmp(html_header_date_zone, ""))
+		if(strcmp(html_header_date_zone, "") >0)
+			um_strcpy(zone, html_header_date_zone, 9, "output_html_meta1");
+		else
 		{
 			time(&uhrzeit);
+			mday_local = localtime(&uhrzeit)->tm_mday;
+			mday_utc = gmtime(&uhrzeit)->tm_mday;
 			hour_local = localtime(&uhrzeit)->tm_hour;
 			hour_utc = gmtime(&uhrzeit)->tm_hour;
 			min_local = localtime(&uhrzeit)->tm_min;
 			min_utc = gmtime(&uhrzeit)->tm_min;
-			sprintf(zone, "%+03d:%02d", hour_local-hour_utc, min_utc-min_local);
 
-/*			um_strcpy(zone, "+00:00", 5, "output_html_meta1");*/
+			if(min_local < min_utc)	/* special for countries with "broken times" (e.g. Iran +03:30) */
+			{
+				if(mday_local != mday_utc)	/* if different days over midnight */
+					hours = hour_local - hour_utc - 1 + 24;
+				else
+					hours = hour_local - hour_utc - 1;
+				minutes = min_utc - min_local;
+			}
+			else
+			{
+				if(mday_local != mday_utc)	/* if different days over midnight */
+					hours = hour_local - hour_utc + 24;
+				else
+					hours = hour_local - hour_utc;
+				minutes = min_local - min_utc;
+			}
+
+			sprintf(zone, "%+03d:%02d", hours, minutes);
 		}
-		else
-			um_strcpy(zone, html_header_date_zone, 5, "output_html_meta2");
 		voutlnf("<meta name=\"date\" content=\"%d-%02d-%02dT%02d:%02d:%02d%s\">", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec, zone);
 	}
 
@@ -2279,7 +2299,8 @@ LOCAL void output_html_doctype ( void )
 			break;
 	}
 		
-	voutlnf("<!-- last modified on %s -->", lang.short_today);
+	if(!html_header_date)
+		voutlnf("<!-- last modified on %s -->", lang.short_today);
 		
 }	/* output_html_doctype */
 
@@ -9126,9 +9147,21 @@ GLOBAL void set_html_doctype ( void )
 /* New feature #0000054 in V6.5.2 [NHz] */
 GLOBAL void set_html_header_date ( void )
 {
-	html_header_date = TRUE;
-	tokcpy2(html_header_date_zone, 6);
+	tokcpy2(html_header_date_zone, 9);
+	
+	if(((html_header_date_zone[0] != '+') &&
+		(html_header_date_zone[0] != '-')) ||
+		isdigit(html_header_date_zone[1] == 0) ||
+		isdigit(html_header_date_zone[2] == 0) ||
+		(html_header_date_zone[3] != ':') ||
+		isdigit(html_header_date_zone[4] == 0) ||
+		isdigit(html_header_date_zone[5] == 0))
+	{
+		error_wrong_header_date(html_header_date_zone);
+		return;
+	}
 
+	html_header_date = TRUE;
 }	/* set_html_header_date */
 
 
@@ -9154,6 +9187,7 @@ GLOBAL void set_html_header_links ( void )
 		kind = strtok(NULL, " ");
 	}
 
+	tokcpy2(html_header_links_kind, 40);
 	html_header_links = TRUE;
 
 }	/* set_html_header_links */
