@@ -27,6 +27,7 @@ const char *id_str_c= "@(#) str.c       10.03.1997";
 #include "import.h"
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 #include "portab.h"
 
 #include "export.h"
@@ -713,7 +714,8 @@ GLOBAL void my_strupr ( char *string )
 	
 	for (i=0; i<strlen(string); i++)
 	{	if ( string[i]>='a' && string[i]<='z' )
-		{	string[i]-= 32;
+		{
+			string[i] = (char)toupper(string[i]);
 		}
 	}
 #endif
@@ -734,7 +736,8 @@ GLOBAL void my_strlwr ( char *string )
 	
 	for (i=0; i<strlen(string); i++)
 	{	if ( string[i]>='A' && string[i]<='Z' )
-		{	string[i]+= 32;
+		{
+			string[i] = (char)tolower(string[i]);
 		}
 	}
 #endif
