@@ -1,7 +1,7 @@
 ################################################################################
 # doc/manual/source/manual.u
 # Hauptfile der Anleitung zu UDO / udo manual main page
-# letzte Änderungen: 21.12.2003 / last changes: Dec 21, 2003
+# letzte Änderungen: 13.01.2004 / last changes: Jan 13, 2004
 ################################################################################
 # In diesem File befindet sich kein Text! Alle Texte werden nachgeladen
 # This file doesn't contain any text! Any text will be included from other files.
@@ -203,6 +203,17 @@
 # end: hh, html
 !endif
 # end: english
+!endif
+
+# hinzugefügt 13.01.2004 - Ulrich Kretschmer
+# (kann später wieder weg, wenn die Doku fertig überarbeitet ist)
+!iflang [german]
+!macro DocumentationWorkInProgress Die UDO-Anleitung ist im Moment in Überarbeitung. Zwischenstände stehen auf der UDO-Website derzeit nur zum Online-Lesen zur Verfügung, aber nicht zum Download.
+!macro FollowingOutdated (!I)Die nachfolgenden Textpassagen sind z.T. nicht mehr aktuell und sind zur Überarbeitung vorgesehen.(!i)
+!endif
+!iflang [english]
+!macro DocumentationWorkInProgress The UDO Guide is actually in revision. Intermediate versions are currently only available on the UDO website for online-reading, but not for download.
+!macro (!I)FollowingOutdated The following text passages are partly outdated and will be revised.(!i)
 !endif
 
 # Sprachabhängige Textbausteine für den Befehlsindex (alphabetisch geordnet)
