@@ -1,6 +1,6 @@
 # mwu.txt
 # Zeichensatz: ANSI
-# letzte Änderungen: 10.12.2003
+# letzte Änderungen: 17.12.2003
 
 # Spracheinstellung (Symbole über Kommandozeilenoptionen setzen!)
 !ifset lang_en
@@ -73,7 +73,7 @@
 !maketitle
 
 !iflang [german]
-!html_name mwu-de.html
+!html_name index.html.de
 !html_description "Made with UDO": Referenzliste von mit UDO erstellten Webseiten, Projekten, Dokumentation etc.
 
 UDO wurde primär zur Software-Dokumentation entwickelt und wird für
@@ -84,12 +84,12 @@ folgenden, mit UDO gestalteten Seiten an.
 
 !ifdest [html]
 !begin_flushright
-This page (!url [in English] [./index-en.html])~(!EN)
+This page (!url [in English] [./index.html.en])~(!EN)
 !end_flushright
 !endif
 
 !else
-!html_name mwu-en.html
+!html_name index.html.en
 !html_description "Made with UDO": reference list of UDO-made web pages, manuals/documentations, projects...
 
 UDO has been primarily developed to enable authors to publish software
@@ -100,7 +100,7 @@ pages.
 
 !ifdest [html]
 !begin_flushright
-Diese Seite (!url [in Deutsch] [./index.html])~(!DE)
+Diese Seite (!url [in Deutsch] [./index.html.de])~(!DE)
 !end_flushright
 !endif
 
