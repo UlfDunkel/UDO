@@ -30,6 +30,10 @@
 #define UM_DEBUG_SHOW_STATS
 /* define or undef to get more debug messages */
 #define UM_DEBUG_SHOW_MSGS
+/* define or undef to say um_free to print the block start and end on an
+ * "memory block end check broken" error
+ */
+#define UM_DEBUG_SHOW_BUFFER_ON_FREE_ERROR
 /*
  * For gcc the um_free and um_realloc methods use %ld instead of %d in some printf
  * statements, to get rid of some compiler warnings. This tests if Linux is used,
