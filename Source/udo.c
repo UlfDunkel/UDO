@@ -9901,16 +9901,20 @@ GLOBAL BOOLEAN udo (char *datei)
 				/* Die folgende if-Abfrage ist nur ein Workaround,
                                    damit -vor allem bei der HTML-Ausgabe- die
                                    Kapitelnummern stimmen und die Unterinhalts-
-                                   verzeichnisse erzeugt werden */
+                                   verzeichnisse erzeugt werden
+				   v6.3.15 [vj] Die if-Abfrage bleibt drin, für den Fall das ein ähnlicher Fehler nochmal
+				   auftritt, er wird dann vielleicht früher erkannt
+				*/
                                 if (bInsideAppendix)
                                 {
                                         bInsideAppendix=FALSE;
                                         printf("Warning: bInsideAppendix=TRUE - fixed it\n");
                                 }
-                                else
+                                /* v6.3.15 [vj] Diese Meldung brauchen wir nun nicht mehr, die verwirrt bloß :-)
+				else
                                 {
                                         printf("Note: bInsideAppendix NOT fixed :-)\n");
-                                }
+                                }*/
 				clear_if_stack();
 				output_preamble();
 				iUdopass= PASS2;
