@@ -53,7 +53,6 @@ const char *id_tp_c= "@(#) tp.c        11.02.1999";
 /*	############################################################
 	# lokale Prototypen
 	############################################################	*/
-LOCAL BOOLEAN init_docinfo_data ( char *data, char **var );
 LOCAL void init_titdat ( void );
 LOCAL void free_titdat ( char **var );
 
@@ -70,7 +69,7 @@ LOCAL void free_titdat ( char **var );
 	->	data:	Zeiger auf den Inhalt
 		var:	Zeiger auf die Variable
 	--------------------------------------------------------------	*/
-LOCAL BOOLEAN init_docinfo_data ( char *data, char **var )
+LOCAL BOOLEAN init_docinfo_data ( char *data, char **var, int allow_empty )
 {
 	char *buffer;
 	
@@ -85,7 +84,7 @@ LOCAL BOOLEAN init_docinfo_data ( char *data, char **var )
 	replace_udo_quotes(data);
 	delete_all_divis(data);
 
-	if (data[0]==EOS)
+	if (data[0]==EOS && !allow_empty)
 	{	error_empty_docinfo();
 		return FALSE;
 	}
@@ -258,68 +257,68 @@ GLOBAL BOOLEAN set_docinfo ( void )
 	}
 
 	if (strcmp(inhalt, "title")==0)
-	{	init_docinfo_data(data, &(titdat.title));
+	{	init_docinfo_data(data, &(titdat.title), FALSE);
 		return TRUE;
 	}
 
 	if (strcmp(inhalt, "program")==0)
-	{	init_docinfo_data(data, &(titdat.program));
+	{	init_docinfo_data(data, &(titdat.program), FALSE);
 		return TRUE;
 	}
 
 	if (strcmp(inhalt, "version")==0)
-	{	init_docinfo_data(data, &(titdat.version));
+	{	init_docinfo_data(data, &(titdat.version), FALSE);
 		return TRUE;
 	}
 
 	if (strcmp(inhalt, "date")==0)
-	{	init_docinfo_data(data, &(titdat.date));
+	{	init_docinfo_data(data, &(titdat.date), FALSE);
 		return TRUE;
 	}
 
 	if (strcmp(inhalt, "author")==0)
-	{	init_docinfo_data(data, &(titdat.author));
+	{	init_docinfo_data(data, &(titdat.author), FALSE);
 		return TRUE;
 	}
 
 	if (strcmp(inhalt, "address")==0)
 	{	if (address_counter<MAXADDRESS)
 		{	address_counter++;
-			init_docinfo_data(data, &(titdat.address[address_counter]));
+			init_docinfo_data(data, &(titdat.address[address_counter]), FALSE);
 		}
 		return TRUE;
 	}
 
 	/* Spezialitaeten fuer ST-Guide */
 	if (strcmp(inhalt, "stgdatabase")==0)	/*r6pl4*/
-	{	init_docinfo_data(data, &(titdat.stg_database));
+	{	init_docinfo_data(data, &(titdat.stg_database), TRUE);
 		return TRUE;
 	}
 
 	/* Spezialitaeten fuer DRC */
 	if (strcmp(inhalt, "drcstatusline")==0)	/*r6pl4*/
-	{	init_docinfo_data(data, &(titdat.drc_statusline));
+	{	init_docinfo_data(data, &(titdat.drc_statusline), FALSE);
 		return TRUE;
 	}
 
 	/* Spezialitaeten fuer HTML */
 	if (strcmp(inhalt, "htmltitle")==0)
-	{	init_docinfo_data(data, &(titdat.htmltitle));
+	{	init_docinfo_data(data, &(titdat.htmltitle), FALSE);
 		return TRUE;
 	}
 
 	if (strcmp(inhalt, "webmastername")==0)
-	{	init_docinfo_data(data, &(titdat.webmastername));
+	{	init_docinfo_data(data, &(titdat.webmastername), FALSE);
 		return TRUE;
 	}
 
 	if (strcmp(inhalt, "webmasteremail")==0)
-	{	init_docinfo_data(data, &(titdat.webmasteremail));
+	{	init_docinfo_data(data, &(titdat.webmasteremail), FALSE);
 		return TRUE;
 	}
 
 	if (strcmp(inhalt, "webmastermailurl")==0)
-	{	init_docinfo_data(data, &(titdat.webmastermailurl));
+	{	init_docinfo_data(data, &(titdat.webmastermailurl), FALSE);
 		return TRUE;
 	}
 

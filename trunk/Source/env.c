@@ -2712,7 +2712,8 @@ GLOBAL void c_begin_document ( void )
 		case TOSTG:
 		case TOAMG:
 			if (titdat.stg_database!=NULL)
-			{	voutlnf("@database \"%s\"", titdat.stg_database);
+			{	if (*titdat.stg_database != EOS)
+					voutlnf("@database \"%s\"", titdat.stg_database);
 			}
 			else
 			{	if ( titleprogram[0]!=EOS)
