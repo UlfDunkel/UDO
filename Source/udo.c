@@ -606,6 +606,24 @@ LOCAL const UDOCHARSET udocharset[MAXCHARSET]=
 GLOBAL char compile_date[11] = "\0";
 GLOBAL char compile_time[9]  = "\0";
 
+/*
+ * New UDO Memory-Layer (new in 6.3.3)
+ * Written by vj
+ *
+ * Use um_malloc instead of malloc and um_free instead of free.
+ * Please don't use malloc or free in UDO.
+ */
+GLOBAL void *um_malloc(size_t size)
+{
+	um_malloc_count++;
+	return malloc(size);
+}
+
+GLOBAL void um_free(void *memblock)
+{
+	um_free_count++;
+	free(memblock);
+}
 
 /*	######################################################################
 	#
@@ -1574,7 +1592,7 @@ LOCAL IDXLIST * new_idxlist_item ( void )
 {
 	IDXLIST *l;
 
-	l= (IDXLIST *) malloc (sizeof(IDXLIST));
+	l= (IDXLIST *) um_malloc (sizeof(IDXLIST));
 
 	if (l!=NULL)
 	{	memset(l, 0, sizeof(IDXLIST));
@@ -4414,7 +4432,7 @@ LOCAL BOOLEAN malloc_token_output_buffer ( void )
 	if (format_uses_output_buffer && use_output_buffer)
 	{
 		for (i=0; i<6; i++)
-		{	tobuffer= (char *) malloc ( bs[i] );
+		{	tobuffer= (char *) um_malloc ( bs[i] );
 			if (tobuffer!=NULL)
 			{	tomaxlen= ml[i];
 				check_parwidth();
@@ -4423,7 +4441,7 @@ LOCAL BOOLEAN malloc_token_output_buffer ( void )
 		}
 	}
 	
-	tobuffer= (char *) malloc ( 2048L );
+	tobuffer= (char *) um_malloc ( 2048L );
 
 	if (tobuffer==NULL)
 	{	error_malloc_failed();
@@ -4446,7 +4464,7 @@ LOCAL void free_token_output_buffer ( void )
 {
 
 	if (tobuffer!=NULL)
-	{	free(tobuffer);
+	{	um_free(tobuffer);
 		tobuffer= NULL;
 	}
 	
@@ -5973,7 +5991,7 @@ LOCAL HYPLIST *new_hyplist_item ( void )
 {
 	HYPLIST *l;
 
-	l= (HYPLIST *) malloc (sizeof(HYPLIST));
+	l= (HYPLIST *) um_malloc (sizeof(HYPLIST));
 
 	if (l!=NULL)
 	{	memset(l, 0, sizeof(HYPLIST));
@@ -10869,6 +10887,9 @@ GLOBAL void init_vars ( void )
 	/*	--------------------------------------------------	*/
 	
 	bNopDetected= FALSE;
+
+	um_malloc_count=0;
+	um_free_count=0;
 
 	lPass1Lines=		0;
 	lPass2Lines=		0;

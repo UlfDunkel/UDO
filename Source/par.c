@@ -384,7 +384,7 @@ GLOBAL void reset_speccmds ( void )
 		for (i=0; i<speccmd_counter; i++)
 		{
 			if ( speccmd[i].entry!=NULL )
-			{	free(speccmd[i].entry);
+			{	um_free(speccmd[i].entry);
 				speccmd[i].entry= NULL;
 			}
 			
@@ -408,7 +408,7 @@ GLOBAL BOOLEAN add_speccmd ( char *entry )
 		speccmd_counter++;
 
 		sl= strlen(entry);
-		ptr= (char *) ( malloc(sl*sizeof(char)+1) );
+		ptr= (char *) ( um_malloc(sl*sizeof(char)+1) );
 		if (ptr==NULL)
 		{	error_malloc_failed();
 			speccmd_counter--;
@@ -499,12 +499,12 @@ GLOBAL void reset_placeholders ( void )
 		for (i=0; i<phold_counter; i++)
 		{
 			if ( phold[i].entry!=NULL )
-			{	free(phold[i].entry);
+			{	um_free(phold[i].entry);
 				phold[i].entry= NULL;
 			}
 			
 			if ( phold[i].text!=NULL )
-			{	free(phold[i].text);
+			{	um_free(phold[i].text);
 				phold[i].text= NULL;
 			}
 			
@@ -528,7 +528,7 @@ GLOBAL BOOLEAN add_placeholder ( char *entry, char *rawtext )
 		phold_counter++;
 
 		el= strlen(entry);
-		eptr= (char *) ( malloc(el*sizeof(char)+1) );
+		eptr= (char *) ( um_malloc(el*sizeof(char)+1) );
 		if (eptr==NULL)
 		{	error_malloc_failed();
 			phold_counter--;
@@ -536,10 +536,10 @@ GLOBAL BOOLEAN add_placeholder ( char *entry, char *rawtext )
 		}
 		
 		tl= strlen(rawtext);
-		tptr= (char *) ( malloc (tl*sizeof(char)+1) );
+		tptr= (char *) ( um_malloc (tl*sizeof(char)+1) );
 		if (tptr==NULL)
 		{	error_malloc_failed();
-			free(eptr);
+			um_free(eptr);
 			phold_counter--;
 			return FALSE;
 		}
@@ -2922,7 +2922,7 @@ GLOBAL void add_hyphen ( void )
 		return;
 	}
 	
-	p= (HYPHEN *) malloc(sizeof(HYPHEN));
+	p= (HYPHEN *) um_malloc(sizeof(HYPHEN));
 	
 	if (p==NULL)
 	{	error_malloc_failed();
@@ -3022,7 +3022,7 @@ GLOBAL BOOLEAN add_macro ( void )
 		return FALSE;
 	}
 
-	p= (MACROS *) malloc(sizeof(MACROS));
+	p= (MACROS *) um_malloc(sizeof(MACROS));
 	
 	if (p==NULL)
 	{	error_malloc_failed();
@@ -3050,7 +3050,7 @@ GLOBAL BOOLEAN add_macro ( void )
 	/* PL10: Inhalt zu lang? */
 	if (strlen(entry)>MACRO_CONT_LEN)
 	{	error_long_macro_cont(MACRO_CONT_LEN);
-		free(p);
+		um_free(p);
 		return FALSE;
 	}
 
@@ -3129,7 +3129,7 @@ GLOBAL BOOLEAN add_define ( void )
 	}
 
 
-	p= (DEFS *) malloc(sizeof(DEFS));
+	p= (DEFS *) um_malloc(sizeof(DEFS));
 	
 	if (p==NULL)
 	{	error_malloc_failed();
@@ -3150,7 +3150,7 @@ GLOBAL BOOLEAN add_define ( void )
 	/* PL10: Inhalt zu lang? */
 	if (strlen(entry)>DEFINE_CONT_LEN)
 	{	error_long_define_cont(DEFINE_CONT_LEN);
-		free(p);
+		um_free(p);
 		return FALSE;
 	}
 	
@@ -3214,19 +3214,19 @@ GLOBAL void exit_module_par ( void )
 
 	for (i=MAXMACROS-1; i>=0; i--)
 	{	if (macros[i]!=NULL)
-		{	free(macros[i]);
+		{	um_free(macros[i]);
 		}
 	}
 
 	for (i=MAXDEFS-1; i>=0; i--)
 	{	if (defs[i]!=NULL)
-		{	free(defs[i]);
+		{	um_free(defs[i]);
 		}
 	}
 
 	for (i=MAXHYPHEN-1; i>=0; i--)
 	{	if (hyphen[i]!=NULL)
-		{	free(hyphen[i]);
+		{	um_free(hyphen[i]);
 		}
 	}
 

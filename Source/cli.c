@@ -613,7 +613,7 @@ LOCAL BOOLEAN read_cliopt_file ( const char *name )
 		sl= strlen(ptr);
 		if (sl>0)
 		{	if ( counter+1<MAX_FILE_ARGV )
-			{	mp= (char *) malloc ( sl * sizeof(char) + 1 );
+			{	mp= (char *) um_malloc ( sl * sizeof(char) + 1 );
 				if (mp)
 				{	counter++;
 					fargv[counter]= mp;
@@ -633,7 +633,7 @@ LOCAL BOOLEAN read_cliopt_file ( const char *name )
 	
 	for (i=counter; i>=0; i--)
 	{	if (fargv[i]!=NULL)
-		{	free(fargv[i]);
+		{	um_free(fargv[i]);
 			fargv[i]= NULL;
 		}
 	}
