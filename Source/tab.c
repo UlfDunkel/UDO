@@ -1003,7 +1003,7 @@ LOCAL void table_output_ipf ( void )
 
 	f[0]= EOS;
 	for (i=0; i<=tab_w; i++)
-	{	sprintf(cx, "%d ", (int) tab_cell_w[i]);
+	{	sprintf(cx, "%lu ", tab_cell_w[i]);
 		strcat(f, cx);
 	}
 	del_whitespaces(f);
@@ -1050,7 +1050,7 @@ LOCAL void table_output_ipf ( void )
 
 LOCAL void table_output_general ( void )
 {
-	int		y, x, i, j, offset, indent;
+	int		y, x, i, j, offset, indent=0;
 	char	s[512], f[512], stg_vl[32];
 	char	hl[3][512], space[50];
 	char	hl_l[3][2], hl_c[3][2], hl_v[3][2], hl_r[3][2];
