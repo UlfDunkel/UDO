@@ -208,6 +208,9 @@ GLOBAL BOOLEAN		html_frames_noscroll;
 GLOBAL BOOLEAN		html_use_folders;			/* Ordnerstruktur erzeugen? */
 GLOBAL BOOLEAN		html_transparent_buttons;	/* Transparente Buttons benutzen?	*/
 
+GLOBAL BOOLEAN		html_ignore_8bit_use_charset;	/* v6.5.0[vj] Use extra charset for meta http-equiv="Content-Type"? This flag is used just for speedup reasons */
+GLOBAL char			html_ignore_8bit_charset[20];	/* v6.5.0[vj] Charset for html_ignore_8bit that should be used in meta http-equiv="Content-Type" */
+
 GLOBAL char			sDocHtmlSwitchLanguage[256];	/* Links zum Wechseln?			*/
 GLOBAL int			iDocHtmlSwitchLanguage;			/* ... und der Wert der Sprache */
 
