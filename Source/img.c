@@ -1404,7 +1404,7 @@ GLOBAL void set_image_alignment ( void )
 {
 	char s[256];
 
-	tokcpy2(s);
+	tokcpy2(s, 256);
 
 	if (strstr(s, "center")!=NULL)
 	{	image_alignment= ALIGN_CENT;
