@@ -2341,8 +2341,8 @@ LOCAL void c_heading ( void )
 		case TOMHH:
 			c_internal_styles(name);
 			n[0]= EOS;
-			if (inside_center)	strcpy(n, " align=center");
-			if (inside_right)	strcpy(n, " align=right");
+			if (inside_center)	strcpy(n, " align=\"center\"");
+			if (inside_right)	strcpy(n, " align=\"right\"");
 			voutlnf("<h%d%s>%s</h%d>", html_nodesize, n, name, html_nodesize);
 			break;
 		case TOASC:
@@ -2465,8 +2465,8 @@ LOCAL void c_subheading ( void )
 		case TOMHH:
 			c_internal_styles(name);
 			n[0]= EOS;
-			if (inside_center)	strcpy(n, " align=center");
-			if (inside_right)	strcpy(n, " align=right");
+			if (inside_center)	strcpy(n, " align=\"center\"");
+			if (inside_right)	strcpy(n, " align=\"right\"");
 			voutlnf("<h%d%s>%s</h%d>", html_nodesize+1, n, name, html_nodesize+1);
 			break;
 		case TOASC:
@@ -2584,8 +2584,8 @@ LOCAL void c_subsubheading ( void )
 		case TOMHH:
 			c_internal_styles(name);
 			n[0]= EOS;
-			if (inside_center)	strcpy(n, " align=center");
-			if (inside_right)	strcpy(n, " align=right");
+			if (inside_center)	strcpy(n, " align=\"center\"");
+			if (inside_right)	strcpy(n, " align=\"right\"");
 			voutlnf("<h%d%s>%s</h%d>", html_nodesize+2, n, name, html_nodesize+2);
 			break;
 		case TOASC:
@@ -2705,8 +2705,8 @@ LOCAL void c_subsubsubheading ( void )
 		case TOMHH:
 			c_internal_styles(name);
 			n[0]= EOS;
-			if (inside_center)	strcpy(n, " align=center");
-			if (inside_right)	strcpy(n, " align=right");
+			if (inside_center)	strcpy(n, " align=\"center\"");
+			if (inside_right)	strcpy(n, " align=\"right\"");
 			voutlnf("<h%d%s>%s</h%d>", html_nodesize+3, n, name, html_nodesize+3);
 			break;
 		case TOASC:
@@ -2778,8 +2778,8 @@ LOCAL void c_listheading ( void )
 		case TOMHH:
 			c_internal_styles(name);
 			align[0]= EOS;
-			if (inside_center)	strcpy(align, " align=center");
-			if (inside_right)	strcpy(align, " align=right");
+			if (inside_center)	strcpy(align, " align=\"center\"");
+			if (inside_right)	strcpy(align, " align=\"right\"");
 			sFontBeg[0]= EOS;
 			sFontEnd[0]= EOS;
 			if (sDocHtmlPropfontName[0]!=EOS)
@@ -2787,7 +2787,7 @@ LOCAL void c_listheading ( void )
 				sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize>=0) ? "+" : "", iSize);
 				strcpy(sFontEnd, "</font>");
 			}
-			voutlnf("<tr><td valign=top%s colspan=2>&nbsp;<br>%s<b>%s</b>", align, sFontBeg, name);
+			voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br>%s<b>%s</b>", align, sFontBeg, name);
 			if (bEnv1stItem[iEnvLevel])
 			{	voutlnf("%s</td></tr>", sFontEnd);
 			}
@@ -2826,8 +2826,8 @@ LOCAL void c_listsubheading ( void )
 		case TOMHH:
 			c_internal_styles(name);
 			align[0]= EOS;
-			if (inside_center)	strcpy(align, " align=center");
-			if (inside_right)	strcpy(align, " align=right");
+			if (inside_center)	strcpy(align, " align=\"center\"");
+			if (inside_right)	strcpy(align, " align=\"right\"");
 			sFontBeg[0]= EOS;
 			sFontEnd[0]= EOS;
 			if (sDocHtmlPropfontName[0]!=EOS)
@@ -2835,7 +2835,7 @@ LOCAL void c_listsubheading ( void )
 				sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize>=0) ? "+" : "", iSize);
 				strcpy(sFontEnd, "</font>");
 			}
-			voutlnf("<tr><td valign=top%s colspan=2>&nbsp;<br>%s<b>%s</b>", align, sFontBeg, name);
+			voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br>%s<b>%s</b>", align, sFontBeg, name);
 			if (bEnv1stItem[iEnvLevel])
 			{	voutlnf("%s</td></tr>", sFontEnd);
 			}
@@ -2873,8 +2873,8 @@ LOCAL void c_listsubsubheading ( void )
 		case TOMHH:
 			c_internal_styles(name);
 			align[0]= EOS;
-			if (inside_center)	strcpy(align, " align=center");
-			if (inside_right)	strcpy(align, " align=right");
+			if (inside_center)	strcpy(align, " align=\"center\"");
+			if (inside_right)	strcpy(align, " align=\"right\"");
 			sFontBeg[0]= EOS;
 			sFontEnd[0]= EOS;
 			if (sDocHtmlPropfontName[0]!=EOS)
@@ -2882,7 +2882,7 @@ LOCAL void c_listsubsubheading ( void )
 				sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize>=0) ? "+" : "", iSize);
 				strcpy(sFontEnd, "</font>");
 			}
-			voutlnf("<tr><td valign=top%s colspan=2>&nbsp;<br>%s<b>%s</b>", align, sFontBeg, name);
+			voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br>%s<b>%s</b>", align, sFontBeg, name);
 			if (bEnv1stItem[iEnvLevel])
 			{	voutlnf("%s</td></tr>", sFontEnd);
 			}
@@ -2920,8 +2920,8 @@ LOCAL void c_listsubsubsubheading ( void )
 		case TOMHH:
 			c_internal_styles(name);
 			align[0]= EOS;
-			if (inside_center)	strcpy(align, " align=center");
-			if (inside_right)	strcpy(align, " align=right");
+			if (inside_center)	strcpy(align, " align=\"center\"");
+			if (inside_right)	strcpy(align, " align=\"right\"");
 			sFontBeg[0]= EOS;
 			sFontEnd[0]= EOS;
 			if (sDocHtmlPropfontName[0]!=EOS)
@@ -2929,7 +2929,7 @@ LOCAL void c_listsubsubsubheading ( void )
 				sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize>=0) ? "+" : "", iSize);
 				strcpy(sFontEnd, "</font>");
 			}
-			voutlnf("<tr><td valign=top%s colspan=2>&nbsp;<br>%s<b>%s</b>", align, sFontBeg, name);
+			voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br>%s<b>%s</b>", align, sFontBeg, name);
 			if (bEnv1stItem[iEnvLevel])
 			{	voutlnf("%s</td></tr>", sFontEnd);
 			}
@@ -3430,10 +3430,10 @@ GLOBAL void c_udolink ( void )
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiGifMwWidth, uiGifMwHeight);
 			}
 			strcpy(sTemp, "<p>");
-			if (inside_center)	strcpy(sTemp, "<p align=center>");
-			if (inside_right)	strcpy(sTemp, "<p align=right>");
+			if (inside_center)	strcpy(sTemp, "<p align=\"center\">");
+			if (inside_right)	strcpy(sTemp, "<p align=\"right\">");
 			if (nodename[0]==EOS)
-			{	voutlnf("%s<a href=\"%s\"><img src=\"%s\" alt=\"%s\" border=0%s></a>",
+			{	voutlnf("%s<a href=\"%s\"><img src=\"%s\" alt=\"%s\" border=\"0\"%s></a>",
 					sTemp, UDO_URL, GIF_MW_NAME, UDO_MADE, sGifSize);
 			}
 			else
@@ -3483,7 +3483,7 @@ GLOBAL void c_toplink ( void )
 		case TOHTM:
 		case TOMHH:
                         /* set width and height =24 to fix bug #0000005 [voja] */
-			voutlnf("<p><a href=\"#\"><img src=\"%s\" border=0 width=24 height=24></a></p>", GIF_TP_NAME);
+			voutlnf("<p><a href=\"#\"><img src=\"%s\" border=\"0\" width=\"24\" height=\"24\"></a></p>", GIF_TP_NAME);
 			break;
 	}
 
@@ -4996,11 +4996,11 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 		case TOMHH:
 			if ( !inside_short )
 			{	if ( inside_center )
-				{	strcat(z, "<div align=center>");
+				{	strcat(z, "<div align=\"center\">");
 				}
 				else
 				{	if ( inside_right )
-					{	strcat(z, "<div align=right>");
+					{	strcat(z, "<div align=\"right\">");
 					}
 					else
 					{

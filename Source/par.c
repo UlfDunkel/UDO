@@ -1592,7 +1592,7 @@ LOCAL void c_ilink ( char *s, const BOOLEAN inside_b4_macro )
 					{	strcpy(img_entry, Param[2]);
 					}
 					else
-					{	sprintf(img_entry, "<img src=\"%s\" alt=\"%s\" border=0>",
+					{	sprintf(img_entry, "<img src=\"%s\" alt=\"%s\" border=\"0\">",
 							Param[1], Param[2]);
 					}
 					flag= replace_once(ptr, old_entry, img_entry);
