@@ -1,5 +1,5 @@
 # doc/manual/source/running.ui
-# letzte Änderungen: 24.01.2004 / last changes: Jan 24, 2004
+# letzte Änderungen: 28.01.2004 / last changes: Jan 28, 2004
 
 
 ################################################################################
@@ -58,6 +58,16 @@ is available for.
 !endif
 !html_name running_gem.html
 
+# neuer Text 28.01.2004 - Ulrich Kretschmer
+!iflang [german]
+Die frühere GEM-Version von UDO steht derzeit nicht mehr zur Verfügung.
+!endif
+!iflang [english]
+The former GEM version of UDO is currently not available.
+!endif
+
+# auskommentiert 28.01.2004 - Ulrich Kretschmer
+!begin_ignore
 !iflang [german]
 Die GEM-Version erlaubt es, bequem mit der Maus Zielformat, Quell- und
 Zieldatei sowie einige Umwandlungsoptionen zu setzen. Darüber hinaus
@@ -505,12 +515,14 @@ itself.
 !end_node
 # GEM-Dialog ''Externe Programme''
 
+!end_ignore
+
 !end_node
 # GEM-Version
 
 ################################################################################
 ################################################################################
-# @(#) Anleitung zur Mac-Version, 26.06.1996, Martin Osieka
+# @(#) (alte) Anleitung zur Mac-Version, 26.06.1996, Martin Osieka
 !iflang [german]
 !begin_node Macintosh-Version
 !endif
@@ -519,6 +531,18 @@ itself.
 !endif
 !html_name running_macos.html
 
+# neuer Text 28.01.2004 - Ulrich Kretschmer
+!iflang [german]
+Die frühere UDO-Version für (!B)MacOS~9(!b) steht derzeit nicht mehr zur Verfügung.
+Für (!B)MacOS~X(!b) gibt es eine Kommandozeilen-Version von UDO.
+!endif
+!iflang [english]
+The former UDO version for (!B)MacOS~9(!b) is currently not available.
+For (!B)MacOS~X(!b) you can use the UDO commandline version.
+!endif
+
+!begin_ignore
+# auskommentiert 28.01.2004 - Ulrich Kretschmer
 !iflang [german]
 Die Macintosh-Variante von UDO kommt in einem etwas schlichteren
 Gewande als die GEM-Variante daher. Alle einstellbaren Optionen sind in
@@ -584,6 +608,8 @@ Hyperion (written by Martin Osieka) and if the hypertext (!V)UDO.HYP(!v) is
 installed in the guides folder of Hyperion.
 !endif
 
+!end_ignore
+
 !end_node
 # Macintosh-Version
 
@@ -598,24 +624,13 @@ installed in the guides folder of Hyperion.
 !html_name running_winshell.html
 
 !iflang [german]
-Die Windows-Shell ""UDOSH"" dient dazu, die Arbeit mit UDO unter Windows
-etwas komfortabler zu gestalten.
-
-Die Shell ist kein eigenständiges Programm, sondern ruft UDO und die
-Zusatzprogramme lediglich mit den passenden Optionen auf.
-
-Die Shell ist daher in einer separaten Anleitung beschrieben.
+Unter Windows steht für UDO eine graphische Bedienungsoberfläche (Shell) zur Verfügung, die aber derzeit nicht mehr weiterentwickelt wird. Siehe (!url [http://www.udo-open-source.org/download/shells.html] []).
 !endif
 # ------------------------------------------------------------------------------
 !iflang [english]
-The UDO shell for Windows (""UDOSH"") makes it easier for you to use UDO
-with Windows.
-
-The shell can call UDO, editors and viewers and you can simple choose which
-destination format you want to use by clicking the mouse.
-
-The shell is distributed with the complete source code for Borland C++ and
-is described in a separate documentation.
+On the Windows platform you can use a graphical user interface (shell) for interacting with UDO.
+The shell is currently out of development.
+See (!url [http://www.udo-open-source.org/download/shells.html] []).
 !endif
 
 !end_node
