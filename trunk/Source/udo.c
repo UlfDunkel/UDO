@@ -9152,8 +9152,10 @@ LOCAL BOOLEAN pass2 (char *datei)
 					c_styles(zeile);
 
                                         /* v6.5.7 [vj] old position and parameters (see above)
-                                         * please keep this comment for information
-                                        c_commands_inside(zeile, FALSE);*/
+                                         * please keep this comment for information;
+                                         * v6.5.9 [NHz] put in again, otherwise commands inside
+                                         * macros are not translated; I think we need both */
+          c_commands_inside(zeile, FALSE);
 
 					replace_defines(zeile);
 
