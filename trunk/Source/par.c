@@ -1305,18 +1305,16 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 					/* Changed in V6.5.5 [NHz] */
 					c_divis(Param[1]);
 					c_vars(Param[1]);
-					/* Changed in V6.5.6 [NHz] */
-					auto_quote_chars(Param[1], TRUE);
+					/* Changed: Fixed bug #0000062 in V 6.5.8 [NHz] */
+					node2postscript(Param[1], KPS_CONTENT);
 					replace_all(Param[1], KPSPO_S, "(");
 					replace_all(Param[1], KPSPC_S, ")");
 					sprintf(s_entry, ") udoshow (%s) (%s) 0 0 255 WebLink (", Param[1], Param[2]);
    				linkerror= !insert_placeholder(s, Param[0], s_entry, Param[1]);
 					break;
 
-					/* New in r6pl15 [NHz] */
-					/* Weblink for WinHelp */
-				case TOWIN:
-
+					/* Deleted bug in V6.5.8 [NHz] */
+					/* Weblink for WinHelp4 */
 				case TOWH4:
   				convert_tilde(Param[1]);
 					if (Param[2][0]==EOS)
@@ -1324,7 +1322,7 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 					}
 					replace_udo_quotes(Param[2]);
 					replace_udo_quotes(Param[1]);
-					sprintf(s_entry, "{\\ul (%s)}{\\v !ExecFile((%s))}", Param[1], Param[2]);
+					sprintf(s_entry, "{\\ul %s}{\\v !ExecFile(%s)}", Param[1], Param[2]);
    				linkerror= !insert_placeholder(s, Param[0], s_entry, Param[1]);
 					break;
 
