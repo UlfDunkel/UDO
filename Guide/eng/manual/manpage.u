@@ -6,11 +6,11 @@
 ############################################################
 
 !tex_2e
-!tex \parindent0cm \parskip2pt
+!raw [tex] \parindent0cm \parskip2pt
 
-!program	udo
-!author		DirkHage@aol.com
-!date		December 10, 1996
+!docinfo [program]	udo
+!docinfo [author]		DirkHage@aol.com
+!docinfo [date]		December 10, 1996
 
 !man_type	1
 !nroff_type 1
