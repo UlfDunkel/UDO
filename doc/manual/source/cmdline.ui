@@ -1,5 +1,5 @@
 # doc/manual/source/running_cmdline.ui
-# letzte Änderungen: 10.01.2004 / last changes: Jan 10, 2004
+# letzte Änderungen: 25.03.2004 / last changes: Mar 25, 2004
 
 
 ################################################################################
@@ -113,6 +113,8 @@ lange Dateinamen zu erzeugen (Endung .html anstatt .htm).
 
 !item [-h, (--)html] Die (!U)Quelldatei(!u) wird ins HTML-Format umgewandelt.
 
+!item [-hh, (--)htmlhelp] Die (!U)Quelldatei(!u) wird ins HTML-Help-Format umgewandelt.
+
 !item [-H, (--)hold] (!B)UDO(!b) wartet am Programmende auf einen Tastendruck.
 
 !item [-i, (--)info] Die (!U)Quelldatei(!u) wird ins GNU-Texinfo-Format umgewandelt.
@@ -125,7 +127,7 @@ lange Dateinamen zu erzeugen (Endung .html anstatt .htm).
 
 !item [-m, (--)man] Die (!U)Quelldatei(!u) wird ins Manualpage-Format umgewandelt.
 
-!item [(--)map] Erzeugt eine Header-Datei für C, in denen Konstanten mit allen Jump-IDs ausgegeben werden.
+!item [(--)map] Erzeugt eine Header-Datei für C, in denen Konstanten mit allen WinHelp-Jump-IDs ausgegeben werden.
 
 !item [(--)map-pas] Erzeugt eine Map-Datei der WinHelp-Jump-IDs für Pascal/Delphi.
 
@@ -225,6 +227,8 @@ operating systems that normally do not support them.
 !item [-g, (--)helptag] The (!U)source file(!u) will be converted to HP Helptag SGML.
 
 !item [-h, (--)html] The (!U)source file(!u) will be converted to HTML.
+
+!item [-hh, (--)htmlhelp] The (!U)source file(!u) will be converted to HTML-Help.
 
 !item [(--)help] Outputs a help page and quits.
 
