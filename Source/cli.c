@@ -136,6 +136,7 @@ LOCAL const CLIOPT cliopt[]=
 	{	"--no-logfile",		"-l",		'b',	FALSE,	&bNoLogfile,		TRUE	},
 	{	"--no-warnings",	"-W",		'b',	FALSE,	&bNoWarnings,		TRUE	},
 	{	"--nroff",			"-n",		'b',	FALSE,	&desttype,			TONRO	},
+	{	"--openoffice",			"-oo",		'b',	FALSE,	&desttype,			TOOO	},
 	{	"--outfile",		"-o",		'c',	TRUE,	outfile.full,		0		},
 	{	"--pascal",			"-P",		'b',	FALSE,	&desttype,			TOSRP	},
 	{	"--pdflatex",		"-f",		'b',	FALSE,	&desttype,			TOPDL	},
@@ -156,6 +157,7 @@ LOCAL const CLIOPT cliopt[]=
 	{	"--vision",			"-v",		'b',	FALSE,	&desttype,			TOTVH	},
 	{	"--win",			"-w",		'b',	FALSE,	&desttype,			TOWIN	},
 	{	"--win4",			"-4",		'b',	FALSE,	&desttype,			TOWH4	},
+	{	"--xml",		"",			'b',	FALSE,	&desttype,			TOXML	},
 
 	/* Endekennung */
 	{	"",					"",			'c',	FALSE,	NULL,				0		},
@@ -203,6 +205,7 @@ LOCAL const char	*Prog_Help[]=
 	"       --map-gfa       GFA-Headerfile mit WinHelp-Jump-IDs erzeugen\n"
 	"-n,    --nroff         ins nroff-Format konvertieren\n"
 	"-o F,  --outfile F     Ausgaben in die Datei F schreiben\n"
+	"-oo    --openoffice    ins OpenOffice XML-Format konvertieren\n"
 	"-p,    --pchelp        ins Pure-C-Help-Quelltextformat konvertieren\n"
 	"-P,    --pascal        Pascal-Sourcecode erzeugen\n"
 	"       --ps            ins PostScript-Format konvertieren\n"
@@ -220,6 +223,7 @@ LOCAL const char	*Prog_Help[]=
 	"-w4,   --win4          ins WinHelp4-Quelltextformat konvertieren\n"
 	"-W,    --no-warnings   Warnungen unterdruecken\n"
 	"-x,    --linuxdoc      ins Linuxdoc-SGML-Format konvertieren\n"
+	"       --xml           ins XML-Format konvertieren\n"
 	"-y,    --no-hypfile    kein Hyphenfile (.uh?) anlegen\n"
 	"-@ F                   Optionen aus der Datei F lesen\n"
 	"       --help          diese Informationen anzeigen und beenden\n"
@@ -254,6 +258,7 @@ LOCAL const char	*Prog_Help[]=
 	"       --map-gfa       generate GFA header file with jump id's for WinHelp\n"
 	"-n,    --nroff         convert to nroff\n"
 	"-o F,  --outfile F     write to file F\n"
+	"-oo    --openoffice    convert to OpenOffice XML-Format\n"
 	"-p,    --pchelp        convert to Pure C Help\n"
 	"-P,    --pascal        generate Pascal sourcecode\n"
 	"       --ps            convert to PostScript\n"
@@ -271,6 +276,7 @@ LOCAL const char	*Prog_Help[]=
 	"-w4,   --win4          convert to WinHelp4\n"
 	"-W,    --no-warnings   suppress warnings\n"
 	"-x,    --linuxdoc      convert to Linuxdoc SGML\n"
+	"       --xml           convert to XML\n"
 	"-y,    --no-hypfile    don't generate hyphen file (.uh?)\n"
 	"-@ F                   read options from file F\n"
 	"       --help          show this helppage and exit\n"

@@ -3299,6 +3299,19 @@ GLOBAL void c_begin_document ( void )
 			bookmarks_ps();
 
 			break;
+		/* [vj] new in r6-3-xmas */
+		case TOXML:
+			printf("XML: begin_document missing\n");
+			break;
+		/* [vj] new in r6-3-xmas */
+		case TOOO:
+			outln("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+			outln("<!DOCTYPE office:document-content PUBLIC \"-//OpenOffice.org//DTD OfficeDocument 1.0//EN\" \"office.dtd\">");
+			outln("<office:document-content xmlns:office=\"http://openoffice.org/2000/office\" xmlns:style=\"http://openoffice.org/2000/style\" xmlns:text=\"http://openoffice.org/2000/text\" xmlns:table=\"http://openoffice.org/2000/table\" xmlns:draw=\"http://openoffice.org/2000/drawing\" xmlns:fo=\"http://www.w3.org/1999/XSL/Format\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:number=\"http://openoffice.org/2000/datastyle\" xmlns:svg=\"http://www.w3.org/2000/svg\" xmlns:chart=\"http://openoffice.org/2000/chart\" xmlns:dr3d=\"http://openoffice.org/2000/dr3d\" xmlns:math=\"http://www.w3.org/1998/Math/MathML\" xmlns:form=\"http://openoffice.org/2000/form\" xmlns:script=\"http://openoffice.org/2000/script\" office:class=\"text\" office:version=\"1.0\">");
+			outln("<office:script/>");
+			outln("<office:body>");
+
+			break;
 	}
 	
 	bCalledBeginDocument= TRUE;
@@ -3438,6 +3451,20 @@ GLOBAL void c_end_document ( void )
 				else
 					voutlnf("(Release %s.%s Patchlevel %s) (%s) (%s) aboutUDO_eng", UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS, UDO_URL);
 				outln("newpage");
+			}
+			break;
+		case TOXML:
+			printf("XML: end_document missing");
+			if(use_about_udo)
+			{
+				printf("XML: about_udo work needed\n");
+			}
+			break;
+		case TOOO:
+			outln("</office:body>\n</office:document-content>");
+			if(use_about_udo)
+			{
+				printf("XML: about_udo work needed\n");
 			}
 			break;
 	}
