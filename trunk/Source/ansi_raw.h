@@ -29,7 +29,7 @@
 	############################################################	*/
 
 #define	MAXANSI2ASC	72
-typedef struct
+typedef struct _a2aitem
 {	unsigned char	ansi;
 	unsigned char	ascii;
 }	A2AITEM;

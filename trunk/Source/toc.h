@@ -37,7 +37,7 @@
 /*	--------------------------------------------------
 	Labels: Sprungmarken, die referenziert werden
 	--------------------------------------------------	*/
-typedef struct
+typedef struct _label
 {
 	char	name[MAX_LABEL_LEN+1];		/* Name eines Labels 	*/
 	int		labindex;		/* lab[1]==1, lab[2]==2 etc.		*/
@@ -60,7 +60,7 @@ typedef struct
 /*	--------------------------------------------------
 	Eintraege fuer das Inhaltsverzeichnis
 	--------------------------------------------------	*/
-typedef struct
+typedef struct _tocitem
 {
 	char	name[MAX_NODE_LEN+1];			/* Der Eintrag selber				*/
 	int		n1;								/* Kapitelnummer (absolut)			*/
@@ -128,7 +128,7 @@ typedef struct
 /*	--------------------------------------------------
 	Platzhalter fuer automatische Referenzen
 	--------------------------------------------------	*/
-typedef struct
+typedef struct _reference
 {
 	char	magic[6];				/* Eine Steuermarke <ESC><0x80+nr> */
 	char	entry[MAX_TOKEN_LEN*2];	/* ergibt max. 256 Zeichen         */

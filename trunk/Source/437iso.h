@@ -33,7 +33,7 @@ const char *id_437iso_h= "@(#) 437iso.h    05.08.1998";
 #endif
 
 
-typedef struct
+typedef struct _cp437iso
 {
 	unsigned char	cp437;
 	unsigned char	iso;

@@ -20,12 +20,12 @@
 	#
 	# Typen, die nur in udo.c verwendet werden
 	######################################################################	*/
-typedef struct						/* ---- Funktionentabelle ----	*/
+typedef struct _udoswitch			/* ---- Funktionentabelle ----	*/
 {
-	const char		magic[25];		/* UDO-Kommando					*/
+	char			magic[25];		/* UDO-Kommando					*/
 	BOOLEAN			*flag;			/* zugehoeriger Schalter		*/
 	char			partype;		/* Parameter-Typ				*/	/*r6pl13*/
-	const char		parcmd[12];		/* Parameter-Kommando			*/	/*r6pl2*/
+	char			parcmd[12];		/* Parameter-Kommando			*/	/*r6pl2*/
 	void			*parval;		/* Parameter-Variable			*/	/*r6pl2*/
 }	UDOSWITCH;
 

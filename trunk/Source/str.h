@@ -45,13 +45,13 @@ GLOBAL int qreplace_once ( char *source, const char *replace, const size_t rlen,
 GLOBAL int qreplace_last ( char *source, const char *replace, const size_t rlen, const char *by, const size_t blen);
 GLOBAL int qreplace_all ( char *source, const char *replace, const size_t rlen, const char *by, const size_t blen);
 
-GLOBAL int delete_once ( char *source, const char *delete );
-GLOBAL int delete_last ( char *source, const char *delete );
-GLOBAL int delete_all ( char *source, const char *delete );
+GLOBAL int delete_once ( char *source, const char *to_delete );
+GLOBAL int delete_last ( char *source, const char *to_delete );
+GLOBAL int delete_all ( char *source, const char *to_delete );
 
-GLOBAL int qdelete_once ( char *source, const char *delete, const size_t dlen );
-GLOBAL int qdelete_last ( char *source, const char *delete, const size_t dlen );
-GLOBAL int qdelete_all ( char *source, const char *delete, const size_t dlen );
+GLOBAL int qdelete_once ( char *source, const char *to_delete, const size_t dlen );
+GLOBAL int qdelete_last ( char *source, const char *to_delete, const size_t dlen );
+GLOBAL int qdelete_all ( char *source, const char *to_delete, const size_t dlen );
 
 
 GLOBAL void del_right_spaces ( char *s );

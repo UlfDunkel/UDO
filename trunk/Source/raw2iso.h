@@ -13,7 +13,7 @@ const char *id_<???>2iso_h= "@(#) <???>2iso.h 26.06.1996";
 #endif
 
 
-typedef struct
+typedef struct _<???>2iso
 {	unsigned char	<???>;
 	unsigned char	iso;
 }	<???>2ISO;

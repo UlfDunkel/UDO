@@ -73,7 +73,7 @@ LOCAL int			speccmd_counter;
 LOCAL void del_param_quotes (char *s);
 LOCAL int get_nr_of_parameters ( const char *cmd, char *s );
 LOCAL void reset_parameters ( void );
-LOCAL int extract_parameters ( const char *s, const char *cmd, const int count );
+LOCAL int extract_parameters ( char *s, const char *cmd, const int count );
 LOCAL int get_parameters ( char *s, const char *search, const int count );
 
 LOCAL void adjust_params_inside ( char * s);
@@ -184,7 +184,7 @@ LOCAL void reset_parameters ( void )
 
 
 
-LOCAL int extract_parameters ( const char *s, const char *cmd, const int count )
+LOCAL int extract_parameters ( char *s, const char *cmd, const int count )
 {
 	int i;
 	char *pos, search[128];

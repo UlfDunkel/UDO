@@ -34,7 +34,7 @@ const char *id_mac2iso_h= "@(#) mac2iso.h   26.06.1996";
 #endif
 
 
-typedef struct
+typedef struct _mac2iso
 {	unsigned char	mac;
 	unsigned char	iso;
 }	MAC2ISO;

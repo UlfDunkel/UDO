@@ -439,7 +439,7 @@ LOCAL MYFILE *my_new_myfile ( void )
 {
 	MYFILE *myfile;
 
-	myfile= malloc(sizeof(MYFILE));
+	myfile = (MYFILE *)malloc(sizeof(MYFILE));
 
 	if (myfile!=NULL)
 	{

@@ -30,9 +30,9 @@ const char *id_chr_all_h= "@(#) chr_all.h   25.11.1997";
 
 /*	------------------------------------------------------------	*/
 
-typedef struct
+typedef struct _quoteinfo
 {
-	const char c;
+	char c;
 	char quoted[32];
 }	QUOTEINFO;
 
@@ -142,13 +142,13 @@ LOCAL /*const*/ QUOTEINFO ipf7bit[MAXIPF7BIT]=
 
 
 
-typedef struct
+typedef struct _unitable
 {
-	const char	uni[8];
-	const char	win[16];
-	const char	tex[16];
-	const char	html[16];
-	const char	lyx[4];		/* PL14 */
+	char	uni[8];
+	char	win[16];
+	char	tex[16];
+	char	html[16];
+	char	lyx[4];		/* PL14 */
 }	UNITABLE;
 
 #define	UNITABLESIZE	63
