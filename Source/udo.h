@@ -137,6 +137,9 @@ GLOBAL BOOLEAN	tokens_contain_item;
 GLOBAL char		udosymbol[MAX_UDOSYMBOLS][MAX_UDOSYMBOL_LEN+1];
 GLOBAL int		udosymbol_counter;
 
+GLOBAL char compile_date[11];
+GLOBAL char compile_time[9];
+
 /*	------------------------------------------------------------------------	*/
 
 /* Fuer die ganzen Flags eine Struktur anlegen, was die Sache	*/
