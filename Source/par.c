@@ -2726,6 +2726,11 @@ LOCAL void c_internal_image ( char *s, const BOOLEAN inside_b4_macro )
 				}
 				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
 				break;
+			/* New in r6.3pl3 [NHz] */
+			case TORTF:
+				strcpy(s_entry, "");
+				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
+				break;
 			default:
 				strcpy(s_entry, Param[2]);
 				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
