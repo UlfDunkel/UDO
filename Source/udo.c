@@ -8088,8 +8088,12 @@ LOCAL BOOLEAN pass1 (char *datei)
 
 						/*if((strstr(zeile, "node")!=NULL) || (strstr(zeile, "heading")!=NULL))*/
 
-						/* 6.3.10 [vj]: used um_strcpy to prevent buffer overrun known as the "bInsideAppendix-Bug" */
-							um_strcpy(current_node_name_sys, zeile, MAX_NODE_LEN+1, "pass1: current_node_name_sys");
+						/* 6.3.10 [vj]: used um_strcpy to prevent buffer overrun known as the "bInsideAppendix-Bug"
+						   6.3.11 [vj]: the len of current_node_name_sys is defined as CNNS_LEN in constant.h
+						   Perhaps we should habe a look, if this copy function can be done
+						   in an if, because this copy needs time <????>
+						 */
+							um_strcpy(current_node_name_sys, zeile, CNNS_LEN, "pass1: current_node_name_sys");
 
 
 
