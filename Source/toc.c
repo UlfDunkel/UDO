@@ -2309,7 +2309,7 @@ LOCAL void output_html_doctype ( void )
 
 LOCAL BOOLEAN html_new_file ( void )
 {
-	char t[512], xml_lang[15];
+	char t[512], xml_lang[15], xml_ns[40];
 
 	if (outfile.file==stdout && !bTestmode)
 	{	return TRUE;
@@ -2336,13 +2336,18 @@ LOCAL BOOLEAN html_new_file ( void )
 
 	/* Header anlegen, Aktueller Node ist bekannt */
 	
-	/* Changed in r6pl16 [NHz] */
+	/* Changed in V6.5.9 [NHz] */
 	if(html_doctype >= XHTML_STRICT)
+	{
 		sprintf(xml_lang, " xml:lang=\"%s\"", lang.html_lang);
+		sprintf(xml_ns, " xmlns=\"http://www.w3.org/1999/xhtml\"");
+	}
 	else
+	{
 		xml_lang[0] = EOS;
-	voutlnf("<html lang=\"%s\"%s>", lang.html_lang, xml_lang);
-/*	outln("<html>");*/
+		xml_ns[0] = EOS;
+	}
+	voutlnf("<html%s lang=\"%s\"%s>", xml_ns, lang.html_lang, xml_lang);
 	outln("<head>");
 	outln("<title>");
 
@@ -2417,16 +2422,21 @@ LOCAL BOOLEAN html_new_file ( void )
 GLOBAL void output_html_header ( const char *t )
 {
 	/* Wird nur fuer die Titelseite/Inhaltsverzeichnis benutzt */
-	char xml_lang[15];
+	char xml_lang[15], xml_ns[40];
 	
 	output_html_doctype();	/* r6pl2 */
-	/* Changed in r6pl16 [NHz] */
+	/* Changed in V6.5.9 [NHz] */
 	if(html_doctype >= XHTML_STRICT)
+	{
 		sprintf(xml_lang, " xml:lang=\"%s\"", lang.html_lang);
+		sprintf(xml_ns, " xmlns=\"http://www.w3.org/1999/xhtml\"");
+	}
 	else
+	{
 		xml_lang[0] = EOS;
-	voutlnf("<html lang=\"%s\"%s>", lang.html_lang, xml_lang);
-/*	outln("<html>");*/
+		xml_ns[0] = EOS;
+	}
+	voutlnf("<html%s lang=\"%s\"%s>", xml_ns, lang.html_lang, xml_lang);
 	outln("<head>");
 	outln("<title>");
 	outln(t);
