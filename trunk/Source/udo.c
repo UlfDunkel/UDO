@@ -132,6 +132,8 @@ LOCAL const char *MONTH_SPA[]=
 	# lokale Variablen
 	#
 	############################################################	*/
+
+
 LOCAL BOOLEAN		format_needs_exact_toklen;
 LOCAL BOOLEAN		format_uses_output_buffer;
 LOCAL BOOLEAN		format_protect_commands;
@@ -406,6 +408,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!define",					"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!hyphen",					"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!docinfo",					"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
+	{ "!doclayout",					"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	}, /* New in r6pl15 [NHz] */
 	{ "!toc_offset",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!subtoc_offset",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!subsubtoc_offset",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
@@ -448,6 +451,9 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!html_frames_alinkcolor",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_frames_vlinkcolor",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_frames_backimage",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
+	{ "!html_style_name",		"",			c_tunix,	TRUE,	CMD_ALWAYS	}, /* New in r6pl15 [NHz] */
+	{ "!html_script_name",		"",			c_tunix,	TRUE,	CMD_ALWAYS	}, /* New in r6pl15 [NHz] */
+	{ "!html_favicon_name",		"",			c_tunix,	TRUE,	CMD_ALWAYS	}, /* New in r6pl15 [NHz] */
 	{ "!html_button_alignment",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_switch_language",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_transparent_buttons",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
@@ -2015,6 +2021,8 @@ LOCAL void c_index ( void )
 {
 	char 	idx[512];
 	char	n[3][128];
+
+	char	entry[512];
 	int 	count, j;
 	size_t	i;
 
@@ -2063,6 +2071,15 @@ LOCAL void c_index ( void )
 	if (count==0)
 	{	return;
 	}
+
+
+	/* New in r6pl15 [NHz] */
+
+	/* Set index in project file */
+
+	sprintf(entry, "%s:%s:%s", n[0], n[1], n[2]); 
+
+	save_upr_entry_index ( count, sCurrFileName, entry, uiCurrFileLine );
 
 	switch(desttype)
 	{
@@ -2281,7 +2298,14 @@ LOCAL void c_heading ( void )
 			align[0]= EOS;
 			if (inside_center)	strcpy(align, "\\qc");
 			if (inside_right)	strcpy(align, "\\qr");
+<<<<<<< udo.c
+			/* Bug -> Corrected in r6pl15 [NHz] */
+
+			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + 14, name);
+/*			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize + 14, align, name);*/
+=======
 			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + 14, name);
+>>>>>>> 1.26
 			break;
 		case TOWIN:
 		case TOWH4:
@@ -2290,7 +2314,12 @@ LOCAL void c_heading ( void )
 			align[0]= EOS;
 			if (inside_center)	strcpy(align, "\\qc");
 			if (inside_right)	strcpy(align, "\\qr");
+<<<<<<< udo.c
 			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + 14, name);
+/*			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize + 14, align, name);*/
+=======
+			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + 14, name);
+>>>>>>> 1.26
 			break;
 		case TOKPS:
 			outln("newline");
@@ -2298,8 +2327,12 @@ LOCAL void c_heading ( void )
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
 			outln("Boff");
-			outln("11 changeFontSize");
-			outln("changeBaseFont");
+
+			/* Changed in r6pl15 [NHz] */
+			voutlnf("%d changeFontSize", laydat.propfontsize);
+			/*outln("11 changeFontSize");*/
+			/* Deleted in r6pl15 [NHz] */
+			/* outln("changeBaseFont"); */
 			outln("newline");
 			break;
 		case TOHTM:
@@ -2356,7 +2389,7 @@ LOCAL void c_heading ( void )
 
 LOCAL void c_subheading ( void )
 {
-	char name[512], n[512];
+	char name[512], n[512], align[64];
 	BOOLEAN inside_center, inside_right;
 
 	tokcpy2(name);
@@ -2392,13 +2425,23 @@ LOCAL void c_subheading ( void )
 		case TORTF:
 			c_rtf_styles(name);
 			c_rtf_quotes(name);
-			voutlnf("{\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize + 6, name);
+			/* New in r6pl15 [NHz] */
+
+			align[0]= EOS;
+			if (inside_center)	strcpy(align, "\\qc");
+			if (inside_right)	strcpy(align, "\\qr");
+			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + 6, name);
 			break;
 		case TOWIN:
 		case TOWH4:
 		case TOAQV:
 			c_win_styles(name);
-			voutlnf("{\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize + 6, name);
+			/* New in r6pl15 [NHz] */
+
+			align[0]= EOS;
+			if (inside_center)	strcpy(align, "\\qc");
+			if (inside_right)	strcpy(align, "\\qr");
+			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + 6, name);
 			break;
 		case TOKPS:
 			outln("newline");
@@ -2406,8 +2449,11 @@ LOCAL void c_subheading ( void )
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
 			outln("Boff");
-			outln("11 changeFontSize");
-			outln("changeBaseFont");
+			/* Changed in r6pl15 [NHz] */
+			voutlnf("%d changeFontSize", laydat.propfontsize);
+			/*outln("11 changeFontSize");*/
+			/* Deleted in r6pl15 [NHz] */
+			/* outln("changeBaseFont"); */
 			outln("newline");
 			break;
 		case TOHTM:
@@ -2462,7 +2508,7 @@ LOCAL void c_subheading ( void )
 
 LOCAL void c_subsubheading ( void )
 {
-	char name[512], n[512];
+	char name[512], n[512], align[64];
 	BOOLEAN inside_center, inside_right;
 
 	tokcpy2(name);
@@ -2498,22 +2544,38 @@ LOCAL void c_subsubheading ( void )
 		case TORTF:
 			c_rtf_styles(name);
 			c_rtf_quotes(name);
-			voutlnf("{\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize, name);
+			/* New in r6pl15 [NHz] */
+
+			align[0]= EOS;
+			if (inside_center)	strcpy(align, "\\qc");
+			if (inside_right)	strcpy(align, "\\qr");
+			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);
 			break;
 		case TOWIN:
 		case TOWH4:
 		case TOAQV:
 			c_win_styles(name);
-			voutlnf("{\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize, name);
+			/* New in r6pl15 [NHz] */
+
+			align[0]= EOS;
+			if (inside_center)	strcpy(align, "\\qc");
+			if (inside_right)	strcpy(align, "\\qr");
+			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);
 			break;
 		case TOKPS:
 			outln("newline");
-			outln("11 changeFontSize");
+			/* Changed in r6pl15 [NHz] */
+			voutlnf("%d changeFontSize", laydat.propfontsize);
+			/*outln("11 changeFontSize");*/
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
 			outln("Boff");
-			outln("11 changeFontSize");
-			outln("changeBaseFont");
+			/* Changed in r6pl15 [NHz] */
+			voutlnf("%d changeFontSize", laydat.propfontsize);
+			/*outln("11 changeFontSize");*/
+
+			/* Deleted in r6pl15 [NHz] */
+			/* outln("changeBaseFont");*/
 			outln("newline");
 			break;
 		case TOHTM:
@@ -2568,7 +2630,7 @@ LOCAL void c_subsubheading ( void )
 
 LOCAL void c_subsubsubheading ( void )
 {
-	char name[512], n[512];
+	char name[512], n[512], align[64];
 	BOOLEAN inside_center, inside_right;
 
 	tokcpy2(name);
@@ -2604,22 +2666,37 @@ LOCAL void c_subsubsubheading ( void )
 		case TORTF:
 			c_rtf_styles(name);
 			c_rtf_quotes(name);
-			voutlnf("{\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize, name);
+			/* New in r6pl15 [NHz] */
+
+			align[0]= EOS;
+			if (inside_center)	strcpy(align, "\\qc");
+			if (inside_right)	strcpy(align, "\\qr");
+			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);
 			break;
 		case TOWIN:
 		case TOWH4:
 		case TOAQV:
 			c_win_styles(name);
-			voutlnf("{\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize, name);
+			/* New in r6pl15 [NHz] */
+
+			align[0]= EOS;
+			if (inside_center)	strcpy(align, "\\qc");
+			if (inside_right)	strcpy(align, "\\qr");
+			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);
 			break;
 		case TOKPS:
 			outln("newline");
-			outln("11 changeFontSize");
+			/* Changed in r6pl15 [NHz] */
+			voutlnf("%d changeFontSize", laydat.propfontsize);
+			/*outln("11 changeFontSize");*/
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
 			outln("Boff");
-			outln("11 changeFontSize");
-			outln("changeBaseFont");
+			/* Changed in r6pl15 [NHz] */
+			voutlnf("%d changeFontSize", laydat.propfontsize);
+			/*outln("11 changeFontSize");*/
+			/* Deleted in r6pl15 [NHz] */
+			/* outln("changeBaseFont"); */
 			outln("newline");
 			break;
 		case TOHTM:
@@ -3288,6 +3365,7 @@ LOCAL void c_bigskip ( void )
 		case TOIPF:	/* <???> */				break;
 		case TOHPH:	/* <???> */				break;
 		case TOINF:	outln("@sp 3");			break;
+		case TOKPS:	outln("newline newline newline\n");		break; /* New in r6pl15 [NHz] */
 		default:	output_empty_lines(3);	break;
 	}
 }	/* c_bigskip */
@@ -3301,6 +3379,7 @@ LOCAL void c_medskip ( void )
 		case TOIPF:	/* <???> */				break;
 		case TOHPH:	/* <???> */				break;
 		case TOINF:	outln("@sp 2");			break;
+		case TOKPS:	outln("newline newline\n");		break; /* New in r6pl15 [NHz] */
 		default:	output_empty_lines(2);	break;
 	}
 }	/* c_medskip */
@@ -3314,6 +3393,7 @@ LOCAL void c_smallskip ( void )
 		case TOIPF:	/* <???> */				break;
 		case TOHPH:	/* <???> */				break;
 		case TOINF:	outln("@sp 1");			break;
+		case TOKPS:	outln("newline\n");		break; /* New in r6pl15 [NHz] */
 		default:	output_empty_lines(1);	break;
 	}
 }	/* c_smallskip */
@@ -4988,6 +5068,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 				}
 			}
 			out("(");
+
 			break;
 		default:
 			to_check_quote_indent(&umbruch);
@@ -5032,6 +5113,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 						break;
 					case TOKPS:
 						strcpy(token[i], ") udoshow newline\n(");
+
 						break;
 					case TONRO:
 						strcpy(token[i], ".br\n");
@@ -5101,6 +5183,16 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 					}
 					else
 					{	strcat(z, " ");
+					}
+					/* New in r6pl15 [NHz] */
+					/* Capture first blank in string for a better appearance */
+					if((inside_env) && (desttype == TOKPS))
+					{
+						BOOLEAN replaced_blank= TRUE;
+						do
+						{
+							replaced_blank = qreplace_once (z, "( ", 2L, "(", 1L );
+						} while (replaced_blank);
 					}
 					len_zeile+= (len_token+1);
 				}/*if*/
@@ -5339,7 +5431,9 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 					qreplace_all(z, "\n\n", 2, "\n", 1);
 					break;
 				case TOKPS:
-					strcat(z, ") udoshow (");
+					/* Changed in r6pl15 [NHz] */
+					strcat(z, " \\");
+/*					strcat(z, ") udoshow (");*/
 					break;
 			}
 			
@@ -5570,7 +5664,9 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 				outln("");
 				break;
 			case TOKPS:
-				outln("newline");
+				/* Deleted in r6pl15 [NHz] */
+
+/*				outln("newline");*/
 				break;
 		}
 	}
@@ -5635,7 +5731,10 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 			case TOIPF:
 				break;
 			case TOKPS:
-				outln("newline newline");
+
+			/* Changed in r6pl15 [NHz] */
+				outln("newline");
+/*				outln("newline newline");*/
 				break;
 			default:
 				outln("");
@@ -6344,7 +6443,7 @@ LOCAL void output_preamble ( void )
 			break;
 			
 		case TOLYX:
-			voutlnf("# This file was created by UDO Release %s Patchlevel %s, %s %s", UDO_REL, UDO_PL, compile_date, compile_time);
+			voutlnf("# This file was created by UDO Release %s Patchlevel %s", UDO_REL, UDO_PL);
 			outln("# UDO (C) 1995-1999 by Dirk Hagedorn (info@dirk-hagedorn.de)");
 			outln("\\lyxformat 2.10");
 			voutlnf("\\textclass %s", (use_style_book) ? "book" : "article");
@@ -6403,7 +6502,7 @@ LOCAL void output_preamble ( void )
 				{	voutlnf("Copyright (c) by %s", titdat.author);
 				}
 				else
-				{	voutlnf("Made with UDO Release %s Patchlevel %s, %s %s", UDO_REL, UDO_PL, compile_date, compile_time);
+				{	voutlnf("Made with UDO Release %s Patchlevel %s", UDO_REL, UDO_PL);
 				}
 			}
 			
@@ -7133,6 +7232,21 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			{	set_html_backimage();
 				return TRUE;
 			}
+			/* New in r6pl15 [NHz] */
+			if ( strcmp(token[0], "!html_style_name")==0 )
+			{	set_html_style();
+				return TRUE;
+			}
+			/* New in r6pl15 [NHz] */
+			if ( strcmp(token[0], "!html_script_name")==0 )
+			{	set_html_script();
+				return TRUE;
+			}
+			/* New in r6pl15 [NHz] */
+			if ( strcmp(token[0], "!html_favicon_name")==0 )
+			{	set_html_favicon();
+				return TRUE;
+			}
 			if ( strcmp(token[0], "!html_modern_width")==0 )
 			{	set_html_modern_width();
 				return TRUE;
@@ -7491,6 +7605,7 @@ LOCAL BOOLEAN pass1 (char *datei)
 	size_t	len;
 	int		i;
 
+
 	if (iFilesOpened>=MAXFILECOUNTER)
 	{	error_too_many_files();
 		return FALSE;
@@ -7510,6 +7625,7 @@ LOCAL BOOLEAN pass1 (char *datei)
 	if (file == NULL)
 	{
 		bErrorDetected= TRUE;
+
 		return FALSE;
 	}
 	
@@ -7601,6 +7717,33 @@ LOCAL BOOLEAN pass1 (char *datei)
 					if (!bInsideDocument)
 					{	if ( strncmp(zeile, "!define", 7)==0 )
 						{	token_reset();
+
+							if( strstr(zeile, "!\\") != NULL )
+
+							{	char tmp_zeile[512];
+
+								long lang;
+
+								do
+
+								{	myTextGetline(tmp_zeile, LINELEN, file);
+
+									lang = strlen(zeile);
+
+									zeile[lang-2] = EOS;
+
+									strcat(zeile, tmp_zeile);
+
+
+
+									uiFileLines[iFilesOpened]++;
+									uiCurrFileLine= uiFileLines[iFilesOpened];
+
+									lPass1Lines++;
+								} while( strstr(tmp_zeile, "!\\") != NULL );
+
+							}
+
 							str2tok(zeile);
 							add_define();
 							zeile[0]= EOS;
@@ -7608,6 +7751,32 @@ LOCAL BOOLEAN pass1 (char *datei)
 
 						if ( strncmp(zeile, "!macro", 6)==0 )
 						{	token_reset();
+							if( strstr(zeile, "!\\") != NULL )
+
+							{	char tmp_zeile[512];
+
+								long lang;
+
+								do
+
+								{	myTextGetline(tmp_zeile, LINELEN, file);
+
+									lang = strlen(zeile);
+
+									zeile[lang-2] = EOS;
+
+									strcat(zeile, tmp_zeile);
+
+
+
+									uiFileLines[iFilesOpened]++;
+									uiCurrFileLine= uiFileLines[iFilesOpened];
+
+									lPass1Lines++;
+								} while( strstr(tmp_zeile, "!\\") != NULL );
+
+							}
+
 							str2tok(zeile);
 							add_macro();
 							zeile[0]= EOS;
@@ -7639,7 +7808,17 @@ LOCAL BOOLEAN pass1 (char *datei)
 					/* stimmen im 2. Durchlauf nicht mehr. */
 					
 					if (zeile[0]!=EOS)
-					{	if (no_umlaute)
+					{	/* New in r6pl15 [NHz] */
+
+						/* Set node name for project file */
+
+						/*if((strstr(zeile, "node")!=NULL) || (strstr(zeile, "heading")!=NULL))*/
+
+							strcpy(current_node_name_sys, zeile);
+
+
+
+						if (no_umlaute)
 						{	umlaute2ascii(zeile);
 						}
 						auto_quote_chars(zeile, FALSE);
@@ -7743,6 +7922,23 @@ LOCAL BOOLEAN pass1 (char *datei)
 						{	toc_end_node();
 							bInsidePopup= FALSE;
 						}	else
+
+						/* New in r6pl15 [NHz] */
+						if ( strcmp(token[0], "!heading")==0 || strcmp(token[0], "!h")==0)
+						{	save_upr_entry_heading (1, sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine );
+						}	else
+						/* New in r6pl15 [NHz] */
+						if ( strcmp(token[0], "!subheading")==0 || strcmp(token[0], "!sh")==0)
+						{	save_upr_entry_heading (2, sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine );
+						}	else
+						/* New in r6pl15 [NHz] */
+						if ( strcmp(token[0], "!subsubheading")==0 || strcmp(token[0], "!ssh")==0)
+						{	save_upr_entry_heading (3, sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine );
+						}	else
+						/* New in r6pl15 [NHz] */
+						if ( strcmp(token[0], "!subsubsubheading")==0 || strcmp(token[0], "!sssh")==0)
+						{	save_upr_entry_heading (4, sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine );
+						}	else
 						if ( strcmp(token[0], "!alias")==0 || strcmp(token[0], "!a")==0)
 						{	tokcpy2(tmp);
 							add_alias(tmp, bInsidePopup);
@@ -7834,6 +8030,12 @@ LOCAL BOOLEAN pass1 (char *datei)
 						}	else
 						if (strcmp(token[0], "!docinfo")==0)	/* r6pl2 */
 						{	if (set_docinfo())
+							{	token[0][0]= EOS;
+							}
+						}	else
+						/* New in r6pl15 [NHz] */
+						if (strcmp(token[0], "!doclayout")==0)	/* r6pl15 [NHz] */
+						{	if (set_doclayout())
 							{	token[0][0]= EOS;
 							}
 						}	else
@@ -8611,6 +8813,7 @@ LOCAL BOOLEAN pass2 (char *datei)
 					c_commands_inside(zeile, FALSE);
 
 					replace_defines(zeile);
+
 					tokenize(zeile);
 				}
 			}
@@ -8671,10 +8874,50 @@ GLOBAL void save_upr_entry_image ( const char *filename )
 	}
 }
 
-GLOBAL void save_upr_entry_node ( const int level, const char *filename, const char *title )
+/* Changed in r6pl15 [NHz] */
+
+/* Extra parameter 'line' */
+
+GLOBAL void save_upr_entry_node ( const int level, const char *filename, const char *title, const long line )
 {
 	if (bUseUPRfile && bUPRopened)	/*r6pl12*/
-	{	fprintf(fUPRfile, "node\t%d\t%s\t%s\n", level, filename, title);
+	{	fprintf(fUPRfile, "node\t%d\t%s\t%ld\t%s\n", level, filename, line, title);
+	}
+}
+
+/* New in r6pl15 [NHz] */
+
+GLOBAL void save_upr_entry_heading ( const int level, const char *filename, const char *title, const long line )
+{
+	if (bUseUPRfile && bUPRopened)	/*r6pl12*/
+	{	fprintf(fUPRfile, "heading\t%d\t%s\t%ld\t%s\n", level, filename, line, title);
+	}
+}
+
+/* New in r6pl15 [NHz] */
+
+GLOBAL void save_upr_entry_alias ( const char *filename, const char *title, const long line )
+{
+	if (bUseUPRfile && bUPRopened)	/*r6pl12*/
+	{	fprintf(fUPRfile, "alias\t%s\t%ld\t%s\n", filename, line, title);
+	}
+}
+
+/* New in r6pl15 [NHz] */
+
+GLOBAL void save_upr_entry_label ( const char *filename, const char *title, const long line )
+{
+	if (bUseUPRfile && bUPRopened)	/*r6pl12*/
+	{	fprintf(fUPRfile, "label\t%s\t%ld\t%s\n", filename, line, title);
+	}
+}
+
+/* New in r6pl15 [NHz] */
+
+GLOBAL void save_upr_entry_index ( const int level, const char *filename, const char *title, const long line )
+{
+	if (bUseUPRfile && bUPRopened)	/*r6pl12*/
+	{	fprintf(fUPRfile, "index\t%d\t%s\t%ld\t%s\n", level, filename, line, title);
 	}
 }
 
@@ -9137,7 +9380,7 @@ LOCAL void set_format_flags ( void )
 LOCAL void show_udo_intro ( void )
 {
 	show_status_info("");
-	sprintf(sInfMsg, "This is UDO Release %s Patchlevel %s for %s, %s %s", UDO_REL, UDO_PL, UDO_OS, compile_date, compile_time);
+	sprintf(sInfMsg, "This is UDO Release %s Patchlevel %s for %s", UDO_REL, UDO_PL, UDO_OS);
 	show_status_loginfo(sInfMsg);
 	show_status_loginfo("Copyright (c) 1995-2001 by Dirk Hagedorn.");
 	sprintf(sInfMsg, "UDO is Open Source (see %s for further information).", UDO_URL);
@@ -9322,6 +9565,7 @@ GLOBAL BOOLEAN udo (char *datei)
 	clear_if_stack();
 
 	iUdopass= PASS1;
+
 
 	if (pass1(datei) &&							/* Erster Durchlauf aufgrund eines Fehlers gescheitert? */
 		(!bCheckMisc || check_modules_pass1()))	/* Diverse Ueberpruefungen auf Wunsch durchfuehren */
@@ -10641,6 +10885,9 @@ GLOBAL void init_vars ( void )
 
 	strcpy(sDocImgSuffix, 		".gif");
 	sDocBackImage[0]=			EOS;
+	sDocStyle[0]=			EOS; /* New in r6pl15 [NHz] */
+	sDocScript[0]=			EOS; /* New in r6pl15 [NHz] */
+	sDocFavIcon[0]=			EOS; /* New in r6pl15 [NHz] */
 	sDocBackColor[0]=			EOS;
 	sDocTextColor[0]=			EOS;
 	sDocLinkColor[0]=			EOS;
