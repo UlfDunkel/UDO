@@ -48,16 +48,6 @@
 #define	UDO_MADE	"Made with UDO"
 
 
-/*	--------------------------------------------------------------
-	LyX- und HP-HelpTag-SGML Routinen anbieten und benutzen?
-	Es reicht, wenn in cli.c bzw. den GUI-Routinen die zugehoerige
-	Option nicht angeboten wird. UDO wird dann zwar groesser, aber
-	man spart sich die ganzen #if's im Sourcecode
-	--------------------------------------------------------------	*/
-#define LYX_SUPPORT			1
-#define HPH_SUPPORT			0
-	
-
 /*	------------------------------------------------------------
 	Zeichensaetze
 	------------------------------------------------------------	*/
@@ -122,7 +112,7 @@
 #define	HAVE_TMPNAM			1
 #endif
 
-#ifdef WIN32
+#ifdef __WIN32__
 #define	UDO_OS			"Win32"
 #define	USE_SLASH			0
 #define	USE_LONG_FILENAMES	1

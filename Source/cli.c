@@ -108,9 +108,7 @@ LOCAL const CLIOPT cliopt[]=
 	{	"--force-long",		"",			'b',	FALSE,	&bForceLong,		TRUE	},
 	{	"--force-short",	"",			'b',	FALSE,	&bForceShort,		TRUE	},
 	{	"--hold",			"-H",		'b',	FALSE,	&bHoldKey,			TRUE	},
-#if HPH_SUPPORT
 	{	"--helptag",		"-g",		'b',	FALSE,	&desttype,			TOHPH	},
-#endif
 	{	"--html",			"-h",		'b',	FALSE,	&desttype,			TOHTM	},
 	{	"--htmlhelp",		"-hh",		'b',	FALSE,	&desttype,			TOMHH	},
 	{	"--info",			"-i",		'b',	FALSE,	&desttype,			TOINF	},
@@ -177,17 +175,13 @@ LOCAL const char	*Prog_Help[]=
 	"-D sym                 Symbol <sym> setzen\n"
 	"       --force-long    immer lange Dateinamen erzeugen\n"
 	"-f     --pdflatex      ins PDFLaTeX-Format konvertieren\n"
-#if HPH_SUPPORT
 	"-g,    --helptag       ins HP-Helptag-SGML-Format konvertieren\n"
-#endif
 	"-h,    --html          ins HTML-Format konvertieren\n"
 	"-hh,   --htmlhelp      ins HTML-Help-Format konvertieren\n"
 	"-H,    --hold          am Ende auf Tastendruck warten\n"
 	"-i,    --info          ins GNU-Texinfo-Format konvertieren\n"
 	"       --ipf           ins OS/2-IPF-Format konvertieren\n"
-#if LYX_SUPPORT
 	"       --lyx           ins LyX-Format konvertieren\n"
-#endif
 	"-l,    --nologfile     kein Logfile (.ul?) anlegen\n"
 	"-m,    --man           in eine Manualpage konvertieren\n"
 	"       --map           C-Headerfile mit WinHelp-Jump-IDs erzeugen\n"
@@ -225,17 +219,13 @@ LOCAL const char	*Prog_Help[]=
 	"-D sym                 set symbol <sym>\n"
 	"       --force-long    save always long filenames\n"
 	"-f     --pdflatex      generate PDFLaTeX sourcecode\n"
-#if HPH_SUPPORT
 	"-g,    --helptag       convert to HP Helptag SGML\n"
-#endif
 	"-h,    --html          convert to HTML\n"
 	"-hh,   --htmlhelp      convert to HTML-Help\n"
 	"-H,    --hold          press key when udo finishs\n"
 	"-i,    --info          convert to GNU Texinfo\n"
 	"       --ipf           convert to OS/2 IPF format\n"
-#if LYX_SUPPORT
 	"       --lyx           convert to LyX\n"
-#endif
 	"-l,    --no-logfile    don't generate logfile (.ul?)\n"
 	"-m,    --man           convert to a manualpage\n"
 	"       --map           generate C header file with jump id's for WinHelp\n"
@@ -323,7 +313,7 @@ GLOBAL void show_status_node ( const char *s )
 GLOBAL void show_status_file_1 ( const char *s )
 {
 	/* Dummy-Routine */
-	s= s;	/* keep compiler happy */
+	UNUSED(s);
 }
 
 GLOBAL void show_status_file_2 ( const char *s )
@@ -353,7 +343,7 @@ GLOBAL void show_status_errors ( void )
 GLOBAL void show_logln_message ( const char *s )
 {
 	/* Dummy-Routine */
-	s= s;	/* keep compiler happy */
+	UNUSED(s);
 }
 
 
@@ -418,8 +408,8 @@ GLOBAL BOOLEAN break_action ( void )
 LOCAL void show_version ( void )
 {
 	fprintf(stdout, "\n%s\n", strPrgname);
-	fprintf(stdout, "Release %s Patchlevel %s, %s\n",
-				UDO_REL, UDO_PL, __DATE__);
+	fprintf(stdout, "Release %s Patchlevel %s for %s, %s\n",
+				UDO_REL, UDO_PL, UDO_OS, __DATE__);
 	fprintf(stdout, "%s\n", COPYRIGHT);
 }
 
@@ -450,7 +440,7 @@ extern const char *id_hp82iso_h;
 extern const char *id_mac2iso_h;
 #endif
 
-#if !defined(__TOS__) && !defined(__MSDOS__)
+#if !defined(__TOS__)
 extern const char *id_tos2iso_h;
 #endif
 
@@ -491,7 +481,7 @@ LOCAL void show_ident ( void )
 	fprintf(stdout, "%s\n", id_mac2iso_h+5);
 #endif
 
-#if !defined(__TOS__) && !defined(__MSDOS__)
+#if !defined(__TOS__)
 	fprintf(stdout, "%s\n", id_tos2iso_h+5);
 #endif
 
@@ -732,7 +722,7 @@ int main ( int argc, const char *argv[] )
 	/* globale Variablen initialisieren */
 	init_vars();
 	sprintf(nam, "UDO Release %s", UDO_REL);
-#ifdef WIN32
+#ifdef __WIN32__
 	init_module_config("udo32.ini", nam, UDO_OS);
 #else
 	init_module_config("udo.ini", nam, UDO_OS);
@@ -846,7 +836,7 @@ int main ( int argc, const char *argv[] )
 
 	wait_on_keypress();
 	
-	if (bErrorDetected)
+	if (bErrorDetected || get_error_counter() > 0)
 	{	return 1;
 	}
 
