@@ -1,5 +1,5 @@
 # doc/manual/source/history.ui
-# letzte Änderungen: 15.03.2004 / last changes: Mar 15, 2004
+# letzte Änderungen: 13.05.2004 / last changes: May 13, 2004
 
 
 !iflang [german]
@@ -2302,7 +2302,7 @@ a change of the syntax of some commands.
 ################################################################################
 # Änderungen UDO4 gegenüber UDO3
 !iflang [german]
-!begin_node Änderugen von Release 3 nach 4
+!begin_node Änderungen von Release 3 nach 4
 !endif
 !iflang [english]
 !begin_node Changes from Release 3 to 4
