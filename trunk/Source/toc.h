@@ -25,7 +25,7 @@
 	############################################################	*/
 
 #define	MAX_LABEL_LEN		128
-#define	MAX_NODE_LEN		128
+#define	MAX_NODE_LEN		199 /* v6.3.9 (old: 128) */
 #define	MAX_FILENAME_LEN	64
 #define	MAX_IMAGE_LEN		128
 #define	MAX_COLOR_LEN		16
