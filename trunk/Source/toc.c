@@ -3313,7 +3313,8 @@ LOCAL void print_htmlhelp_contents ( FILE *file, const char *indent, const int t
 		if (tocname[0]==EOS && called_tableofcontents)	strcpy(tocname, lang.contents);
 		if (tocname[0]==EOS && called_maketitle)		strcpy(tocname, lang.title);
 	}
-
+	del_html_styles(tocname);
+	
 	fprintf(file, "%s<LI> <OBJECT type=\"text/sitemap\">\n", indent);
 	fprintf(file, "%s\t<param name=\"Name\" value=\"%s\">\n", indent, tocname);
 	fprintf(file, "%s\t<param name=\"Local\" value=\"%s%s\">\n", indent, filename, outfile.suff);
@@ -3446,34 +3447,124 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 }	/* save_htmlhelp_contents */
 
 
+typedef struct _hmtl_idx {
+	int toc_index;
+	char tocname[512];
+} HTML_IDX;
+
+LOCAL int comp_index(const void *_p1, const void *_p2)
+{
+	const HTML_IDX *p1 = (const HTML_IDX *)_p1;
+	const HTML_IDX *p2 = (const HTML_IDX *)_p2;
+	
+	return strcmp(p1->tocname, p2->tocname);
+}
+
+
 GLOBAL BOOLEAN save_htmlhelp_index ( const char* filename )
 {
-#if 1
-	UNUSED(filename);
-	return FALSE;
-#else
 	FILE *file;
-
-	file= myFwopen(filename, FTHHK);
-
-	if (!file)
-	{	return FALSE;
+	size_t i;
+	size_t num_index;
+	HTML_IDX *html_index;
+	char htmlname[512];
+	char *tocname;
+	
+	/* erstmal zaehlen wieviel wir brauchen */
+	num_index = 0;
+#if 0
+	for (i = 1; i <= p1_toc_counter; i++)
+	{
+		if (toc[i] != NULL && !toc[i]->invisible)
+			num_index++;
 	}
+#endif
+	for (i = 1; i <= p1_lab_counter; i++)
+		if (lab[i] != NULL)
+			num_index++;
+	
+	if (num_index == 0)
+		return FALSE;   /* Index-File wird nicht gebraucht */
+	
+	file = myFwopen(filename, FTHHK);
 
+	if (file == NULL)
+	{
+		return FALSE;
+	}
+	html_index = (HTML_IDX *)malloc(num_index * sizeof(HTML_IDX));
+	if (html_index == NULL)
+	{
+		fclose(file);
+		error_malloc_failed();
+		return FALSE;
+	}
+	
 	save_upr_entry_outfile(filename);
 
 	fprintf(file, "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n");
-	fprintf(file, "<HTML><HEAD>\n");
+	fprintf(file, "<HTML>\n");
+	fprintf(file, "<HEAD>\n");
 	fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Release %s Patchlevel %s for %s\">\n",
 						UDO_REL, UDO_PL, UDO_OS); 
+	if (titdat.author != NULL)
+		fprintf(file, "<meta name=\"Author\" content=\"%s\">\n", titdat.author);
 	fprintf(file, "<!-- Sitemap 1.0 -->\n");
-	fprintf(file, "</HEAD><BODY>\n");
+	fprintf(file, "</HEAD>\n");
+	fprintf(file, "<BODY>\n");
 	fprintf(file, "<UL>\n");
 
-	fprintf(file, "</UL>\n");
-	fprintf(file, "</BODY></HTML>\n");
-	fclose(file);
+	/* array aufbauen.. */
+	num_index = 0;
+#if 0
+	for (i = 1; i <= p1_toc_counter; i++)
+	{
+		if (toc[i] != NULL && !toc[i]->invisible)
+		{
+			convert_toc_item(toc[i]);
+			html_index[num_index].toc_index = i;
+			strcpy(html_index[num_index].tocname, toc[i]->name);
+			num_index++;
+		}
+	}
 #endif
+	for (i = 1; i <= p1_lab_counter; i++)
+	{
+		if (lab[i] != NULL)
+		{
+			html_index[num_index].toc_index = lab[i]->tocindex;
+			tocname = html_index[num_index].tocname;
+			strcpy(tocname, lab[i]->name);
+			replace_macros(tocname);
+			c_internal_styles(tocname);
+			/* replace_udo_quotes(tocname); */
+			delete_all_divis(tocname);
+			replace_udo_tilde(tocname);
+			replace_udo_nbsp(tocname);
+			del_html_styles(tocname);
+			num_index++;
+		}
+	}
+	/* ..sortieren */
+	qsort(html_index, num_index, sizeof(HTML_IDX), comp_index);
+	
+	/* ..und ausgeben */
+	for (i = 0; i < num_index; i++)
+	{
+		get_html_filename(html_index[i].toc_index, htmlname);
+		fprintf(file, "<LI> <OBJECT type=\"text/sitemap\"> <param name=\"Name\" value=\"%s\"> <param name=\"Local\" value=\"%s%s\"> </OBJECT> </LI>\n",
+			html_index[i].tocname,
+			htmlname, outfile.suff);
+	}
+	
+	fprintf(file, "</UL>\n");
+	fprintf(file, "</BODY>\n");
+	fprintf(file, "</HTML>\n");
+	fclose(file);
+	
+	free((void *) html_index);
+	
+	return TRUE;
 }	/* save_htmlhelp_index */
 
 
