@@ -15,7 +15,7 @@
 #
 Summary: Universal DOcument (UDO) - text processing utility
 Name: udo
-Version: 6.4.0
+Version: 6.4.1
 Release: 1
 Copyright: GPL
 Group: Productivity/Publishing/UDO
