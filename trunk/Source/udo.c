@@ -7332,8 +7332,8 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 				return TRUE;
 			}
 			/* New in r6pl16 [NHz] */
-			if ( strcmp(token[0], "!html_default_hyphenation")==0 )
-			{	html_default_hyphenation = TRUE;
+			if ( strcmp(token[0], "!html_use_hyphenation")==0 )
+			{	html_use_hyphenation = TRUE;
 				return TRUE;
 			}
 			break;
@@ -10412,10 +10412,13 @@ LOCAL void init_lang ( void )
 		    strcpy(lang.unknown,    "Onbekend");
 		    strcpy(lang.update,		"Last updated on");
 		    strcpy(lang.lcid,		"LCID=0x407 0x0 0x0 ;German (Germany)");
-			strcpy(lang.html_home,	"Home");
-			strcpy(lang.html_up,	"Up");
-			strcpy(lang.html_prev,	"Prev");
-			strcpy(lang.html_next,	"Next");
+				strcpy(lang.html_home,	"Home");
+				strcpy(lang.html_up,	"Up");
+				strcpy(lang.html_prev,	"Prev");
+				strcpy(lang.html_next,	"Next");
+				/* New in r6pl16 [NHz] */
+				strcpy(lang.html_lang,	"nl");
+				strcpy(lang.html_start,	"Begin of the document");
 		    break;
 
 		case TOENG:
@@ -10438,10 +10441,13 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.unknown,	"Unknown");
 		  	strcpy(lang.update,		"Last updated on");
 		    strcpy(lang.lcid,		"LCID=0x409 0x0 0x0 ;English (USA)");
-			strcpy(lang.html_home,	"Home");
-			strcpy(lang.html_up,	"Up");
-			strcpy(lang.html_prev,	"Prev");
-			strcpy(lang.html_next,	"Next");
+				strcpy(lang.html_home,	"Home");
+				strcpy(lang.html_up,	"Up");
+				strcpy(lang.html_prev,	"Prev");
+				strcpy(lang.html_next,	"Next");
+				/* New in r6pl16 [NHz] */
+				strcpy(lang.html_lang,	"en");
+				strcpy(lang.html_start,	"Begin of the document");
 			break;
 
 		case TOFRA:		/* vergleiche german.sty von LaTeX */
@@ -10449,7 +10455,7 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.chapter,	"Chapitre");
 		  	strcpy(lang.title,		"Titre");
 		  	strcpy(lang.appendix,	"Annexe");
-			strcpy(lang.contents,	"Sommaire");	/* r6pl13: laut Didier Briel (ddc@imaginet.fr) */
+				strcpy(lang.contents,	"Sommaire");	/* r6pl13: laut Didier Briel (ddc@imaginet.fr) */
 		  	strcpy(lang.listfigure,	"Table des figures");
 		  	strcpy(lang.listtable,	"Liste des tableaux");
 		  	strcpy(lang.figure,		"Figure");
@@ -10464,10 +10470,13 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.unknown,	"Inconnu");
 		  	strcpy(lang.update,		"Derni(!`e)re mise (!`a) jour le");		/* r6pl13: laut Didier Briel (ddc@imaginet.fr) */
 		    strcpy(lang.lcid,		"LCID=0x40c 0x0 0x0 ;Frensh (France)");
-			strcpy(lang.html_home,	"Home");
-			strcpy(lang.html_up,	"Up");
-			strcpy(lang.html_prev,	"Prev");
-			strcpy(lang.html_next,	"Next");
+				strcpy(lang.html_home,	"Home");
+				strcpy(lang.html_up,	"Up");
+				strcpy(lang.html_prev,	"Prev");
+				strcpy(lang.html_next,	"Next");
+				/* New in r6pl16 [NHz] */
+				strcpy(lang.html_lang,	"fr");
+				strcpy(lang.html_start,	"Begin of the document");
 		  	
 		  	/* Strings mit Sonderzeichen anpassen */
 		  	uni2ascii(lang.preface);
@@ -10494,10 +10503,13 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.unknown,	"Ignoto");
 		  	strcpy(lang.update,		"Last updated on");
 		    strcpy(lang.lcid,		"LCID=0x410 0x0 0x0 ;Italian (Italy)");
-			strcpy(lang.html_home,	"Home");
-			strcpy(lang.html_up,	"Up");
-			strcpy(lang.html_prev,	"Prev");
-			strcpy(lang.html_next,	"Next");
+				strcpy(lang.html_home,	"Home");
+				strcpy(lang.html_up,	"Up");
+				strcpy(lang.html_prev,	"Prev");
+				strcpy(lang.html_next,	"Next");
+				/* New in r6pl16 [NHz] */
+				strcpy(lang.html_lang,	"it");
+				strcpy(lang.html_start,	"Begin of the document");
 		  	break;
 
 		case TOSPA:	/* Euro-Dictionary */
@@ -10520,10 +10532,13 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.unknown,	"Desconocido");
 		  	strcpy(lang.update,		"Last updated on");
 		    strcpy(lang.lcid,		"LCID=0x40a 0x0 0x0 ;Spanish (Traditional)");
-			strcpy(lang.html_home,	"Home");
-			strcpy(lang.html_up,	"Up");
-			strcpy(lang.html_prev,	"Prev");
-			strcpy(lang.html_next,	"Next");
+				strcpy(lang.html_home,	"Home");
+				strcpy(lang.html_up,	"Up");
+				strcpy(lang.html_prev,	"Prev");
+				strcpy(lang.html_next,	"Next");
+				/* New in r6pl16 [NHz] */
+				strcpy(lang.html_lang,	"es");
+				strcpy(lang.html_start,	"Begin of the document");
 
 		  	/* Strings mit Sonderzeichen anpassen */
 		  	uni2ascii(lang.chapter);
@@ -10554,10 +10569,13 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.unknown,	"Unknown");
 		  	strcpy(lang.update,		"Last updated on");
 		    strcpy(lang.lcid,		"LCID=0x41d 0x0 0x0 ;Swedish (Sweden)");
-			strcpy(lang.html_home,	"Home");
-			strcpy(lang.html_up,	"Up");
-			strcpy(lang.html_prev,	"Prev");
-			strcpy(lang.html_next,	"Next");
+				strcpy(lang.html_home,	"Home");
+				strcpy(lang.html_up,	"Up");
+				strcpy(lang.html_prev,	"Prev");
+				strcpy(lang.html_next,	"Next");
+				/* New in r6pl16 [NHz] */
+				strcpy(lang.html_lang,	"sv");
+				strcpy(lang.html_start,	"Begin of the document");
 		  	
 		  	/* Strings mit Sonderzeichen anpassen */
 		  	uni2ascii(lang.preface);
@@ -10566,7 +10584,7 @@ LOCAL void init_lang ( void )
 		  	break;
 
 		default:	/* Deutsch ist default */
-			strcpy(lang.preface,	"Vorwort");
+				strcpy(lang.preface,	"Vorwort");
 		  	strcpy(lang.chapter,	"Kapitel");
 		  	strcpy(lang.title,		"Titel");
 		  	strcpy(lang.appendix,	"Anhang");
@@ -10583,12 +10601,15 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.up,			"&Hoch");
 		  	strcpy(lang.exit,		"Bee&nden");
 		  	strcpy(lang.unknown,	"Unbekannt");
-			strcpy(lang.update,		"Letzte Aktualisierung am");	/*r6pl5: (!\"A)nderung */
+				strcpy(lang.update,		"Letzte Aktualisierung am");	/*r6pl5: (!\"A)nderung */
 		    strcpy(lang.lcid,		"LCID=0x407 0x0 0x0 ;German (Germany)");
-			strcpy(lang.html_home,	"Home");
-			strcpy(lang.html_up,	"Up");
-			strcpy(lang.html_prev,	"Prev");
-			strcpy(lang.html_next,	"Next");
+				strcpy(lang.html_home,	"Home");
+				strcpy(lang.html_up,	"Up");
+				strcpy(lang.html_prev,	"Prev");
+				strcpy(lang.html_next,	"Next");
+				/* New in r6pl16 [NHz] */
+				strcpy(lang.html_lang,	"de");
+				strcpy(lang.html_start,	"Beginn des Dokumentes");
 		  	
 		  	uni2ascii(lang.update);
 		  	break;
@@ -10878,7 +10899,7 @@ GLOBAL void init_vars ( void )
 	sDocHtmlSwitchLanguage[0]=	EOS;		/*r6pl12*/
 	iDocHtmlSwitchLanguage=		-1;			/*r6pl12*/
 	html_transparent_buttons=	FALSE;		/*r6pl12*/
-	html_default_hyphenation=	FALSE;		/* New in r6pl16 [NHz] */
+	html_use_hyphenation=	FALSE;		/* New in r6pl16 [NHz] */
 	
 	html_ignore_p= 				FALSE;
 
