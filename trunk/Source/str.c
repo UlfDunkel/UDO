@@ -34,6 +34,80 @@ const char *id_str_c= "@(#) str.c       10.03.1997";
 #include "str.h"
 #include "version.h"
 
+/*
+	#################################################################
+	#
+	# strcat und strcpy Wrapper, die Puffergrenzen checken können
+	#
+	#################################################################
+*/
+
+GLOBAL char *um_strcpy(char *dest, const char *src, size_t max, const char *place)
+{
+	size_t slen; /* Temporäre Variable, für die Länge von src */
+	
+	slen=(size_t)strlen(src); /* Stringlänge bestimmen */
+	if (((size_t)slen+1)<max) /* Testen obs  */
+	{
+		return strcpy(dest, src);
+	}
+	else
+	{
+		dest[0]=EOS;
+		printf("um_strcpy: buffer overrun prevented: %s: %d>%d\n", place, slen+1, max);
+		return dest;
+	}
+}
+
+GLOBAL char *um_strncpy(char *dest, const char *src, size_t n, size_t max, const char *place)
+{
+	if ((n+1)<max)
+	{
+		return strncpy(dest, src, n);
+	}
+	else
+	{
+		dest[0]=EOS;
+		printf("um_strncpy: buffer overrun prevented: %s: %d>%d\n", place, n+1, max);
+		return dest;
+	}
+}
+
+GLOBAL char *um_strcat(char *dest, const char *src, size_t max, const char *place)
+{
+	size_t dlen, slen;
+
+	dlen=(size_t)strlen(dest);
+	slen=(size_t)strlen(src);
+	
+	if ((dlen+slen+1)<max)
+	{
+		return strcat(dest, src);
+	}
+	else
+	{
+		dest[0]=EOS;
+		printf("um_strcat: buffer overrun prevented: %s: %d>%d\n", place, dlen+slen+1, max);
+		return dest;
+	}
+}
+
+GLOBAL char *um_strncat(char *dest, const char *src, size_t n, size_t max, const char *place)
+{
+	size_t dlen;
+
+	dlen=strlen(dest);
+	if ((dlen+n+1)<max)
+	{
+		return strncat(dest, src, n);
+	}
+	else
+	{
+		dest[0]=EOS;
+		printf("um_strncat: buffer overrun prevented: %s: %d>%d\n", place, dlen+n+1, max);
+		return dest;
+	}
+}
 
 /*	############################################################
 	#

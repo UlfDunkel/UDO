@@ -77,6 +77,11 @@ GLOBAL void my_strlwr ( char *string );
 GLOBAL int my_stricmp ( const char *s1, const char *s2 );
 GLOBAL int my_strnicmp ( const char *s1, const char *s2, size_t len );
 
+GLOBAL char *um_strcpy(char *dest, const char *src, size_t max, const char *place);
+GLOBAL char *um_strncpy(char *dest, const char *src, size_t n, size_t max, const char *place);
+GLOBAL char *um_strcat(char *dest, const char *src, size_t max, const char *place);
+GLOBAL char *um_strncat(char *dest, const char *src, size_t n, size_t max, const char *place);
+
 /*	############################################################
 	# str.h
 	############################################################	*/
