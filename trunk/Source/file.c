@@ -54,7 +54,7 @@ GLOBAL MYTEXTFILE *myTextOpen ( const char *filename )
 {
 	MYTEXTFILE *tf;
 
-	tf= (MYTEXTFILE *) malloc (sizeof(*tf));
+	tf= (MYTEXTFILE *) um_malloc (sizeof(*tf));
 
 	if (tf == NULL)
 	{
@@ -68,7 +68,7 @@ GLOBAL MYTEXTFILE *myTextOpen ( const char *filename )
 
 	if (tf->file == NULL)
 	{
-		free(tf);
+		um_free(tf);
 		return NULL;
 	}
 
@@ -79,7 +79,7 @@ GLOBAL MYTEXTFILE *myTextOpen ( const char *filename )
 
 	if (tf->filelen>0)
 	{
-		tf->buffer= (char *) malloc ((size_t) tf->filelen);
+		tf->buffer= (char *) um_malloc ((size_t) tf->filelen);
 
 		if (tf->buffer != NULL)
 		{
@@ -97,7 +97,7 @@ GLOBAL MYTEXTFILE *myTextOpen ( const char *filename )
 
 	if (tf->file == NULL)
 	{
-		free(tf);
+		um_free(tf);
 		tf= NULL;
 	}
 
@@ -196,11 +196,11 @@ GLOBAL int myTextClose ( MYTEXTFILE *tf )
 
 	if (tf->buffer != NULL)
 	{
-		free(tf->buffer);
+		um_free(tf->buffer);
 	}
 
 	fclose(tf->file);
-	free(tf);
+	um_free(tf);
 
 	return 0;
 
@@ -439,7 +439,7 @@ LOCAL MYFILE *my_new_myfile ( void )
 {
 	MYFILE *myfile;
 
-	myfile = (MYFILE *)malloc(sizeof(MYFILE));
+	myfile = (MYFILE *)um_malloc(sizeof(MYFILE));
 
 	if (myfile!=NULL)
 	{
@@ -453,7 +453,7 @@ LOCAL BOOLEAN my_free_myfile ( MYFILE *myfile )
 {
 	if (myfile!=NULL)
 	{
-		free(myfile);
+		um_free(myfile);
 		return TRUE;
 	}
 

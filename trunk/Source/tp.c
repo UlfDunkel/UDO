@@ -284,7 +284,7 @@ LOCAL BOOLEAN init_docinfo_data ( char *data, char **var, int allow_empty )
 	*/
 	char *buffer;
 	
-	buffer= (char *) malloc (strlen(data)*sizeof(char)+1);
+	buffer= (char *) um_malloc (strlen(data)*sizeof(char)+1);
 
 	if (buffer) /* Check if the buffer could be allocated */
 	{
@@ -357,7 +357,7 @@ GLOBAL BOOLEAN set_docinfo ( void )
 		}
 		else
 		{	path_adjust_separator(data);
-			buffer= (char *) malloc ( strlen(data)*sizeof(char)+1 );
+			buffer= (char *) um_malloc ( strlen(data)*sizeof(char)+1 );
 			if (buffer)
 			{	strcpy(buffer, data);
 				titdat.authorimage= buffer;
@@ -385,7 +385,7 @@ GLOBAL BOOLEAN set_docinfo ( void )
 			fsplit(data, sDriv, sPath, sFile, sSuff);
 			sprintf(data, "%s%s%s", sPath, sFile, sDocImgSuffix);
 			path_adjust_separator(data);
-			buffer= (char *) malloc ( strlen(data)*sizeof(char)+1 );
+			buffer= (char *) um_malloc ( strlen(data)*sizeof(char)+1 );
 			if (buffer)
 			{	strcpy(buffer, data);
 				titdat.authoricon= buffer;
@@ -421,7 +421,7 @@ GLOBAL BOOLEAN set_docinfo ( void )
 			fsplit(data, sDriv, sPath, sFile, sSuff);
 			sprintf(data, "%s%s%s", sPath, sFile, sDocImgSuffix);
 			path_adjust_separator(data);
-			buffer= (char *) malloc ( strlen(data)*sizeof(char)+1 );
+			buffer= (char *) um_malloc ( strlen(data)*sizeof(char)+1 );
 			if (buffer)
 			{	strcpy(buffer, data);
 				titdat.authoricon_active= buffer;
@@ -454,7 +454,7 @@ GLOBAL BOOLEAN set_docinfo ( void )
 		}
 		else
 		{	path_adjust_separator(data);
-			buffer= (char *) malloc ( strlen(data)*sizeof(char)+1 );
+			buffer= (char *) um_malloc ( strlen(data)*sizeof(char)+1 );
 			if (buffer)
 			{	strcpy(buffer, data);
 				titdat.programimage= buffer;
@@ -557,7 +557,7 @@ GLOBAL BOOLEAN set_docinfo ( void )
 		{	error_empty_docinfo();
 		}
 		else
-		{	buffer= (char *) malloc ( strlen(data)*sizeof(char)+1 );
+		{	buffer= (char *) um_malloc ( strlen(data)*sizeof(char)+1 );
 			if (buffer)
 			{	strcpy(buffer, data);
 				titdat.webmasterurl= buffer;
@@ -1453,7 +1453,7 @@ GLOBAL void init_module_tp_pass2 ( void )
 LOCAL void free_titdat ( char **var )
 {
 	if (*var!=NULL)
-	{	free(*var);
+	{	um_free(*var);
 		*var= NULL;
 	}
 }

@@ -122,7 +122,7 @@ GLOBAL void table_reset ( void )
 	for (y=0; y<MAX_TAB_H; y++)
 	{	for (x=0; x<MAX_TAB_W; x++)
 		{	if (tab_cell[y][x]!=NULL)
-			{	free(tab_cell[y][x]);
+			{	um_free(tab_cell[y][x]);
 				tab_cell[y][x]= NULL;
 			}
 		}
@@ -340,7 +340,7 @@ GLOBAL BOOLEAN table_add_line ( char *s )
 			{	tab_cell_w[x]= tl;
 			}
 	
-			ptr= (char *) (malloc(sl+2));
+			ptr= (char *) (um_malloc(sl+2));
 			if (ptr==NULL)
 			{	error_malloc_failed();
 				return FALSE;
