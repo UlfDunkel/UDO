@@ -1,7 +1,7 @@
 ############################################################
 # doc/manpage/manpage.u
 # Die Manualpage zur Kommandozeilenversion
-# letzte Änderungen: 21.12.2003 / last changes: Dec 21, 2003
+# letzte Änderungen: 24.01.2004 / last changes: Jan 24, 2004
 ############################################################
 # Mit "udo --nroff -o udo.1 manpage.u"
 # oder "udo --man -o udo.man manpage.u" uebersetzen
@@ -33,7 +33,7 @@
 
 !begin_document
 
-!include ../manual/source/running_cmdline.ui
+!include ../manual/source/cmdline.ui
 
 
 !iflang [german]

@@ -1,5 +1,5 @@
 # doc/manual/source/running.ui
-# letzte Änderungen: 20.12.2003 / last changes: Dec 20, 2003
+# letzte Änderungen: 24.01.2004 / last changes: Jan 24, 2004
 
 
 ################################################################################
@@ -43,7 +43,7 @@ The command line version can be used identically on any operating system UDO
 is available for.
 !endif
 
-!include running_cmdline.ui
+!include cmdline.ui
 
 !end_node
 # Kommandozeilenversion

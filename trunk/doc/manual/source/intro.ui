@@ -1,5 +1,5 @@
 # doc/manual/source/introduction.ui
-# letzte Änderungen: 17.01.2004 / last changes: Jan 17, 2004
+# letzte Änderungen: 24.01.2004 / last changes: Jan 24, 2004
 
 
 ################################################################################
@@ -757,7 +757,7 @@ Mail discussions are mostly in german, but feel free to ask in English.
 !begin_node Copyright
 !html_name introduction_copyright.html
 
-!include copyright.ui
+!include copyrght.ui
 
 !end_node
 # Ende: Copyright

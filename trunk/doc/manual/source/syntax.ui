@@ -1,5 +1,5 @@
 # doc/manual/source/syntax.ui
-# letzte Änderungen: 17.01.2004 / last changes: Jan 17, 2004
+# letzte Änderungen: 24.01.2004 / last changes: Jan 24, 2004
 
 
 ################################################################################
@@ -1524,26 +1524,26 @@ Umgebungen kombinierbar. Hier ein kleines, unverschachteltes Beispiel:
 Aus!..
 
 !begin_quote
-!vinclude (!EXAMPLES)enumerate1.ui
+!vinclude (!EXAMPLES)enum1.ui
 !end_quote
 
 !.. wird:
 
 !begin_quote
-!include (!EXAMPLES)enumerate1.ui
+!include (!EXAMPLES)enum1.ui
 !end_quote
 
 Und aus diesem kleinen Beispiel, in dem die enumerate-Umgebung
 verschachtelt und mit dem Schalter (!KW [short]) benutzt wird,!..
 
 !begin_quote
-!vinclude (!EXAMPLES)enumerate2.ui
+!vinclude (!EXAMPLES)enum2.ui
 !end_quote
 
 !..erhält man
 
 !begin_quote
-!include (!EXAMPLES)enumerate2.ui
+!include (!EXAMPLES)enum2.ui
 !end_quote
 
 (!HINTS)
@@ -1551,16 +1551,16 @@ verschachtelt und mit dem Schalter (!KW [short]) benutzt wird,!..
 !begin_enumerate
 !item Bei den Formaten, die von Hause aus eine vergleichbare Umgebung
      anbieten (z.B. HTML) werden die Punkte nicht von UDO numeriert.
-     Daher sollte man vorsichtig mit Angaben wie ""siehe Punkt 1"" oder
-     ""vergleiche Punkt b)"" sein.
+     Daher sollte man vorsichtig mit Angaben wie ""siehe Punkt~1"" oder
+     ""vergleiche Punkt~b)"" sein.
 
 !item Die dritte Ebene dieser Umgebung wird relativ gesehen etwas
      weiter eingerückt, da die Numerierung durch römische Zahlen mehr
      Platz benötigt.
 
 !item Bei vielen Punkten sollte man aufpassen, nicht die Grenzen zu
-     überschreiten. Wird eine Eben mit Buchstaben numeriert, sollte
-     man nicht mehr als 26 Aufzählungspunkte benutzen.
+     überschreiten. Wird eine Ebene mit Buchstaben numeriert, sollte
+     man nicht mehr als 26~Aufzählungspunkte benutzen.
 
 !item Eine ausführliche Erläuterung des Schalters (!KW [short]) finden Sie in
      der Beschreibung zur itemize-Umgebung.
@@ -1580,26 +1580,26 @@ another itemize environment.
 This short example shows how to write a simple itemize environment:
 
 !begin_quote
-!vinclude (!EXAMPLES)enumerate1.ui
+!vinclude (!EXAMPLES)enum1.ui
 !end_quote
 
 !.. will be displayed this way:
 
 !begin_quote
-!include (!EXAMPLES)enumerate1.ui
+!include (!EXAMPLES)enum1.ui
 !end_quote
 
 In the following example the enumerate environment is used twice and it will
 be compressed because of the usage of (!KW [short]):
 
 !begin_quote
-!vinclude (!EXAMPLES)enumerate2.ui
+!vinclude (!EXAMPLES)enum2.ui
 !end_quote
 
 !.. becomes:
 
 !begin_quote
-!include (!EXAMPLES)enumerate2.ui
+!include (!EXAMPLES)enum2.ui
 !end_quote
 
 (!HINTS)
@@ -1608,13 +1608,13 @@ be compressed because of the usage of (!KW [short]):
 
 !item	UDO doesn't enumerate the items for all destination formats. E.g.
 HTML and (!LaTeX) enumerate the items themselves so you have to be cautious
-with using text like ""see item 1"" or ""see point b)"".
+with using text like ""see item~1"" or ""see point~b)"".
 
 !item	The third layer of enumerate environments will be indented deeper
 than the other layers because Roman numbers need a little bit more space.
 
 !item	Because the second layer is enumerated with letters you shouldn't
-use more than 26 items.
+use more than 26~items.
 
 !item	A description of the (!KW [short]) command is part of the chapter
 ""Itemizations"".
@@ -1648,26 +1648,26 @@ mit anderen Umgebungen kobinieren. Hier ein kleines, unverschachteltes
 Beispiel: Aus!..
 
 !begin_quote
-!vinclude (!EXAMPLES)description1.ui
+!vinclude (!EXAMPLES)descript1.ui
 !end_quote
 
 !.. wird:
 
 !begin_quote
-!include (!EXAMPLES)description1.ui
+!include (!EXAMPLES)descript1.ui
 !end_quote
 
 Aus diesem Beispiel, in dem die description-Umgebung verschachtelt und
 mit dem Schalter (!KW [short]) benutzt wird!..
 
 !begin_quote
-!vinclude (!EXAMPLES)description2.ui
+!vinclude (!EXAMPLES)descript2.ui
 !end_quote
 
 !..erhält man
 
 !begin_quote
-!include (!EXAMPLES)description2.ui
+!include (!EXAMPLES)descript2.ui
 !end_quote
 
 (!HINTS)
@@ -1700,26 +1700,26 @@ The description environment can be used inside other (description)
 environments. This example!..
 
 !begin_quote
-!vinclude (!EXAMPLES)description1.ui
+!vinclude (!EXAMPLES)descript1.ui
 !end_quote
 
 !.. will be displayed this way:
 
 !begin_quote
-!include (!EXAMPLES)description1.ui
+!include (!EXAMPLES)descript1.ui
 !end_quote
 
 In this example the description environment is used inside another one and
 the (!KW [short]) is used, too:
 
 !begin_quote
-!vinclude (!EXAMPLES)description2.ui
+!vinclude (!EXAMPLES)descript2.ui
 !end_quote
 
 !.. becomes:
 
 !begin_quote
-!include (!EXAMPLES)description2.ui
+!include (!EXAMPLES)descript2.ui
 !end_quote
 
 (!HINTS)
@@ -6123,7 +6123,7 @@ the following lines until (!KW [endif]) or (!KW [else]).
 Mit dem Befehl (!KW [ifdest]) können Sie das Format abfragen, welches von UDO
 ausgegeben wird. Zur Abfrage verwenden Sie die Kürzel der Ausgabeformate:
 
-!include format-table.ui
+!include formattb.ui
 
 Zusätzlich zu den hier genannten Zeichenketten können jeweils auch
 ""all"" und ""none"" verwendet werden. Bei ""all"" liefert eine Abfrage
@@ -6186,7 +6186,7 @@ verpassen:
 With the command (!KW [ifdest]) you can test the destination format. Use
 the following abbreviations:
 
-!include format-table.ui
+!include formattb.ui
 
 In addition to these abbreviations you can use ""all"" and ""none"". A query
 with ""all"" always returns a true value, a query with ""none"" always
@@ -6530,7 +6530,7 @@ Hier eine Übersicht, welches Kürzel für welches Ausgabeformat benutzt
 werden kann:
 
 !label Ausgabeformat
-!include format-table.ui
+!include formattb.ui
 
 Um beispielsweise eine Zeile nur in das ASCII-Format auszugeben, gibt
 man folgendes an:
@@ -6630,7 +6630,7 @@ You have to use abbreviations of the destination formates if you want
 to use the (!KW [raw]) command:
 
 !label Abbreviations
-!include format-table.ui
+!include formattb.ui
 
 The next example shows how to insert a line that will only be printed
 for the ASCII format:
