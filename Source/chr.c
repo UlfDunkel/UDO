@@ -36,6 +36,8 @@ const char *id_chr_c= "@(#) chr.c       22.04.1999";
 #include "msg.h"
 #include "str.h"
 #include "sty.h"
+/* New: Fixed bug #0000040 in r6.3pl16 [NHz] */
+#include "tp.h"
 #include "udo.h"
 #include "chr_all.h"
 #include "chr_ttf.h"
@@ -330,7 +332,9 @@ LOCAL void iso2system ( char *s )
 LOCAL void iso2sys ( char *s )
 {
 	if (iCharset==CODE_LAT1)	/* PL14: TOLYX */
-	{	if ( desttype==TOWIN || desttype==TOWH4 || desttype==TORTF || desttype==TOAQV || desttype==TOLYX )
+	{	/* Changed: Fixed Bug #0000040 in r6.3pl16 [NHz] */
+		/* Supplement of desttype==TOKPS */
+		if ( desttype==TOWIN || desttype==TOWH4 || desttype==TORTF || desttype==TOAQV || desttype==TOLYX || desttype==TOKPS )
 		{	return;
 		}
 	}
@@ -1380,6 +1384,27 @@ GLOBAL void node2postscript ( char *s, int text )
 {
 	switch(text)
 	{
+		/* New: Fixed bug #0000040 in r6.3pl16 [NHz] */
+		case KPS_PS2DOCINFO:
+			qreplace_all(s, "\\[", 2, "[", 1);
+			qreplace_all(s, "\\]", 2, "]", 1);
+			break;
+
+		case KPS_DOCINFO2PS:
+			qreplace_all(s, "[", 1, "\\[", 2);
+			qreplace_all(s, "]", 1, "\\]", 2);
+			break;
+
+		case KPS_NODENAME:
+			if(strlen(s) > 80L-strlen(titdat.author))
+			{
+				s[80L-strlen(titdat.author)] = EOS;
+				if(s[79L-strlen(titdat.author)] == '\\')
+					s[79L-strlen(titdat.author)] = EOS;
+				strcat(s, "...\0");
+			}
+			break;
+		
 		case KPS_CONTENT:
 			qreplace_all(s, "/", 1, "\\/", 2);
 			break;
@@ -1399,8 +1424,14 @@ GLOBAL void node2postscript ( char *s, int text )
 			qdelete_all(s, ";", 1);
 			qdelete_all(s, ":", 1);
 			qdelete_all(s, "/", 1);
+			/* New: Fixed Bug #0000040 in r6.3pl16 [NHz] */
+			qdelete_all(s, "\\[", 2);
+			qdelete_all(s, "[", 1);
 			qdelete_all(s, "\\(", 2);
 			qdelete_all(s, "(", 1);
+			/* New: Fixed Bug #0000040 in r6.3pl16 [NHz] */
+			qdelete_all(s, "\\]", 2);
+			qdelete_all(s, "]", 1);
 			qdelete_all(s, "\\)", 2);
 			qdelete_all(s, ")", 1);
 			qdelete_all(s, "-", 1);
@@ -2724,6 +2755,10 @@ GLOBAL void auto_quote_chars ( char *s, BOOLEAN all )
 				{
 					LOCAL QUOTEINFO const ps7bit[]=
 					{
+						/* New: Fixed Bug #0000040 in r6.3pl16 [NHz] */
+						{	'[',		"\\["	},
+						{	']',		"\\]"	},
+
 						{	'(',		"\\("	},
 						{	')',		"\\)"	},
 						{	'\\',		"\\\\"	}
