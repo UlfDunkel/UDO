@@ -9,7 +9,6 @@
 			children = (
 				F88C1ED20457270000D83FD6,
 				F88C1F900457270000D83FD6,
-				F88C1F910457270000D83FD6,
 				F88C1F970457270100D83FD6,
 				F88C1F9A0457270100D83FD6,
 				F88C20EE0457270200D83FD6,
@@ -55,7 +54,6 @@
 			buildPhases = (
 			);
 			buildSettings = {
-				OPTIMIZATION_CFLAGS = "";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
@@ -1429,47 +1427,6 @@
 			name = COPYRIGHT;
 			path = /Users/stefan/Developer/UDO/COPYRIGHT;
 			refType = 0;
-		};
-		F88C1F910457270000D83FD6 = {
-			children = (
-				F88C1F920457270000D83FD6,
-				F88C1F930457270000D83FD6,
-				F88C1F940457270100D83FD6,
-				F88C1F950457270100D83FD6,
-				F88C1F960457270100D83FD6,
-			);
-			isa = PBXGroup;
-			name = CVS;
-			path = /Users/stefan/Developer/UDO/CVS;
-			refType = 0;
-		};
-		F88C1F920457270000D83FD6 = {
-			isa = PBXFileReference;
-			path = .DS_Store;
-			refType = 4;
-		};
-		F88C1F930457270000D83FD6 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			path = Entries;
-			refType = 4;
-		};
-		F88C1F940457270100D83FD6 = {
-			isa = PBXFileReference;
-			path = Entries.Log;
-			refType = 4;
-		};
-		F88C1F950457270100D83FD6 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			path = Repository;
-			refType = 4;
-		};
-		F88C1F960457270100D83FD6 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			path = Root;
-			refType = 4;
 		};
 		F88C1F970457270100D83FD6 = {
 			children = (
@@ -3906,7 +3863,6 @@
 		};
 		F88C20F00457270200D83FD6 = {
 			children = (
-				F88C20F10457270200D83FD6,
 				F88C20F20457270200D83FD6,
 				F88C20F30457270200D83FD6,
 				F88C20F40457270200D83FD6,
@@ -3925,7 +3881,6 @@
 				F88C21020457270200D83FD6,
 				F88C21030457270200D83FD6,
 				F88C21040457270200D83FD6,
-				F88C21050457270200D83FD6,
 				F88C21060457270200D83FD6,
 				F88C21070457270200D83FD6,
 				F88C21080457270200D83FD6,
@@ -3998,11 +3953,6 @@
 			name = Source;
 			path = /Users/stefan/Developer/UDO/Source;
 			refType = 0;
-		};
-		F88C20F10457270200D83FD6 = {
-			isa = PBXFileReference;
-			path = .DS_Store;
-			refType = 4;
 		};
 		F88C20F20457270200D83FD6 = {
 			fileEncoding = 30;
@@ -4118,12 +4068,6 @@
 			fileEncoding = 30;
 			isa = PBXFileReference;
 			path = chr_mac.h;
-			refType = 4;
-		};
-		F88C21050457270200D83FD6 = {
-			fileEncoding = 30;
-			isa = PBXFileReference;
-			path = chr_mac.old.h;
 			refType = 4;
 		};
 		F88C21060457270200D83FD6 = {
@@ -4260,108 +4204,15 @@
 		};
 		F88C211C0457270200D83FD6 = {
 			children = (
-				F88C211D0457270200D83FD6,
 				F88C212B0457270200D83FD6,
 			);
 			isa = PBXGroup;
 			path = MacOSX;
 			refType = 4;
 		};
-		F88C211D0457270200D83FD6 = {
-			children = (
-				F88C211E0457270200D83FD6,
-			);
-			isa = PBXGroup;
-			path = build;
-			refType = 4;
-		};
-		F88C211E0457270200D83FD6 = {
-			children = (
-				F88C211F0457270200D83FD6,
-			);
-			isa = PBXGroup;
-			path = UDO.build;
-			refType = 4;
-		};
-		F88C211F0457270200D83FD6 = {
-			children = (
-				F88C21200457270200D83FD6,
-				F88C21210457270200D83FD6,
-				F88C21220457270200D83FD6,
-				F88C21230457270200D83FD6,
-				F88C21240457270200D83FD6,
-				F88C21250457270200D83FD6,
-				F88C21260457270200D83FD6,
-				F88C21270457270200D83FD6,
-				F88C212A0457270200D83FD6,
-			);
-			isa = PBXGroup;
-			path = UDO.pbxindex;
-			refType = 4;
-		};
-		F88C21200457270200D83FD6 = {
-			isa = PBXFileReference;
-			path = categories.pbxbtree;
-			refType = 4;
-		};
-		F88C21210457270200D83FD6 = {
-			isa = PBXFileReference;
-			path = decls.pbxbtree;
-			refType = 4;
-		};
-		F88C21220457270200D83FD6 = {
-			isa = PBXFileReference;
-			path = files.pbxbtree;
-			refType = 4;
-		};
-		F88C21230457270200D83FD6 = {
-			isa = PBXFileReference;
-			path = imports.pbxbtree;
-			refType = 4;
-		};
-		F88C21240457270200D83FD6 = {
-			isa = PBXFileReference;
-			path = pbxindex.header;
-			refType = 4;
-		};
-		F88C21250457270200D83FD6 = {
-			isa = PBXFileReference;
-			path = protocols.pbxbtree;
-			refType = 4;
-		};
-		F88C21260457270200D83FD6 = {
-			isa = PBXFileReference;
-			path = refs.pbxbtree;
-			refType = 4;
-		};
-		F88C21270457270200D83FD6 = {
-			children = (
-				F88C21280457270200D83FD6,
-				F88C21290457270200D83FD6,
-			);
-			isa = PBXGroup;
-			path = strings.pbxstrings;
-			refType = 4;
-		};
-		F88C21280457270200D83FD6 = {
-			isa = PBXFileReference;
-			path = control;
-			refType = 4;
-		};
-		F88C21290457270200D83FD6 = {
-			isa = PBXFileReference;
-			path = strings;
-			refType = 4;
-		};
-		F88C212A0457270200D83FD6 = {
-			isa = PBXFileReference;
-			path = subclasses.pbxbtree;
-			refType = 4;
-		};
 		F88C212B0457270200D83FD6 = {
 			children = (
 				F88C212C0457270200D83FD6,
-				F88C212D0457270200D83FD6,
 			);
 			isa = PBXGroup;
 			path = UDO.pbproj;
@@ -4370,11 +4221,6 @@
 		F88C212C0457270200D83FD6 = {
 			isa = PBXFileReference;
 			path = project.pbxproj;
-			refType = 4;
-		};
-		F88C212D0457270200D83FD6 = {
-			isa = PBXFileReference;
-			path = stefan.pbxuser;
 			refType = 4;
 		};
 		F88C212E0457270200D83FD6 = {
