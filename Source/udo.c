@@ -9352,41 +9352,41 @@ GLOBAL BOOLEAN udo (char *datei)
 		vloglnf("finished: %s", timer_stop);
 		logln("");
 
-		if (bGifHmSaved)	logln_file_generated("GIF", sGifHmFull);
-		if (bGifUpSaved)	logln_file_generated("GIF", sGifUpFull);
-		if (bGifLfSaved)	logln_file_generated("GIF", sGifLfFull);
-		if (bGifRgSaved)	logln_file_generated("GIF", sGifRgFull);
-		if (bGifNoHmSaved)	logln_file_generated("GIF", sGifNoHmFull);
-		if (bGifNoUpSaved)	logln_file_generated("GIF", sGifNoUpFull);
-		if (bGifNoLfSaved)	logln_file_generated("GIF", sGifNoLfFull);
-		if (bGifNoRgSaved)	logln_file_generated("GIF", sGifNoRgFull);
-		if (bGifTpSaved)	logln_file_generated("GIF", sGifTpFull);
-		if (bGifFoSaved)	logln_file_generated("GIF", sGifFoFull);
-		if (bGifFcSaved)	logln_file_generated("GIF", sGifFcFull);
-		if (bGifFsSaved)	logln_file_generated("GIF", sGifFsFull);
-		if (bGifMwSaved)	logln_file_generated("GIF", sGifMwFull);
-		if (bGifGerSaved)	logln_file_generated("GIF", sGifGerFull);
-		if (bGifEngSaved)	logln_file_generated("GIF", sGifEngFull);
-		if (bBmpFoSaved)	logln_file_generated("BMP", sBmpFoFull);
-		if (bBmpFcSaved)	logln_file_generated("BMP", sBmpFcFull);
-		if (bBmpMwSaved)	logln_file_generated("BMP", sBmpMwFull);
-		if (bImgFoSaved)	logln_file_generated("IMG", sImgFoFull);
-		if (bImgFcSaved)	logln_file_generated("IMG", sImgFcFull);
-		if (bImgMwSaved)	logln_file_generated("IMG", sImgMwFull);
-		if (bCmdSaved)		logln_file_generated("Pure C command file", sCmdfull);
-		if (bHpjSaved)		logln_file_generated("WinHelp project", sHpjfull);
-		if (bCntSaved)		logln_file_generated("WinHelp4 contents", sCntfull);
-		if (bMapSavedC)		logln_file_generated("WinHelp map for C", sMapNoSuff);
-		if (bMapSavedPas)	logln_file_generated("WinHelp map for Pascal", sMapNoSuff);
-		if (bMapSavedVB)	logln_file_generated("WinHelp map for Visual Basic", sMapNoSuff);
-		if (bMapSavedGFA)	logln_file_generated("WinHelp map for GFA Basic", sMapNoSuff);
-		if (bHhpSaved)		logln_file_generated("HTML Help project", sHhpfull);
-		if (bHhcSaved)		logln_file_generated("HTML Help contents", sHhcfull);
-		if (bHhkSaved)		logln_file_generated("HTML Help index", sHhkfull);
-		if (bHypSaved)		logln_file_generated("Hyphen file", sHypfull);
-		if (bIdxSaved)		logln_file_generated("Index file", sIdxfull);
-		if (bTreeSaved)		logln_file_generated("Tree file", sTreefull);
-		if (bUPRSaved)		logln_file_generated("Project file", sUPRfull);
+		if (bGifHmSaved)	logln_file_generated("GIF", sGifHmFull, "");
+		if (bGifUpSaved)	logln_file_generated("GIF", sGifUpFull, "");
+		if (bGifLfSaved)	logln_file_generated("GIF", sGifLfFull, "");
+		if (bGifRgSaved)	logln_file_generated("GIF", sGifRgFull, "");
+		if (bGifNoHmSaved)	logln_file_generated("GIF", sGifNoHmFull, "");
+		if (bGifNoUpSaved)	logln_file_generated("GIF", sGifNoUpFull, "");
+		if (bGifNoLfSaved)	logln_file_generated("GIF", sGifNoLfFull, "");
+		if (bGifNoRgSaved)	logln_file_generated("GIF", sGifNoRgFull, "");
+		if (bGifTpSaved)	logln_file_generated("GIF", sGifTpFull, "");
+		if (bGifFoSaved)	logln_file_generated("GIF", sGifFoFull, "");
+		if (bGifFcSaved)	logln_file_generated("GIF", sGifFcFull, "");
+		if (bGifFsSaved)	logln_file_generated("GIF", sGifFsFull, "");
+		if (bGifMwSaved)	logln_file_generated("GIF", sGifMwFull, "");
+		if (bGifGerSaved)	logln_file_generated("GIF", sGifGerFull, "");
+		if (bGifEngSaved)	logln_file_generated("GIF", sGifEngFull, "");
+		if (bBmpFoSaved)	logln_file_generated("BMP", sBmpFoFull, "");
+		if (bBmpFcSaved)	logln_file_generated("BMP", sBmpFcFull, "");
+		if (bBmpMwSaved)	logln_file_generated("BMP", sBmpMwFull, "");
+		if (bImgFoSaved)	logln_file_generated("IMG", sImgFoFull, "");
+		if (bImgFcSaved)	logln_file_generated("IMG", sImgFcFull, "");
+		if (bImgMwSaved)	logln_file_generated("IMG", sImgMwFull, "");
+		if (bCmdSaved)		logln_file_generated("Pure C command file", sCmdfull, "");
+		if (bHpjSaved)		logln_file_generated("WinHelp project", sHpjfull, "");
+		if (bCntSaved)		logln_file_generated("WinHelp4 contents", sCntfull, "");
+		if (bMapSavedC)		logln_file_generated("WinHelp map for C", sMapNoSuff, ".hpc");
+		if (bMapSavedPas)	logln_file_generated("WinHelp map for Pascal", sMapNoSuff, ".hpp");
+		if (bMapSavedVB)	logln_file_generated("WinHelp map for Visual Basic", sMapNoSuff, ".hpb");
+		if (bMapSavedGFA)	logln_file_generated("WinHelp map for GFA Basic", sMapNoSuff, ".hpg");
+		if (bHhpSaved)		logln_file_generated("HTML Help project", sHhpfull, "");
+		if (bHhcSaved)		logln_file_generated("HTML Help contents", sHhcfull, "");
+		if (bHhkSaved)		logln_file_generated("HTML Help index", sHhkfull, "");
+		if (bHypSaved)		logln_file_generated("Hyphen file", sHypfull, "");
+		if (bIdxSaved)		logln_file_generated("Index file", sIdxfull, "");
+		if (bTreeSaved)		logln_file_generated("Tree file", sTreefull, "");
+		if (bUPRSaved)		logln_file_generated("Project file", sUPRfull, "");
 
 		if ( outfile.full[0]!=EOS )
 		{	if (bBreakHappened)
@@ -9394,7 +9394,7 @@ GLOBAL BOOLEAN udo (char *datei)
 			}
 			else
 			{	if (!bTestmode)
-				{	logln_file_generated("Output", outfile.full);
+				{	logln_file_generated("Output", outfile.full, "");
 				}
 			}
 		}
@@ -9840,7 +9840,7 @@ GLOBAL BOOLEAN udo2udo (char *datei)
 		vloglnf("finished: %s", timer_stop);
 		logln("");
 
-		if (bTreeSaved)		logln_file_generated("Tree file", sTreefull);
+		if (bTreeSaved)		logln_file_generated("Tree file", sTreefull, "");
 
 		if ( outfile.full[0]!=EOS )
 		{	if (bBreakHappened)
@@ -9848,7 +9848,7 @@ GLOBAL BOOLEAN udo2udo (char *datei)
 			}
 			else
 			{	if (!bTestmode)
-				{	logln_file_generated("Output", outfile.full);
+				{	logln_file_generated("Output", outfile.full, "");
 				}
 			}
 		}

@@ -38,7 +38,7 @@ GLOBAL void vloglnf ( const char *fmt, ... ) __attribute__((format(printf, 1, 2)
 GLOBAL void logln_warnings_errors ( void );
 GLOBAL void logln_information ( void );
 GLOBAL void logln_interrupted ( void );
-GLOBAL void logln_file_generated ( const char *kind, const char *filename );
+GLOBAL void logln_file_generated ( const char *kind, const char *filename, const char *suff );
 
 GLOBAL void error_message ( const char *msg );
 GLOBAL void warning_message ( const char *msg );
