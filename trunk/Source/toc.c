@@ -2350,8 +2350,10 @@ GLOBAL void output_html_header ( const char *t )
 	outln(t);
 	outln("</title>");
 
-	/* New in r6pl16 [NHz] */
-	outln("<meta name=\"AppleTitle\" content=\"JobTimer Help\">");
+	/* New in r6pl16 [NHz]
+           Fixed: added real title (from <title> Tag) [vj]
+        */
+	voutlnf("<meta name=\"AppleTitle\" content=\"%s\">", t);
 
 	output_html_meta(TRUE);	/*r6pl5: auch Keywords auf der ersten Seite erlauben */
 	outln("</head>");
