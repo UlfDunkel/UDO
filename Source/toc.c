@@ -1735,7 +1735,7 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 		Perhaps its better to check if this buffer is big
 		enough! Will try this later [vj]
 	*/
-	#define	MAX_TMP_NX	50
+	#define	MAX_TMP_NX	100
 	char tmp_n1[MAX_TMP_NX], tmp_n2[MAX_TMP_NX], tmp_n3[MAX_TMP_NX], tmp_n4[MAX_TMP_NX];
 	int ti;
 	int hexwidth;	/* r6pl2 */
@@ -1770,7 +1770,7 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 		tmp_n4[0]= EOS;
 		
 		if (html_merge_node1)				/* Nodes nicht splitten */
-		{	strcpy(tmp_n1, outfile.name);	/* Verweis auf Hauptfile */
+		{	um_strcpy(tmp_n1, outfile.name, MAX_TMP_NX, "get_html_filename[1]");	/* Verweis auf Hauptfile */
 		}
 		else
 		{
@@ -1807,7 +1807,7 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 			{	
 				/* New in r6pl16 [NHz] */
 				{
-					char dummy[50], name[50], suff[10];
+					char dummy[MAX_TMP_NX], name[MAX_TMP_NX], suff[MAX_TMP_NX]; /* v6.3.12 [vj] See constant definition above */
 				
 					fsplit(toc[ti]->filename, dummy, dummy, name, suff);
 		
@@ -1817,7 +1817,7 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 						sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, outfile.suff);
 				}
 
-				strcpy(tmp_n1, toc[ti]->filename);
+				um_strcpy(tmp_n1, toc[ti]->filename, MAX_TMP_NX, "get_html_filename[2]");
 			}
 			else
 			{	if (toc[ti]->appendix)
@@ -1825,7 +1825,7 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 				}
 				else
 				{	if (toc[ti]->n1==0)
-					{	strcpy(tmp_n1, old_outfile.name);
+					{	um_strcpy(tmp_n1, old_outfile.name, MAX_TMP_NX, "get_html_filename[3]");
 					}
 					else
 					{	sprintf(tmp_n1, "%0*x", hexwidth, toc[ti]->n1);
@@ -1935,9 +1935,9 @@ LOCAL BOOLEAN html_make_file ( void )
 
 	/* New in r6pl16 [NHz] */
 	{
-		char dummy[50], name[50], suff[10];
+		char dummy[MAX_TMP_NX], name[MAX_TMP_NX], suff[MAX_TMP_NX]; /* v6.3.12 [vj] See constant definition in get_html_filename */
 
-		strcpy(name, outfile.name);
+		um_strcpy(name, outfile.name, MAX_TMP_NX, "html_make_file[1]");
 		fsplit(outfile.name, dummy, dummy, name, suff);
 
 		if(strcmp(suff, ""))
@@ -6027,7 +6027,9 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 {
 	register int i;
 	int li, apxstart;
-	char s[128], n[128];
+/* 6.3.12 [vj] Added this define for buffer checks, increased value from 128 to 148 (for Ulrich :-)) */
+#define	PS_BOOKM_LEN	148
+	char s[PS_BOOKM_LEN], n[PS_BOOKM_LEN];
 
 	if (p1_toc_counter<=0)
 	{	return FALSE;
@@ -6054,9 +6056,9 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 
 						li= toc[i]->labindex;
 
-						strcpy(s, lab[li]->name);
+						um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[1]");
 						/* Changed in r6pl16 [NHz] */
-						strcpy(n, lab[li]->name);
+						um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[2]");
 						node2postscript(n, KPS_BOOKMARK);
 						node2postscript(s, KPS_NAMEDEST);
 						voutlnf("(%d %s) /%s %d Bookmarks",
@@ -6071,9 +6073,9 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 
 						li= toc[i]->labindex;
 
-						strcpy(s, lab[li]->name);
+						um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[3]");
 						/* Changed in r6pl16 [NHz] */
-						strcpy(n, lab[li]->name);
+						um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[4]");
 						node2postscript(n, KPS_BOOKMARK);
 						node2postscript(s, KPS_NAMEDEST);
 						voutlnf("(%d.%d %s) /%s %d Bookmarks",
@@ -6088,9 +6090,9 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 
 						li= toc[i]->labindex;
 
-						strcpy(s, lab[li]->name);
+						um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[5]");
 						/* Changed in r6pl16 [NHz] */
-						strcpy(n, lab[li]->name);
+						um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[6]");
 						node2postscript(n, KPS_BOOKMARK);
 						node2postscript(s, KPS_NAMEDEST);
 						voutlnf("(%d.%d.%d %s) /%s %d Bookmarks",
@@ -6106,9 +6108,9 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 
 						li= toc[i]->labindex;
 
-						strcpy(s, lab[li]->name);
+						um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[7]");
 						/* Changed in r6pl16 [NHz] */
-						strcpy(n, lab[li]->name);
+						um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[8]");
 						node2postscript(n, KPS_BOOKMARK);
 						node2postscript(s, KPS_NAMEDEST);
 						voutlnf("(%d.%d.%d.%d %s) /%s 0 Bookmarks",
@@ -6148,9 +6150,9 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 
 						li= toc[i]->labindex;
 
-						strcpy(s, lab[li]->name);
+						um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[9]");
 						/* Changed in r6pl16 [NHz] */
-						strcpy(n, lab[li]->name);
+						um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[10]");
 						node2postscript(n, KPS_BOOKMARK);
 						node2postscript(s, KPS_NAMEDEST);
 						voutlnf("(%c %s) /%s %d Bookmarks",
@@ -6165,10 +6167,10 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 
 						li= toc[i]->labindex;
 
-						strcpy(s, lab[li]->name);
+						/*um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[11]"); v6.3.12 [vj] entfernt, da die nächste zeile gleich ist */
 						/* Changed in r6pl16 [NHz] */
-						strcpy(s, lab[li]->name);
-						strcpy(n, lab[li]->name);
+						um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[12]");
+						um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[13]");
 						node2postscript(n, KPS_BOOKMARK);
 						node2postscript(s, KPS_NAMEDEST);
 						voutlnf("(%c.%2d %s) /%s %d Bookmarks",
@@ -6183,9 +6185,9 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 
 						li= toc[i]->labindex;
 
-						strcpy(s, lab[li]->name);
+						um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[14]");
 						/* Changed in r6pl16 [NHz] */
-						strcpy(n, lab[li]->name);
+						um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[15]");
 						node2postscript(n, KPS_BOOKMARK);
 						node2postscript(s, KPS_NAMEDEST);
 						voutlnf("(%c.%2d.%2d %s) /%s %d Bookmarks",
@@ -6201,9 +6203,9 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 
 						li= toc[i]->labindex;
 
-						strcpy(s, lab[li]->name);
+						um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[16]");
 						/* Changed in r6pl16 [NHz] */
-						strcpy(n, lab[li]->name);
+						um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[17]");
 						node2postscript(n, KPS_BOOKMARK);
 						node2postscript(s, KPS_NAMEDEST);
 						voutlnf("(%c.%2d.%2d.%2d %s) /%s 0 Bookmarks",
