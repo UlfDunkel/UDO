@@ -714,14 +714,21 @@ LOCAL BOOLEAN convert_link_stg ( char *s, const char *p0, char *p1, char *p2, co
 		replace_2at_by_1at(p2);			/*r6pl2*/
 		replace_2at_by_1at(nodename);	/*r6pl2*/
 
-		if (!isnode)
-		{	/* PL9: Links auf Labels sind etwas besonderes */
-			sprintf(s_entry, "@{\"%s\" link \"%s\" \"%s\"}",
-				p1, nodename, p2);
-		}
-		else
-		{	sprintf(s_entry, "@{\"%s\" link \"%s\"}",
-						p1, p2);
+		/* r6pl15: links auf gleiche node mag ST-Guide nicht */
+		if (isnode && is_current_node(ti))
+		{
+			strcpy(s_entry, p1);
+		} else
+		{
+			if (!isnode)
+			{	/* PL9: Links auf Labels sind etwas besonderes */
+				sprintf(s_entry, "@{\"%s\" link \"%s\" \"%s\"}",
+					p1, nodename, p2);
+			}
+			else
+			{	sprintf(s_entry, "@{\"%s\" link \"%s\"}",
+							p1, p2);
+			}
 		}
 	}
 
