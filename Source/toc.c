@@ -9115,7 +9115,7 @@ GLOBAL void set_html_doctype ( void )
 GLOBAL void set_html_header_date ( void )
 {
 	html_header_date = TRUE;
-	tokcpy2(html_header_date_zone);
+	tokcpy2(html_header_date_zone, 6);
 
 }	/* set_html_header_date */
 
@@ -9123,7 +9123,7 @@ GLOBAL void set_html_header_date ( void )
 /* New feature #0000053 in V6.5.2 [NHz] */
 GLOBAL void set_html_header_links ( void )
 {
-	tokcpy2(html_header_links_kind);
+	tokcpy2(html_header_links_kind, 40);
 	if (html_header_links_kind[0]==EOS)
 	{	error_empty_header_links();
 		return;
