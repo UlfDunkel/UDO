@@ -1,5 +1,5 @@
 # doc/manual/source/commands.ui
-# letzte Änderungen: 15.01.2004 / last changes: Jan 15, 2004
+# letzte Änderungen: 08.02.2004 / last changes: Feb 8, 2004
 # ------------------------------------------------------------------------------
 # Diese Datei enthält den alphabetischen Befehlsindex.
 # Die Ausgabe für nicht mehr existente Befehle erfolgt nur dann, wenn "OldKeywords" gesetzt ist.
@@ -8452,12 +8452,17 @@ Set global syllabification mark.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
+!iflang [german]
 !item [(!SYNTAX)] (!T)!/hyphen <wort>(!t)
+!endif
+!iflang [english]
+!item [(!SYNTAX)] (!T)!/hyphen <word>(!t)
+!endif
 
 !iflang [german]
 !item [(!DESCRIPTION)]
 Mit diesem Kommando können Sie UDO einen globalen
-Trennvorschlag unterbreiten. In ""<text>"" sind die
+Trennvorschlag unterbreiten. In ""<wort>"" sind die
 Stellen mit der Zeichenfolge !/- zu markieren, an denen
 ein Wort getrennt werden darf. Im folgenden Beispiel
 wird gezeigt, wie man die möglichen Trennstellen des
