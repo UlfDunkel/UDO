@@ -453,7 +453,7 @@ GLOBAL void output_begin_verbatim ( void )
 		case TOHTM:
 		case TOMHH:
 			if (sDocVerbatimBackColor[0]!=EOS)	/*r6pl5*/
-			{	voutlnf("<table width=\"100%\" bgcolor=\"%s\"><tr><td>%s", sDocVerbatimBackColor, sHtmlMonofontStart);
+			{	voutlnf("<table width=\"100%%\" bgcolor=\"%s\"><tr><td>%s", sDocVerbatimBackColor, sHtmlMonofontStart);
 			}
 			switch (iDocVerbatimSize)
 			{	case VERB_TINY:		outln("<font size=-2>");	break;
@@ -1492,7 +1492,7 @@ LOCAL void c_begin_list ( int listkind )
 		case TOPCH:
 		case TOTVH:
 			ll= (int) strlen(sWidth);
-			iEnvIndent[iEnvLevel]= (int) strlen(sWidth) + 3;	/*r6pl2 +3 statt +2 */
+			iEnvIndent[iEnvLevel]= ll + 3;	/*r6pl2 +3 statt +2 */
 			break;
 		case TOIPF:
 			if (bEnvShort[iEnvLevel])
