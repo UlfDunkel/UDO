@@ -1029,7 +1029,8 @@ LOCAL BOOLEAN convert_link_etc ( char *s, const char *p0, char *p1, char *p2, co
 	replace_udo_tilde(p2);
 	replace_udo_nbsp(p2);
 
-	convert_tilde(p1);
+	/* Deleted in r6.2pl1 [NHz] / Bug #00000030 */
+	/* 	convert_tilde(p1); */
 	replace_udo_quotes(p1);
 
 	if (flag)
@@ -1314,6 +1315,10 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 					/* Weblink for Richtext Format */
 				case TORTF:
   				convert_tilde(Param[1]);
+
+					/* New in r6.2pl1 [NHz] / Bug #00000029 */
+					c_rtf_quotes(Param[1]);
+
 					if (Param[2][0]==EOS)
 					{	strcpy(Param[2], Param[1]);
 					}
