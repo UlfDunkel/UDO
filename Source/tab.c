@@ -592,9 +592,9 @@ LOCAL void table_output_rtf ( void )
 		{	out("\\ql \\cell");
 		}
 		if (tab_caption_visible)
-		{	sprintf(f, "\\qc %s %d: %s\\cell\\row\\pard",
+		/* Changed in r6.3pl3 [NHz] */
+		{	sprintf(f, "\\qc %s {\\field{\\*\\fldinst { SEQ Tabelle \\\\* ARABIC }}{\\fldrslt %d}}: %s\\cell\\row\\pard",
 							lang.table, tab_counter, tab_caption);
-		}
 		else
 		{	sprintf(f, "\\qc %s\\cell\\row\\pard", tab_caption);
 		}
