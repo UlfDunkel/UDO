@@ -1,5 +1,5 @@
 # doc/manual/source/commands.ui
-# letzte Änderungen: 21.12.2003 / last changes: Dec 21, 2003
+# letzte Änderungen: 12.01.2004 / last changes: Jan 12, 2004
 # ------------------------------------------------------------------------------
 # Diese Datei enthält den alphabetischen Befehlsindex.
 # Die Ausgabe für nicht mehr existente Befehle erfolgt nur dann, wenn "OldKeywords" gesetzt ist.
@@ -1465,8 +1465,8 @@ Ausgabe werden Einrückungen beachtet.
 
 Im Unterschied zur verbatim-Umgebung wird (momentan
 nur für RTF) vor der Ausgabe auf einen anderen
-Zeichensatz (""MS Linedraw"") umgeschaltet, sodaß
-DOS-Screenshots korrekt dargestellt werden sollten.
+Zeichensatz (""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm])"")
+umgeschaltet, sodaß DOS-Screenshots korrekt dargestellt werden sollten.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1475,7 +1475,8 @@ finished with (!KW [end_linedraw]).
 Text inside this enviroment is treated like
 in a verbatim environment. Additionaly,
 the character set will be switched to dos,
-and if converting to RTF the ""MS Linedraw"" font will be used.
+and if converting to RTF the ""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm])""
+font will be used.
 !endif
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
