@@ -42,7 +42,7 @@
 #define	TOSRP			16		/* Pascal-Sourcecode		*/	/* Pl16   */
 #define	TOIPF			17		/* OS/2-IPF-Format			*/	/* r6pl2  */
 #define	TODRC			18		/* Dave's Readme Compiler	*/	/* r6pl2  */
-#define	TOMHH			19		/* Dave's Readme Compiler	*/	/* r6pl2  */
+#define	TOMHH			19		/* HTMLHelp					*/	/* r6pl2  */
 #define	TOPDL			20		/* PDFLaTeX					*/	/* r6pl8  */
 #define	TOWH4			21		/* WinHelp4					*/	/* r6pl8  */
 #define	TOUDO			22		/* UDO-Format				*/	/* r6pl9  */
