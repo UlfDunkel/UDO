@@ -9127,14 +9127,21 @@ LOCAL BOOLEAN pass2 (char *datei)
 					if (no_umlaute) umlaute2ascii(zeile);
 					auto_quote_chars(zeile, FALSE);
 
-					/* Changed in V6.5.5 [NHz] */
-					c_commands_inside(zeile, FALSE);
+					/* Changed in V6.5.5 [NHz]
+                                         * v6.5.7 [vj] c_commands_inside(zeile, *TRUE* instead of FALSE)
+                                         *             closes bug #0000059
+                                         */
+					c_commands_inside(zeile, TRUE);
 
 					replace_macros(zeile);
 					c_divis(zeile);
 					c_vars(zeile);
 					c_tilde(zeile);
 					c_styles(zeile);
+
+                                        /* v6.5.7 [vj] old position and parameters (see above)
+                                         * please keep this comment for information */
+                                        c_commands_inside(zeile, FALSE);*/
 
 					replace_defines(zeile);
 
