@@ -35,6 +35,7 @@
 !iflang [english]
 !begin_node Apple-QuickView
 !endif
+!alias Apple QuickView
 !html_name format_aqv.html
 
 (!MISS)
@@ -526,8 +527,9 @@ all links will be wrong.
 !iflang [english]
 !begin_node HTML-Help
 !endif
-!label HTMLhelp
-!label HtmlHelp
+!alias HTMLhelp
+!alias HTMLHelp
+!alias HtmlHelp
 !html_name format_hh.html
 
 (!MISS)
@@ -978,6 +980,7 @@ don't make sense, too.
 !iflang [english]
 !begin_node Nroff
 !endif
+!alias NROFF
 !html_name format_nroff.html
 
 (!MISS)
@@ -2089,6 +2092,7 @@ converting the source file instead of printing an error message.
 !iflang [english]
 !begin_node UDO (Universal Document)
 !endif
+!alias UDO-Output
 !html_name format_udo.html
 
 (!MISS)
@@ -2101,7 +2105,8 @@ converting the source file instead of printing an error message.
 !iflang [english]
 !begin_node Windows Help (WinHelp)
 !endif
-!label WinHelp
+!alias WinHelp
+!alias Windows-Help
 !html_name format_winhelp.html
 
 !begin_description
