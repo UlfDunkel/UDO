@@ -7532,11 +7532,11 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			{	set_html_backimage();
 				return TRUE;
 			}
-			/* New in r6pl15 [NHz] */
-			if ( strcmp(token[0], "!html_style_name")==0 )
+			/* Deleted in V6.5.9 [NHz] */
+			/* if ( strcmp(token[0], "!html_style_name")==0 )
 			{	set_html_style();
 				return TRUE;
-			}
+			}*/
 			/* New in r6pl15 [NHz] */
 			if ( strcmp(token[0], "!html_script_name")==0 )
 			{	set_html_script();
@@ -7743,6 +7743,11 @@ LOCAL BOOLEAN pass1_check_everywhere_commands ( void )
 			}
 			if ( strcmp(token[0], "!html_backimage")==0 )
 			{	set_html_backimage();
+				return TRUE;
+			}
+			/* Changed in V6.5.9 [NHz] [style] */
+			if ( strcmp(token[0], "!html_style_name")==0 )
+			{	set_html_style();
 				return TRUE;
 			}
 			break;

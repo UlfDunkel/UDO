@@ -57,6 +57,21 @@ typedef struct _label
 }	LABEL, *pLABEL;
 
 
+/* New in V6.5.9 [NHz] */
+/*	--------------------------------------------------
+	Stylesheets
+	--------------------------------------------------	*/
+typedef struct _style
+{
+	char	href[MAX_LABEL_LEN+1];		/* Quelle eines Stylesheets 	*/
+	char	media[MAX_LABEL_LEN+1];		/* fÅr welches Medium 	*/
+	char	title[MAX_LABEL_LEN+1];		/* Titel eines Stylesheets 	*/
+	int		alternate;		/* Alternate Stylesheet?	*/
+	int		styleindex;		/* style[1]==1, style[2]==2 etc.		*/
+	int		tocindex;		/* Gehoert zum Node "toc[tocindex]"	*/
+}	STYLE, *pSTYLE;
+
+
 /*	--------------------------------------------------
 	Eintraege fuer das Inhaltsverzeichnis
 	--------------------------------------------------	*/
