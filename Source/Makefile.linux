@@ -3,8 +3,10 @@
 # @(#) Dirk Hagedorn, 27.06.1996
 ###########################################################
 CC = gcc 
+O=.o
+X=
 
-CFLAGS = -g -O2 -Wall -D__LINUX__
+CFLAGS = -O2 -Wall -D__LINUX__
 
 #CFLAGS =	-g -O2 -D__LINUX__ \
 #-Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations \
@@ -15,3 +17,6 @@ LDFLAGS = -s
 
 include makefile.in
 
+
+udo$(X):	$(OSRC) cli$(O)
+		$(CC) $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) -o $@

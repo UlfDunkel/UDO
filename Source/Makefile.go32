@@ -3,8 +3,11 @@
 # @(#) Dirk Hagedorn, 26.12.1998
 ###########################################################
 CC = gcc-go32
+O=.o
+X=
 
-CFLAGS = -g -O2 -Wall -D__MSDOS__
+
+CFLAGS = -O2 -Wall -D__MSDOS__
 
 #CFLAGS =	-g -O2 -D__MSDOS__ \
 #-Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations \
@@ -14,3 +17,6 @@ CFLAGS = -g -O2 -Wall -D__MSDOS__
 LDFLAGS = -s
 
 include makefile.in
+
+udo$(X):	$(OSRC) cli$(O)
+		$(CC) $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) -o $@

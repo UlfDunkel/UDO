@@ -6,55 +6,52 @@
 CSRC =	abo.c cfg.c chr.c env.c file.c img.c msg.c par.c str.c sty.c \
 		tab.c toc.c tp.c udo.c
 
-OSRC =	$(CSRC:.c=.o)
+OSRC =	$(CSRC:.c=$(O))
 
 HEAD = portab.h version.h constant.h udo_type.h
 
-default:	UDO
+all::	udo$(X)
 
-UDO:	$(OSRC) cli.o
-		$(CC) $(CFLAGS) $(OSRC) cli.o $(LDFLAGS) -o udo
+abo$(O):	$(HEAD) abo.h commands.h cfg.h file.h sty.h toc.h udo.h
 
-abo.o:	$(HEAD) abo.h commands.h cfg.h file.h sty.h toc.h udo.h
+cfg$(O):	$(HEAD) cfg.h file.h str.h
 
-cfg.o:	$(HEAD) cfg.h file.h str.h
-
-chr.o:	$(HEAD) chr.h msg.h str.h sty.h udo.h chr_all.h chr_ttf.h \
+chr$(O):	$(HEAD) chr.h msg.h str.h sty.h udo.h chr_all.h chr_ttf.h \
 		ansi2dos.h chr_tos.h chr_437.h \
 		chr_850.h chr_hp8.h chr_next.h chr_iso.h chr_mac.h \
 		tos2iso.h 437iso.h 850iso.h hp82iso.h next2iso.h mac2iso.h
 
-cli.o:	$(HEAD) gui.h file.h cfg.h msg.h udo.h
+cli$(O):	$(HEAD) gui.h file.h cfg.h msg.h udo.h
 
-env.o:	$(HEAD) env.h commands.h abo.h cfg.h chr.h file.h img.h msg.h \
+env$(O):	$(HEAD) env.h commands.h abo.h cfg.h chr.h file.h img.h msg.h \
 		par.h str.h sty.h toc.h tp.h udo.h gui.h
 
-file.o: $(HEAD) file.h str.h msg.h
+file$(O): $(HEAD) file.h str.h msg.h
 
-img.o:	$(HEAD) img.h chr.h env.h file.h msg.h str.h sty.h udo.h \
+img$(O):	$(HEAD) img.h chr.h env.h file.h msg.h str.h sty.h udo.h \
 		img_html.h img_win.h img_stg.h
 
-msg.o:	$(HEAD) msg.h udo.h toc.h gui.h
+msg$(O):	$(HEAD) msg.h udo.h toc.h gui.h
 
-par.o:	$(HEAD) commands.h chr.h file.h msg.h str.h sty.h toc.h \
+par$(O):	$(HEAD) commands.h chr.h file.h msg.h str.h sty.h toc.h \
 		udo.h img.h
 
-str.o:	$(HEAD) str.h
+str$(O):	$(HEAD) str.h
 
-sty.o:	$(HEAD) sty.h commands.h chr.h msg.h str.h udo.h
+sty$(O):	$(HEAD) sty.h commands.h chr.h msg.h str.h udo.h
 
-tab.o:	$(HEAD) tab.h commands.h chr.h env.h msg.h par.h str.h \
+tab$(O):	$(HEAD) tab.h commands.h chr.h env.h msg.h par.h str.h \
 		sty.h toc.h udo.h gui.h
 
-toc.o:	$(HEAD) toc.h commands.h abo.h chr.h env.h file.h img.h \
+toc$(O):	$(HEAD) toc.h commands.h abo.h chr.h env.h file.h img.h \
 		msg.h par.h str.h sty.h tp.h udo.h gui.h
 
-tp.o:	$(HEAD) tp.h commands.h chr.h env.h file.h img.h msg.h \
+tp$(O):	$(HEAD) tp.h commands.h chr.h env.h file.h img.h msg.h \
 		str.h sty.h toc.h udo.h
 
-udo.o:	$(HEAD) udo.h abo.h cfg.h chr.h env.h file.h img.h msg.h \
+udo$(O):	$(HEAD) udo.h abo.h cfg.h chr.h env.h file.h img.h msg.h \
 		par.h str.h sty.h tab.h toc.h tp.h gui.h
 
-clean:
-	rm *.o
-
+clean::
+	$(RM) *$(O)
+	$(RM) udo$(X)
