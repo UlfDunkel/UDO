@@ -1,0 +1,20 @@
+# doc/manual/udowork.txt
+# letzte Änderungen: 21.12.2003 / last changes: Dec 21, 2003
+
+!iflang [german]
+(!B)UDO(!b) wandelt Dateien vom eigenen UDO-Format in folgende Formate um:
+AmigaGuide, Apple QuickView, ASCII, David's Readme-Compiler,
+HP-Helptag-SGML, HTML, HTML-Help, OS/2 IPF, (!LaTeX), Linuxdoc-SGML,
+LyX, Manualpage, Nroff, Pure-C-Help, PDF(!LaTeX), PostScript, RTF,
+ST-Guide-Quelltext, Texinfo, Turbo-Vision-Help-Quelltext, UDO und
+WinHelp/WinHelp4-Quelltext.
+!endif
+
+!iflang [english]
+(!B)UDO(!b) converts files from its own UDO format into the following formats:
+AmigaGuide, Apple QuickView, ASCII, David's Readme-Compiler,
+HP-Helptag-SGML, HTML, HTML-Help, OS/2 IPF, (!LaTeX), Linuxdoc-SGML,
+LyX, Manualpage, Nroff, Pure-C-Help, PDF(!LaTeX), PostScript, RTF,
+ST-Guide source, Texinfo, Turbo-Vision-Help source, UDO and
+WinHelp/WinHelp4 source.
+!endif

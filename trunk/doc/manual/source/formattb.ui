@@ -1,0 +1,66 @@
+# doc/manual/source/output-formats.ui
+# letzte Änderungen: 20.12.2003 / last changes: Dec 20, 2003
+
+!iflang [german]
+!index Kürzel
+#Ausgabe-Formate
+!begin_xlist [nroff] !short
+!item [amg]   AmigaGuide
+!item [aqv]   Apple-QuickView
+!item [asc]   ASCII
+!item [drc]   David's Readme Compiler
+!item [htag]  HP-Helptag-SGML
+!item [html]  HTML
+!item [hh]    HtmlHelp
+!item [info]  Texinfo
+!item [ipf]   OS/2 IPF
+!item [ldoc]  Linuxdoc-SGML
+!item [lyx]   LyX
+!item [man]   Manualpage
+!item [nroff] Nroff
+!item [pas]   Pascal-Sourcecode
+!item [pch]   Pure-C-Help
+!item [pdf]   PDFLaTeX
+!item [ps]    PostScript
+!item [rtf]   RTF
+!item [src]   C-Sourcecode
+!item [stg]   ST-Guide
+!item [tex]   (!LaTeX)
+!item [tvh]   Turbo-Vision-Help
+!item [udo]   UDO (Universal Document)
+!item [wh4]   WinHelp4
+!item [win]   WinHelp
+!end_xlist
+!endif
+
+!iflang [english]
+!index Abbreviations
+#Ausgabe-Formate
+!begin_xlist [htag] !short
+!item [amg]   AmigaGuide
+!item [aqv]   Apple-QuickView
+!item [asc]   ASCII
+!item [drc]   David's Readme Compiler
+!item [htag]  HP-Helptag-SGML
+!item [html]  HTML
+!item [hh]    HtmlHelp
+!item [info]  Texinfo
+!item [ipf]   OS/2 IPF format
+!item [ldoc]  Linuxdoc-SGML
+!item [lyx]   LyX
+!item [man]   Manualpage
+!item [nroff] Nroff
+!item [pas]   Pascal-Sourcecode
+!item [pch]   Pure-C-Help
+!item [pdf]   PDFLaTeX
+!item [ps]    PostScript
+!item [rtf]   RTF
+!item [src]   C-Sourcecode
+!item [stg]   ST-Guide
+!item [tex]   (!LaTeX)
+!item [tvh]   Turbo-Vision-Help
+!item [udo]   UDO (Universal Document)
+!item [wh4]   WinHelp4
+!item [win]   WinHelp
+!end_xlist
+!endif

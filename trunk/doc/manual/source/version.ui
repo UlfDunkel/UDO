@@ -1,0 +1,18 @@
+# doc/manual/source/version.ui
+# letzte Änderungen: 20.12.2003 / last changes: Dec 20, 2003
+
+
+!docinfo [version] Release 6 Patchlevel 14
+
+!iflang [german]
+!docinfo [date] 22.07.1999
+!macro DATE 22.07.1999
+!endif
+
+!iflang [english]
+!docinfo [date] July 22nd, 1999
+!macro DATE July 22nd, 1999
+!endif
+
+!macro RELEASE 6
+!macro VERSION Release 6 Patchlevel 14

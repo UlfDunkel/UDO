@@ -1,0 +1,7 @@
+[kap5test.u]
+!include header.ui
+!begin_document
+!maketitle
+!tableofcontents
+!include kapitel5.ui
+!end_document

@@ -1,0 +1,717 @@
+# doc/manual/source/install.ui
+# letzte Änderungen: 13.12.2003 / last changes: Dec 13, 2003
+
+
+################################################################################
+!iflang [german]
+!begin_node Installation
+!endif
+!iflang [english]
+!begin_node Installation
+!endif
+!html_name installation.html
+
+################################################################################
+!iflang [german]
+!begin_node Installation der TOS- und GEM-Version (Atari)
+!endif
+!iflang [english]
+!begin_node Installing the Atari version
+!endif
+!html_name installation_tos_gem.html
+
+!iflang [german]
+Zur Installation von UDO auf einem Atari-(Kompatiblen-)Rechner kopieren
+Sie einfach alle Dateien in ein beliebiges Verzeichnis, welches
+sinnigerweise "UDO" genannt werden sollte.
+
+Die GEM-Version sollte man im verwendeten Desktop - ich empfehle,
+Gemini, Thing oder Ease zu benutzen - als Anwendung für Dateien mit der
+Endung ''(!V)*.u*(!v)'' anmelden.
+
+Falls Sie das TTP bevorzugen und mit einem Kommandozeileninterpreter
+(z.B. mit der Mupfel von Stefan Eissing) arbeiten, so kopieren oder
+verschieben Sie `udo.ttp' in eines der in (!T)$PATH(!t) angegebenen
+Verzeichnisse (z.B. ''(!V)\usr\bin(!v)'').
+
+Falls Sie den ST-Guide installiert haben, so sollten Sie `(!UDOR)ger.hyp'
+und ''(!V)(!UDOR)ger.ref(!v)'' in Ihr Verzeichnis kopieren oder verschieben, in dem
+Sie auch alle anderen Hypertexte aufbewahren. Nur dann können auch
+andere Hypertexte oder Programme (z.B. ein Editor) auf den
+UDO-Hypertext zugreifen.
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+To install UDO onto an Atari or onto a computer with a compatible operating
+system (e.g. MagiCMac, MagiC-PC, GEMulator) just copy all files to a
+directory that should be named ""UDO"".
+
+The GEM version should be the application for files with the suffix
+''(!V)*.u*(!v)'' so you shall do the neccessary changes in your desktop
+(Gemini, Thing, Ease, Magxdesk, !..).
+
+If you prefer the TTP version and you are using a command line shell (e.g.
+Mupfel by Stefan Eissing) copy or move ''(!V)udo.ttp(!v)'' to one of the
+directories that is part of (!T)$PATH(!t) (e.g. ''(!V)\usr\bin(!v)'').
+
+If you have installed the ST-Guide you should copy or move UDO's hypertext
+((!V)(!UDOR)eng.hyp(!v) and (!V)(!UDOR)eng.ref(!v)) to the directory that contains
+all your other hypertexts.
+!endif
+
+!end_node
+# Ende: Installation TOS/GEM (Atari)
+
+################################################################################
+################################################################################
+!iflang [german]
+!begin_node Installation der DOS-Version (auch für Windows und OS/2)
+!endif
+!iflang [english]
+!begin_node Installing the DOS version (also for Windows and OS/2)
+!endif
+!html_name installation_dos_win_os2_1.html
+
+!iflang [german]
+Für UDO benötigen Sie mindestens einen 386er Prozessor. UDO läuft nicht
+auf Rechnern mit einem 286er Prozessor oder noch älteren Typen(!N)es
+werden auch auf Anfrage keine Versionen für diese ""Dinosaurier""
+erstellt(!n).
+
+Falls im UDO-Archiv ein Programm oder Batch namens (!V)SETUP(!v) oder (!V)INSTALL(!v)
+enthalten ist, so starten Sie diesen bitte zunächst und folgen Sie
+dessen Anweisungen. Falls die Installation aus irgendwelchen Gründen
+fehlschlagen sollte, so lesen Sie hier weiter.
+
+Hat es nicht funktioniert? Ach, noch gar nicht probiert? Lobenswert,
+daß Sie erst einmal alles lesen wollen. (!grin)
+
+Leider ist die Installation der DOS-Version nicht ganz trivial. Ähm,
+eigentlich doch, aber die Vergangenheit hat gezeigt, daß dennoch
+Probleme auftauchen können, obwohl die Installation wirklich simpel und
+eigentlich völlig unproblematisch ist.
+
+Falls Sie noch nie etwas von RSX oder EMXRT gehört haben, so lesen Sie
+bitte auf jeden Fall die beiden folgenden Kapitel aufmerksam durch.
+Falls UDO bei Ihnen dann immer noch nicht korrekt laufen sollte, dann
+haben Sie etwas falsch gemacht oder ich habe die Installation immer
+noch nicht penibel genug beschrieben.
+
+Falls Ihnen RSX und EMXRT bereits ein Begriff sein sollte, da Sie z.B.
+bereits andere Software (z.B. em(!TeX) oder GNU-Utilities) benutzen, die
+diese beiden ""Treiber"" benutzen, dann können Sie sich das folgende
+Kapitel sparen.
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+You need a 80386 processor at least to run UDO. UDO doesn't run on
+80286 processors or processors of an older type and I won't compile versions for these old
+dinosaurs.
+
+If you find a program or batch file named (!V)SETUP(!v) or (!V)INSTALL(!v)
+in the archive please start it and follow the instructions. If the
+installation fails, please go on reading this chapter.
+
+It failed? Ah, you haven't tested it yet? That's fine that you want to
+read all the text before you want to experiment. (!grin)
+
+Unfortunately the installation of the DOS version is not trivial. Er,
+I think it is trivial but the experiences of the past have shown me
+that lots of people have problems installing UDO on a DOS PC although the
+installation is very simple.
+
+If you haven't heard anything of RSX and EMXRT until now I recommend
+to read the following two chapters completely. If UDO still
+refuses to run you have done something wrong or I haven't described
+the installation process detailed enough.
+
+If you already know what RSX and EMXRT are good for, because you are using emTeX or
+the GNU utilities) you can skip the next chapter.
+!endif
+
+################################################################################
+!iflang [german]
+!begin_node Installation von RSX und/oder EMXRT
+!endif
+!iflang [english]
+!begin_node Installation of RSX and/or EMXRT
+!endif
+!html_name installation_dos_win_os2_2.html
+
+!iflang [german]
+Sie haben also noch nie etwas von RSX oder EMXRT gehört. Das ist nicht
+schlimm, Sie brauchen sich dafür nicht schämen. Sollten Sie allerdings
+nach dem Durchlesen dieses Kapitels immer noch nicht wissen, was RSX
+und EMXRT sind oder wofür sie benötigt werden, ja, dann sollten Sie
+sich schämen. Und falls RSX- oder EMX-Insider hier irgendwelchen von
+mir verzapften Schwachsinn lesen sollten, dann sollte ich mich schämen.
+
+Na denn, los geht's!..
+
+UDO wurde für DOS mit dem GNU-C-Compiler (kurz: GCC) compiliert,
+genauer gesagt mit der von Eberhard Mattes portierten Version, dem
+EMX-GCC. Der GCC kommt ursprünglich aus der Unix-Welt, in der seit
+Jahrzehnten mit 32 Bit gearbeitet wird. Der EMX-GCC erzeugt ebenfalls
+32-Bit-Programme und demnach ist UDO ebenfalls ein 32-Bit-Programm.
+Tja, und da haben wir das Problem, denn 32-Bit-Programme können ohne
+Tricks normalerweise nicht unter DOS gestartet werden.
+
+Für diese Tricks sind nun EMXRT und RSX zuständig. Diese beiden
+""Treiber"" kümmern sich darum, daß UDO ausreichend große
+Speicherbereiche von DOS anfordern kann. Da unter DOS und Windows
+verschiedene Tricks angewendet werden müssen, gibt es zwei verschiedene
+""Treiber"": EMXRT für DOS und OS/2 sowie RSX für Windows.
+
+Beachten Sie daher folgendes:
+
+!begin_itemize
+
+!item Um UDO nur in einer DOS-Box von Windows zu benutzen,
+wird nur RSX benötigt. RSX von Rainer Schnitker ist ein DPMI-Server für
+Programme, die mit EMX-GCC oder DJGPP compiliert wurden.
+
+!item Um UDO unter OS/2 oder nur unter DOS (d.h. ohne laufendes
+Windows) zu benutzen, wird nur EMXRT benötigt. EMXRT (""emx runtime
+environment"") von Eberhard Mattes wird für die Programme benötigt, die
+mit dem EMX-GCC programmiert wurden.
+
+!item Um UDO in der DOS-Box von OS/2 oder unter Win-OS/2 (= -Windows
+3.11-Subsystem von OS/2) zu nutzen, muß sowohl EMXRT als auch RSX
+installiert sein. (Anmerkung: Dies wurde nicht getestet, da es für eine
+derartige Nutzung eigentlich keinen sinnvollen Grund gibt; u.a. stehen
+hiermit auch auf HPFS-Partitionen keine langen Dateinamen zur
+Verfügung.)
+
+!item Sind weder RSX noch EMXRT installiert, so kann UDO nicht
+funktionieren. Stattdessen wird UDO lediglich eine Fehlermeldung
+ausgeben.
+
+!item Die Installation von RSX und/oder EMXRT ist trivial, wirklich. Es
+müssen lediglich die Archive entpackt und einige Änderungen an der
+AUTOEXEC.BAT (bzw. unter OS/2 an der CONFIG.SYS) vorgenommen werden.
+
+!item RSX und EMXRT sind keine Treiber, die beim Booten resident
+installiert werden. Sie werden hingegen beim Start eines Programms, daß
+auf sie angewiesen ist, automatisch nachgeladen und nach der Beendigung
+des Programms auch wieder entfernt.
+
+!item Falls Sie nicht im Besitz der beiden Treiber sein sollten, d.h.
+Sie besitzen nicht eines der Archive EMXRT.ZIP oder DPMIGCC5.ZIP bzw.
+RSX*RT.ZIP, so
+müssen Sie sich die Archive per FTP oder Modem beschaffen:
+
+!begin_xlist [Modem:] !short
+
+!item [FTP:] Aktuelle Versionen von EMXRT finden Sie in folgendem
+Verzeichniss: (!T)(!url [ftp://ftp.leo.org/pub/comp/os/os2/leo/gnu/emx+gcc/emxrt.zip] [])(!t) (!nl)
+Aktuelle Versionen von RSX finden Sie in folgendem Verzeichnis:
+(!T)(!url [ftp://ftp.uni-bielefeld.de/pub/systems/msdos/misc/] [])(!t)
+
+#TODO: funktioniert wohl nicht mehr
+!item [Modem:] Im Gruppenprogrammteil ""UDO.Pub"" der Maus MK2
+Iserlohn-Kalthof (+49 2371 944925) finden Sie EMXRT und RSX ebenfalls.
+
+!end_xlist
+
+!end_itemize
+
+Kommen wir also zur Installation der beiden Treiber. Sie können
+natürlich auch nur einen der beiden Treiber installieren, je nachdem ob
+Sie Ihren Rechner mit DOS, Windows und/oder OS/2 benutzen. Die folgende
+Beschreibung bespricht die Installation beider Treiber.
+
+An erster Stelle müssen Sie natürlich die Archive entpacken. Doch halt!
+Sie müssen in jedem Fall die Archive mit Pfaden entpacken, sonst wird
+später nichts funktionieren. Ich empfehle, die Archive mit UNZIP.EXE zu
+entpacken. Beim Entpacken des RSX-Archivs wird im aktuellen Verzeichnis
+das Unterverzeichnis ''(!V)RSX\(!v)'' erzeugt, beim Entpacken des EMXRT-Archiv
+das Verzeichnis ''(!V)EMX\(!v)''. Falls Sie diese Unterverzeichnisse nach dem
+Entpacken nicht vorfinden sollten, so ist etwas falsch gelaufen.
+
+Sie können die beiden Verzeichnisse nun an eine beliebige Stelle Ihres
+Dateisystems verschieben. Ich empfehle, im Wurzelverzeichnis der
+Bootpartition ein Verzeichnis namens ''(!V)DRIVERS\(!v)'' zu erstellen und die
+Verzeichnisse ''(!V)RSX\(!v)'' und ''(!V)EMX\(!v)'' dorthin zu verschieben.
+
+!subheading Installation unter DOS und Windows:
+
+Öffnen Sie nun Ihre (!V)AUTOEXEC.BAT(!v) mit einem beliebigen Editor und fügen
+Sie abhängig davon, ob Sie nur RSX oder nur EMXRT entpackt haben,
+folgende Zeilen ein:
+
+!begin_itemize
+
+!item Nur EMXRT:
+
+!begin_verbatim
+SET EMX=C:\DRIVERS\EMX\BIN\EMX.EXE
+!end_verbatim
+
+!item EMXRT und RSX:
+
+!begin_verbatim
+SET EMX=C:\DRIVERS\EMX\BIN\EMX.EXE
+SET RSX=C:\DRIVERS\RSX\BIN\RSX.EXE
+!end_verbatim
+
+!item Nur RSX:
+
+!begin_verbatim
+SET EMX=C:\DRIVERS\RSX\BIN\RSX.EXE
+SET RSX=C:\DRIVERS\RSX\BIN\RSX.EXE
+!end_verbatim
+
+!end_itemize
+
+Falls Sie die beiden Verzeichnisse nicht nach ''(!V)C:\DRIVERS(!v)'' verschoben
+haben, sollten Sie die oben stehenden Pfade entsprechend anpassen.
+
+Wie Sie sicherlich bereits wissen, werden Änderungen an der
+AUTOEXEC.BAT erst dann aktiviert, wenn Sie Ihren Rechner booten. Bevor
+Sie dies tun, will ich Ihnen noch kurz erklären, welche Veränderungen
+Sie nun genau an Ihrer Konfiguration durchgeführt haben: Sie haben ein
+paar zusätzliche Dateien auf Ihrem Laufwerk sowie nach dem Booten zwei
+neue Umgebungsvariablen. Nicht mehr und nicht weniger.
+
+Booten Sie also nun Ihren Rechner.
+
+
+!subheading Installation unter OS/2:
+Siehe (!T)BOOK\EMXRT.INF(!t) oder (!T)DOC\EMXRT.DOC(!t) -- in Kürze:
+Die CONFIG.SYS wie folgt ändern (ggf. Sicherungskopie anlegen):
+
+!begin_itemize !short
+!item Verzeichnis (!T)C:\DRIVERS\EMX\DLL(!t) zum (!T)LIBPATH(!t) hinzufügen
+!item Verzeichnis (!T)C:\DRIVERS\EMX\BIN(!t) zum (!T)PATH(!t) hinzufügen
+!item optional: Verzeichnis (!T)C:\DRIVERS\EMX\BOOK(!t) zur
+(!T)BOOKSHELF(!t)-Liste hinzufügen (Zugriff auf EMXRT.INF)
+!item Systemabschluß und neu booten
+!item zur Kontrolle im OS/2-Fenster das EMXREV-Programm starten
+!end_itemize
+
+Falls Sie die beiden Verzeichnisse (!I)nicht(!i) nach `C:\DRIVERS' verschoben
+haben, sollten Sie die oben stehenden Pfade entsprechend anpassen.
+
+!end_node
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+OK, you haven't heard anything of RSX and EMXRT yet.  That's not a
+shame. But if you won't know what RSX and EMXRT are good for after
+having read this chapter, you should feel ashamed. And if some RSX or
+EMXRT experts recognize some stupid stuff I should feel ashamed.
+
+Well, let's go!..
+
+UDO was compiled with the GNU C Compiler (GCC), strictly speaking with
+EMX-GCC (ported by Eberhard Mattes). GCC is originally a Unix software
+and Unix has always used 32 bit software. Thus, the EMX-GCC makes 32
+bit software, too. And now we have a problem, because you cannot run
+32 bit software with DOS without using any tricks.
+
+EMXRT and RSX are responsible for these tricks. These ""drivers""
+allow UDO to allocate huge blocks of memory. Because you have to use
+different tricks for DOS and Windows there are existing two different
+""drivers"": EMXRT for DOS and OS/2, RSX for Windows.
+
+Please note:
+
+!begin_itemize
+
+!item	For running UDO exclusively in a DOS box with Windows
+you will need only RSX. RSX, written by Rainer Schnitker, is a DPMI
+server for programs that were compiled with EMX-GCC or DJGPP.
+
+!item	For running UDO under OS/2 or exclusively under DOS (without
+Windows) you will need only EMXRT. EMXRT (""emx runtime
+environment""), written by Eberhard Mattes, is needed for running
+EMX-GCC compiled software.
+
+!item	If you don't install neither RSX nor EMXRT there will be no
+chance to run UDO. It will simply print an error message.
+
+!item	The installation of RSX and EMXRT is very easy. Just extract
+the archives with paths and enter two lines into the
+(!V)AUTOEXEC.BAT(!v).
+
+!item	RSX and EMXRT are no resident drivers. UDO will start them
+automatically. After UDO has finished the drivers terminate, too.
+
+!item	If you haven't received the drivers (you haven't
+(!V)EMXRT.ZIP(!v) or (!V)DPMIGCC5.ZIP(!v)/(!V)RSX*RT.ZIP(!v))
+you can download them:
+
+	!begin_xlist [Modem:] !short
+
+	!item [FTP:] Current version of EMXRT can be downloaded from
+	(!T)(!url [ftp://ftp.leo.org/pub/comp/os/os2/leo/gnu/emx+gcc/emxrt.zip] [])(!t)
+
+	Current versions of RSX can be downloaded from:
+	(!T)(!url [ftp://ftp.uni-bielefeld.de/pub/systems/msdos/misc/] [])(!t)
+
+#TODO: dürfte englisch-sprachige kaum interessieren
+	!item [Modem:] You can download the files from the BBS called
+	""Maus MK2 Iserlohn-Kalthof"" (+49 2371 944925) from the
+	""Gruppenprogrammteil UDO.PUB"".
+
+	!end_xlist
+
+!end_itemize
+
+Let's talk about the installation of RSX and EMXRT. Of course, you can
+install only one of the drivers if you run exclusively DOS or Windows.
+The following descriptions tells you how to install both drivers.
+
+In first place you have to extract the archives. Stop! It's importand
+that you extract the archives with paths! If you don't let your
+archiver generate paths nothing will function. I recommend to use
+(!V)UNZIP.EXE(!v). If you extract the RSX archive a directory ''(!V)RSX\(!v)''
+will be saved. If you extract EMXRT a directory ''(!V)EMX\(!v)'' will
+be saved. If you don't find these directories something went wrong.
+
+You can move the directories to any position of your file system. I
+recommend to move them to ''(!V)C:\DRIVERS(!v)''. If this directory
+doesn't exist you have to create one.
+
+After having extracted the archives you have to edit your
+(!V)AUTOEXEC.BAT(!v) and to insert the following lines. If you have
+only installed EMXRT, insert the lines below ""Only EMXRT"" and so on:
+
+!begin_itemize
+
+!item	Only EMXRT:
+
+!begin_verbatim
+SET EMX=C:\DRIVERS\EMX\BIN\EMX.EXE
+!end_verbatim
+
+!item	EMXRT and RSX:
+
+!begin_verbatim
+SET EMX=C:\DRIVERS\EMX\BIN\EMX.EXE
+SET RSX=C:\DRIVERS\RSX\BIN\RSX.EXE
+!end_verbatim
+
+!item	Only RSX:
+
+!begin_verbatim
+SET EMX=C:\DRIVERS\RSX\BIN\RSX.EXE
+SET RSX=C:\DRIVERS\RSX\BIN\RSX.EXE
+!end_verbatim
+
+!end_itemize
+
+If RSX and EMXRT haven't been installed in ''(!V)C:\DRIVERS(!v)'' you
+have to adjust the upper paths.
+
+I think you already know that changes of the (!V)AUTOEXEC.BAT(!v)
+are activated when rebooting your computer. Before you reboot your
+computer I just want to summarize what you have done until now: you
+have installed some files and you have inserted one or two lines into
+your (!V)AUTOEXEC.BAT(!v). That's all.
+
+And now, reboot your computer.
+
+
+!subheading Installation under OS/2:
+See (!T)BOOK\EMXRT.INF(!t) or (!T)DOC\EMXRT.DOC(!t) -- in short:
+Modify your CONFIG.SYS as follows (you may create a backup copy):
+
+!begin_itemize !short
+!item add directory (!T)C:\DRIVERS\EMX\DLL(!t) to (!T)LIBPATH(!t)
+!item add directory (!T)C:\DRIVERS\EMX\BIN(!t) to (!T)PATH(!t)
+!item optional: add directory (!T)C:\DRIVERS\EMX\BOOK(!t) to the
+(!T)BOOKSHELF(!t)-list (for access to EMXRT.INF)
+!item shutdown and reboot
+!item for examination: open an OS/2 commandline window and run the EMXREV program
+!end_itemize
+
+If you use an other directory than `C:\DRIVERS', modify pathnames according to the directory names which you have chosen.
+
+!endif
+# Ende: Installation RSX/EMRT
+
+################################################################################
+!iflang [german]
+!begin_node Installation von (!T)UDO386.EXE(!t) unter DOS und Windows
+!endif
+!iflang [english]
+Installation of (!T)UDO386.EXE(!t) under DOS and Windows
+!endif
+!html_name installation_dos_win_os2_3.html
+
+!iflang [german]
+Kommen wir nun zum einfacheren Teil der Installation von UDO. Die
+Kurzfassung lautet: Archiv mit Pfaden auspacken, das UDO-Verzeichnis in
+der (!V)AUTOEXEC.BAT(!v) dem (!V)PATH(!v) hinzufügen und neu booten.
+
+Aber auch hier erkläre ich die Installation noch einmal Schritt für
+Schritt:
+
+!begin_enumerate
+
+!item Entpacken Sie das UDO-Archiv (!B)mit(!b) Pfaden. Falls kein
+Verzeichnis namens ''(!V)UDO\(!v)'' erzeugt wird, dann haben Sie den Packer
+falsch aufgerufen. Andernfalls verschieben Sie das Verzeichnis ''(!V)UDO\(!v)''
+an eine beliebige Stelle Ihres Dateisystems. Die folgenden
+Erläuterungen gehen davon aus, daß Sie das Verzeichnis ins
+Wurzelverzeichnis verschieben.
+
+!item Nun müssen Sie noch dafür sorgen, daß DOS das Programm findet.
+Dazu können Sie folgendermaßen vorgehen:
+
+!begin_enumerate
+
+!item Öffnen Sie die (!V)AUTOEXEC.BAT(!v) mit einem beliebigen ASCII-Editor und
+fügen Sie folgende Zeile ein:
+
+!begin_verbatim
+SET PATH=%PATH%;C:\UDO\BIN
+!end_verbatim
+
+Das führt dazu, daß DOS und Windows auch in diesem Verzeichnis nach
+ausführbaren Programmen suchen, jedoch erst nach einem Neustart des
+Rechners.
+
+!item Falls Sie dies nicht möchten, so können Sie die Dateien aus
+''(!V)C:\UDO\BIN(!v)'' auch in eines der Verzeichnisse verschieben, die in PATH
+in der AUTOEXEC.BAT angegeben sind. In diesem Fall müssen Sie Ihren
+Rechner nicht neu booten.
+
+!end_enumerate
+
+!end_enumerate
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+Let's talk of the easier part of the installation of UDO. The abridged
+version: extract the archive and add the UDO directory to (!V)PATH(!v)
+of your (!V)AUTOEXEC.BAT(!v).
+
+But once more I will describe you the installation step by step:
+
+!begin_enumerate
+
+!item	Extract the UDO archvie (!B)with(!b) paths. If you won't find
+a directory named ''(!V)UDO\(!v)'' something went wrong. If you will
+find it move the directory named ''(!V)UDO\(!v)'' to any position of
+your file system. The following descriptions assume that you move
+''(!V)UDO\(!v)'' to your root directory.
+
+!item	Now you have to let DOS find the executable:
+
+	!begin_enumerate
+
+	!item	Edit the (!V)AUTOEXEC.BAT(!v) and insert the following
+	line:
+
+!begin_verbatim
+SET PATH=%PATH%;C:\UDO\BIN
+!end_verbatim
+
+	This meand that DOS and Windows will look for
+	''(!V)UDO386.EXE(!v)'' in this directory, too, when you have
+	rebootet your computer.
+
+	!item	If you don't like to extend your (!V)PATH(!v) you can move
+	the executables of ''(!V)C:\UDO\BIN(!v)'' to any directory that's
+	already listet in (!V)PATH(!v). Using this method you don't have
+	to reboot your computer.
+
+	!end_enumerate
+
+!end_enumerate
+!endif
+
+!end_node
+# Ende: Installation UDO386.EXE unter DOS/Windows
+
+################################################################################
+!iflang [german]
+!begin_node Installation von (!T)UDO386.EXE(!t) unter OS/2
+!endif
+!iflang [english]
+!begin_node Installation of (!T)UDO386.EXE(!t) under OS/2
+!endif
+!html_name installation_dos_win_os2_4.html
+
+!iflang [german]
+Die Installation unter OS/2 erfolgt analog wie im vorstehenden
+Abschnitt für DOS/Windows beschrieben, jedoch muß die PATH-Liste in der
+Datei CONFIG.SYS ergänzt werden (Änderung der CONFIG.SYS wird erst
+nach einem Neustart des Rechners wirksam).
+
+Darüberhinaus sind folgende Arbeiten erforderlich:
+
+!begin_itemize !short
+
+!item Die mitgelieferten .BAT-Dateien in .CMD-Dateien umbenennen. In
+den U2*.CMD-Dateien die Aufrufe von UDO.BAT in UDO.CMD ändern.
+#TODO: Bei einer zukünftigen, überarbeiteten Distribution gleich die
+#.CMD-Dateien passend mitliefern.)
+
+!item Das Verzeichnis, in dem sich die CMD-Dateien befinden, ebenfalls
+in die PATH-Liste der CONFIG.SYS aufnehmen.
+
+!end_itemize
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+# Übersetzung ergänzt Ulrich Kretschmer 13.12.2003
+The installation under OS/2 works analogous as described above for DOS/Windows. Additionally, you have to complete the PATH list in your CONFIG.SYS file (reboot your computer afting changing).
+
+Furthermore, you have to do the following work:
+
+!begin_itemize !short
+!item Rename the shipped .BAT files into .CMD files. Modify the UDO.BAT calls which are located in the U2.CMD files to UDO.CMD calls.
+!item Add the directory where the .CMD files located to the PATH list in your CONFIG.SYS file.
+!end_itemize
+!endif
+
+!end_node
+# Ende: Installation UDO386.EXE unter OS/2
+
+!end_node
+# Ende: Installation DOS-Windows-OS/2
+
+################################################################################
+################################################################################
+
+
+####################################################################
+# @(#) Installation der Macintosh-Version, 26.06.1996, Martin Osieka
+####################################################################
+!iflang [german]
+!begin_node Installation der Macintosh-Version
+!endif
+!iflang [english]
+!begin_node Installing the Macintosh version
+!endif
+!html_name installation_mac.html
+
+!iflang [german]
+Nach dem Entpacken des Archivs, welches die Macintosh-Version von UDO
+enthält, kann UDO an eine beliebige Stelle im Dateisystem verschoben
+werden (üblicherweise in den Programme Ordner).
+
+UDO liegt als FAT-Binary vor, d.h. es ist sowohl auf 68K- als auch auf
+PowerPC-Rechner lauffähig. Bei Platzmangel im Dateisystem kann UDO mit
+einem entsprechenden Programm auf eine native Version verkleinert
+werden. Unabhängig davon ist die Größe zur Laufzeit minimal.
+
+Hat man die Dokumentation zu UDO als Hypertext (!V)(!UDOR)ger.hyp(!v) vorliegen,
+kann diese aus UDO heraus angezeigt werden, wenn man das Programm
+Hyperion besitzt, das Hypertexte in diesem Format auf dem Macintosh
+anzeigen kann. (!V)(!UDOR)ger.hyp(!v) muß sich dazu im Guides-Ordner von Hyperion
+befinden.
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+After having extracted the archive that contains the Macintosh version of
+UDO you can move UDO's files to any place of your file system you want to.
+In most cases this would be the ""Programs"" directory.
+
+UDO is available as a fat-binary so it will run both on a 68k Macintosh and
+a PowerPC Macintosh. If you want to save some disk space you may be smaller
+the program with a certain software.
+
+If you have access to the hypertext of UDO (''(!V)(!UDOR)eng.hyp(!v)'') you can
+read it with ""Hyperion"". Hyperion is a software written by Martin Osieka
+that can display ST-Guide hypertexts. When using Hyperion you should copy
+''(!V)(!UDOR)eng.hyp(!v)'' to the Hyperion directory.
+!endif
+
+!end_node
+# Ende: Installation Macintosh
+
+################################################################################
+################################################################################
+!iflang [german]
+!begin_node Installation der Unix-/Linux-Version
+!endif
+!iflang [english]
+!begin_node Installing the Unix/Linux versions
+!endif
+!html_name installation_unix-linux.html
+
+!iflang [german]
+Nach Entpacken des Archivs kopieren Sie das Binary aus ''(!V)bin/(!v)'' in das
+Verzeichnis ''(!V)/usr/local/bin(!v)'' oder in eines der Verzeichnisse Ihres
+(!T)$PATH(!t)'s.
+
+Kopieren Sie dann die UDO-Manualpage ''(!V)udo.1(!v)'' nach ''(!V)/usr/man/man1/(!v)''.
+
+Um sich die Dokumentation von UDO mittels GNU-Info ansehen zu können,
+sollten Sie die Quelltexte der Dokumentation ins Texinfo-Format
+umwandeln, mit Makeinfo bearbeiten und die erhaltenen Dateien in das
+Verzeichnis kopieren ((!V)$INFOPATH(!v)), in dem sich die anderen Info-Dateien
+befinden, sofern sich in der UDO-Distribution noch keine Info-Dateien
+befinden. Die Datei ''(!V)dir(!v)'' muß dort dann noch angepaßt werden, indem Sie
+auf die UDO-Dokumentation verweisen.
+
+Desweiteren empfiehlt sich das Anlegen von Shellscripten oder Aliasen,
+um nicht immer alle Optionen angeben zu müssen. Das folgende Script,
+welches man ''(!V)''u2tex''(!v)'' benennen sollte, ruft UDO mit den passenden
+Optionen auf.
+
+!begin_quote
+!begin_verbatim
+#!bin/sh
+udo --tex -o ! $*
+!end_verbatim
+!end_quote
+
+Für die anderen Formate können ähnliche Scripte angelegt werden. In der
+Distribution sollten Sie diese Scripte bereits vorfinden.
+
+# das gehört eigentlich inhaltlich woanders hin
+Ein Hinweis für Linuxdoc-SGML-Benutzer: Zumindest in meiner
+Linuxdoc-SGML-Version fehlen ein paar Entities. Werfen Sie daher kurz
+einen Blick in die FAQ in der Mitte dieser Anleitung, falls
+Linuxdoc-SGML Fehlermeldungen erzeugen sollte.
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+After having extracted the archive copy the files of ''(!V)bin/(!v)''
+to ''(!V)/usr/local/bin(!v)'' or any other directory of (!T)$PATH(!t).
+
+Copy the manpage ''(!V)udo.1(!v)'' to ''(!V)/usr/man/man1/(!v)''.
+
+To read the documentation of UDO with GNU Info convert the UDO source
+files to GNU Texinfo, run Makeinfo and copy the Info file to
+(!V)$INFOPATH(!v). You have to edit (!V)$INFOPATH/dir(!v) to get
+access to the UDO Info files.
+
+Furthermore you should make some scripts or aliase to simplify calling
+UDO. The following script (named ''(!V)''u2tex''(!v)'') shows how to tell UDO that he shall convert
+the source file to (!LaTeX)):
+
+!begin_quote
+!begin_verbatim
+#!bin/sh
+udo --tex -o ! $*
+!end_verbatim
+!end_quote
+
+You can make similar scripts for the other destination formats if you
+want. The UDO distribution already contains some scripts.
+
+Hint for users of Linux-SGML: My version doesn't contain all possible
+entities. Just take a look ate the Linuxdoc-SGML FAQ in the middle of
+this documentation if Linuxdoc-SGML prints an error message.
+!endif
+
+!end_node
+# Ende: Installation Unix/Linux
+
+################################################################################
+
+# Ende Installation / end of installation
+!end_node

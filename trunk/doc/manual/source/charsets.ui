@@ -1,0 +1,40 @@
+# doc/manual/source/charsets.ui
+# letzte Änderungen: 14.12.2003 / last changes: Dec 14, 2003
+
+!iflang [german]
+!index Zeichensatz
+!index Sonderzeichen
+!label Code
+!begin_xlist [iso-8859-1:] !short
+!item [cp437:]   IBM-PC-Zeichensatz
+!item [cp850:]   OS/2-Zeichensatz
+!item [dos:]     IBM-PC-Zeichensatz
+!item [hp8:]     HP-Roman-8-Zeichensatz
+!item [mac:]     Apple-Macintosh-Zeichensatz
+!item [os2:]     OS/2-Zeichensatz
+!item [iso:]     ISO-Latin-1-Zeichensatz
+!item [tos:]     Atari-ST-Zeichensatz
+!item [next:]    NeXT-Zeichensatz
+!item [latin1:]  wie (!KW [code] [[iso!!]])
+!item [iso-8859-1:]  wie (!KW [code] [[iso!!]])
+!end_xlist
+!endif
+
+!iflang [english]
+!index Character set
+!index Special chars
+!label Code
+!begin_xlist [iso-8859-1:] !short
+!item [cp437:]   IBM-PC character set
+!item [cp850:]   OS/2 character set
+!item [dos:]     IBM-PC character set
+!item [hp8:]     HP-Roman-8 character set
+!item [mac:]     Apple-Macintosh character set
+!item [os2:]     OS/2 character set
+!item [iso:]     ISO-Latin-1 character set
+!item [tos:]     Atari-ST character set
+!item [next:]    NeXTStep character set
+!item [latin1:]  like (!KW [code] [[iso!!]])
+!item [iso-8859-1:]  like (!KW [code] [[iso!!]])
+!end_xlist
+!endif

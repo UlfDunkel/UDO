@@ -1,0 +1,436 @@
+# doc/manual/source/running_cmdline.ui
+# letzte Änderungen: 21.12.2003 / last changes: Dec 21, 2003
+
+
+################################################################################
+!subheading Name
+
+!iflang [german]
+udo --- Dateien vom UDO-Format in andere Formate umwandeln
+!endif
+!iflang [english]
+udo --- convert files from UDO into different formats
+!endif
+
+################################################################################
+!subheading Synopsis
+
+!iflang [german]
+udo [-acdDfghHilmnpPqrstuvwWxy4]    (!U)(!V)Quelldatei(!v)(!u) (!nl)
+udo [-acdDfghHilmnpPqrstuvwWxy4] -o (!U)(!V)Zieldatei(!v)(!u) (!U)(!V)Quelldatei(!v)(!u)
+!endif
+!iflang [english]
+udo [-acdDfghHilmnpPqrstuvwWxy4]    (!U)(!V)source file(!v)(!u) (!nl)
+udo [-acdDfghHilmnpPqrstuvwWxy4] -o (!U)(!V)destination file(!v)(!u) (!U)(!V)source file(!v)(!u)
+!endif
+
+################################################################################
+!iflang [german]
+!subheading Beschreibung
+!endif
+!iflang [english]
+!subheading Description
+!endif
+
+!ifset manpage_mode
+!include ../manual/source/udowork.ui
+!else
+!include udowork.ui
+!endif
+
+!iflang [german]
+In der ersten Form erfolgen Ausgaben auf die Standardausgabe (stdout),
+Fehlermeldungen werden auf die Standardfehlerausgabe (stderr)
+ausgegeben. In der zweiten Form werden Ausgaben in die
+(!U)Zieldatei(!u) geschrieben, Fehlermeldungen in eine Protokolldatei
+mit der Endung (!V)*.ul*(!v).
+
+Die Optionen müssen einzeln übergeben werden: (!V)-al(!v) wird nicht als (!V)-a -l(!v)
+interpretiert!
+
+Der Name der Quelldatei muß als letzter Parameter übergeben werden.
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+Using the first method UDO prints the destination format to the standard
+output (STDOUT) and error messages to the standard error output (STDERR).
+Using the second method UDO writes the destination format to the
+(!U)destination file(!u) and error messages to a log file with the suffix
+(!V).ul?(!v).
+
+You have to pass single options to (!B)UDO(!b): (!V)-al(!v) isn't the same
+as (!V)-a -l(!v)!
+
+The name of the source file has to be the last option.
+!endif
+
+################################################################################
+!iflang [german]
+!subheading Optionen
+!endif
+!iflang [english]
+!subheading Options
+!endif
+
+#Ausgabe-Formate
+!iflang [german]
+!begin_tlist [-W, (--)no-warnings]
+
+!item [-@ F] UDO liest dann aus der Datei "F" die Optionen. In dieser Datei muß in jeder Zeile genau eine Option stehen.
+
+!item [-a, (--)asc] Die (!U)Quelldatei(!u) wird ins ASCII-Format umgewandelt.
+
+!item [(--)amg] Die (!U)Quelldatei(!u) wird ins AmigaGuide-Format umgewandelt.
+
+!item [(--)aqv, (--)quickview] Die (!U)Quelldatei(!u) wird ins Apple-QuickView-Format umgewandelt.
+
+!item [-c, (--)c] Die (!U)Quelldatei(!u) wird in C-Sourcecode
+umgewandelt. Normaler Text wird Kommentar, der Inhalt der Sourcecode-Umgebung wird C-Code.
+
+!item [(--)check] Zusätzliche Überprüfungen aktivieren.
+
+!item [-d, (--)no-idxfile]
+Erzeugung von Indexdateien unterdrücken.
+
+!item [(--)drc] Die (!U)Quelldatei(!u) wird ins DRC-Format (David's Readme Compiler) umgewandelt.
+
+!item [-D symbol] Setzen des Symbols ''symbol'', welches sich im
+Quelltext mit dem Befehl (!KW [ifset]) abfragen läßt.
+
+!item [(--)force-long] Wird diese Option
+benutzt, so versucht UDO auch auf den Systemen, die
+standardmässig keine langen Dateinamen unterstützen (TOS, DOS),
+lange Dateinamen zu erzeugen (Endung .html anstatt .htm).
+
+!item [(--)force-short] Erzwingt unter Betriebssystemen, die lange Dateinamen beherrschen, die Erzeugung von kurzen Dateinamen (8+3).
+
+!item [-f, (--)pdflatex] Die (!U)Quelldatei(!u) wird in PDF(!LaTeX)-Quellcode umgewandelt.
+
+!item [-g, (--)helptag] Die (!U)Quelldatei(!u) wird ins HP-Helptag-SGML-Format umgewandelt.
+
+!item [(--)help] Ausgabe einer Hilfsseite, die diese Optionen erklärt.
+
+!item [-h, (--)html] Die (!U)Quelldatei(!u) wird ins HTML-Format umgewandelt.
+
+!item [-H, (--)hold] (!B)UDO(!b) wartet am Programmende auf einen Tastendruck.
+
+!item [-i, (--)info] Die (!U)Quelldatei(!u) wird ins GNU-Texinfo-Format umgewandelt.
+
+!item [(--)ipf] Die (!U)Quelldatei(!u) wird ins OS/2 IPF-Format umgewandelt.
+
+!item [-l, (--)no-logfile] (!B)UDO(!b) legt (bei gleichzeitiger Verwendung von -o) keine Protokolldatei an.
+
+!item [(--)lyx] Die (!U)Quelldatei(!u) wird ins LyX-Format umgewandelt.
+
+!item [-m, (--)man] Die (!U)Quelldatei(!u) wird ins Manualpage-Format umgewandelt.
+
+!item [(--)map] Erzeugt eine Header-Datei für C, in denen Konstanten mit allen Jump-IDs ausgegeben werden.
+
+!item [(--)map-pas] Erzeugt eine Map-Datei der WinHelp-Jump-IDs für Pascal/Delphi.
+
+!item [(--)map-gfa] Erzeugt eine Map-Datei der WinHelp-Jump-IDs für GFA Basic.
+
+!item [(--)map-vb] Erzeugt eine Map-Datei der WinHelp-Jump-IDs für Visual Basic.
+
+!item [-n, (--)nroff] Die (!U)Quelldatei(!u) wird ins Nroff-Format umgewandelt.
+
+!item [-o F, (--)outfile F]  (!B)UDO(!b) schreibt seine Ausgaben in die Datei namens "F".
+
+!item [-p, (--)pchelp] Die (!U)Quelldatei(!u) wird ins Pure-C-Help-Quelltextformat umgewandelt.
+
+!item [-P, (--)pascal] Die (!U)Quelldatei(!u) wird in Pascal-Sourcecode
+umgewandelt. Normaler Text wird Kommentar, der Inhalt der Sourcecode-Umgebung wird C-Code.
+
+!item [(--)ps] Die (!U)Quelldatei(!u) wird ins PostScript-Format umgewandelt.
+
+!item [-q, (--)quiet] Die Ausgabe von Statusmeldungen wird unterdrückt.
+
+!item [-r, (--)rtf] Die (!U)Quelldatei(!u) wird ins Rich-Text-Format (RTF) umgewandelt.
+
+!item [-s, (--)stg] Die (!U)Quelldatei(!u) wird ins ST-Guide-Format umgewandelt.
+
+!item [(--)save-upr] Wird diese Option benutzt, so legt UDO eine
+Projekt-Datei mit der Endung (!V).upr(!v) mit einer Liste der benutzten
+und erzeugten Dateien an.
+
+!item [-t, (--)tex] Die (!U)Quelldatei(!u) wird ins (!LaTeX)-Format umgewandelt.
+
+!item [(--)test] Bei zusätzlicher Angabe dieser Option, wird keine
+Ausgabedatei erzeugt, sondern nur ein Logfile und ggf. die Datei mit
+den Rohlingen für die Trennvorschläge.
+
+!item [(--)tree] Wird diese Option benutzt, so legt UDO in einer Datei
+mit der Endung (!V).ut?(!v) eine baumartige Übersicht der benutzten Dateien an.
+Bei intensiver Benutzung des Befehls (!KW [include]) sieht man damit,
+welche Dateien andere Dateien nachladen.
+
+!item [-u, (--)udo] Erzeugt eine Datei im UDO-Format, die sämtliche inkludierten UDO-Quelltexte enthält.
+# Die (!U)Quelldatei(!u) wird ins UDO-Format umgewandelt.
+
+!item [-v, (--)vision] Die (!U)Quelldatei(!u) wird ins Turbo-Vision-Help-Format umgewandelt.
+
+!item [(--)verbose] Bei der Konvertierung werden zusätzlich Informationen
+über die gerade bearbeitete Datei und das gerade bearbeitete Kapitel ausgegeben.
+
+!item [(--)version] Ausgabe der Version von (!B)UDO(!b).
+
+!item [-w, (--)win] Die (!U)Quelldatei(!u) wird ins WinHelp-Quelltextformat umgewandelt.
+
+!item [-4, (--)win4] Die (!U)Quelldatei(!u) wird ins WinHelp4-Quelltextformat umgewandelt.
+
+!item [-W, (--)no-warnings] UDO gibt keine Warnungen, sondern nur Fehler aus.
+
+!item [-x, (--)linuxdoc] Die (!U)Quelldatei(!u) wird ins Linuxdoc-SGML-Format umgewandelt.
+
+!item [-y, (--)no-hypfile] (!B)UDO(!b) legt (bei gleichzeitiger Verwendung von -o) keine Datei mit Trennvorschlägen an.
+
+!end_tlist
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!begin_tlist [-W, (--)no-warnings]
+
+!item [-@ F] UDO will read the options from the file named ""F"".
+This file should contain exactly one option per line.
+
+!item [-a, (--)asc] The (!U)source file(!u) will be converted to ASCII.
+
+!item [(--)amg] The (!U)source file(!u) will be converted to AmigaGuide.
+
+!item [(--)aqv, (--)quickview] The (!U)source file(!u) will be converted to Apple QuickView.
+
+!item [-c, (--)c] The (!U)source file(!u) will be converted to C source code.
+Normal text becomes comment, the content of the sourcecode environment becomes C code.
+
+!item [(--)check] Activate some additional checks.
+
+!item [-d, (--)no-idxfile]
+  Suppress the generation of index files.
+
+!item [(--)drc] The (!U)source file(!u) will be converted to DRC Format (David's Readme Compiler).
+
+!item [-D symbol] Set the symbol ''symbol'' which can be tested in the source file
+with (!KW [ifset]).
+
+!item [(--)force-long] UDO tries to use long filenames even on
+operating systems that normally do not support them.
+
+!item [(--)force-short] Force UDO to use short filenames (8+3).
+
+!item [-f, (--)pdflatex] The (!U)source file(!u) will be converted to PDF(!LaTeX) sourcecode.
+
+!item [-g, (--)helptag] The (!U)source file(!u) will be converted to HP Helptag SGML.
+
+!item [-h, (--)html] The (!U)source file(!u) will be converted to HTML.
+
+!item [(--)help] Outputs a help page and quits.
+
+!item [-H, (--)hold] You have to press a key before (!B)UDO(!b) finishes.
+
+!item [-i, (--)info] The (!U)source file(!u) will be converted to GNU Texinfo.
+
+!item [(--)ipf] The (!U)source file(!u) will be converted to OS/2 IPF.
+
+!item [-l, (--)no-logfile] When using the Option (!V)-o(!v) (!B)UDO(!b) doesn't save a log file.
+
+!item [(--)lyx] The (!U)source file(!u) will be converted to LyX.
+
+!item [-m, (--)man] The (!U)source file(!u) will be converted to a manualpage.
+
+!item [(--)map] Creates a header file for C with the WinHelp-Jump-IDs.
+
+!item [(--)map-pas] Creates a map file with the WinHelp-Jump-IDs for Pascal/Delphi.
+
+!item [(--)map-gfa] Creates a map file with the WinHelp-Jump-IDs for GFA Basic.
+
+!item [(--)map-vb] Creates a map file with the WinHelp-Jump-IDs for Visual Basic.
+
+!item [-n, (--)nroff] The (!U)source file(!u) will be converted to Nroff.
+
+!item [-o F, (--)outfile F]  (!B)UDO(!b) writes the output into the file named ""F"".
+
+!item [-p, (--)pchelp] The (!U)source file(!u) will be converted to Pure C Help.
+
+!item [-P, (--)pascal] The (!U)source file(!u) will be converted to pascal source code.
+Normal text becomes comment, the content of the sourcecode environment becomes C code
+
+!item [(--)ps] The (!U)source file(!u) will be converted to PostScript.
+
+!item [-q, (--)quiet] (!B)UDO(!b) won't print anything to STDOUT or STDERR.
+
+!item [-r, (--)rtf] The (!U)source file(!u) will be converted to Richt Text Format (RTF).
+
+!item [-s, (--)stg] The (!U)source file(!u) will be converted to ST-Guide sourcecode.
+
+!item [(--)save-upr] When using this option (!B)UDO(!b) will save a
+file with the suffix (!V).upr(!v) with a list of all source files,
+include files and generated files
+
+!item [-t, (--)tex] The (!U)source file(!u) will be converted to (!LaTeX).
+
+!item [(--)test] When using this option (!B)UDO(!b) won't save a destination file.
+
+!item [(--)tree] When using this option (!B)UDO(!b) will save a file with the
+suffix (!V).ut?(!v). In this file you will see a tree with all
+files your source file includes.
+
+!item [-u, (--)udo]  Generate one file in udo format containing all included source
+ files. This allows to put all source files into one udo file.
+
+!item [-v, (--)vision] The (!U)source file(!u) will be converted to Turbo Vision Help.
+
+!item [(--)verbose] (!B)UDO(!b) will print some status information while converting the source file.
+
+!item [(--)version] Outputs version information and quits (!B)UDO(!b).
+
+!item [-w, (--)win] The (!U)source file(!u) will be converted to Windows Help sourcecode.
+
+!item [-4, (--)win4] The (!U)source file(!u) will be converted to Windows Help 4 sourcecode.
+
+!item [-W, (--)no-warnings] Warnings will be suppressed. Error messages will still be printed.
+
+!item [-x, (--)linuxdoc] The (!U)source file(!u) will be converted to Linuxdoc-SGML.
+
+!item [-y, (--)no-hypfile] (!B)UDO(!b) doesn't save a file with syllabification hints when
+using the option (!V)-o(!v).
+
+!end_tlist
+
+!endif
+
+################################################################################
+!iflang [german]
+!subheading Beispiele
+!endif
+!iflang [english]
+!subheading Examples
+!endif
+
+!iflang [german]
+!begin_description
+!item [udo file.u]
+
+Umwandeln der Datei ''(!V)file.u(!v)'' ins ASCII-Format (default) und Ausgabe auf
+die Standardausgabe. Fehlermeldungen werden auf die Standardfehlerausgabe ausgegeben.
+
+!item [udo (--)tex -o output.tex file.u]
+
+Umwandeln der Datei ''(!V)file.u(!v)'' ins (!LaTeX)-Format, Ausgaben werden in die
+Datei ''(!V)output.tex(!v)'' geschrieben, Fehlermeldungen werden in der Datei
+''(!V)output.ult(!v)'' protokolliert.
+
+!item [udo -s -y -l -o ! file.u]
+
+Umwandeln der Datei ''(!V)file.u(!v)'' ins St-Guide-Quelltextformat. Ausgaben
+erfolgen in die Datei ''(!V)file.stg(!v)''. Es werden keine Protokolldatei und
+keine Datei mit Trennvorschlägen angelegt.
+
+!end_description
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!begin_description
+!item [udo file.u]
+		Convert the source file ''file.u'' to ASCII (default) and print the
+		output to the standard output and error messages to the standard
+		error output.
+
+!item [udo (--)tex -o output.tex file.u]
+		Convert the source file ''(!V)file.u(!v)'' to (!LaTeX) and write the output
+		to the file named ''(!V)output.tex(!v)''. Warnings, error messages
+		and additional information will be written to the log file named
+		''(!V)output.ult(!v)''.
+
+!item [udo -s -y -l -o ! file.u]
+		Convert the source file ''(!V)file.u(!v)'' to ST-Guide and write the
+		output to ''(!V)file.stg(!v)''. UDO won't save a log file or a file
+		with syllabification patterns.
+
+!end_description
+!endif
+
+################################################################################
+!iflang [german]
+!subsubheading Umgebungsvariablen
+!begin_xlist [UDOINPUTPATH]
+
+# ToDo: wozu UDO.INI ??
+
+!item [HOME] Im Homeverzeichnis wird nach der Datei (!V)udo.ini(!v) gesucht,
+falls (!B)UDOPATH(!b) nicht existiert.
+
+!item [LANG] Legt die zu benutzende Landessprache für Fehlermeldungen
+fest, wenn weder (!B)LC_ALL(!b) noch (!B)LC_MESSAGES(!b) existiert.
+
+!item [LC_ALL] Wenn diese Environmentvariable auf ''german'' gesetzt ist,
+benutzt (!B)UDO(!b) deutschsprachige Meldungen. Für andere Werte werden
+englischsprachige Meldungen benutzt. Existiert diese Variable nicht,
+wird stattdessen (!B)LC_MESSAGES(!b) überprüft.
+
+!item [LC_MESSAGES] Siehe (!B)LC_ALL(!b). Wenn auch diese Variable
+nicht existiert, wird stattdessen (!B)LANG(!b) benutzt.
+
+!item [UDOPATH] In diesem Verzeichnis sucht UDO nach der Datei ''udo.ini''.
+Falls (!B)UDOPATH(!b) nicht existiert, wird stattdessen in
+(!B)$HOME(!b) gesucht.
+
+!item [UDOINPUTPATH] In diesem Verzeichnis sucht UDO nach Dateien, die
+mit dem Befehl (!KW [input]) eingebunden werden.
+
+!end_xlist
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!subheading Environment
+!begin_xlist [UDOINPUTPATH]
+
+!item [HOME]
+		UDO looks for the file (!V)udo.ini(!v) in your home directory if
+		(!B)UDOPATH(!b) doesn't exist.
+
+!item [LANG]
+		Sets the language UDO shall use for error messages if neither
+		(!B)LC_ALL(!b) nor (!B)LC_MESSAGES(!b) exists.
+
+
+!item [LC_ALL]
+		If this is set to ''german'' (!B)UDO(!b) prints German messages.
+		If this variable doesn't exist (!B)LC_MESSAGES(!b) it tested
+		instead.
+
+!item [LC_MESSAGES]
+		See (!B)LC_ALL(!b). If this variable doesn't exist, too,
+		(!B)LANG(!b) is tested instead.
+
+!item [UDOPATH]
+		(!B)UDO(!b) looks for the file (!V)udo.ini(!v) in the directory
+		defined by this variable. If (!B)UDOPATH(!b) doesn't exist
+		(!B)HOME(!b) is tested instead.
+
+!item [UDOINPUTPATH]
+		(!B)UDO(!b) looks for files included by the (!KW [input]) command
+		in the directory defined by this variable.
+
+!end_xlist
+!endif
+
+################################################################################
+!subheading Exit Status
+
+!iflang [german]
+!begin_xlist [>0] !short
+!item [0] Alles in Ordnung.
+!item [>0]  Es ist ein Fehler aufgetreten.
+!end_xlist
+!endif
+
+!iflang [english]
+!begin_xlist [>0] !short
+!item [0]	Everything was OK.
+!item [>0]	An error has appeared.
+!end_xlist
+!endif

@@ -1,0 +1,126 @@
+# doc/manual/source/header.ui
+# letzte Änderungen: 20.12.2003 / last changes: Dec 20, 2003
+
+
+# ----------------------------------------------------------
+# Einstellungen fuer csTeX (MultiTeX), GEM-Images mit 100dpi
+# Settings for csTeX (MultiTeX), GEM images with 100dpi
+# ----------------------------------------------------------
+!ifset [csTeX]
+!tex_strunk
+!tex_dpi 100
+!endif
+
+# ------------------------------------------------------
+# Einstellungen fuer Lindner-TeX, GEM-Images mit 100dpi
+# Settings for Lindner-TeX, GEM images with 100dpi
+# ------------------------------------------------------
+!ifset [lindnerTeX]
+!tex_strunk
+!tex_dpi 100
+!endif
+
+
+# -------------------------------------------------------
+# Einstellungen fuer emTeX, LateX2e, MSP-Grafiken, 300dpi
+# werden ueber Symbol emTeX2e bzw. emTeX2.09 aktiviert
+# Settings for emTeX, LateX2e, MSP images, 300dpi
+# use symbol emTeX2e or emTeX2.09 to enable them
+# -------------------------------------------------------
+!ifset [emTeX2e]
+!tex_2e
+!tex_emtex
+!tex_dpi 300
+!no_verbatim_umlaute [tex]
+!no_images [tex]
+!endif
+
+!ifset [emTeX2.09]
+!tex_emtex
+!tex_dpi 300
+!no_verbatim_umlaute [tex]
+!no_images [tex]
+!endif
+
+!raw [tex] \parskip 5pt
+!raw [tex] \parindent 0pt
+
+# ----------------------------------------------------------------
+# Einstellungen fuer RTF / Settings for RTF
+# ----------------------------------------------------------------
+
+#!rtf_monofont Courier New
+#!rtf_propfont Times New Roman
+
+# ----------------------------------------------------------------
+# Einstellungen fuer HTML und HTML-Help
+# Settings for HTML and HTML-Help
+# ----------------------------------------------------------------
+
+#!html_merge_nodes
+#!html_use_xlist
+#!no_images [html]
+
+# ----------------------------------------------------------------
+# ST-Guide-Kommandos / ST-Guide-Commands
+# ----------------------------------------------------------------
+
+!raw [stg] @options +z
+#!raw [stg] @default Main
+!raw [stg] @help Titel
+#!raw [stg] @indexon
+#!raw [stg] @width 75
+!ifdest [stg]
+!parwidth 75
+!endif
+
+# ----------------------------------------------------------------
+# Allgemeine Schalter / General switches
+# ----------------------------------------------------------------
+!use_justification	[asc]
+#!use_about_udo		[all]
+
+!use_nodes_inside_index [stg,win,wh4,html,pch,asc,ipf,hh,info]
+!use_label_inside_index [stg,win,wh4,html,pch,asc,ipf,hh,info]
+!use_alias_inside_index [stg,win,wh4,html,pch,asc,ipf,hh,info]
+!use_auto_toptocs [stg,win,wh4,html,pch,ipf,hh,info]
+
+#!use_short_toc [stg,win,wh4,html,pch,ipf,hh]
+#!no_toc_subsubnodes [stg,win,wh4,html,pch,ipf,hh]
+
+!use_auto_subtocs [stg,win,wh4,html,pch,ipf,hh,info]
+!use_auto_subsubtocs [stg,win,wh4,html,pch,ipf,hh,info]
+!use_auto_subsubsubtocs [stg,win,wh4,html,pch,ipf,hh,info]
+!sloppy
+
+#!no_toc_subsubnodes		[stg,win,wh4,pch,info,asc,ipf,hh,html]
+!no_effects				[asc]
+!no_numbers				[html,info]
+!no_umlaute				[info]
+
+!use_style_book [tex,asc,rtf,win,aqv,lyx]
+!sort_hyphen_file [asc,stg,pch]
+
+# ------------------------------------------------------
+# Spezielle Schalter / Special switches
+# ------------------------------------------------------
+!win_inline_bitmaps
+!win_high_compression
+#!html_merge_subsubnodes
+#!html_modern_layout
+#!html_switch_language english ../eng/udo.html
+
+# ----------------------------------------------------------------
+# Allgemeine Infos / General Infos
+# ----------------------------------------------------------------
+
+# !docinfo [author] www.udo-open-source.org
+# !docinfo [address] Asmecke 1
+# !docinfo [address] D-59846 Sundern
+# !docinfo [address] Deutschland
+# !docinfo [address] Internet: info@dirk-hagedorn.de
+# !docinfo [address] Mausnet: Dirk Hagedorn @ MK2
+!docinfo [webmastername] www.udo-open-source.org
+# !docinfo [webmasteremail] webmaster@udo-open-source.org
+!docinfo [webmasterurl] http://www.udo-open-source.org/
+# !docinfo [authorimage] (!IMAGES)dh
