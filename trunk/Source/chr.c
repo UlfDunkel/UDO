@@ -1982,6 +1982,15 @@ GLOBAL void c_vars ( char *s )
 			specials2ascii(s);
 			texvar2ascii(s);
 			break;
+		case TOKPS:
+			qreplace_all(s, "(!copyright)", 12, COPY_S, COPY_S_LEN);
+			qreplace_all(s, "(!grin)", 7, ";-\\)", 4);
+			qreplace_all(s, "(!laugh)", 8, ":-\\)", 4);
+			qreplace_all(s, "(!alpha)", 8, ALPHA_S, ALPHA_S_LEN);
+			qreplace_all(s, "(!beta)", 7, BETA_S, BETA_S_LEN);
+			specials2ascii(s);
+			texvar2ascii(s);
+			break;
 		case TOASC:
 		case TODRC:
 		case TOMAN:
@@ -2251,8 +2260,9 @@ GLOBAL void auto_quote_chars ( char *s, BOOLEAN all )
 {
 	register int i,	tabidx;
 	char *ptr, *oldptr;
-	char *ptr_quoted, s_temp[32];
-	char s_char[2]={0,0};
+	const char *ptr_quoted;
+	char s_temp[32];
+	char s_char[2];
 	BOOLEAN aqc_verb;
 	BOOLEAN	found= FALSE;
 	size_t	cmplen, sl_verb_on, sl_verb_off;
@@ -2377,7 +2387,7 @@ GLOBAL void auto_quote_chars ( char *s, BOOLEAN all )
 
 	ptr_quoted= NULL;
 	s_temp[0]=EOS;
-	s_char[0]= EOS;
+	s_char[1]= EOS;
 	aqc_verb= last_aqc_verb;	/* Pl13: vorher = TRUE */
 
 	sl_verb_on= CMD_STYLELEN;
@@ -2469,8 +2479,7 @@ GLOBAL void auto_quote_chars ( char *s, BOOLEAN all )
 					ptr++;
 				}
 				else
-				{	/* Optimierung: Position weitersetzen und Rest ueberspringen */
-					ptr--;
+				{	/* Optimierung: Rest ueberspringen */
 					goto NO_QUOTE_NEEDED;
 				}
 			}
@@ -2594,17 +2603,17 @@ GLOBAL void auto_quote_chars ( char *s, BOOLEAN all )
 						ptr_quoted= s_temp;
 					}
 				}
-#if 0
+#if 1
 				else
 				{
-#define	MAXPS7BIT	3
-LOCAL /*const*/ QUOTEINFO ps7bit[MAXPS7BIT]=
-{
-	{	'(',		"\\("	},
-	{	')',		"\\)"	},
-	{	'\\',		"\\\\"	}
-};
-					for (i=0; i<MAXPS7BIT; i++)
+					LOCAL QUOTEINFO const ps7bit[]=
+					{
+						{	'(',		"\\("	},
+						{	')',		"\\)"	},
+						{	'\\',		"\\\\"	}
+					};
+					
+					for (i=0; i<sizeof(ps7bit)/sizeof(ps7bit[0]); i++)
 					{	if ( ( ptr[0])==ps7bit[i].c)
 						{	ptr_quoted= ps7bit[i].quoted;
 							found= TRUE;
@@ -2743,11 +2752,11 @@ LOCAL /*const*/ QUOTEINFO ps7bit[MAXPS7BIT]=
 		}
 
 		if (ptr_quoted!=NULL && ptr_quoted[0]!=EOS)
-		{	s_char[0]= ptr[0];
-			replace_once(ptr, s_char, ptr_quoted);
+		{
+			s_char[0]= ptr[0];
 			cmplen= strlen(ptr_quoted);
+			qreplace_once(ptr, s_char, 1, ptr_quoted, cmplen);
 			ptr= ptr + cmplen - 1;
-			s_char[0]= EOS;
 			s_temp[0]= EOS;
 			ptr_quoted= NULL;
 		}
