@@ -4,4 +4,9 @@
 !item New: New command !/win_monofont to set the fontname
 used for monospaced text (like !/rtf_monofont).
 
+!index !/win_propfont_size
+!index !/win_monofont_size
+!item New: New commands !/win_propfont_size and !/win_monofont_size
+to change base font size.
+
 !end_itemize
