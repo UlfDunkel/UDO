@@ -1,5 +1,5 @@
 # doc/manual/source/running_cmdline.ui
-# letzte Änderungen: 21.12.2003 / last changes: Dec 21, 2003
+# letzte Änderungen: 26.12.2003 / last changes: Dec 26, 2003
 
 
 ################################################################################
@@ -357,10 +357,8 @@ keine Datei mit Trennvorschlägen angelegt.
 !subsubheading Umgebungsvariablen
 !begin_xlist [UDOINPUTPATH]
 
-# ToDo: wozu UDO.INI ??
-
 !item [HOME] Im Homeverzeichnis wird nach der Datei (!V)udo.ini(!v) gesucht,
-falls (!B)UDOPATH(!b) nicht existiert.
+falls (!B)UDOPATH(!b) nicht existiert ((!V)udo.ini(!v) betrifft nur die Atari-GEM-Version von UDO).
 
 !item [LANG] Legt die zu benutzende Landessprache für Fehlermeldungen
 fest, wenn weder (!B)LC_ALL(!b) noch (!B)LC_MESSAGES(!b) existiert.
@@ -389,8 +387,8 @@ mit dem Befehl (!KW [input]) eingebunden werden.
 !begin_xlist [UDOINPUTPATH]
 
 !item [HOME]
-		UDO looks for the file (!V)udo.ini(!v) in your home directory if
-		(!B)UDOPATH(!b) doesn't exist.
+UDO looks for the file (!V)udo.ini(!v) in your home directory if
+(!B)UDOPATH(!b) doesn't exist ((!V)udo.ini(!v) is only relevant for the Atari-GEM version of UDO).
 
 !item [LANG]
 		Sets the language UDO shall use for error messages if neither
