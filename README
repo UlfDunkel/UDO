@@ -1,13 +1,2 @@
-This archive contains the original source code and documentation of UDO.
-
-Version information: Release 6 Patchlevel 14, 2001, October 27
-
-It's most likely that this version of UDO and its documentation isn't
-up to date anymore.
-
-Please visit http://www.udo-open-source.de to download the latest
-version of UDO and its documentation or to help developing UDO.
-
-Dirk Hagedorn
-udo@dirk-hagedorn.de
-http://www.dirk-hagedorn.de
+This is a debugging version of UDO 6.2.
+Much debuginformation might be given.
