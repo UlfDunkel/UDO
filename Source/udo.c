@@ -3939,9 +3939,9 @@ LOCAL void c_include_preformatted ( void )
 				break;
 			case PASSU:
 				pflag[PASSU].env= ENV_PREFORMATTED;
-				outln("!begin_verbatim");
+				outln("!begin_preformatted");
 				passU(name);
-				outln("!end_verbatim");
+				outln("!end_preformatted");
 				pflag[PASSU].env= ENV_NONE;
 				break;
 		}
