@@ -29,9 +29,9 @@
 /* define or undefine this symbol, to get or don't get a stat of malloc/free calls */
 #define UM_DEBUG_SHOW_STATS
 #ifdef __LINUX__
-#define UM_PRINTF_USE_L
+#define UM_PRINTF_USE_LD
 #else
-#undef UM_PRINTF_USE_L
+#undef UM_PRINTF_USE_LD
 #endif
 /*
  * Declarations for vars that keep memory management information
