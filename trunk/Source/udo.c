@@ -3482,7 +3482,8 @@ GLOBAL void c_toplink ( void )
 	{
 		case TOHTM:
 		case TOMHH:
-			voutlnf("<p><a href=\"#\"><img src=\"%s\" border=0 width=32 height=32></a></p>", GIF_TP_NAME);
+                        /* set width and height =24 to fix bug #0000005 [voja] */
+			voutlnf("<p><a href=\"#\"><img src=\"%s\" border=0 width=24 height=24></a></p>", GIF_TP_NAME);
 			break;
 	}
 
