@@ -1698,8 +1698,11 @@ GLOBAL void c_divis ( char *s )
 		/* New in r6pl15 [NHz] */
 
 		case TOHTM:
-
-			qreplace_all(s, "!-", 2, "&shy;", 5);
+			/* Changed in r6pl16 [NHz] */
+			if(html_default_hyphenation == TRUE)
+				qreplace_all(s, "!-", 2, "&shy;", 5);
+			else
+				qdelete_all(s, "!-", 2);
 			break;
 		default:
 			qdelete_all(s, "!-", 2);
