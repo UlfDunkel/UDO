@@ -5,22 +5,23 @@
 #
 # Build RPMs with: rpm -ba udo.spec
 #
-# Query example: rpm -q -l -p udo-6.2.0-1.i386.rpm
+# Query example: rpm -q -l -p udo-6.2.1-1.i386.rpm
 #
 # These things have to be fixed for a new RPM:
-# - Release: increase by 1, if now new upstream version is packaged,
+# - Release: increase by 1, if no new upstream version is packaged,
 #            else set it back to 1
 # - Version: change if upstream version has changed
 # - Source : change if new upstream version is packaged
-# - Build-Skript needs to be changed, if archive name changes
 #
 Summary: Universal DOcument (UDO) - text processing utility
 Name: udo
-Version: 6.2.0
-Release: 3
+Version: 6.4.0
+Release: 1
 Copyright: GPL
-Group: Applications/Text
-Source: http://www.udo-open-source.org/download/sources/udo_6.2.0_src.tar.gz
+Group: Productivity/Publishing/UDO
+Prefix: %{_prefix}
+BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
+Source: http://www.udo-open-source.org/download/sources/udo_%{version}_src.tar.gz
 URL: http://www.udo-open-source.org/
 Vendor: UDO - Open Source
 Packager: Volker Janzen <webmaster@udo-open-source.org>
@@ -32,23 +33,34 @@ be converted to ASCII, HTML, LaTeX, nroff, PostScript, RTF and many more.
 Though UDO is powerful, it's quite easy to understand and to use.
 
 %prep
-rm -rf $RPM_BUILD_DIR/udo_6.2.0
-tar xzf $RPM_SOURCE_DIR/udo_6.2.0_src.tar.gz
+%setup -q -n udo_%{version}
 
 %build
-make -C udo_6.2.0/Source -f Makefile.linux
-chmod 755 udo_6.2.0/Source/udo
-mkdir -p /usr/local/man/man1
-$RPM_BUILD_DIR/udo_6.2.0/Source/udo --nroff -q -o /usr/local/man/man1/udo.1 $RPM_BUILD_DIR/udo_6.2.0/Guide/eng/manual/manpage.u
-gzip -9 /usr/local/man/man1/udo.1
+cd Source
+make -f Makefile.linux
+cd ../doc/manpage/
+../../Source/udo --nroff -q -o udo.1 manpage.u
+gzip -9 udo.1
 
 %install
-strip udo_6.2.0/Source/udo
-cp udo_6.2.0/Source/udo /usr/local/bin
-mkdir -p /usr/share/doc/udo
-cp $RPM_BUILD_DIR/udo_6.2.0/README /usr/share/doc/udo
+cd Source
+rm -rf "$RPM_BUILD_ROOT"
+mkdir -p $RPM_BUILD_ROOT%{_mandir}/man1
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+mkdir -p $RPM_BUILD_ROOT%{_docdir}/udo-%{version}
+install -m 644 ../doc/manpage/udo.1.gz $RPM_BUILD_ROOT%{_mandir}/man1
+install -m 644 ../README $RPM_BUILD_ROOT%{_docdir}/udo-%{version}
+install -m 755 udo $RPM_BUILD_ROOT%{_bindir}
+strip $RPM_BUILD_ROOT%{_bindir}/udo
 
 %files
-%doc /usr/share/doc/udo/README
-/usr/local/bin/udo
-/usr/local/man/man1/udo.1.gz
+%defattr(-,root,root)
+%doc README
+%{_bindir}/*
+%{_mandir}/man1/*
+
+%changelog
+* Sat Dec 27 2003 Martin Tarenskeen <m.tarenskeen@zonnet.nl>
+- revised specfile
+* Wed Jan 07 2004 Volker Janzen <webmaster@udo-open-source.org>
+- new manpage is used now
