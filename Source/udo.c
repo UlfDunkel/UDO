@@ -5339,6 +5339,12 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 			out("(");
 
 			break;
+		case TOOO:
+			if (!inside_env && !inside_right && !inside_center)
+			{
+				out("<text:p>");
+			}
+			break;
 		default:
 			to_check_quote_indent(&umbruch);
 			break;
@@ -6003,6 +6009,12 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 			/* Changed in r6pl15 [NHz] */
 				outln("newline");
 /*				outln("newline newline");*/
+				break;
+			case TOOO:	/* r6-3-xmas */
+				if (!inside_env && !inside_right && !inside_center)
+				{
+					outln("</text:p>");
+				}
 				break;
 			default:
 				outln("");

@@ -4437,6 +4437,12 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 								:	voutlnf("<s1>%s", name);
 			output_aliasses();
 			break;
+		case TOOO:	/* r6-3-xmas */
+			set_inside_node1(); /* Was tut das? */
+			outln("<text:h text:level=\"1\">");
+			voutlnf("%s", name);
+			outln("</text:h>");
+			break;
 	}
 
 	about_unregistered();
@@ -4899,6 +4905,12 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 								:	voutlnf("<s2>%s", name);
 			output_aliasses();
 			break;
+		case TOOO:	/* r6-3-xmas */
+			set_inside_node2();
+			outln("<text:h text:level=\"2\">");
+			voutlnf("%s", name);
+			outln("</text:h>");
+			break;
 	}
 
 	about_unregistered();
@@ -5358,6 +5370,12 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 								:	voutlnf("<s3>%s", name);
 			output_aliasses();
 			break;
+		case TOOO:	/* r6-3-xmas */
+			set_inside_node3();
+			outln("<text:h text:level=\"3\">");
+			voutlnf("%s", name);
+			outln("</text:h>");
+			break;
 	}
 
 	about_unregistered();
@@ -5810,6 +5828,12 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			(use_style_book)	?	voutlnf("<s3>%s", name)
 								:	voutlnf("<s4>%s", name);
 			output_aliasses();
+			break;
+		case TOOO:	/* r6-3-xmas */
+			set_inside_node4();
+			outln("<text:h text:level=\"4\">");
+			voutlnf("%s", name);
+			outln("</text:h>");
 			break;
 	}
 
