@@ -869,7 +869,8 @@ GLOBAL void c_end_quote ( void )
 	{
 		case TOTEX:
 		case TOPDL:
-			outln("\\end{quote}\n");
+			outln("\\end{quote}");
+			outln("");
 			break;
 		case TOLYX:	/* <???> */
 			break;
@@ -963,7 +964,8 @@ GLOBAL void c_end_center ( void )
 	{
 		case TOTEX:
 		case TOPDL:
-			outln("\\end{center}\n");
+			outln("\\end{center}");
+			outln("");
 			break;
 		case TOIPF:
 			outln(":elines.");	/* r6pl7*/
@@ -1012,7 +1014,8 @@ GLOBAL void c_begin_flushright ( void )
 		case TOLYX:	/* <???> */
 			break;
 		case TOINF:
-			outln("@flushright\n");
+			outln("@flushright");
+			outln("");
 			break;
 		case TOIPF:
 			outln(":lines align=right.");	/* r6pl7*/
@@ -1042,12 +1045,14 @@ GLOBAL void c_end_flushright ( void )
 	{
 		case TOTEX:
 		case TOPDL:
-			outln("\\end{flushright}\n");
+			outln("\\end{flushright}");
+			outln("");
 			break;
 		case TOLYX:	/* <???> */
 			break;
 		case TOINF:
-			outln("@end flushright\n");
+			outln("@end flushright");
+			outln("");
 			break;
 		case TOIPF:
 			outln(":elines.");	/* r6pl7*/
@@ -1093,7 +1098,8 @@ GLOBAL void c_begin_flushleft ( void )
 		case TOLYX:	/* <???> */
 			break;
 		case TOINF:
-			outln("@flushleft\n");
+			outln("@flushleft");
+			outln("");
 			break;
 		case TOIPF:
 			outln(":lines align=left.");	/* r6pl7*/
@@ -1123,12 +1129,14 @@ GLOBAL void c_end_flushleft ( void )
 	{
 		case TOTEX:
 		case TOPDL:
-			outln("\\end{flushleft}\n");
+			outln("\\end{flushleft}");
+			outln("");
 			break;
 		case TOLYX:	/* <???> */
 			break;
 		case TOINF:
-			outln("@end flushleft\n");
+			outln("@end flushleft");
+			outln("");
 			break;
 		case TOIPF:
 			outln(":elines.");	/* r6pl7*/
@@ -1686,16 +1694,20 @@ GLOBAL void c_item ( void )
 			token[0][0]= EOS;
 			switch(iEnvType[iEnvLevel])
 			{	case ENV_ITEM:
-					outln("\\layout Itemize\n");
+					outln("\\layout Itemize");
+					outln("");
 					break;
 				case ENV_ENUM:
-					outln("\\layout Enumerate\n");
+					outln("\\layout Enumerate");
+					outln("");
 					break;
 				case ENV_DESC:
-					outln("\\layout Description\n");
+					outln("\\layout Description");
+					outln("");
 					break;
 				case ENV_LIST:
-					outln("\\layout List\n");
+					outln("\\layout List");
+					outln("");
 					break;
 			}
 			
@@ -2370,10 +2382,10 @@ LOCAL void c_end_list ( int listkind )
 		case TOTEX:
 		case TOPDL:
 			switch(listkind)
-			{	case LIST_BOLD:			outln("\\end{blist}\n");	break;
-				case LIST_ITALIC:		outln("\\end{ilist}\n");	break;
-				case LIST_TYPEWRITER:	outln("\\end{tlist}\n");	break;
-				default:				outln("\\end{xlist}\n");	break;
+			{	case LIST_BOLD:			outln("\\end{blist}");	outln(""); break;
+				case LIST_ITALIC:		outln("\\end{ilist}");	outln(""); break;
+				case LIST_TYPEWRITER:	outln("\\end{tlist}");	outln(""); break;
+				default:				outln("\\end{xlist}");	outln(""); break;
 			}
 			break;
 		case TOLYX:
@@ -2446,7 +2458,8 @@ GLOBAL void c_end_description ( void )
 	{
 		case TOTEX:
 		case TOPDL:
-			outln("\\end{description}\n");
+			outln("\\end{description}");
+			outln("");
 			break;
 		case TOLYX:
 			if (iEnvLevel>0)
@@ -2505,7 +2518,8 @@ GLOBAL void c_end_enumerate ( void )
 	{
 		case TOTEX:
 		case TOPDL:
-			outln("\\end{enumerate}\n");
+			outln("\\end{enumerate}");
+			outln("");
 			break;
 		case TOLYX:
 			if (iEnvLevel>0)
@@ -2513,11 +2527,13 @@ GLOBAL void c_end_enumerate ( void )
 			}
 			break;
 		case TOINF:
-			outln("@end enumerate\n");
+			outln("@end enumerate");
+			outln("");
 			break;
 		case TOHTM:
 		case TOMHH:
-			outln("</li>\n</ol>");	/* r6pl6: Mit </li> */
+			outln("</li>");	/* r6pl6: Mit </li> */
+			outln("</ol>");
 			break;
 		case TOHPH:
 			outln("<\\list>");
@@ -2569,7 +2585,8 @@ GLOBAL void c_end_itemize ( void )
 	{
 		case TOTEX:
 		case TOPDL:
-			outln("\\end{itemize}\n");
+			outln("\\end{itemize}");
+			outln("");
 			break;
 		case TOLYX:
 			if (iEnvLevel>0)
@@ -2577,11 +2594,13 @@ GLOBAL void c_end_itemize ( void )
 			}
 			break;
 		case TOINF:
-			outln("@end itemize\n");
+			outln("@end itemize");
+			outln("");
 			break;
 		case TOHTM:
 		case TOMHH:
-			outln("</li>\n</ul>");	/* r6pl6: mit </li> */
+			outln("</li>");	/* r6pl6: mit </li> */
+			outln("</ul>");
 			break;
 		case TOHPH:
 			outln("<\\list>");
@@ -2612,6 +2631,39 @@ GLOBAL void c_end_itemize ( void )
 
 
 
+LOCAL void output_tex_environments(void)
+{
+	outln("");
+	outln("\\begin{document}");
+	outln("");
+	outln("\\newenvironment{xlist}[1]{\\begin{list}{}{\\settowidth{\\labelwidth}{#1}");
+	outln("  \\setlength{\\leftmargin}{\\labelwidth} \\addtolength{\\leftmargin}{\\labelsep}");
+	outln("  \\setlength{\\parsep}{0.5ex plus0.2ex minus0.2ex}");
+	outln("  \\setlength{\\itemsep}{0.3ex}");
+	outln("  \\renewcommand{\\makelabel}[1]{##1\\hfill}}}{\\end{list}}");
+	outln("");
+	outln("\\newenvironment{blist}[1]{\\begin{list}{}{\\settowidth{\\labelwidth}{{\\bf #1}}");
+	outln("  \\setlength{\\leftmargin}{\\labelwidth} \\addtolength{\\leftmargin}{\\labelsep}");
+	outln("  \\setlength{\\parsep}{0.5ex plus0.2ex minus0.2ex}");
+	outln("  \\setlength{\\itemsep}{0.3ex}");
+	outln("  \\renewcommand{\\makelabel}[1]{{\\bf ##1}\\hfill}}}{\\end{list}}");
+	outln("");
+	outln("\\newenvironment{ilist}[1]{\\begin{list}{}{\\settowidth{\\labelwidth}{{\\it #1}}");
+	outln("  \\setlength{\\leftmargin}{\\labelwidth} \\addtolength{\\leftmargin}{\\labelsep}");
+	outln("  \\setlength{\\parsep}{0.5ex plus0.2ex minus0.2ex}");
+	outln("  \\setlength{\\itemsep}{0.3ex}");
+	outln("  \\renewcommand{\\makelabel}[1]{{\\it ##1}\\hfill}}}{\\end{list}}");
+	outln("");
+	outln("\\newenvironment{tlist}[1]{\\begin{list}{}{\\settowidth{\\labelwidth}{{\\tt #1}}");
+	outln("  \\setlength{\\leftmargin}{\\labelwidth} \\addtolength{\\leftmargin}{\\labelsep}");
+	outln("  \\setlength{\\parsep}{0.5ex plus0.2ex minus0.2ex}");
+	outln("  \\setlength{\\itemsep}{0.3ex}");
+	outln("  \\renewcommand{\\makelabel}[1]{{\\tt ##1}\\hfill}}}{\\end{list}}");
+	outln("");
+	outln("");
+}
+
+
 /*	############################################################
 	# begin/end_document
 	############################################################	*/
@@ -2636,31 +2688,11 @@ GLOBAL void c_begin_document ( void )
 				if (titdat.title!=NULL)		voutlnf("\ttitle {%s}", titdat.title);
 				if (titdat.program!=NULL)	voutlnf("\tsubject {%s}", titdat.program);
 			}
-			/* Durchfall */
+			output_tex_environments();
+			break;
 
 		case TOTEX:
-			outln("\n\\begin{document}\n");
-			outln("\\newenvironment{xlist}[1]{\\begin{list}{}{\\settowidth{\\labelwidth}{#1}");
-			outln("  \\setlength{\\leftmargin}{\\labelwidth} \\addtolength{\\leftmargin}{\\labelsep}");
-			outln("  \\setlength{\\parsep}{0.5ex plus0.2ex minus0.2ex}");
-			outln("  \\setlength{\\itemsep}{0.3ex}");
-			outln("  \\renewcommand{\\makelabel}[1]{##1\\hfill}}}{\\end{list}}\n");
-			outln("\\newenvironment{blist}[1]{\\begin{list}{}{\\settowidth{\\labelwidth}{{\\bf #1}}");
-			outln("  \\setlength{\\leftmargin}{\\labelwidth} \\addtolength{\\leftmargin}{\\labelsep}");
-			outln("  \\setlength{\\parsep}{0.5ex plus0.2ex minus0.2ex}");
-			outln("  \\setlength{\\itemsep}{0.3ex}");
-			outln("  \\renewcommand{\\makelabel}[1]{{\\bf ##1}\\hfill}}}{\\end{list}}\n");
-			outln("\\newenvironment{ilist}[1]{\\begin{list}{}{\\settowidth{\\labelwidth}{{\\it #1}}");
-			outln("  \\setlength{\\leftmargin}{\\labelwidth} \\addtolength{\\leftmargin}{\\labelsep}");
-			outln("  \\setlength{\\parsep}{0.5ex plus0.2ex minus0.2ex}");
-			outln("  \\setlength{\\itemsep}{0.3ex}");
-			outln("  \\renewcommand{\\makelabel}[1]{{\\it ##1}\\hfill}}}{\\end{list}}\n");
-			outln("\\newenvironment{tlist}[1]{\\begin{list}{}{\\settowidth{\\labelwidth}{{\\tt #1}}");
-			outln("  \\setlength{\\leftmargin}{\\labelwidth} \\addtolength{\\leftmargin}{\\labelsep}");
-			outln("  \\setlength{\\parsep}{0.5ex plus0.2ex minus0.2ex}");
-			outln("  \\setlength{\\itemsep}{0.3ex}");
-			outln("  \\renewcommand{\\makelabel}[1]{{\\tt ##1}\\hfill}}}{\\end{list}}\n");
-			outln("");
+			output_tex_environments();
 			break;
 		case TOLYX:	/* <???> */
 			break;
@@ -2910,12 +2942,15 @@ GLOBAL void c_begin_document ( void )
 			break;
 
 		case TOLDS:
-			outln("<!doctype linuxdoc system>\n");
+			outln("<!doctype linuxdoc system>");
+			outln("");
 			if (use_style_book)
-			{	outln("<book>\n");
+			{	outln("<book>");
+				outln("");
 			}
 			else
-			{	outln("<article>\n");
+			{	outln("<article>");
+				outln("");
 			}
 
 			if ( titleprogram[0]!=EOS )
@@ -3014,7 +3049,8 @@ GLOBAL void c_end_document ( void )
 		{	
 			case TOTEX:
 			case TOPDL:
-				outln("\\end{appendix}\n");
+				outln("\\end{appendix}");
+				outln("");
 				break;
 			case TOLYX:	/* <???> */
 				break;
@@ -3033,7 +3069,8 @@ GLOBAL void c_end_document ( void )
 	{
 		case TOTEX:
 		case TOPDL:
-			outln("\\end{document}\n");
+			outln("\\end{document}");
+			outln("");
 			break;
 		case TOLYX:	/* <???> */
 			break;
@@ -3057,7 +3094,8 @@ GLOBAL void c_end_document ( void )
 		case TOWIN:
 		case TOWH4:
 		case TOAQV:
-			outln("}\n");
+			outln("}");
+			outln("");
 			break;
 		case TOHTM:
 		case TOMHH:
@@ -3067,10 +3105,12 @@ GLOBAL void c_end_document ( void )
 			break;
 		case TOLDS:
 			if (use_style_book)
-			{	outln("</book>\n");
+			{	outln("</book>");
+				outln("");
 			}
 			else
-			{	outln("</article>\n");
+			{	outln("</article>");
+				outln("");
 			}
 			break;
 		case TOHPH:
