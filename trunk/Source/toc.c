@@ -1970,8 +1970,11 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 	{	outln("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=iso-8859-1\">");
 	}
 
-/* New in r6pl16 [NHz] */
-LOCAL void toc_link_output ( const int depth );
+	/* New in r6pl16 [NHz] */
+	voutlnf("<meta http-equiv=\"Content-Language\" content=\"%s\">", lang.html_lang);
+	outln("<meta http-equiv=\"Content-Style-Type\" content=\"text/css\">");
+	outln("<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\">");
+
 	voutlnf("<meta name=\"Generator\" content=\"UDO%s PL%s for %s\">",
 			UDO_REL,
 			UDO_PL,
@@ -2189,7 +2192,32 @@ LOCAL void toc_link_output ( const int depth );
 
 LOCAL void output_html_doctype ( void )
 {
-	outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 3.2//EN\">");
+	/* Changed in r6pl16 [NHz] */
+	switch(html_doctype)
+	{
+		case HTML_OLD:
+			outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 3.2//EN\">");
+			break;
+		case HTML_STRICT:
+			outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"");
+		 	outln("        \"http://www.w3.org/TR/html4/strict.dtd\">");
+			break;
+		case HTML_TRANS:
+			outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"");
+		 	outln("        \"http://www.w3.org/TR/html4/loose.dtd\">");
+			break;
+		case XHTML_STRICT:
+			outln("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>");
+			outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"");
+		 	outln("        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
+			break;
+		case XHTML_TRANS:
+			outln("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>");
+			outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"");
+		 	outln("        \"http://www.w3.org/TR/xhtml1/DTD/xhtm1-transitional.dtd\">");
+			break;
+	}
+		
 	voutlnf("<!-- last modified on %s -->", lang.short_today);
 		
 }	/* output_html_doctype */
@@ -2198,7 +2226,7 @@ LOCAL void output_html_doctype ( void )
 
 LOCAL BOOLEAN html_new_file ( void )
 {
-	char t[512];
+	char t[512], xml_lang[15];
 
 	if (outfile.file==stdout && !bTestmode)
 	{	return TRUE;
@@ -2226,7 +2254,9 @@ LOCAL BOOLEAN html_new_file ( void )
 	/* Header anlegen, Aktueller Node ist bekannt */
 	
 	/* Changed in r6pl16 [NHz] */
-	voutlnf("<html lang=\"%s\">", lang.html_lang);
+	if(html_doctype >= XHTML_STRICT)
+		sprintf(xml_lang, " xml:lang=\"%s\"", lang.html_lang);
+	voutlnf("<html lang=\"%s\"%s>", lang.html_lang, xml_lang);
 /*	outln("<html>");*/
 	outln("<head>");
 	outln("<title>");
@@ -2302,10 +2332,13 @@ LOCAL BOOLEAN html_new_file ( void )
 GLOBAL void output_html_header ( const char *t )
 {
 	/* Wird nur fuer die Titelseite/Inhaltsverzeichnis benutzt */
+	char xml_lang[15];
 	
 	output_html_doctype();	/* r6pl2 */
 	/* Changed in r6pl16 [NHz] */
-	voutlnf("<html lang=\"%s\">", lang.html_lang);
+	if(html_doctype >= XHTML_STRICT)
+		sprintf(xml_lang, " xml:lang=\"%s\"", lang.html_lang);
+	voutlnf("<html lang=\"%s\"%s>", lang.html_lang, xml_lang);
 /*	outln("<html>");*/
 	outln("<head>");
 	outln("<title>");
@@ -3110,8 +3143,21 @@ GLOBAL void html_save_frameset ( void )
 {
 	char add[1024], add2[128], s[512], f1[512], f2[512];
 
-	output_html_doctype();
-	outln("<html>");
+	/* New in r6pl16 [NHz] */
+	if(html_doctype >= XHTML_STRICT)
+	{
+		outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Frameset//EN\"");
+ 		outln("        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd\">");
+		voutlnf("<html lang=\"%s\" xml:lang=\"%s\">", lang.html_lang, lang.html_lang");
+	}
+	else
+	{
+		outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\"");
+ 		outln("        \"http://www.w3.org/TR/html4/frameset.dtd\">");
+		voutlnf("<html lang=\"%s\">", lang.html_lang);
+	}
+/*	output_html_doctype();
+	outln("<html>");*/
 	outln("<head>");
 	output_html_meta(TRUE);
 	if (titdat.htmltitle!=NULL && titdat.htmltitle[0]!=EOS)
@@ -3123,15 +3169,15 @@ GLOBAL void html_save_frameset ( void )
 	outln("</head>");
 
 	add[0]= EOS;
-	if (html_frames_noborder)	strcat(add, " border=0 frameborder=0 framespacing=0");
+	if (html_frames_noborder)	strcat(add, " border=\"0\" frameborder=\"0\" framespacing=\"0\"");
 
 	add2[0]= EOS;
 	if (html_frames_noresize)	strcat(add2, " noresize");
-	if (html_frames_noscroll)	strcat(add2, " scrolling=no");
-	sprintf(f1, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=0 marginheight=0%s>",
+	if (html_frames_noscroll)	strcat(add2, " scrolling=\"no\"");
+	sprintf(f1, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\"%s>",
 			html_name_prefix, FRAME_FILE_TOC, outfile.suff, FRAME_NAME_TOC, add2);
 
-	sprintf(f2, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=0 marginheight=0>",
+	sprintf(f2, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\">",
 			html_name_prefix, FRAME_FILE_CON, outfile.suff, FRAME_NAME_CON);
 
 	switch (html_frames_position)
@@ -3215,7 +3261,7 @@ GLOBAL void html_save_frameset ( void )
 	{	sprintf(s, " vlink=\"%s\"", html_frames_vlinkcolor);
 		strcat(add, s);
 	}
-	voutlnf("<body%s>", add);
+	voutlnf("<body%s class=\"frame_toc\">", add); /* Changed in r6pl16 [NHz] */
 
 	outln(sHtmlPropfontStart);
 	html_node_bar_frames();
@@ -4146,10 +4192,10 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 				sprintf(n, "%s%s", numbers, name);
 				/* Changed in r6pl16 [NHz] */
 				/* Nodesize ist set on discrete value */
-				voutlnf("%d changeFontSize", iDocNode1fontSize);
+				voutlnf("%d changeFontSize", laydat.node1size);
 			}
 			node2postscript(name, KPS_NAMEDEST); /* Changed in r6pl16 [NHz] */
-			voutlnf("/NodeName (%s %s) def", lang.chapter, n); /* New in r6pl15 [NHz] */
+			voutlnf("/NodeName (%s %.*s) def", lang.chapter, (int)(75L-strlen(titdat.author)), n); /* Changed in r6pl16 [NHz] */
 			outln("newline");
 			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
 			outln("Bon");
@@ -4242,18 +4288,26 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 			{
 				if (numbers[0]==EOS)
 				{	if (invisible)
-					{	voutlnf("%s %s\\fs%d %s%s", rtf_plain, rtf_inv_node1, iDocPropfontSize + 14, name, rtf_parpard);
+					{	/* Changed in r6pl16 [NHz] */
+						/* Nodesize ist set on discrete value */
+						voutlnf("%s %s\\fs%d %s%s", rtf_plain, rtf_inv_node1, laydat.node1size, name, rtf_parpard);
 					}
 					else
-					{	voutlnf("%s %s\\fs%d %s%s", rtf_plain, rtf_node1, iDocPropfontSize + 14, name, rtf_parpard);
+					{	/* Changed in r6pl16 [NHz] */
+						/* Nodesize ist set on discrete value */
+						voutlnf("%s %s\\fs%d %s%s", rtf_plain, rtf_node1, laydat.node1size, name, rtf_parpard);
 					}
 				}
 				else
 				{	if (invisible)
-					{	voutlnf("%s %s\\fs%d %s  %s%s", rtf_plain, rtf_inv_node1, iDocPropfontSize + 14, numbers, name, rtf_parpard);
+					{	/* Changed in r6pl16 [NHz] */
+						/* Nodesize ist set on discrete value */
+						voutlnf("%s %s\\fs%d %s  %s%s", rtf_plain, rtf_inv_node1, laydat.node1size, numbers, name, rtf_parpard);
 					}
 					else
-					{	voutlnf("%s %s\\fs%d %s  %s%s", rtf_plain, rtf_node1, iDocPropfontSize + 14, numbers, name, rtf_parpard);
+					{	/* Changed in r6pl16 [NHz] */
+						/* Nodesize ist set on discrete value */
+						voutlnf("%s %s\\fs%d %s  %s%s", rtf_plain, rtf_node1, laydat.node1size, numbers, name, rtf_parpard);
 					}
 				}
 			}
@@ -4646,7 +4700,7 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 			{	if (numbers[0]!=EOS) strcat(numbers, " ");
 				sprintf(n, "%s%s", numbers, name);
 				/* Changed in r6pl16 [NHz] */
-				voutlnf("%d changeFontSize", iDocNode2fontSize);
+				voutlnf("%d changeFontSize", laydat.node2size);
 			}
 			outln("newline");
 			node2postscript(name, KPS_NAMEDEST); /* Changed in r6pl16 [NHz] */
@@ -4705,9 +4759,15 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 			else
 			{
 				if (invisible)
-					sprintf(n, "%s\\fs%d", rtf_inv_node2, iDocPropfontSize + 6);
+				{	/* Changed in r6pl16 [NHz] */
+					/* Nodesize ist set on discrete value */
+					sprintf(n, "%s\\fs%d", rtf_inv_node2, laydat.node2size);
+				}
 				else
-					sprintf(n, "%s\\fs%d", rtf_node2, iDocPropfontSize + 6);
+				{	/* Changed in r6pl16 [NHz] */
+					/* Nodesize ist set on discrete value */
+					sprintf(n, "%s\\fs%d", rtf_node2, laydat.node2size);
+				}
 			}
 
 			if (numbers[0]==EOS)
@@ -5096,7 +5156,7 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			{	if (numbers[0]!=EOS) strcat(numbers, " ");
 				sprintf(n, "%s%s", numbers, name);
 				/* Changed in r6pl16 [NHz] */
-				voutlnf("%d changeFontSize", iDocNode3fontSize);
+				voutlnf("%d changeFontSize", laydat.node3size);
 			}
 			outln("newline");
 			node2postscript(name, KPS_NAMEDEST); /* Changed in r6pl16 [NHz] */
@@ -5153,9 +5213,15 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			else
 			{
 				if (invisible)
-					sprintf(n, "%s\\fs%d", rtf_inv_node3, iDocPropfontSize);
+				{	/* Changed in r6pl16 [NHz] */
+					/* Nodesize ist set on discrete value */
+					sprintf(n, "%s\\fs%d", rtf_inv_node3, laydat.node3size);
+				}
 				else
-					sprintf(n, "%s\\fs%d", rtf_node3, iDocPropfontSize);
+				{	/* Changed in r6pl16 [NHz] */
+					/* Nodesize ist set on discrete value */
+					sprintf(n, "%s\\fs%d", rtf_node3, laydat.node3size);
+				}
 			}
 			if (numbers[0]==EOS)
 			{	voutlnf("%s %s %s%s", rtf_plain, n, name, rtf_parpard);
@@ -5548,7 +5614,7 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			{	if (numbers[0]!=EOS) strcat(numbers, " ");
 				sprintf(n, "%s%s", numbers, name);
 				/* Changed in r6pl16 [NHz] */
-				voutlnf("%d changeFontSize", iDocNode4fontSize);
+				voutlnf("%d changeFontSize", laydat.node4size);
 			}
 			node2postscript(name, KPS_NAMEDEST); /* Changed in r6pl16 [NHz] */
 			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
@@ -5600,9 +5666,15 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			else
 			{
 				if (invisible)
-					sprintf(n, "%s\\fs%d", rtf_inv_node4, iDocPropfontSize);
+				{	/* Changed in r6pl16 [NHz] */
+					/* Nodesize ist set on discrete value */
+					sprintf(n, "%s\\fs%d", rtf_inv_node4, laydat.node4size);
+				}
 				else
-					sprintf(n, "%s\\fs%d", rtf_node4, iDocPropfontSize);
+				{	/* Changed in r6pl16 [NHz] */
+					/* Nodesize ist set on discrete value */
+					sprintf(n, "%s\\fs%d", rtf_node4, laydat.node4size);
+				}
 			}
 
 			if (numbers[0]==EOS)
@@ -8045,6 +8117,11 @@ GLOBAL void c_listoffigures ( void )
 			outln("\\begin_inset LatexDel \\listoffigures");
 			outln("\\end_inset");
 			break;
+		/* New in r6pl16 [NHz] */
+		case TORTF:
+			voutlnf("\\page\n%s\\fs36 %s\\par\\par", rtf_node1, lang.listfigure);
+			voutlnf("{\\field\\fldedit{\\*\\fldinst { TOC \\\\c \"%s\" }}{\\fldrslt %s not actual}}", lang.listfigure, lang.listfigure);
+			break;
 	}
 }	/* c_listoffigures */
 
@@ -8422,6 +8499,15 @@ GLOBAL void c_tableofcontents ( void )
 		case TOLDS:
 			output_helpid(0);
 			outln("<toc>");
+			break;
+
+		/* New in r6pl16 [NHz] */
+		case TORTF:
+			voutlnf("\\plain\\s4\\ql\\b\\f0\\li567\\fi-567\\fs%d", laydat.node1size);
+			voutlnf("%s", lang.contents);
+			voutlnf("\\par\\pard\\par\\pard \\plain \\s1\\qj\\f0\\fs%d", iDocPropfontSize);
+			outln("{\\field{\\*\\fldinst {TOC \\\\t \"Node1;1;Node2;2;Node3;3;Node4;4\" }}{\\fldrslt {Please refresh!}}}");
+			outln("\\page");
 			break;
 	}
 	
@@ -8913,6 +8999,36 @@ GLOBAL void set_mapping ( void )
 	}
 
 }	/* set_mapping */
+
+
+/* New in r6pl16 [NHz] */
+GLOBAL void set_html_doctype ( void )
+{
+	char s[512];
+
+	tokcpy2(s);
+
+	if (strcmp(s, "Old")==0)
+	{	html_doctype= HTML_OLD;
+	}
+
+	if (strcmp(s, "Strict")==0)
+	{	html_doctype= HTML_STRICT;
+	}
+
+	if (strcmp(s, "Transitional")==0)
+	{	html_doctype= HTML_TRANS;
+	}
+
+	if (strcmp(s, "XHTML Strict")==0)
+	{	html_doctype= XHTML_STRICT;
+	}
+
+	if (strcmp(s, "XHTML Transitional")==0)
+	{	html_doctype= XHTML_TRANS;
+	}
+
+}	/* set_html_doctype */
 
 
 GLOBAL void set_html_frames_layout ( void )
