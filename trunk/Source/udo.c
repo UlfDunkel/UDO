@@ -11048,9 +11048,9 @@ LOCAL void exit_modules ( void )
 {
 	cursor_working();
 
-	exit_module_toc();
-	exit_module_par();
-	exit_module_tp();
+	exit_module_toc(); /* 6.3.19[vj] for speedup there isn't done um_free, um_exit will do this */
+	exit_module_par(); /* 6.3.19[vj] for speedup there isn't done um_free, um_exit will do this */
+	exit_module_tp();  /* 6.3.19[vj] Needs to be checked, if um_exit can do a faster cleanup here */
 
 	cursor_active();
 

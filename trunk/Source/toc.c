@@ -12172,7 +12172,14 @@ LOCAL void free_toc_data ( char **var )
 
 GLOBAL void exit_module_toc ( void )
 {
-	register int i;
+	/*
+        r6.3.19[vj]: Der folgende Code wurde auskommentiert, um zu überprüfen,
+        ob sich hieraus ein Geschwindigkeitsvorteil erlangen läßt. Wird der
+        Speicher hier nicht freigegeben, wird das später um_exit tun,
+        das die Speicherbereiche viel effizienter freigeben kann.
+        Bitte nicht löschen, da er später vielleicht wieder rein kommt!
+
+        register int i;
 
 	for (i=MAXTOCS-1; i>=0; i--)
 	{
@@ -12199,7 +12206,7 @@ GLOBAL void exit_module_toc ( void )
 		{
 			um_free(lab[i]);
 		}
-	}
+	}*/
 
 }	/* exit_module_toc */
 
