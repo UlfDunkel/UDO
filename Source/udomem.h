@@ -28,6 +28,12 @@
 #undef UM_DEBUG_SHOW_CALLS
 /* define or undefine this symbol, to get or don't get a stat of malloc/free calls */
 #define UM_DEBUG_SHOW_STATS
+/*
+ * For gcc the um_free and um_realloc methods use %ld instead of %d in some printf
+ * statements, to get rid of some compiler warnings. This tests if Linux is used,
+ * so the Symbol UM_PRINTF_USE_LD is set to switch this behavior on, otherwise the
+ * symbol is deleted
+ */
 #ifdef __LINUX__
 #define UM_PRINTF_USE_LD
 #else
@@ -36,11 +42,11 @@
 /*
  * Declarations for vars that keep memory management information
  */
-extern int um_malloc_count;
-extern int um_free_count;
-extern int memory_error;
-extern char endstring[];
-extern size_t endstring_len;
+extern int um_malloc_count;	/* This counts the number of um_malloc calls */
+extern int um_free_count;	/* Counts the um_free calls */
+extern int memory_error;	/* This indicates a broken memory management */
+extern char endstring[];	/* This is the const string, that holds the ending string of memory blocks */
+extern size_t endstring_len; /* For better performance this var saves the string length of endstring */
 /*
  * Structure definitions
  */
