@@ -1,0 +1,7 @@
+udo (6.2.0-1) unstable; urgency=low
+
+  * Initial Release.
+  * Changed README, Makefile and makefile.in for compilation under Debian
+
+ -- Volker Janzen <douglas@voja.org>  Wed, 15 Oct 2003 21:20:06 +0200
+
