@@ -9631,6 +9631,12 @@ GLOBAL BOOLEAN udo (char *datei)
 			if ( !bBreakHappened && !bBreakInside)	/*r6pl4: && !bBreakInside */
 			{
 				show_status_pass("Pass 2...");
+/* VJD */
+if (bInsideAppendix)
+{
+	bInsideAppendix=FALSE;
+	printf("[Debug] Warning bInsideAppendix=TRUE - fixed it\n");
+}
 				clear_if_stack();
 				output_preamble();
 				iUdopass= PASS2;
