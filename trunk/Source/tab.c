@@ -595,6 +595,7 @@ LOCAL void table_output_rtf ( void )
 		/* Changed in r6.3pl3 [NHz] */
 		{	sprintf(f, "\\qc %s {\\field{\\*\\fldinst { SEQ Tabelle \\\\* ARABIC }}{\\fldrslt %d}}: %s\\cell\\row\\pard",
 							lang.table, tab_counter, tab_caption);
+		} /* added closing bracket in order to get this compiled in MXVC++ r6.3.4 [vj] */
 		else
 		{	sprintf(f, "\\qc %s\\cell\\row\\pard", tab_caption);
 		}
