@@ -1,2 +1,7 @@
 This is a debugging version of UDO 6.2.
 Much debuginformation might be given.
+
+
+Kommandozeilenparameter zum Testen:
+--html -o D:\UDO_debug\UDO\HTML-Out\index.html D:\UDO_debug\UDO\input\0000036.u
+--html -o D:\UDO_debug\UDO\HTML-Out\index.html D:\UDO_debug\UDO\input\bergpano\bergpano.txt
