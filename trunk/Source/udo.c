@@ -190,7 +190,7 @@ LOCAL int				counter_if_stack;
 
 /*	------------------------------------------------------------------------	*/
 
-LOCAL long		lPass1Lines, lPass2Lines;			/* fuer die Prozentangabe */
+LOCAL unsigned long		lPass1Lines, lPass2Lines;			/* fuer die Prozentangabe */
 
 /*	------------------------------------------------------------------------	*/
 
@@ -3891,6 +3891,11 @@ LOCAL void c_include_verbatim ( void )
 		replace_macros(name);
 		switch (iUdopass)
 		{
+			case PASS1:
+				pflag[PASS1].env= ENV_VERBATIM;
+				pass1(name);
+				pflag[PASS1].env= ENV_NONE;
+				break;
 			case PASS2:
 				pflag[PASS2].env= ENV_VERBATIM;
 				output_begin_verbatim();
@@ -3930,6 +3935,11 @@ LOCAL void c_include_preformatted ( void )
 		replace_macros(name);
 		switch (iUdopass)
 		{
+			case PASS1:
+				pflag[PASS1].env= ENV_PREFORMATTED;
+				pass1(name);
+				pflag[PASS1].env= ENV_NONE;
+				break;
 			case PASS2:
 				pflag[PASS2].env= ENV_PREFORMATTED;
 				output_begin_verbatim();
@@ -3969,6 +3979,11 @@ LOCAL void c_include_linedraw ( void )
 		replace_macros(name);
 		switch (iUdopass)
 		{
+			case PASS1:
+				pflag[PASS1].env= ENV_LINEDRAW;
+				pass1(name);
+				pflag[PASS1].env= ENV_NONE;
+				break;
 			case PASS2:
 				pflag[PASS2].env= ENV_LINEDRAW;
 				output_begin_linedraw();
@@ -4047,6 +4062,11 @@ LOCAL void c_include_src ( void )
 		replace_macros(name);
 		switch (iUdopass)
 		{
+			case PASS1:
+				pflag[PASS1].env= ENV_SOURCECODE;
+				pass1(name);
+				pflag[PASS1].env= ENV_NONE;
+				break;
 			case PASS2:
 				pflag[PASS2].env= ENV_SOURCECODE;
 				output_begin_sourcecode();
@@ -4087,6 +4107,11 @@ LOCAL void c_include_comment ( void )
 		replace_macros(name);
 		switch (iUdopass)
 		{
+			case PASS1:
+				pflag[PASS1].env= ENV_COMMENT;
+				pass1(name);
+				pflag[PASS1].env= ENV_NONE;
+				break;
 			case PASS2:
 				pflag[PASS2].env= ENV_COMMENT;
 				output_begin_comment();
@@ -7791,6 +7816,21 @@ LOCAL BOOLEAN pass1 (char *datei)
 						if ( strcmp(token[0], "!rinclude")==0 )
 						{	c_include_raw();
 						}	else
+						if ( strcmp(token[0], "!vinclude")==0 )
+						{	c_include_verbatim();
+						}	else
+						if ( strcmp(token[0], "!pinclude")==0 )
+						{	c_include_preformatted();
+						}	else
+						if ( strcmp(token[0], "!sinclude")==0 )
+						{	c_include_src();
+						}	else
+						if ( strcmp(token[0], "!cinclude")==0 )
+						{	c_include_comment();
+						}	else
+						if ( strcmp(token[0], "!ldinclude")==0 )
+						{	c_include_linedraw();
+						}	else
 						if ( strcmp(token[0], "!code")==0 )
 						{	c_code();
 						}	else
@@ -8387,7 +8427,7 @@ LOCAL BOOLEAN pass2 (char *datei)
 	MYTEXTFILE 	*file;
 	char	zeile[LINELEN];
 	char	tmp_datei[256], old_datei[256];
-	int		prozent, i;
+	int		i;
 	size_t	len;
 
 	if (iFilesOpened>=MAXFILECOUNTER)
@@ -8413,12 +8453,7 @@ LOCAL BOOLEAN pass2 (char *datei)
 		}
 	}
 
-	prozent= 0;
-	if (lPass1Lines>0)
-	{	prozent= (int) ((100*lPass2Lines)/lPass1Lines);
-	}
-	
-	show_status_percent(prozent);
+	show_status_percent(lPass1Lines, lPass2Lines);
 	if (bVerbose)
 	{	show_status_file_2(tmp_datei);
 		show_status_errors();
@@ -8447,6 +8482,7 @@ LOCAL BOOLEAN pass2 (char *datei)
 		uiFileLines[iFilesOpened]++;
 		uiCurrFileLine= uiFileLines[iFilesOpened];
 		lPass2Lines++;
+		show_status_percent(lPass1Lines, lPass2Lines);
 
 		if ( break_action() )
 		{	iFilesOpened--;
@@ -8713,7 +8749,7 @@ LOCAL void save_winhelp_project ( void )
 #endif
 		}
 
-		if (called_about_udo)
+		if (use_about_udo)
 		{	/*r6pl5: Button fr UDO einbauen */
 			sprintf(n, "CreateButton(\"BTN_UDO\", \"UDO%s\", \"JumpID(%s, `%s')\")",
 				UDO_REL, hlp_name, WIN_UDO_NODE_NAME);
@@ -8728,7 +8764,7 @@ LOCAL void save_winhelp_project ( void )
 			fprintf(hpjfile, "%s\n", n);
 		}
 		
-		if ( called_about_udo )
+		if ( use_about_udo )
 		{
 			if (desttype==TOAQV)	/* AQV kann kein zweites Fenster */
 			{	sprintf(n, "AppendItem(\"mnu_help\", \"item_udoinfo\", \"&UDO%s...\", \"JumpID(%s, `%s')\")",
@@ -8825,7 +8861,7 @@ LOCAL void save_winhelp4_project ( void )
 			lang.up, hlp_name, WIN_TITLE_NODE_NAME);
 		fprintf(hpjfile, "%s\n", n);
 
-		if (called_about_udo)
+		if (use_about_udo)
 		{	/*r6pl5: Button fr UDO einbauen */
 			sprintf(n, "CreateButton(\"BTN_UDO\", \"UDO%s\", \"JumpID(`%s.hlp>win1', `%s')\")",
 				UDO_REL, outfile.name, WIN_UDO_NODE_NAME);
@@ -10424,8 +10460,8 @@ GLOBAL void init_vars ( void )
 	
 	bNopDetected= FALSE;
 
-	lPass1Lines=		0L;
-	lPass2Lines=		0L;
+	lPass1Lines=		0;
+	lPass2Lines=		0;
 
 	destlang=			TOGER;
 

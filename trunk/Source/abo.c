@@ -184,10 +184,6 @@ GLOBAL void output_about_udo ( void )
 {
 	FILE *uif;
 	
-	if (called_about_udo)
-	{	return;
-	}
-	
 	if (desttype==TOSRC || desttype==TOSRP)
 	{	/* nur eine kurze Info in c_end_document ausgeben */
 		return;
@@ -206,7 +202,7 @@ GLOBAL void output_about_udo ( void )
 	fprintf(uif, "!sloppy\n\n");
 	fprintf(uif, "!node* %s\n", strUdoNodeName);
 	fprintf(uif, "!html_name %s\n", strUdoHtmlName);
-	fprintf(uif, "!jumpid %s\n\n", WIN_UDO_NODE_NAME);	/* r6pl2 */
+	fprintf(uif, "!win_helpid %s\n\n", WIN_UDO_NODE_NAME);	/* r6pl2 */
 	if (!bDocAutorefOff)
 	{	fprintf(uif, "!autoref [off]\n");
 	}
@@ -226,28 +222,13 @@ GLOBAL void output_about_udo ( void )
 	c_include();	
 
 	remove(udofile.full);
-	
-	called_about_udo= TRUE;
 }	/* output_about_udo */
 
 
 
 GLOBAL void add_pass1_about_udo ( void )
 {
-	strcpy(token[0], "!node*");
-	strcpy(token[1], strUdoNodeName);
-	token_counter= 2;
-	add_node_to_toc(FALSE, TRUE);
-	token_reset();
-	strcpy(token[0], "!html_name");
-	strcpy(token[1], strUdoHtmlName);
-	token_counter= 2;
-	set_html_filename();
-	token_reset();
-	strcpy(token[0], "!win_helpid");
-	strcpy(token[1], WIN_UDO_NODE_NAME);
-	token_counter= 2;
-	set_helpid();
+	output_about_udo();
 	token_reset();
 
 }	/* add_pass1_about_udo */
@@ -269,7 +250,6 @@ GLOBAL void about_unregistered ( void )
 	############################################################	*/
 GLOBAL void init_module_about ( void )
 {
-	called_about_udo= FALSE;
 	use_about_udo= FALSE;
 
 	sprintf(strUdoNodeName, "UDO%s", UDO_REL);
