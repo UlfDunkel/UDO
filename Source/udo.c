@@ -971,17 +971,34 @@ GLOBAL void outlncenterfill ( char *s )
 	char tmp[512];
 	size_t sl;
 	
-	strcpy(tmp, s);
-
-	strcenter(tmp, zDocParwidth);
-
 	sl=strlen(tmp);
-	while (sl<zDocParwidth)
-	{	strcat(tmp, " ");
-		sl++;
-	}
+	if (sl<511)
+	{
+		strcpy(tmp, s);
+
+		strcenter(tmp, zDocParwidth);
+
+		sl=strlen(tmp); /* Neue Länge von tmp ermitteln */
+		while (sl<zDocParwidth)
+		{
+			if (sl<511)
+			{
+				strcat(tmp, " ");
+				sl++;
+			}
+			else
+			{
+				printf("Warning: outlncenterfill: Buffer overrun [2] prevented\n");
+				break;
+			}
+		}
 	
-	outln(tmp);
+		outln(tmp);
+	}
+	else
+	{
+		printf("Warning: outlncenterfill: Buffer overrun [1] prevented\n");
+	}
 }	/*outlncenterfill*/
 
 
@@ -1701,22 +1718,22 @@ GLOBAL void c_hline ( void )
 
 LOCAL int idxlist_compare (IDXLIST *p, IDXLIST *q)
 {
-	char ps[1024], qs[1024];
-	
-	ps[0]= EOS;
-	qs[0]= EOS;
+		char ps[1024], qs[1024];
 
-	strcat(ps, p->idx[0]);	strcat(ps, ", ");	
-	if (p->depth>0)	strcat(ps, p->idx[1]);	strcat(ps, ", ");	
-	if (p->depth>1)	strcat(ps, p->idx[2]);	strcat(ps, ", ");	
-	strcat(ps, p->chapter);
+		ps[0]= EOS;
+		qs[0]= EOS;
 
-	strcat(qs, q->idx[0]);	strcat(qs, ", ");	
-	if (q->depth>0)	strcat(qs, q->idx[1]);	strcat(qs, ", ");	
-	if (q->depth>1)	strcat(qs, q->idx[2]);	strcat(qs, ", ");	
-	strcat(qs, q->chapter);
-	
-	return my_stricmp(ps, qs);
+		um_strcat(ps, p->idx[0], 1024, "idxlist_compare [1]");        um_strcat(ps, ", ", 1024, "idxlist_compare [2]");        
+		if (p->depth>0)        um_strcat(ps, p->idx[1], 1024, "idxlist_compare [3]");        um_strcat(ps, ", ", 1024, "idxlist_compare [5]");        
+		if (p->depth>1)        um_strcat(ps, p->idx[2], 1024, "idxlist_compare [4]");        um_strcat(ps, ", ", 1024, "idxlist_compare [6]");        
+		um_strcat(ps, p->chapter, 1024, "idxlist_compare [7]");
+
+		um_strcat(qs, q->idx[0], 1024, "idxlist_compare [8]");        um_strcat(qs, ", ", 1024, "idxlist_compare [9]");        
+		if (q->depth>0)        um_strcat(qs, q->idx[1], 1024, "idxlist_compare [9]");        um_strcat(qs, ", ", 1024, "idxlist_compare [11]");        
+		if (q->depth>1)        um_strcat(qs, q->idx[2], 1024, "idxlist_compare [10]");        um_strcat(qs, ", ", 1024, "idxlist_compare [12]");        
+		um_strcat(qs, q->chapter, 1024, "idxlist_compare [10]");
+
+		return my_stricmp(ps, qs);
 
 }	/* idxlist_compare */
 
@@ -2069,7 +2086,7 @@ LOCAL void print_info_index ( void )
 		switch ( ptr->depth )
 		{
 			case 0:
-				strcpy(left, ptr->idx[0]);
+				um_strcpy(left, ptr->idx[0], 512, "print_info_index [1]");
 				break;
 			case 1:
 				sprintf(left, "%s, %s", ptr->idx[0], ptr->idx[1]);
@@ -2088,7 +2105,7 @@ LOCAL void print_info_index ( void )
 		if (strcmp(left, old_left)==0)
 		{	counter++;
 			sprintf(val, " (%d)", counter+1);
-			strcat(left, val);
+			um_strcat(left, val, 512, "print_info_index [2]");
 		}
 		else
 		{	strcpy(old_left, left);
@@ -4433,7 +4450,7 @@ LOCAL void c_input ( void )
 	{	strcpy(path, tmp);
 		sl= strlen(path);
 		if (path[sl-1]!='\\' && path[sl-1]!='/')
-		{	strcat(path, "/");
+		{	um_strcat(path, "/", 512, "c_input [1]");
 		}
 	}
 	else
@@ -4452,12 +4469,12 @@ LOCAL void c_input ( void )
 			qdelete_last(name, "\"", 1);
 		}
 		else
-		{	strcpy(name, token[1]);
+		{	um_strcpy(name, token[1], 512, "c_input [2]");
 		}
 
 		token_reset();
 		replace_macros(name);
-		strcat(path, name);
+		um_strcat(path, name, 512, "c_input [3]");
 		path_adjust_separator(path);
 		switch (iUdopass)
 		{	case PASS1:	pass1(path);	break;
@@ -4832,9 +4849,9 @@ GLOBAL void tokcat ( char *s, int maxlen )
                    ist ja alles okay */
 		if (m<maxlen)
 		{
-			strcat(s, token[i]);
+			strcat(s, token[i]); /* Dieses strcat ist durch den umgebenden Code save */
 			if (i<token_counter-1)
-			{	strcat(s, " ");
+			{	strcat(s, " "); /* Dieses strcat ist durch den umgebenden Code save */
 			}
 		}
 	}

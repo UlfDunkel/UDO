@@ -378,7 +378,7 @@ LOCAL void output_aliasses ( void )
 					break;
 				case TOHTM:
 				case TOMHH:
-					strcpy(s, lab[i]->name);
+					um_strcpy(s, lab[i]->name, 256, "output_aliasses [1]");
 					convert_tilde(s);
 					label2html(s);	/* r6pl2 */
 					voutlnf("<a name=\"%s\"></a>", s);
@@ -1137,14 +1137,14 @@ GLOBAL void stg_headline ( const char *numbers, const char *nodename )
 	strcpy(s, numbers);
 
 	if (s[0]!=EOS)
-	{	strcat(s, " ");
+	{	um_strcat(s, " ", 512, "stg_headline [1]");
 	}
 	
 	if (nodename[0]==EOS)
 	{	tokcat(s, 512);
 	}
 	else
-	{	strcat(s, nodename);
+	{	um_strcat(s, nodename, 512, "stg_headline [2]");
 	}
 
 	replace_udo_quotes(s);
@@ -9632,10 +9632,10 @@ GLOBAL void set_html_keywords ( void )
 	if (toc[p1_toc_counter]->keywords!=NULL)
 	{	/* r6pl5: Keywords bereits vorhanden, neue anhaengen */
 		oldptr= toc[p1_toc_counter]->keywords;
-		strcpy(oldk, oldptr);
+		um_strcpy(oldk, oldptr, HTML_KW_SIZE, "set_html_keywords [1]");
 		newsize= strlen(oldk) + strlen(k) + 3;
 
-		ptr= (char *) realloc(oldptr, newsize);
+		ptr= (char *) um_realloc(oldptr, newsize);
 		if (!ptr)
 		{	error_malloc_failed();
 			bFatalErrorDetected= TRUE;
@@ -9684,7 +9684,7 @@ GLOBAL void set_html_description ( void )
 		strcpy(oldd, oldptr);
 		newsize= strlen(oldd) + strlen(d) + 2;
 
-		ptr= (char *) realloc(oldptr, newsize);
+		ptr= (char *) um_realloc(oldptr, newsize);
 		if (!ptr)
 		{	error_malloc_failed();
 			bFatalErrorDetected= TRUE;
@@ -9726,7 +9726,7 @@ GLOBAL void set_html_special_color ( char *hc )
 	qdelete_last(token[1], "]", 1);
 
 	if (token[1][0]=='#')
-	{	strcpy(color, token[1]);
+	{	um_strcpy(color, token[1], 256, "set_html_special_color [1]");
 		ret= TRUE;
 	}
 	else
