@@ -1,5 +1,5 @@
 # doc/manual/source/install.ui
-# letzte Änderungen: 14.01.2004 / last changes: Jan 14, 2004
+# letzte Änderungen: 15.01.2004 / last changes: Jan 15, 2004
 
 
 ################################################################################
@@ -86,7 +86,7 @@ all your other hypertexts.
 !item Entpacken Sie das ZIP-File in ein beliebiges Verzeichnis.
 !item Nehmen Sie das Verzeichnis, in dem sich die ausführbare Datei (!T)udo.exe(!t) befindet, in Ihre PATH-Liste (DOS: siehe (!T)autoexec.bat(!t); Windows: siehe....?) auf, oder kopieren Sie diese Datei in ein Verzeichnis, das sich bereits in der PATH-Liste befindet.
 !end_itemize
-Da die DOS-Version einen DOS-Extender verwendet wird, benötigen Sie mindestens eine 80386-CPU.
+Da die DOS-Version einen DOS-Extender verwendet, benötigen Sie mindestens eine 80386-CPU.
 
 Die für frühere UDO-Versionen nötige Installation von RSJ und EMX ist nicht mehr erforderlich.
 !endif
