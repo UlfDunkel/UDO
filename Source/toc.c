@@ -9973,6 +9973,8 @@ LOCAL BOOLEAN save_the_map ( const char *filename, const char *suffix, tWinMapDa
 		}
 	}
 
+	fclose(file);
+	
 	return TRUE;	
 }
 
@@ -10820,6 +10822,7 @@ GLOBAL BOOLEAN check_module_toc_pass1 ( void )
 	switch (desttype)
 	{
 		case TOHTM:
+		case TOMHH:
 			if (!html_merge_node1)
 			{
 				show_status_info("Checking HTML file names...");
