@@ -6,11 +6,11 @@
 ############################################################
 
 !tex_2e
-!tex \parindent0cm \parskip2pt
+!raw [tex] \parindent0cm \parskip2pt
 
-!program	udo
-!author		info@dirk-hagedorn.de
-!date		12. Februar 1998
+!docinfo [program]	udo
+!docinfo [author]		info@dirk-hagedorn.de
+!docinfo [date]		12. Februar 1998
 
 !man_type	1
 !nroff_type 1
