@@ -10,21 +10,10 @@ build-stamp:
 
 	$(MAKE) -C Source
 
-	mkdir debian/tmp
-	mkdir debian/tmp/eng
-	mkdir debian/tmp/eng/html
-	mkdir debian/tmp/eng/html/images
-	mkdir debian/tmp/ger
-	mkdir debian/tmp/ger/html
-	mkdir debian/tmp/ger/html/images
-	Source/udo --nroff -o $(path)/debian/tmp/eng/udo.1 $(path)/Guide/eng/manual/manpage.u
+	mkdir -p debian/tmp
+	mkdir -p debian/tmp/eng
+	Source/udo --nroff -q -o $(path)/debian/tmp/eng/udo.1 $(path)/Guide/eng/manual/manpage.u
 	dh_installman -a $(path)/debian/tmp/eng/udo.1
-	Source/udo -a -o $(path)/debian/tmp/eng/udo.txt $(path)/Guide/eng/manual/index.u
-	Source/udo -a -o $(path)/debian/tmp/ger/udo.txt $(path)/Guide/ger/manual/index.u
-	cp Guide/eng/manual/images/*.gif debian/tmp/eng/html/images/
-	Source/udo --html -o $(path)/debian/tmp/eng/html/index.html $(path)/Guide/eng/manual/index.u
-	cp Guide/ger/manual/images/*.gif debian/tmp/ger/html/images/
-	Source/udo --html -o $(path)/debian/tmp/ger/html/index.html $(path)/Guide/ger/manual/index.u
 
 	touch build-stamp
 
@@ -49,6 +38,18 @@ install: build
 
 # Here udo docs need to be build
 binary-indep: build install
+	mkdir -p debian/tmp/eng/html
+	mkdir -p debian/tmp/eng/html/images
+	mkdir -p debian/tmp/ger
+	mkdir -p debian/tmp/ger/html
+	mkdir -p debian/tmp/ger/html/images
+	Source/udo -a -q -o $(path)/debian/tmp/eng/udo.txt $(path)/Guide/eng/manual/index.u
+	Source/udo -a -q -o $(path)/debian/tmp/ger/udo.txt $(path)/Guide/ger/manual/index.u
+	cp Guide/eng/manual/images/*.gif debian/tmp/eng/html/images/
+	Source/udo --html -q -o $(path)/debian/tmp/eng/html/index.html $(path)/Guide/eng/manual/index.u
+	cp Guide/ger/manual/images/*.gif debian/tmp/ger/html/images/
+	Source/udo --html -q -o $(path)/debian/tmp/ger/html/index.html $(path)/Guide/ger/manual/index.u
+
 	dh_testdir -i
 	dh_testroot -i
 	dh_installchangelogs -i
