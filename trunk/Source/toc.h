@@ -163,8 +163,12 @@ GLOBAL BOOLEAN	called_subsubsubnode;
 
 GLOBAL BOOLEAN	uses_tableofcontents;	/* !tableofcontents wird benutzt */
 
-
-GLOBAL char		current_node_name_sys[MAX_NODE_LEN+1]; /* New in r6pl15 [NHz] */
+/* 
+ * 6.3.11 [vj]
+ * This is needed, because current_node_name_sys needs to buffer a lot of stuff!
+ */
+GLOBAL char		current_node_name_sys[CNNS_LEN];
+/*GLOBAL char		current_node_name_sys[MAX_NODE_LEN+1];*/ /* New in r6pl15 [NHz] */
 GLOBAL char		current_chapter_name[MAX_NODE_LEN+1];
 GLOBAL char		current_chapter_nr[32];
 
