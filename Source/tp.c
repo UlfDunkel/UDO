@@ -274,32 +274,45 @@ GLOBAL BOOLEAN set_doclayout ( void )
 	--------------------------------------------------------------	*/
 LOCAL BOOLEAN init_docinfo_data ( char *data, char **var, int allow_empty )
 {
+	/* [voja][R6PL17] I needed to do the buffer creation first in this function,
+	   elsewise you can't use memmove with compilers like GCC 3.x and
+	   MS VS .net. An segmentation fault will occur (Bug #0000016).
+	   I guess this is because of better memory protection techniques:
+	   The *data coming in can be an constant(!) value. I think these compilers
+	   write constant variable allocations to a protected memory region.
+	   Writing to this region will crash...
+	*/
 	char *buffer;
 	
-	del_whitespaces(data);
-	c_divis(data);
-	c_vars(data);
-	c_tilde(data);
-	c_styles(data);
-	del_internal_styles(data);
-	replace_udo_tilde(data);
-	replace_udo_nbsp(data);
-	replace_udo_quotes(data);
-	delete_all_divis(data);
-
-	if (data[0]==EOS && !allow_empty)
-	{	error_empty_docinfo();
-		return FALSE;
-	}
-
 	buffer= (char *) malloc (strlen(data)*sizeof(char)+1);
 
-	if (buffer)
-	{	*var= buffer;
-		strcpy(*var, data);
+	if (buffer) /* Check if the buffer could be allocated */
+	{
+		/* We copy now first the data to the buffer, this prevents
+		   bug #0000016 with modern compilers */
+		strcpy(buffer, data);
+		del_whitespaces(buffer);		/* Parameter was data */
+		c_divis(buffer);				/* Parameter was data */
+		c_vars(buffer);					/* Parameter was data */
+		c_tilde(buffer);				/* Parameter was data */
+		c_styles(buffer);				/* Parameter was data */
+		del_internal_styles(buffer);	/* Parameter was data */
+		replace_udo_tilde(buffer);		/* Parameter was data */
+		replace_udo_nbsp(buffer);		/* Parameter was data */
+		replace_udo_quotes(buffer);		/* Parameter was data */
+		delete_all_divis(buffer);		/* Parameter was data */
+
+		if (data[0]==EOS && !allow_empty)
+		{	error_empty_docinfo();
+			return FALSE;
+		}
+
+		*var=buffer;
+		
 		return TRUE;
 	}
 
+	/* An error occured when allocating the buffer */
 	error_malloc_failed();
 	bFatalErrorDetected= TRUE;
 	return FALSE;
