@@ -1,5 +1,5 @@
 # doc/manual/source/history.ui
-# letzte Änderungen: 14.01.2004 / last changes: Jan 14, 2004
+# letzte Änderungen: 17.01.2004 / last changes: Jan 17, 2004
 
 
 !iflang [german]
@@ -110,6 +110,13 @@ wird unterstützt.
 !endif
 !html_name history_6-2-1_to_6-4-0.html
 
+!iflang [german]
+(!PUBLISHED [Version~6.4.0] [07.01.2004])
+!endif
+!iflang [english]
+(!PUBLISHED [Version~6.4.0] [Jan 7, 2004])
+!endif
+
 (!MISS)
 
 !begin_description
@@ -167,6 +174,13 @@ wird unterstützt.
 !endif
 !html_name history_6-2-0_to_6-2-1.html
 
+!iflang [german]
+(!PUBLISHED [Version~6.2.1] [09.12.2003])
+!endif
+!iflang [english]
+(!PUBLISHED [Version~6.2.1] [Dec 9, 2003])
+!endif
+
 (!MISS)
 
 !begin_description
@@ -223,6 +237,13 @@ wird unterstützt.
 !begin_node Changes from Release 6 Patchlevel 17 to version 6.2.0
 !endif
 !html_name history_release_6_PL17_to_6-2-0.html
+
+!iflang [german]
+(!PUBLISHED [Version~6.2.0] [15.10.2003])
+!endif
+!iflang [english]
+(!PUBLISHED [Version~6.2.0] [Oct 15, 2003])
+!endif
 
 (!MISS)
 
@@ -282,6 +303,13 @@ wird unterstützt.
 !endif
 !html_name history_release_6_PL16_to_17.html
 
+!iflang [german]
+(!PUBLISHED [Release~6 Patchlevel~17] [11.10.2003])
+!endif
+!iflang [english]
+(!PUBLISHED [Release~6 Patchlevel~17] [Oct 11, 2003])
+!endif
+
 (!MISS)
 
 !begin_description
@@ -340,13 +368,15 @@ wird unterstützt.
 !endif
 !html_name history_release_6_PL15_to_16.html
 
-(!MISS)
+!iflang [german]
+(!PUBLISHED [Release~6 Patchlevel~16] [28.09.2003])
+!endif
+!iflang [english]
+(!PUBLISHED [Release~6 Patchlevel~16] [Sept 28, 2003])
+!endif
 
 !begin_description
 !iflang [german]
-# !item [Neue Formate:]
-# 	!begin_itemize !short
-# 	!end_itemize
  !item [Neue Befehle:]
  	!begin_itemize !short
    !item (!T)!/html_default_hyphenation(!t) (!nl)
@@ -483,18 +513,28 @@ wird unterstützt.
 ################################################################################
 !iflang [german]
 !begin_node Änderungen von Release 6 Patchlevel 14 nach 15
+!endif
+!iflang [english]
+!begin_node Changes from Release 6 Patchlevel 14 to 15
+!endif
+!html_name history_release_6_PL14_to_15.html
+
+!iflang [german]
+(!PUBLISHED [Release~6 Patchlevel~15] [10.06.2003])
+
 !subheading Allgemeines
-!begin_itemize
+!begin_itemize !short
 !item Alle Indexeinträge bis zur vierten Stufe werden in die
-      Projektdatei (*.upr) geschrieben.
+      Projektdatei ((!T)*.upr(!t)) geschrieben.
 !item Die Einträge für (!T)!/label(!t) und (!T)!/alias(!t) werden
-      in die Projektdatei (!*.upr) geschrieben.
-!item Alle Heading-Einträge werden in die Projektdatei (*.upr) geschrieben.
+      in die Projektdatei ((!T)*.upr(!t)) geschrieben.
+!item Alle Heading-Einträge werden in die Projektdatei ((!T)*.upr(!t)) geschrieben.
 !item Außerdem werden die entsprechenden Zeilennummern geschrieben.
 !end_itemize
+
 !subheading Postscript
 !begin_itemize
-!item Die Ausgabe in abo.c kann derzeit von der Postscript-Ausgabe nicht
+!item Die Ausgabe in (!T)abo.c(!t) kann derzeit von der Postscript-Ausgabe nicht
       benutzt werden, da diese keine zentrierte bzw. rechts!-bündige
       Ausgabe zulässt. Deshalb wird die Standard!-ausgabe verhindert
       und statt!-dessen eine eigene Ausgabe formuliert. Die Ausgabe erfolgt
@@ -508,14 +548,14 @@ wird unterstützt.
 
       (!T)!/doclayout [ps] [openMode] foo(!t) (!nl)
       Mögliche Angaben stehen in der Dokumentation zu den pdf-marks.
-      
+
       (!T)!/doclayout [ps] [propfontname] foo(!t) (!nl)
       Mögliche Angaben für foo sind Zeichensatznamen, z.~B. Arial,
       Times New Roman, sans oder sans-serif. (!nl)
       (!B)Hinweis:(!b) Für die Postscriptausgabe gilt, daß für Helvetica,
       Arial oder sans-serif immer Helvetica gesetzt wird, ansonsten
       Times New Roman.
-      
+
       (!T)!/doclayout [ps] [propfontsize] foo(!t) (!nl)
       Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
 !item (!T)!/docinfo [keywords] foo(!t) (!nl)
@@ -549,7 +589,8 @@ wird unterstützt.
       ausgegeben.
 !item Für (!T)!/label(!t) wird ein ""Named Destination"" gesetzt.
 !end_itemize
-!subheading Hypertext Markup Language
+
+!subheading Hypertext Markup Language (HTML)
 !begin_itemize
 !item Neue Kommandos für die HTML-Ausgabe: (!nl)
       (!T)!/html_style_name foo(!t) (!nl)
@@ -560,7 +601,7 @@ wird unterstützt.
 
       (!T)!/html_favicon_name foo(!t) (!nl)
       Zum Setzen eines Faforiten-Icons für alle Dateien eines Projektes.
-      
+
       (!B)Achtung:(!b) Möglicherweise werden die Kommandos nochmal
       geändert.
 !item Trennzeichen (!T)&shy;(!t) für die Worttrennung in HTML eingefügt
@@ -577,47 +618,51 @@ wird unterstützt.
       von Frames nicht so schön.
 !item Werden bei der HTML-Ausgabe Frames erzeugt, wird zusätzlich ein Bereich
       <noframes></noframes> mit Inhaltsverzeichnis gesetzt, damit auch
-      Browser, die gar keine Frames kennen/können (z.~B. beim Vorlesen)
+      Browser, die gar keine Frames kennen/können (z.B. beim Vorlesen)
       an das Inhalts!-ver!-zeichnis kommen.
 !end_itemize
-!subheading Richtext Format
+
+!subheading Rich Text Format (RTF)
 !begin_itemize
 !item Absatzkontrolle (Orphans & Widows) wird für die RTF-Ausgabe
       standard!-mäßig eingeschaltet.
 !end_itemize
 !endif
+
 !iflang [english]
-!begin_node Changes from Release 6 Patchlevel 14 to 15
+(!PUBLISHED [Release~6 Patchlevel~15] [June 10, 2003])
+
 !subheading General
-!begin_itemize
-!item All index entrys up to forth degree will be written in the
-      projekt file (*.upr)
+!begin_itemize !short
+!item All index entrys up to fourth level will be written in the
+      project file ((!T)*.upr(!t))
 !item The entrys for (!T)!/label(!t) and (!T)!/alias(!t) will
-      be written in the projekt file (!*.upr).
-!item All heading entrys will be written in the projekt file (*.upr).
+      be written in the project file ((!T)*.upr(!t)).
+!item All heading entrys will be written in the project file ((!T)*.upr(!t)).
 !item For all entrys the line number will be written.
 !end_itemize
+
 !subheading Postscript
 !begin_itemize
-!item The standard ouput of ""about udo"" can't be used for postscript,
-      so there is a special. The output will be done in german if
+!item The standard output of ""about udo"" can't be used for postscript,
+      so there is a special one. The output will be done in german if
       ""german"" ist set, otherwise in english
 !item New function for postscript output included, to hide characters
-      which can be interpreted as postscript code
+      which can be interpreted as postscript code.
 !item New command for the document layout (!nl)
       (!T)!/doclayout [ps] [paper] foo(!t) (!nl)
       Possible values for foo: A3PORTRAIT, A3LANDSCAPE, A4PORTRAIT,
       A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE.
-      
+
       (!T)!/doclayout [ps] [openMode] foo(!t) (!nl)
       You can find possible values for foo in the pdfmark primer.
-      
+
       (!T)!/doclayout [ps] [propfontname] foo(!t) (!nl)
       Possible value for foo are fontnames like Arial, Times New Roman,
       ans or sans serif (!nl)
       (!B)Hint:(!b) For postscript output will be set Helvetica if
       helvetica, Arial or sans serif is set, otherwise times New Roman
-      
+
       (!T)!/doclayout [ps] [propfontsize] foo(!t) (!nl)
       Possible values for foo are fontsizes with unit pt
 !item (!T)!/docinfo [keywords] foo(!t) (!nl)
@@ -634,7 +679,7 @@ wird unterstützt.
 !item Description- and list environments are supported for postscript
 !item New characters for the itemize environment
 !item The font ""Symbol"" can be used.
-!item Interal links (!T)(!/link ...)(!t), external links (!T)(!/xlink ...)(!t)
+!item Internal links (!T)(!/link ...)(!t), external links (!T)(!/xlink ...)(!t)
       und (!T)(!/url ...)(!t) are transposed for PDF (via Postscript)
 !item Footnotes are transposed for postscript
 !item Tables are transposed legible with monospaced characters
@@ -646,22 +691,23 @@ wird unterstützt.
 !item Table of contents will be put out, if (!T)!/tableofcontents(!t) is set
 !item (!T)!/label(!t) will be transposed to a ""Named Destination""
 !end_itemize
-!subheading Hypertext Markup Language
+
+!subheading Hypertext Markup Language (HTML)
 !begin_itemize
 !item New commands for the HTML output: (!nl)
       (!T)!/html_style_name foo(!t) (!nl)
-      Sets an external stylesheet for all files of a project
+      Set an external stylesheet for all files of a project
 
       (!T)!/html_script_name foo(!t) (!nl)
-      Sets an external script for all files of a project
+      Set an external script for all files of a project
 
       (!T)!/html_favicon_name foo(!t) (!nl)
-      Sets an favicon for all files of a project
-      
+      Set an favicon for all files of a project
+
       (!B)Important:(!b) This commands may be changed in future possibly.
 !item Character (!T)&shy;(!t) for hyphenation in HTML included
-!item The characters (!T)&ndash;(!t), (!T)&mdash;(!t) and (!T)&hellip;(!t)
-      are used for HTML
+!item The entities (!T)&ndash;(!t), (!T)&mdash;(!t) and (!T)&hellip;(!t)
+      are used for HTML.
 !item Setting links for the navigation through a project of HTML sites
       via the element (!T)<link>(!t).
       The following attributes are suppoerted: (!T)contents, start, first,
@@ -676,62 +722,17 @@ wird unterstützt.
       <noframes></noframes> area with a table of contents too. Therefor
       browser, which doesn't knows frames, can read the content.
 !end_itemize
-!subheading Richtext Format
+
+!subheading Rich Text Format (RTF)
 !begin_itemize
 !item Paragraph check for orphans and widows are used now.
 !end_itemize
 !endif
-!html_name history_release_6_PL14_to_15.html
-
-(!MISS)
-!begin_description
-!iflang [german]
-# !item [Neue Formate:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Neue Befehle:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Neuheiten:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Änderungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Syntaxänderungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Fehlerbehebungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
-!endif
-
-!iflang [english]
-# !item [New destination formats:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [New commands:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [News:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Changes:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Syntax changes:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Bugfixes:]
-# 	!begin_itemize !short
-# 	!end_itemize
-!endif
-!end_description
 
 !end_node
 
 ################################################################################
-# Änderungen UDO7 gegenüber UDO6
+# alt: Änderungen UDO7 gegenüber UDO6
 !iflang [german]
 !begin_node Änderungen bis Release 6 Patchlevel 14
 !endif
@@ -740,11 +741,13 @@ wird unterstützt.
 !endif
 !html_name history_release_6_until_PL14.html
 
-# auskommentiert 07.12.2003 - Ulrich Kretschmer
+# auskommentiert 07.12.2003 - Ulrich Kretschmer:
 # Dieses Release wurde noch gar nicht veröffentlicht.
 # UDO7 hasn't been released yet.
 
 !iflang [german]
+(!PUBLISHED [Release~6 Patchlevel~14] [11.07.1999])
+
 Hier eine kleine Übersicht der wichtigsten Änderungen zum letzten Release.
 # zur letzten öffentlichen Version.
 In den letzten Jahren wurden einige neue Formate,
@@ -752,7 +755,10 @@ etliche neue Features eingebaut und einige Fehlerbeseitigungen
 vorgenommen. Auch hier hat es in der Zwischenzeit wieder nicht
 vermeiden lassen, die Syntax einiger Befehle zu ändern.
 !endif
+
 !iflang [english]
+(!PUBLISHED [Release~6 Patchlevel~14] [July 11, 1999])
+
 You will find here a very compressed list of the major changes
 compared to the last release. UDO supports now more destination formats, it
 supports new features and there were fixed a lot of bugs. In some
