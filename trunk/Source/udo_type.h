@@ -58,23 +58,19 @@ typedef struct _lang
 	char	page[32];				/* Seite					*/
 	char	see[32];				/* siehe					*/
 	char	also[32];				/* siehe auch				*/
-	
 	char	by[16];					/* von						*/
+	/* New in V6.5.2 [NHz] */
+	char	fur[16];					/* fÅr						*/
 	char	up[8];					/* Hoch (WinHelp)			*/
 	char	exit[10];				/* Beenden (WinHelp)		*/
-
 	char	today[32];				/* 28. Februar 1995			*/
 	char	short_today[32];		/* 28.02.1995				*/
-	
 	char	update[64];				/* Last updated on (HTML)	*/
-	
 	char	unknown[32];			/* Unbekannt, Unknown etc.	*/
-
 	char	html_home[32];			/* "Home"					*/
 	char	html_up[32];			/* "Hoch"					*/
 	char	html_prev[32];			/* "Zurueck"				*/
 	char	html_next[32];			/* "Weiter"					*/
-
 	char	lcid[64];				/* LCID fuer WinHelp4		*/
 	/* New in r6pl16 [NHz] */
 	char	html_lang[15];	/* Sprachenkuerzel */
