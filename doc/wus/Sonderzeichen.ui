@@ -1,0 +1,66 @@
+!hline
+!subsubnode Sonderzeichen und ihre Darstellungsweise
+
+Die Liste dieser Sonderzeichen ist rein willkÅrlich und kann erweitert oder
+eingeschrÑnkt werden. (!nl)
+(!B)(!T)CAB(!t)(!b) bedeutet, das Sonderzeichen wird auch von (!T)CAB(!t)
+angezeigt.
+
+!table_caption Sonderzeichen
+!begin_table [|l|l|c|l|l|l|l|c|] !hline
+Name !! Darstellung !! ANSI !! Unicode !! (!nolink [Postscript]) !! RTF !! HTML !! Bemerkungen
+Ungleich !! (!raw [html] [&ne;]) !! ~ !! 8800 0x2260 !! ~ !! ~ !! &ne; !! ~
+Kleiner gleich !! (!raw [html] [&le;]) !! 243 !! 8804 0x2264 !! lessequal !! ~ !! &le; !! ~
+Grîûer gleich !! (!raw [html] [&ge;]) !! 242 !! 8805 0x2265 !! greaterequal !! ~ !! &ge; !! ~
+Equivalent !! (!raw [html] [&equiv;]) !! 240 !! 8801 0x2261 !! equivalence !! ~ !! &equiv; !! ~
+Plusminus !! (!raw [html] [&plusmn;]) !! 241 !! 0177 0x00B1 !! plusminus !! ~ !! &plusmn; !! CAB
+Geteilt !! (!raw [html] [&divide;]) !! 246 !! 0247 0x00F7 !! divide !! ~ !! &divide; !! CAB
+éhnlich !! (!raw [html] [&sim;]) !! 247 !! 8776 0x2248 !! approxequal !! ~ !! &sim; !! ~
+Unendlich !! (!raw [html] [&infin;]) !! 223 !! 8734 0x221E !! infinity !! ~ !! &infin; !! ~
+Grad !! (!raw [html] [&deg;]) !! 248 !! 0176 0x00B0 !! degree !! ~ !! &deg; !! CAB
+Copyright !! (!raw [html] [&copy;]) !! 189 !! 0169 0x00A9 !! copyright !! ~ !! &copy; !! CAB
+Registered !! (!raw [html] [&reg;]) !! 190 !! 0174 0x00AE !! registered !! ~ !! &reg; !! CAB
+Trademark !! (!raw [html] [&trade;]) !! 191 !! 8483 0x2122 !! trademark !! ~ !! &trade; !! CAB
+Promille !! (!raw [html] [&permil;]) !! 222 !! 8240 0x2030 !! perthousand !! ~ !! &permil; !! ~
+Punkt, Punkt, Punkt !! (!raw [html] [&hellip;]) !! ~ !! 8230 0x2026 !! ~ !! ~ !! &hellip; !! ~
+AnfÅhrungszeichen unten !! (!raw [html] [&bdquo;]) !! 207 !! 8222 0x201E !! quotedblbase !! \ldblquote !! &bdquo; !! ~
+AnfÅhrungszeichen oben !! (!raw [html] [&ldquo;]) !! 208 !! 8220 0x201C !! quotedblleft !!  !! &ldquo; !! ~
+AnfÅhrungszeichen ende !! (!raw [html] [&rdquo;]) !! 209 !! 8221 0x201D !! quotedblright !! \rdblquote !! &rdquo; !! ~
+AnfÅhrungszeichen fr. Anfang !! (!raw [html] [&laquo;]) !! 174 !! 0171 0x00AB !! guillemotleft !!  !! &laquo; !! CAB
+AnfÅhrungszeichen fr. Ende !! (!raw [html] [&raquo;]) !! 175 !! 0187 0x00BB !! guillemotright !!  !! &raquo; !! CAB
+kurzer Strich !! (!raw [html] [&ndash;]) !! 214 !! 8211 0x2013 !! endash !! \endash !! &ndash; !! CAB
+langer Strich !! (!raw [html] [&mdash;]) !! 215 !! 8212 0x2014 !! emdash !! \emdash !! &mdash; !! CAB
+Pfeil rechts !! (!raw [html] [&rarr;]) !! 219 !! 8594 0x2192 !! arrowright !! ~ !! &rarr; !! ~
+Pfeil links !! (!raw [html] [&larr;]) !! 220 !! 8592 0x2190 !! arrowleft !! ~ !! &larr; !! ~
+Euro !! (!raw [html] [&euro;]) !! 80 !! 8364 !! ~ !! ~ !! &euro; !! ~
+Griechische Buchstaben (klein) !! ~ !! ~ !! ~ !! ~ !! ~ !! ~ !! ~
+Alpha !! (!raw [html] [&alpha;]) !! 224 !! 0945 0x03B1 !! alpha !! ~ !! &alpha; !! CAB
+Beta !! (!raw [html] [&beta;]) !! 225 !! 0946 0x03B2 !! beta !! ~ !! &beta; !! CAB
+Gamma !! (!raw [html] [&gamma;]) !! ~ !! ~ !! ~ !! ~ !! &gamma; !! ~
+Delta !! (!raw [html] [&delta;]) !! 235 !! 0948 0x03B4 !! delta !! ~ !! &delta; !! CAB
+Epsilon !! (!raw [html] [&epsilon;]) !! ~ !! ~ !! ~ !! ~ !! &epsilon; !! ~
+Mu !! (!raw [html] [&mu;]) !! 230 !! 0181 0x00B5 !! mu !! ~ !! &mu; !! CAB
+Nu !! (!raw [html] [&nu;]) !! ~ !! ~ !! ~ !! ~ !! &nu; !! ~
+Pi !! (!raw [html] [&pi;]) !! 227 !! 0960 0x03C0 !! pi !! ~ !! &pi; !! CAB
+Phi !! (!raw [html] [&phi;]) !! 237 !! 0966 0x03C6 !! phi !! ~ !! &phi; !! ~
+Ro !! (!raw [html] [&rho;]) !! ~ !! ~ !! ~ !! ~ !! &rho; !! ~
+Sigma !! (!raw [html] [&sigma;]) !! 229 !! 0963 0x03C3 !! sigma !! ~ !! &sigma; !! CAB
+Tau !! (!raw [html] [&tau;]) !! 231 !! 0964 0x03C4 !! tau !!  !! &tau; !! CAB
+Theta !! (!raw [html] [&theta;]) !! ~ !! ~ !! ~ !! ~ !! &theta; !! ~
+Omega !! (!raw [html] [&omega;]) !! ~ !! ~ !! ~ !! ~ !! &omega; !! ~
+Griechische Buchstaben (groû) !! ~ !! ~ !! ~ !! ~ !! ~ !! ~ !! ~
+Alpha !! (!raw [html] [&Alpha;]) !! ~ !! ~ !! Alpha !! ~ !! &Alpha; !! ~
+Beta !! (!raw [html] [&Beta;]) !! ~ !! ~ !! Beta !! ~ !! &Beta; !! ~
+Gamma !! (!raw [html] [&Gamma;]) !! 226 !! 0915 0x0393 !! Gamma !! ~ !! &Gamma; !! CAB
+Delta !! (!raw [html] [&Delta;]) !! 127 !! 8710 0x2206 !! Delta !! ~ !! &Delta; !! CAB
+Epsilon !! (!raw [html] [&Epsilon;]) !! ~ !! ~ !! ~ !! ~ !! &Epsilon; !! ~
+Mu !! (!raw [html] [&Mu;]) !! ~ !! ~ !! ~ !! ~ !! &Mu; !! ~
+Nu !! (!raw [html] [&Nu;]) !! ~ !! ~ !! ~ !! ~ !! &Nu; !! ~
+Pi !! (!raw [html] [&Pi;]) !! ~ !! ~ !! ~ !! ~ !! &Pi; !! ~
+Phi !! (!raw [html] [&Phi;]) !! 232 !! 0934 0x03A6 !! Phi !! ~ !! &Phi; !! CAB
+Ro !! (!raw [html] [&Rho;]) !! ~ !! ~ !! ~ !! ~ !! &Rho; !! ~
+Sigma !! (!raw [html] [&Sigma;]) !! 228 !! 8721 0x2211 !! Summation !! ~ !! &Sigma; !! CAB
+Tau !! (!raw [html] [&Tau;]) !! ~ !! ~ !! ~ !! ~ !! &Tau; !! ~
+Theta !! (!raw [html] [&Theta;]) !! 233 !! 0920 0x0398 !! Theta !! ~ !! &Theta; !! CAB
+Omega !! (!raw [html] [&Omega;]) !! 234 !! 8486 0x2126 !! Omega !! ~ !! &Omega; !! CAB
+!end_table

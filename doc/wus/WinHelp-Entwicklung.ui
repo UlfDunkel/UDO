@@ -1,0 +1,16 @@
+!smallskip
+!hline
+!subsubnode Ungeordnet (WinHelp)
+!begin_itemize
+!item Fuž- und Endnoten auch bei WinHelp
+!end_itemize
+
+!medskip
+!hline
+!subsubnode Bugs (WinHelp)
+!begin_itemize !short
+!item Das Kommando (!V)(!/url [] [])(!v) wird von UDO offensichtlich nicht
+      richtig umgesetzt. Der Compiler bricht den šbersetzungsvorgang ab.
+!item Bei der Erstellung der Projektdatei wird die Datei *.hpc nicht in
+      die Projektdatei aufgenommen.
+!end_itemize

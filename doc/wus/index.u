@@ -1,0 +1,468 @@
+########################################
+# @(#) UDO - Wunschliste               #
+#                                      #
+# Åbersetzt mit UDO Version 6.4.1      #
+########################################
+#
+!docinfo [title] Wunschliste und Sammlung fÅr
+!docinfo [program] UDO
+!docinfo [version] Version 10
+!docinfo [date] (!today)
+!docinfo [author] Norbert Hanz
+!docinfo [address] fÅr UDO-OPEN-SOURCE
+!docinfo [address] Norbert Hanz @ DO
+!docinfo [address] norbert@familie-hanz.de
+!docinfo [webmasteremail] norbert@familie-hanz.de
+!docinfo [htmltitle] UDO-Open Source
+#
+#
+#!macro HTML_LINK (!raw [\url{(!1)}])
+#!macro HTML_LINK (!raw [\])url(!raw [{])(!1)(!raw [}])
+#
+#!no_preamble [tex]
+!tex_2e
+!tex_tetex
+#!tex_strunk
+#!raw [tex] \documentstyle[11pt,din_a4,makeidx]{article}
+#!raw [tex] \makeindex
+#!raw [tex] %format latex
+!code [tos]
+!docinfo [stgdatabase] UDO-Weiterentwicklung
+!raw [stg] @subject "UDO/Wunsch"
+!ifdest [html]
+!macro BILDPATH .
+!else
+!macro BILDPATH .
+!endif
+#
+!include d:/udo-tool/macros.ui
+!include d:/udo-tool/colour.ui
+#
+#!language french
+!use_auto_helpids [win,wh4]
+!win_backcolor gray
+!win_textcolor navy
+#!win_medium_compression
+#!win_high_compression
+!win_inline_bitmaps
+#!no_index [tex]
+#!no_xlinks [asc,man,rtf,stg,tex,win]
+!use_output_buffer [all]
+!use_formfeed [asc]
+#!use_ansi_tables [asc,man]
+!ifnos [tos]
+  !no_effects [asc]
+!endif
+!use_about_udo [aqv,html,info,man,ps,rtf,stg,tex,win]
+!use_nodes_inside_index [rtf,stg,win]
+!use_label_inside_index [rtf,stg,win]
+!use_auto_toptocs [html,stg,win]
+!verbatimsize [normal]
+#!no_headlines [html]
+#!no_images [html]
+!html_nodesize 2
+!html_backcolor #FFFAF0
+#!html_verbatim_backcolor lightyellow
+!html_verbatim_backcolor #FFDEAD
+#!html_modern_layout
+#!html_modern_width 130
+#!html_modern_backcolor silver
+#!html_frames_layout
+#!html_frames_width 130
+#!html_frames_backcolor silver
+!html_linkcolor blue
+!html_alinkcolor green
+!html_vlinkcolor red
+#!html_merge_subsubnodes
+#!html_merge_subnodes
+#!html_merge_nodes
+!html_backpage http://www.udo-open-source.org 'ZurÅck zu UDO-Open-Source'
+!html_use_hyphenation
+!html_use_folders
+!use_raw_header udo.css
+!use_short_tocs [all]
+!html_style_name wus.css
+!html_doctype XHTML Transitional
+!docinfo [keywords] UDO, UDO-Shell, öbersetzung, Converter
+!docinfo [description] Beschreibung der Bedienung der UDO-Shell
+#!doclayout [ps,rtf] [node1size] 12
+#!doclayout [ps,rtf] [node2size] 18
+#!doclayout [ps,rtf] [node3size] 24
+#!doclayout [ps,rtf] [node4size] 36
+#!doclayout [ps] [propfontname] Times New Roman
+#!doclayout [ps] [propfontsize] 11
+#!doclayout [ps,rtf] [paper] A4PORTRAIT
+#!doclayout [ps] [openMode] Outlines Page=3 HideToolbar Title
+
+!begin_document
+!maketitle
+!tableofcontents
+!listoffigures
+!listoftables
+
+!node EinfÅhrung
+Dieser Bereich soll die (!index [Weiterentwicklung]) von UDO dokumentieren. Zur Zeit
+ist es noch ein rechtes Durcheinander, das sich hoffentlich mit der Zeit
+etwas legt. Ich habe natÅr!-lich mit den Sachen, die mich am meisten
+interessieren, angefangen.
+
+Im Bereich ""Entwicklung und Bugs"" sollen die Erweiterungen sowohl fÅr die
+einzelnen Zielformate als auch Allgemeines dokumentiert werden.
+Hier mîchte ich auch gerne die ''Ergebnisse''
+der WÅnsche im Zielformat niederlegen.
+Zum einen mîchte ich nicht alles selber ausprobieren mÅssen, zum anderen
+kenne ich einige Zielformate gar nicht so gut. Die EintrÑge~sind nach
+Wichtigkeit und Durch!-fÅhr!-barkeit gekenn!-zeichnet.
+
+Dieser Bereich soll die (!index [Weiterentwicklung]) von UDO dokumentieren. Zur Zeit
+ist es noch ein rechtes Durcheinander, das sich hoffentlich mit der Zeit
+etwas legt. Ich habe natÅrlich mit den Sachen, die mich am meisten
+interessieren, angefangen.
+
+!begin_flushleft
+!table_caption Wichtigkeit
+!begin_table [cc] !hline
+~(!img [(!BILDPATH)/rot3] [Sehr wichtig])~ !! ~Sehr wichtig~
+~(!img [(!BILDPATH)/rot2] [Wichtig])~ !! ~Wichtig~
+~(!img [(!BILDPATH)/rot1] [Weniger wichtig])~ !! ~Weniger wichtig~
+!hline
+!end_table
+!smallskip
+!table_caption DurchfÅhrbarkeit
+!begin_table [cc] !hline
+~(!img [(!BILDPATH)/gelb3] [Leicht])~ !! ~Leicht~
+~(!img [(!BILDPATH)/gelb2] [Schwierig])~ !! ~Schwierig~
+~(!img [(!BILDPATH)/gelb1] [Sehr schwierig])~ !! ~Sehr schwierig~
+!hline
+!end_table
+!end_flushleft
+
+Im Bereich Organisation sind die beteiligten Entwickler aufgefÅhrt.
+
+Die Wunschliste habe ich aufgelîst. Alle WÅnsche sind in den einzelnen
+Kapiteln enthalten.
+Unter Adressen findet man die Namen der Beteiligten.
+
+
+!newpage
+!node Entwicklung und Bugs
+!html_name Entwickl
+!subtoc [hh,html,stg]
+
+!subnode Entwicklung formatunabhÑngig
+!html_name E-Allgem
+#WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Allgemeines">Norbert Hanz</a>])
+!smallskip
+!subsubtoc [hh,html,stg]
+!hline
+!include Allgemeines-Entwicklung.ui
+
+!newpage
+!subnode Amiga Guide
+!html_name E-Amiga
+Derzeit noch nicht belegt.
+
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Amiga Guide">Norbert Hanz</a>])
+
+!newpage
+!subnode Apple Quickview
+!html_name E-Quick
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Apple QuickView">Norbert Hanz</a>])
+!hline
+Derzeit nicht belegt.
+#!include AppleQuickview-Entwicklung.ui
+
+
+!newpage
+!subnode ASCII
+!html_name E-ASCII
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=ASCII">Norbert Hanz</a>])
+!hline
+!include ASCII-Entwicklung.ui
+
+
+!newpage
+!subnode C-Source
+!html_name E-C
+Derzeit noch nicht belegt.
+
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=C-Source">Norbert Hanz</a>])
+
+
+!newpage
+!subnode David's Readme Compiler
+!html_name E-DRC
+Derzeit noch nicht belegt.
+
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=David's Readme Compiler">Norbert Hanz</a>])
+
+
+!newpage
+!subnode GNU-Texinfo
+!html_name E-GNU
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=GNU-Texinfo">Norbert Hanz</a>])
+!hline
+Derzeit nicht belegt.
+#!include Texinfo-Entwicklung.ui
+
+
+!newpage
+!subnode Hypertext Markup Language
+!html_name E-HTML
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=HTML">Norbert Hanz</a>])
+!smallskip
+!subsubtoc [hh,html,stg]
+!hline
+!include HTML-Entwicklung.ui
+
+
+!newpage
+!subnode HTML-Help
+!html_name E-HHelp
+Derzeit noch nicht belegt.
+
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=HTML-Help">Norbert Hanz</a>])
+
+
+!newpage
+!subnode OS/2 IPF
+!html_name E-IPF
+Derzeit noch nicht belegt.
+
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=OS/2 IPF">Norbert Hanz</a>])
+
+
+!newpage
+!subnode (!LaTeX)
+!html_name E-LaTeX
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=LaTeX">Norbert Hanz</a>])
+!hline
+!include LaTeX-Entwicklung.ui
+
+
+!newpage
+!subnode Linuxdoc-SGML
+!html_name E-SGML
+Derzeit noch nicht belegt.
+
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Linuxdoc SGML">Norbert Hanz</a>])
+
+
+!newpage
+!subnode LyX
+!html_name E-LyX
+Derzeit noch nicht belegt.
+
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=LyX">Norbert Hanz</a>])
+
+
+!newpage
+!subnode Manualpage
+!html_name E-Manual
+Derzeit noch nicht belegt.
+
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Manualpage">Norbert Hanz</a>])
+
+
+!newpage
+!subnode NROFF
+!html_name E-NROFF
+Derzeit noch nicht belegt.
+
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=NROFF">Norbert Hanz</a>])
+
+
+!newpage
+!subnode Pascal-Source
+!html_name E-Pascal
+Derzeit noch nicht belegt.
+
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Pascal-Source">Norbert Hanz</a>])
+
+
+!newpage
+!subnode PDF-LaTeX
+!html_name E-PDFTeX
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=PDF-LaTeX">Norbert Hanz</a>])
+!hline
+!include PDFLATEX-Entwicklung.ui
+
+
+!newpage
+!subnode Postscript
+!html_name E-PS
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Postscript">Norbert Hanz</a>])
+!hline
+!include Postscript-Entwicklung.ui
+
+
+!newpage
+!subnode PureC Help
+!html_name E-PureC
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=PureC-Help">Norbert Hanz</a>])
+!hline
+!include PureC-Entwicklung.ui
+
+
+!newpage
+!subnode Rich Text Format
+!html_name E-RTF
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=RTF">Norbert Hanz</a>])
+!smallskip
+!subsubtoc [hh,html,stg]
+!hline
+!include RTF-Entwicklung.ui
+
+
+!newpage
+!subnode ST-Guide
+!html_name E-STGuid
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=ST-Guide">Norbert Hanz</a>])
+!hline
+!include STGuide-Entwicklung.ui
+
+
+!newpage
+!subnode Turbo-Vision Help
+!html_name E-TVHelp
+Derzeit noch nicht belegt.
+
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=TurboVision-Help">Norbert Hanz</a>])
+
+
+!newpage
+!subnode UDO-Code
+!html_name E-UDO
+Derzeit noch nicht belegt.
+
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=UDO-Code">Norbert Hanz</a>])
+
+
+!newpage
+!subnode WinHelp
+!html_name E-WHelp
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=WinHelp3">Norbert Hanz</a>])
+!hline
+!include WinHelp-Entwicklung.ui
+
+
+!newpage
+!subnode WinHelp 4
+!html_name E-WHelp4
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=WinHelp4">Norbert Hanz</a>])
+!hline
+!include WinHelp4-Entwicklung.ui
+
+
+!newpage
+!subnode Extensible Markup Language
+!html_name E-XML
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=XML">Norbert Hanz</a>])
+!hline
+!include XML-Entwicklung.ui
+
+
+!newpage
+!subnode Neue Listenstruktur
+!html_name E-List
+WÅnsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Listen">Norbert Hanz</a>])
+!hline
+!include Listen-Entwicklung.ui
+
+!begin_ignore
+!newpage
+!node Adressen (ohne Email)
+!html_name Adressen
+!begin_itemize
+!label Othmar Bahner
+!item (!B)Othmar Bahner(!b) (!nl)
+
+!label Alexander Beuscher
+!item (!B)Alexander Beuscher(!b) (!nl)
+#      (!url [alexb@feanor.schunter.etc.tu-bs.de] [mailto:alexb@feanor.schunter.etc.tu-bs.de?subject=UDO-OpenSource])
+!label Ulf Dunkel
+!item (!B)Ulf Dunkel(!b) (!nl)
+#      (!url [dunkel@calamus.net] [mailto:dunkel@calamus.net?subject=UDO-OpenSource])
+!smallskip
+!label Martin ElsÑsser
+!item (!B)Martin ElsÑsser(!b) (!nl)
+#      (!url [Martin.Elsaesser@t-online.de] [mailto:Martin.Elsaesser@t-online.de?subject=UDO-OpenSource]) (!nl)
+#      (!url [Martin_elsaesser@ll.maus.de] [mailto:Martin_elsaesser@ll.maus.de?subject=UDO-OpenSource])
+!smallskip
+!label Marcus Ertl
+!item (!B)Marcus Ertl(!b) (!nl)
+#      (!url [Marcus.Ertl@larp-welt.de] [mailto:Marcus.Ertl@larp-welt.de?subject=UDO-OpenSource])
+!smallskip
+!label Dirk Hagedorn
+!item (!B)Dirk Hagedorn(!b) (!nl)
+#      (!url [info@dirk-hagedorn.de] [mailto:info@dirk-hagedorn.de?subject=UDO-OpenSource])
+!smallskip
+!label GÅnter Hanke
+!item (!B)GÅnter Hanke(!b) (!nl)
+#      (!url [hanke@guentel.de] [mailto:hanke@guentel.de?subject=UDO-OpenSource])
+!smallskip
+!label Norbert Hanz
+!item (!B)Norbert Hanz(!b) (!nl)
+#      (!url [norbert@familie-hanz.de] [mailto:norbert@familie-hanz.de?subject=UDO-OpenSource]) (!nl)
+#      (!url [norbert.hanz@de.sasol.com] [mailto:norbert.hanz@de.sasol.com?subject=UDO-OpenSource])
+!smallskip
+!label Claas Hilbrecht
+!item (!B)Claas Hilbrecht(!b) (!nl)
+#      (!url [Claas.Hilbrecht@linum.com] [mailto:Claas.Hilbrecht@linum.com?subject=UDO-OpenSource])
+!smallskip
+!label Volker Janzen
+!item (!B)Volker Janzen(!b) (!nl)
+#      (!url [webmaster@udo-open-source.de] [mailto:webmaster@udo-open-source.de?subject=UDO-OpenSource]) (!nl)
+#      (!url [voja@voja.de] [mailto:voja@voja.de?subject=UDO-OpenSource])
+!smallskip
+!label Tobias Jung
+!item (!B)Tobias Jung(!b) (!nl)
+#      (!url [mail@tobias-jung.de] [mailto:mail@tobias-jung.de?subject=UDO-OpenSource])
+!smallskip
+!label Thomas Kerkloh
+!item (!B)Thomas Kerkloh(!b) (!nl)
+#      (!url [Thomas.Kerkloh@t-online.de] [mailto:Thomas.Kerkloh@t-online.de?subject=UDO-OpenSource])
+!smallskip
+!label Ulrich Kretschmer
+!item (!B)Ulrich Kretschmer(!b) (!nl)
+#      (!url [Kretschm.Ulr@planet-interkom.de] [mailto:Kretschm.Ulr@planet-interkom.de?subject=UDO-OpenSource])
+!smallskip
+!label Christian KrÅger
+!item (!B)Christian ""Chrisker"" KrÅger(!b) (!nl)
+#      (!url [chris@pace.de] [mailto:chris@pace.de?subject=UDO-OpenSource])
+!smallskip
+!label Stefan Kuhr
+!item (!B)Stefan Kuhr(!b) (!nl)
+#      (!url [Stefan_kuhr@os.maus.de] [mailto:Stefan_kuhr@os.maus.de?subject=UDO-OpenSource]) (!nl)
+#      (!url [Stefan.Kuhr@mch.siemens.de] [mailto:Stefan.Kuhr@mch.siemens.de?subject=UDO-OpenSource])
+!smallskip
+!label Uwe Mindrup
+!item (!B)Uwe Mindrup(!b) (!nl)
+#      (!url [uwe@mindrup.de] [mailto:uwe@mindrup.de?subject=UDO-OpenSource])
+!smallskip
+!label Axel Mohr
+!item (!B)Axel Mohr(!b) (!nl)
+#      (!url [amohr@geomar.de] [mailto:amohr@geomar.de?subject=UDO-OpenSource])
+!smallskip
+!label Thorsten Otto
+!item (!B)Thorsten Otto(!b) (!nl)
+#      (!url [Thorsten.Otto@sema-telecoms.com] [mailto:Thorsten.Otto@sema-telecoms.com?subject=UDO-OpenSource])
+!smallskip
+!label Gerald Schmidhuber
+!item (!B)Gerald Schmidhuber(!b) (!nl)
+#      (!url [road2ruin@gmx.net] [mailto:road2ruin@gmx.net?subject=UDO-OpenSource])
+!smallskip
+!label Thomas Schramm
+!item (!B)Thomas Schramm(!b) (!nl)
+#      (!url [TSchram@berlin-snafu.de] [mailto:TSchram@berlin-snafu.de?subject=UDO-OpenSource])
+!end_itemize
+!end_ignore
+
+#!listoffigures
+
+!newpage
+!node Hinweis
+!html_name Hinweis
+Erstellt wurde dieser Hypertext natÅrlich mit UDO6.
+
+!end_document

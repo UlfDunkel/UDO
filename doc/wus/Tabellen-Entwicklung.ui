@@ -1,0 +1,377 @@
+Damit die Tabellen in den Zielformaten besser aussehen bzw. handhabbar sind,
+ist eine Erweiterung der vorhandenen oder eine neue Tabellenstruktur
+notwendig.
+
+Einen neue Tabellenstruktur hat den Vorteil, daû alte Texte ohne énderung
+mit neuen UDO-Versionen Åbersetzt werden kînnen. Auûerdem braucht man
+keinen Handstand bei den Zielformaten zu machen, die sowas nicht unterstÅtzen.
+Nachteil ist, daû man u.U. zwei verschiedene Tabellen pflegen muû fÅr eine
+Sache, die eigentlich auch UDO erledigen kînnte.
+
+Folgende Features sollten unterstÅtzt werden, soweit das Zielformat es
+zulÑsst (Kursiv gesetzte Sachen sind IMHO nicht so wichtig):
+!begin_itemize
+!item Breite von Zellen
+!item (!I)Hîhe von Zellen(!i)
+!item Spalten (Zellen) verbinden
+!item Zeilen (Zellen) verbinden
+!item Zeilenumbruch in Zellen
+!item Hintergrundfarben von Zellen
+!item Rahmen von Tabellen
+!item Rahmen innerhalb der Tabelle
+!item Setzen von (!link [Sprungzielen] [Label])
+!end_itemize
+
+(!U)Ich habe hier mal eine Struktur entworfen, gebt mal Euren Kommentar dazu ab.(!u)
+Die Rahmen (aussen und innen) sollten ausschlieûlich durch die HTML-Elemente
+definiert werden. FÅr besondere ""Rahmenbedingungen"" kînnten Angaben
+innerhalb von Style-Bereichen durchgefÅhrt werden. Diese Stylebereiche
+kînnen dann auch in anderen Zielformaten umgesetzt werden. Das Åbliche Setzen
+durch (!V)!/hline(!v) bzw. die senkrechten Striche ((!V)|(!v)) kann erhalten
+bleiben.
+
+Erstmal die ursprÅngliche Tabellenstruktur:
+!begin_verbatim
+!table_caption foo
+!begin_table [l|l|l|l] !hline
+A1 !! A2 !! A3 !! A4
+B1 !! B2 !! B3 !! B4
+C1 !! C2 !! C3 !! C4
+!end_table
+!end_verbatim
+
+Und jetzt eine Erweiterung der alten Tabellenstruktur:
+!begin_verbatim
+!table_caption foo
+!table_summary Dies ist eine Zusammenfassung fÅr nicht-visuelle Medien
+!begin_table [l50|l|l25%|l] [BGC=text,BGI=text,B=x,F=text,CS=x,CP=x,R=text,H=x,W=x]
+ [BGC=text,BGI=text,HA=x,VA=x,ABBR=text] !? A1 !! A2 !! A4
+ (!label [B1] [Verweis]) !! B2 !! Die ist ein etwas lÑngerer Text, den !\
+ ich hier in dieser Zeile fortfÅhren mîchte !! B4
+(!rows [BGC=text,BGI=text,HA=text,VA=text]) C1 !! [COLS=x] C2 !! C4
+!end_table
+!end_verbatim
+
+!begin_blist [hallo]
+!item [!?] Hier fÑngt der eigentliche Zelleninhalt an.
+!item [!\] Hier ist die Tabellenzeile noch (!U)nicht(!u) zu Ende (!nl)
+      (!I)Dieses Zeichen sollte man auch fÅr mehrzeilige öberschriften
+      etc. benutzen(!i)
+!item [B] Breite des Auûenrahmens
+!item [F] Bezeichnung fÅr Frames (Auûenrahmen)
+!item [CS] Wert fÅr Cellspacing
+!item [CP] Wert fÅr Cellpadding
+!item [R] Bezeichnung fÅr Rules (Innenrahmen)
+!item [W] Breite
+!item [H] Hîhe
+!item [HA] Horizontale Ausrichtung
+!item [VA] Vertikale Ausrichtung
+!item [BGC] Hintergrundfarbe
+!item [BGI] Hintergrundbild (Kein HTML-Standard!)
+!item [COLS] Spalten verbinden
+!item [ROWS] Zeilen verbinden
+!item [ABBR] (!nolink [Hinweis]) fÅr nicht-visuelle Medien
+!item [HEAD] Kopfzeile einer Tabelle, die auf jeder Seite wiederholt wird
+!item [S] Stylebereich innerhalb einer Zelle
+!end_blist
+
+Die Breite und Hîhe von einzelnen Zellen sollte nicht unbedingt wÑhlbar sein,
+schlieûlich sollten alle Spalten gleich breit bzw. alle Zeilen gleich hoch
+sein.
+
+Auf Angaben fÅr ganze Zeilen sollte verzichtet werden, denn die einzige
+Mîglichkeit ist die Angabe der Hinter!-grund!-farbe, die auch fÅr jede Zelle
+einzeln angegeben werden kann.
+
+!label Summary
+Als zusÑtzliches Attribut fÅr Tabellen (HTML) sollte das Summary- und das
+Abreviation-Attribut eingefÅhrt werden fÅr nicht-visuelle Medien.
+
+!subsubsubheading Hier folgt jetzt ein Beispiel...
+
+!begin_verbatim
+!table_caption Autoren von UDO
+!table_summary Dies ist eine öbersicht Åber die Autoren von UDO und die !\
+ jeweiligen Fachgebiete, die sie betreuen
+!begin_table [l100|l|l25%|l] [B=3,F=void,CS=3,CP=3,R=rows,W=100%]
+[HEAD] !? Programmierer !! Formate !! Systeme !! Sonstiges
+[BGC=floralwhite] !? Ulf Dunkel !! ASC, HTML, PS, RTF, STG, WinHelp, XML !\
+ !! TOS, Windows, Mac, MagiCMac !!
+(!label [Martin ElsÑsser] [Martin]) !! HTML, LaTeX, STG !! TOS !!
+[ABBR=Alles Åber mich?] !? Norbert Hanz !! HTML, PS, RTF, STG, WinHelp, XML !\
+ !! TOS !! [VA=bottom,ROWS=2] !? WEB-Seite, Dokumentation
+Volker Janzen !! HTML !! [BGC=navajowhite] !? Windows, Linux, MagicPC
+Ulrich Kretschmer !! [HA=center,COLS=3] !? Dokumentation
+Christian KrÅger !! [HA=right] !? Postscript !! !!
+(!rows [BGC=lime]) Uwe Mindrup !! HTML, XML, PHP !! !! Linux-Shell
+Tobias Jung !! !! !! [BGI=./images/back.gif] !? WEB-Seite
+!end_table
+!end_verbatim
+
+!medskip
+!subsubsubheading ...und das Ergebniss fÅr HTML ohne CSS
+
+!begin_verbatim
+<table border="3" cellpadding="3" cellspacing="3" width="100%"
+ frame="void" rules="rows" summary="Dies ist eine öbersicht Åber die
+ Autoren von UDO und die jeweiligen Fachgebiete, die sie betreuen">
+ <caption>Autoren von UDO</caption>
+ <colgroup>
+  <col width="100" />
+  <col />
+  <col width="25%" />
+  <col />
+ </colgroup>
+ <tr align="left">
+  <td width="100">Programmierer</td>
+  <td>Formate</td>
+  <td width="25%">Systeme</td>
+  <td>Sonstiges</td>
+ </tr>
+ <tr align="left">
+  <td bgcolor="floralwhite">Ulf Dunkel</td>
+  <td>ASC, HTML, PS, RTF, STG, WinHelp, XML</td>
+  <td>TOS, Windows, Mac, MagiCMac</td>
+  <td> </td>
+ </tr>
+ <tr align="left">
+  <td><a name="Martin">Martin Els&auml;sser</a></td>
+  <td>HTML, LaTeX, STG</td>
+  <td>TOS</td>
+  <td> </td>
+ </tr>
+ <tr align="left">
+  <td abbr="Alles &uuml;ber mich?">Norbert Hanz</td>
+  <td>HTML, PS, RTF, STG, WinHelp, XML</td>
+  <td>TOS</td>
+  <td valign="bottom" rowspan="2">WEB-Seite, Dokumentation</td>
+ </tr>
+ <tr align="left">
+  <td>Volker Janzen</td>
+  <td>HTML</td>
+  <td bgcolor="navajowhite">Windows, Linux, MagicPC</td>
+ </tr>
+ <tr align="left">
+  <td>Ulrich Kretschmer</td>
+  <td align="center" colspan="3">Dokumentation</td>
+ </tr>
+ <tr>
+  <td>Christian Kr&uuml;ger</td>
+  <td align="right">Postscript</td>
+  <td> </td>
+  <td> </td>
+ </tr>
+ <tr align="left" bgcolor="lime">
+  <td>Uwe Mindrup</td>
+  <td>HTML, XML, PHP</td>
+  <td> </td>
+  <td>Linux-Shell</td>
+ </tr>
+ <tr align="left">
+  <td>Tobias Jung</td>
+  <td> </td>
+  <td> </td>
+  <td background="./images/back.gif">WEB-Seite</td>
+ </tr>
+</table>
+!end_verbatim
+!smallskip
+FÅr das Ergebniss im ""Klartext"" bitte (!xlink [hier] [Tabelle.htm]) klicken.
+
+!medskip
+!subsubsubheading ...und das Ergebniss fÅr RTF
+
+!begin_verbatim
+{\keep
+
+\trowd\trhdr
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx1500
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx3450
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx6300
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx11400
+\intbl
+\ql Programmierer\cell
+\ql Formate\cell
+\ql Systeme\cell
+\ql Sonstiges\cell
+\row
+
+\trowd
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\clcbpat12\cellx1500
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx3450
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx6300
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx11400
+\intbl
+\ql Ulf Dunkel\cell
+\ql ASC, HTML, PS, RTF, STG, WinHelp, XML\cell
+\ql TOS, Windows, Mac, MagiCMac\cell
+\ql \cell
+\row
+
+\trowd
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx1500
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx3450
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx6300
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx11400
+\intbl
+\ql Martin ElsÑsser\cell
+\ql HTML, LaTeX, STG\cell
+\ql TOS\cell
+\ql \cell
+\row
+
+\trowd
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx1500
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx3450
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx6300
+\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\clvertalb\clvmgf\cellx11400
+\intbl
+\ql {{\*\atrfstart 1}Norbert Hanz}{\v {\*\atrfend 1}
+{\*\atnid NHz}{\*\atnauthor UDO Release 7 Patchlevel 0}\chatn
+{\*\annotation{\*\atnref 1}\pard\plain \s16\fs20 
+{\field{\*\fldinst {PAGE \\# "'Seite: '#'\line '"}}{\fldrslt }}
+{\chatn }{Alles Åber mich?}}}\cell
+\ql HTML, PS, RTF, STG, WinHelp, XML\cell
+\ql TOS\cell
+\ql WEB-Seite, Dokumentation\cell
+\row
+
+\trowd
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx1500
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx3450
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\clcbpat12\cellx6300
+\clbrdrr\brdrs\clvmrg\cellx11400
+\intbl
+\ql Volker Janzen\cell
+\ql HTML\cell
+\ql Windows, Linux, MagicPC\cell
+\cell
+\row
+
+\trowd
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx1500
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\clmgf\cellx3450
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\clmrg\cellx6300
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\clmrg\cellx11400
+\intbl
+\ql Ulrich Kretschmer\cell
+\qc Dokumentation\cell
+\cell
+\cell
+\row
+
+\trowd
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx1500
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx3450
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx6300
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx11400
+\intbl
+\ql Christian KrÅger\cell
+\qr Postscript\cell
+\ql \cell
+\ql \cell
+\row
+
+\trowd
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\clcbpat10\cellx1500
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\clcbpat10\cellx3450
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\clcbpat10\cellx6300
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\clcbpat10\cellx11400
+\intbl
+\ql Uwe Mindrup\cell
+\ql HTML, XML, PHP\cell
+\ql \cell
+\ql Linux-Shell\cell
+\row
+
+\trowd
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx1500
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx3450
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx6300
+\clbrdrb\brdrs\clbrdrt\brdrs\clbrdrl\brdrs\clbrdrr\brdrs\cellx11400
+\intbl
+\ql Tobias Jung\cell
+\ql \cell
+\ql \cell
+\ql WEB-Seite\cell
+\row
+
+}
+!end_verbatim
+
+!smallskip
+FÅr das Ergebniss im ""Klartext"" bitte (!xlink [hier] [Tabelle.rtf]) klicken.
+!medskip
+
+Es empfiehlt sich, keine Rahmenformatierungen fÅr ganze Zeilen durchzufÅhren,
+sondern immer einzelne Zellen zu formatieren. Das ist zwar etwas mehr
+Quelltext, aber es muû nicht zwischen Zell- und Zeilenformatierung
+unterschieden werden.
+!begin_itemize
+!item Zellen
+!begin_blist [\xxxxxx] !short
+!item [\cellx] Rechte Grenze der Zelle
+!item [\clmgf] Die erste Zelle in der Zeile soll verbunden werden
+!item [\clmrg] Die Zelle soll mit der vorhergehenden verbunden werden
+!item [\trrhN] (!I)Hîhe einer Zeile(!i)
+!end_blist
+!medskip
+!item Rahmen
+!begin_blist [\xxxxxx] !short
+!item [\clbrdrb] Rahmen unten
+!item [\clbrdrt] Rahmen oben
+!item [\clbrdrl] Rahmen links
+!item [\clbrdrr] Rahmen rechts
+!end_blist
+!medskip
+!item Rahmenart
+!begin_blist [\xxxxxx] !short
+!item [\brdrs] Einfache Linie
+!item [\brdrsh] Schattierte Linie
+!item [\brdrb] Doppelte Linie
+!item [\brdrdot] Gepunktete Linie
+!item [\brdrdash] Gestrichelte Linie
+!item [\brdrhair] Haarlinie
+!end_blist
+!medskip
+!item Ausrichtung des Textes in der Zelle
+!begin_blist [\xxxxxx] !short
+!item [\clvertalt] Ausrichtung oben
+!item [\clvertalc] Ausrichtung zentriert
+!item [\clvertalb] Ausrichtung unten
+!item [\cltxlrtb] Ausrichtung oben nach unten
+!item [\cltxtbrl] Ausrichtung unten nach oben
+!end_blist
+!medskip
+!item Hintergrundfarbe
+!begin_blist [\xxxxxx] !short
+!item [\clcbpatN] Hintergrundfarbe einer Zelle
+!item [\clcfpatN] (!I)Linienfarbe einer Schattierung/Abdunklung(!i)
+!item [\clshdngN] (!I)Abdunklung einer Zelle(!i)
+!end_blist
+!medskip
+!item Sonstige Eigenschaften
+!begin_blist [\xxxxxx] !short
+!item [\brspN] Wert fÅr CP, Abstand Text zu Rahmen
+!item [\brdrcfN] (!I)Farbe des Rahmens(!i)
+!item [\trhdr] Kopfzeile der Tabelle, die auf jeder Seite wiederholt wird
+!item [\trgaphN] Abstand der Zellen untereinander, cellspacing?
+!item [\trkeep] Zeilen der Tabelle zusammenhalten, kein Seitenumbruch
+!end_blist
+!end_itemize
+
+!medskip
+!hline
+!subsubheading Ungeordnet (Tabellen)
+!begin_itemize
+!item vernÅnftige Tabellen ;-) ~~(Norbert Hanz)
+!begin_itemize !short
+!item Zellen verbinden (zeilenweise, spaltenweise)
+!item Hîhen und Breiten von Zellen vorgeben
+!item Farbe fÅr Tabelle und/oder Zellen
+!item ZusÑtzliche Attribute fÅr Zellen (Farbe)
+!item Tabellenzeilen Åber mehrere Quelltextzeilen verteilen ~~(Thomas Kerkloh) (!nl)
+      !\ fÅr mehrzeilige Tabellenzeilen
+!item !/label in Tabellen
+!end_itemize
+!end_itemize

@@ -1,0 +1,52 @@
+!subsubnode Aufz„hlungslisten
+(!img [rot1] [Weniger wichtig])~~|~~(!img [gelb3] [Sehr schwierig])
+
+!begin_itemize !short
+!item šbergabe des Zeichens fr die Aufz„hlung (disc, circle, square)
+!item šbergabe einer Klasse, damit speziell fr diese Liste CSS
+      eingesetzt werden kann
+!end_itemize
+
+Folgender Aufruf...
+!begin_verbatim
+!begin_itemize [Type=circle,Class=Liste1] !short
+!end_verbatim
+!smallskip
+...ergibt dann fr HTML
+!begin_verbatim
+<ul type="circle" class="Liste1">
+!end_verbatim
+Siehe auch (!link [Inhaltsverzeichnis fr HTML] [content_HTML]).
+
+!smallskip
+...ergibt dann fr RTF
+!begin_verbatim
+
+!end_verbatim
+
+!medskip
+!subsubnode Numerierungslisten
+(!img [rot1] [Weniger wichtig])~~|~~(!img [gelb3] [Sehr schwierig])
+
+!begin_itemize !short
+!item šbergabe des Numerierungstyps (1,A,a,I,i)
+!item šbergabe einer Klasse, damit speziell fr diese Liste CSS
+      eingesetzt werden kann
+!item šbergabe des Startpunktes und des Offsets
+!end_itemize
+
+Folgender Aufruf...
+!begin_verbatim
+!begin_enumerate [Type=A,Start=1,Offset=0,Class=Liste2] !short
+!end_verbatim
+...ergibt dann fr HTML
+!begin_verbatim
+<ol type="A" class="Liste2">...</ol>
+!end_verbatim
+!smallskip
+...ergibt dann fr RTF
+!begin_verbatim
+
+!end_verbatim
+
+

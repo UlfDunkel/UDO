@@ -1,0 +1,74 @@
+!subsubnode Postscript-Erweiterung (Norbert Hanz)
+(!img [rot2] [Wichtig])~~|~~(!img [gelb2] [Schwierig])
+
+Die Postcript-Ausgabe von UDO war bisher eher rudimentÑr vorhanden und
+aufgrund eines simplen aber wirkungsvollen Fehlers quasi unbrauchbar.
+
+UDO gibt Klammern [(] direkt aus. Klammern werden aber von Postscript-Codes
+interpretiert und mÅssen daher maskiert werden [\(]. Da Klammern recht
+hÑufig benutzt werden, ist jeder Quell!-text in dem eine Klammer vorkommt
+nicht richtig inter!-pretierbar. Der Adobe Distiller z.B. bricht den
+öber!-setzungs!-vorgang einfach ab.
+
+Die nun folgende ErgÑnzung des Postscriptcodes geht in erster Linie
+auf Erweiterungen ein, die gebraucht werden, wenn man den
+Postscript-Text in eine PDF-Datei Åbersetzen will.
+
+Die Funktionen erklÑren sich soweit eigentlich selbst mit den
+ent!-sprechenden ein!-fÅhrenden Kommen!-taren.
+
+Eine (!xlink [genauere ErklÑrung] [postscript.pdf]) zu den
+Postscript-Erweiterungen gibt es als PDF-Datei.
+
+Zum Schluû folgen die Postscript-Erweiterungen nochmal als
+(!link [Quelltext] [PS-Quelltext]).
+
+!smallskip
+!hline
+!subsubnode Papierformat (Postscript)
+(!img [rot1] [Weniger wichtig])~~|~~(!img [gelb2] [Schwierig])
+!begin_verbatim
+!doclayout [ps] [paper] A3PORTRAIT
+!doclayout [ps] [paper] A3LANDSCAPE
+!doclayout [ps] [paper] A4PORTRAIT
+
+/topmargin    792 def
+/lowermargin   72 def
+/rightmargin  540 def
+/leftmargin    90 def
+
+!doclayout [ps] [paper] A4LANDSCAPE
+!doclayout [ps] [paper] A5PORTRAIT
+!doclayout [ps] [paper] A5LANDSCAPE
+!end_verbatim
+
+!smallskip
+!hline
+!subsubnode Titel fÅr Datei (Postscript)
+(!img [rot3] [Sehr wichtig])~~|~~(!img [gelb1] [Leicht])
+Die Angabe des Titels einer Seite sollte zukÅnftig folgendermaûen
+angegeben werden (siehe auch (!link [ErklÑrung bei RTF] [Title-RTF])):
+
+In Postscript wird es folgendermaûen umgesetzt:
+!begin_verbatim
+!docinfo [ps] [title] Ein Buch Åber UDO
+!end_verbatim
+ergibt
+!begin_verbatim
+[ /Title (Ein Buch \374ber UDO)
+  /Author (Norbert Hanz)
+  /Subject (UDO-Open-Source)
+  /Keywords (UDO, Open Source)
+  /Creator (UDO 6 Patchlevel 13 for Win32)
+  /ModDate (D:19990406130500)
+/DOCINFO pdfmark
+
+[ {Catalog} << /FitWindow >>
+/PUT pdfmark
+!end_verbatim
+
+!ifndest [ps]
+!hline
+!label PS-Quelltext
+!vinclude ./postscript.ui
+!endif

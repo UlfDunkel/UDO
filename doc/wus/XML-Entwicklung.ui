@@ -1,0 +1,14 @@
+!subsubnode XML Document Type Definition
+(!img [rot1] [Weniger wichtig])~~|~~(!img [gelb2] [Schwierig])
+Damit die XML-Ausgabe von UDO auf vernftigen Fen steht, ist es notwendig,
+da es eine DTD gibt. Zur Ausgabe steht z.B. die DOCBOOK-DTD zur Verfgung,
+die auch unter SGML Verwendung findet. Allerdings ist diese DTD ziemlich
+umfangreich und vielleicht berzogen fr UDO.
+
+Eine andere M”glichkeit w„re es, eine eigene DTD festzulegen.
+
+Wer sich auskennt, kann ja mal Vorschl„ge machen.
+
+Anbei schon mal ein Beispiel:
+
+!vinclude XML-DTD.txt

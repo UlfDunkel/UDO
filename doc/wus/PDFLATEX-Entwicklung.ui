@@ -1,0 +1,18 @@
+!subsubnode Umsetzung von URLs (Claas Hilbrecht)
+(!img [rot3] [Sehr wichtig])~~|~~(!img [gelb2] [Schwierig])
+Die allgemeine Umsetzung von URLs entsprechend folgendem Beispiel
+!begin_verbatim
+...und das (!url [alles Åber UDO] [http://www.udo-open-source.de]) steht...
+!end_verbatim
+...ergibt fÅr pdflatex
+!begin_verbatim
+
+!end_verbatim
+
+
+!medskip
+!hline
+!subsubnode Bugs (PDF-LaTeX)
+Innerhalb von RAW-Umgebungen werden (!LaTeX)-(!nolink [Sonderzeichen])
+maskiert, z.B. (!V)\&(!v). Das sollte nicht von UDO, sondern bestenfalls
+vom Benutzer gemacht werden.
