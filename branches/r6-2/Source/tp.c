@@ -75,6 +75,9 @@ LOCAL void free_titdat ( char **var );
 	--------------------------------------------------------------	*/
 GLOBAL BOOLEAN set_mainlayout ( void )
 {
+	/* Fixed Bug #0000040 in r6.2pl2 [NHz] */
+	init_docinfo_data("A4PORTRAIT", &(laydat.paper), FALSE);
+
 	init_docinfo_data("Times New Roman", &(laydat.propfontname), FALSE);
 	laydat.propfontsize = 11;
 	init_docinfo_data("Courier New", &(laydat.monofontname), FALSE);
