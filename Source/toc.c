@@ -2003,9 +2003,20 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 	if(html_header_date)
 	{
 		char zone[6];
+		time_t uhrzeit;
+		int hour_local, min_local, min_utc, hour_utc;
 	
 		if(!strcmp(html_header_date_zone, ""))
-			um_strcpy(zone, "+00:00", 5, "output_html_meta1");
+		{
+			time(&uhrzeit);
+			hour_local = localtime(&uhrzeit)->tm_hour;
+			hour_utc = gmtime(&uhrzeit)->tm_hour;
+			min_local = localtime(&uhrzeit)->tm_min;
+			min_utc = gmtime(&uhrzeit)->tm_min;
+			sprintf(zone, "%+03d:%02d", hour_local-hour_utc, min_utc-min_local);
+
+/*			um_strcpy(zone, "+00:00", 5, "output_html_meta1");*/
+		}
 		else
 			um_strcpy(zone, html_header_date_zone, 5, "output_html_meta2");
 		voutlnf("<meta name=\"date\" content=\"%d-%02d-%02dT%02d:%02d:%02d%s\">", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec, zone);
