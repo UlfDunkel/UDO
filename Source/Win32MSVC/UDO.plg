@@ -6,7 +6,7 @@
 --------------------Configuration: UDO - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Temp\TMP\RSP2E.tmp" with contents
+Creating temporary file "C:\Temp\TMP\RSP1E.tmp" with contents
 [
 /nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /D "__WIN32__" /Fp"Debug/UDO.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /Zm200 /c 
 "E:\ME\Develop\UDO\Source\UDO\Source\abo.c"
@@ -25,8 +25,8 @@ Creating temporary file "C:\Temp\TMP\RSP2E.tmp" with contents
 "E:\ME\Develop\UDO\Source\UDO\Source\tp.c"
 "E:\ME\Develop\UDO\Source\UDO\Source\udo.c"
 ]
-Creating command line "cl.exe @C:\Temp\TMP\RSP2E.tmp" 
-Creating temporary file "C:\Temp\TMP\RSP2F.tmp" with contents
+Creating command line "cl.exe @C:\Temp\TMP\RSP1E.tmp" 
+Creating temporary file "C:\Temp\TMP\RSP1F.tmp" with contents
 [
 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/UDO.pdb" /debug /machine:I386 /out:"Debug/UDO.exe" /pdbtype:sept 
 .\Debug\abo.obj
@@ -45,7 +45,7 @@ kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32
 .\Debug\tp.obj
 .\Debug\udo.obj
 ]
-Creating command line "link.exe @C:\Temp\TMP\RSP2F.tmp"
+Creating command line "link.exe @C:\Temp\TMP\RSP1F.tmp"
 <h3>Output Window</h3>
 Compiling...
 abo.c
