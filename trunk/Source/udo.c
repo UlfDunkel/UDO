@@ -619,18 +619,21 @@ int um_free_count;
 int memory_error;
 char endstring[]=UM_END_STRING;
 size_t endstring_len;
-MEMLIST *anker;
+MEMLIST *anker; /* This is the anchor of our memory-usage list */
 
 /*
  * init_um() sets up the Memory-Layer
  */
 GLOBAL void init_um()
 {
+	/* Initialize Counters, anchor for memory-usage list, memory error indicator and the
+	 * lenght of the ending string
+	 */
 	um_malloc_count=0;
 	um_free_count=0;
 	anker=NULL;
 	memory_error=0;
-	endstring_len=strlen(endstring)+1;
+	endstring_len=strlen(endstring)+1; /* plus 1 for the ending null-byte! */
 }
 /*
  * exit_um() frees all memory alocated by um_mallocs and makes consistency
@@ -648,9 +651,10 @@ GLOBAL void exit_um()
 #ifdef UM_DEBUG_SHOW_CALLS
 		printf("exit_um: Cleaning up\n");
 #endif
+		/* Hier wird die Speicherliste entlang gelaufen */
 		while ((memory_error==0)&&(anker != NULL))
 		{
-			um_free(anker->block);
+			um_free(anker->block); /* Wir geben den in der Liste gefundenen Speicherblock frei */
 		}
 	}
 }
@@ -661,19 +665,19 @@ GLOBAL void *um_malloc(size_t size)
 	MEMLIST *mptr;
 	buffer=NULL;
 	
-	size+=endstring_len;
+	size+=endstring_len; /* We need to allocate more memory... */
 	
 	buffer=malloc(size); /* Allocate Memory */
-	if (buffer != NULL)
+	if (buffer != NULL)	/* Were we successfull? */
 	{
 		mptr=malloc(sizeof(MEMLIST)); /* Speicher für Verwaltungsinformationen anfordern */
 		if (mptr != NULL)
 		{
-			um_malloc_count++;
+			um_malloc_count++; /* Okay, we got our management unit */
 			mptr->check=UM_LONG_CHECK; /* Checksumme initialisieren */
 			mptr->block=buffer; /* Dieser Puffer gehört zu unserer Verwaltungseinheit */
 			mptr->endmark=(char *)buffer+size-endstring_len;
-			strcpy(mptr->endmark, endstring);
+			strcpy(mptr->endmark, endstring); /* copy ending string for checks */
 			/* Wir hängen uns vorne an die Liste an */
 			mptr->next=anker;
 			anker=mptr;
@@ -698,9 +702,9 @@ GLOBAL void *um_realloc(void *block, size_t size)
 	MEMLIST *tanker;
 	buffer=NULL;
 
-	tanker=anker;
+	tanker=anker; /* Laufvariable initialisieren */
 	
-	size+=endstring_len;
+	size+=endstring_len; /* We need more memory for the ending string */
 
 	if ((tanker!=NULL)&&(memory_error==0))
 	{
@@ -719,14 +723,18 @@ GLOBAL void *um_realloc(void *block, size_t size)
 			}
 			else
 			{
+				/* reallocate memory */
 				buffer=realloc(tanker->block, size);
+				/* Was this successfull? */
 				if (buffer != NULL)
 				{
+					/* We need to save the new buffer */
 					tanker->block=buffer;
 					tanker->endmark=(char *)buffer+size-endstring_len;
+					/* Copy ending string */
 					strcpy(tanker->endmark, endstring);
 				}
-				lauf=0;
+				lauf=0; /* exit loop */
 			}
 		} while ((tanker != NULL)&&(lauf==1));
 
@@ -778,7 +786,7 @@ GLOBAL void um_free(void *memblock)
 						last->next=tanker->next;
 					}
 					free(tanker); /* Verwaltungsobjekt freigeben */
-					lauf=0;
+					lauf=0; /* exit loop */
 				}
 				else
 				{
