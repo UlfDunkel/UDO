@@ -478,24 +478,27 @@ GLOBAL void del_whitespaces ( char *s)
 	
 	/* Neue Methode: schneller */
 	
-	char *p1st= s;
+	char *p1st = s;
 	
-	while (*p1st!=EOS && (*p1st==' ' || *p1st=='\t') )
-	{	p1st++;
+	while (*p1st != EOS && (*p1st == ' ' || *p1st == '\t') )
+	{	++p1st;
 	}
+
+	sl = strlen(p1st);
 	
-	if (*p1st!=EOS)
-	{	sl= strlen(p1st);
+	if (*p1st != EOS && s != p1st)
+	{	
 		memmove(s, p1st, sl+1);
 	}
 	
 	/* Rechts TAB's und Leerzeichen entfernen */
-	sl= strlen(s);
-	while (	(sl>0) && ((s[sl-1]==' ') || (s[sl-1]=='\t')) )
-	{	s[sl-1]=EOS;
-		sl--;
+	if (sl > 0)
+	{
+		p1st = s + sl - 1;
+		while (*p1st == ' ' || *p1st == '\t')
+			--p1st;
+		p1st[1] = EOS;
 	}
-
 }	/*del_whitespaces*/
 
 
