@@ -715,9 +715,10 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 			replace_udo_tilde(n);
 			replace_udo_nbsp(n);
 
-			if ( strpbrk(n, " :;\\()")!=NULL )
+			if ( strpbrk(n, " :;\\()/")!=NULL )
 			{	strcpy(s, n);
-				node2postscript(s, FALSE);
+				node2postscript(n, KPS_CONTENT); /* New in r6pl16 [NHz] */
+				node2postscript(s, KPS_NAMEDEST); /* Changed in r6pl16 [NHz] */
 				sprintf(ref, " (%s) /%s 0 0 0 Link", n, s);
 			}
 			else
@@ -4055,9 +4056,11 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 			else
 			{	if (numbers[0]!=EOS) strcat(numbers, " ");
 				sprintf(n, "%s%s", numbers, name);
-				outln("18 changeFontSize");
+				/* Changed in r6pl16 [NHz] */
+				/* Nodesize ist set on discrete value */
+				voutlnf("%d changeFontSize", iDocNode1fontSize);
 			}
-			node2postscript(name, FALSE); /* New in r6pl15 [NHz] */
+			node2postscript(name, KPS_NAMEDEST); /* Changed in r6pl16 [NHz] */
 			voutlnf("/NodeName (%s %s) def", lang.chapter, n); /* New in r6pl15 [NHz] */
 			outln("newline");
 			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
@@ -4066,7 +4069,6 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 			outln("Boff");
 			outln("newline");
 			voutlnf("%d changeFontSize", laydat.propfontsize); /* Changed in r6pl15 [NHz] */
-/*			outln("changeBaseFont");*/
 			break;
 
 		case TODRC:
@@ -4555,17 +4557,17 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 			else
 			{	if (numbers[0]!=EOS) strcat(numbers, " ");
 				sprintf(n, "%s%s", numbers, name);
-				outln("14 changeFontSize");
+				/* Changed in r6pl16 [NHz] */
+				voutlnf("%d changeFontSize", iDocNode2fontSize);
 			}
 			outln("newline");
-			node2postscript(name, FALSE); /* New in r6pl15 [NHz] */
+			node2postscript(name, KPS_NAMEDEST); /* Changed in r6pl16 [NHz] */
 			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
 			outln("Bon");
 			voutlnf("(%s) udoshow", n);
 			outln("Boff");
 			outln("newline");
 			voutlnf("%d changeFontSize", laydat.propfontsize); /* Changed in r6pl15 [NHz] */
-/*			outln("changeBaseFont");*/
 			break;
 
 		case TODRC:
@@ -5005,17 +5007,17 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			else
 			{	if (numbers[0]!=EOS) strcat(numbers, " ");
 				sprintf(n, "%s%s", numbers, name);
-				outln("11 changeFontSize");
+				/* Changed in r6pl16 [NHz] */
+				voutlnf("%d changeFontSize", iDocNode3fontSize);
 			}
 			outln("newline");
-			node2postscript(name, FALSE); /* New in r6pl15 [NHz] */
+			node2postscript(name, KPS_NAMEDEST); /* Changed in r6pl16 [NHz] */
 			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
 			outln("Bon");
 			voutlnf("(%s) udoshow", n);
 			outln("Boff");
 			outln("newline");
 			voutlnf("%d changeFontSize", laydat.propfontsize); /* Changed in r6pl15 [NHz] */
-/*			outln("changeBaseFont");*/
 			break;
 
 		case TODRC:
@@ -5457,9 +5459,10 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			else
 			{	if (numbers[0]!=EOS) strcat(numbers, " ");
 				sprintf(n, "%s%s", numbers, name);
-				outln("11 changeFontSize");
+				/* Changed in r6pl16 [NHz] */
+				voutlnf("%d changeFontSize", iDocNode4fontSize);
 			}
-			node2postscript(name, FALSE); /* New in r6pl15 [NHz] */
+			node2postscript(name, KPS_NAMEDEST); /* Changed in r6pl16 [NHz] */
 			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
 			outln("newline");
 			outln("Bon");
@@ -5467,7 +5470,6 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			outln("Boff");
 			outln("newline");
 			voutlnf("%d changeFontSize", laydat.propfontsize); /* Changed in r6pl15 [NHz] */
-/*			outln("changeBaseFont ");*/
 			break;
 
 		case TODRC:
@@ -5879,11 +5881,13 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 						li= toc[i]->labindex;
 
 						strcpy(s, lab[li]->name);
-/*						node2postscript(lab[li]->name, TRUE);*/
-						node2postscript(s, FALSE);
+						/* Changed in r6pl16 [NHz] */
+						strcpy(n, lab[li]->name);
+						node2postscript(n, KPS_BOOKMARK);
+						node2postscript(s, KPS_NAMEDEST);
 						voutlnf("(%d %s) /%s %d Bookmarks",
 											toc[i]->nr1+toc_offset,
-											lab[li]->name, s,
+											n, s,
 											toc[i]->count_n2);
 					}/* TOC_NODE1 */
 					
@@ -5894,12 +5898,14 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 						li= toc[i]->labindex;
 
 						strcpy(s, lab[li]->name);
-						node2postscript(lab[li]->name, TRUE);
-						node2postscript(s, FALSE);
+						/* Changed in r6pl16 [NHz] */
+						strcpy(n, lab[li]->name);
+						node2postscript(n, KPS_BOOKMARK);
+						node2postscript(s, KPS_NAMEDEST);
 						voutlnf("(%d.%d %s) /%s %d Bookmarks",
 											toc[i]->nr1+toc_offset,
 											toc[i]->nr2+subtoc_offset,
-											lab[li]->name, s,
+											n, s,
 											toc[i]->count_n3);
 					}/* TOC_NODE2 */
 					
@@ -5909,13 +5915,15 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 						li= toc[i]->labindex;
 
 						strcpy(s, lab[li]->name);
-						node2postscript(lab[li]->name, TRUE);
-						node2postscript(s, FALSE);
+						/* Changed in r6pl16 [NHz] */
+						strcpy(n, lab[li]->name);
+						node2postscript(n, KPS_BOOKMARK);
+						node2postscript(s, KPS_NAMEDEST);
 						voutlnf("(%d.%d.%d %s) /%s %d Bookmarks",
 											toc[i]->nr1+toc_offset,
 											toc[i]->nr2+subtoc_offset,
 											toc[i]->nr3+subsubtoc_offset,
-											lab[li]->name, s,
+											n, s,
 											toc[i]->count_n4);
 					}/* TOC_NODE3 */
 				
@@ -5925,14 +5933,16 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 						li= toc[i]->labindex;
 
 						strcpy(s, lab[li]->name);
-						node2postscript(lab[li]->name, TRUE);
-						node2postscript(s, FALSE);
-						voutlnf("(%d.%d.%d.%d %s) /%s Bookmarks",
+						/* Changed in r6pl16 [NHz] */
+						strcpy(n, lab[li]->name);
+						node2postscript(n, KPS_BOOKMARK);
+						node2postscript(s, KPS_NAMEDEST);
+						voutlnf("(%d.%d.%d.%d %s) /%s 0 Bookmarks",
 											toc[i]->nr1+toc_offset,
 											toc[i]->nr2+subtoc_offset,
 											toc[i]->nr3+subsubtoc_offset,
 											toc[i]->nr4+subsubsubtoc_offset,
-											lab[li]->name, s);
+											n, s);
 					}/* TOC_NODE4 */
 
 
@@ -5965,11 +5975,13 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 						li= toc[i]->labindex;
 
 						strcpy(s, lab[li]->name);
-						node2postscript(lab[li]->name, TRUE);
-						node2postscript(s, FALSE);
+						/* Changed in r6pl16 [NHz] */
+						strcpy(n, lab[li]->name);
+						node2postscript(n, KPS_BOOKMARK);
+						node2postscript(s, KPS_NAMEDEST);
 						voutlnf("(%c %s) /%s %d Bookmarks",
 											'A'-1+toc[i]->nr1+toc_offset,
-											lab[li]->name, s,
+											n, s,
 											toc[i]->count_n2);
 					}/* TOC_NODE1 */
 					
@@ -5980,12 +5992,15 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 						li= toc[i]->labindex;
 
 						strcpy(s, lab[li]->name);
-						node2postscript(lab[li]->name, TRUE);
-						node2postscript(s, FALSE);
+						/* Changed in r6pl16 [NHz] */
+						strcpy(s, lab[li]->name);
+						strcpy(n, lab[li]->name);
+						node2postscript(n, KPS_BOOKMARK);
+						node2postscript(s, KPS_NAMEDEST);
 						voutlnf("(%c.%2d %s) /%s %d Bookmarks",
 											'A'-1+toc[i]->nr1+toc_offset,
 											toc[i]->nr2+subtoc_offset,
-											lab[li]->name, s,
+											n, s,
 											toc[i]->count_n3);
 					}/* TOC_NODE2 */
 					
@@ -5995,13 +6010,15 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 						li= toc[i]->labindex;
 
 						strcpy(s, lab[li]->name);
-						node2postscript(lab[li]->name, TRUE);
-						node2postscript(s, FALSE);
+						/* Changed in r6pl16 [NHz] */
+						strcpy(n, lab[li]->name);
+						node2postscript(n, KPS_BOOKMARK);
+						node2postscript(s, KPS_NAMEDEST);
 						voutlnf("(%c.%2d.%2d %s) /%s %d Bookmarks",
 											'A'-1+toc[i]->nr1+toc_offset,
 											toc[i]->nr2+subtoc_offset,
 											toc[i]->nr3+subsubtoc_offset,
-											lab[li]->name, s,
+											n, s,
 											toc[i]->count_n4);
 					}/* TOC_NODE3 */
 				
@@ -6011,14 +6028,15 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 						li= toc[i]->labindex;
 
 						strcpy(s, lab[li]->name);
-						node2postscript(lab[li]->name, TRUE);
-						node2postscript(s, FALSE);
+						/* Changed in r6pl16 [NHz] */
+						strcpy(n, lab[li]->name);
+						node2postscript(n, KPS_BOOKMARK);
+						node2postscript(s, KPS_NAMEDEST);
 						voutlnf("(%c.%2d.%2d.%2d %s) /%s 0 Bookmarks",
 											'A'-1+toc[i]->nr1+toc_offset,
 											toc[i]->nr2+subtoc_offset,
 											toc[i]->nr3+subsubtoc_offset,
-											toc[i]->nr4+subsubsubtoc_offset,
-											lab[li]->name, s);
+											n, s);
 					}/* TOC_NODE4 */
 
 				}/* toc[i]->n1 > 0 */
