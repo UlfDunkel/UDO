@@ -32,6 +32,7 @@ const char *id_str_c= "@(#) str.c       10.03.1997";
 
 #include "export.h"
 #include "str.h"
+#include "version.h"
 
 
 /*	############################################################
@@ -756,6 +757,21 @@ GLOBAL int my_stricmp ( const char *s1, const char *s2 )
 	  return strcasecmp(s1, s2);
 #else
 	  return strcmp(s1, s2);
+#endif
+
+}	/* my_stricmp */
+
+/*	----------------------------------------------
+	Strings caseinsensitiv vergleichen
+	max. n Zeichen
+	----------------------------------------------	*/
+GLOBAL int my_strnicmp ( const char *s1, const char *s2, size_t len )
+{
+
+#if HAVE_STRNICMP
+	return strnicmp(s1, s2, len);
+#else
+	return strncmp(s1, s2, len);
 #endif
 
 }	/* my_stricmp */
