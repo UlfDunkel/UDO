@@ -9134,11 +9134,25 @@ GLOBAL void set_html_header_date ( void )
 /* New feature #0000053 in V6.5.2 [NHz] */
 GLOBAL void set_html_header_links ( void )
 {
+	char *kind;
+	char possible[]="navigation chapter";
+
 	tokcpy2(html_header_links_kind, 40);
+
 	if (html_header_links_kind[0]==EOS)
 	{	error_empty_header_links();
 		return;
 	}
+
+	kind = strtok(html_header_links_kind, " ");
+	while(kind != NULL)
+	{
+		if(strstr(possible, kind)==NULL)
+			error_argument_header_links(kind);
+
+		kind = strtok(NULL, " ");
+	}
+
 	html_header_links = TRUE;
 
 }	/* set_html_header_links */

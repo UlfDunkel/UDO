@@ -503,6 +503,11 @@ GLOBAL void error_empty_header_links ( void )
 {	error_msg_solo("empty !html_header_links");
 }
 
+/* New feature #0000053 in V6.5.2 [NHz] */
+GLOBAL void error_argument_header_links ( const char *s )
+{	error_msg_para("unknown linktype (!html_header_links): %s", s);
+}
+
 GLOBAL void error_error ( const char *s )	/*r6pl4*/
 {	error_msg_solo(s);
 }
