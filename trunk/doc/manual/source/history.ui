@@ -66,6 +66,62 @@ In this chapter you will find a short summary of all the changes in the past.
 !end_description
 !end_ignore
 
+################################################################################
+!iflang [german]
+!begin_node Änderungen von Version 6.2.1 nach 6.4.0
+!endif
+!iflang [english]
+!begin_node Changes from version 6.2.1 to 6.4.0
+!endif
+!html_name history_6-2-1_to_6-4-0.html
+
+(!MISS)
+
+!begin_description
+!iflang [german]
+# !item [Neue Formate:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !item [Neue Befehle:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !item [Neuheiten:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !item [Änderungen:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !item [Syntaxänderungen:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !item [Fehlerbehebungen:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !endif
+
+!iflang [english]
+# !item [New destination formats:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !item [New commands:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !item [News:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !item [Changes:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !item [Syntax changes:]
+# 	!begin_itemize !short
+# 	!end_itemize
+# !item [Bugfixes:]
+# 	!begin_itemize !short
+# 	!end_itemize
+!endif
+!end_description
+
+!end_node
 
 ################################################################################
 !iflang [german]
