@@ -116,7 +116,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
 	
 	if (strcmp(content, "propfontsize")==0)
 	{	if ( str_for_desttype(format) )
-		{	/* Gr”že des Proportionalfonts festlegen */
+		{	/* Größe des Proportionalfonts festlegen */
 			laydat.propfontsize = atoi(data);
 		}
 		return TRUE;
@@ -124,7 +124,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
 
 	if (strcmp(content, "monofontname")==0)
 	{	if ( str_for_desttype(format) )
-		{	/* Žquidistanten Font festlegen */
+		{	/* äquidistanten Font festlegen */
 			init_docinfo_data(data, &(laydat.monofontname), FALSE);
 		}
 		return TRUE;
@@ -132,7 +132,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
 	
 	if (strcmp(content, "monofontsize")==0)
 	{	if ( str_for_desttype(format) )
-		{	/* Gr”že des „quidistanten Fonts festlegen */
+		{	/* Größe des äquidistanten Fonts festlegen */
 			laydat.monofontsize = atoi(data);
 		}
 		return TRUE;

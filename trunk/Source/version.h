@@ -1,4 +1,4 @@
-/*	##################################################
+/*	##################	################################
 	# @(#) version.h
 	# @(#)
 	# @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
@@ -43,22 +43,22 @@
 	Release-Nummer und Patchlevel setzen
 	------------------------------------------------------------	*/
 #define	UDO_REL		"6"
-#define	UDO_PL		"14"
+#define	UDO_PL		"15"
 #define	UDO_URL		"http://www.udo-open-source.org"
-#define	UDO_MADE	"Made with UDO"
+#define	UDO_MADE		"Made with UDO"
 
 
 /*	------------------------------------------------------------
 	Zeichensaetze
 	------------------------------------------------------------	*/
 #define	CODE_LAT1		0		/* ISO Latin 1						*/
-#define	CODE_DOS		1		/* IBM PC							*/
-#define	CODE_437		1		/* DOS Codepage 437 (wie IBM PC)	*/
-#define	CODE_TOS		2		/* Atari ST							*/
-#define CODE_HP8		3		/* HP-Roman-8						*/
-#define	CODE_MAC		4		/* Apple Macintosh					*/
+#define	CODE_DOS			1		/* IBM PC							*/
+#define	CODE_437			1		/* DOS Codepage 437 (wie IBM PC)	*/
+#define	CODE_TOS			2		/* Atari ST							*/
+#define CODE_HP8			3		/* HP-Roman-8						*/
+#define	CODE_MAC			4		/* Apple Macintosh					*/
 #define	CODE_NEXT		5		/* NextSTep							*/
-#define	CODE_850		6		/* DOS Codepage 850					*/
+#define	CODE_850			6		/* DOS Codepage 850					*/
 #define	CODE_UTF8		7		/* UTF-8 (BeOS)						*/
 
 /*	------------------------------------------------------------
