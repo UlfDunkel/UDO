@@ -1,5 +1,5 @@
 # doc/manual/source/syntax.ui
-# letzte Änderungen: 24.01.2004 / last changes: Jan 24, 2004
+# letzte Änderungen: 28.01.2004 / last changes: Jan 28, 2004
 
 
 ################################################################################
@@ -6110,15 +6110,19 @@ the following lines will be converted until UDO reads the (!W [endif]) or
 the following lines until (!KW [endif]) or (!KW [else]).
 !endif
 
-!begin_description
-
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!begin_node Abfrage des Zielformats
+!endif
+!iflang [english]
+!begin_node Testing the destination format
+!endif
+!html_name queries_dest.html
+
 !iflang [german]
 !index Abfrage !! Zielformat
 !index Zielformat !! Abfrage
 !index (!kw [ifdest])
-
-!item [Abfrage des Zielformats]
 
 Mit dem Befehl (!KW [ifdest]) können Sie das Format abfragen, welches von UDO
 ausgegeben wird. Zur Abfrage verwenden Sie die Kürzel der Ausgabeformate:
@@ -6181,8 +6185,6 @@ verpassen:
 !index Destination format !! Query
 !index (!kw [ifdest])
 
-!item [Testing the destination format]
-
 With the command (!KW [ifdest]) you can test the destination format. Use
 the following abbreviations:
 
@@ -6236,13 +6238,22 @@ document title for hypertext formats:
 !end_quote
 !endif
 
+!end_node
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!begin_node Abfrage der Sprache
+!endif
+!iflang [english]
+!begin_node Testing the destination language
+!endif
+!html_name queries_lang.html
+
+
 !iflang [german]
 !index Abfrage !! Sprache
 !index Sprache !! Abfrage
 !index (!kw [iflang])
-
-!item [Abfrage der Sprache]
 
 Mit dem Befehl (!KW [iflang]) können Sie die Sprache abfragen, die für die
 Ausgabe der Zieldatei verwendet wird. Hierbei gelten folgende Zeichenketten:
@@ -6304,8 +6315,6 @@ angeben.
 !index Language !! Query
 !index (!kw [iflang])
 
-!item [Testing the destination language]
-
 Using the (!KW [iflang]) command you can test the language UDO will use in
 the destination file. Use the following words to test the language:
 
@@ -6358,14 +6367,22 @@ destination language. Thus you can write the upper example this way, too:
 It goes without saying that you can test more than one language.
 !endif
 
+!end_node
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!begin_node Abfrage von Symbolen
+!endif
+!iflang [english]
+!begin_node Testing symbols
+!endif
+!html_name queries_symbols.html
+
 !iflang [german]
 !index Abfrage !! Symbole
 !index Symbole !! Abfrage
 !index (!kw [ifnset])
 !index (!kw [ifset])
-
-!item [Abfrage von Symbolen]
 
 Mit dem Befehl (!KW [ifset]) können Sie testen, ob Symbole gesetzt sind, mit
 dem Befehl (!KW [ifnset]), ob Symbole nicht gesetzt sind.
@@ -6404,8 +6421,6 @@ so bindet UDO ein Farbbild, andernfalls ein monochromes Bild ein.
 !index (!kw [ifnset])
 !index (!kw [ifset])
 
-!item [Testing symbols]
-
 With the (!KW [ifset]) command you can test if a symbol was set in the
 preamble or via command line. The (!KW [ifnset]) tests if a symbol is
 (!I)not(!i) set.
@@ -6435,13 +6450,21 @@ the symbol with (!KW [set] [UseColor]) inside the preamble UDO will display
 the color image instead of the monochrome image.
 !endif
 
+!end_node
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+!iflang [german]
+!begin_node Abfrage des Betriebssystems
+!endif
+!iflang [english]
+!begin_node Testing the operating system
+!endif
+!html_name queries_os.html
+
 !iflang [german]
 !index Abfrage !! Betriebssystem
 !index Betriebssystem !! Abfrage
 !index (!kw [ifos])
-
-!item [Abfrage des Betriebssystems]
 
 Mit dem Befehl (!KW [ifos]) können Sie das Betriebssystem abfragen, auf dem
 UDO läuft. Hierbei gelten folgende Zeichenketten:
@@ -6475,8 +6498,6 @@ ob UDO (!I)nicht(!i) auf dem angegebenen Betriebssystem läuft.
 !index Operating system !! Query
 !index (!kw [ifos])
 
-!item [Testing the operating system]
-
 With the (!KW [ifos]) command you can test the operating system UDO is
 running on. Use the following words for this kind of query:
 
@@ -6501,8 +6522,9 @@ The related command called (!KW [ifnos]) tests if UDO does (!I)not(!i)
 run on the given operating system.
 !endif
 
+!end_node
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!end_description
 
 !end_node
 
