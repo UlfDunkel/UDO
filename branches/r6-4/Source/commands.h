@@ -151,8 +151,8 @@
 /*	HTML-Kommandos										*/
 /*	--------------------------------------------------	*/
 
-#define	HTML_BR			"<br>"
-#define	HTML_HR			"<hr>"
+#define	HTML_BR			"<br />"
+#define	HTML_HR			"<hr />"
 #define	HTML_CENTER_ON	"<p align=center>"
 #define	HTML_CENTER_OFF	"</p>"
 

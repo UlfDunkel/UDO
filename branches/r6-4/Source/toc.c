@@ -666,12 +666,12 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 					{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 					}
 					if (l->is_node || l->is_alias)
-					{	sprintf(ref, "<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s></a>",
+					{	sprintf(ref, "<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s /></a>",
 							/* Changed in r6pl16 [NHz] */
 							htmlfilename, suff, html_target, pic, n, sGifSize);
 					}
 					else
-					{	sprintf(ref, "<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s></a>",
+					{	sprintf(ref, "<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s /></a>",
 							/* Changed in r6pl16 [NHz] */
 							htmlfilename, suff, sNoSty, html_target, pic, n, sGifSize);
 					}
@@ -1979,21 +1979,21 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 	char backpage[256], href[256], alt[256], *tok;
 
 	if (!html_ignore_8bit)
-	{	outln("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=iso-8859-1\">");
+	{	outln("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=iso-8859-1\" />");
 	}
 
 	/* New in r6pl16 [NHz] */
-	voutlnf("<meta http-equiv=\"Content-Language\" content=\"%s\">", lang.html_lang);
-	outln("<meta http-equiv=\"Content-Style-Type\" content=\"text/css\">");
-	outln("<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\">");
+	voutlnf("<meta http-equiv=\"Content-Language\" content=\"%s\" />", lang.html_lang);
+	outln("<meta http-equiv=\"Content-Style-Type\" content=\"text/css\" />");
+	outln("<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\" />");
 
-	voutlnf("<meta name=\"Generator\" content=\"UDO %s.%s PL%s for %s\">",
+	voutlnf("<meta name=\"Generator\" content=\"UDO %s.%s PL%s for %s\" />",
 			UDO_REL, UDO_SUBVER,
 			UDO_PL,
 			UDO_OS);
 
 	if (titdat.author!=NULL)
-	{	voutlnf("<meta name=\"Author\" content=\"%s\">", titdat.author);
+	{	voutlnf("<meta name=\"Author\" content=\"%s\" />", titdat.author);
 	}
 
 	if (keywords)
@@ -2001,11 +2001,11 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		if (ti>=0)
 		{
 			if (toc[ti]->keywords!=NULL)
-			{	voutlnf("<meta name=\"Keywords\" content=\"%s\">",
+			{	voutlnf("<meta name=\"Keywords\" content=\"%s\" />",
 						toc[ti]->keywords);
 			}
 			if (toc[ti]->description!=NULL)
-			{	voutlnf("<meta name=\"Description\" content=\"%s\">",
+			{	voutlnf("<meta name=\"Description\" content=\"%s\" />",
 						toc[ti]->description);
 			}
 
@@ -2014,10 +2014,10 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 
 	/*r6pl5: <link>-Tag */
 	if (titdat.webmasteremail!=NULL)
-	{	voutlnf("<meta name=\"Email\" content=\"%s\">", titdat.webmasteremail);
-		voutlnf("<link rev=\"made\" href=\"mailto:%s\" title=\"E-Mail\">", titdat.webmasteremail);
+	{	voutlnf("<meta name=\"Email\" content=\"%s\" />", titdat.webmasteremail);
+		voutlnf("<link rev=\"made\" href=\"mailto:%s\" title=\"E-Mail\" />", titdat.webmasteremail);
 		/* New in r6pl16 [NHz] */
-		voutlnf("<link rel=\"author\" href=\"mailto:%s\" title=\"E-Mail\">", titdat.webmasteremail);
+		voutlnf("<link rel=\"author\" href=\"mailto:%s\" title=\"E-Mail\" />", titdat.webmasteremail);
 	}
 
 
@@ -2037,14 +2037,14 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		/* Feststellen, ob die Referenz im gleichen File liegt */
 		if (strcmp(old_outfile.name, outfile.name)!=0)
 		{
-			voutlnf("<link rel=\"start\" href=\"%s%s\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.html_start);
+			voutlnf("<link rel=\"start\" href=\"%s%s\"%s title=\"%s\" />", old_outfile.name, outfile.suff, sTarget, lang.html_start);
 			/* Special for CAB */
-			voutlnf("<link rel=\"home\" href=\"%s%s\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.html_start);
+			voutlnf("<link rel=\"home\" href=\"%s%s\"%s title=\"%s\" />", old_outfile.name, outfile.suff, sTarget, lang.html_start);
 			if (uses_tableofcontents)
 			{	/* New in r6pl15 [NHz] */
-				voutlnf("<link rel=\"contents\" href=\"%s%s#UDOTOC\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.contents);
+				voutlnf("<link rel=\"contents\" href=\"%s%s#UDOTOC\"%s title=\"%s\" />", old_outfile.name, outfile.suff, sTarget, lang.contents);
 				/* Special for CAB */
-				voutlnf("<link rel=\"toc\" href=\"%s%s#UDOTOC\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.contents);
+				voutlnf("<link rel=\"toc\" href=\"%s%s#UDOTOC\"%s title=\"%s\" />", old_outfile.name, outfile.suff, sTarget, lang.contents);
 			}
 		}
 	}
@@ -2081,7 +2081,7 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 			strcpy(alt, href);
 
 		/* Special for CAB */
-		voutlnf("<link rel=\"up\" href=\"%s\" title=\"%s\">", href, alt);
+		voutlnf("<link rel=\"up\" href=\"%s\" title=\"%s\" />", href, alt);
 	}
 
 	/* New in r6pl15 [NHz] */
@@ -2099,9 +2099,9 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		/* Special for CAB */
 		/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
 		if(strchr(htmlname, '.') != NULL)
-			voutlnf("<link rel=\"first\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
+			voutlnf("<link rel=\"first\" href=\"%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, sTarget, s);
 		else
-			voutlnf("<link rel=\"first\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
+			voutlnf("<link rel=\"first\" href=\"%s%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, outfile.suff, sTarget, s);
 	}
 
 
@@ -2117,15 +2117,15 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
 		if(strchr(htmlname, '.') != NULL)
 		{
-			voutlnf("<link rel=\"prev\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
+			voutlnf("<link rel=\"prev\" href=\"%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, sTarget, s);
 			/* Special for CAB */
-			voutlnf("<link rel=\"previous\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
+			voutlnf("<link rel=\"previous\" href=\"%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, sTarget, s);
 		}
 		else
 		{
-			voutlnf("<link rel=\"prev\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
+			voutlnf("<link rel=\"prev\" href=\"%s%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, outfile.suff, sTarget, s);
 			/* Special for CAB */
-			voutlnf("<link rel=\"previous\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
+			voutlnf("<link rel=\"previous\" href=\"%s%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, outfile.suff, sTarget, s);
 		}
 	}
 
@@ -2141,9 +2141,9 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 
 		/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039*/
 		if(strchr(htmlname, '.') != NULL)
-			voutlnf("<link rel=\"next\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
+			voutlnf("<link rel=\"next\" href=\"%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, sTarget, s);
 		else
-			voutlnf("<link rel=\"next\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
+			voutlnf("<link rel=\"next\" href=\"%s%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, outfile.suff, sTarget, s);
 	}
 
 	/* New in r6pl15 [NHz] */
@@ -2164,9 +2164,9 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		/* Special for CAB */
 		/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
 		if(strchr(htmlname, '.') != NULL)
-			voutlnf("<link rel=\"last\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
+			voutlnf("<link rel=\"last\" href=\"%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, sTarget, s);
 		else
-			voutlnf("<link rel=\"last\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
+			voutlnf("<link rel=\"last\" href=\"%s%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, outfile.suff, sTarget, s);
 	}
 
 	/* New in r6pl15 [NHz] */
@@ -2180,13 +2180,13 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		get_html_filename(lab[li]->tocindex, htmlname);
 
 		if(strcmp(htmlname, outfile.name)!=0) /* Changed in r6pl16 [NHz] */
-			voutlnf("<link rel=\"copyright\" href=\"%s%s\"%s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+			voutlnf("<link rel=\"copyright\" href=\"%s%s\"%s title=\"%s\" />", htmlname, outfile.suff, sTarget, s);
 	}
 
 	/* New in r6pl15 [NHz] */
 	/* Link for overall stylesheet-file */
 	if(sDocStyle[0] != EOS)	
-		voutlnf("<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\">", sDocStyle);
+		voutlnf("<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\" />", sDocStyle);
 	/* Link for overall javascript-file */
 	if(sDocScript[0] != EOS)
 	{
@@ -2197,7 +2197,7 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 	/* New in r6pl15 [NHz] */
 	/* Link for overall FavIcon */
 	if(sDocFavIcon[0] != EOS)	
-		voutlnf("<link rel=\"shortcut icon\" href=\"%s\">", sDocFavIcon);
+		voutlnf("<link rel=\"shortcut icon\" href=\"%s\" />", sDocFavIcon);
 
 }	/* output_html_meta */
 
@@ -2374,7 +2374,7 @@ GLOBAL void output_html_header ( const char *t )
 	/* New in r6pl16 [NHz]
            Fixed: added real title (from <title> Tag) [vj]
         */
-	voutlnf("<meta name=\"AppleTitle\" content=\"%s\">", t);
+	voutlnf("<meta name=\"AppleTitle\" content=\"%s\" />", t);
 
 	output_html_meta(TRUE);	/*r6pl5: auch Keywords auf der ersten Seite erlauben */
 	outln("</head>");
@@ -2504,7 +2504,7 @@ LOCAL void html_index_giflink ( const int idxEnabled, const int idxDisabled, con
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s></a>",
+			voutlnf("<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s /></a>",
 						sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents,
 						sGifSize);
 		}
@@ -2521,7 +2521,7 @@ LOCAL void html_index_giflink ( const int idxEnabled, const int idxDisabled, con
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("<img src=\"%s\" border=\"0\"%s>", sGifName, sGifSize);
+			voutlnf("<img src=\"%s\" border=\"0\"%s />", sGifName, sGifSize);
 		}
 	}
 
@@ -2554,7 +2554,7 @@ LOCAL void html_home_giflink ( const int idxEnabled, const int idxDisabled, cons
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("<img src=\"%s\" alt=\"%s\" border=\"0\"%s>", sGifName, lang.html_home, sGifSize);
+			voutlnf("<img src=\"%s\" alt=\"%s\" border=\"0\"%s />", sGifName, lang.html_home, sGifSize);
 		}
 	}
 	else
@@ -2578,7 +2578,7 @@ LOCAL void html_home_giflink ( const int idxEnabled, const int idxDisabled, cons
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s></a>",
+			voutlnf("<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s /></a>",
 						sFile, outfile.suff, sTarget, sGifName, lang.html_home, sGifSize);
 		}
 	}
@@ -2627,7 +2627,7 @@ LOCAL void html_back_giflink ( const int idxEnabled, const int idxDisabled, cons
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
 			/* Changed in r6pl16 [NHz] */
-			voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s></a>",
+			voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s /></a>",
 						href, target, sGifName, alt, sGifSize);
 		}
 	}
@@ -2643,7 +2643,7 @@ LOCAL void html_back_giflink ( const int idxEnabled, const int idxDisabled, cons
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("<img src=\"%s\" border=\"0\"%s>", sGifName, sGifSize);
+			voutlnf("<img src=\"%s\" border=\"0\"%s />", sGifName, sGifSize);
 		}
 	}
 
@@ -2755,7 +2755,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 				if (uiW!=0 && uiH!=0)
 				{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 				}
-				voutlnf("<img src=\"%s\" border=\"0\"%s>", s, sGifSize);
+				voutlnf("<img src=\"%s\" border=\"0\"%s />", s, sGifSize);
 			}
 #else
 			/* Verweis auf index.htm erzeugen */
@@ -2837,7 +2837,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("<img src=\"%s\" border=\"0\"%s>", s, sGifSize);
+			voutlnf("<img src=\"%s\" border=\"0\"%s />", s, sGifSize);
 		}
 #else
 		html_back_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ");
@@ -2883,7 +2883,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 					if (uiW!=0 && uiH!=0)
 					{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 					}
-					voutlnf("<img src=\"%s\" border=\"0\"%s>", s, sGifSize);
+					voutlnf("<img src=\"%s\" border=\"0\"%s />", s, sGifSize);
 				}
 #else
 				/* Frueher Link auf die Startseite */
@@ -2959,7 +2959,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("<img src=\"%s\" border=\"0\"%s>", s, sGifSize);
+			voutlnf("<img src=\"%s\" border=\"0\"%s />", s, sGifSize);
 		}
 	}
 
@@ -2995,7 +2995,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 						{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 						}
 						/* Changed in r6pl16 [NHz] */
-						voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"Deutsch\" title=\"To the german version of this document\" border=\"0\"%s></a>",
+						voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"Deutsch\" title=\"To the german version of this document\" border=\"0\"%s /></a>",
 							sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize);
 						break;
 					case TOENG:
@@ -3004,7 +3004,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 						{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 						}
 						/* Changed in r6pl16 [NHz] */
-						voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"English\" title=\"Zur englischen Version dieses Dokumentes\" border=\"0\"%s></a>",
+						voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"English\" title=\"Zur englischen Version dieses Dokumentes\" border=\"0\"%s /></a>",
 								sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize);
 						break;
 				}
@@ -3075,7 +3075,7 @@ LOCAL void html_node_bar_modern ( void )
 			if (titdat.authoriconActiveWidth!=0 && titdat.authoriconActiveHeight!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconActiveWidth, titdat.authoriconActiveHeight);
 			}
-			voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=\"0\"%s></a>%s",
+			voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=\"0\"%s /></a>%s",
 				sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon_active, sGifSize, sAlignOff);
 	}
 	else
@@ -3085,7 +3085,7 @@ LOCAL void html_node_bar_modern ( void )
 			if (titdat.authoriconWidth!=0 && titdat.authoriconHeight!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconWidth, titdat.authoriconHeight);
 			}
-			voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=\"0\"%s></a>%s",
+			voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=\"0\"%s /></a>%s",
 				sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon, sGifSize, sAlignOff);
 		}
 	}
@@ -3111,7 +3111,7 @@ LOCAL void html_node_bar_modern ( void )
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=\"0\"%s></a>%s",
+			voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=\"0\"%s /></a>%s",
 				sAlignOn, old_outfile.name, outfile.suff, ptrImg, sGifSize, sAlignOff);	/*r6pl13*/
 		}
 	}
@@ -3144,7 +3144,7 @@ LOCAL void html_node_bar_modern ( void )
 				{	ptr= strstr(the_ref, "</a>");
 					if (ptr!=NULL)
 					{	strinsert(ptr, toc[i]->icon_text);
-						strinsert(ptr, "<br>");
+						strinsert(ptr, "<br />");
 					}
 				}
 				voutlnf("%s%s%s", sAlignOn, the_ref, sAlignOff);	/*r6pl3*/
@@ -3198,10 +3198,10 @@ GLOBAL void html_save_frameset ( void )
 	add2[0]= EOS;
 	if (html_frames_noresize)	strcat(add2, " noresize");
 	if (html_frames_noscroll)	strcat(add2, " scrolling=\"no\"");
-	sprintf(f1, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\"%s>",
+	sprintf(f1, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\"%s />",
 			html_name_prefix, FRAME_FILE_TOC, outfile.suff, FRAME_NAME_TOC, add2);
 
-	sprintf(f2, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\">",
+	sprintf(f2, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\" />",
 			html_name_prefix, FRAME_FILE_CON, outfile.suff, FRAME_NAME_CON);
 
 	switch (html_frames_position)
@@ -3365,7 +3365,7 @@ LOCAL void html_node_bar_frames ( void )
 		if (titdat.authoriconWidth!=0 && titdat.authoriconHeight!=0)
 		{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconWidth, titdat.authoriconHeight);
 		}
-		voutlnf("%s<a href=\"%s%s%s\" target=\"%s\"><img src=\"%s%s\" alt=\"\" border=\"0\"%s></a>%s",
+		voutlnf("%s<a href=\"%s%s%s\" target=\"%s\"><img src=\"%s%s\" alt=\"\" border=\"0\"%s /></a>%s",
 			alignOn, html_name_prefix, FRAME_FILE_CON, outfile.suff,
 			FRAME_NAME_CON, titdat.authoricon, "" /*sDocImgSuffix*/, sGifSize, alignOff);
 	}
@@ -3409,7 +3409,7 @@ LOCAL void html_node_bar_frames ( void )
 				{	ptr= strstr(the_ref, "</a>");
 					if (ptr!=NULL)
 					{	strinsert(ptr, toc[i]->icon_text);
-						strinsert(ptr, "<br>");
+						strinsert(ptr, "<br />");
 					}
 				}
 				voutlnf("%s%s%s", alignOn, the_ref, alignOff);
@@ -3615,7 +3615,7 @@ GLOBAL void html_footer ( void )
 	}
 
 	strcat(footer_buffer, s);
-	strcat(footer_buffer, "<br> ");
+	strcat(footer_buffer, "<br /> ");
     
 	strcpy(s, lang.update);
 	auto_quote_chars(s, TRUE);
@@ -3707,7 +3707,7 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 	fprintf(file, "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n");
 	fprintf(file, "<HTML>\n");
 	fprintf(file, "<HEAD>\n");
-	fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Version %s.%s.%s for %s\">\n",
+	fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Version %s.%s.%s for %s\" />\n",
 						UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
 	fprintf(file, "<!-- Sitemap 1.0 -->\n");
 	fprintf(file, "</HEAD><BODY>\n");
@@ -3868,10 +3868,10 @@ GLOBAL BOOLEAN save_htmlhelp_index ( const char* filename )
 	fprintf(file, "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n");
 	fprintf(file, "<HTML>\n");
 	fprintf(file, "<HEAD>\n");
-	fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Version %s.%s.%s for %s\">\n",
+	fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Version %s.%s.%s for %s\" />\n",
 						UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
 	if (titdat.author != NULL)
-		fprintf(file, "<meta name=\"Author\" content=\"%s\">\n", titdat.author);
+		fprintf(file, "<meta name=\"Author\" content=\"%s\" />\n", titdat.author);
 	fprintf(file, "<!-- Sitemap 1.0 -->\n");
 	fprintf(file, "</HEAD>\n");
 	fprintf(file, "<BODY>\n");
@@ -4394,7 +4394,7 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 							toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
 					}
 					voutlnf("<h%d><p align=\"center\">", html_nodesize);	/* r5pl4 */
-					voutlnf("<img src=\"%s%s\" alt=\"%s%s\"%s>",
+					voutlnf("<img src=\"%s%s\" alt=\"%s%s\"%s />",
 						toc[ti]->image, sDocImgSuffix, numbers, name, sGifSize);
 					voutlnf("</p></h%d>", html_nodesize);				/* r5pl4 */
 					flag= TRUE;
@@ -4860,7 +4860,7 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 							toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
 					}
 					voutlnf("%s<p align=\"center\">", hx_start);
-					voutlnf("<img src=\"%s%s\" alt=\"%s%s\"%s>",
+					voutlnf("<img src=\"%s%s\" alt=\"%s%s\"%s />",
 						toc[ti]->image, sDocImgSuffix, numbers, name, sGifSize);
 					voutlnf("</p>%s", hx_end);
 					flag= TRUE;
@@ -5317,7 +5317,7 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 							toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
 					}
 					voutlnf("%s<p align=\"center\">", hx_start);
-					voutlnf("<img src=\"%s%s\" alt=\"%s%s\"%s>",
+					voutlnf("<img src=\"%s%s\" alt=\"%s%s\"%s />",
 						toc[ti]->image, sDocImgSuffix, numbers, name, sGifSize);
 					voutlnf("</p>%s", hx_end);
 					flag= TRUE;
@@ -5772,7 +5772,7 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 							toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
 					}
 					voutlnf("%s<p align=\"center\">", hx_start);
-					voutlnf("<img src=\"%s%s\" alt=\"%s%s\"%s>",
+					voutlnf("<img src=\"%s%s\" alt=\"%s%s\"%s />",
 						toc[ti]->image, sDocImgSuffix, numbers, name, sGifSize);
 					voutlnf("</p>%s", hx_end);
 					flag= TRUE;
@@ -6291,9 +6291,9 @@ LOCAL void toc_link_output ( const int depth )
 									strcpy(suff, outfile.suff);
 
 								if(no_numbers) /* Fixed bug #0000044 [NHz] */
-									voutlnf("<link rel=\"chapter\" href=\"%s%s\"%s title=\"%s\">", htmlfilename, suff, sTarget, toc[i]->name);
+									voutlnf("<link rel=\"chapter\" href=\"%s%s\"%s title=\"%s\" />", htmlfilename, suff, sTarget, toc[i]->name);
 								else
-									voutlnf("<link rel=\"chapter\" href=\"%s%s\"%s title=\"%d %s\">", htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->name);
+									voutlnf("<link rel=\"chapter\" href=\"%s%s\"%s title=\"%d %s\" />", htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->name);
 							}
 						}/* TOC_NODE1 */
 						break;
@@ -6318,9 +6318,9 @@ LOCAL void toc_link_output ( const int depth )
 										strcpy(suff, outfile.suff);
 
 									if(no_numbers) /* Fixed bug #0000044 [NHz] */
-										voutlnf("<link rel=\"section\" href=\"%s%s\"%s title=\"%s\">", htmlfilename, suff, sTarget, toc[i]->name);
+										voutlnf("<link rel=\"section\" href=\"%s%s\"%s title=\"%s\" />", htmlfilename, suff, sTarget, toc[i]->name);
 									else
-										voutlnf("<link rel=\"section\" href=\"%s%s\"%s title=\"%d.%d %s\">", htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->nr2+subtoc_offset, toc[i]->name);
+										voutlnf("<link rel=\"section\" href=\"%s%s\"%s title=\"%d.%d %s\" />", htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->nr2+subtoc_offset, toc[i]->name);
 								}
 							}
 						}/* TOC_NODE2 */
@@ -6346,9 +6346,9 @@ LOCAL void toc_link_output ( const int depth )
 										strcpy(suff, outfile.suff);
 
 									if(no_numbers) /* Fixed bug #0000044 [NHz] */
-										voutlnf("<link rel=\"subsection\" href=\"%s%s\"%s title=\"%s\">", htmlfilename, suff, sTarget, toc[i]->name);
+										voutlnf("<link rel=\"subsection\" href=\"%s%s\"%s title=\"%s\" />", htmlfilename, suff, sTarget, toc[i]->name);
 									else
-										voutlnf("<link rel=\"subsection\" href=\"%s%s\"%s title=\"%d.%d.%d %s\">", htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->nr2+subtoc_offset, toc[i]->nr3+subsubtoc_offset, toc[i]->name);
+										voutlnf("<link rel=\"subsection\" href=\"%s%s\"%s title=\"%d.%d.%d %s\" />", htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->nr2+subtoc_offset, toc[i]->nr3+subsubtoc_offset, toc[i]->name);
 								}
 							}
 						}/* TOC_NODE3 */
@@ -6370,9 +6370,9 @@ LOCAL void toc_link_output ( const int depth )
 									strcpy(suff, outfile.suff);
 
 								if(no_numbers) /* Fixed bug #0000044 [NHz] */
-									voutlnf("<link rel=\"appendix\" href=\"%s%s\"%s title=\"%s\">", htmlfilename, suff, sTarget, toc[i]->name);
+									voutlnf("<link rel=\"appendix\" href=\"%s%s\"%s title=\"%s\" />", htmlfilename, suff, sTarget, toc[i]->name);
 								else
-									voutlnf("<link rel=\"appendix\" href=\"%s%s\"%s title=\"%c %s\">", htmlfilename, suff, sTarget, 'A'-1+toc[i]->nr1, toc[i]->name);
+									voutlnf("<link rel=\"appendix\" href=\"%s%s\"%s title=\"%c %s\" />", htmlfilename, suff, sTarget, 'A'-1+toc[i]->nr1, toc[i]->name);
 							}
 						}/* TOC_NODE1 */
 						break;
@@ -6433,7 +6433,7 @@ LOCAL void toc_output ( const int depth )
 								case TOWH4:
 								case TOAQV:	outln(rtf_par);	break;
 								case TOHTM:
-								case TOMHH:	outln("<br>&nbsp;");	break;
+								case TOMHH:	outln("<br />&nbsp;");	break;
 								case TOTEX:
 								case TOPDL:	break;
 								default:	outln(""); break;
@@ -6687,7 +6687,7 @@ LOCAL void apx_output ( const int depth )
 						if ( (leerzeile) && (depth>1) )
 						{	switch(desttype)
 							{	case TOHTM:
-								case TOMHH:	outln("<br>&nbsp;");	break;
+								case TOMHH:	outln("<br />&nbsp;");	break;
 								case TOWIN:
 								case TOWH4:
 								case TOAQV:	outln(rtf_par);	break;
@@ -7890,7 +7890,7 @@ LOCAL void do_toptoc ( const int currdepth )
 			{	strcpy(sIndent, "&nbsp;");
 			}
 			else
-			{	sprintf(sIndent, "<img src=\"%s\" width=\"%u\" height=\"%u\">", GIF_FS_NAME, uiGifFsWidth, uiGifFsHeight);
+			{	sprintf(sIndent, "<img src=\"%s\" width=\"%u\" height=\"%u\" />", GIF_FS_NAME, uiGifFsWidth, uiGifFsHeight);
 			}
 
 			if (html_frames_layout)
@@ -7916,7 +7916,7 @@ LOCAL void do_toptoc ( const int currdepth )
 						sFile, outfile.suff, sTarget, s);
 				}
 				else
-				{	voutlnf("<img src=\"%s\" width=\"%u\" height=\"%u\">&nbsp;<a href=\"%s%s\"%s>%s</a>",
+				{	voutlnf("<img src=\"%s\" width=\"%u\" height=\"%u\" />&nbsp;<a href=\"%s%s\"%s>%s</a>",
 						GIF_FO_NAME, uiGifFoWidth, uiGifFoHeight, sFile, outfile.suff, sTarget, s);
 				}
 			}
@@ -7924,10 +7924,10 @@ LOCAL void do_toptoc ( const int currdepth )
 			{	strcpy(s, toc[last_n1_index]->name);
 				auto_references(s, TRUE, "", 0, 0);
 				if (no_images)
-				{	voutlnf("<br><tt>|--+&nbsp;</tt>&nbsp;%s", s);
+				{	voutlnf("<br /><tt>|--+&nbsp;</tt>&nbsp;%s", s);
 				}
 				else
-				{	voutlnf("<br>%s<img src=\"%s\" width=\"%u\" height=\"%u\">&nbsp;%s",
+				{	voutlnf("<br />%s<img src=\"%s\" width=\"%u\" height=\"%u\" />&nbsp;%s",
 						sIndent, GIF_FO_NAME, uiGifFoWidth, uiGifFoHeight, s);
 				}
 			}
@@ -7935,10 +7935,10 @@ LOCAL void do_toptoc ( const int currdepth )
 			{	strcpy(s, toc[last_n2_index]->name);
 				auto_references(s, TRUE, "", 0, 0);
 				if (no_images)
-				{	voutlnf("<br><tt>&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s", s);
+				{	voutlnf("<br /><tt>&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s", s);
 				}
 				else
-				{	voutlnf("<br>%s%s<img src=\"%s\" width=\"%u\" height=\"%u\">&nbsp;%s",
+				{	voutlnf("<br />%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" />&nbsp;%s",
 						sIndent, sIndent, GIF_FO_NAME, uiGifFoWidth, uiGifFoHeight, s);
 				}
 			}
@@ -7946,10 +7946,10 @@ LOCAL void do_toptoc ( const int currdepth )
 			{	strcpy(s, toc[last_n3_index]->name);
 				auto_references(s, TRUE, "", 0, 0);
 				if (no_images)
-				{	voutlnf("<br><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s", s);
+				{	voutlnf("<br /><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s", s);
 				}
 				else
-				{	voutlnf("<br>%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\">&nbsp;%s",
+				{	voutlnf("<br />%s%s%s<img src=\"%s\" width=\"%u\" height=\"%uf\" />&nbsp;%s",
 						sIndent, sIndent, sIndent, GIF_FO_NAME, uiGifFoWidth, uiGifFoHeight, s);
 				}
 			}
