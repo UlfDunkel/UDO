@@ -44,7 +44,7 @@
 	------------------------------------------------------------	*/
 #define	UDO_REL		"6"
 #define	UDO_PL		"14"
-#define	UDO_URL		"http://www.udo-open-source.de"
+#define	UDO_URL		"http://www.udo-open-source.org"
 #define	UDO_MADE	"Made with UDO"
 
 
