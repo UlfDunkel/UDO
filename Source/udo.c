@@ -10494,7 +10494,9 @@ LOCAL void init_lang ( void )
 		  	
 		  	/* Strings mit Sonderzeichen anpassen */
 		  	uni2ascii(lang.preface);
-		  	uni2ascii(lang.contents);
+				/* Changed in r6pl17 [NHz] */
+		  	/* uni2ascii(lang.contents);*/
+		  	uni2ascii(lang.update);
 		  	break;
 
 		case TOITA:		/* laut "g.morando@agora.stm.it" */
