@@ -75,8 +75,6 @@ LOCAL BOOLEAN	bShowIdent;
 LOCAL int last_percent;
 
 #define	PRGNAME		"udo"
-#define	COPYRIGHT	"Copyright (c) 1995-2001 by Dirk Hagedorn (UDO is Open Source)"
-
 
 /*	############################################################
 	# lokale Prototypen
@@ -450,6 +448,8 @@ LOCAL void show_version ( void )
 	fprintf(stdout, "Release %s.%s Patchlevel %s for %s, %s %s\n",
 				UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS, compile_date, compile_time);
 	fprintf(stdout, "%s\n", COPYRIGHT);
+	sprintf(sInfMsg, "UDO is Open Source (see %s for further information).\n", UDO_URL);
+	fprintf(stdout, sInfMsg);
 }
 
 extern const char *id_abo_c;
