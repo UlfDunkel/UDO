@@ -2843,7 +2843,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 #endif
 				if (no_images)
 				{	/* replace_once(s, ">", ">&lt;&lt;&lt; "); */
-					+replace_once(s, lab[li]->name, " &lt;&lt;&lt;");
+					replace_once(s, lab[li]->name, " &lt;&lt;&lt;"); /* [voja][R6PL17] deleted the + at "+replace_once" call */
 					strinsert(s, "| ");
 				}
 				outln(s);
