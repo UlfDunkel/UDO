@@ -715,7 +715,7 @@ GLOBAL void auto_references ( char *s, const BOOLEAN for_toc, const char *pic,
 	char	nextchar, prevchar;
 	int found_lab;
 	size_t	found_len, ll;
-	BOOLEAN	ref_it;
+	BOOLEAN	ref_it= FALSE;
 	BOOLEAN	ignore_it;
 	BOOLEAN next_ok, prev_ok;
 	BOOLEAN found_one, found_ok;
@@ -739,6 +739,7 @@ GLOBAL void auto_references ( char *s, const BOOLEAN for_toc, const char *pic,
 		found_lab= -1;
 		found_len= 0;
 		found_pos= s;
+		ref_it= FALSE;
 	
 		for (i=1; i<MAXLABELS; i++)
 		{
@@ -757,6 +758,9 @@ GLOBAL void auto_references ( char *s, const BOOLEAN for_toc, const char *pic,
 
 				while ( found_one && !found_ok )
 				{
+					found_one= FALSE;
+					found_ok= FALSE;
+
 					ptr= searchpos;
 
 					while ( (pos=strstr(ptr, labptr->name))!=NULL )
@@ -891,8 +895,7 @@ GLOBAL void check_endnode ( void )
 		{
 			case TOSTG:
 			case TOAMG:
-				outln("@endnode");
-				outln("");
+				outln("@endnode\n");
 				break;
 			case TOPCH:
 				pch_bottomline();
@@ -1805,7 +1808,7 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 			toc[ti]->n4,
 			toc[ti]->appendix);
 		fprintf(stderr, "! using 'error' instead\n");
-		fprintf(stderr, "! please inform the author (%s)!\n", UDO_URL);
+		fprintf(stderr, "! please inform the author (info@dirk-hagedorn.de)!\n");
 		strcpy(s, "error");
 	}
 
@@ -2288,7 +2291,7 @@ LOCAL void html_back_giflink ( const int idxEnabled, const int idxDisabled, cons
 
 		if (no_images)	/*r6pl2*/
 		{	voutlnf("%s<a href=\"%s\"%s>^^^</a>",
-						sep, sDocHtmlBackpage, target);
+						sep, sDocHtmlBackpage, target, sDocHtmlBackpage);
 		}
 		else
 		{
@@ -3252,12 +3255,11 @@ GLOBAL void html_footer ( void )
 	}
 
 	strcat(footer_buffer, s);
-	strcat(footer_buffer, "<br>");
-    outln(footer_buffer);
-    
+	strcat(footer_buffer, "<br>\n");
+
 	strcpy(s, lang.update);
 	auto_quote_chars(s, TRUE);
-	strcpy(footer_buffer, s);
+	strcat(footer_buffer, s);
 	strcat(footer_buffer, " ");
 	strcat(footer_buffer, lang.today);
 	strcat(footer_buffer, sHtmlPropfontEnd);
@@ -3353,6 +3355,10 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 	print_htmlhelp_contents(file, "\t", 0);	/* r6pl10: Eintrag fuer erste Seite */
 	fprintf(file, "</UL>\n<UL>\n");
 
+	if (p1_toc_counter<=0)
+	{	goto HHC_EXIT;
+	}
+
 	for (i=1; i<=p1_toc_counter; i++)
 	{
 		if (toc[i]!=NULL && !toc[i]->invisible)
@@ -3436,6 +3442,8 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 	if (inApx)		fprintf(file, "</UL>\n");
 #endif
 
+	HHC_EXIT:
+
 	fprintf(file, "</UL>\n");
 	fprintf(file, "</BODY></HTML>\n");
 
@@ -3449,7 +3457,8 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 GLOBAL BOOLEAN save_htmlhelp_index ( const char* filename )
 {
 #if 1
-	UNUSED(filename);
+	/* keep compiler happy */
+	filename= filename;
 	return FALSE;
 #else
 	FILE *file;
@@ -3492,7 +3501,7 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 	char 	n[512], name[512], stgname[512], numbers[512], nameNoSty[512];
 	char	map[64], sGifSize[80];
 	int		ti, chapter, nr1;
-	BOOLEAN	flag;
+	BOOLEAN	flag= FALSE;
 	BOOLEAN	do_index;
 
 	if (p2_toc_counter>=MAXTOCS)	/* r5pl2 */
@@ -5562,7 +5571,7 @@ LOCAL void toc_output ( const int depth )
 								case TOPDL:	break;
 								default:	outln("");
 							}
-							/* leerzeile= FALSE; */
+							leerzeile= FALSE;
 						}
 						
 						if (use_toc_list_commands)	/* r6pl2: vorher: desttype==TOHTM */
@@ -5819,7 +5828,7 @@ LOCAL void apx_output ( const int depth )
 								case TOPDL:	break;
 								default:	outln("");
 							}
-							/* leerzeile= FALSE; */
+							leerzeile= FALSE;
 						}
 
 						if (use_toc_list_commands)	/* r6pl2: vorher: desttype==TOHTM */
@@ -7285,9 +7294,9 @@ GLOBAL void c_listoffigures ( void )
 			outln("<lof>");
 			break;
 		case TOLYX:
-			outln("\\layout Standard");
-			outln("\\begin_inset LatexDel \\listoffigures");
-			outln("\\end_inset");
+			outln("\\layout Standard\n");
+			outln("\\begin_inset LatexDel \\listoffigures\n");
+			outln("\\end_inset\n");
 			break;
 	}
 }	/* c_listoffigures */
@@ -7307,9 +7316,9 @@ GLOBAL void c_listoftables ( void )
 			outln("<lot>");
 			break;
 		case TOLYX:
-			outln("\\layout Standard");
-			outln("\\begin_inset LatexDel \\listoftables");
-			outln("\\end_inset");
+			outln("\\layout Standard\n");
+			outln("\\begin_inset LatexDel \\listoftables\n");
+			outln("\\end_inset\n");
 			break;
 	}
 }	/* c_listoftables */
@@ -7403,7 +7412,7 @@ GLOBAL void c_tableofcontents ( void )
 		case TOLYX:
 			outln("\\layout LaTeX");
 			outln("\\pagebreak_top \\pagebreak_bottom");
-			outln("\\begin_inset LatexDel \\tableofcontents");
+			outln("\\begin_inset LatexDel \\tableofcontents\n");
 			outln("\\end_inset");
 			break;
 		case TOINF:
@@ -7667,12 +7676,9 @@ GLOBAL void c_label ( void )
 			voutlnf("\\pdfdest num %d fitbh", p2_lab_counter);
 			break;
 		case TOLYX:
-			outln("");
-			outln("\\layout Standard");
-			voutlnf("\\begin_inset Label %s", sLabel);
-			outln("");
-			voutlnf("\\end_inset");
-			outln("");
+			outln("\n\\layout Standard");
+			voutlnf("\\begin_inset Label %s\n", sLabel);
+			voutlnf("\\end_inset\n");
 			break;
 		case TOSTG:
 			node2stg(sLabel);
@@ -9735,7 +9741,7 @@ GLOBAL BOOLEAN	add_subsubsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN inv
 
 GLOBAL BOOLEAN toc_begin_node (const BOOLEAN popup, const BOOLEAN invisible)
 {
-	BOOLEAN ret;
+	BOOLEAN ret= FALSE;
 
 	switch(p1_toctype)
 	{
@@ -9854,7 +9860,7 @@ LOCAL BOOLEAN save_the_map ( const char *filename, const char *suffix, tWinMapDa
 GLOBAL BOOLEAN save_winhelp_map_c ( void )
 {
 	tWinMapData data;
-	BOOLEAN flag;
+	BOOLEAN flag= FALSE;
 
 	memset(&data, 0, sizeof(data));
 	strcpy(data.cmd, "#define");
@@ -9872,7 +9878,7 @@ GLOBAL BOOLEAN save_winhelp_map_c ( void )
 GLOBAL BOOLEAN save_winhelp_map_pas ( void )
 {
 	tWinMapData data;
-	BOOLEAN flag;
+	BOOLEAN flag= FALSE;
 
 	memset(&data, 0, sizeof(data));
 	strcpy(data.cmd, "const");
@@ -9892,7 +9898,7 @@ GLOBAL BOOLEAN save_winhelp_map_pas ( void )
 GLOBAL BOOLEAN save_winhelp_map_vb ( void )
 {
 	tWinMapData data;
-	BOOLEAN flag;
+	BOOLEAN flag= FALSE;
 
 	memset(&data, 0, sizeof(data));
 	strcpy(data.cmd, "Public Const");
@@ -9912,7 +9918,7 @@ GLOBAL BOOLEAN save_winhelp_map_vb ( void )
 GLOBAL BOOLEAN save_winhelp_map_gfa ( void )
 {
 	tWinMapData data;
-	BOOLEAN flag;
+	BOOLEAN flag= FALSE;
 
 	memset(&data, 0, sizeof(data));
 	strcpy(data.cmd, "Public Const");

@@ -259,8 +259,8 @@ GLOBAL void add_pass1_about_udo ( void )
 	############################################################	*/
 GLOBAL void about_unregistered ( void )
 {
-	/* UDO is now Open Source */
-	/* this method is not needed anymore */
+	// UDO is now Open Source
+	// this method is not needed anymore
 }	/* about_unregistered */
 
 

@@ -66,6 +66,9 @@ GLOBAL void path_adjust_separator ( char *s );
 #if USE_HTML_FOLDERS
 
 GLOBAL BOOLEAN my_mkdir ( char *s );
+GLOBAL BOOLEAN my_chdir ( char *s );
+GLOBAL BOOLEAN my_getcwd ( char *s, int maxlen );
+GLOBAL BOOLEAN myDirExists ( char *s );
 
 #endif /* USE_HTML_FOLDERS */
 

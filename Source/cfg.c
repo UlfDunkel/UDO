@@ -254,6 +254,17 @@ LOCAL char	programname[256];
 LOCAL char	programos[256];
 
 
+/*	############################################################
+	# lokale Prototypen
+	############################################################	*/
+GLOBAL BOOLEAN key_check (const char *nam, const char *str, const char *tow, const char *key )
+{
+	// UDO is now Open Source
+	// key is always valid
+
+	return TRUE;
+}	/* key_check */
+
 
 /*	############################################################
 	# Einstellungen laden
@@ -326,9 +337,9 @@ GLOBAL int read_profile ( void )
 	fclose(file);
 
 
-	/* UDO is now Open Source and not limited by */
-	/* any shareware registration fees anymore */
-	/* thus config.bRegistered is always true */
+	// UDO is now Open Source and not limited by
+	// any shareware registration fees anymore
+	// thus config.bRegistered is always true
 
 	config.bRegistered= TRUE;
 
@@ -346,7 +357,7 @@ GLOBAL int read_profile ( void )
 	############################################################	*/
 GLOBAL int write_profile ( void )
 {
-	FILE	*file;
+	FILE	*file= stdout;
 	int		i;
 
 	if (profilefull[0]==EOS)
@@ -361,7 +372,7 @@ GLOBAL int write_profile ( void )
 
 	file= myFwopen(profilefull, TOASC);
 
-	if (file == NULL)
+	if (!file)
 	{	return(CFG_WRITE_NOT_SAVED);
 	}
 	
@@ -493,10 +504,10 @@ GLOBAL void init_module_config ( const char *pfname, const char *prgname, const 
 		{	path[sl-1]= EOS;
 		}
 		sprintf(homepath, "%s%s", path, sep);
-		sprintf(profilefull, "%s%sdefaults%s%s", path, sep, sep, profilename);
+		sprintf(profilefull, "%s\\defaults\\%s", path, profilename);
 		file= fopen(profilefull, "r");
 		if (file)
-		{	sprintf(homepath, "%s%sdefaults%s", path, sep, sep);
+		{	sprintf(homepath, "%s\\defaults", path);
 			fclose(file);
 			return;
 		}
@@ -522,7 +533,7 @@ GLOBAL void init_module_config ( const char *pfname, const char *prgname, const 
 /* PL14: Bei TOS und MS-DOS auch C:\udo.ini suchen, da einige Leute */
 /*       es einfach nicht gebacken bekommen, $HOME zu setzen.       */
 
-#if defined(__TOS__) || defined(__MSDOS__) || defined(__WIN32__)
+#if defined(__TOS__) || defined(__MSDOS__) || defined(WIN32)
 		sprintf(profilefull, "C:\\%s", profilename);
 		file= fopen(profilefull, "r");
 		if (file)

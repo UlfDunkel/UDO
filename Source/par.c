@@ -310,13 +310,12 @@ GLOBAL void replace_variables ( char *s, const char *cmd, const char *entry)
 {
 	int parms, i;
 	char p[16], without[128], *ptr;
-	BOOLEAN flag;
+	BOOLEAN flag= TRUE;
 
 	/* PL10: (!macro) vorher loeschen */
 	sprintf(without, "(!%s)", cmd);
 	delete_all(s, without);
 
-	flag = TRUE;
 	while ( flag && (parms= get_nr_of_parameters(cmd, s))>0 )
 	{
 		if (parms>MAX_PARAMETERS)
@@ -654,7 +653,7 @@ LOCAL BOOLEAN convert_link_lds ( char *s, const char *p0, char *p1, char *p2, co
 {
 	char s_entry[1024], old_entry[1024];
 	char *ptr;
-	BOOLEAN flag;
+	BOOLEAN flag= FALSE;
 	
 	strcpy(s_entry, p2);
 	c_tilde(s_entry);
@@ -692,7 +691,7 @@ LOCAL BOOLEAN convert_link_stg ( char *s, const char *p0, char *p1, char *p2, co
 	char nodename[256], s_entry[256];
 	int ti, li;
 	BOOLEAN isnode;
-	BOOLEAN flag;
+	BOOLEAN flag=FALSE;
 
 	c_tilde(p2);
 	replace_udo_quotes(p2);
@@ -747,7 +746,7 @@ LOCAL BOOLEAN convert_link_pch ( char *s, const char *p0, char *p1, char *p2, co
 	char nodename[256], s_entry[256];
 	int ti, li;
 	BOOLEAN isnode;
-	BOOLEAN flag;
+	BOOLEAN flag=FALSE;
 
 	c_tilde(p2);
 	replace_udo_quotes(p2);
@@ -805,7 +804,7 @@ LOCAL BOOLEAN convert_link_pdf ( char *s, const char *p0, char *p1, char *p2, co
 	char nodename[256], s_entry[256];
 	int ti, li, dest;
 	BOOLEAN isnode;
-	BOOLEAN flag;
+	BOOLEAN flag=FALSE;
 
 	c_tilde(p2);
 	replace_udo_quotes(p2);
@@ -875,7 +874,7 @@ LOCAL BOOLEAN convert_link_info ( char *s, const char *p0, char *p1, char *p2, c
 	char nodename[256], s_entry[256];
 	int ti, li;
 	BOOLEAN isnode;
-	BOOLEAN flag;
+	BOOLEAN flag=FALSE;
 
 	c_tilde(p2);
 	replace_udo_quotes(p2);
@@ -920,7 +919,7 @@ LOCAL BOOLEAN convert_link_ipf ( char *s, const char *p0, char *p1, char *p2, co
 	char nodename[256], s_entry[256], s_id[256];
 	int ti, li;
 	BOOLEAN isnode;
-	BOOLEAN flag;
+	BOOLEAN flag=FALSE;
 
 	c_tilde(p2);
 	replace_udo_quotes(p2);
@@ -956,7 +955,7 @@ LOCAL BOOLEAN convert_link_etc ( char *s, const char *p0, char *p1, char *p2, co
 	char lq[16], rq[16];
 	int ti, li;
 	BOOLEAN isnode;
-	BOOLEAN flag;
+	BOOLEAN flag=FALSE;
 
 	c_tilde(p2);
 	replace_udo_quotes(p2);
@@ -1017,14 +1016,13 @@ LOCAL void c_link ( char *s, BOOLEAN inside_b4_macro )
 	int pnr;
 	char s_entry[1024], old_entry[1024], link[1024];
 	char *ptr;
-	BOOLEAN linkerror;
-	BOOLEAN flag;
+	BOOLEAN linkerror= FALSE;
+	BOOLEAN flag=FALSE;
 	BOOLEAN	old_autorefoff;
 
 	old_autorefoff= bDocAutorefOff;
 	bDocAutorefOff= FALSE;
 	
-	linkerror = FALSE;
 	while ( !linkerror && ((pnr=get_parameters(s, "link", 2))==2) )
 	{
 		strcpy(link, Param[2]);
@@ -1161,6 +1159,7 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 {
 	int pnr;
 	char s_entry[1024];
+	char wnode[1024], wfile[1024], *ptr;
 	BOOLEAN linkerror= FALSE;
 
 	while ( !linkerror && ((pnr=get_parameters(s, "url", 2))==2) )
@@ -1381,13 +1380,12 @@ LOCAL void c_ilink ( char *s, const BOOLEAN inside_b4_macro )
 	char s_entry[1024], img_entry[1024], old_entry[1024], link[1024];
 	char *ptr;
 	BOOLEAN flag;
-	BOOLEAN linkerror;
+	BOOLEAN linkerror= FALSE;
 	BOOLEAN	old_autorefoff;
 
 	old_autorefoff= bDocAutorefOff;
 	bDocAutorefOff= FALSE;
 
-	linkerror = FALSE;
 	while ( !linkerror && ((pnr=get_parameters(s, "ilink", 3))==3) )
 	{
 		strcpy(link, Param[3]);
@@ -2374,7 +2372,7 @@ LOCAL BOOLEAN c_quadruple_index ( char *s, const BOOLEAN inside_b4_macro )
 GLOBAL void c_internal_index ( char *s, const BOOLEAN inside_b4_macro )
 {
 	int nr;
-	BOOLEAN flag;
+	BOOLEAN flag= TRUE;
 	BOOLEAN has_idx, has_index;
 	
 	has_idx = (strstr(s, "(!idx")!=NULL);
@@ -2420,7 +2418,6 @@ GLOBAL void c_internal_index ( char *s, const BOOLEAN inside_b4_macro )
 							break;
 				default:	error_wrong_nr_parameters("!index");
 							flag= FALSE;
-							break;
 			}
 
 		}	while (flag==TRUE);
@@ -2433,10 +2430,9 @@ LOCAL void c_internal_image ( char *s, const BOOLEAN inside_b4_macro )
 {
 	int pnr;
 	char s_entry[1024], sGifSize[80], sGifName[512];
-	BOOLEAN flag;
+	BOOLEAN flag= FALSE;
 	unsigned int uiW, uiH;
 
-	flag = FALSE;
 	while ( !flag && ((pnr=get_parameters(s, "img", 2))==2) )
 	{
 		if (inside_b4_macro)
@@ -2549,10 +2545,8 @@ LOCAL void c_internal_image ( char *s, const BOOLEAN inside_b4_macro )
 LOCAL void c_internal_raw ( char *s, const BOOLEAN inside_b4_macro )
 {
 	int pnr;
-	BOOLEAN flag;
+	BOOLEAN flag= FALSE;
 
-	UNUSED(inside_b4_macro);
-	flag = FALSE;
 	while ( !flag && ((pnr=get_parameters(s, "raw", 1))==1) )
 	{
 		flag= !insert_placeholder(s, Param[0], Param[1], Param[1]);
@@ -2567,17 +2561,25 @@ LOCAL void c_internal_raw ( char *s, const BOOLEAN inside_b4_macro )
 	{	error_wrong_nr_parameters("!raw");
 	}
 
+	if (inside_b4_macro)
+	{
+		/* keep compiler happy */
+	}
 }
 #endif
 
 
 LOCAL BOOLEAN c_single_raw ( char *s, const BOOLEAN inside_b4_macro )
 {
-	BOOLEAN flag;
+	BOOLEAN flag= FALSE;
 
-	UNUSED(inside_b4_macro);
 	if ( get_parameters(s, "raw", 1) )
 	{
+		if (inside_b4_macro)
+		{
+			/* keep compiler happy */
+		}
+
 		flag= insert_placeholder(s, Param[0], Param[1], Param[1]);
 
 		if (!flag)
@@ -2595,11 +2597,15 @@ LOCAL BOOLEAN c_single_raw ( char *s, const BOOLEAN inside_b4_macro )
 
 LOCAL BOOLEAN c_double_raw ( char *s, const BOOLEAN inside_b4_macro )
 {
-	BOOLEAN flag;
+	BOOLEAN flag= FALSE;
 
-	UNUSED(inside_b4_macro);
 	if ( get_parameters(s, "raw", 2) )
 	{
+		if (inside_b4_macro)
+		{
+			/* keep compiler happy */
+		}
+
 		if (str_for_desttype(Param[1]))
 		{
 			flag= insert_placeholder(s, Param[0], Param[2], Param[2]);
@@ -2612,7 +2618,7 @@ LOCAL BOOLEAN c_double_raw ( char *s, const BOOLEAN inside_b4_macro )
 		}
 		else
 		{
-			delete_once(s, Param[0]);
+			flag= delete_once(s, Param[0]);
 		}
 	}
 
@@ -2624,7 +2630,7 @@ LOCAL BOOLEAN c_double_raw ( char *s, const BOOLEAN inside_b4_macro )
 LOCAL void c_internal_raw ( char *s, const BOOLEAN inside_b4_macro )
 {
 	int nr;
-	BOOLEAN flag;
+	BOOLEAN flag= TRUE;
 	BOOLEAN has_raw;
 	
 	has_raw = (strstr(s, "(!raw")!=NULL);
@@ -2648,7 +2654,7 @@ LOCAL void c_internal_raw ( char *s, const BOOLEAN inside_b4_macro )
 							break;
 			}
 
-		}	while (flag);
+		}	while (flag==TRUE);
 	}
 
 }	/* c_internal_raw */
@@ -3038,3 +3044,4 @@ GLOBAL void exit_module_par ( void )
 /*	############################################################
 	# par.c
 	############################################################	*/
+

@@ -24,7 +24,7 @@
 #include	<string.h>	
 #include	<stdlib.h>	
 #if USE_HTML_FOLDERS
-#ifdef __WIN32__
+#ifdef WIN32
 #include	<direct.h>
 #endif
 #endif
@@ -54,19 +54,19 @@ GLOBAL MYTEXTFILE *myTextOpen ( const char *filename )
 {
 	MYTEXTFILE *tf;
 
-	tf= (MYTEXTFILE *) malloc (sizeof(*tf));
+	tf= (MYTEXTFILE *) malloc (sizeof(MYTEXTFILE));
 
-	if (tf == NULL)
+	if (!tf)
 	{
 		return NULL;
 	}
 
-	memset(tf, 0, sizeof(*tf));
+	memset(tf, 0, sizeof(MYTEXTFILE));
 
 #if USE_MYTEXTFILE
 	tf->file= fopen(filename, "rb");
 
-	if (tf->file == NULL)
+	if (!tf->file)
 	{
 		free(tf);
 		return NULL;
@@ -80,22 +80,19 @@ GLOBAL MYTEXTFILE *myTextOpen ( const char *filename )
 	if (tf->filelen>0)
 	{
 		tf->buffer= (char *) malloc ((size_t) tf->filelen);
+		tf->bufptr= tf->buffer;
+		tf->bufend= tf->buffer + tf->filelen;
 
-		if (tf->buffer != NULL)
+		if (tf->buffer)
 		{
 			fread(tf->buffer, sizeof(char), (size_t) tf->filelen, tf->file);
 		}
-	} else
-	{
-		tf->buffer = NULL;
 	}
-	tf->bufptr= tf->buffer;
-	tf->bufend= tf->buffer + tf->filelen;
 #else
 	/* Auf normale Routine zurueckgreifen */
 	tf->file= fopen(filename, "r");
 
-	if (tf->file == NULL)
+	if (!tf->file)
 	{
 		free(tf);
 		tf= NULL;
@@ -114,6 +111,7 @@ GLOBAL char *myTextGetline ( char *string, int n, MYTEXTFILE *tf )
 	size_t sl;
 	char *cr, *lf;
 
+
 	*string= '\0';
 
 	if (!tf || !tf->buffer || !tf->bufptr || tf->bufptr >= tf->bufend)
@@ -124,7 +122,7 @@ GLOBAL char *myTextGetline ( char *string, int n, MYTEXTFILE *tf )
 	cr= strchr(tf->bufptr, '\r');
 	lf= strchr(tf->bufptr, '\n');
 
-	if (cr == NULL && lf == NULL)
+	if (!cr && !lf)
 	{	/* Kein Zeilenende mehr gefunden -> Rest zurueckgeben */
 		sl= tf->bufend - tf->bufptr;
 		memcpy(string, tf->bufptr, sl);
@@ -133,7 +131,7 @@ GLOBAL char *myTextGetline ( char *string, int n, MYTEXTFILE *tf )
 		return string;
 	}
 
-	if (cr != NULL && lf != NULL)
+	if (cr && lf)
 	{	/* DOS-Zeile */
 		*cr= '\0';
 		*lf= '\0';
@@ -149,7 +147,7 @@ GLOBAL char *myTextGetline ( char *string, int n, MYTEXTFILE *tf )
 		return string;
 	}
 
-	if (cr != NULL)
+	if (cr)
 	{	/* MAC-Zeile */
 		*cr= '\0';
 		strcpy(string, tf->bufptr);
@@ -157,7 +155,7 @@ GLOBAL char *myTextGetline ( char *string, int n, MYTEXTFILE *tf )
 		return string;
 	}
 
-	if (lf != NULL)
+	if (lf)
 	{	/* Unix-Zeile */
 		*lf= '\0';
 		strcpy(string, tf->bufptr);
@@ -168,7 +166,7 @@ GLOBAL char *myTextGetline ( char *string, int n, MYTEXTFILE *tf )
 	size_t sl;
 
 	/* Auf normale Routine zurueckgreifen und Endekennung entfernen */
-	if (fgets(string, n, tf->file) == NULL)
+	if (!fgets(string, n, tf->file))
 	{
 		return NULL;
 	}
@@ -189,18 +187,20 @@ GLOBAL char *myTextGetline ( char *string, int n, MYTEXTFILE *tf )
 
 GLOBAL int myTextClose ( MYTEXTFILE *tf )
 {
-	if (tf == NULL)
+	if (!tf)
 	{
 		return EOF;
 	}
 
-	if (tf->buffer != NULL)
+	if (tf->buffer)
 	{
 		free(tf->buffer);
 	}
 
 	fclose(tf->file);
 	free(tf);
+
+	tf= NULL;
 
 	return 0;
 
@@ -272,8 +272,7 @@ GLOBAL void fsplit (char *s, char *drive, char *path, char *filename, char*suffi
 	/* Filenamen ermitteln und abschneiden */	
 	strcpy(filename, wrk);
 	l= 0;
-	while ( (filename[l]!='\0') && (filename[l]!='\\') && (filename[l]!='/') )
-		l++;
+	while ( (filename[l]!='\0') && (filename[l]!='\\') && (filename[l]!='/') ) l++;
 	filename[l]='\0';
 	strmir(filename);
 	fl= strlen(filename);
@@ -281,7 +280,7 @@ GLOBAL void fsplit (char *s, char *drive, char *path, char *filename, char*suffi
 	wrk[wl-fl]= '\0';	
 
 	/* Jetzt noch aus dem Filenamen den Suffix extrahieren */
-	if ( (found=strrchr(filename, '.'))!=NULL )
+	if ( (found=strchr(filename, '.'))!=NULL )
 	{	strcpy(suffix, found);
 		filename[fl-strlen(suffix)]= '\0';
 	}
@@ -406,7 +405,9 @@ GLOBAL FILE * myFwopen ( const char *filename, const int filetype )
 	{	SetFileType(filename, filetype);
 	}
 #else
-	UNUSED(filetype);
+	if (filetype==0)
+	{	/* Keep compiler happy */
+	}
 #endif
 
 	return file;
@@ -424,7 +425,9 @@ GLOBAL FILE * myFwbopen ( const char *filename, const int filetype )
 	{	SetFileType(filename, filetype);
 	}
 #else
-	UNUSED(filetype);
+	if (filetype==0)
+	{	/* Compiler ruhig stellen */
+	}
 #endif
 
 	return file;
@@ -513,42 +516,6 @@ GLOBAL void path_adjust_separator ( char *s )
 #if USE_HTML_FOLDERS
 
 /*	----------------------------------------------------------------------
-	Ermitteln des aktuellen Verzeichnisses
-	----------------------------------------------------------------------	*/
-LOCAL BOOLEAN my_getcwd ( char *s, int maxlen )
-{
-	BOOLEAN ret= TRUE;
-
-	if (getcwd(s, maxlen)==NULL)
-	{	ret= FALSE;
-	}
-
-	return ret;
-
-}	/* my_getcwd */
-
-
-/*	----------------------------------------------------------------------
-	Testen, ob ein Verzeichnis vorhanden ist
-	----------------------------------------------------------------------	*/
-LOCAL BOOLEAN myDirExists ( char *s )
-{
-	char old[512];
-	BOOLEAN ret= TRUE;
-
-	my_getcwd(old, 512);
-
-	if (chdir(s)!=0)
-	{	ret= FALSE;
-	}
-
-	chdir(old);
-
-	return ret;
-
-}	/* myDirExists */
-
-/*	----------------------------------------------------------------------
 	Anlegen eines Verzeichniss
 	----------------------------------------------------------------------	*/
 GLOBAL BOOLEAN my_mkdir ( char *s )
@@ -566,6 +533,58 @@ GLOBAL BOOLEAN my_mkdir ( char *s )
 
 }	/* my_mkdir */
 
+
+/*	----------------------------------------------------------------------
+	Ermitteln des aktuellen Verzeichnisses
+	----------------------------------------------------------------------	*/
+GLOBAL BOOLEAN my_getcwd ( char *s, int maxlen )
+{
+	BOOLEAN ret= TRUE;
+
+	if (getcwd(s, maxlen)==NULL)
+	{	ret= FALSE;
+	}
+
+	return ret;
+
+}	/* my_getcwd */
+
+
+/*	----------------------------------------------------------------------
+	Setzen des aktuellen Verzeichnisses
+	----------------------------------------------------------------------	*/
+GLOBAL BOOLEAN my_chdir ( char *s )
+{
+	BOOLEAN ret= TRUE;
+
+	if (chdir(s)!=0)
+	{	ret= FALSE;
+	}
+
+	return ret;
+
+}	/* my_chdir */
+
+
+/*	----------------------------------------------------------------------
+	Testen, ob ein Verzeichnis vorhanden ist
+	----------------------------------------------------------------------	*/
+GLOBAL BOOLEAN myDirExists ( char *s )
+{
+	char old[512];
+	BOOLEAN ret= TRUE;
+
+	my_getcwd(old, 512);
+
+	if (chdir(s)!=0)
+	{	ret= FALSE;
+	}
+
+	chdir(old);
+
+	return ret;
+
+}	/* myDirExists */
 
 #endif /* USE_HTML_FOLDERS */
 

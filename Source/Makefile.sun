@@ -3,15 +3,9 @@
 # @(#) Dirk Hagedorn, 27.06.1996
 ###########################################################
 CC = gcc 
-O=.o
-X=
-
-CFLAGS = -O2 -Wall -D__SUNOS__
+CFLAGS = -g -O2 -Wall -D__SUNOS__
 
 LDFLAGS = -s
 
 include makefile.in
 
-
-udo$(X):	$(OSRC) cli$(O)
-		$(CC) $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) -o $@

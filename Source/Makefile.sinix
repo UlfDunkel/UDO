@@ -3,15 +3,9 @@
 # @(#) Dirk Hagedorn, 27.06.1996
 ###########################################################
 CC = cc 
-O=.o
-X=
-
-CFLAGS = -O2 -W2 -D__SINIX__
+CFLAGS = -g -O2 -W2 -D__SINIX__
 
 LDFLAGS =
 
 include makefile.in
 
-
-udo$(X):	$(OSRC) cli$(O)
-		$(CC) $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) -o $@

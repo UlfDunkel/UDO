@@ -64,7 +64,7 @@
 
 /*	--------------------------------------------------------------	*/
 
-#ifdef __WIN32__
+#ifdef WIN32
 	#ifndef WORD
 	#define	WORD	short
 	#endif
@@ -197,14 +197,6 @@
 #endif
 
 /*	--------------------------------------------------------------	*/
-
-#ifndef UNUSED
-#define UNUSED(x) if (x) {}
-#endif
-
-#ifndef __GNUC__
-#  define __attribute__(x)
-#endif
 
 #endif	/* PORTAB_H */
 

@@ -446,7 +446,7 @@ LOCAL void calc_jpgsize ( unsigned int *w, unsigned int *h, JPGHEADER *head )
 	/* <???> Hier fehlt noch viel */
 	*w= 0;
 	*h= 0;
-	UNUSED(head);
+	head= head;
 }
 
 LOCAL int get_jpgheader ( const char *datei, JPGHEADER *head )
@@ -1104,7 +1104,9 @@ GLOBAL BOOLEAN c_msp_output ( const char *name, const char *caption, const BOOLE
 			break;
 	}
 
-	UNUSED(visible);
+	if (visible)
+	{	/* keep compiler happy */
+	}
 	
 	return(TRUE);
 }	/* c_msp_output */
@@ -1201,7 +1203,9 @@ GLOBAL BOOLEAN c_pcx_output ( const char *name, const char *caption, const BOOLE
 			break;
 	}
 	
-	UNUSED(visible);
+	if (visible)
+	{	/* keep compiler happy */
+	}
 
 	return(TRUE);
 
@@ -1260,7 +1264,9 @@ GLOBAL void c_eps_output ( const char *name, const char *caption, const char *su
 	outln("\\end_float");
 	outln("");
 
-	UNUSED(visible);
+	if (visible)
+	{	/* keep compiler happy */
+	}
 
 }	/* c_eps_output */
 
@@ -1363,7 +1369,10 @@ GLOBAL void c_png_output ( const char *name, const char *caption, const char *su
 		outln("\\end{figure}");
 	}
 
-	UNUSED(visible);
+	if (visible)
+	{
+		/* keep compiler happy */
+	}
 
 }	/* c_png_output */
 

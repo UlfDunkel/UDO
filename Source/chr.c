@@ -117,6 +117,10 @@ const char *id_chr_c= "@(#) chr.c       22.04.1999";
 #error	"MAXHTAG7BIT not defined!"
 #endif
 
+#ifndef MAXPS7BIT
+#error	"MAXPS7BIT not defined!"
+#endif
+
 /*	############################################################
 	# lokale Variablen
 	############################################################	*/
@@ -173,17 +177,31 @@ LOCAL void str2manunder( char *d, const char *s );
 
 GLOBAL void convert_sz ( char *s )
 {
+#if 0
+	s= s; /* Wird alles von recode uebernommen */
+#else
+
 # ifdef __TOS__
 	replace_char(s, "\341", "\236");
-# else
+	return;
+# endif
 
-# if !defined(__MSDOS__) && !defined(__MSDOS850__)
+# ifndef __MSDOS__
 	replace_char(s, "\236", "\341");
+	return;
+# endif
 
-#else
-	UNUSED(s);
+# ifndef __MSDOS850__
+	replace_char(s, "\236", "\341");
+	return;
+# endif
+
+#if !defined(__TOS__) && !defined(__MSDOS__) && !defined(__MSDOS850__)
+	s= s;	/* keep compiler happy */
 #endif
+
 #endif
+
 }	/* convert_sz */
 
 
@@ -287,6 +305,10 @@ LOCAL void iso2system ( char *s )
 	
 	ptr= s;
 	
+	if (*ptr==EOS)
+	{	return;
+	}
+	
 	while (*ptr!=EOS)
 	{
 		if ( ((UCHAR) *ptr) > 127 )
@@ -332,7 +354,7 @@ LOCAL void iso2sys ( char *s )
 #if USE_LATIN1_CHARSET
 		/* r6pl2: System benutzt Latin1-Zeichensatz? Dann ist */
 		/* eine weitere Umwandlung/Kontroll unnoetig! */
-		UNUSED(s);
+		s= s;	/* keep compiler happy */
 		return;
 #else
 	iso2system(s);
@@ -356,6 +378,10 @@ LOCAL void mac2iso ( char *s )
 	int idx;
 	
 	ptr= s;
+	
+	if (*ptr==EOS)
+	{	return;
+	}
 	
 	while (*ptr!=EOS)
 	{
@@ -469,6 +495,10 @@ LOCAL void next2iso ( char *s )
 	
 	ptr= s;
 	
+	if (*ptr==EOS)
+	{	return;
+	}
+	
 	while (*ptr!=EOS)
 	{
 		if ( ((UCHAR) *ptr) > 127 )
@@ -505,6 +535,10 @@ LOCAL void tos2iso ( char *s )
 	
 	ptr= s;
 	
+	if (*ptr==EOS)
+	{	return;
+	}
+	
 	while (*ptr!=EOS)
 	{
 		if ( ((UCHAR) *ptr) > 127 )
@@ -539,6 +573,10 @@ LOCAL void cp437iso ( char *s )
 	int idx;
 	
 	ptr= s;
+	
+	if (*ptr==EOS)
+	{	return;
+	}
 	
 	while (*ptr!=EOS)
 	{
@@ -576,6 +614,10 @@ LOCAL void cp850iso ( char *s )
 	
 	ptr= s;
 	
+	if (*ptr==EOS)
+	{	return;
+	}
+	
 	while (*ptr!=EOS)
 	{
 		if ( ((UCHAR) *ptr) > 127 )
@@ -595,12 +637,15 @@ LOCAL void cp850iso ( char *s )
 #endif	/* __MSDOS850__ */
 
 
-#if !defined(__MSDOS__) && !defined(__MSDOS850__)
 LOCAL void section2iso ( char *s )
 {
 	char *ptr;
 	
 	ptr= s;
+	
+	if (*ptr==EOS)
+	{	return;
+	}
 	
 	while (*ptr!=EOS)
 	{
@@ -610,7 +655,6 @@ LOCAL void section2iso ( char *s )
 		ptr++;
 	}
 }	/* section2iso */
-#endif
 
 
 /*	############################################################
@@ -628,6 +672,10 @@ LOCAL void hp82iso ( char *s )
 	int idx;
 	
 	ptr= s;
+	
+	if (*ptr==EOS)
+	{	return;
+	}
 	
 	while (*ptr!=EOS)
 	{
@@ -888,6 +936,10 @@ GLOBAL void ansi2dos ( char *s )
 {
 	register int idx;
 	char *ptr;
+	
+	if (s[0]==EOS)
+	{	return;
+	}
 	
 	ptr= s;
 
@@ -1404,7 +1456,7 @@ GLOBAL void replace_1at_by_2at ( char *s )
 
 /*	------------------------------------------------------------
 	node2vision()
-	In einem Topic fuer Turbo Vision Help duerfen nur Zeichen
+	In einem Topic fuer Turbo Vision Help duerfen nue Zeichen
 	vorkommen, die auch in C oder Pascal als Funktionsnamen
 	erlaubt sind.
 	<->	s:	String
@@ -1980,13 +2032,7 @@ GLOBAL void c_vars ( char *s )
 		case TOAMG:
 		case TOPCH:
 			qreplace_all(s, "(!copyright)", 12, COPY_S, COPY_S_LEN);
-			qreplace_all(s, "(!grin)", 7, ";-)", 3);
-			qreplace_all(s, "(!laugh)", 8, ":-)", 3);
-			qreplace_all(s, "(!alpha)", 8, ALPHA_S, ALPHA_S_LEN);
-			qreplace_all(s, "(!beta)", 7, BETA_S, BETA_S_LEN);
-			specials2ascii(s);
-			texvar2ascii(s);
-			break;
+			/* Durchfall */
 		case TOASC:
 		case TODRC:
 		case TOMAN:
@@ -2526,9 +2572,6 @@ GLOBAL void auto_quote_chars ( char *s, BOOLEAN all )
 						break;
 					}
 				}
-				if (!found)
-				{
-				}
 				break;
 				
 			case TOIPF:
@@ -2539,9 +2582,6 @@ GLOBAL void auto_quote_chars ( char *s, BOOLEAN all )
 						found= TRUE;
 						break;
 					}
-				}
-				if (!found)
-				{
 				}
 				break;
 
@@ -2574,9 +2614,6 @@ GLOBAL void auto_quote_chars ( char *s, BOOLEAN all )
 						}
 					}
 				}
-				if (!found)
-				{
-				}
 				break;
 				
 			case TOKPS:
@@ -2601,15 +2638,7 @@ GLOBAL void auto_quote_chars ( char *s, BOOLEAN all )
 				}
 #if 0
 				else
-				{
-#define	MAXPS7BIT	3
-LOCAL /*const*/ QUOTEINFO ps7bit[MAXPS7BIT]=
-{
-	{	'(',		"\\("	},
-	{	')',		"\\)"	},
-	{	'\\',		"\\\\"	}
-};
-					for (i=0; i<MAXPS7BIT; i++)
+				{	for (i=0; i<MAXPS7BIT; i++)
 					{	if ( ( ptr[0])==ps7bit[i].c)
 						{	ptr_quoted= ps7bit[i].quoted;
 							found= TRUE;
@@ -2618,9 +2647,6 @@ LOCAL /*const*/ QUOTEINFO ps7bit[MAXPS7BIT]=
 					}
 				}
 #endif
-				if (!found)
-				{
-				}
 				break;
 
 			case TOWIN:
@@ -2652,9 +2678,6 @@ LOCAL /*const*/ QUOTEINFO ps7bit[MAXPS7BIT]=
 							break;
 						}
 					}
-				}
-				if (!found)
-				{
 				}
 				break;
 				
@@ -2689,9 +2712,6 @@ LOCAL /*const*/ QUOTEINFO ps7bit[MAXPS7BIT]=
 						}
 					}
 				}
-				if (!found)
-				{
-				}
 				break;
 
 			case TOLDS:
@@ -2715,9 +2735,6 @@ LOCAL /*const*/ QUOTEINFO ps7bit[MAXPS7BIT]=
 						}
 					}
 				}
-				if (!found)
-				{
-				}
 				break;
 
 			case TOHPH:
@@ -2740,9 +2757,6 @@ LOCAL /*const*/ QUOTEINFO ps7bit[MAXPS7BIT]=
 							break;
 						}
 					}
-				}
-				if (!found)
-				{
 				}
 				break;
 		}

@@ -249,7 +249,9 @@ typedef struct					/* ---- Funktionentabelle ----		*/
 	const int		pos;		/* Erlaubnis Vorspann/Hauptteil		*/
 }	UDOCOMMAND;
 
-LOCAL const UDOCOMMAND udoCmdSeq[]=
+#define	MAXCOMMAND	234
+
+LOCAL const UDOCOMMAND udoCmdSeq[MAXCOMMAND]=
 {
 	{ "!node",						"!n",		c_node,					TRUE,	CMD_ONLY_MAINPART	},
 	{ "!subnode",					"!sn",		c_subnode,				TRUE,	CMD_ONLY_MAINPART	},
@@ -371,6 +373,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!hline",						"",			c_hline,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!table_caption",				"",			c_table_caption,		TRUE,	CMD_ONLY_MAINPART	},
 	{ "!table_caption*",			"",			c_table_caption_nonr,	TRUE,	CMD_ONLY_MAINPART	},
+	{ "!table_caption",				"",			c_table_caption,		TRUE,	CMD_ONLY_MAINPART	},
 	{ "!universal_charset",			"",			c_universal_charset,	TRUE,	CMD_ALWAYS			},
 	{ "!win_charwidth",				"",			c_win_charwidth,		TRUE,	CMD_ALWAYS			},
 	{ "!wh4_charwidth",				"",			c_wh4_charwidth,		TRUE,	CMD_ALWAYS			},
@@ -605,7 +608,6 @@ GLOBAL void outln (const char *s)
 			{	if (!bTestmode)
 				{	fprintf(outfile.file, NL);
 				}
-				outlines++;
 			}
 			man_headline();
 		}
@@ -827,7 +829,7 @@ LOCAL void strjustify ( char *s, size_t len )
 {
 	size_t	sl, tl, i;
 	int count, pos, j;
-	BOOLEAN	is_verbed;
+	BOOLEAN	is_verbed= FALSE;
 
 	if (s[0]==' ' || s[0]==EOS)
 	{	return;
@@ -984,11 +986,15 @@ GLOBAL BOOLEAN str_for_desttype ( const char *s )
 		case TOAQV:	flag= (strstr(s, "aqv")!=NULL);		break;
 		case TOASC:	flag= (strstr(s, "asc")!=NULL);		break;
 		case TODRC:	flag= (strstr(s, "drc")!=NULL);		break;
+#if HPH_SUPPORT
 		case TOHPH:	flag= (strstr(s, "htag")!=NULL);	break;
+#endif
 		case TOHTM:	flag= (strstr(s, "html")!=NULL);	break;
 		case TOMHH:	flag= (strstr(s, "hh")!=NULL);		break;
 		case TOIPF:	flag= (strstr(s, "ipf")!=NULL);		break;
+#if LYX_SUPPORT
 		case TOLYX:	flag= (strstr(s, "lyx")!=NULL);		break;
+#endif
 		case TOMAN:	flag= (strstr(s, "man")!=NULL);		break;
 		case TONRO:	flag= (strstr(s, "nroff")!=NULL);	break;
 		case TOPCH:	flag= (strstr(s, "pch")!=NULL);		break;
@@ -1044,53 +1050,46 @@ GLOBAL BOOLEAN is_for_desttype (BOOLEAN *schalter, const char *cmd)
 
 LOCAL BOOLEAN str_for_os ( const char *s )
 {
-	BOOLEAN flag;
+	BOOLEAN flag= FALSE;
 
-	flag = FALSE;
-	
 #ifdef __BEOS__
-	flag |= (strstr(s, "beos")!=NULL);
+	flag= (strstr(s, "beos")!=NULL);
 #endif
 
 #ifdef __HPUX_ISO__
-	flag |= (strstr(s, "hpux")!=NULL);
+	flag= (strstr(s, "hpux")!=NULL);
 #endif
 
 #ifdef __HPUX_ROMAN8__
-	flag |= (strstr(s, "hpux")!=NULL);
+	flag= (strstr(s, "hpux")!=NULL);
 #endif
 
 #ifdef __LINUX__
-	flag |= (strstr(s, "linux")!=NULL);
+	flag= (strstr(s, "linux")!=NULL);
 #endif
 
 #ifdef __MACOS__
-	flag |= (strstr(s, "macos")!=NULL);
+	flag= (strstr(s, "macos")!=NULL);
 #endif
 
 #ifdef __MSDOS__
-	flag |= (strstr(s, "dos")!=NULL);
-#endif
-
-#ifdef __WIN32__
-	flag |= (strstr(s, "dos")!=NULL);
-	flag |= (strstr(s, "win")!=NULL);
+	flag= (strstr(s, "dos")!=NULL);
 #endif
 
 #ifdef __NEXTSTEP__
-	flag |= (strstr(s, "nextstep")!=NULL);
+	flag= (strstr(s, "nextstep")!=NULL);
 #endif
 
 #ifdef __SINIX__
-	flag |= (strstr(s, "sinix")!=NULL);
+	flag= (strstr(s, "sinix")!=NULL);
 #endif
 
 #ifdef __SUNOS__
-	flag |= (strstr(s, "sunos")!=NULL);
+	flag= (strstr(s, "sunos")!=NULL);
 #endif
 
 #ifdef __TOS__
-	flag |= (strstr(s, "tos")!=NULL);
+	flag= (strstr(s, "tos")!=NULL);
 #endif
 
 	if (strstr(s, "all")!=NULL)		flag= TRUE;
@@ -1430,8 +1429,7 @@ GLOBAL void c_hline ( void )
 		case TOSTG:
 		case TOAMG:
 			indent=strlen_indent();
-			voutlnf("@line %d %d 0 0 7", indent+1, ((int) zDocParwidth)-indent);	/*r6pl5*/
-			outln("");
+			voutlnf("@line %d %d 0 0 7\n", indent+1, ((int) zDocParwidth)-indent);	/*r6pl5*/
 			break;
 		case TOASC:
 		case TOPCH:
@@ -1738,6 +1736,7 @@ LOCAL void print_ascii_index ( void )
 					else
 					{	if (misslf)
 						{	outln("");
+							misslf= FALSE;
 						}
 						voutf("     %s, %s", ptr->idx[1], ptr->chapter);
 						misslf= TRUE;
@@ -1746,6 +1745,7 @@ LOCAL void print_ascii_index ( void )
 				else
 				{	if (misslf)
 					{	outln("");
+						misslf= TRUE;
 					}
 					outln(ptr->idx[0]);
 					voutf("     %s, %s", ptr->idx[1], ptr->chapter);
@@ -1763,6 +1763,7 @@ LOCAL void print_ascii_index ( void )
 						else
 						{	if (misslf)
 							{	outln("");
+								misslf= FALSE;
 							}
 							voutf("        %s, %s", ptr->idx[2], ptr->chapter);
 							misslf= TRUE;
@@ -1771,6 +1772,7 @@ LOCAL void print_ascii_index ( void )
 					else
 					{	if (misslf)
 						{	outln("");
+							misslf= FALSE;
 						}
 						voutf("     %s, %s", ptr->idx[1], ptr->chapter);
 						misslf= TRUE;
@@ -1779,6 +1781,7 @@ LOCAL void print_ascii_index ( void )
 				else
 				{	if (misslf)
 					{	outln("");
+						misslf= TRUE;
 					}
 					outln(ptr->idx[0]);
 					voutlnf("     %s", ptr->idx[1]);
@@ -2253,14 +2256,11 @@ LOCAL void c_heading ( void )
 		case TOTEX:
 		case TOPDL:
 			c_internal_styles(name);
-			voutlnf("{\\Large{\\bf %s}}", name);
-			outln("");
+			voutlnf("{\\Large{\\bf %s}}\n", name);
 			break;
 		case TOINF:
 			c_internal_styles(name);
-			outln("");
-			voutlnf("@chapheading %s", name);
-			outln("");
+			voutlnf("\n@chapheading %s\n", name);
 			break;
 		case TORTF:
 			c_rtf_styles(name);
@@ -2367,14 +2367,11 @@ LOCAL void c_subheading ( void )
 		case TOTEX:
 		case TOPDL:
 			c_internal_styles(name);
-			voutlnf("{\\large{\\bf %s}}", name);
-			outln("");
+			voutlnf("{\\large{\\bf %s}}\n", name);
 			break;
 		case TOINF:
 			c_internal_styles(name);
-			outln("");
-			voutlnf("@heading %s", name);
-			outln("");
+			voutlnf("\n@heading %s\n", name);
 			break;
 		case TORTF:
 			c_rtf_styles(name);
@@ -2473,14 +2470,11 @@ LOCAL void c_subsubheading ( void )
 		case TOTEX:
 		case TOPDL:
 			c_internal_styles(name);
-			voutlnf("{\\normalsize{\\bf %s}}", name);
-			outln("");
+			voutlnf("{\\normalsize{\\bf %s}}\n", name);
 			break;
 		case TOINF:
 			c_internal_styles(name);
-			outln("");
-			voutlnf("@subheading %s", name);
-			outln("");
+			voutlnf("\n@subheading %s\n", name);
 			break;
 		case TORTF:
 			c_rtf_styles(name);
@@ -2579,14 +2573,11 @@ LOCAL void c_subsubsubheading ( void )
 		case TOTEX:
 		case TOPDL:
 			c_internal_styles(name);
-			voutlnf("{\\normalsize{\\bf %s}}", name);
-			outln("");
+			voutlnf("{\\normalsize{\\bf %s}}\n", name);
 			break;
 		case TOINF:
 			c_internal_styles(name);
-			outln("");
-			voutlnf("@subheading %s", name);
-			outln("");
+			voutlnf("\n@subheading %s\n", name);
 			break;
 		case TORTF:
 			c_rtf_styles(name);
@@ -2857,8 +2848,8 @@ GLOBAL void c_newpage( void )
 
 	switch(desttype)
 	{
-		case TOTEX:	outln(""); outln("\\newpage");	break;
-		case TOPDL:	outln(""); outln("\\newpage");	break;
+		case TOTEX:	outln("\n\\newpage");	break;
+		case TOPDL:	outln("\n\\newpage");	break;
 		case TODRC:	/* <???> */				break;
 		case TOHPH:	/* <???> */				break;
 		case TOIPF:	/* <???> */				break;
@@ -2868,8 +2859,7 @@ GLOBAL void c_newpage( void )
 		case TOMAN:
 			if (iManPageLength>0)
 			{	while ( iManPageLines<iManPageLength-MAN_BOTTOMLINES )
-				{	if (!bTestmode)
-						fprintf(outfile.file, "\n");
+				{	fprintf(outfile.file, "\n");
 					iManPageLines++;
 					outlines++;
 				}
@@ -3650,6 +3640,7 @@ LOCAL void c_check_raw ( char *s )
 	}
 
 	/* Klammerinhalt ermitteln, wenn bl==0 dann kein Inhalt oder fehlende Klammern */
+	contlen= 0;
 	contlen= get_brackets_ptr(ptr, &cont, &data);
 	
 	if (contlen==0 || cont==NULL || data==NULL)
@@ -4531,7 +4522,7 @@ LOCAL void output_hyphen_line ( const char *s )
 		{
 			if (sHypfull[0]!=EOS)			
 			{	fHypfile= myFwopen(sHypfull, TOASC);
-				if (fHypfile == NULL)
+				if (!fHypfile)
 				{	fHypfile= stderr;
 					bHypfailed= TRUE;
 					warning_err_hypfile();
@@ -4914,13 +4905,11 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 
 		case TOLYX:
 			if (iEnvLevel==0)
-			{	outln("\\layout Standard");
-			    outln("");
+			{	outln("\\layout Standard\n");
 			}
 			else
 			{	if (inside_center)
-				{	outln("\\layout Standard");
-				    outln("\\align center");
+				{	outln("\\layout Standard\n\\align center");
 				}
 				if (inside_right)
 				{	outln("\\align right");
@@ -5634,7 +5623,7 @@ GLOBAL void tokenize ( char *s)
 		{
 
 			/* Sequentielle Suche */
-			for (j=0; j<sizeof(udoCmdSeq) / sizeof(udoCmdSeq[0]); j++)
+			for (j=0; j<MAXCOMMAND; j++)
 			{
 				if	(
 						(strcmp(token[i], udoCmdSeq[j].magic)==0) ||
@@ -7390,14 +7379,13 @@ LOCAL BOOLEAN pass1 (char *datei)
 	build_include_filename(tmp_datei, ".ui");
 	file = myTextOpen(tmp_datei);
 	
-	if (file == NULL)
+	if (!file)
 	{	strcpy(tmp_datei, old_datei);
 		file = myTextOpen(tmp_datei);
 	}
 	
-	if (file == NULL)
-	{
-		bErrorDetected= TRUE;
+	if (!file)
+	{	bErrorDetected= TRUE;
 		return FALSE;
 	}
 	
@@ -7546,7 +7534,7 @@ LOCAL BOOLEAN pass1 (char *datei)
 					str2tok(zeile);
 
 					if ( (bInsideDocument) && (token[0][0]!=EOS) )
-					{	/* Kommandos, die nur im Hauptteil erlaubt sind */
+					{	/* Kommandos, die nur im Haputteil erlaubt sind */
 						if (strcmp(token[0], "!node")==0 || strcmp(token[0], "!n")==0)
 						{	add_node_to_toc(NODE_NORMAL, NODE_VISIBLE);
 							bInsidePopup= FALSE;
@@ -7906,8 +7894,7 @@ LOCAL void output_verbatim_line ( char *zeile )
 			break;
 		case TOLYX:
 			indent[0]= EOS;
-			outln("\\layout LyX-Code");
-			outln("");
+			outln("\\layout LyX-Code\n");
 			replace_all(zeile, "\\", "\\backslash"INDENT_S);
 			if (zeile[0]==EOS)
 			{	strcpy(zeile, "\n\\protected_separator\n");
@@ -8368,11 +8355,11 @@ LOCAL BOOLEAN pass2 (char *datei)
 
 	file = myTextOpen(tmp_datei);
 	
-	if (file == NULL)
+	if (!file)
 	{	strcpy(tmp_datei, old_datei);
 		file = myTextOpen(tmp_datei);
 
-		if (file == NULL)
+		if (!file)
 		{	error_open_pass2(tmp_datei);
 			bErrorDetected= TRUE;
 			return FALSE;
@@ -9008,7 +8995,7 @@ LOCAL void show_udo_intro ( void )
 
 }	/* show_udo_intro */
 
-LOCAL int call_dummy ( void )
+int call_dummy ( void )
 {
 	int i=42;
 
@@ -9064,7 +9051,7 @@ GLOBAL BOOLEAN udo (char *datei)
 			}
 			
 			fLogfile= myFwopen(sLogfull, TOASC);
-			if (fLogfile == NULL)
+			if (!fLogfile)
 			{	fLogfile= stderr;
 				warning_err_logfile();
 				bErrorDetected= TRUE;
@@ -9081,7 +9068,7 @@ GLOBAL BOOLEAN udo (char *datei)
 	{	if ( outfile.full[0]!=EOS )
 		{	if (sTreefull[0]!=EOS)			
 			{	fTreefile= myFwopen(sTreefull, TOASC);
-				if (fTreefile == NULL)
+				if (!fTreefile)
 				{	fTreefile= stderr;
 					warning_err_treefile();
 					bErrorDetected= TRUE;
@@ -9097,7 +9084,7 @@ GLOBAL BOOLEAN udo (char *datei)
 	{	if ( outfile.full[0]!=EOS )
 		{	if (sUPRfull[0]!=EOS)			
 			{	fUPRfile= myFwopen(sUPRfull, TOASC);
-				if (fUPRfile == NULL)
+				if (!fUPRfile)
 				{	fUPRfile= stderr;
 					warning_err_uprfile();
 					bErrorDetected= TRUE;
@@ -9129,7 +9116,7 @@ GLOBAL BOOLEAN udo (char *datei)
 			}
 
 			outfile.file= myFwopen(outfile.full, desttype);
-			if (outfile.file == NULL)
+			if (!outfile.file)
 			{	error_open_outfile(outfile.full);
 				warning_err_destination();
 				bErrorDetected= TRUE;
@@ -9181,134 +9168,144 @@ GLOBAL BOOLEAN udo (char *datei)
 
 	iUdopass= PASS1;
 
-	if (pass1(datei) &&							/* Erster Durchlauf aufgrund eines Fehlers gescheitert? */
-		(!bCheckMisc || check_modules_pass1()))	/* Diverse Ueberpruefungen auf Wunsch durchfuehren */
-	{
-	
-		/* Unregistrierte Versionen erzeugen immer die Werbeseite */
-		if (!config.bRegistered)
-		{	/* use_about_udo= TRUE; */ /* UDO is now Open Source */
-		}
-	
-		if ( use_about_udo )
-		{	add_pass1_about_udo();
-		}
-			
-		/* Speicher anfordern */
-		if ( malloc_token_output_buffer() )
+	if (!pass1(datei))
+	{	/* Erster Durchlauf aufgrund eines Fehlers gescheitert */
+		goto Pass1Failed;
+	}
+
+	if (bCheckMisc)
+	{	/* Diverse Ueberpruefungen auf Wunsch durchfuehren */
+		if (!check_modules_pass1())
 		{
-			init_lang_date();		/* Kann IMHO weg */
-			check_parwidth();
-	
-			/* itemchar wird erst nach pass1() gesetzt */
-			/* bei !no_umlaute wird kein 8bit-Zeichen mehr verwendet */
-			init_env_itemchar();
-	
-			bBreakInside= FALSE;
-			bInsideDocument= FALSE;
-			bInsidePopup= FALSE;
-			b1stQuote= TRUE;
-			b1stApost= TRUE;
-			iCharset= SYSTEM_CHARSET;
-	
-			init_vars_spec();
-			init_module_toc_pass2();
-			init_module_tp_pass2();
-			init_module_img_pass2();
-	
-			/* richtigen Einsatz von !if testen */
-			if ( !bBreakHappened && !bBreakInside )	/*r6pl4: && !bBreakInside */
-			{
-				if (counter_if_stack > 0)
-				{	error_missing_endif(if_stack[counter_if_stack].filename, if_stack[counter_if_stack].fileline);
-					bBreakHappened= TRUE;
-					ret= FALSE;
-				}
+			goto Pass1Failed;
+		}
+	}
+
+	/* Unregistrierte Versionen erzeugen immer die Werbeseite */
+	if (!config.bRegistered)
+	{	/* use_about_udo= TRUE; */ /* UDO is now Open Source */
+	}
+
+	if ( use_about_udo )
+	{	add_pass1_about_udo();
+	}
+		
+	/* Speicher anfordern */
+	if ( malloc_token_output_buffer() )
+	{
+		init_lang_date();		/* Kann IMHO weg */
+		check_parwidth();
+
+		/* itemchar wird erst nach pass1() gesetzt */
+		/* bei !no_umlaute wird kein 8bit-Zeichen mehr verwendet */
+		init_env_itemchar();
+
+		bBreakInside= FALSE;
+		bInsideDocument= FALSE;
+		bInsidePopup= FALSE;
+		b1stQuote= TRUE;
+		b1stApost= TRUE;
+		iCharset= SYSTEM_CHARSET;
+
+		init_vars_spec();
+		init_module_toc_pass2();
+		init_module_tp_pass2();
+		init_module_img_pass2();
+
+		/* richtigen Einsatz von !if testen */
+		if ( !bBreakHappened && !bBreakInside )	/*r6pl4: && !bBreakInside */
+		{
+			if (counter_if_stack > 0)
+			{	error_missing_endif(if_stack[counter_if_stack].filename, if_stack[counter_if_stack].fileline);
+				bBreakHappened= TRUE;
+				ret= FALSE;
 			}
-					
-			if ( !bBreakHappened && !bBreakInside)	/*r6pl4: && !bBreakInside */
-			{
-				show_status_pass("Pass 2...");
-				clear_if_stack();
-				output_preamble();
-				iUdopass= PASS2;
-	
-				if (desttype==TOHTM && html_frames_layout )
-				{	html_save_frameset();
-				}
-					
-				if ( pass2(datei) )
-				{
-					if (bCalledBeginDocument && !bCalledEndDocument)
-					{	error_missing_end(CMD_END_DOCUMENT);
-						c_end_document();
-					}
-					if (bCheckMisc)
-					{	/* Diverse Ueberpruefungen auf Wunsch durchfuehren */
-						check_modules_pass2();
-					}
-					outln("");
-					outln("");
-					ret= TRUE;
+		}
 				
-					if (bOutOpened)
-					{	switch (desttype)
-						{	case TOPCH:
-								save_pchelp_commandfile();
-								break;
-							case TOAQV:
-							case TOWIN:
-							case TOWH4:
-								if (desttype==TOWH4)
-								{	save_winhelp4_project();
-									save_winhelp4_cnt();
-								}
-								else
-								{	save_winhelp_project();
-								}
-								save_win_bmps();	/*r6pl5*/
-								if (bUseIdMapFileC)
-								{	bMapSavedC= save_winhelp_map_c();
-								}
-								if (bUseIdMapFilePas)
-								{	bMapSavedPas= save_winhelp_map_pas();
-								}
-								if (bUseIdMapFileVB)
-								{	bMapSavedVB= save_winhelp_map_vb();
-								}
-								if (bUseIdMapFileGFA)
-								{	bMapSavedGFA= save_winhelp_map_gfa();
-								}
-								break;
-							case TORTF:
-								save_rtf_bmps();	/*r6pl6*/
-								break;
-							case TOHTM:
-								save_html_gifs();
-								break;
-							case TOMHH:
-								save_htmlhelp_project();
-								bHhcSaved= save_htmlhelp_contents(sHhcfull);
-								bHhkSaved= save_htmlhelp_index(sHhkfull);
-								save_html_gifs();
-								break;
-							case TOSTG:
-							case TOAMG:
-								save_stg_imgs();
-								break;
-						}
+		if ( !bBreakHappened && !bBreakInside)	/*r6pl4: && !bBreakInside */
+		{
+			show_status_pass("Pass 2...");
+			clear_if_stack();
+			output_preamble();
+			iUdopass= PASS2;
+
+			if (desttype==TOHTM && html_frames_layout )
+			{	html_save_frameset();
+			}
+				
+			if ( pass2(datei) )
+			{
+				if (bCalledBeginDocument && !bCalledEndDocument)
+				{	error_missing_end(CMD_END_DOCUMENT);
+					c_end_document();
+				}
+				if (bCheckMisc)
+				{	/* Diverse Ueberpruefungen auf Wunsch durchfuehren */
+					check_modules_pass2();
+				}
+				outln("");
+				outln("");
+				ret= TRUE;
+			
+				if (bOutOpened)
+				{	switch (desttype)
+					{	case TOPCH:
+							save_pchelp_commandfile();
+							break;
+						case TOAQV:
+						case TOWIN:
+						case TOWH4:
+							if (desttype==TOWH4)
+							{	save_winhelp4_project();
+								save_winhelp4_cnt();
+							}
+							else
+							{	save_winhelp_project();
+							}
+							save_win_bmps();	/*r6pl5*/
+							if (bUseIdMapFileC)
+							{	bMapSavedC= save_winhelp_map_c();
+							}
+							if (bUseIdMapFilePas)
+							{	bMapSavedPas= save_winhelp_map_pas();
+							}
+							if (bUseIdMapFileVB)
+							{	bMapSavedVB= save_winhelp_map_vb();
+							}
+							if (bUseIdMapFileGFA)
+							{	bMapSavedGFA= save_winhelp_map_gfa();
+							}
+							break;
+						case TORTF:
+							save_rtf_bmps();	/*r6pl6*/
+							break;
+						case TOHTM:
+							save_html_gifs();
+							break;
+						case TOMHH:
+							save_htmlhelp_project();
+							bHhcSaved= save_htmlhelp_contents(sHhcfull);
+							bHhkSaved= save_htmlhelp_index(sHhkfull);
+							save_html_gifs();
+							break;
+						case TOSTG:
+						case TOAMG:
+							save_stg_imgs();
+							break;
 					}
-					
-					get_timestr(timer_stop);
-	
-				}	/* if ( pass2() ) */
-	
-			}	/* if (!bBreakHappened) */
-	
-		}	/* if ( malloc...() ) */
-	}	
+				}
+				
+				get_timestr(timer_stop);
+
+			}	/* if ( pass2() ) */
+
+		}	/* if (!bBreakHappened) */
+
+	}	/* if ( malloc...() ) */
+
 
 	/* Hier geht's weiter, wenn schon pass1() versagte */
+Pass1Failed:
 	udo_running= FALSE;
 
 
@@ -9363,7 +9360,7 @@ GLOBAL BOOLEAN udo (char *datei)
 		if (bCmdSaved)		logln_file_generated("Pure C command file", sCmdfull);
 		if (bHpjSaved)		logln_file_generated("WinHelp project", sHpjfull);
 		if (bCntSaved)		logln_file_generated("WinHelp4 contents", sCntfull);
-		if (bMapSavedC)		logln_file_generated("WinHelp map for C", sMapNoSuff);
+		if (bMapSavedC)		logln_file_generated("WinHelp map", sMapNoSuff);
 		if (bMapSavedPas)	logln_file_generated("WinHelp map for Pascal", sMapNoSuff);
 		if (bMapSavedVB)	logln_file_generated("WinHelp map for Visual Basic", sMapNoSuff);
 		if (bMapSavedGFA)	logln_file_generated("WinHelp map for GFA Basic", sMapNoSuff);
@@ -9701,7 +9698,7 @@ GLOBAL BOOLEAN udo2udo (char *datei)
 			}
 
 			outfile.file= myFwopen(outfile.full, desttype);
-			if (outfile.file == NULL)
+			if (!outfile.file)
 			{	error_open_outfile(outfile.full);
 				warning_err_destination();
 				bErrorDetected= TRUE;
@@ -9882,7 +9879,6 @@ GLOBAL BOOLEAN udo2udo (char *datei)
 	{
 		fclose(outfile.file);
 		outfile.file= NULL;
-		bOutOpened = FALSE;
 	}
 
 	exit_modules();
