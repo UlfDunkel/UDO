@@ -1,5 +1,5 @@
 # doc/manual/source/history.ui
-# letzte Änderungen: 29.01.2004 / last changes: Jan 29, 2004
+# letzte Änderungen: 04.02.2004 / last changes: Feb 4, 2004
 
 
 !iflang [german]
@@ -59,15 +59,55 @@ developer versions.
     (!T)company(!t) bezeichnet die Firma, für die ein Dokument erstellt wird.
     Wenn (!T)company(!t) benutzt wird, wird auf der Titelseite unter Autor
     ""für (!I)company(!i)"" eingefügt. (!nl)
-    (!T)category(!t) bezeichnet eine Kategorie, zu der das Dokument gehört.
+    (!T)category(!t) bezeichnet eine Kategorie, zu der das Dokument gehört. (!nl)
+    Diese Erweiterung ist seit Version ..?.. implementiert.
 !endif
 !iflang [english]
 !item (!KW [docinfo]) has two new arguments: (!nl)
     (!T)company(!t) marks a company, for whom the document is made. If
     (!T)company(!t) is used, the title page will be supplemented with
     ""for (!I)company(!i)"" after the author entry. (!nl)
-    (!T)category(!t) describes a category to which the document belongs.
+    (!T)category(!t) describes a category to which the document belongs. (!nl)
+    This extension has been implemented since version ..?..
 !endif
+# ..............................................................................
+!iflang [german]
+!item Endet eine UDO-Eingabezeile mit !\<Zeilenumbruch>, so wird die folgende Zeile
+  von UDO als Fortsetzung der vorhergehenden Zeile aufgefaßt. Es können damit mehrere "echte"
+  Zeilen aus Sicht von UDO zu einer einzigen "logischen" Eingabezeile zusammengefaßt werden.
+  Diese Fortsetzungszeilen sind an jeder Stelle im UDO-Quelltext zulässig, auch z.B. in Makros
+  und Definitionen. Steht !\ nicht unmittelbar am Ende einer Zeile, so wird es ignoriert
+  und als normaler Text ausgegeben. (!nl)
+  Eine mögliche Anwendung ist, den Inhalt einer Tabellenzeile auf mehrere Zeilen
+  in der Eingabedatei aufzuteilen, um die Lesbarkeit des UDO-Quelltextes zu verbessern. (!nl)
+  Dieses Feature ist seit Version~6.5.4 verfügbar.
+!endif
+!iflang [english]
+!item Having an UDO input line ending with !\<line break>, UDO takes the following line as
+  continuation of the previous line. You can combine several "real" lines to a single "logical" line
+  (from UDO's point of view). You can use these continuation lines at every position in the UDO source,
+  e.g. in macros or definitions. !\ will be ignored (and converted as normal text)
+  if not found next to a line break. (!nl)
+  One possible usage is to split the content of one table row into several input lines.
+  This gives a more readable UDO source. (!nl)
+  This extension is available since version~6.5.4.
+!endif
+# Beispiel - für die spätere ausführliche Dokumentation
+!begin_ignore
+!begin_table
+Das hier ist Zelle 1 !! !\
+Das hier ist Zelle 2 !! !\
+Das hier ist Zelle 3
+!end_table
+
+Für UDO sieht das nun so aus:
+
+!begin_table
+Das hier ist Zelle 1 !! Das hier ist Zelle 2 !! Das hier ist Zelle 3
+!end_table
+# Ende des Beispiels
+!end_ignore
+
 # ..............................................................................
 !end_itemize
 # ------------------------------------------------------------------------------
