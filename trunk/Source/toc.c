@@ -2257,6 +2257,8 @@ LOCAL BOOLEAN html_new_file ( void )
 	/* Changed in r6pl16 [NHz] */
 	if(html_doctype >= XHTML_STRICT)
 		sprintf(xml_lang, " xml:lang=\"%s\"", lang.html_lang);
+	else
+		xml_lang[0] = EOS;
 	voutlnf("<html lang=\"%s\"%s>", lang.html_lang, xml_lang);
 /*	outln("<html>");*/
 	outln("<head>");
@@ -2339,6 +2341,8 @@ GLOBAL void output_html_header ( const char *t )
 	/* Changed in r6pl16 [NHz] */
 	if(html_doctype >= XHTML_STRICT)
 		sprintf(xml_lang, " xml:lang=\"%s\"", lang.html_lang);
+	else
+		xml_lang[0] = EOS;
 	voutlnf("<html lang=\"%s\"%s>", lang.html_lang, xml_lang);
 /*	outln("<html>");*/
 	outln("<head>");
