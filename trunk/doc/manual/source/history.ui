@@ -1,5 +1,5 @@
 # doc/manual/source/history.ui
-# letzte Änderungen: 04.02.2004 / last changes: Feb 4, 2004
+# letzte Änderungen: 15.03.2004 / last changes: Mar 15, 2004
 
 
 !iflang [german]
@@ -412,33 +412,6 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 !heading Postscript
 # ------------------------------------------------------------------------------
 !begin_description
-#!item [(!NEWS)]
-#!begin_itemize !short
-# ..............................................................................
-#!iflang [german]
-#!item
-#!endif
-# ..............................................................................
-#!iflang [english]
-#!item
-#!endif
-# ..............................................................................
-#!end_itemize
-# ------------------------------------------------------------------------------
-#!smallskip
-#!item [(!CHANGES)]
-#!begin_itemize !short
-# ..............................................................................
-#!iflang [german]
-#!item
-#!endif
-# ..............................................................................
-#!iflang [english]
-#!item
-#!endif
-# ..............................................................................
-#!end_itemize
-# ------------------------------------------------------------------------------
 !smallskip
 !item [(!BUGFIXES)]
 !begin_itemize !short
@@ -469,49 +442,6 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 !end_description
 !end_ignore
 
-!begin_description
-!iflang [german]
-# !item [Neue Formate:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Neue Befehle:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Neuheiten:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Änderungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Syntaxänderungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
-#!item [Bugfixes:]
-#!end_itemize
-!endif
-
-!iflang [english]
-# !item [New destination formats:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [New commands:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [News:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Changes:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Syntax changes:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Bugfixes:]
-# 	!begin_itemize !short
-# 	!end_itemize
-!endif
-!end_description
-
 !end_node
 
 ################################################################################
@@ -533,31 +463,6 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 !begin_ignore
 !heading PDF-(!LaTeX)
 !begin_description
-# ------------------------------------------------------------------------------
-#!item [(!NEWS)]
-#!begin_itemize !short
-# ..............................................................................
-#!iflang [german]
-#!item 
-#!endif
-# ..............................................................................
-#!iflang [english]
-#!item
-#!endif
-#!end_itemize
-# ------------------------------------------------------------------------------
-#!smallskip
-#!item [(!CHANGES)]
-#!begin_itemize !short
-# ..............................................................................
-#!iflang [german]
-#!item 
-#!endif
-# ..............................................................................
-#!iflang [english]
-#!item
-#!endif
-#!end_itemize
 # ------------------------------------------------------------------------------
 !smallskip
 !item [(!BUGFIXES)]
@@ -585,35 +490,8 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 # ------------------------------------------------------------------------------
 !end_description
 
-!heading Richtext Format RTF
+!heading Richtext Format (RTF)
 !begin_description
-# ------------------------------------------------------------------------------
-#!item [(!NEWS)]
-#!begin_itemize !short
-# ..............................................................................
-#!iflang [german]
-#!item 
-#!endif
-# ..............................................................................
-#!iflang [english]
-#!item
-#!endif
-#!end_itemize
-# ------------------------------------------------------------------------------
-#!smallskip
-#!item [(!CHANGES)]
-#!begin_itemize !short
-# ..............................................................................
-#!iflang [german]
-#!item 
-#!endif
-# ..............................................................................
-#!iflang [english]
-#!item
-#!endif
-#!end_itemize
-# ------------------------------------------------------------------------------
-!smallskip
 !item [(!BUGFIXES)]
 !begin_itemize !short
 # ..............................................................................
@@ -654,8 +532,8 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 !endif
 # ..............................................................................
 !end_itemize
-!endif
 !end_description
+!end_ignore
 
 !end_node
 
@@ -685,7 +563,7 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 #!begin_itemize !short
 # ..............................................................................
 #!iflang [german]
-#!item 
+#!item
 #!endif
 # ..............................................................................
 #!iflang [english]
@@ -698,7 +576,7 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 #!begin_itemize !short
 # ..............................................................................
 #!iflang [german]
-#!item 
+#!item
 #!endif
 # ..............................................................................
 #!iflang [english]
@@ -711,11 +589,11 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 #!begin_itemize
 # ..............................................................................
 #!iflang [german]
-#!item 
+#!item
 #!endif
 # ..............................................................................
 #!iflang [english]
-#!item 
+#!item
 #!endif
 # ..............................................................................
 #!end_itemize
