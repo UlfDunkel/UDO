@@ -21,7 +21,7 @@
 
 #ifndef ID_MSG_C
 #define ID_MSG_C
-const char *id_msg_c= "@(#) msg.c       01.01.1999";
+const char *id_msg_c= "@(#) msg.c       04.02.2004";
 #endif
 
 #include "import.h"
@@ -522,6 +522,11 @@ GLOBAL void error_unknown_docinfo ( const char *s )
 
 GLOBAL void error_unknown_color ( const char *s )
 {	error_msg_para("unknown color: %s", s);
+}
+
+/* New in V6.5.5 [NHz] */
+GLOBAL void error_wrong_header_date ( const char *s )
+{	error_msg_para("wrong argument !html_header_date: %s, e.g. +01:00", s);
 }
 
 /* New feature #0000053 in V6.5.2 [NHz] */
