@@ -1532,15 +1532,34 @@ LOCAL void c_begin_list ( int listkind )
 			for(i=0;i<iEnvIndent[iEnvLevel];i++)
 				strcat(space, "0");
 
-			outln("Bon");
-/*			voutlnf("/offList (%s00) addStrSpaceLeft", space);*/
-			outln("/offCount offCount 1 add def");
+			if(desttype == TOKPS)
 
-			outln("/offCountS offCount 4 add def");
+			{
 
-			voutlnf("offList offCount get (%s00) addStrSpaceLeft", space);
+				switch(listkind)
 
-			outln("Boff");
+				{
+
+					case LIST_BOLD:			outln("Bon");	break;
+					case LIST_ITALIC:		outln("Ion");	break;
+					case LIST_TYPEWRITER:	outln("Von");	break;
+				}
+/*				voutlnf("/offList (%s00) addStrSpaceLeft", space);*/
+				outln("/offCount offCount 1 add def");
+
+				outln("/offCountS offCount 4 add def");
+
+				voutlnf("offList offCount get (%s00) addStrSpaceLeft", space);
+
+				switch(listkind)
+
+				{
+
+					case LIST_BOLD:			outln("Boff");	break;
+					case LIST_ITALIC:		outln("Ioff");	break;
+					case LIST_TYPEWRITER:	outln("Voff");	break;
+				}
+			}
 			break;
 		}
 		case TOIPF:
