@@ -711,7 +711,11 @@ GLOBAL void *um_realloc(void *block, size_t size)
 				/* Speicherfehler: unsere Checksumme wurde überschrieben! */
 				lauf=0; /* Abbrechen, wenn die Zeiger überschrieben sind, könnte es krachen */
 				memory_error=42; /* Speicherfehler Flag setzen */
+#ifdef UM_PRINTF_USE_L
+				printf("Fatal error: um_realloc failed: checksum broken: %l != %l\n", tanker->check, UM_LONG_CHECK);
+#else
 				printf("Fatal error: um_realloc failed: checksum broken: %d != %d\n", tanker->check, UM_LONG_CHECK);
+#endif
 			}
 			else
 			{
@@ -745,7 +749,11 @@ GLOBAL void um_free(void *memblock)
 				/* Speicherfehler: unsere Checksumme wurde überschrieben! */
 				lauf=0; /* Abbrechen, wenn die Zeiger überschrieben sind, könnte es krachen */
 				memory_error=42; /* Speicherfehler Flag setzen */
+#ifdef UM_PRINTF_USE_L
+				printf("Fatal error: um_free failed: checksum broken: %l != %l\n", tanker->check, UM_LONG_CHECK);
+#else
 				printf("Fatal error: um_free failed: checksum broken: %d != %d\n", tanker->check, UM_LONG_CHECK);
+#endif
 			}
 			else
 			{
