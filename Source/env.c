@@ -3031,18 +3031,42 @@ GLOBAL void c_begin_document ( void )
 			else
 				iDocMonofontSize = 10 * 2;/* Courier New 10pt */
 
+			/* New in r6pl16 [NHz] */
+			/* Size of nodes */
+			if (laydat.node1size != 0)
+				laydat.node1size *= 2;
+			else
+				laydat.node1size = iDocPropfontSize + 14;
+
+			if (laydat.node2size != 0)
+				laydat.node2size *= 2;
+			else
+				laydat.node2size = iDocPropfontSize + 6;
+
+			if (laydat.node3size != 0)
+				laydat.node3size *= 2;
+			else
+				laydat.node3size = iDocPropfontSize;
+
+			if (laydat.node4size != 0)
+				laydat.node4size *= 2;
+			else
+				laydat.node4size = iDocPropfontSize;
+
 			voutlnf("{%s\\fs%d\\snext0 Normal;}",	rtf_norm, iDocPropfontSize);
 			voutlnf("{%s\\fs%d\\snext1 Verbatim;}",	rtf_verb, iDocMonofontSize);
 			voutlnf("{%s\\fs%d\\snext2 Chapter;}",	rtf_chapt, iDocPropfontSize + 28);
-			voutlnf("{%s\\fs%d\\snext3 Node1;}",		rtf_node1, iDocPropfontSize + 14);
-			voutlnf("{%s\\fs%d\\snext4 Node2;}",		rtf_node2, iDocPropfontSize + 6);
-			voutlnf("{%s\\fs%d\\snext5 Node3;}",		rtf_node3, iDocPropfontSize);
-			voutlnf("{%s\\fs%d\\snext6 Node4;}",		rtf_node4, iDocPropfontSize);
+			/* Changed in r6pl16 [NHz] */
+			voutlnf("{%s\\fs%d\\snext3 Node1;}",		rtf_node1, laydat.node1size);
+			voutlnf("{%s\\fs%d\\snext4 Node2;}",		rtf_node2, laydat.node2size);
+			voutlnf("{%s\\fs%d\\snext5 Node3;}",		rtf_node3, laydat.node3size);
+			voutlnf("{%s\\fs%d\\snext6 Node4;}",		rtf_node4, laydat.node4size);
 			voutlnf("{%s\\fs%d\\snext7 Chapter*;}",	rtf_inv_chapt, iDocPropfontSize + 28);
-			voutlnf("{%s\\fs%d\\snext8 Node1*;}",		rtf_inv_node1, iDocPropfontSize + 14);
-			voutlnf("{%s\\fs%d\\snext9 Node2*;}",		rtf_inv_node2, iDocPropfontSize + 6);
-			voutlnf("{%s\\fs%d\\snext10 Node3*;}",	rtf_inv_node3, iDocPropfontSize);
-			voutlnf("{%s\\fs%d\\snext12 Node4*;}",	rtf_inv_node4, iDocPropfontSize);
+			/* Changed in r6pl16 [NHz] */
+			voutlnf("{%s\\fs%d\\snext8 Node1*;}",		rtf_inv_node1, laydat.node1size);
+			voutlnf("{%s\\fs%d\\snext9 Node2*;}",		rtf_inv_node2, laydat.node2size);
+			voutlnf("{%s\\fs%d\\snext10 Node3*;}",		rtf_inv_node3, laydat.node3size);
+			voutlnf("{%s\\fs%d\\snext11 Node4*;}",		rtf_inv_node4, laydat.node4size);
 			voutlnf("{%s\\fs%d\\snext13 LineDraw;}",	rtf_linedraw, iDocMonofontSize);
 
 			output_rtf_colortbl();
@@ -3196,25 +3220,17 @@ GLOBAL void c_begin_document ( void )
 		case TOKPS:
 			/* New in r6pl16 [NHz] */
 			/* Size of nodes */
-			if (sDocNode1fontSize[0] != EOS)
-				iDocNode1fontSize = atoi(sDocNode1fontSize);
-			else
-				iDocNode1fontSize = laydat.propfontsize + 7;
+			if (laydat.node1size == 0)
+				laydat.node1size = laydat.propfontsize + 7;
 
-			if (sDocNode2fontSize[0] != EOS)
-				iDocNode2fontSize = atoi(sDocNode2fontSize);
-			else
-				iDocNode2fontSize = laydat.propfontsize + 3;
+			if (laydat.node2size == 0)
+				laydat.node2size = laydat.propfontsize + 3;
 
-			if (sDocNode3fontSize[0] != EOS)
-				iDocNode3fontSize = atoi(sDocNode3fontSize);
-			else
-				iDocNode3fontSize = laydat.propfontsize;
+			if (laydat.node3size == 0)
+				laydat.node3size = laydat.propfontsize;
 
-			if (sDocNode4fontSize[0] != EOS)
-				iDocNode4fontSize = atoi(sDocNode4fontSize);
-			else
-				iDocNode4fontSize = laydat.propfontsize;
+			if (laydat.node4size == 0)
+				laydat.node4size = laydat.propfontsize;
 
 			outln(UDO2PS);	/* in udo2ps.h definiert (c) by Christian Krueger und Norbert Hanz */
 			outln(UDO2PDF);	/* in udo2pdf.h definiert (c) by Norbert Hanz */
