@@ -2661,6 +2661,18 @@ LOCAL void output_tex_environments(void)
 	outln("  \\renewcommand{\\makelabel}[1]{{\\tt ##1}\\hfill}}}{\\end{list}}");
 	outln("");
 	outln("");
+	outln("\\makeatletter");
+	outln("\\@ifundefined{LaTeXe}%");
+	outln("  {\\def\\LaTeXe{{\\protect\\LaTeX{}2${}_{\\textstyle\\varepsilon}$}}");
+	outln("   \\def\\textbf#1{{\\bf #1}}");
+	outln("   \\def\\textit#1{{\\it #1}}");
+	outln("   \\def\\texttt#1{{\\tt #1}}");
+	outln("  }");
+	outln("  {\\def\\underlined#1{\\relax}");
+	outln("  }");
+	outln("\\makeatother");
+	outln("");
+	outln("");
 }
 
 

@@ -6215,8 +6215,7 @@ LOCAL void output_preamble ( void )
 		case TOTEX:
 		case TOPDL:
 			if (bTex2e)
-			{	strcpy(s, "\\documentclass[11pt");
-				strcat(s, "]");
+			{	strcpy(s, "\\documentclass[11pt]");
 				if (use_style_book)
 				{	strcat(s, "{book}");
 				}
@@ -6259,9 +6258,6 @@ LOCAL void output_preamble ( void )
 					outln("\\pdfpagewidth=\\paperwidth");
 					outln("\\pdfpageheight=\\paperheight");
 				}
-				if (!no_index && bCalledIndex)
-				{	outln("\\makeindex");
-				}
 			}
 			else
 			{	strcpy(s, "\\documentstyle[11pt");
@@ -6279,9 +6275,9 @@ LOCAL void output_preamble ( void )
 				{	strcat(s, "{article}");
 				}
 				outln(s);
-				if (!no_index && bCalledIndex)
-				{	outln("\\makeindex");
-				}
+			}
+			if (!no_index && bCalledIndex)
+			{	outln("\\makeindex");
 			}
 
 			if (called_subsubsubnode)
@@ -6794,14 +6790,17 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			}
 			if (strcmp(token[0], "!tex_lindner")==0)
 			{	iTexVersion= TEX_LINDNER;
+				bTex2e = FALSE;
 				return TRUE;
 			}
 			if (strcmp(token[0], "!tex_strunk")==0)
 			{	iTexVersion= TEX_STRUNK;
+				bTex2e = FALSE;
 				return TRUE;
 			}
 			if (strcmp(token[0], "!tex_emtex")==0)
 			{	iTexVersion= TEX_EMTEX;
+				bTex2e = FALSE;
 				return TRUE;
 			}
 			if (strcmp(token[0], "!tex_miktex")==0)
@@ -6818,6 +6817,10 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			{	bTex2e= TRUE;
 				return TRUE;
 			}
+			if (strcmp(token[0], "!tex_209")==0) 
+			{	bTex2e= FALSE; 
+				return TRUE; 
+			} 
 			break;
 
 		case TOPDL:
@@ -10504,7 +10507,7 @@ GLOBAL void init_vars ( void )
 	iTexVersion=			TEX_NONE;
 	iTexDPI=				100;
 	cTexVerb=				VERB_C;
-	bTex2e=					FALSE;
+	bTex2e=					TRUE;
 
 	iDrcFlags=				0;
 	
