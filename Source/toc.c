@@ -6285,7 +6285,10 @@ LOCAL void toc_link_output ( const int depth )
 								else
 									strcpy(suff, outfile.suff);
 
-								voutlnf("<link rel=\"chapter\" href=\"%s%s\"%s title=\"%d %s\">", htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->name);
+								if(no_numbers) /* Fixed bug #0000044 [NHz] */
+									voutlnf("<link rel=\"chapter\" href=\"%s%s\"%s title=\"%s\">", htmlfilename, suff, sTarget, toc[i]->name);
+								else
+									voutlnf("<link rel=\"chapter\" href=\"%s%s\"%s title=\"%d %s\">", htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->name);
 							}
 						}/* TOC_NODE1 */
 						break;
@@ -6309,7 +6312,10 @@ LOCAL void toc_link_output ( const int depth )
 									else
 										strcpy(suff, outfile.suff);
 
-									voutlnf("<link rel=\"section\" href=\"%s%s\"%s title=\"%d.%d %s\">", htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->nr2+subtoc_offset, toc[i]->name);
+									if(no_numbers) /* Fixed bug #0000044 [NHz] */
+										voutlnf("<link rel=\"section\" href=\"%s%s\"%s title=\"%s\">", htmlfilename, suff, sTarget, toc[i]->name);
+									else
+										voutlnf("<link rel=\"section\" href=\"%s%s\"%s title=\"%d.%d %s\">", htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->nr2+subtoc_offset, toc[i]->name);
 								}
 							}
 						}/* TOC_NODE2 */
@@ -6334,7 +6340,10 @@ LOCAL void toc_link_output ( const int depth )
 									else
 										strcpy(suff, outfile.suff);
 
-									voutlnf("<link rel=\"subsection\" href=\"%s%s\"%s title=\"%d.%d.%d %s\">", htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->nr2+subtoc_offset, toc[i]->nr3+subsubtoc_offset, toc[i]->name);
+									if(no_numbers) /* Fixed bug #0000044 [NHz] */
+										voutlnf("<link rel=\"subsection\" href=\"%s%s\"%s title=\"%s\">", htmlfilename, suff, sTarget, toc[i]->name);
+									else
+										voutlnf("<link rel=\"subsection\" href=\"%s%s\"%s title=\"%d.%d.%d %s\">", htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->nr2+subtoc_offset, toc[i]->nr3+subsubtoc_offset, toc[i]->name);
 								}
 							}
 						}/* TOC_NODE3 */
@@ -6355,7 +6364,10 @@ LOCAL void toc_link_output ( const int depth )
 								else
 									strcpy(suff, outfile.suff);
 
-								voutlnf("<link rel=\"appendix\" href=\"%s%s\"%s title=\"%c %s\">", htmlfilename, suff, sTarget, 'A'-1+toc[i]->nr1, toc[i]->name);
+								if(no_numbers) /* Fixed bug #0000044 [NHz] */
+									voutlnf("<link rel=\"appendix\" href=\"%s%s\"%s title=\"%s\">", htmlfilename, suff, sTarget, toc[i]->name);
+								else
+									voutlnf("<link rel=\"appendix\" href=\"%s%s\"%s title=\"%c %s\">", htmlfilename, suff, sTarget, 'A'-1+toc[i]->nr1, toc[i]->name);
 							}
 						}/* TOC_NODE1 */
 						break;
