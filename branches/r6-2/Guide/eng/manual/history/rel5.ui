@@ -1,0 +1,143 @@
+##################################################
+# @(#) Release 5, 1996/04/17
+##################################################
+!subnode Release 5
+
+A very short description of the major changes I added to this release
+for the last five months is listed here. It wasn't possible to prevent
+a change of the syntax of some commands.
+
+!begin_description !short
+
+!item [New destination formats:] ~
+
+	!begin_itemize
+	!item	Linuxdoc-SGML
+	!item	Turbo Vision Help
+	!item	Texinfo
+	!end_itemize
+
+!item [New commands:] ~
+
+	!begin_itemize
+	!item	!/alias
+	!item	!/begin_raw, !/end_raw (!nl)
+			inside the raw environment you can enter special commands
+			for a destination format
+	!item	!/begin_table, !/end_table (!nl)
+			setting tables like in (!LaTeX)!
+	!item	!/chapterimage (!nl)
+			an image can be used for the title of a chapter
+	!item	!/define
+	!item	!/french (!nl)
+			for French expressions
+	!item	!/heading, !/subheading, !/subsubheading (!nl)
+			for displaying headlines 
+	!item	!/hline (!nl)
+			for displaying horizontal lines
+	!item	!/htmlname (!nl)
+			to set the filename of a chapter
+	!item	!/html_merge_nodes, !/html_merge_subnodes,
+			!/html_merge_subsubnodes (!nl)
+			for merging chapters when converting to HTML
+	!item	(!/ilink ...) (!nl)
+			for displaying images with links inside the text, Windows Help and HTML only
+	!item	(!/img ...) (!nl)
+			for displaying images inside the text, Windows Help and HTML only
+	!item	!/index (!nl)
+			for setting an index entry
+	!item	!/list_parsep (!nl)
+			for switching the use of empty lines between items of an
+			environment
+	!item	!/ifdest, !/else, !/endif (!nl)
+			for special passages
+	!item	!/iflang, !/else, !/endif (!nl)
+			for special passages with different languages
+	!item	!/node*, !/subnode*, !/subsubnode*, !/pnode*, !/psubnode*,
+			!/psubsubnode* (!nl)
+			for chapters that don't appear inside a table of contents
+	!item	!/rinclude (!nl)
+			for including special commands
+	!item	!/use_about_udo
+	!item	!/use_chapter_images (!nl)
+			for displaying images instead of chapter titles
+	!item	!/use_style_book
+	!item	!/win_html_look (!nl)
+			for using grey inside a Windows Help file
+	!end_itemize
+
+!item [Changes:] ~
+
+	!begin_itemize
+
+	!item	You can display tables very easily. You can define how to
+			justify columns and where to draw horizontal and vertical
+			lines.
+
+	!item	The layout of the environments was programmed completely
+			new. Now you can use up to six environments inside
+			another, the xlist environment, too! UDO generates a
+			correct output for Windows Help and RTF.
+
+	!item	The semiautomatic syllabification was programmed
+			completely new.
+
+	!item	UDO now references only complete words.
+
+	!item	You can use 1024 chapters and 1024 labels now.
+
+	!item	You can use up to 200 links inside a paragraph. Due to a
+			bug you could only use 16 links inside a complete document
+			in release 4.
+
+	!item	Manualpages are layouted completely new.
+
+	!item	Paintbrush PCX images are supported for em(!TeX).
+
+	!item	The output of Windows Help was updated in many cases!
+
+	!item	The Atari versions were compiled with MiNT libs PL46.
+				
+	!end_itemize
+
+!item [Syntactical changes:] ~
+
+	!begin_itemize
+
+	!item	The special environments that were built with
+			(!T)!/begin_*(!t), (!T)!/else_*(!t) and (!T)!/end_*(!t)
+			have to made with the more flexible commands
+			(!I)!/ifdest(!i), (!I)!/else(!i) and (!I)!/endif(!i).
+	
+			Instead of!..
+
+!begin_quote
+!begin_verbatim
+!begin_asc
+[...]
+!else_asc
+[...]
+!end_asc
+!end_verbatim
+!end_quote
+
+!.. you now have to use this construction:
+
+!begin_quote
+!begin_verbatim
+!ifdest [asc]
+[...]
+!else
+[...]
+!endif
+!end_verbatim
+!end_quote
+	
+	!end_itemize
+
+!item [Bug fixes:] ~
+
+	Innumerous. (!grin)
+
+
+!end_description

@@ -1,0 +1,188 @@
+!subnode	0.43 vom 11.02.1996
+!html_name	r4_v043
+
+!begin_description
+
+###########################################################
+
+!item	[Allgemein] ~
+
+!begin_itemize
+
+!item	Neues Kommando: (!I)!/chapterimage~<file>(!i). Die angegebene Datei
+		wird anstelle des Kapitelnamens ausgeben. Dieses Kommando kann
+		in jedem (!I)!/*node(!i) benutzt werden. Bisher werden diese Grafiken
+		jedoch nur bei HTML beachtet.
+
+!item	Neuer Schalter: (!I)!/use_chapter_images~[!..](!i).
+		Hiermit gibt man an, für
+		welches Format anstatt der Kapitelnamen Grafiken ausgegeben
+		werden sollen (siehe (!I)!/chapterimage(!i)).
+
+!item	Neues Kommando: (!I)!/alias~<text>(!i). UDO referenziert (!I)<text>(!i)
+		auch auf
+		das jeweilige Kapitel, allerdings an den Seitenanfang und nicht
+		wie bei (!I)!/label(!i) an die Position des Kommandos.
+		(Ralf Zimmermann)
+
+!item	raw-Umgebungen sollten nun in verbatim-Umgebungen benutzt
+		werden können, ebenso verbatim-Umgebungen innerhalb von
+		raw-Umgebungen.
+		
+!item	Bei den Informationen für die Titelseite wurden keine
+		Quotes ((!T)!//(!t)) entfernt.
+
+!item	Bei (!I)!/date(!i) wurden keine Umlaute angepaßt.
+
+!item	In den Namen der Makros und Definitionen dürfen jetzt auch
+		Umlaute und andere Sonderzeichen vorkommen. Es gibt einfach
+		Dinge, die fallen einem erst nach Monaten auf.
+
+!item	Link und Schriftumschaltungen werden intern nun anders verwaltet.
+		Dadurch können bis zu 200 Links in einem Absatz benutzt werden
+		(vorher 64).
+
+!item	Die Umwandlung eines (!I)!/code_ansi(!i)-Files sollte nun etwas
+		schneller sein.
+
+!item	Bei ASCII und Manualpage werden Kapitelnamen nun zentriert
+		ausgegeben. Abschnitte werden mit ""="" unterstrichen,
+		Unterabschnitte mit ""-"". Dadurch behält der Leser einen
+		besseren Überblick über die Aufteilung des Textes.
+
+!item	Die GEM-Version wertet nun die Environment-Variablen
+		(!T)$STGUIDE(!t) und danach (!T)$ST-GUIDE(!t) aus. Der ST-Guide wird
+		dann parallel zur Anzeige von Hypertexten gestartet, sollte er
+		nicht als Accessory installiert sein.
+
+!item	Die GEM-Version sichert in den Einstellungen nun auch die
+		Namen der Quell- und Zieldatei, so daß beim nächsten Start die
+		Felder im Dialog vorbelegt sind.
+		
+!end_itemize
+
+
+###########################################################
+
+!item	[ASCII] ~
+
+!begin_itemize
+
+!item	Kapitelüberschriften werden anders ausgegeben. Siehe
+		""Allgemein"".
+
+!end_itemize
+
+
+###########################################################
+
+!item	[HTML] ~
+
+!begin_itemize
+
+!item	Bei (!/link~...) wird nun getestet, ob das Ziel vorhanden ist.
+		Ist es nicht vorhanden, gibt UDO eine Fehlermeldung aus; in der
+		erzeugten Datei wird dann Murks stehen.
+
+!item	Mit !/use_chapter_images [html] und !/chapterimage können anstatt
+		der Kapitelnamen auch Grafiken eingebunden werden.
+
+!end_itemize
+
+###########################################################
+
+!item	[Manualpage] ~
+
+!begin_itemize
+
+!item	Kapitelüberschriften werden anders ausgegeben. Siehe
+		""Allgemein"".
+
+!end_itemize
+
+
+###########################################################
+
+!item	[Pure C Help] ~
+
+!begin_itemize
+
+!item	In den Kopfzeilen werden nun auch die Kapitelnummern ausgegeben,
+		welche sich mit !/no_numbers [pch] ausschalten lassen
+
+!end_itemize
+
+
+###########################################################
+
+!item	[ST-Guide] ~
+
+!begin_itemize
+
+!item	Im Text eines !/label's werden Anführungsstriche durch
+		Apostrophe ersetzt.
+
+!item	In den Kopfzeilen werden nun auch die Kapitelnummern ausgegeben,
+		welche sich mit !/no_numbers [stg] ausschalten lassen
+		(Ralf Zimmermann).
+
+!item	Fehlt bei !/image, !/programimage oder !/authorimage die
+		Laufwerks- und Pfadangabe, so setzt UDO
+		das Laufwerk und den Pfad der Zieldatei ein. Unter GEM fand
+		UDO machmal ein Bild nicht.
+
+!end_itemize
+
+
+###########################################################
+
+!item	[WinHelp] ~
+
+!begin_itemize
+
+!item	Bei (!/link~...) wird nun getestet, ob das Ziel vorhanden ist.
+		Ist es nicht vorhanden, gibt UDO eine Fehlermeldung aus; in der
+		erzeugten Datei wird dann Murks stehen.
+
+!item	Yeah! Die xlist-Umgebung sollte nun einigermaßen fehlerfrei
+		ausgegeben werden. Bitte daran denken, daß die xlist-Umgebung
+		nur bedingt schachtelbar ist. Schachtelungen gehen bei WinHelp
+		immer noch daneben. Die Items werden soweit eingerückt, daß
+		auch ein fett und monospaced dargestellter String noch paßt.
+
+!item	Aufgrund obiger Änderung wurde das Kommando !/win_try_xlist
+		zu !/win_hide_xlist umfunktioniert. Die Angabe von
+		!/win_hide_xlist im Vorspann sorgt nun dafür, daß
+		xlist-Umgebungen intern wie description-Umgebungen gehandhabt
+		werden.
+
+!item	Innerhalb WinHelp erkennt man einen neuen Button mit der
+		Beschriftung ""Hoch"", mit dem man wie beim ST-Guide oder HTML
+		zum übergeordneten Kapitel kommen kann. Ein Klick auf den
+		Button ""Inhalt"" führt einen num zum Inhaltsverzeichnis und
+		nicht mehr zur Titelseite.
+
+		Im Hilfe-Menü von WinHelp (""?"") ein Menüeintrag angelegt, falls
+		man !/udoinfo benutzt hat.
+
+		Im Projectfile werden außerdem Infos über die Ausmaße der Fenster
+		angelegt.
+		
+!item	Verbatim-Umgebungen sollte nun innerhalb anderer Umgebungen
+		richtig eingerückt werden. Dafür wird irgendeine andere
+		Umgebungs-Kombination nun falsch eingerückt (welche?
+		vergessen).
+
+!item	In verbatim-Umgebungen wird nun auch automatisch referenziert.
+		Läßt sich auch hier mit !/autorefoff abschalten.
+
+!item	Grmpf! War der Inhalt von !/title und/oder !/program zulang, so
+		stürzte UDO beim Sichern der Projektdatei ab.
+
+!end_itemize
+
+
+###########################################################
+
+!end_description
+

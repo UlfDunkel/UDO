@@ -1,0 +1,20 @@
+!begin_itemize
+
+!index !/drc_bcolor
+!index !/drc_icolor
+!index !/drc_ucolor
+!item Neu: Schalter (!I)!/drc_bcolor(!i), (!I)!/drc_icolor(!i),
+(!I)!/drc_ucolor(!i) (!nl)
+Da DRC keine verschiedenen Schriftarten kennt, sondern Text lediglich
+farbig hervorheben kann, kann man mit diesen Befehlen UDO mitteilen,
+in welcher Farbe fetter, kuriver und unterstrichener Text dargestellt
+werden soll. Die Farbbezeichnungen stehen oben (Stefan Braunstein).
+
+!item Bugfix: Bei (!I)!/end_document(!i) wird nun immer eine Zeile mit
+dem Inhalt ""%%"" ausgegeben (Stefan Braunstein).
+
+!item Bugfix: Der Inhalt des Titelseite wird nun ordentlich
+dargestellt, da UDO die Zeilen mit Leerzeichen auffüllt.
+
+!end_itemize
+

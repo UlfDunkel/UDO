@@ -1,0 +1,16 @@
+!begin_itemize
+
+!index (--)force-long
+!item	Neu: Die Kommandozeilenoption ""(!T)(--)force-long(!t)"" kann nun
+auch in der GEM-Version benutzt werden.
+
+!item	Änderung: Der Hauptdialog wurde aufgeräumt und benutzt neben
+zahllosen Radio-Buttons nun ein Popup.
+
+!item	Änderung: Unter MagiC wird nun auch eine Menüzeile angemeldet.
+
+!item	Änderung: Der Dialog ""Externe Programme"" wurde aufgeräumt.
+Anstatt der zahllosen Radio-Buttons wird nun eine Listbox verwendet.
+
+!end_itemize
+

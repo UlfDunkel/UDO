@@ -1,0 +1,175 @@
+!subnode	0.41 vom 24.01.1996
+!html_name	r4_v041
+
+!begin_description
+
+###########################################################
+
+!item	[Allgemein] ~
+
+!begin_itemize
+
+!item Neuer Platzhalter: (!/image [file] [Text])
+
+  Durch diesen Platzhalter können bei HTML und WinHelp Bilder
+  innerhalb des Textes angegeben werden (Patrick Jerchel).
+  Ein Beispiel:
+
+!begin_verbatim
+UDO:   Hier steht (!image [logo] [mein Logo]).
+WIN:   Hier steht \{bmc logo.bmp\}.
+HTML:  Hier steht <img src="logo.gif" alt="mein Logo">.
+Sonst: Hier steht mein Logo.
+!end_verbatim
+
+!item (!B)Änderung:(!b) Die Syntax der speziellen Umgebungen hat sich geändert!
+  Durch diese Änderung wurde einiges an Sourcecode eingespart und,
+  was viel wichtiger ist, die Umgebung wurde flexibler. Am Beispiel
+  einer speziellen ASCII-Umgebung ausführlich die Änderungen:
+
+  Bisher:
+
+!begin_verbatim
+!begin_asc
+Dies steht im ASCII-Text.
+!else_asc
+Dies sieht man sonst.
+!end_asc
+!end_verbatim
+  
+  Jetzt:
+!begin_verbatim
+!ifdest [asc]
+Dies steht im ASCII-Text.
+!else
+Dies sieht man sonst.
+!endif
+!end_verbatim
+      
+  Man kann also beim !/ifdest-Kommando angeben, bei welchen Formaten
+  etwas berücksichtigt werden soll und wo nicht. Durch den Wegfall
+  des ""Parameters"" bei !/else ist die Eingabe jetzt noch einfacher
+  und weniger fehleranfällig. Auch das ist nun möglich:
+
+!begin_verbatim  
+!ifdest [asc,stg]
+ASCII oder ST-Guide
+!else
+weder ASCII noch ST-Guide
+!endif
+  
+!ifdest [tex]
+!rinclude table.tex
+!endif
+  
+!ifdest [html]
+!rinclude table.html
+!endif
+  
+!ifdest [asc,man,pch,rtf,stg,win]
+!include table.ui
+!endif
+  
+!ifdest [stg]
+(!xlink [Dirk Hagedorn] [aip.hyp/Dirk Hagedorn])
+!else
+(!xlink [Dirk Hagedorn] [http://pbhrzx.uni-paderborn:...])
+!endif
+!end_verbatim
+  
+  Nötige Anpassungen der Quelltexte (erst Fehlermeldungen abwarten):
+
+  Ersetze "!/begin_asc" durch "!/ifdest [asc]" etc.	(!nl)
+  Ersetze "!/else_asc"  durch "!/else"         etc.	(!nl)
+  Ersetze "!/end_asc"   durch "!/endif"        etc.
+
+
+!item Neue raw-Umgebung:
+  Text, der innerhalb dieser Umgebung steht, wird ohne Umwandlung
+  ausgegeben. Dadurch ist es möglich, größere spezielle Passagen
+  ohne die Angabe von !/tex, !/html etc. zu Beginn jeder Zeile
+  auszugeben. Es wird nicht auf einen nichtpropotionalen Font
+  umgeschaltet. Beispiele:
+
+!begin_verbatim
+!ifdest [stg]
+!begin_raw
+@{"Atari Infopages" link "aip.hyp"}
+@{"Die Dokumentation zu UDO" link "udo.hyp"}
+!end_raw
+!endif  
+!end_verbatim
+
+  ist identisch mit
+
+!begin_verbatim
+!stg @{"Atari Infopages" link "aip.hyp"}
+!stg @{"Die Dokumentation zu UDO" link "udo.hyp"}
+!end_verbatim
+
+  Die raw-Umgebung ist nicht mit der verbatim-Umgebung schachtelbar!
+
+
+!item Neues Kommando: !/rinclude (""raw include"").
+  Funktionsweise wie bei !/vinclude
+  
+!item (!/link ...) wird nun bei WinHelp, HTML und ST-Guide anders
+  übersetzt. (Jan Starzynski, Patrick Jerchel)
+
+!end_itemize
+
+
+###########################################################
+
+!item	[HTML] ~
+
+!begin_itemize
+
+!item	!/subnode's und !/subsubnodes werden nun auch mit
+		(!V)<h1>...</h1>(!v)
+		  ausgegeben, wenn man die Kapitel nicht zusammenfaßt.
+
+!item (!/link [sichtbar] [Label]) wird nun anders uebersetzt. Es wird
+  auf ""Label"" referenziert, falls dieses gesetzt wurde, sonst
+  erscheint eine Fehlermeldung.
+  Gibt es ein Kapitel oder Label, dass ""sichtbar"" heißt, wird
+  trotzdem auf ""Label"" referenziert. (Patrick Jerchel)
+
+!item Wird !/no_headlines [html] benutzt, werden die GIFs udo_lf.gif,
+  udo_rg.gif und udo_up.gif nicht mehr angelegt.
+
+!end_itemize
+
+###########################################################
+
+!item	[ST-Guide] ~
+
+!begin_itemize
+
+!item	(!/link [sichtbar] [Label]) wird nun in
+		(!V)@{"sichtbar" link "Label"}(!v)
+		umgewandelt. Ob ""Label"" definiert wurde, wird nicht überprüft.
+
+!end_itemize
+
+
+###########################################################
+
+!item	[WinHelp] ~
+
+!begin_itemize
+
+!item Labels werden jetzt nicht mehr zu Beginn eines Kapitels, sondern
+  direkt an der benutzten Stelle ausgegeben. Damit sind Verweise
+  jetzt funktional gleich mit denen in HTML oder dem ST-Guide.
+
+!item (!/link ...) wird nun anders übersetzt. Dabei wird vorgegangen wie
+  bei HTML.
+
+!end_itemize
+
+
+###########################################################
+
+!end_description
+

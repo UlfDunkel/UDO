@@ -1,0 +1,726 @@
+!subsubnode !/if
+
+Allgemeine Abfrage beginnen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/if [<text>](!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando vereint die Abfragekommandos (!I)!/iflang(!i),        
+	(!I)!/ifdest(!i), (!I)!/ifset(!i) und (!I)!/ifos(!i). Das (etwas      
+	unglücklich gewählte) Beispiel zeigt, wie man abfragen kann, ob der   
+	Quelltext nach HTML oder mit deutschsprachigen Ausdrücken übersetzt   
+	wird.                                                                 
+
+!item [Beispiel:] (!T)!/if [german,html](!t)
+
+!item [Siehe auch:] (!I)!/iflang(!i), (!I)!/ifdest(!i), (!I)!/ifset(!i), (!I)!/ifos(!i), Abfragebefehle
+
+!end_xlist
+#------------------------------
+!subsubnode !/ifdest
+
+Abfrage des Ausgabeformates
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/ifdest [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando fragt das aktuelle Ausgabeformat ab. Stimmt           
+	''<kürzel>'' mit dem Kürzel des Ausgabeformates überein, so werden    
+	alle Zeilen umgewandelt, die zwischen (!I)!/ifdest(!i) und            
+	(!I)!/else(!i) bzw. (!I)!/endif(!i) angebenen werden. Stimmt das      
+	Kürzel nicht überein, so werden nur die Zeilen zwischen               
+	(!I)!/else(!i) und (!I)!/endif(!i) ausgewertet, sofern (!I)!/else(!i) 
+	benutzt wird. Das Beispiel zeigt, wie man testen kann, ob die         
+	Quelldatei ins ST-Guide- oder WinHelp-Format umgewandelt wird.        
+
+!item [Beispiel:] (!T)!/ifdest [stg,win](!t)
+
+!item [Siehe auch:] (!I)!/else(!i), (!I)!/endif(!i), (!I)!/ifndest(!i), (!I)!/if(!i), Abfragebefehle
+
+!end_xlist
+#------------------------------
+!subsubnode !/iflang
+
+Abfrage der Ausgabesprache
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/iflang [<sprache>](!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando fragt die aktuelle Ausgabesprache ab. Wird ein        
+	deutscher Text erzeugt und wird als ''<sprache>'' die Zeichenkette    
+	''german'' verwendet, so werden alle Zeilen ausgewertet, die bis      
+	(!I)!/else(!i) bzw. (!I)!/endif(!i) angegeben werden. Andernfalls     
+	werden alle Zeilen ausgerwertet, die zwischen (!I)!/else(!i) und      
+	(!I)!/endif(!i) angeben werden.                                       
+
+!item [Beispiel:] (!T)!/iflang [english](!t)
+
+!item [Siehe auch:] (!I)!/ifnlang(!i), (!I)!/ifdest(!i), (!I)!/language(!i), Abfragebefehle
+
+!end_xlist
+#------------------------------
+!subsubnode !/ifndest
+
+Abfrage des Ausgabeformates
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/ifndest [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando fragt das aktuelle Ausgabeformat ab. Stimmt           
+	''<kürzel>'' (!I)nicht(!i) mit dem Kürzel des Ausgabeformates         
+	überein, so werden alle Zeilen umgewandelt, die zwischen              
+	(!I)!/ifndest(!i) und (!I)!/else(!i) bzw. (!I)!/endif(!i) angebenen   
+	werden. Stimmt das Kürzel überein, so werden nur die Zeilen zwischen  
+	(!I)!/else(!i) und (!I)!/endif(!i) ausgewertet, sofern (!I)!/else(!i) 
+	benutzt wird.                                                         
+
+!item [Beispiel:] (!T)!/ifndest [html](!t)
+
+!item [Siehe auch:] (!I)!/else(!i), (!I)!/endif(!i), (!I)!/ifdest(!i), Abfragebefehle
+
+!end_xlist
+#------------------------------
+!subsubnode !/ifnlang
+
+Abfrage der Ausgabesprache
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/ifnlang [<sprache>](!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando fragt die aktuelle Ausgabesprache ab. Wird ein        
+	deutscher Text erzeugt und wird als ''<sprache>'' (!I)nicht(!i) die   
+	Zeichenkette ''german'' verwendet, so werden alle Zeilen ausgewertet, 
+	die bis (!I)!/else(!i) bzw. (!I)!/endif(!i) angegeben werden.         
+	Andernfalls werden alle Zeilen ausgerwertet, die zwischen             
+	(!I)!/else(!i) und (!I)!/endif(!i) angeben werden.                    
+
+!item [Beispiel:] (!T)!/ifnlang [english](!t)
+
+!item [Siehe auch:] (!I)!/iflang(!i), (!I)!/ifdest(!i), (!I)!/language(!i), Abfragebefehle
+
+!end_xlist
+#------------------------------
+!subsubnode !/ifnos
+
+Betriebssystem abfragen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/ifnos [<systeme>](!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando testet das aktuelle Betriebssystem, auf dem UDO       
+	läuft. Enthält ""<systeme>"" (!I)keines(!i) der Kürzel der            
+	Betriebssysteme, so wandelt UDO alle Zeilen ab dem folgenden          
+	(!I)!/else(!i) um, falls (!I)!/else(!i) benutzt wird. Das Beispiel    
+	zeigt, wie man abfragen kann, ob UDO (!I)!/nicht(!i) auf einem Apple  
+	Macintosh läuft.                                                      
+
+!item [Beispiel:] (!T)!/ifnos [macos](!t)
+
+!item [Siehe auch:] (!I)!/ifos(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/ifnset
+
+Symbol abfragen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/ifnset [<text>](!t)
+
+!item [Beschreibung:] 
+	Mit diesem Abfragebefehl können Sie testen, ob ein Symbol für die     
+	Umwandlung (!I)weder(!i) in der Kommandozeile mit der Option          
+	(!T)-D(!t) noch mit (!I)!/set(!i) gesetzt wurde. Wurde (!T)<text>(!t) 
+	nicht gesetzt, so werden alle folgenden Zeilen umgewandelt, bis       
+	(!I)!/else(!i) oder (!I)!/endif(!i) auftaucht. Andernfalls werden nur 
+	die Zeilen umgewandelt, die (!I)!/else(!i) folgen, sofern die Abfrage 
+	einen Sonst-Zweig besitzt. Das Beispiel zeigt, wie man abfragt, ob    
+	das Symbol ""deutsch"" nicht gesetzt wurde.                           
+
+!item [Beispiel:] (!T)!/ifnset [deutsch](!t)
+
+!item [Siehe auch:] (!I)!/ifset(!i), Abfragebefehle
+
+!end_xlist
+#------------------------------
+!subsubnode !/ifos
+
+Betriebssystem abfragen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/ifos [<text>](!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando testet das aktuelle Betriebssystem, auf dem UDO       
+	läuft. Enthält ""<systeme>"" eines der Kürzel der Betriebssysteme, so 
+	wandelt UDO alle Zeilen zwischen (!I)!/ifos(!i) und (!I)!/endif(!i)   
+	bzw. (!I)!/else(!i) um. Das Beispiel zeigt, wie man testen kann, ob   
+	UDO unter Linux läuft.                                                
+
+!item [Beispiel:] (!T)!/ifos [linux](!t)
+
+!item [Siehe auch:] (!I)!/ifnos(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/ifset
+
+Symbol abfragen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/ifset [<text>](!t)
+
+!item [Beschreibung:] 
+	Mit diesem Abfragebefehl können Sie testen, ob ein Symbol für die     
+	Umwandlung in der Kommandozeile mit der Option (!T)-D(!t) gesetzt     
+	wurde. Wurde (!T)<text>(!t) gesetzt, so werden alle folgenden Zeilen  
+	umgewandelt, bis (!I)!/else(!i) oder (!I)!/endif(!i) auftaucht.       
+	Andernfalls werden nur die Zeilen umgewandelt, die (!I)!/else(!i)     
+	folgen, sofern die Abfrage einen Sonst-Zweig besitzt. Das Beispiel    
+	zeigt, wie man abfragt, ob in der Kommandozeile (!T)-D deutsch(!t)    
+	benutzt wurde.                                                        
+
+!item [Beispiel:] (!T)!/ifset [deutsch](!t)
+
+!item [Siehe auch:] (!I)!/ifnset(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/ignore_bottomline
+
+Ausgabe einer Fußzeile unterdrücken.
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/ignore_bottomline(!t)
+
+!item [Beschreibung:] 
+	Wird dieser Schalter in einem Kapitel angegeben, so wird bei diesem   
+	Kapitel keine Fußzeile erzeugt. Im Gegensatz zu                       
+	(!I)!/no_bottomlines(!i) wird lediglich bei dem Kapitel, bei dem      
+	(!I)!/ignore_bottomline(!i) benutzt wird, auf die Ausgabe einer       
+	Kopfzeile verzichtet.                                                 
+
+
+!item [Siehe auch:] (!I)!/no_bottomlines(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/ignore_headline
+
+Ausgabe einer Kopfzeile unterdrücken.
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/ignore_headline(!t)
+
+!item [Beschreibung:] 
+	Wird dieser Schalter in einem Kapitel angegeben, so wird bei diesem   
+	Kapitel keine Kopfzeile erzeugt. Im Gegensatz zu                      
+	(!I)!/no_headlines(!i) wird lediglich bei dem Kapitel, bei dem        
+	(!I)!/ignore_headline(!i) benutzt wird, auf die Ausgabe einer         
+	Kopfzeile verzichtet.                                                 
+
+
+!item [Siehe auch:] (!I)!/no_headlines(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/ignore_index
+
+Ein Kapitel nicht in den Index übernehmen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/ignore_index(!t)
+
+!item [Beschreibung:] 
+	Wird dieser Schalter in einem Kapitel angegeben, so wird das Kapitel  
+	nicht im Index angezeigt. Auch dann nicht, wenn man den Schalter      
+	(!I)!/use_nodes_inside_index(!i) im Vorspann gesetzt hat.             
+
+
+!item [Siehe auch:] (!I)!/use_nodes_inside_index(!i), (!I)!/no_index(!i), Indizes
+
+!end_xlist
+#------------------------------
+!subsubnode !/ignore_links
+
+Ein Kapitel nicht referenzieren
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/ignore_links(!t)
+
+!item [Beschreibung:] 
+	Wird dieser Schalter in einem Kapitel angegeben, so werden keine      
+	automatischen Querverweise auf dieses Kapitel angelegt. Manuelle      
+	Links sind jedoch weiterhin möglich.                                  
+
+
+!item [Siehe auch:] Querverweise, (!I)(!/link~!..)(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/ignore_subsubsubtoc
+
+In dem zugehörigen Subsubnode kein ""subsubsubtoc"" ausgeben.
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/ignore_subsubsubtoc(!t)
+
+!item [Beschreibung:] 
+	Wenn innerhalb eines Subsubnodes dieser Schalter gesetzt wird, so     
+	wird kein (automatisches) Inhaltsverzeichnis ausgegeben, in welchem   
+	die Paragraphen des Subsubnodes aufgelistet werden.                   
+
+
+!item [Siehe auch:] (!I)!/use_auto_subsubsubtocs(!i), (!I)!/subsubsubtoc(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/ignore_subsubtoc
+
+In dem zugehörigen Subnode kein ""subsubtoc"" ausgeben.
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/ignore_subsubtoc(!t)
+
+!item [Beschreibung:] 
+	Wenn innerhalb eines Subnodes dieser Schalter gesetzt wird, so wird   
+	kein (automatisches) Unterinhaltsverzeichnis ausgegeben.              
+
+
+!item [Siehe auch:] (!I)!/use_auto_subsubtocs(!i), (!I)!/subsubtoc(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/ignore_subtoc
+
+In dem zugehörigen Node kein ""subtoc"" ausgeben.
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/ignore_subtoc(!t)
+
+!item [Beschreibung:] 
+	Wenn innerhalb eines Nodes dieser Schalter gesetzt wird, so wird kein 
+	(automatisches) Unterinhaltsverzeichnis ausgegeben.                   
+
+
+!item [Siehe auch:] (!I)!/use_auto_subtocs(!i), (!I)!/subtoc(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/image
+
+Grafik ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/image <datei> <titel>(!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando erzeugt in der Ausgabedatei Befehle zur Einbindung    
+	des Bildes. Die Endung der Datei sollte nicht übergeben werden, da    
+	UDO dies selbst erledigt. UDO benutzt ''(!V).img(!v)'' beim ST-Guide, 
+	CS(!TeX) und Lindner-(!TeX), ''(!V).gif(!v)'' für HTML,               
+	''(!V).msp(!v)'' oder ''(!V).pcx(!v)'' für em(!TeX) und               
+	''(!V).bmp(!v)'' für WinHelp.                                         
+	Wird ''<titel>'' angeben, so wird der Text als Bildunterschrift       
+	angegeben. Die Ausrichtung des Bildes richtet sich nach der eventuell 
+	vorhandenen äußeren Umgebung. Zentrierte Bilder erhält man demnach,   
+	wenn man das (!I)!/image(!i)-Kommando in einer center-Umgebung        
+	verwendet.                                                            
+
+!item [Beispiel:] (!T)!/image tiger(!t)
+
+!item [Siehe auch:] (!I)!/no_images(!i), (!I)(!/img~!..)(!i), Bilder, (!I)!/html_img_suffix(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/image*
+
+Grafik ohne Nummer ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/image* <datei> <titel>(!t)
+
+!item [Beschreibung:] 
+	Der einzige Unterschied zum (!I)!/image(!i)-Kommando ist der, daß in  
+	der Bildunterschrift keine Tabellennummer ausgegeben wird.            
+
+!item [Beispiel:] (!T)!/image* tiger Dies ist ein Tiger(!t)
+
+!item [Siehe auch:] (!I)!/image(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/image_counter
+
+Abbildungszähler setzen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Vorspann
+
+!item [Syntax:] 
+	(!T)!/image_counter [<wert>](!t)
+
+!item [Beschreibung:] 
+	Mit diesem Schalter können Sie die Nummer festlegen, die bei der      
+	ersten Abbildung ausgegeben werden soll. Würde das Beispiel           
+	verwendet, so stünde unterhalb der ersten Abbildung folgendes:        
+	""Abbildung 5: !.."".                                                 
+
+!item [Beispiel:] (!T)!/image_counter 5(!t)
+
+!item [Siehe auch:] Bilder, (!I)!/image(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/include
+
+Datei einbinden
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/include <datei>(!t)
+
+!item [Beschreibung:] 
+	Öffnet die Datei ""<datei>"" und gibt deren umgewandelten Inhalt an   
+	der Stelle aus, an der dieses Kommando benutzt wurde.                 
+
+!item [Beispiel:] (!T)!/include macros.ui(!t)
+
+!item [Siehe auch:] (!I)!/vinclude(!i), (!I)!/rinclude(!i), Verteilte Dokumente
+
+!end_xlist
+#------------------------------
+!subsubnode !/index
+
+Indexeintrag bzw. Schlüsselwort setzen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/index <text>(!t)
+
+!item [Beschreibung:] 
+	(!T)<text>(!t) wird für (!LaTeX) als ''(!T)\index~{!..}(!t)'', für    
+	WinHelp als ''(!T)K{\footnote K !..}(!t)'', für RTF als ''(!T){\xe\v  
+	!..}(!t)'' und für den ST-Guide als ''(!T)@index !..(!t)''            
+	ausgegeben. (!T)<text>(!t) kommt damit bei (!LaTeX) und dem ST-Guide  
+	in den Index, bei WinHelp kann man im Suchen-Dialog nach diesem       
+	Schlüsselwort suchen und bekommt die Namen der Kapitel aufgelistet,   
+	in denen (!I)!/index(!i) benutzt wurde. (!T)<text>(!t) kann beliebig  
+	oft benutzt werden, auch in mehreren Kapiteln.                        
+
+!item [Beispiel:] (!T)!/index Eintrag !! Index(!t)
+
+!item [Siehe auch:] Indizes, (!I)!/no_index(!i), (!I)(!/idx~[~])(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/item
+
+Aufzählungspunkt einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/item <text>(!t)
+
+!item [Beschreibung:] 
+	Leitet einen neuen Aufzählungspunkt einer itemize-Umgebung oder       
+	enumerate-Umgebung ein. Dieser wird mit einer Marke bzw. mit einem    
+	alphanumerischen Wert gekennzeichnet.                                 
+
+!item [Beispiel:] (!T)!/item Dies ist der nächste Aufzählungspunkt(!t)
+
+!item [Siehe auch:] (!I)!/item~[~](!i), Einfache Aufzählungen, Numerierte Aufzählungen
+
+!end_xlist
+#------------------------------
+!subsubnode !/item~[~]
+
+Aufzählungspunkt einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/item [<text>] <text>(!t)
+
+!item [Beschreibung:] 
+	Leitet einen neuen Aufzählungspunkt einer description-Umgebung oder   
+	einer xlist-Umgebung ein. Der Text, der in eckige Klammern eingefaßt  
+	wird, wird bei der description-Umgebung in der Ausgabedatei fett      
+	dargestellt.                                                          
+
+!item [Beispiel:] (!T)!/item [Titel:] Beschreibung(!t)
+
+!item [Siehe auch:] (!I)!/item(!i), Beschreibende Aufzählungen, Listen
+
+!end_xlist
+#------------------------------
+!subsubnode (!/I)...(!/i)
+
+Kursiver Text
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Platzhalter, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)(!/I)<text>(!/i)(!t)
+
+!item [Beschreibung:] 
+	(!V)<text>(!v) wird kursiv dargestellt, falls möglich.                
+
+!item [Beispiel:] (!T)(!/I)kursiv(!/i)(!t)
+
+!item [Siehe auch:] Texthervorhebungen
+
+!end_xlist
+#------------------------------
+!subsubnode (!/idx~!..)
+
+Indexeinträge im Text angeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Platzhalter, Hauptteil
+
+!item [Syntax:] 
+	(!T)(!/idx [<text>] {[<index1>]} {[<index2>]} {[<index3>]} )(!t)
+
+!item [Beschreibung:] 
+	Dient zum Erzeugen von Indizes direkt im Quelltext.                   
+
+!item [Beispiel:] (!T)(!/idx [Wort] [Indexeintrag])(!t)
+
+!item [Siehe auch:] Indizes, (!I)!/no_index(!i), (!I)!/index(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode (!/ilink~!..)
+
+Querverweis mit Grafik, nur WinHelp und HTML
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Platzhalter, Hauptteil
+
+!item [Syntax:] 
+	(!T)(!/ilink [<datei>] [<text>] [<link>])(!t)
+
+!item [Beschreibung:] 
+	Dieser Platzhalter ist eine Kombination der Platzhalter               
+	(!I)(!/image~!..)(!i) und (!I)(!/link~!..)(!i) und dient dazu, einen  
+	Querverweis durch eine Grafik zu ermöglichen. Dies ist momentan nur   
+	beim WinHelp- und HTML-Format möglich. Im Beispiel wird das Bild      
+	(!V)disk.bmp(!v) bzw. (!V)disk.gif(!v) zur Darstellung des Links      
+	benutzt, das Sprungziel lautet ""Download"". Bei HTML wird als        
+	Alternativtext ""UDO downloaden"" ausgegeben. Bei allen anderen       
+	Formaten wird lediglich ""UDO downloaden"" ausgegeben.                
+
+!item [Beispiel:] (!T)(!/ilink [disk] [UDO downloaden] [Download](!t)
+
+!item [Siehe auch:] (!I)(!/img~!..)(!i), (!I)(!/link~!..)(!i), Querverweise, Bilder
+
+!end_xlist
+#------------------------------
+!subsubnode (!/img~!..)
+
+Grafik ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Platzhalter, Hauptteil
+
+!item [Syntax:] 
+	(!T)(!/img [<file>] [<text>])(!t)
+
+!item [Beschreibung:] 
+	Benutzen Sie dieses Kommando, um ein Bild direkt im Text bei der      
+	Umwandlung nach HTML oder WinHelp auszugeben. Bei der Umwandlung nach 
+	HTML wird (!V)file.gif(!v), bei WinHelp (!V)file.bmp(!v) benutzt,     
+	wobei UDO nicht überprüft, ob die jeweiligen Bilder existieren.       
+	Bei HTML wird (!V)<text>(!v) als Alternativtext bentutzt. Bei den     
+	anderen Formaten wird nur (!V)<text>(!v) ausgegeben.                  
+
+!item [Beispiel:] (!T)(!/img [dh] [mein Logo])(!t)
+
+!item [Siehe auch:] Bilder, (!I)!/image(!i)
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+!index Operating system
+
+!begin_xlist [nextstep:] !short
+!item	[beos:]		BeOS
+!item	[dos:]		DOS
+!item	[hpux:]		HP-UX
+!item	[linux:]	Linux
+!item	[macos:]	MacOS
+!item	[nextstep:]	NeXTStep
+!item	[sinix:]	SINIX
+!item	[sunos:]	SunOS
+!item	[tos:]		TOS
+!end_xlist
+

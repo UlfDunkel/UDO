@@ -1,0 +1,20 @@
+!iflang [german]
+!node	Änderungen seit Release 4
+!else
+!node Changes since Release 4
+!endif
+!html_name	news4-5
+
+!include	inc4-5/048.ui
+!include	inc4-5/047.ui
+!include	inc4-5/046.ui
+!include	inc4-5/045.ui
+!include	inc4-5/044.ui
+!include	inc4-5/043.ui
+!include	inc4-5/042.ui
+!include	inc4-5/041.ui
+!include	inc4-5/040.ui
+!include	inc4-5/039.ui
+!include	inc4-5/038.ui
+!include	inc4-5/037.ui
+

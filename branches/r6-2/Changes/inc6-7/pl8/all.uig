@@ -1,0 +1,69 @@
+!begin_itemize
+
+!index Abkürzungen
+!index Befehlsabkürzungen
+!item Neu: Befehlsabkürzungen sind nun vewendbar (Stefan Braunstein):
+
+!begin_table [l|l]
+Kommando !! Abkürzung
+!hline
+!/node				!!	!/n	
+!/subnode			!!	!/sn		
+!/subsubnode		!!	!/ssn		
+!/subsubsubnode		!!	!/sssn
+!/node*				!!	!/n*	
+!/subnode*			!!	!/sn*	
+!/subsubnode*		!!	!/ssn*	
+!/subsubsubnode*	!!	!/sssn*	
+!/pnode				!!	!/p	
+!/psubnode			!!	!/ps	
+!/psubsubnode		!!	!/pss		
+!/psubsubsubnode	!!	!/psss	
+!/pnode*			!!	!/p*		
+!/psubnode*			!!	!/ps*	
+!/psubsubnode*		!!	!/pss*
+!/psubsubsubnode*	!!	!/psss*	
+!/begin_node		!!	!/bn		
+!/begin_node*		!!	!/bn*		
+!/begin_pnode		!!	!/bp		
+!/begin_pnode*		!!	!/bp*	
+!/end_node			!!	!/en	
+!/item				!!	!/i	
+!/begin_itemize		!!	!/bi	
+!/end_itemize		!!	!/ei		
+!/begin_enumerate	!!	!/be		
+!/end_enumerate		!!	!/ee	
+!/begin_description	!!	!/bd	
+!/end_description	!!	!/ed		
+!/begin_xlist		!!	!/bxl		
+!/end_xlist			!!	!/exl	
+!/begin_blist		!!	!/bbl		
+!/end_blist			!!	!/ebl	
+!/begin_ilist		!!	!/bil		
+!/end_ilist			!!	!/eil	
+!/begin_tlist		!!	!/btl		
+!/end_tlist			!!	!/etl	
+!/begin_quote		!!	!/bq		
+!/end_quote			!!	!/eq	
+!/begin_center		!!	!/bc	
+!/end_center		!!	!/ec		
+!/begin_flushright	!!	!/bfr	
+!/end_flushright	!!	!/efr		
+!/begin_flushleft	!!	!/bfl		
+!/end_flushleft		!!	!/efl	
+!/label				!!	!/l	
+!/alias				!!	!/a	
+!/index				!!	!/x	
+!/heading			!!	!/h		
+!/subheading		!!	!/sh		
+!/subsubheading		!!	!/ssh	
+!/subsubsubheading	!!	!/sssh
+!end_table
+
+!index !/mapping
+!item Neu: Befehl (!I)!/mapping <nummer>(!i) (Josef Becker).
+	Spielt nur für WinHelp und IPF eine Rolle (siehe unten).
+
+!end_itemize
+
+
