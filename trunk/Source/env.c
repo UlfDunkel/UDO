@@ -3633,14 +3633,11 @@ GLOBAL void init_env_itemchar ( void )
 			break;
 
 		case TOKPS:
-			strcpy(itemchar[1], ")\n/bullet off1 writeBulletLeft\n(");
-			/* Changed in r6pl15 [NHz] */
-/*			strcpy(itemchar[2], ")\n/dagger off2 writeBulletLeft\n(");*/
-			strcpy(itemchar[2], ")\n/endash off2 writeBulletLeft\n(");
-/*			strcpy(itemchar[3], ")\n/bullet off3 writeBulletLeft\n(");*/
-			strcpy(itemchar[3], ")\n/asterix off3 writeBulletLeft\n(");
-/*			strcpy(itemchar[4], ")\n/bullet off4 writeBulletLeft\n(");*/
-			strcpy(itemchar[4], ")\n/periodcentered off4 writeBulletLeft\n(");
+			/* Changed in V6.5.6 [NHz] */
+			sprintf(itemchar[1], "%s\n/bullet off1 writeBulletLeft\n%s", KPSPC_S, KPSPO_S);
+			sprintf(itemchar[2], "%s\n/endash off1 writeBulletLeft\n%s", KPSPC_S, KPSPO_S);
+			sprintf(itemchar[3], "%s\n/asterix off1 writeBulletLeft\n%s", KPSPC_S, KPSPO_S);
+			sprintf(itemchar[4], "%s\n/periodcentered off1 writeBulletLeft\n%s", KPSPC_S, KPSPO_S);
 			strcpy(itemchar[5], itemchar[1]);
 			strcpy(itemchar[6], itemchar[2]);
 			break;

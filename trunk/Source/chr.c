@@ -20,7 +20,7 @@
 	############################################################	*/
 #ifndef ID_CHARS_C
 #define	ID_CHARS_C
-const char *id_chr_c= "@(#) chr.c       05.02.2004";
+const char *id_chr_c= "@(#) chr.c       08.02.2004";
 #endif
 
 #include "import.h"
@@ -1810,8 +1810,8 @@ LOCAL void specials2ps ( char *s )
 	qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "---", 3);
 	qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "--", 2);
 
-	/* Changed in V6.5.5 [NHz] */
-	qreplace_all(s, "!..", 3, "\033\007\004\033 udoshow /ellipsis glyphshow \033\007\003\033 ", 38);
+	/* Changed in V6.5.6 [NHz] */
+	qreplace_all(s, "!..", 3, "\\214", 4);	/* according to table in ud2ps.h */
 	qreplace_all(s, COPY_S, COPY_S_LEN, "\\251", 4);
 }
 
@@ -2073,32 +2073,21 @@ GLOBAL void c_vars ( char *s )
 			qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "&quot;&quot;", 12);
 			qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
 			break;
-		/* Changed in V6.5.5 [NHz] */
+		/* Changed in V6.5.6 [NHz] */
 		case TOKPS:
-			{	char aon[512], aoff[512], qon[512], qoff[512];
+			{	
 				switch (destlang)
-				{	case TOGER:	sprintf(aon,  "%s udoshow /quotesinglbase glyphshow %s", KPSPC_S, KPSPO_S);
-											sprintf(aoff, "%s udoshow /quoteleft glyphshow %s ", KPSPC_S, KPSPO_S);
-											sprintf(qon,  "%s udoshow /quotedblbase glyphshow %s", KPSPC_S, KPSPO_S);
-											sprintf(qoff, "%s udoshow /quotedblleft glyphshow %s ", KPSPC_S, KPSPO_S);
+				{	case TOGER:	/* according to table in ud2ps.h */
+											c_quotes_apostrophes(s, "\\220", "\\221", "\\226", "\\225");
 											break;
-					case TOFRA:	sprintf(aon,  "%s udoshow /guilsinglleft glyphshow %s", KPSPC_S, KPSPO_S);
-											sprintf(aoff, "%s udoshow /guilsinglright glyphshow %s ", KPSPC_S, KPSPO_S);
-											sprintf(qon,  "\\253");
-											sprintf(qoff, "\\273");
+					case TOFRA:	/* according to table in ud2ps.h */
+											c_quotes_apostrophes(s, "\\222", "\\223", "\\253", "\\273");
 											break;
-					case TONOR:	sprintf(aon,  "\\<");
-											sprintf(aoff, "\\>");
-											sprintf(qon,  "\\\\\\(");
-											sprintf(qoff, "\\\\\\)");
+					case TONOR:	c_quotes_apostrophes(s, "\\<", "\\>", "\\\\\\(", "\\\\\\)");
 											break;
-					default:		sprintf(aon,  "%s udoshow /quotesingle glyphshow %s", KPSPC_S, KPSPO_S);
-											sprintf(aoff, "%s udoshow /quotesingle glyphshow %s ", KPSPC_S, KPSPO_S);
-											sprintf(qon,  "\\042");
-											sprintf(qoff, "\\042");
+					default:		c_quotes_apostrophes(s, "'", "'", "\"", "\"");
 											break;
 				}
-				c_quotes_apostrophes(s, aon, aoff, qon, qoff);
 			}
 			qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "\"\"", 2);
 			qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
