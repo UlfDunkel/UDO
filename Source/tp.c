@@ -85,6 +85,11 @@ GLOBAL BOOLEAN set_mainlayout ( void )
 	init_docinfo_data("1", &(laydat.openpage), FALSE);
 	init_docinfo_data("false", &(laydat.hidetoolbar), FALSE);
 	init_docinfo_data("false", &(laydat.hidemenubar), FALSE);
+	/* New in r6pl16 [NHz] */
+	laydat.node1size = 0;
+	laydat.node2size = 0;
+	laydat.node3size = 0;
+	laydat.node4size = 0;
 
 	return TRUE;
 }
@@ -140,7 +145,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
 	
 	if (strcmp(content, "propfontname")==0)
 	{	if ( str_for_desttype(format) )
-		{	/* Proportionalfont festlegen */
+		{	/* Set proportional font */
 			init_docinfo_data(data, &(laydat.propfontname), FALSE);
 		}
 		return TRUE;
@@ -148,7 +153,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
 	
 	if (strcmp(content, "propfontsize")==0)
 	{	if ( str_for_desttype(format) )
-		{	/* Größe des Proportionalfonts festlegen */
+		{	/* Set size of proportional font */
 			laydat.propfontsize = atoi(data);
 		}
 		return TRUE;
@@ -156,7 +161,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
 
 	if (strcmp(content, "monofontname")==0)
 	{	if ( str_for_desttype(format) )
-		{	/* äquidistanten Font festlegen */
+		{	/* Set aquidistant font */
 			init_docinfo_data(data, &(laydat.monofontname), FALSE);
 		}
 		return TRUE;
@@ -164,12 +169,45 @@ GLOBAL BOOLEAN set_doclayout ( void )
 	
 	if (strcmp(content, "monofontsize")==0)
 	{	if ( str_for_desttype(format) )
-		{	/* Größe des äquidistanten Fonts festlegen */
+		{	/* Set size of the aquidistant font */
 			laydat.monofontsize = atoi(data);
 		}
 		return TRUE;
 	}
 	
+	/* New in r6pl16 [NHz] */
+	if (strcmp(content, "node1size")==0)
+	{	if ( str_for_desttype(format) )
+		{	/* Set size of node */
+			laydat.node1size = atoi(data);
+		}
+		return TRUE;
+	}
+	
+	if (strcmp(content, "node2size")==0)
+	{	if ( str_for_desttype(format) )
+		{	/* Set size of subnode */
+			laydat.node2size	= atoi(data);
+		}
+		return TRUE;
+	}
+	
+	if (strcmp(content, "node3size")==0)
+	{	if ( str_for_desttype(format) )
+		{	/* Set size of subsubnode */
+			laydat.node3size	= atoi(data);
+		}
+		return TRUE;
+	}
+	
+	if (strcmp(content, "node4size")==0)
+	{	if ( str_for_desttype(format) )
+		{	/* Set size of subsubsubnode */
+			laydat.node4size	= atoi(data);
+		}
+		return TRUE;
+	}
+
 	/* Specialities for Postscript */
 	if (strcmp(content, "openMode")==0)
 	{	if (strstr(data, "Outlines"))
