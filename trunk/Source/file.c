@@ -167,20 +167,35 @@ GLOBAL char *myTextGetline ( char *string, int n, MYTEXTFILE *tf )
 	}
 #else
 	size_t sl;
+	BOOLEAN cont;
 
-	/* Auf normale Routine zurueckgreifen und Endekennung entfernen */
-	if (fgets(string, n, tf->file) == NULL)
-	{
-		return NULL;
+	do {
+		cont=FALSE;
+		/* Auf normale Routine zurueckgreifen und Endekennung entfernen */
+		if (fgets(string, n, tf->file) == NULL)
+		{
+			return NULL;
+		}
+
+		sl= strlen(string);
+		while (sl>0 && (string[sl-1]=='\n' || string[sl-1]=='\r'))
+		{
+			string[sl-1]= '\0';
+			sl--;
+		}
+		/*	v6.5.4 [vj] This is a new check for a continued line. This is handled low level,
+			so UDO doesn't need to care about later, except that some buffers could use more space! */
+		if ((string[sl-2]=='!')&&(string[sl-1]=='\\')) /* Is there a continue line mark before linebreak? */
+		{
+			sl=sl-2; /* String got shorter */
+			string[sl]='\0'; /* Cut continue line! */
+			/* Above n is used to indicate how much space is left and string is the buffer start */
+			n=n-sl; /* The new buffer is n minus the string we currently have */
+			string=string+sl; /* So this is the new buffer start */
+			cont=TRUE;
+		}
 	}
-
-	sl= strlen(string);
-	while (sl>0 && (string[sl-1]=='\n' || string[sl-1]=='\r'))
-	{
-		string[sl-1]= '\0';
-		sl--;
-	}
-
+	while (cont==TRUE);
 #endif
 
 	return string;
