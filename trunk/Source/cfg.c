@@ -1,5 +1,5 @@
 /*	############################################################
-	# @(#) abo.c
+	# @(#) cfg.c
 	# @(#)
 	# @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
 	# @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)

@@ -1,5 +1,5 @@
 /*	############################################################
-	# @(#) 437iso.h
+	# @(#) 850iso.h
 	# @(#)
 	# @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
 	# @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)

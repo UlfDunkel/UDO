@@ -1,5 +1,5 @@
 /*	######################################################################
-	# @(#) udo_local.h
+	# @(#) udolocal.h
 	# @(#)
 	# @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
 	# @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)
