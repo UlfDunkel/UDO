@@ -1,0 +1,25 @@
+!ifndest [asc]
+!break
+!endif
+
+!no_numbers [asc]
+
+!begin_document
+
+!ifos [dos]
+!include install/dos.ui
+!endif
+
+!ifos [tos]
+!include install/tos.ui
+!endif
+
+!ifos [mac]
+!include install/mac.ui
+!endif
+
+!ifnos [dos,tos,mac]
+!include install/unix.ui
+!endif
+
+!end_document

@@ -1,0 +1,93 @@
+!subsubnode Descriptions
+!alias description environment
+
+Use the description environment for describing some words. Start the
+environment with (!I)!/begin_description(!i) and finish it using
+(!I)!/end_description(!i).
+
+A word that has to be described is used with the (!I)!/item~[~](!i)
+command inside brackets and will be displayed with bold text.
+
+The description environment can be used inside other (description)
+environments. This example!..
+
+!autoref [off]
+
+!begin_quote
+!begin_verbatim
+UDO offers you the following environments:
+!begin_description
+!item [the itemize environment]
+      for itemized lists,
+!item [the enumerate environment]
+      for enumerated lists,
+!item [the description environment]
+      for descriptions and
+!item [the xlist environment]
+      for lists
+!end_description
+!end_verbatim
+!end_quote
+
+!.. will be display this way:
+
+UDO offers you the following environments:
+!begin_description
+!item [the itemize environment]
+      for simple lists,
+!item [the enumerate environment]
+      for enumerated lists,
+!item [the description environment]
+      for descriptions and
+!item [the xlist environment]
+      for lists
+!end_description
+
+
+In this example the description environment is used inside another one and
+the (!I)!/short(!i) is used, too:
+
+!begin_quote
+!begin_verbatim
+!begin_description !short
+!item [Item 1] of the outer description environment
+!item [Item 2] of the outer description environment
+      !begin_description
+      !item [Item 1] of the inner environment.
+      !item [Item 2] of the inner environment.
+      !end_description
+!item [Item 3] of the outer description environment
+!end_description
+!end_verbatim
+!end_quote
+
+!.. becomes to:
+
+!begin_description !short
+!item [Item 1] of the outer description environment
+!item [Item 2] of the outer description environment
+      !begin_description
+      !item [Item 1] of the inner environment.
+      !item [Item 2] of the inner environment.
+      !end_description
+!item [Item 3] of the outer description environment
+!end_description
+
+!autoref [on]
+
+(!HINTS)
+
+!begin_enumerate
+
+!item	If the word that shall be displayed in bold text contains a ""]""
+you have to quote it with an exclamation mark to tell UDO that it has to
+be printed in bold text, too.
+
+!item	The HTML version of your source file will print the descriptions in
+bold text, too, even if this not typical for HTML. The next versions of UDO
+will offer a command to disable the bold text inside descriptions for HTML.
+
+!item	A description of the (!I)!/short(!i) command is part of the chapter
+""Itemizations"".
+
+!end_enumerate

@@ -1,0 +1,33 @@
+!subnode Questions concerning Texinfo
+!ignore_links
+
+GNU Texinfo is used on many Unix systems to offer the user an online
+hypertext manual and a printed documentation that can be made with
+''Makeinfo'' or plain (!TeX). Online manuals can be displayed with ''Info''.
+
+On systems with 8+3-filenames UDO saves files with the suffix (!V).tex(!v).
+If the operating systems supports long filenames UDO uses the suffix
+(!V).texi(!v) instead.
+
+!begin_description
+
+##################################################
+!item [Why does UDO change the chapter names?] ~
+
+Makeinfo and/or Info get problems if a chapter names contains brackets,
+commas or colons. UDO is forced to delete these characters so that you will
+be able to convert the output with Makeinfo without any problems. If a
+chapter name contains only forbidden characters UDO encodes them.
+
+You will only see the changed chapter names inside the Info headlines and
+Info menus. If you convert the Texinfo file with (!TeX) you will get your
+original chapter names.
+
+##################################################
+!item [Why doesn't Texinfo display the environments in ""compressed"" form?] ~
+
+Using Texinfo it's impossible to smaller the paragraph separation. Thus the
+parameter (!I)!/short(!i) is useless when converting to Texinfo.
+
+##################################################
+!end_description

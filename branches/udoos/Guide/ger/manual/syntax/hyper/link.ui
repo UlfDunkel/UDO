@@ -1,0 +1,294 @@
+############################################################
+# @(#) Querverweise, Dirk Hagedorn, 26.10.1995
+# 23.01.1995: (!link ...) geändert
+# 08.03.1996: WinHelp bei (!xlink ...)
+############################################################
+
+!subsubnode Querverweise
+!alias Links
+
+UDO legt bei den Hypertextformaten wie WinHelp, HTML oder ST-Guide
+automatisch Verweise zu anderen Stellen des Textes an.
+
+Sie haben darüber hinaus die Möglichkeit, auch zusätzliche Verweise
+auf Kapitel oder Sprungmarken des Textes anzulegen oder auf externe
+Dateien zu verweisen.
+
+(!HINT) Falls innerhalb eines der Link-Befehle eine ""("" oder ""]"" benutzt
+werden, so muß man diese quoten, damit UDO den Befehl korrekt umsetzen kann. 
+Beispiel:
+
+!begin_quote
+!begin_verbatim
+Falsch:  (!link [Klammern])] [Verweis])
+Richtig: (!link [Klammern!]!)] [Verweis])
+                         ----
+!end_verbatim
+!end_quote
+
+
+#------------------------------------------------
+!subsubsubnode Interne Querverweise
+
+Manchmal möchte man auf andere Stellen der Dokumentation oder auf andere
+Hypertexte oder Homepages verweisen. Um dies zu ermöglichen, bietet UDO
+einen Satz von Befehlen für Querverweise.
+
+!index (!/link!..)
+Mit dem (!I)(!/link!..)(!i)-Befehl können Sie Bezug auf andere Stellen im
+aktuellen Dokument nehmen:
+
+!begin_quote
+!begin_verbatim
+UDO:      (!link [ein Wort] [der Verweis])
+HTML:     <a href="file.htm#der Verweis">ein Wort</a>
+LaTeX:    ein Wort (siehe \ref{der Verweis})
+ST-Guide: @{"ein Wort" link "der Verweis"}
+WinHelp:  {\uldb ein Wort}{\v der_Verweis}
+Turbo:    {ein Wort:der_Verweis}
+sonst:    ein Wort (siehe "der Verweis")
+!end_verbatim
+!end_quote
+
+Hier nun ein Beispiel, bei dem auf meine Anschrift verwiesen wird.
+Aus!..
+
+!begin_quote
+!begin_verbatim
+Wenn Sie sich registrieren lassen möchten, so
+senden Sie (!link [mir] [Anschrift]) eine
+kurze Nachricht.
+!end_verbatim
+!end_quote
+
+wird!..
+
+!begin_quote
+Wenn Sie sich registrieren lassen möchten, so
+senden Sie (!link [mir] [Anschrift]) eine
+kurze Nachricht.
+!end_quote
+
+
+(!HINTS)
+
+!begin_enumerate
+
+!item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
+diese Zahl überschritten, so gibt UDO eine Fehlermeldung aus, daß der Link
+nicht ersetzt werden konnte. Zur Erinnerung: Absätze werden durch Leerzeilen
+getrennt.
+
+!item Bei der Umwandlung ins HTML- oder WinHelp-Format wird überprüft, ob der
+benutzt Verweis vorhanden ist. Ist er es nicht, so gibt UDO eine
+Fehlermeldung aus.
+
+!item Bei (!LaTeX) kann man nur auf Labels und Aliase, nicht auf Kapitel
+verweisen.
+
+!end_enumerate
+
+#------------------------------------------------
+!subsubsubnode Interne Querverweise mit Bildern
+
+!index (!/ilink!..)
+!index (!/link!..)
+!index (!/img!..)
+
+Speziell für WinHelp und HTML gibt es den
+(!I)(!/ilink!..)(!i)-Befehl, um Verweise mit Darstellung
+eines Bildes zu erstellen. Dieser
+Befehl ist eine Kombination aus (!I)(!/link!..)(!i) und
+(!I)(!/img!..)(!i) und wird bei den anderen Formaten wie der oben
+besprochene Link-Befehl für interne Querverweise behandelt:
+
+!begin_quote
+!begin_verbatim
+UDO:      (!ilink [img] [Text] [Verweis])
+WinHelp:  {\uldb \{bmc img.bmp\}}{\v Verweis}
+HTML:     <a href="Verweis"><img src="img.gif" alt="Text"></a>
+sonst:    analog zu (!link [Text] [Verweis])
+!end_verbatim
+!end_quote
+
+(!HINTS)
+
+!begin_enumerate
+
+!item UDO überprüft nicht, ob die Grafiken existieren.
+
+!index !/html_img_suffix
+
+!item UDO benutzt als Endung für die Grafiken standardmäßig
+''(!V).gif(!v)''. Mit dem Schalter (!I)!/html_img_suffix(!i) kann die
+Endung jederzeit verändert werden.
+
+!item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
+diese Zahl überschritten, so gibt UDO eine Fehlermeldung aus, daß der Link
+nicht ersetzt werden konnte. Zur Erinnerung: Absätze werden durch Leerzeilen
+getrennt.
+
+!end_enumerate
+
+
+#------------------------------------------------
+!subsubsubnode Interne Querverweise auf Seiten
+
+!index (!/plink!..)
+
+Speziell für (!LaTeX) gibt es noch den (!I)(!/plink!..)(!i)-Befehl, um
+Bezug auf andere Seiten zu nehmen:
+
+!begin_quote
+!begin_verbatim
+UDO:   (!plink [Links] [Querverweise])
+LaTeX: Links (siehe Seite \pageref{Querverweise})
+sonst: Links
+!end_verbatim
+!end_quote
+
+
+Hier nun ein Beispiel, bei dem auf die Seite verwiesen wird, auf der
+Sie meine Anschrift finden. Aus!..
+
+!begin_quote
+!begin_verbatim
+Wenn Sie sich registrieren lassen möchten, so
+senden Sie (!plink [mir] [Anschrift]) eine
+kurze Nachricht.
+!end_verbatim
+!end_quote
+
+wird!..
+
+!begin_quote
+Wenn Sie sich registrieren lassen möchten, so
+senden Sie (!plink [mir] [Anschrift]) eine
+kurze Nachricht.
+!end_quote
+
+
+(!HINTS)
+
+!begin_enumerate
+
+!item Bei (!LaTeX) kann man nur auf Labels, nicht auf Kapitel verweisen.
+
+!item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
+diese Zahl überschritten, so gibt UDO eine Fehlermeldung aus, daß der Link
+nicht ersetzt werden konnte. Zur Erinnerung: Absätze werden durch Leerzeilen
+getrennt.
+
+!end_enumerate
+
+#------------------------------------------------
+!subsubsubnode Externe Querverweise
+
+!index (!/xlink!..)
+
+Mit dem (!I)(!/xlink!..)(!i)-Befehl können Sie Bezug auf Stellen
+(!I)andere(!i) Hypertexte oder Homepages nehmen. Der Unterschied zum obigen
+Befehl besteht darin, daß beim zweiten Parameter bis auf die Tilde keine
+Sonderzeichen angepaßt werden(!N)bei Pfadangaben fatal!(!n)
+
+!begin_quote
+!begin_verbatim
+UDO:      (!xlink [UDO] [*:\udo.hyp])
+ST-Guide: @{"UDO" link "*:\udo.hyp"}
+
+UDO:      (!xlink [Atari] [http://www.atari.com])
+HTML:     <A HREF="http://www.atari.com">Atari</A>
+
+UDO:      (!xlink [UDO] [Titel@d:/winhelp/udo.hlp])
+WinHelp:  {\uldb UDO}{\v Titel@d:/winhelp/udo.hlp}
+
+sonst:    UDO bzw. Atari
+!end_verbatim
+!end_quote
+
+#----------------------------
+!ifdest [win]
+Hier nun ein paar kurze Beispiele für externe Verweise in einer
+WinHelp-Datei. Aus!..
+
+!begin_quote
+!begin_verbatim
+""Die (!xlink [Onlinehilfe zu WinHelp] [1@winhelp.hlp])!..""
+!end_verbatim
+!end_quote
+
+wird!..
+
+!begin_quote
+""Die (!xlink [Onlinehilfe zu WinHelp] [1@winhelp.hlp])!..""
+!end_quote
+
+!endif
+#----------------------------
+!ifdest [stg]
+Hier nun ein paar kurze Beispiele für externe Verweise in einem
+ST-Guide-Hypertext. Aus!..
+
+!begin_quote
+!begin_verbatim
+""Die (!xlink [Atari Infopages] [*:\aip.hyp])!..""
+(!nl)
+""Anleitung zum (!xlink [HCP] [*:\hcp.hyp])""
+!end_verbatim
+!end_quote
+
+wird!..
+
+!begin_quote
+""Die (!xlink [Atari Infopages] [*:\aip.hyp])!..""
+(!nl)
+""Anleitung zum (!xlink [HCP] [*:\hcp.hyp])!..""
+!end_quote
+
+!endif
+#----------------------------
+!ifdest [html]
+Hier nun ein paar kurze Beispiele für externe Verweise in einer
+HTML-Datei. Aus!..
+
+!begin_quote
+!begin_verbatim
+""(!xlink [Yahoo] [http://www.yahoo.com])!..""
+(!nl)
+""(!xlink [Web.De] [http://web.de])!..""
+!end_verbatim
+!end_quote
+
+wird!..
+
+!begin_quote
+""(!xlink [Yahoo] [http://www.yahoo.com])!..""
+(!nl)
+""(!xlink [Web.De] [http://web.de])!..""
+!end_quote
+
+!endif
+#----------------------------
+
+(!HINTS)
+
+!begin_enumerate
+
+!item Für WinHelp muß man gültige Topicnamen und Dateinamen angeben.
+Der HCP akzeptiert in Topicnamen nur Buchstaben, Ziffern und den
+Underscore. Andere Zeichen werden von UDO angepaßt!
+
+!item Für den ST-Guide sollte man dem Dateinamen die Zeichen ''(!V)*:\(!v)''
+voranstellen, so daß der ST-Guide in allen in den für ihn angegebenen
+Verzeichnissen aus der in der (!V)ST-GUIDE.INF(!v) angegebenen Variable
+namens (!V)PATHS(!v) nach der Datei sucht.
+
+!index !/no_xlinks
+!item Durch den Schalter (!I)!/no_xlinks~[~](!i) können Sie im Vorspann
+angeben, bei welchen Formaten externe Verweise umgewandelt werden sollen.
+Dieser Schalter wird z.B. dann benötigt, falls man eine Seite mit Verweisen
+für das Internet angelegt hat, die in einem ST-Guide- oder WinHelp-Hypertext
+keinen Sinn machen würden.
+
+!end_enumerate
+

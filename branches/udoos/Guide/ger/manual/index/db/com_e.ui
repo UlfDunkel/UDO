@@ -1,0 +1,462 @@
+!subsubnode !/else
+
+
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/else(!t)
+
+!item [Beschreibung:] 
+	Die diesem Kommando folgenden Zeilen werden bis zum Eintreffen von    
+	(!I)!/endif(!i) ausgegeben, wenn bei (!I)!/ifdest(!i) oder            
+	(!I)!/iflang(!i) nicht das Kürzel des aktuellen Ausgabeformates bzw.  
+	der Ausgabesprache angegeben wurde.                                   
+
+
+!item [Siehe auch:] (!I)!/ifdest(!i), (!I)!/iflang(!i), (!I)!/endif(!i), Abfragebefehle
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_appendix
+
+Anhang beenden
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/end_appendix(!t)
+
+!item [Beschreibung:] 
+	Beendet den Anhang. UDO unterstützt genau einen Anhang, daher sollte  
+	(!I)!/end_appendix(!i) das letzte Kommando vor (!I)!/end_document     
+	(!i) sein.                                                            
+
+
+!item [Siehe auch:] (!I)!/begin_appendix(!i), Anhang
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_blist
+
+Liste beenden
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/end_blist(!t)
+
+!item [Beschreibung:] 
+	Beendet die letzte blist-Umgebung.                                    
+
+
+!item [Siehe auch:] (!I)!/begin_blist(!i), (!I)!/item~[~](!i), Listen
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_center
+
+Die (letzte) center-Umgebung beenden
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/end_center(!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando beendet die zuletzt geöffnete center-Umgebung.        
+
+
+!item [Siehe auch:] (!I)!/begin_center(!i), Texthervorhebungen
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_comment
+
+
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/end_comment(!t)
+
+!item [Beschreibung:] 
+	(!MISS)                                                               
+
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_description
+
+Letzte description-Umgebung beenden
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/end_description(!t)
+
+!item [Beschreibung:] 
+	Beendet die letzte description-Umgebung.                              
+
+
+!item [Siehe auch:] (!I)!/begin_description(!i), (!I)!/item~[~](!i), Beschreibende Aufzählungen
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_document
+
+Ende des Dokumentes setzen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/end_document(!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando (!B)muß(!b) in jedem Quelltext vorhanden sein. Es     
+	beendet den Hauptteil und sollte das letzte Kommando des Quelltextes  
+	sein. Fehlt dieses Kommando, erzeugt UDO eine Fehlermeldung.          
+
+
+!item [Siehe auch:] (!I)!/begin_document(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_enumerate
+
+Letzte numerierte Aufzählung beenden
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/end_enumerate(!t)
+
+!item [Beschreibung:] 
+	Beendet die letzte enumerate-Umgebung.                                
+
+
+!item [Siehe auch:] (!I)!/begin_enumerate(!i), (!I)!/item(!i), Numerierte Aufzählungen
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_flushleft
+
+Umgebung für linksbündigenText schließen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/end_flushleft(!t)
+
+!item [Beschreibung:] 
+	Die (letzte) flushleft-Umgebung wird mit diesem Kommando beendet.     
+
+
+!item [Siehe auch:] Texthervorhebungen, (!I)!/begin_flushleft(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_flushright
+
+Umgebung für rechtsbündigen Text schließen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/end_flushright(!t)
+
+!item [Beschreibung:] 
+	Die (letzte) flushright-Umgebung wird mit diesem Kommando beendet.    
+
+
+!item [Siehe auch:] Texthervorhebungen, (!I)!/begin_flushright(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_ilist
+
+Liste beenden
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/end_ilist(!t)
+
+!item [Beschreibung:] 
+	Beendet die letzte ilist-Umgebung.                                    
+
+
+!item [Siehe auch:] (!I)!/begin_ilist(!i), (!I)!/item~[~](!i), Listen
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_itemize
+
+Letzte einfache Aufzählung beenden
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/end_itemize(!t)
+
+!item [Beschreibung:] 
+	Beendet die letzte itemize-Umgebung.                                  
+
+
+!item [Siehe auch:] (!I)!/begin_itemize(!i), (!I)!/item(!i), Einfache Aufzählungen
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_quote
+
+Letzte Absatzeinrückung aufheben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/end_quote(!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando beendet die letzte quote-Umgebung, in der der Text    
+	eingerückt dargestellt wird.                                          
+
+
+!item [Siehe auch:] (!I)!/begin_quote(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_raw
+
+Raw-Umgebung beenden
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/end_raw(!t)
+
+!item [Beschreibung:] 
+	Beendet die raw-Umgebung.                                             
+
+
+!item [Siehe auch:] (!I)!/begin_raw(!i), raw-Umgebung
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_sourcecode
+
+Eine sourcecode-Umgebung beenden
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/end_sourcecode(!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando beendet die sourcecode-Umgebung.                      
+
+
+!item [Siehe auch:] (!I)!/begin_sourcecode(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_table
+
+Tabelle beenden und ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/end_table(!t)
+
+!item [Beschreibung:] 
+	Beendet die table-Umgebung und sorgt für die Ausgabe der Tabelle.     
+
+
+!item [Siehe auch:] Tabellen, (!I)!/begin_table(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_tlist
+
+Liste beenden
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/end_tlist(!t)
+
+!item [Beschreibung:] 
+	Beendet die letzte tlist-Umgebung.                                    
+
+
+!item [Siehe auch:] (!I)!/begin_tlist(!i), (!I)!/item~[~](!i), Listen
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_verbatim
+
+Verbatim-Umgebung beenden
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/end_verbatim(!t)
+
+!item [Beschreibung:] 
+	Beendet die verbatim-Umgebung.                                        
+
+
+!item [Siehe auch:] (!I)!/begin_verbatim(!i), Vorformatierter Text
+
+!end_xlist
+#------------------------------
+!subsubnode !/end_xlist
+
+Liste beenden
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/end_xlist(!t)
+
+!item [Beschreibung:] 
+	Beendet die letzte xlist-Umgebung.                                    
+
+
+!item [Siehe auch:] (!I)!/begin_xlist(!i), (!I)!/item~[~](!i), Listen
+
+!end_xlist
+#------------------------------
+!subsubnode !/endif
+
+Spezielle Umgebung beenden
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/endif(!t)
+
+!item [Beschreibung:] 
+	Beendet eine spezielle Umgebung, die mit (!I)!/ifdest(!i),            
+	(!I)!/iflang(!i), (!I)!/ifset(!i), (!I)!/ifos(!i) oder (!I)!/if(!i)   
+	begonnen wurde. Der diesem Befehl folgende Text wird wieder für alle  
+	Formate ausgegeben.                                                   
+
+
+!item [Siehe auch:] (!I)!/ifdest(!i), (!I)!/iflang(!i), (!I)!/ifset(!i), (!I)!/ifos(!i), (!I)!/if(!i), (!I)!/else(!i), Abfragebefehle
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,18 @@
+!begin_itemize
+
+!index !/use_auto_helpids
+!item Neu: Durch den Schalter (!I)!/use_auto_helpids~[win](!i) kann
+man im Vorspann bestimmen, daﬂ UDO automatisch Help-IDs sichert, die an
+die Kapitelnamen angelehnt sind, sofern nicht manuell eine Help-ID mit
+(!I)!/win_helpid(!i) gesetzt wird (Markus Schwaiger).
+
+!index !/win_prefix_helpids
+!item Neu: Durch Angabe von (!I)!/win_prefix_helpids~<text>(!i) wird
+jeder HelpID der Text beim Sichern vorangestellt.
+
+!index !/image
+!index Gedankenstriche
+!item Bugfix: In Bildunterschriften konnten keine Gedankenstriche und
+andere Spezialit‰ten benutzt werden (Markus Schwaiger).
+
+!end_itemize

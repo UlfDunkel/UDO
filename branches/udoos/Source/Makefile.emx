@@ -1,0 +1,11 @@
+###########################################################
+# @(#) Makefile fuer EMX-GCC und GNU-Make oder dmake
+# @(#) Dirk Hagedorn, 27.06.1996
+###########################################################
+CC = gcc
+CFLAGS = -g -O2 -Wall -D__MSDOS__
+
+LDFLAGS = 
+
+include makefile.in
+

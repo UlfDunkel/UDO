@@ -1,0 +1,198 @@
+!subsubnode !/raw
+
+Zeile nur beim (!MISS) ausgeben.
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/raw [<format>] <text>(!t)
+
+!item [Beschreibung:] 
+	(!T)<text>(!t) wird nur dann ausgegeben, wenn die Quelldatei ins      
+	ASCII-Format umgewandelt wird. (!T)<text>(!t) wird dann 1:1 und ohne  
+	Berücksichtigung etwaiger UDO-Kommandos ausgegeben. Diese Zeile       
+	zerteilt Absätze genau wie alle anderen Kommandos.                    
+
+
+!item [Siehe auch:] (!I)!/ifdest(!i), Formatspezifische Befehle, raw-Umgebung
+
+!end_xlist
+#------------------------------
+!subsubnode !/rinclude
+
+Datei 1:1 einbinden
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/rinclude <datei>(!t)
+
+!item [Beschreibung:] 
+	Öffnet die Datei ""<datei>"" und gibt deren Inhalt unformatiert an    
+	der Stelle aus, an der dieses Kommando benutzt wurde. Der Inhalt der  
+	Datei wird nicht eingerückt oder zentriert ausgegeben. Die            
+	raw-Umgebung dient dazu, spezielle Formatbefehle einzubinden.         
+
+!item [Beispiel:] (!T)!/rinclude table.tex(!t)
+
+!item [Siehe auch:] (!I)!/include(!i), (!I)!/vinclude(!i), Verteilte Dokumente, raw-Umgebung
+
+!end_xlist
+#------------------------------
+!subsubnode !/rtf_charwidth
+
+Zeichenbreite einstellen (nur RTF)
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/rtf_charwidth <wert>(!t)
+
+!item [Beschreibung:] 
+	UDO benutzt zur Ausrichtung der xlist-Umgebungen und der Tabellen     
+	einen Wert für die Berechnung der Einrückungen und Zellenbreiten.     
+	Dieser Wert ist so ausgelegt, daß auch nichtproportionale fette       
+	Großschrift noch richtig formatiert wird. Bei normaler Schrift kann   
+	es jedoch sein, daß die Zeichen zu weit eingerückt werden oder das    
+	Tabellenzellen zu breit erscheinen. Mit diesem Schalter können sie    
+	den Berechnungswert anpassen. Standardmäßig benutzt UDO den Wert 150. 
+
+!item [Beispiel:] (!T)!/rtf_charwidth 100(!t)
+
+!item [Siehe auch:] Tabellen, Listen
+
+!end_xlist
+#------------------------------
+!subsubnode !/rtf_monofont
+
+Namen des Monospaced-Font für RTF setzen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann
+
+!item [Syntax:] 
+	(!T)!/rtf_monofont <fontname>(!t)
+
+!item [Beschreibung:] 
+	Mit diesem Kommando kann man den Font setzen, der zur Darstellung von 
+	Klartext benutzt werden soll. Als Default verwendet UDO den Font      
+	""Courier New"".                                                      
+
+!item [Beispiel:] (!T)!/rtf_monofont Monospace 821(!t)
+
+!item [Siehe auch:] (!I)!/rtf_propfont(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/rtf_no_tables
+
+ASCII- statt RTF-Tabellen erzeugen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Vorspann
+
+!item [Syntax:] 
+	(!T)!/rtf_no_tables(!t)
+
+!item [Beschreibung:] 
+	Benutzt man diesen Schalter im Vorspann, so werden Tabellen nicht mit 
+	RTF-Kommandos erzeugt, sondern wie ASCII-Tabellen in einem            
+	nichtproportionalen Font ausgegeben. Der Schalter dient dazu,         
+	RTF-Dateien auch für solche Textverarbeitungssysteme zu erzeugen, die 
+	keine RTF-Tabellen importieren können.                                
+
+
+!item [Siehe auch:] Tabellensatz
+
+!end_xlist
+#------------------------------
+!subsubnode !/rtf_propfont
+
+Namen des Proportional-Fonts für RTF setzen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann
+
+!item [Syntax:] 
+	(!T)!/rtf_propfont <fontname>(!t)
+
+!item [Beschreibung:] 
+	Mit diesem Kommando kann man den Font setzen, der zur Darstellung von 
+	Fließtext und Überschriften benutzt werden soll. Als Default          
+	verwendet UDO den Font ""Times New Roman"".                           
+
+!item [Beispiel:] (!T)!/rtf_propfont Dutch 801 Roman(!t)
+
+!item [Siehe auch:] (!I)!/rtf_monofont(!i)
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

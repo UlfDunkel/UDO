@@ -1,0 +1,166 @@
+!subnode General tips & tricks
+!ignore_links
+
+#################################################
+
+!subsubnode Split large documentations
+!ignore_links
+
+If you write a documentation that is 30~KB or larger you should split up it
+into different parts that you can merge with (!I)!/include(!i).
+
+By splitting up the documentation you are e.g. enabled to restructure it by
+simply moving one line of your main source file. If your documentation is
+part of one file you have to move blocks of text to restructure it.
+
+Another advantage is that you can find specific chapters more quickly if you
+write them to files that you name like this chapter.
+
+Furthermore you can test or convert only some parts of the documentation.
+My be you have a documentation with five chapters. Write a preamble file, a
+main file and five files that contain the chapters:
+
+!autoref [off]
+
+!begin_quote
+!begin_verbatim
+[main.u]
+!include header.ui
+!begin_document
+!maketitle
+!tableofcontents
+!include chapter1.ui
+!include chapter2.ui
+!include chapter3.ui
+!include chapter4.ui
+!include chapter5.ui
+!end_document
+
+[header.ui]
+!title ...
+!program ...
+!author ...
+
+[chapter1.ui]
+!node Chapter 1
+...
+
+[chapter2.ui]
+!node Chapter 2
+...
+
+[etc]
+!end_verbatim
+!end_quote
+
+!autoref [on]
+
+If you now want to convert a single chapter you simply edit another main
+file:
+
+!autoref [off]
+!begin_quote
+
+!begin_verbatim
+[ch5test.u]
+!include header.ui
+!begin_document
+!maketitle
+!tableofcontents
+!include chapter5.ui
+!end_document
+!end_verbatim
+
+!end_quote
+!autoref [on]
+
+If you use this method you will be able to find errors in a large
+documentation more quickly.
+
+Just take a look at the source files of the UDO documentation if you want to
+know how to split up a large documentation. You can believe me that it would
+be hard work if all the text would be part of a single text file.
+
+#################################################
+
+!subsubnode Use standardized source files
+!ignore_links
+
+There are some authors that write every few weeks a new program or a new
+hypertext. And in every documentation you can read a disclaimer or a
+copyright chapter. Wouldn't it be easier to use the same text all the time?
+
+No problem, just use macros. The following example shows how to use a
+standardized copyright text. May be you have a written a program that
+contains this copyright note:
+
+!autoref [off]
+!begin_quote
+
+!begin_verbatim
+""Hello, World!"" Version 8.15 (!nl)
+Copyright (!copyright) 1996 by C. Rookie
+!end_verbatim
+
+!end_quote
+!autoref [on]
+
+Your next program contains a similar text, only the name of the program and
+the version number differ. Wouldn't it be better to use a standardized text
+any time you write the documentation of a new software?
+
+!autoref [off]
+!begin_quote
+
+!begin_verbatim
+""(!PrgName)"" Version (!PrgVersion) (!nl)
+Copyright (!copyright) (!PrgYear) by C. Rookie
+!end_verbatim
+
+!end_quote
+!autoref [on]
+
+Here the name, the version number and the years will be replaced by the
+contents of macros ""PrgName"", ""PrgVersion"" and ""PrgYear"". If you write
+the upper text to a sinlge file you can use it for many documentations where
+only the macros have to be defined.
+
+!autoref [off]
+!begin_quote
+
+!begin_verbatim
+!macro PrgName    Hello, World!
+!macro PrgVersion 8.15
+!macro PrgYear    1996
+...
+!begin_document
+...
+!include copyleft.ui
+!end_verbatim
+
+!end_quote
+!autoref [on]
+
+It's true that this is only a small example. But you can make more complex
+files if you want to.
+
+#################################################
+
+!subsubnode Write your own commands
+!ignore_links
+
+UDO doesn't support every command of the destination formats. If you need a
+special command you can add it by using definitions with parameters. You
+only need some knowledge about the destination format.
+
+The following example shows how to write commands for changing the font size
+for (!LaTeX), HTML, Windows Help and RTF:
+
+!autoref [off]
+!begin_quote
+!vinclude examples/fontsize.u
+!end_quote
+!autoref [on]
+
+#################################################
+

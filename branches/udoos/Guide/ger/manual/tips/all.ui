@@ -1,0 +1,181 @@
+!subnode Allgemeine Tips & Tricks
+!ignore_links
+
+#################################################
+
+!subsubnode Zerteilen Sie große Dokumentationen
+!ignore_links
+
+Falls Sie eine Dokumentation schreiben, die einen Umfang von 30~KB
+oder mehr hat, so sollten Sie sie in kleine Häppchen aufteilen. Diese
+Dateien können dann mit dem (!I)!/include(!i) an passender Stelle
+eingeladen werden.
+
+Durch die Aufteilung haben Sie den Vorteil, daß Sie die Dokumentation
+durch einfaches Verschieben nur einer einzigen Zeile neu gliedern
+können. Wäre der gesamte Quelltext in einer Datei, müßten Sie mit
+einem Editor gleich ganze Blöcke umkopieren.
+
+Ein weiterer Vorteil der Aufteilung ist, daß Sie bestimmte Kapitel
+schnell wiederfinden können, sofern Sie den Dateien sinnvolle Namen
+geben.
+
+Außerdem können Sie leicht und schnell nur Teile der Dokumentation
+auf syntaktische Korrektheit testen. Nehmen wir an, wir haben einen
+Quelltext mit fünf Kapiteln. Erstellen Sie eine Datei mit den globalen
+Schaltern, eine Hauptdatei und fünf Dateien mit dem Kapiteltext:
+
+!autoref [off]
+
+!begin_quote
+!begin_verbatim
+[haupt.u]
+!include header.ui
+!begin_document
+!maketitle
+!tableofcontents
+!include kapitel1.ui
+!include kapitel2.ui
+!include kapitel3.ui
+!include kapitel4.ui
+!include kapitel5.ui
+!end_document
+
+[header.ui]
+!title ...
+!program ...
+!author ...
+
+[kapitel1.ui]
+!node Kapitel 1
+...
+
+[kapitel2.ui]
+!node Kapitel 2
+...
+
+[usw]
+!end_verbatim
+!end_quote
+
+!autoref [on]
+
+Falls Sie nun einmal nur ein Kapitel umwandeln wollen, erstellen Sie
+ganz einfach eine zusätzliche Hauptdatei, die Sie dann umwandeln:
+
+!autoref [off]
+!begin_quote
+
+!begin_verbatim
+[kap5test.u]
+!include header.ui
+!begin_document
+!maketitle
+!tableofcontents
+!include kapitel5.ui
+!end_document
+!end_verbatim
+
+!end_quote
+!autoref [on]
+
+Gerade bei sehr umfangreichen Dokumentationen kann man die Fehlersuche
+und -korrektur drastisch beschleuingen.
+
+Falls Sie sich mal ein Bild davon machen wollen, wie so eine
+Aufteilung aussehen kann, dann schauen Sie sich einmal die Quelltexte
+dieser UDO-Dokumentation an. Stünde diese Dokumentation in einer
+Datei, hätte ich schon längst den Überblick verloren.
+
+#################################################
+
+!subsubnode Verwenden Sie standardisierte Quelltexte
+!ignore_links
+
+Es soll ja Autoren geben, die laufend neue Programme oder Hypertexte
+veröffentlichen. Und in fast allen Beschreibungen tauchen Kapitel auf,
+in denen z.B. Copyrightangaben benutzt werden. Solche Dinge braucht
+man natürlich nicht immer wieder neu zu schreiben, sondern kann
+sich unter Zuhilfenahme von Makros kleinere Standardtexte erstellen.
+
+Nehmen wir an, unsere Copyrightangabe sieht so aus:
+
+!autoref [off]
+!begin_quote
+
+!begin_verbatim
+""Hello, World!"" Version 8.15 (!nl)
+Copyright (!copyright) 1996 bei C. Anfänger
+!end_verbatim
+
+!end_quote
+!autoref [on]
+
+Bei einem anderen Programm wird wieder fast die gleiche Angabe
+erfolgen, lediglich der Name des Programms und die Versionsnummer
+werden sich unterscheiden.
+
+Was liegt also näher, als solch einen Text zu standardisieren?
+
+!autoref [off]
+!begin_quote
+
+!begin_verbatim
+""(!ProgrammName)"" Version (!ProgrammVersion) (!nl)
+Copyright (!copyright) (!ProgrammJahr) bei C. Anfänger
+!end_verbatim
+
+!end_quote
+!autoref [on]
+
+
+Im Vorspann einer Datei, die diesen Text einbindet, müssen dann
+lediglich die Makros ""ProgrammName"", ""ProgrammVersion"" und
+""ProgrammJahr"" gesetzt werden, im Hauptteil muß diese Datei dann nur
+noch an passender Stelle eingebunden werden:
+
+!autoref [off]
+!begin_quote
+
+!begin_verbatim
+!macro ProgrammName    Hello, World!
+!macro ProgrammVersion 8.15
+!macro ProgrammJahr    1996
+...
+!begin_document
+...
+!include copyleft.ui
+!end_verbatim
+
+!end_quote
+!autoref [on]
+
+
+Dieser Text kann dann wieder beim nächsten Projekt eingesetzt
+werden, indem man einfach die Makros anders definiert.
+
+Zugegeben, dies ist nur ein kurzes Beispiel. Bei umfangreicheren
+Texten ist es jedoch eine sehr große Arbeitserleichterung.
+
+#################################################
+
+!subsubnode Schreiben Sie Ihre eigenen Kommandos
+!ignore_links
+
+UDO unterstützt längst nicht alle Möglichkeiten jedes Ausgabeformates.
+Jedoch ist es unter Zuhilfenahme der Definitionen ein Leichtes, sich
+eigene Befehle zu schreiben oder spezielle Befehle für ein
+Ausgabeformat einzubauen. Die Kenntnis der Syntax des Ausgabeformates
+ist dabei natürlich sehr von Vorteil.
+
+Das folgende Beispiel zeigt, wie man Befehle zur Änderungen der Schriftgröße
+im (!LaTeX)-, HTML-, WinHelp- und Rich Text Format einbauen kann:
+
+!autoref [off]
+!begin_quote
+!vinclude examples/fontsize.u
+!end_quote
+!autoref [on]
+
+#################################################
+

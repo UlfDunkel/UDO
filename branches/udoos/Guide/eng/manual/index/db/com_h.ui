@@ -1,0 +1,396 @@
+!subsubnode !/heading
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/heading <text>(!t)
+
+!item [Description:]
+	This command prints out ""<text>"" like a headline using the chapter  
+	font and fontsize.                                                    
+
+!item [Example:] (!T)!/heading A headline(!t)
+
+!item [See:] (!I)!/subheading(!i), (!I)!/subsubheading(!i), (!I)!/subsubsubheading(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/hline
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/hline(!t)
+
+!item [Description:]
+	This command displays a horizontal line inside normal text or inside  
+	a table. Not all destination formats support horizontal lines.        
+
+
+!item [See:] Tables
+
+!end_xlist
+#------------------------------
+!subsubnode !/htag_img_suffix
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble & main part
+
+!item [Syntax:]
+	(!T)!/htag_img_suffix <suffix>(!t)
+
+!item [Description:]
+	UDO uses the suffix ""tiff"" when converting the image commands for   
+	HP HelpTag SGML by default. If you want to use different image types  
+	you can redefine the image suffix with this command. The lower        
+	example shows how to change the image suffix to ""xwd"". You can use  
+	(!I)!/htag_img_suffix(!i) as often as you want so you can redefine    
+	the image suffix right before every  image.                           
+
+!item [Example:] (!T)!/htag_img_suffix xwd(!t)
+
+!item [See:] (!I)!/image(!i), (!I)(!/img~[~])(!i), Images
+
+!end_xlist
+#------------------------------
+!subsubnode !/html_alinkcolor
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble & main part
+
+!item [Syntax:]
+	(!T)!/html_alinkcolor <color>(!t)
+
+!item [Description:]
+	(!MISS)                                                               
+
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/html_backcolor
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble & main part
+
+!item [Syntax:]
+	(!T)!/html_backcolor <color>(!t)
+
+!item [Description:]
+	(!MISS)                                                               
+
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/html_backimage
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble & main part
+
+!item [Syntax:]
+	(!T)!/html_backimage <file>(!t)
+
+!item [Description:]
+	(!MISS)                                                               
+
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/html_backpage
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/html_backpage <URL>(!t)
+
+!item [Description:]
+	Using this command you can tell UDO where to jump to when the reader  
+	clicks on the ""Go Up"" button on the title page.                     
+
+!item [Example:] (!T)!/html_backpage ../index.html(!t)
+
+!item [See:] (!I)!/no_headlines(!i), (!I)!/no_bottomlines(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/html_img_suffix
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble & main part
+
+!item [Syntax:]
+	(!T)!/html_img_suffix <suffix>(!t)
+
+!item [Description:]
+	UDO uses the suffix ""gif"" when converting the image commands for    
+	HTML by default. If you want to use different image types you can     
+	redefine the image suffix with this command. The lower example shows  
+	how to change the image suffix to ""jpeg"". You can use               
+	(!I)!/html_img_suffix(!i) as often as you want so you can redefine    
+	the image suffix right before every  image.                           
+
+!item [Example:] (!T)!/html_img_suffix jpeg(!t)
+
+!item [See:] (!I)!/image(!i), (!I)(!/img~[~])(!i), Images
+
+!end_xlist
+#------------------------------
+!subsubnode !/html_keywords
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/html_keywords <text>(!t)
+
+!item [Description:]
+	(!T)<text(!t) should be a comma separated list of keywords. This list 
+	will be printed by UDO inside the header of the HTML file that        
+	contains the chapter where you used this comand. Some Internat        
+	machines are taking these information for referencing the HTML pages. 
+
+!item [Example:] (!T)!/html_keywords Dirk Hagedorn, UDO6, Software, Converter(!t)
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/html_linkcolor
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble & main part
+
+!item [Syntax:]
+	(!T)!/html_linkcolor <color>(!t)
+
+!item [Description:]
+	(!MISS)                                                               
+
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/html_merge_nodes
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/html_merge_nodes(!t)
+
+!item [Description:]
+	If you use this switch inside the preamble of your UDO source file    
+	UDO will save only one HTML file that will contain the whole text.    
+
+
+!item [See:] (!I)!/html_merge_subnodes(!i), (!I)!/html_merge_subsubnodes(!i), (!I)!/html_merge_subsubsubnodes(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/html_merge_subnodes
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/html_merge_subnodes(!t)
+
+!item [Description:]
+	If you use this switch inside the preamble of your source file UDO    
+	will save an HTML file for each chapter. These files will contain the 
+	sections, subsections and paragraphs, too.                            
+
+
+!item [See:] (!I)!/html_merge_nodes(!i), (!I)!/html_merge_subsubnodes(!i), (!I)!/html_merge_subsubsubnodes(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/html_merge_subsubnodes
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/html_merge_subsubnodes(!t)
+
+!item [Description:]
+	If you use this switch inside the preamble of your source file UDO    
+	will save an HTML file for each section. These files will contain the 
+	subsections and paragraphs, too.                                      
+
+
+!item [See:] (!I)!/html_merge_nodes(!i), (!I)!/html_merge_subnodes(!i), (!I)!/html_merge_subsubsubnodes(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/html_merge_subsubsubnodes
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/html_merge_subsubsubnodes(!t)
+
+!item [Description:]
+	If you use this switch inside the preamble of your source file UDO    
+	will save an HTML file for each subsection. These files will contain  
+	the paragraphs, too.                                                  
+
+
+!item [See:] (!I)!/html_merge_nodes(!i), (!I)!/html_merge_subnodes(!i), (!I)!/html_merge_subsubnodes(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/html_name
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/html_name <file>(!t)
+
+!item [Description:]
+	If you use this command inside a chapter, section, subsection or      
+	paragraph, ""<file>"" is used as the name of the HTML file instead of 
+	(!T)CCSSUUPP(!t) (CC chapter, SS section, UU subsection, PP           
+	paragraph).                                                           
+
+!item [Example:] (!T)!/html_name software(!t)
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/html_no_xlist
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/html_no_xlist(!t)
+
+!item [Description:]
+	UDO prints xlist environments using HTML tables. If you don't like    
+	that you can use this switch inside the preamble. UDO will then print 
+	xlist environments like description environments.                     
+
+
+!item [See:] Lists, Descriptions
+
+!end_xlist
+#------------------------------
+!subsubnode !/html_nodesize
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/html_nodesize <value>(!t)
+
+!item [Description:]
+	You can set the font size of the HTML headlines with this switch. By  
+	default UDO will use  value of 1. That means, that UDO will print     
+	(!V)<H1>...</H1>(!v) for chapters, (!V)<H2>...</H2>(!v) for sections  
+	etc. The example shows how to tell UDO that it should print           
+	(!V)<H2>...</H2>(!v) for chapters etc.                                
+
+!item [Example:] (!T)!/html_nodesize 2(!t)
+
+!item [See:] (!I)!/node(!i), (!I)!/subnode(!i), (!I)!/subsubnode(!i), (!I)!/subsubsubnode(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/html_textcolor
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble & main part
+
+!item [Syntax:]
+	(!T)!/html_textcolor <color>(!t)
+
+!item [Description:]
+	(!MISS)                                                               
+
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/html_vlinkcolor
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble & main part
+
+!item [Syntax:]
+	(!T)!/html_vlinkcolor <color>(!t)
+
+!item [Description:]
+	(!MISS)                                                               
+
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/hyphen
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/hyphen <word>(!t)
+
+!item [Description:]
+	You can set syllabification marks ((!T)!/-(!t)) with this command for 
+	a word for the whole text. The example shows how to tell UDO where    
+	it's allowed to split up the word ""syllabification"".                
+
+!item [Example:] (!T)!/hyphen syl!/-labi!/-fi!/-ca!/-tion(!t)
+
+!item [See:] Syllabification, (!I)!/sloppy(!i), (!I)!/fussy(!i), (!I)!/-(!i)
+
+!end_xlist
+#------------------------------
+
+

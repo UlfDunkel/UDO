@@ -1,0 +1,8 @@
+!begin_itemize
+
+!index Kopfzeilen
+!item Änderung: In den RTF-Befehlen für die Kopfzeile wurde ein
+""(!V)\par(!v)"" eingefügt, so daß die Kopfzeileninhalte nun richtig
+ausgerichtet werden (Norbert Hanz).
+
+!end_itemize
