@@ -1,0 +1,78 @@
+!node	Speicherverwaltung mit um_*
+
+In UDO kann leicht das Problem auftreten, das man einen Speicherblock reservieren muß, ihn aber nicht innerhalb der Methode wieder freigeben kann. Dies kann je nach Betriebssystem zu Speicherfragmentierung führen. Die um_* Funktionen verwalten intern eine Liste, die alle allocierten Speicherblöcke beinhalten. So kann UDO am Ende allen benutzten Speicher wieder frei geben. Eine andere Sache, die durch die Verwendung von um_* Funktionen sichergestellt werden, ist, das Pufferüberläufe zumindest erkannt werden können. In diesem Fall gibt UDO eine Meldung aus, mit der Stelle im UDO Quelltext und der gerade verarbeiteten Datei.
+
+Um die im folgenden erklärten Methoden benutzen zu können, muß udomem.h eingebunden werden.
+
+!subnode init_um
+
+!begin_verbatim
+GLOBAL void init_um(void);
+!end_verbatim
+
+Diese Methode darf nur in cli.c aufgerufen werden, um die Speicherverwaltung zu initialisieren. Dies muß vor dem ersten Aufruf einer um_* Speicherfunktion sein.
+
+!subnode exit_um
+
+!begin_verbatim
+GLOBAL void exit_um(void);
+!end_verbatim
+
+Diese Methode muß am Ende von cli.c aufgerufen werden, um allen allocierten Speicher wieder freizugeben und zu überprüfen, ob es darin Pufferüberläufe gab.
+
+!subnode um_malloc 
+
+!begin_verbatim
+GLOBAL void *um_malloc(size_t size);
+!end_verbatim
+
+Diese Methode verhält sich identisch zur C-Funktion malloc, ist also vom Handling her ein vollständiger Ersatz, nur intern passiert mehr.
+
+um_malloc fordert einen Speicherbereich der Größe size zurück. Ist nicht mehr genug Speicher frei, so wird NULL zurück geliefert.
+
+!subnode um_realloc
+
+!begin_verbatim
+GLOBAL void *um_realloc(void *block, size_t size);
+!end_verbatim
+
+um_realloc verhält sich genauso wie realloc. Der Speicherblock block muß mit um_malloc angefordert worden sein. Der Parameter size gibt die neue Größe des Speicherblocks an. Der Speicherblock kann sowohl vergrößert, als auch verkleinert werden. Ist dies nicht möglich, wird NULL zurück geliefert.
+
+Wichtiger Hinweis: der Rückgabewert von um_realloc muß entgegengenommen und auf != NULL getestet werden. Da sich die Speicheradresse von block ändern kann, muß der Zeiger auf den Speicherblock ggf. aktualisiert werden, sonst verliert man die Referenz auf den Block und überschreibt ggf. fremden Speicher. 
+
+!subnode um_free
+
+!begin_verbatim
+GLOBAL void um_free(void *memblock);
+!end_verbatim
+
+um_free funktioniert analog zu free und gibt den übergebenen Speicherblock memblock wieder frei.
+
+!node	Stringmanipulation mit um_str*
+
+Es hat sich heraus gestellt, das UDO an einigen Stellen anfällig für Pufferüberläufe ist. Die verwendeten Puffer sind für einige Fälle einfach zu klein und laufen über. Die um_str* Funktionen liefern ersatz für in C vorhandene Funktionen und bieten die Möglichkeit solche Pufferüberläufe zu erkennen und zu verhindern.
+
+!subnode um_strcpy
+
+!begin_verbatim
+GLOBAL char *um_strcpy(char *dest, const char *src, size_t max, const char *place);
+!end_verbatim
+
+um_strcpy kopiert den String src in den String dest, wenn der String dest die Länge von max nicht übersteigt (auf das Nullbyte wird geachtet). max gibt die Größe in Byte an, die dest aufnehmen kann.
+
+Gilt folgende Deklaration:
+!begin_verbatim
+char test[1000]
+!end_verbatim
+so kann um_strcpy wie folgt aufgerufen werden:
+
+um_strcpy(test, "Hallo Welt!", 1000, "Meine Funktion");
+
+Der Parameter place gibt hierbei an, in welcher Methode die um_strcpy Funktion steht. Hierraus kann man beim Debuggen bzw. bei der Fehlermeldung erkennen, welcher Puffer zu klein gewählt wurde. place sollte im ganzen UDO-Projekt eindeutig gewählt werden, man kann z.B. auch den Funktionsnamen und das n-te Vorkommen ausdrücken: "copy_token[5]".
+
+!begin_verbatim
+GLOBAL char *um_strncpy(char *dest, const char *src, size_t n, size_t max, const char *place);
+GLOBAL char *um_strcat(char *dest, const char *src, size_t max, const char *place);
+GLOBAL char *um_strncat(char *dest, const char *src, size_t n, size_t max, const char *place);
+!end_verbatim
+
