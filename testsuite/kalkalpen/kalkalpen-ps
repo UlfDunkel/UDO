@@ -1,4 +1,0 @@
-#!/bin/sh
-# export UDOINPUTPATH=/usr/share/udo/udoinput/
-# alt: udo614
-udo --ps --verbose --force-long --tree --check -o kalkalpen.ps kalkalpen.txt -D Debug -D NoPics

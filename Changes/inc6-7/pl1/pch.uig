@@ -1,8 +1,0 @@
-!begin_itemize
-
-!index verbatim-Umgebung
-!item	In verbatim-Umgebungen wurden interne Escape-Sequenzen nicht
-ersetzt. Dadurch schlug die Referenzierung fehl (Peter Hellinger).
-
-!end_itemize
-

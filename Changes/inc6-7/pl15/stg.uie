@@ -1,4 +1,0 @@
-!begin_itemize
-	!item Bugfix: in tables with more than 254 lines the vertical lines were
-		not drawn correctly.
-!end_itemize

@@ -1,9 +1,0 @@
-############################################################
-# @(#) Usage of the command line version, 22.09.1995
-############################################################
-!subnode Command line version
-
-The command line version can be used identically on any operating system UDO
-is available for.
-
-!include usage/cliusage.ui

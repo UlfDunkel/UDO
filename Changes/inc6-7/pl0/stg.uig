@@ -1,7 +1,0 @@
-!begin_itemize
-
-!index !/autoref_items
-!item	Neu: (!I)!/autoref_items(!i) wird nun auch für description- und
-xlist-Umgebungen unterstützt.
-
-!end_itemize
