@@ -1,5 +1,5 @@
 # doc/manual/source/appendix.ui
-# letzte Änderungen: 15.12.2003 / last changes: Dec 15, 2003
+# letzte Änderungen: 15.01.2004 / last changes: Jan 15, 2004
 
 
 ################################################################################
@@ -21,20 +21,44 @@
 !iflang [german]
 Folgende Maximalwerte müssen Sie beim Erstellen der Quelltexte beachten:
 
+# Bearbeitungshinweise für Volker:
+# bitte die nachfolgenden Zahlen auf den aktuellen Stand bringen
+# d.h. wo Du bei Deiner Aktion mit meinen Testdateien die verschiedenen Parameter hochgedreht hast
+# Parameter, die hier evtl. fehlen, bitte ergänzen
+# für jeden Wert als Kommentar dazuschreiben, ab welchem Release usw. der Wert geht
+# tunlichst hier auch vermerken, wo im Code diese Limitierungen zu finden sind,
+# damit bei Bedarf diese Doku anhand des Codes überprüft werden kann
+
+
+# Anmerkung: die hier verwendeten Definitionen sind in der Datei "manual.u" definiert...
 !begin_xlist [Schachtelungstiefe der Umgebungen:] !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Macros:]                           (!MAXMACRO)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Defines:]                          (!MAXDEFINE)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Hyphens:]                          4096
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Summe Kapitel, Labels und Aliase:] 32768
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Zeichen pro Zeile:]                512
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Zeichen pro Wort:]                 128
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Silben pro Wort:]                  32
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Worte pro Absatz:]                 800
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Querverweise pro Absatz:]          (!MAXLINK)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Zeilen pro Tabelle:]               256
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Spalten pro Tabelle:]              32
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Zeichen pro Tabellen-Zelle:]       1000
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Schachtelungstiefe der Umgebungen:] 6
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !end_xlist
 
 !endif
@@ -43,19 +67,33 @@ Folgende Maximalwerte müssen Sie beim Erstellen der Quelltexte beachten:
 You can use source files that don't exceed these maximum values:
 
 !begin_xlist [Sum of chapters, labels and aliases:] !short
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Macros:]                              (!MAXMACRO)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Defines:]                             (!MAXDEFINE)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Hyphenation patterns:]                4096
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Sum of chapters, labels and aliases:] 32768
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Characters per line:]                 512
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Characters per word:]                 128
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Syllables per word:]                  32
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Words per paragraph:]                 800
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Links per paragraph:]                 (!MAXLINK)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Rows per table:]                      256
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Columns per table:]                   32
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Chars per table cell:]                1000
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Depth of environments:]               6
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !end_xlist
 !endif
 
@@ -90,6 +128,7 @@ documentation? Here's the answer:
 
 ################################################################################
 # auskommentiert 13.12.2003 (da überholt) - Ulrich Kretschmer
+# Angaben zu den verwendeten Entwicklungswerkzeugen gehören in die Entwickler-Dokumentation.
 !begin_ignore
 !iflang [german]
 !begin_node Entwicklungsumgebung
