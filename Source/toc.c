@@ -1981,6 +1981,18 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 	if (!html_ignore_8bit)
 	{	outln("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=iso-8859-1\">");
 	}
+	else
+	{
+		/* New in v6.5.0 [vj] */
+		if (html_ignore_8bit_use_charset)
+		{
+			/* We should print out a special charset instead of none
+			   No check need if html_ignore_8bit_charset is emtpy,
+			   because html_ignore_8bit_use_charset wouldn't have been set to TRUE
+			 */
+			voutlnf("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=%s\">", html_ignore_8bit_charset);
+		}
+	}
 
 	/* New in r6pl16 [NHz] */
 	voutlnf("<meta http-equiv=\"Content-Language\" content=\"%s\">", lang.html_lang);
