@@ -3027,7 +3027,7 @@ LOCAL void c_listheading ( void )
 				sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize>=0) ? "+" : "", iSize);
 				strcpy(sFontEnd, "</font>");
 			}
-			voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br>%s<b>%s</b>", align, sFontBeg, name);
+			voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br />%s<b>%s</b>", align, sFontBeg, name);
 			if (bEnv1stItem[iEnvLevel])
 			{	voutlnf("%s</td></tr>", sFontEnd);
 			}
@@ -3075,7 +3075,7 @@ LOCAL void c_listsubheading ( void )
 				sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize>=0) ? "+" : "", iSize);
 				strcpy(sFontEnd, "</font>");
 			}
-			voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br>%s<b>%s</b>", align, sFontBeg, name);
+			voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br />%s<b>%s</b>", align, sFontBeg, name);
 			if (bEnv1stItem[iEnvLevel])
 			{	voutlnf("%s</td></tr>", sFontEnd);
 			}
@@ -3122,7 +3122,7 @@ LOCAL void c_listsubsubheading ( void )
 				sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize>=0) ? "+" : "", iSize);
 				strcpy(sFontEnd, "</font>");
 			}
-			voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br>%s<b>%s</b>", align, sFontBeg, name);
+			voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br />%s<b>%s</b>", align, sFontBeg, name);
 			if (bEnv1stItem[iEnvLevel])
 			{	voutlnf("%s</td></tr>", sFontEnd);
 			}
@@ -3169,7 +3169,7 @@ LOCAL void c_listsubsubsubheading ( void )
 				sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize>=0) ? "+" : "", iSize);
 				strcpy(sFontEnd, "</font>");
 			}
-			voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br>%s<b>%s</b>", align, sFontBeg, name);
+			voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br />%s<b>%s</b>", align, sFontBeg, name);
 			if (bEnv1stItem[iEnvLevel])
 			{	voutlnf("%s</td></tr>", sFontEnd);
 			}
@@ -3586,8 +3586,8 @@ LOCAL void output_empty_lines ( const int count )
 					break;
 				case TOHTM:
 				case TOMHH:
-					outln("<br>");
-					/* outln("<br>&nbsp;"); */
+					outln("<br />");
+					/* outln("<br />&nbsp;"); */
 					break;
 				case TOKPS:
 					outln("newline");
@@ -3673,7 +3673,7 @@ GLOBAL void c_udolink ( void )
 			if (inside_center)	strcpy(sTemp, "<p align=\"center\">");
 			if (inside_right)	strcpy(sTemp, "<p align=\"right\">");
 			if (nodename[0]==EOS)
-			{	voutlnf("%s<a href=\"%s\"><img src=\"%s\" alt=\"%s\" border=\"0\"%s></a>",
+			{	voutlnf("%s<a href=\"%s\"><img src=\"%s\" alt=\"%s\" border=\"0\"%s /></a>",
 					sTemp, UDO_URL, GIF_MW_NAME, UDO_MADE, sGifSize);
 			}
 			else
@@ -3724,7 +3724,7 @@ GLOBAL void c_toplink ( void )
 		case TOHTM:
 		case TOMHH:
                         /* set width and height =24 to fix bug #0000005 [voja] */
-			voutlnf("<p><a href=\"#\"><img src=\"%s\" border=\"0\" width=\"24\" height=\"24\"></a></p>", GIF_TP_NAME);
+			voutlnf("<p><a href=\"#\"><img src=\"%s\" border=\"0\" width=\"24\" height=\"24\" /></a></p>", GIF_TP_NAME);
 			break;
 	}
 
@@ -5278,7 +5278,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 							{	bEnv1stPara[iEnvLevel]= FALSE;
 							}
 							else
-							{	strcat(z, "<br>"/*"<p>"*/);
+							{	strcat(z, "<br />"/*"<p>"*/);
 							}
 						}
 					}
@@ -5292,7 +5292,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 					{	bEnv1stPara[iEnvLevel]= FALSE;
 					}
 					else
-					{	strcat(z, "<br>");
+					{	strcat(z, "<br />");
 					}
 				}
 			}
@@ -5974,7 +5974,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 					}
 					else
 					{	if (inside_env)
-						{	outln("<br>&nbsp;");
+						{	outln("<br />&nbsp;");
 						}
 						else
 						{	outln("</p>");
@@ -5983,7 +5983,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 				}
 				else
 				{	if (inside_env)
-					{	outln("<br>&nbsp;");
+					{	outln("<br />&nbsp;");
 					}
 					else
 					{	outln("</p>\n");

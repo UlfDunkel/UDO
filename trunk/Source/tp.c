@@ -1311,13 +1311,13 @@ GLOBAL void c_maketitle ( void )
 			}
 
 			if ( has_version )
-			{	voutlnf("%s<br>", titdat.version);
+			{	voutlnf("%s<br />", titdat.version);
 			}
 			if ( has_date )
-			{	voutlnf("%s<br>", titdat.date);
+			{	voutlnf("%s<br />", titdat.date);
 			}
 			if ( has_author || has_authorimage )
-			{	voutlnf("<br>%s<br>", lang.by);
+			{	voutlnf("<br />%s<br />", lang.by);
 			}
 			if ( has_authorimage )
 			{	c_begin_center();
@@ -1328,20 +1328,20 @@ GLOBAL void c_maketitle ( void )
 				}
 			}
 			if ( has_author )
-			{	voutlnf("%s<br>", titdat.author);
+			{	voutlnf("%s<br />", titdat.author);
 			}
 			
 			/* New in V6.5.2 [NHz] */
 			if ( has_company )
 			{	auto_quote_chars(lang.fur, FALSE);
-				voutlnf("<br>%s<br>", lang.fur);
-				voutlnf("%s<br>", titdat.company);
+				voutlnf("<br />%s<br />", lang.fur);
+				voutlnf("%s<br />", titdat.company);
 			}
 			
 			if ( has_address )
 			{	for (i=1; i<=address_counter; i++)
 				{	if (titdat.address[i]!=NULL)
-					{	voutlnf("%s<br>", titdat.address[i]);
+					{	voutlnf("%s<br />", titdat.address[i]);
 					}
 				}
 			}
