@@ -1,0 +1,21 @@
+!subnode Installation der TOS- und GEM-Version
+!ignore_links
+
+Zur Installation von UDO auf einem Atari-(Kompatiblen-)Rechner
+kopieren Sie einfach alle Dateien in ein beliebiges Verzeichnis, welches
+sinnigerweise ""UDO"" genannt werden sollte.
+
+Die GEM-Version sollte man im verwendeten Desktop --- ich empfehle,
+Gemini, Thing oder Ease zu benutzen ---  als Anwendung für
+Dateien mit der Endung ''(!V)*.u*(!v)'' anmelden.
+
+Falls Sie das TTP bevorzugen und mit einem Kommandozeileninterpreter (z.B.
+mit der Mupfel von Stefan Eissing) arbeiten, so kopieren oder verschieben
+Sie ''(!V)udo.ttp(!v)'' in eines der in (!T)$PATH(!t) angegebenen
+Verzeichnisse (z.B. ''(!V)\usr\bin(!v)'').
+
+Falls Sie den ST-Guide installiert haben, so sollten Sie
+''(!V)udo6ger.hyp(!v)'' und ''(!V)udo6ger.ref(!v)'' in Ihr Verzeichnis kopieren
+oder verschieben, in dem Sie auch alle anderen Hypertexte aufbewahren. Nur
+dann können auch andere Hypertexte oder Programme (z.B. ein Editor) auf den
+UDO-Hypertext zugreifen.

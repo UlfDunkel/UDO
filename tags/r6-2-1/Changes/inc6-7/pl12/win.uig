@@ -1,0 +1,11 @@
+!begin_itemize
+
+!index !/win_propfont
+!item Bugfix: (!I)!/win_propfont(!i) funktionierte nicht (Norbert Hanz).
+
+!index !/win_old_keywords
+!item Bugfix: (!I)!/win_old_keywords(!i) funktionierte nicht für Aliase
+(Andreas Swazinna).
+
+!end_itemize
+

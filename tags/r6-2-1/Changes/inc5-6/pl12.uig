@@ -1,0 +1,218 @@
+!subnode PL12 vom 04.10.1996
+!html_name r5_pl12
+
+!begin_description
+
+###########################################################
+!item [(!ALL):] ~
+
+!begin_itemize
+
+!index Bilder
+!item	(!B)Wichtige Änderung:(!b) Bilder werden jetzt
+		umgebungsabhängig positioniert. Sie werden also nur noch dann
+		zentriert ausgegeben, wenn der (!I)!/image(!i)-Befehl in einer
+		center-Umgebung steht. Die rechtsbündige Ausgabe ist ebenso
+		möglich.
+
+!index !/verbatimsize
+!index tiny
+!index small
+!index normal
+!index large
+!index huge
+!item	Neu: Schalter (!I)!/verbatimsize~[~](!i) (!nl)
+		Mit diesem Schalter kann man die Fontgröße des Textes einer
+		verbatim-Umgebung beeinflussen. Erlaubte Parameter sind
+		(!I)!/tiny(!i), (!I)!/small(!i), (!I)!/normal(!i),
+		(!I)!/large(!i) und (!I)!/huge(!i), wobei (!I)!/tiny(!i) die
+		kleinste und (!I)!/huge(!i) die größte Größe einstellt. Dieser
+		Schalter ist überall und mehrfach einsetzbar und wird momentan
+		von RTF, WinHelp und (!LaTeX) unterstützt (Andreas Swazinna).
+
+!index	!/ignore_headline
+!index	!/ignore_bottomline
+!item	Neu: Schalter (!I)!/ignore_headline(!i) und
+		(!I)!/ignore_bottomline(!i) (!nl)
+		Wird (!I)!/ignore_headline(!i) in einem Node angegeben, so
+		wird nur bei diesem Node keine Kopfzeile ausgegeben. Analog für
+		(!I)!/ignore_bottomline(!i) und Fußzeilen (Wilfried Behne).
+
+!index	!/ifdef
+!index	!/ifndef
+!index	!/ifset
+!index	!/ifnset
+!item	Änderung: Die Abfragebefehle (!I)!/ifdef(!i) und
+(!I)!/ifndef(!i) lauten nun (!I)!/ifset(!i) und (!I)!/ifnset(!i).
+
+!index	!/set
+!item	Neu: Befehl (!I)!/set <symbol>(!i). (!nl)
+		Mit diesem Befehl kann man wie mit der Kommandozeilen-Option
+		(!V)-D(!v) Symbole setzen, die man durch (!I)!/ifset(!i) und
+		(!I)!/ifnset(!i) abfragen kann (Patrick Jerchel).
+
+!index	!/unset
+!item	Neu: Befehl (!I)!/unset <symbol>(!i). (!nl)
+		Mit diesem Befehl kann man ein per Kommandozeilen-Option
+		(!V)-D(!v) oder (!I)!/set(!i) gesetztes Symbole wieder
+		löschen (Patrick Jerchel).
+
+!index	Titelseite !! !/country
+!item	Neu: Befehl (!I)!/country(!i) zur Angabe des Landes auf der
+Titelseite.
+
+!index Titelseite
+!index !/maketitle
+!item	Änderung: Fehlen jegliche Titelseitenangaben, so wird bei
+(!I)!/maketitle(!i) keine leere Titelseite mehr erzeugt.
+
+!index	Inhaltsverzeichnis
+!index	!/tableofcontents
+!item	Ännderung: Wird kein Inhaltsverzeichnis ((!I)!/tableofcontents(!i))
+ausgegeben, so erfolgt kein Link auf das nichtexistente
+Inhaltsverzeichnis.
+
+!index	Sonderzeichen !! !/index
+!item	Bugfix: Sonderzeichen und vordefinierte Makros wurden bei
+Indizes doppelt angepaßt.
+
+!index	Silbentrennung
+!item	Neu: UDO trennt Wörter nun auch bei einem ''/''. URLs und
+Unix-Pfade werden also auch automatisch getrennt (Dirk Haun; laut
+seiner Frage in OBERLEHRER erlaubt). Die Trennung von (!LaTeX) wird
+nicht beeinflußt. UDO trennt --- wie schon immer --- auch innerhalb von
+(!I)(!/V)...(!/v)(!i).
+
+!index	!/hyphen
+!item	Es waren nur 512 !/hyphen-Aufrufe möglich (Uwe Mindrup). Jetzt
+sollten wirklich 4096 Stück funktionieren.
+
+!index quote-Umgebung
+!item	Quote-Umgebungen werden nun bei den ascii-basierten Formaten
+		genauso weit eingerückt wie itemize- und enumerate-Umgebungen
+		(Christian Goßlar).
+
+!end_itemize
+
+
+###########################################################
+!item [HTML:] ~
+
+!begin_itemize
+
+!index HTML !! Sonderzeichen
+!item Die Anpassung der Sonderzeichen von HTML und HelpTag war
+durcheinandergeraten.
+
+!end_itemize
+
+###########################################################
+!item [(!LaTeX):] ~
+
+!begin_itemize
+
+!item Änderung: Folgten eckige Klammern direkt einem manuellen
+Zeilenumbruch, so erzeugte (!LaTeX) Fehlermeldungen. Dies wird nun
+dadurch umgangen, daß UDO die eckigen Klammern mit (!V)\symbol(!v)
+ausgibt.
+
+!item	Änderung: Daß (!LaTeX) 2.09 (!V)\LaTeXe{}(!v) nicht kennt,
+wird nun beachtet.
+
+!item 	Bugfix: (!I)!/subtoc(!i) gibt nun bei (!LaTeX) nichts mehr aus.
+
+!item	Bugfix: Typrographische Anführungszeichen funktionieren nun
+auch bei Indizes.
+
+!index	(!LaTeX) !! !/programimage
+!item	Für (!LaTeX) wird nun auch (!I)!/programimage(!i) unterstützt.
+
+!end_itemize
+
+
+###########################################################
+!item [QuickView:] ~
+
+!begin_itemize
+
+!index	QuickView !! !/programimage
+!item	Für QuickView wird nun auch (!I)!/programimage(!i) unterstützt.
+
+!end_itemize
+
+
+###########################################################
+!item [ST-Guide:] ~
+
+!begin_itemize
+
+!item	Neu: HCP-Kommando (!V)@default(!v) wird unterstützt. Wird
+(!I)!/maketitle(!i) benutzt, so wird (!V)@default~Titel(!v)
+ausgegeben. Wird keine Titelseite erzeugt, aber ein
+Inhaltsverzeichnis, so wird die Zeile
+(!V)@default~Inhaltsverzeichnis(!v) ausgegeben. Wird weder eine
+Titelseite noch ein Inhaltsverzeichnis erzeugt, wird auch keine
+(!V)@default(!v)-Zeile erzeugt.
+
+!end_itemize
+
+
+###########################################################
+!item [WinHelp:] ~
+
+!begin_itemize
+
+!index	Fenstergröße !! WinHelp
+!item	Das Fenster ist nun etwas kleiner, so daß man nicht immer die Taskbar von
+		Windows95 erwischt, wenn man Scrollen will.
+
+!index	WinHelp !! Sonderzeichen
+!item	Ein DOS-Grafikzeichen wurde nicht in ein ''|'' umgewandelt
+(Andreas Swazinna).
+
+!index	WinHelp !! Versteckte Kapitel
+!item	Änderung: Versteckte Kapitel werden nicht mehr in die
+Browse-Sequence aufgenommen. Sie sind also nur noch durch Links
+erreichbar.
+
+!index	WinHelp !! Farben
+!item	Änderung: Die Farbtabelle enthält nun 16 Einträge (Joachim
+Jurst). Mir ist es trotzdem nicht gelungen, mehr als 8 verschiedene
+Farben anzuzeigen.
+
+!index	WinHelp !! Titel
+!item	Der Titel wird auf der Titelseite etwas größer ausgegeben.
+
+!index	WinHelp !! Inhaltsverzeichnis
+!item	Einträge im Inhaltsverzeichnis werden nun korrekt dargestellt,
+		falls man die Breite des Fensters verkleinert.
+
+!index	WinHelp !! !/programimage
+!item	Für WinHelp wird nun auch (!I)!/programimage(!i) unterstützt.
+
+!index WinHelp !! !/win_html_look
+!item	Der Schalter (!V)!/win_html_look(!v) existiert nicht mehr.
+		Grauer Hintergrund kann nun mit (!I)!/win_background(!i) erzeugt
+		werden (siehe unten).
+
+!item	Der Default-Font für WinHelp-Dateien ist nun ""Times New
+		Roman"". ""Arial"" kann man mit (!I)!/win_propfont Arial(!i)
+		einstellen.
+		
+!index WinHelp !! !/win_background
+!item	Neuer Schalter: (!I)!/win_background~<farbe>(!i) (!nl)
+		Mit diesem Schalter kann man die Hintergrundfarbe für WinHelp-
+		Dateien setzen. Erlaubt sind (!I)black(!i), (!I)white(!i)
+		(default), (!I)red(!i), (!I)green(!i), (!I)blue(!i),
+		(!I)cyan(!i), (!I)magenta(!i), (!I)yellow(!i) und
+		(!I)grey(!i).
+		
+		Hinweis: Manche Farben eignen sich überhaupt nicht. Ich werde
+		sie daher noch ein wenig aufhellen müssen, soweit möglich.
+
+!end_itemize
+
+
+###########################################################
+!end_description
+

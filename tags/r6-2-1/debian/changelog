@@ -1,0 +1,16 @@
+udo (6.2.1-1) unstable; urgency=low
+
+  * New upstream release
+  * Fixed rules file for Debian package build
+  * Package sponsored by joergland
+
+ -- Volker Janzen <douglas@voja.org>  Tue, 04 Nov 2003 13:56:00 +0200
+
+udo (6.2.0-1) unstable; urgency=low
+
+  * Initial Release (Closes: #216221)
+  * Changed README, Makefile and makefile.in for compilation under Debian
+  * Package sponsored by joergland
+
+ -- Volker Janzen <douglas@voja.org>  Tue, 20 Oct 2003 19:00:00 +0200
+

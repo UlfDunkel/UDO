@@ -1,0 +1,617 @@
+!subnode	PL6 vom 17.07.1996
+!html_name	r5_pl6
+
+Man kann sagen, ich hatte eine kreative Phase(!N)oder muß das nach der
+Rechtschreibreform jetzt ""Fase"" heißen?(!n). (!grin)
+
+UDO macht im Wesentlichen nichts anderes als vorher, nur besser,
+genauer und manchmal sogar schneller, trotz gesteigertem
+Funktionsumfang. Die Ursachen für die meisten der von Euch geschilderten
+Probleme wurden beseitigt.
+
+Falls diese Version problemlos läuft, dann werde ich noch schnell ein
+paar Kleinigkeiten wie lange Überschriften für Bilder und Tabellen,
+Trennverbot zwischen (!T)(!/V)...(!/v)(!t) einbauen und die Einrückungen in den
+Inhaltsverzeichnissen anpassen und die übernächste Version dann
+als Release~6 veröffentlichen.
+
+
+!begin_description
+
+#####################################################################
+
+!item	[(!ALL)] ~
+
+!begin_itemize
+
+!index Blocksatz
+!index !/use_justified
+!item	Ich muß einen Punkt in der Doku löschen. UDO kann nämlich
+jetzt auch (!B)Blocksatz(!b) erzeugen. Ja, echt! Und zwar muß man im
+Vorspann den Schalter (!I)!/use_justified~[!..](!i) setzen, damit man
+Blocksatz erhält.
+
+!item	Wenn Blocksatz verwendet wird, bemängelt UDO nur die Zeilen,
+die kürzer als 61 Zeichen sind. Da es beim Blocksatz nicht ganz so
+auffällt, wenn ein paar Leerzeichen eingefügt wurden, konnte ich den
+Wert um 3 erhöhen. Wird kein Blocksatz verwendet, werden wie immer
+Zeilen bemängelt, die kürzer als 64 Zeichen sind.
+
+!index Gliederungsebenen
+!item	Es sind jetzt 4 Gliederungsebenen möglich. Dadurch gibt es
+folgende neue Kommandos:
+
+	!begin_itemize
+	!item	!/subsubsubnode
+	!item	!/subsubsubnode*
+	!item	!/psubsubsubnode
+	!item	!/psubsubsubnode*
+	!item	!/use_auto_subsubsubtocs
+	!item	!/subsubsubtoc
+	!item	!/ignore_subsubsubtoc
+	!item	!/html_merge_subsubsubnodes
+	!end_itemize
+
+!index !/verbatim_no_umlaute
+!index !/no_verbatim_umlaute
+!item	(!B)Syntaxänderung:(!b) Der Schalter ""!/verbatim_no_umlaute""
+heißt nun (!I)!/no_verbatim_umlaute(!i), damit die Schalter
+einheitlichere Namen besitzen.
+
+!index !/ignore_subtoc
+!item	Neue Schalter: (!I)!/ignore_subtoc(!i). Wird in einem Node
+dieser Schalter (ohne Abkürzung) gesetzt, so wird hier kein
+Unterinhaltsverzeichnis ausgegeben.
+
+!index !/ignore_subsubtoc
+!item	Neue Schalter: (!I)!/ignore_subsubtoc(!i). Wird in einem Subnode
+dieser Schalter (ohne Abkürzung) gesetzt, so wird hier kein
+Unterinhaltsverzeichnis ausgegeben.
+
+!index !/code_mac
+!index !/code_hp8
+!index !/code_iso
+!index !/code_dos
+!index !/code_tos
+!item	Neue Schalter (!I)!/code_mac(!i), (!I)!/code_hp8(!i),
+(!I)!/code_iso(!i), (!I)!/code_dos(!i) und (!I)!/code_tos(!i).
+Nach Angabe eines dieser
+Schalter erwartet UDO den Zeichensatz des jeweiligen Systems. Dann
+wandelt es die Zeichen zunächst nach ISO-Latin-1 und dann wieder in
+den Systemzeichensatz, auf dem UDO läuft. Dadurch können nur die
+Zeichen bearbeitet werden, die parktisch auf jedem System zur
+Verfügung stehen. Diese Lösung war schneller zu implemtieren als
+Unicode-Routinen.
+
+!index !/code_ansi
+!item	Der Schalter (!I)!/code_iso(!i) bewirkt das gleiche wie
+(!I)!/code_ansi(!i) bisher. Letzterer wird bald nicht mehr
+unterstützt! Man sollte also seine Dokumente anpassen, falls man
+(!I)!/code_ansi(!i) benutzt hat.
+
+!index !/code_ascii
+!item	Der Schalter (!I)!/code_ascii(!i) wird bald nicht mehr
+unterstützt! Man sollte seine Quelltexte also, abhängig von dem
+System, auf dem man UDO benutzt, bereits jetzt auf (!I)!/code_mac(!i),
+(!I)!/code_tos(!i), (!I)!/code_dos(!i) oder (!I)!/code_hp8(!i)
+umstellen.
+
+!index !/no_umlaute
+!item	Wird (!I)!/no_umlaute(!i) benutzt, so wird bei den
+ASCII-Formaten ein ""o"" für die erste Ebene der itemize-Umgebung
+benutzt. Somit sollten keine 8bit-Zeichen mehr in der Zieldatei
+auftauchen.
+
+!index !/ifdest
+!index !/iflang
+!item	Die Abfrage von (!I)!/ifdest(!i) und (!I)!/iflang(!i) wurde
+komplett neu programmiert, so daß nun auch die wildesten Kombinationen
+möglich sein sollten. Maximal sind sie zehnmal ineinander
+verschachtelbar, auch wenn das ziemlicher Unsinn sein würde. Aber es
+geht (!grin).
+
+!index Windows-Shell
+!item	Für Windows gibt es eine kleine Shell, die ich an einem Tag
+zusammengebastelt habe. Archiv: (!V)udosh002.zip(!v)
+
+!index Druk-ker
+!item	(!T)Druc!/-ker(!t) wird nun bei deutschen Texten (!/german) als
+(!T)Druk-~ker(!t) getrennt (Ulf Dunkel).
+
+!item	Der Zeilenumbruch erfolgte teilweise viel zu früh. Jetzt
+werden Zeilen auch wirklich 70 Zeichen lang, wenn es paßt (Dirk Haun).
+
+!index (!/xlink!..)
+!item	Bei (!I)(!/xlink!..)(!i) kann der zweite Parameter auch ohne
+Inhalt angegeben werden, sprich als (!V)[](!v). Es wird dann der
+Inhalt des ersten Parameters benutzt. Sinnvoll ist dies bei
+HTML-Links, damit man die URLs nicht doppelt angeben muß.
+
+!item	Sonderzeichen werden am Ende der Worte entfernt, die in die
+""Hyphendatei"" ausgegeben werden (Ulf Dunkel). In den Fehlermeldungen
+tauchen die Sonderzeichen jedoch auch weiterhin auf.
+
+!item	Worte, die nur einen Vokal enthalten und demnach sowieso nicht
+getrennt werden können, werden nicht in die ""Hyphendatei"" ausgegeben
+(Ulf Dunkel).
+
+!item	Es können nun 4096 Hyphens verwendet werden. Der Speicherbedarf
+von UDO erhöht sich dadurch um ca. 12~KB (Ulf Dunkel).
+
+!item	Im Logfile wird nun ""Nodes"" anstatt ""!/node's"" ausgegeben
+(Götz Hoffart, Ulf Dunkel).
+
+!item	Bei der Angabe eines Spezialbefehls wie (!I)!/stg(!i) wird nun
+erst der letzte Absatz ausgegeben (Götz Hoffart).
+
+!item	Wird der Testmodus verwendet, so taucht nicht mehr ""(!T)...
+generated(!t)"" im Logfile auf, da die Datei ja auch gar nicht
+erzeugt wurde.
+
+!index !/email
+!item	Es können nun bis zu vier eMail-Zeilen für die Titelzeile
+angegeben werden (Martin Osieka).
+
+!index Quote-Umgebung
+!item	Der Inhalt einer Quote-Umgebung wird nun wie bei (!LaTeX) auch
+rechts eingerückt. Mit ""Inhalt"" ist natürlich nicht nur der
+unmittelbar folgende Text, sondern auch der Inhalt weiterer
+Umgebungen, die in einer Quote-Umgebung stehen.
+
+!index !/end_document
+!item	Ein fehlendes (!I)!/end_document(!i) wird von UDO nun
+bemängelt. Dieser Fehler wird von UDO nun automatisch korrigiert
+(Thomas Much).
+
+!item	Zu kurze Zeilen werden nun im Logfile anders bemängelt. Zuerst
+kommt die Warnung ""underfull line"" mit der Nummer der Zeile der
+Zieldatei. Danach folgt ""check this paragraph"" samt Nummer der Zeile
+der Quelldatei, in dem das problematische Wort enthalten ist.
+
+!index !/stg_parwidth
+!item	Der Befehl (!I)!/stg_parwidth(!i) existiert nicht mehr.
+
+!index !/parwidth
+!item	Neuer Schalter: (!I)!/parwidth~<wert>(!i). Hiermit kann man die
+Länge der Zeilen beeinflussen, die UDO in die Zieldatei schreibt.
+Somit kann man auch ASCII-Dateien erstellen, die 132 Zeichen pro Zeile
+benutzen, die man sich in Schmalschrift ausdrucken kann.
+(!I)<wert>(!i) darf in der Regel (mehr dazu unten) nicht größer als
+200 und nicht kleiner als 20 werden.
+
+!index !/use_output_buffer
+!item	Neuer Schalter: (!I)!/use_output_buffer(!i). Hier muß ich
+etwas mehr erklären, deshalb ist am Ende dieser Datei ein eigenes
+Kapitel vorhanden, daß die Funktionsweise erklärt.
+
+!index Apple QuickView
+!item	Neues Format: Apple QuickView. Da dieses Format sich nur in
+wenigen Dingen vom WinHelp-Format unterscheidet, gehe ich nicht weiter
+darauf ein.
+
+!index !/no_preamble
+!item	Neuer Schalter: (!I)!/no_preambel~[!..](!i). Bisher spielt
+dieser Schalter nur für (!LaTeX) eine Rolle und wird daher weiter
+unten beschrieben.
+
+!index !/no_index
+!item	Neuer Schalter: (!I)!/no_index~[!..](!i). Wird dieser Schalter
+im Vorspann benutzt, werden alle (!I)!/index(!i)-Befehle ignoriert.
+Bei der Ausgabe nach (!LaTeX) werden darüber hinaus auch keine Befehle
+für Makeindex eingefügt.
+
+!index !/sort_hyphen_file
+!item	Neuer Schalter: (!I)!/sort_hyphen_file(!i). Wird dieser
+Schalter im Vorspann angegeben und wird ein ""Hyphen File""
+ausgegeben, so wird am Ende der Umwandlung diese Datei eingelesen,
+Dupes entfernt und die Trennvorschläge sortiert (Ulf Dunkel).
+
+!index !/index
+!item	Der Befehl (!I)!/index(!i) wurde erweitert. Nun kann man, durch
+Angabe von (!V)!!(!v), bis zu drei Parameter übergeben. Beispiel:
+
+!begin_verbatim
+[UDO]
+!index Zeilenabstand
+!index Abstand !! Zeilen
+
+[LaTeX]
+\index{Zeilenabstand}
+\index{Abstand!Zeilen}
+
+[WinHelp]
+K{\footnote K Zeilenabstand}
+K{\footnote K Abstand, Zeilen}
+
+[ST-Guide]
+@index Zeilenabstand
+@index Abstand, Zeilen
+!end_verbatim
+
+!item	Tabellen-Überschriften können nun bis zu 256 Zeichen lang sein
+(Ralf Zimmermann).
+
+!end_itemize
+
+#####################################################################
+
+!item	[ASCII] ~
+
+!begin_itemize
+
+!index ASCII !! Dateiendung
+!item	Die Dateiendung wurde auf (!V).txt(!v) gerändert. Ist ja dann
+doch irgendwie gebräuchlicher als (!V).asc(!v).
+
+!index ASCII !! blist-Umgebung
+!index ASCII !! ilist-Umgebung
+!item	Die blist- und ilist-Umgebungen werden nun auch unterstützt.
+
+!end_itemize
+
+
+#####################################################################
+
+!item	[HTML] ~
+
+!begin_itemize
+
+!index !/html_img_suffix
+!item	(!I)!/html_img_suffix(!i) wirkt sich nun bei allen Bildern
+aus, also auch auf (!I)!/programimage(!i), (!I)!/authorimage(!i) und die
+Kapitelüberschriften (!I)!/chapterimage(!i).
+
+!index HTML !! !/image
+!item	Bei (!I)!/image(!i) wird bei dem Alternativtext kein
+""Abbildung x:"" mehr mit ausgegeben. Dies ist im WWW nicht üblich.
+
+!index HTML !! Fußzeilen
+!index HTML !! !/no_bottomlines
+!item	Es werden nun auch Fußzeilen ausgegeben, in denen die GIFs
+wie in den Kopfzeilen benutzt werden, mit denen der Leser
+nach dem Durchlesen einer Seite weiterblättern kann, ohne zum
+Seitenanfang zurückzuscrollen. Abschaltbar sind diese Fußzeilen durch
+den Befehl (!I)!/no_bottomlines~[...](!i) im Vorspann.
+
+!item	Faßt man Kapitel zusammen, so werden nun richtige Links
+erzeugt. Dies wirkt sich im Inhaltsverzeichnis und in den Kopf- und
+Fußzeilen aus.
+
+!index HTML !! !/html_merge_nodes
+!item	Benutzt man (!I)!/html_merge_nodes(!i), so wird vor jeder
+Node-Überschrift ein (!V)<HR>(!v) ausgegeben.
+
+!item	Es wird nun immer ein Linkspfeil in der Kopfzeile erzeugt,
+auch wenn er funktionsgleich mit dem Hochpfeil ist.
+
+!item	Auf der ersten Seite werden nun auch Kopf- und Fußzeilen
+ausgegeben.
+
+!index !/html_backpage
+!item	Neues Kommando (!I)!/html_backpage(!i). Dahinter kann man eine
+URL angeben, die UDO beim Link des Hochpfeils und Linkspfeils benutzt.
+Somit kann man ein von UDO erzeugtes HTML-File auf seiner Homepage
+einrichten und vom UDO-File wieder zurück zur Homepage springen.
+
+!index HTML !! Inhaltsverzeichnisse
+!item	Bugfix: Bei der Benutzung von Unterinhaltsverzeichnissen wurde
+fälschlicherweise ein (!V)<UL>(!v) ausgegeben, wenn keine Unterkapitel
+existierten.
+
+!index HTML !! !/use_short_toc
+!item	Wird nicht (!I)!/use_short_toc(!i) benutzt, so werden im
+Inhaltsverzeichnis die Kapitelüberschriften fett dargestellt und
+eine zusätzliche Leerzeile ausgegeben.
+
+!end_itemize
+
+
+#####################################################################
+
+!item	[Manualpage] ~
+
+!begin_itemize
+
+!index Manualpage !! blist-Umgebung
+!item	Die blist-Umgebung wird nun auch unterstützt.
+
+!end_itemize
+
+
+#####################################################################
+
+!item	[Pure-C-Help] ~
+
+!begin_itemize
+
+!index Pure-C-Help !! !/program
+!item	Falls (!I)!/program(!i) nicht benutzt wird, wird in der
+Titelzeile kein leerer Link eingetragen.
+
+!index Pure-C-Help !! Fußzeilen
+!item	In der Fußzeile wird bei Kapiteln nun auch ein Link auf das
+Inhaltsverzeichnis ausgegeben.
+
+!item	Statt Wörtern werden nun ""Pfeile"" in den Fußzeilen benutzt,
+um anzudeuten, wohin es geht, wenn man den nebenstehenden Link
+anklickt.
+
+!end_itemize
+
+
+#####################################################################
+
+!item	[RTF] ~
+
+!begin_itemize
+
+!index RTF !! Doppelte Anführungsstriche
+!index RTF !! Doppelte Apostrophe
+!item	Doppelte Anführungsstriche und Apostrophe werden nun durch die
+RTF-Tags (!V)\lquote(!v), (!V)\rquote(!v), (!V)\ldblquote(!v) und
+(!V)\rdblquote(!v) dargestellt.
+
+!index RTF !! Itemize-Umgebung
+!item	Die Markierung der itemize-Umgebung wird nun durch
+(!V)\bullet(!v) erzeugt.
+
+!index RTF !! Kapitelüberschriften
+!item	Die Kapitelüberschriften werden anders ausgegeben, so daß
+jetzt die zugehörigen Absatzformate auch von ""dümmeren""
+RTF-Parsern erkannt werden sollten.
+
+!index RTF !! Blocksatz
+!item 	Der Blocksatz sollte nun überall erscheinen.
+
+!index RTF !! Quote-Umgebung
+!index RTF !! Itemize-Umgebung
+!index RTF !! Enumerate-Umgebung
+!item	Bei der Benutzung von (!V)(!/nl)(!v) in einer quote-Umgebung
+wurde ein (!V)\tab(!v) zuviel ausgegeben. Bei der itemize- und
+enumerate-Umgebung hingegen fehlte jeweils ein (!V)\tab(!v).
+
+!index RTF !! Tabellen
+!item	Tabellen werden nun wie bei WinHelp ausgegeben. Leider ist es
+mir bisher noch nicht gelungen, zu testen, wie man die Linien erzeugt.
+
+!index RTF !! !/rtf_no_tables
+!item	Für den Fall, daß man auch weiterhin ASCII-Tabellen möchte
+--- weil z.B. die benutzte Textverarbeitung keine Tabellen importiert
+(wie Papyrus) --- kann man im Vorspann den Schalter (!I)!/rtf_no_tables(!i)
+benutzen.
+
+!index RTF !! !/universal_charset
+!item	Der Schalter (!I)!/universal_charset(!i) wurde nicht beachtet.
+
+!end_itemize
+
+
+#####################################################################
+
+!item	[ST-Guide] ~
+
+!begin_itemize
+
+!index ST-Guide !! blist-Umgebung
+!index ST-Guide !! ilist-Umgebung
+!item	Die blist- und ilist-Umgebungen werden nun auch unterstützt.
+
+!index ST-Guide !! !/image
+!item	Bei Bildern werden nur noch die Angaben von (!I)!/image(!i)
+verwendet. UDO expandiert also die Pfade nicht mehr. Die GEM-Version
+wechselt vor der Konvertierung in das Zieldatei-Verzeichnis.
+
+!index ST-Guide !! Bilder
+!item	Bilder werden nun auch eingerückt, wenn sie in
+Umgebungen benutzt werden.
+
+!end_itemize
+
+
+#####################################################################
+
+!item	[(!LaTeX)] ~
+
+!begin_itemize
+
+!index (!LaTeX) !! !/use_index
+!item	Wird der Schalter (!I)!/use_index~[tex](!i) im Vorspann
+angegeben, so erzeugt UDO automatisch die nötigen Kommandos für
+Makeindex. Fehlt der Schalter, werden Indizes nicht ausgegeben!
+
+!item	UDO erzeugt jetzt selbständig die Preambel für (!LaTeX). Da
+mit den Schaltern (!I)!/tex_2e(!i), (!I)!/use_style_book(!i),
+(!I)!/no_index(!i) und
+der jeweiligen Sprache genügend Informationen vorhanden sind, um die
+Preambel zu erzeugen, erledigt UDO dies jetzt.  Wird nicht
+(!I)!/no_index(!i) benutzt und wird im Quelltext (!I)!/index(!i)
+benutzt, dann trägt UDO auch die passenden Kommandos für Makeindex
+ein.
+
+!index (!LaTeX) !! !/no_preamble
+Will man seine eigene
+Preambel auch weiterhin benutzen, so muß man den Schalter
+(!I)!/no_preambel~[tex](!i) im Vorspann angeben.
+
+UDO setzt (noch?) keine (!V)\parsep(!v) und (!V)\parskip(!v) Kommandos
+im Vorspann, daher sollte man diese und andere Einstellungen auch
+weiterhin manuell angeben.
+
+
+!item	Mit 100%iger Sicherheit wurden in den Unix-Versionen die
+Indizes mit Umlauten falsch umgewandelt.
+
+!end_itemize
+
+
+#####################################################################
+
+!item	[Texinfo] ~
+
+!begin_itemize
+
+!item	Es wurden sehr oft Einrückungen erzeugt, die bei Texinfo
+nicht auftauchen dürfen.
+
+!end_itemize
+
+
+#####################################################################
+
+!item	[WinHelp] ~
+
+!begin_itemize
+
+!index WinHelp !! !/use_inline_bitmaps
+!item	Neuer Schalter: (!I)!/win_inline_bitmaps(!i). Wird dieser
+Schalter im Vorspann angegeben, so verwendet UDO statt bmc den
+Befehl bmcwd zur Einbindung der Bilder. Dies hat aber auch Nachteile.
+Hier ein Ausschnitt aus einer mir vorliegenden WinHelp-Doku:
+
+!begin_quote
+Storing Bitmaps with Data
+
+Each of the bitmap reference forms bmc, bml, bmr has an 
+alternative form ending with wd. Bitmaps positioned with bmc, 
+bml, or bmr appear the same as bitmaps positioned with 
+bmcwd, bmlwd, or bmrwd. However the commands ending 
+with wd store the bitmap data differently in the Help file.
+When you use bmc, bml, or bmr commands, the bitmaps are 
+stored separately from the data, and a single copy of the 
+bitmap is used for all commands that display the same bitmap 
+file.
+
+The disadvantage is that WinHelp must retrieve the image from 
+the disk before it can be displayed. These bitmaps may display 
+more slowly especially if the Help file is stored on CD-ROM.
+When you use bmcwd, bmlwd, or bmrwd commands, the 
+bitmap is stored in the same location in the Help file as the 
+topic text. Each topic that refers to a bitmap will store a copy 
+of that bitmap. This may increase the size of your Help file. If 
+the bitmap is 64K or larger, you will receive an Out-of-Memory 
+error message from the Help compiler. Use this option with 
+smaller bitmaps that appear once or are used infrequently.
+!end_quote
+
+
+!item	Wird nicht (!I)!/use_short_toc(!i) benutzt, so werden im
+Inhaltsverzeichnis die Kapitelüberschriften fett dargestellt.
+
+!item	Der Text einer center-Umgebung, die sich (auch wenn es Unsinn ist)
+in einer weiteren center-Umgebung befindet, wird nun auch zentriert
+ausgegeben.
+
+!item	Workaround für einen Bug im HC eingebaut: Kontextstrings
+werden auf 80 Zeichen gekürzt. Bei sehr langen Kontextstrings stürzt
+der HC einfach ab.
+
+!end_itemize
+
+
+#####################################################################
+
+!end_description
+
+
+#####################################################################
+
+!subsubnode !/use_output_buffer
+!html_name r5_pl6_uob
+
+Dieser Schalter ist neu und bedarf einer etwas längeren Erklärung.
+
+!index !/use_output_buffer
+Gehandhabt wird er wie fast alle Schalter: er muß im Vorspann
+angegeben werden und man muß die Abkürzungen der Formate angeben.
+Beispiel: (!T)!/use_output_buffer~[win](!t)
+
+Er wird momentan unterstützt für WinHelp, HTML, Apple-QuickView und
+Linuxdoc-SGML. Für andere Formate würde er auch keinen Sinn machen.
+
+Bisher war es so, daß UDO intern immer nach 70 Zeichen umbrochen hat.
+Erfolgte der Umbruch genau in einem Wort, daß eigentlich referenziert
+werden sollte, fehlte in der späteren Datei ein Verweis, da UDO erst
+nach dem Umbruch die Referenzierung startet.
+
+Dadurch war es zu erklären, daß in der Doku (besonders der englischen)
+zahllose Links nicht angelegt wurden, wenn eine Kapitelüberschrift
+Leerzeichen enthielt.
+
+!index !/parwidth
+Dank (!I)!/parwidth(!i) passen nun auch kürzere Absätze mit bis zu 200
+Zeichen in eine Zeile. Benutzt man keine längeren oder gibt es sowieso
+keine Probleme mit der Referenzierung, kann man auf
+(!I)!/use_about_buffer(!i) verzichten.
+
+Setzt man diesen Schalter aber ein, so legt UDO intern einen Puffer an,
+der genug Platz bietet, um selbst lange Absätze mit vielen Wörtern in
+einer Zeile zu halten. Im Idealfall erfolgt die Referenzierung dann
+für den ganzen Absatz und es werden keine Verweise ""vergessen"".
+
+Erst nach der Referenzierung wird dann der Absatz umbrochen. UDO
+bricht nun nach 70 Zeichen bzw. nach den durch (!I)!/parwidth(!i)
+eingestellten Zeichen um.
+
+Bei der Verwendung von (!I)!/use_output_buffer(!i) kann man bei
+(!I)!/parwidth(!i) dann auch Werte angeben, die größer als 200 sind
+(wenn genügend Speicher vorhanden ist, bis 3200). Ist nicht genügend
+Speicher vorhanden, wird der Wert von (!I)!/parwidth(!i) auf das
+nachstmögliche Maximum gesetzt.
+
+
+Die Benutzung dieses Schalter bringt Vorteile und Nachteile. Deshalb
+wurde dieser Schalter eben angeboten und UDO benutzt nicht immer den
+Puffer.
+
+!begin_description
+
+!item [Vorteile:] ~
+
+!begin_enumerate
+!item	Die Referenzierung wird wesentlich sicherer.
+!item	Die Zieldateien werden bei entsprechend großen Werten von
+(!I)!/parwidth(!i) kleiner. Es fehlen halt ein paar CR/LF.
+!end_enumerate
+
+!item [Nachteile:] ~
+
+!begin_enumerate
+
+!item	UDO wird nicht unwesentlich langsamer! Bei UDOs eigener Doku
+erhöhte sich die Konvertierungsdauer von ca. 90 Sekunden auf ca. 120
+Sekunden(!N)handgestoppt auf einem 486 DX50 mit RSXWIN3a, Windows 3.1
+und DOS 6.0(!n)
+
+!item	Die Zieldateien lassen sich weniger gut bearbeiten. Bei
+WinHelp mag das noch egal sein, da man dort nachträglich sowieso keine
+Hand anlegen wird. Bei HTML mag man aber vielleicht schon einmal einen
+Blick in das Ergebnis werfen, welcher dann bei Zeilenlängen über 100
+ziemlich getrübt werden wird.
+
+!end_enumerate
+
+!end_description
+
+
+Man sollte folgende Dinge beachten:
+
+!begin_enumerate
+
+!item	Benutzt man (!I)!/parwidth(!i) gar nicht oder mit Werten
+kleiner als 200, so sollte man auf (!I)!/use_output_buffer(!i)
+verzichten.
+
+!item	Man sollte die Einstellungen formatabhängig angeben, damit
+nicht plötzlich auch ASCII-Dateien mit der großen Absatzbreite
+ausgegeben werden:
+
+!begin_verbatim
+!use_output_buffer [win]
+!ifdest [win]
+!parwidth 250
+!endif
+!end_verbatim
+
+!end_enumerate
+
+

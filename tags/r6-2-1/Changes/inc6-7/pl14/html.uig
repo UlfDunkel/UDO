@@ -1,0 +1,18 @@
+!begin_itemize
+
+!index !/html_modern_layout
+!index !/html_frames_layout
+!index !/html_propfont_name
+!item Bugfix: Beim (!I)!/html_modern_layout(!i) und
+(!I)!/html_frames_layout(!i) war die Angabe von
+(!I)!/html_propfont_name(!i) nutzlos (Markus Schwaiger).
+
+!item Änderung: Aufgrund der neuen fünften Gliederungsebende war es
+nicht mehr machbar, die Dokumentenstruktur in den automatisch
+generierten Dateinamen kenntlich zu machen. UDO erzeugt daher nun
+(sofern man nicht (!I)!/html_filename(!i) verwendet) Dateinamen mit
+aufsteigender hexadezimaler Nummer und vorangestelltem Prefix
+''(!V)u_(!v)''.
+
+!end_itemize
+

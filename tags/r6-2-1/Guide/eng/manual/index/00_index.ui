@@ -1,0 +1,115 @@
+############################################################
+# @(#) Command index, Dirk Hagedorn, 26.10.1995
+############################################################
+
+!node Command index
+
+In this chapter you will find a short description of every UDO command in
+alphabetical order. The command description shows you the meaning of the
+descriptions.
+
+# Hypertext formats will print a table with the alphabet
+
+!ifdest [win,html,stg,pch,tvh,aqv]
+	!ignore_subtoc
+
+	!hline
+
+	!begin_table [cccccc]
+	A!.. !! B!.. !! C!.. !! D!.. !! E!.. !! F!..
+	G!.. !! H!.. !! I!.. !! J!.. !! K!.. !! L!..
+	M!.. !! N!.. !! O!.. !! P!.. !! Q!.. !! R!..
+	S!.. !! T!.. !! U!.. !! V!.. !! W!.. !! X!..
+	Y!.. !! Z!..
+	*!..
+	!end_table
+	
+!endif
+
+!include	index/explain.ui
+
+
+!sloppy
+
+!subnode A!..
+!include index/db/com_a.ui
+
+!subnode B!..
+!include index/db/com_b.ui
+
+!subnode C!..
+!include index/db/com_c.ui
+
+!subnode D!..
+!include index/db/com_d.ui
+
+!subnode E!..
+!include index/db/com_e.ui
+
+!subnode F!..
+!include index/db/com_f.ui
+
+!subnode G!..
+!include index/db/com_g.ui
+
+!subnode H!..
+!include index/db/com_h.ui
+
+!subnode I!..
+!include index/db/com_i.ui
+
+# !subnode J!..
+# !include index/db/com_j.ui
+
+# !subnode K!..
+# !include index/db/com_k.ui
+
+!subnode L!..
+!include index/db/com_l.ui
+
+!subnode M!..
+!include index/db/com_m.ui
+
+!subnode N!..
+!include index/db/com_n.ui
+
+!subnode O!..
+!include index/db/com_o.ui
+
+!subnode P!..
+!include index/db/com_p.ui
+
+# !subnode Q!..
+# !include index/db/com_q.ui
+
+!subnode R!..
+!include index/db/com_r.ui
+
+!subnode S!..
+!include index/db/com_s.ui
+
+!subnode T!..
+!include index/db/com_t.ui
+
+!subnode U!..
+!include index/db/com_u.ui
+
+!subnode V!..
+!include index/db/com_v.ui
+
+!subnode W!..
+!include index/db/com_w.ui
+
+!subnode X!..
+!include index/db/com_x.ui
+
+# !subnode Y!..
+# !include index/db/com_y.ui
+
+# !subnode Z!..
+# !include index/db/com_z.ui
+
+!subnode *!..
+!include index/db/com_etc.ui
+
+!fussy

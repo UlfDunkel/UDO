@@ -1,0 +1,58 @@
+!node Bugs
+!html_name bugs
+
+Die folgenden Fehler sind derzeit bekannt und werden bald beseitigt:
+
+!begin_description
+
+!item	[Schriftarten in Indizes:]
+In Indizes können derzeit keine Schriftarten gesetzt werden.  Abhilfe:
+Setzen Sie die Schriftarten-Platzhalter außerhalb des
+(!I)(!/idx~!..)(!i)-Befehls.
+		
+!item	[Bilder & em(!TeX):]
+Die Ausgabe von MSP- und PCX-Bitmaps mittels em(!TeX) ist immer noch
+ziemlich ungetestet. Erste Tests verliefen bei mir erfolgreich. Falls die
+Ausgabe bei Ihnen nicht funktionieren sollte, so verwenden Sie das Kommando
+(!T)!/no_images~[tex](!t) und sorgen Sie mit der raw-Umgebung bitte selber
+für die nötige Einbindung der Bilder.
+
+!item	[Kleine Fehler bei der Formatierung in WinHelp:]
+Wenn viele Kapitel benutzt werden und die Kapitelnummern ""breit"" werden,
+kann es zu falschen Einrückungen in den Inhaltsverzeichnissen kommen.
+Benutzen Sie dann den Schalter (!T)!/no_numbers~[win](!t).
+
+!item	[Inhaltsverzeichnisse:]
+In Inhaltsverzeichnissen werden überlange Überschriften noch nicht
+umbrochen. Außerdem werden die Überschriften nicht immer in der gleichen
+Spalte ausgerichtet (""1.9""-""1.10""-Problem).
+
+!item	[Tabellen:]
+Die Breite von Zellen einer Tabelle wird nicht immer sicher erkannt,
+speziell dann, wenn man darin manuelle Querverweise oder andere
+Spezialitäten verwendet.
+
+!end_description
+
+Falls Sie einen weiteren Fehler entdeckt haben sollten, so melden Sie ihn
+(!link [mir] [Kontaktadresse]) bitte. Vergessen Sie dabei bitte nicht, mir
+die folgenden Dinge mitzuteilen:
+
+
+!begin_itemize
+
+!item	Welche UDO-Version verwenden Sie?
+
+!item	Welches Betriebssystem setzen Sie ein?
+
+!item	Tritt der Fehler immer auf oder nur manchmal?
+
+!item	Woran könnte es Ihrer Meinung liegen, daß UDO fehlerhaft arbeitet?
+
+!item	Können Sie mir ein kurzes Beispiel nennen, bei dem der beobachtete
+		Fehler auftritt?
+
+!item	Falls der Fehler umwandlungstechnischer Art ist, was sollte UDO
+		Ihrer Meinung nach anstelle der derzeitigen Ausgabe erzeugen?
+
+!end_itemize

@@ -1,0 +1,27 @@
+############################################################
+# @(#) Miszellaneen, Dirk Hagedorn, 31.12.1995
+############################################################
+
+!subnode Miszellaneen
+
+# Verteilte Dokumente
+!include syntax/misc/include.ui
+
+# Makros
+!include syntax/misc/macro.ui
+
+# Makros
+!include syntax/misc/define.ui
+
+# Symbole
+!include syntax/misc/symbol.ui
+
+# Indizes
+!include syntax/misc/index.ui
+
+# Abfragen
+!include syntax/misc/if.ui
+
+# Formatspezifische Befehle
+!include syntax/misc/format.ui
+
