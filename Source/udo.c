@@ -3809,6 +3809,7 @@ LOCAL void convert_image ( const BOOLEAN visible )
 			c_rtf_quotes(caption);
 			c_win_styles(caption);
 			c_bmp_output(filename, caption, visible);	/*r6pl6*/
+			break;
 		case TOHPH:	/* <???> */
 			break;
 	}
@@ -5164,7 +5165,8 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 					if ( strncmp(z, "\\\\[", 3)==0 )
 					{	qreplace_once(z, "[", 1, "{\\symbol{91}}", 13);
 					}
-					/* Durchfall */
+					auto_references(z, FALSE, "", 0, 0);
+					break;
 				case TOPDL:
 					auto_references(z, FALSE, "", 0, 0);
 					break;
@@ -5402,7 +5404,8 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 				if ( strncmp(z, "\\\\[", 3)==0 )
 				{	qreplace_once(z, "[", 1, "{\\symbol{91}}", 13);
 				}
-				/* Durchfall */
+				auto_references(z, FALSE, "", 0, 0);
+				break;
 			case TOPDL:
 				auto_references(z, FALSE, "", 0, 0);
 				break;
@@ -10210,7 +10213,9 @@ LOCAL void init_lang ( void )
 		  	uni2ascii(lang.update);
 		  	break;
 	}
-
+	
+	toc_init_lang();
+	
 }	/*init_lang*/
 
 
