@@ -4213,7 +4213,7 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 			um_strcpy(nodename, n, 511, "make_node TOKPS");
 			node2postscript(nodename, KPS_NODENAME);
 			voutlnf("/NodeName (%s %s) def", lang.chapter, nodename);
-/*			voutlnf("/NodeName (%s %.*s) def", lang.chapter, (int)(75L-strlen(titdat.author)), n); /* Changed in r6pl16 [NHz] */*/
+/*			voutlnf("/NodeName (%s %.*s) def", lang.chapter, (int)(75L-strlen(titdat.author)), n);*/
 			outln("newline");
 			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
 			outln("Bon");
