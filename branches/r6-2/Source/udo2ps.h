@@ -141,7 +141,7 @@ const char *UDO2PS=
 	"  { /fontmerk actualfont def\n"
 	"    Voff\n"
 	"  } if\n"
-	"  /fontmerksizemerk fontsize def\n"
+	"  /fontsizemerk fontsize def\n"
 	"  11 changeFontSize\n"
 	"  bold true eq\n"
 	"  { Boff\n"
