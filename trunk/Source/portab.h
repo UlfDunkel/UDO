@@ -41,159 +41,63 @@
 
 /*	--------------------------------------------------------------	*/
 
-#ifdef	__BORLANDC__
-#define	FAR		far
-#define	NEAR	near
-#define	HUGE	huge
-#else
-#define	FAR
-#define	NEAR
-#define	HUGE
-#endif
-
-/*	--------------------------------------------------------------	*/
-
 #ifdef __MSDOS__
-	#ifndef WORD
-	#define	WORD	short
-	#endif
-	#ifndef UWORD
-	#define	UWORD	unsigned short
-	#endif
 #endif
 
 /*	--------------------------------------------------------------	*/
 
 #ifdef __WIN32__
-	#ifndef WORD
-	#define	WORD	short
-	#endif
-	#ifndef UWORD
-	#define	UWORD	unsigned short
-	#endif
 #endif
 
 /*	--------------------------------------------------------------	*/
 
 #ifdef __TOS__
-	#ifndef WORD
-	#define WORD	int
-	#endif
-	#ifndef UWORD
-	#define	UWORD	unsigned short
-	#endif
 #endif
 
 /*	--------------------------------------------------------------	*/
 
 #ifdef __LINUX__
-	#ifndef WORD
-	#define WORD	int
-	#endif
-	#ifndef UWORD
-	#define	UWORD	unsigned int
-	#endif
 #endif
 
 /*	--------------------------------------------------------------	*/
 
 #ifdef __SUNOS__
-	#ifndef WORD
-	#define WORD	int
-	#endif
-	#ifndef UWORD
-	#define	UWORD	unsigned int
-	#endif
 #endif
 
 /*	--------------------------------------------------------------	*/
 
 #ifdef __NEXTSTEP__
-	#ifndef WORD
-	#define WORD	int
-	#endif
-	#ifndef UWORD
-	#define	UWORD	unsigned int
-	#endif
 #endif
 
 /*	--------------------------------------------------------------	*/
 
 #ifdef __HPUX_ISO__
-	#ifndef WORD
-	#define WORD	int
-	#endif
-	#ifndef UWORD
-	#define	UWORD	unsigned int
-	#endif
 #endif
 
 /*	--------------------------------------------------------------	*/
 
 #ifdef __HPUX_ROMAN8__
-	#ifndef WORD
-	#define WORD	int
-	#endif
-	#ifndef UWORD
-	#define	UWORD	unsigned int
-	#endif
 #endif
 
 /*	--------------------------------------------------------------	*/
 
 #ifdef __AMIGA__
-	#ifndef WORD
-	#define WORD	int
-	#endif
-	#ifndef UWORD
-	#define	UWORD	unsigned int
-	#endif
 #endif
 
 /*	--------------------------------------------------------------	*/
 
 #ifdef __SINIX__
-	#ifndef WORD
-	#define WORD	int
-	#endif
-	#ifndef UWORD
-	#define	UWORD	unsigned int
-	#endif
 #endif
 
 /*	--------------------------------------------------------------	*/
 
 #ifdef __BEOS__
-	#ifndef WORD
-	#define WORD	int
-	#endif
-	#ifndef UWORD
-	#define	UWORD	unsigned int
-	#endif
 #endif
 
 /*	--------------------------------------------------------------	*/
 
 #ifdef __MACOS__
-	#ifndef WORD
-	#define WORD	short
-	#endif
-	#ifndef UWORD
-	#define	UWORD	unsigned short
-	#endif
-
-	#define __SHAREWARE__ 0
 	#define __AddLFToNL__ 0	/* solange es keinen HCP auf dem Mac gibt notwendig */
-#endif
-
-/*	--------------------------------------------------------------	*/
-
-#ifndef	WORD
-#error	"WORD not defined in portab.h!"
-#endif
-
-#ifndef	UWORD
-#error	"UWORD not defined in portab.h!"
 #endif
 
 /*	--------------------------------------------------------------	*/
@@ -207,4 +111,3 @@
 #endif
 
 #endif	/* PORTAB_H */
-
