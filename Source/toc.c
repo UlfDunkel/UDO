@@ -2592,10 +2592,6 @@ LOCAL void html_back_giflink ( const int idxEnabled, const int idxDisabled, cons
 		}
 
 		/* Changed in r6pl16 [NHz] */
-		/*		if (no_images)	/*r6pl2*/
-		{	voutlnf("%s<a href=\"%s\"%s>^^^</a>",
-						sep, sDocHtmlBackpage, target);
-		}*/
 		if (no_images)
 		{	voutlnf("%s<a href=\"%s\"%s>%s</a>",
 						sep, href, target, alt);
@@ -6201,6 +6197,7 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 											'A'-1+toc[i]->nr1+toc_offset,
 											toc[i]->nr2+subtoc_offset,
 											toc[i]->nr3+subsubtoc_offset,
+											toc[i]->nr4+subsubsubtoc_offset,
 											n, s);
 					}/* TOC_NODE4 */
 
