@@ -790,13 +790,18 @@ LOCAL BOOLEAN convert_link_pch ( char *s, const char *p0, char *p1, char *p2, co
 LOCAL BOOLEAN convert_link_tex ( char *s, const char *p0, char *p1, char *p2 )
 {
 	char s_entry[1024];
-
+	int li, ti;
+	BOOLEAN isnode;
+	char nodename[256];
+	
 	convert_tilde(p1);
 	convert_tilde(p2);
 	replace_udo_quotes(p1);
 	replace_udo_quotes(p2);
 	label2tex(p2);
 	
+	is_node_link(p2, nodename, &ti, &isnode, &li);
+
 	sprintf(s_entry, "%s (%s \\ref{%s})", p1, lang.see, p2);
 
 	if ( insert_placeholder(s, p0, s_entry, p1) )
@@ -849,7 +854,12 @@ LOCAL BOOLEAN convert_link_pdf ( char *s, const char *p0, char *p1, char *p2, co
 LOCAL BOOLEAN convert_link_lyx ( char *s, const char *p0, char *p1, char *p2 )
 {
 	char s_entry[1024];
+	int li, ti;
+	BOOLEAN isnode;
+	char nodename[256];
 	
+	is_node_link(p2, nodename, &ti, &isnode, &li);
+
 	sprintf(s_entry,
 		"%s (%s \n\\begin_inset LatexDel \\ref{%s}\n\n\\end_inset\n\n)",
 		p1, lang.see, p2);
@@ -865,7 +875,12 @@ LOCAL BOOLEAN convert_link_lyx ( char *s, const char *p0, char *p1, char *p2 )
 LOCAL BOOLEAN convert_link_tvh ( char *s, const char *p0, char *p1, char *p2 )
 {
 	char s_entry[1024];
+	int li, ti;
+	BOOLEAN isnode;
+	char nodename[256];
 	
+	is_node_link(p2, nodename, &ti, &isnode, &li);
+
 	node2vision(p2);
 	sprintf(s_entry, "{%s:%s}", p1, p2);
 
