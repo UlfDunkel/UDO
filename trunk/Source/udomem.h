@@ -35,12 +35,10 @@
  * statements, to get rid of some compiler warnings. This tests if Linux is used,
  * so the Symbol UM_PRINTF_USE_LD is set to switch this behavior on, otherwise the
  * symbol is deleted
+ * Note: at the moment I don't know for which compiler this will be need, so its
+ * always undef
  */
-#ifdef __LINUX__
-#define UM_PRINTF_USE_LD
-#else
 #undef UM_PRINTF_USE_LD
-#endif
 /*
  * Declarations for vars that keep memory management information
  */
