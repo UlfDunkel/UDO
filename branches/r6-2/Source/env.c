@@ -2889,8 +2889,7 @@ GLOBAL void c_begin_document ( void )
 	switch (desttype)
 	{
 		case TOPDL:
-			/* Changed in r6.2pl1 [NHz] */
-			if (titdat.author!=NULL || titdat.title!=NULL || titdat.program!=NULL )
+			/* Changed in r6.2pl1 [NHz] */ 			if (titdat.author!=NULL || titdat.title!=NULL || titdat.program!=NULL )
 			{	outln("\\pdfinfo {");
 				if (titdat.title!=NULL) voutlnf("  /Title (%s)", titdat.title);
 				if (titdat.author!=NULL) voutlnf("  /Author (%s)", titdat.author);

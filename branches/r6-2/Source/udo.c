@@ -10711,8 +10711,7 @@ LOCAL void init_vars_pdf ( void )
 	if (desttype==TOPDL)
 	{
 		bTex2e= TRUE;
-		/* Deleted in r6.2pl1 [NHz] */
-		/* iTexVersion= TEX_MIKTEX; */
+		/* Deleted in r6.2pl1 [NHz] */ 		/* iTexVersion= TEX_MIKTEX; */
 	}
 }
 
@@ -10945,9 +10944,7 @@ GLOBAL void init_vars ( void )
 	iTexDPI=				100;
 	cTexVerb=				VERB_C;
 	bTex2e=					TRUE;
-	/* New in r6.2pl1 [NHz] */
-	bCalledIndex=		TRUE;
-
+	/* New in r6.2pl1 [NHz] */ 	bCalledIndex=		TRUE; 
 	iDrcFlags=				0;
 	
 	iManPageLines=			0;
