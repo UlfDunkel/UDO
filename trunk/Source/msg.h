@@ -29,7 +29,7 @@
 	# Ausgabe von Strings ins Logfile
 	######################################################################	*/
 GLOBAL void logln ( const char *s );
-GLOBAL void vloglnf ( const char *fmt, ... );
+GLOBAL void vloglnf ( const char *fmt, ... ) __attribute__((format(printf, 1, 2)));
 
 
 /*	######################################################################

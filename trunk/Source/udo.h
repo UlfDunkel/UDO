@@ -286,8 +286,8 @@ GLOBAL BOOLEAN		bCalledIndex;				/* !index ignorieren und keinen Index?	*/
 	######################################################################	*/
 GLOBAL void outln (const char *s);
 GLOBAL void out (const char *s);
-GLOBAL void voutlnf ( const char *fmt, ... );
-GLOBAL void voutf ( const char *fmt, ... );
+GLOBAL void voutlnf ( const char *fmt, ... ) __attribute__((format(printf, 1, 2)));
+GLOBAL void voutf ( const char *fmt, ... ) __attribute__((format(printf, 1, 2)));
 
 
 /*	######################################################################
