@@ -1,0 +1,55 @@
+!subnode	Fragen zum ASCII-Format
+!ignore_links
+!html_name faqascii
+
+!begin_description
+
+##################################################
+!item [Ist eine Aufteilung in mehrere Dateien geplant?] ~
+
+Bisher hat erst ein (unregistrierter) Benutzer den Wunsch geäußert, daß UDO
+wie bei HTML Kapitel etc. in eigene Dateien ausgeben soll. Da dieser Wunsch
+bisher einmalig war, bin ich ihm nicht nachgekommen.
+
+Sollte jedoch der Bedarf vorhanden sein, bin ich gerne bereit, eine solche
+Option in UDO einzubauen. Die Routinen zur (!idx [Aufteilung]) von Dateien
+sind quasi fertig und müssen nur noch für ASCII angepaßt werden.
+
+##################################################
+!item [Manche Zeilen sind länger als 70 Zeichen, warum?] ~
+
+Dies sind die Zeilen, in denen Sie Texthervorhebungen wie Fettschrift,
+kursive oder unterstrichene Wörter benutzt haben. Diese Hervorhebungen
+werden durch die Zeichen (!T)*(!t), (!T)/(!t) und (!T)_(!t) geschaffen, wie
+sie in der DFÜ üblich sind.
+
+Da einige Druckprogramme(!N)z.B. IdeaList für den Atari ST(!n) diese
+Hervorhebungen in Druckerbefehle umwandeln können bzw. einige Frontends
+diese Hervorhebungen unterstützen, zählt UDO diese Zeichen bei der
+Längenermittlung nicht mit.
+
+Möchten Sie auf die Ausgabe der oben genannten Zeichen verzichten, so
+geben Sie im Vorspann eines Quelltextes den Schalter
+(!I)!/no_effects~[asc](!i) an.
+
+##################################################
+!item [Die Umlaute in der ASCII-Datei stimmen unter Windows nicht!?] ~
+
+UDO erzeugt jeweils ASCII-Dateien, die den Systemzeichensatz
+verwenden. UDO ist allerdings ein DOS-Programm, kein Windowsprogramm!
+Daher wird auch der DOS- und nicht der Windows-ANSI-Zeichensatz für
+die Erzeugung der ASCII-Dateien verwendet.
+
+Schauen Sie sich die ASCII-Dateien mal mit dem System- oder
+Terminal-Font an. Sie werden dann sehen und mir glauben, daß die
+Umlaute stimmen.
+
+##################################################
+!item [Wie kann man die Zeilenbreite ändern?] ~
+
+Die (!idx [Zeilenbreite]) kann mit dem Befehl (!I)!/parwidth(!i)
+verändert werden.
+
+##################################################
+!end_description
+

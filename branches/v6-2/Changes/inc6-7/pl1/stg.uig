@@ -1,0 +1,18 @@
+!begin_itemize
+
+!index ST-Guide !! @width
+!item	''(!V)@width(!v)'' wird nun immer ausgegeben (Martin Osieka).
+
+!index ST-Guide !! @ignore
+!item	In ''(!V)@{ ... ignore }(!v)'' wurden auch die ''@'' angepaﬂt,
+was nicht sein durfte (Martin Osieka).
+
+!index ST-Guide !! (!/nl)
+!item	Wird (!I)(!/nl)(!i) benutzt, so entfernt UDO Leerzeichen am
+Ende der Zeile, damit Hyperion nicht durcheinander ger‰t (Manfred Osieka).
+
+!index ST-Guide !! !/chapterimage
+!item	Chapterimages wurden nicht zentriert ausgegeben.
+
+!end_itemize
+

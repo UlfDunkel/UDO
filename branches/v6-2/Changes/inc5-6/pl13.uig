@@ -1,0 +1,112 @@
+!subnode PL13 vom 13.10.1996
+!html_name r5_pl13
+
+!begin_description
+
+############################################################
+!item [(!ALL):] ~
+
+!begin_itemize
+
+!index	Sonderzeichen !! ß
+!item	Bugfix: In der Linux-Version wurde ein ''ß'' durch ''sz''
+		statt durch ''ss'' ersetzt.
+
+!index	Fehlermeldungen
+!item	Falls ein Fehler beim Öffnen einer Datei auftritt, wird nun
+		der Grund ausgegeben, warum es schiefgegangen ist (z.B.
+		""Permission denied"" oder ""No such file or directory"").
+
+!index	UDO-Shell !! Windows
+!item	Die Windows-Shell ist ein wenig überarbeitet worden. Die
+		aktuelle Version befindet sich im DOS-Archiv.
+
+!end_itemize
+
+
+############################################################
+!item [HTML:] ~
+
+!begin_itemize
+
+!index	HTML !! !/html_name
+!item Änderung: Das Kommando lautet nun (!I)!/html_name(!i) anstatt
+(!T)!htmlname(!t).
+
+!index HTML !! !/html_keywords
+!item Änderung: Das Kommando lautet nun (!I)!/html_keywords(!i) anstatt
+(!T)!htmlkeywords(!t).
+
+!end_itemize
+
+
+############################################################
+!item [(!LaTeX):] ~
+
+!begin_itemize
+
+!index	(!LaTeXe) !! Zeilenumbruch
+!item	Bugfix: Innerhalb von (!I)(!/V)!..(!/v)(!i) erfolgt nun kein
+		Zeilenumbruch mehr, da das (!LaTeXe) irgendwie gar nicht mag.
+		Das funktioniert aber nur, wenn (!I)(!/V)(!i) und (!I)!/v)(!i)
+		in einer Quelltextzeile stehen.
+
+!index	(!LaTeX) !! Sonderzeichen
+!item	Bugfix: Die Änderung bezüglich der Klammern war natürlich ein
+		Schuß in den Ofen, da auf einmal alle Klammern ersetzt wurden.
+		Nun werden nur noch öffnende eckige Klammern nach einem (!V)\\(!v)
+		durch (!V){\symbol{91}}(!v) ersetzt.
+
+!index	(!/LaTeXe) !! (!LaTeX)
+!item	Das (!LaTeXe)-Logo wird nun auch bei Benutzung von (!LaTeX)
+		2.09 korrekt ausgegeben.
+
+!end_itemize
+
+
+############################################################
+!item [LyX] ~
+
+!begin_itemize
+
+!item	Dieses Format wird ganz frisch angeboten, iX gelesen, LyX
+		und sein Format angeschaut und in knapp vier Stunden fast
+		die komplette Unterstützung durch UDO eingebaut. Ins Format
+		wird mit der Kommandozeilenoption (!T)(--)lyx(!t) gewandelt.
+		Die GEM-Version ist noch nicht darauf vorbereitet, die
+		Windows-Shell schon.
+
+		EPS-Bilder, Umgebungen (flushright und verbatim noch nicht),
+		typographische Anführungszeichen, feste Leerzeichen, Titelseite,
+		Inhaltsverzeichnis, Labels, Links, Schriftarten,
+		Fußnoten, all das sollte einigermaßen funktionieren.
+		
+		Folgendes funktioniert noch nicht:
+		
+		!begin_enumerate
+		
+		!item	Es werden noch keine Sonderzeichen umgewandelt. Falls
+		(!LaTeX) die deutschen Umlaute nicht richtig darstellen
+		sollte, dann einfach im LyX-Header (!T)...encoding default(!t)
+		durch (!T)...encoding latin1(!t) ersetzen. Dann müßte es
+		klappen, vorausgesetzt, die Quelltexte wurden mit Latin1
+		geschrieben.
+
+
+		!item	Tabellen werden nur rudimentär unterstützt, sprich die
+		Linien und die Ausrichtung der Zellen fehlen. Auch sollte man
+		keine
+		
+		!item	Indizes werden nicht unterstützt (geht das überhaupt
+		mit LyX?).
+		
+		!item	Trennvorschläge werden noch nicht übernommen.
+	
+		!end_enumerate
+		
+!end_itemize
+
+
+############################################################
+
+!end_description

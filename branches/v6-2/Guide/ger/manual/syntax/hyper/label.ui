@@ -1,0 +1,50 @@
+############################################################
+# @(#) Sprungmarken, Dirk Hagedorn, 07.11.1995
+############################################################
+
+!subsubnode Sprungmarken
+!alias Labels
+
+!index !/label
+Mit dem Befehl (!I)!/label(!i) können im Quelltext sogenannte
+Sprungmarken (""Labels"") gesetzt
+werden. Ein Beispiel für ein solches Label:
+
+!begin_quote
+!begin_verbatim
+!label Beispiel
+!end_verbatim
+!end_quote
+
+Bei den Hypertextformaten ST-Guide, HTML, WinHelp und Pure-C-Help werden
+solche Sprungmarken automatisch referenziert, d.h. es werden von UDO
+automatisch Querverweise zu diesen Sprungmarken angelegt.
+Bei WinHelp werden diese Sprungmarken zusätzlich im Suchen-Dialog
+angegeben, beim ST-Guide erscheinen sie im Index.
+
+Im Beispiel könnte man dann im
+Hypertext von jedem Wort ""Beispiel"" an die Stelle gelangen, an der diese
+Sprungmarke definiert wurde.
+
+Die Umsetzung im Detail:
+
+!begin_xlist [Linuxdoc-SGML:] !short
+
+!item [HTML:]			(!V)<a name="Beispiel"</a>(!v)
+!item [(!LaTeX):]		(!V)\label{Beispiel}(!v)
+!item [Linuxdoc-SGML:]	(!V)<label id="Beispiel">(!v)
+!item [Pure-C-Help:]	(!V)sensitive("Beispiel")(!v) im Header
+!item [ST-Guide:]		(!V)@symbol ar Beispiel(!v)
+!item [Turbo-Vision:]	(!V).topic Beispiel(!v) im Header
+!item [WinHelp:]		(!V)#{\footnote # Beispiel}(!v)
+!end_xlist
+
+!smallskip
+
+(!HINT) In einem Label sollte man keine Sonderzeichen, Kommata,
+Semikolen, Anführungsstriche oder Apostrophe benutzen, da dies bei einigen
+der Ausgabeformate zu Problemen kommen kann. Versuchen Sie bitte daher, ohne
+diese Sonderzeichen auszukommen. In den meisten Fällen ist dies durchaus
+machbar. Umlaute und Ziffern hingegen sind unproblematisch, da diese von UDO
+besonders beachtet werden.
+

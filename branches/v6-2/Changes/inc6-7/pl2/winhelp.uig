@@ -1,0 +1,14 @@
+!begin_itemize
+
+!index Nummern !! WinHelp
+!item	Änderung: UDO benutzt nun Nummern zur Referenzierung der Nodes
+innerhalb der RTF-Datei. Dadurch ist es möglich, Nodes zu benutzen,
+die sich nur durch Groß-/Kleinschrebung unterscheiden.
+
+!index Inhaltsverzeichnisse !! WinHelp
+!item	Bugfix: In den Subtocs stimmte die Einrückung bei manchen
+Einträgen nicht. Man sah nur noch die letzte Nummer (Peter-F
+Bajetto).
+
+!end_itemize
+

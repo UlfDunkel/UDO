@@ -1,0 +1,101 @@
+!begin_itemize
+
+!index !/docinfo [webmastermailto]
+!index webmastermailto
+!item Neu: Mittels (!I)!/docinfo~[webmastermailto](!i) kann Einfluß auf
+die Ausgabe der Mail-URL im Footer einer HTML-Seite genommen werden
+(Martin Elsässer).
+Wird dieses ""docinfo"" benutzt, so hat es Vorrang vor
+(!I)!/docinfo~[webmastermail](!i). Beispiel:
+!begin_verbatim
+!docinfo [webmastermailto] dhagedorn@t-online.de?subject=UDO
+!end_verbatim
+
+!index Bilder
+!item Neu: UDO erzeugt nun zusätzlich neue, deaktivierte Bilder, um
+kreuz und quer durch eine Homepage zu browsen. Ist ein Link vorhanden
+und sinnvoll, wird das normale Bild ausgegeben, ansonsten ein
+deaktiviertes.
+
+!index Bilder
+!item Neu: Benutzt man im Vorspann den Schalter
+(!I)!/html_transparent_buttons(!i), so erzeugt UDO statt der bisher
+bekannten Navigationsbuttons kleinere, transparente Buttons (wie diese
+aussehen, könnt Ihr auf meiner Homepage betrachten).
+
+!index Inhaltsverzeichnis
+!item Änderung: Im Inhaltsverzeichnis wird zur Erzeugung zusätzlicher
+Leerzeilen nicht mehr (!V)<p>(!v) sondern (!V)<br>&nbsp;(!v) benutzt
+(Alexander Clauss, Thomas Much).
+
+!index Inhaltsverzeichnis
+!item Änderung: Im Inhaltsverzeichnis waren die Tags (!V)<li>(!v) und
+(!V)<b>(!v) vertauscht (Alexander Clauss, Thomas Much).
+
+!index !/html_modern_layout
+!index !/html_frames_layout
+!index authoricon
+!index !/docinfo [authoricon]
+!item Änderung: Bei Frames und Blindtabellen wird unterhalb des
+""authoricon"" keine Trennlinie ((!V)<hr>(!v)) ausgegeben (Wilfried
+Behne). Wer weiterhin eine sehen möchte, kann seine Grafik entsprechend
+anpassen.
+
+!index !/use_auto_toptocs
+!index !/no_images
+!item Änderung: Beim Einsatz von (!I)!/no_images(!i) werden nun auch in
+den ""Top-Tocs"" keine Bilder mehr benutzt, sondern die Ordnerstruktur
+mit ASCII-Zeichen angedeutet.
+
+!index !/no_images
+!item Änderung: Beim Einsatz von (!I)!/no_images(!i) werden wie bisher
+keine Browse-Buttons ausgegeben, allerdings wird nicht mehr das Linkziel
+ausgegeben, sondern ASCII-Pfeile, welche zudem mit eckigen Klammern und
+Pipesymbolen voneinander getrennt sind.
+
+!item Änderung: UDO sollte nun mit den Browse-Buttons in der Kopf- und
+Fußzeile nun immer den richtigen Vorgänger und Nachfolger ansteuern,
+auch dann, wenn man Kapitelnamen doppelt vergeben hat (Herbert Müller).
+
+!index !/chaptericon
+!item Änderung: Konnte UDO ein (!I)!/chaptericon(!i) nicht finden, wird
+dies nun im Logfile bemängelt.
+
+!index !/html_modern_layout
+!index !/html_frames_layout
+!item Änderung: Die benutzten Tabellen zum Layouten der Seiten, wenn
+man (!I)!/html_modern_layout(!i) oder (!I)!/html_frames_layout(!i)
+benutzt, wurden verbessert. So wird nun immer die ganze Browserfläche
+genutzt, so daß bei wenig Text z.B. ein (!V)<hr>(!v) nicht nur die Hälfte der
+Seite belegt (Wilfried Behne).
+
+!index (!/img)
+!item Bugfix: Beim Auslesen der Ausmaße der Inline-Bilder ((!/img))
+wurde auch dann, wenn es kein GIF war und (!I)!/no_img_size(!i) gesetzt
+wurde gesucht. Außerdem wurde nicht im Outfile-Pfad gesucht.
+
+!index !/docinfo [authoricon]
+!index !/html_img_suffix
+!item Bugfix: (!I)!/docinfo~[authoricon](!i) beachtet nun die
+Einstellungen von (!I)!/html_img_suffix(!i) und verlangt nicht mehr
+zwingend ein GIF. Außerdem wird kein Doppel-"".gif"" mehr erzeugt, wenn
+man die Endung bereits angegeben hatte (Wilfried Behne). Wird ein GIF
+benutzt und konnte UDO das GIF nicht öffnen, um die Ausmaße zu
+ermitteln, so gibt UDO eine Fehlermeldung aus.
+
+!index Anführungszeichen
+!item Bugfix: Doppelte Anführungszeichen wurden falsch umgesetzt. Bei
+dem zweiten (!V)&quot;(!v) wurden Zeichen abgeschnitten (Hans F. Braun).
+
+!index Inhaltsverzeichnis
+!index #UDOTOC
+!item Bugfix: Wenn kein Inhaltsverzeichnis ausgegeben wird, sprich
+(!I)!/tableofcontents(!i) nicht benutzt wird, so wird kein Link mehr auf
+""(!V)#UDOTOC(!v)"" mehr ausgegeben (Michael Depke).
+
+!index !/html_modern_layout
+!item Bugfix: Beim Einsatz von (!I)!/html_modern_layout(!i) wurden noch
+zwei überflüssige ""(!V)rowspan=2(!v)"" ausgegeben.
+
+!end_itemize
+

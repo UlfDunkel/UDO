@@ -1,0 +1,12 @@
+!begin_itemize
+
+!index !/tex_2e
+!index !/tex_209
+!index LaTeX 2e
+!index LaTeX 2.09
+!item Änderung: Die Ausgabe von (!LaTeXe)-Code ist nun Default. Wer
+weiterhin (!LaTeX)~2.09-Code erzeugen möchte, der muß im Vorspann den
+neuen Schalter (!I)!/tex_209(!i) angeben.
+
+!end_itemize
+

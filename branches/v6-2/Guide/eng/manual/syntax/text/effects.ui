@@ -1,0 +1,76 @@
+############################################################
+# @(#) Text styles
+############################################################
+!subsubnode	Text styles
+
+UDO enables you to set text styles right inside the source file.
+
+At the moment UDO supports
+(!B)bold(!b),
+(!I)italic(!i),
+(!U)underlined(!u),
+(!V)preformatted(!v) and
+(!T)non-proportional text(!t).
+
+If you want to display a single word or some words in a certain text style
+you have to use them between the according placeholders. Look, how the upper
+paragraph was made:
+
+!begin_verbatim
+At the moment UDO supports
+(!B)bold(!b),
+(!I)italic(!i),
+(!U)underlined(!u),
+(!V)preformatted(!v) and
+(!T)non-proportional text(!t).
+!end_verbatim
+
+In this table you will see in which way the placeholders will be replaced:
+
+!begin_table [|l|l|l|l|l|l|l|] !hline
+UDO  !! ASCII !! ST-Guide !! LaTeX       !! RTF      !! WinHelp !! HTML
+!hline
+(!V)(!/B)(!v) !! (!V)*(!v)     !! (!V)@{B}(!v)     !! (!V){\bf(!v)        !! (!V){\b(!v)      !! (!V){\b(!v)     !! (!V)<B>(!v)
+(!V)(!/b)(!v) !! (!V)*(!v)     !! (!V)@{b}(!v)     !! (!V)}(!v)           !! (!V)}(!v)        !! (!V)}(!v)       !! (!V)</B>(!v)
+!hline
+(!V)(!/I)(!v) !! (!V)/(!v)     !! (!V)@{I}(!v)     !! (!V){\it(!v)        !! (!V){\i(!v)      !! (!V){\i(!v)     !! (!V)<I>(!v)
+(!V)(!/i)(!v) !! (!V)/(!v)     !! (!V)@{i}(!v)     !! (!V)}(!v)           !! (!V)}(!v)        !! (!V)}(!v)       !! (!V)</I>(!v)
+!hline
+(!V)(!/U)(!v) !! (!V)_(!v)     !! (!V)@{U}(!v)     !! (!V){\underline(!v) !! (!V){\ul(!v)     !! (!V){\ul(!v)    !! (!V)<U>(!v)
+(!V)(!/u)(!v) !! (!V)_(!v)     !! (!V)@{u}(!v)     !! (!V)}(!v)           !! (!V)}(!v)        !! (!V)}(!v)       !! (!V)</U>(!v)
+!hline
+(!V)(!/V)(!v) !!       !!          !! (!V)\verb+(!v)      !! (!V){\f1(!v)     !! (!V){\f1(!v)    !! (!V)<PRE>(!v)
+(!V)(!/v)(!v) !!       !!          !! (!V)+(!v)           !! (!V)}(!v)        !! (!V)}(!v)       !! (!V)</PRE>(!v)
+!hline
+(!V)(!/T)(!v) !!       !!          !! (!V){\tt(!v)        !! (!V){\f1(!v)     !! (!V){\f1(!v)    !! (!V)<TT>(!v)
+(!V)(!/t)(!v) !!       !!          !! (!V)}(!v)           !! (!V)}(!v)        !! (!V)}(!v)       !! (!V)</TT>(!v)
+!hline
+!end_table
+
+!index !/no_effects
+
+As you see here for the ASCII format there will be used the text style
+commands as they are used in Usenet. If you don't like them you can use the
+switch called (!I)!/no_effects(!i) to suppress them. Use
+(!I)!/no_effects~[asc](!i) to suppress the text style commands when
+converting to ASCII.
+
+(!HINT) Definitions are great for programming user-defined text styles. It's
+for sure that you need some knowledge about the destination forma to do
+this. The following example show how to use ghosted text which is available
+for the ST-Guide:
+
+!begin_quote
+!begin_verbatim
+!ifdest [stg]
+    !define G @{G}
+    !define g @{g}
+!else
+    !define G
+    !define g
+!endif
+        
+Normal and (!G)ghosted(!g).
+!end_verbatim
+!end_quote
+        

@@ -1,0 +1,100 @@
+############################################################
+# @(#) Symbole, Dirk Hagedorn, 03.10.1996
+############################################################
+
+!subsubnode Symbols
+
+!index -D
+!index !/set
+!index !/unset
+!index !/ifset
+!index !/ifnset
+
+Symbols are user-defined variables which can be set with the (!I)!/set(!i)
+command or via the command line with the (!V)-D(!v) option. Symbols can be
+deleted with the (!I)!/unset(!i) command. If a symbol is set you can test
+with the query commands (!I)!/ifset(!i) and (!I)!/ifnset(!i).
+
+Symbols can be used for different purposes. In the following example I will
+show you how to make a destination file with a different contents depending
+on set symbols.
+
+Assuming that you have written a soure file that contains three chapters,
+the first two chapters have been finished and you are still working on the
+third chapter. To mimize the conversion time of UDO you want only to convert
+the last chapter if the symbol ''(!V)AllChapters(!v)'' is set:
+
+!autoref [off]
+!begin_quote
+!begin_verbatim
+!begin_document
+!tableofcontents
+!ifset [AllChapters]
+!include chapter1.ui
+!include chapter2.ui
+!endif
+!include chapter3.ui
+!end_document
+!end_verbatim
+!end_quote
+!autoref [on]
+
+If you start UDO as you without setting the symbol it will make a
+destination file that contains all chapters. If you set the symbol via
+adding the option ''(!T)-D~AllChapters(!t)'' you will get a destination file
+that contains only the last chapter.
+
+You can even do more. If you use more symbols you can make destination files
+with only one, some or all chapters. If you use the following example and
+you call UDO with the option ''(!T)-D~Chapter1(!t)'' you will get only the
+first chapter. If you call UDO with the options ''(!T)-D~Chapter1(!t)'' and
+''(!T)-D~Chapter2(!t)'' you will get a destination file with the first and
+second chapter. If you call UDO with the option ''(!T)AllChapters(!t)'' you
+will get a complete destination file:
+
+!autoref [off]
+!begin_quote
+!begin_verbatim
+!begin_document
+!tableofcontents
+!ifset [Chapter1, AllChapters]
+!include chapter1.ui
+!endif
+!ifset [Chapter2, AllChapters]
+!include chapter2.ui
+!endif
+!ifset [Chapter3, AllChapters]
+!include chapter3.ui
+!endif
+!end_document
+!end_verbatim
+!end_quote
+!autoref [on]
+
+As I descriped at the beginning of this section you can delete symbols with
+the (!I)!/unset(!i) command.
+
+If you want to avoid that all chapters are saved in the destination file you
+can add the following lines to the beginning of your source file. Here the
+symbol ''(!V)AllChapters(!v)'' will be deleted if it's set:
+
+!autoref [off]
+!begin_quote
+!begin_verbatim
+!ifset [AllChapters]
+!unset AllChapters
+!endif
+!end_verbatim
+!end_quote
+!autoref [on]
+
+In first place it will be testet if the symbol is set. If you don't test the
+symbol UDO will print an error message if you want to delete an unused
+symbol.
+
+(!HINTS)
+
+!begin_enumerate !short
+!item	You may use up to 32 symbols.
+!item	The name of a symbol may be up to 32 characters long.
+!end_enumerate

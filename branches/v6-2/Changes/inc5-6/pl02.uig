@@ -1,0 +1,88 @@
+!subnode	PL2 vom 19.05.1996
+!html_name	r5_pl2
+
+Ab sofort werde ich keine Versionsnummern mehr verwenden, sondern neue
+Versionen mit Patchlevel bezeichnen. Version 0.49 war also Patchlevel
+1, die veröffentlichte Version 0.48 war Patchlevel 0.
+
+Diese Version wurde für die SINIX- und Linux-Version verwendet.
+
+!begin_description
+
+###########################################################
+
+!item	[(!ALL)] ~
+
+!begin_itemize
+
+!index !/english
+!index !/french
+!item Bugfix: Bei (!I)!/english(!i) und (!I)!/french(!i) fehlte die
+Bildunterschrifts-Bezeichnung.
+
+!index Bildunterschriften !! Sonderzeichen
+!item Bugfix: In den Bildunterschriften wurden keine Sonderzeichen
+umgewandelt.
+
+!index !/end_verbatim
+!index !/end_raw
+!index !/end_table
+!item Einzelne Befehle vom Typ (!I)!/end_verbatim(!i),
+(!I)!/end_raw(!i) und (!I)!/end_table(!i) werden nun bemängelt. Da
+konnte man schon eine halbe Stunde lang an sich zweifeln, wenn der HC
+keine WinHelp-Datei erzeugen will, UDO aber nicht meckert, weil ein
+unnützes (!I)!/end_verbatim(!i) im Text steht.
+
+!index !/no_umlaute
+!item (!I)!/no_umlaute(!i) wirkt sich nun auch auf andere
+Sonderzeichen aus. Nun werden nicht nur die deutschen Umlaute sondern
+auch französische Zeichen angepaßt.
+
+!index !/include
+!item Findet UDO ein (!I)!/include(!i)-File nicht, wird nur noch eine
+Fehlermeldung ausgegeben.
+
+!item Zuviele Worte in einem Absatz werden nun bemängelt.
+
+!item Die Benutzung zuvieler Kapitel, Labels und Aliasses wird nun
+bemängelt. Vorher stürzte UDO einfach ab.
+
+!index !/include !! Rekursion
+!item Sind zuviele Dateien gleichzeitig geöffnet, so meckert UDO.
+Dadurch erkennt UDO zwar noch keine rekursive Benutzung von
+(!I)!/include(!i), es stürzt aber auch nicht mehr ab (unter DOS gibt's
+trotzdem noch einen SIGILL samt Core Dump wegen Hardware Fault #2!?).
+
+!end_itemize
+
+
+###########################################################
+
+!item	[PDF] ~
+
+!begin_itemize
+
+!index PDF
+!item	Erste Vorbereitungen für das Portable Document Format. Das
+wird noch ein langer Weg, wenn es überhaupt machbar sein wird, dieses
+Format zu erzeugen. Adobe hat sich da vielleicht etwas ausgedacht!..
+
+!end_itemize
+
+
+###########################################################
+
+!item	[Texinfo] ~
+
+!begin_itemize
+
+!index Texinfo !! Tabellen
+!item	Bugfix: Tabellen wurden falsch dargestellt, da vergessen wurde,
+(!V)@example(!v) und (!V)@end example(!v) auszugeben.
+
+!end_itemize
+
+
+###########################################################
+
+!end_description

@@ -1,0 +1,33 @@
+!subnode Tips & Tricks zum WinHelp-Format
+!ignore_links
+
+###########################################################
+!subsubnode Schreiben Sie die Quelltexte mit einem Windows-Editor
+!ignore_links
+
+Sie können die Laufzeit von UDO positiv beinflussen, wenn Sie
+Quelltexte für eine Windows-Hilfe gleich im Windows-Zeichensatz
+schreiben. UDO braucht in dem Falle keine aufwendige
+Zeichensatzkonvertierung vornehmen.
+
+Achten Sie hierbei darauf, daß Sie den Schalter (!I)!/code_iso(!i)
+benutzen, um UDO anzuzeigen, daß die Texte nicht im DOS-Zeichensatz
+erstellt wurden.
+
+Tip: Als Editor empfehle ich den ""Programmer's File Editor"" (kurz: PFE)
+von Alan Phillips, einen grandiosen Freeware-Editor, der in einer
+16- und 32-Bit-Version verfügbar ist. Man findet Ihn auf vielen CD-ROMs und
+natürlich auf fast jedem FTP-Server.
+
+###########################################################
+!subsubnode Komprimieren Sie die WinHelp-Dateien
+!ignore_links
+
+Mit den Schaltern (!I)!/win_medium_compression(!i) und
+(!I)!/win_high_compression(!i) sorgen Sie dafür, daß der Help-Compiler die
+WinHelp-Datei komprimiert. Dadurch können Sie die Größe der Datei bis zu
+50% verringern, wobei sich allerdings die Laufzeit des Help-Compilers,
+besonders bei der hohen Komprimierungsrate, verlängert.
+
+###########################################################
+

@@ -1,0 +1,462 @@
+!subsubnode !/set
+
+Symbol setzen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)!/set <text>(!t)
+
+!item [Beschreibung:] 
+	Mit diesem Kommando können Sie Symbole in einem Quelltext setzen, die 
+	man durch die Abfrage-Kommandos (!I)!/ifset(!i) und (!I)!/if(!i)      
+	testen kann. Symbole lassen sich auch durch die Option (!V)-D(!v)     
+	setzen. Mit dem Befehl (!I)!/unset(!i) kann man gesetzte Symbole      
+	wieder löschen. (!I)!/set(!i) können Sie überall im Quelltext         
+	benutzen.                                                             
+
+!item [Beispiel:] (!T)!/set UseColourGraphics(!t)
+
+!item [Siehe auch:] (!I)!/unset(!i), (!I)!/ifset(!i), (!I)!/ifnset(!i), Symbole
+
+!end_xlist
+#------------------------------
+!subsubnode !/short
+
+Eine Umgebung ""komprimiert"" ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/short(!t)
+
+!item [Beschreibung:] 
+	Wird dieser Schalter zusammen mit dem Befehl zum Beginnen einer       
+	Umgebung angegeben, so wird diese Umgebung in komprimierter Form      
+	ausgegeben, sprich es werden zwischen den Aufzählungspunkten keine    
+	zusätzlichen Zwischenräume erzeugt. Das Beispiel zeigt, wie man eine  
+	""komprimierte"" Itemize-Umgebung erzeugen kann.                      
+
+!item [Beispiel:] (!T)!/begin_itemize !/short(!t)
+
+!item [Siehe auch:] (!I)!/begin_itemize(!i), (!I)!/begin_enumerate(!i), (!I)!/begin_description(!i), (!I)!/use_short_envs(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/sloppy
+
+Warnungen vor kurzen Zeilen ausschalten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/sloppy(!t)
+
+!item [Beschreibung:] 
+	Schaltet die Warnung vor kurzen Zeilen aus, die ausgegeben werden,    
+	wenn ein grober rechter Flatterrand erzeugt wird oder bei Benutzung   
+	von Blocksatz zuviele Leerzeichen in eine Zeile eingefügt werden      
+	mußten. Bei der Umwandlung ins (!LaTeX)-Format erfolgt (!B)keine(!b)  
+	Umsetzung in ''(!V)\sloppy(!v)''!                                     
+
+
+!item [Siehe auch:] (!I)!/fussy(!i), Fehlermeldungen, Silbentrennung
+
+!end_xlist
+#------------------------------
+!subsubnode !/smallskip
+
+Eine zusätzliche Leerzeile einfügen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/smallskip(!t)
+
+!item [Beschreibung:] 
+	Dieser Befehl sorgt für die Ausgabe von einer zusätzlichen Leerzeile  
+	und dient dazu, Absätze deutlicher voneinander abzuheben. Bei der     
+	Umwandlung ins (!LaTeX)-Format wird keine Leerzeile sondern           
+	''(!V)\smallskip(!v)'' ausgegeben.                                    
+
+
+!item [Siehe auch:] (!I)!/medskip(!i), (!I)!/bigskip(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/sort_hyphen_file
+
+Datei mit Trennvorschlägen sortieren
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Vorspann
+
+!item [Syntax:] 
+	(!T)!/sort_hyphen_file [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	Wird dieser Schalter im Vorspann benutzt, so liest UDO nach der       
+	Umwandlung der Quelldatei die Datei mit den gesicherten               
+	Trenvorschlägen neu ein, sortiert die Zeilen und entfernt doppelte    
+	Einträge. Das Beispiel zeigt, wie man diese Option für die Umwandlung 
+	ins ASCII- und ST-Guide-Format aktivieren kann.                       
+
+!item [Beispiel:] (!T)!/sort_hyphen_file [asc,stg](!t)
+
+!item [Siehe auch:] (!I)!/hyphen(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/stg_no_database
+
+Keine Database-Zeile ausgeben (nur ST-Guide)
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Schalter, Vorspann
+
+!item [Syntax:] 
+	(!T)!/stg_no_database(!t)
+
+!item [Beschreibung:] 
+	Wird dieser Schalter im Vorspann angegeben, so wird bei der           
+	Umwandlung ins ST-Guide-Format die Ausgabe der                        
+	(!T)@database(!t)-Zeile unterbunden. Standardmäßig erzeugt UDO diese  
+	Zeile selber aus den Daten von (!I)!/title(!i) und (!I)!/program(!i). 
+
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/subheading
+
+Eine Abschnitts-Überschrift ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/subheading <text>(!t)
+
+!item [Beschreibung:] 
+	Dieser Befehl erzeugt eine Zeile mit ''<text>'', der in der gleichen  
+	Schriftart und -größe wie eine Abschnitts-Überschrift ausgegeben wird.
+
+!item [Beispiel:] (!T)!/subheading Eine Überschrift(!t)
+
+!item [Siehe auch:] (!I)!/heading(!i), (!I)!/subsubheading(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/subnode
+
+Abschnitt einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/subnode <text>(!t)
+
+!item [Beschreibung:] 
+	Leitet einen Abschnitt mit der Bezeichnung ""<text>"" ein. Abschnitte 
+	erscheinen in Inhaltsverzeichnissen.                                  
+
+!item [Beispiel:] (!T)!/subnode Titel des Abschnitts(!t)
+
+!item [Siehe auch:] (!I)!/psubnode(!i), (!I)!/node(!i), (!I)!/subsubnode(!i), (!I)!/subsubsubnode(!i), Gliederung
+
+!end_xlist
+#------------------------------
+!subsubnode !/subnode*
+
+Abschnitt ohne Eintrag im Inhaltsverzeichnis einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/subnode* <text>(!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando hat die gleiche Funktion wie !/subnode, mit der       
+	Ausnahme, daß ""<text>"" nicht in Inhaltsverzeichnissen erscheint.    
+
+!item [Beispiel:] (!T)!/subnode* Titel des versteckten Abschnitts(!t)
+
+!item [Siehe auch:] (!I)!/subnode(!i), (!I)!/psubnode*(!i), Gliederung
+
+!end_xlist
+#------------------------------
+!subsubnode !/subsubheading
+
+Eine Unterabschnitts-Überschrift ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/subsubheading <text>(!t)
+
+!item [Beschreibung:] 
+	Dieser Befehl erzeugt eine Zeile mit ''<text>'', der in der gleichen  
+	Schriftart und -größe wie eine Unterabschnitts-Überschrift ausgegeben 
+	wird.                                                                 
+
+!item [Beispiel:] (!T)!/subsubheading Eine Überschrift(!t)
+
+!item [Siehe auch:] (!I)!/heading(!i), (!I)!/subheading(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/subsubnode
+
+Unterabschnitt einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/subsubnode <text>(!t)
+
+!item [Beschreibung:] 
+	Leitet einen Unterabschnitt mit der Bezeichnung ""<text>"" ein.       
+	Unterabschnitte erscheinen in Inhaltsverzeichnissen.                  
+
+!item [Beispiel:] (!T)!/subsubnode Titel des Unterabschnitts(!t)
+
+!item [Siehe auch:] (!I)!/psubsubnode(!i), (!I)!/node(!i), (!I)!/subnode(!i), Gliederung
+
+!end_xlist
+#------------------------------
+!subsubnode !/subsubnode*
+
+Unterabschnitt ohne Eintrag im Inhaltsverzeichnis einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/subsubnode* <text>(!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando hat die gleiche Funktion wie !/subsubnode, mit der    
+	Ausnahme, daß ""<text>"" nicht in Inhaltsverzeichnissen erscheint.    
+
+!item [Beispiel:] (!T)!/subsubnode* Titel des versteckten Unterabschnitts(!t)
+
+!item [Siehe auch:] (!I)!/subsubnode(!i), (!I)!/psubsubnode*(!i), Gliederung
+
+!end_xlist
+#------------------------------
+!subsubnode !/subsubsubheading
+
+Eine Paragraphen-Überschrift ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/subsubsubheading <text>(!t)
+
+!item [Beschreibung:] 
+	Dieser Befehl erzeugt eine Zeile mit ''<text>'', der in der gleichen  
+	Schriftart und -größe wie eine Paragraphen-Überschrift ausgegeben     
+	wird.                                                                 
+
+!item [Beispiel:] (!T)!/subsubsubheading Eine Überschrift(!t)
+
+!item [Siehe auch:] (!I)!/heading(!i), (!I)!/subheading(!i), (!I)!/subsubheading(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/subsubsubnode
+
+Paragraph einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/subsubsubnode <text>(!t)
+
+!item [Beschreibung:] 
+	Leitet einen Paragraph mit der Bezeichnung ""<text>"" ein. Ein        
+	Paragraph ist die vierte Gliederungsebene und wird mit #.#.#.#        
+	numeriert.                                                            
+
+!item [Beispiel:] (!T)!/subsubsubnode Titel des Paragraphs(!t)
+
+!item [Siehe auch:] (!I)!/psubsubsubnode(!i), (!I)!/subnode(!i), (!I)!/subsubnode(!i), Gliederung
+
+!end_xlist
+#------------------------------
+!subsubnode !/subsubsubnode*
+
+Paragraph ohne Eintrag im Inhaltsverzeichnis einleiten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/subsubsubnode* <text>(!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando hat die gleiche Funktion wie !/subsubsubnode, mit der 
+	Ausnahme, daß ""<text>"" nicht in Inhaltsverzeichnissen erscheint.    
+
+!item [Beispiel:] (!T)!/subsubsubnode* Titel des Paragraphs(!t)
+
+!item [Siehe auch:] (!I)!/psubsubsubnode(!i), (!I)!/subnode(!i), (!I)!/subsubnode(!i), Gliederung
+
+!end_xlist
+#------------------------------
+!subsubnode !/subsubtoc
+
+Unterabschnitte auflisten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/subsubtoc [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	Listet in Form eines Inhaltsverzeichnisses alle Unterabschnitte des   
+	aktuellen Abschnitts aus und sorgt dafür, daß man in Hypertexten zu   
+	den Unterabschnitten weiterverzweigen kann.                           
+	UDO gibt dieses Unterinhaltsverzeichnis nicht aus, wenn in dem        
+	Abschnitt der Schalter (!I)!/ignore_subsubtoc(!i) verwendet wurde.    
+	Die Ausgabe dieser Unterinhaltsverzeichnisse läßt sich durch          
+	(!I)!/use_auto_subsubtocs(!i) auch automatisieren.                    
+
+!item [Beispiel:] (!T)!/subsubtoc [html,pch,stg,win](!t)
+
+!item [Siehe auch:] (!I)!/tableofcontents(!i), (!I)!/toc(!i), (!I)!/subtoc(!i), (!I)!/use_auto_subsubtocs(!i), Inhaltsverzeichnisse
+
+!end_xlist
+#------------------------------
+!subsubnode !/subtoc
+
+Abschnitte auflisten
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/subtoc [<kürzel>](!t)
+
+!item [Beschreibung:] 
+	Listet in Form eines Inhaltsverzeichnisses alle Abschnitte des        
+	aktuellen Kapitels aus und sorgt dafür, daß man in Hypertexten zu den 
+	Abschnitten weiterverzweigen kann.                                    
+	UDO gibt dieses Unterinhaltsverzeichnis nicht aus, wenn in dem        
+	Abschnitt der Schalter (!I)!/ignore_subtoc(!i) verwendet wurde. Die   
+	Ausgabe dieser Unterinhaltsverzeichnisse läßt sich durch              
+	(!I)!/use_auto_subtocs(!i) auch automatisieren.                       
+
+!item [Beispiel:] (!T)!/subtoc [html,pch,stg,win](!t)
+
+!item [Siehe auch:] (!I)!/tableofcontents(!i), (!I)!/subtoc(!i), (!I)!/subsubtoc(!i), (!I)!/use_auto_subtocs(!i), Inhaltsverzeichnisse
+
+!end_xlist
+#------------------------------
+!subsubnode (!/short_today)
+
+Systemdatum in kurzer Schreibweise einsetzen.
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Platzhalter, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)(!/short_today)(!t)
+
+!item [Beschreibung:] 
+	Dieser Platzhalter wird durch das bei der Umwandlung aktuelle         
+	Systemdatum in kurzer Form ersetzt.                                   
+
+!item [Beispiel:] Aus (!T)(!/short_today)(!t) wird (!short_today)
+
+!item [Siehe auch:]  (!I)(!/today)(!i), (!I)!/language(!i)
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
