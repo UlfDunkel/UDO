@@ -48,7 +48,9 @@
 #define	TOUDO			22		/* UDO-Format				*/	/* r6pl9  */
 #define	TOKPS			23		/* Krueger's PostScript		*/	/* r6pl11 */
 #define	TOAMG			24		/* AmigaGuide				*/	/* r6pl12 */
-#define	MAXDESTTYPE		25		/* Anzahl Ausgabeformate	*/
+#define TOXML			25		/* XML */			/* [vj] v6.3-xmas */
+#define TOOO			26		/* OpenOffice sxw XML */	/* [vj] v6.3-xmas */
+#define	MAXDESTTYPE		27		/* Anzahl Ausgabeformate	*/
 
 #define	TOGER			0		/* Deutsch					*/
 #define	TOENG			1		/* Englisch					*/
@@ -62,7 +64,7 @@
 #define	TONOR			9		/* Norwegisch				*/
 #define	TOFIN			10		/* Finnisch					*/
 
-#define	MAXDESTLANG		7		/* Anzahl Ausgabesprachen	*/
+#define	MAXDESTLANG		7		/* Anzahl Ausgabesprachen	<???>  [vj] Muﬂ das hier nicht 11 heiﬂen, oder gibts die Sprachen nur bis 7? */
 
 
 /*	############################################################
