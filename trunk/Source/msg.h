@@ -169,6 +169,9 @@ GLOBAL int get_error_counter ( void );
 	######################################################################	*/
 GLOBAL void init_module_msg ( void );
 
+/* define this, to let loglnposprintf do printf, instead passing string to gui */
+#define USE_LOGLNPOSPRINTF
+GLOBAL void loglnposprintf ( const char *we, const char *msg );
 
 /*	######################################################################
 	# msg.h

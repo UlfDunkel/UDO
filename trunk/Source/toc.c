@@ -8829,11 +8829,11 @@ GLOBAL void set_raw_header_filename ( void )
 	if (toc[p1_toc_counter]==NULL)	return;
 	if (token[1][0]==EOS)	return;
 	
-	strcpy(s, token[1]);
+	um_strcpy(s, token[1], 512, "set_raw_header_filename[1]");
 
 	if (p1_toc_counter==0)
 	{
-		strcpy(sDocRawHeaderFilename, s);
+		um_strcpy(sDocRawHeaderFilename, s, 512, "set_raw_header_filename[2]");
 	}
 	else
 	{
@@ -8860,11 +8860,11 @@ GLOBAL void set_raw_footer_filename ( void )
 	if (toc[p1_toc_counter]==NULL)	return;
 	if (token[1][0]==EOS)	return;
 	
-	strcpy(s, token[1]);
+	um_strcpy(s, token[1], 512, "set_raw_footer_filename[1]");
 
 	if (p1_toc_counter==0)
 	{
-		strcpy(sDocRawFooterFilename, s);
+		um_strcpy(sDocRawFooterFilename, s, 512, "set_raw_footer_filename[2]");
 	}
 	else
 	{
@@ -8977,7 +8977,7 @@ GLOBAL void set_helpid ( void )
 	if (toc[p1_toc_counter]==NULL)	return;
 	if (token[1][0]==EOS)	return;
 
-	strcpy(id, token[1]);
+	um_strcpy(id, token[1], 512, "set_helpid");
 	
 	/* <???> Hier pruefen, ob nur A-Z, a-z, 0-9 und _ benutzt werden */
 
@@ -9006,7 +9006,7 @@ GLOBAL void set_mapping ( void )
 	if (toc[p1_toc_counter]==NULL)	return;
 	if (token[1][0]==EOS)	return;
 
-	strcpy(map, token[1]);
+	um_strcpy(map, token[1], 512, "set_mapping[1]");
 
 	/* <???> Hier pruefen, ob nur 0-9 benutzt wird */
 
@@ -9134,7 +9134,7 @@ GLOBAL void set_html_filename_prefix ( void )
 	if (toc[p1_toc_counter]==NULL)	return;
 	if (token[1][0]==EOS)	return;
 	
-	strcpy(html_name_prefix, token[1]);
+	um_strcpy(html_name_prefix, token[1], 512, "set_html_filename_prefix[1]");
 
 }	/* set_html_filename_prefix */
 
@@ -9208,7 +9208,7 @@ GLOBAL void set_html_color ( const int which )
 	qdelete_last(token[1], "]", 1);
 
 	if (token[1][0]=='#')
-	{	strcpy(color, token[1]);
+	{	um_strcpy(color, token[1], 256, "set_html_color[1]");
 		ret= TRUE;
 	}
 	else
@@ -9269,7 +9269,7 @@ GLOBAL void set_html_backcolor ( void )
 	qdelete_last(token[1], "]", 1);
 
 	if (token[1][0]=='#')
-	{	strcpy(color, token[1]);
+	{	um_strcpy(color, token[1], 256, "set_html_backcolor");
 		ret= TRUE;
 	}
 	else
@@ -9309,7 +9309,7 @@ GLOBAL void set_html_textcolor ( void )
 	qdelete_last(token[1], "]", 1);
 
 	if (token[1][0]=='#')
-	{	strcpy(color, token[1]);
+	{	um_strcpy(color, token[1], 256, "set_html_textcolor[1]");
 	}
 	else
 	{	get_html_color(token[1], color);
@@ -9343,7 +9343,7 @@ GLOBAL void set_html_linkcolor ( void )
 	qdelete_last(token[1], "]", 1);
 
 	if (token[1][0]=='#')
-	{	strcpy(color, token[1]);
+	{	um_strcpy(color, token[1], 256, "set_html_linkcolor[1]");
 	}
 	else
 	{	get_html_color(token[1], color);
@@ -9376,7 +9376,7 @@ GLOBAL void set_html_alinkcolor ( void )
 	qdelete_last(token[1], "]", 1);
 
 	if (token[1][0]=='#')
-	{	strcpy(color, token[1]);
+	{	um_strcpy(color, token[1], 256, "set_html_alinkcolor[1]");
 	}
 	else
 	{	get_html_color(token[1], color);
@@ -9409,7 +9409,7 @@ GLOBAL void set_html_vlinkcolor ( void )
 	qdelete_last(token[1], "]", 1);
 
 	if (token[1][0]=='#')
-	{	strcpy(color, token[1]);
+	{	um_strcpy(color, token[1], 256, "set_html_vlinkcolor");
 	}
 	else
 	{	get_html_color(token[1], color);
@@ -9757,7 +9757,7 @@ GLOBAL void set_html_modern_width ( void )
 	/*r6pl8: Falls z.B. 30%, dann komplett umkopieren */
 	if (strstr(token[1], "%")!=NULL)
 	{
-		strcpy(html_modern_width, token[1]);
+		um_strcpy(html_modern_width, token[1], 16, "set_html_modern_width[1]");
 	}
 	else
 	{
@@ -9810,15 +9810,15 @@ GLOBAL void set_html_modern_backimage ( void )
 
 		if (ptr)
 		{	ptr[0]= EOS;
-			strcpy(html_modern_backimage, sTemp+1);
+			um_strcpy(html_modern_backimage, sTemp+1, 512, "set_html_modern_backimage[1]");
 		}
 		else
-		{	strcpy(html_modern_backimage, sTemp);
+		{	um_strcpy(html_modern_backimage, sTemp, 512, "set_html_modern_backimage[2]");
 		}
 	}
 	else
 	{
-		strcpy(html_modern_backimage, token[1]);
+		um_strcpy(html_modern_backimage, token[1], 512, "set_html_modern_backimage[3]");
 	}
 
 	/* Hier muessen immer / benutzt werden! */
@@ -9839,7 +9839,7 @@ GLOBAL void set_html_frames_width ( void )
 	/*r6pl8: Falls z.B. 30%, dann komplett umkopieren */
 	if (strstr(token[1], "%")!=NULL)
 	{
-		strcpy(html_frames_width, token[1]);
+		um_strcpy(html_frames_width, token[1], 16, "set_html_frames_width");
 	}
 	else
 	{
@@ -9861,7 +9861,7 @@ GLOBAL void set_html_frames_height ( void )
 	/*r6pl8: Falls z.B. 30%, dann komplett umkopieren */
 	if (strstr(token[1], "%")!=NULL)
 	{
-		strcpy(html_frames_height, token[1]);
+		um_strcpy(html_frames_height, token[1], 16, "set_html_frames_height[1]");
 	}
 	else
 	{
@@ -9942,15 +9942,15 @@ GLOBAL void set_html_frames_backimage ( void )
 
 		if (ptr)
 		{	ptr[0]= EOS;
-			strcpy(html_frames_backimage, sTemp+1);
+			um_strcpy(html_frames_backimage, sTemp+1, 512, "set_html_frames_backimage[1]");
 		}
 		else
-		{	strcpy(html_frames_backimage, sTemp);
+		{	um_strcpy(html_frames_backimage, sTemp, 512, "set_html_frames_backimage[2]");
 		}
 	}
 	else
 	{
-		strcpy(html_frames_backimage, token[1]);
+		um_strcpy(html_frames_backimage, token[1], 512, "set_html_frames_backimage[3]");
 	}
 
 	/* Hier muessen immer / benutzt werden! */

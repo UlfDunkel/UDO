@@ -3038,9 +3038,9 @@ GLOBAL BOOLEAN add_macro ( void )
 
 	if (token_counter>=2)
 	{	for (i=2; i<token_counter; i++)
-		{	strcat(entry, token[i]);
+		{	um_strcat(entry, token[i], 512, "add_macro[1]");
 			if (i<token_counter-1)
-			{	strcat(entry, " ");
+			{	um_strcat(entry, " ", 512, "add_macro[2]");
 			}
 		}
 	}
@@ -3059,11 +3059,11 @@ GLOBAL BOOLEAN add_macro ( void )
 		return FALSE;
 	}
 
-	strcpy(p->entry, entry);
+	um_strcpy(p->entry, entry, MACRO_CONT_LEN+1, "add_macro[3]");
 
 	if ( md_uses_parameters(p->entry) )	/* PL8 */
 	{	/* Makro mit Parametern */
-		strcpy(p->name, token[1]);
+		um_strcpy(p->name, token[1], MACRO_NAME_LEN+1, "add_macro[4]");
 		p->vars= TRUE;
 	}
 	else
@@ -3145,9 +3145,9 @@ GLOBAL BOOLEAN add_define ( void )
 
 	if (token_counter>=2)
 	{	for (i=2; i<token_counter; i++)
-		{	strcat(entry, token[i]);
+		{	um_strcat(entry, token[i], 512, "add_define[1]");
 			if (i<token_counter-1)
-			{	strcat(entry, " ");
+			{	um_strcat(entry, " ", 512, "add_define[2]");
 			}
 		}
 	}
@@ -3159,13 +3159,13 @@ GLOBAL BOOLEAN add_define ( void )
 		return FALSE;
 	}
 	
-	strcpy(p->entry, entry);
+	um_strcpy(p->entry, entry, MACRO_CONT_LEN+1, "add_define[3]");
 
 	/* Schauen, ob der !define Parameter enthalten soll */
 
 	if ( md_uses_parameters(p->entry) )	/* PL12 */
 	{	/* Definition mit Parametern */
-		strcpy(p->name, token[1]);
+		um_strcpy(p->name, token[1], MACRO_NAME_LEN+1, "add_define[4]");
 		p->vars= TRUE;
 	}
 	else

@@ -28,6 +28,8 @@
 #undef UM_DEBUG_SHOW_CALLS
 /* define or undefine this symbol, to get or don't get a stat of malloc/free calls */
 #define UM_DEBUG_SHOW_STATS
+/* define or undef to get more debug messages */
+#define UM_DEBUG_SHOW_MSGS
 /*
  * For gcc the um_free and um_realloc methods use %ld instead of %d in some printf
  * statements, to get rid of some compiler warnings. This tests if Linux is used,
@@ -42,8 +44,8 @@
 /*
  * Declarations for vars that keep memory management information
  */
-extern int um_malloc_count;	/* This counts the number of um_malloc calls */
-extern int um_free_count;	/* Counts the um_free calls */
+extern size_t um_malloc_count;	/* This counts the number of um_malloc calls */
+extern size_t um_free_count;	/* Counts the um_free calls */
 extern int memory_error;	/* This indicates a broken memory management */
 extern char endstring[];	/* This is the const string, that holds the ending string of memory blocks */
 extern size_t endstring_len; /* For better performance this var saves the string length of endstring */
@@ -60,8 +62,8 @@ typedef struct _memory_list
 /*
  * This is the UDO memory interface. Use it instead of malloc or mfree!
  */
-GLOBAL void init_um();
-GLOBAL void exit_um();
+GLOBAL void init_um(void);
+GLOBAL void exit_um(void);
 GLOBAL void *um_malloc(size_t size);
 GLOBAL void *um_realloc(void *block, size_t size);
 GLOBAL void um_free(void *memblock);

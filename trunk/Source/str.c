@@ -34,6 +34,8 @@ const char *id_str_c= "@(#) str.c       10.03.1997";
 #include "str.h"
 #include "version.h"
 
+#include "msg.h"
+
 /*
 	#################################################################
 	#
@@ -44,6 +46,7 @@ const char *id_str_c= "@(#) str.c       10.03.1997";
 
 GLOBAL char *um_strcpy(char *dest, const char *src, size_t max, const char *place)
 {
+	char errbuf[120];
 	size_t slen; /* Temporäre Variable, für die Länge von src */
 	
 	slen=(size_t)strlen(src); /* Stringlänge bestimmen */
@@ -54,13 +57,15 @@ GLOBAL char *um_strcpy(char *dest, const char *src, size_t max, const char *plac
 	else
 	{
 		dest[0]=EOS;
-		printf("um_strcpy: buffer overrun prevented: %s: %d>%d\n", place, slen+1, max);
+		sprintf(errbuf, "um_strcpy: buffer overrun prevented: %s: %d>%d\n", place, slen+1, max);
+		loglnposprintf ("Warning", errbuf);
 		return dest;
 	}
 }
 
 GLOBAL char *um_strncpy(char *dest, const char *src, size_t n, size_t max, const char *place)
 {
+	char errbuf[120];
 	if ((n+1)<max)
 	{
 		return strncpy(dest, src, n);
@@ -68,13 +73,15 @@ GLOBAL char *um_strncpy(char *dest, const char *src, size_t n, size_t max, const
 	else
 	{
 		dest[0]=EOS;
-		printf("um_strncpy: buffer overrun prevented: %s: %d>%d\n", place, n+1, max);
+		sprintf(errbuf, "um_strncpy: buffer overrun prevented: %s: %d>%d\n", place, n+1, max);
+		loglnposprintf ("Warning", errbuf);
 		return dest;
 	}
 }
 
 GLOBAL char *um_strcat(char *dest, const char *src, size_t max, const char *place)
 {
+	char errbuf[120];
 	size_t dlen, slen;
 
 	dlen=(size_t)strlen(dest);
@@ -87,13 +94,15 @@ GLOBAL char *um_strcat(char *dest, const char *src, size_t max, const char *plac
 	else
 	{
 		dest[0]=EOS;
-		printf("um_strcat: buffer overrun prevented: %s: %d>%d\n", place, dlen+slen+1, max);
+		sprintf(errbuf, "um_strcat: buffer overrun prevented: %s: %d>%d\n", place, dlen+slen+1, max);
+		loglnposprintf ("Warning", errbuf);
 		return dest;
 	}
 }
 
 GLOBAL char *um_strncat(char *dest, const char *src, size_t n, size_t max, const char *place)
 {
+	char errbuf[120];
 	size_t dlen;
 
 	dlen=strlen(dest);
@@ -104,7 +113,8 @@ GLOBAL char *um_strncat(char *dest, const char *src, size_t n, size_t max, const
 	else
 	{
 		dest[0]=EOS;
-		printf("um_strncat: buffer overrun prevented: %s: %d>%d\n", place, dlen+n+1, max);
+		sprintf(errbuf, "um_strncat: buffer overrun prevented: %s: %d>%d\n", place, dlen+n+1, max);
+		loglnposprintf("Warning", errbuf);
 		return dest;
 	}
 }
