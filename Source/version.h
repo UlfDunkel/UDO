@@ -44,7 +44,7 @@
 	------------------------------------------------------------	*/
 #define	UDO_REL		"6"
 #define UDO_SUBVER	"4"
-#define	UDO_PL		"0"
+#define	UDO_PL		"1"
 #define	UDO_URL		"http://www.udo-open-source.org"
 #define	UDO_MADE	"Made with UDO"
 
@@ -52,6 +52,7 @@
 	Copyright Meldung
 	------------------------------------------------------------	*/
 #define	COPYRIGHT	"Copyright (c) 1995-2001 by Dirk Hagedorn\nCopyright (c) 2001-2004 by The UDO community"
+#define UDO_COPYRIGHT_TEXT "Copyright (!copyright) 1995-2001 by Dirk Hagedorn\t(!nl)\nCopyright (!copyright) 2001-2004 by The UDO community\t(!nl)\n"
 
 /*	------------------------------------------------------------
 	Zeichensaetze
