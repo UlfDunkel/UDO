@@ -790,7 +790,7 @@ puts(tok);
 LOCAL void table_output_html ( void )
 {
 	int		y, x;
-	char	f[512], alignOn[64];
+	char	f[LINELEN], alignOn[64]; /* r6.3.18[vj]: f is now LINELEN chars long instead of 512 */
 	BOOLEAN inside_center, inside_right, inside_left;
 
 	inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);
@@ -807,8 +807,8 @@ LOCAL void table_output_html ( void )
 	}
 
 	strcpy(alignOn, "left");
-	if (inside_center)	strcpy(alignOn, "center");
-	if (inside_right)	strcpy(alignOn, "right");
+	if (inside_center)	um_strcpy(alignOn, "center", 64, "table_output_html[1]");
+	if (inside_right)	um_strcpy(alignOn, "right", 64, "table_output_html[2]");
 
 	voutf("<div align=\"%s\">", alignOn);
 
@@ -843,7 +843,7 @@ LOCAL void table_output_html ( void )
 			    found = strstr(tab_cell[y][x], "!?");
 
 			if(found != NULL)
-			{	strncpy(token, tab_cell[y][x], strcspn(tab_cell[y][x], "!"));
+			{	um_strncpy(token, tab_cell[y][x], strcspn(tab_cell[y][x], "!"), MAX_TOKEN_LEN+1, "table_output_html[3]"); /* <???> Pufferüberlauf möglich? Wie groß kann hier token wirklich sein? */
 
 				test_for_addition(token);
 
@@ -863,7 +863,7 @@ LOCAL void table_output_html ( void )
 			}
 */			out(sHtmlPropfontStart);
 			if ( tab_cell[y][x]!=NULL )
-			{	strcpy(f, tab_cell[y][x]);
+			{	um_strcpy(f, tab_cell[y][x], LINELEN, "table_output_html[4]");
 				auto_quote_chars(f, FALSE);
 				replace_defines(f);
 				c_commands_inside(f, FALSE);
