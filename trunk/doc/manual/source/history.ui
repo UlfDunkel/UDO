@@ -347,15 +347,64 @@ wird unterstützt.
 # !item [Neue Formate:]
 # 	!begin_itemize !short
 # 	!end_itemize
-# !item [Neue Befehle:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Neuheiten:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Änderungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
+ !item [Neue Befehle:]
+ 	!begin_itemize !short
+   !item (!T)!/html_default_hyphenation(!t) (!nl)
+         Nur wenn dieses Kommando gesetzt ist, werden die bedingten
+         Trennstriche (!T)!/-(!t) bei der HTML-Ausgabe in (!T)&shy;(!t)
+         umgesetzt.
+   !item (!T)!/node1_size foo(!t) (!nl)
+          Mit diesem Kommando (Vorspann) kann die Größe der Nodes und Headings
+          bei der Postscript-Ausgabe festgelegt werden (foo: Zeichensatzgr”e
+          in pt).
+   !item (!T)!/node2_size foo(!t) (!nl)
+         Mit diesem Kommando (Vorspann) kann die Größe der Subnodes und
+         Subheadings bei der Postscript-Ausgabe festgelegt werden (foo:
+         Zeichensatzgr”e in pt).
+   !item (!T)!/node3_size foo(!t) (!nl)
+          Mit diesem Kommando (Vorspann) kann die Größe der Subsubnodes und
+          Subsubheadings bei der Postscript-Ausgabe festgelegt werden
+          (foo: Zeichensatzgr”e in pt).
+   !item (!T)!/node4_size foo(!t) (!nl)
+         Mit diesem Kommando (Vorspann) kann die Größe der Subsubsubnodes
+         und Subsubsubheadings bei der Postscript-Ausgabe festgelegt
+         werden (foo: Zeichensatzgr”e in pt).
+ 	!end_itemize
+ !item [Neuheiten:]
+ 	!begin_itemize !short
+ 	 !item In der ersten Datei der HTML-Ausgabe wird jetzt ein Meta-Tag
+ 	       für AppleTitle/JobTimerHelp angelegt.
+   !item Jetzt werden auch Nodes, die mit (!V)!/html_name(!v) einen
+         ausführlichen Namen bekommen haben (z.~B. foo.php) richtig
+         referenziert.
+   !item Für die HTML-Ausgabe wird jetzt im Tag <ul> zusätzlich
+         (!T)<ul class=""content"">(!t) ausgegeben. Dadurch kann
+         man mittels eines Eintrages im Stylesheet
+         (!T)(ul.content~{~list-style-type:~none;~})(!t) die
+         Aufzählungspunkte in den Inhaltsverzeichnissen vermeiden.
+   !item Bei der HTML-Ausgabe wird jetzt ein (!T)<span style=""page-break-after:always;""></span>(!t)
+         gesetzt, dann können Browser, die das verstehen, beim Ausdruck
+         einen Seitenumbruch vornehmen.
+   !item Die Bildunterschriften werden jetzt als Feld ausgegeben, damit
+         ein Abbildungs!-ver!-zeichnis erstellt werden kann.
+   !item Für RTF wird jetzt eine einzelne Seite erzeugt, die ein
+         Ab!-bildungs!-ver!-zeichnis enthält, wenn (!T)!/listoffigures(!t)
+         gesetzt ist. Dieses muß nur aktualisiert werden.
+   !item Es werden Vorgaben fr das Layout fr die Postscript-Ausgabe
+         gemacht: Art und Gr”e des proportionalen und „quidistanten
+         Zeichensatzes sowie die ™ffnungsparameter fr PDF-Dateien.
+ 	!end_itemize
+ !item [Änderungen:]
+ 	!begin_itemize !short
+ 	 !item (!T)!/html_backpage ../index.html ''Zurck zu UDO-Open-Source''(!t) (!nl)
+ 	       Jetzt kann zusätzlich ein Text übergeben werden, der statt
+         des Links in das alt-Attribut eingetragen wird. Der Text muß
+         in einfachen Anführungszeichen stehen (''foo'')
+   !item Die Bildunterschrift wird bei der Ausgabe nach RTF nicht
+         mehr in Klammern gesetzt.
+   !item Die Bilder werden jetzt bei der Ausgabe nach RTF innerhalb
+         von Umgebungen mit eingerückt.
+ 	!end_itemize
 # !item [Syntaxänderungen:]
 # 	!begin_itemize !short
 # 	!end_itemize
@@ -368,15 +417,57 @@ wird unterstützt.
 # !item [New destination formats:]
 # 	!begin_itemize !short
 # 	!end_itemize
-# !item [New commands:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [News:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Changes:]
-# 	!begin_itemize !short
-# 	!end_itemize
+ !item [New commands:]
+ 	!begin_itemize !short
+   !item (!T)!/html_default_hyphenation(!t) (!nl)
+         Only if this command is set, the syllabification marks for
+         the HTML output are converted to (!T)&shy;(!t)
+   !item (!T)!/node1_size foo(!t) (!nl)
+          This command sets the fontsize of nodes and headings for
+          postscript output (foo: fontsize in pt).
+   !item (!T)!/node2_size foo(!t) (!nl)
+         This command sets the fontsize of subnodes and subheadings for
+         postscript output (foo: fontsize in pt).
+   !item (!T)!/node3_size foo(!t) (!nl)
+         This command sets the fontsize of subsubnodes and subsubheadings
+         for postscript output (foo: fontsize in pt).
+   !item (!T)!/node4_size foo(!t) (!nl)
+         This command sets the fontsize of subsubsubnodes and
+         subsubsubheadings for postscript output (foo: fontsize in pt).
+ 	!end_itemize
+ !item [News:]
+ 	!begin_itemize !short
+ 	 !item In the first file of the HTML output ist set a meta tag for
+ 	       AppleTitle/JobTimerHelp.
+ 	 !item All nodes, which got a special name (e.g. foo.php) by
+ 	       (!T)!/html_name(!t) are referenced correct now.
+   !item The table of contents ist included in the tag (!T)<ul>(!t).
+         This tag is extended to (!T)<ul class=""content"">(!t).
+         Therefore you can choose, weather the bullets in front of
+         every item should be drawn or not. You can control it by
+         ul.content~{~list-style-type:~none;~} in a CSS file.
+   !item For every (!T)!/newpage(!t) there will be given out a
+         (!T)<span style=""page-break-after:always;""></span>(!t).
+         So user agents who knows about it, can make a pge break.
+   !item The image captions will be put out as a field for RTF output.
+         Therefore a table of images could be created.
+   !item There would be build a speacial page with a macro of a list of
+         figures for the RTF output, even if (!T)!/listoffigure(!t)
+         ist set. The macro must be executed in the word processor.
+   !item The default values are set for kind and heightness of fonts
+         and who PDF files will be opened.
+ 	!end_itemize
+ !item [Changes:]
+ 	!begin_itemize !short
+ 	 !item (!T)!/html_backpage ../index.html ''Back to UDO open source''(!t) (!nl)
+ 	       You can tell UDO to set a special text instead of the link text
+ 	       in the ""alt"" attribute. The text must be included in single
+ 	       quotation marks.
+   !item The caption of the image won't be put in parenthis for RTF output
+         any longer
+   !item The images will be shifted with the text too, if they are in a
+         special environment.
+ 	!end_itemize
 # !item [Syntax changes:]
 # 	!begin_itemize !short
 # 	!end_itemize
