@@ -3114,26 +3114,42 @@ GLOBAL void c_begin_document ( void )
 
 			/* New in V6.5.2 [NHz] */
 			/* ---- \description ---- */
-			if (titdat.description[0]!=EOS)
-			{	voutlnf("  {\\subject %s}", titdat.description);
+			/* v6.5.6 [vj] added test for NULL, otherwise UDO might crash */
+			if (titdat.description!=NULL)
+			{
+				if (titdat.description[0]!=EOS)
+				{	voutlnf("  {\\subject %s}", titdat.description);
+				}
 			}
 
 			/* New in V6.5.2 [NHz] */
 			/* ---- \keywords ---- */
-			if (titdat.keywords[0]!=EOS)
-			{	voutlnf("  {\\keywords %s}", titdat.keywords);
+			/* v6.5.6 [vj] added test for NULL, otherwise UDO might crash */
+			if (titdat.keywords!=NULL)
+			{
+				if (titdat.keywords[0]!=EOS)
+				{	voutlnf("  {\\keywords %s}", titdat.keywords);
+				}
 			}
 
 			/* New in V6.5.2 [NHz] */
 			/* ---- \company ---- */
-			if (titdat.company[0]!=EOS)
-			{	voutlnf("  {\\*\\company %s}", titdat.company);
+			/* v6.5.6 [vj] added test for NULL, otherwise UDO might crash */
+			if (titdat.company!=NULL)
+			{
+				if (titdat.company[0]!=EOS)
+				{	voutlnf("  {\\*\\company %s}", titdat.company);
+				}
 			}
 
 			/* New in V6.5.2 [NHz] */
 			/* ---- \category ---- */
-			if (titdat.category[0]!=EOS)
-			{	voutlnf("  {\\*\\category %s}", titdat.category);
+			/* v6.5.6 [vj] added test for NULL, otherwise UDO might crash */
+			if (titdat.category!=NULL)
+			{
+				if (titdat.category[0]!=EOS)
+				{	voutlnf("  {\\*\\category %s}", titdat.category);
+				}
 			}
 
 			/* ---- Ueber UDO ---- */
