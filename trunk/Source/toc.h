@@ -194,8 +194,8 @@ GLOBAL void auto_references ( char *s, const BOOLEAN for_toc, const char *pic,
 
 GLOBAL void check_endnode ( void );
 
-GLOBAL void check_output_raw_header ( void );
-GLOBAL void check_output_raw_footer ( BOOLEAN lastNode );
+GLOBAL BOOLEAN check_output_raw_header ( void );
+GLOBAL BOOLEAN check_output_raw_footer ( BOOLEAN lastNode );
 
 GLOBAL void man_headline ( void );
 GLOBAL void man_bottomline ( void );
