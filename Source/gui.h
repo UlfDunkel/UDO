@@ -39,7 +39,7 @@ GLOBAL void show_status_file_2 ( const char *s );
 GLOBAL void show_status_percent ( unsigned long Pass1Lines, unsigned long Pass2Lines );
 GLOBAL void show_status_pass ( const char *s );
 GLOBAL void show_status_udo2udo ( const char *s );
-GLOBAL void show_status_errors ( void );
+GLOBAL void show_status_errors ( const char *s );
 
 GLOBAL void show_logln_message ( const char *s );
 
