@@ -1314,6 +1314,10 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 					/* Weblink for Richtext Format */
 				case TORTF:
   				convert_tilde(Param[1]);
+
+					/* New in r6.2pl1 [NHz] / Bug #00000029 */
+					c_rtf_quotes(Param[1]);
+
 					if (Param[2][0]==EOS)
 					{	strcpy(Param[2], Param[1]);
 					}
