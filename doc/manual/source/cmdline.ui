@@ -208,8 +208,7 @@ Normal text becomes comment, the content of the sourcecode environment becomes C
 
 !item [(--)check] Activate some additional checks.
 
-!item [-d, (--)no-idxfile]
-  Suppress the generation of index files.
+!item [-d, (--)no-idxfile] Suppress the generation of index files.
 
 !item [(--)drc] The (!U)source file(!u) will be converted to DRC Format (David's Readme Compiler).
 
@@ -281,8 +280,8 @@ include files and generated files
 suffix (!V).ut?(!v). In this file you will see a tree with all
 files your source file includes.
 
-!item [-u, (--)udo]  Generate one file in udo format containing all included source
- files. This allows to put all source files into one udo file.
+!item [-u, (--)udo] Generate one file in udo format containing all included source files. 
+This allows to put all source files into one udo file.
 
 !item [-v, (--)vision] The (!U)source file(!u) will be converted to Turbo Vision Help.
 
