@@ -1,5 +1,4 @@
 #!/bin/sh
 # Seiten "Made with UDO" in Deutsch + Englisch nach HTML übersetzen
-export UDOINPUTPATH=/usr/share/udo/udoinput/
 udo --html --verbose --force-long --check -o ./index.html mwu.txt -D lang_de
 udo --html --verbose --force-long --check -o ./index-en.html mwu.txt -D lang_en
