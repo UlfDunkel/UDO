@@ -71,7 +71,6 @@ GLOBAL int		iDocLinedrawSize;	/* Fontgroesse fuer linedraw-Umgebung	*/
 
 GLOBAL char		sCurrFileName[512];	/* Gerade aktive Datei			*/
 GLOBAL UINT		uiCurrFileLine;		/* und die aktuelle Zeilen-Nr.	*/
-GLOBAL UINT		uiMultiLines;		/* Anzahl zusammengef¸gter Zeilen (0=nicht zusammengef¸gt, 1=eine Zeile angeh‰ngt) */
 
 GLOBAL BOOLEAN	b1stQuote;			/* Flag fuer die "echten"		*/
 GLOBAL BOOLEAN	b1stApost;
@@ -209,9 +208,6 @@ GLOBAL BOOLEAN		html_frames_noscroll;
 GLOBAL BOOLEAN		html_use_folders;			/* Ordnerstruktur erzeugen? */
 GLOBAL BOOLEAN		html_transparent_buttons;	/* Transparente Buttons benutzen?	*/
 
-GLOBAL BOOLEAN		html_ignore_8bit_use_charset;	/* v6.5.0[vj] Use extra charset for meta http-equiv="Content-Type"? This flag is used just for speedup reasons */
-GLOBAL char			html_ignore_8bit_charset[20];	/* v6.5.0[vj] Charset for html_ignore_8bit that should be used in meta http-equiv="Content-Type" */
-
 GLOBAL char			sDocHtmlSwitchLanguage[256];	/* Links zum Wechseln?			*/
 GLOBAL int			iDocHtmlSwitchLanguage;			/* ... und der Wert der Sprache */
 
@@ -242,12 +238,6 @@ GLOBAL char			html_name_prefix[512];			/* Prefix fuer HTML-Dateinamen	*/
 /* New in r6pl16 [NHz] */
 GLOBAL BOOLEAN			html_use_hyphenation;		/* Lange Woerter sollen durch (!-) getrennt werden */
 GLOBAL int			html_doctype;		/* Welche DTD soll benutzt werden? */
-/* New feature #0000054 in V6.5.2 [NHz] */
-GLOBAL BOOLEAN			html_header_date;		/* Ausgabe des Datums im Element <meta> */
-GLOBAL char			html_header_date_zone[10];	/* Zone fÅr das Datum */
-/* New feature #0000053 in V6.5.2 [NHz] */
-GLOBAL BOOLEAN			html_header_links;		/* Ausgabe der Daten im Element <link> */
-GLOBAL char			html_header_links_kind[50];	/* Welche Links sollen ausgegeben werden? */
 
 GLOBAL int			image_alignment;			/* Ausrichtung der Bilder		*/
 GLOBAL int			table_alignment;			/* Ausrichtung der Tabellen		*/

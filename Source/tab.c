@@ -21,7 +21,7 @@
 
 #ifndef ID_TAB_C
 #define ID_TAB_C
-const char *id_tab_c= "@(#) tab.c       01.02.2004";
+const char *id_tab_c= "@(#) tab.c       10.07.1999";
 #endif
 
 #include "import.h"
@@ -74,11 +74,8 @@ LOCAL int		tab_toplines;						/* Oben Linie(n)?			*/
 LOCAL char		cells[MAX_TAB_W+1][MAX_CELLS_LEN];	/* Puffer fuer Zellen		*/
 LOCAL int		cells_counter;						/* Anzahl Zellen von Zeilen	*/
 
-#define TAB_ADDITION_LEN	512
-LOCAL char addition[TAB_ADDITION_LEN]="";
-LOCAL BOOLEAN addition_has_align;
-LOCAL BOOLEAN addition_has_valign;
-LOCAL int addition_col_offset;
+
+LOCAL char addition[512]="";
 
 
 /*	############################################################
@@ -702,61 +699,98 @@ LOCAL void table_output_win ( void )
 
 }	/* table_output_win */
 
-LOCAL void test_for_addition(char *cell)
-{
-	char *found2 = NULL, *tok = NULL;
-	size_t clen;
 
-	if (cell[0]=='[') cell=&cell[1]; /* Eat leading [ */
-	clen=strlen(cell); /* Get length of Cell */
-	if (clen==0) return; /* Empty string? -> Return */
-	if (cell[clen-1]==']') cell[clen-1]=EOS; /* Eat tailing ] */
-	if (cell[0]==0) return; /* Empty string? -> Return */
-	/* Now we have to see, if there are entries */
-	tok = strtok(cell, " ,\t"); /* The whitespace, colon, or tab are seperators */
-	while(tok)
-	{
-		found2 = strstr(tok, "COLS=");
+
+LOCAL void test_for_addition(char *cell)
+
+{
+
+	char *found2 = NULL, *tok = NULL;
+
+
+
+/*		found2 = strstr(tab_cell[y][x], "COLS=");
+
 		if(found2 != NULL)
-		{	um_strcat(addition, " colspan=\"", TAB_ADDITION_LEN, "test_for_addition[1]");
-			addition_col_offset=atoi(found2+5);
-			um_strncat(addition, found2+5, 2L, TAB_ADDITION_LEN, "test_for_addition[2]");
-			um_strcat(addition, "\"", TAB_ADDITION_LEN, "test_for_addition[3]");
+
+		{	strcat(addition, " colspan=\"");
+
+			strncat(addition, found2+5, 1L);
+
+			strcat(addition, "\"");
+
+			col=TRUE;
+
 		}
+
+*/
+
+puts(cell);
+
+
+
+	tok = strtok(cell, " , ");
+
+	while(tok)
+
+	{
+
+puts(tok);
+
+		found2 = strstr(tok, "COLS=");
+
+		if(found2 != NULL)
+
+		{	strcat(addition, " colspan=\"");
+
+			strncat(addition, found2+5, 1L);
+
+			strcat(addition, "\"");
+
+		}
+
+
 
 		found2 = strstr(tok, "BGC=");
+
 		if(found2 != NULL)
-		{	um_strcat(addition, " bgcolor=\"", TAB_ADDITION_LEN, "test_for_addition[4]");
-			um_strcat(addition, found2+4, TAB_ADDITION_LEN, "test_for_addition[5]");
-			um_strcat(addition, "\"", TAB_ADDITION_LEN, "test_for_addition[6]");
+
+		{	strcat(addition, " bgcolor=\"");
+
+			strcat(addition, found2+4);
+
+			strcat(addition, "\"");
+
 		}
+
+
 
 		found2 = strstr(tok, "HA=");
+
 		if(found2 != NULL)
-		{	um_strcat(addition, " align=\"", TAB_ADDITION_LEN, "test_for_addition[7]");
-			um_strcat(addition, found2+3, TAB_ADDITION_LEN, "test_for_addition[8]");
-			um_strcat(addition, "\"", TAB_ADDITION_LEN, "test_for_addition[9]");
-			addition_has_align=TRUE;
+
+		{	strcat(addition, " align=\"");
+
+			strcat(addition, found2+3);
+
+			strcat(addition, "\"");
+
 		}
 
-		found2 = strstr(tok, "VA=");
-		if (found2 != NULL)
-		{
-			um_strcat(addition, " valign=\"", TAB_ADDITION_LEN, "test_for_addition[10]");
-			um_strcat(addition, found2+3, TAB_ADDITION_LEN, "test_for_addition[11]");
-			um_strcat(addition, "\"", TAB_ADDITION_LEN, "test_for_addition[12]");
-			addition_has_valign=TRUE;
-		}
+
 
 		tok = strtok(NULL, ",");
+
 	}
+
+
+
 }	/* test_for_addition */
 
 LOCAL void table_output_html ( void )
 {
 	int		y, x;
 	char	f[LINELEN], alignOn[64]; /* r6.3.18[vj]: f is now LINELEN chars long instead of 512 */
-	char	token_buffer[LINELEN];	 /* v6.5.3[vj]: New buffer needed for table extension */
 	BOOLEAN inside_center, inside_right, inside_left;
 
 	inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);
@@ -800,54 +834,34 @@ LOCAL void table_output_html ( void )
 		for (x=0; x<=tab_w; x++)
 		{	/* New in r6pl16 [NHz] */
 
-			char *found = NULL; /*, *token = NULL;*/
-			size_t tokposition;
+			char *found = NULL, *token = NULL;
 
-			addition[0] = EOS; /* addition takes the extra options per cell, so it needs to be cleaned */
-			token_buffer[0] = EOS; /* This is the buffer where we keep the per cell format information */
-			/* This BOOLEAN flags are possibly set in test_for_addition */
-			addition_has_align=FALSE;
-			addition_has_valign=FALSE;
-			addition_col_offset=0;
+			addition[0] = EOS;
 
 			/* some tables have empty cells, so always check befor using tab_cell entries */
 			if (tab_cell[y][x]!=NULL)
 			    found = strstr(tab_cell[y][x], "!?");
 
 			if(found != NULL)
-			{
-				tokposition=strcspn(tab_cell[y][x], "!");
-				um_strncpy(token_buffer, tab_cell[y][x], tokposition, MAX_TOKEN_LEN+1, "table_output_html[3]"); /* <???> Pufferüberlauf möglich? Wie groß kann hier token wirklich sein? */
-				token_buffer[tokposition]=EOS;
+			{	um_strncpy(token, tab_cell[y][x], strcspn(tab_cell[y][x], "!"), MAX_TOKEN_LEN+1, "table_output_html[3]"); /* <???> Pufferüberlauf möglich? Wie groß kann hier token wirklich sein? */
 
-				del_whitespaces (token_buffer); /* Delete Whitespaces before checking for additions */
-				test_for_addition(token_buffer);
+				test_for_addition(token);
 
 				tab_cell[y][x] = found+2;
 
 			}
 
-			/*switch(tab_just[x])
+			switch(tab_just[x])
 			{	case TAB_CENTER:	voutf("  <td align=\"center\" valign=\"top\"%s>", addition);	break;
 				case TAB_RIGHT:		voutf("  <td align=\"right\" valign=\"top\"%s>", addition);	break;
 				default:			voutf("  <td align=\"left\" valign=\"top\"%s>", addition);	break;
-			}*/
-			/* Everything not set in test_for_addition is now set here */
-			switch(tab_just[x])
-			{	case TAB_CENTER:	if (!addition_has_align) um_strcat(addition, " align=\"center\"", TAB_ADDITION_LEN, "table_output_html[3-1-0]");
-									if (!addition_has_valign) um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-1]");
-									break;
-				case TAB_RIGHT:		if (!addition_has_align) um_strcat(addition, " align=\"right\"", TAB_ADDITION_LEN, "table_output_html[3-1-2]");
-									if (!addition_has_valign) um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-3]");
-									break;
-				default:			if (!addition_has_align) um_strcat(addition, " align=\"left\"", TAB_ADDITION_LEN, "table_output_html[3-1-4]");
-									if (!addition_has_valign) um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-5]");
-									break;
 			}
-			voutf("  <td%s>", addition);
-			/* If there is a colspan, we need to supress empty cols */
-			if (addition_col_offset>0) x=x+addition_col_offset-1;
-			out(sHtmlPropfontStart);
+/*			switch(tab_just[x])
+			{	case TAB_CENTER:	out("  <td align=center valign=top>");	break;
+				case TAB_RIGHT:		out("  <td align=right valign=top>");	break;
+				default:			out("  <td align=left valign=top>");	break;
+			}
+*/			out(sHtmlPropfontStart);
 			if ( tab_cell[y][x]!=NULL )
 			{	um_strcpy(f, tab_cell[y][x], LINELEN, "table_output_html[4]");
 				auto_quote_chars(f, FALSE);
@@ -995,12 +1009,7 @@ LOCAL void table_output_ipf ( void )
 
 	f[0]= EOS;
 	for (i=0; i<=tab_w; i++)
-	{
-#ifdef UM_PRINTF_USE_LD
-		sprintf(cx, "%u ", tab_cell_w[i]);
-#else
-		sprintf(cx, "%lu ", tab_cell_w[i]);
-#endif
+	{	sprintf(cx, "%lu ", tab_cell_w[i]);
 		strcat(f, cx);
 	}
 	del_whitespaces(f);

@@ -20,7 +20,7 @@
 	############################################################	*/
 #ifndef ID_CHARS_C
 #define	ID_CHARS_C
-const char *id_chr_c= "@(#) chr.c       08.04.2004";
+const char *id_chr_c= "@(#) chr.c       05.02.2004";
 #endif
 
 #include "import.h"
@@ -1403,17 +1403,17 @@ GLOBAL void node2postscript ( char *s, int text )
 					s[79L-strlen(titdat.author)] = EOS;
 				strcat(s, "...\0");
 			}
-			/* Changed in V6.5.5 [NHz] */
+			/* Changed in V6.4.1 [NHz] */
 			qreplace_all(s, "(", 1, "\\(", 2);
 			qreplace_all(s, ")", 1, "\\)", 2);
-			/* Changed: Fixed bug #0000062 in V6.5.8 [NHz] */
+			/* Changed: Fixed bug #0000062 in V6.4.1 [NHz] */
 			qreplace_all(s, "[", 1, "\\[", 2);
 			qreplace_all(s, "]", 1, "\\]", 2);
 			break;
 		
 		case KPS_CONTENT:
 			qreplace_all(s, "/", 1, "\\/", 2);
-			/* Changed in V6.5.5 [NHz] */
+			/* Changed in V6.4.1 [NHz] */
 			qreplace_all(s, "(", 1, "\\(", 2);
 			qreplace_all(s, ")", 1, "\\)", 2);
 			qreplace_all(s, "[", 1, "\\[", 2);
@@ -1428,7 +1428,7 @@ GLOBAL void node2postscript ( char *s, int text )
 					s[31] = EOS;
 			}
 			qreplace_all(s, "/", 1, "\\/", 2);
-			/* Changed in V6.5.5 [NHz] */
+			/* Changed in V6.4.1 [NHz] */
 			qreplace_all(s, "(", 1, "\\(", 2);
 			qreplace_all(s, ")", 1, "\\)", 2);
 			qreplace_all(s, "[", 1, "\\[", 2);
@@ -1813,7 +1813,7 @@ LOCAL void specials2ps ( char *s )
 	qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "---", 3);
 	qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "--", 2);
 
-	/* Changed in V6.5.6 [NHz] */
+	/* Changed in V6.4.1 [NHz] */
 	qreplace_all(s, "!..", 3, "\\214", 4);	/* according to table in ud2ps.h */
 	qreplace_all(s, COPY_S, COPY_S_LEN, "\\251", 4);
 }
@@ -2076,7 +2076,7 @@ GLOBAL void c_vars ( char *s )
 			qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "&quot;&quot;", 12);
 			qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
 			break;
-		/* Changed in V6.5.6 [NHz] */
+		/* Changed in V6.4.1 [NHz] */
 		case TOKPS:
 			{	
 				switch (destlang)
@@ -2119,22 +2119,10 @@ GLOBAL void c_vars ( char *s )
 			qreplace_all(s, "(!copyright)", 12, "\\copyright{}", 12);
 			qreplace_all(s, "(!alpha)", 8, "$\\alpha$", 8);
 			qreplace_all(s, "(!beta)", 7, "$\\beta$", 7);
-			/* New in V6.5.8 [NHz] */
-			qreplace_all(s, "(!euro)", 7, "\\euro", 5);
-			qreplace_all(s, "(!pound)", 8, "GBP", 3);
-			qreplace_all(s, "(!reg)", 6, "\\registered{}", 13);
-			qreplace_all(s, "(!tm)", 5, "\\trademark{}", 12);
-			qreplace_all(s, "(!deg)", 6, "$^{o}$", 6);
 			break;
 		case TOLYX:
 			replace_all(s, "(!grin)", "\\family"INDENT_S"typewriter"INDENT_S";-)\\family"INDENT_S"default"INDENT_S);
 			replace_all(s, "(!laugh)", "\\family"INDENT_S"typewriter"INDENT_S":-)\\family"INDENT_S"default"INDENT_S);
-			/* New in V6.5.8 [NHz] */
-			qreplace_all(s, "(!euro)", 7, "EUR", 3);
-			qreplace_all(s, "(!pound)", 8, "GBP", 3);
-			qreplace_all(s, "(!reg)", 6, "(r)", 3);
-			qreplace_all(s, "(!tm)", 5, "(tm)", 4);
-			qreplace_all(s, "(!deg)", 6, " Grad", 5);
 			specials2ascii(s);
 			texvar2ascii(s);
 			break;
@@ -2143,12 +2131,6 @@ GLOBAL void c_vars ( char *s )
 			qreplace_all(s, "(!laugh)", 8, "@code{:-)}", 10);
 			qreplace_all(s, "(!TeX)", 6, "@TeX{}", 6);
 			qreplace_all(s, "(!copyright)", 12, "@copyright{}", 12);
-			/* New in V6.5.8 [NHz] */
-			qreplace_all(s, "(!euro)", 7, "EUR", 3);
-			qreplace_all(s, "(!pound)", 8, "GBP", 3);
-			qreplace_all(s, "(!reg)", 6, "(r)", 3);
-			qreplace_all(s, "(!tm)", 5, "(tm)", 4);
-			qreplace_all(s, "(!deg)", 6, " Grad", 5);
 			specials2info(s);
 			texvar2ascii(s);
 			break;
@@ -2160,12 +2142,6 @@ GLOBAL void c_vars ( char *s )
 			qreplace_all(s, "(!laugh)", 8, ":-)", 3);
 			qreplace_all(s, "(!alpha)", 8, ALPHA_S, ALPHA_S_LEN);
 			qreplace_all(s, "(!beta)", 7, BETA_S, BETA_S_LEN);
-			/* New in V6.5.8 [NHz] */
-			qreplace_all(s, "(!euro)", 7, "EUR", 3);
-			qreplace_all(s, "(!pound)", 8, "GBP", 3);
-			qreplace_all(s, "(!reg)", 6, "(r)", 3);
-			qreplace_all(s, "(!tm)", 5, "(tm)", 4);
-			qreplace_all(s, "(!deg)", 6, " Grad", 5);
 			specials2ascii(s);
 			texvar2ascii(s);
 			break;
@@ -2175,16 +2151,10 @@ GLOBAL void c_vars ( char *s )
 			qreplace_all(s, "(!laugh)", 8, ":-\\)", 4);
 			qreplace_all(s, "(!alpha)", 8, ALPHA_S, ALPHA_S_LEN);
 			qreplace_all(s, "(!beta)", 7, BETA_S, BETA_S_LEN);
-			/* New in V6.5.8 [NHz] */
-			qreplace_all(s, "(!euro)", 7, "\\200", 4);
-			qreplace_all(s, "(!pound)", 8, "\\243", 4);
-			qreplace_all(s, "(!reg)", 6, "\\256", 3);
-			qreplace_all(s, "(!tm)", 5, "\\215", 4);
-			qreplace_all(s, "(!deg)", 6, "\\201", 4);
 /*			qreplace_all(s, "\\(--\\)", 6, "--", 2);*/
 			/* For future use, but commented because of some problems */
 
-			/* Changed in V6.5.5 [NHz] */
+			/* Changed in V6.4.1 [NHz] */
 			specials2ps(s);
 			/*specials2ascii(s);*/
 			texvar2ascii(s);
@@ -2200,12 +2170,6 @@ GLOBAL void c_vars ( char *s )
 			qreplace_all(s, "(!laugh)", 8, ":-)", 3);
 			qreplace_all(s, "(!alpha)", 8, ALPHA_S, ALPHA_S_LEN);
 			qreplace_all(s, "(!beta)", 7, BETA_S, BETA_S_LEN);
-			/* New in V6.5.8 [NHz] */
-			qreplace_all(s, "(!euro)", 7, "EUR", 3);
-			qreplace_all(s, "(!pound)", 8, "GBP", 3);
-			qreplace_all(s, "(!reg)", 6, "(r)", 3);
-			qreplace_all(s, "(!tm)", 5, "(tm)", 4);
-			qreplace_all(s, "(!deg)", 6, " Grad", 5);
 			specials2ascii(s);
 			texvar2ascii(s);
 			break;
@@ -2214,12 +2178,6 @@ GLOBAL void c_vars ( char *s )
 			qreplace_all(s, "(!laugh)", 8, "&colon.-)", 9);
 			qreplace_all(s, "(!alpha)", 8, ALPHA_S, ALPHA_S_LEN);
 			qreplace_all(s, "(!beta)", 7, BETA_S, BETA_S_LEN);
-			/* New in V6.5.8 [NHz] */
-			qreplace_all(s, "(!euro)", 7, "EUR", 3);
-			qreplace_all(s, "(!pound)", 8, "GBP", 3);
-			qreplace_all(s, "(!reg)", 6, "(r)", 3);
-			qreplace_all(s, "(!tm)", 5, "(tm)", 4);
-			qreplace_all(s, "(!deg)", 6, " Grad", 5);
 			specials2ipf(s);
 			texvar2ascii(s);
 			break;
@@ -2229,12 +2187,6 @@ GLOBAL void c_vars ( char *s )
 			qreplace_all(s, "(!alpha)", 8, "alpha", 5);
 			qreplace_all(s, "(!beta)", 7, "beta", 4);
 			qreplace_all(s, "(!copyright)", 12, "\\'A9", 4);
-			/* New in V6.5.8 [NHz] */
-			qreplace_all(s, "(!euro)", 7, "\\'80", 4);
-			qreplace_all(s, "(!pound)", 8, "\\'A3", 4);
-			qreplace_all(s, "(!reg)", 6, "\\'AE", 4);
-			qreplace_all(s, "(!tm)", 5, "\\'99", 4);
-			qreplace_all(s, "(!deg)", 6, "\\'B0", 4);
 			specials2rtf(s);
 			texvar2ascii(s);
 			break;
@@ -2245,12 +2197,6 @@ GLOBAL void c_vars ( char *s )
 			qreplace_all(s, "(!alpha)", 8, "{\\f2 a}", 7);
 			qreplace_all(s, "(!beta)", 7, "{\\f2 b}", 7);
 			qreplace_all(s, "(!copyright)", 12, "\\'A9", 4);
-			/* New in V6.5.8 [NHz] */
-			qreplace_all(s, "(!euro)", 7, "EUR", 3);
-			qreplace_all(s, "(!pound)", 8, "GBP", 3);
-			qreplace_all(s, "(!reg)", 6, "\\'AE", 4);
-			qreplace_all(s, "(!tm)", 5, "(tm)", 4);
-			qreplace_all(s, "(!deg)", 6, "\\'B0", 4);
 			specials2win(s);
 			texvar2ascii(s);
 			break;
@@ -2260,12 +2206,6 @@ GLOBAL void c_vars ( char *s )
 			qreplace_all(s, "(!alpha)", 8, "{\\f2 a}", 7);
 			qreplace_all(s, "(!beta)", 7, "{\\f2 b}", 7);
 			qreplace_all(s, "(!copyright)", 12, "\\'A9", 4);
-			/* New in V6.5.8 [NHz] */
-			qreplace_all(s, "(!euro)", 7, "\\'80", 4);
-			qreplace_all(s, "(!pound)", 8, "\\'A3", 4);
-			qreplace_all(s, "(!reg)", 6, "\\'AE", 4);
-			qreplace_all(s, "(!tm)", 5, "(tm)", 4);
-			qreplace_all(s, "(!deg)", 6, "\\'B0", 4);
 			specials2ascii(s);
 			texvar2ascii(s);
 			break;
@@ -2274,12 +2214,6 @@ GLOBAL void c_vars ( char *s )
 			qreplace_all(s, "(!grin)", 7, "<TT>;-)</TT>", 12);
 			qreplace_all(s, "(!laugh)", 8, "<TT>:-)</TT>", 12);
 			qreplace_all(s, "(!copyright)", 12, "&copy;", 6);
-			/* New in V6.5.8 [NHz] */
-			qreplace_all(s, "(!euro)", 7, "&euro;", 6);
-			qreplace_all(s, "(!pound)", 8, "&pound;", 7);
-			qreplace_all(s, "(!reg)", 6, "&reg;", 5);
-			qreplace_all(s, "(!tm)", 5, "&trade;", 7);
-			qreplace_all(s, "(!deg)", 6, "&deg;", 5);
 
 			/* Changed in r6pl15 [NHz] */
 
@@ -2291,24 +2225,12 @@ GLOBAL void c_vars ( char *s )
 		case TOLDS:
 			qreplace_all(s, "(!grin)", 7, "<tt/;-)/", 8);
 			qreplace_all(s, "(!laugh)", 8, "<tt/:-)/", 8);
-			/* New in V6.5.8 [NHz] */
-			qreplace_all(s, "(!euro)", 7, "EUR", 3);
-			qreplace_all(s, "(!pound)", 8, "GBP", 3);
-			qreplace_all(s, "(!reg)", 6, "(r)", 3);
-			qreplace_all(s, "(!tm)", 5, "(tm)", 4);
-			qreplace_all(s, "(!deg)", 6, " Grad", 5);
 			specials2ascii(s);
 			texvar2ascii(s);
 			break;
 		case TOHPH:
 			qreplace_all(s, "(!grin)", 7, "<ex>;-)<\\ex>", 12);
 			qreplace_all(s, "(!laugh)", 8, "<ex>:-)<\\ex>", 12);
-			/* New in V6.5.8 [NHz] */
-			qreplace_all(s, "(!euro)", 7, "EUR", 3);
-			qreplace_all(s, "(!pound)", 8, "GBP", 3);
-			qreplace_all(s, "(!reg)", 6, "(r)", 3);
-			qreplace_all(s, "(!tm)", 5, "(tm)", 4);
-			qreplace_all(s, "(!deg)", 6, " Grad", 5);
 			specials2ascii(s);
 			texvar2ascii(s);
 			break;
@@ -2853,7 +2775,7 @@ GLOBAL void auto_quote_chars ( char *s, BOOLEAN all )
 						ptr_quoted= s_temp;
 					}
 				}
-/* Changed in V6.5.5 [NHz] */
+/* Changed in V6.4.1 [NHz] */
 #if 0
 				else
 				{

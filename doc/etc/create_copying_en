@@ -1,4 +1,0 @@
-#!/bin/sh
-udo --asc --verbose --force-long -D LANG_EN -o COPYING.txt copying.u
-# das folgende ist vorläufig!
-cp COPYING.txt ../../COPYRIGHT

@@ -1,5 +1,0 @@
-!no_preamble [tex]
-!raw [tex] \documentstyle[11pt,makeidx]{article}
-!raw [tex] \makeindex
-[...]
-!raw [tex] \printindex

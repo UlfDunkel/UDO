@@ -1,3 +1,0 @@
-!ifndest [asc]
-!raw [all] This line will not appear when convertign to ASCII
-!endif

@@ -177,7 +177,7 @@ const char *UDO2PS=
 	"  /acty topmargin def\n"
 	"  actx acty moveto\n"
 	"  %%--- Setup the 12 fonts...\n"
-/*	"  /UdoSwiss             /Helvetica             makeisomap\n"
+	"  /UdoSwiss             /Helvetica             makeisomap\n"
 	"  /UdoSwissItalic       /Helvetica-Oblique     makeisomap\n"
 	"  /UdoSwissBold         /Helvetica-Bold        makeisomap\n"
 	"  /UdoSwissBoldItalic   /Helvetica-BoldOblique makeisomap\n"
@@ -188,7 +188,7 @@ const char *UDO2PS=
 	"  /UdoCourier           /Courier               makeisomap\n"
 	"  /UdoCourierItalic     /Courier-Oblique       makeisomap\n"
 	"  /UdoCourierBold       /Courier-Bold          makeisomap\n"
-	"  /UdoCourierBoldItalic /Courier-BoldQblique   makeisomap\n"*/
+	"  /UdoCourierBoldItalic /Courier-BoldQblique   makeisomap\n"
 	/* New in V6.5.6 [NHz] */
 	"  10.0 /Helvetica              /UdoSwiss              ChgFnt\n"
 	"  10.0 /Helvetica-Oblique      /UdoSwissItalic        ChgFnt\n"

@@ -1,9 +1,0 @@
-!ifdest [html]
-  !define H1 <H1>
-  !define h1 </H1>
-!else
-  !define H1
-  !define h1
-!endif
-[...]
-(!H1)Eine Überschrift(!h1)

@@ -44,7 +44,7 @@ typedef struct _mytextfile
 	############################################################	*/
 
 GLOBAL MYTEXTFILE *myTextOpen ( const char *filename );
-GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf );
+GLOBAL char *myTextGetline ( char *string, int n, MYTEXTFILE *tf );
 GLOBAL int myTextClose ( MYTEXTFILE *tf );
 
 

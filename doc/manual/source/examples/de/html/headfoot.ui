@@ -1,8 +1,0 @@
-!ifdest [html]
-!define HR <hr>
-!macro  HEAD [ Software | Kontaktadressen | Links ] (!HR)
-!macro  FOOT (!I)Dirk Hagedorn - Letzte Änderung (!short_today])
-!else
-!define HR
-!macro  HEAD
-!macro  FOOT

@@ -325,7 +325,7 @@
 #define	TEMPO_S_LEN		4
 #define	TEMPO_S2_LEN	4
 
-/* New in V6.5.5 [NHz] */
+/* New in V6.4.1 [NHz] */
 #define KPSPO_S		"\033\007\003\033"		/* Parenthis for Postscript */
 #define KPSPO_S_LEN		4
 #define KPSPC_S		"\033\007\004\033"

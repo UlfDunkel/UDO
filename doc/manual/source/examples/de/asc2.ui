@@ -1,3 +1,0 @@
-!ifndest [asc]
-!raw [all] Diese Zeile erscheint nicht im ASCII-Format
-!endif

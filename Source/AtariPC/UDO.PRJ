@@ -2,9 +2,6 @@ UDO.TTP
 
 .C[ -DUSE_PCTOS]
 .C[ -D__COMPATIBLE__ ]
-.C[ -C- ]
-
-.C[ -P ]
 .L[ -S=32000 ]
 ;.C[ -Y ]
 ;.L[ -Y -G -L ]

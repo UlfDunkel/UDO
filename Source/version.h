@@ -43,8 +43,8 @@
 	Release-Nummer und Patchlevel setzen
 	------------------------------------------------------------	*/
 #define	UDO_REL		"6"
-#define UDO_SUBVER	"5"
-#define	UDO_PL		"9"
+#define UDO_SUBVER	"4"
+#define	UDO_PL		"1"
 #define	UDO_URL		"http://www.udo-open-source.org"
 #define	UDO_MADE	"Made with UDO"
 
@@ -87,11 +87,6 @@
 #define	HAVE_TMPNAM				0
 #endif
 
-/* OS/2 Support: OS/2 verhält sich wie DOS */
-#ifdef __OS2__
-#define __MSDOS__
-#endif
-
 #ifdef __MSDOS__
 #define	UDO_OS					"DOS"
 #define	USE_SLASH				0
@@ -107,11 +102,6 @@
 #define	HAVE_STRERROR			1
 #define	USE_SETFILETYPE		0
 #define	HAVE_TMPNAM				1
-#endif
-
-#ifdef __OS2__
-#undef UDO_OS
-#define	UDO_OS          "OS/2"
 #endif
 
 #ifdef __MSDOS850__

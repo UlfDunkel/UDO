@@ -835,7 +835,7 @@ GLOBAL void c_bmp_output ( const char *name, const char *caption, const BOOLEAN 
 	{
 		case TORTF:	/*r6pl6*/
 			if ( !get_bmpheader(datei, &bmpheader) )
-			{	/* Fixed bug #0000017 in V6.5.2 [NHz] */
+			{	/* Fixed bug #0000017 in V6.4.1 [NHz] */
 				if(strstr(datei, BMP_MW_NAME) != NULL)
 					error_read_bmp(BMP_MW_NAME);
 				else
@@ -851,7 +851,7 @@ GLOBAL void c_bmp_output ( const char *name, const char *caption, const BOOLEAN 
 			}
 
 			uc4ToInt(bmpheader.biWidth, &width);
-			/* Fixed bug #0000056 in V6.5.2 [NHz] */
+			/* Fixed bug #0000056 in V6.4.1 [NHz] */
 			uc4ToInt(bmpheader.biHeight, &height);
 			uc2ToInt(bmpheader.biBitCnt, &bitcnt);
 			uc2ToInt(bmpheader.biPlanes, &planes);
@@ -917,7 +917,7 @@ GLOBAL void c_bmp_output ( const char *name, const char *caption, const BOOLEAN 
 					/* sprintf(n, "%s %d: %s", lang.figure, image_counter, caption); */
 					/* removed parenthesis */
 
-					/* Fixed bug #0000056 in V6.5.2 [NHz] */
+					/* Fixed bug #0000056 in V6.4.1 [NHz] */
 					sprintf(n, "{{\\*\\bkmkstart _tocimg%d}%s }{\\field{\\*\\fldinst {SEQ %s \\\\* ARABIC }}{\\fldrslt %d}}: %s{\\*\\bkmkend _Tocimg%d}", image_counter, lang.figure, lang.figure, image_counter, caption, image_counter);
 				}
 				else
@@ -1374,7 +1374,7 @@ GLOBAL void c_png_output ( const char *name, const char *caption, const char *su
 #endif
 
 	outln("\\mbox{");
-	/* Changed in V6.5.7 [NHz] */
+	/* Changed in V6.4.1 [NHz] */
 	voutlnf("\\pdfximage{%s}\\pdfrefximage\\pdflastximage", datei);
 	outln("}");
 

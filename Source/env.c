@@ -2364,7 +2364,7 @@ GLOBAL void c_item ( void )
 		 		case ENV_ENUM:
 					enum_count[iEnvLevel]++;
 					itoenum(iEnumLevel, &(enum_count[iEnvLevel]), s);
-					/* Changed in V6.5.5 [NHz] */
+					/* Changed in V6.4.1 [NHz] */
 					sprintf(token[0], "%s\n%s%d.%s off%d writeBeforeLeft\n%s", KPSPC_S, KPSPO_S,
 						enum_count[iEnvLevel], KPSPC_S, iEnvLevel, KPSPO_S);
 					break;
@@ -2391,7 +2391,7 @@ GLOBAL void c_item ( void )
 
 						delete_once(token[0], "[");
 						delete_last(token[0], "]");
-						/* Changed in V6.5.5 [NHz] */
+						/* Changed in V6.4.1 [NHz] */
 	 					sprintf(s, "%s udoshow Bon %s%s%s offDesc writeBeforeLeft Boff %s", KPSPC_S, KPSPO_S, token[0], KPSPC_S, KPSPO_S);
 
 						um_strcpy(token[0], s, MAX_TOKEN_LEN+1, "c_item[42]");
@@ -2440,19 +2440,19 @@ GLOBAL void c_item ( void )
 					switch(env_kind[iEnvLevel])
 		 			{
 		 				case LIST_BOLD:
-							/* Changed in V6.5.5 [NHz] */
+							/* Changed in V6.4.1 [NHz] */
 		 					sprintf(s, "%s udoshow Bon %s%s%s offList offCountS get writeBeforeLeft Boff %s", KPSPC_S, KPSPO_S, token[0], KPSPC_S, KPSPO_S);
 		 					break;
 		 				case LIST_ITALIC:
-							/* Changed in V6.5.5 [NHz] */
+							/* Changed in V6.4.1 [NHz] */
 		 					sprintf(s, "%s udoshow Ion %s%s%s offList offCountS get writeBeforeLeft Ioff %s", KPSPC_S, KPSPO_S, token[0], KPSPC_S, KPSPO_S);
 		 					break;
 		 				case LIST_TYPEWRITER:
-							/* Changed in V6.5.5 [NHz] */
+							/* Changed in V6.4.1 [NHz] */
 		 					sprintf(s, "%s udoshow Von %s%s%s offList offCountS get writeBeforeLeft Voff  %s", KPSPC_S, KPSPO_S, token[0], KPSPC_S, KPSPO_S);
 		 					break;
 		 				default:
-							/* Changed in V6.5.5 [NHz] */
+							/* Changed in V6.4.1 [NHz] */
 		 					sprintf(s, "%s udoshow %s%s%s offList offCountS get writeBeforeLeft %s", KPSPC_S, KPSPO_S, token[0], KPSPC_S, KPSPO_S);
 		 					break;
 		 			}
@@ -3112,46 +3112,6 @@ GLOBAL void c_begin_document ( void )
 			{	voutlnf("  {\\title %s}", titleprogram);
 			}
 
-			/* New in V6.5.2 [NHz] */
-			/* ---- \description ---- */
-			/* v6.5.6 [vj] added test for NULL, otherwise UDO might crash */
-			if (titdat.description!=NULL)
-			{
-				if (titdat.description[0]!=EOS)
-				{	voutlnf("  {\\subject %s}", titdat.description);
-				}
-			}
-
-			/* New in V6.5.2 [NHz] */
-			/* ---- \keywords ---- */
-			/* v6.5.6 [vj] added test for NULL, otherwise UDO might crash */
-			if (titdat.keywords!=NULL)
-			{
-				if (titdat.keywords[0]!=EOS)
-				{	voutlnf("  {\\keywords %s}", titdat.keywords);
-				}
-			}
-
-			/* New in V6.5.2 [NHz] */
-			/* ---- \company ---- */
-			/* v6.5.6 [vj] added test for NULL, otherwise UDO might crash */
-			if (titdat.company!=NULL)
-			{
-				if (titdat.company[0]!=EOS)
-				{	voutlnf("  {\\*\\company %s}", titdat.company);
-				}
-			}
-
-			/* New in V6.5.2 [NHz] */
-			/* ---- \category ---- */
-			/* v6.5.6 [vj] added test for NULL, otherwise UDO might crash */
-			if (titdat.category!=NULL)
-			{
-				if (titdat.category[0]!=EOS)
-				{	voutlnf("  {\\*\\category %s}", titdat.category);
-				}
-			}
-
 			/* ---- Ueber UDO ---- */
 			voutlnf("  {\\doccomm UDO Version %s.%s.%s}", UDO_REL, UDO_SUBVER, UDO_PL);
 
@@ -3319,7 +3279,7 @@ GLOBAL void c_begin_document ( void )
 			/* Document info */
 			voutlnf("[ /Title (%s %s)", titdat.title, titdat.program);
 			voutlnf("  /Author (%s)", titdat.author);
-			/* Changed: Fixed bug #0000062 in V6.5.8 [NHz] */
+			/* Changed: Fixed bug #0000062 in V6.4.1 [NHz] */
 			if(titdat.description)
 				voutlnf("  /Subject (%s)", titdat.description);
 			if(titdat.keywords)
@@ -3652,7 +3612,7 @@ GLOBAL void init_env_itemchar ( void )
 			break;
 
 		case TOKPS:
-			/* Changed in V6.5.6 [NHz] */
+			/* Changed in V6.4.1 [NHz] */
 			sprintf(itemchar[1], "%s\n/bullet off1 writeBulletLeft\n%s", KPSPC_S, KPSPO_S);
 			sprintf(itemchar[2], "%s\n/endash off1 writeBulletLeft\n%s", KPSPC_S, KPSPO_S);
 			sprintf(itemchar[3], "%s\n/asterix off1 writeBulletLeft\n%s", KPSPC_S, KPSPO_S);

@@ -29,15 +29,13 @@
 
 #ifndef ID_TOC_C
 #define ID_TOC_C
-const char *id_toc_c= "@(#) toc.c       04.02.2004";
+const char *id_toc_c= "@(#) toc.c       12.06.1999";
 #endif
 
 #include "import.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
-#include <ctype.h>
 #include "portab.h"
 #include "version.h"
 #include "constant.h"
@@ -214,7 +212,7 @@ LOCAL int get_toccmd_depth ( void );
 LOCAL TOCITEM *init_new_toc_entry ( const int toctype, const BOOLEAN invisible );
 LOCAL BOOLEAN add_toc_to_toc ( void );
 
-/*LOCAL void free_toc_data ( char **var );*/
+LOCAL void free_toc_data ( char **var );
 
 /*	------------------------------------------------------------------	*/
 
@@ -327,11 +325,11 @@ LOCAL void output_aliasses ( void )
 	/* Fuer Pure C Help und Turbo Vision Help werden die Aliasse zusammen */
 	/* mit *nodes ausgegeben */
 
-/*#if 1*/
+#if 1
 	start= toc[p2_toc_counter]->labindex;	/* r6pl2 */
-/*#else
+#else
 	start= 1;
-#endif*/
+#endif
 
 	if (start<=0)
 	{	return;
@@ -628,12 +626,12 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 			}
 			else
 			{
-/*#if 1*/
+#if 1
 				sprintf(hfn, "%s%s", html_name_prefix, toc[ui]->filename);
 				htmlfilename= hfn;
-/*#else
+#else
 				htmlfilename= toc[ui]->filename;
-#endif*/
+#endif
 			}
 
 			/* Feststellen, ob die Referenz im gleichen File liegt */
@@ -937,9 +935,9 @@ GLOBAL void check_endnode ( void )
 				break;
 		}
 
-/*#if 0*/
+#if 0
 		about_unregistered();	/* wird nun am Anfang eines jeden Nodes ausgegeben */
-/*#endif*/
+#endif
 
 		switch (desttype)
 		{
@@ -1379,11 +1377,11 @@ LOCAL void output_pch_header ( const char *numbers, const char *name )
 	outln("");
 	outln("screen(");
 
-/*#if 1*/
+#if 1
 	start= toc[p2_toc_counter]->labindex;
-/*#else
+#else
 	start= 1;
-#endif*/
+#endif
 
 	for (i=start; i<MAXLABELS; i++)
 	{	if ( lab[i]!=NULL )
@@ -1777,8 +1775,8 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 		else
 		{
 			ti= tocindex;					/* default */
-/* Nur zum Debuggen */
-/*#if 0
+
+#if 0	/* Nur zum Debuggen */
 			if (ti<0)
 			{	fprintf(stderr, "ti<0\n");
 			}
@@ -1788,7 +1786,7 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 			if (toc[tocindex]==NULL)
 			{	fprintf(stderr, "toc[tocindex]==NULL\n");
 			}
-#endif*/
+#endif
 			switch (toc[tocindex]->toctype)
 			{
 				case TOC_NODE4:
@@ -1846,11 +1844,11 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 				}
 			}
 		}
-/*#if 0
+#if 0
 		sprintf(s, "%s%s%s%s%s", html_name_prefix, tmp_n1, tmp_n2, tmp_n3, tmp_n4);
-#else*/
+#else
 		sprintf(s, "%s%s%s%s", tmp_n1, tmp_n2, tmp_n3, tmp_n4);
-/*#endif*/
+#endif
 	}
 	else
 	{
@@ -1899,9 +1897,9 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 	############################################################	*/
 LOCAL BOOLEAN html_make_file ( void )
 {
-/*#if 0
+#if 0
 	int ti= p2_toc_counter;
-#endif*/
+#endif
 
 	if (outfile.name[0]==EOS)
 	{	return FALSE;
@@ -1983,68 +1981,13 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 	if (!html_ignore_8bit)
 	{	outln("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=iso-8859-1\">");
 	}
-	else
-	{
-		/* New in v6.5.0 [vj] */
-		if (html_ignore_8bit_use_charset)
-		{
-			/* We should print out a special charset instead of none
-			   No check need if html_ignore_8bit_charset is emtpy,
-			   because html_ignore_8bit_use_charset wouldn't have been set to TRUE
-			 */
-			voutlnf("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=%s\">", html_ignore_8bit_charset);
-		}
-	}
 
 	/* New in r6pl16 [NHz] */
 	voutlnf("<meta http-equiv=\"Content-Language\" content=\"%s\">", lang.html_lang);
 	outln("<meta http-equiv=\"Content-Style-Type\" content=\"text/css\">");
 	outln("<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\">");
 
-	/* New feature #0000054 in V6.5.2 [NHz] */
-	if(html_header_date)
-	{
-		char zone[10]="+00:00";
-		time_t uhrzeit;
-		int hour_local, min_local, mday_local, min_utc, hour_utc, mday_utc;
-		int hours, minutes;
-	
-		if(strcmp(html_header_date_zone, "") >0)
-			um_strcpy(zone, html_header_date_zone, 9, "output_html_meta1");
-		else
-		{
-			time(&uhrzeit);
-			mday_local = localtime(&uhrzeit)->tm_mday;
-			mday_utc = gmtime(&uhrzeit)->tm_mday;
-			hour_local = localtime(&uhrzeit)->tm_hour;
-			hour_utc = gmtime(&uhrzeit)->tm_hour;
-			min_local = localtime(&uhrzeit)->tm_min;
-			min_utc = gmtime(&uhrzeit)->tm_min;
-
-			if(min_local < min_utc)	/* special for countries with "broken times" (e.g. Iran +03:30) */
-			{
-				if(mday_local != mday_utc)	/* if different days over midnight */
-					hours = hour_local - hour_utc - 1 + 24;
-				else
-					hours = hour_local - hour_utc - 1;
-				minutes = min_utc - min_local;
-			}
-			else
-			{
-				if(mday_local != mday_utc)	/* if different days over midnight */
-					hours = hour_local - hour_utc + 24;
-				else
-					hours = hour_local - hour_utc;
-				minutes = min_local - min_utc;
-			}
-
-			sprintf(zone, "%+03d:%02d", hours, minutes);
-		}
-		voutlnf("<meta name=\"date\" content=\"%d-%02d-%02dT%02d:%02d:%02d%s\">", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec, zone);
-	}
-
-	/* Changed in V6.5.5 [NHz] */
-	voutlnf("<meta name=\"Generator\" content=\"UDO %s.%s.%s for %s\">",
+	voutlnf("<meta name=\"Generator\" content=\"UDO %s.%s PL%s for %s\">",
 			UDO_REL, UDO_SUBVER,
 			UDO_PL,
 			UDO_OS);
@@ -2083,160 +2026,147 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 	{	sprintf(sTarget, " target=\"UDOcon\"");
 	}
 
-	/* New feature #0000053 in V6.5.2 [NHz] */
-	if(html_header_links)
-	{
-		if(strstr(html_header_links_kind, "chapter") != NULL)
+	/* New in r6pl16 [NHz] */
+	toc_link_output(1);
+	toc_link_output(2);
+	toc_link_output(3);
+	toc_link_output(4);
+
+	if (old_outfile.name[0]!=EOS)
+	{	/* Changed in r6pl16 [NHz] */
+		/* Feststellen, ob die Referenz im gleichen File liegt */
+		if (strcmp(old_outfile.name, outfile.name)!=0)
 		{
-			toc_link_output(1);
-			toc_link_output(2);
-			toc_link_output(3);
-			toc_link_output(4);
+			voutlnf("<link rel=\"start\" href=\"%s%s\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.html_start);
+			/* Special for CAB */
+			voutlnf("<link rel=\"home\" href=\"%s%s\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.html_start);
+			if (uses_tableofcontents)
+			{	/* New in r6pl15 [NHz] */
+				voutlnf("<link rel=\"contents\" href=\"%s%s#UDOTOC\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.contents);
+				/* Special for CAB */
+				voutlnf("<link rel=\"toc\" href=\"%s%s#UDOTOC\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.contents);
+			}
 		}
 	}
 
-	/* New feature #0000053 in V6.5.2 [NHz] */
-	if(html_header_links)
+	/* Andere moegliche Angaben laut SelfHTML 6.0:
+	* <link rev=relation href="http://www.autorshome.de/" title="Autoren-Homepage">
+	* <link rel=index href="stichwrt.htm" title="Stichwortverzeichnis">
+	* <link rel=glossary href="glossar.htm" title="Begriffs-Glossar">
+	* <link rel=copyright href="rechte.htm" title="Copyright">
+	* <link rel=next href="augsburg.htm" title="n„chste Seite">
+	* <link rel=previous href="aachen.htm" title="vorherige Seite">
+	* <link rel=help href="hilfe.htm" title="Orientierungshilfe">
+	* <link rel=bookmark href="hinweis.htm" title="Neuorientierung">
+	*/
+
+
+	/* New in r6pl16 [NHz] */
+	/* Output of Link-Rel 'up' */
+	/* is going to same place than !html_backpage */
+
+	if(sDocHtmlBackpage[0] != EOS)
 	{
-		if(strstr(html_header_links_kind, "navigation"))
+		strcpy(backpage, sDocHtmlBackpage);
+		tok = strtok(backpage, "\'");
+		strcpy(href, tok);
+		del_right_spaces(href);
+		tok = strtok(NULL, "\'");
+		if(tok != NULL)
 		{
-			if (old_outfile.name[0]!=EOS)
-			{	/* Changed in r6pl16 [NHz] */
-				/* Feststellen, ob die Referenz im gleichen File liegt */
-				if (strcmp(old_outfile.name, outfile.name)!=0)
-				{
-					voutlnf("<link rel=\"start\" href=\"%s%s\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.html_start);
-					/* Special for CAB */
-					voutlnf("<link rel=\"home\" href=\"%s%s\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.html_start);
-					if (uses_tableofcontents)
-					{	/* New in r6pl15 [NHz] */
-						voutlnf("<link rel=\"contents\" href=\"%s%s#UDOTOC\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.contents);
-						/* Special for CAB */
-						voutlnf("<link rel=\"toc\" href=\"%s%s#UDOTOC\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.contents);
-					}
-				}
-			}
-		
-			/* Andere moegliche Angaben laut SelfHTML 6.0:
-			* <link rev=relation href="http://www.autorshome.de/" title="Autoren-Homepage">
-			* <link rel=index href="stichwrt.htm" title="Stichwortverzeichnis">
-			* <link rel=glossary href="glossar.htm" title="Begriffs-Glossar">
-			* <link rel=copyright href="rechte.htm" title="Copyright">
-			* <link rel=next href="augsburg.htm" title="n„chste Seite">
-			* <link rel=previous href="aachen.htm" title="vorherige Seite">
-			* <link rel=help href="hilfe.htm" title="Orientierungshilfe">
-			* <link rel=bookmark href="hinweis.htm" title="Neuorientierung">
-			*/
-		
-		
-			/* New in r6pl16 [NHz] */
-			/* Output of Link-Rel 'up' */
-			/* is going to same place than !html_backpage */
-		
-			if(sDocHtmlBackpage[0] != EOS)
-			{
-				strcpy(backpage, sDocHtmlBackpage);
-				tok = strtok(backpage, "\'");
-				strcpy(href, tok);
-				del_right_spaces(href);
-				tok = strtok(NULL, "\'");
-				if(tok != NULL)
-				{
-					strcpy(alt, tok);
-					auto_quote_chars(alt, TRUE);
-				}
-				else
-					strcpy(alt, href);
-		
-				/* Special for CAB */
-				voutlnf("<link rel=\"up\" href=\"%s\" title=\"%s\">", href, alt);
-			}
-		
-			/* New in r6pl15 [NHz] */
-			/* Output of Link-Rel 'first' */
-		
-			i= toc[ti]->prev_index;
-		
-			if (i>0)
-			{	/* First Node -> No Link */
-				li= toc[1]->labindex;
-		
-				strcpy(s, lab[li]->name);
-				get_html_filename(lab[li]->tocindex, htmlname);
-		
-				/* Special for CAB */
-				/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
-				if(strchr(htmlname, '.') != NULL)
-					voutlnf("<link rel=\"first\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
-				else
-					voutlnf("<link rel=\"first\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
-			}
-		
-		
-			/* New in r6pl15 [NHz] */
-			/* Output of Link-Rel 'prev' */
-		
-			if (i>0)
-			{
-				li= toc[i]->labindex;
-				strcpy(s, lab[li]->name);
-				get_html_filename(lab[li]->tocindex, htmlname);
-		
-				/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
-				if(strchr(htmlname, '.') != NULL)
-				{
-					voutlnf("<link rel=\"prev\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
-					/* Special for CAB */
-					voutlnf("<link rel=\"previous\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
-				}
-				else
-				{
-					voutlnf("<link rel=\"prev\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
-					/* Special for CAB */
-					voutlnf("<link rel=\"previous\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
-				}
-			}
-		
-			/* Output of Link-Rel 'next' */
-		
-			i= toc[ti]->next_index;
-		
-			if (i>1)
-			{
-				li= toc[i]->labindex;
-				strcpy(s, lab[li]->name);
-				get_html_filename(lab[li]->tocindex, htmlname);
-		
-				/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039*/
-				if(strchr(htmlname, '.') != NULL)
-					voutlnf("<link rel=\"next\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
-				else
-					voutlnf("<link rel=\"next\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
-			}
-		
-			/* New in r6pl15 [NHz] */
-			/* Output of Link-Rel 'last' */
-		
-			if (i>1)
-			{
-				if(use_about_udo)
-				{
-					li= toc[p1_toc_counter]->labindex;
-					li--;
-				}
-				else
-					li= toc[p1_toc_counter]->labindex;
-				strcpy(s, lab[li]->name);
-				get_html_filename(lab[li]->tocindex, htmlname);
-		
-				/* Special for CAB */
-				/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
-				if(strchr(htmlname, '.') != NULL)
-					voutlnf("<link rel=\"last\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
-				else
-					voutlnf("<link rel=\"last\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
-			}
+			strcpy(alt, tok);
+			auto_quote_chars(alt, TRUE);
 		}
+		else
+			strcpy(alt, href);
+
+		/* Special for CAB */
+		voutlnf("<link rel=\"up\" href=\"%s\" title=\"%s\">", href, alt);
+	}
+
+	/* New in r6pl15 [NHz] */
+	/* Output of Link-Rel 'first' */
+
+	i= toc[ti]->prev_index;
+
+	if (i>0)
+	{	/* First Node -> No Link */
+		li= toc[1]->labindex;
+
+		strcpy(s, lab[li]->name);
+		get_html_filename(lab[li]->tocindex, htmlname);
+
+		/* Special for CAB */
+		/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
+		if(strchr(htmlname, '.') != NULL)
+			voutlnf("<link rel=\"first\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
+		else
+			voutlnf("<link rel=\"first\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
+	}
+
+
+	/* New in r6pl15 [NHz] */
+	/* Output of Link-Rel 'prev' */
+
+	if (i>0)
+	{
+		li= toc[i]->labindex;
+		strcpy(s, lab[li]->name);
+		get_html_filename(lab[li]->tocindex, htmlname);
+
+		/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
+		if(strchr(htmlname, '.') != NULL)
+		{
+			voutlnf("<link rel=\"prev\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
+			/* Special for CAB */
+			voutlnf("<link rel=\"previous\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
+		}
+		else
+		{
+			voutlnf("<link rel=\"prev\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
+			/* Special for CAB */
+			voutlnf("<link rel=\"previous\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
+		}
+	}
+
+	/* Output of Link-Rel 'next' */
+
+	i= toc[ti]->next_index;
+
+	if (i>1)
+	{
+		li= toc[i]->labindex;
+		strcpy(s, lab[li]->name);
+		get_html_filename(lab[li]->tocindex, htmlname);
+
+		/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039*/
+		if(strchr(htmlname, '.') != NULL)
+			voutlnf("<link rel=\"next\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
+		else
+			voutlnf("<link rel=\"next\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
+	}
+
+	/* New in r6pl15 [NHz] */
+	/* Output of Link-Rel 'last' */
+
+	if (i>1)
+	{
+		if(use_about_udo)
+		{
+			li= toc[p1_toc_counter]->labindex;
+			li--;
+		}
+		else
+			li= toc[p1_toc_counter]->labindex;
+		strcpy(s, lab[li]->name);
+		get_html_filename(lab[li]->tocindex, htmlname);
+
+		/* Special for CAB */
+		/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
+		if(strchr(htmlname, '.') != NULL)
+			voutlnf("<link rel=\"last\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
+		else
+			voutlnf("<link rel=\"last\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
 	}
 
 	/* New in r6pl15 [NHz] */
@@ -2300,8 +2230,7 @@ LOCAL void output_html_doctype ( void )
 			break;
 	}
 		
-	if(!html_header_date)
-		voutlnf("<!-- last modified on %s -->", lang.short_today);
+	voutlnf("<!-- last modified on %s -->", lang.short_today);
 		
 }	/* output_html_doctype */
 
@@ -4287,7 +4216,7 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 			outln("newline");
 			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
 			outln("Bon");
-			/* Changed in V6.5.5 [NHz] */
+			/* Changed in V6.4.1 [NHz] */
 			node2postscript(n, KPS_CONTENT);
 			voutlnf("(%s) udoshow", n);
 			outln("Boff");
@@ -4796,7 +4725,7 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 			node2postscript(name, KPS_NAMEDEST); /* Changed in r6pl16 [NHz] */
 			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
 			outln("Bon");
-			/* New in V6.5.5 [NHz] */
+			/* New in V6.4.1 [NHz] */
 			node2postscript(n, KPS_CONTENT);
 			voutlnf("(%s) udoshow", n);
 			outln("Boff");
@@ -5254,7 +5183,7 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			node2postscript(name, KPS_NAMEDEST); /* Changed in r6pl16 [NHz] */
 			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
 			outln("Bon");
-			/* New in V6.5.5 [NHz] */
+			/* New in V6.4.1 [NHz] */
 			node2postscript(n, KPS_CONTENT);
 			voutlnf("(%s) udoshow", n);
 			outln("Boff");
@@ -5714,7 +5643,7 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
 			outln("newline");
 			outln("Bon");
-			/* New in V6.5.5 [NHz] */
+			/* New in V6.4.1 [NHz] */
 			node2postscript(n, KPS_CONTENT);
 			voutlnf("(%s) udoshow", n);
 			outln("Boff");
@@ -9152,55 +9081,6 @@ GLOBAL void set_html_doctype ( void )
 }	/* set_html_doctype */
 
 
-/* New feature #0000054 in V6.5.2 [NHz] */
-GLOBAL void set_html_header_date ( void )
-{
-	tokcpy2(html_header_date_zone, 9);
-	
-	if(((html_header_date_zone[0] != '+') &&
-		(html_header_date_zone[0] != '-')) ||
-		isdigit(html_header_date_zone[1] == 0) ||
-		isdigit(html_header_date_zone[2] == 0) ||
-		(html_header_date_zone[3] != ':') ||
-		isdigit(html_header_date_zone[4] == 0) ||
-		isdigit(html_header_date_zone[5] == 0))
-	{
-		error_wrong_header_date(html_header_date_zone);
-		return;
-	}
-
-	html_header_date = TRUE;
-}	/* set_html_header_date */
-
-
-/* New feature #0000053 in V6.5.2 [NHz] */
-GLOBAL void set_html_header_links ( void )
-{
-	char *kind;
-	char possible[]="navigation chapter";
-
-	tokcpy2(html_header_links_kind, 40);
-
-	if (html_header_links_kind[0]==EOS)
-	{	error_empty_header_links();
-		return;
-	}
-
-	kind = strtok(html_header_links_kind, " ");
-	while(kind != NULL)
-	{
-		if(strstr(possible, kind)==NULL)
-			error_argument_header_links(kind);
-
-		kind = strtok(NULL, " ");
-	}
-
-	tokcpy2(html_header_links_kind, 40);
-	html_header_links = TRUE;
-
-}	/* set_html_header_links */
-
-
 GLOBAL void set_html_frames_layout ( void )
 {
 	char s[512];
@@ -11069,12 +10949,6 @@ LOCAL BOOLEAN save_the_map ( const char *filename, const char *suffix, tWinMapDa
 	if (!file)
 	{	return FALSE;
 	}
-	/* v6.9.10 [me] Einen Puffer zur Beschleunigung zuordnen */
-
-	if( file!=NULL )
-
-		setvbuf(file, NULL, _IOFBF, 8192);
-
 
 	save_upr_entry_outfile(f);
 	
@@ -12305,9 +12179,7 @@ GLOBAL void init_module_toc ( void )
 
 }	/* init_module_toc */
 
-/*
-v6.5.0 [vj] auskommentiert, um eine Compilerwarnung zu entfernen
-Diese Methode wird im Moment nicht mehr benötigt (siehe exit_module_toc)
+
 LOCAL void free_toc_data ( char **var )
 {
 	if (*var!=NULL)
@@ -12315,7 +12187,7 @@ LOCAL void free_toc_data ( char **var )
 		*var= NULL;
 	}
 }
-*/
+
 
 GLOBAL void exit_module_toc ( void )
 {
@@ -12361,5 +12233,4 @@ GLOBAL void exit_module_toc ( void )
 /*	############################################################
 	# toc.c
 	############################################################	*/
-
 

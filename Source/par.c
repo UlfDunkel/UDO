@@ -992,7 +992,7 @@ LOCAL BOOLEAN convert_link_ps ( char *s, const char *p0, char *p1, char *p2, con
 		}
 		replace_udo_quotes(p2);	/* r6pl2 */
 		replace_udo_quotes(p1);	/* r6pl2 */
-		/* Changed in V6.5.3 [NHz] */
+		/* Changed in V6.4.1 [NHz] */
 		replace_all(p1, "(", "\\(");
 		replace_all(p1, ")", "\\)");
 		c_vars(p1);
@@ -1047,7 +1047,7 @@ LOCAL BOOLEAN convert_link_etc ( char *s, const char *p0, char *p1, char *p2, co
 		}
 		else
 		{	if (desttype==TORTF)	/*r6pl6: die richtigen benutzen */
-			{	strcpy(lq, "\\ldblquote");
+			{	strcpy(lq, "\\ldblquote ");
 				strcpy(rq, "\\rdblquote");
 			}
 			else
@@ -1302,10 +1302,10 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 					}
 					replace_udo_quotes(Param[2]);
 					replace_udo_quotes(Param[1]);
-					/* Changed in V6.5.5 [NHz] */
+					/* Changed in V6.4.1 [NHz] */
 					c_divis(Param[1]);
 					c_vars(Param[1]);
-					/* Changed: Fixed bug #0000062 in V 6.5.8 [NHz] */
+					/* Changed: Fixed bug #0000062 in V 6.4.1 [NHz] */
 					node2postscript(Param[1], KPS_CONTENT);
 					replace_all(Param[1], KPSPO_S, "(");
 					replace_all(Param[1], KPSPC_S, ")");
@@ -1313,7 +1313,7 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
    				linkerror= !insert_placeholder(s, Param[0], s_entry, Param[1]);
 					break;
 
-					/* Deleted bug in V6.5.8 [NHz] */
+					/* Deleted bug in V6.4.1 [NHz] */
 					/* Weblink for WinHelp4 */
 				case TOWH4:
   				convert_tilde(Param[1]);
@@ -1506,7 +1506,7 @@ LOCAL void c_xlink ( char *s, BOOLEAN inside_b4_macro )
 						}
 						replace_udo_quotes(Param[2]);	/* r6pl2 */
 						replace_udo_quotes(Param[1]);	/* r6pl2 */
-						/* Changed in V6.5.6 [NHz] */
+						/* Changed in V6.4.1 [NHz] */
 						c_divis(Param[1]);
 						c_vars(Param[1]);
 						auto_quote_chars(Param[1], TRUE);
@@ -1569,11 +1569,10 @@ LOCAL void c_ilink ( char *s, const BOOLEAN inside_b4_macro )
 		
 		if (inside_b4_macro)
 		{
-			/* Fixed bug #0000055 in V6.5.2 [NHz] */
-			/*if (desttype!=TOSTG)
+			if (desttype!=TOSTG)
 			{	auto_quote_chars(Param[2], TRUE);	
 				auto_quote_chars(Param[3], TRUE);	
-			}*/
+			}
 		
 			adjust_params_inside(Param[1]);
 			adjust_params_inside(Param[2]);
@@ -1686,7 +1685,7 @@ LOCAL void c_ilink ( char *s, const BOOLEAN inside_b4_macro )
 			case TOTVH:
 				linkerror= !convert_link_tvh(s, Param[0], Param[2], Param[3]);
 				break;
-			/* New in V6.5.5 [NHz] */
+			/* New in V6.4.1 [NHz] */
 			case TOKPS:
 				linkerror= !convert_link_ps(s, Param[0], Param[2], Param[3], link);
 				break;
@@ -2665,10 +2664,9 @@ LOCAL void c_internal_image ( char *s, const BOOLEAN inside_b4_macro )
 	{
 		if (inside_b4_macro)
 		{
-			/* Fixed bug #0000055 in V6.5.2 [NHz] */
-			/*if (desttype!=TOSTG)
+			if (desttype!=TOSTG)
 			{	auto_quote_chars(Param[2], TRUE);	
-			}*/
+			}
 		
 			adjust_params_inside(Param[1]);
 			adjust_params_inside(Param[2]);
@@ -2756,7 +2754,7 @@ LOCAL void c_internal_image ( char *s, const BOOLEAN inside_b4_macro )
 				strcpy(s_entry, "");
 				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
 				break;
-			/* New in V6.5.5 [NHz] */
+			/* New in V6.4.1 [NHz] */
 			case TOKPS:
 				strcpy(s_entry, Param[2]);
 				c_vars(s_entry);

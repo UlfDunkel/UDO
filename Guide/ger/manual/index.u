@@ -35,11 +35,11 @@
 !macro	MAXLINK 	200
 !macro	MAXMACRO 	128
 
-!ifset [IntoFolder]
-!macro PICPATH	../images
-!else
+#!ifset [IntoFolder]
+#!macro PICPATH	../images
+#!else
 !macro PICPATH	images
-!endif
+#!endif
 
 # ---------------------------------------------
 # Titel formatabhängig setzen

@@ -21,7 +21,7 @@
 
 #ifndef ID_MSG_C
 #define ID_MSG_C
-const char *id_msg_c= "@(#) msg.c       04.02.2004";
+const char *id_msg_c= "@(#) msg.c       01.01.1999";
 #endif
 
 #include "import.h"
@@ -99,24 +99,11 @@ GLOBAL void logln ( const char *s )
 GLOBAL void loglnposprintf ( const char *we, const char *msg )
 {
 	char z[512];
-	char lineinfo[100];
-	UINT realstart;
-	/* New in v6.5.5 to get a proper message with multilines */
-	if (uiMultiLines>0)
-	{
-		/* Special: we are on a multiline */
-		realstart=uiCurrFileLine-uiMultiLines;
-		sprintf(lineinfo, "%u-%u", realstart, uiCurrFileLine);
-	}
-	else
-	{
-		sprintf(lineinfo, "%u", uiCurrFileLine);
-	}
 	
-	sprintf(z, "%s: %s %s: %s",
+	sprintf(z, "%s: %s %u: %s",
 		we,
 		sCurrFileName,
-		lineinfo,
+		uiCurrFileLine,
 		msg
 	);
 	logln(z);
@@ -135,24 +122,11 @@ GLOBAL void loglnposprintf ( const char *we, const char *msg )
 LOCAL void loglnpos ( const char *we, const char *msg )
 {
 	char z[512];
-	char lineinfo[100];
-	UINT realstart;
-	/* New in v6.5.5 to get a proper message with multilines */
-	if (uiMultiLines>0)
-	{
-		/* Special: we are on a multiline */
-		realstart=uiCurrFileLine-uiMultiLines;
-		sprintf(lineinfo, "%u-%u", realstart, uiCurrFileLine);
-	}
-	else
-	{
-		sprintf(lineinfo, "%u", uiCurrFileLine);
-	}
 	
-	sprintf(z, "%s: %s %s: %s",
+	sprintf(z, "%s: %s %u: %s",
 		we,
 		sCurrFileName,
-		lineinfo,
+		uiCurrFileLine,
 		msg
 	);
 	logln(z);
@@ -440,7 +414,7 @@ GLOBAL void error_read_img ( const char *s )
 }
 
 GLOBAL void error_read_bmp ( const char *s )
-{	/* Fixed bug #0000017 in V6.5.2 [NHz] */
+{	/* Fixed bug #0000017 in V6.4.1 [NHz] */
 	if(strcmp(s, BMP_MW_NAME) == 0)
 		note_msg_solo("Image for UDO link generated (see below), please translate again to complete");
 	else
@@ -522,21 +496,6 @@ GLOBAL void error_unknown_docinfo ( const char *s )
 
 GLOBAL void error_unknown_color ( const char *s )
 {	error_msg_para("unknown color: %s", s);
-}
-
-/* New in V6.5.5 [NHz] */
-GLOBAL void error_wrong_header_date ( const char *s )
-{	error_msg_para("wrong argument !html_header_date: %s, e.g. +01:00", s);
-}
-
-/* New feature #0000053 in V6.5.2 [NHz] */
-GLOBAL void error_empty_header_links ( void )
-{	error_msg_solo("empty !html_header_links");
-}
-
-/* New feature #0000053 in V6.5.2 [NHz] */
-GLOBAL void error_argument_header_links ( const char *s )
-{	error_msg_para("unknown linktype (!html_header_links): %s", s);
 }
 
 GLOBAL void error_error ( const char *s )	/*r6pl4*/

@@ -458,11 +458,9 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!html_favicon_name",		"",			c_tunix,	TRUE,	CMD_ALWAYS	}, /* New in r6pl15 [NHz] */
 	{ "!html_button_alignment",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_switch_language",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
-	{ "!html_use_hyphenation",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	}, /* Fixed Bug #0000048 [NHz] */
+	{ "!html_use_hyphenation",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	}, /* Fixed Bug #0000048 in V6.4.1 [NHz] */
 	{ "!html_transparent_buttons",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_use_folders",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
-	{ "!html_header_date",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	}, /* New feature #0000054 in V6.5.2 [NHz] */
-	{ "!html_header_links",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	}, /* New feature #0000053 in V6.5.2 [NHz] */
 	{ "!rtf_propfont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!rtf_monofont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!rtf_propfont_size",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
@@ -2562,13 +2560,12 @@ LOCAL void c_heading ( void )
 			if (inside_center)	strcpy(align, "\\qc");
 			if (inside_right)	strcpy(align, "\\qr");
 			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize + 14, name);
-/*			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize + 14, align, name);*/
 			break;
 		case TOKPS:
 			outln("newline");
 			/* Changed in r6pl16 [NHz] */
 			voutlnf("%d changeFontSize", laydat.node1size);
-			/* New in V6.5.5 [NHz] */
+			/* Changed in V6.4.1 [NHz] */
 			node2postscript(name, KPS_CONTENT);
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
@@ -2691,7 +2688,7 @@ LOCAL void c_subheading ( void )
 			outln("newline");
 			/* Changed in r6pl16 [NHz] */
 			voutlnf("%d changeFontSize", laydat.node2size);
-			/* New in V6.5.5 [NHz] */
+			/* Changed in V6.4.1 [NHz] */
 			node2postscript(name, KPS_CONTENT);
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
@@ -2812,7 +2809,7 @@ LOCAL void c_subsubheading ( void )
 			outln("newline");
 			/* Changed in r6pl16 [NHz] */
 			voutlnf("%d changeFontSize", laydat.node3size);
-			/* New in V6.5.5 [NHz] */
+			/* Changed in V6.4.1 [NHz] */
 			node2postscript(name, KPS_CONTENT);
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
@@ -2932,7 +2929,7 @@ LOCAL void c_subsubsubheading ( void )
 			outln("newline");
 			/* Fixed bug #0000047 [NHz] */
 			voutlnf("%d changeFontSize", laydat.node4size);
-			/* New in V6.5.5 [NHz] */
+			/* Changed in V6.4.1 [NHz] */
 			node2postscript(name, KPS_CONTENT);
 			outln("Bon");
 			voutlnf("(%s) udoshow", name);
@@ -5385,7 +5382,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 						break;
 					case TOKPS:
 						um_strcpy(token[i], ") udoshow newline\n(", MAX_TOKEN_LEN+1, "token_output[3]");
-						/* New in V6.5.5 [NHz] */
+						/* Changed in V6.4.1 [NHz] */
 						replace_all(token[i], ")", KPSPC_S);
 						replace_all(token[i], "(", KPSPO_S);
 						break;
@@ -5442,8 +5439,8 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 				}/*switch*/
 			}/*if*/
 		}/*if*/
-
-		/* New in V6.5.5 [NHz] */
+		
+		/* Changed in V6.4.1 [NHz] */
 		switch (desttype)
 		{	case TOKPS:
 							replace_all(token[i], "[", "\\[");
@@ -5719,9 +5716,8 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 				case TOKPS:
 					/* Deleted in r6pl16 [NHz] */
 					/* No special line end within a paragraph  for PS anymore */
-					/* Changed in V6.5.6 [NHz] */
+					/* Changed in V6.4.1 [NHz] */
 					strcat(z, " ");
-/*					replace_last (z, "\n", " \n");*/
 					break;
 			}
 			
@@ -6685,8 +6681,6 @@ LOCAL void output_preamble ( void )
 				if (s[0]!= EOS)
 				{	voutlnf("\\usepackage{%s}", s);
 				}
-				/* New in V6.5.8 [NHz] */
-				outln("\\usepackage{eurosym}");
 				if (desttype==TOPDL)	/* r6pl8*/
 				{	outln("\\pdfoutput=1\\relax");
 					if (bDocMediumCompression)
@@ -6734,8 +6728,7 @@ LOCAL void output_preamble ( void )
 			
 		case TOLYX:
 			voutlnf("# This file was created by UDO Version %s.%s.%s", UDO_REL, UDO_SUBVER, UDO_PL);
-			outln("# UDO (C) 1995-2001 by Dirk Hagedorn (info@dirk-hagedorn.de)");
-			outln("# UDO (C) 2001-2004 by The UDO Community (www.udo-open-source.org)");
+			outln("# UDO (C) 1995-1999 by Dirk Hagedorn (info@dirk-hagedorn.de)");
 			outln("\\lyxformat 2.10");
 			voutlnf("\\textclass %s", (use_style_book) ? "book" : "article");
 			outln("\\inputencoding latin1");
@@ -7485,15 +7478,6 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			}
 			if (strcmp(token[0], "!html_ignore_8bit")==0)
 			{	html_ignore_8bit= TRUE;
-				if (strlen(token[1])>0)
-				{
-					um_strcpy(html_ignore_8bit_charset, token[1], 20, "pass1_check_preamble_commands[html_ignore_8bit]");
-					html_ignore_8bit_use_charset = TRUE;
-				}
-				else
-				{
-					html_ignore_8bit_use_charset = FALSE;					
-				}
 				return TRUE;
 			}
 			if (strcmp(token[0], "!html_modern_layout")==0)
@@ -7643,16 +7627,6 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			/* New in r6pl16 [NHz] */
 			if ( strcmp(token[0], "!html_doctype")==0 )
 			{	set_html_doctype();
-				return TRUE;
-			}
-			/* New feature #0000054 in V6.5.2 [NHz] */
-			if ( strcmp(token[0], "!html_header_date")==0 )
-			{	set_html_header_date();
-				return TRUE;
-			}
-			/* New feature #0000053 in V6.5.2 [NHz] */
-			if ( strcmp(token[0], "!html_header_links")==0 )
-			{	set_html_header_links();
 				return TRUE;
 			}
 			break;
@@ -7972,9 +7946,7 @@ LOCAL BOOLEAN pass1 (char *datei)
 
 	while ( (!bBreakHappened) && (!bBreakInside) && (!bFatalErrorDetected) && (myTextGetline(zeile, LINELEN, file)) )
 	{
-		/* Here we need to add possible splitted line numbers
-		uiFileLines[iFilesOpened]++; v6.5.5 [vj]*/
-		uiFileLines[iFilesOpened]=uiFileLines[iFilesOpened]+1+uiMultiLines;
+		uiFileLines[iFilesOpened]++;
 		uiCurrFileLine= uiFileLines[iFilesOpened];
 
 		lPass1Lines++;
@@ -8058,7 +8030,7 @@ LOCAL BOOLEAN pass1 (char *datei)
 
 
 
-									uiFileLines[iFilesOpened]=uiFileLines[iFilesOpened]+1+uiMultiLines; /* v6.5.5 [vj] */
+									uiFileLines[iFilesOpened]++;
 									uiCurrFileLine= uiFileLines[iFilesOpened];
 
 									lPass1Lines++;
@@ -8091,7 +8063,7 @@ LOCAL BOOLEAN pass1 (char *datei)
 
 
 
-									uiFileLines[iFilesOpened]=uiFileLines[iFilesOpened]+1+uiMultiLines; /* v6.5.5 [vj] */
+									uiFileLines[iFilesOpened]++;
 									uiCurrFileLine= uiFileLines[iFilesOpened];
 
 									lPass1Lines++;
@@ -9065,7 +9037,7 @@ LOCAL BOOLEAN pass2 (char *datei)
 
 	while ( (!bBreakHappened) && (!bBreakInside) && (!bFatalErrorDetected) && (myTextGetline(zeile, LINELEN, file)) )
 	{
-		uiFileLines[iFilesOpened]=uiFileLines[iFilesOpened]+1+uiMultiLines; /* v6.5.5 [vj] */
+		uiFileLines[iFilesOpened]++;
 		uiCurrFileLine= uiFileLines[iFilesOpened];
 		lPass2Lines++;
 		show_status_percent(lPass1Lines, lPass2Lines);
@@ -9129,10 +9101,7 @@ LOCAL BOOLEAN pass2 (char *datei)
 					if (no_umlaute) umlaute2ascii(zeile);
 					auto_quote_chars(zeile, FALSE);
 
-					/* Changed in V6.5.5 [NHz]
-                                         * v6.5.7 [vj] c_commands_inside(zeile, *TRUE* instead of FALSE)
-                                         *             closes bug #0000059
-                                         */
+					/* Changed in V6.4.1 [NHz] */
 					c_commands_inside(zeile, TRUE);
 
 					replace_macros(zeile);
@@ -9141,9 +9110,7 @@ LOCAL BOOLEAN pass2 (char *datei)
 					c_tilde(zeile);
 					c_styles(zeile);
 
-                                        /* v6.5.7 [vj] old position and parameters (see above)
-                                         * please keep this comment for information
-                                        c_commands_inside(zeile, FALSE);*/
+					c_commands_inside(zeile, FALSE);
 
 					replace_defines(zeile);
 
@@ -10252,7 +10219,7 @@ LOCAL BOOLEAN passU (char *datei)
 
 	while ( (!bBreakHappened) && (!bBreakInside) && (!bFatalErrorDetected) && (myTextGetline(zeile, LINELEN, file)) )
 	{
-		uiFileLines[iFilesOpened]=uiFileLines[iFilesOpened]+1+uiMultiLines; /* v6.5.5 [vj] */
+		uiFileLines[iFilesOpened]++;
 		uiCurrFileLine= uiFileLines[iFilesOpened];
 
 		if ( break_action() )
@@ -10756,7 +10723,6 @@ LOCAL void init_lang ( void )
 		    strcpy(lang.see,        "zie");
 		    strcpy(lang.also,       "zie ook");
 		    strcpy(lang.by,         "door");
-		    strcpy(lang.fur,        "for"); /* New in V6.5.2 [NHz] */
 		    strcpy(lang.up,         "&Omhoog");
 		    strcpy(lang.exit,       "Be	i&ndigen");
 		    strcpy(lang.unknown,    "Onbekend");
@@ -10786,7 +10752,6 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.see,		"see");
 		  	strcpy(lang.also,		"see also");
 		  	strcpy(lang.by,			"by");
-		    strcpy(lang.fur,    "for"); /* New in V6.5.2 [NHz] */
 		  	strcpy(lang.up,			"&Up");
 		  	strcpy(lang.exit,		"E&xit");
 		  	strcpy(lang.unknown,	"Unknown");
@@ -10816,7 +10781,6 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.see,		"voir");
 		  	strcpy(lang.also,		"voir aussi");
 		  	strcpy(lang.by,			"de");
-		    strcpy(lang.fur,    "for"); /* New in V6.5.2 [NHz] */
 		  	strcpy(lang.up,			"&Haut");
 		  	strcpy(lang.exit,		"&Fin");
 		  	strcpy(lang.unknown,	"Inconnu");
@@ -10852,7 +10816,6 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.see,		"vedere");
 		  	strcpy(lang.also,		"vedere anche");
 		  	strcpy(lang.by,			"da");
-		    strcpy(lang.fur,    "for"); /* New in V6.5.2 [NHz] */
 		  	strcpy(lang.up,			"S&u");
 		  	strcpy(lang.exit,		"Uscita");
 		  	strcpy(lang.unknown,	"Ignoto");
@@ -10882,7 +10845,6 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.see,		"ver");
 		  	strcpy(lang.also,		"ver tambi(!`e)n");
 		  	strcpy(lang.by,			"de");
-		    strcpy(lang.fur,    "for"); /* New in V6.5.2 [NHz] */
 		  	strcpy(lang.up,			"Elevado");
 		  	strcpy(lang.exit,		"Terminar");
 		  	strcpy(lang.unknown,	"Desconocido");
@@ -10920,7 +10882,6 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.see,		"se");
 		  	strcpy(lang.also,		"se (!\"a)ven");
 		  	strcpy(lang.by,			"av");
-		    strcpy(lang.fur,    "for"); /* New in V6.5.2 [NHz] */
 		  	strcpy(lang.up,			"&Upp");
 		  	strcpy(lang.exit,		"Avsluta");
 		  	strcpy(lang.unknown,	"Unknown");
@@ -10955,7 +10916,6 @@ LOCAL void init_lang ( void )
 		  	strcpy(lang.see,		"siehe");
 		  	strcpy(lang.also,		"siehe auch");
 		  	strcpy(lang.by,			"von");
-		    strcpy(lang.fur,    "f(!\"u)r"); /* New in V6.5.2 [NHz] */
 		  	strcpy(lang.up,			"&Hoch");
 		  	strcpy(lang.exit,		"Bee&nden");
 		  	strcpy(lang.unknown,	"Unbekannt");
@@ -10969,7 +10929,6 @@ LOCAL void init_lang ( void )
 				strcpy(lang.html_lang,	"de");
 				strcpy(lang.html_start,	"Beginn des Dokumentes");
 		  	
-		  	uni2ascii(lang.fur); /* New in V6.5.2 [NHz] */
 		  	uni2ascii(lang.update);
 		  	break;
 	}
@@ -11260,10 +11219,6 @@ GLOBAL void init_vars ( void )
 	html_transparent_buttons=	FALSE;		/*r6pl12*/
 	html_use_hyphenation=	FALSE;		/* New in r6pl16 [NHz] */
 	html_doctype= HTML_TRANS;	/* New in r6pl16 [NHz] */
-	html_header_date = FALSE;	/* New feature #0000054 in V6.5.2 [NHz] */
-	html_header_date_zone[0] = EOS;	/* New feature #0000054 in V6.5.2 [NHz] */
-	html_header_links = FALSE;	/* New feature #0000053 in V6.5.2 [NHz] */
-	html_header_links_kind[0] = EOS;	/* New feature #0000053 in V6.5.2 [NHz] */
 	
 	html_ignore_p= 				FALSE;
 

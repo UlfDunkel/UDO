@@ -1,3 +1,0 @@
-!macro BI (!B)(!1)(!b)
-...
-Dieser Text ist (!BI [fett und kursiv]).

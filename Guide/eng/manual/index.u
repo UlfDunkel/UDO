@@ -34,11 +34,11 @@
 !macro	MAXLINK 	200
 !macro	MAXMACRO 	128
 
-!ifset [IntoFolder]
-!macro PICPATH	../images
-!else
+#!ifset [IntoFolder]
+#!macro PICPATH	../images
+#!else
 !macro PICPATH	images
-!endif
+#!endif
 
 # ---------------------------------------------
 # The title of this documentation depends on
@@ -78,9 +78,9 @@
 # the images used inside the documentation
 
 !ifdest [html]
-!docinfo	[authorimage]	..\images\dh
+!docinfo	[authorimage]	images\dh
 !else
-!docinfo	[authorimage]	..\images\dh
+!docinfo	[authorimage]	images\dh
 !endif
 
 #############################################################

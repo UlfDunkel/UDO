@@ -73,8 +73,8 @@ descriptions.
 !subnode N!..
 !include index/db/com_n.ui
 
-!subnode O!..
-!include index/db/com_o.ui
+#!subnode O!..
+#!include index/db/com_o.ui
 
 !subnode P!..
 !include index/db/com_p.ui
