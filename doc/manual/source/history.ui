@@ -124,20 +124,45 @@ wird unterstützt.
 # !item [Neue Formate:]
 # 	!begin_itemize !short
 # 	!end_itemize
-# !item [Neue Befehle:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Neuheiten:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Änderungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
+ !item [Neue Befehle:]
+ 	!begin_itemize !short
+   !item (!T)!/html_header_links <text>(!t) (!nl)
+         Ist dieser Schalter gesetzt werden je nach Vorgabe die <link>-Elemente
+         erzeugt. Beinhaltet <text> ""navigation"" werden die Links zur
+         Navigation erzeugt. Beinhaltet <text> ""chapter"", werden alle Links
+         zu den Kapiteln erzeugt.
+   !item (!T)!/html_header_date <text>(!t) (!nl)
+         Wenn dieser Schalter gesetzt ist, wird ein META-Tag für das
+         Erzeugungsdatum erzeugt. Ist <text> leer, wird für den
+         Zeitzonenunterschied ""+00:00"" gesetzt. Ansonsten kann der
+         Benutzer für <text> den gewünschten Unterschied in der
+         Zeitzone setzen.
+ 	!end_itemize
+ !item [Neuheiten:]
+ 	!begin_itemize !short
+   !item Die UDO Community ist im Werbeblock ergänzt worden (About UDO).
+ 	!end_itemize
+ !item [Änderungen:]
+ 	!begin_itemize !short
+   !item Die Bezeichnung der einzelnen Version wurde geändert. Es heißt
+         jetzt nicht mehr "Release 6.x Patchlevel xx" sondern "Version 6.4.x".
+   !item Feature #0000053 in Version 6.5.2 implementiert (!nl)
+         Die <link>-Elemente für Navigation und Kapitel werden nicht mehr
+         automatisch sondern nur auf Anforderung erzeugt (siehe Neue Befehle).
+   !item Feature #0000054 in Version 6.5.2 implementiert (!nl)
+         Es wird ein META-Tag für das Erzeugungsdatum geschrieben (siehe
+         Neue Befehle).
+ 	!end_itemize
 # !item [Syntaxänderungen:]
 # 	!begin_itemize !short
 # 	!end_itemize
  !item [Fehlerbehebungen:]
  	!begin_itemize !short
+ 	 !item Bug #0000044 in Version 6.4.1 beseitigt (!nl)
+ 	       Wenn !no_numbers gesetzt ist, werden jetzt keine Nummern mehr vor
+ 	       die Kapitel innerhalb des <link>-Elementes geschrieben.
+   !item Bug #0000048 in Version 6.4.1 beseitigt (!nl)
+         Kommando fehlte in der Kommandoliste.
    !item Bug #0000056 in Version 6.4.1 beseitigt (!nl)
          Versehentlich wurde dem Parameter "Höhe" auch die Breite übergeben.
    !item Bug #0000017 in Version 6.4.1 beseitigt (!nl)
@@ -156,20 +181,44 @@ wird unterstützt.
 # !item [New destination formats:]
 # 	!begin_itemize !short
 # 	!end_itemize
-# !item [New commands:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [News:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Changes:]
-# 	!begin_itemize !short
-# 	!end_itemize
+ !item [New commands:]
+ 	!begin_itemize !short
+   !item (!T)!/html_header_links <text>(!t) (!nl)
+         If this command is set, several <link> elements are generated.
+         if <text> contains ""navigation"", links for navigation are
+         generated. If <text> contains ""chapter"", links for all nodes
+         are generated.
+   !item (!T)!/html_header_date <text>(!t) (!nl)
+         If this command is set, a meta element for the bulding date is
+         generated. Is <text> empty, the value for the delta of the time
+         zone is set to ""+00:00"". Otherwise the user can set the time
+         zone himself.
+ 	!end_itemize
+ !item [News:]
+ 	!begin_itemize !short
+   !item The UDO Community is added to the advertisement (About UDO).
+ 	!end_itemize
+ !item [Changes:]
+ 	!begin_itemize !short
+   !item The nomenclature of UDO was changed. It's called "Version 6.4.x"
+         instead of "Release 6.x Patchlevel xx" now.
+   !item Feature #0000053 implemented in Version 6.5.2 (!nl)
+         The <link> elements for navigation and chapters are not generated
+         automatically any longer but on demand (see new commands).
+   !item Feature #0000054 implemented in Version 6.5.2 (!nl)
+         There will be generated a META-Tag for the build date (see
+         new commands).
+ 	!end_itemize
 # !item [Syntax changes:]
 # 	!begin_itemize !short
 # 	!end_itemize
  !item [Bugfixes:]
  	!begin_itemize !short
+ 	 !item Fixed bug #0000044 in version 6.4.1 (!nl)
+ 	       If !no_numbers is set, there won't be print numbers in front of a
+ 	       node in <link> elements any longer
+ 	 !item Fixed bug #0000048 in version 6.4.1 (!nl)
+ 	       Command wasn't listed in the command list.
    !item Fixed bug #0000056 in version 6.4.1 (!nl)
          By an inadvertance the parameter "height" was covered with the width
    !item Fixed bug #0000017 in version 6.4.1 (!nl)
@@ -285,9 +334,25 @@ wird unterstützt.
 # !item [Syntaxänderungen:]
 # 	!begin_itemize !short
 # 	!end_itemize
-# !item [Fehlerbehebungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
+ !item [Fehlerbehebungen:]
+ 	!begin_itemize !short
+ 	 !item Bug #0000024 in Version 6.2.1 beseitigt (!nl)
+ 	       In den <link>-Elementen wurde alle Subsubnodes aus anderen Subnodes
+ 	       mit aufgeführt
+ 	 !item Bug #0000025 in Version 6.2.1 beseitigt (!nl)
+ 	       UDO stürzte ab, wenn Umlaute im Dateinamen oder Domain einer URL
+ 	       im Kommando (!/url !..) vorkamen.
+ 	 !item Bug #0000029 in Version 6.2.1 beseitigt (!nl)
+ 	       Bei (!/url !..) wurde bei der RTF-Ausgabe das führende
+ 	       Anführungszeichen und das folgende Wort verschluckt, weil ein
+ 	       Leerzeichen fehlte.
+ 	 !item Bug #0000030 in Version 6.2.1 beseitigt (!nl)
+ 	       Feste Leerzeichen in Links wurden bei der RTF-Ausgabe falsch
+ 	       umgesetzt (\\~ statt \~).
+   !item Bug #0000039 in Version 6.2.1 beseitigt (!nl)
+         Obwohl !html_name_prefix gesetzt war, fehlte der entsprechende
+         Zusatz in den <link>-Elementen zur Navigation.
+ 	!end_itemize
 !endif
 
 !iflang [english]
@@ -306,9 +371,23 @@ wird unterstützt.
 # !item [Syntax changes:]
 # 	!begin_itemize !short
 # 	!end_itemize
-# !item [Bugfixes:]
-# 	!begin_itemize !short
-# 	!end_itemize
+ !item [Bugfixes:]
+ 	!begin_itemize !short
+   !item Fixed bug #0000024 in version 6.2.1 (!nl)
+         In the <link> elements are listed all subsubnodes of other subnodes
+   !item Fixed bug #0000025 in version 6.2.1 (!nl)
+         UDO chrashed, when umlauts are used in the filename or domain in
+         the command (!/url !..).
+   !item Fixed bug #0000029 in version 6.2.1 (!nl)
+         By using (!/url !..) for RTF output, the opening quote and the
+         following word were swallowed because of missing blanks.
+   !item Fixed bug #0000030 in version 6.2.1 (!nl)
+         Nonbreaking blanks are converted wrong, when used in a link and for
+         RTF output (\\~ instead of \~).
+   !item Fixed bug #0000039 in version 6.2.1 (!nl)
+         Although !html_name_prefix was set, the prefix was missed in the
+         <link> elements for navigation.
+ 	!end_itemize
 !endif
 !end_description
 
