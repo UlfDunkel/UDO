@@ -1,4 +1,6 @@
 !begin_itemize
-
+!item Es werden jetzt die Nodes, Headings, Alias, Label und Index-Einträge
+      in der Projektdatei (*.upr) gesichert, so daß eine bessere Handhabung
+      großer Quelltexte in der UDO-Shell von Norbert Hanz möglich ist.
 !end_itemize
 
