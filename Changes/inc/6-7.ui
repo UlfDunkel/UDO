@@ -6,6 +6,7 @@
 
 !html_name	news6-7
 
+!include	inc6-7/pl15/15.(!SUF)
 !include	inc6-7/pl14/14.(!SUF)
 !include	inc6-7/pl13/13.(!SUF)
 !include	inc6-7/pl12/12.(!SUF)
