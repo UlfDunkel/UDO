@@ -8857,15 +8857,18 @@ LOCAL void save_htmlhelp_project ( void )
 	strcpy(sTitle, titleprogram);
 	html2sys(sTitle);
 	fprintf(hhpfile, "Title=%s\n", sTitle);
+	fprintf(hhpfile, "Compatibility=1.0\n");
 	fprintf(hhpfile, "Compiled file=%s.chm\n", old_outfile.name);
 	fprintf(hhpfile, "Error log file=%s.log\n", old_outfile.name);
-	fprintf(hhpfile, "Contents file=%s.hhc\n", old_outfile.name);
+	if (bHhcSaved)
+		fprintf(hhpfile, "Contents file=%s.hhc\n", old_outfile.name);
 	if (bHhkSaved)
 	{	fprintf(hhpfile, "Index file=%s.hhk\n", old_outfile.name);
 	}
 	fprintf(hhpfile, "Default topic=%s%s\n", old_outfile.name, outfile.suff);
 	fprintf(hhpfile, "Display compile progress=Yes\n");
 	fprintf(hhpfile, "Flat=Yes\n");
+	fprintf(hhpfile, "Full-text search=Yes\n");
 	fprintf(hhpfile, "Auto Index=Yes\n");
 	fprintf(hhpfile, "Language=");
 	switch(destlang)
@@ -9287,9 +9290,9 @@ GLOBAL BOOLEAN udo (char *datei)
 								save_html_gifs();
 								break;
 							case TOMHH:
-								save_htmlhelp_project();
 								bHhcSaved= save_htmlhelp_contents(sHhcfull);
 								bHhkSaved= save_htmlhelp_index(sHhkfull);
+								save_htmlhelp_project();
 								save_html_gifs();
 								break;
 							case TOSTG:
