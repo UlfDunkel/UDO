@@ -1,5 +1,5 @@
 # doc/manual/source/install.ui
-# letzte Änderungen: 13.01.2004 / last changes: Jan 13, 2004
+# letzte Änderungen: 14.01.2004 / last changes: Jan 14, 2004
 
 
 ################################################################################
@@ -417,9 +417,10 @@ Hint for users of Linux-SGML: My version doesn't contain all possible
 entities. Just take a look ate the Linuxdoc-SGML FAQ in the middle of
 this documentation if Linuxdoc-SGML prints an error message.
 !end_ignore
-!endif
 
 The documentation is currently in revision (outdated in parts).
+!endif
+
 !end_node
 # Ende: Installation Linux Source
 
