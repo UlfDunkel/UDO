@@ -37,24 +37,65 @@ The name of the source file has to be the last option.
 	!item	[-a, (--)ascii]
 			The (!U)source file(!u) will be converted to ASCII.
 
+	!item	[(--)amg]
+			The (!U)source file(!u) will be converted to AmigaGuide.
+
+	!item	[(--)aqv, (--)quickview]
+			The (!U)source file(!u) will be converted to Apple QuickView.
+
+	!item	[-c, (--)c]
+			A C sourcecode will be generated from the (!U)source file(!u).
+			Normal text becomes comment, the content of the sourcecode 
+			environment becomes C code.
+
+	!item	[(--)check]
+			Additional checkings will be activated.
+
+	!item	[-d, (--)no-idxfile]
+			Suppresse the generation of index files.
+
+	!item	[(--)drc]
+			The (!U)source file(!u) will be converted to David's Readme 
+			Compiler format.
+
 	!item	[-D symbol]
 			Set the symbol ''symbol'' which can be tested in the source file
 			with (!I)!/ifset(!i).
+
+	!item	[(--)force-long]
+			Force files with long file names.
+
+	!item	[(--)force-short]
+			Force files with short file names (8+3).
+
+	!item	[-f, (--)pdflatex]
+			The (!U)source file(!u) will be converted to PDFLaTeX sourcecode.
 
 	!item	[-g, (--)helptag]
 			The (!U)source file(!u) will be converted to
 			HP Helptag SGML.
 
+	!item	[(--)help]
+			Outputs a help page and quits.
+
 	!item	[-h, (--)html]
 			The (!U)source file(!u) will be converted to
 			HTML.
 
+	!item	[-hh, (--)htmlhelp]
+			The (!U)source file(!u) will be converted to
+			HTML-Help.
+
 	!item	[-H, (--)hold]
 			You have to press a key before (!B)UDO(!b) finishes.
 
-	!item	[-i, (--)texinfo]
+	!item	[-i, (--)info]
 			The (!U)source file(!u) will be converted to
 			GNU Texinfo.
+
+	!item	[(--)ipf]
+			The (!U)source file(!u) will be converted to
+			OS/2 IPF format.
 
 	!item	[(--)lyx]
 			The (!U)source file(!u) will be converted to
@@ -68,6 +109,18 @@ The name of the source file has to be the last option.
 			The (!U)source file(!u) will be converted to
 			a manualpage.
 
+	!item	[(--)map]
+			Generate a C header file with jump id's for the WinHelp format.
+
+	!item	[(--)map-gfa]
+			Generate a GFA Basic header file with jump id's for the WinHelp format.
+
+	!item	[(--)map-pas]
+			Generate a Pascal header file with jump id's for the WinHelp format.
+
+	!item	[(--)map-vb]
+			Generate a VisualBasic header file with jump id's for the WinHelp format.
+
 	!item	[-n, (--)nroff]
 			The (!U)source file(!u) will be converted to
 			Nroff.
@@ -75,10 +128,19 @@ The name of the source file has to be the last option.
 	!item	[-o F, (--)outfile F]
 			(!B)UDO(!b) writes the output into the file named ""F"".
 
+	!item	[-P, (--)pascal]
+			A Pascal sourcecode will be generated from the (!U)source file(!u).
+			Normal text becomes comment, the content of the sourcecode 
+			environment becomes Pascal code.
+
 	!item	[-p, (--)pchelp]
 			The (!U)source file(!u) will be converted to
 			Pure C Help.
 			
+	!item	[(--)ps]
+			The (!U)source file(!u) will be converted to
+			PostScript.
+
 	!item	[-q, (--)quiet]
 			(!B)UDO(!b) won't print anything to STDOUT or STDERR.
 
@@ -86,13 +148,36 @@ The name of the source file has to be the last option.
 			The (!U)source file(!u) will be converted to
 			RTF.
 
+	!item	[(--)save-upr]
+			Generate an additional project filr (.upr). There information 
+			about outfiles, infiles, nodes and index entries are listed.
+
 	!item	[-s, (--)stg]
 			The (!U)source file(!u) will be converted to
 			ST-Guide.
 
+	!item	[(--)test]
+			When using this option (!B)UDO(!b) won't save a destination file.
+
 	!item	[-t, (--)tex]
 			The (!U)source file(!u) will be converted to
 			(!LaTeX).
+
+	!item	[(--)tree]
+			When using this option (!B)UDO(!b) will save a file with the
+			suffix (!V).ut?(!v). In this file you will see a tree with all
+			files your source file includes.
+
+	!item	[-u, (--)udo]
+			Generate one file in udo format containing all included source 
+			files. This allows to put all source files into one udo file. 
+
+	!item	[(--)verbose]
+			(!B)UDO(!b) will print some status information wile converting
+			the source file.
+	
+	!item	[(--)version]
+			Outputs version information and quits (!B)UDO(!b).
 
 	!item	[-v, (--)vision]
 			The (!U)source file(!u) will be converted to
@@ -101,6 +186,10 @@ The name of the source file has to be the last option.
 	!item	[-w, (--)win]
 			The (!U)source file(!u) will be converted to
 			Windows Help.
+			
+	!item	[-w4, (--)win4]
+			The (!U)source file(!u) will be converted to
+			Windows Help 4.
 			
 	!item	[-W, (--)no-warnings]
 			Warnings will be suppressed. Error messages will still be
@@ -111,26 +200,11 @@ The name of the source file has to be the last option.
 			Linuxdoc-SGML.
 
 	!item	[-y, (--)no-hypfile]
-			(!B)UDO(!b) doesn't save a file with syllabification hints when
-			using the option (!V)-o(!v).
+			(!B)UDO(!b) doesn't save a file with syllabification hints (.uh?)
+			when using the option (!V)-o(!v).
 
-	!item	[(--)help]
-			Outputs a help page and quits.
-
-	!item	[(--)test]
-			When using this option (!B)UDO(!b) won't save a destination file.
-
-	!item	[(--)tree]
-			When using this option (!B)UDO(!b) will save a file with the
-			suffix (!V).ut?(!v). In this file you will see a tree with all
-			files your source file includes.
-
-	!item	[(--)verbose]
-			(!B)UDO(!b) will print some status information wile converting
-			the source file.
-	
-	!item	[(--)version]
-			Outputs version information and quits (!B)UDO(!b).
+	!item	[-@ F]
+			(!B)UDO(!b) will read the options from the file named ""F"".
 
 	!end_tlist
 
