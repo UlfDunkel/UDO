@@ -857,6 +857,10 @@ GLOBAL void c_bmp_output ( const char *name, const char *caption, const BOOLEAN 
 			if (inside_center)	strcpy(alignOn, "qc");
 			if (inside_right)	strcpy(alignOn, "qr");
 
+			/* New in r6pl16 [NHz] */
+			/* Now indent for pictures in environments too */
+			voutlnf("\\li%d", strlen_indent());
+
 			voutlnf("{\\%s{\\apoanchor\\pard\\phmrg\\posxc\\pvpara\\posyc\\nowrap", alignOn);
 			out("{\\pict\\dibitmap\\picscalex100\\picscaley100");
 			voutlnf("\\wbmwidthbytes2\\wbmbitspixel%d\\wbmplanes%d\\picw%d\\pich%d",
@@ -864,6 +868,10 @@ GLOBAL void c_bmp_output ( const char *name, const char *caption, const BOOLEAN 
 #else
 			if (inside_center)	out("{\\qc{\\plain");
 			if (inside_right)	out("{\\qr{\\plain");
+
+			/* New in r6pl16 */
+			/* Now indent for pictures in environments too */
+			voutlnf("\\li%d", strlen_indent());
 
 			outln("{\\pict\\dibitmap\\picscalex100\\picscaley100");
 			voutlnf("\\wbmwidthbytes2\\wbmbitspixel%d\\wbmplanes%d\\picw%d\\pich%d",
@@ -900,10 +908,17 @@ GLOBAL void c_bmp_output ( const char *name, const char *caption, const BOOLEAN 
 				if (inside_right)	strcpy(alignOn, "\\qr ");
 
 				if (visible)
-				{	sprintf(n, "(%s %d: %s)", lang.figure, image_counter, caption);
+				{	/* Changed in r6pl16 [NHz] */
+					/* sprintf(n, "%s %d: %s", lang.figure, image_counter, caption); */
+					/* removed parenthesis */
+
+					/* New in r6pl16 [NHz] */
+					sprintf(n, "{{\\*\\bkmkstart _tocimg%d}%s }{\\field{\\*\\fldinst {SEQ %s \\\\* ARABIC }}: %s{\\fldrslt %d: %s{\\*\\bkmkend _Tocimg%d}}}", image_counter, lang.figure, lang.figure, caption, image_counter, caption, image_counter);
 				}
 				else
-				{	sprintf(n, "(%s)", caption);
+				{	/* Changed in r6pl16 [NHz] */
+					/* removed parenthesis */
+					sprintf(n, "%s", caption);
 				}
 				voutlnf("%s%s\\par\\pard\\par", alignOn, n);
 			}
