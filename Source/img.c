@@ -847,7 +847,8 @@ GLOBAL void c_bmp_output ( const char *name, const char *caption, const BOOLEAN 
 			}
 
 			uc4ToInt(bmpheader.biWidth, &width);
-			uc4ToInt(bmpheader.biWidth, &height);
+			/* Fixed bug #0000056 in V6.5.2 [NHz] */
+			uc4ToInt(bmpheader.biHeight, &height);
 			uc2ToInt(bmpheader.biBitCnt, &bitcnt);
 			uc2ToInt(bmpheader.biPlanes, &planes);
 
@@ -912,8 +913,8 @@ GLOBAL void c_bmp_output ( const char *name, const char *caption, const BOOLEAN 
 					/* sprintf(n, "%s %d: %s", lang.figure, image_counter, caption); */
 					/* removed parenthesis */
 
-					/* Changed in r6.3pl3 [NHz] */
-					sprintf(n, "{{\\*\\bkmkstart _tocimg%d}%s }{\\field{\\*\\fldinst {SEQ %s \\\\* ARABIC }}: %s{\\fldrslt %d: %s}}{\\*\\bkmkend _Tocimg%d}", image_counter, lang.figure, lang.figure, caption, image_counter, caption, image_counter);
+					/* Fixed bug #0000056 in V6.5.2 [NHz] */
+					sprintf(n, "{{\\*\\bkmkstart _tocimg%d}%s }{\\field{\\*\\fldinst {SEQ %s \\\\* ARABIC }}{\\fldrslt %d}}: %s{\\*\\bkmkend _Tocimg%d}", image_counter, lang.figure, lang.figure, image_counter, caption, image_counter);
 				}
 				else
 				{	/* Changed in r6pl16 [NHz] */
