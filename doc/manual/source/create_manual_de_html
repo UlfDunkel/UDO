@@ -1,6 +1,6 @@
 #!/bin/sh
 # dieses bash-Skript konvertiert das UDO-Handbuch in Deutsch nach HTML
 # this bash scripts converts the german UDO Manual to HTML
-udo --html --verbose --force-long -D LANG_DE --tree -o ../html-de/index.html manual.u
+udo --html --verbose --force-long -D LANG_DE --tree -o ../html-de/index.html manual.u $*
 mv ../html-de/index.ulh ../manual-de.ulh
 mv ../html-de/index.uth ../manual-de.uth
