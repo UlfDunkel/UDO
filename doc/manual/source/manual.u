@@ -1,7 +1,7 @@
 ################################################################################
 # doc/manual/source/manual.u
 # Hauptfile der Anleitung zu UDO / udo manual main page
-# letzte Änderungen: 24.01.2004 / last changes: Jan 24, 2004
+# letzte Änderungen: 29.01.2004 / last changes: Jan 29, 2004
 ################################################################################
 # In diesem File befindet sich kein Text! Alle Texte werden nachgeladen
 # This file doesn't contain any text! Any text will be included from other files.
@@ -280,6 +280,23 @@
 # used in history.txt:
 !macro PUBLISHED (!1) was published on (!2).
 !endif
+
+
+# Sprachabhängige Textbausteine für die UDO-Historie in history.ui (alphabetisch geordnet)
+# language-dependent text parts for the UDO history in history.ui (in alphabetical order)
+!iflang [german]
+!macro BUGFIXES Fehlerbehebungen
+!macro CHANGES Änderungen
+!macro GENERAL Allgemeines
+!macro NEWS Neuheiten
+!endif
+!iflang [english]
+!macro BUGFIXES Bugfixes
+!macro CHANGES Changes
+!macro GENERAL General
+!macro NEWS News
+!endif
+
 
 # Sprachabhängige Textbausteine für den Befehlsindex (alphabetisch geordnet)
 # language-dependent text parts for the command index (in alphabetical order)
