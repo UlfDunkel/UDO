@@ -1,5 +1,5 @@
 # doc/manual/source/working.ui
-# letzte Änderungen: 20.12.2003 / last changes: Dec 20, 2003
+# letzte Änderungen: 04.01.2004 / last changes: Jan 4, 2004
 
 
 ################################################################################
@@ -1253,10 +1253,14 @@ query with (!KW [if]), (!KW [ifdest]) etc.
 !iflang [german]
 In Ihrem Quelltext steht (!KW [endif]), ohne daß Sie mit (!KW [if]), (!KW [ifdest])
 etc. eine Abfrage begonnen haben.
+# ergänzt 04.01.2004 - Ulrich Kretschmer (vgl. Bug Nr. 43)
+Diese Fehlermeldung wird auch erzeugt, wenn im Quelltext ein (!KW [end_ignore]) ohne zugehöriges (!KW [begin_ignore]) vorkommt.
 !endif
 !iflang [english]
 Your source file contains an (!KW [endif]) command but you haven't
 startet a query with (!KW [if]), (!KW [ifdest]) etc.
+# ergänzt 04.01.2004 - Ulrich Kretschmer (vgl. Bug Nr. 43)
+You will also get this error message if you use (!KW [end_ignore]) without according (!KW [begin_ignore]).
 !endif
 
 !item [''!/item'' outside environment]
