@@ -454,9 +454,13 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!html_use_folders",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!rtf_propfont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!rtf_monofont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
+	{ "!rtf_propfont_size",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
+	{ "!rtf_monofont_size",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!rtf_no_tables",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!win_propfont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!win_monofont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
+	{ "!win_propfont_size",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
+	{ "!win_monofont_size",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!win_backcolor",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!win_textcolor",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!win_linkcolor",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
@@ -467,6 +471,8 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!win_old_keywords",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!wh4_propfont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!wh4_monofont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
+	{ "!wh4_propfont_size",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
+	{ "!wh4_monofont_size",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!wh4_backcolor",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!wh4_textcolor",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!wh4_background",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
@@ -2273,7 +2279,7 @@ LOCAL void c_heading ( void )
 			align[0]= EOS;
 			if (inside_center)	strcpy(align, "\\qc");
 			if (inside_right)	strcpy(align, "\\qr");
-			voutlnf("{%s\\fs36\\b %s}\\par\\pard\\par", align, name);
+			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize + 14, align, name);
 			break;
 		case TOWIN:
 		case TOWH4:
@@ -2282,7 +2288,7 @@ LOCAL void c_heading ( void )
 			align[0]= EOS;
 			if (inside_center)	strcpy(align, "\\qc");
 			if (inside_right)	strcpy(align, "\\qr");
-			voutlnf("{%s\\fs36\\b %s}\\par\\pard\\par", align, name);
+			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize + 14, align, name);
 			break;
 		case TOKPS:
 			outln("newline");
@@ -2384,13 +2390,13 @@ LOCAL void c_subheading ( void )
 		case TORTF:
 			c_rtf_styles(name);
 			c_rtf_quotes(name);
-			voutlnf("{\\fs28\\b %s}\\par\\pard\\par", name);
+			voutlnf("{\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize + 6, name);
 			break;
 		case TOWIN:
 		case TOWH4:
 		case TOAQV:
 			c_win_styles(name);
-			voutlnf("{\\fs28\\b %s}\\par\\pard\\par", name);
+			voutlnf("{\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize + 6, name);
 			break;
 		case TOKPS:
 			outln("newline");
@@ -2490,13 +2496,13 @@ LOCAL void c_subsubheading ( void )
 		case TORTF:
 			c_rtf_styles(name);
 			c_rtf_quotes(name);
-			voutlnf("{\\fs22\\b %s}\\par\\pard\\par", name);
+			voutlnf("{\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize, name);
 			break;
 		case TOWIN:
 		case TOWH4:
 		case TOAQV:
 			c_win_styles(name);
-			voutlnf("{\\fs22\\b %s}\\par\\pard\\par", name);
+			voutlnf("{\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize, name);
 			break;
 		case TOKPS:
 			outln("newline");
@@ -2596,13 +2602,13 @@ LOCAL void c_subsubsubheading ( void )
 		case TORTF:
 			c_rtf_styles(name);
 			c_rtf_quotes(name);
-			voutlnf("{\\fs22\\b %s}\\par\\pard\\par", name);
+			voutlnf("{\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize, name);
 			break;
 		case TOWIN:
 		case TOWH4:
 		case TOAQV:
 			c_win_styles(name);
-			voutlnf("{\\fs22\\b %s}\\par\\pard\\par", name);
+			voutlnf("{\\fs%d\\b %s}\\par\\pard\\par", iDocPropfontSize, name);
 			break;
 		case TOKPS:
 			outln("newline");
@@ -4996,7 +5002,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 	if (desttype==TORTF)
 	{	if (iEnvLevel==0)
 		{	out(rtf_plain);
-			out(rtf_norm);
+			voutf("%s\\fs%d ", rtf_norm, iDocPropfontSize);
 		}
 	}
 	
@@ -6948,6 +6954,14 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			{	tokcpy2(sDocMonofont);
 				return TRUE;
 			}
+			if (strcmp(token[0], "!win_propfont_size")==0)
+			{	tokcpy2(sDocPropfontSize);
+				return TRUE;
+			}
+			if (strcmp(token[0], "!win_monofont_size")==0)
+			{	tokcpy2(sDocMonofontSize);
+				return TRUE;
+			}
 			if (strcmp(token[0], "!win_background")==0)
 			{	c= get_color();
 				set_win_backcolor(sDocBackColor, c);
@@ -7001,6 +7015,14 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			{	tokcpy2(sDocMonofont);
 				return TRUE;
 			}
+			if (strcmp(token[0], "!wh4_propfont_size")==0)
+			{	tokcpy2(sDocPropfontSize);
+				return TRUE;
+			}
+			if (strcmp(token[0], "!wh4_monofont_size")==0)
+			{	tokcpy2(sDocMonofontSize);
+				return TRUE;
+			}
 			if (strcmp(token[0], "!wh4_background")==0)
 			{	c= get_color();
 				set_win_backcolor(sDocBackColor, c);
@@ -7027,6 +7049,14 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			}
 			if (strcmp(token[0], "!rtf_propfont")==0)
 			{	tokcpy2(sDocPropfont);
+				return TRUE;
+			}
+			if (strcmp(token[0], "!rtf_monofont_size")==0)
+			{	tokcpy2(sDocMonofontSize);
+				return TRUE;
+			}
+			if (strcmp(token[0], "!rtf_propfont_size")==0)
+			{	tokcpy2(sDocPropfontSize);
 				return TRUE;
 			}
 			break;
@@ -10614,6 +10644,8 @@ GLOBAL void init_vars ( void )
 
 	sDocPropfont[0]=		EOS;
 	sDocMonofont[0]=		EOS;
+	sDocPropfontSize[0]=	EOS;
+	sDocMonofontSize[0]=	EOS;
 
 	justify_from_right= FALSE;
 

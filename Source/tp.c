@@ -792,16 +792,16 @@ GLOBAL void c_maketitle ( void )
 			outln(rtf_par);
 			outln("\\qc ");
 			if ( has_title )
-			{	voutlnf("{\\fs36 %s}%s%s", titdat.title, rtf_par, rtf_par);
+			{	voutlnf("{\\fs%d %s}%s%s", iDocPropfontSize + 14, titdat.title, rtf_par, rtf_par);
 			}
 			if ( has_program )
-			{	voutlnf("{\\fs60 %s}%s%s", titdat.program, rtf_par, rtf_par);
+			{	voutlnf("{\\fs%d %s}%s%s", iDocPropfontSize + 38, titdat.program, rtf_par, rtf_par);
 			}
 			if ( has_version )
-			{	voutlnf("{\\fs28 %s}%s", titdat.version, rtf_par);
+			{	voutlnf("{\\fs%d %s}%s", iDocPropfontSize + 6, titdat.version, rtf_par);
 			}
 			if ( has_date )
-			{	voutlnf("{\\fs28 %s}%s", titdat.date, rtf_par);
+			{	voutlnf("{\\fs%d %s}%s", iDocPropfontSize + 6, titdat.date, rtf_par);
 			}
 			if ( has_author || has_address )
 			{	for (i=0; i<(25-address_counter); i++) out(rtf_par) ;
@@ -837,7 +837,7 @@ GLOBAL void c_maketitle ( void )
 			}
 
 			if ( has_title )
-			{	voutlnf("\\qc{\\fs28 %s}\\par\\pard", titdat.title);
+			{	voutlnf("\\qc{\\fs%d %s}\\par\\pard", iDocPropfontSize + 6, titdat.title);
 			}
 
 			if ( has_programimage )
@@ -848,7 +848,7 @@ GLOBAL void c_maketitle ( void )
 			}
 			else
 			{	if ( has_program )
-				{	voutlnf("\\qc{\\fs48 %s}\\par\\pard", titdat.program);
+				{	voutlnf("\\qc{\\fs%d %s}\\par\\pard", iDocPropfontSize + 26, titdat.program);
 				}
 			}
 			
@@ -912,7 +912,7 @@ GLOBAL void c_maketitle ( void )
 			}
 			else
 			{	if ( has_program )
-				{	voutlnf("\\qc\\fs48 %s\\par\\pard\\plain", titdat.program);
+				{	voutlnf("\\qc\\fs%d %s\\par\\pard\\plain", iDocPropfontSize + 26, titdat.program);
 				}
 			}
 

@@ -268,6 +268,10 @@ GLOBAL BOOLEAN		bDocMediumCompression;
 GLOBAL int			iDocCharwidth;				/* Zeichenbreiten-Konstanten */
 GLOBAL char			sDocPropfont[MAXZEILE+1];	/* Proportional- und Monospacedfont */
 GLOBAL char			sDocMonofont[MAXZEILE+1];	/* fuer den RTF-Header */
+GLOBAL char			sDocPropfontSize[16];
+GLOBAL int			iDocPropfontSize;
+GLOBAL char			sDocMonofontSize[16];
+GLOBAL int			iDocMonofontSize;
 GLOBAL BOOLEAN		bDocNoTables;				/* Keine echten RTF-Tabellen anlegen? */
 
 GLOBAL BOOLEAN		bCalledIndex;				/* !index ignorieren und keinen Index?	*/
