@@ -2043,7 +2043,8 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		voutlnf("<meta name=\"date\" content=\"%d-%02d-%02dT%02d:%02d:%02d%s\">", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec, zone);
 	}
 
-	voutlnf("<meta name=\"Generator\" content=\"UDO %s.%s PL%s for %s\">",
+	/* Changed in V6.5.5 [NHz] */
+	voutlnf("<meta name=\"Generator\" content=\"UDO %s.%s.%s for %s\">",
 			UDO_REL, UDO_SUBVER,
 			UDO_PL,
 			UDO_OS);
