@@ -4,18 +4,15 @@
 !no_effects [asc]
 
 !docinfo [program]	UDO Developer's Guide
-!docinfo [version]	Version 5
-!docinfo [date]		27.10.2001
+!docinfo [version]	Version 6
+!docinfo [date]		11.12.2003
 
-!docinfo [author]	Dirk Hagedorn
-!docinfo [address]	Asmecke 1
-!docinfo [address]	59846 Sundern
-!docinfo [address]	Deutschland
-!docinfo [address]	email	E-Mail: udo@dirk-hagedorn.de
+!docinfo [author]	Dirk Hagedorn, Volker Janzen und andere
+!docinfo [address]	http://www.udo-open-source.org/
 
 !use_short_tocs			[stg,win,aqv,info,html]
 !use_auto_subtocs		[stg,win,aqv,info,html]
-!use_auto_subsubtocs	[stg,win,aqv,info,html]
+!use_auto_subsubtocs		[stg,win,aqv,info,html]
 !use_justification		[asc,stg]
 
 !macro MISS	Hier fehlt noch etwas!..
@@ -531,6 +528,10 @@ Funktionen (!V)c_macros(!v), (!V)auto_quote_chars(!v),
 (!V)auto_references(!v), (!V)c_divis(!v), (!V)c_tilde(!v), 
 (!V)c_vars(!v) etc. hat mir schon manche schlaflose Nacht bereitet.
 
+############################################################
+# 
+############################################################
+!include um.ui
 
 ############################################################
 # 
