@@ -1,6 +1,6 @@
 #!/bin/sh
 export UDOINPUTPATH=/usr/share/udo/udoinput/
-ddd ../../UDO/Source/udo
+ddd ../../Source/udo
 # --html --verbose --force-long --tree --check
 # -o ../../HTML-Out/bergpano/index.html bergpano.txt
 chmod 644 ../../HTML-Out/bergpano/*.html
