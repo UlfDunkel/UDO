@@ -1053,7 +1053,7 @@ LOCAL void table_output_general ( void )
 
 {
 
-    int     y, x, i, j, offset, indent=0;
+    int     y, x, i, j, offset, indent=0, y_stg;
 
     char    s[512], f[512], stg_vl[32];
 
@@ -1255,7 +1255,17 @@ LOCAL void table_output_general ( void )
 
         {   if (tab_vert[x]>0)
 
-            {   sprintf(stg_vl, "@line %d 0 %d", offset, tab_h+1);
+            {
+
+	             /* if inserted r6pl15 [GS] */
+
+                if( tab_h>253 )
+
+                   sprintf(stg_vl, "@line %d 0 %d", offset, 254);
+
+                else
+
+                	sprintf(stg_vl, "@line %d 0 %d", offset, tab_h+1);
 
                 outln(stg_vl);
 
@@ -1269,7 +1279,17 @@ LOCAL void table_output_general ( void )
 
         if (tab_vert[tab_w+1]>0)
 
-        {   sprintf(stg_vl, "@line %d 0 %d", offset, tab_h+1);
+        {
+
+            /* if inserted r6pl15 [GS] */
+
+            if( tab_h>253 )
+
+            	sprintf(stg_vl, "@line %d 0 %d", offset, 254);
+
+            else
+
+            	sprintf(stg_vl, "@line %d 0 %d", offset, tab_h+1);
 
             outln(stg_vl);
 
@@ -1525,11 +1545,65 @@ LOCAL void table_output_general ( void )
 
 
 
-    for (y=0; y<=tab_h; y++)
+    for( y=0, y_stg=0 ; y<=tab_h ; y++, y_stg++ )
 
     {   s[0]= EOS;
 
+			
 
+			/* New in r6pl15 [GS] */
+
+        if ( y_stg > 253 && (desttype==TOSTG || desttype==TOAMG) && !ansichars)
+
+        {
+
+            /* ST-Guide kann nur Linien mit einer L„nge von 254 Zeilen */
+
+            /* zeichen. Deshalb wird hier eine Anschlužline gezeichnet */
+
+        
+
+            offset= (int) toffset;
+
+            y_stg = tab_h - y;
+
+            if ( y_stg > 253 )
+
+                y_stg = 253;
+
+            for (x=0; x<=tab_w; x++)
+
+            {   if (tab_vert[x]>0)
+
+                {   sprintf(stg_vl, "@line %d 0 %d", offset, y_stg+1);
+
+                    outln(stg_vl);
+
+                }
+
+                offset+= (int) tab_cell_w[x];
+
+                offset+= 2;
+
+            }
+
+        
+
+            if (tab_vert[tab_w+1]>0)
+
+            {   sprintf(stg_vl, "@line %d 0 %d", offset, y_stg+1);
+
+            }
+
+            outln(stg_vl);
+
+            
+
+            y_stg = 0;
+
+        }
+
+        
 
         /* New in r6pl15 [NHz] */
 
