@@ -8627,7 +8627,8 @@ GLOBAL void c_label ( void )
 
 		/* New in r6pl15 [NHz] */
 		case TOKPS:
-			node2postscript(sLabel, FALSE);
+			/* Fixed Bug #0000040 in r6.3pl16 [NHz] */
+			node2postscript(sLabel, KPS_NAMEDEST);
 			voutlnf("/%s NameDest", sLabel);
 			/* Must be changed if (!label ...) is possible */
 			break;
