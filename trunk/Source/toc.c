@@ -2050,147 +2050,160 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 	{	sprintf(sTarget, " target=\"UDOcon\"");
 	}
 
-	/* New in r6pl16 [NHz] */
-	toc_link_output(1);
-	toc_link_output(2);
-	toc_link_output(3);
-	toc_link_output(4);
-
-	if (old_outfile.name[0]!=EOS)
-	{	/* Changed in r6pl16 [NHz] */
-		/* Feststellen, ob die Referenz im gleichen File liegt */
-		if (strcmp(old_outfile.name, outfile.name)!=0)
+	/* New feature #0000053 in V6.5.2 [NHz] */
+	if(html_header_links)
+	{
+		if(strstr(html_header_links_kind, "chapter") != NULL)
 		{
-			voutlnf("<link rel=\"start\" href=\"%s%s\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.html_start);
-			/* Special for CAB */
-			voutlnf("<link rel=\"home\" href=\"%s%s\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.html_start);
-			if (uses_tableofcontents)
-			{	/* New in r6pl15 [NHz] */
-				voutlnf("<link rel=\"contents\" href=\"%s%s#UDOTOC\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.contents);
+			toc_link_output(1);
+			toc_link_output(2);
+			toc_link_output(3);
+			toc_link_output(4);
+		}
+	}
+
+	/* New feature #0000053 in V6.5.2 [NHz] */
+	if(html_header_links)
+	{
+		if(strstr(html_header_links_kind, "navigation"))
+		{
+			if (old_outfile.name[0]!=EOS)
+			{	/* Changed in r6pl16 [NHz] */
+				/* Feststellen, ob die Referenz im gleichen File liegt */
+				if (strcmp(old_outfile.name, outfile.name)!=0)
+				{
+					voutlnf("<link rel=\"start\" href=\"%s%s\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.html_start);
+					/* Special for CAB */
+					voutlnf("<link rel=\"home\" href=\"%s%s\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.html_start);
+					if (uses_tableofcontents)
+					{	/* New in r6pl15 [NHz] */
+						voutlnf("<link rel=\"contents\" href=\"%s%s#UDOTOC\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.contents);
+						/* Special for CAB */
+						voutlnf("<link rel=\"toc\" href=\"%s%s#UDOTOC\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.contents);
+					}
+				}
+			}
+		
+			/* Andere moegliche Angaben laut SelfHTML 6.0:
+			* <link rev=relation href="http://www.autorshome.de/" title="Autoren-Homepage">
+			* <link rel=index href="stichwrt.htm" title="Stichwortverzeichnis">
+			* <link rel=glossary href="glossar.htm" title="Begriffs-Glossar">
+			* <link rel=copyright href="rechte.htm" title="Copyright">
+			* <link rel=next href="augsburg.htm" title="n„chste Seite">
+			* <link rel=previous href="aachen.htm" title="vorherige Seite">
+			* <link rel=help href="hilfe.htm" title="Orientierungshilfe">
+			* <link rel=bookmark href="hinweis.htm" title="Neuorientierung">
+			*/
+		
+		
+			/* New in r6pl16 [NHz] */
+			/* Output of Link-Rel 'up' */
+			/* is going to same place than !html_backpage */
+		
+			if(sDocHtmlBackpage[0] != EOS)
+			{
+				strcpy(backpage, sDocHtmlBackpage);
+				tok = strtok(backpage, "\'");
+				strcpy(href, tok);
+				del_right_spaces(href);
+				tok = strtok(NULL, "\'");
+				if(tok != NULL)
+				{
+					strcpy(alt, tok);
+					auto_quote_chars(alt, TRUE);
+				}
+				else
+					strcpy(alt, href);
+		
 				/* Special for CAB */
-				voutlnf("<link rel=\"toc\" href=\"%s%s#UDOTOC\"%s title=\"%s\">", old_outfile.name, outfile.suff, sTarget, lang.contents);
+				voutlnf("<link rel=\"up\" href=\"%s\" title=\"%s\">", href, alt);
+			}
+		
+			/* New in r6pl15 [NHz] */
+			/* Output of Link-Rel 'first' */
+		
+			i= toc[ti]->prev_index;
+		
+			if (i>0)
+			{	/* First Node -> No Link */
+				li= toc[1]->labindex;
+		
+				strcpy(s, lab[li]->name);
+				get_html_filename(lab[li]->tocindex, htmlname);
+		
+				/* Special for CAB */
+				/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
+				if(strchr(htmlname, '.') != NULL)
+					voutlnf("<link rel=\"first\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
+				else
+					voutlnf("<link rel=\"first\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
+			}
+		
+		
+			/* New in r6pl15 [NHz] */
+			/* Output of Link-Rel 'prev' */
+		
+			if (i>0)
+			{
+				li= toc[i]->labindex;
+				strcpy(s, lab[li]->name);
+				get_html_filename(lab[li]->tocindex, htmlname);
+		
+				/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
+				if(strchr(htmlname, '.') != NULL)
+				{
+					voutlnf("<link rel=\"prev\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
+					/* Special for CAB */
+					voutlnf("<link rel=\"previous\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
+				}
+				else
+				{
+					voutlnf("<link rel=\"prev\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
+					/* Special for CAB */
+					voutlnf("<link rel=\"previous\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
+				}
+			}
+		
+			/* Output of Link-Rel 'next' */
+		
+			i= toc[ti]->next_index;
+		
+			if (i>1)
+			{
+				li= toc[i]->labindex;
+				strcpy(s, lab[li]->name);
+				get_html_filename(lab[li]->tocindex, htmlname);
+		
+				/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039*/
+				if(strchr(htmlname, '.') != NULL)
+					voutlnf("<link rel=\"next\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
+				else
+					voutlnf("<link rel=\"next\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
+			}
+		
+			/* New in r6pl15 [NHz] */
+			/* Output of Link-Rel 'last' */
+		
+			if (i>1)
+			{
+				if(use_about_udo)
+				{
+					li= toc[p1_toc_counter]->labindex;
+					li--;
+				}
+				else
+					li= toc[p1_toc_counter]->labindex;
+				strcpy(s, lab[li]->name);
+				get_html_filename(lab[li]->tocindex, htmlname);
+		
+				/* Special for CAB */
+				/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
+				if(strchr(htmlname, '.') != NULL)
+					voutlnf("<link rel=\"last\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
+				else
+					voutlnf("<link rel=\"last\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
 			}
 		}
-	}
-
-	/* Andere moegliche Angaben laut SelfHTML 6.0:
-	* <link rev=relation href="http://www.autorshome.de/" title="Autoren-Homepage">
-	* <link rel=index href="stichwrt.htm" title="Stichwortverzeichnis">
-	* <link rel=glossary href="glossar.htm" title="Begriffs-Glossar">
-	* <link rel=copyright href="rechte.htm" title="Copyright">
-	* <link rel=next href="augsburg.htm" title="n„chste Seite">
-	* <link rel=previous href="aachen.htm" title="vorherige Seite">
-	* <link rel=help href="hilfe.htm" title="Orientierungshilfe">
-	* <link rel=bookmark href="hinweis.htm" title="Neuorientierung">
-	*/
-
-
-	/* New in r6pl16 [NHz] */
-	/* Output of Link-Rel 'up' */
-	/* is going to same place than !html_backpage */
-
-	if(sDocHtmlBackpage[0] != EOS)
-	{
-		strcpy(backpage, sDocHtmlBackpage);
-		tok = strtok(backpage, "\'");
-		strcpy(href, tok);
-		del_right_spaces(href);
-		tok = strtok(NULL, "\'");
-		if(tok != NULL)
-		{
-			strcpy(alt, tok);
-			auto_quote_chars(alt, TRUE);
-		}
-		else
-			strcpy(alt, href);
-
-		/* Special for CAB */
-		voutlnf("<link rel=\"up\" href=\"%s\" title=\"%s\">", href, alt);
-	}
-
-	/* New in r6pl15 [NHz] */
-	/* Output of Link-Rel 'first' */
-
-	i= toc[ti]->prev_index;
-
-	if (i>0)
-	{	/* First Node -> No Link */
-		li= toc[1]->labindex;
-
-		strcpy(s, lab[li]->name);
-		get_html_filename(lab[li]->tocindex, htmlname);
-
-		/* Special for CAB */
-		/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
-		if(strchr(htmlname, '.') != NULL)
-			voutlnf("<link rel=\"first\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
-		else
-			voutlnf("<link rel=\"first\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
-	}
-
-
-	/* New in r6pl15 [NHz] */
-	/* Output of Link-Rel 'prev' */
-
-	if (i>0)
-	{
-		li= toc[i]->labindex;
-		strcpy(s, lab[li]->name);
-		get_html_filename(lab[li]->tocindex, htmlname);
-
-		/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
-		if(strchr(htmlname, '.') != NULL)
-		{
-			voutlnf("<link rel=\"prev\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
-			/* Special for CAB */
-			voutlnf("<link rel=\"previous\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
-		}
-		else
-		{
-			voutlnf("<link rel=\"prev\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
-			/* Special for CAB */
-			voutlnf("<link rel=\"previous\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
-		}
-	}
-
-	/* Output of Link-Rel 'next' */
-
-	i= toc[ti]->next_index;
-
-	if (i>1)
-	{
-		li= toc[i]->labindex;
-		strcpy(s, lab[li]->name);
-		get_html_filename(lab[li]->tocindex, htmlname);
-
-		/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039*/
-		if(strchr(htmlname, '.') != NULL)
-			voutlnf("<link rel=\"next\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
-		else
-			voutlnf("<link rel=\"next\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
-	}
-
-	/* New in r6pl15 [NHz] */
-	/* Output of Link-Rel 'last' */
-
-	if (i>1)
-	{
-		if(use_about_udo)
-		{
-			li= toc[p1_toc_counter]->labindex;
-			li--;
-		}
-		else
-			li= toc[p1_toc_counter]->labindex;
-		strcpy(s, lab[li]->name);
-		get_html_filename(lab[li]->tocindex, htmlname);
-
-		/* Special for CAB */
-		/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
-		if(strchr(htmlname, '.') != NULL)
-			voutlnf("<link rel=\"last\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
-		else
-			voutlnf("<link rel=\"last\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
 	}
 
 	/* New in r6pl15 [NHz] */
@@ -9105,6 +9118,19 @@ GLOBAL void set_html_header_date ( void )
 	tokcpy2(html_header_date_zone);
 
 }	/* set_html_header_date */
+
+
+/* New feature #0000053 in V6.5.2 [NHz] */
+GLOBAL void set_html_header_links ( void )
+{
+	tokcpy2(html_header_links_kind);
+	if (html_header_links_kind[0]==EOS)
+	{	error_empty_header_links();
+		return;
+	}
+	html_header_links = TRUE;
+
+}	/* set_html_header_links */
 
 
 GLOBAL void set_html_frames_layout ( void )

@@ -462,6 +462,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!html_transparent_buttons",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_use_folders",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_header_date",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	}, /* New feature #0000054 in V6.5.2 [NHz] */
+	{ "!html_header_links",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	}, /* New feature #0000053 in V6.5.2 [NHz] */
 	{ "!rtf_propfont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!rtf_monofont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!rtf_propfont_size",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
@@ -7626,6 +7627,11 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			{	set_html_header_date();
 				return TRUE;
 			}
+			/* New feature #0000053 in V6.5.2 [NHz] */
+			if ( strcmp(token[0], "!html_header_links")==0 )
+			{	set_html_header_links();
+				return TRUE;
+			}
 			break;
 	}	/* switch */
 
@@ -11217,6 +11223,8 @@ GLOBAL void init_vars ( void )
 	html_doctype= HTML_TRANS;	/* New in r6pl16 [NHz] */
 	html_header_date = FALSE;	/* New feature #0000054 in V6.5.2 [NHz] */
 	html_header_date_zone[0] = EOS;	/* New feature #0000054 in V6.5.2 [NHz] */
+	html_header_links = FALSE;	/* New feature #0000053 in V6.5.2 [NHz] */
+	html_header_links_kind[0] = EOS;	/* New feature #0000053 in V6.5.2 [NHz] */
 	
 	html_ignore_p= 				FALSE;
 
