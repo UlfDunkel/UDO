@@ -3252,12 +3252,11 @@ GLOBAL void html_footer ( void )
 	}
 
 	strcat(footer_buffer, s);
-	strcat(footer_buffer, "<br>");
-    outln(footer_buffer);
+	strcat(footer_buffer, "<br> ");
     
 	strcpy(s, lang.update);
 	auto_quote_chars(s, TRUE);
-	strcpy(footer_buffer, s);
+	strcat(footer_buffer, s);
 	strcat(footer_buffer, " ");
 	strcat(footer_buffer, lang.today);
 	strcat(footer_buffer, sHtmlPropfontEnd);
