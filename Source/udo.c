@@ -9102,7 +9102,7 @@ LOCAL BOOLEAN pass2 (char *datei)
 					auto_quote_chars(zeile, FALSE);
 
 					/* Changed in V6.4.1 [NHz] */
-					c_commands_inside(zeile, FALSE);
+					c_commands_inside(zeile, TRUE);
 
 					replace_macros(zeile);
 					c_divis(zeile);
