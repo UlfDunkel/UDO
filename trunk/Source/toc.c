@@ -2097,11 +2097,11 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		get_html_filename(lab[li]->tocindex, htmlname);
 
 		/* Special for CAB */
-		/* Changed in r6pl16 [NHz] */
+		/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
 		if(strchr(htmlname, '.') != NULL)
-			voutlnf("<link rel=\"first\" href=\"%s\"%s title=\"%s\">", htmlname, sTarget, s);
+			voutlnf("<link rel=\"first\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
 		else
-			voutlnf("<link rel=\"first\" href=\"%s%s\"%s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+			voutlnf("<link rel=\"first\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
 	}
 
 
@@ -2114,18 +2114,18 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		strcpy(s, lab[li]->name);
 		get_html_filename(lab[li]->tocindex, htmlname);
 
-		/* Changed in r6pl16 [NHz] */
+		/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
 		if(strchr(htmlname, '.') != NULL)
 		{
-			voutlnf("<link rel=\"prev\" href=\"%s\"%s title=\"%s\">", htmlname, sTarget, s);
+			voutlnf("<link rel=\"prev\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
 			/* Special for CAB */
-			voutlnf("<link rel=\"previous\" href=\"%s\"%s title=\"%s\">", htmlname, sTarget, s);
+			voutlnf("<link rel=\"previous\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
 		}
 		else
 		{
-			voutlnf("<link rel=\"prev\" href=\"%s%s\"%s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+			voutlnf("<link rel=\"prev\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
 			/* Special for CAB */
-			voutlnf("<link rel=\"previous\" href=\"%s%s\"%s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+			voutlnf("<link rel=\"previous\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
 		}
 	}
 
@@ -2139,11 +2139,11 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		strcpy(s, lab[li]->name);
 		get_html_filename(lab[li]->tocindex, htmlname);
 
-		/* Changed in r6pl16 [NHz] */
+		/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039*/
 		if(strchr(htmlname, '.') != NULL)
-			voutlnf("<link rel=\"next\" href=\"%s\"%s title=\"%s\">", htmlname, sTarget, s);
+			voutlnf("<link rel=\"next\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
 		else
-			voutlnf("<link rel=\"next\" href=\"%s%s\"%s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+			voutlnf("<link rel=\"next\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
 	}
 
 	/* New in r6pl15 [NHz] */
@@ -2162,11 +2162,11 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		get_html_filename(lab[li]->tocindex, htmlname);
 
 		/* Special for CAB */
-		/* Changed in r6pl16 [NHz] */
+		/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
 		if(strchr(htmlname, '.') != NULL)
-			voutlnf("<link rel=\"last\" href=\"%s\"%s title=\"%s\">", htmlname, sTarget, s);
+			voutlnf("<link rel=\"last\" href=\"%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, sTarget, s);
 		else
-			voutlnf("<link rel=\"last\" href=\"%s%s\"%s title=\"%s\">", htmlname, outfile.suff, sTarget, s);
+			voutlnf("<link rel=\"last\" href=\"%s%s%s\"%s title=\"%s\">", html_name_prefix, htmlname, outfile.suff, sTarget, s);
 	}
 
 	/* New in r6pl15 [NHz] */
