@@ -137,8 +137,8 @@ GLOBAL BOOLEAN	tokens_contain_item;
 GLOBAL char		udosymbol[MAX_UDOSYMBOLS][MAX_UDOSYMBOL_LEN+1];
 GLOBAL int		udosymbol_counter;
 
-GLOBAL char compile_date[11];
-GLOBAL char compile_time[9];
+extern char compile_date[11];
+extern char compile_time[9];
 
 /*	------------------------------------------------------------------------	*/
 
