@@ -41,6 +41,11 @@
 #define	CMD_VERB_OFF			"(!v)"
 #define	CMD_STYLELEN			4
 
+/* New in V6.5.9 [NHz] */
+#define	CMD_INSERT_ON				"(!INS)"
+#define	CMD_INSERT_OFF			"(!ins)"
+#define	CMD_DELETED_ON			"(!DEL)"
+#define	CMD_DELETED_OFF			"(!del)"
 
 /*	--------------------------------------------------	*/
 /* Umgebungen */

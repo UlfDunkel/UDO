@@ -38,6 +38,9 @@ typedef struct _styleflag
 	BOOLEAN underlined;
 	BOOLEAN verbatim;
 	BOOLEAN twriter;
+	/* New in V6.5.9 [NHz] */
+	BOOLEAN insert;
+	BOOLEAN deleted;
 }	STYLEFLAG;
 
 #endif /* UDO_STY_H */
@@ -46,6 +49,8 @@ typedef struct _styleflag
 	# Platzhalter-Konstanten
 	# \011 und \012 duerfen aus mir momentan nicht erfindlichen
 	# Gruenden nicht benutzt werden.
+	# Dies gilt auch fÅr \018, \019, \025, \027, \030, \038,
+	# \039 und \042 [NHz]
 	############################################################	*/
 
 #define	STYLELEN		4
@@ -62,6 +67,11 @@ typedef struct _styleflag
 #define	C_VERB_OFF		'\014'
 #define	C_TWRITER_ON	'\015'
 #define	C_TWRITER_OFF	'\016'
+/* New in V6.5.9 [NHz] */
+#define	C_INSERT_ON	'\017'
+#define	C_INSERT_OFF	'\020'
+#define	C_DELETED_ON	'\021'
+#define	C_DELETED_OFF	'\022'
 
 
 
@@ -76,6 +86,9 @@ GLOBAL char FOOT_ON[8],		FOOT_OFF[8];
 GLOBAL char ITALIC_ON[8],	ITALIC_OFF[8];
 GLOBAL char TWRITER_ON[8],	TWRITER_OFF[8];
 GLOBAL char UNDER_ON[8],	UNDER_OFF[8];
+/* New in V6.5.9 [NHz] */
+GLOBAL char INSERT_ON[8],	INSERT_OFF[8];
+GLOBAL char DELETED_ON[8],	DELETED_OFF[8];
 
 
 /*	############################################################

@@ -36,6 +36,7 @@ const char *id_sty_c= "@(#) sty.c       31.07.1998";
 #include "chr.h"
 #include "msg.h"
 #include "str.h"
+#include "time.h" /* New in V6.5.9 [NHz] */
 #include "udo.h"
 
 #include "export.h"
@@ -152,9 +153,10 @@ GLOBAL void c_pch_styles ( char *s )
 
 GLOBAL void c_rtf_styles ( char *s )
 {
-	char *ptr;
+	char *ptr, time_insert[40], time_delete[40]; /* New in V6.5.9 [NHz] */
 	char fs[20];
 	int l;
+	long time; /* New in V6.5.9 [NHz] */
 
 	if ( (ptr=strstr(s, STYLEMAGIC))==NULL )
 	{	return;
@@ -174,6 +176,15 @@ GLOBAL void c_rtf_styles ( char *s )
 	qreplace_all(ptr, TWRITER_OFF, STYLELEN, "}", 1);
 	qreplace_all(ptr, FOOT_ON, STYLELEN, "{\\chftn{\\footnote\\chftn{\\fs14  ", 31);	/* r5pl9 */
 	qreplace_all(ptr, FOOT_OFF, STYLELEN, "}}}", 3);
+
+	/* New in V6.5.9 [NHz] */
+	time=(long)(iDateMin + (iDateHour << 6) + (iDateDay << 11) + ((long)iDateMonth << 16) + ((long)(iDateYear-1900) << 20));
+	sprintf(time_insert, "{\\revised\\revauth1\\revdttm%ld ", time);
+	sprintf(time_delete, "{\\deleted\\revauthdel1\\revdttm%ld ", time);
+	qreplace_all(ptr, INSERT_ON, STYLELEN, time_insert, 36);
+	qreplace_all(ptr, INSERT_OFF, STYLELEN, "}", 1);
+	qreplace_all(ptr, DELETED_ON, STYLELEN, time_delete, 39);
+	qreplace_all(ptr, DELETED_OFF, STYLELEN, "}", 1);
 
 	del_internal_styles(s);
 }	/* c_rtf_styles */
@@ -212,6 +223,9 @@ GLOBAL void c_win_styles ( char *s )
 
 GLOBAL void c_internal_styles ( char *s )
 {
+	char time_insert[1024], time_delete[1024]; /* New in V6.5.9 [NHz] */
+	char this_time[40], cite[1024], change_date[26];
+	long lang_insert, lang_delete;
 	char	*ptr;	/*r6pl5: schon gefunden, also als Start benutzen */
 	char	tex_verb_on[16];
 	char	tex_verb_off[16];
@@ -392,6 +406,62 @@ GLOBAL void c_internal_styles ( char *s )
 				qreplace_all(ptr, TWRITER_OFF, STYLELEN,	"</tt>", 5);
 			}
 			footnote2ascii(s);
+
+			/* New in V6.5.9 [NHz] */
+			change_date[0] = EOS;
+
+			if(change_date[0] == EOS)
+			{
+				char zone[10]="+00:00";
+				time_t uhrzeit;
+				int hour_local, min_local, mday_local, min_utc, hour_utc, mday_utc;
+				int hours, minutes;
+			
+				if(strcmp(html_header_date_zone, "") >0)
+					um_strcpy(zone, html_header_date_zone, 9, "output_html_meta1");
+				else
+				{
+					time(&uhrzeit);
+					mday_local = localtime(&uhrzeit)->tm_mday;
+					mday_utc = gmtime(&uhrzeit)->tm_mday;
+					hour_local = localtime(&uhrzeit)->tm_hour;
+					hour_utc = gmtime(&uhrzeit)->tm_hour;
+					min_local = localtime(&uhrzeit)->tm_min;
+					min_utc = gmtime(&uhrzeit)->tm_min;
+		
+					if(min_local < min_utc)	/* special for countries with "broken times" (e.g. Iran +03:30) */
+					{
+						if(mday_local != mday_utc)	/* if different days over midnight */
+							hours = hour_local - hour_utc - 1 + 24;
+						else
+							hours = hour_local - hour_utc - 1;
+						minutes = min_utc - min_local;
+					}
+					else
+					{
+						if(mday_local != mday_utc)	/* if different days over midnight */
+							hours = hour_local - hour_utc + 24;
+						else
+							hours = hour_local - hour_utc;
+						minutes = min_local - min_utc;
+					}
+		
+					sprintf(zone, "%+03d:%02d", hours, minutes);
+				}
+				sprintf(this_time, " datetime=\"%d-%02d-%02dT%02d:%02d:%02d%s\"", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec, zone);
+			}
+		
+			sprintf(cite, " cite=\"%s\"", "http://www.udo-open-source.org");
+
+			sprintf(time_insert, "<ins%s%s>", cite, this_time);
+			lang_insert = strlen(time_insert);
+			sprintf(time_delete, "<del%s%s>", cite, this_time);
+			lang_delete = strlen(time_delete);
+			qreplace_all(ptr, INSERT_ON, STYLELEN, time_insert, lang_insert);
+			qreplace_all(ptr, INSERT_OFF, STYLELEN, "</ins>", 6);
+			qreplace_all(ptr, DELETED_ON, STYLELEN, time_delete, lang_delete);
+			qreplace_all(ptr, DELETED_OFF, STYLELEN, "</del>", 6);
+		
 			del_internal_styles(s);
 			break;
 		case TOHPH:
@@ -475,6 +545,11 @@ GLOBAL void c_styles ( char *s )
 	qreplace_all(ptr, CMD_FOOT_OFF, CMD_STYLELEN, 		FOOT_OFF, STYLELEN);
 	qreplace_all(ptr, CMD_TWRITER_ON, CMD_STYLELEN, 	TWRITER_ON, STYLELEN);
 	qreplace_all(ptr, CMD_TWRITER_OFF, CMD_STYLELEN,	TWRITER_OFF, STYLELEN);
+	/* New in V6.5.9 [NHz] */	
+	qreplace_all(ptr, CMD_INSERT_ON, 6, 	INSERT_ON, STYLELEN);
+	qreplace_all(ptr, CMD_INSERT_OFF, 6,	INSERT_OFF, STYLELEN);
+	qreplace_all(ptr, CMD_DELETED_ON, 6, 	DELETED_ON, STYLELEN);
+	qreplace_all(ptr, CMD_DELETED_OFF, 6,	DELETED_OFF, STYLELEN);
 	
 }	/* c_styles */
 
@@ -557,6 +632,23 @@ GLOBAL void check_styles ( char *s )
 				if (!styleflag.twriter)		error_not_active(CMD_TWRITER_ON);
 				styleflag.twriter= FALSE;
 				break;
+			/* New in V6.5.9 [NHz] */
+			case C_INSERT_ON:
+				if (styleflag.insert)		error_still_active(CMD_INSERT_ON);
+				styleflag.insert= TRUE;
+				break;
+			case C_INSERT_OFF:
+				if (!styleflag.insert)		error_not_active(CMD_INSERT_ON);
+				styleflag.insert= FALSE;
+				break;
+			case C_DELETED_ON:
+				if (styleflag.deleted)		error_still_active(CMD_DELETED_ON);
+				styleflag.deleted= TRUE;
+				break;
+			case C_DELETED_OFF:
+				if (!styleflag.deleted)		error_not_active(CMD_DELETED_ON);
+				styleflag.deleted= FALSE;
+				break;
 		}	/* switch ptr[0] */
 
 		found= strstr(ptr+1, STYLEMAGIC);
@@ -575,6 +667,9 @@ GLOBAL void check_styleflags ( void )
 	if (styleflag.twriter)		error_still_active(CMD_TWRITER_ON);
 	if (styleflag.underlined)	error_still_active(CMD_UNDER_ON);
 	if (styleflag.verbatim)		error_still_active(CMD_VERB_ON);
+	/* New in V6.5.9 [NHz] */
+	if (styleflag.insert)		error_still_active(CMD_INSERT_ON);
+	if (styleflag.deleted)		error_still_active(CMD_DELETED_ON);
 
 }	/* check_styleflags */
 
@@ -631,6 +726,11 @@ GLOBAL void init_module_sty ( void )
 	sprintf(VERB_OFF,		"%s%c\033", ESC_STYLE_MAGIC, C_VERB_OFF);
 	sprintf(TWRITER_ON,		"%s%c\033", ESC_STYLE_MAGIC, C_TWRITER_ON);
 	sprintf(TWRITER_OFF,	"%s%c\033", ESC_STYLE_MAGIC, C_TWRITER_OFF);
+	/* New in V6.5.9 [NHz] */
+	sprintf(INSERT_ON,		"%s%c\033", ESC_STYLE_MAGIC, C_INSERT_ON);
+	sprintf(INSERT_OFF,	"%s%c\033", ESC_STYLE_MAGIC, C_INSERT_OFF);
+	sprintf(DELETED_ON,		"%s%c\033", ESC_STYLE_MAGIC, C_DELETED_ON);
+	sprintf(DELETED_OFF,	"%s%c\033", ESC_STYLE_MAGIC, C_DELETED_OFF);
 
 	strcpy(sDrcBcolor, "\003O");
 	strcpy(sDrcIcolor, "\003O");
