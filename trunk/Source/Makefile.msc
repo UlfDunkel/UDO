@@ -8,7 +8,7 @@ RM=del
 O=.obj
 X=.exe
 
-CFLAGS = -D__WIN32__
+CFLAGS = -D__WIN32__ $(XCFLAGS)
 
 LDFLAGS = 
 
@@ -17,5 +17,5 @@ include makefile.in
 
 udo$(X):	$(OSRC) cli$(O)
 		$(CC) @<<
-	-Fo$@ $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS)
+	-Fo$@ $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) $(XLDFLAGS)
 <<NOKEEP

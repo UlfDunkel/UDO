@@ -7,7 +7,7 @@ CC =	gcc
 O=.o
 X=
 
-CFLAGS =	-O2 -D__HPUX_ROMAN8__ -Wall
+CFLAGS =	-O2 -D__HPUX_ROMAN8__ -Wall $(XCFLAGS)
 
 #CFLAGS =	-g -O2 -D__HPUX_ROMAN8__ \
 #-Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations \
@@ -20,4 +20,4 @@ include makefile.in
 
 
 udo$(X):	$(OSRC) cli$(O)
-		$(CC) $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) -o $@
+		$(CC) $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) $(XLDFLAGS) -o $@

@@ -8,7 +8,7 @@ RM=del
 O=.obj
 X=.exe
 
-CFLAGS =
+CFLAGS = $(XCFLAGS)
 
 LDFLAGS = 
 
@@ -17,5 +17,5 @@ LDFLAGS =
 
 udo$(X):	$(OSRC) cli$(O)
 		$(CC) @&&|
-	-e$@ $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS)
+	-e$@ $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) $(XLDFLAGS)
 |

@@ -7,16 +7,16 @@ O=.o
 X=
 
 
-CFLAGS = -O2 -Wall -D__MSDOS__
+CFLAGS = -O2 -Wall -D__MSDOS__ $(XCFLAGS)
 
 #CFLAGS =	-g -O2 -D__MSDOS__ \
 #-Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations \
 #-Wshadow -Wwrite-strings -Wbad-function-cast -Wcast-qual \
 #-Wconversion -pedantic 
 
-LDFLAGS = -s
+LDFLAGS = 
 
 include makefile.in
 
 udo$(X):	$(OSRC) cli$(O)
-		$(CC) $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) -o $@
+		$(CC) $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) $(XLDFLAGS) -o $@
