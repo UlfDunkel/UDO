@@ -217,6 +217,15 @@
 #define	HTML_MODERN_COLOR_VLINK		8
 #define	HTML_MODERN_COLOR_ALINK		9
 
+/* New in r6pl16 [NHz] */
+#define HTML_OLD	0
+#define HTML_STRICT	1
+#define HTML_TRANS	2
+#define HTML_FRAME	3
+#define XHTML_STRICT	4
+#define XHTML_TRANS	5
+#define XHTML_FRAME	6
+
 /*	############################################################
 	# Dateinamen und Sonstiges
 	############################################################	*/
