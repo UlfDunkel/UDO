@@ -808,6 +808,11 @@ GLOBAL void strcpy_indent ( char *s )
 	############################################################	*/
 GLOBAL void c_begin_quote ( void )
 {
+	/* Changed in V6.5.9 [NHz] [blockquote] */
+	char quote[1024], *ptr, title[512];
+	int j, k;
+	long lang;
+
 
 	if ( !check_iEnvLevel() )
 	{	return;
@@ -836,7 +841,80 @@ GLOBAL void c_begin_quote ( void )
 			break;
 		case TOHTM:
 		case TOMHH:
-			outln("<blockquote>");
+			/* Changed in V6.5.9 [NHz] [blockquote] */
+			um_strcpy(quote, "<blockquote", 1020, "c_begin_quote[1]");
+			if(token[1][0] == '[')
+			{
+				token[token_counter-1][strlen(token[token_counter-1])-1] = EOS;
+				for(j=1;j<token_counter;j++)
+				{
+					ptr = strstr(token[j], "id=");
+					if(ptr != NULL)
+					{
+						lang = strcspn(ptr, " ");
+						um_strcat(quote, " id=\"", 1020, "c_begin_quote[2]");
+						um_strncat(quote, ptr+3, lang, 1020, "c_begin_quote[3]");
+						um_strcat(quote, "\"", 1020, "c_begin_quote[4]");
+					}
+					ptr = strstr(token[j], "class=");
+					if(ptr != NULL)
+					{
+						lang = strcspn(ptr, " ");
+						um_strcat(quote, " class=\"", 1020, "c_begin_quote[5]");
+						um_strncat(quote, ptr+6, lang, 1020, "c_begin_quote[6]");
+						um_strcat(quote, "\"", 1020, "c_begin_quote[7]");
+					}
+					ptr = strstr(token[j], "cite=");
+					if(ptr != NULL)
+					{
+						lang = strcspn(ptr, " ");
+						um_strcat(quote, " cite=\"", 1020, "c_begin_quote[8]");
+						um_strncat(quote, ptr+5, lang, 1020, "c_begin_quote[9]");
+						um_strcat(quote, "\"", 1020, "c_begin_quote[10]");
+					}
+					ptr = strstr(token[j], "lang=");
+					if(ptr != NULL)
+					{
+						lang = strcspn(ptr, " ");
+						um_strcat(quote, " lang=\"", 1020, "c_begin_quote[11]");
+						um_strncat(quote, ptr+5, lang, 1020, "c_begin_quote[12]");
+						um_strcat(quote, "\"", 1020, "c_begin_quote[13]");
+					}
+					ptr = strstr(token[j], "title=");
+					if(ptr != NULL)
+					{
+						um_strcat(quote, " title=\"", 1020, "c_begin_quote[14]");
+						if(ptr[6] == '\'')
+						{
+							um_strcpy(title, ptr+7, 512, "c_begin_quote[15]");
+							lang = strlen(title);
+							if(title[lang-1L] == '\'')
+								goto no_blanks;
+							k = j;
+							do
+							{
+								k++;
+								um_strcat(title, " ", 512, "c_begin_quote[16]");
+								um_strcat(title, token[k], 512, "c_begin_quote[17]");
+							} while(strrchr(token[k], '\'') == NULL);
+							lang = strlen(title);
+
+							no_blanks:
+							title[lang-1L] = EOS;
+							um_strncat(quote, title, lang, 1020, "c_begin_quote[18]");
+						}
+						else
+						{
+							lang = strcspn(ptr+6, " ");
+							um_strncat(quote, ptr+6, lang, 1020, "c_begin_quote[19]");
+						}
+						um_strcat(quote, "\"", 1020, "c_begin_quote[20]");
+					}
+				}
+			}
+			um_strcat(quote, ">", 1020, "c_begin_quote[21]");
+			outln(quote);
+/*			outln("<blockquote>");*/
 			break;
 		case TOLDS:
 			/* siehe token_output() */
