@@ -1050,907 +1050,457 @@ LOCAL void table_output_ipf ( void )
 
 
 LOCAL void table_output_general ( void )
-
 {
-
     int     y, x, i, j, offset, indent=0, y_stg;
-
     char    s[512], f[512], stg_vl[32];
-
     char    hl[3][512], space[50];
-
     char    hl_l[3][2], hl_c[3][2], hl_v[3][2], hl_r[3][2];
-
     char    vc_l[2], vc_m[2], vc_r[2];
-
     size_t  tl, add, twidth, toffset=1, isl;
-
     BOOLEAN tortf, tosrc, ansichars, align_caption;
-
     BOOLEAN inside_center, inside_right, inside_left;
 
-
-
     inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);
-
     inside_right= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_RIGH);
-
     inside_left= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_LEFT);
 
-
-
     /* New in r6pl15 [NHz] */
-
     for(j=1;j<=iEnvLevel;j++)
-
     {
-
         if(iEnvType[j] == ENV_CENT)
-
             inside_center = TRUE;
-
         if(iEnvType[j] == ENV_RIGH)
-
             inside_right = TRUE;
-
         if(iEnvType[j] == ENV_LEFT)
-
             inside_left = TRUE;
-
     }
-
-
 
     if (!inside_center && !inside_right && !inside_left)
-
     {
-
         switch (table_alignment)    /*r6pl9*/
-
         {
-
             case ALIGN_CENT:
-
                 inside_center= TRUE;    break;
-
             case ALIGN_RIGH:
-
                 inside_right= TRUE;     break;
-
             default:
-
                 indent=strlen_indent(); break;
-
         }
-
     }
-
     /* New in r6pl15 [NHz] */
-
     else if(inside_left == TRUE)
-
         indent=strlen_indent();
 
-
-
     /* New in r6pl15 [NHz] */
-
     /* If the table is inside an environment */
-
     space[0] = EOS;
-
     if(indent > 0)
-
     {
-
         for(i=0;i<indent;i++)
-
             strcat(space, " ");
-
     }
 
-
-
     
-
     /* PL7: MAXZEILE durch zDocParwidth ersetzt */
-
     
-
     tortf= (desttype==TORTF || desttype==TOWIN || desttype==TOWH4 || desttype==TOAQV);
-
     tosrc= (desttype==TOSRC || desttype==TOSRP);
-
-
-
 
 
     ansichars= FALSE;
 
-
-
     if (use_ansi_tables)
-
     {
-
        if (desttype!=TOWIN && desttype!=TOWH4 && desttype!=TOAQV && desttype!=TORTF && desttype!=TOINF)
-
         {   ansichars= TRUE;
-
         }
-
     }
-
     
-
     if (tortf || desttype==TOINF || desttype==TOLDS)
-
     {   output_begin_verbatim();
-
     }
-
-
 
     outln("");
-
     
-
     if (tosrc)
-
     {   outln(sSrcRemOn);
-
     }
-
-
 
     if ((desttype==TOSTG || desttype==TOAMG) && !ansichars)
-
     {   /* Tabellenbreite fuer den ST-Guide berechnen und in <hl[1]> */
-
         /* den Befehl zum Zeichnen von horizontalen Linien einsetzen */
-
         twidth= 0;
-
         toffset= 1;
-
         for (x=0; x<=tab_w; x++)    twidth+= ((int) tab_cell_w[x]+2) ;
-
         if (twidth<=zDocParwidth)
-
         {
-
             if (inside_center)
-
             {   toffset= (zDocParwidth-twidth)/2 + 1;
-
             }
-
             if (inside_right)
-
             {   toffset= zDocParwidth-twidth+1;
-
             }
-
             if (indent > 0)
-
             {   toffset= indent+1;
-
             }
-
         }
-
         sprintf(hl[1], "@line %d %d 0", (int) toffset, (int) twidth);
-
         strcpy(hl[0], hl[1]);
-
         strcpy(hl[2], hl[1]);
 
-
-
         /* Befehle fuer vertikale Linien erzeugen */
-
         offset= (int) toffset;
-
         for (x=0; x<=tab_w; x++)
-
         {   if (tab_vert[x]>0)
-
             {
-
 	             /* if inserted r6pl15 [GS] */
-
                 if( tab_h>253 )
-
                    sprintf(stg_vl, "@line %d 0 %d", offset, 254);
-
                 else
-
                 	sprintf(stg_vl, "@line %d 0 %d", offset, tab_h+1);
-
                 outln(stg_vl);
-
             }
-
             offset+= (int) tab_cell_w[x];
-
             offset+= 2;
-
         }
-
         if (tab_vert[tab_w+1]>0)
-
         {
-
             /* if inserted r6pl15 [GS] */
-
             if( tab_h>253 )
-
             	sprintf(stg_vl, "@line %d 0 %d", offset, 254);
-
             else
-
             	sprintf(stg_vl, "@line %d 0 %d", offset, tab_h+1);
-
             outln(stg_vl);
-
         }
-
         strcpy(vc_l, "");
-
         strcpy(vc_m, "");
-
         strcpy(vc_r, "");
-
         if (tab_toplines>0)
-
         {   outln(hl[1]);
-
         }
-
     }
-
     else
-
     {   /* Zeichen fuer die Trennlinie(n) setzen        */
-
         /* Bei MSDOS wird der Grafikzeichensatz benutzt */
 
-
-
         if (ansichars)
-
         {   strcpy(hl_l[0], "\311");    /*  ||= */  /* Top */
-
             strcpy(hl_r[0], "\273");    /*  =|| */
-
             strcpy(hl_v[0], "\321");    /*  =|= */
-
             strcpy(hl_c[0], "\315");    /*  =   */
-
             strcpy(hl_l[1], "\307");    /* ||-  */  /* Middle */
-
             strcpy(hl_r[1], "\266");    /* -||  */
-
             strcpy(hl_v[1], "\305");    /*  -|- */
-
             strcpy(hl_c[1], "\304");    /*  -   */
-
             strcpy(hl_l[2], "\310");    /* ||=  */  /* Bottom */
-
             strcpy(hl_r[2], "\274");    /* =||  */
-
             strcpy(hl_v[2], "\317");    /*  =|= */
-
             strcpy(hl_c[2], "\315");    /*  =   */
 
-
-
             strcpy(vc_l, "\272");
-
             strcpy(vc_m, "\263");
-
             strcpy(vc_r, "\272");
-
         }
-
         else
-
         {   strcpy(hl_l[0], "+");   /* Top */
-
             strcpy(hl_r[0], "+");
-
             strcpy(hl_v[0], "+");
-
             strcpy(hl_c[0], "-");
-
             strcpy(hl_l[1], "+");   /* Middle */
-
             strcpy(hl_r[1], "+");
-
             strcpy(hl_v[1], "+");
-
             strcpy(hl_c[1], "-");
-
             strcpy(hl_l[2], "+");   /* Bottom */
-
             strcpy(hl_r[2], "+");
-
             strcpy(hl_v[2], "+");
-
             strcpy(hl_c[2], "-");
 
-
-
             strcpy(vc_l, "|");
-
             strcpy(vc_m, "|");
-
             strcpy(vc_r, "|");
-
         }
 
-
-
         /* ----------------------------- */
-
         /* Trennlinie(n) zusammenstellen */
-
         /* 0= top, 1=middle, 2=bottom    */
-
         /* ----------------------------- */
-
-
 
         for (y=0; y<3; y++)
-
         {   
-
             hl[y][0]= EOS;
 
-
-
             /* New in r6pl15 [NHz] */
-
             strcat(hl[y], space);
 
-
-
             /* New in r6pl15 [NHz] */
-
             /* Begin of a table-line in postscript */
-
             if (desttype==TOKPS)
-
                 strcat(hl[y], "Von (");
 
-
-
             for (x=0; x<=tab_w; x++)
-
             {   if (tab_vert[x]>0)
-
                 {   if (x==0)
-
                     {   for (i=1; i<=tab_vert[x]; i++)
-
                         {   strcat(hl[y], hl_l[y]);
-
                         }
-
                     }
-
                     else
-
                     {   for (i=1; i<=tab_vert[x]; i++)
-
                         {   strcat(hl[y], hl_v[y]);
-
                         }
-
                     }
-
                 }
-
                 strcat(hl[y], hl_c[y]);
-
                 for (isl=1; isl<=tab_cell_w[x]; isl++)
-
                 {   strcat(hl[y], hl_c[y]);
-
                 }
-
                 strcat(hl[y], hl_c[y]);
-
             }
-
             if (tab_vert[tab_w+1]>0)
-
             {   for (i=1; i<=tab_vert[tab_w+1]; i++)
-
                 {   if (i==tab_vert[tab_w+1])
-
                     {   strcat(hl[y], hl_r[y]);
-
                     }
-
                     else
-
                     {   strcat(hl[y], hl_v[y]);
-
                     }
-
                 }
-
             }
-
             
-
             /* New in r6pl15 [NHz] */
-
             /* Conclusion of a table-line in postscript */
-
             if (desttype==TOKPS)
-
                 strcat(hl[y], ") udoshow newline Voff");
 
-
-
             if (inside_center)
-
             {   stringcenter(hl[y], zDocParwidth);  /* Linie fuer den Rest zentrieren */
-
             }
-
             if (inside_right)
-
             {   strright(hl[y], zDocParwidth);      /* Linie fuer den Rest ausrichten */
-
             }
-
             if (tortf)  strcat(hl[y], "\\par");
-
             if (tosrc)  strinsert(hl[y], "    ");
-
         }
-
-
-
 
 
         /* obere Tabellenlinien ausgeben */     
-
         if (tab_toplines>0)
-
         {   for (i=1; i<=tab_toplines; i++)
-
             {   if (i==1)
-
                 {   outln(hl[0]);
-
                 }
-
                 else
-
                 {   outln(hl[1]);
-
                 }
-
             }
-
         }
-
     }
-
     
 
-
-
     for( y=0, y_stg=0 ; y<=tab_h ; y++, y_stg++ )
-
     {   s[0]= EOS;
-
 			
-
 			/* New in r6pl15 [GS] */
-
         if ( y_stg > 253 && (desttype==TOSTG || desttype==TOAMG) && !ansichars)
-
         {
-
-            /* ST-Guide kann nur Linien mit einer L„nge von 254 Zeilen */
-
-            /* zeichen. Deshalb wird hier eine Anschlužline gezeichnet */
-
+            /* ST-Guide kann nur Linien mit einer Laenge von 254 Zeilen */
+            /* zeichen. Deshalb wird hier eine Anschlussline gezeichnet */
         
-
             offset= (int) toffset;
-
             y_stg = tab_h - y;
-
             if ( y_stg > 253 )
-
                 y_stg = 253;
-
             for (x=0; x<=tab_w; x++)
-
             {   if (tab_vert[x]>0)
-
                 {   sprintf(stg_vl, "@line %d 0 %d", offset, y_stg+1);
-
                     outln(stg_vl);
-
                 }
-
                 offset+= (int) tab_cell_w[x];
-
                 offset+= 2;
-
             }
-
         
-
             if (tab_vert[tab_w+1]>0)
-
             {   sprintf(stg_vl, "@line %d 0 %d", offset, y_stg+1);
-
             }
-
             outln(stg_vl);
-
             
-
             y_stg = 0;
-
         }
-
         
-
         /* New in r6pl15 [NHz] */
-
         strcat(s, space);
 
-
-
         /* New in r6pl15 [NHz] */
-
         /* Begin of a table-line in postscript */
-
         if (desttype==TOKPS)
-
             strcat(s, "Von (");
 
-
-
         for (x=0; x<=tab_w; x++)
-
         {
-
             if (tab_vert[x]>0)
-
             {   for (i=1; i<=tab_vert[x]; i++)
-
                 {   (x==0) ? strcat(s, vc_l) : strcat(s, vc_m);
-
                 }
-
             }
-
-
 
             strcat(s, " ");
 
-
-
             f[0]= EOS;
-
             if (tab_cell[y][x]!=NULL)
-
             {   strcpy(f, tab_cell[y][x]);
-
             }
-
-
 
             add= 0;
 
-
-
             switch(tab_just[x])
-
             {   case TAB_CENTER:
-
                     stringcenter(f, ((int) tab_cell_w[x]) );
-
                     strcat(s, f);
-
                     tl= toklen(f);
-
                     if (tab_cell_w[x] > tl) add=tab_cell_w[x]-tl;
-
                     if (add>0)  for (isl=0; isl<add; isl++) strcat(s, " ") ;
-
                     break;
-
                 case TAB_RIGHT:
-
                     tl=toklen(f);
-
                     if (tab_cell_w[x] > tl) add=tab_cell_w[x]-tl;
-
                     if (add>0)  for (isl=0; isl<add; isl++) strcat(s, " ") ;
-
                     strcat(s, f);
-
                     break;
-
                 default:    /* TAB_LEFT */
-
                     strcat(s, f);
-
                     tl=toklen(f);
-
                     if (tab_cell_w[x] > tl) add=tab_cell_w[x]-tl;
-
                     if (add>0)  for (isl=0; isl<add; isl++) strcat(s, " ") ;
-
                     break;
-
             }
-
             
-
             strcat(s, " ");
-
         }   /* for x */
-
         
+        if (tab_vert[tab_w+1]>0)
+        {   for (i=1; i<=tab_vert[tab_w+1]; i++)
+            {   (i==tab_vert[tab_w+1]) ? strcat(s, vc_r) : strcat(s, vc_m);
+            }
+        }
 
-        /* New in r6pl15 [NHz] */
-
+        /* Changed in r6pl16 [NHz] */
+				/* Displaced because of a bug */
         /* Conclusion of a table-line in postscript */
-
         if (desttype==TOKPS)
-
             strcat(s, ") udoshow newline Voff");
 
-
-
-        if (tab_vert[tab_w+1]>0)
-
-        {   for (i=1; i<=tab_vert[tab_w+1]; i++)
-
-            {   (i==tab_vert[tab_w+1]) ? strcat(s, vc_r) : strcat(s, vc_m);
-
-            }
-
-        }
-
-
-
         if (inside_center)
-
         {   stringcenter(s, zDocParwidth);
-
         }
-
-
 
         if (inside_right)
-
         {   strright(s, zDocParwidth);
-
         }
-
-
 
 			/* Changed in r6pl15 [NHz] */
-
 			/* Parenthesis of table lines would be quoted \( */
-
         if(desttype != TOKPS)
-
             auto_quote_chars(s, FALSE);
-
         switch(desttype)
-
         {
-
             case TOWIN:
-
             case TOWH4:
-
             case TOAQV:
-
             case TORTF:
-
             case TOLDS: /* PL8 */
-
                 c_vars(s);
-
                 c_commands_inside(s, FALSE);
-
                 break;
-
         }
-
         replace_defines(s);
-
         replace_udo_quotes(s);
-
         switch (desttype)
-
         {   case TOWIN:
-
             case TOWH4:
-
             case TOAQV: c_win_styles(s);        break;
-
             case TORTF: c_rtf_styles(s);        break;
-
             case TOLDS: del_internal_styles(s); break;  /* PL15*/
-
             default:    c_internal_styles(s);
-
         }
-
         replace_placeholders(s);
-
         replace_udo_tilde(s);
-
         replace_udo_nbsp(s);
 
-
-
         if (tortf)  strcat(s, "\\par");
-
         if (tosrc)  strinsert(s, "    ");
 
-
-
         outln(s);
-
         
-
         if (tab_hori[y]>0)
-
         {   for (i=1; i<=tab_hori[y]; i++)
-
             {   if (y==tab_h && i==tab_hori[y])
-
                 {   outln(hl[2]);
-
                 }
-
                 else
-
                 {   outln(hl[1]);
-
                 }
-
             }
-
         }
-
     }   /* for y */
 
-
-
     if (tosrc)
-
     {   outln(sSrcRemOff);
-
     }
-
-
 
     if (tab_caption[0]!=EOS)
-
     {   if (tortf)
-
         {   outln(rtf_par);
-
         }
-
         else
-
         {   outln("");
-
         }
-
         
-
         /* PL7: Caption wird wie bei LaTeX nur zentriert, wenn sie  */
-
         /* kuerzer als die Absatzbreite ist.                        */
-
         
-
         token_reset();
-
         align_caption= (strlen(tab_caption)<zDocParwidth);
 
-
-
         if (align_caption)
-
         {   s[0]= EOS;
-
             if (inside_center)  strcpy(s, CMD_BEGIN_CENTER);
-
             if (inside_right)   strcpy(s, CMD_BEGIN_RIGHT);
-
             tokenize(s);
-
             if (tab_caption_visible)
-
             {   sprintf(s, "%s %d: %s", lang.table, tab_counter, tab_caption);
-
             }
-
             else
-
             {   strcpy(s, tab_caption);
-
             }
-
             tokenize(s);
-
             s[0]= EOS;
-
             if (inside_center)  strcpy(s, CMD_END_CENTER);
-
             if (inside_right)   strcpy(s, CMD_END_RIGHT);
-
             tokenize(s);
-
             token_output(TRUE);
-
         }
-
         else
-
         {
-
             if (tab_caption_visible)
-
             {   sprintf(s, "%s %d: %s", lang.table, tab_counter, tab_caption);
-
             }
-
             else
-
             {   strcpy(s, tab_caption);
-
             }
-
             tokenize(s);
-
             token_output(TRUE);
-
         }
-
     }
-
-
 
     if (tortf)
-
     {   outln(rtf_par);
-
     }
-
-
 
     if (tortf || desttype==TOINF || desttype==TOLDS)
-
     {   output_end_verbatim();
-
     }
 
-
-
 }   /* table_output_general */
-
 
 
 
