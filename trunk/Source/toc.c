@@ -1999,6 +1999,18 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 	outln("<meta http-equiv=\"Content-Style-Type\" content=\"text/css\">");
 	outln("<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\">");
 
+	/* New feature #0000054 in V6.5.2 [NHz] */
+	if(html_header_date)
+	{
+		char zone[6];
+	
+		if(!strcmp(html_header_date_zone, ""))
+			um_strcpy(zone, "+00:00", 5, "output_html_meta1");
+		else
+			um_strcpy(zone, html_header_date_zone, 5, "output_html_meta2");
+		voutlnf("<meta name=\"date\" content=\"%d-%02d-%02dT%02d:%02d:%02d%s\">", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec, zone);
+	}
+
 	voutlnf("<meta name=\"Generator\" content=\"UDO %s.%s PL%s for %s\">",
 			UDO_REL, UDO_SUBVER,
 			UDO_PL,
@@ -9084,6 +9096,15 @@ GLOBAL void set_html_doctype ( void )
 	}
 
 }	/* set_html_doctype */
+
+
+/* New feature #0000054 in V6.5.2 [NHz] */
+GLOBAL void set_html_header_date ( void )
+{
+	html_header_date = TRUE;
+	tokcpy2(html_header_date_zone);
+
+}	/* set_html_header_date */
 
 
 GLOBAL void set_html_frames_layout ( void )
