@@ -95,7 +95,13 @@ GLOBAL MYTEXTFILE *myTextOpen ( const char *filename )
 	tf->bufend= tf->buffer + tf->filelen;
 #else
 	/* Auf normale Routine zurueckgreifen */
-	tf->file= fopen(filename, "r");
+	/* v6.5.9 [me] fgets kommt mit Zeilenenden nicht so gut klar,   */
+	/*             wenn diese gem. den Konventionen einer anderen   */
+	/*             Plattform codiert sind. Daher Ausweichen auf     */
+	/*             fread und selbst '\n' und '\r' erkennen. Dazu    */
+	/*             muž hier di datei bin„r ge”ffnet werden!         */
+	/*tf->file= fopen(filename, "r");*/
+	tf->file= fopen(filename, "rb");
 
 	if (tf->file == NULL)
 	{
@@ -167,6 +173,7 @@ GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf )
 		return string;
 	}
 #else
+	register char *s_ptr;
 	size_t sl;
 	BOOLEAN cont;
 
@@ -176,9 +183,40 @@ GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf )
 	do {
 		cont=FALSE;
 		/* Auf normale Routine zurueckgreifen und Endekennung entfernen */
-		if (fgets(string, n, tf->file) == NULL)
+		/* v6.5.9 [me] fgets kommt mit Zeilenenden nicht so gut klar,   */
+		/*             wenn diese gem. den Konventionen einer anderen   */
+		/*             Plattform codiert sind. Daher Ausweichen auf     */
+		/*             fread und selbst '\n' und '\r' erkennen.         */
+		/* if (fgets(string, n, tf->file) == NULL)*/
+		sl = fread(string, sizeof(*string), n, tf->file);
+		if( sl<1 )
 		{
 			return NULL;
+		}
+		string[sl] = '\0';
+		
+		/* v6.5.8 [me] den String am Ende der Zeile krzen und */
+		/*             die passende Anzahl von Zeichen wieder  */
+		/*             in den Input-Stream stellen.            */
+		for( s_ptr=string ; *s_ptr!='\n' && *s_ptr!='\r' && *s_ptr!='\0' ; s_ptr++ )
+		{
+			/* Reine Z„hlschleife, daher gibt es hier nichts zu tun */
+		}
+		
+		/* Bei den Zeichen fr neue Zeile innehalten */
+		if( *s_ptr=='\n' || *s_ptr=='\r' )
+		{
+			/* Den zu verarbeitenden String abteilen */
+			*(s_ptr++) = '\0';
+			
+			/* Das n„chste zu lesende Zeichend er neuen Zeile suchen */
+			for( ; *s_ptr=='\n' || *s_ptr=='\r' ; s_ptr++ )
+			{
+				/* Reine Z„hlschleife, daher gibt es hier nichts zu tun */
+			}
+			
+			/* Nun genau so viele Zeichen zurckgeben, wie nun in s_ptr zu viel gelesen wurden */
+			fseek(tf->file, -strlen(s_ptr), SEEK_CUR);
 		}
 
 		uiMultiLines++;
@@ -190,7 +228,7 @@ GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf )
 		}
 		/*	v6.5.4 [vj] This is a new check for a continued line. This is handled low level,
 			so UDO doesn't need to care about later, except that some buffers could use more space! */
-		if ((string[sl-2]=='!')&&(string[sl-1]=='\\')) /* Is there a continue line mark before linebreak? */
+		if (sl>1 && (string[sl-2]=='!') && (string[sl-1]=='\\')) /* Is there a continue line mark before linebreak? */
 		{
 			sl=sl-2; /* String got shorter */
 			string[sl]='\0'; /* Cut continue line! */
