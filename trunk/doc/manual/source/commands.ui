@@ -1119,11 +1119,11 @@ brackets of (!KW [item] [[~!!]]) will be printed with bold text.
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KW [end_description]), (!KW [item] [[~!!]]), (!link [Beschreibungen] [Beschreibungen]), (!KW [short])
+(!KW [end_description]), (!KW [item] [[~!!]]), (!link [Beschreibungen] [Beschreibungen]), (!KW [short]), (!KW [use_short_envs])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
-(!KW [end_description]), (!KW [item] [[~!!]]), (!KW [short]), (!link [Descriptions] [Descriptions])
+(!KW [end_description]), (!KW [item] [[~!!]]), (!link [Descriptions] [Descriptions]), (!KW [short]), (!KW [use_short_envs])
 !endif
 
 !end_xlist
@@ -1202,11 +1202,11 @@ will be marked with alphanumerical characters.
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KW [end_enumerate]), (!KW [item]), (!link [Numerierungen] [Numerierungen]), (!KW [short])
+(!KW [end_enumerate]), (!KW [item]), (!link [Numerierungen] [Numerierungen]), (!KW [short]), (!KW [use_short_envs])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
-(!KW [end_enumerate]), (!KW [item]), (!KW [short]), (!link [Enumerations] [Enumerations])
+(!KW [end_enumerate]), (!KW [item]), (!link [Enumerations] [Enumerations]), (!KW [short]), (!KW [use_short_envs])
 !endif
 
 !end_xlist
@@ -1426,11 +1426,11 @@ be marked with bullets, dashes or stars.
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KW [end_itemize]), (!KW [item]), (!link [Aufzählungen] [Aufzählungen]), (!KW [short])
+(!KW [end_itemize]), (!KW [item]), (!link [Aufzählungen] [Aufzählungen]), (!KW [short]), (!KW [use_short_envs])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
-(!KW [end_itemize]), (!KW [item]), (!KW [short]), (!link [Itemizations] [Itemizations])
+(!KW [end_itemize]), (!KW [item]), (!link [Itemizations] [Itemizations]), (!KW [short]), (!KW [use_short_envs])
 !endif
 
 !end_xlist
@@ -2155,11 +2155,11 @@ with (!KW [item] [[~!!]]) will be displayed with the normal font.
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KW [end_xlist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!link [Listen] [Listen])
+(!KW [end_xlist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!link [Listen] [Listen]), (!KW [short]), (!KW [use_short_envs])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
-(!KW [end_xlist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!link [Lists] [Lists])
+(!KW [end_xlist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!link [Lists] [Lists]), (!KW [short]), (!KW [use_short_envs])
 !endif
 
 !end_xlist
@@ -17283,11 +17283,11 @@ text) for the ST-Guide.
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KW [tableofcontents]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [depth]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+(!KW [tableofcontents]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [depth]), (!KW [use_short_tocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
-(!KW [tableofcontents]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [depth]), (!link [Tables of contents] [Tables of contents])
+(!KW [tableofcontents]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [depth]), (!KW [use_short_tocs]), (!link [Tables of contents] [Tables of contents])
 !endif
 
 !end_xlist
@@ -18686,11 +18686,11 @@ without additional horizontal space. The example shows how to use
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KW [begin_itemize]), (!KW [begin_enumerate]), (!KW [begin_description]), (!KW [begin_xlist]), (!KW [short]), (!link [Umgebungen] [Umgebungen])
+(!KW [begin_itemize]), (!KW [begin_enumerate]), (!KW [begin_description]), (!KW [begin_xlist]), (!KW [short]), (!KW [use_short_tocs]), (!link [Umgebungen] [Umgebungen])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
-(!KW [begin_itemize]), (!KW [begin_enumerate]), (!KW [begin_description]), (!KW [begin_xlist]), (!KW [short]), (!link [Environments] [Environments])
+(!KW [begin_itemize]), (!KW [begin_enumerate]), (!KW [begin_description]), (!KW [begin_xlist]), (!KW [short]), (!KW [use_short_tocs]), (!link [Environments] [Environments])
 !endif
 
 !end_xlist
@@ -18736,11 +18736,11 @@ names of sections will be printed.
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KW [tableofcontents]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+(!KW [tableofcontents]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse]), (!KW [use_short_envs]), (!link [Umgebungen] [Umgebungen])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
-(!KW [tableofcontents]), (!link [Tables of contents] [Tables of contents])
+(!KW [tableofcontents]), (!link [Tables of contents] [Tables of contents]), (!KW [use_short_envs]), (!link [Environments] [Environments])
 !endif
 
 !end_xlist
