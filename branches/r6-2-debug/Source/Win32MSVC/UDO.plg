@@ -1,0 +1,76 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: UDO - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Temp\TMP\RSP1E.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /D "__WIN32__" /Fp"Debug/UDO.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /Zm200 /c 
+"E:\ME\Develop\UDO\Source\UDO\Source\abo.c"
+"E:\ME\Develop\UDO\Source\UDO\Source\cfg.c"
+"E:\ME\Develop\UDO\Source\UDO\Source\chr.c"
+"E:\ME\Develop\UDO\Source\UDO\Source\cli.c"
+"E:\ME\Develop\UDO\Source\UDO\Source\env.c"
+"E:\ME\Develop\UDO\Source\UDO\Source\file.c"
+"E:\ME\Develop\UDO\Source\UDO\Source\img.c"
+"E:\ME\Develop\UDO\Source\UDO\Source\msg.c"
+"E:\ME\Develop\UDO\Source\UDO\Source\par.c"
+"E:\ME\Develop\UDO\Source\UDO\Source\str.c"
+"E:\ME\Develop\UDO\Source\UDO\Source\sty.c"
+"E:\ME\Develop\UDO\Source\UDO\Source\tab.c"
+"E:\ME\Develop\UDO\Source\UDO\Source\toc.c"
+"E:\ME\Develop\UDO\Source\UDO\Source\tp.c"
+"E:\ME\Develop\UDO\Source\UDO\Source\udo.c"
+]
+Creating command line "cl.exe @C:\Temp\TMP\RSP1E.tmp" 
+Creating temporary file "C:\Temp\TMP\RSP1F.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/UDO.pdb" /debug /machine:I386 /out:"Debug/UDO.exe" /pdbtype:sept 
+.\Debug\abo.obj
+.\Debug\cfg.obj
+.\Debug\chr.obj
+.\Debug\cli.obj
+.\Debug\env.obj
+.\Debug\file.obj
+.\Debug\img.obj
+.\Debug\msg.obj
+.\Debug\par.obj
+.\Debug\str.obj
+.\Debug\sty.obj
+.\Debug\tab.obj
+.\Debug\toc.obj
+.\Debug\tp.obj
+.\Debug\udo.obj
+]
+Creating command line "link.exe @C:\Temp\TMP\RSP1F.tmp"
+<h3>Output Window</h3>
+Compiling...
+abo.c
+cfg.c
+chr.c
+cli.c
+env.c
+e:\me\develop\udo\source\udo\source\env.c(88) : warning C4244: 'initializing' : conversion from 'const double ' to 'unsigned int ', possible loss of data
+e:\me\develop\udo\source\udo\source\env.c(89) : warning C4244: 'initializing' : conversion from 'const double ' to 'unsigned int ', possible loss of data
+file.c
+img.c
+msg.c
+par.c
+str.c
+sty.c
+tab.c
+toc.c
+tp.c
+udo.c
+Linking...
+
+
+
+<h3>Results</h3>
+UDO.exe - 0 error(s), 2 warning(s)
+</pre>
+</body>
+</html>
