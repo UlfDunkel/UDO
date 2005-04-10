@@ -332,8 +332,8 @@ GLOBAL void c_internal_styles ( char *s )
 
 			/* New in V6.5.9 [NHz], fuer TeX gibt es vielleicht eine bessere
 			Moeglichkeit eingefuegte und geloeschte Text zu kennzeichnen */
-			qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
-			qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
+			qreplace_all(ptr, DELETED_ON, STYLELEN, "\\[", 2);
+			qreplace_all(ptr, DELETED_OFF, STYLELEN, "\\]", 2);
 
 			del_internal_styles(s);
 			break;
