@@ -2268,7 +2268,7 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 	/* New in r6pl15 [NHz] */
 	/* Link for overall and file-related stylesheet-file */
 	/* Changed in V6.5.9 [NHz] */
-	for (j=1; j<p1_style_counter; j++)
+	for (j=1; j<=p1_style_counter; j++)
 	{
 		styleptr= style[j];
 		if(styleptr->href != NULL && (styleptr->tocindex == 0 || styleptr->tocindex == p2_toc_counter))
@@ -3628,7 +3628,7 @@ GLOBAL void html_footer ( void )
 
 	/* Changed in V6.5.9 [NHz] */
 	has_counter=	(toc[p2_toc_counter]->counter_command!=NULL);
-	has_main_counter=	(sCounterCommand!=NULL);
+	has_main_counter=	(sCounterCommand[0]!=EOS);
 
 	if(!has_counter && !has_main_counter)
 	{
@@ -8635,6 +8635,8 @@ GLOBAL void c_tableofcontents ( void )
 			output_helpid(0);
 			if (toc_available)
 			{	voutlnf("<h1><a name=\"%s\">%s</a></h1>", HTML_LABEL_CONTENTS, lang.contents);
+				/* New in V6.5.9 [NHz] */
+				add_label(HTML_LABEL_CONTENTS, FALSE, FALSE);
 				toc_output(depth);
 				outln(HTML_BR);
 			}
