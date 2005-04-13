@@ -2073,9 +2073,19 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 			{	voutlnf("<meta name=\"Keywords\" content=\"%s\" />",
 						toc[ti]->keywords);
 			}
+			/* New in V6.5.9 [NHz] */
+			else
+			{	voutlnf("<meta name=\"Keywords\" content=\"%s\" />",
+						titdat.keywords);
+			}
 			if (toc[ti]->description!=NULL)
 			{	voutlnf("<meta name=\"Description\" content=\"%s\" />",
 						toc[ti]->description);
+			}
+			/* New in V6.5.9 [NHz] [docinfo] */
+			else
+			{	voutlnf("<meta name=\"Description\" content=\"%s\" />",
+						titdat.description);
 			}
 
 		}
