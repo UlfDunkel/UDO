@@ -286,6 +286,8 @@ GLOBAL BOOLEAN		bDocHighCompression;
 GLOBAL BOOLEAN		bDocMediumCompression;
 
 GLOBAL int			iDocCharwidth;				/* Zeichenbreiten-Konstanten */
+/* New in V6.5.9 [NHz] */
+GLOBAL char			sDocColour[512];			/* ZusÑtzliche Farben fÅr RTF */
 GLOBAL char			sDocPropfont[MAXZEILE+1];	/* Proportional- und Monospacedfont */
 GLOBAL char			sDocMonofont[MAXZEILE+1];	/* fuer den RTF-Header */
 GLOBAL char			sDocPropfontSize[16];

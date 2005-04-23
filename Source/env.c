@@ -2940,6 +2940,9 @@ LOCAL void output_rtf_colortbl(void)
 	outln("\\red0\\green0\\blue255;");		/* \cf14:	blue	*/
 	outln("\\red0\\green128\\blue128;");	/* \cf15:	teal	*/
 	outln("\\red0\\green255\\blue255;");	/* \cf16:	aqua	*/
+	/* New in V6.5.9 [NHz] */
+	if(sDocColour[0] != EOS)
+		outln(sDocColour);
 	outln("}");
 }
 

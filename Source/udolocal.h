@@ -140,6 +140,8 @@ LOCAL void c_tex_verb ( void );
 LOCAL void c_win_charwidth ( void );
 LOCAL void c_wh4_charwidth ( void );
 LOCAL void c_rtf_charwidth ( void );
+/* New in V6.5.9 [NHz] */
+LOCAL void c_rtf_add_colour ( void );
 LOCAL void c_html_img_suffix ( void );
 LOCAL void c_html_nodesize ( void );
 

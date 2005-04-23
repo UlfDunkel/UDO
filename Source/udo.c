@@ -378,6 +378,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!win_charwidth",				"",			c_win_charwidth,		TRUE,	CMD_ALWAYS			},
 	{ "!wh4_charwidth",				"",			c_wh4_charwidth,		TRUE,	CMD_ALWAYS			},
 	{ "!rtf_charwidth",				"",			c_rtf_charwidth,		TRUE,	CMD_ALWAYS			},
+	{ "!rtf_add_colour",				"",			c_rtf_add_colour,		TRUE,	CMD_ONLY_PREAMBLE			},	/* in V6.5.9 [NHz] */
 	{ "!rtf_keep_tables",			"",			c_rtf_keep_tables,		TRUE,	CMD_ALWAYS			},
 	{ "!html_img_suffix",			"",			c_html_img_suffix,		TRUE,	CMD_ALWAYS			},
 	{ "!html_nodesize",				"",			c_html_nodesize,		TRUE,	CMD_ALWAYS			},
@@ -3800,6 +3801,21 @@ LOCAL void c_rtf_charwidth ( void )
 	{	iDocCharwidth= 150;
 	}
 }	/* c_rtf_charwidth */
+
+
+/* New in V6.5.9 [NHz] */
+/*	--------------------------------------------------------------
+	c_rtf_add_colour
+	Setzen zusaetzlicher Farben im Kopf der RTF-Datei
+	--------------------------------------------------------------	*/
+LOCAL void c_rtf_add_colour ( void )
+{
+	um_strncpy(sDocColour, token[1], 50, 512, "c_rtf_add_colour[1]");
+	
+	qreplace_all(sDocColour, ";", 1, ";\n", 2);
+	qreplace_last(sDocColour, ";\n", 2, ";", 1);
+
+}	/* c_rtf_add_colour */
 
 
 /*	--------------------------------------------------------------
