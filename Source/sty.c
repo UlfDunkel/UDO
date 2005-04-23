@@ -182,7 +182,7 @@ GLOBAL void c_pch_styles ( char *s )
 
 GLOBAL void c_rtf_styles ( char *s )
 {
-	char *ptr, time_insert[40], time_delete[40]; /* New in V6.5.9 [NHz] */
+	char *ptr, time_insert[50], time_delete[50]; /* Changed in V6.5.9 [NHz] */
 	char fs[20];
 	int l;
 	long time; /* New in V6.5.9 [NHz] */
@@ -206,13 +206,13 @@ GLOBAL void c_rtf_styles ( char *s )
 	qreplace_all(ptr, FOOT_ON, STYLELEN, "{\\chftn{\\footnote\\chftn{\\fs14  ", 31);	/* r5pl9 */
 	qreplace_all(ptr, FOOT_OFF, STYLELEN, "}}}", 3);
 
-	/* New in V6.5.9 [NHz] */
+	/* Changed in V6.5.9 [NHz] */
 	time=(long)(iDateMin + (iDateHour << 6) + (iDateDay << 11) + ((long)iDateMonth << 16) + ((long)(iDateYear-1900) << 20));
 	sprintf(time_insert, "{\\revised\\revauth1\\revdttm%ld ", time);
-	sprintf(time_delete, "{\\deleted\\revauthdel1\\revdttm%ld ", time);
+	sprintf(time_delete, "{\\deleted\\revauthdel1\\revdttmdel%ld ", time);
 	qreplace_all(ptr, INSERT_ON, STYLELEN, time_insert, 36);
 	qreplace_all(ptr, INSERT_OFF, STYLELEN, "}", 1);
-	qreplace_all(ptr, DELETED_ON, STYLELEN, time_delete, 39);
+	qreplace_all(ptr, DELETED_ON, STYLELEN, time_delete, 42);
 	qreplace_all(ptr, DELETED_OFF, STYLELEN, "}", 1);
 
 	/* New in V6.5.9 [NHz] */
