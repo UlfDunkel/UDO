@@ -4432,21 +4432,26 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 
 			output_aliasses();
 
+			/* New in V6.5.9 [NHz] [bookmark] */
+			um_strcpy(n, name, 512, "make_node[RTF]");
+			winspecials2ascii(n);
+			node2winhelp(n);
+
 			if (use_style_book)
 			{	if (bInsideAppendix)
 				{	if (invisible)
-					{	voutlnf("%s\\fs%d %s %s\\par %s\\fs%d %s\\par\\pard", rtf_inv_chapt, iDocPropfontSize + 28, lang.appendix, numbers, rtf_inv_chapt, iDocPropfontSize + 28, name);
+					{	voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", rtf_inv_chapt, iDocPropfontSize + 28, lang.appendix, numbers, rtf_inv_chapt, iDocPropfontSize + 28, n, name, n);
 					}
 					else
-					{	voutlnf("%s\\fs%d %s %s\\par %s\\fs%d %s\\par\\pard", rtf_inv_chapt, iDocPropfontSize + 28, lang.appendix, numbers, rtf_chapt, iDocPropfontSize + 28, name);
+					{	voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", rtf_inv_chapt, iDocPropfontSize + 28, lang.appendix, numbers, rtf_chapt, iDocPropfontSize + 28, n, name, n);
 					}
 				}
 				else
 				{	if (invisible)
-					{	voutlnf("%s\\fs%d %s %s\\par %s\\fs%d %s\\par\\pard", rtf_inv_chapt, iDocPropfontSize + 28, lang.chapter, numbers, rtf_inv_chapt, iDocPropfontSize + 28, name);
+					{	voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", rtf_inv_chapt, iDocPropfontSize + 28, lang.chapter, numbers, rtf_inv_chapt, iDocPropfontSize + 28, n, name, n);
 					}
 					else
-					{	voutlnf("%s\\fs%d %s %s\\par %s\\fs%d %s\\par\\pard", rtf_inv_chapt, iDocPropfontSize + 28, lang.chapter, numbers, rtf_chapt, iDocPropfontSize + 28, name);
+					{	voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", rtf_inv_chapt, iDocPropfontSize + 28, lang.chapter, numbers, rtf_chapt, iDocPropfontSize + 28, n, name, n);
 					}
 				}
 			}
@@ -4454,26 +4459,26 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 			{
 				if (numbers[0]==EOS)
 				{	if (invisible)
-					{	/* Changed in r6pl16 [NHz] */
+					{	/* Changed in V6.5.9 [NHz] */
 						/* Nodesize ist set on discrete value */
-						voutlnf("%s %s\\fs%d %s%s", rtf_plain, rtf_inv_node1, laydat.node1size, name, rtf_parpard);
+						voutlnf("%s %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, rtf_inv_node1, laydat.node1size, n, name, n, rtf_parpard);
 					}
 					else
-					{	/* Changed in r6pl16 [NHz] */
+					{	/* Changed in V6.5.9 [NHz] */
 						/* Nodesize ist set on discrete value */
-						voutlnf("%s %s\\fs%d %s%s", rtf_plain, rtf_node1, laydat.node1size, name, rtf_parpard);
+						voutlnf("%s %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, rtf_node1, laydat.node1size, n, name, n, rtf_parpard);
 					}
 				}
 				else
 				{	if (invisible)
-					{	/* Changed in r6pl16 [NHz] */
+					{	/* Changed in V6.5.9 [NHz] */
 						/* Nodesize ist set on discrete value */
-						voutlnf("%s %s\\fs%d %s  %s%s", rtf_plain, rtf_inv_node1, laydat.node1size, numbers, name, rtf_parpard);
+						voutlnf("%s %s\\fs%d %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, rtf_inv_node1, laydat.node1size, numbers, n, name, n, rtf_parpard);
 					}
 					else
-					{	/* Changed in r6pl16 [NHz] */
+					{	/* Changed in V6.5.9 [NHz] */
 						/* Nodesize ist set on discrete value */
-						voutlnf("%s %s\\fs%d %s  %s%s", rtf_plain, rtf_node1, laydat.node1size, numbers, name, rtf_parpard);
+						voutlnf("%s %s\\fs%d %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, rtf_node1, laydat.node1size, numbers, n, name, n, rtf_parpard);
 					}
 				}
 			}
@@ -4600,7 +4605,7 @@ LOCAL void set_inside_node2 ( void )
 LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 {
 	char 	n[512], name[512], stgname[512], hx_start[16], hx_end[16], sTemp[512];
-	char	numbers[512], nameNoSty[512];
+	char	numbers[512], nameNoSty[512], k[512]; /* Changed in V6.5.9 [NHz] */
 	char	map[64], sGifSize[80];
 	int		ti, ui, chapter, nr1, nr2;
 	BOOLEAN	flag;
@@ -4917,6 +4922,11 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 				voutf("{\\xe\\v %s}", n);
 			}
 
+			/* New in V6.5.9 [NHz] */
+			um_strcpy(k, name, 512, "make_subnode[RTF]");
+			winspecials2ascii(k);
+			node2winhelp(k);
+
 			if (use_style_book)
 			{
 				if (invisible)
@@ -4938,11 +4948,11 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 				}
 			}
 
-			if (numbers[0]==EOS)
-			{	voutlnf("%s %s %s%s", rtf_plain, n, name, rtf_parpard);
+			if (numbers[0]==EOS)	/* Changed in V6.5.9 [NHz] [bookmark] */
+			{	voutlnf("%s %s {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, n, k, name, k, rtf_parpard);
 			}
 			else
-			{	voutlnf("%s %s %s  %s%s", rtf_plain, n, numbers, name, rtf_parpard);
+			{	voutlnf("%s %s %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, n, numbers, k, name, k, rtf_parpard);
 			}
 			voutlnf("%s %s\\fs%d %s", rtf_plain, rtf_norm, iDocPropfontSize, rtf_par);	/* r5pl6 */
 			break;
@@ -5058,7 +5068,7 @@ LOCAL void set_inside_node3 ( void )
 LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 {
 	char 	n[512], name[512], stgname[512], hx_start[16], hx_end[16], sTemp[512];
-	char	numbers[512], nameNoSty[512];
+	char	numbers[512], nameNoSty[512], k[512];	/* New in V6.5.9 [NHz] */
 	char	map[64], sGifSize[80];
 	int		ti, ui, chapter, nr1, nr2, nr3;
 	BOOLEAN	flag;
@@ -5373,6 +5383,11 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 				voutf("{\\xe\\v %s}", n);
 			}
 
+			/* New in V6.5.9 [NHz] */
+			um_strcpy(k, name, 512, "make_subsubnode[RTF]");
+			winspecials2ascii(k);
+			node2winhelp(k);
+
 			if (use_style_book)
 			{
 				if (invisible)
@@ -5393,11 +5408,11 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 					sprintf(n, "%s\\fs%d", rtf_node3, laydat.node3size);
 				}
 			}
-			if (numbers[0]==EOS)
-			{	voutlnf("%s %s %s%s", rtf_plain, n, name, rtf_parpard);
+			if (numbers[0]==EOS)	/* Changed in V6.5.9 [NHz] */
+			{	voutlnf("%s %s {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, n, k, name, k, rtf_parpard);
 			}
 			else
-			{	voutlnf("%s %s %s  %s%s", rtf_plain, n, numbers, name, rtf_parpard);
+			{	voutlnf("%s %s %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, n, numbers, k, name, k, rtf_parpard);
 			}
 
 			voutlnf("%s %s\\fs%d %s", rtf_plain, rtf_norm, iDocPropfontSize, rtf_par);	/* r5pl6 */
@@ -5519,7 +5534,7 @@ LOCAL void set_inside_node4 ( void )
 LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 {
 	char 	n[512], name[512], stgname[512], hx_start[16], hx_end[16], sTemp[512];
-	char	numbers[512], nameNoSty[512];
+	char	numbers[512], nameNoSty[512], k[512];	/* New in V6.5.9 [NHz] */
 	char	map[64], sGifSize[80];
 	int		ti, ui, chapter, nr1, nr2, nr3, nr4;
 	BOOLEAN	flag;
@@ -5828,6 +5843,11 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 				voutf("{\\xe\\v %s}", n);
 			}
 
+			/* New in V6.5.9 [NHz] */
+			um_strcpy(k, name, 512, "make_subsubsubnode[RTF]");
+			winspecials2ascii(k);
+			node2winhelp(k);
+
 			if (use_style_book)
 			{
 				if (invisible)
@@ -5849,11 +5869,11 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 				}
 			}
 
-			if (numbers[0]==EOS)
-			{	voutlnf("%s %s %s%s", rtf_plain, n, name, rtf_parpard);
+			if (numbers[0]==EOS)	/* Changed in V6.5.9 [NHz] */
+			{	voutlnf("%s %s {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, n, k, name, k, rtf_parpard);
 			}
 			else
-			{	voutlnf("%s %s %s  %s%s", rtf_plain, n, numbers, name, rtf_parpard);
+			{	voutlnf("%s %s %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, n, numbers, k, name, k, rtf_parpard);
 			}
 			voutlnf("%s %s\\fs%d %s", rtf_plain, rtf_norm, iDocPropfontSize, rtf_par);	/* r5pl6 */
 			break;
