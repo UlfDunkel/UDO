@@ -94,6 +94,7 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro );
 LOCAL void c_xlink ( char *s, BOOLEAN inside_b4_macro );
 LOCAL void c_ilink ( char *s, const BOOLEAN inside_b4_macro );
 LOCAL void c_plink ( char *s, const BOOLEAN inside_b4_macro );
+LOCAL void c_plabel ( char *s, const BOOLEAN inside_b4_macro ); /* New in V6.5.9 [NHz] */
 LOCAL void c_nolink ( char *s, const BOOLEAN inside_b4_macro );
 LOCAL void c_comment ( char *s, const BOOLEAN inside_b4_macro );
 
@@ -1748,6 +1749,14 @@ LOCAL void c_plink ( char *s, const BOOLEAN inside_b4_macro )
 					replace_once(s, Param[0], s_entry);
 				}
 				break;
+			/* New in V6.5.9 [NHz] */
+			case TORTF:
+				um_strcpy(n, Param[2], 512, "c_plink[1]");
+				node2winhelp(n);
+				sprintf(s_entry, "%s (%s %s {\\field{\\*\\fldinst {PAGEREF %s }}{\\fldrslt {\\lang1024 x}}})",
+								Param[1], lang.see, lang.page, n);
+				linkerror= !replace_once(s, Param[0], s_entry);
+				break;								
 			default:
 				linkerror= !replace_once(s, Param[0], Param[1]);
 		}
@@ -1762,6 +1771,51 @@ LOCAL void c_plink ( char *s, const BOOLEAN inside_b4_macro )
 	}
 
 }	/*c_plink*/
+
+
+/* New in V6.5.9 [NHz] */
+LOCAL void c_plabel ( char *s, const BOOLEAN inside_b4_macro )
+{
+	int pnr=0;
+	char s_entry[1024], n[512];
+	BOOLEAN linkerror= FALSE;
+
+	while ( !linkerror && (pnr=get_parameters(s, "label", 2))==2 )
+	{
+
+		if (inside_b4_macro)
+		{
+			if (desttype!=TOSTG)
+			{	auto_quote_chars(Param[1], TRUE);	
+				auto_quote_chars(Param[2], TRUE);	
+			}
+			adjust_params_inside(Param[1]);
+			adjust_params_inside(Param[2]);
+		}
+
+		switch (desttype)
+		{
+			case TORTF:
+				um_strcpy(n, Param[2], 512, "c_plabel[1]");
+				node2winhelp(n);
+				sprintf(s_entry, "{\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}",
+								n, Param[1], n);
+				linkerror= !replace_once(s, Param[0], s_entry);
+				break;								
+			default:
+				linkerror= !replace_once(s, Param[0], Param[1]);
+		}
+	}
+
+	if (pnr!=0 && pnr!=2)
+	{	error_wrong_nr_parameters("!label");
+	}
+
+	if (linkerror)
+	{	error_replace_param("!label");
+	}
+
+}	/*c_plabel*/
 
 
 LOCAL void c_nolink ( char *s, const BOOLEAN inside_b4_macro )
@@ -2904,6 +2958,7 @@ GLOBAL void c_commands_inside ( char *s, const BOOLEAN inside_b4_macro )
 	c_xlink(s, inside_b4_macro);
 	c_ilink(s, inside_b4_macro);
 	c_plink(s, inside_b4_macro);
+	c_plabel(s, inside_b4_macro);	/* New in V6.5.9 [NHz] */
 	c_nolink(s, inside_b4_macro);
 	c_comment(s, inside_b4_macro);
 	c_internal_index(s, inside_b4_macro);
