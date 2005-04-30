@@ -3168,7 +3168,8 @@ LOCAL void html_node_bar_modern ( void )
 	sGifSize[0]= EOS;
 
 #if 1
-	voutlnf("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"%s\">", html_modern_width);
+	/* Changed in V6.5.9 [NHz] */
+	voutlnf("<table id=\"UDO_menu\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"%s\">", html_modern_width);
 	switch (html_modern_alignment)
 	{
 		case ALIGN_LEFT:
