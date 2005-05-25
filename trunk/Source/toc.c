@@ -9357,7 +9357,8 @@ GLOBAL void set_html_filename ( void )
 {
 	char *ptr;
 	
-	if (desttype!=TOHTM)	return;
+	/* New in v6.5.10 [vj]: !html_name is read in HTML and (new) HTML-Help output */
+	if ((desttype!=TOHTM)&&(desttype!=TOMHH)) return;
 
 	if (p1_toc_counter<0)	return;
 	if (toc[p1_toc_counter]==NULL)	return;

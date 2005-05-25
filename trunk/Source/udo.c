@@ -7691,6 +7691,13 @@ LOCAL BOOLEAN pass1_check_main_commands ( void )
 
 	switch (desttype)
 	{
+		case TOMHH:
+			/* New in 6.5.10 [vj]: !html_name is read in HTML-Help output */
+			if ( strcmp(token[0], "!html_name")==0 )
+			{	set_html_filename();
+				return TRUE;
+			}
+			break;
 		case TOHTM:
 			if (strncmp(token[0], "!html", 5)!=0)
 			{	return FALSE;
