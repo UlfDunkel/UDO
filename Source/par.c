@@ -1716,6 +1716,7 @@ LOCAL void c_plink ( char *s, const BOOLEAN inside_b4_macro )
 {
 	int pnr=0;
 	char s_entry[1024];
+	char n[512]; /* Added in 6.5.10, this var was used but not declared, so 6.5.9 could not compile [vj] */
 	BOOLEAN linkerror= FALSE;
 
 	while ( !linkerror && (pnr=get_parameters(s, "plink", 2))==2 )
