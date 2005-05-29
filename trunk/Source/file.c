@@ -201,24 +201,24 @@ GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf )
 		/* v6.5.9 [me] den String am Ende der Zeile krzen und */
 		/*             die passende Anzahl von Zeichen wieder  */
 		/*             in den Input-Stream stellen.            */
-
 		for( s_ptr=string ; *s_ptr!='\n' && *s_ptr!='\r' && *s_ptr!='\0' ; s_ptr++ )
 		{
 			/* Reine Z„hlschleife, daher gibt es hier nichts zu tun */
 		}
 		
+		/* v6.5.10 [me]	Die neue Stringl„nge wird bestimmt, um eine */
+		/*						erneute Z„hlung der Zeichen zu vermeiden!   */
+		sl = (s_ptr - string);
+		
 		/* Bei den Zeichen fr neue Zeile innehalten */
 		if( *s_ptr=='\n' || *s_ptr=='\r' )
 		{
 			/* Den zu verarbeitenden String abteilen */
-
 			char ch = *s_ptr;
 			*(s_ptr++) = '\0';
 			
 			/* Das n„chste zu lesende Zeichen der neuen Zeile suchen */
-
 			if( (*s_ptr=='\n' || *s_ptr=='\r') && *s_ptr!=ch )
-
 				s_ptr++;
 
 			
@@ -227,14 +227,14 @@ GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf )
 		}
 
 		uiMultiLines++;
-		sl= strlen(string);
 		while (sl>0 && (string[sl-1]=='\n' || string[sl-1]=='\r'))
 		{
 			string[sl-1]= '\0';
 			sl--;
 		}
-		/*	v6.5.4 [vj] This is a new check for a continued line. This is handled low level,
-			so UDO doesn't need to care about later, except that some buffers could use more space! */
+		/*	v6.5.4 [vj]	This is a new check for a continued line. This is handled low level,	*/
+		/*					so UDO doesn't need to care about later, except that some buffers		*/
+		/*					could use more space!																*/
 		if (sl>1 && (string[sl-2]=='!') && (string[sl-1]=='\\')) /* Is there a continue line mark before linebreak? */
 		{
 			sl=sl-2; /* String got shorter */
@@ -469,18 +469,15 @@ GLOBAL FILE * myFwopen ( const char *filename, const int filetype )
 
 #if USE_SETFILETYPE	
 	if (file)
-	{	SetFileType(filename, filetype);
+	{
+		SetFileType(filename, filetype);
 	}
 #else
 	UNUSED(filetype);
 #endif
 	/* v6.9.10 [me] Einen Puffer zur Beschleunigung zuordnen */
-
 	if( file!=NULL )
-
 		setvbuf(file, NULL, _IOFBF, 8192);
-
-	
 
 	return file;
 }	/* myFwopen */
@@ -494,7 +491,8 @@ GLOBAL FILE * myFwbopen ( const char *filename, const int filetype )
 
 #if USE_SETFILETYPE	
 	if (file)
-	{	SetFileType(filename, filetype);
+	{
+		SetFileType(filename, filetype);
 	}
 #else
 	UNUSED(filetype);
@@ -502,7 +500,6 @@ GLOBAL FILE * myFwbopen ( const char *filename, const int filetype )
 	/* v6.9.10 [me] Einen Puffer zur Beschleunigung zuordnen */
 
 	if( file!=NULL )
-
 		setvbuf(file, NULL, _IOFBF, 8192);
 
 
