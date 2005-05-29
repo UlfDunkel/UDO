@@ -8473,6 +8473,20 @@ LOCAL BOOLEAN pass1 (char *datei)
 				}	/* if (zeile[0]==META_C) */
 
 			}	/* if (!pflag[PASS1].ignore_line...) */
+			else
+			{
+				if	(
+					(pflag[PASS1].ignore_line==0)
+					&& (pflag[PASS1].env==ENV_TABLE)
+					)
+				{
+					if ( strcmp(token[0], "!label")==0 || strcmp(token[0], "!l")==0)
+					{	tokcpy2(tmp, 512);
+						replace_udo_quotes(tmp);
+						add_label(tmp, FALSE, bInsidePopup);
+					}
+				}
+			}
 
 		}	/* if (zeile[0]!=EOS) */
 

@@ -70,6 +70,8 @@ LOCAL int		tab_vert[MAX_TAB_W+1];				/* Vertikale Linien, wo?	*/
 LOCAL int		tab_hori[MAX_TAB_H+1];				/* Horiz. Linien, wo?		*/
 LOCAL int		tab_just[MAX_TAB_H+1];				/* Spaltenausrichtung		*/
 LOCAL int		tab_toplines;						/* Oben Linie(n)?			*/
+LOCAL int		tab_label[MAX_TAB_H+1];				/* Link, wo?				*/
+LOCAL char		*tab_label_cell[MAX_TAB_H+1];		/* Linktext					*/
 
 LOCAL char		cells[MAX_TAB_W+1][MAX_CELLS_LEN];	/* Puffer fuer Zellen		*/
 LOCAL int		cells_counter;						/* Anzahl Zellen von Zeilen	*/
@@ -131,6 +133,12 @@ GLOBAL void table_reset ( void )
 		}
 		tab_hori[y]= 0;
 		tab_just[y]= TAB_LEFT;
+		tab_label[y]= 0;
+		if ( tab_label_cell[y] != NULL )
+		{	um_free( tab_label_cell[y] );
+			tab_label_cell[y] = NULL;
+		}
+
 	}
 	
 	for (x=0; x<MAX_TAB_W; x++)
@@ -232,11 +240,7 @@ GLOBAL BOOLEAN table_add_line ( char *s )
 	del_whitespaces(s);
 
         /* Leerzeilen  und Kommentare nicht bearbeiten */
-        /* [GS] r6pl17 Start */
         if ( s[0]==EOS || s[0] == '#')
-        /* Ende; alt:
-        if ( s[0]==EOS )
-        */
 	{	return TRUE;
 	}
 
@@ -245,7 +249,21 @@ GLOBAL BOOLEAN table_add_line ( char *s )
 		s[0]= EOS;
 		return FALSE;
 	}
-	
+
+	if ((strncmp(s, "!label", 6 )==0 || strncmp(s, "!l ", 3)) && tab_label[tab_h] == 0)
+	{
+		sl = strlen ( s );
+		ptr= (char *) (um_malloc(sl+2));
+		if (ptr==NULL)
+		{	error_malloc_failed();
+			return FALSE;
+		}
+		strcpy(ptr, s);
+		tab_label_cell[tab_h]= ptr;
+		tab_label[tab_h]++;
+		return TRUE;
+	}
+
 	/* Alte Zellen leeren */
 	cells_reset();
 
@@ -484,6 +502,17 @@ LOCAL void table_output_lyx ( void )
 			{	outln("\\newline");
 			}
 		}
+	    if (tab_label[y]>0)
+	    {	if ( tab_label_cell[y] != NULL )
+	       	{
+				str2tok(tab_label_cell[y]);
+				
+				if (token_counter>0)
+				{	c_label();
+				}
+				token_reset();
+	        }
+	    }
 	}
 	
 	if (tab_caption[0]!=EOS)
@@ -578,6 +607,19 @@ LOCAL void table_output_rtf ( void )
 			out("\\cell");
 		}
 		outln("\\row");
+
+        if (tab_label[y]>0)
+        {	if ( tab_label_cell[y] != NULL )
+        	{
+				str2tok(tab_label_cell[y]);
+				
+				if (token_counter>0)
+				{	c_label();
+				}
+				token_reset();
+        	}
+        }
+
 	}
 	
 	outln("\\trowd\\pard");
@@ -673,6 +715,19 @@ LOCAL void table_output_win ( void )
 		else
 		{	outln("\\row");
 		}
+
+        if (tab_label[y]>0)
+        {	if ( tab_label_cell[y] != NULL )
+        	{
+				str2tok(tab_label_cell[y]);
+				
+				if (token_counter>0)
+				{	c_label();
+				}
+				token_reset();
+        	}
+        }
+
 	}
 	
 	outln("\\trowd\\pard");
@@ -866,6 +921,19 @@ LOCAL void table_output_html ( void )
 			outln("</td>");	/* PL14: "</td>" statt " " */
 		}
 		outln("</tr>");		/* PL14: "</tr>" statt "" */
+
+        if (tab_label[y]>0)
+        {	if ( tab_label_cell[y] != NULL )
+        	{
+				str2tok(tab_label_cell[y]);
+				
+				if (token_counter>0)
+				{	c_label();
+				}
+				token_reset();
+        	}
+        }
+
 	}
 
 
@@ -967,6 +1035,19 @@ LOCAL void table_output_tex ( void )
 		{	out(" \\hline");
 		}
 		outln("");
+
+        if (tab_label[y]>0)
+        {	if ( tab_label_cell[y] != NULL )
+        	{
+				str2tok(tab_label_cell[y]);
+				
+				if (token_counter>0)
+				{	c_label();
+				}
+				token_reset();
+        	}
+        }
+
 	}
 
 	outln("\\end{tabular}");
@@ -1149,7 +1230,6 @@ LOCAL void table_output_general ( void )
         for (x=0; x<=tab_w; x++)
         {   if (tab_vert[x]>0)
             {
-	             /* if inserted r6pl15 [GS] */
                 if( tab_h>253 )
                    sprintf(stg_vl, "@line %d 0 %d", offset, 254);
                 else
@@ -1161,7 +1241,6 @@ LOCAL void table_output_general ( void )
         }
         if (tab_vert[tab_w+1]>0)
         {
-            /* if inserted r6pl15 [GS] */
             if( tab_h>253 )
             	sprintf(stg_vl, "@line %d 0 %d", offset, 254);
             else
@@ -1296,7 +1375,6 @@ LOCAL void table_output_general ( void )
     for( y=0, y_stg=0 ; y<=tab_h ; y++, y_stg++ )
     {   s[0]= EOS;
 			
-			/* New in r6pl15 [GS] */
         if ( y_stg > 253 && (desttype==TOSTG || desttype==TOAMG) && !ansichars)
         {
             /* ST-Guide kann nur Linien mit einer Laenge von 254 Zeilen */
@@ -1437,6 +1515,19 @@ LOCAL void table_output_general ( void )
                 }
             }
         }
+
+        if (tab_label[y]>0)
+        {	if ( tab_label_cell[y] != NULL )
+        	{
+				str2tok(tab_label_cell[y]);
+				
+				if (token_counter>0)
+				{	c_label();
+				}
+				token_reset();
+        	}
+        }
+
     }   /* for y */
 
     if (tosrc)
