@@ -54,6 +54,7 @@ const char *id_tab_c= "@(#) tab.c       01.02.2004";
 
 #define MAX_TAB_H		512		/* max. Hoehe einer Tabelle */
 #define MAX_TAB_W		64		/* max. Breite einer Tabelle */
+#define MAX_TAB_LABEL	10		/* max. Anzahl der hinter einanderfolgenden Labels */
 #define	TAB_LEFT		0		/* Spalte linksbuendig */
 #define	TAB_CENTER		1		/* Spalte zentriert */
 #define	TAB_RIGHT		2		/* Spalte rechtsbuendig */
@@ -70,8 +71,8 @@ LOCAL int		tab_vert[MAX_TAB_W+1];				/* Vertikale Linien, wo?	*/
 LOCAL int		tab_hori[MAX_TAB_H+1];				/* Horiz. Linien, wo?		*/
 LOCAL int		tab_just[MAX_TAB_H+1];				/* Spaltenausrichtung		*/
 LOCAL int		tab_toplines;						/* Oben Linie(n)?			*/
-LOCAL int		tab_label[MAX_TAB_H+1];				/* Link, wo?				*/
-LOCAL char		*tab_label_cell[MAX_TAB_H+1];		/* Linktext					*/
+LOCAL int		tab_label[MAX_TAB_H+1];				/* Label, wo?				*/
+LOCAL char		*tab_label_cell[MAX_TAB_H+1][MAX_TAB_LABEL];	/* Labeltext	*/
 
 LOCAL char		cells[MAX_TAB_W+1][MAX_CELLS_LEN];	/* Puffer fuer Zellen		*/
 LOCAL int		cells_counter;						/* Anzahl Zellen von Zeilen	*/
@@ -134,9 +135,11 @@ GLOBAL void table_reset ( void )
 		tab_hori[y]= 0;
 		tab_just[y]= TAB_LEFT;
 		tab_label[y]= 0;
-		if ( tab_label_cell[y] != NULL )
-		{	um_free( tab_label_cell[y] );
-			tab_label_cell[y] = NULL;
+		for (x=0; x<MAX_TAB_LABEL; x++)
+		{	if ( tab_label_cell[y][x] != NULL )
+			{	um_free( tab_label_cell[y][x] );
+				tab_label_cell[y][x] = NULL;
+			}
 		}
 
 	}
@@ -239,8 +242,8 @@ GLOBAL BOOLEAN table_add_line ( char *s )
 
 	del_whitespaces(s);
 
-        /* Leerzeilen  und Kommentare nicht bearbeiten */
-        if ( s[0]==EOS || s[0] == '#')
+    /* Leerzeilen  und Kommentare nicht bearbeiten */
+    if ( s[0]==EOS || s[0] == '#')
 	{	return TRUE;
 	}
 
@@ -250,8 +253,13 @@ GLOBAL BOOLEAN table_add_line ( char *s )
 		return FALSE;
 	}
 
-	if ((strncmp(s, "!label", 6 )==0 || strncmp(s, "!l ", 3)) && tab_label[tab_h] == 0)
+	if ((strncmp(s, "!label", 6 )==0 || strncmp(s, "!l ", 3) == 0) )
 	{
+		if ( tab_label[tab_h] >= MAX_TAB_LABEL )
+		{	error_table_label();
+			s[0]= EOS;
+			return FALSE;
+		}
 		sl = strlen ( s );
 		ptr= (char *) (um_malloc(sl+2));
 		if (ptr==NULL)
@@ -259,7 +267,7 @@ GLOBAL BOOLEAN table_add_line ( char *s )
 			return FALSE;
 		}
 		strcpy(ptr, s);
-		tab_label_cell[tab_h]= ptr;
+		tab_label_cell[tab_h][tab_label[tab_h]]= ptr;
 		tab_label[tab_h]++;
 		return TRUE;
 	}
@@ -503,12 +511,11 @@ LOCAL void table_output_lyx ( void )
 			}
 		}
 	    if (tab_label[y]>0)
-	    {	if ( tab_label_cell[y] != NULL )
-	       	{
-				str2tok(tab_label_cell[y]);
-				
-				if (token_counter>0)
-				{	c_label();
+	    {	for (i=0; i<tab_label[y]; i++)
+	    	{	if ( tab_label_cell[y][i] != NULL )
+	       		{	str2tok(tab_label_cell[y][i]);
+					if (token_counter>0)
+						c_label();
 				}
 				token_reset();
 	        }
@@ -608,18 +615,16 @@ LOCAL void table_output_rtf ( void )
 		}
 		outln("\\row");
 
-        if (tab_label[y]>0)
-        {	if ( tab_label_cell[y] != NULL )
-        	{
-				str2tok(tab_label_cell[y]);
-				
-				if (token_counter>0)
-				{	c_label();
+	    if (tab_label[y]>0)
+	    {	for (i=0; i<tab_label[y]; i++)
+	    	{	if ( tab_label_cell[y][i] != NULL )
+	       		{	str2tok(tab_label_cell[y][i]);
+					if (token_counter>0)
+						c_label();
 				}
 				token_reset();
-        	}
-        }
-
+	        }
+	    }
 	}
 	
 	outln("\\trowd\\pard");
@@ -716,18 +721,16 @@ LOCAL void table_output_win ( void )
 		{	outln("\\row");
 		}
 
-        if (tab_label[y]>0)
-        {	if ( tab_label_cell[y] != NULL )
-        	{
-				str2tok(tab_label_cell[y]);
-				
-				if (token_counter>0)
-				{	c_label();
+	    if (tab_label[y]>0)
+	    {	for (i=0; i<tab_label[y]; i++)
+	    	{	if ( tab_label_cell[y][i] != NULL )
+	       		{	str2tok(tab_label_cell[y][i]);
+					if (token_counter>0)
+						c_label();
 				}
 				token_reset();
-        	}
-        }
-
+	        }
+	    }
 	}
 	
 	outln("\\trowd\\pard");
@@ -809,7 +812,7 @@ LOCAL void test_for_addition(char *cell)
 
 LOCAL void table_output_html ( void )
 {
-	int		y, x;
+	int		y, x, i;
 	char	f[LINELEN], alignOn[64]; /* r6.3.18[vj]: f is now LINELEN chars long instead of 512 */
 	char	token_buffer[LINELEN];	 /* v6.5.3[vj]: New buffer needed for table extension */
 	BOOLEAN inside_center, inside_right, inside_left;
@@ -922,18 +925,16 @@ LOCAL void table_output_html ( void )
 		}
 		outln("</tr>");		/* PL14: "</tr>" statt "" */
 
-        if (tab_label[y]>0)
-        {	if ( tab_label_cell[y] != NULL )
-        	{
-				str2tok(tab_label_cell[y]);
-				
-				if (token_counter>0)
-				{	c_label();
+	    if (tab_label[y]>0)
+	    {	for (i=0; i<tab_label[y]; i++)
+	    	{	if ( tab_label_cell[y][i] != NULL )
+	       		{	str2tok(tab_label_cell[y][i]);
+					if (token_counter>0)
+						c_label();
 				}
 				token_reset();
-        	}
-        }
-
+	        }
+	    }
 	}
 
 
@@ -1036,18 +1037,16 @@ LOCAL void table_output_tex ( void )
 		}
 		outln("");
 
-        if (tab_label[y]>0)
-        {	if ( tab_label_cell[y] != NULL )
-        	{
-				str2tok(tab_label_cell[y]);
-				
-				if (token_counter>0)
-				{	c_label();
+	    if (tab_label[y]>0)
+	    {	for (i=0; i<tab_label[y]; i++)
+	    	{	if ( tab_label_cell[y][i] != NULL )
+	       		{	str2tok(tab_label_cell[y][i]);
+					if (token_counter>0)
+						c_label();
 				}
 				token_reset();
-        	}
-        }
-
+	        }
+	    }
 	}
 
 	outln("\\end{tabular}");
@@ -1516,18 +1515,16 @@ LOCAL void table_output_general ( void )
             }
         }
 
-        if (tab_label[y]>0)
-        {	if ( tab_label_cell[y] != NULL )
-        	{
-				str2tok(tab_label_cell[y]);
-				
-				if (token_counter>0)
-				{	c_label();
+	    if (tab_label[y]>0)
+	    {	for (i=0; i<tab_label[y]; i++)
+	    	{	if ( tab_label_cell[y][i] != NULL )
+	       		{	str2tok(tab_label_cell[y][i]);
+					if (token_counter>0)
+						c_label();
 				}
 				token_reset();
-        	}
-        }
-
+	        }
+	    }
     }   /* for y */
 
     if (tosrc)
