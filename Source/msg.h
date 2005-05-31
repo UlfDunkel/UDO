@@ -121,6 +121,7 @@ GLOBAL void error_missing_endif ( const char *s, const UINT l );
 GLOBAL void error_table_width ( void );
 GLOBAL void error_table_height ( void );
 GLOBAL void error_table_cell_width ( void );
+GLOBAL void error_table_label ( void );
 GLOBAL void error_odd_dblquotes ( void );
 GLOBAL void error_odd_quotes ( void );
 GLOBAL void error_no_language ( const char *s );

@@ -730,6 +730,10 @@ GLOBAL void error_table_cell_width ( void )
 {	error_msg_solo("table cell contains too many characters");
 }
 
+GLOBAL void error_table_label ( void )
+{	error_msg_solo("too many labels used");
+}
+
 GLOBAL void error_odd_dblquotes ( void )
 {	error_msg_solo("odd number of \"\"");
 }
