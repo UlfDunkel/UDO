@@ -48,6 +48,9 @@ Der Name der Quelldatei muß als letzter Parameter übergeben werden.
 	!item	[-h, (--)html]
 			Die (!U)Quelldatei(!u) wird ins HTML-Format umgewandelt.
 
+	!item	[-hh, (--)htmlhelp]
+			Die (!U)Quelldatei(!u) wird ins HTML Help-Format umgewandelt.
+
 	!item	[-H, (--)hold]
 			(!B)UDO(!b) wartet am Programmende auf einen Tastendruck
 
