@@ -221,7 +221,8 @@ GLOBAL void html_save_frameset ( void );
 GLOBAL void html_headline ( void );
 GLOBAL void html_bottomline ( void );
 GLOBAL void html_footer ( void );
-
+GLOBAL BOOLEAN save_html_index ( void );
+GLOBAL void add_pass1_index_udo ( void );
 GLOBAL void hh_headline ( void );
 GLOBAL void hh_bottomline ( void );
 GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename );

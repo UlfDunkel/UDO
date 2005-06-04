@@ -8487,7 +8487,6 @@ LOCAL BOOLEAN pass1 (char *datei)
 					}
 				}
 			}
-
 		}	/* if (zeile[0]!=EOS) */
 
 #if 0
@@ -9962,6 +9961,12 @@ GLOBAL BOOLEAN udo (char *datei)
 		{	add_pass1_about_udo();
 		}
 			
+		if (desttype==TOHTM)
+		{	if (!no_index)
+			{	add_pass1_index_udo ();
+			}
+		}
+		
 		/* Speicher anfordern */
 		if ( malloc_token_output_buffer() )
 		{
