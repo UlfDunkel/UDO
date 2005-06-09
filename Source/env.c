@@ -2207,6 +2207,11 @@ GLOBAL void c_item ( void )
 		 			strcpy(sBig, "<li>");
 					break;
 				case ENV_DESC:
+					/* New in V6.5.11 [NHz] */
+					if (!bEnv1stItem[iEnvLevel])
+					{	outln("</dd>");
+					}
+
 					token[0][0]= EOS;
 					sBig[0]= EOS;
 					if (token[1][0]=='[')
@@ -2712,7 +2717,7 @@ GLOBAL void c_end_description ( void )
 			break;
 		case TOHTM:
 		case TOMHH:
-			outln("</dl>");
+			outln("</dd>\n</dl>");	/* Changed in V6.5.11 [NHz] */
 			break;
 		case TOHPH:
 			outln("<\\list>");
