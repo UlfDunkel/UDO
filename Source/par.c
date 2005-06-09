@@ -551,6 +551,9 @@ GLOBAL BOOLEAN add_placeholder ( char *entry, char *rawtext )
 		if (phold_counter+OFFSET_PHOLD==(int) '\177')	/* PL8 */
 		{	phold_counter++;
 		}
+		if (phold_counter+OFFSET_PHOLD==(int) '@')
+		{	phold_counter++;
+		}
 
 		sprintf(phold[phold_counter].magic, "\033%c%c\033",
 			C_PHOLD_MAGIC, phold_counter+OFFSET_PHOLD);
@@ -3015,7 +3018,7 @@ GLOBAL void add_hyphen ( void )
 	{	error_missing_parameter("!hyphen");
 		return;
 	}
-	
+
 	p= (HYPHEN *) um_malloc(sizeof(HYPHEN));
 	
 	if (p==NULL)
