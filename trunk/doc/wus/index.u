@@ -318,9 +318,6 @@ Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=R
 !subnode ST-Guide
 !html_name E-STGuid
 Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=ST-Guide">Norbert Hanz</a>])
-!hline
-!include STGuide-Entwicklung.ui
-
 
 !newpage
 !subnode Turbo-Vision Help

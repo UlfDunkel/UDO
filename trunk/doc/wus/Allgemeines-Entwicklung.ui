@@ -136,7 +136,7 @@ einzubringen?(!b)
 Die Makros sind bewusst mit öffnendem und schließendem Teil angelegt,
 da so farbige Texte auch über mehrere Zeilen angelegt werden können.
 
-!vinclude d:/udo-tool/colour.ui
+!vinclude colour.ui
 
 !smallskip
 Statt des (!V)style(!v)-Attributes bei HTML kann auch das
