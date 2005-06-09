@@ -1425,6 +1425,17 @@ LOCAL void table_output_general ( void )
 
             add= 0;
 
+						/* New in V6.5.11 [NHz] */
+						if(desttype==TOKPS)
+						{
+							c_vars(f);
+							c_commands_inside(f, FALSE);
+							replace_all(s, "[", "\\[");
+							replace_all(s, "]", "\\]");
+							replace_all(s, "(", "\\(");
+							replace_all(s, ")", "\\)");
+						}
+
             switch(tab_just[x])
             {   case TAB_CENTER:
                     stringcenter(f, ((int) tab_cell_w[x]) );
