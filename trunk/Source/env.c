@@ -3462,7 +3462,12 @@ GLOBAL void c_end_document ( void )
 	}
 
 	if (desttype==TOHTM)
-	{	html_bottomline();
+	{	if (!no_index)
+		{
+			save_html_index();
+			check_endnode();
+		}
+		html_bottomline();
 	}
 
 	if (bInsideAppendix)

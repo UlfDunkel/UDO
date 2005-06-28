@@ -11411,6 +11411,95 @@ typedef struct _tWinMapData
 }	tWinMapData;
 
 
+LOCAL BOOLEAN save_the_alias ( const char *filename, const char *suffix, tWinMapData *data )
+{
+	register int i;
+	int map;
+	char hid[256], f[512];
+	FILE *file;
+	
+	strcpy(f, filename);
+	strcat(f, suffix);
+
+	file= fopen(f, "w");
+	if (!file)
+	{	return FALSE;
+	}
+
+	if( file!=NULL )
+
+		setvbuf(file, NULL, _IOFBF, 8192);
+
+
+	save_upr_entry_outfile(f);
+	
+	fprintf(file, "%s Alias-Datei for %s, made with UDO%s %s\n\n",
+		data->remOn, old_outfile.full, UDO_REL, data->remOff);
+
+	for (i=0; i<=p1_toc_counter; i++)
+	{
+		hid[0]= EOS;
+
+		if (toc[i]->helpid!=NULL)
+		{	strcpy(hid, toc[i]->helpid);
+		}
+		else
+		{
+			if (use_auto_helpids)
+			{
+				node2WinAutoID(hid, toc[i]->name);
+			}
+		}
+
+		map= -1;
+
+		if (toc[i]->mapping>=0)
+		{	map= toc[i]->mapping;
+		}
+
+		if (hid[0]!=EOS || map>=0 || desttype==TOWH4)
+		{
+			if (hid[0]==EOS)
+			{
+				node2NrWinhelp(hid, toc[i]->labindex);
+			}
+
+			strinsert(hid, sDocWinPrefixID);
+
+			if (map<0)
+			{	map= 0x1000+i;
+			}
+
+			fprintf(file, "%-*s =%s%s ; %s\n",
+						MAX_HELPID_LEN+1,
+						hid,
+						toc[i]->filename,
+						outfile.suff,
+						toc[i]->name
+				);
+		}
+	}
+
+	fclose(file);
+	
+	return TRUE;	
+}
+
+GLOBAL BOOLEAN save_htmlhelp_alias ( void )
+{
+	tWinMapData data;
+	BOOLEAN flag;
+
+	memset(&data, 0, sizeof(data));
+	strcpy(data.remOn, "/*");
+	strcpy(data.remOff, "*/");
+
+	flag= save_the_alias (sMapNoSuff, ".hha", &data);
+
+	return flag;
+}	/* save_htmlhelp_alias */
+
+
 LOCAL BOOLEAN save_the_map ( const char *filename, const char *suffix, tWinMapData *data )
 {
 	register int i;
@@ -11490,6 +11579,22 @@ LOCAL BOOLEAN save_the_map ( const char *filename, const char *suffix, tWinMapDa
 	
 	return TRUE;	
 }
+GLOBAL BOOLEAN save_htmlhelp_map ( void )
+{
+	tWinMapData data;
+	BOOLEAN flag;
+
+	memset(&data, 0, sizeof(data));
+	strcpy(data.cmd, "#define");
+	strcpy(data.hexPre, "0x");
+	strcpy(data.remOn, "/*");
+	strcpy(data.remOff, "*/");
+	strcpy(data.compiler, "C");
+
+	flag= save_the_map (sMapNoSuff, ".hhm", &data);
+
+	return flag;
+}	/* save_winhelp_map_c */
 
 
 GLOBAL BOOLEAN save_winhelp_map_c ( void )

@@ -358,6 +358,8 @@ GLOBAL void toc_init_lang(void);
 /*	############################################################
 	#	Dateien mit den Jump-IDs ausgeben fuer div. Compiler
 	############################################################	*/
+GLOBAL BOOLEAN save_htmlhelp_alias ( void );
+GLOBAL BOOLEAN save_htmlhelp_map ( void );
 GLOBAL BOOLEAN save_winhelp_map_c ( void );
 GLOBAL BOOLEAN save_winhelp_map_pas ( void );
 GLOBAL BOOLEAN save_winhelp_map_vb ( void );
