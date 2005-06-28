@@ -9648,6 +9648,15 @@ LOCAL void save_htmlhelp_project ( void )
 	fprintf(hhpfile, "[FILES]\n");
 	fprintf(hhpfile, "%s%s\n", old_outfile.name, outfile.suff);
 	
+	if (bUseIdMapFileC)
+	{
+		fprintf(hhpfile, "\n[ALIAS]\n");
+		fprintf(hhpfile, "#include <%s.hha>\n", old_outfile.name);
+
+		fprintf(hhpfile, "\n[MAP]\n");
+		fprintf(hhpfile, "#include <%s.hhm>\n", old_outfile.name);
+	}
+
 	fclose(hhpfile);
 	
 	bHhpSaved= TRUE;
@@ -10081,6 +10090,11 @@ GLOBAL BOOLEAN udo (char *datei)
 								bHhkSaved= save_htmlhelp_index(sHhkfull);
 								save_htmlhelp_project();
 								save_html_gifs();
+								if (bUseIdMapFileC)
+								{	strcpy(outfile.full, old_outfile.full);
+									bMapSavedC= save_htmlhelp_map();
+									save_htmlhelp_alias ();
+								}
 								break;
 							case TOSTG:
 							case TOAMG:
