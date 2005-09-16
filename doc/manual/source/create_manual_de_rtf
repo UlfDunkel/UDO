@@ -1,0 +1,4 @@
+#!/bin/sh
+# dieses bash-Skript konvertiert das deutsche UDO-Handbuch nach RTF (Rich Text Format)
+# this bash scripts converts the german UDO Manual to RTF (Rich Text Format)
+udo --rtf --verbose --force-long -D LANG_DE --tree -o manual-de.rtf manual.u $*

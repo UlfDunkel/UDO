@@ -1,0 +1,4 @@
+#!/bin/sh
+# dieses bash-Skript konvertiert das deutsche UDO-Handbuch nach LaTeX
+# this bash scripts converts the german UDO Manual to LaTeX
+udo --tex --verbose --force-long -D LANG_DE manual.u -o manual-de.tex
