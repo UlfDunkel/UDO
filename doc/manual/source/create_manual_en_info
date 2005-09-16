@@ -1,4 +1,4 @@
 #!/bin/sh
 # dieses bash-Skript konvertiert das englische UDO-Handbuch nach GNU-texinfo
-# this bash scripts converts the english UDO Manual to GNU-texinfo
+# this bash script converts the english UDO Manual to GNU-texinfo
 udo --info --verbose --force-long -D LANG_EN --tree -o manual-en.info manual.u $*
