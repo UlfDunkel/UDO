@@ -1,0 +1,4 @@
+#!/bin/sh
+# dieses bash-Skript konvertiert das deutsche UDO-Handbuch nach WinHelp4-Source
+# this bash scripts converts the german UDO Manual to WinHelp4-Source
+udo --win4 --verbose --force-long -D LANG_DE --tree -o ../wh4-de/manual-de.rtf manual.u $*
