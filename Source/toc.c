@@ -3937,8 +3937,10 @@ GLOBAL BOOLEAN save_html_index ( void )
 		{
 			strcpy ( cLabel, html_index[i].tocname );
 			label2html ( cLabel );
-			fprintf(uif, "<a href=\"%s%s\#%s\">%s</a> <br>\n",
-				htmlname, outfile.suff, cLabel,
+			/* v6.5.13 [vj] Compiler-Warnung beseitigt, # wurde in String ausgelagert,
+                            da der gcc sonst meckert: "toc.c:3940:17: warning: unknown escape sequence '\#'" */
+			fprintf(uif, "<a href=\"%s%s%s%s\">%s</a> <br>\n",
+				htmlname, outfile.suff, "#", cLabel,
 				html_index[i].tocname );
 		}
 	}
