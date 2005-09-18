@@ -108,9 +108,13 @@ GLOBAL MYTEXTFILE *myTextOpen ( const char *filename )
 		um_free(tf);
 		tf= NULL;
 	}
-
-	setvbuf(tf->file, NULL, _IOFBF, 8192);
-
+	else
+	{
+		/* v6.5.13 [vj] Dieser Befehl darf natürlich nur ausgeführt werden,
+                        wenn tf-file != NULL ist, sonst crashed UDO an
+                        dieser Stelle */
+		setvbuf(tf->file, NULL, _IOFBF, 8192);
+	}
 
 #endif
 
