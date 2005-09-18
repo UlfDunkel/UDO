@@ -1,5 +1,5 @@
 # doc/manual/source/syntax.ui
-# letzte Änderungen: 02.02.2004 / last changes: Feb 2, 2004
+# letzte Änderungen: 18.09.2005 / last changes: Sep 18, 2005
 
 
 ################################################################################
@@ -5087,7 +5087,7 @@ Seite mit Verweisen für das Internet angelegt hat, die in einem
 ST-Guide- oder WinHelp-Hypertext keinen Sinn machen würden.
 
 !index (!kkw [nolink])
-!item Durch den Platzhalter (!KKW [nolink]) können sie Text
+!item Durch den Platzhalter (!KKW [nolink]) können Sie Text
 angeben, bei dem keine Verweise erzeugt werden sollen.
 
 !end_enumerate
