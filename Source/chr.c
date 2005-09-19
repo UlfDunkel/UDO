@@ -1382,6 +1382,8 @@ GLOBAL void node2pchelp ( char *s )
 /* Changed in r6pl16 [NHz] */
 GLOBAL void node2postscript ( char *s, int text )
 {
+	long talen;
+
 	switch(text)
 	{
 		/* New: Fixed bug #0000040 in r6.3pl16 [NHz] */
@@ -1396,11 +1398,23 @@ GLOBAL void node2postscript ( char *s, int text )
 			break;
 
 		case KPS_NODENAME:
-			if(strlen(s) > 80L-strlen(titdat.author))
+			/* v6.5.14 [vj]: titdat.author kann ein Null-Pointer sein
+			 * => ich berechnet strlen(titdat.author) vor und nehme 0
+			 *    an, wenn es leer ist.
+			 */
+			if (titdat.author)
 			{
-				s[80L-strlen(titdat.author)] = EOS;
-				if(s[79L-strlen(titdat.author)] == '\\')
-					s[79L-strlen(titdat.author)] = EOS;
+				talen=strlen(titdat.author);
+			}
+			else
+			{
+				talen=0;
+			}
+			if(strlen(s) > 80L-talen)
+			{
+				s[80L-talen] = EOS;
+				if(s[79L-talen] == '\\')
+					s[79L-talen] = EOS;
 				strcat(s, "...\0");
 			}
 			/* Changed in V6.5.5 [NHz] */
