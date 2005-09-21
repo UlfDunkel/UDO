@@ -39,7 +39,7 @@ const char *id_str_c= "@(#) str.c       10.03.1997";
 /*
 	#################################################################
 	#
-	# strcat und strcpy Wrapper, die Puffergrenzen checken können
+	# strcat und strcpy Wrapper, die Puffergrenzen checken k”nnen
 	#
 	#################################################################
 */
@@ -47,8 +47,22 @@ const char *id_str_c= "@(#) str.c       10.03.1997";
 GLOBAL char *um_strcpy(char *dest, const char *src, size_t max, const char *place)
 {
 	char errbuf[120];
-	size_t slen; /* Temporäre Variable, für die Länge von src */
+	size_t slen; /* Temporaere Variable, fuer die Laenge von src */
 	
+	if ( dest == NULL )
+	{
+		sprintf(errbuf, "um_strcpy: dest is NULL: %s", place);
+		loglnposprintf ("Warning", errbuf);
+		return dest;
+	}
+	if ( src == NULL )
+	{
+		sprintf(errbuf, "um_strcpy: src is NULL: %s", place);
+		loglnposprintf ("Warning", errbuf);
+		dest[0]=EOS;
+		return dest;
+	}
+
 	slen=(size_t)strlen(src); /* Stringlänge bestimmen */
 	if (((size_t)slen+1)<max) /* Testen obs  */
 	{
@@ -66,6 +80,21 @@ GLOBAL char *um_strcpy(char *dest, const char *src, size_t max, const char *plac
 GLOBAL char *um_strncpy(char *dest, const char *src, size_t n, size_t max, const char *place)
 {
 	char errbuf[120];
+
+	if ( dest == NULL )
+	{
+		sprintf(errbuf, "um_strncpy: dest is NULL: %s", place);
+		loglnposprintf ("Warning", errbuf);
+		return dest;
+	}
+	if ( src == NULL )
+	{
+		sprintf(errbuf, "um_strncpy: src is NULL: %s", place);
+		loglnposprintf ("Warning", errbuf);
+		dest[0]=EOS;
+		return dest;
+	}
+
 	if ((n+1)<max)
 	{
 		return strncpy(dest, src, n);
@@ -83,6 +112,19 @@ GLOBAL char *um_strcat(char *dest, const char *src, size_t max, const char *plac
 {
 	char errbuf[120];
 	size_t dlen, slen;
+
+	if ( dest == NULL )
+	{
+		sprintf(errbuf, "um_strcat: dest is NULL: %s", place);
+		loglnposprintf ("Warning", errbuf);
+		return dest;
+	}
+	if ( src == NULL )
+	{
+		sprintf(errbuf, "um_strcat: src is NULL: %s", place);
+		loglnposprintf ("Warning", errbuf);
+		return dest;
+	}
 
 	dlen=(size_t)strlen(dest);
 	slen=(size_t)strlen(src);
@@ -104,6 +146,19 @@ GLOBAL char *um_strncat(char *dest, const char *src, size_t n, size_t max, const
 {
 	char errbuf[120];
 	size_t dlen;
+
+	if ( dest == NULL )
+	{
+		sprintf(errbuf, "um_strncat: dest is NULL: %s", place);
+		loglnposprintf ("Warning", errbuf);
+		return dest;
+	}
+	if ( src == NULL )
+	{
+		sprintf(errbuf, "um_strncat: src is NULL: %s", place);
+		loglnposprintf ("Warning", errbuf);
+		return dest;
+	}
 
 	dlen=strlen(dest);
 	if ((dlen+n+1)<max)
