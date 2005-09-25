@@ -3857,6 +3857,7 @@ GLOBAL BOOLEAN save_html_index ( void )
 	char htmlname[512];
 	char cLabel[512];
 	char *tocname;
+	char *escapedtocname;
 	
 	/* at first wie count how much we need */
 	num_index = 0;
@@ -3927,11 +3928,19 @@ GLOBAL BOOLEAN save_html_index ( void )
 		}
 		
 		get_html_filename(html_index[i].toc_index, htmlname);
+
+		/* v6.5.15 [vj] need to make a copy of this, because we need to change it */
+		escapedtocname=um_physical_strcpy(html_index[i].tocname, 100, "save_html_index");
+		if (escapedtocname != NULL)
+		{
+			replace_all(escapedtocname, "!", "&#33;");
+		}
+
 		if ( html_index[i].is_node )
 		{
 			fprintf(uif, "<a href=\"%s%s\">%s</a> <br>\n",
 				htmlname, outfile.suff,
-				html_index[i].tocname );
+				escapedtocname );
 		}
 		else
 		{
@@ -3941,8 +3950,10 @@ GLOBAL BOOLEAN save_html_index ( void )
                             da der gcc sonst meckert: "toc.c:3940:17: warning: unknown escape sequence '\#'" */
 			fprintf(uif, "<a href=\"%s%s%s%s\">%s</a> <br>\n",
 				htmlname, outfile.suff, "#", cLabel,
-				html_index[i].tocname );
+				escapedtocname );
 		}
+
+		um_free(escapedtocname); /* v6.5.15 [vj] var can be freed now */
 	}
 	fprintf( uif, "!end_raw\n" );
 	
