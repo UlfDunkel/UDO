@@ -36,6 +36,7 @@ const char *id_str_c= "@(#) str.c       10.03.1997";
 
 #include "msg.h"
 
+#include "udomem.h"
 /*
 	#################################################################
 	#
@@ -172,6 +173,29 @@ GLOBAL char *um_strncat(char *dest, const char *src, size_t n, size_t max, const
 		loglnposprintf("Warning", errbuf);
 		return dest;
 	}
+}
+
+/*
+ * v6.5.15 [vj] New function makes physical copies of a string
+ *
+ * morealloc is the number of bytes that should be alloced more
+ * for the new string (e.g. if you need to extend the copied string
+ * but leave the original alone)
+ */
+GLOBAL char *um_physical_strcpy(const char *src, size_t morealloc, const char *place)
+{
+	size_t slen; /* length of source string */
+	char *dest;  /* pointer to the new string */
+
+	slen=strlen(src);
+	dest=um_malloc(slen+morealloc+1);
+
+	if (dest != NULL)
+	{
+		dest=um_strcpy(dest, src, slen+morealloc+1, "um_physical_strcpy");
+	}
+
+	return dest;
 }
 
 /*	############################################################
