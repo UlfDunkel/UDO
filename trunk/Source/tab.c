@@ -1220,7 +1220,29 @@ LOCAL void table_output_general ( void )
             {   toffset= indent+1;
             }
         }
-        sprintf(hl[1], "@line %d %d 0", (int) toffset, (int) twidth);
+        if ( twidth > 126 )				/* ST-Guide kennt Linien nur mit einer 	*/
+        {								/* Breite von max 126 Zeichen		 	*/
+        	i = (int) twidth;
+        	twidth = 126;
+   	        sprintf(hl[1], "@line %d %d 0", (int) toffset, (int) twidth);
+			i -= 126;
+			x = (int)toffset + 126;
+			while ( i > 0 )
+			{
+				if ( i > 126 )
+					twidth = 126;
+				else
+					twidth = i;
+				j = (int)strlen ( hl[1] );
+		        sprintf(&hl[1][j], "\n@line %d %d 0", (int) x, (int) twidth);
+				i -= (int)twidth;
+				x += (int)twidth;
+				if ( x > 255 )			/* Max X-Position	*/
+					break;
+			}
+        }
+        else
+	        sprintf(hl[1], "@line %d %d 0", (int) toffset, (int) twidth);
         strcpy(hl[0], hl[1]);
         strcpy(hl[2], hl[1]);
 
