@@ -186,13 +186,16 @@ GLOBAL char *um_physical_strcpy(const char *src, size_t morealloc, const char *p
 {
 	size_t slen; /* length of source string */
 	char *dest;  /* pointer to the new string */
+	char placebuf[120]; /* internal buffer for place handling */
+
+	sprintf(placebuf, "%s: um_physical_strcpy", place);
 
 	slen=strlen(src);
 	dest=um_malloc(slen+morealloc+1);
 
 	if (dest != NULL)
 	{
-		dest=um_strcpy(dest, src, slen+morealloc+1, "um_physical_strcpy");
+		dest=um_strcpy(dest, src, slen+morealloc+1, placebuf);
 	}
 
 	return dest;
