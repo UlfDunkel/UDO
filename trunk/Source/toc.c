@@ -280,7 +280,7 @@ LOCAL void output_helpid(int tocindex)
 	s[0] = '\0';
 	if ( toc[tocindex]->helpid!=NULL )
 	{
-		strcpy(s, toc[tocindex]->helpid);
+		um_strcpy(s, toc[tocindex]->helpid, 256, "output_helpid[1]");
 	} else if (use_auto_helpids)
 	{
 		node2WinAutoID(s, toc[tocindex]->name);
@@ -355,48 +355,48 @@ LOCAL void output_aliasses ( void )
 				case TOWIN:
 				case TOWH4:
 				case TOAQV:
-					strcpy(s, lab[i]->name);
+					um_strcpy(s, lab[i]->name, 256, "output_aliasses[1]");
 					del_internal_styles(s);
 					convert_tilde(s);
 					if (use_alias_inside_index && !no_index)
-					{	strcpy(keyword, s);
+					{	um_strcpy(keyword, s, 256, "output_aliasses[2]");
 						winspecials2ascii(keyword);
 						voutlnf("K{\\footnote K %s}", keyword);
 					}
 					alias2NrWinhelp(s, i);
 					voutlnf("#{\\footnote # %s}", s);
 					if (bDocWinOldKeywords)
-					{	strcpy(s, lab[i]->name);
+					{	um_strcpy(s, lab[i]->name, 256, "output_aliasses[3]");
 						del_internal_styles(s);
 						node2winhelp(s);
 						voutlnf("#{\\footnote # %s}", s);
 					}
 					break;
 				case TORTF:
-					strcpy(s, lab[i]->name);
+					um_strcpy(s, lab[i]->name, 256, "output_aliasses[4]");
 					del_internal_styles(s);
 					convert_tilde(s);
 					if (use_alias_inside_index && !no_index)
-					{	strcpy(keyword, s);
+					{	um_strcpy(keyword, s, 256, "output_aliasses[5]");
 						winspecials2ascii(keyword);
 						voutlnf("{\\xe\\v %s}", keyword);
 					}
 					break;
 				case TOHTM:
 				case TOMHH:
-					um_strcpy(s, lab[i]->name, 256, "output_aliasses [1]");
+					um_strcpy(s, lab[i]->name, 256, "output_aliasses [6]");
 					convert_tilde(s);
 					label2html(s);	/* r6pl2 */
 					voutlnf("<a name=\"%s\"></a>", s);
 					break;	
 				case TOLDS:
-					strcpy(s, lab[i]->name);
+					um_strcpy(s, lab[i]->name, 256, "output_aliasses[7]");
 					convert_tilde(s);
 					voutlnf("<label id=\"%s\">", s);
 					break;	
 				case TOTEX:	/* r5pl9 */
 				case TOPDL:
-					strcpy(s, lab[i]->name);
+					um_strcpy(s, lab[i]->name, 256, "output_aliasses[8]");
 					convert_tilde(s);
 					label2tex(s);
 					voutlnf("\\label{%s}", s);
@@ -485,7 +485,7 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 		case TOWIN:
 		case TOWH4:
 		case TOAQV:
-			strcpy(n, l->name);
+			um_strcpy(n, l->name, 512, "string2reference[1]");
 			replace_udo_tilde(n);
 			replace_udo_nbsp(n);
 			if (l->is_node)
@@ -508,7 +508,7 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 			break;
 
 		case TOIPF:	/* r6pl7 */
-			strcpy(n, l->name);
+			um_strcpy(n, l->name, 512, "string2reference[2]");
 			replace_udo_tilde(n);
 			replace_udo_nbsp(n);
 			if (l->is_node)
@@ -523,7 +523,7 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 
 		case TOSTG:	/* r5pl16 */
 			if (l->ignore_links)
-			{	strcpy(n, l->name);
+			{	um_strcpy(n, l->name, 512, "string2reference[3]");
 				replace_udo_tilde(n);
 				replace_udo_nbsp(n);
 				node2stg(n);
@@ -538,7 +538,7 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 			break;
 
 		case TOAMG:
-			strcpy(s, l->name);
+			um_strcpy(s, l->name, 512, "string2reference[4]");
 			replace_udo_tilde(n);
 			replace_udo_nbsp(n);
 			if (l->is_node)
@@ -546,7 +546,7 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 			}
 			else
 			{	ti= l->tocindex;
-				strcpy(n, lab[toc[ti]->labindex]->name);
+				um_strcpy(n, lab[toc[ti]->labindex]->name, 512, "string2reference[5]");
 			}
 			replace_udo_tilde(n);
 			replace_udo_nbsp(n);
@@ -555,21 +555,21 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 			break;
 
 		case TOTVH:
-			strcpy(n, l->name);
+			um_strcpy(n, l->name, 512, "string2reference[6]");
 			replace_udo_tilde(n);
 			replace_udo_nbsp(n);
-			strcpy(s, n);
+			um_strcpy(s, n, 512, "string2reference[7]");
 			node2vision(s);
 			sprintf(ref, "{%s:%s}", n, s);
 			break;
 
 		case TOPCH:
-			strcpy(n, l->name);
+			um_strcpy(n, l->name, 512, "string2reference[8]");
 			replace_udo_tilde(n);
 			replace_udo_nbsp(n);
 
 			if ( strchr(n, '"')!=NULL )
-			{	strcpy(s, n);
+			{	um_strcpy(s, n, 512, "string2reference[9]");
 				node2pchelp(s);
 				sprintf(ref, "\\link(\"%s\")%s\\#", s, n);
 			}
@@ -585,14 +585,14 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 			break;
 
 		case TOLDS:
-			strcpy(n, l->name);
+			um_strcpy(n, l->name, 512, "string2reference[10]");
 			replace_udo_tilde(n);
 			replace_udo_nbsp(n);
 			sprintf(ref, "<ref id=\"%s\" name=\"%s\">", n, n);
 			break;
 
 		case TOINF:
-			strcpy(n, l->name);
+			um_strcpy(n, l->name, 512, "string2reference[11]");
 			replace_udo_tilde(n);
 			replace_udo_nbsp(n);
 			node2texinfo(n);
@@ -601,11 +601,11 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 
 		case TOHTM:
 		case TOMHH:
-			strcpy(n, l->name);
+			um_strcpy(n, l->name, 512, "string2reference[12]");
 			replace_udo_tilde(n);
 			replace_udo_nbsp(n);
 
-			strcpy(sNoSty, n);
+			um_strcpy(sNoSty, n, 512, "string2reference[13]");
 			del_html_styles(sNoSty);
 			label2html(sNoSty);
 			
@@ -627,7 +627,7 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 			}
 
 			if (ui==0)
-			{	strcpy(hfn, outfile.name);
+			{	um_strcpy(hfn, outfile.name, 512, "string2reference[14]");
 				htmlfilename= hfn;
 			}
 			else
@@ -723,7 +723,7 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 			break;
 
 		case TOPDL:
-			strcpy(n, l->name);
+			um_strcpy(n, l->name, 512, "string2reference[15]");
 			replace_udo_tilde(n);
 			replace_udo_nbsp(n);
 			/* Changed in r6.2pl1 [NHz] */
@@ -733,12 +733,12 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 
 		/* New in r6pl15 [NHz] */
 		case TOKPS:
-			strcpy(n, l->name);
+			um_strcpy(n, l->name, 512, "string2reference[16]");
 			replace_udo_tilde(n);
 			replace_udo_nbsp(n);
 
 			if ( strpbrk(n, " :;\\()/")!=NULL )
-			{	strcpy(s, n);
+			{	um_strcpy(s, n, 512, "string2reference[17]");
 				node2postscript(n, KPS_CONTENT); /* New in r6pl16 [NHz] */
 				node2postscript(s, KPS_NAMEDEST); /* Changed in r6pl16 [NHz] */
 				sprintf(ref, " (%s) /%s 0 0 0 Link", n, s);
@@ -987,8 +987,8 @@ LOCAL BOOLEAN output_raw_file ( const char *filename )
 	char s[1024], old_filename[512], tmp_filename[512];
 	size_t len;
 
-	strcpy(old_filename, filename);
-	strcpy(tmp_filename, filename);
+	um_strcpy(old_filename, filename, 512, "output_raw_file[1]");
+	um_strcpy(tmp_filename, filename, 512, "output_raw_file[2]");
 
 	build_include_filename(tmp_filename, "");
 
@@ -996,7 +996,7 @@ LOCAL BOOLEAN output_raw_file ( const char *filename )
 	
 	if (!file)
 	{
-		strcpy(tmp_filename, old_filename);
+		um_strcpy(tmp_filename, old_filename, 512, "output_raw_file[3]");
 		file = myTextOpen(tmp_filename);
 	}
 
@@ -1614,7 +1614,7 @@ LOCAL void win_headline ( char *name, BOOLEAN popup )
 	if (use_chapter_images)
 	{	
 		if (ti>=0 && toc[ti]->image!=NULL)
-		{	strcpy(n, toc[ti]->image);
+		{	um_strcpy(n, toc[ti]->image, 512, "win_headline[1]");
 			c_begin_center(); 	/* r6pl1 */
 			c_bmp_output(n, "", FALSE);
 			c_end_center();		/* r6pl1 */
@@ -1665,19 +1665,19 @@ LOCAL void output_win_header ( const char *name, const BOOLEAN invisible )
 	{	sprintf(hlp_name, "`%s.hlp'", outfile.name);
 	}
 
-	strcpy(n, name);
+	um_strcpy(n, name, 512, "output_win_header[1]");
 	del_internal_styles(n);	/* r5pl3 */
 
 	outln("{");
 	
 	if (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index)	/* r5pl10 */
-	{	strcpy(f, n);
+	{	um_strcpy(f, n, 512, "output_win_header[2]");
 		winspecials2ascii(f);
 		voutlnf("K{\\footnote K %s}", f);
 	}
 
 	if (bDocWinOldKeywords)
-	{	strcpy(f, n);
+	{	um_strcpy(f, n, 512, "output_win_header[3]");
 		node2winhelp(f);
 		voutlnf("#{\\footnote # %s}", f);
 	}
@@ -2022,7 +2022,7 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 		int hours, minutes;
 	
 		if(strcmp(html_header_date_zone, "") >0)
-			um_strcpy(zone, html_header_date_zone, 9, "output_html_meta1");
+			um_strcpy(zone, html_header_date_zone, 9, "output_html_meta[1]1");
 		else
 		{
 			time(&uhrzeit);
@@ -2885,7 +2885,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 			break;
 		case TOC_NODE2:	/* Verweis auf aktuellen !node */
 			li= toc[last_n1_index]->labindex;
-			strcpy(s, lab[li]->name);
+			um_strcpy(s, lab[li]->name, 512, "html_hb_line[1]");
 #if 1
 			string2reference(anchor, lab[li], TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
 			replace_once(s, lab[li]->name, anchor);
@@ -2902,7 +2902,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 			break;
 		case TOC_NODE3:	/* Verweis auf aktuellen !subnode */
 			li= toc[last_n2_index]->labindex;
-			strcpy(s, lab[li]->name);
+			um_strcpy(s, lab[li]->name, 512, "html_hb_line[2]");
 #if 1
 			string2reference(anchor, lab[li], TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
 			replace_once(s, lab[li]->name, anchor);
@@ -2919,7 +2919,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 			break;
 		case TOC_NODE4:	/* Verweis auf aktuellen !subsubnode */
 			li= toc[last_n3_index]->labindex;
-			strcpy(s, lab[li]->name);
+			um_strcpy(s, lab[li]->name, 512, "html_hb_line[3]");
 #if 1
 			string2reference(anchor, lab[li], TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
 			replace_once(s, lab[li]->name, anchor);
@@ -2975,7 +2975,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 		{	if (i>0)
 			{
 				li= toc[i]->labindex;
-				strcpy(s, lab[li]->name);
+				um_strcpy(s, lab[li]->name, 512, "html_hb_line[4]");
 #if 1
 				string2reference(anchor, lab[li], TRUE, GIF_LF_NAME, uiGifLfWidth, uiGifLfHeight);
 				replace_once(s, lab[li]->name, anchor);
@@ -3053,7 +3053,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 	if (i>0)
 	{
 		li= toc[i]->labindex;
-		strcpy(s, lab[li]->name);
+		um_strcpy(s, lab[li]->name, 512, "html_hb_line[5]");
 #if 1
 		string2reference(anchor, lab[li], TRUE, GIF_RG_NAME, uiGifRgWidth, uiGifRgHeight);
 		replace_once(s, lab[li]->name, anchor);
@@ -3855,6 +3855,8 @@ GLOBAL BOOLEAN save_html_index ( void )
 	HTML_INDEX *html_index;
 	char thisc, lastc;
 	char htmlname[512];
+	char dummy[512];
+	char suff[100];
 	char cLabel[512];
 	char *tocname;
 	char *escapedtocname;
@@ -3938,9 +3940,18 @@ GLOBAL BOOLEAN save_html_index ( void )
 
 		if ( html_index[i].is_node )
 		{
-			fprintf(uif, "<a href=\"%s%s\">%s</a> <br>\n",
-				htmlname, outfile.suff,
-				escapedtocname );
+			fsplit(htmlname, dummy, dummy, dummy, suff);
+			if ( suff[0]==EOS )
+			{
+				fprintf(uif, "<a href=\"%s%s\">%s</a> <br>\n",
+					htmlname, outfile.suff,
+					escapedtocname );
+			}
+			else
+			{
+				fprintf(uif, "<a href=\"%s\">%s</a> <br>\n",
+					htmlname, escapedtocname );
+			}
 		}
 		else
 		{
@@ -4016,15 +4027,15 @@ LOCAL void print_htmlhelp_contents ( FILE *file, const char *indent, const int t
 	if (ti>0)
 	{
 		get_html_filename(ti, filename);
-		strcpy(tocname, toc[ti]->name);
+		um_strcpy(tocname, toc[ti]->name, 512, "print_htmlhelp_contents[1]");
 	}
 	else
 	{
 		strcpy(filename, old_outfile.name);
 		tocname[0]= EOS;
-		if (tocname[0]==EOS && titleprogram[0]!=EOS)	strcpy(tocname, titleprogram);
-		if (tocname[0]==EOS && called_tableofcontents)	strcpy(tocname, lang.contents);
-		if (tocname[0]==EOS && called_maketitle)		strcpy(tocname, lang.title);
+		if (tocname[0]==EOS && titleprogram[0]!=EOS)	um_strcpy(tocname, titleprogram, 512, "print_htmlhelp_contents[2]");
+		if (tocname[0]==EOS && called_tableofcontents)	um_strcpy(tocname, lang.contents, 512, "print_htmlhelp_contents[3]");
+		if (tocname[0]==EOS && called_maketitle)		um_strcpy(tocname, lang.title, 512, "print_htmlhelp_contents[4]");
 	}
 	del_html_styles(tocname);
 	
