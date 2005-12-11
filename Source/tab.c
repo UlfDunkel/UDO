@@ -52,7 +52,7 @@ const char *id_tab_c= "@(#) tab.c       01.02.2004";
 	############################################################	*/
 #define	MAX_CELLS_LEN	1024	/* max. Zeichenanzahl einer Zelle */
 
-#define MAX_TAB_H		512		/* max. Hoehe einer Tabelle */
+#define MAX_TAB_H		600		/* max. Hoehe einer Tabelle */
 #define MAX_TAB_W		64		/* max. Breite einer Tabelle */
 #define MAX_TAB_LABEL	10		/* max. Anzahl der hinter einanderfolgenden Labels */
 #define	TAB_LEFT		0		/* Spalte linksbuendig */
