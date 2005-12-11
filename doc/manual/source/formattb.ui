@@ -2,58 +2,134 @@
 # letzte Änderungen: 29.01.2004 / last changes: Jan 29, 2004
 
 !iflang [german]
-!index Kürzel
 
-!begin_table [|l|l|l|c|] !hline
-(!B)Kürzel(!b) !! (!B)Format-Name(!b) !! (!B)Erläuterung(!b) !! (!B)Plattform(en)(!b)
-!hline
-amg !! AmigaGuide !! Hypertext-System, vorwiegend zur Dokumentation von Amiga-Programmen !! Commodore Amiga
-!hline
-aqv !!Apple QuickView !! älteres Hypertext-Format unter MacOS !! Apple
-!hline
-asc !!ASCII !! "Plain" Text !! alle
-!hline
-drc !! David's Readme Compiler !! DOS-Programm zur Erzeugung menügesteuerter ReadMe's als EXE-Datei  !! MS-DOS
-!hline
-helptag !! HP-Helptag-SGML !! SGML-basiertes Hypertext-Hilfesystem für kommerzielle Unices (HP-UX, Sun Solaris, IBM AIX) !! Unix
-!hline
-html !! HTML (Hypertext Markup Language) !! Seitenauszeichnungssprache, u.a. für Webseiten, Dokumentationen etc. !! plattformunabhängig
-!hline
-hh !! HTMLHelp !! zur Erzeugung von HTML-Help-Dateien unter Windows (HTML-Variante mit Erweiterungen) !! Win32
-!hline
-tex !! (!LaTeX) 2.09, (!LaTeX)2e !! Satzsystem, insbesondere für wissenschaftliche Publikationen !! zahlreiche Plattformen
-!hline
-ipf !! OS/2 IPF !! SGML-basiertes Textformat zur Erzeugung von Hilfedateien (INF, HLP) unter OS/2 !! OS/2
-!hline
-linuxdoc !! Linuxdoc-SGML !! Linuxdoc-SGML (neuerdings: SGMLtools) ist genau wie UDO ein Multiformat-Konverter, der sein eigenes Format in LaTeX, Manualpage, RTF, HTML, Texinfo etc. umwandeln kann !! Unix/Linux
-!hline
-lyx !! LyX !! (!LaTeX)-verwandtes Dokumentenverarbeitungsprogramm !! Unix/Linux
-!hline
-man !! Manualpage !! Unix-/Linux-Hilfeseiten für Kommandozeilenprogramme/-aufrufe !! Unix/Linux
-!hline
-nroff !! NROFF !!  Unix-/Linux-Hilfeseiten für Kommandozeilenprogramme/-aufrufe !! Unix/Linux
-!hline
-pdflatex !! PDF(!LaTeX) !! zur Erzeugung von PDF-Dateien aus (!LaTeX) !! diverse
-!hline
-ps !! PostScript !!  geräteunabhängige Seitenbeschreibungssprache, z.B. zur Ansteuerung von Druckern; kann zur Erstellung von PDF-Dateien genutzt werden (Ghostscript, Adobe Distiller) !! diverse
-!hline
-pchelp !! Pure-C-Help !! Hilfesystem für den Pure C-Compiler !!  Atari ST
-!hline
-rtf !! RTF (Rich Text Format) !! Textformat für den Textaustausch zwischen verschiedenen Textverarbeitungsprogrammen  !! diverse
-!hline
-c, pascal !! Sourcecode (C und Pascal) !! Die UDO-Quelldatei wird in Sourcecode umgewandelt, d.h. normaler Text wird Kommentar, der Inhalt der Sourcecode-Umgebung wird C- bzw. Pascal-Source. !! diverse
-!hline
-stg !! ST-Guide !! Hypertextsystem !! Atari ST
-!hline
-info !! GNU Texinfo !! zur Erzeugung von Online-Dokumentationen mit dem Kommandozeilen-Aufruf (!T)info 'command'(!t) !! Linux, MiNTNet
-!hline
-v !! Turbo-Vision-Help !! zur Erstellung von  Onlinehilfen für DOS-Programme, die mit Borlands Turbo Vision-Library geschrieben wurden !! MS-DOS
-!hline
-udo !! UDO !! führt alle UDO-Eingabedateien in eine einzige zusammen !! alle von UDO unterstützten
-!hline
-win, wh4 !! Windows-Help, WinHelp4 !! RTF-Variante zur Erzeugung von Win-Help-Dateien unter Windows !! Windows (Win16, Win32)
-!hline
-!end_table
+!ifnset var_kuerzel
+	!index Kürzel
+	!set var_kuerzel
+!endif
+
+!begin_xlist [linuxdoc ]
+
+!item [amg]
+AmigaGuide (!nl)
+Hypertext-System, vorwiegend zur Dokumentation von Amiga-Programmen (!nl)
+Commodore Amiga
+
+!item [aqv]
+Apple QuickView (!nl)
+älteres Hypertext-Format unter MacOS (!nl)
+Apple
+
+!item [asc]
+ASCII (!nl)
+"Plain" Text (!nl)
+alle
+
+!item [drc]
+David's Readme Compiler (!nl)
+DOS-Programm zur Erzeugung menügesteuerter ReadMe's als EXE-Datei (!nl)
+MS-DOS
+
+!item [helptag]
+HP-Helptag-SGML (!nl)
+SGML-basiertes Hypertext-Hilfesystem für kommerzielle Unices (HP-UX, Sun Solaris, IBM AIX) (!nl)
+Unix
+
+!item [html]
+HTML (Hypertext Markup Language) (!nl)
+Seitenauszeichnungssprache, u.a. für Webseiten, Dokumentationen etc. (!nl)
+plattformunabhängig
+
+!item [hh]
+HTMLHelp (!nl)
+zur Erzeugung von HTML-Help-Dateien unter Windows (HTML-Variante mit Erweiterungen) (!nl)
+Win32
+
+!item [tex]
+(!LaTeX) 2.09, (!LaTeX)2e  (!nl)
+Satzsystem, insbesondere für wissenschaftliche Publikationen (!nl)
+zahlreiche Plattformen
+
+!item [ipf]
+OS/2 IPF (!nl)
+SGML-basiertes Textformat zur Erzeugung von Hilfedateien (INF, HLP) unter OS/2 (!nl)
+OS/2
+
+!item [linuxdoc]
+Linuxdoc-SGML (!nl)
+Linuxdoc-SGML (neuerdings: SGMLtools) ist genau wie UDO ein Multiformat-Konverter,
+der sein eigenes Format in LaTeX, Manualpage, RTF, HTML, Texinfo etc. umwandeln kann (!nl)
+Unix/Linux
+
+!item [lyx]
+LyX (!nl)
+(!LaTeX)-verwandtes Dokumentenverarbeitungsprogramm (!nl)
+Unix/Linux
+
+!item [man]
+Manualpage (!nl)
+Unix-/Linux-Hilfeseiten für Kommandozeilenprogramme/-aufrufe (!nl)
+Unix/Linux
+
+!item [nroff]
+NROFF (!nl)
+Unix-/Linux-Hilfeseiten für Kommandozeilenprogramme/-aufrufe (!nl)
+Unix/Linux
+
+!item [pdflatex]
+PDF(!LaTeX) (!nl)
+zur Erzeugung von PDF-Dateien aus (!LaTeX) (!nl)
+diverse
+
+!item [ps]
+PostScript (!nl)
+geräteunabhängige Seitenbeschreibungssprache, z.B. zur Ansteuerung von Druckern;
+kann zur Erstellung von PDF-Dateien genutzt werden (Ghostscript, Adobe Distiller) (!nl)
+diverse
+
+!item [pchelp]
+Pure-C-Help (!nl)
+Hilfesystem für den Pure C-Compiler (!nl)
+Atari ST
+
+!item [rtf]
+RTF (Rich Text Format) (!nl)
+Textformat für den Textaustausch zwischen verschiedenen Textverarbeitungsprogrammen (!nl)
+diverse
+
+!item [c, pascal]
+Sourcecode (C und Pascal) (!nl)
+Die UDO-Quelldatei wird in Sourcecode umgewandelt, d.h. normaler Text wird
+Kommentar, der Inhalt der Sourcecode-Umgebung wird C- bzw. Pascal-Source. (!nl)
+diverse
+
+!item [stg]
+ST-Guide (!nl)
+Hypertextsystem (!nl)
+Atari ST
+
+!item [info]
+GNU Texinfo (!nl)
+zur Erzeugung von Online-Dokumentationen mit dem Kommandozeilen-Aufruf
+(!T)info 'command'(!t) (!nl)
+Linux, MiNTNet
+
+!item [v]
+Turbo-Vision-Help (!nl)
+zur Erstellung von  Onlinehilfen für DOS-Programme, die mit Borlands Turbo
+Vision-Library geschrieben wurden (!nl)
+MS-DOS
+
+!item [udo]
+UDO (!nl)
+führt alle UDO-Eingabedateien in eine einzige zusammen (!nl)
+alle von UDO unterstützten
+
+!item [win, wh4]
+Windows-Help, WinHelp4 (!nl)
+RTF-Variante zur Erzeugung von Win-Help-Dateien unter Windows (!nl)
+Windows (Win16, Win32)
+!end_xlist
 
 !begin_ignore
 !begin_xlist [nroff] !short
@@ -88,58 +164,132 @@ win, wh4 !! Windows-Help, WinHelp4 !! RTF-Variante zur Erzeugung von Win-Help-Da
 !endif
 
 !iflang [english]
-!index Abbreviations
+!ifnset var_kuerzel
+	!index Abbreviations
+	!set var_kuerzel
+!endif
 
-!begin_table [|l|l|l|c|] !hline
-(!B)Abbrevation(!b) !! (!B)Format Name(!b) !! (!B)Description(!b) !! (!B)Platform(s)(!b)
-!hline
-amg !! AmigaGuide !! hypertext system, used for documentation of Amiga programs !! Commodore Amiga
-!hline
-aqv !!Apple QuickView !! old hypertext format for MacOS !! Apple
-!hline
-asc !!ASCII !! "plain" text !! all
-!hline
-drc !! David's Readme Compiler !! DOS program for creating menu-driven ReadMe's as EXE-programs !! MS-DOS
-!hline
-helptag !! HP-Helptag-SGML !! SGML-based hypertext helpsystem for commercial Unices (HP-UX, Sun Solaris, IBM AIX) !! Unix
-!hline
-html !! HTML (Hypertext Markup Language) !! page description language -- for websites, documentations and more !! platform-independent
-!hline
-hh !! HTMLHelp !! HTML-related format, for creation of HTML-Help files under windows !! Win32
-!hline
-tex !! (!LaTeX) 2.09, (!LaTeX)2e !! typesetting system, especially for scientific publications !! many platforms
-!hline
-ipf !! OS/2 IPF !! SGML-based text format for creating help files (INF, HLP) under OS/2 !! OS/2
-!hline
-linuxdoc !! Linuxdoc-SGML !! Linuxdoc-SGML (recently: SGMLtools) is -- like UDO -- a multiformat converter which converts its own format to LaTeX, Manualpage, RTF, HTML, Texinfo... !! Unix/Linux
-!hline
-lyx !! LyX !! a (!LaTeX)-related document processor !! Unix/Linux
-!hline
-man !! Manualpage !! Unix-/Linux-help pages for commandline programs !! Unix/Linux
-!hline
-nroff !! NROFF !! Unix-/Linux-help pages for commandline programs !! Unix/Linux
-!hline
-pdflatex !! PDF(!LaTeX) !! for producing PDF files from (!LaTeX) !! several
-!hline
-ps !! PostScript !!  device-independent page description language, e.g. for printers; can also be used for producing PDF files (Ghostscript, Adobe Distiller) !! several
-!hline
-pchelp !! Pure-C-Help !! help system for the Pure C compiler !!  Atari ST
-!hline
-rtf !! RTF (Rich Text Format) !! for exchanging text between different programs and platforms !! several
-!hline
-c, pascal !! Sourcecode (C and Pascal) !! the UDO source file will be converted to sourcecode, meaning normal text becomes comment, the content of the sourcecode environment becomes C-/Pascal-sourcecode !! several
-!hline
-stg !! ST-Guide !! a hypertext system !! Atari ST
-!hline
-info !! GNU Texinfo !! for making online documentations, started with (!T)info 'command'(!t) !! Linux, MiNTNet
-!hline
-v !! Turbo-Vision-Help !! creating online helpfiles for DOS programs written with Borland's Turbo Vision-Library !! MS-DOS
-!hline
-udo !! UDO !! merges all UDO input files into one big file !! all platforms with UDO-support
-!hline
-win, wh4 !! Windows-Help, WinHelp4 !! RTF-derived format for producing WinHelp files under Windows !! Windows (Win16, Win32)
-!hline
-!end_table
+!begin_xlist [linuxdoc ]
+
+!item [amg]
+AmigaGuide (!nl)
+hypertext system, used for documentation of Amiga programs (!nl)
+Commodore Amiga
+
+!item [aqv]
+Apple QuickView (!nl)
+old hypertext format for MacOS (!nl)
+Apple
+
+!item [asc]
+ASCII (!nl)
+"Plain" Text (!nl)
+all
+
+!item [drc]
+David's Readme Compiler (!nl)
+DOS program for creating menu-driven ReadMe's as EXE-programs (!nl)
+MS-DOS
+
+!item [helptag]
+HP-Helptag-SGML (!nl)
+SGML-based hypertext helpsystem for commercial Unices (HP-UX, Sun Solaris, IBM AIX) (!nl)
+Unix
+
+!item [html]
+HTML (Hypertext Markup Language) (!nl)
+page description language -- for websites, documentations and more (!nl)
+platform-independent
+
+!item [hh]
+HTMLHelp (!nl)
+HTML-related format, for creation of HTML-Help files under windows (!nl)
+Win32
+
+!item [tex]
+(!LaTeX) 2.09, (!LaTeX)2e  (!nl)
+typesetting system, especially for scientific publications (!nl)
+many platforms
+
+!item [ipf]
+OS/2 IPF (!nl)
+SGML-based text format for creating help files (INF, HLP) under OS/2 (!nl)
+OS/2
+
+!item [linuxdoc]
+Linuxdoc-SGML (!nl)
+Linuxdoc-SGML (recently: SGMLtools) is -- like UDO -- a multiformat converter
+which converts its own format to LaTeX, Manualpage, RTF, HTML, Texinfo... (!nl)
+Unix/Linux
+
+!item [lyx]
+LyX (!nl)
+a (!LaTeX)-related document processor (!nl)
+Unix/Linux
+
+!item [man]
+Manualpage (!nl)
+Unix-/Linux-help pages for commandline programs (!nl)
+Unix/Linux
+
+!item [nroff]
+NROFF (!nl)
+Unix-/Linux-help pages for commandline programs (!nl)
+Unix/Linux
+
+!item [pdflatex]
+PDF(!LaTeX) (!nl)
+for producing PDF files from (!LaTeX) (!nl)
+diverse
+
+!item [ps]
+PostScript (!nl)
+device-independent page description language, e.g. for printers; can also be
+used for producing PDF files (Ghostscript, Adobe Distiller) (!nl)
+several
+
+!item [pchelp]
+Pure-C-Help (!nl)
+help system for the Pure C compiler (!nl)
+Atari ST
+
+!item [rtf]
+RTF (Rich Text Format) (!nl)
+for exchanging text between different programs and platforms (!nl)
+several
+
+!item [c, pascal]
+Sourcecode (C und Pascal) (!nl)
+the UDO source file will be converted to sourcecode, meaning normal text becomes
+comment, the content of the sourcecode environment becomes C-/Pascal-sourcecode. (!nl)
+several
+
+!item [stg]
+ST-Guide (!nl)
+a hypertext system (!nl)
+Atari ST
+
+!item [info]
+GNU Texinfo (!nl)
+for making online documentations, started with (!T)info 'command'(!t) (!nl)
+Linux, MiNTNet
+
+!item [v]
+Turbo-Vision-Help (!nl)
+creating online helpfiles for DOS programs written with Borland's
+Turbo Vision-Library  (!nl)
+MS-DOS
+
+!item [udo]
+UDO (!nl)
+merges all UDO input files into one big file (!nl)
+all platforms with UDO-support
+
+!item [win, wh4]
+Windows-Help, WinHelp4 (!nl)
+RTF-derived format for producing WinHelp files under Windows (!nl)
+Windows (Win16, Win32)
+!end_xlist
 
 !begin_ignore
 !begin_xlist [htag] !short
