@@ -6751,7 +6751,7 @@ LOCAL void output_preamble ( void )
 		case TOLYX:
 			voutlnf("# This file was created by UDO Version %s.%s.%s", UDO_REL, UDO_SUBVER, UDO_PL);
 			outln("# UDO (C) 1995-2001 by Dirk Hagedorn (info@dirk-hagedorn.de)");
-			outln("# UDO (C) 2001-2005 by The UDO Community (www.udo-open-source.org)");
+			outln("# UDO (C) 2001-2006 by The UDO Community (www.udo-open-source.org)");
 			outln("\\lyxformat 2.10");
 			voutlnf("\\textclass %s", (use_style_book) ? "book" : "article");
 			outln("\\inputencoding latin1");
