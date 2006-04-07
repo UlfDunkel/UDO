@@ -107,6 +107,13 @@ Das hier ist Zelle 1 !! Das hier ist Zelle 2 !! Das hier ist Zelle 3
 !end_table
 # Ende des Beispiels
 !end_ignore
+# ..............................................................................
+!iflang [german]
+!item Neuer Kommandozeilen Parameter -Wl bzw. (--)no-warningslines
+!endif
+!iflang [english]
+!item New command line parameter -Wl bzw. (--)no-warningslines
+!endif
 
 # ..............................................................................
 !end_itemize

@@ -20,7 +20,7 @@
 	############################################################	*/
 #ifndef ID_CLI_C
 #define ID_CLI_C
-const char *id_cli_c= "@(#) cli.c       21.08.1998";
+const char *id_cli_c= "@(#) cli.c       06.04.2006";
 #endif
 
 #include	"import.h"
@@ -35,7 +35,7 @@ const char *id_cli_c= "@(#) cli.c       21.08.1998";
 #include	"cfg.h"
 #include	"msg.h"
 #include	"udo.h"
-#include        "udomem.h"
+#include  "udomem.h"
 
 #ifdef __TOS__
 	#ifdef USE_PCTOS
@@ -95,7 +95,7 @@ LOCAL int getcliopt ( int *counter, const char *arg, const char *argnext, const 
 	############################################################	*/
 typedef struct _cliopt
 {
-	char		longname[16];		/* lange Option								*/
+	char		longname[20];		/* lange Option								*/
 	char		shortname[6];		/* kurze Option								*/
 	char		type;				/* Typ: b=Boolean, c=char[]					*/
 	BOOLEAN	needs2;					/* folgt der Option ein Parameter?			*/
@@ -133,6 +133,7 @@ LOCAL const CLIOPT cliopt[]=
 	{	"--no-idxfile",		"-d",		'b',	FALSE,	&bNoIdxfile,		TRUE	},
 	{	"--no-logfile",		"-l",		'b',	FALSE,	&bNoLogfile,		TRUE	},
 	{	"--no-warnings",	"-W",		'b',	FALSE,	&bNoWarnings,		TRUE	},
+	{	"--no-warningslines",	"-Wl",		'b',	FALSE,	&bNoWarningsLines,		TRUE	},
 	{	"--nroff",			"-n",		'b',	FALSE,	&desttype,			TONRO	},
 	{	"--outfile",		"-o",		'c',	TRUE,	outfile.full,		0		},
 	{	"--pascal",			"-P",		'b',	FALSE,	&desttype,			TOSRP	},
@@ -217,6 +218,7 @@ LOCAL const char	*Prog_Help[]=
 	"-w,    --win           ins WinHelp-Quelltextformat konvertieren\n"
 	"-w4,   --win4          ins WinHelp4-Quelltextformat konvertieren\n"
 	"-W,    --no-warnings   Warnungen unterdruecken\n"
+	"-Wl,   --no-warningslines   Warnungen fuer Zeilenlaenge unterdruecken\n"
 	"-x,    --linuxdoc      ins Linuxdoc-SGML-Format konvertieren\n"
 	"-y,    --no-hypfile    kein Hyphenfile (.uh?) anlegen\n"
 	"-@ F                   Optionen aus der Datei F lesen\n"
@@ -778,6 +780,7 @@ int main ( int argc, const char *argv[] )
 	bUseIdMapFileVB= FALSE;
 	bUseIdMapFileGFA= FALSE;
 	bNoWarnings= FALSE;
+	bNoWarningsLines= FALSE;
 	bForceLong= FALSE;
 	bForceShort= FALSE;
 	bCheckMisc= FALSE;
@@ -792,7 +795,7 @@ int main ( int argc, const char *argv[] )
 	infile.full[0]= EOS;
 	sLogfull[0]= EOS;
 
-	no_stderr_output= FALSE;		/* r5pl9 */
+	no_stderr_output= FALSE;
 
 	if ( (ptr=getenv("LANG"))!=NULL )
 	{	if ( strstr(ptr, "german") )
@@ -824,7 +827,6 @@ int main ( int argc, const char *argv[] )
 	}	/*while*/
 
 
-	/* r6pl6: Kommandos anzeigen */
 	if (bShowArgs)
 	{
 		i= 1;

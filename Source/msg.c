@@ -21,7 +21,7 @@
 
 #ifndef ID_MSG_C
 #define ID_MSG_C
-const char *id_msg_c= "@(#) msg.c       04.02.2004";
+const char *id_msg_c= "@(#) msg.c       04.04.2006";
 #endif
 
 #include "import.h"
@@ -157,7 +157,7 @@ LOCAL void loglnpos ( const char *we, const char *msg )
 	);
 	logln(z);
 
-	show_logln_message(z);	/* r6pl12: Ausgabe ans GUI weiterreichen */
+	show_logln_message(z);	/* Ausgabe ans GUI weiterreichen */
 	
 }	/* loglnpos */
 
@@ -524,17 +524,14 @@ GLOBAL void error_unknown_color ( const char *s )
 {	error_msg_para("unknown color: %s", s);
 }
 
-/* New in V6.5.5 [NHz] */
 GLOBAL void error_wrong_header_date ( const char *s )
 {	error_msg_para("wrong argument !html_header_date: %s, e.g. +01:00", s);
 }
 
-/* New feature #0000053 in V6.5.2 [NHz] */
 GLOBAL void error_empty_header_links ( void )
 {	error_msg_solo("empty !html_header_links");
 }
 
-/* New feature #0000053 in V6.5.2 [NHz] */
 GLOBAL void error_argument_header_links ( const char *s )
 {	error_msg_para("unknown linktype (!html_header_links): %s", s);
 }
@@ -717,7 +714,6 @@ GLOBAL void error_missing_endif ( const char *s, const UINT l )
 	error_msg_solo(m);
 }
 
-
 GLOBAL void error_table_width ( void )
 {	error_msg_solo("too many columns used");
 }
@@ -795,7 +791,11 @@ GLOBAL void error_node4_not_allowed ( void )
 	######################################################################	*/
 
 GLOBAL void note_long_sourceline ( void )
-{	note_msg_solo("check this paragraph");
+{
+	if (!bNoWarnings && !bNoWarningsLines)
+		note_msg_solo("check this paragraph");
+	else
+		note_counter++;
 }
 
 GLOBAL void warning_long_destline ( const char *s,
@@ -804,7 +804,7 @@ GLOBAL void warning_long_destline ( const char *s,
 {
 	char m[512];
 
-	if (!bNoWarnings)
+	if (!bNoWarnings && !bNoWarningsLines)
 	{	sprintf(m, "Warning: %s %u: overfull line: %d", s, lnr, ll);
 		logln(m);
 	}
@@ -813,7 +813,11 @@ GLOBAL void warning_long_destline ( const char *s,
 
 
 GLOBAL void note_short_sourceline ( const char *s )
-{	note_msg_para("check this paragraph", s);
+{
+	if (!bNoWarnings && !bNoWarningsLines)
+		note_msg_para("check this paragraph", s);
+	else
+		note_counter++;
 }
 
 GLOBAL void warning_short_destline ( const char *s,
@@ -823,7 +827,7 @@ GLOBAL void warning_short_destline ( const char *s,
 {
 	char m[512];
 
-	if (!bNoWarnings)
+	if (!bNoWarnings && !bNoWarningsLines)
 	{	sprintf(m, "Warning: %s %u: underfull line: %d: %s", s, lnr, ll, w);
 		logln(m);
 	}
