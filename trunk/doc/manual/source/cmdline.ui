@@ -75,7 +75,7 @@ The name of the source file has to be the last option.
 
 #Ausgabe-Formate
 !iflang [german]
-!begin_tlist [-W, (--)no-warnings]
+!begin_tlist [-W, (--)no-warningslines]
 
 !item [-@ F] UDO liest dann aus der Datei "F" die Optionen. In dieser Datei muﬂ in jeder Zeile genau eine Option stehen.
 
@@ -185,6 +185,9 @@ welche Dateien andere Dateien nachladen.
 
 !item [-W, (--)no-warnings] UDO gibt keine Warnungen, sondern nur Fehler aus.
 
+!item [-Wl, (--)no-warningslines] Warnungen f‹r Zeilenl‰nge unterdr‹cken. Macht nur Sinn, wenn
+          UDO Warnungen ausgeben soll.
+
 !item [-x, (--)linuxdoc] Die (!U)Quelldatei(!u) wird ins Linuxdoc-SGML-Format umgewandelt.
 
 !item [-y, (--)no-hypfile] (!B)UDO(!b) legt (bei gleichzeitiger Verwendung von -o) keine Datei mit Trennvorschl‰gen an.
@@ -194,7 +197,7 @@ welche Dateien andere Dateien nachladen.
 !endif
 # ------------------------------------------------------------------------------
 !iflang [english]
-!begin_tlist [-W, (--)no-warnings]
+!begin_tlist [-W, (--)no-warningslines]
 
 !item [-@ F] UDO will read the options from the file named ""F"".
 This file should contain exactly one option per line.
@@ -298,6 +301,9 @@ This allows to put all source files into one udo file.
 !item [-4, (--)win4] The (!U)source file(!u) will be converted to Windows Help 4 sourcecode.
 
 !item [-W, (--)no-warnings] Warnings will be suppressed. Error messages will still be printed.
+
+!item [-Wl, (--)no-warningslines] Warnings for line len suppressed. Macht nur Sinn, wenn
+          UDO Warnungen ausgeben soll.
 
 !item [-x, (--)linuxdoc] The (!U)source file(!u) will be converted to Linuxdoc-SGML.
 
