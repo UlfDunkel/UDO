@@ -71,7 +71,7 @@ typedef struct _defs
 	--------------------------------------------------	*/
 typedef struct _placeholder				
 {
-	char	magic[6];	/* Eine Steuermarke <ESC><0xB0+nr>	*/
+	char	magic[10];	/* Eine Steuermarke <ESC><0xB0+nr>	*/
 	char	*entry;		/* Das komplette Kommando			*/
 	char	*text;		/* Nur Text (wichtig fuer toklen())	*/
 	BOOLEAN	replaced;	/* TRUE: PH ist bereits ersetzt worden */

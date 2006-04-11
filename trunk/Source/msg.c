@@ -656,6 +656,10 @@ GLOBAL void error_long_define_cont ( int len )
 	error_msg_para("definition contents longer than %s characters", s);
 }
 
+GLOBAL void error_too_many_placeholder ( void )
+{	error_msg_solo("too many placeholder used");
+}
+
 GLOBAL void error_too_many_symbols ( void )
 {	error_msg_solo("too many symbols used");
 }

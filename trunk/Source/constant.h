@@ -169,7 +169,7 @@
 
 
 #define	OFFSET_PHOLD	33		/* ESC/Magic/#+offset/ESC	*/
-#define	MAXPHOLDS		200		/* max. Platzhalter pro Absatz */
+#define	MAXPHOLDS		600		/* max. Platzhalter pro Absatz */
 
 #define	OFFSET_SPECCMD	33		/* ESC/Magic/#+offset/ESC	*/
 #define	MAXSPECCMDS		200		/* max. Platzhalter pro Absatz */
