@@ -52,6 +52,8 @@ GLOBAL BOOLEAN	bUseIdMapFilePas;	/* Jump-ID-File fuer HPJ?		*/
 GLOBAL BOOLEAN	bUseIdMapFileVB;	/* Jump-ID-File fuer HPJ?		*/
 GLOBAL BOOLEAN	bUseIdMapFileGFA;	/* Jump-ID-File fuer HPJ?		*/
 GLOBAL BOOLEAN	bNoWarnings;		/* Keine Warnungen ausgeben?	*/
+GLOBAL BOOLEAN	bNoWarningsLines;	/* Keine Warnungen ausgeben, bei*/
+                                    /* zu langen oder kurzen Zeilen */
 GLOBAL BOOLEAN	bForceLong;			/* Immer lange Dateinamen?		*/
 GLOBAL BOOLEAN	bForceShort;		/* Immer kurze Dateinamen?		*/
 

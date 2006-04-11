@@ -545,20 +545,9 @@ GLOBAL BOOLEAN add_placeholder ( char *entry, char *rawtext )
 			return FALSE;
 		}
 
-		if (phold_counter+OFFSET_PHOLD==(int) '~')		/* PL8 */
-		{	phold_counter++;
-		}
-		if (phold_counter+OFFSET_PHOLD==(int) '\177')	/* PL8 */
-		{	phold_counter++;
-		}
-		if (phold_counter+OFFSET_PHOLD==(int) '@')
-		{	phold_counter++;
-		}
-
-		sprintf(phold[phold_counter].magic, "\033%c%c\033",
+		sprintf(phold[phold_counter].magic, "\033%c%04i\033",
 			C_PHOLD_MAGIC, phold_counter+OFFSET_PHOLD);
-		
-		
+
 		phold[phold_counter].entry= eptr;
 		phold[phold_counter].text= tptr;
 		
@@ -567,7 +556,9 @@ GLOBAL BOOLEAN add_placeholder ( char *entry, char *rawtext )
 
 		return TRUE;
 	}
-	
+	else
+		error_too_many_placeholder ();	
+
 	return FALSE;
 }	/* add_placeholder */
 

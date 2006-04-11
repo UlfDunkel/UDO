@@ -105,6 +105,7 @@ GLOBAL void error_long_macro_cont ( int len );
 GLOBAL void error_too_many_defines ( void );
 GLOBAL void error_long_define_name ( int len );
 GLOBAL void error_long_define_cont ( int len );
+GLOBAL void error_too_many_placeholder ( void );
 GLOBAL void error_too_many_symbols ( void );
 GLOBAL void error_unset_symbol ( const char *s );
 GLOBAL void error_too_many_hyphens ( void );

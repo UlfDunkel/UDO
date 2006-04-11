@@ -4752,6 +4752,8 @@ LOCAL void insert_nl_token_buffer ( void )
 	------------------------------------------------------------	*/
 GLOBAL size_t toklen ( char *s )
 {
+	char n[5];
+	int i;
 	size_t len;
 	char *ptr;
 	
@@ -4782,7 +4784,13 @@ GLOBAL size_t toklen ( char *s )
 					case C_PHOLD_MAGIC:
 						/* Laenge des Linktexts addieren */
 						ptr++;
-						len+= pholdlen(*ptr-OFFSET_PHOLD);
+						n[0] = *(ptr++);
+						n[1] = *(ptr++);
+						n[2] = *(ptr++);
+						n[3] = *ptr;
+						n[4] = '\0';
+						i = atoi ( n );
+						len+= pholdlen( i - OFFSET_PHOLD);
 						/* Und noch das ESC ueberspringen */
 						ptr++;
 						break;
