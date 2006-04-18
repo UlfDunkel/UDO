@@ -51,9 +51,9 @@ Folgende Maximalwerte müssen Sie beim Erstellen der Quelltexte beachten:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Querverweise pro Absatz:]          (!MAXLINK)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Zeilen pro Tabelle:]               256
+!item [Zeilen pro Tabelle:]               (!MAXLINETABLE)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Spalten pro Tabelle:]              32
+!item [Spalten pro Tabelle:]              (!MAXCOLUMSTABLE)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Zeichen pro Tabellen-Zelle:]       1000
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -86,9 +86,9 @@ You can use source files that don't exceed these maximum values:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Links per paragraph:]                 (!MAXLINK)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Rows per table:]                      256
+!item [Rows per table:]                      (!MAXLINETABLE)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Columns per table:]                   32
+!item [Columns per table:]                   (!MAXCOLUMSTABLE)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Chars per table cell:]                1000
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

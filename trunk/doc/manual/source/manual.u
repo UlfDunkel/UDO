@@ -354,8 +354,8 @@
 !define MAXMACRO       1000
 !define MAXDEFINE       128
 !define MAXSYMLEN        32
-
-
+!define MAXLINETABLE    600
+!define MAXCOLUMSTABLE	 64
 ################################################################################
 # Jetzt geht's lohooos...
 ################################################################################
