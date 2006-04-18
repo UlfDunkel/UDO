@@ -58,7 +58,6 @@
 # ----------------------------------------------------------------
 
 #!html_merge_nodes
-#!html_use_xlist
 #!no_images [html]
 
 # ----------------------------------------------------------------
@@ -85,7 +84,7 @@
 !use_alias_inside_index [stg,win,wh4,html,pch,asc,ipf,hh,info]
 !use_auto_toptocs [stg,win,wh4,html,pch,ipf,hh,info]
 
-#!use_short_toc [stg,win,wh4,html,pch,ipf,hh]
+#!use_short_tocs [stg,win,wh4,html,pch,ipf,hh]
 #!no_toc_subsubnodes [stg,win,wh4,html,pch,ipf,hh]
 
 !use_auto_subtocs [stg,win,wh4,html,pch,ipf,hh,info]

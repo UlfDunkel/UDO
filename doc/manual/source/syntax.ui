@@ -740,12 +740,9 @@ direkt nach (!KW [begin_document]) eingesetzt werden. UDO erlaubt zwar
 auch die Verwendung an anderer Stelle im Quelltext, jedoch ist dies
 nicht unproblematisch.
 
-!index (!kw [no_toc_subnodes])
-!index (!kw [no_toc_subsubnodes])
-!index (!kw [no_toc_subsubsubnodes])
-Der Umfang dieses Inhaltsverzeichnisses l‰ﬂt sich durch die Schalter
-(!KW [no_toc_subnodes]), (!KW [no_toc_subsubnodes]) und (!KW [no_toc_subsubsubnodes])
-beeinflussen. Wird einer dieser Schalter im
+!index (!kw [toc])
+Der Umfang dieses Inhaltsverzeichnisses l‰ﬂt sich durch den Schalter
+(!KW [toc]) beeinflussen. Wird dieser Schalter im
 Vorspann mit dem jeweiligen K¸rzel des betroffenen Ausgabeformats
 angegeben, so sorgt UDO daf¸r, daﬂ ein entsprechend eingeschr‰nktes
 Inhaltsverzeichnis ausgegeben wird.
@@ -841,11 +838,8 @@ source file.
 You should use (!KW [tableofcontents]) directly after (!KW [maketitle])
 or (!KW [begin_document]) to avoid problems.
 
-!index (!kw [no_toc_subnodes])
-!index (!kw [no_toc_subsubnodes])
-!index (!kw [no_toc_subsubsubnodes])
-By using the switches (!KW [no_toc_subnodes]),
-(!KW [no_toc_subsubnodes]) and (!KW [no_toc_subsubsubnodes]) you can
+!index (!kw [toc])
+By using the switch (!KW [toc]) you can
 decrease the size of the table of contents. This is useful when writing
 large hypertexts.
 
@@ -1846,12 +1840,16 @@ beinhaltet, so muﬂ man dieser Klammer ein Ausrufezeichen
 voranstellen, damit UDO erkennt, daﬂ die folgende eckige Klammer
 noch zum ""linken Teil"" des Punktes z‰hlt.
 
-!index (!kw [use_xlist])
-!item HTML, Linuxdoc-SGML und Texinfo bietet keine direkte
-Unterst¸tzung f¸r Listen diesen Typs, daher werden Listen wie
-Beschreibungen behandelt. Benutzt man jedoch den Schalter
-(!KW [use_xlist]) im Vorspann, werden diese Listen wie beim
-ASCII-Format ausgegeben, jedoch dann als vorformatierter Text,
+!index (!kw [html_no_xlist])
+!item Bei HTML erzeugt fÅr diese Listen Tabellen Leider
+unterscheiden sich Navigator und IE bei der Ausgabe der Tabellen.
+Falls nicht gewÅnscht kann man per (!KW [html_no_xlist]) veranlassen,
+daû die Listen als description-Umgebungen ausgeben werden.
+# !item HTML, Linuxdoc-SGML und Texinfo bietet keine direkte
+# Unterst¸tzung f¸r Listen diesen Typs, daher werden Listen wie
+# Beschreibungen behandelt. Benutzt man jedoch den Schalter
+# (!KW [use_xlist]) im Vorspann, werden diese Listen wie beim
+# ASCII-Format ausgegeben, jedoch dann als vorformatierter Text,
 
 !index (!kw [rtf_charwidth])
 !index (!kw [win_charwidth])
@@ -1953,11 +1951,16 @@ You have to notice some aspects:
 it with an exclamation mark so that UDO will recognize that this ""]"" shall
 be part of the item and shall be displayed on the ""left side"".
 
-!item	HTML, Linuxdoc-SGML and Texinfo don't support an environment like
-UDO's xlist environment. In these formats the xlist environments are
-displayed like a description environment by default. But if you use the
-switch (!KW [use_xlist]) inside the preamble UDO will print xlist
-environments like in ASCII, but with preformatted text.
+!index (!kw [html_no_xlist])
+!item Bei HTML erzeugt fÅr diese Listen Tabellen Leider
+unterscheiden sich Navigator und IE bei der Ausgabe der Tabellen.
+Falls nicht gewÅnscht kann man per (!KW [html_no_xlist]) veranlassen,
+daû die Listen als description-Umgebungen ausgeben werden.
+# !item	HTML, Linuxdoc-SGML and Texinfo don't support an environment like
+# UDO's xlist environment. In these formats the xlist environments are
+# displayed like a description environment by default. But if you use the
+# switch (!KW [use_xlist]) inside the preamble UDO will print xlist
+# environments like in ASCII, but with preformatted text.
 
 !item	UDO doesn't know the character widths when converting the source
 file to RTF and Windows Help. If the indents are too wide you can adjust the
@@ -6182,9 +6185,9 @@ anders als f¸r die anderen Formate setzt:
 !begin_quote
 !begin_verbatim
 !ifdest [win]
-!title Die Windows-Hilfe zu
+!docinfo [title] Die Windows-Hilfe zu
 !else
-!title Die Anleitung zu
+!docinfo [title] Die Anleitung zu
 !endif
 !end_verbatim
 !end_quote
@@ -6197,9 +6200,9 @@ sich demnach auch folgendermaﬂen darstellen:
 !begin_quote
 !begin_verbatim
 !ifndest [win]
-!title Die Anleitung zu
+!docinfo [title] Die Anleitung zu
 !else
-!title Die Windows-Hilfe zu
+!docinfo [title] Die Windows-Hilfe zu
 !endif
 !end_verbatim
 !end_quote
@@ -6213,9 +6216,9 @@ verpassen:
 !begin_quote
 !begin_verbatim
 !ifdest [win,html,stg,htag]
-!title Der Hypertext zu
+!docinfo [title] Der Hypertext zu
 !else
-!title Die Anleitung zu
+!docinfo [title] Die Anleitung zu
 !endif
 !end_verbatim
 !end_quote
@@ -6243,9 +6246,9 @@ Help:
 !begin_quote
 !begin_verbatim
 !ifdest [win]
-!title The Windows Help to
+!docinfo [title] The Windows Help to
 !else
-!title The guide to
+!docinfo [title] The guide to
 !endif
 !end_verbatim
 !end_quote
@@ -6258,9 +6261,9 @@ destination format. Thus you can write the upper example this way, too:
 !begin_quote
 !begin_verbatim
 !ifndest [win]
-!title The guide to
+!docinfo [title] The guide to
 !else
-!title The Windows Help to
+!docinfo [title] The Windows Help to
 !endif
 !end_verbatim
 !end_quote
@@ -6273,9 +6276,9 @@ document title for hypertext formats:
 !begin_quote
 !begin_verbatim
 !ifdest [win,html,stg,htag]
-!title The hypertext to
+!docinfo [title] The hypertext to
 !else
-!title The guide to
+!docinfo [title] The guide to
 !endif
 !end_verbatim
 !end_quote
@@ -6324,9 +6327,9 @@ einem Quelltext unterbringen:
 !begin_quote
 !begin_verbatim
 !iflang [german]
-!title Die Benutzeranleitung zu
+!docinfo [title] Die Benutzeranleitung zu
 !else
-!title The User's Guide to
+!docinfo [title] The User's Guide to
 !endif
 !end_verbatim
 !end_quote
@@ -6339,9 +6342,9 @@ also auch so ausdr¸cken:
 !begin_quote
 !begin_verbatim
 !ifnlang [german]
-!title The User's Guide to
+!docinfo [title] The User's Guide to
 !else
-!title Die Benutzeranleitung zu
+!docinfo [title] Die Benutzeranleitung zu
 !endif
 !end_verbatim
 !end_quote
@@ -6385,9 +6388,9 @@ source file:
 !begin_quote
 !begin_verbatim
 !iflang [german]
-!title Die Benutzeranleitung zu
+!docinfo [title] Die Benutzeranleitung zu
 !else
-!title The User's Guide to
+!docinfo [title] The User's Guide to
 !endif
 !end_verbatim
 !end_quote
@@ -6400,9 +6403,9 @@ destination language. Thus you can write the upper example this way, too:
 !begin_quote
 !begin_verbatim
 !ifnlang [german]
-!title The User's Guide to
+!docinfo [title] The User's Guide to
 !else
-!title Die Benutzeranleitung zu
+!docinfo [title] Die Benutzeranleitung zu
 !endif
 !end_verbatim
 !end_quote

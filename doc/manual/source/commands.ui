@@ -7961,7 +7961,7 @@ as descriptions, as before. Default behaviour is now to use tables instead.
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~1
 
 !item [(!SEEALSO)]
-(!KW [use_xlist])
+# (!KW [use_xlist])
 
 !end_xlist
 
@@ -12674,6 +12674,7 @@ to suppress line for the WinHelp and IPF formats.
 !end_node
 
 ################################################################################
+!ifset OldKeywords
 !begin_node (!kw [no_toc_subnodes])
 !html_name cmd_no_toc_subnodes.html
 
@@ -12717,6 +12718,8 @@ the (!KW [toc]) command.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~8
 
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
 !iflang [german]
 !item [(!SEEALSO)]
 (!KW [tableofcontents]), (!KW [toc]), (!KW [depth]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
@@ -12729,8 +12732,9 @@ the (!KW [toc]) command.
 !end_xlist
 
 !end_node
-
+!endif
 ################################################################################
+!ifset OldKeywords
 !begin_node (!kw [no_toc_subsubnodes])
 !html_name cmd_no_toc_subsubnodes.html
 
@@ -12771,6 +12775,8 @@ the (!KW [toc]) command.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~8
 
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
 !iflang [german]
 !item [(!SEEALSO)]
 (!KW [tableofcontents]), (!KW [toc]), (!KW [depth]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
@@ -12783,8 +12789,9 @@ the (!KW [toc]) command.
 !end_xlist
 
 !end_node
-
+!endif
 ################################################################################
+!ifset OldKeywords
 !begin_node (!kw [no_toc_subsubsubnodes])
 !html_name cmd_no_toc_subsubsubnodes.html
 
@@ -12826,6 +12833,8 @@ the (!KW [toc]) command.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~8
 
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
 !iflang [german]
 !item [(!SEEALSO)]
 (!KW [tableofcontents]), (!KW [toc]), (!KW [depth]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
@@ -12838,7 +12847,7 @@ the (!KW [toc]) command.
 !end_xlist
 
 !end_node
-
+!endif
 ################################################################################
 !begin_node (!kw [no_umlaute])
 !html_name cmd_no_umlaute.html
@@ -18837,6 +18846,7 @@ means that chapters will be printed as ""Chapter~#"".
 !end_node
 
 ################################################################################
+!ifset OldKeywords
 !begin_node (!kw [use_xlist])
 !html_name cmd_use_xlist.html
 
@@ -18884,7 +18894,7 @@ like in ASCII and with the use of the preformatted tag.
 !end_xlist
 
 !end_node
-
+!endif
 ################################################################################
 !end_node
 
