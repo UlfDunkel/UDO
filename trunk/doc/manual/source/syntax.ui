@@ -757,9 +757,8 @@ Unterabschnitte etc. in der Form eines kleinen Inhaltsverzeichnisses
 angeben können. Sinn und Zweck dieser sogenannten
 ""Unterinhaltsverzeichnisse"" ist es, dem Leser eines Hypertextformates
 (ST-Guide, Pure-C-Help, HTML, WinHelp) das direkte Weiterlesen zu
-ermöglichen. Besonders beim Einsatz von (!KW [no_toc_subnodes]) oder
-der verwandten Schalter empfiehlt sich der Gebrauch dieser
-Inhaltsverzeichnisse.
+ermöglichen. Besonders beim Einsatz von (!KW [tableofcontents]) !/depth
+empfiehlt sich der Gebrauch dieser Inhaltsverzeichnisse.
 
 !index (!kw [use_auto_subsubsubtocs])
 !index (!kw [use_auto_subsubtocs])
@@ -796,12 +795,6 @@ eigenen Seite
 Abschnitts
 !item [(!KW [subsubsubtoc]):]          Ausgabe aller Paragraphen eines
 Unterabschnitts
-!item [(!KW [no_toc_subnodes]):]       Im Inhaltsverzeichnis nur die Kapitel
-auflisten.
-!item [(!KW [no_toc_subsubnodes]):]    Im Inhaltsverzeichnis nur die Kapitel und
-Abschnitte auflisten.
-!item [(!KW [no_toc_subsubsubnodes]):] Im Inhaltsverzeichnis nur die Kapitel,
-Abschnitte und Unterabschnitte auflisten.
 !item [(!KW [use_auto_subtocs]):]      Bei jedem Kapitel automatisch alle zugehörigen Abschnitte auflisten
 !item [(!KW [use_auto_subsubtocs]):]   Bei jedem Abschnitt automatisch alle zugehörigen Unterabschnitte auflisten
 !item [(!KW [use_auto_subsubsubtocs]):] Bei jedem Unterabschnitt alle zugehörigen
@@ -883,14 +876,6 @@ manually by using (!KW [subtoc]) etc.
 		Prints all subsections of a section.
 !item [(!KW [subsubsubtoc]):]
 		Prints all paragraphs of a subsection.
-!item [(!KW [no_toc_subnodes]):]
-		Tells UDO that it has to print only the chapter names inside the
-		table of contents.
-!item [(!KW [no_toc_subsubnodes]):]
-		The table of contents lists only the chapters and sections.
-!item [(!KW [no_toc_subsubsubnodes]):]
-		The table of contents lists only the chapters, sections and
-		subsections.
 !item [(!KW [use_auto_subtocs]):]
 		Print all sections of a chapter automatically.
 !item [(!KW [use_auto_subsubtocs]):]
@@ -1841,10 +1826,10 @@ voranstellen, damit UDO erkennt, daß die folgende eckige Klammer
 noch zum ""linken Teil"" des Punktes zählt.
 
 !index (!kw [html_no_xlist])
-!item Bei HTML erzeugt fr diese Listen Tabellen Leider
+!item Bei HTML erzeugt für diese Listen Tabellen Leider
 unterscheiden sich Navigator und IE bei der Ausgabe der Tabellen.
-Falls nicht gewnscht kann man per (!KW [html_no_xlist]) veranlassen,
-da die Listen als description-Umgebungen ausgeben werden.
+Falls nicht gewünscht kann man per (!KW [html_no_xlist]) veranlassen,
+daß die Listen als description-Umgebungen ausgeben werden.
 # !item HTML, Linuxdoc-SGML und Texinfo bietet keine direkte
 # Unterstützung für Listen diesen Typs, daher werden Listen wie
 # Beschreibungen behandelt. Benutzt man jedoch den Schalter
@@ -1952,10 +1937,10 @@ it with an exclamation mark so that UDO will recognize that this ""]"" shall
 be part of the item and shall be displayed on the ""left side"".
 
 !index (!kw [html_no_xlist])
-!item Bei HTML erzeugt fr diese Listen Tabellen Leider
+!item Bei HTML erzeugt für diese Listen Tabellen Leider
 unterscheiden sich Navigator und IE bei der Ausgabe der Tabellen.
-Falls nicht gewnscht kann man per (!KW [html_no_xlist]) veranlassen,
-da die Listen als description-Umgebungen ausgeben werden.
+Falls nicht gewünscht kann man per (!KW [html_no_xlist]) veranlassen,
+daß die Listen als description-Umgebungen ausgeben werden.
 # !item	HTML, Linuxdoc-SGML and Texinfo don't support an environment like
 # UDO's xlist environment. In these formats the xlist environments are
 # displayed like a description environment by default. But if you use the
