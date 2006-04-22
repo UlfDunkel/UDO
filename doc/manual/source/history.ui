@@ -1644,7 +1644,7 @@ cases it was impossible not to change the syntax of some commands.
         !item (!kw [german]), (!kw [english]), (!kw [french]) etc.
            existieren nicht mehr und wurden durch den Befehl (!KW [language])
            ersetzt.
-        !item (!KW [no_toc_subnodes]) kann nun durch (!KW [tableofcontents] [!depth 1])
+        !item (!kw [no_toc_subnodes]) kann nun durch (!KW [tableofcontents] [!depth 1])
            ersetzt werden.
         !item Die Befehle zum Setzen des Zeichensatzes haben
            sich geändert. Jetzt gibt es nur noch einen Befehl (!KW [code]).
@@ -1681,7 +1681,7 @@ cases it was impossible not to change the syntax of some commands.
         !item (!kw [german]), (!kw [english]), (!kw [french]) etc.
            don't exist any more and have been replaced by the (!KW [language])
            command.
-        !item (!KW [no_toc_subnodes]) can be replace by (!KW [tableofcontents] [!depth 1])
+        !item (!kw [no_toc_subnodes]) can be replace by (!KW [tableofcontents] [!depth 1])
            now.
         !item The commands to switch the character set have changed.
            The command (!KW [code]) replaces the old commands (!kw [code_dos])
@@ -1820,8 +1820,8 @@ cases it was impossible not to change the syntax of some commands.
         !item (!KW [image*]): Zum Erzeugen von Bildunterschriften ohne ""Abbildung #:"".
         !item (!KW [image_counter]): Zum Setzen des Bildzählers.
         !item (!KW [no_index]): Soll kein Index erzeugt werden?
-        !item (!KW [no_toc_subnodes]), (!KW [no_toc_subsubnodes]),
-          (!KW [no_toc_subsubsubnodes]): Zur Verringerung des Umfangs des Inhaltsverzeichnisses
+        !item (!kw [no_toc_subnodes]), (!kw [no_toc_subsubnodes]),(!kw [no_toc_subsubsubnodes]):
+              Zur Verringerung des Umfangs des Inhaltsverzeichnisses
         !item (!KW [no_preamble]): Falls man selber die Präambel zu einem Format
           erstellen möchte.
         !item (!KW [parwidth]): Zur Veränderung der Zeilenbreite des
@@ -1888,7 +1888,7 @@ cases it was impossible not to change the syntax of some commands.
           For changing the image counter.
         !item (!KW [no_index]):
           For suppressing index command conversion.
-        !item (!KW [no_toc_subnodes]), (!KW [no_toc_subsubnodes]), (!KW [no_toc_subsubsubnodes]):
+        !item (!kw [no_toc_subnodes]), (!kw [no_toc_subsubnodes]), (!kw [no_toc_subsubsubnodes]):
           For making the table of contents smaller.
         !item (!KW [no_preamble]):
           Useful if you want to write your own preamble.
