@@ -4024,6 +4024,31 @@ images will be displayed left justified.
 !endif
 
 ################################################################################
+# ToDo: englisch
+#       Beschreibung richtig?
+!begin_node *.eps & te(!TeX)
+!html_name pictures_tex_te.html
+
+!index (!kw [tex_tetex])
+!iflang [german]
+Wenn man EPS-Grafiken in ein (!LaTeX)-File einbinden möchte, welches mit dem
+te(!TeX) weiterverabeitet werden soll, so (!B)muß(!b) im
+Vorspann das Kommando (!KW [tex_tetex]) gesetzt werden.
+
+!endif
+
+!iflang [english]
+If you are using CS-(!TeX) or Multi(!TeX) and you want to include a GEM
+image into your DVI file you have to add (!KW [tex_strunk]) to your
+preamble.
+
+Because the drivers of CS-(!TeX) support the macros of Lindner-(!TeX) the
+same is done here as in the upper section.
+!endif
+
+!end_node
+
+################################################################################
 !begin_node *.img & ST-Guide
 !html_name pictures_stg.html
 
