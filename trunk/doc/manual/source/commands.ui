@@ -3704,6 +3704,115 @@ UDO will output nothing.
 !end_node
 
 ################################################################################
+# ToDo: englisch
+!begin_node (!kw [doclayout])
+!html_name cmd_doclayout.html
+
+!iflang [german]
+Setzen von Informationen für das Layout.
+!endif
+!iflang [english]
+Set document information.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/doclayout [<(!FORMAT)>][<name>] <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando dient dazu, verschiedene Informationen für
+das Layout. zu setzen. ""<name>"" kann dabei einer
+der folgenden Werte sein:
+
+!begin_description
+
+!item [paper]
+!doclayout [ps] [paper] foo (!nl)
+Mögliche Angaben für foo sind: A3PORTRAIT, A3LANDSCAPE,
+A4PORTRAIT, A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE
+
+!item [propfontname]
+!doclayout [ps] [propfontname] foo (!nl)
+Mögliche Angaben für foo sind Zeichensatznamen, z. B. Arial,
+Times New Roman, sans oder sans serif.
+
+Hinweis: Für die Postscriptausgabe gilt zur Zeit: Wenn dort irgendwas
+mit "Helvetica", "Arial" oder "sans-serif" steht wird "Helvetica" gesetzt,
+ansonsten "Times New Roman".
+
+!item [propfontsize]
+!doclayout [ps] [propfontsize] foo
+Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+
+!item [monofontname]
+
+!item [monofontsize]
+Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+
+!item [node1size] 
+!doclayout [ps,rtf] [node1size] foo (!nl)
+Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+
+seit Release~6 Patchlevel~16
+
+!item [node2size]
+!doclayout [ps,rtf] [node2size] foo (!nl)
+Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+
+seit Release~6 Patchlevel~16
+
+!item [node3size]
+!doclayout [ps,rtf] [node3size] foo (!nl)
+Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+
+seit Release~6 Patchlevel~16
+
+!item [node4size]
+!doclayout [ps,rtf] [node4size] foo (!nl)
+Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+
+seit Release~6 Patchlevel~16
+
+!item [openMode]
+Mögliche Angaben für foo sind die entsprechenden Angaben in
+der Dokumentation zu den pdfmarks.
+
+!end_description
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!item [(!DESCRIPTION)]
+
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE2)]
+(!T)
+!begin_verbatim
+!end_verbatim
+(!t)
+!endif
+
+!iflang [english]
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15, Teile erst ab 
+
+!iflang [german]
+!item [(!SEEALSO)]
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
 !ifset OldKeywords
 !begin_node (!kw [drc])
 !html_name cmd_drc.html
@@ -6285,7 +6394,8 @@ name, including extension, of the file name.
 !end_node
 
 ################################################################################
-!begin_node (!kw [html_backpage])
+# ToDo: Englisch
+!begin_node (!kw [s])
 !html_name cmd_html_backpage.html
 
 !iflang [german]
@@ -6299,13 +6409,14 @@ Specify link for ""Go up"" button button on title page (HTML only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_backpage <URL>(!t)
+!item [(!SYNTAX)] (!T)!/html_backpage <URL> '<(!TEXT)'(!t)
 
 !iflang [german]
 !item [(!DESCRIPTION)]
 Mit diesem Kommando können Sie eine URL angeben, die
 für den Verweis für den ""Go up""-Button in der
 Kopfzeile der Hauptseite bei HTML-Dateien verwendet werden soll.
+Es besteht die Möglichkeit zusätzlichen einen Verweistext anzugeben.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -6316,8 +6427,8 @@ clicks on the ""Go Up"" button on the title page.
 !item [(!EXAMPLE)]
 (!T)!/html_backpage ../index.html(!t)
 
-!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
-
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6, Zusätzlicher Text ab 
+     Release~6 Patchlevel~16
 !item [(!SEEALSO)]
 (!KW [no_headlines]), (!KW [no_bottomlines])
 
@@ -8087,6 +8198,78 @@ This command sets the size of the font that is used to display regular text.
 
 !item [(!SEEALSO)]
 (!KW [html_propfont_name])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: englisch
+!begin_node (!kw [html_script_name])
+!html_name cmd_html_script_name.html
+
+!iflang [german]
+JavaScript einbinden (nur HTML).
+!endif
+!iflang [english]
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!iflang [german]
+!item [(!SYNTAX)] (!T)!/html_script_name <(!FILE)>.js(!t)
+!endif
+!iflang [english]
+!item [(!SYNTAX)] (!T)!/html_script_name <(!FILE)>.js(!t)
+!endif
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando kann ein JavaScript eingebunden werden.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: englisch
+!begin_node (!kw [html_style_name])
+!html_name cmd_html_style_name.html
+
+!iflang [german]
+Stylesheet einbinden (nur HTML).
+!endif
+!iflang [english]
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!iflang [german]
+!item [(!SYNTAX)] (!T)!/html_style_name <(!FILE)>.css(!t)
+!endif
+!iflang [english]
+!item [(!SYNTAX)] (!T)!/html_style_name <(!FILE)>.css(!t)
+!endif
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Stylesheets eingebunden werden.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
 
 !end_xlist
 
@@ -14735,7 +14918,49 @@ preformatted text. The default is ""Courier New"".
 (!T)!/rtf_monofont Monospace 821(!t)
 
 !item [(!SEEALSO)]
-(!KW [rtf_propfont])
+(!KW [rtf_propfont]), (!KW [rtf_monofont_size])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: englisch
+!begin_node (!kw [rtf_monofont_size])
+!html_name cmd_rtf_monofont_size.html
+
+!iflang [german]
+Größe des Monospaced-Font für RTF setzen.
+!endif
+!iflang [english]
+Set monospaced font (RTF only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/rtf_monofont_size <wert>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando kann man die Größe des Font setzen, der zur
+Darstellung von Klartext benutzt werden soll.
+Als Default verwendet UDO 10pt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+With this command you can set the font that will be used to display
+text inside a Windows Help hypertext. The default is 10pt.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/rtf_monofont_size 10(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [rtf_monofont])
 
 !end_xlist
 
@@ -14822,7 +15047,49 @@ text and headings. The default is ""Times New Roman"".
 (!T)!/rtf_propfont Dutch 801 Roman(!t)
 
 !item [(!SEEALSO)]
-(!KW [rtf_monofont])
+(!KW [rtf_monofont]), (!KW [rtf_propfont_size])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: englisch
+!begin_node (!kw [rtf_propfont_size])
+!html_name cmd_rtf_propfont_size.html
+
+!iflang [german]
+Größe des Proportional-Font für RTF setzen.
+!endif
+!iflang [english]
+Set proportional font (RTF only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/rtf_propfont_size <wert>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando kann man die Größe des Font setzen, der zur
+Darstellung von Fließtext und Überschriften benutzt
+werden soll. Als Default verwendet UDO 11pt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+With this command you can set the font that will be used to display
+text inside a Windows Help hypertext. The default is 11pt.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/rtf_propfont_size 10(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [rtf_propfont])
 
 !end_xlist
 
@@ -17204,6 +17471,44 @@ Query the destination format.
 !endif
 
 ################################################################################
+# ToDo: englisch
+!begin_node (!kw [tex_209])
+!html_name cmd_tex_209.html
+
+!iflang [german]
+(!LaTeX)~2.09 Kommandos benutzen (nur (!TeX)).
+!endif
+!iflang [english]
+Use (!LaTeXe) commands ((!TeX) only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_209(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+UDO erzeugt bei der Umwandlung ins (!LaTeX)-Format
+(!LaTeX)~2.09-Kommandos.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+UDO will output special (!LaTeXe) commands if you use this command
+e.g. (!V)\textbf{...}(!v) instead of (!V){\bf ...}(!v)
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [tex_2e])
+
+!end_xlist
+
+!end_node
+
+################################################################################
 !begin_node (!kw [tex_2e])
 !html_name cmd_tex_2e.html
 
@@ -17232,6 +17537,9 @@ bei der Umwandlung von (!KK1 [B]).
 UDO will output special (!LaTeXe) commands if you use this command
 e.g. (!V)\textbf{...}(!v) instead of (!V){\bf ...}(!v)
 !endif
+
+!item [(!SEEALSO)]
+(!KW [tex_209])
 
 !end_xlist
 

@@ -756,11 +756,12 @@ knows if you are using indices or not. So UDO knows enough to create the
 !endif
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#ToDo: Englisch
 !iflang [german]
-!item [Wie werden Dateien für (!LaTeX2e) erzeugt?]
+!item [Wie werden Dateien für (!LaTeX)~2.09 erzeugt?]
 
-Standardmäßig erzeugt UDO Dateien für (!LaTeX)~2.09. Durch den
-Schalter (!KW [tex_2e]) können Sie UDO mitteilen, Befehle für (!LaTeX2e) zu
+Standardmäßig erzeugt UDO Dateien für (!LaTeX2e)~2.09. Durch den
+Schalter (!KW [tex_209]) können Sie UDO mitteilen, Befehle für (!LaTeX)~2.09 zu
 erzeugen.
 !endif
 
