@@ -56,19 +56,13 @@ developer versions.
 # ..............................................................................
 !iflang [german]
 !item (!KW [docinfo]) hat zwei neue Argumente: (!nl)
-    (!T)company(!t) bezeichnet die Firma, für die ein Dokument erstellt wird.
-    Wenn (!T)company(!t) benutzt wird, wird auf der Titelseite unter Autor
-    ""für (!I)company(!i)"" eingefügt. (!nl)
-    (!T)category(!t) bezeichnet eine Kategorie, zu der das Dokument gehört. (!nl)
-    Diese Erweiterung ist seit Version ..?.. implementiert.
+    (!T)company(!t) und (!T)category(!t) (!nl)
+    Diese Erweiterung ist seit Version 6.5.2 implementiert.
 !endif
 !iflang [english]
 !item (!KW [docinfo]) has two new arguments: (!nl)
-    (!T)company(!t) marks a company, for whom the document is made. If
-    (!T)company(!t) is used, the title page will be supplemented with
-    ""for (!I)company(!i)"" after the author entry. (!nl)
-    (!T)category(!t) describes a category to which the document belongs. (!nl)
-    This extension has been implemented since version ..?..
+    (!T)company(!t) and (!T)category(!t) (!nl)
+    This extension has been implemented since version 6.5.2
 !endif
 # ..............................................................................
 !iflang [german]
@@ -164,7 +158,7 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 !begin_itemize !short
 # ..............................................................................
 !iflang [german]
-!item Bug #0000055 in Version ..?.. beseitigt (!nl)
+!item Bug #0000055 in Version 6.4.1 beseitigt (!nl)
     Umlaute, die in (!KKW [img]) oder (!KKW [ilink]) im zweiten Parameter vorkamen,
     wurden nicht richtig umgesetzt.
 !endif
@@ -202,80 +196,34 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 !begin_itemize
 # ..............................................................................
 !iflang [german]
-!item Neuer Schalter (nur für Vorspann): (!T)!/html_header_links <text>(!t) (!nl)
-   Ist dieser Schalter gesetzt, so werden je nach Vorgabe
-   (!T)<link>(!t)-Elemente im HTML-Header erzeugt:
-   !begin_itemize !short
-   !item Beinhaltet (!T)<text>(!t) ""navigation"", werden die Links zur Navigation erzeugt
-   (<link rel="start" href="index.html" title="Beginn des Dokumentes">, ebenso
-   <link rel="home"!.., "contents", "toc", "first", "prev", "previous", "next", "last").
-   !item Beinhaltet (!T)<text>(!t) ""chapter"", werden alle Links zu den Kapiteln erzeugt
-   (<link rel="chapter" href="!.." title="!..">, ebenso für "section").
-   !end_itemize
-# U.K. 28.1.04: Beispiele (aus der UDO-HTML-Doku) bringen. Erklären, was erzeugt wird, wenn
-# !html_header_links *nicht* gesetzt ist (+ Beispiel).
-# NHz 29.01.04: Beispiel -> !html_header_links navigation chapter (siehe meine Mail vom 29.01.04)
-# U.K. 29.1.04: die Frage nach dem Beispiel war mißverständlich. Sind obige Klammerzusätze korrekt??
-   Dadurch, daß die Link-Elemente nicht mehr automatisch, sondern nur noch auf Anforderung
-   erzeugt werden, entstehen kleinere HTML-Dateien. (!nl)
+!item Neuer Schalter: (!T)!/html_header_links(!t) (!nl)
+    Ist dieser Schalter gesetzt, so werden je nach Vorgabe
+   (!T)<link>(!t)-Elemente im HTML-Header erzeugt. (!nl)
    Dieser Feature-Wunsch #0000053 ist seit Version~6.5.2 implementiert.
-# Beispiel-Aufruf für spätere Kommando-Doku: !html_header_links chapter, navigation
 !endif
 !iflang [english]
-!item New Switch (preamble only): (!T)!/html_header_links <text>(!t) (!nl)
-   If this switch is set, several (!T)<link>(!t) elements are generated in the HTML header as following:
-   !begin_itemize !short
-   !item If <text> contains ""navigation"", links for navigation are generated
-   (<link rel="start" href="index.html" title="Begin of the document">, just as
-   <link rel="home"!.., "contents", "toc", "first", "prev", "previous", "next", "last").
-   !item If <text> contains ""chapter"", links for all nodes are generated
-   (<link rel="chapter" href="!.." title="!..">, same for "section").
-   !end_itemize
-   In the past, these link elements were produced automatically. Now, you get the link elements only
-   if you really want them. This makes smaller HTML files. (!nl)
+!item New Switch (preamble only): (!T)!/html_header_links(!t) (!nl)
+   If this switch is set, several (!T)<link>(!t) elements are generated in the
+   HTML header as following. (!nl)
    This feature wish #0000053 has been implemented since version~6.5.2.
 !endif
 # ..............................................................................
 !iflang [german]
-!item Neuer Schalter (nur für Vorspann): (!T)!/html_header_date [<text>](!t) (!nl)
+!item Neuer Schalter: (!T)!/html_header_date [<text>](!t) (!nl)
    Bisher wurde zu Beginn jeder HTML-Datei ein Kommentar mit dem Datum der Datei-Erzeugung eingefügt,
    z.B. (!T)<!-- last modified on 29.01.2004 -->(!t). (!nl)
    Nunmehr wird, wenn dieser Schalter gesetzt ist, im HTML-Header ein META-Tag für
-   Datum/Uhrzeit der Datei-Erzeugung erzeugt,
-   z.B. (!T)<META name="date" content="2004-01-29T08:49:37+00:00">(!t). (!nl)
-   Dabei ist "+00:00" der Unterschied von der lokalen Zeit zu UTC (Coordinated Universal Time, vormals GMT).
-   Mit dem optionalen Parameter <text> kann ein Wert für diese Zeitdifferenz
-   übergeben werden, z.B. (!T)!/html_header_date +02:00(!t).
-# max. 6 Zeichen für <text>
-   Für <text> werden von UDO keine Überprüfungen durchgeführt; der Autor ist selbst
-   dafür verantwortlich, einen korrekten Wert zu übergeben.
-   Ist <text> leer, wird für den Zeitzonenunterschied ""+00:00"" gesetzt. (!nl)
+   Datum/Uhrzeit der Datei-Erzeugung erzeugt. (!nl)
    Dieser Feature-Wunsch #0000054 ist seit Version~6.5.2 implementiert.
 !endif
-# Datumsformat gemäß http://www.w3.org/TR/html401/types.html#type-datetime
 !iflang [english]
-!item New Switch (preamble only): (!T)!/html_header_date [<text>](!t) (!nl)
+!item New Switch: (!T)!/html_header_date [<text>](!t) (!nl)
    Until now, UDO inserted near to the beginning of every HTML file the building date,
    e.g. (!T)<!-- last modified on 2004/01/29 -->(!t). (!nl)
    Now, only if this switch is set, a META element for the building date/time is generated
-   in the HTML Header, e.g. (!T)<META name="date" content="2004-01-29T08:49:37+00:00">(!t). (!nl)
-   "+00:00" means the difference from local time to UTC (Coordinated Universal Time, former GMT).
-   Using the optional parameter <text>, you can specify a value for this time difference,
-   e.g. (!T)!/html_header_date +02:00(!t).
-# up to 6 characters for <text>
-   There are no verifications on <text>. You are responsible for using a legal value.
-   If <text> is empty, the value for the time difference is set to ""+00:00"". (!nl)
+   in the HTML Header. (!nl)
    This feature wish #0000054 has been implemented since version 6.5.2.
 !endif
-!begin_ignore
-# # für die künftige, endgültige Doku an anderer Stelle:
-UTC = Coordinated Universal Time, entspricht der vormaligen Greenwich Mean Time (GMT).
-übersichtliche Umrechungstabelle (wohl am wichtigsten für die praktische
-UDO-Anwendung): http://setiathome.ssl.berkeley.edu/utc.html
-umfassend (mit weiteren Links):
-http://de.wikipedia.org/wiki/UTC bzw. http://en2.wikipedia.org/wiki/UTC,
-http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
-!end_ignore
 # ..............................................................................
 !end_itemize
 # ------------------------------------------------------------------------------
@@ -298,16 +246,11 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 # ..............................................................................
 !iflang [german]
 !item Bei (!KW [html_ignore_8bit]) kann nun ein optionaler Parameter <text> für die Codepage
-   übergeben werden. Zum Beispiel wird mit (!T)!/html_ignore_8bit ISO-8859-2(!t) in die HTML-Header
-   folgendes geschrieben: (!T)<meta http-equiv="content-type" content="text/html;charset=ISO-8859-2">(!t).
-# <text> kann max. 20 Zeichen haben.
-# siehe auch: http://www.w3.org/TR/1999/REC-html401-19991224/charset.html#doc-char-set
+   übergeben werden.
 !endif
 !iflang [english]
 !item While using (!KW [html_ignore_8bit]), you can use now an optional parameter <text>
-  for the codepage. For example, if you use (!T)!/html_ignore_8bit ISO-8859-2(!t), you will
-  get HTML headers with
-  (!T)<meta http-equiv="content-type" content="text/html;charset=ISO-8859-2">(!t).
+  for the codepage.
 !endif
 # ..............................................................................
 !end_itemize
@@ -398,6 +341,7 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 !end_node
 
 ################################################################################
+#ToDo: english
 !iflang [german]
 !begin_node Änderungen von Version 6.2.1 nach 6.4.0
 !endif
@@ -413,9 +357,70 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 (!PUBLISHED [Version~6.4.0] [Jan 7, 2004])
 !endif
 
-(!MISS)
+!heading [(!GENERAL)]
+!begin_description !short
+# ------------------------------------------------------------------------------
+#!item [(!NEWS)]
+#!begin_itemize !short
+# ..............................................................................
+#!iflang [german]
+#!item
+#!endif
+# ..............................................................................
+#!iflang [english]
+#!item
+#!endif
+#!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!CHANGES)]
+!begin_itemize !short
+# ..............................................................................
+!iflang [german]
+!item In der Tabellenumgebung können Kommentare eingefügt werden.
+      Beispiel:
 
-!begin_ignore
+!begin_verbatim
+!begin_table [|l|c|r|] !hline
+links !! mitte !! rechts
+# Dies ist ein Kommentar
+unten links !! unten mitte !! unten rechts
+!hline
+!end_table
+!end_verbatim
+!endif
+# ..............................................................................
+!iflang [english]
+!item In der Tabellenumgebung können Kommentare eingefügt werden.
+      Beispiel:
+
+!begin_verbatim
+!begin_table [|l|c|r|] !hline
+links !! mitte !! rechts
+# Dies ist ein Kommentar
+unten links !! unten mitte !! unten rechts
+!hline
+!end_table
+!end_verbatim
+!endif
+!end_itemize
+# ------------------------------------------------------------------------------
+#!smallskip
+#!item [(!BUGFIXES)]
+#!begin_itemize
+# ..............................................................................
+#!iflang [german]
+#!item
+#!endif
+# ..............................................................................
+#!iflang [english]
+#!item
+#!endif
+# ..............................................................................
+#!end_itemize
+# ------------------------------------------------------------------------------
+!end_description
+
 !heading Postscript
 # ------------------------------------------------------------------------------
 !begin_description
@@ -447,7 +452,63 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 !end_itemize
 
 !end_description
-!end_ignore
+
+!medskip
+!heading Hypertext Markup Language (HTML)
+!begin_description !short
+# ------------------------------------------------------------------------------
+#!item [(!NEWS)]
+#!begin_itemize !short
+# ..............................................................................
+#!iflang [german]
+#!item 
+#!endif
+# ..............................................................................
+#!iflang [english]
+#!item
+#!endif
+#!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!CHANGES)]
+!begin_itemize !short
+# ..............................................................................
+!iflang [german]
+!item Bug #0000010 (!nl)
+      Im HTML-Code werden alle Zahlenangaen in Tags in "" eingefaßt.
+!endif
+# ..............................................................................
+!iflang [english]
+!item Bug #0000010 (!nl)
+      Im HTML-Code werden alle Zahlenangaen in Tags in "" eingefaßt.
+!endif
+!end_itemize
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize
+# ..............................................................................
+!iflang [german]
+!item Bug #0000035 (!nl)
+      Falscher ungarischer Akzent korrigiert.
+!endif
+# ..............................................................................
+!iflang [english]
+!endif
+# ..............................................................................
+# ..............................................................................
+!iflang [german]
+!item Bug #0000039 (!nl)
+      (!KW [html_name_prefix]) wurde nicht bei den <link>-Elementen nicht benutzt.
+!endif
+# ..............................................................................
+!iflang [english]
+!endif
+# ..............................................................................
+
+!end_itemize
+!end_description
 
 !end_node
 
@@ -467,7 +528,6 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 (!PUBLISHED [Version~6.2.1] [Dec 9, 2003])
 !endif
 
-!begin_ignore
 !heading PDF-(!LaTeX)
 !begin_description
 # ------------------------------------------------------------------------------
@@ -540,11 +600,11 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 # ..............................................................................
 !end_itemize
 !end_description
-!end_ignore
 
 !end_node
 
 ################################################################################
+# ToDo: englisch
 !iflang [german]
 !begin_node Änderungen von Release 6 Patchlevel 17 nach Version 6.2.0
 !endif
@@ -560,13 +620,10 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 (!PUBLISHED [Version~6.2.0] [Oct 15, 2003])
 !endif
 
-(!MISS)
-
-!begin_ignore
-!heading [(!GENERAL)]
-!begin_description !short
+#!heading [(!GENERAL)]
+#!begin_description !short
 # ------------------------------------------------------------------------------
-!item [(!NEWS)]
+#!item [(!NEWS)]
 #!begin_itemize !short
 # ..............................................................................
 #!iflang [german]
@@ -578,8 +635,8 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 #!endif
 #!end_itemize
 # ------------------------------------------------------------------------------
-!smallskip
-!item [(!CHANGES)]
+#!smallskip
+#!item [(!CHANGES)]
 #!begin_itemize !short
 # ..............................................................................
 #!iflang [german]
@@ -591,8 +648,8 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 #!endif
 #!end_itemize
 # ------------------------------------------------------------------------------
-!smallskip
-!item [(!BUGFIXES)]
+#!smallskip
+#!item [(!BUGFIXES)]
 #!begin_itemize
 # ..............................................................................
 #!iflang [german]
@@ -605,51 +662,55 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 # ..............................................................................
 #!end_itemize
 # ------------------------------------------------------------------------------
-!end_description
-!end_ignore
+#!end_description
 
-!begin_description
+!medskip
+!heading Hypertext Markup Language (HTML)
+!begin_description !short
+# ------------------------------------------------------------------------------
+#!item [(!NEWS)]
+#!begin_itemize !short
+# ..............................................................................
+#!iflang [german]
+#!item 
+#!endif
+# ..............................................................................
+#!iflang [english]
+#!item
+#!endif
+#!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!CHANGES)]
+!begin_itemize !short
+# ..............................................................................
 !iflang [german]
-# !item [Neue Formate:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Neue Befehle:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Neuheiten:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Änderungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Syntaxänderungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Fehlerbehebungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
+!item Bug #0000010 (!nl)
+      Im HTML-Code werden alle Zahlenangaen in Tags in "" eingefaßt.
 !endif
-
+# ..............................................................................
 !iflang [english]
-# !item [New destination formats:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [New commands:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [News:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Changes:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Syntax changes:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Bugfixes:]
-# 	!begin_itemize !short
-# 	!end_itemize
+!item Bug #0000010 (!nl)
+      Im HTML-Code werden alle Zahlenangaen in Tags in "" eingefaßt.
 !endif
+!end_itemize
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize
+# ..............................................................................
+!iflang [german]
+!item Bug #0000010 (!nl)
+      Überflüssiges <br> nach Bild-Paragraph entfernt.
+!endif
+# ..............................................................................
+!iflang [english]
+!item Bug #0000010 (!nl)
+      Überflüssiges <br> nach Bild-Paragraph entfernt.
+!endif
+# ..............................................................................
+!end_itemize
 !end_description
 
 !end_node
@@ -670,9 +731,6 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 (!PUBLISHED [Release~6 Patchlevel~17] [Oct 11, 2003])
 !endif
 
-(!MISS)
-
-!begin_ignore
 !heading [(!GENERAL)]
 !begin_description !short
 # ------------------------------------------------------------------------------
@@ -689,8 +747,8 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 #!endif
 #!end_itemize
 # ------------------------------------------------------------------------------
-!smallskip
-!item [(!CHANGES)]
+#!smallskip
+#!item [(!CHANGES)]
 #!begin_itemize !short
 # ..............................................................................
 #!iflang [german]
@@ -707,13 +765,13 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 !begin_itemize
 # ..............................................................................
 !iflang [german]
-!item Bug #0000003 in Release 6 Patchlevel 17 beseitigt (!nl)
+!item Bug #0000003 (!nl)
       Die Meldung ""Letzte Änderung am!.."" kommt jetzt mit den richtigen
       französischen Umlauten.
 !endif
 # ..............................................................................
 !iflang [english]
-!item Fixed bug #0000003 in release 6 patchlevel 17 (!nl)
+!item Fixed bug #0000003 (!nl)
       The update message ""Last updated on!.."" has the correct french
       umlauts.
 !endif
@@ -724,7 +782,7 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 !heading Richtext Format RTF
 !begin_description !short
 # ------------------------------------------------------------------------------
-!item [(!NEWS)]
+#!item [(!NEWS)]
 #!begin_itemize !short
 # ..............................................................................
 #!iflang [german]
@@ -736,8 +794,8 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 #!endif
 #!end_itemize
 # ------------------------------------------------------------------------------
-!smallskip
-!item [(!CHANGES)]
+#!smallskip
+#!item [(!CHANGES)]
 #!begin_itemize !short
 # ..............................................................................
 #!iflang [german]
@@ -765,51 +823,6 @@ http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
 !endif
 # ..............................................................................
 !end_itemize
-!end_description
-!end_ignore
-
-!begin_description
-!iflang [german]
-# !item [Neue Formate:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Neue Befehle:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Neuheiten:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Änderungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Syntaxänderungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Fehlerbehebungen:]
-# 	!begin_itemize !short
-# 	!end_itemize
-!endif
-
-!iflang [english]
-# !item [New destination formats:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [New commands:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [News:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Changes:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Syntax changes:]
-# 	!begin_itemize !short
-# 	!end_itemize
-# !item [Bugfixes:]
-# 	!begin_itemize !short
-# 	!end_itemize
-!endif
 !end_description
 
 !end_node

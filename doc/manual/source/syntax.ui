@@ -604,7 +604,7 @@ eine Titelseite und greift bei der Erzeugung dieser Titelseite auf die
 Informationen zurück, die Sie im Vorspann Ihrer Quelldatei mit den
 Kommandos der folgenden Tabelle setzen:
 
-!begin_xlist [programimage:] !short
+!begin_xlist [docinfo   programimage:] !short
 
 !item [(!KW [docinfo] [[title!!]]):]
 Der Titel des Textes, z.B. ""Die Anleitung zu"", ""Das
@@ -613,8 +613,8 @@ Handbuch zu"" oder ""Die Einführung in"".
 !item [(!KW [docinfo] [[program!!]]):]     Der Name des im Text behandelten Themas. Hier kann man
 den beispielsweise den Namen des Programms angeben.
 
-!item [(!KW [docinfo] [[programimage!!]]):] Eine Grafik, die anstelle der durch (!KW [docinfo] [[program!!]]) gesetzten
-Information ausgegeben werden soll.
+!item [(!KW [docinfo] [[programimage!!]]):] Eine Grafik, die anstelle der durch
+                     (!KW [docinfo] [[program!!]]) gesetzten Information ausgegeben werden soll.
 
 !item [(!KW [docinfo] [[version!!]]):]     Versionsinformationen, z.B. ""Version 47.11""
 
@@ -626,9 +626,11 @@ geschrieben wurden.
 !item [(!KW [docinfo] [[authorimage!!]]):] Eine Grafik, die zusätzlich oberhalb des Namen des
 Autors ausgegeben werden soll.
 
-!item [(!KW [docinfo] [[address!!]]):]      Die Straße, Wohnort, Land etc. in der der Autor wohnt. Optional kann man
-natürlich irgendetwas anderes angeben, was dann
-unterhalb des Namens des Autors ausgegeben wird, wie z.B. Email-Adressen.
+!item [(!KW [docinfo] [[company!!]]):]      Firma, für die ein Dokument erstellt wird.
+
+!item [(!KW [docinfo] [[address!!]]):]      Die Straße, Wohnort, Land etc. in der der Autor wohnt.
+                   Optional kann man natürlich irgendetwas anderes angeben, was dann
+                   unterhalb des Namens des Autors ausgegeben wird, wie z.B. Email-Adressen.
 
 !end_xlist
 

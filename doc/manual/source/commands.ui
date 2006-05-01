@@ -3457,6 +3457,7 @@ containing only the chapter names.
 !end_node
 
 ################################################################################
+# ToDo: Englisch
 !begin_node (!kw [docinfo])
 !html_name cmd_docinfo.html
 
@@ -3527,6 +3528,14 @@ des Autors ausgegeben. ""<text>"" findet sonst keine
 weitere Verwendung durch UDO. (!KW [docinfo] [[address!!]]) kann bis zu 15 mal
 angegeben werden, so daß man hier z.B. auch mehrere E-Mail-Adressen auf der
 Titelseite angeben kann.
+
+!item [company]
+""<text>"" bezeichnet die Firma, für die ein Dokument erstellt wird. 
+Wenn company benutzt wird, wird auf der Titelseite unter Autor 
+""für company"" eingefügt.
+
+!item [category]
+""<text>"" bezeichnet eine Kategorie, zu der das Dokument gehört.
 
 !item [stgdatabase]
 Mittels (!KW [docinfo] [[stgdatabase!!]]) kann man angeben, was UDO
@@ -3612,6 +3621,14 @@ of HTML.
 ""<text>"" will be given out below the author's name on the
 title page. (!KW [docinfo] [[address!!]]) can be used up to 15 times,
 and can contain any address lines, such as email-addresses.
+
+!item [company]
+""<text>"" bezeichnet die Firma, für die ein Dokument erstellt wird. 
+Wenn company benutzt wird, wird auf der Titelseite unter Autor 
+""für company"" eingefügt.
+
+!item [category]
+""<text>"" bezeichnet eine Kategorie, zu der das Dokument gehört.
 
 !item [stgdatabase]
 With this command you can specify the contents of the @database-line
@@ -3730,12 +3747,16 @@ der folgenden Werte sein:
 !begin_description
 
 !item [paper]
-!doclayout [ps] [paper] foo (!nl)
+!begin_verbatim
+!doclayout [ps] [paper] foo
+!end_verbatim
 Mögliche Angaben für foo sind: A3PORTRAIT, A3LANDSCAPE,
 A4PORTRAIT, A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE
 
 !item [propfontname]
-!doclayout [ps] [propfontname] foo (!nl)
+!begin_verbatim
+!doclayout [ps] [propfontname] foo
+!end_verbatim
 Mögliche Angaben für foo sind Zeichensatznamen, z. B. Arial,
 Times New Roman, sans oder sans serif.
 
@@ -3744,7 +3765,9 @@ mit "Helvetica", "Arial" oder "sans-serif" steht wird "Helvetica" gesetzt,
 ansonsten "Times New Roman".
 
 !item [propfontsize]
+!begin_verbatim
 !doclayout [ps] [propfontsize] foo
+!end_verbatim
 Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
 
 !item [monofontname]
@@ -3753,25 +3776,33 @@ Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
 Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
 
 !item [node1size] 
-!doclayout [ps,rtf] [node1size] foo (!nl)
+!begin_verbatim
+!doclayout [ps,rtf] [node1size] foo
+!end_verbatim
 Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
 
 seit Release~6 Patchlevel~16
 
 !item [node2size]
-!doclayout [ps,rtf] [node2size] foo (!nl)
+!begin_verbatim
+!doclayout [ps,rtf] [node2size] foo
+!end_verbatim
 Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
 
 seit Release~6 Patchlevel~16
 
 !item [node3size]
-!doclayout [ps,rtf] [node3size] foo (!nl)
+!begin_verbatim
+!doclayout [ps,rtf] [node3size] foo
+!end_verbatim
 Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
 
 seit Release~6 Patchlevel~16
 
 !item [node4size]
-!doclayout [ps,rtf] [node4size] foo (!nl)
+!begin_verbatim
+!doclayout [ps,rtf] [node4size] foo
+!end_verbatim
 Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
 
 seit Release~6 Patchlevel~16
@@ -3788,25 +3819,7 @@ der Dokumentation zu den pdfmarks.
 
 !endif
 
-!iflang [german]
-!item [(!EXAMPLE2)]
-(!T)
-!begin_verbatim
-!end_verbatim
-(!t)
-!endif
-
-!iflang [english]
-!endif
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~15, Teile erst ab 
-
-!iflang [german]
-!item [(!SEEALSO)]
-!endif
-!iflang [english]
-!item [(!SEEALSO)]
-!endif
 
 !end_xlist
 
@@ -6395,7 +6408,7 @@ name, including extension, of the file name.
 
 ################################################################################
 # ToDo: Englisch
-!begin_node (!kw [s])
+!begin_node (!kw [html_backpage])
 !html_name cmd_html_backpage.html
 
 !iflang [german]
@@ -6599,6 +6612,82 @@ where the HTML file will be created.
 
 !end_node
 !end_ignore
+
+################################################################################
+!begin_node (!kw [html_doctype])
+!html_name cmd_html_doctype.html
+
+!iflang [german]
+Setzen des Dokumententyp (nur HTML).
+!endif
+!iflang [english]
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_doctype <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando kann man den Dokumententyp setzen. Dabei gibt es folgemde
+Möglichkeiten: Old (HTML 3.2), Strict (HTML 4.01 Strict),
+Transitional (HTML 4.01 Transitional), XHTML Strict oder XHTML Transitional.
+
+Für Frames werden die DOCTYPEs automatisch gesetzt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command is used to align the links in the left frame.
+Default value is ""center"".
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/html_doctype Strict(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~16
+
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: englisch
+!begin_node (!kw [html_favicon_name])
+!html_name cmd_html_favicon_name.html
+
+!iflang [german]
+Setzen der Favoriten-Icons (nur HTML).
+!endif
+!iflang [english]
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!iflang [german]
+!item [(!SYNTAX)] (!T)!/html_favicon_name <(!FILE)>.js(!t)
+!endif
+!iflang [english]
+!item [(!SYNTAX)] (!T)!/html_favicon_name <(!FILE)>.js(!t)
+!endif
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando könne die Favoriten-Icons gesetzt werden.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!end_xlist
+
+!end_node
 
 ################################################################################
 !begin_node (!kw [html_frames_alignment])
@@ -7186,6 +7275,124 @@ If you use a percentage value, UDO will output a percentage value, too.
 !end_node
 
 ################################################################################
+# Datumsformat gemäß http://www.w3.org/TR/html401/types.html#type-datetime
+#  für die künftige, endgültige Doku an anderer Stelle:
+# UTC = Coordinated Universal Time, entspricht der vormaligen Greenwich Mean Time (GMT).
+# übersichtliche Umrechungstabelle (wohl am wichtigsten für die praktische
+# UDO-Anwendung): http://setiathome.ssl.berkeley.edu/utc.html
+# umfassend (mit weiteren Links):
+# http://de.wikipedia.org/wiki/UTC bzw. http://en2.wikipedia.org/wiki/UTC,
+# http://de.wikipedia.org/wiki/Zeitzone, http://en2.wikipedia.org/wiki/Time_zone
+# ToDo: Englisch
+!begin_node (!kw [html_header_date])
+!html_name cmd_html_header_date.html
+
+!iflang [german]
+Setzen des Datums (nur HTML).
+!endif
+!iflang [english]
+Setzen des Datums (nur HTML).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_header_date <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Ist dieser Schalter gesetzt, so setzt UDO im HTML-Header ein META-Tag für
+Datum/Uhrzeit der Datei-Erzeugung
+z.B. (!T)<META name="date" content="2004-01-29T08:49:37+00:00">(!t).
+
+Dabei ist "+00:00" der Unterschied von der lokalen Zeit zu UTC
+(Coordinated Universal Time, vormals GMT). Mit dem optionalen Parameter <text>
+kann ein Wert für diese Zeitdifferenz übergeben werden.
+Für <text> werden von UDO keine Überprüfungen durchgeführt; der Autor ist selbst
+dafür verantwortlich, einen korrekten Wert zu übergeben.
+Ist <text> leer, wird für den Zeitzonenunterschied ""+00:00"" gesetzt.
+
+# max. 6 Zeichen für <text>
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/html_header_date +02:00(!t).
+
+!item [(!EXISTSSINCE)] Version~6.5.2
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# U.K. 28.1.04: Beispiele (aus der UDO-HTML-Doku) bringen. Erklären, was erzeugt
+#      wird, wenn !html_header_links *nicht* gesetzt ist (+ Beispiel).
+# NHz 29.01.04: Beispiel -> !html_header_links navigation chapter (siehe meine Mail vom 29.01.04)
+# U.K. 29.1.04: die Frage nach dem Beispiel war mißverständlich.
+#       Sind obige Klammerzusätze korrekt??
+# Beispiel-Aufruf für spätere Kommando-Doku: !html_header_links chapter, navigation
+# ToDo: Englisch
+!begin_node (!kw [html_header_links])
+!html_name cmd_html_header_links.html
+
+!iflang [german]
+<link>-Elemente setzen (nur HTML).
+!endif
+!iflang [english]
+<link>-Elemente setzen (only HTML).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_header_links <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Ist dieser Schalter gesetzt, so werden je nach Vorgabe
+(!T)<link>(!t)-Elemente im HTML-Header erzeugt:
+!begin_itemize
+!item Beinhaltet (!T)<text>(!t) ""navigation"", werden die Links zur Navigation erzeugt
+   (<link rel="start" href="index.html" title="Beginn des Dokumentes">, ebenso
+   <link rel="home"!.., "contents", "toc", "first", "prev", "previous", "next", "last").
+!item Beinhaltet (!T)<text>(!t) ""chapter"", werden alle Links zu den Kapiteln erzeugt
+   (<link rel="chapter" href="!.." title="!..">, ebenso für "section").
+!end_itemize
+
+Dadurch, daß die Link-Elemente nicht mehr automatisch, sondern nur noch auf Anforderung
+erzeugt werden, entstehen kleinere HTML-Dateien.
+
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If this switch is set, several (!T)<link>(!t) elements are generated in the HTML header as following:
+!begin_itemize
+!item If <text> contains ""navigation"", links for navigation are generated
+   (<link rel="start" href="index.html" title="Begin of the document">, just as
+   <link rel="home"!.., "contents", "toc", "first", "prev", "previous", "next", "last").
+!item If <text> contains ""chapter"", links for all nodes are generated
+   (<link rel="chapter" href="!.." title="!..">, same for "section").
+!end_itemize
+
+   In the past, these link elements were produced automatically. Now, you get the link elements only
+   if you really want them. This makes smaller HTML files.
+!endif
+
+!item [(!EXISTSSINCE)] Version~6.5.2
+
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# <text> kann max. 20 Zeichen haben.
+# siehe auch: http://www.w3.org/TR/1999/REC-html401-19991224/charset.html#doc-char-set
 !begin_node (!kw [html_ignore_8bit])
 !html_name cmd_html_ignore_8bit.html
 
@@ -7200,11 +7407,17 @@ Ignore 8-bit characters (HTML only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_ignore_8bit(!t)
+!item [(!SYNTAX)] (!T)!/html_ignore_8bit <(!TEXT)>(!t)
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann angegeben, so werden 8-Bit-Zeichen (!I)nicht(!i) in HTML-Entities (&auml; etc.) umgewandelt. Somit ist es möglich, auch von ISO-Latin1 abweichende Dateien zu erzeugen, ohne das UDO dazwischenfunkt.
+Wird dieser Schalter im Vorspann angegeben, so werden 8-Bit-Zeichen (!I)nicht(!i)
+in HTML-Entities (&auml; etc.) umgewandelt. Somit ist es möglich, auch von ISO-Latin1
+abweichende Dateien zu erzeugen, ohne das UDO dazwischenfunkt.
+
+Optional kann durch den Parameter <text> ein Codepage übergeben werden.
+Zum Beispiel wird mit (!T)!/html_ignore_8bit ISO-8859-2(!t) in die HTML-Header
+folgendes geschrieben: (!T)<meta http-equiv="content-type" content="text/html;charset=ISO-8859-2">(!t).
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -7213,7 +7426,10 @@ won't be converted to HTML entities (&auml; etc.).
 Thus you can generate files different from iso-latin1 without UDO intervening.
 !endif
 
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+!item [(!EXAMPLE)]
+(!T)!/html_ignore_8bit ISO-8859-2(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2, Erweiterung seit Version 6.5.0
 
 !item [(!SEEALSO)]
 (!KW [code])
@@ -8432,6 +8648,43 @@ the directory names set with (!KW [html_dirname]) will be used.
 
 !end_node
 !end_ignore
+
+################################################################################
+# ToDo: Englisch
+!begin_node (!kw [html_use_hyphenation])
+!html_name cmd_html_use_hyphenation.html
+
+!iflang [german]
+Trennstrichwandlung (HTML only).
+!endif
+!iflang [english]
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_use_hyphenation(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie festlegen, daß UDO
+!- in &shy; umgesetzen soll.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/html_use_hyphenation(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~16
+
+!item [(!SEEALSO)]
+
+!end_xlist
+
+!end_node
 
 ################################################################################
 !ifset OldKeywords
