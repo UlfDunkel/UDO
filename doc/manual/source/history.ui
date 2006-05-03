@@ -103,12 +103,110 @@ Das hier ist Zelle 1 !! Das hier ist Zelle 2 !! Das hier ist Zelle 3
 !end_ignore
 # ..............................................................................
 !iflang [german]
-!item Neuer Kommandozeilen Parameter -Wl bzw. (--)no-warningslines
+!item Neuer Kommandozeilen Parameter -Wl bzw. (--)no-warningslines (!nl)
+      Version 6.5.16
 !endif
 !iflang [english]
-!item New command line parameter -Wl bzw. (--)no-warningslines
+!item New command line parameter -Wl bzw. (--)no-warningslines (!nl)
+      Version 6.5.16
 !endif
-
+# ..............................................................................
+!iflang [german]
+!item In der Tabellenumgebung können Kommentare eingefügt werden.
+      Beispiel:
+!begin_quote
+!begin_verbatim
+!begin_table [|l|c|r|] !hline
+# Dies ist ein Kommendtar
+links !! mitte !! rechts
+unten links !! unten mitte !! unten rechts
+!hline
+!end_table
+!end_verbatim
+!end_quote
+Version 6.5.13
+!endif
+!iflang [english]
+!item In der Tabellenumgebung können Kommentare eingefügt werden.
+      Beispiel:
+!begin_quote
+!begin_verbatim
+!begin_table [|l|c|r|] !hline
+# Dies ist ein Kommendtar
+links !! mitte !! rechts
+unten links !! unten mitte !! unten rechts
+!hline
+!end_table
+!end_verbatim
+!end_quote
+Version 6.5.13
+!endif
+# ..............................................................................
+!iflang [german]
+!item In der Tabellenumgebung können Labels eingefügt werden.
+      Beispiel:
+!begin_quote
+!begin_verbatim
+!begin_table [|l|c|r|] !hline
+!label test
+links !! mitte !! rechts
+unten links !! unten mitte !! unten rechts
+!hline
+!end_table
+!end_verbatim
+!end_quote
+Version 6.5.13
+!endif
+!iflang [english]
+!item In der Tabellenumgebung können Labels eingefügt werden.
+      Beispiel:
+!begin_quote
+!begin_verbatim
+!begin_table [|l|c|r|] !hline
+!label test
+links !! mitte !! rechts
+unten links !! unten mitte !! unten rechts
+!hline
+!end_table
+!end_verbatim
+!end_quote
+Version 6.5.13
+!endif
+# ..............................................................................
+!iflang [german]
+!item Die 16 Standardfarben existieren jetzt in UDO als Platzhalter
+      für die Ausgabe von HTML, RTF, WinHelp, DRC und
+      Postscript. Die Farben werden wie folgt angegeben: (!KKW [black]),
+      (!KKW [red]), etc. Abgeschlossen wird jeweils mit (!KKW [coloff]). (!nl)
+      Version 6.5.9
+!endif
+!iflang [english]
+!item Die 16 Standardfarben existieren jetzt in UDO als Platzhalter
+      für die Ausgabe von HTML, RTF, WinHelp, DRC und
+      Postscript. Die Farben werden wie folgt angegeben: (!black),
+      (!red), etc. Abgeschlossen wird jeweils mit (!coloff). 
+      Version 6.5.9
+!endif
+# ..............................................................................
+!iflang [german]
+!item Zwei neue Kommandos (!kkkw [INS] [ins]) und (!kkkw [DEL] [del]) zum
+      Markieren von Einfügungen und Löschungen. (!nl)
+      Version 6.5.9
+!endif
+!iflang [english]
+!item Zwei neue Kommandos (!kkkw [INS] [ins]) und (!kkkw [DEL] [del]) zum
+      Markieren von Einfügungen und Löschungen. (!nl)
+      Version 6.5.9
+!endif
+# ..............................................................................
+!iflang [german]
+!item Neues Kommando (!kkw [label]) (!nl)
+      Version 6.5.9
+!endif
+!iflang [english]
+!item Neues Kommando (!kkw [label]) (!nl)
+      Version 6.5.9
+!endif
 # ..............................................................................
 !end_itemize
 # ------------------------------------------------------------------------------
@@ -164,12 +262,11 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 !endif
 # U.K. an N.H.: ist der Text mit dem 2. Parameter so okay?
 !iflang [english]
-!item Fixed bug #0000055 in version ..?.. (!nl)
+!item Fixed bug #0000055 in version 6.4.1 (!nl)
     Umlauts used in the second parameter of (!KKW [img]) or (!KKW [ilink])
     were not converted in the right way.
 !endif
 # http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000055
-# behoben 25.01.2004 -> welche Version war zu diesem Zeitpunkt?
 # ..............................................................................
 !iflang [german]
 !item Bug #0000048 in Version~6.4.1 beseitigt (!nl)
@@ -183,6 +280,17 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 !endif
 # http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000048
 # behoben 25.01.2004
+# ..............................................................................
+!iflang [german]
+!item Bug #0000059 in Version~6.5.10 beseitigt (!nl)
+      Nichtfunktion, wenn Makro intern eine Definition aufruft.
+!endif
+!iflang [english]
+!item Bug #0000059 in Version~6.5.10 beseitigt (!nl)
+      Nichtfunktion, wenn Makro intern eine Definition aufruft.
+!endif
+# http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000059
+# behoben 2005-03-22
 # ..............................................................................
 !end_itemize
 !end_description
@@ -225,6 +333,15 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
    This feature wish #0000054 has been implemented since version 6.5.2.
 !endif
 # ..............................................................................
+!iflang [german]
+!item Indexseite für HTML (!nl)
+      Version~6.5.12
+!endif
+!iflang [english]
+!item Indexseite für HTML (!nl)
+      Version~6.5.12
+!endif
+# ..............................................................................
 !end_itemize
 # ------------------------------------------------------------------------------
 !smallskip
@@ -253,6 +370,141 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
   for the codepage.
 !endif
 # ..............................................................................
+!iflang [german]
+!item (!KW [html_counter_command]) kann jetzt auch in der Preamble benutzt
+      werden, dann wird dies für alle Dateien erzeugt. (!nl)
+      Version 6.5.9
+!endif
+!iflang [english]
+!item (!KW [html_counter_command]) kann jetzt auch in der Preamble benutzt
+      werden, dann wird dies für alle Dateien erzeugt. (!nl)
+      Version 6.5.9
+!endif
+# ..............................................................................
+!iflang [german]
+!item Die Kommandos (!/B), (!/I), (!/U), (!/T) und (!/V) werden
+      zu <strong>, <em>, <span style="text-decoration: underline;"> und <kbd>
+      umgesetzt, wenn der HTML Doctype >= XHTML_STRICT ist, ansonsten
+      werden die alten Elemente benutzt. (!nl)
+      Version 6.5.9
+!endif
+!iflang [english]
+!item Die Kommandos (!/B), (!/I), (!/U), (!/T) und (!/V) werden
+      zu <strong>, <em>, <span style="text-decoration: underline;"> und <kbd>
+      umgesetzt, wenn der HTML Doctype >= XHTML_STRICT ist, ansonsten
+      werden die alten Elemente benutzt. (!nl)
+      Version 6.5.9
+!endif
+# ..............................................................................
+!iflang [german]
+!item Der Bereich der Titelseite wird jetzt durch folgendes Konstrukt geklammert:
+
+      <div id=""udo_titlepage""></div> (!nl)
+      Version 6.5.9
+!endif
+!iflang [english]
+!item Der Bereich der Titelseite wird jetzt durch folgendes Konstrukt geklammert:
+
+      <div id=""udo_titlepage""></div> (!nl)
+      Version 6.5.9
+!endif
+# ..............................................................................
+!iflang [german]
+!item Bei (!KW [use_raw_header]) und (!KW [use_raw_footer]) werden Makros und Defines
+      ausgeführt. (!nl)
+      Version 6.5.9
+!endif
+!iflang [english]
+!item Bei (!KW [use_raw_header]) und (!KW [use_raw_footer]) werden Makros und Defines
+      ausgeführt. (!nl)
+      Version 6.5.9
+!endif
+# ..............................................................................
+!iflang [german]
+!item Einige Änderungen für eine bessere HTML Compliance.
+      - (nowrap, noresize) Attribute erweitert (!nl)
+      - (<br />, <hr />, <img />, <frame />, <link />) (!nl)
+      - XML-Namespace für XHTML-Dateien hinzugefügt. (!nl)
+      - Added </dd> after items in description lists. (!nl)
+      Version 6.5.9 und 6.5.13
+!endif
+!iflang [english]
+!item Einige Änderungen für eine bessere HTML Compliance.
+      - (nowrap, noresize) Attribute erweitert (!nl)
+      - (<br />, <hr />, <img />, <frame />, <link />) (!nl)
+      - XML-Namespace für XHTML-Dateien hinzugefügt. (!nl)
+      - Added </dd> after items in description lists. (!nl)
+      Version 6.5.9 und 6.5.13
+!endif
+# ..............................................................................
+!iflang [german]
+!item Beim Modern Layout wird die Tabelle in der linken Spalte, die das
+      Menu zeigt, jetzt mit einer ID namens ""UDO_menu""" versehen, so daß
+      das Menu beim Drucken mittels CSS ausgeblendet werden kann. (!nl)
+      Version 6.5.9
+!endif
+!iflang [english]
+!item Beim Modern Layout wird die Tabelle in der linken Spalte, die das
+      Menu zeigt, jetzt mit einer ID namens ""UDO_menu""" versehen, so daß
+      das Menu beim Drucken mittels CSS ausgeblendet werden kann. (!nl)
+      Version 6.5.9
+!endif
+# ..............................................................................
+!iflang [german]
+!item Die Einträge von (!KW [docinfo]) [keywords, description] werden jetzt
+      auch bei der HTML-Ausgabe geschrieben, allerdings nur, wenn in
+      einzelnen Dateien nicht (!KW [html_keywords]) bzw. (!KW [html_description])
+      benutzt wird. Diese haben also vorang. (!nl)
+      Version 6.5.9
+!endif
+!iflang [english]
+!item Die Einträge von (!KW [docinfo]) [keywords, description] werden jetzt
+      auch bei der HTML-Ausgabe geschrieben, allerdings nur, wenn in
+      einzelnen Dateien nicht (!KW [html_keywords]) bzw. (!KW [html_description])
+      benutzt wird. Diese haben also vorang. (!nl)
+      Version 6.5.9
+!endif
+# ..............................................................................
+!iflang [german]
+!item Das Kommando (!KW [begin_quote]) kann jetzt ein Argument bekommen. (!nl)
+      Version 6.5.9
+!endif
+!iflang [english]
+!item Das Kommando (!KW [begin_quote]) kann jetzt ein Argument bekommen. (!nl)
+      Version 6.5.9
+!endif
+# ..............................................................................
+!iflang [german]
+!item Beim Kommando (!KW [html_style_name]) können beliebig viele Stylesheets
+      übergeben werden. (!nl)
+      Version 6.5.9
+!endif
+!iflang [english]
+!item Beim Kommando (!KW [html_style_name]) können beliebig viele Stylesheets
+      übergeben werden. (!nl)
+      Version 6.5.9
+!endif
+# ..............................................................................
+!iflang [german]
+!item Bisher gab es ein <a name="UDOTOC"></a> vor dem
+      Inhaltsverzeichnis, auf das man bei der HTML-Ausgabe innerhalb
+      von Raw-Umgebungen verweisen kann. (!nl)
+      Jetzt wird UDOTOC als Label angelegt, wenn für HTML ein
+      Inhaltsverzeichnis erzeugt werden soll. Dann kann man auch
+      innerhalb des UDO-Quelltextes auf UDOTOC verweisen, ohne dass ein
+      Fehler auftritt. (!nl)
+      Version 6.5.9
+!endif
+!iflang [english]
+!item Bisher gab es ein <a name="UDOTOC"></a> vor dem
+      Inhaltsverzeichnis, auf das man bei der HTML-Ausgabe innerhalb
+      von Raw-Umgebungen verweisen kann. (!nl)
+      Jetzt wird UDOTOC als Label angelegt, wenn für HTML ein
+      Inhaltsverzeichnis erzeugt werden soll. Dann kann man auch
+      innerhalb des UDO-Quelltextes auf UDOTOC verweisen, ohne dass ein
+      Fehler auftritt. (!nl)
+      Version 6.5.9
+!endif
 !end_itemize
 # ------------------------------------------------------------------------------
 !smallskip
@@ -270,6 +522,17 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
    node names in the HTML header <link> elements.
 !endif
 # ..............................................................................
+!iflang [german]
+!item Bug #0000058 in Version~6.5.8 beseitigt (!nl)
+   Falsche UDO-Versionsbezeichnung in HTML-Metatags korrigiert.
+!endif
+!iflang [english]
+!item Bug #0000058 in Version~6.5.8 beseitigt (!nl)
+   Falsche UDO-Versionsbezeichnung in HTML-Metatags korrigiert.
+!endif
+# http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000058
+# behoben 2004-02-11
+# ..............................................................................
 !end_itemize
 !end_description
 # ------------------------------------------------------------------------------
@@ -280,6 +543,19 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 # ------------------------------------------------------------------------------
 !item [(!NEWS)]
 !begin_itemize !short
+# ..............................................................................
+!iflang [german]
+!item Neues Kommando (!KW [rtf_add_colour]), mit dem zusätzliche Farben (über
+      die 16 Standardfarben hinaus) in den Kopf einer RTF-Datei
+      geschrieben werden. (!nl)
+      Version 6.5.9
+!endif
+!iflang [english]
+!item Neues Kommando (!KW [rtf_add_colour]), mit dem zusätzliche Farben (über
+      die 16 Standardfarben hinaus) in den Kopf einer RTF-Datei
+      geschrieben werden. (!nl)
+      Version 6.5.9
+!endif
 # ..............................................................................
 !iflang [german]
 !item Die (!T)!/docinfo(!t)-Einträge (!T)subject(!t), (!T)keywords(!t),
@@ -293,6 +569,45 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
    of RTF files.
 !endif
 # ..............................................................................
+!iflang [german]
+!item Alle Nodes, Subnodes, etc. werden für die RTF-Ausgabe als
+      Label/Bookmark markiert. (!nl)
+      Version 6.5.9
+!endif
+!iflang [english]
+!item Alle Nodes, Subnodes, etc. werden für die RTF-Ausgabe als
+      Label/Bookmark markiert. (!nl)
+      Version 6.5.9
+!endif
+# ..............................................................................
+!iflang [german]
+!item Das Kommando (!kkw [plink]) unterstützt. Die Angabe erfolgt als Hinweis
+      auf die Seitenzahl. (!nl)
+      Version 6.5.9
+!endif
+!iflang [english]
+!item Das Kommando (!kkw [plink]) unterstützt. Die Angabe erfolgt als Hinweis
+      auf die Seitenzahl. (!nl)
+      Version 6.5.9
+!endif
+# ..............................................................................
+!iflang [german]
+!item ""\*\revtbl {Unknown}{UDO Version x.x.x}}"" wird gesetzt. (!nl)
+      Version 6.5.9
+!endif
+!iflang [english]
+!item ""\*\revtbl {Unknown}{UDO Version x.x.x}}"" wird gesetzt. (!nl)
+      Version 6.5.9
+!endif
+# ..............................................................................
+!iflang [german]
+!item (!KW [use_raw_header]) kann auch für die RTF-Ausgabe benutzt werden. (!nl)
+      Version 6.5.9
+!endif
+!iflang [english]
+!item (!KW [use_raw_header]) kann auch für die RTF-Ausgabe benutzt werden. (!nl)
+      Version 6.5.9
+!endif
 !end_itemize
 # ------------------------------------------------------------------------------
 !smallskip
@@ -331,6 +646,80 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 !endif
 # http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000017
 # Fehler erledigt 25.01.2004
+# ..............................................................................
+!iflang [german]
+!item Bug #0000060 in Version~6.5.8 beseitigt (!nl)
+      Abstürze bei RTF Ausgabe mit Version 6.5.5 beseitigt.
+!endif
+!iflang [english]
+!item Bug #0000060 in Version~6.5.8 beseitigt (!nl)
+      Abstürze bei RTF Ausgabe mit Version 6.5.5 beseitigt.
+!endif
+# http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000060
+# behoben 2004-03-22
+# ..............................................................................
+!end_itemize
+!end_description
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+!medskip
+!heading HTML-Help
+!begin_description !short
+# ------------------------------------------------------------------------------
+!item [(!NEWS)]
+!begin_itemize !short
+# ..............................................................................
+!iflang [german]
+!item Wird der Kommandozeilenparameter --map gesetzt, so wird eine Alias- und MAP-
+      Datei erzeugt. (!nl)
+      Version 6.5.13
+!endif
+!iflang [english]
+!item Wird der Kommandozeilenparameter --map gesetzt, so wird eine Alias- und MAP-
+      Datei erzeugt. (!nl)
+      Version 6.5.13
+!endif
+# ..............................................................................
+!iflang [german]
+!item (!KW [html_name]) is now used in HTML-Help output. (!nl)
+      Version 6.5.10
+!endif
+!iflang [english]
+!item (!KW [html_name]) is now used in HTML-Help output. (!nl)
+      Version 6.5.10
+!endif
+# ..............................................................................
+!end_itemize
+# ------------------------------------------------------------------------------
+# !smallskip
+# !item [(!BUGFIXES)]
+# !begin_itemize !short
+# ..............................................................................
+# !end_itemize
+!end_description
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+!medskip
+!heading ST-Guide
+!begin_description !short
+# ------------------------------------------------------------------------------
+#!item [(!NEWS)]
+#!begin_itemize !short
+#!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize !short
+# ..............................................................................
+# zu ST_Guide
+!iflang [german]
+!item Horizontale Linen können länger als 126 Zeichen sein. (!nl)
+      Version 6.5.16
+!endif
+!iflang [english]
+!item Horizontale Linen können länger als 126 Zeichen sein. (!nl)
+      Version 6.5.16
+!endif
 # ..............................................................................
 !end_itemize
 
