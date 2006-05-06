@@ -21,7 +21,7 @@
 
 #ifndef ID_MSG_C
 #define ID_MSG_C
-const char *id_msg_c= "@(#) msg.c       04.04.2006";
+const char *id_msg_c= "@(#) msg.c       $DATE$";
 #endif
 
 #include "import.h"
@@ -731,7 +731,7 @@ GLOBAL void error_table_cell_width ( void )
 }
 
 GLOBAL void error_table_label ( void )
-{	error_msg_solo("too many labels used");
+{	error_msg_solo("too many labels used in table");
 }
 
 GLOBAL void error_odd_dblquotes ( void )

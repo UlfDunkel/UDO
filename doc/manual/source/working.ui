@@ -1770,6 +1770,15 @@ unimportant labels or aliases or contact the author to get a special
 version of UDO.
 !endif
 
+!item [too many labels used in table]
+!iflang [german]
+Ihr Quelltext verwendet zuviele Sprungmarken zwischen zwei Tabellenzeilen.
+!endif
+!iflang [english]
+# ToDo: Englisch
+Your source file contains too many (!KW [label]) commands.
+!endif
+
 !item [too many macros used]
 !iflang [german]
 In Ihrem Quelltext werden mehr als (!MAXMACRO) Makros benutzt.
