@@ -21,7 +21,7 @@
 
 #ifndef ID_STY_C
 #define ID_STY_C
-const char *id_sty_c= "@(#) sty.c       31.07.1998";
+const char *id_sty_c= "@(#) sty.c       $Date$";
 #endif
 
 #include "import.h"
@@ -920,11 +920,11 @@ GLOBAL void check_styles ( char *s )
 			case C_COLOR_BLUE:
 			case C_COLOR_TEAL:
 			case C_COLOR_AQUA:
-				if (styleflag.colour)		error_still_active("Farbe");
+				if (styleflag.colour)		error_still_active("Colour");
 				styleflag.colour= TRUE;
 				break;
 			case C_COLOR_OFF:
-				if (!styleflag.colour)		error_not_active("Farbe");
+				if (!styleflag.colour)		error_not_active("Colour");
 				styleflag.colour= FALSE;
 				break;
 		}	/* switch ptr[0] */
