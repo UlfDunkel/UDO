@@ -23,49 +23,6 @@ Postscript-Erweiterungen gibt es als PDF-Datei.
 #Zum Schluß folgen die Postscript-Erweiterungen nochmal als
 #(!link [Quelltext] [PS-Quelltext]).
 
-!smallskip
-!hline
-!subsubnode Papierformat (Postscript)
-(!img [rot1] [Weniger wichtig])~~|~~(!img [gelb2] [Schwierig])
-!begin_verbatim
-!doclayout [ps] [paper] A3PORTRAIT
-!doclayout [ps] [paper] A3LANDSCAPE
-!doclayout [ps] [paper] A4PORTRAIT
-
-/topmargin    792 def
-/lowermargin   72 def
-/rightmargin  540 def
-/leftmargin    90 def
-
-!doclayout [ps] [paper] A4LANDSCAPE
-!doclayout [ps] [paper] A5PORTRAIT
-!doclayout [ps] [paper] A5LANDSCAPE
-!end_verbatim
-
-!smallskip
-!hline
-!subsubnode Titel für Datei (Postscript)
-(!img [rot3] [Sehr wichtig])~~|~~(!img [gelb1] [Leicht])
-Die Angabe des Titels einer Seite sollte zukünftig folgendermaßen
-angegeben werden (siehe auch (!link [Erklärung bei RTF] [Title-RTF])):
-
-In Postscript wird es folgendermaßen umgesetzt:
-!begin_verbatim
-!docinfo [ps] [title] Ein Buch über UDO
-!end_verbatim
-ergibt
-!begin_verbatim
-[ /Title (Ein Buch \374ber UDO)
-  /Author (Norbert Hanz)
-  /Subject (UDO-Open-Source)
-  /Keywords (UDO, Open Source)
-  /Creator (UDO 6 Patchlevel 13 for Win32)
-  /ModDate (D:19990406130500)
-/DOCINFO pdfmark
-
-[ {Catalog} << /FitWindow >>
-/PUT pdfmark
-!end_verbatim
 
 #!ifndest [ps]
 #!hline
