@@ -27,56 +27,6 @@ die Länge der Linie ((!T)\dpxsize(!t) und (!T)\dpptxN(!t))
 angepasst werden. (!nl)
 Papyrus unterstützt diese RTF-Kommandos leider nicht.
 
-!smallskip
-!hline
-!subsubnode Bookmarks & Verweise auf Seiten (Norbert Hanz)
-(!img [rot1] [Weniger wichtig])~~|~~(!img [gelb2] [Schwierig])
-Labels sollten außer als Index auch als Bookmarks in RTF umgesetzt werden,
-damit man in RTF-Dokumenten
-!begin_itemize !short
-!item in der Textverarbeitung danach suchen kann und
-!item im gedruckten Text darauf verweisen kann (wie bei (!LaTeX))
-!end_itemize
-
-!smallskip
-Die beiden Kommandos für Label würden folgendermaßen umgesetzt:
-!begin_itemize
-!item (!V)!/label(!v)
-!begin_verbatim
-!label Verweisziel
-!end_verbatim
-...ergibt für RTF
-!begin_verbatim
-{\*\bkmkstart Verweisziel} {\bkmkend Verweisziel}
-!end_verbatim
-
-!medskip
-!item (!V)(!/label [] [])(!v)
-!smallskip
-!begin_verbatim
-...dies ist ein (!label [Beispiel] [Verweisziel]) für...
-!end_verbatim
-...ergibt für RTF
-!begin_verbatim
-...dies ist ein {\*\bkmkstart Verweisziel} Beispiel{\bkmkend Verweisziel} für...
-!end_verbatim
-!end_itemize
-
-!medskip
-Für die (!LaTeX)-Ausgabe besteht die Möglichkeit Verweise direkt
-auf Seitenzahlen zu beziehen. Dies geschieht mit dem Kommando
-(!V)(!/plink [] [])(!v) und sollte auch für RTF umgesetzt werden.
-
-!begin_verbatim
-...sehen Sie im (!plink [Vorwort] [Verweisziel]) des Buches...
-!end_verbatim
-...ergibt dann für RTF
-!begin_verbatim
-...sehen Sie im Vorwort (siehe Seite }{\field{\*\fldinst { PAGEREF Verweisziel }}
-{\fldrslt {\lang1024 8}}}{) des Buches...
-!end_verbatim
-Leider funktioniert das nicht in Papyrus.
-#...sehen Sie im {\xe Vorwort \rxe Verweisziel} des Buches...
 
 
 !smallskip
