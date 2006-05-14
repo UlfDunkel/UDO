@@ -464,6 +464,8 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!html_use_folders",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_header_date",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	}, /* New feature #0000054 in V6.5.2 [NHz] */
 	{ "!html_header_links",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	}, /* New feature #0000053 in V6.5.2 [NHz] */
+	{ "!html_frames_toc_title",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	}, /* New in V6.5.16 [GS] */
+	{ "!html_frames_con_title",	    "",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	}, /* New in V6.5.16 [GS] */
 	{ "!rtf_propfont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!rtf_monofont",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!rtf_propfont_size",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
@@ -7684,6 +7686,17 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			{	set_html_counter_command();
 				return TRUE;
 			}
+			/* New in V6.5.16 [GS] */
+			if ( strcmp(token[0], "!html_frames_toc_title")==0 )
+			{	set_html_frames_toc_title();
+				return TRUE;
+			}
+			/* New in V6.5.16 [GS] */
+			if ( strcmp(token[0], "!html_frames_con_title")==0 )
+			{	set_html_frames_con_title();
+				return TRUE;
+			}
+
 			break;
 	}	/* switch */
 

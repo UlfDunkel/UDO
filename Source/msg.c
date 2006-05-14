@@ -21,7 +21,7 @@
 
 #ifndef ID_MSG_C
 #define ID_MSG_C
-const char *id_msg_c= "@(#) msg.c       $DATE$";
+const char *id_msg_c= "@(#) msg.c       $Date$";
 #endif
 
 #include "import.h"
