@@ -143,6 +143,8 @@ LOCAL char		footer_buffer[512];		/* Puffer fuer den Footer */	/*r6pl2 */
 
 LOCAL char		html_target[64];
 
+LOCAL char		*html_frames_toc_title;		/* V6.5.16 [GS] */
+LOCAL char		*html_frames_con_title;		/* V6.5.16 [GS] */
 
 /*	############################################################
 	# Prototypen lokaler Funktionen
@@ -3306,8 +3308,6 @@ GLOBAL void html_save_frameset ( void )
  		outln("        \"http://www.w3.org/TR/html4/frameset.dtd\">");
 		voutlnf("<html lang=\"%s\">", lang.html_lang);
 	}
-/*	output_html_doctype();
-	outln("<html>");*/
 	outln("<head>");
 	output_html_meta(TRUE);
 	if (titdat.htmltitle!=NULL && titdat.htmltitle[0]!=EOS)
@@ -3324,12 +3324,29 @@ GLOBAL void html_save_frameset ( void )
 	add2[0]= EOS;
 	if (html_frames_noresize)	strcat(add2, " noresize=\"noresize\"");
 	if (html_frames_noscroll)	strcat(add2, " scrolling=\"no\"");
-	sprintf(f1, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\"%s />",
-			html_name_prefix, FRAME_FILE_TOC, outfile.suff, FRAME_NAME_TOC, add2);
 
-	sprintf(f2, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\" />",
-			html_name_prefix, FRAME_FILE_CON, outfile.suff, FRAME_NAME_CON);
-
+	if ( html_frames_toc_title == NULL ) /* Change in 6.5.16 [GS] */
+	{
+		sprintf(f1, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\"%s />",
+				html_name_prefix, FRAME_FILE_TOC, outfile.suff, FRAME_NAME_TOC, add2);
+	}
+	else
+	{
+		sprintf(f1, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\" title=\"%s\"%s />",
+				html_name_prefix, FRAME_FILE_TOC, outfile.suff, FRAME_NAME_TOC, html_frames_toc_title, add2);
+	}
+	
+	if ( html_frames_con_title == NULL ) /* Change in 6.5.16 [GS] */
+	{
+		sprintf(f2, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\" />",
+				html_name_prefix, FRAME_FILE_CON, outfile.suff, FRAME_NAME_CON);
+	}
+	else
+	{
+		sprintf(f2, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\" title=\"%s\" />",
+				html_name_prefix, FRAME_FILE_CON, outfile.suff, FRAME_NAME_CON, html_frames_con_title);
+	}
+	
 	switch (html_frames_position)
 	{
 		case POS_LEFT:
@@ -10357,6 +10374,63 @@ GLOBAL void set_html_modern_backimage ( void )
 }	/* set_html_modern_backimage */
 
 
+/* New in v6.5.16 [GS] */
+GLOBAL void set_html_frames_toc_title ( void )
+{
+	char d[1024], *ptr;
+	
+	tokcpy2(d, 1024);
+	c_vars(d);
+	qdelete_all(d, "!-", 2);
+
+	auto_quote_chars(d, TRUE);
+	replace_udo_quotes(d);
+
+	if ( html_frames_toc_title !=NULL )
+		um_free ( html_frames_toc_title );
+		
+	{	ptr= (char *) um_malloc(1+strlen(d)*sizeof(char));
+	
+		if (!ptr)
+		{	error_malloc_failed();
+			bFatalErrorDetected= TRUE;
+		}
+		else
+		{	strcpy(ptr, d);
+			html_frames_toc_title = ptr;
+		}
+	}
+	
+}	/* set_html_frames_toc_title */
+
+/* New in 6.5.16 [GS] */
+GLOBAL void set_html_frames_con_title ( void )
+{
+	char d[1024], *ptr;
+	
+	tokcpy2(d, 1024);
+	c_vars(d);
+	qdelete_all(d, "!-", 2);
+
+	auto_quote_chars(d, TRUE);
+	replace_udo_quotes(d);
+
+	if ( html_frames_con_title !=NULL )
+		um_free ( html_frames_con_title );
+		
+	{	ptr= (char *) um_malloc(1+strlen(d)*sizeof(char));
+	
+		if (!ptr)
+		{	error_malloc_failed();
+			bFatalErrorDetected= TRUE;
+		}
+		else
+		{	strcpy(ptr, d);
+			html_frames_con_title = ptr;
+		}
+	}
+	
+}	/* set_html_frames_con_title */
 
 GLOBAL void set_html_frames_width ( void )
 {
@@ -12792,6 +12866,8 @@ GLOBAL void init_module_toc ( void )
 	sHtmlMonofontStart[0]= EOS;		/*r6pl7*/
 	sHtmlMonofontEnd[0]= EOS;		/*r6pl7*/
 
+	html_frames_toc_title = NULL;		/* 6.5.16 */
+	html_frames_con_title = NULL;		/* 6.5.16 */
 }	/* init_module_toc */
 
 /*

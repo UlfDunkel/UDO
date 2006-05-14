@@ -328,6 +328,8 @@ GLOBAL void set_html_style ( void );
 GLOBAL void set_html_script ( void );
 GLOBAL void set_html_favicon ( void );
 GLOBAL void set_html_special_color ( char *hc );
+GLOBAL void set_html_frames_toc_title ( void ); /* New in 6.5.16 [GS] */
+GLOBAL void set_html_frames_con_title ( void ); /* New in 6.5.16 [GS] */
 GLOBAL void set_html_modern_width ( void );
 GLOBAL void set_html_modern_alignment ( void );
 GLOBAL void set_html_modern_backimage ( void );
