@@ -25,7 +25,7 @@
 
 #ifndef ID_UDO_C
 #define ID_UDO_C
-const char *id_udo_c= "@(#) udo.c       09.10.2001";
+const char *id_udo_c= "@(#) udo.c       $Date$";
 #endif
 
 #include "import.h"
@@ -317,6 +317,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!html_dirname",				"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!html_keywords",				"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!html_description",			"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	},
+	{ "!html_robots",				"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	}, /* new V6.5.17 */
 	{ "!html_backimage",			"",			c_tunix,				TRUE,	CMD_ALWAYS			},
 	{ "!html_backcolor",			"",			c_tunix,				TRUE,	CMD_ALWAYS			},
 	{ "!html_textcolor",			"",			c_tunix,				TRUE,	CMD_ALWAYS			},
@@ -7737,6 +7738,10 @@ LOCAL BOOLEAN pass1_check_main_commands ( void )
 			}
 			if ( strcmp(token[0], "!html_description")==0 )
 			{	set_html_description();
+				return TRUE;
+			}
+			if ( strcmp(token[0], "!html_robots")==0 )		/* New V 6.5.17 */
+			{	set_html_robots();
 				return TRUE;
 			}
 			if ( strcmp(token[0], "!html_counter_command")==0 )

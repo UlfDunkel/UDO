@@ -56,6 +56,7 @@ typedef struct _titledata			/* ---- Titelseiteninfos ----		*/
 	unsigned int authoriconActiveHeight;
 	char  *keywords; /* New in r6pl15 [NHz] */
 	char	*description; /* New in r6pl15 [NHz] */
+	char	*robots; /* New in V6.5.17 */
 	char	*company; /* New in V6.5.2 [NHz] */
 	char	*category; /* New in V6.5.2 [NHz] */
 	char	*drc_statusline;

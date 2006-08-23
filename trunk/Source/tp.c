@@ -538,6 +538,24 @@ GLOBAL BOOLEAN set_docinfo ( void )
 		return TRUE;
 	}
 
+	/* New in V6.5.17 */
+	if (strcmp(inhalt, "robots")==0)
+	{	init_docinfo_data(data, &(titdat.robots), FALSE);
+		if ( strcmp ( titdat.robots, "none") != 0 )
+		{	if ( strcmp ( titdat.robots, "noindex") != 0 )
+			{	if ( strcmp ( titdat.robots, "index") != 0 )
+				{	if ( strcmp ( titdat.robots, "nofollow") != 0 )
+					{	if ( strcmp ( titdat.robots, "follow") != 0 )
+						{	error_syntax_error();
+							titdat.robots = NULL;
+							return TRUE;
+						}
+					}
+				}
+			}
+		}
+		return TRUE;
+	}
 	/* New in V6.5.2 [NHz] */
 	if (strcmp(inhalt, "company")==0)
 	{	init_docinfo_data(data, &(titdat.company), FALSE);
@@ -1563,6 +1581,7 @@ LOCAL void init_titdat ( void )
 	
 	titdat.keywords= NULL; /* New in r6pl15 [NHz] */
 	titdat.description= NULL; /* New in r6pl15 [NHz] */
+	titdat.robots= NULL; /* New in V6.6.17 */
 	titdat.company= NULL; /* New in V6.5.2 [NHz] */
 	titdat.category= NULL; /* New in V6.5.2 [NHz] */
 	titdat.htmltitle= NULL;
