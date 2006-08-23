@@ -89,6 +89,7 @@ typedef struct _tocitem
 	char	dirname[MAX_FILENAME_LEN+1];	/* HTML-Verzeichnisname				*/	/* r6pl6 */
 	char	*keywords;						/* HTML-Keywords					*/	/* r5pl3 */
 	char	*description;					/* HTML-Description					*/	/* r6pl5 */
+	char	*robots;						/* HTML-Robots						*/	/* V6.5.17 */
 	char	*counter_command;				/* HTML-Kommandos fuer Counter		*/	/* r5pl4 */
 	char	backcolor[MAX_COLOR_LEN+1];		/* HTML <BODY BGCOLOR=...>			*/	/* r6pl1 */
 	char	textcolor[MAX_COLOR_LEN+1];		/* HTML <BODY TEXT=...>				*/	/* r6pl1 */
@@ -315,6 +316,7 @@ GLOBAL void set_html_dirname ( void );
 GLOBAL void set_html_counter_command ( void );
 GLOBAL void set_html_keywords ( void );
 GLOBAL void set_html_description ( void );
+GLOBAL void set_html_robots ( void );		/* new V6.5.17 */
 GLOBAL void set_html_color ( const int which );
 #if 0
 	GLOBAL void set_html_backcolor ( void );

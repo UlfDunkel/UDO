@@ -29,7 +29,7 @@
 
 #ifndef ID_TOC_C
 #define ID_TOC_C
-const char *id_toc_c= "@(#) toc.c       04.02.2004";
+const char *id_toc_c= "@(#) toc.c       $DATE$";
 #endif
 
 #include "import.h"
@@ -2088,9 +2088,21 @@ LOCAL void output_html_meta ( BOOLEAN keywords )
 			}
 			/* New in V6.5.9 [NHz] [docinfo] */
 			else
-			{	if ( titdat.description != NULL )
+ 			{	if ( titdat.description != NULL )
 				{	voutlnf("<meta name=\"Description\" content=\"%s\" />",
 						 titdat.description);
+				}
+			}
+
+			/* New in V6.5.17 */
+			if (toc[ti]->robots!=NULL)
+			{	voutlnf("<meta name=\"robots\" content=\"%s\" />",
+						toc[ti]->robots);
+			}
+			else
+ 			{	if ( titdat.robots != NULL )
+				{	voutlnf("<meta name=\"robots\" content=\"%s\" />",
+						 titdat.robots);
 				}
 			}
 
@@ -10257,6 +10269,47 @@ GLOBAL void set_html_description ( void )
 	
 }	/* set_html_description */
 
+/* new since V6.5.17 */
+GLOBAL void set_html_robots ( void )
+{
+	char d[1024], *ptr;
+	
+	if (p1_toc_counter<0)	return;
+	if (toc[p1_toc_counter]==NULL)	return;
+	if (token[1][0]==EOS)	return;
+
+	tokcpy2(d, 1024);
+	c_vars(d);
+	qdelete_all(d, "!-", 2);
+
+	auto_quote_chars(d, TRUE);
+	replace_udo_quotes(d);
+
+	if ( strcmp ( d, "none") != 0 )
+	{	if ( strcmp ( d, "noindex") != 0 )
+		{	if ( strcmp ( d, "index") != 0 )
+			{	if ( strcmp ( d, "nofollow") != 0 )
+				{	if ( strcmp ( d, "follow") != 0 )
+					{	error_syntax_error();
+						return;
+					}
+				}
+			}
+		}
+	}
+
+	ptr= (char *) um_malloc(1+strlen(d)*sizeof(char));
+
+	if (!ptr)
+	{	error_malloc_failed();
+		bFatalErrorDetected= TRUE;
+	}
+	else
+	{	strcpy(ptr, d);
+		toc[p1_toc_counter]->robots= ptr;
+	}
+	
+}	/* set_html_robots */
 
 GLOBAL void set_html_special_color ( char *hc )
 {
@@ -10872,6 +10925,7 @@ LOCAL TOCITEM *init_new_toc_entry ( const int toctype, const BOOLEAN invisible )
 	tocptr->counter_command=	NULL;
 	tocptr->keywords=			NULL;
 	tocptr->description=		NULL;	/*r6pl5*/
+	tocptr->robots=				NULL;	/*V6.5.17*/
 	tocptr->helpid=				NULL;
 	tocptr->mapping=			-1;
 	tocptr->image=				NULL;
@@ -12900,6 +12954,7 @@ GLOBAL void exit_module_toc ( void )
 			free_toc_data( &(toc[i]->counter_command) );
 			free_toc_data( &(toc[i]->keywords) );
 			free_toc_data( &(toc[i]->description) );
+			free_toc_data( &(toc[i]->robots) );
 			free_toc_data( &(toc[i]->helpid) );
 			free_toc_data( &(toc[i]->image) );
 			free_toc_data( &(toc[i]->icon) );
