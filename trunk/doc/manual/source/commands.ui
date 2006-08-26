@@ -3799,6 +3799,10 @@ erzeugt UDO eine Zeile der Art ""Copyright (!copyright) by <author>"". Wurde
 ""<text>"" wird für den Titel jeder Seite benutzt (anstelle der
 Zusammenfassung von [title] und [program]).
 
+!item [robots]
+""<text>"" entspricht einer der Robots Anweisung wie sie für Suchmaschinen benutzt werden.
+Erlaubt sind "none", "noindex", "index", "nofollow" und "follow".
+
 !item [webmastername|webmasteremail|webmasterurl]
 Werden Webmaster-Daten angegeben, so erzeugt
 UDO standardmäßig am Ende einer jeden Seite folgendes:
@@ -3894,6 +3898,10 @@ the text ""Made with UDO"".
 !item [htmltitle]
 ""<text>"" will be used as the title of every page (instead of
 using [title] and [program]).
+
+!item [robots]
+""<text>"" entspricht einer der Robots Anweisung wie sie für Suchmaschinen benutzt werden.
+Erlaubt sind "none", "noindex", "index", "nofollow" und "follow".
 
 !item [webmastername|webmasteremail|webmasterurl]
 If you specify webmaster informations, UDO will
@@ -7350,6 +7358,44 @@ This command has been renamed to (!KW [html_frames_width]).
 !endif
 
 ################################################################################
+# ToDo: Englisch
+!begin_node (!kw [html_frames_con_title])
+!html_name cmd_html_frames_con_title.html
+
+!iflang [german]
+Setzen des Frametitel für den Frame des Inhalsverzeichnis beim Frame Layout (nur HTML).
+!endif
+!iflang [english]
+Setzen des Frametitel für den Frame des Inhalts beim Frame Layout (nur HTML).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_toc_title <text>(!t)
+!iflang [german]
+!item [(!DESCRIPTION)]
+Setzen des Frametitel für den Frame des Inhalts beim Frame Layout.
+Gibt man zum Beispiel als <text> Inhalt an so wird daraus: (!nl)
+<frame src="00con.htm" name="UDOcon" marginwidth="0" marginheight="0" title="Inhalt">
+!endif
+!iflang [english]
+Setzen des Frametitel für den Frame des Inhalts beim Frame Layout.
+Gibt man zum Beispiel als <text> Inhalt an so wird daraus: (!nl)
+<frame src="00con.htm" name="UDOcon" marginwidth="0" marginheight="0" title="Inhalt">
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.16
+
+!item [(!SEEALSO)]
+(!KW [html_frames_layout]), (!KW [html_frames_toc_title])
+
+!end_xlist
+
+!end_node
+
+################################################################################
 !begin_node (!kw [html_frames_height])
 !html_name cmd_html_frames_heigth.html
 
@@ -7461,7 +7507,7 @@ The left frame can not be scrolled then.
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~4
 
 !item [(!SEEALSO)]
-(!KW [html_frames_position]), (!KW [html_frames_width]), (!KW [html_frames_height]), (!KW [html_frames_backcolor]), (!KW [html_frames_alignment]), (!KW [html_modern_layout])
+(!KW [html_frames_position]), (!KW [html_frames_width]), (!KW [html_frames_height]), (!KW [html_frames_backcolor]), (!KW [html_frames_alignment]), (!KW [html_frames_toc_title]), (!KW [html_frames_con_title]), (!KW [html_modern_layout])
 
 !end_xlist
 
@@ -7575,6 +7621,45 @@ when using the frames layout.
 
 !item [(!SEEALSO)]
 (!KW [html_frames_linkcolor]), (!KW [html_frames_alinkcolor]), (!KW [html_frames_vlinkcolor]), (!KW [html_frames_backcolor]), (!KW [html_frames_layout])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: Englisch
+!begin_node (!kw [html_frames_toc_title])
+!html_name cmd_html_frames_toc_title.html
+
+!iflang [german]
+Setzen des Frametitel für den Frame des Inhalsverzeichnis beim Frame Layout (nur HTML).
+!endif
+!iflang [english]
+Setzen des Frametitel für den Frame des Inhalsverzeichnis beim Frame Layout (nur HTML).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_frames_toc_title <text>(!t)
+!iflang [german]
+!item [(!DESCRIPTION)]
+Setzen des Frametitel für den Frame des Inhalsverzeichnis beim Frame Layout.
+Gibt man zum Beispiel als <text> Navigation an so wird daraus: (!nl)
+<frame src="00toc.htm" name="UDOtoc" marginwidth="0" marginheight="0" title="Navigation">
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Setzen des Frametitel für den Frame des Inhalsverzeichnis beim Frame Layout.
+Gibt man zum Beispiel als <text> Navigation an so wird daraus: (!nl)
+<frame src="00toc.htm" name="UDOtoc" marginwidth="0" marginheight="0" title="Navigation">
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.16
+
+!item [(!SEEALSO)]
+(!KW [html_frames_layout]), (!KW [html_frames_con_title])
 
 !end_xlist
 
@@ -8800,6 +8885,50 @@ This command sets the size of the font that is used to display regular text.
 
 !item [(!SEEALSO)]
 (!KW [html_propfont_name])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: englisch
+!begin_node (!kw [html_robots])
+!html_name cmd_html_robots.html
+
+!iflang [german]
+Einstellen der Robots Anweisung für Suchmaschinen (nur HTML).
+!endif
+!iflang [english]
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!iflang [german]
+!item [(!SYNTAX)] (!T)!/html_robots <(!TEXT)>(!t)
+!endif
+!iflang [english]
+!item [(!SYNTAX)] (!T)!/html_robots <(!TEXT)>(!t)
+!endif
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+""<text>"" entspricht einer der Robots Anweisung wie sie für Suchmaschinen benutzt werden.
+Erlaubt sind "none", "noindex", "index", "nofollow" und "follow". Diese Anweisung hat 
+vorrang vor (!KW [docinfo] [[robots!!]])
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+""<text>"" entspricht einer der Robots Anweisung wie sie für Suchmaschinen benutzt werden.
+Erlaubt sind "none", "noindex", "index", "nofollow" und "follow". Diese Anweisung hat 
+vorrang vor (!KW [docinfo] [[robots!!]])
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.17
+
+!item [(!SEEALSO)]
+(!KW [docinfo] [[robots!!]])
 
 !end_xlist
 
