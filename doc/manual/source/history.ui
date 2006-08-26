@@ -304,6 +304,34 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 !begin_itemize
 # ..............................................................................
 !iflang [german]
+!item Neue Kommandos: (!T)!/html_robots(!t), (!KW [docinfo]) [robots] (!nl)
+   Dienen zum Setzen der Robots Anweisungen für Suchmaschinen. (!nl)
+   (!KW [docinfo]) [robots] wird nur geschrieben, wenn in
+   einzelnen Dateien nicht (!KW [html_robots]) benutzt wird. Dies habt also vorang.
+   Seit Version~6.5.17 implementiert.
+!endif
+!iflang [english]
+# ToDo: Englisch
+!item Neue Kommandos: (!T)!/html_robots(!t), (!KW [docinfo]) [robots] (!nl)
+   Dienen zum Setzen der Robots Anweisungen für Suchmaschinen. (!nl)
+   (!KW [docinfo]) [robots] wird nur geschrieben, wenn in
+   einzelnen Dateien nicht (!KW [html_robots]) benutzt wird. Dies habt also vorang.
+   Seit Version~6.5.17 implementiert.
+!endif
+# ..............................................................................
+!iflang [german]
+!item Neue Kommandos: (!T)!/html_frames_toc_title(!t), (!T)!/html_frames_con_title(!t) (!nl)
+   Dienen zum Setzen der Framentitel beim Frame Layout.
+   Seit Version~6.5.16 implementiert.
+!endif
+!iflang [english]
+# ToDo: Englisch
+!item Neue Kommandos: (!T)!/html_frames_toc_title(!t), (!T)!/html_frames_con_title(!t) (!nl)
+   Dienen zum Setzen der Framentitel beim Frame Layout.
+   Seit Version~6.5.16 implementiert.
+!endif
+# ..............................................................................
+!iflang [german]
 !item Neuer Schalter: (!T)!/html_header_links(!t) (!nl)
     Ist dieser Schalter gesetzt, so werden je nach Vorgabe
    (!T)<link>(!t)-Elemente im HTML-Header erzeugt. (!nl)
