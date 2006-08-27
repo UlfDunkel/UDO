@@ -9115,13 +9115,13 @@ GLOBAL int add_label ( const char *label, const BOOLEAN isn, const BOOLEAN isp )
 		return FALSE;
 	}
 
-	/* rel6pl2: Leeres Label abweisen */
+	/* rel6pl2: Leeres Label abweisen and too long (V6.5.17) */
 #if 1
-	if (label[0]==EOS)
+	if (label[0]==EOS || strlen (label) > MAX_LABEL_LEN)
 	{	return FALSE;
 	}
 #endif
-	
+
 	labptr= (LABEL *) um_malloc(sizeof(LABEL)+1);
 	
 	if (labptr==NULL)					/* Kein Speicher mehr frei? */
@@ -11103,7 +11103,7 @@ GLOBAL BOOLEAN add_node_to_toc ( const BOOLEAN popup, const BOOLEAN invisible )
 
 	li= add_label(tocptr->name, TRUE, popup);
 
-	if (li>=0)
+	if (li>0)			/* and not li>=0, V6.5.17 [GS] */
 	{	tocptr->labindex= li;
 	}
 
@@ -11251,7 +11251,7 @@ GLOBAL BOOLEAN add_subnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisible
 
 	li= add_label(tocptr->name, TRUE, popup);
 
-	if (li>=0)
+	if (li>0)			/* and not li>=0, V6.5.17 [GS] */
 	{	tocptr->labindex= li;
 	}
 
@@ -11383,7 +11383,7 @@ GLOBAL BOOLEAN	add_subsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisi
 
 	li= add_label(tocptr->name, TRUE, popup);
 
-	if (li>=0)
+	if (li>0)			/* and not li>=0, V6.5.17 [GS] */
 	{	tocptr->labindex= li;
 	}
 
