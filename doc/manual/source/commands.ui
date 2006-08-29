@@ -10757,11 +10757,13 @@ If ''<caption>'' is used it will be printed as the title of the image.
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KW [no_images]), (!KKW [img]), (!KW [image*]), (!link [Bilder] [Bilder]), (!KW [html_img_suffix])
+(!KW [no_images]), (!KKW [img]), (!KW [image*]), (!link [Bilder] [Bilder]), (!KW [html_img_suffix]),
+(!KW [no_img_size])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
-(!KW [no_images]), (!KKW [img]), (!KW [image*]), (!link [Images] [Images]), (!KW [html_img_suffix])
+(!KW [no_images]), (!KKW [img]), (!KW [image*]), (!link [Images] [Images]), (!KW [html_img_suffix]),
+(!KW [no_img_size])
 !endif
 
 !end_xlist
@@ -10984,11 +10986,11 @@ if this file exists.
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!link [Bilder] [Bilder]), (!KW [image])
+(!link [Bilder] [Bilder]), (!KW [image]), (!KW [no_img_size])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
-(!link [Images] [Images]), (!KW [image])
+(!link [Images] [Images]), (!KW [image]), (!KW [no_img_size])
 !endif
 
 !end_xlist
@@ -11673,11 +11675,11 @@ accessed by a link command
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!link [Sprungmarken] [Sprungmarken]), (!link [Querverweise] [Querverweise]), (!KKW [link]), (!KKW [plink])
+(!link [Sprungmarken] [Sprungmarken]), (!link [Querverweise] [Querverweise]), (!kkw [label]), (!KKW [link]), (!KKW [plink])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
-(!link [Labels] [Labels]), (!link [Links] [Links]), (!KKW [link]), (!KKW [plink])
+(!link [Labels] [Labels]), (!link [Links] [Links]), (!kkw [label]), (!KKW [link]), (!KKW [plink])
 !endif
 
 !end_xlist
@@ -11713,6 +11715,15 @@ z. Zt. nur für die RTF-Ausgabe unterstützt.
 !endif
 
 !item [(!EXISTSSINCE)] Version 6.5.9
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Sprungmarken] [Sprungmarken]), (!link [Querverweise] [Querverweise]), (!kw [label]), (!KKW [link]), (!KKW [plink])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Labels] [Labels]), (!link [Links] [Links]), (!kw [label]), (!KKW [link]), (!KKW [plink])
+!endif
 
 !end_xlist
 
@@ -18365,7 +18376,7 @@ the (!KW [begin_table]) and (!KW [end_table]) commands.
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KW [image]), (!KKW [img]), (!link [Tabellen] [Tabellen])
+(!KW [begin_table]), (!link [Tabellen] [Tabellen])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]

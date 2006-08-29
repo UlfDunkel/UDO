@@ -305,7 +305,7 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 # ..............................................................................
 !iflang [german]
 !item Neue Kommandos: (!T)!/html_robots(!t), (!KW [docinfo]) [robots] (!nl)
-   Dienen zum Setzen der Robots Anweisungen fŸr Suchmaschinen. (!nl)
+   Dienen zum Setzen der Robots Anweisungen für Suchmaschinen. (!nl)
    (!KW [docinfo]) [robots] wird nur geschrieben, wenn in
    einzelnen Dateien nicht (!KW [html_robots]) benutzt wird. Dies habt also vorang.
    Seit Version~6.5.17 implementiert.
@@ -313,7 +313,7 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 !iflang [english]
 # ToDo: Englisch
 !item Neue Kommandos: (!T)!/html_robots(!t), (!KW [docinfo]) [robots] (!nl)
-   Dienen zum Setzen der Robots Anweisungen fŸr Suchmaschinen. (!nl)
+   Dienen zum Setzen der Robots Anweisungen für Suchmaschinen. (!nl)
    (!KW [docinfo]) [robots] wird nur geschrieben, wenn in
    einzelnen Dateien nicht (!KW [html_robots]) benutzt wird. Dies habt also vorang.
    Seit Version~6.5.17 implementiert.
