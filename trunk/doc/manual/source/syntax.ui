@@ -4401,8 +4401,7 @@ images from Paintbrush PCX you can ignore the warning printed by UDO.
 
 !iflang [german]
 UDO kann zur Einbindung von GIFs in eine HTML-Seite entsprechende
-HTML-Kommandos erzeugen. UDO prüft dabei nicht, ob die angegebene
-Datei existiert!
+HTML-Kommandos erzeugen.
 
 Anders als bei den anderen Formaten wird der zweite Parameter nicht
 als Bildunterschrift, sondern als Alternativtext benutzt.
@@ -4413,7 +4412,7 @@ erzeugt:
 !begin_quote
 !begin_verbatim
 <p align=...>
-<img src="tiger.gif" alt="Ein Tiger">
+<img src="tiger.gif" alt="Ein Tiger" width="200" height="300">
 </p><br>
 !end_verbatim
 !end_quote
@@ -4426,16 +4425,19 @@ wird
 !begin_quote
 !begin_verbatim
 <p align=...>
-<img src="../gif/tiger.gif" alt="">
+<img src="../gif/tiger.gif" width="200" height="300">
 </p><br>
 !end_verbatim
 !end_quote
 
+Wer die Größenangaben nicht benötigt kann die Ermittlung der
+Ausmaße von Bildern unterbinden. Dazu gibt es das Kommando (!kw [no_img_size]).
+
 !endif
 # ------------------------------------------------------------------------------
+# ToDo: Englisch
 !iflang [english]
-UDO can generate HTML commands to include a GIF. UDO doesn't check if the
-GIF is existing!
+UDO can generate HTML commands to include a GIF. 
 
 For HTML the second parameter of the (!KW [image]) command will be used as
 the alternative text. The command (!KW [image] [tiger A tiger]) will be
@@ -4444,7 +4446,7 @@ converted into the following HTML commands:
 !begin_quote
 !begin_verbatim
 <p align=...>
-<img src="tiger.gif" alt="(Figure 1: A tiger)">
+<img src="tiger.gif" alt="(Figure 1: A tiger)" width="200" height="300">
 </p><br>
 !end_verbatim
 !end_quote
@@ -4455,10 +4457,13 @@ text. The command (!KW [image] [tiger]) will be converted into this:
 !begin_quote
 !begin_verbatim
 <p align=...>
-<img src="../gif/tiger.gif" alt="">
+<img src="../gif/tiger.gif" width="200" height="300">
 </p><br>
 !end_verbatim
 !end_quote
+
+Wer die Größenangaben nicht benötigt kann die Ermittlung der
+Ausmaße von Bildern unterbinden. Dazu gibt es das Kommando (!kw [no_img_size]).
 !endif
 
 !end_node
@@ -4666,7 +4671,7 @@ die Stelle gelangen, an der diese Sprungmarke definiert wurde.
 Die Umsetzung im Detail:
 
 !begin_xlist [Linuxdoc-SGML:] !short
-!item [HTML:]          (!V)<a name="Beispiel"</a>(!v)
+!item [HTML:]          (!V)<a name="Beispiel"></a>(!v)
 !item [LaTeX:]         (!V)\label{Beispiel}(!v)
 !item [Linuxdoc-SGML:] (!V)<label id="Beispiel">(!v)
 !item [Pure-C-Help:]   (!V)sensitive("Beispiel")(!v) im Header
@@ -4709,7 +4714,7 @@ the word ""example"" is used to the position where you used the label.
 Here a list how UDO converts a label for the hypertext formats:
 
 !begin_xlist [Linuxdoc-SGML:] !short
-!item [HTML:]          (!V)<a name="example"</a>(!v)
+!item [HTML:]          (!V)<a name="example"></a>(!v)
 !item [LaTeX:]         (!V)\label{example}(!v)
 !item [Linuxdoc-SGML:] (!V)<label id="example">(!v)
 !item [Pure-C-Help:]   (!V)sensitive("example")(!v) inside the header
