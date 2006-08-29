@@ -2465,9 +2465,9 @@ GLOBAL void c_man_styles ( char *s )
 
 typedef struct _quotecommand
 {
-	char	cmd[20];	/* String PL6: vorher UCHAR */
+	char	*cmd;		/* String PL6: vorher UCHAR */
 	size_t	cmdlen;		/* Laenge des Kommandos (need speed ;-))*/
-	char	abb[20];	/* Kommandoabkuerzung */
+	char	*abb;		/* Kommandoabkuerzung */
 	size_t	abblen;		/* Laenge der Abkuerzung */
 }	QUOTECOMMAND;
 
