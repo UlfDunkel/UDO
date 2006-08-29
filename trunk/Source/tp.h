@@ -50,6 +50,8 @@ typedef struct _titledata			/* ---- Titelseiteninfos ----		*/
 	char	*authorimage;			/* ... Text			*/
 	char	*authoricon;			/* -> Modern/Frames	*/
 	char	*authoricon_active;		/* -> Modern/Frames	*/
+	char	*appletitle;			/* for HTML Apple Help V6.5.17 */
+	char	*appleicon;				/* for HTML Apple Help V6.5.17 */
 	unsigned int authoriconWidth;
 	unsigned int authoriconHeight;
 	unsigned int authoriconActiveWidth;

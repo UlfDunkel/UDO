@@ -529,6 +529,7 @@ GLOBAL void c_internal_styles ( char *s )
 
 			del_internal_styles(s);
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			/* Changed in V6.5.9 [NHz] */

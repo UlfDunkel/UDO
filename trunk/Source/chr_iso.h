@@ -192,11 +192,11 @@ LOCAL const ISO2SYS iso2sys_item[128]=
 typedef struct _chartable
 {
 	unsigned char	system;
-	char ascii[16];
-	char ansi[16];
-	char tex[16];
-	char html[16];
-	char ps[6];
+	char *ascii;
+	char *ansi;
+	char *tex;
+	char *html;
+	char *ps;
 }	CHARTABLE;
 
 LOCAL /*const*/ CHARTABLE chrtab[128]=
@@ -338,8 +338,8 @@ LOCAL /*const*/ CHARTABLE chrtab[128]=
 	############################################################	*/
 typedef struct _uni2systab
 {
-	char			uni[8];
-	unsigned char	system[2];
+	char			*uni;
+	unsigned char	*system;
 }	UNI2SYSTAB;
 
 #define	UNI2SYSTABSIZE	64

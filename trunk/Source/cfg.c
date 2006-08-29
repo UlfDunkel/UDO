@@ -24,7 +24,7 @@
 
 #ifndef ID_CFG_C
 #define ID_CFG_C
-const char *id_cfg_c= "@(#) cfg.c       17.04.1998";
+const char *id_cfg_c= "@(#) cfg.c       $DATE$";
 #endif
 
 #include "import.h"
@@ -47,7 +47,7 @@ const char *id_cfg_c= "@(#) cfg.c       17.04.1998";
 	############################################################	*/
 
 typedef struct _profile
-{	char		key[32];
+{	char		*key;
 	char		type;
 	void		*val;	/* nicht const, da gecastet wird */
 	size_t	maxlen;

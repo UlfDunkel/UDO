@@ -141,8 +141,8 @@ LOCAL void output_about_udo_ger ( FILE *f )
 	fprintf(f, "UDO ist ein Programm, welches Textdateien, die im\n");
 	fprintf(f, "Universal Document Format erstellt wurden, in das ASCII-,\n");
 	fprintf(f, "ST-Guide-, LaTeX-, Rich Text-, Pure-C-Help-, Manualpage-,\n");
-	fprintf(f, "HTML-, WinHelp-, Texinfo-, Linuxdoc-SGML-, LyX-, Apple-QuickView-\n");
-	fprintf(f, "und Turbo-Vision-Help-Format umwandeln kann.\n");
+	fprintf(f, "HTML-, WinHelp-, Texinfo-, Linuxdoc-SGML-, LyX-, Apple-QuickView-, \n");
+	fprintf(f, "HTML Apple Help- und Turbo-Vision-Help-Format umwandeln kann.\n");
 	fprintf(f, "\n");
 	fprintf(f, "Weitere Informationen sowie die aktuellen Versionen findet man im World Wide Web unter\t(!nl)\n");
 	fprintf(f, "(!url [%s][])\n", UDO_URL);
@@ -171,7 +171,7 @@ LOCAL void output_about_udo_eng ( FILE *f )
 	fprintf(f, "UDO is a program that converts files that are written\n");
 	fprintf(f, "in the Universal Document Format into ASCII, ST-Guide, LaTeX,\n");
 	fprintf(f, "Rich Text Format, Pure C Help, Manualpage, HTML, WinHelp\n,");
-	fprintf(f, "Texinfo, Linuxdoc-SGML, LyX, Apple QuickView and Turbo-Vision-Help.\n");
+	fprintf(f, "Texinfo, Linuxdoc-SGML, LyX, Apple QuickView HTML Apple Help and Turbo-Vision-Help.\n");
 	fprintf(f, "Further information and the current versions can be found at\t(!nl)\n");
 	fprintf(f, "\n");
 	fprintf(f, "(!url [%s] [])\n", UDO_URL);

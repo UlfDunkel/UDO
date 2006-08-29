@@ -1628,6 +1628,7 @@ GLOBAL void table_output ( void )
 	switch (desttype)
 	{	case TOHTM:
 		case TOMHH:
+		case TOHAH:			/* V6.5.17 */
 			table_output_html();
 			break;
 		case TOTEX:

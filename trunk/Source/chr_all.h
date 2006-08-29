@@ -25,7 +25,7 @@
 
 #ifndef ID_CHR_ALL_H
 #define	ID_CHR_ALL_H
-const char *id_chr_all_h= "@(#) chr_all.h   25.11.1997";
+const char *id_chr_all_h= "@(#) chr_all.h   $DATE$";
 #endif
 
 /*	------------------------------------------------------------	*/
@@ -33,7 +33,7 @@ const char *id_chr_all_h= "@(#) chr_all.h   25.11.1997";
 typedef struct _quoteinfo
 {
 	char c;
-	char quoted[32];
+	char *quoted;
 }	QUOTEINFO;
 
 /*	------------------------------------------------------------	*/
@@ -144,11 +144,11 @@ LOCAL /*const*/ QUOTEINFO ipf7bit[MAXIPF7BIT]=
 
 typedef struct _unitable
 {
-	char	uni[8];
-	char	win[16];
-	char	tex[16];
-	char	html[16];
-	char	lyx[4];		/* PL14 */
+	char	*uni;
+	char	*win;
+	char	*tex;
+	char	*html;
+	char	*lyx;		/* PL14 */
 }	UNITABLE;
 
 #define	UNITABLESIZE	63

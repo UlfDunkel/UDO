@@ -339,6 +339,7 @@ LOCAL void end_env_output_line ( const int el )
 			case TORTF:
 				outln("\\par");
 				break;
+			case TOHAH:		/* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
 #if 0	/* r6pl6*/
@@ -457,6 +458,7 @@ GLOBAL void output_begin_verbatim ( void )
 				case VERB_HUGE:		voutf("\\fs%d ", iDocMonofontSize + 8);	break;
 			}
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			if (sDocVerbatimBackColor[0]!=EOS)	/*r6pl5*/
@@ -512,6 +514,7 @@ GLOBAL void output_end_verbatim ( void )
 			outln(rtf_pardplain);
 			voutlnf("%s\\fs%d", rtf_norm, iDocPropfontSize);
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			outln("</pre>");
@@ -839,6 +842,7 @@ GLOBAL void c_begin_quote ( void )
 		case TOINF:
 			outln("@quotation");
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			/* Changed in V6.5.9 [NHz] [blockquote] */
@@ -977,6 +981,7 @@ GLOBAL void c_end_quote ( void )
 			{	outln("\\li0\\ri0\\fi0 ");
 			}
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			outln("</blockquote>");
@@ -1011,7 +1016,7 @@ GLOBAL void c_begin_center ( void )
 	bEnv1stPara[iEnvLevel]= TRUE;
 	/*r6pl6:	!short verbieten, da UDO dann nur Schrott erzeugt	*/
 	/*			und eine Anpassung unheimlich problematisch ist		*/
-	if (desttype==TOHTM || desttype==TOMHH)
+	if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH)
 	{	bEnvShort[iEnvLevel]= FALSE;
 	}
 	else
@@ -1088,7 +1093,7 @@ GLOBAL void c_begin_flushright ( void )
 	bEnv1stPara[iEnvLevel]= TRUE;
 	/*r6pl6:	!short verbieten, da UDO dann nur Schrott erzeugt	*/
 	/*			und eine Anpassung unheimlich problematisch ist		*/
-	if (desttype==TOHTM || desttype==TOMHH)
+	if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH)
 	{	bEnvShort[iEnvLevel]= FALSE;
 	}
 	else
@@ -1172,7 +1177,7 @@ GLOBAL void c_begin_flushleft ( void )
 	bEnv1stPara[iEnvLevel]= TRUE;
 	/*r6pl6:	!short verbieten, da UDO dann nur Schrott erzeugt	*/
 	/*			und eine Anpassung unheimlich problematisch ist		*/
-	if (desttype==TOHTM || desttype==TOMHH)
+	if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH)
 	{	bEnvShort[iEnvLevel]= FALSE;
 	}
 	else
@@ -1281,6 +1286,7 @@ GLOBAL void c_begin_itemize ( void )
 				case 2: case 4:	outln("@minus");	break;
 			}
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			outln("<ul>");
@@ -1365,6 +1371,7 @@ GLOBAL void c_begin_enumerate ( void )
 				case 4:	outln("A");	break;
 			}
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 #if 1
@@ -1459,6 +1466,7 @@ GLOBAL void c_begin_description ( void )
 			}
 			break;
 		case TOINF:	outln("@table @strong");			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			outln("<dl>");
@@ -1516,7 +1524,7 @@ LOCAL void c_begin_list ( int listkind )
 		return;
 	}
 
-	if (desttype==TOHTM && html_no_xlist)
+	if ((desttype==TOHTM || desttype==TOHAH) && html_no_xlist)
 	{	c_begin_description();
 		return;
 	}
@@ -1589,6 +1597,7 @@ LOCAL void c_begin_list ( int listkind )
 		case TOINF:
 			outln("@table @asis");
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			outln("<table>");
@@ -2195,6 +2204,7 @@ GLOBAL void c_item ( void )
 			
 			break;
 
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			switch(iEnvType[iEnvLevel])
@@ -2565,7 +2575,7 @@ LOCAL void c_end_list ( int listkind )
 		return;
 	}
 
-	if (desttype==TOHTM && html_no_xlist)
+	if ((desttype==TOHTM || desttype==TOHAH) && html_no_xlist)
 	{	c_end_description();
 		return;
 	}
@@ -2632,6 +2642,7 @@ LOCAL void c_end_list ( int listkind )
 		case TOINF:
 			outln("@end table");
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			voutlnf("%s</td></tr></table>", sHtmlPropfontEnd);
@@ -2715,6 +2726,7 @@ GLOBAL void c_end_description ( void )
 		case TOINF:
 			outln("@end table");
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			outln("</dd>\n</dl>");	/* Changed in V6.5.11 [NHz] */
@@ -2780,6 +2792,7 @@ GLOBAL void c_end_enumerate ( void )
 			outln("@end enumerate");
 			outln("");
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			outln("</li>");	/* r6pl6: Mit </li> */
@@ -2847,6 +2860,7 @@ GLOBAL void c_end_itemize ( void )
 			outln("@end itemize");
 			outln("");
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			outln("</li>");	/* r6pl6: mit </li> */
@@ -3080,6 +3094,7 @@ GLOBAL void c_begin_document ( void )
 			}
 			
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			if (titdat.htmltitle!=NULL && titdat.htmltitle[0]!=EOS)
@@ -3461,7 +3476,7 @@ GLOBAL void c_end_document ( void )
 		check_endnode();
 	}
 
-	if (desttype==TOHTM)
+	if (desttype==TOHTM || desttype==TOHAH)
 	{	if (!no_index)
 		{
 			save_html_index();
@@ -3525,6 +3540,7 @@ GLOBAL void c_end_document ( void )
 			outln("}");
 			outln("");
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			voutlnf("%s", sHtmlPropfontEnd);
