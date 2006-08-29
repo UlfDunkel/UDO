@@ -300,6 +300,7 @@ LOCAL void output_helpid(int tocindex)
 			case TOAQV:
 				voutlnf("#{\\footnote # %s}", s);
 				break;
+			case TOHAH:		/* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
 				label2html(s);	/*r6pl2*/
@@ -384,6 +385,7 @@ LOCAL void output_aliasses ( void )
 						voutlnf("{\\xe\\v %s}", keyword);
 					}
 					break;
+				case TOHAH:		/* V6.5.17 */
 				case TOHTM:
 				case TOMHH:
 					um_strcpy(s, lab[i]->name, 256, "output_aliasses [6]");
@@ -601,6 +603,7 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 			sprintf(ref, "* %s::", n);
 			break;
 
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			um_strcpy(n, l->name, 512, "string2reference[12]");
@@ -966,6 +969,7 @@ GLOBAL void check_endnode ( void )
 			case TOAQV:
 				outln("}\\page");
 				break;
+			case TOHAH:		/* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
 				break;
@@ -2419,7 +2423,7 @@ LOCAL BOOLEAN html_new_file ( void )
 	outln("<head>");
 	outln("<title>");
 
-	if (desttype==TOHTM)
+	if (desttype==TOHTM || desttype==TOHAH)
 	{
 		if (titdat.htmltitle!=NULL && titdat.htmltitle[0]!=EOS)
 		{	strcpy(t, titdat.htmltitle);	/*r6pl5*/
@@ -2476,7 +2480,7 @@ LOCAL BOOLEAN html_new_file ( void )
 
 	output_aliasses();	/* r5pl9 */
 
-	if (desttype==TOHTM)
+	if (desttype==TOHTM || desttype==TOHAH)
 	{	html_headline();
 	}
 	else
@@ -2490,7 +2494,7 @@ LOCAL BOOLEAN html_new_file ( void )
 GLOBAL void output_html_header ( const char *t )
 {
 	/* Wird nur fuer die Titelseite/Inhaltsverzeichnis benutzt */
-	char xml_lang[15], xml_ns[40];
+	char xml_lang[15], xml_ns[40], str[512];
 	
 	output_html_doctype();	/* r6pl2 */
 	/* Changed in V6.5.9 [NHz] */
@@ -2513,7 +2517,20 @@ GLOBAL void output_html_header ( const char *t )
 	/* New in r6pl16 [NHz]
            Fixed: added real title (from <title> Tag) [vj]
         */
-	voutlnf("<meta name=\"AppleTitle\" content=\"%s\" />", t);
+	/* V6.5.17 */
+	if (desttype==TOHAH)
+	{	if ( titdat.appletitle != NULL )
+		{	um_strcpy(str, titdat.appletitle, 512, "output_html_header [1]");
+			um_strcat(str, " Help", 512, "output_html_header [2]");
+			voutlnf("<meta name=\"AppleTitle\" content=\"%s\" />", str);
+			if ( titdat.appleicon != NULL )
+			{	um_strcpy(str, titdat.appletitle, 512, "output_html_header [2]");
+				um_strcat(str, "%20Help/", 512, "output_html_header [3]");
+				um_strcat(str, titdat.appleicon, 512, "output_html_header [4]");
+				voutlnf("<meta name=\"AppleIcon\" content=\"%s\" />", str);
+			}
+		}
+	}
 
 	output_html_meta(TRUE);	/*r6pl5: auch Keywords auf der ersten Seite erlauben */
 	outln("</head>");
@@ -4360,7 +4377,7 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 	p2_lab_counter++;		/*r6pl2*/
 	p2_toctype= TOC_NODE1;	/*r6pl5*/
 	
-	if (desttype==TOHTM && !html_merge_node1)
+	if ( (desttype==TOHTM || desttype==TOHAH) && !html_merge_node1)
 	{	check_endnode();
 		html_bottomline();
 	}
@@ -4769,6 +4786,7 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 			output_pch_header(numbers, name);
 			break;
 
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			ti= p2_toc_counter;
@@ -4885,7 +4903,7 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 	p2_lab_counter++;		/*r6pl2*/
 	p2_toctype= TOC_NODE2;	/*r6pl5*/
 
-	if (desttype==TOHTM && !html_merge_node2)
+	if ( (desttype==TOHTM || desttype==TOHAH) && !html_merge_node2)
 	{	check_endnode();
 		html_bottomline();
 	}
@@ -5232,6 +5250,7 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 			output_pch_header(numbers, name);
 			break;
 
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			ti= p2_toc_counter;
@@ -5348,7 +5367,7 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 	p2_lab_counter++;		/*r6pl2*/
 	p2_toctype= TOC_NODE3;	/*r6pl5*/
 
-	if (desttype==TOHTM && !html_merge_node3)
+	if ( (desttype==TOHTM || desttype==TOHAH) && !html_merge_node3)
 	{	check_endnode();
 		html_bottomline();
 	}
@@ -5695,6 +5714,7 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			output_pch_header(numbers, name);
 			break;
 
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			ti= p2_toc_counter;
@@ -5814,7 +5834,7 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 	p2_lab_counter++;		/*r6pl2*/
 	p2_toctype= TOC_NODE4;	/*r6pl5*/
 
-	if (desttype==TOHTM && !html_merge_node4)
+	if ((desttype==TOHTM || desttype==TOHAH) && !html_merge_node4)
 	{	check_endnode();
 		html_bottomline();
 	}
@@ -6155,6 +6175,7 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			output_pch_header(numbers, name);
 			break;
 
+		case TOHAH: /* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			ti= p2_toc_counter;
@@ -6391,6 +6412,7 @@ LOCAL void tocline_make_bold ( char *s, const int depth )
 	{
 		switch (desttype)
 		{
+			case TOHAH: /* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
 #if 1
@@ -6428,6 +6450,7 @@ LOCAL void tocline_handle_1st ( BOOLEAN *f )
 		{	case TOINF:
 				outln("@menu");
 				break;
+			case TOHAH: /* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
 			case TOTEX:
@@ -6847,6 +6870,7 @@ LOCAL void toc_output ( const int depth )
 							{	case TOWIN:
 								case TOWH4:
 								case TOAQV:	outln(rtf_par);	break;
+								case TOHAH: /* V6.5.17 */
 								case TOHTM:
 								case TOMHH:	outln("<br />&nbsp;");	break;
 								case TOTEX:
@@ -7021,6 +7045,7 @@ LOCAL void toc_output ( const int depth )
 
 	switch (desttype)
 	{
+		case TOHAH: /* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 		case TOTEX:
@@ -7101,7 +7126,8 @@ LOCAL void apx_output ( const int depth )
 
 						if ( (leerzeile) && (depth>1) )
 						{	switch(desttype)
-							{	case TOHTM:
+							{	case TOHAH: /* V6.5.17 */
+								case TOHTM:
 								case TOMHH:	outln("<br />&nbsp;");	break;
 								case TOWIN:
 								case TOWH4:
@@ -7263,6 +7289,7 @@ LOCAL void apx_output ( const int depth )
 
 	switch (desttype)
 	{
+		case TOHAH: /* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 		case TOTEX:
@@ -7445,7 +7472,8 @@ LOCAL void subtoc_output ( const int depth )
 	
 	if (output_done)
 	{	switch(desttype)
-		{	case TOHTM:
+		{	case TOHAH: /* V6.5.17 */
+			case TOHTM:
 			case TOMHH:
 				if (last_sssn)
 				{	voutlnf("%s%s", toc_list_end, toc_list_end);
@@ -7636,6 +7664,7 @@ LOCAL void subapx_output ( const int depth )
 	if (output_done)
 	{	switch(desttype)
 		{
+			case TOHAH: /* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
 				if (last_ssn)
@@ -7803,6 +7832,7 @@ LOCAL void subsubtoc_output ( const int depth )
 	if (output_done)
 	{	switch(desttype)
 		{
+			case TOHAH: /* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
 				if (last_sssn)	outln(toc_list_end);
@@ -7954,6 +7984,7 @@ LOCAL void subsubapx_output ( const int depth )
 	if (output_done)
 	{	switch(desttype)
 		{
+			case TOHAH: /* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
 				if (last_sssn)	outln(toc_list_end);
@@ -8081,6 +8112,7 @@ LOCAL void subsubsubtoc_output ( void )
 	if (output_done)
 	{	switch(desttype)
 		{
+			case TOHAH: /* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
 				outln(toc_list_end);
@@ -8202,6 +8234,7 @@ LOCAL void subsubsubapx_output ( void )
 	if (output_done)
 	{	switch(desttype)
 		{
+			case TOHAH: /* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
 				outln(toc_list_end);
@@ -8299,6 +8332,7 @@ LOCAL void do_toptoc ( const int currdepth )
 
 	switch (desttype)
 	{
+		case TOHAH: /* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			if (no_images || no_auto_toptocs_icons)
@@ -8662,6 +8696,7 @@ LOCAL void output_appendix_line ( void )
 		case TOAQV:
 			voutlnf("{\\b %s}\\par\\pard\\par", lang.appendix);
 			break;
+		case TOHAH: /* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			voutlnf("<h1>%s</h1>", lang.appendix);
@@ -8918,6 +8953,7 @@ GLOBAL void c_tableofcontents ( void )
 			outln("");
 			break;
 
+		case TOHAH: /* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			output_helpid(0);
@@ -9046,6 +9082,7 @@ GLOBAL void c_label ( void )
 			{	voutlnf("@symbol ar \"%s\"", sLabel);
 			}
 			break;
+		case TOHAH: /* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			label2html(sLabel);							/* r6pl2 */
@@ -9615,7 +9652,8 @@ GLOBAL void set_html_filename ( void )
 	char *ptr;
 	
 	/* New in v6.5.10 [vj]: !html_name is read in HTML and (new) HTML-Help output */
-	if ((desttype!=TOHTM)&&(desttype!=TOMHH)) return;
+	if ((desttype!=TOHTM)&&(desttype!=TOMHH) && desttype!=TOHAH ) /* New TOHAH; V6.5.17 */
+		return;
 
 	if (p1_toc_counter<0)	return;
 	if (toc[p1_toc_counter]==NULL)	return;
@@ -9637,7 +9675,8 @@ GLOBAL void set_html_filename ( void )
 
 GLOBAL void set_html_filename_prefix ( void )
 {
-	if (desttype!=TOHTM)	return;
+	if (desttype!=TOHTM && desttype!=TOHAH ) /* New TOHAH; V6.5.17 */
+		return;
 
 	if (p1_toc_counter<0)	return;
 	if (toc[p1_toc_counter]==NULL)	return;
@@ -9652,7 +9691,8 @@ GLOBAL void set_html_dirname ( void )
 {
 	char *ptr;
 	
-	if (desttype!=TOHTM)	return;
+	if (desttype!=TOHTM && desttype!=TOHAH ) /* New TOHAH; V6.5.17 */
+		return;
 
 	if (p1_toc_counter<0)	return;
 	if (toc[p1_toc_counter]==NULL)	return;
@@ -9675,7 +9715,7 @@ GLOBAL void set_html_dirname ( void )
 
 GLOBAL void set_html_switch_language ( void )
 {
-	if (desttype!=TOHTM && desttype!=TOMHH)
+	if (desttype!=TOHTM && desttype!=TOMHH && desttype!=TOHAH ) /* New TOHAH; V6.5.17 */
 	{	return;
 	}
 
@@ -10290,8 +10330,14 @@ GLOBAL void set_html_robots ( void )
 		{	if ( strcmp ( d, "index") != 0 )
 			{	if ( strcmp ( d, "nofollow") != 0 )
 				{	if ( strcmp ( d, "follow") != 0 )
-					{	error_syntax_error();
-						return;
+					{	if ( strcmp ( d, "keywords") != 0 )	/* For HTML Apple Help */
+						{	if ( strcmp ( d, "segements") != 0 )	/* For HTML Apple Help */
+							{	if ( strcmp ( d, "anchors") != 0 )	/* For HTML Apple Help */
+								{	error_syntax_error();
+									return;
+								}
+							}
+						}
 					}
 				}
 			}
@@ -10651,7 +10697,7 @@ GLOBAL void set_chapter_image ( void )
 	fsplit(token[1], tmp_driv, tmp_path, tmp_name, tmp_suff);
 	sprintf(s, "%s%s%s", tmp_driv, tmp_path, tmp_name);
 
-	if (desttype==TOHTM || desttype==TOMHH)
+	if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{	replace_char(s, "\\", "/");	/*r6pl4*/
 	}
 
@@ -10666,7 +10712,7 @@ GLOBAL void set_chapter_image ( void )
 	strcpy(ptr, s);
 	toc[p1_toc_counter]->image= ptr;
 	
-	if (desttype!=TOHTM && desttype!=TOMHH)
+	if (desttype!=TOHTM && desttype!=TOMHH && desttype!=TOHAH ) /* New TOHAH; V6.5.17 */
 	{	return;
 	}
 
@@ -10697,7 +10743,7 @@ GLOBAL void set_chapter_icon ( void )
 	fsplit(token[1], tmp_driv, tmp_path, tmp_name, tmp_suff);
 	sprintf(s, "%s%s%s%s", tmp_driv, tmp_path, tmp_name, sDocImgSuffix);
 	
-	if (desttype==TOHTM || desttype==TOMHH)
+	if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{	replace_char(s, "\\", "/");	/*r6pl4*/
 	}
 
@@ -10712,7 +10758,7 @@ GLOBAL void set_chapter_icon ( void )
 	strcpy(ptr, s);
 	toc[p1_toc_counter]->icon= ptr;
 
-	if (desttype!=TOHTM)
+	if (desttype!=TOHTM && desttype!=TOHAH ) /* New TOHAH; V6.5.17 */
 	{	return;
 	}
 
@@ -10756,7 +10802,7 @@ GLOBAL void set_chapter_icon_active ( void )
 	fsplit(token[1], tmp_driv, tmp_path, tmp_name, tmp_suff);
 	sprintf(s, "%s%s%s%s", tmp_driv, tmp_path, tmp_name, sDocImgSuffix);
 	
-	if (desttype==TOHTM || desttype==TOMHH)
+	if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{	replace_char(s, "\\", "/");	/*r6pl4*/
 	}
 
@@ -10771,7 +10817,7 @@ GLOBAL void set_chapter_icon_active ( void )
 	strcpy(ptr, s);
 	toc[p1_toc_counter]->icon_active= ptr;
 
-	if (desttype!=TOHTM)
+	if (desttype!=TOHTM && desttype!=TOHAH ) /* New TOHAH; V6.5.17 */
 	{	return;
 	}
 
@@ -10989,7 +11035,7 @@ GLOBAL BOOLEAN add_node_to_toc ( const BOOLEAN popup, const BOOLEAN invisible )
 
 	/* Bei HTML muss das Mergen beachtet werden! Der		*/
 	/* Vorgaenger wird daher auf den letzten *Node gesetzt	*/
-	if (desttype==TOHTM)
+	if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{
 		if (html_merge_node4 && last_n3_index>0)
 		{	tocptr->prev_index= last_n3_index;
@@ -11009,7 +11055,7 @@ GLOBAL BOOLEAN add_node_to_toc ( const BOOLEAN popup, const BOOLEAN invisible )
 	
 	toc[p1_toc_counter]->next_index= p1_toc_counter+1;
 	
-	if (desttype==TOHTM)
+	if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{
 		/* Wenn Subsubsubnode gemerged werden, dann muss	*/
 		/* beim letzten Subsubnode dieser Node als			*/
@@ -11095,7 +11141,7 @@ GLOBAL BOOLEAN add_node_to_toc ( const BOOLEAN popup, const BOOLEAN invisible )
 		}
 	}
 
-	if (desttype==TOHTM || desttype==TOMHH)
+	if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{	/* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
 		/* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
 		get_html_filename(p1_toc_counter, tocptr->filename);
@@ -11139,7 +11185,7 @@ GLOBAL BOOLEAN add_subnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisible
 	/* Bei HTML muss das Mergen beachtet werden!			*/
 	tocptr->prev_index= p1_toc_counter;
 
-	if (desttype==TOHTM)
+	if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{
 		if (html_merge_node4 && last_n3_index>0)
 		{	tocptr->prev_index= last_n3_index;
@@ -11160,7 +11206,7 @@ GLOBAL BOOLEAN add_subnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisible
 
 	toc[p1_toc_counter]->next_index= p1_toc_counter+1;
 
-	if (desttype==TOHTM)
+	if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{
 		/* Wenn Subsubsubnode gemerged werden, dann muss	*/
 		/* beim letzten Subsubnode dieser Subnode als		*/
@@ -11243,7 +11289,7 @@ GLOBAL BOOLEAN add_subnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisible
 		}
 	}
 
-	if (desttype==TOHTM || desttype==TOMHH)
+	if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{	/* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
 		/* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
 		get_html_filename(p1_toc_counter, tocptr->filename);
@@ -11287,7 +11333,7 @@ GLOBAL BOOLEAN	add_subsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisi
 	/* zeigt daher auf den letzten (Sub(Sub))Node			*/
 	tocptr->prev_index= p1_toc_counter;
 
-	if (desttype==TOHTM)
+	if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{
 		if (html_merge_node4 && last_n3_index>0)
 		{	tocptr->prev_index= last_n3_index;
@@ -11313,7 +11359,7 @@ GLOBAL BOOLEAN	add_subsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisi
 		toc[last_n2_index]->count_n3++;				/*r6pl8*/
 	}
 
-	if (desttype==TOHTM)
+	if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{
 		/* Wenn Subsubsubnodes gemerged werden, dann muss	*/
 		/* beim letzten Subsubnode dieser Subsubnode als	*/
@@ -11375,7 +11421,7 @@ GLOBAL BOOLEAN	add_subsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisi
 		}
 	}
 
-	if (desttype==TOHTM || desttype==TOMHH)
+	if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{	/* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
 		/* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
 		get_html_filename(p1_toc_counter, tocptr->filename);
@@ -11419,7 +11465,7 @@ GLOBAL BOOLEAN	add_subsubsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN inv
 	/* und zeigt daher auf den letzten (Sub(Sub))Node		*/
 	tocptr->prev_index= p1_toc_counter;
 
-	if (desttype==TOHTM)
+	if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{
 		if (html_merge_node4 && last_n3_index>0)
 		{	tocptr->prev_index= last_n3_index;
@@ -11492,7 +11538,7 @@ GLOBAL BOOLEAN	add_subsubsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN inv
 		}
 	}
 
-	if (desttype==TOHTM || desttype==TOMHH)
+	if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{	/* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
 		/* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
 		get_html_filename(p1_toc_counter, tocptr->filename);
@@ -12185,6 +12231,7 @@ LOCAL void init_toc_forms_numbers ( void )
 			strcpy(form_a4_n4, "\\li800\\fi-800\\tx800 %c.%d.%d.%d\\tab{%s}\\par\\pard");
 			break;
 
+		case TOHAH:			/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			strcpy(form_t1_n1, "<li>%2d %s</li>");
@@ -12343,6 +12390,7 @@ LOCAL void init_toc_forms_no_numbers ( void )
 			strcpy(form_a4_n4, form_t4_n4);
 			break;
 
+		case TOHAH:			/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			strcpy(s, "<li>%s</li>");
@@ -12521,6 +12569,7 @@ GLOBAL void init_module_toc_pass2 ( void )
 	/* zu erzeugen */
 	switch (desttype)	/* r6pl2 */
 	{
+		case TOHAH:			/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			/* Changed in r6pl16 [NHz] */
@@ -12606,6 +12655,7 @@ GLOBAL BOOLEAN check_module_toc_pass1 ( void )
 	/* Schauen, ob bei Hypertextformaten Dinge eindeutig benutzt werden */
 	switch (desttype)
 	{
+		case TOHAH:			/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 		case TOWIN:
@@ -12666,6 +12716,7 @@ GLOBAL BOOLEAN check_module_toc_pass1 ( void )
 
 	switch (desttype)
 	{
+		case TOHAH:			/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			if (!html_merge_node1)

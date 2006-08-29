@@ -245,8 +245,8 @@ LOCAL IDXLIST *idxlist;
 typedef	void (*CMDPROC)(void);
 
 typedef struct _udocommand		/* ---- Funktionentabelle ----		*/
-{	char		magic[30];	/* UDO-Kommando						*/
-	char		macut[8];	/* Shortcut des Kommandos			*/
+{	char		*magic;		/* UDO-Kommando						*/
+	char		*macut;		/* Shortcut des Kommandos			*/
 	CMDPROC	proc;			/* zugehoerige Routine				*/
 	BOOLEAN	reset;			/* Tokens danach loeschen?			*/
 	int		pos;			/* Erlaubnis Vorspann/Hauptteil		*/
@@ -1255,6 +1255,7 @@ GLOBAL BOOLEAN str_for_desttype ( const char *s )
 		case TODRC:	flag= (strstr(s, "drc")!=NULL);		break;
 		case TOHPH:	flag= (strstr(s, "htag")!=NULL);	break;
 		case TOHTM:	flag= (strstr(s, "html")!=NULL);	break;
+		case TOHAH:	flag= (strstr(s, "hah")!=NULL);		break; /* V6.5.17 */
 		case TOMHH:	flag= (strstr(s, "hh")!=NULL);		break;
 		case TOIPF:	flag= (strstr(s, "ipf")!=NULL);		break;
 		case TOLYX:	flag= (strstr(s, "lyx")!=NULL);		break;
@@ -1691,6 +1692,7 @@ GLOBAL void c_hline ( void )
 	
 	switch (desttype)
 	{
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			outln(HTML_HR);
@@ -2581,6 +2583,7 @@ LOCAL void c_heading ( void )
 			voutlnf("%d changeFontSize", laydat.propfontsize);
 			outln("newline");
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			c_internal_styles(name);
@@ -2704,6 +2707,7 @@ LOCAL void c_subheading ( void )
 			voutlnf("%d changeFontSize", laydat.propfontsize);
 			outln("newline");
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			c_internal_styles(name);
@@ -2825,6 +2829,7 @@ LOCAL void c_subsubheading ( void )
 			voutlnf("%d changeFontSize", laydat.propfontsize);
 			outln("newline");
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			c_internal_styles(name);
@@ -2945,6 +2950,7 @@ LOCAL void c_subsubsubheading ( void )
 			voutlnf("%d changeFontSize", laydat.propfontsize);
 			outln("newline");
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			c_internal_styles(name);
@@ -3018,6 +3024,7 @@ LOCAL void c_listheading ( void )
 
 	switch (desttype)
 	{
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			c_internal_styles(name);
@@ -3066,6 +3073,7 @@ LOCAL void c_listsubheading ( void )
 
 	switch (desttype)
 	{
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			c_internal_styles(name);
@@ -3113,6 +3121,7 @@ LOCAL void c_listsubsubheading ( void )
 
 	switch (desttype)
 	{
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			c_internal_styles(name);
@@ -3160,6 +3169,7 @@ LOCAL void c_listsubsubsubheading ( void )
 
 	switch (desttype)
 	{
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			c_internal_styles(name);
@@ -3224,6 +3234,7 @@ GLOBAL void c_newpage( void )
 			outln("newpage");
 			break;
 		/* New in r6pl16 [NHz] */
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 			outln("<span class=\"page-break\"></span>");
 			break;
@@ -3588,6 +3599,7 @@ LOCAL void output_empty_lines ( const int count )
 				case TOWH4:
 					outln(rtf_par);
 					break;
+				case TOHAH:		/* V6.5.17 */
 				case TOHTM:
 				case TOMHH:
 					outln("<br />");
@@ -3667,6 +3679,7 @@ GLOBAL void c_udolink ( void )
 
 	switch (desttype)
 	{
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			sGifSize[0]= EOS;
@@ -3725,6 +3738,7 @@ GLOBAL void c_toplink ( void )
 
 	switch (desttype)
 	{
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
                         /* set width and height =24 to fix bug #0000005 [voja] */
@@ -4154,6 +4168,7 @@ LOCAL void convert_image ( const BOOLEAN visible )
 			indent2space(caption);
 			c_eps_output(filename, caption, ".eps", visible);
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			del_internal_styles(caption);	/*r6pl3*/
@@ -5237,6 +5252,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 		case TOMAN:
 			umbruch= zDocParwidth - 5;
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			umbruch= zDocParwidth;
@@ -5284,6 +5300,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 			{	strcat(z, "\\ql ");
 			}
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			if ( !inside_short )
@@ -5455,6 +5472,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 						um_strcpy(token[i], "\\line ", MAX_TOKEN_LEN+1, "token_output[10]");
 						insert_speccmd(token[i], token[i], token[i]);
 						break;
+					case TOHAH:		/* V6.5.17 */
 					case TOHTM:
 					case TOMHH:
 						um_strcpy(token[i], HTML_BR, MAX_TOKEN_LEN+1, "token_output[11]");
@@ -5647,6 +5665,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 				case TOPCH:
 					auto_references(z, FALSE, "", 0, 0);
 					break;
+				case TOHAH:		/* V6.5.17 */
 				case TOHTM:
 				case TOMHH:
 					c_internal_styles(z);
@@ -5890,6 +5909,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 			case TOPCH:
 				auto_references(z, FALSE, "", 0, 0);
 				break;
+			case TOHAH:		/* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
 				c_internal_styles(z);
@@ -5970,6 +5990,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 			case TOSRP:
 				outln(sSrcRemOff);
 				break;
+			case TOHAH:		/* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
 				html_ignore_p= FALSE;
@@ -5993,6 +6014,7 @@ GLOBAL void token_output ( BOOLEAN reset_internals )
 			case TORTF:
 				outln("\\par\\pard\\par");
 				break;
+			case TOHAH:		/* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
 				if (!inside_short)
@@ -7480,6 +7502,7 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			}
 			break;
 
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 			if (strncmp(token[0], "!html", 5)!=0)
 			{	return FALSE;
@@ -7720,6 +7743,7 @@ LOCAL BOOLEAN pass1_check_main_commands ( void )
 				return TRUE;
 			}
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 			if (strncmp(token[0], "!html", 5)!=0)
 			{	return FALSE;
@@ -7762,6 +7786,7 @@ LOCAL BOOLEAN pass1_check_everywhere_commands ( void )
 
 	switch (desttype)
 	{
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 			if (strncmp(token[0], "!html", 5)!=0)
 			{	return FALSE;
@@ -8649,6 +8674,7 @@ LOCAL void output_verbatim_line ( char *zeile )
 			indent[0]= EOS;
 			auto_quote_chars(zeile, TRUE);
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			indent[0]= EOS;
@@ -8717,6 +8743,7 @@ LOCAL void output_comment_line ( char *zeile )
 {
 	switch (desttype)
 	{
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			voutlnf("<!-- %s -->", zeile);
@@ -9728,6 +9755,7 @@ LOCAL void set_format_flags ( void )
 		case TOKPS:
 			format_needs_exact_toklen= TRUE;
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			format_uses_output_buffer= TRUE;
@@ -9945,7 +9973,7 @@ GLOBAL BOOLEAN udo (char *datei)
 
 	for (i=0; i<MAXENVLEVEL; iEnvIndent[i++]= 0) ;
 
-	if (desttype==TOHTM || desttype==TOMHH)
+	if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH)
 	{
 		strcpy(old_outfile.full, outfile.full);
 		strcpy(old_outfile.driv, outfile.driv);
@@ -9996,7 +10024,7 @@ GLOBAL BOOLEAN udo (char *datei)
 		{	add_pass1_about_udo();
 		}
 			
-		if (desttype==TOHTM)
+		if (desttype==TOHTM || desttype==TOHAH)
 		{	if (!no_index)
 			{	add_pass1_index_udo ();
 			}
@@ -10058,7 +10086,7 @@ GLOBAL BOOLEAN udo (char *datei)
 				output_preamble();
 				iUdopass= PASS2;
 
-				if (desttype==TOHTM && html_frames_layout )
+				if ((desttype==TOHTM|| desttype==TOHAH) && html_frames_layout )
 				{	html_save_frameset();
 				}
 
@@ -10108,6 +10136,7 @@ GLOBAL BOOLEAN udo (char *datei)
 							case TORTF:
 								save_rtf_bmps();	/*r6pl6*/
 								break;
+							case TOHAH:		/* V6.5.17 */
 							case TOHTM:
 								save_html_gifs();
 								break;
@@ -10142,7 +10171,7 @@ GLOBAL BOOLEAN udo (char *datei)
 	udo_running= FALSE;
 
 
-	if (desttype==TOHTM || desttype==TOMHH)	/* Alten Filenamen zurueckholen */
+	if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH)	/* Alten Filenamen zurueckholen */
 	{
 		strcpy(outfile.full, old_outfile.full);
 		strcpy(outfile.driv, old_outfile.driv);
@@ -10551,7 +10580,7 @@ GLOBAL BOOLEAN udo2udo (char *datei)
 
 	for (i=0; i<MAXENVLEVEL; iEnvIndent[i++]= 0) ;
 
-	if (desttype==TOHTM || desttype==TOMHH)
+	if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH)
 	{
 		strcpy(outfile.full, old_outfile.full);
 		strcpy(outfile.driv, old_outfile.driv);
@@ -11463,6 +11492,7 @@ LOCAL void logfile_adjust ( void )
 		case TOHPH:	strcpy(suff, ".ulg");	break;	/* Dupe! */
 		case TOAMG:	strcpy(suff, ".ulg");	break;
 		case TOHTM:	strcpy(suff, ".ulh");	break;
+		case TOHAH:	strcpy(suff, ".ulh");	break;	/* Dupe! V6.5.17 */
 		case TOMHH:	strcpy(suff, ".ulh");	break;	/* Dupe! */
 		case TOINF:	strcpy(suff, ".uli");	break;	/* Dupe! */
 		case TOIPF:	strcpy(suff, ".uli");	break;	/* Dupe! */
@@ -11620,6 +11650,7 @@ GLOBAL void dest_adjust ( void )
 		case TOWH4:	strcpy(outfile.suff, ".rtf");		break;
 		case TOPCH:	strcpy(outfile.suff, ".scr");		break;
 		case TOTVH:	strcpy(outfile.suff, ".txt");		break;
+		case TOHAH:	strcpy(outfile.suff, html_suff);	break;		/* V6.5.17 */
 		case TOHTM:	strcpy(outfile.suff, html_suff);	break;
 		case TOMHH:	strcpy(outfile.suff, html_suff);	break;
 		case TOLDS:	strcpy(outfile.suff, sgml_suff);	break;

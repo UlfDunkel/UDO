@@ -48,7 +48,8 @@
 #define	TOUDO			22		/* UDO-Format				*/	/* r6pl9  */
 #define	TOKPS			23		/* Krueger's PostScript		*/	/* r6pl11 */
 #define	TOAMG			24		/* AmigaGuide				*/	/* r6pl12 */
-#define	MAXDESTTYPE		25		/* Anzahl Ausgabeformate	*/
+#define	TOHAH			25		/* HTML Apple Help			*/	/* V6.5.17 */
+#define	MAXDESTTYPE		26		/* Anzahl Ausgabeformate	*/
 
 #define	TOGER			0		/* Deutsch					*/
 #define	TOENG			1		/* Englisch					*/

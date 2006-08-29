@@ -1110,6 +1110,7 @@ LOCAL void c_link ( char *s, BOOLEAN inside_b4_macro )
 
 		switch(desttype)
 		{
+			case TOHAH:		/* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
 				strcpy(s_entry, Param[2]);
@@ -1267,6 +1268,7 @@ LOCAL void c_url ( char *s, BOOLEAN inside_b4_macro )
 		{
  			switch(desttype)
  			{
+				case TOHAH:		/* V6.5.17 */
  				case TOHTM:
 				case TOMHH:
  					convert_tilde(Param[1]);
@@ -1390,7 +1392,7 @@ LOCAL void c_xlink ( char *s, BOOLEAN inside_b4_macro )
 
 		/* PL6: Wird ein leerer Parameter benutzt, den	*/
 		/* den ersten auch als zweiten verwenden.		*/
-		if (Param[2][0]==EOS && desttype!=TOHTM && desttype!=TOMHH)
+		if (Param[2][0]==EOS && desttype!=TOHTM && desttype!=TOMHH && desttype!=TOHAH)
 		{	strcpy(Param[2], Param[1]);
 		}
 
@@ -1425,7 +1427,8 @@ LOCAL void c_xlink ( char *s, BOOLEAN inside_b4_macro )
    					
    					linkerror= !insert_placeholder(s, Param[0], s_entry, Param[1]);
    					break;
-   				case TOHTM:
+				case TOHAH:		/* V6.5.17 */
+ 				case TOHTM:
 				case TOMHH:
    					convert_tilde(Param[1]);
 					if (Param[2][0]==EOS)
@@ -1582,6 +1585,7 @@ LOCAL void c_ilink ( char *s, const BOOLEAN inside_b4_macro )
 
 		switch(desttype)
 		{
+			case TOHAH:		/* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
 				strcpy(tmp_suff, sDocImgSuffix);
@@ -1884,6 +1888,7 @@ LOCAL void c_comment ( char *s, const BOOLEAN inside_b4_macro )
 
 		switch (desttype)
 		{
+			case TOHAH:		/* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
 				sprintf(s_entry, "<!-- %s -->", Param[1]);
@@ -2729,6 +2734,7 @@ LOCAL void c_internal_image ( char *s, const BOOLEAN inside_b4_macro )
 
 		switch(desttype)
 		{
+			case TOHAH:		/* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
 				strcpy(tmp_suff, sDocImgSuffix);
@@ -2995,6 +3001,7 @@ GLOBAL void add_hyphen ( void )
 		case TOWH4:
 		case TOAQV:
 		case TORTF:
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			return;	/* Hier werden keine Trennregeln benoetigt */

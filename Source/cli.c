@@ -118,6 +118,7 @@ LOCAL const CLIOPT cliopt[]=
 	{	"--help",			"",			'b',	FALSE,	&bShowHelp,			TRUE	},
 	{	"--helptag",		"-g",		'b',	FALSE,	&desttype,			TOHPH	},
 	{	"--html",			"-h",		'b',	FALSE,	&desttype,			TOHTM	},
+	{	"--hah",			"",		'b',	FALSE,	&desttype,			TOHAH	},			/* V6.5.17 */
 	{	"--htmlhelp",		"-hh",		'b',	FALSE,	&desttype,			TOMHH	},
 	{	"--ident",			"",			'b',	FALSE,	&bShowIdent,		TRUE	},
 	{	"--info",			"-i",		'b',	FALSE,	&desttype,			TOINF	},
@@ -189,6 +190,7 @@ LOCAL const char	*Prog_Help[]=
 	"-f     --pdflatex      ins PDFLaTeX-Format konvertieren\n"
 	"-g,    --helptag       ins HP-Helptag-SGML-Format konvertieren\n"
 	"-h,    --html          ins HTML-Format konvertieren\n"
+	"       --hah           ins HTML Apple Help Format konvertieren\n"					/* V6.5.17 */
 	"-hh,   --htmlhelp      ins HTML-Help-Format konvertieren\n"
 	"-H,    --hold          am Ende auf Tastendruck warten\n"
 	"-i,    --info          ins GNU-Texinfo-Format konvertieren\n"
@@ -241,6 +243,7 @@ LOCAL const char	*Prog_Help[]=
 	"-f     --pdflatex      generate PDFLaTeX sourcecode\n"
 	"-g,    --helptag       convert to HP Helptag SGML\n"
 	"-h,    --html          convert to HTML\n"
+	"       --hah           convert to HTML Apple Help\n"						/* V6.5.17 */
 	"-hh,   --htmlhelp      convert to HTML-Help\n"
 	"-H,    --hold          press key when udo finishs\n"
 	"-i,    --info          convert to GNU Texinfo\n"

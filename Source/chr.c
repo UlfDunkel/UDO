@@ -245,6 +245,7 @@ LOCAL void uni2misc ( char *s )
 			for (i=0; i<UNITABLESIZE; i++) replace_all(s, unitab[i].uni, unitab[i].tex) ;
 			break;
 
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 		case TOLDS:
@@ -1702,6 +1703,7 @@ GLOBAL void replace_udo_nbsp ( char * s)
 		case TOAQV:
 			qreplace_all(s, NBSP_S, NBSP_S_LEN, "\\~", 2);
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			qreplace_all(s, NBSP_S, NBSP_S_LEN, "&nbsp;", 6);
@@ -1758,6 +1760,7 @@ GLOBAL void c_divis ( char *s )
 
 		/* New in r6pl15 [NHz] */
 
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 			/* Changed in r6pl16 [NHz] */
 			if(html_use_hyphenation == TRUE)
@@ -2084,6 +2087,7 @@ GLOBAL void c_vars ( char *s )
 			qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "\"\"", 2);
 			qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
 			break;
+		case TOHAH:	/* V6.5.17 */
 		case TOHTM:	/*r6pl5*/
 		case TOMHH:
 			c_quotes_apostrophes(s, "`", "'", "&quot;", "&quot;");
@@ -2283,6 +2287,7 @@ GLOBAL void c_vars ( char *s )
 			specials2ascii(s);
 			texvar2ascii(s);
 			break;
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			qreplace_all(s, "(!grin)", 7, "<TT>;-)</TT>", 12);
@@ -2937,6 +2942,7 @@ GLOBAL void auto_quote_chars ( char *s, BOOLEAN all )
 				}
 				break;
 
+			case TOHAH:		/* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
 				found= FALSE;

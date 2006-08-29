@@ -382,7 +382,7 @@ GLOBAL BOOLEAN set_docinfo ( void )
 			if (buffer)
 			{	strcpy(buffer, data);
 				titdat.authorimage= buffer;
-				if (desttype==TOHTM || desttype==TOMHH)
+				if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH)
 				{	replace_char(titdat.authorimage, "\\", "/");	/*r6pl4*/
 					/* r6pl9: Ausmasse nicht ermitteln -> da */
 					/* ueber c_gif_output() ausgegeben wird  */
@@ -410,7 +410,7 @@ GLOBAL BOOLEAN set_docinfo ( void )
 			if (buffer)
 			{	strcpy(buffer, data);
 				titdat.authoricon= buffer;
-				if (desttype==TOHTM || desttype==TOMHH)
+				if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH)
 				{	replace_char(titdat.authoricon, "\\", "/");
 					if (my_stricmp(sDocImgSuffix, ".gif")==0)
 					{	/* r6pl9: Ausmasse ermitteln */
@@ -446,7 +446,7 @@ GLOBAL BOOLEAN set_docinfo ( void )
 			if (buffer)
 			{	strcpy(buffer, data);
 				titdat.authoricon_active= buffer;
-				if (desttype==TOHTM || desttype==TOMHH)
+				if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH)
 				{	replace_char(titdat.authoricon_active, "\\", "/");
 					if (my_stricmp(sDocImgSuffix, ".gif")==0)
 					{	/* r6pl9: Ausmasse ermitteln */
@@ -479,7 +479,7 @@ GLOBAL BOOLEAN set_docinfo ( void )
 			if (buffer)
 			{	strcpy(buffer, data);
 				titdat.programimage= buffer;
-				if (desttype==TOHTM || desttype==TOMHH)
+				if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH)
 				{	replace_char(titdat.programimage, "\\", "/");	/*r6pl4*/
 					/* r6pl9: Ausmasse nicht ermitteln -> da */
 					/* ueber c_gif_output() ausgegeben wird  */
@@ -546,9 +546,15 @@ GLOBAL BOOLEAN set_docinfo ( void )
 			{	if ( strcmp ( titdat.robots, "index") != 0 )
 				{	if ( strcmp ( titdat.robots, "nofollow") != 0 )
 					{	if ( strcmp ( titdat.robots, "follow") != 0 )
-						{	error_syntax_error();
-							titdat.robots = NULL;
-							return TRUE;
+						{	if ( strcmp ( titdat.robots, "keywords") != 0 )	/* For HTML Apple Help */
+							{	if ( strcmp ( titdat.robots, "segements") != 0 )	/* For HTML Apple Help */
+								{	if ( strcmp ( titdat.robots, "anchors") != 0 )	/* For HTML Apple Help */
+									{	error_syntax_error();
+										titdat.robots = NULL;
+										return TRUE;
+									}
+								}
+							}
 						}
 					}
 				}
@@ -618,6 +624,18 @@ GLOBAL BOOLEAN set_docinfo ( void )
 				bFatalErrorDetected= TRUE;
 			}
 		}
+		return TRUE;
+	}
+
+	/* Spezialitaeten fuer HTML Apple Help V6.5.17 */
+	if (strcmp(inhalt, "appletitle")==0)
+	{	init_docinfo_data(data, &(titdat.appletitle), TRUE);
+		return TRUE;
+	}
+
+	/* Spezialitaeten fuer HTML Apple Help V6.5.17 */
+	if (strcmp(inhalt, "appleicon")==0)
+	{	init_docinfo_data(data, &(titdat.appleicon), TRUE);
 		return TRUE;
 	}
 
@@ -1317,6 +1335,7 @@ GLOBAL void c_maketitle ( void )
 			outln("}\\page");
 			break;
 
+		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
 			/* New in V6.5.9 [NHz] */
@@ -1581,7 +1600,7 @@ LOCAL void init_titdat ( void )
 	
 	titdat.keywords= NULL; /* New in r6pl15 [NHz] */
 	titdat.description= NULL; /* New in r6pl15 [NHz] */
-	titdat.robots= NULL; /* New in V6.6.17 */
+	titdat.robots= NULL; /* New in V6.5.17 */
 	titdat.company= NULL; /* New in V6.5.2 [NHz] */
 	titdat.category= NULL; /* New in V6.5.2 [NHz] */
 	titdat.htmltitle= NULL;
@@ -1590,6 +1609,8 @@ LOCAL void init_titdat ( void )
 	titdat.webmastermailurl= NULL;
 	titdat.webmasterurl= NULL;
 	titdat.programimage= NULL;
+	titdat.appletitle= NULL;	/* V6.5.17 */
+	titdat.appleicon= NULL;		/* V6.5.17 */
 	titdat.authorimage= NULL;
 	titdat.authoricon= NULL;
 	titdat.authoricon_active= NULL;

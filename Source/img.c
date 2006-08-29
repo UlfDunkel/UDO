@@ -1501,7 +1501,7 @@ LOCAL void init_gif_size ( const char *filename, const unsigned char *def, unsig
 
 GLOBAL void init_module_img_pass2 ( void )
 {
-	if (desttype==TOHTM || desttype==TOMHH)
+	if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH) /* New TOHAH; V6.5.17 */
 	{
 		save_html_gifs();
 
