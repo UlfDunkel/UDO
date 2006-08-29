@@ -348,7 +348,7 @@ LOCAL /* const */ CHARTABLE chrtab[128]=
 typedef struct _uni2systab
 {
 	char			*uni;
-	unsigned char	*system;
+	char	*system;
 }	UNI2SYSTAB;
 
 #define	UNI2SYSTABSIZE	64

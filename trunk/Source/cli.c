@@ -95,8 +95,8 @@ LOCAL int getcliopt ( int *counter, const char *arg, const char *argnext, const 
 	############################################################	*/
 typedef struct _cliopt
 {
-	char		longname[20];		/* lange Option								*/
-	char		shortname[6];		/* kurze Option								*/
+	char		*longname;		/* lange Option								*/
+	char		*shortname;		/* kurze Option								*/
 	char		type;				/* Typ: b=Boolean, c=char[]					*/
 	BOOLEAN	needs2;					/* folgt der Option ein Parameter?			*/
 	void			*var;			/* Variable, die geaendert wird				*/
