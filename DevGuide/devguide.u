@@ -207,10 +207,10 @@ verzichten.
 
 In (!V)portab.h(!v) werden derzeit nur grundlegende Dinge festgelegt. 
 Zum einen die boolschen Konstanten, EOS (end of string),
-(!V)USE_ISO_CHARSET(!v) sowie (!V)WORD(!v) und (!V)UWORD(!v).
+(!V)USE_LATIN1_CHARSET(!v) sowie (!V)WORD(!v) und (!V)UWORD(!v).
 
-(!V)USE_ISO_CHARSET(!v) sollte auf 1 gesetzt werde, falls das 
-Betriebssystem den ISO-Latin-1-Zeichensatz benutzt, andernfalls auf 0.
+(!V)USE_LATIN1_CHARSET(!v) sollte  auf  1 gesetzt werde, falls das Betriebssystem
+den ISO-Latin-1-Zeichensatz benutzt, andernfalls auf 0.
 
 (!V)WORD(!v) und (!V)UWORD(!v) werde nur in (!V)img.c(!v) benutzt um 
 die Header der Grafikformate auszulesen.
@@ -225,14 +225,14 @@ In diesem File werden ein paar Konstanten für Versionsnummern gesetzt.
 Aber was viel wichtiger ist: Auch hier werden systemabhängige Makros 
 definiert:
 
-!begin_xlist [HAVE_STRICMP:]
-!item	[OSUDO:]	Ein String, der für den ""Werbetext"" für 
+!begin_xlist [USE_LONG_FILENAMES:]
+!item	[UDO_OS:]	Ein String, der für den ""Werbetext"" für 
 ''!/use_about_udo'' eingesetzt wird.
 
 !item	[USE_SLASH:]	Soll als Pfadtrenner ein ''/'' verwendet 
 werden? Falls ja, als 1 defnieren. Für Unix ist dies immer der Fall.
 
-!item	[USE_LNAME:]	Werden lange Dateinamen standardmäßig 
+!item	[USE_LONG_FILENAMES:]	Werden lange Dateinamen standardmäßig 
 unterstützt? Falls ja, dann mit 1 definieren. UDO legt dann z.B. 
 Dateien mit der Endung (!V).html(!v) statt (!V).htm(!v) an.(!N)Obwohl 
 weder DOS noch GEMDOS etwas dagegen haben, wenn man versucht, eine 
