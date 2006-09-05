@@ -2447,7 +2447,7 @@ LOCAL BOOLEAN html_new_file ( void )
 	outln("</title>");
 	output_html_meta(TRUE);
 	outln("</head>");
-	
+
 	if ( toc[p2_toc_counter]!=NULL )
 	{	out("<body");
 		if (toc[p2_toc_counter]->backimage[0]!=EOS)
@@ -2494,7 +2494,7 @@ LOCAL BOOLEAN html_new_file ( void )
 GLOBAL void output_html_header ( const char *t )
 {
 	/* Wird nur fuer die Titelseite/Inhaltsverzeichnis benutzt */
-	char xml_lang[15], xml_ns[40], str[512];
+	char xml_lang[15], xml_ns[40];
 	
 	output_html_doctype();	/* r6pl2 */
 	/* Changed in V6.5.9 [NHz] */
@@ -2520,16 +2520,9 @@ GLOBAL void output_html_header ( const char *t )
 	/* V6.5.17 */
 	if (desttype==TOHAH)
 	{	if ( titdat.appletitle != NULL )
-		{	um_strcpy(str, titdat.appletitle, 512, "output_html_header [1]");
-			um_strcat(str, " Help", 512, "output_html_header [2]");
-			voutlnf("<meta name=\"AppleTitle\" content=\"%s\" />", str);
-			if ( titdat.appleicon != NULL )
-			{	um_strcpy(str, titdat.appletitle, 512, "output_html_header [2]");
-				um_strcat(str, "%20Help/", 512, "output_html_header [3]");
-				um_strcat(str, titdat.appleicon, 512, "output_html_header [4]");
-				voutlnf("<meta name=\"AppleIcon\" content=\"%s\" />", str);
-			}
-		}
+			voutlnf("<meta name=\"AppleTitle\" content=\"%s\" />", titdat.appletitle);
+		if ( titdat.appleicon != NULL )
+			voutlnf("<meta name=\"AppleIcon\" content=\"%s\" />", titdat.appleicon);
 	}
 
 	output_html_meta(TRUE);	/*r6pl5: auch Keywords auf der ersten Seite erlauben */
@@ -3982,7 +3975,7 @@ GLOBAL BOOLEAN save_html_index ( void )
 		get_html_filename(html_index[i].toc_index, htmlname);
 
 		/* v6.5.15 [vj] need to make a copy of this, because we need to change it */
-		escapedtocname=um_physical_strcpy(html_index[i].tocname, 100, "save_html_index");
+		escapedtocname=um_physical_strcpy(html_index[i].tocname, 100, "save_html_index [1]");
 		if (escapedtocname != NULL)
 		{
 			replace_all(escapedtocname, "!", "&#33;");
@@ -4022,7 +4015,7 @@ GLOBAL BOOLEAN save_html_index ( void )
 
 	token_reset();
 	strcpy(token[0], "!include"); /* sollte safe sein, da ein Token auf jeden Fall so lang werden kann :-) [vj] */
-	um_strcpy(token[1], udofile.full, MAX_TOKEN_LEN+1, "save_html_index");
+	um_strcpy(token[1], udofile.full, MAX_TOKEN_LEN+1, "save_html_index [2]");
 	token_counter= 2;
 
 	c_include();	
@@ -4827,6 +4820,7 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 				voutlnf("<h%d><a name=\"%s\">%s%s</a></h%d>",
 							html_nodesize, nameNoSty, numbers, name, html_nodesize);	/* r5pl4 */
 			}
+voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line ); /* V6.5.18 */
 			break;
 
 		case TOLDS:
@@ -10954,6 +10948,8 @@ LOCAL TOCITEM *init_new_toc_entry ( const int toctype, const BOOLEAN invisible )
 	}
 	
 	tocptr->toctype=			toctype;
+	strcpy ( tocptr->source_filename, sCurrFileName);	/* V6.5.18 */
+	tocptr->source_line=		uiCurrFileLine;			/* V6.5.18 */
 	tocptr->converted=			FALSE;
 	tocptr->ignore_subtoc=		FALSE;
 	tocptr->ignore_links=		FALSE;

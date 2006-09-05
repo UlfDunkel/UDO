@@ -85,6 +85,8 @@ typedef struct _tocitem
 	int		nr1, nr2, nr3, nr4;				/* Inhaltsverzeichnis-Nummern		*/
 	BOOLEAN	appendix;						/* Steht im Anhang					*/
 	int		toctype;						/* !node, !subnode oder !subsubnode	*/
+	char	source_filename[MYFILE_FULL_LEN]; /* Filename der Sourcecodedatei	*/	/* V6.5.18 */
+	long	source_line;					/* Zeile im Sourcecode ab der der Node beginnt */	/* V6.5.18 */
 	char	filename[MAX_FILENAME_LEN+1];	/* HTML-Filename					*/	/* r5pl3 */
 	char	dirname[MAX_FILENAME_LEN+1];	/* HTML-Verzeichnisname				*/	/* r6pl6 */
 	char	*keywords;						/* HTML-Keywords					*/	/* r5pl3 */

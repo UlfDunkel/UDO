@@ -463,6 +463,7 @@ extern const char *id_chr_c;
 extern const char *id_env_c;
 extern const char *id_fsplit_c;
 extern const char *id_img_c;
+extern const char *id_lang_c;		/* V6.5.18 */
 extern const char *id_msg_c;
 extern const char *id_str_c;
 extern const char *id_sty_c;
@@ -502,6 +503,7 @@ LOCAL void show_ident ( void )
 	fprintf(stdout, "%s\n", id_env_c+5);
 	fprintf(stdout, "%s\n", id_fsplit_c+5);
 	fprintf(stdout, "%s\n", id_img_c+5);
+	fprintf(stdout, "%s\n", id_lang_c+5);		/* V6.5.18 */
 	fprintf(stdout, "%s\n", id_msg_c+5);
 	fprintf(stdout, "%s\n", id_str_c+5);
 	fprintf(stdout, "%s\n", id_sty_c+5);
