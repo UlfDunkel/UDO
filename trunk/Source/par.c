@@ -2709,13 +2709,16 @@ GLOBAL void c_internal_index ( char *s, const BOOLEAN inside_b4_macro )
 
 LOCAL void c_internal_image ( char *s, const BOOLEAN inside_b4_macro )
 {
-	int pnr=0;
+	int pnr=0, count;
 	char s_entry[1024], sGifSize[80], sGifName[512];
 	BOOLEAN flag;
 	unsigned int uiW, uiH;
 
 	flag = FALSE;
-	while ( !flag && ((pnr=get_parameters(s, "img", 2))==2) )
+
+	count = get_nr_of_parameters ( "img", s ); 	/* V 6.5.18 */
+	
+	while ( !flag && ((pnr=get_parameters(s, "img", count))==2 || pnr==3) ) 	/* V 6.5.18 */
 	{
 		if (inside_b4_macro)
 		{
@@ -2726,11 +2729,13 @@ LOCAL void c_internal_image ( char *s, const BOOLEAN inside_b4_macro )
 		
 			adjust_params_inside(Param[1]);
 			adjust_params_inside(Param[2]);
+			adjust_params_inside(Param[3]);		/* V 6.5.18 */
 		}
 
 		fsplit(Param[1], tmp_driv, tmp_path, tmp_name, tmp_suff);
 		
 		replace_udo_quotes(Param[2]);
+		replace_udo_quotes(Param[3]); 	/* V 6.5.18 */
 
 		switch(desttype)
 		{
@@ -2763,9 +2768,14 @@ LOCAL void c_internal_image ( char *s, const BOOLEAN inside_b4_macro )
 				if (no_images)	/*r6pl2*/
 				{	strcpy(s_entry, Param[2]);
 				}
-				else
-				{	sprintf(s_entry, "<img src=\"%s\" alt=\"%s\"%s />",
-						Param[1], Param[2], sGifSize);
+				else  /* Feature-Wunsch 0000070 V6.5.18 */
+				{
+					if ( Param[3][0] != EOS )
+						sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\"%s />",
+							Param[1], Param[2], Param[3], sGifSize);
+					else
+						sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\"%s />",
+							Param[1], Param[2], Param[2], sGifSize);
 				}
 				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
 				break;
@@ -2831,7 +2841,7 @@ LOCAL void c_internal_image ( char *s, const BOOLEAN inside_b4_macro )
 		error_replace_param("!img");
 	}
 
-	if (pnr!=0 && pnr!=2)
+	if (pnr!=0 && pnr==1 )
 	{	error_wrong_nr_parameters("!img");
 	}
 
