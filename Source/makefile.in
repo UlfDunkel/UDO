@@ -29,6 +29,8 @@ file$(O): $(HEAD) file.h str.h msg.h
 img$(O):	$(HEAD) img.h chr.h env.h file.h msg.h str.h sty.h udo.h \
 		img_html.h img_win.h img_stg.h
 
+lang$(O): $(HEAD) lang.h
+
 msg$(O):	$(HEAD) msg.h udo.h toc.h gui.h
 
 par$(O):	$(HEAD) commands.h chr.h file.h msg.h str.h sty.h toc.h \
@@ -47,7 +49,7 @@ toc$(O):	$(HEAD) toc.h commands.h abo.h chr.h env.h file.h img.h \
 tp$(O):	$(HEAD) tp.h commands.h chr.h env.h file.h img.h msg.h \
 		str.h sty.h toc.h udo.h
 
-udo$(O):	$(HEAD) udo.h abo.h cfg.h chr.h env.h file.h img.h msg.h \
+udo$(O):	$(HEAD) udo.h abo.h cfg.h chr.h env.h file.h img.h lang.h msg.h \
 		par.h str.h sty.h tab.h toc.h tp.h gui.h
 
 install::	udo$(X)
