@@ -509,7 +509,7 @@ LOCAL const UDOSWITCH udoswitch[MAXSWITCH+1]=
 
 
 typedef struct _udolanguage		/* ---- Sprachentabelle ----	*/
-{	char	magic[25];		/* UDO-Kommando					*/
+{	char	*magic;			/* UDO-Kommando					*/
 	int	langval;			/* zugehoerige Sprache			*/
 }	UDOLANGUAGE;
 
@@ -534,7 +534,7 @@ LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE]=
 
 
 typedef struct _udocharset		/* ---- Zeichensatztabelle ----	*/
-{	char	magic[16];			/* code-Parameter				*/
+{	char	*magic;			/* code-Parameter				*/
 	int	codepage;				/* zugehoeriger Zeichensatz		*/
 }	UDOCHARSET;
 
@@ -1333,12 +1333,12 @@ LOCAL BOOLEAN str_for_os ( const char *s )
 
 typedef struct _udocolor
 {	int val;
-	char name[20];
-	char html[8];
-	char drc[3];
-	char wintext[32];
-	char winback[32];
-	char wh4back[32];
+	char *name;
+	char *html;
+	char *drc;
+	char *wintext;
+	char *winback;
+	char *wh4back;
 }	UDOCOLOR;
 
 #define	MAX_UDOCOLOR	17

@@ -22,10 +22,10 @@
 	######################################################################	*/
 typedef struct _udoswitch			/* ---- Funktionentabelle ----	*/
 {
-	char			magic[25];		/* UDO-Kommando					*/
+	char			*magic;		/* UDO-Kommando					*/
 	BOOLEAN			*flag;			/* zugehoeriger Schalter		*/
 	char			partype;		/* Parameter-Typ				*/	/*r6pl13*/
-	char			parcmd[12];		/* Parameter-Kommando			*/	/*r6pl2*/
+	char			*parcmd;		/* Parameter-Kommando			*/	/*r6pl2*/
 	void			*parval;		/* Parameter-Variable			*/	/*r6pl2*/
 }	UDOSWITCH;
 
