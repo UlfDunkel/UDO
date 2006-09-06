@@ -3,7 +3,7 @@
 # @(#) Dirk Hagedorn (udo@dirk-hagedorn.de), 1998/05/25
 # ###################################################################
 
-OSRC =	abo$(O) cfg$(O) chr$(O) env$(O) file$(O) img$(O) msg$(O) par$(O) str$(O) sty$(O) \
+OSRC =	abo$(O) cfg$(O) chr$(O) env$(O) file$(O) img$(O) lang$(O) msg$(O) par$(O) str$(O) sty$(O) \
 		tab$(O) toc$(O) tp$(O) udo$(O)
 
 HEAD = portab.h version.h constant.h udo_type.h
@@ -29,7 +29,7 @@ file$(O): $(HEAD) file.h str.h msg.h
 img$(O):	$(HEAD) img.h chr.h env.h file.h msg.h str.h sty.h udo.h \
 		img_html.h img_win.h img_stg.h
 
-lang$(O): $(HEAD) lang.h
+lang$(O): $(HEAD) lang.h udo.h
 
 msg$(O):	$(HEAD) msg.h udo.h toc.h gui.h
 
