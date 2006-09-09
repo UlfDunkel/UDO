@@ -6375,6 +6375,7 @@ Ausgabe der Zieldatei verwendet wird. Hierbei gelten folgende Zeichenketten:
 !label Sprache
 !label Sprachen
 !begin_xlist [swedish:] !short
+!item [danish:]   Dänisch
 !item [dutch:]   Holländisch
 !item [english:] Englisch
 !item [french:]  Französisch
@@ -6436,6 +6437,7 @@ the destination file. Use the following words to test the language:
 !label language
 !label languages
 !begin_xlist [swedish:] !short
+!item [danish:]   Danish
 !item [dutch:]   Dutch
 !item [english:] English
 !item [french:]  French

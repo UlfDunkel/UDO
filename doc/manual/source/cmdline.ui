@@ -113,6 +113,8 @@ lange Dateinamen zu erzeugen (Endung .html anstatt .htm).
 
 !item [-h, (--)html] Die (!U)Quelldatei(!u) wird ins HTML-Format umgewandelt.
 
+!item [(--)hah] Die (!U)Quelldatei(!u) wird ins HTML Apple Help Format umgewandelt.
+
 !item [-hh, (--)htmlhelp] Die (!U)Quelldatei(!u) wird ins HTML-Help-Format umgewandelt.
 
 !item [-H, (--)hold] (!B)UDO(!b) wartet am Programmende auf einen Tastendruck.
@@ -196,6 +198,7 @@ welche Dateien andere Dateien nachladen.
 
 !endif
 # ------------------------------------------------------------------------------
+# ToDo: Englisch
 !iflang [english]
 !begin_tlist [-W, (--)no-warningslines]
 
@@ -230,6 +233,8 @@ operating systems that normally do not support them.
 !item [-g, (--)helptag] The (!U)source file(!u) will be converted to HP Helptag SGML.
 
 !item [-h, (--)html] The (!U)source file(!u) will be converted to HTML.
+
+!item [(--)hah] Die (!U)Quelldatei(!u) wird ins HTML Apple Help Format umgewandelt.
 
 !item [-hh, (--)htmlhelp] The (!U)source file(!u) will be converted to HTML-Help.
 

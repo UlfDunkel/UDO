@@ -3803,6 +3803,13 @@ Zusammenfassung von [title] und [program]).
 ""<text>"" entspricht einer der Robots Anweisung wie sie für Suchmaschinen benutzt werden.
 Erlaubt sind "none", "noindex", "index", "nofollow" und "follow".
 
+!item [appletitel]
+Wird für HTML Apple Help benötig und beschreibt den Titel der Hilfe.
+
+!item [appleicon]
+Wird für HTML Apple Help benötig. Damit wird das Icon angegeben, welches der Apple Help Viewer
+anzeigen soll.
+
 !item [webmastername|webmasteremail|webmasterurl]
 Werden Webmaster-Daten angegeben, so erzeugt
 UDO standardmäßig am Ende einer jeden Seite folgendes:
@@ -3902,6 +3909,13 @@ using [title] and [program]).
 !item [robots]
 ""<text>"" entspricht einer der Robots Anweisung wie sie für Suchmaschinen benutzt werden.
 Erlaubt sind "none", "noindex", "index", "nofollow" und "follow".
+
+!item [appletitel]
+Wird für HTML Apple Help benötig und beschreibt den Titel der Hilfe.
+
+!item [appleicon]
+Wird für HTML Apple Help benötig. Damit wird das Icon angegeben, welches der Apple Help Viewer
+anzeigen soll.
 
 !item [webmastername|webmasteremail|webmasterurl]
 If you specify webmaster informations, UDO will
@@ -8917,12 +8931,17 @@ Einstellen der Robots Anweisung für Suchmaschinen (nur HTML).
 ""<text>"" entspricht einer der Robots Anweisung wie sie für Suchmaschinen benutzt werden.
 Erlaubt sind "none", "noindex", "index", "nofollow" und "follow". Diese Anweisung hat 
 vorrang vor (!KW [docinfo] [[robots!!]])
+
+Für HTML Apple Help sind noch "keywords", "segements" und "anchors" erlaubt.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
 ""<text>"" entspricht einer der Robots Anweisung wie sie für Suchmaschinen benutzt werden.
 Erlaubt sind "none", "noindex", "index", "nofollow" und "follow". Diese Anweisung hat 
 vorrang vor (!KW [docinfo] [[robots!!]])
+
+
+Für HTML Apple Help sind noch "keywords", "segements" und "anchors" erlaubt.
 !endif
 
 !item [(!EXISTSSINCE)] Version 6.5.17
@@ -10940,6 +10959,7 @@ example the caption of the first image will look like this: ""Figure 5: !.."".
 ################################################################################
 !begin_node (!kkw [img])
 !html_name cmd_img().html
+# ToDo: Englisch
 
 !iflang [german]
 Grafik ausgeben.
@@ -10963,6 +10983,14 @@ auszugeben. Bei der Umwandlung nach HTML wird
 nicht überprüft, ob die jeweiligen Bilder existieren.
 Bei HTML wird ""<text>"" als Alternativtext bentutzt. Bei
 den anderen Formaten wird nur ""<text>"" ausgegeben.
+
+Seit Version 6.5.18 wurde das Kommando erweitert: (!nl)
+(!T)(!/img [<(!FILE)>] [<(!TEXT)> [<(!TEXT)>]])(!t) (!nl)
+Dies hat nur Auswirkung bei der Ausgabe nach HTML, HTML Apple Help und HTMLHelp.
+Dabei wird der zweite <(!TEXT)> für das Attribut ""titel"" benutzt. Ist nur ein <(!TEXT)>
+vorhanden bekommen beide Atrribute den selben Text. Beispiel:
+
+<img src=""d.gif"" width=""xxx"" height=""yyy"" border=""0"" alt=""text"" title=""text 2"">
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -10971,6 +10999,14 @@ WinHelp. If another destination format will be used only ""<text>""
 will be  displayed. When converting to HTML (!T)file.gif(!t) will be used,
 when converting to WinHelp (!T)file.bmp(!t) will be used. UDO doesn't check
 if this file exists.
+
+Seit Version 6.5.18 wurde das Kommando erweitert: (!nl)
+(!T)(!/img [<(!FILE)>] [<(!TEXT)> [<(!TEXT)>]])(!t) (!nl)
+Dies hat nur Auswirkung bei der Ausgabe nach HTML, HTML Apple Help und HTMLHelp.
+Dabei wird der zweite <(!TEXT)> für das Attribut ""titel"" benutzt. Ist nur ein <(!TEXT)>
+vorhanden bekommen beide Atrribute den selben Text. Beispiel:
+
+<img src=""d.gif"" width=""xxx"" height=""yyy"" border=""0"" alt=""text"" title=""text 2"">
 !endif
 
 !iflang [german]

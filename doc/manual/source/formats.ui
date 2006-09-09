@@ -607,6 +607,22 @@ all links will be wrong.
 !end_node
 
 ################################################################################
+# ToDo: Infos about HTML Apple Help
+
+!iflang [german]
+!begin_node HTML Apple Help
+!endif
+!iflang [english]
+!begin_node HTML Apple Help
+!endif
+!label HTML Apple Help
+!html_name format_hah.html
+
+(!MISS)
+
+!end_node
+
+################################################################################
 !iflang [german]
 !begin_node HTML-Help
 !endif
