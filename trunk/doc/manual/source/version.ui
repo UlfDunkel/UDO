@@ -2,17 +2,17 @@
 # letzte Änderungen: 20.12.2003 / last changes: Dec 20, 2003
 
 
-!docinfo [version]  6.5.17
+!docinfo [version]  6.5.18
 
 !iflang [german]
-!docinfo [date] 30.04.2006
-!macro DATE 30.04.2006
+!docinfo [date] 09.09.2006
+!macro DATE 09.09.2006
 !endif
 
 !iflang [english]
-!docinfo [date] Apr 30nd, 2006
-!macro DATE Apr 30nd, 2006
+!docinfo [date] Sep 9nd, 2006
+!macro DATE Sep 9nd, 2006
 !endif
 
 !macro RELEASE 6
-!macro VERSION .5.17
+!macro VERSION .5.18

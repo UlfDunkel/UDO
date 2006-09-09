@@ -55,6 +55,34 @@ developer versions.
 !begin_itemize !short
 # ..............................................................................
 !iflang [german]
+!item Neue Sprache: Dänisch (!nl)
+  Als zusätzliche Sprache ((!KW [language]))steht nun auch dänsich zur Verfügung. (!nl)
+  Dieses Feature ist seit Version~6.5.18 verfügbar.
+!endif
+!iflang [english]
+# ToDo: Englisch
+!item Neue Sprache: Dänisch (!nl)
+  Als zusätzliche Sprache ((!KW [language]))steht nun auch dänsich zur Verfügung. (!nl)
+  This extension is available since version~6.5.18.
+!endif
+# ..............................................................................
+!iflang [german]
+!item Neues Ausgabeformat HTML Apple Help (!nl)
+  Ist im Prinzip nichts anderes als HTML, allerdings mit kleinen Änderungen. Deshalb
+  gibt es auch für (!KW [docinfo]) zwei neue Argumente: (!T)AppleTitle(!t) und 
+  (!T)AppleIcon(!t) (!nl)
+  Dieses Feature ist seit Version~6.5.17 verfügbar.
+!endif
+!iflang [english]
+# ToDo: Englisch
+!item Neues Ausgabeformat HTML Apple Help (!nl)
+  Ist im Prinzip nichts anderes als HTML, allerdings mit kleinen Änderungen. Deshalb
+  gibt es auch für (!KW [docinfo]) zwei neue Argumente: (!T)AppleTitle(!t) und 
+  (!T)AppleIcon(!t) (!nl)
+  This extension is available since version~6.5.17.
+!endif
+# ..............................................................................
+!iflang [german]
 !item (!KW [docinfo]) hat zwei neue Argumente: (!nl)
     (!T)company(!t) und (!T)category(!t) (!nl)
     Diese Erweiterung ist seit Version 6.5.2 implementiert.
@@ -375,6 +403,16 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 !smallskip
 !item [(!CHANGES)]
 !begin_itemize !short
+# ..............................................................................
+# ToDo: Englisch
+!iflang [german]
+!item Das Kommando (!KKW [img]) wurde erweitert. (!nl)
+  Feature-Wunsch 0000070; V6.5.18
+!endif
+!iflang [english]
+!item Das Kommando (!KKW [img]) wurde erweitert. (!nl)
+  Feature-Wunsch 0000070; V6.5.18
+!endif
 # ..............................................................................
 !iflang [german]
 !item Die <link>-Elemente für die Navigation werden nicht mehr automatisch, sondern
@@ -758,7 +796,7 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 !end_node
 
 ################################################################################
-#ToDo: english
+# ToDo: English
 !iflang [german]
 !begin_node Änderungen von Version 6.2.1 nach 6.4.0
 !endif
