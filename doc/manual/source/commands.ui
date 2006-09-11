@@ -10959,13 +10959,11 @@ example the caption of the first image will look like this: ""Figure 5: !.."".
 ################################################################################
 !begin_node (!kkw [img])
 !html_name cmd_img().html
-# ToDo: Englisch
-
 !iflang [german]
 Grafik ausgeben.
 !endif
 !iflang [english]
-Print inline images.
+Output inline images.
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -10987,8 +10985,8 @@ den anderen Formaten wird nur ""<text>"" ausgegeben.
 Seit Version 6.5.18 wurde das Kommando erweitert: (!nl)
 (!T)(!/img [<(!FILE)>] [<(!TEXT)> [<(!TEXT)>]])(!t) (!nl)
 Dies hat nur Auswirkung bei der Ausgabe nach HTML, HTML Apple Help und HTMLHelp.
-Dabei wird der zweite <(!TEXT)> für das Attribut ""titel"" benutzt. Ist nur ein <(!TEXT)>
-vorhanden bekommen beide Atrribute den selben Text. Beispiel:
+Dabei wird der zweite <(!TEXT)> für das Attribut ""title"" benutzt. Ist nur ein <(!TEXT)>
+vorhanden, bekommen beide Attribute (""alt"" und ""title"") den selben Text. Beispiel:
 
 <img src=""d.gif"" width=""xxx"" height=""yyy"" border=""0"" alt=""text"" title=""text 2"">
 !endif
@@ -11000,11 +10998,11 @@ will be  displayed. When converting to HTML (!T)file.gif(!t) will be used,
 when converting to WinHelp (!T)file.bmp(!t) will be used. UDO doesn't check
 if this file exists.
 
-Seit Version 6.5.18 wurde das Kommando erweitert: (!nl)
+Since version 6.5.18, this command has been enhanced: (!nl)
 (!T)(!/img [<(!FILE)>] [<(!TEXT)> [<(!TEXT)>]])(!t) (!nl)
-Dies hat nur Auswirkung bei der Ausgabe nach HTML, HTML Apple Help und HTMLHelp.
-Dabei wird der zweite <(!TEXT)> für das Attribut ""titel"" benutzt. Ist nur ein <(!TEXT)>
-vorhanden bekommen beide Atrribute den selben Text. Beispiel:
+This has effects only on HTML, HTML Apple Help and HTMLHelp output.
+The second <(!TEXT)> will then be used for the attribute ""title"". If only one <(!TEXT)>
+exists, both attributes ('alt' and 'title') get the same text. Example:
 
 <img src=""d.gif"" width=""xxx"" height=""yyy"" border=""0"" alt=""text"" title=""text 2"">
 !endif
