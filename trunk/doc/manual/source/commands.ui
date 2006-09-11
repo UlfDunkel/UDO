@@ -7062,7 +7062,7 @@ Default value is ""center"".
 !end_node
 
 ################################################################################
-# ToDo: englisch
+# ToDo: -
 !begin_node (!kw [html_favicon_name])
 !html_name cmd_html_favicon_name.html
 
@@ -7070,6 +7070,7 @@ Default value is ""center"".
 Setzen der Favoriten-Icons (nur HTML).
 !endif
 !iflang [english]
+Defines the favorite icon(s (HTML only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -7077,10 +7078,10 @@ Setzen der Favoriten-Icons (nur HTML).
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
 !iflang [german]
-!item [(!SYNTAX)] (!T)!/html_favicon_name <(!FILE)>.js(!t)
+!item [(!SYNTAX)] (!T)!/html_favicon_name <(!FILE)>(!t)
 !endif
 !iflang [english]
-!item [(!SYNTAX)] (!T)!/html_favicon_name <(!FILE)>.js(!t)
+!item [(!SYNTAX)] (!T)!/html_favicon_name <(!FILE)>(!t)
 !endif
 
 !iflang [german]
@@ -7089,6 +7090,7 @@ Mit diesem Kommando könne die Favoriten-Icons gesetzt werden.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
+Use this command to define the favorite icon(s).
 !endif
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~15
