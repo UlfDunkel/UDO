@@ -6592,10 +6592,12 @@ UDO l‰uft. Hierbei gelten folgende Zeichenketten:
 !item [hpux:]     HP-UX
 !item [linux:]    Linux
 !item [macos:]    MacOS
+!item [macosx:]   MacOS X
 !item [nextstep:] NeXTStep
 !item [sinix:]    SINIX
 !item [sunos:]    SunOS
 !item [tos:]      TOS
+!item [win:]      Windows (32-Bit)
 !end_xlist
 
 Auch hier gilt, daﬂ zus‰tzlich zu den genannten Zeichenketten auch
@@ -6624,10 +6626,12 @@ running on. Use the following words for this kind of query:
 !item [hpux:]     HP-UX
 !item [linux:]    Linux
 !item [macos:]    MacOS
+!item [macosx:]   MacOS X
 !item [nextstep:] NeXTStep
 !item [sinix:]    SINIX
 !item [sunos:]    SunOS
 !item [tos:]      TOS
+!item [win:]      Windows (32 bit)
 !end_xlist
 
 Like in the other queries you can use ""all"" and ""none"", too.
