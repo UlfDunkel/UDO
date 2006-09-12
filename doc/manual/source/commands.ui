@@ -10981,7 +10981,7 @@ Text bei der Umwandlung nach HTML oder WinHelp
 auszugeben. Bei der Umwandlung nach HTML wird
 (!T)file.gif(!t), bei WinHelp (!T)file.bmp(!t) benutzt, wobei UDO
 nicht überprüft, ob die jeweiligen Bilder existieren.
-Bei HTML wird ""<text>"" als Alternativtext bentutzt. Bei
+Bei HTML wird ""<text>"" als Alternativtext benutzt. Bei
 den anderen Formaten wird nur ""<text>"" ausgegeben.
 
 Seit Version 6.5.18 wurde das Kommando erweitert: (!nl)
