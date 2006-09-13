@@ -5173,877 +5173,1135 @@ LOCAL void to_check_quote_indent ( size_t *u )
 
         ##############################################################
         ##############################################################  */
-GLOBAL void token_output ( BOOLEAN reset_internals )
+
+GLOBAL void token_output(
+
+BOOLEAN        reset_internals)        /* */
 {
-        register int i, j;
-        int silb;
-        char    *z= tobuffer;
-        char    sIndent[512];
-        size_t  umbruch;
-        BOOLEAN newline= FALSE;
-        BOOLEAN just_linefeed= FALSE;
-        BOOLEAN use_token;
-        BOOLEAN inside_center, inside_right, inside_left, inside_quote;
-        BOOLEAN inside_short, inside_env, inside_fussy;
-        size_t  sl, len_zeile, len_silbe, len_token;
+register int   i,                      /* */
+               j;                      /* */
+int            silb;                   /* */
+char          *z = tobuffer;           /* */
+char           sIndent[512];           /* */
+size_t         umbruch;                /* */
+BOOLEAN        newline = FALSE;        /* */
+BOOLEAN        just_linefeed = FALSE;  /* */
+BOOLEAN        use_token;              /* */
+BOOLEAN        inside_center,          /* */
+               inside_right,           /* */
+               inside_left,            /* */
+               inside_quote;           /* */
+BOOLEAN        inside_short,           /* */
+               inside_env,             /* */
+               inside_fussy;           /* */
+size_t         sl,                     /* */
+               len_zeile,              /* */
+               len_silbe,              /* */
+               len_token;              /* */
 
-        if (token_counter<=0)
-        {       return;
-        }
-        
-        if (!bInsideDocument)
-        {       return;
-        }
+               
+   if (token_counter <= 0)
+   {
+      return;
+   }
+   
+   if (!bInsideDocument)
+   {
+      return;
+   }
+   
+   umbruch = zDocParwidth;
+   
+   switch (desttype)
+   {
+   case TOSTG:                            /* ST-Guide */  
+   case TOAMG:                            /* AmigaGuide */
+      umbruch = zDocParwidth;
 
-        umbruch= zDocParwidth;
-        
-        switch (desttype)
-        {       case TOSTG:     
-                case TOAMG:
-                        umbruch= zDocParwidth;
-                        if (bInsidePopup && zDocParwidth>60)
-                        {       umbruch= 60;
-                        }
-                        break;
-                case TOMAN:
-                        umbruch= zDocParwidth - 5;
-                        break;
-                case TOHAH:             /* V6.5.17 */
-                case TOHTM:
-                case TOMHH:
-                        umbruch= zDocParwidth;
-                        if (iListLevel>0 && umbruch>70)
-                        {       umbruch= 70;
-                        }
-                        break;
-                case TOSRC:
-                case TOSRP:
-                        outln(sSrcRemOn);
-                        break;
-        }
-        
-        inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);
-        inside_right= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_RIGH);
-        inside_left= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_LEFT);
-        inside_quote= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_QUOT);
-        inside_env= (iItemLevel>0 || iEnumLevel>0 || iDescLevel>0 || iListLevel>0);
-        inside_short= (iEnvLevel>0 && bEnvShort[iEnvLevel]);
-        inside_fussy= ( (!inside_center) && (!inside_right) && (!inside_left) && (!bDocSloppy) );
+      if (bInsidePopup && zDocParwidth>60)
+      {
+         umbruch = 60;
+      }
+      break;
+   
+   case TOMAN:                            /* Manualpage */
+      umbruch = zDocParwidth - 5;
+      break;
+   
+   case TOHAH:                            /* HTML Apple Help - V6.5.17 */
+   case TOHTM:                            /* HTML */
+   case TOMHH:                            /* Microsoft HTML Help */
+      umbruch= zDocParwidth;
 
-        i=0;
-        z[0]= EOS;
-        sIndent[0]= EOS;
-        len_zeile= 0;
+      if (iListLevel>0 && umbruch>70)
+      {
+         umbruch = 70;
+      }
+      break;
+
+   case TOSRC:                            /* */
+   case TOSRP:                            /* */
+      outln(sSrcRemOn);
+   }
+   
+   inside_center = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_CENT);
+   inside_right  = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
+   inside_left   = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_LEFT);
+   inside_quote  = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_QUOT);
+   inside_env    = (iItemLevel > 0 || iEnumLevel > 0 || iDescLevel > 0 || iListLevel > 0);
+   inside_short  = (iEnvLevel  > 0 && bEnvShort[iEnvLevel]);
+   inside_fussy  = ( (!inside_center) && (!inside_right) && (!inside_left) && (!bDocSloppy) );
+   
+   i = 0;
+   z[0] = EOS;
+   sIndent[0] = EOS;
+   len_zeile = 0;
+   
+   
+   if ( token[0][0] != ' ' && token[0][0] != INDENT_C)
+   {
+      strcat_indent(z);
+   }
+   
+   switch (desttype)
+   {
+   case TORTF:                            /* RTF */
+   case TOWIN:                            /* WindowsHelp (RTF) */
+   case TOWH4:                            /* WinHelp4 */
+   case TOAQV:                            /* Apple QuickView */
+      to_check_rtf_quote_indent(z);
+
+      if ( inside_center )
+      {
+         strcat(z, "\\qc ");
+      }
+
+      if ( inside_right )
+      {
+         strcat(z, "\\qr ");
+      }
+
+      if ( inside_left )
+      {
+         strcat(z, "\\ql ");
+      }
+      break;
+
+   case TOHAH:                            /* HTML Apple Help V6.5.17 */
+   case TOHTM:                            /* HTML */
+   case TOMHH:                            /* Microsoft HTML Help */
+      if ( !inside_short )
+      {
+         if ( inside_center )
+         {
+            strcat(z, "<div align=\"center\">");
+         }
+         else
+         {
+            if ( inside_right )
+            {
+               strcat(z, "<div align=\"right\">");
+            }
+            else
+            {
+               if (!inside_env)
+               {
+                  strcat(z, "<p>");
+               }
+               else
+               {
+                  if (bEnv1stPara[iEnvLevel])
+                  {
+                     bEnv1stPara[iEnvLevel]= FALSE;
+                  }
+                  else
+                  {
+                     strcat(z, "<br />"  /*"<p>"*/  );
+                  }
+               }
+            }
+         }
+      }
+      else
+      {
+         if (inside_env)
+         {
+            if (bEnv1stPara[iEnvLevel])
+            {
+               bEnv1stPara[iEnvLevel]= FALSE;
+            }
+            else
+            {
+               strcat(z, "<br />");
+            }
+         }
+      }
+      
+      break;
+   
+   case TOIPF:                            /* OS/2 IPF */
+      if (!inside_env)
+      {
+         strcat(z, ":p.");
+      }
+      break;
+   
+   case TOLDS:                            /* Linuxdoc-SGML */
+      if (inside_quote)
+      {
+         outln("<quote>");
+      }
+      break;
+   
+   case TOLYX:                            /* LyX */
+      if (iEnvLevel == 0)
+      {
+         outln("\\layout Standard");
+         outln("");
+      }
+      else
+      {
+         if (inside_center)
+         {
+            outln("\\layout Standard");
+            outln("\\align center");
+         }
+         
+         if (inside_right)
+         {
+            outln("\\align right");
+         }
+         
+         if (!tokens_contain_item && !inside_center)
+         {
+            outln("\\newline");
+         }
+      }
+      break;
+   
+   case TOKPS:                            /* */
+      if (inside_env)
+      {
+         if (bEnv1stPara[iEnvLevel])
+         {
+            bEnv1stPara[iEnvLevel]= FALSE;
+         }
+         else
+         {
+            outln(" newline");
+         }
+      }
+      
+      out("(");
+      break;
+
+      
+   default:                               /* */
+      to_check_quote_indent(&umbruch);
+    
+   }  /* switch (desttype) */
+   
+
+   if (format_protect_commands)
+   {
+      strcpy(sIndent, z);
+
+      if ( insert_speccmd(sIndent, sIndent, sIndent) )
+      {
+         strcpy(z, sIndent);
+      }
+   }
+   
+   if (desttype == TORTF)
+   {
+      if (iEnvLevel == 0)
+      {
+         out(rtf_plain);
+         voutf("%s\\fs%d ", rtf_norm, iDocPropfontSize);
+      }
+   }
+   
+   while (i < token_counter)
+   {
+      use_token = TRUE;
+   
+      switch (desttype)
+      {
+      case TOPCH:
+         c_pch_styles(token[i]);
+         
+      }  /*switch*/
+   
+   
+      if (token[i][1] == META_C && token[i][2] != QUOTE_C)
+      {
+                                          /* vorzeitiger Zeilenumbruch? */
+         if (strcmp(token[i], "(!nl)") == 0)
+         {
+            newline = TRUE;
+            just_linefeed = TRUE;
+            use_token = FALSE;
+      
+            
+            switch (desttype)
+            {       
+            case TOTEX:
+            case TOPDL:
+               um_strcpy(token[i], "\\\\", MAX_TOKEN_LEN+1, "token_output[1]");
+               break;
+      
+            case TOLYX:
+               um_strcpy(token[i], "\n\\newline\n", MAX_TOKEN_LEN+1, "token_output[2]");
+               break;
+      
+            case TOKPS:
+               um_strcpy(token[i], ") udoshow newline\n(", MAX_TOKEN_LEN+1, "token_output[3]");
+               
+               /* New in V6.5.5 [NHz] */
+               replace_all(token[i], ")", KPSPC_S);
+               replace_all(token[i], "(", KPSPO_S);
+               break;
+
+            case TONRO:
+               um_strcpy(token[i], ".br\n", MAX_TOKEN_LEN+1, "token_output[4]");
+               break;
+
+            case TOIPF:
+               um_strcpy(token[i], ".br\n", MAX_TOKEN_LEN+1, "token_output[5]");       /*r6pl3*/
+               break;
+               
+            case TOINF:
+               token[i][0]= EOS;
+
+               if (!inside_center && !inside_right && !inside_left)
+               {
+                  strcat(z, "@*");
+               }
+               break;
+               
+            case TORTF:
+               if (iEnvLevel > 0)
+               {
+                  switch (iEnvType[iEnvLevel])
+                  {
+                  case ENV_ITEM:
+                  case ENV_ENUM:
+                     um_strcpy(token[i], "\\par\\tab\\tab ", MAX_TOKEN_LEN+1, "token_output[6]");
+                     break;
+                     
+                  case ENV_DESC:
+                  case ENV_LIST:
+                     um_strcpy(token[i], "\\par\\tab ", MAX_TOKEN_LEN+1, "token_output[7]");
+                     break;
+                  
+                  default:
+                     um_strcpy(token[i], "\\par ", MAX_TOKEN_LEN+1, "token_output[8]");
+                     
+                  }  /* switch (iEnvType[iEnvLevel]) */ 
+                  
+               }  /* if (iEnvLevel > 0) */
+               
+               else
+               {
+                  um_strcpy(token[i], "\\par ", MAX_TOKEN_LEN+1, "token_output[9]");
+               }
+               break;
+               
+            case TOWIN:
+            case TOWH4:
+            case TOAQV:
+               um_strcpy(token[i], "\\line ", MAX_TOKEN_LEN+1, "token_output[10]");
+               insert_speccmd(token[i], token[i], token[i]);
+               break;
+               
+            case TOHAH:             /* V6.5.17 */
+            case TOHTM:
+            case TOMHH:
+               um_strcpy(token[i], HTML_BR, MAX_TOKEN_LEN+1, "token_output[11]");
+               break;
+               
+            case TOLDS:
+            case TOHPH:
+               um_strcpy(token[i], "<newline>", MAX_TOKEN_LEN+1, "token_output[12]");
+               break;
+               
+            default:
+               token[i][0]= EOS;
+
+            }  /* switch (desttype) */
+            
+         }  /* if (strcmp(token[i], "(!nl)") == 0) */
+
+      }   /* if (token[i][1] == META_C && token[i][2] != QUOTE_C) */
 
 
-        if ( token[0][0]!=' ' && token[0][0]!=INDENT_C)
-        {       strcat_indent(z);
-        }
-        
-        switch(desttype)
-        {       case TORTF:
-                case TOWIN:
-                case TOWH4:
-                case TOAQV:
-                        to_check_rtf_quote_indent(z);
-                        if ( inside_center )
-                        {       strcat(z, "\\qc ");
-                        }
-                        if ( inside_right )
-                        {       strcat(z, "\\qr ");
-                        }
-                        if ( inside_left )
-                        {       strcat(z, "\\ql ");
-                        }
-                        break;
-                case TOHAH:             /* V6.5.17 */
-                case TOHTM:
-                case TOMHH:
-                        if ( !inside_short )
-                        {       if ( inside_center )
-                                {       strcat(z, "<div align=\"center\">");
-                                }
-                                else
-                                {       if ( inside_right )
-                                        {       strcat(z, "<div align=\"right\">");
-                                        }
-                                        else
-                                        {
-                                                if (!inside_env)
-                                                {       strcat(z, "<p>");
-                                                }
-                                                else
-                                                {
-                                                        if (bEnv1stPara[iEnvLevel])
-                                                        {       bEnv1stPara[iEnvLevel]= FALSE;
-                                                        }
-                                                        else
-                                                        {       strcat(z, "<br />"/*"<p>"*/);
-                                                        }
-                                                }
-                                        }
-                                }
-                        }
-                        else
+
+      /* New in V6.5.5 [NHz] */
+      switch (desttype)
+      {
+      case TOKPS:
+         replace_all(token[i], "[", "\\[");
+         replace_all(token[i], "]", "\\]");
+         replace_all(token[i], "(", "\\(");
+         replace_all(token[i], ")", "\\)");
+         qreplace_all(token[i], KPSPC_S, KPSPC_S_LEN, ")", 1);
+         qreplace_all(token[i], KPSPO_S, KPSPO_S_LEN, "(", 1);
+         
+      }  /* switch (desttype) */
+
+
+
+      if (use_token)
+      {
+         len_zeile = toklen(z);
+         len_token = toklen(token[i]);
+   
+         if ( (len_zeile + len_token) <= umbruch)
+         {
+            /* Das naechste Token hat noch Platz in der Zeile */
+            if (token[i][0] != EOS)
+            {
+               strcat(z, token[i]);
+
+               if (i == 0 && use_justification)
+               {
+                  strcat(z, INDENT_S);
+               }
+               else
+               {
+                  strcat(z, " ");
+               }
+               
+               /* New in r6pl15 [NHz] */
+               /* Capture first blank in string for a better appearance */
+               
+               if ((inside_env) && (desttype == TOKPS))
+               {
+                  BOOLEAN   replaced_blank = TRUE;  /* */
+
+
+                  do
+                  {
+                     replaced_blank = qreplace_once (z, "( ", 2L, "(", 1L );
+                  }
+                  while (replaced_blank);
+               }
+               
+               len_zeile += (len_token + 1);
+               
+            } /* if (token[i][0] != EOS) */
+            
+            newline= FALSE;
+            
+         } /* if ( (len_zeile + len_token) <= umbruch) */
+
+         else
+         {
+            /* Die Zeile wird zu lang, also zur Ausgabe vorbereiten */
+            newline = TRUE;
+   
+            switch(desttype)
+            {
+            case TOASC:
+            case TODRC:
+            case TOMAN:
+            case TOSTG:
+            case TOAMG:
+            case TOPCH:
+             
+               /* Schauen, ob das "ueberhaengende" Wort in den Trennvorschlaegen steckt */
+               replace_hyphens(token[i]);
+               str2silben(token[i]);
+   
+               if (silben_counter >= 0)
+               {
+                  silb = 0;        /* Zaehler der naechsten Silbe */
+   
+                  /* len_zeile= toklen(z);: unveraendert */
+                  len_silbe = toklen(silbe[silb]);
+
+                  while ( (silb <= silben_counter) && ( (len_zeile + len_silbe + 1) <= umbruch) )
+                  {
+                     strcat(z, silbe[silb]);
+                     len_zeile += len_silbe;
+                     silb++;
+                     len_silbe = toklen(silbe[silb]);
+
+                  } /* while */
+   
+                  if (silb > 0)
+                  {
+                     /* An die Zeile wurden Silben angehaengt */
+                     /* In ihr befinden sich u.U. noch DIVIS_C */
+                     /* Daher das letzte DIVIS_C in "-" umwandeln, */
+                     /* anderen entfernen */
+                     
+                     sl = strlen(z);
+
+                     if (z[sl - 1] == DIVIS_C)
+                     {
+                        z[sl - 1] = '-';
+
+                        /* Deutsches c!-k in k-k wandeln */
+                        if (z[sl -2 ] == 'c' && silbe[silb][0] == 'k' && destlang == TOGER)
                         {
-                                if (inside_env)
-                                {
-                                        if (bEnv1stPara[iEnvLevel])
-                                        {       bEnv1stPara[iEnvLevel]= FALSE;
-                                        }
-                                        else
-                                        {       strcat(z, "<br />");
-                                        }
-                                }
+                           z[sl-2] = 'k';
                         }
+                     }
 
-                        break;
+                     delete_all_divis(z);
+   
+                     /* Nun noch die restlichen Silben in das */
+                     /* naechste Token uebertragen */
 
-                case TOIPF:
-                        if (!inside_env)
-                        {       strcat(z, ":p.");
-                        }
-                        break;
+                     token[i][0] = EOS;
 
-                case TOLDS:
-                        if (inside_quote)
-                        {       outln("<quote>");
-                        }
-                        break;
+                     for (j = silb; j <= silben_counter; j++)
+                     {
+                        um_strcat(token[i], silbe[j], MAX_TOKEN_LEN+1, "token_output[14]");
+                     }
 
-                case TOLYX:
-                        if (iEnvLevel==0)
-                        {       outln("\\layout Standard");
-                            outln("");
-                        }
-                        else
-                        {       if (inside_center)
-                                {       outln("\\layout Standard");
-                                    outln("\\align center");
-                                }
-                                if (inside_right)
-                                {       outln("\\align right");
-                                }
-                                if (!tokens_contain_item && !inside_center)
-                                {       outln("\\newline");
-                                }
-                        }
-                        break;
-                case TOKPS:
-                        if (inside_env)
-                        {
-                                if (bEnv1stPara[iEnvLevel])
-                                {       bEnv1stPara[iEnvLevel]= FALSE;
-                                }
-                                else
-                                {       outln(" newline");
-                                }
-                        }
-                        out("(");
+                     delete_all_divis(token[i]);
+   
+                  } /* if (silb > 0) */
 
-                        break;
-                default:
-                        to_check_quote_indent(&umbruch);
-                        break;
-        }
+               } /* if (silben_counter >= 0) */
 
-        if (format_protect_commands)
-        {       strcpy(sIndent, z);
-                if ( insert_speccmd(sIndent, sIndent, sIndent) )
-                {       strcpy(z, sIndent);
-                }
-        }
+            } /* switch */
 
-        if (desttype==TORTF)
-        {       if (iEnvLevel==0)
-                {       out(rtf_plain);
-                        voutf("%s\\fs%d ", rtf_norm, iDocPropfontSize);
-                }
-        }
-        
-        while ( i<token_counter )
-        {       use_token= TRUE;
+         } /* if..else */
 
-                switch (desttype)
-                {       case TOPCH:     c_pch_styles(token[i]); break;
-                }       /*switch*/
-                
-                if ( token[i][1]==META_C && token[i][2]!=QUOTE_C )
-                {       /* vorzeitiger Zeilenumbruch? */
-                        if (strcmp(token[i], "(!nl)")==0)
-                        {       newline= TRUE;
-                                just_linefeed= TRUE;
-                                use_token= FALSE;
-                                switch(desttype)
-                                {       
-                                        case TOTEX:
-                                        case TOPDL:
-                                                um_strcpy(token[i], "\\\\", MAX_TOKEN_LEN+1, "token_output[1]");
-                                                break;
-                                        case TOLYX:
-                                                um_strcpy(token[i], "\n\\newline\n", MAX_TOKEN_LEN+1, "token_output[2]");
-                                                break;
-                                        case TOKPS:
-                                                um_strcpy(token[i], ") udoshow newline\n(", MAX_TOKEN_LEN+1, "token_output[3]");
-                                                /* New in V6.5.5 [NHz] */
-                                                replace_all(token[i], ")", KPSPC_S);
-                                                replace_all(token[i], "(", KPSPO_S);
-                                                break;
-                                        case TONRO:
-                                                um_strcpy(token[i], ".br\n", MAX_TOKEN_LEN+1, "token_output[4]");
-                                                break;
-                                        case TOIPF:
-                                                um_strcpy(token[i], ".br\n", MAX_TOKEN_LEN+1, "token_output[5]");       /*r6pl3*/
-                                                break;
-                                        case TOINF:
-                                                token[i][0]= EOS;
-                                                if (!inside_center && !inside_right && !inside_left)
-                                                {       strcat(z, "@*");
-                                                }
-                                                break;
-                                        case TORTF:
-                                                if ( iEnvLevel>0 )
-                                                {
-                                                        switch(iEnvType[iEnvLevel])
-                                                        {       case ENV_ITEM:
-                                                                case ENV_ENUM:
-                                                                        um_strcpy(token[i], "\\par\\tab\\tab ", MAX_TOKEN_LEN+1, "token_output[6]");
-                                                                        break;
-                                                                case ENV_DESC:
-                                                                case ENV_LIST:
-                                                                        um_strcpy(token[i], "\\par\\tab ", MAX_TOKEN_LEN+1, "token_output[7]");
-                                                                        break;
-                                                                default:
-                                                                        um_strcpy(token[i], "\\par ", MAX_TOKEN_LEN+1, "token_output[8]");
-                                                                        break;
-                                                        }
-                                                }
-                                                else
-                                                {       um_strcpy(token[i], "\\par ", MAX_TOKEN_LEN+1, "token_output[9]");
-                                                }
-                                                break;
-                                        case TOWIN:
-                                        case TOWH4:
-                                        case TOAQV:
-                                                um_strcpy(token[i], "\\line ", MAX_TOKEN_LEN+1, "token_output[10]");
-                                                insert_speccmd(token[i], token[i], token[i]);
-                                                break;
-                                        case TOHAH:             /* V6.5.17 */
-                                        case TOHTM:
-                                        case TOMHH:
-                                                um_strcpy(token[i], HTML_BR, MAX_TOKEN_LEN+1, "token_output[11]");
-                                                break;
-                                        case TOLDS:
-                                        case TOHPH:
-                                                um_strcpy(token[i], "<newline>", MAX_TOKEN_LEN+1, "token_output[12]");
-                                                break;
-                                        default:
-                                                token[i][0]= EOS;
-                                                break;
-                                }/*switch*/
-                        }/*if*/
-                }/*if*/
+      } /* if (use_token) */
+   
 
-                /* New in V6.5.5 [NHz] */
-                switch (desttype)
-                {       case TOKPS:
-                                                        replace_all(token[i], "[", "\\[");
-                                                        replace_all(token[i], "]", "\\]");
-                                                        replace_all(token[i], "(", "\\(");
-                                                        replace_all(token[i], ")", "\\)");
-                                                        qreplace_all(token[i], KPSPC_S, KPSPC_S_LEN, ")", 1);
-                                                        qreplace_all(token[i], KPSPO_S, KPSPO_S_LEN, "(", 1);
-                                                        break;
-                }       /*switch*/
-                
-                if (use_token)
-                {
-                        len_zeile= toklen(z);
-                        len_token= toklen(token[i]);
 
-                        if ( (len_zeile+len_token) <= umbruch )
-                        {       /* Das naechste Token hat noch Platz in der Zeile */
-                                if ( token[i][0]!=EOS )
-                                {       strcat(z, token[i]);
-                                        if (i==0 && use_justification)
-                                        {       strcat(z, INDENT_S);
-                                        }
-                                        else
-                                        {       strcat(z, " ");
-                                        }
-                                        /* New in r6pl15 [NHz] */
-                                        /* Capture first blank in string for a better appearance */
-                                        if((inside_env) && (desttype == TOKPS))
-                                        {
-                                                BOOLEAN replaced_blank= TRUE;
-                                                do
-                                                {
-                                                        replaced_blank = qreplace_once (z, "( ", 2L, "(", 1L );
-                                                } while (replaced_blank);
-                                        }
-                                        len_zeile+= (len_token+1);
-                                }/*if*/
-                                newline= FALSE;
-                        }/*if..then*/
-                        else
-                        {       /* Die Zeile wird zu lang, also zur Ausgabe vorbereiten */
-                                newline= TRUE;
-
-                                switch(desttype)
-                                {       case TOASC:
-                                        case TODRC:
-                                        case TOMAN:
-                                        case TOSTG:
-                                        case TOAMG:
-                                        case TOPCH:
-                                                /* Schauen, ob das "ueberhaengende" Wort in den Trennvorschlaegen steckt */
-                                                replace_hyphens(token[i]);
-                                                str2silben(token[i]);
-                                        
-                                                if (silben_counter>=0)
-                                                {
-                                                        silb= 0;        /* Zaehler der naechsten Silbe */
-
-                                                        /* len_zeile= toklen(z);: unveraendert */
-                                                        len_silbe= toklen(silbe[silb]);
-                                                        while   (       (silb<=silben_counter) &&
-                                                                                ( (len_zeile+len_silbe+1) <= umbruch)
-                                                                        )
-                                                        {       strcat(z, silbe[silb]);
-                                                                len_zeile+= len_silbe;
-                                                                silb++;
-                                                                len_silbe= toklen(silbe[silb]);
-                                                        }/*while*/
-
-                                                        if ( silb>0 )
-                                                        {       /* An die Zeile wurden Silben angehaengt */
-                                                                /* In ihr befinden sich u.U. noch DIVIS_C */
-                                                                /* Daher das letzte DIVIS_C in "-" umwandeln, */
-                                                                /* anderen entfernen */
-                                                                sl= strlen(z);
-                                                                if ( z[sl-1]==DIVIS_C )
-                                                                {       z[sl-1]= '-';
-                                                                        /* Deutsches c!-k in k-k wandeln */
-                                                                        if ( z[sl-2]=='c' && silbe[silb][0]=='k' && destlang==TOGER)
-                                                                        {       z[sl-2]='k';
-                                                                        }
-                                                                }
-                                                                delete_all_divis(z);
-
-                                                                /* Nun noch die restlichen Silben in das */
-                                                                /* naechste Token uebertragen */
-                                                                token[i][0]= EOS;
-                                                                for (j=silb; j<=silben_counter; j++)
-                                                                {       um_strcat(token[i], silbe[j], MAX_TOKEN_LEN+1, "token_output[14]");
-                                                                }
-                                                                delete_all_divis(token[i]);
-                                                        
-                                                        }/*if (silb>0)*/
-                                                }/* if (silben_counter>=0) */
-                                                break;
-                                }/*switch*/
-                        }/*if..else*/
-                }/*if (use_token)*/
-                
-                if (newline)
-                {
-                        check_styles(z);
-                        replace_udo_quotes(z);
-                        delete_all_divis(z);
-                        
-                        /* Zeilen zentrieren? */
-                        if (inside_center)
-                        {       switch(desttype)
-                                {       case TOASC:
-                                        case TODRC:
-                                        case TOMAN:
-                                        case TOSTG:
-                                        case TOAMG:
-                                        case TOPCH:
-                                        case TOTVH:
-                                        case TOSRC:
-                                        case TOSRP:
-                                                del_right_spaces(z);
-                                                strcenter(z, umbruch);
-                                                break;
-                                        case TOINF:
-                                                strinsert(z, "@center ");
-                                                break;
-                                }
-                        }
-
-                        if (inside_right)
-                        {       switch(desttype)
-                                {       case TOASC:
-                                        case TODRC:
-                                        case TOMAN:
-                                        case TOSTG:
-                                        case TOAMG:
-                                        case TOPCH:
-                                        case TOTVH:
-                                        case TOSRC:
-                                        case TOSRP:
-                                                del_right_spaces(z);
-                                                strright(z, umbruch);
-                                                break;
-                                }
-                        }
-
-                        switch(desttype)
-                        {
-                                case TOTEX:
-                                        replace_hyphens(z);
-                                        indent2space(z);
-                                        if ( strncmp(z, "\\\\[", 3)==0 )
-                                        {       qreplace_once(z, "[", 1, "{\\symbol{91}}", 13);
-                                        }
-                                        auto_references(z, FALSE, "", 0, 0);
-                                        break;
-                                case TOPDL:
-                                        auto_references(z, FALSE, "", 0, 0);
-                                        break;
-                                case TOLYX:
-                                        c_internal_styles(z);
-                                        indent2space(z);
-                                        break;
-                                case TORTF:
-                                        c_rtf_styles(z);
-                                        c_rtf_quotes(z);
-                                        break;
-                                case TOWIN:
-                                case TOWH4:
-                                case TOAQV:
-                                        c_win_styles(z);
-                                        /* Einen kleinen Maengel der Umgebungen TAB+SPACE beseitigen */
-                                        qreplace_all(z, "\\tab  ", 6, "\\tab ", 5);
-                                        auto_references(z, FALSE, "", 0, 0);
-                                        break;
-                                case TOPCH:
-                                        auto_references(z, FALSE, "", 0, 0);
-                                        break;
-                                case TOHAH:             /* V6.5.17 */
-                                case TOHTM:
-                                case TOMHH:
-                                        c_internal_styles(z);
-                                        auto_references(z, FALSE, "", 0, 0);
-                                        break;
-                                case TOHPH:
-                                        break;
-                                case TOTVH:
-                                        auto_references(z, FALSE, "", 0, 0);
-                                        break;
-                                case TOIPF:
-                                        auto_references(z, FALSE, "", 0, 0);
-                                        break;
-                                case TOAMG:
-                                        auto_references(z, FALSE, "", 0, 0);
-                                        break;
-                                default:
-                                        break;
-                        }
-
-                        /* Kurze Zeilen bemaengeln, wenn sloppy nicht gesetzt ist       */
-                        /* <???> "i+1<token_counter", nicht "i<token_counter"?          */
-
-                        if ( (inside_fussy) && (z[0]!=EOS) && (i+1<token_counter) && (!just_linefeed) )
-                        {       switch(desttype)
-                                {       case TOASC:
-                                        case TODRC:
-                                        case TOMAN:
-                                        case TOSTG:
-                                        case TOAMG:
-                                        case TOPCH:
+      if (newline)
+      {
+         check_styles(z);
+         replace_udo_quotes(z);
+         delete_all_divis(z);
+   
+         /* Zeilen zentrieren? */
+         if (inside_center)
+         {
+            switch(desttype)
+            {
+            case TOASC:
+            case TODRC:
+            case TOMAN:
+            case TOSTG:
+            case TOAMG:
+            case TOPCH:
+            case TOTVH:
+            case TOSRC:
+            case TOSRP:
+               del_right_spaces(z);
+               strcenter(z, umbruch);
+               break;
+            
+            case TOINF:
+               strinsert(z, "@center ");
+            }
+         }
+      
+         if (inside_right)
+         {
+            switch(desttype)
+            {
+            case TOASC:
+            case TODRC:
+            case TOMAN:
+            case TOSTG:
+            case TOAMG:
+            case TOPCH:
+            case TOTVH:
+            case TOSRC:
+            case TOSRP:
+               del_right_spaces(z);
+               strright(z, umbruch);
+            }
+         }
+      
+         switch(desttype)
+         {
+         case TOTEX:
+            replace_hyphens(z);
+            indent2space(z);
+            
+            if (strncmp(z, "\\\\[", 3) == 0)
+            {
+               qreplace_once(z, "[", 1, "{\\symbol{91}}", 13);
+            }
+            
+            auto_references(z, FALSE, "", 0, 0);
+            break;
+            
+         case TOPDL:
+            auto_references(z, FALSE, "", 0, 0);
+            break;
+            
+         case TOLYX:
+            c_internal_styles(z);
+            indent2space(z);
+            break;
+   
+         case TORTF:
+            c_rtf_styles(z);
+            c_rtf_quotes(z);
+            break;
+            
+         case TOWIN:
+         case TOWH4:
+         case TOAQV:
+            c_win_styles(z);
+            
+            /* Einen kleinen Maengel der Umgebungen TAB+SPACE beseitigen */
+            qreplace_all(z, "\\tab  ", 6, "\\tab ", 5);
+            auto_references(z, FALSE, "", 0, 0);
+            break;
+            
+         case TOPCH:
+            auto_references(z, FALSE, "", 0, 0);
+            break;
+            
+         case TOHAH:             /* V6.5.17 */
+         case TOHTM:
+         case TOMHH:
+            c_internal_styles(z);
+            auto_references(z, FALSE, "", 0, 0);
+            break;
+            
+         case TOHPH:
+            break;
+            
+         case TOTVH:
+            auto_references(z, FALSE, "", 0, 0);
+            break;
+            
+         case TOIPF:
+            auto_references(z, FALSE, "", 0, 0);
+            break;
+            
+         case TOAMG:
+            auto_references(z, FALSE, "", 0, 0);
+            break;
+            
+         default:
+            break;
+         }
+   
+   
+   
+         /* Kurze Zeilen bemaengeln, wenn sloppy nicht gesetzt ist */
+         /* <???> "i + 1 < token_counter", nicht "i < token_counter"? */
+      
+         if ( (inside_fussy) && (z[0] != EOS) && (i + 1 < token_counter) && (!just_linefeed) )
+         {
+            switch(desttype)
+            {
+            case TOASC:
+            case TODRC:
+            case TOMAN:
+            case TOSTG:
+            case TOAMG:
+            case TOPCH:
 #if 0
-                                                /* z wurde, ausser bei der Zentrierung  */
-                                                /* nicht veraendert. len_zeile hat also */
-                                                /* noch den richtigen Wert.                             */
-                                                len_zeile= toklen(z);
+               /* z wurde, ausser bei der Zentrierung  */
+               /* nicht veraendert. len_zeile hat also */
+               /* noch den richtigen Wert. */
+   
+               len_zeile = toklen(z);
 #endif
-                                                if (use_justification && !inside_left)
-                                                {       if (len_zeile<umbruch-9)
-                                                        {       warning_short_line(len_zeile, token[i]);
-                                                        }
-                                                }
-                                                else
-                                                {       if (len_zeile<umbruch-6)
-                                                        {       warning_short_line(len_zeile, token[i]);
-                                                        }
-                                                }
-                                                break;
-                                }       /* switch */
-                        }       /* if */
+   
+               if (use_justification && !inside_left)
+               {
+                  if (len_zeile < umbruch - 9)
+                  {
+                     warning_short_line(len_zeile, token[i]);
+                  }
+               }
+               else
+               {
+                  if (len_zeile < umbruch - 6)
+                  {
+                     warning_short_line(len_zeile, token[i]);
+                  }
+               }
+               
+            }       /* switch */
+            
+         }       /* if */
+      
+   
+         if ( use_justification )
+         {
+            if (i < token_counter && !just_linefeed && !inside_center && !inside_right && !inside_left)
+            {
+               switch (desttype)
+               {
+               case TOASC:
+               case TODRC:
+               case TOMAN:
+               case TOSTG:
+               case TOAMG:
+               case TOPCH:
+               case TOSRC:
+               case TOSRP:
+                  del_right_spaces(z);
+                  strjustify(z, (size_t) umbruch);
+               }
+            }
+   
+            indent2space(z);
+         }
+      
+         replace_placeholders(z);
+         replace_speccmds(z);
+         c_internal_styles(z);
+      
+         replace_udo_tilde(z);
+         replace_udo_nbsp(z);
+      
+   
+         switch (desttype)                   /* Letztes Leerzeichen entfernen */
+         {
+         case TORTF:
+         case TOWIN:
+         case TOWH4:
+         case TOAQV:
+         case TOLYX:
+            break;
+         
+         default:
+            del_right_spaces(z);
+         }
+      
+   
+         switch (desttype)                       
+         {
+         case TOMAN:
+            strinsert(z, "     ");
+            break;
+            
+         case TOSRC:
+         case TOSRP:
+            strinsert(z, "    ");
+            break;
+   
+         case TONRO:
+            qreplace_all(z, "\n ", 2, "\n", 1);
+            qreplace_all(z, "\n\n", 2, "\n", 1);
+            break;
+            
+         case TOKPS:
+            /* Deleted in r6pl16 [NHz] */
+            /* No special line end within a paragraph  for PS anymore */
+            /* Changed in V6.5.6 [NHz] */
+               strcat(z, " ");
+   /*          replace_last (z, "\n", " \n");
+   */
+         }
+      
+      
+         if (format_uses_output_buffer && use_output_buffer)
+         {
+            insert_nl_token_buffer();
+         }
+      
+         /* r5pl14: Fuer STG wieder ein Leerzeichen anhaengen, damit HypC */
+         /* daran erkennen kann, dass der Absatz noch nicht zuende ist */
+         /* Das Leerzeichen muss oben entfernt werden, da sonst der */
+         /* Blocksatz weiter oben nicht richtig erzeugt wird! */
+      
+         if (desttype == TOSTG && !just_linefeed)
+         {
+            strcat(z, " ");
+         }
+      
+         if (!no_effects && desttype == TOASC)
+         {
+            /* Offene Effekte am Zeilenende beenden */
+            /* und unten in der naechsten Zeile oeffnen */
+            
+            check_styles_asc_last_line(z);
+         }
+      
+         /* Endlich kann die Zeile ausgegeben werden */
+         outln(z);
+      
+         /* Schonmal die naechste Zeile vorbereiten. */
+         z[0] = EOS;
+         len_zeile = 0;
+      
+         switch (desttype)
+         {
+         case TORTF:
+         case TOWIN:
+         case TOWH4:
+         case TOAQV:
+            to_check_rtf_quote_indent(z);
+            break;
+         
+         default:
+            strcat_indent(z);
+         }
+      
+         if (format_protect_commands)
+         {
+            strcpy(sIndent, z);
+   
+            if (insert_speccmd(sIndent, sIndent, sIndent))
+            {
+               strcpy(z, sIndent);
+            }
+         }
+      
+         if (!no_effects)
+         {
+            switch (desttype)
+            {
+            case TODRC:
+               check_styles_drc_next_line();
+               break;
+   
+            case TOASC:
+               check_styles_asc_next_line();
+            }
+         }
+      
+         strcat(z, token[i]);
+      
+         if (!just_linefeed)
+         {
+            strcat(z, " ");
+         }
+         else
+         {
+            just_linefeed = FALSE;
+         }
+      
+      } /* if (newline) */
+   
+      i++;
 
-                        if ( use_justification )
-                        {       if ( i<token_counter && !just_linefeed && !inside_center && !inside_right && !inside_left )
-                                {       switch (desttype)
-                                        {       case TOASC:
-                                                case TODRC:
-                                                case TOMAN:
-                                                case TOSTG:
-                                                case TOAMG:
-                                                case TOPCH:
-                                                case TOSRC:
-                                                case TOSRP:
-                                                        del_right_spaces(z);
-                                                        strjustify(z, (size_t) umbruch);
-                                                        break;
-                                        }
-                                }
-                                indent2space(z);
-                        }
-                        
-                        replace_placeholders(z);
-                        replace_speccmds(z);
-                        c_internal_styles(z);
+   }  /* while (i < token_counter) */
+   
+   
+   if (z[0] != EOS)
+   {
+      check_styles(z);
+      replace_udo_quotes(z);
+      delete_all_divis(z);
+   
+      if (inside_center)
+      {
+         switch(desttype)
+         {
+         case TOASC:
+         case TODRC:
+         case TOMAN:
+         case TOSTG:
+         case TOAMG:
+         case TOPCH:
+         case TOTVH:
+         case TOSRC:
+         case TOSRP:
+            del_right_spaces(z);
+            strcenter(z, umbruch);
+            break;
+         
+         case TOINF:
+            strinsert(z, "@center ");
+         }
+      }
+   
+      if (inside_right)
+      {
+         switch(desttype)
+         {
+         case TOASC:
+         case TODRC:
+         case TOMAN:
+         case TOSTG:
+         case TOAMG:
+         case TOPCH:
+         case TOTVH:
+         case TOSRC:
+         case TOSRP:
+            del_right_spaces(z);
+            strright(z, umbruch);
+         }
+      }
+   
+      switch (desttype)
+      {
+      case TOTEX:
+         replace_hyphens(z);
+         indent2space(z);
+         
+         if (strncmp(z, "\\\\[", 3) == 0)
+         {
+            qreplace_once(z, "[", 1, "{\\symbol{91}}", 13);
+         }
 
-                        replace_udo_tilde(z);
-                        replace_udo_nbsp(z);
+         auto_references(z, FALSE, "", 0, 0);
+         break;
+         
+      case TOPDL:
+         auto_references(z, FALSE, "", 0, 0);
+         break;
+         
+      case TOLYX:
+         c_internal_styles(z);
+         indent2space(z);
+         break;
+         
+      case TORTF:
+         c_rtf_styles(z);
+         c_rtf_quotes(z);        /* r5pl6 */
+         break;
+         
+      case TOWIN:
+      case TOWH4:
+      case TOAQV:
+         c_win_styles(z);
+         /* Einen kleinen Maengel der Umgebungen TAB+SPACE beseitigen */
+         qreplace_all(z, "\\tab  ", 6, "\\tab ", 5);
+         auto_references(z, FALSE, "", 0, 0);
+         break;
+         
+      case TOPCH:
+         auto_references(z, FALSE, "", 0, 0);
+         break;
+         
+      case TOHAH:             /* V6.5.17 */
+      case TOHTM:
+      case TOMHH:
+         c_internal_styles(z);
+         auto_references(z, FALSE, "", 0, 0);
+         break;
+         
+      case TOHPH:
+         break;
+         
+      case TOTVH:
+         auto_references(z, FALSE, "", 0, 0);
+         break;
+         
+      case TOIPF:
+         auto_references(z, FALSE, "", 0, 0);
+         break;
+         
+      case TOAMG:
+         auto_references(z, FALSE, "", 0, 0);
+         break;
+         
+      default:
+         break;
+      }
+   
+      if (use_justification)
+      {
+         indent2space(z);
+      }
+   
+      replace_placeholders(z);
+      replace_speccmds(z);
+      c_internal_styles(z);
+   
+      replace_udo_tilde(z);
+      replace_udo_nbsp(z);
+   
+      /* Letztes Leerzeichen entfernen */
+      switch (desttype)
+      {
+      case TORTF:
+      case TOWIN:
+      case TOWH4:
+      case TOAQV:
+      case TOLYX:
+         break;
+      
+      default:
+         del_right_spaces(z);
+      }
+   
+      switch (desttype)
+      {
+      case TOMAN:
+         strinsert(z, "     ");
+         break;
 
-                        /* Letztes Leerzeichen entfernen */
-                        if ( (desttype!=TORTF) && (desttype!=TOWIN) && (desttype!=TOWH4)
-                                        && (desttype!=TOAQV) && (desttype!=TOLYX) )
-                        {       del_right_spaces(z);
-                        }
-                        
-                        switch (desttype)                       
-                        {
-                                case TOMAN:
-                                        strinsert(z, "     ");
-                                        break;
-                                case TOSRC:
-                                case TOSRP:
-                                        strinsert(z, "    ");
-                                        break;
-                                case TONRO:
-                                        qreplace_all(z, "\n ", 2, "\n", 1);
-                                        qreplace_all(z, "\n\n", 2, "\n", 1);
-                                        break;
-                                case TOKPS:
-                                        /* Deleted in r6pl16 [NHz] */
-                                        /* No special line end within a paragraph  for PS anymore */
-                                        /* Changed in V6.5.6 [NHz] */
-                                        strcat(z, " ");
-/*                                      replace_last (z, "\n", " \n");*/
-                                        break;
-                        }
-                        
+      case TOSRC:
+      case TOSRP:
+         strinsert(z, "    ");
+         break;
 
-                        if (format_uses_output_buffer && use_output_buffer)
-                        {       insert_nl_token_buffer();
-                        }
-                        
-                        /* r5pl14: Fuer STG wieder ein Leerzeichen anhaengen, damit HypC */
-                        /* daran erkennen kann, dass der Absatz noch nicht zuende ist */
-                        /* Das Leerzeichen muss oben entfernt werden, da sonst der */
-                        /* Blocksatz weiter oben nicht richtig erzeugt wird! */
-                        
-                        if (desttype==TOSTG && !just_linefeed)
-                        {       strcat(z, " ");
-                        }
+      case TONRO:
+         qreplace_all(z, "\n ", 2, "\n", 1);
+         qreplace_all(z, "\n\n", 2, "\n", 1);
+         break;
+         
+      case TOKPS:
+         strcat(z, ") udoshow");
+      }
+   
+      if (format_uses_output_buffer && use_output_buffer)
+      {
+         insert_nl_token_buffer();
+      }
+   
+      outln(z);
+   
+   }  /* if (z[0] != EOS) */
+   
+   check_verb_style();     /* r5pl16 */
+   
+   /* Leerzeilen dann ausgeben, wenn der Absatz sich nicht in einer */
+   /* komprimierten Umgebung befindet. */
+   
+   if (inside_short)
+   {
+      switch (desttype)
+      {
+      case TOWIN:
+      case TOWH4:
+      case TOAQV:
+      case TORTF:
+         outln(rtf_parpard);
+         break;
+         
+      case TOSRC:
+      case TOSRP:
+         outln(sSrcRemOff);
+         break;
+         
+      case TOHAH:             /* V6.5.17 */
+      case TOHTM:
+      case TOMHH:
+         html_ignore_p = FALSE;
+         break;
+         
+      case TOTEX:
+      case TOPDL:
+         outln("");
+         break;
+         
+      case TOKPS:
+         /* Deleted in r6pl15 [NHz] */
+/*       outln("newline");
+*/
+         break;
+      }
+      
+   }  /* if (inside_short) */
+   
+   else
+   {
+      switch (desttype)
+      {
+      case TOWIN:
+      case TOWH4:
+      case TOAQV:
+      case TORTF:
+         outln("\\par\\pard\\par");
+         break;
+         
+      case TOHAH:             /* V6.5.17 */
+      case TOHTM:
+      case TOMHH:
+         if (!inside_short)
+         {
+            if (inside_center || inside_right)
+            {
+               outln("</div>");
+            }
+            else
+            {
+               if (inside_env)
+               {
+                  outln("<br />&nbsp;");
+               }
+               else
+               {
+                  outln("</p>");
+               }
+            }
+         }
+         else
+         {
+            if (inside_env)
+            {
+               outln("<br />&nbsp;");
+            }
+            else
+            {
+               outln("</p>\n");
+            }
+         }
+         break;
 
-                        if (!no_effects && desttype==TOASC)
-                        {       /* Offene Effekte am Zeilenende beenden */
-                                /* und unten in der naechsten Zeile oeffnen */
-                                check_styles_asc_last_line(z);
-                        }
-                        
-                        /* Endlich kann die Zeile ausgegeben werden */
-                        outln(z);
-
-                        /* Schonmal die naechste Zeile vorbereiten. */
-                        z[0]= EOS;
-                        len_zeile= 0;
-                        
-                        if (desttype!=TORTF && desttype!=TOWIN && desttype!=TOWH4 && desttype!=TOAQV)
-                        {       strcat_indent(z);
-                        }
-                        else
-                        {       to_check_rtf_quote_indent(z);
-                        }
-
-                        if (format_protect_commands)
-                        {       strcpy(sIndent, z);
-                                if ( insert_speccmd(sIndent, sIndent, sIndent) )
-                                {       strcpy(z, sIndent);
-                                }
-                        }
-
-                        if (!no_effects)
-                        {       switch (desttype)
-                                {       case TODRC:     check_styles_drc_next_line();   break;
-                                        case TOASC:     check_styles_asc_next_line();   break;
-                                }
-                        }
-
-                        strcat(z, token[i]);
-                        
-                        if (!just_linefeed)
-                        {       strcat(z, " ");
-                        }
-                        else
-                        {       just_linefeed= FALSE;
-                        }
-                        
-                }/*if*/
-                
-                i++;
-        }       /* while (i<token_counter) */
-        
-        
-        if ( z[0]!=EOS )
-        {
-                check_styles(z);
-                replace_udo_quotes(z);
-                delete_all_divis(z);
-                
-                if (inside_center)
-                {       switch(desttype)
-                        {       case TOASC:
-                                case TODRC:
-                                case TOMAN:
-                                case TOSTG:
-                                case TOAMG:
-                                case TOPCH:
-                                case TOTVH:
-                                case TOSRC:
-                                case TOSRP:
-                                        del_right_spaces(z);
-                                        strcenter(z, umbruch);
-                                        break;
-                                case TOINF:
-                                        strinsert(z, "@center ");
-                                        break;
-                        }
-                }
-
-                if (inside_right)
-                {       switch(desttype)
-                        {       case TOASC:
-                                case TODRC:
-                                case TOMAN:
-                                case TOSTG:
-                                case TOAMG:
-                                case TOPCH:
-                                case TOTVH:
-                                case TOSRC:
-                                case TOSRP:
-                                        del_right_spaces(z);
-                                        strright(z, umbruch);
-                                        break;
-                        }
-                }
-
-                switch(desttype)
-                {
-                        case TOTEX:
-                                replace_hyphens(z);
-                                indent2space(z);
-                                if ( strncmp(z, "\\\\[", 3)==0 )
-                                {       qreplace_once(z, "[", 1, "{\\symbol{91}}", 13);
-                                }
-                                auto_references(z, FALSE, "", 0, 0);
-                                break;
-                        case TOPDL:
-                                auto_references(z, FALSE, "", 0, 0);
-                                break;
-                        case TOLYX:
-                                c_internal_styles(z);
-                                indent2space(z);
-                                break;
-                        case TORTF:
-                                c_rtf_styles(z);
-                                c_rtf_quotes(z);        /* r5pl6 */
-                                break;
-                        case TOWIN:
-                        case TOWH4:
-                        case TOAQV:
-                                c_win_styles(z);
-                                /* Einen kleinen Maengel der Umgebungen TAB+SPACE beseitigen */
-                                qreplace_all(z, "\\tab  ", 6, "\\tab ", 5);
-                                auto_references(z, FALSE, "", 0, 0);
-                                break;
-                        case TOPCH:
-                                auto_references(z, FALSE, "", 0, 0);
-                                break;
-                        case TOHAH:             /* V6.5.17 */
-                        case TOHTM:
-                        case TOMHH:
-                                c_internal_styles(z);
-                                auto_references(z, FALSE, "", 0, 0);
-                                break;
-                        case TOHPH:
-                                break;
-                        case TOTVH:
-                                auto_references(z, FALSE, "", 0, 0);
-                                break;
-                        case TOIPF:
-                                auto_references(z, FALSE, "", 0, 0);
-                                break;
-                        case TOAMG:
-                                auto_references(z, FALSE, "", 0, 0);
-                                break;
-                        default:
-                                break;
-                }
-
-                if (use_justification)
-                {       indent2space(z);
-                }
-
-                replace_placeholders(z);
-                replace_speccmds(z);
-                c_internal_styles(z);
-
-                replace_udo_tilde(z);
-                replace_udo_nbsp(z);
-
-                /* Letztes Leerzeichen entfernen */
-                if ( (desttype!=TORTF) && (desttype!=TOWIN) && (desttype!=TOWH4)
-                                && (desttype!=TOAQV) && (desttype!=TOLYX) )
-                {       del_right_spaces(z);
-                }
-
-                switch (desttype)
-                {
-                        case TOMAN:
-                                strinsert(z, "     ");
-                                break;
-                        case TOSRC:
-                        case TOSRP:
-                                strinsert(z, "    ");
-                                break;
-                        case TONRO:
-                                qreplace_all(z, "\n ", 2, "\n", 1);
-                                qreplace_all(z, "\n\n", 2, "\n", 1);
-                                break;
-                        case TOKPS:
-                                strcat(z, ") udoshow");
-                                break;
-                }
-
-                if (format_uses_output_buffer && use_output_buffer)
-                {       insert_nl_token_buffer();
-                }
-
-                outln(z);
-                
-        }       /* if (z[0]!=EOS) */
-
-        check_verb_style();     /* r5pl16 */
-
-        /* Leerzeilen dann ausgeben, wenn der Absatz sich nicht in einer        */
-        /* komprimierten Umgebung befindet.                                                                     */
-
-        if ( inside_short )
-        {       switch (desttype)
-                {       case TOWIN:
-                        case TOWH4:
-                        case TOAQV:
-                        case TORTF:
-                                outln(rtf_parpard);
-                                break;
-                        case TOSRC:
-                        case TOSRP:
-                                outln(sSrcRemOff);
-                                break;
-                        case TOHAH:             /* V6.5.17 */
-                        case TOHTM:
-                        case TOMHH:
-                                html_ignore_p= FALSE;
-                                break;
-                        case TOTEX:
-                        case TOPDL:
-                                outln("");
-                                break;
-                        case TOKPS:
-                                /* Deleted in r6pl15 [NHz] */
-
-/*                              outln("newline");*/
-                                break;
-                }
-        }
-        else
-        {       switch (desttype)
-                {       case TOWIN:
-                        case TOWH4:
-                        case TOAQV:
-                        case TORTF:
-                                outln("\\par\\pard\\par");
-                                break;
-                        case TOHAH:             /* V6.5.17 */
-                        case TOHTM:
-                        case TOMHH:
-                                if (!inside_short)
-                                {       if (inside_center || inside_right)
-                                        {       outln("</div>");
-                                        }
-                                        else
-                                        {       if (inside_env)
-                                                {       outln("<br />&nbsp;");
-                                                }
-                                                else
-                                                {       outln("</p>");
-                                                }
-                                        }
-                                }
-                                else
-                                {       if (inside_env)
-                                        {       outln("<br />&nbsp;");
-                                        }
-                                        else
-                                        {       outln("</p>\n");
-                                        }
-                                }
-                                break;
-                        case TOHPH:
-                                outln("");
-                                break;
-                        case TONRO:
-                                if (!inside_env)
-                                {       outln("");
-                                }
-                                break;
-                        case TOLDS:
-                                if (inside_quote)
-                                {       outln("</quote>");
-                                }
-                                else
-                                {       outln("");
-                                }
-                                break;
-                        case TOINF:
-                                if (inside_center)
-                                {       outln("@center");
-                                }
-                                outln("");
-                                break;
-                        case TOSRC:
-                        case TOSRP:
-                                outln(sSrcRemOff);
-                                break;
-                        case TOIPF:
-                                break;
-                        case TOKPS:
-
-                        /* Changed in r6pl15 [NHz] */
-                                outln("newline");
-/*                              outln("newline newline");*/
-                                break;
-                        default:
-                                outln("");
-                                break;
-                }
-        }
-        
-        token_reset();
-
-        if (reset_internals)
-        {       reset_placeholders();
-                reset_refs();
-        }
-        
+      case TOHPH:
+         outln("");
+         break;
+         
+      case TONRO:
+         if (!inside_env)
+         {
+            outln("");
+         }
+         break;
+         
+      case TOLDS:
+         if (inside_quote)
+         {
+            outln("</quote>");
+         }
+         else
+         {
+            outln("");
+         }
+         break;
+   
+      case TOINF:
+         if (inside_center)
+         {
+            outln("@center");
+         }
+   
+         outln("");
+         break;
+         
+      case TOSRC:
+      case TOSRP:
+         outln(sSrcRemOff);
+         break;
+         
+      case TOIPF:
+         break;
+         
+      case TOKPS:
+         /* Changed in r6pl15 [NHz] */
+         outln("newline");
+/*       outln("newline newline");
+*/
+         break;
+   
+      default:
+         outln("");
+      }
+   }
+   
+   token_reset();
+   
+   if (reset_internals)
+   {
+      reset_placeholders();
+      reset_refs();
+   }
+   
 #if 1
-        reset_speccmds();
+   reset_speccmds();
 #endif
 
 }       /*token_output*/
