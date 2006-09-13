@@ -519,7 +519,6 @@ GLOBAL void init_lang ( void )
       strcpy(lang.html_start, "Beginn des Dokumentes");
       
       uni2ascii(lang.fur); /* New in V6.5.2 [NHz] */
-      uni2ascii(lang.update);
    }
    
    toc_init_lang();
