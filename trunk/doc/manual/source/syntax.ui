@@ -3699,7 +3699,7 @@ Platzhalter  !! x aus           !! Beispiel
 (!/`x)       !! aeiouAEIOU      !! (!T)(!/`i)(!t) = (!`i)
 (!/^x)       !! aeiouAEIOU      !! (!T)(!/^o)(!t) = (!^o)
 (!/&x)       !! ae, oe, AE, OE  !! (!T)(!/&AE)(!t) = (!&AE)
-(!/~x)       !! anoANO          !! (!T)(!/~n)(!t) = (!~n)
+(!/!~x)      !! anoANO          !! (!T)(!/!~n)(!t) = (!~n)
 (!/,x)       !! cC              !! (!T)(!/,C)(!t) = (!,C)
 (!/.x)       !! aA              !! (!T)(!/.A)(!t) = (!.A)
 (!/_x)       !! ao              !! (!T)(!/_a)(!t) = (!_a)
