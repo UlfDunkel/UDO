@@ -2391,7 +2391,8 @@ LOCAL BOOLEAN html_new_file ( void )
 	check_endnode();
 	voutf("%s", sHtmlPropfontEnd);
 	check_output_raw_footer(FALSE);	/*r6pl10*/
-	outln("</body></html>");
+	outln("</body>");
+   outln("</html>");
 
 	/* Dateinamen der neuen Datei ermitteln */
 #if 1
@@ -3454,8 +3455,10 @@ GLOBAL void html_save_frameset ( void )
 
 	outln(sHtmlPropfontStart);
 	html_node_bar_frames();
-	voutlnf("%s</body></html>", sHtmlPropfontEnd);
-
+	voutlnf("%s", sHtmlPropfontEnd);
+   outln("</body>");
+   outln("</html>");
+   
 	/* Neue Datei fÅr das erste Kapitel anlegen */
 
 	sprintf(outfile.name, "%s%s", html_name_prefix, FRAME_FILE_CON);
@@ -4110,16 +4113,16 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 	save_upr_entry_outfile(filename);
 
 	fprintf(file, "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n");
-	fprintf(file, "<HTML>\n");
-	fprintf(file, "<HEAD>\n");
+	fprintf(file, "<html>\n");
+	fprintf(file, "<head>\n");
 	fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Version %s.%s.%s for %s\" />\n",
 						UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
 	fprintf(file, "<!-- Sitemap 1.0 -->\n");
-	fprintf(file, "</HEAD><BODY>\n");
-	fprintf(file, "<UL>\n");
+	fprintf(file, "</head>\n<body>\n");
+	fprintf(file, "<ul>\n");
 
 	print_htmlhelp_contents(file, "\t", 0);	/* r6pl10: Eintrag fuer erste Seite */
-	fprintf(file, "</UL>\n<UL>\n");
+	fprintf(file, "</ul>\n<ul>\n");
 
 	for (i=1; i<=p1_toc_counter; i++)
 	{
@@ -4130,17 +4133,17 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 			if ( !inApx && toc[i]->appendix)
 			{	/* r6pl13: Anhang mit ausgeben, hier den ersten Node im Anhang */
 				inApx= TRUE;
-				if (last_n)		fprintf(file, "</UL>\n");
-				if (last_sn)	fprintf(file, "\t</UL>\n</UL>\n");
-				if (last_ssn)	fprintf(file, "\t\t</UL>\n\t</UL>\n</UL>\n");
-				if (last_sssn)	fprintf(file, "\t\t\t</UL>\n\t\t</UL>\n\t</UL>\n</UL>\n");
+				if (last_n)		fprintf(file, "</ul>\n");
+				if (last_sn)	fprintf(file, "\t</ul>\n</ul>\n");
+				if (last_ssn)	fprintf(file, "\t\t</ul>\n\t</ul>\n</ul>\n");
+				if (last_sssn)	fprintf(file, "\t\t\t</ul>\n\t\t</ul>\n\t</ul>\n</ul>\n");
 				last_n= last_sn= last_ssn= last_sssn= FALSE;
 #if 0
-				fprintf(file, "<UL>\t<LI> <OBJECT type=\"text/sitemap\">\n");
+				fprintf(file, "<ul>\t<LI> <object type=\"text/sitemap\">\n");
 				fprintf(file, "\t\t<param name=\"Name\" value=\"%s\">\n", lang.appendix);
-				fprintf(file, "\t\t</OBJECT>\n");
+				fprintf(file, "\t\t</object>\n");
 #endif
-				fprintf(file, "<UL>\n");
+				fprintf(file, "<ul>\n");
 			}
 
 
@@ -4149,9 +4152,9 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 				if ( toc[i]->toctype==TOC_NODE1 )
 				{	/* Ein Kapitel */	
 
-					if (last_sn)	{	fprintf(file, "\t</UL>\n");							last_sn= FALSE;		}
-					if (last_ssn)	{	fprintf(file, "\t\t</UL>\n\t</UL>\n");				last_ssn= FALSE;	}
-					if (last_sssn)	{	fprintf(file, "\t\t\t</UL>\n\t\t</UL>\n\t</UL>\n");	last_sssn= FALSE;	}
+					if (last_sn)	{	fprintf(file, "\t</ul>\n");							last_sn= FALSE;		}
+					if (last_ssn)	{	fprintf(file, "\t\t</ul>\n\t</ul>\n");				last_ssn= FALSE;	}
+					if (last_sssn)	{	fprintf(file, "\t\t\t</ul>\n\t\t</ul>\n\t</ul>\n");	last_sssn= FALSE;	}
 					last_n= TRUE;
 					print_htmlhelp_contents(file, "\t", i);
 
@@ -4160,9 +4163,9 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 					
 				if ( toc[i]->toctype==TOC_NODE2 )
 				{	/* Ein Abschnitt */
-					if (last_n)		{	fprintf(file, "\t<UL>\n");					last_n= FALSE;		}
-					if (last_ssn)	{	fprintf(file, "\t\t</UL>\n");				last_ssn= FALSE;	}
-					if (last_sssn)	{	fprintf(file, "\t\t\t</UL>\n\t\t</UL>\n");	last_sssn= FALSE;	}
+					if (last_n)		{	fprintf(file, "\t<ul>\n");					last_n= FALSE;		}
+					if (last_ssn)	{	fprintf(file, "\t\t</ul>\n");				last_ssn= FALSE;	}
+					if (last_sssn)	{	fprintf(file, "\t\t\t</ul>\n\t\t</ul>\n");	last_sssn= FALSE;	}
 					last_sn= TRUE;
 					print_htmlhelp_contents(file, "\t\t", i);
 
@@ -4170,9 +4173,9 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 					
 				if ( toc[i]->toctype==TOC_NODE3 )
 				{	/* Ein Unterabschnitt */
-					if (last_n)		{	fprintf(file, "<UL>\n\t<UL>\n");	last_n= FALSE;		}
-					if (last_sn)	{	fprintf(file, "\t\t<UL>\n");		last_sn= FALSE;		}
-					if (last_sssn)	{	fprintf(file, "\t\t\t</UL>\n");		last_sssn= FALSE;	}
+					if (last_n)		{	fprintf(file, "<ul>\n\t<ul>\n");	last_n= FALSE;		}
+					if (last_sn)	{	fprintf(file, "\t\t<ul>\n");		last_sn= FALSE;		}
+					if (last_sssn)	{	fprintf(file, "\t\t\t</ul>\n");		last_sssn= FALSE;	}
 					last_ssn= TRUE;
 					print_htmlhelp_contents(file, "\t\t\t", i);
 
@@ -4181,9 +4184,9 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 					
 				if ( toc[i]->toctype==TOC_NODE4 )
 				{	/* Ein Paragraph */
-					if (last_n)		{	fprintf(file, "\t<UL>\n\t\t<UL>\n\t\t\t<UL>\n");	last_n= FALSE;		}
-					if (last_sn)	{	fprintf(file, "\t<UL>\n\t\t<UL>\n");				last_sn= FALSE;		}
-					if (last_ssn)	{	fprintf(file, "\t\t\t<UL>\n");						last_ssn= FALSE;	}
+					if (last_n)		{	fprintf(file, "\t<ul>\n\t\t<ul>\n\t\t\t<ul>\n");	last_n= FALSE;		}
+					if (last_sn)	{	fprintf(file, "\t<ul>\n\t\t<ul>\n");				last_sn= FALSE;		}
+					if (last_ssn)	{	fprintf(file, "\t\t\t<ul>\n");						last_ssn= FALSE;	}
 					last_sssn= TRUE;
 					print_htmlhelp_contents(file, "\t\t\t\t", i);
 
@@ -4196,16 +4199,16 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 	}/* for */
 
 
-	if (last_sn)	fprintf(file, "\t</UL>\n</UL>\n");
-	if (last_ssn)	fprintf(file, "\t\t</UL>\n\t</UL>\n");
-	if (last_sssn)	fprintf(file, "\t\t\t</UL>\n\t\t</UL>\n\t</UL>\n");
+	if (last_sn)	fprintf(file, "\t</ul>\n</ul>\n");
+	if (last_ssn)	fprintf(file, "\t\t</ul>\n\t</ul>\n");
+	if (last_sssn)	fprintf(file, "\t\t\t</ul>\n\t\t</ul>\n\t</ul>\n");
 
 #if 0
-	if (inApx)		fprintf(file, "</UL>\n");
+	if (inApx)		fprintf(file, "</ul>\n");
 #endif
 
-	fprintf(file, "</UL>\n");
-	fprintf(file, "</BODY></HTML>\n");
+	fprintf(file, "</ul>\n");
+	fprintf(file, "</body>\n</html>\n");
 
 	fclose(file);
 
@@ -4271,16 +4274,16 @@ GLOBAL BOOLEAN save_htmlhelp_index ( const char* filename )
 	save_upr_entry_outfile(filename);
 
 	fprintf(file, "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n");
-	fprintf(file, "<HTML>\n");
-	fprintf(file, "<HEAD>\n");
-	fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Version %s.%s.%s for %s\" />\n",
+	fprintf(file, "<html>\n");
+	fprintf(file, "<head>\n");
+	fprintf(file, "<meta name=\"Generator\" content=\"UDO Version %s.%s.%s for %s\" />\n",
 						UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
 	if (titdat.author != NULL)
 		fprintf(file, "<meta name=\"Author\" content=\"%s\" />\n", titdat.author);
 	fprintf(file, "<!-- Sitemap 1.0 -->\n");
-	fprintf(file, "</HEAD>\n");
-	fprintf(file, "<BODY>\n");
-	fprintf(file, "<UL>\n");
+	fprintf(file, "</head>\n");
+	fprintf(file, "<body>\n");
+	fprintf(file, "<ul>\n");
 
 	/* array aufbauen.. */
 	num_index = 0;
@@ -4320,14 +4323,14 @@ GLOBAL BOOLEAN save_htmlhelp_index ( const char* filename )
 	for (i = 0; i < num_index; i++)
 	{
 		get_html_filename(html_index[i].toc_index, htmlname);
-		fprintf(file, "<LI> <OBJECT type=\"text/sitemap\"> <param name=\"Name\" value=\"%s\"> <param name=\"Local\" value=\"%s%s\"> </OBJECT> </LI>\n",
+		fprintf(file, "<li><object type=\"text/sitemap\"> <param name=\"Name\" value=\"%s\"> <param name=\"Local\" value=\"%s%s\"></object></li>\n",
 			html_index[i].tocname,
 			htmlname, outfile.suff);
 	}
 	
-	fprintf(file, "</UL>\n");
-	fprintf(file, "</BODY>\n");
-	fprintf(file, "</HTML>\n");
+	fprintf(file, "</ul>\n");
+	fprintf(file, "</body>\n");
+	fprintf(file, "</html>\n");
 	fclose(file);
 	
 	um_free((void *) html_index);

@@ -3545,7 +3545,8 @@ GLOBAL void c_end_document ( void )
 		case TOMHH:
 			voutlnf("%s", sHtmlPropfontEnd);
 			check_output_raw_footer(TRUE);
-			outln("</body></html>");
+			outln("</body>");
+         outln("</html>");
 			break;
 		case TOLDS:
 			if (use_style_book)
