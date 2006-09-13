@@ -4,10 +4,10 @@ projectIdent
 VpeMain
 1
 WRect
-0
-0
-7680
-9200
+-25
+-34
+10291
+9856
 2
 MProject
 3
@@ -28,10 +28,10 @@ WVList
 VComponent
 8
 WRect
-530
-520
-5700
-4293
+0
+384
+5696
+4224
 0
 0
 9
@@ -39,5 +39,5 @@ WFileName
 7
 udo.tgt
 0
-0
+15
 7
