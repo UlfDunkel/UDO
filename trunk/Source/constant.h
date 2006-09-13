@@ -62,8 +62,8 @@
 #define	TODAN			8		/* Daenisch					*/
 #define	TONOR			9		/* Norwegisch				*/
 #define	TOFIN			10		/* Finnisch					*/
-#define TOCHE			11		/* Tschechisch				*/	/* V6.5.18 */
-#define	MAXDESTLANG		12		/* Anzahl Ausgabesprachen	*/
+#define  TOCZE			11		/* Tschechisch				*/	/* V6.5.19 */
+#define	MAXDESTLANG 12		/* Anzahl Ausgabesprachen	*/
 
 
 /*	############################################################
