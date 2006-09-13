@@ -513,22 +513,23 @@ typedef struct _udolanguage             /* ---- Sprachentabelle ----    */
         int     langval;                        /* zugehoerige Sprache                  */
 }       UDOLANGUAGE;
 
-/* Changed in r6pl16 [NHz] */
-#define MAXLANGUAGE     11
+/* Changed in v6.5.19 (fd) */
+#define MAXLANGUAGE     12
 
-LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE]=
+LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE] =
 {
-        { "danish",             TODAN   },
-        { "dutch",              TODUT   },
-        { "english",    TOENG   },
-        { "finnish",    TOFIN   },
-        { "french",             TOFRA   },
-        { "german",             TOGER   },
-        { "italian",    TOITA   },
-        { "norwegian",  TONOR   },
-        { "portuguese", TOPOR   },
-        { "spanish",    TOSPA   },
-        { "swedish",    TOSWE   },
+   { "czech",      TOCZE },
+   { "danish",     TODAN },
+   { "dutch",      TODUT },
+   { "english",    TOENG },
+   { "finnish",    TOFIN },
+   { "french",     TOFRA },
+   { "german",     TOGER },
+   { "italian",    TOITA },
+   { "norwegian",  TONOR },
+   { "portuguese", TOPOR },
+   { "spanish",    TOSPA },
+   { "swedish",    TOSWE },
 };
 
 
@@ -540,23 +541,23 @@ typedef struct _udocharset              /* ---- Zeichensatztabelle ---- */
 
 #define MAXCHARSET      15
 
-LOCAL const UDOCHARSET udocharset[MAXCHARSET]=
+LOCAL const UDOCHARSET udocharset[MAXCHARSET] =
 {
-        { "dos",                CODE_437                },
-        { "os2",                CODE_850                },
-        { "cp437",              CODE_437                },
-        { "cp850",              CODE_850                },
-        { "hp8",                CODE_HP8                },
-        { "iso-8859-1", CODE_LAT1               },
-        { "iso",                CODE_LAT1               },
-        { "latin1",             CODE_LAT1               },
-        { "mac",                CODE_MAC                },
-        { "next",               CODE_NEXT               },
-        { "tos",                CODE_TOS                },
-        { "utf-8",              CODE_UTF8               },
-        { "utf8",               CODE_UTF8               },
-        { "sys",                SYSTEM_CHARSET  },
-        { "win",                CODE_LAT1               },
+   { "dos",        CODE_437       },
+   { "os2",        CODE_850       },
+   { "cp437",      CODE_437       },
+   { "cp850",      CODE_850       },
+   { "hp8",        CODE_HP8       },
+   { "iso-8859-1", CODE_LAT1      },
+   { "iso",        CODE_LAT1      },
+   { "latin1",     CODE_LAT1      },
+   { "mac",        CODE_MAC       },
+   { "next",       CODE_NEXT      },
+   { "tos",        CODE_TOS       },
+   { "utf-8",      CODE_UTF8      },
+   { "utf8",       CODE_UTF8      },
+   { "sys",        SYSTEM_CHARSET },
+   { "win",        CODE_LAT1      },
 };
 
 GLOBAL char compile_date[11] = "\0";
