@@ -226,13 +226,11 @@
 #define html_body_on     "<body>"
 #define html_body_off    "</body>"
 
-/* fd: v.6.5.19 changed from <i></i> to <em></em> */
-#define html_italic_on   "<em>"
-#define html_italic_off  "</em>"
+#define html_italic_on   "<i>"
+#define html_italic_off  "</i>"
 
-/* fd: v.6.5.19 changed from <b></b> to <strong></strong> */
-#define html_bold_on     "<strong>"
-#define html_bold_off    "</strong>"
+#define html_bold_on     "<b>"
+#define html_bold_off    "</b>"
 
 #define html_pre_on      "<pre>"
 #define html_pre_off     "</pre>"
