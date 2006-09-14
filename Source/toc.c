@@ -3799,7 +3799,7 @@ GLOBAL void html_footer ( void )
 	}
 
 	strcat(footer_buffer, s);
-	strcat(footer_buffer, "<br /> ");
+	strcat(footer_buffer, "<br />\n");
     
 	strcpy(s, lang.update);
 	auto_quote_chars(s, TRUE);
@@ -4085,10 +4085,10 @@ LOCAL void print_htmlhelp_contents ( FILE *file, const char *indent, const int t
 	}
 	del_html_styles(tocname);
 	
-	fprintf(file, "%s<LI> <OBJECT type=\"text/sitemap\">\n", indent);
+	fprintf(file, "%s<li><object type=\"text/sitemap\">\n", indent);
 	fprintf(file, "%s\t<param name=\"Name\" value=\"%s\">\n", indent, tocname);
 	fprintf(file, "%s\t<param name=\"Local\" value=\"%s%s\">\n", indent, filename, outfile.suff);
-	fprintf(file, "%s\t</OBJECT>\n", indent);
+	fprintf(file, "%s\t</object>\n", indent);
 
 }	/* print_htmlhelp_contents */
 
@@ -4118,11 +4118,13 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 	fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Version %s.%s.%s for %s\" />\n",
 						UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
 	fprintf(file, "<!-- Sitemap 1.0 -->\n");
-	fprintf(file, "</head>\n<body>\n");
+	fprintf(file, "</head>\n");
+	fprintf(file, "<body>\n");
 	fprintf(file, "<ul>\n");
 
 	print_htmlhelp_contents(file, "\t", 0);	/* r6pl10: Eintrag fuer erste Seite */
-	fprintf(file, "</ul>\n<ul>\n");
+	fprintf(file, "</ul>\n");
+   fprintf(file, "<ul>\n");
 
 	for (i=1; i<=p1_toc_counter; i++)
 	{
@@ -4139,7 +4141,7 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 				if (last_sssn)	fprintf(file, "\t\t\t</ul>\n\t\t</ul>\n\t</ul>\n</ul>\n");
 				last_n= last_sn= last_ssn= last_sssn= FALSE;
 #if 0
-				fprintf(file, "<ul>\t<LI> <object type=\"text/sitemap\">\n");
+				fprintf(file, "<ul>\t<li><object type=\"text/sitemap\">\n");
 				fprintf(file, "\t\t<param name=\"Name\" value=\"%s\">\n", lang.appendix);
 				fprintf(file, "\t\t</object>\n");
 #endif
