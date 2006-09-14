@@ -296,8 +296,9 @@
 
 
 # Sprachabhängige Textbausteine für den Befehlsindex (alphabetisch geordnet)
-# language-dependent text parts for the command index (in alphabetical order)
+# language-dependant text parts for the command index (in alphabetical order)
 # hinzugefügt 14.12.2003 / added Dec 14th, 2003 / Ulrich Kretschmer
+# 2006-09-14: fd: (!HINT) added
 !iflang [german]
 !macro ABBREV Dies ist eine Abkürzung für das Kommando
 !macro CHAR zeichen
@@ -309,6 +310,7 @@
 !macro EXISTSSINCE Existiert seit:
 !macro EXISTEDUNTIL Existierte bis:
 !macro FILE datei
+!macro HINT Hinweis:
 !macro MAINPART Hauptteil
 !macro NOTEXISTING Dieser Befehl existiert nicht mehr.
 !macro PLACEHOLDER Platzhalter
@@ -334,6 +336,7 @@
 !macro EXISTSSINCE Exists since:
 !macro EXISTEDUNTIL Existed until:
 !macro FILE file
+!macro HINT Hint:
 !macro MAINPART main part
 !macro NOTEXISTING This command does not exist anymore.
 !macro PLACEHOLDER placeholder
