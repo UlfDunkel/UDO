@@ -2235,11 +2235,11 @@ GLOBAL void c_item ( void )
 						}
 						c_internal_styles(sBig);
 			 			strinsert(sBig, "<dt>");
-						um_strcat(sBig, "</dt>\n<dd><p>", 1024, "c_item[21]");
+						um_strcat(sBig, "</dt>\n<dd>", 1024, "c_item[21]");
 					}
 					else
 					{
-               	um_strcpy(sBig, "<dt>&nbsp;</dt>\n<dd><p>", 1024, "c_item[22]");
+               	um_strcpy(sBig, "<dt>&nbsp;</dt>\n<dd>", 1024, "c_item[22]");
 					}
 					break;
 
