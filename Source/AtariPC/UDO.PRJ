@@ -21,6 +21,7 @@ StUpArgv.O
 ..\env.c
 ..\file.c
 ..\img.c
+..\lang.c
 ..\msg.c
 ..\par.c
 ..\str.c
