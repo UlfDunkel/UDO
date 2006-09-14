@@ -128,8 +128,17 @@ const char *id_chr_c= "@(#) chr.c       08.04.2004";
         # lokale Variablen
         ############################################################    */
 
-LOCAL BOOLEAN last_aqc_verb;
-LOCAL int texinfo_np_counter;   /* Non-Printable-Texinfo-Node-Counter ;-) */
+LOCAL BOOLEAN   last_aqc_verb;            /* */
+LOCAL int       texinfo_np_counter;       /* Non-Printable-Texinfo-Node-Counter ;-) */
+                                          /* list of supported HTML specials */
+LOCAL char      html_specs[HTML_SPEC_MAX][65] =
+{
+   {"&hellip;"},
+   {"&mdash;"},
+   {"&ndash;"},
+   {"&shy;"}
+};
+
 
 
 /*      ############################################################
@@ -882,13 +891,12 @@ GLOBAL void html2sys ( char *s )
                 one[0]= chrtab[i].system;
                 replace_all(s, chrtab[i].html, one);
         }
-
         for (i=0; i<MAXHTML7BIT; i++)
         {
                 one[0]= html7bit[i].c;
                 replace_all(s, html7bit[i].quoted, one);
         }
-        
+     
 }       /* html2sys */
 
 
@@ -2306,7 +2314,7 @@ GLOBAL void c_vars ( char *s )
 
                         specials2html(s);
 
-/*                      specials2ascii(s);*/
+/*                      specials2ascii(s); */
                         texvar2ascii(s);
                         break;
                 case TOLDS:
@@ -2381,6 +2389,42 @@ LOCAL void str2manunder( char *d, const char *s )
         }
         
 }       /* str2manunder */
+
+
+
+
+
+/*******************************************************************************
+*
+*  check_html_specs():
+*     check if a quoted string is a HTML special character supported by UDO.
+*  
+*  return:
+*     TRUE:  is special char, don't cast '&' to '&amp;'
+*     FALSE: no special char ...
+*
+******************************************|************************************/
+
+LOCAL BOOLEAN check_html_specs(
+
+char *s)
+{
+   size_t   i;    /* counter */
+
+   
+   for (i = 0; i < HTML_SPEC_MAX; i++)
+   {
+      if (strncmp(html_specs[i], s, strlen(html_specs[i])) == 0)
+         return TRUE;
+   }
+   
+   return FALSE;
+}
+
+
+
+
+
 
 
 GLOBAL void c_man_styles ( char *s )
@@ -2527,514 +2571,644 @@ LOCAL const QUOTECOMMAND quotecommand[MAXQUOTECMD]=
 };
 
 
-GLOBAL void auto_quote_chars ( char *s, BOOLEAN all )
+
+
+
+/*******************************************************************************
+*
+*  auto_quote_chars():
+*     description: ???
+*  
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void auto_quote_chars(
+
+char             *s,              /* */
+BOOLEAN           all)            /* */
 {
-        register int i, tabidx;
-        char *ptr, *oldptr;
-        const char *ptr_quoted;
-        char s_temp[32];
-        char s_char[2];
-        BOOLEAN aqc_verb;
-        BOOLEAN found= FALSE;
-        size_t  cmplen, sl_verb_on, sl_verb_off;
-        
-        if (s[0]==EOS)
-        {       return;
-        }
+   register int   i,              /* */
+                  tabidx;         /* */
+   char          *ptr,            /* */
+                 *oldptr;         /* */
+   const char    *ptr_quoted;     /* */
+   char           s_temp[32];     /* */
+   char           s_char[2];      /* */
+   BOOLEAN        aqc_verb;       /* */
+   BOOLEAN        found = FALSE;  /* */
+   size_t         cmplen,         /* */
+                  sl_verb_on,     /* */
+                  sl_verb_off;    /* */
 
-        if (no_umlaute)
-        {       umlaute2ascii(s);
-        }
-
-        switch(desttype)
-        {       case TOASC:     /* Hier muss nicht gequotet werden! */
-                case TODRC:
-                case TOMAN:
-                case TONRO:
-                case TOSTG:
-                case TOAMG:
-                case TOTVH:
-                case TOINF:
-                case TOSRC:
-                case TOSRP:
+   
+   if (s[0] == EOS)
+   {
+      return;
+   }
+   
+   if (no_umlaute)
+   {
+      umlaute2ascii(s);
+   }
+   
+   switch(desttype)
+   {
+   case TOASC:                            /* Hier muss nicht gequotet werden! */
+   case TODRC:
+   case TOMAN:
+   case TONRO:
+   case TOSTG:
+   case TOAMG:
+   case TOTVH:
+   case TOINF:
+   case TOSRC:
+   case TOSRP:
 #ifdef __TOS__
-                        replace_all(s, BETA_S, "\236");
+      replace_all(s, BETA_S, "\236");
 #endif
 #ifdef __MSDOS__
-                        replace_all(s, "\236", "\341");
+      replace_all(s, "\236", "\341");
 #endif
 #ifdef __MSDOS850__
-                        replace_all(s, "\236", "\341");
+      replace_all(s, "\236", "\341");
 #endif
-                        if ( bDocUniversalCharsetOn )
-                        {       uni2ascii(s);
-                        }
+      if ( bDocUniversalCharsetOn )
+      {
+         uni2ascii(s);
+      }
+   
+      /* r6pl2: Neue Version: immer quoten */
+      /* nicht auf !raw !stg testen, da dies im wichtigen pass2() */
+      /* nicht auftreten kann, da vorher die Zeilen mit */
+      /* c_special_commands() bearbeitet werden. */
+      
+      switch (desttype)
+      {
+      case TOSTG:                         /* ST-Guide */
+         replace_1at_by_2at(s);
+         return;
+      
+      case TOINF:
+         qreplace_all(s, "@", 1, "@@", 2);
+         qreplace_all(s, "}", 1, "@}", 2);
+         qreplace_all(s, "{", 1, "@{", 2);
+         return;
 
-                        /* r6pl2: Neue Version: immer quoten                                            */
-                        /* nicht auf !raw !stg testen, da dies im wichtigen pass2() */
-                        /* nicht auftreten kann, da vorher die Zeilen mit                       */
-                        /* c_special_commands() bearbeitet werden.                                      */
-                        
-                        if (desttype==TOSTG)
-                        {
-                                replace_1at_by_2at(s);
-                                return;
-                        }
-                        if (desttype==TOINF)
-                        {
-                                qreplace_all(s, "@", 1, "@@", 2);
-                                qreplace_all(s, "}", 1, "@}", 2);
-                                qreplace_all(s, "{", 1, "@{", 2);
-                                return;
-                        }
-                        if (desttype==TOTVH)    /* r5pl10 */
-                        {
-                                qreplace_all(s, "{", 1, "{{", 2);
-                                return;
-                        }
-                        return;
-        }       
-        
-        ptr= s;
+      case TOTVH:                         /* r5pl10 */
+         qreplace_all(s, "{", 1, "{{", 2);
+         return;
+      }
+      
+      return;
+   }       
 
-        if (!all)
-        {       /* Wenn in der Zeile ein Kommando steht, dann nur den Rest      */
-                /* quoten, wenn das Kommando einen Parameter enthaelt,          */
-                /* der gequotet werden muss!                                                                    */
-                if ( s[0]==META_C && s[1]>='a' && s[1]<='z' )
-                {
-                        for (i=0; i<MAXQUOTECMD; i++)
-                        {
-                                cmplen= quotecommand[i].cmdlen;
-                                if (strncmp(s, quotecommand[i].cmd, cmplen)==0)
-                                {       /* Das naechste Zeichen muss aber Space oder Tab sein! */
-                                        if ( s[cmplen]==' ' || s[cmplen]=='\t')
-                                        {       found= TRUE;
-                                                ptr+= cmplen;
-                                                break;
-                                        }
-                                }
-                                if ( (cmplen= quotecommand[i].abblen) >0 )
-                                {       /*r6pl12: Abkuerzungen auch beachten */
-                                        if (strncmp(s, quotecommand[i].abb, cmplen)==0)
-                                        {       /* Das naechste Zeichen muss aber Space oder Tab sein! */
-                                                if ( s[cmplen]==' ' || s[cmplen]=='\t')
-                                                {       found= TRUE;
-                                                        ptr+= cmplen;
-                                                        break;
-                                                }
-                                        }
-                                }
+   
+   ptr = s;
+   
+   if (!all)
+   {
+      /* Wenn in der Zeile ein Kommando steht, dann nur den Rest */
+      /* quoten, wenn das Kommando einen Parameter enthaelt, */
+      /* der gequotet werden muss! */
+      
+      if (s[0] == META_C && s[1] >= 'a' && s[1] <= 'z')
+      {
+         for (i = 0; i < MAXQUOTECMD; i++)
+         {
+            cmplen = quotecommand[i].cmdlen;
+            
+            if (strncmp(s, quotecommand[i].cmd, cmplen) == 0)
+            {
+               /* Das naechste Zeichen muss aber Space oder Tab sein! */
+               if (s[cmplen] == ' ' || s[cmplen] == '\t')
+               {
+                  found = TRUE;
+                  ptr += cmplen;
+                  break;
+               }
+            }
+   
+            if ( (cmplen = quotecommand[i].abblen) > 0)
+            {
+               /*r6pl12: Abkuerzungen auch beachten */
+               if (strncmp(s, quotecommand[i].abb, cmplen) == 0)
+               {
+                  /* Das naechste Zeichen muss aber Space oder Tab sein! */
+                  if ( s[cmplen] == ' ' || s[cmplen] == '\t')
+                  {
+                     found = TRUE;
+                     ptr += cmplen;
+                     break;
+                  }
+               }
+            }
+         }
+   
+         if (!found)
+         {
+            return;
+         }
+      }
+   }
+   
+   
+   ptr_quoted = NULL;
+   s_temp[0] = EOS;
+   s_char[1] = EOS;
+   aqc_verb = last_aqc_verb;              /* Pl13: vorher = TRUE */
+   
+   sl_verb_on = CMD_STYLELEN;
+   sl_verb_off = CMD_STYLELEN;
+   
+   while (ptr[0] != EOS)
+   {
+      /* PL13: Innerhalb (!V)...(!v) Leerzeichen durch interne  */
+      /* feste Leerzeichen ersetzen, damit token_output() nicht */
+      /* \verb+...+ umbricht. */
+      
+      if (desttype == TOTEX || desttype == TOPDL)
+      {
+         if ( aqc_verb || styleflag.verbatim)
+         {
+            if (ptr[0] == ' ')
+            {
+               ptr[0] = INDENT_C;
+               goto NO_QUOTE_NEEDED;
+            }
+         }
+      }
+   
+      /* Das Alphabet und die Ziffern muessen nie gequotet werden! */
+      /* Also einfach den ganzen Rotz ueberspringen */
 
-                        }
-                        if (!found)
-                        {       return;
-                        }
-                }
-        }
+      if (ptr[0] == ' ')                  /* space */
+         goto NO_QUOTE_NEEDED;
+         
+      if (ptr[0] >= 'a' && ptr[0] <= 'z') /* [a..z] */
+         goto NO_QUOTE_NEEDED;
+         
+      if (ptr[0] >= 'A' && ptr[0] <= 'Z') /* [A..Z] */
+         goto NO_QUOTE_NEEDED;
+      
+      if (ptr[0] >= '0' && ptr[0] <= '9') /* [0..9] */
+         goto NO_QUOTE_NEEDED;
+      
+      
+      if ( (desttype == TOTEX || desttype == TOPDL) && !all)
+      {
+         if (strncmp(ptr, CMD_VERB_ON, sl_verb_on) == 0)
+         {
+            /* Optimierung durch Hochzaehlen von ptr */
+            aqc_verb = TRUE;
+            ptr += (sl_verb_on - 1);
+            goto NO_QUOTE_NEEDED;
+         }
 
-        ptr_quoted= NULL;
-        s_temp[0]=EOS;
-        s_char[1]= EOS;
-        aqc_verb= last_aqc_verb;        /* Pl13: vorher = TRUE */
+         if (strncmp(ptr, CMD_VERB_OFF, sl_verb_off) == 0)
+         {
+            /* Optimierung durch Hochzaehlen von ptr */
+            aqc_verb = FALSE;
+            ptr += (sl_verb_off - 1);
+            goto NO_QUOTE_NEEDED;
+         }
+      }
+   
+      /* Sonderbehandlung fuer doppelte Anfuehrungszeichen und Apostrophe */
+      if (ptr[0] == '\"' && ptr[1] == '\"')
+      {
+         /* Doppelquotes: "" */
+         ptr++;
+         goto NO_QUOTE_NEEDED;
+      }
 
-        sl_verb_on= CMD_STYLELEN;
-        sl_verb_off= CMD_STYLELEN;
-        
-        while (ptr[0]!=EOS)
-        {
-                /* PL13: Innerhalb (!V)...(!v) Leerzeichen durch interne  */
-                /* feste Leerzeichen ersetzen, damit token_output() nicht */
-                /* \verb+...+ umbricht.                                   */
-                if ( desttype==TOTEX || desttype==TOPDL )
-                {       {       if ( aqc_verb || styleflag.verbatim)
-                                {       if (ptr[0]==' ')
-                                        {       ptr[0]= INDENT_C;
-                                                goto NO_QUOTE_NEEDED;
-                                        }
-                                }
-                        }
-                }
+      /* Gequotete Quotes: ("") */
+      if (ptr[0] == '(' && ptr[1] == '\"' && ptr[2] == '\"' && ptr[3] == ')')
+      {
+         ptr += 3;
+         goto NO_QUOTE_NEEDED;
+      }
+   
+      /* Gequotete Apostrophe: ('') */
+      if (ptr[0] == '(' && ptr[1] == '\'' && ptr[2] == '\'' && ptr[3] == ')')
+      {
+         ptr += 3;
+         goto NO_QUOTE_NEEDED;
+      }
+   
+   
+      /* Sonderbehandlung fuer Platzhalter, welche spaeter */
+      /* gequotet werden (macro, define, link, index) */
+      /* PL6: aber nicht in verbatim-Umgebungen! */
+      
+      /* Dabei beruecksichtigen, dass Klammern innerhalb */
+      /* durch ein Ausrufungszeichen gequotet werden. */              
+      
+      if (pflag[PASS2].env != ENV_VERBATIM)
+      {
+         if (ptr[0] == '(' && ptr[1] == META_C && ptr[2] != QUOTE_C)
+         {
+            oldptr = ptr;                 /* Pointer sichern */
+            ptr++;
+            
+            while (ptr[0] != EOS && ptr[0] != ')' )
+            {
+               if (ptr[0] == '!' && ptr[1] == ')' )
+               {
+                  ptr++;                  /* gequotete Klammer ueberspringen */
+               }
+               
+               ptr++;
+            }       
+      
+            if (ptr[0] == EOS)
+            {
+               /* PL16: Falls der Pointer auf das Ende zeigt, dann */
+               /* ist etwas schiefgelaufen oder aber es handelte */
+               /* sich gar nicht um einen Parameter (z.B. "(!)") */
+               /* In dem Falle den alten Pointer restaurieren */
+               
+               ptr = oldptr;
+               ptr++;
+            }
+            else
+            {
+               /* Optimierung: Rest ueberspringen */
+               goto NO_QUOTE_NEEDED;
+            }
+         }
+      }
+      
+      
+      switch (desttype)
+      {
+      case TOTEX:
+      case TOPDL:
+         if ( (all) || (!styleflag.verbatim && !aqc_verb) )
+         {
+            found = FALSE;
+      
+            if ( ((UCHAR) ptr[0]) > 127 )
+            {
+               tabidx = ((UCHAR) ptr[0]) - 128;
+               
+               if (chrtab[tabidx].tex[0] != EOS)
+               {
+                  ptr_quoted = chrtab[tabidx].tex;
+                  found = TRUE;
+               }
+            }
+            else
+            {
+               for (i = 0; i < MAXTEX7BIT; i++)
+               {
+                  if ( ( /*(UCHAR)*/ ptr[0]) == tex7bit[i].c)
+                  {
+                     ptr_quoted = tex7bit[i].quoted;
+                     found = TRUE;
+                     break;
+                  }
+               }
+            }
+      
+            if (!found)
+            {
+               if ( (UCHAR) ptr[0] >= 127)
+               {
+                  warning_no_texchar(ptr[0]);     /* PL12 */
+                  sprintf(s_temp, "$\\symbol{%d}$", (UCHAR) ptr[0]);
+                  ptr_quoted = s_temp;
+               }
+            }
+         }
+         break;
+      
+      case TOLYX:
+         found = FALSE;
+         
+         for (i = 0; i < MAXLYX7BIT; i++)
+         {
+            if ( ( /*(UCHAR)*/ ptr[0]) == lyx7bit[i].c)
+            {
+               ptr_quoted = lyx7bit[i].quoted;
+               found = TRUE;
+               break;
+            }
+         }
+         break;
+      
+      case TOIPF:
+         found = FALSE;
 
-                /* Das Alphabet und die Ziffern muessen nie gequotet werden!    */
-                /* Also einfach den ganzen Rotz ueberspringen                                   */
-                if (ptr[0]==' ')                                goto NO_QUOTE_NEEDED;
-                if (ptr[0]>='a' && ptr[0]<='z') goto NO_QUOTE_NEEDED;
-                if (ptr[0]>='A' && ptr[0]<='Z') goto NO_QUOTE_NEEDED;
-                if (ptr[0]>='0' && ptr[0]<='9') goto NO_QUOTE_NEEDED;
+         for (i = 0; i < MAXIPF7BIT; i++)
+         {
+            if ( ( /*(UCHAR)*/ ptr[0]) == ipf7bit[i].c)
+            {
+               ptr_quoted = ipf7bit[i].quoted;
+               found = TRUE;
+               break;
+            }
+         }
+         break;
+      
+      case TORTF:
+         found = FALSE;
 
-                if ( (desttype==TOTEX || desttype==TOPDL) && !all)      
-                {       if (strncmp(ptr, CMD_VERB_ON, sl_verb_on)==0)
-                        {       /* Optimierung durch Hochzaehlen von ptr */
-                                aqc_verb= TRUE;
-                                ptr+= (sl_verb_on-1);
-                                goto NO_QUOTE_NEEDED;
-                        }
-                        if (strncmp(ptr, CMD_VERB_OFF, sl_verb_off)==0)
-                        {       /* Optimierung durch Hochzaehlen von ptr */
-                                aqc_verb= FALSE;
-                                ptr+= (sl_verb_off-1);
-                                goto NO_QUOTE_NEEDED;
-                        }
-                }
+         if ( ((UCHAR) ptr[0]) > 127 )
+         {
+            /* Wie bei WinHelp */
+            if (iCharset != CODE_LAT1)
+            {
+               tabidx = ((UCHAR) ptr[0]) - 128;
 
-                /* Sonderbehandlung fuer doppelte Anfuehrungszeichen und Apostrophe*/
-                if (ptr[0]=='\"' && ptr[1]=='\"')
-                {       /* Doppelquotes: "" */
-                        ptr++;
-                        goto NO_QUOTE_NEEDED;
-                }
+               if (chrtab[tabidx].ansi[0] != EOS)
+               {
+                  ptr_quoted = chrtab[tabidx].ansi;
+                  found = TRUE;
+               }
+               else
+               {
+                  warning_cannot_recode(ptr[0], "system charset", "Windows ANSI");
+                  ptr[0] = '?';
+               }
+            }
 
-                if (ptr[0]=='(' && ptr[1]=='\"' && ptr[2]=='\"' && ptr[3]==')')
-                {       /* Gequotete Quotes: ("") */
-                        ptr+= 3;
-                        goto NO_QUOTE_NEEDED;
-                }
+            if (!found)
+            {
+               sprintf(s_temp, "\\'%X", (UCHAR) ptr[0]);
+               ptr_quoted = s_temp;
+            }
+         }
+         else
+         {
+            for (i = 0; i < MAXRTF7BIT; i++)
+            {
+               if ( ( ptr[0]) == rtf7bit[i].c)
+               {
+                  ptr_quoted = rtf7bit[i].quoted;
+                  found = TRUE;
+                  break;
+               }
+            }
+         }
+         break;
+      
+      case TOKPS:
+         found = FALSE;
 
-                if (ptr[0]=='(' && ptr[1]=='\'' && ptr[2]=='\'' && ptr[3]==')')
-                {       /* Gequotete Apostrophe: ('') */
-                        ptr+= 3;
-                        goto NO_QUOTE_NEEDED;
-                }
-                
-                
-                /* Sonderbehandlung fuer Platzhalter, welche spaeter    */
-                /* gequotet werden (macro, define, link, index)                 */
-                /* PL6: aber nicht in verbatim-Umgebungen!                              */
-
-                /* Dabei beruecksichtigen, dass Klammern innerhalb              */
-                /* durch ein Ausrufungszeichen gequotet werden.                 */              
-
-                if ( pflag[PASS2].env!=ENV_VERBATIM )
-                {
-                        if (ptr[0]=='(' && ptr[1]==META_C && ptr[2]!=QUOTE_C)
-                        {
-                                oldptr= ptr;    /* Pointer sichern */
-                                ptr++;
-                                while ( ptr[0]!=EOS && ptr[0]!=')' )
-                                {       if ( ptr[0]=='!' && ptr[1]==')' )
-                                        {       ptr++;  /* gequotete Klammer ueberspringen */
-                                        }
-                                        ptr++;
-                                }       
-
-                                if (ptr[0]==EOS)
-                                {       /* PL16: Falls der Pointer auf das Ende zeigt, dann */
-                                        /* ist etwas schiefgelaufen oder aber es handelte */
-                                        /* sich gar nicht um einen Parameter (z.B. "(!)") */
-                                        /* In dem Falle den alten Pointer restaurieren */
-                                        ptr= oldptr;
-                                        ptr++;
-                                }
-                                else
-                                {       /* Optimierung: Rest ueberspringen */
-                                        goto NO_QUOTE_NEEDED;
-                                }
-                        }
-                }
-                
-
-                switch (desttype)
-                {
-                        case TOTEX:
-                        case TOPDL:
-                                if ( (all) || (!styleflag.verbatim && !aqc_verb) )
-                                {
-                                        found= FALSE;
-                                        
-                                        if ( ((UCHAR) ptr[0]) > 127 )
-                                        {       tabidx= ((UCHAR) ptr[0])-128;
-                                                if ( chrtab[tabidx].tex[0]!=EOS )
-                                                {       ptr_quoted= chrtab[tabidx].tex;
-                                                        found= TRUE;
-                                                }
-                                        }
-                                        else
-                                        {       for (i=0; i<MAXTEX7BIT; i++)
-                                                {       if ( ( /*(UCHAR)*/ ptr[0])==tex7bit[i].c)
-                                                        {       ptr_quoted= tex7bit[i].quoted;
-                                                                found= TRUE;
-                                                                break;
-                                                        }
-                                                }
-                                        }
-                                        
-                                        if (!found)
-                                        {       if ( (UCHAR) ptr[0]>=127 )
-                                                {       warning_no_texchar(ptr[0]);     /* PL12 */
-                                                        sprintf(s_temp, "$\\symbol{%d}$", (UCHAR) ptr[0]);
-                                                        ptr_quoted= s_temp;
-                                                }
-                                        }
-                                }
-                                break;
-                        
-                        case TOLYX:
-                                found= FALSE;
-                                for (i=0; i<MAXLYX7BIT; i++)
-                                {       if ( ( /*(UCHAR)*/ ptr[0])==lyx7bit[i].c)
-                                        {       ptr_quoted= lyx7bit[i].quoted;
-                                                found= TRUE;
-                                                break;
-                                        }
-                                }
-                                if (!found)
-                                {
-                                }
-                                break;
-                                
-                        case TOIPF:
-                                found= FALSE;
-                                for (i=0; i<MAXIPF7BIT; i++)
-                                {       if ( ( /*(UCHAR)*/ ptr[0])==ipf7bit[i].c)
-                                        {       ptr_quoted= ipf7bit[i].quoted;
-                                                found= TRUE;
-                                                break;
-                                        }
-                                }
-                                if (!found)
-                                {
-                                }
-                                break;
-
-                        case TORTF:
-                                found= FALSE;
-                                if ( ((UCHAR) ptr[0]) > 127 )
-                                {       /* Wie bei WinHelp */
-                                        if (iCharset!=CODE_LAT1)
-                                        {       tabidx= ((UCHAR) ptr[0])-128;
-                                                if ( chrtab[tabidx].ansi[0]!=EOS )
-                                                {       ptr_quoted= chrtab[tabidx].ansi;
-                                                        found= TRUE;
-                                                }
-                                                else
-                                                {       warning_cannot_recode(ptr[0], "system charset", "Windows ANSI");
-                                                        ptr[0]= '?';
-                                                }
-                                        }
-                                        if (!found)
-                                        {       sprintf(s_temp, "\\'%X", (UCHAR) ptr[0]);
-                                                ptr_quoted= s_temp;
-                                        }
-                                }
-                                else
-                                {       for (i=0; i<MAXRTF7BIT; i++)
-                                        {       if ( ( ptr[0])==rtf7bit[i].c)
-                                                {       ptr_quoted= rtf7bit[i].quoted;
-                                                        found= TRUE;
-                                                        break;
-                                                }
-                                        }
-                                }
-                                if (!found)
-                                {
-                                }
-                                break;
-                                
-                        case TOKPS:
-                                found= FALSE;
-                                if ( ((UCHAR) ptr[0]) > 127 )
-                                {       
-                                        if (iCharset!=CODE_LAT1)
-                                        {       tabidx= ((UCHAR) ptr[0])-128;
-                                                if ( chrtab[tabidx].ps[0]!=EOS )
-                                                {       ptr_quoted= chrtab[tabidx].ps;
-                                                        found= TRUE;
-                                                }
-                                                else
-                                                {       warning_cannot_recode(ptr[0], "system charset", "Windows ANSI");
-                                                        ptr[0]= '?';
-                                                }
-                                        }
-                                        if (!found)
-                                        {       sprintf(s_temp, "\\%03o", (UCHAR) ptr[0]);
-                                                ptr_quoted= s_temp;
-                                        }
-                                }
-/* Changed in V6.5.5 [NHz] */
+         if ( ((UCHAR) ptr[0]) > 127)
+         {       
+            if (iCharset != CODE_LAT1)
+            {
+               tabidx = ((UCHAR) ptr[0]) - 128;
+   
+               if (chrtab[tabidx].ps[0] != EOS)
+               {
+                  ptr_quoted = chrtab[tabidx].ps;
+                  found = TRUE;
+               }
+               else
+               {
+                  warning_cannot_recode(ptr[0], "system charset", "Windows ANSI");
+                  ptr[0] = '?';
+               }
+            }
+   
+            if (!found)
+            {
+               sprintf(s_temp, "\\%03o", (UCHAR) ptr[0]);
+               ptr_quoted = s_temp;
+            }
+         }
+         
+         /* Changed in V6.5.5 [NHz] */
 #if 0
-                                else
-                                {
-                                        LOCAL QUOTEINFO const ps7bit[]=
-                                        {
-                                                {       '[',            "\\["   },
-                                                {       ']',            "\\]"   },
-
-                                                {       '(',            "\\("   },
-                                                {       ')',            "\\)"   },
-                                                {       '\\',           "\\\\"  }
-                                        };
-                                        
-                                        for (i=0; i<sizeof(ps7bit)/sizeof(ps7bit[0]); i++)
-                                        {       if ( ( ptr[0])==ps7bit[i].c)
-                                                {       ptr_quoted= ps7bit[i].quoted;
-                                                        found= TRUE;
-                                                        break;
-                                                }
-                                        }
-                                }
+         else
+         {
+            LOCAL QUOTEINFO const   ps7bit[] =
+            {
+               { '[',  "\\["  },
+               { ']',  "\\]"  },
+         
+               { '(',  "\\("  },
+               { ')',  "\\)"  },
+               { '\\', "\\\\" }
+            };
+         
+         
+            for (i = 0; i < sizeof(ps7bit) / sizeof(ps7bit[0]); i++)
+            {
+               if ( (ptr[0]) == ps7bit[i].c)
+               {
+                  ptr_quoted = ps7bit[i].quoted;
+                  found = TRUE;
+                  break;
+               }
+            }
+         }
 #endif
-                                if (!found)
-                                {
-                                }
-                                break;
+         break;
+      
+      case TOWIN:
+      case TOWH4:
+      case TOAQV:
+         found = FALSE;
 
-                        case TOWIN:
-                        case TOWH4:
-                        case TOAQV:
-                                found= FALSE;
-                                if ( ((UCHAR) ptr[0]) > 127 )
-                                {       if (iCharset!=CODE_LAT1)
-                                        {       tabidx= ((UCHAR) ptr[0])-128;
-                                                if ( chrtab[tabidx].ansi[0]!=EOS )
-                                                {       ptr_quoted= chrtab[tabidx].ansi;
-                                                        found= TRUE;
-                                                }
-                                                else
-                                                {       warning_cannot_recode(ptr[0], "system charset", "Windows ANSI");
-                                                        ptr[0]= '?';
-                                                }
-                                        }
-                                        if (!found)
-                                        {       sprintf(s_temp, "\\'%X", ((UCHAR) ptr[0]) );
-                                                ptr_quoted= s_temp;
-                                        }
-                                }
-                                else
-                                {       for (i=0; i<MAXWIN7BIT; i++)
-                                        {       if ( (/*(UCHAR)*/ ptr[0])==win7bit[i].c)
-                                                {       ptr_quoted= win7bit[i].quoted;
-                                                        found= TRUE;
-                                                        break;
-                                                }
-                                        }
-                                }
-                                if (!found)
-                                {
-                                }
-                                break;
-                                
-                        case TOPCH:
-                                if (ptr[0]=='\\')
-                                {       strcpy(s_temp, "\\\\");
-                                        ptr_quoted= s_temp;
-                                }
-                                break;
+         if ( ((UCHAR) ptr[0]) > 127)
+         {
+            if (iCharset != CODE_LAT1)
+            {
+               tabidx = ((UCHAR) ptr[0]) - 128;
 
-                        case TOHAH:             /* V6.5.17 */
-                        case TOHTM:
-                        case TOMHH:
-                                found= FALSE;
-                                if ( ((UCHAR) ptr[0]) > 127 )
-                                {       if (!html_ignore_8bit)
-                                        {       tabidx= ((UCHAR) ptr[0])-128;
-                                                if ( chrtab[tabidx].html[0]!=EOS )
-                                                {       ptr_quoted= chrtab[tabidx].html;
-                                                        found= TRUE;
-                                                }
-                                                else
-                                                {       warning_no_isochar(ptr[0]);
-                                                }
-                                        }
-                                }
-                                else
-                                {       for (i=0; i<MAXHTML7BIT; i++)
-                                        {       if ( ptr[0]==html7bit[i].c)
-                                                {       ptr_quoted= html7bit[i].quoted;
-                                                        found= TRUE;
-                                                        break;
-                                                }
-                                        }
-                                }
-                                if (!found)
-                                {
-                                }
-                                break;
+               if (chrtab[tabidx].ansi[0] != EOS)
+               {
+                  ptr_quoted = chrtab[tabidx].ansi;
+                  found = TRUE;
+               }
+               else
+               {
+                  warning_cannot_recode(ptr[0], "system charset", "Windows ANSI");
+                  ptr[0] = '?';
+               }
+            }
 
-                        case TOLDS:
-                                found= FALSE;
-                                if ( ((UCHAR) ptr[0]) > 127 )
-                                {       tabidx= ((UCHAR) ptr[0])-128;
-                                        if ( chrtab[tabidx].html[0]!=EOS )
-                                        {       ptr_quoted= chrtab[tabidx].html;
-                                                found= TRUE;
-                                        }
-                                        else
-                                        {       warning_no_isochar(ptr[0]);
-                                        }
-                                }
-                                else
-                                {       for (i=0; i<MAXLDS7BIT; i++)
-                                        {       if ( (ptr[0])==lds7bit[i].c)
-                                                {       ptr_quoted= lds7bit[i].quoted;
-                                                        found= TRUE;
-                                                        break;
-                                                }
-                                        }
-                                }
-                                if (!found)
-                                {
-                                }
-                                break;
+            if (!found)
+            {
+               sprintf(s_temp, "\\'%X", ((UCHAR) ptr[0]) );
+               ptr_quoted = s_temp;
+            }
+         }
+         else
+         {
+            for (i = 0; i < MAXWIN7BIT; i++)
+            {
+               if ( (/*(UCHAR)*/ ptr[0]) == win7bit[i].c)
+               {
+                  ptr_quoted = win7bit[i].quoted;
+                  found = TRUE;
+                  break;
+               }
+            }
+         }
+         break;
+      
+      case TOPCH:
+         if (ptr[0] == '\\')
+         {
+            strcpy(s_temp, "\\\\");
+            ptr_quoted = s_temp;
+         }
+         break;
+      
+      case TOHAH:                         /* HTML Apple Help (since V6.5.17) */
+      case TOHTM:                         /* HTML */
+      case TOMHH:                         /* Microsoft HTML Help */
+         found = FALSE;
 
-                        case TOHPH:
-                                found= FALSE;
-                                if ( ((UCHAR) ptr[0]) > 127 )
-                                {       tabidx= ((UCHAR) ptr[0])-128;
-                                        if ( chrtab[tabidx].html[0]!=EOS )
-                                        {       ptr_quoted= chrtab[tabidx].html;
-                                                found= TRUE;
-                                        }
-                                        else
-                                        {       warning_no_isochar(ptr[0]);
-                                        }
-                                }
-                                else
-                                {       for (i=0; i<MAXHTAG7BIT; i++)
-                                        {       if ( ptr[0]==htag7bit[i].c)
-                                                {       ptr_quoted= htag7bit[i].quoted;
-                                                        found= TRUE;
-                                                        break;
-                                                }
-                                        }
-                                }
-                                if (!found)
-                                {
-                                }
-                                break;
-                }
+         if ( ((UCHAR) ptr[0]) > 127)
+         {
+            if (!html_ignore_8bit)
+            {
+               tabidx = ((UCHAR) ptr[0]) - 128;
 
-                if (ptr_quoted!=NULL && ptr_quoted[0]!=EOS)
-                {
-                        s_char[0]= ptr[0];
-                        cmplen= strlen(ptr_quoted);
-                        qreplace_once(ptr, s_char, 1, ptr_quoted, cmplen);
-                        ptr= ptr + cmplen - 1;
-                        s_temp[0]= EOS;
-                        ptr_quoted= NULL;
-                }
-                
-                NO_QUOTE_NEEDED:
+               if (chrtab[tabidx].html[0] != EOS)
+               {
+                  ptr_quoted = chrtab[tabidx].html;
+                  found= TRUE;
+               }
+               else
+               {
+                  warning_no_isochar(ptr[0]);
+               }
+            }
+         }
+         else
+         {
+            for (i = 0; i < MAXHTML7BIT; i++)
+            {
+               if (ptr[0] == html7bit[i].c)
+               {
+                  if (ptr[0] == '&')      /* insert check for HTML entities */
+                  {
+                     if (check_html_specs(ptr) == FALSE)
+                     {
+                        ptr_quoted = html7bit[i].quoted;
+                        found = TRUE;
+                        break;
+                     }
+                  }
+                  else
+                  {                  
+                     ptr_quoted = html7bit[i].quoted;
+                     found = TRUE;
+                     break;
+                  }
+               }
+            }
+         }
+         break;
+      
+      case TOLDS:
+         found = FALSE;
 
-                ptr++;
-        }
+         if ( ((UCHAR) ptr[0]) > 127)
+         {
+            tabidx = ((UCHAR) ptr[0]) - 128;
 
-        if ( bDocUniversalCharsetOn )
-        {       uni2misc(s);
-        }
+            if (chrtab[tabidx].html[0] != EOS)
+            {
+               ptr_quoted = chrtab[tabidx].html;
+               found = TRUE;
+            }
+            else
+            {
+               warning_no_isochar(ptr[0]);
+            }
+         }
+         else
+         {
+            for (i = 0; i < MAXLDS7BIT; i++)
+            {
+               if ( (ptr[0]) == lds7bit[i].c)
+               {
+                  ptr_quoted = lds7bit[i].quoted;
+                  found = TRUE;
+                  break;
+               }
+            }
+         }
+         break;
+      
+      case TOHPH:
+         found = FALSE;
 
-        if (iUdopass==PASS2)
-        {
-                last_aqc_verb= aqc_verb;        /* PL13: Status sichern */
-        }
-        else
-        {
-                /* r6pl9: In pass1() werden nur Kommandozeilen beachtet.        */
-                /* Wird last_aqc_verb nicht zurueckgesetzt, dann kracht es!     */
-                last_aqc_verb= FALSE;
-        }
-        
+         if ( ((UCHAR) ptr[0]) > 127)
+         {
+            tabidx = ((UCHAR) ptr[0]) - 128;
+
+            if (chrtab[tabidx].html[0] != EOS)
+            {
+               ptr_quoted = chrtab[tabidx].html;
+               found= TRUE;
+            }
+            else
+            {
+               warning_no_isochar(ptr[0]);
+            }
+         }
+         else
+         {
+            for (i = 0; i < MAXHTAG7BIT; i++)
+            {
+               if (ptr[0] == htag7bit[i].c)
+               {
+                  ptr_quoted = htag7bit[i].quoted;
+                  found = TRUE;
+                  break;
+               }
+            }
+         }
+         break;
+
+      }  /* switch (desttype) */
+      
+
+      if (ptr_quoted != NULL && ptr_quoted[0] != EOS)
+      {
+         s_char[0] = ptr[0];
+         cmplen = strlen(ptr_quoted);
+         qreplace_once(ptr, s_char, 1, ptr_quoted, cmplen);
+         
+         ptr = ptr + cmplen - 1;
+         s_temp[0] = EOS;
+         ptr_quoted = NULL;
+      }
+   
+NO_QUOTE_NEEDED:
+      ptr++;
+   }
+   
+   if (bDocUniversalCharsetOn)
+   {
+      uni2misc(s);
+   }
+   
+   if (iUdopass == PASS2)
+   {
+      last_aqc_verb = aqc_verb;           /* PL13: Status sichern */
+   }
+   else
+   {
+      /* r6pl9: In pass1() werden nur Kommandozeilen beachtet. */
+      /* Wird last_aqc_verb nicht zurueckgesetzt, dann kracht es! */
+      last_aqc_verb = FALSE;
+   }
+
 } /* auto_quote_chars */
+
+
+
 
 
 GLOBAL void auto_quote_texindex ( char *s )
