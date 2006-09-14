@@ -43,6 +43,15 @@
 #define KPS_DOCINFO2PS	4
 #define KPS_NODENAME	5
 
+
+/* new in v6.5.19 [fd] */
+/* this is a list of UDO supported special HTML characters */
+#define HTML_SPEC_HELLIP  0
+#define HTML_SPEC_MDASH   1
+#define HTML_SPEC_NDASH   2
+#define HTML_SPEC_SHY     3
+#define HTML_SPEC_MAX     4
+
 #endif	/* __UDOCHR__ */
 
 
