@@ -36,7 +36,6 @@ const char *id_chr_c= "@(#) chr.c       08.04.2004";
 #include "msg.h"
 #include "str.h"
 #include "sty.h"
-/* New: Fixed bug #0000040 in r6.3pl16 [NHz] */
 #include "tp.h"
 #include "udo.h"
 #include "chr_all.h"
@@ -2571,7 +2570,6 @@ GLOBAL void auto_quote_chars ( char *s, BOOLEAN all )
                         {       uni2ascii(s);
                         }
 
-#if 1
                         /* r6pl2: Neue Version: immer quoten                                            */
                         /* nicht auf !raw !stg testen, da dies im wichtigen pass2() */
                         /* nicht auftreten kann, da vorher die Zeilen mit                       */
@@ -2594,28 +2592,6 @@ GLOBAL void auto_quote_chars ( char *s, BOOLEAN all )
                                 qreplace_all(s, "{", 1, "{{", 2);
                                 return;
                         }
-#else
-                        /* Alte Version */
-                        if (desttype==TOSTG)
-                        {       if (strncmp(s, "!stg", 4)!=0)
-                                {       replace_all(s, "@", "@@");
-                                }
-                                return;
-                        }
-                        if (desttype==TOINF)
-                        {       if (strncmp(s, "!info", 5)!=0)
-                                {       replace_all(s, "@", "@@");
-                                        replace_all(s, "}", "@}");
-                                        replace_all(s, "{", "@{");
-                                }
-                                return;
-                        }
-                        if (desttype==TOTVH)    /* r5pl10 */
-                        {       if (strncmp(s, "!tvh", 4)!=0)
-                                {       replace_all(s, "{", "{{");
-                                }
-                        }
-#endif
                         return;
         }       
         

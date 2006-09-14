@@ -211,6 +211,8 @@ GLOBAL BOOLEAN		html_frames_noscroll;
 GLOBAL BOOLEAN		html_use_folders;			/* Ordnerstruktur erzeugen? */
 GLOBAL BOOLEAN		html_transparent_buttons;	/* Transparente Buttons benutzen?	*/
 
+GLOBAL SHOW_VARAIABLE show_variable;			/* New in V6.5.19 */
+
 GLOBAL BOOLEAN	  html_navigation_line;	         /* v6.5.19[fd] TRUE: show navigation levels in one line without folder symbols */
 GLOBAL char      html_navigation_separator[20]; /* v6.5.19[fd] string which separates navigation levels (default: '&gt; ') */
 GLOBAL BOOLEAN	  html_navigation_1st_folder;    /* v6.5.19[fd] TRUE: show first level folder symbol */
@@ -446,4 +448,3 @@ GLOBAL void init_vars ( void );
 	######################################################################	*/
 GLOBAL void dest_special_adjust ( void );
 GLOBAL void dest_adjust ( void );
-
