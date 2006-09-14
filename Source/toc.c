@@ -300,12 +300,14 @@ LOCAL void output_helpid(int tocindex)
 			case TOAQV:
 				voutlnf("#{\\footnote # %s}", s);
 				break;
+            
 			case TOHAH:		/* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
-				label2html(s);	/*r6pl2*/
-				voutlnf("<a name=\"%s\"></a>", s);
+            label2html(s);	/*r6pl2*/
+            voutlnf("<a name=\"%s\"></a>", s);
 				break;	
+         
 			case TOLDS:
 				voutlnf("<label id=\"%s\">", s);
 				break;	
@@ -390,9 +392,11 @@ LOCAL void output_aliasses ( void )
 				case TOMHH:
 					um_strcpy(s, lab[i]->name, 256, "output_aliasses [6]");
 					convert_tilde(s);
-					label2html(s);	/* r6pl2 */
-					voutlnf("<a name=\"%s\"></a>", s);
-					break;	
+
+               label2html(s);	/* r6pl2 */
+               voutlnf("<a name=\"%s\"></a>", s);
+					break;
+
 				case TOLDS:
 					um_strcpy(s, lab[i]->name, 256, "output_aliasses[7]");
 					convert_tilde(s);
@@ -612,7 +616,8 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 
 			um_strcpy(sNoSty, n, 512, "string2reference[13]");
 			del_html_styles(sNoSty);
-			label2html(sNoSty);
+
+         label2html(sNoSty);
 
 			ti= l->tocindex;
 
@@ -3998,12 +4003,14 @@ GLOBAL BOOLEAN save_html_index ( void )
 		else
 		{
 			strcpy ( cLabel, html_index[i].tocname );
-			label2html ( cLabel );
-			/* v6.5.13 [vj] Compiler-Warnung beseitigt, # wurde in String ausgelagert,
+         
+         if (!no_index && use_label_inside_index) /* v6.5.19 [fd] */
+         {
+			   label2html ( cLabel );
+            /* v6.5.13 [vj] Compiler-Warnung beseitigt, # wurde in String ausgelagert,
                             da der gcc sonst meckert: "toc.c:3940:17: warning: unknown escape sequence '\#'" */
-			fprintf(uif, "<a href=\"%s%s%s%s\">%s</a> <br>\n",
-				htmlname, outfile.suff, "#", cLabel,
-				escapedtocname );
+            fprintf(uif, "<a href=\"%s%s%s%s\">%s</a> <br>\n",htmlname, outfile.suff, "#", cLabel,escapedtocname );
+         }
 		}
 
 		um_free(escapedtocname); /* v6.5.15 [vj] var can be freed now */
@@ -4817,9 +4824,9 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 			{	
 				strcpy(nameNoSty, name);
 				del_html_styles(nameNoSty);
-				label2html(nameNoSty);	/*r6pl2*/
-				voutlnf("\n<h%d><a name=\"%s\">%s%s</a></h%d>\n",
-							html_nodesize, nameNoSty, numbers, name, html_nodesize);	/* r5pl4 */
+            
+            label2html(nameNoSty);	/*r6pl2*/
+            voutlnf("\n<h%d><a name=\"%s\">%s%s</a></h%d>\n", html_nodesize, nameNoSty, numbers, name, html_nodesize);	/* r5pl4 */
 			}
 			if (show_variable.source_filename) /* V6.5.19 */
 				voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line ); /* V6.5.18 */
@@ -5289,9 +5296,9 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 			if (!flag)
 			{	strcpy(nameNoSty, name);
 				del_html_styles(nameNoSty);
-				label2html(nameNoSty);	/*r6pl2*/
-				voutlnf("%s<a name=\"%s\">%s%s</a>%s",
-					hx_start, nameNoSty, numbers, name, hx_end);
+            
+            label2html(nameNoSty);	/*r6pl2*/
+            voutlnf("%s<a name=\"%s\">%s%s</a>%s",hx_start, nameNoSty, numbers, name, hx_end);
 			}
 			if (show_variable.source_filename) /* V6.5.19 */
 				voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line );
@@ -5756,9 +5763,9 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			{
 				strcpy(nameNoSty, name);
 				del_html_styles(nameNoSty);
-				label2html(nameNoSty);	/*r6pl2*/
-				voutlnf("%s<a name=\"%s\">%s%s</a>%s",
-					hx_start, nameNoSty, numbers, name, hx_end);
+            
+            label2html(nameNoSty);	/*r6pl2*/
+            voutlnf("%s<a name=\"%s\">%s%s</a>%s",hx_start, nameNoSty, numbers, name, hx_end);
 			}
 			if (show_variable.source_filename) /* V6.5.19 */
 				voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line );
@@ -6218,9 +6225,12 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 			{
 				strcpy(nameNoSty, name);
 				del_html_styles(nameNoSty);
-				label2html(nameNoSty);	/*r6pl2*/
-				voutlnf("%s<a name=\"%s\">%s%s</a>%s",
-					hx_start, nameNoSty, numbers, name, hx_end);
+            
+            if (!no_index && use_label_inside_index)  /* v6.5.19 [fd] */
+				{
+               label2html(nameNoSty);	/*r6pl2*/
+               voutlnf("%s<a name=\"%s\">%s%s</a>%s",	hx_start, nameNoSty, numbers, name, hx_end);
+            }
 			}
 			if (show_variable.source_filename) /* V6.5.19 */
 				voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line );
@@ -9221,12 +9231,19 @@ GLOBAL void c_label ( void )
 			{	voutlnf("@symbol ar \"%s\"", sLabel);
 			}
 			break;
-		case TOHAH: /* V6.5.17 */
-		case TOHTM:
-		case TOMHH:
-			label2html(sLabel);							/* r6pl2 */
-			voutlnf("<a name=\"%s\"></a>", sLabel);		/* r5pl14 */
+      
+		case TOHAH:                         /* HTML Apple Help (since V6.5.17) */
+		case TOHTM:                         /* HTML */
+		case TOMHH:                         /* Microsoft HTML Help */
+                                          /* v 6.5.19 [fd] */
+         if (!no_index && use_label_inside_index)
+         {
+	         label2html(sLabel);           /* r6pl2 */
+                                          /* r5pl14 */
+            voutlnf("<a name=\"%s\"></a>", sLabel);
+         }
 			break;
+         
 		case TOLDS:
 			voutlnf("<label id=\"%s\">", sLabel);
 			break;
