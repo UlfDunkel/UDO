@@ -186,14 +186,14 @@ LOCAL IDXLIST *idxlist;
         # Schluss.
         #
         ############################################################    */
-#define CMD_ALWAYS                      0
-#define CMD_ONLY_PREAMBLE       1
-#define CMD_ONLY_MAINPART       2
+#define CMD_ALWAYS          0
+#define CMD_ONLY_PREAMBLE   1
+#define CMD_ONLY_MAINPART   2
 
 typedef void (*CMDPROC)(void);
 
 
-typedef struct _udocommand                /* ---- Funktionentabelle ----          */
+typedef struct _udocommand                /* ---- Funktionentabelle ---- */
 {
    char     *magic;                       /* UDO-Kommando */
    char     *macut;                       /* Shortcut des Kommandos */
@@ -388,7 +388,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
    { "!html_merge_subsubnodes",    "",       cmd_outside_preamble,   TRUE,  CMD_ONLY_PREAMBLE },
    { "!html_merge_subsubsubnodes", "",       cmd_outside_preamble,   TRUE,  CMD_ONLY_PREAMBLE },
    { "!html_ignore_8bit",          "",       cmd_outside_preamble,   TRUE,  CMD_ONLY_PREAMBLE },
-   { "!html_navigation_line",      "",       cmd_outside_preamble,   TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_navigation_line",      "",       cmd_outside_preamble,   TRUE,  CMD_ONLY_PREAMBLE }, /* New in v6.5.19 [fd] */
    { "!html_modern_layout",        "",       cmd_outside_preamble,   TRUE,  CMD_ONLY_PREAMBLE },
    { "!html_modern_width",         "",       cmd_outside_preamble,   TRUE,  CMD_ONLY_PREAMBLE },
    { "!html_modern_alignment",     "",       cmd_outside_preamble,   TRUE,  CMD_ONLY_PREAMBLE },
@@ -462,58 +462,59 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
    { "!nop",                       "",       c_nop,                  TRUE,  CMD_ALWAYS        },
 };
 
-#define MAXSWITCH       40
+#define MAXSWITCH  40
 
-LOCAL const UDOSWITCH udoswitch[MAXSWITCH+1]=
+LOCAL const UDOSWITCH udoswitch[MAXSWITCH + 1] =
 {
-        { "!use_auto_subtocs",                  &use_auto_subtocs               ,       'i',    "!depth",               &subtocs1_depth },
-        { "!use_auto_subsubtocs",               &use_auto_subsubtocs    ,       'i',    "!depth",               &subtocs2_depth },
-        { "!use_auto_subsubsubtocs",    &use_auto_subsubsubtocs ,       'i',    "!depth",               &subtocs3_depth },
-        { "!use_auto_toptocs",                  &use_auto_toptocs               ,       'b',    "!no_icons",    &no_auto_toptocs_icons  },
-        { "!use_short_envs",                    &use_short_envs                 ,       '\0',   "",                             NULL                    },
-        { "!use_short_tocs",                    &use_short_tocs                 ,       '\0',   "",                             NULL                    },
-        { "!use_formfeed",                              &use_formfeed                   ,       '\0',   "",                             NULL                    },
-        { "!use_chapter_images",                &use_chapter_images             ,       '\0',   "",                             NULL                    },
-        { "!use_about_udo",                             &use_about_udo                  ,       '\0',   "",                             NULL                    },
-        { "!use_ansi_tables",                   &use_ansi_tables                ,       '\0',   "",                             NULL                    },
-        { "!use_style_book",                    &use_style_book                 ,       '\0',   "",                             NULL                    },
-        { "!use_justification",                 &use_justification              ,       '\0',   "",                             NULL                    },
-        { "!use_output_buffer",                 &use_output_buffer              ,       '\0',   "",                             NULL                    },
-        { "!use_nodes_inside_index",    &use_nodes_inside_index ,       '\0',   "",                             NULL                    },
-        { "!use_alias_inside_index",    &use_alias_inside_index ,       '\0',   "",                             NULL                    },
-        { "!use_label_inside_index",    &use_label_inside_index ,       '\0',   "",                             NULL                    },
-        { "!use_udo_index",                             &use_udo_index                  ,       '\0',   "",                             NULL                    },
-        { "!use_mirrored_indices",              &use_mirrored_indices   ,       '\0',   "",                             NULL                    },
-        { "!use_comments",                              &use_comments                   ,       '\0',   "",                             NULL                    },
-        { "!use_auto_helpids",                  &use_auto_helpids               ,       '\0',   "",                             NULL                    },
-        { "!no_index",                                  &no_index                               ,       '\0',   "",                             NULL                    },
-        { "!no_images",                                 &no_images                              ,       '\0',   "",                             NULL                    },
-        { "!no_img_size",                               &no_img_size                    ,       '\0',   "",                             NULL                    },
-        { "!no_numbers",                                &no_numbers                             ,       '\0',   "",                             NULL                    },
-        { "!no_umlaute",                                &no_umlaute                             ,       '\0',   "",                             NULL                    },
-        { "!no_8bit",                                   &no_umlaute                             ,       '\0',   "",                             NULL                    },
-        { "!no_xlinks",                                 &no_xlinks                              ,       '\0',   "",                             NULL                    },
-        { "!no_urls",                                   &no_urls                                ,       '\0',   "",                             NULL                    },
-        { "!no_links",                                  &no_links                               ,       '\0',   "",                             NULL                    },
-        { "!no_verbatim_umlaute",               &no_verbatim_umlaute    ,       '\0',   "",                             NULL                    },
-        { "!no_effects",                                &no_effects                             ,       '\0',   "",                             NULL                    },
-        { "!no_quotes",                                 &no_quotes                              ,       '\0',   "",                             NULL                    },
-        { "!no_preamble",                               &no_preamble                    ,       '\0',   "",                             NULL                    },
-        { "!no_titles",                                 &no_titles                              ,       '\0',   "",                             NULL                    },
-        { "!no_headlines",                              &no_headlines                   ,       '\0',   "",                             NULL                    },
-        { "!no_bottomlines",                    &no_bottomlines                 ,       '\0',   "",                             NULL                    },
-        { "!no_popup_headlines",                &no_popup_headlines             ,       '\0',   "",                             NULL                    },
-        { "!no_footers",                                &no_footers                             ,       '\0',   "",                             NULL                    },
-        { "!no_buttons",                                &no_buttons                             ,       '\0',   "",                             NULL                    },
-        { "!no_sourcecode",                             &no_sourcecode                  ,       '\0',   "",                             NULL                    },
-        { "!no_table_lines",                    &no_table_lines                 ,       '\0',   "",                             NULL                    },
+   { "!use_auto_subtocs",       &use_auto_subtocs      , 'i',  "!depth",    &subtocs1_depth        },
+   { "!use_auto_subsubtocs",    &use_auto_subsubtocs   , 'i',  "!depth",    &subtocs2_depth        },
+   { "!use_auto_subsubsubtocs", &use_auto_subsubsubtocs, 'i',  "!depth",    &subtocs3_depth        },
+   { "!use_auto_toptocs",       &use_auto_toptocs      , 'b',  "!no_icons", &no_auto_toptocs_icons },
+   { "!use_short_envs",         &use_short_envs        , '\0', "",          NULL                   },
+   { "!use_short_tocs",         &use_short_tocs        , '\0', "",          NULL                   },
+   { "!use_formfeed",           &use_formfeed          , '\0', "",          NULL                   },
+   { "!use_chapter_images",     &use_chapter_images    , '\0', "",          NULL                   },
+   { "!use_about_udo",          &use_about_udo         , '\0', "",          NULL                   },
+   { "!use_ansi_tables",        &use_ansi_tables       , '\0', "",          NULL                   },
+   { "!use_style_book",         &use_style_book        , '\0', "",          NULL                   },
+   { "!use_justification",      &use_justification     , '\0', "",          NULL                   },
+   { "!use_output_buffer",      &use_output_buffer     , '\0', "",          NULL                   },
+   { "!use_nodes_inside_index", &use_nodes_inside_index, '\0', "",          NULL                   },
+   { "!use_alias_inside_index", &use_alias_inside_index, '\0', "",          NULL                   },
+   { "!use_label_inside_index", &use_label_inside_index, '\0', "",          NULL                   },
+   { "!use_udo_index",          &use_udo_index         , '\0', "",          NULL                   },
+   { "!use_mirrored_indices",   &use_mirrored_indices  , '\0', "",          NULL                   },
+   { "!use_comments",           &use_comments          , '\0', "",          NULL                   },
+   { "!use_auto_helpids",       &use_auto_helpids      , '\0', "",          NULL                   },
+   { "!no_index",               &no_index              , '\0', "",          NULL                   },
+   { "!no_images",              &no_images             , '\0', "",          NULL                   },
+   { "!no_img_size",            &no_img_size           , '\0', "",          NULL                   },
+   { "!no_numbers",             &no_numbers            , '\0', "",          NULL                   },
+   { "!no_umlaute",             &no_umlaute            , '\0', "",          NULL                   },
+   { "!no_8bit",                &no_umlaute            , '\0', "",          NULL                   },
+   { "!no_xlinks",              &no_xlinks             , '\0', "",          NULL                   },
+   { "!no_urls",                &no_urls               , '\0', "",          NULL                   },
+   { "!no_links",               &no_links              , '\0', "",          NULL                   },
+   { "!no_verbatim_umlaute",    &no_verbatim_umlaute   , '\0', "",          NULL                   },
+   { "!no_effects",             &no_effects            , '\0', "",          NULL                   },
+   { "!no_quotes",              &no_quotes             , '\0', "",          NULL                   },
+   { "!no_preamble",            &no_preamble           , '\0', "",          NULL                   },
+   { "!no_titles",              &no_titles             , '\0', "",          NULL                   },
+   { "!no_headlines",           &no_headlines          , '\0', "",          NULL                   },
+   { "!no_bottomlines",         &no_bottomlines        , '\0', "",          NULL                   },
+   { "!no_popup_headlines",     &no_popup_headlines    , '\0', "",          NULL                   },
+   { "!no_footers",             &no_footers            , '\0', "",          NULL                   },
+   { "!no_buttons",             &no_buttons            , '\0', "",          NULL                   },
+   { "!no_sourcecode",          &no_sourcecode         , '\0', "",          NULL                   },
+   { "!no_table_lines",         &no_table_lines        , '\0', "",          NULL                   },
 };
 
 
-typedef struct _udolanguage             /* ---- Sprachentabelle ----    */
-{       char    *magic;                 /* UDO-Kommando                                 */
-        int     langval;                        /* zugehoerige Sprache                  */
-}       UDOLANGUAGE;
+typedef struct _udolanguage               /* ---- Sprachentabelle ----    */
+{
+   char  *magic;                          /* UDO-Kommando                                 */
+   int    langval;                        /* zugehoerige Sprache                  */
+}  UDOLANGUAGE;
 
 /* Changed in v6.5.19 (fd) */
 #define MAXLANGUAGE     12
@@ -536,10 +537,11 @@ LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE] =
 
 
 
-typedef struct _udocharset              /* ---- Zeichensatztabelle ---- */
-{       char    *magic;                 /* code-Parameter                               */
-        int     codepage;                               /* zugehoeriger Zeichensatz             */
-}       UDOCHARSET;
+typedef struct _udocharset                /* ---- Zeichensatztabelle ---- */
+{
+   char  *magic;                          /* code-Parameter */
+   int    codepage;                       /* zugehoeriger Zeichensatz */
+}  UDOCHARSET;
 
 #define MAXCHARSET      15
 
@@ -572,14 +574,14 @@ GLOBAL char compile_time[9]  = "\0";
  * Use um_malloc instead of malloc, um_realloc instead of realloc and um_free instead of free.
  * Please don't use malloc, realloc or free in UDO.
  */
-long um_malloc_count;
-long um_free_count;
-long um_free_error_count;
-long um_free_endbroken_count;
-int memory_error;
-char endstring[]=UM_END_STRING;
-size_t endstring_len;
-MEMLIST *anker; /* This is the anchor of our memory-usage list */
+long      um_malloc_count;                /* */
+long      um_free_count;                  /* */
+long      um_free_error_count;            /* */
+long      um_free_endbroken_count;        /* */
+int       memory_error;                   /* */
+char      endstring[] = UM_END_STRING;    /* */
+size_t    endstring_len;                  /* */
+MEMLIST  *anker;                          /* this is the anchor of our memory-usage list */
 
 /*
  * init_um() sets up the Memory-Layer
