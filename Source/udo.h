@@ -213,6 +213,7 @@ GLOBAL BOOLEAN		html_transparent_buttons;	/* Transparente Buttons benutzen?	*/
 
 GLOBAL BOOLEAN	  html_navigation_line;	         /* v6.5.19[fd] TRUE: show navigation levels in one line without folder symbols */
 GLOBAL char      html_navigation_separator[20]; /* v6.5.19[fd] string which separates navigation levels (default: '&gt; ') */
+GLOBAL BOOLEAN	  html_navigation_1st_folder;    /* v6.5.19[fd] TRUE: show first level folder symbol */
 
 GLOBAL BOOLEAN		html_ignore_8bit_use_charset;	/* v6.5.0[vj] Use extra charset for meta http-equiv="Content-Type"? This flag is used just for speedup reasons */
 GLOBAL char			html_ignore_8bit_charset[20];	/* v6.5.0[vj] Charset for html_ignore_8bit that should be used in meta http-equiv="Content-Type" */
