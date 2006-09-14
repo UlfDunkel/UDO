@@ -4818,7 +4818,7 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 				strcpy(nameNoSty, name);
 				del_html_styles(nameNoSty);
 				label2html(nameNoSty);	/*r6pl2*/
-				voutlnf("<h%d><a name=\"%s\">%s%s</a></h%d>",
+				voutlnf("\n<h%d><a name=\"%s\">%s%s</a></h%d>\n",
 							html_nodesize, nameNoSty, numbers, name, html_nodesize);	/* r5pl4 */
 			}
 			if (show_variable.source_filename) /* V6.5.19 */
@@ -9097,7 +9097,7 @@ GLOBAL void c_tableofcontents ( void )
 		case TOMHH:
 			output_helpid(0);
 			if (toc_available)
-			{	voutlnf("<h1><a name=\"%s\">%s</a></h1>", HTML_LABEL_CONTENTS, lang.contents);
+			{	voutlnf("\n<h1><a name=\"%s\">%s</a></h1>\n", HTML_LABEL_CONTENTS, lang.contents);
 				/* New in V6.5.9 [NHz] */
 				add_label(HTML_LABEL_CONTENTS, FALSE, FALSE);
 				toc_output(depth);
@@ -12714,7 +12714,7 @@ GLOBAL void init_module_toc_pass2 ( void )
 		case TOMHH:
 			/* Changed in r6pl16 [NHz] */
 			strcpy(toc_list_top,	"<ul class=\"content\">");
-			strcpy(toc_list_end,	"</ul>");
+			strcpy(toc_list_end,	"</ul>\n");
 			use_toc_list_commands= TRUE;
 			break;
 		case TOTEX:
