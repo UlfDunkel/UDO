@@ -1,0 +1,807 @@
+################################################################################
+!begin_node D!..
+!html_name cmd-d.html
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [date])
+!html_name cmd_date.html
+
+!iflang [german]
+Datumsinformation für Titelseite setzen.
+!endif
+!iflang [english]
+Set document information.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/date <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [docinfo] [[date!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Titelseite] [Titelseite])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Title page] [Title page])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!begin_node (!kw [define])
+!html_name cmd_define.html
+
+!iflang [german]
+Definition setzen.
+!endif
+!iflang [english]
+Set a definition.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/define <wort> <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando legt eine neue Definition an. Bei der
+Umwandlung wird dann ""(!/<wort>)"" durch ""<text>""
+ersetzt, ohne daß Umlaute oder andere spezielle
+Zeichen umgewandelt werden. Im Beispiel würde ""(!/H1)""
+durch ""</H1>"" ersetzt. Definitionen können auch
+Paramater enthalten. Nähere Informationen dazu findet
+man im Kapitel ""Definitionen"".
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Sets a (new) definition. When converting UDO will replace every
+""(!/<word>)"" by ""<text>"" without converting special chars. When
+using the example below every ""(!/H1)"" will be replaced by
+""</H1>"". The difference to a macro: no umlauts or other special
+characters will be converted. Definitions can contain parameters. Read the
+chapter ""Definitions"" to get to know how to use definitions with
+parameters.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/define H1 </H1>(!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.37
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Definitionen] [Definitionen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Definitions] [Definitions])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: Englisch
+!begin_node (!kkkw [DEL] [del])
+!html_name cmd_INS_ins.html
+!label (!kk1 [/DEL])
+!label (!kk1 [/del])
+
+!iflang [german]
+Markierung von Löschungen.
+!endif
+!iflang [english]
+Print text in bold.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/DEL)<(!TEXT)>(!/ins)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+""<text>"" wird als Löschung markiert.
+
+Bei der HTML-Ausgabe wird die aktuelle Zeit als Attribut datetime
+und die URL ""http://www.udo-open-source.org"" als Attribut cite eingesetzt.
+
+Bei der RTF-Ausgabe wird ebenfalls die aktuelle Zeit eingesetzt. Außerdem
+trägt sich UDO als Änderungsautor 1 ein.
+
+Bei WinHelp(4), Apple Quickview und Postscript wird der Text wird
+durchgestrichen.
+
+Bei ST-Guide und AmigaGuide wird der Text hell dargestellt.
+
+Bei allen anderen Formaten wird der gelöschte Text in eckige Klammern gesetzt. 
+
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)(!/DEL)Löschungen(!/del)(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/B)bold(!/b)(!t)
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Texthervorhebungen] [Texthervorhebungen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Emphasizing text] [Emphasizing text])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [depth])
+!html_name cmd_depth.html
+
+!iflang [german]
+Tiefe für Inhaltsverzeichnis angeben.
+!endif
+!iflang [english]
+Specify depth of table of contents.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/depth <(!VALUE)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wird dieser Schalter zusammen mit dem Befehl zur
+Ausgabe eines Inhaltsverzeichnisses angegeben,
+legt er die Tiefe des ausgegebenen Verzeichnisses fest.
+Das Beispiel zeigt, wie man ein Inhaltsverzeichnis ausgibt,
+das nur die Nodes (1.~Ebene) enthält.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This switch, used in conjunction with a command
+to output a table of contents, specifies the
+depth of the generated table. The example
+below show how to generate a table of contents
+containing only the chapter names.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/tableofcontents !/depth 1(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [use_auto_subtocs]), (!KW [use_short_tocs])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: Englisch
+!begin_node (!kw [docinfo])
+!html_name cmd_docinfo.html
+
+!iflang [german]
+Dokumentinformationen setzen.
+!endif
+!iflang [english]
+Set document information.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/docinfo [<name>] <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando dient dazu, verschiedene Informationen für
+die Titelseite zu setzen. ""<name>"" kann dabei einer
+der folgenden Werte sein:
+
+!begin_description
+
+!item [title]
+""<text>"" wird auf der Titelseite vor dem Inhalt von
+(!KW [docinfo] [[program!!]]) ausgegeben. ""<text>"" wird darüber hinaus noch
+zur Darstellung von Kopfzeilen bei einigen Formaten herangezogen.
+
+!item [program]
+""<text>"" wird auf der Titelseite unterhalb der Titelzeile
+ausgegeben. Desweiteren wird ""<text>"" bei einigen Formaten zur
+Darstellung von Kopfzeilen herangezogen.
+
+!item [programimage]
+Das Bild ""<datei>"" wird (!B)anstelle(!b) des Inhalts von
+(!KW [docinfo] [[program!!]]) unterhalb der Titelzeile auf der Titelseite
+ausgegeben.
+
+!item [version]
+""<text>"" wird unterhalb des Programmnamens auf der Titelseite
+ausgegeben. Ansonsten findet ""<text>"" keine weitere Verwendung.
+
+!item [date]
+""<text>"" wird unterhalb der Versionsinformationen auf der
+Titelseite ausgegeben. Ansonsten werden diese Informationen nicht
+weiter benötigt. Im Beispiel würde auf der Titelseite das aktuelle
+Systemdatum eingesetzt.
+
+!item [author]
+""<text>"" wird als Name des Autors auf der Titelseite ausgegeben
+und für weitere, jedoch sehr spezifische Formatbefehle verwendet. Im
+Text selbst findet ""<text>"" keine weitere Verwendung.
+
+!item [authorimage]
+""<datei>"" wird als Bild (z.B. ein Logo) zusätzlich direkt über
+dem Namen des Autors auf der Titelseite ausgegeben, falls das
+Ausgabeformat Unterstützung für Bilder bietet.
+
+!item [authoricon]
+""<datei>"" wird als Bild (z.B. ein Logo) im linken Frame bzw.
+in der linken Spalte beim Frame-Layout bzw. ""modernen"" Layout
+von HTML ausgegeben.
+
+!item [address]
+""<text>"" wird auf der Titelseite unterhalb des Namens
+des Autors ausgegeben. ""<text>"" findet sonst keine
+weitere Verwendung durch UDO. (!KW [docinfo] [[address!!]]) kann bis zu 15 mal
+angegeben werden, so daß man hier z.B. auch mehrere E-Mail-Adressen auf der
+Titelseite angeben kann.
+
+!item [company]
+""<text>"" bezeichnet die Firma, für die ein Dokument erstellt wird.
+Wenn company benutzt wird, wird auf der Titelseite unter Autor
+""für company"" eingefügt.
+
+!item [category]
+""<text>"" bezeichnet eine Kategorie, zu der das Dokument gehört.
+
+!item [stgdatabase]
+Mittels (!KW [docinfo] [[stgdatabase!!]]) kann man angeben, was UDO
+für die @database-Zeile beim ST-Guide-Format ausgeben soll.
+Wird (!KW [docinfo] [[stgdatabase!!]]) nicht
+verwendet, so erzeugt UDO wie gehabt eine Zeile, gebildet aus
+(!KW [docinfo] [[title!!]]) und (!KW [docinfo] [[program!]]).
+
+!item [drcstatusline]
+Mittels (!KW [docinfo] [[drcstatusline!!]]) kann man den Text setzen,
+den UDO für die Statuszeile verwendet. Fehlt diese Angabe, so
+erzeugt UDO eine Zeile der Art ""Copyright (!copyright) by <author>"". Wurde
+(!KW [docinfo] [[author!!]]) nicht angegeben, so erzeugt UDO eine Zeile
+""Made with UDO"".
+
+!item [htmltitle]
+""<text>"" wird für den Titel jeder Seite benutzt (anstelle der
+Zusammenfassung von [title] und [program]).
+
+!item [robots]
+""<text>"" entspricht einer der Robots Anweisung wie sie für Suchmaschinen benutzt werden.
+Erlaubt sind "none", "noindex", "index", "nofollow" und "follow".
+
+!item [appletitel]
+Wird für HTML Apple Help benötig und beschreibt den Titel der Hilfe.
+
+!item [appleicon]
+Wird für HTML Apple Help benötig. Damit wird das Icon angegeben, welches der Apple Help Viewer
+anzeigen soll.
+
+!item [webmastername|webmasteremail|webmasterurl]
+Werden Webmaster-Daten angegeben, so erzeugt
+UDO standardmäßig am Ende einer jeden Seite folgendes:
+
+!begin_quote
+!begin_verbatim
+Copyright (!copyright) by <webmastername> [<webmasteremail>|<webmasterurl>]
+
+Letzte Aktualisierung am (!today)
+!end_verbatim
+!end_quote
+
+<webmasterurl> hat Priorität vor <webmasteremail>. Werden keine
+Angaben gemacht oder im Vorspann (!KW [no_footers] [[html!!]]) benutzt, so
+gibt UDO nichts aus.
+
+!end_description
+Die Werte Einträge stehen als Defines zur Verfügung in der Form
+(!KW [UDO_xxx)], also z. B. (!KW [UDO_title]). Natürlich ist dies nur der
+Fall, wenn sie vorher definiert worden sind.
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!item [(!DESCRIPTION)]
+!item [Description:]
+This command is used to set several informations printed
+on the title page. ""<name>"" can have one of the following values:
+
+!begin_description
+
+!item [title]
+""<text>"" will be displayed on the title page before the contents of
+the program name. It's also used inside the headlines.
+
+!item [program]
+""<text>"" will be displayed on the title page below the title.
+Furthermore ""<text>"" will be used by some destination formats
+to generate the header line.
+
+!item [programimage]
+""<file>"" will be displayed (!B)instead(!b) of the name of the program on
+the title page if the destination format supports images.
+
+!item [version]
+""<text>"" will be given out right below the contents of the program name on
+the title page.
+
+!item [date]
+""<text>"" will be displayed on the title page below the contents of
+the program version. The example shows how to use the current system
+time for the title page.
+
+!item [author]
+""<text>"" will be used as the name of the author on the title page
+and for different other purposes.
+
+!item [authorimage]
+""<file>"" will be displayed above the name of the author on the
+title page if the destination format supports images.
+
+!item [authoricon]
+""<file>"" will be displayed as image in the left frame or
+left column when using the frame layout or ""modern"" layout
+of HTML.
+
+!item [address]
+""<text>"" will be given out below the author's name on the
+title page. (!KW [docinfo] [[address!!]]) can be used up to 15 times,
+and can contain any address lines, such as email-addresses.
+
+!item [company]
+""<text>"" bezeichnet die Firma, für die ein Dokument erstellt wird.
+Wenn company benutzt wird, wird auf der Titelseite unter Autor
+""für company"" eingefügt.
+
+!item [category]
+""<text>"" bezeichnet eine Kategorie, zu der das Dokument gehört.
+
+!item [stgdatabase]
+With this command you can specify the contents of the @database-line
+that is generated for the ST-Guide format.
+If you don't use this command, UDO will construct a line containing
+the title and the program name.
+
+!item [drcstatusline]
+This command is used to specify the contents of the status line
+for the DRC format. If you don't use this command, UDO
+will use a line like ""Copyright (!copyright) by <author>"".
+If you did not set the name of the author, UDO will use
+the text ""Made with UDO"".
+
+!item [htmltitle]
+""<text>"" will be used as the title of every page (instead of
+using [title] and [program]).
+
+!item [robots]
+""<text>"" entspricht einer der Robots Anweisung wie sie für Suchmaschinen benutzt werden.
+Erlaubt sind "none", "noindex", "index", "nofollow" und "follow".
+
+!item [appletitel]
+Wird für HTML Apple Help benötig und beschreibt den Titel der Hilfe.
+
+!item [appleicon]
+Wird für HTML Apple Help benötig. Damit wird das Icon angegeben, welches der Apple Help Viewer
+anzeigen soll.
+
+!item [webmastername|webmasteremail|webmasterurl]
+If you specify webmaster informations, UDO will
+output following lines at the end of each page:
+
+!begin_quote
+!begin_verbatim
+Copyright (!copyright) <webmastername> [<webmasteremail>|<webmasterurl>]
+Last updated on (!today)
+!end_verbatim
+!end_quote
+
+<webmasterurl> has priority over <webmasteremail>. If you don't specify
+any data or use the switch (!KW [no_footers] [[html!!]]) in the preamble,
+UDO will output nothing.
+
+!end_description
+
+Die Werte Einträge stehen als Defines zur Verfügung in der Form
+(!KW [UDO_xxx)], also z. B. (!KW [UDO_title]). Natürlich ist dies nur der
+Fall, wenn sie vorher definiert worden sind.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE2)]
+(!T)
+!begin_verbatim
+!docinfo [title] Die Windows-Hilfe zu
+!docinfo [program] UDO
+!docinfo [author] Dirk Hagedorn
+!docinfo [address] Asmecke 1
+!docinfo [address] D-59846 Sundern
+!docinfo [address] Deutschland
+!docinfo [address] Internet: info@dirk-hagedorn.de
+!docinfo [address] Mausnet: Dirk Hagedorn @ MK2
+!docinfo [webmasteremail] webmaster@dirk-hagedorn.de
+!docinfo [webmasterurl] http://www.dirk-hagedorn.de/
+!docinfo [authorimage] dh
+!docinfo [date] (!today)
+!end_verbatim
+(!t)
+!endif
+
+!iflang [english]
+!item [(!EXAMPLE2)]
+(!T)
+!begin_verbatim
+!docinfo [title] The Windows Help of
+!docinfo [program] UDO
+!docinfo [author] Dirk Hagedorn
+!docinfo [address] Asmecke 1
+!docinfo [address] D-59846 Sundern
+!docinfo [address] Germany
+!docinfo [address] Internet: info@dirk-hagedorn.de
+!docinfo [address] Mausnet: Dirk Hagedorn @ MK2
+!docinfo [webmasteremail] webmaster@dirk-hagedorn.de
+!docinfo [webmasterurl] http://www.dirk-hagedorn.de/
+!docinfo [authorimage] dh
+!docinfo [date] (!today)
+!end_verbatim
+(!t)
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!link [Titelseite] [Titelseite])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!link [Title page] [Title page])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: englisch
+!begin_node (!kw [doclayout])
+!html_name cmd_doclayout.html
+
+!iflang [german]
+Setzen von Informationen für das Layout.
+!endif
+!iflang [english]
+Set document information.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/doclayout [<(!FORMAT)>][<name>] <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando dient dazu, verschiedene Informationen für
+das Layout. zu setzen. ""<name>"" kann dabei einer
+der folgenden Werte sein:
+
+!begin_description
+
+!item [paper]
+!begin_verbatim
+!doclayout [ps] [paper] foo
+!end_verbatim
+Mögliche Angaben für foo sind: A3PORTRAIT, A3LANDSCAPE,
+A4PORTRAIT, A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE
+
+!item [propfontname]
+!begin_verbatim
+!doclayout [ps] [propfontname] foo
+!end_verbatim
+Mögliche Angaben für foo sind Zeichensatznamen, z. B. Arial,
+Times New Roman, sans oder sans serif.
+
+Hinweis: Für die Postscriptausgabe gilt zur Zeit: Wenn dort irgendwas
+mit "Helvetica", "Arial" oder "sans-serif" steht wird "Helvetica" gesetzt,
+ansonsten "Times New Roman".
+
+!item [propfontsize]
+!begin_verbatim
+!doclayout [ps] [propfontsize] foo
+!end_verbatim
+Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+
+!item [monofontname]
+
+!item [monofontsize]
+Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+
+!item [node1size]
+!begin_verbatim
+!doclayout [ps,rtf] [node1size] foo
+!end_verbatim
+Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+
+seit Release~6 Patchlevel~16
+
+!item [node2size]
+!begin_verbatim
+!doclayout [ps,rtf] [node2size] foo
+!end_verbatim
+Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+
+seit Release~6 Patchlevel~16
+
+!item [node3size]
+!begin_verbatim
+!doclayout [ps,rtf] [node3size] foo
+!end_verbatim
+Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+
+seit Release~6 Patchlevel~16
+
+!item [node4size]
+!begin_verbatim
+!doclayout [ps,rtf] [node4size] foo
+!end_verbatim
+Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+
+seit Release~6 Patchlevel~16
+
+!item [openMode]
+Mögliche Angaben für foo sind die entsprechenden Angaben in
+der Dokumentation zu den pdfmarks.
+
+!end_description
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!item [(!DESCRIPTION)]
+
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15, Teile erst ab
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [drc])
+!html_name cmd_drc.html
+
+!iflang [german]
+Abfrage des Ausgabeformates.
+!endif
+!iflang [english]
+Query the destination format.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/drc <text>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[drc!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!begin_node (!kw [drc_bcolor])
+!html_name cmd_drc_bcolor.html
+
+!iflang [german]
+Farbe für ""fetten"" Text bestimmen (nur DRC).
+!endif
+!iflang [english]
+Specify color of ""bold"" text (DRC only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/drc_bcolor (!COLOR)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Da DRC keine verschiedenen Schriftarten kennt, sondern Text
+lediglich farbig hervorheben kann, kann man mit diesem Befehl
+UDO mitteilen, in welcher Farbe fetter Text dargestellt werden soll.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Since DRC does not know about different text styles,
+but can display text in different colors, you can use
+this command to specify the color of bold text.
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [drc_icolor]), (!KW [drc_ucolor]), (!KKKW [B] [b])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [drc_flags])
+!html_name cmd_drc_flags.html
+
+!iflang [german]
+Wert für Nodefinition festlegen (nur DRC).
+!endif
+!iflang [english]
+Assign value to node definition (DRC only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/drc_flags <(!VALUE)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Hiermit kann man den Wert angeben, der als letzter numerischer Wert einer
+Nodedefinition gesetzt werden soll.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command can be used to assign a value that is printed
+as last numeric value of a node definition when converting to DRC.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/drc_flags 6(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!item [(!SEEALSO)]
+(!KW [drc_bcolor]), (!KW [drc_icolor]), (!KW [drc_ucolor])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [drc_icolor])
+!html_name cmd_drc_icolor.html
+
+!iflang [german]
+Farbe für ""kursiven"" Text bestimmen (nur DRC).
+!endif
+!iflang [english]
+Specify color of ""italic"" text (DRC only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/drc_icolor (!COLOR)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Da DRC keine verschiedenen Schriftarten kennt, sondern Text
+lediglich farbig hervorheben kann, kann man mit diesem Befehl
+UDO mitteilen, in welcher Farbe kursiver Text dargestellt werden soll.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Since DRC does not know about different text styles,
+but can display text in different colors, you can use
+this command to specify the color of italic text.
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [drc_bcolor]), (!KW [drc_ucolor]), (!KKKW [I] [i])
+
+!end_xlist
+
+!end_node
+################################################################################
+!begin_node (!kw [drc_ucolor])
+!html_name cmd_drc_ucolor.html
+
+!iflang [german]
+Farbe für ""unterstrichenen"" Text bestimmen (nur DRC).
+!endif
+!iflang [english]
+Specify color of ""underlined"" text (DRC only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/drc_ucolor (!COLOR)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Da DRC keine verschiedenen Schriftarten kennt, sondern Text
+lediglich farbig hervorheben kann, kann man mit diesem Befehl
+UDO mitteilen, in welcher Farbe unterstrichener Text dargestellt werden soll.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Since DRC does not know about different text styles,
+but can display text in different colors, you can use
+this command to specify the color of underlined text.
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [drc_icolor]), (!KW [drc_bcolor]), (!KKKW [U] [u])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!end_node
+
+################################################################################

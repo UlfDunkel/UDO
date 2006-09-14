@@ -1,0 +1,648 @@
+################################################################################
+!begin_node *!..
+!html_name cmd-other.html
+
+################################################################################
+!begin_node (!kw [! ])
+!html_name cmd_exclamation.html
+
+!iflang [german]
+Tabellen- oder Indexeinträge trennen.
+!endif
+!iflang [english]
+Divide table cells.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/!(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Ein doppeltes Ausrufungszeichen trennt die Zellen einer Tabellenzeile sowie Indexeinträge.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Double exclamation marks are used for splitting the cells of a table row and for multiple indices.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)!/index Ebene 1 !/! Ebene 2(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)!/index Level 1 !! Level 2(!t)
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen]), (!link [Indizes] [Indizes])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Tables] [Tables]), (!link [Indices] [Indices])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node !!~
+!html_name cmd_qtilde.html
+!label Tilde
+
+!iflang [german]
+Tilde ausgeben.
+!endif
+!iflang [english]
+Tilde
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!!~(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Diese Zeichenfolge wird nach der Umwandlung als Tilde
+dargestellt. Beachten Sie, daß eine einzige Tilde als
+festes Leerzeichen interpretiert wird.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+These characters will be printed as a tilde. Please remember that a
+single tilde is used for a non-breaking space.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+Aus (!T)!!~(!t) wird !~.
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)!!~(!t) becomes !~.
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [!~] [Festes Leerzeichen]), (!link [Feste Leerzeichen] [Feste Leerzeichen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [!~] [Non breaking space]), (!link [Non breaking spaces] [Non breaking spaces])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node !~
+!html_name cmd_tilde.html
+!label Festes Leerzeichen
+
+!iflang [german]
+Festes Leerzeichen.
+!endif
+!iflang [english]
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!~(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Die Tilde gilt in der UDO-Syntax als festes Leerzeichen. Wörter, zwischen denen ein festes
+Leerzeichen steht, werden nicht durch einen Zeilenumbruch voneinander getrennt. Beim Blocksatz werden an
+der Einsatzstelle auch keine Leerzeichen eingefügt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+42!~DM, Dr.!~Sommer
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [!!~] [Tilde]), (!link [Feste Leerzeichen] [Feste Leerzeichen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node ("")
+!html_name cmd_quote.html
+
+!iflang [german]
+Typographisches Anführungszeichen ausgeben.
+!endif
+!iflang [english]
+Print typographical quote.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)("")(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Zwei aufeinanderfolgende Anführungszeichen werden von UDO in die typographischen Anführungszeichen der
+benutzten Sprache umgewandelt, sofern das Ausgabeformat diese anzeigen kann. Andernfalls werden doppelte
+Anführungszeichen durch einfache ersetzt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Two quotes in a row will be replaced by one typographical quote if
+the destination format supports typographical quotes. If it doesn't
+UDO will replace two quotes by one quote.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)("")Typographische Anführungszeichen("")(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)("")typographical quotes("")(!t)
+!endif
+
+!item [(!SEEALSO)]
+(!link [((""))] [((""))]), (!link [('')] [('')]), (!KW [no_quotes])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node ('')
+!html_name cmd_apostrophe.html
+
+!iflang [german]
+Typographischen Apostroph ausgeben.
+!endif
+!iflang [english]
+Print typographical apostroph.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)('')(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Zwei aufeinanderfolgende Apostrophe werden von UDO in die typographischen Apostrophe der benutzten Sprache umgewandelt, sofern das Ausgabeformat diese anzeigen kann. Andernfalls werden doppelte Apostrophe
+durch einfache ersetzt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Two apostrophes in a row will be replaced by one typographical
+apostrophe if the destination format supports typographical
+apostrophes. If it doesn't UDO will replace two apostrophes by one apostrophe.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)('')Typographische Apostrophe('')(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)('')typographical apostrophes('')(!t)
+!endif
+
+!item [(!SEEALSO)]
+(!link [((''))] [((''))]), (!link [("")] [("")])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node ((""))
+!html_name cmd_qquote.html
+
+!iflang [german]
+Zwei Anführungszeichen ausgeben.
+!endif
+!iflang [english]
+Print two quotes.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)((""))(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wollen Sie zwei Anführungszeichen ausgeben, so müssen Sie diese klammern. Andernfalls würde UDO diese in
+typographische Anführungszeichen umwandeln.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If you want to print two quotes you have to insert them between
+brackets. If you don't UDO will replace the two quotes by a
+typographical quote.
+!endif
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!link [("")] [("")])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node ((''))
+!html_name cmd_qapostrophe.html
+
+!iflang [german]
+Zwei Apostrophe ausgeben.
+!endif
+!iflang [english]
+Print two apostrophes.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)((''))(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wollen Sie zwei Apostrophe ausgeben, so müssen Sie diese klammern.
+Andernfalls würde UDO diese in typographische Apostrophe umwandeln.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If you want to print two apostrophes you have to insert them between
+brackets. If you don't UDO will replace the two apostrophes by a
+typographical apostrophe.
+!endif
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!link [('')] [('')])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node ((--))
+!html_name cmd_qdash.html
+
+!iflang [german]
+Zwei Minuszeichen ausgeben.
+!endif
+!iflang [english]
+Print two dashes.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)((--))(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wenn Sie zwei Minuszeichen ausgegeben wollen, so müssen Sie diese Klammern. Andernfalls würde UDO
+diese beiden Minuszeichen in einen kurzen Gedankenstrich umwandeln.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If you want to print two minus characters you have to insert them
+between brackets. If you don't UDO will replace the two minus
+characters by a short dash
+!endif
+
+!item [(!EXAMPLE)]
+(!T)((--))outfile(!t)
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [(--)] [(--)]), (!link [(---)] [(---)]), (!link [Gedankenstriche] [Gedankenstriche])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [(--)] [(--)]), (!link [(---)] [(---)]), (!link [Dashes] [Dashes])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node ((---))
+!html_name cmd_qldash.html
+
+!iflang [german]
+Drei Minuszeichen ausgeben.
+!endif
+!iflang [english]
+Print three dashes.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)((---))(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wenn Sie drei Minuszeichen ausgegeben wollen, so müssen Sie diese Klammern. Andernfalls würde UDO
+diese drei Minuszeichen in einen langen Gedankenstrich umwandeln.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If you want to print three minus characters you have to insert them
+between brackets. If you don't UDO will replace the three minus
+characters by a long dash.
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [(---)] [(---)]), (!link [(--)] [(--)]), (!link [Gedankenstriche] [Gedankenstriche])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [(---)] [(---)]), (!link [(--)] [(--)]), (!link [Dashes] [Dashes])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (--)
+!html_name cmd_dash.html
+
+!iflang [german]
+Kurzen Gedankenstrich ausgeben.
+!endif
+!iflang [english]
+Output a short dash.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(--)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Zwei aufeinanderfolgende Minuszeichen werden von UDO in einen kurzen Gedankenstrich umgewandelt, sofern
+das Ausgabeformat Gedankenstriche anzeigen kann. Andernfalls werden die beiden Minuszeichen durch
+eines ersetzt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Two minus characters in a row will be replaced by a short dash if the
+destination format supports them. If the destination format doesn't
+support them UDO will print one normal minus character instead.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)Ein kurzer (--) ähm, achso (--) Gedankenstrich(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)A short (--) er, ah (--) dash.(!t)
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [(---)] [(---)]), (!link [((--))] [((--))]), (!link [Gedankenstriche] [Gedankenstriche])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [(---)] [(---)]), (!link [((--))] [((--))]), (!link [Dashes] [Dashes])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (---)
+!html_name cmd_ldash.html
+
+!iflang [german]
+Langen Gedankenstrich ausgeben.
+!endif
+!iflang [english]
+Output a long dash.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(---)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Drei aufeinanderfolgende Minuszeichen werden von UDO in einen langen Gedankenstrich umgewandelt, sofern
+das Ausgabeformat Gedankenstriche anzeigen kann. Andernfalls werden die beiden Minuszeichen durch eines ersetzt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Three minus characters in a row will be replaced by a long dash if
+the destination format supports them. If the destination format
+doesn't support them UDO will print one normal minus character
+instead.
+
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)Ein langer (---) ähm, achso (---) Gedankenstrich(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)A long (---) er, ah (---) dash(!t)
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [((---))] [((---))]), (!link [(--)] [(--)]), (!link [Gedankenstriche] [Gedankenstriche])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [((---))] [((---))]), (!link [(--)] [(--)]), (!link [Dashes] [Dashes])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!k1 [/-])
+!html_name cmd_syllable.html
+
+!iflang [german]
+Marke für eine mögliche Trennstelle.
+!endif
+!iflang [english]
+Set syllabification mark.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/-(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Hiermit können Sie Stellen in einem Wort markieren, an denen UDO das Wort trennen darf. Das Beispiel
+zeigt, wie man die Stellen des Wortes ""Silbentrennung"" markieren könnte.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+With these characters you can mark the positions of a word where UDO
+is allowed to split it up. The example shows how to mark the
+syllables of ""syllabification"".
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)Sil!/-ben!/-tren!/-nung(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)syl!/-labi!/-fi!/-cation(!t)
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [hyphen]), (!K1 [//-])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [/..])
+!html_name cmd_dots.html
+
+!iflang [german]
+Typographische drei Punkte ausgeben.
+!endif
+!iflang [english]
+Output typographical dots.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/..(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Ein Ausrufungszeichen, gefolgt von zwei Punkten, wandelt UDO in typographische drei Punkte um, sofern
+das Ausgabeformat diese anzeigen kann. Ansonsten wandelt UDO !/.. in drei normale Punkte um.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+An exclamation mark followed by two points will be replaced by
+typographical three dots if the destination format allows it to
+display them. If not, UDO will replace them by three normal dots.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+Aus (!T)!/..(!t) wird !...
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)!/..(!t) is converted to !...
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!k1 [//-])
+!html_name cmd_qsyllable.html
+
+!iflang [german]
+Die Zeichenfolge !/- ausgeben.
+!endif
+!iflang [english]
+Print the character string !/-.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!//-(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Diese Zeichenfolge wird nach der Umwandlung als !/- dargestellt. Beachten Sie, daß (!K1 [/-]) als
+Trennstelle interpretiert wird.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This string will be converted to !/-.
+Please note that (!K1 [/-]) would be interpreted as syllabification mark.
+
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+Aus (!T)!//-(!t) wird !/-.
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)!//-(!t) becomes !/-.
+!endif
+
+!item [(!SEEALSO)]
+(!KW [hyphen]), (!K1 [/-])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!end_node
+
+################################################################################

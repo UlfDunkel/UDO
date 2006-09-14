@@ -1,0 +1,1196 @@
+################################################################################
+!begin_node T!..
+!html_name cmd-t.html
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [=tex])
+!html_name cmd_tex-eq.html
+
+!iflang [german]
+Abfrage des Ausgabeformates.
+!endif
+!iflang [english]
+Query the destination format.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/=tex <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[tex!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!begin_node (!kkkw [T] [t])
+!html_name cmd_T().html
+!label (!kk1 [/T])
+!label (!kk1 [/t])
+
+!iflang [german]
+Text in Schreibmaschinenschrift ausgeben.
+!endif
+!iflang [english]
+Print text in typewriter.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/T)<(!TEXT)>(!/t)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+""<text>"" wird in Schreibmaschinenschrift dargestellt, falls möglich. Diese Schriftart wird von fast allen Ausgabeformaten unterstützt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+""<text>"" will be displayed in typewriter if possible.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)(!/T)monospaced(!/t)(!t)
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Texthervorhebungen] [Texthervorhebungen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Emphasizing text] [Emphasizing text])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kkw [TeX])
+!html_name cmd_TeX().html
+
+!iflang [german]
+(!TeX)-Schriftzug ausgeben.
+!endif
+!iflang [english]
+Print the (!TeX) symbol.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/TeX)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird bei der Umwandlung ins
+(!LaTeX)-Format in ''(!V)\TeX{}(!v)'', ansonsten in ""TeX"" umgewandelt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This placeholder will be replaced by (!V)\TeX{}(!v) when converting
+to (!LaTeX). Otherwise it will be replace by ""TeX"".
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+Aus (!T)(!/TeX)(!t) wird (!TeX).
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/TeX)(!t) is printed as (!TeX).
+!endif
+
+!item [(!SEEALSO)]
+(!KKW [LaTeX]), (!KKW [LaTeXe])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [table_alignment])
+!html_name cmd_table_alignment.html
+
+!iflang [german]
+Ausrichtung für Tabellen bestimmen.
+!endif
+!iflang [english]
+Set aligment of tables.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/table_alignment [left|center|right](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Im Vorspann eingesetzt, bestimmt es die Standard-Ausrichtung von
+(!link [Tabellen] [Tabellen]), die mit (!KW [begin_table]) eingebunden werden. Diese Ausrichtung
+wird genau dann benutzt, wenn eine Tabelle außerhalb einer center-,
+flushleft- oder flushright-Umgebung ausgegeben werden soll. Wird eine
+Tabelle innerhalb einer solchen Umgebung ausgegeben, wird sie genauso
+ausgerichtet wie der Text innerhalb der Umgebung, sprich eine Tabelle wird
+in einer center-Umgebung zentriert ausgegeben, unabhängig davon, was
+man bei (!KW [table_alignment]) gesetzt hat. Will man eine Tabelle in einer
+center-Umgebung rechtsbündig ausgeben, so muß man in dem Fall noch
+eine flushright-Umgebung um den (!KW [begin_table])-Befehl setzen.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Used in the preamble this command determines the default
+alignment of tables that are included with the (!KW [begin_table]) command.
+This alignment will be used when a table is placed outside
+a center, flushleft or flushright environment.
+When a table is placed inside such an environment,
+it will be aligned according to the text of the environment,
+independent of the setting of the (!KW [table_alignment]) command.
+If you want to align a table right inside a center environment,
+you will have to insert a flushright environment around
+the (!KW [begin_table]) and (!KW [end_table]) commands.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/table_alignment left(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [begin_table]), (!link [Tabellen] [Tabellen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [begin_table]), (!link [Tables] [Tables])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [table_caption])
+!html_name cmd_table_caption.html
+
+!iflang [german]
+Titel der nächsten Tabelle setzen.
+!endif
+!iflang [english]
+Set title of next table.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/table_caption <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando wird der Titel der nächsten
+Tabelle gesetzt. Dieses Kommando muß außerhalb der
+table-Umgebung benutzt werden. Für die erste Tabelle
+würde UDO dann beim Beispiel als Titel ""Tabelle 1: Ein Tabellentitel"" ausgeben.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Use this command to set the title of the next table. You have to use
+this command outside the table environment. For the first table of
+your source file UDO will print ""Table 1: A table"" if you use the
+example below.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)!/table_caption Ein Tabellentitel(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)!/table_caption A table title(!t)
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen]), (!KW [table_caption*])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Tables] [Tables]), (!KW [table_caption*])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [table_caption*])
+!html_name cmd_table_caption_asterisk.html
+
+!iflang [german]
+Titel der nächsten Tabelle setzen.
+!endif
+!iflang [english]
+Set title of next table.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/table_caption* <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Der einzige Unterscheid zum Kommando (!KW [table_caption])
+ist der, daß UDO dem Tabellentitel nicht ""Tabelle <nummer>:"" voranstellt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+The difference between this and the (!KW [table_caption]) command
+is that UDO won't print ""Table <no>:"" before the table caption.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)!/table_caption* Ein Tabellentitel(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)!/table_caption* A table title(!t)
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~0
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen]), (!KW [table_caption])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Tables] [Tables]), (!KW [table_caption])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [table_counter])
+!html_name cmd_table_counter.html
+
+!iflang [german]
+Tabellenzähler setzen.
+!endif
+!iflang [english]
+Set table counter.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/table_counter [<(!VALUE)>](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Schalter können Sie die Nummer festlegen,
+die bei der ersten Tabelle ausgegeben werden soll.
+Würde das Beispiel verwendet, so stünde unterhalb der
+ersten Tabelle folgendes: ""Tabelle~5: !.."".
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+With this switch you can set the table counter. If you use the lower
+example the caption of the first table will look like this: ""Table~5: !.."".
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/table_counter 5(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~15
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Tables] [Tables])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [tableofcontents])
+!html_name cmd_tableofcontents.html
+
+!iflang [german]
+Inhaltsverzeichnis ausgeben.
+!endif
+!iflang [english]
+Print table of contents.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/tableofcontents !/depth <(!VALUE)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando gibt ein komplettes Inhaltsverzeichnis aus, welches
+durch ausgabeformatspezifische Kommandos eingefaßt und in Hypertexten
+auf einer eigenen Seite dargestellt wird. Dieses Kommando sollte direkt
+nach (!KW [begin_document]) bzw. nach (!KW [maketitle]) eingesetzt
+werden. Der Umfang des Inhaltsverzeichnis läßt sich durch den Schalter
+(!KW [use_short_tocs]) oder durch Angabe des Schalters
+(!KW [depth]) verkleinern.
+Das Beispiel zeigt, wie man ein Inhaltsverzeichnis ausgibt,
+das nur die Nodes (1.~Ebene) enthält.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Generates a full table of contents with specific commands of the
+destination format. I recommend to use this command right after using
+(!KW [begin_document] or (!KW [maketitle]). You can influence the
+depth of the table with the switch behind the command. The
+example shows how to print a table of contents that contains
+only the chapters.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/tableofcontents !/depth 1(!t)
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse]), (!KW [use_short_tocs]), (!KW [toc]), (!KW [depth])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Tables of contents] [Tables of contents]), (!KW [use_short_tocs]), (!KW [toc]), (!KW [depth])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [tabwidth])
+!html_name cmd_tabwidth.html
+
+!iflang [german]
+Tabulatorbreite für verbatim-Umgebungen setzen.
+!endif
+!iflang [english]
+Set tabulator width of verbatim environments.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/tabwidth <(!VALUE)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Enthalten Zeilen einer verbatim-Umgebung Tabulatoren,
+so wandelt UDO diese entsprechend dem angegebenen
+<wert> in Leerzeichen um. Wollen Sie beispielsweise
+Sourcecodes darstellen, die sie mit einer
+Tabulatorweite von 4 erstellt haben, so sollten Sie
+das folgende Beispiel vor der verbatim-Umgebung bzw.
+vor (!KW [vinclude]) angeben. (!KW [tabwidth]) kann überall und
+beliebig oft im Quelltext angegeben werden. <wert>
+wird jeweils für die nächste verbatim-Umgebung
+verwendet. Standardmäßig benutzt UDO den Wert 8.
+Benutzt man 0 als <wert>, so wandelt UDO die Tabulatoren nicht um.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If lines that are part of a verbatim environment contain TABs
+(ASCII~9) UDO will replace them by a specific number of blanks. E.g.
+if you have written a C source code using a tabwidth of 3 and you
+want to print it with UDO you can use (!KW [tabwidth] [3]). You can
+reset this value before every verbatim environment. UDO will use a
+value of 8 by default.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/tabwidth 4(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~10
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [verbatim-Umgebung] [verbatim-Umgebung]), (!KW [vinclude])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [verbatim environment] [verbatim environment]), (!KW [vinclude])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [tex])
+!html_name cmd_tex.html
+
+!iflang [german]
+Abfrage des Ausgabeformates.
+!endif
+!iflang [english]
+Query the destination format.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/tex <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[tex!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+# ToDo: Englisch
+!begin_node (!kkw [teal])
+!html_name cmd_teal.html
+
+!iflang [german]
+Setzen den Schriftfarbe auf ?.
+!endif
+!iflang [english]
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/teal)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe auf ?.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
+Postscript unterstürzt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: englisch
+!begin_node (!kw [tex_209])
+!html_name cmd_tex_209.html
+
+!iflang [german]
+(!LaTeX)~2.09 Kommandos benutzen (nur (!TeX)).
+!endif
+!iflang [english]
+Use (!LaTeXe) commands ((!TeX) only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_209(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+UDO erzeugt bei der Umwandlung ins (!LaTeX)-Format
+(!LaTeX)~2.09-Kommandos.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+UDO will output special (!LaTeXe) commands if you use this command
+e.g. (!V)\textbf{...}(!v) instead of (!V){\bf ...}(!v)
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [tex_2e])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [tex_2e])
+!html_name cmd_tex_2e.html
+
+!iflang [german]
+(!LaTeXe)-Kommandos benutzen (nur (!TeX)).
+!endif
+!iflang [english]
+Use (!LaTeXe) commands ((!TeX) only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_2e(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+UDO erzeugt bei der Umwandlung ins (!LaTeX)-Format
+spezielle (!LaTeXe)-Kommandos, wie eine Preambel für
+(!LaTeXe) oder ''(!V)\textbf{!..}(!v)'' anstelle von ''(!V){\bf~!..}(!v)''
+bei der Umwandlung von (!KK1 [B]).
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+UDO will output special (!LaTeXe) commands if you use this command
+e.g. (!V)\textbf{...}(!v) instead of (!V){\bf ...}(!v)
+!endif
+
+!item [(!SEEALSO)]
+(!KW [tex_209])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [tex_book])
+!html_name cmd_tex_book.html
+
+!iflang [german]
+Zieldatei als ""Buch"" ausgeben.
+!endif
+!iflang [english]
+Use a book style.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_book(!t)
+
+!item [(!DESCRIPTION)]
+# Der Befehl (!KW [tex_book]) existiert nicht mehr.
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [use_style_book] [[tex!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [use_style_book])
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!begin_node (!kw [tex_dpi])
+!html_name cmd_tex_dpi.html
+
+!iflang [german]
+Grafikauflösung setzen (nur (!TeX)).
+!endif
+!iflang [english]
+Set graphic resolution (!TeX) only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/tex_dpi <(!VALUE)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Setzt die Auflösung, mit der Bilder in (!LaTeX)
+ausgegeben werden sollen. Beim Lindner-(!TeX) wird
+dieser Wert herangezogen, um den Header eines GEM-Images zu verändern.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Sets the resolution with which images should be output via (!LaTeX).
+For Lindner-(!TeX), this value will be used for modifying the header of a GEM image.
+# Satz 2 ergänzt 20.12.2003 - Ulrich Kretschmer
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/tex_dpi 100(!t)
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [tex_strunk]), (!KW [tex_lindner]), (!KW [tex_emtex]), (!KW [image]), (!link [Bilder] [Bilder])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [tex_strunk]), (!KW [tex_lindner]), (!KW [tex_emtex]), (!KW [image]), (!link [Images] [Images])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [tex_emtex])
+!html_name cmd_tex_emtex.html
+
+!iflang [german]
+Grafikmakros für em(!TeX) erzeugen (nur (!TeX)).
+!endif
+!iflang [english]
+Create graphic commands for em(!TeX) ((!TeX) only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_emtex(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Gibt an, daß bei der Einbindung von Windows-Paintshop-Bildern ein (!TeX)-Makro für em(!TeX) erzeugt
+werden soll.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This switch says UDO to generate special em(!TeX) commands to display
+Windows Paintshop Bitmaps ((!V)*.msp(!v)) when using the (!KW [image]) command.
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [tex_tetex]), (!KW [tex_strunk]), (!KW [tex_lindner]), (!KW [tex_miktex]), (!KW [image]), (!link [Bilder] [Bilder])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [tex_tetex]), (!KW [tex_strunk]), (!KW [tex_lindner]), (!KW [tex_miktex]), (!KW [image]), (!link [Images] [Images])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [tex_lindner])
+!html_name cmd_tex_lindner.html
+
+!iflang [german]
+Grafikmakros für Lindner-(!TeX) erzeugen (nur (!TeX)).
+!endif
+!iflang [english]
+Create graphic commands for Lindner-(!TeX) ((!TeX) only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_lindner(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Gibt an, daß bei der Einbindung von Bildern ein (!TeX)-Makro für das Lindner-(!TeX) erzeugt werden soll.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This switch says UDO to generate special Lindner-(!TeX) commands to
+display GEM images when using the (!KW [image]) command.
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [tex_tetex]), (!KW [tex_strunk]), (!KW [tex_emtex]), (!KW [tex_miktex]), (!KW [image]), (!link [Bilder] [Bilder])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [tex_tetex]), (!KW [tex_strunk]), (!KW [tex_emtex]), (!KW [tex_miktex]), (!KW [image]), (!link [Images] [Images])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [tex_miktex])
+!html_name cmd_tex_miktex.html
+
+!iflang [german]
+Grafikmakros für MiK-(!TeX) erzeugen (nur (!TeX)).
+!endif
+!iflang [english]
+Create graphic commands for MiK-(!TeX) ((!TeX) only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_miktex(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Gibt an, daß bei der Einbindung von Bildern ein (!TeX)-Makro für das MiK-(!TeX) erzeugt werden soll.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This switch says UDO to generate special MiK-(!TeX) commands to
+display GEM images when using the (!KW [image]) command.
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~8
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [tex_tetex]), (!KW [tex_strunk]), (!KW [tex_emtex]), (!KW [tex_lindner]), (!KW [image]), (!link [Bilder] [Bilder])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [tex_tetex]), (!KW [tex_strunk]), (!KW [tex_emtex]), (!KW [tex_lindner]), (!KW [image]), (!link [Images] [Images])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [tex_strunk])
+!html_name cmd_tex_strunk.html
+
+!iflang [german]
+Grafikmakros für CS(!TeX) erzeugen (nur (!TeX)).
+!endif
+!iflang [english]
+Create graphic commands for CS(!TeX) ((!TeX) only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_strunk(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Gibt an, daß bei der Einbindung von Bildern ein (!TeX)-Makro für das CS- oder Multi(!TeX) erzeugt werden soll.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This switch says UDO to generate special Strunk-(!TeX) commands to
+display GEM images when using the (!KW [image]) command.
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [tex_tetex]), (!KW [tex_lindner]), (!KW [tex_emtex]), (!KW [tex_miktex]), (!KW [image]), (!link [Bilder] [Bilder])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [tex_tetex]), (!KW [tex_lindner]), (!KW [tex_emtex]), (!KW [tex_miktex]), (!KW [image]), (!link [Images] [Images])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: englisch
+!begin_node (!kw [tex_tetex])
+!html_name cmd_tex_tetex.html
+
+!iflang [german]
+Grafikmakros für te(!TeX) erzeugen (nur (!TeX)).
+!endif
+!iflang [english]
+Create graphic commands for te(!TeX) ((!TeX) only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/tex_tetex(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Aktiviert Kommandos um EPS-Grafiken mittels usepackage{graphicx} einzubinden.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This switch says UDO to generate special Strunk-(!TeX) commands to
+display GEM images when using the (!KW [image]) command.
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [tex_strunk]), (!KW [tex_lindner]), (!KW [tex_emtex]), (!KW [tex_miktex]), (!KW [image]), (!link [Bilder] [Bilder])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [tex_strunk]), (!KW [tex_lindner]), (!KW [tex_emtex]), (!KW [tex_miktex]), (!KW [image]), (!link [Images] [Images])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [tex_verb])
+!html_name cmd_tex_verb.html
+
+!iflang [german]
+Verbatim-Zeichen für (!LaTeX) setzen (nur (!TeX))
+!endif
+!iflang [english]
+Set verbatim character for (!LaTeX) ((!TeX) only)
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/tex_verb <(!CHAR)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+""<zeichen>"" wird als Klammerungszeichen für den
+(!LaTeX)-Befehl ''(!V)\verb(!v)'' verwendet. Bei der nächsten
+Umwandlung von (!KK1 [V]) und (!KK1 [v]) wird dann ""<zeichen>""
+benutzt. Als Defaultzeichen benutzt UDO ""+"".
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+""<char>"" will be used as the sign for the (!LaTeX) command
+(!V)\verb(!v). ""+"" will be used by default.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/tex_verb |(!t)
+
+!item [(!SEEALSO)]
+(!KKKW [V] [v])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [title])
+!html_name cmd_title.html
+
+!iflang [german]
+Dokumenttitel definieren.
+!endif
+!iflang [english]
+Set document information.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/title <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [docinfo] [[title!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Titelseite] [Titelseite])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Title page] [Title page])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!begin_node (!kw [toc])
+!html_name cmd_toc.html
+
+!iflang [german]
+Inhaltsverzeichnis ""alleine"" ausgeben.
+!endif
+!iflang [english]
+Output table of contents.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/toc [(!FORMAT)] !/depth <(!VALUE)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Gibt ein komplettes Inhaltsverzeichnis aus. Im
+Gegensatz zu (!KW [tableofcontents]) wird dabei bei
+Hypertextformaten keine eigene Seite erzeugt. Im
+Beispiel würde das Inhaltsverzeichnis bei der
+Umwandlung ins ST-Guide-Format ausgegeben.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Outputs a table of contents without special page or hypertext
+commands. The example shows how to output a table of contents (as raw
+text) for the ST-Guide.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/toc [stg](!t)
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [depth]), (!KW [use_short_tocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [depth]), (!KW [use_short_tocs]), (!link [Tables of contents] [Tables of contents])
+!endif
+
+!end_xlist
+
+!end_node
+
+
+################################################################################
+!begin_node (!kw [toc_offset])
+!html_name cmd_toc_offset.html
+
+!iflang [german]
+Offset für die Kapitelnumerierung setzen.
+!endif
+!iflang [english]
+Set offset of chapter counter.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/toc_offset <(!VALUE)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+""<wert>"" wird bei der Ausgabe der Kapitelnummern zu
+der aktuellen Nummer hinzugezählt. Im Beispiel würde
+das erste Kapitel mit der Nummer~10 ausgegeben. Es
+können auch negative Werte benutzt werden. Dieser
+Schalter hat keine Wirkung auf Kapitel des Anhangs.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+""<value>"" will be added to the current
+chapter counter when printing a headline or a table of contents.
+The example shows how to print the first
+chapter with the number 10. You can also specify
+negative values. This switch does not affect
+chapters of the appendix.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/toc_offset 9(!t)
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [subtoc_offset]), (!KW [subsubtoc_offset]), (!KW [subsubsubtoc_offset])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [subtoc_offset]), (!KW [subsubtoc_offset]), (!KW [subsubsubtoc_offset])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kkw [today])
+!html_name cmd_today().html
+
+!iflang [german]
+Systemdatum in langer Schreibweise ausgeben.
+!endif
+!iflang [english]
+Insert long form of current date.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/today)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das bei der Umwandlung aktuelle Systemdatum in langer Form ersetzt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This placeholder will be replaced by the long form of the current date.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+Aus (!T)(!/today)(!t) wird (!today).
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/today)(!t) becomes (!today).
+!endif
+
+!item [(!SEEALSO)]
+(!KKW [short_today]), (!KW [language])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [toplink])
+!html_name cmd_toplink.html
+
+!iflang [german]
+Link auf Seitenanfang erzeugen (nur HTML und HTML-Help).
+!endif
+!iflang [english]
+Create link to top of page (HTML and HTML-Help only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/toplink(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+UDO sichert für HTML und HTML-Help eine Datei namens
+""(!V)udo_tp.gif(!v)"". Mit diesem Kommando kann man in sein Werk die
+Grafik einbinden. Zugleich wird ein Link auf den Seitenanfang erzeugt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+UDO saves a file named ""(!V)udo_tp.[gif,bmp,img](!v)"" when
+converting to HTML or HTML-Help. With this command
+you can include this image. Additionally a link
+to the top of the page is generated.
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [town])
+!html_name cmd_town.html
+
+!iflang [german]
+Wohnort des Autors für den Adreßblock der Titelseite setzen.
+!endif
+!iflang [english]
+Set document information.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/town <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [docinfo] [[address!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Titelseite] [Titelseite])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Title page] [Title page])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!end_node
+
+################################################################################

@@ -1,0 +1,46 @@
+################################################################################
+!begin_node K!..
+!html_name cmd-k.html
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [keyword])
+!html_name cmd_keyword.html
+
+!iflang [german]
+Indexeintrag bzw. Schlüsselwort setzen.
+!endif
+!iflang [english]
+Set index entry.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/keyword <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Befehl existiert nicht mehr und wurde umbenannt in (!KW [index]).
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command has been renamed to (!KW [index]).
+!endif
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.44
+
+!item [(!EXISTEDUNTIL)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!KW [index])
+
+!end_xlist
+
+!end_node
+!endif
+
+!end_node
+
+################################################################################

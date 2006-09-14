@@ -1,0 +1,621 @@
+################################################################################
+!begin_node R!..
+!html_name cmd-r.html
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [=rtf])
+!html_name cmd_rtf-eq.html
+
+!iflang [german]
+Abfrage des Ausgabeformates.
+!endif
+!iflang [english]
+Query the destination format.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/=rtf <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[rtf!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!begin_node (!kkw [raw])
+!html_name cmd_raw().html
+
+!iflang [german]
+Text nur für bestimmte Formate ausgeben.
+!endif
+!iflang [english]
+Insert special command, for certain destination formats.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/raw [(!FORMAT)] [<(!TEXT)>])(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+(!T)<text>(!t) wird nur dann ausgegeben, wenn die Quelldatei
+in eines der angegebenen Formate umgewandelt wird. (!T)<text>(!t)
+wird dann 1:1 und ohne Berücksichtigung etwaiger UDO-Kommandos ausgegeben.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+(!T)<text>(!t) will only be printed when converting to one
+of the specified destination formats. (!T)<text>(!t)
+will be printed then without any conversion.
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [raw])
+!html_name cmd_raw.html
+
+!iflang [german]
+Zeile nur für bestimmte Formate ausgeben.
+!endif
+!iflang [english]
+Print raw string for destination format.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/raw [(!FORMAT)] <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+(!T)<text>(!t) wird nur dann ausgegeben, wenn die Quelldatei
+in eines der angegebenen Formate umgewandelt wird. (!T)<text>(!t)
+wird dann 1:1 und ohne Berücksichtigung etwaiger UDO-Kommandos
+ausgegeben. Diese Zeile zerteilt Absätze genau wie alle anderen Kommandos.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+""<text>"" will only be printed if you convert into
+one of the specified formats. ""<text>"" will be not converted!
+!endif
+
+!item [(!EXAMPLE)]
+!/raw [stg] @subject Documentation/Utilities
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: Englisch
+!begin_node (!kkw [red])
+!html_name cmd_red.html
+
+!iflang [german]
+Setzen den Schriftfarbe auf rot.
+!endif
+!iflang [english]
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/red)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe auf rot.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
+Postscript unterstürzt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [rinclude])
+!html_name cmd_rinclude.html
+
+!iflang [german]
+Datei 1:1 einbinden.
+!endif
+!iflang [english]
+Include file without conversion.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/rinclude <(!FILE)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Öffnet die Datei ""<datei>"" und gibt deren Inhalt unformatiert an der
+Stelle aus, an der dieses Kommando benutzt wurde. Der Inhalt der Datei
+wird nicht eingerückt oder zentriert ausgegeben. Die raw-Umgebung dient
+dazu, spezielle Formatbefehle einzubinden. Enthält der Dateiname Leerzeichen,
+muß er in Anführungsstriche gesetzt werden.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+""<file>"" will be included and output unformatted inside a raw
+environment. Useful for large tables for (!LaTeX) or HTML.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/rinclude table.tex(!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.41
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [include]), (!KW [vinclude]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [raw-Umgebung] [raw-Umgebung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [include]), (!KW [vinclude]), (!link [Split documents] [Split documents]), (!link [raw environment] [raw environment])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [rtf])
+!html_name cmd_rtf.html
+
+!iflang [german]
+Abfrage des Ausgabeformates.
+!endif
+!iflang [english]
+Query the destination format.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/rtf <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[rtf!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+# ToDo: Englisch
+!begin_node (!kw [rtf_add_colour])
+!html_name cmd_rtf_add_colour.html
+
+!iflang [german]
+Zeichenbreite einstellen (nur RTF).
+!endif
+!iflang [english]
+Set character width (RTF only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/rtf_add_colour <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando könnenzusätzliche Farben (über die 16 Standardfarben
+hinaus) in den Kopf einer RTF-Datei geschrieben werden.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando könnenzusätzliche Farben (über die 16 Standardfarben
+hinaus) in den Kopf einer RTF-Datei geschrieben werden.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/rtf_addcolour \red153\green204\blue255(!t)
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [rtf_charwidth])
+!html_name cmd_rtf_charwidth.html
+
+!iflang [german]
+Zeichenbreite einstellen (nur RTF).
+!endif
+!iflang [english]
+Set character width (RTF only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/rtf_charwidth <(!VALUE)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+UDO benutzt zur Ausrichtung der xlist-Umgebungen und
+der Tabellen einen Wert für die Berechnung der
+Einrückungen und Zellenbreiten. Dieser Wert ist so
+ausgelegt, daß auch nichtproportionale fette
+Großschrift noch richtig formatiert wird. Bei
+normaler Schrift kann es jedoch sein, daß die Zeichen
+zu weit eingerückt werden oder daß Tabellenzellen zu
+breit erscheinen. Mit diesem Schalter können sie den
+Berechnungswert anpassen. Standardmäßig benutzt UDO den Wert 150.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+UDO uses a constant value for caclulating the indent of lists and the
+widths of table cells. This value works even fine with bold
+monospaced capital letters, but if you use normal text the indents or
+table cells my be too width. You can adjust this value by using
+(!KW [rtf_charwidth]). UDO uses 150 by default.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/rtf_charwidth 100(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen]), (!link [Listen] [Listen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Tables] [Tables]), (!link [Lists] [Lists])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [rtf_keep_tables])
+!html_name cmd_rtf_keep_tables.html
+
+!iflang [german]
+Seitenumbruch vor Tabelle erzeugen (nur RTF).
+!endif
+!iflang [english]
+Insert pagebreak before tables (RTF only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/rtf_keep_tables [on|off](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wird dieser Schalter benutzt, so gibt UDO alle folgenden Tabellen so
+aus, daß z.B. WinWord Tabellen am Seitenende nicht umbricht, sondern
+den Seitenumbruch vor der Tabelle erzeugt. Mit [off] schaltet man
+diesen Effekt für alle folgenden Tabellen wieder aus. Default ist [off].
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If you use this switch, UDO will output all following tables such that
+for example WinWord won't split them at the end of the page,
+but insert a pagebreak before the table. Using [off] you turn
+can this effect off again.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/rtf_keep_tables [on](!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [rtf_no_tables]), (!link [Tabellen] [Tabellen]), (!link [Listen] [Listen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [rtf_no_tables]), (!link [Tables] [Tables]), (!link [Lists] [Lists])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [rtf_monofont])
+!html_name cmd_rtf_monofont.html
+
+!iflang [german]
+Namen des Monospaced-Font für RTF setzen.
+!endif
+!iflang [english]
+Set name of monospaced font (RTF only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/rtf_monofont <fontname>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando kann man den Font setzen, der zur
+Darstellung von Klartext benutzt werden soll. Als
+Default verwendet UDO den Font ""Courier New"".
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+With this command you can set the font that will be used to display
+preformatted text. The default is ""Courier New"".
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/rtf_monofont Monospace 821(!t)
+
+!item [(!SEEALSO)]
+(!KW [rtf_propfont]), (!KW [rtf_monofont_size])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: englisch
+!begin_node (!kw [rtf_monofont_size])
+!html_name cmd_rtf_monofont_size.html
+
+!iflang [german]
+Größe des Monospaced-Font für RTF setzen.
+!endif
+!iflang [english]
+Set monospaced font (RTF only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/rtf_monofont_size <wert>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando kann man die Größe des Font setzen, der zur
+Darstellung von Klartext benutzt werden soll.
+Als Default verwendet UDO 10pt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+With this command you can set the font that will be used to display
+text inside a Windows Help hypertext. The default is 10pt.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/rtf_monofont_size 10(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [rtf_monofont])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [rtf_no_tables])
+!html_name cmd_rtf_no_tables.html
+
+!iflang [german]
+ASCII- statt RTF-Tabellen erzeugen.
+!endif
+!iflang [english]
+Print ASCII table (RTF only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/rtf_no_tables(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Benutzt man diesen Schalter im (!PREAMBLE), so werden
+Tabellen nicht mit RTF-Kommandos erzeugt, sondern wie
+ASCII-Tabellen in einem nichtproportionalen Font
+ausgegeben. Der Schalter dient dazu, RTF-Dateien auch
+für solche Textverarbeitungssysteme zu erzeugen, die
+keine RTF-Tabellen importieren können.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If you use this command inside the preamble UDO prints tables without
+using special RTF commands. It will print the table ASCII like with a
+monospaced font.
+!endif
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Tables] [Tables])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [rtf_propfont])
+!html_name cmd_rtf_propfont.html
+
+!iflang [german]
+Namen des Proportional-Fonts für RTF setzen.
+!endif
+!iflang [english]
+Set name of proportional font (RTF only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/rtf_propfont <fontname>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando kann man den Font setzen, der zur
+Darstellung von Fließtext und Überschriften benutzt
+werden soll. Als Default verwendet UDO den Font ""Times New Roman"".
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+With this command you can set the font that will be used to display
+text and headings. The default is ""Times New Roman"".
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/rtf_propfont Dutch 801 Roman(!t)
+
+!item [(!SEEALSO)]
+(!KW [rtf_monofont]), (!KW [rtf_propfont_size])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: englisch
+!begin_node (!kw [rtf_propfont_size])
+!html_name cmd_rtf_propfont_size.html
+
+!iflang [german]
+Größe des Proportional-Font für RTF setzen.
+!endif
+!iflang [english]
+Set proportional font (RTF only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/rtf_propfont_size <wert>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando kann man die Größe des Font setzen, der zur
+Darstellung von Fließtext und Überschriften benutzt
+werden soll. Als Default verwendet UDO 11pt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+With this command you can set the font that will be used to display
+text inside a Windows Help hypertext. The default is 11pt.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/rtf_propfont_size 10(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [rtf_propfont])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!end_node
+
+################################################################################

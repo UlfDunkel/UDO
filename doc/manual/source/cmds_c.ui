@@ -1,0 +1,740 @@
+################################################################################
+!begin_node C!..
+!html_name cmd-c.html
+
+################################################################################
+!begin_node (!kw [chaptericon])
+!html_name cmd_cshaptericon.html
+
+!iflang [german]
+Grafik für Kapitel angeben.
+!endif
+!iflang [english]
+Set graphic for chapter.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/chaptericon <(!FILE)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando gibt den Namen einer Grafik an, welche UDO für
+den Link auf den aktuellen Node in der linken Spalte des
+""modernen"" Layouts verwenden soll. Bei Subnodes und tieferen
+Ebenen wird der Befehl momentan mißachtet.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+You can use this command to tell UDO which graphic
+should be used to generate a link to the current node
+in the left column of the ""modern"" layout.
+Right now, the command will be ignored inside
+sections and subsections.
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout]), (!KW [html_frames_layout]), (!KW [chaptericon_text]), (!KW [chaptericon_active])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [chaptericon_active])
+!html_name cmd_chaptericon_active.html
+
+!iflang [german]
+Grafik für aktives Kapitel angeben.
+!endif
+!iflang [english]
+Set graphic for active chapter.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/chaptericon_active <(!FILE>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Hier kann man für den linken Rahmen bzw. für die linke Spalte
+ein Bild angeben, das nur dann angezeigt wird, wenn das Kapitel
+oder eines dessen Unterkapitel angezeigt wird.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+You can use this command to tell UDO which graphic
+should be displayed in the left column of the ""modern""
+layout, if the current chapter or one of its subnodes is active.
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout]), (!KW [html_frames_layout]), (!KW [chaptericon]), (!KW [chaptericon_text])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [chaptericon_text])
+!html_name cmd_chaptericon_text.html
+
+!iflang [german]
+Text für Kapitel-Grafik angeben.
+!endif
+!iflang [english]
+Set text for chapter icon.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/chaptericon_text <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Hiermit kann man einen Text unterhalb eines Chaptericons darstellen.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+""<text>"" will be displayed below the graphic of a (!KW [chaptericon]).
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout]), (!KW [html_frames_layout]), (!KW [chaptericon]), (!KW [chaptericon_active])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [chapterimage])
+!html_name cmd_chapterimage.html
+
+!iflang [german]
+Kapitelüberschrift durch Grafik ersetzen.
+!endif
+!iflang [english]
+Replace chapter title with graphic.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/chapterimage <(!FILE)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Beim HTML-, ST-Guide- und WinHelp-Format wird
+anstelle einer Kapitelüberschrift die Grafik
+""<datei>"" verwendet, falls im Vorspann der Schalter
+(!KW [use_chapter_images]) verwendet wurde.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Converting to Windows Help, HTML or ST-Guide the image called
+''<file>'' is displayed instead of the chapter title if
+(!KW [use_chapter_images]) is used inside the preamble
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/chapterimage udo(!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.43
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Bilder] [Bilder]), (!KW [use_chapter_images])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [cinclude])
+!html_name cmd_cinclude.html
+
+!iflang [german]
+Datei einbinden und in einer comment-Umgebung darstellen.
+!endif
+!iflang [english]
+Include file in a comment environment.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/cinclude <(!FILE)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Öffnet die Datei namens ""<datei>"" und gibt deren Inhalt
+als Kommentar an der Stelle aus, an der dieses
+Kommando benutzt wurde. Etwaige Einrückungen werden
+dabei berücksichtigt, Zentrierungen jedoch nicht.
+Tabulatoren werden abhängig von (!KW [tabwidth])
+umgewandelt. Enthält der Dateiname Leerzeichen,
+muß er in Anführungsstriche gesetzt werden.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+""<file>"" will be included and displayed like preformatted text
+inside a comment environment. If you use this commands inside
+another environment UDO indents the contents of this file. UDO
+converts tabs according to (!KW [tabwidth]).
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/cinclude hello.txt(!t)
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [include]), (!KW [begin_comment]), (!KW [comment]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [comment-Umgebung] [comment-Umgebung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [include]), (!KW [begin_comment]), (!KW [comment]), (!link [Split documents] [Split documents]), (!link [comment environment] [comment environment])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [code])
+!html_name cmd_code.html
+
+!iflang [german]
+Auf einen anderen Zeichensatz umschalten.
+!endif
+!iflang [english]
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code [(!CODE)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+UDO erwartet nach diesem Kommando Texte oder
+Textpassagen, die in dem entsprechenden Zeichensatz verfaßt
+wurden. Um wieder auf den Systemzeichensatz
+zurückzuwechseln, verwenden Sie dieses Kommando noch einmal
+mit dem Namen des Systemzeichensatzes.
+
+Hier eine Übersicht, welches Kürzel für den Zeichensatz benutzt
+werden kann:
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+UDO expects files written in the IBM-PC character set after this
+command. You can switch back to your system charset with by
+using this command again with name of your system character set.
+
+Below is an overview of the character sets UDO knows about:
+!endif
+
+!include charsets.ui
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Sonderzeichen] [Sonderzeichen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Special characters] [Special characters])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [code_dos])
+!html_name cmd_code_dos.html
+
+!iflang [german]
+Auf einen anderen Zeichensatz umschalten.
+!endif
+!iflang [english]
+Switch to another character set.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code_dos(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [code] [[dos!!]]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [code]), (!link [Sonderzeichen] [Sonderzeichen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [code]), (!link [Special characters] [Special characters])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [code_hp8])
+!html_name cmd_code_hp8.html
+
+!iflang [german]
+Auf einen anderen Zeichensatz umschalten.
+!endif
+!iflang [english]
+Switch to another character set.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code_hp8(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [code] [[hp8!!]]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [code]), (!link [Sonderzeichen] [Sonderzeichen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [code]), (!link [Special characters] [Special characters])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [code_iso])
+!html_name cmd_code_iso.html
+
+!iflang [german]
+Auf einen anderen Zeichensatz umschalten.
+!endif
+!iflang [english]
+Switch to another character set.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code_iso(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [code] [[iso!!]]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [code]), (!link [Sonderzeichen] [Sonderzeichen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [code]), (!link [Special characters] [Special characters])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [code_mac])
+!html_name cmd_code_mac.html
+
+!iflang [german]
+Auf einen anderen Zeichensatz umschalten.
+!endif
+!iflang [english]
+Switch to another character set.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code_mac(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [code] [[mac!!]]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [code]), (!link [Sonderzeichen] [Sonderzeichen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [code]), (!link [Special characters] [Special characters])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [code_next])
+!html_name cmd_code_next.html
+
+!iflang [german]
+Auf einen anderen Zeichensatz umschalten.
+!endif
+!iflang [english]
+Switch to another character set.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code_next(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [code] [[next!!]]).
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~1
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [code]), (!link [Sonderzeichen] [Sonderzeichen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [code]), (!link [Special characters] [Special characters])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [code_tos])
+!html_name cmd_code_tos.html
+
+!iflang [german]
+Auf einen anderen Zeichensatz umschalten.
+!endif
+!iflang [english]
+Switch to another character set.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code_tos(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [code] [[tos!!]]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [code]), (!link [Sonderzeichen] [Sonderzeichen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [code]), (!link [Special characters] [Special characters])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+# ToDo: Englisch
+!begin_node (!kkw [coloff])
+!html_name cmd_coloff.html
+
+!iflang [german]
+Abschalten der gesetzen Schriftfarbe.
+!endif
+!iflang [english]
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/coloff)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird die gesetzt die Schriftfarbe abgeschlossen.
+
+Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
+Postscript unterstürzt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!iflang [german]
+!item [(!SEEALSO)]
+Schriftfarben
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kkw [comment])
+!html_name cmd_comment().html
+
+!iflang [german]
+Inline-Kommentare erzeugen.
+!endif
+!iflang [english]
+Write inline comment to destination file.
+# "inline" ergänzt 18.12.2003 - Ulrich Kretschmer
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/comment [<(!TEXT)>])(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit (!KKW [comment]) können Inline-Kommentare für HTML,
+WinHelp, RTF, Quickview, C und Pascal erzeugt werden. Wird im
+Vorspann der Schalter (!KW [use_comments]) benutzt, so werden die
+Kommentare auch bei allen anderen Formaten in Klammern ausgegeben.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command writes ""<text>"" as comment into the output file,
+if the destinations format knows about comments.
+# ToDo: vollständige Übersetzung ergänzen
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)(!/comment [Was soll das?])(!t)
+!endif
+# engl. Beispiel hinzugefügt 18.12.2003
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/comment [this is a comment])(!t)
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Kommentare] [Kommentare]), (!KW [comment]), (!link [comment-Umgebung] [comment-Umgebung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [begin_comment]), (!KW [end_comment]), (!KW [cinclude]), (!KW [use_comments]), (!link [Environments] [Environments])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [comment])
+!html_name cmd_comment.html
+
+!iflang [german]
+Kommentar in die Ausgabedatei schreiben.
+!endif
+!iflang [english]
+Write comment to destination file.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/comment <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando schreibt ""<text>"" als Kommentar auch in die Ausgabedatei, sofern das
+jeweilige Format Kommentare beherrscht.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command writes ""<text>"" as comment into the output file,
+if the destinations format knows about comments.
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [begin_comment]), (!KW [end_comment]), (!KW [cinclude]), (!KW [use_comments]), (!link [Umgebungen] [Umgebungen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [begin_comment]), (!KW [end_comment]), (!KW [cinclude]), (!KW [use_comments]), (!link [Environments] [Environments])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kkw [copyright])
+!html_name cmd_copyright().html
+
+!iflang [german]
+Copyright-Symbol ausgeben.
+!endif
+!iflang [english]
+Print the copyright symbol.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/copyright)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das Copyright-Symbol
+ersetzt, sofern es in dem jeweiligen Zeichensatz
+vorhanden ist. Ist es das nicht, so ersetzt UDO den
+Platzhalter durch ""(!T)(c)(!t)"".
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This placeholder will be replaced by a special copyright symbol if
+the destination format supports them. If it doesn't UDO will replace
+this placeholder by ""(!T)(c)(!t)"".
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+Aus (!T)(!/copyright)(!t) wird (!copyright)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/copyright)(!t) is converted to (!copyright)
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [country])
+!html_name cmd_country.html
+
+!iflang [german]
+Land des Autors für den Adreßblock der Titelseite setzen.
+!endif
+!iflang [english]
+Set document information.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/country <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [docinfo] [[address!!]]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Titelseite] [Titelseite])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Title page] [Title page])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!end_node
+
+################################################################################

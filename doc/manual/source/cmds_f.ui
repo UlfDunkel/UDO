@@ -1,0 +1,128 @@
+################################################################################
+!begin_node F!..
+!html_name cmd-f.html
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [french])
+!html_name cmd_french.html
+
+!iflang [german]
+Sprache setzen.
+!endif
+!iflang [english]
+Define language.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/french(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+# Der Befehl (!KW [french]) existiert nicht mehr.
+(!USEINSTEAD[]) (!KW [language] [[french!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [language])
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+# ToDo: Englisch
+!begin_node (!kkw [fuchsia])
+!html_name cmd_fuchsia.html
+
+!iflang [german]
+Setzen den Schriftfarbe auf ?.
+!endif
+!iflang [english]
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/fuchsia)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe auf ?.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
+Postscript unterstürzt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [fussy])
+!html_name cmd_fussy.html
+
+!iflang [german]
+Warnmeldungen für kurze Zeilen einschalten.
+!endif
+!iflang [english]
+Activate warning messages for short lines.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/fussy(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Schaltet die Warnung vor kurzen Zeilen wieder ein.
+Bei der Umwandlung ins (!LaTeX)-Format erfolgt (!B)keine(!b)
+Umsetzung in ''(!V)\fussy(!v)''!
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Switches on warning messages according to short lines. You can use
+this command wherever you want. The warnings can be disabled with
+(!KW [sloppy]). When converting to (!LaTeX) UDO does (!B)not(!b) convert
+(!KW [fussy]) into ''(!V)\fussy(!v)''!
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [sloppy]), (!link [Fehlermeldungen] [Fehlermeldungen]), (!link [Silbentrennung] [Silbentrennung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [sloppy]), (!link [Error messages] [Error messages]), (!link [Syllabification] [Syllabification])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!end_node
+
+################################################################################
