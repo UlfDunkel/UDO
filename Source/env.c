@@ -2235,10 +2235,11 @@ GLOBAL void c_item ( void )
 						}
 						c_internal_styles(sBig);
 			 			strinsert(sBig, "<dt>");
-						um_strcat(sBig, "</dt>\n<dd>", 1024, "c_item[21]");
+						um_strcat(sBig, "</dt>\n<dd><p>", 1024, "c_item[21]");
 					}
 					else
-					{	um_strcpy(sBig, "<dt>&nbsp;</dt>\n<dd>", 1024, "c_item[22]");
+					{
+               	um_strcpy(sBig, "<dt>&nbsp;</dt>\n<dd><p>", 1024, "c_item[22]");
 					}
 					break;
 
@@ -2295,7 +2296,8 @@ GLOBAL void c_item ( void )
 			}
 			
 			if ( insert_placeholder(sBig, sBig, sBig, sBig) )
-			{	um_strcpy(token[0], sBig, MAX_TOKEN_LEN+1, "c_item[24]");
+			{
+         	um_strcpy(token[0], sBig, MAX_TOKEN_LEN+1, "c_item[24]");
 			}
 			else
 			{	token[0][0]= EOS;

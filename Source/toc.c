@@ -3701,7 +3701,9 @@ GLOBAL void html_footer ( void )
 	has_mailurl=	(titdat.webmastermailurl!=NULL);
 
 	if (has_counter || has_main_counter || has_name || has_email || has_url || has_mailurl)
-	{	outln(HTML_HR);
+	{
+      outln("");                          /* v6.5.19 [fd] */
+   	outln(HTML_HR);
 	}
 
 	/* r6pl4: Counterkommando ausgeben */
@@ -3808,7 +3810,7 @@ GLOBAL void html_footer ( void )
 	strcat(footer_buffer, " ");
 	strcat(footer_buffer, lang.today);
 	strcat(footer_buffer, sHtmlPropfontEnd);
-	strcat(footer_buffer, "</address>");
+	strcat(footer_buffer, "</address>\n");
 
 	outln(footer_buffer);
 
@@ -6880,7 +6882,9 @@ LOCAL void toc_output ( const int depth )
 								case TOAQV:	outln(rtf_par);	break;
 								case TOHAH: /* V6.5.17 */
 								case TOHTM:
-								case TOMHH:	outln("<br />&nbsp;");	break;
+								case TOMHH:
+/*                        	outln("<br />&nbsp;");	break; */
+                        	outln("<br />");	break;
 								case TOTEX:
 								case TOPDL:	break;
 								default:	outln(""); break;
@@ -8523,6 +8527,7 @@ const int    currdepth)                   /* current node depth */
       }
 
       outln(HTML_HR);
+      outln("");
       
       break;
    
