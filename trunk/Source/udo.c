@@ -11252,8 +11252,8 @@ GLOBAL void init_vars ( void )
 	html_merge_node4=			FALSE;
 	html_no_xlist=				FALSE;
 	html_ignore_8bit=			FALSE;	/*r6pl2*/
-    html_navigation_line = FALSE;  /* 6.5.19[fd] */
-    html_navigation_1st_folder = FALSE;  /* 6.5.19[fd] */
+   html_navigation_line = FALSE;  /* 6.5.19[fd] */
+   html_navigation_1st_folder = FALSE;  /* 6.5.19[fd] */
 	html_modern_layout=			FALSE;	/*r6pl2*/
 	html_modern_alignment=		ALIGN_CENT;	/*r6pl13*/
 	html_frames_layout=			FALSE;	/*r6pl2*/
