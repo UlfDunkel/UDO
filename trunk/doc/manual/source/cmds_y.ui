@@ -1,0 +1,52 @@
+################################################################################
+!begin_node Y!..
+!html_name cmd-y.html
+
+################################################################################
+# ToDo: Englisch
+!begin_node (!kkw [yellow])
+!html_name cmd_yellow.html
+
+!iflang [german]
+Setzen den Schriftfarbe auf gelb.
+!endif
+!iflang [english]
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/yellow)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe auf gelb.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
+Postscript unterstürzt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+
+!end_node
+
+################################################################################
