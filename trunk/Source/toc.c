@@ -8308,22 +8308,34 @@ LOCAL void do_subsubsubtoc ( void )
 
 
 
+/*******************************************************************************
+*
+*  do_topdoc():
+*     outputs the navigation section (basically on top of the current page)
+*
+*     
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
 LOCAL void do_toptoc(
 
-const int    currdepth)     /* */
+const int    currdepth)                   /* current node depth */
 {
-   char      s[512],        /* */
-             sIndent[512],  /* */
-             sTarget[64],   /* */
-             sFile[64];     /* */
-
-   char      sSmartSep[64] = "&gt; ";
+   char      s[512],                      /* */
+             sIndent[512],                /* */
+             sTarget[64],                 /* */
+             sFile[64];                   /* */
+   char      sSmartSep[64] = " &gt; ";    /* default separator string */
    
-   if (strcmp(html_navigation_separator,"") != 0)
+
+   if (html_navigation_separator[0] != 0) /* check if valid userdef separator exists */
    {
-      strcpy(sSmartSep, html_navigation_separator);
-      qdelete_once(sSmartSep, "[", 1);
-      qdelete_last(sSmartSep, "]", 1);
+      strcpy(sSmartSep, " ");             /* overwrite local default */
+      strcat(sSmartSep, html_navigation_separator);
+      strcat(sSmartSep, " ");
    }
    
    
@@ -8368,7 +8380,7 @@ const int    currdepth)     /* */
          strcpy(sFile, old_outfile.name);
       }
    
-      /* Level 1 */
+      /* --- Level 1 --- */
       if (currdepth >= TOC_NODE1)
       {
          if (titdat.htmltitle!=NULL)
@@ -8386,22 +8398,40 @@ const int    currdepth)     /* */
          }
          else if (html_navigation_line)   /* new v6.5.19[fd] */
          {
-            voutlnf("<a href=\"%s%s\"%s>%s</a>",
-                    sFile,
-                    outfile.suff,
-                    sTarget,
-                    s);
+                                          /* open CSS class div */
+            outln("<div class=\"UDO_nav_line\">");
+            
+            if (html_navigation_1st_folder)
+            {
+                                          /* don't close the nav line already! */
+               voutf("<img src=\"%s\" width=\"%u\" height=\"%u\" />&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
+                     GIF_FO_NAME,         /* folder image file name */
+                     uiGifFoWidth,        /* folder image width */
+                     uiGifFoHeight,       /* folder image height */
+                     sFile,               /* file name */
+                     outfile.suff,        /* file suffix */
+                     sTarget,             /* a href target */
+                     s);                  /* node name */
+            }
+            else
+            {
+               voutf("<a href=\"%s%s\"%s>%s</a>",
+                     sFile,               /* file name */
+                     outfile.suff,        /* file suffix */
+                     sTarget,             /* a href target */
+                     s);                  /* node name */
+            }
          }
          else
          {
             voutlnf("<img src=\"%s\" width=\"%u\" height=\"%u\" />&nbsp;<a href=\"%s%s\"%s>%s</a>",
-                    GIF_FO_NAME,
-                    uiGifFoWidth,
-                    uiGifFoHeight,
-                    sFile,
-                    outfile.suff,
-                    sTarget,
-                    s);
+                    GIF_FO_NAME,          /* folder image file name */
+                    uiGifFoWidth,         /* folder image width */
+                    uiGifFoHeight,        /* folder image height */
+                    sFile,                /* file name */
+                    outfile.suff,         /* file suffix */
+                    sTarget,              /* a href target */
+                    s);                   /* node name */
          }
       }
    
@@ -8417,7 +8447,7 @@ const int    currdepth)     /* */
          }
          else if (html_navigation_line)   /* new v6.5.19[fd] */
          {
-            voutlnf("%s%s", sSmartSep, s);
+            voutf("%s%s", sSmartSep, s);  /* don't close the nav line already! */
          }
          else
          {
@@ -8437,7 +8467,7 @@ const int    currdepth)     /* */
          }
          else if (html_navigation_line)   /* new v6.5.19[fd] */
          {
-            voutlnf("%s%s", sSmartSep, s);
+            voutf("%s%s", sSmartSep, s);  /* don't close the nav line already! */
          }
          else
          {
@@ -8463,7 +8493,7 @@ const int    currdepth)     /* */
          }
          else if (html_navigation_line)   /* new v6.5.19[fd] */
          {
-            voutlnf("%s%s", sSmartSep, s);
+            voutf("%s%s", sSmartSep, s);  /* don't close the nav line already! */
          }
          else
          {
@@ -8477,8 +8507,14 @@ const int    currdepth)     /* */
                     s);
          }
       }
-   
+      
+      if (html_navigation_line)
+      {                                   /* close CSS class div */
+         outln("\n</div> <!-- UDO_nav_line -->");
+      }
+
       outln(HTML_HR);
+      
       break;
    
    case TOWIN:
