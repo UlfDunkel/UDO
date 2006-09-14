@@ -6185,7 +6185,8 @@ size_t         sl,                     /* */
             {
                if (inside_env)
                {
-                  outln("<br />&nbsp;");
+/*                outln("<br />&nbsp;"); */
+                  outln("</p>");
                }
                else
                {
@@ -6197,7 +6198,8 @@ size_t         sl,                     /* */
          {
             if (inside_env)
             {
-               outln("<br />&nbsp;");
+/*             outln("<br />&nbsp;"); */
+               outln("</p>");
             }
             else
             {
