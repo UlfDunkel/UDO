@@ -7721,8 +7721,6 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
                         {
                            html_navigation_line = TRUE;
                            
-printf("TOKEN1: >%s<\n\n", token[1]);
-                           
                            if (strlen(token[1]) > 0)
                               um_strcpy(html_navigation_separator, token[1], 20, "pass1_check_preamble_commands[html_navigation_line]");
                            else
