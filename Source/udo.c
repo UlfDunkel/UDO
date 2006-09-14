@@ -5939,7 +5939,7 @@ size_t         sl,                     /* */
       i++;
 
    }  /* while (i < token_counter) */
-   
+
    
    if (z[0] != EOS)
    {
@@ -6105,7 +6105,18 @@ size_t         sl,                     /* */
          insert_nl_token_buffer();
       }
    
-      outln(z);
+      switch (desttype)                   /* This is the last content line of a section */
+      {
+      case TOHAH:                         /* HTML Apple Help */
+      case TOHTM:                         /* HTML */
+      case TOMHH:                         /* Microsoft HTML Help */
+         out(z);                          /* don't close last line in paragraph! */
+         break;
+         
+      default:
+         outln(z);                        /* normal line output */
+      }
+
    
    }  /* if (z[0] != EOS) */
    
@@ -6178,7 +6189,7 @@ size_t         sl,                     /* */
                }
                else
                {
-                  outln("</p>");
+                  outln("</p>\n");
                }
             }
          }

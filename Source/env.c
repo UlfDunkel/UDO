@@ -2864,7 +2864,7 @@ GLOBAL void c_end_itemize ( void )
 		case TOHTM:
 		case TOMHH:
 			outln("</li>");	/* r6pl6: mit </li> */
-			outln("</ul>");
+			outln("</ul>\n");
 			break;
 		case TOHPH:
 			outln("<\\list>");
