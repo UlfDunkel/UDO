@@ -57,24 +57,30 @@ developer versions.
 !iflang [german]
 !item Neue Formatierung der Navigationsleiste (!nl)
   In den unterstützten HTML-Ausgabeformaten kann jetzt optional die Navigationsleiste 
-  einzeilig (ohne Ordner-Symbole) ausgegeben werden. (!nl)
-  Dieses Feature ist seit Version~6.5.19 verfügbar.
+  einzeilig (mit und ohne Ordner-Symbol am Anfang) ausgegeben werden. (!nl)
+  Die neuen Kommandos heißen (!nl) 
+  (!KW [html_navigation_line]) (!nl)
+  (!KW [html_navigation_1st_folder]) (!nl)
+  Diese Features sind seit Version~6.5.19 verfügbar.
 !endif
 !iflang [english]
 !item New formatting of navigation bar (!nl)
   Using the supported HTML formats, the navigation bar can be output in a single line 
-  without folder images. (!nl)
-  This extension is available since version~6.5.19.
+  with or without a folder image in front. (!nl)
+  The new commands are named (!nl) 
+  (!KW [html_navigation_line]) (!nl)
+  (!KW [html_navigation_1st_folder]) (!nl)
+  These new commands are available since version~6.5.19.
 !endif
 # ..............................................................................
 !iflang [german]
-!item Neue Sprache: Dänisch (!nl)
-  Als zusätzliche Sprache ((!KW [language])) steht nun auch Dänisch zur Verfügung. (!nl)
+!item Neue Sprachen: Dänisch und Tschechisch (!nl)
+  Als zusätzliche Sprachen ((!KW [language])) stehen nun auch Dänisch und Tschechisch zur Verfügung. (Tschechisch wird noch nicht vollständig unterstützt bei der Ausgabe.) (!nl)
   Dieses Feature ist seit Version~6.5.18 verfügbar.
 !endif
 !iflang [english]
-!item New language: Danish (!nl)
-  Danish ist another supported language ((!KW [language])) now. (!nl)
+!item New languages: Danish and Czech (!nl)
+  Danish and Czech are supported languages ((!KW [language])) now. (Czech is not fully implemented for output already.) (!nl)
   This extension is available since version~6.5.18.
 !endif
 # ..............................................................................

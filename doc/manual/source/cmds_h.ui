@@ -2706,53 +2706,117 @@ all filenames that are generated during output will get the specified prefix.
 !end_node
 
 ################################################################################
-# <text> kann max. 20 Zeichen haben.
-!begin_node (!kw [html_navigation_line])
-!html_name cmd_html_navigation_line.html
+!begin_node (!kw [html_navigation_1st_folder])
+!html_name cmd_html_navigation_1st_folder.html
 
 !iflang [german]
-Navigationsleiste ohne Ordner-Symbole in einer einzigen Zeile ausgeben (nur HTML).
+Vor der Navigationsleiste ein Ordnersymbol zeigen (nur HTML, nur in Verbindung mit (!KW [html_navigation_line])).
 !endif
 !iflang [english]
-Output of navigation section without folder symbols in a single line (HTML only).
+Output a folder symbol in front of the navigation bar (HTML only, requires (!KW [html_navigation_line])).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_navigation_line [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/html_navigation_1st_folder(!t)
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann angegeben, so wird die Navigationsleiste oben 
-am Seitenanfang in einer einzigen Zeile ausgegeben, ohne Ordnersymbole, mit ' > ' getrennt.
+Wird dieser Schalter im Vorspann gesetzt und ist (!KW [html_navigation_line]) ebenfalls gesetzt, 
+so wird am Anfang der Navigationszeile ein einzelnes Ordnersymbol ausgegeben. Dadurch 
+wird die Funktion der Navigationszeile auf den ersten Blick besser verständlich.
 
-(!I)Beispiel:(!i) (!nl)
-(!T)Kapitel 1 > Kapitel 1.1 > Kapitel 1.1.1 > Kapitel 1.1.1.1(!t).
-
-Optional kann durch den Parameter [<text>] (in eckigen Klammern!) ein Separatortext übergeben werden.
-Zum Beispiel wird mit (!T)!/html_navigation_line [::&ndash;](!t) eine Navigationszeile folgendermaßen ausgegeben: (!nl)
-(!T)Kapitel 1 :: Kapitel 1.1 :: Kapitel 1.1.1 :: Kapitel 1.1.1.1(!t).
+!item [(!EXAMPLE)]
+(!T)!/html_navigation_1st_folder(!t) (!nl)
+(!img [udo_fo] [Ordner])~~Kapitel 1 > Kapitel 1.1 > Kapitel 1.1.1 > Kapitel 1.1.1.1
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
-If you use this switch in the preamble, the navigation bar on top of the page will 
-be output in a single line without folder symbols, separated by ' > '.
-
-(!I)Example:(!i) (!nl)
-(!T)Chapter 1 > Chapter 1.1 > Chapter 1.1.1 > Chapter 1.1.1.1(!t).
-
-Use the optional [<text>] parameter (in square brackets!) to define your own separator text.
-The command (!T)!/html_navigation_line [::&ndash;](!t) would output a navigation line like this: (!nl)
-(!T)Chapter 1 :: Chapter 1.1 :: Chapter 1.1.1 :: Chapter 1.1.1.1(!t).
-!endif
+If this switch is used in the preamble and (!KW [html_navigation_line]) is also used, 
+a single folder symbol will be output in front of the navigation line. 
+This visualizes the purpose of the navigation line at first sight.
 
 !item [(!EXAMPLE)]
-(!T)!/html_navigation_line [|&ndash;](!t)
+(!T)!/html_navigation_1st_folder(!t) (!nl)
+(!img [udo_fo] [folder])~~Chapter 1 > Chapter 1.1 > Chapter 1.1.1 > Chapter 1.1.1.1
+!endif
 
 !item [(!EXISTSSINCE)] Version 6.5.19
 
+!item [(!SEEALSO)]
+(!KW [html_navigation_line])
+!end_xlist
+
+!end_node
+
+################################################################################
+# <text> kann max. 20 Zeichen haben.
+!begin_node (!kw [html_navigation_line])
+!html_name cmd_html_navigation_line.html
+
+!iflang [german]
+Navigationsleiste in einer einzigen Zeile ausgeben (nur HTML).
+!endif
+!iflang [english]
+Output of navigation section in a single line (HTML only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_navigation_line <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, so wird der Navigationsbereich oben 
+am Seitenanfang in einer einzigen Navigationszeile ausgegeben, 
+standardmäßig ohne Ordnersymbole, mit ' > ' getrennt.
+
+Optional kann durch den Parameter <text> ein Separatortext übergeben werden. 
+Dieser wird automatisch vorn und hinten mit einem Leerzeichen ergänzt, damit der Separator 
+nicht an den Kapitelnamen klebt.
+
+!item [(!HINT)]
+Die Navigationszeile ist in eine (!T)<div>(!t)-Umgebung mit der CSS-Klasse (!B)UDO_nav_line(!b) eingebettet. 
+So kann ihr Inhalt über CSS-Anweisungen weiter formatiert werden.
+
+!item [(!EXAMPLE)]
+(!T)!/html_navigation_line(!t) (!nl)
+Kapitel 1 > Kapitel 1.1 > Kapitel 1.1.1 > Kapitel 1.1.1.1
+
+!item [(!EXAMPLE)]
+(!T)!/html_navigation_line ::(!t) (!nl)
+Kapitel 1 :: Kapitel 1.1 :: Kapitel 1.1.1 :: Kapitel 1.1.1.1
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If you use this switch in the preamble, the navigation area on top of the page will 
+be output in a single navigation line, basically without folder symbols, separated by ' > '.
+
+Use the optional [<text>] parameter to define your own separator text. 
+It will be enclosed by blanks automatically to avoid that the 
+node names are glued to the separator text.
+
+!item [(!HINT)]
+The navigation line is embedded in a (!T)<div>(!t) environment with the CSS class (!B)UDO_nav_line(!b). 
+So you can format its content with CSS commands.
+
+!item [(!EXAMPLE)]
+(!T)!/html_navigation_line(!t) (!nl)
+Chapter 1 > Chapter 1.1 > Chapter 1.1.1 > Chapter 1.1.1.1
+
+!item [(!EXAMPLE)]
+(!T)!/html_navigation_line ::(!t) (!nl)
+Chapter 1 :: Chapter 1.1 :: Chapter 1.1.1 :: Chapter 1.1.1.1
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.19
+
+!item [(!SEEALSO)]
+(!KW [html_navigation_1st_folder])
 !end_xlist
 
 !end_node
