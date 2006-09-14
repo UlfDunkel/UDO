@@ -55,14 +55,26 @@ developer versions.
 !begin_itemize !short
 # ..............................................................................
 !iflang [german]
+!item Neue Formatierung der Navigationsleiste (!nl)
+  In den unterstützten HTML-Ausgabeformaten kann jetzt optional die Navigationsleiste 
+  einzeilig (ohne Ordner-Symbole) ausgegeben werden. (!nl)
+  Dieses Feature ist seit Version~6.5.19 verfügbar.
+!endif
+!iflang [english]
+!item New formatting of navigation bar (!nl)
+  Using the supported HTML formats, the navigation bar can be output in a single line 
+  without folder images. (!nl)
+  This extension is available since version~6.5.19.
+!endif
+# ..............................................................................
+!iflang [german]
 !item Neue Sprache: Dänisch (!nl)
-  Als zusätzliche Sprache ((!KW [language]))steht nun auch dänsich zur Verfügung. (!nl)
+  Als zusätzliche Sprache ((!KW [language])) steht nun auch Dänisch zur Verfügung. (!nl)
   Dieses Feature ist seit Version~6.5.18 verfügbar.
 !endif
 !iflang [english]
-# ToDo: Englisch
-!item Neue Sprache: Dänisch (!nl)
-  Als zusätzliche Sprache ((!KW [language]))steht nun auch dänsich zur Verfügung. (!nl)
+!item New language: Danish (!nl)
+  Danish ist another supported language ((!KW [language])) now. (!nl)
   This extension is available since version~6.5.18.
 !endif
 # ..............................................................................
@@ -74,10 +86,9 @@ developer versions.
   Dieses Feature ist seit Version~6.5.17 verfügbar.
 !endif
 !iflang [english]
-# ToDo: Englisch
-!item Neues Ausgabeformat HTML Apple Help (!nl)
-  Ist im Prinzip nichts anderes als HTML, allerdings mit kleinen Änderungen. Deshalb
-  gibt es auch für (!KW [docinfo]) zwei neue Argumente: (!T)AppleTitle(!t) und 
+!item New output format HTML Apple Help (!nl)
+  Basically this is HTML but with tiny changes Therefore, two new arguments have been 
+  implemented for (!KW [docinfo]): (!T)AppleTitle(!t) and 
   (!T)AppleIcon(!t) (!nl)
   This extension is available since version~6.5.17.
 !endif
