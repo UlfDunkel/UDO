@@ -2368,8 +2368,8 @@ LOCAL void output_html_doctype ( void )
 			break;
 	}
 
-	if(!html_header_date)
-		voutlnf("<!-- last modified on %s -->", lang.short_today);
+   if (html_header_date)                  /* fixed in v6.5.19 */
+      voutlnf("<!-- last modified on %s -->", lang.short_today);
 
 }	/* output_html_doctype */
 
@@ -9702,6 +9702,7 @@ GLOBAL void set_html_header_date ( void )
 	}
 
 	html_header_date = TRUE;
+
 }	/* set_html_header_date */
 
 
