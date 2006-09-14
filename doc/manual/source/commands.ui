@@ -8742,6 +8742,58 @@ all filenames that are generated during output will get the specified prefix.
 !end_node
 
 ################################################################################
+# <text> kann max. 20 Zeichen haben.
+!begin_node (!kw [html_navigation_line])
+!html_name cmd_html_navigation_line.html
+
+!iflang [german]
+Navigationsleiste ohne Ordner-Symbole in einer einzigen Zeile ausgeben (nur HTML).
+!endif
+!iflang [english]
+Output of navigation section without folder symbols in a single line (HTML only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_navigation_line [<(!TEXT)>](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, so wird die Navigationsleiste oben 
+am Seitenanfang in einer einzigen Zeile ausgegeben, ohne Ordnersymbole, mit ' > ' getrennt.
+
+(!I)Beispiel:(!i) (!nl)
+(!T)Kapitel 1 > Kapitel 1.1 > Kapitel 1.1.1 > Kapitel 1.1.1.1(!t).
+
+Optional kann durch den Parameter [<text>] (in eckigen Klammern!) ein Separatortext übergeben werden.
+Zum Beispiel wird mit (!T)!/html_navigation_line [::&ndash;](!t) eine Navigationszeile folgendermaßen ausgegeben: (!nl)
+(!T)Kapitel 1 :: Kapitel 1.1 :: Kapitel 1.1.1 :: Kapitel 1.1.1.1(!t).
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If you use this switch in the preamble, the navigation bar on top of the page will 
+be output in a single line without folder symbols, separated by ' > '.
+
+(!I)Example:(!i) (!nl)
+(!T)Chapter 1 > Chapter 1.1 > Chapter 1.1.1 > Chapter 1.1.1.1(!t).
+
+Use the optional [<text>] parameter (in square brackets!) to define your own separator text.
+The command (!T)!/html_navigation_line [::&ndash;](!t) would output a navigation line like this: (!nl)
+(!T)Chapter 1 :: Chapter 1.1 :: Chapter 1.1.1 :: Chapter 1.1.1.1(!t).
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/html_navigation_line [|&ndash;](!t)
+
+!item [(!EXISTSSINCE)] Version 6.5.19
+
+!end_xlist
+
+!end_node
+
+################################################################################
 !begin_node (!kw [html_no_xlist])
 !html_name cmd_html_no_xlist.html
 
