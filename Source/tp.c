@@ -59,6 +59,46 @@ LOCAL BOOLEAN init_docinfo_data ( char *data, char **var, int allow_empty );
 LOCAL void init_titdat ( void );
 LOCAL void free_titdat ( char **var );
 
+/* New in V6.5.19 */
+/*	--------------------------------------------------------------
+	set_show_variable()
+	Setzen von Informationen fuer Variablen
+	Die Daten stehen in token[]. Ich habe die Funktion hier herein
+	gepackt, da ich keine neue C-Datei eroeffnen wollte.
+	!show_variable [format] [foo]".
+	<-	TRUE:	OK
+		sonst:	Fehler
+	--------------------------------------------------------------	*/
+GLOBAL BOOLEAN set_show_variable ( void )
+{
+	char s[512], *cont, *data, inhalt[512];
+	size_t contlen;
+
+	tokcpy2(s, 512);
+
+	/* New in V6.5.9 [NHz] */
+	contlen = strlen(token[1]);
+
+	contlen= get_brackets_ptr(s, &cont, &data);
+
+	if (contlen==0 || cont==NULL || data==NULL)
+	{	error_syntax_error();
+		return FALSE;
+	}
+
+	inhalt[0]= EOS;	
+	strncpy(inhalt, cont, contlen);
+	inhalt[contlen]= EOS;
+	del_whitespaces(inhalt);
+
+	if (strcmp(inhalt, "source_filename")==0)
+	{	show_variable.source_filename=TRUE;
+		return TRUE;
+	}
+	return FALSE;
+
+}	/* set_show_variable */
+
 /* New in r6pl16 [NHz] */
 /*	############################################################
 	#
@@ -122,9 +162,9 @@ GLOBAL BOOLEAN set_doclayout ( void )
 	struct size_brackets contlen;
 
 	tokcpy2(s, 512);
-	
+
 	contlen= get_two_brackets_ptr(s, &cont_format, &cont_content, &data);
-	
+
 	if (contlen.format==0 || contlen.content==0 || cont_content==NULL || cont_format==NULL || data==NULL)
 	{	error_syntax_error();
 		return FALSE;
@@ -147,7 +187,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
 		}
 		return TRUE;
 	}
-	
+
 	if (strcmp(content, "propfontname")==0)
 	{	if ( str_for_desttype(format) )
 		{	/* Set proportional font */
@@ -155,7 +195,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
 		}
 		return TRUE;
 	}
-	
+
 	if (strcmp(content, "propfontsize")==0)
 	{	if ( str_for_desttype(format) )
 		{	/* Set size of proportional font */
@@ -171,7 +211,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
 		}
 		return TRUE;
 	}
-	
+
 	if (strcmp(content, "monofontsize")==0)
 	{	if ( str_for_desttype(format) )
 		{	/* Set size of the aquidistant font */
@@ -179,7 +219,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
 		}
 		return TRUE;
 	}
-	
+
 	/* New in r6pl16 [NHz] */
 	if (strcmp(content, "node1size")==0)
 	{	if ( str_for_desttype(format) )
@@ -188,7 +228,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
 		}
 		return TRUE;
 	}
-	
+
 	if (strcmp(content, "node2size")==0)
 	{	if ( str_for_desttype(format) )
 		{	/* Set size of subnode */
@@ -196,7 +236,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
 		}
 		return TRUE;
 	}
-	
+
 	if (strcmp(content, "node3size")==0)
 	{	if ( str_for_desttype(format) )
 		{	/* Set size of subsubnode */
@@ -204,7 +244,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
 		}
 		return TRUE;
 	}
-	
+
 	if (strcmp(content, "node4size")==0)
 	{	if ( str_for_desttype(format) )
 		{	/* Set size of subsubsubnode */
@@ -252,7 +292,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
 			init_docinfo_data("/TwoColumnRight", &(laydat.viewerpreferences), FALSE);
 		else
 			init_docinfo_data("/SinglePage", &(laydat.viewerpreferences), FALSE);
-		
+
 		if (strstr(data, "Title"))
 			init_docinfo_data("true", &(laydat.fitwindow), FALSE);
 		else
@@ -288,7 +328,7 @@ LOCAL BOOLEAN init_docinfo_data ( char *data, char **var, int allow_empty )
 	   Writing to this region will crash...
 	*/
 	char *buffer;
-	
+
 	buffer= (char *) um_malloc (strlen(data)*sizeof(char)+1);
 
 	if (buffer) /* Check if the buffer could be allocated */
@@ -313,7 +353,7 @@ LOCAL BOOLEAN init_docinfo_data ( char *data, char **var, int allow_empty )
 		}
 
 		*var=buffer;
-		
+
 		return TRUE;
 	}
 
@@ -350,13 +390,13 @@ GLOBAL BOOLEAN set_docinfo ( void )
 	um_strncpy(token[1], udo_macro, 5, 10, "set_docinfo[2]");
 	um_strncat(token[1], macro_tmp, (long)(contlen-2L), 500, "set_docinfo[3]");
 	add_define();
-	
+
 	/* New: Fixed bug #0000040 in r6.3pl16 [NHz] */
 	if(desttype==TOKPS)
 		node2postscript(s, KPS_PS2DOCINFO);
 
 	contlen= get_brackets_ptr(s, &cont, &data);
-	
+
 	if (contlen==0 || cont==NULL || data==NULL)
 	{	error_syntax_error();
 		return FALSE;
@@ -626,7 +666,6 @@ GLOBAL BOOLEAN set_docinfo ( void )
 		}
 		return TRUE;
 	}
-
 	/* Spezialitaeten fuer HTML Apple Help V6.5.17 */
 	if (strcmp(inhalt, "appletitle")==0)
 	{	init_docinfo_data(data, &(titdat.appletitle), TRUE);
@@ -640,7 +679,7 @@ GLOBAL BOOLEAN set_docinfo ( void )
 	}
 
 	error_unknown_docinfo(inhalt);
-	
+
 	return FALSE;
 
 }	/* set_docinfo */
@@ -704,7 +743,7 @@ GLOBAL void c_maketitle ( void )
 			{	voutlnf("{\\Large %s} \\\\", titdat.title);
 				outln("\\bigskip");
 			}
-			
+
 			if ( has_programimage )
 			{	switch (iTexVersion)
 				{	case TEX_LINDNER:
@@ -731,7 +770,7 @@ GLOBAL void c_maketitle ( void )
 					outln("\\bigskip");
 				}
 			}
-			
+
 			if (has_version)
 			{	voutlnf("{\\large %s} \\\\", titdat.version);
 				outln("\\bigskip");
@@ -783,11 +822,11 @@ GLOBAL void c_maketitle ( void )
 					}
 				}
 			}
-			
+
 			outln("\\end{center}");
 			outln("\\end{titlepage}");
 			break;
-		
+
 		case TOLYX:
 			outln("\\layout Title");
 			outln("\\fill_top");
@@ -821,7 +860,7 @@ GLOBAL void c_maketitle ( void )
 				}
 			}
 			break;
-		
+
 		case TOINF:
 			outln("@titlepage");
 			outln("@sp 1");
@@ -928,7 +967,7 @@ GLOBAL void c_maketitle ( void )
 			}
 			outln("@autorefon");
 			outln("");
-			
+
 			if (uses_tableofcontents)
 			{	outln("");
 				outlncenter(lang.contents);
@@ -979,7 +1018,7 @@ GLOBAL void c_maketitle ( void )
 				}
 			}
 			outln("");
-			
+
 			if (uses_tableofcontents)
 			{	outln("");
 				outlncenter(lang.contents);
@@ -1045,7 +1084,7 @@ GLOBAL void c_maketitle ( void )
 			}
 			outln("");
 			break;
-		
+
 		case TOASC:
 		case TOMAN:
 			if ( has_title )
@@ -1197,7 +1236,7 @@ GLOBAL void c_maketitle ( void )
 		case TOWIN:
 		case TOWH4:
 			check_endnode();
-			
+
 			outln("");		
 			outln("{");	
 			voutlnf("#{\\footnote # %s}", WIN_TITLE_NODE_NAME);
@@ -1223,7 +1262,7 @@ GLOBAL void c_maketitle ( void )
 				{	voutlnf("\\qc{\\fs%d %s}\\par\\pard", iDocPropfontSize + 26, titdat.program);
 				}
 			}
-			
+
 			if ( has_version )	voutlnf("\\qc{%s}\\par\\pard", titdat.version);
 			if ( has_date )		voutlnf("\\qc{%s}\\par\\pard", titdat.date);
 
@@ -1267,7 +1306,7 @@ GLOBAL void c_maketitle ( void )
 
 		case TOAQV:
 			check_endnode();
-			
+
 			outln("");		
 			outln("{");	
 			voutlnf("#{\\footnote # %s}", WIN_TITLE_NODE_NAME);
@@ -1340,11 +1379,11 @@ GLOBAL void c_maketitle ( void )
 		case TOMHH:
 			/* New in V6.5.9 [NHz] */
 			outln("<div id=\"udo_titlepage\">");
-			
+
 			if ( has_title )
 			{	voutlnf("<h2 align=\"center\">%s</h2>", titdat.title);
 			}
-			
+
 			if ( has_programimage )
 			{	c_begin_center();
 				c_gif_output(titdat.programimage, "", sDocImgSuffix, 0);
@@ -1380,14 +1419,14 @@ GLOBAL void c_maketitle ( void )
 			if ( has_author )
 			{	voutlnf("%s<br />", titdat.author);
 			}
-			
+
 			/* New in V6.5.2 [NHz] */
 			if ( has_company )
 			{	auto_quote_chars(lang.fur, FALSE);
 				voutlnf("<br />%s<br />", lang.fur);
 				voutlnf("%s<br />", titdat.company);
 			}
-			
+
 			if ( has_address )
 			{	for (i=1; i<=address_counter; i++)
 				{	if (titdat.address[i]!=NULL)
@@ -1406,14 +1445,14 @@ GLOBAL void c_maketitle ( void )
 
 			/* New in V6.5.9 [NHz] */
 			outln("</div>");
-			
+
 			break;
 
 		case TOTVH:
 			outln("");
 			voutlnf(".topic %s=0", lang.title);
 			outln("");
-			
+
 			if ( has_title )
 			{	outlncenter(titdat.title);
 				outln("");
@@ -1464,7 +1503,7 @@ GLOBAL void c_maketitle ( void )
 
 			outln("");
 			break;
-		
+
 		/* New in r6pl15 [NHz] */
 		/* Title-Page for Postscript */
 		case TOKPS:
@@ -1526,14 +1565,14 @@ GLOBAL void c_maketitle ( void )
 			break;
 
 	}
-	
+
 }	/*c_maketitle*/
 
 
 GLOBAL void pch_titlepage ( void )
 {
 	int i;
-	
+
 	if ( titdat.title!=NULL )
 	{	outlncenter(titdat.title);
 		outln("");
@@ -1576,7 +1615,7 @@ GLOBAL void pch_titlepage ( void )
 	}
 
 	outln("");
-	
+
 }	/* pch_titlepage */
 
 
@@ -1587,7 +1626,7 @@ GLOBAL void pch_titlepage ( void )
 LOCAL void init_titdat ( void )
 {
 	int i;
-	
+
 	titdat.title= NULL;
 	titdat.program= NULL;
 	titdat.date= NULL;
@@ -1597,7 +1636,7 @@ LOCAL void init_titdat ( void )
 	for (i=0; i<MAXADDRESS; i++)
 	{	titdat.address[i]= NULL;
 	}
-	
+
 	titdat.keywords= NULL; /* New in r6pl15 [NHz] */
 	titdat.description= NULL; /* New in r6pl15 [NHz] */
 	titdat.robots= NULL; /* New in V6.5.17 */
@@ -1631,7 +1670,7 @@ GLOBAL void init_module_tp ( void )
 	address_counter=	0;
 
 	titleprogram[0]=	EOS;
-	
+
 	init_titdat();
 }
 
@@ -1648,7 +1687,7 @@ GLOBAL void init_module_tp_pass2 ( void )
 	if (titdat.program!=NULL)
 	{	strcat(titleprogram, titdat.program);
 	}
-	
+
 	del_whitespaces(titleprogram);
 }
 
@@ -1665,7 +1704,7 @@ LOCAL void free_titdat ( char **var )
 GLOBAL void exit_module_tp ( void )
 {
 	int i;
-	
+
 	free_titdat(&(titdat.title));
 	free_titdat(&(titdat.program));
 	free_titdat(&(titdat.date));
@@ -1675,7 +1714,7 @@ GLOBAL void exit_module_tp ( void )
 	for (i=address_counter; i>=1; i--)
 	{	free_titdat(&(titdat.address[i]));
 	}
-	
+
 	free_titdat(&(titdat.keywords)); /* New in r6pl15 [NHz] */
 	free_titdat(&(titdat.description)); /* New in r6pl15 [NHz] */
 	free_titdat(&(titdat.company)); /* New in V6.5.2 [NHz] */
@@ -1698,4 +1737,3 @@ GLOBAL void exit_module_tp ( void )
 /*	############################################################
 	# tp.c
 	############################################################	*/
-

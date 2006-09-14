@@ -36,7 +36,7 @@ typedef struct _passflags
 
 	int		env;				/* ENV_NONE, ENV_RAW etc.	*/	/*r6pl2*/
 	BOOLEAN	env1st;
-	
+
 }	PASSFLAGS;
 
 
@@ -99,9 +99,17 @@ typedef struct _myfile
 }	MYFILE;
 
 
+/*	--------------------------------------------------	*/
+/* New in V6.5.19 */
+
+typedef struct _show_variable
+{
+	BOOLEAN source_filename;			/* Filename anzeigen		*/
+}	SHOW_VARAIABLE;
+
+
 /*	############################################################
 	# udo_type.h
 	############################################################	*/
 
 #endif	/* UDO_TYPE_H */
-

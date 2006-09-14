@@ -131,6 +131,7 @@ GLOBAL char			titleprogram[512];
 /*	############################################################
 	# globale Funktionen
 	############################################################	*/
+GLOBAL BOOLEAN set_show_variable ( void ); /* New V6.5.19 */
 GLOBAL BOOLEAN set_mainlayout ( void ); /* New in r6pl16 [NHz] */
 GLOBAL BOOLEAN set_doclayout ( void ); /* New in r6pl15 [NHz] */
 GLOBAL BOOLEAN set_docinfo ( void );
@@ -144,4 +145,3 @@ GLOBAL void exit_module_tp ( void );
 /*	############################################################
 	# tp.h
 	############################################################	*/
-
