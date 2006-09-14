@@ -226,10 +226,9 @@ Version 6.5.13
       Version 6.5.9
 !endif
 !iflang [english]
-!item Die 16 Standardfarben existieren jetzt in UDO als Platzhalter
-      für die Ausgabe von HTML, RTF, WinHelp, DRC und
-      Postscript. Die Farben werden wie folgt angegeben: (!black),
-      (!red), etc. Abgeschlossen wird jeweils mit (!coloff). 
+!item 16 standard colors are now defined in UDO as placeholders for HTML, RTF, WinHelp
+      DRC and Postscript output. The colors are used like this: (!KKW [black]),
+      (!KKW [red]), etc. Close the color command with (!KKW [coloff]). 
       Version 6.5.9
 !endif
 # ..............................................................................
