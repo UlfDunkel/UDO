@@ -3990,13 +3990,13 @@ GLOBAL BOOLEAN save_html_index ( void )
 			fsplit(htmlname, dummy, dummy, dummy, suff);
 			if ( suff[0]==EOS )
 			{
-				fprintf(uif, "<a href=\"%s%s\">%s</a> <br>\n",
+				fprintf(uif, "<a href=\"%s%s\">%s</a><br>\n",
 					htmlname, outfile.suff,
 					escapedtocname );
 			}
 			else
 			{
-				fprintf(uif, "<a href=\"%s\">%s</a> <br>\n",
+				fprintf(uif, "<a href=\"%s\">%s</a><br>\n",
 					htmlname, escapedtocname );
 			}
 		}
@@ -4009,7 +4009,7 @@ GLOBAL BOOLEAN save_html_index ( void )
 			   label2html ( cLabel );
             /* v6.5.13 [vj] Compiler-Warnung beseitigt, # wurde in String ausgelagert,
                             da der gcc sonst meckert: "toc.c:3940:17: warning: unknown escape sequence '\#'" */
-            fprintf(uif, "<a href=\"%s%s%s%s\">%s</a> <br>\n",htmlname, outfile.suff, "#", cLabel,escapedtocname );
+            fprintf(uif, "<a href=\"%s%s%s%s\">%s</a><br>\n",htmlname, outfile.suff, "#", cLabel,escapedtocname );
          }
 		}
 
@@ -8408,7 +8408,7 @@ const int    currdepth)                   /* current node depth */
          else if (html_navigation_line)   /* new v6.5.19[fd] */
          {
                                           /* open CSS class div */
-            outln("<div class=\"UDO_nav_line\">");
+            outln("\n<div class=\"UDO_nav_line\">");
             
             if (html_navigation_1st_folder)
             {
