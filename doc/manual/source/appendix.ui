@@ -37,17 +37,17 @@ Folgende Maximalwerte müssen Sie beim Erstellen der Quelltexte beachten:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Defines:]                          (!MAXDEFINE)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Hyphens:]                          4096
+!item [Hyphens:]                          (!MAXHYPHEN)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Summe Kapitel, Labels und Aliase:] 32768
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Zeichen pro Zeile:]                512
+!item [Zeichen pro Zeile:]                (!LINELEN)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Zeichen pro Wort:]                 128
+!item [Zeichen pro Wort:]                 (!MAX_TOKEN_LEN)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Silben pro Wort:]                  32
+!item [Silben pro Wort:]                  (!MAXSILBEN)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Worte pro Absatz:]                 800
+!item [Worte pro Absatz:]                 (!MAX_TOKENS)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Querverweise pro Absatz:]          (!MAXLINK)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -72,17 +72,17 @@ You can use source files that don't exceed these maximum values:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Defines:]                             (!MAXDEFINE)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Hyphenation patterns:]                4096
+!item [Hyphenation patterns:]                (!MAXHYPHEN)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Sum of chapters, labels and aliases:] 32768
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Characters per line:]                 512
+!item [Characters per line:]                 (!LINELEN)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Characters per word:]                 128
+!item [Characters per word:]                 (!MAX_TOKEN_LEN)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Syllables per word:]                  32
+!item [Syllables per word:]                  (!MAXSILBEN)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Words per paragraph:]                 800
+!item [Words per paragraph:]                 (!MAX_TOKENS)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Links per paragraph:]                 (!MAXLINK)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
