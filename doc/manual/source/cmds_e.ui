@@ -89,7 +89,7 @@ Finish a description.
 !html_name cmd_ee.html
 
 !iflang [german]
-Letzte numerierte Aufz‰hlung beenden.
+Letzte nummerierte Aufz‰hlung beenden.
 !endif
 !iflang [english]
 Finish an enumeration.
@@ -547,7 +547,7 @@ Finish the document.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieses Kommando (!B)muﬂ(!b) in jedem Quelltext vorhanden
+Dieses Kommando (!B)muss(!b) in jedem Quelltext vorhanden
 sein. Es beendet den Hauptteil und sollte das letzte
 Kommando des Quelltextes sein. Fehlt dieses Kommando,
 erzeugt UDO eine Fehlermeldung.
@@ -571,7 +571,7 @@ error message.
 !html_name cmd_end_enumerate.html
 
 !iflang [german]
-Letzte numerierte Aufz‰hlung beenden.
+Letzte nummerierte Aufz‰hlung beenden.
 !endif
 !iflang [english]
 Finish an enumeration.
@@ -594,7 +594,7 @@ Finishes the latest enumerate environment.
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KW [begin_enumerate]), (!KW [item]), (!link [Numerierungen] [Numerierungen])
+(!KW [begin_enumerate]), (!KW [item]), (!link [Nummerierungen] [Nummerierungen])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]

@@ -71,7 +71,7 @@ Tilde
 !iflang [german]
 !item [(!DESCRIPTION)]
 Diese Zeichenfolge wird nach der Umwandlung als Tilde
-dargestellt. Beachten Sie, daﬂ eine einzige Tilde als
+dargestellt. Beachten Sie, dass eine einzige Tilde als
 festes Leerzeichen interpretiert wird.
 !endif
 !iflang [english]
@@ -616,7 +616,7 @@ Print the character string !/-.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Diese Zeichenfolge wird nach der Umwandlung als !/- dargestellt. Beachten Sie, daﬂ (!K1 [/-]) als
+Diese Zeichenfolge wird nach der Umwandlung als !/- dargestellt. Beachten Sie, dass (!K1 [/-]) als
 Trennstelle interpretiert wird.
 !endif
 !iflang [english]

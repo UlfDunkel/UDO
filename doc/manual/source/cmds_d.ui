@@ -61,7 +61,7 @@ Set a definition.
 !item [(!DESCRIPTION)]
 Dieses Kommando legt eine neue Definition an. Bei der
 Umwandlung wird dann ""(!/<wort>)"" durch ""<text>""
-ersetzt, ohne daß Umlaute oder andere spezielle
+ersetzt, ohne dass Umlaute oder andere spezielle
 Zeichen umgewandelt werden. Im Beispiel würde ""(!/H1)""
 durch ""</H1>"" ersetzt. Definitionen können auch
 Paramater enthalten. Nähere Informationen dazu findet
@@ -278,7 +278,7 @@ von HTML ausgegeben.
 ""<text>"" wird auf der Titelseite unterhalb des Namens
 des Autors ausgegeben. ""<text>"" findet sonst keine
 weitere Verwendung durch UDO. (!KW [docinfo] [[address!!]]) kann bis zu 15 mal
-angegeben werden, so daß man hier z.B. auch mehrere E-Mail-Adressen auf der
+angegeben werden, so dass man hier z.B. auch mehrere E-Mail-Adressen auf der
 Titelseite angeben kann.
 
 !item [company]
@@ -550,18 +550,18 @@ ansonsten "Times New Roman".
 !begin_verbatim
 !doclayout [ps] [propfontsize] foo
 !end_verbatim
-Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
 
 !item [monofontname]
 
 !item [monofontsize]
-Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
 
 !item [node1size]
 !begin_verbatim
 !doclayout [ps,rtf] [node1size] foo
 !end_verbatim
-Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
 
 seit Release~6 Patchlevel~16
 
@@ -569,7 +569,7 @@ seit Release~6 Patchlevel~16
 !begin_verbatim
 !doclayout [ps,rtf] [node2size] foo
 !end_verbatim
-Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
 
 seit Release~6 Patchlevel~16
 
@@ -577,7 +577,7 @@ seit Release~6 Patchlevel~16
 !begin_verbatim
 !doclayout [ps,rtf] [node3size] foo
 !end_verbatim
-Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
 
 seit Release~6 Patchlevel~16
 
@@ -585,7 +585,7 @@ seit Release~6 Patchlevel~16
 !begin_verbatim
 !doclayout [ps,rtf] [node4size] foo
 !end_verbatim
-Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
 
 seit Release~6 Patchlevel~16
 

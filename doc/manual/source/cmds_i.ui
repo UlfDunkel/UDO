@@ -857,7 +857,7 @@ Ignore footer file.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Darf nur in einem Node benutzt werden und besagt, daß in diesem Node
+Darf nur in einem Node benutzt werden und besagt, dass in diesem Node
 die global geltende Footerdatei nicht ausgegeben werden soll. Somit
 kann man einzelne Nodes davor schützen, einen Footer zu erhalten.
 
@@ -898,7 +898,7 @@ Ignore header file.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Darf nur in einem Node benutzt werden und besagt, daß in diesem Node
+Darf nur in einem Node benutzt werden und besagt, dass in diesem Node
 die global geltende Headerdatei nicht ausgegeben werden soll. Somit
 kann man einzelne Nodes davor schützen, einen Header zu erhalten.
 
@@ -1279,7 +1279,7 @@ Wird ""<titel>"" angegeben, so wird der Text als Bildunterschrift angegeben.
 Die Ausrichtung des Bildes richtet sich nach der
 eventuell vorhandenen äußeren Umgebung. Zentrierte
 Bilder erhält man demnach, wenn man das (!KW [image])-Kommando in einer center-Umgebung verwendet.
-Enthält der Dateiname Leerzeichen, muß er in Anführungsstriche gesetzt werden.
+Enthält der Dateiname Leerzeichen, muss er in Anführungsstriche gesetzt werden.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1335,7 +1335,7 @@ Include image.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Der einzige Unterschied zum (!KW [image])-Kommando ist der,
-daß in der Bildunterschrift keine Abbildungsnummer ausgegeben wird.
+dass in der Bildunterschrift keine Abbildungsnummer ausgegeben wird.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1394,7 +1394,7 @@ Bild innerhalb einer solchen Umgebung ausgegeben, wird es genauso
 ausgerichtet wie der Text innerhalb der Umgebung, sprich: ein Bild wird
 in einer center-Umgebung zentriert ausgegeben, unabhängig davon, was
 man bei (!KW [image_alignment]) gesetzt hat. Will man ein Bild in einer
-center-Umgebung rechtsbündig ausgeben, so muß man in dem Fall noch
+center-Umgebung rechtsbündig ausgeben, so muss man in dem Fall noch
 eine flushright-Umgebung um den (!KW [image])-Befehl setzen.
 !endif
 !iflang [english]
@@ -1574,7 +1574,7 @@ Include file.
 Öffnet die Datei ""<datei>"" und gibt deren
 umgewandelten Inhalt an der Stelle aus, an der dieses
 Kommando benutzt wurde. Enthält der Dateiname Leerzeichen,
-muß er in Anführungsstriche gesetzt werden.
+muss er in Anführungsstriche gesetzt werden.
 # ToDo: letzter Satz fehlt in engl. Übersetzung!
 !endif
 !iflang [english]
@@ -1876,7 +1876,7 @@ Starts a new item of an itemize or enumerate environment.
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KW [item] [[~!!]]), (!link [Aufzählungen] [Aufzählungen]), (!link [Numerierungen] [Numerierungen])
+(!KW [item] [[~!!]]), (!link [Aufzählungen] [Aufzählungen]), (!link [Nummerierungen] [Nummerierungen])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
@@ -1908,7 +1908,7 @@ Start an item.
 !item [(!DESCRIPTION)]
 Leitet einen neuen Aufzählungspunkt einer
 description-Umgebung oder einer xlist-Umgebung ein.
-Der Text, der in eckige Klammern eingefaßt wird, wird
+Der Text, der in eckige Klammern eingefasst wird, wird
 bei der description-Umgebung in der Ausgabedatei fett dargestellt.
 !endif
 !iflang [english]

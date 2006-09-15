@@ -36,7 +36,7 @@ dienen kann, eigene Quelltexte mit UDO zu erstellen:
 !subsubheading Erläuterungen
 
 Zu Beginn des Quelltextes ist ein Kommentar angegeben, damit man später
-noch auf Anhieb erkennen kann, womit sich der Text befaßt. Eine Zeile
+noch auf Anhieb erkennen kann, womit sich der Text befasst. Eine Zeile
 bewertet UDO als Kommantar, wenn das erste Zeichen der Zeile ein ''#''
 ist.
 
@@ -80,11 +80,11 @@ angegeben, so würde UDO beim ASCII-Format die in der DFÜ gebräuchlichen
 Zeichen zur Schriftartumschaltung benutzen.
 
 !index (!kw [use_justification])
-Der Schalter (!KW2 [use_justification] [[asc,stg!!]]) sorgt dafür, daß UDO beim
+Der Schalter (!KW2 [use_justification] [[asc,stg!!]]) sorgt dafür, dass UDO beim
 ASCII- und ST-Guide-Format Blocksatz erzeugt.
 
 !index (!kw [begin_document])
-Das Kommando (!KW [begin_document]) teilt UDO mit, daß nun der
+Das Kommando (!KW [begin_document]) teilt UDO mit, dass nun der
 Hauptteil des Quelltextes beginnt. Dieses Kommando darf in keinem
 Quelltext fehlen, da hier unverzichtbare Informationen für die
 Ausgabeformate ausgegeben werden!
@@ -98,7 +98,7 @@ Einsatz an späterer Stelle, jedoch ist dies weder sinnvoll noch
 unproblematisch.
 
 !index (!kw [tableofcontents])
-Danach möchten wir, daß UDO ein Inhaltsverzeichnis ausgibt. In diesem
+Danach möchten wir, dass UDO ein Inhaltsverzeichnis ausgibt. In diesem
 sind alle Kapitel, Abschnitte und Unterabschnitte des Quelltextes
 aufgelistet. Das oben Gesagte gilt auch hier. Wird der Befehl
 (!KW [tableofcontents]) benutzt, so sollte er direkt hinter
@@ -268,7 +268,7 @@ versteht folgende Zeichensätze:
 
 Beim Start der Konvertierung erwartet UDO den aktuellen
 Systemzeichensatz. Sollen Quelltexte konvertiert werden, die andere
-Zeichensätze benutzen, muß man UDO dies mit den obigen Befehlen
+Zeichensätze benutzen, muss man UDO dies mit den obigen Befehlen
 kenntlich machen. Mehr zu diesem Thema findet man im Kapitel
 ""Sonderzeichen"".
 
@@ -346,7 +346,7 @@ z.B. die Ausgabe eines Inhaltsverzeichnisses (siehe (!KW [tableofcontents])).
 !index Schalter
 !item [Schalter:] Ein UDO-Schalter ist eine mit einem ""!"" beginnende
 Zeichenfolge, die die Aktionen von UDO oder einem Kommando
-beeinflussen. So gibt es z.B. einen Schalter, der bewirkt, daß
+beeinflussen. So gibt es z.B. einen Schalter, der bewirkt, dass 
 Bezeichnungen in englischer Sprache(!N)""Appendix"" statt ""Anhang""(!n)
 ausgegeben werden (siehe (!KW [language])).
 
@@ -356,7 +356,7 @@ eingerückt durch Leerzeichen oder Tabs eingerückt, steht.
 !index Platzhalter
 
 !item [Platzhalter:] Ein Platzhalter ist eine mit ""!"" beginnende
-Zeichenfolge, die durch runde Klammern eingefaßt ist. Ein Platzhalter
+Zeichenfolge, die durch runde Klammern eingefasst ist. Ein Platzhalter
 wird von UDO durch eine dem Ausgabeformat zugehörige Zeichenfolge
 ersetzt (z.B. ''(!KK1 [B])'' durch ''(!V){\bf(!v)'').
 
@@ -406,10 +406,10 @@ placeholder is replaced by certain characters e.g. ''(!KK1 [B])'' by ''{\bf'' fo
 !iflang [german]
 !index Kommentar
 Es besteht die Möglichkeit, in einer Quelldatei Kommentare einzufügen.
-Ist das erste Zeichen einer Zeile ein ""#"", so faßt UDO diese Zeile als
+Ist das erste Zeichen einer Zeile ein ""#"", so fasst UDO diese Zeile als
 Kommentar auf und wertet diese Zeile nicht aus.
 
-Das ""#"" darf nicht eingerückt sein, muß also das erste Zeichen einer
+Das ""#"" darf nicht eingerückt sein, muss also das erste Zeichen einer
 Zeile sein!
 
 Keine Regel ohne Ausnahme: Innerhalb einer verbatim- oder raw-Umgebug
@@ -511,7 +511,7 @@ berücksichtigen. Hier eine Übersicht:
 !item [comment-Umgebung:]      Kommentare
 !item [description-Umgebung:]  Beschreibungen
 !item [document-Umgebung:]     Dokument-Inhalt
-!item [enumerate-Umgebung:]    numerierte Aufzählungen
+!item [enumerate-Umgebung:]    nummerierte Aufzählungen
 !item [flushleft-Umgebung:]    linksbündiger Text
 !item [flushright-Umgebung:]   rechtsbündiger Text
 !item [ignore-Umgebung:]       Textpassagen ignorieren
@@ -618,7 +618,7 @@ den beispielsweise den Namen des Programms angeben.
 
 !item [(!KW [docinfo] [[version!!]]):]     Versionsinformationen, z.B. ""Version 47.11""
 
-!item [(!KW [docinfo] [[date!!]]):]        Das Datum, an dem der Text verfaßt oder das Programm
+!item [(!KW [docinfo] [[date!!]]):]        Das Datum, an dem der Text verfasst oder das Programm
 geschrieben wurden.
 
 !item [(!KW [docinfo] [[author!!]]):]      Der Name des Autors des vorliegenden Textes.
@@ -644,7 +644,7 @@ an späterer Stelle, allerdings ist dies weder sinnvoll noch
 unproblematisch.
 
 Die Titelseite wird innerhalb des ST-Guide und WinHelp als eigene Seite
-angelegt. Von dieser aus läßt sich dann zum Inhaltsverzeichnis
+angelegt. Von dieser aus lässt sich dann zum Inhaltsverzeichnis
 verzweigen. Dies ist besonders eine große Hilfe für Benutzer mit
 kleinen Monitoren, die sonst vor lauter Informationen das
 Inhaltsverzeichnis nicht wiederfinden würden.
@@ -653,7 +653,7 @@ Bei (!TeX) hingegen wird aus den angegebenen Informationen eine eigene
 Titelseite mittels der titlepage-Umgebung erstellt.
 
 Um beim ST-Guide eine eigene Titelseite zu erstellen (sei es, falls
-einem die von UDO erzeugte Titelseite nicht gefällt), so muß man etwas
+einem die von UDO erzeugte Titelseite nicht gefällt), so muss man etwas
 tiefer in die Trickkiste greifen. Die UDO-Distribution enthält einen
 Beispiel-Quelltext, der zeigt, wie man eigene Titelseiten erstellen
 kann.
@@ -743,10 +743,10 @@ auch die Verwendung an anderer Stelle im Quelltext, jedoch ist dies
 nicht unproblematisch.
 
 !index (!kw [toc])
-Der Umfang dieses Inhaltsverzeichnisses läßt sich durch den Schalter
+Der Umfang dieses Inhaltsverzeichnisses lässt sich durch den Schalter
 (!KW [toc]) beeinflussen. Wird dieser Schalter im
 Vorspann mit dem jeweiligen Kürzel des betroffenen Ausgabeformats
-angegeben, so sorgt UDO dafür, daß ein entsprechend eingeschränktes
+angegeben, so sorgt UDO dafür, dass ein entsprechend eingeschränktes
 Inhaltsverzeichnis ausgegeben wird.
 
 !index (!kw [subsubsubtoc])
@@ -775,7 +775,7 @@ in denen man den Inhalt eines Kapitels oder Abschnitts erkennen kann.
 !index (!kw [ignore_subsubsubtoc])
 !index (!kw [ignore_subsubtoc])
 !index (!kw [ignore_subtoc])
-Jedoch kann es sein, daß Sie gerne im ganzen Text genau diese
+Jedoch kann es sein, dass Sie gerne im ganzen Text genau diese
 Unterinhaltsverzeichnisse erzeugt haben möchten, bei einigen Kapiteln
 jedoch lieber darauf verzichten würden. Für diesen Zweck gibt es die
 Befehle (!KW [ignore_subtoc]), (!KW [ignore_subsubtoc]) und
@@ -963,7 +963,7 @@ Beispiel. Die (hier inhaltsleere) Befehlsfolge...
 !end_quote
 
 WinHelp und ST-Guide bieten die Möglichkeit, Texte auch in kleinen
-Dialogen, sogenannten Popups darzustellen. Möchten Sie, daß ein
+Dialogen, sogenannten Popups darzustellen. Möchten Sie, dass ein
 Kapitel, Abschnitt oder Unterabschnitt in einem Popup dargestellt
 wird, so benutzen Sie hierfür die Befehle
 
@@ -1004,10 +1004,10 @@ aufgeführt werden. Dazu benutzen Sie die Befehle
 
 !begin_enumerate
 !item Kapitel, die nicht in Inhaltsverzeichnissen erscheinen, werden
-auch referenziert, werden aber nicht numeriert.
+auch referenziert, werden aber nicht nummeriert.
 
 !index (!kw [no_numbers])
-!item UDO numeriert Kapitel automatisch. Falls man auf die Angabe
+!item UDO nummeriert Kapitel automatisch. Falls man auf die Angabe
 dieser Nummern verzichten möchte, so sollte man den Schalter
 (!KW [no_numbers]) im Vorspann setzen.
 !end_enumerate
@@ -1132,7 +1132,7 @@ einer appendix-Umgebung, sprich: der Anhang wird durch das Kommando
 
 Kapitel, die im Anhang stehen, werden mit Großbuchstaben
 gekennzeichnet; Abschnitte und Unterabschnitte werden auch hier
-durchnumeriert. Auch hier zur Verdeutlichung ein kleines Beispiel:
+durchnummeriert. Auch hier zur Verdeutlichung ein kleines Beispiel:
 
 !begin_quote
 !begin_verbatim
@@ -1168,11 +1168,11 @@ A  Ein Kapitel
 !item Der Anhang sollte ganz am Ende des Quelltextes stehen, sprich
 (!KW [end_appendix]) sollte das vorletzte Kommando vor (!KW [end_document])
 sein. Nach dem Ende des Anhangs sollte man keine
-weiteren Kapitel angeben, da die Kapitelnumerierung von UDO dann
+weiteren Kapitel angeben, da die Kapitelnummerierung von UDO dann
 fürchterlich durcheinandergeraten könnte.
 
-!item Aufgrund der Tatsache, daß UDO die Kapitel des Anhangs mit
-Buchstaben numeriert, sollte man im Anhang nicht mehr als 26 Kapitel
+!item Aufgrund der Tatsache, dass UDO die Kapitel des Anhangs mit
+Buchstaben nummeriert, sollte man im Anhang nicht mehr als 26 Kapitel
 benutzen.
 !end_enumerate
 
@@ -1288,7 +1288,7 @@ eines Aufzählungspunktes müssen am Zeilenanfang stehen, eventuell
 eingerückt durch Leerzeichen oder Tabulatoren.
 
 Die itemize-Umgebung kann mehrfach verschachtelt benutzt werden und
-läßt sich auch mit anderen Umgebungen kombinieren.
+lässt sich auch mit anderen Umgebungen kombinieren.
 
 Aus diesem kurzen Beispiel...
 
@@ -1325,7 +1325,7 @@ Aufzählung dadurch unschön auseinandergezogen würde.
 
 Um nun Aufzählungen ""komprimiert"" auszugeben, können Sie den Schalter
 (!KW [short]) direkt hinter dem Befehl (!KW [begin_itemize]) angeben.
-Dies bewirkt, daß die zusätzlichen Zwischenräume in dieser nicht
+Dies bewirkt, dass die zusätzlichen Zwischenräume in dieser nicht
 ausgegeben werden. Zusätzlich wird die Unterdrückung der Ausgabe der
 Zwischenräume an innere Umgebungen vererbt.
 
@@ -1481,7 +1481,7 @@ with an ''o'' instead of a bullet.
 
 ################################################################################
 !iflang [german]
-!begin_node Numerierungen
+!begin_node Nummerierungen
 !label enumerate-Umgebung
 !endif
 !iflang [english]
@@ -1492,7 +1492,7 @@ with an ''o'' instead of a bullet.
 
 !iflang [german]
 Die enumerate-Umgebung ist ebenso wie die itemize-Umgebung dafür
-geeignet, schnell und komfortabel durchnumerierte Aufzählungen zu
+geeignet, schnell und komfortabel durchnummerierte Aufzählungen zu
 erstellen, bei denen die Aufzählungspunkte durch Zahlen oder Buchstaben
 gekennzeichnet werden.
 
@@ -1531,16 +1531,16 @@ verschachtelt und mit dem Schalter (!KW [short]) benutzt wird,!..
 
 !begin_enumerate
 !item Bei den Formaten, die von Hause aus eine vergleichbare Umgebung
-     anbieten (z.B. HTML) werden die Punkte nicht von UDO numeriert.
+     anbieten (z.B. HTML) werden die Punkte nicht von UDO nummeriert.
      Daher sollte man vorsichtig mit Angaben wie ""siehe Punkt~1"" oder
      ""vergleiche Punkt~b)"" sein.
 
 !item Die dritte Ebene dieser Umgebung wird relativ gesehen etwas
-     weiter eingerückt, da die Numerierung durch römische Zahlen mehr
+     weiter eingerückt, da die Nummerierung durch römische Zahlen mehr
      Platz benötigt.
 
 !item Bei vielen Punkten sollte man aufpassen, nicht die Grenzen zu
-     überschreiten. Wird eine Ebene mit Buchstaben numeriert, sollte
+     überschreiten. Wird eine Ebene mit Buchstaben nummeriert, sollte
      man nicht mehr als 26~Aufzählungspunkte benutzen.
 
 !item Eine ausführliche Erläuterung des Schalters (!KW [short]) finden Sie in
@@ -1624,7 +1624,7 @@ mehreren Begriffen zu erzeugen, wobei Begriffe fett dargestellt werden.
 Ein Aufzählungspunkt wird durch (!KW [item] [[<text>!!]]) gekennzeichnet,
 wobei ""<text>"" in der Aufzählung fett dargestellt wird.
 
-Die description-Umgebung ist mehrfach schachtelbar und läßt sich auch
+Die description-Umgebung ist mehrfach schachtelbar und lässt sich auch
 mit anderen Umgebungen kobinieren. Hier ein kleines, unverschachteltes
 Beispiel: Aus!..
 
@@ -1655,8 +1655,8 @@ mit dem Schalter (!KW [short]) benutzt wird!..
 
 !begin_enumerate
 !item Wenn der zu beschreibende Text eine schließende eckige Klammer
-     beinhaltet, so muß man dieser Klammer ein Ausrufezeichen
-     voranstellen, damit UDO erkennt, daß die folgende eckige Klammer
+     beinhaltet, so muss man dieser Klammer ein Ausrufezeichen
+     voranstellen, damit UDO erkennt, dass die folgende eckige Klammer
      auch fett dargestellt werden soll.
 
 !item Der in den eckigen Klammer angegebene Text wird auch in HTML fett
@@ -1763,7 +1763,7 @@ Aus!..
 
 
 Der bereits in den vorherigen Kapiteln besprochene Schalter
-(!KW [short]) läßt sich auch bei den Listen einsetzen. Um eine
+(!KW [short]) lässt sich auch bei den Listen einsetzen. Um eine
 ""komprimierte"" Liste zu erzeugen, geben Sie einfach den Schalter am
 Ende der Zeile an. Auch hier ein Beispiel:
 
@@ -1823,15 +1823,15 @@ Bezüglich dieser Listen-Umgebungen gibt es einige Dinge zu beachten:
 
 !begin_enumerate
 !item Wenn der zu beschreibende Text eine schließende eckige Klammer
-beinhaltet, so muß man dieser Klammer ein Ausrufezeichen
-voranstellen, damit UDO erkennt, daß die folgende eckige Klammer
+beinhaltet, so muss man dieser Klammer ein Ausrufezeichen
+voranstellen, damit UDO erkennt, dass die folgende eckige Klammer
 noch zum ""linken Teil"" des Punktes zählt.
 
 !index (!kw [html_no_xlist])
 !item Bei HTML erzeugt für diese Listen Tabellen Leider
 unterscheiden sich Navigator und IE bei der Ausgabe der Tabellen.
 Falls nicht gewünscht kann man per (!KW [html_no_xlist]) veranlassen,
-daß die Listen als description-Umgebungen ausgeben werden.
+dass die Listen als description-Umgebungen ausgeben werden.
 # !item HTML, Linuxdoc-SGML und Texinfo bietet keine direkte
 # Unterstützung für Listen diesen Typs, daher werden Listen wie
 # Beschreibungen behandelt. Benutzt man jedoch den Schalter
@@ -1942,7 +1942,7 @@ be part of the item and shall be displayed on the ""left side"".
 !item Bei HTML erzeugt für diese Listen Tabellen Leider
 unterscheiden sich Navigator und IE bei der Ausgabe der Tabellen.
 Falls nicht gewünscht kann man per (!KW [html_no_xlist]) veranlassen,
-daß die Listen als description-Umgebungen ausgeben werden.
+dass die Listen als description-Umgebungen ausgeben werden.
 # !item	HTML, Linuxdoc-SGML and Texinfo don't support an environment like
 # UDO's xlist environment. In these formats the xlist environments are
 # displayed like a description environment by default. But if you use the
@@ -1988,8 +1988,8 @@ werden diese wie sonst auch ausgegeben. Erst wenn die center-Umgebung
 wieder aktiv ist, wird Text zentriert ausgegeben.
 
 Falls das folgende kleine Beispiel nicht zentriert wird, liegt das
-daran, daß das Format der Dokumentation, die Sie gerade lesen, keine
-Zentrierungen zuläßt. Aus!..
+daran, dass das Format der Dokumentation, die Sie gerade lesen, keine
+Zentrierungen zulässt. Aus!..
 
 !begin_quote
 !vinclude (!EXAMPLES)center.ui
@@ -2062,8 +2062,8 @@ flushright-Umgebung wieder aktiv ist, wird Text rechtsbündig
 ausgegeben.
 
 Falls das folgende kleine Beispiel nicht rechtsbündig dargestellt wird,
-so liegt das daran, daß das Format der Dokumentation, die Sie gerade
-lesen, keinen rechtsbündigen Text zuläßt. Aus!..
+so liegt das daran, dass das Format der Dokumentation, die Sie gerade
+lesen, keinen rechtsbündigen Text zulässt. Aus!..
 
 !begin_quote
 !vinclude (!EXAMPLES)flushright.ui
@@ -2202,7 +2202,7 @@ insert a manual line break use the (!KKW [nl]) command.
 !iflang [german]
 Die quote-Umgebung dient dazu, Passagen eingerückt darzustellen. Diese
 Umgebung wird mit (!KW [begin_quote]) eingeleitet und mit (!KW [end_quote]) beendet.
-Die quote-Umgebung läßt sich mehrfach ineinander benutzen, man kann
+Die quote-Umgebung lässt sich mehrfach ineinander benutzen, man kann
 Sie auch mit anderen Umgebungen kombinieren.
 
 Diese Umgebung eignet sich dazu, Textpassagen deutlicher vom
@@ -2289,7 +2289,7 @@ auch den Hinweis am Ende dieses Abschnitts.
 Bei der Ausgabe ins (!LaTeX)-Format werden die gleichnamigen Befehle
 (!V)\begin{verbatim}(!v) und (!V)\end{verbatim}(!v) ausgegeben, bei den
 anderen Formaten wird (falls nötig) ein nichtproportionaler Font
-eingestellt und Sonderzeichen automatisch angepaßt.
+eingestellt und Sonderzeichen automatisch angepasst.
 
 !index (!kw [tabwidth])
 Tabulatoren, die innerhalb einer verbatim-Umgebung auftauchen, werden
@@ -2308,7 +2308,7 @@ Befehlskombination aus (!KW [begin_verbatim]), (!KW [include]) und
 (!KW [end_verbatim]) darstellt.
 
 Falls Sie jedoch Passagen benutzen wollen, die bereits im Ausgabeformat
-geschrieben wurden (z.B. eine mit (!LaTeX) gesetzte Tabelle), so muß man
+geschrieben wurden (z.B. eine mit (!LaTeX) gesetzte Tabelle), so muss man
 sich der raw-Umgebung bedienen.
 
 !smallskip
@@ -2319,12 +2319,12 @@ sich der raw-Umgebung bedienen.
 
 !item Da andere Umgebungen im Quelltext eingerückt werden können,
 erscheint es verlockend, auch eine verbatim-Umgebung im Quelltext
-passend einzurücken. Bedenken Sie allerdings, daß führende Leerzeichen
+passend einzurücken. Bedenken Sie allerdings, dass führende Leerzeichen
 bei der Ausgabe des vorformatierten Textes übernommen werden und dieser
 dann in der späteren Ausgabedatei zuweit rechts stehen wird, falls Sie
 den Text der verbatim-Umgebung einrücken.
 
-!item Der Unterschied zur raw-Umgebung besteht darin, daß der Text der
+!item Der Unterschied zur raw-Umgebung besteht darin, dass der Text der
 verbatim-Umgebung 1:1 dargestellt wird. Text der raw-Umgebung wird
 hingegen 1:1 übernommen und dient daher der Einbindung spezieller
 Formatbefehle.
@@ -2423,7 +2423,7 @@ bei RTF wird der Zeichensatz ""(!url [MS Linedraw] [http://www.kostis.net/charse
 benutzt. Bei der Ausgabe ins (!LaTeX)-Format werden die Befehle
 (!V)\begin{verbatim}(!v) und (!V)\end{verbatim}(!v) ausgegeben, bei den
 anderen Formaten wird (falls nötig) ein nichtproportionaler Font
-eingestellt und Sonderzeichen automatisch angepaßt.
+eingestellt und Sonderzeichen automatisch angepasst.
 
 !index (!kw [tabwidth])
 Tabulatoren, die innerhalb einer linedraw-Umgebung auftauchen, werden
@@ -2446,7 +2446,7 @@ Befehlskombination aus (!KW [begin_linedraw]), (!KW [include]) und
 !begin_enumerate
 !item Da andere Umgebungen im Quelltext eingerückt werden können,
      erscheint es verlockend, auch eine linedraw-Umgebung im Quelltext
-     passend einzurücken. Bedenken Sie allerdings, daß führende
+     passend einzurücken. Bedenken Sie allerdings, dass führende
      Leerzeichen bei der Ausgabe des vorformatierten Textes übernommen
      werden und dieser dann in der späteren Ausgabedatei zuweit rechts
      stehen wird, falls Sie den Text der linedraw-Umgebung einrücken.
@@ -2518,7 +2518,7 @@ whereas WordPad95 does not.
 !html_name footnotes.html
 
 !iflang [german]
-Text, der durch (!KK1 [N]) und (!KK1 [n]) eingefaßt wird, wird in eine Fußnote
+Text, der durch (!KK1 [N]) und (!KK1 [n]) eingefasst wird, wird in eine Fußnote
 umgewandelt, sofern das Ausgabeformat Fußnoten unterstützt. Bei den
 anderen Ausgabeformaten wird (!KK1 [N]) einfach durch ""~("" und (!KK1 [n]) durch
 "")"" ersetzt; die Fußnote erscheint hier also einfach in Klammern.
@@ -2554,7 +2554,7 @@ Fußnoten werden von folgenden Formaten unterstützt:
 (!HINTS)
 
 !begin_enumerate
-!item Daß UDO bei den Formaten, die keine Fußnoten unterstützen, den
+!item Dass UDO bei den Formaten, die keine Fußnoten unterstützen, den
      Fußnotentext einfach in Klammern setzt, ist natürlich etwas
      unglücklich. Besser wäre es, UDO würde hier die Fußnotentexte
      sammeln und am Ende eines Kapitels ausgeben. Leider ist dies eine
@@ -2665,7 +2665,7 @@ berücksichigt.
 !index (!kw [no_effects])
 Wenn man bei einem Ausgabeformat keine Schriftarten benutzen möchte,
 so kann man die Ausgabe der Schriftartbefehle durch die Angabe des
-Schalter (!KW [no_effects]) unterdrücken. Der Schalter muß dabei zusammen mit
+Schalter (!KW [no_effects]) unterdrücken. Der Schalter muss dabei zusammen mit
 dem/den gewünschten Format(en) im Vorspann angegeben werden. Um z.B.
 keine Schriftarten beim ASCII- und Manualpage-Format zu benutzen, so
 benutzt man dafür (!KW [no_effects] [[asc,man!!]]).
@@ -2673,7 +2673,7 @@ benutzt man dafür (!KW [no_effects] [[asc,man!!]]).
 (!HINT)
 
 Mit Definitionen lassen sich leicht benutzerdefinierte Schriftarten
-erstellen. Dazu muß man natürlich Kenntnis der Formatbefehle des
+erstellen. Dazu muss man natürlich Kenntnis der Formatbefehle des
 jeweiligen Formates haben. Im folgenden Beispiel wird gezeigt, wie man
 die vom ST-Guide unterstützte helle Schrift ein- und ausschalten kann:
 
@@ -2837,7 +2837,7 @@ Um mit UDO Tabellen zu setzen, benötigen Sie folgende Kommandos:
 !end_enumerate
 
 Das Kommando (!KW [table_caption]) legt die Überschrift der folgenden Tabelle
-fest. (!KW [table_caption]) muß vor der table-Umgebung eingesetzt werden,
+fest. (!KW [table_caption]) muss vor der table-Umgebung eingesetzt werden,
 darf also nicht innerhalb dieser Umgebung stehen.
 
 Das Kommando (!KW [begin_table]) leitet eine Tabelle ein. Das Ende der
@@ -2849,14 +2849,14 @@ und vor und nach welchen Spalten vertikale Linien gezogen werden sollen
 (!KW [hline]), beginnt die Tabelle mit einer horizontalen Linie.
 
 Nachdem Sie das Format der Tabelle angegeben haben, folgt der
-eigentliche Tabelleninhalt. Jede Tabellenzeile muß auch in einer
+eigentliche Tabelleninhalt. Jede Tabellenzeile muss auch in einer
 Textzeile angegeben werden, wobei die einzelnen Zellen durch zwei
 Ausrufezeichen voneinander getrennt werden. Leere Tabellenfelder
 sollten im Quelltext stets mit einer Tilde (!~) gefüllt werden, da
 diese Tabellen sonst in einigen Browsern unschön dargestellt werden.
 
 Möchten Sie eine horizontale Linie in der Tabelle ausgeben, so benutzen
-Sie dazu das Kommando (!KW [hline]). Dieser Befehl muß am Anfang einer
+Sie dazu das Kommando (!KW [hline]). Dieser Befehl muss am Anfang einer
 Zeile und alleine in dieser Zeile stehen.
 
 Falls Sie die obigen Erklärungen mehr verwirrt haben sollten, als Ihnen
@@ -2910,7 +2910,7 @@ UDO bietet einen Schalter an, um die Linien der Tabelle nicht mit den
 ASCII-Zeichen (!T)+(!t), (!T)-(!t) und (!T)|(!t) zu erzeugen. Wird im Vorspann der Schalter
 (!KW [use_ansi_tables]) benutzt, so werden die Linien der Tabelle mit
 Hilfe der Grafikzeichen aus dem PC-Zeichensatz erzeugt. Auf die Formate
-WinHelp, RTF, HTML und (!LateX) hat dieser Schalter keinen Einfluß.
+WinHelp, RTF, HTML und (!LateX) hat dieser Schalter keinen Einfluss.
 
 !smallskip
 
@@ -2933,7 +2933,7 @@ nicht, wird die komplette Tabelle ohne Linien dargestellt.
 !item Beim ST-Guide werden die Tabellenlinien durch den Grafikbefehl
 (!T)@line(!t) erzeugt. Hier ist es nicht möglich, mehrere Linien
 zwischen den Spalten zu erzeugen, wenn man keine ANSI-Tabellen ausgeben
-läßt.
+lässt.
 
 !item In den Feldern der Tabelle sind natürlich alle sonstigen
 UDO-Kommandos erlaubt. Sie können dort also auch Schriftarten,
@@ -3220,7 +3220,7 @@ switch called (!KW [no_quotes] [[~!!]]).
 
 !iflang [german]
 !index Apostrophe !! doppelte
-Genau wie bei doppelten Anführungszeichen paßt UDO auch hier doppelt
+Genau wie bei doppelten Anführungszeichen passt UDO auch hier doppelt
 vorkommende Apostrophe an.
 
 Aus!..
@@ -3244,7 +3244,7 @@ müssen Sie stattdessen (!T)(!link [((''!)!)] [((''!)!)])text(!link [((''!)!)] [(
 
 !index (!kw [no_quotes])
 Der Schalter (!KW [no_quotes] [[~!!]]) hat genau wie auf die doppelten
-Anführungszeichen Einfluß auf die Umsetzung der doppelten Apostrophe.
+Anführungszeichen Einfluss auf die Umsetzung der doppelten Apostrophe.
 
 !endif
 # ------------------------------------------------------------------------------
@@ -3529,7 +3529,7 @@ sollten dann auf die Verwendung dieser Zeichen verzichten.
 
 (!HINT)
 
-Es kann durchaus sein, daß das eine oder andere Zeichen fehlt oder Zeichen falsch umgesetzt werden.
+Es kann durchaus sein, dass das eine oder andere Zeichen fehlt oder Zeichen falsch umgesetzt werden.
 Sollten Sie auf solche Zeichen stoßen, so (!link [melden] [Kontaktadresse]) Sie dies bitte unverzüglich.
 Vielen Dank!
 
@@ -3669,8 +3669,8 @@ Mit den im vorherigen Abschnitt beschriebenen Befehlen ist es möglich,
 Quelltexte auch mit 8-Bit-Zeichen systemweit weiterzugeben.
 
 Werden Quelltexte jedoch über das Internet ausgetauscht, kann es
-passieren, daß irgendwo auf dem Übertragungswege 8-Bit-Zeichen
-umgewandelt oder angepaßt werden. Dies wäre bei Quelltexten, die
+passieren, dass irgendwo auf dem Übertragungswege 8-Bit-Zeichen
+umgewandelt oder angepasst werden. Dies wäre bei Quelltexten, die
 mehrere Zeichensätze verwenden fatal.
 
 Um nun den Austausch von Quelltexten auch hier zur ermöglichen, bietet
@@ -3679,8 +3679,8 @@ wirklich um einen Zeichensatz, sondern vielmehr um eine Möglichkeit,
 8-Bit-Zeichen durch Folgen mehrere 7-Bit-Zeichen zu emulieren.
 
 !index (!kw [universal_charset])
-Da die nötigen Abfragen und Umwandlungen sehr rechenintensiv sind, muß
-man UDO mitteilen, daß die folgenden Zeilen ""universelle Zeichen""
+Da die nötigen Abfragen und Umwandlungen sehr rechenintensiv sind, muss
+man UDO mitteilen, dass die folgenden Zeilen ""universelle Zeichen""
 beinhalten. Dies geschieht durch den Einsatz des Schalters
 (!KW [universal_charset]).
 
@@ -3783,7 +3783,7 @@ of ''(!^a)''.
 !iflang [german]
 UDO bietet für das ASCII-, ST-Guide-, Pure-C-Help- und
 Manualpage-Format eine halbautomatische Silbentrennung. Halbautomatisch
-bedeutet, daß Sie in einem Quelltext die Stellen markieren müssen, an
+bedeutet, dass Sie in einem Quelltext die Stellen markieren müssen, an
 denen ein Wort getrennt werden darf.
 
 Es gibt zwei Möglichkeiten, diese Trennstellen zu setzen:
@@ -3796,7 +3796,7 @@ Es gibt zwei Möglichkeiten, diese Trennstellen zu setzen:
 !end_enumerate
 
 Bei der Umwandlung ins (!LaTeX)-Format werden die angegebenen Trennstellen
-durch ""\-"" ersetzt. (!LaTeX) weiß dann, daß das Wort nur an den Stellen
+durch ""\-"" ersetzt. (!LaTeX) weiß dann, dass das Wort nur an den Stellen
 getrennt werden darf.
 
 Bei der Umwandlung ins Rich Text, WinHelp- und HTML-Format werden die
@@ -3853,7 +3853,7 @@ eine halbautomatische Sil!-ben!-tren!-nung.
 Bei der Umwandlung ins (!LaTeX-Format) werden alle ""(!K1 [/-])"" durch ""\-"" ersetzt;
 es wird also ""Sil\-ben\-tren\-nung"" ausgegeben. Bei der Umwandlung ins
 ASCII-, ST-Guide-, Pure-C-Help- und Manualpage-Format wird das Wort
-passend aufgetrennt, falls es nicht mehr komplett in eine Zeile paßt
+passend aufgetrennt, falls es nicht mehr komplett in eine Zeile passt
 (z.B. in ""Sil-~bentrennung"" oder ""Silben-~trennung""). Bei allen
 anderen Ausgabeformaten werden die Trennmarken einfach entfernt.
 
@@ -3894,17 +3894,17 @@ When converting to other formats the marks are simply deleted.
 !index (!kw [hyphen])
 !iflang [german]
 Trennstellen können durch das Kommando (!KW [hyphen]) global gesetzt werden.
-Global bedeutet, daß Sie die Trennstelle nur einmal im Vorspann des
+Global bedeutet, dass Sie die Trennstelle nur einmal im Vorspann des
 Quelltextes angeben müssen, UDO dann bei der Umwandlung alle Zeilen
 nach dem zugehörigen Wort durchsucht und die nötigen Anpassungen
 durchführt.
 
 Sobald in Ihrem Quelltext mehrere problematische Worte (also Worte,
-die ungetrennt einen häßlichen rechten Flatterrand erzeugen)
+die ungetrennt einen hässlichen rechten Flatterrand erzeugen)
 auftauchen, sollten Sie sich überlegen, ob es nicht vielleicht
 sinnvoller ist, im Vorspann einmal (!KW [hyphen]) zu benutzen.
 
-In diesem Beispiel wird davon ausgegangen, daß in Ihrem Quelltext das
+In diesem Beispiel wird davon ausgegangen, dass in Ihrem Quelltext das
 Wort "Dokumentation" mehrfach auftaucht. Damit Sie nicht bei jedem
 Wort die Trennstellen lokal setzen müssen, fügen Sie folgenden
 Zeile(n) in den Vorspann des Quelltextes ein:
@@ -3917,7 +3917,7 @@ Zeile(n) in den Vorspann des Quelltextes ein:
 !end_quote
 
 In diesem Beispiel wurde zusätzlich der Trennvorschlag für den Plural
-angegeben, da dieser anders getrennt werden muß. Der Plural muß, wenn
+angegeben, da dieser anders getrennt werden muss. Der Plural muss, wenn
 er angegeben werden wird, (!I)vor(!i) dem Singular stehen. Der Grund: UDO
 speichert alle Trennvorschläge in einer Liste, die es bei der
 Umwandlung im FIFO-Prinzip(!N)first in first out(!n) abarbeitet.
@@ -3957,13 +3957,13 @@ many times in your source file:
 !iflang [german]
 Bei der Umwandlung ins ASCII-, Manualpage-, Pure-C-Help- und
 ST-Guide-Format kann UDO durch seine halbautomatische Silbentrennung
-dafür sorgen, daß im Ausgabetext ein relativ gleichmäßiger rechter Rand
+dafür sorgen, dass im Ausgabetext ein relativ gleichmäßiger rechter Rand
 erzeugt bzw. beim Blocksatz eine Zeile mit wenig Leerzeichen aufgefüllt
 wird.
 
 Dies ist dann nicht der Fall, wenn manche Zeilen zu kurz geraten. UDO
 bemängelt diese Zeilen in der Logdatei und zeigt Ihnen dort auch das
-Wort, welches durch seine Länge dazu führte, daß ein ungleichmäßiger
+Wort, welches durch seine Länge dazu führte, dass ein ungleichmäßiger
 rechter Rand erzeugt bzw. die Zeile mit zuviel Leerzeichen aufgefüllt
 wurde.
 
@@ -3981,7 +3981,7 @@ wieder einschalten.
 
 Gerade in der Entwicklungsphase einer Dokumentation interessieren
 einen die Warnungen eher weniger. Benutzen Sie dann einfach zu Beginn
-des Dokumentes den Befehl (!KW [sloppy]), so daß in der Logdatei nur noch die
+des Dokumentes den Befehl (!KW [sloppy]), so dass in der Logdatei nur noch die
 ""wichtigen"" Dinge zu erkennen sind. Vor der Veröffentlichung der
 Dokumentation sollte man dann den Befehl auskommentieren und die
 Formatierung überprüfen.
@@ -4033,7 +4033,7 @@ jeweiligen Ausgabeformat erzeugt.
 !index (!kw [image])
 Zur Einbindung von Bilder bedient man sich des Kommandos (!KW [image]),
 bei dem man den Dateinamen der einzubindenden Datei (ohne Endung!)
-angeben muß sowie optional eine Bildunterschrift angeben kann.
+angeben muss sowie optional eine Bildunterschrift angeben kann.
 
 !index (!kkw [img])
 Um Bilder bei HTML und WinHelp mitten im Text zu plazieren, kann man
@@ -4084,7 +4084,7 @@ images will be displayed left justified.
 !index (!kw [tex_tetex])
 !iflang [german]
 Wenn man EPS-Grafiken in ein (!LaTeX)-File einbinden möchte, welches mit dem
-te(!TeX) weiterverabeitet werden soll, so (!B)muß(!b) im
+te(!TeX) weiterverabeitet werden soll, so (!B)muss(!b) im
 Vorspann das Kommando (!KW [tex_tetex]) gesetzt werden.
 
 !endif
@@ -4142,8 +4142,8 @@ file. This subtitle will look like ""(Figure x: A tiger)"".
 !index (!kw [tex_lindner])
 !iflang [german]
 Wenn man GEM-Images in ein (!LaTeX)-File einbinden möchte, welches mit dem
-Linder-(!TeX) weiterverabeitet werden soll, so (!B)muß(!b) im Vorspann das
-Kommando (!KW [tex_lindner]) gesetzt werden. Daran erkennt UDO, daß ein
+Linder-(!TeX) weiterverabeitet werden soll, so (!B)muss(!b) im Vorspann das
+Kommando (!KW [tex_lindner]) gesetzt werden. Daran erkennt UDO, dass ein
 spezielles Lindner-(!TeX)-Makro zur Einbindung des Bildes erzeugt werden
 soll.
 
@@ -4217,7 +4217,7 @@ original one with the first and the copy with the second resolution.
 !index (!kw [tex_strunk])
 !iflang [german]
 Wenn man GEM-Images in ein (!LaTeX)-File einbinden möchte, welches mit dem
-CS-(!TeX) oder Multi(!TeX) weiterverabeitet werden soll, so (!B)muß(!b) im
+CS-(!TeX) oder Multi(!TeX) weiterverabeitet werden soll, so (!B)muss(!b) im
 Vorspann das Kommando (!KW [tex_strunk]) gesetzt werden.
 
 Da die Treiber des CS-(!TeX) auch die Spezialbefehle des Lindner-(!TeX)
@@ -4473,7 +4473,7 @@ Ausmaße von Bildern unterbinden. Dazu gibt es das Kommando (!kw [no_img_size]).
 !html_name pictures_html_jpg.html
 
 !iflang [german]
-Standardmäßig erwartet UDO, daß Sie Grafiken im GIF-Format darstellen
+Standardmäßig erwartet UDO, dass Sie Grafiken im GIF-Format darstellen
 möchten (siehe oben). Natürlich ist es mit UDO aber auch möglich,
 JPEG-Grafiken einzubinden.
 
@@ -4492,7 +4492,7 @@ vorliegt, stellen Sie dem im vorherigen Beispiel gezeigten
 !end_verbatim
 !end_quote
 
-Sollte die Grafik nicht tiger.jpg heißen, sondern tiger.jpeg, so muß
+Sollte die Grafik nicht tiger.jpg heißen, sondern tiger.jpeg, so muss
 der Befehl entsprechend so lauten:
 
 !begin_quote
@@ -4501,8 +4501,8 @@ der Befehl entsprechend so lauten:
 !end_verbatim
 !end_quote
 
-Beachten Sie, daß die Endung für alle folgenden Grafiken gesetzt wird.
-Falls später wieder ein GIF dargestellt werden soll, so muß die Endung
+Beachten Sie, dass die Endung für alle folgenden Grafiken gesetzt wird.
+Falls später wieder ein GIF dargestellt werden soll, so muss die Endung
 wieder mit (!KW [html_img_suffix] [[gif!!]]) eingestellt werden.
 
 !endif
@@ -4577,7 +4577,7 @@ UDO erzeugt dann folgende RTF-Befehle:
 
 !index (!kw [win_inline_bitmaps])
 !item Mit dem Schalter (!KW [win_inline_bitmaps]) werden die Bilder mit
-     anderen Befehlen eingebunden, so daß sie quasi ""hardcoded""
+     anderen Befehlen eingebunden, so dass sie quasi ""hardcoded""
      übernommen werden.
 !end_enumerate
 
@@ -4758,7 +4758,7 @@ Dateien zu verweisen.
 (!HINT)
 
 Falls innerhalb eines der Link-Befehle eine ""("" oder ""]""
-benutzt werden, so muß man diese quoten, damit UDO den Befehl korrekt
+benutzt werden, so muss man diese quoten, damit UDO den Befehl korrekt
 umsetzen kann. Beispiel:
 
 !begin_quote
@@ -4838,7 +4838,7 @@ wird!..
 
 !begin_enumerate
 !item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
-     diese Zahl überschritten, so gibt UDO eine Fehlermeldung aus, daß
+     diese Zahl überschritten, so gibt UDO eine Fehlermeldung aus, dass 
      der Link nicht ersetzt werden konnte. Zur Erinnerung: Absätze
      werden durch Leerzeilen getrennt.
 
@@ -4934,7 +4934,7 @@ behandelt:
 !item UDO überprüft nicht, ob die Grafiken existieren.
 
 !index (!kw [html_img_suffix])
-!item UDO benutzt als Endung für die Grafiken standardmäßig `.gif'. Mit
+!item UDO benutzt als Endung für die Grafiken standardmäßig "".gif"". Mit
 dem Schalter (!KW [html_img_suffix]) kann die Endung jederzeit verändert
 werden.
 
@@ -5018,7 +5018,7 @@ wird!..
 !item Bei (!LaTeX) kann man nur auf Labels, nicht auf Kapitel verweisen.
 
 !item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
-diese Zahl überschritten, so gibt UDO eine Fehlermeldung aus, daß
+diese Zahl überschritten, so gibt UDO eine Fehlermeldung aus, dass 
 der Link nicht ersetzt werden konnte. Zur Erinnerung: Absätze
 werden durch Leerzeilen getrennt.
 !end_enumerate
@@ -5077,8 +5077,8 @@ more links UDO will print an error message.
 !iflang [german]
 Mit den Befehlen (!KKW [xlink]) und (!KKW [url]) können Sie Bezug auf Stellen
 (!I)anderer(!i) Hypertexte oder Homepages nehmen. Der Unterschied zum
-obigen Befehl besteht darin, daß beim zweiten Parameter bis auf die
-Tilde keine Sonderzeichen angepaßt werden (bei Pfadangaben fatal!)
+obigen Befehl besteht darin, dass beim zweiten Parameter bis auf die
+Tilde keine Sonderzeichen angepasst werden (bei Pfadangaben fatal!)
 
 !begin_xlist [ST-Guide:] !short
 !item [UDO:]      (!KK2W [xlink] [[UDO!!] [*:\udo.hyp!!]])
@@ -5140,12 +5140,12 @@ wird!..
 (!HINTS)
 
 !begin_enumerate
-!item Für WinHelp muß man gültige Topicnamen und Dateinamen angeben.
+!item Für WinHelp muss man gültige Topicnamen und Dateinamen angeben.
 Der HCP akzeptiert in Topicnamen nur Buchstaben, Ziffern und den
-Underscore. Andere Zeichen werden von UDO angepaßt!
+Underscore. Andere Zeichen werden von UDO angepasst!
 
 !item Für den ST-Guide sollte man dem Dateinamen die Zeichen ''(!V)*:\(!v)''
-voranstellen, so daß der ST-Guide in allen in den für ihn angegebenen
+voranstellen, so dass der ST-Guide in allen in den für ihn angegebenen
 Verzeichnissen aus der in der (!V)ST-GUIDE.INF(!v) angegebenen Variable namens
 (!V)PATHS(!v) nach der Datei sucht.
 
@@ -5318,7 +5318,7 @@ einzige Zeile ""sichtbaren"" Textes.
 
 !item Bei umfangreichen Texten empfiehlt es sich, die Kapitel in
 eigenen Dateien zu halten und von einer Hauptdatei mittels
-(!KW [include]) an passender Stelle einzubinden. Dies hat den Vorteil, daß
+(!KW [include]) an passender Stelle einzubinden. Dies hat den Vorteil, dass 
 man durch einfaches Verschieben des (!KW [include])-Befehls dem Text
 eine neue Struktur geben zu können.
 
@@ -5331,13 +5331,13 @@ Kapitel umwandelt.
 !item In Verbindung mit Makros kann man sich standardisierte Texte
 erstellen, die man für mehrere Programmbeschreibungen verwenden kann.
 Z.B. tauchen in Programmdokumentationen immer wieder die Kapitel auf,
-die sich mit dem Haftungsausschluß oder den Warenzeichen anderer
+die sich mit dem Haftungsausschluss oder den Warenzeichen anderer
 Produkte befassen.
 
 !item Beim Schreiben eines Textes kann die Arbeit auf beliebig viele
 Personen aufgeteilt werden. Jeder Autor kann dann in aller Ruhe seine
 Texte bearbeiten und austesten. Erst kurz vor Vollendung des
-Gesamtwerks faßt ein Projektleiter alle Texte zu einem zusammen.
+Gesamtwerks fasst ein Projektleiter alle Texte zu einem zusammen.
 
 UDO wird beispielsweise dazu eingesetzt, ein Online-Computermagazin zu
 erstellen. Der Projektleiter gibt Vorgaben, wie das Layout der
@@ -5489,7 +5489,7 @@ Auch hier zunächst ein paar Beispiele:
 Diese Makros könnten dazu benutzt werden, sich lästige Tipparbeit zu
 sparen oder Änderungen zu beschleunigen. Ein weiteres Anwendungsgebiet
 ist das Erstellen von standardisierten Texten, deren Inhalt durch
-Makros an den jeweiligen Quelltext angepaßt wird. Im folgenden
+Makros an den jeweiligen Quelltext angepasst wird. Im folgenden
 Beispiel wird der Programmname in einen Disclaimer eingebaut, der per
 (!KW [include]) eingebunden wird:
 
@@ -5535,7 +5535,7 @@ Zeilenumbruch nicht mehr funktionieren.
 !item Die Benutzung von Makros sollte nicht übertrieben werden. UDO
 erlaubt zwar die Benutzung von bis zu (!MAXMACRO) Makros, jedoch verlangsamt
 jedes zusätzliche Makro die Umwandlung der Quelldatei, da jede Zeile
-nach allen Makros durchsucht werden muß.
+nach allen Makros durchsucht werden muss.
 !end_enumerate
 
 !endif
@@ -5624,8 +5624,8 @@ einzubauen.
 
 !index (!kw [define])
 Die Syntax für eine Definition lautet (!KW [define] [<wort> <text>]). Im
-Gegensatz zu den Makros wird (!T)<text>(!t) nicht speziell angepaßt, d.h. es
-werden keine Umlaute und andere Sonderzeichen angepaßt.
+Gegensatz zu den Makros wird (!T)<text>(!t) nicht speziell angepasst, d.h. es
+werden keine Umlaute und andere Sonderzeichen angepasst.
 
 Im folgenden Beispiel benutzen wir eine Definition, um nur im
 HTML-Format ein Wort als Überschrift auszugeben:
@@ -5640,7 +5640,7 @@ Wie Sie sehen, können Sie mit diesen Definitionen spezielle Befehle des
 Ausgabeformates einbauen, die UDO standardmäßig nicht anbietet. In UDO4
 gab es mal einen Satz Spezialplatzhalter, die nur für (!LaTeX) vorhanden
 waren. Da diese Platzhalter selten gebraucht wurden, die Umwandlung
-eines Quelltextes daher zumeist unnötig bremste, muß man diese
+eines Quelltextes daher zumeist unnötig bremste, muss man diese
 Platzhalter nun mit geeigneten Definitionen nachahmen:
 
 !index \linebreak
@@ -5659,7 +5659,7 @@ Möglichkeit der hifreich sein.
 
 Benutzt werden Definitionen, die Parameter enthalten sollen, wie
 Makros mit Parametern. Text, der beim Aufruf einer Definition anstelle
-eines der durchnumerierten Parameter ausgegeben werden soll, ist in
+eines der durchnummerierten Parameter ausgegeben werden soll, ist in
 eckige Klammern einzufassen.
 
 Im obigen Beispiel habe ich Ihnen gezeigt, wie man eine Überschrift für
@@ -5670,7 +5670,7 @@ wesentlich eleganter erzeugen:
 !vinclude (!EXAMPLES)define3.ui
 !end_quote
 
-Sie sehen, daß Sie mit diesem Befehl einige Möglichkeiten haben,
+Sie sehen, dass Sie mit diesem Befehl einige Möglichkeiten haben,
 spezielle Funktionen eines Formates nachzubilden, die UDO standardmäßig
 nicht zur Verfügung stellt.
 
@@ -5694,17 +5694,17 @@ zu nichts expandiert. Dieser Umweg ist leider nötig.
 
 !begin_enumerate
 !item Der Text, der zusammen mit (!KW [define]) angegeben wird, wird
-nicht an das Ausgabeformat angepaßt.
+nicht an das Ausgabeformat angepasst.
 
 !item Text, der als Parameter an eine Definition übergeben wird, wird
-an das Ausgabeformat angepaßt.
+an das Ausgabeformat angepasst.
 
 !index (!kw [heading])
 !item UDO kann natürlich Überschriften mit (!KW [heading]) direkt
 erzeugen. Die obigen Beispiele eigneten sich halt gut zur Darstellung
 des Problems.
 
-!item Wie bei den Makros sollten Sie aufpassen, daß sie keine von UDO
+!item Wie bei den Makros sollten Sie aufpassen, dass sie keine von UDO
 benutzten Platzhalter wie (!KK1 [B]), (!KK1 [v]), (!KKW [TeX]) etc. verwenden. Auch gibt
 es hier eine maximale Anzahl von benutzbaren Definitionen. Sie liegt
 momentan bei maximal (!MAXMACRO) pro Quelltext.
@@ -5827,7 +5827,7 @@ of definitions is (!MAXMACRO).
 Symbole sind benutzerdefinierte inhaltsleere Variablen, welche sich
 durch das Kommando (!KW [set]) und beim Aufruf von UDO durch die
 Kommandozeilenoption (!V)-D(!v) setzen und mit dem Kommando (!KW [unset]) auch
-wieder entfernen lassen. Ob ein Symbol (nicht) gesetzt ist, läßt sich
+wieder entfernen lassen. Ob ein Symbol (nicht) gesetzt ist, lässt sich
 durch die Abfrage-Befehle (!KW [ifset]) bzw. (!KW [ifnset]) testen.
 
 Die Einsatzmöglichkeiten von Symbolen sind vielfältig. Im folgenden
@@ -5835,7 +5835,7 @@ Beispiel werde ich versuchen, Ihnen ein typisches Anwendungsgebiet zu
 zeigen, bei dem man je nach gesetzten Symbolen eine Zieldatei mit
 unterschiedlichem Inhalt erhält.
 
-Gehen wir einmal davon aus, daß wir einen Quelltext geschrieben haben,
+Gehen wir einmal davon aus, dass wir einen Quelltext geschrieben haben,
 der drei Kapitel enthält. Die ersten beiden Kapitel sind bereits
 fertig, am letzten Kapitel wird noch eifgrig herumgebastelt. Um nun die
 Turn-Around-Zeiten zu minimieren, wollen wir eine Zieldatei erzeugen,
@@ -5867,7 +5867,7 @@ Der Phantasie sind also wenige Grenzen gesetzt!
 Wie in der Einführung zu diesem Abschnitt beschrieben, lassen sich
 Symbole auch wieder löschen. Dazu bedient man sich des Befehls (!KW [unset]).
 
-Wollen Sie in obigem Beispiel partout verhindern, daß alle Kapitel in
+Wollen Sie in obigem Beispiel partout verhindern, dass alle Kapitel in
 die Zieldatei eingebunden werden, so können Sie zuvor das Symbol
 AlleKapitel löschen, sofern es gesetzt wurde. Dies funktioniert so:
 
@@ -5986,10 +5986,10 @@ Suchen-Dialog.
 Um einen mehrstufigen Indexeintrag anzulegen, benutzt man ein doppeltes
 Ausrufezeichen als Trennung der einzelnen Stufen. Es werden bis zu drei
 Stufen unterstützt. Mehrstufige Indizes sollte man dann einsetzen,
-falls man davon ausgehen kann, daß der Leser bei der Suche nach einem
+falls man davon ausgehen kann, dass der Leser bei der Suche nach einem
 Wort auf verschiedene Art und Weise im Indexregister nachschaut.
 
-Falls Sie denken, daß der Leser bei der Suche nach dem Wort
+Falls Sie denken, dass der Leser bei der Suche nach dem Wort
 ""Zeilenabstand"" im Index auch unter "Abstand" nachschauen wird,
 sollten Sie beide Indexeinträge vornehmen.
 
@@ -6035,7 +6035,7 @@ benutzt werden. Die folgenden Beispiele zeigen, wie die Umsetzung nach
 
 !begin_enumerate
 !index (!kw [no_index])
-!item Die Umwandlung von Indizes läßt sich durch den Schalter (!KW [no_index])
+!item Die Umwandlung von Indizes lässt sich durch den Schalter (!KW [no_index])
 im Vorspann unterbinden.
 
 !index (!kw [use_alias_inside_index])
@@ -6056,11 +6056,11 @@ Schalter (!KW [use_nodes_inside_index]) verwendet.
 !item Wenn man nach (!LaTeX) umwandelt und Index-Befehle verwendet, so
 fügt UDO in das (!LaTeX)-File die für das Programm ""Makeindex""
 nötige Befehle ein. Sonderzeichen in den Indizes werden bereits
-speziell für Makeindex angepaßt.
+speziell für Makeindex angepasst.
 
 !item Die jeweiligen Parameter werden also durch eckige Klammern
-eingefaßt. Falls man in einem Parameter eine schließende eckige
-oder runde Klammer benutzen möchte, so muß deren Wirkung mit
+eingefasst. Falls man in einem Parameter eine schließende eckige
+oder runde Klammer benutzen möchte, so muss deren Wirkung mit
 einem Ausrufezeichen aufgehoben werden. Geschieht dies nicht, so
 denkt UDO, der Parameter oder der Index-Befehl wäre bereits
 beendet. Ein Beispiel:
@@ -6261,7 +6261,7 @@ anders als für die anderen Formate setzt:
 
 !index (!kw [ifndest])
 Verwandt mit dem (!KW [ifdest])-Befehl ist der Befehl (!KW [ifndest]). Hier wird
-abgefragt, ob man (!I)nicht(!i) in ein Format ausgibt. Das obige Beispiel läßt
+abgefragt, ob man (!I)nicht(!i) in ein Format ausgibt. Das obige Beispiel lässt
 sich demnach auch folgendermaßen darstellen:
 
 !begin_quote
@@ -6600,7 +6600,7 @@ UDO läuft. Hierbei gelten folgende Zeichenketten:
 !item [win:]      Windows (32-Bit)
 !end_xlist
 
-Auch hier gilt, daß zusätzlich zu den genannten Zeichenketten auch
+Auch hier gilt, dass zusätzlich zu den genannten Zeichenketten auch
 ""all"" und ""none"" verwendet werden können.
 
 !index (!kw [ifnos])
@@ -6690,13 +6690,13 @@ gibt man folgendes an:
 Der Inhalt dieser Zeilen wird ohne das Kommando selbst, ohne
 Berücksichtigung von UDO-Kommandos und ohne Umwandlung von
 Sonderzeichen ausgegeben. Diese Zeilen sorgen - genau wie alle
-Kommandos - auch dafür, daß ein Absatz beendet wird. Diese Kommandos
+Kommandos - auch dafür, dass ein Absatz beendet wird. Diese Kommandos
 eignen sich also nicht dazu, mittem in einem Absatz unterschiedliche
 Sätze einzufügen!
 
 Dieses Kommandos können dazu dienen, formatspezifische Kommandos
 einzufügen. Im folgenden Beispiel wird gezeigt, welche Kommandos man in
-einen Quelltext einfügen muß, damit (!LaTeX) weiß, mit welchem Stil ein
+einen Quelltext einfügen muss, damit (!LaTeX) weiß, mit welchem Stil ein
 Dokument auszudrucken ist und damit es einen Index erzeugt:
 
 !begin_quote
@@ -6709,7 +6709,7 @@ Dokument auszudrucken ist und damit es einen Index erzeugt:
 !item [Die raw-Umgebung]
 
 Will man größere Blöcke im jeweiligen Format angeben, wäre es ziemlich
-mühsam, wenn man jede Zeile mit einem Kürzel beginnen müßte.
+mühsam, wenn man jede Zeile mit einem Kürzel beginnen müsste.
 
 !index !begin_raw
 !index !end_raw
@@ -6744,7 +6744,7 @@ Eine weitere Möglichkeit dazu bietet der Befehl (!KW [rinclude]).
 !item [Die comment-Umgebung]
 
 Will man größere Blöcke als Kommentar in die Ausgabedatei schreiben, wäre es ziemlich
-mühsam, wenn man jede Zeile mit einem Kürzel beginnen müßte.
+mühsam, wenn man jede Zeile mit einem Kürzel beginnen müsste.
 
 !index !begin_comment
 !index !end_comment

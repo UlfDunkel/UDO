@@ -112,8 +112,8 @@ developer versions.
 # ..............................................................................
 !iflang [german]
 !item Endet eine UDO-Eingabezeile mit !\<Zeilenumbruch>, so wird die folgende Zeile
-  von UDO als Fortsetzung der vorhergehenden Zeile aufgefaßt. Es können damit mehrere "echte"
-  Zeilen aus Sicht von UDO zu einer einzigen "logischen" Eingabezeile zusammengefaßt werden.
+  von UDO als Fortsetzung der vorhergehenden Zeile aufgefasst. Es können damit mehrere "echte"
+  Zeilen aus Sicht von UDO zu einer einzigen "logischen" Eingabezeile zusammengefasst werden.
   Diese Fortsetzungszeilen sind an jeder Stelle im UDO-Quelltext zulässig, auch z.B. in Makros
   und Definitionen. Steht !\ nicht unmittelbar am Ende einer Zeile, so wird es ignoriert
   und als normaler Text ausgegeben. (!nl)
@@ -267,7 +267,7 @@ Version 6.5.13
 !endif
 # ..............................................................................
 !iflang [german]
-!item Die Bezeichnung der einzelnen Versionen wurde geändert. Es heißt
+!item Die Bezeichnung der einzelnen Versionen wurde geändert. Es heisst
 jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 (x gerade für Produktionsversionen bzw. ungerade für Entwicklerversionen von UDO).
 !endif
@@ -521,13 +521,13 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 # ..............................................................................
 !iflang [german]
 !item Beim Modern Layout wird die Tabelle in der linken Spalte, die das
-      Menu zeigt, jetzt mit einer ID namens ""UDO_menu""" versehen, so daß
+      Menu zeigt, jetzt mit einer ID namens ""UDO_menu""" versehen, so dass
       das Menu beim Drucken mittels CSS ausgeblendet werden kann. (!nl)
       Version 6.5.9
 !endif
 !iflang [english]
 !item Beim Modern Layout wird die Tabelle in der linken Spalte, die das
-      Menu zeigt, jetzt mit einer ID namens ""UDO_menu""" versehen, so daß
+      Menu zeigt, jetzt mit einer ID namens ""UDO_menu""" versehen, so dass
       das Menu beim Drucken mittels CSS ausgeblendet werden kann. (!nl)
       Version 6.5.9
 !endif
@@ -946,12 +946,12 @@ unten links !! unten mitte !! unten rechts
 # ..............................................................................
 !iflang [german]
 !item Bug #0000010 (!nl)
-      Im HTML-Code werden alle Zahlenangaen in Tags in "" eingefaßt.
+      Im HTML-Code werden alle Zahlenangaben in Tags in "" eingefasst.
 !endif
 # ..............................................................................
 !iflang [english]
 !item Bug #0000010 (!nl)
-      Im HTML-Code werden alle Zahlenangaen in Tags in "" eingefaßt.
+      Im HTML-Code werden alle Zahlenangaben in Tags in "" eingefasst.
 !endif
 !end_itemize
 # ------------------------------------------------------------------------------
@@ -1157,12 +1157,12 @@ unten links !! unten mitte !! unten rechts
 # ..............................................................................
 !iflang [german]
 !item Bug #0000010 (!nl)
-      Im HTML-Code werden alle Zahlenangaen in Tags in "" eingefaßt.
+      Im HTML-Code werden alle Zahlenangaben in Tags in "" eingefasst.
 !endif
 # ..............................................................................
 !iflang [english]
 !item Bug #0000010 (!nl)
-      Im HTML-Code werden alle Zahlenangaen in Tags in "" eingefaßt.
+      Im HTML-Code werden alle Zahlenangaben in Tags in "" eingefasst.
 !endif
 !end_itemize
 # ------------------------------------------------------------------------------
@@ -1358,7 +1358,7 @@ unten links !! unten mitte !! unten rechts
          ein Abbildungs!-ver!-zeichnis erstellt werden kann.
    !item Für RTF wird jetzt eine einzelne Seite erzeugt, die ein
          Ab!-bildungs!-ver!-zeichnis enthält, wenn (!T)!/listoffigures(!t)
-         gesetzt ist. Dieses muß nur aktualisiert werden.
+         gesetzt ist. Dieses muss nur aktualisiert werden.
    !item Es werden Vorgaben für das Layout für die Postscript-Ausgabe
          gemacht: Art und Größe des proportionalen und äquidistanten
          Zeichensatzes sowie die Öffnungsparameter für PDF-Dateien.
@@ -1367,7 +1367,7 @@ unten links !! unten mitte !! unten rechts
  	!begin_itemize !short
  	 !item (!T)!/html_backpage ../index.html ''Zurück zu UDO-Open-Source''(!t) (!nl)
  	       Jetzt kann zusätzlich ein Text übergeben werden, der statt
-         des Links in das alt-Attribut eingetragen wird. Der Text muß
+         des Links in das alt-Attribut eingetragen wird. Der Text muss
          in einfachen Anführungszeichen stehen (''foo'')
    !item Die Bildunterschrift wird bei der Ausgabe nach RTF nicht
          mehr in Klammern gesetzt.
@@ -1476,12 +1476,12 @@ unten links !! unten mitte !! unten rechts
       (!T)!/doclayout [ps] [propfontname] foo(!t) (!nl)
       Mögliche Angaben für foo sind Zeichensatznamen, z.~B. Arial,
       Times New Roman, sans oder sans-serif. (!nl)
-      (!B)Hinweis:(!b) Für die Postscriptausgabe gilt, daß für Helvetica,
+      (!B)Hinweis:(!b) Für die Postscriptausgabe gilt, dass für Helvetica,
       Arial oder sans-serif immer Helvetica gesetzt wird, ansonsten
       Times New Roman.
 
       (!T)!/doclayout [ps] [propfontsize] foo(!t) (!nl)
-      Mögliche Angaben für foo ist eine Zeichensatzgröße in pt.
+      Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
 !item (!T)!/docinfo [keywords] foo(!t) (!nl)
       Ersatz und Erweiterung für (!T)!/html_keywords(!t) (funkioniert
       derzeit nur für Postscript).
@@ -1987,7 +1987,7 @@ cases it was impossible not to change the syntax of some commands.
 	!item Es sind nun 3000 Kapitel benutzbar
 	!item (!KW [verbatimsize]) wird nun für HTML unterstützt.
 	!item Auf Systemen, die lange Dateinamen unterstützen,
-          benutzt UDO nun für die Numerierung der HTML-Dateien drei
+          benutzt UDO nun für die Nummerierung der HTML-Dateien drei
           Stellen pro Ebene anstatt zwei (001002003004.html anstatt
           01020304.html).
         !item Die Einträge für das Inhaltsverzeichnis werden nun
@@ -2253,7 +2253,7 @@ cases it was impossible not to change the syntax of some commands.
              Quelltext und dessen Dokumentation in einer Datei
              zusammenzufassen.
 
-             UDO gibt normalen Text für diese Formate so aus, daß er zwischen
+             UDO gibt normalen Text für diese Formate so aus, dass er zwischen
              die typischen Kommentarzeichen gesetzt wird. Der Quelltext selber
              wird in einer sourcecode-Umgebung angegeben.
 
@@ -2473,7 +2473,7 @@ cases it was impossible not to change the syntax of some commands.
 
         !begin_itemize !short
         !item Die Umwandlung ins RTF wurde komplett neu programmiert, so
-          daß die erzeugten Dateien nun auch problemlos mit WinWord
+          dass die erzeugten Dateien nun auch problemlos mit WinWord
           importiert werden können.
         !item Für (!LaTeX)~2.09 und (!LaTeX2e) erzeugt UDO automatisch eine
           Präambel (abschaltbar).
@@ -2520,7 +2520,7 @@ cases it was impossible not to change the syntax of some commands.
         !item (!KW [no_verbatim_umlaute]) ersetzt den Schalter (!kw [verbatim_no_umlaute])
         !item Der Befehl (!kw [list_parsep]) existiert nicht mehr. Komprimierte
           Umgebungen können nun viel eleganter mit dem Umgebungsparameter (!KW [short]) erstellt werden.
-        !item Die zu benutzende Sprache muß nun mit (!KW [language]) gesetzt
+        !item Die zu benutzende Sprache muss nun mit (!KW [language]) gesetzt
           werden. (!KW [language] [[german!!]]) ersetzt demnach den Befehl !german
           etc.
         !item Beim Index-Befehl können nun bis zu drei Indizes übergeben
@@ -2709,14 +2709,14 @@ a change of the syntax of some commands.
         !item Die halbautomatische Silbentrennung wurde komplett neu
           programmiert.
         !item Die automatische Referenzierung wurde dahingehend verändert,
-          daß ein Verweis nur noch bei ganzen Worten angelegt wird.
+          dass ein Verweis nur noch bei ganzen Worten angelegt wird.
         !item Die maximale Anzahl der Kapitel und Labels innerhalb eines
           Quelltextes wurde verdoppelt. Nun sind maximal 1024 Kapitel
           und 1024 Labels möglich.
         !item Pro Absatz sind jetzt bis zu 200 Verweise möglich. Früher
           waren (aufgrund eines Fehlers) nur 16 Verweise pro Quelltext
           möglich.
-        !item Manualpages werden komplett neu formatiert. Nun muß man sich
+        !item Manualpages werden komplett neu formatiert. Nun muss man sich
           nicht mehr die Finger mit description- und quote-Umgebungen
           verbiegen.
         !item Für em(!TeX) werden nun auch PCX-Bilder unterstützt.
@@ -2806,7 +2806,7 @@ This was the first English version with an English documentation!
 !iflang [german]
 Diese Version wurde am 12.11.1995 veröffentlicht.
 
-Gegenüber Release 3 hat sich soviel getan, daß ich jedem nur empfehlen
+Gegenüber Release 3 hat sich soviel getan, dass ich jedem nur empfehlen
 kann, diese Dokumentation einmal zu überfliegen. Würde ich alle
 Änderungen hier angeben, wäre diese Dokumentation um 10 Seiten länger!
 

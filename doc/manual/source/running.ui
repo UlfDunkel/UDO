@@ -81,7 +81,7 @@ MagiC (Mac/PC) sowie STonX.
 
 Während der Umwandlung kann man im Hauptdialog den Umwandlungsvorgang
 verfolgen. Dies ist jedoch aufgrund der vielen AES-Aufrufe eine
-zeitaufwendige Angelegenheit. Generell kann ich sagen, daß UDO in der
+zeitaufwendige Angelegenheit. Generell kann ich sagen, dass UDO in der
 GEM-Version wesentlich langsamer läuft als die TTP-Version. Bei großen
 Dokumentationen sollte man den Quelltext daher mit der TTP-Version
 übersetzen.
@@ -202,20 +202,20 @@ wird hier erklärt.
 
     !begin_itemize
 
-    !item Anpassen: Ist dieser Button selektiert, so paßt die GEM-Version
+    !item Anpassen: Ist dieser Button selektiert, so passt die GEM-Version
     den Namen der Zieldatei bei einem Wechsel des Zielformats im
     Hauptdialog an. Die Anpassung ist abhängig davon, welche der folgenden
     Buttons Sie selektieren:
 
         !begin_itemize
-        !item Komplett: UDO paßt übernimmt den kompletten Dateinamen der
-        Quelldatei und paßt nur die Endung an.
+        !item Komplett: UDO übernimmt den kompletten Dateinamen der
+        Quelldatei und passt nur die Endung an.
 
         !item Name und Endung: UDO übernimmt den Namen der Quelldatei und
-        paßt die Endung an das ausgewählte Ausgabeformat an. Der Pfad der
+        passt die Endung an das ausgewählte Ausgabeformat an. Der Pfad der
         Zieldatei wird nicht verändert.
 
-        !item Nur Endung: UDO paßt lediglich die Endung der Zieldatei an das
+        !item Nur Endung: UDO passt lediglich die Endung der Zieldatei an das
         jeweilige Ausgabeformat an. Pfad und Name der Zieldatei werden nicht
         verändert.
         !end_itemize
@@ -406,8 +406,8 @@ If an entry is checked UDO will use the text as a predefined symbol.
 !html_name running_gem_externalprograms.html
 
 !iflang [german]
-Dieser Dialog sieht ziemlich verwirrend aus und ich muß gestehen, daß
-er bald ein wenig überarbeitet werden müßte.
+Dieser Dialog sieht ziemlich verwirrend aus und ich muss gestehen, dass 
+er bald ein wenig überarbeitet werden müsste.
 
 In diesem Dialog können Sie festlegen, mit welchen Programmen Sie die
 Quell- und Zieldateien bearbeiten und sich ansehen möchten. Außerdem
@@ -546,7 +546,7 @@ For (!B)MacOS~X(!b) you can use the UDO commandline version.
 !iflang [german]
 Die Macintosh-Variante von UDO kommt in einem etwas schlichteren
 Gewande als die GEM-Variante daher. Alle einstellbaren Optionen sind in
-einem Dialog zusammengefaßt.
+einem Dialog zusammengefasst.
 
 Hat man beim Start von UDO kein UDO-Dokument übergeben, wählt man
 zunächst die Eingabedatei über den zugehörigen [Auswählen]-Knopf. Über
@@ -560,7 +560,7 @@ Gruppe von Schaltern --- deren Beschriftung hoffentlich selbsterklärend
 ist --- eingestellt werden. Die Einstellung des Ausgabeanzeige-Popups
 bestimmt die Geschwindigkeit mit der UDO seine Arbeit erledigt bzw. wie
 kooperativ und mitteilsam es dabei ist. Kooperativ bedeutet in diesem
-Fall, daß man, während UDO beschäftigt ist, mit einer anderen
+Fall, dass man, während UDO beschäftigt ist, mit einer anderen
 Applikation arbeiten kann.
 
 Die eigentliche Konvertierung wird über den [Ausgeben]-Knopf gestartet.

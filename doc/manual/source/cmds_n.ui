@@ -204,9 +204,9 @@ Set a line break.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Durch (!KKW [nl]) kann man einen Zeilenumbruch erzwingen.
-Vor (!KKW [nl]) (!B)muß(!b) ein (festes) Leerzeichen stehen! Nach
-(!KKW [nl]) muß ebenfalls ein (festes) Leerzeichen stehen
-oder (!KKW [nl]) muß das letzte Wort einer Zeile sein.
+Vor (!KKW [nl]) (!B)muss(!b) ein (festes) Leerzeichen stehen! Nach
+(!KKW [nl]) muss ebenfalls ein (festes) Leerzeichen stehen
+oder (!KKW [nl]) muss das letzte Wort einer Zeile sein.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -501,7 +501,7 @@ Do not use images in tables of contents.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Mit diesem Kommando läßt sich die Ausgabe von
+Mit diesem Kommando lässt sich die Ausgabe von
 Bildern neben den Verweisen auf die übergeordneten
 Kapitel in Inhaltsverzeichnissen unterdrücken.
 !endif
@@ -550,7 +550,7 @@ Do not use images.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Mit diesem Kommando läßt sich die Ausgabe von Befehlen zur Ausgabe von Bildern
+Mit diesem Kommando lässt sich die Ausgabe von Befehlen zur Ausgabe von Bildern
 für ein Ausgabeformat unterbinden; (!KW [image]) wird dann einfach ignoriert.
 Im Beispiel würden keine Befehle zur Ausgabe von Bildern beim HTML-Format erzeugt.
 !endif
@@ -828,7 +828,7 @@ Do not output a preamble.
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, so gibt
 UDO für die angegebenen Formate keine Preambel aus.
-Das Beispiel zeigt, wie man dafür sorgen kann, daß
+Das Beispiel zeigt, wie man dafür sorgen kann, dass
 UDO keine (!LaTeX)-Preambel erzeugt. Diesen Schalter
 sollte man nur dann verwenden, wenn man ausreichend
 Kenntnis über das jeweilige Zielformat besitzt.
@@ -915,7 +915,7 @@ Do not output source code lines.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Der Schalter (!KW [no_sourcecode]) bewirkt, daß für die
+Der Schalter (!KW [no_sourcecode]) bewirkt, dass für die
 angegebenen Formate die Sourcecode-Zeilen nicht ausgegeben werden. Somit
 kann man sich eine Programm-Doku ohne den Sourcecode erzeugen.
 !endif
@@ -1438,7 +1438,7 @@ Start a "hidden" chapter.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Dieses Kommando hat die gleiche Funktion wie (!KW [node]),
-mit der Ausnahme, daß ""<text>"" nicht in Inhaltsverzeichnissen erscheint.
+mit der Ausnahme, dass ""<text>"" nicht in Inhaltsverzeichnissen erscheint.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1488,7 +1488,7 @@ Suppress referencing.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieser Platzhalter sorgt dafür, daß der ausgegebene Text (Inhalt der Klammern) nicht referenziert wird.
+Dieser Platzhalter sorgt dafür, dass der ausgegebene Text (Inhalt der Klammern) nicht referenziert wird.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]

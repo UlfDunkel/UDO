@@ -28,12 +28,12 @@ Anleitungen oder sonstigen Textdateien, die in einem oder mehreren
 Formaten benötigt werden. Trotz der Vielseitigkeit ist UDO leicht zu
 bedienen und die UDO-Syntax leicht zu erlernen.
 
-UDOs Vielseitigkeit drückt sich dadurch aus, daß diese Anleitung
+UDOs Vielseitigkeit drückt sich dadurch aus, dass diese Anleitung
 ziemlich umfangreich ist. Dieser Umfang schreckt viele Leute ab, die
 Anleitung einmal komplett durchzulesen. Genau diese Leute sind es aber
 später, die viele Fragen stellen, die diese Anleitung fast alle erklären kann.
 
-Aus diesem Grunde sei gleich zu Beginn darauf hingewiesen, daß
+Aus diesem Grunde sei gleich zu Beginn darauf hingewiesen, dass 
 Sie UDO nur dann effizient einsetzen können, wenn Sie die Anleitung
 einmal komplett durchlesen/überfliegen und mit den mitgelieferten
 Beispielen ein wenig herumexperimentieren.
@@ -45,9 +45,9 @@ Sie etwas nachschlagen können, falls Ihnen der Sinn eines Befehls
 wieder entfallen ist.
 
 Falls Sie dabei Stellen entdecken, in denen Dinge zu kurz, falsch oder
-mißverständlich beschrieben worden sind, so (!link [teilen Sie dies bitte mit] [Mailingliste]).
+missverständlich beschrieben worden sind, so (!link [teilen Sie dies bitte mit] [Mailingliste]).
 
-In der Hoffnung, daß UDO für Sie eine unverzichtbare Hilfe wird und Sie
+In der Hoffnung, dass UDO für Sie eine unverzichtbare Hilfe wird und Sie
 mehr Zeit für die wesentlichen Dinge bekommen.
 
 !endif
@@ -106,10 +106,10 @@ vereinfachen, die in (!I)mehreren(!i) Formaten benötigt werden.
 UDO leistet aber auch gute Dienste, falls man nur
 (!I)ein(!i) Format erzeugen will. So ist es für Anfänger sicherlich einfacher,
 die Syntax von UDO zu begreifen als die von HTML oder (!LaTeX), denn bei
-letzterem muß man beispielsweise höllisch aufpassen, daß man nicht
+letzterem muss man beispielsweise höllisch aufpassen, dass man nicht
 unerlaubte Zeichen im Quelltext einbaut, wogegen UDO auch mit
 Sonderzeichen klarkommt und diese automatisch an das jeweilige Ausgabeformat
-anpaßt. Sprich, selbst wenn man nur HTML oder nur (!LaTeX) erzeugen will,
+anpasst. Sprich, selbst wenn man nur HTML oder nur (!LaTeX) erzeugen will,
 kann UDO sehr gute Dienste leisten.
 
 Bei alledem ist UDO multilingual, d.h. Sie können Texte in verschiedenen Sprachen erzeugen,
@@ -118,7 +118,7 @@ und UDO wird dabei für die unterstützten Sprachen die jeweils passenden Begriffe
 im jeweiligen Format darstellen.
 
 Die Syntax von UDO ist sehr leicht zu erlernen. Zur Erstellung
-einfacher Dateien muß man lediglich Kenntnis von etwa zehn bis
+einfacher Dateien muss man lediglich Kenntnis von etwa zehn bis
 fünfzehn Befehlen besitzen, also in etwa so viel, wie Sie auch beim
 Verfassen von HTML- oder (!LaTeX)-Dateien besitzen müssen.
 
@@ -158,20 +158,20 @@ Haben Sie einen Quelltext erstellt, so können Sie diesen in folgende Formate umw
 # Einige Formate sind system-/plattformübergreifend austauschbar, einige sind nur auf
 # bestimmten Systemen/Plattformen von Interesse.
 
-UDO erzeugt größtenteils keine `fertigen' Dokumente. In aller Regel
+UDO erzeugt größtenteils keine (!I)fertigen(!i) Dokumente. In aller Regel
 müssen die von UDO erzeugten Dateien erst noch durch weitere Programme
 bearbeitet werden. So müssen Windows-Help-Quelltexte erst noch durch
 den Hypertext-Compiler (!V)HC.EXE(!v) bearbeitet werden, RTF-Dateien mit einer
 Textverarbeitung ausgegeben werden, etc.
 
-UDO versucht, dem Verfasser des Textes soviel Arbeit wie möglich
+UDO versucht, beim Verfassen des Textes soviel Arbeit wie möglich
 abzunehmen. Neben der reinen Umwandlung bietet UDO daher je nach Ausgabeformat sinnvolle Nützlichkeiten wie
 
 #TODO: link zu Kopfzeilen fehlt, ebenso das dazugehörige Kapitel
 !begin_itemize !short
 !item automatische Generierung von (!link [Titelseiten] [Titelseite]),
 Kopfzeilen, (!link [Fußnoten] [Fußnoten]), (!link [Inhaltsverzeichnissen] [Inhaltsverzeichnisse]),
-!item automatische (!link [Kapitelnumerierung] [Gliederungsebenen]),
+!item automatische (!link [Kapitelnummerierung] [Gliederungsebenen]),
 !item (!link [Tabellensatz] [Tabellen]),
 !item automatisches Anlegen von (!link [Querverweisen] [Querverweise]) bei Hypertext-Formaten,
 !item Unterstützung verschiedener (!link [Schriftarten] [Schriftarten]),
@@ -191,7 +191,7 @@ Blocksatz,
 
 !smallskip
 
-UDO hat so seine Stärken und Schwächen. Die Umwandlung ins ASCII-Text-,
+UDO hat seine Stärken und Schwächen. Die Umwandlung ins ASCII-Text-,
 ST-Guide-, HTML-, (!LaTeX)- und WinHelp-Format gehören -- historisch
 bedingt -- sicherlich zu den Stärken dieses Programms. Ausgabeformate
 Linuxdoc-SGML und LyX werden erst seit kurzer Zeit angeboten und
@@ -363,12 +363,12 @@ UDO can't convert them into its own format.
 Falls Sie eine oder mehrere der folgenden Fragen mit Ja beantworten,
 dann dürfte es sich für Sie lohnen, UDO einmal genauer anzusehen.
 Falls Sie keine Frage mit Ja beantworten sollten, dann dürfte es sehr
-wahrscheinlich so sein, daß ein Weiterlesen dieser Dokumentation oder
+wahrscheinlich so sein, dass ein Weiterlesen dieser Dokumentation oder
 der Einsatz von UDO für Sie überflüssig ist.
 
 !begin_itemize
 
-!item Sie haben einen Text mit allgemeinem Inhalt verfaßt und möchten
+!item Sie haben einen Text mit allgemeinem Inhalt verfasst und möchten
 diesen auch Personen zugänglich machen, die nicht das Betriebssystem
 benutzen, welches Sie selbst einsetzen?
 
@@ -390,7 +390,7 @@ Textverarbeitung, die das Rich Text Format (korrekt!) importieren kann,
 setzen möchten?
 
 !item Sie benötigen nur eine ASCII-Anleitung, möchten sich aber nicht
-immer selbst um den Zeilenumbruch, die Kapitelnumerierung, Blocksatz
+immer selbst um den Zeilenumbruch, die Kapitelnummerierung, Blocksatz
 und die Erstellung des Inhaltsverzeichnisses kümmern?
 
 !item Sie möchten einen Hypertext im World Wide Web anbieten, Sie
@@ -476,21 +476,21 @@ Ich begann jeweils damit, zunächst die ASCII-Anleitung zu schreiben, in
 eine Kopie der ASCII-Anleitung die Hypertextkommandos einzufügen und
 schließlich die ASCII-Anleitung in eine Textverarbeitung zu
 importieren, um sie neu zu formatieren und auszudrucken. Schnell
-stellte sich heraus, daß dieser Weg ziemlich mühsam war, denn bei auch
-nur kleinen Änderungen mußten diese in gleich drei Dateien durchgeführt
-werden. Bei größeren Änderungen mußte der ganze manuelle
+stellte sich heraus, dass dieser Weg ziemlich mühsam war, denn bei auch
+nur kleinen Änderungen mussten diese in gleich drei Dateien durchgeführt
+werden. Bei größeren Änderungen musste der ganze manuelle
 Umwandlungsvorgang erneut durchgeführt werden.
 
 Nachdem diese Prozedur endlich ein Ende gefunden hatte, schwor ich
-mir, daß es (!I)so(!i) einfach nicht weitergehen durfte!
+mir, dass es (!I)so(!i) einfach nicht weitergehen durfte!
 
 Im Januar 1995 kam mir nach ein paar gründlichen Überlegungen die Idee,
 ein neues Textformat zu entwerfen, welchem ich den Projektnamen "UDO"
 (als Abkürzung für (!B)U(!b)niversal (!B)DO(!b)cument) gab. Die Syntax
 sollte gleichzeitig leicht zu erlernen und flexibel genug sein, und so
-entschloß ich mich dazu, daß sich die neue Syntax an der von (!LaTeX)
+entschloss ich mich dazu, dass sich die neue Syntax an der von (!LaTeX)
 orientieren sollte. Parallel dazu wurde das passende Programm
-entwickelt, welches Textdateien, die in diesem neuen Textformat verfaßt
+entwickelt, welches Textdateien, die in diesem neuen Textformat verfasst
 wurden, ins ASCII- ST-Guide- und (!LaTeX)-Format umwandeln konnte: UDO war
 geboren!
 
@@ -582,6 +582,7 @@ Am UDO-Projekt beteiligte Personen (in alphabetischer Reihenfolge):
 !begin_description
   !item [Denesh Bhabuta] Support in England (bis 2001)
   !item [Alexander Clauss] Erstellung der HP-UX-300/400-Version (bis 2001)
+  !item [Ulf Dunkel] Programmierung und Dokumentation [seit 2006]
   !item [Dirk Hagedorn] Programmierung und Dokumentation (bis 2001)
   !item [Norbert Hanz] Programmierung (seit 2002)
   !item [Dirk Haun] einer der Geburtsväter von UDO
@@ -594,6 +595,7 @@ Am UDO-Projekt beteiligte Personen (in alphabetischer Reihenfolge):
   !item [Martin Osieka] Portierung auf MacOS (bis ca. 1999)
   !item [Thorsten Otto] Pflege der Dokumentation (2001)
   !item [Rainer Riedl] Erstellung der BeOS-Version (bis ca. 2001)
+  !item [Gerhard Stoll] Programmierung [seit ????]
   !item [Tom Thomason] Support in Schweden (bis ca. 2001)
 !end_description
 !endif
@@ -606,6 +608,7 @@ Persons working on the UDO project (in alphabetical ordner):
 !begin_description
   !item [Denesh Bhabuta] supporting UDO in Great Britain (until 2001)
   !item [Alexander Clauss] compiling the HP-UX 300/400 version (until 2001)
+  !item [Ulf Dunkel] programming and documentation [since 2006]
   !item [Dirk Hagedorn] programming and documentation (until 2001)
   !item [Norbert Hanz] programming (since 2002)
   !item [Dirk Haun] one of the fathers of UDO
@@ -618,6 +621,7 @@ Persons working on the UDO project (in alphabetical ordner):
   !item [Martin Osieka] porting UDO to MacOS (until ca. 1999)
   !item [Thorsten Otto] maintaining the documentation (2001)
   !item [Rainer Riedl] compiling the BeOS version (until ca. 2001)
+  !item [Gerhard Stoll] programming [since ????]
   !item [Tom Thomason] supporting UDO in Sweden (until ca. 2001)
 !end_description
 !endif
@@ -772,7 +776,7 @@ Mail discussions are mostly in german, but feel free to ask in English.
 
 ################################################################################
 !iflang [german]
-!begin_node Haftungsausschluß
+!begin_node Haftungsausschluss
 !endif
 !iflang [english]
 !begin_node Disclaimer
@@ -805,7 +809,7 @@ Nevertheless the UDO Community will be glad if you (!link [send bug reports] [Co
 !endif
 
 !end_node
-# Ende: Haftungsausschluß/Disclaimer
+# Ende: Haftungsausschluss/Disclaimer
 
 ################################################################################
 !iflang [german]
@@ -819,7 +823,7 @@ Nevertheless the UDO Community will be glad if you (!link [send bug reports] [Co
 !iflang [german]
 Innerhalb dieser Dokumentation wird auf Warenzeichen Bezug genommen,
 die nicht explizit als solche ausgewiesen sind. Aus dem Fehlen einer
-Kennzeichnung kann nicht geschlossen werden, daß ein Name frei von den
+Kennzeichnung kann nicht geschlossen werden, dass ein Name frei von den
 Rechten Dritter ist.
 
 Atari, TOS und MultiTOS sind Warenzeichen oder eingetragene

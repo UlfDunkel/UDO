@@ -13,7 +13,7 @@ Statt!..
 !end_asc
 !end_verbatim
 
-!.. muß man nun folgendes Konstrukt verwenden:
+!.. muss man nun folgendes Konstrukt verwenden:
 !begin_verbatim
 !ifdest [asc]
 [...]
