@@ -139,7 +139,7 @@ gleich mit CAB ansehen. Der Phantasie sind wenig Grenzen gesetzt.
 
 !item [Ziel/ST-Guide:] Wird dieser Menüeintrag aufgerufen, so ruft UDO
 den ST-Guide auf und teilt diesem mit, er möge doch bitte den soeben
-erzeugten Hypertext (Name der Zieldatei mit der Endung `.hyp)'
+erzeugten Hypertext (Name der Zieldatei mit der Endung '.hyp') 
 anzeigen.
 
 !end_tlist
