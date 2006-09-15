@@ -145,10 +145,10 @@ Older UDO versions needed the installation of EMX. This software is no longer ne
 # @(#) Installation der Macintosh-Version, 26.06.1996, Martin Osieka
 ####################################################################
 !iflang [german]
-!begin_node Installation der Macintosh-Version (MacOS 9)
+!begin_node Installation der Macintosh-Version (Mac~OS 9)
 !endif
 !iflang [english]
-!begin_node Installing the Macintosh version (MacOS 9)
+!begin_node Installing the Macintosh version (Mac~OS 9)
 !endif
 !html_name installation_mac_9.html
 
@@ -176,15 +176,15 @@ the program with a certain software.
 
 (!DocumentationWorkInProgress)
 !end_node
-# Ende: Installation Macintosh (MacOS 9)
+# Ende: Installation Macintosh (Mac~OS 9)
 
 ################################################################################
 ################################################################################
 !iflang [german]
-!begin_node Installation der Macintosh-Version (MacOS X)
+!begin_node Installation der Macintosh-Version (Mac~OS~X)
 !endif
 !iflang [english]
-!begin_node Installing the Macintosh version (MacOS X)
+!begin_node Installing the Macintosh version (Mac~OS~X)
 !endif
 !html_name installation_mac_x.html
 
@@ -194,19 +194,19 @@ the program with a certain software.
 !item Packen Sie das ZIP-File aus und kopieren Sie die ausführbare Datei ''(!T)udo(!t)'' nach (!T)/usr/bin(!t).
 !end_itemize
 !endif
-Anmerkung: Eine manpage ist derzeit nicht Teil der MacOS X Distribution.
+Anmerkung: Eine manpage ist derzeit nicht Teil der Mac-OS-X-Distribution.
 # ------------------------------------------------------------------------------
 !iflang [english]
 !begin_itemize !short
 !item Download the appropriate ZIP archive from (!url [http://www.udo-open-source.org/] [http://www.udo-open-source.org])
 !item Unpack the ZIP archiv and copy the executable file ''(!T)udo(!t)'' to (!T)/usr/bin(!t).
 !end_itemize
-Please note: a manpage is currently not part of the MacOS X Distribution.
+Please note: a manpage is currently not part of the Mac~OS~X distribution.
 !endif
 
 (!DocumentationWorkInProgress)
 !end_node
-# Ende: Installation Macintosh (MacOS X)
+# Ende: Installation Macintosh (Mac~OS~X)
 
 ################################################################################
 ################################################################################

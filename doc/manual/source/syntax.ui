@@ -6591,8 +6591,8 @@ UDO läuft. Hierbei gelten folgende Zeichenketten:
 !item [dos:]      DOS
 !item [hpux:]     HP-UX
 !item [linux:]    Linux
-!item [macos:]    MacOS
-!item [macosx:]   MacOS X
+!item [macos:]    Mac~OS
+!item [macosx:]   Mac~OS~X
 !item [nextstep:] NeXTStep
 !item [sinix:]    SINIX
 !item [sunos:]    SunOS
@@ -6625,8 +6625,8 @@ running on. Use the following words for this kind of query:
 !item [dos:]      DOS
 !item [hpux:]     HP-UX
 !item [linux:]    Linux
-!item [macos:]    MacOS
-!item [macosx:]   MacOS X
+!item [macos:]    Mac~OS
+!item [macosx:]   Mac~OS~X
 !item [nextstep:] NeXTStep
 !item [sinix:]    SINIX
 !item [sunos:]    SunOS

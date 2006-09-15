@@ -592,7 +592,7 @@ Am UDO-Projekt beteiligte Personen (in alphabetischer Reihenfolge):
   !item [Ulrich Kretschmer] Pflege der Dokumentation (seit Ende 2003)
   !item [Christian Krüger] Erstellung der PostScript-Anbindung von UDO
   !item [Martin Loos] Verwaltung der alten Mailingliste (bis ca. 1999)
-  !item [Martin Osieka] Portierung auf MacOS (bis ca. 1999)
+  !item [Martin Osieka] Portierung auf Mac~OS (bis ca. 1999)
   !item [Thorsten Otto] Pflege der Dokumentation (2001)
   !item [Rainer Riedl] Erstellung der BeOS-Version (bis ca. 2001)
   !item [Gerhard Stoll] Programmierung [seit ????]
@@ -618,7 +618,7 @@ Persons working on the UDO project (in alphabetical ordner):
   !item [Ulrich Kretschmer] maintaining the documentation (since 2003)
   !item [Christian Krüger] programming the PostScript support
   !item [Martin Loos] managing the old mailing list (until ca. 1999)
-  !item [Martin Osieka] porting UDO to MacOS (until ca. 1999)
+  !item [Martin Osieka] porting UDO to Mac~OS (until ca. 1999)
   !item [Thorsten Otto] maintaining the documentation (2001)
   !item [Rainer Riedl] compiling the BeOS version (until ca. 2001)
   !item [Gerhard Stoll] programming [since ????]
@@ -835,7 +835,7 @@ Corporation PLC.
 GEM und GEM Desktop sind Warenzeichen oder eingetragene Warenzeichen
 von Digital Research.
 
-Mac, Macintosh und MacOS sind eingetragene Warenzeichen von Apple
+Mac, Macintosh, Mac~OS und Mac~OS~X sind eingetragene Warenzeichen von Apple
 Computer Inc.
 
 MS-DOS, Windows, Windows~95 und Windows~NT sind eingetragene
@@ -865,7 +865,7 @@ Corporation PLC.
 GEM and GEM Desktop are trademarks or registered trademarks of
 Digital Research.
 
-Mac, Macintosh and MacOS are registered trademarks of Apple Computer
+Mac, Macintosh, Mac~OS and Mac~OS~X are registered trademarks of Apple Computer
 Inc.
 
 MS-DOS, Windows, Windows~95 and Windows~NT are registered trademarks of

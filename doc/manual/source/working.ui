@@ -536,7 +536,7 @@ udorlyyy.sss
    ||           hp4:  Version für HP-UX, 300/400er Baureihe
    ||           hp8:  Version für HP-UX, 700/800er Baureihe
    ||           lin:  Version für Linux
-   ||           mac:  Version für MacOS
+   ||           mac:  Version für Mac~OS
    ||           nex:  Version für NeXTStep
    ||           sin:  Version für Sinix
    ||           sun:  Version für SunOS
@@ -601,7 +601,7 @@ udorlyyy.sss
    ||           hp4:  version for HP-UX, 300/400
    ||           hp8:  version for HP-UX, 700/800
    ||           lin:  version for Linux
-   ||           mac:  version for MacOS
+   ||           mac:  version for Mac~OS
    ||           nex:  version for NeXTStep
    ||           sin:  version for SINIX
    ||           sun:  version for SunOS
@@ -641,7 +641,7 @@ Von UDO existieren momentan Versionen für folgende Systeme:
 !item DOS, OS/2, Windows
 # !item HP-UX 9.x auf HP-Rechnern der 300/400er und 700/800er Baureihe
 !item Linux x86
-!item MacOS
+!item Mac~OS
 # !item NeXTStep
 # !item Sinix
 # !item SunOS 5.5
@@ -665,7 +665,7 @@ At the moment UDO is available for the following operating systems:
 !item	DOS, OS/2, Windows
 # !item	HP-UX 9.x for 300/400 and 700/800 models
 !item	Linux x86
-!item	MacOS
+!item	Mac~OS
 # !item	NeXTStep
 # !item	SINIX
 # !item SunOS 5.5
