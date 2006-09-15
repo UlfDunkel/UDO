@@ -131,10 +131,11 @@ der Einsatzstelle auch keine Leerzeichen eingefügt.
 
 !iflang [german]
 !item [(!EXAMPLE)]
-42!~DM, Dr.!~Sommer
+42!~EUR, Dr.!~Sommer
 !endif
 !iflang [english]
 !item [(!EXAMPLE)]
+42!~EUR, Dr.!~Summer
 !endif
 
 !iflang [german]
@@ -335,7 +336,7 @@ Print two dashes.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Wenn Sie zwei Minuszeichen ausgegeben wollen, so müssen Sie diese Klammern. Andernfalls würde UDO
+Wenn Sie zwei Minuszeichen ausgegeben wollen, so müssen Sie diese klammern. Andernfalls würde UDO
 diese beiden Minuszeichen in einen kurzen Gedankenstrich umwandeln.
 !endif
 !iflang [english]
@@ -380,7 +381,7 @@ Print three dashes.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Wenn Sie drei Minuszeichen ausgegeben wollen, so müssen Sie diese Klammern. Andernfalls würde UDO
+Wenn Sie drei Minuszeichen ausgegeben wollen, so müssen Sie diese klammern. Andernfalls würde UDO
 diese drei Minuszeichen in einen langen Gedankenstrich umwandeln.
 !endif
 !iflang [english]
@@ -586,11 +587,11 @@ display them. If not, UDO will replace them by three normal dots.
 
 !iflang [german]
 !item [(!EXAMPLE)]
-Aus (!T)!/..(!t) wird !...
+Aus (!T)!/..(!t) wird !..
 !endif
 !iflang [english]
 !item [(!EXAMPLE)]
-(!T)!/..(!t) is converted to !...
+(!T)!/..(!t) is converted to !..
 !endif
 
 !end_xlist
