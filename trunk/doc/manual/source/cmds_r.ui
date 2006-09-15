@@ -197,7 +197,7 @@ Include file without conversion.
 Stelle aus, an der dieses Kommando benutzt wurde. Der Inhalt der Datei
 wird nicht eingerückt oder zentriert ausgegeben. Die raw-Umgebung dient
 dazu, spezielle Formatbefehle einzubinden. Enthält der Dateiname Leerzeichen,
-muß er in Anführungsstriche gesetzt werden.
+muss er in Anführungsstriche gesetzt werden.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -321,10 +321,10 @@ Set character width (RTF only).
 UDO benutzt zur Ausrichtung der xlist-Umgebungen und
 der Tabellen einen Wert für die Berechnung der
 Einrückungen und Zellenbreiten. Dieser Wert ist so
-ausgelegt, daß auch nichtproportionale fette
+ausgelegt, dass auch nichtproportionale fette
 Großschrift noch richtig formatiert wird. Bei
-normaler Schrift kann es jedoch sein, daß die Zeichen
-zu weit eingerückt werden oder daß Tabellenzellen zu
+normaler Schrift kann es jedoch sein, dass die Zeichen
+zu weit eingerückt werden oder dass Tabellenzellen zu
 breit erscheinen. Mit diesem Schalter können sie den
 Berechnungswert anpassen. Standardmäßig benutzt UDO den Wert 150.
 !endif
@@ -375,7 +375,7 @@ Insert pagebreak before tables (RTF only).
 !iflang [german]
 !item [(!DESCRIPTION)]
 Wird dieser Schalter benutzt, so gibt UDO alle folgenden Tabellen so
-aus, daß z.B. WinWord Tabellen am Seitenende nicht umbricht, sondern
+aus, dass z.B. WinWord Tabellen am Seitenende nicht umbricht, sondern
 den Seitenumbruch vor der Tabelle erzeugt. Mit [off] schaltet man
 diesen Effekt für alle folgenden Tabellen wieder aus. Default ist [off].
 !endif

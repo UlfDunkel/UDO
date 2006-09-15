@@ -48,7 +48,7 @@ mit der Endung (!V)*.ul*(!v).
 Die Optionen müssen einzeln übergeben werden: (!V)-al(!v) wird nicht als (!V)-a -l(!v)
 interpretiert!
 
-Der Name der Quelldatei muß als letzter Parameter übergeben werden.
+Der Name der Quelldatei muss als letzter Parameter übergeben werden.
 
 !endif
 # ------------------------------------------------------------------------------
@@ -77,7 +77,7 @@ The name of the source file has to be the last option.
 !iflang [german]
 !begin_tlist [-W, (--)no-warningslines]
 
-!item [-@ F] UDO liest dann aus der Datei "F" die Optionen. In dieser Datei muß in jeder Zeile genau eine Option stehen.
+!item [-@ F] UDO liest dann aus der Datei "F" die Optionen. In dieser Datei muss in jeder Zeile genau eine Option stehen.
 
 !item [-a, (--)asc] Die (!U)Quelldatei(!u) wird ins ASCII-Format umgewandelt.
 
@@ -96,7 +96,7 @@ Erzeugung von Indexdateien unterdrücken.
 !item [(--)drc] Die (!U)Quelldatei(!u) wird ins DRC-Format (David's Readme Compiler) umgewandelt.
 
 !item [-D symbol] Setzen des Symbols ''symbol'', welches sich im
-Quelltext mit dem Befehl (!KW [ifset]) abfragen läßt.
+Quelltext mit dem Befehl (!KW [ifset]) abfragen lässt.
 
 !item [(--)force-long] Wird diese Option
 benutzt, so versucht UDO auch auf den Systemen, die

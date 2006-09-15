@@ -3,7 +3,7 @@ UDO stellt folgende Aufzählungsumgebungen zur Verfügung:
 !item [itemize-Umgebung:]
       für Aufzählungen
 !item [enumerate-Umgebung:]
-      für Numerierungen
+      für Nummerierungen
 !item [description-Umgebung:]
       für Beschreibungen
 !item [xlist-Umgebung:]

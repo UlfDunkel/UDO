@@ -138,7 +138,7 @@ Start a description.
 !html_name cmd_be.html
 
 !iflang [german]
-Neue Numerierung einleiten.
+Neue Nummerierung einleiten.
 !endif
 !iflang [english]
 Start an enumeration.
@@ -259,9 +259,9 @@ Start a ""bold"" list.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Leitet eine neue Listen-Umgebung ein. Diese Umgebung
-muß mit (!KW [end_blist]) beendet werden. Die Länge von
+muss mit (!KW [end_blist]) beendet werden. Die Länge von
 ""<text>"" definiert die Tiefe der Einrückung der
-Aufzählungspunkte. Diese Umgebung läßt sich mit
+Aufzählungspunkte. Diese Umgebung lässt sich mit
 anderen Umgebungen kombiniert verwenden. Die Texte,
 die man mit (!KW [item] [[~!!]]) angibt, werden fett
 dargestellt.
@@ -404,7 +404,7 @@ Start a description.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Leitet eine (weitere) description-Umgebung ein. Diese
-Umgebung muß mit (!KW [end_description]) beendet werden. Die
+Umgebung muss mit (!KW [end_description]) beendet werden. Die
 description-Umgebung kann mehrfach verschachtelt
 benutzt oder mit anderen Umgebungen kombiniert
 werden. Aufzählungspunkte werden bei der
@@ -452,7 +452,7 @@ Start the main part of the document.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieses Kommando (!B)muß(!b) in jedem Quelltext vorhanden sein.
+Dieses Kommando (!B)muss(!b) in jedem Quelltext vorhanden sein.
 Es trennt den Vorspann des Quelltextes vom Hauptteil.
 !endif
 !iflang [english]
@@ -473,7 +473,7 @@ the preamble from the main part.
 !html_name cmd_begin_enumerate.html
 
 !iflang [german]
-Neue Numerierung einleiten.
+Neue Nummerierung einleiten.
 !endif
 !iflang [english]
 Start an enumeration.
@@ -488,7 +488,7 @@ Start an enumeration.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Leitet eine (weitere) enumerate-Umgebung ein. Diese
-Umgebung muß mit (!KW [end_enumerate]) beendet werden. Die
+Umgebung muss mit (!KW [end_enumerate]) beendet werden. Die
 enumerate-Umgebung können Sie mehrfach verschachtelt
 und auch mit anderen Umgebungen kombiniert benutzen.
 Aufzählungspunkte einer enumerate-Umgebung werden mit
@@ -505,7 +505,7 @@ will be marked with alphanumerical characters.
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KW [end_enumerate]), (!KW [item]), (!link [Numerierungen] [Numerierungen]), (!KW [short]), (!KW [use_short_envs])
+(!KW [end_enumerate]), (!KW [item]), (!link [Nummerierungen] [Nummerierungen]), (!KW [short]), (!KW [use_short_envs])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
@@ -665,7 +665,7 @@ Start an italic list.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Leitet eine neue Listen-Umgebung ein. Diese Umgebung muß mit (!KW [end_ilist]) beendet werden. Die Länge von
+Leitet eine neue Listen-Umgebung ein. Diese Umgebung muss mit (!KW [end_ilist]) beendet werden. Die Länge von
 ""<text>"" definiert die Tiefe der Einrückung der Aufzählungspunkte. Sie können diese Umgebung auch mit
 anderen Umgebungen kombinieren. Die Aufzählungspunkte, die man mit (!KW [item] [[~!!]]) einleitet,
 werden kursiv dargestellt.
@@ -713,7 +713,7 @@ Start an itemization environment.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Leitet eine (weitere) itemize-Umgebung ein. Diese
-Umgebung muß mit (!KW [end_itemize]) beendet werden. Die
+Umgebung muss mit (!KW [end_itemize]) beendet werden. Die
 itemize-Umgebung können Sie mehrfach und auch mit
 anderen Umgebungen kombiniert einsetzen.
 Aufzählungspunkte, die mit (!KW [item]) eingeleitet werden,
@@ -759,7 +759,7 @@ Start a linedraw environment.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Leitet eine linedraw-Umgebung ein. Diese Umgebung muß
+Leitet eine linedraw-Umgebung ein. Diese Umgebung muss
 mit (!KW [end_linedraw]) beendet werden. Text einer
 linedraw-Umgebung wird 1:1 ausgegeben, es werden
 keine UDO-Kommandos umgewandelt! Auch die Wirkung von
@@ -769,7 +769,7 @@ Ausgabe werden Einrückungen beachtet.
 Im Unterschied zur verbatim-Umgebung wird (momentan
 nur für RTF) vor der Ausgabe auf einen anderen
 Zeichensatz (""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm])"")
-umgeschaltet, sodaß DOS-Screenshots korrekt dargestellt werden sollten.
+umgeschaltet, sodass DOS-Screenshots korrekt dargestellt werden sollten.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -883,7 +883,7 @@ Start new chapter/section/subsection/paragraph without entry in table of content
 !iflang [german]
 !item [(!DESCRIPTION)]
 Dieses Kommando hat die gleiche Funktion wie (!KW [begin_node]),
-mit der Ausnahme, daß ""<text>"" nicht in Inhaltsverzeichnissen erscheint.
+mit der Ausnahme, dass ""<text>"" nicht in Inhaltsverzeichnissen erscheint.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1002,7 +1002,7 @@ Start new popup-chapter/section/subsection/paragraph without entry in table of c
 !iflang [german]
 !item [(!DESCRIPTION)]
 Dieses Kommando hat die gleiche Funktion wie (!KW [begin_pnode]),
-mit der Ausnahme, daß ""<text>"" nicht in Inhaltsverzeichnissen erscheint.
+mit der Ausnahme, dass ""<text>"" nicht in Inhaltsverzeichnissen erscheint.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1057,7 +1057,7 @@ Start a preformatted environment.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Leitet eine preformatted-Umgebung ein. Diese Umgebung muß
+Leitet eine preformatted-Umgebung ein. Diese Umgebung muss
 mit (!KW [end_preformatted]) beendet werden. Text einer
 preformatted-Umgebung wird 1:1 ausgegeben, es werden
 keine UDO-Kommandos umgewandelt! Auch die Wirkung von
@@ -1156,7 +1156,7 @@ Start a raw environment.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Dieser Befehl leitet eine raw-Umgebung ein. Diese
-Umgebung muß mit (!KW [end_raw]) beendet werden. Jede Zeile
+Umgebung muss mit (!KW [end_raw]) beendet werden. Jede Zeile
 innerhalb dieser Umgebung wird direkt, also ohne
 jegliche Umwandlung, Zentrierung oder Einrückung
 ausgegeben. Die Umgebung dient daher zur Einbindung
@@ -1204,7 +1204,7 @@ Start a sourcecode environment.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Dieses Kommando leitet eine sourcecode-Umgebung ein.
-Diese Umgebung muß mit (!KW [end_sourcecode]) beendet
+Diese Umgebung muss mit (!KW [end_sourcecode]) beendet
 werden. Zeilen die in einer solchen Umgebung
 angegeben sind, werden für die Sourcecode-Formate
 ohne Anpassung ausgegeben. Bei allen ""normalen""
@@ -1297,7 +1297,7 @@ Mit diesem Kommando wird eine Tabelle eingeleitet.
 Für ""<format>"" geben Sie an, wie die Spalten der
 Tabelle ausgerichtet werden sollen und vor bzw. nach
 welcher Spalte vertikale Linien gezogen werden
-sollen. Wird zum Schluß noch (!KW [hline]) angegeben, so
+sollen. Wird zum Schluss noch (!KW [hline]) angegeben, so
 beginnt die Tabelle mit einer horizontalen Linie. Im
 Beispiel sehen Sie eine Tabelle, die mit links,
 rechts und oben mit einer Linie versehen ist und die
@@ -1353,7 +1353,7 @@ Start a monospaced list.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Leitet eine neue Listen-Umgebung ein. Diese Umgebung
-muß mit (!KW [end_tlist]) beendet werden. Die Länge von
+muss mit (!KW [end_tlist]) beendet werden. Die Länge von
 ""<text>"" definiert die Tiefe der Einrückung der
 Aufzählungspunkte. Sie können diese Umgebung auch mit
 anderen Umgebungen kombinieren. Die
@@ -1402,7 +1402,7 @@ Start a verbatim environment.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Leitet eine verbatim-Umgebung ein. Diese Umgebung muß
+Leitet eine verbatim-Umgebung ein. Diese Umgebung muss
 mit (!KW [end_verbatim]) beendet werden. Text einer
 verbatim-Umgebung wird 1:1 ausgegeben, es werden
 keine UDO-Kommandos umgewandelt! Auch die Wirkung von
@@ -1449,9 +1449,9 @@ Start a list.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Leitet eine neue Listen-Umgebung ein. Diese Umgebung
-muß mit (!KW [end_xlist]) beendet werden. Die Länge von
+muss mit (!KW [end_xlist]) beendet werden. Die Länge von
 ""<text>"" definiert die Tiefe der Einrückung der
-Aufzählungspunkte. Diese Umgebung läßt sich mit
+Aufzählungspunkte. Diese Umgebung lässt sich mit
 anderen Umgebungen kombiniert verwenden. Die Texte,
 die man mit (!KW [item] [[~!!]]) angibt, werden normal
 dargestellt.

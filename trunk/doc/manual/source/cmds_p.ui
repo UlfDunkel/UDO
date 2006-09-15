@@ -363,7 +363,7 @@ Kommando benutzt wurde. Etwaige Einrückungen werden
 dabei berücksichtigt, Zentrierungen jedoch nicht.
 Tabulatoren werden abhängig von (!KW [tabwidth])
 umgewandelt. Enthält der Dateiname Leerzeichen,
-muß er in Anführungsstriche gesetzt werden.
+muss er in Anführungsstriche gesetzt werden.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -513,7 +513,7 @@ Start a hidden popup chapter.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Dieses Kommando hat die gleiche Funktion wie (!KW [pnode]),
-mit der Ausnahme, daß ""<text>"" nicht in Inhaltsverzeichnissen erscheint.
+mit der Ausnahme, dass ""<text>"" nicht in Inhaltsverzeichnissen erscheint.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -852,7 +852,7 @@ Start hidden popup section.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieses Kommando hat die gleiche Funktion wie (!KW [psubnode]), mit der Ausnahme, daß ""<text>"" nicht in
+Dieses Kommando hat die gleiche Funktion wie (!KW [psubnode]), mit der Ausnahme, dass ""<text>"" nicht in
 Inhaltsverzeichnissen erscheint.
 !endif
 !iflang [english]
@@ -953,7 +953,7 @@ Start a hidden popup subsection.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieses Kommando hat die gleiche Funktion wie (!KW [psubsubnode]), mit der Ausnahme, daß ""<text>"" nicht in
+Dieses Kommando hat die gleiche Funktion wie (!KW [psubsubnode]), mit der Ausnahme, dass ""<text>"" nicht in
 Inhaltsverzeichnissen erscheint.
 !endif
 !iflang [english]
@@ -1056,7 +1056,7 @@ Start a hidden popup paragraph.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieses Kommando hat die gleiche Funktion wie (!KW [psubsubsubnode]), mit der Ausnahme, daß ""<text>"" nicht
+Dieses Kommando hat die gleiche Funktion wie (!KW [psubsubsubnode]), mit der Ausnahme, dass ""<text>"" nicht
 in Inhaltsverzeichnissen erscheint.
 !endif
 !iflang [english]

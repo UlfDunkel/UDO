@@ -24,7 +24,7 @@ Set graphic for chapter.
 Dieses Kommando gibt den Namen einer Grafik an, welche UDO für
 den Link auf den aktuellen Node in der linken Spalte des
 ""modernen"" Layouts verwenden soll. Bei Subnodes und tieferen
-Ebenen wird der Befehl momentan mißachtet.
+Ebenen wird der Befehl momentan missachtet.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -191,7 +191,7 @@ Kommando benutzt wurde. Etwaige Einrückungen werden
 dabei berücksichtigt, Zentrierungen jedoch nicht.
 Tabulatoren werden abhängig von (!KW [tabwidth])
 umgewandelt. Enthält der Dateiname Leerzeichen,
-muß er in Anführungsstriche gesetzt werden.
+muss er in Anführungsstriche gesetzt werden.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -236,7 +236,7 @@ Auf einen anderen Zeichensatz umschalten.
 !iflang [german]
 !item [(!DESCRIPTION)]
 UDO erwartet nach diesem Kommando Texte oder
-Textpassagen, die in dem entsprechenden Zeichensatz verfaßt
+Textpassagen, die in dem entsprechenden Zeichensatz verfasst
 wurden. Um wieder auf den Systemzeichensatz
 zurückzuwechseln, verwenden Sie dieses Kommando noch einmal
 mit dem Namen des Systemzeichensatzes.
@@ -700,7 +700,7 @@ Aus (!T)(!/copyright)(!t) wird (!copyright)
 !html_name cmd_country.html
 
 !iflang [german]
-Land des Autors für den Adreßblock der Titelseite setzen.
+Land des Autors für den Adressblock der Titelseite setzen.
 !endif
 !iflang [english]
 Set document information.

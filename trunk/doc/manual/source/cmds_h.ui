@@ -242,9 +242,9 @@ Specify a background image (HTML-Help only)
 !iflang [german]
 !item [(!DESCRIPTION)]
 Setzt das Hintergrundbild für HTML-Help-Seiten. Als Dateiname
-muß der komplette Name, also inklusive Dateiendung,
+muss der komplette Name, also inklusive Dateiendung,
 angegeben werden. Enthält der Dateiname Leerzeichen,
-muß der Name in Anführungszeichen eingeschlossen werden.
+muss der Name in Anführungszeichen eingeschlossen werden.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -295,7 +295,7 @@ verwendet werden soll. Standardmäßig benutzt UDO die
 Endung ''(!V)gif(!v)''. Falls Sie z.B. JPEG-Grafiken benutzen
 und diese Dateien auf ''(!V)jpeg(!v)'' enden, benutzen Sie
 einfach untenstehendes Beispiel. (!KW [hh_img_suffix])
-kann beliebig oft aufgerufen werden, so daß einer
+kann beliebig oft aufgerufen werden, so dass einer
 Verwendung verschiedener Grafikformate nichts im Wege steht.
 !endif
 !iflang [english]
@@ -581,7 +581,7 @@ Mit diesem Befehl können Sie die Endung der Grafiken
 setzen, die für die folgenden (!KW [image])-Befehle
 verwendet werden soll. Standardmäßig benutzt UDO die
 Endung ''(!V)tiff(!v)''. (!KW [htag_img_suffix]) kann beliebig oft
-aufgerufen werden, so daß einer Verwendung verschiedener
+aufgerufen werden, so dass einer Verwendung verschiedener
 Grafikformate nichts im Wege steht.
 !endif
 !iflang [english]
@@ -744,9 +744,9 @@ Specify a background image (HTML only).
 !iflang [german]
 !item [(!DESCRIPTION)]
 Setzt das Hintergrundbild für HTML-Seiten. Als Dateiname
-muß der komplette Name, also inklusive Dateiendung,
+muss der komplette Name, also inklusive Dateiendung,
 angegeben werden. Enthält der Dateiname Leerzeichen,
-muß der Name in Anführungszeichen eingeschlossen werden.
+muss der Name in Anführungszeichen eingeschlossen werden.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -873,7 +873,7 @@ Place counter (HTML only).
 !iflang [german]
 !item [(!DESCRIPTION)]
 Was dem Kommando folgt, wird 1:1 in der Fußzeile
-ausgegeben, sodaß man den Counter optisch besser plazieren kann.
+ausgegeben, sodass man den Counter optisch besser plazieren kann.
 Beim ""modernen"" Layout und beim Frames-Layout wird der Counter in
 der rechten Spalte dargestellt.
 
@@ -1192,9 +1192,9 @@ Specify a background image for left frame (HTML only).
 !iflang [german]
 !item [(!DESCRIPTION)]
 Setzt das Hintergrundbild für den linken Rahmen in HTML-Seiten. Als Dateiname
-muß der komplette Name, also inklusive Dateiendung,
+muss der komplette Name, also inklusive Dateiendung,
 angegeben werden. Enthält der Dateiname Leerzeichen,
-muß der Name in Anführungszeichen eingeschlossen werden.
+muss der Name in Anführungszeichen eingeschlossen werden.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1449,7 +1449,7 @@ Als ""<text>"" können folgende Parameter übergeben werden:
 
 !begin_itemize !short
 !item ""noresize"": Fügt dem Frameset-Tag ""noresize"" hinzu. Die
-Breite des linken Frames läßt sich dann vom Benutzer nicht
+Breite des linken Frames lässt sich dann vom Benutzer nicht
 mehr verändern.
 !item ""noborder"": Fügt dem Frameset-Tag ""border=0 frameborder=0
 framespacing=0"" hinzu. Der linke Frame hat dann keinen Rand
@@ -1783,7 +1783,7 @@ Ist <text> leer, wird für den Zeitzonenunterschied ""+00:00"" gesetzt.
 # U.K. 28.1.04: Beispiele (aus der UDO-HTML-Doku) bringen. Erklären, was erzeugt
 #      wird, wenn !html_header_links *nicht* gesetzt ist (+ Beispiel).
 # NHz 29.01.04: Beispiel -> !html_header_links navigation chapter (siehe meine Mail vom 29.01.04)
-# U.K. 29.1.04: die Frage nach dem Beispiel war mißverständlich.
+# U.K. 29.1.04: die Frage nach dem Beispiel war missverständlich.
 #       Sind obige Klammerzusätze korrekt??
 # Beispiel-Aufruf für spätere Kommando-Doku: !html_header_links chapter, navigation
 # ToDo: Englisch
@@ -1815,7 +1815,7 @@ Ist dieser Schalter gesetzt, so werden je nach Vorgabe
    (<link rel="chapter" href="!.." title="!..">, ebenso für "section").
 !end_itemize
 
-Dadurch, daß die Link-Elemente nicht mehr automatisch, sondern nur noch auf Anforderung
+Dadurch, dass die Link-Elemente nicht mehr automatisch, sondern nur noch auf Anforderung
 erzeugt werden, entstehen kleinere HTML-Dateien.
 
 !endif
@@ -1914,7 +1914,7 @@ verwendet werden soll. Standardmäßig benutzt UDO die
 Endung ''(!V)gif(!v)''. Falls Sie z.B. JPEG-Grafiken benutzen
 und diese Dateien auf ''(!V)jpeg(!v)'' enden, benutzen Sie
 einfach untenstehendes Beispiel. (!KW [html_img_suffix])
-kann beliebig oft aufgerufen werden, so daß einer
+kann beliebig oft aufgerufen werden, so dass einer
 Verwendung verschiedener Grafikformate nichts im Wege steht.
 !endif
 !iflang [english]
@@ -2079,7 +2079,7 @@ Create only one HTML file (HTML only).
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, so werden
 alle Kapitel, Abschnitte, Unterabschnitte und
-Paragraphen bei der Umwandlung ins HTML-Format in einer Datei zusammengefaßt.
+Paragraphen bei der Umwandlung ins HTML-Format in einer Datei zusammengefasst.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -2117,7 +2117,7 @@ Merge sections, subsections and paragraphs (HTML only).
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann eingesetzt, so wird
 ein Kapitel samt allen zugehörigen Abschnitten,
-Unterabschnitten und Paragraphen in einer Datei zusammengefaßt.
+Unterabschnitten und Paragraphen in einer Datei zusammengefasst.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -2156,7 +2156,7 @@ Merge subsections and paragraphs (HTML only).
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann eingesetzt, so wird
 ein Abschnitt samt allen zugehörigen Unterabschnitten
-und Paragraphen in einer Datei zusammengefaßt.
+und Paragraphen in einer Datei zusammengefasst.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -2194,7 +2194,7 @@ Merge paragraphs (HTML only).
 !iflang [german]
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann eingesetzt, so werden alle Paragraphen eines Unterabschnitts in
-einer Datei zusammengefaßt.
+einer Datei zusammengefasst.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -2304,9 +2304,9 @@ Specify a background image for left column (HTML only).
 !iflang [german]
 !item [(!DESCRIPTION)]
 Setzt das Hintergrundbild für HTML-Seiten. Als Dateiname
-muß der komplette Name, also inklusive Dateiendung,
+muss der komplette Name, also inklusive Dateiendung,
 angegeben werden. Enthält der Dateiname Leerzeichen,
-muß der Name in Anführungszeichen eingeschlossen werden.
+muss der Name in Anführungszeichen eingeschlossen werden.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -2840,7 +2840,7 @@ Output xlist environment as description (HTML only).
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Der Schalter (!KW [html_no_xlist]) führt dazu, daß UDO
+Der Schalter (!KW [html_no_xlist]) führt dazu, dass UDO
 die Listen wie bisher als description-Umgebungen ausgibt.
 Defaultmäßig erzeugt UDO dafür nun HTML-Tabellen. Leider
 unterscheiden sich Navigator und IE bei der Ausgabe der (!link [Tabellen] [Tabellen]),
@@ -3290,7 +3290,7 @@ Trennstrichwandlung (HTML only).
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Mit diesem Kommando können Sie festlegen, daß UDO
+Mit diesem Kommando können Sie festlegen, dass UDO
 !- in &shy; umgesetzen soll.
 !endif
 !iflang [english]

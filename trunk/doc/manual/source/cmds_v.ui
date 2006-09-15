@@ -212,7 +212,7 @@ Kommando benutzt wurde. Etwaige Einrückungen werden
 dabei berücksichtigt, Zentrierungen jedoch nicht.
 Tabulatoren werden abhängig von (!KW [tabwidth])
 umgewandelt. Enthält der Dateiname Leerzeichen,
-muß er in Anführungsstriche gesetzt werden.
+muss er in Anführungsstriche gesetzt werden.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]

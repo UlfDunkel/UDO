@@ -79,7 +79,7 @@ descriptions.
 !item	[Typ & Position:]
 	Der Typ des Befehls und die Position, wo der Befehl benutzt werden darf.
 
-	Ein Kommando veranlaßt UDO, etwas bestimmtes zu tun, ein Schalter setzt
+	Ein Kommando veranlasst UDO, etwas Bestimmtes zu tun, ein Schalter setzt
     bestimmte Informationen, an denen UDO erkennt, wie es demnächst zu
     verfahren hat, ein Platzhalter wird bei der Umwandlung lediglich
     durch etwas anderes ersetzt.
@@ -91,7 +91,7 @@ descriptions.
     man einen Befehl überall einsetzen.
 
 !item	[Syntax:]
-	Hier sieht man, wie man den Befehl einsetzen muß.
+	Hier sieht man, wie man den Befehl einsetzen muss.
 
 	!begin_tlist [WsystemeW] !short
 

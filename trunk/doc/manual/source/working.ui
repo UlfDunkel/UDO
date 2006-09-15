@@ -89,13 +89,13 @@ durch eine schnellere Umwandlung belohnt wird.
 
 !item (!B)Vermeiden Sie gleichnamige Überschriften.(!b)
 
-Nicht nur daß Sie damit UDO und Hypertext-Compiler verwirren,
+Nicht nur dass Sie damit UDO und Hypertext-Compiler verwirren,
 nein, auch der potentielle Leser gerät bei gleichnamigen Kapiteln
 durcheinander.
 
 !item (!B)Gehen Sie sparsam mit Makros und Definitionen um.(!b)
 
-UDO muß jede Zeile bis zu zweimal nach allen benutzten Makros und
+UDO muss jede Zeile bis zu zweimal nach allen benutzten Makros und
 Definitionen durchsuchen. Jedes zusätzliche Makro und jede
 zusätzliche Definition verlangsamt den Umwandlungsvorgang.
 
@@ -185,12 +185,12 @@ oder mehr hat, so sollten Sie sie in kleine Häppchen aufteilen. Diese
 Dateien können dann mit dem (!KW [include]) an passender Stelle eingeladen
 werden.
 
-Durch die Aufteilung haben Sie den Vorteil, daß Sie die Dokumentation
+Durch die Aufteilung haben Sie den Vorteil, dass Sie die Dokumentation
 durch einfaches Verschieben nur einer einzigen Zeile neu gliedern
-können. Wäre der gesamte Quelltext in einer Datei, müßten Sie mit
+können. Wäre der gesamte Quelltext in einer Datei, müssten Sie mit
 einem Editor gleich ganze Blöcke umkopieren.
 
-Ein weiterer Vorteil der Aufteilung ist, daß Sie bestimmte Kapitel
+Ein weiterer Vorteil der Aufteilung ist, dass Sie bestimmte Kapitel
 schnell wiederfinden können, sofern Sie den Dateien sinnvolle Namen
 geben.
 
@@ -297,7 +297,7 @@ Copyright (!copyright) (!ProgrammJahr) bei C. Anfänger
 
 Im Vorspann einer Datei, die diesen Text einbindet, müssen dann
 lediglich die Makros ""ProgrammName"", ""ProgrammVersion"" und
-""ProgrammJahr"" gesetzt werden, im Hauptteil muß diese Datei dann nur
+""ProgrammJahr"" gesetzt werden, im Hauptteil muss diese Datei dann nur
 noch an passender Stelle eingebunden werden:
 
 !begin_quote
@@ -690,7 +690,7 @@ andere Betriebssysteme erzeugt werden, da die Versionen identisch
 sind. So ist es möglich, mit der Atari-Version WinHelp-Quelltexte
 zu erzeugen oder unter OS/2 mit der DOS-Version ST-Guide-Quelltexte.
 
-Lediglich eine Umsetzung der Sonderzeichen muß ggf. erfolgen.
+Lediglich eine Umsetzung der Sonderzeichen muss ggf. erfolgen.
 Dies kann man z.B. mit GNU-recode durchführen. Auf Wunsch gibt es
 auch bei (!link [mir] [Kontaktadresse]) ein Programm zur Umsetzung der Sonderzeichen in
 Textdateien.
@@ -750,7 +750,7 @@ werden sicherlich auch in Zukunft weitere Kommandos hinzukommen.
 
 Teilweise wird es sich auch nicht vermeiden lassen, die Syntax
 einiger Kommandos zu ändern. Auf solche Änderungen wird aber
-besonders hingewiesen, so daß man die nötigen Anpassungen
+besonders hingewiesen, so dass man die nötigen Anpassungen
 innerhalb von Minuten mit einem Editor vornehmen kann.
 
 !endif
@@ -849,7 +849,7 @@ references until you use the switch (!KW [autoref] [[on!!]]).
 
 Da UDO nicht auf der Seite Verweise anlegt, auf der ein Label
 gesetzt wurde, gibt es ein Problem, falls man am Seitenende einen
-Verweis zum Seitenanfang anlegen will. Daher muß man hier einen
+Verweis zum Seitenanfang anlegen will. Daher muss man hier einen
 manuellen Querverweis setzen.
 
 !begin_quote
@@ -889,7 +889,7 @@ placeholder. An example:
 !iflang [german]
 !item [Wie bekomme ich Bilder in ein Inhaltsverzeichnis?]
 
-Dazu muß man auf den Befehl (!KW [tableofcontents]) verzichten und ein
+Dazu muss man auf den Befehl (!KW [tableofcontents]) verzichten und ein
 Kapitel anlegen, in welches das Inhaltsverzeichnis ausgegeben
 wird. In einem normalen Kapitel kann man natürlich Bilder wie
 sonst auch benutzen. Beispiel:
@@ -1215,7 +1215,7 @@ misplaced the (!I)!/end_*(!i) command
 !item [''!..'' ignored inside preamble]
 !iflang [german]
 Das angegebene Kommando ist im Vorspann nicht erlaubt. Sorgen Sie
-dafür, daß es nach (!KW [begin_document]) angegeben wird oder löschen
+dafür, dass es nach (!KW [begin_document]) angegeben wird oder löschen
 Sie das Kommando.
 !endif
 !iflang [english]
@@ -1227,7 +1227,7 @@ the source file. That means you have to place it after
 !item [''!..'' ignored outside preamble]
 !iflang [german]
 Das angegebene Kommando ist im Hauptteil nicht erlaubt. Sorgen
-Sie dafür, daß es vor (!KW [begin_document]) angegeben wird oder löschen
+Sie dafür, dass es vor (!KW [begin_document]) angegeben wird oder löschen
 Sie das Kommando.
 !endif
 !iflang [english]
@@ -1249,7 +1249,7 @@ another character
 !item [''!..'' not active]
 !iflang [german]
 Eine Schriftart oder Fußnote sollte beendet werden, obwohl Sie
-noch gar nicht begonnen wurde. Beachten Sie, daß die Platzhalter
+noch gar nicht begonnen wurde. Beachten Sie, dass die Platzhalter
 mit Großbuchstaben eine Schriftart oder Fußnote beginnen, wogegen
 Platzhalter mit Kleinbuchstaben sie beenden.
 !endif
@@ -1308,7 +1308,7 @@ You wanted to finish an environment even if it wasn't started before.
 
 !item [!/else without !/if]
 !iflang [german]
-In Ihrem Quelltext steht (!KW [else]), ohne daß Sie mit (!KW [if]), (!KW [ifdest])
+In Ihrem Quelltext steht (!KW [else]), ohne dass Sie mit (!KW [if]), (!KW [ifdest])
 etc. eine Abfrage begonnen haben.
 !endif
 !iflang [english]
@@ -1318,7 +1318,7 @@ query with (!KW [if]), (!KW [ifdest]) etc.
 
 !item [!/endif without !/if]
 !iflang [german]
-In Ihrem Quelltext steht (!KW [endif]), ohne daß Sie mit (!KW [if]), (!KW [ifdest])
+In Ihrem Quelltext steht (!KW [endif]), ohne dass Sie mit (!KW [if]), (!KW [ifdest])
 etc. eine Abfrage begonnen haben.
 # ergänzt 04.01.2004 - Ulrich Kretschmer (vgl. Bug Nr. 43)
 Diese Fehlermeldung wird auch erzeugt, wenn im Quelltext ein (!KW [end_ignore]) ohne zugehöriges (!KW [begin_ignore]) vorkommt.
@@ -1333,8 +1333,8 @@ You will also get this error message if you use (!KW [end_ignore]) without accor
 !item [''!/item'' outside environment]
 !iflang [german]
 Sie haben einen Aufzählungspunkt außerhalb einer Aufzählung,
-Numerierung, Beschreibung oder Liste eingesetzt. Sorgen Sie
-dafür, daß der Punkt innerhalb einer solchen Umgebung steht.
+Nummerierung, Beschreibung oder Liste eingesetzt. Sorgen Sie
+dafür, dass der Punkt innerhalb einer solchen Umgebung steht.
 !endif
 !iflang [english]
 You have used the (!KW [item]) command outside an itemization,
@@ -1428,7 +1428,7 @@ file protection of the existing file.
 !iflang [german]
 Entweder ist die angegebene Datei nicht vorhanden oder aber es
 handelt sich nicht um eine Grafik im Windows-BMP-Format. Stellen Sie
-sicher, daß die Datei vorhanden ist und das es sich um das
+sicher, dass die Datei vorhanden ist und das es sich um das
 richtige Grafikformat handelt.
 !endif
 !iflang [english]
@@ -1439,7 +1439,7 @@ The printed file isn't a Windows Bitmap or the file doesn't exist.
 !iflang [german]
 Entweder ist die angegebene Datei nicht vorhanden oder aber es
 handelt sich nicht um eine Grafik im IMG-Format. Stellen Sie
-sicher, daß die Datei vorhanden ist und das es sich um das
+sicher, dass die Datei vorhanden ist und das es sich um das
 richtige Grafikformat handelt.
 !endif
 !iflang [english]
@@ -1450,7 +1450,7 @@ The printed file isn't a GEM image or the file doesn't exist.
 !iflang [german]
 Entweder ist die angegebene Datei nicht vorhanden oder aber es
 handelt sich nicht um eine Grafik im MSP-Format. Stellen Sie
-sicher, daß die Datei vorhanden ist und das es sich um das
+sicher, dass die Datei vorhanden ist und das es sich um das
 richtige Grafikformat handelt.
 !endif
 !iflang [english]
@@ -1461,7 +1461,7 @@ The printed file isn't a MSP image or the file doesn't exist.
 !iflang [german]
 Entweder ist die angegebene Datei nicht vorhanden oder aber es
 handelt sich nicht um eine Grafik im PCX-Format. Stellen Sie
-sicher, daß die Datei vorhanden ist und das es sich um das
+sicher, dass die Datei vorhanden ist und das es sich um das
 richtige Grafikformat handelt.
 !endif
 !iflang [english]
@@ -1541,7 +1541,7 @@ information. Maybe the file doesn't exist or it's write protected.
 !iflang [german]
 Der Inhalt einer Definition darf maximal die angegebene Anzahl an
 Zeichen enthalten. Die in Ihrem Quelltext benutzte Definition
-beinhaltet mehr Text und muß daher gekürzt werden.
+beinhaltet mehr Text und muss daher gekürzt werden.
 !endif
 !iflang [english]
 The contents of a definition exceeds the maximum number of
@@ -1553,7 +1553,7 @@ characters. Please shorten your definition contents.
 !iflang [german]
 Der Name einer Definition darf maximal die angegebene Anzahl an
 Zeichen enthalten. Die in Ihrem Quelltext benutzte Definition hat
-einen längeren Namen und muß daher gekürzt werden.
+einen längeren Namen und muss daher gekürzt werden.
 !endif
 !iflang [english]
 The name of a definition exceeds the maximum number of characters.
@@ -1584,7 +1584,7 @@ chapter or label exisiting with the given name
 !iflang [german]
 Der Inhalt eines Makros darf maximal die angegebene Anzahl an
 Zeichen enthalten. Das in Ihrem Quelltext benutzte Makro
-beinhaltet mehr Text und muß daher gekürzt werden.
+beinhaltet mehr Text und muss daher gekürzt werden.
 !endif
 !iflang [english]
 The contents of a macro exceeds the maximum number of characters.
@@ -1595,7 +1595,7 @@ Please shorten your macro contents.
 !iflang [german]
 Der Name eines Makros darf maximal die angegebene Anzahl an
 Zeichen enthalten. Das in Ihrem Quelltext benutzte Makro hat
-einen längeren Namen und muß daher gekürzt werden.
+einen längeren Namen und muss daher gekürzt werden.
 !endif
 !iflang [english]
 The name of a macro exceeds the maximum number of characters.
@@ -1607,7 +1607,7 @@ Please shorten your macro name
 UDO konnte den für eine Aktion nötigen Speicher nicht anfordern.
 UDO bricht die Umwandlung nicht ab, jedoch sollten Sie die
 Ausgabedatei sehr skeptisch betrachten. Sorgen Sie vor der
-nächsten Umwandlung dafür, daß mehr Arbeitsspeicher vorhanden ist.
+nächsten Umwandlung dafür, dass mehr Arbeitsspeicher vorhanden ist.
 !endif
 !iflang [english]
 The destination of a manual link isn't defined. That means there's no
@@ -1683,7 +1683,7 @@ Please contact the author.
 !item [too many aliases used]
 !iflang [german]
 Ihr Quelltext benutzt zu viele (!KW [alias])-Befehle. Verzichten Sie auf
-unwichtige Aliase oder schreiben Sie dem Autor, daß Sie eine
+unwichtige Aliase oder schreiben Sie dem Autor, dass Sie eine
 Spezialversion von UDO benötigen.
 !endif
 !iflang [english]
@@ -1832,10 +1832,10 @@ the paragraph into two or more parts.
 
 !item [underfull line]
 !iflang [german]
-Die angegebene Zeile ist zu kurz und hinterläßt einen stark
+Die angegebene Zeile ist zu kurz und hinterlässt einen stark
 ungleichmäßigen rechten Rand. Bei der Benutzung von Blocksatz
-bedeutet diese Meldung, daß zuviele Leerzeichen in eine Zeile
-eingefügt werden mußten, um den Blocksatz zu erzielen. Versuchen
+bedeutet diese Meldung, dass zuviele Leerzeichen in eine Zeile
+eingefügt werden mussten, um den Blocksatz zu erzielen. Versuchen
 Sie, in den folgenden Wörtern Trennmarken einzubauen oder
 verwenden Sie den Befehl (!KW [sloppy]), um diese Fehlermeldung nicht
 mehr zu erhalten.
@@ -1859,7 +1859,7 @@ Your source file contains a placeholder that wasn't finished correctly.
 !item [unknown command]
 !iflang [german]
 UDO kennt das angegebene Kommando nicht. Falls Sie ein Wort
-darstellen möchten, daß mit einem Ausrufungszeichen beginnt, so
+darstellen möchten, dass mit einem Ausrufungszeichen beginnt, so
 müssen Sie dieses durch Einfügen eines ''/'' besonders markieren.
 !endif
 !iflang [english]
@@ -1973,7 +1973,7 @@ Dinge mitzuteilen:
 !item Welche UDO-Version verwenden Sie?
 !item Welches Betriebssystem setzen Sie ein?
 !item Tritt der Fehler immer auf oder nur manchmal?
-!item Woran könnte es Ihrer Meinung liegen, daß UDO fehlerhaft
+!item Woran könnte es Ihrer Meinung liegen, dass UDO fehlerhaft
      arbeitet?
 !item Können Sie mir ein kurzes Beispiel nennen, bei dem der beobachtete Fehler auftritt?
 !item Falls der Fehler umwandlungstechnischer Art ist, was sollte UDO

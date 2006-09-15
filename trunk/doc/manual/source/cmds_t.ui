@@ -155,7 +155,7 @@ Tabelle innerhalb einer solchen Umgebung ausgegeben, wird sie genauso
 ausgerichtet wie der Text innerhalb der Umgebung, sprich eine Tabelle wird
 in einer center-Umgebung zentriert ausgegeben, unabhängig davon, was
 man bei (!KW [table_alignment]) gesetzt hat. Will man eine Tabelle in einer
-center-Umgebung rechtsbündig ausgeben, so muß man in dem Fall noch
+center-Umgebung rechtsbündig ausgeben, so muss man in dem Fall noch
 eine flushright-Umgebung um den (!KW [begin_table])-Befehl setzen.
 !endif
 !iflang [english]
@@ -210,7 +210,7 @@ Set title of next table.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Mit diesem Kommando wird der Titel der nächsten
-Tabelle gesetzt. Dieses Kommando muß außerhalb der
+Tabelle gesetzt. Dieses Kommando muss außerhalb der
 table-Umgebung benutzt werden. Für die erste Tabelle
 würde UDO dann beim Beispiel als Titel ""Tabelle 1: Ein Tabellentitel"" ausgeben.
 !endif
@@ -264,7 +264,7 @@ Set title of next table.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Der einzige Unterscheid zum Kommando (!KW [table_caption])
-ist der, daß UDO dem Tabellentitel nicht ""Tabelle <nummer>:"" voranstellt.
+ist der, dass UDO dem Tabellentitel nicht ""Tabelle <nummer>:"" voranstellt.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -364,10 +364,10 @@ Print table of contents.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Dieses Kommando gibt ein komplettes Inhaltsverzeichnis aus, welches
-durch ausgabeformatspezifische Kommandos eingefaßt und in Hypertexten
+durch ausgabeformatspezifische Kommandos eingefasst und in Hypertexten
 auf einer eigenen Seite dargestellt wird. Dieses Kommando sollte direkt
 nach (!KW [begin_document]) bzw. nach (!KW [maketitle]) eingesetzt
-werden. Der Umfang des Inhaltsverzeichnis läßt sich durch den Schalter
+werden. Der Umfang des Inhaltsverzeichnis lässt sich durch den Schalter
 (!KW [use_short_tocs]) oder durch Angabe des Schalters
 (!KW [depth]) verkleinern.
 Das Beispiel zeigt, wie man ein Inhaltsverzeichnis ausgibt,
@@ -712,7 +712,7 @@ Create graphic commands for em(!TeX) ((!TeX) only).
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Gibt an, daß bei der Einbindung von Windows-Paintshop-Bildern ein (!TeX)-Makro für em(!TeX) erzeugt
+Gibt an, dass bei der Einbindung von Windows-Paintshop-Bildern ein (!TeX)-Makro für em(!TeX) erzeugt
 werden soll.
 !endif
 !iflang [english]
@@ -753,7 +753,7 @@ Create graphic commands for Lindner-(!TeX) ((!TeX) only).
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Gibt an, daß bei der Einbindung von Bildern ein (!TeX)-Makro für das Lindner-(!TeX) erzeugt werden soll.
+Gibt an, dass bei der Einbindung von Bildern ein (!TeX)-Makro für das Lindner-(!TeX) erzeugt werden soll.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -793,7 +793,7 @@ Create graphic commands for MiK-(!TeX) ((!TeX) only).
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Gibt an, daß bei der Einbindung von Bildern ein (!TeX)-Makro für das MiK-(!TeX) erzeugt werden soll.
+Gibt an, dass bei der Einbindung von Bildern ein (!TeX)-Makro für das MiK-(!TeX) erzeugt werden soll.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -835,7 +835,7 @@ Create graphic commands for CS(!TeX) ((!TeX) only).
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Gibt an, daß bei der Einbindung von Bildern ein (!TeX)-Makro für das CS- oder Multi(!TeX) erzeugt werden soll.
+Gibt an, dass bei der Einbindung von Bildern ein (!TeX)-Makro für das CS- oder Multi(!TeX) erzeugt werden soll.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1029,7 +1029,7 @@ text) for the ST-Guide.
 !html_name cmd_toc_offset.html
 
 !iflang [german]
-Offset für die Kapitelnumerierung setzen.
+Offset für die Kapitelnummerierung setzen.
 !endif
 !iflang [english]
 Set offset of chapter counter.
@@ -1158,7 +1158,7 @@ to the top of the page is generated.
 !html_name cmd_town.html
 
 !iflang [german]
-Wohnort des Autors für den Adreßblock der Titelseite setzen.
+Wohnort des Autors für den Adressblock der Titelseite setzen.
 !endif
 !iflang [english]
 Set document information.

@@ -13,7 +13,7 @@
 
 # 10.01.1996: Erweiterungen
 # 25.01.1996: Anderer Aufbau und weitere Fragen
-# 20.10.2001: Zusammengefaßt mit Fragen aus Anhang
+# 20.10.2001: Zusammengefasst mit Fragen aus Anhang
 # 20.12.2003: eigenes Kapitel "Ausgabeformate"
 
 ################################################################################
@@ -300,16 +300,16 @@ Wird im Vorspann (!KW [html_merge_nodes]) benutzt, so wird das gesamte
 Dokument in einer Datei gesichert. Dies empfiehlt sich lediglich
 bei kleinen Dokumenten, die kleiner als 16 KB sind.
 
-(!KW [html_merge_subnodes]) sorgt dafür, daß alle Abschnitte eines
+(!KW [html_merge_subnodes]) sorgt dafür, dass alle Abschnitte eines
 Kapitels in der Datei angegeben werden, in dem sich auch das
 Kapitel selbst befindet.
 
-Der Schalter (!KW [html_merge_subsubnodes]) sorgt dafür, daß alle
+Der Schalter (!KW [html_merge_subsubnodes]) sorgt dafür, dass alle
 Unterabschnitte im gleichen File wie der übergeordnete Abschnitt
 untergebracht werden.
 
 Der Schalter (!KW [html_merge_subsubsubnodes]) schließlich sorgt dafür,
-daß alle Paragraphen im gleichen File wie der übergeordnete
+dass alle Paragraphen im gleichen File wie der übergeordnete
 Unterabschnitt untergebracht werden.
 
 !endif
@@ -555,8 +555,8 @@ long filenames.
 !iflang [german]
 !item [Die Dateinamen bei den Querverweisen stimmen nicht!?]
 
-Falls Sie HTML-Dateien auf einem Betriebssystem erstellen, daß
-keine langen Namen zuläßt, Sie als Endung (!T).html(!t) vorgegeben haben
+Falls Sie HTML-Dateien auf einem Betriebssystem erstellen, das 
+keine langen Namen zulässt, Sie als Endung (!T).html(!t) vorgegeben haben
 und Sie diese Dateien dann auf einem Web-Server ablegen, so
 müssen Sie folgendes beachten:
 
@@ -569,7 +569,7 @@ ein HTML-Browser unter TOS und DOS versucht, (!T)foo.html(!t) zu
 öffnen, öffnet dieser anstandslos (!T)foo.htm(!t).
 
 !item Nach dem Kopieren der Dateien auf den Web-Server *müssen*
-die Endungen der Dateien von (!T).htm(!t) auf (!T).html(!t) angepaßt werden.
+die Endungen der Dateien von (!T).htm(!t) auf (!T).html(!t) angepasst werden.
 Hier wird (!T)foo.htm(!t) nicht geöffnet, wenn auf (!T)foo.html(!t)
 zugegriffen werden soll!
 !end_enumerate
@@ -757,7 +757,7 @@ After installing, you need only the following files from the directory (!T)\JUST
 !iflang [german]
 !item [Wie erzeugt UDO die (!LaTeX)-Präambel?]
 
-UDO ""weiß"", in welcher Sprache und mit welchem Dokumentstil die
+UDO ""weiss"", in welcher Sprache und mit welchem Dokumentstil die
 Datei gesetzt und ob Indizes benutzt werden sollen. Anhand dieser
 bekannten Informationen bastelt UDO dann die Präambel für
 (!LaTeX)~2.09 bzw. (!LaTeX2e) zusammen.
@@ -791,7 +791,7 @@ special commands for (!LaTeXe).
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !iflang [german]
-!item [Ich benötige eine eigene Präambel, was muß ich tun?]
+!item [Ich benötige eine eigene Präambel, was muss ich tun?]
 
 Im Gegensatz zu den vorherigen UDO-Versionen erzeugt UDO(!RELEASE) automatisch
 passende (!LaTeX)-Präambeln für (!LaTeX)~2.09 und (!LaTeX2e).
@@ -876,9 +876,9 @@ The first binomial theorem: (!ab2)
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !iflang [german]
-!item [Wie werden Sonderzeichen in Indizes angepaßt?]
+!item [Wie werden Sonderzeichen in Indizes angepasst?]
 
-Sonderzeichen in Indizes werden speziell für makeindex angepaßt.
+Sonderzeichen in Indizes werden speziell für makeindex angepasst.
 Es sind also keine zusätzlichen Anpassungen des von UDO erzeugten (!LaTeX)-Files nötig.
 !endif
 
@@ -893,7 +893,7 @@ It's not necessary to adjust the UDO-generated (!LaTeX) files.
 !iflang [german]
 !item [Geschweifte Klammern im Indexeintrag erzeugt (!LaTeX)-Fehler!?]
 
-Laut Kopka ist es zwingend erforderlich, daß jede öffnende
+Laut Kopka ist es zwingend erforderlich, dass jede öffnende
 geschweifte Klammer in einem Indexeintrag eine passende
 schließende geschweifte Klammer erhält. (!KW [index] [{]) ist demnach
 nicht möglich, nur (!KW [index] [{...}]) funktioniert.
@@ -932,7 +932,7 @@ die Vorgaben des User's Guide gehalten.
 Linuxdoc-SGML ist genau wie UDO ein Multiformat-Konverter, das auch
 sein eigenes Format in (!LaTeX), Manualpage, RTF, HTML, Texinfo etc.
 umwandeln kann. Nicht ganz ohne Stolz möchte ich aber darauf
-hinweisen, daß UDO gegenüber Linuxdoc-SGML 1.5 leistungsfähiger und
+hinweisen, dass UDO gegenüber Linuxdoc-SGML 1.5 leistungsfähiger und
 auch leichter zu begreifen ist. Allerdings kann sich das hier gesagte
 bei dem Entwicklungstempo, was man von der Linux-Szene kennt, sehr
 schnell ändern.
@@ -1182,7 +1182,7 @@ der Überschrift der jeweiligen Seite sowie des Titels der
 Hilfedatei. Durch Anklicken des Titels kann man zur Titelseite
 bzw. zum Inhaltsverzeichnis verzweigen.
 
-Durch den Schalter (!KW [no_headlines] [[pch!!]]) läßt sich die Ausgabe
+Durch den Schalter (!KW [no_headlines] [[pch!!]]) lässt sich die Ausgabe
 dieser Kopfzeilen unterbinden.
 !endif
 
@@ -1206,7 +1206,7 @@ Verweise auf das vorherige, nachfolgende und/oder übergeordnete
 Kapitel zu finden sind. Diese ermöglichen dem Leser, direkt zu
 anderen Kapiteln des Textes zu verzweigen.
 
-Durch den Schalter (!KW [no_bottomlines] [[pch!!]]) läßt sich die Ausgabe
+Durch den Schalter (!KW [no_bottomlines] [[pch!!]]) lässt sich die Ausgabe
 dieser Kopfzeilen unterbinden.
 !endif
 
@@ -1228,7 +1228,7 @@ of these bottomlines.
 
 UDO legt während der Umwandlung eine Kommandodatei für den
 Helpcompiler von Pure~C an, welche an diesen zur Erzeugung der
-Helpdatei als Kommando übergeben werden muß.
+Helpdatei als Kommando übergeben werden muss.
 
 UDO überschreibt diese Kommandodatei ohne Rückfrage. Um manuelle
 Änderungen an dieser Datei zu bewahren, müssen Sie die Datei
@@ -1372,8 +1372,8 @@ Leider handeln nicht alle Programme so, sondern interpretieren
 irgendwelchen Unsinn. Selbst Microsoft Word scheint das im eigenen
 Hause entwickelte Format nicht ganz zu verstehen.
 
-Somit kann durchaus gesagt werden, daß das RTF das am meisten
-mißverstandende Format ist, daß derzeit existiert!
+Somit kann durchaus gesagt werden, dass das RTF das am meisten
+missverstandende Format ist, dass derzeit existiert!
 !endif
 
 !iflang [english]
@@ -1406,7 +1406,7 @@ Kapitel zu finden ist, erzeugt es kein Inhaltsverzeichnis.
 
 Sicher, es wäre kein Problem, dieses auszugeben, allerdings
 würden dann die Seitennummern fehlen, und ich kann mir kaum
-vorstellen, daß dies gewünscht wird.
+vorstellen, dass dies gewünscht wird.
 !endif
 
 !iflang [english]
@@ -1509,7 +1509,7 @@ preamble of the UDO source file.
 !item [Meine Textverarbeitung stellt Tabellen nicht dar?]
 
 Falls Ihre Textverarbeitung keine RTF-Tabellen-Befehle kennt,
-können Sie mit dem Schalter (!KW [rtf_no_tables]) dafür sorgen, daß
+können Sie mit dem Schalter (!KW [rtf_no_tables]) dafür sorgen, dass 
 UDO die Tabellen wie beim ASCII-Format ausgibt.
 !endif
 
@@ -1560,7 +1560,7 @@ indices.
 !iflang [german]
 !item [Lotus WordPro plaziert Kapitelnummern außerhalb des Textrahmens!?]
 
-Tja, wenn ich wüßte, was WordPro sich dabei denkt, dann könnte
+Tja, wenn ich wüsste, was WordPro sich dabei denkt, dann könnte
 ich etwas dazu sagen. Andere Textverarbeitungen stellen die
 Kapitelnummern korrekt dar.
 !endif
@@ -1695,7 +1695,7 @@ you can call the ST-Guide from programs you can read in the HCP hypertext.
 UDO erzeugt standardmäßig auf jeder Seite eine Kopfzeile,
 gebildet aus dem Titel und dem Namen des im Hypertext besprochenen Programms. Die Kopfzeilen werden unterstrichen dargestellt.
 
-Durch den Schalter (!KW [no_headlines] [[stg!!]]) läßt sich die Ausgabe
+Durch den Schalter (!KW [no_headlines] [[stg!!]]) lässt sich die Ausgabe
 dieser Kopfzeilen unterbinden.
 !endif
 
@@ -1735,7 +1735,7 @@ HCP.
 !item [Wie werden Labels umgesetzt?]
 
 UDOs Befehl (!KW [label]) wird in den HCP-Befehl ""(!T)@symbol ari(!t)""
-umgesetzt. Dabei ist zu beachten, daß noch kein anderes Kapitel
+umgesetzt. Dabei ist zu beachten, dass noch kein anderes Kapitel
 oder Label mit gleichem Namen existiert, da der HCP dies
 bemängeln würde.
 
@@ -1790,7 +1790,7 @@ UDO bearbeitet einen Quelltext Zeile für Zeile. Beim Auftreten
 einer Leerzeile oder eines Kommandos wird der letzte Absatz samt
 einer zusätzlichen Leerzeile ausgegeben.
 
-Dies ist auch bei den Popup-Nodes nicht anders. Das Problem läßt
+Dies ist auch bei den Popup-Nodes nicht anders. Das Problem lässt
 sich leider nicht lösen.
 !endif
 
@@ -1871,7 +1871,7 @@ Ihre eigene Titelseite erzeugen.
 Im folgenden Beispiel wird nach (!KW [begin_document]) nur für den ST-Guide
 eine eigene Titelseite mittels eines Kapitels erzeugt, welches nicht
 im Inhaltsverzeichnis erscheint. Am Ende der Titelseite wird das Wort
-""Inhaltsverzeichnis"" angegeben, so daß ein Link zu eben diesem vom
+""Inhaltsverzeichnis"" angegeben, so dass ein Link zu eben diesem vom
 ST-Guide erzeugt wird.
 
 !begin_quote
@@ -2062,7 +2062,7 @@ library you shouldn't use this format.
 !item [TVHC meldet den Fehler ""Unterminated topic reference""!?]
 
 Der mir vorliegende TVHC Version 1.0 beinhaltet einen bösen Fehler, der
-dazu führt, daß die Quotefunktion --- das Aufheben der Funktion der
+dazu führt, dass die Quotefunktion --- das Aufheben der Funktion der
 geschweiften Klammer durch doppelte Angabe --- nicht funktioniert.
 Falls der TVHC Ihnen die obige Fehlermeldung präsentiert, so ändern Sie
 die Funktion scanForCrossRefs() in tvhc.cpp folgendermaßen um:
@@ -2144,7 +2144,7 @@ Textpuffers fest, den der TVHC als Zwischenspeicher währen der
 Übersetzung benutzt. Der Puffer ist ziemlich klein dimensioniert, falls
 Sie obige Fehlermeldung erhalten.
 
-Legen Sie einen ausreichen großen Puffer (z.B. 32 KB) an, so daß auch
+Legen Sie einen ausreichen großen Puffer (z.B. 32 KB) an, so dass auch
 größere Texte problemlos übersetzt werden.
 
 !begin_quote
@@ -2277,12 +2277,12 @@ This output format merges all UDO input files into one big file.
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !iflang [german]
-!item [WinHelp meint, daß *.rtf und *.hpj keine Hilfedatei sei?]
+!item [WinHelp meint, dass *.rtf und *.hpj keine Hilfedatei sei?]
 
 Weder die eine noch die andere Datei ist eine fertige Hilfedatei
 für Windows. UDO erzeugt lediglich die Quelltexte einer
 Hilfedatei, welche noch mit einem Hypertext-Compiler (HC.EXE,
-HC31.EXE, HCP.EXE) übersetzt werden muß.
+HC31.EXE, HCP.EXE) übersetzt werden muss.
 !endif
 
 !iflang [english]
@@ -2325,13 +2325,13 @@ Dafür kann es zwei Gründe geben:
 zunächst die Fehlermeldungen von UDO in der Datei mit der Endung
 (!V).ulw(!v) an, beseitigen Sie etwaige Fehler und konvertieren Sie
 dann den UDO-Quelltext neu. Falls UDO keine Fehlermeldungen ausgibt, so
-kann es dennoch sein, daß der Quelltext Fehler enthält, UDO diese
+kann es dennoch sein, dass der Quelltext Fehler enthält, UDO diese
 Fehler aber nicht erkannt hat.
 
 !item Der HC macht Murks. Beachten Sie das Errorfile mit der Endung
 (!V).err(!v), welches vom HC angelegt wird. Leider kann ich keine
 Hilfestellung zu den Fehlermeldungen des HC geben, da ich in den
-meisten Fällen selbst nicht weiß, was da schiefläuft.
+meisten Fällen selbst nicht weiss, was da schiefläuft.
 !end_enumerate
 !endif
 
@@ -2360,7 +2360,7 @@ errors printed in the error file in most cases.
 !item [Wofür ist die Datei mit der Endung ''hpj''?]
 
 UDO erzeugt automatisch eine zum Hypertext gehörende Projektdatei mit
-der Endung (!V).hpj(!v), die dem HC übergeben werden muß, um aus dem
+der Endung (!V).hpj(!v), die dem HC übergeben werden muss, um aus dem
 Quelltext eine fertige WinHelp-Datei zu erstellen.
 
 In dieser Projektdatei befinden sich Informationen wie der Titel des
@@ -2396,7 +2396,7 @@ your changes you have to write protect the project file.
 UDO erzeugt auf jeder Seite (mit Ausnahme der Titelseite und des
 Inhaltsverzeichnisses) eine Kopfzeile. In dieser befindet sich der Name
 des jeweiligen Kapitels. Kopfzeilen werden als
-""non-scrolling-regions"" angelegt, so daß man auch nach dem Scrollen
+""non-scrolling-regions"" angelegt, so dass man auch nach dem Scrollen
 der Seite immer noch den Kapitelnamen erkennen kann.
 
 Durch den Schalter ""(!KW [no_headlines] [[win!!]])"" wird die Ausgabe
@@ -2463,10 +2463,10 @@ ersetzt. ""'"" enspricht ""0x27"", wird also durch ""_27"" ersetzt.
 !item Die Leerzeichen werden durch ""_"" ersetzt.
 !end_enumerate
 
-Sie sehen, daß aus einem ""ü"" die ziemlich lange Zeichenfolge
+Sie sehen, dass aus einem ""ü"" die ziemlich lange Zeichenfolge
 ""_5C_27FC"" wird. Dies scheint auf den ersten Blick mehr als
 umständlich und ""doppelt gemoppelt"" zu sein, bringt aber den Vorteil,
-daß die Vergabe von gleichen Kontextstrings bei ähnlichen Kapitelnamen
+dass die Vergabe von gleichen Kontextstrings bei ähnlichen Kapitelnamen
 ziemlich unwahrscheinlich wird. Würde aus dem ""ü"" lediglich ""FC""
 gemacht, wären Probleme vorprogrammiert.
 !endif
@@ -2617,8 +2617,8 @@ Quelltexte für eine Windows-Hilfe gleich im Windows-Zeichensatz
 schreiben. UDO braucht in dem Falle keine aufwendige
 Zeichensatzkonvertierung vornehmen.
 
-Achten Sie hierbei darauf, daß Sie den Schalter (!KW [code] [[iso!!]]) benutzen, um
-UDO anzuzeigen, daß die Texte nicht im DOS-Zeichensatz erstellt
+Achten Sie hierbei darauf, dass Sie den Schalter (!KW [code] [[iso!!]]) benutzen, um
+UDO anzuzeigen, dass die Texte nicht im DOS-Zeichensatz erstellt
 wurden.
 
 !begin_ignore
@@ -2656,7 +2656,7 @@ Windows 3.11 and Windows95/NT.
 !item [Warum sollte ich die WinHelp-Dateien komprimieren?]
 
 Mit den Schaltern (!KW [win_medium_compression]) und (!KW [win_high_compression])
-sorgen Sie dafür, daß der Help-Compiler die WinHelp-Datei komprimiert.
+sorgen Sie dafür, dass der Help-Compiler die WinHelp-Datei komprimiert.
 Dadurch können Sie die Größe der Datei bis zu 50~% verringern, wobei
 sich allerdings die Laufzeit des Help-Compilers, besonders bei der
 hohen Komprimierungsrate, verlängert.

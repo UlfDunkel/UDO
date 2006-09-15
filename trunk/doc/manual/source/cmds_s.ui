@@ -282,7 +282,7 @@ Kommando benutzt wurde. Etwaige Einrückungen werden
 dabei berücksichtigt, Zentrierungen jedoch nicht.
 Tabulatoren werden abhängig von (!KW [tabwidth])
 umgewandelt. Enthält der Dateiname Leerzeichen,
-muß er in Anführungsstriche gesetzt werden.
+muss er in Anführungsstriche gesetzt werden.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -331,7 +331,7 @@ Schaltet die Warnung vor kurzen Zeilen aus, die
 ausgegeben werden, wenn ein grober rechter
 Flatterrand erzeugt wird oder bei Benutzung von
 Blocksatz zuviele Leerzeichen in eine Zeile eingefügt
-werden mußten. Bei der Umwandlung ins (!LaTeX)-Format
+werden mussten. Bei der Umwandlung ins (!LaTeX)-Format
 erfolgt (!B)keine(!b) Umsetzung in ''(!V)\sloppy(!v)''!
 !endif
 !iflang [english]
@@ -884,7 +884,7 @@ Set the paragraph width (ST-Guide only).
 !html_name cmd_street.html
 
 !iflang [german]
-Straße des Autors für den Adreßblock der Titelseite setzen.
+Straße des Autors für den Adressblock der Titelseite setzen.
 !endif
 !iflang [english]
 Set document information.
@@ -1031,7 +1031,7 @@ Start a section.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Dieses Kommando hat die gleiche Funktion wie
-(!KW [subnode]), mit der Ausnahme, daß ""<text>"" nicht in Inhaltsverzeichnissen erscheint.
+(!KW [subnode]), mit der Ausnahme, dass ""<text>"" nicht in Inhaltsverzeichnissen erscheint.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1177,7 +1177,7 @@ Start a hidden subsection.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieses Kommando hat die gleiche Funktion wie (!KW [subsubnode]), mit der Ausnahme, daß ""<text>"" nicht in
+Dieses Kommando hat die gleiche Funktion wie (!KW [subsubnode]), mit der Ausnahme, dass ""<text>"" nicht in
 Inhaltsverzeichnissen erscheint.
 !endif
 !iflang [english]
@@ -1277,7 +1277,7 @@ Start a paragraph.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Leitet einen Paragraph mit der Bezeichnung ""<text>"" ein. Ein Paragraph ist die vierte Gliederungsebene
-und wird mit #.#.#.# numeriert.
+und wird mit #.#.#.# nummeriert.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1328,7 +1328,7 @@ Start a hidden paragraph.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieses Kommando hat die gleiche Funktion wie (!KW [subsubsubnode]), mit der Ausnahme, daß ""<text>"" nicht
+Dieses Kommando hat die gleiche Funktion wie (!KW [subsubsubnode]), mit der Ausnahme, dass ""<text>"" nicht
 in Inhaltsverzeichnissen erscheint.
 !endif
 !iflang [english]
@@ -1381,11 +1381,11 @@ List paragraphs.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Listet in Form eines Inhaltsverzeichnisses alle Paragraphen des
-aktuellen Unterabschnitts auf und sorgt dafür, daß man in Hypertexten
+aktuellen Unterabschnitts auf und sorgt dafür, dass man in Hypertexten
 zu den Paragraphen weiterverzweigen kann. UDO gibt dieses
 Unterinhaltsverzeichnis nicht aus, wenn in dem Unterabschnitt der Schalter
 (!KW [ignore_subsubsubtoc]) verwendet wurde. Die Ausgabe dieser
-Unterinhaltsverzeichnisse läßt sich durch
+Unterinhaltsverzeichnisse lässt sich durch
 (!KW [use_auto_subsubsubtocs]) auch automatisieren.
 !endif
 !iflang [english]
@@ -1420,7 +1420,7 @@ This table can be generated automatically with the switch (!KW [use_auto_subsubs
 !html_name cmd_subsubsubtoc_offset.html
 
 !iflang [german]
-Offset für die Paragraphennumerierung setzen.
+Offset für die Paragraphennummerierung setzen.
 !endif
 !iflang [english]
 Set offset of paragraph counter.
@@ -1484,7 +1484,7 @@ Start a subparagraph.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Leitet einen Unterparagraph mit der Bezeichnung ""<text>"" ein. Ein Unterparagraph ist die fünfte Gliederungsebene
-und wird mit #.#.#.#.# numeriert.
+und wird mit #.#.#.#.# nummeriert.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1538,7 +1538,7 @@ Start a hidden subparagraph.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieses Kommando hat die gleiche Funktion wie (!KW [subsubsubsubnode]), mit der Ausnahme, daß ""<text>"" nicht
+Dieses Kommando hat die gleiche Funktion wie (!KW [subsubsubsubnode]), mit der Ausnahme, dass ""<text>"" nicht
 in Inhaltsverzeichnissen erscheint.
 !endif
 !iflang [english]
@@ -1594,11 +1594,11 @@ List subparagraphs.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Listet in Form eines Inhaltsverzeichnisses alle Unterparagraphen des
-aktuellen Unterabschnitts auf und sorgt dafür, daß man in Hypertexten
+aktuellen Unterabschnitts auf und sorgt dafür, dass man in Hypertexten
 zu den Paragraphen weiterverzweigen kann. UDO gibt dieses
 Unterinhaltsverzeichnis nicht aus, wenn in dem Unterabschnitt der Schalter
 (!KW [ignore_subsubsubsubtoc]) verwendet wurde. Die Ausgabe dieser
-Unterinhaltsverzeichnisse läßt sich durch
+Unterinhaltsverzeichnisse lässt sich durch
 (!KW [use_auto_subsubsubsubtocs]) auch automatisieren.
 !endif
 !iflang [english]
@@ -1636,7 +1636,7 @@ This table can be generated automatically with the switch (!KW [use_auto_subsubs
 !html_name cmd_subsubsubsubtoc_offset.html
 
 !iflang [german]
-Offset für die Unterparagraphennumerierung setzen.
+Offset für die Unterparagraphennummerierung setzen.
 !endif
 !iflang [english]
 Set offset of subparagraph counter.
@@ -1699,11 +1699,11 @@ List subsections.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Listet in Form eines Inhaltsverzeichnisses alle Unterabschnitte des
-aktuellen Abschnitts auf und sorgt dafür, daß man in Hypertexten zu den
+aktuellen Abschnitts auf und sorgt dafür, dass man in Hypertexten zu den
 Unterabschnitten weiterverzweigen kann. UDO gibt dieses
 Unterinhaltsverzeichnis nicht aus, wenn in dem Abschnitt der Schalter
 (!KW [ignore_subsubtoc]) verwendet wurde. Die Ausgabe dieser
-Unterinhaltsverzeichnisse läßt sich durch (!KW [use_auto_subsubtocs]) auch automatisieren.
+Unterinhaltsverzeichnisse lässt sich durch (!KW [use_auto_subsubtocs]) auch automatisieren.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1735,7 +1735,7 @@ This table can be generate automatically with the switch (!KW [use_auto_subsubto
 !html_name cmd_subsubtoc_offset.html
 
 !iflang [german]
-Offset für die Unterabschnittnumerierung setzen.
+Offset für die Unterabschnittnummerierung setzen.
 !endif
 !iflang [english]
 Set offset of subsection counter.
@@ -1797,11 +1797,11 @@ List sections.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Listet in Form eines Inhaltsverzeichnisses alle Abschnitte des
-aktuellen Kapitels auf und sorgt dafür, daß man in Hypertexten zu den
+aktuellen Kapitels auf und sorgt dafür, dass man in Hypertexten zu den
 Abschnitten weiterverzweigen kann. UDO gibt dieses
 Unterinhaltsverzeichnis nicht aus, wenn in dem Kapitel der Schalter
 (!KW [ignore_subtoc]) verwendet wurde. Die Ausgabe dieser
-Unterinhaltsverzeichnisse läßt sich durch (!KW [use_auto_subtocs]) auch automatisieren.
+Unterinhaltsverzeichnisse lässt sich durch (!KW [use_auto_subtocs]) auch automatisieren.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1833,7 +1833,7 @@ This table can be generate automatically with the switch (!KW [use_auto_subtocs]
 !html_name cmd_subtoc_offset.html
 
 !iflang [german]
-Offset für die Abschnittnumerierung setzen.
+Offset für die Abschnittnummerierung setzen.
 !endif
 !iflang [english]
 Set offset of section counter.

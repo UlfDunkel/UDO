@@ -348,7 +348,7 @@ sollten Sie die Quelltexte der Dokumentation ins Texinfo-Format
 umwandeln, mit Makeinfo bearbeiten und die erhaltenen Dateien in das
 Verzeichnis kopieren ((!V)$INFOPATH(!v)), in dem sich die anderen Info-Dateien
 befinden, sofern sich in der UDO-Distribution noch keine Info-Dateien
-befinden. Die Datei ''(!V)dir(!v)'' muﬂ dort dann noch angepaﬂt werden, indem Sie
+befinden. Die Datei ''(!V)dir(!v)'' muss dort dann noch angepasst werden, indem Sie
 auf die UDO-Dokumentation verweisen.
 
 Desweiteren empfiehlt sich das Anlegen von Shellscripten oder Aliasen,

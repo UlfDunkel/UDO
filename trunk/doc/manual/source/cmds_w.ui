@@ -65,9 +65,9 @@ Verfügung: black, silver (hellgrau, ehemals ""grey""),
 gray (dunkelgrau, ""gray"", nicht ""grey""!), white, maroon,
 red, purple, fuchsia, green (dunkelgrün), lime (hellgrün),
 olive, yellow, navy, blue, teal und aqua (ehemals "cyan").
-Gleichzeitig paßt UDO die Textfarbe
+Gleichzeitig passt UDO die Textfarbe
 an. Man sollte möglichst nur Weiß und Grau als
-Hintergrundfarben verwenden; alle anderen Farben sind furchtbar häßlich.
+Hintergrundfarben verwenden; alle anderen Farben sind furchtbar hässlich.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -144,10 +144,10 @@ Set character width (WinHelp4 only).
 UDO benutzt zur Ausrichtung der xlist-Umgebungen und
 der Tabellen einen Wert für die Berechnung der
 Einrückungen und Zellenbreiten. Dieser Wert ist so
-ausgelegt, daß auch nichtproportionale fette
+ausgelegt, dass auch nichtproportionale fette
 Großschrift noch richtig formatiert wird. Bei
-normaler Schrift kann es jedoch sein, daß die Zeichen
-zu weit eingerückt werden oder daß Tabellenzellen zu
+normaler Schrift kann es jedoch sein, dass die Zeichen
+zu weit eingerückt werden oder dass Tabellenzellen zu
 breit erscheinen. Mit diesem Schalter können sie den
 Berechnungswert anpassen. Standardmäßig benutzt UDO den Wert 150.
 !endif
@@ -707,9 +707,10 @@ Query the destination format.
 !html_name cmd_white.html
 
 !iflang [german]
-Setzen den Schriftfarbe auf weiß.
+Setzt die Schriftfarbe auf Weiß.
 !endif
 !iflang [english]
+Sets the text color white.
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -769,9 +770,9 @@ Verfügung: black, silver (hellgrau, ehemals ""grey""),
 gray (dunkelgrau, ""gray"", nicht ""grey""!), white, maroon,
 red, purple, fuchsia, green (dunkelgrün), lime (hellgrün),
 olive, yellow, navy, blue, teal und aqua (ehemals "cyan").
-Gleichzeitig paßt UDO die Textfarbe
+Gleichzeitig passt UDO die Textfarbe
 an. Man sollte möglichst nur Weiß und Grau als
-Hintergrundfarben verwenden; alle anderen Farben sind furchtbar häßlich.
+Hintergrundfarben verwenden; alle anderen Farben sind furchtbar hässlich.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -852,9 +853,9 @@ Set character width (WinHelp and QuickView only).
 UDO benutzt zur Ausrichtung der xlist-Umgebungen und
 der Tabellen einen Wert für die Berechnung der
 Einrückungen und Zellenbreiten. Dieser Wert ist so
-ausgelegt, daß auch nichtproportionale fette
+ausgelegt, dass auch nichtproportionale fette
 Großschrift noch richtig formatiert wird. Bei
-normaler Schrift kann es jedoch sein, daß die Zeichen
+normaler Schrift kann es jedoch sein, dass die Zeichen
 zu weit eingerückt werden oder das Tabellenzellen zu
 breit erscheinen. Mit diesem Schalter können sie den
 Berechnungswert anpassen. Standardmäßig benutzt UDO den Wert 150.

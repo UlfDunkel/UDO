@@ -315,7 +315,7 @@ Include information page.
 !item [(!DESCRIPTION)]
 Die Benutzung dieses Schalters erzeugt am Ende der erzeugten Datei
 (sofern das zugehörige Format als Kürzel übergeben wurde) eine kleine
-Seite mit Informationen zu UDO. Wer ein bißchen Werbung für UDO machen
+Seite mit Informationen zu UDO. Wer ein bisschen Werbung für UDO machen
 möchte, sollte dieses Kommando im Vorspann einsetzen und im Quelltext
 das Wort ""UDO(!RELEASE)"" einmal unterbringen, da diese Werbeseite nicht im
 Inhaltsverzeichnis aufgeführt wird.
@@ -455,7 +455,7 @@ Automatically create Help-IDs.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Durch diesen Schalter kann man im Vorspann bestimmen, daß UDO
+Durch diesen Schalter kann man im Vorspann bestimmen, dass UDO
 automatisch Help-IDs sichert, die an die Kapitelnamen angelehnt sind,
 sofern nicht manuell eine Help-ID mit (!KW [win_helpid]) oder
 (!KW [wh4_helpid]) gesetzt wird.
@@ -776,7 +776,7 @@ Output formfeed.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Mit diesem Schalter kann man UDO mitteilen, daß beim (!KW [newpage])-Befehl bei ASCII-Formaten ein Formfeed
+Mit diesem Schalter kann man UDO mitteilen, dass beim (!KW [newpage])-Befehl bei ASCII-Formaten ein Formfeed
 (ASCII~12) ausgegeben werden soll.
 !endif
 !iflang [english]
@@ -1051,12 +1051,12 @@ Request output buffer.
 !item [(!DESCRIPTION)]
 UDO bricht bei allen Formaten an der durch (!KW [parwidth])
 definierten Position die Zeilen um. Bei WinHelp und
-HTML kann es dadurch passieren, daß Querverweise
+HTML kann es dadurch passieren, dass Querverweise
 nicht erkannt werden. Wird dieser Schalter benutzt,
 so werden Absätze erst komplett in einem ausreichend
 großen Puffer erzeugt, dann die Querverweise angelegt
 und erst dann die Zeilen umbrochen. Da dies die
-Umwandlungsdauer negativ beeinflußt, benutzt UDO
+Umwandlungsdauer negativ beeinflusst, benutzt UDO
 standardmäßig keinen Ausgabepuffer. Im Beispiel
 würden Ausgabepuffer für WinHelp und HTML angefordert.
 !endif
