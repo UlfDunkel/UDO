@@ -1374,7 +1374,7 @@ Rechner, auf denen UDO läuft, jeweils an anderer Stelle definiert ist.
 
 !index (!kw [no_umlaute])
 !item Verwendet man im Vorspann den Schalter (!KW [no_umlaute]), so
-wird als Markierung für die Ebene ein `o' statt des Bullets verwendet.
+wird als Markierung für die Ebene ein 'o' statt des Bullets verwendet.
 !end_enumerate
 
 !endif
