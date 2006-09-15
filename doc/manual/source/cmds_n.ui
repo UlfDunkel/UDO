@@ -114,9 +114,10 @@ Start a chapter.
 !html_name cmd_navy.html
 
 !iflang [german]
-Setzen den Schriftfarbe auf hellblau.
+Setzt die Schriftfarbe auf Marineblau.
 !endif
 !iflang [english]
+Sets the text color navy.
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -127,11 +128,11 @@ Setzen den Schriftfarbe auf hellblau.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieser Platzhalter setzt die Schriftfarbe auf hellblau.
+Dieser Platzhalter setzt die Schriftfarbe Marineblau.
 Abgeschlossen wird mit (!kkw [coloff]).
 
 Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-Postscript unterstürzt.
+Postscript unterstützt.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]

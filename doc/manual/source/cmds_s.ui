@@ -220,9 +220,10 @@ Aus (!T)(!/short_today)(!t) wird (!short_today)
 !html_name cmd_silver.html
 
 !iflang [german]
-Setzen den Schriftfarbe auf hellgrau.
+Setzt die Schriftfarbe Hellgrau.
 !endif
 !iflang [english]
+Sets the text color silver (light gray).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -233,11 +234,11 @@ Setzen den Schriftfarbe auf hellgrau.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieser Platzhalter setzt die Schriftfarbe auf hellgrau.
+Dieser Platzhalter setzt die Schriftfarbe Hellgrau.
 Abgeschlossen wird mit (!kkw [coloff]).
 
 Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-Postscript unterstürzt.
+Postscript unterstützt.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]

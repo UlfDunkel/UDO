@@ -41,9 +41,10 @@ Define language.
 !html_name cmd_green.html
 
 !iflang [german]
-Setzen den Schriftfarbe auf dunkelgrün.
+Setzt die Schriftfarbe Grün.
 !endif
 !iflang [english]
+Sets the text color green.
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -54,11 +55,11 @@ Setzen den Schriftfarbe auf dunkelgrün.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieser Platzhalter setzt die Schriftfarbe auf dunkelgrün.
+Dieser Platzhalter setzt die Schriftfarbe Grün.
 Abgeschlossen wird mit (!kkw [coloff]).
 
 Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-Postscript unterstürzt.
+Postscript unterstützt.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -84,9 +85,11 @@ Postscript unterstürzt.
 !html_name cmd_gray.html
 
 !iflang [german]
-Setzen den Schriftfarbe auf dunkelgrau.
+Setzt die Schriftfarbe (Dunkel-)Grau.
 !endif
 !iflang [english]
+Sets the text color (dark) gray.
+
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -97,11 +100,11 @@ Setzen den Schriftfarbe auf dunkelgrau.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieser Platzhalter setzt die Schriftfarbe auf dunkelgrau.
+Dieser Platzhalter setzt die Schriftfarbe (Dunkel-)Grau.
 Abgeschlossen wird mit (!kkw [coloff]).
 
 Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-Postscript unterstürzt.
+Postscript unterstützt.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]

@@ -532,7 +532,7 @@ Abschalten der gesetzen Schriftfarbe.
 Dieser Platzhalter wird die gesetzt die Schriftfarbe abgeschlossen.
 
 Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-Postscript unterstürzt.
+Postscript unterstützt.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]

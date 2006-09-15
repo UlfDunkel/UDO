@@ -335,9 +335,10 @@ or both.
 !html_name cmd_maroon.html
 
 !iflang [german]
-Setzen den Schriftfarbe auf kastanienbraun.
+Setzt die Schriftfarbe Kastanienbraun.
 !endif
 !iflang [english]
+Sets the text color maroon.
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -348,11 +349,11 @@ Setzen den Schriftfarbe auf kastanienbraun.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieser Platzhalter setzt die Schriftfarbe auf kastanienbraun.
+Dieser Platzhalter setzt die Schriftfarbe Kastanienbraun.
 Abgeschlossen wird mit (!kkw [coloff]).
 
 Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-Postscript unterstürzt.
+Postscript unterstützt.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]

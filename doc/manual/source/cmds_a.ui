@@ -366,9 +366,10 @@ Set logo of author for title page.
 !html_name cmd_aqua.html
 
 !iflang [german]
-Setzen den Schriftfarbe auf ?.
+Setzt die Schriftfarbe Cyan.
 !endif
 !iflang [english]
+Sets the text color aqua.
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -379,11 +380,11 @@ Setzen den Schriftfarbe auf ?.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieser Platzhalter setzt die Schriftfarbe auf ?.
+Dieser Platzhalter setzt die Schriftfarbe Cyan.
 Abgeschlossen wird mit (!kkw [coloff]).
 
 Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-Postscript unterstürzt.
+Postscript unterstützt.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]

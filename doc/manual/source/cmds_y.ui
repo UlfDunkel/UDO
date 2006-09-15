@@ -8,9 +8,10 @@
 !html_name cmd_yellow.html
 
 !iflang [german]
-Setzen den Schriftfarbe auf gelb.
+Setzt die Schriftfarbe Gelb.
 !endif
 !iflang [english]
+Sets the text color yellow.
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -21,11 +22,11 @@ Setzen den Schriftfarbe auf gelb.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieser Platzhalter setzt die Schriftfarbe auf gelb.
+Dieser Platzhalter setzt die Schriftfarbe Gelb.
 Abgeschlossen wird mit (!kkw [coloff]).
 
 Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-Postscript unterstürzt.
+Postscript unterstützt.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]

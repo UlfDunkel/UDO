@@ -137,9 +137,10 @@ one of the specified formats. ""<text>"" will be not converted!
 !html_name cmd_red.html
 
 !iflang [german]
-Setzen den Schriftfarbe auf rot.
+Setzt die Schriftfarbe Rot.
 !endif
 !iflang [english]
+Sets the text color red.
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -150,11 +151,11 @@ Setzen den Schriftfarbe auf rot.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieser Platzhalter setzt die Schriftfarbe auf rot.
+Dieser Platzhalter setzt die Schriftfarbe Rot.
 Abgeschlossen wird mit (!kkw [coloff]).
 
 Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-Postscript unterstürzt.
+Postscript unterstützt.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]

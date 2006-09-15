@@ -707,7 +707,7 @@ Query the destination format.
 !html_name cmd_white.html
 
 !iflang [german]
-Setzt die Schriftfarbe auf Weiß.
+Setzt die Schriftfarbe Weiß.
 !endif
 !iflang [english]
 Sets the text color white.
@@ -721,11 +721,11 @@ Sets the text color white.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieser Platzhalter setzt die Schriftfarbe auf weiß.
+Dieser Platzhalter setzt die Schriftfarbe Weiß.
 Abgeschlossen wird mit (!kkw [coloff]).
 
 Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-Postscript unterstürzt.
+Postscript unterstützt.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
