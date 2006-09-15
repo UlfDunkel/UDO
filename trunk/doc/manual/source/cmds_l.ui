@@ -453,9 +453,10 @@ Query the destination format.
 !html_name cmd_lime.html
 
 !iflang [german]
-Setzen den Schriftfarbe auf hellgrün.
+Setzt die Schriftfarbe Hellgrün.
 !endif
 !iflang [english]
+Sets the text color lime.
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -466,11 +467,11 @@ Setzen den Schriftfarbe auf hellgrün.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieser Platzhalter setzt die Schriftfarbe auf hellgrün.
+Dieser Platzhalter setzt die Schriftfarbe Hellgrün.
 Abgeschlossen wird mit (!kkw [coloff]).
 
 Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-Postscript unterstürzt.
+Postscript unterstützt.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]

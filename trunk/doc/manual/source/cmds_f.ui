@@ -41,9 +41,10 @@ Define language.
 !html_name cmd_fuchsia.html
 
 !iflang [german]
-Setzen den Schriftfarbe auf ?.
+Setzt die Schriftfarbe Magenta.
 !endif
 !iflang [english]
+Sets the text color fuchsia.
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -54,11 +55,11 @@ Setzen den Schriftfarbe auf ?.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieser Platzhalter setzt die Schriftfarbe auf ?.
+Dieser Platzhalter setzt die Schriftfarbe Magenta.
 Abgeschlossen wird mit (!kkw [coloff]).
 
 Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-Postscript unterstürzt.
+Postscript unterstützt.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]

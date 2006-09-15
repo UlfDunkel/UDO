@@ -2764,43 +2764,84 @@ Normal and (!G)ghosted(!g).
 !endif
 !html_name colour.html
 
-UDO ermöglicht es Ihnen, bereits im Quelltext festzulegen, in welcher
-Schriftfarbe Worte oder Sätze im Ausgabeformat erscheinen soll. Dazu stehen
-Ihnen mehere Platzhalter zur Verfügung:
+!iflang [german]
+UDO unterstützt das Einstellen bestimmter Schriftfarben im Ausgabeformat. 
+Dazu stehen mehrere Kommandos zur Verfügung:
+
+!begin_flushleft
+!begin_table [ll]
+(!kkw [black])   !! (!black)Schwarz(!coloff)
+(!kkw [silver])  !! (!silver)Hellgrau(!coloff)
+(!kkw [gray])    !! (!gray)(Dunkel-)Grau(!coloff)
+(!kkw [white])   !! (!white)Weiß(!coloff)
+(!kkw [maroon])  !! (!maroon)Kastanienbraun(!coloff)
+(!kkw [red])     !! (!red)Rot(!coloff)
+(!kkw [purple])  !! (!purple)Lila(!coloff)
+(!kkw [fuchsia]) !! (!fuchsia)Magenta(!coloff)
+(!kkw [green])   !! (!green)Grün(!coloff)
+(!kkw [lime])    !! (!lime)Hellgrün(!coloff)
+(!kkw [olive])   !! (!olive)Olivgrün(!coloff)
+(!kkw [yellow])  !! (!yellow)Gelb(!coloff)
+(!kkw [navy])    !! (!navy)Marineblau(!coloff)
+(!kkw [blue])    !! (!blue)Blau(!coloff)
+(!kkw [teal])    !! (!teal)Blaugrün(!coloff)
+(!kkw [aqua])    !! (!aqua)Cyan(!coloff)
+!end_table
+!end_flushleft
+
+Mit dem Kommando (!kkw [coloff]) wird wieder auf die Standardfarbe Schwarz zurückgeschaltet.
+
+Aus~!..
+!begin_verbatim
+(!red)Farbe in UDO(!coloff)
+!end_verbatim
+
+!..~wird:
+
+(!red)Farbe in UDO(!coloff)
+
+Das Setzen der Farben wird z. Zt. bei den Formaten HTML, RTF, WinHelp, DRC und
+Postscript unterstützt.
+!endif
+!iflang [english]
+UDO supports definition of text color for words or paragraphs. 
+You can use the following commands:
 
 !begin_flushleft
 !begin_table [ll]
 (!kkw [black])   !! (!black)black(!coloff)
-(!kkw [silver])  !! (!black)silver(!coloff)
-(!kkw [gray])    !! (!black)gray(!coloff)
-(!kkw [white])   !! (!black)white(!coloff)
-(!kkw [maroon])  !! (!black)maroon(!coloff)
-(!kkw [red])     !! (!black)red(!coloff)
-(!kkw [purple])  !! (!black)purple(!coloff)
-(!kkw [fuchsia]) !! (!black)fuchsia(!coloff)
-(!kkw [green])   !! (!black)green(!coloff)
-(!kkw [lime])    !! (!black)lime(!coloff)
-(!kkw [olive])   !! (!black)olive(!coloff)
-(!kkw [yellow])  !! (!black)yellow(!coloff)
-(!kkw [navy])    !! (!black)navy(!coloff)
-(!kkw [blue])    !! (!black)blue(!coloff)
-(!kkw [teal])    !! (!black)teal(!coloff)
-(!kkw [aqua])    !! (!black)aqua(!coloff)
+(!kkw [silver])  !! (!silver)silver(!coloff)
+(!kkw [gray])    !! (!gray)gray(!coloff)
+(!kkw [white])   !! (!white)white(!coloff)
+(!kkw [maroon])  !! (!maroon)maroon(!coloff)
+(!kkw [red])     !! (!red)red(!coloff)
+(!kkw [purple])  !! (!purple)purple(!coloff)
+(!kkw [fuchsia]) !! (!fuchsia)fuchsia(!coloff)
+(!kkw [green])   !! (!green)green(!coloff)
+(!kkw [lime])    !! (!lime)lime(!coloff)
+(!kkw [olive])   !! (!olive)olive(!coloff)
+(!kkw [yellow])  !! (!yellow)yellow(!coloff)
+(!kkw [navy])    !! (!navy)navy(!coloff)
+(!kkw [blue])    !! (!blue)blue(!coloff)
+(!kkw [teal])    !! (!teal)teal(!coloff)
+(!kkw [aqua])    !! (!aqua)aqua(!coloff)
 !end_table
 !end_flushleft
-Mit dem Platzhalter (!kkw [coloff]) wird das ganze abgeschlossen.
 
-Aus...
+The command (!kkw [coloff]) resets the default color black.
+
+From~...
 !begin_verbatim
-(!red) Farbe in UDO (!coloff)
+(!red)Color in UDO(!coloff)
 !end_verbatim
 
-...wird:
+...~you get:
 
-(!red) Farbe in UDO (!coloff)
+(!red)Color in UDO(!coloff)
 
-Das setzen der Farben wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-Postscript unterstürzt.
+Text color definition is currently supported for the output formats 
+HTML, RTF, WinHelp, DRC and Postscript.
+!endif
 
 !end_node
 
