@@ -533,12 +533,12 @@ itself.
 
 # neuer Text 28.01.2004 - Ulrich Kretschmer
 !iflang [german]
-Die frühere UDO-Version für (!B)MacOS~9(!b) steht derzeit nicht mehr zur Verfügung.
-Für (!B)MacOS~X(!b) gibt es eine Kommandozeilen-Version von UDO.
+Die frühere UDO-Version für (!B)Mac~OS~9(!b) steht derzeit nicht mehr zur Verfügung.
+Für (!B)Mac~OS~X(!b) gibt es eine Kommandozeilen-Version von UDO.
 !endif
 !iflang [english]
-The former UDO version for (!B)MacOS~9(!b) is currently not available.
-For (!B)MacOS~X(!b) you can use the UDO commandline version.
+The former UDO version for (!B)Mac~OS~9(!b) is currently not available.
+For (!B)Mac~OS~X(!b) you can use the UDO commandline version.
 !endif
 
 !begin_ignore

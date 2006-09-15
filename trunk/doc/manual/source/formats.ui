@@ -94,14 +94,14 @@ More information can be found on:
 !html_name format_aqv.html
 
 !iflang [german]
-Apple QuickView ist ein Hypertext-Format, das unter älteren MacOS-Versionen verwendet wurde.
+Apple QuickView ist ein Hypertext-Format, das unter älteren Mac-OS-Versionen verwendet wurde.
 Es wurde von der Firma Altura ((!url [http://www.altura.com] [http://www.altura.com/])) definiert.
 
 Eine Spezifikation des Formats ist derzeit nicht verfügbar.
 !endif
 # ------------------------------------------------------------------------------
 !iflang [english]
-Apple QuickView is an hypertext format running under older MacOS versions.
+Apple QuickView is an hypertext format running under older Mac~OS versions.
 Is was defined by Altura ((!url [http://www.altura.com] [http://www.altura.com/])).
 
 Actually, there is no format specification available.
