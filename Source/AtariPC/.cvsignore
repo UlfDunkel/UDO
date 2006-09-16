@@ -1,3 +1,8 @@
 *.PDB
-
+*.pdb
+*.LZH
+*.lzh
 *.TTP
+*.ttp
+*.BAK
+*.bak
