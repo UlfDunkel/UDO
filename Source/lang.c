@@ -111,8 +111,8 @@ LOCAL const char *MONTH_SPA[] =
 /* Czech */ /* V6.5.19 */
 LOCAL const char *MONTH_CZE[] =
 {
-   "ledna", "(!'u)nora", "b(!\o)ezna", "dubna", "kv(!`i)tna", "(!`e)ervna",
-   "(!`e)ervence", "srpna", "z(!'a)(!\o)(!'i)", "(!\o)(!'i)jna", "listopadu", "prosince"
+   "ledna", "(!'u)nora", "b(!\\o)ezna", "dubna", "kv(!`i)tna", "(!`e)ervna",
+   "(!`e)ervence", "srpna", "z(!'a)(!\\o)(!'i)", "(!\\o)(!'i)jna", "listopadu", "prosince"
 };
 
 
