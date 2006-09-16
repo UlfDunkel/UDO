@@ -108,13 +108,24 @@ LOCAL const char *MONTH_SPA[] =
    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
 };
 
-/* Czech */ /* V6.5.19 */
+
+/* Czech windows-1250 encoding */ /* V6.5.19 */
+/* fd:20060916: temporarily faded as there is noone else using this stuff at the moment 
 LOCAL const char *MONTH_CZE[] =
 {
    "ledna", "(!'u)nora", "b(!\\o)ezna", "dubna", "kv(!`i)tna", "(!`e)ervna",
    "(!`e)ervence", "srpna", "z(!'a)(!\\o)(!'i)", "(!\\o)(!'i)jna", "listopadu", "prosince"
 };
+*/
 
+/* Czech x-mac-ce encoding */ /* V6.5.19 */
+LOCAL const char *MONTH_CZE[] =
+{
+   "ledna", "œnora", "bÞezna", "dubna", "kvžtna", "‹ervna",
+   "‹ervence", "srpna", "z‡Þ’", "Þ’jna", "listopadu", "prosince"
+};
+
+   
 
 
 /*      ############################################################
@@ -446,8 +457,9 @@ GLOBAL void init_lang ( void )
       uni2ascii(lang.also);
       uni2ascii(lang.html_next);
       break;
-   
-   case TOCZE:                     /* V6.5.18 */
+
+/* fd:20060916: windows-1250 encoding temporarily faded
+   case TOCZE:
       strcpy(lang.preface,    "P(!\o)edmluva");
       strcpy(lang.chapter,    "Kapitola");
       strcpy(lang.title,      "Titul");
@@ -462,16 +474,16 @@ GLOBAL void init_lang ( void )
       strcpy(lang.see,        "viz");
       strcpy(lang.also,       "viz t(!'e)ž");
       strcpy(lang.by,         "");
-      strcpy(lang.fur,        "pro"); /* New in V6.5.2 [NHz] */
+      strcpy(lang.fur,        "pro");
       strcpy(lang.up,         "Nahoru");
       strcpy(lang.exit,       "Odchod");
       strcpy(lang.unknown,    "Nen(!'i) zn(!'a)mo");
-      strcpy(lang.update,     "Podledn(!'i) aktualizace");
+      strcpy(lang.update,     "Posledn(!'i) aktualizace");
       strcpy(lang.lcid,       "LCID=0x405 0x0 0x0 ;Czech");
       strcpy(lang.html_home,  "Dom(!`u)");
       strcpy(lang.html_up,    "Nahoru");
       strcpy(lang.html_prev,  "P(!\o)edchoz(!'i)");
-      strcpy(lang.html_next,  "N(!'a)sleduj(!'i)c(!'i)"); /* New in r6pl16 [NHz] */
+      strcpy(lang.html_next,  "N(!'a)sleduj(!'i)c(!'i)");
       strcpy(lang.html_lang,  "cs");
       strcpy(lang.html_start, "Za(!`e)(!'a)tek dokumentu");
 
@@ -487,6 +499,36 @@ GLOBAL void init_lang ( void )
       uni2ascii(lang.html_prev);
       uni2ascii(lang.html_next);
       uni2ascii(lang.html_start);
+      break;
+*/
+
+   case TOCZE:                     /* V6.5.18 */
+      strcpy(lang.preface,    "PÞedmluva");
+      strcpy(lang.chapter,    "Kapitola");
+      strcpy(lang.title,      "Titul");
+      strcpy(lang.appendix,   "PÞ’loha");
+      strcpy(lang.contents,   "Obsah");
+      strcpy(lang.listfigure, "Seznam obr‡zkó");
+      strcpy(lang.listtable,  "Seznam tabulek");
+      strcpy(lang.figure,     "Obr‡zek");
+      strcpy(lang.table,      "Tabulka");
+      strcpy(lang.index,      "RejstÞ’k");
+      strcpy(lang.page,       "strana");
+      strcpy(lang.see,        "viz");
+      strcpy(lang.also,       "viz tŽì");
+      strcpy(lang.by,         "");
+      strcpy(lang.fur,        "pro"); /* New in V6.5.2 [NHz] */
+      strcpy(lang.up,         "Nahoru");
+      strcpy(lang.exit,       "Odchod");
+      strcpy(lang.unknown,    "Nen’ zn‡mo");
+      strcpy(lang.update,     "Posledn’ aktualizace");
+      strcpy(lang.lcid,       "LCID=0x405 0x0 0x0 ;Czech");
+      strcpy(lang.html_home,  "Domó");
+      strcpy(lang.html_up,    "Nahoru");
+      strcpy(lang.html_prev,  "PÞedchoz’");
+      strcpy(lang.html_next,  "N‡sleduj’c’"); /* New in r6pl16 [NHz] */
+      strcpy(lang.html_lang,  "cs");
+      strcpy(lang.html_start, "Za‹‡tek dokumentu");
       break;
    
    default:        /* Deutsch ist default */
