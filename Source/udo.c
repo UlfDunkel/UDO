@@ -3593,8 +3593,8 @@ GLOBAL void c_udolink ( void )
 			if (inside_center)	strcpy(sTemp, "<p align=\"center\">");
 			if (inside_right)	strcpy(sTemp, "<p align=\"right\">");
 			if (nodename[0]==EOS)
-			{	voutlnf("%s<a href=\"%s\"><img src=\"%s\" alt=\"%s\" border=\"0\"%s /></a>",
-					sTemp, UDO_URL, GIF_MW_NAME, UDO_MADE, sGifSize);
+			{	voutlnf("%s<a href=\"%s\"><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s /></a>",
+					sTemp, UDO_URL, GIF_MW_NAME, UDO_MADE, UDO_MADE, sGifSize);
 			}
 			else
 			{	auto_references(nodename, TRUE, GIF_MW_NAME, uiGifMwWidth, uiGifMwHeight);

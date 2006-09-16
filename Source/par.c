@@ -1617,8 +1617,8 @@ LOCAL void c_ilink ( char *s, const BOOLEAN inside_b4_macro )
 					{	strcpy(img_entry, Param[2]);
 					}
 					else
-					{	sprintf(img_entry, "<img src=\"%s\" alt=\"%s\" border=\"0\" />",
-							Param[1], Param[2]);
+					{	sprintf(img_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\" />",
+							Param[1], Param[2], Param[2]);
 					}
 					flag= replace_once(ptr, old_entry, img_entry);
 				}
@@ -2806,10 +2806,10 @@ LOCAL void c_internal_image ( char *s, const BOOLEAN inside_b4_macro )
 				else  /* Feature-Wunsch 0000070 V6.5.18 */
 				{
 					if ( Param[3][0] != EOS )
-						sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\"%s />",
+						sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s />",
 							Param[1], Param[2], Param[3], sGifSize);
 					else
-						sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\"%s />",
+						sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s />",
 							Param[1], Param[2], Param[2], sGifSize);
 				}
 				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
