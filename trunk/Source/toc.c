@@ -682,14 +682,14 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 					{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 					}
 					if (l->is_node || l->is_alias)
-					{	sprintf(ref, "<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s /></a>",
+					{	sprintf(ref, "<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s /></a>",
 							/* Changed in r6pl16 [NHz] */
-							htmlfilename, suff, html_target, pic, n, sGifSize);
+							htmlfilename, suff, html_target, pic, n, n, sGifSize);
 					}
 					else
-					{	sprintf(ref, "<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s /></a>",
+					{	sprintf(ref, "<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s /></a>",
 							/* Changed in r6pl16 [NHz] */
-							htmlfilename, suff, sNoSty, html_target, pic, n, sGifSize);
+							htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize);
 					}
 				}
 			}
@@ -2655,8 +2655,8 @@ LOCAL void html_index_giflink ( const int idxEnabled, const int idxDisabled, con
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s /></a>",
-						sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents,
+			voutlnf("<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s /></a>",
+						sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents, lang.contents,
 						sGifSize);
 		}
 	}
@@ -2705,7 +2705,7 @@ LOCAL void html_home_giflink ( const int idxEnabled, const int idxDisabled, cons
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("<img src=\"%s\" alt=\"%s\" border=\"0\"%s />", sGifName, lang.html_home, sGifSize);
+			voutlnf("<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s />", sGifName, lang.html_home, lang.html_home, sGifSize);
 		}
 	}
 	else
@@ -2729,8 +2729,8 @@ LOCAL void html_home_giflink ( const int idxEnabled, const int idxDisabled, cons
 			if (uiW!=0 && uiH!=0)
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
-			voutlnf("<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s /></a>",
-						sFile, outfile.suff, sTarget, sGifName, lang.html_home, sGifSize);
+			voutlnf("<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s /></a>",
+						sFile, outfile.suff, sTarget, sGifName, lang.html_home, lang.html_home, sGifSize);
 		}
 	}
 
@@ -2778,8 +2778,8 @@ LOCAL void html_back_giflink ( const int idxEnabled, const int idxDisabled, cons
 			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 			}
 			/* Changed in r6pl16 [NHz] */
-			voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"%s\" border=\"0\"%s /></a>",
-						href, target, sGifName, alt, sGifSize);
+			voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s /></a>",
+						href, target, sGifName, alt, alt, sGifSize);
 		}
 	}
 	else
@@ -3146,7 +3146,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 						{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 						}
 						/* Changed in r6pl16 [NHz] */
-						voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"Deutsch\" title=\"To the german version of this document\" border=\"0\"%s /></a>",
+						voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"Deutsch\" title=\"German version of this document\" border=\"0\"%s /></a>",
 							sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize);
 						break;
 					case TOENG:
@@ -3155,7 +3155,7 @@ LOCAL void html_hb_line ( BOOLEAN head )
 						{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
 						}
 						/* Changed in r6pl16 [NHz] */
-						voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"English\" title=\"Zur englischen Version dieses Dokumentes\" border=\"0\"%s /></a>",
+						voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"English\" title=\"Englische Version dieses Dokumentes\" border=\"0\"%s /></a>",
 								sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize);
 						break;
 				}
@@ -3534,7 +3534,7 @@ LOCAL void html_node_bar_frames ( void )
 		if (titdat.authoriconWidth!=0 && titdat.authoriconHeight!=0)
 		{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconWidth, titdat.authoriconHeight);
 		}
-		voutlnf("%s<a href=\"%s%s%s\" target=\"%s\"><img src=\"%s%s\" alt=\"\" border=\"0\"%s /></a>%s",
+		voutlnf("%s<a href=\"%s%s%s\" target=\"%s\"><img src=\"%s%s\" alt=\"\" title=\"\" border=\"0\"%s /></a>%s",
 			alignOn, html_name_prefix, FRAME_FILE_CON, outfile.suff,
 			FRAME_NAME_CON, titdat.authoricon, "" /*sDocImgSuffix*/, sGifSize, alignOff);
 	}
@@ -4815,8 +4815,8 @@ LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
 							toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
 					}
 					voutlnf("<h%d><p align=\"center\">", html_nodesize);	/* r5pl4 */
-					voutlnf("<img src=\"%s%s\" alt=\"%s%s\"%s />",
-						toc[ti]->image, sDocImgSuffix, numbers, name, sGifSize);
+					voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\"%s />",
+						toc[ti]->image, sDocImgSuffix, numbers, name, numbers, name, sGifSize);
 					voutlnf("</p></h%d>", html_nodesize);				/* r5pl4 */
 					flag= TRUE;
 				}
@@ -5288,8 +5288,8 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 							toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
 					}
 					voutlnf("%s<p align=\"center\">", hx_start);
-					voutlnf("<img src=\"%s%s\" alt=\"%s%s\"%s />",
-						toc[ti]->image, sDocImgSuffix, numbers, name, sGifSize);
+					voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\"%s />",
+						toc[ti]->image, sDocImgSuffix, numbers, name, numbers, name, sGifSize);
 					voutlnf("</p>%s", hx_end);
 					flag= TRUE;
 				}
@@ -5752,8 +5752,8 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 							toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
 					}
 					voutlnf("%s<p align=\"center\">", hx_start);
-					voutlnf("<img src=\"%s%s\" alt=\"%s%s\"%s />",
-						toc[ti]->image, sDocImgSuffix, numbers, name, sGifSize);
+					voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\"%s />",
+						toc[ti]->image, sDocImgSuffix, numbers, name, numbers, name, sGifSize);
 					voutlnf("</p>%s", hx_end);
 					flag= TRUE;
 				}
@@ -6214,8 +6214,8 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 							toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
 					}
 					voutlnf("%s<p align=\"center\">", hx_start);
-					voutlnf("<img src=\"%s%s\" alt=\"%s%s\"%s />",
-						toc[ti]->image, sDocImgSuffix, numbers, name, sGifSize);
+					voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\" %s />",
+						toc[ti]->image, sDocImgSuffix, numbers, name, numbers, name, sGifSize);
 					voutlnf("</p>%s", hx_end);
 					flag= TRUE;
 				}
@@ -8379,7 +8379,7 @@ const int    currdepth)                   /* current node depth */
       }
       else
       {
-         sprintf(sIndent, "<img src=\"%s\" width=\"%u\" height=\"%u\" />", GIF_FS_NAME, uiGifFsWidth, uiGifFsHeight);
+         sprintf(sIndent, "<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\" />", GIF_FS_NAME, uiGifFsWidth, uiGifFsHeight);
       }
    
       if (html_frames_layout)
@@ -8417,7 +8417,7 @@ const int    currdepth)                   /* current node depth */
             if (html_navigation_1st_folder)
             {
                                           /* don't close the nav line already! */
-               voutf("<img src=\"%s\" width=\"%u\" height=\"%u\" />&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
+               voutf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\" />&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
                      GIF_FO_NAME,         /* folder image file name */
                      uiGifFoWidth,        /* folder image width */
                      uiGifFoHeight,       /* folder image height */
@@ -8437,7 +8437,7 @@ const int    currdepth)                   /* current node depth */
          }
          else
          {
-            voutlnf("<img src=\"%s\" width=\"%u\" height=\"%u\" />&nbsp;<a href=\"%s%s\"%s>%s</a>",
+            voutlnf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\" />&nbsp;<a href=\"%s%s\"%s>%s</a>",
                     GIF_FO_NAME,          /* folder image file name */
                     uiGifFoWidth,         /* folder image width */
                     uiGifFoHeight,        /* folder image height */
@@ -8464,7 +8464,7 @@ const int    currdepth)                   /* current node depth */
          }
          else
          {
-            voutlnf("<br />%s<img src=\"%s\" width=\"%u\" height=\"%u\" />&nbsp;%s", sIndent, GIF_FO_NAME, uiGifFoWidth, uiGifFoHeight, s);
+            voutlnf("<br />%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\" />&nbsp;%s", sIndent, GIF_FO_NAME, uiGifFoWidth, uiGifFoHeight, s);
          }
       }
    
@@ -8484,7 +8484,7 @@ const int    currdepth)                   /* current node depth */
          }
          else
          {
-            voutlnf("<br />%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" />&nbsp;%s",
+            voutlnf("<br />%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\" />&nbsp;%s",
                      sIndent, 
                      sIndent, 
                      GIF_FO_NAME, 
@@ -8510,7 +8510,7 @@ const int    currdepth)                   /* current node depth */
          }
          else
          {
-            voutlnf("<br />%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" />&nbsp;%s",
+            voutlnf("<br />%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\" />&nbsp;%s",
                     sIndent, 
                     sIndent, 
                     sIndent, 

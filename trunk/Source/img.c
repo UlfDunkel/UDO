@@ -785,8 +785,8 @@ GLOBAL void c_gif_output ( const char *name, const char *caption, const char *su
 	}
 	else
 	{	image_counter++; /* r6pl17: deleted <br /> at the end of the string next line [voja] */
-		sprintf(n, "%s<img src=\"%s\" alt=\"%s\" border=\"%d\"%s%s /></p>",
-					 align, datei, caption, border, sWidth, sHeight);
+		sprintf(n, "%s<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"%d\"%s%s /></p>",
+					 align, datei, caption, caption, border, sWidth, sHeight);
 		outln(n);
 	}
 	
