@@ -58,8 +58,8 @@ ein:
 
 !item (!B)Sprechen Sie den Leser direkt an.(!b)
 
-Verwenden Sie ""Sie können..."" bzw. ""Du kannst"" anstatt ""Man
-kann!.."".
+Verwenden Sie ""Sie können !.."" bzw. ""Du kannst"" anstatt ""Man
+kann !.."".
 
 !item (!B)Benutzen Sie Schriftarten sparsam und einheitlich.(!b)
 
@@ -156,7 +156,7 @@ source file. Any additional macro or definitions slows down the conversion.
 !endif
 
 !end_node
-# Ende: 7 goldene Regel / 7 rules...
+# Ende: 7 goldene Regel / 7 rules
 
 ################################################################################
 ################################################################################
@@ -255,7 +255,7 @@ be hard work if all the text would be part of a single text file.
 !endif
 
 !end_node
-# Ende: Zerteilen Sie / Split...
+# Ende: Zerteilen Sie / Split
 
 ################################################################################
 !iflang [german]
@@ -381,7 +381,7 @@ files if you want to.
 !endif
 
 !end_node
-# Ende: Standardisierung...
+# Ende: Standardisierung
 
 ################################################################################
 !iflang [german]
@@ -1038,13 +1038,13 @@ Umgang mit UDO über den Weg laufen werden.
 !item [.texi:]   Texinfo-Quelltext
 !end_xlist
 
-Dateien mit der Endung (!V).ul?(!v) beinhalten die Fehlermeldungen und
+Dateien mit der Endung (!V).ul?(!v) enthalten die Fehlermeldungen und
 Informationen, die UDO während der Umwandlung erzeugt.
 
-Dateien mit der Endung (!V).uh?(!v) beinhalten die Trennvorschläge für das
+Dateien mit der Endung (!V).uh?(!v) enthalten die Trennvorschläge für das
 ASCII-, ST-Guide- und Pure-C-Help-Format.
 
-Dateien mit der Endung (!V).ut?(!v) beinhalten den ""Include-Tree"", also den
+Dateien mit der Endung (!V).ut?(!v) enthalten den ""Include-Tree"", also den
 logischen Aufbau aus Include-Dateien Ihres Quelltextes.
 
 Die folgenden Dateiendungen werden auftauchen, wenn Sie die von UDO
@@ -1541,7 +1541,7 @@ information. Maybe the file doesn't exist or it's write protected.
 !iflang [german]
 Der Inhalt einer Definition darf maximal die angegebene Anzahl an
 Zeichen enthalten. Die in Ihrem Quelltext benutzte Definition
-beinhaltet mehr Text und muss daher gekürzt werden.
+enthält mehr Text und muss daher gekürzt werden.
 !endif
 !iflang [english]
 The contents of a definition exceeds the maximum number of
@@ -1584,7 +1584,7 @@ chapter or label exisiting with the given name
 !iflang [german]
 Der Inhalt eines Makros darf maximal die angegebene Anzahl an
 Zeichen enthalten. Das in Ihrem Quelltext benutzte Makro
-beinhaltet mehr Text und muss daher gekürzt werden.
+enthält mehr Text und muss daher gekürzt werden.
 !endif
 !iflang [english]
 The contents of a macro exceeds the maximum number of characters.

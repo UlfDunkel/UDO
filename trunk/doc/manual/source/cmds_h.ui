@@ -1549,7 +1549,7 @@ Specify position of frame (HTML only).
 !iflang [german]
 !item [(!DESCRIPTION)]
 Mit diesem Befehl kann man die Position des Rahmens bestimmen,
-der die Links auf die Nodes beinhaltet. Standardeinstellung ist links.
+der die Links auf die Nodes enthält. Standardeinstellung ist links.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1808,10 +1808,10 @@ Ist <text> leer, wird für den Zeitzonenunterschied ""+00:00"" gesetzt.
 Ist dieser Schalter gesetzt, so werden je nach Vorgabe
 (!T)<link>(!t)-Elemente im HTML-Header erzeugt:
 !begin_itemize
-!item Beinhaltet (!T)<text>(!t) ""navigation"", werden die Links zur Navigation erzeugt
+!item Enthält (!T)<text>(!t) ""navigation"", werden die Links zur Navigation erzeugt
    (<link rel="start" href="index.html" title="Beginn des Dokumentes">, ebenso
    <link rel="home"!.., "contents", "toc", "first", "prev", "previous", "next", "last").
-!item Beinhaltet (!T)<text>(!t) ""chapter"", werden alle Links zu den Kapiteln erzeugt
+!item Enthält (!T)<text>(!t) ""chapter"", werden alle Links zu den Kapiteln erzeugt
    (<link rel="chapter" href="!.." title="!..">, ebenso für "section").
 !end_itemize
 
