@@ -2061,7 +2061,7 @@ library you shouldn't use this format.
 !iflang [german]
 !item [TVHC meldet den Fehler ""Unterminated topic reference""!?]
 
-Der mir vorliegende TVHC Version 1.0 beinhaltet einen bösen Fehler, der
+Der mir vorliegende TVHC Version 1.0 enthält einen bösen Fehler, der
 dazu führt, dass die Quotefunktion --- das Aufheben der Funktion der
 geschweiften Klammer durch doppelte Angabe --- nicht funktioniert.
 Falls der TVHC Ihnen die obige Fehlermeldung präsentiert, so ändern Sie
@@ -2321,7 +2321,7 @@ Dafür kann es zwei Gründe geben:
 
 !begin_enumerate
 
-!item Der UDO-Quelltext beinhaltet Fehler. Schauen Sie sich also
+!item Der UDO-Quelltext enthält Fehler. Schauen Sie sich also
 zunächst die Fehlermeldungen von UDO in der Datei mit der Endung
 (!V).ulw(!v) an, beseitigen Sie etwaige Fehler und konvertieren Sie
 dann den UDO-Quelltext neu. Falls UDO keine Fehlermeldungen ausgibt, so

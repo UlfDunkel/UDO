@@ -1655,7 +1655,7 @@ mit dem Schalter (!KW [short]) benutzt wird!..
 
 !begin_enumerate
 !item Wenn der zu beschreibende Text eine schließende eckige Klammer
-     beinhaltet, so muss man dieser Klammer ein Ausrufezeichen
+     enthält, so muss man dieser Klammer ein Ausrufezeichen
      voranstellen, damit UDO erkennt, dass die folgende eckige Klammer
      auch fett dargestellt werden soll.
 
@@ -1823,7 +1823,7 @@ Bezüglich dieser Listen-Umgebungen gibt es einige Dinge zu beachten:
 
 !begin_enumerate
 !item Wenn der zu beschreibende Text eine schließende eckige Klammer
-beinhaltet, so muss man dieser Klammer ein Ausrufezeichen
+enthält, so muss man dieser Klammer ein Ausrufezeichen
 voranstellen, damit UDO erkennt, dass die folgende eckige Klammer
 noch zum ""linken Teil"" des Punktes zählt.
 
@@ -3722,7 +3722,7 @@ wirklich um einen Zeichensatz, sondern vielmehr um eine Möglichkeit,
 !index (!kw [universal_charset])
 Da die nötigen Abfragen und Umwandlungen sehr rechenintensiv sind, muss
 man UDO mitteilen, dass die folgenden Zeilen ""universelle Zeichen""
-beinhalten. Dies geschieht durch den Einsatz des Schalters
+enthalten. Dies geschieht durch den Einsatz des Schalters
 (!KW [universal_charset]).
 
 Nach der Angabe von (!KW [universal_charset] [[on!!]]) betrachtet UDO
@@ -4189,7 +4189,7 @@ spezielles Lindner-(!TeX)-Makro zur Einbindung des Bildes erzeugt werden
 soll.
 
 UDO macht das dem Lindner-(!TeX) beiliegende Zusatzprogramm namens
-(!T)IMGTOTEX(!t) überflüssig! UDO beinhaltet alle Aufgaben, für die sonst
+(!T)IMGTOTEX(!t) überflüssig! UDO enthält alle Aufgaben, für die sonst
 (!T)IMGTOTEX(!t) zuständig ist, nämlich das Eintragen bestimmter
 Auflösungswerte in den Header des jeweiligen GEM-Images. Ein Beispiel:
 
