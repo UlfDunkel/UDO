@@ -6228,11 +6228,8 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 				strcpy(nameNoSty, name);
 				del_html_styles(nameNoSty);
             
-            if (!no_index && use_label_inside_index)  /* v6.5.19 [fd] */
-				{
-               label2html(nameNoSty);	/*r6pl2*/
-               voutlnf("%s<a name=\"%s\">%s%s</a>%s",	hx_start, nameNoSty, numbers, name, hx_end);
-            }
+            label2html(nameNoSty);	/*r6pl2*/
+            voutlnf("%s<a name=\"%s\">%s%s</a>%s",	hx_start, nameNoSty, numbers, name, hx_end);
 			}
 			if (show_variable.source_filename) /* V6.5.19 */
 				voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line );
