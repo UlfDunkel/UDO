@@ -6,3 +6,7 @@
 *.ttp
 *.BAK
 *.bak
+*.o
+*.O
+*.lst
+*.LST
