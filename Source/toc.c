@@ -8413,15 +8413,29 @@ const int    currdepth)                   /* current node depth */
             
             if (html_navigation_image)
             {
+                                          /* if userdef image exists */ 
+               if (html_navigation_image_fspec[0] != 0)
+               {
                                           /* don't close the nav line already! */
-               voutf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\" />&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
-                     GIF_FO_NAME,         /* folder image file name */
-                     uiGifFoWidth,        /* folder image width */
-                     uiGifFoHeight,       /* folder image height */
-                     sFile,               /* file name */
-                     outfile.suff,        /* file suffix */
-                     sTarget,             /* a href target */
-                     s);                  /* node name */
+                  voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\" />&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
+                        html_navigation_image_fspec,  /* folder image file name */
+                        sFile,                        /* file name */
+                        outfile.suff,                 /* file suffix */
+                        sTarget,                      /* a href target */
+                        s);                           /* node name */
+               }
+               else
+               {
+                                          /* don't close the nav line already! */
+                  voutf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\" />&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
+                        GIF_FO_NAME,         /* folder image file name */
+                        uiGifFoWidth,        /* folder image width */
+                        uiGifFoHeight,       /* folder image height */
+                        sFile,               /* file name */
+                        outfile.suff,        /* file suffix */
+                        sTarget,             /* a href target */
+                        s);                  /* node name */
+               }
             }
             else
             {
