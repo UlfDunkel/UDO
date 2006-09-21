@@ -389,7 +389,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!html_merge_subsubsubnodes",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_ignore_8bit",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
     { "!html_navigation_line",       "",       cmd_outside_preamble,   TRUE,  CMD_ONLY_PREAMBLE }, /* New in v6.5.19 [fd] */
-    { "!html_navigation_1st_folder", "",       cmd_outside_preamble,   TRUE,  CMD_ONLY_PREAMBLE }, /* New in v6.5.19 [fd] */
+    { "!html_navigation_image", "",       cmd_outside_preamble,   TRUE,  CMD_ONLY_PREAMBLE }, /* New in v6.5.19 [fd] */
 	{ "!html_modern_layout",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_modern_width",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_modern_alignment",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
@@ -7741,9 +7741,9 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
                         }
                         
                         /* new v6.5.19[fd] */
-                        if (strcmp(token[0], "!html_navigation_1st_folder") == 0)
+                        if (strcmp(token[0], "!html_navigation_image") == 0)
                         {
-                           html_navigation_1st_folder = TRUE;
+                           html_navigation_image = TRUE;
                            return TRUE;
                         }
 			if (strcmp(token[0], "!html_modern_layout")==0)
@@ -11253,7 +11253,7 @@ GLOBAL void init_vars ( void )
 	html_no_xlist=				FALSE;
 	html_ignore_8bit=			FALSE;	/*r6pl2*/
    html_navigation_line = FALSE;  /* 6.5.19[fd] */
-   html_navigation_1st_folder = FALSE;  /* 6.5.19[fd] */
+   html_navigation_image = FALSE;  /* 6.5.19[fd] */
 	html_modern_layout=			FALSE;	/*r6pl2*/
 	html_modern_alignment=		ALIGN_CENT;	/*r6pl13*/
 	html_frames_layout=			FALSE;	/*r6pl2*/

@@ -2706,8 +2706,8 @@ all filenames that are generated during output will get the specified prefix.
 !end_node
 
 ################################################################################
-!begin_node (!kw [html_navigation_1st_folder])
-!html_name cmd_html_navigation_1st_folder.html
+!begin_node (!kw [html_navigation_image])
+!html_name cmd_html_navigation_image.html
 
 !iflang [german]
 Vor der Navigationsleiste ein Ordnersymbol zeigen (nur HTML, nur in Verbindung mit (!KW [html_navigation_line])).
@@ -2720,7 +2720,7 @@ Output a folder symbol in front of the navigation bar (HTML only, requires (!KW 
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_navigation_1st_folder(!t)
+!item [(!SYNTAX)] (!T)!/html_navigation_image(!t)
 
 !iflang [german]
 !item [(!DESCRIPTION)]
@@ -2729,7 +2729,7 @@ so wird am Anfang der Navigationszeile ein einzelnes Ordnersymbol ausgegeben. Da
 wird die Funktion der Navigationszeile auf den ersten Blick besser verständlich.
 
 !item [(!EXAMPLE)]
-(!T)!/html_navigation_1st_folder(!t) (!nl)
+(!T)!/html_navigation_image(!t) (!nl)
 (!img [udo_fo] [Ordner])~~Kapitel 1 > Kapitel 1.1 > Kapitel 1.1.1 > Kapitel 1.1.1.1
 !endif
 !iflang [english]
@@ -2739,7 +2739,7 @@ a single folder symbol will be output in front of the navigation line.
 This visualizes the purpose of the navigation line at first sight.
 
 !item [(!EXAMPLE)]
-(!T)!/html_navigation_1st_folder(!t) (!nl)
+(!T)!/html_navigation_image(!t) (!nl)
 (!img [udo_fo] [folder])~~Chapter 1 > Chapter 1.1 > Chapter 1.1.1 > Chapter 1.1.1.1
 !endif
 
@@ -2816,7 +2816,7 @@ Chapter 1 :: Chapter 1.1 :: Chapter 1.1.1 :: Chapter 1.1.1.1
 !item [(!EXISTSSINCE)] Version 6.5.19
 
 !item [(!SEEALSO)]
-(!KW [html_navigation_1st_folder])
+(!KW [html_navigation_image])
 !end_xlist
 
 !end_node
