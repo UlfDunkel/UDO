@@ -2711,22 +2711,26 @@ all filenames that are generated during output will get the specified prefix.
 
 !iflang [german]
 Vor der Navigationsleiste ein Ordnersymbol zeigen (nur HTML, nur in Verbindung mit (!KW [html_navigation_line])).
+Bei Angabe eines zusätzlichen Parameters kann ein eigenes Bild als Symbol verwendet werden.
 !endif
 !iflang [english]
-Output a folder symbol in front of the navigation bar (HTML only, requires (!KW [html_navigation_line])).
+Output a folder symbol in front of the navigation bar (HTML only, requires (!KW [html_navigation_line])). 
+Using an additional parameter you can define your own symbol image.
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_navigation_image(!t)
+!item [(!SYNTAX)] (!T)!/html_navigation_image <(!FILE)>(!t)
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann gesetzt und ist (!KW [html_navigation_line]) ebenfalls gesetzt, 
-so wird am Anfang der Navigationszeile ein einzelnes Ordnersymbol ausgegeben. Dadurch 
+Wenn der Schalter (!KW [html_navigation_line]) im Vorspann gesetzt ist, so wird durch dieses Kommando 
+am Anfang der Navigationszeile ein einzelnes Ordnersymbol ausgegeben. Dadurch 
 wird die Funktion der Navigationszeile auf den ersten Blick besser verständlich.
+
+Mit dem optionalen Parameter kann ein eigenes Bild angegeben werden.
 
 !item [(!EXAMPLE)]
 (!T)!/html_navigation_image(!t) (!nl)
@@ -2737,6 +2741,8 @@ wird die Funktion der Navigationszeile auf den ersten Blick besser verständlich.
 If this switch is used in the preamble and (!KW [html_navigation_line]) is also used, 
 a single folder symbol will be output in front of the navigation line. 
 This visualizes the purpose of the navigation line at first sight.
+
+The optional parameter can be used to define a userdef image.
 
 !item [(!EXAMPLE)]
 (!T)!/html_navigation_image(!t) (!nl)
