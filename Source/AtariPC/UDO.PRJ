@@ -12,7 +12,7 @@ UDO.TTP
 =
 
 ; Startup-Code von Stefan Kuhr @ OS
-StUpArgv.S
+StUpArgv.O
 
 ; Die UDO-Quellen
 ..\abo.c
