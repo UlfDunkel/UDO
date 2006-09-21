@@ -7744,6 +7744,11 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
                         if (strcmp(token[0], "!html_navigation_image") == 0)
                         {
                            html_navigation_image = TRUE;
+                           
+                           if (strlen(token[1]) > 0)
+                              um_strcpy(html_navigation_image_fspec, token[1], 128, "pass1_check_preamble_commands[html_navigation_image]");
+                           else
+                              um_strcpy(html_navigation_image_fspec, "", 128, "pass1_check_preamble_commands[html_navigation_image]");
                            return TRUE;
                         }
 			if (strcmp(token[0], "!html_modern_layout")==0)
