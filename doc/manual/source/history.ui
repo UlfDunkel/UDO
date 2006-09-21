@@ -60,7 +60,7 @@ developer versions.
   einzeilig (mit und ohne Ordner-Symbol am Anfang) ausgegeben werden. (!nl)
   Die neuen Kommandos heißen (!nl) 
   (!KW [html_navigation_line]) (!nl)
-  (!KW [html_navigation_1st_folder]) (!nl)
+  (!KW [html_navigation_image]) (!nl)
   Diese Features sind seit Version~6.5.19 verfügbar.
 !endif
 !iflang [english]
@@ -69,7 +69,7 @@ developer versions.
   with or without a folder image in front. (!nl)
   The new commands are named (!nl) 
   (!KW [html_navigation_line]) (!nl)
-  (!KW [html_navigation_1st_folder]) (!nl)
+  (!KW [html_navigation_image]) (!nl)
   These new commands are available since version~6.5.19.
 !endif
 # ..............................................................................

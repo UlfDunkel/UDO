@@ -8411,7 +8411,7 @@ const int    currdepth)                   /* current node depth */
                                           /* open CSS class div */
             outln("\n<div class=\"UDO_nav_line\">");
             
-            if (html_navigation_1st_folder)
+            if (html_navigation_image)
             {
                                           /* don't close the nav line already! */
                voutf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\" />&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
