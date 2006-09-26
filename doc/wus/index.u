@@ -177,6 +177,8 @@ Derzeit nicht belegt.
 !subnode ASCII
 !html_name E-ASCII
 Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=ASCII">Norbert Hanz</a>])
+!smallskip
+!subsubtoc [hh,html,stg]
 !hline
 !include ASCII-Entwicklung.ui
 
@@ -236,6 +238,8 @@ Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=O
 !subnode (!LaTeX)
 !html_name E-LaTeX
 Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=LaTeX">Norbert Hanz</a>])
+!smallskip
+!subsubtoc [hh,html,stg]
 !hline
 !include LaTeX-Entwicklung.ui
 
@@ -284,6 +288,8 @@ Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=P
 !subnode PDF-LaTeX
 !html_name E-PDFTeX
 Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=PDF-LaTeX">Norbert Hanz</a>])
+!smallskip
+!subsubtoc [hh,html,stg]
 !hline
 !include PDFLATEX-Entwicklung.ui
 
@@ -292,6 +298,8 @@ Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=P
 !subnode Postscript
 !html_name E-PS
 Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Postscript">Norbert Hanz</a>])
+!smallskip
+!subsubtoc [hh,html,stg]
 !hline
 !include Postscript-Entwicklung.ui
 
@@ -300,6 +308,8 @@ Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=P
 !subnode PureC Help
 !html_name E-PureC
 Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=PureC-Help">Norbert Hanz</a>])
+!smallskip
+!subsubtoc [hh,html,stg]
 !hline
 !include PureC-Entwicklung.ui
 
@@ -339,6 +349,8 @@ Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=U
 !subnode WinHelp
 !html_name E-WHelp
 Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=WinHelp3">Norbert Hanz</a>])
+!smallskip
+!subsubtoc [hh,html,stg]
 !hline
 !include WinHelp-Entwicklung.ui
 
@@ -347,6 +359,8 @@ Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=W
 !subnode WinHelp 4
 !html_name E-WHelp4
 Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=WinHelp4">Norbert Hanz</a>])
+!smallskip
+!subsubtoc [hh,html,stg]
 !hline
 !include WinHelp4-Entwicklung.ui
 
@@ -355,6 +369,8 @@ Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=W
 !subnode Extensible Markup Language
 !html_name E-XML
 Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=XML">Norbert Hanz</a>])
+!smallskip
+!subsubtoc [hh,html,stg]
 !hline
 !include XML-Entwicklung.ui
 
@@ -363,6 +379,8 @@ Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=X
 !subnode Neue Listenstruktur
 !html_name E-List
 Wünsche bitte an (!raw [html] [<a href="mailto:norbert@familie-hanz.de?subject=Listen">Norbert Hanz</a>])
+!smallskip
+!subsubtoc [hh,html,stg]
 !hline
 !include Listen-Entwicklung.ui
 
