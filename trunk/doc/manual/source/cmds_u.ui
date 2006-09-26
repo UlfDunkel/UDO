@@ -1333,7 +1333,12 @@ means that chapters will be printed as ""Chapter~#"".
 !begin_node (!kw [use_udo_index])
 !html_name cmd_use_udo_index.html
 
-(!MISS)
+!iflang [german]
+Indexseite automatisch erzeugen.
+!endif
+!iflang [english]
+Create index page automatically.
+!endif
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -1341,9 +1346,30 @@ means that chapters will be printed as ""Chapter~#"".
 
 !item [(!SYNTAX)] (!T)!/use_udo_index [(!FORMAT)](!t)
 
+!iflang [german]
 !item [(!DESCRIPTION)]
-(!MISS)
+Wenn dieses Kommando im Vorspann benutzt wird, erzeugt UDO automatisch einen Index
+aus den gefundenen Querverweisen. Falls entsprechende !ignore_...-Befehle genutzt wurden, 
+werden die entsprechenden Kapitel, Aliase, Indexreferenzen oder Label nicht in den Index 
+aufgenommen.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+When you use this command in the preamble, UDO automatically creates an index from the 
+relevant links. If !ignore_...-commands are used accordingly, the relevant nodes, aliases, 
+index references or labels are not listed in the index.
+!endif
 
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [ignore_index]), (!KW [ignore_links]), (!KW [index]), (!KW [no_index]), 
+(!KW [use_alias_inside_index]), (!KW [use_label_inside_index]), (!KW [use_nodes_inside_index])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [ignore_index]), (!KW [ignore_links]), (!KW [index]), (!KW [no_index]), 
+(!KW [use_alias_inside_index]), (!KW [use_label_inside_index]), (!KW [use_nodes_inside_index])
+!endif
 !end_xlist
 
 !end_node
