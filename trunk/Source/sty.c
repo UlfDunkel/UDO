@@ -838,7 +838,7 @@ GLOBAL void check_styles ( char *s )
 	{
 		ptr= found;
 		
-		switch (ptr[2])
+		switch ( (int) ptr[2])
 		{	case C_BOLD_ON:
 				if (styleflag.bold)			error_still_active(CMD_BOLD_ON);
 				styleflag.bold= TRUE;
