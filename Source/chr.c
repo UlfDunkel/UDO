@@ -130,8 +130,9 @@ const char *id_chr_c= "@(#) chr.c       08.04.2004";
 
 LOCAL BOOLEAN   last_aqc_verb;            /* */
 LOCAL int       texinfo_np_counter;       /* Non-Printable-Texinfo-Node-Counter ;-) */
-                                          /* list of supported HTML specials */
-LOCAL char      html_specs[HTML_SPEC_MAX][65] =
+                           
+										  /* list of supported HTML specials */
+LOCAL char      *html_specs[HTML_SPEC_MAX] =
 {
    {"&hellip;"},
    {"&mdash;"},
