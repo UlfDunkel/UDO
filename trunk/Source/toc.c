@@ -8876,8 +8876,10 @@ LOCAL void output_appendix_line ( void )
 
 GLOBAL void c_tableofcontents ( void )
 {
-	char	n[256], name[256], hlp_name[256];
-	int		i;
+	char	n[256], 
+         name[256], 
+         hlp_name[256];
+	int	i;
 	int 	depth;
 
 	if (called_tableofcontents)
@@ -9122,19 +9124,26 @@ GLOBAL void c_tableofcontents ( void )
 		case TOHTM:
 		case TOMHH:
 			output_helpid(0);
+         
 			if (toc_available)
-			{	voutlnf("\n<h1><a name=\"%s\">%s</a></h1>\n", HTML_LABEL_CONTENTS, lang.contents);
+			{
+         	voutlnf("\n<h1><a name=\"%s\">%s</a></h1>\n", HTML_LABEL_CONTENTS, lang.contents);
 				/* New in V6.5.9 [NHz] */
 				add_label(HTML_LABEL_CONTENTS, FALSE, FALSE);
 				toc_output(depth);
-				outln(HTML_BR);
 			}
 			if (apx_available)
-			{	output_appendix_line();
+			{
+         	output_appendix_line();
 				apx_output(depth);
-				outln(HTML_BR);
 			}
-			outln(HTML_BR);
+         
+         /* new since v6.5.19 */
+         if (use_udo_index)
+         {
+            voutlnf("\n<h1><a href=\"indexudo%s\">%s</a></h1>\n", outfile.suff, lang.index);
+         }
+         
 			break;	/* r5pl4 */
 
 		case TOKPS:
