@@ -55,6 +55,19 @@ developer versions.
 !begin_itemize !short
 # ..............................................................................
 !iflang [german]
+!item Index-Link im Inhaltsverzeichnis (!nl)
+  Wenn der Schalter (!KW [use_udo_index]) benutzt wird, wird ein Link ""Index"" im Abschnitt (!KW [tableofcontents])
+  ausgegeben. (!nl)
+  Dies ist seit Version~6.5.19 verfügbar.
+!endif
+!iflang [english]
+!item Index link in TableOfContent (!nl)
+  When you use the (!KW [use_udo_index]) switch, an ""Index"" link will be output in the (!KW [tableofcontents]) 
+  section. (!nl)
+  This is available since version~6.5.19.
+!endif
+# ..............................................................................
+!iflang [german]
 !item Neue Formatierung der Navigationsleiste (!nl)
   In den unterstützten HTML-Ausgabeformaten kann jetzt optional die Navigationsleiste 
   einzeilig (mit und ohne Ordner-Symbol am Anfang) ausgegeben werden. (!nl)
@@ -795,11 +808,11 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 # ..............................................................................
 # zu ST_Guide
 !iflang [german]
-!item Horizontale Linen können länger als 126 Zeichen sein. (!nl)
+!item Horizontale Linien können länger als 126 Zeichen sein. (!nl)
       Version 6.5.16
 !endif
 !iflang [english]
-!item Horizontale Linen können länger als 126 Zeichen sein. (!nl)
+!item Horizontal lines can exceed a length of 126 characters. (!nl)
       Version 6.5.16
 !endif
 # ..............................................................................
