@@ -389,6 +389,16 @@ ob sie auch mit Leerzeichen im übergebenen String zurechtkommt.
 Für Filesysteme wie die des Mac oder der BeBox stehen hier ein paar
 weitere Funktionen.
 
+!label __fast_file
+Mit dem Makro __fast_file kann man festlegen, wie das Einlesen der
+Dateien erfolgen soll. Seit der Version 6.5.9 erfolgt das Einlesen
+als Binärdatei und UDO ermittelt sich selbst die Zeilenende. Unter
+TOS ist dies sehr langsam. Setzt man __fast_file so werden die alten
+Funktionen benutzt. Achtung es kann aber passieren, daß Text nicht mehr
+korrekt gelesen werden, weil fgets mit Zeilenenden nicht so gut klar 
+kommt, wenn diese gem. den Konventionen einer anderen Plattform
+codiert sind.
+
 #-----------------------------------------------------------
 !subnode    img.c
 !html_name img
@@ -752,15 +762,15 @@ Quelltextverzeichnis kopiert hat:
         Objectfiles löschen ((!T)make clean(!t)):
         
         !begin_xlist [ISO Latin 1:]
-        !item [ISO Latin 1:] (!T)make -f makefile.hpi(!t) (!nl)
+        !item [ISO Latin 1:] (!T)make -f makefile.hp-iso(!t) (!nl)
                              es wird (!T)udo-iso(!t) erzeugt.
-        !item [Roman 8:]    (!T)make -f makefile.hp8(!t) (!nl)
+        !item [Roman 8:]    (!T)make -f makefile.hp-ro8(!t) (!nl)
                              es wird (!T)udo-hp8(!t) erzeugt.
         !end_xlist
         
-!item   [Linux:] (!T)make -f makefile.lin(!t)
-!item   [NeXT:]  (!T)make -f makefile.nex(!t)
-!item   [Sinix:] (!T)make -f makefile.snx(!t)
+!item   [Linux:] (!T)make -f makefile.linux(!t)
+!item   [NeXT:]  (!T)make -f makefile.nextstep(!t)
+!item   [Sinix:] (!T)make -f makefile.sinix(!t)
 !item   [SunOS:] (!T)make -f makefile.sun(!t)
 
 !end_xlist
