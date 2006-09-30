@@ -100,8 +100,12 @@ GLOBAL MYTEXTFILE *myTextOpen ( const char *filename )
 	/*             Plattform codiert sind. Daher Ausweichen auf     */
 	/*             fread und selbst '\n' und '\r' erkennen. Dazu    */
 	/*             muž hier die Datei bin„r ge”ffnet werden!         */
-	/*tf->file= fopen(filename, "r");*/
+  #ifndef __fast_file
 	tf->file= fopen(filename, "rb");
+  #else
+  	tf->file= fopen(filename, "r");
+  #endif
+
 
 	if (tf->file == NULL)
 	{
@@ -194,7 +198,7 @@ GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf )
 		/*             wenn diese gem. den Konventionen einer anderen   */
 		/*             Plattform codiert sind. Daher Ausweichen auf     */
 		/*             fread und selbst '\n' und '\r' erkennen.         */
-		/* if (fgets(string, n, tf->file) == NULL)*/
+  #ifndef __fast_file
 		sl = fread(string, sizeof(*string), n - 1, tf->file);
 		if( sl<1 )
 		{
@@ -229,6 +233,13 @@ GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf )
 			/* Nun genau so viele Zeichen zurckgeben, wie nun in s_ptr zu viel gelesen wurden */
 			fseek(tf->file, -strlen(s_ptr), SEEK_CUR);
 		}
+  #else
+        if (fgets(string, n, tf->file) == NULL)
+        {
+        	return NULL;
+        }
+        sl=strlen(string);
+  #endif
 
 		uiMultiLines++;
 		while (sl>0 && (string[sl-1]=='\n' || string[sl-1]=='\r'))
