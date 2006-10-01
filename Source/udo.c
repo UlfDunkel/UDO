@@ -55,6 +55,7 @@ const char *id_udo_c= "@(#) udo.c       $Date$";
 #include "sty.h"		/* Textstilumwandlungen				*/
 #include "tab.h"		/* Tabellensatz						*/
 #include "toc.h"		/* !node, !alias, !label, !toc		*/
+#include "toc_html.h"	/* HTML Teile fr !node, !alias, !label, !toc*/ /* V6.5.20 */
 #include "tp.h"			/* Titelseite (!maketitle)			*/
 
 #include "gui.h"		/* Funktionen GUI-/CLI-Version		*/
@@ -388,8 +389,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!html_merge_subsubnodes",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_merge_subsubsubnodes",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_ignore_8bit",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
-    { "!html_navigation_line",       "",       cmd_outside_preamble,   TRUE,  CMD_ONLY_PREAMBLE }, /* New in v6.5.19 [fd] */
-    { "!html_navigation_image", "",       cmd_outside_preamble,   TRUE,  CMD_ONLY_PREAMBLE }, /* New in v6.5.19 [fd] */
+    { "!html_navigation",           "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   }, /* New in v6.5.20 [gs] */
 	{ "!html_modern_layout",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_modern_width",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_modern_alignment",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
@@ -7712,45 +7712,25 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			{	html_no_xlist= TRUE;
 				return TRUE;
 			}
-                        if (strcmp(token[0], "!html_ignore_8bit") == 0)
-                        {
-                           html_ignore_8bit= TRUE;
-                           if (strlen(token[1])>0)
-                           {
-                              um_strcpy(html_ignore_8bit_charset, token[1], 20, "pass1_check_preamble_commands[html_ignore_8bit]");
-                              html_ignore_8bit_use_charset = TRUE;
-                           }
-                           else
-                           {
-                              html_ignore_8bit_use_charset = FALSE;                                   
-                           }
-                           return TRUE;
-                        }
-                        
-                        /* new v6.5.19[fd] */
-                        if (strcmp(token[0], "!html_navigation_line") == 0)
-                        {
-                           html_navigation_line = TRUE;
-                           
-                           if (strlen(token[1]) > 0)
-                              um_strcpy(html_navigation_separator, token[1], 20, "pass1_check_preamble_commands[html_navigation_line]");
-                           else
-                              um_strcpy(html_navigation_separator, "", 20, "pass1_check_preamble_commands[html_navigation_line]");
-                           
-                           return TRUE;
-                        }
-                        
-                        /* new v6.5.19[fd] */
-                        if (strcmp(token[0], "!html_navigation_image") == 0)
-                        {
-                           html_navigation_image = TRUE;
-                           
-                           if (strlen(token[1]) > 0)
-                              um_strcpy(html_navigation_image_fspec, token[1], 128, "pass1_check_preamble_commands[html_navigation_image]");
-                           else
-                              um_strcpy(html_navigation_image_fspec, "", 128, "pass1_check_preamble_commands[html_navigation_image]");
-                           return TRUE;
-                        }
+         if (strcmp(token[0], "!html_ignore_8bit") == 0)
+         {
+            html_ignore_8bit= TRUE;
+            if (strlen(token[1])>0)
+            {
+               um_strcpy(html_ignore_8bit_charset, token[1], 20, "pass1_check_preamble_commands[html_ignore_8bit]");
+               html_ignore_8bit_use_charset = TRUE;
+            }
+            else
+            {
+               html_ignore_8bit_use_charset = FALSE;                                   
+            }
+            return TRUE;
+         }
+         if (strcmp(token[0], "!html_navigation") == 0)  /* New V 6.5.20 [gs] */
+         {
+            if ( set_html_navigation() )
+               return TRUE;
+         }
 			if (strcmp(token[0], "!html_modern_layout")==0)
 			{	html_modern_layout= TRUE;
 				return TRUE;
