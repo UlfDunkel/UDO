@@ -346,18 +346,18 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
   In den unterstützten HTML-Ausgabeformaten kann jetzt optional die Navigationsleiste 
   einzeilig (mit und ohne Ordner-Symbol am Anfang) ausgegeben werden. (!nl)
   Die neuen Kommandos heißen (!nl) 
-  (!KW [html_navigation_line]) (!nl)
-  (!KW [html_navigation_image]) (!nl)
-  Diese Features sind seit Version~6.5.19 verfügbar.
+  (!KW [html_navigation]) [line] (!nl)
+  (!KW [html_navigation]) [image] (!nl)
+  Diese Features sind seit Version~6.5.20 verfügbar.
 !endif
 !iflang [english]
 !item New formatting of navigation bar (!nl)
   Using the supported HTML formats, the navigation bar can be output in a single line 
   with or without a folder image in front. (!nl)
   The new commands are named (!nl) 
-  (!KW [html_navigation_line]) (!nl)
-  (!KW [html_navigation_image]) (!nl)
-  These new commands are available since version~6.5.19.
+  (!KW [html_navigation]) [line] (!nl)
+  (!KW [html_navigation]) [image] (!nl)
+  These new commands are available since version~6.5.20.
 !endif
 # ..............................................................................
 !iflang [german]

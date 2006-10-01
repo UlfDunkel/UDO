@@ -4,7 +4,7 @@
 # ###################################################################
 
 OSRC =	abo$(O) cfg$(O) chr$(O) env$(O) file$(O) img$(O) lang$(O) msg$(O) par$(O) str$(O) sty$(O) \
-		tab$(O) toc$(O) tp$(O) udo$(O)
+		tab$(O) toc$(O) toc_html$(O) tp$(O) udo$(O)
 
 HEAD = portab.h version.h constant.h udo_type.h
 
@@ -44,6 +44,9 @@ tab$(O):	$(HEAD) tab.h commands.h chr.h env.h msg.h par.h str.h \
 		sty.h toc.h udo.h gui.h
 
 toc$(O):	$(HEAD) toc.h commands.h abo.h chr.h env.h file.h img.h \
+		msg.h par.h str.h sty.h tp.h udo.h gui.h
+
+toc_html$(O):	$(HEAD) toc.h commands.h abo.h chr.h env.h file.h img.h \
 		msg.h par.h str.h sty.h tp.h udo.h gui.h
 
 tp$(O):	$(HEAD) tp.h commands.h chr.h env.h file.h img.h msg.h \

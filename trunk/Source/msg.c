@@ -520,6 +520,11 @@ GLOBAL void error_unknown_docinfo ( const char *s )
 {	error_msg_para("unknown docinfo: %s", s);
 }
 
+/* New V 6.5.20 */
+GLOBAL void error_unknown_html_navigation ( const char *s )
+{	error_msg_para("unknown html_navigation: %s", s);
+}
+
 GLOBAL void error_unknown_color ( const char *s )
 {	error_msg_para("unknown color: %s", s);
 }

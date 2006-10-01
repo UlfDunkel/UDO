@@ -72,6 +72,7 @@ GLOBAL void error_buffer_overflow ( void );
 GLOBAL void error_empty_docinfo ( void );
 GLOBAL void error_missing_title_data ( void );
 GLOBAL void error_unknown_docinfo ( const char *s );
+GLOBAL void error_unknown_html_navigation ( const char *s );  /* New V 6.5.20 */
 GLOBAL void error_unknown_color ( const char *s );
 GLOBAL void error_wrong_header_date ( const char *s ); /* New in V6.5.5 [NHz] */
 GLOBAL void error_empty_header_links ( void );	/* New feature #0000053 in V6.5.2 [NHz] */

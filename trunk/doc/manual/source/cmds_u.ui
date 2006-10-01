@@ -663,11 +663,11 @@ for the links.
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KW [use_auto_subtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+(!KW [html_navigation]), (!KW [use_auto_subtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
-(!KW [use_auto_subtocs]), (!link [Tables of contents] [Tables of contents])
+(!KW [html_navigation]), (!KW [use_auto_subtocs]), (!link [Tables of contents] [Tables of contents])
 !endif
 
 !end_xlist

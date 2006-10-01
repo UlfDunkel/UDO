@@ -28,6 +28,7 @@ StUpArgv.O
 ..\sty.c
 ..\tab.c
 ..\toc.c
+..\toc_html.c
 ..\tp.c
 ..\udo.c
 ..\cli.c
