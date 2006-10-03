@@ -476,6 +476,13 @@ Dieses Modul wurde zwischen Release 5 Patchlevel 5 und Patchlevel 6
 fast komplett neu programmiert.
 
 #-----------------------------------------------------------
+!subnode    toc_html.c
+!html_name toc_html
+
+Hier befinden sich Teile, welche inhaltlich zum Modul toc.c gehören, die
+für die HTML Ausgabe zuständig sind.
+
+#-----------------------------------------------------------
 !subnode    tp.c
 !html_name tp
 
