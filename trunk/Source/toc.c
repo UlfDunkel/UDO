@@ -3888,9 +3888,15 @@ LOCAL int comp_index_html (const void *_p1, const void *_p2)
 	const HTML_INDEX *p2 = (const HTML_INDEX *)_p2;
 
 	strcpy ( p1_tocname, p1->tocname );
+	html2sys ( p1_tocname );         /* V6.5.20 [gs] */
+	str_din_5007_1 ( p1_tocname );   /* V6.5.20 [gs] */
 	my_strupr ( p1_tocname );
 	strcpy ( p2_tocname, p2->tocname );
+	html2sys ( p2_tocname );         /* V6.5.20 [gs] */
+	str_din_5007_1 ( p2_tocname );   /* V6.5.20 [gs] */
 	my_strupr ( p2_tocname );
+
+/* vloglnf ( "%s -> %s; %s-> %s", p1->tocname, p1_tocname, p2->tocname, p2_tocname ); */
 
 	return strcmp(p1_tocname, p2_tocname);
 }
@@ -3961,6 +3967,8 @@ GLOBAL BOOLEAN save_html_index ( void )
 			replace_udo_nbsp(tocname);
 			del_html_styles(tocname);
 			num_index++;
+            if ( strcmp ( tocname, HTML_LABEL_CONTENTS ) == 0 ) /* V6.5.20 [gs] */
+				num_index--;					/* HTML_LABEL_CONTENTS ignorieren */
 		}
 	}
 	/* ..sort */
