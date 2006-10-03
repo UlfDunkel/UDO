@@ -972,6 +972,30 @@ GLOBAL void my_strlwr ( char *string )
 #endif
 }	/* my_strlwr */
 
+/* New V6.5.20 [gs] */
+/*  ----------------------------------------------
+    Wandelt ein String nach DIN 5007-1
+    (fuer Woerter verwendet, etwas Lexika)
+    - Ñ und a sind gleich
+    - î und o sind gleich
+    - Å und u sind gleich
+    - û und ss sind gleich
+    ----------------------------------------------  */
+
+GLOBAL void str_din_5007_1 ( char *string )
+{
+   if ( string[0] == EOS )
+      return;
+   
+   replace_char ( string, "Ñ", "a" );
+   replace_char ( string, "î", "o" );
+   replace_char ( string, "Å", "u" );
+   replace_all  ( string, "û", "ss" );
+
+   replace_char ( string, "é", "A" );
+   replace_char ( string, "ô", "O" );
+   replace_char ( string, "ö", "U" );
+}
 
 /*	----------------------------------------------
 	Strings caseinsensitiv vergleichen

@@ -74,6 +74,7 @@ GLOBAL void tabs2spaces (char *s, const int tw);
 GLOBAL char *itoroman ( int value, char *string );
 GLOBAL void my_strupr ( char *string );
 GLOBAL void my_strlwr ( char *string );
+GLOBAL void str_din_5007_1 ( char *string );   /* New V6.5.20 [gs] */
 GLOBAL int my_stricmp ( const char *s1, const char *s2 );
 GLOBAL int my_strnicmp ( const char *s1, const char *s2, size_t len );
 
