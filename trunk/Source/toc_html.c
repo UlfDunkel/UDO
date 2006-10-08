@@ -33,15 +33,22 @@ const char *id_toc_html_c= "@(#) toc_html.c    $Date$";
 
 #include "import.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "portab.h"
 #include "constant.h"
 #include "udo_type.h"
+#include "chr.h"
+#include "file.h"
 #include "msg.h"
+#include "par.h"
 #include "str.h"
+#include "sty.h"
 #include "udo.h"
 
 #include "export.h"
+#include "udomem.h"
 
 /* ############################################################
    # lokale Variablen

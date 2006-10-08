@@ -3817,240 +3817,243 @@ GLOBAL void html_footer ( void )
 }	/* html_footer */
 
 
-/*	############################################################
-	#
-	#  Index output for HTML
-	#
-	############################################################	*/
+/* --------------------------------------------------------------
+   *
+   *  Index output for HTML
+   *
+   --------------------------------------------------------------  */
 
 typedef struct _hmtl_index {
-	int toc_index;
-	BOOLEAN is_node;		/* The label is the caption	*/
-	char tocname[512];
+   int toc_index;
+   BOOLEAN is_node;     /* The label is the caption   */
+   char tocname[512];
 } HTML_INDEX;
 
-LOCAL MYFILE	udofile;
+LOCAL MYFILE   udofile;
 
-/*	############################################################
-	# Dateinamen zusammenbasteln
-	############################################################	*/
+/* --------------------------------------------------------------
+   * Dateinamen zusammenbasteln
+   --------------------------------------------------------------  */
 LOCAL void udofile_adjust_index ( void )
 {
 
 #if HAVE_TMPNAM
 
-	char t[512];
+   char t[512];
 
-	if ( tmpnam(t)!=NULL )
-	{	
-		strcpy(udofile.full, t);
-	}
-	else
-	{	strcpy(udofile.full, "_udoind.tmp");
-	}
+   if ( tmpnam(t)!=NULL )
+   {  
+      strcpy(udofile.full, t);
+   }
+   else
+   {  strcpy(udofile.full, "_udoind.tmp");
+   }
 
 #else
 
-	char	*tp;
+   char  *tp;
 
-	tp= NULL;
+   tp= NULL;
 
-	if ( (tp=getenv("TEMP"))==NULL )
-	{	if ( (tp=getenv("TMP"))==NULL )
-		{	tp=getenv("TMPDIR");
-		}
-	}
+   if ( (tp=getenv("TEMP"))==NULL )
+   {  if ( (tp=getenv("TMP"))==NULL )
+      {  tp=getenv("TMPDIR");
+      }
+   }
 
-	if ( tp!=NULL )
-	{	fsplit(tp, tmp_driv, tmp_path, tmp_name, tmp_suff);
-		strcpy(udofile.driv, tmp_driv);
-		strcpy(udofile.path, tmp_path);
-	}
-	else
-	{	strcpy(udofile.driv, outfile.driv);
-		strcpy(udofile.path, outfile.path);
-	}
+   if ( tp!=NULL )
+   {  fsplit(tp, tmp_driv, tmp_path, tmp_name, tmp_suff);
+      strcpy(udofile.driv, tmp_driv);
+      strcpy(udofile.path, tmp_path);
+   }
+   else
+   {  strcpy(udofile.driv, outfile.driv);
+      strcpy(udofile.path, outfile.path);
+   }
 
-	strcpy(udofile.name, "_udoind");
-	strcpy(udofile.suff, ".tmp");
+   strcpy(udofile.name, "_udoind");
+   strcpy(udofile.suff, ".tmp");
 
-	sprintf(udofile.full, "%s%s%s%s", udofile.driv, udofile.path, udofile.name, udofile.suff);
+   sprintf(udofile.full, "%s%s%s%s", udofile.driv, udofile.path, udofile.name, udofile.suff);
 #endif
 
-}	/* udofile_adjust_index */
+}  /* udofile_adjust_index */
+
+/* --------------------------------------------------------------
+   --------------------------------------------------------------  */
 
 LOCAL int comp_index_html (const void *_p1, const void *_p2)
 {
-	char p1_tocname[512];
-	char p2_tocname[512];
+   char p1_tocname[512];
+   char p2_tocname[512];
 
-	const HTML_INDEX *p1 = (const HTML_INDEX *)_p1;
-	const HTML_INDEX *p2 = (const HTML_INDEX *)_p2;
+   const HTML_INDEX *p1 = (const HTML_INDEX *)_p1;
+   const HTML_INDEX *p2 = (const HTML_INDEX *)_p2;
 
-	strcpy ( p1_tocname, p1->tocname );
-	html2sys ( p1_tocname );         /* V6.5.20 [gs] */
-	str_din_5007_1 ( p1_tocname );   /* V6.5.20 [gs] */
-	my_strupr ( p1_tocname );
-	strcpy ( p2_tocname, p2->tocname );
-	html2sys ( p2_tocname );         /* V6.5.20 [gs] */
-	str_din_5007_1 ( p2_tocname );   /* V6.5.20 [gs] */
-	my_strupr ( p2_tocname );
+   strcpy ( p1_tocname, p1->tocname );
+   html2sys ( p1_tocname );         /* V6.5.20 [gs] */
+   strcpy ( p2_tocname, p2->tocname );
+   html2sys ( p2_tocname );         /* V6.5.20 [gs] */
 
-/* vloglnf ( "%s -> %s; %s-> %s", p1->tocname, p1_tocname, p2->tocname, p2_tocname ); */
-
-	return strcmp(p1_tocname, p2_tocname);
+   return str_sort_cmp(p1_tocname, p2_tocname);  /* Instead of strcmp v6.5.20 [gs] */
 }
+
+/* --------------------------------------------------------------
+   --------------------------------------------------------------  */
 
 GLOBAL BOOLEAN save_html_index ( void )
 {
-	FILE *uif;
-	size_t i;
-	int j;
-	size_t num_index;
-	HTML_INDEX *html_index;
-	char thisc, lastc;
-	char htmlname[512];
-	char dummy[512];
-	char suff[100];
-	char cLabel[512];
-	char *tocname;
-	char *escapedtocname;
+   FILE *uif;
+   size_t i;
+   int j;
+   size_t num_index;
+   HTML_INDEX *html_index;
+   char thisc, lastc;
+   char htmlname[512];
+   char dummy[512];
+   char suff[100];
+   char cLabel[512];
+   char *tocname;
+   char *escapedtocname;
 
-	/* at first wie count how much we need */
-	num_index = 0;
-	for (j = 1; j <= p1_lab_counter; j++)
-		if (lab[j] != NULL && lab[j]->ignore_index == FALSE)
-			num_index++;
+   /* at first wie count how much we need */
+   num_index = 0;
+   for (j = 1; j <= p1_lab_counter; j++)
+      if (lab[j] != NULL && lab[j]->ignore_index == FALSE)
+         num_index++;
 
-	if (num_index == 0)
-		return FALSE;   /* Index-File will not needed */
+   if (num_index == 0)
+      return FALSE;   /* Index-File will not needed */
 
-	udofile_adjust_index();
+   udofile_adjust_index();
 
-	uif= myFwopen(udofile.full, TOASC);
+   uif= myFwopen(udofile.full, TOASC);
 
-	if (!uif)
-	{	return FALSE;
-	}
+   if (!uif)
+   {  return FALSE;
+   }
 
-	fprintf(uif, "!newpage\n");
-	fprintf(uif, "!code [sys]\n");
-	fprintf(uif, "!sloppy\n\n");
-	fprintf(uif, "!node* Index\n");
-	fprintf(uif, "!html_name indexudo\n" );
-	if (!bDocAutorefOff)
-	{	fprintf(uif, "!autoref [off]\n");
-	}
+   fprintf(uif, "!newpage\n");
+   fprintf(uif, "!code [sys]\n");
+   fprintf(uif, "!sloppy\n\n");
+   fprintf(uif, "!node* Index\n");
+   fprintf(uif, "!html_name indexudo\n" );
+   if (!bDocAutorefOff)
+   {  fprintf(uif, "!autoref [off]\n");
+   }
 
-	html_index = (HTML_INDEX *)um_malloc(num_index * sizeof(HTML_INDEX));
-	if (html_index == NULL)
-	{
-		fclose(uif);
-		error_malloc_failed();
-		return FALSE;
-	}
+   html_index = (HTML_INDEX *)um_malloc(num_index * sizeof(HTML_INDEX));
+   if (html_index == NULL)
+   {
+      fclose(uif);
+      error_malloc_failed();
+      return FALSE;
+   }
 
-	/* array aufbauen.. */
-	num_index = 0;
-	for (j = 1; j <= p1_lab_counter; j++)
-	{
-		if (lab[j] != NULL  && lab[j]->ignore_index == FALSE )
-		{
-			html_index[num_index].toc_index = lab[j]->tocindex;
-			html_index[num_index].is_node = lab[j]->is_node;
-			tocname = html_index[num_index].tocname;
-			strcpy(tocname, lab[j]->name);
-			replace_macros(tocname);
-			c_internal_styles(tocname);
-			delete_all_divis(tocname);
-			replace_udo_tilde(tocname);
-			replace_udo_nbsp(tocname);
-			del_html_styles(tocname);
-			num_index++;
-            if ( strcmp ( tocname, HTML_LABEL_CONTENTS ) == 0 ) /* V6.5.20 [gs] */
-				num_index--;					/* HTML_LABEL_CONTENTS ignorieren */
-		}
-	}
-	/* ..sort */
-	qsort(html_index, num_index, sizeof(HTML_INDEX), comp_index_html );
+   /* array aufbauen.. */
+   num_index = 0;
+   for (j = 1; j <= p1_lab_counter; j++)
+   {
+      if (lab[j] != NULL  && lab[j]->ignore_index == FALSE )
+      {
+         html_index[num_index].toc_index = lab[j]->tocindex;
+         html_index[num_index].is_node = lab[j]->is_node;
+         tocname = html_index[num_index].tocname;
+         strcpy(tocname, lab[j]->name);
+         replace_macros(tocname);
+         c_internal_styles(tocname);
+         delete_all_divis(tocname);
+         replace_udo_tilde(tocname);
+         replace_udo_nbsp(tocname);
+         del_html_styles(tocname);
+         num_index++;
+         if ( strcmp ( tocname, HTML_LABEL_CONTENTS ) == 0 ) /* V6.5.20 [gs] */
+            num_index--;               /* HTML_LABEL_CONTENTS ignorieren */
+      }
+   }
+   /* ..sort */
+   qsort(html_index, num_index, sizeof(HTML_INDEX), comp_index_html );
 
-	/* ..and ausgeben */
-	fprintf( uif, "!begin_raw\n" );
-	lastc = EOS;
-	for (i = 0; i < num_index; i++)
-	{
-		thisc = html_index[i].tocname[0];
-		if (toupper(thisc)!=toupper(lastc))
-		{
-			fprintf( uif, "<br>\n" );
-			lastc= thisc;
-		}
+   /* ..and ausgeben */
+   fprintf( uif, "!begin_raw\n" );
+   lastc = EOS;
+   for (i = 0; i < num_index; i++)
+   {
+      strcpy ( dummy, &html_index[i].tocname[0] );  /* V6.5.20 [gs] */
+	  html2sys ( dummy );                           /* V6.5.20 [gs] */
+      thisc = dummy[0];                             /* V6.5.20 [gs] */
+      if (toupper(thisc)!=toupper(lastc))
+      {
+         fprintf( uif, "<br>\n" );
+         lastc= thisc;
+      }
 
-		get_html_filename(html_index[i].toc_index, htmlname);
+      get_html_filename(html_index[i].toc_index, htmlname);
 
-		/* v6.5.15 [vj] need to make a copy of this, because we need to change it */
-		escapedtocname=um_physical_strcpy(html_index[i].tocname, 100, "save_html_index [1]");
-		if (escapedtocname != NULL)
-		{
-			replace_all(escapedtocname, "!", "&#33;");
-		}
+      /* v6.5.15 [vj] need to make a copy of this, because we need to change it */
+      escapedtocname=um_physical_strcpy(html_index[i].tocname, 100, "save_html_index [1]");
+      if (escapedtocname != NULL)
+      {
+         replace_all(escapedtocname, "!", "&#33;");
+      }
 
-		if ( html_index[i].is_node )
-		{
-			fsplit(htmlname, dummy, dummy, dummy, suff);
-			if ( suff[0]==EOS )
-			{
-				fprintf(uif, "<a href=\"%s%s\">%s</a><br>\n",
-					htmlname, outfile.suff,
-					escapedtocname );
-			}
-			else
-			{
-				fprintf(uif, "<a href=\"%s\">%s</a><br>\n",
-					htmlname, escapedtocname );
-			}
-		}
-		else
-		{
-			strcpy ( cLabel, html_index[i].tocname );
+      if ( html_index[i].is_node )
+      {
+         fsplit(htmlname, dummy, dummy, dummy, suff);
+         if ( suff[0]==EOS )
+         {
+            fprintf(uif, "<a href=\"%s%s\">%s</a><br>\n",
+               htmlname, outfile.suff,
+               escapedtocname );
+         }
+         else
+         {
+            fprintf(uif, "<a href=\"%s\">%s</a><br>\n",
+               htmlname, escapedtocname );
+         }
+      }
+      else
+      {
+         strcpy ( cLabel, html_index[i].tocname );
          
          if (!no_index && use_label_inside_index) /* v6.5.19 [fd] */
          {
-			   label2html ( cLabel );
+            label2html ( cLabel );
             /* v6.5.13 [vj] Compiler-Warnung beseitigt, # wurde in String ausgelagert,
                             da der gcc sonst meckert: "toc.c:3940:17: warning: unknown escape sequence '\#'" */
             fprintf(uif, "<a href=\"%s%s%s%s\">%s</a><br>\n",htmlname, outfile.suff, "#", cLabel,escapedtocname );
          }
-		}
+      }
 
-		um_free(escapedtocname); /* v6.5.15 [vj] var can be freed now */
-	}
-	fprintf( uif, "!end_raw\n" );
+      um_free(escapedtocname); /* v6.5.15 [vj] var can be freed now */
+   }
+   fprintf( uif, "!end_raw\n" );
 
-	fclose(uif);
+   fclose(uif);
 
-	token_reset();
-	strcpy(token[0], "!include"); /* sollte safe sein, da ein Token auf jeden Fall so lang werden kann :-) [vj] */
-	um_strcpy(token[1], udofile.full, MAX_TOKEN_LEN+1, "save_html_index [2]");
-	token_counter= 2;
+   token_reset();
+   strcpy(token[0], "!include"); /* sollte safe sein, da ein Token auf jeden Fall so lang werden kann :-) [vj] */
+   um_strcpy(token[1], udofile.full, MAX_TOKEN_LEN+1, "save_html_index [2]");
+   token_counter= 2;
 
-	c_include();	
+   c_include();   
 
-	remove(udofile.full);
+   remove(udofile.full);
 
-	um_free((void *) html_index);
+   um_free((void *) html_index);
 
-	return TRUE;
-}	/* save_html_index */
+   return TRUE;
+}  /* save_html_index */
 
+/* --------------------------------------------------------------
+   --------------------------------------------------------------  */
 
 GLOBAL void add_pass1_index_udo ( void )
 {
-	save_html_index();
-	token_reset();
+   save_html_index();
+   token_reset();
 
-}	/* add_pass1_index_udo */
-
+}  /* add_pass1_index_udo */
 
 /*	############################################################
 	#
@@ -9323,7 +9326,7 @@ GLOBAL void c_alias ( void )
 	#
 	# Ein Label der internen Liste hinzufuegen
 	# label:	String
-	# isn:		TRUE: Ein Kapitel, FALSE: nur Label
+	# isn:		TRUE: Ein Kapitel (Node), FALSE: nur Label
 	# isp:		TRUE: Ein Popup
 	# tocindex:	Position des Labels in toc[]
 	#
