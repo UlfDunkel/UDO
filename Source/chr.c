@@ -1212,37 +1212,60 @@ GLOBAL void label2tex ( char *s )
                                         periods (".")."
         Beispiel: "Ein Label" -> "Ein_20Label"
         ------------------------------------------------------------    */
-GLOBAL void label2html ( char *s )
+GLOBAL void label2html(
+
+char     *s)               /* ^ to label name */
 {
-        char *ptr, val[16];
-        char one[2]= {0, 0};
+   char  *ptr,             /* ^ to current char in string*/
+          val[16];         /* char value */
+   char   one[2]= {0, 0};  /* hex value buffer */
 
-        ptr= s;
 
-        while (*ptr!=EOS)
-        {
-                if (*ptr>='a' && *ptr<='z')     goto LABEL2HTML_NEXT;
-                if (*ptr>='A' && *ptr<='Z')     goto LABEL2HTML_NEXT;
-                if (*ptr>='0' && *ptr<='9')     goto LABEL2HTML_NEXT;
-                if (*ptr=='-')  goto LABEL2HTML_NEXT;
-                if (*ptr=='_')  goto LABEL2HTML_NEXT;
-                if (*ptr==':')  goto LABEL2HTML_NEXT;
-                if (*ptr=='.')  goto LABEL2HTML_NEXT;
+   ptr = s;
+
+   while (*ptr != EOS)
+   {
+      if (*ptr >= 'a' && *ptr <= 'z')
+         goto LABEL2HTML_NEXT;
+
+      if (*ptr >= 'A' && *ptr <= 'Z')
+         goto LABEL2HTML_NEXT;
+
+      if (*ptr >= '0' && *ptr <= '9')
+         goto LABEL2HTML_NEXT;
+
+      if (*ptr == '-')
+         goto LABEL2HTML_NEXT;
+
+      if (*ptr == '_')
+         goto LABEL2HTML_NEXT;
+
+      if (*ptr == ':')
+         goto LABEL2HTML_NEXT;
+
+      if (*ptr == '.')
+         goto LABEL2HTML_NEXT;
                 
-                sprintf(val, "_%X", (UCHAR) *ptr);
-                one[0]= *ptr;
-                replace_once(ptr, one, val);
+      sprintf(val, "_%X", (UCHAR) *ptr);
+      one[0]= *ptr;
+      replace_once(ptr, one, val);
                 
-                LABEL2HTML_NEXT:
-                ptr++;
-        }
+LABEL2HTML_NEXT:
+      ptr++;
+   }
 
-        /* Labelname muss mit einem Buchstaben beginnen (siehe Spec) */
-        if (*s>='a' && *s<='z') return;
-        if (*s>='A' && *s<='Z') return;
-        strinsert(s, "UDO_");
+   /* Labelname muss mit einem Buchstaben beginnen (siehe Spec) */
+   if (*s>='a' && *s<='z')
+      return;
+
+   if (*s>='A' && *s<='Z')
+      return;
+
+   /* 2006-10-10: fd: faded */
+/* strinsert(s, "UDO_");
+*/
         
-}       /* label2html */
+}   /* label2html */
 
 
 /*      ------------------------------------------------------------
