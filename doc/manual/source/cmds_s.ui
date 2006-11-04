@@ -207,8 +207,14 @@ Aus (!T)(!/short_today)(!t) wird (!short_today)
 (!T)(!/short_today)(!t) becomes (!short_today)
 !endif
 
+!iflang [german]
 !item [(!SEEALSO)]
-(!KKW [today]), (!KW [language])
+(!KKW [today]), (!KW [language]), Vordefinierte Makros
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KKW [today]), (!KW [language]), Defined macros
+!endif
 
 !end_xlist
 

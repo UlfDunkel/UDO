@@ -690,6 +690,15 @@ Aus (!T)(!/copyright)(!t) wird (!copyright)
 (!T)(!/copyright)(!t) is converted to (!copyright)
 !endif
 
+!iflang [german]
+!item [(!SEEALSO)]
+Vordefinierte Makros
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+Defined macros
+!endif
+
 !end_xlist
 
 !end_node

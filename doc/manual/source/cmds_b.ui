@@ -1519,11 +1519,11 @@ Aus (!T)(!/beta)(!t) wird (!beta).
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KKW [alpha]), (!link [Sonderzeichen] [Sonderzeichen])
+(!KKW [alpha]), (!link [Sonderzeichen] [Sonderzeichen]), Vordefinierte Makros
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
-(!KKW [alpha]), (!link [Special characters] [Special characters])
+(!KKW [alpha]), (!link [Special characters] [Special characters]), Defined macros
 !endif
 
 !end_xlist

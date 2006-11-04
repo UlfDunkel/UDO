@@ -176,6 +176,61 @@ Postscript unterstützt.
 !end_node
 
 ################################################################################
+!begin_node (!kkw [reg])
+!html_name cmd_reg().html
+
+!iflang [german]
+(!reg)-Zeichen ausgeben.
+!endif
+!iflang [english]
+Print the (!reg) symbol.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/reg)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das Registermarke-Symbol
+ersetzt, sofern es in dem jeweiligen Zeichensatz
+vorhanden ist. Ist es das nicht, so ersetzt UDO den
+Platzhalter durch ""(!T)registered(!t)"".
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This placeholder will be replaced by the registermarke symbol if
+the destination format supports it. If it doesn't UDO will replace
+this placeholder by ""(!T)registered(!t)"".
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+Aus (!T)(!/reg)(!t) wird (!reg).
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/reg)(!t) becomes (!reg).
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.8
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [tm]), Vordefinierte Makros
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KKW [tm]), Defined macros
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
 !begin_node (!kw [rinclude])
 !html_name cmd_rinclude.html
 

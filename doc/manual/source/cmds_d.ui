@@ -97,6 +97,61 @@ parameters.
 !end_node
 
 ################################################################################
+!begin_node (!kkw [deg])
+!html_name cmd_deg().html
+
+!iflang [german]
+(!deg)-Zeichen ausgeben.
+!endif
+!iflang [english]
+Print the (!deg) symbol.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/deg)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das Grad-Symbol
+ersetzt, sofern es in dem jeweiligen Zeichensatz
+vorhanden ist. Ist es das nicht, so ersetzt UDO den
+Platzhalter durch ""(!T)Grad(!t)"".
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This placeholder will be replaced by the degree symbol if
+the destination format supports it. If it doesn't UDO will replace
+this placeholder by ""(!T)Grad(!t)"".
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+Aus (!T)(!/deg)(!t) wird (!deg).
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/deg)(!t) becomes (!deg).
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.8
+
+!iflang [german]
+!item [(!SEEALSO)]
+Vordefinierte Makros
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+Defined macros
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
 # ToDo: Englisch
 !begin_node (!kkkw [DEL] [del])
 !html_name cmd_INS_ins.html
@@ -303,6 +358,18 @@ erzeugt UDO eine Zeile der Art ""Copyright (!copyright) by <author>"". Wurde
 (!KW [docinfo] [[author!!]]) nicht angegeben, so erzeugt UDO eine Zeile
 ""Made with UDO"".
 
+!item [keywords]
+(!KW [docinfo] [[keywords!!]]) entspricht dem Kommando (!KW [html_keywords]).
+Kann auch bei Postscript genutzt werden. (!nl)
+Bei der HTML-Ausgabe allerdings nur, wenn in einzelnen Dateien nicht
+(!KW [html_keywords]) benutzt wird. Diese haben also vorang. (!nl)
+
+!item [description]
+(!KW [docinfo] [[description!!]]) entspricht dem Kommando (!KW [html_description]).
+Kann auch bei Postscript genutzt werden. (!nl)
+Bei der HTML-Ausgabe allerdings nur, wenn in einzelnen Dateien nicht
+(!KW [html_description]) benutzt wird. Diese haben also vorang. (!nl)
+
 !item [htmltitle]
 ""<text>"" wird für den Titel jeder Seite benutzt (anstelle der
 Zusammenfassung von [title] und [program]).
@@ -409,6 +476,20 @@ for the DRC format. If you don't use this command, UDO
 will use a line like ""Copyright (!copyright) by <author>"".
 If you did not set the name of the author, UDO will use
 the text ""Made with UDO"".
+
+# ToDo: Englisch
+!item [keywords]
+(!KW [docinfo] [[keywords!!]]) entspricht dem Kommando (!KW [html_keywords]).
+Kann auch bei Postscript genutzt werden. (!nl)
+Bei der HTML-Ausgabe allerdings nur, wenn in einzelnen Dateien nicht
+(!KW [html_keywords]) benutzt wird. Diese haben also vorang. (!nl)
+
+# ToDo: Englisch
+!item [description]
+(!KW [docinfo] [[description!!]]) entspricht dem Kommando (!KW [html_description]).
+Kann auch bei Postscript genutzt werden. (!nl)
+Bei der HTML-Ausgabe allerdings nur, wenn in einzelnen Dateien nicht
+(!KW [html_description]) benutzt wird. Diese haben also vorang. (!nl)
 
 !item [htmltitle]
 ""<text>"" will be used as the title of every page (instead of

@@ -193,15 +193,16 @@ Aus (!T)(!/alpha)(!t) wird (!alpha).
 !endif
 !iflang [english]
 !item [(!EXAMPLE)]
-(!KKW [beta]), (!link [Special characters] [Special characters])
+(!T)(!/alpha)(!t) becomes (!alpha).
 !endif
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KKW [beta]), (!link [Sonderzeichen] [Sonderzeichen])
+(!KKW [beta]), (!link [Sonderzeichen] [Sonderzeichen]), Vordefinierte Makros
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
+(!KKW [beta]), (!link [Special characters] [Special characters]), Defined macros
 !endif
 
 !end_xlist

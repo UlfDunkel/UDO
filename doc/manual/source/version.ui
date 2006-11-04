@@ -5,14 +5,14 @@
 !docinfo [version]  6.5.19
 
 !iflang [german]
-!docinfo [date] 27.09.2006
-!macro DATE 27.09.2006
+!docinfo [date] 03.11.2006
+!macro DATE 03.11.2006
 !endif
 
 !iflang [english]
-!docinfo [date] Sep 27nd, 2006
-!macro DATE Sep 27nd, 2006
+!docinfo [date] Nov 3nd, 2006
+!macro DATE Nov 3nd, 2006
 !endif
 
 !macro RELEASE 6
-!macro VERSION .5.19
+!macro VERSION .5.20

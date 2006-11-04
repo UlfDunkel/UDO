@@ -5647,6 +5647,92 @@ down the conversion of the source file. The maximum number of macro is
 !end_enumerate
 !endif
 
+# ------------------------------------------------------------------------------
+# ToDo: Englisch
+
+!iflang [german]
+!begin_node Vordefinierte Makros
+!endif
+!iflang [english]
+!begin_node Defined macros
+!endif
+!html_name macros_defines.html
+
+!iflang [german]
+UDO kennt ein paar vordefinierte Makros/Platzhalter:
+
+!begin_table [|l|l|] !hline
+(!KKW [alpha]) !! (!alpha)-Zeichen ausgeben
+!hline
+(!KKW [beta]) !! (!beta)-Zeichen ausgeben
+!hline
+(!KKW [copyright]) !! Copyright-Symbol ausgeben
+!hline
+(!KKW [deg]) !! (!deg)-Zeichen ausgeben
+!hline
+(!KKW [euro]) !! (!euro)-Zeichen ausgeben
+!hline
+(!KKW [grin]) !! Emoticon ausgeben (!grin)
+!hline
+(!KKW [LaTeX]) !! (!LaTeX)-Schriftzug ausgeben
+!hline
+(!KKW [LaTeXe]) !! (!LaTeXe)-Schriftzug ausgeben
+!hline
+(!KKW [laugh]) !! Emoticon ausgeben (!laugh)
+!hline
+(!KKW [pound]) !! (!pound)-Zeichen ausgeben
+!hline
+(!KKW [reg]) !! (!reg)-Zeichen ausgeben
+!hline
+(!KKW [TeX]) !! (!TeX)-Schriftzug ausgeben
+!hline
+(!KKW [tm]) !! (!tm)-Zeichen ausgeben
+!hline
+(!KKW [today]) !! Systemdatum in langer Schreibweise ausgeben
+!hline
+(!KKW [short_today]) !! Systemdatum in kurzer Schreibweise einsetzen
+!hline
+!end_table
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+UDO kennt ein paar vordefinierte Makros/Platzhalter:
+
+!begin_table [|l|l|] !hline
+(!KKW [alpha]) !! Print the (!alpha) symbol
+!hline
+(!KKW [beta]) !! Print the (!beta) symbol
+!hline
+(!KKW [copyright]) !! Print the copyright symbol
+!hline
+(!KKW [deg]) !! Print the (!deg) symbol
+!hline
+(!KKW [euro]) !! Print the (!euro) symbol
+!hline
+(!KKW [grin]) !! Print an emoticon (!grin)
+!hline
+(!KKW [LaTeX]) !! Print the (!LaTeX) symbol
+!hline
+(!KKW [LaTeXe]) !! Print the (!LaTeXe) symbol
+!hline
+(!KKW [laugh]) !! Print an emoticon (!laugh)
+!hline
+(!KKW [pound]) !! Print the (!pound) symbol
+!hline
+(!KKW [reg]) !! Print the (!reg) symbol
+!hline
+(!KKW [TeX]) !! Print the (!TeX) symbol
+!hline
+(!KKW [tm]) !! Print the (!tm) symbol
+!hline
+(!KKW [today]) !! Insert long form of current date
+!hline
+(!KKW [short_today]) !! Insert short form of current date
+!hline
+!end_table
+!endif
+!end_node
+
 !end_node
 
 ################################################################################

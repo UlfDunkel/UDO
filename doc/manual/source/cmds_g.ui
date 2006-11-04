@@ -160,8 +160,14 @@ Aus (!T)(!/grin)(!t) wird (!grin).
 (!T)(!/grin)(!t) becomes (!grin).
 !endif
 
+!iflang [german]
 !item [(!SEEALSO)]
-(!KKW [laugh])
+(!KKW [laugh]), Vordefinierte Makros
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KKW [laugh]), Defined macros
+!endif
 
 !end_xlist
 

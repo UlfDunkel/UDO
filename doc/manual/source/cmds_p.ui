@@ -546,6 +546,61 @@ will not appear in a table of contents.
 !end_node
 
 ################################################################################
+!begin_node (!kkw [pound])
+!html_name cmd_pound().html
+
+!iflang [german]
+(!pound)-Zeichen ausgeben.
+!endif
+!iflang [english]
+Print the (!pound) symbol.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/pound)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das Pfund-Symbol
+ersetzt, sofern es in dem jeweiligen Zeichensatz
+vorhanden ist. Ist es das nicht, so ersetzt UDO den
+Platzhalter durch ""(!T)GBP(!t)"".
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This placeholder will be replaced by the pound symbol if
+the destination format supports it. If it doesn't UDO will replace
+this placeholder by ""(!T)GBP(!t)"".
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+Aus (!T)(!/pound)(!t) wird (!pound).
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/pound)(!t) becomes (!pound).
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.8
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [euro]), Vordefinierte Makros
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KKW [euro]), Defined macros
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
 !ifset OldKeywords
 !begin_node (!kw [program])
 !html_name cmd_program.html
