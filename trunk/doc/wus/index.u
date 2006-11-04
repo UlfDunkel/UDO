@@ -7,7 +7,7 @@
 !code [iso]
 !docinfo [title] Wunschliste und Sammlung für
 !docinfo [program] UDO
-!docinfo [version] Version 10
+!docinfo [version] Version 11
 !docinfo [date] (!today)
 !docinfo [author] Norbert Hanz
 !docinfo [address] für UDO-OPEN-SOURCE
@@ -83,8 +83,8 @@
 !use_short_tocs [all]
 !html_style_name wus.css
 !html_doctype XHTML Transitional
-!docinfo [keywords] UDO, UDO-Shell, Übersetzung, Converter
-!docinfo [description] Beschreibung der Bedienung der UDO-Shell
+!docinfo [keywords] UDO, Wunschliste
+!docinfo [description] Wunschliste und Sammlung für UDO
 #!doclayout [ps,rtf] [node1size] 12
 #!doclayout [ps,rtf] [node2size] 18
 #!doclayout [ps,rtf] [node3size] 24
