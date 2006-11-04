@@ -121,8 +121,14 @@ Aus (!T)(!/TeX)(!t) wird (!TeX).
 (!T)(!/TeX)(!t) is printed as (!TeX).
 !endif
 
+!iflang [german]
 !item [(!SEEALSO)]
-(!KKW [LaTeX]), (!KKW [LaTeXe])
+(!KKW [LaTeX]), (!KKW [LaTeXe]), Vordefinierte Makros
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KKW [LaTeX]), (!KKW [LaTeXe]), Defined macros
+!endif
 
 !end_xlist
 
@@ -977,6 +983,61 @@ Set document information.
 !endif
 
 ################################################################################
+!begin_node (!kkw [tm])
+!html_name cmd_tm().html
+
+!iflang [german]
+(!tm)-Zeichen ausgeben.
+!endif
+!iflang [english]
+Print the (!tm) symbol.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/tm)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das Trademark-Symbol
+ersetzt, sofern es in dem jeweiligen Zeichensatz
+vorhanden ist. Ist es das nicht, so ersetzt UDO den
+Platzhalter durch ""(!T)trademark(!t)"".
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This placeholder will be replaced by the trademark symbol if
+the destination format supports it. If it doesn't UDO will replace
+this placeholder by ""(!T)trademark(!t)"".
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+Aus (!T)(!/tm)(!t) wird (!tm).
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/tm)(!t) becomes (!tm).
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.8
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [reg]), Vordefinierte Makros
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KKW [reg]), Defined macros
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
 !begin_node (!kw [toc])
 !html_name cmd_toc.html
 
@@ -1111,8 +1172,14 @@ Aus (!T)(!/today)(!t) wird (!today).
 (!T)(!/today)(!t) becomes (!today).
 !endif
 
+!iflang [german]
 !item [(!SEEALSO)]
-(!KKW [short_today]), (!KW [language])
+(!KKW [short_today]), (!KW [language]), Vordefinierte Makros
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KKW [short_today]), (!KW [language]), Defined macros
+!endif
 
 !end_xlist
 

@@ -1407,6 +1407,61 @@ Finish a list.
 !end_node
 
 ################################################################################
+!begin_node (!kkw [euro])
+!html_name cmd_euro().html
+
+!iflang [german]
+(!euro)-Zeichen ausgeben.
+!endif
+!iflang [english]
+Print the (!euro) symbol.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/euro)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das Euro-Symbol
+ersetzt, sofern es in dem jeweiligen Zeichensatz
+vorhanden ist. Ist es das nicht, so ersetzt UDO den
+Platzhalter durch ""(!T)EUR(!t)"".
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This placeholder will be replaced by the Euro symbol if
+the destination format supports it. If it doesn't UDO will replace
+this placeholder by ""(!T)EUR(!t)"".
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+Aus (!T)(!/euro)(!t) wird (!euro).
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/euro)(!t) becomes (!euro).
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.8
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [pound]), Vordefinierte Makros
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KKW [pound]), Defined macros
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
 !begin_node (!kw [exl])
 !html_name cmd_exl.html
 

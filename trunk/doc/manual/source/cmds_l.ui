@@ -77,8 +77,14 @@ Aus (!T)(!/LaTeX)(!t) wird (!LaTeX).
 (!T)(!/LaTeX)(!t) will become (!LaTeX).
 !endif
 
+!iflang [german]
 !item [(!SEEALSO)]
-(!KKW [TeX]), (!KKW [LaTeXe])
+(!KKW [TeX]), (!KKW [LaTeXe]), Vordefinierte Makros
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KKW [TeX]), (!KKW [LaTeXe]), Defined macros
+!endif
 
 !end_xlist
 
@@ -121,8 +127,14 @@ Aus (!T)(!/LaTeXe)(!t) wird (!LaTeXe).
 (!T)(!/LaTeXe)(!t) will become (!LaTeXe).
 !endif
 
+!iflang [german]
 !item [(!SEEALSO)]
-(!KKW [TeX]), (!KKW [LaTeX])
+(!KKW [TeX]), (!KKW [LaTeX]), Vordefinierte Makros
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KKW [TeX]), (!KKW [LaTeX]), Defined macros
+!endif
 
 !end_xlist
 
@@ -327,8 +339,14 @@ Aus (!T)(!/laugh)(!t) wird (!laugh)
 (!T)(!/laugh)(!t) becomes (!laugh)
 !endif
 
+!iflang [german]
 !item [(!SEEALSO)]
-(!KKW [grin])
+(!KKW [grin]), Vordefinierte Makros
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KKW [grin]), Defined macros
+!endif
 
 !end_xlist
 
