@@ -459,7 +459,7 @@ GLOBAL void init_lang ( void )
       break;
 
    case TOCZE:
-      strcpy(lang.preface,    "P(!\o)edmluva");
+      strcpy(lang.preface,    "Pøedmluva");
       strcpy(lang.chapter,    "Kapitola");
       strcpy(lang.title,      "Titul");
       strcpy(lang.appendix,   "P(!\o)(!'i)loha");
@@ -468,7 +468,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.listtable,  "Seznam tabulek");
       strcpy(lang.figure,     "Obr(!'a)zek");
       strcpy(lang.table,      "Tabulka");
-      strcpy(lang.index,      "Rejst(!\o)(!'i)k");
+      strcpy(lang.index,      "Rejstø(!'i)k");
       strcpy(lang.page,       "strana");
       strcpy(lang.see,        "viz");
       strcpy(lang.also,       "viz t(!'e)ž");
@@ -481,7 +481,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.lcid,       "LCID=0x405 0x0 0x0 ;Czech");
       strcpy(lang.html_home,  "Dom(!`u)");
       strcpy(lang.html_up,    "Nahoru");
-      strcpy(lang.html_prev,  "P(!\o)edchoz(!'i)");
+      strcpy(lang.html_prev,  "Pøedchoz(!'i)");
       strcpy(lang.html_next,  "N(!'a)sleduj(!'i)c(!'i)");
       strcpy(lang.html_lang,  "cs");
       strcpy(lang.html_start, "Za(!`e)(!'a)tek dokumentu");
@@ -501,7 +501,7 @@ GLOBAL void init_lang ( void )
       break;
 
 /* fd:20061122: x-mac-ce encoding temporarily faded
-   case TOCZE:                     /* V6.5.18 */
+   case TOCZE:
       strcpy(lang.preface,    "PÞedmluva");
       strcpy(lang.chapter,    "Kapitola");
       strcpy(lang.title,      "Titul");
@@ -516,7 +516,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.see,        "viz");
       strcpy(lang.also,       "viz tŽì");
       strcpy(lang.by,         "");
-      strcpy(lang.fur,        "pro"); /* New in V6.5.2 [NHz] */
+      strcpy(lang.fur,        "pro");
       strcpy(lang.up,         "Nahoru");
       strcpy(lang.exit,       "Odchod");
       strcpy(lang.unknown,    "Nen’ zn‡mo");
@@ -525,7 +525,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.html_home,  "Domó");
       strcpy(lang.html_up,    "Nahoru");
       strcpy(lang.html_prev,  "PÞedchoz’");
-      strcpy(lang.html_next,  "N‡sleduj’c’"); /* New in r6pl16 [NHz] */
+      strcpy(lang.html_next,  "N‡sleduj’c’");
       strcpy(lang.html_lang,  "cs");
       strcpy(lang.html_start, "Za‹‡tek dokumentu");
       break;
