@@ -458,7 +458,6 @@ GLOBAL void init_lang ( void )
       uni2ascii(lang.html_next);
       break;
 
-/* fd:20060916: windows-1250 encoding temporarily faded
    case TOCZE:
       strcpy(lang.preface,    "P(!\o)edmluva");
       strcpy(lang.chapter,    "Kapitola");
@@ -500,8 +499,8 @@ GLOBAL void init_lang ( void )
       uni2ascii(lang.html_next);
       uni2ascii(lang.html_start);
       break;
-*/
 
+/* fd:20061122: x-mac-ce encoding temporarily faded
    case TOCZE:                     /* V6.5.18 */
       strcpy(lang.preface,    "PÞedmluva");
       strcpy(lang.chapter,    "Kapitola");
@@ -530,7 +529,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.html_lang,  "cs");
       strcpy(lang.html_start, "Za‹‡tek dokumentu");
       break;
-   
+*/
    default:        /* Deutsch ist default */
       strcpy(lang.preface,    "Vorwort");
       strcpy(lang.chapter,    "Kapitel");
