@@ -110,20 +110,20 @@ LOCAL const char *MONTH_SPA[] =
 
 
 /* Czech windows-1250 encoding */ /* V6.5.19 */
-/* fd:20060916: temporarily faded as there is noone else using this stuff at the moment 
 LOCAL const char *MONTH_CZE[] =
 {
    "ledna", "(!'u)nora", "b(!\\o)ezna", "dubna", "kv(!`i)tna", "(!`e)ervna",
    "(!`e)ervence", "srpna", "z(!'a)(!\\o)(!'i)", "(!\\o)(!'i)jna", "listopadu", "prosince"
 };
-*/
 
 /* Czech x-mac-ce encoding */ /* V6.5.19 */
+/* fd:20061122: temporarily faded as there is noone else using this stuff at the moment 
 LOCAL const char *MONTH_CZE[] =
 {
    "ledna", "února", "bﬁezna", "dubna", "kvûtna", "ãervna",
    "ãervence", "srpna", "záﬁí", "ﬁíjna", "listopadu", "prosince"
 };
+*/
 
    
 
