@@ -1245,7 +1245,7 @@ Shorten table of contents.
 
 !item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/use_short_tocs [(!FORMAT)](!t)
+!item [(!SYNTAX)] (!T)!/use_short_tocs [(!FORMAT)] !/depth <(!VALUE)>(!t)
 
 !iflang [german]
 !item [(!DESCRIPTION)]
@@ -1269,11 +1269,11 @@ names of sections will be printed.
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KW [tableofcontents]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse]), (!KW [use_short_envs]), (!link [Umgebungen] [Umgebungen])
+(!KW [depth]), (!KW [tableofcontents]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse]), (!KW [use_short_envs]), (!link [Umgebungen] [Umgebungen])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
-(!KW [tableofcontents]), (!link [Tables of contents] [Tables of contents]), (!KW [use_short_envs]), (!link [Environments] [Environments])
+(!KW [depth]), (!KW [tableofcontents]), (!link [Tables of contents] [Tables of contents]), (!KW [use_short_envs]), (!link [Environments] [Environments])
 !endif
 
 !end_xlist
