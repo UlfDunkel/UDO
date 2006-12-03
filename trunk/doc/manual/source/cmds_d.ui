@@ -257,7 +257,8 @@ containing only the chapter names.
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~2
 
 !item [(!SEEALSO)]
-(!KW [tableofcontents]), (!KW [toc]), (!KW [use_auto_subtocs]), (!KW [use_short_tocs])
+(!KW [tableofcontents]), (!KW [toc]), (!KW [use_auto_subtocs]), (!KW [use_short_tocs]),
+(!KW [subtoc]), (!KW [subsubtoc]), (!KW [subsubsubtoc])
 
 !end_xlist
 

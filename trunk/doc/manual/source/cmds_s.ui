@@ -1383,7 +1383,7 @@ List paragraphs.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/subsubsubtoc [(!FORMAT)](!t)
+!item [(!SYNTAX)] (!T)!/subsubsubtoc [(!FORMAT)] !/depth <(!VALUE)>(!t)
 
 !iflang [german]
 !item [(!DESCRIPTION)]
@@ -1411,11 +1411,11 @@ This table can be generated automatically with the switch (!KW [use_auto_subsubs
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [use_auto_subsubsubtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+(!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [use_auto_subsubsubtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
-(!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [use_auto_subsubsubtocs]), (!link [Tables of contents] [Tables of contents])
+(!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [use_auto_subsubsubtocs]), (!link [Tables of contents] [Tables of contents])
 !endif
 
 !end_xlist
@@ -1701,7 +1701,7 @@ List subsections.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/subsubtoc [(!FORMAT)](!t)
+!item [(!SYNTAX)] (!T)!/subsubtoc [(!FORMAT)] !/depth <(!VALUE)>(!t)
 
 !iflang [german]
 !item [(!DESCRIPTION)]
@@ -1726,11 +1726,11 @@ This table can be generate automatically with the switch (!KW [use_auto_subsubto
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subsubtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+(!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subsubtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
-(!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subsubtocs]), (!link [Tables of contents] [Tables of contents])
+(!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subsubtocs]), (!link [Tables of contents] [Tables of contents])
 !endif
 
 !end_xlist
@@ -1799,7 +1799,7 @@ List sections.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/subtoc [(!FORMAT)](!t)
+!item [(!SYNTAX)] (!T)!/subtoc [(!FORMAT)] !/depth <(!VALUE)>(!t)
 
 !iflang [german]
 !item [(!DESCRIPTION)]
@@ -1824,11 +1824,11 @@ This table can be generate automatically with the switch (!KW [use_auto_subtocs]
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!KW [tableofcontents]), (!KW [toc]), (!KW [subsubtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+(!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subsubtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
-(!KW [tableofcontents]), (!KW [toc]), (!KW [subsubtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subtocs]), (!link [Tables of contents] [Tables of contents])
+(!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subsubtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subtocs]), (!link [Tables of contents] [Tables of contents])
 !endif
 
 !end_xlist
