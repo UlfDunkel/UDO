@@ -1353,7 +1353,7 @@ Setzen des Frametitel für den Frame des Inhalts beim Frame Layout (nur HTML).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_frames_toc_title <text>(!t)
+!item [(!SYNTAX)] (!T)!/html_frames_con_title <text>(!t)
 !iflang [german]
 !item [(!DESCRIPTION)]
 Setzen des Frametitel für den Frame des Inhalts beim Frame Layout.
