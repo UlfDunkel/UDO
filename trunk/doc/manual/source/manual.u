@@ -356,6 +356,11 @@
 !define MAXLINK         200
 !define MAXMACRO       1000
 !define MAXDEFINE       128
+!define MAXHYPHEN      4096
+!define LINELEN        4092
+!define MAX_TOKEN_LEN   199
+!define MAXSILBEN        32
+!define MAX_TOKENS      800
 !define MAXSYMLEN        32
 !define MAXLINETABLE    600
 !define MAXCOLUMSTABLE	 64

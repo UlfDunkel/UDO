@@ -1181,7 +1181,7 @@ geschrieben.
 !endif
 !iflang [english]
 !item [(!EXAMPLE)]
-(!T)(!/B)bold(!/b)(!t)
+(!T)(!/INS)Einfügungen(!/ins)(!t)
 !endif
 
 !item [(!EXISTSSINCE)] Version 6.5.9

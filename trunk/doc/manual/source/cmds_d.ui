@@ -154,7 +154,7 @@ Defined macros
 ################################################################################
 # ToDo: Englisch
 !begin_node (!kkkw [DEL] [del])
-!html_name cmd_INS_ins.html
+!html_name cmd_DEL_del.html
 !label (!kk1 [/DEL])
 !label (!kk1 [/del])
 
@@ -169,7 +169,7 @@ Print text in bold.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/DEL)<(!TEXT)>(!/ins)(!t)
+!item [(!SYNTAX)] (!T)(!/DEL)<(!TEXT)>(!/del)(!t)
 
 !iflang [german]
 !item [(!DESCRIPTION)]
@@ -199,7 +199,7 @@ Bei allen anderen Formaten wird der gelöschte Text in eckige Klammern gesetzt.
 !endif
 !iflang [english]
 !item [(!EXAMPLE)]
-(!T)(!/B)bold(!/b)(!t)
+(!T)(!/DEL)Löschungen(!/del)(!t)
 !endif
 
 !item [(!EXISTSSINCE)] Version 6.5.9
@@ -680,10 +680,81 @@ der Dokumentation zu den pdfmarks.
 # ------------------------------------------------------------------------------
 !iflang [english]
 !item [(!DESCRIPTION)]
+Dieses Kommando dient dazu, verschiedene Informationen für
+das Layout. zu setzen. ""<name>"" kann dabei einer
+der folgenden Werte sein:
 
+!begin_description
+
+!item [paper]
+!begin_verbatim
+!doclayout [ps] [paper] foo
+!end_verbatim
+Mögliche Angaben für foo sind: A3PORTRAIT, A3LANDSCAPE,
+A4PORTRAIT, A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE
+
+!item [propfontname]
+!begin_verbatim
+!doclayout [ps] [propfontname] foo
+!end_verbatim
+Mögliche Angaben für foo sind Zeichensatznamen, z. B. Arial,
+Times New Roman, sans oder sans serif.
+
+Hinweis: Für die Postscriptausgabe gilt zur Zeit: Wenn dort irgendwas
+mit "Helvetica", "Arial" oder "sans-serif" steht wird "Helvetica" gesetzt,
+ansonsten "Times New Roman".
+
+!item [propfontsize]
+!begin_verbatim
+!doclayout [ps] [propfontsize] foo
+!end_verbatim
+Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
+
+!item [monofontname]
+
+!item [monofontsize]
+Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
+
+!item [node1size]
+!begin_verbatim
+!doclayout [ps,rtf] [node1size] foo
+!end_verbatim
+Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
+
+seit Release~6 Patchlevel~16
+
+!item [node2size]
+!begin_verbatim
+!doclayout [ps,rtf] [node2size] foo
+!end_verbatim
+Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
+
+seit Release~6 Patchlevel~16
+
+!item [node3size]
+!begin_verbatim
+!doclayout [ps,rtf] [node3size] foo
+!end_verbatim
+Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
+
+seit Release~6 Patchlevel~16
+
+!item [node4size]
+!begin_verbatim
+!doclayout [ps,rtf] [node4size] foo
+!end_verbatim
+Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
+
+seit Release~6 Patchlevel~16
+
+!item [openMode]
+Mögliche Angaben für foo sind die entsprechenden Angaben in
+der Dokumentation zu den pdfmarks.
+
+!end_description
 !endif
 
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~15, Teile erst ab
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15, Teile erst ab Release~6 Patchlevel~16
 
 !end_xlist
 

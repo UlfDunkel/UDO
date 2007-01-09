@@ -102,6 +102,7 @@ Aus (!T)!!~(!t) wird !~.
 
 !end_node
 
+
 ################################################################################
 !begin_node !~
 !html_name cmd_tilde.html
@@ -638,6 +639,62 @@ Aus (!T)!//-(!t) wird !/-.
 
 !item [(!SEEALSO)]
 (!KW [hyphen]), (!K1 [/-])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+#ToDo: Englisch
+!begin_node !!\
+!html_name cmd_longline.html
+!label Tilde
+
+!iflang [german]
+Lange Eingabezeile
+!endif
+!iflang [english]
+Lange Eingabezeile
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!!\(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Endet eine UDO-Eingabezeile mit !!\<Zeilenumbruch>, so wird die 
+folgende Zeile von UDO als Fortsetzung der vorhergehenden Zeile 
+aufgefasst. Es können damit mehrere "echte" Zeilen aus Sicht von 
+UDO zu einer einzigen "logischen" Eingabezeile zusammengefasst 
+werden. Diese Fortsetzungszeilen sind an jeder Stelle im UDO- 
+ Quelltext zulässig, auch z.B. in Makros und Definitionen. Steht 
+!!\ nicht unmittelbar am Ende einer Zeile, so wird es ignoriert 
+und als normaler Text ausgegeben.
+
+Eine mögliche Anwendung ist, den Inhalt einer Tabellenzeile auf 
+mehrere Zeilen in der Eingabedatei aufzuteilen, um die Lesbarkeit 
+des UDO-Quelltextes zu verbessern.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Endet eine UDO-Eingabezeile mit !!\<Zeilenumbruch>, so wird die 
+folgende Zeile von UDO als Fortsetzung der vorhergehenden Zeile 
+aufgefasst. Es können damit mehrere "echte" Zeilen aus Sicht von 
+UDO zu einer einzigen "logischen" Eingabezeile zusammengefasst 
+werden. Diese Fortsetzungszeilen sind an jeder Stelle im UDO- 
+ Quelltext zulässig, auch z.B. in Makros und Definitionen. Steht 
+!!\ nicht unmittelbar am Ende einer Zeile, so wird es ignoriert 
+und als normaler Text ausgegeben.
+
+Eine mögliche Anwendung ist, den Inhalt einer Tabellenzeile auf 
+mehrere Zeilen in der Eingabedatei aufzuteilen, um die Lesbarkeit 
+des UDO-Quelltextes zu verbessern.
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.4
 
 !end_xlist
 

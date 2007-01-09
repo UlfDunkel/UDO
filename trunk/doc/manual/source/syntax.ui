@@ -787,7 +787,7 @@ Unterinhaltsverzeichnis ausgegeben. Analog gilt dies für Abschnitte und
 
 !subsubsubheading Zusammenfassung der Befehle und Schalter
 
-!begin_xlist [use_auto_subsubsubtocs:] !short
+!begin_xlist [use_auto_subsubsubtocs: ] !short
 
 !item [(!KW [tableofcontents]):]       Ausgabe des Inhaltsverzeichnisses auf einer
 eigenen Seite
@@ -866,7 +866,7 @@ manually by using (!KW [subtoc]) etc.
 
 !subsubsubheading Summary of all commands and switches
 
-!begin_xlist [use_auto_subsubsubtocs:] !short
+!begin_xlist [use_auto_subsubsubtocs: ] !short
 
 !item [(!KW [tableofcontents]):]
 		Prints the table of contents on a separate page.
@@ -3732,7 +3732,7 @@ umgewandelt werden:
 
 
 !universal_charset [on]
-!begin_table [|l|l|l|] (!hline)
+!begin_table [|l|l|l|] !hline
 Platzhalter  !! x aus           !! Beispiel
 !hline
 (!/"x)       !! aeiosuyAEIOU    !! (!T)(!/"a)(!t) = (!"a)
@@ -3782,7 +3782,7 @@ to 8-bit characters. The following table shows which input
 sequences are converted to which characters:
 
 !universal_charset [on]
-!begin_table [|l|l|l|] (!hline)
+!begin_table [|l|l|l|] !hline
 Placeholder  !! x from          !! Example
 !hline
 (!/"x)       !! aeiosuyAEIOU    !! (!T)(!/"a)(!t) = (!"a)
