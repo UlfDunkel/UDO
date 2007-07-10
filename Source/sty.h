@@ -43,6 +43,9 @@ typedef struct _styleflag
 	BOOLEAN deleted;
 	/* New in V6.5.9 [NHz] */
 	BOOLEAN colour;
+	/* New in V6.5.20 [GS] */
+	BOOLEAN sup;
+	BOOLEAN sub;
 }	STYLEFLAG;
 
 #endif /* UDO_STY_H */
@@ -92,6 +95,11 @@ typedef struct _styleflag
 #define	C_COLOR_TEAL	'\045'
 #define	C_COLOR_AQUA	'\046'
 #define	C_COLOR_OFF	    '\047'
+/* New in V6.5.20 [GS] */
+#define	C_SUP_ON	    '\048'
+#define	C_SUP_OFF	    '\049'
+#define	C_SUB_ON	    '\050'
+#define	C_SUB_OFF	    '\051'
 
 
 /*	############################################################
@@ -115,6 +123,10 @@ COLOR_RED[8],	COLOR_PURPLE[8],	COLOR_FUCHSIA[8],
 COLOR_GREEN[8],	COLOR_LIME[8],	COLOR_OLIVE[8],
 COLOR_YELLOW[8],	COLOR_NAVY[8],	COLOR_BLUE[8],
 COLOR_TEAL[8],	COLOR_AQUA[8],	COLOR_OFF[8];
+/* New in V6.5.20 [GS] */
+GLOBAL char SUP_ON[8],	SUP_OFF[8];
+GLOBAL char SUB_ON[8],	SUB_OFF[8];
+
 
 
 /*	############################################################
@@ -145,4 +157,3 @@ GLOBAL void init_module_sty ( void );
 /*	############################################################
 	# sty.h
 	############################################################	*/
-
