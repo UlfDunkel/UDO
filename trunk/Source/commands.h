@@ -47,6 +47,11 @@
 #define CMD_INSERT_OFF   "(!ins)"
 #define CMD_DELETED_ON   "(!DEL)"
 #define CMD_DELETED_OFF  "(!del)"
+/* New in V6.5.20 [GS] */
+#define CMD_SUP_ON    "(!SUP)"
+#define CMD_SUP_OFF   "(!sup)"
+#define CMD_SUB_ON    "(!SUB)"
+#define CMD_SUB_OFF   "(!sub)"
 
 
 
@@ -302,4 +307,3 @@
 /* ############################################################
    # commands.h
    ############################################################   */
-

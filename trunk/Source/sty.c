@@ -72,7 +72,7 @@ GLOBAL void del_footnotes ( char *s )
 	if ( (ptr=strstr(s, stylemagic))==NULL )
 	{	return;
 	}
-	
+
 	qdelete_all(ptr, CMD_FOOT_ON, CMD_STYLELEN);
 	qdelete_all(ptr, CMD_FOOT_OFF, CMD_STYLELEN);
 }
@@ -85,7 +85,7 @@ GLOBAL void del_internal_footnotes ( char *s )
 	if ( (ptr=strstr(s, STYLEMAGIC))==NULL )
 	{	return;
 	}
-	
+
 	delete_all(ptr, FOOT_ON);
 	delete_all(ptr, FOOT_OFF);
 }
@@ -154,7 +154,12 @@ GLOBAL void del_internal_styles ( char *s )
 	qdelete_all(ptr, COLOR_TEAL, STYLELEN);
 	qdelete_all(ptr, COLOR_AQUA, STYLELEN);
 	qdelete_all(ptr, COLOR_OFF, STYLELEN);
-	
+	/* New in V6.5.9 [GS] */
+	qdelete_all(ptr, SUP_ON, STYLELEN);
+	qdelete_all(ptr, SUP_OFF, STYLELEN);
+	qdelete_all(ptr, SUB_ON, STYLELEN);
+	qdelete_all(ptr, SUB_OFF, STYLELEN);
+
 }	/* del_internal_styles */
 
 
@@ -170,7 +175,7 @@ GLOBAL void c_pch_styles ( char *s )
 	delete_all(s, VERB_ON);
 	delete_all(s, VERB_OFF);
 #endif
-	
+
 	/* New in V6.5.9 [NHz] */
 	qreplace_all(s, DELETED_ON, STYLELEN, "[", 1);
 	qreplace_all(s, DELETED_OFF, STYLELEN, "]", 1);
@@ -234,6 +239,11 @@ GLOBAL void c_rtf_styles ( char *s )
 	qreplace_all(ptr, COLOR_AQUA, STYLELEN, "{\\cf16 ", 7);
 	qreplace_all(ptr, COLOR_OFF, STYLELEN, "}", 1);
 
+	/* New in V6.5.20 [GS] */
+	qreplace_all(ptr, SUP_ON,  STYLELEN, "\\super ", 7);
+	qreplace_all(ptr, SUP_OFF, STYLELEN, "\\nosupersub ", 12);
+	qreplace_all(ptr, SUB_ON,  STYLELEN, "\\sub ", 5);
+	qreplace_all(ptr, SUB_OFF, STYLELEN, "\\nosupersub ", 12);
 	del_internal_styles(s);
 }	/* c_rtf_styles */
 
@@ -243,7 +253,7 @@ GLOBAL void c_win_styles ( char *s )
 	char *ptr;
 	char fs[20];
 	int l;
-	
+
 	if ( (ptr=strstr(s, STYLEMAGIC))==NULL )
 	{	return;
 	}
@@ -306,7 +316,7 @@ GLOBAL void c_internal_styles ( char *s )
 	if ( (ptr=strstr(s, STYLEMAGIC))==NULL )
 	{	return;
 	}
-	
+
 	if (no_effects)
 	{	del_internal_styles(s);
 	}
@@ -334,6 +344,12 @@ GLOBAL void c_internal_styles ( char *s )
 			Moeglichkeit eingefuegte und geloeschte Text zu kennzeichnen */
 			qreplace_all(ptr, DELETED_ON, STYLELEN, "\\[", 2);
 			qreplace_all(ptr, DELETED_OFF, STYLELEN, "\\]", 2);
+
+			/* New in V6.5.20 [GS] */
+			qreplace_all(ptr, SUP_ON,  STYLELEN, "$^{\\mbox{", 9);
+			qreplace_all(ptr, SUP_OFF, STYLELEN, "}}$", 3);
+			qreplace_all(ptr, SUB_ON,  STYLELEN, "$_{\\mbox{", 9);
+			qreplace_all(ptr, SUB_OFF, STYLELEN, "}}$", 3);
 
 			del_internal_styles(s);
 			break;
@@ -570,7 +586,7 @@ GLOBAL void c_internal_styles ( char *s )
 				time_t uhrzeit;
 				int hour_local, min_local, mday_local, min_utc, hour_utc, mday_utc;
 				int hours, minutes;
-			
+
 				if(strcmp(html_header_date_zone, "") >0)
 					um_strcpy(zone, html_header_date_zone, 9, "output_html_meta1");
 				else
@@ -582,7 +598,7 @@ GLOBAL void c_internal_styles ( char *s )
 					hour_utc = gmtime(&uhrzeit)->tm_hour;
 					min_local = localtime(&uhrzeit)->tm_min;
 					min_utc = gmtime(&uhrzeit)->tm_min;
-		
+
 					if(min_local < min_utc)	/* special for countries with "broken times" (e.g. Iran +03:30) */
 					{
 						if(mday_local != mday_utc)	/* if different days over midnight */
@@ -599,12 +615,12 @@ GLOBAL void c_internal_styles ( char *s )
 							hours = hour_local - hour_utc;
 						minutes = min_local - min_utc;
 					}
-		
+
 					sprintf(zone, "%+03d:%02d", hours, minutes);
 				}
 				sprintf(this_time, " datetime=\"%d-%02d-%02dT%02d:%02d:%02d%s\"", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec, zone);
 			}
-		
+
 			sprintf(cite, " cite=\"%s\"", "http://www.udo-open-source.org");
 
 			sprintf(time_insert, "<ins%s%s>", cite, this_time);
@@ -615,7 +631,7 @@ GLOBAL void c_internal_styles ( char *s )
 			qreplace_all(ptr, INSERT_OFF, STYLELEN, "</ins>", 6);
 			qreplace_all(ptr, DELETED_ON, STYLELEN, time_delete, lang_delete);
 			qreplace_all(ptr, DELETED_OFF, STYLELEN, "</del>", 6);
-		
+
 			/* New in V6.5.9 [NHz] */
 			if(html_doctype==HTML_OLD)
 			{
@@ -657,6 +673,11 @@ GLOBAL void c_internal_styles ( char *s )
 				qreplace_all(ptr, COLOR_AQUA, STYLELEN, "<span style=\"color: aqua;\">", 27);
 				qreplace_all(ptr, COLOR_OFF, STYLELEN, "</span>", 7);
 			}
+			/* New in V6.5.20 [GS] */
+			qreplace_all(ptr, SUP_ON,  STYLELEN, "<sup>", 5);
+			qreplace_all(ptr, SUP_OFF, STYLELEN, "</sup>", 6);
+			qreplace_all(ptr, SUB_ON,  STYLELEN, "<sub>", 5);
+			qreplace_all(ptr, SUB_OFF, STYLELEN, "</sub>", 6);
 
 			del_internal_styles(s);
 			break;
@@ -712,7 +733,7 @@ GLOBAL void c_internal_styles ( char *s )
 
 			del_internal_styles(s);
 			break;
-			
+
 		case TOKPS:
 			qreplace_all(ptr, BOLD_ON, STYLELEN,		") udoshow Bon (", 15);
 			qreplace_all(ptr, BOLD_OFF, STYLELEN,		") udoshow Boff (", 16);
@@ -805,6 +826,11 @@ GLOBAL void c_styles ( char *s )
 	qreplace_all(ptr, CMD_COLOR_TEAL, 7, 	COLOR_TEAL, STYLELEN);
 	qreplace_all(ptr, CMD_COLOR_AQUA, 7, 	COLOR_AQUA, STYLELEN);
 	qreplace_all(ptr, CMD_COLOR_OFF, 9, 	COLOR_OFF, STYLELEN);
+	/* New in V6.5.20 [GS] */	
+	qreplace_all(ptr, CMD_SUP_ON,  6, 	    SUP_ON, STYLELEN);
+	qreplace_all(ptr, CMD_SUP_OFF, 6,	    SUP_OFF, STYLELEN);
+	qreplace_all(ptr, CMD_SUB_ON,  6, 	    SUB_ON, STYLELEN);
+	qreplace_all(ptr, CMD_SUB_OFF, 6,	    SUB_OFF, STYLELEN);
 
 }	/* c_styles */
 
@@ -819,17 +845,17 @@ GLOBAL void check_styles ( char *s )
 {
 	char *ptr, *found;
 
-	
+
 	if (s[0]==EOS)	/* Leerer String? */
 	{	return;
 	}
-	
+
 	found= strstr(s, STYLEMAGIC);
-	
+
 	if (found==NULL)
 	{	return;
 	}
-	
+
 	/* ptr zeigt jeweils auf das erste Zeichen des Stylemagic \033\001 */
 	/* UDO ersetzt Befehle wie (!B) zunaechst durch eigene Escape-Befehle */
 	/* ESC-001-xxx-ESC, wobei xxx den jeweiligen Stil angibt */
@@ -837,7 +863,7 @@ GLOBAL void check_styles ( char *s )
 	do
 	{
 		ptr= found;
-		
+
 		switch ( (int) ptr[2])
 		{	case C_BOLD_ON:
 				if (styleflag.bold)			error_still_active(CMD_BOLD_ON);
@@ -928,13 +954,30 @@ GLOBAL void check_styles ( char *s )
 				if (!styleflag.colour)		error_not_active("Colour");
 				styleflag.colour= FALSE;
 				break;
+			/* New in V6.5.20 [GS] */
+			case C_SUP_ON:
+				if (styleflag.sup)  		error_still_active(CMD_SUP_ON);
+				styleflag.sup= TRUE;
+				break;
+			case C_SUP_OFF:
+				if (!styleflag.sup)		    error_not_active(CMD_SUP_ON);
+				styleflag.sup= FALSE;
+				break;
+			case C_SUB_ON:
+				if (styleflag.sub)  		error_still_active(CMD_SUB_ON);
+				styleflag.sub= TRUE;
+				break;
+			case C_SUB_OFF:
+				if (!styleflag.sub)		    error_not_active(CMD_SUB_ON);
+				styleflag.sub= FALSE;
+				break;
 		}	/* switch ptr[0] */
 
 		found= strstr(ptr+1, STYLEMAGIC);
 
 	}	while ( found!=NULL );
 
-		
+
 } /* check_styles */
 
 
@@ -951,6 +994,9 @@ GLOBAL void check_styleflags ( void )
 	if (styleflag.deleted)		error_still_active(CMD_DELETED_ON);
 	/* New in V6.5.9 [NHz] */
 	if (styleflag.colour)		error_still_active(CMD_COLOR_OFF);
+	/* New in V6.5.20 [GS] */
+	if (styleflag.sup)		    error_still_active(CMD_SUP_ON);
+	if (styleflag.sub)		    error_still_active(CMD_SUB_ON);
 
 }	/* check_styleflags */
 
@@ -960,7 +1006,7 @@ GLOBAL void check_verb_style ( void )	/* Pl13 */
 	if ((desttype==TOTEX || desttype==TOPDL) && styleflag.verbatim)
 	{	warning_split_verb();
 	}
-	
+
 }	/* check_verb_style */
 
 
@@ -1030,6 +1076,11 @@ GLOBAL void init_module_sty ( void )
 	sprintf(COLOR_TEAL,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_TEAL);
 	sprintf(COLOR_AQUA,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_AQUA);
 	sprintf(COLOR_OFF,	"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_OFF);
+	/* New in V6.5.9 [NHz] */
+	sprintf(SUP_ON,	    	"%s%c\033", ESC_STYLE_MAGIC, C_SUP_ON);
+	sprintf(SUP_OFF,    	"%s%c\033", ESC_STYLE_MAGIC, C_SUP_OFF);
+	sprintf(SUB_ON,	    	"%s%c\033", ESC_STYLE_MAGIC, C_SUB_ON);
+	sprintf(SUB_OFF,    	"%s%c\033", ESC_STYLE_MAGIC, C_SUB_OFF);
 
 	strcpy(sDrcBcolor, "\003O");
 	strcpy(sDrcIcolor, "\003O");
@@ -1039,4 +1090,3 @@ GLOBAL void init_module_sty ( void )
 /*	############################################################
 	# sty.c
 	############################################################	*/
-
