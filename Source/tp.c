@@ -319,50 +319,55 @@ GLOBAL BOOLEAN set_doclayout ( void )
         --------------------------------------------------------------  */
 LOCAL BOOLEAN init_docinfo_data ( char *data, char **var, int allow_empty )
 {
-        /* [voja][R6PL17] I needed to do the buffer creation first in this function,
-           elsewise you can't use memmove with compilers like GCC 3.x and
-           MS VS .net. An segmentation fault will occur (Bug #0000016).
-           I guess this is because of better memory protection techniques:
-           The *data coming in can be an constant(!) value. I think these compilers
-           write constant variable allocations to a protected memory region.
-           Writing to this region will crash...
-        */
-        char *buffer;
+   /* [voja][R6PL17] I needed to do the buffer creation first in this function,
+      elsewise you can't use memmove with compilers like GCC 3.x and
+      MS VS .net. An segmentation fault will occur (Bug #0000016).
+      I guess this is because of better memory protection techniques:
+      The *data coming in can be an constant(!) value. I think these compilers
+      write constant variable allocations to a protected memory region.
+      Writing to this region will crash...
+   */
+   char *buffer;
+   size_t len;
 
-        buffer= (char *) um_malloc (strlen(data)*sizeof(char)+1);
+   len = strlen(data)*sizeof(char);
+   len *=2;                 /* We need space if some text will be replace */
+   len++;                   /* End of string                              */
 
-        if (buffer) /* Check if the buffer could be allocated */
-        {
-                /* We copy now first the data to the buffer, this prevents
-                   bug #0000016 with modern compilers */
-                strcpy(buffer, data);
-                del_whitespaces(buffer);                /* Parameter was data */
-                c_divis(buffer);                                /* Parameter was data */
-                c_vars(buffer);                                 /* Parameter was data */
-                c_tilde(buffer);                                /* Parameter was data */
-                c_styles(buffer);                               /* Parameter was data */
-                del_internal_styles(buffer);    /* Parameter was data */
-                replace_udo_tilde(buffer);              /* Parameter was data */
-                replace_udo_nbsp(buffer);               /* Parameter was data */
-                replace_udo_quotes(buffer);             /* Parameter was data */
-                delete_all_divis(buffer);               /* Parameter was data */
+   buffer= (char *) um_malloc ( len );
 
-                if (data[0]==EOS && !allow_empty)
-                {       error_empty_docinfo();
-                        return FALSE;
-                }
+   if (buffer) /* Check if the buffer could be allocated */
+   {
+      /* We copy now first the data to the buffer, this prevents
+         bug #0000016 with modern compilers */
+      strcpy(buffer, data);
+      del_whitespaces(buffer);                /* Parameter was data */
+      c_divis(buffer);                        /* Parameter was data */
+      c_vars(buffer);                         /* Parameter was data */
+      c_tilde(buffer);                        /* Parameter was data */
+      c_styles(buffer);                       /* Parameter was data */
+      del_internal_styles(buffer);            /* Parameter was data */
+      replace_udo_tilde(buffer);              /* Parameter was data */
+      replace_udo_nbsp(buffer);               /* Parameter was data */
+      replace_udo_quotes(buffer);             /* Parameter was data */
+      delete_all_divis(buffer);               /* Parameter was data */
 
-                *var=buffer;
+      if (data[0]==EOS && !allow_empty)
+      {  error_empty_docinfo();
+         return FALSE;
+      }
 
-                return TRUE;
-        }
+      *var=buffer;
 
-        /* An error occured when allocating the buffer */
-        error_malloc_failed();
-        bFatalErrorDetected= TRUE;
-        return FALSE;
+      return TRUE;
+   }
 
-}       /* init_docinfo_data */
+   /* An error occured when allocating the buffer */
+   error_malloc_failed();
+   bFatalErrorDetected= TRUE;
+   return FALSE;
+
+}  /* init_docinfo_data */
 
 
 
@@ -710,9 +715,9 @@ GLOBAL void c_maketitle ( void )
         has_author=             (titdat.author!=NULL);
         has_address=            (address_counter>0);
         has_program=            (titdat.program!=NULL);
-        has_title=                      (titdat.title!=NULL);
+        has_title=              (titdat.title!=NULL);
         has_version=            (titdat.version!=NULL);
-        has_date=                       (titdat.date!=NULL);
+        has_date=               (titdat.date!=NULL);
         has_authorimage=        (titdat.authorimage!=NULL);
         has_programimage=       (titdat.programimage!=NULL);
         has_company=            (titdat.company!=NULL); /* New in V6.5.2 [NHz] */
@@ -1737,4 +1742,3 @@ GLOBAL void exit_module_tp ( void )
 /*      ############################################################
         # tp.c
         ############################################################    */
-           
