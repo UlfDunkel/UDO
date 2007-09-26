@@ -1196,7 +1196,9 @@ LOCAL void table_output_general ( void )
     {   output_begin_verbatim();
     }
 
+/* V6.5.20 [GS] old:
     outln("");
+*/
     
     if (tosrc)
     {   outln(sSrcRemOn);
