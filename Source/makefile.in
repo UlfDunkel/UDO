@@ -55,6 +55,8 @@ tp$(O):	$(HEAD) tp.h commands.h chr.h env.h file.h img.h msg.h \
 udo$(O):	$(HEAD) udo.h abo.h cfg.h chr.h env.h file.h img.h lang.h msg.h \
 		par.h str.h sty.h tab.h toc.h tp.h gui.h
 
+udomem$(O):	$(HEAD) udomem.h file.h
+
 install::	udo$(X)
 		install -d $(BIN)
 		install ./udo $(BIN)
