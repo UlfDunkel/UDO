@@ -31,10 +31,11 @@ StUpArgv.O
 ..\toc_html.c
 ..\tp.c
 ..\udo.c
+..\udomem.c
 ..\cli.c
 
 ; Die TOS-Bibliothek
-pctos.lib		; Moderner Ersatz (siehe http://acspro.atari.org)
+pctos.lib		; Moderner Ersatz (look at http://acspro.atari.org)
 ;pctoslib.lib	; Original Pure-C-Bibliothek
 
 ; Die Pure-C-Bibliotheken

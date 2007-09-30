@@ -62,7 +62,7 @@ const char *id_udo_c= "@(#) udo.c       $Date$";
 
 #include "export.h"
 #include "udo.h"		/* globale Prototypen				*/
-#include "udomem.h"             /* Memory-Management */
+#include "udomem.h"     /* Memory-Management                */
 
 
 
@@ -569,226 +569,6 @@ LOCAL const UDOCHARSET udocharset[MAXCHARSET]=
 GLOBAL char compile_date[11] = "\0";
 GLOBAL char compile_time[9]  = "\0";
 
-/*
- * New UDO Memory-Layer (new in 6.3.3)
- * Written by vj
- *
- * Use um_malloc instead of malloc, um_realloc instead of realloc and um_free instead of free.
- * Please don't use malloc, realloc or free in UDO.
- */
-long      um_malloc_count;                /* */
-long      um_free_count;                  /* */
-long      um_free_error_count;            /* */
-long      um_free_endbroken_count;        /* */
-int       memory_error;                   /* */
-char      endstring[] = UM_END_STRING;    /* */
-size_t    endstring_len;                  /* */
-MEMLIST  *anker;                          /* this is the anchor of our memory-usage list */
-
-/*
- * init_um() sets up the Memory-Layer
- */
-GLOBAL void init_um(void)
-{
-	/* Initialize Counters, anchor for memory-usage list, memory error indicator and the
-	 * lenght of the ending string
-	 */
-	um_malloc_count=0;
-	um_free_count=0;
-	um_free_error_count=0;
-	um_free_endbroken_count=0;
-	anker=NULL;
-	memory_error=0;
-	endstring_len=strlen(endstring)+1; /* plus 1 for the ending null-byte! */
-}
-/*
- * exit_um() frees all memory alocated by um_mallocs and makes consistency
- * checks on the memory blocks.
- */
-GLOBAL void exit_um(void)
-{
-#ifdef UM_DEBUG_SHOW_STATS
-	/* Added Debug information of Memory Management */
-#ifdef UM_PRINTF_USE_LD
-	printf("Memory statistic: %ld malloc, %ld free, %ld bad checks, %ld bad ends\n", um_malloc_count, um_free_count, um_free_error_count, um_free_endbroken_count);
-#else
-	printf("Memory statistic: %d malloc, %d free, %d bad checks, %d bad ends\n", um_malloc_count, um_free_count, um_free_error_count, um_free_endbroken_count);
-#endif
-#endif
-	/* Falls es jetzt noch belegten Speicher gibt, räumen wir den auf */
-	if (anker != NULL)
-	{
-		/* Hier wird die Speicherliste entlang gelaufen */
-#ifdef UM_DEBUG_SHOW_MSGS
-		printf("exit_um: Cleaning up\n");
-#endif
-		while ((memory_error==0)&&(anker != NULL))
-		{
-			um_free(anker->block); /* Wir geben den in der Liste gefundenen Speicherblock frei */
-		}
-#ifdef UM_DEBUG_SHOW_MSGS
-		printf("exit_um: done\n");
-#endif
-	}
-}
-
-GLOBAL void *um_malloc(size_t size)
-{
-	void *buffer;
-	MEMLIST *mptr;
-	buffer=NULL;
-
-	size+=endstring_len; /* We need to allocate more memory... */
-
-	buffer=malloc(size); /* Allocate Memory */
-	if (buffer != NULL)	/* Were we successfull? */
-	{
-		mptr=malloc(sizeof(MEMLIST)); /* Speicher für Verwaltungsinformationen anfordern */
-		if (mptr != NULL)
-		{
-			um_malloc_count++; /* Okay, we got our management unit */
-			mptr->check=UM_LONG_CHECK; /* Checksumme initialisieren */
-			mptr->block=buffer; /* Dieser Puffer gehört zu unserer Verwaltungseinheit */
-			mptr->endmark=(char *)buffer+size-endstring_len;
-			strcpy(mptr->endmark, endstring); /* copy ending string for checks */
-			/* Wir hängen uns vorne an die Liste an */
-			mptr->next=anker;
-			anker=mptr;
-#ifdef UM_DEBUG_SHOW_CALLS
-			printf("1 MEMLIST node created: %d\n", mptr->check, UM_LONG_CHECK);
-#endif
-		}
-		else
-		{
-			/* Konnte keinen Speicher für Verwaltungsinformationen anlegen */
-			free(buffer); /* buffer wieder freigeben */
-			buffer=NULL; /* Wir melden keinen freien Speicher zurück */
-		}
-	}
-	return buffer;
-}
-
-GLOBAL void *um_realloc(void *block, size_t size)
-{
-	int lauf=1;
-	void *buffer;
-	MEMLIST *tanker;
-	buffer=NULL;
-
-	tanker=anker; /* Laufvariable initialisieren */
-
-	size+=endstring_len; /* We need more memory for the ending string */
-
-	if ((tanker!=NULL)&&(memory_error==0))
-	{
-		do
-		{
-			if (tanker->check != UM_LONG_CHECK)
-			{
-				/* Speicherfehler: unsere Checksumme wurde überschrieben! */
-				lauf=0; /* Abbrechen, wenn die Zeiger überschrieben sind, könnte es krachen */
-				memory_error=42; /* Speicherfehler Flag setzen */
-#ifdef UM_PRINTF_USE_LD
-				printf("Fatal error: um_realloc failed: checksum broken: %ld != %ld\n", tanker->check, UM_LONG_CHECK);
-#else
-				printf("Fatal error: um_realloc failed: checksum broken: %d != %d\n", tanker->check, UM_LONG_CHECK);
-#endif
-			}
-			else
-			{
-				if (tanker->block==block) /* v6.3.6: checken, ob das aktuelle Element der gesuchte Block ist [vj] */
-				{
-					/* reallocate memory */
-					buffer=realloc(tanker->block, size);
-					/* Was this successfull? */
-					if (buffer != NULL)
-					{
-						/* We need to save the new buffer */
-						tanker->block=buffer;
-						tanker->endmark=(char *)buffer+size-endstring_len;
-						/* Copy ending string */
-						strcpy(tanker->endmark, endstring);
-					}
-					lauf=0; /* exit loop */
-				}
-				else
-				{
-					tanker=tanker->next; /* v6.3.12 [vj] Of course, we need this! */
-				}
-			}
-		} while ((tanker != NULL)&&(lauf==1));
-
-	}
-	return buffer;	
-}
-
-GLOBAL void um_free(void *memblock)
-{
-	int lauf=1;
-	MEMLIST *tanker=anker;
-	MEMLIST *last=NULL;
-
-	if ((tanker!=NULL)&&(memory_error==0))
-	{
-		do
-		{
-			if (tanker->check != UM_LONG_CHECK)
-			{
-				/* Speicherfehler: unsere Checksumme wurde überschrieben! */
-				lauf=0; /* Abbrechen, wenn die Zeiger überschrieben sind, könnte es krachen */
-				memory_error=42; /* Speicherfehler Flag setzen */
-				if (um_free_error_count==0)
-				{
-#ifdef UM_PRINTF_USE_LD
-					printf("Fatal error: um_free failed: checksum broken: %ld != %ld\n", tanker->check, UM_LONG_CHECK);
-#else
-					printf("Fatal error: um_free failed: checksum broken: %d != %d\n", tanker->check, UM_LONG_CHECK);
-#endif
-				}
-				um_free_error_count++;
-			}
-			else
-			{
-				/* Soll der aktuelle Eintrag freigegeben werden? */
-				if (memblock==tanker->block)
-				{
-					if (strcmp(tanker->endmark, endstring)!=0)
-					{
-						if (um_free_endbroken_count==0)
-						{
-							printf("Warning: um_free: memory block end check broken\n");
-#ifdef UM_DEBUG_SHOW_BUFFER_ON_FREE_ERROR
-							printf("Bufferstart: \"%s\"\n", (char *)tanker->block);
-							printf("Bufferende : \"%s\"\n", tanker->endmark);
-#endif
-						}
-						um_free_endbroken_count++;
-					}
-					um_free_count++;
-					free(tanker->block); /* Speicher freigeben */
-					/* Verwaltungselement aus der Kette aushängen */
-					if (last==NULL)
-					{
-						/* Wurzel neu setzen, da wir das erste Element der Liste freigeben */
-						anker=tanker->next;
-					}
-					else
-					{
-						/* Beim Vorgänger setzen wir nun den Next-Pointer auf unseren Nachfolger */
-						last->next=tanker->next;
-					}
-					free(tanker); /* Verwaltungsobjekt freigeben */
-					lauf=0; /* exit loop */
-				}
-				else
-				{
-					last=tanker;
-					tanker=tanker->next;
-				}
-			}
-		} while ((tanker != NULL)&&(lauf==1));
-	}
-}
 
 /*	######################################################################
 	#
@@ -4560,7 +4340,7 @@ LOCAL void check_parwidth (void)
    {
       zDocParwidth = MAXZEILE;
    }
-        
+
    switch (desttype)
    {
    case TOTVH:
@@ -5153,19 +4933,19 @@ size_t         sl,                     /* */
                len_silbe,              /* */
                len_token;              /* */
 
-               
+
    if (token_counter <= 0)
    {
       return;
    }
-   
+
    if (!bInsideDocument)
    {
       return;
    }
-   
+
    umbruch = zDocParwidth;
-   
+
    switch (desttype)
    {
    case TOSTG:                            /* ST-Guide */  
@@ -5177,11 +4957,11 @@ size_t         sl,                     /* */
          umbruch = 60;
       }
       break;
-   
+
    case TOMAN:                            /* Manualpage */
       umbruch = zDocParwidth - 5;
       break;
-   
+
    case TOHAH:                            /* HTML Apple Help - V6.5.17 */
    case TOHTM:                            /* HTML */
    case TOMHH:                            /* Microsoft HTML Help */
@@ -5197,7 +4977,7 @@ size_t         sl,                     /* */
    case TOSRP:                            /* */
       outln(sSrcRemOn);
    }
-   
+
    inside_center = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_CENT);
    inside_right  = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
    inside_left   = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_LEFT);
@@ -5205,18 +4985,18 @@ size_t         sl,                     /* */
    inside_env    = (iItemLevel > 0 || iEnumLevel > 0 || iDescLevel > 0 || iListLevel > 0);
    inside_short  = (iEnvLevel  > 0 && bEnvShort[iEnvLevel]);
    inside_fussy  = ( (!inside_center) && (!inside_right) && (!inside_left) && (!bDocSloppy) );
-   
+
    i = 0;
    z[0] = EOS;
    sIndent[0] = EOS;
    len_zeile = 0;
-   
-   
+
+
    if ( token[0][0] != ' ' && token[0][0] != INDENT_C)
    {
       strcat_indent(z);
    }
-   
+
    switch (desttype)
    {
    case TORTF:                            /* RTF */
@@ -5290,23 +5070,23 @@ size_t         sl,                     /* */
             }
          }
       }
-      
+
       break;
-   
+
    case TOIPF:                            /* OS/2 IPF */
       if (!inside_env)
       {
          strcat(z, ":p.");
       }
       break;
-   
+
    case TOLDS:                            /* Linuxdoc-SGML */
       if (inside_quote)
       {
          outln("<quote>");
       }
       break;
-   
+
    case TOLYX:                            /* LyX */
       if (iEnvLevel == 0)
       {
@@ -5320,19 +5100,19 @@ size_t         sl,                     /* */
             outln("\\layout Standard");
             outln("\\align center");
          }
-         
+
          if (inside_right)
          {
             outln("\\align right");
          }
-         
+
          if (!tokens_contain_item && !inside_center)
          {
             outln("\\newline");
          }
       }
       break;
-   
+
    case TOKPS:                            /* */
       if (inside_env)
       {
@@ -5345,16 +5125,16 @@ size_t         sl,                     /* */
             outln(" newline");
          }
       }
-      
+
       out("(");
       break;
 
-      
+
    default:                               /* */
       to_check_quote_indent(&umbruch);
-    
+
    }  /* switch (desttype) */
-   
+
 
    if (format_protect_commands)
    {
@@ -5365,7 +5145,7 @@ size_t         sl,                     /* */
          strcpy(z, sIndent);
       }
    }
-   
+
    if (desttype == TORTF)
    {
       if (iEnvLevel == 0)
@@ -5374,19 +5154,19 @@ size_t         sl,                     /* */
          voutf("%s\\fs%d ", rtf_norm, iDocPropfontSize);
       }
    }
-   
+
    while (i < token_counter)
    {
       use_token = TRUE;
-   
+
       switch (desttype)
       {
       case TOPCH:
          c_pch_styles(token[i]);
-         
+
       }  /*switch*/
-   
-   
+
+
       if (token[i][1] == META_C && token[i][2] != QUOTE_C)
       {
                                           /* vorzeitiger Zeilenumbruch? */
@@ -5395,22 +5175,22 @@ size_t         sl,                     /* */
             newline = TRUE;
             just_linefeed = TRUE;
             use_token = FALSE;
-      
-            
+
+
             switch (desttype)
             {       
             case TOTEX:
             case TOPDL:
                um_strcpy(token[i], "\\\\", MAX_TOKEN_LEN+1, "token_output[1]");
                break;
-      
+
             case TOLYX:
                um_strcpy(token[i], "\n\\newline\n", MAX_TOKEN_LEN+1, "token_output[2]");
                break;
-      
+
             case TOKPS:
                um_strcpy(token[i], ") udoshow newline\n(", MAX_TOKEN_LEN+1, "token_output[3]");
-               
+
                /* New in V6.5.5 [NHz] */
                replace_all(token[i], ")", KPSPC_S);
                replace_all(token[i], "(", KPSPO_S);
@@ -5423,7 +5203,7 @@ size_t         sl,                     /* */
             case TOIPF:
                um_strcpy(token[i], ".br\n", MAX_TOKEN_LEN+1, "token_output[5]");       /*r6pl3*/
                break;
-               
+
             case TOINF:
                token[i][0]= EOS;
 
@@ -5432,7 +5212,7 @@ size_t         sl,                     /* */
                   strcat(z, "@*");
                }
                break;
-               
+
             case TORTF:
                if (iEnvLevel > 0)
                {
@@ -5442,48 +5222,48 @@ size_t         sl,                     /* */
                   case ENV_ENUM:
                      um_strcpy(token[i], "\\par\\tab\\tab ", MAX_TOKEN_LEN+1, "token_output[6]");
                      break;
-                     
+
                   case ENV_DESC:
                   case ENV_LIST:
                      um_strcpy(token[i], "\\par\\tab ", MAX_TOKEN_LEN+1, "token_output[7]");
                      break;
-                  
+
                   default:
                      um_strcpy(token[i], "\\par ", MAX_TOKEN_LEN+1, "token_output[8]");
-                     
+
                   }  /* switch (iEnvType[iEnvLevel]) */ 
-                  
+
                }  /* if (iEnvLevel > 0) */
-               
+
                else
                {
                   um_strcpy(token[i], "\\par ", MAX_TOKEN_LEN+1, "token_output[9]");
                }
                break;
-               
+
             case TOWIN:
             case TOWH4:
             case TOAQV:
                um_strcpy(token[i], "\\line ", MAX_TOKEN_LEN+1, "token_output[10]");
                insert_speccmd(token[i], token[i], token[i]);
                break;
-               
+
             case TOHAH:             /* V6.5.17 */
             case TOHTM:
             case TOMHH:
                um_strcpy(token[i], HTML_BR, MAX_TOKEN_LEN+1, "token_output[11]");
                break;
-               
+
             case TOLDS:
             case TOHPH:
                um_strcpy(token[i], "<newline>", MAX_TOKEN_LEN+1, "token_output[12]");
                break;
-               
+
             default:
                token[i][0]= EOS;
 
             }  /* switch (desttype) */
-            
+
          }  /* if (strcmp(token[i], "(!nl)") == 0) */
 
       }   /* if (token[i][1] == META_C && token[i][2] != QUOTE_C) */
@@ -5500,7 +5280,7 @@ size_t         sl,                     /* */
          replace_all(token[i], ")", "\\)");
          qreplace_all(token[i], KPSPC_S, KPSPC_S_LEN, ")", 1);
          qreplace_all(token[i], KPSPO_S, KPSPO_S_LEN, "(", 1);
-         
+
       }  /* switch (desttype) */
 
 
@@ -5509,7 +5289,7 @@ size_t         sl,                     /* */
       {
          len_zeile = toklen(z);
          len_token = toklen(token[i]);
-   
+
          if ( (len_zeile + len_token) <= umbruch)
          {
             /* Das naechste Token hat noch Platz in der Zeile */
@@ -5525,10 +5305,10 @@ size_t         sl,                     /* */
                {
                   strcat(z, " ");
                }
-               
+
                /* New in r6pl15 [NHz] */
                /* Capture first blank in string for a better appearance */
-               
+
                if ((inside_env) && (desttype == TOKPS))
                {
                   BOOLEAN   replaced_blank = TRUE;  /* */
@@ -5540,20 +5320,20 @@ size_t         sl,                     /* */
                   }
                   while (replaced_blank);
                }
-               
+
                len_zeile += (len_token + 1);
-               
+
             } /* if (token[i][0] != EOS) */
-            
+
             newline= FALSE;
-            
+
          } /* if ( (len_zeile + len_token) <= umbruch) */
 
          else
          {
             /* Die Zeile wird zu lang, also zur Ausgabe vorbereiten */
             newline = TRUE;
-   
+
             switch(desttype)
             {
             case TOASC:
@@ -5562,15 +5342,15 @@ size_t         sl,                     /* */
             case TOSTG:
             case TOAMG:
             case TOPCH:
-             
+
                /* Schauen, ob das "ueberhaengende" Wort in den Trennvorschlaegen steckt */
                replace_hyphens(token[i]);
                str2silben(token[i]);
-   
+
                if (silben_counter >= 0)
                {
                   silb = 0;        /* Zaehler der naechsten Silbe */
-   
+
                   /* len_zeile= toklen(z);: unveraendert */
                   len_silbe = toklen(silbe[silb]);
 
@@ -5582,14 +5362,14 @@ size_t         sl,                     /* */
                      len_silbe = toklen(silbe[silb]);
 
                   } /* while */
-   
+
                   if (silb > 0)
                   {
                      /* An die Zeile wurden Silben angehaengt */
                      /* In ihr befinden sich u.U. noch DIVIS_C */
                      /* Daher das letzte DIVIS_C in "-" umwandeln, */
                      /* anderen entfernen */
-                     
+
                      sl = strlen(z);
 
                      if (z[sl - 1] == DIVIS_C)
@@ -5604,7 +5384,7 @@ size_t         sl,                     /* */
                      }
 
                      delete_all_divis(z);
-   
+
                      /* Nun noch die restlichen Silben in das */
                      /* naechste Token uebertragen */
 
@@ -5616,7 +5396,7 @@ size_t         sl,                     /* */
                      }
 
                      delete_all_divis(token[i]);
-   
+
                   } /* if (silb > 0) */
 
                } /* if (silben_counter >= 0) */
@@ -5626,7 +5406,7 @@ size_t         sl,                     /* */
          } /* if..else */
 
       } /* if (use_token) */
-   
+
 
 
       if (newline)
@@ -5634,7 +5414,7 @@ size_t         sl,                     /* */
          check_styles(z);
          replace_udo_quotes(z);
          delete_all_divis(z);
-   
+
          /* Zeilen zentrieren? */
          if (inside_center)
          {
@@ -5652,12 +5432,12 @@ size_t         sl,                     /* */
                del_right_spaces(z);
                strcenter(z, umbruch);
                break;
-            
+
             case TOINF:
                strinsert(z, "@center ");
             }
          }
-      
+
          if (inside_right)
          {
             switch(desttype)
@@ -5675,80 +5455,80 @@ size_t         sl,                     /* */
                strright(z, umbruch);
             }
          }
-      
+
          switch(desttype)
          {
          case TOTEX:
             replace_hyphens(z);
             indent2space(z);
-            
+
             if (strncmp(z, "\\\\[", 3) == 0)
             {
                qreplace_once(z, "[", 1, "{\\symbol{91}}", 13);
             }
-            
+
             auto_references(z, FALSE, "", 0, 0);
             break;
-            
+
          case TOPDL:
             auto_references(z, FALSE, "", 0, 0);
             break;
-            
+
          case TOLYX:
             c_internal_styles(z);
             indent2space(z);
             break;
-   
+
          case TORTF:
             c_rtf_styles(z);
             c_rtf_quotes(z);
             break;
-            
+
          case TOWIN:
          case TOWH4:
          case TOAQV:
             c_win_styles(z);
-            
+
             /* Einen kleinen Maengel der Umgebungen TAB+SPACE beseitigen */
             qreplace_all(z, "\\tab  ", 6, "\\tab ", 5);
             auto_references(z, FALSE, "", 0, 0);
             break;
-            
+
          case TOPCH:
             auto_references(z, FALSE, "", 0, 0);
             break;
-            
+
          case TOHAH:             /* V6.5.17 */
          case TOHTM:
          case TOMHH:
             c_internal_styles(z);
             auto_references(z, FALSE, "", 0, 0);
             break;
-            
+
          case TOHPH:
             break;
-            
+
          case TOTVH:
             auto_references(z, FALSE, "", 0, 0);
             break;
-            
+
          case TOIPF:
             auto_references(z, FALSE, "", 0, 0);
             break;
-            
+
          case TOAMG:
             auto_references(z, FALSE, "", 0, 0);
             break;
-            
+
          default:
             break;
          }
-   
-   
-   
+
+
+
          /* Kurze Zeilen bemaengeln, wenn sloppy nicht gesetzt ist */
          /* <???> "i + 1 < token_counter", nicht "i < token_counter"? */
-      
+
          if ( (inside_fussy) && (z[0] != EOS) && (i + 1 < token_counter) && (!just_linefeed) )
          {
             switch(desttype)
@@ -5763,10 +5543,10 @@ size_t         sl,                     /* */
                /* z wurde, ausser bei der Zentrierung  */
                /* nicht veraendert. len_zeile hat also */
                /* noch den richtigen Wert. */
-   
+
                len_zeile = toklen(z);
 #endif
-   
+
                if (use_justification && !inside_left)
                {
                   if (len_zeile < umbruch - 9)
@@ -5781,12 +5561,12 @@ size_t         sl,                     /* */
                      warning_short_line(len_zeile, token[i]);
                   }
                }
-               
+
             }       /* switch */
-            
+
          }       /* if */
-      
-   
+
+
          if ( use_justification )
          {
             if (i < token_counter && !just_linefeed && !inside_center && !inside_right && !inside_left)
@@ -5805,18 +5585,18 @@ size_t         sl,                     /* */
                   strjustify(z, (size_t) umbruch);
                }
             }
-   
+
             indent2space(z);
          }
-      
+
          replace_placeholders(z);
          replace_speccmds(z);
          c_internal_styles(z);
-      
+
          replace_udo_tilde(z);
          replace_udo_nbsp(z);
-      
-   
+
+
          switch (desttype)                   /* Letztes Leerzeichen entfernen */
          {
          case TORTF:
@@ -5825,28 +5605,28 @@ size_t         sl,                     /* */
          case TOAQV:
          case TOLYX:
             break;
-         
+
          default:
             del_right_spaces(z);
          }
-      
-   
+
+
          switch (desttype)                       
          {
          case TOMAN:
             strinsert(z, "     ");
             break;
-            
+
          case TOSRC:
          case TOSRP:
             strinsert(z, "    ");
             break;
-   
+
          case TONRO:
             qreplace_all(z, "\n ", 2, "\n", 1);
             qreplace_all(z, "\n\n", 2, "\n", 1);
             break;
-            
+
          case TOKPS:
             /* Deleted in r6pl16 [NHz] */
             /* No special line end within a paragraph  for PS anymore */
@@ -5855,38 +5635,38 @@ size_t         sl,                     /* */
    /*          replace_last (z, "\n", " \n");
    */
          }
-      
-      
+
+
          if (format_uses_output_buffer && use_output_buffer)
          {
             insert_nl_token_buffer();
          }
-      
+
          /* r5pl14: Fuer STG wieder ein Leerzeichen anhaengen, damit HypC */
          /* daran erkennen kann, dass der Absatz noch nicht zuende ist */
          /* Das Leerzeichen muss oben entfernt werden, da sonst der */
          /* Blocksatz weiter oben nicht richtig erzeugt wird! */
-      
+
          if (desttype == TOSTG && !just_linefeed)
          {
             strcat(z, " ");
          }
-      
+
          if (!no_effects && desttype == TOASC)
          {
             /* Offene Effekte am Zeilenende beenden */
             /* und unten in der naechsten Zeile oeffnen */
-            
+
             check_styles_asc_last_line(z);
          }
-      
+
          /* Endlich kann die Zeile ausgegeben werden */
          outln(z);
-      
+
          /* Schonmal die naechste Zeile vorbereiten. */
          z[0] = EOS;
          len_zeile = 0;
-      
+
          switch (desttype)
          {
          case TORTF:
@@ -5895,21 +5675,21 @@ size_t         sl,                     /* */
          case TOAQV:
             to_check_rtf_quote_indent(z);
             break;
-         
+
          default:
             strcat_indent(z);
          }
-      
+
          if (format_protect_commands)
          {
             strcpy(sIndent, z);
-   
+
             if (insert_speccmd(sIndent, sIndent, sIndent))
             {
                strcpy(z, sIndent);
             }
          }
-      
+
          if (!no_effects)
          {
             switch (desttype)
@@ -5917,14 +5697,14 @@ size_t         sl,                     /* */
             case TODRC:
                check_styles_drc_next_line();
                break;
-   
+
             case TOASC:
                check_styles_asc_next_line();
             }
          }
-      
+
          strcat(z, token[i]);
-      
+
          if (!just_linefeed)
          {
             strcat(z, " ");
@@ -5933,20 +5713,20 @@ size_t         sl,                     /* */
          {
             just_linefeed = FALSE;
          }
-      
+
       } /* if (newline) */
-   
+
       i++;
 
    }  /* while (i < token_counter) */
 
-   
+
    if (z[0] != EOS)
    {
       check_styles(z);
       replace_udo_quotes(z);
       delete_all_divis(z);
-   
+
       if (inside_center)
       {
          switch(desttype)
@@ -5963,12 +5743,12 @@ size_t         sl,                     /* */
             del_right_spaces(z);
             strcenter(z, umbruch);
             break;
-         
+
          case TOINF:
             strinsert(z, "@center ");
          }
       }
-   
+
       if (inside_right)
       {
          switch(desttype)
@@ -5986,13 +5766,13 @@ size_t         sl,                     /* */
             strright(z, umbruch);
          }
       }
-   
+
       switch (desttype)
       {
       case TOTEX:
          replace_hyphens(z);
          indent2space(z);
-         
+
          if (strncmp(z, "\\\\[", 3) == 0)
          {
             qreplace_once(z, "[", 1, "{\\symbol{91}}", 13);
@@ -6000,21 +5780,21 @@ size_t         sl,                     /* */
 
          auto_references(z, FALSE, "", 0, 0);
          break;
-         
+
       case TOPDL:
          auto_references(z, FALSE, "", 0, 0);
          break;
-         
+
       case TOLYX:
          c_internal_styles(z);
          indent2space(z);
          break;
-         
+
       case TORTF:
          c_rtf_styles(z);
          c_rtf_quotes(z);        /* r5pl6 */
          break;
-         
+
       case TOWIN:
       case TOWH4:
       case TOAQV:
@@ -6023,49 +5803,49 @@ size_t         sl,                     /* */
          qreplace_all(z, "\\tab  ", 6, "\\tab ", 5);
          auto_references(z, FALSE, "", 0, 0);
          break;
-         
+
       case TOPCH:
          auto_references(z, FALSE, "", 0, 0);
          break;
-         
+
       case TOHAH:             /* V6.5.17 */
       case TOHTM:
       case TOMHH:
          c_internal_styles(z);
          auto_references(z, FALSE, "", 0, 0);
          break;
-         
+
       case TOHPH:
          break;
-         
+
       case TOTVH:
          auto_references(z, FALSE, "", 0, 0);
          break;
-         
+
       case TOIPF:
          auto_references(z, FALSE, "", 0, 0);
          break;
-         
+
       case TOAMG:
          auto_references(z, FALSE, "", 0, 0);
          break;
-         
+
       default:
          break;
       }
-   
+
       if (use_justification)
       {
          indent2space(z);
       }
-   
+
       replace_placeholders(z);
       replace_speccmds(z);
       c_internal_styles(z);
-   
+
       replace_udo_tilde(z);
       replace_udo_nbsp(z);
-   
+
       /* Letztes Leerzeichen entfernen */
       switch (desttype)
       {
@@ -6075,11 +5855,11 @@ size_t         sl,                     /* */
       case TOAQV:
       case TOLYX:
          break;
-      
+
       default:
          del_right_spaces(z);
       }
-   
+
       switch (desttype)
       {
       case TOMAN:
@@ -6095,16 +5875,16 @@ size_t         sl,                     /* */
          qreplace_all(z, "\n ", 2, "\n", 1);
          qreplace_all(z, "\n\n", 2, "\n", 1);
          break;
-         
+
       case TOKPS:
          strcat(z, ") udoshow");
       }
-   
+
       if (format_uses_output_buffer && use_output_buffer)
       {
          insert_nl_token_buffer();
       }
-   
+
       switch (desttype)                   /* This is the last content line of a section */
       {
       case TOHAH:                         /* HTML Apple Help */
@@ -6112,19 +5892,19 @@ size_t         sl,                     /* */
       case TOMHH:                         /* Microsoft HTML Help */
          out(z);                          /* don't close last line in paragraph! */
          break;
-         
+
       default:
          outln(z);                        /* normal line output */
       }
 
-   
+
    }  /* if (z[0] != EOS) */
-   
+
    check_verb_style();     /* r5pl16 */
-   
+
    /* Leerzeilen dann ausgeben, wenn der Absatz sich nicht in einer */
    /* komprimierten Umgebung befindet. */
-   
+
    if (inside_short)
    {
       switch (desttype)
@@ -6135,32 +5915,32 @@ size_t         sl,                     /* */
       case TORTF:
          outln(rtf_parpard);
          break;
-         
+
       case TOSRC:
       case TOSRP:
          outln(sSrcRemOff);
          break;
-         
+
       case TOHAH:             /* V6.5.17 */
       case TOHTM:
       case TOMHH:
          html_ignore_p = FALSE;
          break;
-         
+
       case TOTEX:
       case TOPDL:
          outln("");
          break;
-         
+
       case TOKPS:
          /* Deleted in r6pl15 [NHz] */
 /*       outln("newline");
 */
          break;
       }
-      
+
    }  /* if (inside_short) */
-   
+
    else
    {
       switch (desttype)
@@ -6171,7 +5951,7 @@ size_t         sl,                     /* */
       case TORTF:
          outln("\\par\\pard\\par");
          break;
-         
+
       case TOHAH:             /* V6.5.17 */
       case TOHTM:
       case TOMHH:
@@ -6209,14 +5989,14 @@ size_t         sl,                     /* */
       case TOHPH:
          outln("");
          break;
-         
+
       case TONRO:
          if (!inside_env)
          {
             outln("");
          }
          break;
-         
+
       case TOLDS:
          if (inside_quote)
          {
@@ -6227,44 +6007,44 @@ size_t         sl,                     /* */
             outln("");
          }
          break;
-   
+
       case TOINF:
          if (inside_center)
          {
             outln("@center");
          }
-   
+
          outln("");
          break;
-         
+
       case TOSRC:
       case TOSRP:
          outln(sSrcRemOff);
          break;
-         
+
       case TOIPF:
          break;
-         
+
       case TOKPS:
          /* Changed in r6pl15 [NHz] */
          outln("newline");
 /*       outln("newline newline");
 */
          break;
-   
+
       default:
          outln("");
       }
    }
-   
+
    token_reset();
-   
+
    if (reset_internals)
    {
       reset_placeholders();
       reset_refs();
    }
-   
+
 #if 1
    reset_speccmds();
 #endif

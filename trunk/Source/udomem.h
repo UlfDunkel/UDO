@@ -65,6 +65,8 @@ typedef struct _memory_list
 	long check;
 	void *block;
 	char *endmark;
+	char file[30];
+	int line;
 	struct _memory_list *next;
 } MEMLIST;
 /*
@@ -72,7 +74,8 @@ typedef struct _memory_list
  */
 GLOBAL void init_um(void);
 GLOBAL void exit_um(void);
-GLOBAL void *um_malloc(size_t size);
+GLOBAL void *um_malloc2(size_t size, char *file, int line );
+#define um_malloc(size) um_malloc2(size, __FILE__, __LINE__ )
 GLOBAL void *um_realloc(void *block, size_t size);
 GLOBAL void um_free(void *memblock);
 #endif
