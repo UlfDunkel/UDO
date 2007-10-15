@@ -332,7 +332,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.listtable,  "Lista di Tabelle");
       strcpy(lang.figure,     "Figura");
       strcpy(lang.table,      "Tabella");
-      strcpy(lang.index,      "Index");
+      strcpy(lang.index,      "Indice");
       strcpy(lang.page,       "pagina");
       strcpy(lang.see,        "vedere");
       strcpy(lang.also,       "vedere anche");
@@ -341,7 +341,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.up,         "S&u");
       strcpy(lang.exit,       "Uscita");
       strcpy(lang.unknown,    "Ignoto");
-      strcpy(lang.update,     "Last updated on");
+      strcpy(lang.update,     "Ultimo aggiornamento");
       strcpy(lang.lcid,       "LCID=0x410 0x0 0x0 ;Italian (Italy)");
       strcpy(lang.html_home,  "Home");
       strcpy(lang.html_up,    "Up");
