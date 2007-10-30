@@ -3916,27 +3916,29 @@ GLOBAL BOOLEAN save_html_index ( void )
    char *tocname;
    char *escapedtocname;
 
-   /* at first wie count how much we need */
+   /* first we count how much we need */
    num_index = 0;
+	
    for (j = 1; j <= p1_lab_counter; j++)
       if (lab[j] != NULL && lab[j]->ignore_index == FALSE)
          num_index++;
 
    if (num_index == 0)
-      return FALSE;   /* Index-File will not needed */
+      return FALSE;   /* Index file will not be created */
 
    udofile_adjust_index();
 
    uif= myFwopen(udofile.full, TOASC);
 
    if (!uif)
-   {  return FALSE;
+   {
+      return FALSE;
    }
 
    fprintf(uif, "!newpage\n");
    fprintf(uif, "!code [sys]\n");
    fprintf(uif, "!sloppy\n\n");
-   fprintf(uif, "!node* Index\n");
+   fprintf(uif, "!node* %s\n", lang.index);
    fprintf(uif, "!html_name indexudo\n" );
    if (!bDocAutorefOff)
    {  fprintf(uif, "!autoref [off]\n");
