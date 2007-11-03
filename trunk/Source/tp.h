@@ -75,8 +75,8 @@ typedef struct _titledata			/* ---- Titelseiteninfos ----		*/
 typedef struct
 {
 	char *paper;										/* Papierformat */
-	unsigned int width_mm;					/* Breite */
-	unsigned int height_mm;					/* H”he */
+	unsigned int width_mm10;				/* Breite in 10tel mm */
+	unsigned int height_mm10;				/* H”he */
 	unsigned int width_pt;
 	unsigned int height_pt;
 	unsigned int margintop_pt;

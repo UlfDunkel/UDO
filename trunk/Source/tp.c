@@ -758,6 +758,7 @@ GLOBAL void c_maketitle ( void )
                                                 c_end_center();
                                                 break;
                                         case TEX_EMTEX:
+                                        case TEX_MIKTEX:  /* V6.5.20 [CS] */
                                                 c_begin_center();
                                                 c_msp_output(titdat.programimage, "", FALSE);
                                                 c_end_center();
@@ -797,6 +798,7 @@ GLOBAL void c_maketitle ( void )
                                                 c_end_center();
                                                 break;
                                         case TEX_EMTEX:
+                                        case TEX_MIKTEX:  /* V6.5.20 [CS] */
                                                 c_begin_center();
                                                 c_msp_output(titdat.authorimage, "", FALSE);
                                                 c_end_center();

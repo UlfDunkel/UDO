@@ -940,7 +940,7 @@ GLOBAL void c_bmp_output ( const char *name, const char *caption, const BOOLEAN 
 			/* Hier muessen noch die Breite und Hoehe des Bildes in pt(!) */
 			/* eingetragen werden */
 			
-			if (iTexVersion==TEX_EMTEX)
+			if (iTexVersion==TEX_EMTEX || iTexVersion==TEX_MIKTEX) /* V6.5.20 [CS] */
 			{	
 				replace_char(datei, "\\", "/");
 				outln("");
@@ -1081,7 +1081,7 @@ GLOBAL BOOLEAN c_msp_output ( const char *name, const char *caption, const BOOLE
 	switch (desttype)
 	{
 		case TOTEX:
-			if (iTexVersion==TEX_EMTEX)
+			if (iTexVersion==TEX_EMTEX || iTexVersion==TEX_MIKTEX) /* V6.5.20 [CS] */
 			{	if ( !get_mspheader(datei, &mspheader) )
 				{	error_read_msp(datei);
 					bErrorDetected= TRUE;
@@ -1169,7 +1169,7 @@ GLOBAL BOOLEAN c_pcx_output ( const char *name, const char *caption, const BOOLE
 	switch (desttype)
 	{
 		case TOTEX:
-			if (iTexVersion==TEX_EMTEX)
+			if (iTexVersion==TEX_EMTEX || iTexVersion==TEX_MIKTEX) /* V6.5.20 [CS] */
 			{	if ( !get_pcxheader(datei, &pcxheader) )
 				{	error_read_pcx(datei);
 					bErrorDetected= TRUE;
@@ -1375,7 +1375,14 @@ GLOBAL void c_png_output ( const char *name, const char *caption, const char *su
 
 	outln("\\mbox{");
 	/* Changed in V6.5.7 [NHz] */
+/* New V6.5.20 [CS] */
+	/* Rechne Zielbreite in mm aus : */
+  /* uiWidth sind Pixel. 90 dpi. Verkleinere so, dass 180 dpi. Dann auf mm */
+	/* umrechnen, also: uiWidth / 180 * 25.4                                  */
+	voutlnf("\\pdfximage width %umm {%s}\\pdfrefximage\\pdflastximage", uiWidth*254/1800, datei);
+/* old:
 	voutlnf("\\pdfximage{%s}\\pdfrefximage\\pdflastximage", datei);
+*/
 	outln("}");
 
 	if ( caption[0]!=EOS )

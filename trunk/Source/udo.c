@@ -2397,7 +2397,13 @@ LOCAL void c_subheading ( void )
 		case TOTEX:
 		case TOPDL:
 			c_internal_styles(name);
+/* V6.5.20 [CS] */
+			{	(use_style_book)	? voutlnf("\n\\section*{%s}", name)
+				: voutlnf("\n\\subsection*{%s}", name);
+			}
+/* old:
 			voutlnf("{\\large{\\bf %s}}", name);
+*/
 			outln("");
 			break;
 		case TOINF:
@@ -2519,7 +2525,13 @@ LOCAL void c_subsubheading ( void )
 		case TOTEX:
 		case TOPDL:
 			c_internal_styles(name);
+/* V6.5.20 [CS] */
+			{	(use_style_book)	? voutlnf("\n\\subsection*{%s}", name)
+				: voutlnf("\n\\subsubsection*{%s}", name);
+			}
+/* old:
 			voutlnf("{\\normalsize{\\bf %s}}", name);
+*/
 			outln("");
 			break;
 		case TOINF:
@@ -2641,7 +2653,13 @@ LOCAL void c_subsubsubheading ( void )
 		case TOTEX:
 		case TOPDL:
 			c_internal_styles(name);
+/* V6.5.20 [CS] */
+			{	(use_style_book)	? voutlnf("\n\\subsubsection*{%s}", name)
+				: voutlnf("\n\\subsubsubsection*{%s}", name);
+			}
+/* old:
 			voutlnf("{\\normalsize{\\bf %s}}", name);
+*/
 			outln("");
 			break;
 		case TOINF:
@@ -3827,12 +3845,10 @@ LOCAL void convert_image ( const BOOLEAN visible )
 					c_img_output(filename, caption, visible);
 					break;
 				case TEX_EMTEX:
+				case TEX_MIKTEX:  /* V6.5.20 [CS] */
 					if ( !c_msp_output(filename, caption, visible) )
 					{	c_pcx_output(filename, caption, visible);
 					}
-					break;
-				case TEX_MIKTEX:
-					/* <???> */
 					break;
 				case TEX_TETEX:
 					c_eps_output(filename, caption, ".eps", visible);
@@ -6661,12 +6677,13 @@ LOCAL void output_preamble ( void )
 		case TOTEX:
 		case TOPDL:
 			if (bTex2e)
-			{	strcpy(s, "\\documentclass[11pt]");
+			{	strcpy(s, "\\documentclass[10pt]");
+				/* v6.5.20 [CS] was 11pt */
 				if (use_style_book)
-				{	strcat(s, "{book}");
+				{	strcat(s, "{scrbook}");			/*was: {book} */
 				}
 				else
-				{	strcat(s, "{article}");
+				{	strcat(s, "{scrartcl}");		/*was: {article} */
 				}
 				outln(s);
 				s[0]= EOS;
@@ -6695,6 +6712,9 @@ LOCAL void output_preamble ( void )
 				}
 				/* New in V6.5.8 [NHz] */
 				outln("\\usepackage{eurosym}");
+				/* New in V6.5.20 [CS] */
+				outln("\\usepackage{times}");
+
 				if (desttype==TOPDL)	/* r6pl8*/
 				{	outln("\\pdfoutput=1\\relax");
 					if (bDocMediumCompression)

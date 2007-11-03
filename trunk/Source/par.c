@@ -833,8 +833,11 @@ LOCAL BOOLEAN convert_link_pdf ( char *s, const char *p0, char *p1, char *p2, co
 		{	dest= li;
 		}
 		/* Changed in r6.2pl1 [NHz] */
-		sprintf(s_entry, "{\\pdfstartlink goto num %d\n%s\\pdfendlink}",
-			dest, p1);
+/* V6.5.20 [CS] Start */
+		sprintf(s_entry, "\\hidelink{\\pdfstartlink goto num %d %s\\pdfendlink}", dest, p1);
+/* old:
+		sprintf(s_entry, "{\\pdfstartlink goto num %d\n%s\\pdfendlink}", dest, p1);
+*/
 	}
 	else
 	{	/* Node, Alias oder Label nicht definiert */

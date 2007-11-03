@@ -82,12 +82,12 @@ LOCAL int		pre_linedraw_charset;
 /* New in r6pl15 [NHz] */
 LOCAL const PAPERFORMAT paperSize[MAXPAPERSIZE]=
 {
-	{ "A3PORTRAIT", 297, 420, 842, 1191, 1136, 85, 780, 72, 0, 0, FALSE },
-	{ "A3LANDSCAPE", 420, 297, 1191, 842, 780, 72, 1119, 72, 0, 0, TRUE },
-	{ "A4PORTRAIT",	210, 297, 595, 842, 780, 85, 540, 72, 0, 0, FALSE },
-	{ "A4LANDSCAPE", 297, 210, 842, 595, 530, 72, 770, 72, 0, 0, TRUE },
-	{ "A5PORTRAIT", 148.5, 210, 421, 595, 530, 85, 366, 72, 0, 0, FALSE },
-	{ "A5LANDSCAPE", 210, 148.5, 595, 421, 356, 72, 523, 72, 0, 0, TRUE },
+	{ "A3PORTRAIT", 2970, 4200, 842, 1191, 1136, 85, 780, 72, 0, 0, FALSE },
+	{ "A3LANDSCAPE", 4200, 2970, 1191, 842, 780, 72, 1119, 72, 0, 0, TRUE },
+	{ "A4PORTRAIT",	2100, 2970, 595, 842, 780, 85, 540, 72, 0, 0, FALSE },
+	{ "A4LANDSCAPE", 2970, 2100, 842, 595, 530, 72, 770, 72, 0, 0, TRUE },
+	{ "A5PORTRAIT", 1485, 2100, 421, 595, 530, 85, 366, 72, 0, 0, FALSE },
+	{ "A5LANDSCAPE", 2100, 1485, 595, 421, 356, 72, 523, 72, 0, 0, TRUE },
 };
 
 
@@ -2899,6 +2899,7 @@ GLOBAL void c_end_itemize ( void )
 
 LOCAL void output_tex_environments(void)
 {
+	outln("\\def\\hidelink#1{}");		/* V6.5.20 [CS] */
 	outln("");
 	outln("\\begin{document}");
 	outln("");

@@ -205,7 +205,7 @@ GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf )
 			return NULL;
 		}
 		string[sl] = '\0';
-		
+
 		/* v6.5.9 [me] den String am Ende der Zeile krzen und */
 		/*             die passende Anzahl von Zeichen wieder  */
 		/*             in den Input-Stream stellen.            */
@@ -213,25 +213,25 @@ GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf )
 		{
 			/* Reine Z„hlschleife, daher gibt es hier nichts zu tun */
 		}
-		
+
 		/* v6.5.10 [me]	Die neue Stringl„nge wird bestimmt, um eine */
 		/*						erneute Z„hlung der Zeichen zu vermeiden!   */
 		sl = (s_ptr - string);
-		
+
 		/* Bei den Zeichen fr neue Zeile innehalten */
 		if( *s_ptr=='\n' || *s_ptr=='\r' )
 		{
 			/* Den zu verarbeitenden String abteilen */
 			char ch = *s_ptr;
 			*(s_ptr++) = '\0';
-			
+
 			/* Das n„chste zu lesende Zeichen der neuen Zeile suchen */
 			if( (*s_ptr=='\n' || *s_ptr=='\r') && *s_ptr!=ch )
 				s_ptr++;
 
-			
+
 			/* Nun genau so viele Zeichen zurckgeben, wie nun in s_ptr zu viel gelesen wurden */
-			fseek(tf->file, -strlen(s_ptr), SEEK_CUR);
+			fseek(tf->file, -(long)strlen(s_ptr), SEEK_CUR);
 		}
   #else
         if (fgets(string, n, tf->file) == NULL)
@@ -302,7 +302,7 @@ LOCAL char *strmir ( char *s )
 {
 	size_t	sl, i;
 	char	swap;
-	
+
 	if (  ( sl=strlen(s) ) > 0  )
 	{	for (i=0; i<sl/2; i++)
 		{	swap= s[i];
@@ -328,12 +328,12 @@ GLOBAL void fsplit (char *s, char *drive, char *path, char *filename, char*suffi
 	char	wrk[512];
 	char	*found;
 	size_t	wl, fl, l;
-	
+
 	strcpy(drive, "");
 	strcpy(path, "");
 	strcpy(filename, "");
 	strcpy(suffix, "");
-	
+
 	strcpy(wrk, s);
 	wl= strlen(wrk);
 
@@ -341,7 +341,7 @@ GLOBAL void fsplit (char *s, char *drive, char *path, char *filename, char*suffi
 
 	strcpy(wrk, s);
 	strmir(wrk);
-	
+
 	/* Drive ermitteln und abschneiden */	
 	if ( wrk[wl-2]==':' )
 	{	strcpy(drive, "a:");
@@ -396,10 +396,10 @@ GLOBAL void
 fsplit( const char *sour, char *destDrive, char *destFolders, char *destName, char *destSuffix)
 {
 	char *s;
-	
+
 	*destDrive = 0;
 	*destFolders = 0;
-	
+
 	s = strrchr( sour, ':');
 	if (s && (s != sour + 1)) {	
 		/* Macintosh-Dateipfad (volume-Name wird nicht abgetrennt) */
@@ -446,7 +446,7 @@ fsplit( const char *sour, char *destDrive, char *destFolders, char *destName, ch
 			}
 		}
 	}
-	
+
 	/* Dateinamen und -suffix aufspalten */
 	s = strrchr( sour, '.');
 	if (s) {

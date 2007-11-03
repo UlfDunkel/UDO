@@ -353,12 +353,12 @@ GLOBAL void show_status_file_2 ( const char *s )
 GLOBAL void show_status_percent ( unsigned long Pass1Lines, unsigned long Pass2Lines )
 {
 	int percent;
-	
+
 	percent= 0;
 	if (Pass1Lines>0)
 	{	percent= (int) ((100*Pass2Lines)/Pass1Lines);
 	}
-	
+
 	if ( (bOutOpened || bTestmode) && !bBeQuiet && percent != last_percent)
 	{	if (bVerbose)
 		{	fprintf(stdout, "\n%3d%% ", percent);
@@ -472,6 +472,7 @@ extern const char *id_toc_c;
 extern const char *id_toc_html_c;   /* V6.5.20 [gs] */
 extern const char *id_tp_c;
 extern const char *id_udo_c;
+extern const char *id_udomem_c;     /* V6.5.20 [gs] */
 
 extern const char *id_img_html_h;
 extern const char *id_img_win_h;
@@ -513,6 +514,7 @@ LOCAL void show_ident ( void )
 	fprintf(stdout, "%s\n", id_tab_c+5);
 	fprintf(stdout, "%s\n", id_tp_c+5);
 	fprintf(stdout, "%s\n", id_udo_c+5);
+	fprintf(stdout, "%s\n", id_udomem_c+5);  /* V6.5.20 [gs] */
 
 	fprintf(stdout, "\n");
 
@@ -574,7 +576,7 @@ LOCAL void show_unknown ( const char *s )
 LOCAL void wait_on_keypress ( void )
 {
 	char input[256];
-	
+
 	if (bHoldKey)
 	{	if (eLanguage==DEUTSCH)
 		{	fprintf(stdout, "\n<RETURN> druecken...\n");
@@ -603,7 +605,7 @@ LOCAL BOOLEAN read_cliopt_file ( const char *name )
 	size_t sl;
 	int counter= -1;
 	int i;
-	
+
 	file= fopen(name, "r");
 	if (!file)
 	{	return FALSE;
@@ -632,7 +634,7 @@ LOCAL BOOLEAN read_cliopt_file ( const char *name )
 			}
 		}
 	}
-	
+
 	fclose(file);
 
 	i= 0;
@@ -640,14 +642,14 @@ LOCAL BOOLEAN read_cliopt_file ( const char *name )
 	{	getcliopt(&i, fargv[i], (i+1<=counter) ? fargv[i+1] : NULL, TRUE);
 		i++;
 	}
-	
+
 	for (i=counter; i>=0; i--)
 	{	if (fargv[i]!=NULL)
 		{	um_free(fargv[i]);
 			fargv[i]= NULL;
 		}
 	}
-	
+
 	return TRUE;
 
 }	/* read_cliopt_file */
@@ -658,7 +660,7 @@ LOCAL BOOLEAN getcliopt ( int *counter, const char *arg, const char *argnext, co
 {
 	register int i;
 	BOOLEAN found= FALSE;
-	
+
 	i= 0;
 
 	while ( cliopt[i].longname[0]!=EOS )
@@ -730,7 +732,7 @@ LOCAL BOOLEAN getcliopt ( int *counter, const char *arg, const char *argnext, co
 			}
 		}
 	}
-	
+
 	return found;
 
 }	/* getcliopt */
@@ -891,7 +893,7 @@ int main ( int argc, const char *argv[] )
 	exit_um(); /* Call memory management to clean up memory allocated */
 
 	wait_on_keypress();
-	
+
 	if (!cliok || bErrorDetected || get_error_counter() > 0)
 	{	return 1;
 	}
