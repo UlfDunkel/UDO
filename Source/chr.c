@@ -130,7 +130,7 @@ const char *id_chr_c= "@(#) chr.c       08.04.2004";
 
 LOCAL BOOLEAN   last_aqc_verb;            /* */
 LOCAL int       texinfo_np_counter;       /* Non-Printable-Texinfo-Node-Counter ;-) */
-                           
+
 										  /* list of supported HTML specials */
 LOCAL char      *html_specs[HTML_SPEC_MAX] =
 {
@@ -219,29 +219,29 @@ char  *s)  /* single character */
 GLOBAL void uni2ascii ( char *s )
 {
    register int i;
-   
+
    if (s[0] == EOS)
       return;
-   
+
    if (strstr(s, "(!") == NULL)
       return;
-   
-   
+
+
    for (i = 0; i < UNI2SYSTABSIZE; i++)
    {
       replace_all(s, uni2sys[i].uni, (const char *) uni2sys[i].system);
    }
-   
+
    if (no_umlaute)
       umlaute2ascii(s);
-   
+
 }       /* uni2ascii */
 
 
 LOCAL void uni2misc ( char *s )
 {
         register int i;
-        
+
         if ( s[0]==EOS )
         {       return;
         }
@@ -286,7 +286,7 @@ LOCAL void uni2misc ( char *s )
                         for (i=0; i<UNITABLESIZE; i++) replace_all(s, unitab[i].uni, unitab[i].lyx) ;
                         break;
         }
-        
+
 }       /* uni2misc */
 
 
@@ -305,9 +305,9 @@ LOCAL void iso2system ( char *s )
         /* Optimierter Suchmethode, ohne zeitraubendes strlen() */
         char *ptr;
         int idx;
-        
+
         ptr= s;
-        
+
         while (*ptr!=EOS)
         {
                 if ( ((UCHAR) *ptr) > 127 )
@@ -351,7 +351,7 @@ LOCAL void iso2sys ( char *s )
                 {       return;
                 }
         }
-        
+
 #if USE_LATIN1_CHARSET
                 /* r6pl2: System benutzt Latin1-Zeichensatz? Dann ist */
                 /* eine weitere Umwandlung/Kontroll unnoetig! */
@@ -377,9 +377,9 @@ LOCAL void mac2iso ( char *s )
         /* Optimierter Suchmethode, ohne zeitraubendes strlen() */
         char *ptr;
         int idx;
-        
+
         ptr= s;
-        
+
         while (*ptr!=EOS)
         {
                 if ( ((UCHAR) *ptr) > 127 )
@@ -413,15 +413,15 @@ LOCAL void utf82iso ( char *s )
         char *ptr, sUTF[16], onechar[1];
         int i, bytes;
         BOOLEAN found;
-        
+
         ptr= s;
-        
+
         if (*ptr==EOS)
         {       return;
         }
 
         strcpy(onechar, " ");
-        
+
         while (*ptr!=EOS)
         {
                 if ( ((UCHAR) *ptr > 127) && (((UCHAR) *ptr & 0xC0) != 0x80 ) )
@@ -475,7 +475,7 @@ LOCAL void utf82iso ( char *s )
 
 /* #endif */    /* __BEOS__ */
 
-        
+
 /*      ##################################################################
         #
         #       NextStep-Zeichensatz in ISO-Zeichensatz umwandeln (!code_next)
@@ -489,9 +489,9 @@ LOCAL void next2iso ( char *s )
         /* Optimierter Suchmethode, ohne zeitraubendes strlen() */
         char *ptr;
         int idx;
-        
+
         ptr= s;
-        
+
         while (*ptr!=EOS)
         {
                 if ( ((UCHAR) *ptr) > 127 )
@@ -525,9 +525,9 @@ LOCAL void tos2iso ( char *s )
         /* Optimierter Suchmethode, ohne zeitraubendes strlen() */
         char *ptr;
         int idx;
-        
+
         ptr= s;
-        
+
         while (*ptr!=EOS)
         {
                 if ( ((UCHAR) *ptr) > 127 )
@@ -560,9 +560,9 @@ LOCAL void cp437iso ( char *s )
         /* Optimierter Suchmethode, ohne zeitraubendes strlen() */
         char *ptr;
         int idx;
-        
+
         ptr= s;
-        
+
         while (*ptr!=EOS)
         {
                 if ( ((UCHAR) *ptr) > 127 )
@@ -596,9 +596,9 @@ LOCAL void cp850iso ( char *s )
         /* Optimierter Suchmethode, ohne zeitraubendes strlen() */
         char *ptr;
         int idx;
-        
+
         ptr= s;
-        
+
         while (*ptr!=EOS)
         {
                 if ( ((UCHAR) *ptr) > 127 )
@@ -622,9 +622,9 @@ LOCAL void cp850iso ( char *s )
 LOCAL void section2iso ( char *s )
 {
         char *ptr;
-        
+
         ptr= s;
-        
+
         while (*ptr!=EOS)
         {
                 if ( ((UCHAR) *ptr) == '\025' )
@@ -649,9 +649,9 @@ LOCAL void hp82iso ( char *s )
         /* Optimierter Suchmethode, ohne zeitraubendes strlen() */
         char *ptr;
         int idx;
-        
+
         ptr= s;
-        
+
         while (*ptr!=EOS)
         {
                 if ( ((UCHAR) *ptr) > 127 )
@@ -679,7 +679,7 @@ GLOBAL void recode ( char *zeile, int char_set )        /* PL6 */
                                 /* 7-Bit-Zeichen zweimal uebersprungen werden muessen */
                                 /* Ist kein 8-Bit-Zeichen enthalten, so spart man sich */
                                 /* zwei Aufrufe mit nutzlosen 128-Schritt-Schleifen */
-        
+
         switch (char_set)
         {
 
@@ -841,20 +841,20 @@ GLOBAL void win2sys ( char *s )
         char one[2];
         char four[5];
         char *ptr;
-        
+
         if (s[0]==EOS)
         {       return;
         }
-        
+
         strcpy(one, " ");
-        
+
         for (i=0; i<128; i++)
         {       if ( chrtab[i].ansi[0]=='\\' )
                 {       one[0]= chrtab[i].system;
                         replace_all(s, chrtab[i].ansi, one);
                 }
         }
-        
+
         /* Noch das sz anpassen */
         replace_char(s, "\236", "\341");
 
@@ -867,7 +867,7 @@ GLOBAL void win2sys ( char *s )
                 four[3]= ptr[3];
                 delete_all(s, four);
         }
-        
+
 }       /* win2sys */
 
 
@@ -880,13 +880,13 @@ GLOBAL void html2sys ( char *s )
 {
         register int i;
         char one[2];
-        
+
         if (s[0]==EOS)
         {       return;
         }
-        
+
         strcpy(one, " ");
-        
+
         for (i=0; i<128; i++)
         {
                 one[0]= chrtab[i].system;
@@ -897,7 +897,7 @@ GLOBAL void html2sys ( char *s )
                 one[0]= html7bit[i].c;
                 replace_all(s, html7bit[i].quoted, one);
         }
-     
+
 }       /* html2sys */
 
 
@@ -910,7 +910,7 @@ GLOBAL void ansi2dos ( char *s )
 {
         register int idx;
         char *ptr;
-        
+
         ptr= s;
 
         while (*ptr!=EOS)
@@ -945,17 +945,17 @@ GLOBAL int calc_ttf_twip ( const char *s, const int font, const int style )
         int pixel, twip;
         size_t i;
         char d[512];
-        
+
         if ( s[0]==EOS )
         {       return(0);
         }
-        
+
         strcpy(d, s);
         recode_allways(d, iCharset);
         strcat(d, "W");                                 /* Breitenausgleiche */
 
         pixel= 0;
-        
+
         switch (font)
         {       
                 case TTF_TIMES:
@@ -1039,7 +1039,7 @@ GLOBAL int calc_ttf_twip ( const char *s, const int font, const int style )
         /* passt aber nicht, daher etwas mehr!                  */
 
         twip= (int) (pixel*14.4);
-        
+
         return(twip);
 }       /* calc_ttf_twip */
 
@@ -1245,11 +1245,11 @@ char     *s)               /* ^ to label name */
 
       if (*ptr == '.')
          goto LABEL2HTML_NEXT;
-                
+
       sprintf(val, "_%X", (UCHAR) *ptr);
       one[0]= *ptr;
       replace_once(ptr, one, val);
-                
+
 LABEL2HTML_NEXT:
       ptr++;
    }
@@ -1264,7 +1264,7 @@ LABEL2HTML_NEXT:
    /* 2006-10-10: fd: faded */
 /* strinsert(s, "UDO_");
 */
-        
+
 }   /* label2html */
 
 
@@ -1280,7 +1280,7 @@ GLOBAL void node2winhelp (char *n)
         size_t i;
 
         if ( n[0]==EOS) return;
-        
+
         umlaute2ascii(n);
         replace_udo_quotes(n);
         delete_all_divis(n);
@@ -1308,7 +1308,7 @@ GLOBAL void node2winhelp (char *n)
         }
 
         strcpy(n, t);
-        
+
 }       /* node2winhelp */
 
 
@@ -1324,7 +1324,7 @@ GLOBAL void node2WinAutoID (char *id, const char *n)
         id[0]= EOS;
 
         if ( n[0]==EOS) return;
-        
+
         strcpy(s, n);
         win2sys(s);
         umlaute2ascii(s);
@@ -1445,7 +1445,7 @@ GLOBAL void node2postscript ( char *s, int text )
                         {
                                 talen=0;
                         }
-                        if(strlen(s) > 80L-talen)
+                        if((long)strlen(s) > 80L-talen)
                         {
                                 s[80L-talen] = EOS;
                                 if(s[79L-talen] == '\\')
@@ -1459,7 +1459,7 @@ GLOBAL void node2postscript ( char *s, int text )
                         qreplace_all(s, "[", 1, "\\[", 2);
                         qreplace_all(s, "]", 1, "\\]", 2);
                         break;
-                
+
                 case KPS_CONTENT:
                         qreplace_all(s, "/", 1, "\\/", 2);
                         /* Changed in V6.5.5 [NHz] */
@@ -1483,7 +1483,7 @@ GLOBAL void node2postscript ( char *s, int text )
                         qreplace_all(s, "[", 1, "\\[", 2);
                         qreplace_all(s, "]", 1, "\\]", 2);
                         break;
-                
+
                 case KPS_NAMEDEST:
                         qreplace_all(s, " ", 1, "_", 1);
                         qdelete_all(s, ";", 1);
@@ -1555,12 +1555,12 @@ GLOBAL void node2vision (char *n)
         /* genau wie bei node2winhelp */
         /* Strings werden noch nicht gekuerzt */
         /* <???> Testen, ob TVH mit langen Namen klarkommt */
-        
+
         char t[512], v[32];
         size_t i;
 
         if ( n[0]==EOS) return;
-        
+
         umlaute2ascii(n);
         replace_udo_quotes(n);
         delete_all_divis(n);
@@ -1605,9 +1605,9 @@ GLOBAL void node2texinfo (char *s)
         size_t  sl, i;
         char d[512], a[32], c;
         BOOLEAN has_an;                         /* has_alphanumeric */
-        
+
         if ( s[0]==EOS) return;
-        
+
         replace_udo_quotes(s);
         delete_all_divis(s);
 
@@ -1660,7 +1660,7 @@ GLOBAL void node2texinfo (char *s)
                 /* Noch das letzte "-" entfernen */
                 s[strlen(s)-1]= EOS;            
         }
-        
+
 }       /* node2texinfo */
 
 
@@ -1818,7 +1818,7 @@ GLOBAL void c_divis ( char *s )
 LOCAL void specials2ascii ( char *s )
 {
         qreplace_all(s, "!..", 3, "...", 3);
-        
+
         qreplace_all(s, "(---)", 5, TEMPO_S, TEMPO_S_LEN);
         qreplace_all(s, "(--)", 4, TEMPO_S2, TEMPO_S2_LEN);
         qreplace_all(s, "---", 3, "-", 1);
@@ -1840,7 +1840,7 @@ LOCAL void specials2html ( char *s )
 
         /* Doesn't work in CAB :-( */
 /*      qreplace_all(s, "!..", 3, "&hellip;", 8);*/
-        
+
         qreplace_all(s, "(---)", 5, TEMPO_S, TEMPO_S_LEN);
         qreplace_all(s, "(--)", 4, TEMPO_S2, TEMPO_S2_LEN);
         qreplace_all(s, "---", 3, "&mdash;", 7);
@@ -1877,7 +1877,7 @@ LOCAL void specials2ps ( char *s )
 LOCAL void specials2ipf ( char *s )
 {
         qreplace_all(s, "!&per.&per.", 11, "&per.&per.&per.", 15);
-        
+
         qreplace_all(s, "(---)", 5, TEMPO_S, TEMPO_S_LEN);
         qreplace_all(s, "(--)", 4, TEMPO_S2, TEMPO_S2_LEN);
         qreplace_all(s, "---", 3, "-", 1);
@@ -1894,7 +1894,7 @@ LOCAL void specials2ipf ( char *s )
 LOCAL void specials2info ( char *s )
 {
         qreplace_all(s, "!..", 3, "@dots{}", 7);
-        
+
         qreplace_all(s, "(---)", 5, TEMPO_S, TEMPO_S_LEN);
         qreplace_all(s, "(--)", 4, TEMPO_S2, TEMPO_S2_LEN);
         qreplace_all(s, "---", 3, "@minus{}", 8);
@@ -1966,7 +1966,7 @@ GLOBAL void winspecials2ascii ( char *s )
 LOCAL void texvar2ascii ( char *s )
 {
         if ( strstr(s, "(!")==NULL )    return;
-        
+
         qreplace_all(s, "(!TeX)", 6, "TeX", 3);
         qreplace_all(s, "(!LaTeX)", 8, "LaTeX", 5);
         qreplace_all(s, "(!LaTeXe)", 9, "LaTeX2e", 7);
@@ -2019,12 +2019,12 @@ LOCAL void c_quotes_apostrophes ( char *s,
         {       (b1stApost) ? replace_once(s, "''", aon) : replace_once(s, "''", aoff);
                 b1stApost= !b1stApost;
         }
-        
+
         while (strstr(s, "\"\"")!=NULL)
         {       (b1stQuote) ? replace_once(s, "\"\"", qon) : replace_once(s, "\"\"", qoff);
                 b1stQuote= !b1stQuote;
         }
-        
+
 }       /* c_quotes_apostrophes */
 
 
@@ -2378,20 +2378,20 @@ LOCAL void str2manbold( char *d, const char *s )
 {
         size_t  i;
         char    c[2]={0,0};
-        
+
         d[0]= EOS;
 
         if (s[0]==EOS)
         {       return;
         }
-        
+
         for (i=0; i<strlen(s); i++)
         {       c[0]=s[i];
                 strcat(d, c);
                 strcat(d, "\010");
                 strcat(d, c);
         }
-        
+
 }       /* str2manbold */
 
 
@@ -2399,19 +2399,19 @@ LOCAL void str2manunder( char *d, const char *s )
 {
         size_t  i;
         char    c[2]={0,0};
-        
+
         d[0]= EOS;
 
         if (s[0]==EOS)
         {       return;
         }
-        
+
         for (i=0; i<strlen(s); i++)
         {       strcat(d, "_\010");
                 c[0]=s[i];
                 strcat(d, c);
         }
-        
+
 }       /* str2manunder */
 
 
@@ -2435,13 +2435,13 @@ char *s)
 {
    size_t   i;    /* counter */
 
-   
+
    for (i = 0; i < HTML_SPEC_MAX; i++)
    {
       if (strncmp(html_specs[i], s, strlen(html_specs[i])) == 0)
          return TRUE;
    }
-   
+
    return FALSE;
 }
 
@@ -2466,10 +2466,10 @@ GLOBAL void c_man_styles ( char *s )
         /* ptr zeigt jeweils auf das erste Zeichen des Stylemagic \033\001 */
         /* UDO ersetzt Befehle wie (!B) zunaechst durch eigene Escape-Befehle */
         /* ESC-001-xxx-ESC, wobei xxx den jeweiligen Stil angibt */
-        
+
         ptr= strstr(s, STYLEMAGIC);
         if (ptr==NULL)  return;
-        
+
         start=ptr;
 
         alt[0]= EOS;
@@ -2510,7 +2510,7 @@ GLOBAL void c_man_styles ( char *s )
                                         break;
                         }       /*switch*/
                 }       /* if...else */
-                
+
                 if (replace_it)
                 {       replace_once(start, alt, neu);
                         ptr+= (strlen(neu)-strlen(alt));
@@ -2521,7 +2521,7 @@ GLOBAL void c_man_styles ( char *s )
                 ptr++;          
 
         }       while (ptr[0]!=EOS);
-        
+
 }       /* c_man_styles */
 
 
@@ -2626,17 +2626,17 @@ BOOLEAN           all)            /* */
                   sl_verb_on,     /* */
                   sl_verb_off;    /* */
 
-   
+
    if (s[0] == EOS)
    {
       return;
    }
-   
+
    if (no_umlaute)
    {
       umlaute2ascii(s);
    }
-   
+
    switch(desttype)
    {
    case TOASC:                            /* Hier muss nicht gequotet werden! */
@@ -2662,18 +2662,18 @@ BOOLEAN           all)            /* */
       {
          uni2ascii(s);
       }
-   
+
       /* r6pl2: Neue Version: immer quoten */
       /* nicht auf !raw !stg testen, da dies im wichtigen pass2() */
       /* nicht auftreten kann, da vorher die Zeilen mit */
       /* c_special_commands() bearbeitet werden. */
-      
+
       switch (desttype)
       {
       case TOSTG:                         /* ST-Guide */
          replace_1at_by_2at(s);
          return;
-      
+
       case TOINF:
          qreplace_all(s, "@", 1, "@@", 2);
          qreplace_all(s, "}", 1, "@}", 2);
@@ -2684,25 +2684,25 @@ BOOLEAN           all)            /* */
          qreplace_all(s, "{", 1, "{{", 2);
          return;
       }
-      
+
       return;
    }       
 
-   
+
    ptr = s;
-   
+
    if (!all)
    {
       /* Wenn in der Zeile ein Kommando steht, dann nur den Rest */
       /* quoten, wenn das Kommando einen Parameter enthaelt, */
       /* der gequotet werden muss! */
-      
+
       if (s[0] == META_C && s[1] >= 'a' && s[1] <= 'z')
       {
          for (i = 0; i < MAXQUOTECMD; i++)
          {
             cmplen = quotecommand[i].cmdlen;
-            
+
             if (strncmp(s, quotecommand[i].cmd, cmplen) == 0)
             {
                /* Das naechste Zeichen muss aber Space oder Tab sein! */
@@ -2713,7 +2713,7 @@ BOOLEAN           all)            /* */
                   break;
                }
             }
-   
+
             if ( (cmplen = quotecommand[i].abblen) > 0)
             {
                /*r6pl12: Abkuerzungen auch beachten */
@@ -2729,29 +2729,29 @@ BOOLEAN           all)            /* */
                }
             }
          }
-   
+
          if (!found)
          {
             return;
          }
       }
    }
-   
-   
+
+
    ptr_quoted = NULL;
    s_temp[0] = EOS;
    s_char[1] = EOS;
    aqc_verb = last_aqc_verb;              /* Pl13: vorher = TRUE */
-   
+
    sl_verb_on = CMD_STYLELEN;
    sl_verb_off = CMD_STYLELEN;
-   
+
    while (ptr[0] != EOS)
    {
       /* PL13: Innerhalb (!V)...(!v) Leerzeichen durch interne  */
       /* feste Leerzeichen ersetzen, damit token_output() nicht */
       /* \verb+...+ umbricht. */
-      
+
       if (desttype == TOTEX || desttype == TOPDL)
       {
          if ( aqc_verb || styleflag.verbatim)
@@ -2763,23 +2763,23 @@ BOOLEAN           all)            /* */
             }
          }
       }
-   
+
       /* Das Alphabet und die Ziffern muessen nie gequotet werden! */
       /* Also einfach den ganzen Rotz ueberspringen */
 
       if (ptr[0] == ' ')                  /* space */
          goto NO_QUOTE_NEEDED;
-         
+
       if (ptr[0] >= 'a' && ptr[0] <= 'z') /* [a..z] */
          goto NO_QUOTE_NEEDED;
-         
+
       if (ptr[0] >= 'A' && ptr[0] <= 'Z') /* [A..Z] */
          goto NO_QUOTE_NEEDED;
-      
+
       if (ptr[0] >= '0' && ptr[0] <= '9') /* [0..9] */
          goto NO_QUOTE_NEEDED;
-      
-      
+
+
       if ( (desttype == TOTEX || desttype == TOPDL) && !all)
       {
          if (strncmp(ptr, CMD_VERB_ON, sl_verb_on) == 0)
@@ -2798,7 +2798,7 @@ BOOLEAN           all)            /* */
             goto NO_QUOTE_NEEDED;
          }
       }
-   
+
       /* Sonderbehandlung fuer doppelte Anfuehrungszeichen und Apostrophe */
       if (ptr[0] == '\"' && ptr[1] == '\"')
       {
@@ -2813,46 +2813,46 @@ BOOLEAN           all)            /* */
          ptr += 3;
          goto NO_QUOTE_NEEDED;
       }
-   
+
       /* Gequotete Apostrophe: ('') */
       if (ptr[0] == '(' && ptr[1] == '\'' && ptr[2] == '\'' && ptr[3] == ')')
       {
          ptr += 3;
          goto NO_QUOTE_NEEDED;
       }
-   
-   
+
+
       /* Sonderbehandlung fuer Platzhalter, welche spaeter */
       /* gequotet werden (macro, define, link, index) */
       /* PL6: aber nicht in verbatim-Umgebungen! */
-      
+
       /* Dabei beruecksichtigen, dass Klammern innerhalb */
       /* durch ein Ausrufungszeichen gequotet werden. */              
-      
+
       if (pflag[PASS2].env != ENV_VERBATIM)
       {
          if (ptr[0] == '(' && ptr[1] == META_C && ptr[2] != QUOTE_C)
          {
             oldptr = ptr;                 /* Pointer sichern */
             ptr++;
-            
+
             while (ptr[0] != EOS && ptr[0] != ')' )
             {
                if (ptr[0] == '!' && ptr[1] == ')' )
                {
                   ptr++;                  /* gequotete Klammer ueberspringen */
                }
-               
+
                ptr++;
             }       
-      
+
             if (ptr[0] == EOS)
             {
                /* PL16: Falls der Pointer auf das Ende zeigt, dann */
                /* ist etwas schiefgelaufen oder aber es handelte */
                /* sich gar nicht um einen Parameter (z.B. "(!)") */
                /* In dem Falle den alten Pointer restaurieren */
-               
+
                ptr = oldptr;
                ptr++;
             }
@@ -2863,8 +2863,8 @@ BOOLEAN           all)            /* */
             }
          }
       }
-      
-      
+
+
       switch (desttype)
       {
       case TOTEX:
@@ -2872,11 +2872,11 @@ BOOLEAN           all)            /* */
          if ( (all) || (!styleflag.verbatim && !aqc_verb) )
          {
             found = FALSE;
-      
+
             if ( ((UCHAR) ptr[0]) > 127 )
             {
                tabidx = ((UCHAR) ptr[0]) - 128;
-               
+
                if (chrtab[tabidx].tex[0] != EOS)
                {
                   ptr_quoted = chrtab[tabidx].tex;
@@ -2895,7 +2895,7 @@ BOOLEAN           all)            /* */
                   }
                }
             }
-      
+
             if (!found)
             {
                if ( (UCHAR) ptr[0] >= 127)
@@ -2907,10 +2907,10 @@ BOOLEAN           all)            /* */
             }
          }
          break;
-      
+
       case TOLYX:
          found = FALSE;
-         
+
          for (i = 0; i < MAXLYX7BIT; i++)
          {
             if ( ( /*(UCHAR)*/ ptr[0]) == lyx7bit[i].c)
@@ -2921,7 +2921,7 @@ BOOLEAN           all)            /* */
             }
          }
          break;
-      
+
       case TOIPF:
          found = FALSE;
 
@@ -2935,7 +2935,7 @@ BOOLEAN           all)            /* */
             }
          }
          break;
-      
+
       case TORTF:
          found = FALSE;
 
@@ -2977,7 +2977,7 @@ BOOLEAN           all)            /* */
             }
          }
          break;
-      
+
       case TOKPS:
          found = FALSE;
 
@@ -2986,7 +2986,7 @@ BOOLEAN           all)            /* */
             if (iCharset != CODE_LAT1)
             {
                tabidx = ((UCHAR) ptr[0]) - 128;
-   
+
                if (chrtab[tabidx].ps[0] != EOS)
                {
                   ptr_quoted = chrtab[tabidx].ps;
@@ -2998,14 +2998,14 @@ BOOLEAN           all)            /* */
                   ptr[0] = '?';
                }
             }
-   
+
             if (!found)
             {
                sprintf(s_temp, "\\%03o", (UCHAR) ptr[0]);
                ptr_quoted = s_temp;
             }
          }
-         
+
          /* Changed in V6.5.5 [NHz] */
 #if 0
          else
@@ -3014,13 +3014,13 @@ BOOLEAN           all)            /* */
             {
                { '[',  "\\["  },
                { ']',  "\\]"  },
-         
+
                { '(',  "\\("  },
                { ')',  "\\)"  },
                { '\\', "\\\\" }
             };
-         
-         
+
+
             for (i = 0; i < sizeof(ps7bit) / sizeof(ps7bit[0]); i++)
             {
                if ( (ptr[0]) == ps7bit[i].c)
@@ -3033,7 +3033,7 @@ BOOLEAN           all)            /* */
          }
 #endif
          break;
-      
+
       case TOWIN:
       case TOWH4:
       case TOAQV:
@@ -3076,7 +3076,7 @@ BOOLEAN           all)            /* */
             }
          }
          break;
-      
+
       case TOPCH:
          if (ptr[0] == '\\')
          {
@@ -3084,7 +3084,7 @@ BOOLEAN           all)            /* */
             ptr_quoted = s_temp;
          }
          break;
-      
+
       case TOHAH:                         /* HTML Apple Help (since V6.5.17) */
       case TOHTM:                         /* HTML */
       case TOMHH:                         /* Microsoft HTML Help */
@@ -3132,7 +3132,7 @@ BOOLEAN           all)            /* */
             }
          }
          break;
-      
+
       case TOLDS:
          found = FALSE;
 
@@ -3163,7 +3163,7 @@ BOOLEAN           all)            /* */
             }
          }
          break;
-      
+
       case TOHPH:
          found = FALSE;
 
@@ -3196,28 +3196,28 @@ BOOLEAN           all)            /* */
          break;
 
       }  /* switch (desttype) */
-      
+
 
       if (ptr_quoted != NULL && ptr_quoted[0] != EOS)
       {
          s_char[0] = ptr[0];
          cmplen = strlen(ptr_quoted);
          qreplace_once(ptr, s_char, 1, ptr_quoted, cmplen);
-         
+
          ptr = ptr + cmplen - 1;
          s_temp[0] = EOS;
          ptr_quoted = NULL;
       }
-   
+
 NO_QUOTE_NEEDED:
       ptr++;
    }
-   
+
    if (bDocUniversalCharsetOn)
    {
       uni2misc(s);
    }
-   
+
    if (iUdopass == PASS2)
    {
       last_aqc_verb = aqc_verb;           /* PL13: Status sichern */
@@ -3292,7 +3292,7 @@ GLOBAL void auto_quote_linedraw ( char *s )
                 }
 
                 ptr++;
-        
+
         }       /*while*/
 
 }       /* auto_quote_linedraw */
@@ -3312,4 +3312,3 @@ GLOBAL void init_module_chars ( void )
 /*      ############################################################
         # chars.c
         ############################################################    */
-

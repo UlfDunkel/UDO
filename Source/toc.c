@@ -737,8 +737,12 @@ LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
 			replace_udo_tilde(n);
 			replace_udo_nbsp(n);
 			/* Changed in r6.2pl1 [NHz] */
+/* V6.5.20 [CS] Start */
+			sprintf(ref, "%s \\hidelink{\\pdfstartlink goto num %d %s\\pdfendlink}", n, l->labindex, n);
+/* old:
 			sprintf(ref, "{\\pdfstartlink goto num %d\n%s\\pdfendlink}",
 				l->labindex, n);
+*/
 			break;
 
 		/* New in r6pl15 [NHz] */
@@ -11949,7 +11953,11 @@ LOCAL BOOLEAN save_the_map ( const char *filename, const char *suffix, tWinMapDa
 		{
 			if (hid[0]==EOS)
 			{
+/* V6.5.20 [CS] */
+				node2WinAutoID(hid, toc[i]->name);
+/* old:
 				node2NrWinhelp(hid, toc[i]->labindex);
+*/
 			}
 
 			strinsert(hid, sDocWinPrefixID);
@@ -11958,6 +11966,19 @@ LOCAL BOOLEAN save_the_map ( const char *filename, const char *suffix, tWinMapDa
 			{	map= 0x1000+i;
 			}
 
+/* V6.5.20 [CS]
+			Fuer htmlhelp eine Datei mit C-Makros erzeugen, ueber welche 
+			dann eine Map vom Titel auf den Knoten (html-Dateinamen) 
+			gebildet werden kann.
+		Z.B. X("Formatierung","004006.html")
+*/
+			fprintf(file, "X(\"%s\",\"%s%s\")\n",
+				toc[i]->name,
+				toc[i]->filename,
+				outfile.suff
+			);
+
+/* old:
 			fprintf(file, "%s %-*s%s\t%s%04X%s\t%s %s %s\n",
 						data->cmd,
 						MAX_HELPID_LEN+1,
@@ -11970,6 +11991,7 @@ LOCAL BOOLEAN save_the_map ( const char *filename, const char *suffix, tWinMapDa
 						toc[i]->name,
 						data->remOff
 				);
+*/
 		}
 	}
 
