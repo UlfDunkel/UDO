@@ -73,7 +73,7 @@ magazine in a HTML file. If (!V)<link>(!v) is empty the contents of
 
 !iflang [german]
 !item [(!EXAMPLE2)]
-(!T)(!/xlink [Deutsche Telekom] [http://www.dtag.de])(!t)
+(!T)(!/xlink [Deutsche Telekom] [http://www.dtag.de])(!t) (!nl)
 (!T)(!/xlink [irgendwas] [http://www.domain.de/!~user/index.html])(!t)
 !endif
 !iflang [english]
