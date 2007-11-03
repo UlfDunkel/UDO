@@ -1659,7 +1659,7 @@ mit dem Schalter (!KW [short]) benutzt wird!..
      voranstellen, damit UDO erkennt, dass die folgende eckige Klammer
      auch fett dargestellt werden soll.
 
-!item Wenn der das letzte Zeichen ein Ausrufezeichen ist, dann muû diesem
+!item Wenn der das letzte Zeichen ein Ausrufezeichen ist, dann muﬂ diesem
       ein / folgend, damit UDO nicht die obige Regel annimmt.
       
 !item Der in den eckigen Klammer angegebene Text wird auch in HTML fett
@@ -1715,7 +1715,7 @@ you have to quote it with an exclamation mark to tell UDO that it has to
 be printed in bold text, too.
 
 # ToDo: englisch
-!item Wenn der das letzte Zeichen ein Ausrufezeichen ist, dann muû diesem
+!item Wenn der das letzte Zeichen ein Ausrufezeichen ist, dann muﬂ diesem
       ein / folgend, damit UDO nicht die obige Regel annimmt.
 
 !item	The HTML version of your source file will print the descriptions in
@@ -1834,7 +1834,7 @@ enth‰lt, so muss man dieser Klammer ein Ausrufezeichen
 voranstellen, damit UDO erkennt, dass die folgende eckige Klammer
 noch zum ""linken Teil"" des Punktes z‰hlt.
 
-!item Wenn der das letzte Zeichen ein Ausrufezeichen ist, dann muû diesem
+!item Wenn der das letzte Zeichen ein Ausrufezeichen ist, dann muﬂ diesem
       ein / folgend, damit UDO nicht die obige Regel annimmt.
 
 !index (!kw [html_no_xlist])
@@ -1949,7 +1949,7 @@ it with an exclamation mark so that UDO will recognize that this ""]"" shall
 be part of the item and shall be displayed on the ""left side"".
 
 # ToDo: englisch
-!item Wenn der das letzte Zeichen ein Ausrufezeichen ist, dann muû diesem
+!item Wenn der das letzte Zeichen ein Ausrufezeichen ist, dann muﬂ diesem
       ein / folgend, damit UDO nicht die obige Regel annimmt.
 
 !index (!kw [html_no_xlist])
