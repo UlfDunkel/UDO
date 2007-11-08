@@ -369,18 +369,13 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 # ..............................................................................
 !iflang [german]
 !item Neue Kommandos: (!T)!/html_robots(!t), (!KW [docinfo]) [robots] (!nl)
-   Dienen zum Setzen der Robots Anweisungen für Suchmaschinen. (!nl)
-   (!KW [docinfo]) [robots] wird nur geschrieben, wenn in
-   einzelnen Dateien nicht (!KW [html_robots]) benutzt wird. Dies habt also vorang.
-   Seit Version~6.5.17 implementiert.
+      Dienen zum Setzen der Robots Anweisungen für Suchmaschinen. (!nl)
+      (!KW [docinfo]) [robots] wird nur geschrieben, wenn in einzelnen Dateien nicht (!KW [html_robots]) benutzt wird. (!T)!/html_robots(!t) hat also Vorrang vor (!KW [docinfo]) [robots]. Seit Version~6.5.17 implementiert.
 !endif
 !iflang [english]
-# ToDo: Englisch
-!item Neue Kommandos: (!T)!/html_robots(!t), (!KW [docinfo]) [robots] (!nl)
-   Dienen zum Setzen der Robots Anweisungen für Suchmaschinen. (!nl)
-   (!KW [docinfo]) [robots] wird nur geschrieben, wenn in
-   einzelnen Dateien nicht (!KW [html_robots]) benutzt wird. Dies habt also vorang.
-   Seit Version~6.5.17 implementiert.
+!item New commands: (!T)!/html_robots(!t), (!KW [docinfo]) [robots] (!nl)
+      Use them for creating robots commands for search engines. (!nl)
+      (!KW [docinfo]) [robots] is only written if single manual pages don't use (!KW [html_robots]). So (!T)!/html_robots(!t) has a higher priority than (!KW [docinfo]) [robots]. Implemented since version~6.5.17.
 !endif
 # ..............................................................................
 !iflang [german]
