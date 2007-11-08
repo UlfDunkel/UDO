@@ -400,7 +400,13 @@ Letzte Aktualisierung am (!today)
 Angaben gemacht oder im Vorspann (!KW [no_footers] [[html!!]]) benutzt, so
 gibt UDO nichts aus.
 
+!item [distributor]
+""<text>"" bezeichnet die Firma, die das Produkt oder Dokument vertreibt.
+Wenn distributor benutzt wird, wird auf der Titelseite nach Autor und Firma 
+""Distributor: distributor"" eingefügt.
+
 !end_description
+
 Die Werte Einträge stehen als Defines zur Verfügung in der Form
 (!KW [UDO_xxx)], also z. B. (!KW [UDO_title]). Natürlich ist dies nur der
 Fall, wenn sie vorher definiert worden sind.
@@ -518,6 +524,11 @@ Last updated on (!today)
 <webmasterurl> has priority over <webmasteremail>. If you don't specify
 any data or use the switch (!KW [no_footers] [[html!!]]) in the preamble,
 UDO will output nothing.
+
+!item [distributor]
+""<text>"" describes the company which distributes the product or document.
+When distributor is used, the title page will show it below author and company as 
+""Distributor: distributor"".
 
 !end_description
 
