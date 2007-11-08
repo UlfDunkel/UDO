@@ -551,14 +551,14 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 !item Die Einträge von (!KW [docinfo]) [keywords, description] werden jetzt
       auch bei der HTML-Ausgabe geschrieben, allerdings nur, wenn in
       einzelnen Dateien nicht (!KW [html_keywords]) bzw. (!KW [html_description])
-      benutzt wird. Diese haben also vorang. (!nl)
+      benutzt wird. Diese haben also Vorrang. (!nl)
       Version 6.5.9
 !endif
 !iflang [english]
 !item Die Einträge von (!KW [docinfo]) [keywords, description] werden jetzt
       auch bei der HTML-Ausgabe geschrieben, allerdings nur, wenn in
       einzelnen Dateien nicht (!KW [html_keywords]) bzw. (!KW [html_description])
-      benutzt wird. Diese haben also vorang. (!nl)
+      benutzt wird. Diese haben also Vorrang. (!nl)
       Version 6.5.9
 !endif
 # ..............................................................................
