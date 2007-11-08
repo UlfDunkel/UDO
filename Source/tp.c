@@ -691,889 +691,1146 @@ GLOBAL BOOLEAN set_docinfo ( void )
 
 
 
-GLOBAL void c_maketitle ( void )
+
+
+
+
+/*******************************************************************************
+*
+*  c_maketitle():
+*     creates and outputs title page of the document
+*
+*  Out:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void c_maketitle(void)
 {
-        int i;
-        char n[512], s1[128], s2[128];
-        BOOLEAN has_author,
-                        has_program,
-                        has_title,
-                        has_version,
-                        has_date,
-                        has_authorimage,
-                        has_programimage,
-                        has_address,
-                        has_company;    /* New in V6.5.2 [NHz] */
-
-        if (called_maketitle)
-        {       error_called_twice("!maketitle");       /*r6pl2*/
-                return;
-        }
-
-        called_maketitle= TRUE;
-
-        has_author=             (titdat.author!=NULL);
-        has_address=            (address_counter>0);
-        has_program=            (titdat.program!=NULL);
-        has_title=              (titdat.title!=NULL);
-        has_version=            (titdat.version!=NULL);
-        has_date=               (titdat.date!=NULL);
-        has_authorimage=        (titdat.authorimage!=NULL);
-        has_programimage=       (titdat.programimage!=NULL);
-        has_company=            (titdat.company!=NULL); /* New in V6.5.2 [NHz] */
-
-        if ( !( has_author ||
-                        has_program ||
-                        has_title ||
-                        has_version ||
-                        has_date ||
-                        has_authorimage ||
-                        has_programimage ||
-                        has_address ||
-                        has_company) /* New in V6.5.2 [NHz] */
-                )
-        {
-                error_missing_title_data();     /* r6pl2 */
-                return;
-        }
-
-
-        switch(desttype)
-        {
-                case TOTEX:
-                case TOPDL:
-                        outln("\\begin{titlepage}");
-                        outln("\\begin{center}");
-                        if (has_title)
-                        {       voutlnf("{\\Large %s} \\\\", titdat.title);
-                                outln("\\bigskip");
-                        }
-
-                        if ( has_programimage )
-                        {       switch (iTexVersion)
-                                {       case TEX_LINDNER:
-                                        case TEX_STRUNK:
-                                                c_begin_center();
-                                                c_img_output(titdat.programimage, "", FALSE);
-                                                c_end_center();
-                                                break;
-                                        case TEX_EMTEX:
-                                        case TEX_MIKTEX:  /* V6.5.20 [CS] */
-                                                c_begin_center();
-                                                c_msp_output(titdat.programimage, "", FALSE);
-                                                c_end_center();
-                                                break;
-                                        case TEX_TETEX:
-                                                c_begin_center();
-                                                c_eps_output(titdat.programimage, "", ".eps", FALSE);
-                                                c_end_center();
-                                                break;
-                                }
-                        }
-                        else
-                        {       if (has_program)
-                                {       voutlnf("{\\Huge %s} \\\\", titdat.program);
-                                        outln("\\bigskip");
-                                }
-                        }
-
-                        if (has_version)
-                        {       voutlnf("{\\large %s} \\\\", titdat.version);
-                                outln("\\bigskip");
-                        }
-                        if (has_date)
-                        {       voutlnf("{\\large %s} \\\\", titdat.date);
-                        }
-
-                        if ( has_author || has_authorimage )
-                        {       voutlnf("\\vfill\n%s\\\\\n\\medskip", lang.by);
-                        }
-
-                        if ( has_authorimage )
-                        {       switch (iTexVersion)
-                                {       case TEX_LINDNER:
-                                        case TEX_STRUNK:
-                                                c_begin_center();
-                                                c_img_output(titdat.authorimage, "", FALSE);
-                                                c_end_center();
-                                                break;
-                                        case TEX_EMTEX:
-                                        case TEX_MIKTEX:  /* V6.5.20 [CS] */
-                                                c_begin_center();
-                                                c_msp_output(titdat.authorimage, "", FALSE);
-                                                c_end_center();
-                                                break;
-                                        case TEX_TETEX:
-                                                c_begin_center();
-                                                c_eps_output(titdat.authorimage, "", ".eps", FALSE);
-                                                c_end_center();
-                                                break;
-                                }
-                        }
-
-                        if (has_author)
-                        {       voutlnf("%s \\\\", titdat.author);
-                        }
-
-                        /* New in V6.5.2 [NHz] */
-                        if (has_company)
-                        {       auto_quote_chars(lang.fur, FALSE);
-                                voutlnf("\\vfill\n%s\\\\\n\\medskip", lang.fur);
-                                voutlnf("%s \\\\", titdat.company);
-                        }
-
-                        if (has_address)
-                        {       for (i=1; i<=address_counter; i++)
-                                {       if (titdat.address[i]!=NULL)
-                                        {       voutlnf("%s \\\\", titdat.address[i]);
-                                        }
-                                }
-                        }
-
-                        outln("\\end{center}");
-                        outln("\\end{titlepage}");
-                        break;
-
-                case TOLYX:
-                        outln("\\layout Title");
-                        outln("\\fill_top");
-                        outln("");
-                        if (has_title)
-                        {       voutlnf("\\layout Section*\n\\align center\n%s\n\\newline\n", titdat.title);
-                        }
-                        if (has_program)
-                        {       voutlnf("\\size giant %s\n", titdat.program);
-                        }
-                        if (has_version)
-                        {       voutlnf("\\layout Subsection*\n\\align center\n%s\n", titdat.version);
-                        }
-                        if (has_date)
-                        {       voutlnf("\\layout Subsection*\n\\align center\n%s\n", titdat.date);
-                        }
-                        if (has_author)
-                        {       voutlnf("\\fill_bottom\n\\layout Subsubsection*\n\\align center\n\n%s\n", lang.by);
-                                voutlnf("\\layout Subsection*\n\\align center\n\n%s\n", titdat.author);
-                        }
-                        /* New in V6.5.2 [NHz] */
-                        if (has_company)
-                        {       voutlnf("\\fill_bottom\n\\layout Subsubsection*\n\\align center\n\n%s\n", lang.fur);
-                                voutlnf("\\layout Subsection*\n\\align center\n\n%s\n", titdat.company);
-                        }
-                        if (has_address)
-                        {       for (i=1; i<=address_counter; i++)
-                                {       if (titdat.address[i]!=NULL)
-                                        {       voutlnf("\\layout Subsection*\n\\align center\n%s\n", titdat.address[i]);
-                                        }
-                                }
-                        }
-                        break;
-
-                case TOINF:
-                        outln("@titlepage");
-                        outln("@sp 1");
-                        if (has_title)
-                        {       voutlnf("@center @titlefont{%s}", titdat.title);
-                                outln("@sp 1");
-                        }
-                        if (has_program)
-                        {       voutlnf("@center @titlefont{%s}", titdat.program);
-                                outln("@sp 1");
-                        }
-                        if (has_version)
-                        {       voutlnf("@center %s", titdat.version);
-                                outln("@sp 1");
-                        }
-                        if (has_date)
-                        {       voutlnf("@center %s", titdat.date);
-                                outln("@sp 1");
-                        }
-                        if (has_author)
-                        {       outln("@sp 10");
-                                voutlnf("@center %s", lang.by);
-                                outln("@sp 1");
-                                voutlnf("@center %s", titdat.author);
-                        }
-                        /* New in V6.5.2 [NHz] */
-                        if (has_company)
-                        {       outln("@sp 10");
-                                voutlnf("@center %s", lang.fur);
-                                outln("@sp 1");
-                                voutlnf("@center %s", titdat.company);
-                        }
-                        if (has_address)
-                        {       for (i=1; i<=address_counter; i++)
-                                {       if (titdat.address[i]!=NULL)
-                                        {       voutlnf("@center %s", titdat.address[i]);
-                                        }
-                                }
-                        }
-                        outln("@end titlepage");
-                        break;
-
-                case TOSTG:
-                        outln("");
-                        voutlnf("@node \"%s\"", lang.title);
-                        stg_headline("", lang.title);
-                        outln("");
-
-                        outln("@autorefoff");
-                        if (has_title)
-                        {       outlncenter(titdat.title);
-                                outln("");
-                        }
-
-                        if (has_programimage)
-                        {       strcpy(n, titdat.programimage);
-                                change_sep_suffix(n, ".img");   /* PL6 */
-                                c_begin_center();
-                                c_img_output(n, "", FALSE);
-                                c_end_center();
-                        }
-                        else
-                        {       if (has_program)
-                                {       outlncenter(titdat.program);
-                                        outln("");
-                                }
-                        }
-
-                        if (has_version)        outlncenter(titdat.version);
-                        if (has_date)           outlncenter(titdat.date);
-
-                        if ( has_author || has_authorimage )
-                        {       outln("");
-                                outlncenter(lang.by);
-                        }
-
-                        if ( has_authorimage )
-                        {       strcpy(n, titdat.authorimage);
-                                change_sep_suffix(n, ".img");   /* PL6 */
-                                c_begin_center();
-                                c_img_output(n, "", FALSE);
-                                c_end_center();
-                        }
-
-                        if ( has_author )
-                        {       outln("");
-                                outlncenter(titdat.author);
-                        }
-
-                        /* New in V6.5.2 [NHz] */
-                        if ( has_company )
-                        {       outln("");
-                                outlncenter(lang.fur);
-                                outln("");
-                                outlncenter(titdat.company);
-                        }
-
-                        if ( has_address )
-                        {       for (i=1; i<=address_counter; i++)
-                                {       if (titdat.address[i]!=NULL)
-                                        {       outlncenter(titdat.address[i]);
-                                        }
-                                }
-                        }
-                        outln("@autorefon");
-                        outln("");
-
-                        if (uses_tableofcontents)
-                        {       outln("");
-                                outlncenter(lang.contents);
-                        }
-                        outln("@endnode");
-                        outln("");
-                        break;
-
-                case TOAMG:
-                        outln("");
-                        voutlnf("@node \"%s\" \"%s\"", lang.title, titleprogram);
-                        stg_headline("", lang.title);
-                        outln("");
-
-                        if (has_title)
-                        {       outlncenter(titdat.title);
-                                outln("");
-                        }
-
-                        if (has_program)
-                        {       outlncenter(titdat.program);
-                                outln("");
-                        }
-
-                        if (has_version)        outlncenter(titdat.version);
-                        if (has_date)           outlncenter(titdat.date);
-
-                        if ( has_author )
-                        {       outln("");
-                                outlncenter(lang.by);
-                                outln("");
-                                outlncenter(titdat.author);
-                        }
-
-                        /* New in V6.5.2 [NHz] */
-                        if ( has_company )
-                        {       outln("");
-                                outlncenter(lang.fur);
-                                outln("");
-                                outlncenter(titdat.company);
-                        }
-
-                        if ( has_address )
-                        {       for (i=1; i<=address_counter; i++)
-                                {       if (titdat.address[i]!=NULL)
-                                        {       outlncenter(titdat.address[i]);
-                                        }
-                                }
-                        }
-                        outln("");
-
-                        if (uses_tableofcontents)
-                        {       outln("");
-                                outlncenter(lang.contents);
-                        }
-                        outln("@endnode");
-                        outln("");
-                        break;
-
-                case TOPCH:
-                        /* Titelseite erfolgt bei PC-HELP bei tableofcontents... */
-                        break;
-
-                case TODRC:
-                        n[0]= EOS;
-                        if (has_title)
-                        {       strcat(n, titdat.title);
-                                strcat(n, " ");
-                        }
-                        if (has_program)
-                        {       strcat(n, titdat.program);
-                        }
-                        del_whitespaces(n);
-                        if (n[0]==EOS)
-                        {       strcpy(n, lang.unknown);
-                        }
-                        voutlnf("%%%% 1, %s", n);
-
-                        /*r6pl5: Eigene Titelseitenroutine, damit die Zentrierung klappt */
-
-                        if ( has_title )
-                        {       outlncenterfill(titdat.title);
-                                outln("");
-                        }
-                        if ( has_program )
-                        {       outlncenterfill(titdat.program);
-                                outln("");
-                        }
-                        if ( has_version )      outlncenterfill(titdat.version);
-                        if ( has_date )         outlncenterfill(titdat.date);
-
-                        if ( has_author )
-                        {       outln("");
-                                outlncenterfill(lang.by);
-                                outln("");
-                                outlncenterfill(titdat.author);
-                        }
-
-                        /* New in V6.5.2 [NHz] */
-                        if ( has_company )
-                        {       outln("");
-                                outlncenterfill(lang.fur);
-                                outln("");
-                                outlncenterfill(titdat.company);
-                        }
-
-                        if ( has_address )
-                        {       for (i=1; i<=address_counter; i++)
-                                {       if (titdat.address[i]!=NULL)
-                                        {       outlncenterfill(titdat.address[i]);
-                                        }
-                                }
-                                outln("");
-                        }
-                        outln("");
-                        break;
-
-                case TOASC:
-                case TOMAN:
-                        if ( has_title )
-                        {       outlncenter(titdat.title);
-                                outln("");
-                        }
-                        if ( has_program )
-                        {       outlncenter(titdat.program);
-                                outln("");
-                        }
-                        if ( has_version )      outlncenter(titdat.version);
-                        if ( has_date )         outlncenter(titdat.date);
-
-                        if ( has_author )
-                        {       outln("");
-                                outlncenter(lang.by);
-                                outln("");
-                                outlncenter(titdat.author);
-                        }
-
-                        /* New in V6.5.2 [NHz] */
-                        if ( has_company )
-                        {       outln("");
-                                outlncenter(lang.fur);
-                                outln("");
-                                outlncenter(titdat.company);
-                        }
-
-                        if ( has_address )
-                        {       for (i=1; i<=address_counter; i++)
-                                {       if (titdat.address[i]!=NULL)
-                                        {       outlncenter(titdat.address[i]);
-                                        }
-                                }
-                                outln("");
-                        }
-                        outln("");
-                        outln("");
-                        if (desttype==TOMAN)
-                        {       c_newpage();
-                        }
-                        break;
-
-                case TOSRC:
-                case TOSRP:
-                        memset(n, '#', 62);     n[62]= EOS;
-                        voutlnf("%s  %s", sSrcRemOn, n);
-                        if ( has_title )
-                        {       strcpy(s1, titdat.title);
-                                stringcenter(s1, 60);
-                                voutlnf("    # %s", s1);
-                                outln("    #");
-                        }
-                        if ( has_program )
-                        {       strcpy(s1, titdat.program);
-                                stringcenter(s1, 60);
-                                voutlnf("    # %s", s1);
-                                outln("    #");
-                        }
-                        if ( has_version )
-                        {       strcpy(s1, titdat.version);
-                                stringcenter(s1, 60);
-                                voutlnf("    # %s", s1);
-                        }
-                        if ( has_date )
-                        {       strcpy(s1, titdat.date);
-                                stringcenter(s1, 60);
-                                voutlnf("    # %s", s1);
-                        }
-                        if ( has_author )
-                        {       outln("    #");
-                                strcpy(s1, "Copyright (C) by");
-                                stringcenter(s1, 60);
-                                voutlnf("    # %s", s1);
-                                outln("    #");
-                                strcpy(s1, titdat.author);
-                                stringcenter(s1, 60);
-                                voutlnf("    # %s", s1);
-                        }
-                        /* New in V6.5.2 [NHz] */
-                        if ( has_company )
-                        {       outln("    #");
-                                strcpy(s1, lang.fur);
-                                stringcenter(s1, 60);
-                                voutlnf("    # %s", s1);
-                                outln("    #");
-                                strcpy(s1, titdat.company);
-                                stringcenter(s1, 60);
-                                voutlnf("    # %s", s1);
-                        }
-
-                        if ( has_address )
-                        {       for (i=1; i<=address_counter; i++)
-                                {       if (titdat.address[i]!=NULL)
-                                        {       strcpy(s1, titdat.address[i]);
-                                                stringcenter(s1, 60);
-                                                voutlnf("    # %s", s1);
-                                        }
-                                }
-                                outln("    #");
-                        }
-                        voutlnf("    %s %s", n, sSrcRemOff);
-                        break;
-
-                case TORTF:
-                        outln(rtf_par);
-                        outln("\\qc ");
-                        if ( has_title )
-                        {       voutlnf("{\\fs%d %s}%s%s", iDocPropfontSize + 14, titdat.title, rtf_par, rtf_par);
-                        }
-                        if ( has_program )
-                        {       voutlnf("{\\fs%d %s}%s%s", iDocPropfontSize + 38, titdat.program, rtf_par, rtf_par);
-                        }
-                        if ( has_version )
-                        {       voutlnf("{\\fs%d %s}%s", iDocPropfontSize + 6, titdat.version, rtf_par);
-                        }
-                        if ( has_date )
-                        {       voutlnf("{\\fs%d %s}%s", iDocPropfontSize + 6, titdat.date, rtf_par);
-                        }
-                        if ( has_author || has_address )
-                        {       /* New in V6.5.2 [NHz] */
-                                if(has_company)
-                                        for (i=0; i<(22-address_counter); i++) out(rtf_par);
-                                else
-                                        for (i=0; i<(25-address_counter); i++) out(rtf_par);
-                                outln(rtf_par);
-                        }
-                        if (has_author)
-                        {       voutlnf("%s%s%s", lang.by, rtf_par, rtf_par);
-                                voutlnf("%s%s", titdat.author, rtf_par);
-                        }
-                        /* New in V6.5.2 [NHz] */
-                        if (has_company)
-                        {       auto_quote_chars(lang.fur, FALSE);
-                                voutlnf("%s %s%s%s", rtf_par, lang.fur, rtf_par, rtf_par);
-                                voutlnf("%s%s", titdat.company, rtf_par);
-                        }
-                        if ( has_address )
-                        {       for (i=1; i<=address_counter; i++)
-                                {       if (titdat.address[i]!=NULL)
-                                        {       voutlnf("%s%s", titdat.address[i], rtf_par);
-                                        }
-                                }
-                        }
-                        outln("\\ql");
-                        outln("\\page");
-                        break;
-
-                case TOWIN:
-                case TOWH4:
-                        check_endnode();
-
-                        outln("");              
-                        outln("{");     
-                        voutlnf("#{\\footnote # %s}", WIN_TITLE_NODE_NAME);
-                        voutlnf("${\\footnote $ %s}", lang.title);
-                        voutlnf("K{\\footnote K %s}", lang.title);
-                        if (!no_buttons)        /* r6pl8 */
-                        {       outln(win_browse);
-                                outln("!{\\footnote ! DisableButton(\"BTN_UP\") }");
-                        }
-
-                        if ( has_title )
-                        {       voutlnf("\\qc{\\fs%d %s}\\par\\pard", iDocPropfontSize + 6, titdat.title);
-                        }
-
-                        if ( has_programimage )
-                        {       outln("\\par");
-                                c_begin_center();
-                                c_bmp_output(titdat.programimage, "", FALSE);
-                                c_end_center();
-                        }
-                        else
-                        {       if ( has_program )
-                                {       voutlnf("\\qc{\\fs%d %s}\\par\\pard", iDocPropfontSize + 26, titdat.program);
-                                }
-                        }
-
-                        if ( has_version )      voutlnf("\\qc{%s}\\par\\pard", titdat.version);
-                        if ( has_date )         voutlnf("\\qc{%s}\\par\\pard", titdat.date);
-
-                        if ( has_author || has_authorimage)
-                        {       voutlnf("\\par\\qc{%s}\\par\\pard", lang.by);
-                        }
-
-                        if ( has_authorimage )
-                        {       outln("\\par");
-                                c_begin_center();
-                                c_bmp_output(titdat.authorimage, "", FALSE);
-                                c_end_center();
-                        }
-
-                        if ( has_author )
-                        {       voutlnf("\\qc{%s}\\par\\pard", titdat.author);
-                        }
-
-                        /* New in V6.5.2 [NHz] */
-                        if ( has_company )
-                        {       auto_quote_chars(lang.fur, FALSE);
-                                voutlnf("\\par\\qc{%s}\\par\\pard", lang.fur);
-                                voutlnf("\\qc{%s}\\par\\pard", titdat.company);
-                        }
-
-                        if ( has_address )
-                        {       for (i=1; i<=address_counter; i++)
-                                {       if (titdat.address[i]!=NULL)
-                                        {       voutlnf("\\qc{%s}\\par\\pard", titdat.address[i]);
-                                        }
-                                }
-                        }
-
-                        outln("\\par\\par");
-                        if (uses_tableofcontents)
-                        {       node2NrWinhelp(n, 0);
-                                voutlnf("\\qc{{\\uldb %s}{\\v %s}}\\par\\pard", lang.contents, n);
-                        }
-                        outln("}\\page");
-                        break;
-
-                case TOAQV:
-                        check_endnode();
-
-                        outln("");              
-                        outln("{");     
-                        voutlnf("#{\\footnote # %s}", WIN_TITLE_NODE_NAME);
-                        voutlnf("${\\footnote $ %s}", lang.title);
-                        voutlnf("K{\\footnote K %s}", lang.title);
-
-                        if (!no_buttons)        /* r6pl8 */
-                        {       outln(win_browse);
-                                outln("!{\\footnote ! DisableButton(\"BTN_UP\") }");
-                        }
-
-                        if ( has_title )
-                        {       voutlnf("\\qc %s\\par\\pard\\par", titdat.title);
-                        }
-
-                        if ( has_programimage )
-                        {       outln("\\par");
-                                c_begin_center();
-                                c_bmp_output(titdat.programimage, "", FALSE);
-                                c_end_center();
-                        }
-                        else
-                        {       if ( has_program )
-                                {       voutlnf("\\qc\\fs%d %s\\par\\pard\\plain", iDocPropfontSize + 26, titdat.program);
-                                }
-                        }
-
-                        if ( has_version )      voutlnf("\\qc %s\\par\\pard", titdat.version);
-                        if ( has_date )         voutlnf("\\qc %s\\par\\pard", titdat.date);
-
-                        if ( has_author || has_authorimage )
-                        {       voutlnf("\\par\\qc %s\\par\\pard", lang.by);
-                        }
-
-                        if ( has_authorimage )
-                        {       outln("\\par");
-                                c_begin_center();
-                                c_bmp_output(titdat.authorimage, "", FALSE);
-                                c_end_center();
-                        }
-
-                        if ( has_author )
-                        {       voutlnf("\\qc %s\\par\\pard", titdat.author);
-                        }
-
-                        /* New in V6.5.2 [NHz] */
-                        if ( has_company )
-                        {       auto_quote_chars(lang.fur, FALSE);
-                                voutlnf("\\par\\qc %s\\par\\pard", lang.fur);
-                                voutlnf("\\qc %s\\par\\pard", titdat.company);
-                        }
-
-                        if ( has_address )
-                        {       for (i=1; i<=address_counter; i++)
-                                {       if (titdat.address[i]!=NULL)
-                                        {       voutlnf("\\qc %s\\par\\pard", titdat.address[i]);
-                                        }
-                                }
-                        }
-
-                        outln("\\par\\par");
-                        if (uses_tableofcontents)
-                        {       voutlnf("\\qc {\\uldb %s}{\\v %s}\\par\\pard", lang.contents, lang.contents);
-                        }
-                        outln("}\\page");
-                        break;
-
-                case TOHAH:             /* V6.5.17 */
-                case TOHTM:
-                case TOMHH:
-                        /* New in V6.5.9 [NHz] */
-                        outln("<div id=\"udo_titlepage\">");
-
-                        if ( has_title )
-                        {       voutlnf("<h2 align=\"center\">%s</h2>", titdat.title);
-                        }
-
-                        if ( has_programimage )
-                        {       c_begin_center();
-                                c_gif_output(titdat.programimage, "", sDocImgSuffix, 0);
-                                c_end_center();
-                        }
-                        else
-                        {       if ( has_program )
-                                {       voutlnf("<h1 align=\"center\">%s</h1>", titdat.program);
-                                }
-                        }
-
-                        if (has_version || has_date || has_author || has_address)
-                        {       outln("<p align=\"center\">");
-                        }
-
-                        if ( has_version )
-                        {       voutlnf("%s<br />", titdat.version);
-                        }
-                        if ( has_date )
-                        {       voutlnf("%s<br />", titdat.date);
-                        }
-                        if ( has_author || has_authorimage )
-                        {       voutlnf("<br />%s<br />", lang.by);
-                        }
-                        if ( has_authorimage )
-                        {       c_begin_center();
-                                c_gif_output(titdat.authorimage, "", sDocImgSuffix, 0);
-                                c_end_center();
-                                if (has_author || has_address)
-                                {       outln("<p align=\"center\">");
-                                }
-                        }
-                        if ( has_author )
-                        {       voutlnf("%s<br />", titdat.author);
-                        }
-
-                        /* New in V6.5.2 [NHz] */
-                        if ( has_company )
-                        {       auto_quote_chars(lang.fur, FALSE);
-                                voutlnf("<br />%s<br />", lang.fur);
-                                voutlnf("%s<br />", titdat.company);
-                        }
-
-                        if ( has_address )
-                        {       for (i=1; i<=address_counter; i++)
-                                {       if (titdat.address[i]!=NULL)
-                                        {       voutlnf("%s<br />", titdat.address[i]);
-                                        }
-                                }
-                        }
-
-                        if (has_version || has_date || has_author || has_address)
-                        {       outln("<p>");
-                        }
-
-                        if (uses_tableofcontents)
-                        {       outln(HTML_HR);
-                        }
-
-                        /* New in V6.5.9 [NHz] */
-                        outln("</div>");
-
-                        break;
-
-                case TOTVH:
-                        outln("");
-                        voutlnf(".topic %s=0", lang.title);
-                        outln("");
-
-                        if ( has_title )
-                        {       outlncenter(titdat.title);
-                                outln("");
-                        }
-
-                        if ( has_program )
-                        {       outlncenter(titdat.program);
-                                outln("");
-                        }
-
-                        if ( has_version )      outlncenter(titdat.version);
-                        if ( has_date )         outlncenter(titdat.date);
-
-                        if ( has_author )
-                        {       outln("");
-                                outlncenter(lang.by);
-                                outln("");
-                                outlncenter(titdat.author);
-                        }
-
-                        /* New in V6.5.2 [NHz] */
-                        if ( has_company )
-                        {       outln("");
-                                outlncenter(lang.fur);
-                                outln("");
-                                outlncenter(titdat.company);
-                        }
-
-                        if (address_counter>0)
-                        {       for (i=1; i<=address_counter; i++)
-                                {       if (titdat.address[i]!=NULL)
-                                        {       outlncenter(titdat.address[i]);
-                                        }
-                                }
-                        }
-
-                        outln("");
-                        outln("");
-
-                        if (uses_tableofcontents)
-                        {       sprintf(s1, "%s", lang.contents);       /* PL10: Leerzeichen davor */
-                                sprintf(s2, "{%s:%s}", lang.contents, lang.contents);
-                                strcpy(n, lang.contents);
-                                strcenter(n, zDocParwidth);
-                                replace_once(n, s1, s2);
-                                outln(n);
-                        }
-
-                        outln("");
-                        break;
-
-                /* New in r6pl15 [NHz] */
-                /* Title-Page for Postscript */
-                case TOKPS:
-                        outln("/acty acty 50 sub def");
-                        outln("newline");
-                        if ( has_title )
-                        {       outln("14 changeFontSize");
-                                voutlnf("(%s) Center setAlign", titdat.title);
-                        }
-                        if ( has_program )
-                        {       outln("22 changeFontSize");
-                                outln("newline");
-                                voutlnf("(%s) Center setAlign", titdat.program);
-                        }
-                        if ( has_version )
-                        {       outln("14 changeFontSize");
-                                outln("newline");
-                                voutlnf("(%s) Center setAlign", titdat.version);
-                        }
-                        if ( has_date )
-                        {       outln("newline");
-                                voutlnf("(%s) Center setAlign", titdat.date);
-                                outln("11 changeFontSize");
-                        }
-
-                        if ( has_author )
-                        {       outln("currentpoint exch pop lowermargin 125 add lt");
-                                outln("{");
-                                outln("  /acty lowermargin 125 add def");
-                                outln("}");
-                                outln("{");
-                                outln("  /acty lowermargin 200 add def");
-                                outln("} ifelse");
-                                outln("newline");
-                                voutlnf("(%s) Center setAlign newline", lang.by);
-                                voutlnf("(%s) Center setAlign", titdat.author);
-                        }
-
-                        /* New in V6.5.2 [NHz] */
-                        if ( has_company )
-                        {       outln("newline");
-                                auto_quote_chars(lang.fur, FALSE);
-                                voutlnf("(%s) Center setAlign newline", lang.fur);
-                                voutlnf("(%s) Center setAlign", titdat.company);
-                        }
-
-                        if ( has_address )
-                        {       outln("newline");
-                                for (i=1; i<=address_counter; i++)
-                                {       if (titdat.address[i]!=NULL)
-                                        {       voutlnf("(%s) Center setAlign newline", titdat.address[i]);
-                                        }
-                                }
-                                outln("newline");
-                        }
-                        c_newpage();
-                        /* New: Fixed bug #0000040 in r6.3pl16 [NHz] */
-                        outln("newline");
-                        break;
-
-        }
-
-}       /*c_maketitle*/
+   int       i;                 /* counter var. */
+   char      n[512],            /* */
+	          s1[128],           /* */
+				 s2[128];           /* */
+   BOOLEAN   has_author,        /* flag */
+             has_program,       /* flag */
+             has_title,         /* flag */
+             has_version,       /* flag */
+             has_date,          /* flag */
+             has_authorimage,   /* flag */
+             has_programimage,  /* flag */
+             has_address,       /* flag */
+             has_company;       /* flag; New in V6.5.2 [NHz] */
+
+
+   if (called_maketitle)                  /* this function has been used already? */
+   {
+	   error_called_twice("!maketitle");   /*r6pl2*/
+      return;
+   }
+
+   called_maketitle = TRUE;               /* set flag when this function is used */
+
+   has_author       = (titdat.author       != NULL);
+   has_authorimage  = (titdat.authorimage  != NULL);
+   has_address      = (address_counter     >  0);
+   has_program      = (titdat.program      != NULL);
+   has_programimage = (titdat.programimage != NULL);
+   has_title        = (titdat.title        != NULL);
+   has_version      = (titdat.version      != NULL);
+   has_date         = (titdat.date         != NULL);
+                                          /* New in V6.5.2 [NHz] */
+   has_company      = (titdat.company      != NULL);
+
+   if ( !(    has_author
+           || has_authorimage
+           || has_program
+           || has_programimage
+           || has_title
+           || has_version
+           || has_date
+           || has_address
+           || has_company                 /* New in V6.5.2 [NHz] */
+          )
+      )
+   {
+      error_missing_title_data();         /* r6pl2 */
+      return;
+   }
+
+
+   switch (desttype)                      /* which output format? */
+   {
+   case TOTEX:                            /* TeX */
+   case TOPDL:                            /* */
+      outln("\\begin{titlepage}");
+      outln("\\begin{center}");
+		
+      if (has_title)
+      {
+		   voutlnf("{\\Large %s} \\\\", titdat.title);
+         outln("\\bigskip");
+      }
+
+      if (has_programimage)
+      {
+		   switch (iTexVersion)
+         {
+			case TEX_LINDNER:
+         case TEX_STRUNK:
+            c_begin_center();
+            c_img_output(titdat.programimage, "", FALSE);
+            c_end_center();
+            break;
+         case TEX_EMTEX:
+         case TEX_MIKTEX:                 /* V6.5.20 [CS] */
+            c_begin_center();
+            c_msp_output(titdat.programimage, "", FALSE);
+            c_end_center();
+            break;
+         case TEX_TETEX:
+            c_begin_center();
+            c_eps_output(titdat.programimage, "", ".eps", FALSE);
+            c_end_center();
+            break;
+         }
+      }
+      
+		if (has_program)
+      {
+         voutlnf("{\\Huge %s} \\\\", titdat.program);
+         outln("\\bigskip");
+      }
+
+      if (has_version)
+      {
+		   voutlnf("{\\large %s} \\\\", titdat.version);
+         outln("\\bigskip");
+      }
+		
+      if (has_date)
+      {
+		   voutlnf("{\\large %s} \\\\", titdat.date);
+      }
+
+      if (has_author || has_authorimage)
+      {
+		   voutlnf("\\vfill\n%s\\\\\n\\medskip", lang.by);
+      }
+
+      if (has_authorimage)
+      {
+		   switch (iTexVersion)
+         {
+			case TEX_LINDNER:
+         case TEX_STRUNK:
+            c_begin_center();
+            c_img_output(titdat.authorimage, "", FALSE);
+            c_end_center();
+            break;
+         case TEX_EMTEX:
+            c_begin_center();
+            c_msp_output(titdat.authorimage, "", FALSE);
+            c_end_center();
+            break;
+         case TEX_TETEX:
+            c_begin_center();
+            c_eps_output(titdat.authorimage, "", ".eps", FALSE);
+            c_end_center();
+            break;
+         }
+      }
+
+      if (has_author)
+      {
+		   voutlnf("%s \\\\", titdat.author);
+      }
+
+      /* New in V6.5.2 [NHz] */
+      if (has_company)
+      {
+		   auto_quote_chars(lang.fur, FALSE);
+         voutlnf("\\vfill\n%s\\\\\n\\medskip", lang.fur);
+         voutlnf("%s \\\\", titdat.company);
+      }
+
+      if (has_address)
+      {
+		   for (i = 1; i <= address_counter; i++)
+         {
+			   if (titdat.address[i] != NULL)
+            {
+				   voutlnf("%s \\\\", titdat.address[i]);
+            }
+         }
+      }
+
+      outln("\\end{center}");
+      outln("\\end{titlepage}");
+      break;
+
+   case TOLYX:                            /* */
+      outln("\\layout Title");
+      outln("\\fill_top");
+      outln("");
+		
+      if (has_title)
+      {
+		   voutlnf("\\layout Section*\n\\align center\n%s\n\\newline\n", titdat.title);
+      }
+      
+      if (has_program)
+      {
+		   voutlnf("\\size giant %s\n", titdat.program);
+      }
+		
+      if (has_version)
+      {
+		   voutlnf("\\layout Subsection*\n\\align center\n%s\n", titdat.version);
+      }
+		
+      if (has_date)
+      {
+		   voutlnf("\\layout Subsection*\n\\align center\n%s\n", titdat.date);
+      }
+		
+      if (has_author)
+      {
+		   voutlnf("\\fill_bottom\n\\layout Subsubsection*\n\\align center\n\n%s\n", lang.by);
+         voutlnf("\\layout Subsection*\n\\align center\n\n%s\n", titdat.author);
+      }
+		
+      /* New in V6.5.2 [NHz] */
+      if (has_company)
+      {
+		   voutlnf("\\fill_bottom\n\\layout Subsubsection*\n\\align center\n\n%s\n", lang.fur);
+         voutlnf("\\layout Subsection*\n\\align center\n\n%s\n", titdat.company);
+      }
+		
+      if (has_address)
+      {
+		   for (i = 1; i <= address_counter; i++)
+         {
+			   if (titdat.address[i] != NULL)
+            {
+				   voutlnf("\\layout Subsection*\n\\align center\n%s\n", titdat.address[i]);
+            }
+         }
+      }
+      break;
+
+   case TOINF:                            /* */
+      outln("@titlepage");
+      outln("@sp 1");
+		
+      if (has_title)
+      {
+		   voutlnf("@center @titlefont{%s}", titdat.title);
+         outln("@sp 1");
+      }
+		
+      if (has_program)
+      {
+		   voutlnf("@center @titlefont{%s}", titdat.program);
+         outln("@sp 1");
+      }
+		
+      if (has_version)
+      {
+		   voutlnf("@center %s", titdat.version);
+         outln("@sp 1");
+      }
+		
+      if (has_date)
+      {
+		   voutlnf("@center %s", titdat.date);
+         outln("@sp 1");
+      }
+		
+      if (has_author)
+      {
+		   outln("@sp 10");
+         voutlnf("@center %s", lang.by);
+         outln("@sp 1");
+         voutlnf("@center %s", titdat.author);
+      }
+		
+      /* New in V6.5.2 [NHz] */
+      if (has_company)
+      {
+		   outln("@sp 10");
+         voutlnf("@center %s", lang.fur);
+         outln("@sp 1");
+         voutlnf("@center %s", titdat.company);
+      }
+		
+      if (has_address)
+      {
+		   for (i = 1; i <= address_counter; i++)
+         {
+			   if (titdat.address[i] != NULL)
+            {
+				   voutlnf("@center %s", titdat.address[i]);
+            }
+         }
+      }
+		
+      outln("@end titlepage");
+      break;
+
+   case TOSTG:                            /* ST-Guide */
+      outln("");
+      voutlnf("@node \"%s\"", lang.title);
+      stg_headline("", lang.title);
+      outln("");
+      outln("@autorefoff");
+		
+      if (has_title)
+      {
+		   outlncenter(titdat.title);
+         outln("");
+      }
+
+      if (has_programimage)
+      {
+		   strcpy(n, titdat.programimage);
+         change_sep_suffix(n, ".img");    /* PL6 */
+         c_begin_center();
+         c_img_output(n, "", FALSE);
+         c_end_center();
+      }
+      
+		if (has_program)
+      {
+		   outlncenter(titdat.program);
+         outln("");
+      }
+
+      if (has_version)
+		   outlncenter(titdat.version);
+	   
+      if (has_date)
+		   outlncenter(titdat.date);
+      
+      if (has_author || has_authorimage)
+      {
+		   outln("");
+         outlncenter(lang.by);
+      }
+
+      if (has_authorimage)
+      {
+		   strcpy(n, titdat.authorimage);
+         change_sep_suffix(n, ".img");    /* PL6 */
+         c_begin_center();
+         c_img_output(n, "", FALSE);
+         c_end_center();
+      }
+
+      if (has_author)
+      {
+		   outln("");
+         outlncenter(titdat.author);
+      }
+
+      /* New in V6.5.2 [NHz] */
+      if (has_company)
+      {
+		   outln("");
+         outlncenter(lang.fur);
+         outln("");
+         outlncenter(titdat.company);
+      }
+
+      if (has_address)
+      {
+		   for (i = 1; i <= address_counter; i++)
+         {
+			   if (titdat.address[i] != NULL)
+            {
+				   outlncenter(titdat.address[i]);
+            }
+         }
+      }
+		
+      outln("@autorefon");
+      outln("");
+
+      if (uses_tableofcontents)
+      {
+		   outln("");
+         outlncenter(lang.contents);
+      }
+		
+      outln("@endnode");
+      outln("");
+      break;
+
+   case TOAMG:                            /* */
+      outln("");
+      voutlnf("@node \"%s\" \"%s\"", lang.title, titleprogram);
+      stg_headline("", lang.title);
+      outln("");
+
+      if (has_title)
+      {
+		   outlncenter(titdat.title);
+         outln("");
+      }
+
+      if (has_program)
+      {
+		   outlncenter(titdat.program);
+         outln("");
+      }
+
+      if (has_version)
+		   outlncenter(titdat.version);
+	   
+      if (has_date)
+		   outlncenter(titdat.date);
+      
+      if (has_author)
+      {
+		   outln("");
+         outlncenter(lang.by);
+         outln("");
+         outlncenter(titdat.author);
+      }
+
+      /* New in V6.5.2 [NHz] */
+      if (has_company)
+      {
+		   outln("");
+         outlncenter(lang.fur);
+         outln("");
+         outlncenter(titdat.company);
+      }
+
+      if (has_address)
+      {
+		   for (i = 1; i <= address_counter; i++)
+         {
+			   if (titdat.address[i] != NULL)
+            {
+				   outlncenter(titdat.address[i]);
+            }
+         }
+      }
+      
+		outln("");
+      
+      if (uses_tableofcontents)
+      {
+		   outln("");
+         outlncenter(lang.contents);
+      }
+      
+		outln("@endnode");
+      outln("");
+      break;
+
+   case TOPCH:                            /* PC-Help */
+      /* Titelseite erfolgt bei PC-HELP bei tableofcontents... */
+      break;
+
+   case TODRC:                            /* */
+      n[0] = EOS;
+		
+      if (has_title)
+      {
+         strcat(n, titdat.title);
+         strcat(n, " ");
+      }
+      
+      if (has_program)
+      {
+         strcat(n, titdat.program);
+      }
+      
+      del_whitespaces(n);
+      
+      if (n[0] == EOS)
+      {
+         strcpy(n, lang.unknown);
+      }
+      
+      voutlnf("%%%% 1, %s", n);
+
+      /*r6pl5: Eigene Titelseitenroutine, damit die Zentrierung klappt */
+      if (has_title)
+      {
+         outlncenterfill(titdat.title);
+         outln("");
+      }
+      
+      if (has_program)
+      {
+         outlncenterfill(titdat.program);
+         outln("");
+      }
+      
+      if (has_version)
+         outlncenterfill(titdat.version);
+      
+      if (has_date)
+         outlncenterfill(titdat.date);
+
+      if (has_author)
+      {
+         outln("");
+         outlncenterfill(lang.by);
+         outln("");
+         outlncenterfill(titdat.author);
+      }
+
+      /* New in V6.5.2 [NHz] */
+      if (has_company)
+      {
+         outln("");
+         outlncenterfill(lang.fur);
+         outln("");
+         outlncenterfill(titdat.company);
+      }
+
+      if (has_address)
+      {
+         for (i = 1; i <= address_counter; i++)
+         {
+            if (titdat.address[i] != NULL)
+            {
+               outlncenterfill(titdat.address[i]);
+            }
+         }
+         
+         outln("");
+      }
+      
+      outln("");
+      break;
+
+   case TOASC:                            /* ASCII */
+   case TOMAN:                            /* */
+      if (has_title)
+      {
+         outlncenter(titdat.title);
+         outln("");
+      }
+      
+      if (has_program)
+      {
+         outlncenter(titdat.program);
+         outln("");
+      }
+      
+      if (has_version)
+         outlncenter(titdat.version);
+      
+      if (has_date)
+         outlncenter(titdat.date);
+      
+      if (has_author)
+      {
+         outln("");
+         outlncenter(lang.by);
+         outln("");
+         outlncenter(titdat.author);
+      }
+
+      /* New in V6.5.2 [NHz] */
+      if (has_company)
+      {
+         outln("");
+         outlncenter(lang.fur);
+         outln("");
+         outlncenter(titdat.company);
+      }
+      
+      if (has_address)
+      {
+         for (i = 1; i <= address_counter; i++)
+         {
+            if (titdat.address[i] != NULL)
+            {
+               outlncenter(titdat.address[i]);
+            }
+         }
+         
+         outln("");
+      }
+      
+      outln("");
+      outln("");
+      
+      if (desttype == TOMAN)
+      {
+         c_newpage();
+      }
+      
+      break;
+
+   case TOSRC:                            /* */
+   case TOSRP:                            /* */
+      memset(n, '#', 62);
+      n[62] = EOS;
+      voutlnf("%s  %s", sSrcRemOn, n);
+      
+      if (has_title)
+      {
+         strcpy(s1, titdat.title);
+         stringcenter(s1, 60);
+         voutlnf("    # %s", s1);
+         outln("    #");
+      }
+      
+      if (has_program)
+      {
+         strcpy(s1, titdat.program);
+         stringcenter(s1, 60);
+         voutlnf("    # %s", s1);
+         outln("    #");
+      }
+      
+      if (has_version)
+      {
+         strcpy(s1, titdat.version);
+         stringcenter(s1, 60);
+         voutlnf("    # %s", s1);
+      }
+      
+      if (has_date)
+      {
+         strcpy(s1, titdat.date);
+         stringcenter(s1, 60);
+         voutlnf("    # %s", s1);
+      }
+      
+      if (has_author)
+      {
+         outln("    #");
+         
+         /* YYY fd:20071108: the next output should be localized! */
+         strcpy(s1, "Copyright (C) by");
+         stringcenter(s1, 60);
+         voutlnf("    # %s", s1);
+         outln("    #");
+         strcpy(s1, titdat.author);
+         stringcenter(s1, 60);
+         voutlnf("    # %s", s1);
+      }
+      
+      /* New in V6.5.2 [NHz] */
+      if (has_company)
+      {
+         outln("    #");
+         strcpy(s1, lang.fur);
+         stringcenter(s1, 60);
+         voutlnf("    # %s", s1);
+         outln("    #");
+         strcpy(s1, titdat.company);
+         stringcenter(s1, 60);
+         voutlnf("    # %s", s1);
+      }
+
+      if (has_address)
+      {
+         for (i = 1; i <= address_counter; i++)
+         {
+            if (titdat.address[i] != NULL)
+            {
+               strcpy(s1, titdat.address[i]);
+               stringcenter(s1, 60);
+               voutlnf("    # %s", s1);
+            }
+         }
+         
+         outln("    #");
+      }
+      
+      voutlnf("    %s %s", n, sSrcRemOff);
+      break;
+
+   case TORTF:                            /* RTF */
+      outln(rtf_par);
+      outln("\\qc ");
+      
+      if (has_title)
+      {
+         voutlnf("{\\fs%d %s}%s%s", iDocPropfontSize + 14, titdat.title, rtf_par, rtf_par);
+      }
+      
+      if (has_program)
+      {
+         voutlnf("{\\fs%d %s}%s%s", iDocPropfontSize + 38, titdat.program, rtf_par, rtf_par);
+      }
+      
+      if (has_version)
+      {
+         voutlnf("{\\fs%d %s}%s", iDocPropfontSize + 6, titdat.version, rtf_par);
+      }
+      
+      if (has_date)
+      {
+         voutlnf("{\\fs%d %s}%s", iDocPropfontSize + 6, titdat.date, rtf_par);
+      }
+      
+      if (has_author || has_address)
+      {
+         /* New in V6.5.2 [NHz] */
+         if (has_company)
+            for (i = 0; i < (22 - address_counter); i++)
+               out(rtf_par);
+         else
+            for (i = 0; i < (25 - address_counter); i++)
+               out(rtf_par);
+               
+         outln(rtf_par);
+      }
+      
+      if (has_author)
+      {
+         voutlnf("%s%s%s", lang.by, rtf_par, rtf_par);
+         voutlnf("%s%s", titdat.author, rtf_par);
+      }
+      
+      /* New in V6.5.2 [NHz] */
+      if (has_company)
+      {
+         auto_quote_chars(lang.fur, FALSE);
+         voutlnf("%s %s%s%s", rtf_par, lang.fur, rtf_par, rtf_par);
+         voutlnf("%s%s", titdat.company, rtf_par);
+      }
+      
+      if (has_address)
+      {
+         for (i = 1; i <= address_counter; i++)
+         {
+            if (titdat.address[i] != NULL)
+            {
+               voutlnf("%s%s", titdat.address[i], rtf_par);
+            }
+         }
+      }
+      
+      outln("\\ql");
+      outln("\\page");
+      break;
+
+   case TOWIN:                            /* */
+   case TOWH4:                            /* */
+      check_endnode();
+
+      outln("");              
+      outln("{");     
+      voutlnf("#{\\footnote # %s}", WIN_TITLE_NODE_NAME);
+      voutlnf("${\\footnote $ %s}", lang.title);
+      voutlnf("K{\\footnote K %s}", lang.title);
+      
+      if (!no_buttons)        /* r6pl8 */
+      {
+         outln(win_browse);
+         outln("!{\\footnote ! DisableButton(\"BTN_UP\") }");
+      }
+
+      if (has_title)
+      {
+         voutlnf("\\qc{\\fs%d %s}\\par\\pard", iDocPropfontSize + 6, titdat.title);
+      }
+
+      if (has_programimage)
+      {
+         outln("\\par");
+         c_begin_center();
+         c_bmp_output(titdat.programimage, "", FALSE);
+         c_end_center();
+      }
+      
+      if (has_program)
+      {
+         voutlnf("\\qc{\\fs%d %s}\\par\\pard", iDocPropfontSize + 26, titdat.program);
+      }
+      
+      if (has_version)
+         voutlnf("\\qc{%s}\\par\\pard", titdat.version);
+      
+      if (has_date)
+         voutlnf("\\qc{%s}\\par\\pard", titdat.date);
+      
+      if (has_author || has_authorimage)
+      {
+         voutlnf("\\par\\qc{%s}\\par\\pard", lang.by);
+      }
+
+      if (has_authorimage)
+      {
+         outln("\\par");
+         c_begin_center();
+         c_bmp_output(titdat.authorimage, "", FALSE);
+         c_end_center();
+      }
+
+      if (has_author)
+      {
+         voutlnf("\\qc{%s}\\par\\pard", titdat.author);
+      }
+
+      /* New in V6.5.2 [NHz] */
+      if (has_company)
+      {
+         auto_quote_chars(lang.fur, FALSE);
+         voutlnf("\\par\\qc{%s}\\par\\pard", lang.fur);
+         voutlnf("\\qc{%s}\\par\\pard", titdat.company);
+      }
+
+      if (has_address)
+      {
+         for (i = 1; i <= address_counter; i++)
+         {
+            if (titdat.address[i] != NULL)
+            {
+               voutlnf("\\qc{%s}\\par\\pard", titdat.address[i]);
+            }
+         }
+      }
+
+      outln("\\par\\par");
+      
+      if (uses_tableofcontents)
+      {
+         node2NrWinhelp(n, 0);
+         voutlnf("\\qc{{\\uldb %s}{\\v %s}}\\par\\pard", lang.contents, n);
+      }
+      
+      outln("}\\page");
+      break;
+      
+   case TOAQV:                            /* */
+      check_endnode();
+
+      outln("");              
+      outln("{");     
+      voutlnf("#{\\footnote # %s}", WIN_TITLE_NODE_NAME);
+      voutlnf("${\\footnote $ %s}", lang.title);
+      voutlnf("K{\\footnote K %s}", lang.title);
+
+      if (!no_buttons)        /* r6pl8 */
+      {
+         outln(win_browse);
+         outln("!{\\footnote ! DisableButton(\"BTN_UP\") }");
+      }
+
+      if (has_title)
+      {
+         voutlnf("\\qc %s\\par\\pard\\par", titdat.title);
+      }
+
+      if (has_programimage)
+      {
+         outln("\\par");
+         c_begin_center();
+         c_bmp_output(titdat.programimage, "", FALSE);
+         c_end_center();
+      }
+      
+      if (has_program)
+      {
+         voutlnf("\\qc\\fs%d %s\\par\\pard\\plain", iDocPropfontSize + 26, titdat.program);
+      }
+
+      if (has_version)
+         voutlnf("\\qc %s\\par\\pard", titdat.version);
+         
+      if (has_date)
+         voutlnf("\\qc %s\\par\\pard", titdat.date);
+         
+      if (has_author || has_authorimage)
+      {
+         voutlnf("\\par\\qc %s\\par\\pard", lang.by);
+      }
+
+      if (has_authorimage)
+      {
+         outln("\\par");
+         c_begin_center();
+         c_bmp_output(titdat.authorimage, "", FALSE);
+         c_end_center();
+      }
+
+      if (has_author)
+      {
+         voutlnf("\\qc %s\\par\\pard", titdat.author);
+      }
+      
+      /* New in V6.5.2 [NHz] */
+      if (has_company)
+      {
+         auto_quote_chars(lang.fur, FALSE);
+         voutlnf("\\par\\qc %s\\par\\pard", lang.fur);
+         voutlnf("\\qc %s\\par\\pard", titdat.company);
+      }
+      
+      if (has_address)
+      {
+         for (i = 1; i <= address_counter; i++)
+         {
+            if (titdat.address[i] != NULL)
+            {
+               voutlnf("\\qc %s\\par\\pard", titdat.address[i]);
+            }
+         }
+      }
+
+      outln("\\par\\par");
+         
+      if (uses_tableofcontents)
+      {
+         voutlnf("\\qc {\\uldb %s}{\\v %s}\\par\\pard", lang.contents, lang.contents);
+      }
+         
+      outln("}\\page");
+      break;
+         
+   case TOHAH:                            /* Apple-Help (HTML); New in V6.5.17 */
+   case TOHTM:                            /* HTML */
+   case TOMHH:                            /*        ; New in V6.5.9 [NHz] */
+      outln("<div id=\"udo_titlepage\">");
+
+      if (has_title)
+      {
+         voutlnf("<h2 align=\"center\">%s</h2>", titdat.title);
+      }
+
+      if (has_programimage)
+      {
+         c_begin_center();
+         c_gif_output(titdat.programimage, "", sDocImgSuffix, 0);
+         c_end_center();
+      }
+      
+      if (has_program)
+      {
+         voutlnf("<h1 align=\"center\">%s</h1>", titdat.program);
+      }
+      
+      if (has_version || has_date || has_author || has_address)
+      {
+         outln("<p align=\"center\">");
+      }
+      
+      if (has_version)
+      {
+         voutlnf("%s<br />", titdat.version);
+      }
+      
+      if (has_date)
+      {
+         voutlnf("%s<br />", titdat.date);
+      }
+      
+      if (has_author || has_authorimage)
+      {
+         voutlnf("<br />%s<br />", lang.by);
+      }
+      
+      if (has_authorimage)
+      {
+         c_begin_center();
+         c_gif_output(titdat.authorimage, "", sDocImgSuffix, 0);
+         c_end_center();
+         
+         if (has_author || has_address)
+         {
+            outln("<p align=\"center\">");
+         }
+      }
+      
+      if (has_author)
+      {
+         voutlnf("%s<br />", titdat.author);
+      }
+
+      /* New in V6.5.2 [NHz] */
+      if (has_company)
+      {
+         auto_quote_chars(lang.fur, FALSE);
+         voutlnf("<br />%s<br />", lang.fur);
+         voutlnf("%s<br />", titdat.company);
+      }
+
+      if (has_address)
+      {
+         for (i = 1; i <= address_counter; i++)
+         {
+            if (titdat.address[i] != NULL)
+            {
+               voutlnf("%s<br />", titdat.address[i]);
+            }
+         }
+      }
+
+      if (has_version || has_date || has_author || has_address)
+      {
+         outln("<p>");
+      }
+
+      if (uses_tableofcontents)
+      {
+         outln(HTML_HR);
+      }
+
+      /* New in V6.5.9 [NHz] */
+      outln("</div>");
+
+      break;
+
+   case TOTVH:                            /* */
+      outln("");
+      voutlnf(".topic %s=0", lang.title);
+      outln("");
+
+      if (has_title)
+      {
+         outlncenter(titdat.title);
+         outln("");
+      }
+
+      if (has_program)
+      {
+         outlncenter(titdat.program);
+         outln("");
+      }
+
+      if (has_version)
+         outlncenter(titdat.version);
+      
+      if (has_date)
+         outlncenter(titdat.date);
+      
+      if (has_author)
+      {
+         outln("");
+         outlncenter(lang.by);
+         outln("");
+         outlncenter(titdat.author);
+      }
+
+      /* New in V6.5.2 [NHz] */
+      if (has_company)
+      {
+         outln("");
+         outlncenter(lang.fur);
+         outln("");
+         outlncenter(titdat.company);
+      }
+
+      if (address_counter>0)
+      {
+         for (i = 1; i <= address_counter; i++)
+         {
+            if (titdat.address[i] != NULL)
+            {
+               outlncenter(titdat.address[i]);
+            }
+         }
+      }
+
+      outln("");
+      outln("");
+
+      if (uses_tableofcontents)
+      {
+         sprintf(s1, "%s", lang.contents);       /* PL10: Leerzeichen davor */
+         sprintf(s2, "{%s:%s}", lang.contents, lang.contents);
+         strcpy(n, lang.contents);
+         strcenter(n, zDocParwidth);
+         replace_once(n, s1, s2);
+         outln(n);
+      }
+
+      outln("");
+      break;
+
+   /* New in r6pl15 [NHz] */
+   /* Title-Page for Postscript */
+   case TOKPS:                            /* */
+      outln("/acty acty 50 sub def");
+      outln("newline");
+      
+      if (has_title)
+      {
+         outln("14 changeFontSize");
+         voutlnf("(%s) Center setAlign", titdat.title);
+      }
+      
+      if (has_program)
+      {
+         outln("22 changeFontSize");
+         outln("newline");
+         voutlnf("(%s) Center setAlign", titdat.program);
+      }
+      
+      if (has_version)
+      {
+         outln("14 changeFontSize");
+         outln("newline");
+         voutlnf("(%s) Center setAlign", titdat.version);
+      }
+      
+      if (has_date)
+      {
+         outln("newline");
+         voutlnf("(%s) Center setAlign", titdat.date);
+         outln("11 changeFontSize");
+      }
+      
+      if (has_author)
+      {
+         outln("currentpoint exch pop lowermargin 125 add lt");
+         outln("{");
+         outln("  /acty lowermargin 125 add def");
+         outln("}");
+         outln("{");
+         outln("  /acty lowermargin 200 add def");
+         outln("} ifelse");
+         outln("newline");
+         voutlnf("(%s) Center setAlign newline", lang.by);
+         voutlnf("(%s) Center setAlign", titdat.author);
+      }
+      
+      /* New in V6.5.2 [NHz] */
+      if (has_company)
+      {
+         outln("newline");
+         auto_quote_chars(lang.fur, FALSE);
+         voutlnf("(%s) Center setAlign newline", lang.fur);
+         voutlnf("(%s) Center setAlign", titdat.company);
+      }
+      
+      if (has_address)
+      {
+         outln("newline");
+         for (i = 1; i <= address_counter; i++)
+         {
+            if (titdat.address[i] != NULL)
+            {
+               voutlnf("(%s) Center setAlign newline", titdat.address[i]);
+            }
+         }
+         
+         outln("newline");
+      }
+      
+      c_newpage();
+      
+      /* New: Fixed bug #0000040 in r6.3pl16 [NHz] */
+      outln("newline");
+      break;
+
+   }  /* switch (desttype) */
+
+}  /*c_maketitle*/
+
+
+
 
 
 GLOBAL void pch_titlepage ( void )
@@ -1614,8 +1871,8 @@ GLOBAL void pch_titlepage ( void )
         }
 
         if (address_counter>0)
-        {       for (i=1; i<=address_counter; i++)
-                {       if (titdat.address[i]!=NULL)
+        {       for (i = 1; i <= address_counter; i++)
+                {       if (titdat.address[i] != NULL)
                         {       outlncenter(titdat.address[i]);
                         }
                 }
