@@ -301,9 +301,7 @@ ausgegeben. Desweiteren wird ""<text>"" bei einigen Formaten zur
 Darstellung von Kopfzeilen herangezogen.
 
 !item [programimage]
-Das Bild ""<datei>"" wird (!B)anstelle(!b) des Inhalts von
-(!KW [docinfo] [[program!!]]) unterhalb der Titelzeile auf der Titelseite
-ausgegeben.
+Das Bild ""<datei>"" wird unterhalb der Titelzeile auf der Titelseite ausgegeben.
 
 !item [version]
 ""<text>"" wird unterhalb des Programmnamens auf der Titelseite
@@ -427,8 +425,7 @@ Furthermore ""<text>"" will be used by some destination formats
 to generate the header line.
 
 !item [programimage]
-""<file>"" will be displayed (!B)instead(!b) of the name of the program on
-the title page if the destination format supports images.
+""<file>"" will be displayed on the title page if the destination format supports images.
 
 !item [version]
 ""<text>"" will be given out right below the contents of the program name on
