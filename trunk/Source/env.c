@@ -3262,6 +3262,14 @@ GLOBAL void c_begin_document ( void )
 				}
 			}
 
+			/* ---- \distributor ---- */
+			if (titdat.distributor != NULL)
+			{
+				if (titdat.distributor[0] != EOS)
+				{	voutlnf("  {\\*\\distributor %s}", titdat.distributor);
+				}
+			}
+
 			/* ---- Ueber UDO ---- */
 			voutlnf("  {\\doccomm UDO Version %s.%s.%s}", UDO_REL, UDO_SUBVER, UDO_PL);
 

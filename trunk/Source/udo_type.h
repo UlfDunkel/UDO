@@ -73,8 +73,10 @@ typedef struct _lang
 	char	html_next[32];			/* "Weiter"					*/
 	char	lcid[64];				/* LCID fuer WinHelp4		*/
 	/* New in r6pl16 [NHz] */
-	char	html_lang[15];	/* Sprachenkuerzel */
-	char	html_start[32];	/* "Start" */
+	char	html_lang[15];                   /* Sprachenkuerzel */
+	char	html_start[32];                  /* "Start" */
+   
+   char  distributor[32];                 /* "Distributor" */
 }	LANG;
 
 

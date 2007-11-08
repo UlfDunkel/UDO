@@ -91,7 +91,7 @@ GLOBAL BOOLEAN set_show_variable ( void )
         inhalt[contlen]= EOS;
         del_whitespaces(inhalt);
 
-        if (strcmp(inhalt, "source_filename")==0)
+        if (strcmp(inhalt, "source_filename") == 0)
         {       show_variable.source_filename=TRUE;
                 return TRUE;
         }
@@ -180,7 +180,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
         content[contlen.content]= EOS;
         del_whitespaces(content);
 
-        if (strcmp(content, "paper")==0)
+        if (strcmp(content, "paper") == 0)
         {       if ( str_for_desttype(format) )
                 {       /* Layout festlegen */
                         init_docinfo_data(data, &(laydat.paper), FALSE);
@@ -188,7 +188,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
                 return TRUE;
         }
 
-        if (strcmp(content, "propfontname")==0)
+        if (strcmp(content, "propfontname") == 0)
         {       if ( str_for_desttype(format) )
                 {       /* Set proportional font */
                         init_docinfo_data(data, &(laydat.propfontname), FALSE);
@@ -196,7 +196,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
                 return TRUE;
         }
 
-        if (strcmp(content, "propfontsize")==0)
+        if (strcmp(content, "propfontsize") == 0)
         {       if ( str_for_desttype(format) )
                 {       /* Set size of proportional font */
                         laydat.propfontsize = atoi(data);
@@ -204,7 +204,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
                 return TRUE;
         }
 
-        if (strcmp(content, "monofontname")==0)
+        if (strcmp(content, "monofontname") == 0)
         {       if ( str_for_desttype(format) )
                 {       /* Set aquidistant font */
                         init_docinfo_data(data, &(laydat.monofontname), FALSE);
@@ -212,7 +212,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
                 return TRUE;
         }
 
-        if (strcmp(content, "monofontsize")==0)
+        if (strcmp(content, "monofontsize") == 0)
         {       if ( str_for_desttype(format) )
                 {       /* Set size of the aquidistant font */
                         laydat.monofontsize = atoi(data);
@@ -221,7 +221,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
         }
 
         /* New in r6pl16 [NHz] */
-        if (strcmp(content, "node1size")==0)
+        if (strcmp(content, "node1size") == 0)
         {       if ( str_for_desttype(format) )
                 {       /* Set size of node */
                         laydat.node1size = atoi(data);
@@ -229,7 +229,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
                 return TRUE;
         }
 
-        if (strcmp(content, "node2size")==0)
+        if (strcmp(content, "node2size") == 0)
         {       if ( str_for_desttype(format) )
                 {       /* Set size of subnode */
                         laydat.node2size        = atoi(data);
@@ -237,7 +237,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
                 return TRUE;
         }
 
-        if (strcmp(content, "node3size")==0)
+        if (strcmp(content, "node3size") == 0)
         {       if ( str_for_desttype(format) )
                 {       /* Set size of subsubnode */
                         laydat.node3size        = atoi(data);
@@ -245,7 +245,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
                 return TRUE;
         }
 
-        if (strcmp(content, "node4size")==0)
+        if (strcmp(content, "node4size") == 0)
         {       if ( str_for_desttype(format) )
                 {       /* Set size of subsubsubnode */
                         laydat.node4size        = atoi(data);
@@ -254,7 +254,7 @@ GLOBAL BOOLEAN set_doclayout ( void )
         }
 
         /* Specialities for Postscript */
-        if (strcmp(content, "openMode")==0)
+        if (strcmp(content, "openMode") == 0)
         {       if (strstr(data, "Outlines"))
                         init_docinfo_data("/UseOutlines", &(laydat.pagemode), FALSE);
                 else if (strstr(data, "Thumbs"))
@@ -371,323 +371,503 @@ LOCAL BOOLEAN init_docinfo_data ( char *data, char **var, int allow_empty )
 
 
 
-/*      --------------------------------------------------------------
-        set_docinfo()
-        Setzen von Informationen fuer die Titelseite (neue Version)
-        Die Daten stehen in token[]. Frueher setzte man bspw. den
-        Programmnamen mit "!program UDO", nun mit
-        "!docinfo [program] UDO".
-        <-      TRUE:   OK
-                sonst:  Fehler
-        --------------------------------------------------------------  */
-GLOBAL BOOLEAN set_docinfo ( void )
+
+
+/*******************************************************************************
+*
+*  set_docinfo():
+*     Set document information for title page (new approach). 
+*     The data can be found in token[]. In former versions of UDO, e.g. the 
+*     app name was defined using "!program UDO", now with "!docinfo [program] UDO".
+*
+*  Out:
+*     - TRUE: OK
+*     - error
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN set_docinfo(void)
 {
-        char s[512], *cont, *data, inhalt[512], *buffer;
-        char sDriv[512], sPath[512], sFile[512], sSuff[512];
-        size_t contlen;
-        char udo_macro[]="UDO_", macro_tmp[512];        /* V6.5.9 */
+   char     s[512],              /* */
+           *cont,                /* */
+           *data,                /* */
+            inhalt[512],         /* */
+           *buffer;              /* */
+   char     sDriv[512],          /* */
+            sPath[512],          /* */
+            sFile[512],          /* */
+            sSuff[512];          /* */
+   size_t   contlen;             /* */
+   char     udo_macro[]="UDO_",  /* */
+            macro_tmp[512];      /* V6.5.9 */
+   
+   
+   tokcpy2(s, 512);                       /* */
+   
+   contlen = strlen(token[1]);            /* New in V6.5.9 [NHz] */
+   
+   um_strncpy(macro_tmp, token[1] + 1, contlen - 2, 500, "set_docinfo[1]");
+   um_strncpy(token[1], udo_macro, 5, 10, "set_docinfo[2]");
+   um_strncat(token[1], macro_tmp, (long)(contlen-2L), 500, "set_docinfo[3]");
+   add_define();
+   
+   if (desttype == TOKPS)                 /* New: Fixed bug #0000040 in r6.3pl16 [NHz] */
+      node2postscript(s, KPS_PS2DOCINFO);
+   
+   contlen = get_brackets_ptr(s, &cont, &data);
+   
+   if (contlen == 0 || cont == NULL || data == NULL)
+   {
+      error_syntax_error();
+      return FALSE;
+   }
+   
+   inhalt[0] = EOS; 
+   strncpy(inhalt, cont, contlen);
+   inhalt[contlen] = EOS;
+   del_whitespaces(inhalt);
+   
+   if (desttype == TOKPS)                 /* New: Fixed Bug #0000040 in r6.3pl16 [NHz] */
+      node2postscript(data, KPS_DOCINFO2PS);
+   
+   
+   /* --- authorimage --- */
+   
+   if (strcmp(inhalt,"authorimage") == 0)
+   {
+      del_whitespaces(data);
+      
+      if (data[0] == EOS)
+      {
+         error_empty_docinfo();
+      }
+      else
+      {
+         path_adjust_separator(data);
+         buffer = (char *) um_malloc(strlen(data) * sizeof(char) + 1);
+         
+         if (buffer)
+         {
+            strcpy(buffer, data);
+            titdat.authorimage = buffer;
+            
+            if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
+            {
+               replace_char(titdat.authorimage, "\\", "/");    /*r6pl4*/
+                                          /* r6pl9: Ausmasse nicht ermitteln -> da */
+                                          /* ueber c_gif_output() ausgegeben wird  */
+            }
+         }
+         else
+         {
+            error_malloc_failed();
+            bFatalErrorDetected = TRUE;
+         }
+      }
+      
+      return TRUE;
+   }
+   
 
-        tokcpy2(s, 512);
+   /* --- authoricon --- */
+   
+   if (strcmp(inhalt,"authoricon") == 0)  /*r6pl6*/
+   {
+      del_whitespaces(data);
+      
+      if (data[0] == EOS)
+      {
+         error_empty_docinfo();
+      }
+      else
+      {                                   /* r6pl12: Endung abschneiden und mit !html_img_suffix ersetzen */
+         fsplit(data, sDriv, sPath, sFile, sSuff);
+         sprintf(data, "%s%s%s", sPath, sFile, sDocImgSuffix);
+         path_adjust_separator(data);
+         
+         buffer = (char*)um_malloc(strlen(data) * sizeof(char) + 1);
+         
+         if (buffer)
+         {
+            strcpy(buffer, data);
+            titdat.authoricon= buffer;
+            
+            if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
+            {
+               replace_char(titdat.authoricon, "\\", "/");
+               
+               if (my_stricmp(sDocImgSuffix, ".gif") == 0)
+               {                          /* r6pl9: Ausmasse ermitteln */
+                  strinsert(data, old_outfile.path);
+                  strinsert(data, old_outfile.driv);
+                  /* strcat(data, ".gif"); */
+                  path_adjust_separator(data);
+                  
+                  if (!get_gif_size(data, &titdat.authoriconWidth, &titdat.authoriconHeight))
+                  {
+                     error_read_gif(data);
+                  }
+               }
+            }
+         }
+         else
+         {
+            error_malloc_failed();
+            bFatalErrorDetected = TRUE;
+         }
+      }
+      
+      return TRUE;
+   }
+   
+   
+   /* --- authoricon_active --- */
+   
+   if (strcmp(inhalt, "authoricon_active") == 0)     /*r6pl13*/
+   {
+      del_whitespaces(data);
+      
+      if (data[0] == EOS)
+      {
+         error_empty_docinfo();
+      }
+      else
+      {                                   /* r6pl12: Endung abschneiden und mit !html_img_suffix ersetzen */
+         fsplit(data, sDriv, sPath, sFile, sSuff);
+         sprintf(data, "%s%s%s", sPath, sFile, sDocImgSuffix);
+         path_adjust_separator(data);
+         
+         buffer = (char*)um_malloc(strlen(data) * sizeof(char) + 1);
+         
+         if (buffer)
+         {
+            strcpy(buffer, data);
+            titdat.authoricon_active = buffer;
+            
+            if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
+            {
+               replace_char(titdat.authoricon_active, "\\", "/");
+               
+               if (my_stricmp(sDocImgSuffix, ".gif") == 0)
+               {                          /* r6pl9: Ausmasse ermitteln */
+                  strinsert(data, old_outfile.path);
+                  strinsert(data, old_outfile.driv);
+                  /* strcat(data, ".gif"); */
+                  path_adjust_separator(data);
+                  
+                  if (!get_gif_size(data, &titdat.authoriconActiveWidth, &titdat.authoriconActiveHeight))
+                  {
+                     error_read_gif(data);
+                  }
+               }
+            }
+         }
+         else
+         {
+            error_malloc_failed();
+            bFatalErrorDetected = TRUE;
+         }
+      }
+     
+      return TRUE;
+   }
+   
+   
+   /* --- programimage --- */
+   
+   if (strcmp(inhalt, "programimage") == 0)
+   {
+      del_whitespaces(data);
+      
+      if (data[0] == EOS)
+      {
+         error_empty_docinfo();
+      }
+      else
+      {
+         path_adjust_separator(data);
+         buffer = (char*)um_malloc(strlen(data) * sizeof(char) + 1);
+         
+         if (buffer)
+         {
+            strcpy(buffer, data);
+            titdat.programimage= buffer;
+            
+            if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
+            {
+               replace_char(titdat.programimage, "\\", "/");   /*r6pl4*/
+                                          /* r6pl9: Ausmasse nicht ermitteln -> da */
+                                          /* ueber c_gif_output() ausgegeben wird  */
+            }
+         }
+         else
+         {
+            error_malloc_failed();
+            bFatalErrorDetected = TRUE;
+         }
+      }
+      
+      return TRUE;
+   }
+   
+   
+   /* --- title --- */
+   
+   if (strcmp(inhalt,"title") == 0)
+   {
+      init_docinfo_data(data, &(titdat.title), FALSE);
+      return TRUE;
+   }
+   
+   
+   /* --- program --- */
+   
+   if (strcmp(inhalt,"program") == 0)
+   {
+      init_docinfo_data(data, &(titdat.program), FALSE);
+      return TRUE;
+   }
+   
+   
+   /* --- version --- */
+   
+   if (strcmp(inhalt,"version") == 0)
+   {
+      init_docinfo_data(data, &(titdat.version), FALSE);
+      return TRUE;
+   }
 
-        /* New in V6.5.9 [NHz] */
-        contlen = strlen(token[1]);
-        um_strncpy(macro_tmp, token[1]+1, contlen-2, 500, "set_docinfo[1]");
-        um_strncpy(token[1], udo_macro, 5, 10, "set_docinfo[2]");
-        um_strncat(token[1], macro_tmp, (long)(contlen-2L), 500, "set_docinfo[3]");
-        add_define();
+   
+   /* --- date --- */
+   
+   if (strcmp(inhalt,"date") == 0)
+   {
+      init_docinfo_data(data, &(titdat.date), FALSE);
+      return TRUE;
+   }
 
-        /* New: Fixed bug #0000040 in r6.3pl16 [NHz] */
-        if(desttype==TOKPS)
-                node2postscript(s, KPS_PS2DOCINFO);
+   
+   /* --- author --- */
+   
+   if (strcmp(inhalt,"author") == 0)
+   {
+      init_docinfo_data(data, &(titdat.author), FALSE);
+      return TRUE;
+   }
 
-        contlen= get_brackets_ptr(s, &cont, &data);
+   
+   /* --- address --- */
+   
+   if (strcmp(inhalt, "address") == 0)
+   {
+      if (address_counter < MAXADDRESS)
+      {
+         address_counter++;
+         init_docinfo_data(data, &(titdat.address[address_counter]), FALSE);
+      }
+      
+      return TRUE;
+   }
 
-        if (contlen==0 || cont==NULL || data==NULL)
-        {       error_syntax_error();
-                return FALSE;
-        }
+   
+   /* --- keywords --- */
+   
+   /* New in r6pl15 [NHz] */
+   if (strcmp(inhalt,"keywords") == 0)
+   {
+      init_docinfo_data(data, &(titdat.keywords), FALSE);
+      return TRUE;
+   }
 
-        inhalt[0]= EOS; 
-        strncpy(inhalt, cont, contlen);
-        inhalt[contlen]= EOS;
-        del_whitespaces(inhalt);
+   
+   /* --- description --- */
+   
+   /* New in r6pl15 [NHz] */
+   if (strcmp(inhalt,"description") == 0)
+   {
+      init_docinfo_data(data, &(titdat.description), FALSE);
+      return TRUE;
+   }
 
-        /* New: Fixed Bug #0000040 in r6.3pl16 [NHz] */
-        if(desttype==TOKPS)
-                node2postscript(data, KPS_DOCINFO2PS);
-
-        if (strcmp(inhalt, "authorimage")==0)
-        {       del_whitespaces(data);
-                if (data[0]==EOS)
-                {       error_empty_docinfo();
-                }
-                else
-                {       path_adjust_separator(data);
-                        buffer= (char *) um_malloc ( strlen(data)*sizeof(char)+1 );
-                        if (buffer)
-                        {       strcpy(buffer, data);
-                                titdat.authorimage= buffer;
-                                if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH)
-                                {       replace_char(titdat.authorimage, "\\", "/");    /*r6pl4*/
-                                        /* r6pl9: Ausmasse nicht ermitteln -> da */
-                                        /* ueber c_gif_output() ausgegeben wird  */
-                                }
+   
+   /* --- robots --- */
+   
+   /* New in V6.5.17 */
+   if (strcmp(inhalt,"robots") == 0)
+   {
+      init_docinfo_data(data, &(titdat.robots), FALSE);
+      
+      if (strcmp(titdat.robots,"none") != 0)
+      {
+         if (strcmp(titdat.robots,"noindex") != 0)
+         {
+            if (strcmp(titdat.robots,"index") != 0)
+            {
+               if (strcmp(titdat.robots,"nofollow") != 0)
+               {
+                  if (strcmp(titdat.robots,"follow") != 0)
+                  {
+                                          /* For HTML Apple Help */
+                     if (strcmp(titdat.robots,"keywords") != 0)
+                     {
+                                          /* For HTML Apple Help */
+                        if (strcmp(titdat.robots,"segments") != 0)
+                        {
+                                          /* For HTML Apple Help */
+                           if (strcmp(titdat.robots,"anchors") != 0)
+                           {
+                              error_syntax_error();
+                              titdat.robots = NULL;
+                              return TRUE;
+                           }
                         }
-                        else
-                        {       error_malloc_failed();
-                                bFatalErrorDetected= TRUE;
-                        }
-                }
-                return TRUE;
-        }
+                     }
+                  }
+               }
+            }
+         }
+      }
+      
+      return TRUE;
+   }
+   
 
-        if (strcmp(inhalt, "authoricon")==0)    /*r6pl6*/
-        {       del_whitespaces(data);
-                if (data[0]==EOS)
-                {       error_empty_docinfo();
-                }
-                else
-                {       /* r6pl12: Endung abschneiden und mit !html_img_suffix ersetzen */
-                        fsplit(data, sDriv, sPath, sFile, sSuff);
-                        sprintf(data, "%s%s%s", sPath, sFile, sDocImgSuffix);
-                        path_adjust_separator(data);
-                        buffer= (char *) um_malloc ( strlen(data)*sizeof(char)+1 );
-                        if (buffer)
-                        {       strcpy(buffer, data);
-                                titdat.authoricon= buffer;
-                                if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH)
-                                {       replace_char(titdat.authoricon, "\\", "/");
-                                        if (my_stricmp(sDocImgSuffix, ".gif")==0)
-                                        {       /* r6pl9: Ausmasse ermitteln */
-                                                strinsert(data, old_outfile.path);
-                                                strinsert(data, old_outfile.driv);
-                                                /* strcat(data, ".gif"); */
-                                                path_adjust_separator(data);
-                                                if (!get_gif_size(data, &titdat.authoriconWidth, &titdat.authoriconHeight))
-                                                {       error_read_gif(data);
-                                                }
-                                        }
-                                }
-                        }
-                        else
-                        {       error_malloc_failed();
-                                bFatalErrorDetected= TRUE;
-                        }
-                }
-                return TRUE;
-        }
+   /* --- company --- */
 
-        if (strcmp(inhalt, "authoricon_active")==0)     /*r6pl13*/
-        {       del_whitespaces(data);
-                if (data[0]==EOS)
-                {       error_empty_docinfo();
-                }
-                else
-                {       /* r6pl12: Endung abschneiden und mit !html_img_suffix ersetzen */
-                        fsplit(data, sDriv, sPath, sFile, sSuff);
-                        sprintf(data, "%s%s%s", sPath, sFile, sDocImgSuffix);
-                        path_adjust_separator(data);
-                        buffer= (char *) um_malloc ( strlen(data)*sizeof(char)+1 );
-                        if (buffer)
-                        {       strcpy(buffer, data);
-                                titdat.authoricon_active= buffer;
-                                if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH)
-                                {       replace_char(titdat.authoricon_active, "\\", "/");
-                                        if (my_stricmp(sDocImgSuffix, ".gif")==0)
-                                        {       /* r6pl9: Ausmasse ermitteln */
-                                                strinsert(data, old_outfile.path);
-                                                strinsert(data, old_outfile.driv);
-                                                /* strcat(data, ".gif"); */
-                                                path_adjust_separator(data);
-                                                if (!get_gif_size(data, &titdat.authoriconActiveWidth, &titdat.authoriconActiveHeight))
-                                                {       error_read_gif(data);
-                                                }
-                                        }
-                                }
-                        }
-                        else
-                        {       error_malloc_failed();
-                                bFatalErrorDetected= TRUE;
-                        }
-                }
-                return TRUE;
-        }
+   if (strcmp(inhalt,"company") == 0)     /* New in V6.5.2 [NHz] */
+   {
+      init_docinfo_data(data, &(titdat.company), FALSE);
+      return TRUE;
+   }
+   
 
-        if (strcmp(inhalt, "programimage")==0)
-        {       del_whitespaces(data);
-                if (data[0]==EOS)
-                {       error_empty_docinfo();
-                }
-                else
-                {       path_adjust_separator(data);
-                        buffer= (char *) um_malloc ( strlen(data)*sizeof(char)+1 );
-                        if (buffer)
-                        {       strcpy(buffer, data);
-                                titdat.programimage= buffer;
-                                if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH)
-                                {       replace_char(titdat.programimage, "\\", "/");   /*r6pl4*/
-                                        /* r6pl9: Ausmasse nicht ermitteln -> da */
-                                        /* ueber c_gif_output() ausgegeben wird  */
-                                }
-                        }
-                        else
-                        {       error_malloc_failed();
-                                bFatalErrorDetected= TRUE;
-                        }
-                }
-                return TRUE;
-        }
+   /* --- category --- */
+   
+   if (strcmp(inhalt, "category") == 0)   /* New in V6.5.2 [NHz] */
+   {
+      init_docinfo_data(data, &(titdat.category), FALSE);
+      return TRUE;
+   }
+   
 
-        if (strcmp(inhalt, "title")==0)
-        {       init_docinfo_data(data, &(titdat.title), FALSE);
-                return TRUE;
-        }
+   /* --- stgdatabase --- */
+   
+                                          /* Spezialitaeten fuer ST-Guide *//*r6pl4*/
+   if (strcmp(inhalt, "stgdatabase") == 0)
+   {
+      init_docinfo_data(data, &(titdat.stg_database), TRUE);
+      return TRUE;
+   }
+   
 
-        if (strcmp(inhalt, "program")==0)
-        {       init_docinfo_data(data, &(titdat.program), FALSE);
-                return TRUE;
-        }
+   /* --- drcstatusline --- */
+   
+                                          /* Spezialitaeten fuer DRC *//*r6pl4*/
+   if (strcmp(inhalt, "drcstatusline") == 0) 
+   {
+      init_docinfo_data(data, &(titdat.drc_statusline), FALSE);
+      return TRUE;
+   }
+   
 
-        if (strcmp(inhalt, "version")==0)
-        {       init_docinfo_data(data, &(titdat.version), FALSE);
-                return TRUE;
-        }
+   /* --- htmltitle --- */
+   
+   if (strcmp(inhalt, "htmltitle") == 0)  /* Spezialitaeten fuer HTML */
+   {
+      init_docinfo_data(data, &(titdat.htmltitle), FALSE);
+      return TRUE;
+   }
+   
 
-        if (strcmp(inhalt, "date")==0)
-        {       init_docinfo_data(data, &(titdat.date), FALSE);
-                return TRUE;
-        }
+   /* --- webmastername --- */
+   
+   if (strcmp(inhalt, "webmastername") == 0)
+   {
+      init_docinfo_data(data, &(titdat.webmastername), FALSE);
+      return TRUE;
+   }
+   
 
-        if (strcmp(inhalt, "author")==0)
-        {       init_docinfo_data(data, &(titdat.author), FALSE);
-                return TRUE;
-        }
+   /* --- webmasteremail --- */
+   
+   if (strcmp(inhalt, "webmasteremail") == 0)
+   {
+      init_docinfo_data(data, &(titdat.webmasteremail), FALSE);
+      return TRUE;
+   }
+   
 
-        if (strcmp(inhalt, "address")==0)
-        {       if (address_counter<MAXADDRESS)
-                {       address_counter++;
-                        init_docinfo_data(data, &(titdat.address[address_counter]), FALSE);
-                }
-                return TRUE;
-        }
+   /* --- webmastermailurl --- */
+   
+   if (strcmp(inhalt, "webmastermailurl") == 0)
+   {
+      init_docinfo_data(data, &(titdat.webmastermailurl), FALSE);
+      return TRUE;
+   }
+   
 
-        /* New in r6pl15 [NHz] */
-        if (strcmp(inhalt, "keywords")==0)
-        {       init_docinfo_data(data, &(titdat.keywords), FALSE);
-                return TRUE;
-        }
+   /* --- webmasterurl --- */
+   
+   if (strcmp(inhalt, "webmasterurl") == 0)
+   {
+      del_whitespaces(data);              /* nicht init_...!!! */
+      convert_tilde(data);
+      
+      if (data[0] == EOS)
+      {
+         error_empty_docinfo();
+      }
+      else
+      {
+         buffer = (char*)um_malloc(strlen(data) * sizeof(char) + 1);
+         
+         if (buffer)
+         {
+            strcpy(buffer, data);
+            titdat.webmasterurl= buffer;
+         }
+         else
+         {
+            error_malloc_failed();
+            bFatalErrorDetected= TRUE;
+         }
+      }
 
-        /* New in r6pl15 [NHz] */
-        if (strcmp(inhalt, "description")==0)
-        {       init_docinfo_data(data, &(titdat.description), FALSE);
-                return TRUE;
-        }
+      return TRUE;
+   }
+   
 
-        /* New in V6.5.17 */
-        if (strcmp(inhalt, "robots")==0)
-        {       init_docinfo_data(data, &(titdat.robots), FALSE);
-                if ( strcmp ( titdat.robots, "none") != 0 )
-                {       if ( strcmp ( titdat.robots, "noindex") != 0 )
-                        {       if ( strcmp ( titdat.robots, "index") != 0 )
-                                {       if ( strcmp ( titdat.robots, "nofollow") != 0 )
-                                        {       if ( strcmp ( titdat.robots, "follow") != 0 )
-                                                {       if ( strcmp ( titdat.robots, "keywords") != 0 ) /* For HTML Apple Help */
-                                                        {       if ( strcmp ( titdat.robots, "segements") != 0 )        /* For HTML Apple Help */
-                                                                {       if ( strcmp ( titdat.robots, "anchors") != 0 )  /* For HTML Apple Help */
-                                                                        {       error_syntax_error();
-                                                                                titdat.robots = NULL;
-                                                                                return TRUE;
-                                                                        }
-                                                                }
-                                                        }
-                                                }
-                                        }
-                                }
-                        }
-                }
-                return TRUE;
-        }
-        /* New in V6.5.2 [NHz] */
-        if (strcmp(inhalt, "company")==0)
-        {       init_docinfo_data(data, &(titdat.company), FALSE);
-                return TRUE;
-        }
+   /* --- appletitle --- */
 
-        /* New in V6.5.2 [NHz] */
-        if (strcmp(inhalt, "category")==0)
-        {       init_docinfo_data(data, &(titdat.category), FALSE);
-                return TRUE;
-        }
+   if (strcmp(inhalt,"appletitle") == 0)  /* Spezialitaeten fuer HTML Apple Help V6.5.17 */
+   {
+      init_docinfo_data(data, &(titdat.appletitle), TRUE);
+      return TRUE;
+   }
+   
 
-        /* Spezialitaeten fuer ST-Guide */
-        if (strcmp(inhalt, "stgdatabase")==0)   /*r6pl4*/
-        {       init_docinfo_data(data, &(titdat.stg_database), TRUE);
-                return TRUE;
-        }
-
-        /* Spezialitaeten fuer DRC */
-        if (strcmp(inhalt, "drcstatusline")==0) /*r6pl4*/
-        {       init_docinfo_data(data, &(titdat.drc_statusline), FALSE);
-                return TRUE;
-        }
-
-        /* Spezialitaeten fuer HTML */
-        if (strcmp(inhalt, "htmltitle")==0)
-        {       init_docinfo_data(data, &(titdat.htmltitle), FALSE);
-                return TRUE;
-        }
-
-        if (strcmp(inhalt, "webmastername")==0)
-        {       init_docinfo_data(data, &(titdat.webmastername), FALSE);
-                return TRUE;
-        }
-
-        if (strcmp(inhalt, "webmasteremail")==0)
-        {       init_docinfo_data(data, &(titdat.webmasteremail), FALSE);
-                return TRUE;
-        }
-
-        if (strcmp(inhalt, "webmastermailurl")==0)
-        {       init_docinfo_data(data, &(titdat.webmastermailurl), FALSE);
-                return TRUE;
-        }
-
-        if (strcmp(inhalt, "webmasterurl")==0)
-        {       del_whitespaces(data);  /* nicht init_...!!! */
-                convert_tilde(data);
-                if (data[0]==EOS)
-                {       error_empty_docinfo();
-                }
-                else
-                {       buffer= (char *) um_malloc ( strlen(data)*sizeof(char)+1 );
-                        if (buffer)
-                        {       strcpy(buffer, data);
-                                titdat.webmasterurl= buffer;
-                        }
-                        else
-                        {       error_malloc_failed();
-                                bFatalErrorDetected= TRUE;
-                        }
-                }
-                return TRUE;
-        }
-        /* Spezialitaeten fuer HTML Apple Help V6.5.17 */
-        if (strcmp(inhalt, "appletitle")==0)
-        {       init_docinfo_data(data, &(titdat.appletitle), TRUE);
-                return TRUE;
-        }
-
-        /* Spezialitaeten fuer HTML Apple Help V6.5.17 */
-        if (strcmp(inhalt, "appleicon")==0)
-        {       init_docinfo_data(data, &(titdat.appleicon), TRUE);
-                return TRUE;
-        }
-
-        error_unknown_docinfo(inhalt);
-
-        return FALSE;
-
-}       /* set_docinfo */
+   /* --- appleicon --- */
+   
+   if (strcmp(inhalt,"appleicon") == 0)   /* Spezialitaeten fuer HTML Apple Help V6.5.17 */
+   {
+      init_docinfo_data(data, &(titdat.appleicon), TRUE);
+      return TRUE;
+   }
+   
+   
+   /* --- distributor --- */
+   
+   if (strcmp(inhalt,"distributor") == 0)
+   {
+      init_docinfo_data(data, &(titdat.distributor), TRUE);
+      return TRUE;
+   }
+   
+   error_unknown_docinfo(inhalt);
+   
+   return FALSE;
+   
+}  /* set_docinfo() */
 
 
 
@@ -719,7 +899,8 @@ GLOBAL void c_maketitle(void)
              has_authorimage,   /* flag */
              has_programimage,  /* flag */
              has_address,       /* flag */
-             has_company;       /* flag; New in V6.5.2 [NHz] */
+             has_company,       /* flag; New in V6.5.2 [NHz] */
+             has_distributor;   /* flag */
 
 
    if (called_maketitle)                  /* this function has been used already? */
@@ -740,6 +921,7 @@ GLOBAL void c_maketitle(void)
    has_date         = (titdat.date         != NULL);
                                           /* New in V6.5.2 [NHz] */
    has_company      = (titdat.company      != NULL);
+   has_distributor  = (titdat.distributor  != NULL);
 
    if ( !(    has_author
            || has_authorimage
@@ -750,6 +932,7 @@ GLOBAL void c_maketitle(void)
            || has_date
            || has_address
            || has_company                 /* New in V6.5.2 [NHz] */
+           || has_distributor
           )
       )
    {
@@ -864,6 +1047,13 @@ GLOBAL void c_maketitle(void)
          }
       }
 
+      if (has_distributor)
+      {
+		   auto_quote_chars(lang.distributor, FALSE);
+         voutlnf("\\vfill\n%s\\\\\n\\medskip", lang.distributor);
+         voutlnf("%s \\\\", titdat.distributor);
+      }
+
       outln("\\end{center}");
       outln("\\end{titlepage}");
       break;
@@ -916,6 +1106,13 @@ GLOBAL void c_maketitle(void)
             }
          }
       }
+      
+      if (has_distributor)
+      {
+		   voutlnf("\\fill_bottom\n\\layout Subsubsection*\n\\align center\n\n%s\n", lang.distributor);
+         voutlnf("\\layout Subsection*\n\\align center\n\n%s\n", titdat.distributor);
+      }
+		
       break;
 
    case TOINF:                            /* */
@@ -972,6 +1169,14 @@ GLOBAL void c_maketitle(void)
 				   voutlnf("@center %s", titdat.address[i]);
             }
          }
+      }
+		
+      if (has_distributor)
+      {
+		   outln("@sp 10");
+         voutlnf("@center %s", lang.distributor);
+         outln("@sp 1");
+         voutlnf("@center %s", titdat.distributor);
       }
 		
       outln("@end titlepage");
@@ -1052,6 +1257,14 @@ GLOBAL void c_maketitle(void)
          }
       }
 		
+      if (has_distributor)
+      {
+		   outln("");
+         outlncenter(lang.distributor);
+         outln("");
+         outlncenter(titdat.distributor);
+      }
+
       outln("@autorefon");
       outln("");
 
@@ -1117,6 +1330,14 @@ GLOBAL void c_maketitle(void)
          }
       }
       
+      if (has_distributor)
+      {
+		   outln("");
+         outlncenter(lang.distributor);
+         outln("");
+         outlncenter(titdat.distributor);
+      }
+
 		outln("");
       
       if (uses_tableofcontents)
@@ -1205,6 +1426,14 @@ GLOBAL void c_maketitle(void)
          outln("");
       }
       
+      if (has_distributor)
+      {
+         outln("");
+         outlncenterfill(lang.distributor);
+         outln("");
+         outlncenterfill(titdat.distributor);
+      }
+
       outln("");
       break;
 
@@ -1256,6 +1485,14 @@ GLOBAL void c_maketitle(void)
          }
          
          outln("");
+      }
+      
+      if (has_distributor)
+      {
+         outln("");
+         outlncenter(lang.distributor);
+         outln("");
+         outlncenter(titdat.distributor);
       }
       
       outln("");
@@ -1346,6 +1583,18 @@ GLOBAL void c_maketitle(void)
          outln("    #");
       }
       
+      if (has_distributor)
+      {
+         outln("    #");
+         strcpy(s1, lang.distributor);
+         stringcenter(s1, 60);
+         voutlnf("    # %s", s1);
+         outln("    #");
+         strcpy(s1, titdat.distributor);
+         stringcenter(s1, 60);
+         voutlnf("    # %s", s1);
+      }
+
       voutlnf("    %s %s", n, sSrcRemOff);
       break;
 
@@ -1409,6 +1658,13 @@ GLOBAL void c_maketitle(void)
                voutlnf("%s%s", titdat.address[i], rtf_par);
             }
          }
+      }
+      
+      if (has_distributor)
+      {
+         auto_quote_chars(lang.distributor, FALSE);
+         voutlnf("%s %s%s%s", rtf_par, lang.distributor, rtf_par, rtf_par);
+         voutlnf("%s%s", titdat.distributor, rtf_par);
       }
       
       outln("\\ql");
@@ -1490,6 +1746,13 @@ GLOBAL void c_maketitle(void)
                voutlnf("\\qc{%s}\\par\\pard", titdat.address[i]);
             }
          }
+      }
+
+      if (has_distributor)
+      {
+         auto_quote_chars(lang.distributor, FALSE);
+         voutlnf("\\par\\qc{%s}\\par\\pard", lang.distributor);
+         voutlnf("\\qc{%s}\\par\\pard", titdat.distributor);
       }
 
       outln("\\par\\par");
@@ -1579,6 +1842,13 @@ GLOBAL void c_maketitle(void)
          }
       }
 
+      if (has_distributor)
+      {
+         auto_quote_chars(lang.distributor, FALSE);
+         voutlnf("\\par\\qc %s\\par\\pard", lang.distributor);
+         voutlnf("\\qc %s\\par\\pard", titdat.distributor);
+      }
+      
       outln("\\par\\par");
          
       if (uses_tableofcontents)
@@ -1667,7 +1937,14 @@ GLOBAL void c_maketitle(void)
          }
       }
 
-      if (has_version || has_date || has_author || has_address)
+      if (has_distributor)
+      {
+         auto_quote_chars(lang.distributor, FALSE);
+         voutlnf("<br />%s<br />", lang.distributor);
+         voutlnf("%s<br />", titdat.distributor);
+      }
+
+      if (has_version || has_date || has_author || has_address || has_distributor)
       {
          outln("<p>");
       }
@@ -1731,6 +2008,14 @@ GLOBAL void c_maketitle(void)
                outlncenter(titdat.address[i]);
             }
          }
+      }
+
+      if (has_distributor)
+      {
+         outln("");
+         outlncenter(lang.distributor);
+         outln("");
+         outlncenter(titdat.distributor);
       }
 
       outln("");
@@ -1819,6 +2104,14 @@ GLOBAL void c_maketitle(void)
          outln("newline");
       }
       
+      if (has_distributor)
+      {
+         outln("newline");
+         auto_quote_chars(lang.distributor, FALSE);
+         voutlnf("(%s) Center setAlign newline", lang.distributor);
+         voutlnf("(%s) Center setAlign", titdat.distributor);
+      }
+      
       c_newpage();
       
       /* New: Fixed bug #0000040 in r6.3pl16 [NHz] */
@@ -1835,50 +2128,66 @@ GLOBAL void c_maketitle(void)
 
 GLOBAL void pch_titlepage ( void )
 {
-        int i;
+   int   i;  /* counter */
 
-        if ( titdat.title!=NULL )
-        {       outlncenter(titdat.title);
-                outln("");
-        }
+   if (titdat.title != NULL)
+   {
+      outlncenter(titdat.title);
+      outln("");
+   }
 
-        if ( titdat.program!=NULL )
-        {       outlncenter(titdat.program);
-                outln("");
-        }
+   if (titdat.program != NULL)
+   {
+      outlncenter(titdat.program);
+      outln("");
+   }
 
-        if ( titdat.version!=NULL )
-        {       outlncenter(titdat.version);
-        }
+   if (titdat.version != NULL)
+   {
+      outlncenter(titdat.version);
+   }
 
-        if ( titdat.date!=NULL )
-        {       outlncenter(titdat.date);
-        }
+   if (titdat.date != NULL)
+   {
+      outlncenter(titdat.date);
+   }
 
-        if ( titdat.author!=NULL )
-        {       outln("");
-                outlncenter(lang.by);
-                outln("");
-                outlncenter(titdat.author);
-        }
+   if (titdat.author != NULL)
+   {
+      outln("");
+      outlncenter(lang.by);
+      outln("");
+      outlncenter(titdat.author);
+   }
 
-        /* New in V6.5.2 [NHz] */
-        if ( titdat.company!=NULL )
-        {       outln("");
-                outlncenter(lang.fur);
-                outln("");
-                outlncenter(titdat.company);
-        }
+   if (titdat.company != NULL)            /* New in V6.5.2 [NHz] */
+   {
+      outln("");
+      outlncenter(lang.fur);
+      outln("");
+      outlncenter(titdat.company);
+   }
 
-        if (address_counter>0)
-        {       for (i = 1; i <= address_counter; i++)
-                {       if (titdat.address[i] != NULL)
-                        {       outlncenter(titdat.address[i]);
-                        }
-                }
-        }
+   if (address_counter > 0)
+   {
+      for (i = 1; i <= address_counter; i++)
+      {
+         if (titdat.address[i] != NULL)
+         {
+            outlncenter(titdat.address[i]);
+         }
+      }
+   }
 
-        outln("");
+   if (titdat.distributor != NULL)
+   {
+      outln("");
+      outlncenter(lang.distributor);
+      outln("");
+      outlncenter(titdat.distributor);
+   }
+
+   outln("");
 
 }       /* pch_titlepage */
 
@@ -1889,41 +2198,44 @@ GLOBAL void pch_titlepage ( void )
         ############################################################    */
 LOCAL void init_titdat ( void )
 {
-        int i;
+        int   i;  /* counter */
+        
+        
+        titdat.title   = NULL;
+        titdat.program = NULL;
+        titdat.date    = NULL;
+        titdat.version = NULL;
+        titdat.author  = NULL;
 
-        titdat.title= NULL;
-        titdat.program= NULL;
-        titdat.date= NULL;
-        titdat.version= NULL;
-        titdat.author= NULL;
-
-        for (i=0; i<MAXADDRESS; i++)
-        {       titdat.address[i]= NULL;
+        for (i = 0; i < MAXADDRESS; i++)
+        {
+           titdat.address[i] = NULL;
         }
 
-        titdat.keywords= NULL; /* New in r6pl15 [NHz] */
-        titdat.description= NULL; /* New in r6pl15 [NHz] */
-        titdat.robots= NULL; /* New in V6.5.17 */
-        titdat.company= NULL; /* New in V6.5.2 [NHz] */
-        titdat.category= NULL; /* New in V6.5.2 [NHz] */
-        titdat.htmltitle= NULL;
-        titdat.webmastername= NULL;
-        titdat.webmasteremail= NULL;
-        titdat.webmastermailurl= NULL;
-        titdat.webmasterurl= NULL;
-        titdat.programimage= NULL;
-        titdat.appletitle= NULL;        /* V6.5.17 */
-        titdat.appleicon= NULL;         /* V6.5.17 */
-        titdat.authorimage= NULL;
-        titdat.authoricon= NULL;
-        titdat.authoricon_active= NULL;
-        titdat.authoriconWidth= 0;
-        titdat.authoriconHeight= 0;
-        titdat.authoriconActiveWidth= 0;
-        titdat.authoriconActiveHeight= 0;
+        titdat.keywords               = NULL; /* New in r6pl15 [NHz] */
+        titdat.description            = NULL; /* New in r6pl15 [NHz] */
+        titdat.robots                 = NULL; /* New in V6.5.17 */
+        titdat.company                = NULL; /* New in V6.5.2 [NHz] */
+        titdat.category               = NULL; /* New in V6.5.2 [NHz] */
+        titdat.htmltitle              = NULL;
+        titdat.webmastername          = NULL;
+        titdat.webmasteremail         = NULL;
+        titdat.webmastermailurl       = NULL;
+        titdat.webmasterurl           = NULL;
+        titdat.programimage           = NULL;
+        titdat.appletitle             = NULL;        /* V6.5.17 */
+        titdat.appleicon              = NULL;         /* V6.5.17 */
+        titdat.authorimage            = NULL;
+        titdat.authoricon             = NULL;
+        titdat.authoricon_active      = NULL;
+        titdat.authoriconWidth        = 0;
+        titdat.authoriconHeight       = 0;
+        titdat.authoriconActiveWidth  = 0;
+        titdat.authoriconActiveHeight = 0;
 
-        titdat.drc_statusline= NULL;
-        titdat.stg_database= NULL;
+        titdat.drc_statusline         = NULL;
+        titdat.stg_database           = NULL;
+        titdat.distributor            = NULL;
 }
 
 
@@ -1995,6 +2307,7 @@ GLOBAL void exit_module_tp ( void )
 
         free_titdat(&(titdat.drc_statusline));  
         free_titdat(&(titdat.stg_database));    
+        free_titdat(&(titdat.distributor));    
 }
 
 
