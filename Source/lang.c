@@ -215,7 +215,7 @@ GLOBAL void init_lang_date ( void )
 
 
 /*      --------------------------------------------------------------
-        init_lang() initialsisiert die von UDO benutzen Ausdrucke in
+        init_lang() initialisiert die von UDO benutzen Ausdruecke in
         der jeweiligen Sprache. Sonderzeichen muessen im Universal
         Charset angegeben werden.
         --------------------------------------------------------------  */
@@ -240,7 +240,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.see,        "zie");
       strcpy(lang.also,       "zie ook");
       strcpy(lang.by,         "door");
-      strcpy(lang.fur,        "for"); /* New in V6.5.2 [NHz] */
+      strcpy(lang.fur,        "voor"); /* New in V6.5.2 [NHz] */
       strcpy(lang.up,         "&Omhoog");
       strcpy(lang.exit,       "Be i&ndigen");
       strcpy(lang.unknown,    "Onbekend");
@@ -253,6 +253,7 @@ GLOBAL void init_lang ( void )
       /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "nl");
       strcpy(lang.html_start, "Begin of the document");
+      strcpy(lang.distributor,"Distributie:");
       break;
 
    case TOENG:
@@ -283,6 +284,7 @@ GLOBAL void init_lang ( void )
       /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "en");
       strcpy(lang.html_start, "Begin of the document");
+      strcpy(lang.distributor,"Distributor:");
       break;
 
    case TOFRA:             /* vergleiche german.sty von LaTeX */
@@ -300,7 +302,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.see,        "voir");
       strcpy(lang.also,       "voir aussi");
       strcpy(lang.by,         "de");
-      strcpy(lang.fur,        "for"); /* New in V6.5.2 [NHz] */
+      strcpy(lang.fur,        "pour"); /* New in V6.5.2 [NHz] */
       strcpy(lang.up,         "&Haut");
       strcpy(lang.exit,       "&Fin");
       strcpy(lang.unknown,    "Inconnu");
@@ -313,6 +315,7 @@ GLOBAL void init_lang ( void )
       /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "fr");
       strcpy(lang.html_start, "Begin of the document");
+      strcpy(lang.distributor,"Distribution~:");
 
       /* Strings mit Sonderzeichen anpassen */
       uni2ascii(lang.preface);
@@ -337,7 +340,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.see,        "vedere");
       strcpy(lang.also,       "vedere anche");
       strcpy(lang.by,         "da");
-      strcpy(lang.fur,        "for"); /* New in V6.5.2 [NHz] */
+      strcpy(lang.fur,        "pro"); /* New in V6.5.2 [NHz] */
       strcpy(lang.up,         "S&u");
       strcpy(lang.exit,       "Uscita");
       strcpy(lang.unknown,    "Ignoto");
@@ -350,6 +353,7 @@ GLOBAL void init_lang ( void )
       /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "it");
       strcpy(lang.html_start, "Begin of the document");
+      strcpy(lang.distributor,"Distribuzione:");
       break;
 
    case TOSPA:     /* Euro-Dictionary */
@@ -367,7 +371,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.see,        "ver");
       strcpy(lang.also,       "ver tambi(!`e)n");
       strcpy(lang.by,         "de");
-      strcpy(lang.fur,        "for"); /* New in V6.5.2 [NHz] */
+      strcpy(lang.fur,        "per"); /* New in V6.5.2 [NHz] */
       strcpy(lang.up,         "Elevado");
       strcpy(lang.exit,       "Terminar");
       strcpy(lang.unknown,    "Desconocido");
@@ -380,6 +384,7 @@ GLOBAL void init_lang ( void )
       /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "es");
       strcpy(lang.html_start, "Begin of the document");
+      strcpy(lang.distributor,"Distributor:");
       
       /* Strings mit Sonderzeichen anpassen */
       uni2ascii(lang.chapter);
@@ -405,7 +410,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.see,        "se");
       strcpy(lang.also,       "se (!\"a)ven");
       strcpy(lang.by,         "av");
-      strcpy(lang.fur,        "for"); /* New in V6.5.2 [NHz] */
+      strcpy(lang.fur,        "f(!\"o)r"); /* New in V6.5.2 [NHz] */
       strcpy(lang.up,         "&Upp");
       strcpy(lang.exit,       "Avsluta");
       strcpy(lang.unknown,    "Unknown");
@@ -418,6 +423,7 @@ GLOBAL void init_lang ( void )
       /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "sv");
       strcpy(lang.html_start, "Begin of the document");
+      strcpy(lang.distributor,"Distributor:");
       
       /* Strings mit Sonderzeichen anpassen */
       uni2ascii(lang.preface);
@@ -452,6 +458,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.html_next,  "n(!&ae)ste");
       strcpy(lang.html_lang,  "da");
       strcpy(lang.html_start, "start af dokument");
+      strcpy(lang.distributor,"Distributor:");
       
       uni2ascii(lang.appendix);
       uni2ascii(lang.also);
@@ -485,6 +492,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.html_next,  "N(!'a)sleduj(!'i)c(!'i)");
       strcpy(lang.html_lang,  "cs");
       strcpy(lang.html_start, "Za(!`e)(!'a)tek dokumentu");
+      strcpy(lang.distributor,"Distributor:");
 
       uni2ascii(lang.preface);
       uni2ascii(lang.appendix);
@@ -528,6 +536,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.html_next,  "N‡sleduj’c’");
       strcpy(lang.html_lang,  "cs");
       strcpy(lang.html_start, "Za‹‡tek dokumentu");
+      strcpy(lang.distributor,"Distributor:");
       break;
 */
    default:        /* Deutsch ist default */
@@ -558,6 +567,7 @@ GLOBAL void init_lang ( void )
       /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "de");
       strcpy(lang.html_start, "Beginn des Dokumentes");
+      strcpy(lang.distributor,"Distributor:");
       
       uni2ascii(lang.fur); /* New in V6.5.2 [NHz] */
    }
