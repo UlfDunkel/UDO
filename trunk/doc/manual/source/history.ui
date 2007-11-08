@@ -253,6 +253,13 @@ Version 6.5.13
 !begin_itemize !short
 # ..............................................................................
 !iflang [german]
+!item Die (!T)!/docinfo(!t)-Optionen (!T)[program](!t) und (!T)[programimage](!t) schließen sich nicht mehr gegenseitig aus, sondern können jetzt gleichzeitig ausgegeben werden. Wenn beide benutzt werden, wird [program] zuerst ausgegeben.
+!endif
+!iflang [english]
+!item The (!T)!/docinfo(!t) options (!T)[program] and (!T)[programimage](!t) no longer exclude each other but can be used simultaneously now. If you use both, [program] will be output first.
+!endif
+# ..............................................................................
+!iflang [german]
 !item Die "UDO Community" ist in dem Text ergänzt worden, der von
     (!KW [use_about_udo]) ausgegeben wird.
 !endif
