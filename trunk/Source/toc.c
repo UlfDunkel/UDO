@@ -478,302 +478,375 @@ LOCAL void replace_refs ( char *s )
 }	/* replace_refs */
 
 
-LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
-							 const char *pic, const unsigned int uiW, const unsigned int uiH  )
+
+
+
+/*******************************************************************************
+*
+*  string2reference():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void string2reference(
+
+char                *ref,                        /* */
+const LABEL         *l,                          /* */
+const BOOLEAN        for_toc,                    /* */
+const char          *pic,                        /* */
+const unsigned int   uiW,                        /* */
+const unsigned int   uiH)                        /* */
 {
-	char	s[512], n[512], sNoSty[512], hfn[512], sGifSize[80];
-	int		ti, ui;
-	BOOLEAN	same_file= FALSE;
-	char 	*htmlfilename, suff[MYFILE_SUFF_LEN+1];
-
-	ref[0]= EOS;
-
-	switch (desttype)
-	{
-		case TOWIN:
-		case TOWH4:
-		case TOAQV:
-			um_strcpy(n, l->name, 512, "string2reference[1]");
-			replace_udo_tilde(n);
-			replace_udo_nbsp(n);
-			if (l->is_node)
-			{	node2NrWinhelp(s, l->labindex);
-			}
-			else
-			{	if (l->is_alias)
-				{	alias2NrWinhelp(s, l->labindex);
-				}
-				else
-				{	label2NrWinhelp(s, l->labindex);
-				}
-			}
-			if (l->is_popup)
-			{	sprintf(ref, "{\\ul %s}{\\v %s}", n, s);
-			}
-			else
-			{	sprintf(ref, "{\\uldb %s}{\\v %s}", n, s);
-			}
-			break;
-
-		case TOIPF:	/* r6pl7 */
-			um_strcpy(n, l->name, 512, "string2reference[2]");
-			replace_udo_tilde(n);
-			replace_udo_nbsp(n);
-			if (l->is_node)
-			{	node2NrIPF(s, l->labindex);
-			}
-			else
-			{	ui= l->tocindex;
-				node2NrIPF(s, toc[ui]->labindex);
-			}
-			sprintf(ref, ":link refid=%s reftype=hd.%s:elink.", s, n);	/*r6pl8*/
-			break;
-
-		case TOSTG:	/* r5pl16 */
-			if (l->ignore_links)
-			{	um_strcpy(n, l->name, 512, "string2reference[3]");
-				replace_udo_tilde(n);
-				replace_udo_nbsp(n);
-				node2stg(n);
-				sprintf(ref, "@{\"%s\" link \"%s\"}", n, n);
-			}
-			else
-			{	/* wie bei default */
-				strcpy(ref, l->name);
-				replace_udo_tilde(ref);
-				replace_udo_nbsp(ref);
-			}
-			break;
-
-		case TOAMG:
-			um_strcpy(s, l->name, 512, "string2reference[4]");
-			replace_udo_tilde(n);
-			replace_udo_nbsp(n);
-			if (l->is_node)
-			{	strcpy(n, l->name);
-			}
-			else
-			{	ti= l->tocindex;
-				um_strcpy(n, lab[toc[ti]->labindex]->name, 512, "string2reference[5]");
-			}
-			replace_udo_tilde(n);
-			replace_udo_nbsp(n);
-			node2stg(n);
-			sprintf(ref, "@{\"%s\" link \"%s\"}", s, n);
-			break;
-
-		case TOTVH:
-			um_strcpy(n, l->name, 512, "string2reference[6]");
-			replace_udo_tilde(n);
-			replace_udo_nbsp(n);
-			um_strcpy(s, n, 512, "string2reference[7]");
-			node2vision(s);
-			sprintf(ref, "{%s:%s}", n, s);
-			break;
-
-		case TOPCH:
-			um_strcpy(n, l->name, 512, "string2reference[8]");
-			replace_udo_tilde(n);
-			replace_udo_nbsp(n);
-
-			if ( strchr(n, '"')!=NULL )
-			{	um_strcpy(s, n, 512, "string2reference[9]");
-				node2pchelp(s);
-				sprintf(ref, "\\link(\"%s\")%s\\#", s, n);
-			}
-			else
-			{	sprintf(ref, "\\#%s\\#", n);
-			}
-
-			if (!for_toc)
-			{	/* r5pl10: Referenz als Platzhalter anlegen, damit der */
-				/* Blocksatz korrekt wird. */
-				insert_placeholder(ref, ref, ref, n);
-			}
-			break;
-
-		case TOLDS:
-			um_strcpy(n, l->name, 512, "string2reference[10]");
-			replace_udo_tilde(n);
-			replace_udo_nbsp(n);
-			sprintf(ref, "<ref id=\"%s\" name=\"%s\">", n, n);
-			break;
-
-		case TOINF:
-			um_strcpy(n, l->name, 512, "string2reference[11]");
-			replace_udo_tilde(n);
-			replace_udo_nbsp(n);
-			node2texinfo(n);
-			sprintf(ref, "* %s::", n);
-			break;
-
-		case TOHAH:		/* V6.5.17 */
-		case TOHTM:
-		case TOMHH:
-			um_strcpy(n, l->name, 512, "string2reference[12]");
-			replace_udo_tilde(n);
-			replace_udo_nbsp(n);
-
-			um_strcpy(sNoSty, n, 512, "string2reference[13]");
-			del_html_styles(sNoSty);
-
-         label2html(sNoSty);
-
-			ti= l->tocindex;
-
-			/* Hier auch das Mergen beachten! */
-			ui= ti;	/* upper index = toc index */
-			if (html_merge_node4 && toc[ti]->toctype==TOC_NODE4)
-			{	ui= toc[ti]->up_n3_index;
-			}
-			if (html_merge_node3 && toc[ti]->toctype==TOC_NODE3)
-			{	ui= toc[ti]->up_n2_index;
-			}
-			if (html_merge_node2 && toc[ti]->toctype==TOC_NODE2)
-			{	ui= toc[ti]->up_n1_index;
-			}
-			if (html_merge_node1)
-			{	ui= 0;
-			}
-
-			if (ui==0)
-			{	um_strcpy(hfn, outfile.name, 512, "string2reference[14]");
-				htmlfilename= hfn;
-			}
-			else
-			{
-/*#if 1*/
-				sprintf(hfn, "%s%s", html_name_prefix, toc[ui]->filename);
-				htmlfilename= hfn;
-/*#else
-				htmlfilename= toc[ui]->filename;
-#endif*/
-			}
-
-			/* Feststellen, ob die Referenz im gleichen File liegt */
-			if (strcmp(htmlfilename, outfile.name)==0)
-			{	same_file= TRUE;
-			}
-
-			/* New in r6pl16 [NHz] */
-				if(strchr(htmlfilename, '.') != NULL)
-					strcpy(suff, "");
-				else
-					strcpy(suff, outfile.suff);
-
-			if (pic[0]!=EOS)
-			{	/* Fuer Kopf- oder Fusszeile */
-				if (no_images)	/*r6pl2*/
-				{	if (l->is_node || l->is_alias)
-					{	sprintf(ref, "<a href=\"%s%s\"%s>%s</a>",
-							/* Changed in r6pl16 [NHz] */
-							htmlfilename, suff, html_target, n);
-					}
-					else
-					{	sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",
-							/* Changed in r6pl16 [NHz] */
-							htmlfilename, suff, sNoSty, html_target, n);
-					}
-				}
-				else
-				{	
-					sGifSize[0]= EOS;
-					if (uiW!=0 && uiH!=0)
-					{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
-					}
-					if (l->is_node || l->is_alias)
-					{	sprintf(ref, "<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s /></a>",
-							/* Changed in r6pl16 [NHz] */
-							htmlfilename, suff, html_target, pic, n, n, sGifSize);
-					}
-					else
-					{	sprintf(ref, "<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s /></a>",
-							/* Changed in r6pl16 [NHz] */
-							htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize);
-					}
-				}
-			}
-			else
-			{	if (l->is_node || l->is_alias)
-				{	if (same_file)
-					{	sprintf(ref, "<a href=\"#%s\"%s>%s</a>",
-							sNoSty, html_target, n);
-					}
-					else
-					{	/* Hier muss noch unterschieden werden, wenn	*/
-						/* gemerged wird. Dann ein # einfuegen!!!!		*/
-						/* ti oben bereits aus tocindex gesetzt			*/
-						if	(	(html_merge_node2 && toc[ti]->n2>0)
-							||	(html_merge_node3 && toc[ti]->n3>0)
-							||	(html_merge_node4 && toc[ti]->n4>0)
-							)
-						{	sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",
-								/* Changed in r6pl16 [NHz] */
-								htmlfilename, suff, sNoSty, html_target, n);
-						}
-						else
-						{	sprintf(ref, "<a href=\"%s%s\"%s>%s</a>",
-								/* Changed in r6pl16 [NHz] */
-								htmlfilename, suff, html_target, n);
-						}
-					}
-				}
-				else
-				{	sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",
-						/* Changed in r6pl16 [NHz] */
-						htmlfilename, suff, sNoSty, html_target, n);
-				}
-			}
-			break;
-
-		case TOTEX:
-			strcpy(ref, l->name);
-			replace_udo_tilde(ref);
-			replace_udo_nbsp(ref);
-			break;
-
-		case TOPDL:
-			um_strcpy(n, l->name, 512, "string2reference[15]");
-			replace_udo_tilde(n);
-			replace_udo_nbsp(n);
-			/* Changed in r6.2pl1 [NHz] */
-/* V6.5.20 [CS] Start */
-			sprintf(ref, "%s \\hidelink{\\pdfstartlink goto num %d %s\\pdfendlink}", n, l->labindex, n);
-/* old:
-			sprintf(ref, "{\\pdfstartlink goto num %d\n%s\\pdfendlink}",
-				l->labindex, n);
+   char	            s[512],                     /* */
+                     n[512],                     /* */
+                     sNoSty[512],                /* */
+                     hfn[512],                   /* */
+                     sGifSize[80];               /* */
+   int		         ti,                         /* */
+                     ui;                         /* */
+   BOOLEAN           same_file = FALSE;          /* TRUE: reference is in same file */
+   char             *htmlfilename,               /* */
+                     suff[MYFILE_SUFF_LEN + 1];  /* */
+   char              closer[8] = "\0";           /* single tag closer mark in XHTML */
+   
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   ref[0] = EOS;
+   
+   switch (desttype)
+   {
+   case TOWIN:
+   case TOWH4:
+   case TOAQV:
+      um_strcpy(n, l->name, 512, "string2reference[1]");
+      replace_udo_tilde(n);
+      replace_udo_nbsp(n);
+      
+      if (l->is_node)
+      {
+         node2NrWinhelp(s, l->labindex);
+      }
+      else
+      {
+         if (l->is_alias)
+         {
+            alias2NrWinhelp(s, l->labindex);
+         }
+         else
+         {
+            label2NrWinhelp(s, l->labindex);
+         }
+      }
+      
+      if (l->is_popup)
+      {
+         sprintf(ref, "{\\ul %s}{\\v %s}", n, s);
+      }
+      else
+      {
+         sprintf(ref, "{\\uldb %s}{\\v %s}", n, s);
+      }
+      
+      break;
+      
+   case TOIPF:                            /* r6pl7 */
+      um_strcpy(n, l->name, 512, "string2reference[2]");
+      replace_udo_tilde(n);
+      replace_udo_nbsp(n);
+      
+      if (l->is_node)
+      {
+      	node2NrIPF(s, l->labindex);
+      }
+      else
+      {
+      	ui = l->tocindex;
+         node2NrIPF(s, toc[ui]->labindex);
+      }
+                                          /*r6pl8*/
+      sprintf(ref, ":link refid=%s reftype=hd.%s:elink.", s, n);
+      break;
+      
+   case TOSTG:                            /* r5pl16 */
+      if (l->ignore_links)
+      {
+         um_strcpy(n, l->name, 512, "string2reference[3]");
+         replace_udo_tilde(n);
+         replace_udo_nbsp(n);
+         node2stg(n);
+         sprintf(ref, "@{\"%s\" link \"%s\"}", n, n);
+      }
+      else
+      {                                   /* wie bei default */
+         strcpy(ref, l->name);
+         replace_udo_tilde(ref);
+         replace_udo_nbsp(ref);
+      }
+      
+      break;
+      
+   case TOAMG:
+      um_strcpy(s, l->name, 512, "string2reference[4]");
+      replace_udo_tilde(n);
+      replace_udo_nbsp(n);
+      
+      if (l->is_node)
+      {
+         strcpy(n, l->name);
+      }
+      else
+      {
+         ti = l->tocindex;
+         um_strcpy(n, lab[toc[ti]->labindex]->name, 512, "string2reference[5]");
+      }
+      
+      replace_udo_tilde(n);
+      replace_udo_nbsp(n);
+      node2stg(n);
+      sprintf(ref, "@{\"%s\" link \"%s\"}", s, n);
+      break;
+      
+   case TOTVH:
+      um_strcpy(n, l->name, 512, "string2reference[6]");
+      replace_udo_tilde(n);
+      replace_udo_nbsp(n);
+      um_strcpy(s, n, 512, "string2reference[7]");
+      node2vision(s);
+      sprintf(ref, "{%s:%s}", n, s);
+      break;
+      
+   case TOPCH:
+      um_strcpy(n, l->name, 512, "string2reference[8]");
+      replace_udo_tilde(n);
+      replace_udo_nbsp(n);
+      
+      if (strchr(n, '"') != NULL)
+      {
+         um_strcpy(s, n, 512, "string2reference[9]");
+         node2pchelp(s);
+         sprintf(ref, "\\link(\"%s\")%s\\#", s, n);
+      }
+      else
+      {
+         sprintf(ref, "\\#%s\\#", n);
+      }
+      
+      if (!for_toc)
+      {                                   /* r5pl10: Referenz als Platzhalter anlegen, damit der */
+                                          /* Blocksatz korrekt wird. */
+         insert_placeholder(ref, ref, ref, n);
+      }
+      
+      break;
+      
+   case TOLDS:
+      um_strcpy(n, l->name, 512, "string2reference[10]");
+      replace_udo_tilde(n);
+      replace_udo_nbsp(n);
+      sprintf(ref, "<ref id=\"%s\" name=\"%s\">", n, n);
+      break;
+      
+   case TOINF:
+      um_strcpy(n, l->name, 512, "string2reference[11]");
+      replace_udo_tilde(n);
+      replace_udo_nbsp(n);
+      node2texinfo(n);
+      sprintf(ref, "* %s::", n);
+      break;
+      
+   case TOHAH:                            /* V6.5.17 */
+   case TOHTM:
+   case TOMHH:
+      um_strcpy(n, l->name, 512, "string2reference[12]");
+      replace_udo_tilde(n);
+      replace_udo_nbsp(n);
+      
+      um_strcpy(sNoSty, n, 512, "string2reference[13]");
+      del_html_styles(sNoSty);
+      
+      label2html(sNoSty);
+      
+      ti = l->tocindex;
+      
+      /* Hier auch das Mergen beachten! */
+      ui = ti;                            /* upper index = toc index */
+      
+      if (html_merge_node4 && toc[ti]->toctype == TOC_NODE4)
+         ui = toc[ti]->up_n3_index;
+      
+      if (html_merge_node3 && toc[ti]->toctype == TOC_NODE3)
+         ui = toc[ti]->up_n2_index;
+      
+      if (html_merge_node2 && toc[ti]->toctype == TOC_NODE2)
+         ui = toc[ti]->up_n1_index;
+      
+      if (html_merge_node1)
+         ui = 0;
+      
+      if (ui == 0)
+      {
+         um_strcpy(hfn, outfile.name, 512, "string2reference[14]");
+         htmlfilename= hfn;
+      }
+      else
+      {
+/* #if 1 */
+         sprintf(hfn, "%s%s", html_name_prefix, toc[ui]->filename);
+         htmlfilename= hfn;
+/*
+#else
+         htmlfilename= toc[ui]->filename;
+#endif
 */
-			break;
-
-		/* New in r6pl15 [NHz] */
-		case TOKPS:
-			um_strcpy(n, l->name, 512, "string2reference[16]");
-			replace_udo_tilde(n);
-			replace_udo_nbsp(n);
-
-			if ( strpbrk(n, " :;\\()/")!=NULL )
-			{	um_strcpy(s, n, 512, "string2reference[17]");
-				node2postscript(n, KPS_CONTENT); /* New in r6pl16 [NHz] */
-				node2postscript(s, KPS_NAMEDEST); /* Changed in r6pl16 [NHz] */
-				sprintf(ref, " (%s) /%s 0 0 0 Link", n, s);
-			}
-			else
-			{	sprintf(ref, " (%s) /%s 0 0 0 Link", n, n);
-			}
-
-			if (!for_toc)
-			{	/* r5pl10: Referenz als Platzhalter anlegen, damit der */
-				/* Blocksatz korrekt wird. */
-				insert_placeholder(ref, ref, ref, n);
-			}
-			break;
-
-		default:
-			strcpy(ref, l->name);
-			replace_udo_tilde(ref);
-			replace_udo_nbsp(ref);
-			break;
-	}
+      }
+      
+      /* Feststellen, ob die Referenz im gleichen File liegt */
+      if (strcmp(htmlfilename, outfile.name) == 0)
+      {
+         same_file = TRUE;
+      }
+      
+      /* New in r6pl16 [NHz] */
+      if (strchr(htmlfilename, '.') != NULL)
+         strcpy(suff, "");
+      else
+         strcpy(suff, outfile.suff);
+      
+      if (pic[0] != EOS)
+      {                                   /* Fuer Kopf- oder Fusszeile */
+         if (no_images)                   /*r6pl2*/
+         {
+            if (l->is_node || l->is_alias)
+            {
+               sprintf(ref, "<a href=\"%s%s\"%s>%s</a>",
+                                          /* Changed in r6pl16 [NHz] */
+                  htmlfilename, suff, html_target, n);
+            }
+            else
+            {
+               sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",
+                                          /* Changed in r6pl16 [NHz] */
+                  htmlfilename, suff, sNoSty, html_target, n);
+            }
+         }
+         else
+         {	
+            sGifSize[0] = EOS;
+            
+            if (uiW != 0 && uiH != 0)
+            {
+               sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
+            }
+            
+            if (l->is_node || l->is_alias)
+            {
+               sprintf(ref, "<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+                  htmlfilename, suff, html_target, pic, n, n, sGifSize, closer);
+            }
+            else
+            {
+               sprintf(ref, "<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+                  htmlfilename, suff, sNoSty, html_target, pic, n, n, sGifSize, closer);
+            }
+         }
+      }
+      else
+      {
+         if (l->is_node || l->is_alias)
+         {
+            if (same_file)
+            {
+               sprintf(ref, "<a href=\"#%s\"%s>%s</a>", sNoSty, html_target, n);
+            }
+            else
+            {                             /* Hier muss noch unterschieden werden, wenn */
+                                          /* gemerged wird. Dann ein # einfuegen!!!! */
+                                          /* ti oben bereits aus tocindex gesetzt */
+               if (   (html_merge_node2 && toc[ti]->n2 > 0)
+                   || (html_merge_node3 && toc[ti]->n3 > 0)
+                   || (html_merge_node4 && toc[ti]->n4 > 0)
+                  )
+               {
+                  sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",
+                                          /* Changed in r6pl16 [NHz] */
+                     htmlfilename, suff, sNoSty, html_target, n);
+               }
+               else
+               {
+                  sprintf(ref, "<a href=\"%s%s\"%s>%s</a>",
+                                          /* Changed in r6pl16 [NHz] */
+                     htmlfilename, suff, html_target, n);
+               }
+            }
+         }
+         else
+         {
+            sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",
+                                          /* Changed in r6pl16 [NHz] */
+               htmlfilename, suff, sNoSty, html_target, n);
+         }
+      }
+      
+      break;
+      
+   case TOTEX:
+      strcpy(ref, l->name);
+      replace_udo_tilde(ref);
+      replace_udo_nbsp(ref);
+      break;
+      
+   case TOPDL:
+      um_strcpy(n, l->name, 512, "string2reference[15]");
+      replace_udo_tilde(n);
+      replace_udo_nbsp(n);
+      
+      /* Changed in r6.2pl1 [NHz] */
+      /* V6.5.20 [CS] Start */
+      sprintf(ref, "%s \\hidelink{\\pdfstartlink goto num %d %s\\pdfendlink}", n, l->labindex, n);
+      
+/* old:
+      sprintf(ref, "{\\pdfstartlink goto num %d\n%s\\pdfendlink}",
+      l->labindex, n);
+*/
+      break;
+      
+   /* New in r6pl15 [NHz] */
+   case TOKPS:
+      um_strcpy(n, l->name, 512, "string2reference[16]");
+      replace_udo_tilde(n);
+      replace_udo_nbsp(n);
+      
+      if (strpbrk(n, " :;\\()/") != NULL)
+      {
+         um_strcpy(s, n, 512, "string2reference[17]");
+         node2postscript(n, KPS_CONTENT); /* New in r6pl16 [NHz] */
+         node2postscript(s, KPS_NAMEDEST);/* Changed in r6pl16 [NHz] */
+         sprintf(ref, " (%s) /%s 0 0 0 Link", n, s);
+      }
+      else
+      {
+         sprintf(ref, " (%s) /%s 0 0 0 Link", n, n);
+      }
+      
+      if (!for_toc)
+      {
+                                          /* r5pl10: Referenz als Platzhalter anlegen, damit der */
+                                          /* Blocksatz korrekt wird. */
+         insert_placeholder(ref, ref, ref, n);
+      }
+      
+      break;
+      
+   default:
+      strcpy(ref, l->name);
+      replace_udo_tilde(ref);
+      replace_udo_nbsp(ref);
+   }
 
 }	/* string2reference */
 
@@ -1989,364 +2062,461 @@ LOCAL BOOLEAN html_make_file ( void )
 	return TRUE;
 }	/* html_make_file */
 
-/* <???> <meta name="Subject" content="..."> */
-/* <???> <meta name="Modification-Date" content="..."> */
-/* <???> <meta name="Expiration-Date" content="..."> */
-/* <???> <meta name="Language" content="..."> */
 
 
-LOCAL void output_html_meta ( BOOLEAN keywords )
+
+
+/*******************************************************************************
+*
+*  output_html_meta():
+*     outputs HTML meta data in the HTML head section
+*
+*  <???> <meta name="Subject" content="...">
+*  <???> <meta name="Modification-Date" content="...">
+*  <???> <meta name="Expiration-Date" content="...">
+*  <???> <meta name="Language" content="...">
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void output_html_meta(
+
+BOOLEAN    keywords)             /* */
 {
-	int ti=0, i, li, j;
-	STYLE *styleptr;
+   int     ti = 0,               /* */
+           i,                    /* */
+           li,                   /* */
+           j;                    /* */
+   STYLE  *styleptr;             /* */
+   char    s[512],               /* */
+           htmlname[512],        /* */
+           sTarget[512] = "\0";  /* */
+   char    backpage[256],        /* */
+           href[256],            /* */
+           alt[256],             /* */
+          *tok;                  /* */
+   char    closer[8] = "\0";     /* single tag closer mark in XHTML */
 
-	char s[512], htmlname[512], sTarget[512]="\0";
-	char backpage[256], href[256], alt[256], *tok;
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   if (!html_ignore_8bit)
+   {
+      voutlnf("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=iso-8859-1\"%s>", closer);
+   }
+   else
+   {
+      /* New in v6.5.0 [vj] */
+      if (html_ignore_8bit_use_charset)
+      {
+         /* We should print out a special charset instead of none.
+            No check needed if html_ignore_8bit_charset is emtpy,
+            because html_ignore_8bit_use_charset wouldn't have been set to TRUE.
+         */
+         voutlnf("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=%s\"%s>", html_ignore_8bit_charset, closer);
+      }
+   }
 
-	if (!html_ignore_8bit)
-	{	outln("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=iso-8859-1\" />");
-	}
-	else
-	{
-		/* New in v6.5.0 [vj] */
-		if (html_ignore_8bit_use_charset)
-		{
-			/* We should print out a special charset instead of none
-			   No check need if html_ignore_8bit_charset is emtpy,
-			   because html_ignore_8bit_use_charset wouldn't have been set to TRUE
-			 */
-			voutlnf("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=%s\" />", html_ignore_8bit_charset);
-		}
-	}
+   /* New in r6pl16 [NHz] */
+   voutlnf("<meta http-equiv=\"Content-Language\" content=\"%s\"%s>", lang.html_lang, closer);
+   voutlnf("<meta http-equiv=\"Content-Style-Type\" content=\"text/css\"%s>", closer);
+   voutlnf("<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\"%s>", closer);
 
-	/* New in r6pl16 [NHz] */
-	voutlnf("<meta http-equiv=\"Content-Language\" content=\"%s\" />", lang.html_lang);
-	outln("<meta http-equiv=\"Content-Style-Type\" content=\"text/css\" />");
-	outln("<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\" />");
-
-	/* New feature #0000054 in V6.5.2 [NHz] */
-	if(html_header_date)
-	{
-		char zone[10]="+00:00";
-		time_t uhrzeit;
-		int hour_local, min_local, mday_local, min_utc, hour_utc, mday_utc;
-		int hours, minutes;
-
-		if(strcmp(html_header_date_zone, "") >0)
-			um_strcpy(zone, html_header_date_zone, 9, "output_html_meta[1]1");
-		else
-		{
-			time(&uhrzeit);
-			mday_local = localtime(&uhrzeit)->tm_mday;
-			mday_utc = gmtime(&uhrzeit)->tm_mday;
-			hour_local = localtime(&uhrzeit)->tm_hour;
-			hour_utc = gmtime(&uhrzeit)->tm_hour;
-			min_local = localtime(&uhrzeit)->tm_min;
-			min_utc = gmtime(&uhrzeit)->tm_min;
-
-			if(min_local < min_utc)	/* special for countries with "broken times" (e.g. Iran +03:30) */
-			{
-				if(mday_local != mday_utc)	/* if different days over midnight */
-					hours = hour_local - hour_utc - 1 + 24;
-				else
-					hours = hour_local - hour_utc - 1;
-				minutes = min_utc - min_local;
-			}
-			else
-			{
-				if(mday_local != mday_utc)	/* if different days over midnight */
-					hours = hour_local - hour_utc + 24;
-				else
-					hours = hour_local - hour_utc;
-				minutes = min_local - min_utc;
-			}
-
-			sprintf(zone, "%+03d:%02d", hours, minutes);
-		}
-		voutlnf("<meta name=\"date\" content=\"%d-%02d-%02dT%02d:%02d:%02d%s\" />", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec, zone);
-	}
-
-	/* Changed in V6.5.5 [NHz] */
-	voutlnf("<meta name=\"Generator\" content=\"UDO %s.%s.%s for %s\" />",
-			UDO_REL, UDO_SUBVER,
-			UDO_PL,
-			UDO_OS);
-
-	if (titdat.author!=NULL)
-	{	voutlnf("<meta name=\"Author\" content=\"%s\" />", titdat.author);
-	}
-
-	if (keywords)
-	{	ti= p2_toc_counter;
-		if (ti>=0)
-		{
-			if (toc[ti]->keywords!=NULL)
-			{	voutlnf("<meta name=\"Keywords\" content=\"%s\" />",
-						toc[ti]->keywords);
-			}
-			/* New in V6.5.9 [NHz] */
-			else
-			{	if ( titdat.keywords != NULL )
-				{	voutlnf("<meta name=\"Keywords\" content=\"%s\" />",
-						       titdat.keywords);
-				}
-			}
-			if (toc[ti]->description!=NULL)
-			{	voutlnf("<meta name=\"Description\" content=\"%s\" />",
-						toc[ti]->description);
-			}
-			/* New in V6.5.9 [NHz] [docinfo] */
-			else
- 			{	if ( titdat.description != NULL )
-				{	voutlnf("<meta name=\"Description\" content=\"%s\" />",
-						 titdat.description);
-				}
-			}
-
-			/* New in V6.5.17 */
-			if (toc[ti]->robots!=NULL)
-			{	voutlnf("<meta name=\"robots\" content=\"%s\" />",
-						toc[ti]->robots);
-			}
-			else
- 			{	if ( titdat.robots != NULL )
-				{	voutlnf("<meta name=\"robots\" content=\"%s\" />",
-						 titdat.robots);
-				}
-			}
-
-		}
-	}
-
-	/*r6pl5: <link>-Tag */
-	if (titdat.webmasteremail!=NULL)
-	{	voutlnf("<meta name=\"Email\" content=\"%s\" />", titdat.webmasteremail);
-		voutlnf("<link rev=\"made\" href=\"mailto:%s\" title=\"E-Mail\" />", titdat.webmasteremail);
-		/* New in r6pl16 [NHz] */
-		voutlnf("<link rel=\"author\" href=\"mailto:%s\" title=\"E-Mail\" />", titdat.webmasteremail);
-	}
+   /* New feature #0000054 in V6.5.2 [NHz] */
+   if (html_header_date)
+   {
+      char     zone[10] = "+00:00";  /* */
+      time_t   uhrzeit;              /* */
+      int      hour_local,           /* */
+               min_local,            /* */
+               mday_local,           /* */
+               min_utc,              /* */
+               hour_utc,             /* */
+               mday_utc;             /* */
+      int      hours,                /* */
+               minutes;              /* */
 
 
-	/* New in r6pl15 [NHz] */
-	if (html_frames_layout)
-	{	sprintf(sTarget, " target=\"UDOcon\"");
-	}
+      if (strcmp(html_header_date_zone, "") > 0)
+         um_strcpy(zone, html_header_date_zone, 9, "output_html_meta[1]1");
+      else
+      {
+         time(&uhrzeit);
+         mday_local = localtime(&uhrzeit)->tm_mday;
+         mday_utc   = gmtime(&uhrzeit)->tm_mday;
+         hour_local = localtime(&uhrzeit)->tm_hour;
+         hour_utc   = gmtime(&uhrzeit)->tm_hour;
+         min_local  = localtime(&uhrzeit)->tm_min;
+         min_utc    = gmtime(&uhrzeit)->tm_min;
 
-	/* New feature #0000053 in V6.5.2 [NHz] */
-	if(html_header_links)
-	{
-		if(strstr(html_header_links_kind, "chapter") != NULL)
-		{
-			toc_link_output(1);
-			toc_link_output(2);
-			toc_link_output(3);
-			toc_link_output(4);
-		}
-	}
+         if (min_local < min_utc)         /* special for countries with "broken times" (e.g. Iran +03:30) */
+         {
+            if (mday_local != mday_utc)   /* if different days over midnight */
+               hours = hour_local - hour_utc - 1 + 24;
+            else
+               hours = hour_local - hour_utc - 1;
 
-	/* New feature #0000053 in V6.5.2 [NHz] */
-	if(html_header_links)
-	{
-		if(strstr(html_header_links_kind, "navigation"))
-		{
-			if (old_outfile.name[0]!=EOS)
-			{	/* Changed in r6pl16 [NHz] */
-				/* Feststellen, ob die Referenz im gleichen File liegt */
-				if (strcmp(old_outfile.name, outfile.name)!=0)
-				{
-					voutlnf("<link rel=\"start\" href=\"%s%s\"%s title=\"%s\" />", old_outfile.name, outfile.suff, sTarget, lang.html_start);
-					/* Special for CAB */
-					voutlnf("<link rel=\"home\" href=\"%s%s\"%s title=\"%s\" />", old_outfile.name, outfile.suff, sTarget, lang.html_start);
-					if (uses_tableofcontents)
-					{	/* New in r6pl15 [NHz] */
-						voutlnf("<link rel=\"contents\" href=\"%s%s#UDOTOC\"%s title=\"%s\" />", old_outfile.name, outfile.suff, sTarget, lang.contents);
-						/* Special for CAB */
-						voutlnf("<link rel=\"toc\" href=\"%s%s#UDOTOC\"%s title=\"%s\" />", old_outfile.name, outfile.suff, sTarget, lang.contents);
-					}
-				}
-			}
+            minutes = min_utc - min_local;
+         }
+         else
+         {
+            if (mday_local != mday_utc)   /* if different days over midnight */
+               hours = hour_local - hour_utc + 24;
+            else
+               hours = hour_local - hour_utc;
+            
+            minutes = min_local - min_utc;
+         }
 
-			/* Andere moegliche Angaben laut SelfHTML 6.0:
-			* <link rev=relation href="http://www.autorshome.de/" title="Autoren-Homepage">
-			* <link rel=index href="stichwrt.htm" title="Stichwortverzeichnis">
-			* <link rel=glossary href="glossar.htm" title="Begriffs-Glossar">
-			* <link rel=copyright href="rechte.htm" title="Copyright">
-			* <link rel=next href="augsburg.htm" title="nÑchste Seite">
-			* <link rel=previous href="aachen.htm" title="vorherige Seite">
-			* <link rel=help href="hilfe.htm" title="Orientierungshilfe">
-			* <link rel=bookmark href="hinweis.htm" title="Neuorientierung">
-			*/
+         sprintf(zone, "%+03d:%02d", hours, minutes);
+      }
+   
+      voutlnf("<meta name=\"date\" content=\"%d-%02d-%02dT%02d:%02d:%02d%s\"%s>", 
+         iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec, zone, closer);
+   }
+
+   /* Changed in V6.5.5 [NHz] */
+   voutlnf("<meta name=\"Generator\" content=\"UDO %s.%s.%s for %s\"%s>",
+      UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS, closer);
+
+   if (titdat.author != NULL)
+   {
+      voutlnf("<meta name=\"Author\" content=\"%s\"%s>", titdat.author, closer);
+   }
+
+   if (keywords)
+   {
+      ti = p2_toc_counter;
+
+      if (ti >= 0)
+      {
+         if (toc[ti]->keywords != NULL)
+         {
+            voutlnf("<meta name=\"Keywords\" content=\"%s\"%s>", toc[ti]->keywords, closer);
+         }
+
+         /* New in V6.5.9 [NHz] */
+         else
+         {
+            if ( titdat.keywords != NULL )
+            {
+               voutlnf("<meta name=\"Keywords\" content=\"%s\"%s>", titdat.keywords, closer);
+            }
+         }
+
+         if (toc[ti]->description != NULL)
+         {
+            voutlnf("<meta name=\"Description\" content=\"%s\"%s>", toc[ti]->description, closer);
+         }
+         else                             /* New in V6.5.9 [NHz] [docinfo] */
+         {
+            if (titdat.description != NULL )
+            {
+               voutlnf("<meta name=\"Description\" content=\"%s\"%s>", titdat.description, closer);
+            }
+         }
+
+         /* New in V6.5.17 */
+         if (toc[ti]->robots != NULL)
+         {
+            voutlnf("<meta name=\"robots\" content=\"%s\"%s>", toc[ti]->robots, closer);
+         }
+         else
+         {
+            if (titdat.robots != NULL)
+            {
+               voutlnf("<meta name=\"robots\" content=\"%s\"%s>", titdat.robots, closer);
+            }
+         }
+      }
+   }
+
+   /*r6pl5: <link>-Tag */
+   if (titdat.webmasteremail != NULL)
+   {
+      voutlnf("<meta name=\"Email\" content=\"%s\"%s>", titdat.webmasteremail, closer);
+      voutlnf("<link rev=\"made\" href=\"mailto:%s\" title=\"E-Mail\"%s>", titdat.webmasteremail, closer);
+
+      /* New in r6pl16 [NHz] */
+      voutlnf("<link rel=\"author\" href=\"mailto:%s\" title=\"E-Mail\"%s>", titdat.webmasteremail, closer);
+   }
+
+   /* New in r6pl15 [NHz] */
+   if (html_frames_layout)
+   {
+      sprintf(sTarget, " target=\"UDOcon\"");
+   }
+
+   /* New feature #0000053 in V6.5.2 [NHz] */
+   if (html_header_links)
+   {
+      if (strstr(html_header_links_kind, "chapter") != NULL)
+      {
+         toc_link_output(1);
+         toc_link_output(2);
+         toc_link_output(3);
+         toc_link_output(4);
+      }
+   }
+
+   /* New feature #0000053 in V6.5.2 [NHz] */
+   if (html_header_links)
+   {
+      if (strstr(html_header_links_kind, "navigation"))
+      {
+         if (old_outfile.name[0] != EOS)
+         {                                /* Changed in r6pl16 [NHz] */
+                                          /* Feststellen, ob die Referenz im gleichen File liegt */
+            if (strcmp(old_outfile.name, outfile.name) != 0)
+            {
+               voutlnf("<link rel=\"start\" href=\"%s%s\"%s title=\"%s\"%s>",
+                  old_outfile.name, outfile.suff, sTarget, lang.html_start, closer);
+
+               /* Special for CAB */
+               voutlnf("<link rel=\"home\" href=\"%s%s\"%s title=\"%s\"%s>", 
+                  old_outfile.name, outfile.suff, sTarget, lang.html_start, closer);
+               
+               if (uses_tableofcontents)
+               {
+                                          /* New in r6pl15 [NHz] */
+                  voutlnf("<link rel=\"contents\" href=\"%s%s#UDOTOC\"%s title=\"%s\"%s>",
+                     old_outfile.name, outfile.suff, sTarget, lang.contents, closer);
+
+                  /* Special for CAB */
+                  voutlnf("<link rel=\"toc\" href=\"%s%s#UDOTOC\"%s title=\"%s\"%s>", 
+                     old_outfile.name, outfile.suff, sTarget, lang.contents, closer);
+               }
+            }
+         }
+
+         /* Andere moegliche Angaben laut SelfHTML 6.0:
+          * <link rev="relation" href="http://www.autorshome.de/" title="Autoren-Homepage">
+          * <link rel="index" href="stichwrt.htm" title="Stichwortverzeichnis">
+          * <link rel="glossary" href="glossar.htm" title="Begriffs-Glossar">
+          * <link rel="copyright" href="rechte.htm" title="Copyright">
+          * <link rel="next" href="augsburg.htm" title="naechste Seite">
+          * <link rel="previous" href="aachen.htm" title="vorherige Seite">
+          * <link rel="help" href="hilfe.htm" title="Orientierungshilfe">
+          * <link rel="bookmark" href="hinweis.htm" title="Neuorientierung">
+          */
+
+          
+         /* New in r6pl16 [NHz] */
+         /* Output of Link-Rel 'up' */
+         /* is going to same place than !html_backpage */
+
+         if (sDocHtmlBackpage[0] != EOS)
+         {
+            strcpy(backpage, sDocHtmlBackpage);
+            tok = strtok(backpage, "\'");
+            strcpy(href, tok);
+            del_right_spaces(href);
+            tok = strtok(NULL, "\'");
+            
+            if (tok != NULL)
+            {
+               strcpy(alt, tok);
+               auto_quote_chars(alt, TRUE);
+            }
+            else
+               strcpy(alt, href);
+
+            /* Special for CAB */
+            voutlnf("<link rel=\"up\" href=\"%s\" title=\"%s\"%s>", href, alt, closer);
+         }
+
+         /* New in r6pl15 [NHz] */
+         /* Output of Link-Rel 'first' */
+
+         i = toc[ti]->prev_index;
+
+         if (i > 0)
+         {
+            li = toc[1]->labindex;        /* First Node -> No Link */
+
+            strcpy(s, lab[li]->name);
+            get_html_filename(lab[li]->tocindex, htmlname);
+
+            /* Special for CAB */
+            /* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
+            if (strchr(htmlname, '.') != NULL)
+            {
+               voutlnf("<link rel=\"first\" href=\"%s%s\"%s title=\"%s\"%s>", 
+                  html_name_prefix, htmlname, sTarget, s, closer);
+            }
+            else
+            {
+               voutlnf("<link rel=\"first\" href=\"%s%s%s\"%s title=\"%s\"%s>", 
+                  html_name_prefix, htmlname, outfile.suff, sTarget, s, closer);
+            }
+         }
+
+         
+         /* New in r6pl15 [NHz] */
+         /* Output of Link-Rel 'prev' */
+
+         if (i > 0)
+         {
+            li = toc[i]->labindex;
+            strcpy(s, lab[li]->name);
+            get_html_filename(lab[li]->tocindex, htmlname);
+
+            /* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
+            if (strchr(htmlname, '.') != NULL)
+            {
+               voutlnf("<link rel=\"prev\" href=\"%s%s\"%s title=\"%s\"%s>", 
+                  html_name_prefix, htmlname, sTarget, s, closer);
+               
+               /* Special for CAB */
+               voutlnf("<link rel=\"previous\" href=\"%s%s\"%s title=\"%s\"%s>", 
+                  html_name_prefix, htmlname, sTarget, s, closer);
+            }
+            else
+            {
+               voutlnf("<link rel=\"prev\" href=\"%s%s%s\"%s title=\"%s\"%s>",
+                  html_name_prefix, htmlname, outfile.suff, sTarget, s, closer);
+               
+               /* Special for CAB */
+               voutlnf("<link rel=\"previous\" href=\"%s%s%s\"%s title=\"%s\"%s>", 
+                  html_name_prefix, htmlname, outfile.suff, sTarget, s, closer);
+            }
+         }
+
+         /* Output of Link-Rel 'next' */
+
+         i = toc[ti]->next_index;
+
+         if (i > 1)
+         {
+            li = toc[i]->labindex;
+            strcpy(s, lab[li]->name);
+            get_html_filename(lab[li]->tocindex, htmlname);
+
+            /* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039*/
+            if (strchr(htmlname, '.') != NULL)
+            {
+               voutlnf("<link rel=\"next\" href=\"%s%s\"%s title=\"%s\"%s>", 
+                  html_name_prefix, htmlname, sTarget, s, closer);
+            }
+            else
+            {
+               voutlnf("<link rel=\"next\" href=\"%s%s%s\"%s title=\"%s\"%s>", 
+                  html_name_prefix, htmlname, outfile.suff, sTarget, s, closer);
+            }
+         }
+         
+
+         /* New in r6pl15 [NHz] */
+         /* Output of Link-Rel 'last' */
+
+         if (i > 1)
+         {
+            if (use_about_udo)
+            {
+               li = toc[p1_toc_counter]->labindex;
+               li--;
+            }
+            else
+               li = toc[p1_toc_counter]->labindex;
+            
+            strcpy(s, lab[li]->name);
+            get_html_filename(lab[li]->tocindex, htmlname);
+
+            /* Special for CAB */
+            /* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
+            if (strchr(htmlname, '.') != NULL)
+            {
+               voutlnf("<link rel=\"last\" href=\"%s%s\"%s title=\"%s\"%s>",
+                  html_name_prefix, htmlname, sTarget, s, closer);
+            }
+            else
+            {
+               voutlnf("<link rel=\"last\" href=\"%s%s%s\"%s title=\"%s\"%s>",
+                  html_name_prefix, htmlname, outfile.suff, sTarget, s, closer);
+            }
+         }
+      }
+   }
+
+   /* New in r6pl15 [NHz] */
+   /* Output of Link-Rel 'copyright' */
+   /* Link shows to 'About UDO'; maybe changed in future times */
+
+   if (use_about_udo)
+   {
+      li = toc[p1_toc_counter]->labindex;
+      strcpy(s, lab[li]->name);
+      get_html_filename(lab[li]->tocindex, htmlname);
+
+                                          /* Changed in r6pl16 [NHz] */
+      if (strcmp(htmlname, outfile.name) != 0)
+      {
+         voutlnf("<link rel=\"copyright\" href=\"%s%s\"%s title=\"%s\"%s>",
+            htmlname, outfile.suff, sTarget, s, closer);
+      }
+   }
+
+   /* New in r6pl15 [NHz] */
+   /* Link for overall and file-related stylesheet-file */
+   /* Changed in V6.5.9 [NHz] */
+
+   for (j = 1; j <= p1_style_counter; j++)
+   {
+      styleptr = style[j];
+      
+      if (styleptr->href != NULL && (styleptr->tocindex == 0 || styleptr->tocindex == p2_toc_counter))
+      {
+         char  this_style[512];  /* */
+
+         
+         strcpy(this_style, "<link rel=\"");
+
+         if (styleptr->alternate == TRUE)
+            strcat(this_style, "alternate ");
+         
+         strcat(this_style, "stylesheet\" type=\"text/css\" href=\"");
+         strcat(this_style, styleptr->href);
+         
+         if (styleptr->media[0] != EOS)
+         {
+            strcat(this_style, "\" media=\"");
+            strcat(this_style, styleptr->media);
+         }
+         
+         if (styleptr->title[0] != EOS)
+         {
+            strcat(this_style, "\" title=\"");
+            strcat(this_style, styleptr->title);
+         }
+         
+         strcat(this_style, "\">");       /* fd:20071114: tag closed */
+         outln(this_style);
+      }
+   }
+
+/* if (sDocStyle[0] != EOS)	
+      voutlnf("<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\"%s>", sDocStyle, closer);
+*/
+
+   /* Link for overall javascript-file */
+   if (sDocScript[0] != EOS)
+   {
+      voutlnf("<script language=\"JavaScript\" src=\"%s\" type=\"text/javascript\">", sDocScript);
+      outln("</script>");
+   }
+
+   /* New in r6pl15 [NHz] */
+   /* Link for overall FavIcon */
+   if (sDocFavIcon[0] != EOS)
+      voutlnf("<link rel=\"shortcut icon\" href=\"%s\"%s>", sDocFavIcon, closer);
+   
+}  /* output_html_meta */
 
 
-			/* New in r6pl16 [NHz] */
-			/* Output of Link-Rel 'up' */
-			/* is going to same place than !html_backpage */
 
-			if(sDocHtmlBackpage[0] != EOS)
-			{
-				strcpy(backpage, sDocHtmlBackpage);
-				tok = strtok(backpage, "\'");
-				strcpy(href, tok);
-				del_right_spaces(href);
-				tok = strtok(NULL, "\'");
-				if(tok != NULL)
-				{
-					strcpy(alt, tok);
-					auto_quote_chars(alt, TRUE);
-				}
-				else
-					strcpy(alt, href);
-
-				/* Special for CAB */
-				voutlnf("<link rel=\"up\" href=\"%s\" title=\"%s\" />", href, alt);
-			}
-
-			/* New in r6pl15 [NHz] */
-			/* Output of Link-Rel 'first' */
-
-			i= toc[ti]->prev_index;
-
-			if (i>0)
-			{	/* First Node -> No Link */
-				li= toc[1]->labindex;
-
-				strcpy(s, lab[li]->name);
-				get_html_filename(lab[li]->tocindex, htmlname);
-
-				/* Special for CAB */
-				/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
-				if(strchr(htmlname, '.') != NULL)
-					voutlnf("<link rel=\"first\" href=\"%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, sTarget, s);
-				else
-					voutlnf("<link rel=\"first\" href=\"%s%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, outfile.suff, sTarget, s);
-			}
-
-
-			/* New in r6pl15 [NHz] */
-			/* Output of Link-Rel 'prev' */
-
-			if (i>0)
-			{
-				li= toc[i]->labindex;
-				strcpy(s, lab[li]->name);
-				get_html_filename(lab[li]->tocindex, htmlname);
-
-				/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
-				if(strchr(htmlname, '.') != NULL)
-				{
-					voutlnf("<link rel=\"prev\" href=\"%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, sTarget, s);
-					/* Special for CAB */
-					voutlnf("<link rel=\"previous\" href=\"%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, sTarget, s);
-				}
-				else
-				{
-					voutlnf("<link rel=\"prev\" href=\"%s%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, outfile.suff, sTarget, s);
-					/* Special for CAB */
-					voutlnf("<link rel=\"previous\" href=\"%s%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, outfile.suff, sTarget, s);
-				}
-			}
-
-			/* Output of Link-Rel 'next' */
-
-			i= toc[ti]->next_index;
-
-			if (i>1)
-			{
-				li= toc[i]->labindex;
-				strcpy(s, lab[li]->name);
-				get_html_filename(lab[li]->tocindex, htmlname);
-
-				/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039*/
-				if(strchr(htmlname, '.') != NULL)
-					voutlnf("<link rel=\"next\" href=\"%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, sTarget, s);
-				else
-					voutlnf("<link rel=\"next\" href=\"%s%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, outfile.suff, sTarget, s);
-			}
-
-			/* New in r6pl15 [NHz] */
-			/* Output of Link-Rel 'last' */
-
-			if (i>1)
-			{
-				if(use_about_udo)
-				{
-					li= toc[p1_toc_counter]->labindex;
-					li--;
-				}
-				else
-					li= toc[p1_toc_counter]->labindex;
-				strcpy(s, lab[li]->name);
-				get_html_filename(lab[li]->tocindex, htmlname);
-
-				/* Special for CAB */
-				/* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
-				if(strchr(htmlname, '.') != NULL)
-					voutlnf("<link rel=\"last\" href=\"%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, sTarget, s);
-				else
-					voutlnf("<link rel=\"last\" href=\"%s%s%s\"%s title=\"%s\" />", html_name_prefix, htmlname, outfile.suff, sTarget, s);
-			}
-		}
-	}
-
-	/* New in r6pl15 [NHz] */
-	/* Output of Link-Rel 'copyright' */
-	/* Link shows to 'About UDO'; maybe changed in future times */
-
-	if(use_about_udo)
-	{
-		li= toc[p1_toc_counter]->labindex;
-		strcpy(s, lab[li]->name);
-		get_html_filename(lab[li]->tocindex, htmlname);
-
-		if(strcmp(htmlname, outfile.name)!=0) /* Changed in r6pl16 [NHz] */
-			voutlnf("<link rel=\"copyright\" href=\"%s%s\"%s title=\"%s\" />", htmlname, outfile.suff, sTarget, s);
-	}
-
-	/* New in r6pl15 [NHz] */
-	/* Link for overall and file-related stylesheet-file */
-	/* Changed in V6.5.9 [NHz] */
-	for (j=1; j<=p1_style_counter; j++)
-	{
-		styleptr= style[j];
-		if(styleptr->href != NULL && (styleptr->tocindex == 0 || styleptr->tocindex == p2_toc_counter))
-		{
-			char this_style[512];
-
-			strcpy(this_style, "<link rel=\"");
-			if(styleptr->alternate == TRUE)
-				strcat(this_style, "alternate ");
-			strcat(this_style, "stylesheet\" type=\"text/css\" href=\"");
-			strcat(this_style, styleptr->href);
-			if(styleptr->media[0] != EOS)
-			{
-				strcat(this_style, "\" media=\"");
-				strcat(this_style, styleptr->media);
-			}
-			if(styleptr->title[0] != EOS)
-			{
-				strcat(this_style, "\" title=\"");
-				strcat(this_style, styleptr->title);
-			}
-			strcat(this_style, "\" />");
-			outln(this_style);
-		}
-	}
-/*	if(sDocStyle[0] != EOS)	
-		voutlnf("<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\" />", sDocStyle);*/
-
-	/* Link for overall javascript-file */
-	if(sDocScript[0] != EOS)
-	{
-		voutlnf("<script language=\"JavaScript\" src=\"%s\" type=\"text/javascript\">", sDocScript);
-		outln("</script>");
-	}
-
-	/* New in r6pl15 [NHz] */
-	/* Link for overall FavIcon */
-	if(sDocFavIcon[0] != EOS)	
-		voutlnf("<link rel=\"shortcut icon\" href=\"%s\" />", sDocFavIcon);
-
-}	/* output_html_meta */
 
 
 LOCAL void output_html_doctype ( void )
@@ -2497,72 +2667,108 @@ LOCAL BOOLEAN html_new_file ( void )
 }	/* html_new_file */
 
 
-GLOBAL void output_html_header ( const char *t )
+
+
+
+/*******************************************************************************
+*
+*  output_html_header():
+*     Wird nur fuer die Titelseite/Inhaltsverzeichnis benutzt
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void output_html_header(
+
+const char  *t)                 /* */
 {
-	/* Wird nur fuer die Titelseite/Inhaltsverzeichnis benutzt */
-	char xml_lang[15], xml_ns[40];
+   char      xml_lang[15],      /* */
+             xml_ns[40];        /* */
+   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
 
-	output_html_doctype();	/* r6pl2 */
-	/* Changed in V6.5.9 [NHz] */
-	if(html_doctype >= XHTML_STRICT)
-	{
-		sprintf(xml_lang, " xml:lang=\"%s\"", lang.html_lang);
-		sprintf(xml_ns, " xmlns=\"http://www.w3.org/1999/xhtml\"");
-	}
-	else
-	{
-		xml_lang[0] = EOS;
-		xml_ns[0] = EOS;
-	}
-	voutlnf("<html%s lang=\"%s\"%s>", xml_ns, lang.html_lang, xml_lang);
-	outln("<head>");
-	outln("<title>");
-	outln(t);
-	outln("</title>");
-
-	/* New in r6pl16 [NHz]
-           Fixed: added real title (from <title> Tag) [vj]
-        */
-	/* V6.5.17 */
-	if (desttype==TOHAH)
-	{	if ( titdat.appletitle != NULL )
-			voutlnf("<meta name=\"AppleTitle\" content=\"%s\" />", titdat.appletitle);
-		if ( titdat.appleicon != NULL )
-			voutlnf("<meta name=\"AppleIcon\" content=\"%s\" />", titdat.appleicon);
-	}
-
-	output_html_meta(TRUE);	/*r6pl5: auch Keywords auf der ersten Seite erlauben */
-	outln("</head>");
-
-	out("<body");
-
-	if (sDocBackImage[0]!=EOS)
-	{	if (!no_images)	/*r6pl2*/
-		{	voutf(" background=\"%s\"", sDocBackImage);
-		}
-	}
-	if (sDocBackColor[0]!=EOS)
-	{	voutf(" bgcolor=\"%s\"", sDocBackColor);
-	}
-	if (sDocTextColor[0]!=EOS)
-	{	voutf(" text=\"%s\"", sDocTextColor);
-	}
-	if (sDocLinkColor[0]!=EOS)
-	{	voutf(" link=\"%s\"", sDocLinkColor);
-	}
-	if (sDocAlinkColor[0]!=EOS)
-	{	voutf(" alink=\"%s\"", sDocAlinkColor);
-	}
-	if (sDocVlinkColor[0]!=EOS)
-	{	voutf(" vlink=\"%s\"", sDocVlinkColor);
-	}
-
-	voutlnf(">");
-
-	check_output_raw_header();	/*r6pl10*/
-
-	voutlnf("%s", sHtmlPropfontStart);
-
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   output_html_doctype();                 /* r6pl2 */
+   
+   if (html_doctype >= XHTML_STRICT)      /* Changed in V6.5.9 [NHz] */
+   {
+      sprintf(xml_lang, " xml:lang=\"%s\"", lang.html_lang);
+      sprintf(xml_ns, " xmlns=\"http://www.w3.org/1999/xhtml\"");
+   }
+   else
+   {
+      xml_lang[0] = EOS;
+      xml_ns[0] = EOS;
+   }
+   
+   voutlnf("<html%s lang=\"%s\"%s>", xml_ns, lang.html_lang, xml_lang);
+   outln("<head>");
+   outln("<title>");
+   outln(t);
+   outln("</title>");
+   
+   /* New in r6pl16 [NHz]
+   Fixed: added real title (from <title> Tag) [vj]
+   */
+   
+   /* V6.5.17 */
+   if (desttype == TOHAH)
+   {
+      if (titdat.appletitle != NULL)
+         voutlnf("<meta name=\"AppleTitle\" content=\"%s\"%s>", titdat.appletitle, closer);
+         
+      if (titdat.appleicon != NULL)
+         voutlnf("<meta name=\"AppleIcon\" content=\"%s\"%s>", titdat.appleicon, closer);
+   }
+   
+   output_html_meta(TRUE);                /*r6pl5: auch Keywords auf der ersten Seite erlauben */
+   outln("</head>");
+   
+   out("<body");
+   
+   if (sDocBackImage[0] != EOS)
+   {
+      if (!no_images)                     /*r6pl2*/
+      {
+         voutf(" background=\"%s\"", sDocBackImage);
+      }
+   }
+   
+   if (sDocBackColor[0] != EOS)
+   {
+      voutf(" bgcolor=\"%s\"", sDocBackColor);
+   }
+   
+   if (sDocTextColor[0] != EOS)
+   {
+      voutf(" text=\"%s\"", sDocTextColor);
+   }
+   
+   if (sDocLinkColor[0] != EOS)
+   {
+      voutf(" link=\"%s\"", sDocLinkColor);
+   }
+   
+   if (sDocAlinkColor[0] != EOS)
+   {
+      voutf(" alink=\"%s\"", sDocAlinkColor);
+   }
+   
+   if (sDocVlinkColor[0] != EOS)
+   {
+      voutf(" vlink=\"%s\"", sDocVlinkColor);
+   }
+   
+   voutlnf(">");
+   
+   check_output_raw_header();             /*r6pl10*/
+   
+   voutlnf("%s", sHtmlPropfontStart);
+   
 }	/*output_html_header*/
 
 
@@ -2628,975 +2834,1359 @@ LOCAL void get_giflink_data ( const int index, char *name, unsigned int *width, 
 }	/* get_giflink_data */
 
 
-LOCAL void html_index_giflink ( const int idxEnabled, const int idxDisabled, const char *sep )
+
+
+
+/*******************************************************************************
+*
+*  html_index_giflink():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void html_index_giflink(
+
+const int         idxEnabled,        /* */
+const int         idxDisabled,       /* */
+const char       *sep)               /* */
 {
-	char sTarget[64], sFile[64], sGifSize[80], sGifName[256];
-	unsigned int uiW, uiH;
+   char           sTarget[64],       /* */
+                  sFile[64],         /* */
+                  sGifSize[80],      /* */
+                  sGifName[256];     /* */
+   unsigned int   uiW,               /* */
+                  uiH;               /* */
+   char           closer[8] = "\0";  /* single tag closer mark in XHTML */
 
-	sTarget[0]= sGifSize[0]= EOS;
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   sTarget[0] = sGifSize[0] = EOS;
+   
+   if (html_frames_layout)
+   {
+      sprintf(sTarget, " target=\"%s\"", FRAME_NAME_CON);
+      sprintf(sFile, "%s%s", html_name_prefix, FRAME_FILE_CON);
+   }
+   else
+   {
+      sTarget[0] = EOS;
+      strcpy(sFile, old_outfile.name);
+   }
+   
+   
+   if (uses_tableofcontents)
+   {
+      if (no_images)                      /*r6pl2*/
+      {
+         voutlnf("%s<a href=\"%s%s#%s\"%s>%s</a>",
+            sep, sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, " ^^^" /* lang.contents */);
+      }
+      else
+      {
+         get_giflink_data(idxEnabled, sGifName, &uiW, &uiH);
+         sGifSize[0] = EOS;
 
-	if (html_frames_layout)
-	{	sprintf(sTarget, " target=\"%s\"", FRAME_NAME_CON);
-		sprintf(sFile, "%s%s", html_name_prefix, FRAME_FILE_CON);
-	}
-	else
-	{	sTarget[0]= EOS;
-		strcpy(sFile, old_outfile.name);
-	}
-
-
-	if (uses_tableofcontents)
-	{
-		if (no_images)	/*r6pl2*/
-		{	voutlnf("%s<a href=\"%s%s#%s\"%s>%s</a>",
-				sep, sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, " ^^^" /* lang.contents */);
-		}
-		else
-		{
-
-			get_giflink_data(idxEnabled, sGifName, &uiW, &uiH);
-			sGifSize[0]= EOS;
-			if (uiW!=0 && uiH!=0)
-			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
-			}
-			voutlnf("<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s /></a>",
-						sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents, lang.contents,
-						sGifSize);
-		}
-	}
-	else
-	{
-		if (no_images)
-		{	voutlnf("%s ^^^", sep);
-		}
-		else
-		{
-			get_giflink_data(idxDisabled, sGifName, &uiW, &uiH);
-			sGifSize[0]= EOS;
-			if (uiW!=0 && uiH!=0)
-			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
-			}
-			voutlnf("<img src=\"%s\" border=\"0\"%s />", sGifName, sGifSize);
-		}
-	}
-
+         if (uiW != 0 && uiH != 0)
+         {
+            sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
+         }
+         
+         voutlnf("<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+            sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents, lang.contents, sGifSize, closer);
+      }
+   }
+   else
+   {
+      if (no_images)
+      {
+         voutlnf("%s ^^^", sep);
+      }
+      else
+      {
+         get_giflink_data(idxDisabled, sGifName, &uiW, &uiH);
+         sGifSize[0] = EOS;
+         
+         if (uiW != 0 && uiH != 0)
+         {
+            sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
+         }
+         
+         voutlnf("<img src=\"%s\" border=\"0\"%s%s>", sGifName, sGifSize, closer);
+      }
+   }
+   
 }	/* html_index_giflink */
 
 
 
-LOCAL void html_home_giflink ( const int idxEnabled, const int idxDisabled, const char *sep )
+
+
+/*******************************************************************************
+*
+*  html_home_giflink():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void html_home_giflink(
+
+const int         idxEnabled,        /* */
+const int         idxDisabled,       /* */
+const char       *sep)               /* */
 {
-	char sTarget[64], sFile[64];
-	char sGifSize[128], sGifName[256];
-	unsigned int uiW, uiH;
+   char           sTarget[64],       /* */
+                  sFile[64];         /* */
+   char           sGifSize[128],     /* */
+                  sGifName[256];     /* */
+   unsigned int   uiW,               /* */
+                  uiH;               /* */
+   char           closer[8] = "\0";  /* single tag closer mark in XHTML */
 
-	if (toc[p2_toc_counter]->toctype==TOC_TOC)
-	{	/* r6pl7: Im Inhaltsverzeichnis Link auf !html_backpage mit Home-Symbol */
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   if (toc[p2_toc_counter]->toctype == TOC_TOC)
+   {
+   /* r6pl7: Im Inhaltsverzeichnis Link auf !html_backpage mit Home-Symbol */
+      sTarget[0] = EOS;
+   
+      if (html_frames_layout)
+      {
+         sprintf(sTarget, " target=\"_top\"");
+      }
+   
+      if (no_images)
+      {
+         voutlnf("%s%s", sep, lang.html_home);
+      }
+      else
+      {                                   /* Button disabled ausgeben */
+         get_giflink_data(idxDisabled, sGifName, &uiW, &uiH);
+         sGifSize[0] = EOS;
 
-		sTarget[0]= EOS;
-
-		if (html_frames_layout)
-		{	sprintf(sTarget, " target=\"_top\"");
-		}
-
-		if (no_images)
-		{	voutlnf("%s%s", sep, lang.html_home);
-		}
-		else
-		{	/* Button disabled ausgeben */
-			get_giflink_data(idxDisabled, sGifName, &uiW, &uiH);
-			sGifSize[0]= EOS;
-			if (uiW!=0 && uiH!=0)
-			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
-			}
-			voutlnf("<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s />", sGifName, lang.html_home, lang.html_home, sGifSize);
-		}
-	}
-	else
-	{
-		if (html_frames_layout)
-		{	sprintf(sTarget, " target=\"%s\"", FRAME_NAME_CON);
-			sprintf(sFile, "%s%s", html_name_prefix, FRAME_FILE_CON);
-		}
-		else
-		{	sTarget[0]= EOS;
-			strcpy(sFile, old_outfile.name);
-		}
-
-		if (no_images)	/*r6pl2*/
-		{	voutlnf("%s<a href=\"%s%s\"%s>%s</a>", sep, sFile, outfile.suff, sTarget, lang.html_home);
-		}
-		else
-		{
-			get_giflink_data(idxEnabled, sGifName, &uiW, &uiH);
-			sGifSize[0]= EOS;
-			if (uiW!=0 && uiH!=0)
-			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
-			}
-			voutlnf("<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s /></a>",
-						sFile, outfile.suff, sTarget, sGifName, lang.html_home, lang.html_home, sGifSize);
-		}
-	}
-
+         if (uiW != 0 && uiH != 0)
+         {
+            sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
+         }
+         
+         voutlnf("<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s>",
+            sGifName, lang.html_home, lang.html_home, sGifSize, closer);
+      }
+   }
+   else
+   {
+      if (html_frames_layout)
+      {
+         sprintf(sTarget, " target=\"%s\"", FRAME_NAME_CON);
+         sprintf(sFile, "%s%s", html_name_prefix, FRAME_FILE_CON);
+      }
+      else
+      {
+         sTarget[0] = EOS;
+         strcpy(sFile, old_outfile.name);
+      }
+   
+      if (no_images)                      /*r6pl2*/
+      {
+         voutlnf("%s<a href=\"%s%s\"%s>%s</a>", sep, sFile, outfile.suff, sTarget, lang.html_home);
+      }
+      else
+      {
+         get_giflink_data(idxEnabled, sGifName, &uiW, &uiH);
+         sGifSize[0] = EOS;
+         
+         if (uiW != 0 && uiH != 0)
+         {
+            sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
+         }
+         
+         voutlnf("<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+   			sFile, outfile.suff, sTarget, sGifName, lang.html_home, lang.html_home, sGifSize, closer);
+      }
+   }
+   
 }	/* html_home_giflink */
 
 
-LOCAL void html_back_giflink ( const int idxEnabled, const int idxDisabled, const char *sep )
+
+
+
+/*******************************************************************************
+*
+*  html_home_giflink():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void html_back_giflink(
+
+const int         idxEnabled,        /* */
+const int         idxDisabled,       /* */
+const char       *sep)               /* */
 {
-	char target[64], backpage[256], href[256], alt[256], *tok;
-	char sGifSize[128], sGifName[256];
-	unsigned int uiW, uiH;
-
-	target[0]= sGifName[0]= EOS;
-
-	if (sDocHtmlBackpage[0]!=EOS)
-	{
-		/* New in r6pl16 [NHz] */
-		strcpy(backpage, sDocHtmlBackpage);
-		tok = strtok(backpage, "\'");
-		strcpy(href, tok);
-		del_right_spaces(href);
-		tok = strtok(NULL, "\'");
-		if(tok != NULL)
-		{
-			strcpy(alt, tok);
-			auto_quote_chars(alt, TRUE);
-		}
-		else
-			strcpy(alt, href);
-
-		if (html_frames_layout)
-		{	sprintf(target, " target=\"_top\"");
-		}
-
-		/* Changed in r6pl16 [NHz] */
-		if (no_images)
-		{	voutlnf("%s<a href=\"%s\"%s>%s</a>",
-						sep, href, target, alt);
-		} /* changed */
-		else
-		{
-			get_giflink_data(idxEnabled, sGifName, &uiW, &uiH);
-			sGifSize[0]= EOS;
-			if (uiW!=0 && uiH!=0)
-			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
-			}
-			/* Changed in r6pl16 [NHz] */
-			voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s /></a>",
-						href, target, sGifName, alt, alt, sGifSize);
-		}
-	}
-	else
-	{
-		if (no_images)
-		{	voutlnf("%s^^^", sep);
-		}
-		else
-		{	/* Diabled Button ausgeben */
-			get_giflink_data(idxDisabled, sGifName, &uiW, &uiH);
-			sGifSize[0]= EOS;
-			if (uiW!=0 && uiH!=0)
-			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
-			}
-			voutlnf("<img src=\"%s\" border=\"0\"%s />", sGifName, sGifSize);
-		}
-	}
-
+   char           target[64],        /* */
+   backpage[256],     /* */
+   href[256],         /* */
+   alt[256],          /* */
+   *tok;               /* */
+   char           sGifSize[128],     /* */
+   sGifName[256];     /* */
+   unsigned int   uiW,               /* */
+   uiH;               /* */
+   char           closer[8] = "\0";  /* single tag closer mark in XHTML */
+   
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   target[0] = sGifName[0] = EOS;
+   
+   if (sDocHtmlBackpage[0] != EOS)
+   {
+      /* New in r6pl16 [NHz] */
+      strcpy(backpage, sDocHtmlBackpage);
+      tok = strtok(backpage, "\'");
+      strcpy(href, tok);
+      del_right_spaces(href);
+      tok = strtok(NULL, "\'");
+   
+      if (tok != NULL)
+      {
+         strcpy(alt, tok);
+         auto_quote_chars(alt, TRUE);
+      }
+      else
+         strcpy(alt, href);
+      
+      if (html_frames_layout)
+      {
+         sprintf(target, " target=\"_top\"");
+      }
+   
+      /* Changed in r6pl16 [NHz] */
+      if (no_images)
+      {
+         voutlnf("%s<a href=\"%s\"%s>%s</a>", sep, href, target, alt);
+      } /* changed */
+      else
+      {
+         get_giflink_data(idxEnabled, sGifName, &uiW, &uiH);
+         sGifSize[0] = EOS;
+   
+         if (uiW != 0 && uiH != 0)
+         {
+            sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
+         }
+         
+         /* Changed in r6pl16 [NHz] */
+         voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+            href, target, sGifName, alt, alt, sGifSize, closer);
+      }
+   }
+   else
+   {
+      if (no_images)
+      {
+         voutlnf("%s^^^", sep);
+      }
+      else
+      {                                   /* Diabled Button ausgeben */
+         get_giflink_data(idxDisabled, sGifName, &uiW, &uiH);
+         sGifSize[0] = EOS;
+         
+         if (uiW != 0 && uiH != 0)
+         {
+            sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
+         }
+         
+         voutlnf("<img src=\"%s\" border=\"0\"%s%s>", sGifName, sGifSize, closer);
+      }
+   }
+   
 }	/* html_back_giflink */
 
 
 
-LOCAL void html_hb_line ( BOOLEAN head )
+
+
+/*******************************************************************************
+*
+*  html_hb_line():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void html_hb_line(
+
+BOOLEAN           head)              /* */
 {
-	int i, ti, li;
-	char s[512], anchor[512], sGifSize[128], sGifFile[128], sTarget[64], *colptr;
-	BOOLEAN old_autorefoff;
-	BOOLEAN	for_main_file;
-	unsigned int uiW, uiH;
+   int            i,                 /* */
+                  ti,                /* */
+                  li;                /* */
+   char           s[512],            /* */
+                  anchor[512],       /* */
+                  sGifSize[128],     /* */
+                  sGifFile[128],     /* */
+                  sTarget[64],       /* */
+                 *colptr;            /* */
+   BOOLEAN        old_autorefoff;    /* */
+   BOOLEAN	      for_main_file;     /* */
+   unsigned int   uiW,               /* */
+                  uiH;               /* */
+   char           closer[8] = "\0";  /* single tag closer mark in XHTML */
 
-	/* Herausfinden, fuer welchen Node die Kopf- und Fusszeile	*/
-	/* ausgegeben werden soll. Beim mergen ist der Index nicht	*/
-	/* immer gleich dem Nodezaehler im 2. Durchlauf!			*/
-
-	/* Um das Tildenproblem zu loesen, muss ueber lab[]			*/
-	/* gegangen werden, da nur dort die Tilden noch nicht		*/
-	/* bearbeitet wurden und nur so die Referenzen fuer die		*/
-	/* Kopfzeilen gefunden werden!								*/
-
-	ti = p2_toc_counter;
-
-	if (ti>0)
-	{	if (html_merge_node4)
-		{	ti= last_n3_index;
-			if (ti<=0)	ti=last_n2_index;	
-			if (ti<=0)	ti=last_n1_index;	
-		}
-		if (html_merge_node3)
-		{	ti= last_n2_index;
-			if (ti<=0)	ti=last_n1_index;	
-		}
-		if (html_merge_node2)
-		{	ti= last_n1_index;
-		}
-		if (html_merge_node1)
-		{	ti= 0;
-		}
-	}
-
-	for_main_file= (toc[ti]->toctype==TOC_TOC);
-
-	/* ------------------------------------------- */
-	/* ignore_headline/ignore_bottomline testen    */
-	/* ------------------------------------------- */
-	if (head && toc[ti]->ignore_headline)		/* r5pl12 */
-	{	return;
-	}
-
-	if (!head && toc[ti]->ignore_bottomline)	/* r5pl12 */
-	{	return;
-	}
-
-	old_autorefoff= bDocAutorefOff;
-	bDocAutorefOff= FALSE;
-
-	if (!head)
-	{
-		if (!html_modern_layout && !html_frames_layout)
-		{
-			if (!((no_footers || toc[ti]->ignore_footer) && (no_bottomlines || toc[ti]->ignore_bottomline)))
-			{	outln(HTML_HR);
-			}
-		}
-	}
-
-
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   /* Herausfinden, fuer welchen Node die Kopf- und Fusszeile	*/
+   /* ausgegeben werden soll. Beim mergen ist der Index nicht	*/
+   /* immer gleich dem Nodezaehler im 2. Durchlauf!			*/
+   
+   /* Um das Tildenproblem zu loesen, muss ueber lab[]			*/
+   /* gegangen werden, da nur dort die Tilden noch nicht		*/
+   /* bearbeitet wurden und nur so die Referenzen fuer die		*/
+   /* Kopfzeilen gefunden werden!								*/
+   
+   ti = p2_toc_counter;
+   
+   if (ti > 0)
+   {
+      if (html_merge_node4)
+      {
+         ti = last_n3_index;
+         
+         if (ti <= 0)
+            ti = last_n2_index;	
+         
+         if (ti <= 0)
+            ti = last_n1_index;	
+      }
+      
+      if (html_merge_node3)
+      {
+         ti = last_n2_index;
+         
+         if (ti <= 0)
+            ti = last_n1_index;	
+      }
+      
+      if (html_merge_node2)
+         ti = last_n1_index;
+      
+      if (html_merge_node1)
+         ti = 0;
+   }
+   
+   for_main_file = (toc[ti]->toctype == TOC_TOC);
+   
+   /* ------------------------------------------- */
+   /* ignore_headline/ignore_bottomline testen    */
+   /* ------------------------------------------- */
+   
+   if (head && toc[ti]->ignore_headline)  /* r5pl12 */
+      return;
+   
+   if (!head && toc[ti]->ignore_bottomline)
+      return;
+   
+   old_autorefoff = bDocAutorefOff;
+   bDocAutorefOff = FALSE;
+   
+   if (!head)
+   {
+      if (!html_modern_layout && !html_frames_layout)
+      {
+         if (!((no_footers || toc[ti]->ignore_footer) && (no_bottomlines || toc[ti]->ignore_bottomline)))
+         {
+            if (html_doctype < XHTML_STRICT)
+               outln(HTML_HR);
+            else
+               outln(XHTML_HR);
+         }
+      }
+   }
+   
+   
 #if 1
-	colptr= NULL;
-	if (html_modern_layout)	colptr= html_modern_backcolor;
-	if (html_frames_layout)	colptr= html_frames_backcolor;
-
-	if(colptr)
-	{
-		s[0]= EOS;
-		if (colptr[0]!=EOS)
-		{	sprintf(s, " bgcolor=\"%s\"", colptr);
-		}
-		voutlnf("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%%\"%s><tr><td valign=\"top\">", s);
-	}
+   colptr = NULL;
+   
+   if (html_modern_layout)
+      colptr = html_modern_backcolor;
+      
+   if (html_frames_layout)
+      colptr = html_frames_backcolor;
+   
+   if (colptr)
+   {
+      s[0] = EOS;
+      
+      if (colptr[0] != EOS)
+      {
+         sprintf(s, " bgcolor=\"%s\"", colptr);
+      }
+      
+      voutlnf("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%%\"%s><tr><td valign=\"top\">", s);
+   }
 #endif
-
-	/* ------------------------------------------------ */
-	/* Verweis auf die Homepage erzeugen				*/
-	/* ------------------------------------------------ */
-	html_home_giflink(GIF_HM_INDEX, GIF_NOHM_INDEX, "[ ");
-
-
-	/* ------------------------------------------------ */
-	/* Verweis auf das uebergeordnete Kapitel erzeugen	*/
-	/* ------------------------------------------------ */
-	switch (toc[ti]->toctype)
-	{	case TOC_TOC:		/* Verweis auf Backpage erzeugen */
-			html_back_giflink(GIF_UP_INDEX, GIF_NOUP_INDEX, "| ");
-			break;
-		case TOC_NODE1:		/* Weiter nach oben geht es nicht */
+   
+   /* ------------------------------------------------ */
+   /* Verweis auf die Homepage erzeugen				*/
+   /* ------------------------------------------------ */
+   
+   html_home_giflink(GIF_HM_INDEX, GIF_NOHM_INDEX, "[ ");
+   
+   
+   /* ------------------------------------------------ */
+   /* Verweis auf das uebergeordnete Kapitel erzeugen	*/
+   /* ------------------------------------------------ */
+   
+   switch (toc[ti]->toctype)
+   {
+   case TOC_TOC:                          /* Verweis auf Backpage erzeugen */
+      html_back_giflink(GIF_UP_INDEX, GIF_NOUP_INDEX, "| ");
+      break;
+      
+   case TOC_NODE1:                        /* Weiter nach oben geht es nicht */
 #if 0
-			if (no_images)
-			{	outln("| ^^^");
-			}
-			else
-			{
-				get_giflink_data(GIF_NOUP_INDEX, s, &uiW, &uiH);
-				sGifSize[0]= EOS;
-				if (uiW!=0 && uiH!=0)
-				{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
-				}
-				voutlnf("<img src=\"%s\" border=\"0\"%s />", s, sGifSize);
-			}
+   if (no_images)
+   {
+      outln("| ^^^");
+   }
+   else
+   {
+      get_giflink_data(GIF_NOUP_INDEX, s, &uiW, &uiH);
+      sGifSize[0] = EOS;
+      
+      if (uiW != 0 && uiH != 0)
+      {
+         sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
+      }
+      
+      voutlnf("<img src=\"%s\" border=\"0\"%s%s>", s, sGifSize, closer);
+   }
 #else
-			/* Verweis auf index.htm erzeugen */
-			html_index_giflink(GIF_UP_INDEX, GIF_NOUP_INDEX, "| ");
+                                          /* Verweis auf index.htm erzeugen */
+   html_index_giflink(GIF_UP_INDEX, GIF_NOUP_INDEX, "| ");
 #endif
-			break;
-		case TOC_NODE2:	/* Verweis auf aktuellen !node */
-			li= toc[last_n1_index]->labindex;
-			um_strcpy(s, lab[li]->name, 512, "html_hb_line[1]");
+   break;
+   
+   case TOC_NODE2:                        /* Verweis auf aktuellen !node */
+      li = toc[last_n1_index]->labindex;
+      um_strcpy(s, lab[li]->name, 512, "html_hb_line[1]");
+   
 #if 1
-			string2reference(anchor, lab[li], TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
-			replace_once(s, lab[li]->name, anchor);
+      string2reference(anchor, lab[li], TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
+      replace_once(s, lab[li]->name, anchor);
 #else
-			replace_udo_quotes(s);
-			auto_references(s, TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
+      replace_udo_quotes(s);
+      auto_references(s, TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
 #endif
-			if (no_images)
-			{	/* replace_once(s, ">", ">^^^ "); */
-				replace_once(s, lab[li]->name, " ^^^");
-				strinsert(s, "| ");
-			}
-			outln(s);
-			break;
-		case TOC_NODE3:	/* Verweis auf aktuellen !subnode */
-			li= toc[last_n2_index]->labindex;
-			um_strcpy(s, lab[li]->name, 512, "html_hb_line[2]");
+
+      if (no_images)
+      {
+/*       replace_once(s, ">", ">^^^ ");
+*/
+         replace_once(s, lab[li]->name, " ^^^");
+         strinsert(s, "| ");
+      }
+   
+      outln(s);
+      break;
+   
+   case TOC_NODE3:                        /* Verweis auf aktuellen !subnode */
+      li = toc[last_n2_index]->labindex;
+      um_strcpy(s, lab[li]->name, 512, "html_hb_line[2]");
+      
 #if 1
-			string2reference(anchor, lab[li], TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
-			replace_once(s, lab[li]->name, anchor);
+      string2reference(anchor, lab[li], TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
+      replace_once(s, lab[li]->name, anchor);
 #else
-			replace_udo_quotes(s);
-			auto_references(s, TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
+      replace_udo_quotes(s);
+      auto_references(s, TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
 #endif
-			if (no_images)
-			{	/* replace_once(s, ">", ">^^^ "); */
-				replace_once(s, lab[li]->name, " ^^^");
-				strinsert(s, "| ");
-			}
-			outln(s);
-			break;
-		case TOC_NODE4:	/* Verweis auf aktuellen !subsubnode */
-			li= toc[last_n3_index]->labindex;
-			um_strcpy(s, lab[li]->name, 512, "html_hb_line[3]");
+
+      if (no_images)
+      {
+/*       replace_once(s, ">", ">^^^ ");
+*/
+         replace_once(s, lab[li]->name, " ^^^");
+         strinsert(s, "| ");
+      }
+      
+      outln(s);
+      break;
+      
+   case TOC_NODE4:                        /* Verweis auf aktuellen !subsubnode */
+      li = toc[last_n3_index]->labindex;
+      um_strcpy(s, lab[li]->name, 512, "html_hb_line[3]");
+
 #if 1
-			string2reference(anchor, lab[li], TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
-			replace_once(s, lab[li]->name, anchor);
+      string2reference(anchor, lab[li], TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
+      replace_once(s, lab[li]->name, anchor);
 #else
-			replace_udo_quotes(s);
-			auto_references(s, TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
+      replace_udo_quotes(s);
+      auto_references(s, TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
 #endif
-			if (no_images)
-			{	/* replace_once(s, ">", ">^^^ "); */
-				replace_once(s, lab[li]->name, " ^^^");
-				strinsert(s, "| ");
-			}
-			outln(s);
-			break;
-	}
 
-
-	/* --------------------------------------------------- */
-	/* Verweis auf die vorherige Seite erzeugen            */
-	/* default:                 das letzte Kapitel         */
-	/* !html_merge_node1:       kein Aufruf dieser Routine */
-	/* !html_merge_node2:		der letzte !node           */
-	/* !html_merge_node3:		der letzte !subnode        */
-	/* --------------------------------------------------- */
-	if (for_main_file)
-	{
+      if (no_images)
+      {
+/*       replace_once(s, ">", ">^^^ ");
+*/
+         replace_once(s, lab[li]->name, " ^^^");
+         strinsert(s, "| ");
+      }
+      
+      outln(s);
+   }
+   
+   
+   /* --------------------------------------------------- */
+   /* Verweis auf die vorherige Seite erzeugen            */
+   /* default:                 das letzte Kapitel         */
+   /* !html_merge_node1:       kein Aufruf dieser Routine */
+   /* !html_merge_node2:		der letzte !node           */
+   /* !html_merge_node3:		der letzte !subnode        */
+   /* --------------------------------------------------- */
+   if (for_main_file)
+   {
 #if 1
-		/* Deaktivierten Link/Bild ausgeben */
-		if (no_images)
-		{	outln("| &lt;&lt;&lt;");
-		}
-		else
-		{
-			get_giflink_data(GIF_NOLF_INDEX, s, &uiW, &uiH);
-			sGifSize[0]= EOS;
-			if (uiW!=0 && uiH!=0)
-			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
-			}
-			voutlnf("<img src=\"%s\" border=\"0\"%s />", s, sGifSize);
-		}
+      /* Deaktivierten Link/Bild ausgeben */
+      if (no_images)
+      {
+         outln("| &lt;&lt;&lt;");
+      }
+      else
+      {
+         get_giflink_data(GIF_NOLF_INDEX, s, &uiW, &uiH);
+         sGifSize[0] = EOS;
+         
+         if (uiW != 0 && uiH != 0)
+         {
+         	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
+         }
+         
+         voutlnf("<img src=\"%s\" border=\"0\"%s%s>", s, sGifSize, closer);
+      }
 #else
-		html_back_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ");
+      html_back_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ");
 #endif
-	}
-	else
-	{	i= toc[ti]->prev_index;
-
-		if (i==0)
-		{	/* Erster Node -> Zurueck zum Hauptfile */
-			html_home_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ");
-		}
-		else
-		{	if (i>0)
-			{
-				li= toc[i]->labindex;
-				um_strcpy(s, lab[li]->name, 512, "html_hb_line[4]");
+   }
+   else
+   {
+      i = toc[ti]->prev_index;
+   
+      if (i == 0)
+      {                                   /* Erster Node -> Zurueck zum Hauptfile */
+         html_home_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ");
+      }
+      else
+      {
+         if (i > 0)
+         {
+            li = toc[i]->labindex;
+            um_strcpy(s, lab[li]->name, 512, "html_hb_line[4]");
 #if 1
-				string2reference(anchor, lab[li], TRUE, GIF_LF_NAME, uiGifLfWidth, uiGifLfHeight);
-				replace_once(s, lab[li]->name, anchor);
+            string2reference(anchor, lab[li], TRUE, GIF_LF_NAME, uiGifLfWidth, uiGifLfHeight);
+            replace_once(s, lab[li]->name, anchor);
 #else
-				replace_udo_quotes(s);
-				auto_references(s, TRUE, GIF_LF_NAME, uiGifLfWidth, uiGifLfHeight);
+            replace_udo_quotes(s);
+            auto_references(s, TRUE, GIF_LF_NAME, uiGifLfWidth, uiGifLfHeight);
 #endif
-				if (no_images)
-				{	/* replace_once(s, ">", ">&lt;&lt;&lt; "); */
-					replace_once(s, lab[li]->name, " &lt;&lt;&lt;"); /* [voja][R6PL17] deleted the + at "+replace_once" call */
-					strinsert(s, "| ");
-				}
-				outln(s);
-			}
-			else
-			{
+            if (no_images)
+            {
+/*             replace_once(s, ">", ">&lt;&lt;&lt; ");
+*/
+                                          /* [voja][R6PL17] deleted the + at "+replace_once" call */
+               replace_once(s, lab[li]->name, " &lt;&lt;&lt;");
+               strinsert(s, "| ");
+            }
+            
+            outln(s);
+         }
+         else
+         {
 #if 1
-				/* disabled nach links */
-				if (no_images)
-				{	outln("| &lt;&lt;&lt;");
-				}
-				else
-				{
-					get_giflink_data(GIF_NOLF_INDEX, s, &uiW, &uiH);
-					sGifSize[0]= EOS;
-					if (uiW!=0 && uiH!=0)
-					{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
-					}
-					voutlnf("<img src=\"%s\" border=\"0\"%s />", s, sGifSize);
-				}
+            /* disabled nach links */
+            if (no_images)
+            {
+               outln("| &lt;&lt;&lt;");
+            }
+            else
+            {
+               get_giflink_data(GIF_NOLF_INDEX, s, &uiW, &uiH);
+               sGifSize[0] = EOS;
+               
+               if (uiW != 0 && uiH != 0)
+               {
+                  sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
+               }
+               
+               voutlnf("<img src=\"%s\" border=\"0\"%s%s>", s, sGifSize, closer);
+            }
 #else
-				/* Frueher Link auf die Startseite */
-				html_home_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ");
+                                          /* Frueher Link auf die Startseite */
+            html_home_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ");
 #endif
-			}
-		}
-	}
-
-
-	/* ------------------------------------------- */
-	/* Verweis auf die nachfolgende Seite erzeugen */
-	/* ------------------------------------------- */
-	i= 0;
-
-	if (for_main_file)
-	{	if (p1_toc_counter>0 &&!html_merge_node1)
-		{	i= 1;
-		}
-	}
-	else
-	{	i= toc[ti]->next_index;
-		if (i>0)
-		{	if (html_merge_node2)
-			{	if (toc[i]->toctype!=TOC_NODE1)
-				{	i= 0;
-				}
-			}
-			else
-			{	if (html_merge_node3)
-				{	if (toc[i]->toctype!=TOC_NODE1 && toc[i]->toctype!=TOC_NODE2)
-					{	i= 0;
-					}
-				}
-				else
-				{	if (html_merge_node4)
-					{	if (toc[i]->toctype!=TOC_NODE1 && toc[i]->toctype!=TOC_NODE2  && toc[i]->toctype!=TOC_NODE3)
-						{	i= 0;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	if (i>0)
-	{
-		li= toc[i]->labindex;
-		um_strcpy(s, lab[li]->name, 512, "html_hb_line[5]");
+         }
+      }
+   }
+   
+   
+   /* ------------------------------------------- */
+   /* Verweis auf die nachfolgende Seite erzeugen */
+   /* ------------------------------------------- */
+   i = 0;
+   
+   if (for_main_file)
+   {
+      if (p1_toc_counter>0 && !html_merge_node1)
+      {
+         i = 1;
+      }
+   }
+   else
+   {
+      i = toc[ti]->next_index;
+      
+      if (i > 0)
+      {
+         if (html_merge_node2)
+         {
+            if (toc[i]->toctype != TOC_NODE1)
+            {
+               i = 0;
+            }
+         }
+         else
+         {
+            if (html_merge_node3)
+            {
+               if (toc[i]->toctype != TOC_NODE1 && toc[i]->toctype != TOC_NODE2)
+               {
+                  i = 0;
+               }
+            }
+            else
+            {
+               if (html_merge_node4)
+               {
+                  if (toc[i]->toctype != TOC_NODE1 && toc[i]->toctype != TOC_NODE2 && toc[i]->toctype != TOC_NODE3)
+                  {
+                     i = 0;
+                  }
+               }
+            }
+         }
+      }
+   }
+   
+   if (i > 0)
+   {
+      li = toc[i]->labindex;
+      um_strcpy(s, lab[li]->name, 512, "html_hb_line[5]");
 #if 1
-		string2reference(anchor, lab[li], TRUE, GIF_RG_NAME, uiGifRgWidth, uiGifRgHeight);
-		replace_once(s, lab[li]->name, anchor);
+      string2reference(anchor, lab[li], TRUE, GIF_RG_NAME, uiGifRgWidth, uiGifRgHeight);
+      replace_once(s, lab[li]->name, anchor);
 #else
-		replace_udo_quotes(s);
-		auto_references(s, TRUE, GIF_RG_NAME, uiGifRgWidth, uiGifRgHeight);
+      replace_udo_quotes(s);
+      auto_references(s, TRUE, GIF_RG_NAME, uiGifRgWidth, uiGifRgHeight);
 #endif
-		if (no_images)
-		{	/* replace_once(s, "</a>", " &gt;&gt;&gt;</a>"); */
-			replace_once(s, lab[li]->name, " &gt;&gt;&gt;");
-			strinsert(s, "| ");
-		}
-		outln(s);
-	}
-	else
-	{	/* disabled nach rechts */
-		if (no_images)
-		{	outln("| &gt;&gt;&gt;");
-		}
-		else
-		{
-			get_giflink_data(GIF_NORG_INDEX, s, &uiW, &uiH);
-			sGifSize[0]= EOS;
-			if (uiW!=0 && uiH!=0)
-			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
-			}
-			voutlnf("<img src=\"%s\" border=\"0\"%s />", s, sGifSize);
-		}
-	}
 
-	if (html_modern_layout || html_frames_layout)
-	{
-		if (iDocHtmlSwitchLanguage>=0 && sDocHtmlSwitchLanguage[0]!=EOS)
-		{
+      if (no_images)
+      {
+/*       replace_once(s, "</a>", " &gt;&gt;&gt;</a>");
+*/
+         replace_once(s, lab[li]->name, " &gt;&gt;&gt;");
+         strinsert(s, "| ");
+      }
+   
+      outln(s);
+   }
+   else
+   {                                      /* disabled nach rechts */
+      if (no_images)
+      {
+         outln("| &gt;&gt;&gt;");
+      }
+      else
+      {
+         get_giflink_data(GIF_NORG_INDEX, s, &uiW, &uiH);
+         sGifSize[0] = EOS;
+         
+         if (uiW != 0 && uiH != 0)
+         {
+            sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
+         }
+         
+         voutlnf("<img src=\"%s\" border=\"0\"%s%s>", s, sGifSize, closer);
+      }
+   }
+   
+   if (html_modern_layout || html_frames_layout)
+   {
+      if (iDocHtmlSwitchLanguage >= 0 && sDocHtmlSwitchLanguage[0] != EOS)
+      {
 #if 1
-			outln("</td><td valign=\"top\" align=\"right\">");
+         outln("</td><td valign=\"top\" align=\"right\">");
 #endif
-			if (no_images)
-			{
-				switch (iDocHtmlSwitchLanguage)
-				{
-					case TOGER:	voutlnf("<a href=\"%s\">Deutsch</a>", sDocHtmlSwitchLanguage);	break;
-					case TOENG:	voutlnf("<a href=\"%s\">English</a>", sDocHtmlSwitchLanguage);	break;
-				}
-			}
-			else
-			{
-				if (html_frames_layout)
-				{	strcpy(sTarget, " target=\"_top\"");
-				}
-				else
-				{	sTarget[0]= EOS;
-				}
-				sGifSize[0]= EOS;
-				switch (iDocHtmlSwitchLanguage)
-				{
-					case TOGER:
-						get_giflink_data(GIF_GER_INDEX, sGifFile, &uiW, &uiH);
-						if (uiW!=0 && uiH!=0)
-						{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
-						}
-						/* Changed in r6pl16 [NHz] */
-						voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"Deutsch\" title=\"German version of this document\" border=\"0\"%s /></a>",
-							sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize);
-						break;
-					case TOENG:
-						get_giflink_data(GIF_ENG_INDEX, sGifFile, &uiW, &uiH);
-						if (uiW!=0 && uiH!=0)
-						{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
-						}
-						/* Changed in r6pl16 [NHz] */
-						voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"English\" title=\"Englische Version dieses Dokumentes\" border=\"0\"%s /></a>",
-								sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize);
-						break;
-				}
-			}
-		}
-	}
-
+         if (no_images)
+         {
+            switch (iDocHtmlSwitchLanguage)
+            {
+            case TOGER:
+               voutlnf("<a href=\"%s\">Deutsch</a>", sDocHtmlSwitchLanguage);
+                  break;
+            case TOENG:
+               voutlnf("<a href=\"%s\">English</a>", sDocHtmlSwitchLanguage);
+            }
+         }
+         else
+         {
+            if (html_frames_layout)
+            {
+               strcpy(sTarget, " target=\"_top\"");
+            }
+            else
+            {
+               sTarget[0] = EOS;
+            }
+            
+            sGifSize[0] = EOS;
+            
+            switch (iDocHtmlSwitchLanguage)
+            {
+            case TOGER:
+               get_giflink_data(GIF_GER_INDEX, sGifFile, &uiW, &uiH);
+               
+               if (uiW != 0 && uiH != 0)
+               {
+                  sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
+               }
+                                          /* Changed in r6pl16 [NHz] */
+               voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"Deutsch\" title=\"Deutsche Version dieses Dokuments\" border=\"0\"%s%s></a>",
+                  sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize, closer);
+               break;
+               
+            case TOENG:
+               get_giflink_data(GIF_ENG_INDEX, sGifFile, &uiW, &uiH);
+               
+               if (uiW != 0 && uiH != 0)
+               {
+                  sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
+               }
+                                          /* Changed in r6pl16 [NHz] */
+               voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"English\" title=\"English version of this document\" border=\"0\"%s%s></a>",
+                  sDocHtmlSwitchLanguage, sTarget, sGifFile, sGifSize, closer);
+            }
+         }
+      }
+   }
+   
 #if 1
-	if (html_modern_layout || html_frames_layout)
-	{
-		outln("</td></tr></table>");
-	}
+   if (html_modern_layout || html_frames_layout)
+   {
+      outln("</td></tr></table>");
+   }
 #endif
-
-	if (no_images)
-	{	outln("]");
-	}
-
-	if (head)
-	{	if (!html_modern_layout && !html_frames_layout)
-		{	outln(HTML_HR);
-		}
-	}
-
-	bDocAutorefOff= old_autorefoff;
-
+   
+   if (no_images)
+   {
+      outln("]");
+   }
+   
+   if (head)
+   {
+      if (!html_modern_layout && !html_frames_layout)
+      {
+         if (html_doctype < XHTML_STRICT)
+            outln(HTML_HR);
+         else
+            outln(XHTML_HR);
+      }
+   }
+   
+   bDocAutorefOff = old_autorefoff;
+   
 }	/* html_hb_line */
 
 
 
-LOCAL void html_node_bar_modern ( void )
+
+
+/*******************************************************************************
+*
+*  html_node_bar_modern():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void html_node_bar_modern(void)
 {
-	register int i;
-	int li;
-	unsigned int uiW, uiH;
-	char the_ref[1024], *ptrImg, *ptr;
-	char *noImg= "";
-	char sGifSize[80], sAlignOn[128], sAlignOff[128];
+   register int   i;                 /* */
+   int            li;                /* */
+   unsigned int   uiW,               /* */
+                  uiH;               /* */
+   char           the_ref[1024],     /* */
+                 *ptrImg,            /* */
+                 *ptr;               /* */
+   char          *noImg = "";        /* */
+   char           sGifSize[80],      /* */
+                  sAlignOn[128],     /* */
+                  sAlignOff[128];    /* */
+   char           closer[8] = "\0";  /* single tag closer mark in XHTML */
 
-	sGifSize[0]= EOS;
-
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   sGifSize[0] = EOS;
+   
 #if 1
-	/* Changed in V6.5.9 [NHz] */
-	voutlnf("<table id=\"UDO_menu\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"%s\">", html_modern_width);
-	switch (html_modern_alignment)
-	{
-		case ALIGN_LEFT:
-			sprintf(sAlignOn, "<tr><td>%s", sHtmlPropfontStart);
-			sprintf(sAlignOff, "%s</td></tr>", sHtmlPropfontEnd);
-			break;
-		case ALIGN_CENT:
-			sprintf(sAlignOn, "<tr><td align=\"center\">%s", sHtmlPropfontStart);
-			sprintf(sAlignOff, "%s</td></tr>", sHtmlPropfontEnd);
-			break;
-		case ALIGN_RIGH:
-			sprintf(sAlignOn, "<tr><td align=\"right\">%s", sHtmlPropfontStart);
-			sprintf(sAlignOff, "%s</td></tr>", sHtmlPropfontEnd);
-			break;
-	}
+   /* Changed in V6.5.9 [NHz] */
+   voutlnf("<table id=\"UDO_menu\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"%s\">", html_modern_width);
+   
+   switch (html_modern_alignment)
+   {
+   case ALIGN_LEFT:
+      sprintf(sAlignOn, "<tr><td>%s", sHtmlPropfontStart);
+      sprintf(sAlignOff, "%s</td></tr>", sHtmlPropfontEnd);
+      break;
+   case ALIGN_CENT:
+      sprintf(sAlignOn, "<tr><td align=\"center\">%s", sHtmlPropfontStart);
+      sprintf(sAlignOff, "%s</td></tr>", sHtmlPropfontEnd);
+      break;
+   case ALIGN_RIGH:
+      sprintf(sAlignOn, "<tr><td align=\"right\">%s", sHtmlPropfontStart);
+      sprintf(sAlignOff, "%s</td></tr>", sHtmlPropfontEnd);
+   }
 #else
-	strcpy(sAlignOn, "<center>");
-	strcpy(sAlignOff, "</center>");
+   strcpy(sAlignOn, "<center>");
+   strcpy(sAlignOff, "</center>");
 #endif
+   
+   
+   
+   if (p2_toc_counter == 0 && titdat.authoricon_active != NULL)
+   {
+      if (titdat.authoriconActiveWidth != 0 && titdat.authoriconActiveHeight != 0)
+      {
+         sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconActiveWidth, titdat.authoriconActiveHeight);
+      }
+      
+      voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=\"0\"%s%s></a>%s",
+         sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon_active, sGifSize, closer, sAlignOff);
+   }
+   else
+   {
+      if (titdat.authoricon != NULL)
+      {
+         if (titdat.authoriconWidth != 0 && titdat.authoriconHeight != 0)
+         {
+            sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconWidth, titdat.authoriconHeight);
+         }
+         
+         voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=\"0\"%s%s></a>%s",
+            sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon, sGifSize, closer, sAlignOff);
+      }
+   }
+   
+   if (toc[0]->icon != NULL)              /*r6pl13*/
+   {
+      ptrImg = noImg;
+      uiW = uiH = 0;
+      
+      if (toc[0]->icon != NULL)           /* fd:20071114: ??? */
+      {
+         ptrImg = toc[0]->icon;
+         uiW = toc[0]->uiIconWidth;
+         uiH = toc[0]->uiIconHeight;
+      }
+      
+      if (toc[0]->icon_active != NULL)
+      {
+         if (p2_toc_counter == 0)
+         {
+            ptrImg = toc[0]->icon_active;
+            uiW = toc[0]->uiIconActiveWidth;
+            uiH = toc[0]->uiIconActiveHeight;
+         }
+      }
+      
+      if (ptrImg != noImg)
+      {
+         sGifSize[0] = EOS;
+         
+         if (uiW != 0 && uiH != 0)
+         {
+            sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
+         }
+         
+                                          /*r6pl13*/
+         voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=\"0\"%s%s></a>%s",
+            sAlignOn, old_outfile.name, outfile.suff, ptrImg, sGifSize, closer, sAlignOff);
+      }
+   }
+   
+   for (i = 1; i <= p1_toc_counter; i++)
+   {
+      if (toc[i] != NULL)
+      {
+         if (toc[i]->toctype == TOC_NODE1 && !toc[i]->invisible)
+         {
+            convert_toc_item(toc[i]);
+            li = toc[i]->labindex;
+   
+            ptrImg = noImg;
+            uiW = uiH = 0;
+            
+            if (toc[i]->icon != NULL)
+            {
+               ptrImg = toc[i]->icon;
+               uiW = toc[i]->uiIconWidth;
+               uiH = toc[i]->uiIconHeight;
+            }
 
-
-
-	if (p2_toc_counter==0 && titdat.authoricon_active!=NULL)
-	{
-			if (titdat.authoriconActiveWidth!=0 && titdat.authoriconActiveHeight!=0)
-			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconActiveWidth, titdat.authoriconActiveHeight);
-			}
-			voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=\"0\"%s /></a>%s",
-				sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon_active, sGifSize, sAlignOff);
-	}
-	else
-	{
-		if (titdat.authoricon!=NULL)
-		{
-			if (titdat.authoriconWidth!=0 && titdat.authoriconHeight!=0)
-			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconWidth, titdat.authoriconHeight);
-			}
-			voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=\"0\"%s /></a>%s",
-				sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon, sGifSize, sAlignOff);
-		}
-	}
-
-	if (toc[0]->icon!=NULL)		/*r6pl13*/
-	{
-		ptrImg= noImg;
-		uiW= uiH= 0;
-		if (toc[0]->icon!=NULL)
-		{	ptrImg= toc[0]->icon;
-			uiW= toc[0]->uiIconWidth;
-			uiH= toc[0]->uiIconHeight;
-		}
-		if (toc[0]->icon_active!=NULL)
-		{	if (p2_toc_counter==0)
-			{	ptrImg= toc[0]->icon_active;
-				uiW= toc[0]->uiIconActiveWidth;
-				uiH= toc[0]->uiIconActiveHeight;
-			}
-		}
-		if (ptrImg!=noImg)
-		{	sGifSize[0]= EOS;
-			if (uiW!=0 && uiH!=0)
-			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
-			}
-			voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=\"0\"%s /></a>%s",
-				sAlignOn, old_outfile.name, outfile.suff, ptrImg, sGifSize, sAlignOff);	/*r6pl13*/
-		}
-	}
-
-	for (i=1; i<=p1_toc_counter; i++)
-	{
-		if (toc[i]!=NULL)
-		{
-			if (toc[i]->toctype==TOC_NODE1 && !toc[i]->invisible)
-			{
-				convert_toc_item(toc[i]);
-				li= toc[i]->labindex;
-
-				ptrImg= noImg;
-				uiW= uiH= 0;
-				if (toc[i]->icon!=NULL)
-				{	ptrImg= toc[i]->icon;
-					uiW= toc[i]->uiIconWidth;
-					uiH= toc[i]->uiIconHeight;
-				}
-				if (toc[i]->icon_active!=NULL)
-				{	if (toc[i]->n1 == p2_toc_n1)
-					{	ptrImg= toc[i]->icon_active;
-						uiW= toc[i]->uiIconActiveWidth;
-						uiH= toc[i]->uiIconActiveHeight;
-					}
-				}
-				string2reference(the_ref, lab[li], FALSE, ptrImg, uiW, uiH);
-				if (ptrImg!=noImg && toc[i]->icon_text!=NULL)
-				{	ptr= strstr(the_ref, "</a>");
-					if (ptr!=NULL)
-					{	strinsert(ptr, toc[i]->icon_text);
-						strinsert(ptr, "<br />");
-					}
-				}
-				voutlnf("%s%s%s", sAlignOn, the_ref, sAlignOff);	/*r6pl3*/
-			}
-		}
-		else
-		{	break;
-		}
-	}
-
+            if (toc[i]->icon_active != NULL)
+            {
+               if (toc[i]->n1 == p2_toc_n1)
+               {
+                  ptrImg = toc[i]->icon_active;
+                  uiW = toc[i]->uiIconActiveWidth;
+                  uiH = toc[i]->uiIconActiveHeight;
+               }
+            }
+            
+            string2reference(the_ref, lab[li], FALSE, ptrImg, uiW, uiH);
+            
+            if (ptrImg != noImg && toc[i]->icon_text != NULL)
+            {
+               ptr = strstr(the_ref, "</a>");
+               
+               if (ptr != NULL)
+               {
+                  strinsert(ptr, toc[i]->icon_text);
+                  
+                  if (html_doctype < XHTML_STRICT)
+                     strinsert(ptr, "<br>");
+                  else
+                     strinsert(ptr, "<br />");
+               }
+            }
+                                          /*r6pl3*/
+            voutlnf("%s%s%s", sAlignOn, the_ref, sAlignOff);
+         }
+      }
+      else
+      {
+         break;
+      }
+   }
+   
 #if 1
-	outln("</table>");
+   outln("</table>");
 #endif
-
+   
 }	/* html_node_bar_modern */
 
 
 
-GLOBAL void html_save_frameset ( void )
+
+
+/*******************************************************************************
+*
+*  html_save_frameset():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void html_save_frameset(void)
 {
-	char add[1024], add2[256], s[512], f1[512], f2[512];
-
-	/* New in r6pl16 [NHz] */
-	if(html_doctype >= XHTML_STRICT)
-	{
-		outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Frameset//EN\"");
- 		outln("        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd\">");
-		voutlnf("<html lang=\"%s\" xml:lang=\"%s\">", lang.html_lang, lang.html_lang);
-	}
-	else
-	{
-		outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\"");
- 		outln("        \"http://www.w3.org/TR/html4/frameset.dtd\">");
-		voutlnf("<html lang=\"%s\">", lang.html_lang);
-	}
-	outln("<head>");
-	output_html_meta(TRUE);
-	if (titdat.htmltitle!=NULL && titdat.htmltitle[0]!=EOS)
-	{	voutlnf("<title>%s</title>", titdat.htmltitle);	/*r6pl5*/
-	}
-	else
-	{	voutlnf("<title>%s</title>", titleprogram);
-	}
-	outln("</head>");
-
-	add[0]= EOS;
-	if (html_frames_noborder)	strcat(add, " border=\"0\" frameborder=\"0\" framespacing=\"0\"");
-
-	add2[0]= EOS;
-	if (html_frames_noresize)	strcat(add2, " noresize=\"noresize\"");
-	if (html_frames_noscroll)	strcat(add2, " scrolling=\"no\"");
-
-	if ( html_frames_toc_title == NULL ) /* Change in 6.5.16 [GS] */
-	{
-		sprintf(f1, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\"%s />",
-				html_name_prefix, FRAME_FILE_TOC, outfile.suff, FRAME_NAME_TOC, add2);
-	}
-	else
-	{
-		sprintf(f1, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\" title=\"%s\"%s />",
-				html_name_prefix, FRAME_FILE_TOC, outfile.suff, FRAME_NAME_TOC, html_frames_toc_title, add2);
-	}
-
-	if ( html_frames_con_title == NULL ) /* Change in 6.5.16 [GS] */
-	{
-		sprintf(f2, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\" />",
-				html_name_prefix, FRAME_FILE_CON, outfile.suff, FRAME_NAME_CON);
-	}
-	else
-	{
-		sprintf(f2, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\" title=\"%s\" />",
-				html_name_prefix, FRAME_FILE_CON, outfile.suff, FRAME_NAME_CON, html_frames_con_title);
-	}
-
-	switch (html_frames_position)
-	{
-		case POS_LEFT:
-			voutlnf("<frameset cols=\"%s,*\"%s>", html_frames_width, add);
-			outln(f1);
-			outln(f2);
-			break;
-		case POS_RIGHT:
-			voutlnf("<frameset cols=\"*,%s\"%s>", html_frames_width, add);
-			outln(f2);
-			outln(f1);
-			break;
-		case POS_TOP:
-			voutlnf("<frameset rows=\"%s,*\"%s>", html_frames_height, add);
-			outln(f1);
-			outln(f2);
-			break;
-		case POS_BOTTOM:
-			voutlnf("<frameset rows=\"*,%s\"%s>", html_frames_height, add);
-			outln(f2);
-			outln(f1);
-			break;
-	}
-
-	outln("</frameset>");
-
-	/* New in r6pl15 [NHz] */
-
-	/* Noframes for browsers who do not know frames */
-	outln("<noframes>");
-	c_maketitle();
-
-	c_tableofcontents();
-
-	/* Set both to FALSE in order that the title page and the
-
-			table of contents will be written in the frame again */
-
-	called_maketitle= FALSE;
-
-	called_tableofcontents= FALSE;
-	outln("</noframes>");
-	outln("</html>");
-
-	/* Das Inhaltverzeichnis fÅr den linken Frame ausgeben */
-
+   char   add[1024],         /* */
+          add2[256],         /* */
+          s[512],            /* */
+          f1[512],           /* */
+          f2[512];           /* */
+   char   closer[8] = "\0";  /* single tag closer mark in XHTML */
+   
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   
+   /* New in r6pl16 [NHz] */
+   if (html_doctype >= XHTML_STRICT)
+   {
+      outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Frameset//EN\"");
+      outln("        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd\">");
+      voutlnf("<html lang=\"%s\" xml:lang=\"%s\">", lang.html_lang, lang.html_lang);
+   }
+   else
+   {
+      outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\"");
+      outln("        \"http://www.w3.org/TR/html4/frameset.dtd\">");
+      voutlnf("<html lang=\"%s\">", lang.html_lang);
+   }
+   
+   outln("<head>");
+   output_html_meta(TRUE);
+   
+   if (titdat.htmltitle != NULL && titdat.htmltitle[0] != EOS)
+   {
+                                          /*r6pl5*/
+      voutlnf("<title>%s</title>", titdat.htmltitle);
+   }
+   else
+   {
+      voutlnf("<title>%s</title>", titleprogram);
+   }
+   
+   outln("</head>");
+   
+   add[0] = EOS;
+   
+   if (html_frames_noborder)
+      strcat(add, " border=\"0\" frameborder=\"0\" framespacing=\"0\"");
+   
+   add2[0] = EOS;
+   
+   if (html_frames_noresize)
+      strcat(add2, " noresize=\"noresize\"");
+   
+   if (html_frames_noscroll)
+      strcat(add2, " scrolling=\"no\"");
+   
+   if (html_frames_toc_title == NULL)     /* Change in 6.5.16 [GS] */
+   {
+      sprintf(f1, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\"%s%s>",
+      html_name_prefix, FRAME_FILE_TOC, outfile.suff, FRAME_NAME_TOC, add2, closer);
+   }
+   else
+   {
+      sprintf(f1, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\" title=\"%s\"%s%s>",
+      html_name_prefix, FRAME_FILE_TOC, outfile.suff, FRAME_NAME_TOC, html_frames_toc_title, add2, closer);
+   }
+   
+   if (html_frames_con_title == NULL)     /* Change in 6.5.16 [GS] */
+   {
+      sprintf(f2, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\"%s>",
+      html_name_prefix, FRAME_FILE_CON, outfile.suff, FRAME_NAME_CON, closer);
+   }
+   else
+   {
+      sprintf(f2, "\t<frame src=\"%s%s%s\" name=\"%s\" marginwidth=\"0\" marginheight=\"0\" title=\"%s\"%s>",
+      html_name_prefix, FRAME_FILE_CON, outfile.suff, FRAME_NAME_CON, html_frames_con_title, closer);
+   }
+   
+   switch (html_frames_position)
+   {
+   case POS_LEFT:
+      voutlnf("<frameset cols=\"%s,*\"%s>", html_frames_width, add);
+      outln(f1);
+      outln(f2);
+      break;
+   
+   case POS_RIGHT:
+      voutlnf("<frameset cols=\"*,%s\"%s>", html_frames_width, add);
+      outln(f2);
+      outln(f1);
+      break;
+   
+   case POS_TOP:
+      voutlnf("<frameset rows=\"%s,*\"%s>", html_frames_height, add);
+      outln(f1);
+      outln(f2);
+      break;
+   
+   case POS_BOTTOM:
+      voutlnf("<frameset rows=\"*,%s\"%s>", html_frames_height, add);
+      outln(f2);
+      outln(f1);
+   }
+   
+   outln("</frameset>");
+   
+   /* New in r6pl15 [NHz] */
+   
+   /* Noframes for browsers who do not know frames */
+   outln("<noframes>");
+   c_maketitle();
+   
+   c_tableofcontents();
+   
+   /* Set both to FALSE in order that the title page and the
+   
+   table of contents will be written in the frame again */
+   
+   called_maketitle = FALSE;
+   
+   called_tableofcontents = FALSE;
+   outln("</noframes>");
+   outln("</html>");
+   
+   /* Das Inhaltverzeichnis fÅr den linken Frame ausgeben */
+   
 #if 1
-	sprintf(outfile.name, "%s%s", html_name_prefix, FRAME_FILE_TOC);
+   sprintf(outfile.name, "%s%s", html_name_prefix, FRAME_FILE_TOC);
 #else
-	strcpy(outfile.name, FRAME_FILE_TOC);
+   strcpy(outfile.name, FRAME_FILE_TOC);
 #endif
-	if (!html_make_file())
-	{	return;
-	}
-	output_html_doctype();
-	outln("<html>");
-	outln("<head>");
-	voutlnf("<title>%s</title>", lang.contents);
-	output_html_meta(FALSE);
-	outln("</head>");
-	add[0]= EOS;
-	if (html_frames_backimage[0]!=EOS)
-	{	sprintf(s, " background=\"%s\"", html_frames_backimage);
-		strcat(add, s);
-	}
-	if (html_frames_backcolor[0]!=EOS)
-	{	sprintf(s, " bgcolor=\"%s\"", html_frames_backcolor);
-		strcat(add, s);
-	}
-	if (html_frames_linkcolor[0]!=EOS)
-	{	sprintf(s, " link=\"%s\"", html_frames_linkcolor);
-		strcat(add, s);
-	}
-	if (html_frames_alinkcolor[0]!=EOS)
-	{	sprintf(s, " alink=\"%s\"", html_frames_alinkcolor);
-		strcat(add, s);
-	}
-	if (html_frames_vlinkcolor[0]!=EOS)
-	{	sprintf(s, " vlink=\"%s\"", html_frames_vlinkcolor);
-		strcat(add, s);
-	}
-	voutlnf("<body%s class=\"frame_toc\">", add); /* Changed in r6pl16 [NHz] */
 
-	outln(sHtmlPropfontStart);
-	html_node_bar_frames();
-    voutlnf("%s", sHtmlPropfontEnd);
+   if (!html_make_file())
+      return;
+   
+   output_html_doctype();
+   outln("<html>");
+   outln("<head>");
+   voutlnf("<title>%s</title>", lang.contents);
+   output_html_meta(FALSE);
+   outln("</head>");
+   add[0] = EOS;
+   
+   if (html_frames_backimage[0] != EOS)
+   {
+      sprintf(s, " background=\"%s\"", html_frames_backimage);
+      strcat(add, s);
+   }
+   
+   if (html_frames_backcolor[0] != EOS)
+   {
+      sprintf(s, " bgcolor=\"%s\"", html_frames_backcolor);
+      strcat(add, s);
+   }
+   
+   if (html_frames_linkcolor[0] != EOS)
+   {
+      sprintf(s, " link=\"%s\"", html_frames_linkcolor);
+      strcat(add, s);
+   }
+   
+   if (html_frames_alinkcolor[0] != EOS)
+   {
+      sprintf(s, " alink=\"%s\"", html_frames_alinkcolor);
+      strcat(add, s);
+   }
+   
+   if (html_frames_vlinkcolor[0] != EOS)
+   {
+      sprintf(s, " vlink=\"%s\"", html_frames_vlinkcolor);
+      strcat(add, s);
+   }
+                                          /* Changed in r6pl16 [NHz] */
+   voutlnf("<body%s class=\"frame_toc\">", add);
+   
+   outln(sHtmlPropfontStart);
+   html_node_bar_frames();
+   voutlnf("%s", sHtmlPropfontEnd);
    outln("</body>");
    outln("</html>");
-
-	/* Neue Datei fÅr das erste Kapitel anlegen */
-
-	sprintf(outfile.name, "%s%s", html_name_prefix, FRAME_FILE_CON);
-	html_make_file();
-
+   
+   /* Neue Datei fÅr das erste Kapitel anlegen */
+   
+   sprintf(outfile.name, "%s%s", html_name_prefix, FRAME_FILE_CON);
+   html_make_file();
+   
 }	/* html_save_frameset */ 
 
 
-LOCAL void html_node_bar_frames ( void )
+
+
+
+/*******************************************************************************
+*
+*  html_node_bar_frames():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void html_node_bar_frames(void)
 {
-	register int i;
-	int li;
-	unsigned int uiW, uiH;
-	char the_ref[1024], *ptr, *ptrImg, sGifSize[80];
-	char  alignOn[128], alignOff[128], divOn[32], divOff[32], rowOn[16], rowOff[16];
-	char *noImg= "";
+   register int   i;                 /* */
+   int            li;                /* */
+   unsigned int   uiW,               /* */
+                  uiH;               /* */
+   char           the_ref[1024],     /* */
+                 *ptr,               /* */
+                 *ptrImg,            /* */
+                  sGifSize[80];      /* */
+   char           alignOn[128],      /* */
+                  alignOff[128],     /* */
+                  divOn[32],         /* */
+                  divOff[32],        /* */
+                  rowOn[16],         /* */
+                  rowOff[16];        /* */
+   char          *noImg= "";         /* */
+   char           closer[8] = "\0";  /* single tag closer mark in XHTML */
 
-	switch (html_frames_position)
-	{
-		case POS_LEFT:
-		case POS_RIGHT:
-			divOn[0]= divOff[0]= rowOn[0]= rowOff[0]= EOS;
-			switch (html_frames_alignment)
-			{
-				case ALIGN_LEFT:
-					sprintf(alignOn, "<tr><td>%s", sHtmlPropfontStart);
-					sprintf(alignOff, "%s</td></tr>", sHtmlPropfontEnd);
-					break;
-				case ALIGN_CENT:
-					sprintf(alignOn, "<tr><td align=\"center\">%s", sHtmlPropfontStart);
-					sprintf(alignOff, "%s</td></tr>", sHtmlPropfontEnd);
-					break;
-				case ALIGN_RIGH:
-					sprintf(alignOn, "<tr><td align=\"right\">%s", sHtmlPropfontStart);
-					sprintf(alignOff, "%s</td></tr>", sHtmlPropfontEnd);
-					break;
-			}
-			outln(divOn);
-			outln("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">");
-			outln(rowOn);
-			break;
-		default:
-			sprintf(alignOn, "<td nowrap=\"nowrap\" >%s", sHtmlPropfontStart);
-			sprintf(alignOff, "%s</td>", sHtmlPropfontEnd);
-			strcpy(rowOn, "<tr>");
-			strcpy(rowOff, "</tr>");
-			switch (html_frames_alignment)
-			{
-				case ALIGN_LEFT:
-					divOn[0]= EOS;
-					divOff[0]= EOS;
-					break;
-				case ALIGN_CENT:
-					strcpy(divOn, "<div align=\"center\">");
-					strcpy(divOff, "</div>");
-					break;
-				case ALIGN_RIGH:
-					strcpy(divOn, "<div align=\"right\">");
-					strcpy(divOff, "</div>");
-					break;
-			}
-			outln(divOn);
-			outln("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
-			outln(rowOn);
-			break;
-	}
-
-
-	if (titdat.authoricon!=NULL)
-	{
-		sGifSize[0]= EOS;
-		if (titdat.authoriconWidth!=0 && titdat.authoriconHeight!=0)
-		{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconWidth, titdat.authoriconHeight);
-		}
-		voutlnf("%s<a href=\"%s%s%s\" target=\"%s\"><img src=\"%s%s\" alt=\"\" title=\"\" border=\"0\"%s /></a>%s",
-			alignOn, html_name_prefix, FRAME_FILE_CON, outfile.suff,
-			FRAME_NAME_CON, titdat.authoricon, "" /*sDocImgSuffix*/, sGifSize, alignOff);
-	}
-
-	for (i=1; i<=p1_toc_counter; i++)
-	{
-		if (toc[i]!=NULL)
-		{
-			if (toc[i]->toctype==TOC_NODE1 && !toc[i]->invisible)
-			{
-				convert_toc_item(toc[i]);
-				li= toc[i]->labindex;
-
-				ptrImg= noImg;
-				uiW= uiH= 0;
-				if (toc[i]->icon!=NULL)
-				{	ptrImg= toc[i]->icon;
-					uiW= toc[i]->uiIconWidth;
-					uiH= toc[i]->uiIconHeight;
-				}
-				if (toc[i]->icon_active!=NULL)
-				{	if (toc[i]->n1 == p2_toc_n1)
-					{	ptrImg= toc[i]->icon_active;
-						uiW= toc[i]->uiIconActiveWidth;
-						uiH= toc[i]->uiIconActiveHeight;
-					}
-				}
-				string2reference(the_ref, lab[li], FALSE, ptrImg, uiW, uiH);
-
-				/* Im Inhaltsverzeichnis DARF nicht <a href="#..."> stehen! */
-				/* kleiner Zwischenhack, da Frames mit gemergten Nodes wohl */
-				/* niemand ernsthaft verwenden werden wird. */
-				ptr= strstr(the_ref, "href=\"#");
-				if (ptr!=NULL)
-				{	ptr+= 6;
-					strinsert(ptr, outfile.suff);
-					strinsert(ptr, FRAME_FILE_CON);
-					strinsert(ptr, html_name_prefix);
-				}
-				if (ptrImg!=noImg && toc[i]->icon_text!=NULL)
-				{	ptr= strstr(the_ref, "</a>");
-					if (ptr!=NULL)
-					{	strinsert(ptr, toc[i]->icon_text);
-						strinsert(ptr, "<br />");
-					}
-				}
-				voutlnf("%s%s%s", alignOn, the_ref, alignOff);
-			}
-		}
-		else
-		{	break;
-		}
-	}
-
-	outln(rowOff);
-	outln("</table>");
-	outln(divOff);
-
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   
+   switch (html_frames_position)
+   {
+   case POS_LEFT:
+   case POS_RIGHT:
+      divOn[0] = divOff[0] = rowOn[0] = rowOff[0] = EOS;
+      
+      switch (html_frames_alignment)
+      {
+      case ALIGN_LEFT:
+         sprintf(alignOn, "<tr><td>%s", sHtmlPropfontStart);
+         sprintf(alignOff, "%s</td></tr>", sHtmlPropfontEnd);
+         break;
+      case ALIGN_CENT:
+         sprintf(alignOn, "<tr><td align=\"center\">%s", sHtmlPropfontStart);
+         sprintf(alignOff, "%s</td></tr>", sHtmlPropfontEnd);
+         break;
+      case ALIGN_RIGH:
+         sprintf(alignOn, "<tr><td align=\"right\">%s", sHtmlPropfontStart);
+         sprintf(alignOff, "%s</td></tr>", sHtmlPropfontEnd);
+      }
+      
+      outln(divOn);
+      outln("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">");
+      outln(rowOn);
+      break;
+      
+   default:
+      sprintf(alignOn, "<td nowrap=\"nowrap\">%s", sHtmlPropfontStart);
+      sprintf(alignOff, "%s</td>", sHtmlPropfontEnd);
+      strcpy(rowOn, "<tr>");
+      strcpy(rowOff, "</tr>");
+      
+      switch (html_frames_alignment)
+      {
+      case ALIGN_LEFT:
+         divOn[0] = EOS;
+         divOff[0] = EOS;
+         break;
+      case ALIGN_CENT:
+         strcpy(divOn, "<div align=\"center\">");
+         strcpy(divOff, "</div>");
+         break;
+      case ALIGN_RIGH:
+         strcpy(divOn, "<div align=\"right\">");
+         strcpy(divOff, "</div>");
+      }
+      
+      outln(divOn);
+      outln("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">");
+      outln(rowOn);
+   }
+   
+   
+   if (titdat.authoricon != NULL)
+   {
+      sGifSize[0] = EOS;
+      
+      if (titdat.authoriconWidth != 0 && titdat.authoriconHeight != 0)
+      {
+         sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconWidth, titdat.authoriconHeight);
+      }
+      
+      voutlnf("%s<a href=\"%s%s%s\" target=\"%s\"><img src=\"%s%s\" alt=\"\" title=\"\" border=\"0\"%s%s></a>%s",
+         alignOn, html_name_prefix, FRAME_FILE_CON, outfile.suff,
+         FRAME_NAME_CON, titdat.authoricon, "" /*sDocImgSuffix*/, sGifSize, closer, alignOff);
+   }
+   
+   for (i = 1; i <= p1_toc_counter; i++)
+   {
+      if (toc[i] != NULL)
+      {
+         if (toc[i]->toctype == TOC_NODE1 && !toc[i]->invisible)
+         {
+            convert_toc_item(toc[i]);
+            li = toc[i]->labindex;
+            
+            ptrImg = noImg;
+            uiW = uiH = 0;
+            
+            if (toc[i]->icon != NULL)
+            {
+               ptrImg = toc[i]->icon;
+               uiW = toc[i]->uiIconWidth;
+               uiH = toc[i]->uiIconHeight;
+            }
+            
+            if (toc[i]->icon_active != NULL)
+            {
+               if (toc[i]->n1 == p2_toc_n1)
+               {
+                  ptrImg = toc[i]->icon_active;
+                  uiW = toc[i]->uiIconActiveWidth;
+                  uiH = toc[i]->uiIconActiveHeight;
+               }
+            }
+            
+            string2reference(the_ref, lab[li], FALSE, ptrImg, uiW, uiH);
+   
+            /* Im Inhaltsverzeichnis DARF nicht <a href="#..."> stehen! */
+            /* kleiner Zwischenhack, da Frames mit gemergten Nodes wohl */
+            /* niemand ernsthaft verwenden werden wird. */
+            
+            ptr= strstr(the_ref, "href=\"#");
+            
+            if (ptr != NULL)
+            {
+               ptr += 6;
+               strinsert(ptr, outfile.suff);
+               strinsert(ptr, FRAME_FILE_CON);
+               strinsert(ptr, html_name_prefix);
+            }
+            
+            if (ptrImg != noImg && toc[i]->icon_text != NULL)
+            {
+               ptr = strstr(the_ref, "</a>");
+               
+               if (ptr != NULL)
+               {
+                  strinsert(ptr, toc[i]->icon_text);
+                  
+                  if (html_doctype < XHTML_STRICT)
+                     strinsert(ptr, "<br>");
+                  else
+                     strinsert(ptr, "<br />");
+               }
+            }
+            
+            voutlnf("%s%s%s", alignOn, the_ref, alignOff);
+         }
+      }
+      else
+      {
+         break;
+      }
+   }
+   
+   outln(rowOff);
+   outln("</table>");
+   outln(divOff);
+   
 }	/* html_node_bar_frames */
 
 
@@ -3707,7 +4297,11 @@ GLOBAL void html_footer ( void )
 	if (has_counter || has_main_counter || has_name || has_email || has_url || has_mailurl)
 	{
       outln("");                          /* v6.5.19 [fd] */
-   	outln(HTML_HR);
+      
+      if (html_doctype < XHTML_STRICT)
+         outln(HTML_HR);
+      else
+         outln(XHTML_HR);
 	}
 
 	/* r6pl4: Counterkommando ausgeben */
@@ -3806,7 +4400,11 @@ GLOBAL void html_footer ( void )
 	}
 
 	strcat(footer_buffer, s);
-	strcat(footer_buffer, "<br />\n");
+   
+   if (html_doctype < XHTML_STRICT)
+   	strcat(footer_buffer, "<br>\n");
+   else
+   	strcat(footer_buffer, "<br />\n");
 
 	strcpy(s, lang.update);
 	auto_quote_chars(s, TRUE);
@@ -4135,9 +4733,9 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 	save_upr_entry_outfile(filename);
 
 	fprintf(file, "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n");
-    fprintf(file, "<html>\n");
-    fprintf(file, "<head>\n");
-	fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Version %s.%s.%s for %s\" />\n",
+   fprintf(file, "<html>\n");
+   fprintf(file, "<head>\n");
+	fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Version %s.%s.%s for %s\">\n",
 						UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
 	fprintf(file, "<!-- Sitemap 1.0 -->\n");
         fprintf(file, "</head>\n");
@@ -4300,10 +4898,10 @@ GLOBAL BOOLEAN save_htmlhelp_index ( const char* filename )
 	fprintf(file, "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n");
 	fprintf(file, "<html>\n");
 	fprintf(file, "<head>\n");
-	fprintf(file, "<meta name=\"Generator\" content=\"UDO Version %s.%s.%s for %s\" />\n",
+	fprintf(file, "<meta name=\"Generator\" content=\"UDO Version %s.%s.%s for %s\">\n",
 						UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
 	if (titdat.author != NULL)
-		fprintf(file, "<meta name=\"Author\" content=\"%s\" />\n", titdat.author);
+		fprintf(file, "<meta name=\"Author\" content=\"%s\">\n", titdat.author);
 	fprintf(file, "<!-- Sitemap 1.0 -->\n");
 	fprintf(file, "</head>\n");
 	fprintf(file, "<body>\n");
@@ -4373,502 +4971,664 @@ LOCAL void set_inside_node1 ( void )
 	active_nodetype= TOC_NODE1;
 }
 
-LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible )
+
+
+
+
+/*******************************************************************************
+*
+*  make_node():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void make_node(
+
+const BOOLEAN   popup,             /* */
+const BOOLEAN   invisible)         /* */
 {
-	char 	n[512], name[512], stgname[512], numbers[512], nameNoSty[512];
-	char	map[64], sGifSize[80], nodename[512];
-	int		ti, chapter, nr1;
-	BOOLEAN	flag;
-	BOOLEAN	do_index;
+   char         n[512],            /* */
+                name[512],         /* */
+                stgname[512],      /* */
+                numbers[512],      /* */
+                nameNoSty[512];    /* */
+   char         map[64],           /* */
+                sGifSize[80],      /* */
+                nodename[512];     /* */
+   int          ti,                /* */
+                chapter,           /* */
+                nr1;               /* */
+   BOOLEAN  	 flag;              /* */
+   BOOLEAN      do_index;          /* */
+   char         closer[8] = "\0";  /* single tag closer mark in XHTML */
 
-	if (p2_toc_counter>=MAXTOCS)	/* r5pl2 */
-	{	bBreakInside= TRUE;
-		return;
-	}
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   
+   if (p2_toc_counter >= MAXTOCS)         /* r5pl2 */
+   {
+      bBreakInside = TRUE;
+      return;
+   }
+   
+   tokcpy2(name, 512);
+   strcpy(stgname, name);                 /* r5pl14 */
+   
+   if (name[0] == EOS)
+   {
+      error_missing_parameter("!node");
+      return;
+   }
+   
+   p2_lab_counter++;                      /*r6pl2*/
+   p2_toctype= TOC_NODE1;                 /*r6pl5*/
+   
+   if ( (desttype == TOHTM || desttype == TOHAH) && !html_merge_node1)
+   {
+      check_endnode();
+      html_bottomline();
+   }
+   
+   if (desttype == TOMHH)
+   {
+      check_endnode();
+      hh_bottomline();
+   }
+   
+   check_styles(name);                    /*r6pl3*/
+   c_styles(name);
+   
+   switch (desttype)                      /*r5pl3*/
+   {
+   case TOWIN:
+   case TOWH4:
+   case TOAQV:
+      c_win_styles(name);
+         break;
+         
+   case TORTF:
+      c_rtf_styles(name);
+      c_rtf_quotes(name);
+      break;
+      
+   default:
+      c_internal_styles(name);
+   }
+   
+   replace_udo_quotes(name);
+   delete_all_divis(name);
+   replace_udo_tilde(name);
+   replace_udo_nbsp(name);
+   
+   check_endnode();
+   check_styleflags();
+   check_environments_node();
+   
+   if (bInsideAppendix)
+   {
+      p2_apx_n1++;
+      p2_apx_n2 = 0;
+      p2_apx_n3 = 0;
+      p2_apx_n4 = 0;
+   }
+   else
+   {
+      p2_toc_n1++;
+      p2_toc_n2 = 0;
+      p2_toc_n3 = 0;
+      p2_toc_n4 = 0;
+   }
+   
+   p2_toc_counter++;
+   curr_n1_index = p2_toc_counter;
+   curr_n2_index = 0;
+   curr_n3_index = 0;
+   
+   last_n1_index = p2_toc_counter;
+   last_n2_index = 0;
+   last_n3_index = 0;
+   last_n4_index = 0;
+   
+   nr1 = toc[p2_toc_counter]->nr1;
+   
+   (bInsideAppendix) ? (chapter= nr1) : (chapter= nr1+toc_offset);
+   
+   n[0] = EOS;
+   numbers[0] = EOS;
+   
+   if (!invisible)
+   {
+      if (bInsideAppendix)
+      {
+         sprintf(numbers, "%c", 'A'+ nr1 - 1);
+      }
+      else
+      {
+         sprintf(numbers, "%d", chapter); /* r5pl7: chapter statt nr1 */
+      }
+   }
+   
+   if (bVerbose)
+   {
+      sprintf(sInfMsg, "[%s] ", numbers);
+      show_status_node(sInfMsg);
+   }
+   
+   if (no_numbers || invisible)
+   {
+      numbers[0] = EOS;
+   }
+   else
+   {
+      strcat(numbers, " ");
+   }
+   
+   strcpy(current_chapter_name, name);
+   strcpy(current_chapter_nr, numbers);
+   
+                                          /* r5pl10 */
+   do_index = (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index);
+   
+   switch (desttype)
+   {
+   case TOTEX:
+   case TOPDL:
+      set_inside_node1();
+      
+      if (invisible)
+      {
+         (use_style_book) ? voutlnf("\n\\chapter*{%s}", name) : voutlnf("\n\\section*{%s}", name);
+      }
+      else
+      {
+         (use_style_book) ? voutlnf("\n\\chapter{%s}", name) : voutlnf("\n\\section{%s}", name);
+      }
+      
+      label2tex(name);                    /*r6pl2*/
+      voutlnf("\\label{%s}", name);       /*r6pl2*/
+      output_aliasses();
+   
+      if (desttype == TOPDL)              /*r6pl8*/
+      {
+         voutlnf("\\pdfdest num %d fitbh", p2_lab_counter);
+         voutlnf("\\pdfoutline goto num %d count %d {%s}",
+         p2_lab_counter, toc[p2_toc_counter]->count_n2, name);
+      }
+      
+      break;
+   
+   case TOLYX:
+      set_inside_node1();
+      out("\\layout ");
+      
+      if (invisible)
+      {
+         (use_style_book) ? outln("Chapter") : outln("Section*");
+      }
+      else
+      {
+         (use_style_book) ? outln("Chapter") : outln("Section");
+      }
+      
+      indent2space(name);
+      outln(name);
+      break;
+   
+   case TOINF:
+      set_inside_node1();
+      output_texinfo_node(name);
+      
+      if (bInsideAppendix)
+      {
+         voutlnf("@appendix %s", name);
+      }
+      else
+      {
+         (invisible) ? (voutlnf("@chapheading %s", name)) : (voutlnf("@chapter %s", name));
+      }
+      break;
+   
+   case TOTVH:
+      set_inside_node1();
+      
+      if (numbers[0] != EOS)
+         strcat(numbers, " ");
+         
+      output_vision_header(numbers, name);
+      break;
+   
+   case TOSTG:
+      set_inside_node1();
+      bInsidePopup = popup;
+   
+      replace_2at_by_1at(name);
+   
+      node2stg(name);
+   
+      outln("");
+      
+      if (!do_index)
+      {
+         outln("@indexoff");
+      }
+      
+      if (popup)
+      {
+         voutlnf("@pnode \"%s\"", name);
+      }
+      else
+      {
+         voutlnf("@node \"%s\"", name);
+      }
+      
+      if (!do_index)
+      {
+         outln("@indexon");
+      }
+   
+      if (!popup)
+      {
+         if (called_tableofcontents)
+         {
+            outln("@toc \"Main\"");
+         }
+      }
+      
+      stg_header(numbers, stgname, popup);
+      break;
+   
+   case TOAMG:
+      set_inside_node1();
+      
+      replace_2at_by_1at(name);
+      
+      node2stg(name);
+      
+      outln("");
+      
+      if (titleprogram[0] != EOS)
+      {
+         voutlnf("@node \"%s\" \"%s - %s\"", name, titleprogram, name);
+      }
+      else
+      {
+         voutlnf("@node \"%s\" \"%s\"", name, name);
+      }
+      
+      if (called_tableofcontents)
+      {
+         outln("@toc \"Main\"");
+      }
+      
+      stg_header(numbers, stgname, FALSE);
+      break;
+   
+   case TOMAN:
+      set_inside_node1();
+      outln("");
+      my_strupr(name);
+      sprintf(n, " %s%s%s", BOLD_ON, name, BOLD_OFF);
+      c_internal_styles(n);
+      outln(n);
+      break;
+      
+   case TONRO:
+      set_inside_node1();
+      my_strupr(name);
+      sprintf(n, ".SH %s", name);
+      c_internal_styles(n);
+      outln(n);
+      break;
+      
+   case TOASC:
+      set_inside_node1();
+      outln("");
+      outln("");
+      
+      if (use_style_book)
+      {
+         (bInsideAppendix) ? sprintf(n, "%s %s", lang.appendix, numbers) : sprintf(n, "%s %s", lang.chapter, numbers);
+         del_right_spaces(n);
+         output_ascii_line("=", zDocParwidth);
+         outln(n);
+         outln("");
+         outln(name);
+         output_ascii_line("=", zDocParwidth);
+      }
+      else
+      {
+         if (numbers[0] != EOS)
+            strcat(numbers, " ");
+         
+         sprintf(n, "%s%s", numbers, name);
+         outln(n);
+         output_ascii_line("*", strlen(n));
+      }
+      
+      outln("");
+      break;
+      
+   case TOKPS:
+      set_inside_node1();
+   
+      if (use_style_book)
+      {
+         (bInsideAppendix) ? sprintf(n, "%s %s", lang.appendix, numbers) : sprintf(n, "%s %s", lang.chapter, numbers);
+         del_right_spaces(n);
+         
+         if (n[0] != EOS)
+            strcat(n, " ");
 
-	tokcpy2(name, 512);
-	strcpy(stgname, name);	/* r5pl14 */
+         strcat(n, name);
+         outln("25 changeFontSize");
+      }
+      else
+      {
+         if (numbers[0] != EOS)
+            strcat(numbers, " ");
+         
+         sprintf(n, "%s%s", numbers, name);
+         
+         /* Changed in r6pl16 [NHz] */
+         /* Nodesize ist set on discrete value */
+         voutlnf("%d changeFontSize", laydat.node1size);
+      }
+      
+                                          /* Changed in r6pl16 [NHz] */
+      node2postscript(name, KPS_NAMEDEST);
+                                          /* Changed: Fixed bug #0000040 in r6.3pl16 [NHz] */
+      um_strcpy(nodename, n, 511, "make_node TOKPS");
+      node2postscript(nodename, KPS_NODENAME);
+      voutlnf("/NodeName (%s %s) def", lang.chapter, nodename);
+      outln("newline");
+      voutlnf("/%s NameDest", name);      /* New in r6pl15 [NHz] */
+      outln("Bon");
+      
+      node2postscript(n, KPS_CONTENT);    /* Changed in V6.5.5 [NHz] */
+      voutlnf("(%s) udoshow", n);
+      outln("Boff");
+      outln("newline");
+                                          /* Changed in r6pl15 [NHz] */
+      voutlnf("%d changeFontSize", laydat.propfontsize);
+   break;
+   
+   case TODRC:
+      set_inside_node1();
+      outln("%%*");
+      
+      if (p2_toc_counter + 1 <= p1_toc_counter && toc[p2_toc_counter + 1]->toctype == TOC_NODE2)
+      {
+         voutlnf("%%%% 0, %d, 0, 0, %d, %s", p2_toc_counter+10, iDrcFlags, name);
+      }
+      else
+      {
+         voutlnf("%%%% 0, 0, 0, 0, %d, %s", iDrcFlags, name);
+      }
+      
+      outln("%%*");
+      outln("");
+      break;
+      
+   case TOIPF:
+      set_inside_node1();
+                                          /* r6pl2 */
+      node2NrIPF(n, toc[p2_toc_counter]->labindex);
+      map[0] = EOS;
+      
+      if (toc[p2_toc_counter]->mapping >= 0)
+      {
+         sprintf(map, " res=%d", toc[p2_toc_counter]->mapping);
+      }
+      
+      if (bInsideAppendix)
+      {
+         voutlnf(":h1 id=%s%s.%s %s%s", n, map, lang.appendix, numbers, name);
+      }
+      else
+      {
+         voutlnf(":h1 id=%s%s.%s%s", n, map, numbers, name);
+      }
+      
+      break;
+      
+   case TOSRC:
+   case TOSRP:
+      set_inside_node1();
+      outln("");
+      outln("");
+      
+      memset(n, '#', 62);
+      n[62] = EOS;
+      voutlnf("%s  %s", sSrcRemOn, n);
+      outln("    #");
+      outln("    #");
+      
+      voutlnf("    # %s", name);
+      outln("    #");
+      outln("    #");
+      
+      voutlnf("    %s  %s", n, sSrcRemOff);
+      outln("");
+      break;
+      
+   case TORTF:
+      set_inside_node1();
+      
+      if (use_style_book)
+      {
+         c_newpage();
+      }
+      
+      outln(rtf_pardpar);
+      
+      /* r6pl6: Indizes fuer RTF */
+      if (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index)
+      {
+         strcpy(n, name);
+         winspecials2ascii(n);
+         voutf("{\\xe\\v %s}", n);
+      }
+      
+      output_aliasses();
+      
+      /* New in V6.5.9 [NHz] [bookmark] */
+      um_strcpy(n, name, 512, "make_node[RTF]");
+      winspecials2ascii(n);
+      node2winhelp(n);
+      
+      if (use_style_book)
+      {
+         if (bInsideAppendix)
+         {
+            if (invisible)
+            {
+               voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", 
+                  rtf_inv_chapt, iDocPropfontSize + 28, lang.appendix, numbers, rtf_inv_chapt, 
+                  iDocPropfontSize + 28, n, name, n);
+            }
+            else
+            {
+               voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", 
+                  rtf_inv_chapt, iDocPropfontSize + 28, lang.appendix, numbers, rtf_chapt, 
+                  iDocPropfontSize + 28, n, name, n);
+            }
+         }
+         else
+         {
+            if (invisible)
+            {
+               voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", 
+                  rtf_inv_chapt, iDocPropfontSize + 28, lang.chapter, numbers, rtf_inv_chapt, 
+                  iDocPropfontSize + 28, n, name, n);
+            }
+            else
+            {
+               voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", 
+                  rtf_inv_chapt, iDocPropfontSize + 28, lang.chapter, numbers, rtf_chapt, 
+                  iDocPropfontSize + 28, n, name, n);
+            }
+         }
+      }
+      else
+      {
+         if (numbers[0] == EOS)
+         {
+            if (invisible)
+            {                             /* Changed in V6.5.9 [NHz] */
+                                          /* Nodesize ist set on discrete value */
+               voutlnf("%s %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", 
+                  rtf_plain, rtf_inv_node1, laydat.node1size, n, name, n, rtf_parpard);
+            }
+            else
+            {                             /* Changed in V6.5.9 [NHz] */
+                                          /* Nodesize ist set on discrete value */
+               voutlnf("%s %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", 
+                  rtf_plain, rtf_node1, laydat.node1size, n, name, n, rtf_parpard);
+            }
+         }
+         else
+         {
+            if (invisible)
+            {                             /* Changed in V6.5.9 [NHz] */
+                                          /* Nodesize ist set on discrete value */
+               voutlnf("%s %s\\fs%d %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", 
+                  rtf_plain, rtf_inv_node1, laydat.node1size, numbers, n, name, n, rtf_parpard);
+            }
+            else
+            {                             /* Changed in V6.5.9 [NHz] */
+                                          /* Nodesize ist set on discrete value */
+               voutlnf("%s %s\\fs%d %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", 
+                  rtf_plain, rtf_node1, laydat.node1size, numbers, n, name, n, rtf_parpard);
+            }
+         }
+      }
+      
+      voutlnf("%s %s\\fs%d %s", rtf_plain, rtf_norm, iDocPropfontSize, rtf_par);
+      break;
+      
+   case TOWIN:
+   case TOWH4:
+   case TOAQV:
+      set_inside_node1();
+      
+      output_win_header(name, invisible);
+      output_aliasses();
+      
+      if (use_style_book)
+      {
+         (bInsideAppendix) ? sprintf(n, "%s %s\\par %s", lang.appendix, numbers, name) : sprintf(n, "%s %s\\par %s", lang.chapter, numbers, name);
+      }
+      else
+      {
+         if (numbers[0] != EOS)
+            strcat(numbers, "\\~\\~");
+         
+         sprintf(n, "%s%s", numbers, name);
+      }
+      
+      win_headline(n, popup);
+      break;
+      
+   case TOPCH:
+      set_inside_node1();
+      
+      if (numbers[0] != EOS)
+         strcat(numbers, " ");
 
-	if (name[0]==EOS)
-	{	error_missing_parameter("!node");
-		return;
-	}
-
-	p2_lab_counter++;		/*r6pl2*/
-	p2_toctype= TOC_NODE1;	/*r6pl5*/
-
-	if ( (desttype==TOHTM || desttype==TOHAH) && !html_merge_node1)
-	{	check_endnode();
-		html_bottomline();
-	}
-
-	if (desttype==TOMHH)
-	{	check_endnode();
-		hh_bottomline();
-	}
-
-	check_styles(name);			/*r6pl3*/
-	c_styles(name);
-	switch (desttype)			/*r5pl3*/
-	{	case TOWIN:
-		case TOWH4:
-		case TOAQV:	c_win_styles(name);	break;
-		case TORTF:	c_rtf_styles(name);	c_rtf_quotes(name);	break;
-		default:	c_internal_styles(name); break;
-	}
-	replace_udo_quotes(name);
-	delete_all_divis(name);
-	replace_udo_tilde(name);
-	replace_udo_nbsp(name);
-
-
-	check_endnode();
-	check_styleflags();
-	check_environments_node();
-
-	if (bInsideAppendix)
-	{	p2_apx_n1++;
-		p2_apx_n2= 0;
-		p2_apx_n3= 0;
-		p2_apx_n4= 0;
-	}
-	else
-	{	p2_toc_n1++;
-		p2_toc_n2= 0;
-		p2_toc_n3= 0;
-		p2_toc_n4= 0;
-	}
-
-	p2_toc_counter++;
-	curr_n1_index= p2_toc_counter;
-	curr_n2_index= 0;
-	curr_n3_index= 0;
-
-	last_n1_index= p2_toc_counter;
-	last_n2_index= 0;
-	last_n3_index= 0;
-	last_n4_index= 0;
-
-	nr1= toc[p2_toc_counter]->nr1;
-	(bInsideAppendix) ? (chapter= nr1) : (chapter= nr1+toc_offset);
-
-	n[0]= EOS;
-	numbers[0]= EOS;
-
-	if (!invisible)
-	{	if (bInsideAppendix)
-		{	sprintf(numbers, "%c", 'A'+ nr1 - 1);
-		}
-		else
-		{	sprintf(numbers, "%d", chapter);	/* r5pl7: chapter statt nr1 */
-		}
-	}
-
-	if (bVerbose)
-	{	sprintf(sInfMsg, "[%s] ", numbers);
-		show_status_node(sInfMsg);
-	}
-
-	if (no_numbers || invisible)
-	{	numbers[0]= EOS;
-	}
-	else
-	{	strcat(numbers, " ");
-	}
-
-	strcpy(current_chapter_name, name);
-	strcpy(current_chapter_nr, numbers);
-
-	do_index= (use_nodes_inside_index && !no_index &&
-					!toc[p2_toc_counter]->ignore_index);	/* r5pl10 */
-
-	switch(desttype)
-	{
-		case TOTEX:
-		case TOPDL:
-			set_inside_node1();
-			if (invisible)
-			{	(use_style_book)	? voutlnf("\n\\chapter*{%s}", name)
-									: voutlnf("\n\\section*{%s}", name);
-			}
-			else
-			{	(use_style_book)	? voutlnf("\n\\chapter{%s}", name)
-									: voutlnf("\n\\section{%s}", name);
-			}
-			label2tex(name);				/*r6pl2*/
-			voutlnf("\\label{%s}", name);	/*r6pl2*/
-			output_aliasses();
-
-			if (desttype==TOPDL)	/*r6pl8*/
-			{
-				voutlnf("\\pdfdest num %d fitbh", p2_lab_counter);
-				voutlnf("\\pdfoutline goto num %d count %d {%s}",
-					p2_lab_counter, toc[p2_toc_counter]->count_n2, name);
-			}
-			break;
-
-		case TOLYX:
-			set_inside_node1();
-			out("\\layout ");
-			if (invisible)
-			{	(use_style_book)	? outln("Chapter")
-									: outln("Section*");
-			}
-			else
-			{	(use_style_book)	? outln("Chapter")
-									: outln("Section");
-			}
-			indent2space(name);
-			outln(name);
-			break;
-
-		case TOINF:
-			set_inside_node1();
-			output_texinfo_node(name);
-			if (bInsideAppendix)
-			{	voutlnf("@appendix %s", name);
-			}
-			else
-			{	(invisible) ? 	(voutlnf("@chapheading %s", name))
-							:	(voutlnf("@chapter %s", name));
-			}
-			break;
-
-		case TOTVH:
-			set_inside_node1();
-			if (numbers[0]!=EOS) strcat(numbers, " ");
-			output_vision_header(numbers, name);
-			break;
-
-		case TOSTG:
-			set_inside_node1();
-			bInsidePopup= popup;
-
-			replace_2at_by_1at(name);
-
-			node2stg(name);
-
-			outln("");
-			if ( !do_index )
-			{	outln("@indexoff");
-			}
-			if (popup)
-			{	voutlnf("@pnode \"%s\"", name);
-			}
-			else
-			{	voutlnf("@node \"%s\"", name);
-			}
-			if ( !do_index )
-			{	outln("@indexon");
-			}
-
-			if (!popup)
-			{	if (called_tableofcontents)
-				{	outln("@toc \"Main\"");
-				}
-			}
-			stg_header(numbers, stgname, popup);
-			break;
-
-		case TOAMG:
-			set_inside_node1();
-
-			replace_2at_by_1at(name);
-
-			node2stg(name);
-
-			outln("");
-			if (titleprogram[0]!=EOS)
-			{	voutlnf("@node \"%s\" \"%s - %s\"", name, titleprogram, name);
-			}
-			else
-			{	voutlnf("@node \"%s\" \"%s\"", name, name);
-			}
-
-			if (called_tableofcontents)
-			{	outln("@toc \"Main\"");
-			}
-			stg_header(numbers, stgname, FALSE);
-			break;
-
-		case TOMAN:
-			set_inside_node1();
-			outln("");
-			my_strupr(name);
-			sprintf(n, " %s%s%s", BOLD_ON, name, BOLD_OFF);
-			c_internal_styles(n);
-			outln(n);
-			break;
-
-		case TONRO:
-			set_inside_node1();
-			my_strupr(name);
-			sprintf(n, ".SH %s", name);
-			c_internal_styles(n);
-			outln(n);
-			break;
-
-		case TOASC:
-			set_inside_node1();
-			outln("");
-			outln("");
-
-			if (use_style_book)
-			{	(bInsideAppendix)	?	sprintf(n, "%s %s", lang.appendix, numbers)
-									:	sprintf(n, "%s %s", lang.chapter, numbers);
-				del_right_spaces(n);
-				output_ascii_line("=", zDocParwidth);
-				outln(n);
-				outln("");
-				outln(name);
-				output_ascii_line("=", zDocParwidth);
-			}
-			else
-			{	if (numbers[0]!=EOS) strcat(numbers, " ");
-				sprintf(n, "%s%s", numbers, name);
-				outln(n);
-				output_ascii_line("*", strlen(n));
-			}
-			outln("");
-			break;
-
-		case TOKPS:
-			set_inside_node1();
-
-			if (use_style_book)
-			{	(bInsideAppendix)	?	sprintf(n, "%s %s", lang.appendix, numbers)
-									:	sprintf(n, "%s %s", lang.chapter, numbers);
-				del_right_spaces(n);
-				if (n[0]!=EOS) strcat(n, " ");
-				strcat(n, name);
-				outln("25 changeFontSize");
-			}
-			else
-			{	if (numbers[0]!=EOS) strcat(numbers, " ");
-				sprintf(n, "%s%s", numbers, name);
-				/* Changed in r6pl16 [NHz] */
-				/* Nodesize ist set on discrete value */
-				voutlnf("%d changeFontSize", laydat.node1size);
-			}
-			node2postscript(name, KPS_NAMEDEST); /* Changed in r6pl16 [NHz] */
-			/* Changed: Fixed bug #0000040 in r6.3pl16 [NHz] */
-			um_strcpy(nodename, n, 511, "make_node TOKPS");
-			node2postscript(nodename, KPS_NODENAME);
-			voutlnf("/NodeName (%s %s) def", lang.chapter, nodename);
-			outln("newline");
-			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
-			outln("Bon");
-			/* Changed in V6.5.5 [NHz] */
-			node2postscript(n, KPS_CONTENT);
-			voutlnf("(%s) udoshow", n);
-			outln("Boff");
-			outln("newline");
-			voutlnf("%d changeFontSize", laydat.propfontsize); /* Changed in r6pl15 [NHz] */
-			break;
-
-		case TODRC:
-			set_inside_node1();
-			outln("%%*");
-			if (p2_toc_counter+1<=p1_toc_counter && toc[p2_toc_counter+1]->toctype==TOC_NODE2)
-			{	voutlnf("%%%% 0, %d, 0, 0, %d, %s", p2_toc_counter+10, iDrcFlags, name);
-			}
-			else
-			{	voutlnf("%%%% 0, 0, 0, 0, %d, %s", iDrcFlags, name);
-			}
-			outln("%%*");
-			outln("");
-			break;
-
-		case TOIPF:
-			set_inside_node1();
-			node2NrIPF(n, toc[p2_toc_counter]->labindex);	/* r6pl2 */
-			map[0]= EOS;
-			if (toc[p2_toc_counter]->mapping>=0)
-			{	sprintf(map, " res=%d", toc[p2_toc_counter]->mapping);
-			}
-			if (bInsideAppendix)
-			{	voutlnf(":h1 id=%s%s.%s %s%s", n, map, lang.appendix, numbers, name);
-			}
-			else
-			{	voutlnf(":h1 id=%s%s.%s%s", n, map, numbers, name);
-			}
-			break;
-
-		case TOSRC:
-		case TOSRP:
-			set_inside_node1();
-			outln("");
-			outln("");
-			memset(n, '#', 62); n[62]= EOS;
-			voutlnf("%s  %s", sSrcRemOn, n);
-			outln("    #");
-			outln("    #");
-			voutlnf("    # %s", name);
-			outln("    #");
-			outln("    #");
-			voutlnf("    %s  %s", n, sSrcRemOff);
-			outln("");
-			break;
-
-		case TORTF:
-			set_inside_node1();
-			if (use_style_book)
-			{	c_newpage();
-			}
-
-			outln(rtf_pardpar);
-
-			/* r6pl6: Indizes fuer RTF */
-			if (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index)
-			{	strcpy(n, name);
-				winspecials2ascii(n);
-				voutf("{\\xe\\v %s}", n);
-			}
-
-			output_aliasses();
-
-			/* New in V6.5.9 [NHz] [bookmark] */
-			um_strcpy(n, name, 512, "make_node[RTF]");
-			winspecials2ascii(n);
-			node2winhelp(n);
-
-			if (use_style_book)
-			{	if (bInsideAppendix)
-				{	if (invisible)
-					{	voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", rtf_inv_chapt, iDocPropfontSize + 28, lang.appendix, numbers, rtf_inv_chapt, iDocPropfontSize + 28, n, name, n);
-					}
-					else
-					{	voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", rtf_inv_chapt, iDocPropfontSize + 28, lang.appendix, numbers, rtf_chapt, iDocPropfontSize + 28, n, name, n);
-					}
-				}
-				else
-				{	if (invisible)
-					{	voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", rtf_inv_chapt, iDocPropfontSize + 28, lang.chapter, numbers, rtf_inv_chapt, iDocPropfontSize + 28, n, name, n);
-					}
-					else
-					{	voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", rtf_inv_chapt, iDocPropfontSize + 28, lang.chapter, numbers, rtf_chapt, iDocPropfontSize + 28, n, name, n);
-					}
-				}
-			}
-			else
-			{
-				if (numbers[0]==EOS)
-				{	if (invisible)
-					{	/* Changed in V6.5.9 [NHz] */
-						/* Nodesize ist set on discrete value */
-						voutlnf("%s %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, rtf_inv_node1, laydat.node1size, n, name, n, rtf_parpard);
-					}
-					else
-					{	/* Changed in V6.5.9 [NHz] */
-						/* Nodesize ist set on discrete value */
-						voutlnf("%s %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, rtf_node1, laydat.node1size, n, name, n, rtf_parpard);
-					}
-				}
-				else
-				{	if (invisible)
-					{	/* Changed in V6.5.9 [NHz] */
-						/* Nodesize ist set on discrete value */
-						voutlnf("%s %s\\fs%d %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, rtf_inv_node1, laydat.node1size, numbers, n, name, n, rtf_parpard);
-					}
-					else
-					{	/* Changed in V6.5.9 [NHz] */
-						/* Nodesize ist set on discrete value */
-						voutlnf("%s %s\\fs%d %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, rtf_node1, laydat.node1size, numbers, n, name, n, rtf_parpard);
-					}
-				}
-			}
-			voutlnf("%s %s\\fs%d %s", rtf_plain, rtf_norm, iDocPropfontSize, rtf_par);
-
-			break;
-
-		case TOWIN:
-		case TOWH4:
-		case TOAQV:
-			set_inside_node1();
-
-			output_win_header(name, invisible);
-			output_aliasses();
-
-			if (use_style_book)
-			{	(bInsideAppendix)	?	sprintf(n, "%s %s\\par %s", lang.appendix, numbers, name)
-									:	sprintf(n, "%s %s\\par %s", lang.chapter, numbers, name);
-			}
-			else
-			{	if (numbers[0]!=EOS) strcat(numbers, "\\~\\~");
-				sprintf(n, "%s%s", numbers, name);
-			}
-			win_headline(n, popup);
-			break;
-
-		case TOPCH:
-			set_inside_node1();
-			if (numbers[0]!=EOS) strcat(numbers, " ");
-			output_pch_header(numbers, name);
-			break;
-
-		case TOHAH:		/* V6.5.17 */
-		case TOHTM:
-		case TOMHH:
-			ti= p2_toc_counter;
-
-			if (!html_merge_node1)
-			{	if (!html_new_file()) return;
-			}
-			else
-			{	output_aliasses();
-				outln(HTML_HR);		/* r5pl6 */
-			}
-			set_inside_node1();
-			flag= FALSE;
-
-			do_toptoc(TOC_NODE1);	/*r6pl5*/
-
-			if (use_chapter_images)
-			{	
-				if (ti>=0 && toc[ti]->image!=NULL)
-				{	sGifSize[0]= EOS;
-					if (toc[ti]->uiImageWidth!=0 && toc[ti]->uiImageHeight!=0)
-					{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"",
-							toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
-					}
-					voutlnf("<h%d><p align=\"center\">", html_nodesize);	/* r5pl4 */
-					voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\"%s />",
-						toc[ti]->image, sDocImgSuffix, numbers, name, numbers, name, sGifSize);
-					voutlnf("</p></h%d>", html_nodesize);				/* r5pl4 */
-					flag= TRUE;
-				}
-			}
-
-			if (!flag && !toc[ti]->ignore_title)
-			{	
-				strcpy(nameNoSty, name);
-				del_html_styles(nameNoSty);
+      output_pch_header(numbers, name);
+      break;
+      
+   case TOHAH:                            /* V6.5.17 */
+   case TOHTM:
+   case TOMHH:
+      ti= p2_toc_counter;
+      
+      if (!html_merge_node1)
+      {
+         if (!html_new_file())
+            return;
+      }
+      else
+      {
+         output_aliasses();
+         
+         if (html_doctype < XHTML_STRICT)
+            outln(HTML_HR);
+         else
+            outln(XHTML_HR);
+      }
+      
+      set_inside_node1();
+      flag = FALSE;
+      
+      do_toptoc(TOC_NODE1);               /*r6pl5*/
+      
+      if (use_chapter_images)
+      {	
+         if (ti >= 0 && toc[ti]->image != NULL)
+         {
+            sGifSize[0] = EOS;
             
-            label2html(nameNoSty);	/*r6pl2*/
-            voutlnf("\n<h%d><a name=\"%s\">%s%s</a></h%d>\n", html_nodesize, nameNoSty, numbers, name, html_nodesize);	/* r5pl4 */
-			}
-			if (show_variable.source_filename) /* V6.5.19 */
-				voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line ); /* V6.5.18 */
+            if (toc[ti]->uiImageWidth != 0 && toc[ti]->uiImageHeight != 0)
+            {
+               sprintf(sGifSize, " width=\"%u\" height=\"%u\"",
+                  toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
+            }
+                                          /* r5pl4 */
+            voutlnf("<h%d><p align=\"center\">", html_nodesize);
+               
+            voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\"%s%s>",
+               toc[ti]->image, sDocImgSuffix, numbers, name, numbers, name, sGifSize, closer);
+                  
+                                          /* r5pl4 */
+            voutlnf("</p></h%d>", html_nodesize);
+            
+            flag = TRUE;
+         }
+      }
+      
+      if (!flag && !toc[ti]->ignore_title)
+      {	
+         strcpy(nameNoSty, name);
+         del_html_styles(nameNoSty);
+      
+         label2html(nameNoSty);           /*r6pl2*/
+         
+                                          /* r5pl4 */
+         voutlnf("\n<h%d><a name=\"%s\">%s%s</a></h%d>\n",
+            html_nodesize, nameNoSty, numbers, name, html_nodesize);
+      }
+      
+      if (show_variable.source_filename)  /* V6.5.19 */
+                                          /* V6.5.18 */
+         voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, 
+            toc[p2_toc_counter]->source_line );
+      
+      break;
+      
+   case TOLDS:
+      set_inside_node1();
 
-			break;
-
-		case TOLDS:
-			set_inside_node1();
-			(use_style_book)	?	voutlnf("<chapter>%s<label id=\"%s\">", name, name)
-								:	voutlnf("<sect>%s<label id=\"%s\">", name, name);
-			output_aliasses();	/* r5pl8 */
-			outln("<p>");
-			break;
-
-		case TOHPH:
-			set_inside_node1();
-			(use_style_book)	?	voutlnf("<chapter>%s", name)
-								:	voutlnf("<s1>%s", name);
-			output_aliasses();
-			break;
-	}
-
+      (use_style_book) ? voutlnf("<chapter>%s<label id=\"%s\">", name, name) : voutlnf("<sect>%s<label id=\"%s\">", name, name);
+      output_aliasses();                  /* r5pl8 */
+      outln("<p>");
+      break;
+   
+   case TOHPH:
+      set_inside_node1();
+      (use_style_book) ? voutlnf("<chapter>%s", name) : voutlnf("<s1>%s", name);
+      output_aliasses();
+   }
+   
 }	/*make_node*/
+
+
+
 
 
 /* r5pl15: Texinfo kennt keine versteckten Kapitel, daher wird bei den	*/
@@ -5297,16 +6057,30 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 			do_toptoc(TOC_NODE2);	/*r6pl5*/
 
 			if (use_chapter_images)
-			{	ti= p2_toc_counter;
+			{
+            char closer[8] = "\0";
+               
+                                          /* no single tag closer in HTML! */
+            if (html_doctype >= XHTML_STRICT)
+               strcpy(closer, " /");
+               
+            ti = p2_toc_counter;
+            
 				if (ti>=0 && toc[ti]->image!=NULL)
-				{	sGifSize[0]= EOS;
+				{
+               sGifSize[0]= EOS;
+               
 					if (toc[ti]->uiImageWidth!=0 && toc[ti]->uiImageHeight!=0)
-					{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"",
+					{
+                  sprintf(sGifSize, " width=\"%u\" height=\"%u\"",
 							toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
 					}
+               
 					voutlnf("%s<p align=\"center\">", hx_start);
-					voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\"%s />",
-						toc[ti]->image, sDocImgSuffix, numbers, name, numbers, name, sGifSize);
+               
+   					voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\"%s%s>",
+	   					toc[ti]->image, sDocImgSuffix, numbers, name, numbers, name, sGifSize, closer);
+               
 					voutlnf("</p>%s", hx_end);
 					flag= TRUE;
 				}
@@ -5761,16 +6535,28 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 
 			if (use_chapter_images)
 			{
+            char closer[8] = "\0";
+               
+                                          /* no single tag closer in HTML! */
+            if (html_doctype >= XHTML_STRICT)
+               strcpy(closer, " /");
+               
 				ti= p2_toc_counter;
 				if (ti>=0 && toc[ti]->image!=NULL)
-				{	sGifSize[0]= EOS;
+				{
+            	sGifSize[0]= EOS;
+               
 					if (toc[ti]->uiImageWidth!=0 && toc[ti]->uiImageHeight!=0)
-					{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"",
+					{
+               	sprintf(sGifSize, " width=\"%u\" height=\"%u\"",
 							toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
 					}
+               
 					voutlnf("%s<p align=\"center\">", hx_start);
-					voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\"%s />",
-						toc[ti]->image, sDocImgSuffix, numbers, name, numbers, name, sGifSize);
+               
+					voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\"%s%s>",
+						toc[ti]->image, sDocImgSuffix, numbers, name, numbers, name, sGifSize, closer);
+               
 					voutlnf("</p>%s", hx_end);
 					flag= TRUE;
 				}
@@ -6223,18 +7009,31 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 
 			if (use_chapter_images)
 			{
-				ti= p2_toc_counter;
-				if (ti>=0 && toc[ti]->image!=NULL)
-				{	sGifSize[0]= EOS;
+            char closer[8] = "\0";
+               
+                                          /* no single tag closer in HTML! */
+            if (html_doctype >= XHTML_STRICT)
+               strcpy(closer, " /");
+               
+				ti = p2_toc_counter;
+            
+				if (ti >= 0 && toc[ti]->image != NULL)
+				{
+            	sGifSize[0] = EOS;
+               
 					if (toc[ti]->uiImageWidth!=0 && toc[ti]->uiImageHeight!=0)
-					{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"",
+					{
+               	sprintf(sGifSize, " width=\"%u\" height=\"%u\"",
 							toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
 					}
+               
 					voutlnf("%s<p align=\"center\">", hx_start);
-					voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\" %s />",
-						toc[ti]->image, sDocImgSuffix, numbers, name, numbers, name, sGifSize);
+               
+					voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\" %s%s>",
+						toc[ti]->image, sDocImgSuffix, numbers, name, numbers, name, sGifSize, closer);
+               
 					voutlnf("</p>%s", hx_end);
-					flag= TRUE;
+					flag = TRUE;
 				}
 			}
 
@@ -6714,395 +7513,529 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 
 
 /* New in r6pl16 [NHz] */
-LOCAL void toc_link_output ( const int depth )
+/*******************************************************************************
+*
+*  toc_link_output():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void toc_link_output(
+
+const int         depth)                /* */
 {
-	register int i;
-	char	*htmlfilename, hfn[512], suff[12], sTarget[512]="\0";
+   register int   i;                    /* */
+   char          *htmlfilename,         /* */
+                  hfn[512],             /* */
+                  suff[12],             /* */
+                  sTarget[512] = "\0";  /* */
+   char           closer[8] = "\0";     /* single tag closer mark in XHTML */
 
-	if (html_frames_layout)
-	{	sprintf(sTarget, " target=\"UDOcon\"");
-	}
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   if (html_frames_layout)
+      sprintf(sTarget, " target=\"UDOcon\"");
+   
+   if (p1_toc_counter <= 0)
+      return;
+   
+   for (i = 1; i <= p1_toc_counter; i++)
+   {
+      if (toc[i] != NULL && !toc[i]->invisible)
+      {
+         convert_toc_item(toc[i]);
+         
+         if (toc[i]->n1 != 0)
+         {
+            switch (depth)
+            {
+            case 1:                       /* node */
+               if ( (toc[i]->toctype == TOC_NODE1) && !(toc[i]->appendix) )
+               {                          /* Ein Kapitel */	
+                  sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
+                  htmlfilename = hfn;
+   
+                  /* Feststellen, ob die Referenz im gleichen File liegt */
+                  if ((html_merge_node1 == FALSE) && (strcmp(htmlfilename, outfile.name) != 0))
+                  {
+                     if (strchr(htmlfilename, '.') != NULL)
+                        strcpy(suff, "");
+                     else
+                        strcpy(suff, outfile.suff);
+   
+                     if (no_numbers)      /* Fixed bug #0000044 [NHz] */
+                     {
+                        voutlnf("<link rel=\"chapter\" href=\"%s%s\"%s title=\"%s\"%s>", 
+                           htmlfilename, suff, sTarget, toc[i]->name, closer);
+                     }
+                     else
+                     {
+                        voutlnf("<link rel=\"chapter\" href=\"%s%s\"%s title=\"%d %s\"%s>", 
+                           htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->name, closer);
+                     }
+                  }
+                  
+               }  /* TOC_NODE1 */
+               
+               break;
+   
+            case 2:
+               if (toc[i]->toctype == TOC_NODE2)
+               {                          /* subnode */	
+               
+               /* Changed in r6.2pl1 [NHz]; I'm not sure, if this makes sense, but it doesn't disturb */
+                  if (    (toc[toc[i]->up_n1_index]->nr1 + toc_offset == toc[last_n1_index]->nr1 + toc_offset) 
+                       &&     (toc[i]->up_n1_index == last_n1_index)
+                     )
+                  {
+                     sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
+                     htmlfilename = hfn;
+                  
+                     /* Feststellen, ob die Referenz im gleichen File liegt */
+                     if ((html_merge_node2 == FALSE) && (strcmp(htmlfilename, outfile.name) != 0))
+                     {
+                        if (strchr(htmlfilename, '.') != NULL)
+                           strcpy(suff, "");
+                        else
+                           strcpy(suff, outfile.suff);
+                  
+                        if (no_numbers)      /* Fixed bug #0000044 [NHz] */
+                        {
+                           voutlnf("<link rel=\"section\" href=\"%s%s\"%s title=\"%s\"%s>", 
+                              htmlfilename, suff, sTarget, toc[i]->name, closer);
+                        }
+                        else
+                        {
+                           voutlnf("<link rel=\"section\" href=\"%s%s\"%s title=\"%d.%d %s\"%s>",
+                              htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->nr2+subtoc_offset, 
+                              toc[i]->name, closer); 
+                        }
+                     }
+                  }
+                  
+               }  /* TOC_NODE2 */
+               
+               break;
+               
+            case 3:
+               if (toc[i]->toctype == TOC_NODE3)
+               {                          /* a subsubnode */	
+               
+                  /* Changed in r6.2pl1 [NHz] */
+                  if (   (toc[toc[i]->up_n2_index]->nr2 + subtoc_offset == toc[last_n2_index]->nr2 + subtoc_offset)
+                       &&    (toc[i]->up_n2_index == last_n2_index)
+                     )
+                  {
+                     sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
+                     htmlfilename = hfn;
+                     
+                     /* Feststellen, ob die Referenz im gleichen File liegt */
+                     if ( (html_merge_node3 == FALSE) && (strcmp(htmlfilename, outfile.name) != 0) )
+                     {
+                        if (strchr(htmlfilename, '.') != NULL)
+                           strcpy(suff, "");
+                        else
+                           strcpy(suff, outfile.suff);
+                     
+                        if (no_numbers)   /* Fixed bug #0000044 [NHz] */
+                        {
+                           voutlnf("<link rel=\"subsection\" href=\"%s%s\"%s title=\"%s\"%s>", 
+                              htmlfilename, suff, sTarget, toc[i]->name, closer);
+                        }
+                        else
+                        {
+                        voutlnf("<link rel=\"subsection\" href=\"%s%s\"%s title=\"%d.%d.%d %s\"%s>", 
+                           htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->nr2+subtoc_offset, 
+                           toc[i]->nr3+subsubtoc_offset, toc[i]->name, closer);
+                        }
+                     }
+                  }
+                  
+               }  /* TOC_NODE3 */
+               
+               break;
+               
+            case 4:
+               if ( (toc[i]->toctype == TOC_NODE1) && (toc[i]->appendix) )
+               {                          /* a subsubsubnode */	
+               
+                  sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
+                  htmlfilename = hfn;
+               
+                  /* Feststellen, ob die Referenz im gleichen File liegt */
+                  if ( (html_merge_node1 == FALSE) && (strcmp(htmlfilename, outfile.name) != 0) )
+                  {
+                     if (strchr(htmlfilename, '.') != NULL)
+                        strcpy(suff, "");
+                     else
+                        strcpy(suff, outfile.suff);
+                  
+                     if (no_numbers)      /* Fixed bug #0000044 [NHz] */
+                     {
+                        voutlnf("<link rel=\"appendix\" href=\"%s%s\"%s title=\"%s\"%s>", 
+                           htmlfilename, suff, sTarget, toc[i]->name, closer);
+                     }
+                     else
+                     {
+                        voutlnf("<link rel=\"appendix\" href=\"%s%s\"%s title=\"%c %s\"%s>", 
+                           htmlfilename, suff, sTarget, 'A'-1+toc[i]->nr1, toc[i]->name, closer);
+                     }
+                  }
+                  
+               }  /* TOC_NODE1 */
 
-	if (p1_toc_counter<=0)
-	{	return;
-	}
-
-	for (i=1; i<=p1_toc_counter; i++)
-	{
-		if (toc[i]!=NULL && !toc[i]->invisible)
-		{
-			convert_toc_item(toc[i]);
-
-			if ( toc[i]->n1 != 0 )
-			{
-				switch (depth)
-				{
-					case 1:
-						if (( toc[i]->toctype==TOC_NODE1 ) && !(toc[i]->appendix ))
-						{	/* Ein Kapitel */	
-
-							sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
-							htmlfilename= hfn;
-
-							/* Feststellen, ob die Referenz im gleichen File liegt */
-							if ((html_merge_node1==FALSE) && (strcmp(htmlfilename, outfile.name)!=0))
-							{
-								if(strchr(htmlfilename, '.') != NULL)
-									strcpy(suff, "");
-								else
-									strcpy(suff, outfile.suff);
-
-								if(no_numbers) /* Fixed bug #0000044 [NHz] */
-									voutlnf("<link rel=\"chapter\" href=\"%s%s\"%s title=\"%s\" />", htmlfilename, suff, sTarget, toc[i]->name);
-								else
-									voutlnf("<link rel=\"chapter\" href=\"%s%s\"%s title=\"%d %s\" />", htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->name);
-							}
-						}/* TOC_NODE1 */
-						break;
-
-					case 2:
-						if ( toc[i]->toctype==TOC_NODE2 )
-						{	/* Ein Unterkapitel */	
-
-							/* Changed in r6.2pl1 [NHz]; I'm not sure, if this makes sense, but it doesn't disturb */
-							if((toc[toc[i]->up_n1_index]->nr1+toc_offset == toc[last_n1_index]->nr1+toc_offset) &&
-									(toc[i]->up_n1_index == last_n1_index))
-							{
-								sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
-								htmlfilename= hfn;
-
-								/* Feststellen, ob die Referenz im gleichen File liegt */
-								if ((html_merge_node2==FALSE) && (strcmp(htmlfilename, outfile.name)!=0))
-								{
-									if(strchr(htmlfilename, '.') != NULL)
-										strcpy(suff, "");
-									else
-										strcpy(suff, outfile.suff);
-
-									if(no_numbers) /* Fixed bug #0000044 [NHz] */
-										voutlnf("<link rel=\"section\" href=\"%s%s\"%s title=\"%s\" />", htmlfilename, suff, sTarget, toc[i]->name);
-									else
-										voutlnf("<link rel=\"section\" href=\"%s%s\"%s title=\"%d.%d %s\" />", htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->nr2+subtoc_offset, toc[i]->name);
-								}
-							}
-						}/* TOC_NODE2 */
-						break;
-
-					case 3:
-						if ( toc[i]->toctype==TOC_NODE3 )
-						{	/* Ein Unterunterkapitel */	
-
-							/* Changed in r6.2pl1 [NHz] */
-							if((toc[toc[i]->up_n2_index]->nr2+subtoc_offset == toc[last_n2_index]->nr2+subtoc_offset) &&
-									(toc[i]->up_n2_index == last_n2_index))
-							{
-								sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
-								htmlfilename= hfn;
-
-								/* Feststellen, ob die Referenz im gleichen File liegt */
-								if ((html_merge_node3==FALSE) && (strcmp(htmlfilename, outfile.name)!=0))
-								{
-									if(strchr(htmlfilename, '.') != NULL)
-										strcpy(suff, "");
-									else
-										strcpy(suff, outfile.suff);
-
-									if(no_numbers) /* Fixed bug #0000044 [NHz] */
-										voutlnf("<link rel=\"subsection\" href=\"%s%s\"%s title=\"%s\" />", htmlfilename, suff, sTarget, toc[i]->name);
-									else
-										voutlnf("<link rel=\"subsection\" href=\"%s%s\"%s title=\"%d.%d.%d %s\" />", htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->nr2+subtoc_offset, toc[i]->nr3+subsubtoc_offset, toc[i]->name);
-								}
-							}
-						}/* TOC_NODE3 */
-						break;
-
-					case 4:
-						if (( toc[i]->toctype==TOC_NODE1 ) && ( toc[i]->appendix ))
-						{	/* Ein Unterunterunterkapitel */	
-
-							sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
-							htmlfilename= hfn;
-
-							/* Feststellen, ob die Referenz im gleichen File liegt */
-							if ((html_merge_node1==FALSE) && (strcmp(htmlfilename, outfile.name)!=0))
-							{
-								if(strchr(htmlfilename, '.') != NULL)
-									strcpy(suff, "");
-								else
-									strcpy(suff, outfile.suff);
-
-								if(no_numbers) /* Fixed bug #0000044 [NHz] */
-									voutlnf("<link rel=\"appendix\" href=\"%s%s\"%s title=\"%s\" />", htmlfilename, suff, sTarget, toc[i]->name);
-								else
-									voutlnf("<link rel=\"appendix\" href=\"%s%s\"%s title=\"%c %s\" />", htmlfilename, suff, sTarget, 'A'-1+toc[i]->nr1, toc[i]->name);
-							}
-						}/* TOC_NODE1 */
-						break;
-
-				}/* switch */
-
-			}/* toc[i]->n1 > 0 */
-
-		}/* toc[i]!=NULL && !toc[i]->invisible */
-
-	}/* for */
+            } /* switch */
+         
+         } /* toc[i]->n1 > 0 */
+      
+      } /* toc[i]!=NULL && !toc[i]->invisible */
+   
+   }/* for */
 
 }	/* toc_link_output */
 
 
-LOCAL void toc_output ( const int depth )
+
+
+
+/*******************************************************************************
+*
+*  toc_output():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void toc_output(
+
+const int         depth)              /* */
 {
-	register int i;
-	int li;
-	char	n[512], ref[512];
-	BOOLEAN	leerzeile= FALSE;
-	BOOLEAN last_n= TRUE;
-	BOOLEAN last_sn= FALSE;
-	BOOLEAN last_ssn= FALSE;
-	BOOLEAN last_sssn= FALSE;
-	BOOLEAN	first= TRUE;
-	BOOLEAN old;
+   register int   i;                  /* */
+   int            li;                 /* */
+   char	         n[512],             /* */
+                  ref[512];           /* */
+   BOOLEAN        leerzeile = FALSE;  /* */
+   BOOLEAN        last_n = TRUE;      /* */
+   BOOLEAN        last_sn = FALSE;    /* */
+   BOOLEAN        last_ssn = FALSE;   /* */
+   BOOLEAN        last_sssn = FALSE;  /* */
+   BOOLEAN        first = TRUE;       /* */
+   BOOLEAN        old;                /* */
+   char           closer[8] = "\0";   /* single tag closer mark in XHTML */
 
-	if (desttype==TOLYX)
-	{	return;
-	}
+   
+   if (desttype == TOLYX)
+      return;
+   
+   if (p1_toc_counter <= 0)
+      return;
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   old = bDocAutorefOff;
+   bDocAutorefOff = FALSE;
+   
+   for (i = 1; i <= p1_toc_counter; i++)
+   {
+      if (toc[i] != NULL && !toc[i]->invisible)
+      {
+         convert_toc_item(toc[i]);
+   
+         if (toc[i]->appendix)
+         {
+            break;                        /* r5pl6: Es kann nur einen Anhang geben */
+         }
+         else
+         {
+            if (toc[i]->n1 != 0)
+            {
+               if (toc[i]->toctype == TOC_NODE1)
+               {                          /* Ein Kapitel */	
+   
+                  if ( (leerzeile) && (depth > 1) )
+                  {
+                     switch (desttype)
+                     {
+                     case TOWIN:
+                     case TOWH4:
+                     case TOAQV:
+                        outln(rtf_par);
+                        break;
+                        
+                     case TOHAH:             /* V6.5.17 */
+                     case TOHTM:
+                     case TOMHH:
+                        voutlnf("<br%s", closer);
+                        break;
+                        
+                     case TOTEX:
+                     case TOPDL:
+                        break;
+                        
+                     default:
+                        outln("");
+                     }
+                     
+   /*                leerzeile = FALSE;
+   */
+                  }
+                  
+                  if (use_toc_list_commands) /* r6pl2: vorher: desttype==TOHTM */
+                  {
+                     if (last_sn)
+                     {
+                        outln(toc_list_end);
+                        last_sn = FALSE;
+                     }
+                     
+                     if (last_ssn)
+                     {
+                        voutlnf("%s%s", toc_list_end, toc_list_end);
+                        last_ssn = FALSE;
+                     }
+                     
+                     if (last_sssn)
+                     {
+                        voutlnf("%s%s%s", toc_list_end, toc_list_end, toc_list_end);
+                        last_sssn = FALSE;
+                     }
+                     
+                     last_n = TRUE;
+                  }
+                  
+                  li = toc[i]->labindex;
+                  string2reference(ref, lab[li], TRUE, "", 0, 0);
+                  
+                  if (no_numbers)
+                  {
+                     sprintf(n, form_t1_n1, ref);
+                  }
+                  else
+                  {
+                     sprintf(n, form_t1_n1, toc[i]->nr1 + toc_offset, ref);
+                  }
+                  
+                  tocline_make_bold(n, depth);
+                  
+                  tocline_handle_1st(&first);
+                  
+                  outln(n);
+                  leerzeile = TRUE;
+                  
+               }  /* TOC_NODE1 */
+      
+               if (depth > 1)
+               {
+                  if (toc[i]->toctype == TOC_NODE2)
+                  {                          /* Ein Abschnitt */
+                     if (use_toc_list_commands)	/*r6pl2: vorher desttype==TOHTM */
+                     {
+                        if (last_n)
+                        {
+                           outln(toc_list_top);
+                           last_n = FALSE;
+                        }
+                        
+                        if (last_ssn)
+                        {
+                           outln(toc_list_end);
+                           last_ssn = FALSE;
+                        }
+                        
+                        if (last_sssn)
+                        {
+                           voutlnf("%s%s", toc_list_end, toc_list_end);
+                           last_sssn = FALSE;
+                        }
+                        
+                        last_sn = TRUE;
+                     }
+                  
+                     li = toc[i]->labindex;
+                     string2reference(ref, lab[li], TRUE, "", 0, 0);
+                  
+                     if (no_numbers)
+                     {
+                        sprintf(n, form_t1_n2, ref);
+                     }
+                     else
+                     {
+                        sprintf(n, form_t1_n2, 
+                           toc[i]->nr1 + toc_offset,
+                           toc[i]->nr2 + subtoc_offset, ref);
+                     }
+                  
+                     tocline_handle_1st(&first);
+                  
+                     outln(n);
+                     
+                  }  /* TOC_NODE2 */
+                  
+               }  /* depth > 1 */
+      
+               if (depth > 2)
+               {
+                  if (toc[i]->toctype == TOC_NODE3)
+                  {                          /* Ein Unterabschnitt */
+                     if (use_toc_list_commands)	/* r6pl2: vorher: desttype==TOHTM */
+                     {
+                        if (last_n)
+                        {
+                           voutlnf("%s%s", toc_list_top, toc_list_top);
+                           last_n = FALSE;
+                        }
+                        
+                        if (last_sn)
+                        {
+                           outln(toc_list_top);
+                           last_sn = FALSE;
+                        }
+                        
+                        if (last_sssn)
+                        {
+                           outln(toc_list_end);
+                           last_sssn = FALSE;
+                        }
+                        
+                        last_ssn = TRUE;
+                     }
+                        
+                     li = toc[i]->labindex;
+                     string2reference(ref, lab[li], TRUE, "", 0, 0);
+                     
+                     if (no_numbers)
+                     {
+                        sprintf(n, form_t1_n3, ref);
+                     }
+                     else
+                     {
+                        sprintf(n, form_t1_n3, toc[i]->nr1 + toc_offset,
+                           toc[i]->nr2 + subtoc_offset,
+                           toc[i]->nr3 + subsubtoc_offset, ref);
+                     }
+                     
+                     tocline_handle_1st(&first);
+                     
+                     outln(n);
+                     
+                  }  /* TOC_NODE3 */
+                  
+               }  /* depth>2 */
+      
+               if (depth>3)
+               {
+                  if (toc[i]->toctype == TOC_NODE4)
+                  {                          /* Ein Paragraph */
+                     if (use_toc_list_commands)	/* r6pl2: vorher: desttype==TOHTM */
+                     {
+                        if (last_n)
+                        {
+                           voutlnf("%s%s%s", toc_list_top, toc_list_top, toc_list_top);
+                           last_n = FALSE;
+                        }
+                        
+                        if (last_sn)
+                        {
+                           voutlnf("%s%s", toc_list_top, toc_list_top);
+                           last_sn = FALSE;
+                        }
+                        
+                        if (last_ssn)
+                        {
+                           outln(toc_list_top);
+                           last_ssn = FALSE;
+                        }
+                        
+                        last_sssn= TRUE;
+                     }
+                  
+                     li = toc[i]->labindex;
+                     string2reference(ref, lab[li], TRUE, "", 0, 0);
+                     
+                     if (no_numbers)
+                     {
+                        sprintf(n, form_t1_n4, ref);
+                     }
+                     else
+                     {
+                        sprintf(n, form_t1_n4,
+                           toc[i]->nr1 + toc_offset,
+                           toc[i]->nr2 + subtoc_offset,
+                           toc[i]->nr3 + subsubtoc_offset,
+                           toc[i]->nr4 + subsubsubtoc_offset,
+                           ref);
+                     }
+               
+                     tocline_handle_1st(&first);
+                  
+                     outln(n);
+               
+                  }  /* TOC_NODE4 */
+            
+               }  /* if (depth > 3) */
+         
+            }  /* toc[i]->n1 > 0 */
+   
+         }  /* !toc[i]->appendix */
+     
+      }  /* toc[i] != NULL && !toc[i]->invisible */
+   
+   }  /* for */
+   
+   switch (desttype)
+   {
+   case TOHAH:                            /* V6.5.17 */
+   case TOHTM:
+   case TOMHH:
+   case TOTEX:
+   case TOPDL:
+      if (last_sn)
+         outln(toc_list_end);
+         
+      if (last_ssn)
+         voutlnf("%s%s", toc_list_end, toc_list_end);
+         
+      if (last_sssn)
+         voutlnf("%s%s%s", toc_list_end, toc_list_end, toc_list_end);
+      
+      outln(toc_list_end);
+      break;
+      
+   case TOWIN:
+   case TOWH4:
+   case TOAQV:
+      outln("\\par ");
+      break;
+      
+   case TOINF:
+      if (!apx_available && !no_index && bCalledIndex && use_udo_index)
+      {
+         outln("");
+         voutlnf("* %s::", lang.index);
+      }
+      
+      outln("@end menu");
+      break;
+      
+   case TOSTG:
+   case TOAMG:
+      if (!apx_available)
+      {
+         outln("");
+      }
+   }
+   
+   bDocAutorefOff = old;
 
-	if (p1_toc_counter<=0)
-	{	return;
-	}
-
-	old= bDocAutorefOff;
-	bDocAutorefOff= FALSE;
-
-	for (i=1; i<=p1_toc_counter; i++)
-	{
-		if (toc[i]!=NULL && !toc[i]->invisible)
-		{
-			convert_toc_item(toc[i]);
-
-			if ( toc[i]->appendix )
-			{	break;	/* r5pl6: Es kann nur einen Anhang geben */
-			}
-			else
-			{	if ( toc[i]->n1 != 0 )
-				{
-					if ( toc[i]->toctype==TOC_NODE1 )
-					{	/* Ein Kapitel */	
-
-						if ( (leerzeile) && (depth>1) )
-						{	switch(desttype)
-							{	case TOWIN:
-								case TOWH4:
-								case TOAQV:	outln(rtf_par);	break;
-								case TOHAH: /* V6.5.17 */
-								case TOHTM:
-								case TOMHH:
-/*                        	outln("<br />&nbsp;");	break; */
-                        	outln("<br />");	break;
-								case TOTEX:
-								case TOPDL:	break;
-								default:	outln(""); break;
-							}
-							/* leerzeile= FALSE; */
-						}
-
-						if (use_toc_list_commands)	/* r6pl2: vorher: desttype==TOHTM */
-						{	if (last_sn)
-							{	outln(toc_list_end);
-								last_sn= FALSE;
-							}
-							if (last_ssn)
-							{	voutlnf("%s%s", toc_list_end, toc_list_end);
-								last_ssn= FALSE;
-							}
-							if (last_sssn)
-							{	voutlnf("%s%s%s", toc_list_end, toc_list_end, toc_list_end);
-								last_sssn= FALSE;
-							}
-							last_n= TRUE;
-						}
-
-						li= toc[i]->labindex;
-						string2reference(ref, lab[li], TRUE, "", 0, 0);
-
-						if (no_numbers)
-						{	sprintf(n, form_t1_n1, ref);
-						}
-						else
-						{	sprintf(n, form_t1_n1, toc[i]->nr1+toc_offset, ref);
-						}
-
-						tocline_make_bold(n, depth);
-
-						tocline_handle_1st(&first);
-
-						outln(n);
-						leerzeile= TRUE;
-					}/* TOC_NODE1 */
-
-
-					if (depth>1)
-					{
-						if ( toc[i]->toctype==TOC_NODE2 )
-						{	/* Ein Abschnitt */
-							if (use_toc_list_commands)	/*r6pl2: vorher desttype==TOHTM */
-							{	if (last_n)
-								{	outln(toc_list_top);
-									last_n= FALSE;
-								}
-								if (last_ssn)
-								{	outln(toc_list_end);
-									last_ssn= FALSE;
-								}
-								if (last_sssn)
-								{	voutlnf("%s%s", toc_list_end, toc_list_end);
-									last_sssn= FALSE;
-								}
-								last_sn= TRUE;
-							}
-
-							li= toc[i]->labindex;
-							string2reference(ref, lab[li], TRUE, "", 0, 0);
-
-							if (no_numbers)
-							{	sprintf(n, form_t1_n2, ref);
-							}
-							else
-							{	sprintf(n, form_t1_n2, toc[i]->nr1+toc_offset,
-														toc[i]->nr2+subtoc_offset, ref);
-							}
-
-							tocline_handle_1st(&first);
-
-							outln(n);
-						}/* TOC_NODE2 */
-					}	/* depth>1 */
-
-					if (depth>2)
-					{
-						if ( toc[i]->toctype==TOC_NODE3 )
-						{	/* Ein Unterabschnitt */
-							if (use_toc_list_commands)	/* r6pl2: vorher: desttype==TOHTM */
-							{	if (last_n)
-								{	voutlnf("%s%s", toc_list_top, toc_list_top);
-									last_n= FALSE;
-								}
-								if (last_sn)
-								{	outln(toc_list_top);
-									last_sn= FALSE;
-								}
-								if (last_sssn)
-								{	outln(toc_list_end);
-									last_sssn= FALSE;
-								}
-								last_ssn= TRUE;
-							}
-
-							li= toc[i]->labindex;
-							string2reference(ref, lab[li], TRUE, "", 0, 0);
-
-							if (no_numbers)
-							{	sprintf(n, form_t1_n3, ref);
-							}
-							else
-							{	sprintf(n, form_t1_n3, toc[i]->nr1+toc_offset,
-														toc[i]->nr2+subtoc_offset,
-														toc[i]->nr3+subsubtoc_offset, ref);
-							}
-
-							tocline_handle_1st(&first);
-
-							outln(n);
-
-						}/* TOC_NODE3 */
-					}	/* depth>2 */
-
-
-					if (depth>3)
-					{
-						if ( toc[i]->toctype==TOC_NODE4 )
-						{	/* Ein Paragraph */
-							if (use_toc_list_commands)	/* r6pl2: vorher: desttype==TOHTM */
-							{	if (last_n)
-								{	voutlnf("%s%s%s", toc_list_top, toc_list_top, toc_list_top);
-									last_n= FALSE;
-								}
-								if (last_sn)
-								{	voutlnf("%s%s", toc_list_top, toc_list_top);
-									last_sn= FALSE;
-								}
-								if (last_ssn)
-								{	outln(toc_list_top);
-									last_ssn= FALSE;
-								}
-								last_sssn= TRUE;
-							}
-
-							li= toc[i]->labindex;
-							string2reference(ref, lab[li], TRUE, "", 0, 0);
-
-							if (no_numbers)
-							{	sprintf(n, form_t1_n4, ref);
-							}
-							else
-							{	sprintf(n, form_t1_n4,
-									toc[i]->nr1+toc_offset,
-									toc[i]->nr2+subtoc_offset,
-									toc[i]->nr3+subsubtoc_offset,
-									toc[i]->nr4+subsubsubtoc_offset,
-									ref);
-							}
-
-							tocline_handle_1st(&first);
-
-							outln(n);
-
-						}/* TOC_NODE4 */
-
-					}/* if (depth>3) */
-
-				}/* toc[i]->n1 > 0 */
-
-			}/* !toc[i]->appendix */
-
-		}/* toc[i]!=NULL && !toc[i]->invisible */
-
-	}/* for */
-
-	switch (desttype)
-	{
-		case TOHAH: /* V6.5.17 */
-		case TOHTM:
-		case TOMHH:
-		case TOTEX:
-		case TOPDL:
-			if (last_sn)	outln(toc_list_end);
-			if (last_ssn)	voutlnf("%s%s", toc_list_end, toc_list_end);
-			if (last_sssn)	voutlnf("%s%s%s", toc_list_end, toc_list_end, toc_list_end);
-			outln(toc_list_end);
-			break;
-		case TOWIN:
-		case TOWH4:
-		case TOAQV:
-			outln("\\par ");
-			break;
-		case TOINF:
-			if (!apx_available && !no_index && bCalledIndex && use_udo_index)
-			{	outln("");
-				voutlnf("* %s::", lang.index);
-			}
-			outln("@end menu");
-			break;
-		case TOSTG:
-		case TOAMG:
-			if (!apx_available)
-			{	outln("");
-			}
-			break;
-	}
-
-	bDocAutorefOff= old;	
-}	/* toc_output */
+}  /* toc_output */
 
 
 
@@ -7151,16 +8084,30 @@ LOCAL void apx_output ( const int depth )
 					{	/* Ein Kapitel */
 
 						if ( (leerzeile) && (depth>1) )
-						{	switch(desttype)
-							{	case TOHAH: /* V6.5.17 */
-								case TOHTM:
-								case TOMHH:	outln("<br />&nbsp;");	break;
-								case TOWIN:
-								case TOWH4:
-								case TOAQV:	outln(rtf_par);	break;
-								case TOTEX:
-								case TOPDL:	break;
-								default:	outln(""); break;
+						{	
+                     switch(desttype)
+							{
+                     case TOHAH: /* V6.5.17 */
+                     case TOHTM:
+                     case TOMHH:
+                        if (html_doctype < XHTML_STRICT)
+                           outln("<br>");
+                        else
+                           outln("<br />&nbsp;");
+                        break;
+                     
+                     case TOWIN:
+                     case TOWH4:
+                     case TOAQV:
+                        outln(rtf_par);
+                        break;
+                     
+                     case TOTEX:
+                     case TOPDL:
+                        break;
+                     
+                     default:
+                        outln("");
 							}
 							/* leerzeile= FALSE; */
 						}
@@ -7508,8 +8455,14 @@ LOCAL void subtoc_output ( const int depth )
 				{	outln(toc_list_end);
 				}
 				outln(toc_list_end);
-				outln(HTML_BR);
+            
+            if (html_doctype < XHTML_STRICT)
+   				outln(HTML_BR);
+            else
+   				outln(XHTML_BR);
+            
 				break;
+            
 			case TOTEX:
 			case TOPDL:
 				if (last_sssn)
@@ -7700,8 +8653,14 @@ LOCAL void subapx_output ( const int depth )
 				{	voutlnf("%s%s", toc_list_end, toc_list_end);
 				}
 				outln(toc_list_end);
-				outln(HTML_BR);
+            
+            if (html_doctype < XHTML_STRICT)
+   				outln(HTML_BR);
+            else
+   				outln(XHTML_BR);
+            
 				break;
+            
 			case TOTEX:
 			case TOPDL:
 				if (last_ssn)
@@ -7863,8 +8822,14 @@ LOCAL void subsubtoc_output ( const int depth )
 			case TOMHH:
 				if (last_sssn)	outln(toc_list_end);
 				outln(toc_list_end);
-				outln(HTML_BR);
+            
+            if (html_doctype < XHTML_STRICT)
+   				outln(HTML_BR);
+            else
+   				outln(XHTML_BR);
+            
 				break;
+         
 			case TOTEX:
 			case TOPDL:
 				if (last_sssn)	outln(toc_list_end);
@@ -8015,8 +8980,13 @@ LOCAL void subsubapx_output ( const int depth )
 			case TOMHH:
 				if (last_sssn)	outln(toc_list_end);
 				outln(toc_list_end);
-				outln(HTML_BR);
+            
+            if (html_doctype < XHTML_STRICT)
+   				outln(HTML_BR);
+            else
+   				outln(XHTML_BR);
 				break;
+         
 			case TOTEX:
 			case TOPDL:
 				if (last_sssn)	outln(toc_list_end);
@@ -8142,7 +9112,12 @@ LOCAL void subsubsubtoc_output ( void )
 			case TOHTM:
 			case TOMHH:
 				outln(toc_list_end);
-				outln(HTML_BR);
+            
+            if (html_doctype < XHTML_STRICT)
+   				outln(HTML_BR);
+            else
+   				outln(XHTML_BR);
+            
 				break;
 			case TOTEX:
 			case TOPDL:
@@ -8264,8 +9239,14 @@ LOCAL void subsubsubapx_output ( void )
 			case TOHTM:
 			case TOMHH:
 				outln(toc_list_end);
-				outln(HTML_BR);
+            
+            if (html_doctype < XHTML_STRICT)
+   				outln(HTML_BR);
+            else
+   				outln(XHTML_BR);
+            
 				break;
+            
 			case TOTEX:
 			case TOPDL:
 				outln(toc_list_end);
@@ -8349,15 +9330,19 @@ LOCAL void do_subsubsubtoc ( void )
 
 LOCAL void do_toptoc(
 
-const int    currdepth)                   /* current node depth */
+const int    currdepth)                 /* current node depth */
 {
-   char      s[512],                      /* */
-             sIndent[512],                /* */
-             sTarget[64],                 /* */
-             sFile[64];                   /* */
-   char      sSmartSep[64] = " &gt; ";    /* default separator string */
-   
+   char      s[512],                    /* */
+             sIndent[512],              /* */
+             sTarget[64],               /* */
+             sFile[64];                 /* */
+   char      sSmartSep[64] = " &gt; ";  /* default separator string */
+   char      closer[8] = "\0";          /* single tag closer mark in XHTML */
 
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
    if (html_navigation_separator[0] != 0) /* check if valid userdef separator exists */
    {
       strcpy(sSmartSep, " ");             /* overwrite local default */
@@ -8384,7 +9369,7 @@ const int    currdepth)                   /* current node depth */
    
    switch (desttype)
    {
-   case TOHAH: /* V6.5.17 */
+   case TOHAH:                            /* V6.5.17 */
    case TOHTM:
    case TOMHH:
       if (no_images || no_auto_toptocs_icons)
@@ -8393,7 +9378,7 @@ const int    currdepth)                   /* current node depth */
       }
       else
       {
-         sprintf(sIndent, "<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\" />", GIF_FS_NAME, uiGifFsWidth, uiGifFsHeight);
+         sprintf(sIndent, "<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>", GIF_FS_NAME, uiGifFsWidth, uiGifFsHeight, closer);
       }
    
       if (html_frames_layout)
@@ -8434,24 +9419,27 @@ const int    currdepth)                   /* current node depth */
                if (html_navigation_image_fspec[0] != 0)
                {
                                           /* don't close the nav line already! */
-                  voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\" />&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
-                        html_navigation_image_fspec,  /* folder image file name */
-                        sFile,                        /* file name */
-                        outfile.suff,                 /* file suffix */
-                        sTarget,                      /* a href target */
-                        s);                           /* node name */
+                  voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
+                                          /* folder image file name */
+                     html_navigation_image_fspec,
+                     closer,              /* XHTML single tag closer (if any) */
+                     sFile,               /* file name */
+                     outfile.suff,        /* file suffix */
+                     sTarget,             /* a href target */
+                     s);                  /* node name */
                }
                else
                {
                                           /* don't close the nav line already! */
-                  voutf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\" />&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
-                        GIF_FO_NAME,         /* folder image file name */
-                        uiGifFoWidth,        /* folder image width */
-                        uiGifFoHeight,       /* folder image height */
-                        sFile,               /* file name */
-                        outfile.suff,        /* file suffix */
-                        sTarget,             /* a href target */
-                        s);                  /* node name */
+                  voutf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;&nbsp;<a href=\"%s%s\"%s>%s</a>",
+                     GIF_FO_NAME,         /* folder image file name */
+                     uiGifFoWidth,        /* folder image width */
+                     uiGifFoHeight,       /* folder image height */
+                     closer,              /* XHTML single tag closer (if any) */
+                     sFile,               /* file name */
+                     outfile.suff,        /* file suffix */
+                     sTarget,             /* a href target */
+                     s);                  /* node name */
                }
             }
             else
@@ -8465,14 +9453,15 @@ const int    currdepth)                   /* current node depth */
          }
          else
          {
-            voutlnf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\" />&nbsp;<a href=\"%s%s\"%s>%s</a>",
-                    GIF_FO_NAME,          /* folder image file name */
-                    uiGifFoWidth,         /* folder image width */
-                    uiGifFoHeight,        /* folder image height */
-                    sFile,                /* file name */
-                    outfile.suff,         /* file suffix */
-                    sTarget,              /* a href target */
-                    s);                   /* node name */
+            voutlnf("<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;<a href=\"%s%s\"%s>%s</a>",
+               GIF_FO_NAME,               /* folder image file name */
+               uiGifFoWidth,              /* folder image width */
+               uiGifFoHeight,             /* folder image height */
+               closer,                    /* XHTML single tag closer (if any) */
+               sFile,                     /* file name */
+               outfile.suff,              /* file suffix */
+               sTarget,                   /* a href target */
+               s);                        /* node name */
          }
       }
    
@@ -8484,7 +9473,8 @@ const int    currdepth)                   /* current node depth */
    
          if (no_images)
          {
-            voutlnf("<br /><tt>|--+&nbsp;</tt>&nbsp;%s", s);
+            voutlnf("<br%s><tt>|--+&nbsp;</tt>&nbsp;%s", 
+               closer, s);
          }
          else if (html_navigation_line)   /* new v6.5.19[fd] */
          {
@@ -8492,7 +9482,8 @@ const int    currdepth)                   /* current node depth */
          }
          else
          {
-            voutlnf("<br />%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\" />&nbsp;%s", sIndent, GIF_FO_NAME, uiGifFoWidth, uiGifFoHeight, s);
+            voutlnf("<br%s>%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;%s", 
+               closer, sIndent, GIF_FO_NAME, uiGifFoWidth, uiGifFoHeight, closer, s);
          }
       }
    
@@ -8504,7 +9495,8 @@ const int    currdepth)                   /* current node depth */
    
          if (no_images)
          {
-            voutlnf("<br /><tt>&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s", s);
+            voutlnf("<br%s><tt>&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s", 
+               closer, s);
          }
          else if (html_navigation_line)   /* new v6.5.19[fd] */
          {
@@ -8512,13 +9504,15 @@ const int    currdepth)                   /* current node depth */
          }
          else
          {
-            voutlnf("<br />%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\" />&nbsp;%s",
-                     sIndent, 
-                     sIndent, 
-                     GIF_FO_NAME, 
-                     uiGifFoWidth, 
-                     uiGifFoHeight, 
-                     s);
+            voutlnf("<br%s>%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;%s",
+               closer,
+               sIndent, 
+               sIndent, 
+               GIF_FO_NAME, 
+               uiGifFoWidth, 
+               uiGifFoHeight, 
+               closer,
+               s);
          }
       }
    
@@ -8530,7 +9524,8 @@ const int    currdepth)                   /* current node depth */
    
          if (no_images)
          {
-            voutlnf("<br /><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s", s);
+            voutlnf("<br%s><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s",
+               closer, s);
          }
          else if (html_navigation_line)   /* new v6.5.19[fd] */
          {
@@ -8538,14 +9533,16 @@ const int    currdepth)                   /* current node depth */
          }
          else
          {
-            voutlnf("<br />%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\" />&nbsp;%s",
-                    sIndent, 
-                    sIndent, 
-                    sIndent, 
-                    GIF_FO_NAME, 
-                    uiGifFoWidth, 
-                    uiGifFoHeight, 
-                    s);
+            voutlnf("<br%s>%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;%s",
+               closer,
+               sIndent, 
+               sIndent, 
+               sIndent, 
+               GIF_FO_NAME, 
+               uiGifFoWidth, 
+               uiGifFoHeight, 
+               closer,
+               s);
          }
       }
       
@@ -8554,7 +9551,11 @@ const int    currdepth)                   /* current node depth */
          outln("\n</div> <!-- UDO_nav_line -->");
       }
 
-      outln(HTML_HR);
+      if (html_doctype < XHTML_STRICT)
+         outln(HTML_HR);
+      else
+         outln(XHTML_HR);
+      
       outln("");
       
       break;

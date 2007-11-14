@@ -1430,20 +1430,26 @@ GLOBAL void c_hline ( void )
 		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
-			outln(HTML_HR);
+         if (html_doctype < XHTML_STRICT)
+            outln(HTML_HR);
+         else
+            outln(XHTML_HR);
 			break;
+         
 		case TOWIN:
 		case TOWH4:
 		case TOAQV:
 			strcpy_indent(n);
 			voutlnf("%s\\sl30\\brdrt\\brdrs \\par\\pard\\par", n);
 			break;
+         
 		case TOSTG:
 		case TOAMG:
 			indent=strlen_indent();
 			voutlnf("@line %d %d 0 0 7", indent+1, ((int) zDocParwidth)-indent);	/*r6pl5*/
 			outln("");
 			break;
+         
 		case TOASC:
 		case TOPCH:
 		case TODRC:
@@ -1453,6 +1459,7 @@ GLOBAL void c_hline ( void )
 			output_ascii_line("-", zDocParwidth-strlen(n));
 			outln("");
 			break;
+         
 		case TOTVH:
 			strcpy_indent(n);
 			indent2space(n);
@@ -1463,16 +1470,18 @@ GLOBAL void c_hline ( void )
 			output_ascii_line("\304", zDocParwidth-strlen(n));
 			outln("");
 			break;
+         
 		case TOSRC:
 		case TOSRP:
 			out("    ");
 			output_ascii_line("-", zDocParwidth-strlen(n));
 			break;
+         
 		case TOIPF:	/* <???> */
 			break;
+         
 		case TOKPS:
 			outln("hline");
-			break;
 	}
 
 }	/* c_hline */
@@ -2753,198 +2762,337 @@ LOCAL void c_subsubsubheading ( void )
 }	/* c_subsubsubheading */
 
 
-LOCAL void c_listheading ( void )
+
+
+
+/*******************************************************************************
+*
+*  c_listheading():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void c_listheading(void)
 {
-	char name[512], sFontBeg[512], sFontEnd[32], align[64];
-	BOOLEAN inside_center, inside_right;
-	int iSize;
+   char      name[512],         /* */
+             sFontBeg[512],     /* */
+             sFontEnd[32],      /* */
+             align[64];         /* */
+   BOOLEAN   inside_center,     /* */
+             inside_right;      /* */
+   int       iSize;             /* */
+   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
 
-	tokcpy2(name, 512);
+   
+   tokcpy2(name, 512);
+   
+   if (name[0] == EOS)
+   {
+      error_missing_parameter(CMD_HEADING);
+      return;
+   }
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   convert_tilde(name);
+   replace_udo_quotes(name);
+   delete_all_divis(name);
+   
+   check_styles(name);                    /*r6pl3*/
+   
+                                          /*r6pl5*/
+   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
+                                          /*r6pl5*/
+   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
+   
+   switch (desttype)
+   {
+   case TOHAH:                            /* V6.5.17 */
+   case TOHTM:
+   case TOMHH:
+      c_internal_styles(name);
+      align[0] = EOS;
+      
+      if (inside_center)
+         strcpy(align, " align=\"center\"");
+         
+      if (inside_right)
+         strcpy(align, " align=\"right\"");
+         
+      sFontBeg[0] = EOS;
+      sFontEnd[0] = EOS;
+      
+      if (sDocHtmlPropfontName[0] != EOS)
+      {
+         iSize = iDocHtmlPropfontSize + 3;
+         sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize >= 0) ? "+" : "", iSize);
+         strcpy(sFontEnd, "</font>");
+      }
+      
+      voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
+         align, closer, sFontBeg, name);
+      
+      if (bEnv1stItem[iEnvLevel])
+      {
+         voutlnf("%s</td></tr>", sFontEnd);
+      }
+   }
+   
+}  /* c_listheading */
 
-	if (name[0]==EOS)
-	{	error_missing_parameter(CMD_HEADING);
-		return;
-	}
-
-	convert_tilde(name);
-	replace_udo_quotes(name);
-	delete_all_divis(name);
-
-	check_styles(name);	/*r6pl3*/
-
-	inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);	/*r6pl5*/
-	inside_right= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_RIGH);	/*r6pl5*/
-
-	switch (desttype)
-	{
-		case TOHAH:		/* V6.5.17 */
-		case TOHTM:
-		case TOMHH:
-			c_internal_styles(name);
-			align[0]= EOS;
-			if (inside_center)	strcpy(align, " align=\"center\"");
-			if (inside_right)	strcpy(align, " align=\"right\"");
-			sFontBeg[0]= EOS;
-			sFontEnd[0]= EOS;
-			if (sDocHtmlPropfontName[0]!=EOS)
-			{	iSize= iDocHtmlPropfontSize + 3;
-				sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize>=0) ? "+" : "", iSize);
-				strcpy(sFontEnd, "</font>");
-			}
-			voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br />%s<b>%s</b>", align, sFontBeg, name);
-			if (bEnv1stItem[iEnvLevel])
-			{	voutlnf("%s</td></tr>", sFontEnd);
-			}
-			break;
-	}
 
 
-}	/* c_listheading */
 
 
-LOCAL void c_listsubheading ( void )
+/*******************************************************************************
+*
+*  c_listsubheading():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void c_listsubheading(void)
 {
-	char name[512], sFontBeg[512], sFontEnd[32], align[64];
-	BOOLEAN inside_center, inside_right;
-	int iSize;
+   char      name[512],         /* */
+             sFontBeg[512],     /* */
+             sFontEnd[32],      /* */
+             align[64];         /* */
+   BOOLEAN   inside_center,     /* */
+             inside_right;      /* */
+   int       iSize;             /* */
+   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
+   
+   
+   tokcpy2(name, 512);
+   
+   if (name[0] == EOS)
+   {  error_missing_parameter(CMD_HEADING);
+      return;
+   }
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   convert_tilde(name);
+   replace_udo_quotes(name);
+   delete_all_divis(name);
+   
+   check_styles(name);                    /*r6pl3*/
+   
+                                          /*r6pl5*/
+   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
+                                          /*r6pl5*/
+   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
+   
+   switch (desttype)
+   {
+   case TOHAH:                            /* V6.5.17 */
+   case TOHTM:
+   case TOMHH:
+      c_internal_styles(name);
+      align[0] = EOS;
+      
+      if (inside_center)
+         strcpy(align, " align=\"center\"");
+         
+      if (inside_right)
+         strcpy(align, " align=\"right\"");
+         
+      sFontBeg[0] = EOS;
+      sFontEnd[0] = EOS;
+      
+      if (sDocHtmlPropfontName[0] != EOS)
+      {
+         iSize = iDocHtmlPropfontSize + 2;
+         sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize >= 0) ? "+" : "", iSize);
+         strcpy(sFontEnd, "</font>");
+      }
+      
+      voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
+      align, closer, sFontBeg, name);
+      
+      if (bEnv1stItem[iEnvLevel])
+      {
+         voutlnf("%s</td></tr>", sFontEnd);
+      }
+   }
 
-	tokcpy2(name, 512);
-
-	if (name[0]==EOS)
-	{	error_missing_parameter(CMD_HEADING);
-		return;
-	}
-
-	convert_tilde(name);
-	replace_udo_quotes(name);
-	delete_all_divis(name);
-
-	check_styles(name);	/*r6pl3*/
-
-	inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);	/*r6pl5*/
-	inside_right= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_RIGH);	/*r6pl5*/
-
-	switch (desttype)
-	{
-		case TOHAH:		/* V6.5.17 */
-		case TOHTM:
-		case TOMHH:
-			c_internal_styles(name);
-			align[0]= EOS;
-			if (inside_center)	strcpy(align, " align=\"center\"");
-			if (inside_right)	strcpy(align, " align=\"right\"");
-			sFontBeg[0]= EOS;
-			sFontEnd[0]= EOS;
-			if (sDocHtmlPropfontName[0]!=EOS)
-			{	iSize= iDocHtmlPropfontSize + 2;
-				sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize>=0) ? "+" : "", iSize);
-				strcpy(sFontEnd, "</font>");
-			}
-			voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br />%s<b>%s</b>", align, sFontBeg, name);
-			if (bEnv1stItem[iEnvLevel])
-			{	voutlnf("%s</td></tr>", sFontEnd);
-			}
-			break;
-	}
+}  /* c_listsubheading */
 
 
-}	/* c_listsubheading */
 
-LOCAL void c_listsubsubheading ( void )
+
+/*******************************************************************************
+*
+*  c_listsubsubheading():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void c_listsubsubheading(void)
 {
-	char name[512], sFontBeg[512], sFontEnd[32], align[64];
-	BOOLEAN inside_center, inside_right;
-	int iSize;
+   char      name[512],         /* */
+             sFontBeg[512],     /* */
+             sFontEnd[32],      /* */
+             align[64];         /* */
+   BOOLEAN   inside_center,     /* */
+             inside_right;      /* */
+   int       iSize;             /* */
+   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
+   
+   
+   tokcpy2(name, 512);
+   
+   if (name[0] == EOS)
+   {
+      error_missing_parameter(CMD_HEADING);
+      return;
+   }
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   convert_tilde(name);
+   replace_udo_quotes(name);
+   delete_all_divis(name);
+   
+   check_styles(name);                    /*r6pl3*/
+   
+                                          /*r6pl5*/
+   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
+                                          /*r6pl5*/
+   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
+   
+   switch (desttype)
+   {
+   case TOHAH:                            /* V6.5.17 */
+   case TOHTM:
+   case TOMHH:
+      c_internal_styles(name);
+      align[0] = EOS;
+      
+      if (inside_center)
+         strcpy(align, " align=\"center\"");
+         
+      if (inside_right)
+         strcpy(align, " align=\"right\"");
+         
+      sFontBeg[0] = EOS;
+      sFontEnd[0] = EOS;
+      
+      if (sDocHtmlPropfontName[0] != EOS)
+      {
+         iSize = iDocHtmlPropfontSize + 1;
+         sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize >= 0) ? "+" : "", iSize);
+         strcpy(sFontEnd, "</font>");
+      }
+      
+      voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
+         align, closer, sFontBeg, name);
+      
+      if (bEnv1stItem[iEnvLevel])
+      {
+         voutlnf("%s</td></tr>", sFontEnd);
+      }
+   }
+   
+}  /* c_listsubsubheading */
 
-	tokcpy2(name, 512);
-
-	if (name[0]==EOS)
-	{	error_missing_parameter(CMD_HEADING);
-		return;
-	}
-
-	convert_tilde(name);
-	replace_udo_quotes(name);
-	delete_all_divis(name);
-
-	check_styles(name);	/*r6pl3*/
-
-	inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);	/*r6pl5*/
-	inside_right= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_RIGH);	/*r6pl5*/
-
-	switch (desttype)
-	{
-		case TOHAH:		/* V6.5.17 */
-		case TOHTM:
-		case TOMHH:
-			c_internal_styles(name);
-			align[0]= EOS;
-			if (inside_center)	strcpy(align, " align=\"center\"");
-			if (inside_right)	strcpy(align, " align=\"right\"");
-			sFontBeg[0]= EOS;
-			sFontEnd[0]= EOS;
-			if (sDocHtmlPropfontName[0]!=EOS)
-			{	iSize= iDocHtmlPropfontSize + 1;
-				sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize>=0) ? "+" : "", iSize);
-				strcpy(sFontEnd, "</font>");
-			}
-			voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br />%s<b>%s</b>", align, sFontBeg, name);
-			if (bEnv1stItem[iEnvLevel])
-			{	voutlnf("%s</td></tr>", sFontEnd);
-			}
-			break;
-	}
 
 
-}	/* c_listsubsubheading */
 
-LOCAL void c_listsubsubsubheading ( void )
+
+/*******************************************************************************
+*
+*  c_listsubsubsubheading():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void c_listsubsubsubheading(void)
 {
-	char name[512], sFontBeg[512], sFontEnd[32], align[64];
-	BOOLEAN inside_center, inside_right;
-	int iSize;
+   char      name[512],         /* */
+             sFontBeg[512],     /* */
+             sFontEnd[32],      /* */
+             align[64];         /* */
+   BOOLEAN   inside_center,     /* */
+             inside_right;      /* */
+   int       iSize;             /* */
+   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
 
-	tokcpy2(name, 512);
+   tokcpy2(name, 512);
+   
+   if (name[0] == EOS)
+   {
+      error_missing_parameter(CMD_HEADING);
+      return;
+   }
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   convert_tilde(name);
+   replace_udo_quotes(name);
+   delete_all_divis(name);
+   
+   check_styles(name);                    /*r6pl3*/
+   
+                                          /*r6pl5*/
+   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
+                                          /*r6pl5*/
+   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
+   
+   switch (desttype)
+   {
+   case TOHAH:                            /* V6.5.17 */
+   case TOHTM:
+   case TOMHH:
+      c_internal_styles(name);
+      align[0] = EOS;
+      
+      if (inside_center)
+         strcpy(align, " align=\"center\"");
+      
+      if (inside_right)
+         strcpy(align, " align=\"right\"");
+      
+      sFontBeg[0] = EOS;
+      sFontEnd[0] = EOS;
+      
+      if (sDocHtmlPropfontName[0] != EOS)
+      {
+         iSize = iDocHtmlPropfontSize;
+         sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize >= 0) ? "+" : "", iSize);
+         strcpy(sFontEnd, "</font>");
+      }
+      
+      voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
+         align, closer, sFontBeg, name);
+      
+      if (bEnv1stItem[iEnvLevel])
+      {
+         voutlnf("%s</td></tr>", sFontEnd);
+      }
+   }
+   
+}  /* c_listsubsubsubheading */
 
-	if (name[0]==EOS)
-	{	error_missing_parameter(CMD_HEADING);
-		return;
-	}
-
-	convert_tilde(name);
-	replace_udo_quotes(name);
-	delete_all_divis(name);
-
-	check_styles(name);	/*r6pl3*/
-
-	inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);	/*r6pl5*/
-	inside_right= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_RIGH);	/*r6pl5*/
-
-	switch (desttype)
-	{
-		case TOHAH:		/* V6.5.17 */
-		case TOHTM:
-		case TOMHH:
-			c_internal_styles(name);
-			align[0]= EOS;
-			if (inside_center)	strcpy(align, " align=\"center\"");
-			if (inside_right)	strcpy(align, " align=\"right\"");
-			sFontBeg[0]= EOS;
-			sFontEnd[0]= EOS;
-			if (sDocHtmlPropfontName[0]!=EOS)
-			{	iSize= iDocHtmlPropfontSize;
-				sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize>=0) ? "+" : "", iSize);
-				strcpy(sFontEnd, "</font>");
-			}
-			voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br />%s<b>%s</b>", align, sFontBeg, name);
-			if (bEnv1stItem[iEnvLevel])
-			{	voutlnf("%s</td></tr>", sFontEnd);
-			}
-			break;
-	}
 
 
-}	/* c_listsubsubsubheading */
+
 
 /*	############################################################
 	#
@@ -3273,50 +3421,67 @@ LOCAL void c_verbatim_backcolor ( void )
 }	/* c_verbatim_backcolor */
 
 
-/*	--------------------------------------------------------------
-	output_empty_lines()
-	Ausgabe von <count> zusaetzlichen Leerzeilen
-	Wird von c_*skip verwendet.
-	--------------------------------------------------------------	*/
-LOCAL void output_empty_lines ( const int count )
+
+
+
+/*******************************************************************************
+*
+*  output_empty_lines():
+*     Ausgabe von <count> zusaetzlichen Leerzeilen.
+*     Wird von c_*skip verwendet.
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void output_empty_lines(
+
+const int count)                     /* # of empty lines */
 {
-	register int i;
+   register int   i;                 /* counter */
+   char           closer[8] = "\0";  /* single tag closer mark in XHTML */
 
-	if (count<=0)	return;
 
-	if (desttype==TOINF)
-	{
-		voutlnf("@sp %d", count);
-	}
-	else
-	{
-		for (i=0; i<count; i++)
-		{
-			switch(desttype)
-			{
-				case TORTF:
-				case TOAQV:
-				case TOWIN:
-				case TOWH4:
-					outln(rtf_par);
-					break;
-				case TOHAH:		/* V6.5.17 */
-				case TOHTM:
-				case TOMHH:
-					outln("<br />");
-					/* outln("<br />&nbsp;"); */
-					break;
-				case TOKPS:
-					outln("newline");
-					break;
-				default:
-					outln("");
-					break;
-			}
-		}
-	}
+   if (count <= 0)                        /* nothing to do here */
+      return;
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   if (desttype == TOINF)
+   {
+      voutlnf("@sp %d", count);
+      return;                             /* done */
+   }
 
-}	/* output_empty_lines */
+   for (i = 0; i < count; i++)            /* all other desttype */
+   {
+      switch (desttype)
+      {
+      case TORTF:
+      case TOAQV:
+      case TOWIN:
+      case TOWH4:
+         outln(rtf_par);
+         break;
+         
+      case TOHAH:                         /* V6.5.17 */
+      case TOHTM:
+      case TOMHH:
+         voutlnf("<br%s>", closer);
+         break;
+         
+      case TOKPS:
+         outln("newline");
+         break;
+         
+      default:
+         outln("");
+      }
+   }
+   
+}  /* output_empty_lines */
 
 
 LOCAL void c_bigskip ( void )
@@ -3363,91 +3528,144 @@ LOCAL void c_smallskip ( void )
 
 
 
-/*	--------------------------------------------------------------
-	c_udolink() fuegt einen Link samt Bild auf die UDO-Seite ein
-	--------------------------------------------------------------	*/
-GLOBAL void c_udolink ( void )
+
+
+/*******************************************************************************
+*
+*  c_udolink():
+*     fuegt einen Link samt Bild auf der UDO-Seite ein
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void c_udolink (void)
 {
-	char sTemp[64], nodename[512], sGifSize[80];
-	BOOLEAN inside_center, inside_right;
+   char      sTemp[64],         /* */
+             nodename[512],     /* */
+             sGifSize[80];      /* */
+   BOOLEAN   inside_center,     /* */
+             inside_right;      /* */
+   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
 
-	uses_udolink= TRUE;
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   uses_udolink = TRUE;
+   
+                                          /*r6pl5*/
+   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
+                                          /*r6pl5*/
+   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
+   
+   tokcpy2(nodename, 512);
+   
+   switch (desttype)
+   {
+   case TOHAH:                            /* V6.5.17 */
+   case TOHTM:
+   case TOMHH:
+      sGifSize[0] = EOS;
+      
+      if (uiGifMwWidth != 0 && uiGifMwHeight != 0)
+      {
+         sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiGifMwWidth, uiGifMwHeight);
+      }
+      
+      strcpy(sTemp, "<p>");
+      
+      if (inside_center)
+         strcpy(sTemp, "<p align=\"center\">");
+         
+      if (inside_right)
+         strcpy(sTemp, "<p align=\"right\">");
+         
+      if (nodename[0] == EOS)
+      {
+         voutlnf("%s<a href=\"%s\"><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+            sTemp, UDO_URL, GIF_MW_NAME, UDO_MADE, UDO_MADE, sGifSize, closer);
+      }
+      else
+      {
+         auto_references(nodename, TRUE, GIF_MW_NAME, uiGifMwWidth, uiGifMwHeight);
+         voutlnf("%s%s", sTemp, nodename);
+      }
+      
+      outln("</p>");
+      break;
+      
+   case TOWIN:
+   case TOWH4:
+      strcpy(sTemp, "ql");
+      if (inside_center)
+         strcpy(sTemp, "qc");
+         
+      if (inside_right)
+         strcpy(sTemp, "qr");
+         
+      voutlnf("\\%s{\\{bmc %s\\}}\\par\\par\\pard", sTemp, BMP_MW_NAME);
+      break;
+      
+   case TOSTG:
+   case TOAMG:
+      if (!no_images)
+      {
+         voutlnf("@limage %s 0", IMG_MW_NAME);
+      }
+      
+      break;
+      
+   case TORTF:
+      if (!no_images)
+      {                                   /* Fixed bug #0000017 in V6.4.1 [NHz] */
+         c_bmp_output(sBmpMwFull, "", TRUE);
+      }
+      
+   }
+   
+}  /* c_udolink */
 
-	inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);	/*r6pl5*/
-	inside_right= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_RIGH);	/*r6pl5*/
-
-	tokcpy2(nodename, 512);
-
-	switch (desttype)
-	{
-		case TOHAH:		/* V6.5.17 */
-		case TOHTM:
-		case TOMHH:
-			sGifSize[0]= EOS;
-			if (uiGifMwWidth!=0 && uiGifMwHeight!=0)
-			{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiGifMwWidth, uiGifMwHeight);
-			}
-			strcpy(sTemp, "<p>");
-			if (inside_center)	strcpy(sTemp, "<p align=\"center\">");
-			if (inside_right)	strcpy(sTemp, "<p align=\"right\">");
-			if (nodename[0]==EOS)
-			{	voutlnf("%s<a href=\"%s\"><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s /></a>",
-					sTemp, UDO_URL, GIF_MW_NAME, UDO_MADE, UDO_MADE, sGifSize);
-			}
-			else
-			{	auto_references(nodename, TRUE, GIF_MW_NAME, uiGifMwWidth, uiGifMwHeight);
-				voutlnf("%s%s", sTemp, nodename);
-			}
-			outln("</p>");
-			break;
-
-		case TOWIN:
-		case TOWH4:
-			strcpy(sTemp, "ql");
-			if (inside_center)	strcpy(sTemp, "qc");
-			if (inside_right)	strcpy(sTemp, "qr");
-			voutlnf("\\%s{\\{bmc %s\\}}\\par\\par\\pard", sTemp, BMP_MW_NAME);
-			break;
-
-		case TOSTG:
-		case TOAMG:
-			if (!no_images)
-			{	voutlnf("@limage %s 0", IMG_MW_NAME);
-			}
-			break;
-
-		case TORTF:
-			if (!no_images)
-			{	/* Fixed bug #0000017 in V6.4.1 [NHz] */
-				c_bmp_output(sBmpMwFull, "", TRUE);
-			}
-			break;
-
-	}
-
-}	/* c_udolink */
 
 
 
-/*	--------------------------------------------------------------
-	c_toplink() fuegt einen Link samt Bild an den Anfang der Seite
-	ein (Unterstuetzung nur fuer Hypertext-Formate).
-	--------------------------------------------------------------	*/
-GLOBAL void c_toplink ( void )
+
+/*******************************************************************************
+*
+*  c_toplink():
+*     Fuegt einen Link samt Bild an den Anfang der Seite	ein.
+*     (Unterstuetzung nur fuer Hypertext-Formate.)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void c_toplink(void)
 {
-	uses_toplink= TRUE;
-
-	switch (desttype)
-	{
-		case TOHAH:		/* V6.5.17 */
-		case TOHTM:
-		case TOMHH:
-                        /* set width and height =24 to fix bug #0000005 [voja] */
-			voutlnf("<p><a href=\"#\"><img src=\"%s\" border=\"0\" width=\"24\" height=\"24\" /></a></p>", GIF_TP_NAME);
-			break;
-	}
-
+   char   closer[8] = "\0";  /* single tag closer mark in XHTML */
+   
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+   strcpy(closer, " /");
+   
+   uses_toplink = TRUE;
+   
+   switch (desttype)
+   {
+   case TOHAH:		/* V6.5.17 */
+   case TOHTM:
+   case TOMHH:
+                                          /* width and height set to 24 to fix bug #0000005 [voja] */
+      voutlnf("<p><a href=\"#\"><img src=\"%s\" border=\"0\" width=\"24\" height=\"24\"%s></a></p>", 
+         GIF_TP_NAME, closer);
+   }
+   
 }	/* c_toplink */
+
+
+
 
 
 /*	############################################################
@@ -4261,74 +4479,84 @@ LOCAL void c_input ( void )
 	#
 	#
 	############################################################	*/
-LOCAL void str2silben ( char *s )
+LOCAL void str2silben(
+
+char *s)
 {
-	size_t	i, sl, yl;
-	char	syl[MAX_TOKEN_LEN+1];
+   size_t   i,
+            sl, 
+            yl;
+   char	   syl[MAX_TOKEN_LEN + 1];
 
-	silben_counter= -1;
+   
+   silben_counter = -1;
+   
+                                          /* Kein Trennzeichen enthalten? */
+   if ( (strchr(s, '-') == NULL) && (strchr(s, DIVIS_C) == NULL) )
+      return;
+                                    
+   if ( (s[0] == '-') && (s[1] == EOS) )  /* Token besteht nur aus einem Bindestrich? */
+      return;
 
-	/* Kein Trennzeichen enthalten? */
-	if ( (strchr(s, '-')==NULL) && (strchr(s, DIVIS_C)==NULL) )
-	{	return;
-	}
-
-	/* Token besteht nur aus einem Bindestrich? */
-	if ( (s[0]=='-') && (s[1]==EOS) )
-	{	return;
-	}
-
-	/* <???> Ist das Leeren nicht ueberfluessig, wenn silbe[] */
-	/* ueber strcpy() gesetzt und silben_counter benutzt wird? */
-	for (i=0; i<MAXSILBEN; silbe[i++][0]= EOS) ;
-
-	syl[0]= EOS;
-	yl= 0;
-
-	/* <???> Schleife optimierbar ueber while (*ptr!=EOS) */
-
-	sl= strlen(s);
-
-	for (i=0; i<sl; i++)
-	{
-		syl[yl+1]= EOS;	/* vorher: chrcat() */
-		syl[yl]= s[i];
-		yl++;
-
-		switch (s[i])
-		{	case '-':
-			case '/':
-				if (i>0)
-				{	/* Nur dann trennen, wenn das naechste Zeichen */
-					/* keine Zahl, kein Komma und )]} ist */
-					if	(	((s[i+1]<'0') || (s[i+1]>'9'))
-						&&	(s[i+1]!=',')
-						&&	(s[i+1]!=')')
-						&&	(s[i+1]!=']')
-						&&	(s[i+1]!='}')
-						)
-					{	silben_counter++;
-						strcpy(silbe[silben_counter], syl);
-						syl[0]= EOS;
-						yl= 0;
-					}
-				}
-				break;
-			case DIVIS_C:
-				silben_counter++;
-				strcpy(silbe[silben_counter], syl);
-				syl[0]= EOS;
-				yl= 0;
-				break;
-		}
-	}
-
-	if ( syl[0]!=EOS )
-	{	silben_counter++;
-		strcpy(silbe[silben_counter], syl);
-	}
-
-}	/* str2silben */
+   /* <???> Ist das Leeren nicht ueberfluessig, wenn silbe[] */
+   /* ueber strcpy() gesetzt und silben_counter benutzt wird? */
+   
+   for (i = 0; i < MAXSILBEN; silbe[i++][0] = EOS)
+   {
+      ;
+   }
+   
+   syl[0] = EOS;
+   yl = 0;
+   
+   /* <???> Schleife optimierbar ueber while (*ptr!=EOS) */
+   
+   sl= strlen(s);
+   
+   for (i = 0; i < sl; i++)
+   {
+      syl[yl + 1] = EOS;                  /* vorher: chrcat() */
+      syl[yl]     = s[i];
+      yl++;
+      
+      switch (s[i])
+      {
+      case '-':
+      case '/':
+         if (i > 0)
+         {                                /* Nur dann trennen, wenn das naechste Zeichen */
+                                          /* keine Zahl, kein Komma und kein ')',']','}' ist */
+            if	(   ( (s[i + 1] < '0') || (s[i + 1] > '9') )
+                && (s[i+1] != ',')
+                && (s[i+1] != ')')
+                && (s[i+1] != ']')
+                && (s[i+1] != '}')
+               )
+            {
+               silben_counter++;
+               strcpy(silbe[silben_counter], syl);
+               syl[0]= EOS;
+               yl= 0;
+            }
+         }
+         
+         break;
+         
+      case DIVIS_C:
+         silben_counter++;
+         strcpy(silbe[silben_counter], syl);
+         syl[0] = EOS;
+         yl     = 0;
+      }
+   }
+   
+   if (syl[0] != EOS)
+   {
+      silben_counter++;
+      strcpy(silbe[silben_counter], syl);
+   }
+   
+}  /* str2silben */
 
 
 
@@ -4917,48 +5145,54 @@ LOCAL void to_check_quote_indent ( size_t *u )
 /*	##############################################################
 	##############################################################
 
-	token_output() ist eines der Herzstuecke von UDO. Hier
-	werden Absaetze formatiert und ausgegeben. Hier durchzusteigen
-	faellt mir langsam selber schwer. ;-)
+	
 
 	##############################################################
 	##############################################################	*/
 
+/*******************************************************************************
+*
+*  token_output():
+*     token_output() ist eines der Herzstuecke von UDO. Hier
+*     werden Absaetze formatiert und ausgegeben. Hier durchzusteigen
+*     faellt mir langsam selber schwer. ;-) (says Dirk ...)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
 GLOBAL void token_output(
 
-BOOLEAN        reset_internals)        /* */
+BOOLEAN           reset_internals)        /* */
 {
-register int   i,                      /* */
-               j;                      /* */
-int            silb;                   /* */
-char          *z = tobuffer;           /* */
-char           sIndent[512];           /* */
-size_t         umbruch;                /* */
-BOOLEAN        newline = FALSE;        /* */
-BOOLEAN        just_linefeed = FALSE;  /* */
-BOOLEAN        use_token;              /* */
-BOOLEAN        inside_center,          /* */
-               inside_right,           /* */
-               inside_left,            /* */
-               inside_quote;           /* */
-BOOLEAN        inside_short,           /* */
-               inside_env,             /* */
-               inside_fussy;           /* */
-size_t         sl,                     /* */
-               len_zeile,              /* */
-               len_silbe,              /* */
-               len_token;              /* */
+   register int   i,                      /* */
+                  j;                      /* */
+   int            silb;                   /* */
+   char          *z = tobuffer;           /* */
+   char           sIndent[512];           /* */
+   size_t         umbruch;                /* */
+   BOOLEAN        newline = FALSE;        /* */
+   BOOLEAN        just_linefeed = FALSE;  /* */
+   BOOLEAN        use_token;              /* */
+   BOOLEAN        inside_center,          /* */
+                  inside_right,           /* */
+                  inside_left,            /* */
+                  inside_quote;           /* */
+   BOOLEAN        inside_short,           /* */
+                  inside_env,             /* */
+                  inside_fussy;           /* */
+   size_t         sl,                     /* */
+                  len_zeile,              /* */
+                  len_silbe,              /* */
+                  len_token;              /* */
 
-
-   if (token_counter <= 0)
-   {
+   
+   if (token_counter <= 0)                /* nothing to do here */
       return;
-   }
 
-   if (!bInsideDocument)
-   {
+   if (!bInsideDocument)                  /* we're not allowed to output tokens here */
       return;
-   }
 
    umbruch = zDocParwidth;
 
@@ -4968,10 +5202,9 @@ size_t         sl,                     /* */
    case TOAMG:                            /* AmigaGuide */
       umbruch = zDocParwidth;
 
-      if (bInsidePopup && zDocParwidth>60)
-      {
+      if (bInsidePopup && zDocParwidth > 60)
          umbruch = 60;
-      }
+      
       break;
 
    case TOMAN:                            /* Manualpage */
@@ -4981,12 +5214,11 @@ size_t         sl,                     /* */
    case TOHAH:                            /* HTML Apple Help - V6.5.17 */
    case TOHTM:                            /* HTML */
    case TOMHH:                            /* Microsoft HTML Help */
-      umbruch= zDocParwidth;
+      umbruch = zDocParwidth;
 
-      if (iListLevel>0 && umbruch>70)
-      {
+      if (iListLevel > 0 && umbruch > 70)
          umbruch = 70;
-      }
+      
       break;
 
    case TOSRC:                            /* */
@@ -5008,10 +5240,8 @@ size_t         sl,                     /* */
    len_zeile = 0;
 
 
-   if ( token[0][0] != ' ' && token[0][0] != INDENT_C)
-   {
+   if ( (token[0][0] != ' ') && (token[0][0] != INDENT_C) )
       strcat_indent(z);
-   }
 
    switch (desttype)
    {
@@ -5021,52 +5251,42 @@ size_t         sl,                     /* */
    case TOAQV:                            /* Apple QuickView */
       to_check_rtf_quote_indent(z);
 
-      if ( inside_center )
-      {
+      if (inside_center)
          strcat(z, "\\qc ");
-      }
 
-      if ( inside_right )
-      {
+      if (inside_right)
          strcat(z, "\\qr ");
-      }
 
-      if ( inside_left )
-      {
+      if (inside_left)
          strcat(z, "\\ql ");
-      }
+      
       break;
 
    case TOHAH:                            /* HTML Apple Help V6.5.17 */
    case TOHTM:                            /* HTML */
    case TOMHH:                            /* Microsoft HTML Help */
-      if ( !inside_short )
+      if (!inside_short)
       {
-         if ( inside_center )
-         {
+         if (inside_center)
             strcat(z, "<div align=\"center\">");
-         }
          else
          {
-            if ( inside_right )
-            {
+            if (inside_right)
                strcat(z, "<div align=\"right\">");
-            }
             else
             {
                if (!inside_env)
-               {
                   strcat(z, "<p>");
-               }
                else
                {
                   if (bEnv1stPara[iEnvLevel])
-                  {
                      bEnv1stPara[iEnvLevel]= FALSE;
-                  }
                   else
                   {
-                     strcat(z, "<br />"  /*"<p>"*/  );
+                     if (html_doctype < XHTML_STRICT)
+                        strcat(z, "<br>");   /* was "<p>" */
+                     else
+                        strcat(z, "<br />");  /* was "<p>" */
                   }
                }
             }
@@ -5077,12 +5297,13 @@ size_t         sl,                     /* */
          if (inside_env)
          {
             if (bEnv1stPara[iEnvLevel])
-            {
                bEnv1stPara[iEnvLevel]= FALSE;
-            }
             else
             {
-               strcat(z, "<br />");
+               if (html_doctype < XHTML_STRICT)
+                  strcat(z, "<br>");
+               else
+                  strcat(z, "<br />");
             }
          }
       }
@@ -5091,16 +5312,14 @@ size_t         sl,                     /* */
 
    case TOIPF:                            /* OS/2 IPF */
       if (!inside_env)
-      {
          strcat(z, ":p.");
-      }
+      
       break;
 
    case TOLDS:                            /* Linuxdoc-SGML */
       if (inside_quote)
-      {
          outln("<quote>");
-      }
+      
       break;
 
    case TOLYX:                            /* LyX */
@@ -5118,14 +5337,10 @@ size_t         sl,                     /* */
          }
 
          if (inside_right)
-         {
             outln("\\align right");
-         }
 
          if (!tokens_contain_item && !inside_center)
-         {
             outln("\\newline");
-         }
       }
       break;
 
@@ -5133,13 +5348,9 @@ size_t         sl,                     /* */
       if (inside_env)
       {
          if (bEnv1stPara[iEnvLevel])
-         {
             bEnv1stPara[iEnvLevel]= FALSE;
-         }
          else
-         {
             outln(" newline");
-         }
       }
 
       out("(");
@@ -5157,9 +5368,7 @@ size_t         sl,                     /* */
       strcpy(sIndent, z);
 
       if ( insert_speccmd(sIndent, sIndent, sIndent) )
-      {
          strcpy(z, sIndent);
-      }
    }
 
    if (desttype == TORTF)
@@ -5224,9 +5433,8 @@ size_t         sl,                     /* */
                token[i][0]= EOS;
 
                if (!inside_center && !inside_right && !inside_left)
-               {
                   strcat(z, "@*");
-               }
+               
                break;
 
             case TORTF:
@@ -5267,12 +5475,16 @@ size_t         sl,                     /* */
             case TOHAH:             /* V6.5.17 */
             case TOHTM:
             case TOMHH:
-               um_strcpy(token[i], HTML_BR, MAX_TOKEN_LEN+1, "token_output[11]");
+               if (html_doctype < XHTML_STRICT)
+                  um_strcpy(token[i], HTML_BR, MAX_TOKEN_LEN + 1, "token_output[11]");
+               else
+                  um_strcpy(token[i], XHTML_BR, MAX_TOKEN_LEN + 1, "token_output[11]");
+                  
                break;
 
             case TOLDS:
             case TOHPH:
-               um_strcpy(token[i], "<newline>", MAX_TOKEN_LEN+1, "token_output[12]");
+               um_strcpy(token[i], "<newline>", MAX_TOKEN_LEN + 1, "token_output[12]");
                break;
 
             default:
@@ -5314,13 +5526,9 @@ size_t         sl,                     /* */
                strcat(z, token[i]);
 
                if (i == 0 && use_justification)
-               {
                   strcat(z, INDENT_S);
-               }
                else
-               {
                   strcat(z, " ");
-               }
 
                /* New in r6pl15 [NHz] */
                /* Capture first blank in string for a better appearance */
@@ -5394,9 +5602,7 @@ size_t         sl,                     /* */
 
                         /* Deutsches c!-k in k-k wandeln */
                         if (z[sl -2 ] == 'c' && silbe[silb][0] == 'k' && destlang == TOGER)
-                        {
                            z[sl-2] = 'k';
-                        }
                      }
 
                      delete_all_divis(z);
@@ -5407,9 +5613,7 @@ size_t         sl,                     /* */
                      token[i][0] = EOS;
 
                      for (j = silb; j <= silben_counter; j++)
-                     {
                         um_strcat(token[i], silbe[j], MAX_TOKEN_LEN+1, "token_output[14]");
-                     }
 
                      delete_all_divis(token[i]);
 
@@ -5479,9 +5683,7 @@ size_t         sl,                     /* */
             indent2space(z);
 
             if (strncmp(z, "\\\\[", 3) == 0)
-            {
                qreplace_once(z, "[", 1, "{\\symbol{91}}", 13);
-            }
 
             auto_references(z, FALSE, "", 0, 0);
             break;
@@ -5564,19 +5766,11 @@ size_t         sl,                     /* */
 #endif
 
                if (use_justification && !inside_left)
-               {
                   if (len_zeile < umbruch - 9)
-                  {
                      warning_short_line(len_zeile, token[i]);
-                  }
-               }
                else
-               {
                   if (len_zeile < umbruch - 6)
-                  {
                      warning_short_line(len_zeile, token[i]);
-                  }
-               }
 
             }       /* switch */
 
@@ -5654,9 +5848,7 @@ size_t         sl,                     /* */
 
 
          if (format_uses_output_buffer && use_output_buffer)
-         {
             insert_nl_token_buffer();
-         }
 
          /* r5pl14: Fuer STG wieder ein Leerzeichen anhaengen, damit HypC */
          /* daran erkennen kann, dass der Absatz noch nicht zuende ist */
@@ -5664,9 +5856,7 @@ size_t         sl,                     /* */
          /* Blocksatz weiter oben nicht richtig erzeugt wird! */
 
          if (desttype == TOSTG && !just_linefeed)
-         {
             strcat(z, " ");
-         }
 
          if (!no_effects && desttype == TOASC)
          {
@@ -5701,9 +5891,7 @@ size_t         sl,                     /* */
             strcpy(sIndent, z);
 
             if (insert_speccmd(sIndent, sIndent, sIndent))
-            {
                strcpy(z, sIndent);
-            }
          }
 
          if (!no_effects)
@@ -5722,13 +5910,9 @@ size_t         sl,                     /* */
          strcat(z, token[i]);
 
          if (!just_linefeed)
-         {
             strcat(z, " ");
-         }
          else
-         {
             just_linefeed = FALSE;
-         }
 
       } /* if (newline) */
 
@@ -5790,9 +5974,7 @@ size_t         sl,                     /* */
          indent2space(z);
 
          if (strncmp(z, "\\\\[", 3) == 0)
-         {
             qreplace_once(z, "[", 1, "{\\symbol{91}}", 13);
-         }
 
          auto_references(z, FALSE, "", 0, 0);
          break;
@@ -5808,14 +5990,14 @@ size_t         sl,                     /* */
 
       case TORTF:
          c_rtf_styles(z);
-         c_rtf_quotes(z);        /* r5pl6 */
+         c_rtf_quotes(z);                 /* r5pl6 */
          break;
 
       case TOWIN:
       case TOWH4:
       case TOAQV:
          c_win_styles(z);
-         /* Einen kleinen Maengel der Umgebungen TAB+SPACE beseitigen */
+         /* Einen kleinen Mangel der Umgebungen TAB+SPACE beseitigen */
          qreplace_all(z, "\\tab  ", 6, "\\tab ", 5);
          auto_references(z, FALSE, "", 0, 0);
          break;
@@ -5851,9 +6033,7 @@ size_t         sl,                     /* */
       }
 
       if (use_justification)
-      {
          indent2space(z);
-      }
 
       replace_placeholders(z);
       replace_speccmds(z);
@@ -5897,9 +6077,7 @@ size_t         sl,                     /* */
       }
 
       if (format_uses_output_buffer && use_output_buffer)
-      {
          insert_nl_token_buffer();
-      }
 
       switch (desttype)                   /* This is the last content line of a section */
       {
@@ -5913,10 +6091,9 @@ size_t         sl,                     /* */
          outln(z);                        /* normal line output */
       }
 
-
    }  /* if (z[0] != EOS) */
 
-   check_verb_style();     /* r5pl16 */
+   check_verb_style();                    /* r5pl16 */
 
    /* Leerzeilen dann ausgeben, wenn der Absatz sich nicht in einer */
    /* komprimierten Umgebung befindet. */
@@ -5937,7 +6114,7 @@ size_t         sl,                     /* */
          outln(sSrcRemOff);
          break;
 
-      case TOHAH:             /* V6.5.17 */
+      case TOHAH:                         /* V6.5.17 */
       case TOHTM:
       case TOMHH:
          html_ignore_p = FALSE;
@@ -5956,7 +6133,6 @@ size_t         sl,                     /* */
       }
 
    }  /* if (inside_short) */
-
    else
    {
       switch (desttype)
@@ -5968,37 +6144,37 @@ size_t         sl,                     /* */
          outln("\\par\\pard\\par");
          break;
 
-      case TOHAH:             /* V6.5.17 */
+      case TOHAH:                         /* V6.5.17 */
       case TOHTM:
       case TOMHH:
          if (!inside_short)
          {
             if (inside_center || inside_right)
-            {
                outln("</div>");
-            }
             else
             {
                if (inside_env)
                {
-                 outln("<br />&nbsp;");
+                  if (html_doctype < XHTML_STRICT)
+                     outln("<br>");       /* was "<br />&nbsp;" */
+                  else
+                     outln("<br />");     /* was "<br />&nbsp;" */
                }
                else
-               {
                   outln("</p>\n");
-               }
             }
          }
          else
          {
             if (inside_env)
             {
-               outln("<br />&nbsp;");
+               if (html_doctype < XHTML_STRICT)
+                  outln("<br>");          /* was "<br />&nbsp;" */
+               else
+                  outln("<br />");        /* was "<br />&nbsp;" */
             }
             else
-            {
                outln("</p>\n");
-            }
          }
          break;
 
@@ -6008,27 +6184,21 @@ size_t         sl,                     /* */
 
       case TONRO:
          if (!inside_env)
-         {
             outln("");
-         }
+         
          break;
 
       case TOLDS:
          if (inside_quote)
-         {
             outln("</quote>");
-         }
          else
-         {
             outln("");
-         }
+         
          break;
 
       case TOINF:
          if (inside_center)
-         {
             outln("@center");
-         }
 
          outln("");
          break;
@@ -6082,9 +6252,8 @@ GLOBAL void tokenize ( char *s)
 	BOOLEAN found= FALSE;
 	register int i, j;
 
-	if ( s[0]==EOS )
-	{	return;		
-	}
+	if (s[0] == EOS)
+      return;
 
 	/* Bei einem neuen Kommando erst den Token-Buffer ausgeben, */
 	/* bevor das neue Kommando bearbeitet wird. */
@@ -6096,8 +6265,7 @@ GLOBAL void tokenize ( char *s)
 	str2tok(s);	
 
 	if (!newtoken)
-	{	return;
-	}
+      return;
 
 	i= 0;
 	while ( (i<token_counter) && (!found) )

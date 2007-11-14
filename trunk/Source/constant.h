@@ -223,13 +223,17 @@
 #define	HTML_MODERN_COLOR_ALINK		9
 
 /* New in r6pl16 [NHz] */
-#define HTML_OLD	0
-#define HTML_STRICT	1
-#define HTML_TRANS	2
-#define HTML_FRAME	3
-#define XHTML_STRICT	4
-#define XHTML_TRANS	5
-#define XHTML_FRAME	6
+#define HTML_OLD      0                   /* HTML 3.2 */
+#define HTML_STRICT   1                   /* HTML 4.01 */
+#define HTML_TRANS	 2                   /* HTML 4.01 Transitional */
+#define HTML_FRAME	 3                   /* HTML 4.01 Frameset */
+#define XHTML_STRICT	 4                   /* XHTML 1.0 Strict */
+#define XHTML_TRANS	 5                   /* XHTML 1.0 Transitional */
+#define XHTML_FRAME	 6                   /* XHTML 1.0 Frameset */
+
+
+
+
 
 /*	############################################################
 	# Dateinamen und Sonstiges
