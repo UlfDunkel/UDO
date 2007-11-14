@@ -694,103 +694,140 @@ GLOBAL BOOLEAN c_img_output ( const char *name, const char *caption, const BOOLE
 
 
 
-/*	############################################################
-	# GIF (nur fuer HTML)
-	############################################################	*/
-GLOBAL void c_gif_output ( const char *name, const char *caption, const char *suffix, const int border )
+
+
+/*******************************************************************************
+*
+*  c_gif_output():
+*     outputs GIF image tag (HTML only)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void c_gif_output(
+
+const char       *name,              /* */
+const char       *caption,           /* */
+const char       *suffix,            /* */
+const int         border)            /* */
 {
-	char		n[512], datei[512], gifdatei[512];
-	char		align[64];
-	char		sWidth[32], sHeight[32];
-	unsigned int	uiWidth, uiHeight;
-	BOOLEAN		inside_center, inside_right, inside_left, flag;
-	GIFHEADER	gifhead;
-	/* JPGHEADER	jpghead; */
+   char           n[512],            /* */
+                  datei[512],        /* */
+                  gifdatei[512];     /* */
+   char           align[64];         /* */
+   char           sWidth[32],        /* */
+                  sHeight[32];       /* */
+   unsigned int   uiWidth,           /* */
+                  uiHeight;          /* */
+   BOOLEAN        inside_center,     /* */
+                  inside_right,      /* */
+                  inside_left,       /* */
+                  flag;              /* */
+   GIFHEADER      gifhead;           /* */
+/* JPGHEADER      jpghead; */        /* */
+   char           closer[8] = "\0";  /* tag closer in XHTML */
 
-	if (no_images)
-	{	return;
-	}
-	
-	strcpy(datei, name);	/*r6pl3*/
-	sWidth[0]= EOS;			/*r6pl7*/
-	sHeight[0]= EOS;		/*r6pl7*/
+   
+   if (no_images)                         /* nothing to do here */
+      return;                             /* bye ... */
 
-	change_sep_suffix(datei, suffix);	/* PL6 */
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
 
-	save_upr_entry_image(datei);
-	
+   strcpy(datei, name);                   /*r6pl3*/
+   
+   sWidth[0]  = EOS;                      /*r6pl7*/
+   sHeight[0] = EOS;                      /*r6pl7*/
+   
+   change_sep_suffix(datei, suffix);      /* PL6 */
+
+   save_upr_entry_image(datei);
+
 #if __MACOS__
-	if (*datei == ':') datei++;
-	replace_char(datei, ":", "/");
+   if (*datei == ':')
+      datei++;
+   
+   replace_char(datei, ":", "/");
 #else
-	replace_char(datei, "\\", "/");
+   replace_char(datei, "\\", "/");
 #endif
 
-	inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);
-	inside_right= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_RIGH);
-	inside_left= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_LEFT);
+   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
+   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
+   inside_left   = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_LEFT);
 
-	if (!inside_center && !inside_right && !inside_left)
-	{
-		switch (image_alignment)	/*r6pl9*/
-		{
-			case ALIGN_CENT:	inside_center= TRUE;	break;
-			case ALIGN_RIGH:	inside_right= TRUE;		break;
-		}
-	}
+   if (!inside_center && !inside_right && !inside_left)
+   {
+      switch (image_alignment)            /*r6pl9*/
+      {
+      case ALIGN_CENT:
+         inside_center = TRUE;
+         break;
+      case ALIGN_RIGH:
+         inside_right = TRUE;
+      }
+   }
 
-	strcpy(align, "<p>");
+   strcpy(align, "<p>");
 
-	if (inside_center)
-	{	/* Bild in einer center-Umgebung */
-		strcpy(align, "<p align=\"center\">");
-	}
-	if (inside_right)
-	{	/* Bild in einer flushright-Umgebung */
-		strcpy(align, "<p align=\"right\">");
-	}
+   if (inside_center)                     /* Bild in einer center-Umgebung */
+   {
+      strcpy(align, "<p align=\"center\">");
+   }
 
-	if (!no_img_size)
-	{	if (my_stricmp(suffix, ".gif")==0)
-		{
-			strcpy(gifdatei, datei);
-			strinsert(gifdatei, old_outfile.path);
-			strinsert(gifdatei, old_outfile.driv);
-			path_adjust_separator(gifdatei);
-			flag= get_gifheader(gifdatei, &gifhead);
-			if (!flag)
-			{
-				build_image_filename(gifdatei, suffix);
-				flag= get_gifheader(gifdatei, &gifhead);
+   if (inside_right)                      /* Bild in einer flushright-Umgebung */
+   {
+      strcpy(align, "<p align=\"right\">");
+   }
 
-				if (!flag)
-				{
-					sWidth[0]= EOS;
-					error_read_gif(gifdatei);
-				}
-			}
+   if (!no_img_size)
+   {
+      if (my_stricmp(suffix, ".gif") == 0)
+      {
+         strcpy(gifdatei, datei);
+         strinsert(gifdatei, old_outfile.path);
+         strinsert(gifdatei, old_outfile.driv);
+         path_adjust_separator(gifdatei);
+         flag = get_gifheader(gifdatei, &gifhead);
 
-			if (flag)
-			{
-				calc_gifsize(&uiWidth, &uiHeight, &gifhead);
-				sprintf(sWidth, " width=\"%u\"", uiWidth);
-				sprintf(sHeight, " height=\"%u\"", uiHeight);
-			}
-		}
-	}
+         if (!flag)
+         {
+            build_image_filename(gifdatei, suffix);
+            flag = get_gifheader(gifdatei, &gifhead);
 
-	if ( caption[0]==EOS ) /* r6pl17: deleted <br /> at the end of the string next line [voja] */
-	{	sprintf(n, "%s<img src=\"%s\" border=\"%d\"%s%s /></p>", align, datei, border, sWidth, sHeight);	/* r6pl3 */
-		outln(n);
-	}
-	else
-	{	image_counter++; /* r6pl17: deleted <br /> at the end of the string next line [voja] */
-		sprintf(n, "%s<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"%d\"%s%s /></p>",
-					 align, datei, caption, caption, border, sWidth, sHeight);
-		outln(n);
-	}
-	
-}	/* c_gif_output */
+            if (!flag)
+            {
+               sWidth[0] = EOS;
+               error_read_gif(gifdatei);
+            }
+         }
+
+         if (flag)
+         {
+            calc_gifsize(&uiWidth, &uiHeight, &gifhead);
+            sprintf(sWidth, " width=\"%u\"", uiWidth);
+            sprintf(sHeight, " height=\"%u\"", uiHeight);
+         }
+      }
+   }
+
+   if (caption[0] == EOS)                 /* r6pl17: deleted <br> at the end of the string next line [voja] */
+   {
+                                          /* r6pl3 */
+      sprintf(n, "%s<img src=\"%s\" border=\"%d\"%s%s%s></p>", align, datei, border, sWidth, sHeight, closer);
+      outln(n);
+   }
+   else
+   {
+      image_counter++;                    /* r6pl17: deleted <br> at the end of the string next line [voja] */
+      sprintf(n, "%s<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"%d\"%s%s%s></p>",
+         align, datei, caption, caption, border, sWidth, sHeight, closer);
+      outln(n);
+   }
+
+}  /* c_gif_output */
 
 
 

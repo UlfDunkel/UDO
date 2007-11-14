@@ -901,8 +901,12 @@ GLOBAL void c_maketitle(void)
              has_address,       /* flag */
              has_company,       /* flag; New in V6.5.2 [NHz] */
              has_distributor;   /* flag */
+   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
 
-
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
    if (called_maketitle)                  /* this function has been used already? */
    {
 	   error_called_twice("!maketitle");   /*r6pl2*/
@@ -1888,17 +1892,17 @@ GLOBAL void c_maketitle(void)
       
       if (has_version)
       {
-         voutlnf("%s<br />", titdat.version);
+         voutlnf("%s<br%s>", titdat.version, closer);
       }
       
       if (has_date)
       {
-         voutlnf("%s<br />", titdat.date);
+         voutlnf("%s<br%s>", titdat.date, closer);
       }
       
       if (has_author || has_authorimage)
       {
-         voutlnf("<br />%s<br />", lang.by);
+         voutlnf("<br%s>%s<br%s>", closer, lang.by, closer);
       }
       
       if (has_authorimage)
@@ -1915,15 +1919,15 @@ GLOBAL void c_maketitle(void)
       
       if (has_author)
       {
-         voutlnf("%s<br />", titdat.author);
+         voutlnf("%s<br%s>", titdat.author, closer);
       }
 
       /* New in V6.5.2 [NHz] */
       if (has_company)
       {
          auto_quote_chars(lang.fur, FALSE);
-         voutlnf("<br />%s<br />", lang.fur);
-         voutlnf("%s<br />", titdat.company);
+         voutlnf("<br%s>%s<br%s>", closer, lang.fur, closer);
+         voutlnf("%s<br%s>", titdat.company, closer);
       }
 
       if (has_address)
@@ -1932,7 +1936,7 @@ GLOBAL void c_maketitle(void)
          {
             if (titdat.address[i] != NULL)
             {
-               voutlnf("%s<br />", titdat.address[i]);
+               voutlnf("%s<br%s>", titdat.address[i], closer);
             }
          }
       }
@@ -1940,8 +1944,8 @@ GLOBAL void c_maketitle(void)
       if (has_distributor)
       {
          auto_quote_chars(lang.distributor, FALSE);
-         voutlnf("<br />%s<br />", lang.distributor);
-         voutlnf("%s<br />", titdat.distributor);
+         voutlnf("<br%s>%s<br%s>", closer, lang.distributor, closer);
+         voutlnf("%s<br%s>", titdat.distributor, closer);
       }
 
       if (has_version || has_date || has_author || has_address || has_distributor)
@@ -1951,7 +1955,10 @@ GLOBAL void c_maketitle(void)
 
       if (uses_tableofcontents)
       {
-         outln(HTML_HR);
+         if (html_doctype < XHTML_STRICT)
+            outln(HTML_HR);
+         else
+            outln(XHTML_HR);
       }
 
       /* New in V6.5.9 [NHz] */

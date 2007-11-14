@@ -1542,177 +1542,219 @@ LOCAL void c_xlink ( char *s, BOOLEAN inside_b4_macro )
 
 
 
-/*	--------------------------------------------------------------
-	c_ilink()
-	Umwandeln des (!ilink [] [] []) Kommandos in einer Zeile.
-	->	inside_b4_macro:	Sind bereits Makros in dieser Zeile
-							umgewandelt worden?
-	<->	s:					komplette Zeile
-	--------------------------------------------------------------
-	Kommandosyntax: (!ilink [filename] [alternativtext] [linkziel])
-	--------------------------------------------------------------	*/
-LOCAL void c_ilink ( char *s, const BOOLEAN inside_b4_macro )
+
+
+/*******************************************************************************
+*
+*  c_ilink():
+*     Umwandeln des (!ilink [] [] []) Kommandos in einer Zeile.
+*
+*  Kommandosyntax: (!ilink [filename] [alternativtext] [linkziel])
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void c_ilink(
+
+char           *s,                 /* komplette Zeile */
+const BOOLEAN   inside_b4_macro)   /* Sind bereits Makros in dieser Zeile umgewandelt worden? */
 {
-	int pnr=0;
-	char s_entry[1024], img_entry[1024], old_entry[1024], link[1024];
-	char *ptr;
-	BOOLEAN flag;
-	BOOLEAN linkerror;
-	BOOLEAN	old_autorefoff;
+   int          pnr = 0;           /* */
+   char         s_entry[1024],     /* */
+                img_entry[1024],   /* */
+                old_entry[1024],   /* */
+                link[1024];        /* */
+   char        *ptr;               /* */
+   BOOLEAN      flag;              /* */
+   BOOLEAN      linkerror;         /* */
+   BOOLEAN      old_autorefoff;    /* */
+   char         closer[8] = "\0";  /* tag closer */
+   
+   
+   old_autorefoff = bDocAutorefOff;
+   bDocAutorefOff = FALSE;
+   
+   linkerror = FALSE;
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   while (!linkerror && ((pnr = get_parameters(s, "ilink", 3)) == 3) )
+   {
+      strcpy(link, Param[3]);
+      del_whitespaces(Param[1]);
+      del_whitespaces(Param[2]);
+      del_whitespaces(Param[3]);
+   
+      if (inside_b4_macro)
+      {
+         /* Fixed bug #0000055 in V6.5.2 [NHz] */
+/*       if (desttype!=TOSTG)
+         {
+            auto_quote_chars(Param[2], TRUE);
+            auto_quote_chars(Param[3], TRUE);
+         }
+*/
+   
+         adjust_params_inside(Param[1]);
+         adjust_params_inside(Param[2]);
+         adjust_params_inside(Param[3]);
+      }
+      
+      fsplit(Param[1], tmp_driv, tmp_path, tmp_name, tmp_suff);
+      
+      replace_udo_quotes(Param[2]);
+      replace_udo_quotes(Param[3]);
+      
+      switch (desttype)
+      {
+      case TOHAH:                         /* V6.5.17 */
+      case TOHTM:
+      case TOMHH:
+         strcpy(tmp_suff, sDocImgSuffix);
+         sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
+         replace_char(Param[1], "\\", "/");
+         
+         strcpy(s_entry, Param[3]);
+         c_tilde(s_entry);
+         replace_udo_quotes(s_entry);
+         
+         convert_tilde(Param[2]);
+         convert_tilde(Param[3]);
+         replace_udo_quotes(Param[2]);
+         replace_udo_quotes(Param[3]);
+         strcpy(old_entry, Param[3]);
+         
+                                          /* auch innerhalb des Nodes linken (TRUE)! */
+         auto_references(s_entry, TRUE, "", 0, 0);
+         
+         /* Trick/Hack: Schauen, ob nun "> im Eintrag steht und dann */
+         /* ab dort den Image-Eintrag setzen. */
+         
+         flag = FALSE;
+         
+         if ( (ptr = strstr(s_entry, "\">")) != NULL )
+         {
+            if (no_images)                /* r6pl2 */
+            {
+               strcpy(img_entry, Param[2]);
+            }
+            else
+            {
+               sprintf(img_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s>",
+                  Param[1], Param[2], Param[2], closer);
+            }
 
-	old_autorefoff= bDocAutorefOff;
-	bDocAutorefOff= FALSE;
+            flag = replace_once(ptr, old_entry, img_entry);
+         }
+         
+         if (!flag)
+         {
+            error_undefined_link(link);
+            strcpy(s_entry, Param[2]);    /* PL9 */
+         }
+         
+         linkerror = !insert_placeholder(s, Param[0], s_entry, Param[2]);
+         break;
+         
+      case TOWIN:
+      case TOWH4:
+      case TOAQV:
+         strcpy(tmp_suff, ".bmp");
+         sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
+         replace_char(Param[1], "\\", "/");
+         
+         strcpy(s_entry, Param[3]);
+         c_tilde(s_entry);
+         replace_udo_quotes(s_entry);
+         
+         convert_tilde(Param[2]);
+         convert_tilde(Param[3]);
+         replace_udo_quotes(Param[2]);
+         replace_udo_quotes(Param[3]);
+         strcpy(old_entry, Param[3]);
+         
+                                          /* auch innerhalb des Nodes linken (TRUE)! */
+         auto_references(s_entry, TRUE, "", 0, 0);
+         
+         /* Trick: Schauen, ob nun {\uldb im Eintrag steht und dann */
+         /* ab dort den Image-Text einsetzen. */
+         
+         flag = FALSE;
+         
+         if ( (ptr = strstr(s_entry, "{\\uldb")) != NULL )
+         {
+            if (no_images)                /*r6pl2*/
+            {
+               strcpy(img_entry, Param[2]);
+            }
+            else
+            {
+               sprintf(img_entry, "\\{bmc %s\\}", Param[1]);
+            }
 
-	linkerror = FALSE;
-	while ( !linkerror && ((pnr=get_parameters(s, "ilink", 3))==3) )
-	{
-		strcpy(link, Param[3]);
-		del_whitespaces(Param[1]);
-		del_whitespaces(Param[2]);
-		del_whitespaces(Param[3]);
+            flag = replace_once(ptr, old_entry, img_entry);
+         }
+         
+         if (!flag)
+         {
+            error_undefined_link(link);
+            strcpy(s_entry, Param[2]);    /* PL9 */
+         }
+         
+         linkerror = !insert_placeholder(s, Param[0], s_entry, Param[2]);
+         break;
+         
+      case TOLDS:
+         linkerror= !convert_link_lds(s, Param[0], Param[2], Param[3], link);
+         break;
+         
+      case TOSTG:
+      case TOAMG:
+         linkerror= !convert_link_stg(s, Param[0], Param[2], Param[3], link);
+         break;
+         
+      case TOTEX:
+      case TOPDL:
+         linkerror= !convert_link_tex(s, Param[0], Param[2], Param[3]);
+         break;
+         
+      case TOLYX:
+         linkerror= !convert_link_lyx(s, Param[0], Param[2], Param[3]);
+         break;
+         
+      case TOTVH:
+         linkerror= !convert_link_tvh(s, Param[0], Param[2], Param[3]);
+         break;
+         
+      /* New in V6.5.5 [NHz] */
+      case TOKPS:
+         linkerror= !convert_link_ps(s, Param[0], Param[2], Param[3], link);
+         break;
+         
+      default:
+         linkerror= !convert_link_etc(s, Param[0], Param[2], Param[3], link);
+      }
+   }
+   
+   if (linkerror)
+   {
+      replace_once(s, Param[0], Param[2]);
+      error_replace_param("!ilink");
+   }
+   
+   if (pnr != 0 && pnr != 3)
+   {
+      error_wrong_nr_parameters("!ilink");
+   }
+   
+   bDocAutorefOff = old_autorefoff;
+   
+}  /* c_ilink */
 
-		if (inside_b4_macro)
-		{
-			/* Fixed bug #0000055 in V6.5.2 [NHz] */
-			/*if (desttype!=TOSTG)
-			{	auto_quote_chars(Param[2], TRUE);	
-				auto_quote_chars(Param[3], TRUE);	
-			}*/
 
-			adjust_params_inside(Param[1]);
-			adjust_params_inside(Param[2]);
-			adjust_params_inside(Param[3]);
-		}
-
-		fsplit(Param[1], tmp_driv, tmp_path, tmp_name, tmp_suff);
-
-		replace_udo_quotes(Param[2]);
-		replace_udo_quotes(Param[3]);
-
-		switch(desttype)
-		{
-			case TOHAH:		/* V6.5.17 */
-			case TOHTM:
-			case TOMHH:
-				strcpy(tmp_suff, sDocImgSuffix);
-				sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
-				replace_char(Param[1], "\\", "/");
-
-				strcpy(s_entry, Param[3]);
-				c_tilde(s_entry);
-				replace_udo_quotes(s_entry);
-
-				convert_tilde(Param[2]);
-				convert_tilde(Param[3]);
-				replace_udo_quotes(Param[2]);
-				replace_udo_quotes(Param[3]);
-				strcpy(old_entry, Param[3]);
-
-				auto_references(s_entry, TRUE, "", 0, 0);		/* auch innerhalb des Nodes linken (TRUE)! */
-
-				/* Trick/Hack: Schauen, ob nun "> im Eintrag steht und dann */
-				/* ab dort den Image-Eintrag setzen. */
-
-				flag= FALSE;
-
-				if ( (ptr=strstr(s_entry, "\">")) != NULL )
-				{	if (no_images)	/* r6pl2 */
-					{	strcpy(img_entry, Param[2]);
-					}
-					else
-					{	sprintf(img_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\" />",
-							Param[1], Param[2], Param[2]);
-					}
-					flag= replace_once(ptr, old_entry, img_entry);
-				}
-
-				if (!flag)
-				{	error_undefined_link(link);
-					strcpy(s_entry, Param[2]);	/* PL9 */
-				}
-
-				linkerror= !insert_placeholder(s, Param[0], s_entry, Param[2]);
-				break;
-
-			case TOWIN:
-			case TOWH4:
-			case TOAQV:
-				strcpy(tmp_suff, ".bmp");
-				sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
-				replace_char(Param[1], "\\", "/");
-
-				strcpy(s_entry, Param[3]);
-				c_tilde(s_entry);
-				replace_udo_quotes(s_entry);
-
-				convert_tilde(Param[2]);
-				convert_tilde(Param[3]);
-				replace_udo_quotes(Param[2]);
-				replace_udo_quotes(Param[3]);
-				strcpy(old_entry, Param[3]);
-
-				auto_references(s_entry, TRUE, "", 0, 0);		/* auch innerhalb des Nodes linken (TRUE)! */
-
-				/* Trick: Schauen, ob nun {\uldb im Eintrag steht und dann */
-				/* ab dort den Image-Text einsetzen. */
-				flag= FALSE;
-				if ( (ptr=strstr(s_entry, "{\\uldb")) != NULL )
-				{	if (no_images)	/*r6pl2*/
-					{	strcpy(img_entry, Param[2]);
-					}
-					else
-					{	sprintf(img_entry, "\\{bmc %s\\}", Param[1]);
-					}
-					flag= replace_once(ptr, old_entry, img_entry);
-				}
-
-				if (!flag)
-				{	error_undefined_link(link);
-					strcpy(s_entry, Param[2]);	/* PL9 */
-				}
-
-				linkerror= !insert_placeholder(s, Param[0], s_entry, Param[2]);
-				break;
-
-			case TOLDS:
-				linkerror= !convert_link_lds(s, Param[0], Param[2], Param[3], link);
-				break;
-			case TOSTG:
-			case TOAMG:
-				linkerror= !convert_link_stg(s, Param[0], Param[2], Param[3], link);
-				break;
-			case TOTEX:
-			case TOPDL:
-				linkerror= !convert_link_tex(s, Param[0], Param[2], Param[3]);
-				break;
-			case TOLYX:
-				linkerror= !convert_link_lyx(s, Param[0], Param[2], Param[3]);
-				break;
-			case TOTVH:
-				linkerror= !convert_link_tvh(s, Param[0], Param[2], Param[3]);
-				break;
-			/* New in V6.5.5 [NHz] */
-			case TOKPS:
-				linkerror= !convert_link_ps(s, Param[0], Param[2], Param[3], link);
-				break;
-			default:
-				linkerror= !convert_link_etc(s, Param[0], Param[2], Param[3], link);
-				break;
-		}
-	}
-
-	if (linkerror)
-	{	replace_once(s, Param[0], Param[2]);
-		error_replace_param("!ilink");
-	}
-
-	if (pnr!=0 && pnr!=3)
-	{	error_wrong_nr_parameters("!ilink");
-	}
-
-	bDocAutorefOff= old_autorefoff;
-
-}	/*c_ilink*/
 
 
 
@@ -2745,145 +2787,211 @@ LOCAL void c_internal_time ( char *s, const BOOLEAN inside_b4_macro )
 
 }	/*c_internal_time*/
 
-LOCAL void c_internal_image ( char *s, const BOOLEAN inside_b4_macro )
+
+
+
+
+/*******************************************************************************
+*
+*  c_internal_image():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void c_internal_image(
+
+char             *s,                 /* */
+const BOOLEAN     inside_b4_macro)   /* */
 {
-	int pnr=0, count;
-	char s_entry[1024], sGifSize[80], sGifName[512];
-	BOOLEAN flag;
-	unsigned int uiW, uiH;
+   int            pnr = 0,           /* */
+                  count;             /* */
+   char           s_entry[1024],     /* */
+                  sGifSize[80],      /* */
+                  sGifName[512];     /* */
+   BOOLEAN        flag;              /* */
+   unsigned int   uiW,               /* */
+                  uiH;               /* */
+   char           closer[8] = "\0";  /* single tag closer mark in XHTML */
 
-	flag = FALSE;
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   flag = FALSE;
+   
+   count = get_nr_of_parameters("img",s); /* V 6.5.18 */
+   
+                                          /* V 6.5.18 */
+   while (!flag && ((pnr = get_parameters(s, "img", count)) == 2 || pnr == 3) )
+   {
+      if (inside_b4_macro)
+      {
+         /* Fixed bug #0000055 in V6.5.2 [NHz] */
+/*       if (desttype != TOSTG)
+         {
+            auto_quote_chars(Param[2], TRUE);	
+         }
+*/
+   
+         adjust_params_inside(Param[1]);
+         adjust_params_inside(Param[2]);
+         adjust_params_inside(Param[3]);  /* V 6.5.18 */
+      }
+   
+      fsplit(Param[1], tmp_driv, tmp_path, tmp_name, tmp_suff);
+   
+      replace_udo_quotes(Param[2]);
+      replace_udo_quotes(Param[3]);       /* V 6.5.18 */
+   
+      switch (desttype)
+      {
+      case TOHAH:                         /* V6.5.17 */
+      case TOHTM:
+      case TOMHH:
+         strcpy(tmp_suff, sDocImgSuffix);
+         sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
+         path_adjust_separator(Param[1]);
+         
+         uiW = uiH = 0;
+         sGifSize[0] = EOS;
+         
+         if (!no_img_size)
+         {
+            if (my_stricmp(tmp_suff, ".gif") == 0)
+            {
+               strcpy(sGifName, Param[1]);
+               strinsert(sGifName, old_outfile.path);
+               strinsert(sGifName, old_outfile.driv);
+               path_adjust_separator(sGifName);
+         
+               if (!get_gif_size(sGifName, &uiW, &uiH))
+               {
+                  error_read_gif(sGifName);
+               }
+            }
+         }
+         
+         if (uiW != 0 && uiH != 0)
+         {
+            sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
+         }
+         
+         replace_char(Param[1], "\\", "/");
+         
+         if (no_images)                   /*r6pl2*/
+         {
+            strcpy(s_entry, Param[2]);
+         }
+         else                             /* Feature-Wunsch 0000070 V6.5.18 */
+         {
+            if (Param[3][0] != EOS)
+            {
+               sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s>",
+                  Param[1], Param[2], Param[3], sGifSize, closer);
+            }
+            else
+            {
+               sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s>",
+                  Param[1], Param[2], Param[2], sGifSize, closer);
+            }
+         }
+         
+         flag = !insert_placeholder(s, Param[0], s_entry, Param[2]);
+         break;
+         
+      case TOHPH:
+         strcpy(tmp_suff, sDocImgSuffix);
+         sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
+         replace_char(Param[1], "\\", "/");
+         
+         if (no_images)                   /*r6pl2*/
+         {
+            strcpy(s_entry, Param[2]);
+         }
+         else
+         {
+            sprintf(s_entry, "<graphic>%s<\\graphic>", Param[1]);
+         }
+         
+         flag = !insert_placeholder(s, Param[0], s_entry, Param[2]);
+         break;
+         
+      case TOWIN:
+      case TOWH4:
+      case TOAQV:
+         strcpy(tmp_suff, ".bmp");
+         sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
+         replace_char(Param[1], "\\", "/");
+         
+         if (no_images)                   /*r6pl2*/
+         {
+            strcpy(s_entry, Param[2]);
+         }
+         else
+         {
+            sprintf(s_entry, " \\{bmc %s\\}", Param[1]);
+         }
+         
+         flag = !insert_placeholder(s, Param[0], s_entry, Param[2]);
+         break;
+         
+      case TOIPF:                         /*r6pl8*/
+         strcpy(tmp_suff, ".bmp");
+         sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
+         
+         if (no_images)                   /*r6pl2*/
+         {
+            strcpy(s_entry, Param[2]);
+         }
+         else
+         {
+            sprintf(s_entry, "\n:artwork runin name='%s'.\n", Param[1]);
+         }
+         
+         flag = !insert_placeholder(s, Param[0], s_entry, Param[2]);
+         break;
+         
+      /* New in r6.3pl3 [NHz] */
+      case TORTF:
+         strcpy(s_entry, "");
+         
+         flag = !insert_placeholder(s, Param[0], s_entry, Param[2]);
+         break;
+      
+      /* New in V6.5.5 [NHz] */
+      case TOKPS:
+         strcpy(s_entry, Param[2]);
+         c_vars(s_entry);
+         replace_all(s_entry, KPSPC_S, ")");
+         replace_all(s_entry, KPSPO_S, "(");
+         
+         flag = !insert_placeholder(s, Param[0], s_entry, Param[2]);
+         break;
 
-	count = get_nr_of_parameters ( "img", s ); 	/* V 6.5.18 */
+      default:
+         strcpy(s_entry, Param[2]);
+         flag = !insert_placeholder(s, Param[0], s_entry, Param[2]);
+      }
+   }
+   
+   if (flag)
+   {
+      replace_once(s, Param[0], Param[2]);
+      error_replace_param("!img");
+   }
+   
+   if (pnr != 0 && pnr == 1)
+   {
+      error_wrong_nr_parameters("!img");
+   }
+   
+}   /* c_internal_image */
 
-	while ( !flag && ((pnr=get_parameters(s, "img", count))==2 || pnr==3) ) 	/* V 6.5.18 */
-	{
-		if (inside_b4_macro)
-		{
-			/* Fixed bug #0000055 in V6.5.2 [NHz] */
-			/*if (desttype!=TOSTG)
-			{	auto_quote_chars(Param[2], TRUE);	
-			}*/
 
-			adjust_params_inside(Param[1]);
-			adjust_params_inside(Param[2]);
-			adjust_params_inside(Param[3]);		/* V 6.5.18 */
-		}
 
-		fsplit(Param[1], tmp_driv, tmp_path, tmp_name, tmp_suff);
-
-		replace_udo_quotes(Param[2]);
-		replace_udo_quotes(Param[3]); 	/* V 6.5.18 */
-
-		switch(desttype)
-		{
-			case TOHAH:		/* V6.5.17 */
-			case TOHTM:
-			case TOMHH:
-				strcpy(tmp_suff, sDocImgSuffix);
-				sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
-				path_adjust_separator(Param[1]);
-				uiW= uiH= 0;
-				sGifSize[0]= EOS;
-				if (!no_img_size)
-				{
-					if (my_stricmp(tmp_suff, ".gif")==0)
-					{
-						strcpy(sGifName, Param[1]);
-						strinsert(sGifName, old_outfile.path);
-						strinsert(sGifName, old_outfile.driv);
-						path_adjust_separator(sGifName);
-
-						if (!get_gif_size(sGifName, &uiW, &uiH))
-						{	error_read_gif(sGifName);
-						}
-					}
-				}
-				if (uiW!=0 && uiH!=0)
-				{	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
-				}
-				replace_char(Param[1], "\\", "/");
-				if (no_images)	/*r6pl2*/
-				{	strcpy(s_entry, Param[2]);
-				}
-				else  /* Feature-Wunsch 0000070 V6.5.18 */
-				{
-					if ( Param[3][0] != EOS )
-						sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s />",
-							Param[1], Param[2], Param[3], sGifSize);
-					else
-						sprintf(s_entry, "<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s />",
-							Param[1], Param[2], Param[2], sGifSize);
-				}
-				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
-				break;
-			case TOHPH:
-				strcpy(tmp_suff, sDocImgSuffix);
-				sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
-				replace_char(Param[1], "\\", "/");
-				if (no_images)	/*r6pl2*/
-				{	strcpy(s_entry, Param[2]);
-				}
-				else
-				{	sprintf(s_entry, "<graphic>%s<\\graphic>", Param[1]);
-				}
-				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
-				break;
-			case TOWIN:
-			case TOWH4:
-			case TOAQV:
-				strcpy(tmp_suff, ".bmp");
-				sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
-				replace_char(Param[1], "\\", "/");
-				if (no_images)	/*r6pl2*/
-				{	strcpy(s_entry, Param[2]);
-				}
-				else
-				{	sprintf(s_entry, " \\{bmc %s\\}", Param[1]);
-				}
-				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
-				break;
-			case TOIPF:	/*r6pl8*/
-				strcpy(tmp_suff, ".bmp");
-				sprintf(Param[1], "%s%s%s%s", tmp_driv, tmp_path, tmp_name, tmp_suff);
-				if (no_images)	/*r6pl2*/
-				{	strcpy(s_entry, Param[2]);
-				}
-				else
-				{	sprintf(s_entry, "\n:artwork runin name='%s'.\n", Param[1]);
-				}
-				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
-				break;
-			/* New in r6.3pl3 [NHz] */
-			case TORTF:
-				strcpy(s_entry, "");
-				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
-				break;
-			/* New in V6.5.5 [NHz] */
-			case TOKPS:
-				strcpy(s_entry, Param[2]);
-				c_vars(s_entry);
-				replace_all(s_entry, KPSPC_S, ")");
-				replace_all(s_entry, KPSPO_S, "(");
-				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
-				break;
-			default:
-				strcpy(s_entry, Param[2]);
-				flag= !insert_placeholder(s, Param[0], s_entry, Param[2]);
-				break;
-		}
-	}
-
-	if (flag)
-	{	replace_once(s, Param[0], Param[2]);
-		error_replace_param("!img");
-	}
-
-	if (pnr!=0 && pnr==1 )
-	{	error_wrong_nr_parameters("!img");
-	}
-
-}	/*c_internal_image*/
 
 
 LOCAL BOOLEAN c_single_raw ( char *s, const BOOLEAN inside_b4_macro )

@@ -209,8 +209,11 @@
 /* HTML-Kommandos                                       */
 /* --------------------------------------------------   */
 
-#define HTML_BR          "<br />"
-#define HTML_HR          "<hr />"
+#define HTML_BR          "<br>"
+#define HTML_HR          "<hr>"
+
+#define XHTML_BR         "<br />"
+#define XHTML_HR         "<hr />"
 
 /* the next two seem to be unused so far */
 #define HTML_CENTER_ON   "<p align=\"center\">"
