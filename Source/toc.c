@@ -2525,7 +2525,7 @@ LOCAL void output_html_doctype ( void )
 	switch(html_doctype)
 	{
 		case HTML_OLD:
-			outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 3.2//EN\">");
+			outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN">");
 			break;
 		case HTML_STRICT:
 			outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"");
