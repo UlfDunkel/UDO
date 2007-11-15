@@ -3455,7 +3455,7 @@ BOOLEAN           head)              /* */
    
    if (for_main_file)
    {
-      if (p1_toc_counter>0 && !html_merge_node1)
+      if (p1_toc_counter > 0 && !html_merge_node1)
       {
          i = 1;
       }
@@ -3614,6 +3614,8 @@ BOOLEAN           head)              /* */
    {
       if (!html_modern_layout && !html_frames_layout)
       {
+         outln("");
+         
          if (html_doctype < XHTML_STRICT)
             outln(HTML_HR);
          else
@@ -4296,8 +4298,6 @@ GLOBAL void html_footer ( void )
 
 	if (has_counter || has_main_counter || has_name || has_email || has_url || has_mailurl)
 	{
-      outln("");                          /* v6.5.19 [fd] */
-      
       if (html_doctype < XHTML_STRICT)
          outln(HTML_HR);
       else
@@ -9321,8 +9321,6 @@ LOCAL void do_subsubsubtoc ( void )
 *  do_topdoc():
 *     outputs the navigation section (basically on top of the current page)
 *
-*     
-*
 *  return:
 *     -
 *
@@ -9354,7 +9352,7 @@ const int    currdepth)                 /* current node depth */
    if (!use_auto_toptocs)
       return;
    
-   if (html_merge_node1 )
+   if (html_merge_node1)
       return;
    
    if (html_merge_node2 && currdepth >= TOC_NODE2)
@@ -9378,7 +9376,8 @@ const int    currdepth)                 /* current node depth */
       }
       else
       {
-         sprintf(sIndent, "<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>", GIF_FS_NAME, uiGifFsWidth, uiGifFsHeight, closer);
+         sprintf(sIndent, "<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>", 
+            GIF_FS_NAME, uiGifFsWidth, uiGifFsHeight, closer);
       }
    
       if (html_frames_layout)
@@ -9411,7 +9410,7 @@ const int    currdepth)                 /* current node depth */
          else if (html_navigation_line)   /* new v6.5.19[fd] */
          {
                                           /* open CSS class div */
-            outln("\n<div class=\"UDO_nav_line\">");
+            outln("<div class=\"UDO_nav_line\">");
             
             if (html_navigation_image)
             {

@@ -2731,7 +2731,7 @@ GLOBAL void c_end_description ( void )
 		case TOHAH:		/* V6.5.17 */
 		case TOHTM:
 		case TOMHH:
-			outln("</dd>\n</dl>");	/* Changed in V6.5.11 [NHz] */
+			outln("</dd>\n</dl>\n");	/* Changed in V6.5.11 [NHz] */
 			break;
 		case TOHPH:
 			outln("<\\list>");
