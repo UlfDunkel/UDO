@@ -2525,7 +2525,7 @@ LOCAL void output_html_doctype ( void )
 	switch(html_doctype)
 	{
 		case HTML_OLD:
-			outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN">");
+			outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN\">");
 			break;
 		case HTML_STRICT:
 			outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"");
@@ -9548,15 +9548,13 @@ const int    currdepth)                 /* current node depth */
       
       if (html_navigation_line)
       {                                   /* close CSS class div */
-         outln("\n</div> <!-- UDO_nav_line -->");
+         outln("\n</div> <!-- UDO_nav_line -->\n");
       }
 
       if (html_doctype < XHTML_STRICT)
          outln(HTML_HR);
       else
          outln(XHTML_HR);
-      
-      outln("");
       
       break;
    
