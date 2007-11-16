@@ -2916,7 +2916,7 @@ const char       *sep)               /* */
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         voutlnf("<img src=\"%s\" border=\"0\"%s%s>", sGifName, sGifSize, closer);
+         voutlnf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", sGifName, sGifSize, closer);
       }
    }
    
@@ -3111,7 +3111,7 @@ const char       *sep)               /* */
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         voutlnf("<img src=\"%s\" border=\"0\"%s%s>", sGifName, sGifSize, closer);
+         voutlnf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", sGifName, sGifSize, closer);
       }
    }
    
@@ -3278,7 +3278,7 @@ BOOLEAN           head)              /* */
          sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
       }
       
-      voutlnf("<img src=\"%s\" border=\"0\"%s%s>", s, sGifSize, closer);
+      voutlnf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
    }
 #else
                                           /* Verweis auf index.htm erzeugen */
@@ -3381,7 +3381,7 @@ BOOLEAN           head)              /* */
          	sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         voutlnf("<img src=\"%s\" border=\"0\"%s%s>", s, sGifSize, closer);
+         voutlnf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
       }
 #else
       html_back_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ");
@@ -3437,7 +3437,7 @@ BOOLEAN           head)              /* */
                   sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
                }
                
-               voutlnf("<img src=\"%s\" border=\"0\"%s%s>", s, sGifSize, closer);
+               voutlnf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
             }
 #else
                                           /* Frueher Link auf die Startseite */
@@ -3534,7 +3534,7 @@ BOOLEAN           head)              /* */
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         voutlnf("<img src=\"%s\" border=\"0\"%s%s>", s, sGifSize, closer);
+         voutlnf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
       }
    }
    
@@ -3694,7 +3694,7 @@ LOCAL void html_node_bar_modern(void)
          sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconActiveWidth, titdat.authoriconActiveHeight);
       }
       
-      voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=\"0\"%s%s></a>%s",
+      voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s></a>%s",
          sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon_active, sGifSize, closer, sAlignOff);
    }
    else
@@ -3706,7 +3706,7 @@ LOCAL void html_node_bar_modern(void)
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", titdat.authoriconWidth, titdat.authoriconHeight);
          }
          
-         voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=\"0\"%s%s></a>%s",
+         voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s></a>%s",
             sAlignOn, old_outfile.name, outfile.suff, titdat.authoricon, sGifSize, closer, sAlignOff);
       }
    }
@@ -3743,7 +3743,7 @@ LOCAL void html_node_bar_modern(void)
          }
          
                                           /*r6pl13*/
-         voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" border=\"0\"%s%s></a>%s",
+         voutlnf("%s<a href=\"%s%s\"><img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s></a>%s",
             sAlignOn, old_outfile.name, outfile.suff, ptrImg, sGifSize, closer, sAlignOff);
       }
    }

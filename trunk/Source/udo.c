@@ -3658,7 +3658,7 @@ GLOBAL void c_toplink(void)
    case TOHTM:
    case TOMHH:
                                           /* width and height set to 24 to fix bug #0000005 [voja] */
-      voutlnf("<p><a href=\"#\"><img src=\"%s\" border=\"0\" width=\"24\" height=\"24\"%s></a></p>", 
+      voutlnf("<p><a href=\"#\"><img src=\"%s\" alt=\"\" title=\"\" border=\"0\" width=\"24\" height=\"24\"%s></a></p>", 
          GIF_TP_NAME, closer);
    }
    
