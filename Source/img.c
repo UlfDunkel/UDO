@@ -812,16 +812,17 @@ const int         border)            /* */
          }
       }
    }
-
-   if (caption[0] == EOS)                 /* r6pl17: deleted <br> at the end of the string next line [voja] */
+   
+   if (caption[0] == EOS)                 /* no image alt / title text available */
    {
-                                          /* r6pl3 */
-      sprintf(n, "%s<img src=\"%s\" border=\"%d\"%s%s%s></p>", align, datei, border, sWidth, sHeight, closer);
+                                          /* output empty alt + title contents for valid HTML */
+      sprintf(n, "%s<img src=\"%s\" alt=\"\" title=\"\" border=\"%d\"%s%s%s></p>", 
+         align, datei, border, sWidth, sHeight, closer);
       outln(n);
    }
-   else
+   else                                   /* image alt / title text available */
    {
-      image_counter++;                    /* r6pl17: deleted <br> at the end of the string next line [voja] */
+      image_counter++;
       sprintf(n, "%s<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"%d\"%s%s%s></p>",
          align, datei, caption, caption, border, sWidth, sHeight, closer);
       outln(n);
@@ -1614,4 +1615,4 @@ GLOBAL void init_module_img ( void )
 /*	############################################################
 	# img.c
 	############################################################	*/
-
+   
