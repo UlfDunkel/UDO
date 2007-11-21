@@ -871,34 +871,46 @@ GLOBAL void win2sys ( char *s )
 }       /* win2sys */
 
 
-/*      ############################################################
-        #
-        # String mit HTML-Zeichen in Systemzeichen wandeln
-        #
-        ############################################################    */
-GLOBAL void html2sys ( char *s )
+
+
+
+/*******************************************************************************
+*
+*  html2sys():
+*     String mit HTML-Zeichen in Systemzeichen wandeln
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void html2sys(
+
+char             *s)       /* ^ to string */
 {
-        register int i;
-        char one[2];
-
-        if (s[0]==EOS)
-        {       return;
-        }
-
-        strcpy(one, " ");
-
-        for (i=0; i<128; i++)
-        {
-                one[0]= chrtab[i].system;
-                replace_all(s, chrtab[i].html, one);
-        }
-        for (i=0; i<MAXHTML7BIT; i++)
-        {
-                one[0]= html7bit[i].c;
-                replace_all(s, html7bit[i].quoted, one);
-        }
-
-}       /* html2sys */
+   register int   i;       /* counter */
+   char           one[2];  /* */
+   
+   
+   if (s[0] == EOS)                       /* nothing to do ... */
+      return;
+   
+   strcpy(one, " ");                      /* fd:20071121: really needed? */
+   
+   for (i = 0; i < 128; i++)              /* convert lower ASCII part */
+   {
+      one[0] = chrtab[i].system;
+      replace_all(s, chrtab[i].html, one);
+   }
+   
+   for (i = 0; i < MAXHTML7BIT; i++)      /* convert special HTML characters */
+   {
+      one[0] = html7bit[i].c;             /* get HTML character (e.g. '&') */
+                                          /* replace it (e.g. by '&amp;') */
+      replace_all(s, html7bit[i].quoted, one);
+   }
+   
+}  /* html2sys() */
 
 
 /*      ############################################################
