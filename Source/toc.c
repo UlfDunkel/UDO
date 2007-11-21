@@ -4481,23 +4481,42 @@ LOCAL void udofile_adjust_index ( void )
 
 }  /* udofile_adjust_index */
 
-/* --------------------------------------------------------------
-   --------------------------------------------------------------  */
 
-LOCAL int comp_index_html (const void *_p1, const void *_p2)
+
+
+
+/*******************************************************************************
+*
+*  comp_index_html():
+*     Compares two index entries.
+*
+*  return:
+*     -1: s1  < s2
+*      0: s1 == s2
+*      1: s1  > s2
+*
+******************************************|************************************/
+
+LOCAL int comp_index_html(
+
+const void  *_p1,              /* */
+const void  *_p2)              /* */
 {
-   char p1_tocname[512];
-   char p2_tocname[512];
+   char      p1_tocname[512];  /* */
+   char      p2_tocname[512];  /* */
+   
 
    const HTML_INDEX *p1 = (const HTML_INDEX *)_p1;
    const HTML_INDEX *p2 = (const HTML_INDEX *)_p2;
 
-   strcpy ( p1_tocname, p1->tocname );
-   html2sys ( p1_tocname );         /* V6.5.20 [gs] */
-   strcpy ( p2_tocname, p2->tocname );
-   html2sys ( p2_tocname );         /* V6.5.20 [gs] */
+   strcpy(p1_tocname, p1->tocname);
+   html2sys(p1_tocname);                  /* V6.5.20 [gs] */
+   
+   strcpy(p2_tocname, p2->tocname);
+   html2sys(p2_tocname);                  /* V6.5.20 [gs] */
 
-   return str_sort_cmp(p1_tocname, p2_tocname);  /* Instead of strcmp v6.5.20 [gs] */
+                                          /* Instead of strcmp v6.5.20 [gs] */
+   return str_sort_cmp(p1_tocname, p2_tocname);
 }
 
 
