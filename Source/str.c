@@ -1015,7 +1015,7 @@ static unsigned char sort_tab[] =
 /* 0x60 - 0x6F */   0x60,0x41,0x42,0x43,0x44,0x45,0x46,0x47,0x48,0x49,0x4A,0x4B,0x4C,0x4D,0x4E,0x4F,
 /* 0x70 - 0x7F */   0x50,0x51,0x52,0x53,0x54,0x55,0x56,0x57,0x58,0x59,0x5A,0x7B,0x7C,0x7D,0x7E,0x7F,
 /* 0x80 - 0x8F */   'C' ,'U' ,'E' ,'A' ,'A' ,'A' ,'A' ,'C' ,'E' ,'E' ,'E' ,'I' ,'I' ,'I' ,'A' ,'A' ,
-/* 0x90 - 0x9F */   'E' ,'A' ,'A' ,'O' ,'O' ,'O' ,'U' ,'U' ,'Y' ,'O' ,'U' ,0x9B,0x9C,0x9D,'S' ,0x9F,
+/* 0x90 - 0x9F */   'E' ,'A' ,'A' ,'O' ,'O' ,'O' ,'U' ,'U' ,'Y' ,'O' ,'U' ,0x9B,0x9C,0x9D,0x9E,'E' ,
 /* 0xA0 - 0xAF */   'A' ,'I' ,'O' ,'U' ,'N' ,'N' ,'A' ,'O' ,0xA8,0xA9,0xAA,0xAB,0xAC,0xAD,0xAE,0xAF,
 /* 0xB0 - 0xBF */   'A' ,'O' ,'O' ,'O' ,'O' ,'O' ,'A' ,'A' ,'O' ,0xB9,0xBA,0xBB,0xBC,0xBD,0xBE,0xBF,
 /* 0xC0 - 0xCF */   'I' ,'I' ,0xC2,0xC3,0xC4,0xC5,0xC6,0xC7,0xC8,0xC9,0xCA,0xCB,0xCC,0xCD,0xCE,0xCF,
@@ -1025,37 +1025,65 @@ static unsigned char sort_tab[] =
 };
 
 
-GLOBAL int str_sort_cmp(char *s1, char *s2)
+
+
+
+/*******************************************************************************
+*
+*  str_sort_cmp():
+*     Compares two index entries.
+*
+*  return:
+*     -1: s1  < s2
+*      0: s1 == s2
+*      1: s1  > s2
+*
+******************************************|************************************/
+
+GLOBAL int str_sort_cmp(
+
+char              *s1,  /* */
+char              *s2)  /* */
 {
-   unsigned char  c1, c2;
+   unsigned char   c1,  /* */
+                   c2;  /* */
 
-   if (!s1)
-      return s2 ? -1 : 0;
+   if (!s1)                               /* s1 doesn't exist? */
+      return (s2) ? -1 : 0;               /* return s2 > s1 or both don't exist */
    
-   if (!s2) 
-      return 1;
+   if (!s2)                               /* s2 doesn't exist? */
+      return 1;                           /* so s1 is greater */
 
-   replace_all  ( s1, "ž", "ss" );
-   replace_all  ( s2, "ž", "ss" );
-
+   /* --- replace with more than one character --- */
+   replace_all(s1, "ž", "ss");            /* ATARI (?) sslig */
+   replace_all(s2, "ž", "ss");            /* ATARI (?) sslig */
+   
    do 
    {
-      c1 =  sort_tab[(unsigned char)*s1];
-      c2 =  sort_tab[(unsigned char)*s2]; 
+      c1 = sort_tab[(unsigned char)*s1];
+      c2 = sort_tab[(unsigned char)*s2];
+      
       s1++;
       s2++;
    } 
-   while ( c1 != '\0' && c1 == c2);
+   while (c1 != '\0' && c1 == c2);
+
 
    if (c1 == c2)
       return 0;
+   
    if (c1 == '\0')
       return -1;
+   
    if (c2 == '\0')
       return 1;
    
-   return ( c1 - c2 );
+   return (c1 - c2);
 }
+
+
+
+
 
 /* ----------------------------------------------
    Strings caseinsensitiv vergleichen
