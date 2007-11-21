@@ -4500,153 +4500,243 @@ LOCAL int comp_index_html (const void *_p1, const void *_p2)
    return str_sort_cmp(p1_tocname, p2_tocname);  /* Instead of strcmp v6.5.20 [gs] */
 }
 
-/* --------------------------------------------------------------
-   --------------------------------------------------------------  */
 
-GLOBAL BOOLEAN save_html_index ( void )
+
+
+
+/*******************************************************************************
+*
+*  save_html_index():
+*     This functions creates a temporary index file for HTML index generation.
+*
+*  return:
+*     FALSE on errors
+*     TRUE  if index could be saved
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN save_html_index(void)
 {
-   FILE *uif;
-   size_t i;
-   int j;
-   size_t num_index;
-   HTML_INDEX *html_index;
-   char thisc, lastc;
-   char htmlname[512];
-   char dummy[512];
-   char suff[100];
-   char cLabel[512];
-   char *tocname;
-   char *escapedtocname;
-
-   /* first we count how much we need */
-   num_index = 0;
-	
-   for (j = 1; j <= p1_lab_counter; j++)
+   FILE        *uif;             /* ^ to temporary index file */
+   size_t       i;               /* counter */
+   int          j;               /* counter */
+   size_t       num_index;       /* # of entries in index file */
+   HTML_INDEX  *html_index;      /* ^ to HTML_INDEX array */
+   char         thisc,           /* single char for comparison */
+                lastc;           /* last char from comparison */
+   char         htmlname[512];   /* */
+   char         dummy[512];      /* */
+   char         suff[100];       /* */
+   char         cLabel[512];     /* */
+   char        *tocname;         /* */
+   char        *escapedtocname;  /* */
+   char         jumplist[2048];  /* buffer string for A-Z navigation bar */
+   
+   
+   num_index = 0;                         /* first we count how much we entries need */
+   
+   for (j = 1; j <= p1_lab_counter; j++)  /* check all collected labels */
+   {
       if (lab[j] != NULL && lab[j]->ignore_index == FALSE)
          num_index++;
-
-   if (num_index == 0)
-      return FALSE;   /* Index file will not be created */
-
-   udofile_adjust_index();
-
-   uif= myFwopen(udofile.full, TOASC);
-
-   if (!uif)
-   {
-      return FALSE;
    }
+   
+   if (num_index == 0)                    /* index file will not be created */
+      return FALSE;
 
-   fprintf(uif, "!newpage\n");
+   
+   udofile_adjust_index();
+   
+   uif= myFwopen(udofile.full, TOASC);    /* create temporary index file */
+   
+   if (!uif)                              /* no file pointer */
+      return FALSE;
+   
+   fprintf(uif, "!newpage\n");            /* output index page stuff in UDO format */
    fprintf(uif, "!code [sys]\n");
    fprintf(uif, "!sloppy\n\n");
    fprintf(uif, "!node* %s\n", lang.index);
    fprintf(uif, "!html_name indexudo\n" );
+   
    if (!bDocAutorefOff)
-   {  fprintf(uif, "!autoref [off]\n");
-   }
+      fprintf(uif, "!autoref [off]\n");
 
+                                          /* we need memory */   
    html_index = (HTML_INDEX *)um_malloc(num_index * sizeof(HTML_INDEX));
-   if (html_index == NULL)
+   
+   if (html_index == NULL)                /* fatal error! */
    {
       fclose(uif);
       error_malloc_failed();
       return FALSE;
    }
-
-   /* array aufbauen.. */
+   
+   /* --- create index array --- */
+   
    num_index = 0;
+   
    for (j = 1; j <= p1_lab_counter; j++)
    {
       if (lab[j] != NULL  && lab[j]->ignore_index == FALSE )
       {
          html_index[num_index].toc_index = lab[j]->tocindex;
-         html_index[num_index].is_node = lab[j]->is_node;
+         html_index[num_index].is_node   = lab[j]->is_node;
+         
          tocname = html_index[num_index].tocname;
          strcpy(tocname, lab[j]->name);
+         
          replace_macros(tocname);
          c_internal_styles(tocname);
          delete_all_divis(tocname);
          replace_udo_tilde(tocname);
          replace_udo_nbsp(tocname);
          del_html_styles(tocname);
+         
          num_index++;
-         if ( strcmp ( tocname, HTML_LABEL_CONTENTS ) == 0 ) /* V6.5.20 [gs] */
-            num_index--;               /* HTML_LABEL_CONTENTS ignorieren */
+                                          /* V6.5.20 [gs] */
+         if (strcmp (tocname, HTML_LABEL_CONTENTS) == 0)
+            num_index--;                  /* ignore HTML_LABEL_CONTENTS */
       }
    }
-   /* ..sort */
-   qsort(html_index, num_index, sizeof(HTML_INDEX), comp_index_html );
-
-   /* ..and ausgeben */
-   fprintf( uif, "!begin_raw\n" );
-   lastc = EOS;
+   
+   
+   /* --- sort the index --- */
+   
+   qsort(html_index, num_index, sizeof(HTML_INDEX), comp_index_html);
+   
+   
+   /* --- create index A-Z jumplist --- */
+   
+   lastc = EOS;                           /* clear buffer for last character */
+   
+   strcpy(jumplist, "<div class=\"UDO_index_list\">\n");
+   
    for (i = 0; i < num_index; i++)
    {
-      strcpy ( dummy, &html_index[i].tocname[0] );  /* V6.5.20 [gs] */
-	  html2sys ( dummy );                           /* V6.5.20 [gs] */
-      thisc = dummy[0];                             /* V6.5.20 [gs] */
-      if (toupper(thisc)!=toupper(lastc))
+      strcpy(dummy, &html_index[i].tocname[0]);
+      html2sys(dummy);                    /* convert HTML characters to system characters */
+      thisc = dummy[0];                   /* use first character for comparison */
+      
+      if (toupper(thisc) != toupper(lastc))
       {
-         fprintf( uif, "<br>\n" );
-         lastc= thisc;
+                                          /* set anchor entry for index A-Z list */
+         
+         if (lastc == EOS)
+            sprintf(dummy, "<a href=\"%s%c\">%c</a>\n", "#", thisc, thisc);
+         else
+            sprintf(dummy, " | <a href=\"%s%c\">%c</a>\n", "#", thisc, thisc);
+         
+         strcat(jumplist, dummy);
+   
+         lastc = thisc;
       }
-
+   }
+   
+   strcat(jumplist, "<\div>  <!-- UDO_index_list -->\n");
+   
+   
+   /* --- output index --- */
+   
+   fprintf(uif, "!begin_raw\n");
+   
+   fprintf(uif, jumplist);                /* output A-Z jumplist */
+   
+   lastc = EOS;                           /* reset buffer for last character */
+   
+   for (i = 0; i < num_index; i++)
+   {
+                                          /* V6.5.20 [gs] */
+      strcpy(dummy, &html_index[i].tocname[0]);
+      html2sys(dummy);                    /* convert HTML characters to system characters - V6.5.20 [gs] */
+      thisc = dummy[0];                   /* V6.5.20 [gs] */
+      
+      if (toupper(thisc) != toupper(lastc))
+      {
+         if (lastc != EOS)                /* close previous character group of index entries */
+            fprintf(uif, "</p>\n");
+         
+                                          /* start index group */
+         fprintf(uif, "\n<p class=\"UDO_index_group\">\n");
+         
+         if (num_index > 100)             /* set jump entry for index A-Z list */
+         {
+            fprintf(uif, "<span class=\"UDO_index_name\"><a name=\"%c\">%c</a></span>%s\n",
+               thisc, thisc, HTML_BR);
+         }
+         else
+            fprintf(uif, "<a name=\"%c\"></a>\n", thisc);
+         
+         lastc = thisc;
+      }
+      else                                /* normal index entry within a character group: */
+         fprintf(uif, "%s\n", HTML_BR);   /* end the entry line */
+      
       get_html_filename(html_index[i].toc_index, htmlname);
-
+   
       /* v6.5.15 [vj] need to make a copy of this, because we need to change it */
-      escapedtocname=um_physical_strcpy(html_index[i].tocname, 100, "save_html_index [1]");
+      /* fd:20071121: value increased (100 -> 512), as .tocname is 512 chars long */
+      escapedtocname = um_physical_strcpy(html_index[i].tocname, 512, "save_html_index [1]");
+      
       if (escapedtocname != NULL)
-      {
          replace_all(escapedtocname, "!", "&#33;");
-      }
-
-      if ( html_index[i].is_node )
+   
+      if (html_index[i].is_node)          /* this index entry points to another file */
       {
          fsplit(htmlname, dummy, dummy, dummy, suff);
-         if ( suff[0]==EOS )
+         
+         if (suff[0] == EOS)
          {
-            fprintf(uif, "<a href=\"%s%s\">%s</a><br>\n",
-               htmlname, outfile.suff,
-               escapedtocname );
+            fprintf(uif, "<a href=\"%s%s\">%s</a>",
+               htmlname, outfile.suff, escapedtocname);
          }
          else
          {
-            fprintf(uif, "<a href=\"%s\">%s</a><br>\n",
-               htmlname, escapedtocname );
+            fprintf(uif, "<a href=\"%s\">%s</a>",
+               htmlname, escapedtocname);
          }
       }
-      else
+      else                                /* this index entry is a label in another file */
       {
-         strcpy ( cLabel, html_index[i].tocname );
+         strcpy (cLabel, html_index[i].tocname);
          
-         if (!no_index && use_label_inside_index) /* v6.5.19 [fd] */
+         if (!no_index && use_label_inside_index)
          {
-            label2html ( cLabel );
+            label2html (cLabel);
+            
             /* v6.5.13 [vj] Compiler-Warnung beseitigt, # wurde in String ausgelagert,
-                            da der gcc sonst meckert: "toc.c:3940:17: warning: unknown escape sequence '\#'" */
-            fprintf(uif, "<a href=\"%s%s%s%s\">%s</a><br>\n",htmlname, outfile.suff, "#", cLabel,escapedtocname );
+            da der gcc sonst meckert: "toc.c:3940:17: warning: unknown escape sequence '\#'" */
+            fprintf(uif, "<a href=\"%s%s%s%s\">%s</a>",
+               htmlname, outfile.suff, "#", cLabel, escapedtocname);
          }
       }
-
-      um_free(escapedtocname); /* v6.5.15 [vj] var can be freed now */
+      
+      um_free(escapedtocname);            /* v6.5.15 [vj] var can be freed now */
    }
-   fprintf( uif, "!end_raw\n" );
-
+   
+   fprintf(uif, "</p>\n\n");
+   
+   fprintf(uif, jumplist);                /* output A-Z jumplist */
+   
+   fprintf(uif, "!end_raw\n");
+   
    fclose(uif);
-
+   
    token_reset();
-   strcpy(token[0], "!include"); /* sollte safe sein, da ein Token auf jeden Fall so lang werden kann :-) [vj] */
+   
+   strcpy(token[0], "!include");          /* sollte safe sein, da ein Token auf jeden Fall so lang werden kann :-) [vj] */
+   
    um_strcpy(token[1], udofile.full, MAX_TOKEN_LEN+1, "save_html_index [2]");
-   token_counter= 2;
-
+   
+   token_counter = 2;
+   
    c_include();   
-
+   
    remove(udofile.full);
-
+   
    um_free((void *) html_index);
-
+   
    return TRUE;
+   
 }  /* save_html_index */
 
 /* --------------------------------------------------------------
