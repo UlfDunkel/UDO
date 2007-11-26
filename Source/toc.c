@@ -4651,7 +4651,7 @@ GLOBAL BOOLEAN save_html_index(void)
       }
    }
    
-   strcat(jumplist, "<\div>  <!-- UDO_index_list -->\n");
+   strcat(jumplist, "</div>  <!-- UDO_index_list -->\n");
    
    
    /* --- output index --- */
