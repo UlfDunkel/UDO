@@ -307,7 +307,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.exit,       "&Fin");
       strcpy(lang.unknown,    "Inconnu");
       strcpy(lang.update,     "Derni(!`e)re mise (!`a) jour le");             /* r6pl13: laut Didier Briel (ddc@imaginet.fr) */
-      strcpy(lang.lcid,       "LCID=0x40c 0x0 0x0 ;Frensh (France)");
+      strcpy(lang.lcid,       "LCID=0x40c 0x0 0x0 ;French (France)");
       strcpy(lang.html_home,  "Home");
       strcpy(lang.html_up,    "Up");
       strcpy(lang.html_prev,  "Prev");
@@ -315,7 +315,7 @@ GLOBAL void init_lang ( void )
       /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "fr");
       strcpy(lang.html_start, "Begin of the document");
-      strcpy(lang.distributor,"Distribution~:");
+      strcpy(lang.distributor,"Distribution :");
 
       /* Strings mit Sonderzeichen anpassen */
       uni2ascii(lang.preface);
