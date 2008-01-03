@@ -312,8 +312,8 @@ LOCAL void iso2system ( char *s )
         {
                 if ( ((UCHAR) *ptr) > 127 )
                 {       idx= ((UCHAR) *ptr)-128;
-                        if ( iso2sys_item[idx].sys!=EOS )
-                        {       *ptr= iso2sys_item[idx].sys;
+                        if ( iso2sys_item[idx].charsys!=EOS )
+                        {       *ptr= iso2sys_item[idx].charsys;
                         }
                         else
                         {       warning_cannot_recode(*ptr, "Latin1", "system charset");
@@ -850,7 +850,7 @@ GLOBAL void win2sys ( char *s )
 
         for (i=0; i<128; i++)
         {       if ( chrtab[i].ansi[0]=='\\' )
-                {       one[0]= chrtab[i].system;
+                {       one[0]= chrtab[i].charsystem;
                         replace_all(s, chrtab[i].ansi, one);
                 }
         }
@@ -899,7 +899,7 @@ char             *s)       /* ^ to string */
    
    for (i = 0; i < 128; i++)              /* convert lower ASCII part */
    {
-      one[0] = chrtab[i].system;
+      one[0] = chrtab[i].charsystem;
       replace_all(s, chrtab[i].html, one);
    }
    
