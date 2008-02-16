@@ -646,7 +646,8 @@ Aus (!T)!//-(!t) wird !/-.
 
 ################################################################################
 #ToDo: Englisch
-!begin_node !!\
+# The ~ must is important, do not delete them
+!begin_node !!\~
 !html_name cmd_longline.html
 !label Tilde
 
