@@ -28,6 +28,34 @@
 //842
 //843
 //844
+//8E0
+//8E1
+//8E2
+//8E3
+//8E4
+		8EC125490D7DB5BA00D74143 = {
+			fileEncoding = 5;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.c;
+			name = udomem.c;
+			path = ../udomem.c;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		8EC1254A0D7DB5BA00D74143 = {
+			fileEncoding = 5;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = udomem.h;
+			path = ../udomem.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+//8E0
+//8E1
+//8E2
+//8E3
+//8E4
 //F80
 //F81
 //F82
@@ -4984,6 +5012,8 @@
 				F88C21520457270200D83FD6,
 				F88C21530457270200D83FD6,
 				F88C21540457270200D83FD6,
+				8EC125490D7DB5BA00D74143,
+				8EC1254A0D7DB5BA00D74143,
 				F88C21550457270200D83FD6,
 				F88C21560457270200D83FD6,
 				F88C21570457270200D83FD6,
