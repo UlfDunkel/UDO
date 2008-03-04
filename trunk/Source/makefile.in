@@ -4,7 +4,7 @@
 # ###################################################################
 
 OSRC =	abo$(O) cfg$(O) chr$(O) env$(O) file$(O) img$(O) lang$(O) msg$(O) par$(O) str$(O) sty$(O) \
-		tab$(O) toc$(O) toc_html$(O) tp$(O) udo$(O)
+		tab$(O) toc$(O) toc_html$(O) tp$(O) udo$(O) udomem$(O)
 
 HEAD = portab.h version.h constant.h udo_type.h
 
