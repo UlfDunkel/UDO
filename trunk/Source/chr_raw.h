@@ -180,7 +180,7 @@ LOCAL const ISO2SYS iso2sys_item[128]=
 
 typedef struct _chartable
 {
-	unsigned char	system;
+	unsigned char	charsystem;
 	char *ansi;
 	char *tex;
 	char *html;
