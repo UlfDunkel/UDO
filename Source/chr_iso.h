@@ -47,7 +47,7 @@ const char *id_charset_h= "@(#) chr_iso.h   16.07.1998";
 
 typedef struct _iso2sys
 {	unsigned char	iso;
-	unsigned char	sys;
+	unsigned char	charsys;
 }	ISO2SYS;
 
 LOCAL const ISO2SYS iso2sys_item[128]=
@@ -191,7 +191,7 @@ LOCAL const ISO2SYS iso2sys_item[128]=
 
 typedef struct _chartable
 {
-	unsigned char	system;
+	unsigned char	charsystem;
 	char *ascii;
 	char *ansi;
 	char *tex;
