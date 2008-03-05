@@ -47,8 +47,8 @@
 					PBXFindDataSource_LocationID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 226417295;
-			PBXWorkspaceStateSaveDate = 226417295;
+			PBXPerProjectTemplateStateSaveDate = 226420294;
+			PBXWorkspaceStateSaveDate = 226420294;
 		};
 		perUserProjectItems = {
 			12B721C00D7ED1FF002F6059 = 12B721C00D7ED1FF002F6059 /* PBXTextBookmark */;
@@ -117,6 +117,8 @@
 			12B722390D7ED5AA002F6059 = 12B722390D7ED5AA002F6059 /* PBXTextBookmark */;
 			12B7223A0D7ED5AA002F6059 = 12B7223A0D7ED5AA002F6059 /* PBXTextBookmark */;
 			12B7223B0D7ED5AA002F6059 = 12B7223B0D7ED5AA002F6059 /* PBXTextBookmark */;
+			12B722B90D7EE69C002F6059 /* PBXBookmark */ = 12B722B90D7EE69C002F6059 /* PBXBookmark */;
+			12B722BA0D7EE69C002F6059 /* PBXTextBookmark */ = 12B722BA0D7EE69C002F6059 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 12B7212B0D7ED19B002F6059 /* Source Control */;
 		userBuildSettings = {
@@ -170,9 +172,9 @@
 	};
 	12B7212D0D7ED1B2002F6059 /* 437iso.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1672, 2492}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1673, 2492}}";
 			sepNavSelRange = "{0, 0}";
-			sepNavVisRect = "{{0, 0}, {1672, 505}}";
+			sepNavVisRect = "{{0, 0}, {1673, 598}}";
 		};
 	};
 	12B7212E0D7ED1B2002F6059 /* 850iso.h */ = {
@@ -350,6 +352,12 @@
 		vrLoc = 0;
 	};
 	12B721D00D7ED276002F6059 /* Makefile.macosx */ = {
+		isa = PBXFileReference;
+		fileEncoding = 30;
+		lastKnownFileType = text;
+		name = Makefile.macosx;
+		path = /iDEV/UDO_CVS/Source/Source/Makefile.macosx;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1673, 598}}";
 			sepNavSelRange = "{0, 0}";
@@ -357,6 +365,12 @@
 		};
 	};
 	12B721D30D7ED291002F6059 /* makefile.in */ = {
+		isa = PBXFileReference;
+		fileEncoding = 30;
+		lastKnownFileType = text;
+		name = makefile.in;
+		path = /iDEV/UDO_CVS/Source/Source/makefile.in;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1672, 952}}";
 			sepNavSelRange = "{400, 0}";
@@ -937,6 +951,20 @@
 		rLoc = 0;
 		rType = 0;
 		vrLen = 1386;
+		vrLoc = 0;
+	};
+	12B722B90D7EE69C002F6059 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 12B7212D0D7ED1B2002F6059 /* 437iso.h */;
+	};
+	12B722BA0D7EE69C002F6059 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 12B7212D0D7ED1B2002F6059 /* 437iso.h */;
+		name = "437iso.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1336;
 		vrLoc = 0;
 	};
 	8DD76FA90486AB0100D96B5E /* UDO */ = {

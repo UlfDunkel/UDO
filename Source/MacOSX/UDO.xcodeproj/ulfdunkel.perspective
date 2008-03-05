@@ -486,6 +486,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -554,7 +556,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>12B721BE0D7ED1FF002F6059</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>abo.c</string>
+								<string>437iso.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -562,48 +564,14 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>12B721BF0D7ED1FF002F6059</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>abo.c</string>
+										<string>437iso.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>12B7223B0D7ED5AA002F6059</string>
+										<string>12B722BA0D7EE69C002F6059</string>
 										<key>history</key>
 										<array>
-											<string>12B721C00D7ED1FF002F6059</string>
-											<string>12B721D70D7ED2AE002F6059</string>
-											<string>12B721D80D7ED2AE002F6059</string>
-											<string>12B721D90D7ED2AE002F6059</string>
-											<string>12B721F60D7ED3F7002F6059</string>
-											<string>12B721F70D7ED3F7002F6059</string>
-											<string>12B721F80D7ED3F7002F6059</string>
-											<string>12B721F90D7ED3F7002F6059</string>
-											<string>12B721FA0D7ED3F7002F6059</string>
-											<string>12B7221A0D7ED507002F6059</string>
-											<string>12B7221B0D7ED507002F6059</string>
-											<string>12B7221C0D7ED507002F6059</string>
-											<string>12B7221D0D7ED507002F6059</string>
-											<string>12B7221E0D7ED507002F6059</string>
-											<string>12B722380D7ED5AA002F6059</string>
-											<string>12B722390D7ED5AA002F6059</string>
-										</array>
-										<key>prevStack</key>
-										<array>
-											<string>12B721C30D7ED1FF002F6059</string>
-											<string>12B721C90D7ED245002F6059</string>
-											<string>12B721CA0D7ED245002F6059</string>
-											<string>12B721DC0D7ED2AE002F6059</string>
-											<string>12B721DD0D7ED2AE002F6059</string>
-											<string>12B721DE0D7ED2AE002F6059</string>
-											<string>12B721FB0D7ED3F7002F6059</string>
-											<string>12B721FD0D7ED3F7002F6059</string>
-											<string>12B721FE0D7ED3F7002F6059</string>
-											<string>12B722000D7ED3F7002F6059</string>
-											<string>12B722210D7ED507002F6059</string>
-											<string>12B722220D7ED507002F6059</string>
-											<string>12B722230D7ED507002F6059</string>
-											<string>12B722250D7ED507002F6059</string>
-											<string>12B722260D7ED507002F6059</string>
-											<string>12B7223A0D7ED5AA002F6059</string>
+											<string>12B722B90D7EE69C002F6059</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -647,6 +615,8 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {1714, 416}}</string>
+										<key>RubberWindowFrame</key>
+										<string>0 59 1920 1119 0 0 1920 1178 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXBuildResultsModule</string>
@@ -700,8 +670,6 @@
 									<dict>
 										<key>Frame</key>
 										<string>{{10, 27}, {1714, 416}}</string>
-										<key>RubberWindowFrame</key>
-										<string>0 59 1920 1119 0 0 1920 1178 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXRunSessionModule</string>
@@ -728,14 +696,14 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>12B7223C0D7ED5AA002F6059</string>
+				<string>12B722BB0D7EE69C002F6059</string>
 				<string>1CA23EE50692099D00951B8B</string>
-				<string>12B7223D0D7ED5AA002F6059</string>
+				<string>12B722BC0D7EE69C002F6059</string>
 				<string>12B721BE0D7ED1FF002F6059</string>
-				<string>12B7223E0D7ED5AA002F6059</string>
+				<string>12B722BD0D7EE69C002F6059</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 				<string>1CA23EE80692099D00951B8B</string>
-				<string>12B7223F0D7ED5AA002F6059</string>
+				<string>12B722BE0D7EE69C002F6059</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.buildAndRun</string>
@@ -904,10 +872,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>12B722460D7ED5AA002F6059</string>
-		<string>12B722470D7ED5AA002F6059</string>
-		<string>12B722450D7ED5AA002F6059</string>
-		<string>/iDEV/UDO/UDO_MacOSX/UDO.xcodeproj</string>
+		<string>/iDEV/UDO_CVS/Source/MacOSX/UDO.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 59 1920 1119 0 0 1920 1178 </string>

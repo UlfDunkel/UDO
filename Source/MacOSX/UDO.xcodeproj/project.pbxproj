@@ -78,8 +78,6 @@
 		12B721B90D7ED1F0002F6059 /* udomem.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 12B721780D7ED1F0002F6059 /* udomem.h */; };
 		12B721BA0D7ED1F0002F6059 /* utf82iso.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 12B721790D7ED1F0002F6059 /* utf82iso.h */; };
 		12B721BB0D7ED1F0002F6059 /* version.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 12B7217A0D7ED1F0002F6059 /* version.h */; };
-		12B721D10D7ED276002F6059 /* Makefile.macosx in CopyFiles */ = {isa = PBXBuildFile; fileRef = 12B721D00D7ED276002F6059 /* Makefile.macosx */; };
-		12B721D50D7ED291002F6059 /* makefile.in in CopyFiles */ = {isa = PBXBuildFile; fileRef = 12B721D30D7ED291002F6059 /* makefile.in */; };
 		8DD76FB00486AB0100D96B5E /* UDO.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6A0FF2C0290799A04C91782 /* UDO.1 */; };
 /* End PBXBuildFile section */
 
@@ -144,88 +142,84 @@
 				12B721B90D7ED1F0002F6059 /* udomem.h in CopyFiles */,
 				12B721BA0D7ED1F0002F6059 /* utf82iso.h in CopyFiles */,
 				12B721BB0D7ED1F0002F6059 /* version.h in CopyFiles */,
-				12B721D10D7ED276002F6059 /* Makefile.macosx in CopyFiles */,
-				12B721D50D7ED291002F6059 /* makefile.in in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		12B7212D0D7ED1B2002F6059 /* 437iso.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = 437iso.h; path = ../Source/437iso.h; sourceTree = SOURCE_ROOT; };
-		12B7212E0D7ED1B2002F6059 /* 850iso.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = 850iso.h; path = ../Source/850iso.h; sourceTree = SOURCE_ROOT; };
-		12B7212F0D7ED1B2002F6059 /* abo.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = abo.c; path = ../Source/abo.c; sourceTree = SOURCE_ROOT; };
-		12B721300D7ED1B2002F6059 /* abo.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = abo.h; path = ../Source/abo.h; sourceTree = SOURCE_ROOT; };
-		12B721310D7ED1B2002F6059 /* ansi2dos.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ansi2dos.h; path = ../Source/ansi2dos.h; sourceTree = SOURCE_ROOT; };
-		12B721320D7ED1B2002F6059 /* ansi_raw.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ansi_raw.h; path = ../Source/ansi_raw.h; sourceTree = SOURCE_ROOT; };
-		12B7213A0D7ED1F0002F6059 /* cfg.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = cfg.c; path = ../Source/cfg.c; sourceTree = SOURCE_ROOT; };
-		12B7213B0D7ED1F0002F6059 /* cfg.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = cfg.h; path = ../Source/cfg.h; sourceTree = SOURCE_ROOT; };
-		12B7213C0D7ED1F0002F6059 /* chr.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = chr.c; path = ../Source/chr.c; sourceTree = SOURCE_ROOT; };
-		12B7213D0D7ED1F0002F6059 /* chr.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = chr.h; path = ../Source/chr.h; sourceTree = SOURCE_ROOT; };
-		12B7213E0D7ED1F0002F6059 /* chr_437.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = chr_437.h; path = ../Source/chr_437.h; sourceTree = SOURCE_ROOT; };
-		12B7213F0D7ED1F0002F6059 /* chr_850.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = chr_850.h; path = ../Source/chr_850.h; sourceTree = SOURCE_ROOT; };
-		12B721400D7ED1F0002F6059 /* chr_all.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = chr_all.h; path = ../Source/chr_all.h; sourceTree = SOURCE_ROOT; };
-		12B721410D7ED1F0002F6059 /* chr_dos.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = chr_dos.h; path = ../Source/chr_dos.h; sourceTree = SOURCE_ROOT; };
-		12B721420D7ED1F0002F6059 /* chr_hp8.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = chr_hp8.h; path = ../Source/chr_hp8.h; sourceTree = SOURCE_ROOT; };
-		12B721430D7ED1F0002F6059 /* chr_iso.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = chr_iso.h; path = ../Source/chr_iso.h; sourceTree = SOURCE_ROOT; };
-		12B721440D7ED1F0002F6059 /* chr_mac.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = chr_mac.h; path = ../Source/chr_mac.h; sourceTree = SOURCE_ROOT; };
-		12B721450D7ED1F0002F6059 /* chr_next.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = chr_next.h; path = ../Source/chr_next.h; sourceTree = SOURCE_ROOT; };
-		12B721460D7ED1F0002F6059 /* chr_raw.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = chr_raw.h; path = ../Source/chr_raw.h; sourceTree = SOURCE_ROOT; };
-		12B721470D7ED1F0002F6059 /* chr_tos.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = chr_tos.h; path = ../Source/chr_tos.h; sourceTree = SOURCE_ROOT; };
-		12B721480D7ED1F0002F6059 /* chr_ttf.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = chr_ttf.h; path = ../Source/chr_ttf.h; sourceTree = SOURCE_ROOT; };
-		12B721490D7ED1F0002F6059 /* cli.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = cli.c; path = ../Source/cli.c; sourceTree = SOURCE_ROOT; };
-		12B7214A0D7ED1F0002F6059 /* commands.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = commands.h; path = ../Source/commands.h; sourceTree = SOURCE_ROOT; };
-		12B7214B0D7ED1F0002F6059 /* constant.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = constant.h; path = ../Source/constant.h; sourceTree = SOURCE_ROOT; };
-		12B7214C0D7ED1F0002F6059 /* env.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = env.c; path = ../Source/env.c; sourceTree = SOURCE_ROOT; };
-		12B7214D0D7ED1F0002F6059 /* env.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = env.h; path = ../Source/env.h; sourceTree = SOURCE_ROOT; };
-		12B7214E0D7ED1F0002F6059 /* export.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = export.h; path = ../Source/export.h; sourceTree = SOURCE_ROOT; };
-		12B7214F0D7ED1F0002F6059 /* file.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = file.c; path = ../Source/file.c; sourceTree = SOURCE_ROOT; };
-		12B721500D7ED1F0002F6059 /* file.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = file.h; path = ../Source/file.h; sourceTree = SOURCE_ROOT; };
-		12B721510D7ED1F0002F6059 /* gui.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = gui.h; path = ../Source/gui.h; sourceTree = SOURCE_ROOT; };
-		12B721520D7ED1F0002F6059 /* hp82iso.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = hp82iso.h; path = ../Source/hp82iso.h; sourceTree = SOURCE_ROOT; };
-		12B721530D7ED1F0002F6059 /* img.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = img.c; path = ../Source/img.c; sourceTree = SOURCE_ROOT; };
-		12B721540D7ED1F0002F6059 /* img.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = img.h; path = ../Source/img.h; sourceTree = SOURCE_ROOT; };
-		12B721550D7ED1F0002F6059 /* img_html.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = img_html.h; path = ../Source/img_html.h; sourceTree = SOURCE_ROOT; };
-		12B721560D7ED1F0002F6059 /* img_stg.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = img_stg.h; path = ../Source/img_stg.h; sourceTree = SOURCE_ROOT; };
-		12B721570D7ED1F0002F6059 /* img_win.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = img_win.h; path = ../Source/img_win.h; sourceTree = SOURCE_ROOT; };
-		12B721580D7ED1F0002F6059 /* import.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = import.h; path = ../Source/import.h; sourceTree = SOURCE_ROOT; };
-		12B721590D7ED1F0002F6059 /* lang.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = lang.c; path = ../Source/lang.c; sourceTree = SOURCE_ROOT; };
-		12B7215A0D7ED1F0002F6059 /* lang.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = lang.h; path = ../Source/lang.h; sourceTree = SOURCE_ROOT; };
-		12B7215B0D7ED1F0002F6059 /* mac2iso.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = mac2iso.h; path = ../Source/mac2iso.h; sourceTree = SOURCE_ROOT; };
-		12B7215C0D7ED1F0002F6059 /* msg.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = msg.c; path = ../Source/msg.c; sourceTree = SOURCE_ROOT; };
-		12B7215D0D7ED1F0002F6059 /* msg.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = msg.h; path = ../Source/msg.h; sourceTree = SOURCE_ROOT; };
-		12B7215E0D7ED1F0002F6059 /* next2iso.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = next2iso.h; path = ../Source/next2iso.h; sourceTree = SOURCE_ROOT; };
-		12B7215F0D7ED1F0002F6059 /* par.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = par.c; path = ../Source/par.c; sourceTree = SOURCE_ROOT; };
-		12B721600D7ED1F0002F6059 /* par.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = par.h; path = ../Source/par.h; sourceTree = SOURCE_ROOT; };
-		12B721610D7ED1F0002F6059 /* portab.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = portab.h; path = ../Source/portab.h; sourceTree = SOURCE_ROOT; };
-		12B721620D7ED1F0002F6059 /* raw2iso.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = raw2iso.h; path = ../Source/raw2iso.h; sourceTree = SOURCE_ROOT; };
-		12B721630D7ED1F0002F6059 /* str.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = str.c; path = ../Source/str.c; sourceTree = SOURCE_ROOT; };
-		12B721640D7ED1F0002F6059 /* str.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = str.h; path = ../Source/str.h; sourceTree = SOURCE_ROOT; };
-		12B721650D7ED1F0002F6059 /* sty.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = sty.c; path = ../Source/sty.c; sourceTree = SOURCE_ROOT; };
-		12B721660D7ED1F0002F6059 /* sty.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = sty.h; path = ../Source/sty.h; sourceTree = SOURCE_ROOT; };
-		12B721670D7ED1F0002F6059 /* tab.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = tab.c; path = ../Source/tab.c; sourceTree = SOURCE_ROOT; };
-		12B721680D7ED1F0002F6059 /* tab.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = tab.h; path = ../Source/tab.h; sourceTree = SOURCE_ROOT; };
-		12B721690D7ED1F0002F6059 /* toc.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = toc.c; path = ../Source/toc.c; sourceTree = SOURCE_ROOT; };
-		12B7216A0D7ED1F0002F6059 /* toc.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = toc.h; path = ../Source/toc.h; sourceTree = SOURCE_ROOT; };
-		12B7216B0D7ED1F0002F6059 /* toc_html.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = toc_html.c; path = ../Source/toc_html.c; sourceTree = SOURCE_ROOT; };
-		12B7216C0D7ED1F0002F6059 /* toc_html.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = toc_html.h; path = ../Source/toc_html.h; sourceTree = SOURCE_ROOT; };
-		12B7216D0D7ED1F0002F6059 /* tos2iso.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = tos2iso.h; path = ../Source/tos2iso.h; sourceTree = SOURCE_ROOT; };
-		12B7216E0D7ED1F0002F6059 /* tp.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = tp.c; path = ../Source/tp.c; sourceTree = SOURCE_ROOT; };
-		12B7216F0D7ED1F0002F6059 /* tp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = tp.h; path = ../Source/tp.h; sourceTree = SOURCE_ROOT; };
-		12B721700D7ED1F0002F6059 /* udo.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = udo.c; path = ../Source/udo.c; sourceTree = SOURCE_ROOT; };
-		12B721710D7ED1F0002F6059 /* udo.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = udo.h; path = ../Source/udo.h; sourceTree = SOURCE_ROOT; };
-		12B721720D7ED1F0002F6059 /* udo2pdf.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = udo2pdf.h; path = ../Source/udo2pdf.h; sourceTree = SOURCE_ROOT; };
-		12B721730D7ED1F0002F6059 /* udo2ps.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = udo2ps.h; path = ../Source/udo2ps.h; sourceTree = SOURCE_ROOT; };
-		12B721740D7ED1F0002F6059 /* udo_type.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = udo_type.h; path = ../Source/udo_type.h; sourceTree = SOURCE_ROOT; };
-		12B721750D7ED1F0002F6059 /* udocmd.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = udocmd.h; path = ../Source/udocmd.h; sourceTree = SOURCE_ROOT; };
-		12B721760D7ED1F0002F6059 /* udolocal.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = udolocal.h; path = ../Source/udolocal.h; sourceTree = SOURCE_ROOT; };
-		12B721770D7ED1F0002F6059 /* udomem.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = udomem.c; path = ../Source/udomem.c; sourceTree = SOURCE_ROOT; };
-		12B721780D7ED1F0002F6059 /* udomem.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = udomem.h; path = ../Source/udomem.h; sourceTree = SOURCE_ROOT; };
-		12B721790D7ED1F0002F6059 /* utf82iso.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = utf82iso.h; path = ../Source/utf82iso.h; sourceTree = SOURCE_ROOT; };
-		12B7217A0D7ED1F0002F6059 /* version.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = version.h; path = ../Source/version.h; sourceTree = SOURCE_ROOT; };
-		12B721D00D7ED276002F6059 /* Makefile.macosx */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = Makefile.macosx; path = ../Source/Makefile.macosx; sourceTree = SOURCE_ROOT; };
-		12B721D30D7ED291002F6059 /* makefile.in */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = makefile.in; path = ../Source/makefile.in; sourceTree = SOURCE_ROOT; };
-		8DD76FB20486AB0100D96B5E /* UDO */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "compiled.mach-o.executable"; path = UDO; sourceTree = BUILT_PRODUCTS_DIR; };
+		12B7212D0D7ED1B2002F6059 /* 437iso.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = 437iso.h; sourceTree = "<group>"; };
+		12B7212E0D7ED1B2002F6059 /* 850iso.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = 850iso.h; sourceTree = "<group>"; };
+		12B7212F0D7ED1B2002F6059 /* abo.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = abo.c; sourceTree = "<group>"; };
+		12B721300D7ED1B2002F6059 /* abo.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = abo.h; sourceTree = "<group>"; };
+		12B721310D7ED1B2002F6059 /* ansi2dos.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ansi2dos.h; sourceTree = "<group>"; };
+		12B721320D7ED1B2002F6059 /* ansi_raw.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ansi_raw.h; sourceTree = "<group>"; };
+		12B7213A0D7ED1F0002F6059 /* cfg.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = cfg.c; sourceTree = "<group>"; };
+		12B7213B0D7ED1F0002F6059 /* cfg.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = cfg.h; sourceTree = "<group>"; };
+		12B7213C0D7ED1F0002F6059 /* chr.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = chr.c; sourceTree = "<group>"; };
+		12B7213D0D7ED1F0002F6059 /* chr.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = chr.h; sourceTree = "<group>"; };
+		12B7213E0D7ED1F0002F6059 /* chr_437.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = chr_437.h; sourceTree = "<group>"; };
+		12B7213F0D7ED1F0002F6059 /* chr_850.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = chr_850.h; sourceTree = "<group>"; };
+		12B721400D7ED1F0002F6059 /* chr_all.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = chr_all.h; sourceTree = "<group>"; };
+		12B721410D7ED1F0002F6059 /* chr_dos.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = chr_dos.h; sourceTree = "<group>"; };
+		12B721420D7ED1F0002F6059 /* chr_hp8.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = chr_hp8.h; sourceTree = "<group>"; };
+		12B721430D7ED1F0002F6059 /* chr_iso.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = chr_iso.h; sourceTree = "<group>"; };
+		12B721440D7ED1F0002F6059 /* chr_mac.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = chr_mac.h; sourceTree = "<group>"; };
+		12B721450D7ED1F0002F6059 /* chr_next.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = chr_next.h; sourceTree = "<group>"; };
+		12B721460D7ED1F0002F6059 /* chr_raw.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = chr_raw.h; sourceTree = "<group>"; };
+		12B721470D7ED1F0002F6059 /* chr_tos.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = chr_tos.h; sourceTree = "<group>"; };
+		12B721480D7ED1F0002F6059 /* chr_ttf.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = chr_ttf.h; sourceTree = "<group>"; };
+		12B721490D7ED1F0002F6059 /* cli.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = cli.c; sourceTree = "<group>"; };
+		12B7214A0D7ED1F0002F6059 /* commands.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = commands.h; sourceTree = "<group>"; };
+		12B7214B0D7ED1F0002F6059 /* constant.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = constant.h; sourceTree = "<group>"; };
+		12B7214C0D7ED1F0002F6059 /* env.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = env.c; sourceTree = "<group>"; };
+		12B7214D0D7ED1F0002F6059 /* env.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = env.h; sourceTree = "<group>"; };
+		12B7214E0D7ED1F0002F6059 /* export.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = export.h; sourceTree = "<group>"; };
+		12B7214F0D7ED1F0002F6059 /* file.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = file.c; sourceTree = "<group>"; };
+		12B721500D7ED1F0002F6059 /* file.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = file.h; sourceTree = "<group>"; };
+		12B721510D7ED1F0002F6059 /* gui.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = gui.h; sourceTree = "<group>"; };
+		12B721520D7ED1F0002F6059 /* hp82iso.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = hp82iso.h; sourceTree = "<group>"; };
+		12B721530D7ED1F0002F6059 /* img.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = img.c; sourceTree = "<group>"; };
+		12B721540D7ED1F0002F6059 /* img.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = img.h; sourceTree = "<group>"; };
+		12B721550D7ED1F0002F6059 /* img_html.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = img_html.h; sourceTree = "<group>"; };
+		12B721560D7ED1F0002F6059 /* img_stg.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = img_stg.h; sourceTree = "<group>"; };
+		12B721570D7ED1F0002F6059 /* img_win.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = img_win.h; sourceTree = "<group>"; };
+		12B721580D7ED1F0002F6059 /* import.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = import.h; sourceTree = "<group>"; };
+		12B721590D7ED1F0002F6059 /* lang.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = lang.c; sourceTree = "<group>"; };
+		12B7215A0D7ED1F0002F6059 /* lang.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = lang.h; sourceTree = "<group>"; };
+		12B7215B0D7ED1F0002F6059 /* mac2iso.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = mac2iso.h; sourceTree = "<group>"; };
+		12B7215C0D7ED1F0002F6059 /* msg.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = msg.c; sourceTree = "<group>"; };
+		12B7215D0D7ED1F0002F6059 /* msg.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = msg.h; sourceTree = "<group>"; };
+		12B7215E0D7ED1F0002F6059 /* next2iso.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = next2iso.h; sourceTree = "<group>"; };
+		12B7215F0D7ED1F0002F6059 /* par.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = par.c; sourceTree = "<group>"; };
+		12B721600D7ED1F0002F6059 /* par.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = par.h; sourceTree = "<group>"; };
+		12B721610D7ED1F0002F6059 /* portab.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = portab.h; sourceTree = "<group>"; };
+		12B721620D7ED1F0002F6059 /* raw2iso.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = raw2iso.h; sourceTree = "<group>"; };
+		12B721630D7ED1F0002F6059 /* str.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = str.c; sourceTree = "<group>"; };
+		12B721640D7ED1F0002F6059 /* str.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = str.h; sourceTree = "<group>"; };
+		12B721650D7ED1F0002F6059 /* sty.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = sty.c; sourceTree = "<group>"; };
+		12B721660D7ED1F0002F6059 /* sty.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = sty.h; sourceTree = "<group>"; };
+		12B721670D7ED1F0002F6059 /* tab.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = tab.c; sourceTree = "<group>"; };
+		12B721680D7ED1F0002F6059 /* tab.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = tab.h; sourceTree = "<group>"; };
+		12B721690D7ED1F0002F6059 /* toc.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = toc.c; sourceTree = "<group>"; };
+		12B7216A0D7ED1F0002F6059 /* toc.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = toc.h; sourceTree = "<group>"; };
+		12B7216B0D7ED1F0002F6059 /* toc_html.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = toc_html.c; sourceTree = "<group>"; };
+		12B7216C0D7ED1F0002F6059 /* toc_html.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = toc_html.h; sourceTree = "<group>"; };
+		12B7216D0D7ED1F0002F6059 /* tos2iso.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = tos2iso.h; sourceTree = "<group>"; };
+		12B7216E0D7ED1F0002F6059 /* tp.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = tp.c; sourceTree = "<group>"; };
+		12B7216F0D7ED1F0002F6059 /* tp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = tp.h; sourceTree = "<group>"; };
+		12B721700D7ED1F0002F6059 /* udo.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = udo.c; sourceTree = "<group>"; };
+		12B721710D7ED1F0002F6059 /* udo.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = udo.h; sourceTree = "<group>"; };
+		12B721720D7ED1F0002F6059 /* udo2pdf.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = udo2pdf.h; sourceTree = "<group>"; };
+		12B721730D7ED1F0002F6059 /* udo2ps.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = udo2ps.h; sourceTree = "<group>"; };
+		12B721740D7ED1F0002F6059 /* udo_type.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = udo_type.h; sourceTree = "<group>"; };
+		12B721750D7ED1F0002F6059 /* udocmd.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = udocmd.h; sourceTree = "<group>"; };
+		12B721760D7ED1F0002F6059 /* udolocal.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = udolocal.h; sourceTree = "<group>"; };
+		12B721770D7ED1F0002F6059 /* udomem.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = udomem.c; sourceTree = "<group>"; };
+		12B721780D7ED1F0002F6059 /* udomem.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = udomem.h; sourceTree = "<group>"; };
+		12B721790D7ED1F0002F6059 /* utf82iso.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = utf82iso.h; sourceTree = "<group>"; };
+		12B7217A0D7ED1F0002F6059 /* version.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
+		8DD76FB20486AB0100D96B5E /* UDO */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = UDO; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A0FF2C0290799A04C91782 /* UDO.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = UDO.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -253,8 +247,6 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				12B721D30D7ED291002F6059 /* makefile.in */,
-				12B721D00D7ED276002F6059 /* Makefile.macosx */,
 				12B7212D0D7ED1B2002F6059 /* 437iso.h */,
 				12B7212E0D7ED1B2002F6059 /* 850iso.h */,
 				12B7212F0D7ED1B2002F6059 /* abo.c */,
@@ -328,7 +320,8 @@
 				12B7217A0D7ED1F0002F6059 /* version.h */,
 			);
 			name = Source;
-			sourceTree = "<group>";
+			path = ..;
+			sourceTree = SOURCE_ROOT;
 		};
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
@@ -450,6 +443,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				WARNING_CFLAGS = (
+					"$(inherited)",
+					"-Wno-multichar",
+				);
 			};
 			name = Debug;
 		};
@@ -464,6 +461,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				WARNING_CFLAGS = (
+					"$(inherited)",
+					"-Wno-multichar",
+				);
 			};
 			name = Release;
 		};
