@@ -51,8 +51,8 @@
 /*	------------------------------------------------------------
 	Copyright Meldung
 	------------------------------------------------------------	*/
-#define	COPYRIGHT	"Copyright (C) 1995-2001 by Dirk Hagedorn\nCopyright (C) 2001-2007 by The UDO Community"
-#define UDO_COPYRIGHT_TEXT "Copyright (!copyright) 1995-2001 by Dirk Hagedorn\t(!nl)\nCopyright (!copyright) 2001-2007 by The UDO Community\t(!nl)\n"
+#define	COPYRIGHT	"Copyright (C) 1995-2001 by Dirk Hagedorn\nCopyright (C) 2001-2008 by The UDO Community"
+#define UDO_COPYRIGHT_TEXT "Copyright (!copyright) 1995-2001 by Dirk Hagedorn\t(!nl)\nCopyright (!copyright) 2001-2008 by The UDO Community\t(!nl)\n"
 
 /*	------------------------------------------------------------
 	Zeichensaetze
