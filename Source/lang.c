@@ -125,6 +125,14 @@ LOCAL const char *MONTH_CZE[] =
 };
 */
 
+/* Latvian windows-1257 encoding (not translated yet) */
+LOCAL const char *MONTH_LVA[] =
+{
+   "January", "February", "March", "April", "May", "June",
+   "July", "August", "September", "October", "November", "December"
+};
+
+
    
 
 
@@ -193,6 +201,11 @@ GLOBAL void init_lang_date ( void )
 
    case TOCZE:     /* Czech */ /* v6.5.19 */
       sprintf(lang.today, "%d. %s %d", zeit->tm_mday, MONTH_CZE[zeit->tm_mon], 1900+zeit->tm_year);
+      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+      break;
+
+   case TOLVA:     /* Latvian */
+      sprintf(lang.today, "%d. %s %d", zeit->tm_mday, MONTH_LVA[zeit->tm_mon], 1900+zeit->tm_year);
       sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
       break;
 
@@ -539,6 +552,50 @@ GLOBAL void init_lang ( void )
       strcpy(lang.distributor,"Distributor:");
       break;
 */
+   case TOLVA:
+      strcpy(lang.preface,    "Preface");
+      strcpy(lang.chapter,    "Chapter");
+      strcpy(lang.title,      "Title");
+      strcpy(lang.appendix,   "Appendix");
+      strcpy(lang.contents,   "Contents");
+      strcpy(lang.listfigure, "List of Figures");
+      strcpy(lang.listtable,  "List of Tables");
+      strcpy(lang.figure,     "Figure");
+      strcpy(lang.table,      "Table");
+      strcpy(lang.index,      "Index");
+      strcpy(lang.page,       "page");
+      strcpy(lang.see,        "see");
+      strcpy(lang.also,       "see also");
+      strcpy(lang.by,         "by");
+      strcpy(lang.fur,        "for");
+      strcpy(lang.up,         "&Up");
+      strcpy(lang.exit,       "E&xit");
+      strcpy(lang.unknown,    "Unknown");
+      strcpy(lang.update,     "Last updated on");
+      strcpy(lang.lcid,       "LCID=0x426 0x0 0x0 ;Latvian");
+      strcpy(lang.html_home,  "Home");
+      strcpy(lang.html_up,    "Up");
+      strcpy(lang.html_prev,  "Prev");
+      strcpy(lang.html_next,  "Next");
+      strcpy(lang.html_lang,  "lv");
+      strcpy(lang.html_start, "Begin of the document");
+      strcpy(lang.distributor,"Distributor:");
+/*
+      uni2ascii(lang.preface);
+      uni2ascii(lang.appendix);
+      uni2ascii(lang.listfigure);
+      uni2ascii(lang.figure);
+      uni2ascii(lang.index);
+      uni2ascii(lang.also);
+      uni2ascii(lang.unknown);
+      uni2ascii(lang.update);
+      uni2ascii(lang.html_home);
+      uni2ascii(lang.html_prev);
+      uni2ascii(lang.html_next);
+      uni2ascii(lang.html_start);
+*/
+      break;
+
    default:        /* Deutsch ist default */
       strcpy(lang.preface,    "Vorwort");
       strcpy(lang.chapter,    "Kapitel");
