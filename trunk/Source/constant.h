@@ -63,7 +63,7 @@
 #define	TONOR			9		/* Norwegisch				*/
 #define	TOFIN			10		/* Finnisch					*/
 #define  TOCZE			11		/* Tschechisch				*/	/* V6.5.19 */
-#define  TOLVA			11		/* Lettisch (Latvian)   */
+#define  TOLVA			12		/* Lettisch (Latvian)   */
 #define	MAXDESTLANG 13		/* Anzahl Ausgabesprachen	*/
 
 
