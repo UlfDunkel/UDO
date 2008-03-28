@@ -518,23 +518,24 @@ typedef struct _udolanguage		/* ---- Sprachentabelle ----	*/
 	int	langval;			/* zugehoerige Sprache			*/
 }	UDOLANGUAGE;
 
-/* Changed in v6.5.19 (fd) */
-#define MAXLANGUAGE     12
 
-LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE]=
+#define MAXLANGUAGE     13
+
+LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE] =
 {
-    { "czech",      TOCZE   },
-	{ "danish",		TODAN	},
-	{ "dutch",		TODUT	},
-	{ "english",	TOENG	},
-	{ "finnish",	TOFIN	},
-	{ "french",		TOFRA	},
-	{ "german",		TOGER	},
-	{ "italian",	TOITA	},
-	{ "norwegian",	TONOR	},
-	{ "portuguese",	TOPOR	},
-	{ "spanish",	TOSPA	},
-	{ "swedish",	TOSWE	},
+   {"czech",      TOCZE},
+   {"danish",     TODAN},
+   {"dutch",      TODUT},
+   {"english",    TOENG},
+   {"finnish",    TOFIN},
+   {"french",     TOFRA},
+   {"german",     TOGER},
+   {"italian",    TOITA},
+   {"latvian",    TOLVA},
+   {"norwegian",  TONOR},
+   {"portuguese", TOPOR},
+   {"spanish",    TOSPA},
+   {"swedish",    TOSWE},
 };
 
 
