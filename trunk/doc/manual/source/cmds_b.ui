@@ -165,7 +165,7 @@ Start an enumeration.
 !html_name cmd_begin_appendix.html
 
 !iflang [german]
-Anhang einleiten.
+(!nolink [Anhang]) einleiten.
 !endif
 !iflang [english]
 Start appendix.
@@ -179,7 +179,7 @@ Start appendix.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Leitet den Anhang ein. Kapitel werden im Anhang mit Buchstaben gekennzeichnet. UDO unterstützt nur (!I)einen(!i) Anhang pro Quelltext!
+Leitet den Anhang ein. Kapitel werden im Anhang mit Buchstaben gekennzeichnet. UDO unterstützt nur (!I)einen(!i) (!nolink [Anhang]) pro Quelltext!
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -342,7 +342,7 @@ linebreaks with (!KKW [nl]).
 !html_name cmd_begin_comment.html
 
 !iflang [german]
-Kommentare in die Ausgabedatei schreiben.
+(!nolink [Kommentare]) in die Ausgabedatei schreiben.
 !endif
 !iflang [english]
 Create comments.
@@ -405,10 +405,10 @@ Start a description.
 !item [(!DESCRIPTION)]
 Leitet eine (weitere) description-Umgebung ein. Diese
 Umgebung muss mit (!KW [end_description]) beendet werden. Die
-description-Umgebung kann mehrfach verschachtelt
+(!nolink [description-Umgebung]) kann mehrfach verschachtelt
 benutzt oder mit anderen Umgebungen kombiniert
 werden. Aufzählungspunkte werden bei der
-description-Umgebung mit (!KW [item] [[~!!]]) eingeleitet. Der
+(!nolink [description-Umgebung]) mit (!KW [item] [[~!!]]) eingeleitet. Der
 Text, der dann hier in eckigen Klammern angegeben
 wird, wird in Fettschrift ausgegeben, sofern das Ausgabeformat Fettschrift unterstützt.
 !endif
@@ -489,9 +489,9 @@ Start an enumeration.
 !item [(!DESCRIPTION)]
 Leitet eine (weitere) enumerate-Umgebung ein. Diese
 Umgebung muss mit (!KW [end_enumerate]) beendet werden. Die
-enumerate-Umgebung können Sie mehrfach verschachtelt
+(!nolink [enumerate-Umgebung]) können Sie mehrfach verschachtelt
 und auch mit anderen Umgebungen kombiniert benutzen.
-Aufzählungspunkte einer enumerate-Umgebung werden mit
+Aufzählungspunkte einer (!nolink [enumerate-Umgebung]) werden mit
 (!KW [item]) eingeleitet und mit alphanumerischen Zeichen
 markiert.
 !endif
@@ -667,7 +667,7 @@ Start an italic list.
 !item [(!DESCRIPTION)]
 Leitet eine neue Listen-Umgebung ein. Diese Umgebung muss mit (!KW [end_ilist]) beendet werden. Die Länge von
 ""<text>"" definiert die Tiefe der Einrückung der Aufzählungspunkte. Sie können diese Umgebung auch mit
-anderen Umgebungen kombinieren. Die Aufzählungspunkte, die man mit (!KW [item] [[~!!]]) einleitet,
+anderen (!nolink [Umgebungen]) kombinieren. Die Aufzählungspunkte, die man mit (!KW [item] [[~!!]]) einleitet,
 werden kursiv dargestellt.
 !endif
 !iflang [english]
@@ -714,8 +714,8 @@ Start an itemization environment.
 !item [(!DESCRIPTION)]
 Leitet eine (weitere) itemize-Umgebung ein. Diese
 Umgebung muss mit (!KW [end_itemize]) beendet werden. Die
-itemize-Umgebung können Sie mehrfach und auch mit
-anderen Umgebungen kombiniert einsetzen.
+(!nolink [itemize-Umgebung]) können Sie mehrfach und auch mit
+anderen (!nolink [Umgebungen]) kombiniert einsetzen.
 Aufzählungspunkte, die mit (!KW [item]) eingeleitet werden,
 werden mit Punkten und Strichen markiert.
 !endif
@@ -829,9 +829,9 @@ starts a new chapter, section, subsection or paragraph.
 
 !iflang [german]
 !item [(!EXAMPLE2)]
-(!T)!/begin_node Titel des Kapitels(!t) (!nl)
+(!T)!/begin_node (!nolink [Titel]) des Kapitels(!t) (!nl)
 !.. (!nl)
-    (!T)!/begin_node Titel des Abschnitts(!t) (!nl)
+    (!T)!/begin_node (!nolink [Titel]) des Abschnitts(!t) (!nl)
     !.. (!nl)
     (!T)!/end_node(!t)
 !.. (!nl)
@@ -893,7 +893,7 @@ appear in a table of contents.
 
 !iflang [german]
 !item [(!EXAMPLE2)]
-(!T)!/begin_node* Titel des versteckten Kapitels(!t) (!nl)
+(!T)!/begin_node* (!nolink [Titel]) des versteckten Kapitels(!t) (!nl)
 ...
 (!T)!/end_node(!t)
 !endif
@@ -956,7 +956,7 @@ in Windows Help or ST-Guide.
 
 !iflang [german]
 !item [(!EXAMPLE2)]
-(!T)!/begin_pnode Titel des Kapitels(!t) (!nl)
+(!T)!/begin_pnode (!nolink [Titel]) des Kapitels(!t) (!nl)
 ... (!nl)
 (!T)!/end_node(!t)
 !endif
@@ -1012,7 +1012,7 @@ appear in a table of contents.
 
 !iflang [german]
 !item [(!EXAMPLE2)]
-(!T)!/begin_pnode* Titel des versteckten Popups(!t) (!nl)
+(!T)!/begin_pnode* (!nolink [Titel]) des versteckten Popups(!t) (!nl)
 ... (!nl)
 (!T)!/end_node(!t)
 !endif
@@ -1141,7 +1141,7 @@ indented until UDO reads the (!KW [end_quote]) command.
 !html_name cmd_begin_raw.html
 
 !iflang [german]
-raw-Umgebung einleiten.
+(!nolink [raw-Umgebung]) einleiten.
 !endif
 !iflang [english]
 Start a raw environment.
@@ -1160,7 +1160,7 @@ Umgebung muss mit (!KW [end_raw]) beendet werden. Jede Zeile
 innerhalb dieser Umgebung wird direkt, also ohne
 jegliche Umwandlung, Zentrierung oder Einrückung
 ausgegeben. Die Umgebung dient daher zur Einbindung
-spezieller Befehle für die Ausgabeformate.
+spezieller Befehle für die (!nolink [Ausgabeformate]).
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1189,7 +1189,7 @@ insert specific commands for the destionation format.
 !html_name cmd_begin_sourcecode.html
 
 !iflang [german]
-Eine Sourcecode-Umgebung einleiten.
+Eine (!nolink [Sourcecode])-Umgebung einleiten.
 !endif
 !iflang [english]
 Start a sourcecode environment.
@@ -1212,7 +1212,7 @@ Formaten erfolgt die Ausgabe der Zeilen, als ob sie
 innerhalb einer verbatim-Umgebung stehen, welche sich
 wiederum innerhalb einer quote-Umgebung befindet.
 Somit wirken auch hier die Befehle, die für die
-verbatim-Umgebungen vorgesehen sind, wie z.B. (!KW [verbatimsize]) und
+verbatim-(!nolink [Umgebungen]) vorgesehen sind, wie z.B. (!KW [verbatimsize]) und
 (!KW [no_verbatim_umlaute]).
 !endif
 !iflang [english]
@@ -1356,7 +1356,7 @@ Leitet eine neue Listen-Umgebung ein. Diese Umgebung
 muss mit (!KW [end_tlist]) beendet werden. Die Länge von
 ""<text>"" definiert die Tiefe der Einrückung der
 Aufzählungspunkte. Sie können diese Umgebung auch mit
-anderen Umgebungen kombinieren. Die
+anderen (!nolink [Umgebungen]) kombinieren. Die
 Die Texte, die man mit (!KW [item] [[~!!]]) angibt, werden mit nichtproportionaler Schrift
 dargestellt.
 !endif
@@ -1388,7 +1388,7 @@ with (!KW [item] [[~!!]]) will be displayed with a monospaced font
 !html_name cmd_begin_verbatim.html
 
 !iflang [german]
-Eine verbatim-Umgebung einleiten.
+Eine (!nolink [verbatim-Umgebung]) einleiten.
 !endif
 !iflang [english]
 Start a verbatim environment.
@@ -1452,7 +1452,7 @@ Leitet eine neue Listen-Umgebung ein. Diese Umgebung
 muss mit (!KW [end_xlist]) beendet werden. Die Länge von
 ""<text>"" definiert die Tiefe der Einrückung der
 Aufzählungspunkte. Diese Umgebung lässt sich mit
-anderen Umgebungen kombiniert verwenden. Die Texte,
+anderen (!nolink [Umgebungen]) kombiniert verwenden. Die Texte,
 die man mit (!KW [item] [[~!!]]) angibt, werden normal
 dargestellt.
 !endif

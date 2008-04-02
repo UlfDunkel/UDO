@@ -70,7 +70,7 @@
 #!raw [stg] @indexon
 #!raw [stg] @width 75
 !ifdest [stg]
-!parwidth 75
+!parwidth 73
 !endif
 
 # ----------------------------------------------------------------

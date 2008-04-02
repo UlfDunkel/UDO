@@ -1152,7 +1152,7 @@ Print text in bold.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/INS)<(!TEXT)>(!/[ins])(!t)
+!item [(!SYNTAX)] (!T)(!/INS)<(!TEXT)>(!/ins)(!t)
 
 !iflang [german]
 !item [(!DESCRIPTION)]
@@ -1276,6 +1276,7 @@ Lindner-(!TeX), ''(!V).gif(!v)'' für HTML, ''(!V).msp(!v)'' oder ''(!V).pcx(!v)'
 em(!TeX) und ''(!V).bmp(!v)'' für WinHelp, RTF und IPF.
 Wird ""<titel>"" angegeben, so wird der Text als Bildunterschrift angegeben.
 # ToDo: folgender Text fehlt in engl. Übersetzung!!
+
 Die Ausrichtung des Bildes richtet sich nach der
 eventuell vorhandenen äußeren Umgebung. Zentrierte
 Bilder erhält man demnach, wenn man das (!KW [image])-Kommando in einer center-Umgebung verwendet.

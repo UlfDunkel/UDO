@@ -59,7 +59,7 @@ Set graphic for active chapter.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/chaptericon_active <(!FILE>(!t)
+!item [(!SYNTAX)] (!T)!/chaptericon_active <(!FILE)>(!t)
 
 !iflang [german]
 !item [(!DESCRIPTION)]
@@ -557,7 +557,7 @@ Schriftfarben
 !html_name cmd_comment().html
 
 !iflang [german]
-Inline-Kommentare erzeugen.
+Inline-(!nolink [Kommentare]) erzeugen.
 !endif
 !iflang [english]
 Write inline comment to destination file.
@@ -575,7 +575,7 @@ Write inline comment to destination file.
 Mit (!KKW [comment]) können Inline-Kommentare für HTML,
 WinHelp, RTF, Quickview, C und Pascal erzeugt werden. Wird im
 Vorspann der Schalter (!KW [use_comments]) benutzt, so werden die
-Kommentare auch bei allen anderen Formaten in Klammern ausgegeben.
+(!nolink [Kommentare]) auch bei allen anderen Formaten in Klammern ausgegeben.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -655,7 +655,7 @@ if the destinations format knows about comments.
 !html_name cmd_copyright().html
 
 !iflang [german]
-Copyright-Symbol ausgeben.
+(!nolink [Copyright])-Symbol ausgeben.
 !endif
 !iflang [english]
 Print the copyright symbol.
@@ -669,7 +669,7 @@ Print the copyright symbol.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Dieser Platzhalter wird durch das Copyright-Symbol
+Dieser Platzhalter wird durch das (!nolink [Copyright])-Symbol
 ersetzt, sofern es in dem jeweiligen Zeichensatz
 vorhanden ist. Ist es das nicht, so ersetzt UDO den
 Platzhalter durch ""(!T)(c)(!t)"".

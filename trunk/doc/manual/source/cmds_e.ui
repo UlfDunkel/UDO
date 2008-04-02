@@ -333,7 +333,7 @@ Finish a chapter/section/subsection/paragraph.
 !html_name cmd_end_appendix.html
 
 !iflang [german]
-Anhang beenden.
+(!nolink [Anhang]) beenden.
 !endif
 !iflang [english]
 Finish the appendix.
@@ -347,7 +347,7 @@ Finish the appendix.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Beendet den Anhang. UDO unterstützt genau (!I)einen(!i)
+Beendet den (!nolink [Anhang]). UDO unterstützt genau (!I)einen(!i)
 Anhang, daher sollte (!KW [end_appendix]) das letzte
 Kommando vor (!KW [end_document]) sein.
 !endif
@@ -494,7 +494,7 @@ This command finishes the latest comment environment.
 !html_name cmd_end_description.html
 
 !iflang [german]
-Letzte description-Umgebung beenden.
+Letzte (!nolink [description-Umgebung]) beenden.
 !endif
 !iflang [english]
 Finish a description.
@@ -811,7 +811,7 @@ Finishes the latest itemize environment
 !html_name cmd_end_linedraw.html
 
 !iflang [german]
-linedraw-Umgebung beenden.
+(!nolink [linedraw-Umgebung]) beenden.
 !endif
 !iflang [english]
 Finish a linedraw environment.
@@ -972,7 +972,7 @@ of a quote environment will be displayed indented.
 !html_name cmd_end_raw.html
 
 !iflang [german]
-raw-Umgebung beenden.
+(!nolink [raw-Umgebung]) beenden.
 !endif
 !iflang [english]
 Finish a raw environment.
@@ -986,7 +986,7 @@ Finish a raw environment.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Beendet die raw-Umgebung.
+Beendet die (!nolink [raw-Umgebung]).
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1011,7 +1011,7 @@ Finishes the raw environment.
 !html_name cmd_end_sourcecode.html
 
 !iflang [german]
-Eine sourcecode-Umgebung beenden.
+Eine (!nolink [sourcecode-Umgebung]) beenden.
 !endif
 !iflang [english]
 Finish a sourcecode environment.
@@ -1060,7 +1060,7 @@ Finish and output a table.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Beendet die table-Umgebung und sorgt für die Ausgabe der Tabelle.
+Beendet die (!nolink [table-Umgebung]) und sorgt für die Ausgabe der Tabelle.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1099,7 +1099,7 @@ Finish a list.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Beendet die letzte tlist-Umgebung.
+Beendet die letzte (!nolink [tlist-Umgebung]).
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1126,7 +1126,7 @@ Finishes the latest tlist environment.
 !html_name cmd_end_verbatim.html
 
 !iflang [german]
-verbatim-Umgebung beenden.
+(!nolink [verbatim-Umgebung]) beenden.
 !endif
 !iflang [english]
 Finish a verbatim environment.
@@ -1140,7 +1140,7 @@ Finish a verbatim environment.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Beendet die verbatim-Umgebung.
+Beendet die (!nolink [verbatim-Umgebung]).
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1179,7 +1179,7 @@ Finish a list.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Beendet die letzte xlist-Umgebung.
+Beendet die letzte (!nolink [xlist-Umgebung]).
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
