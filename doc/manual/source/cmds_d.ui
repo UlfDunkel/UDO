@@ -60,17 +60,17 @@ Set a definition.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Dieses Kommando legt eine neue Definition an. Bei der
-Umwandlung wird dann ""(!/<wort>)"" durch ""<text>""
+Umwandlung wird dann ""<wort>"" durch ""<text>""
 ersetzt, ohne dass Umlaute oder andere spezielle
 Zeichen umgewandelt werden. Im Beispiel würde ""(!/H1)""
-durch ""</H1>"" ersetzt. Definitionen können auch
+durch ""</H1>"" ersetzt. (!nolink [Definitionen]) können auch
 Paramater enthalten. Nähere Informationen dazu findet
-man im Kapitel ""Definitionen"".
+man im Kapitel ""(!nolink [Definitionen])"".
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
 Sets a (new) definition. When converting UDO will replace every
-""(!/<word>)"" by ""<text>"" without converting special chars. When
+""<word>"" by ""<text>"" without converting special chars. When
 using the example below every ""(!/H1)"" will be replaced by
 ""</H1>"". The difference to a macro: no umlauts or other special
 characters will be converted. Definitions can contain parameters. Read the
@@ -222,7 +222,7 @@ Bei allen anderen Formaten wird der gelöschte Text in eckige Klammern gesetzt.
 !html_name cmd_depth.html
 
 !iflang [german]
-Tiefe für Inhaltsverzeichnis angeben.
+Tiefe für (!nolink [Inhaltsverzeichnis]) angeben.
 !endif
 !iflang [english]
 Specify depth of table of contents.
@@ -239,7 +239,7 @@ Specify depth of table of contents.
 Wird dieser Schalter zusammen mit dem Befehl zur
 Ausgabe eines Inhaltsverzeichnisses angegeben,
 legt er die Tiefe des ausgegebenen Verzeichnisses fest.
-Das Beispiel zeigt, wie man ein Inhaltsverzeichnis ausgibt,
+Das Beispiel zeigt, wie man ein (!nolink [Inhaltsverzeichnis]) ausgibt,
 das nur die Nodes (1.~Ebene) enthält.
 !endif
 !iflang [english]
@@ -291,37 +291,37 @@ der folgenden Werte sein:
 !begin_description
 
 !item [title]
-""<text>"" wird auf der Titelseite vor dem Inhalt von
+""<text>"" wird auf der (!nolink [Titelseite]) vor dem Inhalt von
 (!KW [docinfo] [[program!!]]) ausgegeben. ""<text>"" wird darüber hinaus noch
 zur Darstellung von Kopfzeilen bei einigen Formaten herangezogen.
 
 !item [program]
-""<text>"" wird auf der Titelseite unterhalb der Titelzeile
+""<text>"" wird auf der (!nolink [Titelseite]) unterhalb der Titelzeile
 ausgegeben. Desweiteren wird ""<text>"" bei einigen Formaten zur
 Darstellung von Kopfzeilen herangezogen.
 
 !item [programimage]
-Das Bild ""<datei>"" wird unterhalb der Titelzeile auf der Titelseite ausgegeben.
+Das Bild ""<datei>"" wird unterhalb der (!nolink [Titelzeile]) auf der Titelseite ausgegeben.
 
 !item [version]
-""<text>"" wird unterhalb des Programmnamens auf der Titelseite
+""<text>"" wird unterhalb des Programmnamens auf der (!nolink [Titelseite])
 ausgegeben. Ansonsten findet ""<text>"" keine weitere Verwendung.
 
 !item [date]
 ""<text>"" wird unterhalb der Versionsinformationen auf der
-Titelseite ausgegeben. Ansonsten werden diese Informationen nicht
+(!nolink [Titelseite]) ausgegeben. Ansonsten werden diese Informationen nicht
 weiter benötigt. Im Beispiel würde auf der Titelseite das aktuelle
 Systemdatum eingesetzt.
 
 !item [author]
-""<text>"" wird als Name des Autors auf der Titelseite ausgegeben
+""<text>"" wird als Name des Autors auf der (!nolink [Titelseite]) ausgegeben
 und für weitere, jedoch sehr spezifische Formatbefehle verwendet. Im
 Text selbst findet ""<text>"" keine weitere Verwendung.
 
 !item [authorimage]
 ""<datei>"" wird als Bild (z.B. ein Logo) zusätzlich direkt über
-dem Namen des Autors auf der Titelseite ausgegeben, falls das
-Ausgabeformat Unterstützung für Bilder bietet.
+dem Namen des Autors auf der (!nolink [Titelseite]) ausgegeben, falls das
+(!nolink [Ausgabeformat]) Unterstützung für (!nolink [Bilder]) bietet.
 
 !item [authoricon]
 ""<datei>"" wird als Bild (z.B. ein Logo) im linken Frame bzw.
@@ -329,7 +329,7 @@ in der linken Spalte beim Frame-Layout bzw. ""modernen"" Layout
 von HTML ausgegeben.
 
 !item [address]
-""<text>"" wird auf der Titelseite unterhalb des Namens
+""<text>"" wird auf der (!nolink [Titelseite]) unterhalb des Namens
 des Autors ausgegeben. ""<text>"" findet sonst keine
 weitere Verwendung durch UDO. (!KW [docinfo] [[address!!]]) kann bis zu 15 mal
 angegeben werden, so dass man hier z.B. auch mehrere E-Mail-Adressen auf der
@@ -353,7 +353,7 @@ verwendet, so erzeugt UDO wie gehabt eine Zeile, gebildet aus
 !item [drcstatusline]
 Mittels (!KW [docinfo] [[drcstatusline!!]]) kann man den Text setzen,
 den UDO für die Statuszeile verwendet. Fehlt diese Angabe, so
-erzeugt UDO eine Zeile der Art ""Copyright (!copyright) by <author>"". Wurde
+erzeugt UDO eine Zeile der Art ""(!nolink [Copyright]) (!copyright) by <author>"". Wurde
 (!KW [docinfo] [[author!!]]) nicht angegeben, so erzeugt UDO eine Zeile
 ""Made with UDO"".
 
@@ -370,7 +370,7 @@ Bei der HTML-Ausgabe allerdings nur, wenn in einzelnen Dateien nicht
 (!KW [html_description]) benutzt wird. Diese haben also Vorrang. (!nl)
 
 !item [htmltitle]
-""<text>"" wird für den Titel jeder Seite benutzt (anstelle der
+""<text>"" wird für den (!nolink [Titel]) jeder Seite benutzt (anstelle der
 Zusammenfassung von [title] und [program]).
 
 !item [robots]
@@ -378,7 +378,7 @@ Zusammenfassung von [title] und [program]).
 Erlaubt sind "none", "noindex", "index", "nofollow" und "follow".
 
 !item [appletitle]
-Wird für HTML Apple Help benötig und beschreibt den Titel der Hilfe.
+Wird für HTML Apple Help benötig und beschreibt den (!nolink [Titel]) der Hilfe.
 
 !item [appleicon]
 Wird für HTML Apple Help benötig. Damit wird das Icon angegeben, welches der Apple Help Viewer
@@ -608,7 +608,7 @@ Set document information.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/doclayout [<(!FORMAT)>][<name>] <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/doclayout [(!FORMAT)][<name>] <(!TEXT)>(!t)
 
 !iflang [german]
 !item [(!DESCRIPTION)]
