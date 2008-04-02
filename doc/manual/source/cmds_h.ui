@@ -156,10 +156,10 @@ font and fontsize.
 !html_name cmd_hh_alinkcolor.html
 
 !iflang [german]
-Setzen der Farbe für aktive Links (nur HTML-Help).
+Setzen der Farbe für aktive (!nolink [Links]) (nur (!nolink [HTML-Help])).
 !endif
 !iflang [english]
-Specify the color of active links (HTML-Help only).
+Specify the color of active links ((!nolink [HTML-Help]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -191,7 +191,7 @@ Sets the color that is used to display active links in HTML-Help pages.
 !html_name cmd_hh_backcolor.html
 
 !iflang [german]
-Setzen der Hintergrundfarbe (nur HTML-Help).
+Setzen der Hintergrundfarbe (nur (!nolink [HTML-Help])).
 !endif
 !iflang [english]
 Specify the background color (HTML-Help only).
@@ -227,10 +227,10 @@ Sets the color that is used to display the background in HTML-Help pages.
 !html_name cmd_hh_backimage.html
 
 !iflang [german]
-Setzen des Hintergrundbildes (nur HTML-Help).
+Setzen des Hintergrundbildes (nur (!nolink [HTML-Help])).
 !endif
 !iflang [english]
-Specify a background image (HTML-Help only)
+Specify a background image ((!nolink [HTML-Help]) only)
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -270,7 +270,7 @@ name, including extension, of the file name.
 !html_name cmd_img_suffix.html
 
 !iflang [german]
-Endung der Grafiken für HTML-Help ändern.
+Endung der Grafiken für (!nolink [HTML-Help]) ändern.
 !endif
 !iflang [english]
 Change filename extension of images.
@@ -331,7 +331,7 @@ the image suffix right before every image.
 !html_name cmd_hh_linkcolor.html
 
 !iflang [german]
-Setzen der Farbe für Links (nur HTML-Help).
+Setzen der Farbe für (!nolink [Links]) (nur (!nolink [HTML-Help])).
 !endif
 !iflang [english]
 Specify the color of links (HTML-Help only).
@@ -366,10 +366,10 @@ Sets the color that is used to display links in HTMLHelp pages.
 !html_name cmd_hh_textcolor.html
 
 !iflang [german]
-Setzen der Textfarbe (nur HTML-Help).
+Setzen der Textfarbe (nur (!nolink [HTML-Help])).
 !endif
 !iflang [english]
-Specify the textcolor (HTML-Help only).
+Specify the textcolor ((!nolink [HTML-Help]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -401,7 +401,7 @@ Sets the color that is used to display text in HTMLHelp pages.
 !html_name cmd_hh_verbatim_backcolor.html
 
 !iflang [german]
-Setzen der Hintergrundfarbe für verbatim-Umgebungen (nur HTML-Help).
+Setzen der Hintergrundfarbe für verbatim-(!nolink [Umgebungen]) (nur (!nolink [HTML-Help])).
 !endif
 !iflang [english]
 Specify the background color of verbatim environments (HTML-Help only).
@@ -416,7 +416,7 @@ Specify the background color of verbatim environments (HTML-Help only).
 !iflang [german]
 !item [(!DESCRIPTION)]
 Setzt die Farbe, die benutzt wird, um in HTML-Help-Seiten
-den Hintergrund in verbatim-Umgebungen darzustellen.
+den Hintergrund in verbatim-(!nolink [Umgebungen]) darzustellen.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -442,7 +442,7 @@ of verbatim environments in HTMLHelp pages.
 !html_name cmd_hh_vlinkcolor.html
 
 !iflang [german]
-Setzen der Farbe für bereits besuchte Links (nur HTML-Help).
+Setzen der Farbe für bereits besuchte (!nolink [Links]) (nur (!nolink [HTML-Help])).
 !endif
 !iflang [english]
 Specify the color of visited links (HTML-Help only).
@@ -653,7 +653,7 @@ Query the destination format.
 !html_name cmd_html_alinkcolor.html
 
 !iflang [german]
-Setzen der Farbe für aktive Links (nur HTML).
+Setzen der Farbe für aktive (!nolink [Links]) (nur (!nolink [HTML])).
 !endif
 !iflang [english]
 Specify the color of active links (HTML only).
@@ -688,7 +688,7 @@ Sets the color that is used to display active links in HTML pages.
 !html_name cmd_backcolor.html
 
 !iflang [german]
-Setzen der Hintergrundfarbe (nur HTML).
+Setzen der Hintergrundfarbe (nur (!nolink [HTML])).
 !endif
 !iflang [english]
 Specify the background color (HTML only).
@@ -729,10 +729,10 @@ background color for the frames and ""modern"" layout.
 !html_name cmd_html_backimage.html
 
 !iflang [german]
-Setzen des Hintergrundbildes (nur HTML).
+Setzen des Hintergrundbildes (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Specify a background image (HTML only).
+Specify a background image ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -821,10 +821,10 @@ clicks on the ""Go Up"" button on the title page.
 !html_name cmd_html_button_alignment.html
 
 !iflang [german]
-Buttons beim ""modernen"" Layout ausrichten (nur HTML).
+Buttons beim ""modernen"" Layout ausrichten (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Align buttons for the ""modern"" layout (HTML only).
+Align buttons for the ""modern"" layout ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -858,10 +858,10 @@ This command is used to align the buttons in the left column of the ""modern"" l
 !html_name cmd_html_counter_command.html
 
 !iflang [german]
-Counter plazieren (nur HTML).
+Counter plazieren (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Place counter (HTML only).
+Place counter ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -904,10 +904,10 @@ Wird das Kommando in der Preamble benutzt, dann wird dies für alle Dateien erzeu
 !html_name cmd_html_description.html
 
 !iflang [german]
-Beschreibung in Metainformationen aufnehmen (nur HTML).
+Beschreibung in Metainformationen aufnehmen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Insert description in meta information (HTML only).
+Insert description in meta information ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -986,11 +986,12 @@ where the HTML file will be created.
 !end_ignore
 
 ################################################################################
+# ToDo: Englisch
 !begin_node (!kw [html_doctype])
 !html_name cmd_html_doctype.html
 
 !iflang [german]
-Setzen des Dokumententyp (nur HTML).
+Setzen des Dokumententyp (nur (!nolink [HTML])).
 !endif
 !iflang [english]
 !endif
@@ -1004,7 +1005,7 @@ Setzen des Dokumententyp (nur HTML).
 !iflang [german]
 !item [(!DESCRIPTION)]
 Mit diesem Kommando kann man den Dokumententyp setzen. Dabei gibt es folgemde
-Möglichkeiten: Old (HTML 3.2), Strict (HTML 4.01 Strict),
+Möglichkeiten: Old ((!nolink [HTML]) 3.2), Strict ((!nolink [HTML]) 4.01 Strict),
 Transitional (HTML 4.01 Transitional), XHTML Strict oder XHTML Transitional.
 
 Für Frames werden die DOCTYPEs automatisch gesetzt.
@@ -1031,10 +1032,10 @@ Default value is ""center"".
 !html_name cmd_html_favicon_name.html
 
 !iflang [german]
-Setzen der Favoriten-Icons (nur HTML).
+Setzen der Favoriten-Icons (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Defines the favorite icon(s (HTML only).
+Defines the favorite icon(s ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -1068,10 +1069,10 @@ Use this command to define the favorite icon(s).
 !html_name cmd_html_frames_alignment.html
 
 !iflang [german]
-Links beim ""modernen"" Layout ausrichten (nur HTML).
+(!nolink [Links]) beim ""modernen"" Layout ausrichten (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Align links of frames layout (HTML only).
+Align links of frames layout ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -1105,10 +1106,10 @@ Default value is ""center"".
 !html_name cmd_html_frames_alinkcolor.html
 
 !iflang [german]
-Setzen der Hintergrundfarbe für linken Rahmen (nur HTML).
+Setzen der Hintergrundfarbe für linken Rahmen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Specify the color of active links in left frame (HTML only).
+Specify the color of active links in left frame ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -1119,7 +1120,7 @@ Specify the color of active links in left frame (HTML only).
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Setzt die Farbe, die benutzt wird, um in HTML-Seiten den Hintergrund des linken Rahmens darzustellen.
+Setzt die Farbe, die benutzt wird, um in (!nolink [HTML])-Seiten den Hintergrund des linken Rahmens darzustellen.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1141,10 +1142,10 @@ when using the frames layout.
 !html_name cmd_html_frames_backcolor.html
 
 !iflang [german]
-Setzen der Hintergrundfarbe für linken Rahmen (nur HTML).
+Setzen der Hintergrundfarbe für linken Rahmen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Specify the background color of left frame (HTML only).
+Specify the background color of left frame ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -1155,7 +1156,7 @@ Specify the background color of left frame (HTML only).
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Setzt die Farbe, die benutzt wird, um in HTML-Seiten den Hintergrund im linken Rahmen darzustellen.
+Setzt die Farbe, die benutzt wird, um in (!nolink [HTML])-Seiten den Hintergrund im linken Rahmen darzustellen.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1177,7 +1178,7 @@ when using the frames layout.
 !html_name cmd_html_frames_backimage.html
 
 !iflang [german]
-Setzen des Hintergrundbildes für den linken Rahmen (nur HTML).
+Setzen des Hintergrundbildes für den linken Rahmen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
 Specify a background image for left frame (HTML only).
@@ -1191,7 +1192,7 @@ Specify a background image for left frame (HTML only).
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Setzt das Hintergrundbild für den linken Rahmen in HTML-Seiten. Als Dateiname
+Setzt das Hintergrundbild für den linken Rahmen in (!nolink [HTML])-Seiten. Als Dateiname
 muss der komplette Name, also inklusive Dateiendung,
 angegeben werden. Enthält der Dateiname Leerzeichen,
 muss der Name in Anführungszeichen eingeschlossen werden.
@@ -1221,10 +1222,10 @@ name, including extension, of the file name.
 !html_name cmd_html_frames_column_color.html
 
 !iflang [german]
-Setzen der Hintergrundfarbe für linken Rahmen (nur HTML).
+Setzen der Hintergrundfarbe für linken Rahmen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Specify the background color of left frame (HTML only).
+Specify the background color of left frame ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -1343,10 +1344,10 @@ This command has been renamed to (!KW [html_frames_width]).
 !html_name cmd_html_frames_con_title.html
 
 !iflang [german]
-Setzen des Frametitel für den Frame des Inhalsverzeichnis beim Frame Layout (nur HTML).
+Setzen des Frametitel für den Frame des Inhalsverzeichnis beim Frame Layout (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Setzen des Frametitel für den Frame des Inhalts beim Frame Layout (nur HTML).
+Setzen des Frametitel für den Frame des Inhalts beim Frame Layout (nur (!nolink [HTML])).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -1380,10 +1381,10 @@ Gibt man zum Beispiel als <text> Inhalt an so wird daraus: (!nl)
 !html_name cmd_html_frames_heigth.html
 
 !iflang [german]
-Höhe des Rahmens beim Frames-Layout bestimmen (nur HTML).
+Höhe des Rahmens beim Frames-Layout bestimmen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Set height of left frame (HTML only).
+Set height of left frame ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -1498,10 +1499,10 @@ The left frame can not be scrolled then.
 !html_name cmd_html_frames_linkcolor.html
 
 !iflang [german]
-Setzen der Farbe für Links für linken Rahmen (nur HTML).
+Setzen der Farbe für Links für linken Rahmen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Specify the color of links of left frame (HTML only).
+Specify the color of links of left frame ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -1512,7 +1513,7 @@ Specify the color of links of left frame (HTML only).
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Setzt die Farbe, die benutzt wird, um in HTML-Seiten Links in dem linken Rahmens darzustellen.
+Setzt die Farbe, die benutzt wird, um in (!nolink [HTML])-Seiten Links in dem linken Rahmens darzustellen.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -1534,10 +1535,10 @@ when using the frames layout.
 !html_name cmd_frames_position.html
 
 !iflang [german]
-Position des Rahmens beim Frames-Layout bestimmen (nur HTML).
+Position des Rahmens beim Frames-Layout bestimmen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Specify position of frame (HTML only).
+Specify position of frame ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -1575,10 +1576,10 @@ using the frames layout. Default value is left.
 !html_name cmd_frames_textcolor.html
 
 !iflang [german]
-Setzen der Textfarbe für linken Rahmen (nur HTML).
+Setzen der Textfarbe für linken Rahmen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Specify the textcolor of left frame (HTML only).
+Specify the textcolor of left frame ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -1589,11 +1590,11 @@ Specify the textcolor of left frame (HTML only).
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Setzt die Farbe, die benutzt wird, um in HTML-Seiten Text im linken Rahmen darzustellen.
+Setzt die Farbe, die benutzt wird, um in (!nolink [HTML])-Seiten Text im linken Rahmen darzustellen.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
-Sets the color that is used to display text in the left frame of HTML pages
+Sets the color that is used to display text in the left frame of (!nolink [HTML]) pages
 when using the frames layout.
 !endif
 
@@ -1650,10 +1651,10 @@ Gibt man zum Beispiel als <text> Navigation an so wird daraus: (!nl)
 !html_name cmd_html_frames_vlinkcolor.html
 
 !iflang [german]
-Setzen der Farbe für bereits besuchte Links für linken Rahmen (nur HTML).
+Setzen der Farbe für bereits besuchte Links für linken Rahmen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Specify the color of visited links of left frame (HTML only).
+Specify the color of visited links of left frame ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -1686,7 +1687,7 @@ when using the frames layout.
 !html_name cmd_html_frames_width.html
 
 !iflang [german]
-Breite des Rahmens beim Frames-Layout bestimmen (nur HTML).
+Breite des Rahmens beim Frames-Layout bestimmen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
 Set width of left frame (HTML only).
@@ -1739,10 +1740,10 @@ If you use a percentage value, UDO will output a percentage value, too.
 !html_name cmd_html_header_date.html
 
 !iflang [german]
-Setzen des Datums (nur HTML).
+Setzen des Datums (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Setzen des Datums (nur HTML).
+Setzen des Datums (nur (!nolink [HTML])).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -1753,7 +1754,7 @@ Setzen des Datums (nur HTML).
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Ist dieser Schalter gesetzt, so setzt UDO im HTML-Header ein META-Tag für
+Ist dieser Schalter gesetzt, so setzt UDO im (!nolink [HTML])-Header ein META-Tag für
 Datum/Uhrzeit der Datei-Erzeugung
 z.B. (!T)<META name="date" content="2004-01-29T08:49:37+00:00">(!t).
 
@@ -1791,10 +1792,10 @@ Ist <text> leer, wird für den Zeitzonenunterschied ""+00:00"" gesetzt.
 !html_name cmd_html_header_links.html
 
 !iflang [german]
-<link>-Elemente setzen (nur HTML).
+<link>-Elemente setzen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-<link>-Elemente setzen (only HTML).
+<link>-Elemente setzen (only (!nolink [HTML])).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -1806,7 +1807,7 @@ Ist <text> leer, wird für den Zeitzonenunterschied ""+00:00"" gesetzt.
 !iflang [german]
 !item [(!DESCRIPTION)]
 Ist dieser Schalter gesetzt, so werden je nach Vorgabe
-(!T)<link>(!t)-Elemente im HTML-Header erzeugt:
+(!T)<link>(!t)-Elemente im (!nolink [HTML])-Header erzeugt:
 !begin_itemize
 !item Enthält (!T)<text>(!t) ""navigation"", werden die Links zur Navigation erzeugt
    (<link rel="start" href="index.html" title="Beginn des Dokumentes">, ebenso
@@ -1816,7 +1817,7 @@ Ist dieser Schalter gesetzt, so werden je nach Vorgabe
 !end_itemize
 
 Dadurch, dass die Link-Elemente nicht mehr automatisch, sondern nur noch auf Anforderung
-erzeugt werden, entstehen kleinere HTML-Dateien.
+erzeugt werden, entstehen kleinere (!nolink [HTML])-Dateien.
 
 !endif
 !iflang [english]
@@ -1848,10 +1849,10 @@ If this switch is set, several (!T)<link>(!t) elements are generated in the HTML
 !html_name cmd_html_ignore_8bit.html
 
 !iflang [german]
-8-Bit-Zeichen ignorieren (nur HTML).
+8-Bit-Zeichen ignorieren (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Ignore 8-bit characters (HTML only).
+Ignore 8-bit characters ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -1863,11 +1864,11 @@ Ignore 8-bit characters (HTML only).
 !iflang [german]
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, so werden 8-Bit-Zeichen (!I)nicht(!i)
-in HTML-Entities (&auml; etc.) umgewandelt. Somit ist es möglich, auch von ISO-Latin1
+in (!nolink [HTML])-Entities (&auml; etc.) umgewandelt. Somit ist es möglich, auch von ISO-Latin1
 abweichende Dateien zu erzeugen, ohne das UDO dazwischenfunkt.
 
 Optional kann durch den Parameter <text> ein Codepage übergeben werden.
-Zum Beispiel wird mit (!T)!/html_ignore_8bit ISO-8859-2(!t) in die HTML-Header
+Zum Beispiel wird mit (!T)!/html_ignore_8bit ISO-8859-2(!t) in die (!nolink [HTML])-Header
 folgendes geschrieben: (!T)<meta http-equiv="content-type" content="text/html;charset=ISO-8859-2">(!t).
 !endif
 !iflang [english]
@@ -1894,7 +1895,7 @@ Thus you can generate files different from iso-latin1 without UDO intervening.
 !html_name cmd_html_img_suffix.html
 
 !iflang [german]
-Endung der Grafiken für HTML ändern.
+Endung der Grafiken für (!nolink [HTML]) ändern.
 !endif
 !iflang [english]
 Change filename extension of images.
@@ -1971,10 +1972,10 @@ the image suffix right before every image.
 !html_name cmd_html_keywords.html
 
 !iflang [german]
-HTML-Meta-Keywords setzen.
+(!nolink [HTML])-Meta-Keywords setzen.
 !endif
 !iflang [english]
-Set META keywords for HTML.
+Set META keywords for (!nolink [HTML]).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -2024,10 +2025,10 @@ the entries will be concatenated, separated by a comma.
 !html_name cmd_html_linkcolor.html
 
 !iflang [german]
-Setzen der Farbe für Links (nur HTML).
+Setzen der Farbe für Links (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Specify the color of links (HTML only).
+Specify the color of links ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -2038,7 +2039,7 @@ Specify the color of links (HTML only).
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Setzt die Farbe, die benutzt wird, um in HTML-Seiten Links darzustellen.
+Setzt die Farbe, die benutzt wird, um in (!nolink [HTML])-Seiten Links darzustellen.
 Wird der Befehl im Vorspann benutzt, so setzt man damit
 die Defaultwerte für alle Seiten inkl. dem Inhaltsverzeichnis.
 !endif
@@ -2063,10 +2064,10 @@ this will be the default color for all pages including the table of contents.
 !html_name cmd_html_merge_nodes.html
 
 !iflang [german]
-Nur eine HTML-Datei erzeugen (nur HTML).
+Nur eine (!nolink [HTML])-Datei erzeugen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Create only one HTML file (HTML only).
+Create only one (!nolink [HTML])HTML file ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -2079,12 +2080,12 @@ Create only one HTML file (HTML only).
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, so werden
 alle Kapitel, Abschnitte, Unterabschnitte und
-Paragraphen bei der Umwandlung ins HTML-Format in einer Datei zusammengefasst.
+Paragraphen bei der Umwandlung ins (!nolink [HTML])-Format in einer Datei zusammengefasst.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
 If you use this switch inside the preamble of your UDO source file
-UDO will save only one HTML file that will contain the whole text.
+UDO will save only one (!nolink [HTML]) file that will contain the whole text.
 !endif
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.37
@@ -2101,10 +2102,10 @@ UDO will save only one HTML file that will contain the whole text.
 !html_name cmd_html_merge_subnodes.html
 
 !iflang [german]
-Abschnitte, Unterabschnitte und Paragraphen zusammenfassen (nur HTML).
+Abschnitte, Unterabschnitte und Paragraphen zusammenfassen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Merge sections, subsections and paragraphs (HTML only).
+Merge sections, subsections and paragraphs ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -2140,10 +2141,10 @@ sections, subsections and paragraphs, too.
 !html_name cmd_merge_subsubnodes.html
 
 !iflang [german]
-Unterabschnitte und Paragraphen zusammenfassen (nur HTML).
+Unterabschnitte und Paragraphen zusammenfassen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Merge subsections and paragraphs (HTML only).
+Merge subsections and paragraphs ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -2179,7 +2180,7 @@ subsections and paragraphs, too.
 !html_name cmd_html_merge_subsubsubnode.html
 
 !iflang [german]
-Paragraphen zusammenfassen (nur HTML).
+Paragraphen zusammenfassen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
 Merge paragraphs (HTML only).
@@ -2216,10 +2217,10 @@ will save an HTML file for each subsection. These files will contain the paragra
 !html_name cmd_modern_alignment.html
 
 !iflang [german]
-Links beim ""modernen"" Layout ausrichten (nur HTML).
+Links beim ""modernen"" Layout ausrichten (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Align links of ""modern"" layout (HTML only).
+Align links of ""modern"" layout ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -2253,10 +2254,10 @@ Default value is ""center"".
 !html_name cmd_modern_backcolor.html
 
 !iflang [german]
-Setzen der Hintergrundfarbe beim ""modernen"" Layout (nur HTML).
+Setzen der Hintergrundfarbe beim ""modernen"" Layout (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Specify the background color of ""modern"" layout (HTML only).
+Specify the background color of ""modern"" layout ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -2267,7 +2268,7 @@ Specify the background color of ""modern"" layout (HTML only).
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Setzt die Farbe, die benutzt wird, um in HTML-Seiten den Hintergrund darzustellen.
+Setzt die Farbe, die benutzt wird, um in (!nolink [HTML])-Seiten den Hintergrund darzustellen.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -2289,10 +2290,10 @@ in the left column of HTML pages when using the ""modern"" layout.
 !html_name cmd_modern_backimage.html
 
 !iflang [german]
-Setzen des Hintergrundbildes beim ""modernen"" Layout (nur HTML).
+Setzen des Hintergrundbildes beim ""modernen"" Layout (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Specify a background image for left column (HTML only).
+Specify a background image for left column ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -2303,7 +2304,7 @@ Specify a background image for left column (HTML only).
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Setzt das Hintergrundbild für HTML-Seiten. Als Dateiname
+Setzt das Hintergrundbild für (!nolink [HTML])-Seiten. Als Dateiname
 muss der komplette Name, also inklusive Dateiendung,
 angegeben werden. Enthält der Dateiname Leerzeichen,
 muss der Name in Anführungszeichen eingeschlossen werden.
@@ -2455,7 +2456,7 @@ This command has been renamed to (!KW [html_modern_width]).
 !html_name cmd_html_modern_layout.html
 
 !iflang [german]
-""Modernes"" (Tabellen-) Layout erzeugen.
+""Modernes"" ((!nolink [Tabellen])-) Layout erzeugen.
 !endif
 !iflang [english]
 Create ""modern"" (table) layout.
@@ -2471,7 +2472,7 @@ Create ""modern"" (table) layout.
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, so wird jede Seite
 als Tabelle dargestellt. Die Tabelle besteht dann aus zwei
-Spalten, wobei in der linken Spalte die Links auf die anderen
+Spalten, wobei in der linken Spalte die (!nolink [Links]) auf die anderen
 Nodes und in der rechten Spalte der Seiteninhalt ausgegeben
 werden. Benutzt man (!KW [chaptericon]) innerhalb eines Nodes, so werden
 in der linken Spalte Imagelinks angelegt.
@@ -2500,10 +2501,10 @@ to replace the links in the left column by images.
 !html_name cmd_html_modern_width.html
 
 !iflang [german]
-Breite der linken Spalte beim ""modernen"" Layout bestimmen (nur HTML).
+Breite der linken Spalte beim ""modernen"" Layout bestimmen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Set width of left column (HTML only).
+Set width of left column ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -2544,10 +2545,10 @@ If you use a percentage value, UDO will output a percentage value, too.
 !html_name cmd_html_monofont_name.html
 
 !iflang [german]
-Nichtproportionalen Zeichensatzes für verbatim-Umgebungen bestimmen (nur HTML).
+Nichtproportionalen Zeichensatzes für verbatim-Umgebungen bestimmen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Specify name of monospaced font (HTML only).
+Specify name of monospaced font ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -2584,10 +2585,10 @@ is used to display text in verbatim environments.
 !html_name cmd_html_monofont_size.html
 
 !iflang [german]
-Größe des Fonts für verbatim-Umgebungen bestimmen (nur HTML).
+Größe des Fonts für verbatim-Umgebungen bestimmen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Set size of monospaced font (HTML only).
+Set size of monospaced font ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -2624,10 +2625,10 @@ is used to display text in verbatim environments.
 !html_name cmd_html_name.html
 
 !iflang [german]
-Dateinamen zuweisen (nur HTML).
+Dateinamen zuweisen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Assign filename (HTML only).
+Assign filename ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -2670,10 +2671,10 @@ paragraph, ""<file>"" is used as the name of the HTML file instead of
 !html_name cmd_html_name_prefix.html
 
 !iflang [german]
-Ausgabenamen ändern (nur HTML).
+Ausgabenamen ändern (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Change output filename (HTML only).
+Change output filename ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -2775,11 +2776,11 @@ Mit dem optionalen Parameter kann ein eigenes Bild angegeben werden.
 !html_name cmd_html_navigation_image.html
 
 !iflang [german]
-Vor der Navigationsleiste ein Ordnersymbol zeigen (nur HTML, nur in Verbindung mit (!KW [html_navigation_line])).
+Vor der Navigationsleiste ein Ordnersymbol zeigen (nur (!nolink [HTML]), nur in Verbindung mit (!KW [html_navigation_line])).
 Bei Angabe eines zusätzlichen Parameters kann ein eigenes Bild als Symbol verwendet werden.
 !endif
 !iflang [english]
-Output a folder symbol in front of the navigation bar (HTML only, requires (!KW [html_navigation_line])). 
+Output a folder symbol in front of the navigation bar ((!nolink [HTML]) only, requires (!KW [html_navigation_line])). 
 Using an additional parameter you can define your own symbol image.
 !endif
 
@@ -2832,10 +2833,10 @@ The optional parameter can be used to define a userdef image.
 !html_name cmd_html_navigation_line.html
 
 !iflang [german]
-Navigationsleiste in einer einzigen Zeile ausgeben (nur HTML).
+Navigationsleiste in einer einzigen Zeile ausgeben (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Output of navigation section in a single line (HTML only).
+Output of navigation section in a single line ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -2904,10 +2905,10 @@ Chapter 1 :: Chapter 1.1 :: Chapter 1.1.1 :: Chapter 1.1.1.1
 !html_name cmd_html_no_xlist.html
 
 !iflang [german]
-xlist-Umgebung als description ausgeben (nur HTML).
+xlist-Umgebung als description ausgeben (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Output xlist environment as description (HTML only).
+Output xlist environment as description ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -2920,7 +2921,7 @@ Output xlist environment as description (HTML only).
 !item [(!DESCRIPTION)]
 Der Schalter (!KW [html_no_xlist]) führt dazu, dass UDO
 die Listen wie bisher als description-Umgebungen ausgibt.
-Defaultmäßig erzeugt UDO dafür nun HTML-Tabellen. Leider
+Defaultmäßig erzeugt UDO dafür nun (!nolink [HTML])-Tabellen. Leider
 unterscheiden sich Navigator und IE bei der Ausgabe der (!link [Tabellen] [Tabellen]),
 besonders was die Zwischenräume und den Umbruch der ersten Spalte angeht.
 !endif
@@ -2944,10 +2945,10 @@ as descriptions, as before. Default behaviour is now to use tables instead.
 !html_name cmd_html_nodesize.html
 
 !iflang [german]
-Größe der Kapitelüberschriften setzen (HTML).
+Größe der Kapitelüberschriften setzen ((!nolink [HTML])).
 !endif
 !iflang [english]
-Set size of headings (HTML only).
+Set size of headings ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -2967,7 +2968,7 @@ einer kleineren Größe. Standardmäßig verwendet UDO den Wert~1.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
-You can set the font size of the HTML headlines with this switch. By
+You can set the font size of the (!nolink [HTML]) headlines with this switch. By
 default UDO will use  value of 1. That means, that UDO will print
 (!V)<H1>...</H1>(!v) for chapters, (!V)<H2>...</H2>(!v) for sections
 etc. The example shows how to tell UDO that it should print
@@ -2991,10 +2992,10 @@ etc. The example shows how to tell UDO that it should print
 !html_name cmd_html_propfont_name.html
 
 !iflang [german]
-Standardfont bestimmen (nur HTML).
+Standardfont bestimmen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Specify name of default font (HTML only).
+Specify name of default font ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -3006,7 +3007,7 @@ Specify name of default font (HTML only).
 !iflang [german]
 !item [(!DESCRIPTION)]
 Mit diesem Befehl kann der Standardfont bestimmt werden, der für die
-Anzeige von Text in HTML-Dateien benutzt wird.
+Anzeige von Text in (!nolink [HTML])-Dateien benutzt wird.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -3030,10 +3031,10 @@ This command sets the name of the font that is used to display regular text.
 !html_name cmd_html_propfont_size.html
 
 !iflang [german]
-Größe des Standardfonts bestimmen (nur HTML).
+Größe des Standardfonts bestimmen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Set size of default font (HTML only).
+Set size of default font ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -3045,7 +3046,7 @@ Set size of default font (HTML only).
 !iflang [german]
 !item [(!DESCRIPTION)]
 Mit diesem Befehl kann die Größe des Standardfonts bestimmt werden, der für die
-Anzeige von Text in HTML-Dateien benutzt wird.
+Anzeige von Text in (!nolink [HTML])-Dateien benutzt wird.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -3070,7 +3071,7 @@ This command sets the size of the font that is used to display regular text.
 !html_name cmd_html_robots.html
 
 !iflang [german]
-Einstellen der Robots Anweisung für Suchmaschinen (nur HTML).
+Einstellen der Robots Anweisung für Suchmaschinen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
 !endif
@@ -3119,7 +3120,7 @@ Für HTML Apple Help sind noch "keywords", "segements" und "anchors" erlaubt.
 !html_name cmd_html_script_name.html
 
 !iflang [german]
-JavaScript einbinden (nur HTML).
+JavaScript einbinden (nur (!nolink [HTML])).
 !endif
 !iflang [english]
 !endif
@@ -3155,7 +3156,7 @@ Mit diesem Kommando kann ein JavaScript eingebunden werden.
 !html_name cmd_html_style_name.html
 
 !iflang [german]
-Stylesheet einbinden (nur HTML).
+Stylesheet einbinden (nur (!nolink [HTML])).
 !endif
 !iflang [english]
 !endif
@@ -3192,14 +3193,14 @@ in die Datei, die den Node enthält.
 !end_node
 
 ################################################################################
+# ToDo: Englisch
 !begin_node (!kw [html_switch_language])
 !html_name cmd_html_switch_language.html
-
 !iflang [german]
-Verweis für weitere Sprachen erzeugen (nur HTML).
+Verweis für weitere Sprachen erzeugen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Create links for foreign languages (HTML only).
+Create links for foreign languages ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -3218,6 +3219,10 @@ Create links for foreign languages (HTML only).
 Wird dieses Kommando im Vorspann benutzt, werden
 beim ""modernen"" und beim Frames-Layout in Inhaltsverzeichnissen
 auf der rechten Seite Verweise für Seiten in anderen Sprachen erzeugt.
+
+UDO kennt zur Zeit nur <german> und <english>, da nur für diese entsprechende
+Grafiken zur Verfügung stehen.
+
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -3225,6 +3230,9 @@ If you use this command inside the preamble,
 in the ""modern"" and frames-layout links will
 be generated in tables of contents that point
 to the starting pages for foreign languages.
+
+UDO kennt zur Zeit nur <german> und <english>, da nur für diese entsprechende
+Grafiken zur Verfügung stehen.
 !endif
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~12
@@ -3241,10 +3249,10 @@ to the starting pages for foreign languages.
 !html_name cmd_html_textcolor.html
 
 !iflang [german]
-Setzen der Textfarbe (nur HTML).
+Setzen der Textfarbe (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Specify the textcolor (HTML only).
+Specify the textcolor ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -3255,11 +3263,11 @@ Specify the textcolor (HTML only).
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Setzt die Farbe, die benutzt wird, um in HTML-Seiten Text darzustellen.
+Setzt die Farbe, die benutzt wird, um in (!nolink [HTML])-Seiten Text darzustellen.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
-Sets the color that is used to display text in HTML pages.
+Sets the color that is used to display text in (!nolink [HTML]) pages.
 !endif
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~1
@@ -3276,10 +3284,10 @@ Sets the color that is used to display text in HTML pages.
 !html_name cmd_html_transparent_buttons.html
 
 !iflang [german]
-Transparente Navigationsbutton erzeugen (nur HTML).
+Transparente Navigationsbutton erzeugen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Create transparent navigation buttons (HTML only).
+Create transparent navigation buttons ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -3315,7 +3323,7 @@ will use smaller and transparent for the navigation links.
 !html_name cmd_html_use_folders.html
 
 !iflang [german]
-Verzeichnisnamen benutzen (nur HTML).
+Verzeichnisnamen benutzen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
 Use folders (HTML only).
@@ -3355,7 +3363,7 @@ the directory names set with (!KW [html_dirname]) will be used.
 !html_name cmd_html_use_hyphenation.html
 
 !iflang [german]
-Trennstrichwandlung (HTML only).
+Trennstrichwandlung ((!nolink [HTML]) only).
 !endif
 !iflang [english]
 !endif
@@ -3392,7 +3400,7 @@ Mit diesem Kommando können Sie festlegen, dass UDO
 !html_name cmd_html_use_xlist.html
 
 !iflang [german]
-xlist-Umgebung wie bei ASCII ausgeben (nur HTML)
+xlist-Umgebung wie bei ASCII ausgeben (nur (!nolink [HTML]))
 !endif
 !iflang [english]
 Output xlist environment like in ASCII.
@@ -3425,10 +3433,10 @@ Output xlist environment like in ASCII.
 !html_name cmd_html_verbatim_backcolor.html
 
 !iflang [german]
-Setzen der Hintergrundfarbe für verbatim-Umgebungen (nur HTML).
+Setzen der Hintergrundfarbe für verbatim-Umgebungen (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Specify the background color of verbatim environments (HTML only).
+Specify the background color of verbatim environments ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -3439,7 +3447,7 @@ Specify the background color of verbatim environments (HTML only).
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Setzt die Farbe, die benutzt wird, um in HTML-Seiten den Hintergrund in verbatim-Umgebungen darzustellen.
+Setzt die Farbe, die benutzt wird, um in (!nolink [HTML])-Seiten den Hintergrund in verbatim-Umgebungen darzustellen.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
@@ -3465,10 +3473,10 @@ of verbatim environments in HTML pages.
 !html_name cmd_html_vlinkcolor.html
 
 !iflang [german]
-Setzen der Farbe für bereits besuchte Links (nur HTML).
+Setzen der Farbe für bereits besuchte Links (nur (!nolink [HTML])).
 !endif
 !iflang [english]
-Specify the color of visited links (HTML only).
+Specify the color of visited links ((!nolink [HTML]) only).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -3479,11 +3487,11 @@ Specify the color of visited links (HTML only).
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-Setzt die Farbe, die benutzt wird, um in HTML-Seiten Links darzustellen, die bereits besucht wurden.
+Setzt die Farbe, die benutzt wird, um in (!nolink [HTML])-Seiten Links darzustellen, die bereits besucht wurden.
 !endif
 !iflang [english]
 !item [(!DESCRIPTION)]
-Sets the color that is used to display visited links in HTML pages.
+Sets the color that is used to display visited links in (!nolink [HTML]) pages.
 !endif
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~1
@@ -3504,7 +3512,7 @@ Sets the color that is used to display visited links in HTML pages.
 HTML-Meta-Keywords setzen.
 !endif
 !iflang [english]
-Set META keywords for HTML.
+Set META keywords for (!nolink [HTML]).
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
