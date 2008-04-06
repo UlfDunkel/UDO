@@ -4687,8 +4687,6 @@ GLOBAL BOOLEAN save_html_index(void)
          
          lastc = thisc;
       }
-      else                                /* normal index entry within a character group: */
-         fprintf(uif, "%s\n", HTML_BR);   /* end the entry line */
       
       get_html_filename(html_index[i].toc_index, htmlname);
    
@@ -4713,6 +4711,7 @@ GLOBAL BOOLEAN save_html_index(void)
             fprintf(uif, "<a href=\"%s\">%s</a>",
                htmlname, escapedtocname);
          }
+         fprintf(uif, "%s\n", HTML_BR);   /* end the entry line */
       }
       else                                /* this index entry is a label in another file */
       {
@@ -4726,6 +4725,7 @@ GLOBAL BOOLEAN save_html_index(void)
             da der gcc sonst meckert: "toc.c:3940:17: warning: unknown escape sequence '\#'" */
             fprintf(uif, "<a href=\"%s%s%s%s\">%s</a>",
                htmlname, outfile.suff, "#", cLabel, escapedtocname);
+            fprintf(uif, "%s\n", HTML_BR);   /* end the entry line */
          }
       }
       
