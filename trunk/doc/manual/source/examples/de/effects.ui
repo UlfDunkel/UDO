@@ -2,5 +2,7 @@ UDO unterstützt derzeit
 (!B)fetten(!b),
 (!I)kursiven(!i),
 (!U)unterstrichenen(!u),
-(!V)Klartext(!v) sowie
-(!T)Schreibmaschinenschrift(!t).
+(!V)Klartext(!v),
+(!T)Schreibmaschinenschrift(!t),
+(!SUB)tiefgestellt(!sub) sowie
+(!SUP)hochgestellt(!sup).

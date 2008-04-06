@@ -924,6 +924,59 @@ Set document information.
 !endif
 
 ################################################################################
+# TodDo: Englisch
+!begin_node (!kkkw [SUB] [sub])
+!html_name cmd_SUB_sub.html
+!label (!kk1 [/SUB])
+!label (!kk1 [/sub])
+
+!iflang [german]
+Text tiefgestellt ausgeben
+!endif
+!iflang [english]
+Text tiefgestellt ausgeben
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/SUB)[<(!TEXT)>](!/sub)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+""<text>"" wird tiefgestellt dargestellt, falls möglich.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+""<text>"" wird tiefgestellt dargestellt, falls möglich.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)(!/SUB)tiefgestellt(!/sub)(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/SUB)tiefgestellt(!/sub)(!t)
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.20
+
+!iflang [german]
+!item [(!SEEALSO)]
+Schriftarten, (!link [Texthervorhebungen] [Texthervorhebungen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+Text styles, (!link [Emphasizing text] [Emphasizing text])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
 !begin_node (!kw [subheading])
 !html_name cmd_subheading.html
 
@@ -1881,6 +1934,60 @@ chapters of the appendix.
 !end_xlist
 
 !end_node
+
+################################################################################
+# TodDo: Englisch
+!begin_node (!kkkw [SUP] [sup])
+!html_name cmd_SUP_sup.html
+!label (!kk1 [/SUP])
+!label (!kk1 [/sup])
+
+!iflang [german]
+Text hochgestellt ausgeben
+!endif
+!iflang [english]
+Text hochgestellt ausgeben
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/SUP)[<(!TEXT)>](!/sup)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+""<text>"" wird hochgestellt dargestellt, falls möglich.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+""<text>"" wird hochgestellt dargestellt, falls möglich.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)(!/SUP)hochgestellt(!/sup)(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/SUP)hochgestellt(!/sup)(!t)
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.20
+
+!iflang [german]
+!item [(!SEEALSO)]
+Schriftarten, (!link [Texthervorhebungen] [Texthervorhebungen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+Text styles, (!link [Emphasizing text] [Emphasizing text])
+!endif
+
+!end_xlist
+
+!end_node
+
 
 ################################################################################
 !ifset OldKeywords

@@ -1,3 +1,4 @@
+# ToDo: Eingiges ins englische Übertagen.
 # doc/manual/source/history.ui
 # letzte Änderungen: 13.05.2004 / last changes: May 13, 2004
 
@@ -53,6 +54,19 @@ developer versions.
 # ------------------------------------------------------------------------------
 !item [(!NEWS)]
 !begin_itemize !short
+# ..............................................................................
+!iflang [german]
+!item Text hoch- und tiefgestellt ausgeben (!nl)
+  Mit den neuen Kommandos (!kkkw [SUP] [sup]) bzw. (!kkkw [SUB] [sub]) kann man Text hoch- oder
+  tiefgestellt ausgeben (!nl)
+  Dies ist seit Version~6.5.20 verfügbar.
+!endif
+!iflang [english]
+!item Index link in TableOfContent (!nl)
+  Mit den neuen Kommandos (!kkkw [SUP] [sup]) bzw. (!kkkw [SUB] [sub]) kann man Text hoch- oder
+  tiefgestellt ausgeben (!nl)
+  Dies ist seit Version~6.5.20 verfügbar.
+!endif
 # ..............................................................................
 !iflang [german]
 !item Index-Link im Inhaltsverzeichnis (!nl)
