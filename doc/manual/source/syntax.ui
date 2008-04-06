@@ -2668,6 +2668,10 @@ UDO        !! ASCII         !! ST-Guide         !! LaTeX               !! RTF   
 (!KK1 [v]) !! (!V) (!v)     !! (!V)    (!v)     !! (!V)+(!v)           !! (!V)}(!v)    !! (!V)}(!v)       !! (!V)</PRE>(!v)
 (!KK1 [T]) !! (!V) (!v)     !! (!V)    (!v)     !! (!V){\tt(!v)        !! (!V){\f1(!v) !! (!V){\f1(!v)    !! (!V)<TT>(!v)
 (!KK1 [t]) !! (!V) (!v)     !! (!V)    (!v)     !! (!V)}(!v)           !! (!V)}(!v)    !! (!V)}(!v)       !! (!V)</TT>(!v)
+(!KK1 [SUB]) !! (!V) (!v)     !! (!V)    (!v)     !! (!V)$_{\mbox{(!v)           !! (!V)\sub(!v)    !! (!V) (!v)       !! (!V)<sub>(!v)
+(!KK1 [sub]) !! (!V) (!v)     !! (!V)    (!v)     !! (!V)}}${(!v)           !! (!V)\nosupersub(!v)~    !! (!V) (!v)       !! (!V)</sub>~(!v)
+(!KK1 [SUP]) !! (!V) (!v)     !! (!V)    (!v)     !! (!V)$^{\mbox{(!v)           !! (!V)\super(!v)    !! (!V) (!v)       !! (!V)<sup>(!v)
+(!KK1 [sup]) !! (!V) (!v)     !! (!V)    (!v)     !! (!V)}}${(!v)           !! (!V)\nosupersub(!v)    !! (!V) (!v)       !! (!V)</sup>(!v)
 !hline
 !end_table
 
