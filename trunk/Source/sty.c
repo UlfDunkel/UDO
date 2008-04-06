@@ -1076,7 +1076,7 @@ GLOBAL void init_module_sty ( void )
 	sprintf(COLOR_TEAL,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_TEAL);
 	sprintf(COLOR_AQUA,		"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_AQUA);
 	sprintf(COLOR_OFF,	"%s%c\033", ESC_STYLE_MAGIC, C_COLOR_OFF);
-	/* New in V6.5.9 [NHz] */
+	/* New in V6.5.20 [GS] */
 	sprintf(SUP_ON,	    	"%s%c\033", ESC_STYLE_MAGIC, C_SUP_ON);
 	sprintf(SUP_OFF,    	"%s%c\033", ESC_STYLE_MAGIC, C_SUP_OFF);
 	sprintf(SUB_ON,	    	"%s%c\033", ESC_STYLE_MAGIC, C_SUB_ON);
