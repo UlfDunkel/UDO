@@ -269,6 +269,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!html_keywords",				"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!html_description",			"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!html_robots",				"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	}, /* new V6.5.17 */
+	{ "!html_bgsound",			"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	}, /* new V6.5.20 */
 	{ "!html_backimage",			"",			c_tunix,				TRUE,	CMD_ALWAYS			},
 	{ "!html_backcolor",			"",			c_tunix,				TRUE,	CMD_ALWAYS			},
 	{ "!html_textcolor",			"",			c_tunix,				TRUE,	CMD_ALWAYS			},
@@ -343,8 +344,8 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!drc_bcolor",				"",			c_drc_bcolor,			TRUE,	CMD_ALWAYS			},
 	{ "!drc_icolor",				"",			c_drc_icolor,			TRUE,	CMD_ALWAYS			},
 	{ "!drc_ucolor",				"",			c_drc_ucolor,			TRUE,	CMD_ALWAYS			},
-	{ "!use_raw_header",			"",			c_tunix,				TRUE,	CMD_ALWAYS			},
-	{ "!use_raw_footer",			"",			c_tunix,				TRUE,	CMD_ALWAYS			},
+	{ "!use_raw_header",			"",			c_tunix,				TRUE,	CMD_ALWAYS	},
+	{ "!use_raw_footer",			"",			c_tunix,				TRUE,	CMD_ALWAYS	},
 	{ "!udolink",					"",			c_udolink,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!toplink",					"",			c_toplink,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!endnode",					"",			c_endnode,				TRUE,	CMD_ONLY_MAINPART	},
@@ -521,7 +522,7 @@ typedef struct _udolanguage		/* ---- Sprachentabelle ----	*/
 
 #define MAXLANGUAGE     13
 
-LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE] =
+LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE]=
 {
    {"czech",      TOCZE},
    {"danish",     TODAN},
@@ -7920,6 +7921,10 @@ LOCAL BOOLEAN pass1_check_main_commands ( void )
 			}
 			if ( strcmp(token[0], "!html_robots")==0 )		/* New V 6.5.17 */
 			{	set_html_robots();
+				return TRUE;
+			}
+			if ( strcmp(token[0], "!html_bgsound")==0 )		/* New V 6.5.20 [GS]*/
+			{	set_html_bgsound();
 				return TRUE;
 			}
 			if ( strcmp(token[0], "!html_counter_command")==0 )

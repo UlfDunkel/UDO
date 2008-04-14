@@ -41,11 +41,11 @@ Print text in bold.
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!link [Texthervorhebungen] [Texthervorhebungen])
+Schriftarten, (!link [Texthervorhebungen] [Texthervorhebungen])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
-(!link [Emphasizing text] [Emphasizing text])
+Text styles, (!link [Emphasizing text] [Emphasizing text])
 !endif
 
 !end_xlist

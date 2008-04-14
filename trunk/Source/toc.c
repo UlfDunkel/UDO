@@ -2513,6 +2513,10 @@ BOOLEAN    keywords)             /* */
    if (sDocFavIcon[0] != EOS)
       voutlnf("<link rel=\"shortcut icon\" href=\"%s\"%s>", sDocFavIcon, closer);
    
+	/* New in V6.5.20 [GS] */
+	if ( toc[p2_toc_counter]->bgsound[0] != '\0' )
+		voutlnf("<bgsound src=%s>", toc[p2_toc_counter]->bgsound);
+
 }  /* output_html_meta */
 
 
@@ -4566,8 +4570,9 @@ GLOBAL BOOLEAN save_html_index(void)
    
    udofile_adjust_index();
    
+
    uif= myFwopen(udofile.full, TOASC);    /* create temporary index file */
-   
+
    if (!uif)                              /* no file pointer */
       return FALSE;
    
@@ -11285,6 +11290,62 @@ GLOBAL void set_html_vlinkcolor ( void )
 #endif
 
 
+/*******************************************************************************
+*
+*  set_html_bgsound():
+*     Set the sound for a node
+*
+*     Only HTML
+*
+******************************************|************************************/
+
+/* New in v6.5.20 [GS] */
+GLOBAL void set_html_bgsound ( void )
+{
+	char *ptr, *dest;
+	char	filename[512];
+	char loop [40], sTemp[1024];
+
+	if ( desttype!=TOHTM )
+		return;
+
+	if (p1_toc_counter<0)	return;
+	if (toc[p1_toc_counter]==NULL)	return;
+	if (token[1][0]==EOS)	return;
+
+	dest = toc[p1_toc_counter]->bgsound;
+
+	if (token[1][0]=='\"')
+	{
+		tokcpy2(sTemp, 1024);
+		ptr= strchr(sTemp+1, '\"');		/* zweites " suchen */
+
+		if (ptr)
+		{	ptr[0]= EOS;
+			strcpy(filename, sTemp+1);
+			um_strcpy(loop, ptr+1, 40, "set_html_bgsound[1]");
+			del_whitespaces(loop);
+		}
+		else
+		{	strcpy(filename, sTemp);
+			loop[0]= EOS;
+		}
+	}
+	else
+	{
+		um_strcpy(filename, token[1], 512, "set_html_bgsound[2]");
+		token[1][0]= EOS;
+		tokcpy2(loop, 40);
+		del_whitespaces(loop);
+	}
+
+	replace_char(filename, "\\", "/");
+
+	if ( loop[0] == EOS )
+		sprintf ( dest, "\"%s\" loop=\"infinitie\"", filename );
+	else
+		sprintf ( dest, "\"%s\" loop=\"%s\"", filename, loop );
+}	/* set_html_bgsound */
 
 GLOBAL void set_html_backimage ( void )
 {
@@ -12279,6 +12340,7 @@ LOCAL TOCITEM *init_new_toc_entry ( const int toctype, const BOOLEAN invisible )
 	tocptr->keywords=			NULL;
 	tocptr->description=		NULL;	/*r6pl5*/
 	tocptr->robots=				NULL;	/*V6.5.17*/
+   tocptr->bgsound[0]=			'\0';       /* V6.5.20 [GS] */
 	tocptr->helpid=				NULL;
 	tocptr->mapping=			-1;
 	tocptr->image=				NULL;

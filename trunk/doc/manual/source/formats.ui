@@ -601,6 +601,24 @@ all links will be wrong.
 !endif
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ToDo: Englisch
+!iflang [german]
+!index Hintergrundmusik
+!index HTML !! Hintergrundmusik
+!item [Wie kann ich Hintergrundmusik einbinden?]
+
+Hier für steht das Kommonado (!KW [html_bgsound]) zur Verfügung.
+!endif
+
+!iflang [english]
+!index Hintergrundmusik
+!index HTML !! Hintergrundmusik
+!item [Wie kann ich Hintergrundmusik einbinden?]
+
+Hier für steht das Kommonado (!KW [html_bgsound]) zur Verfügung.
+!endif
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 !end_description
 

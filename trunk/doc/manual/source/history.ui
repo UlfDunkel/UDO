@@ -55,6 +55,7 @@ developer versions.
 !item [(!NEWS)]
 !begin_itemize !short
 # ..............................................................................
+# ..............................................................................
 !iflang [german]
 !item Text hoch- und tiefgestellt ausgeben (!nl)
   Mit den neuen Kommandos (!kkkw [SUP] [sup]) bzw. (!kkkw [SUB] [sub]) kann man Text hoch- oder
@@ -362,6 +363,14 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 !item [(!NEWS)]
 !begin_itemize
 # ..............................................................................
+!iflang [german]
+!item Hintergrundmusik mit (!KW [html_bgsound]) (!nl)
+  Dies ist seit Version~6.5.20 verfügbar.
+!endif
+!iflang [english]
+!item Hintergrundmusik mit (!KW [html_bgsound]) (!nl)
+  Dies ist seit Version~6.5.20 verfügbar.
+!endif
 !iflang [german]
 !item Neue Formatierung der Navigationsleiste (!nl)
   In den unterstützten HTML-Ausgabeformaten kann jetzt optional die Navigationsleiste 

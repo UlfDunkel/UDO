@@ -46,11 +46,11 @@ otherwise the same output will be generated as for (!KKKW [T] [t]).
 
 !iflang [german]
 !item [(!SEEALSO)]
-(!link [Texthervorhebungen] [Texthervorhebungen]), (!KKKW [T] [t]), (!KW [tex_verb])
+Schriftarten, (!link [Texthervorhebungen] [Texthervorhebungen]), (!KKKW [T] [t]), (!KW [tex_verb])
 !endif
 !iflang [english]
 !item [(!SEEALSO)]
-(!link [Emphasizing text] [Emphasizing text]), (!KKKW [T] [t]), (!KW [tex_verb])
+Text styles, (!link [Emphasizing text] [Emphasizing text]), (!KKKW [T] [t]), (!KW [tex_verb])
 !endif
 
 !end_xlist

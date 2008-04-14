@@ -99,7 +99,7 @@ descriptions.
 	!item [<text>] steht für eine Zeichenfolge
 
 	!label <datei>
-	!item [<datei>] steht für einen Dateinamen
+	!item [<datei>] steht für einen Dateinamen. Besitzt der Name Leerzeichen dann muß er in "" gesetzt werden.
 
 	!label <wert>
 	!item [<wert>] steht für eine Ziffernfolge
