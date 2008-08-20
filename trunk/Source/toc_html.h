@@ -25,7 +25,7 @@
    # globale Funktionen
    ############################################################ */
 
-GLOBAL BOOLEAN set_html_navigation ( void );
+GLOBAL BOOLEAN set_html_navigation(void);
 
 /* ############################################################
    # toc_html.h
