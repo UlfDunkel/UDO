@@ -110,6 +110,8 @@ typedef struct _tocitem
 
    char   favicon_name[MAX_IMAGE_LEN+1];       /* HTML < FAVICON> r6pl15 [NHz] */
 
+   char   bgsound[MYFILE_FULL_LEN+1];       /* HTML < bgsound> V6.5.20 [GS] */
+
    char   *image;                     /* Grafik anstelle Kapitelnamen      */
    unsigned int uiImageWidth;            /* Breite und Hoehe des Bildes      */ 
    unsigned int uiImageHeight;
