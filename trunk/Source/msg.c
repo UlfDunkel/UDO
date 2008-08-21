@@ -795,6 +795,10 @@ GLOBAL void error_node4_not_allowed ( void )
 {	fatal_msg_solo("use !subsubnode first (structure gap)");
 }
 
+GLOBAL void error_node5_not_allowed ( void )
+{	fatal_msg_solo("use !subsubsubnode first (structure gap)");
+}
+
 /*	######################################################################
 	# Warnmeldungen (leichte Syntaxfehler)
 	######################################################################	*/
@@ -893,7 +897,7 @@ GLOBAL void warning_split_verb ( void )
 
 GLOBAL void warning_node_too_deep ( void )
 {
-	warning_msg_solo("structure depth exceeded, using subsubsubnode");
+	warning_msg_solo("structure depth exceeded, using subsubsubsubnode"); /* [GS] */
 }
 
 

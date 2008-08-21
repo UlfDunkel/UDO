@@ -138,6 +138,7 @@ GLOBAL void error_wrong_mapping ( void );
 GLOBAL void error_node2_not_allowed ( void );
 GLOBAL void error_node3_not_allowed ( void );
 GLOBAL void error_node4_not_allowed ( void );
+GLOBAL void error_node5_not_allowed ( void );
 
 /*	######################################################################
 	# Warnmeldungen (leichte Syntaxfehler)

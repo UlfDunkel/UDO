@@ -10,3 +10,4 @@
 *.O
 *.lst
 *.LST
+.DS_Store

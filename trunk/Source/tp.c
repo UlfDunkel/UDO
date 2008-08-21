@@ -253,6 +253,14 @@ GLOBAL BOOLEAN set_doclayout ( void )
                 return TRUE;
         }
 
+        if (strcmp(content, "node5size") == 0)
+        {       if ( str_for_desttype(format) )
+                {       /* Set size of subsubsubsubnode */
+                        laydat.node5size        = atoi(data);
+                }
+                return TRUE;
+        }
+
         /* Specialities for Postscript */
         if (strcmp(content, "openMode") == 0)
         {       if (strstr(data, "Outlines"))

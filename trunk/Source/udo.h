@@ -151,6 +151,7 @@ extern char compile_time[9];
 GLOBAL BOOLEAN 		use_auto_subtocs;			/* autom. Unter-Toc's anlegen? 			*/
 GLOBAL BOOLEAN 		use_auto_subsubtocs;
 GLOBAL BOOLEAN 		use_auto_subsubsubtocs;
+GLOBAL BOOLEAN 		use_auto_subsubsubsubtocs;
 GLOBAL BOOLEAN 		use_auto_toptocs;			/* autom. Ueber-Toc's anlegen? 			*/
 GLOBAL BOOLEAN 		no_auto_toptocs_icons;		/* ... aber ohne Icons 					*/	/*r6pl13*/
 GLOBAL BOOLEAN		use_short_envs;				/* Umgebungen immer komprimiert?		*/
@@ -200,6 +201,7 @@ GLOBAL BOOLEAN		html_merge_node1;			/* Nodes nicht splitten? */
 GLOBAL BOOLEAN		html_merge_node2;			/* Subnodes nicht splitten? */
 GLOBAL BOOLEAN		html_merge_node3;			/* Subsubnodes nicht splitten? */
 GLOBAL BOOLEAN		html_merge_node4;			/* Subsubsubnodes nicht splitten? */
+GLOBAL BOOLEAN		html_merge_node5;			/* Subsubsubsubnodes nicht splitten? */
 GLOBAL BOOLEAN		html_no_xlist;				/* xlist- durch description-Umgebung ersetzen? */
 GLOBAL BOOLEAN		html_ignore_p;				/* Internes Flag, ob <P> in token_output() ignoriert werden soll. */
 GLOBAL BOOLEAN		html_ignore_8bit;			/* ae nicht in &auml; wandeln? */

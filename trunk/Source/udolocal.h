@@ -104,11 +104,13 @@ LOCAL void c_heading ( void );
 LOCAL void c_subheading ( void );
 LOCAL void c_subsubheading ( void );
 LOCAL void c_subsubsubheading ( void );
+LOCAL void c_subsubsubsubheading ( void );
 
 LOCAL void c_listheading ( void );
 LOCAL void c_listsubheading ( void );
 LOCAL void c_listsubsubheading ( void );
 LOCAL void c_listsubsubsubheading ( void );
+LOCAL void c_listsubsubsubsubheading ( void );
 
 /*	############################################################
 	# Diverses

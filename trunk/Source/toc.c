@@ -69,7 +69,8 @@ const char *id_toc_c= "@(#) toc.c       $DATE$";
 #define	TOC_NODE2	2	/* !subnode				*/
 #define	TOC_NODE3	3	/* !subsubnode			*/
 #define	TOC_NODE4	4	/* !subsubsubnode		*/
-#define	TOC_NONE	5	/* weder noch			*/
+#define	TOC_NODE5	5	/* !subsubsubnode		*/
+#define	TOC_NONE	6	/* weder noch			*/
 
 LOCAL const char *FRAME_NAME_TOC="UDOtoc";
 LOCAL const char *FRAME_NAME_CON="UDOcon";
@@ -103,35 +104,39 @@ LOCAL int		p1_style_counter;				/* Zaehler							*/
 LOCAL REFERENCE	refs[MAXREFERENCES+1];		/* Referenzen	*/
 LOCAL int		refs_counter;				/* Zaehler		*/
 
-LOCAL int		p1_toc_n1, p1_toc_n2, p1_toc_n3, p1_toc_n4;	/* absolut */
-LOCAL int		p1_apx_n1, p1_apx_n2, p1_apx_n3, p1_apx_n4;
+LOCAL int		p1_toc_n1, p1_toc_n2, p1_toc_n3, p1_toc_n4, p1_toc_n5;	/* absolut */
+LOCAL int		p1_apx_n1, p1_apx_n2, p1_apx_n3, p1_apx_n4, p1_apx_n5;
 
-LOCAL int		p1_toc_nr1, p1_toc_nr2, p1_toc_nr3, p1_toc_nr4;	/* Anzeige */
-LOCAL int		p1_apx_nr1, p1_apx_nr2, p1_apx_nr3, p1_apx_nr4;
+LOCAL int		p1_toc_nr1, p1_toc_nr2, p1_toc_nr3, p1_toc_nr4, p1_toc_nr5;	/* Anzeige */
+LOCAL int		p1_apx_nr1, p1_apx_nr2, p1_apx_nr3, p1_apx_nr4, p1_apx_nr5;
 
-LOCAL int		p2_toc_n1, p2_toc_n2, p2_toc_n3, p2_toc_n4;
-LOCAL int		p2_apx_n1, p2_apx_n2, p2_apx_n3, p2_apx_n4;
+LOCAL int		p2_toc_n1, p2_toc_n2, p2_toc_n3, p2_toc_n4, p2_toc_n5;
+LOCAL int		p2_apx_n1, p2_apx_n2, p2_apx_n3, p2_apx_n4, p2_apx_n5;
 
 LOCAL int		curr_n1_index;
 LOCAL int		curr_n2_index;
 LOCAL int		curr_n3_index;
+LOCAL int		curr_n4_index; 	/* [GS] */
 
 LOCAL int		last_n1_index;		/* toc[]-Indizes fuer Titelzeilen	*/
 LOCAL int		last_n2_index;
 LOCAL int		last_n3_index;
 LOCAL int		last_n4_index;
+LOCAL int		last_n5_index;		/* [GS] */
 
 LOCAL int		active_nodetype;	/* Flag fuer check_endnode()		*/
 
-LOCAL char		form_t1_n1[80], form_t1_n2[80], form_t1_n3[80], form_t1_n4[80];
-LOCAL char		form_t2_n2[80], form_t2_n3[80], form_t2_n4[80];
-LOCAL char		form_t3_n3[80], form_t3_n4[80];
-LOCAL char		form_t4_n4[80];
+LOCAL char		form_t1_n1[80], form_t1_n2[80], form_t1_n3[80], form_t1_n4[80], form_t1_n5[80];
+LOCAL char		form_t2_n2[80], form_t2_n3[80], form_t2_n4[80], form_t2_n5[80];
+LOCAL char		form_t3_n3[80], form_t3_n4[80], form_t3_n5[80];
+LOCAL char		form_t4_n4[80], form_t4_n5[80];
+LOCAL char		form_t5_n5[80];
 
-LOCAL char		form_a1_n1[80], form_a1_n2[80], form_a1_n3[80], form_a1_n4[80];
-LOCAL char		form_a2_n2[80], form_a2_n3[80], form_a2_n4[80];
-LOCAL char		form_a3_n3[80], form_a3_n4[80];
-LOCAL char		form_a4_n4[80];
+LOCAL char		form_a1_n1[80], form_a1_n2[80], form_a1_n3[80], form_a1_n4[80], form_a1_n5[80];
+LOCAL char		form_a2_n2[80], form_a2_n3[80], form_a2_n4[80], form_a2_n5[80];
+LOCAL char		form_a3_n3[80], form_a3_n4[80], form_a3_n5[80];
+LOCAL char		form_a4_n4[80], form_a4_n5[80];
+LOCAL char		form_a5_n5[80];
 
 LOCAL char		toc_list_top[64], toc_list_end[64];	/*r6pl2*/
 LOCAL char		use_toc_list_commands;				/*r6pl2*/
@@ -205,13 +210,16 @@ LOCAL void subtoc_output ( const int depth );
 LOCAL void subapx_output ( const int depth );
 LOCAL void subsubtoc_output ( const int depth );
 LOCAL void subsubapx_output ( const int depth );
-LOCAL void subsubsubtoc_output ( void );
-LOCAL void subsubsubapx_output ( void );
+LOCAL void subsubsubtoc_output ( const int depth );
+LOCAL void subsubsubapx_output ( const int depth );
+LOCAL void subsubsubsubtoc_output ( void );
+LOCAL void subsubsubsubapx_output ( void );
 
 LOCAL void do_toc ( const int depth );
 LOCAL void do_subtoc ( const int depth );
 LOCAL void do_subsubtoc ( const int depth );
-LOCAL void do_subsubsubtoc ( void );
+LOCAL void do_subsubsubtoc ( const int depth );
+LOCAL void do_subsubsubsubtoc ( void );
 
 LOCAL void do_toptoc ( const int current_node );
 
@@ -676,6 +684,9 @@ const unsigned int   uiH)                        /* */
       /* Hier auch das Mergen beachten! */
       ui = ti;                            /* upper index = toc index */
       
+      if (html_merge_node5 && toc[ti]->toctype == TOC_NODE5)
+         ui = toc[ti]->up_n4_index;
+
       if (html_merge_node4 && toc[ti]->toctype == TOC_NODE4)
          ui = toc[ti]->up_n3_index;
       
@@ -770,6 +781,7 @@ const unsigned int   uiH)                        /* */
                if (   (html_merge_node2 && toc[ti]->n2 > 0)
                    || (html_merge_node3 && toc[ti]->n3 > 0)
                    || (html_merge_node4 && toc[ti]->n4 > 0)
+                   || (html_merge_node5 && toc[ti]->n5 > 0)
                   )
                {
                   sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",
@@ -1023,7 +1035,12 @@ GLOBAL void check_endnode ( void )
 				break;
 			case TOC_NODE3:
 				if (use_auto_subsubsubtocs)
-				{	do_subsubsubtoc();
+				{	do_subsubsubtoc(subtocs3_depth);
+				}
+				break;
+			case TOC_NODE4:
+				if (use_auto_subsubsubsubtocs)
+				{	do_subsubsubsubtoc();
 				}
 				break;
 		}
@@ -1217,6 +1234,7 @@ GLOBAL void man_bottomline ( void )
 }	/* man_bottomline */
 
 
+
 /*	############################################################
 	#
 	# Topline fuer den ST-Guide
@@ -1390,7 +1408,6 @@ LOCAL void pch_headline ( char *s )
 }	/*pch_headline*/
 
 
-
 LOCAL void pch_bottomline ( void )
 {
 	int		ci, pi, ni, ui;
@@ -1417,6 +1434,7 @@ LOCAL void pch_bottomline ( void )
 	{	case TOC_NODE2:	ui= toc[ci]->up_n1_index;	break;
 		case TOC_NODE3:	ui= toc[ci]->up_n2_index;	break;
 		case TOC_NODE4:	ui= toc[ci]->up_n3_index;	break;
+		case TOC_NODE5:	ui= toc[ci]->up_n4_index;	break;
 	}
 
 	if (ui>0)	up= toc[ui]->name;
@@ -1569,6 +1587,7 @@ LOCAL void tvh_bottomline ( void )
 	{	case TOC_NODE2:	ui= toc[ci]->up_n1_index;	break;
 		case TOC_NODE3:	ui= toc[ci]->up_n2_index;	break;
 		case TOC_NODE4:	ui= toc[ci]->up_n3_index;	break;
+		case TOC_NODE5:	ui= toc[ci]->up_n4_index;	break;
 	}
 
 	if (ui>0)	strcpy(up, toc[ui]->name);
@@ -1663,6 +1682,7 @@ LOCAL void output_texinfo_node ( const char *name )
 	{	case TOC_NODE2:	ui= toc[ci]->up_n1_index;	break;
 		case TOC_NODE3:	ui= toc[ci]->up_n2_index;	break;
 		case TOC_NODE4:	ui= toc[ci]->up_n3_index;	break;
+		case TOC_NODE5:	ui= toc[ci]->up_n4_index;	break;
 	}
 
 	if (ui>0)	strcpy(up, toc[ui]->name);
@@ -1786,6 +1806,7 @@ LOCAL void output_win_header ( const char *name, const BOOLEAN invisible )
 		{	case TOC_NODE2:	ui= toc[ci]->up_n1_index;	break;
 			case TOC_NODE3:	ui= toc[ci]->up_n2_index;	break;
 			case TOC_NODE4:	ui= toc[ci]->up_n3_index;	break;
+			case TOC_NODE5:	ui= toc[ci]->up_n4_index;	break;
 		}
 
 		if (ui==0)
@@ -1833,7 +1854,8 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 		enough! Will try this later [vj]
 	*/
 	#define	MAX_TMP_NX	100
-	char tmp_n1[MAX_TMP_NX], tmp_n2[MAX_TMP_NX], tmp_n3[MAX_TMP_NX], tmp_n4[MAX_TMP_NX];
+	char tmp_n1[MAX_TMP_NX], tmp_n2[MAX_TMP_NX], tmp_n3[MAX_TMP_NX], tmp_n4[MAX_TMP_NX],
+	     tmp_n5[MAX_TMP_NX];
 	int ti;
 	int hexwidth;	/* r6pl2 */
 
@@ -1865,6 +1887,7 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 		tmp_n2[0]= EOS;
 		tmp_n3[0]= EOS;
 		tmp_n4[0]= EOS;
+		tmp_n5[0]= EOS;
 
 		if (html_merge_node1)				/* Nodes nicht splitten */
 		{	um_strcpy(tmp_n1, outfile.name, MAX_TMP_NX, "get_html_filename[1]");	/* Verweis auf Hauptfile */
@@ -1886,6 +1909,12 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 #endif*/
 			switch (toc[tocindex]->toctype)
 			{
+				case TOC_NODE5:
+					if (html_merge_node5)	ti= toc[tocindex]->up_n4_index;
+					if (html_merge_node4)	ti= toc[tocindex]->up_n3_index;
+					if (html_merge_node3)	ti= toc[tocindex]->up_n2_index;
+					if (html_merge_node2)	ti= toc[tocindex]->up_n1_index;
+					break;
 				case TOC_NODE4:
 					if (html_merge_node4)	ti= toc[tocindex]->up_n3_index;
 					if (html_merge_node3)	ti= toc[tocindex]->up_n2_index;
@@ -1939,13 +1968,19 @@ LOCAL char *get_html_filename ( const int tocindex, char *s )
 				if (toc[ti]->n4>0 && !html_merge_node4)
 				{	sprintf(tmp_n4, "%0*x", hexwidth, toc[ti]->n4);
 				}
+/* ToDo: [GS] Problem, wie man bei einen Dateinamen mit 8 Zeichen den Node 5 darstellt */
+				if (toc[ti]->n5>0 && !html_merge_node5)
+				{	if ( hexwidth == 3 )			/* Long filename */
+						sprintf(tmp_n5, "%0*x", hexwidth, toc[ti]->n5);
+					else
+						sprintf(tmp_n4, "%0*x", hexwidth, toc[ti]->n5+100);
+				}
 			}
 		}
-/*#if 0
-		sprintf(s, "%s%s%s%s%s", html_name_prefix, tmp_n1, tmp_n2, tmp_n3, tmp_n4);
-#else*/
-		sprintf(s, "%s%s%s%s", tmp_n1, tmp_n2, tmp_n3, tmp_n4);
-/*#endif*/
+		if ( hexwidth == 3 )			/* Long filename */
+			sprintf(s, "%s%s%s%s%s", tmp_n1, tmp_n2, tmp_n3, tmp_n4, tmp_n5);
+		else
+			sprintf(s, "%s%s%s%s", tmp_n1, tmp_n2, tmp_n3, tmp_n4);
 	}
 	else
 	{
@@ -3171,6 +3206,20 @@ BOOLEAN           head)              /* */
    
    if (ti > 0)
    {
+      if (html_merge_node5)
+      {
+         ti = last_n4_index;
+         
+         if (ti <= 0)
+            ti = last_n3_index;	
+
+         if (ti <= 0)
+            ti = last_n2_index;	
+         
+         if (ti <= 0)
+            ti = last_n1_index;	
+      }
+
       if (html_merge_node4)
       {
          ti = last_n3_index;
@@ -3357,6 +3406,30 @@ BOOLEAN           head)              /* */
       }
       
       outln(s);
+      break;
+
+   case TOC_NODE5:                        /* Verweis auf aktuellen !subsubsubnode */
+      li = toc[last_n4_index]->labindex;
+      um_strcpy(s, lab[li]->name, 512, "html_hb_line[4]");
+
+#if 1
+      string2reference(anchor, lab[li], TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
+      replace_once(s, lab[li]->name, anchor);
+#else
+      replace_udo_quotes(s);
+      auto_references(s, TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
+#endif
+
+      if (no_images)
+      {
+/*       replace_once(s, ">", ">^^^ ");
+*/
+         replace_once(s, lab[li]->name, " ^^^");
+         strinsert(s, "| ");
+      }
+      
+      outln(s);
+
    }
    
    
@@ -3364,8 +3437,9 @@ BOOLEAN           head)              /* */
    /* Verweis auf die vorherige Seite erzeugen            */
    /* default:                 das letzte Kapitel         */
    /* !html_merge_node1:       kein Aufruf dieser Routine */
-   /* !html_merge_node2:		der letzte !node           */
-   /* !html_merge_node3:		der letzte !subnode        */
+   /* !html_merge_node2:		der letzte !node            */
+   /* !html_merge_node3:		der letzte !subnode         */
+   /* !html_merge_node4:		der letzte !subsubnode      */
    /* --------------------------------------------------- */
    if (for_main_file)
    {
@@ -3404,7 +3478,7 @@ BOOLEAN           head)              /* */
          if (i > 0)
          {
             li = toc[i]->labindex;
-            um_strcpy(s, lab[li]->name, 512, "html_hb_line[4]");
+            um_strcpy(s, lab[li]->name, 512, "html_hb_line[5]");
 #if 1
             string2reference(anchor, lab[li], TRUE, GIF_LF_NAME, uiGifLfWidth, uiGifLfHeight);
             replace_once(s, lab[li]->name, anchor);
@@ -3495,6 +3569,16 @@ BOOLEAN           head)              /* */
                      i = 0;
                   }
                }
+               else
+               {
+	               if (html_merge_node5)
+	               {
+	                  if (toc[i]->toctype != TOC_NODE1 && toc[i]->toctype != TOC_NODE2 && toc[i]->toctype != TOC_NODE3 && toc[i]->toctype != TOC_NODE4)
+	                  {
+	                     i = 0;
+	                  }
+	               }
+	            }
             }
          }
       }
@@ -4836,6 +4920,7 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 	BOOLEAN last_sn= FALSE;
 	BOOLEAN last_ssn= FALSE;
 	BOOLEAN last_sssn= FALSE;
+	BOOLEAN last_ssssn= FALSE;
 	BOOLEAN inApx= FALSE;
 
 	file= myFwopen(filename, FTHHC);
@@ -4873,7 +4958,8 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
                                 if (last_sn)    fprintf(file, "\t</ul>\n</ul>\n");
                                 if (last_ssn)   fprintf(file, "\t\t</ul>\n\t</ul>\n</ul>\n");
                                 if (last_sssn)  fprintf(file, "\t\t\t</ul>\n\t\t</ul>\n\t</ul>\n</ul>\n");
-                                last_n= last_sn= last_ssn= last_sssn= FALSE;
+                                if (last_ssssn)  fprintf(file, "\t\t\t\t</ul>\n\t\t\t</ul>\n\t\t</ul>\n</ul>\n</ul>\n");
+                                last_n= last_sn= last_ssn= last_sssn= last_ssssn= FALSE;
 #if 0
                                 fprintf(file, "<ul>\t<li><object type=\"text/sitemap\">\n");
                                 fprintf(file, "\t\t<param name=\"Name\" value=\"%s\">\n", lang.appendix);
@@ -4881,7 +4967,7 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 #endif
                                 fprintf(file, "<ul>\n");
                         }
-
+/* ToDo: last_ssssn */
 
                         if ( toc[i]->n1 != 0 )
                         {
@@ -5189,6 +5275,7 @@ const BOOLEAN   invisible)         /* */
       p2_apx_n2 = 0;
       p2_apx_n3 = 0;
       p2_apx_n4 = 0;
+      p2_apx_n5 = 0;
    }
    else
    {
@@ -5196,17 +5283,20 @@ const BOOLEAN   invisible)         /* */
       p2_toc_n2 = 0;
       p2_toc_n3 = 0;
       p2_toc_n4 = 0;
+      p2_toc_n5 = 0;
    }
    
    p2_toc_counter++;
    curr_n1_index = p2_toc_counter;
    curr_n2_index = 0;
    curr_n3_index = 0;
+   curr_n4_index = 0;
    
    last_n1_index = p2_toc_counter;
    last_n2_index = 0;
    last_n3_index = 0;
    last_n4_index = 0;
+   last_n5_index = 0;
    
    nr1 = toc[p2_toc_counter]->nr1;
    
@@ -5830,20 +5920,24 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 	{	p2_apx_n2++;
 		p2_apx_n3= 0;
 		p2_apx_n4= 0;
+		p2_apx_n5= 0;
 	}
 	else
 	{	p2_toc_n2++;
 		p2_toc_n3= 0;
 		p2_toc_n4= 0;
+		p2_toc_n5= 0;
 	}
 
 	p2_toc_counter++;
 	curr_n2_index= p2_toc_counter;
 	curr_n3_index= 0;
+	curr_n4_index= 0;
 
 	last_n2_index= p2_toc_counter;
 	last_n3_index= 0;
 	last_n4_index= 0;
+	last_n5_index= 0;
 
 	nr1= toc[p2_toc_counter]->nr1;
 	nr2= toc[p2_toc_counter]->nr2;
@@ -6308,17 +6402,21 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 	if (bInsideAppendix)
 	{	p2_apx_n3++;
 		p2_apx_n4= 0;
+		p2_apx_n5= 0;
 	}
 	else
 	{	p2_toc_n3++;
 		p2_toc_n4= 0;
+		p2_toc_n5= 0;
 	}
 
 	p2_toc_counter++;
 	curr_n3_index= p2_toc_counter;
+	curr_n4_index= 0;
 
 	last_n3_index= p2_toc_counter;
 	last_n4_index= 0;
+	last_n5_index= 0;
 
 	nr1= toc[p2_toc_counter]->nr1;
 	nr2= toc[p2_toc_counter]->nr2;
@@ -6787,14 +6885,18 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 
 	if (bInsideAppendix)
 	{	p2_apx_n4++;
+		p2_apx_n5= 0;
 	}
 	else
 	{	p2_toc_n4++;
+		p2_toc_n5= 0;
 	}
 
 	p2_toc_counter++;
+	curr_n4_index= p2_toc_counter;
 
 	last_n4_index= p2_toc_counter;
+	last_n5_index= 0;
 
 	nr1= toc[p2_toc_counter]->nr1;
 	nr2= toc[p2_toc_counter]->nr2;
@@ -7017,7 +7119,12 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 		case TODRC:
 			set_inside_node4();
 			outln("%%*");
-			voutlnf("%%%% %d, 0, 0, 0, %d, %s", last_n3_index+1000, iDrcFlags, name);
+			if (p2_toc_counter+1<=p1_toc_counter && toc[p2_toc_counter+1]->toctype==TOC_NODE4)
+			{	voutlnf("%%%% %d, %d, 0, 0, %d, %s", last_n3_index+1000, p2_toc_counter+100, iDrcFlags, name);
+			}
+			else
+			{	voutlnf("%%%% %d, 0, 0, 0, %d, %s", last_n3_index+1000, iDrcFlags, name);
+			}
 			outln("%%*");
 			outln("");
 			break;
@@ -7202,6 +7309,483 @@ GLOBAL void c_psubsubsubnode_iv ( void )
 }	/* c_psubsubsubnode */
 
 
+LOCAL void set_inside_node5 ( void )
+{
+	active_nodetype= TOC_NODE5;
+}
+
+LOCAL void make_subsubsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
+{
+	char 	n[512], name[512], stgname[512], hx_start[16], hx_end[16], sTemp[512];
+	char	numbers[512], nameNoSty[512], k[512];
+	char	map[64], sGifSize[80];
+	int		ti, ui, chapter, nr1, nr2, nr3, nr4, nr5;
+	BOOLEAN	flag;
+	BOOLEAN	do_index;
+
+	if (p2_toc_counter>=MAXTOCS)
+	{	bBreakInside= TRUE;
+		return;
+	}
+
+	tokcpy2(name, 512);
+	strcpy(stgname, name);
+
+	if (name[0]==EOS)
+	{	error_missing_parameter("!subsubsubsubnode");
+		return;
+	}
+
+	p2_lab_counter++;		/*r6pl2*/
+	p2_toctype= TOC_NODE5;	/*r6pl5*/
+
+	if ((desttype==TOHTM || desttype==TOHAH) && !html_merge_node5)
+	{	check_endnode();
+		html_bottomline();
+	}
+
+	if (desttype==TOMHH)
+	{	check_endnode();
+		hh_bottomline();
+	}
+
+	check_styles(name);			/*r6pl3*/
+	c_styles(name);
+	switch (desttype)			/* r5pl3 */
+	{	case TOWIN:
+		case TOWH4:
+		case TOAQV:	c_win_styles(name);	break;
+		case TORTF:	c_rtf_styles(name);	c_rtf_quotes(name);	break;
+		default:	c_internal_styles(name); break;
+	}
+	replace_udo_quotes(name);
+	delete_all_divis(name);
+	replace_udo_tilde(name);
+	replace_udo_nbsp(name);
+
+	check_endnode();
+	check_styleflags();
+	check_environments_node();
+
+	if (bInsideAppendix)
+	{	p2_apx_n5++;
+	}
+	else
+	{	p2_toc_n5++;
+	}
+
+	p2_toc_counter++;
+
+	last_n5_index= p2_toc_counter;
+
+	nr1= toc[p2_toc_counter]->nr1;
+	nr2= toc[p2_toc_counter]->nr2;
+	nr3= toc[p2_toc_counter]->nr3;
+	nr4= toc[p2_toc_counter]->nr4;
+	nr5= toc[p2_toc_counter]->nr5;
+	(bInsideAppendix) ? (chapter= nr1) : (chapter= nr1+toc_offset);
+
+	n[0]= EOS;
+	numbers[0]= EOS;
+
+	if (!invisible)
+	{	if (bInsideAppendix)
+		{	sprintf(numbers, "%c.%d.%d.%d.%d", 'A'+nr1-1, nr2+subtoc_offset, nr3+subsubtoc_offset, nr4+subsubsubtoc_offset, nr5+subsubsubsubtoc_offset);
+		}
+		else
+		{	sprintf(numbers, "%d.%d.%d.%d.%d", chapter, nr2+subtoc_offset, nr3+subsubtoc_offset, nr4+subsubsubtoc_offset, nr5+subsubsubtoc_offset);
+		}
+	}
+
+	if (bVerbose)
+	{	sprintf(sInfMsg, "[%s] ", numbers);
+		show_status_node(sInfMsg);
+	}
+
+	if (no_numbers || invisible)
+	{	numbers[0]= EOS;
+	}
+	else
+	{	strcat(numbers, " ");
+	}
+
+	strcpy(current_chapter_name, name);
+	strcpy(current_chapter_nr, numbers);
+
+	do_index= (use_nodes_inside_index && !no_index &&
+					!toc[p2_toc_counter]->ignore_index);	/* r5pl10 */
+
+	switch(desttype)
+	{
+		case TOTEX:
+		case TOPDL:
+			set_inside_node5();
+			if (invisible)
+			{	(use_style_book)	? voutlnf("\n\\paragraph*{%s}", name)  /* ToDo: Was muž hier hin? */
+									: voutlnf("\n\\subparagraph*{%s}", name);   /* ToDo: Was muž hier hin? */
+			}
+			else
+			{	(use_style_book)	? voutlnf("\n\\paragraph{%s}", name)  /* ToDo: Was muž hier hin? */
+									: voutlnf("\n\\subparagraph{%s}", name);   /* ToDo: Was muž hier hin? */
+			}
+			label2tex(name);				/*r6pl2*/
+			voutlnf("\\label{%s}", name);	/*r6pl2*/
+			output_aliasses();
+			if (desttype==TOPDL)	/*r6pl8*/
+			{
+				voutlnf("\\pdfdest num %d fitbh", p2_lab_counter);
+				voutlnf("\\pdfoutline goto num %d count 0 {%s}", p2_lab_counter, name);
+			}
+			break;
+
+		case TOLYX:
+			set_inside_node5();
+			out("\\layout ");
+			if (invisible)
+			{	(use_style_book)	? outln("Subsubsection*")	  /* ToDo: Was muž hier hin? */
+									: outln("Paragraph*");  /* ToDo: Was muž hier hin? */
+			}
+			else
+			{	(use_style_book)	? outln("Subsubsection")  /* ToDo: Was muž hier hin? */
+									: outln("Paragraph");  /* ToDo: Was muž hier hin? */
+			}
+			indent2space(name);
+			outln(name);
+			break;
+
+		case TOINF:
+			set_inside_node5();
+			output_texinfo_node(name);
+			if (bInsideAppendix)
+			{	voutlnf("@appendixsubsubsec %s", name);  /* ToDo: Was muž hier hin? */
+			}
+			else
+			{	(invisible) ? 	(voutlnf("@subsubheading %s", name))  /* ToDo: Was muž hier hin? */
+							:	(voutlnf("@subsubsection %s", name));  /* ToDo: Was muž hier hin? */
+			}
+			break;
+
+		case TOTVH:
+			set_inside_node5();
+			if (numbers[0]!=EOS) strcat(numbers, " ");
+			output_vision_header(numbers, name);
+			break;
+
+		case TOSTG:
+			set_inside_node5();
+			bInsidePopup= popup;
+			replace_2at_by_1at(name);
+			node2stg(name);
+
+			outln("");
+			if ( !do_index )
+			{	outln("@indexoff");
+			}
+			if (popup)
+			{	voutlnf("@pnode \"%s\"", name);
+			}
+			else
+			{	voutlnf("@node \"%s\"", name);
+			}
+			if ( !do_index )
+			{	outln("@indexon");
+			}
+
+			/* r5pl6: up_n2_index wird statt der alten Abfrage benutzt */
+			if (!popup)
+			{	ui= toc[p2_toc_counter]->up_n4_index;
+				if (ui>0)
+				{	strcpy(sTemp, toc[ui]->name);
+					node2stg(sTemp);
+					replace_2at_by_1at(sTemp);
+					voutlnf("@toc \"%s\"", sTemp);
+				}
+			}
+			stg_header(numbers, stgname, popup);	/* r5pl14: stgname statt "" */
+			break;
+
+		case TOAMG:
+			set_inside_node5();
+			replace_2at_by_1at(name);
+			node2stg(name);
+
+			outln("");
+			if (titleprogram[0]!=EOS)
+			{	voutlnf("@node \"%s\" \"%s - %s\"", name, titleprogram, name);
+			}
+			else
+			{	voutlnf("@node \"%s\" \"%s\"", name, name);
+			}
+
+			/* r5pl6: up_n2_index wird statt der alten Abfrage benutzt */
+			ui= toc[p2_toc_counter]->up_n4_index;
+			if (ui>0)
+			{	strcpy(sTemp, toc[ui]->name);
+				node2stg(sTemp);
+				replace_2at_by_1at(sTemp);
+				voutlnf("@toc \"%s\"", sTemp);
+			}
+			stg_header(numbers, stgname, FALSE);	/* r5pl14: stgname statt "" */
+			break;
+
+		case TOMAN:
+			set_inside_node5();
+			outln("");
+			sprintf(n, " %s", name);
+			c_internal_styles(n);
+			outln(n);
+			break;
+
+		case TONRO:
+			set_inside_node5();
+			sprintf(n, ".SH %s", name);
+			c_internal_styles(n);
+			outln(n);
+			break;
+
+		case TOASC:
+			set_inside_node5();
+			if (numbers[0]!=EOS) strcat(numbers, " ");
+			sprintf(n, "%s%s", numbers, name);
+			outln("");
+			outln(n);
+			outln("");
+			break;
+
+		case TOIPF:
+			set_inside_node5();
+			node2NrIPF(n, toc[p2_toc_counter]->labindex);	/* r6pl2 */
+			map[0]= EOS;
+			if (toc[p2_toc_counter]->mapping>=0)
+			{	sprintf(map, " res=%d", toc[p2_toc_counter]->mapping);
+			}
+			if (bInsideAppendix)
+			{	voutlnf(":h5 id=%s%s.%s %s%s", n, map, lang.appendix, numbers, name); /* ToDo: Ist h5 richtig? */
+			}
+			else
+			{	voutlnf(":h5 id=%s%s.%s%s", n, map, numbers, name);  /* ToDo: Ist h5 richtig? */
+			}
+			break;
+
+
+		case TOKPS:
+			set_inside_node5();
+
+			if (use_style_book)
+			{	(bInsideAppendix)	?	sprintf(n, "%s %s", lang.appendix, numbers)
+									:	sprintf(n, "%s %s", lang.chapter, numbers);
+				del_right_spaces(n);
+				if (n[0]!=EOS) strcat(n, " ");
+				strcat(n, name);
+				outln("11 changeFontSize");
+			}
+			else
+			{	if (numbers[0]!=EOS) strcat(numbers, " ");
+				sprintf(n, "%s%s", numbers, name);
+				/* Changed in r6pl16 [NHz] */
+				voutlnf("%d changeFontSize", laydat.node4size);
+			}
+			node2postscript(name, KPS_NAMEDEST); /* Changed in r6pl16 [NHz] */
+			voutlnf("/%s NameDest", name); /* New in r6pl15 [NHz] */
+			outln("newline");
+			outln("Bon");
+			/* New in V6.5.5 [NHz] */
+			node2postscript(n, KPS_CONTENT);
+			voutlnf("(%s) udoshow", n);
+			outln("Boff");
+			outln("newline");
+			voutlnf("%d changeFontSize", laydat.propfontsize); /* Changed in r6pl15 [NHz] */
+			break;
+
+		case TODRC:
+			set_inside_node5();
+			outln("%%*");
+			voutlnf("%%%% %d, 0, 0, 0, %d, %s", last_n4_index+10000, iDrcFlags, name);
+			outln("%%*");
+			outln("");
+			break;
+
+		case TOSRC:
+		case TOSRP:
+			set_inside_node1();
+			outln("");
+			memset(n, '-', 62); n[62]= EOS;
+			voutlnf("%s  %s", sSrcRemOn, n);
+			voutlnf("    - %s", name);
+			voutlnf("    %s  %s", n, sSrcRemOff);
+			outln("");
+			break;
+
+		case TORTF:
+			set_inside_node5();
+			outln(rtf_pardpar);
+
+			/* r6pl6: Indizes fr RTF */
+			if (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index)
+			{	strcpy(n, name);
+				winspecials2ascii(n);
+				voutf("{\\xe\\v %s}", n);
+			}
+
+			/* New in V6.5.9 [NHz] */
+			um_strcpy(k, name, 512, "make_subsubsubsubnode[RTF]");
+			winspecials2ascii(k);
+			node2winhelp(k);
+
+			if (use_style_book)
+			{
+				if (invisible)
+					sprintf(n, "%s\\fs%d", rtf_inv_node4, iDocPropfontSize);
+				else
+					sprintf(n, "%s\\fs%d", rtf_node4, iDocPropfontSize);
+			}
+			else
+			{
+				if (invisible)
+				{	/* Changed in r6pl16 [NHz] */
+					/* Nodesize ist set on discrete value */
+					sprintf(n, "%s\\fs%d", rtf_inv_node5, laydat.node5size);
+				}
+				else
+				{	/* Changed in r6pl16 [NHz] */
+					/* Nodesize ist set on discrete value */
+					sprintf(n, "%s\\fs%d", rtf_node5, laydat.node5size);
+				}
+			}
+
+			if (numbers[0]==EOS)	/* Changed in V6.5.9 [NHz] */
+			{	voutlnf("%s %s {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, n, k, name, k, rtf_parpard);
+			}
+			else
+			{	voutlnf("%s %s %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, n, numbers, k, name, k, rtf_parpard);
+			}
+			voutlnf("%s %s\\fs%d %s", rtf_plain, rtf_norm, iDocPropfontSize, rtf_par);	/* r5pl6 */
+			break;
+
+		case TOWIN:
+		case TOWH4:
+		case TOAQV:
+			set_inside_node5();
+
+			output_win_header(name, invisible);
+			output_aliasses();
+
+			if (numbers[0]!=EOS) strcat(numbers, "\\~\\~");
+			sprintf(n, "%s%s", numbers, name);
+			win_headline(n, popup);
+			break;
+
+		case TOPCH:
+			set_inside_node5();
+			if (numbers[0]!=EOS) strcat(numbers, " ");
+			output_pch_header(numbers, name);
+			break;
+
+		case TOHAH: /* V6.5.17 */
+		case TOHTM:
+		case TOMHH:
+			ti= p2_toc_counter;
+
+			if (!html_merge_node5)
+			{	if (!html_new_file()) return;
+				if (!toc[ti]->ignore_title)
+				{	sprintf(hx_start, "<h%d>", html_nodesize);
+					sprintf(hx_end, "</h%d>", html_nodesize);
+				}
+			}
+			else
+			{	if (!toc[ti]->ignore_title)
+				{	sprintf(hx_start, "<h%d>", html_nodesize+3);
+					sprintf(hx_end, "</h%d>", html_nodesize+3);
+				}
+				output_aliasses();
+			}
+
+			set_inside_node5();
+			flag= FALSE;
+
+			if (use_chapter_images)
+			{
+            char closer[8] = "\0";
+               
+                                          /* no single tag closer in HTML! */
+            if (html_doctype >= XHTML_STRICT)
+               strcpy(closer, " /");
+               
+				ti = p2_toc_counter;
+            
+				if (ti >= 0 && toc[ti]->image != NULL)
+				{
+            	sGifSize[0] = EOS;
+               
+					if (toc[ti]->uiImageWidth!=0 && toc[ti]->uiImageHeight!=0)
+					{
+               	sprintf(sGifSize, " width=\"%u\" height=\"%u\"",
+							toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
+					}
+               
+					voutlnf("%s<p align=\"center\">", hx_start);
+               
+					voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\" %s%s>",
+						toc[ti]->image, sDocImgSuffix, numbers, name, numbers, name, sGifSize, closer);
+               
+					voutlnf("</p>%s", hx_end);
+					flag = TRUE;
+				}
+			}
+
+			do_toptoc(TOC_NODE5);	/*r6pl5*/
+
+			if (!flag)
+			{
+				strcpy(nameNoSty, name);
+				del_html_styles(nameNoSty);
+            
+            label2html(nameNoSty);	/*r6pl2*/
+            voutlnf("%s<a name=\"%s\">%s%s</a>%s",	hx_start, nameNoSty, numbers, name, hx_end);
+			}
+			if (show_variable.source_filename) /* V6.5.19 */
+				voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line );
+
+			break;
+
+		case TOLDS:
+			set_inside_node5();
+			(use_style_book)	?	voutlnf("<sect2>%s<label id=\"%s\">", name, name)
+								:	voutlnf("<sect3>%s<label id=\"%s\">", name, name);
+			output_aliasses();	/* r5pl8 */
+			outln("<p>");
+			break;
+
+		case TOHPH:
+			set_inside_node5();
+			(use_style_book)	?	voutlnf("<s4>%s", name)
+								:	voutlnf("<s5>%s", name);
+			output_aliasses();
+			break;
+	}
+
+}	/*make_subsubsubsubnode*/
+
+
+GLOBAL void c_subsubsubsubnode ( void )
+{	make_subsubsubsubnode (FALSE, FALSE);
+}	/* c_subsubsubsubnode */
+
+GLOBAL void c_subsubsubsubnode_iv ( void )
+{	make_subsubsubsubnode (FALSE, (desttype!=TOINF));	/* r5pl15 */
+}	/* c_subsubsubsubnode */
+
+GLOBAL void c_psubsubsubsubnode ( void )
+{	make_subsubsubsubnode (TRUE, FALSE);
+}	/* c_psubsubsubnode */
+
+GLOBAL void c_psubsubsubsubnode_iv ( void )
+{	make_subsubsubsubnode (TRUE, (desttype!=TOINF));	/* r5pl15 */
+}	/* c_psubsubsubsubnode */
+
+
+
 GLOBAL void c_endnode ( void )
 {
 	check_endnode();
@@ -7230,9 +7814,12 @@ GLOBAL void c_begin_node ( void )
 		case TOC_NODE3:
 			c_subsubsubnode();
 			break;
+		case TOC_NODE4:
+			c_subsubsubsubnode();
+			break;
 		default:
 			warning_node_too_deep();
-			c_subsubsubnode();
+			c_subsubsubsubnode();
 			break;
 	}
 
@@ -7257,9 +7844,12 @@ GLOBAL void c_begin_node_iv ( void )
 		case TOC_NODE3:
 			c_subsubsubnode_iv();	
 			break;
+		case TOC_NODE4:
+			c_subsubsubsubnode_iv();	
+			break;
 		default:
 			warning_node_too_deep();
-			c_subsubsubnode_iv();	
+			c_subsubsubsubnode_iv();	
 			break;
 	}
 
@@ -7284,9 +7874,12 @@ GLOBAL void c_begin_pnode ( void )
 		case TOC_NODE3:
 			c_psubsubsubnode();	
 			break;
+		case TOC_NODE4:
+			c_psubsubsubsubnode();	
+			break;
 		default:
 			warning_node_too_deep();
-			c_psubsubsubnode();	
+			c_psubsubsubsubnode();	
 			break;
 	}
 
@@ -7311,9 +7904,12 @@ GLOBAL void c_begin_pnode_iv ( void )
 		case TOC_NODE3:
 			c_psubsubsubnode_iv();	
 			break;
+		case TOC_NODE4:
+			c_psubsubsubsubnode_iv();	
+			break;
 		default:
 			warning_node_too_deep();
-			c_psubsubsubnode_iv();	
+			c_psubsubsubsubnode_iv();	
 			break;
 	}
 
@@ -7329,6 +7925,7 @@ GLOBAL void c_end_node ( void )
 		case TOC_NODE2:	p2_toctype= TOC_NODE1;	break;
 		case TOC_NODE3:	p2_toctype= TOC_NODE2;	break;
 		case TOC_NODE4:	p2_toctype= TOC_NODE3;	break;
+		case TOC_NODE5:	p2_toctype= TOC_NODE4;	break;
 	}
 
 }	/* c_end_node */
@@ -7517,6 +8114,24 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 											n, s);
 					}/* TOC_NODE4 */
 
+					if ( toc[i]->toctype==TOC_NODE5 )
+					{	/* Ein Paragraph */ /* ToDo: ??? */
+
+						li= toc[i]->labindex;
+
+						um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[7.1]");
+						/* Changed in r6pl16 [NHz] */
+						um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[8.1]");
+						node2postscript(n, KPS_BOOKMARK);
+						node2postscript(s, KPS_NAMEDEST);
+						voutlnf("(%d.%d.%d.%d.d %s) /%s 0 Bookmarks",
+											toc[i]->nr1+toc_offset,
+											toc[i]->nr2+subtoc_offset,
+											toc[i]->nr3+subsubtoc_offset,
+											toc[i]->nr4+subsubsubtoc_offset,
+											toc[i]->nr5+subsubsubsubtoc_offset,
+											n, s);
+					}/* TOC_NODE5 */
 
 				}/* toc[i]->n1 > 0 */
 
@@ -7611,6 +8226,25 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
 											toc[i]->nr4+subsubsubtoc_offset,
 											n, s);
 					}/* TOC_NODE4 */
+
+					if ( toc[i]->toctype==TOC_NODE5 )
+					{	/* Ein Paragraph */	/* ToDo: ??? */
+
+						li= toc[i]->labindex;
+
+						um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[16]");
+						/* Changed in r6pl16 [NHz] */
+						um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[17]");
+						node2postscript(n, KPS_BOOKMARK);
+						node2postscript(s, KPS_NAMEDEST);
+						voutlnf("(%c.%2d.%2d.%2d.%2d %s) /%s 0 Bookmarks",
+											'A'-1+toc[i]->nr1+toc_offset,
+											toc[i]->nr2+subtoc_offset,
+											toc[i]->nr3+subsubtoc_offset,
+											toc[i]->nr4+subsubsubtoc_offset,
+											toc[i]->nr5+subsubsubsubtoc_offset,
+											n, s);
+					}/* TOC_NODE5 */
 
 				}/* toc[i]->n1 > 0 */
 
@@ -7775,6 +8409,43 @@ const int         depth)                /* */
                break;
                
             case 4:
+               if (toc[i]->toctype == TOC_NODE4)
+               {                          /* a subsubsubnode */	
+               
+                  if (   (toc[toc[i]->up_n3_index]->nr3 + subsubtoc_offset == toc[last_n3_index]->nr3 + subsubtoc_offset)
+                       &&    (toc[i]->up_n3_index == last_n3_index)
+                     )
+                  {
+                     sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
+                     htmlfilename = hfn;
+                     
+                     /* Feststellen, ob die Referenz im gleichen File liegt */
+                     if ( (html_merge_node4 == FALSE) && (strcmp(htmlfilename, outfile.name) != 0) )
+                     {
+                        if (strchr(htmlfilename, '.') != NULL)
+                           strcpy(suff, "");
+                        else
+                           strcpy(suff, outfile.suff);
+                     
+                        if (no_numbers)   /* Fixed bug #0000044 [NHz] */
+                        {
+                           voutlnf("<link rel=\"subsection\" href=\"%s%s\"%s title=\"%s\"%s>",  /* ToDo: subsection? */
+                              htmlfilename, suff, sTarget, toc[i]->name, closer);
+                        }
+                        else
+                        {
+                        voutlnf("<link rel=\"subsection\" href=\"%s%s\"%s title=\"%d.%d.%d.%d %s\"%s>", /* ToDo: subsection? */
+                           htmlfilename, suff, sTarget, toc[i]->nr1+toc_offset, toc[i]->nr2+subtoc_offset, 
+                           toc[i]->nr3+subsubtoc_offset, toc[i]->nr4+subsubsubtoc_offset, toc[i]->name, closer);
+                        }
+                     }
+                  }
+                  
+               }  /* TOC_NODE4 */
+               
+               break;
+
+            case 5:
                if ( (toc[i]->toctype == TOC_NODE1) && (toc[i]->appendix) )
                {                          /* a subsubsubnode */	
                
@@ -7840,6 +8511,7 @@ const int         depth)              /* */
    BOOLEAN        last_sn = FALSE;    /* */
    BOOLEAN        last_ssn = FALSE;   /* */
    BOOLEAN        last_sssn = FALSE;  /* */
+   BOOLEAN        last_ssssn = FALSE; /* */
    BOOLEAN        first = TRUE;       /* */
    BOOLEAN        old;                /* */
    char           closer[8] = "\0";   /* single tag closer mark in XHTML */
@@ -7922,6 +8594,12 @@ const int         depth)              /* */
                         last_sssn = FALSE;
                      }
                      
+                     if (last_ssssn)
+                     {
+                        voutlnf("%s%s%s%s", toc_list_end, toc_list_end, toc_list_end, toc_list_end);
+                        last_ssssn = FALSE;
+                     }
+
                      last_n = TRUE;
                   }
                   
@@ -7968,6 +8646,12 @@ const int         depth)              /* */
                         {
                            voutlnf("%s%s", toc_list_end, toc_list_end);
                            last_sssn = FALSE;
+                        }
+
+                        if (last_ssssn)
+                        {
+                           voutlnf("%s%s%s", toc_list_end, toc_list_end, toc_list_end);
+                           last_ssssn = FALSE;
                         }
                         
                         last_sn = TRUE;
@@ -8019,6 +8703,12 @@ const int         depth)              /* */
                            last_sssn = FALSE;
                         }
                         
+                        if (last_ssssn)
+                        {
+                           outln(toc_list_end);
+                           last_ssssn = FALSE;
+                        }
+
                         last_ssn = TRUE;
                      }
                         
@@ -8068,6 +8758,12 @@ const int         depth)              /* */
                            last_ssn = FALSE;
                         }
                         
+                        if (last_ssssn)
+                        {
+                           outln(toc_list_end);
+                           last_ssssn = FALSE;
+                        }
+
                         last_sssn= TRUE;
                      }
                   
@@ -8096,6 +8792,65 @@ const int         depth)              /* */
             
                }  /* if (depth > 3) */
          
+               if (depth>4)
+               {
+                  if (toc[i]->toctype == TOC_NODE5)
+                  {                          /* Ein Paragraph */
+                     if (use_toc_list_commands)	/* r6pl2: vorher: desttype==TOHTM */
+                     {
+                        if (last_n)
+                        {
+                           voutlnf("%s%s%s", toc_list_top, toc_list_top, toc_list_top);
+                           last_n = FALSE;
+                        }
+                        
+                        if (last_sn)
+                        {
+                           voutlnf("%s%s", toc_list_top, toc_list_top);
+                           last_sn = FALSE;
+                        }
+                        
+                        if (last_ssn)
+                        {
+                           outln(toc_list_top);
+                           last_ssn = FALSE;
+                        }
+                        
+                        if (last_sssn)
+                        {
+                           outln(toc_list_top);
+                           last_sssn = FALSE;
+                        }
+
+                        last_ssssn= TRUE;
+                     }
+                  
+                     li = toc[i]->labindex;
+                     string2reference(ref, lab[li], TRUE, "", 0, 0);
+                     
+                     if (no_numbers)
+                     {
+                        sprintf(n, form_t1_n5, ref);
+                     }
+                     else
+                     {
+                        sprintf(n, form_t1_n5,
+                           toc[i]->nr1 + toc_offset,
+                           toc[i]->nr2 + subtoc_offset,
+                           toc[i]->nr3 + subsubtoc_offset,
+                           toc[i]->nr4 + subsubsubtoc_offset,
+                           toc[i]->nr5 + subsubsubsubtoc_offset,
+                           ref);
+                     }
+               
+                     tocline_handle_1st(&first);
+                  
+                     outln(n);
+               
+                  }  /* TOC_NODE5 */
+            
+               }  /* if (depth > 4) */
+
             }  /* toc[i]->n1 > 0 */
    
          }  /* !toc[i]->appendix */
@@ -8120,6 +8875,9 @@ const int         depth)              /* */
       if (last_sssn)
          voutlnf("%s%s%s", toc_list_end, toc_list_end, toc_list_end);
       
+      if (last_ssssn)
+         voutlnf("%s%s%s%s", toc_list_end, toc_list_end, toc_list_end, toc_list_end);
+
       outln(toc_list_end);
       break;
       
@@ -8163,6 +8921,7 @@ LOCAL void apx_output ( const int depth )
 	BOOLEAN last_sn= FALSE;
 	BOOLEAN last_ssn= FALSE;
 	BOOLEAN last_sssn= FALSE;
+	BOOLEAN last_ssssn= FALSE;
 	BOOLEAN first= TRUE;
 
 	BOOLEAN old;
@@ -8239,6 +8998,10 @@ LOCAL void apx_output ( const int depth )
 							{	voutlnf("%s%s%s", toc_list_end, toc_list_end, toc_list_end);
 								last_sssn= FALSE;
 							}
+							if (last_ssssn)
+							{	voutlnf("%s%s%s%s", toc_list_end, toc_list_end, toc_list_end, toc_list_end);
+								last_ssssn= FALSE;
+							}
 							last_n= TRUE;
 						}
 
@@ -8276,6 +9039,10 @@ LOCAL void apx_output ( const int depth )
 								{	voutlnf("%s%s", toc_list_end, toc_list_end);
 									last_sssn= FALSE;
 								}
+								if (last_ssssn)
+								{	voutlnf("%s%s%s", toc_list_end, toc_list_end, toc_list_end);
+									last_ssssn= FALSE;
+								}
 								last_sn= TRUE;
 							}
 
@@ -8310,6 +9077,10 @@ LOCAL void apx_output ( const int depth )
 								if (last_sssn)
 								{	outln(toc_list_end);
 									last_sssn= FALSE;
+								}
+								if (last_ssssn)
+								{	voutlnf("%s%s", toc_list_top, toc_list_top);
+									last_ssssn= FALSE;
 								}
 								last_ssn= TRUE;
 							}
@@ -8346,6 +9117,10 @@ LOCAL void apx_output ( const int depth )
 								{	outln(toc_list_top);
 									last_ssn= FALSE;
 								}
+								if (last_ssssn)
+								{	outln(toc_list_end);
+									last_ssssn= FALSE;
+								}
 								last_sssn= TRUE;
 							}
 
@@ -8369,6 +9144,54 @@ LOCAL void apx_output ( const int depth )
 						}/* TOC_NODE4 */
 
 					}/* depth>3 */
+
+					if (depth>4)
+					{
+						if ( toc[i]->toctype==TOC_NODE5 )
+						{	/* Ein Paragraph */
+							if (use_toc_list_commands)	/* r6pl2: vorher: desttype==TOHTM */
+							{	if (last_n)
+								{	voutlnf("%s%s%s", toc_list_top, toc_list_top, toc_list_top); /* ToDo: noch ein %s? */
+									last_n= FALSE;
+								}
+								if (last_sn)
+								{	voutlnf("%s%s", toc_list_top, toc_list_top);
+									last_sn= FALSE;
+								}
+								if (last_ssn)
+								{	outln(toc_list_top);
+									last_ssn= FALSE;
+								}
+
+								if (last_sssn)
+								{	outln(toc_list_top);
+									last_sssn= FALSE;
+								}
+
+								last_ssssn= TRUE;
+							}
+
+							li= toc[i]->labindex;
+							string2reference(ref, lab[li], TRUE, "", 0, 0);
+
+							if (no_numbers)
+							{	sprintf(n, form_a1_n5, ref);
+							}
+							else
+							{	sprintf(n, form_a1_n5,
+									'A'-1+toc[i]->nr1,
+									toc[i]->nr2,
+									toc[i]->nr3,
+									toc[i]->nr4,
+									toc[i]->nr5,
+									ref);
+							}
+
+							tocline_handle_1st(&first);
+							outln(n);
+						}/* TOC_NODE5 */
+
+					}/* depth>4 */
 				}/* toc[i]->n1!=0 */
 			}/* toc[i]->appendix */
 		}
@@ -8381,9 +9204,10 @@ LOCAL void apx_output ( const int depth )
 		case TOMHH:
 		case TOTEX:
 		case TOPDL:
-			if (last_sn)	outln(toc_list_end);
-			if (last_ssn)	voutlnf("%s%s", toc_list_end, toc_list_end);
-			if (last_sssn)	voutlnf("%s%s%s", toc_list_end, toc_list_end, toc_list_end);
+			if (last_sn)		outln(toc_list_end);
+			if (last_ssn)		voutlnf("%s%s", toc_list_end, toc_list_end);
+			if (last_sssn)		voutlnf("%s%s%s", toc_list_end, toc_list_end, toc_list_end);
+			if (last_ssssn)	voutlnf("%s%s%s%s", toc_list_end, toc_list_end, toc_list_end, toc_list_end);
 			outln(toc_list_end);
 			break;
 		case TOINF:
@@ -8411,6 +9235,7 @@ LOCAL void subtoc_output ( const int depth )
 	BOOLEAN last_sn= FALSE;
 	BOOLEAN last_ssn= FALSE;
 	BOOLEAN last_sssn= FALSE;
+	BOOLEAN last_ssssn= FALSE;
 	BOOLEAN output_done= FALSE;
 	BOOLEAN first= TRUE;
 	BOOLEAN old;
@@ -8462,6 +9287,12 @@ LOCAL void subtoc_output ( const int depth )
 							{	voutlnf("%s%s", toc_list_end, toc_list_end);
 								last_sssn= FALSE;
 							}
+
+							if (last_ssssn)
+							{	voutlnf("%s%s%s", toc_list_end, toc_list_end, toc_list_end);
+								last_ssssn= FALSE;
+							}
+
 							last_sn= TRUE;
 						}
 
@@ -8494,6 +9325,12 @@ LOCAL void subtoc_output ( const int depth )
 								{	outln(toc_list_end);
 									last_sssn= FALSE;
 								}
+
+								if (last_ssssn)
+								{	voutlnf("%s%s", toc_list_end, toc_list_end);
+									last_ssssn= FALSE;
+								}
+
 								last_ssn= TRUE;
 							}
 
@@ -8529,6 +9366,11 @@ LOCAL void subtoc_output ( const int depth )
 								{	outln(toc_list_top);
 									last_ssn= FALSE;
 								}
+								if (last_ssssn)
+								{	outln(toc_list_end);
+									last_sssn= FALSE;
+								}
+
 								last_sssn= TRUE;
 							}
 
@@ -8552,6 +9394,50 @@ LOCAL void subtoc_output ( const int depth )
 							output_done=TRUE;
 						}/* TOC_NODE4 */
 					}	/* depth>2 */
+
+					if (depth>3)
+					{
+						if ( toc[i]->toctype==TOC_NODE5 )
+						{	/* Ein Paragraph */					/* ToDo: ?? */
+							if (use_toc_list_commands)	/* r6pl2: vorher: desttype==TOHTM */
+							{	if (last_sn)
+								{	outln(toc_list_top);
+									last_sn= FALSE;
+								}
+								if (last_ssn)
+								{	outln(toc_list_top);
+									last_ssn= FALSE;
+								}
+								if (last_sssn)
+								{	outln(toc_list_top);
+									last_ssn= FALSE;
+								}
+
+								last_ssssn= TRUE;
+							}
+
+							li= toc[i]->labindex;
+							string2reference(ref, lab[li], TRUE, "", 0, 0);
+
+							if (no_numbers)
+							{	sprintf(n, form_t2_n5, ref);
+							}
+							else
+							{	sprintf(n, form_t2_n5,
+									toc[i]->nr1+toc_offset,
+									toc[i]->nr2+subtoc_offset,
+									toc[i]->nr3+subsubtoc_offset,
+									toc[i]->nr4+subsubsubtoc_offset,
+									toc[i]->nr5+subsubsubsubtoc_offset,
+									ref);
+							}
+
+							tocline_handle_1st(&first);
+							outln(n);
+							output_done=TRUE;
+						}/* TOC_NODE5 */
+					}	/* depth>3 */
+
 				}
 			}
 		}
@@ -8562,6 +9448,9 @@ LOCAL void subtoc_output ( const int depth )
 		{	case TOHAH: /* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
+				if (last_ssssn)
+				{	voutlnf("%s%s%s", toc_list_end, toc_list_end, toc_list_end);
+				}
 				if (last_sssn)
 				{	voutlnf("%s%s", toc_list_end, toc_list_end);
 				}
@@ -8579,6 +9468,9 @@ LOCAL void subtoc_output ( const int depth )
             
 			case TOTEX:
 			case TOPDL:
+				if (last_ssssn)
+				{	voutlnf("%s%s%s", toc_list_end, toc_list_end, toc_list_end);
+				}
 				if (last_sssn)
 				{	voutlnf("%s%s", toc_list_end, toc_list_end);
 				}
@@ -8615,6 +9507,7 @@ LOCAL void subapx_output ( const int depth )
 	BOOLEAN last_sn= FALSE;
 	BOOLEAN last_ssn= FALSE;
 	BOOLEAN last_sssn= FALSE;
+	BOOLEAN last_ssssn= FALSE;
 	BOOLEAN output_done= FALSE;
 	BOOLEAN first= TRUE;
 
@@ -8637,9 +9530,6 @@ LOCAL void subapx_output ( const int depth )
 
 	for (i=last_n1_index; i<=p1_toc_counter; i++)
 	{
-		/* r5pl10: langwierige Indizierung vermeiden */
-		toc[i]= toc[i];
-
 		if (toc[i]!=NULL && !toc[i]->invisible)
 		{
 			convert_toc_item(toc[i]);
@@ -8662,6 +9552,10 @@ LOCAL void subapx_output ( const int depth )
 							if (last_sssn)
 							{	voutlnf("%s%s", toc_list_end, toc_list_end);
 								last_sssn= FALSE;
+							}
+							if (last_ssssn)
+							{	voutlnf("%s%s%s", toc_list_end, toc_list_end, toc_list_end);
+								last_ssssn= FALSE;
 							}
 							last_sn= TRUE;
 						}
@@ -8693,6 +9587,10 @@ LOCAL void subapx_output ( const int depth )
 								if (last_sssn)
 								{	outln(toc_list_end);
 									last_sssn= FALSE;
+								}
+								if (last_ssssn)
+								{	voutlnf("%s%s", toc_list_end, toc_list_end);
+									last_ssssn= FALSE;
 								}
 								last_ssn= TRUE;
 							}
@@ -8726,6 +9624,10 @@ LOCAL void subapx_output ( const int depth )
 								{	outln(toc_list_top);
 									last_ssn= FALSE;
 								}
+								if (last_ssssn)
+								{	outln(toc_list_end);
+									last_ssssn= FALSE;
+								}
 								last_sssn= TRUE;
 							}
 
@@ -8749,6 +9651,49 @@ LOCAL void subapx_output ( const int depth )
 							output_done= TRUE;
 						}/* TOC_NODE4 */
 					}	/* depth>2 */
+
+					if (depth>3)
+					{
+						if ( toc[i]->toctype==TOC_NODE5 )
+						{	/* Ein Paragraph */					/* ToDo: ??? */
+							if (use_toc_list_commands)	/* r6pl2: vorher: desttype==TOHTM */
+							{	if (last_sn)
+								{	outln(toc_list_top);
+									last_sn= FALSE;
+								}
+								if (last_ssn)
+								{	outln(toc_list_top);
+									last_ssn= FALSE;
+								}
+								if (last_sssn)
+								{	outln(toc_list_top);
+									last_sssn= FALSE;
+								}
+								last_ssssn= TRUE;
+							}
+
+							li= toc[i]->labindex;
+							string2reference(ref, lab[li], TRUE, "", 0, 0);
+
+							if (no_numbers)
+							{	sprintf(n, form_a2_n5, ref);
+							}
+							else
+							{	sprintf(n, form_a2_n5,
+									'A'-1+toc[i]->nr1,
+									toc[i]->nr2,
+									toc[i]->nr3,
+									toc[i]->nr4,
+									toc[i]->nr5,
+									ref);
+							}
+
+							tocline_handle_1st(&first);
+							outln(n);
+							output_done= TRUE;
+						}/* TOC_NODE4 */
+					}	/* depth>2 */
+
 				}
 			}
 		}
@@ -8766,6 +9711,9 @@ LOCAL void subapx_output ( const int depth )
 				if (last_sssn)
 				{	voutlnf("%s%s", toc_list_end, toc_list_end);
 				}
+				if (last_ssssn)
+				{	voutlnf("%s%s%s", toc_list_end, toc_list_end, toc_list_end);
+				}
 				outln(toc_list_end);
             
             if (html_doctype < XHTML_STRICT)
@@ -8782,6 +9730,9 @@ LOCAL void subapx_output ( const int depth )
 				}
 				if (last_sssn)
 				{	voutlnf("%s%s", toc_list_end, toc_list_end);
+				}
+				if (last_ssssn)
+				{	voutlnf("%s%s%s", toc_list_end, toc_list_end, toc_list_end);
 				}
 				outln(toc_list_end);
 				break;
@@ -8811,6 +9762,7 @@ LOCAL void subsubtoc_output ( const int depth )
 	char	n[512], ref[512];
 	BOOLEAN last_ssn= FALSE;
 	BOOLEAN last_sssn= FALSE;
+	BOOLEAN last_ssssn= FALSE;
 	BOOLEAN output_done= FALSE;
 	BOOLEAN first= TRUE;
 	BOOLEAN old;
@@ -8869,6 +9821,10 @@ LOCAL void subsubtoc_output ( const int depth )
 								{	outln(toc_list_end);
 									last_sssn= FALSE;
 								}
+								if (last_ssssn)
+								{	outln(toc_list_end);
+									last_ssssn= FALSE;
+								}
 								last_ssn= TRUE;
 							}
 
@@ -8899,6 +9855,10 @@ LOCAL void subsubtoc_output ( const int depth )
 									{	outln(toc_list_top);
 										last_ssn= FALSE;
 									}
+									if (last_ssssn)
+									{	outln(toc_list_end);
+										last_ssssn= FALSE;
+									}
 									last_sssn= TRUE;
 								}
 
@@ -8922,6 +9882,45 @@ LOCAL void subsubtoc_output ( const int depth )
 								output_done= TRUE;
 							}/* TOC_NODE4 */
 						}
+
+						if (depth>2)
+						{	if ( toc[i]->toctype==TOC_NODE5 )
+							{	/* Ein Paragraph */
+
+								if (use_toc_list_commands)	/* r6pl2: vorher: desttype==TOHTM */
+								{	if (last_ssn)
+									{	outln(toc_list_top);
+										last_ssn= FALSE;
+									}
+									if (last_sssn)
+									{	outln(toc_list_top);
+										last_sssn= FALSE;
+									}
+									last_ssssn= TRUE;
+								}
+
+								li= toc[i]->labindex;
+								string2reference(ref, lab[li], TRUE, "", 0, 0);
+
+								if (no_numbers)
+								{	sprintf(n, form_t3_n5, ref);
+								}
+								else
+								{	sprintf(n, form_t3_n5,
+										toc[i]->nr1+toc_offset,
+										toc[i]->nr2+subtoc_offset,
+										toc[i]->nr3+subsubtoc_offset,
+										toc[i]->nr4+subsubsubtoc_offset,
+										toc[i]->nr5+subsubsubsubtoc_offset,
+										ref);
+								}
+
+								tocline_handle_1st(&first);
+								outln(n);
+								output_done= TRUE;
+							}/* TOC_NODE5 */
+						}
+
 					}
 				}
 			}
@@ -8935,6 +9934,8 @@ LOCAL void subsubtoc_output ( const int depth )
 			case TOHTM:
 			case TOMHH:
 				if (last_sssn)	outln(toc_list_end);
+				if (last_ssssn) voutlnf("%s%s", toc_list_end, toc_list_end);
+
 				outln(toc_list_end);
             
             if (html_doctype < XHTML_STRICT)
@@ -8947,6 +9948,8 @@ LOCAL void subsubtoc_output ( const int depth )
 			case TOTEX:
 			case TOPDL:
 				if (last_sssn)	outln(toc_list_end);
+				if (last_ssssn) voutlnf("%s%s", toc_list_end, toc_list_end);
+
 				outln(toc_list_end);
 				break;
 			case TOAQV:
@@ -8976,6 +9979,7 @@ LOCAL void subsubapx_output ( const int depth )
 	char	n[512], ref[512];
 	BOOLEAN last_ssn= FALSE;
 	BOOLEAN last_sssn= FALSE;
+	BOOLEAN last_ssssn= FALSE;
 	BOOLEAN output_done= FALSE;
 	BOOLEAN first= TRUE;
 	BOOLEAN old;
@@ -9030,6 +10034,10 @@ LOCAL void subsubapx_output ( const int depth )
 								{	outln(toc_list_end);
 									last_sssn= FALSE;
 								}
+								if (last_ssssn)
+								{	voutlnf("%s%s", toc_list_end, toc_list_end);
+									last_ssssn= FALSE;
+								}
 								last_ssn= TRUE;
 							}
 
@@ -9057,6 +10065,10 @@ LOCAL void subsubapx_output ( const int depth )
 									{	outln(toc_list_top);
 										last_ssn= FALSE;
 									}
+									if (last_ssssn)
+									{	outln(toc_list_end);
+										last_ssssn= FALSE;
+									}
 									last_sssn= TRUE;
 								}
 
@@ -9080,6 +10092,45 @@ LOCAL void subsubapx_output ( const int depth )
 								output_done= TRUE;
 							}/* TOC_NODE3 */
 						}
+
+						if (depth>2)
+						{	if ( toc[i]->toctype==TOC_NODE5 )
+							{	/* Ein Paragraph */
+
+								if (use_toc_list_commands)	/* r6pl2: vorher: desttype==TOHTM */
+								{	if (last_ssn)
+									{	outln(toc_list_top);
+										last_ssn= FALSE;
+									}
+									if (last_sssn)
+									{	outln(toc_list_top);
+										last_sssn= FALSE;
+									}
+									last_ssssn= TRUE;
+								}
+
+								li= toc[i]->labindex;
+								string2reference(ref, lab[li], TRUE, "", 0, 0);
+
+								if (no_numbers)
+								{	sprintf(n, form_a3_n5, ref);
+								}
+								else
+								{	sprintf(n, form_a3_n5,
+										'A'-1+toc[i]->nr1,
+										toc[i]->nr2,
+										toc[i]->nr3,
+										toc[i]->nr4,
+										toc[i]->nr5,
+										ref);
+								}
+
+								tocline_handle_1st(&first);
+								outln(n);
+								output_done= TRUE;
+							}/* TOC_NODE5 */
+						}
+
 					}
 				}
 			}
@@ -9093,6 +10144,7 @@ LOCAL void subsubapx_output ( const int depth )
 			case TOHTM:
 			case TOMHH:
 				if (last_sssn)	outln(toc_list_end);
+				if (last_ssssn)	voutlnf("%s%s", toc_list_end, toc_list_end);
 				outln(toc_list_end);
             
             if (html_doctype < XHTML_STRICT)
@@ -9104,6 +10156,7 @@ LOCAL void subsubapx_output ( const int depth )
 			case TOTEX:
 			case TOPDL:
 				if (last_sssn)	outln(toc_list_end);
+				if (last_ssssn)	voutlnf("%s%s", toc_list_end, toc_list_end);
 				outln(toc_list_end);
 				break;
 			case TOAQV:
@@ -9124,12 +10177,13 @@ LOCAL void subsubapx_output ( const int depth )
 	bDocAutorefOff= old;
 }	/*subsubapx_output*/
 
-
-LOCAL void subsubsubtoc_output ( void )
+LOCAL void subsubsubtoc_output ( const int depth )
 {
 	register int i;
 	int li;
 	char	n[512], ref[512];
+	BOOLEAN last_sssn= FALSE;
+	BOOLEAN last_ssssn= FALSE;
 	BOOLEAN output_done= FALSE;
 	BOOLEAN first= TRUE;
 	BOOLEAN old;
@@ -9193,6 +10247,14 @@ LOCAL void subsubsubtoc_output ( void )
 							if ( toc[i]->toctype==TOC_NODE4 )
 							{	/* Ein Paragraph */
 
+								if (use_toc_list_commands)
+								{	if (last_ssssn)
+									{	outln(toc_list_end);
+										last_ssssn= FALSE;
+									}
+									last_sssn= TRUE;
+								}
+
 								li= toc[i]->labindex;
 								string2reference(ref, lab[li], TRUE, "", 0, 0);
 
@@ -9212,6 +10274,41 @@ LOCAL void subsubsubtoc_output ( void )
 								outln(n);
 								output_done= TRUE;
 							}/* TOC_NODE4 */
+
+							if (depth>1)
+							{	if ( toc[i]->toctype==TOC_NODE5 )
+								{	/* Ein Paragraph */
+	
+									if (use_toc_list_commands)
+									{	if (last_sssn)
+										{	outln(toc_list_top);
+											last_sssn= FALSE;
+										}
+										last_ssssn= TRUE;
+									}
+	
+									li= toc[i]->labindex;
+									string2reference(ref, lab[li], TRUE, "", 0, 0);
+	
+									if (no_numbers)
+									{	sprintf(n, form_t4_n5, ref);
+									}
+									else
+									{	sprintf(n, form_t4_n5,
+											toc[i]->nr1+toc_offset,
+											toc[i]->nr2+subtoc_offset,
+											toc[i]->nr3+subsubtoc_offset,
+											toc[i]->nr4+subsubsubtoc_offset,
+											toc[i]->nr5+subsubsubsubtoc_offset,
+											ref);
+									}
+	
+									tocline_handle_1st(&first);
+									outln(n);
+									output_done= TRUE;
+								}/* TOC_NODE5 */
+							} /* depth>1 */
+
 						}
 					}
 				}
@@ -9225,6 +10322,12 @@ LOCAL void subsubsubtoc_output ( void )
 			case TOHAH: /* V6.5.17 */
 			case TOHTM:
 			case TOMHH:
+		      if (last_sssn)
+		         outln(toc_list_end);
+		         
+		      if (last_ssssn)
+		         voutlnf("%s%s", toc_list_end, toc_list_end);
+
 				outln(toc_list_end);
             
             if (html_doctype < XHTML_STRICT)
@@ -9235,6 +10338,12 @@ LOCAL void subsubsubtoc_output ( void )
 				break;
 			case TOTEX:
 			case TOPDL:
+		      if (last_sssn)
+		         outln(toc_list_end);
+		         
+		      if (last_ssssn)
+		         voutlnf("%s%s", toc_list_end, toc_list_end);
+
 				outln(toc_list_end);
 				break;
 			case TOAQV:
@@ -9256,11 +10365,13 @@ LOCAL void subsubsubtoc_output ( void )
 }	/*subsubsubtoc_output*/
 
 
-LOCAL void subsubsubapx_output ( void )
+LOCAL void subsubsubapx_output ( const int depth )
 {
 	register int i;
 	int li;
 	char	n[512], ref[512];
+	BOOLEAN last_sssn= FALSE;
+	BOOLEAN last_ssssn= FALSE;
 	BOOLEAN output_done= FALSE;
 	BOOLEAN first= TRUE;
 	BOOLEAN old;
@@ -9320,6 +10431,14 @@ LOCAL void subsubsubapx_output ( void )
 							if ( toc[i]->toctype==TOC_NODE4 )
 							{	/* Ein Paragraph */
 
+								if (use_toc_list_commands)
+								{	if (last_ssssn)
+									{	outln(toc_list_end);
+										last_ssssn= FALSE;
+									}
+									last_sssn= TRUE;
+								}
+
 								li= toc[i]->labindex;
 								string2reference(ref, lab[li], TRUE, "", 0, 0);
 
@@ -9339,6 +10458,333 @@ LOCAL void subsubsubapx_output ( void )
 								outln(n);
 								output_done= TRUE;
 							}/* TOC_NODE4 */
+
+							if (depth>1)
+							{	if ( toc[i]->toctype==TOC_NODE5 )
+								{	/* Ein Paragraph */
+	
+									if (use_toc_list_commands)
+									{	if (last_sssn)
+										{	outln(toc_list_top);
+											last_sssn= FALSE;
+										}
+										last_ssssn= TRUE;
+									}
+	
+									li= toc[i]->labindex;
+									string2reference(ref, lab[li], TRUE, "", 0, 0);
+	
+									if (no_numbers)
+									{	sprintf(n, form_a4_n5, ref);
+									}
+									else
+									{	sprintf(n, form_a4_n5,
+											toc[i]->nr1,
+											toc[i]->nr2,
+											toc[i]->nr3,
+											toc[i]->nr4,
+											toc[i]->nr5,
+											ref);
+									}
+	
+									tocline_handle_1st(&first);
+									outln(n);
+									output_done= TRUE;
+								}/* TOC_NODE5 */
+							} /* depth>1 */
+
+						}
+					}
+				}
+			}
+		}
+	}
+
+	if (output_done)
+	{	switch(desttype)
+		{
+			case TOHAH: /* V6.5.17 */
+			case TOHTM:
+			case TOMHH:
+		      if (last_sssn)
+		         outln(toc_list_end);
+		         
+		      if (last_ssssn)
+		         voutlnf("%s%s", toc_list_end, toc_list_end);
+
+				outln(toc_list_end);
+            
+            if (html_doctype < XHTML_STRICT)
+   				outln(HTML_BR);
+            else
+   				outln(XHTML_BR);
+            
+				break;
+            
+			case TOTEX:
+			case TOPDL:
+		      if (last_sssn)
+		         outln(toc_list_end);
+		         
+		      if (last_ssssn)
+		         voutlnf("%s%s", toc_list_end, toc_list_end);
+
+				outln(toc_list_end);
+				break;
+			case TOAQV:
+			case TOWIN:
+			case TOWH4:
+				outln(rtf_par);
+				outln(rtf_pard);
+				break;
+			case TOINF:
+				outln("@end menu");
+				break;
+			default:
+				outln("");
+				break;
+		}
+	}
+
+	bDocAutorefOff= old;
+}	/*subsubsubapx_output*/
+
+LOCAL void subsubsubsubtoc_output ( void )
+{
+	register int i;
+	int li;
+	char	n[512], ref[512];
+	BOOLEAN output_done= FALSE;
+	BOOLEAN first= TRUE;
+	BOOLEAN old;
+
+	if (desttype==TOLYX)
+	{	return;
+	}
+
+	if ( p1_toc_counter<=0 )
+	{	return;
+	}
+
+	if ( toc[p2_toc_counter]->ignore_subtoc )	/* r5pl6 */
+	{	return;
+	}
+
+	if ( last_n2_index==0 )	/* r5pl6 */
+	{	return;				/* Wer benutzt !subsubsubtoc in einem Node? */
+	}
+
+	if ( last_n3_index==0 )	/* r5pl6 */
+	{	return;				/* Wer benutzt !subsubsubtoc in einem Subnode? */
+	}
+
+	if ( last_n4_index==0 )	/* r5pl6 */
+	{	return;				/* Wer benutzt !subsubsubtoc in einem Subnode? */
+	}
+
+	old= bDocAutorefOff;
+	bDocAutorefOff= FALSE;
+
+	for (i=last_n4_index; i<=p1_toc_counter; i++)
+	{
+		/* r5pl10: langwierige Indizierung vermeiden */
+		toc[i]= toc[i];
+
+		if (toc[i]!=NULL && !toc[i]->invisible)
+		{
+			convert_toc_item(toc[i]);
+
+			if ( toc[i]->appendix )
+			{	break;	/* r5pl6: Nach dem ersten Anhang-Node kommt nichts mehr */
+			}
+
+			if ( toc[i]->n1>p2_toc_n1 )
+			{	break;	/* r5pl6: Das waren dann alle */
+			}
+
+			if ( toc[i]->n1!=0 )
+			{
+				if ( toc[i]->n1 == p2_toc_n1 )
+				{
+					if ( toc[i]->n2>p2_toc_n2 )
+					{	break;	/* r5pl6: Das waren dann alle */
+					}
+
+					if ( toc[i]->n2==p2_toc_n2 )
+					{
+						if ( toc[i]->n3>p2_toc_n3 )
+						{	break;	/* r5pl6: Das waren dann alle */
+						}
+
+						if ( toc[i]->n3==p2_toc_n3 )
+						{
+
+							if ( toc[i]->n4>p2_toc_n4 )
+							{	break;	/* r5pl6: Das waren dann alle */
+							}
+	
+							if ( toc[i]->n4==p2_toc_n4 )
+							{
+								if ( toc[i]->toctype==TOC_NODE5 )
+								{	/* Ein Paragraph */
+	
+									li= toc[i]->labindex;
+									string2reference(ref, lab[li], TRUE, "", 0, 0);
+	
+									if (no_numbers)
+									{	sprintf(n, form_t5_n5, ref);
+									}
+									else
+									{	sprintf(n, form_t5_n5,
+											toc[i]->nr1+toc_offset,
+											toc[i]->nr2+subtoc_offset,
+											toc[i]->nr3+subsubtoc_offset,
+											toc[i]->nr4+subsubsubtoc_offset,
+											toc[i]->nr5+subsubsubsubtoc_offset,
+											ref);
+									}
+	
+									tocline_handle_1st(&first);
+									outln(n);
+									output_done= TRUE;
+								}/* TOC_NODE5 */
+							}
+							
+						}
+					}
+				}
+			}
+		}
+	}
+
+	if (output_done)
+	{	switch(desttype)
+		{
+			case TOHAH: /* V6.5.17 */
+			case TOHTM:
+			case TOMHH:
+				outln(toc_list_end);
+            
+            if (html_doctype < XHTML_STRICT)
+   				outln(HTML_BR);
+            else
+   				outln(XHTML_BR);
+            
+				break;
+			case TOTEX:
+			case TOPDL:
+				outln(toc_list_end);
+				break;
+			case TOAQV:
+			case TOWIN:
+			case TOWH4:
+				outln(rtf_par);
+				outln(rtf_pard);
+				break;
+			case TOINF:
+				outln("@end menu");
+				break;
+			default:
+				outln("");
+				break;
+		}
+	}
+
+	bDocAutorefOff= old;
+}	/*subsubsubtoc_output*/
+
+LOCAL void subsubsubsubapx_output ( void )
+{
+	register int i;
+	int li;
+	char	n[512], ref[512];
+	BOOLEAN output_done= FALSE;
+	BOOLEAN first= TRUE;
+	BOOLEAN old;
+
+	if (desttype==TOLYX)
+	{	return;
+	}
+
+	if ( p1_toc_counter<=0 )
+	{	return;
+	}
+
+	if ( toc[p2_toc_counter]->ignore_subtoc )	/* r5pl6 */
+	{	return;
+	}
+
+	if ( last_n2_index==0 )	/* r5pl6 */
+	{	return;				/* Wer benutzt !subsubsubtoc in einem Node? */
+	}
+
+	if ( last_n3_index==0 )	/* r5pl6 */
+	{	return;				/* Wer benutzt !subsubsubtoc in einem Subnode? */
+	}
+
+	if ( last_n4_index==0 )	/* r5pl6 */
+	{	return;				/* Wer benutzt !subsubsubtoc in einem Subnode? */
+	}
+
+	old= bDocAutorefOff;
+	bDocAutorefOff= FALSE;
+
+	for (i=last_n4_index; i<=p1_toc_counter; i++)
+	{
+		/* r5pl10: langwierige Indizierung vermeiden */
+		toc[i]= toc[i];
+
+		if (toc[i]!=NULL && !toc[i]->invisible)
+		{
+			convert_toc_item(toc[i]);
+
+			if ( toc[i]->appendix && toc[i]->n1!=0 )
+			{
+				if (  toc[i]->n1>p2_apx_n1 )
+				{	break;	/* r5pl6: Das waren dann alle */
+				}
+
+				if ( toc[i]->n1 == p2_apx_n1 )
+				{
+					if ( toc[i]->n2>p2_apx_n2 )
+					{	break;	/* r5pl6: Das waren dann alle */
+					}
+
+					if ( toc[i]->n2==p2_apx_n2 )
+					{
+						if ( toc[i]->n3>p2_apx_n3 )
+						{	break;	/* r5pl6: Das waren alle */
+						}
+
+						if ( toc[i]->n3==p2_apx_n3 )
+						{
+							if ( toc[i]->n4>p2_apx_n4 )
+							{	break;	/* r5pl6: Das waren alle */
+							}
+
+							if ( toc[i]->toctype==TOC_NODE5 )
+							{	/* Ein Paragraph */
+
+								li= toc[i]->labindex;
+								string2reference(ref, lab[li], TRUE, "", 0, 0);
+
+								if (no_numbers)
+								{	sprintf(n, form_a5_n5, ref);
+								}
+								else
+								{	sprintf(n, form_a5_n5,
+										'A'-1+toc[i]->nr1,
+										toc[i]->nr2,
+										toc[i]->nr3,
+										toc[i]->nr4,
+										toc[i]->nr5,
+										ref);
+								}
+
+								tocline_handle_1st(&first);
+								outln(n);
+								output_done= TRUE;
+							}/* TOC_NODE5 */
 						}
 					}
 				}
@@ -9384,7 +10830,6 @@ LOCAL void subsubsubapx_output ( void )
 }	/*subsubsubapx_output*/
 
 
-
 LOCAL void do_toc ( const int depth )
 {
 	if (desttype==TORTF)
@@ -9418,14 +10863,22 @@ LOCAL void do_subsubtoc ( const int depth )
 	(bInsideAppendix) ? subsubapx_output(depth) : subsubtoc_output(depth);
 }	/* do_subtoc */
 
-LOCAL void do_subsubsubtoc ( void )
+LOCAL void do_subsubsubtoc ( const int depth )
 {
 	if (desttype==TORTF)
 	{	return;
 	}
-	(bInsideAppendix) ? subsubsubapx_output() : subsubsubtoc_output();
+	(bInsideAppendix) ? subsubsubapx_output(depth) : subsubsubtoc_output(depth);
 }	/* do_subtoc */
 
+
+LOCAL void do_subsubsubsubtoc ( void )
+{
+	if (desttype==TORTF)
+	{	return;
+	}
+	(bInsideAppendix) ? subsubsubsubapx_output() : subsubsubsubtoc_output();
+}	/* do_subtoc */
 
 
 
@@ -9476,6 +10929,9 @@ const int    currdepth)                 /* current node depth */
       return;
    
    if (html_merge_node4 && currdepth >= TOC_NODE4)
+      return;
+
+   if (html_merge_node5 && currdepth >= TOC_NODE5)
       return;
    
    
@@ -9658,6 +11114,36 @@ const int    currdepth)                 /* current node depth */
                s);
          }
       }
+
+      /* Level 5 */
+      if (currdepth >= TOC_NODE5 && last_n4_index > 0)
+      {
+         strcpy(s, toc[last_n4_index]->name);
+         auto_references(s, TRUE, "", 0, 0);
+   
+         if (no_images)
+         {
+            voutlnf("<br%s><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|--+&nbsp;</tt>&nbsp;%s",
+               closer, s);
+         }
+         else if (html_navigation_line)   /* new v6.5.19[fd] */
+         {
+            voutf("%s%s", sSmartSep, s);  /* don't close the nav line already! */
+         }
+         else
+         {
+            voutlnf("<br%s>%s%s%s<img src=\"%s\" width=\"%u\" height=\"%u\" alt=\"\" title=\"\" border=\"0\"%s>&nbsp;%s",
+               closer,
+               sIndent, 
+               sIndent, 
+               sIndent, 
+               GIF_FO_NAME, 
+               uiGifFoWidth, 
+               uiGifFoHeight, 
+               closer,
+               s);
+         }
+      }
       
       if (html_navigation_line)
       {                                   /* close CSS class div */
@@ -9701,6 +11187,13 @@ const int    currdepth)                 /* current node depth */
          strcpy(s, toc[last_n3_index]->name);
          auto_references(s, TRUE, "", 0, 0);
          voutlnf("\\par\\li800\\{bmc %s\\} %s", BMP_FO_NAME, s);
+      }
+
+      if (currdepth >= TOC_NODE5 && last_n4_index > 0)
+      {
+         strcpy(s, toc[last_n4_index]->name);
+         auto_references(s, TRUE, "", 0, 0);
+         voutlnf("\\par\\li1200\\{bmc %s\\} %s", BMP_FO_NAME, s);
       }
       
       outln("\\par\\par");
@@ -9748,6 +11241,16 @@ const int    currdepth)                 /* current node depth */
          voutlnf("            %s", toc[last_n3_index]->name);
       }
 
+      if (currdepth >= TOC_NODE5 && last_n4_index > 0)
+      {
+         if (!no_images && !no_auto_toptocs_icons)
+         {
+            voutlnf("@image %s 13", IMG_FO_NAME);
+         }
+         
+         voutlnf("            %s", toc[last_n4_index]->name);
+      }
+
       outln("");
       break;
    
@@ -9772,6 +11275,11 @@ const int    currdepth)                 /* current node depth */
          voutlnf("            \001 \\#%s\\#", toc[last_n3_index]->name);
       }
       
+      if (currdepth >= TOC_NODE5 && last_n4_index > 0)
+      {
+         voutlnf("                \001 \\#%s\\#", toc[last_n4_index]->name);
+      }
+
       output_ascii_line("-", zDocParwidth);
       
    }  /* switch (desttype) */
@@ -9849,51 +11357,17 @@ GLOBAL void c_subtoc ( void )
 				do_subsubtoc(d);
 				break;
 			case TOC_NODE3:
-				do_subsubsubtoc();
+				d= get_toccmd_depth();
+				if (d==0)	d= subtocs3_depth;
+				do_subsubsubtoc(d);
+				break;
+			case TOC_NODE4:
+				do_subsubsubsubtoc();
 				break;
 		}
 	}
 
 }	/* c_subtoc */
-
-
-#if 0	/*	---------------------------------------------------------	*/
-GLOBAL void c_subtoc ( void )
-{
-	BOOLEAN flag= FALSE;
-	int d;
-
-	if ( is_for_desttype(&flag, "!subtoc") )
-	{
-		d= get_toccmd_depth();
-		if (d==0)	d= subtocs1_depth;
-		do_subtoc(d);
-	}
-}	/* c_subtoc */
-
-GLOBAL void c_subsubtoc ( void )
-{
-	BOOLEAN flag= FALSE;
-	int d;
-
-	if ( is_for_desttype(&flag, "!subsubtoc") )
-	{
-		d= get_toccmd_depth();
-		if (d==0)	d= subtocs2_depth;
-		do_subsubtoc(d);
-	}
-}	/* c_subsubtoc */
-
-
-GLOBAL void c_subsubsubtoc ( void )
-{
-	BOOLEAN flag= FALSE;
-
-	if ( is_for_desttype(&flag, "!subsubsubtoc") )
-	{	do_subsubsubtoc();
-	}
-}	/* c_subsubsubtoc */
-#endif	/*	---------------------------------------------------------	*/
 
 
 GLOBAL void c_listoffigures ( void )
@@ -10507,6 +11981,7 @@ GLOBAL int add_label ( const char *label, const BOOLEAN isn, const BOOLEAN isp )
 		labptr->n2= p1_apx_n2;
 		labptr->n3= p1_apx_n3;
 		labptr->n4= p1_apx_n4;
+		labptr->n5= p1_apx_n5;
 	}
 	else
 	{	labptr->appendix= FALSE;
@@ -10514,6 +11989,7 @@ GLOBAL int add_label ( const char *label, const BOOLEAN isn, const BOOLEAN isp )
 		labptr->n2= p1_toc_n2;
 		labptr->n3= p1_toc_n3;
 		labptr->n4= p1_toc_n4;
+		labptr->n5= p1_toc_n5;
 	}
 
 	return p1_lab_counter;
@@ -10582,6 +12058,7 @@ GLOBAL BOOLEAN add_alias ( const char *alias, const BOOLEAN isp )
 		labptr->n2= p1_apx_n2;
 		labptr->n3= p1_apx_n3;
 		labptr->n4= p1_apx_n4;
+		labptr->n5= p1_apx_n5;
 	}
 	else
 	{	labptr->appendix= FALSE;
@@ -10589,6 +12066,7 @@ GLOBAL BOOLEAN add_alias ( const char *alias, const BOOLEAN isp )
 		labptr->n2= p1_toc_n2;
 		labptr->n3= p1_toc_n3;
 		labptr->n4= p1_toc_n4;
+		labptr->n5= p1_toc_n5;
 	}
 
 	return TRUE;
@@ -11113,182 +12591,6 @@ GLOBAL void set_html_color ( const int which )
 }	/* set_html_color */
 
 
-#if 0
-GLOBAL void set_html_backcolor ( void )
-{
-	char color[256], *ptr;
-	BOOLEAN ret;
-
-	if (p1_toc_counter<0)	return;
-	if (toc[p1_toc_counter]==NULL)	return;
-	if (token[1][0]==EOS)	return;
-
-	color[0]= EOS;
-
-	qdelete_once(token[1], "[", 1);
-	qdelete_last(token[1], "]", 1);
-
-	if (token[1][0]=='#')
-	{	um_strcpy(color, token[1], 256, "set_html_backcolor");
-		ret= TRUE;
-	}
-	else
-	{	ret= get_html_color(token[1], color);
-	}
-
-	if (ret)
-	{	if (p1_toc_counter==0)
-		{	ptr= sDocBackColor;
-		}
-		else
-		{	ptr= toc[p1_toc_counter]->backcolor;
-		}
-		ptr[0]= EOS;
-		if (color[0]!=EOS)
-		{	strncat(ptr, color, MAX_COLOR_LEN);
-		}
-	}
-	else
-	{	error_unknown_color(token[1]);
-	}
-
-}	/* set_html_backcolor */
-
-
-GLOBAL void set_html_textcolor ( void )
-{
-	char color[256], *ptr;
-
-	if (p1_toc_counter<0)	return;
-	if (toc[p1_toc_counter]==NULL)	return;
-	if (token[1][0]==EOS)	return;
-
-	color[0]= EOS;
-
-	qdelete_once(token[1], "[", 1);
-	qdelete_last(token[1], "]", 1);
-
-	if (token[1][0]=='#')
-	{	um_strcpy(color, token[1], 256, "set_html_textcolor[1]");
-	}
-	else
-	{	get_html_color(token[1], color);
-	}
-
-	if (color[0]!=EOS)
-	{
-		if (p1_toc_counter==0)
-		{	ptr= sDocTextColor;
-		}
-		else
-		{	ptr= toc[p1_toc_counter]->textcolor;
-		}
-		ptr[0]= EOS;
-		strncat(ptr, color, MAX_COLOR_LEN);
-	}
-}
-
-
-GLOBAL void set_html_linkcolor ( void )
-{
-	char color[256], *ptr;
-
-	if (p1_toc_counter<0)	return;
-	if (toc[p1_toc_counter]==NULL)	return;
-	if (token[1][0]==EOS)	return;
-
-	color[0]= EOS;
-
-	qdelete_once(token[1], "[", 1);
-	qdelete_last(token[1], "]", 1);
-
-	if (token[1][0]=='#')
-	{	um_strcpy(color, token[1], 256, "set_html_linkcolor[1]");
-	}
-	else
-	{	get_html_color(token[1], color);
-	}
-
-	if (color[0]!=EOS)
-	{
-		if (p1_toc_counter==0)
-		{	ptr= sDocLinkColor;
-		}
-		else
-		{	ptr= toc[p1_toc_counter]->linkcolor;
-		}
-		ptr[0]= EOS;
-		strncat(ptr, color, MAX_COLOR_LEN);
-	}
-}
-
-GLOBAL void set_html_alinkcolor ( void )
-{
-	char color[256], *ptr;
-
-	if (p1_toc_counter<0)	return;
-	if (toc[p1_toc_counter]==NULL)	return;
-	if (token[1][0]==EOS)	return;
-
-	color[0]= EOS;
-
-	qdelete_once(token[1], "[", 1);
-	qdelete_last(token[1], "]", 1);
-
-	if (token[1][0]=='#')
-	{	um_strcpy(color, token[1], 256, "set_html_alinkcolor[1]");
-	}
-	else
-	{	get_html_color(token[1], color);
-	}
-
-	if (color[0]!=EOS)
-	{
-		if (p1_toc_counter==0)
-		{	ptr= sDocAlinkColor;
-		}
-		else
-		{	ptr= toc[p1_toc_counter]->alinkcolor;
-		}
-		ptr[0]= EOS;
-		strncat(ptr, color, MAX_COLOR_LEN);
-	}
-}
-
-GLOBAL void set_html_vlinkcolor ( void )
-{
-	char color[256], *ptr;
-
-	if (p1_toc_counter<0)	return;
-	if (toc[p1_toc_counter]==NULL)	return;
-	if (token[1][0]==EOS)	return;
-
-	color[0]= EOS;
-
-	qdelete_once(token[1], "[", 1);
-	qdelete_last(token[1], "]", 1);
-
-	if (token[1][0]=='#')
-	{	um_strcpy(color, token[1], 256, "set_html_vlinkcolor");
-	}
-	else
-	{	get_html_color(token[1], color);
-	}
-
-	if (color[0]!=EOS)
-	{
-		if (p1_toc_counter==0)
-		{	ptr= sDocVlinkColor;
-		}
-		else
-		{	ptr= toc[p1_toc_counter]->vlinkcolor;
-		}
-		ptr[0]= EOS;
-		strncat(ptr, color, MAX_COLOR_LEN);
-	}
-}	/* set_html_vlinkcolor */
-#endif
-
 
 /*******************************************************************************
 *
@@ -11347,6 +12649,7 @@ GLOBAL void set_html_bgsound ( void )
 		sprintf ( dest, "\"%s\" loop=\"%s\"", filename, loop );
 }	/* set_html_bgsound */
 
+
 GLOBAL void set_html_backimage ( void )
 {
 	char *ptr, *dest;
@@ -11362,7 +12665,6 @@ GLOBAL void set_html_backimage ( void )
 	else
 	{	dest= toc[p1_toc_counter]->backimage;
 	}
-
 
 	if (token[1][0]=='\"')
 	{
@@ -12357,6 +13659,7 @@ LOCAL TOCITEM *init_new_toc_entry ( const int toctype, const BOOLEAN invisible )
 	tocptr->count_n2=			0;		/*r6pl8*/
 	tocptr->count_n3=			0;		/*r6pl8*/
 	tocptr->count_n4=			0;		/*r6pl8*/
+	tocptr->count_n5=			0;		/*r6pl8*/
 	strcpy(tocptr->backimage, sDocBackImage);
 	strcpy(tocptr->backcolor, sDocBackColor);
 	strcpy(tocptr->textcolor, sDocTextColor);
@@ -12406,6 +13709,9 @@ GLOBAL BOOLEAN add_node_to_toc ( const BOOLEAN popup, const BOOLEAN invisible )
 	/* Vorgaenger wird daher auf den letzten *Node gesetzt	*/
 	if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{
+		if (html_merge_node5 && last_n4_index>0)
+		{	tocptr->prev_index= last_n4_index;
+		}
 		if (html_merge_node4 && last_n3_index>0)
 		{	tocptr->prev_index= last_n3_index;
 		}
@@ -12426,6 +13732,13 @@ GLOBAL BOOLEAN add_node_to_toc ( const BOOLEAN popup, const BOOLEAN invisible )
 
 	if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{
+		/* Wenn Subsubsubsubnode gemerged werden, dann muss	*/
+		/* beim letzten Subsubnode dieser Node als			*/
+		/* naechster Index eingetragen werden!				*/
+		if (html_merge_node5 && last_n4_index>0)
+		{	toc[last_n4_index]->next_index= p1_toc_counter+1;
+		}
+
 		/* Wenn Subsubsubnode gemerged werden, dann muss	*/
 		/* beim letzten Subsubnode dieser Node als			*/
 		/* naechster Index eingetragen werden!				*/
@@ -12455,11 +13768,13 @@ GLOBAL BOOLEAN add_node_to_toc ( const BOOLEAN popup, const BOOLEAN invisible )
 	tocptr->up_n1_index= 0;
 	tocptr->up_n2_index= 0;
 	tocptr->up_n3_index= 0;
+	tocptr->up_n4_index= 0;
 
 	last_n1_index= p1_toc_counter+1;
 	last_n2_index= 0;
 	last_n3_index= 0;
 	last_n4_index= 0;
+	last_n5_index= 0;
 	/* ----------------------------------------------------	*/
 
 	p1_toc_counter++;
@@ -12471,20 +13786,24 @@ GLOBAL BOOLEAN add_node_to_toc ( const BOOLEAN popup, const BOOLEAN invisible )
 		p1_apx_n2= 0;
 		p1_apx_n3= 0;
 		p1_apx_n4= 0;
+		p1_apx_n5= 0;
 		tocptr->appendix= TRUE;
 		tocptr->n1= p1_apx_n1;
 		tocptr->n2= p1_apx_n2;
 		tocptr->n3= p1_apx_n3;
 		tocptr->n4= p1_apx_n4;
+		tocptr->n5= p1_apx_n5;
 		if (!invisible)
 		{	p1_apx_nr1++;
 			p1_apx_nr2= 0;
 			p1_apx_nr3= 0;
 			p1_apx_nr4= 0;
+			p1_apx_nr5= 0;
 			tocptr->nr1= p1_apx_nr1;
 			tocptr->nr2= p1_apx_nr2;
 			tocptr->nr3= p1_apx_nr3;
 			tocptr->nr4= p1_apx_nr4;
+			tocptr->nr5= p1_apx_nr5;
 		}
 	}
 	else
@@ -12493,20 +13812,24 @@ GLOBAL BOOLEAN add_node_to_toc ( const BOOLEAN popup, const BOOLEAN invisible )
 		p1_toc_n2= 0;
 		p1_toc_n3= 0;
 		p1_toc_n4= 0;
+		p1_toc_n5= 0;
 		tocptr->appendix= FALSE;
 		tocptr->n1= p1_toc_n1;
 		tocptr->n2= p1_toc_n2;
 		tocptr->n3= p1_toc_n3;
 		tocptr->n4= p1_toc_n4;
+		tocptr->n5= p1_toc_n5;
 		if (!invisible)
 		{	p1_toc_nr1++;
 			p1_toc_nr2= 0;
 			p1_toc_nr3= 0;
 			p1_toc_nr4= 0;
+			p1_toc_nr5= 0;
 			tocptr->nr1= p1_toc_nr1;
 			tocptr->nr2= p1_toc_nr2;
 			tocptr->nr3= p1_toc_nr3;
 			tocptr->nr4= p1_toc_nr4;
+			tocptr->nr5= p1_toc_nr5;
 		}
 	}
 
@@ -12556,6 +13879,9 @@ GLOBAL BOOLEAN add_subnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisible
 
 	if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{
+		if (html_merge_node5 && last_n4_index>0)
+		{	tocptr->prev_index= last_n4_index;
+		}
 		if (html_merge_node4 && last_n3_index>0)
 		{	tocptr->prev_index= last_n3_index;
 		}
@@ -12577,6 +13903,13 @@ GLOBAL BOOLEAN add_subnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisible
 
 	if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{
+		/* Wenn Subsubsubsubnode gemerged werden, dann muss	*/
+		/* beim letzten Subsubnode dieser Subnode als		*/
+		/* naechster Index eingetragen werden!				*/
+		if (html_merge_node5 && last_n4_index>0)
+		{	toc[last_n4_index]->next_index= p1_toc_counter+1;
+		}
+
 		/* Wenn Subsubsubnode gemerged werden, dann muss	*/
 		/* beim letzten Subsubnode dieser Subnode als		*/
 		/* naechster Index eingetragen werden!				*/
@@ -12607,10 +13940,12 @@ GLOBAL BOOLEAN add_subnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisible
 	tocptr->up_n1_index=	last_n1_index;
 	tocptr->up_n2_index=	0;
 	tocptr->up_n3_index=	0;
+	tocptr->up_n4_index=	0;
 
 	last_n2_index=	p1_toc_counter+1;
 	last_n3_index=	0;
 	last_n4_index=	0;
+	last_n5_index=	0;
 	/* ----------------------------------------------------	*/
 
 	/* Zaehler hochsetzen und Zeiger in das Array kopieren	*/
@@ -12622,19 +13957,23 @@ GLOBAL BOOLEAN add_subnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisible
 		p1_apx_n2++;
 		p1_apx_n3= 0;
 		p1_apx_n4= 0;
+		p1_apx_n5= 0;
 		tocptr->appendix= TRUE;
 		tocptr->n1= p1_apx_n1;
 		tocptr->n2= p1_apx_n2;
 		tocptr->n3= p1_apx_n3;
 		tocptr->n4= p1_apx_n4;
+		tocptr->n5= p1_apx_n5;
 		if (!invisible)
 		{	p1_apx_nr2++;
 			p1_apx_nr3= 0;
 			p1_apx_nr4= 0;
+			p1_apx_nr5= 0;
 			tocptr->nr1= p1_apx_nr1;
 			tocptr->nr2= p1_apx_nr2;
 			tocptr->nr3= p1_apx_nr3;
 			tocptr->nr4= p1_apx_nr4;
+			tocptr->nr5= p1_apx_nr5;
 		}
 	}
 	else
@@ -12642,19 +13981,23 @@ GLOBAL BOOLEAN add_subnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisible
 		p1_toc_n2++;
 		p1_toc_n3= 0;
 		p1_toc_n4= 0;
+		p1_toc_n5= 0;
 		tocptr->appendix= FALSE;
 		tocptr->n1= p1_toc_n1;
 		tocptr->n2= p1_toc_n2;
 		tocptr->n3= p1_toc_n3;
 		tocptr->n4= p1_toc_n4;
+		tocptr->n5= p1_toc_n5;
 		if (!invisible)
 		{	p1_toc_nr2++;
 			p1_toc_nr3= 0;
 			p1_toc_nr4= 0;
+			p1_toc_nr5= 0;
 			tocptr->nr1= p1_toc_nr1;
 			tocptr->nr2= p1_toc_nr2;
 			tocptr->nr3= p1_toc_nr3;
 			tocptr->nr4= p1_toc_nr4;
+			tocptr->nr5= p1_toc_nr5;
 		}
 	}
 
@@ -12704,6 +14047,12 @@ GLOBAL BOOLEAN	add_subsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisi
 
 	if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{
+		if (html_merge_node5 && last_n4_index>0)
+		{	tocptr->prev_index= last_n4_index;
+		}
+		if (html_merge_node4 && last_n3_index>0)
+		{	tocptr->prev_index= last_n3_index;
+		}
 		if (html_merge_node4 && last_n3_index>0)
 		{	tocptr->prev_index= last_n3_index;
 		}
@@ -12730,6 +14079,13 @@ GLOBAL BOOLEAN	add_subsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisi
 
 	if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{
+		/* Wenn Subsubsubsubnodes gemerged werden, dann muss	*/
+		/* beim letzten Subsubnode dieser Subsubnode als	*/
+		/* naechster Index eingetragen werden!				*/
+		if (html_merge_node5 && last_n4_index>0)
+		{	toc[last_n4_index]->next_index= p1_toc_counter+1;
+		}
+
 		/* Wenn Subsubsubnodes gemerged werden, dann muss	*/
 		/* beim letzten Subsubnode dieser Subsubnode als	*/
 		/* naechster Index eingetragen werden!				*/
@@ -12746,9 +14102,11 @@ GLOBAL BOOLEAN	add_subsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisi
 	tocptr->up_n1_index=	last_n1_index;
 	tocptr->up_n2_index=	last_n2_index;
 	tocptr->up_n3_index=	0;
+	tocptr->up_n4_index=	0;
 
 	last_n3_index= p1_toc_counter+1;
 	last_n4_index= 0;
+	last_n5_index= 0;
 	/* ----------------------------------------------------	*/
 
 	p1_toc_counter++;
@@ -12758,35 +14116,43 @@ GLOBAL BOOLEAN	add_subsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisi
 	{	apx_available= TRUE;
 		p1_apx_n3++;
 		p1_apx_n4= 0;
+		p1_apx_n5= 0;
 		tocptr->appendix= TRUE;
 		tocptr->n1= p1_apx_n1;
 		tocptr->n2= p1_apx_n2;
 		tocptr->n3= p1_apx_n3;
 		tocptr->n4= p1_apx_n4;
+		tocptr->n5= p1_apx_n5;
 		if (!invisible)
 		{	p1_apx_nr3++;
 			p1_apx_nr4= 0;
+			p1_apx_nr5= 0;
 			tocptr->nr1= p1_apx_nr1;
 			tocptr->nr2= p1_apx_nr2;
 			tocptr->nr3= p1_apx_nr3;
 			tocptr->nr4= p1_apx_nr4;
+			tocptr->nr5= p1_apx_nr5;
 		}
 	}
 	else
 	{	toc_available= TRUE;
 		p1_toc_n3++;
 		p1_toc_n4= 0;
+		p1_toc_n5= 0;
 		tocptr->appendix= FALSE;
 		tocptr->n1= p1_toc_n1;
 		tocptr->n2= p1_toc_n2;
 		tocptr->n3= p1_toc_n3;
 		tocptr->n4= p1_toc_n4;
+		tocptr->n5= p1_toc_n5;
 		{	p1_toc_nr3++;
 			p1_toc_nr4= 0;
+			p1_toc_nr5= 0;
 			tocptr->nr1= p1_toc_nr1;
 			tocptr->nr2= p1_toc_nr2;
 			tocptr->nr3= p1_toc_nr3;
 			tocptr->nr4= p1_toc_nr4;
+			tocptr->nr5= p1_toc_nr5;
 		}
 	}
 
@@ -12825,8 +14191,6 @@ GLOBAL BOOLEAN	add_subsubsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN inv
 
 	all_subsubsubnodes++;
 
-	called_subsubsubnode= TRUE;		/* r5pl6 */
-
 	/* ----------------------------------------------------	*/
 	/* r5pl6: Listenartige Verkettung erzeugen				*/
 	/* ----------------------------------------------------	*/
@@ -12836,6 +14200,9 @@ GLOBAL BOOLEAN	add_subsubsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN inv
 
 	if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
 	{
+		if (html_merge_node5 && last_n4_index>0)
+		{	tocptr->prev_index= last_n4_index;
+		}
 		if (html_merge_node4 && last_n3_index>0)
 		{	tocptr->prev_index= last_n3_index;
 		}
@@ -12868,8 +14235,10 @@ GLOBAL BOOLEAN	add_subsubsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN inv
 	tocptr->up_n1_index= last_n1_index;
 	tocptr->up_n2_index= last_n2_index;
 	tocptr->up_n3_index= last_n3_index;
+	tocptr->up_n4_index= 0;
 
 	last_n4_index= p1_toc_counter+1;
+	last_n5_index= 0;
 	/* ----------------------------------------------------	*/
 
 	p1_toc_counter++;
@@ -12878,32 +14247,40 @@ GLOBAL BOOLEAN	add_subsubsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN inv
 	if (pflag[PASS1].inside_apx)
 	{	apx_available= TRUE;
 		p1_apx_n4++;
+		p1_apx_n5= 0;
 		tocptr->appendix= TRUE;
 		tocptr->n1= p1_apx_n1;
 		tocptr->n2= p1_apx_n2;
 		tocptr->n3= p1_apx_n3;
 		tocptr->n4= p1_apx_n4;
+		tocptr->n5= p1_apx_n5;
 		if (!invisible)
 		{	p1_apx_nr4++;
+			p1_apx_nr5= 0;
 			tocptr->nr1= p1_apx_nr1;
 			tocptr->nr2= p1_apx_nr2;
 			tocptr->nr3= p1_apx_nr3;
 			tocptr->nr4= p1_apx_nr4;
+			tocptr->nr5= p1_apx_nr5;
 		}
 	}
 	else
 	{	toc_available= TRUE;
 		p1_toc_n4++;
+		p1_toc_n5= 0;
 		tocptr->appendix= FALSE;
 		tocptr->n1= p1_toc_n1;
 		tocptr->n2= p1_toc_n2;
 		tocptr->n3= p1_toc_n3;
 		tocptr->n4= p1_toc_n4;
+		tocptr->n5= p1_toc_n5;
 		{	p1_toc_nr4++;
+			p1_toc_nr5= 0;
 			tocptr->nr1= p1_toc_nr1;
 			tocptr->nr2= p1_toc_nr2;
 			tocptr->nr3= p1_toc_nr3;
 			tocptr->nr4= p1_toc_nr4;
+			tocptr->nr5= p1_toc_nr5;
 		}
 	}
 
@@ -12924,6 +14301,132 @@ GLOBAL BOOLEAN	add_subsubsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN inv
 
 
 
+GLOBAL BOOLEAN	add_subsubsubsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisible )
+{
+	TOCITEM	*tocptr;
+	int li;
+
+	if (last_n4_index==0)
+	{	error_node5_not_allowed();
+		return FALSE;
+	}
+
+	tocptr= init_new_toc_entry (TOC_NODE5, invisible);
+
+	if (tocptr==NULL)
+	{	return FALSE;
+	}
+
+	all_subsubsubsubnodes++;
+
+	called_subsubsubsubnode= TRUE;		/* r5pl6 */
+
+	/* ----------------------------------------------------	*/
+	/* r5pl6: Listenartige Verkettung erzeugen				*/
+	/* ----------------------------------------------------	*/
+	/* noch ist p1_toc_counter nicht inkrementiert worden 	*/
+	/* und zeigt daher auf den letzten (Sub(Sub))Node		*/
+	tocptr->prev_index= p1_toc_counter;
+
+	if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
+	{
+		if (html_merge_node5 && last_n4_index>0)
+		{	tocptr->prev_index= last_n4_index;
+		}
+		if (html_merge_node4 && last_n3_index>0)
+		{	tocptr->prev_index= last_n3_index;
+		}
+		if (html_merge_node3 && last_n2_index>0)
+		{	tocptr->prev_index= last_n2_index;
+		}
+		if (html_merge_node2 && last_n1_index>0)
+		{	tocptr->prev_index= last_n1_index;
+		}
+		if (html_merge_node1)
+		{	tocptr->prev_index= 0;
+		}
+	}
+
+	/* Den Nachfolger des Vorgaengers setzen: auf diesen	*/
+	toc[p1_toc_counter]->next_index= p1_toc_counter+1;
+
+	/* Merken, dass der uebergeordnete Kinder hat */
+	/* und die Anzahl der Subsubsubnodes erhoehen */
+	if (last_n4_index>0)
+	{	toc[last_n4_index]->has_children=	TRUE;	/*r6pl5*/
+		toc[last_n4_index]->count_n5++;				/*r6pl8*/
+	}
+
+	/* Der Zeiger auf den Nachfolger muss vom Nachfolger	*/
+	/* gesetzt werden.										*/
+	tocptr->next_index= 0;
+
+	/* Hilfsvariablen setzen fuer die uebergeordneten Nodes	*/
+	tocptr->up_n1_index= last_n1_index;
+	tocptr->up_n2_index= last_n2_index;
+	tocptr->up_n3_index= last_n3_index;
+	tocptr->up_n4_index= last_n4_index;
+
+	last_n5_index= p1_toc_counter+1;
+	/* ----------------------------------------------------	*/
+
+	p1_toc_counter++;
+	toc[p1_toc_counter]= tocptr;
+
+	if (pflag[PASS1].inside_apx)
+	{	apx_available= TRUE;
+		p1_apx_n5++;
+		tocptr->appendix= TRUE;
+		tocptr->n1= p1_apx_n1;
+		tocptr->n2= p1_apx_n2;
+		tocptr->n3= p1_apx_n3;
+		tocptr->n4= p1_apx_n4;
+		tocptr->n5= p1_apx_n5;
+		if (!invisible)
+		{	p1_apx_nr5++;
+			tocptr->nr1= p1_apx_nr1;
+			tocptr->nr2= p1_apx_nr2;
+			tocptr->nr3= p1_apx_nr3;
+			tocptr->nr4= p1_apx_nr4;
+			tocptr->nr5= p1_apx_nr5;
+		}
+	}
+	else
+	{	toc_available= TRUE;
+		p1_toc_n5++;
+		tocptr->appendix= FALSE;
+		tocptr->n1= p1_toc_n1;
+		tocptr->n2= p1_toc_n2;
+		tocptr->n3= p1_toc_n3;
+		tocptr->n4= p1_toc_n4;
+		tocptr->n5= p1_toc_n5;
+		{	p1_toc_nr5++;
+			tocptr->nr1= p1_toc_nr1;
+			tocptr->nr2= p1_toc_nr2;
+			tocptr->nr3= p1_toc_nr3;
+			tocptr->nr4= p1_toc_nr4;
+			tocptr->nr5= p1_toc_nr5;
+		}
+	}
+
+	if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
+	{	/* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
+		/* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
+		get_html_filename(p1_toc_counter, tocptr->filename);
+	}
+
+	li= add_label(tocptr->name, TRUE, popup);
+
+	if (li>=0)
+	{	tocptr->labindex= li;
+	}
+
+	return TRUE;
+}	/*add_subsubsubsubnode_to_toc*/
+
+
+
+
 GLOBAL BOOLEAN toc_begin_node (const BOOLEAN popup, const BOOLEAN invisible)
 {
 	BOOLEAN ret;
@@ -12934,7 +14437,8 @@ GLOBAL BOOLEAN toc_begin_node (const BOOLEAN popup, const BOOLEAN invisible)
 		case TOC_NODE1:	ret= add_subnode_to_toc(popup, invisible);			break;
 		case TOC_NODE2:	ret= add_subsubnode_to_toc(popup, invisible);		break;
 		case TOC_NODE3:	ret= add_subsubsubnode_to_toc(popup, invisible);	break;
-		default:		ret= add_subsubsubnode_to_toc(popup, invisible);	break;
+		case TOC_NODE4:	ret= add_subsubsubsubnode_to_toc(popup, invisible);	break;
+		default:		ret= add_subsubsubsubnode_to_toc(popup, invisible);	break;
 	}
 
 	return ret;
@@ -12950,6 +14454,7 @@ GLOBAL void toc_end_node (void)
 		case TOC_NODE2:	p1_toctype= TOC_NODE1;	break;
 		case TOC_NODE3:	p1_toctype= TOC_NODE2;	break;
 		case TOC_NODE4:	p1_toctype= TOC_NODE3;	break;
+		case TOC_NODE5:	p1_toctype= TOC_NODE4;	break;
 	}
 
 }	/* toc_end_node */
@@ -12965,7 +14470,6 @@ GLOBAL int get_toc_counter(void)
 {
 	return p2_toc_counter;
 }
-
 
 /*	############################################################
 	#
@@ -13274,6 +14778,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
 	BOOLEAN n1HadChildren= FALSE;
 	BOOLEAN n2HadChildren= FALSE;
 	BOOLEAN n3HadChildren= FALSE;
+	BOOLEAN n4HadChildren= FALSE;
 
 	cntfile= myFwopen(sCntfull, FTCNT);
 
@@ -13340,6 +14845,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
 
 							n2HadChildren= FALSE;
 							n3HadChildren= FALSE;
+							n4HadChildren= FALSE;
 						}/* TOC_NODE1 */
 
 
@@ -13367,6 +14873,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
 							}
 
 							n3HadChildren= FALSE;
+							n4HadChildren= FALSE;
 						}/* TOC_NODE2 */
 
 						if ( toc[i]->toctype==TOC_NODE3 )
@@ -13392,6 +14899,8 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
 							else
 							{	fprintf(cntfile, "3 %s=%s\n", sName, sID);
 							}
+
+							n4HadChildren= FALSE;
 						}/* TOC_NODE3 */
 
 						if ( toc[i]->toctype==TOC_NODE4 )
@@ -13410,9 +14919,36 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
 									toc[i]->name);
 							}
 							win2sys(sName);
-							fprintf(cntfile, "4 %s=%s\n", sName, sID);
+							if (n4HadChildren || toc[i]->has_children)
+							{	fprintf(cntfile, "4 %s\n", sName);
+								fprintf(cntfile, "5 %s=%s\n", sName, sID);
+								n4HadChildren= TRUE;
+							}
+							else
+							{	fprintf(cntfile, "4 %s=%s\n", sName, sID);
+							}
 						}/* TOC_NODE4 */
 
+
+						if ( toc[i]->toctype==TOC_NODE5 )
+						{	/* Ein Paragraph */
+							li= toc[i]->labindex;
+							node2NrWinhelp(sID, li);
+							if (no_numbers)
+							{	strcpy(sName, toc[i]->name);
+							}
+							else
+							{	sprintf(sName, "[%d.%d.%d.%d.%d] %s",
+									toc[i]->nr1+toc_offset,
+									toc[i]->nr2+subtoc_offset,
+									toc[i]->nr3+subsubtoc_offset,
+									toc[i]->nr4+subsubsubtoc_offset,
+									toc[i]->nr5+subsubsubsubtoc_offset,
+									toc[i]->name);
+							}
+							win2sys(sName);
+							fprintf(cntfile, "5 %s=%s\n", sName, sID);
+						}/* TOC_NODE5 */
 
 					}/* toc[i]->n1 > 0 */
 
@@ -13428,6 +14964,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
 			n1HadChildren= FALSE;
 			n2HadChildren= FALSE;
 			n3HadChildren= FALSE;
+			n4HadChildren= FALSE;
 
 			fprintf(cntfile, "1 %s\n", lang.appendix);
 
@@ -13466,6 +15003,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
 
 								n2HadChildren= FALSE;
 								n3HadChildren= FALSE;
+								n4HadChildren= FALSE;
 
 							}/* TOC_NODE1 */
 
@@ -13494,6 +15032,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
 								}
 
 								n3HadChildren= FALSE;
+								n4HadChildren= FALSE;
 
 							}/* TOC_NODE2 */
 
@@ -13520,6 +15059,8 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
 								else
 								{	fprintf(cntfile, "4 %s=%s\n", sName, sID);
 								}
+
+								n4HadChildren= FALSE;
 							}/* TOC_NODE3 */
 
 							if ( toc[i]->toctype==TOC_NODE4 )
@@ -13538,9 +15079,36 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
 										toc[i]->name);
 								}
 								win2sys(sName);
-								fprintf(cntfile, "5 %s=%s\n", sName, sID);
+								if (n4HadChildren || toc[i]->has_children)
+								{	fprintf(cntfile, "5 %s\n", sName);
+									fprintf(cntfile, "6 %s=%s\n", sName, sID);
+									n4HadChildren= TRUE;
+								}
+								else
+								{	fprintf(cntfile, "5 %s=%s\n", sName, sID);
+								}
 							}/* TOC_NODE4 */
 
+
+							if ( toc[i]->toctype==TOC_NODE5 )
+							{	/* Ein Paragraph */				/* ToDo: ??? */
+								li= toc[i]->labindex;
+								node2NrWinhelp(sID, li);
+								if (no_numbers)
+								{	strcpy(sName, toc[i]->name);
+								}
+								else
+								{	sprintf(sName, "[%c.%d.%d.%d.%d] %s",
+										'A'-1+toc[i]->nr1,
+										toc[i]->nr2,
+										toc[i]->nr3,
+										toc[i]->nr4,
+										toc[i]->nr5,
+										toc[i]->name);
+								}
+								win2sys(sName);
+								fprintf(cntfile, "6 %s=%s\n", sName, sID);
+							}/* TOC_NODE5 */
 
 						}/* toc[i]->n1 > 0 */
 
@@ -13575,47 +15143,68 @@ LOCAL void init_toc_forms_numbers ( void )
 /* 560 */	strcpy(form_t1_n2, "\\li880\\fi-560\\tx880 %d.%d\\tab{%s}\\par\\pard");
 /* 920 */	strcpy(form_t1_n3, "\\li1800\\fi-920\\tx1800 %d.%d.%d\\tab{%s}\\par\\pard");
 /*1000 */	strcpy(form_t1_n4, "\\li2800\\fi-1000\\tx2800 %d.%d.%d.%d\\tab{%s}\\par\\pard");
+			strcpy(form_t1_n5, "\\li2800\\fi-1000\\tx2800 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
 			strcpy(form_t2_n2, "\\li480\\fi-480\\tx480 %d.%d\\tab{%s}\\par\\pard");
 			strcpy(form_t2_n3, "\\li1400\\fi-920\\tx1400 %d.%d.%d\\tab{%s}\\par\\pard");
 			strcpy(form_t2_n4, "\\li2400\\fi-1000\\tx2400 %d.%d.%d.%d\\tab{%s}\\par\\pard");
+			strcpy(form_t2_n5, "\\li2400\\fi-1000\\tx2400 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
 			strcpy(form_t3_n3, "\\li880\\fi-880\\tx880 %d.%d.%d\\tab{%s}\\par\\pard");
 			strcpy(form_t3_n4, "\\li1800\\fi-920\\tx1800 %d.%d.%d.%d\\tab{%s}\\par\\pard");
+			strcpy(form_t3_n5, "\\li1800\\fi-920\\tx1800 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
 			strcpy(form_t4_n4, "\\li880\\fi-880\\tx880 %d.%d.%d.%d\\tab{%s}\\par\\pard");
+			strcpy(form_t4_n5, "\\li880\\fi-880\\tx880 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
+			strcpy(form_t5_n5, "\\li880\\fi-880\\tx880 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
 
 			strcpy(form_a1_n1, "\\li320\\fi-320\\tx320 %c\\tab{%s}\\par\\pard");
 /* 560 */	strcpy(form_a1_n2, "\\li880\\fi-560\\tx880 %c.%d\\tab{%s}\\par\\pard");
 /* 920 */	strcpy(form_a1_n3, "\\li1800\\fi-920\\tx1800 %c.%d.%d\\tab{%s}\\par\\pard");
 /*1000 */	strcpy(form_a1_n4, "\\li2800\\fi-1000\\tx2800 %c.%d.%d.%d\\tab{%s}\\par\\pard");
+			strcpy(form_a1_n5, "\\li2800\\fi-1000\\tx2800 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
 			strcpy(form_a2_n2, "\\li480\\fi-480\\tx480 %c.%d\\tab{%s}\\par\\pard");
 			strcpy(form_a2_n3, "\\li1400\\fi-920\\tx1400 %c.%d.%d\\tab{%s}\\par\\pard");
 			strcpy(form_a2_n4, "\\li2400\\fi-1000\\tx2400 %c.%d.%d.%d\\tab{%s}\\par\\pard");
+			strcpy(form_a2_n5, "\\li2400\\fi-1000\\tx2400 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
 			strcpy(form_a3_n3, "\\li880\\fi-880\\tx880 %c.%d.%d\\tab{%s}\\par\\pard");
 			strcpy(form_a3_n4, "\\li1800\\fi-920\\tx1800 %c.%d.%d.%d\\tab{%s}\\par\\pard");
+			strcpy(form_a3_n5, "\\li1800\\fi-920\\tx1800 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
 			strcpy(form_a4_n4, "\\li880\\fi-880\\tx880 %c.%d.%d.%d\\tab{%s}\\par\\pard");
+			strcpy(form_a4_n5, "\\li880\\fi-880\\tx880 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
+			strcpy(form_a5_n5, "\\li880\\fi-880\\tx880 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
 			break;
+
 
 		case TOWH4:
 			strcpy(form_t1_n1, "\\li300\\fi-300\\tx300 %d\\tab{%s}\\par\\pard");
 /* 560 */	strcpy(form_t1_n2, "\\li800\\fi-500\\tx800 %d.%d\\tab{%s}\\par\\pard");
 /* 920 */	strcpy(form_t1_n3, "\\li1600\\fi-800\\tx1600 %d.%d.%d\\tab{%s}\\par\\pard");
 /*1000 */	strcpy(form_t1_n4, "\\li2600\\fi-1000\\tx2600 %d.%d.%d.%d\\tab{%s}\\par\\pard");
+			strcpy(form_t1_n5, "\\li2600\\fi-1000\\tx2600 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
 			strcpy(form_t2_n2, "\\li400\\fi-400\\tx400 %d.%d\\tab{%s}\\par\\pard");
 			strcpy(form_t2_n3, "\\li1300\\fi-920\\tx1300 %d.%d.%d\\tab{%s}\\par\\pard");
 			strcpy(form_t2_n4, "\\li2200\\fi-1000\\tx2200 %d.%d.%d.%d\\tab{%s}\\par\\pard");
+			strcpy(form_t2_n5, "\\li2200\\fi-1000\\tx2200 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
 			strcpy(form_t3_n3, "\\li800\\fi-800\\tx800 %d.%d.%d\\tab{%s}\\par\\pard");
 			strcpy(form_t3_n4, "\\li1600\\fi-920\\tx1600 %d.%d.%d.%d\\tab{%s}\\par\\pard");
+			strcpy(form_t3_n5, "\\li1600\\fi-920\\tx1600 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
 			strcpy(form_t4_n4, "\\li800\\fi-800\\tx800 %d.%d.%d.%d\\tab{%s}\\par\\pard");
+			strcpy(form_t4_n5, "\\li800\\fi-800\\tx800 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
+			strcpy(form_t5_n5, "\\li800\\fi-800\\tx800 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
 
 			strcpy(form_a1_n1, "\\li300\\fi-300\\tx300 %c\\tab{%s}\\par\\pard");
 /* 560 */	strcpy(form_a1_n2, "\\li800\\fi-500\\tx800 %c.%d\\tab{%s}\\par\\pard");
 /* 920 */	strcpy(form_a1_n3, "\\li1600\\fi-800\\tx1600 %c.%d.%d\\tab{%s}\\par\\pard");
 /*1000 */	strcpy(form_a1_n4, "\\li2600\\fi-1000\\tx2600 %c.%d.%d.%d\\tab{%s}\\par\\pard");
+			strcpy(form_a1_n5, "\\li2600\\fi-1000\\tx2600 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
 			strcpy(form_a2_n2, "\\li400\\fi-400\\tx400 %c.%d\\tab{%s}\\par\\pard");
 			strcpy(form_a2_n3, "\\li1300\\fi-920\\tx1300 %c.%d.%d\\tab{%s}\\par\\pard");
 			strcpy(form_a2_n4, "\\li2200\\fi-1000\\tx2200 %c.%d.%d.%d\\tab{%s}\\par\\pard");
+			strcpy(form_a2_n5, "\\li2200\\fi-1000\\tx2200 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
 			strcpy(form_a3_n3, "\\li800\\fi-800\\tx800 %c.%d.%d\\tab{%s}\\par\\pard");
 			strcpy(form_a3_n4, "\\li1600\\fi-920\\tx1600 %c.%d.%d.%d\\tab{%s}\\par\\pard");
+			strcpy(form_a3_n5, "\\li1600\\fi-920\\tx1600 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
 			strcpy(form_a4_n4, "\\li800\\fi-800\\tx800 %c.%d.%d.%d\\tab{%s}\\par\\pard");
+			strcpy(form_a4_n5, "\\li800\\fi-800\\tx800 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
+			strcpy(form_a5_n5, "\\li800\\fi-800\\tx800 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
 			break;
 
 		case TOHAH:			/* V6.5.17 */
@@ -13625,23 +15214,33 @@ LOCAL void init_toc_forms_numbers ( void )
 			strcpy(form_t1_n2, "<li>%2d.%d %s</li>");
 			strcpy(form_t1_n3, "<li>%2d.%d.%d %s</li>");
 			strcpy(form_t1_n4, "<li>%2d.%d.%d.%d %s</li>");
+			strcpy(form_t1_n5, "<li>%2d.%d.%d.%d.%d %s</li>");
 			strcpy(form_t2_n2, form_t1_n2);
 			strcpy(form_t2_n3, form_t1_n3);
 			strcpy(form_t2_n4, form_t1_n4);
+			strcpy(form_t2_n5, form_t1_n5);
 			strcpy(form_t3_n3, form_t1_n3);
 			strcpy(form_t3_n4, form_t1_n4);
+			strcpy(form_t3_n5, form_t1_n5);
 			strcpy(form_t4_n4, form_t1_n4);
+			strcpy(form_t4_n5, form_t1_n5);
+			strcpy(form_t5_n5, form_t1_n5);
 
 			strcpy(form_a1_n1, "<li>%c %s</li>");
 			strcpy(form_a1_n2, "<li>%c.%d %s</li>");
 			strcpy(form_a1_n3, "<li>%c.%d.%d %s</li>");
 			strcpy(form_a1_n4, "<li>%c.%d.%d.%d %s</li>");
+			strcpy(form_a1_n5, "<li>%c.%d.%d.%d.%d %s</li>");
 			strcpy(form_a2_n2, form_a1_n2);
 			strcpy(form_a2_n3, form_a1_n3);
 			strcpy(form_a2_n4, form_a1_n4);
+			strcpy(form_a2_n5, form_a1_n5);
 			strcpy(form_a3_n3, form_a1_n3);
 			strcpy(form_a3_n4, form_a1_n4);
+			strcpy(form_a3_n5, form_a1_n5);
 			strcpy(form_a4_n4, form_a1_n4);
+			strcpy(form_a4_n5, form_a1_n5);
+			strcpy(form_a5_n5, form_a1_n5);
 			break;
 
 		case TOTEX:
@@ -13650,23 +15249,33 @@ LOCAL void init_toc_forms_numbers ( void )
 			strcpy(form_t1_n2, "\\item %d.%d %s");
 			strcpy(form_t1_n3, "\\item %d.%d.%d %s");
 			strcpy(form_t1_n4, "\\item %d.%d.%d.%d %s");
+			strcpy(form_t1_n5, "\\item %d.%d.%d.%d.%d %s");
 			strcpy(form_t2_n2, form_t1_n2);
 			strcpy(form_t2_n3, form_t1_n3);
 			strcpy(form_t2_n4, form_t1_n4);
+			strcpy(form_t2_n5, form_t1_n5);
 			strcpy(form_t3_n3, form_t1_n3);
 			strcpy(form_t3_n4, form_t1_n4);
+			strcpy(form_t3_n5, form_t1_n5);
 			strcpy(form_t4_n4, form_t1_n4);
+			strcpy(form_t4_n5, form_t1_n5);
+			strcpy(form_t5_n5, form_t1_n5);
 
 			strcpy(form_a1_n1, "\\item %d %s");
 			strcpy(form_a1_n2, "\\item %d.%d %s");
 			strcpy(form_a1_n3, "\\item %d.%d.%d %s");
 			strcpy(form_a1_n4, "\\item %d.%d.%d.%d %s");
+			strcpy(form_a1_n5, "\\item %d.%d.%d.%d.%d %s");
 			strcpy(form_a2_n2, form_t1_n2);
 			strcpy(form_a2_n3, form_t1_n3);
 			strcpy(form_a2_n4, form_t1_n4);
+			strcpy(form_a2_n5, form_t1_n5);
 			strcpy(form_a3_n3, form_t1_n3);
 			strcpy(form_a3_n4, form_t1_n4);
+			strcpy(form_a3_n5, form_t1_n5);
 			strcpy(form_a4_n4, form_t1_n4);
+			strcpy(form_a4_n5, form_t1_n5);
+			strcpy(form_a5_n5, form_t1_n5);
 			break;
 
 		/* New in r6pl15 [NHz] */
@@ -13675,23 +15284,33 @@ LOCAL void init_toc_forms_numbers ( void )
 			strcpy(form_t1_n2, "(   %2d.%d ) udoshow %s newline");
 			strcpy(form_t1_n3, "(         %2d.%d.%d ) udoshow  %s newline");
 			strcpy(form_t1_n4, "(               %2d.%d.%d.%d ) udoshow %s newline");
+			strcpy(form_t1_n5, "(                     %2d.%d.%d.%d.%d ) udoshow %s newline");
 			strcpy(form_t2_n2, "(%2d.%d ) udoshow %s newline");
 			strcpy(form_t2_n3, "(      %2d.%d.%d ) udoshow %s newline");
 			strcpy(form_t2_n4, "(            %2d.%d.%d.%d ) udoshow %s newline");
+			strcpy(form_t2_n5, "(                  %2d.%d.%d.%d.%d ) udoshow %s newline");
 			strcpy(form_t3_n3, "(%2d.%d.%d ) udoshow %s newline");
 			strcpy(form_t3_n4, "(         %2d.%d.%d.%d ) udoshow %s newline");
+			strcpy(form_t3_n5, "(              %2d.%d.%d.%d.%d ) udoshow %s newline");
 			strcpy(form_t4_n4, "(%2d.%d.%d.%d ) udoshow %s newline");
+			strcpy(form_t4_n5, "(     %2d.%d.%d.%d.%d ) udoshow %s newline");
+			strcpy(form_t5_n5, "(%2d.%d.%d.%d.%d ) udoshow %s newline");
 
 			strcpy(form_a1_n1, "( %c ) udoshow %s newline");
 			strcpy(form_a1_n2, "(    %c.%d ) udoshow %s newline");
 			strcpy(form_a1_n3, "(         %c.%d.%d ) udoshow  %s newline");
 			strcpy(form_a1_n4, "(                 %c.%d.%d.%d ) udoshow %s newline");
+			strcpy(form_a1_n5, "(                     %c.%d.%d.%d.%d ) udoshow %s newline");
 			strcpy(form_a2_n2, "( %c.%d ) udoshow %s newline");
 			strcpy(form_a2_n3, "(      %c.%d.%d ) udoshow %s newline");
 			strcpy(form_a2_n4, "(              %c.%d.%d.%d ) udoshow %s newline");
+			strcpy(form_a2_n5, "(                  %c.%d.%d.%d.%d ) udoshow %s newline");
 			strcpy(form_a3_n3, "( %c.%d.%d ) udoshow %s newline");
 			strcpy(form_a3_n4, "(         %c.%d.%d.%d ) udoshow %s newline");
+			strcpy(form_a3_n5, "(             %c.%d.%d.%d.%d ) udoshow %s newline");
 			strcpy(form_a4_n4, "( %c.%d.%d.%d ) udoshow %s newline");
+			strcpy(form_a4_n5, "(     %c.%d.%d.%d.%d ) udoshow %s newline");
+			strcpy(form_a5_n5, "( %c.%d.%d.%d.%d ) udoshow %s newline");
 			break;
 
 /*		case TOKPS:
@@ -13723,23 +15342,32 @@ LOCAL void init_toc_forms_numbers ( void )
 			strcpy(form_t1_n2, "   %2d.%d  %s");
 			strcpy(form_t1_n3, "        %2d.%d.%d  %s");
 			strcpy(form_t1_n4, "               %2d.%d.%d.%d  %s");
+			strcpy(form_t1_n5, "                      %2d.%d.%d.%d.%d  %s");
 			strcpy(form_t2_n2, "%2d.%d  %s");
 			strcpy(form_t2_n3, "     %2d.%d.%d  %s");
 			strcpy(form_t2_n4, "            %2d.%d.%d.%d  %s");
+			strcpy(form_t2_n5, "                   %2d.%d.%d.%d.%d  %s");
 			strcpy(form_t3_n3, "%2d.%d.%d  %s");
 			strcpy(form_t3_n4, "       %2d.%d.%d.%d  %s");
+			strcpy(form_t3_n5, "              %2d.%d.%d.%d.%d  %s");
 			strcpy(form_t4_n4, "%2d.%d.%d.%d  %s");
+			strcpy(form_t4_n5, "       %2d.%d.%d.%d.%d  %s");
+			strcpy(form_t5_n5, "%2d.%d.%d.%d.%d  %s");
 
 			strcpy(form_a1_n1, " %c  %s");
 			strcpy(form_a1_n2, "    %c.%d  %s");
 			strcpy(form_a1_n3, "         %c.%d.%d  %s");
 			strcpy(form_a1_n4, "                %c.%d.%d.%d  %s");
+			strcpy(form_a1_n5, "                       %c.%d.%d.%d.%d  %s");
 			strcpy(form_a2_n2, " %c.%d  %s");
 			strcpy(form_a2_n3, "    %c.%d.%d  %s");
 			strcpy(form_a2_n4, "           %c.%d.%d.%d  %s");
+			strcpy(form_a2_n5, "                  %c.%d.%d.%d.%d  %s");
 			strcpy(form_a3_n3, " %c.%d.%d  %s");
 			strcpy(form_a3_n4, "        %c.%d.%d.%d  %s");
+			strcpy(form_a3_n5, "               %c.%d.%d.%d.%d  %s");
 			strcpy(form_a4_n4, " %c.%d.%d.%d  %s");
+			strcpy(form_a4_n5, "        %c.%d.%d.%d.%d  %s");
 			break;
 	}
 
@@ -13758,23 +15386,33 @@ LOCAL void init_toc_forms_no_numbers ( void )
 			strcpy(form_t1_n2, "\\li560{%s}\\par\\pard");
 			strcpy(form_t1_n3, "\\li1120{%s}\\par\\pard");
 			strcpy(form_t1_n4, "\\li1680{%s}\\par\\pard");
+			strcpy(form_t1_n5, "\\li1680{%s}\\par\\pard"); /* ToDo: ??? */
 			strcpy(form_t2_n2, "{%s}\\par\\pard");
 			strcpy(form_t2_n3, "\\li560{%s}\\par\\pard");
 			strcpy(form_t2_n4, "\\li1120{%s}\\par\\pard");
+			strcpy(form_t2_n5, "\\li1120{%s}\\par\\pard"); /* ToDo: ??? */
 			strcpy(form_t3_n3, "{%s}\\par\\pard");
 			strcpy(form_t3_n4, "\\li560{%s}\\par\\pard");
+			strcpy(form_t3_n5, "\\li560{%s}\\par\\pard"); /* ToDo: ??? */
 			strcpy(form_t4_n4, "{%s}\\par\\pard");
+			strcpy(form_t4_n5, "{%s}\\par\\pard"); /* ToDo: ??? */
+			strcpy(form_t5_n5, "{%s}\\par\\pard"); /* ToDo: ??? */
 
 			strcpy(form_a1_n1, form_t1_n1);
 			strcpy(form_a1_n2, form_t1_n2);
 			strcpy(form_a1_n3, form_t1_n3);
 			strcpy(form_a1_n4, form_t1_n4);
+			strcpy(form_a1_n5, form_t1_n5);
 			strcpy(form_a2_n2, form_t2_n2);
 			strcpy(form_a2_n3, form_t2_n3);
 			strcpy(form_a2_n4, form_t2_n4);
+			strcpy(form_a2_n5, form_t2_n5);
 			strcpy(form_a3_n3, form_t3_n3);
 			strcpy(form_a3_n4, form_t3_n4);
+			strcpy(form_a3_n5, form_t3_n5);
 			strcpy(form_a4_n4, form_t4_n4);
+			strcpy(form_a4_n5, form_t4_n5);
+			strcpy(form_a5_n5, form_t5_n5);
 			break;
 
 		case TOHAH:			/* V6.5.17 */
@@ -13786,23 +15424,33 @@ LOCAL void init_toc_forms_no_numbers ( void )
 			strcpy(form_t1_n2, s);
 			strcpy(form_t1_n3, s);
 			strcpy(form_t1_n4, s);
+			strcpy(form_t1_n5, s);
 			strcpy(form_t2_n2, s);
 			strcpy(form_t2_n3, s);
 			strcpy(form_t2_n4, s);
+			strcpy(form_t2_n4, s);
 			strcpy(form_t3_n3, s);
 			strcpy(form_t3_n4, s);
+			strcpy(form_t3_n5, s);
 			strcpy(form_t4_n4, s);
+			strcpy(form_t4_n5, s);
+			strcpy(form_t5_n5, s);
 
 			strcpy(form_a1_n1, s);
 			strcpy(form_a1_n2, s);
 			strcpy(form_a1_n3, s);
 			strcpy(form_a1_n4, s);
+			strcpy(form_a1_n5, s);
 			strcpy(form_a2_n2, s);
 			strcpy(form_a2_n3, s);
 			strcpy(form_a2_n4, s);
+			strcpy(form_a2_n5, s);
 			strcpy(form_a3_n3, s);
 			strcpy(form_a3_n4, s);
+			strcpy(form_a3_n5, s);
 			strcpy(form_a4_n4, s);
+			strcpy(form_a4_n5, s);
+			strcpy(form_a5_n5, s);
 			break;
 
 		case TOTEX:
@@ -13813,23 +15461,33 @@ LOCAL void init_toc_forms_no_numbers ( void )
 			strcpy(form_t1_n2, s);
 			strcpy(form_t1_n3, s);
 			strcpy(form_t1_n4, s);
+			strcpy(form_t1_n5, s);
 			strcpy(form_t2_n2, s);
 			strcpy(form_t2_n3, s);
 			strcpy(form_t2_n4, s);
+			strcpy(form_t2_n4, s);
 			strcpy(form_t3_n3, s);
 			strcpy(form_t3_n4, s);
+			strcpy(form_t3_n5, s);
 			strcpy(form_t4_n4, s);
+			strcpy(form_t4_n5, s);
+			strcpy(form_t5_n5, s);
 
 			strcpy(form_a1_n1, s);
 			strcpy(form_a1_n2, s);
 			strcpy(form_a1_n3, s);
 			strcpy(form_a1_n4, s);
+			strcpy(form_a1_n5, s);
 			strcpy(form_a2_n2, s);
 			strcpy(form_a2_n3, s);
 			strcpy(form_a2_n4, s);
+			strcpy(form_a2_n5, s);
 			strcpy(form_a3_n3, s);
 			strcpy(form_a3_n4, s);
+			strcpy(form_a3_n5, s);
 			strcpy(form_a4_n4, s);
+			strcpy(form_a4_n5, s);
+			strcpy(form_a5_n5, s);
 			break;
 
 		case TOINF:
@@ -13839,23 +15497,33 @@ LOCAL void init_toc_forms_no_numbers ( void )
 			strcpy(form_t1_n2, s);
 			strcpy(form_t1_n3, s);
 			strcpy(form_t1_n4, s);
+			strcpy(form_t1_n5, s);
 			strcpy(form_t2_n2, s);
 			strcpy(form_t2_n3, s);
 			strcpy(form_t2_n4, s);
+			strcpy(form_t2_n4, s);
 			strcpy(form_t3_n3, s);
 			strcpy(form_t3_n4, s);
+			strcpy(form_t3_n5, s);
 			strcpy(form_t4_n4, s);
+			strcpy(form_t4_n5, s);
+			strcpy(form_t5_n5, s);
 
 			strcpy(form_a1_n1, s);
 			strcpy(form_a1_n2, s);
 			strcpy(form_a1_n3, s);
 			strcpy(form_a1_n4, s);
+			strcpy(form_a1_n5, s);
 			strcpy(form_a2_n2, s);
 			strcpy(form_a2_n3, s);
 			strcpy(form_a2_n4, s);
+			strcpy(form_a2_n5, s);
 			strcpy(form_a3_n3, s);
 			strcpy(form_a3_n4, s);
+			strcpy(form_a3_n5, s);
 			strcpy(form_a4_n4, s);
+			strcpy(form_a4_n5, s);
+			strcpy(form_a5_n5, s);
 			break;
 
 		/* New in r6pl15 [NHz] */
@@ -13864,23 +15532,33 @@ LOCAL void init_toc_forms_no_numbers ( void )
 			strcpy(form_t1_n2, "    %s newline");
 			strcpy(form_t1_n3, "       %s newline");
 			strcpy(form_t1_n4, "          %s newline");
+			strcpy(form_t1_n5, "             %s newline");
 			strcpy(form_t2_n2, " %s newline");
 			strcpy(form_t2_n3, "    %s newline");
 			strcpy(form_t2_n4, "       %s newline");
+			strcpy(form_t2_n5, "          %s newline");
 			strcpy(form_t3_n3, " %s newline");
 			strcpy(form_t3_n4, "    %s newline");
+			strcpy(form_t3_n5, "      %s newline");
 			strcpy(form_t4_n4, " %s newline");
+			strcpy(form_t4_n5, "   %s newline");
+			strcpy(form_t5_n5, " %s newline");
 
 			strcpy(form_a1_n1, " %s newline");
 			strcpy(form_a1_n2, "    %s newline");
 			strcpy(form_a1_n3, "       %s newline");
 			strcpy(form_a1_n4, "          %s newline");
+			strcpy(form_a1_n5, "             %s newline");
 			strcpy(form_a2_n2, " %s newline");
 			strcpy(form_a2_n3, "    %s newline");
 			strcpy(form_a2_n4, "       %s newline");
+			strcpy(form_a2_n5, "          %s newline");
 			strcpy(form_a3_n3, " %s newline");
 			strcpy(form_a3_n4, "    %s newline");
+			strcpy(form_a3_n5, "       %s newline");
 			strcpy(form_a4_n4, " %s newline");
+			strcpy(form_a4_n5, "    %s newline");
+			strcpy(form_a5_n5, " %s newline");
 			break;
 
 		default:
@@ -13888,23 +15566,33 @@ LOCAL void init_toc_forms_no_numbers ( void )
 			strcpy(form_t1_n2, "    %s");
 			strcpy(form_t1_n3, "       %s");
 			strcpy(form_t1_n4, "          %s");
+			strcpy(form_t1_n5, "             %s");
 			strcpy(form_t2_n2, " %s");
 			strcpy(form_t2_n3, "    %s");
 			strcpy(form_t2_n4, "       %s");
+			strcpy(form_t2_n5, "          %s");
 			strcpy(form_t3_n3, " %s");
 			strcpy(form_t3_n4, "    %s");
+			strcpy(form_t3_n5, "       %s");
 			strcpy(form_t4_n4, " %s");
+			strcpy(form_t4_n5, "    %s");
+			strcpy(form_t5_n5, " %s");
 
 			strcpy(form_a1_n1, " %s");
 			strcpy(form_a1_n2, "    %s");
 			strcpy(form_a1_n3, "       %s");
 			strcpy(form_a1_n4, "          %s");
+			strcpy(form_a1_n5, "             %s");
 			strcpy(form_a2_n2, " %s");
 			strcpy(form_a2_n3, "    %s");
 			strcpy(form_a2_n4, "       %s");
+			strcpy(form_a2_n5, "          %s");
 			strcpy(form_a3_n3, " %s");
 			strcpy(form_a3_n4, "    %s");
+			strcpy(form_a3_n5, "       %s");
 			strcpy(form_a4_n4, " %s");
+			strcpy(form_a4_n5, "    %s");
+			strcpy(form_a5_n5, " %s");
 			break;
 	}
 
@@ -13937,6 +15625,7 @@ GLOBAL void init_module_toc_pass2 ( void )
 	{	subtocs1_depth= 1;
 		subtocs2_depth= 1;
 		subtocs3_depth= 1;
+		subtocs4_depth= 1;
 	}
 
 	if (subtocs1_depth<=0 || subtocs1_depth>9)
@@ -13951,6 +15640,9 @@ GLOBAL void init_module_toc_pass2 ( void )
 	{	subtocs3_depth= 9;
 	}
 
+	if (subtocs4_depth<=0 || subtocs4_depth>9)
+	{	subtocs4_depth= 9;
+	}
 	/* Die Formatkommando angeben, die fuer die Inhaltsausgabe */
 	/* verwendet werden, um die Einrueckungen der Listen */
 	/* zu erzeugen */
@@ -14116,6 +15808,11 @@ GLOBAL BOOLEAN check_module_toc_pass1 ( void )
 					{
 						checkString= FALSE;
 
+						if (html_merge_node5)
+						{
+							checkString= ( (toc[i]->n1 != toc[j]->n1) || (toc[i]->n2 != toc[j]->n2) || (toc[i]->n3 != toc[j]->n3) || (toc[i]->n4 != toc[j]->n4));
+						}
+
 						if (html_merge_node4)
 						{
 							checkString= ( (toc[i]->n1 != toc[j]->n1) || (toc[i]->n2 != toc[j]->n2) || (toc[i]->n3 != toc[j]->n3));
@@ -14205,6 +15902,7 @@ GLOBAL void init_module_toc ( void )
 	subtoc_offset= 0;
 	subsubtoc_offset= 0;
 	subsubsubtoc_offset= 0;
+	subsubsubsubtoc_offset= 0;		/* [GS] */
 
 
 	/*	--------------------------------------------------------------	*/
@@ -14214,6 +15912,7 @@ GLOBAL void init_module_toc ( void )
 	curr_n1_index= 0;
 	curr_n2_index= 0;
 	curr_n3_index= 0;
+	curr_n4_index= 0;		/* [GS] */
 
 
 	/*	--------------------------------------------------------------	*/
@@ -14234,18 +15933,18 @@ GLOBAL void init_module_toc ( void )
 	/*	1.2.3  Node:    n1=1, n2=2, n3=3, n4=0							*/
 	/*	1.2.3.4  Node:  n1=1, n2=2, n3=3, n4=4							*/
 	/*	--------------------------------------------------------------	*/
-	p1_toc_n1= 0;	p1_toc_n2= 0;	p1_toc_n3= 0;	p1_toc_n4= 0;
-	p1_apx_n1= 0;	p1_apx_n2= 0;	p1_apx_n3= 0;	p1_apx_n4= 0;
+	p1_toc_n1= 0;	p1_toc_n2= 0;	p1_toc_n3= 0;	p1_toc_n4= 0;	p1_toc_n5= 0;
+	p1_apx_n1= 0;	p1_apx_n2= 0;	p1_apx_n3= 0;	p1_apx_n4= 0;	p1_apx_n5= 0;
 
-	p2_toc_n1= 0;	p2_toc_n2= 0;	p2_toc_n3= 0;	p2_toc_n4= 0;
-	p2_apx_n1= 0;	p2_apx_n2= 0;	p2_apx_n3= 0;	p2_apx_n4= 0;
+	p2_toc_n1= 0;	p2_toc_n2= 0;	p2_toc_n3= 0;	p2_toc_n4= 0;	p2_toc_n5= 0;
+	p2_apx_n1= 0;	p2_apx_n2= 0;	p2_apx_n3= 0;	p2_apx_n4= 0;	p2_apx_n5= 0;
 
 
 	/*	--------------------------------------------------------------	*/
 	/*	Hier nun die Nummern, wie sie im Inhaltsverzeichis erscheinen	*/
 	/*	--------------------------------------------------------------	*/
-	p1_toc_nr1= 0;	p1_toc_nr2= 0;	p1_toc_nr3= 0;	p1_toc_nr4= 0;
-	p1_apx_nr1= 0;	p1_apx_nr2= 0;	p1_apx_nr3= 0;	p1_apx_nr4= 0;
+	p1_toc_nr1= 0;	p1_toc_nr2= 0;	p1_toc_nr3= 0;	p1_toc_nr4= 0; p1_toc_nr5= 0;
+	p1_apx_nr1= 0;	p1_apx_nr2= 0;	p1_apx_nr3= 0;	p1_apx_nr4= 0;	p1_apx_nr5= 0;
 
 
 
@@ -14259,6 +15958,7 @@ GLOBAL void init_module_toc ( void )
 	last_n2_index= 0;
 	last_n3_index= 0;
 	last_n4_index= 0;
+	last_n5_index= 0;		/* [GS] */
 
 
 	/*	--------------------------------------------------------------	*/
@@ -14273,7 +15973,7 @@ GLOBAL void init_module_toc ( void )
 	/*	Ebene benutzt wird. In der LaTeX-Preambel mussen dann einige	*/
 	/*	Befehle zusaetzlich ausgegeben werden.							*/
 	/*	--------------------------------------------------------------	*/
-	called_subsubsubnode= FALSE;
+	called_subsubsubsubnode= FALSE;	/* [GS] */
 
 
 	/*	--------------------------------------------------------------	*/
@@ -14285,7 +15985,7 @@ GLOBAL void init_module_toc ( void )
 	/*	des toc[]-Arrays.												*/
 	/*	--------------------------------------------------------------	*/
 	p1_toc_counter= 0;
-	p2_toc_counter=	0;	
+	p2_toc_counter= 0;	
 
 
 	/*	--------------------------------------------------------------	*/
@@ -14311,6 +16011,7 @@ GLOBAL void init_module_toc ( void )
 	all_subnodes= 0;
 	all_subsubnodes= 0;
 	all_subsubsubnodes= 0;
+	all_subsubsubsubnodes= 0;  /* [GS] */
 
 
 	/*	--------------------------------------------------------------	*/
@@ -14332,6 +16033,7 @@ GLOBAL void init_module_toc ( void )
 	subtocs1_depth= 9;				/*r6pl2*/
 	subtocs2_depth= 9;				/*r6pl2*/
 	subtocs3_depth= 9;				/*r6pl2*/
+	subtocs4_depth= 9;				/*r6pl2*/
 
 	no_auto_toptocs_icons= FALSE;	/*r6pl13*/
 
