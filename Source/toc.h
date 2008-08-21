@@ -46,6 +46,7 @@ typedef struct _label
    int       n2;                          /* ... Abschnitt */
    int       n3;                          /* ... Unterabschnitt */
    int       n4;                          /* ... Unterabschnitt */
+   int       n5;                          /* ... Unterabschnitt */
    BOOLEAN   appendix;                    /* Das Label steht im Anhang */
    BOOLEAN   is_node;                     /* Das Label ist die Ueberschrift */
    BOOLEAN   is_popup;                    /* Der Node soll ein Popup sein */
@@ -77,27 +78,28 @@ typedef struct _style
    --------------------------------------------------   */
 typedef struct _tocitem
 {
-   char   name[MAX_NODE_LEN+1];         /* Der Eintrag selber            */
+   char   name[MAX_NODE_LEN+1];        /* Der Eintrag selber            */
    int      n1;                        /* Kapitelnummer (absolut)         */
    int      n2;                        /* Abschnittnummer (absolut)      */
    int      n3;                        /* Unterabschnittnummer   (absolut)   */
    int      n4;                        /* Unterabschnittnummer   (absolut)   */
-   int      nr1, nr2, nr3, nr4;            /* Inhaltsverzeichnis-Nummern      */
-   BOOLEAN   appendix;                  /* Steht im Anhang               */
-   int      toctype;                  /* !node, !subnode oder !subsubnode   */
+   int      n5;                        /* Unterabschnittnummer   (absolut)   */
+   int      nr1, nr2, nr3, nr4, nr5;   /* Inhaltsverzeichnis-Nummern      */
+   BOOLEAN   appendix;                 /* Steht im Anhang               */
+   int      toctype;                   /* !node, !subnode oder !subsubnode   */
    char   source_filename[MYFILE_FULL_LEN]; /* Filename der Sourcecodedatei   */   /* V6.5.18 */
-   long   source_line;               /* Zeile im Sourcecode ab der der Node beginnt */   /* V6.5.18 */
+   long   source_line;                 /* Zeile im Sourcecode ab der der Node beginnt */   /* V6.5.18 */
    char   filename[MAX_FILENAME_LEN+1];   /* HTML-Filename               */   /* r5pl3 */
    char   dirname[MAX_FILENAME_LEN+1];   /* HTML-Verzeichnisname            */   /* r6pl6 */
-   char   *keywords;                  /* HTML-Keywords               */   /* r5pl3 */
-   char   *description;               /* HTML-Description               */   /* r6pl5 */
-   char   *robots;                  /* HTML-Robots                  */   /* V6.5.17 */
+   char   *keywords;                   /* HTML-Keywords               */   /* r5pl3 */
+   char   *description;                /* HTML-Description               */   /* r6pl5 */
+   char   *robots;                     /* HTML-Robots                  */   /* V6.5.17 */
    char   *counter_command;            /* HTML-Kommandos fuer Counter      */   /* r5pl4 */
-   char   backcolor[MAX_COLOR_LEN+1];      /* HTML <BODY BGCOLOR=...>         */   /* r6pl1 */
-   char   textcolor[MAX_COLOR_LEN+1];      /* HTML <BODY TEXT=...>            */   /* r6pl1 */
-   char   linkcolor[MAX_COLOR_LEN+1];      /* HTML <BODY LINK=...>            */   /* r6pl1 */
-   char   alinkcolor[MAX_COLOR_LEN+1];   /* HTML <BODY ALINK=...>         */   /* r6pl1 */
-   char   vlinkcolor[MAX_COLOR_LEN+1];   /* HTML <BODY VLINK=...>         */   /* r6pl1 */
+   char   backcolor[MAX_COLOR_LEN+1];  /* HTML <BODY BGCOLOR=...>         */   /* r6pl1 */
+   char   textcolor[MAX_COLOR_LEN+1];  /* HTML <BODY TEXT=...>            */   /* r6pl1 */
+   char   linkcolor[MAX_COLOR_LEN+1];  /* HTML <BODY LINK=...>            */   /* r6pl1 */
+   char   alinkcolor[MAX_COLOR_LEN+1]; /* HTML <BODY ALINK=...>         */   /* r6pl1 */
+   char   vlinkcolor[MAX_COLOR_LEN+1]; /* HTML <BODY VLINK=...>         */   /* r6pl1 */
    char   modern_backcolor[MAX_COLOR_LEN+1];   /* HTML <BODY BGCOLOR=...>      */   /* r6pl12 */
    char   modern_textcolor[MAX_COLOR_LEN+1];   /* HTML <BODY TEXT=...>         */   /* r6pl12 */
    char   modern_linkcolor[MAX_COLOR_LEN+1];   /* HTML <BODY LINK=...>         */   /* r6pl12 */
@@ -132,9 +134,11 @@ typedef struct _tocitem
    int      up_n1_index;      /* toc[]-Position oberhalb         */
    int      up_n2_index;
    int      up_n3_index;
+   int      up_n4_index;
    int      count_n2;         /* Anzahl enthaltener Subnodes      */   /* r6pl8 */
    int      count_n3;         /* Anzahl enthaltener Subsubnodes   */   /* r6pl8 */
    int      count_n4;         /* Anzahl enthaltener Subsubsub...   */   /* r6pl8 */
+   int      count_n5;         /* Anzahl enthaltener Subsubsubsub...   */   /* r6pl8 */
    BOOLEAN   ignore_subtoc;      /* !use_auto_subtoc's ignorieren   */   /* r5pl6 */
    BOOLEAN   ignore_links;      /* Keine Links auf dieses anlegen   */   /* r5pl8 */
    BOOLEAN   ignore_index;      /* Keinen Indexeintrag anlegen      */   /* r5pl10 */
@@ -171,15 +175,16 @@ GLOBAL int      toc_offset;               /* Offsets fuer Kapitelnumerierung, De
 GLOBAL int      subtoc_offset;
 GLOBAL int      subsubtoc_offset;
 GLOBAL int      subsubsubtoc_offset;
+GLOBAL int      subsubsubsubtoc_offset;		/* [GS] */
 
-GLOBAL int      all_nodes, all_subnodes, all_subsubnodes, all_subsubsubnodes;
+GLOBAL int      all_nodes, all_subnodes, all_subsubnodes, all_subsubsubnodes, all_subsubsubsubnodes;
 
 GLOBAL BOOLEAN   bInsideAppendix,      /* Ist UDO im Anhang?               */
             bInsideDocument,      /* Ist UDO im Dokument selber?         */
             bInsidePopup;         /* In einem Popup-Node?               */
 
 GLOBAL BOOLEAN   called_tableofcontents;   /* Wurde toc ausgegeben? (@toc) */
-GLOBAL BOOLEAN   called_subsubsubnode;
+GLOBAL BOOLEAN   called_subsubsubsubnode;
 
 GLOBAL BOOLEAN   uses_tableofcontents;   /* !tableofcontents wird benutzt */
 
@@ -195,6 +200,7 @@ GLOBAL char      current_chapter_nr[32];
 GLOBAL int      subtocs1_depth;         /*r6pl2*/
 GLOBAL int      subtocs2_depth;         /*r6pl2*/
 GLOBAL int      subtocs3_depth;         /*r6pl2*/
+GLOBAL int      subtocs4_depth;
 
 GLOBAL char      sHtmlPropfontStart[256];   /*r6pl7*/
 GLOBAL char      sHtmlPropfontEnd[16];      /*r6pl7*/
@@ -255,6 +261,11 @@ GLOBAL void c_subsubsubnode ( void );
 GLOBAL void c_subsubsubnode_iv ( void );
 GLOBAL void c_psubsubsubnode ( void );
 GLOBAL void c_psubsubsubnode_iv ( void );
+
+GLOBAL void c_subsubsubsubnode ( void );
+GLOBAL void c_subsubsubsubnode_iv ( void );
+GLOBAL void c_psubsubsubsubnode ( void );
+GLOBAL void c_psubsubsubsubnode_iv ( void );
 
 GLOBAL void c_endnode ( void );
 
@@ -329,6 +340,7 @@ GLOBAL void set_html_color ( const int which );
    GLOBAL void set_html_alinkcolor ( void );
    GLOBAL void set_html_vlinkcolor ( void );
 #endif
+GLOBAL void set_html_bgsound ( void );				/* New in 6.5.20 [GS] */
 GLOBAL void set_html_backimage ( void );
 GLOBAL void set_html_style ( void );
 GLOBAL void set_html_script ( void );

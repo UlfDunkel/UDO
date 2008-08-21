@@ -130,6 +130,7 @@ typedef struct                            /* ---- Layoutinfos ---- */
    unsigned int   node2size;              /* New in r6pl16 [NHz] */
    unsigned int   node3size;              /* New in r6pl16 [NHz] */
    unsigned int   node4size;              /* New in r6pl16 [NHz] */
+   unsigned int   node5size;
 }  LAYOUTDATA;
 
 

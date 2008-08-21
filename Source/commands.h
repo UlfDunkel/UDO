@@ -175,6 +175,7 @@
 #define CMD_SUBHEADING        "!subheading"
 #define CMD_SUBSUBHEADING     "!subsubheading"
 #define CMD_SUBSUBSUBHEADING  "!subsubsubheading"
+#define CMD_SUBSUBSUBSUBHEADING  "!subsubsubsubheading"
 
 
 
@@ -271,12 +272,14 @@
 #define rtf_node2      "\\s5\\ql\\b\\f0\\li907\\fi-907"
 #define rtf_node3      "\\s6\\ql\\b\\f0\\li1134\\fi-1134"
 #define rtf_node4      "\\s7\\ql\\b\\f0\\li1248\\fi-1248"
+#define rtf_node5      "\\s7\\ql\\b\\f0\\li1248\\fi-1248" /* ToDo: ??? */
 
 #define rtf_inv_chapt  "\\s8\\ql\\b\\f0"
 #define rtf_inv_node1  "\\s9\\ql\\b\\f0"
 #define rtf_inv_node2  "\\s10\\ql\\b\\f0"
 #define rtf_inv_node3  "\\s11\\ql\\b\\f0"
 #define rtf_inv_node4  "\\s12\\ql\\b\\f0"
+#define rtf_inv_node5  "\\s12\\ql\\b\\f0"						/* ToDo: ??? */
 
 #define rtf_linedraw   "\\s13\\ql\\f2"
 

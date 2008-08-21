@@ -209,18 +209,22 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!subnode",					"!sn",		c_subnode,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!subsubnode",				"!ssn",		c_subsubnode,			TRUE,	CMD_ONLY_MAINPART	},
 	{ "!subsubsubnode",				"!sssn",	c_subsubsubnode,		TRUE,	CMD_ONLY_MAINPART	},
+	{ "!subsubsubsubnode",			"!ssssn",	c_subsubsubsubnode,	TRUE,	CMD_ONLY_MAINPART	},
 	{ "!node*",						"!n*",		c_node_iv,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!subnode*",					"!sn*",		c_subnode_iv,			TRUE,	CMD_ONLY_MAINPART	},
 	{ "!subsubnode*",				"!ssn*",	c_subsubnode_iv,		TRUE,	CMD_ONLY_MAINPART	},
 	{ "!subsubsubnode*",			"!sssn*",	c_subsubsubnode_iv,		TRUE,	CMD_ONLY_MAINPART	},
+	{ "!subsubsubsubnode*",		"!ssssn*",	c_subsubsubsubnode_iv,		TRUE,	CMD_ONLY_MAINPART	},
 	{ "!pnode",						"!p",		c_pnode,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!psubnode",					"!ps",		c_psubnode,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!psubsubnode",				"!pss",		c_psubsubnode,			TRUE,	CMD_ONLY_MAINPART	},
 	{ "!psubsubsubnode",			"!psss",	c_psubsubsubnode,		TRUE,	CMD_ONLY_MAINPART	},
+	{ "!psubsubsubsubnode",		"!pssss",	c_psubsubsubsubnode,		TRUE,	CMD_ONLY_MAINPART	},
 	{ "!pnode*",					"!p*",		c_pnode_iv,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!psubnode*",					"!ps*",		c_psubnode_iv,			TRUE,	CMD_ONLY_MAINPART	},
 	{ "!psubsubnode*",				"!pss*",	c_psubsubnode_iv,		TRUE,	CMD_ONLY_MAINPART	},
 	{ "!psubsubsubnode*",			"!psss*",	c_psubsubsubnode_iv,	TRUE,	CMD_ONLY_MAINPART	},
+	{ "!psubsubsubsubnode*",		"!pssss*",	c_psubsubsubsubnode_iv,	TRUE,	CMD_ONLY_MAINPART	},
 	{ "!begin_node",				"!bn",		c_begin_node,			TRUE,	CMD_ONLY_MAINPART	},
 	{ "!begin_node*",				"!bn*",		c_begin_node_iv,		TRUE,	CMD_ONLY_MAINPART	},
 	{ "!begin_pnode",				"!bp",		c_begin_pnode,			TRUE,	CMD_ONLY_MAINPART	},
@@ -256,10 +260,12 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!subheading",				"!sh",		c_subheading,			TRUE,	CMD_ONLY_MAINPART	},
 	{ "!subsubheading",				"!ssh",		c_subsubheading,		TRUE,	CMD_ONLY_MAINPART	},
 	{ "!subsubsubheading",			"!sssh",	c_subsubsubheading,		TRUE,	CMD_ONLY_MAINPART	},
+	{ "!subsubsubsubheading",		"!ssssh",	c_subsubsubsubheading,		TRUE,	CMD_ONLY_MAINPART	},
 	{ "!listheading",				"!lh",		c_listheading,			TRUE,	CMD_ONLY_MAINPART	},
 	{ "!listsubheading",			"!lsh",		c_listsubheading,		TRUE,	CMD_ONLY_MAINPART	},
 	{ "!listsubsubheading",			"!lssh",	c_listsubsubheading,	TRUE,	CMD_ONLY_MAINPART	},
 	{ "!listsubsubsubheading",		"!lsssh",	c_listsubsubsubheading,	TRUE,	CMD_ONLY_MAINPART	},
+	{ "!listsubsubsubsubheading",		"!lssssh",	c_listsubsubsubsubheading,	TRUE,	CMD_ONLY_MAINPART	},
 	{ "!jumpid",					"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!win_helpid",				"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!wh4_helpid",				"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	},
@@ -315,6 +321,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!subtoc",					"",			c_subtoc,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!subsubtoc",					"",			c_subtoc,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!subsubsubtoc",				"",			c_subtoc,				TRUE,	CMD_ONLY_MAINPART	},
+	{ "!subsubsubsubtoc",		"",			c_subtoc,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!begin_appendix",			"",			c_begin_appendix,		TRUE,	CMD_ONLY_MAINPART	},
 	{ "!end_appendix",				"",			c_end_appendix,			TRUE,	CMD_ONLY_MAINPART	},
 	{ "!begin_document",			"",			c_begin_document,		TRUE,	CMD_ONLY_PREAMBLE	},
@@ -352,6 +359,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!ignore_subtoc",				"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!ignore_subsubtoc",			"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!ignore_subsubsubtoc",		"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	},
+	{ "!ignore_subsubsubsubtoc",	"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!ignore_links",				"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!ignore_index",				"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	},
 	{ "!ignore_title",				"",			c_tunix,				TRUE,	CMD_ONLY_MAINPART	},
@@ -368,6 +376,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!subtoc_offset",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!subsubtoc_offset",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!subsubsubtoc_offset",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
+	{ "!subsubsubsubtoc_offset",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!table_counter",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!table_alignment",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!image_counter",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
@@ -389,6 +398,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!html_merge_subnodes",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_merge_subsubnodes",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_merge_subsubsubnodes",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
+	{ "!html_merge_subsubsubsubnodes",	"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
 	{ "!html_ignore_8bit",			"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
     { "!html_navigation",           "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   }, /* New in v6.5.20 [gs] */
 	{ "!html_modern_layout",		"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},
@@ -465,13 +475,14 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
 	{ "!show_variable",				"",			cmd_outside_preamble,	TRUE,	CMD_ONLY_PREAMBLE	},		/* V6.5.19 */
 };
 
-#define	MAXSWITCH	40
+#define	MAXSWITCH	41
 
 LOCAL const UDOSWITCH udoswitch[MAXSWITCH+1]=
 {
 	{ "!use_auto_subtocs",			&use_auto_subtocs		,	'i',	"!depth",		&subtocs1_depth	},
 	{ "!use_auto_subsubtocs",		&use_auto_subsubtocs	,	'i',	"!depth",		&subtocs2_depth	},
 	{ "!use_auto_subsubsubtocs",	&use_auto_subsubsubtocs	,	'i',	"!depth",		&subtocs3_depth	},
+	{ "!use_auto_subsubsubsubtocs",	&use_auto_subsubsubsubtocs	,	'i',	"!depth",		&subtocs4_depth	},
 	{ "!use_auto_toptocs",			&use_auto_toptocs		,	'b',	"!no_icons",	&no_auto_toptocs_icons	},
 	{ "!use_short_envs",			&use_short_envs			,	'\0',	"",				NULL			},
 	{ "!use_short_tocs",			&use_short_tocs			,	'\0',	"",				NULL			},
@@ -2764,6 +2775,130 @@ LOCAL void c_subsubsubheading ( void )
 }	/* c_subsubsubheading */
 
 
+LOCAL void c_subsubsubsubheading ( void )
+{
+	char name[512], n[512], align[64];
+	BOOLEAN inside_center, inside_right;
+
+	tokcpy2(name, 512);
+
+	if (name[0]==EOS)
+	{	error_missing_parameter(CMD_SUBSUBSUBHEADING);
+		return;
+	}
+
+	convert_tilde(name);
+	replace_udo_quotes(name);
+	delete_all_divis(name);
+
+	check_styles(name);	/*r6pl3*/
+
+	inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);	/*r6pl5*/
+	inside_right= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_RIGH);	/*r6pl5*/
+
+	switch (desttype)
+	{
+		case TOTEX:
+		case TOPDL:
+			c_internal_styles(name);
+/* V6.5.20 [CS] */
+			{	(use_style_book)	? voutlnf("\n\\subsubsection*{%s}", name) /* ToDo:??? */
+				: voutlnf("\n\\subsubsubsection*{%s}", name); /* ToDo:??? */
+			}
+/* old:
+			voutlnf("{\\normalsize{\\bf %s}}", name);
+*/
+			outln("");
+			break;
+		case TOINF:
+			c_internal_styles(name);
+			outln("");
+			voutlnf("@subheading %s", name); /* ToDo:??? */
+			outln("");
+			break;
+		case TORTF:
+			c_rtf_styles(name);
+			c_rtf_quotes(name);
+			/* New in r6pl15 [NHz] */
+
+			align[0]= EOS;
+			if (inside_center)	strcpy(align, "\\qc");
+			if (inside_right)	strcpy(align, "\\qr");
+			/* Changed in r6pl16 [NHz] */
+			voutlnf("%s{\\fs%d\\b %s}\\par\\pard\\par", align, laydat.node5size, name);
+			break;
+		case TOWIN:
+		case TOWH4:
+		case TOAQV:
+			c_win_styles(name);
+			/* New in r6pl15 [NHz] */
+
+			align[0]= EOS;
+			if (inside_center)	strcpy(align, "\\qc");
+			if (inside_right)	strcpy(align, "\\qr");
+			voutlnf("{%s\\fs%d\\b %s}\\par\\pard\\par", align, iDocPropfontSize, name);
+			break;
+		case TOKPS:
+			outln("newline");
+			/* Fixed bug #0000047 [NHz] */
+			voutlnf("%d changeFontSize", laydat.node5size);
+			/* New in V6.5.5 [NHz] */
+			node2postscript(name, KPS_CONTENT);
+			outln("Bon");
+			voutlnf("(%s) udoshow", name);
+			outln("Boff");
+			/* Changed in r6pl15 [NHz] */
+			voutlnf("%d changeFontSize", laydat.propfontsize);
+			outln("newline");
+			break;
+		case TOHAH:		/* V6.5.17 */
+		case TOHTM:
+		case TOMHH:
+			c_internal_styles(name);
+			n[0]= EOS;
+			if (inside_center)	strcpy(n, " align=\"center\"");
+			if (inside_right)	strcpy(n, " align=\"right\"");
+			voutlnf("<h%d%s>%s</h%d>", html_nodesize+4, n, name, html_nodesize+4);
+			break;
+		case TOASC:
+		case TOPCH:
+			c_internal_styles(name);
+			outln("");
+			outln(name);
+			outln("");
+			break;
+		case TOMAN:
+			sprintf(n, " %s%s%s", BOLD_ON, name, BOLD_OFF);
+			c_internal_styles(n);
+			outln(n);
+			break;
+		case TONRO:
+			my_strupr(name);
+			voutlnf(".SH %s", name);
+			break;
+		case TOSTG:
+		case TOAMG:
+			sprintf(n, "%s%s%s", UNDER_ON, name, UNDER_OFF);
+			if (inside_center)	strcenter(n, zDocParwidth);
+			if (inside_right)	strright(n, zDocParwidth);
+			c_internal_styles(n);
+			outln("");
+			outln(n);
+			outln("");
+			break;
+		case TOTVH:
+			c_internal_styles(name);
+			tvh_headline(name);
+			outln("");
+			break;
+		case TODRC:	/* <???> */
+		case TOHPH:	/* <???> */
+		case TOIPF:	/* <???> */
+		case TOLYX:	/* <???> */
+			break;
+	}
+
+}	/* c_subsubsubsubheading */
 
 
 
@@ -3092,6 +3227,84 @@ LOCAL void c_listsubsubsubheading(void)
    
 }  /* c_listsubsubsubheading */
 
+
+/*******************************************************************************
+*
+*  c_listsubsubsubsubheading():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void c_listsubsubsubsubheading(void)
+{
+   char      name[512],         /* */
+             sFontBeg[512],     /* */
+             sFontEnd[32],      /* */
+             align[64];         /* */
+   BOOLEAN   inside_center,     /* */
+             inside_right;      /* */
+   int       iSize;             /* */
+   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
+
+   tokcpy2(name, 512);
+   
+   if (name[0] == EOS)
+   {
+      error_missing_parameter(CMD_HEADING);
+      return;
+   }
+   
+   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
+      strcpy(closer, " /");
+   
+   convert_tilde(name);
+   replace_udo_quotes(name);
+   delete_all_divis(name);
+   
+   check_styles(name);                    /*r6pl3*/
+   
+                                          /*r6pl5*/
+   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
+                                          /*r6pl5*/
+   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
+   
+   switch (desttype)
+   {
+   case TOHAH:                            /* V6.5.17 */
+   case TOHTM:
+   case TOMHH:
+      c_internal_styles(name);
+      align[0] = EOS;
+      
+      if (inside_center)
+         strcpy(align, " align=\"center\"");
+      
+      if (inside_right)
+         strcpy(align, " align=\"right\"");
+      
+      sFontBeg[0] = EOS;
+      sFontEnd[0] = EOS;
+      
+      if (sDocHtmlPropfontName[0] != EOS)
+      {
+         iSize = iDocHtmlPropfontSize;
+         sprintf(sFontBeg, "<font face=\"%s\" size=\"%s%d\">", sDocHtmlPropfontName, (iSize >= 0) ? "+" : "", iSize);
+         strcpy(sFontEnd, "</font>");
+      }
+      
+      voutlnf("<tr><td valign=\"top\"%s colspan=\"2\">&nbsp;<br%s>%s<b>%s</b>", 
+         align, closer, sFontBeg, name);
+      
+      if (bEnv1stItem[iEnvLevel])
+      {
+         voutlnf("%s</td></tr>", sFontEnd);
+      }
+   }
+   
+}  /* c_listsubsubsubsubheading */
 
 
 
@@ -6918,7 +7131,7 @@ LOCAL void output_preamble ( void )
 			{	outln("\\makeindex");
 			}
 
-			if (called_subsubsubnode)
+			if (called_subsubsubsubnode)
 			{	if (use_style_book)
 				{	outln("\\setcounter{tocdepth}{4}");
 					outln("\\setcounter{secnumdepth}{4}");
@@ -6942,7 +7155,7 @@ LOCAL void output_preamble ( void )
 			outln("\\papersize default");
 			outln("\\paperfontsize 11");
 			outln("\\baselinestretch 1.0");
-			if (called_subsubsubnode)
+			if (called_subsubsubsubnode)
 			{	outln("\\secnumdepth 4");
 				outln("\\tocdepth 4");
 			}
@@ -7364,6 +7577,16 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 		return TRUE;
 	}
 
+	if ( strcmp(token[0], "!subsubsubsubtoc_offset")==0 )
+	{	if (token[1][0]==EOS)
+		{	subsubsubsubtoc_offset= 0;
+		}
+		else
+		{	subsubsubsubtoc_offset= atoi(token[1]);
+		}
+		return TRUE;
+	}
+
 	if ( strcmp(token[0], "!table_counter")==0 )
 	{	if (token[1][0]==EOS)
 		{	set_table_counter(0);
@@ -7676,6 +7899,10 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
 			}
 			if (strcmp(token[0], "!html_merge_subsubsubnodes")==0)
 			{	html_merge_node4= TRUE;
+				return TRUE;
+			}
+			if (strcmp(token[0], "!html_merge_subsubsubsubnodes")==0)
+			{	html_merge_node5= TRUE;
 				return TRUE;
 			}
 			if (strcmp(token[0], "!html_no_xlist")==0)
@@ -8547,6 +8774,9 @@ LOCAL BOOLEAN pass1 (char *datei)
 						{	set_ignore_subtoc();
 						}	else
 						if ( strcmp(token[0], "!ignore_subsubsubtoc")==0 )
+						{	set_ignore_subtoc();
+						}	else
+						if ( strcmp(token[0], "!ignore_subsubsubsubtoc")==0 )
 						{	set_ignore_subtoc();
 						}	else
 						if ( strcmp(token[0], "!ignore_links")==0 )
@@ -10352,17 +10582,18 @@ GLOBAL BOOLEAN udo (char *datei)
 	{	logln_information();
 		vloglnf("source file: %s", infile.full);
 		logln("");
-		vloglnf("Warnings:       %d", get_warning_counter());
-		vloglnf("Notes:          %d", get_note_counter());
-		vloglnf("Errors:         %d", get_error_counter());
+		vloglnf("Warnings:          %d", get_warning_counter());
+		vloglnf("Notes:             %d", get_note_counter());
+		vloglnf("Errors:            %d", get_error_counter());
 		logln("");
-		vloglnf("Nodes:          %d", all_nodes);
-		vloglnf("Subnodes:       %d", all_subnodes);
-		vloglnf("Subsubnodes:    %d", all_subsubnodes);
-		vloglnf("Subsubsubnodes: %d", all_subsubsubnodes);
-		vloglnf("Macros:         %d", macro_counter);
-		vloglnf("Defines:        %d", define_counter);
-		vloglnf("Hyphens:        %d", hyphen_counter);
+		vloglnf("Nodes:             %d", all_nodes);
+		vloglnf("Subnodes:          %d", all_subnodes);
+		vloglnf("Subsubnodes:       %d", all_subsubnodes);
+		vloglnf("Subsubsubnodes:    %d", all_subsubsubnodes);
+		vloglnf("Subsubsubsubnodes: %d", all_subsubsubsubnodes);
+		vloglnf("Macros:            %d", macro_counter);
+		vloglnf("Defines:           %d", define_counter);
+		vloglnf("Hyphens:           %d", hyphen_counter);
 		logln("");
 		vloglnf("started:  %s", timer_start);
 		vloglnf("finished: %s", timer_stop);
@@ -10844,17 +11075,18 @@ GLOBAL BOOLEAN udo2udo (char *datei)
 	{	logln_information();
 		vloglnf("source file: %s", infile.full);
 		logln("");
-		vloglnf("Warnings:       %d", get_warning_counter());
-		vloglnf("Notes:          %d", get_note_counter());
-		vloglnf("Errors:         %d", get_error_counter());
+		vloglnf("Warnings:          %d", get_warning_counter());
+		vloglnf("Notes:             %d", get_note_counter());
+		vloglnf("Errors:            %d", get_error_counter());
 		logln("");
-		vloglnf("Nodes:          %d", all_nodes);
-		vloglnf("Subnodes:       %d", all_subnodes);
-		vloglnf("Subsubnodes:    %d", all_subsubnodes);
-		vloglnf("Subsubsubnodes: %d", all_subsubsubnodes);
-		vloglnf("Macros:         %d", macro_counter);
-		vloglnf("Defines:        %d", define_counter);
-		vloglnf("Hyphens:        %d", hyphen_counter);
+		vloglnf("Nodes:             %d", all_nodes);
+		vloglnf("Subnodes:          %d", all_subnodes);
+		vloglnf("Subsubnodes:       %d", all_subsubnodes);
+		vloglnf("Subsubsubnodes:    %d", all_subsubsubnodes);
+		vloglnf("Subsubsubsubnodes: %d", all_subsubsubsubnodes);
+		vloglnf("Macros:            %d", macro_counter);
+		vloglnf("Defines:           %d", define_counter);
+		vloglnf("Hyphens:           %d", hyphen_counter);
 		logln("");
 		vloglnf("started:  %s", timer_start);
 		vloglnf("finished: %s", timer_stop);
@@ -10962,6 +11194,7 @@ LOCAL void init_vars_texinfo ( void )
 		use_auto_subtocs= TRUE;			subtocs1_depth= 1;
 		use_auto_subsubtocs= TRUE;		subtocs2_depth= 1;
 		use_auto_subsubsubtocs= TRUE;	subtocs3_depth= 1;
+		use_auto_subsubsubsubtocs= TRUE;	subtocs4_depth= 1;
 		no_numbers= TRUE;
 	}
 }
