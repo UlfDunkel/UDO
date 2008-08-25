@@ -708,6 +708,12 @@ GLOBAL void error_undefined_link ( const char *l )
 	}
 }
 
+GLOBAL void error_too_many_if ( const char *s, const UINT l )
+{	char m[512];
+	sprintf(m, "Too many !if in: <%s> line %d", s, l);
+	error_msg_solo(m);
+}
+
 GLOBAL void error_else_without_if ( void )
 {	error_msg_solo("!else without !if...");
 }

@@ -117,6 +117,7 @@ GLOBAL void error_too_many_alias ( void );
 GLOBAL void error_too_many_files ( void );
 GLOBAL void error_replace_param ( const char *s );
 GLOBAL void error_undefined_link ( const char *l );
+GLOBAL void error_too_many_if ( const char *s, const UINT l );
 GLOBAL void error_else_without_if ( void );
 GLOBAL void error_endif_without_if ( void );
 GLOBAL void error_missing_endif ( const char *s, const UINT l );
