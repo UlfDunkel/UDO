@@ -7266,7 +7266,7 @@ LOCAL void push_if_stack ( int kind, BOOLEAN ignore )
 		strcpy(if_stack[counter_if_stack].filename, sFileNames[iFilesOpened]);
 	}
 	else
-	{	/* <???> Fehlermeldung fehlt */
+	{	error_too_many_if ( sFileNames[iFilesOpened], uiFileLines[iFilesOpened] );
 	}
 
 }	/* push_if_stack */
