@@ -138,43 +138,88 @@ LOCAL void del_param_quotes (char *s)
 }
 
 
-/*	------------------------------------------------------------
-	Anzahl der Parameter eines Kommandos ermitteln, das so
-	aufgebaut ist: (!command [p1] [p2] [...])
-	------------------------------------------------------------	*/
-LOCAL int get_nr_of_parameters ( const char *cmd, char *s )
+
+
+
+/*******************************************************************************
+*
+*  get_nr_of_parameters():
+*     get # of parameter blocks of command blocks in round brackets
+*     which are formatted like this: (!command [p1] [p2] [...])
+*
+*  Out:
+*     # of parameter blocks
+*
+******************************************|************************************/
+
+LOCAL int get_nr_of_parameters(
+
+const char  *cmd,             /* command string, e.g. "raw" */
+char        *s)               /* string to check */
 {
-	int count= 0;
-	char *pos;
-	char search[128];
+   int       count = 0;       /* # of found parameters */
+   char     *pos;             /* ^ to string s */
+   char      search[128];     /* buffer for search string */
+   BOOLEAN   is_raw = FALSE;  /* flag: TRUE = RAW */
 
-	sprintf(search, "(!%s", cmd);
 
-	if ( (pos=strstr(s, search))==NULL )
-	{	return 0;
-	}
+   sprintf(search, "(!%s", cmd);          /* create search string, e.g. "(!raw" */
 
-	pos+= strlen(search);
+                                          /* command not found */
+   if ( (pos = strstr(s, search)) == NULL )
+      return 0;                           /* exit */
 
-	/* Die erste geschlossene Klammer suchen, vor der kein ! steht */
+   pos += strlen(search);                 /* skip command */
 
-	while( pos[0]!=')' || (pos[0]==')' && pos[-1]=='!') )
-	{	switch(pos[0])
-		{	case EOS:
-				error_unexpected_eol();
-				return 0;
-			case ']':
-				if (pos[-1]!='!')
-				{	count++;
-				}
-				break;
-		}
-		pos++;
-	}
+   if (!strcmp(cmd,"raw"))                /* check if we're in RAW mode */
+      is_raw = TRUE;                      /* yes */
+   
 
-	return count;
 
-}	/* get_nr_of_parameters */
+   if (is_raw)                            /* (!raw [][]) */
+   {
+      while (pos[0] != EOS)               /* everything allowed until the end of line */
+      {
+         switch (pos[0])
+         {
+         case ']':
+            if (pos[-1] != '!')           /* even in (!raw ), ']' has to be casted by ! when used as data */
+               count++;
+         }
+      
+         pos++;
+      }
+   }
+   else                                   /* other commands ... */
+   {
+                                          /* find first uncasted closing bracket */
+      while (pos[0] != ')' || (pos[0] == ')' && pos[-1] == '!') )
+      {
+         switch (pos[0])
+         {
+         case EOS:                        /* not allowed: command block has a line break! */
+            error_unexpected_eol();
+            return 0;
+         
+         case ']':                        /* parameter found? */
+            if (pos[-1] != '!')           /* if ] wasn't casted by ! ... */
+            {
+               count++;                   /* yes, parameter found */
+            }
+         
+            break;
+         }
+      
+         pos++;                           /* next char */
+      }
+   }
+
+   return count;
+
+}  /* get_nr_of_parameters() */
+
+
+
 
 
 LOCAL void reset_parameters ( void )
