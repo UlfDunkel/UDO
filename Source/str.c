@@ -668,107 +668,146 @@ GLOBAL void del_whitespaces ( char *s)
 }  /*del_whitespaces*/
 
 
-/* --------------------------------------------------------------
-   get_brackets_ptr()
-   Ermittelt aus einem String wie "!raw [ stg, tex ] foo bar"
-   oder "!docinfo [author] Dirk Hagedorn" den Zeiger auf das
-   erste Zeichen hinter der ersten [ und die Anzahl der Zeichen,
-   die bis zur ersten ] folgen.
-   -> s:    Der zu untersuchende String
-   <- cont: Zeiger auf das erste Zeichen des Inhalts
-      data: Zeiger auf das erste Zeichen der Daten
-      0:    fehlerhafte Syntax (keine [ und ] gefunden)
-      sonst:   Laenge des Inhaltes
-   -------------------------------------------------------------- */
-GLOBAL size_t get_brackets_ptr ( char *s, char **cont, char **data )
+
+
+
+/*******************************************************************************
+*
+*  get_brackets_ptr():
+*     Ermittelt aus einem String wie "!raw [ stg, tex ] foo bar"
+*     oder "!docinfo [author] Dirk Hagedorn" den Zeiger auf das
+*     erste Zeichen hinter der ersten [ und die Anzahl der Zeichen,
+*     die bis zur ersten ] folgen.
+*  
+*  Returns:
+*     0   : wrong syntax (no brackets [ + ] found)
+*     else: length of content
+*
+******************************************|*************************************/
+
+GLOBAL size_t get_brackets_ptr(
+
+char       *s,     /* ^ string to be checked */
+char      **cont,  /* ^ first char of content */
+char      **data)  /* ^ first char of data */
 {
-   char *ptr;
-   size_t len;
+   char    *ptr;   /* a pointer */
+   size_t   len;   /* computed length */
    
-   ptr= s;
-   *cont= NULL;
-   *data= NULL;
-   len= 0;
+
+   ptr = s;                               /* copy pointer as we will change it local */
    
-   while (*ptr!=EOS)
+   *cont = NULL;                          /* nothing found yet */
+   *data = NULL;
+
+   len = 0;                               /* nothing to report yet */
+   
+   while (*ptr != EOS)
    {
-      if (*ptr=='[')
-      {  *cont= ptr+1;
+      if (*ptr == '[')                    /* first opening bracket [ found */
+      {
+         *cont = ptr + 1;                 /* remind start of content */
       }
       
-      if (*ptr==']')
-      {  if (*cont!=NULL)
-         {  *data= ptr+1;
-            len= ptr - *cont;
+      if (*ptr == ']')                    /* first closing bracket ] found */ 
+      {
+         if (*cont != NULL)               /* we have found content already */
+         {
+            *data = ptr + 1;              /* set ^ data behind this bracket */
+            len = ptr - *cont;            /* compute length of content string */
          }
-         return len;
+         
+         return len;                      /* we're done */
       }
       
-      ptr++;
+      ptr++;                              /* next char */
    }
 
-   return 0;   
+   return 0;                              /* error */
    
-}  /* get_brackets_ptr */
+}  /* get_brackets_ptr() */
 
 
-/* New since r6pl15 [NHz] */
-/* --------------------------------------------------------------
-   get_two_brackets_ptr()
-   Ermittelt aus einem String wie "!doclayout [ ps, rtf ] [paper] foo bar"
-   die Zeiger auf die ersten Zeichen hinter den ersten [ und die
-   Anzahl der Zeichen, die bis zur ersten ] folgen.
-   -> s:    Der zu untersuchende String
-   <- cont_format:   Zeiger auf das erste Zeichen der Formate
-       cont_content: Zeiger auf das erste Zeichen des Inhalts
-      data: Zeiger auf das erste Zeichen der Daten
-      0:    fehlerhafte Syntax (keine [ und ] gefunden)
-      sonst:   Laenge des Inhaltes
-   -------------------------------------------------------------- */
-GLOBAL struct size_brackets get_two_brackets_ptr ( char *s, char **cont_format, char **cont_content, char **data )
+
+
+
+/*******************************************************************************
+*
+*  get_two_brackets_ptr():
+*     Ermittelt aus einem String wie "!doclayout [ ps, rtf ] [paper] foo bar"
+*     die Zeiger auf die ersten Zeichen hinter den ersten [ und die
+*     Anzahl der Zeichen, die bis zur ersten ] folgen.
+*  
+*  Returns:
+*     0   : wrong syntax (no brackets [ + ] found)
+*     else: length of format and content
+*
+*  Note: New since r6pl15 [NHz]
+*
+******************************************|*************************************/
+
+GLOBAL struct size_brackets get_two_brackets_ptr(
+
+char                     *s,             /* ^ string to be checked */
+char                    **cont_format,   /* ^ first char of formats */
+char                    **cont_content,  /* ^ first char of content */
+char                    **data)          /* ^ first char of data */
 {
-   char *ptr;
-   struct size_brackets len;
-   BOOLEAN firstend;
+   char                  *ptr;           /* a pointer */
+   struct size_brackets   len;           /* computed length */
+   BOOLEAN                firstend;      /* flag: TRUE = first ] found in string */
    
-   ptr= s;
-   *cont_format= NULL;
-   *cont_content= NULL;
-   *data= NULL;
-   len.format= 0;
-   len.content= 0;
    
-   firstend = FALSE;
+   ptr = s;                               /* copy pointer as we will change it local */
 
-   while (*ptr!=EOS)
+   *cont_format  = NULL;                  /* nothing found yet */
+   *cont_content = NULL;
+   *data         = NULL;
+
+   len.format  = 0;                       /* nothing to report yet */
+   len.content = 0;
+   
+   firstend = FALSE;                      /* no closing bracket ] found yet */
+
+   while (*ptr != EOS)
    {
-      if ((*ptr=='[') && (!firstend))
-      {  *cont_format= ptr+1;
+      if ((*ptr=='[') && (!firstend))     /* 1st opening bracket [ found */
+      {
+         *cont_format = ptr + 1;          /* remind start of format string */
       }
-      
-      else if ((*ptr==']') && (!firstend))
-      {  firstend = TRUE;
-         len.format= ptr - *cont_format;
+                                          /* 1st closing bracket ] found */
+      else if ((*ptr == ']') && (!firstend))
+      {
+         firstend = TRUE;                 /* format descriptor string is complete */
+         len.format = ptr - *cont_format; /* remind length of format */
       }
-      
-      else if ((*ptr=='[') && (firstend))
-      {  *cont_content= ptr+1;
+                                         /* 2nd opening bracket [ found */
+      else if ((*ptr == '[') && (firstend))
+      {
+         *cont_content = ptr + 1;        /* remind start of content string */
       }
-
-      else if ((*ptr==']') && (firstend))
-      {  if (*cont_content!=NULL)
-         {  *data= ptr+1;
-            len.content= ptr - *cont_content;
+                                         /* 2nd closing bracket ] found */ 
+      else if ((*ptr == ']') && (firstend))
+      {
+         if (*cont_content != NULL)      /* we have found content already */
+         {
+            *data = ptr + 1;             /* set ^ data behind this bracket */
+                                         /* compute length of content string */ 
+            len.content = ptr - *cont_content;
          }
-         return len;
+         
+         return len;                     /* we're done */
       }
       
-      ptr++;
+      ptr++;                             /* next char */
    }
 
-   return len; 
+   return len;                           /* in case of errors still return len */
    
-}  /* get_two_brackets_ptr */
+}  /* get_two_brackets_ptr() */
+
+
+
 
 
 /* --------------------------------------------------------------
