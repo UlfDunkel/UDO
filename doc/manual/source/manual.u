@@ -310,7 +310,7 @@
 !macro EXISTSSINCE Existiert seit:
 !macro EXISTEDUNTIL Existierte bis:
 !macro FILE datei
-!macro HINT Hinweis:
+!macro HINT (!B)Hinweis:(!b)
 !macro MAINPART Hauptteil
 !macro NOTEXISTING Dieser Befehl existiert nicht mehr.
 !macro PLACEHOLDER Platzhalter
@@ -336,7 +336,7 @@
 !macro EXISTSSINCE Exists since:
 !macro EXISTEDUNTIL Existed until:
 !macro FILE file
-!macro HINT Hint:
+!macro HINT (!B)Hint:(!b)
 !macro MAINPART main part
 !macro NOTEXISTING This command does not exist anymore.
 !macro PLACEHOLDER placeholder
