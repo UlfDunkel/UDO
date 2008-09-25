@@ -45,10 +45,10 @@ Query the destination format.
 !html_name cmd_raw().html
 
 !iflang [german]
-Text nur für bestimmte Formate ausgeben.
+Text unverändert innerhalb einer Zeile für angegebene Formate ausgeben.
 !endif
 !iflang [english]
-Insert special command, for certain destination formats.
+Output text within a line without changes, for defined destination formats.
 !endif
 
 !begin_xlist [(!TYPEPOSITION)]
@@ -59,15 +59,33 @@ Insert special command, for certain destination formats.
 
 !iflang [german]
 !item [(!DESCRIPTION)]
-(!T)<text>(!t) wird nur dann ausgegeben, wenn die Quelldatei
-in eines der angegebenen Formate umgewandelt wird. (!T)<text>(!t)
-wird dann 1:1 und ohne Berücksichtigung etwaiger UDO-Kommandos ausgegeben.
+(!T)<(!TEXT)>(!t) wird nur dann ausgegeben, wenn die Quelldatei in eines der 
+angegebenen Formate umgewandelt wird. (!T)<text>(!t) wird dann 1:1 und ohne 
+Berücksichtigung etwaiger UDO-Kommandos ausgegeben.
+
+(!HINT) Da die abschließende runde Klammer (!T))(!t) sowie die abschließenden 
+eckigen Klammern (!T)](!t) für die Parameter-Blöcke von UDO erkannt werden müssen, 
+ist es wichtig, diese beiden Zeichen mit (!T)!(!t) zu schützen, falls sie im 
+auszugebenden Inhalt selbst vorkommen sollen.
+
+!item [(!EXAMPLE)]
+(!/raw [stg] [@subject Dokumentation/Zubehör]) (!nl)
+(!/raw [asc] [Die runde Klammer !) und die eckige Klammer !] müssen hier geschützt werden.])
 !endif
+
 !iflang [english]
 !item [(!DESCRIPTION)]
-(!T)<text>(!t) will only be printed when converting to one
-of the specified destination formats. (!T)<text>(!t)
-will be printed then without any conversion.
+(!T)<(!TEXT)>(!t) will only be printed when converting to one of the specified 
+destination formats. (!T)<text>(!t) will be printed then without any conversion.
+
+(!HINT) Because UDO needs to recognize the closing bracket (!T))(!t) as well as 
+the closing square brackets (!T)](!t) of the parameter blocks, it is important 
+to protect these characters with (!T)!(!t) if you want to use them in the content 
+themselves.
+
+!item [(!EXAMPLE)]
+(!/raw [stg] [@subject Documentation/Utilities]) (!nl)
+(!/raw [asc] [Round brackets !) and square brackets !] have to be protected here.])
 !endif
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~7
