@@ -1,0 +1,81 @@
+!subnode* Command description
+
+!begin_description
+
+!item	[Type & position:]	~ (!nl)
+	The type of the command and the position where it's allowed to use it.
+
+	A command tells UDO do something especially, a switch sets some internal
+	information for UDO and a placeholder will be simply replaced by a
+	different text fragment.
+
+	""Preamble"" means that you are only allowed to use this command in the
+	preamble of your source file (before (!I)!/begin_document(!i)). ""Main
+	part"" means that you are only allowed to use it behind
+	(!I)!/begin_document(!i). ""Preamble & main part"" means that you can
+	use this command wherever you want.
+
+!item	[Syntax:]	~ (!nl)
+	Here you can see how to use the command.
+
+	!begin_tlist [WabbreviationW]
+
+	!label <text>
+	!item [<text>] replaces text
+
+	!label <file>
+	!item [<file>] replaces a file name
+
+	!label <value>
+	!item [<value>] replaces a number
+
+	!label <char>
+	!item [<char>] replaces a single character
+
+	!label <abbreviations>
+	!item [<abbreviations>] replaces the abbreviation of the destination
+	formats(!N)aqv = Apple QuickView,
+		asc = ASCII,
+		htag = HP-Helptag-SGML,
+		html = HTML,
+		info = Texinfo,
+		ldoc = Linuxdoc-SGML,
+		lyx = LyX,
+		man = Manualpage,
+		pch = Pure-C-Help,
+		rtf = RTF,
+		stg = ST-Guide,
+		tex = (!LaTeX),
+		tvh = Turbo-Vision-Help,
+		win = WinHelp(!n)
+
+	!label <language>
+	!item [<language>] replaces the abbreviation of the destination
+	language(!N)english = English,
+		french = French,
+		german = German,
+		italian = Italian,
+		spanish = Spanish,
+		swedish = Swedish(!n)
+
+	!label <systems>
+	!item [<systems>] replaces one or more operating
+	systems(!N)beos = BeOS,
+		dos = DOS,
+		hpux = HP-UX,
+		linux = Linux,
+		macos = MacOS,
+		nextstep = NeXTStep,
+		sinix = SINIX,
+		sunos = SunOS,
+		tos = TOS(!n)
+
+	!end_tlist
+
+!item	[Example:]	~ (!nl)
+	Here you can see a small example.
+
+!item	[See also:]	~ (!nl)
+	Related commands and topic are listed here.
+
+!end_description

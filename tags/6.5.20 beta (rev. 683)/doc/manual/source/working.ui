@@ -1,0 +1,2054 @@
+# doc/manual/source/working.ui
+# letzte Änderungen: 11.05.2004 / last changes: May 11, 2004
+
+
+################################################################################
+!iflang [german]
+!begin_node Praktische Arbeit mit UDO
+# alt: Allgemeine Fragen, Tips & Tricks
+!endif
+!iflang [english]
+!begin_node Working with UDO
+# old: General Questions, Tips & Tricks
+!endif
+!html_name general.html
+
+# auskommentiert 20.12.2003 - Ulrich Kretschmer
+!begin_ignore
+!iflang [german]
+In diesem Kapitel werde ich Ihnen ein paar Tips geben, die Sie beim
+Schreiben von Texten beachten sollten.
+
+Desweiteren gebe ich Ihnen einen kleinen Einblick in meine Trickkiste.
+Hier finden Sie vielleicht genau die Problemlösung, auf die Sie so ohne
+weiteres nicht gekommen wären.
+
+In naher Zukunft werde ich weitere Tips in diese Dokumentation
+aufnehmen. Achten Sie also bitte auf Updates dieser Dokumentation oder
+auf Upgrades von UDO.
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+In this chapter I will tell you some tips for your writing UDO source files.
+Furthermore I will show you some tricks. Maybe these tricks can help you
+solving some of your problems.
+
+I'm going to add additional tips in the near future. Watch out for new
+versions of this documentation or for new UDO Releases
+!endif
+!end_ignore
+
+################################################################################
+################################################################################
+!iflang [german]
+!begin_node Sieben goldene Regeln für das Schreiben eines Quelltextes
+!endif
+!iflang [english]
+!begin_node Seven rules for writing UDO source files
+!endif
+!html_name rules.html
+
+!iflang [german]
+Bevor Sie mit dem Schreiben eines UDO-Quelltextes beginnen, werfen Sie
+bitte einen Blick auf die folgenden Regeln und prägen Sie sie sich
+ein:
+
+!begin_enumerate
+!item (!B)Geben Sie Ihrem Text eine übersichtliche Struktur!(!b)
+
+!item (!B)Sprechen Sie den Leser direkt an.(!b)
+
+Verwenden Sie ""Sie können !.."" bzw. ""Du kannst"" anstatt ""Man
+kann !.."".
+
+!item (!B)Benutzen Sie Schriftarten sparsam und einheitlich.(!b)
+
+Der übermäßige Einsatz von kursivem, fettem und unterstrichenen
+verwirrt den Leser eher, als das er ihm hilft. Falls Sie
+Schriftarten einsetzen, so tun Sie dies allerdings einheitlich.
+Diese Anleitung stellt Dateinamen grundsätzlich mit einer
+nichtproportionalen Schrift dar, Kommandos werden immer kursiv
+angezeigt.
+
+!item (!B)Fassen Sie sich so kurz wie möglich.(!b)
+
+Holen Sie nicht zuweit aus, sondern kommen Sie möglichst schnell
+auf den Punkt. Der Leser langweilt sich sonst oder wird
+unkonzentriert und überliest womöglich noch die wichtigen
+Stellen.
+
+Ich gebe zu, ich schaffe es meistens auch nicht, mich kurz zu
+fassen. (!grin)
+
+!item (!B)Verwenden Sie kurze Kapitelüberschriften.(!b)
+
+Der Leser wird dann das gewünschte Kapitel beim Überfliegen des
+Inhaltsverzeichnisses schneller (wieder)finden. Außerdem nehmen
+Sie UDO dadurch eine Menge Arbeit bei der Referenzierung ab, was
+durch eine schnellere Umwandlung belohnt wird.
+
+!item (!B)Vermeiden Sie gleichnamige Überschriften.(!b)
+
+Nicht nur dass Sie damit UDO und Hypertext-Compiler verwirren,
+nein, auch der potentielle Leser gerät bei gleichnamigen Kapiteln
+durcheinander.
+
+!item (!B)Gehen Sie sparsam mit Makros und Definitionen um.(!b)
+
+UDO muss jede Zeile bis zu zweimal nach allen benutzten Makros und
+Definitionen durchsuchen. Jedes zusätzliche Makro und jede
+zusätzliche Definition verlangsamt den Umwandlungsvorgang.
+
+!end_enumerate
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+Before starting to write UDO source files you should take a look at these
+rules and learn them by heart:
+
+!begin_enumerate
+
+#1
+!item	(!B)Arrange your documentation clearly!(!b)
+
+#2
+!item	(!B)Speak directly to the reader.(!b)
+
+Use ""You can!.."" instead of ""It's possible to!.."".
+
+#3
+!item	(!B)Use text styles sparingly and homogeneously.(!b)
+
+Don't use italic, bold and underlined text too often. But if you use
+different text styles use them homogeneously. This documentations prints all
+UDO command in italics, all filenames are printed with a mono-spaced font.
+
+#4
+!item	(!B)Make it brief as possible.(!b)
+
+Don't write novels, come straight to the point. If you don't the reader may
+get bored while reading your manual.
+
+I have to admit that I'm not able to do this in some cases. (!grin)
+
+#5
+!item	(!B)Use short chapter names.(!b)
+
+If you use short chapter names the reader will find the chapter more quickly
+after having read the table of contents. Furthermore you can help UDO to
+insert hypertext links more quickly.
+
+#6
+!item	(!B)Avoid to use the same chapter name more than once.(!b)
+
+If you use the same chapter name more than once UDO and the hypertext
+compilers get confused. And you will confuse the reader, too.
+
+#7
+!item	(!B)Use macros and definitions sparingly.(!b)
+
+UDO has to look for macros and definitions twice in every line of your
+source file. Any additional macro or definitions slows down the conversion.
+
+!end_enumerate
+
+!endif
+
+!end_node
+# Ende: 7 goldene Regel / 7 rules
+
+################################################################################
+################################################################################
+!iflang [german]
+!begin_node Tips & Tricks
+# alt: Allgemeine Tips & Tricks
+!endif
+!iflang [english]
+!begin_node Tips & Tricks
+# old: General tips & tricks
+!endif
+!html_name tips.html
+
+################################################################################
+!iflang [german]
+!begin_node Zerteilen Sie große Dokumentationen
+!endif
+!iflang [english]
+!begin_node Split large documentations
+!endif
+!html_name tips_split.html
+
+!iflang [german]
+Falls Sie eine Dokumentation schreiben, die einen Umfang von 30~kB
+oder mehr hat, so sollten Sie sie in kleine Häppchen aufteilen. Diese
+Dateien können dann mit dem (!KW [include]) an passender Stelle eingeladen
+werden.
+
+Durch die Aufteilung haben Sie den Vorteil, dass Sie die Dokumentation
+durch einfaches Verschieben nur einer einzigen Zeile neu gliedern
+können. Wäre der gesamte Quelltext in einer Datei, müssten Sie mit
+einem Editor gleich ganze Blöcke umkopieren.
+
+Ein weiterer Vorteil der Aufteilung ist, dass Sie bestimmte Kapitel
+schnell wiederfinden können, sofern Sie den Dateien sinnvolle Namen
+geben.
+
+Außerdem können Sie leicht und schnell nur Teile der Dokumentation auf
+syntaktische Korrektheit testen. Nehmen wir an, wir haben einen
+Quelltext mit fünf Kapiteln. Erstellen Sie eine Datei mit den globalen
+Schaltern, eine Hauptdatei und fünf Dateien mit dem Kapiteltext:
+
+!begin_quote
+!vinclude (!EXAMPLES)main.u
+!end_quote
+
+Falls Sie nun einmal nur ein Kapitel umwandeln wollen, erstellen Sie
+ganz einfach eine zusätzliche Hauptdatei, die Sie dann umwandeln:
+
+!begin_quote
+!vinclude (!EXAMPLES)ch5test.u
+!end_quote
+
+Gerade bei sehr umfangreichen Dokumentationen kann man die Fehlersuche
+und -korrektur drastisch beschleunigen.
+
+Falls Sie sich mal ein Bild davon machen wollen, wie so eine
+Aufteilung aussehen kann, dann schauen Sie sich einmal die Quelltexte
+dieser UDO-Dokumentation an. Stünde diese Dokumentation in einer
+Datei, hätte ich schon längst den Überblick verloren.
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+If you write a documentation that is 30~kB or larger you should split up it
+into different parts that you can merge with (!KW [include]).
+
+By splitting up the documentation you are e.g. enabled to restructure it by
+simply moving one line of your main source file. If your documentation is
+part of one file you have to move blocks of text to restructure it.
+
+Another advantage is that you can find specific chapters more quickly if you
+write them to files that you name like this chapter.
+
+Furthermore you can test or convert only some parts of the documentation.
+My be you have a documentation with five chapters. Write a preamble file, a
+main file and five files that contain the chapters:
+
+!begin_quote
+!vinclude (!EXAMPLES)main.u
+!end_quote
+
+If you now want to convert a single chapter you simply edit another main
+file:
+
+!begin_quote
+!vinclude (!EXAMPLES)ch5test.u
+!end_quote
+
+If you use this method you will be able to find errors in a large
+documentation more quickly.
+
+Just take a look at the source files of the UDO documentation if you want to
+know how to split up a large documentation. You can believe me that it would
+be hard work if all the text would be part of a single text file.
+!endif
+
+!end_node
+# Ende: Zerteilen Sie / Split
+
+################################################################################
+!iflang [german]
+!begin_node Verwenden Sie standardisierte Quelltexte
+!endif
+!iflang [english]
+!begin_node Use standardized source files
+!endif
+!html_name tips_standardize.html
+
+!iflang [german]
+Es soll ja Autoren geben, die laufend neue Programme oder Hypertexte
+veröffentlichen. Und in fast allen Beschreibungen tauchen Kapitel auf,
+in denen z.B. Copyrightangaben benutzt werden. Solche Dinge braucht
+man natürlich nicht immer wieder neu zu schreiben, sondern kann sich
+unter Zuhilfenahme von Makros kleinere Standardtexte erstellen.
+
+Nehmen wir an, unsere Copyrightangabe sieht so aus:
+
+!begin_quote
+!begin_verbatim
+""Hello, World!"" Version 8.15 (!nl)
+Copyright (!copyright) 1996 bei C. Anfänger
+!end_verbatim
+!end_quote
+
+Bei einem anderen Programm wird wieder fast die gleiche Angabe
+erfolgen, lediglich der Name des Programms und die Versionsnummer
+werden sich unterscheiden.
+
+Was liegt also näher, als solch einen Text zu standardisieren?
+
+!begin_quote
+!begin_verbatim
+""(!ProgrammName)"" Version (!ProgrammVersion) (!nl)
+Copyright (!copyright) (!ProgrammJahr) bei C. Anfänger
+!end_verbatim
+!end_quote
+
+Im Vorspann einer Datei, die diesen Text einbindet, müssen dann
+lediglich die Makros ""ProgrammName"", ""ProgrammVersion"" und
+""ProgrammJahr"" gesetzt werden, im Hauptteil muss diese Datei dann nur
+noch an passender Stelle eingebunden werden:
+
+!begin_quote
+!begin_verbatim
+!macro ProgrammName    Hello, World!
+!macro ProgrammVersion 8.15
+!macro ProgrammJahr    1996
+...
+!begin_document
+...
+!include copyleft.ui
+!end_verbatim
+!end_quote
+
+Dieser Text kann dann wieder beim nächsten Projekt eingesetzt werden,
+indem man einfach die Makros anders definiert.
+
+Zugegeben, dies ist nur ein kurzes Beispiel. Bei umfangreicheren
+Texten ist es jedoch eine sehr große Arbeitserleichterung.
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+There are some authors that write every few weeks a new program or a new
+hypertext. And in every documentation you can read a disclaimer or a
+copyright chapter. Wouldn't it be easier to use the same text all the time?
+
+No problem, just use macros. The following example shows how to use a
+standardized copyright text. May be you have a written a program that
+contains this copyright note:
+
+!autoref [off]
+!begin_quote
+
+!begin_verbatim
+""Hello, World!"" Version 8.15 (!nl)
+Copyright (!copyright) 1996 by C. Rookie
+!end_verbatim
+
+!end_quote
+!autoref [on]
+
+Your next program contains a similar text, only the name of the program and
+the version number differ. Wouldn't it be better to use a standardized text
+any time you write the documentation of a new software?
+
+!autoref [off]
+!begin_quote
+
+!begin_verbatim
+""(!PrgName)"" Version (!PrgVersion) (!nl)
+Copyright (!copyright) (!PrgYear) by C. Rookie
+!end_verbatim
+
+!end_quote
+!autoref [on]
+
+Here the name, the version number and the years will be replaced by the
+contents of macros ""PrgName"", ""PrgVersion"" and ""PrgYear"". If you write
+the upper text to a sinlge file you can use it for many documentations where
+only the macros have to be defined.
+
+!autoref [off]
+!begin_quote
+
+!begin_verbatim
+!macro PrgName    Hello, World!
+!macro PrgVersion 8.15
+!macro PrgYear    1996
+...
+!begin_document
+...
+!include copyleft.ui
+!end_verbatim
+
+!end_quote
+!autoref [on]
+
+It's true that this is only a small example. But you can make more complex
+files if you want to.
+!endif
+
+!end_node
+# Ende: Standardisierung
+
+################################################################################
+!iflang [german]
+!begin_node Schreiben Sie Ihre eigenen Kommandos
+!endif
+!iflang [english]
+!begin_node Write your own commands
+!endif
+!html_name tips_owncommands.html
+
+!iflang [german]
+UDO unterstützt längst nicht alle Möglichkeiten jedes Ausgabeformates.
+Jedoch ist es unter Zuhilfenahme der Definitionen ein Leichtes, sich
+eigene Befehle zu schreiben oder spezielle Befehle für ein
+Ausgabeformat einzubauen. Die Kenntnis der Syntax des Ausgabeformates
+ist dabei natürlich sehr von Vorteil.
+
+Das folgende Beispiel zeigt, wie man Befehle zur Änderungen der
+Schriftgröße im (!LaTeX)-, HTML-, WinHelp- und Rich Text Format einbauen
+kann:
+
+!begin_quote
+!vinclude (!EXAMPLES_DIST)font_size.u
+!end_quote
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+UDO doesn't support every command of the destination formats. If you need a
+special command you can add it by using definitions with parameters. You
+only need some knowledge about the destination format.
+
+The following example shows how to write commands for changing the font size
+for (!LaTeX), HTML, Windows Help and RTF:
+
+!begin_quote
+!vinclude (!EXAMPLES_DIST)font_size.u
+!end_quote
+!endif
+
+!end_node
+# Ende: eigene Kommandos
+
+!end_node
+# Ende: Tips + Tricks
+
+################################################################################
+################################################################################
+!iflang [german]
+!begin_node Allgemeine Fragen
+!endif
+!iflang [english]
+!begin_node General questions
+!endif
+!html_name faq.html
+
+!begin_description
+
+############################################################
+!iflang [german]
+!item [Was bedeutet ''FAQ''?]
+
+""FAQ"" bedeutet ""Frequently Asked Questions"" und bedeutet
+übersetzt soviel wie ""häufig gestellte Fragen"". Im übertragenen
+Sinn versteht man darunter eine Auflistung eben dieser oft
+gestellten Fragen samt der passenden Antwort.
+!endif
+# ------------------------------------------------------------------------------
+# kein englisches Äquivalent verfügbar; obiger Text auf Englisch ist sicherlich entbehrlich
+!iflang [english]
+!endif
+
+############################################################
+!iflang [german]
+!ifdest [html]
+!hline
+!endif
+!item [Wieso heißt UDO ''UDO''?]
+
+Als ich mit der Programmierung von UDO begann, brauchte ich einen
+Namen. Mir fiel auf die Schnelle nichts besseres ein als die
+Abkürzung ""UDO"", was als Abkürzung für ""(!B)U(!b)niversal (!B)DO(!b)cument""
+steht.
+
+Übrigens: Der Autor heißt mit Vornamen nicht Udo, sondern Dirk!
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!item [Why is UDO named ''UDO''?] ~
+
+When I began programming UDO I had no better idea than naming it ""UDO"",
+the abbreviation for ""(!B)U(!b)niversal (!B)DO(!b)cument"".
+
+By the way: The author's first name isn't Udo, he's called Dirk!
+!endif
+
+############################################################
+!ifdest [html]
+!hline
+!endif
+!iflang [german]
+!item [Wie spricht man ''UDO'' aus?]
+
+''UDO'' wird genauso ausgesprochen wie der Vorname Udo, also ''Uh-Doh''. ''UDO'' wird (!I)nicht(!i) anglophil wie ''Judo'' oder ''You do'' ausgesprochen!
+!endif
+
+!iflang [english]
+!item [How to I pronounce ''UDO''?] ~
+
+''UDO'' is pronounced like the prename Udo: ''Ooh-do''. Pronounce the ''U''
+like the ''u'' in ''butcher'', the ''do'' like the ''do'' in ''document''.
+Please don't pronounce it like ''You do''.
+!endif
+
+############################################################
+!ifdest [html]
+!hline
+!endif
+!iflang [german]
+!item [Woher bekomme ich die aktuellen Versionen?]
+
+!label Bezugsquellen
+#Aktuelle Versionen von UDO können sich Besitzer eines Modems aus
+#dem Gruppenprogrammteil UDO.Pub der (!idx [Maus Iserlohn MK2]) (++49 2371
+#944925) downloaden. Auf neue Versionen wird in der (!idx [MausNet])-Gruppe
+#(!T)ATARI.NEWS(!t) hingewiesen.
+
+Die aktuellen Versionen sind im (!idx [WWW])
+unter (!url [http://www.udo-open-source.org/] []) erhältlich.
+
+#Interessenten, die kein Modem besitzen und keinen Zugriff auf
+#FTP-Server oder das (!idx [World Wide Web]) haben, können die aktuellen
+#Versionen auch durch Einsenden einer formatierten Diskette samt
+#adressierten und ausreichend frankierten Rückumschlags anfordern.
+
+!begin_ignore
+# auskommentiert 13.12.2003 - Ulrich Kretschmer
+
+!raw [tex] \pagebreak[3]
+
+Die Name der Archive der einzelnen Versionen haben jeweils einen
+bestimmten Aufbau:
+
+!begin_quote
+!begin_verbatim
+udorlyyy.sss
+   ||| ||  |
+   ||| |+--+--- .zip: Gepackt mit ST-ZIP oder PKZIP
+   ||| |        .tgz: Mit gzip gepacktes tar-Archiv
+   ||| |
+   ||+-+------- beo:  Version für BeOS
+   ||           hp4:  Version für HP-UX, 300/400er Baureihe
+   ||           hp8:  Version für HP-UX, 700/800er Baureihe
+   ||           lin:  Version für Linux
+   ||           mac:  Version für Mac~OS
+   ||           nex:  Version für NeXTStep
+   ||           sin:  Version für Sinix
+   ||           sun:  Version für SunOS
+   ||           tos:  Version für Atari und Kompatible
+   ||           dos:  Version für DOS, OS/2 und Windows
+   ||           man:  Die Quelltexte dieser Dokumentation
+   ||
+   |+---------- g:    deutschsprachige Version
+   |            e:    englischsprachige Version
+   |
+   +----------- Releasenummer: 6 für UDO Rel. 6
+!end_verbatim
+!end_quote
+
+Das Archiv mit der deutschsprachigen Atari-Version des Release 6
+würde also (!T)(!UDOR)gtos.tos(!t) lauten, das mit den englischsprachigen
+Quelltexten (!T)(!UDOR)eman.zip(!t).
+
+Falls die Archive auf einem FTP-Server liegen, so können sie
+eventuell aussagekräftige Namen besitzen, z.B.
+(!T)(!UDOR)_ger_linux.tar.gz(!t) oder (!T)(!UDOR)_eng_hp-ux.tar.gz(!t).
+!end_ignore
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!item [How can I get the current versions?] ~
+
+# You can download the current version via FTP or from the World Wide Web.
+
+#The current versions are always available in the BBS called ""Maus MK2
+#Iserlohn-Kalthof"" (+49 2371 944925) in the ""Gruppenprogrammteil UDO.Pub"".
+#After the login press ''P'' for ''Programmteil'', press ''G'' for
+#''Gruppenprogrammteil'' and enter ''UDO.Pub''. You can list all archives by
+#pressing ''A'' (''Ausführliche Liste'') and ''L'' (output list). Remember
+#the number of the archive and start the download by pressing ''D'' and
+#entering the number of the archives.
+
+To download the current version from the World Wide Web open the URL
+(!T)(!url [http://www.udo-open-source.org/] [])(!t). Here you will find links to
+the UDO archives.
+
+#If you don't own a modem and you don't have access to the Internet you can
+#get the current version by simply sending me a formatted floppy disk besides
+#a readdressed envelope and 2~DM for stamps. Please tell me which operating
+#system you use.
+
+!begin_ignore
+# auskommentiert 13.12.2003 - Ulrich Kretschmer
+!raw [tex] \pagebreak[3]
+
+The names of the archives are constructed in the following way:
+
+!begin_quote
+!begin_verbatim
+udorlyyy.sss
+   ||| ||  |
+   ||| |+--+--- .zip: ZIP archive
+   ||| |        .tgz: tar gzip archive
+   ||| |
+   ||+-+------- beo:  version for BeOS
+   ||           hp4:  version for HP-UX, 300/400
+   ||           hp8:  version for HP-UX, 700/800
+   ||           lin:  version for Linux
+   ||           mac:  version for Mac~OS
+   ||           nex:  version for NeXTStep
+   ||           sin:  version for SINIX
+   ||           sun:  version for SunOS
+   ||           tos:  version for Atari ST and clones
+   ||           dos:  version for DOS, OS/2 and Windows
+   ||           man:  source files of this manual
+   ||
+   |+---------- g:    version with German manual
+   |            e:    version with English manual
+   |
+   +----------- Release number: 6 for UDO Rel. 6
+!end_verbatim
+!end_quote
+
+The archive containing the English version for MS-DOS is called
+(!V)(!UDOR)edos.zip(!v), the archive containing the English source files of
+this manual is called (!V)(!UDOR)eman.zip(!v).
+
+The Unix version may have longer names like (!V)(!UDOR)_ger_linux.tar.gz(!v) or
+(!V)(!UDOR)_eng_hp-ux-34.tar.Z(!v).
+!end_ignore
+
+!endif
+
+############################################################
+!ifdest [html]
+!hline
+!endif
+!iflang [german]
+!item [Wird es Portierungen auf andere Systeme geben?]
+
+Von UDO existieren momentan Versionen für folgende Systeme:
+
+!begin_itemize !short
+!item Atari TOS
+# !item	BeOS
+!item DOS, OS/2, Windows
+# !item HP-UX 9.x auf HP-Rechnern der 300/400er und 700/800er Baureihe
+!item Linux x86
+!item Mac~OS
+# !item NeXTStep
+# !item Sinix
+# !item SunOS 5.5
+!end_itemize
+
+UDO wurde komplett in C geschrieben, verzichtet vollkommen auf
+betriebssystemspezifische Routinen. Dadurch könnte die Kommandozeilenversion von UDO theoretisch auf jedes beliebige System portiert werden, für das ein ANSI-C-Compiler existiert.
+
+Wenn Sie an einer Portierung auf ein bestimmtes System interessiert sind und einen Compiler für dieses System besitzen, so (!link [kontaktieren] [Kontaktadresse]) Sie bitte die UDO-Entwickler.
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!item [Will there be versions for other operating systems?] ~
+
+At the moment UDO is available for the following operating systems:
+
+!begin_itemize !short
+!item	Atari TOS
+# !item	BeOS
+!item	DOS, OS/2, Windows
+# !item	HP-UX 9.x for 300/400 and 700/800 models
+!item	Linux x86
+!item	Mac~OS
+# !item	NeXTStep
+# !item	SINIX
+# !item SunOS 5.5
+!end_itemize
+
+UDO was completely written in highly portable C. The source code doesn't
+call any system specific functions. Due to this fact UDO could be ported to
+any operating system a C compiler is existing for.
+
+If you would like to port UDO to a system which isn't listed above, please (!link [contact] [Contact addresses]) the UDO developer team.
+!endif
+
+############################################################
+!ifdest [html]
+!hline
+!endif
+!iflang [german]
+!item [Können auch ''systemfremde'' Formate erzeugt werden?]
+
+Mit UDO kann auf man jedem System natürlich auch Formate für
+andere Betriebssysteme erzeugt werden, da die Versionen identisch
+sind. So ist es möglich, mit der Atari-Version WinHelp-Quelltexte
+zu erzeugen oder unter OS/2 mit der DOS-Version ST-Guide-Quelltexte.
+
+Lediglich eine Umsetzung der Sonderzeichen muss ggf. erfolgen.
+Dies kann man z.B. mit GNU-recode durchführen. Auf Wunsch gibt es
+auch bei (!link [mir] [Kontaktadresse]) ein Programm zur Umsetzung der Sonderzeichen in
+Textdateien.
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!item [Can UDO generate formats from other systems?] ~
+
+Sure. E.g. you can run UDO on a Windows PC and save Linuxdoc-SGML files. You
+can run UDO on a Linux PC and save Windows Help files. No problem. UDO has
+the same functions on any operating systems it's available for.
+
+Maybe you have only to convert the file with GNU-Recode later if the
+charsets are not the same.
+!endif
+
+############################################################
+!ifdest [html]
+!hline
+!endif
+!iflang [german]
+!item [Kann man Texte ""hier"" schreiben und ""dort"" konvertieren?]
+
+Ja, denn UDO versteht alle Zeichensätze der Systeme, für die UDO
+erhältlich ist. Somit können Texte unter DOS geschrieben werden
+und auf einem Unix-Rechner konvertiert werden.
+
+Sogar in einer Datei können die Zeichensätze gewechselt werden,
+falls das nötig sein sollte. Durch einen Satz Befehle können Sie
+UDO mitteilen, welcher Zeichensatz in den folgenden Zeilen
+benutzt werden soll.
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!item [Can I write my source files ""here"" and translate them ""there""?] ~
+
+Yes, you can e.g. write your source files on a Windows PC and convert them
+on a BeBox or Apple Macintosh. UDO knows the charsets of all operating
+system it's available for. You have only to say UDO which charset was used
+for writing the source files by using the commands like (!KW [code] [[iso!!]])
+or (!KW [code] [[mac!!]]).
+!endif
+
+############################################################
+!ifdest [html]
+!hline
+!endif
+!iflang [german]
+!item [Kann sich die UDO-Syntax noch ändern?]
+
+!index Änderungen der Syntax
+!index Syntaxänderungen
+UDO ist ein Programm, das ständig weiterentwickelt wird. Es
+werden sicherlich auch in Zukunft weitere Kommandos hinzukommen.
+
+Teilweise wird es sich auch nicht vermeiden lassen, die Syntax
+einiger Kommandos zu ändern. Auf solche Änderungen wird aber
+besonders hingewiesen, so dass man die nötigen Anpassungen
+innerhalb von Minuten mit einem Editor vornehmen kann.
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!item [May the UDO syntax change in the future?] ~
+
+!index Syntax changes
+
+UDO is that kind of software that is improved day by day. New commands will
+appear in the future, that's for sure.
+
+In some cases it will be necessary to change the syntax of some commands.
+But I will tell you about these changes. Just take a look at the ""History""
+to get to know about the changes in the past.
+!endif
+
+############################################################
+!ifdest [html]
+!hline
+!endif
+!iflang [german]
+!item [Wie funktioniert UDO?]
+
+UDO liest die Quelldatei(en) in zwei Durchgängen ein.
+
+Im ersten Durchgang werden Schalter, Makros, Definitionen sowie
+die Namen der Kapitel für das Inhaltsverzeichnis und die
+automatische Referenzierung ermittelt.
+
+Im zweiten Durchgang erfolgt dann die Konvertierung und
+Formatierung des Textes. UDO speichert bis zum Eintreffen einer
+Leerzeile bzw. eines Kommandos den Text in einem internen Puffer
+und gibt dann den eingelesenen Absatz aus bzw. führt das
+jeweilige Kommando aus.
+
+Aus dem letzten Satz folgt: Leerzeilen (!I)und(!i) Kommandos unterteilen
+Absätze.
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!item [How does UDO work?] ~
+
+UDO reads the source file(s) in two passes.
+
+In the first pass UDO reads in the switches, macros, definitions and the
+chapter titles that are needed for referencing.
+
+In the second pass UDO will convert and layout the text. UDO will save all
+lines in an internal buffer until it reads an empty line or an UDO command.
+A command or an empty line tells UDO to layout the last paragraph and to go
+on reading the source file.
+!endif
+
+############################################################
+!ifdest [html]
+!hline
+!endif
+!iflang [german]
+!item [Wie referenziert UDO?]
+
+!index Automatische Referenzierung
+!index Querverweise
+!index Referenzierung
+UDO legt bei den Hypertext-Formaten (außer beim ST-Guide-Format)
+im Text automatisch Querverweise zu Kapiteln und Sprungmarken an.
+Es werden dabei nur Verweise auf ""andere"" Seiten angelegt, also
+keine Verweise auf Stellen der aktuellen Seite.
+
+!index !autoref
+Mit dem Schaltern (!KW [autoref]) kann man die automatische Referenzierung aus- (Parameter (!I)[off](!i)) und wieder einschalten (Parameter
+(!I)[on](!i)).
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!item [How does UDO reference other parts of the document?] ~
+
+UDO inserts links in hypertext formats (except for the ST-Guide)
+automatically to other parts of the documentation. UDO references chapter
+titles, labels and aliases.
+
+!index (!kw [autoref])
+
+Using the switch (!KW [autoref] [[off!!]]) you can tell UDO not to insert any
+references until you use the switch (!KW [autoref] [[on!!]]).
+!endif
+
+############################################################
+!ifdest [html]
+!hline
+!endif
+!iflang [german]
+!item [Wie verweist man auf Stellen des aktuellen Kapitels?]
+
+Da UDO nicht auf der Seite Verweise anlegt, auf der ein Label
+gesetzt wurde, gibt es ein Problem, falls man am Seitenende einen
+Verweis zum Seitenanfang anlegen will. Daher muss man hier einen
+manuellen Querverweis setzen.
+
+!begin_quote
+!begin_verbatim
+!node  Test
+!label Test Anfang
+[...]
+(!link [Zum Seitenanfang] [Test Anfang])
+!end_verbatim
+!end_quote
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!item [How can I link to parts of the current page?] ~
+
+Because UDO doesn't insert links to labels of the same page you have to
+insert a explicit link to this label by using the (!KKW [link])
+placeholder. An example:
+
+!autoref [off]
+!begin_quote
+!begin_verbatim
+!node  Test
+!label Test top
+[...]
+(!link [Back to top of page] [Test top])
+!end_verbatim
+!end_quote
+!autoref [on]
+!endif
+
+############################################################
+!ifdest [html]
+!hline
+!endif
+!iflang [german]
+!item [Wie bekomme ich Bilder in ein Inhaltsverzeichnis?]
+
+Dazu muss man auf den Befehl (!KW [tableofcontents]) verzichten und ein
+Kapitel anlegen, in welches das Inhaltsverzeichnis ausgegeben
+wird. In einem normalen Kapitel kann man natürlich Bilder wie
+sonst auch benutzen. Beispiel:
+
+!begin_quote
+!begin_verbatim
+!begin_document
+!maketitle
+!node Inhaltsverzeichnis
+!image foo
+!toc [all]
+
+!node Erstes Kapitel
+!end_verbatim
+!end_quote
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!item [How can I get pictures into a table of content?]
+
+You have to make your own table of contents, that means you have to leave
+the (!KW [tableofcontents]) command. An example:
+
+!begin_quote
+!begin_verbatim
+!begin_document
+!maketitle
+!node Contents
+!image foo
+!toc [all]
+
+!node First chapter
+!end_verbatim
+!end_quote
+!endif
+
+############################################################
+!ifdest [html]
+!hline
+!endif
+!iflang [german]
+!item [Welchen Editor kann ich für UDO verwenden?]
+
+Hier einige Vorschläge:
+
+!begin_table [|l|c|c|] !hline
+"e" (e.exe) !! OS/2 !! Bestandteil des Systems
+!hline
+(!url [Kate, KEdit, KWrite] [http://kate.kde.org/]) !! Linux/KDE !! Open Source
+!hline
+(!url [NotePad++] [http://www.froeb-software.de/]) !! Windows !! Freeware
+!hline
+(!url [Pepper] [http://www.slacksolutions.com/]) !! Linux, Mac, Windows !! kommerziell
+!hline
+(!url [SciTe] [http://www.scintilla.org/]) !! Linux, Windows !! Open Source
+!hline
+(!url [SuperEdi] [http://www.wolosoft.com/]) !! Windows !! Freeware
+!hline
+(!url [TextPad] [http://www.texpad.com/]) !! Windows !! Freeware
+!hline
+(!url [UltraEdit32] [http://www.ultraedit.com/]) !! Windows !! kommerziell
+!hline
+!end_table
+
+# Bemerkungen 11.05.2005 - Ulrich Kretschmer:
+# Auswahl-/Testkriterien:
+# a) kommt unter Windows mit Unix/Linux-Zeilenumbrüchen zurecht
+# b) kann überlange Zeilen am Bildschirm umbrechen (word wrap)
+# c) Zeilennummern-Darstellung auf Basis der Datei-Zeilenumbrüche, nicht auf Basis der Bildschirmanzeige
+# Ergebnisse:
+# * BEditor, www.ubesoft.de: (c) funktioniert nicht; eher einfacher Editor
+# * iEdit, www.bitshape.com: kann keine Umbrüche, d.h. (b) nicht erfüllt
+# * Boxer Text Editor, www.boxersoftwae.com: Situation bzgl. Umbrüchen unklar
+# * FoldMaster, www.foldmaster.de: kann keine Umbrüche; "Falteneditor" = interessantes Konzept
+# * NaSTex, www.saschaseidel.de, Freeware: (c) nicht erfüllt; aber (b) einfach umschaltbar
+# * NotePro, www.crystaloffice.com: (a) nicht erfüllt, (b) ja, (c) nicht erfüllt
+# * NoteTab light, www.notetab.com: (c) nicht erfüllt
+# * Pepper:
+# * PFE Programmer's File Editor, www.lancs.ac.uk/people/cpaap/pfe, kann keine Umbrüche, Stand 1999
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+!item [Which editor can I use for UDO?]
+
+Here are some suggestions:
+
+!begin_table [|l|c|c|] !hline
+"e" (e.exe) !! OS/2 !! part of the system
+!hline
+(!url [Kate, KEdit, KWrite] [http://kate.kde.org/])  !! Linux/KDE !! Open Source
+!hline
+(!url [NotePad++] [http://www.froeb-software.de/]) !! Windows !! Freeware
+!hline
+(!url [Pepper] [http://www.slacksolutions.com/]) !! Linux, Mac, Windows !! commercial
+!hline
+(!url [SciTe] [http://www.scintilla.org/]) !! Linux, Windows !! Open Source
+!hline
+(!url [SuperEdi] [http://www.wolosoft.com/]) !! Windows !! Freeware
+!hline
+(!url [TextPad] [http://www.texpad.com/]) !! Windows !! Freeware
+!hline
+(!url [UltraEdit32] [http://www.ultraedit.com/]) !! Windows !! commercial
+!hline
+!end_table
+
+!endif
+
+!end_description
+
+!end_node
+# Ende: Fragen / FAQ
+
+################################################################################
+################################################################################
+!iflang [german]
+!begin_node Erzeugte Dateien
+!endif
+!iflang [english]
+!begin_node Generated files
+!endif
+!html_name files.html
+
+!iflang [german]
+Es folgt eine Auflistung der Endungen der Dateien, die Ihnen beim
+Umgang mit UDO über den Weg laufen werden.
+
+#Ausgabe-Formate
+!begin_xlist [.htm(l):] !short
+!item [.1:]      Nroff
+!item [.c:]      C Sourcecode
+!item [.txt:]    ASCII-Format
+!item [.man:]    Manualpage-Format
+!item [.cmd:]    Kommandodatei für den Pure-C-Help-Hypertext-Compiler
+!item [.hpj:]    Projektdatei für den WinHelp-Hypertext-Compiler (!T)HC.EXE(!t)
+!item [.htm(l):] HTML-Format
+!item [.lyx:]    LyX-Format
+!item [.pas:]    Pascal Sourcecode
+!item [.rtf:]    RTF bzw. WinHelp- oder QuickView-Quelltext
+!item [.scr:]    Pure-C-Help-Quelltext
+!item [.sgm(l):] Linuxdoc-SGML-Quelltext
+!item [.stg:]    ST-Guide-Quelltext
+!item [.txt:]    Turbo-Vision-Help-Quelltext
+!item [.tex:]    (!LaTeX)-Quelltext
+!item [.texi:]   Texinfo-Quelltext
+!end_xlist
+
+Dateien mit der Endung (!V).ul?(!v) enthalten die Fehlermeldungen und
+Informationen, die UDO während der Umwandlung erzeugt.
+
+Dateien mit der Endung (!V).uh?(!v) enthalten die Trennvorschläge für das
+ASCII-, ST-Guide- und Pure-C-Help-Format.
+
+Dateien mit der Endung (!V).ut?(!v) enthalten den ""Include-Tree"", also den
+logischen Aufbau aus Include-Dateien Ihres Quelltextes.
+
+Die folgenden Dateiendungen werden auftauchen, wenn Sie die von UDO
+erzeugten Dateien durch die formatzugehörigen Programmen (siehe
+Klammerinhalt) weiterbearbeiten:
+
+!begin_xlist [.www]
+!item [.err:] Logfile des WinHelp-Compilers ((!T)HC.EXE(!t))
+
+!item [.h:]   C-Header-File für Turbo-Vision ((!T)TVHC.EXE(!t))
+
+!item [.hlp:] WinHelp-Datei ((!T)HC.EXE(!t)), Turbo-Vision-Help-Datei ((!T)TVHC.EXE(!t)),
+       Pure-C-Help-Datei ((!T)HC.PRG(!t))
+
+!item [.hyp:] ST-Guide-Hypertext ((!T)HCP.TTP(!t))
+
+!item [.ref:] ST-Guide-Referenzdatei ((!T)HCP.TTP(!t))
+!end_xlist
+
+!endif
+# -------------------------------------------------------------------------------'
+!iflang [english]
+Using UDO, you may see the follwing file suffixes:
+
+#Ausgabe-Formate
+!begin_xlist [.htm(l):] !short
+
+!item	[.1:]		Nroff
+!item	[.c:]		C source code
+!item	[.cmd:]		command file for the Pure C help compiler
+!item	[.txt:]		ASCII
+!item	[.hpj:]		project file for the Microsoft Help Compiler (!V)HC.EXE(!v)
+!item	[.htm(l):]	HTML
+!item	[.lyx:] 	LyX
+!item	[.man:]		Manualpage
+!item	[.pas:]		Pascal source code
+!item	[.rtf:]		RTF or WinHelp source code or QuickView source code
+!item	[.scr:]		Pure C Help source code
+!item	[.sgm(l):]	Linuxdoc-SGML
+!item	[.stg:]		ST-Guide source code
+!item	[.txt:]		Turbo-Vision-Help source code
+!item	[.tex:]		(!LaTeX)
+!item	[.texi:]	Texinfo
+
+!end_xlist
+
+Files with the suffix (!V).ul?(!v) contain the error messages and warnings
+UDO prints while converting the source file.
+
+Files with the suffix (!V).uh?(!v) contain the syllabification patterns UDO
+prints for ASCII, ST-Guide and Pure C Help.
+
+Files with the suffix (!V).ut?(!v) contain the ""include tree"".
+
+The following suffixes appear if UDO saves a file that has to be converted
+with another software to get the final result:
+
+!begin_xlist [.www:]
+
+!item	[.err:]	log file of the Microsoft Help Compiler ((!V)HC.EXE(!v))
+!item	[.h:]	C header file for Turbo Vision ((!T)TVHC.EXE(!t))
+!item	[.hlp:]	Windows Help file ((!T)HC.EXE(!t)),
+				Turbo Vision Help file ((!T)TVHC.EXE(!t)),
+				Pure C Help file ((!T)HC.PRG(!t))
+!item	[.hyp:]	ST-Guide hypertext ((!T)HCP.TTP(!t))
+!item	[.ref:]	ST-Guide reference file ((!T)HCP.TTP(!t))
+
+!end_xlist
+!endif
+
+!end_node
+
+################################################################################
+################################################################################
+# Fehlermeldungen
+# @(#) Fehlermeldungen, Dirk Hagedorn, 26.09.1995
+# @(#) Meldungen werden nun mit Phoenix verwaltet, 22.08.1996
+
+!ifnset [NoErrors]
+
+!iflang [german]
+!begin_node Fehlermeldungen
+!endif
+!iflang [english]
+!begin_node Error messages
+!endif
+!html_name errormessages.html
+
+!iflang [german]
+UDO protokolliert in einer Datei, welche die Endung (!V).ul?(!v) besitzt,
+Fehler, die bei der Umwandlung aufgetreten sind. Die Fehlermeldungen,
+Warnungen und Hinweise haben dabei immer folgenden Aufbau:
+
+!begin_quote
+!begin_verbatim
+  Error: <datei> <zeilennummer>: <text>
+Warning: <datei> <zeilennummer>: <text>
+   Hint: <datei> <zeilennummer>: <text>
+!end_verbatim
+!end_quote
+
+Zur Beseitigung dieser Fehlermeldung schauen Sie sich in der
+angegebenen Datei die betroffene Zeile an und versuchen Sie, den
+angegeben Fehler zu lokalisieren und zu korrigieren. Beginnen Sie dabei
+mit der Korrektur des ersten Fehlers jeder angegebenen Datei und
+wandeln Sie die Quelldatei neu um, da manche Fehlermeldungen auf
+vorhergehende Fehler zurückzuführen sind.
+
+!endif
+# ------------------------------------------------------------------------------
+!iflang [english]
+UDO prints all error messages, warnings and hints that appear when
+converting the source file to files with the suffix
+(!V).ul?(!v). Each message is constructed the following way:
+
+!begin_quote
+!begin_verbatim
+  Error: <file> <line number>: <text>
+Warning: <file> <line number>: <text>
+   Hint: <file> <line number>: <text>
+!end_verbatim
+!end_quote
+
+If you want to avoid these errors, warnings and hints open the printed file,
+go to the printed line and try to find the error. Start with the first
+printed error and convert your source file once again. A lot of messages
+will disappear because they depend on earlier errors.
+!endif
+
+# ------------------------------------------------------------------------------
+
+!begin_description
+
+!item [''!..'' called twice]
+!iflang [german]
+Das angegebene Kommando taucht zweimal oder sogar noch öfters in
+Ihrem Quelltext auf, darf aber nur einmalig benutzt werden.
+!endif
+!iflang [english]
+The printed command was used twice or more inside the source file
+even if it's only to be used once.
+!endif
+
+!item [''!..'' expected]
+!iflang [german]
+UDO hat den angegebenen Befehl erwartet. Überprüfen Sie, ob jede
+geöffnete Umgebung mit dem richtigen Befehl beendet wurde oder ob
+vielleicht ein (!I)!/begin_*](!i) fehlt.
+!endif
+!iflang [english]
+UDO has expected the printed command. Please check if all
+environments were finished with the correct command or if a
+(!I)!/begin_*(!i) is missing.
+!endif
+
+!item [''!..'' followed by ''!..'']
+!iflang [german]
+Eine Umgebung wurde mit einem falschen Befehl beendet. Entweder
+haben Sie den falschen Befehl zur Beedigung einer Umgebung
+vergessen oder falsch positioniert.
+!endif
+!iflang [english]
+You have finished an environment with an incorrect command or you
+have forgotten to finish it. Another possibility is that you have
+misplaced the (!I)!/end_*(!i) command
+!endif
+
+!item [''!..'' ignored inside preamble]
+!iflang [german]
+Das angegebene Kommando ist im Vorspann nicht erlaubt. Sorgen Sie
+dafür, dass es nach (!KW [begin_document]) angegeben wird oder löschen
+Sie das Kommando.
+!endif
+!iflang [english]
+It's only allowed to use the printed command inside the main part of
+the source file. That means you have to place it after
+(!KW [begin_document]).
+!endif
+
+!item [''!..'' ignored outside preamble]
+!iflang [german]
+Das angegebene Kommando ist im Hauptteil nicht erlaubt. Sorgen
+Sie dafür, dass es vor (!KW [begin_document]) angegeben wird oder löschen
+Sie das Kommando.
+!endif
+!iflang [english]
+It's only allowed to use the printed command inside the preamble of
+the source file. That means you have to place it before
+(!KW [begin_document]).
+!endif
+
+!item [''!..'' maybe not available in (!LaTex)]
+!iflang [german]
+Das angegebene Zeichen ist sehr wahrscheinlich nicht von (!LaTex)
+darstellbar. Verzichten Sie besser auf das angegebene Zeichen.
+!endif
+!iflang [english]
+The printed character cannot be used for (!LaTeX). Please try to use
+another character
+!endif
+
+!item [''!..'' not active]
+!iflang [german]
+Eine Schriftart oder Fußnote sollte beendet werden, obwohl Sie
+noch gar nicht begonnen wurde. Beachten Sie, dass die Platzhalter
+mit Großbuchstaben eine Schriftart oder Fußnote beginnen, wogegen
+Platzhalter mit Kleinbuchstaben sie beenden.
+!endif
+!iflang [english]
+A text style or a footnote shall be finished even if it isn't active.
+Please note that the placeholders contain a capital letter for
+activating a text style. The placeholders that finish a text style
+contain a small letter.
+!endif
+
+!item [''!..'' not available in ISO Latin 1]
+!iflang [german]
+Das angegebene Zeichen ist im ISO-Latin-1-Zeichensatz nicht
+definiert. UDO kann dieses Zeichen demnach nicht umwandeln.
+!endif
+!iflang [english]
+ISO Latin1 doesn't contain the printed character. Thus, UDO cannot
+convert the printed character.
+!endif
+
+!item [''!..'' not available in this charset]
+!iflang [german]
+Das angegebene Zeichen ist im Systemzeichensatz nicht vorhanden
+und kann demnach nicht dargestellt werden. Weichen Sie, falls
+möglich, auf andere Zeichen aus.
+!endif
+!iflang [english]
+The printed character isn't available in the system character set.
+Thus, UDO cannot convert it. Please try to avoid the printed
+character.
+!endif
+
+!item [''!..'' still active]
+!iflang [german]
+Eine Schriftart oder Fußnote soll begonnen werden, obwohl sie
+noch aktiv ist. Entweder fehlt vor der Stelle, an dem dieser
+Fehler auftritt, der Platzhalter zur Beendigung der Schriftart
+bzw. Fußnote oder Sie haben sich verschrieben.
+!endif
+!iflang [english]
+A text style or a footnote shall be started even if it's still
+active. Please note that the placeholders contain a capital letter
+for activating a text style. The placeholders that finish a text
+style contain a small letter.
+!endif
+
+!item [''!..'' without ''!..'']
+!iflang [german]
+Sie haben eine Umgebung beendet, obwohl sie noch gar nicht
+begonnen wurde. Entweder ist das Ende-Kommando überflüssig, oder
+aber das Anfangskommando fehlt.
+!endif
+!iflang [english]
+You wanted to finish an environment even if it wasn't started before.
+!endif
+
+!item [!/else without !/if]
+!iflang [german]
+In Ihrem Quelltext steht (!KW [else]), ohne dass Sie mit (!KW [if]), (!KW [ifdest])
+etc. eine Abfrage begonnen haben.
+!endif
+!iflang [english]
+You have used the (!KW [else]) command but you haven't started a
+query with (!KW [if]), (!KW [ifdest]) etc.
+!endif
+
+!item [!/endif without !/if]
+!iflang [german]
+In Ihrem Quelltext steht (!KW [endif]), ohne dass Sie mit (!KW [if]), (!KW [ifdest])
+etc. eine Abfrage begonnen haben.
+# ergänzt 04.01.2004 - Ulrich Kretschmer (vgl. Bug Nr. 43)
+Diese Fehlermeldung wird auch erzeugt, wenn im Quelltext ein (!KW [end_ignore]) ohne zugehöriges (!KW [begin_ignore]) vorkommt.
+!endif
+!iflang [english]
+Your source file contains an (!KW [endif]) command but you haven't
+startet a query with (!KW [if]), (!KW [ifdest]) etc.
+# ergänzt 04.01.2004 - Ulrich Kretschmer (vgl. Bug Nr. 43)
+You will also get this error message if you use (!KW [end_ignore]) without according (!KW [begin_ignore]).
+!endif
+
+!item [''!/item'' outside environment]
+!iflang [german]
+Sie haben einen Aufzählungspunkt außerhalb einer Aufzählung,
+Nummerierung, Beschreibung oder Liste eingesetzt. Sorgen Sie
+dafür, dass der Punkt innerhalb einer solchen Umgebung steht.
+!endif
+!iflang [english]
+You have used the (!KW [item]) command outside an itemization,
+enumeration, description or list.
+!endif
+
+!item [check this paragraph]
+!iflang [german]
+UDO zeigt Ihnen den Dateinamen und die Zeilennummer, wo sie einen
+Fehler korrigieren sollten.
+!endif
+!iflang [english]
+UDO prints a filename and a line number where you can find the reason
+for the upper printed error message.
+!endif
+
+!item [couldn't open <file> (pass1)]
+!iflang [german]
+Im ersten der beiden Durchgänge konnte UDO die angegebene Datei
+nicht öffnen.
+!endif
+!iflang [english]
+UDO couldn't open the printed file in the first of two passes.
+!endif
+
+!item [couldn't open <file> (pass2)]
+!iflang [german]
+Im zweiten der beiden Durchgänge konnte UDO die angegebene Datei
+nicht öffnen. Überprüfen Sie bitte den Dateinamen, den Sie bei
+einem Include-Befehl angegeben haben, löschen Sie das Include-Kommando oder kommentieren Sie es.
+!endif
+!iflang [english]
+UDO couldn't open the printed file in the second pass. Please check
+the filename you have used for (!KW [include]).
+!endif
+
+!item [couldn't open destination file]
+!iflang [german]
+UDO kann die angegebene Datei nicht öffnen. Überprüfen Sie den
+Dateinamen oder entfernen Sie den Schreibschutz der Datei, falls
+Sie bereits existiert.
+!endif
+!iflang [english]
+UDO couldn't open the destination file. Please check the filename or
+remove file protection of the existing file.
+!endif
+
+!item [couldn't open hypfile]
+!iflang [german]
+UDO kann die angegebene Datei nicht öffnen. Überprüfen Sie den
+Dateinamen oder entfernen Sie den Schreibschutz der Datei, falls
+Sie bereits existiert.
+!endif
+!iflang [english]
+UDO couldn't open the hyphenation file. Please check the filename or
+remove file protection of the existing file.
+!endif
+
+!item [couldn't open logfile]
+!iflang [german]
+UDO kann die angegebene Datei nicht öffnen. Überprüfen Sie den
+Dateinamen oder entfernen Sie den Schreibschutz der Datei, falls
+Sie bereits existiert.
+!endif
+!iflang [english]
+UDO couldn't open the log file. Please check the filename or remove
+file protection of the existing file.
+!endif
+
+!item [couldn't open source file]
+!iflang [german]
+UDO kann die angegebene Datei nicht öffnen. Überprüfen Sie den
+Dateinamen.
+!endif
+!iflang [english]
+UDO couldn't open the source file. Please check the filename.
+!endif
+
+!item [couldn't open treefile]
+!iflang [german]
+UDO kann die angegebene Datei nicht öffnen. Überprüfen Sie den
+Dateinamen oder entfernen Sie den Schreibschutz der Datei, falls
+Sie bereits existiert.
+!endif
+!iflang [english]
+UDO couldn't open the tree file. Please check the filename or remove
+file protection of the existing file.
+!endif
+
+!item [couldn't read BMP header]
+!iflang [german]
+Entweder ist die angegebene Datei nicht vorhanden oder aber es
+handelt sich nicht um eine Grafik im Windows-BMP-Format. Stellen Sie
+sicher, dass die Datei vorhanden ist und das es sich um das
+richtige Grafikformat handelt.
+!endif
+!iflang [english]
+The printed file isn't a Windows Bitmap or the file doesn't exist.
+!endif
+
+!item [couldn't read IMG header]
+!iflang [german]
+Entweder ist die angegebene Datei nicht vorhanden oder aber es
+handelt sich nicht um eine Grafik im IMG-Format. Stellen Sie
+sicher, dass die Datei vorhanden ist und das es sich um das
+richtige Grafikformat handelt.
+!endif
+!iflang [english]
+The printed file isn't a GEM image or the file doesn't exist.
+!endif
+
+!item [couldn't read MSP header]
+!iflang [german]
+Entweder ist die angegebene Datei nicht vorhanden oder aber es
+handelt sich nicht um eine Grafik im MSP-Format. Stellen Sie
+sicher, dass die Datei vorhanden ist und das es sich um das
+richtige Grafikformat handelt.
+!endif
+!iflang [english]
+The printed file isn't a MSP image or the file doesn't exist.
+!endif
+
+!item [couldn't read PCX header]
+!iflang [german]
+Entweder ist die angegebene Datei nicht vorhanden oder aber es
+handelt sich nicht um eine Grafik im PCX-Format. Stellen Sie
+sicher, dass die Datei vorhanden ist und das es sich um das
+richtige Grafikformat handelt.
+!endif
+!iflang [english]
+The printed file isn't a PCX image or the file doesn't exist.
+!endif
+
+!item [couldn't replace (!KKW [ilink])]
+!iflang [german]
+Ein manueller Link mit einem ""fließendes"" Bild konnte nicht
+ersetzt werden. Innerhalb eines Absatzes sind lediglich (!MAXLINK)
+interne und externe Querverweise sowie Querverweise auf Seiten
+und ""fließende"" Bilder möglich. Teilen Sie den Absatz, in dem
+dieser manuelle Querverweis benutzt werden soll in zwei Hälften
+oder entfernen Sie ein paar manuelle Querverweise.
+!endif
+!iflang [english]
+A manual image link couldn't be replaced. You are allowed to use up
+to (!MAXLINK) internal and external links and internal images inside
+each paragraph. Split up the paragraph in two or more parts or delete
+some links.
+!endif
+
+!item [couldn't replace (!KKW [img])]
+!iflang [german]
+Ein ""fließendes"" Bild konnte nicht ersetzt werden. Innerhalb
+eines Absatzes sind lediglich (!MAXLINK) interne und externe Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder möglich.
+Teilen Sie den Absatz, in dem dieser manuelle Querverweis benutzt
+werden soll in zwei Hälften oder entfernen Sie ein paar manuelle
+Querverweise.
+!endif
+!iflang [english]
+An internal image couldn't be replaced. You are allowed to use up to
+(!MAXLINK) internal and external links and internal images inside
+each paragraph. Split up the paragraph in two or more parts or delete
+some links.
+!endif
+
+!item [couldn't replace (!KKW [link])]
+!iflang [german]
+Ein manueller interner Querverweis konnte nicht ersetzt werden.
+Innerhalb eines Absatzes sind lediglich (!MAXLINK) interne und externe
+Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder
+möglich. Teilen Sie den Absatz, in dem dieser manuelle Querverweis benutzt werden soll in zwei Hälften oder entfernen Sie ein paar manuelle Querverweise.
+!endif
+!iflang [english]
+A manual link couldn't be replaced. You are allowed to use up to
+(!MAXLINK) internal and external links and internal images inside
+each paragraph. Split up the paragraph in two or more parts or delete
+some links.
+!endif
+
+# (!KKW [xlink]) does not work here???
+!item [couldn't replace !/xlink]
+!iflang [german]
+Ein manueller externer Querverweis konnte nicht ersetzt werden.
+Innerhalb eines Absatzes sind lediglich (!MAXLINK) interne und externe
+Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder
+möglich. Teilen Sie den Absatz, in dem dieser manuelle Querverweis benutzt werden soll in zwei Hälften oder entfernen Sie ein paar manuelle Querverweise.
+!endif
+!iflang [english]
+An external link couldn't be replaced. You are allowed to use up to
+(!MAXLINK) internal and external links and internal images inside
+each paragraph. Split up the paragraph in two or more parts or delete
+some links.
+!endif
+
+!item [couldn't write IMG header]
+!iflang [german]
+UDO konnte die angegebene Datei nicht öffnen, um die Bildinformationen zu ändern. Entweder ist diese Datei nicht vorhanden oder sie ist schreibgeschützt.
+!endif
+!iflang [english]
+UDO couldn't open the printed file for changing the image
+information. Maybe the file doesn't exist or it's write protected.
+!endif
+
+!item [definition contents longer than !.. characters]
+!iflang [german]
+Der Inhalt einer Definition darf maximal die angegebene Anzahl an
+Zeichen enthalten. Die in Ihrem Quelltext benutzte Definition
+enthält mehr Text und muss daher gekürzt werden.
+!endif
+!iflang [english]
+The contents of a definition exceeds the maximum number of
+characters. Please shorten your definition contents.
+!endif
+# wie hoch ist denn die maximale Anzahl?
+
+!item [definition name longer than !.. characters]
+!iflang [german]
+Der Name einer Definition darf maximal die angegebene Anzahl an
+Zeichen enthalten. Die in Ihrem Quelltext benutzte Definition hat
+einen längeren Namen und muss daher gekürzt werden.
+!endif
+!iflang [english]
+The name of a definition exceeds the maximum number of characters.
+Please shorten your definition name.
+!endif
+
+!item [language !.. not supported]
+!iflang [german]
+Die von Ihnen gewünschte Sprache wird von UDO (noch) nicht
+unterstützt oder Sie haben sich einfach nur verschrieben.
+!endif
+!iflang [english]
+The printed language isn't supported by UDO (yet) or you have written
+the language in a wrong way.
+!endif
+
+!item [link destination undefined]
+!iflang [german]
+Das Ziel eines manuellen Querverweises ist nicht definiert,
+sprich: es existiert kein Kapitel und kein Label mit einem solchen Namen.
+!endif
+!iflang [english]
+The destination of a manual link isn't defined. That means there's no
+chapter or label exisiting with the given name
+!endif
+
+!item [macro contents longer than !.. characters]
+!iflang [german]
+Der Inhalt eines Makros darf maximal die angegebene Anzahl an
+Zeichen enthalten. Das in Ihrem Quelltext benutzte Makro
+enthält mehr Text und muss daher gekürzt werden.
+!endif
+!iflang [english]
+The contents of a macro exceeds the maximum number of characters.
+Please shorten your macro contents.
+!endif
+
+!item [macro name longer than !.. characters]
+!iflang [german]
+Der Name eines Makros darf maximal die angegebene Anzahl an
+Zeichen enthalten. Das in Ihrem Quelltext benutzte Makro hat
+einen längeren Namen und muss daher gekürzt werden.
+!endif
+!iflang [english]
+The name of a macro exceeds the maximum number of characters.
+Please shorten your macro name
+!endif
+
+!item [memory allocation failed]
+!iflang [german]
+UDO konnte den für eine Aktion nötigen Speicher nicht anfordern.
+UDO bricht die Umwandlung nicht ab, jedoch sollten Sie die
+Ausgabedatei sehr skeptisch betrachten. Sorgen Sie vor der
+nächsten Umwandlung dafür, dass mehr Arbeitsspeicher vorhanden ist.
+!endif
+!iflang [english]
+The destination of a manual link isn't defined. That means there's no
+chapter or label exisiting with the given name.
+!endif
+
+!item [missing parameter(s)]
+!iflang [german]
+Bei einem Befehl wurden nötige Informationen nicht angegeben.
+Überprüfen Sie den Befehl und fügen Sie die fehlenden Informationen ein.
+!endif
+!iflang [english]
+A command needs a specific numer of parameters and you have used not
+enough parameters. Check the command and add the needed parameters.
+!endif
+
+!item [odd number of ('')]
+!iflang [german]
+Ihr Quelltext besitzt eine ungerade Anzahl an doppelten
+Apostrophen. UDO stellt diesen Mangel erst am Ende eines Kapitels
+fest. Kontrollieren Sie daher das Kapitel oberhalb der von UDO
+angegebenen Zeilennummer.
+!endif
+!iflang [english]
+The source file contains an odd number of double apostrophes. UDO
+will find this error at the end of a chapter so check the chapter
+above the printed line number.
+!endif
+
+!item [odd number off ("")]
+!iflang [german]
+Ihr Quelltext besitzt eine ungerade Anzahl an doppelten
+Anführungszeichen. UDO stellt diesen Mangel erst am Ende eines
+Kapitels fest. Kontrollieren Sie daher das Kapitel oberhalb der
+von UDO angegebenen Zeilennummer.
+!endif
+!iflang [english]
+The source file contains an odd number of double quotes. UDO will
+find this error at the end of a chapter so check the chapter above
+the printed line number.
+!endif
+
+!item [overfull line]
+!iflang [german]
+Eine Zeile einer verbatim-Umgebung ist länger als die eingestellte Zeilenbreite. Versuchen Sie, diese Zeile zu kürzen oder
+stellen Sie mit (!KW [parwidth]) eine größere Zeilenbreite ein.
+!endif
+!iflang [english]
+A line of a verbatim environment is longer than the value of
+(!KW [parwidth]). Try to cut the line or increase the paragraph
+width.
+!endif
+
+!item [source and destination file are equal]
+!iflang [german]
+Sie haben versucht, eine Datei ""in sich selbst"" umzuwandeln.
+Übergeben Sie UDO die richtigen Dateinamen in der Kommandozeile.
+!endif
+!iflang [english]
+You have tried to read and write the same file. Check your command
+line options.
+!endif
+
+!item [string buffer overflow]
+!iflang [german]
+# ToDo: ändern!!!
+Bitte verständigen Sie den Autor.
+!endif
+!iflang [english]
+Please contact the author.
+!endif
+
+!item [too many aliases used]
+!iflang [german]
+Ihr Quelltext benutzt zu viele (!KW [alias])-Befehle. Verzichten Sie auf
+unwichtige Aliase oder schreiben Sie dem Autor, dass Sie eine
+Spezialversion von UDO benötigen.
+!endif
+!iflang [english]
+Your source file contains too many (!I)!/alias(!i) commands. Please
+delete some unimportant aliases or contact the author to get a
+special version of UDO.
+!endif
+
+!item [too many columns used]
+!iflang [german]
+Ihr Quelltext benutzt in einer Tabelle zuviele Spalten.
+!endif
+!iflang [english]
+Your source file contains a table with too many columns.
+!endif
+
+!item [too many defines used]
+!iflang [german]
+In Ihrem Quelltext werden mehr als (!MAXDEFINE) Definitionen benutzt.
+!endif
+!iflang [english]
+Your source file contains more than (!MAXDEFINE) definitions.
+!endif
+
+!item [too many environments used]
+!iflang [german]
+In Ihrem Quelltext wurde die maximale Schachtelungstiefe für
+Umgebungen überschritten. Versuchen Sie, Ihren Text einfacher zu gestalten.
+!endif
+!iflang [english]
+You have used too many environments nested into one another. Try to layout
+your source file less complex.
+!endif
+
+!item [too many files opened]
+!iflang [german]
+Zuviele Dateien waren während der Umwandlung gleichzeitig
+geöffnet. Untersuchen Sie Ihren Quelltext daraufhin, ob (!KW [include])
+rekursiv verwendet wird.
+!endif
+!iflang [english]
+During the conversion too many files were opened. Check your source
+file if you constructed a recursive include.
+!endif
+
+!item [too many hyphens used]
+!iflang [german]
+Ihr Quelltext verwendet zuviele globale Trennvorschläge.
+Entfernen Sie die unwichtigsten und benutzen Sie lokale
+Trennvorschläge.
+!endif
+!iflang [english]
+Your source file contains too many syllabification patterns. Delete
+some of them and use local syllabification marks
+!endif
+
+!item [too many items inside enumeration]
+!iflang [german]
+In einer enumerate-Umgebung, die mit Buchstaben gekennzeichnet
+wird, wurden zuviele Aufzählungspunkte eingesetzt. Reduzieren Sie
+die Anzahl der Punkte auf 26 oder benutzen Sie anstelle der
+enumerate-Umgebung eine itemize-Umgebung.
+!endif
+!iflang [english]
+You have used too many items inside an enumerate environment where
+items are marked with letters. Reduce the ammount of items to 26 or
+use an itemize environment instead.
+!endif
+
+!item [too many labels used]
+!iflang [german]
+Ihr Quelltext verwendet zuviele Sprungmarken. Da UDO Kapitel und
+Aliase intern auch als Sprungmarken verwendet, kann diese
+Fehlermeldung auch bei nur wenigen benutzten Labels auftreten,
+wenn viele Kapitel benutzt werden. Abhilfe: Verzichten Sie auf
+einige Labels oder Aliase oder bestellen Sie beim Autor eine
+Spezialversion.
+!endif
+!iflang [english]
+Your source file contains too many (!KW [label]) commands. Because
+UDO handles chapters and aliases like labels, too, this error message
+can appear when using only some labels. Please delete some
+unimportant labels or aliases or contact the author to get a special
+version of UDO.
+!endif
+
+!item [too many labels used in table]
+!iflang [german]
+Ihr Quelltext verwendet zuviele Sprungmarken zwischen zwei Tabellenzeilen.
+!endif
+!iflang [english]
+# ToDo: Englisch
+Your source file contains too many (!KW [label]) commands.
+!endif
+
+!item [too many macros used]
+!iflang [german]
+In Ihrem Quelltext werden mehr als (!MAXMACRO) Makros benutzt.
+!endif
+!iflang [english]
+Your source file uses more than (!MAXMACRO) macros
+!endif
+
+!item [too many nodes used]
+!iflang [german]
+In Ihrem Quelltext werden zuviele Kapitel verwendet. Falls
+möglich, versuchen Sie einige Kapitel zusammenzufassen. Falls
+dies nicht möglich ist, fordern Sie beim Autor eine Spezialversion
+von UDO an.
+!endif
+!iflang [english]
+Your source file uses too many chapters. If possible try to merge
+some chapters or contact the author to get a special version of UDO.
+!endif
+
+!item [too many parameters used]
+!iflang [german]
+Bei einem Befehl oder Platzhalter wurden zuviele Parameter
+übergeben. Lesen Sie bitte im Befehlsindex nach, welche und
+wieviele Parameter dem angegebenen Befehl übergeben werden müssen
+und korrigieren Sie Ihren Quelltext.
+!endif
+!iflang [english]
+A command or placeholder was called with too many parameters. Check
+the command and look for additional information inside the command
+index.
+!endif
+
+!item [too many rows used]
+!iflang [german]
+Ihr Quelltext benutzt in einer Tabelle zuviele Zeilen.
+!endif
+!iflang [english]
+Your source file uses a table with too many rows.
+!endif
+
+!item [too many words used inside paragraph]
+!iflang [german]
+In einem Absatz wurden zuviele Wörter benutzt. Teilen Sie den
+Absatz in zwei Hälften, um diese Fehlermeldung zu beseitigen.
+!endif
+!iflang [english]
+A paragraph of your source file uses too many words. Try to split up
+the paragraph into two or more parts.
+!endif
+
+!item [underfull line]
+!iflang [german]
+Die angegebene Zeile ist zu kurz und hinterlässt einen stark
+ungleichmäßigen rechten Rand. Bei der Benutzung von Blocksatz
+bedeutet diese Meldung, dass zuviele Leerzeichen in eine Zeile
+eingefügt werden mussten, um den Blocksatz zu erzielen. Versuchen
+Sie, in den folgenden Wörtern Trennmarken einzubauen oder
+verwenden Sie den Befehl (!KW [sloppy]), um diese Fehlermeldung nicht
+mehr zu erhalten.
+!endif
+!iflang [english]
+The printed line is too short and you will see an ugly right margin.
+If you use justification this error message says that there were
+inserted too many blanks. Try to insert syllabification marks or use
+the (!KW [sloppy]) command to suppress this type of error message.
+!endif
+
+!item [unexpected end of line in command]
+!iflang [german]
+Ihr Quelltext benutzt einen Platzhalter, dessen Text sich über
+mehrere Zeilen erstreckt oder dessen Ende UDO nicht finden konnte.
+!endif
+!iflang [english]
+Your source file contains a placeholder that wasn't finished correctly.
+!endif
+
+!item [unknown command]
+!iflang [german]
+UDO kennt das angegebene Kommando nicht. Falls Sie ein Wort
+darstellen möchten, dass mit einem Ausrufungszeichen beginnt, so
+müssen Sie dieses durch Einfügen eines ''/'' besonders markieren.
+!endif
+!iflang [english]
+UDO doesn't know the printed command. If you want to use a word a the
+beginning of a line that begins with an exclamation mark you have to
+mark it with a slash (''/'').
+!endif
+
+!item [use (!/V) and (!/v) in one line]
+(!MISS)
+
+!item [use (!/xlink [text!] [topic@foo.hlp!])]
+!iflang [german]
+Der Aufbau eines externen Verweises für WinHelp ist nicht korrekt.
+!endif
+!iflang [english]
+The construction of an external link for Windows Help is incorrect
+!endif
+
+!item [wrong number of parameters]
+!iflang [german]
+Bei einem Befehl oder Platzhalter wurde die falsche Anzahl an
+Parametern übergeben. Lesen Sie bitte im Befehlsindex nach,
+welche und wieviele Parameter dem angegebenen Befehl übergeben
+werden müssen und korrigieren Sie Ihren Quelltext.
+!endif
+!iflang [english]
+You called a command or placeholder with the wrong number of
+parameters. Check the command index for additional information
+!endif
+
+!item [xlink needs WinHelp destination topic]
+!iflang [german]
+Der Aufbau eines externen Verweises für WinHelp ist nicht
+korrekt. In diesem Fall fehlt der Name der Seite, die WINHELP.EXE
+darstellen soll.
+!endif
+!iflang [english]
+The construction of an external link for Windows Help is incorrect.
+Here the name of the page is missing.
+!endif
+
+!item [xlinks needs WinHelp destination file]
+!iflang [german]
+Der Aufbau eines externen Verweises für WinHelp ist nicht
+korrekt. In diesem Fall fehlt der Name der Hilfedatei.
+!endif
+!iflang [english]
+The construction of an external link for Windows Help is incorrect.
+Here, the name of the Windows Help file is missing.
+!endif
+
+!end_description
+
+!end_node
+
+!endif
+
+################################################################################
+################################################################################
+# Bekannte Fehler
+!ifnset [NoBugs]
+!iflang [german]
+!begin_node Bugs und Probleme
+!endif
+!iflang [english]
+!begin_node Bugs and Problems
+!endif
+!html_name bugs.html
+
+!iflang [german]
+Die folgenden Fehler und Probleme sind derzeit bekannt:
+
+!begin_description
+!item [Schriftarten in Indizes:]
+ In Indizes können derzeit keine Schriftarten
+     gesetzt werden. Abhilfe: Setzen Sie die Schriftarten-Platzhalter
+     außerhalb des (!KKW [idx])-Befehls.
+
+!item [Bilder & em(!TeX):]
+ Die Ausgabe von MSP- und PCX-Bitmaps mittels em(!TeX)
+     ist immer noch ziemlich ungetestet. Erste Tests verliefen bei mir
+     erfolgreich. Falls die Ausgabe bei Ihnen nicht funktionieren
+     sollte, so verwenden Sie das Kommando (!KW [no_images] [[tex!!]]) und sorgen
+     Sie mit der raw-Umgebung bitte selber für die nötige Einbindung
+     der Bilder.
+
+!item [Kleine Fehler bei der Formatierung in WinHelp:] Wenn viele Kapitel
+     benutzt werden und die Kapitelnummern ""breit"" werden, kann es zu
+     falschen Einrückungen in den Inhaltsverzeichnissen kommen.
+     Benutzen Sie dann den Schalter (!KW [no_numbers] [[win!!]]).
+
+!item [Inhaltsverzeichnisse:] In Inhaltsverzeichnissen werden überlange
+    Überschriften noch nicht umbrochen. Außerdem werden die Überschriften nicht
+    immer in der gleichen Spalte ausgerichtet (""1.9""-""1.10""-Problem).
+
+!item [Tabellen:] Die Breite von Zellen einer Tabelle wird nicht immer sicher
+     erkannt, speziell dann, wenn man darin manuelle Querverweise oder
+     andere Spezialitäten verwendet.
+
+!end_description
+
+
+!begin_ignore
+# auskommentiert 13.12.2003 - Ulrich Kretschmer
+Falls Sie einen weiteren Fehler entdeckt haben sollten, so melden Sie
+ihn (!link [mir] [Kontaktadresse]) bitte. Vergessen Sie dabei bitte nicht, mir die folgenden
+Dinge mitzuteilen:
+
+!begin_itemize
+!item Welche UDO-Version verwenden Sie?
+!item Welches Betriebssystem setzen Sie ein?
+!item Tritt der Fehler immer auf oder nur manchmal?
+!item Woran könnte es Ihrer Meinung liegen, dass UDO fehlerhaft
+     arbeitet?
+!item Können Sie mir ein kurzes Beispiel nennen, bei dem der beobachtete Fehler auftritt?
+!item Falls der Fehler umwandlungstechnischer Art ist, was sollte UDO
+     Ihrer Meinung nach anstelle der derzeitigen Ausgabe erzeugen?
+!end_itemize
+!end_ignore
+
+# neuer Text 20.12.2003 - Ulrich Kretschmer
+Weitere Fehler und Probleme sind auf den (!url [UDO-Webseiten] [http://www.udo-open-source.org/]) dokumentiert. Hier können Sie Fehler und Feature-Wünsche in das Bugtracker-System eintragen.
+Bitte vergewissern Sie sich jedoch zunächst, ob es sich nicht bereits um einen bekannten Fehler oder einen
+bereits dokumentierten Feature-Wunsch handelt. Hierzu können Sie z.B. auf der Mailingliste "UDO Discussion" nachfragen.
+
+!endif
+# german
+# ------------------------------------------------------------------------------
+!iflang [english]
+The following known bugs will be fixed as fast as possible:
+
+!begin_description
+
+!item	[Text styles inside indices:]
+Inside indices you cannot use text styles at the moment. You can avoid this
+problem of you use the text style commands outside the (!KKW [idx])
+placeholder.
+
+!item	[Images & em(!TeX):]
+The output of (!LaTeX) commands for displaying MSP and PCX images with
+em(!TeX) wasn't tested enough. If you have problems printing the images use
+the switch (!KW [no_images] [[tex!!]]) inside the preamble and write your own
+commands inside a raw environment.
+
+!item	[Small mistakes when layouting WinHelp:]
+If you use many chapters and the chapter numbers become ""too wide"" there
+may be wrong indents in the tables of contents. You can avoid this by using
+the switch (!KW [no_numbers] [[win!!]]) in the preamble.
+
+!item	[Tables of contents:]
+In the tables of contents long chapter titles aren't sized to the current
+document width yet. Chapter titles may also appear in different columns
+(""1.9""-""1.10"" problem).
+
+!end_description
+
+!begin_ignore
+# auskommentiert 13.12.2003 - Ulrich Kretschmer
+If you detect another bug please let (!link [me] [Contact addresses]) know.
+Please add the following details to your bug report:
+
+!begin_itemize
+!item	Which UDO version do you use?
+!item	On which operating system do you use UDO?
+!item	Does the bug appear every time or only sometimes?
+!item	Do you have an idea why UDO is working incorrectly?
+!item	Can you give me a short example where I can reproduce the bug?
+!item	If the error is format specific what do you think UDO should output?
+!end_itemize
+
+!end_ignore
+
+# neuer Text 20.12.2003 - Ulrich Kretschmer
+More bugs and problems are documented on the (!url [UDO website] [http://www.udo-open-source.org/]).
+You may enter new bugs and problems into the bugtracker system. Before doing so, please check if your
+bug isn't already known or your feature wish isn't already documented. You may ask on the mailing list "UDO discussion".
+!endif
+# english
+
+!end_node
+
+!endif
+# NoBugs
+
+################################################################################
+################################################################################
+
+
+################################################################################
+!end_node
+# Ende: Praktische Arbeit mit UDO

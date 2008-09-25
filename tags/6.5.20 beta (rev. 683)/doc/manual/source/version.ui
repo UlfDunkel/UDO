@@ -1,0 +1,21 @@
+# doc/manual/source/version.ui
+# ------------------------------------------------------------------------------
+# History:
+# 2008:
+#   fd  Sep 25: version increased to 6.5.20 beta (rev. 683) 
+# ------------------------------------------------------------------------------
+
+!docinfo [version]  6.5.20 beta (rev. 683)
+
+!iflang [german]
+!docinfo [date] 25.09.2008
+!macro DATE 25.09.2008
+!endif
+
+!iflang [english]
+!docinfo [date] 2008-09-25
+!macro DATE 2008-09-25
+!endif
+
+!macro RELEASE 6
+!macro VERSION .5.20 beta (rev. 683)

@@ -1,0 +1,7 @@
+*.O
+*.o
+*.BAK
+*.bak
+*.DUP
+*.dup
+.DS_Store

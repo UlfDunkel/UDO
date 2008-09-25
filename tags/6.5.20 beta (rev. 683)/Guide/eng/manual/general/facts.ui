@@ -1,0 +1,135 @@
+!node This & that
+!ignore_links
+
+############################################################
+
+!subnode Facts, facts, facts
+!ignore_links
+
+You can use source files that don't exceed these maximum values:
+
+!begin_xlist [Sum of chapters, labels and aliases:] !short
+!item [Macros:]									128
+!item [Defines:]								128
+!item [Hyphenation patterns:]					4096
+!item [Sum of chapters, labels and aliases:]	6144
+!item [Characters per line:]					512
+!item [Characters per word:]					128
+!item [Syllables per word:]						32
+!item [Words per paragraph:]					800
+!item [Links per paragraph:] 					200
+!item [Rows per table:]							256
+!item [Columns per table:]						32
+!item [Depth of environments:]					6
+!end_xlist
+
+!smallskip
+
+Do you know how much work it has been to program UDO and to write this
+documentation? Here's the answer:
+
+!begin_xlist [English Documentation:] !short
+!item [Source code:]				820 KB
+!item [German Documentation:]		470 KB
+!item [English Documentation:]		420 KB
+!end_xlist
+
+############################################################
+
+!subnode Programming environment
+!ignore_links
+
+UDO has been developed using the following software:
+
+!begin_xlist [Macintosh:]
+
+!item [Atari:]
+Pure C 1.1, Pure Profiler 1.0, MiNT-Libs PL 46, SysGem 2.03(!beta),
+Interface 2.3, Programming Tools by Julian F. Reschke, MagiC-PC 1.01
+
+!item [DOS:]
+EMX-GCC 2.6.3 emxfix06, GDB 4.13, PFE
+
+!item [HP-UX:]
+GCC 2.7.2
+
+!item [Linux:]
+GCC 2.7.2, S.u.S.E. Linux 4.3 Kernel 2.0.18, Joe
+
+!item [Macintosh:]
+CodeWarrior 9 (68K/PPC), ResEdit 2.1
+
+!end_xlist
+
+Currently I develop UDO on a Pentium~133 running Windows~95 with the EMX-GCC
+and on my Compaq Contura 486-DX50 notebook running Linux.
+
+!medskip
+
+This documentation has been written with the following software:
+
+!begin_itemize !short
+
+!item Joe Allan's Own Editor ''Joe'' for MS-DOS and Linux
+
+!item Allan Phillips' Programmer's File Editor ''PFE'' 0.06.01
+(the best editor for Windows 3.1 and Windows 95 I know)
+
+!item Phoenix for Windows 3.11 by Application Systems Heidelberg
+(also available as Fuji Base 1.0)
+
+!end_itemize
+
+
+############################################################
+
+!subnode Generated files
+!ignore_links
+
+A short description of the files, UDO saves next to its log files:
+
+!begin_xlist [.texinfo:] !short
+
+!item	[.1:]		Nroff
+!item	[.c:]		C source code
+!item	[.cmd:]		command file for the Pure C help compiler
+!item	[.txt:]		ASCII
+!item	[.hpj:]		project file for the Microsoft Help Compiler (!V)HC.EXE(!v)
+!item	[.htm(l):]	HTML
+!item	[.lyx:] 	LyX
+!item	[.man:]		Manualpage
+!item	[.pas:]		Pascal source code
+!item	[.rtf:]		RTF or WinHelp source code or QuickView source code
+!item	[.scr:]		Pure C Help source code
+!item	[.sgm(l):]	Linuxdoc-SGML
+!item	[.stg:]		ST-Guide source code
+!item	[.txt:]		Turbo-Vision-Help source code
+!item	[.tex:]		(!LaTeX)
+!item	[.texinfo:]	Texinfo
+
+!end_xlist
+
+Files with the suffix (!V).ul?(!v) contain the error messages and warnings
+UDO prints while converting the source file.
+
+Files with the suffix (!V).uh?(!v) contain the syllabification patterns UDO
+prints for ASCII, ST-Guide and Pure C Help.
+
+Files with the suffix (!V).ut?(!v) contain the ""include tree"".
+
+The following suffixes appear if UDO saves a file that has to be converted
+with another software to get the final result:
+
+!begin_xlist [.www:]
+
+!item	[.err:]	log file of the Microsoft Help Compiler ((!V)HC.EXE(!v))
+!item	[.h:]	C header file for Turbo Vision ((!T)TVHC.EXE(!t))
+!item	[.hlp:]	Windows Help file ((!T)HC.EXE(!t)),
+				Turbo Vision Help file ((!T)TVHC.EXE(!t)),
+				Pure C Help file ((!T)HC.PRG(!t))
+!item	[.hyp:]	ST-Guide hypertext ((!T)HCP.TTP(!t))
+!item	[.ref:]	ST-Guide reference file ((!T)HCP.TTP(!t))
+
+!end_xlist
+
+############################################################

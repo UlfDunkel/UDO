@@ -1,0 +1,26 @@
+############################################################
+# @(#) Die Manualpage zur Kommandozeilenversion
+# @(#) Mit "udo --nroff -o udo.1 manpage.u"
+# @(#) oder "udo --man -o udo.man manpage.u" uebersetzen
+# @(#) Dirk Hagedorn, 12.11.1996
+############################################################
+
+!tex_2e
+!raw [tex] \parindent0cm \parskip2pt
+
+!docinfo [program]	udo
+!docinfo [author]	webmaster@udo-open-source.org
+!docinfo [date]		08. November 2003
+
+!man_type	1
+!nroff_type 1
+
+!no_umlaute		[man]
+#!sloppy
+
+
+!begin_document
+
+!include usage/cliusage.ui
+
+!end_document

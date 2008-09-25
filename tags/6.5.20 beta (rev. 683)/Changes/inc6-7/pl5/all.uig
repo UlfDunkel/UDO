@@ -1,0 +1,137 @@
+!begin_itemize
+
+!index !/input
+!item Neuer Befehl: (!I)!/input(!i) (!nl) Funktioniert genau wie
+(!I)!/include(!i) jedoch sucht (!I)!/input(!i) lediglich in dem
+Verzeichnis, welches durch die Umgebungsvariable (!V)$UDOINPUTPATH(!v)
+definiert ist.
+
+!index !/begin_node
+!index !/end_node
+!item Neue Umgebung: (!I)!/begin_node(!i) !.. (!I)!/end_node(!i)
+(Martin Osieka). (!nl) Hiermit lassen sich Nodes wie mit
+(!I)!/node(!i), (!I)!/subnode(!i) etc. anlegen. Welche
+Gliederungsebene jedoch verwendet wird, das hängt vom übergeordneten
+Node ab. Nodes können hiermit also genauso geschachtelt werden wie
+alle anderen Umgebungen geschachtelt werden. Ein Beispiel:
+
+!begin_quote
+!begin_verbatim
+!begin_document
+!tableofcontents
+!begin_node Ein Node
+...
+	!begin_node Ein Subnode
+	...
+	!end_node
+!end_node
+!end_document
+!end_verbatim
+!end_quote
+
+Die neuen Befehle lassen sich auch zusammen mit den ""alten"" Befehlen
+verwenden, wobei zu beachten ist, daß nach einem (!I)!/node(!i) durch
+(!I)!/begin_node(!i) ein Subnode geöffnet wird.
+
+Durch die neuen Befehle ergeben sich interessante Möglichkeiten. Will
+ich bspw. die auf meiner Homepage als Subsubnode erscheinenden Softwarebeschreibungen
+in einem ST-Guide-Hypertext oder einer Windows-Hilfe als Subnodes
+darstellen, so kann ich diese nun ohne Änderung mittels
+(!I)!/include(!i) einbinden.
+
+!index !/begin_node*
+!index !/begin_pnode
+!index !/begin_pnode*
+!item Neue Kommandos: (!I)!/begin_node*(!i), (!I)!/begin_pnode(!i),
+(!I)!/begin_pnode*(!i) (!nl)
+Diese werden analog zu (!I)!/begin_node(!i), (!I)!/node*(!i),
+(!I)!/pnode(!i) und (!I)!/pnode*(!i) verwendet. Geschlossen werden die
+Befehle ebenfalls mit (!I)!/end_node(!i).
+
+!index !/begin_linedraw
+!index !/end_linedraw
+!index linedraw-Umgebung
+!item Neu: linedraw-Umgebung, (!I)!/ldinclude(!i), (!I)!/linedrawsize(!i) (!nl)
+Bei Nicht-RTF-Formaten wird auf den DOS-Zeichensatz umgeschaltet und
+die Umgebung wie eine verbatim-Umgebung behandelt. Näheres zur
+Umgebung weiter unten. (!I)!/ldinclude(!i) und (!I)!/linedrawsize(!i)
+sind analog zu (!I)!/vinclude(!i) und (!I)!/verbatimsize(!i)
+implementiert.
+
+!index !/error
+!item Neues Kommando: (!I)!/error <text>(!i) (!nl) Genau wie die
+Präprozessoranweisung (!V)#error(!v) eines C-Compilers kann man
+hiermit eine Fehlermeldung erzeugen und (!I)<text>(!i) ausgeben. UDO
+bricht beim Eintreffen dieses Schalter die Konvertierung ab.
+
+!index !/use_auto_toptocs
+!item Neuer Schalter: (!I)!/use_auto_toptocs [<format>](!i) (!nl)
+Wird dieser Schalter eingesetzt, so werden zu Beginn jedes Kapitels
+Links auf die übergeordneten Kapitel erzeugt. Der Schalter ist
+verfügbar für HTML, WinHelp und ST-Guide. Wird der Schalter benutzt,
+so sichert UDO ein paar zusätzliche Grafiken, die dann verwendet
+werden.
+
+!index udo_mw.gif
+!index udo_mw.bmp
+!index udo_mw.img
+!index !/udolink
+!item Neu: (!I)!/udolink(!i) (!nl)
+UDO sichert für HTML, WinHelp und ST-Guide eine Datei namens
+""(!V)udo_wm.[gif,bmp,img](!v)"". Mit (!I)!/udolink(!i) kann man in sein Werk
+die Grafik einbinden. Bei HTML wird zugleich ein Link auf meine
+Homepage erzeugt.
+
+!index (!/comment [...])
+!item Neu: (!I)(!/comment [!..])(!i), (!I)!/use_comments~[!..](!i) (!nl)
+Mit (!I)(!/comment [!..])(!i) können Inline-Kommentare für HTML, WinHelp,
+RTF, Quickview, C und Pascal erzeugt werden. Wir im Vorspann der
+Schalter (!I)!/use_comments(!i) benutzt, so werden die Kommentare auch
+bei allen anderen Formaten in Klammern ausgegeben (Martin Rost).
+
+!index !/use_short_tocs
+!item Wieder da: Schalter (!I)!/use_short_tocs~[!..](!i) (!nl)
+Wer nicht die automatisch erzeugten Inhaltsverzeichnisse benutzte,
+mußte viele (!I)!/depth~1(!i) einfügen. Dies ist nun nicht mehr nötig
+(Andreas Swazinna).
+
+!index Farben
+!item Änderung: Die Farbnamen wurden neu festgelegt und orientieren
+sich nun an den durch HTML 3.2 definierten 16 Farben. Diese lauten:
+
+!begin_ilist [fuchsiawww] !short
+!item [black] ~
+!item [silver] (hellgrau, ehemals ""grey"")
+!item [gray] (dunkelgrau, ""gray"", nicht ""grey""!!!)
+!item [white] ~
+!item [maroon] ~
+!item [red] ~
+!item [purple] ~
+!item [fuchsia] ~
+!item [green] (dunkelgrün)
+!item [lime] (hellgrün)
+!item [olive] ~
+!item [yellow] ~
+!item [navy] ~
+!item [blue] ~
+!item [teal] ~
+!item [aqua] (ehemals ""cyan"")
+!end_ilist
+
+Diese Änderung betrifft die Farbkommandos von HTML und WinHelp.
+
+!index udo.ini
+!item Bugfix: UDO findet wieder sicher seine INI-Datei.
+
+!index !/image
+!item Änderung: Mit (!I)!/image(!i) kann man nun auch problemlos
+Bilder anzeigen lassen, deren Dateiname Leerzeichen enthält, wenn man
+den Dateinamen in Anführungsstriche setzt. (!nl)
+Beispiel: (!V)!/image "foo bar" (!v)
+
+!index Symbole
+!item Änderung: Die Anzahl der maximal zu verwendenden Symbole wurde
+von 32 auf 128 erhöht (Uwe Mindrup).
+
+!end_itemize
+

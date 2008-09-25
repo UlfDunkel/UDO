@@ -1,0 +1,26 @@
+!begin_itemize
+
+!item Die TOS-Version stürzte einfach ab (haben wohl alle gemerkt, nur
+nicht ich). Sorry dafür.
+
+!item Eine fünfte Gliederungsebene ist hinzugekommen (Helmut Schultze). Dadurch gibt es
+die folgenden neue Kommandos, in der Funktionsweise analog zu den
+bisherigen Gliederungskommandos und Schaltern
+
+	!begin_itemize !short
+	!item (!I)!/subsubsubsubnode(!i) (Abkürzung: (!I)!/ssssn(!i))
+	!item (!I)!/subsubsubsubnode*(!i) (Abkürzung: (!I)!/ssssn*(!i))
+	!item (!I)!/psubsubsubsubnode(!i) (Abkürzung: (!I)!/pssssn(!i))
+	!item (!I)!/psubsubsubsubnode*(!i) (Abkürzung: (!I)!/pssssn*(!i))
+	!item (!I)!/subsubsubsubheading(!i) (Abkürzung: (!I)!/ssssh(!i))
+	!item (!I)!/subsubsubsubtoc(!i)
+	!item (!I)!/subsubsubsubtoc_offset(!i)
+	!item (!I)!/ignore_subsubsubsubtoc(!i)
+	!item (!I)!/use_auto_subsubsubsubtocs(!i)
+	!item (!I)!/html_merge_subsubsubsubnodes(!i)
+	!end_itemize
+
+!item UDO ist nun Open Source. Der Sourcecode dieses Patchlevels -- der der letzte von mir veröffentlichte Patchlevel sein wird -- ist auf meiner Homepage erhätlich. Die Shareware-Einschränkungen entfallen mit dem Erscheinen dieses Patchlveles. Für weitere Informationen zur Open-Source-Version siehe (!url [http://www.udo-open-source.de]).
+
+!end_itemize
+

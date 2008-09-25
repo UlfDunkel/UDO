@@ -1,0 +1,4 @@
+!begin_itemize
+	!item Bugfix: Bei Tabellen die länger als 254 Zeilen waren, wurden die
+		vertikalen Linien nicht korrekt gezeichnet.
+!end_itemize

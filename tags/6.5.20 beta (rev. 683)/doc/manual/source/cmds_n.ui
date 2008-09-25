@@ -1,0 +1,1592 @@
+################################################################################
+!begin_node N!..
+!html_name cmd-n.html
+
+################################################################################
+!begin_node (!kkkw [N] [n])
+!html_name cmd_N().html
+!label (!kk1 [/N])
+!label (!kk1 [/n])
+
+!iflang [german]
+Fußnote erzeugen.
+!endif
+!iflang [english]
+Create a footnote.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/N)<(!TEXT)>(!/n)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+""<text>"" wird als Fußnote oder in Klammern dargestellt.
+Vor (!KK1 [N]) sollte sich kein Leerzeichen, Tabulator oder Zeilenumbruch befinden!
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+""<text>"" will be displayed as a footnote or in brakes. Right before
+(!/N) shouldn't be a space, tab or linefeed!
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)der Text(!/N)die Fußnote(!/n)(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)the text(!/N)the footnote(!/n)(!t)
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Fußnoten] [Fußnoten])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Footnotes] [Footnotes])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [n])
+!html_name cmd_n.html
+
+!iflang [german]
+Kapitel einleiten.
+!endif
+!iflang [english]
+Start a chapter.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/n [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [node]).
+
+!item [(!SEEALSO)]
+(!KW [node])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [n*])
+!html_name cmd_n_asterisk.html
+
+!iflang [german]
+Kapitel ohne Eintrag im Inhaltsverzeichnis einleiten.
+!endif
+!iflang [english]
+Start a chapter.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/n* [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [node*]).
+
+!item [(!SEEALSO)]
+(!KW [node*])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: Englisch
+!begin_node (!kkw [navy])
+!html_name cmd_navy.html
+
+!iflang [german]
+Setzt die Schriftfarbe auf Marineblau.
+!endif
+!iflang [english]
+Sets the text color navy.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/navy)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Marineblau.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
+Postscript unterstützt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [newpage])
+!html_name cmd_newpage.html
+
+!iflang [german]
+Seitenumbruch erzeugen.
+!endif
+!iflang [english]
+Generate a page break.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/newpage(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Erzeugt in der Ausgabedatei einen Seitenumbruch, falls das Ausgabeformat Seitenumbrüche unterstützt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Generates a page break if the destination format supports it.
+!endif
+
+!item [(!SEEALSO)]
+(!KW [use_formfeed])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kkw [nl])
+!html_name cmd_nl().html
+
+!iflang [german]
+Manuellen Zeilenumbruch setzen.
+!endif
+!iflang [english]
+Set a line break.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/nl)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Durch (!KKW [nl]) kann man einen Zeilenumbruch erzwingen.
+Vor (!KKW [nl]) (!B)muss(!b) ein (festes) Leerzeichen stehen! Nach
+(!KKW [nl]) muss ebenfalls ein (festes) Leerzeichen stehen
+oder (!KKW [nl]) muss das letzte Wort einer Zeile sein.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+With (!/nl) you can force a line break. You (!B)must(!b) add a space
+before (!/nl) or (!/nl) must be the last word of a line.
+# letzten Halbsatz (mit or...) ergänzt 20.12.2003 - Ulrich Kretschmer
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)Ein manueller (!/nl) Zeilenumbruch(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)breaking (!/nl) lines(!t)
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_8bit])
+!html_name cmd_no_8bit.html
+
+!iflang [german]
+Keine Sonderzeichen benutzen.
+!endif
+!iflang [english]
+Do not use special characters.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_8bit [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Umlaute, die im Quelltext vorkommen, werden in der
+Zieldatei durch ae, oe, ue, ss, Ae, Oe und Ue
+ausgegeben. Im Beispiel würde dies bei der Umwandlung
+ins Manualpage-Format geschehen.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Switches off the usage of German umlauts. The example shows how to
+switch it off when converting to a manualpage. Umlauts are then
+replaced by ae, oe, ue, ss, Ae, Oe and Ue.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_8bit [man](!t)
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Sonderzeichen] [Sonderzeichen]), (!KW [no_umlaute])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Special characters] [Special characters]), (!KW [no_umlaute])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_bottomlines])
+!html_name cmd_no_bottomlines.html
+
+!iflang [german]
+Keine Fußzeilen benutzen.
+!endif
+!iflang [english]
+Do not use bottom lines.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_bottomlines [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando kann man die automatische
+Erzeugung von Fußzeilen der jeweiligen Ausgabeformate
+unterbinden. Im Beispiel würde dies bei der
+Umwandlung ins Pure-C-Help-Format geschehen.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Tells UDO not to generate bottomlines. In the example this is done
+for the Pure C Help format.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_bottomlines [pch](!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [no_headlines]), (!KW [no_footers]), (!KW [ignore_bottomline])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_buttons])
+!html_name cmd_no_buttons.html
+
+!iflang [german]
+Keine Browsebuttons erzeugen (nur WinHelp).
+!endif
+!iflang [english]
+Do not generate browse buttons (WinHelp only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_buttons(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann benutzt, werden keine Befehle in die
+Projekt-Datei geschrieben, die Browse-Buttons in der Hilfe-Datei erzeugen.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If you use this switch in the preamble, UDO will not
+write commands to the project file that generate
+browse buttons in the help file.
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_effects])
+!html_name cmd_not_effects.html
+
+!iflang [german]
+Keine Schriftarten benutzen.
+!endif
+!iflang [english]
+Do not use text styles.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_effects [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Schaltet die Benutzung von Schriftarten aus. Befehle
+wie (!KK1 [B]) werden dann nicht in Schriftarten
+umgewandelt, sondern einfach gefiltert. Im Beispiel
+würden diese bei der Umwandlung ins ASCII-Format nicht benutzt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Switches off the usage of text emphasises. The example shows how to
+switch it of when converting to ASCII.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_effects [asc](!t)
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Schriftarten] [Schriftarten])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Text styles] [Text styles])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_footers])
+!html_name cmd_no_footers.html
+
+!iflang [german]
+Keine Webmasterangaben in den Fußzeilen erzeugen.
+!endif
+!iflang [english]
+Do not insert webmaster informations in bottom lines.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_footers [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando kann man die automatische
+Erzeugung der Webmasterangaben in der Fußzeile der jeweiligen Ausgabeformate
+unterbinden, sofern diese vorhanden sind. Im Beispiel würde dies bei der
+Umwandlung ins HTML-Format geschehen.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This switch will turn off the automatic generation
+if webmaster informations in the bottom line
+of the page. The example shows how to
+switch it of when converting to HTML.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_footers [html](!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [no_bottomlines])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_headlines])
+!html_name cmd_no_headlines.html
+
+!iflang [german]
+Keine Kopfzeilen benutzen.
+!endif
+!iflang [english]
+Do not use head lines.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_headlines [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando kann man die automatische
+Erzeugung von Titelzeilen der jeweiligen Ausgabeformate
+unterbinden. Im Beispiel würde dies bei der
+Umwandlung ins WinHelp-Format geschehen.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Switches off the usage of headlines. The example show how to switch
+it off when converting to WinHelp.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_headlines [win](!t)
+
+!item [(!SEEALSO)]
+(!KW [no_bottomlines]), (!KW [no_popup_headlines]), (!KW [ignore_headline])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_icons])
+!html_name cmd_no_icons.html
+
+!iflang [german]
+Keine Bilder in Inhaltsverzeichnissen benutzen.
+!endif
+!iflang [english]
+Do not use images in tables of contents.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/no_icons(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando lässt sich die Ausgabe von
+Bildern neben den Verweisen auf die übergeordneten
+Kapitel in Inhaltsverzeichnissen unterdrücken.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Switches off the output of commands to display images
+in tables of contents.
+!endif
+
+!item [(!EXAMPLE2)]
+(!T)
+!begin_verbatim
+!ifdest [stg]
+        !use_auto_toptocs [all] !no_icons
+!else
+        !use_auto_toptocs [all]
+!endif
+!end_verbatim
+(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~13
+
+!item [(!SEEALSO)]
+(!KW [use_auto_toptocs])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_images])
+!html_name cmd_no_images.html
+
+!iflang [german]
+Keine Grafiken benutzen.
+!endif
+!iflang [english]
+Do not use images.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_images [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando lässt sich die Ausgabe von Befehlen zur Ausgabe von Bildern
+für ein Ausgabeformat unterbinden; (!KW [image]) wird dann einfach ignoriert.
+Im Beispiel würden keine Befehle zur Ausgabe von Bildern beim HTML-Format erzeugt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Switches off the output of commands to display images. The example
+show how to switch it off when converting to HTML.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_images [html](!t)
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [image]), (!KKW [img]), (!link [Bilder] [Bilder])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [image]), (!KKW [img]), (!link [Images] [Images])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_img_size])
+!html_name cmd_no_img_size.html
+
+!iflang [german]
+Ermittlung der Ausmaße von Bildern unterbinden.
+!endif
+!iflang [english]
+Suppress detection of image sizes.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_img_size [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+UDO ermittelt nun für Bilder im GIF-Format die jeweiligen Ausmaße und
+gibt diese dann beim HTML-Format beim IMG-Tag an. UDO sucht die GIFs
+ausgehend vom Ausgabeverzeichnis, bastelt sich also den Dateinamen aus
+Laufwerk und Pfad der Ausgabedatei und dem bei (!KW [image]) angebenen
+Dateinamen zusammen. Mit diesem Schalter kann man die Ermittlung der Ausmaße deaktivieren.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+UDO will normally detect the width and height of images
+(and inserts this value into the IMG tag for HTML).
+UDO will search for the files beginning at the output directory,
+thus constructing the pathname from the pathname of the output
+file and the filename of the image. With this switch you
+can turn off the detection of the image sizes.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_img_size [html](!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [image]), (!KKW [img]), (!link [Bilder] [Bilder])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [image]), (!KKW [img]), (!link [Images] [Images])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_index])
+!html_name cmd_no_index.html
+
+!iflang [german]
+Keinen Index erzeugen und Index-Befehle ignorieren.
+!endif
+!iflang [english]
+Do not create index.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_index [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann benutzt, so werden
+für die angegebenen Formate die Befehle (!KW [index]) und
+(!KKW [idx]) ignoriert. Desweiteren wird weder von UDO
+noch vom Zielformat ein Index erzeugt. Im Beispiel
+würden keine Indizes für das RTF ausgegeben.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If this switch is used inside the preamble UDO suppresses index
+commands for the given destination formats. Furthermore neither UDO
+nor the destination format will print an index. The example shows how
+to suppress index commands for RTF.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_index [rtf](!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [index]), (!KKW [idx])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_links])
+!html_name cmd_no_links.html
+
+!iflang [german]
+Keine Verweise benutzen.
+!endif
+!iflang [english]
+Do not use links.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_links [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Befehl schaltet die Benutzung von
+Verweisen aus, falls das formatzugehörige Kürzel
+angegeben wurde. Dies ist sinnvoll, falls man z.B.
+in einem RTF-Dokument den Text ""siehe !.."" unterdrücken will.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If this switch is used inside the preamble UDO suppresses link
+commands for the given destination formats.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_links [rtf](!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [link]), (!KW [no_xlinks]), (!KKW [nolink]), (!link [Querverweise] [Querverweise])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KKW [link]), (!KW [no_xlinks]), (!KKW [nolink]), (!link [Links] [Links])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_numbers])
+!html_name cmd_no_numbers.html
+
+!iflang [german]
+Keine Kapitelnummern benutzen.
+!endif
+!iflang [english]
+Do not output chapter numbers.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_numbers [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando schaltet die Ausgabe von
+Kapitelnummern aus. In Inhaltsverzeichnissen werden
+dann nur die Kapitelnamen ausgegeben. Im Beispiel
+wird dies für das WinHelp-Format und für HTML gemacht.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command switches off the usage of chapter numbers. In tables of
+contens only the chapter titles will be displayed. The example shows
+how to suppress them in Windows Help and HTML.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_numbers [win,html](!t)
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_popup_headlines])
+!html_name cmd_no_popup_headlines.html
+
+!iflang [german]
+Keine Kopfzeilen in Popup-Nodes benutzen.
+!endif
+!iflang [english]
+Do not use headlines in popup nodes.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_popup_headlines [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando kann man die automatische
+Erzeugung von Titelzeilen der jeweiligen Ausgabeformate
+bei Popup-Nodes unterbinden. Titelzeilen für normales
+Nodes werden weiterhin erzeugt. Im Beispiel würde dies bei der
+Umwandlung ins WinHelp-Format geschehen.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Switches off the usage of headlines in popup nodes.
+Headlines for other nodes will continue to be generated.
+The example show how to switch it off when converting to WinHelp.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_popup_headlines [win](!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!item [(!SEEALSO)]
+(!KW [no_bottomlines]), (!KW [no_headlines])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_preamble])
+!html_name cmd_no_preamble.html
+
+!iflang [german]
+Ausgabe von Zielformat-Preambeln unterdrücken.
+!endif
+!iflang [english]
+Do not output a preamble.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_preamble [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, so gibt
+UDO für die angegebenen Formate keine Preambel aus.
+Das Beispiel zeigt, wie man dafür sorgen kann, dass
+UDO keine (!LaTeX)-Preambel erzeugt. Diesen Schalter
+sollte man nur dann verwenden, wenn man ausreichend
+Kenntnis über das jeweilige Zielformat besitzt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If this switch is used inside the preamble of the source file UDO
+won't print a specific preamble for the destination format. The
+example shows how to suppress the preamble for (!LaTeX). You shall
+have some knowledge about the destination format if you want to write
+your own preamble.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_preamble [tex](!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_quotes])
+!html_name cmd_no_quotes.html
+
+!iflang [german]
+Keine typographischen Anführungsstriche benutzen.
+!endif
+!iflang [english]
+Do not use typographical quotes.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_quotes [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Schaltet die Umwandlung von doppelten in echte
+Anführungszeichen und Apostrophen aus. Doppelte
+Anführungszeichen und Apostrope werden dann durch einfache ersetzt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Tells UDO not to replace double quotes and double apostrophes by typographical
+quotes and apostrophes.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_quotes [asc,man](!t)
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [("")] [("")]), (!link [Doppelte Anführungszeichen] [Doppelte Anführungszeichen]), (!link [('')] [('')]), (!link [Doppelte Apostrophe] [Doppelte Apostrophe])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [("")] [("")]), (!link [Double quotes] [Double quotes]), (!link [('')] [('')]), (!link [Double apostrophes] [Double apostrophes])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_sourcecode])
+!html_name cmd_no_sourcecode.html
+
+!iflang [german]
+Sourcecode-Zeilen nicht ausgeben.
+!endif
+!iflang [english]
+Do not output source code lines.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_sourcecode [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Der Schalter (!KW [no_sourcecode]) bewirkt, dass für die
+angegebenen Formate die Sourcecode-Zeilen nicht ausgegeben werden. Somit
+kann man sich eine Programm-Doku ohne den Sourcecode erzeugen.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If you don't want that source code is printed in other formats than
+C and Pascal use the switch (!KW [no_sourcecode]). Thus you can
+produce a special documentation without source code.
+!endif
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [begin_sourcecode])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_table_lines])
+!html_name cmd_no_table_lines.html
+
+!iflang [german]
+Keine Linien in Tabellen benutzen.
+!endif
+!iflang [english]
+Do not use lines in tables.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_table_lines [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Benutzt man im Vorspann diesen Schalter, so erzeugt UDO in Tabellen
+keine vertikalen oder horizontalen Linien. Im Beispiel würde UDO keine
+Tabellenlinien für WinHelp und IPF erzeugen.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If you use this switch in the preamble, UDO won't generate
+vertical or horzontal lines in tables. The example show how
+to suppress line for the WinHelp and IPF formats.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_table_lines [win,ipf](!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [begin_table]), (!link [Tabellen] [Tabellen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [begin_table]), (!link [Tables] [Tables])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_titles])
+!html_name cmd_no_titles.html
+
+(!MISS)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_titles(!t)
+
+!item [(!DESCRIPTION)]
+(!MISS)
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [no_toc_subnodes])
+!html_name cmd_no_toc_subnodes.html
+
+!iflang [german]
+Im Inhaltsverzeichnis keine Subnodes auflisten.
+!endif
+!iflang [english]
+Do not output sections in tables of contents.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_toc_subnodes [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Schalter dient zur Unterdrückung der Ausgabe
+von Subnodes und der tieferen Gliederungsebenen im
+Inhaltsverzeichnis. Das Beispiel zeigt, wie man die
+Auflistung beim WinHelp-Format unterdrücken kann.
+(!KW [no_toc_subnodes]) ist funktionsgleich mit (!KW [use_short_tocs]).
+
+Eine andere Möglichkeit, die Tiefe der Ausgabe des
+Inhaltsverzeichnisses zu beeinflussen, ist die Verwendung
+des Parameters (!KW [depth]) bei (!KW [toc]).
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble UDO will print only the
+chapter titles inside the table of contents.
+(!KW [no_toc_subnodes]) is the same as (!KW [use_short_tocs]).
+
+Another possibily is to use the switch (!KW [depth]) with
+the (!KW [toc]) command.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_toc_subnodes [win](!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [depth]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [depth]), (!link [Tables of contents] [Tables of contents])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [no_toc_subsubnodes])
+!html_name cmd_no_toc_subsubnodes.html
+
+!iflang [german]
+Im Inhaltsverzeichnis keine Unterabschnitte auflisten.
+!endif
+!iflang [english]
+Do not output seubsections in tables of contents.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_toc_subsubnodes [(!FORMAT)<](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann benutzt, so werden
+bei den angegebenen Formaten im Inhaltsverzeichnis
+keine Unterabschnitte und Pragraphen aufgelistet.
+
+Eine andere Möglichkeit, die Tiefe der Ausgabe des
+Inhaltsverzeichnisses zu beeinflussen, ist die Verwendung
+des Parameters (!KW [depth]) bei (!KW [toc]).
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble UDO will print only the
+chapter titles and section titles inside the table of contents.
+
+Another possibily is to use the switch (!KW [depth]) with
+the (!KW [toc]) command.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_toc_subsubnodes [win,stg,html](!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [depth]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [depth]), (!link [Tables of contents] [Tables of contents])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [no_toc_subsubsubnodes])
+!html_name cmd_no_toc_subsubsubnodes.html
+
+!iflang [german]
+Im Inhaltsverzeichnis keine Paragraphen auflisten.
+!endif
+!iflang [english]
+Do not output paragraphs in tables of contents.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_toc_subsubsubnodes [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann benutzt, so werden
+bei den angegebenen Formaten im Inhaltsverzeichnis
+keine Pragraphen aufgelistet.
+
+Eine andere Möglichkeit, die Tiefe der Ausgabe des
+Inhaltsverzeichnisses zu beeinflussen, ist die Verwendung
+des Parameters (!KW [depth]) bei (!KW [toc]).
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble UDO will print only the
+chapter titles, section titles and subsection titles inside the table
+of contents.
+
+Another possibily is to use the switch (!KW [depth]) with
+the (!KW [toc]) command.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_toc_subsubsubnodes [win,stg,html](!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [depth]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [depth]), (!link [Tables of contents] [Tables of contents])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+################################################################################
+!begin_node (!kw [no_umlaute])
+!html_name cmd_no_umlaute.html
+
+!iflang [german]
+Keine Umlaute benutzen.
+!endif
+!iflang [english]
+Do not use german umlauts.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_umlaute [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Umlaute, die im Quelltext vorkommen, werden in der Zieldatei durch ae, oe, ue, ss, Ae, Oe und Ue
+ausgegeben. Im Beispiel würde dies bei der Umwandlung ins Manualpage-Format geschehen.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Switches off the usage of German umlauts. The example shows how to
+switch it off when converting to a manualpage. Umlauts are then
+replaced by ae, oe, ue, ss, Ae, Oe and Ue.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_umlaute [man](!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Sonderzeichen] [Sonderzeichen]), (!KW [no_8bit])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Special characters] [Special characters]), (!KW [no_8bit])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_urls])
+!html_name cmd_no_urls.html
+
+!iflang [german]
+Keine externen Verweise auf WWW-Seiten benutzen.
+!endif
+!iflang [english]
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_urls [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Befehl schaltet die Benutzung von externen
+Verweisen auf WWW-Seiten aus, falls das formatzugehörige Kürzel
+angegeben wurde. Dies ist sinnvoll, falls man einen
+Hypertext mit HTML-Links versehen hat, die jedoch
+weder in einem WinHelp- noch ST-Guide-Hypertext Sinn machen würden.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command switches off the usage of external links to URLs. This is useful
+if you used external HTML links in a source file that you want to
+convert to another format that supports external links. The example
+shows how to suppress the usage of external links when converting to ST-Guide.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_urls [stg](!t)
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [url]), (!KW [no_links]), (!KW [no_xlinks]), (!link [Querverweise] [Querverweise])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KKW [url]), (!KW [no_links]), (!KW [no_xlinks]), (!link [Links] [Links])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_verbatim_umlaute])
+!html_name cmd_no_verbatim_umlaute.html
+
+!iflang [german]
+Keine Umlaute in verbatim-Umgebungen verwenden.
+!endif
+!iflang [english]
+Do not use german umlauts in verbatim environments.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_verbatim_umlaute [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Umlaute, die im Quelltext innerhalb einer verbatim-Umgebung vorkommen, werden in der Zieldatei durch ae,
+oe, ue, ss, Ae, Oe und Ue ausgegeben. Im Beispiel würde dies bei der Umwandlung ins (!LaTeX)-Format geschehen.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Switches off the usage of German umlauts inside a verbatim
+environment. The example shows how to switch it off when converting to
+(!LaTeX). Umlauts are then replaced by ae, oe, ue, ss, Ae, Oe and Ue.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_verbatim_umlaute [tex](!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [begin_verbatim]), (!KW [end_verbatim]), (!link [Vorformatierter Text] [Vorformatierter Text])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [begin_verbatim]), (!KW [end_verbatim]), (!link [Preformatted text] [Preformatted text])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [no_xlinks])
+!html_name cmd_no_xlinks.html
+
+!iflang [german]
+Keine externen Verweise benutzen.
+!endif
+!iflang [english]
+Do not generate external links.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/no_xlinks [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Befehl schaltet die Benutzung von externen
+Verweisen aus, falls das formatzugehörige Kürzel
+angegeben wurde. Dies ist sinnvoll, falls man einen
+Hypertext mit HTML-Links versehen hat, die jedoch
+weder in einem WinHelp- noch ST-Guide-Hypertext Sinn machen würden.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command switches off the usage of external links. This is useful
+if you used external HTML links in a source file that you want to
+convert to another format that supports external links. The example
+shows how to suppress the usage of external links when converting to ST-Guide.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/no_xlinks [stg](!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.44
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [xlink]), (!KW [no_links]), (!link [Querverweise] [Querverweise])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KKW [xlink]), (!KW [no_links]), (!link [Links] [Links])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [node])
+!html_name cmd_node.html
+
+!iflang [german]
+Kapitel einleiten.
+!endif
+!iflang [english]
+Start a chapter.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/node <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Leitet ein Kapitel mit der Bezeichnung ""<text>"" ein. Kapitel erscheinen in Inhaltsverzeichnissen.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Starts a new chapter named ""<text>"".
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)!/node Titel des Kapitels(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)!/node A chapter title(!t)
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node]), (!link [Structuring] [Structuring])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [node*])
+!html_name cmd_node_asterisk.html
+
+!iflang [german]
+Kapitel ohne Eintrag im Inhaltsverzeichnis einleiten.
+!endif
+!iflang [english]
+Start a "hidden" chapter.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/node* <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie (!KW [node]),
+mit der Ausnahme, dass ""<text>"" nicht in Inhaltsverzeichnissen erscheint.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [node]), but here ""<text>"" will not
+appear in a table of contents.
+!endif
+
+!item [(!EXAMPLE)]
+!iflang [german]
+(!T)!/node* Titel des versteckten Kapitels(!t)
+!endif
+!iflang [english]
+(!T)!/node* Title of hidden chapter(!t)
+!endif
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.46
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [pnode*]), (!KW [begin_node*]), (!link [Gliederung] [Gliederung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [pnode*]), (!KW [begin_node*]), (!link [Structuring] [Structuring])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kkw [nolink])
+!html_name cmd_nolink().html
+
+!iflang [german]
+Referenzierung unterdrücken.
+!endif
+!iflang [english]
+Suppress referencing.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/nolink [<(!TEXT)>])(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter sorgt dafür, dass der ausgegebene Text (Inhalt der Klammern) nicht referenziert wird.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This placeholder can be used to ensure that the text inside the brackets won't be referenced.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)(!nolink [hallo])(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!nolink [hello])(!t)
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [no_links]), (!KKW [link])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [nop])
+!html_name cmd_nop.html
+
+!iflang [german]
+Nichts tun.
+!endif
+!iflang [english]
+Do nothing.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/nop(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Befehl (""no operation"") macht gar nichts und wird lediglich für Debugging-Zwecke eingesetzt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command (""no operation"") does nothing and is used for debugging purposes.
+!endif
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~15
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [nroff_type])
+!html_name cmd_nroff_type.html
+
+!iflang [german]
+Programmtyp setzen (nur NROFF).
+!endif
+!iflang [english]
+Set program type (NROFF only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/nroff_type <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+""<text>"" wird bei der Ausgabe in NROFF in Klammern in der Kopfzeile ausgegeben. Im Beispiel
+würde bei benutztem ""(!KW [docinfo] [[program!!] udo])"" die Kopfzeile
+""udo(1)"" ausgegeben. ""<text>"" wird nicht als Dateiendung benutzt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+When converting to NROFF UDO uses ""<text>"" inside the
+headline with brackets. The example and ""(!KW [docinfo] [[program!!] udo](!i)""
+would look like ""udo(1)"". UDO doesn't use ""<text>"" as a file suffix.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/nroff_type 1(!t)
+
+!item [(!SEEALSO)]
+(!KW [man_type])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!end_node
+
+################################################################################

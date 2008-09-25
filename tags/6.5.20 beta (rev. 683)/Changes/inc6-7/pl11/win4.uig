@@ -1,0 +1,42 @@
+UDO unterstützt nun ein ""neues"" Format: WinHelp4. Zur Umwandlung in
+ein Helpfile wird der Microsoft Help Workshop 4.0x benötigt (HCW.EXE), welcher
+kostenlos bei Microsoft erhältlich ist. Ich habe die URL nicht im Kopf;
+wer die Datei bei Microsoft nicht findet, sollte mal bei
+(!V)http://www.helpmaster.com(!v) vorbeischauen (sowieso
+empfehlenswert).
+
+WinHelp4 unterscheidet sich von WinHelp dadurch, daß UDO eine kleinere
+Schrift benutzt (MS Sans Serif 8pt), dadurch die Einrückungen in
+Inhaltsverzeichnissen, Aufzählungen und Tabellen ebenfalls schrumpfen,
+automatisch ein Contents-File ((!V).cnt(!v)-File) erzeugt wird und die
+Projektdatei ((!V).hpj(!v)) ein paar andere Einträge besitzt.
+
+Damit UDO WinHelp4-Dateien erzeugt, übergibt man per Kommandozeile die
+Option ""(!V)-4(!v)"" bzw. ""(!V)(--)win4(!v)"". WinHelp4 wird dazu ab
+der UDOSH32~1.02 unterstützt.
+
+Für WinHelp4 gibt es analog zu WinHelp folgende neue Kommandos und
+Schalter (die Funktionsweise ist identisch):
+!begin_table [|l|l|] !hline
+WinHelp						!! WinHelp4
+!hline
+!/win_helpid				!! !/wh4_helpid
+!/win_charwidth				!! !/wh4_charwidth
+!/win_propfont				!! !/wh4_propfont
+!/win_backcolor				!! !/wh4_backcolor
+!/win_textcolor				!! !/wh4_textcolor
+!/win_background			!! !/wh4_background
+!/win_inline_bitmaps		!! !/wh4_inline_bitmaps
+!/win_high_compression		!! !/wh4_high_compression
+!/win_medium_compression	!! (nicht möglich)
+!hline
+Kürzel für Schalter: win	!! Kürzel für Schalter: wh4
+!hline
+!end_table
+
+Ich bitte um Rückmeldung, falls etwas nicht wie gewünscht funktioniert!
+
+!index !/wh4_old_keywords
+!item Neu: Schalter (!I)!/wh4_old_keywords(!i), Funktionsweise analog zu
+(!I)!/win_old_keywords(!i).
+

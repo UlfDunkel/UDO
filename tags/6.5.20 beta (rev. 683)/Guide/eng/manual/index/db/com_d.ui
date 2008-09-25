@@ -1,0 +1,396 @@
+!subsubnode !/define
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/define <word> <text>(!t)
+
+!item [Description:]
+	Sets a (new) definition. When converting UDO will replace every       
+	""(!/<word>)"" by ""<text>"" without converting special chars. When   
+	using the lower exmaple every ""(!H1)"" will be replaced by           
+	""</H1>"". The difference to a macro: no umlauts or other special     
+	chars will be converted. Definitions can contain parameters. Read the 
+	chapter ""Definitions"" to get to know how to use definitions with    
+	parameters.                                                           
+
+!item [Example:] (!T)!/define H1 </H1>(!t)
+
+!item [See:] Definitions
+
+!end_xlist
+#------------------------------
+!subsubnode !/depth
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, main part
+
+!item [Syntax:]
+	(!T)!/depth(!t)
+
+!item [Description:]
+	(!MISS)                                                               
+
+!item [Example:] (!T)!/tableofcontents !/depth 2(!t)
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/docinfo
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/docinfo(!t)
+
+!item [Description:]
+	(!MISS)                                                               
+
+
+!item [See:] (!I)!/maketitle(!i), Title page
+
+!end_xlist
+#------------------------------
+!subsubnode !/docinfo [author]
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/author <text>(!t)
+
+!item [Description:]
+	""<text>"" will be used as the name of the author on the title page   
+	and for different other purposes.                                     
+
+!item [Example:] (!T)!/author Dirk Hagedorn(!t)
+
+!item [See:] (!I)!/maketitle(!i), (!I)!/authorimage(!i), Title page
+
+!end_xlist
+#------------------------------
+!subsubnode !/docinfo [authorimage]
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/authorimage <file>(!t)
+
+!item [Description:]
+	(!T)<file>(!t) will be displayed above the name of the author on the  
+	title page if the destination format supports images.                 
+
+!item [Example:] (!T)!/authorimage dh(!t)
+
+!item [See:] (!I)!/maketitle(!i), (!I)!/author(!i), Title page, Images
+
+!end_xlist
+#------------------------------
+!subsubnode !/docinfo [country]
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/country <text>(!t)
+
+!item [Description:]
+	""<text>"" will be displayed below the town of the author on the      
+	title page to show in which country he lives.                         
+
+!item [Example:] (!T)!/country Germany(!t)
+
+!item [See:] (!I)!/maketitle(!i), Title page
+
+!end_xlist
+#------------------------------
+!subsubnode !/docinfo [date]
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/date <text>(!t)
+
+!item [Description:]
+	""<text>"" will be displayed on the title page below the contents of  
+	(!I)!/version(!i). The example shows how to use the current system    
+	time for the title page.                                              
+
+!item [Example:] (!T)!/date (!/today)(!t)
+
+!item [See:] (!I)!/maketitle(!i), (!I)(!/today)(!i), (!I)(!/short_today)(!i), Title page
+
+!end_xlist
+#------------------------------
+!subsubnode !/docinfo [email]
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/email <text>(!t)
+
+!item [Description:]
+	""<text>"" will be dsiplayed on the titlepage below the name and      
+	address of the author. (!I)!/email(!i) can be used up to four times   
+	to enable you to print more than one email address on the title page. 
+
+!item [Example:] (!T)!/email Internet: dh@mk2.maus.sauerland.de(!t)
+
+!item [See:] (!I)!/maketitle(!i), Title page
+
+!end_xlist
+#------------------------------
+!subsubnode !/docinfo [program]
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/program <text>(!t)
+
+!item [Description:]
+	""<text>"" will be displayed on the titlepage below the title.        
+
+!item [Example:] (!T)!/program UDO(!t)
+
+!item [See:] (!I)!/maketitle(!i), (!I)!/programimage(!i), Title page
+
+!end_xlist
+#------------------------------
+!subsubnode !/docinfo [programimage]
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/programimage <file>(!t)
+
+!item [Description:]
+	""<file>"" will be displayed instead of the name of the program on    
+	the titlepage if the destination format supports images.              
+
+!item [Example:] (!T)!/programimage udo(!t)
+
+!item [See:] (!I)!/maketitle(!i), (!I)!/program(!i), Title page
+
+!end_xlist
+#------------------------------
+!subsubnode !/docinfo [street]
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/street <text>(!t)
+
+!item [Description:]
+	""<text>"" will be displayed below the name of the author to show in  
+	which street you live.                                                
+
+!item [Example:] (!T)!/street Asmecke 1(!t)
+
+!item [See:] (!I)!/maketitle(!i), Title page
+
+!end_xlist
+#------------------------------
+!subsubnode !/docinfo [title]
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/title <text>(!t)
+
+!item [Description:]
+	""<text>"" will be displayed on the titlepage before the contents of  
+	!/program. It's also used inside the headlines.                       
+
+!item [Example:] (!T)!/title The guide to(!t)
+
+!item [See:] (!I)!/maketitle(!i), Title page
+
+!end_xlist
+#------------------------------
+!subsubnode !/docinfo [town]
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/town <text>(!t)
+
+!item [Description:]
+	""<text>"" will be given out inside the author's address block on the 
+	titlepage.                                                            
+
+!item [Example:] (!T)!/town D-59846 Sundern(!t)
+
+!item [See:] (!I)!/maketitle(!i), Title page
+
+!end_xlist
+#------------------------------
+!subsubnode !/docinfo [version]
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/version <text>(!t)
+
+!item [Description:]
+	""<text>"" will be given out right below the contents of !/program on 
+	the titlepage.                                                        
+
+!item [Example:] (!T)!/version Release 6(!t)
+
+!item [See:] (!I)!/maketitle(!i), Title page
+
+!end_xlist
+#------------------------------
+!subsubnode !/docinfo [webmasteremail]
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/docinfo [webmasteremail](!t)
+
+!item [Description:]
+	(!MISS)                                                               
+
+
+!item [See:] (!I)!/maketitle(!i), Title page
+
+!end_xlist
+#------------------------------
+!subsubnode !/docinfo [webmastername]
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/docinfo [webmastername](!t)
+
+!item [Description:]
+	(!MISS)                                                               
+
+
+!item [See:] (!I)!/maketitle(!i), Title page
+
+!end_xlist
+#------------------------------
+!subsubnode !/docinfo [webmasterurl]
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/docinfo [webmasterurl](!t)
+
+!item [Description:]
+	(!MISS)                                                               
+
+
+!item [See:] (!I)!/maketitle(!i), Title page
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

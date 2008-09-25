@@ -1,0 +1,1946 @@
+################################################################################
+!begin_node I!..
+!html_name cmd-i.html
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [=info])
+!html_name cmd_info-eq.html
+
+!iflang [german]
+Abfrage des Ausgabeformates.
+!endif
+!iflang [english]
+Query the destination format.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/=info <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[info!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!begin_node (!kkkw [I] [i])
+!html_name cmd_I().html
+!label (!kk1 [/I])
+!label (!kk1 [/i])
+
+!iflang [german]
+Text kursiv ausgeben.
+!endif
+!iflang [english]
+Print text in italics.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/I)[<(!TEXT)>](!/i)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+""<text>"" wird kursiv dargestellt, falls möglich.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+""<text>"" will be displayed in italics if possible.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)(!/I)kursiv(!/i)(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/I)italics(!/i)(!t)
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+Schriftarten, (!link [Texthervorhebungen] [Texthervorhebungen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+Text styles, (!link [Emphasizing text] [Emphasizing text])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [i])
+!html_name cmd_i.html
+
+!iflang [german]
+Aufzählungspunkt einleiten.
+!endif
+!iflang [english]
+Start an item.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/i [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [item]).
+
+!item [(!SEEALSO)]
+(!KW [item])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kkw [idx])
+!html_name cmd_idx().html
+
+!iflang [german]
+Indexeinträge im Text angeben.
+!endif
+!iflang [english]
+Create index entries.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/idx [<(!TEXT)>] {[<index1>]} {[<index2>]} {[<index3>]})(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dient zum Erzeugen von Indizes direkt im Quelltext.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Useful for adding indices right inside the source file.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)(!/idx [Wort] [Indexeintrag])(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/idx [word] [index entry])(!t)
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Indizes] [Indizes]), (!KKW [index]), (!KW [no_index]), (!KW [index])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Indices] [Indices]), (!KKW [index]), (!KW [no_index]), (!KW [index])
+!endif
+
+!end_xlist
+
+!end_node
+################################################################################
+!begin_node (!kw [if])
+!html_name cmd_if.html
+
+!iflang [german]
+Allgemeine Abfrage beginnen.
+!endif
+!iflang [english]
+Start a query.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/if [<(!TEXT)>](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando vereint die Abfragekommandos (!KW [iflang]),
+(!KW [ifdest]), (!KW [ifset]) und (!KW [ifos]). Das (etwas unglücklich gewählte) Beispiel zeigt, wie man abfragen kann, ob der Quelltext nach HTML oder mit deutschsprachigen Ausdrücken übersetzt wird.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command combines the commands (!KW [ifdest]),
+(!KW [iflang]), (!KW [ifset]) and (!KW [ifos]). The example
+shows how to test if the source file is converted into an english HTML file.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/if [german,html](!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [iflang]), (!KW [ifdest]), (!KW [ifset]), (!KW [ifos]), (!link [Abfragebefehle] [Abfragebefehle])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [iflang]), (!KW [ifdest]), (!KW [ifset]), (!KW [ifos]), (!link [Query commands] [Query commands])
+!endif
+
+!end_xlist
+
+!end_node
+
+
+################################################################################
+!begin_node (!kw [ifdest])
+!html_name cmd_ifdest.html
+
+!iflang [german]
+Abfrage des Ausgabeformates.
+!endif
+!iflang [english]
+Query the destination format.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ifdest [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando fragt das aktuelle Ausgabeformat ab.
+Stimmt ""<kürzel>"" mit dem Kürzel des Ausgabeformates
+überein, so werden alle Zeilen umgewandelt, die
+zwischen (!KW [ifdest]) und (!KW [else]) bzw. (!KW [endif]) angegeben
+werden. Stimmt das Kürzel nicht überein, so werden
+nur die Zeilen zwischen (!KW [else]) und (!KW [endif]) ausgewertet,
+sofern (!KW [else]) benutzt wird. Das Beispiel zeigt, wie
+man testen kann, ob die Quelldatei ins ST-Guide- oder
+WinHelp-Format umgewandelt wird.
+# ToDo: erfolgt stets eine ODER-Verknüpfung?? (U.K. 17.12.03)
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command tests the current destination format. If one of the
+""<abbreviations>"" matches the abbreviation of the destination
+format UDO will convert all lines between (!KW [ifdest]) and
+(!KW [else]) or (!KW [endif]). If not UDO will only convert the
+lines between (!KW [else]) and (!KW [endif]) if (!KW [else]) is
+used. The example shows how to test if UDO converts to ST-Guide or Windows Help.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/ifdest [stg,win](!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.41
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [else]), (!KW [endif]), (!KW [ifndest]), (!KW [if]), (!link [Abfragebefehle] [Abfragebefehle])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [else]), (!KW [endif]), (!KW [ifndest]), (!KW [if]), (!link [Query commands] [Query commands])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [iflang])
+!html_name cmd_iflang.html
+
+!iflang [german]
+Abfrage der Ausgabesprache.
+!endif
+!iflang [english]
+Query the language.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/iflang [(!LANGUAGE)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando fragt die aktuelle Ausgabesprache ab.
+Wird ein deutscher Text erzeugt und wird als
+""<sprache>"" die Zeichenkette ""german"" verwendet, so
+werden alle Zeilen ausgewertet, die bis (!KW [else]) bzw.
+(!KW [endif]) angegeben werden. Andernfalls werden alle
+Zeilen ausgewertet, die zwischen (!KW [else]) und (!KW [endif])
+angegeben werden.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command test the language UDO uses for the destination file. If
+""<language>"" matches one of the abbreviations for the destination
+languages UDO will convert all lines between (!KW [iflang]) and
+(!KW [else]) or (!KW [endif]). If not UDO will only convert the
+lines between (!KW [else]) and (!KW [endif]) if (!KW [else]) is
+used. The example shows how to test if UDO converts to English.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/iflang [english](!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [ifnlang]), (!KW [ifdest]), (!KW [language]), (!link [Abfragebefehle] [Abfragebefehle])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [ifnlang]), (!KW [ifdest]), (!KW [language]), (!link [Query commands] [Query commands])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [ifndest])
+!html_name cmd_ifndest.html
+
+!iflang [german]
+Abfrage des Ausgabeformates.
+!endif
+!iflang [english]
+Query the destination format.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ifndest [(!FORMAT)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando fragt das aktuelle Ausgabeformat ab. Stimmt
+""<kürzel>"" (!I)nicht(!i) mit dem Kürzel des Ausgabeformates überein,
+so werden alle Zeilen umgewandelt, die zwischen (!KW [ifndest]) und
+(!KW [else]) bzw. (!KW [endif]) angegeben werden. Stimmt das Kürzel
+überein, so werden nur die Zeilen zwischen (!KW [else]) und
+(!KW [endif]) ausgewertet, sofern (!KW [else]) benutzt wird.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command tests the current destination format. If (!I)none(!i) of
+the ""<abbreviations>"" match the abbreviation of the destination
+format UDO will convert all lines between (!KW [ifdest]) and
+(!KW [else]) or (!KW [endif]). If one matches them UDO will only
+convert the lines between (!KW [else]) and (!KW [endif]) if
+(!KW [else]) is used. The example shows how to test if UDO doesn't
+convert to HTML.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/ifndest [html](!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [else]), (!KW [endif]), (!KW [ifdest]), (!link [Abfragebefehle] [Abfragebefehle])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [else]), (!KW [endif]), (!KW [ifdest]), (!link [Query commands] [Query commands])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [ifnlang])
+!html_name cmd_ifnlang.html
+
+!iflang [german]
+Abfrage der Ausgabesprache.
+!endif
+!iflang [english]
+Query the language.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ifnlang [(!LANGUAGE)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando fragt die aktuelle Ausgabesprache ab.
+Wird ein deutscher Text erzeugt und wird als
+""<sprache>"" (!I)nicht(!i) die Zeichenkette ""german""
+verwendet, so werden alle Zeilen ausgewertet, die bis
+(!KW [else]) bzw. (!KW [endif]) angegeben werden. Andernfalls
+werden alle Zeilen ausgewertet, die zwischen (!KW [else])
+und (!KW [endif]) angegeben werden.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command tests the current destination language. If (!I)none(!i)
+of the ""<languages>"" match the abbreviation of the destination
+language UDO will convert all lines between (!KW [ifdest]) and
+(!KW [else]) or (!KW [endif]). If one matches them UDO will only
+convert the lines between (!KW [else]) and (!KW [endif]) if
+(!KW [else]) is used. The example shows how to test if UDO doesn't
+convert to French.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/ifnlang [english](!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [iflang]), (!KW [ifdest]), (!KW [language]), (!link [Abfragebefehle] [Abfragebefehle])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [iflang]), (!KW [ifdest]), (!KW [language]), (!link [Query commands] [Query commands])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [ifnos])
+!html_name cmd_ifnox.html
+
+!iflang [german]
+Betriebssystem abfragen.
+!endif
+!iflang [english]
+Query the operating system.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ifnos [(!OS)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando testet das aktuelle Betriebssystem,
+unter dem UDO läuft. Enthält ""<systeme>"" (!I)keines(!i) der
+Kürzel der Betriebssysteme, so wandelt UDO alle
+Zeilen ab dem folgenden (!KW [else]) um, falls (!KW [else]) benutzt
+wird. Das Beispiel zeigt, wie man abfragen kann, ob
+UDO (!I)nicht(!i) auf einem Apple Macintosh läuft.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command tests the current operating system UDO is running on. If
+""<systems>"" doesn't match any of the abbreviations of the operating
+systems UDO will convert all lines that follow (!KW [else]) if it
+is used. If (!KW [else]) isn't used UDO will ignore all lines until
+an (!KW [endif]). The example shows how you can test if UDO
+does (!B)not(!b) run on an Apple Macintosh.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/ifnos [macos](!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [ifos]), (!link [Abfragebefehle] [Abfragebefehle])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [ifos]), (!link [Query commands] [Query commands])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [ifnset])
+!html_name cmd_ifnset.html
+
+!iflang [german]
+Symbol abfragen.
+!endif
+!iflang [english]
+Query symbol.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ifnset [<(!TEXT)>](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Abfragebefehl können Sie testen, ob ein
+Symbol für die Umwandlung (!I)weder(!i) in der Kommandozeile
+mit der Option (!V)-D(!v) noch mit (!KW [set]) gesetzt wurde. Wurde
+""<text>"" nicht gesetzt, so werden alle folgenden Zeilen
+umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht.
+Andernfalls werden nur die Zeilen umgewandelt, die
+(!KW [else]) folgen, sofern die Abfrage einen Sonst-Zweig
+besitzt. Das Beispiel zeigt, wie man abfragt, ob das
+Symbol ""deutsch"" nicht gesetzt wurde.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+With this command you can test if a symbol was (!B)not(!b) set with
+the command line option (!T)-D(!t) or with (!KW [set]). If
+(!T)<text>(!t) wasn't set UDO will convert all lines bewteen
+(!KW [ifnset]) and (!KW [else]) or (!KW [endif]). If
+(!T)<text>(!t) was set UDO will convert all lines between
+(!KW [else]) and (!KW [endif]) if (!KW [else]) was used. The
+example shows how to test if the symbol ""british"" isn't set.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)!/ifnset [deutsch](!t)
+!endif
+!iflang [english]
+(!T)!/ifnset [british](!t)
+!endif
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~10
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [ifset]), (!link [Abfragebefehle] [Abfragebefehle])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [ifset]), (!link [Query commands] [Query commands])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [ifos])
+!html_name cmd_ifos.html
+
+!iflang [german]
+Betriebssystem abfragen.
+!endif
+!iflang [english]
+Query operating system.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ifos [(!OS)](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando testet das aktuelle Betriebssystem,
+auf dem UDO läuft. Enthält ""<systeme>"" eines der
+Kürzel der Betriebssysteme, so wandelt UDO alle
+Zeilen zwischen (!KW [ifos]) und (!KW [endif]) bzw. (!KW [else]) um. Das
+Beispiel zeigt, wie man testen kann, ob UDO unter Linux läuft.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command tests the current operating system UDO is running on. If
+""<systems>"" match one of the abbreviations of the operating systems
+UDO will convert all lines that are used between (!KW [ifos]) and
+(!KW [endif]) or (!KW [else]). If ""<systems>"" doesn't match any
+of the abbreviations of the operating systems UDO will ignore all
+lines before (!KW [endif]) or (!KW [else]). The example shows how
+you can test if UDO runs with Linux.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/ifos [linux](!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [ifnos]), (!link [Abfragebefehle] [Abfragebefehle])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [ifnos]), (!link [Query commands] [Query commands])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [ifset])
+!html_name cmd_ifset.html
+
+!iflang [german]
+Symbol abfragen.
+!endif
+!iflang [english]
+Query symbol.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ifset [<(!TEXT)>](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Abfragebefehl können Sie testen, ob ein Symbol für die Umwandlung in der Kommandozeile mit
+der Option (!V)-D(!v) gesetzt wurde. Wurde ""<text>"" gesetzt, so werden alle folgenden Zeilen umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht. Andernfalls werden nur die Zeilen umgewandelt, die (!KW [else]) folgen, sofern die Abfrage einen else-Zweig besitzt. Das Beispiel zeigt, wie man abfragt, ob in der Kommandozeile (!V)-D deutsch(!v) benutzt wurde.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+With this command you can test if a symbol was set with the command
+line option (!T)-D(!t) or with (!KW [set]). If (!T)<text>(!t) was
+set UDO will convert all lines bewteen (!KW [ifset]) and
+(!KW [else]) or (!KW [endif]). If (!T)<text>(!t) wasn't set UDO
+will convert all lines between (!KW [else]) and (!KW [endif]) if
+(!KW [else]) was used. The example shows how to test if the symbol
+""british"" was set.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)!/ifset [deutsch](!t)
+!endif
+!iflang [english]
+(!T)!/ifset [british](!t)
+!endif
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~10
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [ifnset]), (!link [Abfragebefehle] [Abfragebefehle])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [ifnset]), (!link [Query commands] [Query commands])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [ignore_bottomline])
+!html_name cmd_ignore_bottomline.html
+
+!iflang [german]
+Ausgabe einer Fußzeile unterdrücken.
+!endif
+!iflang [english]
+Suppress output of bottom line.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_bottomline(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wird dieser Schalter in einem Kapitel angegeben, so
+wird bei diesem Kapitel keine Fußzeile erzeugt. Im
+Gegensatz zu (!KW [no_bottomlines]) wird lediglich bei dem
+Kapitel, bei dem (!KW [ignore_bottomline]) benutzt wird, auf
+die Ausgabe einer Kopfzeile verzichtet.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If this switch is used inside a chapter UDO won't print a bottom line.
+In contrast to (!KW [no_bottomlines]) this switch will only
+suppress the bottom line inside the chapter where
+(!KW [ignore_bottomline]) is used.
+!endif
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [no_bottomlines])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [ignore_headline])
+!html_name cmd_ignore_headline.html
+
+!iflang [german]
+Ausgabe einer Kopfzeile unterdrücken.
+!endif
+!iflang [english]
+Suppress output of headline.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_headline(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wird dieser Schalter in einem Kapitel angegeben, so
+wird bei diesem Kapitel keine Kopfzeile erzeugt. Im
+Gegensatz zu (!KW [no_headlines]) wird lediglich bei dem
+Kapitel, bei dem (!KW [ignore_headline]) benutzt wird, auf
+die Ausgabe einer Kopfzeile verzichtet.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If this switch is used inside a chapter UDO won't print a headline.
+In contrast to (!KW [no_headlines]) this switch will only suppress
+the headline inside the chapter where (!KW [ignore_headline]) is used.
+!endif
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [no_headlines])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [ignore_index])
+!html_name cmd_ignore_index.html
+
+!iflang [german]
+Ein Kapitel nicht in den Index übernehmen.
+!endif
+!iflang [english]
+Don't include chapter in index.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_index(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wird dieser Schalter in einem Kapitel angegeben, so
+wird das Kapitel nicht im Index angezeigt. Auch dann
+nicht, wenn man den Schalter (!KW [use_nodes_inside_index])
+im Vorspann gesetzt hat.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If this switch is used inside a chapter UDO won't add its title to
+the index even if the switch (!KW [use_nodes_inside_index]) is used
+inside the preamble of the source file.
+!endif
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~10
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [use_nodes_inside_index]), (!KW [no_index]), (!link [Indizes] [Indizes])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [use_nodes_inside_index]), (!KW [no_index]), (!link [Indices] [Indices])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [ignore_links])
+!html_name cmd_ignore_links.html
+
+!iflang [german]
+Ein Kapitel nicht referenzieren.
+!endif
+!iflang [english]
+Suppress referencing a chapter.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_links(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wird dieser Schalter in einem Kapitel angegeben, so
+werden keine automatischen Querverweise auf dieses
+Kapitel angelegt. Manuelle Links sind jedoch
+weiterhin möglich.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If this switch is part of a chapter UDO won't insert links to this
+chapter automatically. You are still able to insert links with
+(!KKW [link]) on your own.
+!endif
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Querverweise] [Querverweise]), (!KKW [link])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Links] [Links]), (!KKW [link])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [ignore_raw_footer])
+!html_name cmd_ignore_raw_footer.html
+
+!iflang [german]
+Footerdatei ignorieren.
+!endif
+!iflang [english]
+Ignore footer file.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_raw_footer(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Darf nur in einem Node benutzt werden und besagt, dass in diesem Node
+die global geltende Footerdatei nicht ausgegeben werden soll. Somit
+kann man einzelne Nodes davor schützen, einen Footer zu erhalten.
+
+Dieser Befehl wird derzeit nur für HTML unterstützt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command may only be used inside a node
+and suppresses the output of the footer file
+that was set with (!KW [use_raw_footer]).
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!KW [use_raw_footer]), (!KW [ignore_raw_header])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [ignore_raw_header])
+!html_name cmd_ignore_raw_header.html
+
+!iflang [german]
+Headerdatei ignorieren.
+!endif
+!iflang [english]
+Ignore header file.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_raw_header(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Darf nur in einem Node benutzt werden und besagt, dass in diesem Node
+die global geltende Headerdatei nicht ausgegeben werden soll. Somit
+kann man einzelne Nodes davor schützen, einen Header zu erhalten.
+
+Dieser Befehl wird derzeit nur für HTML unterstützt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command may only be used inside a node
+and suppresses the output of the header file
+that was set with (!KW [use_raw_header]).
+
+This command is currently supported by HTML only.
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!KW [use_raw_header]), (!KW [ignore_raw_footer])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [ignore_subsubsubtoc])
+!html_name cmd_ignore_subsubsubtoc.html
+
+!iflang [german]
+In dem zugehörigen Subsubnode kein ""subsubsubtoc"" ausgeben.
+!endif
+!iflang [english]
+Suppress output of ""subsubsubtoc"".
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_subsubsubtoc(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wenn innerhalb eines Subsubnodes dieser Schalter
+gesetzt wird, so wird kein (automatisches) Inhaltsverzeichnis ausgegeben, in welchem die Paragraphen
+des Subsubnodes aufgelistet werden.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If this switch is used inside a subsection UDO won't print a
+""subsubsubtoc"" which contains all paragraphs of this subsection
+even if you have used (!KW [use_auto_subsubsubtocs]) inside the preamble.
+!endif
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [use_auto_subsubsubtocs]), (!KW [subsubsubtoc])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [ignore_subsubtoc])
+!html_name cmd_ignore_subsubtoc.html
+
+!iflang [german]
+In dem zugehörigen Subnode kein ""subsubtoc"" ausgeben.
+!endif
+!iflang [english]
+Suppress output of ""subsubtoc"".
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_subsubtoc(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wenn innerhalb eines Subnodes dieser Schalter gesetzt
+wird, so wird kein (automatisches) Unterinhaltsverzeichnis ausgegeben.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If this switch is used inside a section UDO won't print a
+""subsubtoc"" which contains all subsections and paragraphs of this
+section even if you have used (!KW [use_auto_subsubtocs]) inside the preamble.
+!endif
+
+!item [(!SEEALSO)]
+(!KW [use_auto_subsubtocs]), (!KW [subsubtoc])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [ignore_subtoc])
+!html_name cmd_ignore_subtoc.html
+
+!iflang [german]
+In dem zugehörigen Node kein ""subtoc"" ausgeben.
+!endif
+!iflang [english]
+Suppress output of ""subtoc"".
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_subtoc(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wenn innerhalb eines Nodes dieser Schalter gesetzt
+wird, so wird kein (automatisches) Unterinhaltsverzeichnis ausgegeben.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If this switch is used inside a chapter UDO won't print a ""subtoc""
+which contains all sections, subsections and paragraphs of this
+chapter even if you have used (!KW [use_auto_subtocs]) inside the preamble.
+!endif
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [use_auto_subtocs]), (!KW [subtoc])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [ignore_title])
+!html_name cmd_ignore_title.html
+
+!iflang [german]
+Titelzeilen ignorieren (nur HTML und HTML-Help).
+!endif
+!iflang [english]
+Ignore title lines (HTML and HTML-Help only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ignore_title(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Wird dieses Kommando innerhalb eines Kapitels, Abschnitts,
+Unterabschnitts oder Paragraphs benutzt, wird für die entsprechende
+Seite keine Titelzeile generiert.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+If you use this command inside a chapter, section, subsection
+or paragraph, UDO will not generate a title line on the corresponding page.
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~13
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kkw [ilink])
+!html_name cmd_ilink().html
+
+!iflang [german]
+Querverweis mit Grafik (nur WinHelp und HTML).
+!endif
+!iflang [english]
+Create link with graphic (WinHelp and HTML only).
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/ilink [<(!FILE)>] [<(!TEXT)>] [<link>])(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter ist eine Kombination der Platzhalter
+(!KKW [img]) und (!KKW [link]) und dient dazu,
+einen Querverweis durch eine Grafik zu ermöglichen.
+Dies ist momentan nur beim WinHelp- und HTML-Format
+möglich. Im Beispiel wird das Bild (!V)disk.bmp(!v) bzw.
+(!V)disk.gif(!v) zur Darstellung des Links benutzt, das
+Sprungziel lautet ""Download"". Bei HTML wird als
+Alternativtext ""UDO downloaden"" ausgegeben. Bei allen
+anderen Formaten wird lediglich ""UDO downloaden"" ausgegeben.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This placeholder is a combination of (!KKW [img]) and (!KKW [link]) and
+is useful to display an image right inside the text. If you click
+this image you will jump to another part of the document. The example
+shows how to display an image called (!V)disk.[bmp,gif](!v), the link
+destination is ""Download"". In HTML ""download UDO"" will be used as
+the alternative text. In all other formats only ""download"" UDO will
+be dislayed.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)(!/ilink [disk] [UDO downloaden] [Download])(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/ilink [disk] [download UDO] [Download])(!t)
+!endif
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [img]), (!KKW [link]), (!link [Querverweise] [Querverweise]), (!link [Bilder] [Bilder])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KKW [img]), (!KKW [link]), (!link [Links] [Links]), (!link [Images] [Images])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: Englisch
+!begin_node (!kkkw [INS] [ins])
+!html_name cmd_INS_ins.html
+!label (!kk1 [/INS])
+!label (!kk1 [/ins])
+
+!iflang [german]
+Markierung von Einfügungen.
+!endif
+!iflang [english]
+Print text in bold.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/INS)<(!TEXT)>(!/ins)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+""<text>"" wird als Einfügung markiert.
+
+Bei der HTML-Ausgabe wird die aktuelle Zeit als Attribut datetime
+und die URL ""http://www.udo-open-source.org"" als Attribut cite eingesetzt.
+
+Bei der RTF-Ausgabe wird ebenfalls die aktuelle Zeit eingesetzt. Außerdem
+trägt sich UDO als Änderungsautor 1 ein.
+
+Bei WinHelp(4), Apple Quickview und Postscript wird der neue Text in roter
+Farbe geschrieben.
+
+Bei allen anderen Formaten wird der eingefügte Text ohne besondere Kennzeichen
+geschrieben.
+
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)(!/INS)Einfügungen(!/ins)(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/INS)Einfügungen(!/ins)(!t)
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Texthervorhebungen] [Texthervorhebungen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Emphasizing text] [Emphasizing text])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kkw [image])
+!html_name cmd_image().html
+
+!iflang [german]
+Grafik ausgeben.
+!endif
+!iflang [english]
+Print inline images.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/image [<(!FILE)>] [<(!TEXT)>])(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Befehl wurde umbenannt in (!KKW [img]).
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command has been renamed to (!KKW [img]).
+!endif
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.41
+
+!item [(!EXISTEDUNTIL)] Release~4 Version~0.48
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Bilder] [Bilder]), (!KKW [img])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Images] [Images]), (!KKW [img])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!begin_node (!kw [image])
+!html_name cmd_image.html
+
+!iflang [german]
+Grafik ausgeben.
+!endif
+!iflang [english]
+Include image.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!iflang [german]
+!item [(!SYNTAX)] (!T)!/image <(!FILE)> <titel>(!t)
+!endif
+!iflang [english]
+!item [(!SYNTAX)] (!T)!/image <(!FILE)> <title>(!t)
+!endif
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando erzeugt in der Ausgabedatei Befehle
+zur Einbindung des Bildes. Die Endung der Datei
+sollte nicht übergeben werden, da UDO dies selbst
+erledigt. UDO benutzt ''(!V).img(!v)'' beim ST-Guide, CS(!TeX) und
+Lindner-(!TeX), ''(!V).gif(!v)'' für HTML, ''(!V).msp(!v)'' oder ''(!V).pcx(!v)'' für
+em(!TeX) und ''(!V).bmp(!v)'' für WinHelp, RTF und IPF.
+Wird ""<titel>"" angegeben, so wird der Text als Bildunterschrift angegeben.
+# ToDo: folgender Text fehlt in engl. Übersetzung!!
+
+Die Ausrichtung des Bildes richtet sich nach der
+eventuell vorhandenen äußeren Umgebung. Zentrierte
+Bilder erhält man demnach, wenn man das (!KW [image])-Kommando in einer center-Umgebung verwendet.
+Enthält der Dateiname Leerzeichen, muss er in Anführungsstriche gesetzt werden.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+A command to include an image is generated in the destination file,
+if it supports images. You shouldn't pass the suffix of the wanted
+image because UDO itself adds the right one. It will be (!V).img(!v)
+for the ST-Guide, CS(!TeX) and Lindner-(!TeX), (!V).gif(!v) for HTML,
+(!V).msp(!v) or (!V).pcx(!v) for em(!TeX) and (!V).bmp(!v) for
+Windows Help, RTF and IPF.
+If ''<caption>'' is used it will be printed as the title of the image.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/image tiger(!t)
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [no_images]), (!KKW [img]), (!KW [image*]), (!link [Bilder] [Bilder]), (!KW [html_img_suffix]),
+(!KW [no_img_size])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [no_images]), (!KKW [img]), (!KW [image*]), (!link [Images] [Images]), (!KW [html_img_suffix]),
+(!KW [no_img_size])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [image*])
+!html_name cmd_image_asterisk.html
+
+!iflang [german]
+Grafik ohne Nummer ausgeben.
+!endif
+!iflang [english]
+Include image.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!iflang [german]
+!item [(!SYNTAX)] (!T)!/image* <(!FILE)> <titel>(!t)
+!endif
+!iflang [english]
+!item [(!SYNTAX)] (!T)!/image* <(!FILE)> <title>(!t)
+!endif
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Der einzige Unterschied zum (!KW [image])-Kommando ist der,
+dass in der Bildunterschrift keine Abbildungsnummer ausgegeben wird.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+There's one difference between (!KW [image*]) and (!KW [image]).
+If you use this command there will be printed no image counter.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)!/image* tiger Dies ist ein Tiger(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)!/image* tiger This is a tiger(!t)
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~0
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [no_images]), (!KKW [img]), (!KW [image]), (!link [Bilder] [Bilder]), (!KW [html_img_suffix])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [no_images]), (!KKW [img]), (!KW [image]), (!link [Images] [Images]), (!KW [html_img_suffix])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [image_alignment])
+!html_name cmd_image_alignment.html
+
+!iflang [german]
+Ausrichtung für Bilder bestimmen.
+!endif
+!iflang [english]
+Specify alignment of images.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/image_alignment [left|center|right](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Im Vorspann eingesetzt, bestimmt es die Standard-Ausrichtung von
+Bildern, die mit (!KW [image]) eingebunden werden. Diese Ausrichtung
+wird genau dann benutzt, wenn ein Bild außerhalb einer center-,
+flushleft- oder flushright-Umgebung ausgegeben werden soll. Wird ein
+Bild innerhalb einer solchen Umgebung ausgegeben, wird es genauso
+ausgerichtet wie der Text innerhalb der Umgebung, sprich: ein Bild wird
+in einer center-Umgebung zentriert ausgegeben, unabhängig davon, was
+man bei (!KW [image_alignment]) gesetzt hat. Will man ein Bild in einer
+center-Umgebung rechtsbündig ausgeben, so muss man in dem Fall noch
+eine flushright-Umgebung um den (!KW [image])-Befehl setzen.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Used in the preamble this command determines the default
+alignment of images that are included with the (!KW [image]) command.
+This alignment will be used when an image is placed outside
+a center, flushleft or flushright environment.
+When an image is placed inside such an environment,
+it will be aligned according to the text of the environment,
+independent of the setting of the (!KW [image_alignment]) command.
+If you want to align an image right inside a center environment,
+you will have to insert a flushright environment around
+the (!KW [image]) command.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/image_alignment right(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~9
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [image]), (!KW [image*]), (!KKW [img]), (!KW [table_alignment]), (!link [Bilder] [Bilder])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [image]), (!KW [image*]), (!KKW [img]), (!KW [table_alignment]), (!link [Images] [Images])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [image_counter])
+!html_name cmd_image_counter.html
+
+!iflang [german]
+Abbildungszähler setzen.
+!endif
+!iflang [english]
+Set image counter.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/image_counter [<(!VALUE)>](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Schalter können Sie die Nummer festlegen,
+die bei der ersten Abbildung ausgegeben werden soll.
+Würde das Beispiel verwendet, so stünde unterhalb der
+ersten Abbildung folgendes: ""Abbildung 5: !.."".
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+With this switch you can set the image counter. If you use the lower
+example the caption of the first image will look like this: ""Figure 5: !.."".
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/image_counter 5(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~15
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Bilder] [Bilder]), (!KW [image])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Images] [Images]), (!KW [image])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kkw [img])
+!html_name cmd_img().html
+!iflang [german]
+Grafik ausgeben.
+!endif
+!iflang [english]
+Output inline images.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/img [<(!FILE)>] [<(!TEXT)>])(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Benutzen Sie dieses Kommando, um ein Bild direkt im
+Text bei der Umwandlung nach HTML oder WinHelp
+auszugeben. Bei der Umwandlung nach HTML wird
+(!T)file.gif(!t), bei WinHelp (!T)file.bmp(!t) benutzt, wobei UDO
+nicht überprüft, ob die jeweiligen Bilder existieren.
+Bei HTML wird ""<text>"" als Alternativtext benutzt. Bei
+den anderen Formaten wird nur ""<text>"" ausgegeben.
+
+Seit Version 6.5.18 wurde das Kommando erweitert: (!nl)
+(!T)(!/img [<(!FILE)>] [<(!TEXT)> [<(!TEXT)>]])(!t) (!nl)
+Dies hat nur Auswirkung bei der Ausgabe nach HTML, HTML Apple Help und HTMLHelp.
+Dabei wird der zweite <(!TEXT)> für das Attribut ""title"" benutzt. Ist nur ein <(!TEXT)>
+vorhanden, bekommen beide Attribute (""alt"" und ""title"") den selben Text. Beispiel:
+
+<img src=""d.gif"" width=""xxx"" height=""yyy"" border=""0"" alt=""text"" title=""text 2"">
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Use this placeholder to use an image right inside the text of HTML or
+WinHelp. If another destination format will be used only ""<text>""
+will be  displayed. When converting to HTML (!T)file.gif(!t) will be used,
+when converting to WinHelp (!T)file.bmp(!t) will be used. UDO doesn't check
+if this file exists.
+
+Since version 6.5.18, this command has been enhanced: (!nl)
+(!T)(!/img [<(!FILE)>] [<(!TEXT)> [<(!TEXT)>]])(!t) (!nl)
+This has effects only on HTML, HTML Apple Help and HTMLHelp output.
+The second <(!TEXT)> will then be used for the attribute ""title"". If only one <(!TEXT)>
+exists, both attributes ('alt' and 'title') get the same text. Example:
+
+<img src=""d.gif"" width=""xxx"" height=""yyy"" border=""0"" alt=""text"" title=""text 2"">
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)(!/img [dh] [mein Logo])(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/img [dh] [my logotype])(!t)
+!endif
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.48
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Bilder] [Bilder]), (!KW [image]), (!KW [no_img_size])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Images] [Images]), (!KW [image]), (!KW [no_img_size])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [include])
+!html_name cmd_include.html
+
+!iflang [german]
+Datei einbinden.
+!endif
+!iflang [english]
+Include file.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/include <(!FILE)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Öffnet die Datei ""<datei>"" und gibt deren
+umgewandelten Inhalt an der Stelle aus, an der dieses
+Kommando benutzt wurde. Enthält der Dateiname Leerzeichen,
+muss er in Anführungsstriche gesetzt werden.
+# ToDo: letzter Satz fehlt in engl. Übersetzung!
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Opens the file named ""file"" and converts its contents.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/include macros.ui(!t)
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [vinclude]), (!KW [rinclude]), (!KW [input]), (!link [Verteilte Dokumente] [Verteilte Dokumente])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [vinclude]), (!KW [rinclude]), (!KW [input]), (!link [Split documents] [Split documents])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kkw [index])
+!html_name cmd_index().html
+
+!iflang [german]
+Indexeinträge im Text angeben.
+!endif
+!iflang [english]
+Set index entry.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/index [<(!TEXT)>] {[<index1>]} {[<index2>]} {[<index3>]})(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dient zum Erzeugen von Indizes direkt im Quelltext.
+Im Gegensatz zu (!KKW [idx]) wird ""<text>"" nicht ausgegeben,
+es erfolgt also lediglich ein Eintrag in den Index.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Creating indices in the source text directly.
+In opposite to (!KKW [idx]), ""<text>"" won't be printed, only an index entry will be done.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)(!/index [Wort] [Indexeintrag])(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/index [word] [index entry])(!t)
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Indizes] [Indizes]), (!KKW [idx]), (!KW [no_index]), (!KW [index])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Indices] [Indices]), (!KKW [idx]), (!KW [no_index]), (!KW [index])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [index])
+!html_name cmd_index.html
+
+!iflang [german]
+Indexeintrag bzw. Schlüsselwort setzen.
+!endif
+!iflang [english]
+Indexeintrag bzw. Schlüsselwort setzen.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/index <(!TEXT)>(!t)
+
+#Ausgabe-Formate
+!iflang [german]
+!item [(!DESCRIPTION)]
+""<text>"" wird für (!LaTeX) als ''(!V)\index~{!..}(!v)'', für WinHelp
+als ''(!V)K{\footnote~K~!..}(!v)'', für RTF als ''(!V){\xe\v~!..}(!v)''
+und für den ST-Guide als ''(!V)@index~!..(!v)'' ausgegeben.
+""<text>"" kommt damit bei (!LaTeX) und dem ST-Guide in den
+Index, bei WinHelp kann man im Suchen-Dialog nach
+diesem Schlüsselwort suchen und bekommt die Namen der
+Kapitel aufgelistet, in denen (!KW [index]) benutzt wurde.
+""<text>"" kann beliebig oft benutzt werden, auch in mehreren Kapiteln.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+(!T)<text>(!t) will pe printed as (!T)\index~{!..}(!t) for (!LaTeX),
+(!T)K{\footnote K !..}(!t) for WinHelp, (!T){\xe\v !..}(!t) for RTF
+and (!T)@index !..(!t) for ST-Guide. So, (!T)<text>(!t) appears in
+the index of (!LaTeX) and ST-Guide. WinHelp allows  to search this
+word. You can use this command as many times as you like
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)!/index Eintrag !! Index(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)!/index entry !! Index(!t)
+!endif
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.48
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Indizes] [Indizes]), (!KW [no_index]), (!KKW [idx])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [Indices] [Indices]), (!KW [no_index]), (!KKW [idx])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [info])
+!html_name cmd_info.html
+
+!iflang [german]
+Abfrage des Ausgabeformates.
+!endif
+!iflang [english]
+Query the destination format.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/info <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[info!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!begin_node (!kw [input])
+!html_name cmd_input.html
+
+!iflang [german]
+Datei einbinden.
+!endif
+!iflang [english]
+Include file.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/input <(!FILE)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Öffnet die Datei ""<datei>"" und gibt deren
+umgewandelten Inhalt an der Stelle aus, an der dieses
+Kommando benutzt wurde. Im Gegensatz zu (!KW [include])
+sucht (!KW [input]) lediglich in
+dem Verzeichnis, welches durch die Umgebungsvariable
+(!V)$UDOINPUTPATH(!v) definiert ist.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Opens the file named ""file"" and converts its contents.
+In contrast to (!KW [include]) this command
+only looks up the file in the directory
+defined by the environment variable (!V)$UDOINPUTPATH(!v).
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/input macros.ui(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [include]), (!KW [vinclude]), (!KW [rinclude]), (!link [Verteilte Dokumente] [Verteilte Dokumente])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [include]), (!KW [vinclude]), (!KW [rinclude]), (!link [Split documents] [Split documents])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [italian])
+!html_name cmd_italian.html
+
+!iflang [german]
+Sprache setzen.
+!endif
+!iflang [english]
+Define language.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/italian(!t)
+
+!item [(!DESCRIPTION)]
+# Der Befehl (!KW [italian]) existiert nicht mehr.
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [language] [[italian!!]]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [language])
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!begin_node (!kw [item])
+!html_name cmd_item.html
+
+!iflang [german]
+Aufzählungspunkt einleiten.
+!endif
+!iflang [english]
+Start an item.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/item <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Leitet einen neuen Aufzählungspunkt einer itemize-Umgebung oder enumerate-Umgebung ein. Dieser wird mit
+einer Marke bzw. mit einem alphanumerischen Wert gekennzeichnet.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Starts a new item of an itemize or enumerate environment.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)!/item Dies ist der nächste Aufzählungspunkt(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)!/item This is the next item(!t)
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [item] [[~!!]]), (!link [Aufzählungen] [Aufzählungen]), (!link [Nummerierungen] [Nummerierungen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [item] [[~!!]]), (!link [Itemizations] [Itemizations]), (!link [Enumerations] [Enumerations])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [item [~!]])
+!html_name cmd_item2.html
+
+!iflang [german]
+Aufzählungspunkt einleiten.
+!endif
+!iflang [english]
+Start an item.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/item [<(!TEXT)>] <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Leitet einen neuen Aufzählungspunkt einer
+description-Umgebung oder einer xlist-Umgebung ein.
+Der Text, der in eckige Klammern eingefasst wird, wird
+bei der description-Umgebung in der Ausgabedatei fett dargestellt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Starts a new item of a description or an xlist environment.
+""<text>"" will be displayed in bold text inside a description environment.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)!/item [Titel:] Beschreibung(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)!/item [Title:] Description(!t)
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [item]), (!link [Beschreibungen] [Beschreibungen]), (!link [Listen] [Listen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [item]), (!link [Descriptions] [Descriptions]), (!link [Lists] [Lists])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!end_node
+
+################################################################################

@@ -1,0 +1,53 @@
+!begin_itemize
+
+!index !/use_auto_toptocs !! !/no_icons
+!item Neu: Wird beim Schalter (!I)!/use_auto_toptocs(!i) zusätzlich
+noch (!I)!/no_icons(!i) angegeben, so werden keine Bilder neben den
+Verweisen auf die übergeordneten Kapitel ausgegeben (Uwe Mindrup).
+Beispiel:
+!begin_verbatim
+!ifdest [stg]
+	!use_auto_toptocs [all] !no_icons
+!else
+	!use_auto_toptocs [all]
+!endif
+!end_verbatim
+
+!index !/image
+!index Dateinamen
+!index Umlaute
+!item Änderung: Es ist fortan zu (!B)vermeiden(!b), in Dateinamen für Bilder,
+die mit (!I)!/image(!i) eingebunden werden, Umlaute oder andere
+Sonderzeichen zu verwenden!
+
+!index Französisches Datumsformat
+!index Datumsformat, Französisch
+!item Änderung: Das Datumsformat für (!I)!/language~[french](!i) wurde angepaßt
+(Didier Briel).
+
+!index Makros
+!index Definitionen
+!index Nodes
+!item Änderung: Die Anzahl der maximalen Makros und Definitionen wurde
+jweils auf 1000 erhöht (Holger Herzog). Die Anzahl der maximalen Nodes
+wurde auf 32.768 erhöht (Helmut Schultze).
+
+!index Tabellen
+!index Zellen
+!item Änderung: Pro Zelle könn in Tabellen nun bis zu 1000 Zeichen
+verwendet werden (Helmut Schultze, Ulrich Kretschmer, Patrick Jerchel).
+
+!index (--)force-short
+!index Kurze Dateinamen
+!index Dateinamen, kurz
+!item Neu: Kommandozeilenoption (!V)(--)force-short(!v) erzwingt unter
+Betriebssystemen, die lange Dateinamen beherrschen, die Erzeugung von
+kurzen Dateinamen (Markus Schwaiger). Unter Win32 und Linux werden dann
+bspw. (!V).htm(!v) anstelle von (!V).html(!v) erzeugt.
+
+!index !/sort_hyphen_file
+!item Bugfix: Die Benutzung von (!I)!/sort_hyphen_file~[all](!i) konnte
+UDO bei Formaten wie WinHelp oder HTML zum Absturz bringen (Markus
+Schwaiger).
+
+!end_itemize

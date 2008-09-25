@@ -1,0 +1,101 @@
+################################################################################
+!begin_node X!..
+!html_name cmd-x.html
+
+################################################################################
+!begin_node (!kw [x])
+!html_name cmd_x.html
+
+!iflang [german]
+Indexeintrag bzw. Schlüsselwort setzen.
+!endif
+!iflang [english]
+Set index entry.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/x <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [index]).
+
+!item [(!SEEALSO)]
+(!KW [index])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kkw [xlink])
+!html_name cmd_xlink().html
+
+!iflang [german]
+Verweis auf externe Daten.
+!endif
+!iflang [english]
+Reference external documents.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/xlink [<(!TEXT)>] [<link>])(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dient zum Erzeugen von Verweisen auf externe
+Dokumente. Im Unterschied zu (!KKW [link]) werden
+Sonderzeichen innerhalb ""<link>"" nicht umgewandelt. Im
+Beispiel würde bei einem HTML-File ein Querverweis
+auf die Seite der Deutschen Telekom erzeugt. ""<link>""
+kann auch leer sein, dann wird für ""<link>"" der Inhalt
+von ""<text>"" ausgegeben.
+
+Kommt in einem Verweis eine Tilde vor,
+so braucht dieser bei Verwendung im (!KKW [xlink])-Kommando
+(!I)kein(!i) Ausrufezeichen vorangestellt zu werden.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Useful for referencing external documents like other hypertexts or
+WWW-pages. In contrast to (!KKW [link]) (!V)<link>(!v) will
+not be converted! The example shows how to make a link to a popular
+magazine in a HTML file. If (!V)<link>(!v) is empty the contents of
+(!V)<text>(!v) is used.
+!endif
+
+# ToDo: was ist der Unterschied zu !url ?
+
+!iflang [german]
+!item [(!EXAMPLE2)]
+(!T)(!/xlink [Deutsche Telekom] [http://www.dtag.de])(!t) (!nl)
+(!T)(!/xlink [irgendwas] [http://www.domain.de/!~user/index.html])(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE2)]
+(!T)(!/xlink [Playboy] [http://www.playboy.com])(!t)
+!endif
+# ToDo: andere Beispiele verwenden!
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [link]), (!KKW [plink]), (!KKW [url]), (!KW [no_xlinks]), (!link [Querverweise] [Querverweise])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KKW [link]), (!KKW [plink]), (!KKW [url]), (!KW [no_xlinks]), (!link [Links] [Links])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!end_node
+
+################################################################################

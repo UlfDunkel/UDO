@@ -1,0 +1,31 @@
+!subnode Installing the Unix versions
+!ignore_links
+
+After having extracted the archive copy the files of ''(!V)bin/(!v)''
+to ''(!V)/usr/local/bin(!v)'' or any other directory of (!T)$PATH(!t).
+
+Copy the manpage ''(!V)udo.1(!v)'' to ''(!V)/usr/man/man1/(!v)''.
+
+To read the documentation of UDO with GNU Info convert the UDO source
+files to GNU Texinfo, run Makeinfo and copy the Info file to
+(!V)$INFOPATH(!v). You have to edit (!V)$INFOPATH/dir(!v) to get
+access to the UDO Info files.
+
+Furthermore you should make some scripts or aliase to simplify calling
+UDO. The following script (named ''(!V)''u2tex''(!v)'') shows how to tell UDO that he shall convert
+the source file to (!LaTeX)):
+
+!begin_quote
+!begin_verbatim
+#!bin/sh
+udo --tex -o ! $*
+!end_verbatim
+!end_quote
+
+You can make similar scripts for the other destination formats if you
+want. The UDO distribution already contains some scripts.
+
+Hint for users of Linux-SGML: My version doesn't contain all possible
+entities. Just take a look ate the Linuxdoc-SGML FAQ in the middle of
+this documentation if Linuxdoc-SGML prints an error message.
+

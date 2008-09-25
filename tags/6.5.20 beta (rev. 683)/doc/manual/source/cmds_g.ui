@@ -1,0 +1,179 @@
+################################################################################
+!begin_node G!..
+!html_name cmd-g.html
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [german])
+!html_name cmd_german.html
+
+!iflang [german]
+Sprache setzen.
+!endif
+!iflang [english]
+Define language.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/german(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+# Der Befehl (!KW [german]) existiert nicht mehr.
+(!USEINSTEAD[]) (!KW [language] [[german!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [language])
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+# ToDo: Englisch
+!begin_node (!kkw [green])
+!html_name cmd_green.html
+
+!iflang [german]
+Setzt die Schriftfarbe Grün.
+!endif
+!iflang [english]
+Sets the text color green.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/green)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Grün.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
+Postscript unterstützt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: Englisch
+!begin_node (!kkw [gray])
+!html_name cmd_gray.html
+
+!iflang [german]
+Setzt die Schriftfarbe (Dunkel-)Grau.
+!endif
+!iflang [english]
+Sets the text color (dark) gray.
+
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/gray)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe (Dunkel-)Grau.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
+Postscript unterstützt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kkw [grin])
+!html_name cmd_grin().html
+
+!iflang [german]
+Emoticon ausgeben.
+!endif
+!iflang [english]
+Print an emoticon.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/grin)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch einen grinsenden Smiley
+ersetzt, der in Schreibmaschinenschrift ausgegeben wird.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+(!/grin) will be replaced by a grinning emoticon displayed in typewriter.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+Aus (!T)(!/grin)(!t) wird (!grin).
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/grin)(!t) becomes (!grin).
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [laugh]), Vordefinierte Makros
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KKW [laugh]), Defined macros
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!end_node
+
+################################################################################

@@ -1,0 +1,4 @@
+#!/bin/sh
+# dieses bash-Skript konvertiert das deutsche UDO-Handbuch nach NROFF
+# this bash script converts the german UDO Manual to NROFF
+udo --nroff --verbose --force-long -D LANG_DE manual.u -o manual-de.nroff $*

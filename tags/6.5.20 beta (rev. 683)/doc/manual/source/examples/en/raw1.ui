@@ -1,0 +1,14 @@
+!ifdest [html]
+!begin_raw
+<FORM method=post action="mailto:info@dirk-hagedorn.de">
+<PRE>
+<p>    Name:  <INPUT name="Name" size=60>
+<p>
+<p>           <INPUT type=submit value="Send">
+<p>           <INPUT type=reset value="Reset">
+</PRE>
+</FORM>
+!end_raw
+!else
+The HTML version will display a form here.
+!endif

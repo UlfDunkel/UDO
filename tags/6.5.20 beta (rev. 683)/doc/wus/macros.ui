@@ -1,0 +1,689 @@
+# Definitionen und Macros für verschiedene Formate
+# !code_iso
+#
+# Alle Defines, die ein Feld benutzen, sind evtl. nur mit WinWord benutzbar
+#
+!ifdest [rtf]
+# Euro-zeichen (!euro)
+# Aufruf (!V)(!euro)(!v)
+!define euro \'80
+# Hochsetzen und Verkleinern eines Textes (!T)superscript(!t)
+# Aufruf (!V)(!/up [Text])(!v)
+!define up {\super {(!1)}}
+# Tiefsetzen und Verkleinern eines Textes (!T)subscript(!t)
+# Aufruf (!V)(!/dn [Text])(!v)
+!define dn {\sub {(!1)}}
+# Zeichensatz "Symbol"
+# Langer Rechtspfeil
+# Aufruf (!lra)
+!define lra {{\field{\*\fldinst SYMBOL 174 \\f "Symbol" \\s 10}{\fldrslt\f1\fs20 --->}}}
+# Langer Doppel-Rechtspfeil
+# Aufruf (!Lra)
+!define Lra {{\field{\*\fldinst SYMBOL 222 \\f "Symbol" \\s 10}{\fldrslt\f1\fs20 ===>}}}
+# Rechtspfeil mit Haken am Ende; Dummy, existiert bei RTF nicht
+# Aufruf (!hra)
+!macro hra (!T)|--->(!t)
+#!define hra |{{\field{\*\fldinst SYMBOL 174 \\f "Symbol" \\s 11}{\fldrslt\f1\fs22 -->}}}
+# Symbol für ''kleiner gleich''
+# Aufruf (!V)(!leq)(!v)
+!define leq {{\field{\*\fldinst SYMBOL 163 \\f "Symbol" \\s 10}{\fldrslt\f1\fs20 <=}}}
+# Symbol für ''größer gleich''
+# Aufruf (!V)(!geq)(!v)
+!define geq {{\field{\*\fldinst SYMBOL 179 \\f "Symbol" \\s 10}{\fldrslt\f1\fs20 >=}}}
+# Symbol für das Geteiltzeichen
+# Aufruf (!V)(!div)(!v)
+!define div {{\field{\*\fldinst SYMBOL 184 \\f "Symbol" \\s 10}{\fldrslt\f1\fs20 /}}}
+# Symbol für das Summenzeichen
+# Aufruf (!V)(!Sum)(!v)
+!define Sum {{\field{\*\fldinst SYMBOL 229 \\f "Symbol" \\s 10}{\fldrslt\f1\fs20 Summe}}}
+# Symbol für das Registered
+# Aufruf (!V)(!reg)(!v)
+!define reg {{\field{\*\fldinst SYMBOL 210 \\f "Symbol" \\s 10}{\fldrslt\f1\fs20 /}}}
+# Abkürzung für den Ausdruck ''Normkubikmeter pro Normkubikmeter''
+# Aufruf (!V)(!N/N)(!v)
+!define N/N Nm{\super {3}}/Nm{\super {3}}
+# Symbol für das Gradzeichen
+# Aufruf (!V)(!gra)(!v)
+!define gra {{\field{\*\fldinst SYMBOL 176 \\f "Symbol" \\s 10}{\fldrslt\f1\fs20 °}}}
+# Define für die mathematische Schreibweise von TeX innerhalb von Fließtexten; Dummy,
+# da es bei RTF keine mathematische Schreibweise gibt
+# Aufruf (!V)(!math [Mathe-Text])(!v)
+!macro math (!1)
+# Setzen der Minuten einer Uhrzeit ohne Unterstreichung
+# Aufruf (!V)(!uhr [Minuten])(!v)
+!define uhr {\super {(!1)}}
+# Hilfe zum Unterstreichen von Einträgen bei Hypertextformaten, die keine Links darstellen,
+# für ein schöneres Schriftbild; Dummy, da RTF kein Hypertextformat ist
+# Aufruf (!V)(!un [Text])(!v)
+!macro un  (!1)
+# Setzen der aktuellen Seitenzahl als Feld
+# Aufruf (!V)(!Seite [Startseite])(!v)
+!define Seite {\field{\*\fldinst  PAGE  \\* MERGEFORMAT }{\fldrslt (!1)}}
+# Setzen der Gesamtseiten als Feld (!I)Evtl. ''Felder aktualisieren'' aufrufen(!i)
+# Aufruf (!V)(!Svon [Seiten])(!v)
+#!define Svon {\field{\*\fldinst  NUMPAGES  \\* MERGEFORMAT }}
+!define Svon {\field{\*\fldinst  NUMPAGES  \\* MERGEFORMAT }{\fldrslt (!1)}}
+# Erstellung eines Index, ähnlich (!V)(!idx)(!v), mit einem nicht indizierten Oberbegriff
+# und mehreren indizierten Unterbegriffen; der indizierte Begriff erscheint auch
+# im Text (!nl)
+# Aufruf (!V)(!IDX [Oberbegriff] [indizierter Begriff])(!v)
+!define IDX (!2){\pard\plain \v\f4\fs20\lang1031 {\xe {(!1)\:(!2)}}}
+# Dreifacher Index
+# {\xe\v Hauptbegriff\:Oberbegriff\:Unterbegriff}Unterbegriff 
+# Erstellung eines Index, ähnlich (!V)!index(!v), mit einem nicht indizierten Oberbegriff
+# und mehreren indizierten Unterbegriffen; der indizierte Begriff erscheint nicht
+# im Text (!nl)
+# Aufruf (!V)(!INDEX [Oberbegriff] [indizierter Begriff])(!v)
+!define INDEX {\pard\plain \v\f4\fs20\lang1031 {\xe {(!1)\:(!2)}}}
+# Setzen des Landscape-Modus
+# Aufruf (!V)(!landscape)(!v)
+!define landscape \par \sect \lndscpsxn\pgwsxn16840\pghsxn11907\marglsxn1134\margbsxn1418\linex0\headery709\footery709\colsx709\endnhere
+# Zurücksetzen in den Portrait-Modus
+# Aufruf (!V)(!portrait)(!v)
+!define portrait \par \sect \sectd \linex0\headery709\footery709\colsx709\endnhere
+# Setzen einer Textmarke
+# Aufruf (!V)(!/LABEL [Marke] [Text])(!v)
+!define LABEL {\*\bkmkstart (!1)}(!2){\*\bkmkend (!1)}
+# Bilder numerieren für ein Abbildungsverzeichnis
+# Aufruf (!V)(!ABB [Titel])(!v)
+!define ABB \sb120\sa120 \f4\fs22\lang1031 Abbildung {\field{\*\fldinst  SEQ Abbildung \\* ARABIC }{\fldrslt 1}}: (!1)
+# Tabellen numerieren für ein Tabellenverzeichnis
+# Aufruf (!V)(!TAB [Titel])(!v)
+!define TAB \sb120\sa120 \f4\fs22\lang1031 Tabelle {\field{\*\fldinst  SEQ Tabelle \\* ARABIC }{\fldrslt 1}}: (!1)
+# Gleichungen numerieren für ein Gleichungsverzeichnis
+# Aufruf (!V)(!GLE [Titel])(!v)
+!define GLE \sb120\sa120 \f4\fs22\lang1031 Gleichung {\field{\*\fldinst  SEQ Gleichung \\* ARABIC }{\fldrslt 1}}: (!1)
+# Sperrung für z. B.
+# Aufruf (!V)(!ZB [(!1)] [(!2)])(!v)
+!define ZB (!1){\expnd10\expndtw50 .}(!2).
+#
+!define DELTA {{\field{\*\fldinst SYMBOL 184 \\f "Symbol" \\s 10}{\fldrslt\f1\fs20 /}}}
+#
+#{\brdrbar\brdrw15\brsp80\brdrs
+#\par}\pard
+# Änderungsmarke im Text beginnen und schließen sowie Durchstreichen makieren
+# Aufruf (!V)(!BMC)(!v)
+# Aufruf (!V)(!EMC)(!v)
+# Aufruf (!V)(!BMS)(!v)
+# Aufruf (!V)(!EMS)(!v)
+# Aufruf (!V)(!BMR)(!v)
+# Aufruf (!V)(!EMR)(!v)
+ !define BMC {\revised\revauth2
+ !define EMC }
+ !define BMS {\deleted\revauthdel2
+ !define EMS }
+ # Änderungsmarke am Rand beginnen und schließen
+ # Aufruf (!V)(!BMR)(!v)
+ # Aufruf (!V)(!EMR)(!v)
+ !define BMT {\revised\revauth2
+ !define EMT }
+ !define BMR 
+ !define EMR 
+# !define BMR {\brdrbar\brdrw15\brsp80\brdrs
+# !define EMR \par}\pard
+# Fußnote setzen
+!macro FOOT (!1)(!N)(!2)(!n)
+!endif
+#
+!ifdest [tex]
+# Hochsetzen und Verkleinern eines Textes (!T)superscript(!t)
+# Aufruf (!V)(!up [Text])(!v)
+!define up $^{(!1)}$
+# Tiefsetzen und Verkleinern eines Textes (!T)subscript(!t)
+# Aufruf (!V)(!dn [Text])(!v)
+!define dn $_{(!1)}$
+# Langer Rechtspfeil
+# Aufruf (!lra)
+!define lra $\longrightarrow$
+# Langer Doppel-Rechtspfeil
+# Aufruf (!Lra)
+!define Lra $\Longrightarrow$
+# Rechtspfeil mit Haken am Ende
+# Aufruf (!hra)
+!define hra $\hookrightarrow$
+# Symbol für ''kleiner gleich''
+# Aufruf (!V)(!leq)(!v)
+!define leq $\leq$
+# Symbol für ''größer gleich''
+# Aufruf (!V)(!geq)(!v)
+!define geq $\geq$
+# Symbol für das Geteiltzeichen
+# Aufruf (!V)(!div)(!v)
+!define div $\div$
+# Symbol für das Summenzeichen
+# Aufruf (!V)(!Sum)(!v)
+!define Sum $\sum$
+# Abkürzung für den Ausdruck ''Normkubikmeter pro Normkubikmeter''
+# Aufruf (!V)(!N/N)(!v)
+!define N/N Nm$^{3}$/Nm$^{3}$
+# Symbol für das Gradzeichen
+# Aufruf (!V)(!gra)(!v)
+!define gra $^{o}$
+# Define für die mathematische Schreibweise von TeX innerhalb von Fließtexten
+# Aufruf (!V)(!math [Mathe-Text])(!v)
+!define math $(!1)$
+# Setzen der Minuten einer Uhrzeit ohne Unterstreichung
+# Aufruf (!V)(!uhr [Minuten])(!v)
+!define uhr $^{(!1)}$
+# Hilfe zum Unterstreichen von Einträgen bei Hypertextformaten, die keine Links darstellen,
+# für ein schöneres Schriftbild; Dummy, da TeX kein Hypertextformat ist
+# Aufruf (!V)(!un [Text])(!v)
+!macro un  (!1)
+# Erstellung eines Index, ähnlich (!V)(!idx)(!v), mit einem nicht indizierten Oberbegriff
+# und mehreren indizierten Unterbegriffen; der indizierte Begriff erscheint auch
+# im Text (!nl)
+# Aufruf (!V)(!IDX [Oberbegriff] [indizierter Begriff])(!v)
+!define IDX (!2)\index{(!2)!(!1)}
+# Erstellung eines Index, ähnlich (!V)!index(!v), mit einem nicht indizierten Oberbegriff
+# und mehreren indizierten Unterbegriffen; der indizierte Begriff erscheint nicht
+# im Text (!nl)
+# Aufruf (!V)(!INDEX [Oberbegriff] [indizierter Begriff])(!v)
+!define INDEX \index{(!1)!(!2)}
+# Setzen einer Textmarke
+# Aufruf (!V)(!/LABEL [Marke] [Text])(!v)
+!macro LABEL !label (!1)
+!endif
+#
+!ifdest [html]
+# Euro-zeichen (!euro)
+# Aufruf (!V)(!euro)(!v)
+!define euro &euro;
+# Hochsetzen und Verkleinern eines Textes (!T)superscript(!t)
+# Aufruf (!V)(!up [Text])(!v)
+!define up <sup>(!1)</sup>
+# Tiefsetzen und Verkleinern eines Textes (!T)subscript(!t)
+# Aufruf (!V)(!dn [Text])(!v)
+!define dn <sub>(!1)</sub>
+# Langer Rechtspfeil; Dummy, da in HTML nicht vorhanden
+# Aufruf (!lra)
+#!macro lra (---)>
+!define lra <font face=Symbol>&#174;</font>
+# Langer Doppel-Rechtspfeil; Dummy, da in HTML nicht vorhanden
+# Aufruf (!Lra)
+#!macro Lra ===>
+!define Lra <font face=Symbol>&#222;</font>
+# Rechtspfeil mit Haken am Ende; Dummy, da in HTML nicht vorhanden
+# Aufruf (!hra)
+!macro hra |(---)>
+# Symbol für ''kleiner gleich''; ein Dummy, da das Zeichen nicht existiert
+# Aufruf (!V)(!leq)(!v)
+#!macro leq <=
+!define leq &le;
+# Symbol für ''größer gleich''; ein Dummy, da das Zeichen nicht existiert
+# Aufruf (!V)(!geq)(!v)
+#!macro geq >=
+!define geq &ge;
+# Symbol für das Geteiltzeichen
+# Aufruf (!V)(!div)(!v)
+!define div &divide;
+# Symbol für das Summenzeichen; ein Dummy, da es kein Summenzeichen gibt
+# (anderer Zeichensatz?)
+# Aufruf (!V)(!Sum)(!v)
+!macro Sum Summe
+# Symbol für das Registered
+# Aufruf (!V)(!reg)(!v)
+!define reg <sup>&reg;</sup>
+# Abkürzung für den Ausdruck ''Normkubikmeter pro Normkubikmeter''
+# Aufruf (!V)(!N/N)(!v)
+!define N/N Nm&sup3;/Nm&sup3;
+#!define N/N Nm<sup>3</sup>/Nm<sup>3</sup>
+# Symbol für das Gradzeichen
+# Aufruf (!V)(!gra)(!v)
+!define gra &deg;
+# Define für die mathematische Schreibweise von TeX innerhalb von Fließtexten; Dummy,
+# da es bei HTML keine mathematische Schreibweise gibt
+# Aufruf (!V)(!math [Mathe-Text])(!v)
+!macro math (!1)
+# Setzen der Minuten einer Uhrzeit ohne Unterstreichung
+# Aufruf (!V)(!uhr [Minuten])(!v)
+!define uhr <sup>(!1)</sup>
+# Hilfe zum Unterstreichen von Einträgen bei Hypertextformaten, die keine Links darstellen,
+# für ein schöneres Schriftbild
+# Aufruf (!V)(!un [Text])(!v)
+!macro un  (!U)(!1)(!u)
+#
+# Erstellung eines Index, ähnlich (!V)(!idx)(!v), mit einem nicht indizierten Oberbegriff
+# und mehreren indizierten Unterbegriffen; der indizierte Begriff erscheint auch
+# im Text (!nl)
+# Aufruf (!V)(!IDX [Oberbegriff] [indizierter Begriff])(!v)
+!macro IDX (!idx [(!2)] [(!1)])
+# Erstellung eines Index, ähnlich (!V)!index(!v), mit einem nicht indizierten Oberbegriff
+# und mehreren indizierten Unterbegriffen; der indizierte Begriff erscheint nicht
+# im Text (!nl)
+# Aufruf (!V)(!INDEX [Oberbegriff] [indizierter Begriff])(!v)
+#  !macro INDEX !html_keywords (!2)
+!macro INDEX !index (!2) !! (!1)
+# Setzen einer Textmarke
+# Aufruf (!V)(!/LABEL [Marke] [Text])(!v)
+!macro LABEL !label (!1)
+# Bilder numerieren für ein Abbildungsverzeichnis
+# Aufruf (!V)(!ABB [Titel])(!v)
+!macro ABB (!1)
+# Tabellen numerieren für ein Tabellenverzeichnis
+# Aufruf (!V)(!TAB [Titel])(!v)
+!macro TAB (!1)
+# Bild links, Text rechts
+# Aufruf (!V)(!/IMGL [Pfad])
+!define IMGL \{bml (!1)\} 
+# Bild rechts, Text links
+# Aufruf (!V)(!/IMGR [Pfad])
+!define IMGR \{bmr (!1)\}
+# Sperrung für z. B.
+# Aufruf (!V)(!ZB [(!1)] [(!2)])(!v)
+!define ZB (!1). (!2).
+
+# Änderungsmarke im Text beginnen und schließen sowie Durchstreichen makieren
+# Aufruf (!V)(!BMC)(!v)
+# Aufruf (!V)(!EMC)(!v)
+!ifset [modern, frames]
+ !define BMC <span class="change"><script language="JavaScript">change_i = change_i + 1</script>
+ !define EMC </span>
+ !define BMS <span class="strike"><script language="JavaScript">change_i = change_i + 1</script>
+ !define EMS </span>
+ # Änderungsmarke am Rand beginnen und schließen
+ # Aufruf (!V)(!BMR)(!v)
+ # Aufruf (!V)(!EMR)(!v)
+ !define BMR <div class="change"><script language="JavaScript">div_ch_i = div_ch_i + 1</script>
+ !define EMR </div>
+ !define BMT 
+ !define EMT 
+!endif
+!ifset [normal]
+ !define BMC <font color="red">
+ !define EMC </font>
+ !define BMS <s>
+ !define EMS </s>
+ !define BMR <font color="red">
+ !define EMR </font>
+ !define BMT 
+ !define EMT 
+!endif
+# Änderungsabschlußdatum setzen
+# Aufruf (!V)(!DMC [Tag] [Monat] [Jahr])(!v)
+!define DMC <script language="JavaScript">a = (!2)-1; Zeit = new Date((!3),a,(!1));</script>
+# Fußnote setzen
+!define FOOT <span title="(!2)">(!1)</span>
+!endif
+#
+!define DELTA &Delta;
+#
+!ifdest [hh]
+# Hochsetzen und Verkleinern eines Textes (!T)superscript(!t)
+# Aufruf (!V)(!up [Text])(!v)
+!define up <sup><font size=-3>(!1)</font></sup>
+# Tiefsetzen und Verkleinern eines Textes (!T)subscript(!t)
+# Aufruf (!V)(!dn [Text])(!v)
+!define dn <sub><font size=-3>(!1)</font></sub>
+# Langer Rechtspfeil; Dummy, da in HTML nicht vorhanden
+# Aufruf (!lra)
+#!macro lra (---)>
+!define lra <font face=Symbol>&#174;</font>
+# Langer Doppel-Rechtspfeil; Dummy, da in HTML nicht vorhanden
+# Aufruf (!Lra)
+#!macro Lra ===>
+!define lra <font face=Symbol>&#222;</font>
+# Rechtspfeil mit Haken am Ende; Dummy, da in HTML nicht vorhanden
+# Aufruf (!hra)
+!macro hra |(---)>
+# Symbol für ''kleiner gleich''; ein Dummy, da das Zeichen nicht existiert
+# Aufruf (!V)(!leq)(!v)
+!macro leq <=
+# Symbol für ''größer gleich''; ein Dummy, da das Zeichen nicht existiert
+# Aufruf (!V)(!geq)(!v)
+!macro geq >=
+# Symbol für das Geteiltzeichen
+# Aufruf (!V)(!div)(!v)
+!define div &divide;
+# Symbol für das Summenzeichen; ein Dummy, da es kein Summenzeichen gibt
+# (anderer Zeichensatz?)
+# Aufruf (!V)(!Sum)(!v)
+!macro Sum Summe
+# Abkürzung für den Ausdruck ''Normkubikmeter pro Normkubikmeter''
+# Aufruf (!V)(!N/N)(!v)
+!define N/N Nm&sup3;/Nm&sup3;
+#!define N/N Nm<sup>3</sup>/Nm<sup>3</sup>
+# Symbol für das Gradzeichen
+# Aufruf (!V)(!gra)(!v)
+!define gra &deg;
+# Define für die mathematische Schreibweise von TeX innerhalb von Fließtexten; Dummy,
+# da es bei HTML keine mathematische Schreibweise gibt
+# Aufruf (!V)(!math [Mathe-Text])(!v)
+!macro math (!1)
+# Setzen der Minuten einer Uhrzeit ohne Unterstreichung
+# Aufruf (!V)(!uhr [Minuten])(!v)
+!define uhr <sup><font size=-3>(!1)</font></sup>
+# Hilfe zum Unterstreichen von Einträgen bei Hypertextformaten, die keine Links darstellen,
+# für ein schöneres Schriftbild
+# Aufruf (!V)(!un [Text])(!v)
+!macro un  (!U)(!1)(!u)
+#
+# Erstellung eines Index, ähnlich (!V)(!idx)(!v), mit einem nicht indizierten Oberbegriff
+# und mehreren indizierten Unterbegriffen; der indizierte Begriff erscheint auch
+# im Text (!nl)
+# Aufruf (!V)(!IDX [Oberbegriff] [indizierter Begriff])(!v)
+!macro IDX (!idx [(!2)] [(!1)])
+# Erstellung eines Index, ähnlich (!V)!index(!v), mit einem nicht indizierten Oberbegriff
+# und mehreren indizierten Unterbegriffen; der indizierte Begriff erscheint nicht
+# im Text (!nl)
+# Aufruf (!V)(!INDEX [Oberbegriff] [indizierter Begriff])(!v)
+#  !macro INDEX !html_keywords (!2)
+!macro INDEX !index (!2) !! (!1)
+# Setzen einer Textmarke
+# Aufruf (!V)(!/LABEL [Marke] [Text])(!v)
+!macro LABEL !label (!1)
+# Bilder numerieren für ein Abbildungsverzeichnis
+# Aufruf (!V)(!ABB [Titel])(!v)
+!macro ABB (!1)
+# Tabellen numerieren für ein Tabellenverzeichnis
+# Aufruf (!V)(!TAB [Titel])(!v)
+!macro TAB (!1)
+# Bild links, Text rechts
+# Aufruf (!V)(!/IMGL [Pfad])
+!define IMGL \{bml (!1)\} 
+# Bild rechts, Text links
+# Aufruf (!V)(!/IMGR [Pfad])
+!define IMGR \{bmr (!1)\}
+# Sperrung für z. B.
+# Aufruf (!V)(!ZB [(!1)] [(!2)])(!v)
+!define ZB (!1). (!2).
+!endif
+#
+!ifdest [win,wh4]
+# Hochsetzen und Verkleinern eines Textes (!T)superscript(!t); Bei WinHelp f. Windows 3.1
+# hat das allerdings keine Wirkung
+# Aufruf (!V)(!/up [Text])(!v)
+!define up {\super {(!1)}}
+# Tiefsetzen und Verkleinern eines Textes (!T)subscript(!t) ); Bei WinHelp f. Windows 3.1
+# hat das allerdings keine Wirkung
+# Aufruf (!V)(!/dn [Text])(!v)
+!define dn {\sub {(!1)}}
+# Langer Rechtspfeil; Dummy, da in WinHelp nicht vorhanden
+# Aufruf (!lra)
+!define lra {\f2 \'AE}
+#!macro lra (!T)(---)>(!t)
+# Langer Doppel-Rechtspfeil; Dummy, da in WinHelp nicht vorhanden
+# Aufruf (!Lra)
+!define Lra {\f2 \'DE}
+#!macro Lra ===>
+# Rechtspfeil mit Haken am Ende; Dummy, da in WinHelp nicht vorhanden
+# Aufruf (!hra)
+!macro hra (!T)|(---)>(!t)
+# Symbol für ''kleiner gleich''; ein Dummy, da das Zeichen nicht existiert
+# Aufruf (!V)(!leq)(!v)
+!define leq {\f2 \'A3}
+#!macro leq <=
+# Symbol für ''größer gleich''; ein Dummy, da das Zeichen nicht existiert
+# Aufruf (!V)(!geq)(!v)
+!define geq {\f2 \'B3}
+#!macro geq >=
+# Symbol für das Geteiltzeichen; ein Dummy, da es kein Geteiltzeichen gibt
+# Aufruf (!V)(!div)(!v)
+!define div {\f2 \'B8}
+#!macro div /
+# Symbol für das Summenzeichen; ein Dummy, da es kein Summenzeichen gibt
+# (derzeit keine Möglichkeit mit UDO, kann sich aber ändern)
+# Aufruf (!V)(!Sum)(!v)
+!define Sum {\f2 \'E5}
+#!macro Sum Summe
+# Abkürzung für den Ausdruck ''Normkubikmeter pro Normkubikmeter''; quasi ein Dummy,
+# da ein Hochsetzen offensichtlich nicht möglich ist
+# Aufruf (!V)(!N/N)(!v)
+!define N/N Nm{\super {3}}/Nm{\super {3}}
+# Symbol für das Gradzeichen; quasi ein Dummy
+# Aufruf (!V)(!gra)(!v)
+!define gra {\f2 \'B0}
+#!macro gra °
+# Define für die mathematische Schreibweise von TeX innerhalb von Fließtexten; Dummy,
+# da es bei WIN-Help keine mathematische Schreibweise gibt
+# Aufruf (!V)(!math [Mathe-Text])(!v)
+!macro math (!1)
+# Setzen der Minuten einer Uhrzeit ohne Unterstreichung; quasi ein Dummy, da ein
+# Hochsetzen offensichtlich nicht möglich ist
+# Aufruf (!V)(!uhr [Minuten])(!v)
+!macro uhr .(!1)
+# Hilfe zum Unterstreichen von Einträgen bei Hypertextformaten, die keine Links darstellen,
+# für ein schöneres Schriftbild
+# Aufruf (!V)(!un [Text])(!v)
+!macro un  (!U)(!1)(!u)
+# Erstellung eines Index, ähnlich (!V)(!idx)(!v), mit einem nicht indizierten Oberbegriff
+# und mehreren indizierten Unterbegriffen; der indizierte Begriff erscheint auch
+# im Text (!nl)
+# Aufruf (!V)(!IDX [Oberbegriff] [indizierter Begriff])(!v)
+!define IDX {K{\footnote K (!1), (!2)}}(!2)
+# Erstellung eines Index, ähnlich (!V)!index(!v), mit einem nicht indizierten Oberbegriff
+# und mehreren indizierten Unterbegriffen; der indizierte Begriff erscheint nicht
+# im Text (!nl)
+# Aufruf (!V)(!INDEX [Oberbegriff] [indizierter Begriff])(!v)
+!define INDEX {K{\footnote K (!1), (!2)}}
+# Setzen einer Textmarke
+# Aufruf (!V)(!/LABEL [Marke] [Text])(!v)
+!macro LABEL !label (!1)
+# Bilder numerieren für ein Abbildungsverzeichnis
+# Aufruf (!V)(!ABB [Titel])(!v)
+!macro ABB (!1)
+# Tabellen numerieren für ein Tabellenverzeichnis
+# Aufruf (!V)(!TAB [Titel])(!v)
+!macro TAB (!1)
+# Bild links, Text rechts
+# Aufruf (!V)(!/IMGL [Pfad])
+!define IMGL \{bmlt (!1)\} 
+# Bild rechts, Text links
+# Aufruf (!V)(!/IMGR [Pfad])
+!define IMGR \{bmrt (!1)\}
+# Sperrung für z. B.
+# Aufruf (!V)(!ZB [(!1)] [(!2)])(!v)
+!define ZB (!1). (!2).
+!endif
+#
+!ifdest [ps]
+# Hochsetzen und Verkleinern eines Textes (!T)superscript(!t); Dummy, da es bei
+# ASCII, Man-Page und ST-Guide kein Hochsetzen gibt
+# Aufruf (!V)(!up [Text])(!v)
+!macro up (!1)
+# Tiefsetzen und Verkleinern eines Textes (!T)subscript(!t); Dummy, da es bei ASCII,
+# Man-Page und ST-Guide kein Tiefsetzen gibt
+# Aufruf (!V)(!dn [Text])(!v)
+!macro dn (!1)
+# Zeichensatz "Symbol"
+# Langer Rechtspfeil
+# Aufruf (!lra)
+!define lra ) udoshow /arrowright glyphshow (
+#!define lra /Encoding StandardEncoding def /arrowleft glyphshow /Encoding ISOLatin1Encoding def
+# Langer Doppel-Rechtspfeil
+# Aufruf (!Lra)
+!define Lra /arrowdblleft
+# Rechtspfeil mit Haken am Ende; Dummy, existiert bei RTF nicht
+# Aufruf (!hra)
+!macro hra (!T)|--->(!t)
+#!define hra |(---)>
+# Symbol für ''kleiner gleich''
+# Aufruf (!V)(!leq)(!v)
+!define leq /lessequal
+# Symbol für ''größer gleich''
+# Aufruf (!V)(!geq)(!v)
+!define geq /greaterequal
+# Symbol für das Geteiltzeichen
+# Aufruf (!V)(!div)(!v)
+!define div /divide
+# Symbol für das Summenzeichen
+# Aufruf (!V)(!Sum)(!v)
+!define Sum /summation
+# Abkürzung für den Ausdruck ''Normkubikmeter pro Normkubikmeter''; Dummy, da es bei ASCII,
+# Man-Page und ST-Guide kein Hochsetzen gibt
+# Aufruf (!V)(!N/N)(!v)
+!macro N/N Nm3/Nm3
+# Symbol für das Gradzeichen
+# Aufruf (!V)(!gra)(!v)
+!define gra /degree
+!endif
+#
+!ifdest [asc,man,stg]
+# Hochsetzen und Verkleinern eines Textes (!T)superscript(!t); Dummy, da es bei
+# ASCII, Man-Page und ST-Guide kein Hochsetzen gibt
+# Aufruf (!V)(!up [Text])(!v)
+!macro up (!1)
+# Tiefsetzen und Verkleinern eines Textes (!T)subscript(!t); Dummy, da es bei ASCII,
+# Man-Page und ST-Guide kein Tiefsetzen gibt
+# Aufruf (!V)(!dn [Text])(!v)
+!macro dn (!1)
+# Langer Rechtspfeil; Dummy, da in ASCII, ManPage und ST-Guide nicht vorhanden
+# Aufruf (!lra)
+!macro lra (---)>
+# Langer Doppel-Rechtspfeil; Dummy, da in ASCII, ManPage und ST-Guide nicht vorhanden
+# Aufruf (!Lra)
+!macro Lra ===>
+# Rechtspfeil mit Haken am Ende; Dummy, da in ASCII, ManPage und ST-Guide nicht vorhanden
+# Aufruf (!hra)
+!macro hra |(---)>
+# Symbol für ''kleiner gleich''; ein Dummy, da das Zeichen nicht existiert
+# Aufruf (!V)(!leq)(!v)
+!macro leq <=
+# Symbol für ''größer gleich''; ein Dummy, da das Zeichen nicht existiert
+# Aufruf (!V)(!geq)(!v)
+!macro geq >=
+# Symbol für das Geteiltzeichen; ein Dummy, da es kein Geteiltzeichen gibt
+# Aufruf (!V)(!div)(!v)
+!macro div /
+# Symbol für das Summenzeichen, ein Dummy, da es kein Summenzeichen gibt
+# Aufruf (!V)(!Sum)(!v)
+!macro Sum Summe
+# Abkürzung für den Ausdruck ''Normkubikmeter pro Normkubikmeter''; Dummy, da es bei ASCII,
+# Man-Page und ST-Guide kein Hochsetzen gibt
+# Aufruf (!V)(!N/N)(!v)
+!macro N/N Nm3/Nm3
+# Symbol für das Gradzeichen; quasi ein Dummy
+# Aufruf (!V)(!gra)(!v)
+!macro gra °
+# Define für die mathematische Schreibweise von TeX innerhalb von Fließtexten; Dummy,
+# da es bei ASCII, Man-Page und ST-Guide keine mathematische Schreibweise gibt
+# Aufruf (!V)(!math [Mathe-Text])(!v)
+!macro math (!1)
+# Setzen der Minuten einer Uhrzeit ohne Unterstreichung; Dummy, da es bei ASCII,
+# Man-Page und ST-Guide kein Hochsetzen gibt
+# Aufruf (!V)(!uhr [Minuten])(!v)
+!macro uhr .(!1)
+# Hilfe zum Unterstreichen von Einträgen bei Hypertextformaten, die keine Links darstellen,
+# für ein schöneres Schriftbild; nur ein Dummy, da ASCII und Man-Page kein Hypertextformat
+# sind (ST-Guide nochmal überlegen; auch Nm³/Nm³)
+# Aufruf (!V)(!un [Text])(!v)
+!macro un (!U)(!1)(!u)
+# Erstellung eines Index, ähnlich (!V)(!idx)(!v), mit einem nicht indizierten Oberbegriff
+# und mehreren indizierten Unterbegriffen; der indizierte Begriff erscheint auch
+# im Text (!nl)
+# Aufruf (!V)(!IDX [Oberbegriff] [indizierter Begriff])(!v)
+!macro IDX (!idx [(!2)] [(!2)])
+# Erstellung eines Index, ähnlich (!V)!index(!v), mit einem nicht indizierten Oberbegriff
+# und mehreren indizierten Unterbegriffen; der indizierte Begriff erscheint nicht
+# im Text (!nl)
+# Aufruf (!V)(!INDEX [Oberbegriff] [indizierter Begriff])(!v)
+!macro INDEX !index (!1) !! (!2)
+# Setzen einer Textmarke
+# Aufruf (!V)(!/LABEL [Marke] [Text])(!v)
+!macro LABEL !label (!1)
+# Sperrung für z. B.
+# Aufruf (!V)(!ZB [(!1)] [(!2)])(!v)
+!define ZB (!1). (!2).
+!endif
+#
+# Macros für interne und externe Links
+#
+!ifdest [tex]
+  !macro LINK (!plink [(!1)] [(!2)])
+  !macro XLINK (!1) (siehe ""(!5)"")
+  !macro HLINK (!1)
+  !macro SLINK (!1)
+  !macro GLINK (!1)
+  !macro NLINK (!1)
+  !macro MAIL (!1)(!N)Mail an (!2) (Betreff: (!3))(!n)
+  !macro LF
+!endif
+#
+!ifdest [rtf]
+#  !define LINK (!1) (siehe Seite {\field{\*\fldinst {PAGEREF (!2) }}{\fldrslt {1}}})
+  !macro LINK (!link [(!1)] [(!2)])
+  !macro XLINK (!1) (siehe ""(!5)"")
+#  !macro HLINK (!1) (siehe ""(!2)"")
+  !macro HLINK (!1)
+  !macro SLINK (!1)
+  !macro GLINK (!1)
+  !macro NLINK (!1)
+  !macro MAIL (!1)(!N)Mail an (!2) (Betreff: (!3))(!n)
+  !macro LF (!nl)
+!endif
+#
+!ifdest [win]
+  !macro LINK (!link [(!1)] [(!2)])
+  !macro LF (!nl)
+  !macro XLINK (!xlink [(!1)] [(!2)@(!3)(!4).hlp])
+  !define HLINK {\ul (!1)}{\v !ExecFile((!2))}
+#  !define SLINK {\uldb (!1)}{\v !ExecProgram("(!2)",5)}
+  !define SLINK {\uldb (!1)}{\v !ExecFile("(!2)","(!3)",1,UDON00001)}
+  !macro GLINK (!xlink [(!1)] [(!2)@../gesetz/gesetz.hlp])
+  !macro NLINK (!xlink [(!1)] [(!3)@../nebenbes/(!2).hlp])
+  !macro MAIL (!1)(!N)Mail an (!2) (Betreff: (!3))(!n)
+!endif
+#
+!ifdest [wh4]
+  !macro LINK (!link [(!1)] [(!2)])
+  !macro LF (!nl)
+  !macro XLINK (!xlink [(!1)] [(!2)@(!3)(!4).hlp])
+  !define HLINK {\ul (!1)}{\v !ExecFile((!2))}
+#  !define SLINK {\uldb (!1)}{\v !ExecProgram("(!2)",5)}
+  !define SLINK {\uldb (!1)}{\v !ExecFile("(!2)","(!3)",1,UDON00001)}
+  !macro GLINK (!xlink [(!1)] [(!2)@../gesetz/gesetz.hlp])
+  !macro NLINK (!xlink [(!1)] [(!3)@../nebenbes/(!2).hlp])
+  !define MAIL {\ul (!1)}{\v !ExecFile(mailto:(!2)?subject=(!3))}
+!endif
+#
+!ifdest [stg]
+  !macro LINK (!link [(!1)] [(!2)])
+  !macro LF (!nl)
+  !macro XLINK (!xlink [(!1)] [(!2)*:\(!4).hyp])
+  !macro HLINK (!1)
+  !macro SLINK (!1)
+  !macro GLINK (!xlink [(!1)] [(!1)*:\gesetz.hyp])
+  !macro NLINK (!xlink [(!1)] [(!1)*:\nebenbes/(!2).hyp])
+  !macro MAIL (!1)(!N)Mail an (!2) (Betreff: (!3))(!n)
+!endif
+!ifdest [html]
+  !macro LINK (!link [(!1)] [(!2)])
+  !macro LF (!nl)
+  !macro XLINK (!xlink [(!1)] [http://(!3)(!4).html#(!2)])
+  !macro HLINK (!url [(!1)] [(!2)])
+  !macro SLINK (!xlink [(!1)] [file:(!2)])
+  !macro GLINK (!xlink [(!1)] [http://www.decbqu.meerbeck.rwedea.de/Referat1/Gesetzeskataster/(!2).html])
+  !macro NLINK (!xlink [(!1)] [file:./(!2).html])
+  !define MAIL <a href="mailto:(!2)?subject=(!3)">(!1)</a>
+!endif
+!ifdest [hh]
+  !macro LINK (!link [(!1)] [(!2)])
+  !macro LF (!nl)
+  !macro XLINK (!xlink [(!1)] [http://(!3)(!4).html#(!2)])
+  !macro HLINK (!url [(!1)] [(!2)])
+  !macro SLINK (!xlink [(!1)] [file:(!2)])
+  !macro GLINK (!xlink [(!1)] [http://www.decbqu.meerbeck.rwedea.de/Referat1/Gesetzeskataster/(!2).html])
+  !macro NLINK (!xlink [(!1)] [file:./(!2).html])
+  !define MAIL <a href="mailto:(!2)?subject=(!3)">(!1)</a>
+!endif
+!ifdest [ps]
+  !macro LINK ((!1)) /(!2) 0 0 255 Link 
+  !macro LF (!nl)
+  !macro XLINK ((!1)) ((!3)(!4)) /(!2) 0 0 255 FileLink
+  !macro HLINK ((!1)) ((!2)) 0 0 255 WebLink
+#  !macro HLINK (!url [(!1)] [(!2)])
+#  !macro SLINK (!xlink [(!1)] [file:(!2)])
+#  !macro GLINK (!xlink [(!1)] [file:/daten/udo/gesetz/html/(!2).html])
+#  !macro NLINK (!xlink [(!1)] [file:./(!2).html])
+  !macro MAIL ((!1)) (mailto:(!2)?subject=(!3)) 255 0 0 WebLink
+!endif
+!ifndest [hh,html,ps,rtf,stg,tex,win,wh4]
+  !macro LINK (!link [(!1)] [(!2)])
+  !macro LF (!nl)
+  !macro XLINK (!1) (siehe ""(!5)"")
+  !macro HLINK (!1) (siehe ""(!2)"")
+  !macro SLINK (!1)
+  !macro GLINK (!1)
+  !macro NLINK (!1)
+  !macro MAIL (!1)(!N)Mail an (!2) (Betreff: (!3))(!n)
+!endif
+

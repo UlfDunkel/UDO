@@ -1,0 +1,10 @@
+!begin_itemize
+!item This is the first item.
+!item This is the second item with a little bit
+      more text to demonstrate how UDO formats
+      an itemization.
+
+      This is the second paragraph of the
+      second item of the itemize environment.
+!item This is the last item.      
+!end_itemize

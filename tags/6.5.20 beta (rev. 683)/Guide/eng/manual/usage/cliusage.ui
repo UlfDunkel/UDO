@@ -1,0 +1,201 @@
+!subheading Name
+
+udo --- Dateien vom UDO-Format in andere Formate umwandeln
+
+############################################################
+
+!subheading Synopsis
+
+(!V)udo [-adDghHilmnpqrstvwWxy](!v) (!U)(!V)Quelldatei(!v)(!u) (!nl)
+(!V)udo [-adDghHilmnpqrstvwWxy] -o(!v) (!U)(!V)Zieldatei(!v)(!u) (!U)(!V)Quelldatei(!v)(!u)
+
+############################################################
+
+!subheading Beschreibung
+
+(!B)UDO(!b) wandelt Dateien vom UDO-Format wahlweise ins Apple-Quick!-View-,
+ASCII-, HTML-, Texinfo-, Linuxdoc-SGML-, Manualpage-,
+Pure-C-Help-Quelltext-, Rich Text-, ST-Guide-Quelltext-, (!LaTeX)-,
+Turbo-Vision-Help- oder WinHelp-Quelltext-Format um.
+
+In der ersten Form erfolgen Ausgaben auf die Standardausgabe (stdout),
+Fehlermeldungen werden auf die Standardfehlerausgabe (stderr)
+aus!-ge!-ge!-ben. In der zweiten Form werden Ausgaben in die
+(!U)Zieldatei(!u) geschrieben, Fehlermeldungen in eine
+Pro!-to!-koll!-da!-tei mit der Endung (!V)*.ul*(!v).
+
+Die Optionen müssen einzeln übergeben werden: (!V)-al(!v) wird nicht als
+(!V)-a -l(!v) interpretiert!
+
+Der Name der Quelldatei muß als letzter Parameter übergeben werden.
+
+############################################################
+
+!subheading Optionen
+
+	!begin_tlist [-o F, (--)outfile F---]
+
+	!item	[-a, (--)asc]
+			Die (!U)Quelldatei(!u) wird ins ASCII-Format umgewandelt.
+
+	!item	[-D symbol]
+			Setzen des Symbols ''symbol'', welches sich im Quelltext mit
+			dem Befehl (!I)!/ifset(!i) abfragen läßt.
+
+	!item	[-g, (--)helptag]
+			Die (!U)Quelldatei(!u) wird ins HP-Helptag-SGML-Format umgewandelt.
+
+	!item	[-h, (--)html]
+			Die (!U)Quelldatei(!u) wird ins HTML-Format umgewandelt.
+
+	!item	[-H, (--)hold]
+			(!B)UDO(!b) wartet am Programmende auf einen Tastendruck
+
+	!item	[-i, (--)texinfo]
+			Die (!U)Quelldatei(!u) wird ins GNU-Texinfo-Format umgewandelt.
+
+	!item	[(--)lyx]
+			Die (!U)Quelldatei(!u) wird ins LyX-Format umgewandelt.
+
+	!item	[-l, (--)no-logfile]
+			(!B)UDO(!b) legt (bei gleichzeitiger Verwendung von (!V)-o(!v)) keine
+			Pro!-to!-koll!-da!-tei an.
+
+	!item	[-m, (--)man]
+			Die (!U)Quelldatei(!u) wird ins Manualpage-Format umgewandelt.
+
+	!item	[-n, (--)nroff]
+			Die (!U)Quelldatei(!u) wird ins Nroff-Format umgewandelt.
+
+	!item	[-o F, (--)outfile F]
+			(!B)UDO(!b) schreibt seine Ausgaben in die Datei namens ""F"".
+
+	!item	[-p, (--)pchelp]
+			Die (!U)Quelldatei(!u) wird ins
+			Pure-C-Help-Quell!-text!-for!-mat umgewandelt.
+
+	!item	[-q, (--)quiet]
+			Die Ausgabe von Statusmeldungen wird unterdrückt.
+
+	!item	[-r, (--)rtf]
+			Die (!U)Quelldatei(!u) wird ins Rich-Text-Format umgewandelt.
+
+	!item	[-s, (--)stg]
+			Die (!U)Quelldatei(!u) wird ins ST-Guide-Format umgewandelt.
+
+	!item	[-t, (--)tex]
+			Die (!U)Quelldatei(!u) wird ins (!LaTeX)-Format umgewandelt.
+
+	!item	[-v, (--)vision]
+			Die (!U)Quelldatei(!u) wird ins Turbo-Vision-Help-Format umgewandelt.
+
+	!item	[-w, (--)win]
+			Die (!U)Quelldatei(!u) wird ins WinHelp-Quell!-text!-for!-mat
+			umgewandelt.
+
+	!item	[-W, (--)no-warnings]
+			UDO gibt keine Warnungen sondern nur Fehler aus.
+
+	!item	[-x, (--)linuxdoc]
+			Die (!U)Quelldatei(!u) wird ins Linuxdoc-SGML-Format umgewandelt.
+
+	!item	[-y, (--)no-hypfile]
+			(!B)UDO(!b) legt (bei gleichzeitiger Verwendung von (!V)-o(!v))
+			keine Datei mit Trennvorschlägen an.
+
+	!item	[(--)help]
+			Ausgabe einer Hilfsseite, die diese Optionen erklärt.
+
+	!item	[(--)test]
+			Bei zusätzlicher Angabe dieser Option, wird keine Ausgabedatei
+            erzeugt, sondern nur ein Logfile und ggf. die Datei
+            mit den Rohlingen für die Trennvorschläge.
+
+	!item	[(--)tree]
+			Wird diese Option benutzt, so legt UDO in einer Datei mit der
+			Endung (!T).ut?(!t) eine baum!-ar!-ti!-ge Über!-sicht der benutzten
+			Dateien an. Bei intensiver Benutzung des Befehl
+			(!I)!/include(!i) sieht man dann, welche Datei andere Dateien
+			nachladen.
+
+	!item	[(--)verbose]
+			Bei der Konvertierung werden zusätzlich In!-for!-ma!-tio!-nen über
+			die gerade bearbeitete Datei und das gerade bearbeitete Kapitel
+			ausgegeben.
+	
+	!item	[(--)version]
+			Ausgabe der Version von (!B)UDO(!b).
+
+	!end_tlist
+
+############################################################
+
+!subheading Beispiele
+
+!begin_description
+!item	[udo file.u] ~ (!nl)
+		Umwandeln der Datei ''file.u'' ins ASCII-Format (default) und
+        Ausgabe auf die Standardausgabe. Fehlermeldungen werden auf die
+        Standardfehlerausgabe ausgegeben.
+
+!item	[udo (--)tex -o output.tex file.u] ~ (!nl)
+		Umwandeln der Datei ''file.u'' ins (!LaTeX)-Format, Ausgaben werden
+		in die Datei ''output.tex'' geschrieben, Feh!-ler!-mel!-dun!-gen
+		werden in der Datei ''output.ult'' protokolliert.
+
+!item	[udo -s -y -l -o ! file.u] ~ (!nl)
+		Umwandeln der Datei ''file.u'' ins St-Guide-Quell!-text!-for!-mat.
+		Ausgaben erfolgen in die Datei ''file.stg''. Es werden keine
+		Protokolldatei und keine Datei mit Trennvorschlägen angelegt.
+
+!end_description
+
+############################################################
+
+!subheading Environment
+
+!begin_xlist [LC_MESSAGES--]
+
+!item	[HOME]
+		Im Homeverzeichnis wird nach der Datei (!V)udo.ini(!v) gesucht,
+		falls (!B)UDOPATH(!b) nicht existiert.
+		
+!item	[LANG]
+		Legt die zu benutzende Landessprache für Feh!-ler!-mel!-dun!-gen
+		fest, wenn weder (!B)LC_ALL(!b) noch (!B)LC_MESSAGES(!b) existiert.
+	
+!item	[LC_ALL]
+		Wenn diese Environmentvariable auf ''german'' gesetzt ist,
+		benutzt (!B)UDO(!b) deutschsprachige Meldungen. Für andere Werte
+		werden englischsprachige Meldungen benutzt. Existiert diese
+		Variable nicht, wird stattdessen (!B)LC_MESSAGES(!b) überprüft.
+		
+!item	[LC_MESSAGES]
+		Siehe (!B)LC_ALL(!b). Wenn auch diese Variable nicht existiert,
+        wird stattdessen (!B)LANG(!b) benutzt.
+
+!item	[UDOPATH]
+		In diesem Verzeichnis sucht UDO nach der Datei (!V)udo.ini(!v).
+		Falls (!B)UDOPATH(!b) nicht existiert, wird stattdessen in
+		(!B)$HOME(!b) gesucht.
+			
+!end_xlist
+
+############################################################
+
+!subheading Exit Status
+
+!begin_xlist [>0-] !short
+!item [0]	Alles in Ordnung.
+!item [>0]	Es ist ein Fehler aufgetreten.
+!end_xlist
+
+############################################################
+
+!subheading Autor
+
+!autoref [off]
+Copyright (!copyright) 1995-1999 by (!nl)
+Dirk Hagedorn (info@dirk-hagedorn.de)
+!autoref [on]
+

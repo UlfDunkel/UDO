@@ -1,0 +1,1999 @@
+################################################################################
+!begin_node B!..
+!html_name cmd-b.html
+
+################################################################################
+!begin_node (!kkkw [B] [b])
+!html_name cmd_B().html
+!label (!kk1 [/B])
+!label (!kk1 [/b])
+
+!iflang [german]
+Text in Fettschrift ausgeben.
+!endif
+!iflang [english]
+Print text in bold.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/B)<(!TEXT)>(!/b)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+""<text>"" wird fett dargestellt, falls möglich.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+""<text>"" will be displayed in bold text if possible.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)(!/B)fett(!/b)(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/B)bold(!/b)(!t)
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+Schriftarten, (!link [Texthervorhebungen] [Texthervorhebungen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+Text styles, (!link [Emphasizing text] [Emphasizing text])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [bbl])
+!html_name cmd_bbl.html
+
+!iflang [german]
+Eine ""fette"" Liste einleiten.
+!endif
+!iflang [english]
+Start a ""bold"" list.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bbl [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_blist]).
+
+!item [(!SEEALSO)]
+(!KW [begin_blist])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [bc])
+!html_name cmd_bc.html
+
+!iflang [german]
+Text zentriert ausgeben.
+!endif
+!iflang [english]
+Display centered text.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bc(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_center]).
+
+!item [(!SEEALSO)]
+(!KW [begin_center])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [bd])
+!html_name cmd_bd.html
+
+!iflang [german]
+Neue Beschreibung einleiten.
+!endif
+!iflang [english]
+Start a description.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bd(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_description]).
+
+!item [(!SEEALSO)]
+(!KW [begin_description])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [be])
+!html_name cmd_be.html
+
+!iflang [german]
+Neue Nummerierung einleiten.
+!endif
+!iflang [english]
+Start an enumeration.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/be(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_enumerate]).
+
+!item [(!SEEALSO)]
+(!KW [begin_enumerate])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_appendix])
+!html_name cmd_begin_appendix.html
+
+!iflang [german]
+(!nolink [Anhang]) einleiten.
+!endif
+!iflang [english]
+Start appendix.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_appendix(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Leitet den Anhang ein. Kapitel werden im Anhang mit Buchstaben gekennzeichnet. UDO unterstützt nur (!I)einen(!i) (!nolink [Anhang]) pro Quelltext!
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Starts the appendix. Chapters are enumerated with letters. UDO
+supports only (!I)one(!i) appendix per source file!
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [end_appendix]), (!link [Anhang] [Anhang])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [end_appendix]), (!link [Appendix] [Appendix])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [begin_asc])
+!html_name cmd_begin_asc.html
+!label !/else_asc
+!label !/end_asc
+
+!iflang [german]
+Abfrage des Ausgabeformates.
+!endif
+!iflang [english]
+Query the destination format.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_asc(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+!iflang [german]
+!include history_begin_asc_de.ui
+!endif
+!iflang [english]
+!include history_begin_asc_en.ui
+!endif
+
+!item [(!EXISTEDUNTIL)] Release~4 Version~0.41
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [else]), (!KW [endif])
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!begin_node (!kw [begin_blist])
+!html_name cmd_begin_blist.html
+
+!iflang [german]
+Eine ""fette"" Liste einleiten.
+!endif
+!iflang [english]
+Start a ""bold"" list.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_blist [<(!TEXT)>](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Leitet eine neue Listen-Umgebung ein. Diese Umgebung
+muss mit (!KW [end_blist]) beendet werden. Die Länge von
+""<text>"" definiert die Tiefe der Einrückung der
+Aufzählungspunkte. Diese Umgebung lässt sich mit
+anderen Umgebungen kombiniert verwenden. Die Texte,
+die man mit (!KW [item] [[~!!]]) angibt, werden fett
+dargestellt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Starts a new list. The length of ""<text>"" defines the indent of the
+list. This environment must be finished with (!KW [end_blist]). You
+can use this environment inside other environments. The text you set
+with (!KW [item] [[~!!]]) will be displayed with a bold font.
+!endif
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [end_blist]), (!KW [item] [[~!!]]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!KW [begin_xlist]), (!link [Listen] [Listen]), (!link [Umgebungen] [Umgebungen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [end_blist]), (!KW [item] [[~!!]]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!KW [begin_xlist]), (!link [Lists] [Lists]), (!link [Environments] [Environments])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_center])
+!html_name cmd_begin_center.html
+
+!iflang [german]
+Text zentriert ausgeben.
+!endif
+!iflang [english]
+Display centered text.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_center(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando öffnet eine (neue) center-Umgebung.
+Zeilen, die innerhalb dieser Umgebung stehen, werden
+zentriert ausgegeben, bis das Kommando (!KW [end_center])
+angegeben wird. UDO formatiert auch die Zeilen dieser
+Umgebung, daher sollte man auch hier notfalls
+manuelle Zeilenumbrüche mit (!KKW [nl]) einfügen.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command opens a (new) center environment. Text that is part of a
+center environment will be printed centred until the
+(!KW [end_center]) command appears. UDO layouts the text of a
+center environment so you will may be be forced to insert manual
+linebreaks with (!KKW [nl]).
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [end_center]), (!KKW [nl]), (!link [Texthervorhebungen] [Texthervorhebungen]), (!link [Umgebungen] [Umgebungen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [end_center]), (!KKW [nl]), (!link [Emphasizing text] [Emphasizing text]), (!link [Environments] [Environments])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_comment])
+!html_name cmd_begin_comment.html
+
+!iflang [german]
+(!nolink [Kommentare]) in die Ausgabedatei schreiben.
+!endif
+!iflang [english]
+Create comments.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_comment(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando öffnet eine (neue) comment-Umgebung.
+Zeilen, die innerhalb dieser Umgebung stehen, werden
+als Kommentar auch in die Ausgabedatei geschrieben, sofern das
+jeweilige Format Kommentare beherrscht.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command opens a (new) comment environment.
+Text that is part of a comment environment
+will be written as comments to the destination file.
+# ToDo: letzten Halbsatz in engl. ergänzen
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [end_comment]), (!KW [cinclude]), (!KW [comment]), (!link [Umgebungen] [Umgebungen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [end_comment]), (!KW [cinclude]), (!KW [comment]), (!link [Environments] [Environments])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_description])
+!html_name cmd_begin_description.html
+
+!iflang [german]
+Neue Beschreibung einleiten.
+!endif
+!iflang [english]
+Start a description.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_description(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Leitet eine (weitere) description-Umgebung ein. Diese
+Umgebung muss mit (!KW [end_description]) beendet werden. Die
+(!nolink [description-Umgebung]) kann mehrfach verschachtelt
+benutzt oder mit anderen Umgebungen kombiniert
+werden. Aufzählungspunkte werden bei der
+(!nolink [description-Umgebung]) mit (!KW [item] [[~!!]]) eingeleitet. Der
+Text, der dann hier in eckigen Klammern angegeben
+wird, wird in Fettschrift ausgegeben, sofern das Ausgabeformat Fettschrift unterstützt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Starts a new description environment that has to be finished with
+(!KW [end_description]). You can use the description environment
+inside other (description) environments. Text that stands between the
+brackets of (!KW [item] [[~!!]]) will be printed with bold text.
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [end_description]), (!KW [item] [[~!!]]), (!link [Beschreibungen] [Beschreibungen]), (!KW [short]), (!KW [use_short_envs])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [end_description]), (!KW [item] [[~!!]]), (!link [Descriptions] [Descriptions]), (!KW [short]), (!KW [use_short_envs])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_document])
+!html_name cmd_begin_document.html
+
+!iflang [german]
+Hauptteil des Dokumentes einleiten.
+!endif
+!iflang [english]
+Start the main part of the document.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/begin_document(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando (!B)muss(!b) in jedem Quelltext vorhanden sein.
+Es trennt den Vorspann des Quelltextes vom Hauptteil.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command (!B)must(!b) be part of every source file. It divides
+the preamble from the main part.
+!endif
+
+!item [(!SEEALSO)]
+(!KW [end_document])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_enumerate])
+!html_name cmd_begin_enumerate.html
+
+!iflang [german]
+Neue Nummerierung einleiten.
+!endif
+!iflang [english]
+Start an enumeration.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_enumerate(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Leitet eine (weitere) enumerate-Umgebung ein. Diese
+Umgebung muss mit (!KW [end_enumerate]) beendet werden. Die
+(!nolink [enumerate-Umgebung]) können Sie mehrfach verschachtelt
+und auch mit anderen Umgebungen kombiniert benutzen.
+Aufzählungspunkte einer (!nolink [enumerate-Umgebung]) werden mit
+(!KW [item]) eingeleitet und mit alphanumerischen Zeichen
+markiert.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Starts a new enumerate environment that has to be finished with
+(!KW [end_enumerate]). You can use the enumerate environment inside
+other (enumerate) environments. The items of an enumerate environment
+will be marked with alphanumerical characters.
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [end_enumerate]), (!KW [item]), (!link [Nummerierungen] [Nummerierungen]), (!KW [short]), (!KW [use_short_envs])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [end_enumerate]), (!KW [item]), (!link [Enumerations] [Enumerations]), (!KW [short]), (!KW [use_short_envs])
+!endif
+
+!end_xlist
+
+!end_node
+
+
+################################################################################
+!begin_node (!kw [begin_flushleft])
+!html_name cmd_begin_flushleft.html
+
+!iflang [german]
+Umgebung für linksbündigen Text öffnen.
+!endif
+!iflang [english]
+Start left justified text.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_flushleft(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Zeilen, die in einer flushleft-Umgebung stehen, werden immer linksbündig, d.h. ohne Blocksatz, ausgegeben.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Lines that are part of a flushleft environment are printed left
+justified without justification.
+# Blocksatz = justication, lt. Kontrolle auf http://dict.leo.org 18.12.2003 - Ulrich Kretschmer
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~0
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Texthervorhebungen] [Texthervorhebungen]), (!KW [end_flushleft])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [end_flushleft]), (!link [Emphasizing text] [Emphasizing text])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_flushright])
+!html_name cmd_begin_flushright.html
+
+!iflang [german]
+Umgebung für rechtsbündigen Text öffnen.
+!endif
+!iflang [english]
+Start right justified text.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_flushright(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Zeilen, die in einer flushright-Umgebung stehen, werden rechtsbündig, d.h. ohne Blocksatz, ausgegeben.
+# Zusatz "d.h. ohne Blocksatz" ergänzt 18.12.2003 - Ulrich Kretschmer
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Lines that are part of a flushright environment are printed right
+justified without justification.
+!endif
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~10
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [Texthervorhebungen] [Texthervorhebungen]), (!KW [end_flushright])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [end_flushright]), (!link [Emphasizing text] [Emphasizing text])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_ignore])
+!html_name cmd_begin_ignore.html
+
+!iflang [german]
+Textpassagen ignorieren.
+!endif
+!iflang [english]
+Ignore text.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_ignore(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando öffnet eine (neue) ignore-Umgebung.
+Zeilen, die innerhalb dieser Umgebung stehen, werden vollständig ignoriert und nicht umgewandelt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Starts a new ignore environment. Lines that are part of this environment are ignored
+until the correspondig (!KW [end_ignore]) is found.
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [end_ignore]), (!link [Umgebungen] [Umgebungen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [end_ignore]), (!link [Environments] [Environments])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_ilist])
+!html_name cmd_begin_ilist.html
+
+!iflang [german]
+Eine ""kursive"" Liste einleiten.
+!endif
+!iflang [english]
+Start an italic list.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_ilist [<(!TEXT)>](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Leitet eine neue Listen-Umgebung ein. Diese Umgebung muss mit (!KW [end_ilist]) beendet werden. Die Länge von
+""<text>"" definiert die Tiefe der Einrückung der Aufzählungspunkte. Sie können diese Umgebung auch mit
+anderen (!nolink [Umgebungen]) kombinieren. Die Aufzählungspunkte, die man mit (!KW [item] [[~!!]]) einleitet,
+werden kursiv dargestellt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Starts a new list. The length of ""<text>"" defines the indent of the
+list. This environment must be finished with (!KW [end_ilist]). You
+can use this environment inside other (iltalic list) environments.
+The text you set with (!KW [item] [[~!!]]) will be displayed with an italic font.
+!endif
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [end_ilist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_xlist]), (!KW [begin_tlist]), (!link [Listen] [Listen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [end_ilist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_xlist]), (!KW [begin_tlist]), (!link [Lists] [Lists])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_itemize])
+!html_name cmd_begin_itemize.html
+
+!iflang [german]
+Neue Aufzählung einleiten.
+!endif
+!iflang [english]
+Start an itemization environment.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_itemize(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Leitet eine (weitere) itemize-Umgebung ein. Diese
+Umgebung muss mit (!KW [end_itemize]) beendet werden. Die
+(!nolink [itemize-Umgebung]) können Sie mehrfach und auch mit
+anderen (!nolink [Umgebungen]) kombiniert einsetzen.
+Aufzählungspunkte, die mit (!KW [item]) eingeleitet werden,
+werden mit Punkten und Strichen markiert.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Starts a new itemize environment that has to be finished with
+(!KW [end_itemize]). You can use the itemize environment inside
+other (itemize) environments. Items of the itemize environment will
+be marked with bullets, dashes or stars.
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [end_itemize]), (!KW [item]), (!link [Aufzählungen] [Aufzählungen]), (!KW [short]), (!KW [use_short_envs])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [end_itemize]), (!KW [item]), (!link [Itemizations] [Itemizations]), (!KW [short]), (!KW [use_short_envs])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_linedraw])
+!html_name cmd_begin_linedraw.html
+
+!iflang [german]
+Eine linedraw-Umgebung einleiten.
+!endif
+!iflang [english]
+Start a linedraw environment.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_linedraw(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Leitet eine linedraw-Umgebung ein. Diese Umgebung muss
+mit (!KW [end_linedraw]) beendet werden. Text einer
+linedraw-Umgebung wird 1:1 ausgegeben, es werden
+keine UDO-Kommandos umgewandelt! Auch die Wirkung von
+etwaigen Zielformatbefehlen wird aufgehoben. Bei der
+Ausgabe werden Einrückungen beachtet.
+
+Im Unterschied zur verbatim-Umgebung wird (momentan
+nur für RTF) vor der Ausgabe auf einen anderen
+Zeichensatz (""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm])"")
+umgeschaltet, sodass DOS-Screenshots korrekt dargestellt werden sollten.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Starts a new linedraw environment that has to be
+finished with (!KW [end_linedraw]).
+Text inside this enviroment is treated like
+in a verbatim environment. Additionaly,
+the character set will be switched to dos,
+and if converting to RTF the ""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm])""
+font will be used.
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [end_linedraw]), (!link [Vorformatierter Text] [Vorformatierter Text]), (!KW [ldinclude]), (!KW [linedrawsize])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [end_linedraw]), (!KW [ldinclude]), (!KW [linedrawsize]), (!link [Preformatted text] [Preformatted text])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_node])
+!html_name cmd_begin_node.html
+
+!iflang [german]
+Kapitel/Abschnitt/Unterabschnitt/Paragraph einleiten.
+!endif
+!iflang [english]
+Start new chapter/section/subsection/paragraph.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_node <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Leitet, abhängig von der momentanen Gliederungsebene,
+ein Kapitel, Abschnitt, Unterabschnitt oder Paragraphen
+mit der Bezeichnung ""<text>"" ein.
+Kapitel erscheinen in Inhaltsverzeichnissen.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Depending on the current level of your document structure,
+starts a new chapter, section, subsection or paragraph.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE2)]
+(!T)!/begin_node (!nolink [Titel]) des Kapitels(!t) (!nl)
+!.. (!nl)
+    (!T)!/begin_node (!nolink [Titel]) des Abschnitts(!t) (!nl)
+    !.. (!nl)
+    (!T)!/end_node(!t)
+!.. (!nl)
+(!T)!/end_node(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE2)]
+(!T)!/begin_node Title of chapter(!t) (!nl)
+!.. (!nl)
+    (!T)!/begin_node Title of section(!t) (!nl)
+    !.. (!nl)
+    (!T)!/end_node(!t)
+!.. (!nl)
+(!T)!/end_node(!t)
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [end_node]), (!link [Gliederung] [Gliederung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [end_node]), (!link [Structuring] [Structuring])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_node*])
+!html_name cmd_begin_node_asterisk.html
+
+!iflang [german]
+Kapitel/Abschnitt/Unterabschnitt/Paragraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+!endif
+!iflang [english]
+Start new chapter/section/subsection/paragraph without entry in table of contents.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_node* <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie (!KW [begin_node]),
+mit der Ausnahme, dass ""<text>"" nicht in Inhaltsverzeichnissen erscheint.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [begin_node]), but here ""<text>"" will not
+appear in a table of contents.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE2)]
+(!T)!/begin_node* (!nolink [Titel]) des versteckten Kapitels(!t) (!nl)
+...
+(!T)!/end_node(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE2)]
+(!T)!/begin_node* Title of a hidden chapter(!t) (!nl)
+...
+(!T)!/end_node(!t)
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [pnode*]), (!KW [begin_node]), (!KW [end_node]), (!link [Gliederung] [Gliederung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [pnode*]), (!KW [begin_node]), (!KW [end_node]), (!link [Structuring] [Structuring])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_pnode])
+!html_name cmd_begin_pnode.html
+
+!iflang [german]
+Popup-Kapitel/Abschnitt/Unterabschnitt/Paragraph einleiten.
+!endif
+!iflang [english]
+Start new popup-chapter/section/subsection/paragraph.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_pnode <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Leitet, abhängig von der momentanen Gliederungsebene,
+ein Kapitel, Abschnitt, Unterabschnitt oder Paragraphen
+mit der Bezeichnung ""<text>"" ein.
+Kapitel erscheinen in Inhaltsverzeichnissen.
+Identisch mit (!KW [begin_node]), der Inhalt wird jedoch beim
+ST-Guide und bei WinHelp als Popup dargestellt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Depending on the current level of your document structure,
+starts a new chapter, section, subsection or paragraph.
+This command is similar to (!KW [begin_node]), but
+the contents of the node will be displayed as popup
+in Windows Help or ST-Guide.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE2)]
+(!T)!/begin_pnode (!nolink [Titel]) des Kapitels(!t) (!nl)
+... (!nl)
+(!T)!/end_node(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE2)]
+(!T)!/begin_pnode Title of chapter(!t) (!nl)
+... (!nl)
+(!T)!/end_node(!t)
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [end_node]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [end_node]), (!KW [begin_node]), (!link [Structuring] [Structuring])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_pnode*])
+!html_name cmd_begin_pnode_asterisk.html
+
+!iflang [german]
+Popup-Kapitel/Abschnitt/Unterabschnitt/Paragraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+!endif
+!iflang [english]
+Start new popup-chapter/section/subsection/paragraph without entry in table of contents.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_pnode* <(!TEXT)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie (!KW [begin_pnode]),
+mit der Ausnahme, dass ""<text>"" nicht in Inhaltsverzeichnissen erscheint.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [begin_pnode]), but here ""<text>"" will not
+appear in a table of contents.
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE2)]
+(!T)!/begin_pnode* (!nolink [Titel]) des versteckten Popups(!t) (!nl)
+... (!nl)
+(!T)!/end_node(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE2)]
+(!T)!/begin_pnode* Title of hidden popup(!t) (!nl)
+... (!nl)
+(!T)!/end_node(!t)
+!endif
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [node*]), (!KW [begin_pnode]), (!link [Gliederung] [Gliederung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [node*]), (!KW [begin_pnode]), (!link [Structuring] [Structuring])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_preformatted])
+!html_name cmd_begin_preformatted.html
+
+!iflang [german]
+Eine preformatted-Umgebung einleiten.
+!endif
+!iflang [english]
+Start a preformatted environment.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_preformatted(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Leitet eine preformatted-Umgebung ein. Diese Umgebung muss
+mit (!KW [end_preformatted]) beendet werden. Text einer
+preformatted-Umgebung wird 1:1 ausgegeben, es werden
+keine UDO-Kommandos umgewandelt! Auch die Wirkung von
+etwaigen Zielformatbefehlen wird aufgehoben. Bei der
+Ausgabe werden Einrückungen beachtet.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Starts a preformatted environment that has to be finished with
+(!KW [end_preformatted]). Text that is part of a preformatted environment
+is printed out as given using a monospaced font.
+!endif
+# TODO: was ist Unterschied zu begin_verbatim?
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [end_preformatted]), (!KW [begin_verbatim]), (!link [Vorformatierter Text] [Vorformatierter Text]), (!KW [vinclude]), (!KW [verbatimsize])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [end_preformatted]), (!KW [begin_verbatim]), (!KW [vinclude]), (!KW [verbatimsize]), (!link [Preformatted text] [Preformatted text])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: Englisch
+!begin_node (!kw [begin_quote])
+!html_name cmd_begin_quote.html
+
+!iflang [german]
+Umgebungstext eingerückt darstellen.
+!endif
+!iflang [english]
+Print indented text.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_quote [<(!TEXT)>](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando leitet eine (weitere) quote-Umgebung
+ein. Text, der zwischen diesem und (!KW [end_quote])
+angegeben ist, wird eingerückt dargestellt. Sie
+können die Umgebung mehrfach und kombiniert mit
+anderen Umgebungen benutzen.
+
+Bei der HTML-Ausgabe kann zusätzlich die ID und
+eine URL auf ein Zitat übergeben werden.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command starts a new quote environment. Text is printed
+indented until UDO reads the (!KW [end_quote]) command.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/begin_quote [id=myid cite=http://www.udo-open-source.org](!t)
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [end_quote]), (!link [Einrücken von Absätzen] [Einrücken von Absätzen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [end_quote]), (!link [Indented paragraphs] [Indented paragraphs])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_raw])
+!html_name cmd_begin_raw.html
+
+!iflang [german]
+(!nolink [raw-Umgebung]) einleiten.
+!endif
+!iflang [english]
+Start a raw environment.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_raw(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Befehl leitet eine raw-Umgebung ein. Diese
+Umgebung muss mit (!KW [end_raw]) beendet werden. Jede Zeile
+innerhalb dieser Umgebung wird direkt, also ohne
+jegliche Umwandlung, Zentrierung oder Einrückung
+ausgegeben. Die Umgebung dient daher zur Einbindung
+spezieller Befehle für die (!nolink [Ausgabeformate]).
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Starts a raw environment that has to be finished with
+(!KW [end_raw]). Each line inside this environment will be output
+directly without any conversion. Thus this environment can be used to
+insert specific commands for the destionation format.
+!endif
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.41
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [end_raw]), (!link [raw-Umgebung] [raw-Umgebung]), (!KW [rinclude]), (!KW [ifdest])
+!endif
+!iflang [english]
+(!KW [end_raw]), (!KW [rinclude]), (!KW [ifdest]), (!link [raw environment] [raw environment])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_sourcecode])
+!html_name cmd_begin_sourcecode.html
+
+!iflang [german]
+Eine (!nolink [Sourcecode])-Umgebung einleiten.
+!endif
+!iflang [english]
+Start a sourcecode environment.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_sourcecode(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando leitet eine sourcecode-Umgebung ein.
+Diese Umgebung muss mit (!KW [end_sourcecode]) beendet
+werden. Zeilen die in einer solchen Umgebung
+angegeben sind, werden für die Sourcecode-Formate
+ohne Anpassung ausgegeben. Bei allen ""normalen""
+Formaten erfolgt die Ausgabe der Zeilen, als ob sie
+innerhalb einer verbatim-Umgebung stehen, welche sich
+wiederum innerhalb einer quote-Umgebung befindet.
+Somit wirken auch hier die Befehle, die für die
+verbatim-(!nolink [Umgebungen]) vorgesehen sind, wie z.B. (!KW [verbatimsize]) und
+(!KW [no_verbatim_umlaute]).
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+With this command you can start a sourcecode environment. It has to
+be finished with the (!KW [end_sourcecode]) command. Lines that are
+part of a sourcecode environment will be printed without conversion
+for the sourcecode formats. For the ""normal"" formats the text of
+the sourcecode environment will be printed like text of a verbatim
+environment that is used inside a quote environment.
+!endif
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [end_sourcecode]), (!KW [sinclude]), (!KW [no_sourcecode])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [begin_stg])
+!html_name cmd_begin_stg.html
+!label !/else_stg
+!label !/end_stg
+
+!iflang [german]
+Abfrage des Ausgabeformates.
+!endif
+!iflang [english]
+Query the destination format.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_stg(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+
+!iflang [german]
+!include history_begin_asc_de.ui
+!endif
+!iflang [english]
+!include history_begin_asc_en.ui
+!endif
+
+!item [(!EXISTEDUNTIL)] Release~4 Version~0.41
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [else]), (!KW [endif])
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!begin_node (!kw [begin_table])
+!html_name cmd_begin_table.html
+
+!iflang [german]
+Eine Tabelle beginnen.
+!endif
+!iflang [english]
+Start a table.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_table [<format>] {!hline}(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Kommando wird eine Tabelle eingeleitet.
+Für ""<format>"" geben Sie an, wie die Spalten der
+Tabelle ausgerichtet werden sollen und vor bzw. nach
+welcher Spalte vertikale Linien gezogen werden
+sollen. Wird zum Schluss noch (!KW [hline]) angegeben, so
+beginnt die Tabelle mit einer horizontalen Linie. Im
+Beispiel sehen Sie eine Tabelle, die mit links,
+rechts und oben mit einer Linie versehen ist und die
+Spalten linksbündig, zentriert und rechtsbündig
+ausgerichtet werden.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+With this command a table is started. For <format> you enter the
+justification of the columns of this table and the position of
+vertical lines. If this command is followed by ''(!KW [hline])'' the table
+starts with a horizontal line. The example shows how to make a table
+with three columns where the left column is left justified, the
+second is centered and the last columns is right justified. The table
+begins with a horizontal line an it has one vertical line on the left.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/begin_table [|lcr|] !/hline(!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.42
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [hline]), (!KW [end_table]), (!link [Tabellen] [Tabellen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [hline]), (!KW [end_table]), (!link [Tables] [Tables])]
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_tlist])
+!html_name cmd_begin_tlist.html
+
+!iflang [german]
+Eine ""nichtproportionale"" Liste einleiten.
+!endif
+!iflang [english]
+Start a monospaced list.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_tlist [<(!TEXT)>](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Leitet eine neue Listen-Umgebung ein. Diese Umgebung
+muss mit (!KW [end_tlist]) beendet werden. Die Länge von
+""<text>"" definiert die Tiefe der Einrückung der
+Aufzählungspunkte. Sie können diese Umgebung auch mit
+anderen (!nolink [Umgebungen]) kombinieren. Die
+Die Texte, die man mit (!KW [item] [[~!!]]) angibt, werden mit nichtproportionaler Schrift
+dargestellt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Starts a new list. The length of ""<text>"" defines the indent of the
+list. This environment must be finished with (!KW [end_tlist]). You
+can use this environment inside other environments. The text you set
+with (!KW [item] [[~!!]]) will be displayed with a monospaced font
+!endif
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [end_tlist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_xlist]), (!link [Listen] [Listen])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [end_tlist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_xlist]), (!link [Lists] [Lists])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_verbatim])
+!html_name cmd_begin_verbatim.html
+
+!iflang [german]
+Eine (!nolink [verbatim-Umgebung]) einleiten.
+!endif
+!iflang [english]
+Start a verbatim environment.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_verbatim(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Leitet eine verbatim-Umgebung ein. Diese Umgebung muss
+mit (!KW [end_verbatim]) beendet werden. Text einer
+verbatim-Umgebung wird 1:1 ausgegeben, es werden
+keine UDO-Kommandos umgewandelt! Auch die Wirkung von
+etwaigen Zielformatbefehlen wird aufgehoben. Bei der
+Ausgabe werden Einrückungen beachtet.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Starts a verbatim environment that has to be finished with
+(!KW [end_verbatim]). Text that is part of a verbatim environment
+is printed out as given using a monospaced font.
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [end_verbatim]), (!KW [begin_preformatted]), (!link [Vorformatierter Text] [Vorformatierter Text]), (!KW [vinclude]), (!KW [verbatimsize])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [end_verbatim]), (!KW [begin_preformatted]), (!KW [vinclude]), (!KW [verbatimsize]), (!link [Preformatted text] [Preformatted text])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [begin_xlist])
+!html_name cmd_begin_xlist.html
+
+!iflang [german]
+Eine Liste einleiten.
+!endif
+!iflang [english]
+Start a list.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/begin_xlist [<(!TEXT)>](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Leitet eine neue Listen-Umgebung ein. Diese Umgebung
+muss mit (!KW [end_xlist]) beendet werden. Die Länge von
+""<text>"" definiert die Tiefe der Einrückung der
+Aufzählungspunkte. Diese Umgebung lässt sich mit
+anderen (!nolink [Umgebungen]) kombiniert verwenden. Die Texte,
+die man mit (!KW [item] [[~!!]]) angibt, werden normal
+dargestellt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+Starts a new list. The length of ""<text>"" defines the indent of the
+list. This environment must be finished with (!KW [end_xlist]). You
+can use this environment inside other environments. The text you set
+with (!KW [item] [[~!!]]) will be displayed with the normal font.
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [end_xlist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!link [Listen] [Listen]), (!KW [short]), (!KW [use_short_envs])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [end_xlist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!link [Lists] [Lists]), (!KW [short]), (!KW [use_short_envs])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kkw [beta])
+!html_name cmd_beta().html
+
+!iflang [german]
+(!beta)-Zeichen ausgeben.
+!endif
+!iflang [english]
+Print the (!beta) symbol.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/beta)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das beta-Symbol
+ersetzt, sofern es in dem jeweiligen Zeichensatz
+vorhanden ist. Ist es das nicht, so ersetzt UDO den
+Platzhalter durch ""(!T)beta(!t)"".
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This placeholder will be replaced by the beta symbol if
+the destination format supports it. If it doesn't UDO will replace
+this placeholder by ""(!T)beta(!t)"".
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+Aus (!T)(!/beta)(!t) wird (!beta).
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/beta)(!t) becomes (!beta).
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [alpha]), (!link [Sonderzeichen] [Sonderzeichen]), Vordefinierte Makros
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KKW [alpha]), (!link [Special characters] [Special characters]), Defined macros
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [bfl])
+!html_name cmd_bfl.html
+
+!iflang [german]
+Umgebung für linksbündigen Text öffnen.
+!endif
+!iflang [english]
+Start left justified text.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bfl(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_flushleft]).
+
+!item [(!SEEALSO)]
+(!KW [begin_flushleft])
+
+!end_xlist
+
+!end_node
+
+
+################################################################################
+!begin_node (!kw [bfr])
+!html_name cmd_bfr.html
+
+!iflang [german]
+Umgebung für rechtsbündigen Text öffnen.
+!endif
+!iflang [english]
+Start right justified text.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bfr(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_flushright]).
+
+!item [(!SEEALSO)]
+(!KW [begin_flushright])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [bi])
+!html_name cmd_bi.html
+
+!iflang [german]
+Neue Aufzählung einleiten.
+!endif
+!iflang [english]
+Start an itemization environment.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bi(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_itemize]).
+
+!item [(!SEEALSO)]
+(!KW [begin_itemize])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [bigskip])
+!html_name cmd_bigskip.html
+
+!iflang [german]
+Drei zusätzliche Leerzeilen einfügen.
+!endif
+!iflang [english]
+Insert three empty lines.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bigskip(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Befehl sorgt für die Ausgabe von drei
+zusätzlichen Leerzeilen und dient dazu, Absätze
+deutlicher voneinander abzuheben. Bei der Umwandlung
+ins (!LaTeX)-Format werden keine drei Leerzeilen, sondern
+''(!V)\bigskip(!v)'' ausgegeben.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command will be simply replaced by ""(!V)\bigskip(!v)"" when
+converted to (!LaTeX). Otherwise three additional empty lines will be generated.
+!endif
+
+!item [(!SEEALSO)]
+(!KW [smallskip]), (!KW [medskip])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [bil])
+!html_name cmd_bil.html
+
+!iflang [german]
+Eine ""kursive"" Liste einleiten.
+!endif
+!iflang [english]
+Start an italic list.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bil [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_ilist]).
+
+!item [(!SEEALSO)]
+(!KW [begin_ilist])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: Englisch
+!begin_node (!kkw [black])
+!html_name cmd_black.html
+
+!iflang [german]
+Setzt die Schriftfarbe Schwarz.
+!endif
+!iflang [english]
+Sets the text color black.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/black)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Schwarz.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
+Postscript unterstützt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+# ToDo: Englisch
+!begin_node (!kkw [blue])
+!html_name cmd_blue.html
+
+!iflang [german]
+Setzt die Schriftfarbe Blau.
+!endif
+!iflang [english]
+Sets the text color blue.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/blue)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Blau.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
+Postscript unterstützt.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+!endif
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [bn])
+!html_name cmd_bn.html
+
+!iflang [german]
+Kapitel/Abschnitt/Unterabschnitt/Paragraph einleiten.
+!endif
+!iflang [english]
+Start new chapter/section/subsection/paragraph.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bn [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_node]).
+
+!item [(!SEEALSO)]
+(!KW [begin_node])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [bn*])
+!html_name cmd_bn_asterisk.html
+
+!iflang [german]
+Kapitel/Abschnitt/Unterabschnitt/Paragraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+!endif
+!iflang [english]
+Start new chapter/section/subsection/paragraph without entry in table of contents.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bn* [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_node*]).
+
+!item [(!SEEALSO)]
+(!KW [begin_node*])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [bp])
+!html_name cmd_bp.html
+
+!iflang [german]
+Popup-Kapitel/Abschnitt/Unterabschnitt/Paragraph einleiten.
+!endif
+!iflang [english]
+Start new popup-chapter/section/subsection/paragraph.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bp [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_pnode]).
+
+!item [(!SEEALSO)]
+(!KW [begin_pnode])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [bp*])
+!html_name cmd_bp_asterisk.html
+
+!iflang [german]
+Popup-Kapitel/Abschnitt/Unterabschnitt/Paragraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+!endif
+!iflang [english]
+Start new popup-chapter/section/subsection/paragraph without entry in table of contents.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bp* [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_pnode*]).
+
+!item [(!SEEALSO)]
+(!KW [begin_pnode*])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [bq])
+!html_name cmd_bq.html
+
+!iflang [german]
+Umgebungstext eingerückt darstellen.
+!endif
+!iflang [english]
+Print indented text.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bq(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_quote]).
+
+!item [(!SEEALSO)]
+(!KW [begin_quote])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [break])
+!html_name cmd_break.html
+
+!iflang [german]
+Umwandlung vorzeitig unterbrechen.
+!endif
+!iflang [english]
+Stop processing the source file.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/break(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Dieses Kommando kann man benutzen, um die Umwandlung
+des Quelltextes vorzeitig zu beenden. Alles, was nach
+(!KW [break]) folgt, wird nicht mehr beachtet. UDO führt
+noch automatisch ein (!KW [end_appendix]) und (!KW [end_document])
+aus, bevor die Umwandlung unterbrochen wird.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+You can use this command inside the source file to stop the
+conversion right at the line where you use this command. UDO calls
+(!KW [end_appendix]) and (!KW [end_document]) itself if necessary.
+!endif
+
+!item [(!SEEALSO)]
+(!KW [end_document]), (!KW [end_appendix]), (!KW [error])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [btl])
+!html_name cmd_btl.html
+
+!iflang [german]
+Eine ""nichtproportionale"" Liste einleiten.
+!endif
+!iflang [english]
+Start a monospaced list.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/btl [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_tlist]).
+
+!item [(!SEEALSO)]
+(!KW [begin_tlist])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!begin_node (!kw [bxl])
+!html_name cmd_bxl.html
+
+!iflang [german]
+Eine Liste einleiten.
+!endif
+!iflang [english]
+Start a list.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/bxl [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [begin_xlist]).
+
+!item [(!SEEALSO)]
+(!KW [begin_xlist])
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!end_node
+
+################################################################################

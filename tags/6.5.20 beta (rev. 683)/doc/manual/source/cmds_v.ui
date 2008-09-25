@@ -1,0 +1,244 @@
+################################################################################
+!begin_node V!..
+!html_name cmd-v.html
+
+################################################################################
+!begin_node (!kkkw [V] [v])
+!html_name cmd_V().html
+!label (!kk1 [/V])
+!label (!kk1 [/v])
+
+!iflang [german]
+Klartext ausgeben.
+!endif
+!iflang [english]
+Print preformatted text.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/V)<(!TEXT)>(!/v)(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+""<text>"" wird als Klartext dargestellt, falls möglich.
+Für (!LaTeX) wird ''(!V)\verb+<text>+'(!v)'' ausgegeben, bei allen
+anderen Formaten erfolgt die gleiche Ausgabe wie bei
+(!KKKW [T] [t]).
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+""<text>"" will be displayed preformatted if possible.
+When converting to (!LaTeX), ''(!V)\verb+<text>+'(!v)'' will be printed,
+otherwise the same output will be generated as for (!KKKW [T] [t]).
+!endif
+
+!iflang [german]
+!item [(!EXAMPLE)]
+(!T)(!/V)Klartext(!/v)(!t)
+!endif
+!iflang [english]
+!item [(!EXAMPLE)]
+(!T)(!/V)preformatted(!/v)(!t)
+!endif
+
+!iflang [german]
+!item [(!SEEALSO)]
+Schriftarten, (!link [Texthervorhebungen] [Texthervorhebungen]), (!KKKW [T] [t]), (!KW [tex_verb])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+Text styles, (!link [Emphasizing text] [Emphasizing text]), (!KKKW [T] [t]), (!KW [tex_verb])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [verbatim_no_umlaute])
+!html_name cmd_verbatim_no_umlaute.html
+
+!iflang [german]
+Keine Umlaute in verbatim-Umgebungen verwenden.
+!endif
+!iflang [english]
+Do not use german umlauts in verbatim environments.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/verbatim_no_umlaute(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Der Befehl (!KW [verbatim_no_umlaute]) wurde durch (!KW [no_verbatim_umlaute]) ersetzt.
+#TODO: wann?
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+This command has been renamed to (!KW [no_verbatim_umlaute]).
+#TODO: wann?
+!endif
+
+!item [(!EXISTEDUNTIL)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [no_verbatim_umlaute])
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!begin_node (!kw [verbatimsize])
+!html_name cmd_verbatimsize.html
+
+!iflang [german]
+Schriftgröße für verbatim-Umgebungen einstellen.
+!endif
+!iflang [english]
+Set font size for verbatim environments.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/verbatimsize [tiny|small|normal|large|huge](!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Mit diesem Schalter können Sie festlegen, in welcher
+Schriftgröße Text erscheinen soll, der in einer
+verbatim-Umgebung steht. Der Schalter kann überall im
+Quelltext verwendet werden. Die kleinste Schriftgröße
+wird mit ''(!V)tiny(!v)'', die größte mit ''(!V)huge(!v)'' gesetzt. Die
+Standardgröße für verbatim-Umgebungen ist ''(!V)normal(!v)''.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+With this switch you can set the font size of verbatim environments
+if the destination format allows it to use different font sizes. You
+can use this switch wherever you want. The smallest font size is
+activated with ''(!T)tiny(!t)'', the largest one with
+''(!T)huge(!t)''. The default font size is ''(!T)normal(!t)''.
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/verbatimsize [small](!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!link [verbatim-Umgebung] [verbatim-Umgebung]), (!KW [html_monofont_size])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!link [verbatim environment] [verbatim environment]), (!KW [html_monofont_size])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!ifset OldKeywords
+!begin_node (!kw [version])
+!html_name cmd_version.html
+
+!iflang [german]
+Versionsnummer des Programms für die Titelseite setzen.
+!endif
+!iflang [english]
+Set document information.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/version <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [docinfo] [[version!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Titelseite] [Titelseite])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Title page] [Title page])
+!endif
+
+!end_xlist
+
+!end_node
+!endif
+
+################################################################################
+!begin_node (!kw [vinclude])
+!html_name cmd_vinclude.html
+
+!iflang [german]
+Datei einbinden und in einer verbatim-Umgebung darstellen.
+!endif
+!iflang [english]
+Include file in verbatim environment.
+!endif
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/vinclude <(!FILE)>(!t)
+
+!iflang [german]
+!item [(!DESCRIPTION)]
+Öffnet die Datei namens ""<datei>"" und gibt deren Inhalt
+als Klartext an der Stelle aus, an der dieses
+Kommando benutzt wurde. Etwaige Einrückungen werden
+dabei berücksichtigt, Zentrierungen jedoch nicht.
+Tabulatoren werden abhängig von (!KW [tabwidth])
+umgewandelt. Enthält der Dateiname Leerzeichen,
+muss er in Anführungsstriche gesetzt werden.
+!endif
+!iflang [english]
+!item [(!DESCRIPTION)]
+""<file>"" will be included and displayed like preformatted text
+inside a verbatim environment. If you use this command inside
+another environment UDO indents the contents of this file. UDO
+converts tabs according to (!KW [tabwidth]).
+!endif
+
+!item [(!EXAMPLE)]
+(!T)!/vinclude hello.c(!t)
+
+!iflang [german]
+!item [(!SEEALSO)]
+(!KW [tabwidth]), (!KW [include]), (!KW [verbatimsize]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [verbatim-Umgebung] [verbatim-Umgebung])
+!endif
+!iflang [english]
+!item [(!SEEALSO)]
+(!KW [tabwidth]), (!KW [include]), (!KW [verbatimsize]), (!link [Split documents] [Split documents]), (!link [verbatim environment] [verbatim environment])
+!endif
+
+!end_xlist
+
+!end_node
+
+################################################################################
+!end_node
+
+################################################################################
