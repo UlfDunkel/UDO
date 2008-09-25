@@ -4998,7 +4998,7 @@ dem Schalter (!KW [html_img_suffix]) kann die Endung jederzeit verändert
 werden.
 
 !item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
-diese Zahl überschritten, so gibt UDO eine Fehlermeldung aus, daß
+diese Zahl überschritten, so gibt UDO eine Fehlermeldung aus, dass 
 der Link nicht ersetzt werden konnte. Zur Erinnerung: Absätze
 werden durch Leerzeilen getrennt.
 !end_enumerate
