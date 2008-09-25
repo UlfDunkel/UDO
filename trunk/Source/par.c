@@ -146,6 +146,7 @@ LOCAL void del_param_quotes (char *s)
 *  get_nr_of_parameters():
 *     get # of parameter blocks of command blocks in round brackets
 *     which are formatted like this: (!command [p1] [p2] [...])
+*     or even like this: (!command[p1][p2][..])
 *
 *  Out:
 *     # of parameter blocks
@@ -160,7 +161,6 @@ char        *s)               /* string to check */
    int       count = 0;       /* # of found parameters */
    char     *pos;             /* ^ to string s */
    char      search[128];     /* buffer for search string */
-   BOOLEAN   is_raw = FALSE;  /* flag: TRUE = RAW */
 
 
    sprintf(search, "(!%s", cmd);          /* create search string, e.g. "(!raw" */
@@ -171,47 +171,25 @@ char        *s)               /* string to check */
 
    pos += strlen(search);                 /* skip command */
 
-   if (!strcmp(cmd,"raw"))                /* check if we're in RAW mode */
-      is_raw = TRUE;                      /* yes */
-   
-
-
-   if (is_raw)                            /* (!raw [][]) */
-   {
-      while (pos[0] != EOS)               /* everything allowed until the end of line */
-      {
-         switch (pos[0])
-         {
-         case ']':
-            if (pos[-1] != '!')           /* even in (!raw ), ']' has to be casted by ! when used as data */
-               count++;
-         }
-      
-         pos++;
-      }
-   }
-   else                                   /* other commands ... */
-   {
                                           /* find first uncasted closing bracket */
-      while (pos[0] != ')' || (pos[0] == ')' && pos[-1] == '!') )
+   while (pos[0] != ')' || (pos[0] == ')' && pos[-1] == '!') )
+   {
+      switch (pos[0])
       {
-         switch (pos[0])
+      case EOS:                           /* not allowed: command block has a line break! */
+         error_unexpected_eol();
+         return 0;
+         
+      case ']':                           /* parameter found? */
+         if (pos[-1] != '!')              /* if ] wasn't casted by ! ... */
          {
-         case EOS:                        /* not allowed: command block has a line break! */
-            error_unexpected_eol();
-            return 0;
-         
-         case ']':                        /* parameter found? */
-            if (pos[-1] != '!')           /* if ] wasn't casted by ! ... */
-            {
-               count++;                   /* yes, parameter found */
-            }
-         
-            break;
+            count++;                      /* yes, parameter found */
          }
-      
-         pos++;                           /* next char */
+         
+         break;
       }
+      
+      pos++;                              /* next char */
    }
 
    return count;
