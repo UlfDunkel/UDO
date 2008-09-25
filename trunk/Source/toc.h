@@ -332,6 +332,7 @@ GLOBAL void set_html_counter_command ( void );
 GLOBAL void set_html_keywords ( void );
 GLOBAL void set_html_description ( void );
 GLOBAL void set_html_robots ( void );      /* new V6.5.17 */
+GLOBAL void set_html_bgsound(void);        /* new V6.5.20 GS] */
 GLOBAL void set_html_color ( const int which );
 #if 0
    GLOBAL void set_html_backcolor ( void );
