@@ -1,6 +1,7 @@
 # doc/manual/source/introduction.ui
-# letzte Änderungen: 28.01.2004 / last changes: Jan 28, 2004
-
+# History:
+# 2008:
+#   fd  Sep 29: 'Apple Computer Inc.' -> 'Apple Inc.'
 
 ################################################################################
 !iflang [german]
@@ -835,8 +836,7 @@ Corporation PLC.
 GEM und GEM Desktop sind Warenzeichen oder eingetragene Warenzeichen
 von Digital Research.
 
-Mac, Macintosh, Mac~OS und Mac~OS~X sind eingetragene Warenzeichen von Apple
-Computer Inc.
+Mac, Macintosh, Mac~OS und Mac~OS~X sind eingetragene Warenzeichen von Apple Inc.
 
 MS-DOS, Windows, Windows~95 und Windows~NT sind eingetragene
 Warenzeichen der Microsoft Corporation.
@@ -865,8 +865,7 @@ Corporation PLC.
 GEM and GEM Desktop are trademarks or registered trademarks of
 Digital Research.
 
-Mac, Macintosh, Mac~OS and Mac~OS~X are registered trademarks of Apple Computer
-Inc.
+Mac, Macintosh, Mac~OS and Mac~OS~X are registered trademarks of Apple Inc.
 
 MS-DOS, Windows, Windows~95 and Windows~NT are registered trademarks of
 Microsoft Corporation.
