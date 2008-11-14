@@ -1,36 +1,71 @@
-/*	############################################################
-	# @(#) toc.c
-	# @(#)
-	# @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
-	# @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)
-	#
-	# This program is free software; you can redistribute it and/or
-	# modify it under the terms of the GNU General Public License
-	# as published by the Free Software Foundation; either version 2
-	# of the License, or (at your option) any later version.
-	# 
-	# This program is distributed in the hope that it will be useful,
-	# but WITHOUT ANY WARRANTY; without even the implied warranty of
-	# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	# GNU General Public License for more details.
-	# 
-	# You should have received a copy of the GNU General Public License
-	# along with this program; if not, write to the Free Software
-	# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-	#
-	#	Routinen, die sich um Kapitel, Labels, Aliase,
-	#	dem Inhaltsverzeichnis und der automatischen
-	#	Referenzierung kuemmern
-	#
-	#	Eine ausfuehrliche Variablenbeschreibung befindet sich
-	#	init_module_toc();
-	#
-	############################################################	*/
+/*******************************************************************************
+*
+*  Project name : UDO
+*  Module name  : toc.c
+*  Symbol prefix: toc
+*
+*  Copyright    : 1995-2001 Dirk Hagedorn
+*  Open Source  : since 2001
+*
+*                 This program is free software; you can redistribute it and/or
+*                 modify it under the terms of the GNU General Public License
+*                 as published by the Free Software Foundation; either version 2
+*                 of the License, or (at your option) any later version.
+*                 
+*                 This program is distributed in the hope that it will be useful,
+*                 but WITHOUT ANY WARRANTY; without even the implied warranty of
+*                 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*                 GNU General Public License for more details.
+*                 
+*                 You should have received a copy of the GNU General Public License
+*                 along with this program; if not, write to the Free Software
+*                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*  Description  : This module contains routines wich handle chapters, labels, aliases,
+*                 table of contents and automatic referencing.
+*
+*                 Please find a detailed description of all variables in
+*                 init_module_toc().
+*
+*-------------------------------------------------------------------------------
+*
+*  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
+*  Co-Authors   : Ulf Dunkel (fd)
+*  Write access : fd
+*
+*  Notes        : Please add yourself as co-author when you change this file.
+*
+*-------------------------------------------------------------------------------
+*  Things to do : re-write UDO string and encoding engine for full Unicode support 
+*
+*-------------------------------------------------------------------------------
+*  History:
+*
+*  2008:
+*    fd  Nov 14: indexudo.html now capitalizes the A-Z jump labels (issue #76 solved)
+*
+******************************************|************************************/
+
+/*******************************************************************************
+*
+*     CONSTANTS
+*
+******************************************|************************************/
 
 #ifndef ID_TOC_C
 #define ID_TOC_C
 const char *id_toc_c= "@(#) toc.c       $DATE$";
 #endif
+
+
+
+
+
+/*******************************************************************************
+*
+*     INCLUDE FILES
+*
+******************************************|************************************/
 
 #include "import.h"
 #include <stdio.h>
@@ -151,9 +186,16 @@ LOCAL char		html_target[64];
 LOCAL char		*html_frames_toc_title;		/* V6.5.16 [GS] */
 LOCAL char		*html_frames_con_title;		/* V6.5.16 [GS] */
 
-/*	############################################################
-	# Prototypen lokaler Funktionen
-	############################################################	*/
+
+
+
+
+/*******************************************************************************
+*
+*     LOCAL PROTOTYPES
+*
+******************************************|************************************/
+
 LOCAL void output_aliasses ( void );
 
 LOCAL BOOLEAN add_ref ( const char *r );
@@ -4725,7 +4767,9 @@ GLOBAL BOOLEAN save_html_index(void)
       html2sys(dummy);                    /* convert HTML characters to system characters */
       thisc = dummy[0];                   /* use first character for comparison */
       
-      if (toupper(thisc) != toupper(lastc))
+      thisc = toupper(thisc);             /* always use capitalized index chars (issue #76) */
+      
+      if (thisc != lastc)
       {
                                           /* set anchor entry for index A-Z list */
          
@@ -4758,7 +4802,9 @@ GLOBAL BOOLEAN save_html_index(void)
       html2sys(dummy);                    /* convert HTML characters to system characters - V6.5.20 [gs] */
       thisc = dummy[0];                   /* V6.5.20 [gs] */
       
-      if (toupper(thisc) != toupper(lastc))
+      thisc = toupper(thisc);             /* always use capitalized index chars (issue #76) */
+      
+      if (thisc != lastc)
       {
          if (lastc != EOS)                /* close previous character group of index entries */
             fprintf(uif, "</p>\n");
