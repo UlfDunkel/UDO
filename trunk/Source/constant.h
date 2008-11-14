@@ -1,27 +1,47 @@
+/*******************************************************************************
+*
+*  Project name : UDO
+*  Module name  : constant.h
+*  Symbol prefix: constant
+*
+*  Copyright    : 1995-2001 Dirk Hagedorn
+*  Open Source  : since 2001
+*
+*                 This program is free software; you can redistribute it and/or
+*                 modify it under the terms of the GNU General Public License
+*                 as published by the Free Software Foundation; either version 2
+*                 of the License, or (at your option) any later version.
+*                 
+*                 This program is distributed in the hope that it will be useful,
+*                 but WITHOUT ANY WARRANTY; without even the implied warranty of
+*                 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*                 GNU General Public License for more details.
+*                 
+*                 You should have received a copy of the GNU General Public License
+*                 along with this program; if not, write to the Free Software
+*                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*-------------------------------------------------------------------------------
+*
+*  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
+*  Co-Authors   : Ulf Dunkel (fd)
+*  Write access : fd
+*
+*  Notes        : Please add yourself as co-author when you change this file.
+*
+*-------------------------------------------------------------------------------
+*  Things to do : re-write UDO string and encoding engine for full Unicode support 
+*
+*-------------------------------------------------------------------------------
+*  History:
+*
+*  2008:
+*    fd  Nov 14: TOPOL introduced
+*
+******************************************|************************************/
+
 #ifndef CONSTANT_H
 #define CONSTANT_H
-
-/*	############################################################
-	# @(#) constant.h
-	# @(#)
-	# @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
-	# @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)
-	#
-	# This program is free software; you can redistribute it and/or
-	# modify it under the terms of the GNU General Public License
-	# as published by the Free Software Foundation; either version 2
-	# of the License, or (at your option) any later version.
-	# 
-	# This program is distributed in the hope that it will be useful,
-	# but WITHOUT ANY WARRANTY; without even the implied warranty of
-	# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	# GNU General Public License for more details.
-	# 
-	# You should have received a copy of the GNU General Public License
-	# along with this program; if not, write to the Free Software
-	# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-	# 
-	############################################################	*/
 
 #define	TOASC			0		/* ASCII					*/
 #define	TOMAN			1		/* ASCII (formatiert)		*/
@@ -51,20 +71,23 @@
 #define	TOHAH			25		/* HTML Apple Help			*/	/* V6.5.17 */
 #define	MAXDESTTYPE		26		/* Anzahl Ausgabeformate	*/
 
-#define	TOGER			0		/* Deutsch					*/
-#define	TOENG			1		/* Englisch					*/
-#define	TOFRA			2		/* Franzoesisch				*/
-#define	TOITA			3		/* Italienisch				*/
-#define	TOSPA			4		/* Spanisch					*/
-#define	TOSWE			5		/* Schwedisch				*/
-#define	TOPOR			6		/* Portugiesisch			*/
-#define	TODUT			7		/* Hollaendisch				*/
-#define	TODAN			8		/* Daenisch					*/
-#define	TONOR			9		/* Norwegisch				*/
-#define	TOFIN			10		/* Finnisch					*/
-#define  TOCZE			11		/* Tschechisch				*/	/* V6.5.19 */
-#define  TOLVA			12		/* Lettisch (Latvian)   */
-#define	MAXDESTLANG 13		/* Anzahl Ausgabesprachen	*/
+
+#define TOGER         0    /* German */
+#define TOENG         1    /* English */
+#define TOFRA         2    /* French */
+#define TOITA         3    /* Italan */
+#define TOSPA         4    /* Spanish */
+#define TOSWE         5    /* Swedish */
+#define TOPOR         6    /* Portugese */
+#define TODUT         7    /* Dutch */
+#define TODAN         8    /* Danish */
+#define TONOR         9    /* Norwegian */
+#define TOFIN        10    /* Finnish */
+#define TOCZE        11    /* Czech */
+#define TOLVA        12    /* Latvian */
+#define TOPOL        13    /* Polish */
+
+#define MAXDESTLANG  14    /* total # of supported languages */
 
 
 /*	############################################################
