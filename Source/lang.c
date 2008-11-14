@@ -1,31 +1,65 @@
-/*      ##############################################################
-        # @(#) udo.c
-        # @(#)
-        # @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
-        # @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)
-        #
-        # This program is free software; you can redistribute it and/or
-        # modify it under the terms of the GNU General Public License
-        # as published by the Free Software Foundation; either version 2
-        # of the License, or (at your option) any later version.
-        # 
-        # This program is distributed in the hope that it will be useful,
-        # but WITHOUT ANY WARRANTY; without even the implied warranty of
-        # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        # GNU General Public License for more details.
-        # 
-        # You should have received a copy of the GNU General Public License
-        # along with this program; if not, write to the Free Software
-        # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-        # 
-        ##############################################################
-        ##############################################################  */
+/*******************************************************************************
+*
+*  Project name : UDO
+*  Module name  : lang.c
+*  Symbol prefix: lang
+*
+*  Copyright    : 1995-2001 Dirk Hagedorn
+*  Open Source  : since 2001
+*
+*                 This program is free software; you can redistribute it and/or
+*                 modify it under the terms of the GNU General Public License
+*                 as published by the Free Software Foundation; either version 2
+*                 of the License, or (at your option) any later version.
+*                 
+*                 This program is distributed in the hope that it will be useful,
+*                 but WITHOUT ANY WARRANTY; without even the implied warranty of
+*                 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*                 GNU General Public License for more details.
+*                 
+*                 You should have received a copy of the GNU General Public License
+*                 along with this program; if not, write to the Free Software
+*                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*-------------------------------------------------------------------------------
+*
+*  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
+*  Co-Authors   : Ulf Dunkel (fd)
+*  Write access : fd
+*
+*  Notes        : Please add yourself as co-author when you change this file.
+*
+*-------------------------------------------------------------------------------
+*  Things to do : re-write UDO string and encoding engine for full Unicode support 
+*
+*-------------------------------------------------------------------------------
+*  History:
+*
+*  2008:
+*    fd  Nov 14: Latvian strings localized (hard encoded in windows-1257 so far)
+*
+******************************************|************************************/
 
+/*******************************************************************************
+*
+*     CONSTANTS
+*
+******************************************|************************************/
 
 #ifndef ID_LANG_C
 #define ID_LANG_C
 const char *id_lang_c= "@(#) lang.c       $Date$";
 #endif
+
+
+
+
+
+/*******************************************************************************
+*
+*     INCLUDE FILES
+*
+******************************************|************************************/
 
 #include "import.h"
 #include <stdio.h>
@@ -125,11 +159,15 @@ LOCAL const char *MONTH_CZE[] =
 };
 */
 
-/* Latvian windows-1257 encoding (not translated yet) */
+/* Latvian windows-1257 encoding */
 LOCAL const char *MONTH_LVA[] =
 {
-   "January", "February", "March", "April", "May", "June",
-   "July", "August", "September", "October", "November", "December"
+   /* â = small latin character a with dash above */
+   /* î = small latin character i with dash above */
+   /* û = small latin character u with dash above */
+   
+   "Janvâris", "Februâris", "Marts", "Aprîlis", "Maijs", "Jûnijs",
+   "Jûlijs", "Augusts", "Septembris", "Oktobris", "Novembris", "Decembris"
 };
 
 
@@ -553,33 +591,40 @@ GLOBAL void init_lang ( void )
       break;
 */
    case TOLVA:
-      strcpy(lang.preface,    "Preface");
-      strcpy(lang.chapter,    "Chapter");
-      strcpy(lang.title,      "Title");
-      strcpy(lang.appendix,   "Appendix");
-      strcpy(lang.contents,   "Contents");
-      strcpy(lang.listfigure, "List of Figures");
-      strcpy(lang.listtable,  "List of Tables");
-      strcpy(lang.figure,     "Figure");
-      strcpy(lang.table,      "Table");
-      strcpy(lang.index,      "Index");
-      strcpy(lang.page,       "page");
-      strcpy(lang.see,        "see");
-      strcpy(lang.also,       "see also");
-      strcpy(lang.by,         "by");
-      strcpy(lang.fur,        "for");
-      strcpy(lang.up,         "&Up");
-      strcpy(lang.exit,       "E&xit");
-      strcpy(lang.unknown,    "Unknown");
-      strcpy(lang.update,     "Last updated on");
-      strcpy(lang.lcid,       "LCID=0x426 0x0 0x0 ;Latvian");
-      strcpy(lang.html_home,  "Home");
-      strcpy(lang.html_up,    "Up");
-      strcpy(lang.html_prev,  "Prev");
-      strcpy(lang.html_next,  "Next");
-      strcpy(lang.html_lang,  "lv");
-      strcpy(lang.html_start, "Begin of the document");
-      strcpy(lang.distributor,"Distributor:");
+      /* â = small latin character a with dash above */
+      /* ç = small latin character e with dash above */
+      /* î = small latin character i with dash avove */
+      /* ï = small latin character l with colon below */
+      /* ð = small latin character s with caron above */
+      /* û = small latin character u with dash above */
+   
+      strcpy(lang.preface, "Priekðvârds");
+      strcpy(lang.chapter, "Nodaïa");
+      strcpy(lang.title, "Nosaukums");
+      strcpy(lang.appendix, "Pielikums");
+      strcpy(lang.contents, "Saturs");
+      strcpy(lang.listfigure, "Attçlu saraksts");
+      strcpy(lang.listtable, "Tabulu saraksts");
+      strcpy(lang.figure, "Attçls");
+      strcpy(lang.table, "Tabula");
+      strcpy(lang.index, "Alfabçtiskais râdîtâjs");
+      strcpy(lang.page, "lappuse");
+      strcpy(lang.see, "skatît");
+      strcpy(lang.also, "skatît arî");
+      strcpy(lang.by, "pçc");
+      strcpy(lang.fur, "");
+      strcpy(lang.up, "&Augðup");
+      strcpy(lang.exit, "I&ziet");
+      strcpy(lang.unknown, "Nezinâms");
+      strcpy(lang.update, "Pçdçjoreiz atjaunots");
+      strcpy(lang.lcid, "LCID=0x426 0x0 0x0 ;Latvian");  /* Latvieðu */
+      strcpy(lang.html_home, "Sâkums");
+      strcpy(lang.html_up, "Augðup");
+      strcpy(lang.html_prev, "Iepriekðçjais");
+      strcpy(lang.html_next, "Nâkamais");
+      strcpy(lang.html_lang, "lv");
+      strcpy(lang.html_start, "Dokumenta sâkums");
+      strcpy(lang.distributor,"Izplatîtâjs:");
 /*
       uni2ascii(lang.preface);
       uni2ascii(lang.appendix);
