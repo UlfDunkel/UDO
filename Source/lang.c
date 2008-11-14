@@ -37,6 +37,7 @@
 *
 *  2008:
 *    fd  Nov 14: Latvian strings localized (hard encoded in windows-1257 so far)
+*    fd  Nov 14: Polish strings introduced
 *
 ******************************************|************************************/
 
@@ -170,6 +171,13 @@ LOCAL const char *MONTH_LVA[] =
    "Jûlijs", "Augusts", "Septembris", "Oktobris", "Novembris", "Decembris"
 };
 
+/* Polish windows-???? encoding */
+LOCAL const char *MONTH_POL[] =
+{
+   "stycze(!'n)", "luty", "marzec", "kwiecie(!'n)", "maj", "czerwiec",
+   "lipiec", "sierpien", "wrzesie(!'n)", "pa(!'z)dziernik", "listopad", "grudzie(!'n)"
+};
+
 
    
 
@@ -244,6 +252,11 @@ GLOBAL void init_lang_date ( void )
 
    case TOLVA:     /* Latvian */
       sprintf(lang.today, "%d. %s %d", zeit->tm_mday, MONTH_LVA[zeit->tm_mon], 1900+zeit->tm_year);
+      sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
+      break;
+
+   case TOPOL:     /* Polish */
+      sprintf(lang.today, "%d. %s %d", zeit->tm_mday, MONTH_POL[zeit->tm_mon], 1900+zeit->tm_year);
       sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
       break;
 
@@ -639,6 +652,36 @@ GLOBAL void init_lang ( void )
       uni2ascii(lang.html_next);
       uni2ascii(lang.html_start);
 */
+      break;
+
+   case TOPOL:
+      strcpy(lang.preface,    "Preface");
+      strcpy(lang.chapter,    "Chapter");
+      strcpy(lang.title,      "Title");
+      strcpy(lang.appendix,   "Appendix");
+      strcpy(lang.contents,   "Contents");
+      strcpy(lang.listfigure, "List of Figures");
+      strcpy(lang.listtable,  "List of Tables");
+      strcpy(lang.figure,     "Figure");
+      strcpy(lang.table,      "Table");
+      strcpy(lang.index,      "Index");
+      strcpy(lang.page,       "page");
+      strcpy(lang.see,        "see");
+      strcpy(lang.also,       "see also");
+      strcpy(lang.by,         "by");
+      strcpy(lang.fur,        "for");
+      strcpy(lang.up,         "&Up");
+      strcpy(lang.exit,       "E&xit");
+      strcpy(lang.unknown,    "Unknown");
+      strcpy(lang.update,     "Last updated on");
+      strcpy(lang.lcid,       "LCID=0x415 0x0 0x0 ;Polish");
+      strcpy(lang.html_home,  "Home");
+      strcpy(lang.html_up,    "Up");
+      strcpy(lang.html_prev,  "Prev");
+      strcpy(lang.html_next,  "Next");
+      strcpy(lang.html_lang,  "en");
+      strcpy(lang.html_start, "Begin of the document");
+      strcpy(lang.distributor,"Distributor:");
       break;
 
    default:        /* Deutsch ist default */
