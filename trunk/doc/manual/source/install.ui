@@ -195,6 +195,8 @@ the program with a certain software.
 !end_itemize
 !endif
 Anmerkung: Eine manpage ist derzeit nicht Teil der Mac-OS-X-Distribution.
+
+Um in das Verzeichniss zu kommen kann man Åber den MenÅpunkt "Gehe zu/Gehe zum Ordner ..." des Finders gehen.
 # ------------------------------------------------------------------------------
 !iflang [english]
 !begin_itemize !short
@@ -202,6 +204,8 @@ Anmerkung: Eine manpage ist derzeit nicht Teil der Mac-OS-X-Distribution.
 !item Unpack the ZIP archiv and copy the executable file ''(!T)udo(!t)'' to (!T)/usr/bin(!t).
 !end_itemize
 Please note: a manpage is currently not part of the Mac~OS~X distribution.
+# English:
+Um in das Verzeichniss zu kommen kann man Åber den MenÅpunkt "Gehe zu/Gehe zum Ordner ..." des Finders gehen.
 !endif
 
 (!DocumentationWorkInProgress)
