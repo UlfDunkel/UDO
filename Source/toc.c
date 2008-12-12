@@ -21,7 +21,7 @@
 *                 along with this program; if not, write to the Free Software
 *                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 *
-*  Description  : This module contains routines wich handle chapters, labels, aliases,
+*  Description  : This module contains routines which handle chapters, labels, aliases,
 *                 table of contents and automatic referencing.
 *
 *                 Please find a detailed description of all variables in
