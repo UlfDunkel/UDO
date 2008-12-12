@@ -1,27 +1,67 @@
-/*      ############################################################
-        # @(#) chr.c
-        # @(#)
-        # @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
-        # @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)
-        #
-        # This program is free software; you can redistribute it and/or
-        # modify it under the terms of the GNU General Public License
-        # as published by the Free Software Foundation; either version 2
-        # of the License, or (at your option) any later version.
-        # 
-        # This program is distributed in the hope that it will be useful,
-        # but WITHOUT ANY WARRANTY; without even the implied warranty of
-        # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        # GNU General Public License for more details.
-        # 
-        # You should have received a copy of the GNU General Public License
-        # along with this program; if not, write to the Free Software
-        # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-        ############################################################    */
+/*******************************************************************************
+*
+*  Project name : UDO
+*  Module name  : chr.c
+*  Symbol prefix: chr
+*
+*  Copyright    : 1995-2001 Dirk Hagedorn
+*  Open Source  : since 2001
+*
+*                 This program is free software; you can redistribute it and/or
+*                 modify it under the terms of the GNU General Public License
+*                 as published by the Free Software Foundation; either version 2
+*                 of the License, or (at your option) any later version.
+*                 
+*                 This program is distributed in the hope that it will be useful,
+*                 but WITHOUT ANY WARRANTY; without even the implied warranty of
+*                 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*                 GNU General Public License for more details.
+*                 
+*                 You should have received a copy of the GNU General Public License
+*                 along with this program; if not, write to the Free Software
+*                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*  Description  : This module contains routines which convert strings between ISO and
+*                 the system font. There are also function which replace character.
+*                 
+*
+*-------------------------------------------------------------------------------
+*
+*  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
+*  Co-Authors   : Ulf Dunkel (fd), Gerhard Stoll (ggs)
+*  Write access : fd, ggs
+*
+*  Notes        : Please add yourself as co-author when you change this file.
+*
+*-------------------------------------------------------------------------------
+*  Things to do : re-write UDO string and encoding engine for full Unicode support 
+*
+*-------------------------------------------------------------------------------
+*  History:
+*
+*  2008:
+*    fd  Nov 14: indexudo.html now capitalizes the A-Z jump labels (issue #76 solved)
+*    ggs Dec 12: The output for T-Guide and PueC-Help will always in Atari
+*                charcater set
+*
+******************************************|************************************/
+
+/*******************************************************************************
+*
+*     CONSTANTS
+*
+******************************************|************************************/
+
 #ifndef ID_CHARS_C
 #define ID_CHARS_C
-const char *id_chr_c= "@(#) chr.c       08.04.2004";
+const char *id_chr_c= "@(#) chr.c       $DATE$";
 #endif
+
+/*******************************************************************************
+*
+*     INCLUDE FILES
+*
+******************************************|************************************/
 
 #include "import.h"
 #include <stdio.h>
@@ -46,6 +86,7 @@ const char *id_chr_c= "@(#) chr.c       08.04.2004";
 #include        "chr_tos.h"
 #else
 #include        "tos2iso.h"
+#include        "iso2tos.h"
 #endif
 
 #ifdef __MSDOS__
@@ -142,9 +183,12 @@ LOCAL char      *html_specs[HTML_SPEC_MAX] =
 
 
 
-/*      ############################################################
-        # lokale Prototypen
-        ############################################################    */
+/*******************************************************************************
+*
+*     LOCAL PROTOTYPES
+*
+******************************************|************************************/
+
 LOCAL void uni2misc ( char *s );
 
 LOCAL void iso2system ( char *s );
@@ -190,19 +234,20 @@ LOCAL void str2manunder( char *d, const char *s );
 
 GLOBAL void convert_sz(
 
-char  *s)  /* single character */
+char  *s)  /* pointer to a string */
 {
    if (html_ignore_8bit)                  /* simply ignore conversion */
       return;
 
 #ifdef __TOS__
-        replace_char(s, "\341", "\236");
+   replace_char(s, "\341", "\236");
 #else
 
 #if !defined(__MSDOS__) && !defined(__MSDOS850__)
-        replace_char(s, "\236", "\341");
+   if ( desttype != TOSTG || desttype == TOPCH )
+      replace_char(s, "\236", "\341");
 #else
-        UNUSED(s);
+   UNUSED(s);
 #endif
 #endif
 }       /* convert_sz */
@@ -342,6 +387,50 @@ LOCAL void iso2system ( char *s )
 }       /* iso2system */
 
 
+#ifndef __TOS__
+LOCAL void iso2tos ( char *s )
+{
+        /* Optimierter Suchmethode, ohne zeitraubendes strlen() */
+        char *ptr;
+        int idx;
+
+        ptr= s;
+
+        while (*ptr!=EOS)
+        {
+                if ( ((UCHAR) *ptr) > 127 )
+                {       idx= ((UCHAR) *ptr)-128;
+                        if ( iso2tos_item[idx].charsys!=EOS )
+                        {       *ptr= iso2tos_item[idx].charsys;
+                        }
+                        else
+                        {       warning_cannot_recode(*ptr, "Latin1", "system charset");
+                                *ptr= '?';
+                        }
+                }
+#ifdef __MSDOS__
+                else
+                {
+                        if ( *ptr == '\247' )
+                        {       *ptr= '\025';
+                        }
+                }
+#endif
+#ifdef __MSDOS850__
+                else
+                {
+                        if ( *ptr == '\247' )
+                        {       *ptr= '\025';
+                        }
+                }
+#endif
+                ptr++;
+        }
+
+}       /* iso2tos */
+#endif
+
+
 LOCAL void iso2sys ( char *s )
 {
         if (iCharset==CODE_LAT1)        /* PL14: TOLYX */
@@ -355,10 +444,16 @@ LOCAL void iso2sys ( char *s )
 #if USE_LATIN1_CHARSET
                 /* r6pl2: System benutzt Latin1-Zeichensatz? Dann ist */
                 /* eine weitere Umwandlung/Kontroll unnoetig! */
-                UNUSED(s);
-                return;
+   if ( desttype == TOSTG || desttype == TOPCH )
+      iso2tos(s);
+   return;
 #else
-        iso2system(s);
+#ifndef __TOS__
+   if ( desttype == TOSTG || desttype == TOPCH )
+      iso2tos(s);
+   else
+#endif
+      iso2system(s);
 #endif
 }       /* iso2sys */
 
@@ -1551,7 +1646,7 @@ GLOBAL void replace_2at_by_1at ( char *s )
 GLOBAL void replace_1at_by_2at ( char *s )
 {
         qreplace_all(s, "@", 1, "@@", 2);
-}       /* replace_2at_by_1at */
+}       /* replace_1at_by_2at */
 
 
 
