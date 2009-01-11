@@ -24,8 +24,8 @@
 *-------------------------------------------------------------------------------
 *
 *  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
-*  Co-Authors   : Ulf Dunkel (fd)
-*  Write access : fd
+*  Co-Authors   : Ulf Dunkel (fd), Gerhard Stoll (ggs)
+*  Write access : fd, ggs
 *
 *  Notes        : Please add yourself as co-author when you change this file.
 *
@@ -41,6 +41,8 @@
 *    DH  Oct 02: last DH version
 *  2008:
 *    fd  Nov 14: TOPOL introduced
+*  2009:
+*    ggs Jan 11: Change year
 *
 ******************************************|************************************/
 
@@ -7184,7 +7186,7 @@ LOCAL void output_preamble ( void )
 		case TOLYX:
 			voutlnf("# This file was created by UDO Version %s.%s.%s", UDO_REL, UDO_SUBVER, UDO_PL);
 			outln("# UDO (C) 1995-2001 by Dirk Hagedorn (info@dirk-hagedorn.de)");
-			outln("# UDO (C) 2001-2008 by The UDO Community (www.udo-open-source.org)");
+			outln("# UDO (C) 2001-2009 by The UDO Community (www.udo-open-source.org)");
 			outln("\\lyxformat 2.10");
 			voutlnf("\\textclass %s", (use_style_book) ? "book" : "article");
 			outln("\\inputencoding latin1");
