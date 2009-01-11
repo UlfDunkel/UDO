@@ -1,24 +1,46 @@
-/*	##############################################################
-	# @(#) udo2pdf.h
-	# @(#)
-	# @(#) Copyright (c) 2002 by Norbert Hanz
-	# @(#) (norbert@familie-hanz.de)
-	#
-	# This program is free software; you can redistribute it and/or
-	# modify it under the terms of the GNU General Public License
-	# as published by the Free Software Foundation; either version 2
-	# of the License, or (at your option) any later version.
-	# 
-	# This program is distributed in the hope that it will be useful,
-	# but WITHOUT ANY WARRANTY; without even the implied warranty of
-	# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	# GNU General Public License for more details.
-	# 
-	# You should have received a copy of the GNU General Public License
-	# along with this program; if not, write to the Free Software
-	# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-	# 
-	###############################################################*/
+/*******************************************************************************
+*
+*  Project name : UDO
+*  Module name  : udo2pdf.h
+*  Symbol prefix: udo2pdf
+*
+*  Copyright    : 2002 Norbert Hanz
+*  Open Source  : 
+*                 This program is free software; you can redistribute it and/or
+*                 modify it under the terms of the GNU General Public License
+*                 as published by the Free Software Foundation; either version 2
+*                 of the License, or (at your option) any later version.
+*                 
+*                 This program is distributed in the hope that it will be useful,
+*                 but WITHOUT ANY WARRANTY; without even the implied warranty of
+*                 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*                 GNU General Public License for more details.
+*                 
+*                 You should have received a copy of the GNU General Public License
+*                 along with this program; if not, write to the Free Software
+*                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*  Description  : 
+*
+*
+*-------------------------------------------------------------------------------
+*
+*  Author       : Norbert Hanz (norbert@familie-hanz.de)
+*  Co-Authors   : Gerhard Stoll (ggs)
+*  Write access : ggs
+*
+*  Notes        : Please add yourself as co-author when you change this file.
+*
+*-------------------------------------------------------------------------------
+*  Things to do : re-write UDO string and encoding engine for full Unicode support 
+*
+*-------------------------------------------------------------------------------
+*  History:
+*
+*  2009:
+*    ggs Jan 11: Change year
+*
+******************************************|************************************/
 
 const char *UDO2PDF=
 	"%% History:\n"
@@ -445,7 +467,7 @@ const char *UDO2PDF=
 	"  udo_os Center setAlign newline\n"
 	"  newline \n"
 	"  (Copyright \\251 1995-2001 by Dirk Hagedorn) Center setAlign newline\n"
-	"  (Copyright \\251 2001-2008 by The UDO Community) Center setAlign newline\n"
+	"  (Copyright \\251 2001-2009 by The UDO Community) Center setAlign newline\n"
 	"  (UDO ist Open Source) Center setAlign newline\n"
 	"  newline\n"
 	"  (UDO ist ein Programm, welches Textdateien, die im) Center setAlign newline\n"
@@ -478,7 +500,7 @@ const char *UDO2PDF=
 	"  udo_os Center setAlign newline\n"
 	"  newline\n"
 	"  (Copyright \\251 1995-2001 by Dirk Hagedorn) Center setAlign newline\n"
-	"  (Copyright \\251 2001-2008 by The UDO Community) Center setAlign newline\n"
+	"  (Copyright \\251 2001-2009 by The UDO Community) Center setAlign newline\n"
 	"  (UDO is Open Source) Center setAlign newline\n"
 	"  newline\n"
 	"  (UDO is a program that converts files that are written) Center setAlign newline\n"
