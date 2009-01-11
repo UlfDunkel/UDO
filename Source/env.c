@@ -1,33 +1,68 @@
-/*	############################################################
-	# @(#) env.c
-	# @(#)
-	# @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
-	# @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)
-	#
-	# This program is free software; you can redistribute it and/or
-	# modify it under the terms of the GNU General Public License
-	# as published by the Free Software Foundation; either version 2
-	# of the License, or (at your option) any later version.
-	# 
-	# This program is distributed in the hope that it will be useful,
-	# but WITHOUT ANY WARRANTY; without even the implied warranty of
-	# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	# GNU General Public License for more details.
-	# 
-	# You should have received a copy of the GNU General Public License
-	# along with this program; if not, write to the Free Software
-	# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-	#
-	#
-	# Routinen, die die Ausgabe der zahlreichen Umgebungen
-	# verwalten und fuer token_output() vorbereiten
-	#
-	############################################################	*/
+/*******************************************************************************
+*
+*  Project name : UDO
+*  Module name  : env.c
+*  Symbol prefix: env
+*
+*  Copyright    : 1995-2001 Dirk Hagedorn
+*  Open Source  : since 2001
+*
+*                 This program is free software; you can redistribute it and/or
+*                 modify it under the terms of the GNU General Public License
+*                 as published by the Free Software Foundation; either version 2
+*                 of the License, or (at your option) any later version.
+*                 
+*                 This program is distributed in the hope that it will be useful,
+*                 but WITHOUT ANY WARRANTY; without even the implied warranty of
+*                 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*                 GNU General Public License for more details.
+*                 
+*                 You should have received a copy of the GNU General Public License
+*                 along with this program; if not, write to the Free Software
+*                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*  Description  : This module contains routines which handle the environment
+*                 Routinen, die die Ausgabe der zahlreichen Umgebungen
+*	               verwalten und fuer token_output() vorbereiten
+*
+*
+*-------------------------------------------------------------------------------
+*
+*  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
+*  Co-Authors   : Ulf Dunkel (fd), Gerhard Stoll (ggs)
+*  Write access : fd, ggs
+*
+*  Notes        : Please add yourself as co-author when you change this file.
+*
+*-------------------------------------------------------------------------------
+*  Things to do : re-write UDO string and encoding engine for full Unicode support 
+*
+*-------------------------------------------------------------------------------
+*  History:
+*
+*  2008:
+*    fd  Nov 14: indexudo.html now capitalizes the A-Z jump labels (issue #76 solved)
+*  2009:
+*    ggs Jan 11: Bullet for the !begin_itemize, will always use in ST-Guide
+*
+******************************************|************************************/
+
+/*******************************************************************************
+*
+*     CONSTANTS
+*
+******************************************|************************************/
 
 #ifndef ID_ENV_C
 #define ID_ENV_C
 const char *id_env_c= "@(#) env.c       16.07.1998";
 #endif
+
+/*******************************************************************************
+*
+*     INCLUDE FILES
+*
+******************************************|************************************/
 
 #include "import.h"
 #include <stdio.h>
@@ -61,6 +96,7 @@ const char *id_env_c= "@(#) env.c       16.07.1998";
 /*	############################################################
 	# lokale Variablen
 	############################################################	*/
+
 LOCAL int	env_kind[MAXENVLEVEL+1];	/* Art der Umgebung (LIST_BOLD, ...	*/
 
 LOCAL int	enum_count[MAXENVLEVEL+1];	/* Item-Zaehler fuer enumerate		*/
@@ -79,7 +115,6 @@ LOCAL BOOLEAN	bCalledEndAppendix;
 LOCAL int		pre_linedraw_charset;
 
 
-/* New in r6pl15 [NHz] */
 LOCAL const PAPERFORMAT paperSize[MAXPAPERSIZE]=
 {
 	{ "A3PORTRAIT", 2970, 4200, 842, 1191, 1136, 85, 780, 72, 0, 0, FALSE },
@@ -91,9 +126,12 @@ LOCAL const PAPERFORMAT paperSize[MAXPAPERSIZE]=
 };
 
 
-/*	############################################################
-	# lokale Prototypen
-	############################################################	*/
+/*******************************************************************************
+*
+*     LOCAL PROTOTYPES
+*
+******************************************|************************************/
+
 LOCAL int strlen_prev_indent ( void );
 LOCAL void strcat_prev_indent ( char *s );
 LOCAL void strcpy_prev_indent ( char *s );
@@ -3712,32 +3750,26 @@ GLOBAL void init_env_itemchar ( void )
 			strcpy(itemchar[1], ".");
 			if (!no_umlaute)	/* PL6 */
 			{
+			   if ( desttype == TOSTG )
+			      strcpy(itemchar[1], "\371");
+			   else
+			   {
 #ifdef __TOS__
-				strcpy(itemchar[1], "\371");
-#endif
-
-#if 0
-#ifdef __MSDOS__
-				strcpy(itemchar[1], "\371" );
-#endif
+				   strcpy(itemchar[1], "\371");
 #endif
 
 #ifdef __NEXTSTEP__
-				strcpy(itemchar[1], "\367");
+				   strcpy(itemchar[1], "\367");
 #endif
 
 #ifdef __HPUX_ROMAN8__
-				strcpy(itemchar[1], "\374");
+				   strcpy(itemchar[1], "\374");
 #endif
 
 #if defined(__MACOS__) || defined(__MACOSX__) || defined(__BEOS__)
-				strcpy(itemchar[1], "\245");
+				   strcpy(itemchar[1], "\245");
 #endif
-
-#if 0 /*USE_LATIN1_CHARSET*/
-				strcpy(itemchar[1], "\255");
-#endif
-
+				} /* if ( desttype == TOSTG ) */
 			}	/* if (!no_umlaute) PL6 */
 
 			strcpy(itemchar[2], "-");
