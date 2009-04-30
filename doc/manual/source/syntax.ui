@@ -1,5 +1,9 @@
 # doc/manual/source/syntax.ui
 # letzte Änderungen: 18.09.2005 / last changes: Sep 18, 2005
+# 
+# History:
+# 2009:
+#   fd  Apr 30: 'latvian' and 'polish' added
 
 
 ################################################################################
@@ -6521,12 +6525,14 @@ Ausgabe der Zieldatei verwendet wird. Hierbei gelten folgende Zeichenketten:
 !label Sprachen
 !begin_xlist [swedish:] !short
 !item [czech:]   Tschechisch
-!item [danish:]   Dänisch
+!item [danish:]  Dänisch
 !item [dutch:]   Holländisch
 !item [english:] Englisch
 !item [french:]  Französisch
 !item [german:]  Deutsch
 !item [italian:] Italienisch
+!item [latvian:] Lettisch
+!item [polish:]  Polnisch
 !item [spanish:] Spanisch
 !item [swedish:] Schwedisch
 !end_xlist
@@ -6583,13 +6589,15 @@ the destination file. Use the following words to test the language:
 !label language
 !label languages
 !begin_xlist [swedish:] !short
-!item [czech:]   Tschechisch
-!item [danish:]   Danish
+!item [czech:]   Czech
+!item [danish:]  Danish
 !item [dutch:]   Dutch
 !item [english:] English
 !item [french:]  French
 !item [german:]  German
 !item [italian:] Italian
+!item [latvian:] Latvian
+!item [polish:]  Polish
 !item [spanish:] Spanish
 !item [swedish:] Swedish
 !end_xlist
