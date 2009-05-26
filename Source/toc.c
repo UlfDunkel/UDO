@@ -43,6 +43,8 @@
 *
 *  2008:
 *    fd  Nov 14: indexudo.html now capitalizes the A-Z jump labels (issue #76 solved)
+*  2009:
+*    fd  May 26: closing bracket in <br%s> added
 *
 ******************************************|************************************/
 
@@ -8605,7 +8607,7 @@ const int         depth)              /* */
                      case TOHAH:             /* V6.5.17 */
                      case TOHTM:
                      case TOMHH:
-                        voutlnf("<br%s", closer);
+                        voutlnf("<br%s>", closer);
                         break;
                         
                      case TOTEX:
