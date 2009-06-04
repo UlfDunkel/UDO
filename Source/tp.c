@@ -1,23 +1,49 @@
-/*      ############################################################
-        # @(#) tp.c
-        # @(#)
-        # @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
-        # @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)
-        #
-        # This program is free software; you can redistribute it and/or
-        # modify it under the terms of the GNU General Public License
-        # as published by the Free Software Foundation; either version 2
-        # of the License, or (at your option) any later version.
-        # 
-        # This program is distributed in the hope that it will be useful,
-        # but WITHOUT ANY WARRANTY; without even the implied warranty of
-        # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        # GNU General Public License for more details.
-        # 
-        # You should have received a copy of the GNU General Public License
-        # along with this program; if not, write to the Free Software
-        # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-        ############################################################    */
+/*******************************************************************************
+*
+*  Project name : UDO
+*  Module name  : tp.c
+*  Symbol prefix: tp
+*
+*  Copyright    : 1995-2001 Dirk Hagedorn
+*  Open Source  : since 2001
+*
+*                 This program is free software; you can redistribute it and/or
+*                 modify it under the terms of the GNU General Public License
+*                 as published by the Free Software Foundation; either version 2
+*                 of the License, or (at your option) any later version.
+*                 
+*                 This program is distributed in the hope that it will be useful,
+*                 but WITHOUT ANY WARRANTY; without even the implied warranty of
+*                 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*                 GNU General Public License for more details.
+*                 
+*                 You should have received a copy of the GNU General Public License
+*                 along with this program; if not, write to the Free Software
+*                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*  Description  : This module contains routines which handle the environment
+*                 Routinen, die die Ausgabe der zahlreichen Umgebungen
+*	               verwalten und fuer token_output() vorbereiten
+*
+*
+*-------------------------------------------------------------------------------
+*
+*  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
+*  Co-Authors   : Ulf Dunkel (fd), Gerhard Stoll (ggs)
+*  Write access : fd, ggs
+*
+*  Notes        : Please add yourself as co-author when you change this file.
+*
+*-------------------------------------------------------------------------------
+*  Things to do : -
+*
+*-------------------------------------------------------------------------------
+*  History:
+*
+*  2009:
+*    fd  Jun 04: !docinfo [translator] introduced
+*
+******************************************|************************************/
 
 #ifndef ID_TP_C
 #define ID_TP_C
@@ -863,6 +889,14 @@ GLOBAL BOOLEAN set_docinfo(void)
    }
    
    
+   /* --- translator --- */
+   
+   if (strcmp(inhalt,"translator") == 0)
+   {
+      init_docinfo_data(data, &(titdat.translator), TRUE);
+      return TRUE;
+   }
+   
    /* --- distributor --- */
    
    if (strcmp(inhalt,"distributor") == 0)
@@ -908,6 +942,7 @@ GLOBAL void c_maketitle(void)
              has_programimage,  /* flag */
              has_address,       /* flag */
              has_company,       /* flag; New in V6.5.2 [NHz] */
+             has_translator,    /* flag */
              has_distributor;   /* flag */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
 
@@ -933,6 +968,7 @@ GLOBAL void c_maketitle(void)
    has_date         = (titdat.date         != NULL);
                                           /* New in V6.5.2 [NHz] */
    has_company      = (titdat.company      != NULL);
+   has_translator   = (titdat.translator   != NULL);
    has_distributor  = (titdat.distributor  != NULL);
 
    if ( !(    has_author
@@ -944,6 +980,7 @@ GLOBAL void c_maketitle(void)
            || has_date
            || has_address
            || has_company                 /* New in V6.5.2 [NHz] */
+           || has_translator
            || has_distributor
           )
       )
@@ -1059,6 +1096,13 @@ GLOBAL void c_maketitle(void)
          }
       }
 
+      if (has_translator)
+      {
+		   auto_quote_chars(lang.translator, FALSE);
+         voutlnf("\\vfill\n%s\\\\\n\\medskip", lang.translator);
+         voutlnf("%s \\\\", titdat.translator);
+      }
+
       if (has_distributor)
       {
 		   auto_quote_chars(lang.distributor, FALSE);
@@ -1119,6 +1163,12 @@ GLOBAL void c_maketitle(void)
          }
       }
       
+      if (has_translator)
+      {
+		   voutlnf("\\fill_bottom\n\\layout Subsubsection*\n\\align center\n\n%s\n", lang.translator);
+         voutlnf("\\layout Subsection*\n\\align center\n\n%s\n", titdat.translator);
+      }
+		
       if (has_distributor)
       {
 		   voutlnf("\\fill_bottom\n\\layout Subsubsection*\n\\align center\n\n%s\n", lang.distributor);
@@ -1181,6 +1231,14 @@ GLOBAL void c_maketitle(void)
 				   voutlnf("@center %s", titdat.address[i]);
             }
          }
+      }
+		
+      if (has_translator)
+      {
+		   outln("@sp 10");
+         voutlnf("@center %s", lang.translator);
+         outln("@sp 1");
+         voutlnf("@center %s", titdat.translator);
       }
 		
       if (has_distributor)
@@ -1269,6 +1327,14 @@ GLOBAL void c_maketitle(void)
          }
       }
 		
+      if (has_translator)
+      {
+		   outln("");
+         outlncenter(lang.translator);
+         outln("");
+         outlncenter(titdat.translator);
+      }
+
       if (has_distributor)
       {
 		   outln("");
@@ -1342,6 +1408,14 @@ GLOBAL void c_maketitle(void)
          }
       }
       
+      if (has_translator)
+      {
+		   outln("");
+         outlncenter(lang.translator);
+         outln("");
+         outlncenter(titdat.translator);
+      }
+
       if (has_distributor)
       {
 		   outln("");
@@ -1438,6 +1512,14 @@ GLOBAL void c_maketitle(void)
          outln("");
       }
       
+      if (has_translator)
+      {
+         outln("");
+         outlncenterfill(lang.translator);
+         outln("");
+         outlncenterfill(titdat.translator);
+      }
+
       if (has_distributor)
       {
          outln("");
@@ -1497,6 +1579,14 @@ GLOBAL void c_maketitle(void)
          }
          
          outln("");
+      }
+      
+      if (has_translator)
+      {
+         outln("");
+         outlncenter(lang.translator);
+         outln("");
+         outlncenter(titdat.translator);
       }
       
       if (has_distributor)
@@ -1595,6 +1685,18 @@ GLOBAL void c_maketitle(void)
          outln("    #");
       }
       
+      if (has_translator)
+      {
+         outln("    #");
+         strcpy(s1, lang.translator);
+         stringcenter(s1, 60);
+         voutlnf("    # %s", s1);
+         outln("    #");
+         strcpy(s1, titdat.translator);
+         stringcenter(s1, 60);
+         voutlnf("    # %s", s1);
+      }
+
       if (has_distributor)
       {
          outln("    #");
@@ -1670,6 +1772,13 @@ GLOBAL void c_maketitle(void)
                voutlnf("%s%s", titdat.address[i], rtf_par);
             }
          }
+      }
+      
+      if (has_translator)
+      {
+         auto_quote_chars(lang.translator, FALSE);
+         voutlnf("%s %s%s%s", rtf_par, lang.translator, rtf_par, rtf_par);
+         voutlnf("%s%s", titdat.translator, rtf_par);
       }
       
       if (has_distributor)
@@ -1758,6 +1867,13 @@ GLOBAL void c_maketitle(void)
                voutlnf("\\qc{%s}\\par\\pard", titdat.address[i]);
             }
          }
+      }
+
+      if (has_translator)
+      {
+         auto_quote_chars(lang.translator, FALSE);
+         voutlnf("\\par\\qc{%s}\\par\\pard", lang.translator);
+         voutlnf("\\qc{%s}\\par\\pard", titdat.translator);
       }
 
       if (has_distributor)
@@ -1854,6 +1970,13 @@ GLOBAL void c_maketitle(void)
          }
       }
 
+      if (has_translator)
+      {
+         auto_quote_chars(lang.translator, FALSE);
+         voutlnf("\\par\\qc %s\\par\\pard", lang.translator);
+         voutlnf("\\qc %s\\par\\pard", titdat.translator);
+      }
+      
       if (has_distributor)
       {
          auto_quote_chars(lang.distributor, FALSE);
@@ -1949,6 +2072,13 @@ GLOBAL void c_maketitle(void)
          }
       }
 
+      if (has_translator)
+      {
+         auto_quote_chars(lang.translator, FALSE);
+         voutlnf("<br%s>%s<br%s>", closer, lang.translator, closer);
+         voutlnf("%s<br%s>", titdat.translator, closer);
+      }
+
       if (has_distributor)
       {
          auto_quote_chars(lang.distributor, FALSE);
@@ -1956,7 +2086,7 @@ GLOBAL void c_maketitle(void)
          voutlnf("%s<br%s>", titdat.distributor, closer);
       }
 
-      if (has_version || has_date || has_author || has_address || has_distributor)
+      if (has_version || has_date || has_author || has_address || has_translator || has_distributor)
       {
          outln("<p>");
       }
@@ -2023,6 +2153,14 @@ GLOBAL void c_maketitle(void)
                outlncenter(titdat.address[i]);
             }
          }
+      }
+
+      if (has_translator)
+      {
+         outln("");
+         outlncenter(lang.translator);
+         outln("");
+         outlncenter(titdat.translator);
       }
 
       if (has_distributor)
@@ -2119,6 +2257,14 @@ GLOBAL void c_maketitle(void)
          outln("newline");
       }
       
+      if (has_translator)
+      {
+         outln("newline");
+         auto_quote_chars(lang.translator, FALSE);
+         voutlnf("(%s) Center setAlign newline", lang.translator);
+         voutlnf("(%s) Center setAlign", titdat.translator);
+      }
+      
       if (has_distributor)
       {
          outln("newline");
@@ -2194,6 +2340,14 @@ GLOBAL void pch_titlepage ( void )
       }
    }
 
+   if (titdat.translator != NULL)
+   {
+      outln("");
+      outlncenter(lang.translator);
+      outln("");
+      outlncenter(titdat.translator);
+   }
+
    if (titdat.distributor != NULL)
    {
       outln("");
@@ -2250,6 +2404,7 @@ LOCAL void init_titdat ( void )
 
         titdat.drc_statusline         = NULL;
         titdat.stg_database           = NULL;
+        titdat.translator             = NULL;
         titdat.distributor            = NULL;
 }
 
@@ -2322,6 +2477,7 @@ GLOBAL void exit_module_tp ( void )
 
         free_titdat(&(titdat.drc_statusline));  
         free_titdat(&(titdat.stg_database));    
+        free_titdat(&(titdat.translator));    
         free_titdat(&(titdat.distributor));    
 }
 

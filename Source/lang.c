@@ -40,6 +40,7 @@
 *    fd  Nov 14: Polish strings introduced
 *  2009:
 *    fd  Apr 23: Polish encoding set to ISO-8859-2 (hard encoded)
+*    fd  Jun 04: !docinfo [translator] introduced
 *
 ******************************************|************************************/
 
@@ -319,6 +320,7 @@ GLOBAL void init_lang ( void )
       /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "nl");
       strcpy(lang.html_start, "Begin of the document");
+      strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Distributie:");
       break;
 
@@ -350,6 +352,7 @@ GLOBAL void init_lang ( void )
       /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "en");
       strcpy(lang.html_start, "Begin of the document");
+      strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Distributor:");
       break;
 
@@ -381,6 +384,7 @@ GLOBAL void init_lang ( void )
       /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "fr");
       strcpy(lang.html_start, "Begin of the document");
+      strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Distribution :");
 
       /* Strings mit Sonderzeichen anpassen */
@@ -419,6 +423,7 @@ GLOBAL void init_lang ( void )
       /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "it");
       strcpy(lang.html_start, "Begin of the document");
+      strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Distribuzione:");
       break;
 
@@ -450,6 +455,7 @@ GLOBAL void init_lang ( void )
       /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "es");
       strcpy(lang.html_start, "Begin of the document");
+      strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Distributor:");
       
       /* Strings mit Sonderzeichen anpassen */
@@ -489,6 +495,7 @@ GLOBAL void init_lang ( void )
       /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "sv");
       strcpy(lang.html_start, "Begin of the document");
+      strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Distributor:");
       
       /* Strings mit Sonderzeichen anpassen */
@@ -524,6 +531,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.html_next,  "n(!&ae)ste");
       strcpy(lang.html_lang,  "da");
       strcpy(lang.html_start, "start af dokument");
+      strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Distributor:");
       
       uni2ascii(lang.appendix);
@@ -558,6 +566,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.html_next,  "N(!'a)sleduj(!'i)c(!'i)");
       strcpy(lang.html_lang,  "cs");
       strcpy(lang.html_start, "Za(!`e)(!'a)tek dokumentu");
+      strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Distributor:");
 
       uni2ascii(lang.preface);
@@ -602,6 +611,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.html_next,  "N‡sleduj’c’");
       strcpy(lang.html_lang,  "cs");
       strcpy(lang.html_start, "Za‹‡tek dokumentu");
+      strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Distributor:");
       break;
 */
@@ -639,6 +649,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.html_next, "Nâkamais");
       strcpy(lang.html_lang, "lv");
       strcpy(lang.html_start, "Dokumenta sâkums");
+      strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Izplatîtâjs:");
 /*
       uni2ascii(lang.preface);
@@ -683,6 +694,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.html_next,  "Next");
       strcpy(lang.html_lang,  "pl");
       strcpy(lang.html_start, "Begin of the document");
+      strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Distributor:");
       break;
 
@@ -714,9 +726,11 @@ GLOBAL void init_lang ( void )
       /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "de");
       strcpy(lang.html_start, "Beginn des Dokumentes");
+      strcpy(lang.translator, "(!\"U)bersetzung:");
       strcpy(lang.distributor,"Distributor:");
       
       uni2ascii(lang.fur); /* New in V6.5.2 [NHz] */
+      uni2ascii(lang.translator);
    }
    
    toc_init_lang();

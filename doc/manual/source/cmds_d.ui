@@ -400,6 +400,11 @@ Letzte Aktualisierung am (!today)
 Angaben gemacht oder im Vorspann (!KW [no_footers] [[html!!]]) benutzt, so
 gibt UDO nichts aus.
 
+!item [translator]
+""<text>"" bezeichnet den Namen des Übersetzers, der das Produkt oder Dokument übersetzt hat.
+Wenn translator benutzt wird, wird auf der Titelseite nach Autor und Firma 
+""Übersetzung: translator"" eingefügt.
+
 !item [distributor]
 ""<text>"" bezeichnet die Firma, die das Produkt oder Dokument vertreibt.
 Wenn distributor benutzt wird, wird auf der Titelseite nach Autor und Firma 
@@ -524,6 +529,11 @@ Last updated on (!today)
 <webmasterurl> has priority over <webmasteremail>. If you don't specify
 any data or use the switch (!KW [no_footers] [[html!!]]) in the preamble,
 UDO will output nothing.
+
+!item [translator]
+""<text>"" describes the name of the localizer who has translated the product or document.
+When translator is used, the title page will show it below author and company as 
+""Translator: translator"".
 
 !item [distributor]
 ""<text>"" describes the company which distributes the product or document.
