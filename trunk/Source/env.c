@@ -44,6 +44,7 @@
 *    fd  Nov 14: indexudo.html now capitalizes the A-Z jump labels (issue #76 solved)
 *  2009:
 *    ggs Jan 11: Bullet for the !begin_itemize, will always use in ST-Guide
+*    fd  Jun 04: !docinfo [translator] introduced
 *
 ******************************************|************************************/
 
@@ -3297,6 +3298,14 @@ GLOBAL void c_begin_document ( void )
 			{
 				if (titdat.category[0]!=EOS)
 				{	voutlnf("  {\\*\\category %s}", titdat.category);
+				}
+			}
+
+			/* ---- \translator ---- */
+			if (titdat.translator != NULL)
+			{
+				if (titdat.translator[0] != EOS)
+				{	voutlnf("  {\\*\\translator %s}", titdat.translator);
 				}
 			}
 
