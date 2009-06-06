@@ -16,16 +16,17 @@
 #   fd  Sep 25: version increased to 6.5.20 beta (rev. 683) 
 # 2009:
 #   fd  Jun 05: header added; file reformatted
+#   fd  Jun 06: dates updated
 #
 ################################################################################
 
 !macro RELEASE  6
-!macro VERSION  (!RELEASE).5.20 beta (rev. 683)
+!macro VERSION  (!RELEASE).5.20 beta (rev. 709)
 
 !iflang [english]
-!macro DATE     2009-06-05
+!macro DATE     2009-06-06
 !else
-!macro DATE     05.06.2009
+!macro DATE     06.06.2009
 !endif
 
 !docinfo [version]  (!VERSION)
