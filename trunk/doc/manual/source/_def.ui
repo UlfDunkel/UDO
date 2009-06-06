@@ -1,0 +1,32 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : definitions
+# Language    : all
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from manual.u)
+#
+################################################################################
+
+!define MAXLINK         200
+!define MAXMACRO       1000
+!define MAXDEFINE       128
+!define MAXHYPHEN      4096
+!define LINELEN        4092
+!define MAX_TOKEN_LEN   199
+!define MAXSILBEN        32
+!define MAX_TOKENS      800
+!define MAXSYMLEN        32
+!define MAXLINETABLE    600
+!define MAXCOLUMSTABLE	 64
+
+# === EOF ===

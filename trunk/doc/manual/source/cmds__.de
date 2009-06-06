@@ -1,0 +1,441 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands 1-0, etc.
+# Language    : German
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#
+################################################################################
+
+!begin_node *!..
+!html_name  cmds_other
+
+# = = = = =
+
+!begin_node (!kw [! ])
+!html_name  cmd_exclamation
+
+Tabellen- oder Indexeinträge trennen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/!(!t)
+
+!item [(!DESCRIPTION)]
+Ein doppeltes Ausrufungszeichen trennt die Zellen einer Tabellenzeile sowie Indexeinträge.
+
+!item [(!EXAMPLE)]
+(!T)!/index Ebene 1 !/! Ebene 2(!t)
+
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen]), (!link [Indizes] [Indizes])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node !!~
+!html_name  cmd_qtilde
+!label Tilde
+
+Tilde ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!!~(!t)
+
+!item [(!DESCRIPTION)]
+Diese Zeichenfolge wird nach der Umwandlung als Tilde
+dargestellt. Beachten Sie, dass eine einzige Tilde als
+festes Leerzeichen interpretiert wird.
+
+!item [(!EXAMPLE)]
+Aus (!T)!!~(!t) wird !~.
+
+!item [(!SEEALSO)]
+(!link [!~] [Festes Leerzeichen]), (!link [Feste Leerzeichen] [Feste Leerzeichen])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node !~
+!html_name  cmd_tilde
+!label Festes Leerzeichen
+
+Festes Leerzeichen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!~(!t)
+
+!item [(!DESCRIPTION)]
+Die Tilde gilt in der UDO-Syntax als festes Leerzeichen. Wörter, zwischen denen ein festes
+Leerzeichen steht, werden nicht durch einen Zeilenumbruch voneinander getrennt. Beim Blocksatz werden an
+der Einsatzstelle auch keine Leerzeichen eingefügt.
+
+!item [(!EXAMPLE)]
+42!~EUR, Dr.!~Sommer
+
+!item [(!SEEALSO)]
+(!link [!!~] [Tilde]), (!link [Feste Leerzeichen] [Feste Leerzeichen])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node ("")
+!html_name  cmd_quote
+
+Typographisches Anführungszeichen ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)("")(!t)
+
+!item [(!DESCRIPTION)]
+Zwei aufeinanderfolgende Anführungszeichen werden von UDO in die typographischen Anführungszeichen der
+benutzten Sprache umgewandelt, sofern das Ausgabeformat diese anzeigen kann. Andernfalls werden doppelte
+Anführungszeichen durch einfache ersetzt.
+
+!item [(!EXAMPLE)]
+(!T)("")Typographische Anführungszeichen("")(!t)
+
+!item [(!SEEALSO)]
+(!link [((""))] [((""))]), (!link [('')] [('')]), (!KW [no_quotes])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node ('')
+!html_name  cmd_apostrophe
+
+Typographischen Apostroph ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)('')(!t)
+
+!item [(!DESCRIPTION)]
+Zwei aufeinanderfolgende Apostrophe werden von UDO in die typographischen Apostrophe der benutzten Sprache umgewandelt, sofern das Ausgabeformat diese anzeigen kann. Andernfalls werden doppelte Apostrophe
+durch einfache ersetzt.
+
+!item [(!EXAMPLE)]
+(!T)('')Typographische Apostrophe('')(!t)
+
+!item [(!SEEALSO)]
+(!link [((''))] [((''))]), (!link [("")] [("")])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node ((""))
+!html_name  cmd_qquote
+
+Zwei Anführungszeichen ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)((""))(!t)
+
+!item [(!DESCRIPTION)]
+Wollen Sie zwei Anführungszeichen ausgeben, so müssen Sie diese klammern. Andernfalls würde UDO diese in
+typographische Anführungszeichen umwandeln.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!link [("")] [("")])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node ((''))
+!html_name  cmd_qapostrophe
+
+Zwei Apostrophe ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)((''))(!t)
+
+!item [(!DESCRIPTION)]
+Wollen Sie zwei Apostrophe ausgeben, so müssen Sie diese klammern.
+Andernfalls würde UDO diese in typographische Apostrophe umwandeln.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!link [('')] [('')])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node ((--))
+!html_name  cmd_qdash
+
+Zwei Minuszeichen ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)((--))(!t)
+
+!item [(!DESCRIPTION)]
+Wenn Sie zwei Minuszeichen ausgegeben wollen, so müssen Sie diese klammern. Andernfalls würde UDO
+diese beiden Minuszeichen in einen kurzen Gedankenstrich umwandeln.
+
+!item [(!EXAMPLE)]
+(!T)((--))outfile(!t)
+
+!item [(!SEEALSO)]
+(!link [(--)] [(--)]), (!link [(---)] [(---)]), (!link [Gedankenstriche] [Gedankenstriche])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node ((---))
+!html_name  cmd_qldash
+
+Drei Minuszeichen ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)((---))(!t)
+
+!item [(!DESCRIPTION)]
+Wenn Sie drei Minuszeichen ausgegeben wollen, so müssen Sie diese klammern. Andernfalls würde UDO
+diese drei Minuszeichen in einen langen Gedankenstrich umwandeln.
+
+!item [(!SEEALSO)]
+(!link [(---)] [(---)]), (!link [(--)] [(--)]), (!link [Gedankenstriche] [Gedankenstriche])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (--)
+!html_name  cmd_dash
+
+Kurzen Gedankenstrich ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(--)(!t)
+
+!item [(!DESCRIPTION)]
+Zwei aufeinanderfolgende Minuszeichen werden von UDO in einen kurzen Gedankenstrich umgewandelt, sofern
+das Ausgabeformat Gedankenstriche anzeigen kann. Andernfalls werden die beiden Minuszeichen durch
+eines ersetzt.
+
+!item [(!EXAMPLE)]
+(!T)Ein kurzer (--) ähm, achso (--) Gedankenstrich(!t)
+
+!item [(!SEEALSO)]
+(!link [(---)] [(---)]), (!link [((--))] [((--))]), (!link [Gedankenstriche] [Gedankenstriche])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (---)
+!html_name  cmd_ldash
+
+Langen Gedankenstrich ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(---)(!t)
+
+!item [(!DESCRIPTION)]
+Drei aufeinanderfolgende Minuszeichen werden von UDO in einen langen Gedankenstrich umgewandelt, sofern
+das Ausgabeformat Gedankenstriche anzeigen kann. Andernfalls werden die beiden Minuszeichen durch eines ersetzt.
+
+!item [(!EXAMPLE)]
+(!T)Ein langer (---) ähm, achso (---) Gedankenstrich(!t)
+
+!item [(!SEEALSO)]
+(!link [((---))] [((---))]), (!link [(--)] [(--)]), (!link [Gedankenstriche] [Gedankenstriche])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!k1 [/-])
+!html_name  cmd_syllable
+
+Marke für eine mögliche Trennstelle.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/-(!t)
+
+!item [(!DESCRIPTION)]
+Hiermit können Sie Stellen in einem Wort markieren, an denen UDO das Wort trennen darf. Das Beispiel
+zeigt, wie man die Stellen des Wortes ""Silbentrennung"" markieren könnte.
+
+!item [(!EXAMPLE)]
+(!T)Sil!/-ben!/-tren!/-nung(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [hyphen]), (!K1 [//-])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [/..])
+!html_name  cmd_dots
+
+Typographische drei Punkte ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/..(!t)
+
+!item [(!DESCRIPTION)]
+Ein Ausrufungszeichen, gefolgt von zwei Punkten, wandelt UDO in typographische drei Punkte um, sofern
+das Ausgabeformat diese anzeigen kann. Ansonsten wandelt UDO !/.. in drei normale Punkte um.
+
+!item [(!EXAMPLE)]
+Aus (!T)!/..(!t) wird !..
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!k1 [//-])
+!html_name  cmd_qsyllable
+
+Die Zeichenfolge !/- ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!//-(!t)
+
+!item [(!DESCRIPTION)]
+Diese Zeichenfolge wird nach der Umwandlung als !/- dargestellt. Beachten Sie, dass (!K1 [/-]) als
+Trennstelle interpretiert wird.
+
+!item [(!EXAMPLE)]
+Aus (!T)!//-(!t) wird !/-.
+
+!item [(!SEEALSO)]
+(!KW [hyphen]), (!K1 [/-])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+#ToDo: Englisch
+# The ~ must is important, do not delete them
+!begin_node !!\~
+!html_name  cmd_longline
+!label Tilde
+
+Lange Eingabezeile
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!!\(!t)
+
+!item [(!DESCRIPTION)]
+Endet eine UDO-Eingabezeile mit !!\<Zeilenumbruch>, so wird die 
+folgende Zeile von UDO als Fortsetzung der vorhergehenden Zeile 
+aufgefasst. Es können damit mehrere "echte" Zeilen aus Sicht von 
+UDO zu einer einzigen "logischen" Eingabezeile zusammengefasst 
+werden. Diese Fortsetzungszeilen sind an jeder Stelle im UDO- 
+ Quelltext zulässig, auch z.B. in Makros und Definitionen. Steht 
+!!\ nicht unmittelbar am Ende einer Zeile, so wird es ignoriert 
+und als normaler Text ausgegeben.
+
+Eine mögliche Anwendung ist, den Inhalt einer Tabellenzeile auf 
+mehrere Zeilen in der Eingabedatei aufzuteilen, um die Lesbarkeit 
+des UDO-Quelltextes zu verbessern.
+
+!item [(!EXISTSSINCE)] Version 6.5.4
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

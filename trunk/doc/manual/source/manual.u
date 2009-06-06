@@ -1,394 +1,112 @@
 ################################################################################
-# doc/manual/source/manual.u
-# Hauptfile der Anleitung zu UDO / udo manual main page
-# letzte Änderungen: 02.02.2004 / last changes: Feb 2, 2004
-################################################################################
-# In diesem File befindet sich kein Text! Alle Texte werden nachgeladen
-# This file doesn't contain any text! Any text will be included from other files.
-################################################################################
-
-
-################################################################################
-# ~~~ KOMMANDOZEILENPARAMETER / COMMAND LINE PARAMETERS: ~~~
-# Durch Benutzung der Option -D lassen sich "kleinere" Anleitungen erstellen:
-# Using the option -D you can make smaller manuals:
-# 1) ohne Kapitel "Einführung" / without chapter "Introduction":
-#    $ udo ... -o ! -D NoIntro manual.u
-# 2) ohne Kapitel "Installation" / without chapter "Installation":
-#    $ udo ... -D NoInstall ...
-# 3) ohne Kapitel "Bedienung" / without chapter "Running":
-#    $ udo ... -D NoRunning ...
-# 4) ohne Kapitel "Syntax" / without chapter "Syntax":
-#    $ udo ... -D NoSyntax ...
-# 5) ohne Kapitel "Ausgabeformate" / without chapter "Output Formats":
-#    $ udo ... -D NoFormats ...
-# 6) ohne Kapitel "Praktische Arbeit" / without chapter "Working with UDO":
-#    $ udo ... -D NoIntro ...
-# 7) ohne Anhang / without Appendix:
-#    $ udo ... -D NoAppendix ...
-# 8) Anhang wird ohne Kapitel "Historie" erzeugt / Appendix without chapter "History":
-#    $ udo ... -D NoHistory ...
-# 9) Anhang wird ohne Befehlsindex erzeugt / Appendix without Command index:
-#    $ udo ... -D NoIndex ...
-# Per Voreinstellung wird eine vollständige Dokumentation erzeugt.
-# By default a complete documentation will be produced.
-# Die verschiedenen Schalter können selbstverständlich kombiniert werden.
-# You can combine these switches.
-# ~~~ PARAMETER FÜR SPRACHE / PARAMETER FOR DOCUMENTATION LANGUAGE: ~~~
-# $ udo ... -D LANG_DE ... => diese Dokumentation wird in Deutsch erzeugt
-# $ udo ... -D LANG_EN ... => this documentation will be produced in English
-# Parameter "LANG_DE" und "LANG_EN" fehlen beide => Deutsch (siehe lang.ui)
-# Parameter "LANG_DE" and "LANG_EN" are both missing => german (see lang.ui)
-# ~~~ WEITERE PARAMETER / MORE PARAMETERS: ~~~
-# 1) Befehlsindex *ohne* nicht mehr unterstützte Kommandos erzeugen:
-#    Remove no longer supported commands from command index:
-#       $ udo ... -D NoOldKeywords ...
-#    Voreinstellung: Befehlsindex wird *mit* diesen Kommandos erstellt.
-#    Default: having command index *with* these commands.
-# 2) Dokumentation mit speziellen HTML-Einstellungen für die UDO-Website (siehe weiter unten):
-#    Documentation with special HTML parameters for the UDO website (see below):
-#       $ udo ... -D UseForWeb ...
-################################################################################
-
+#
+# Project     : UDO manual
+# Chapter     : main file
+# Language    : all
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
 # ------------------------------------------------------------------------------
-# Die Doku-Quellen wurden im Zeichensatz ISO-8859-1 erstellt.
+#
+# Notes
+# -----
+#    This file should not contain any language-specific content!
+# 
+#    All includes should be done from .ui files.
+#    All language-specific content should be included in .ui files, using
+#    ISO designator file extensions like .de (= German) or .en (English).
+#
+#    .ui files, which do NOT include language-specific files, should start with
+#    an underscore, like _lang.ui or _version.ui.
+#
+# ------------------------------------------------------------------------------
+#
+# Command line parameters
+# -----------------------
+#    Using the option -D you can make smaller manuals:
+#    1) without chapter "Introduction":
+#       $ udo ... -o ! -D NoIntro manual.u
+#    2) without chapter "Installation":
+#       $ udo ... -D NoInstall ...
+#    3) without chapter "Running":
+#       $ udo ... -D NoRunning ...
+#    4) without chapter "Syntax":
+#       $ udo ... -D NoSyntax ...
+#    5) without chapter "Output Formats":
+#       $ udo ... -D NoFormats ...
+#    6) without chapter "Working with UDO":
+#       $ udo ... -D NoIntro ...
+#    7) without Appendix:
+#       $ udo ... -D NoAppendix ...
+#    8) Appendix without chapter "History":
+#       $ udo ... -D NoHistory ...
+#    9) Appendix without Command index:
+#       $ udo ... -D NoIndex ...
+# 
+#    By default a complete documentation will be produced.
+#    You can combine these switches.
+# 
+# Parameters for documentation language
+# -------------------------------------
+#    $ udo ... -D LANG_DE ... => diese Dokumentation wird in Deutsch erzeugt
+#    $ udo ... -D LANG_EN ... => this documentation will be produced in English
+#    Parameters "LANG_DE" and "LANG_EN" are both missing => german (see _lang.ui)
+#
+# More parameters
+# ---------------
+#    1) Remove no longer supported commands from command index:
+#       $ udo ... -D NoOldKeywords ...
+#       Default: having command index *with* these commands.
+#    2) Documentation with special HTML parameters for the UDO website (see below):
+#       $ udo ... -D UseForWeb ...
+#
+# ------------------------------------------------------------------------------
+#
+# History
+# -------
+# 2009:
+#   fd  Jun 05: history introduced
+#
+################################################################################
+
 # ------------------------------------------------------------------------------
 # The source files were written using the ISO-8859-1 charset.
 # ------------------------------------------------------------------------------
 !code [iso]
 
-# ------------------------------------------------------------------------------
-# Spracheinstellung für dieses Dokument / Language of this document
-# ------------------------------------------------------------------------------
-!include lang.ui
+!include _header.ui                       # switches
+!include _lang.ui                         # language of this document
+!include _version.ui                      # version numbers
+!include macros.ui                        # all macros
+!include hyphen.ui                        # hyphenation patterns
+!include udo.ui                           # general UDO title stuff
 
-# ------------------------------------------------------------------------------
-# Die deutschen Trennregeln befinden sich in der Datei hyph-de.ui
-# ------------------------------------------------------------------------------
-# The english syllabification patterns are inside the file hyph-en.ui
-# ------------------------------------------------------------------------------
-!iflang [german]
-!include hyph-de.ui
-!endif
-!iflang [english]
-!include hyph-en.ui
-!endif
+
+
+
+
 
 # ------------------------------------------------------------------------------
-# Sprachabhängige Makros / Language-dependent macros
+# the Document structure
 # ------------------------------------------------------------------------------
-!ifdest [html,hh,stg]
-!macro IMAGES
-!endif
-
-!ifnset IMAGES
-!macro IMAGES images/
-!endif
-
-!iflang [german]
-!macro EXAMPLES ./examples/de/
-!macro EXAMPLES_DIST ../../examples/de/
-!endif
-!iflang [english]
-!macro EXAMPLES ./examples/en/
-!macro EXAMPLES_DIST ../../examples/en/
-!endif
-
-# ------------------------------------------------------------------------------
-# Die zahlreichen Schalter befinden sich in einer eigenen Datei namens header.ui
-# ------------------------------------------------------------------------------
-# The unnumerous switches are part of header.ui
-# ------------------------------------------------------------------------------
-!include header.ui
-
-# ------------------------------------------------------------------------------
-# Titel formatabhängig setzen
-# ------------------------------------------------------------------------------
-# The title of this documentation depends on the destination format
-# ------------------------------------------------------------------------------
-!iflang [german]
-!ifdest [stg]
-!docinfo [title] Der Hypertext zu
-!else
-!ifdest [win,wh4,hh]
-!docinfo [title] Die Windows-Hilfe zu
-!else
-!ifdest [rtf]
-!docinfo [title] Das Handbuch zu
-!else
-!docinfo [title] Die Anleitung zu
-# end: rtf:
-!endif
-# end: win, wh4, hh:
-!endif
-# end: stg:
-!endif
-# end: german:
-!endif
-!iflang [english]
-!ifdest [stg]
-!docinfo [title] The hypertext of
-!else
-!ifdest [win,wh4,hh]
-!docinfo [title] The Windows help of
-!else
-!ifdest [rtf]
-!docinfo [title] The book of
-!else
-!docinfo [title] The guide of
-# end: rtf:
-!endif
-# end: win, wh4, hh:
-!endif
-# end: stg:
-!endif
-# end: english
-!endif
-!docinfo [program] UDO
-
-
-!include version.ui
-
-# ------------------------------------------------------------------------------
-# Subject für den ST-Guide setzen / Set the subject for the ST-Guide
-# ------------------------------------------------------------------------------
-!iflang [german]
-!raw [stg] @subject "Dokumentation/Utilities"
-!endif
-!iflang [english]
-!raw [stg] @subject "Documentation/Utilities"
-!endif
-
-# ------------------------------------------------------------------------------
-# Typ für Manualpage setzen  / Set the type of the manual page
-# ------------------------------------------------------------------------------
-!man_type 1
-!nroff_type 1
-
-# ------------------------------------------------------------------------------
-# HTML-Spezialitäten / do some special things for HTML
-# ------------------------------------------------------------------------------
-!ifset [UseForWeb]
-# Dokumentation zur Veröffentlichung auf der UDO-Website:
-# Documentation for website publishing:
-!html_style_name /udo.css
-!iflang [german]
-!html_backpage http://www.udo-open-source.org/ 'Zurück zu UDO Open Source (Home)'
-!endif
-!iflang [english]
-!html_backpage http://www.udo-open-source.org/ 'Back to UDO Open Source (Home)'
-!endif
-!else
-# Dokumentation für den "normalen" Anwender...
-# Documentation for "normal" users...
-!html_style_name ./udo.css
-!endif
-
-# ------------------------------------------------------------------------------
-# Makros / Set some macros
-# ------------------------------------------------------------------------------
-
-!macro UDOR udo(!RELEASE)
-# "RELEASE" ist in der Datei "version.ui" definiert.
-
-!macro a !]
-!define x !(!1)
-!macro  X !
-!macro  KW   (!I)(!link [!(!1) (!2)] [!(!1)])(!i)
-!macro  K1   (!I)(!link [!(!1) (!2)] [!(!1)])(!i)
-!macro  KKW  (!I)(!link [(!(!1)!)] [(!/(!1)!)])(!i)
-!macro  KK2W (!I)(!link [(!(!1) (!2)!)] [(!/(!1)!)])(!i)
-!macro  KKKW (!I)(!link [(!(!1)!)...(!(!2)!)] [(!(!1)!)...(!(!2)!)])(!i)
-!macro  KK1  (!I)(!link [((!X)(!1)!)] [((!X)/(!1)!)])(!i)
-!macro  kw   !(!1)
-!define k1   !(!1)
-!define kkw  (!/(!1))
-!define kkkw (!/(!1))...(!/(!2))
-!define kk1  (!(!1))
-
-!iflang [german]
-!macro	MISS   (!idx [Hier fehlt noch etwas])!..
-!macro  HINT   (!B)Hinweis:(!b)
-!macro  HINTS  (!B)Hinweise:(!b)
-!ifdest [win,wh4]
-!macro  FORMAT (!link [<k\'FCrzel>] [Ausgabeformat])
-!else
-!ifdest [hh,html]
-!macro  FORMAT (!link [&lt;k&uuml;rzel&gt;] [Ausgabeformat])
-!else
-!macro  FORMAT (!link [<kürzel>] [Ausgabeformat])
-# end: hh, html:
-!endif
-# end: win, wh4:
-!endif
-!ifdest [hh,html]
-!macro  COLOR    (!link [&lt;farbe&gt;] [Farben])
-!macro  LANGUAGE (!link [&lt;sprache&gt;] [Sprache])
-!macro  OS       (!link [&lt;system&gt;] [Betriebssystem])
-!macro  CODE     (!link [&lt;zeichensatz&gt;] [Code])
-!else
-!macro  COLOR    (!link [<farbe>] [Farben])
-!macro  LANGUAGE (!link [<sprache>] [Sprache])
-!macro  OS       (!link [<system>] [Betriebssystem])
-!macro  CODE     (!link [<zeichensatz>] [Code])
-# end: hh, html:
-!endif
-# end: german:
-!endif
-
-!iflang [english]
-!macro	MISS   (!idx [Something's still missing here])!..
-!macro  HINT   (!B)Please note:(!b)
-!macro  HINTS  (!B)Please note:(!b)
-!ifdest [win,wh4]
-!macro  FORMAT (!link [<abbreviations>] [Abbreviations])
-!else
-!ifdest [hh,html]
-!macro  FORMAT (!link [&lt;abbreviations&gt;] [Abbreviations])
-!else
-!macro  FORMAT (!link [<abbreviations>] [Abbreviations])
-# end: hh, html:
-!endif
-# end: win, wh4:
-!endif
-!ifdest [hh,html]
-!macro  COLOR    (!link [&lt;color&gt;] [Colors])
-!macro  LANGUAGE (!link [&lt;language&gt;] [Language])
-!macro  OS       (!link [&lt;system&gt;] [Operating systems])
-!macro  CODE     (!link [&lt;charset&gt;] [Code])
-!else
-!macro  COLOR    (!link [<color>] [Colors])
-!macro  LANGUAGE (!link [<language>] [Language])
-!macro  OS       (!link [<system>] [Operating systems])
-!macro  CODE     (!link [<charset>] [Code])
-# end: hh, html
-!endif
-# end: english
-!endif
-
-# hinzugefügt 13.01.2004 - Ulrich Kretschmer
-!iflang [german]
-!macro DocumentationWorkInProgress Die UDO-Anleitung ist im Moment in Überarbeitung. Zwischenstände stehen auf der UDO-Website derzeit nur zum Online-Lesen zur Verfügung, aber nicht zum Download.
-!macro FollowingOutdated (!I)Die nachfolgenden Textpassagen sind z.T. nicht mehr aktuell und sind zur Überarbeitung vorgesehen.(!i)
-!endif
-!iflang [english]
-!macro DocumentationWorkInProgress The UDO Guide is actually in revision. Intermediate versions are currently only available on the UDO website for online-reading, but not for download.
-!macro FollowingOutdated (!I)The following text passages are partly outdated and will be revised.(!i)
-!endif
-
-
-# Sprachabhängige Textbausteine für die UDO-Historie in history.ui (alphabetisch geordnet)
-# language-dependent text parts for the UDO history in history.ui (in alphabetical order)
-!iflang [german]
-!macro BUGFIXES Fehlerbehebungen
-!macro CHANGES Änderungen
-!macro GENERAL Allgemeines
-!macro NEWS Neuheiten
-!macro PUBLISHED (!1) wurde am (!2) veröffentlicht.
-!endif
-!iflang [english]
-!macro BUGFIXES Bugfixes
-!macro CHANGES Changes
-!macro GENERAL General
-!macro NEWS News
-!macro PUBLISHED (!1) was published on (!2).
-!endif
-
-
-# Sprachabhängige Textbausteine für den Befehlsindex (alphabetisch geordnet)
-# language-dependant text parts for the command index (in alphabetical order)
-# hinzugefügt 14.12.2003 / added Dec 14th, 2003 / Ulrich Kretschmer
-# 2006-09-14: fd: (!HINT) added
-!iflang [german]
-!macro ABBREV Dies ist eine Abkürzung für das Kommando
-!macro CHAR zeichen
-!macro COMMAND Kommando
-!macro COMMANDABBREV Kommando-Abkürzung
-!macro DESCRIPTION Beschreibung:
-!macro EXAMPLE Beispiel:
-!macro EXAMPLE2 Beispiel:
-!macro EXISTSSINCE Existiert seit:
-!macro EXISTEDUNTIL Existierte bis:
-!macro FILE datei
-!macro HINT (!B)Hinweis:(!b)
-!macro MAINPART Hauptteil
-!macro NOTEXISTING Dieser Befehl existiert nicht mehr.
-!macro PLACEHOLDER Platzhalter
-!macro PREAMBLE Vorspann
-!macro RENAMEDTO Dieses Kommando (!1) wurde umbenannt zu
-!macro SEEALSO Siehe auch:
-!macro SPECIALCHAR Sonderzeichen
-!macro SWITCH Schalter
-!macro SYNTAX Syntax:
-!macro TEXT text
-!macro TYPEPOSITION Typ & Position:
-!macro USEINSTEAD Benutzen Sie stattdessen (!1)
-!macro VALUE wert
-!endif
-!iflang [english]
-!macro ABBREV This is an abbreviation of the command
-!macro CHAR char
-!macro COMMAND command
-!macro COMMANDABBREV command abbreviation
-!macro DESCRIPTION Description:
-!macro EXAMPLE Example:
-!macro EXAMPLE2 Examples:
-!macro EXISTSSINCE Exists since:
-!macro EXISTEDUNTIL Existed until:
-!macro FILE file
-!macro HINT (!B)Hint:(!b)
-!macro MAINPART main part
-!macro NOTEXISTING This command does not exist anymore.
-!macro PLACEHOLDER placeholder
-!macro PREAMBLE preamble
-!macro RENAMEDTO This command has been renamed to
-!macro SEEALSO See also:
-!macro SPECIALCHAR special character
-!macro SWITCH switch
-!macro SYNTAX Syntax:
-!macro TEXT text
-!macro TYPEPOSITION Type & position:
-!macro USEINSTEAD Use (!1) instead
-!macro VALUE value
-!endif
-
-
-!define MAXLINK         200
-!define MAXMACRO       1000
-!define MAXDEFINE       128
-!define MAXHYPHEN      4096
-!define LINELEN        4092
-!define MAX_TOKEN_LEN   199
-!define MAXSILBEN        32
-!define MAX_TOKENS      800
-!define MAXSYMLEN        32
-!define MAXLINETABLE    600
-!define MAXCOLUMSTABLE	 64
-################################################################################
-# Jetzt geht's lohooos...
-################################################################################
-# 10, 9, 8, 7, 6, ignition sequence started, ...
-################################################################################
 
 !begin_document
 
-# !html_description
 !html_keywords UDO, Universal Document
-# !html_keywords Atari
-# !html_keywords Windows
 
 !raw [tex] \sloppy
 
-# erzeuge Titelseite + Inhaltsverzeichnis / create title page + table of contents
+# create title page + table of contents
 !maketitle
 # !ifdest [win,wh4,html,hh,stg,amg,pch,tvh,aqv]
 # !tableofcontents !depth 1
-# # für Hypertextformate auf Depth 1 reduziert: 20.12.2003 - Ulrich Kretschmer
 # !else
 !tableofcontents !depth 2
 # !endif
 
-# Einführung / Introduction
+# Introduction
 !ifnset [NoIntro]
 !include intro.ui
 !endif
@@ -398,32 +116,31 @@
 !include install.ui
 !endif
 
-# Bedienung / Running
+# Usage
 !ifnset [NoRunning]
-!include running.ui
+!include usage.ui
 !endif
 
-# UDO-Syntax
+# Syntax
 !ifnset [NoSyntax]
 !include syntax.ui
 !endif
 
-# Ausgabeformate / Output formats
+# Output formats
 !ifnset [NoFormats]
 !include formats.ui
 !endif
 
-# Praktische Arbeit / Working with UDO
+# Practice
 !ifnset [NoWorking]
-!include working.ui
+!include practice.ui
 !endif
 
-################################################################################
-# Anhang / Appendix
-################################################################################
-
+# Appendix
 !ifnset [NoAppendix]
 !include appendix.ui
 !endif
 
 !end_document
+
+# === EOF ===

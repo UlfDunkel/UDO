@@ -1,0 +1,77 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Practice: Seven rules
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from working.ui)
+#
+################################################################################
+
+!begin_node Sieben goldene Regeln beim Schreiben von Quelltexten
+!html_name  rules
+
+Bevor Sie mit dem Schreiben eines UDO-Quelltextes beginnen, werfen Sie
+bitte einen Blick auf die folgenden Regeln und prägen Sie sie sich
+ein:
+
+!begin_enumerate
+!item (!B)Geben Sie Ihrem Text eine übersichtliche Struktur!(!b)
+
+!item (!B)Sprechen Sie den Leser direkt an.(!b)
+
+Verwenden Sie ""Sie können !.."" bzw. ""Du kannst"" anstatt ""Man
+kann !.."".
+
+!item (!B)Benutzen Sie Schriftarten sparsam und einheitlich.(!b)
+
+Der übermäßige Einsatz von kursivem, fettem und unterstrichenen
+verwirrt den Leser eher, als das er ihm hilft. Falls Sie
+Schriftarten einsetzen, so tun Sie dies allerdings einheitlich.
+Diese Anleitung stellt Dateinamen grundsätzlich mit einer
+nichtproportionalen Schrift dar, Kommandos werden immer kursiv
+angezeigt.
+
+!item (!B)Fassen Sie sich so kurz wie möglich.(!b)
+
+Holen Sie nicht zuweit aus, sondern kommen Sie möglichst schnell
+auf den Punkt. Der Leser langweilt sich sonst oder wird
+unkonzentriert und überliest womöglich noch die wichtigen
+Stellen.
+
+Ich gebe zu, ich schaffe es meistens auch nicht, mich kurz zu
+fassen. (!grin)
+
+!item (!B)Verwenden Sie kurze Kapitelüberschriften.(!b)
+
+Der Leser wird dann das gewünschte Kapitel beim Überfliegen des
+Inhaltsverzeichnisses schneller (wieder)finden. Außerdem nehmen
+Sie UDO dadurch eine Menge Arbeit bei der Referenzierung ab, was
+durch eine schnellere Umwandlung belohnt wird.
+
+!item (!B)Vermeiden Sie gleichnamige Überschriften.(!b)
+
+Nicht nur dass Sie damit UDO und Hypertext-Compiler verwirren,
+nein, auch der potentielle Leser gerät bei gleichnamigen Kapiteln
+durcheinander.
+
+!item (!B)Gehen Sie sparsam mit Makros und Definitionen um.(!b)
+
+UDO muss jede Zeile bis zu zweimal nach allen benutzten Makros und
+Definitionen durchsuchen. Jedes zusätzliche Makro und jede
+zusätzliche Definition verlangsamt den Umwandlungsvorgang.
+
+!end_enumerate
+
+!end_node # Sieben goldene Regeln beim Schreiben von Quelltexten
+
+# === EOF ===

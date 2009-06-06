@@ -1,0 +1,183 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: HTML (Hypertext Markup Language)
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#
+################################################################################
+
+!begin_node HTML (Hypertext Markup Language)
+!html_name  format_html
+!label      HTML
+
+!begin_description
+
+!index Aufteilung
+!index HTML !! Aufteilung
+!item [Wie kann man die Aufteilung in mehrere Dateien unterbinden?]
+
+Im Gegensatz zu den anderen Formaten erzeugt UDO standardmäßig
+mehrere Dateien, die miteinander verknüpft sind. Für jedes
+Kapitel, jeden Abschnitt und Unterabschnitt wird eine eigene
+Datei mit der Endung (!T).htm[l](!t) angelegt. Die Namen der einzelnen
+Dateien richten sich nach der Nummer und der Position des
+jeweiligen Kapitel. Inhaltsverzeichnis und Titelseite gelangen in
+die Datei, die Sie UDO per Kommandozeile als (!T)(--)outfile(!t) übergeben.
+
+!index !html_merge_nodes
+!index !html_merge_subnodes
+!index !html_merge_subsubnodes
+!index !html_merge_subsubsubnodes
+Mit den Schaltern (!KW [html_merge_nodes]), (!KW [html_merge_subnodes]),
+(!KW [html_merge_subsubnodes]) oder (!KW [html_merge_subsubsubnodes]) können
+Sie die Aufteilung in mehrere Dateien unterbinden.
+
+Wird im Vorspann (!KW [html_merge_nodes]) benutzt, so wird das gesamte
+Dokument in einer Datei gesichert. Dies empfiehlt sich lediglich
+bei kleinen Dokumenten, die kleiner als 16 KB sind.
+
+(!KW [html_merge_subnodes]) sorgt dafür, dass alle Abschnitte eines
+Kapitels in der Datei angegeben werden, in dem sich auch das
+Kapitel selbst befindet.
+
+Der Schalter (!KW [html_merge_subsubnodes]) sorgt dafür, dass alle
+Unterabschnitte im gleichen File wie der übergeordnete Abschnitt
+untergebracht werden.
+
+Der Schalter (!KW [html_merge_subsubsubnodes]) schließlich sorgt dafür,
+dass alle Paragraphen im gleichen File wie der übergeordnete
+Unterabschnitt untergebracht werden.
+
+!index Dateinamen
+!index HTML !! Dateinamen
+!item [Mir gefallen die Dateinamen bei der HTML-Ausgabe nicht!/]
+
+!index !html_name
+Durch den Befehl (!KW [html_name]) können Sie einem Kapitel einen
+bestimmten Namen zuweisen, den UDO für die jeweilige Datei
+anstelle der etwas kryptischen Namen wie etwa ""0a1009.htm""
+benutzt.
+
+!index HTML !! Kopfzeile
+!index udo_lf.gif
+!index udo_rg.gif
+!index udo_up.gif
+!item [Wie bekommt man diese scheußlichen Kopfzeilen weg?]
+
+UDO erzeugt standardmäßig auf jeder HTML-Seite eine Kopfzeile,
+anhand derer man das Thema (gebildet aus den Daten von (!KW [docinfo] [[title!!]]) und
+(!KW [docinfo] [[program!!]])) des Hypertextes erkennen kann. Desweiteren werden Links
+zu der vorgehenden, nachfolgenden und/oder übergeordneten Seite
+angelegt. Dazu werden GIFs benutzt, die UDO automatisch erzeugt.
+Die Dateinamen dieser GIFs lauten (!T)udo_lf.gif(!t), (!T)udo_rg.gif(!t) und
+(!T)udo_up.gif(!t).
+
+!index !no_headlines
+Durch den Schalter (!KW [no_headlines] [[html!!]]) kann die Ausgabe der
+Kopfzeilen und der Grafiken unterbunden werden.
+
+!item [Wie kann man bequem eigene Kopf- und Fußzeilen erzeugen?]
+
+Um eigene (!idx [Kopfzeilen]) und (!idx [Fußzeilen]) zu erzeugen, kann man Makros
+benutzen, die man jeweils am Anfang und Ende eines Kapitels
+angibt. Der Inhalt dieser Kapitel erscheint dabei jedoch
+unterhalb der Überschrift. Auf folgende Art und Weise wurden
+beispielsweise Kopf- und Fußzeilen meiner WWW-Homepage angelegt,
+in der es Kapitel namens ""Software"", ""Kontaktadressen"" und
+""Links"" gibt:
+
+!begin_description
+!item [Hauptdatei:]
+
+!vinclude (!EXAMPLES)html/headfoot.ui
+
+!item [software.ui:]
+
+!vinclude (!EXAMPLES)html/software.ui
+!end_description
+
+Wird nun nach HTML umgewandelt, so werden die jeweiligen Kopf- und
+Fußzeilen ausgegeben. Durch die Referenzierung von UDO werden
+automatisch Links auf die anderen Kapitel angelegt.
+
+Wandelt man nicht nach HTML um, so werden leere Definitionen und
+Makros erzeugt, wodurch keine Kopf- und Fußzeilen ausgegeben
+werden.
+
+Eine andere Möglichkeit, Kopf- bzw. Fußzeilen zu erzeugen, ist die
+Verwendung von (!KW [use_raw_header]) bzw. (!KW [use_raw_footer]).
+
+!index HTML !! Tabellen
+!index Umrahmung
+!index Rahmen
+!index Tabelle
+!item [Mal wird eine Tabelle umrahmt dargestellt, mal nicht!?]
+
+Bei HTML kann man leider nur angeben, ob die gesamte Tabelle
+umrahmt werden soll oder ob sie gar nicht mit einem Rahmen
+dargestellt werden soll.
+
+Um eine Tabelle mit Rahmen darzustellen, müssen Sie bei
+(!KW [begin_table]) den Befehle (!KW [hline]) angeben. Fehlt (!KW [hline]) bei diesem
+Befehl, wird die Tabelle ohne Rahmen dargestellt.
+
+!index HTML !! Dateiendungen
+!item [Wie legt UDO die Endungen der Dateiendungen fest?]
+
+UDO benutzt als Endung für die HTML-Dateien immer die Endung des
+in der Kommandozeile mit der Option (!T)(--)outfile(!t) bzw. (!T)-o(!t) übergebenen
+Dateinamens:
+
+!begin_tlist [-o INDEX.HTML] !short
+!item [-o index.htm]  .htm
+!item [-o index.html] .html
+!item [-o INDEX.HTML] .HTML
+!end_tlist
+
+Wenn Sie stattdessen die Option (!T)-o~!(!t) verwenden, benutzt UDO für
+8+3-Dateisysteme immer die Endung (!T).htm(!t), bei Dateisystemen, die
+lange Namen erlauben, hingegen immer die Endung (!T).html(!t).
+
+!item [Die Dateinamen bei den Querverweisen stimmen nicht!?]
+
+Falls Sie HTML-Dateien auf einem Betriebssystem erstellen, das 
+keine langen Namen zulässt, Sie als Endung (!T).html(!t) vorgegeben haben
+und Sie diese Dateien dann auf einem Web-Server ablegen, so
+müssen Sie folgendes beachten:
+
+!begin_enumerate
+!item UDO versucht zwar, (!T)foo.html(!t) zu sichern, TOS und DOS sichern
+die Datei jedoch nur als (!T)foo.htm(!t).
+
+!item UDO benutzt für alle Querverweise die Endung (!T).html(!t). Wenn nun
+ein HTML-Browser unter TOS und DOS versucht, (!T)foo.html(!t) zu
+öffnen, öffnet dieser anstandslos (!T)foo.htm(!t).
+
+!item Nach dem Kopieren der Dateien auf den Web-Server *müssen*
+die Endungen der Dateien von (!T).htm(!t) auf (!T).html(!t) angepasst werden.
+Hier wird (!T)foo.htm(!t) nicht geöffnet, wenn auf (!T)foo.html(!t)
+zugegriffen werden soll!
+!end_enumerate
+
+!index Hintergrundmusik
+!index HTML !! Hintergrundmusik
+!item [Wie kann ich Hintergrundmusik einbinden?]
+
+Hier für steht das Kommonado (!KW [html_bgsound]) zur Verfügung.
+
+!end_description
+
+!end_node # HTML (Hypertext Markup Language)
+
+# === EOF ===

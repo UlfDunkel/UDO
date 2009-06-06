@@ -1,0 +1,34 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : version numbers
+# Language    : all
+# Initial Date: 2008-09-25
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2008:
+#   fd  Sep 25: version increased to 6.5.20 beta (rev. 683) 
+# 2009:
+#   fd  Jun 05: header added; file reformatted
+#
+################################################################################
+
+!macro RELEASE  6
+!macro VERSION  (!RELEASE).5.20 beta (rev. 683)
+
+!iflang [english]
+!macro DATE     2009-06-05
+!else
+!macro DATE     05.06.2009
+!endif
+
+!docinfo [version]  (!VERSION)
+!docinfo [date]     (!DATE)
+
+# === EOF ===

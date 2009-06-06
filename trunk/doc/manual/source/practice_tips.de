@@ -1,0 +1,151 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Practice: Tips & Tricks
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from working.ui)
+#
+################################################################################
+
+!begin_node Tipps & Tricks
+!html_name  tips
+
+# = = = = =
+
+!begin_node Zerteilen Sie große Dokumentationen
+!html_name  tips_split
+
+Falls Sie eine Dokumentation schreiben, die einen Umfang von 30~kB
+oder mehr hat, so sollten Sie sie in kleine Häppchen aufteilen. Diese
+Dateien können dann mit dem (!KW [include]) an passender Stelle eingeladen
+werden.
+
+Durch die Aufteilung haben Sie den Vorteil, dass Sie die Dokumentation
+durch einfaches Verschieben nur einer einzigen Zeile neu gliedern
+können. Wäre der gesamte Quelltext in einer Datei, müssten Sie mit
+einem Editor gleich ganze Blöcke umkopieren.
+
+Ein weiterer Vorteil der Aufteilung ist, dass Sie bestimmte Kapitel
+schnell wiederfinden können, sofern Sie den Dateien sinnvolle Namen
+geben.
+
+Außerdem können Sie leicht und schnell nur Teile der Dokumentation auf
+syntaktische Korrektheit testen. Nehmen wir an, wir haben einen
+Quelltext mit fünf Kapiteln. Erstellen Sie eine Datei mit den globalen
+Schaltern, eine Hauptdatei und fünf Dateien mit dem Kapiteltext:
+
+!begin_quote
+!vinclude (!EXAMPLES)main.u
+!end_quote
+
+Falls Sie nun einmal nur ein Kapitel umwandeln wollen, erstellen Sie
+ganz einfach eine zusätzliche Hauptdatei, die Sie dann umwandeln:
+
+!begin_quote
+!vinclude (!EXAMPLES)ch5test.u
+!end_quote
+
+Gerade bei sehr umfangreichen Dokumentationen kann man die Fehlersuche
+und -korrektur drastisch beschleunigen.
+
+Falls Sie sich mal ein Bild davon machen wollen, wie so eine
+Aufteilung aussehen kann, dann schauen Sie sich einmal die Quelltexte
+dieser UDO-Dokumentation an. Stünde diese Dokumentation in einer
+Datei, hätte ich schon längst den Überblick verloren.
+
+!end_node # Zerteilen Sie große Dokumentationen
+
+# = = = = =
+
+!begin_node Verwenden Sie standardisierte Quelltexte
+!html_name  tips_standardize
+
+Es soll ja Autoren geben, die laufend neue Programme oder Hypertexte
+veröffentlichen. Und in fast allen Beschreibungen tauchen Kapitel auf,
+in denen z.B. Copyrightangaben benutzt werden. Solche Dinge braucht
+man natürlich nicht immer wieder neu zu schreiben, sondern kann sich
+unter Zuhilfenahme von Makros kleinere Standardtexte erstellen.
+
+Nehmen wir an, unsere Copyrightangabe sieht so aus:
+
+!begin_quote
+!begin_verbatim
+""Hello, World!"" Version 8.15 (!nl)
+Copyright (!copyright) 1996 bei C. Anfänger
+!end_verbatim
+!end_quote
+
+Bei einem anderen Programm wird wieder fast die gleiche Angabe
+erfolgen, lediglich der Name des Programms und die Versionsnummer
+werden sich unterscheiden.
+
+Was liegt also näher, als solch einen Text zu standardisieren?
+
+!begin_quote
+!begin_verbatim
+""(!ProgrammName)"" Version (!ProgrammVersion) (!nl)
+Copyright (!copyright) (!ProgrammJahr) bei C. Anfänger
+!end_verbatim
+!end_quote
+
+Im Vorspann einer Datei, die diesen Text einbindet, müssen dann
+lediglich die Makros ""ProgrammName"", ""ProgrammVersion"" und
+""ProgrammJahr"" gesetzt werden, im Hauptteil muss diese Datei dann nur
+noch an passender Stelle eingebunden werden:
+
+!begin_quote
+!begin_verbatim
+!macro ProgrammName    Hello, World!
+!macro ProgrammVersion 8.15
+!macro ProgrammJahr    1996
+...
+!begin_document
+...
+!include copyleft.ui
+!end_verbatim
+!end_quote
+
+Dieser Text kann dann wieder beim nächsten Projekt eingesetzt werden,
+indem man einfach die Makros anders definiert.
+
+Zugegeben, dies ist nur ein kurzes Beispiel. Bei umfangreicheren
+Texten ist es jedoch eine sehr große Arbeitserleichterung.
+
+!end_node # Verwenden Sie standardisierte Quelltexte
+
+# = = = = =
+
+!begin_node Schreiben Sie Ihre eigenen Kommandos
+!html_name  tips_own_commands
+
+UDO unterstützt längst nicht alle Möglichkeiten jedes Ausgabeformates.
+Jedoch ist es unter Zuhilfenahme der Definitionen ein Leichtes, sich
+eigene Befehle zu schreiben oder spezielle Befehle für ein
+Ausgabeformat einzubauen. Die Kenntnis der Syntax des Ausgabeformates
+ist dabei natürlich sehr von Vorteil.
+
+Das folgende Beispiel zeigt, wie man Befehle zur Änderungen der
+Schriftgröße im (!LaTeX)-, HTML-, WinHelp- und Rich Text Format einbauen
+kann:
+
+!begin_quote
+!vinclude (!EXAMPLES_DIST)font_size.u
+!end_quote
+
+!end_node # Schreiben Sie Ihre eigenen Kommandos
+
+# = = = = =
+
+!end_node # Tipps & Tricks
+
+# === EOF ===

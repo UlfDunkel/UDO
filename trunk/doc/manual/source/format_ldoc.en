@@ -1,0 +1,53 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: Linuxdoc-SGML
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#
+################################################################################
+
+!begin_node Linuxdoc-SGML
+!html_name  format_ldoc
+
+In March 1996 I found an article in the German Unix magazine ""iX"" about
+Linuxdoc-SGML. It took two hours to download the Linuxdoc-SGML archive and
+to implement this format into UDO. Unfortunately I didn't own a Linux
+computer and so I wasn't able to test UDO's output.
+
+Linuxdoc-SGML is a multiformat converter like UDO. With Linuxdoc-SGML you
+can convert SGML files into (!LaTeX), RTF, HTML, Texinfo and manpages. But
+it's not a lie if I say that UDO is more powerful than Linuxdoc-SGML 1.5.
+
+!begin_description
+
+!item [The xlist environment is handled like a description environment!?] ~
+
+Linuxdoc-SGML doesn't offer an environment like UDO's xlist environment. So
+UDO is forced to handle it like a description environment.
+
+!item [Linuxdoc-SGML doesn't know (!V)&Aring;(!v), why?] ~
+
+Add the following line to (!V)/usr/lib/linuxdoc-sgml/rep/html/general(!v):
+
+!begin_quote
+!begin_verbatim
+<!entity Aring sdata "&Aring;" >
+!end_verbatim
+!end_quote
+
+!end_description
+
+!end_node # Linuxdoc-SGML
+
+# === EOF ===

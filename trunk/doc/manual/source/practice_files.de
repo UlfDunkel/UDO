@@ -1,0 +1,74 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Practice: Generated files
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from working.ui)
+#
+################################################################################
+
+!begin_node Erzeugte Dateien
+!html_name  files
+
+Es folgt eine Auflistung der Endungen der Dateien, die Ihnen beim
+Umgang mit UDO über den Weg laufen werden.
+
+#Ausgabe-Formate
+!begin_xlist [.htm(l):] !short
+!item [.1:]      Nroff
+!item [.c:]      C Sourcecode
+!item [.txt:]    ASCII-Format
+!item [.man:]    Manualpage-Format
+!item [.cmd:]    Kommandodatei für den Pure-C-Help-Hypertext-Compiler
+!item [.hpj:]    Projektdatei für den WinHelp-Hypertext-Compiler (!T)HC.EXE(!t)
+!item [.htm(l):] HTML-Format
+!item [.lyx:]    LyX-Format
+!item [.pas:]    Pascal Sourcecode
+!item [.rtf:]    RTF bzw. WinHelp- oder QuickView-Quelltext
+!item [.scr:]    Pure-C-Help-Quelltext
+!item [.sgm(l):] Linuxdoc-SGML-Quelltext
+!item [.stg:]    ST-Guide-Quelltext
+!item [.txt:]    Turbo-Vision-Help-Quelltext
+!item [.tex:]    (!LaTeX)-Quelltext
+!item [.texi:]   Texinfo-Quelltext
+!end_xlist
+
+Dateien mit der Endung (!V).ul?(!v) enthalten die Fehlermeldungen und
+Informationen, die UDO während der Umwandlung erzeugt.
+
+Dateien mit der Endung (!V).uh?(!v) enthalten die Trennvorschläge für das
+ASCII-, ST-Guide- und Pure-C-Help-Format.
+
+Dateien mit der Endung (!V).ut?(!v) enthalten den ""Include-Tree"", also den
+logischen Aufbau aus Include-Dateien Ihres Quelltextes.
+
+Die folgenden Dateiendungen werden auftauchen, wenn Sie die von UDO
+erzeugten Dateien durch die formatzugehörigen Programmen (siehe
+Klammerinhalt) weiterbearbeiten:
+
+!begin_xlist [.www]
+!item [.err:] Logfile des WinHelp-Compilers ((!T)HC.EXE(!t))
+
+!item [.h:]   C-Header-File für Turbo-Vision ((!T)TVHC.EXE(!t))
+
+!item [.hlp:] WinHelp-Datei ((!T)HC.EXE(!t)), Turbo-Vision-Help-Datei ((!T)TVHC.EXE(!t)),
+       Pure-C-Help-Datei ((!T)HC.PRG(!t))
+
+!item [.hyp:] ST-Guide-Hypertext ((!T)HCP.TTP(!t))
+
+!item [.ref:] ST-Guide-Referenzdatei ((!T)HCP.TTP(!t))
+!end_xlist
+
+!end_node # Erzeugte Dateien
+
+# === EOF ===

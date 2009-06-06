@@ -1,0 +1,366 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands A
+# Language    : German
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#
+################################################################################
+
+!begin_node A!..
+!html_name  cmds_a
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [=aqv])
+!html_name  cmd_aqv_eq
+
+Abfrage des Ausgabeformates.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/=aqv <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[aqv!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [=asc])
+!html_name  cmd_asc-eq
+
+Abfrage des Ausgabeformates.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/=asc <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[asc!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [a])
+!html_name  cmd_a
+
+Zusatznamen eines Kapitels definieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/a [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [alias]).
+
+!item [(!SEEALSO)]
+(!KW [alias])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [alias])
+!html_name  cmd_alias
+
+Zusatznamen eines Kapitels definieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/alias <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+Definiert einen Zweitnamen eines Kapitels. Taucht
+"<text>" im Text auf, werden genauso Querverweise zum
+zugehörigen Kapitel erzeugt wie bei (!KW [label]), (!KW [node]),
+(!KW [subnode]), (!KW [subsubnode]) etc. Sie können (!KW [alias]) mehrfach
+innerhalb eines Kapitels benutzen, jedoch sollte
+<text> nur einmal als Name für einen Alias, Label
+oder ein Kapitel verwendet werden.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.43
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [label]), (!link [Querverweise] [Querverweise]), (!link [Sprungmarken] [Sprungmarken])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [alpha])
+!html_name  cmd_alpha()
+
+(!alpha)-Zeichen ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/alpha)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das alpha-Symbol
+ersetzt, sofern es in dem jeweiligen Zeichensatz
+vorhanden ist. Ist es das nicht, so ersetzt UDO den
+Platzhalter durch ""(!T)alpha(!t)"".
+
+!item [(!EXAMPLE)]
+Aus (!T)(!/alpha)(!t) wird (!alpha).
+
+!item [(!SEEALSO)]
+(!KKW [beta]), (!link [Sonderzeichen] [Sonderzeichen]), Vordefinierte Makros
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [aqv])
+!html_name  cmd_aqv
+
+Abfrage des Ausgabeformates.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/aqv <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[aqv!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [asc])
+!html_name  cmd_asc
+
+Abfrage des Ausgabeformates.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/asc <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[asc!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [author])
+!html_name  cmd_author
+
+Namen des Autors setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/author <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [docinfo] [[author!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Titelseite] [Titelseite])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [authorimage])
+!html_name  cmd_authorimage
+
+Logo des Autors für die Titelseite definieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/authorimage <(!FILE)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [docinfo] [[authorimage!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Titelseite] [Titelseite])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kkw [aqua])
+!html_name  cmd_aqua
+
+Setzt die Schriftfarbe Cyan.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/aqua)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Cyan.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
+Postscript unterstützt.
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [autoref])
+!html_name  cmd_autoref
+
+Automatische Referenzierung ein-/ausschalten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/autoref [ on | off ](!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl schaltet die automatische Referenzierung ein ((!T)[on](!t)) oder aus ((!T)[off](!t)). Beim Start der Konvertierung ist die automatische Generierung von
+Querverweisen aktiviert. Bei der Umwandlung ins ST-Guide-Format werden die Befehle in @autorefon bzw.
+@autorefoff umgewandelt.
+
+!item [(!EXAMPLE)]
+(!T)!/autoref [off](!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!link [Querverweise] [Querverweise])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [autoref_items])
+!html_name  cmd_autoref_items
+
+Referenzierung bei Items ein-/ausschalten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/autoref_items [ on | off ](!t)
+
+!item [(!DESCRIPTION)]
+Hiermit kann man einstellen, ob UDO die Items einer description-Umgebung oder xlist-Umgebung
+referenzieren soll. Beim Start von UDO ist die Referenzierung der Items standardmäßig aktiviert.
+
+!item [(!EXAMPLE)]
+(!T)!/autoref_items [off](!t)
+
+!item [(!SEEALSO)]
+(!link [Beschreibungen] [Beschreibungen]), (!link [Listen] [Listen]), (!KW [item] [[~!!]])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

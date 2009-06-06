@@ -1,0 +1,176 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : header definitions
+# Language    : all
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: header introduced
+#
+################################################################################
+
+# ------------------------------------------------------------------------------
+# Typ für Manualpage setzen  / Set the type of the manual page
+# ------------------------------------------------------------------------------
+!man_type 1
+!nroff_type 1
+
+
+
+
+
+# ----------------------------------------------------------
+# Settings for csTeX (MultiTeX), GEM images with 100dpi
+# ----------------------------------------------------------
+!ifset [csTeX]
+!tex_strunk
+!tex_dpi 100
+!endif
+
+
+
+
+
+# ------------------------------------------------------
+# Settings for Lindner-TeX, GEM images with 100dpi
+# ------------------------------------------------------
+!ifset [lindnerTeX]
+!tex_strunk
+!tex_dpi 100
+!endif
+
+
+
+
+
+# -------------------------------------------------------
+# Settings for emTeX, LateX2e, MSP images, 300dpi
+# use symbol emTeX2e or emTeX2.09 to enable them
+# -------------------------------------------------------
+!ifset [emTeX2e]
+!tex_2e
+!tex_emtex
+!tex_dpi 300
+!no_verbatim_umlaute [tex]
+!no_images [tex]
+!endif
+
+!ifset [emTeX2.09]
+!tex_emtex
+!tex_dpi 300
+!no_verbatim_umlaute [tex]
+!no_images [tex]
+!endif
+
+!raw [tex] \parskip 5pt
+!raw [tex] \parindent 0pt
+
+
+
+
+
+# ----------------------------------------------------------------
+# Settings for RTF
+# ----------------------------------------------------------------
+#!rtf_monofont Courier New
+#!rtf_propfont Times New Roman
+
+
+
+
+
+# ----------------------------------------------------------------
+# Settings for HTML and HTML-Help
+# ----------------------------------------------------------------
+#!html_merge_nodes
+#!no_images [html]
+
+
+
+
+
+# ----------------------------------------------------------------
+# ST Guide commands
+# ----------------------------------------------------------------
+!raw [stg] @options +z
+#!raw [stg] @default Main
+!raw [stg] @help Titel
+#!raw [stg] @indexon
+#!raw [stg] @width 75
+!ifdest [stg]
+!parwidth 73
+!endif
+
+
+
+
+
+# ----------------------------------------------------------------
+# General switches
+# ----------------------------------------------------------------
+!use_justification	[asc]
+#!use_about_udo		[all]
+
+!use_nodes_inside_index [stg,win,wh4,html,pch,asc,ipf,hh,info]
+!use_label_inside_index [stg,win,wh4,html,pch,asc,ipf,hh,info]
+!use_alias_inside_index [stg,win,wh4,html,pch,asc,ipf,hh,info]
+!use_auto_toptocs       [stg,win,wh4,html,pch,ipf,hh,info]
+
+#!use_short_tocs        [stg,win,wh4,html,pch,ipf,hh]
+#!no_toc_subsubnodes    [stg,win,wh4,html,pch,ipf,hh]
+
+!use_auto_subtocs       [stg,win,wh4,html,pch,ipf,hh,info]
+!use_auto_subsubtocs    [stg,win,wh4,html,pch,ipf,hh,info]
+!use_auto_subsubsubtocs [stg,win,wh4,html,pch,ipf,hh,info]
+!sloppy
+
+#!no_toc_subsubnodes		[stg,win,wh4,pch,info,asc,ipf,hh,html]
+!no_effects				   [asc]
+!no_numbers				   [html,info]
+!no_umlaute             [info]
+
+!use_style_book         [tex,asc,rtf,win,aqv,lyx]
+!sort_hyphen_file       [asc,stg,pch]
+
+
+
+
+
+# ------------------------------------------------------
+# Special switches
+# ------------------------------------------------------
+!win_inline_bitmaps
+!win_high_compression
+#!html_merge_subsubnodes
+#!html_modern_layout
+#!html_switch_language english ../eng/udo.html
+
+# MEZ = UTC + 1 h
+!html_header_date +01:00
+
+
+
+
+# ----------------------------------------------------------------
+# General Infos
+# ----------------------------------------------------------------
+# !docinfo [author] www.udo-open-source.org
+# !docinfo [address] Asmecke 1
+# !docinfo [address] D-59846 Sundern
+# !docinfo [address] Deutschland
+# !docinfo [address] Internet: info@dirk-hagedorn.de
+# !docinfo [address] Mausnet: Dirk Hagedorn @ MK2
+!docinfo [webmastername] www.udo-open-source.org
+# !docinfo [webmasteremail] webmaster@udo-open-source.org
+!docinfo [webmasterurl] http://www.udo-open-source.org/
+# !docinfo [authorimage] (!IMAGES)dh
+
+# === EOF ===

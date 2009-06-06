@@ -1,0 +1,594 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands D
+# Language    : English
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#
+################################################################################
+
+!begin_node D!..
+!html_name  cmds_d
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [date])
+!html_name  cmd_date
+
+Datumsinformation für Titelseite setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/date <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [docinfo] [[date!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Title page] [Title page])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [define])
+!html_name  cmd_define
+
+Set a definition.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/define <wort> <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+Sets a (new) definition. When converting UDO will replace every
+""<word>"" by ""<text>"" without converting special chars. When
+using the example below every ""(!/H1)"" will be replaced by
+""</H1>"". The difference to a macro: no umlauts or other special
+characters will be converted. Definitions can contain parameters. Read the
+chapter ""Definitions"" to get to know how to use definitions with
+parameters.
+
+!item [(!EXAMPLE)]
+(!T)!/define H1 </H1>(!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.37
+
+!item [(!SEEALSO)]
+(!link [Definitions] [Definitions])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [deg])
+!html_name  cmd_deg()
+
+Output the (!deg) symbol.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/deg)(!t)
+
+!item [(!DESCRIPTION)]
+This placeholder will be replaced by the degree symbol if
+the destination format supports it. If it doesn't UDO will replace
+this placeholder by ""(!T)Grad(!t)"".
+
+!item [(!EXAMPLE)]
+(!T)(!/deg)(!t) becomes (!deg).
+
+!item [(!EXISTSSINCE)] Version 6.5.8
+
+!item [(!SEEALSO)]
+Defined macros
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kkkw [DEL] [del])
+!html_name  cmd_DEL_del
+!label (!kk1 [/DEL])
+!label (!kk1 [/del])
+
+Output deleted text in bold.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/DEL)<(!TEXT)>(!/del)(!t)
+
+!item [(!DESCRIPTION)]
+""<text>"" wird als Löschung markiert.
+
+Bei der HTML-Ausgabe wird die aktuelle Zeit als Attribut datetime
+und die URL ""http://www.udo-open-source.org"" als Attribut cite eingesetzt.
+
+Bei der RTF-Ausgabe wird ebenfalls die aktuelle Zeit eingesetzt. Außerdem
+trägt sich UDO als Änderungsautor 1 ein.
+
+Bei WinHelp(4), Apple Quickview und Postscript wird der Text wird
+durchgestrichen.
+
+Bei ST-Guide und AmigaGuide wird der Text hell dargestellt.
+
+Bei allen anderen Formaten wird der gelöschte Text in eckige Klammern gesetzt. 
+
+!item [(!EXAMPLE)]
+(!T)(!/DEL)Löschungen(!/del)(!t)
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!item [(!SEEALSO)]
+(!link [Text styling] [Text styling])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [depth])
+!html_name  cmd_depth
+
+Specify depth of table of contents.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/depth <(!VALUE)>(!t)
+
+!item [(!DESCRIPTION)]
+This switch, used in conjunction with a command
+to output a table of contents, specifies the
+depth of the generated table. The example
+below show how to generate a table of contents
+containing only the chapter names.
+
+!item [(!EXAMPLE)]
+(!T)!/tableofcontents !/depth 1(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [use_auto_subtocs]), (!KW [use_short_tocs]),
+(!KW [subtoc]), (!KW [subsubtoc]), (!KW [subsubsubtoc])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kw [docinfo])
+!html_name  cmd_docinfo
+
+Set document information.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/docinfo [<name>] <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+!item [Description:]
+This command is used to set several informations output on the title page. ""<name>"" can have one of the following values:
+
+!begin_description
+
+!item [title]
+""<text>"" will be displayed on the title page before the contents of
+the program name. It's also used inside the headlines.
+
+!item [program]
+""<text>"" will be displayed on the title page below the title.
+Furthermore ""<text>"" will be used by some destination formats
+to generate the header line.
+
+!item [programimage]
+""<file>"" will be displayed on the title page if the destination format supports images.
+
+!item [version]
+""<text>"" will be given out right below the contents of the program name on
+the title page.
+
+!item [date]
+""<text>"" will be displayed on the title page below the contents of
+the program version. The example shows how to use the current system
+time for the title page.
+
+!item [author]
+""<text>"" will be used as the name of the author on the title page
+and for different other purposes.
+
+!item [authorimage]
+""<file>"" will be displayed above the name of the author on the
+title page if the destination format supports images.
+
+!item [authoricon]
+""<file>"" will be displayed as image in the left frame or
+left column when using the frame layout or ""modern"" layout
+of HTML.
+
+!item [address]
+""<text>"" will be given out below the author's name on the
+title page. (!KW [docinfo] [[address!!]]) can be used up to 15 times,
+and can contain any address lines, such as email-addresses.
+
+!item [company]
+""<text>"" bezeichnet die Firma, für die ein Dokument erstellt wird.
+Wenn company benutzt wird, wird auf der Titelseite unter Autor
+""für company"" eingefügt.
+
+!item [category]
+""<text>"" bezeichnet eine Kategorie, zu der das Dokument gehört.
+
+!item [stgdatabase]
+With this command you can specify the contents of the @database-line
+that is generated for the ST-Guide format.
+If you don't use this command, UDO will construct a line containing
+the title and the program name.
+
+!item [drcstatusline]
+This command is used to specify the contents of the status line
+for the DRC format. If you don't use this command, UDO
+will use a line like ""Copyright (!copyright) by <author>"".
+If you did not set the name of the author, UDO will use
+the text ""Made with UDO"".
+
+# ToDo: Englisch
+!item [keywords]
+(!KW [docinfo] [[keywords!!]]) entspricht dem Kommando (!KW [html_keywords]).
+Kann auch bei Postscript genutzt werden. (!nl)
+Bei der HTML-Ausgabe allerdings nur, wenn in einzelnen Dateien nicht
+(!KW [html_keywords]) benutzt wird. Diese haben also Vorrang. (!nl)
+
+# ToDo: Englisch
+!item [description]
+(!KW [docinfo] [[description!!]]) entspricht dem Kommando (!KW [html_description]).
+Kann auch bei Postscript genutzt werden. (!nl)
+Bei der HTML-Ausgabe allerdings nur, wenn in einzelnen Dateien nicht
+(!KW [html_description]) benutzt wird. Diese haben also Vorrang. (!nl)
+
+!item [htmltitle]
+""<text>"" will be used as the title of every page (instead of
+using [title] and [program]).
+
+!item [robots]
+""<text>"" entspricht einer der Robots-Anweisungen, wie sie für Suchmaschinen benutzt werden.
+Erlaubt sind "none", "noindex", "index", "nofollow" und "follow".
+
+!item [appletitle]
+Wird für HTML-Apple-Help benötigt und beschreibt den Titel der Hilfe.
+
+!item [appleicon]
+Wird für HTML-Apple-Help benötigt. Damit wird das Icon angegeben, welches der Apple Help Viewer
+anzeigen soll.
+
+!item [webmastername|webmasteremail|webmasterurl]
+If you specify webmaster informations, UDO will
+output following lines at the end of each page:
+
+!begin_quote
+!begin_verbatim
+Copyright (!copyright) <webmastername> [<webmasteremail>|<webmasterurl>]
+Last updated on (!today)
+!end_verbatim
+!end_quote
+
+<webmasterurl> has priority over <webmasteremail>. If you don't specify
+any data or use the switch (!KW [no_footers] [[html!!]]) in the preamble,
+UDO will output nothing.
+
+!item [translator]
+""<text>"" describes the name of the localizer who has translated the product or document.
+When translator is used, the title page will show it below author and company as 
+""Translator: translator"".
+
+!item [distributor]
+""<text>"" describes the company which distributes the product or document.
+When distributor is used, the title page will show it below author and company as 
+""Distributor: distributor"".
+
+!end_description
+
+Die Werte-Einträge stehen als Defines zur Verfügung in der Form
+(!KW [UDO_xxx)], also z. B. (!KW [UDO_title]). Natürlich ist dies nur der
+Fall, wenn sie vorher definiert worden sind.
+
+!item [(!EXAMPLE2)]
+(!T)
+!begin_verbatim
+!docinfo [title] The Windows Help of
+!docinfo [program] UDO
+!docinfo [author] Dirk Hagedorn
+!docinfo [address] Asmecke 1
+!docinfo [address] D-59846 Sundern
+!docinfo [address] Germany
+!docinfo [address] Internet: info@dirk-hagedorn.de
+!docinfo [address] Mausnet: Dirk Hagedorn @ MK2
+!docinfo [webmasteremail] webmaster@dirk-hagedorn.de
+!docinfo [webmasterurl] http://www.dirk-hagedorn.de/
+!docinfo [authorimage] dh
+!docinfo [date] (!today)
+!end_verbatim
+(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!link [Title page] [Title page])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# ToDo: englisch
+!begin_node (!kw [doclayout])
+!html_name  cmd_doclayout
+
+Setzen von Informationen für das Layout.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/doclayout [(!FORMAT)][<name>] <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando dient dazu, verschiedene Informationen für
+das Layout. zu setzen. ""<name>"" kann dabei einer
+der folgenden Werte sein:
+
+!begin_description
+
+!item [paper]
+!begin_verbatim
+!doclayout [ps] [paper] foo
+!end_verbatim
+Mögliche Angaben für foo sind: A3PORTRAIT, A3LANDSCAPE,
+A4PORTRAIT, A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE
+
+!item [propfontname]
+!begin_verbatim
+!doclayout [ps] [propfontname] foo
+!end_verbatim
+Mögliche Angaben für foo sind Zeichensatznamen, z. B. Arial,
+Times New Roman, sans oder sans serif.
+
+Hinweis: Für die Postscriptausgabe gilt zur Zeit: Wenn dort irgendwas
+mit "Helvetica", "Arial" oder "sans-serif" steht wird "Helvetica" gesetzt,
+ansonsten "Times New Roman".
+
+!item [propfontsize]
+!begin_verbatim
+!doclayout [ps] [propfontsize] foo
+!end_verbatim
+Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
+
+!item [monofontname]
+
+!item [monofontsize]
+Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
+
+!item [node1size]
+!begin_verbatim
+!doclayout [ps,rtf] [node1size] foo
+!end_verbatim
+Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
+
+seit Release~6 Patchlevel~16
+
+!item [node2size]
+!begin_verbatim
+!doclayout [ps,rtf] [node2size] foo
+!end_verbatim
+Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
+
+seit Release~6 Patchlevel~16
+
+!item [node3size]
+!begin_verbatim
+!doclayout [ps,rtf] [node3size] foo
+!end_verbatim
+Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
+
+seit Release~6 Patchlevel~16
+
+!item [node4size]
+!begin_verbatim
+!doclayout [ps,rtf] [node4size] foo
+!end_verbatim
+Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
+
+seit Release~6 Patchlevel~16
+
+!item [openMode]
+Mögliche Angaben für foo sind die entsprechenden Angaben in
+der Dokumentation zu den pdfmarks.
+
+!end_description
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15, Teile erst ab Release~6 Patchlevel~16
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [drc])
+!html_name  cmd_drc
+
+Query the destination format.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/drc <text>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[drc!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [drc_bcolor])
+!html_name  cmd_drc_bcolor
+
+Specify color of ""bold"" text (DRC only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/drc_bcolor (!COLOR)(!t)
+
+!item [(!DESCRIPTION)]
+Since DRC does not know about different text styles,
+but can display text in different colors, you can use
+this command to specify the color of bold text.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [drc_icolor]), (!KW [drc_ucolor]), (!KKKW [B] [b])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [drc_flags])
+!html_name  cmd_drc_flags
+
+Assign value to node definition (DRC only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/drc_flags <(!VALUE)>(!t)
+
+!item [(!DESCRIPTION)]
+This command can be used to assign a value that is output as last numeric value of a node definition when converting to DRC.
+
+!item [(!EXAMPLE)]
+(!T)!/drc_flags 6(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~7
+
+!item [(!SEEALSO)]
+(!KW [drc_bcolor]), (!KW [drc_icolor]), (!KW [drc_ucolor])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [drc_icolor])
+!html_name  cmd_drc_icolor
+
+Specify color of ""italic"" text (DRC only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/drc_icolor (!COLOR)(!t)
+
+!item [(!DESCRIPTION)]
+Since DRC does not know about different text styles,
+but can display text in different colors, you can use
+this command to specify the color of italic text.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [drc_bcolor]), (!KW [drc_ucolor]), (!KKKW [I] [i])
+
+!end_xlist
+
+!end_node
+# = = = = =
+
+!begin_node (!kw [drc_ucolor])
+!html_name  cmd_drc_ucolor
+
+Specify color of ""underlined"" text (DRC only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/drc_ucolor (!COLOR)(!t)
+
+!item [(!DESCRIPTION)]
+Since DRC does not know about different text styles,
+but can display text in different colors, you can use
+this command to specify the color of underlined text.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [drc_icolor]), (!KW [drc_bcolor]), (!KKKW [U] [u])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

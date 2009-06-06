@@ -1,0 +1,145 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# Notes:
+#    This file contains the command index (in alphabetical order).
+#    Output for commands which are no longer existing will be created 
+#    only if "OldKeywords" was set.
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (from commands.ui)
+#   fd  Jun 05: nodes 'Command description' + 'Colors' are no longer hidden
+#
+################################################################################
+
+!begin_node Befehlsindex
+!html_name  cmds
+
+!ignore_subsubtoc
+
+In diesem Anhang finden Sie eine Kurzbeschreibung aller UDO-Kommandos
+in alphabetischer Reihenfolge. In der Befehlserklärung wird
+beschrieben, was die Beschreibungen bedeuten.
+
+# Bei den Hypertexten eine Tabelle anbieten, von der aus man die
+# nach dem Alphabet sortierten Unterkapitel erreichen kann
+!ifdest [win,wh4,html,hh,stg,amg,pch,tvh,aqv]
+	!ignore_subtoc
+	!hline
+	!begin_table [llllll]
+	A!.. !! B!.. !! C!.. !! D!.. !! E!.. !! F!..
+	G!.. !! H!.. !! I!.. !! J!.. !! K!.. !! L!..
+	M!.. !! N!.. !! O!.. !! P!.. !! Q!.. !! R!..
+	S!.. !! T!.. !! U!.. !! V!.. !! W!.. !! X!..
+	Y!.. !! Z!..
+	*!..
+	!end_table
+
+!endif
+
+# = = = = =
+
+!begin_node Befehlserklärung
+!html_name  cmds_explanation
+
+!begin_description
+
+!item	[Typ & Position:]
+	Der Typ des Befehls und die Position, wo der Befehl benutzt werden darf.
+
+	Ein Kommando veranlasst UDO, etwas Bestimmtes zu tun, ein Schalter setzt
+    bestimmte Informationen, an denen UDO erkennt, wie es demnächst zu
+    verfahren hat, ein Platzhalter wird bei der Umwandlung lediglich
+    durch etwas anderes ersetzt.
+
+	Bei ""Vorspann"" darf man einen Befehl nur im Vorspann des Quelltextes
+    (also vor (!KW [begin_document])) einsetzen, bei ""Hauptteil"" darf
+    man einen Befehl nur im Hauptteil des Quelltextes (also nach
+    (!KW [begin_document])) einsetzen, bei ""Vorspann & Hauptteil"" darf
+    man einen Befehl überall einsetzen.
+
+!item	[Syntax:]
+	Hier sieht man, wie man den Befehl einsetzen muss.
+
+	!begin_tlist [WsystemeW] !short
+
+	!label <text>
+	!item [<text>] steht für eine Zeichenfolge
+
+	!label <datei>
+	!item [<datei>] steht für einen Dateinamen. (!FILESPACEQUOTE)
+
+	!label <wert>
+	!item [<wert>] steht für eine Ziffernfolge
+
+	!label <zeichen>
+	!item [<zeichen>] steht für ein einzelnes Zeichen
+
+	!label <kürzel>
+	!item [<kürzel>] steht für die Angabe von Kürzeln der (!link [Ausgabeformate] [Ausgabeformat])
+
+	!label <sprache>
+	!item [<sprache>] steht für die Angabe von (!link [Sprachkürzeln] [Sprache])
+
+	!label <systeme>
+	!item [<systeme>] steht für ein oder mehrere (!link [Betriebssysteme] [Betriebssystem])
+
+	!label <farbe>
+	!item [<farbe>] steht für einen (!link [Farbnamen] [Farben])
+
+	!label <zeichensatz>
+	!item [<zeichensatz>] steht für einen (!link [Zeichensatz] [Code])
+
+	!end_tlist
+
+!item	[Beispiel:]
+	Hier findet man eventuell ein kurzes Beispiel für den jeweiligen Befehl.
+
+!item	[Siehe auch:]
+	Hier sind verwandte Befehle oder Themen ausgelistet, die
+	in direktem Zusammenhang mit dem beschriebenen Befehl stehen.
+
+!end_description
+
+!end_node # Befehlserklärung
+
+# = = = = =
+
+!begin_node Farben
+!html_name  cmds_colors
+
+!index Farben
+!label Farben
+!begin_itemize !short
+!item black
+!item silver      (hellgrau, ehemals ""grey"")
+!item gray        (dunkelgrau, ""gray"", nicht ""grey""!!!)
+!item white
+!item maroon
+!item red
+!item purple
+!item fuchsia
+!item green       (dunkelgruen)
+!item lime        (hellgruen)
+!item olive
+!item yellow
+!item navy
+!item blue
+!item teal
+!item aqua        (ehemals ""cyan"")
+!end_itemize
+
+!end_node # Farben
+
+# === EOF ===

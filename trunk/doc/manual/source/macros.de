@@ -1,0 +1,87 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Macro definitions
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (extracted from manual.u)
+#   fd  Jun 05: FILESPACEQUOTE
+#
+################################################################################
+
+# path macros
+# --------------------
+!macro EXAMPLES       ./examples/de/
+!macro EXAMPLES_DIST  ../../examples/de/
+
+
+!ifdest [win,wh4]
+!macro FORMAT         (!link [<k\'FCrzel>] [Ausgabeformat])
+!endif
+
+!ifdest [hh,html]
+!macro FORMAT         (!link [&lt;k&uuml;rzel&gt;] [Ausgabeformat])
+!macro COLOR          (!link [&lt;farbe&gt;] [Farben])
+!macro LANGUAGE       (!link [&lt;sprache&gt;] [Sprache])
+!macro OS             (!link [&lt;system&gt;] [Betriebssystem])
+!macro CODE           (!link [&lt;zeichensatz&gt;] [Code])
+!else
+!macro FORMAT         (!link [<kürzel>] [Ausgabeformat])
+!macro COLOR          (!link [<farbe>] [Farben])
+!macro LANGUAGE       (!link [<sprache>] [Sprache])
+!macro OS             (!link [<system>] [Betriebssystem])
+!macro CODE           (!link [<zeichensatz>] [Code])
+!endif
+
+
+!macro DocumentationWorkInProgress  Die UDO-Anleitung ist im Moment in Überarbeitung. Zwischenstände stehen auf der UDO-Website derzeit nur zum Online-Lesen zur Verfügung, aber nicht zum Download.
+!macro FollowingOutdated            (!I)Die nachfolgenden Textpassagen sind z.T. nicht mehr aktuell und sind zur Überarbeitung vorgesehen.(!i)
+
+
+# Sprachabhängige Textbausteine für die UDO-Historie in history.ui (alphabetisch geordnet)
+!macro BUGFIXES       Fehlerbehebungen
+!macro CHANGES        Änderungen
+!macro GENERAL        Allgemeines
+!macro NEWS           Neuheiten
+!macro PUBLISHED      (!1) wurde am (!2) veröffentlicht.
+
+
+# Sprachabhängige Textbausteine für den Befehlsindex (alphabetisch geordnet)
+!macro ABBREV         Dies ist eine Abkürzung für das Kommando
+!macro CHAR           zeichen
+!macro COMMAND        Kommando
+!macro COMMANDABBREV  Kommando-Abkürzung
+!macro DESCRIPTION    Beschreibung:
+!macro EXAMPLE        Beispiel:
+!macro EXAMPLE2       Beispiel:
+!macro EXISTSSINCE    Existiert seit:
+!macro EXISTEDUNTIL   Existierte bis:
+!macro FILE           datei
+!macro FILESPACEQUOTE Enthält der Dateiname Leerzeichen, muss er in Anführungszeichen gesetzt werden.
+!macro HINT           (!B)Hinweis:(!b)
+!macro HINTS          (!B)Hinweise:(!b)
+!macro MAINPART       Hauptteil
+!macro MISS           (!idx [Hier fehlt noch etwas])!..
+!macro NOTEXISTING    Dieser Befehl existiert nicht mehr.
+!macro PLACEHOLDER    Platzhalter
+!macro PREAMBLE       Vorspann
+!macro RENAMEDTO      Dieses Kommando (!1) wurde umbenannt zu
+!macro SEEALSO        Siehe auch:
+!macro SPECIALCHAR    Sonderzeichen
+!macro SWITCH         Schalter
+!macro SYNTAX         Syntax:
+!macro TEXT           text
+!macro TYPEPOSITION   Typ & Position:
+!macro USEINSTEAD     Benutzen Sie stattdessen (!1)
+!macro VALUE          wert
+
+# === EOF ===

@@ -1,0 +1,177 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: HTML (Hypertext Markup Language)
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#
+################################################################################
+
+!begin_node HTML (Hypertext Markup Language)
+!html_name  format_html
+!label      HTML
+
+!begin_description
+
+!item	[How can I tell UDO not make files for each chapter?] ~
+
+In contrast to the other formats UDO saves a separate HTML file for each
+chapter by default. UDO names these files by using the chapter numbers. The
+title page and the table of contents will be saved in the file you passed in
+the command line.
+
+!index !/html_merge_nodes
+!index !/html_merge_subnodes
+!index !/html_merge_subsubnodes
+!index !/html_merge_subsubsubnodes
+
+Using the switches
+(!KW [html_merge_nodes]),
+(!KW [html_merge_subnodes]),
+(!KW [html_merge_subsubnodes]) or
+(!KW [html_merge_subsubsubnodes])
+you can tell UDO not to save a file for each chapter.
+
+If you use (!KW [html_merge_nodes]) inside the preamble UDO will save only
+one HTML file that contains the whole text. You should use this option only
+for small source files.
+
+If you use (!KW [html_merge_subnodes]) UDO will save separate files only
+for chapters. All sections, subsections and paragraphs of a chapter will be
+saved inside this file, too.
+
+If you use (!KW [html_merge_subsubnodes]) UDO will save separate files for
+chapters and sections. The subsections and paragraphs of a section will be
+saved in the file that contains the text of the upper section.
+
+Finally if you use (!KW [html_merge_subsubsubnodes]) the paragraphs of a
+subsection will be saved in the file that contains the text of the
+subsection. UDO will save separate files for chapters, sections and
+subsections.
+
+!index HTML !! Filenames
+!index !/html_name
+
+!item [I don't like the names of the HTML files! ] ~
+
+Using the command (!KW [html_name]) inside a chapter, section, subsection
+or paragraph you can tell UDO which filename it shall use instead of using
+a filename like "01020304.html".
+
+!item [How can I suppress these ugly headlines?] ~
+
+!index	udo_rg.gif
+!index	udo_lf.gif
+!index	udo_up.gif
+!index	HTML !! Headlines
+
+UDO will print on every HTML page a headline that contains the title of the
+documentation and hypertext links to the previous, next and upper page.
+UDO uses GIF's for these links that are saved by UDO automatically. The
+filenames of these GIF's are (!V)udo_lf.gif(!v), (!V)udo_rg.gif(!v) and
+(!V)udo_up.gif(!v).
+
+!index (!kw [no_headlines])
+
+Using the switch (!KW [no_headlines] [[html!!]]) inside the preamble you can
+tell UDO not to generate these headlines.
+
+!item [How can I easily make my own headlines or bottomlines?] ~
+
+!index Headlines
+!index Bottomlines
+
+If you want to make your own headlines or bottomlines you can use macros
+at the beginning of each chapter. The following example shows how I added
+bottomlines to my WWW pages. These pages contain links to the chapters that
+contain my address, the descriptions of my software and links to other web
+sites.
+
+!begin_description
+!item [Main file:]
+
+!vinclude (!EXAMPLES)html/headfoot.ui
+
+!item [software.ui:]
+
+!vinclude (!EXAMPLES)html/software.ui
+!end_description
+
+If you convert the source file to HTML UDO expands the macros that contain
+the text of the headlines and bottomlines. Because UDO insert links
+automatically you can jump to the other pages by clicking the entries of the
+bottomline.
+
+If you don't convert to HTML empty macros are used so that nothing will
+appear when using (!V)(!/HEAD)(!v) or (!V)(!/FOOT)(!v).
+
+!index	HTML !! Table frames
+
+!item [Sometimes a table has a frame, sometimes it hasn't!?] ~
+
+Unfortunately HTML only allows to use tables with or without frames. You
+cannot use table lines where you want to.
+
+To print a table with a frame you have to add (!I)!/hline(!i) to the line
+that contains (!KW [begin_table]). If you don't want a frame don't use
+(!KW [hline]). That's all.
+
+!index	HTML !! Suffixes
+
+!item [Which suffixes does UDO use for HTML files?] ~
+
+By default UDO uses the suffix of the (!V)(--)outfile(!v) you used in the
+command line:
+
+!begin_tlist [-o INDEX.HTML] !short
+!item [-o index.htm]	(!V).htm(!v)
+!item [-o index.html]	(!V).html(!v)
+!item [-o INDEX.HTML]	(!V).HTML(!v)
+!end_tlist
+
+If you use the option (!T)-o~!(!t) UDO uses ''(!V).htm(!v)'' on operating
+systems with 8+3-filenames and ''(!V).html(!v)'' on operating systems with
+long filenames.
+
+!item [The filenames of the URL's are wrong!?] ~
+
+If you use UDO on an operating system that doesn't support long filenames
+but you have used ''(!V)(--)outfile index.html(!v)'' and you copy the saved
+''(!V).htm(!v)'' files to a web server, remember this:
+
+!begin_enumerate
+!item	UDO will try to save ''(!V)index.html(!v)'' but TOS and DOS will
+name it ''(!V)index.htm(!v)''.
+
+!item	UDO will use for all hypertext links the suffix ''(!V).html(!v)''
+because of the suffix of the ''outfile''. If you use a HTML browser for TOS
+or DOS this browser will open ''(!V)index.html(!v)'' without any problems
+even if there's only a file named ''(!V)index.htm(!v)''.
+
+!item	When copying the files to a web server you have to change the
+suffixes from ''(!V).htm(!v)'' to ''(!V).html(!v)''. If you will forget this
+all links will be wrong.
+!end_enumerate
+
+# ToDo: Englisch
+!index Hintergrundmusik
+!index HTML !! Hintergrundmusik
+!item [Wie kann ich Hintergrundmusik einbinden?]
+
+Hier für steht das Kommonado (!KW [html_bgsound]) zur Verfügung.
+
+!end_description
+
+!end_node # HTML (Hypertext Markup Language)
+
+# === EOF ===
