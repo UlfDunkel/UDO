@@ -1,0 +1,57 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands K
+# Language    : English
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#
+################################################################################
+
+!begin_node K!..
+!html_name  cmds_k
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [keyword])
+!html_name  cmd_keyword
+
+Set index entry or keyword.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/keyword <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+This command no longer exists and has been renamed to (!KW [index]).
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.44
+
+!item [(!EXISTEDUNTIL)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!KW [index])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

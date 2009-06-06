@@ -1,0 +1,299 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands M
+# Language    : German
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#
+################################################################################
+
+!begin_node M!..
+!html_name  cmds_m
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [=man])
+!html_name  cmd_man-eq
+
+Abfrage des Ausgabeformates.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/=man <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[man!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [macro])
+!html_name  cmd_macro
+
+Makro definieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/macro <wort> <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando definiert ein neues Makro. Bei der
+Umwandlung wird dann ""(!/<wort>)"" durch ""<text>""
+ersetzt. Im Beispiel würde ""(!/DH)"" durch ""Dirk Hagedorn"" ersetzt.
+
+!item [(!EXAMPLE)]
+(!T)!/macro DH Dirk Hagedorn(!t)
+
+!item [(!SEEALSO)]
+(!link [Makros] [Makros])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [maketitle])
+!html_name  cmd_maketitle
+
+Titelseite ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/maketitle(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando erzeugt in der Zieldatei eine
+Titelseite, die aus den Informationen des (!KW [docinfo])-Befehls
+gebildet wird. Wenn (!KW [maketitle]) benutzt wird,
+sollte es nur direkt nach (!KW [begin_document]) eingesetzt werden.
+
+!item [(!SEEALSO)]
+(!KW [docinfo]), (!link [Titelseite] [Titelseite])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [man])
+!html_name  cmd_man
+
+Abfrage des Ausgabeformates.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/man <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[man!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [man_lpp])
+!html_name  cmd_man_lpp
+
+Zeilen pro Seite setzen (nur Manualpage).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/man_lpp <(!VALUE)>(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Anzahl der Zeilen pro Seite (""lines per page"") einer Manualpage. Im Fußbereich werden dann
+zusätzlich Seitennummern ausgegeben. Beim Start der Umwandlung ist die Seitenlänge undefiniert und es
+werden auch keine Fußzeilen ausgegeben.
+
+!item [(!EXAMPLE)]
+(!T)!/man_lpp 60(!t)
+
+!item [(!SEEALSO)]
+(!KW [use_formfeed])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [man_type])
+!html_name  cmd_man_type
+
+Programmtyp setzen (nur Manualpage).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/man_type <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+""<text>"" wird bei der Ausgabe in eine Manualpage in
+Klammern in der Kopfzeile ausgegeben. Im Beispiel
+würde bei benutztem ""(!KW [docinfo] [[program!!] udo])"" die Kopfzeile
+""udo(1)"" ausgegeben. ""<text>"" wird nicht als Dateiendung benutzt.
+
+!item [(!EXAMPLE)]
+(!T)!/man_type 1(!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.45
+
+!item [(!SEEALSO)]
+(!KW [nroff_type])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [mapping])
+!html_name  cmd_mapping
+
+Nummer für Node vergeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/mapping <(!VALUE)>(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl wird momentan nur für WinHelp und IPF unterstützt.
+
+!begin_description
+
+!item [IPF:]
+Wird in einem Node (!KW [mapping] [4711]) benutzt, so erzeugt UDO den
+Eintrag res=4711 im IPF-Node-Header. Wird kein (!KW [mapping]) benutzt,
+so wird auch kein res=!.. ausgegeben.
+
+!item [WinHelp:]
+Mit (!KW [mapping] [<wert>]) kann ein numerischer Wert angegeben
+werden, den UDO dann im Map-File für einen Node verwendet. Wird
+kein (!KW [mapping]) verwendet, so sichert UDO einen Eintrag im Map-File
+mit seiner internen Nummer, aber nur dann, wenn man eine
+(!KW [win_helpid]) gesetzt hat. Sprich: Ein Eintrag wird nur dann
+erzeugt, wenn man bei einem Node (!KW [mapping]) oder (!KW [win_helpid]) oder beides verwendet.
+
+!end_description
+
+!item [(!EXAMPLE)]
+(!T)!/mapping 4711(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!KW [win_helpid])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kkw [maroon])
+!html_name  cmd_maroon
+
+Setzt die Schriftfarbe Kastanienbraun.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/white)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Kastanienbraun.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
+Postscript unterstützt.
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [medskip])
+!html_name  cmd_medskip
+
+Zwei zusätzliche Leerzeilen einfügen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/medskip(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl sorgt für die Ausgabe von zwei
+zusätzlichen Leerzeilen und dient dazu, Absätze
+deutlicher voneinander abzuheben. Bei der Umwandlung
+ins (!LaTeX)-Format werden keine drei Leerzeilen sondern
+''(!V)\medskip(!v)'' ausgegeben.
+
+!item [(!SEEALSO)]
+(!KW [smallskip]), (!KW [bigskip])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

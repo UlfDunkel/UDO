@@ -1,0 +1,192 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: Windows Help (WinHelp)
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#
+################################################################################
+
+!begin_node Windows Help (WinHelp)
+!html_name  format_winhelp
+!alias      WinHelp
+!alias      Windows-Help
+
+!begin_description
+
+!item [WinHelp meint, dass *.rtf und *.hpj keine Hilfedatei sei?]
+
+Weder die eine noch die andere Datei ist eine fertige Hilfedatei
+für Windows. UDO erzeugt lediglich die Quelltexte einer
+Hilfedatei, welche noch mit einem Hypertext-Compiler (HC.EXE,
+HC31.EXE, HCP.EXE) übersetzt werden muss.
+
+# ToDo: Text aktualisieren
+!item [Woher bekomme ich den Hypertext-Compiler?]
+
+# Den Hypertext-Compiler HC31.EXE bekommen Sie überall dort, wo es auch UDO gibt (siehe Bezugsquellen).
+# Sie finden ihn auch auf dem FTP-Server von Microsoft (ftp.microsoft.com).
+# 13.12.2003: neuer Text - Ulrich Kretschmer
+Den Hypertext-Compiler HC31.EXE können Sie kostenlos vom FTP-Server von Microsoft (ftp.microsoft.com) herunterladen.
+
+!item [Warum will der HC einfach keine HLP-Datei erzeugen?]
+
+Dafür kann es zwei Gründe geben:
+
+!begin_enumerate
+
+!item Der UDO-Quelltext enthält Fehler. Schauen Sie sich also
+zunächst die Fehlermeldungen von UDO in der Datei mit der Endung
+(!V).ulw(!v) an, beseitigen Sie etwaige Fehler und konvertieren Sie
+dann den UDO-Quelltext neu. Falls UDO keine Fehlermeldungen ausgibt, so
+kann es dennoch sein, dass der Quelltext Fehler enthält, UDO diese
+Fehler aber nicht erkannt hat.
+
+!item Der HC macht Murks. Beachten Sie das Errorfile mit der Endung
+(!V).err(!v), welches vom HC angelegt wird. Leider kann ich keine
+Hilfestellung zu den Fehlermeldungen des HC geben, da ich in den
+meisten Fällen selbst nicht weiss, was da schiefläuft.
+!end_enumerate
+
+!item [Wofür ist die Datei mit der Endung ''hpj''?]
+
+UDO erzeugt automatisch eine zum Hypertext gehörende Projektdatei mit
+der Endung (!V).hpj(!v), die dem HC übergeben werden muss, um aus dem
+Quelltext eine fertige WinHelp-Datei zu erstellen.
+
+In dieser Projektdatei befinden sich Informationen wie der Titel des
+Hypertextes, die zusätzlichen Schaltflächen, die Ausmaße des Fensters
+nach dem Öffnen des Hypertextes etc.
+
+UDO überschreibt vorhandene Projektdateien ohne Rückfrage. Wenn Sie
+manuelle Änderungen an einer Projektdatei vorgenommen haben und diese
+beibehalten möchten, so schreibschützen Sie die Projektdatei.
+
+!item [Wie werden hier die Kopfzeilen erzeugt?]
+
+UDO erzeugt auf jeder Seite (mit Ausnahme der Titelseite und des
+Inhaltsverzeichnisses) eine Kopfzeile. In dieser befindet sich der Name
+des jeweiligen Kapitels. Kopfzeilen werden als
+""non-scrolling-regions"" angelegt, so dass man auch nach dem Scrollen
+der Seite immer noch den Kapitelnamen erkennen kann.
+
+Durch den Schalter ""(!KW [no_headlines] [[win!!]])"" wird die Ausgabe
+von Kopfzeilen unterdrückt.
+
+!item [Wie werden die Kontextstrings ermittelt?]
+
+Falls Sie von anderen WinHelp-Files auf ein mit UDO erzeugtes
+WinHelp-File verzweigen möchten, müssen Sie den Kontextstring des
+Kapitels kennen.
+
+WinHelp erlaubt in Kontextstrings keine Sonderzeichen. UDO wandelt
+daher die Namen der Kapitel folgendermaßen in Kontext-strings um:
+
+!begin_enumerate
+!item Zunächst werden wie sonst auch Sonderzeichen durch die
+RTF-Schreibweise ersetzt.
+
+!item Leerzeichen werden in Unterstriche umgewandelt.
+
+!item Alle anderen Zeichen (ausgenommen Ziffern und die Buchstaben des
+Alphabets) werden durch Ihren hexadezimalen Wert in großer Schreibweise
+mit einem vorangehenden Unterstrich ersetzt.
+!end_enumerate
+
+Ein Beispiel:
+
+!begin_quote
+!begin_verbatim
+UDO:     !node LaTeX-Einführung Teil 1
+WinHelp: #{footnote # LaTeX_2DEinf_5C_27FChrung_Teil_1}
+!end_verbatim
+!end_quote
+
+Erläuterungen:
+
+!begin_enumerate
+!item Das Minuszeichen entspricht ASCII ""0x2D"", daher wird es durch
+""_2D"" ersetzt.
+
+!item Das ""ü"" in Einführung lautet in RTF-Schreibweise
+""(!T)\'FC(!t)."" ""\"" entspricht ""0x5C"", wird also durch ""_5C""
+ersetzt. ""'"" enspricht ""0x27"", wird also durch ""_27"" ersetzt.
+
+!item Die Leerzeichen werden durch ""_"" ersetzt.
+!end_enumerate
+
+Sie sehen, dass aus einem ""ü"" die ziemlich lange Zeichenfolge
+""_5C_27FC"" wird. Dies scheint auf den ersten Blick mehr als
+umständlich und ""doppelt gemoppelt"" zu sein, bringt aber den Vorteil,
+dass die Vergabe von gleichen Kontextstrings bei ähnlichen Kapitelnamen
+ziemlich unwahrscheinlich wird. Würde aus dem ""ü"" lediglich ""FC""
+gemacht, wären Probleme vorprogrammiert.
+
+!item [Warum werden Tabellen nicht zentriert?]
+
+Entweder ist dies wirklich nicht möglich, Tabellen zentriert
+auszugeben, oder aber ich habe bei meiner viertägigen Suche die
+entscheidende Möglichkeit übersehen.
+
+!item [Warum werden in Tabellen keine Linien angezeigt?]
+
+Die Tabellenfunktionen von WinHelp sind ziemlich mager. So ist es
+unmöglich, Linien frei in einer Tabelle zu plazieren. Es ist nur
+möglich, jede Tabellenzelle mit oder ohne Rahmen darzustellen.
+
+!item [Warum sind die Einrückungen bei Listen und Tabellen so groß?]
+
+UDO kennt die Zeichenbreiten der benutzten Zeichensätze nicht. Daher
+benutzt es einen konstanten Wert für jedes Zeichen. Damit ist die
+Einrückung auch bei kursiver fetter Großschrift passend, bei reiner
+Proportionalschrift ist die Einrückung und auch die Breite der
+Tabellenspalten etwas zu groß, was jedoch eher zu verschmerzen ist, als
+eine zu geringe Einrückung oder Spaltenbreite.
+
+!item [Wie kann ich DOS-Grafikzeichen darstellen?]
+
+Leider gar nicht.
+
+WinHelp weigert sich, die Fonts ""Terminal"" und ""MS LineDraw"" zur
+Anzeige des Textes zu verwenden. Stattdessen benutzt WinHelp einen
+Ersatzfont aus der Roman-, Script- oder Symbol-Familie, die leider alle
+keine DOS-Grafikzeichen enthalten.
+
+UDO ersetzt daher DOS-Grafikzeichen durch die ASCII-Zeichen ""+"",
+""-"" und ""|"", um z.B. DOS-Screenshots halbwegs realistisch
+darzustellen.
+
+!item [Warum sollte ich die Quelltexte mit einem Windows-Editor schreiben?]
+
+Sie können die Laufzeit von UDO positiv beinflussen, wenn Sie
+Quelltexte für eine Windows-Hilfe gleich im Windows-Zeichensatz
+schreiben. UDO braucht in dem Falle keine aufwendige
+Zeichensatzkonvertierung vornehmen.
+
+Achten Sie hierbei darauf, dass Sie den Schalter (!KW [code] [[iso!!]]) benutzen, um
+UDO anzuzeigen, dass die Texte nicht im DOS-Zeichensatz erstellt
+wurden.
+
+!item [Warum sollte ich die WinHelp-Dateien komprimieren?]
+
+Mit den Schaltern (!KW [win_medium_compression]) und (!KW [win_high_compression])
+sorgen Sie dafür, dass der Help-Compiler die WinHelp-Datei komprimiert.
+Dadurch können Sie die Größe der Datei bis zu 50~% verringern, wobei
+sich allerdings die Laufzeit des Help-Compilers, besonders bei der
+hohen Komprimierungsrate, verlängert.
+
+!end_description
+
+!end_node # Windows Help (WinHelp)
+
+# === EOF ===

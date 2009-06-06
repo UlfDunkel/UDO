@@ -1,0 +1,181 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats table
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formattb.ui)
+#
+################################################################################
+
+!ifnset var_kuerzel
+	!index Abbreviations
+	!set var_kuerzel
+!endif
+
+!begin_xlist [linuxdoc ]
+
+!item [amg]
+AmigaGuide (!nl)
+hypertext system, used for documentation of Amiga programs (!nl)
+Commodore Amiga
+
+!item [aqv]
+Apple QuickView (!nl)
+old hypertext format for Mac~OS (!nl)
+Apple
+
+!item [asc]
+ASCII (!nl)
+"Plain" Text (!nl)
+all
+
+!item [drc]
+David's Readme Compiler (!nl)
+DOS program for creating menu-driven ReadMe's as EXE-programs (!nl)
+MS-DOS
+
+!item [hah]
+HTML Apple Help (!nl)
+
+!item [helptag]
+HP-Helptag-SGML (!nl)
+SGML-based hypertext helpsystem for commercial Unices (HP-UX, Sun Solaris, IBM AIX) (!nl)
+Unix
+
+!item [html]
+HTML (Hypertext Markup Language) (!nl)
+page description language -- for websites, documentations and more (!nl)
+platform-independent
+
+!item [hh]
+HTMLHelp (!nl)
+HTML-related format, for creation of HTML-Help files under windows (!nl)
+Win32
+
+!item [tex]
+(!LaTeX) 2.09, (!LaTeX)2e  (!nl)
+typesetting system, especially for scientific publications (!nl)
+many platforms
+
+!item [ipf]
+OS/2 IPF (!nl)
+SGML-based text format for creating help files (INF, HLP) under OS/2 (!nl)
+OS/2
+
+!item [linuxdoc]
+Linuxdoc-SGML (!nl)
+Linuxdoc-SGML (recently: SGMLtools) is -- like UDO -- a multiformat converter
+which converts its own format to LaTeX, Manualpage, RTF, HTML, Texinfo... (!nl)
+Unix/Linux
+
+!item [lyx]
+LyX (!nl)
+a (!LaTeX)-related document processor (!nl)
+Unix/Linux
+
+!item [man]
+Manualpage (!nl)
+Unix-/Linux-help pages for commandline programs (!nl)
+Unix/Linux
+
+!item [nroff]
+NROFF (!nl)
+Unix-/Linux-help pages for commandline programs (!nl)
+Unix/Linux
+
+!item [pdflatex]
+PDF(!LaTeX) (!nl)
+for producing PDF files from (!LaTeX) (!nl)
+diverse
+
+!item [ps]
+PostScript (!nl)
+device-independent page description language, e.g. for printers; can also be
+used for producing PDF files (Ghostscript, Adobe Distiller) (!nl)
+several
+
+!item [pchelp]
+Pure-C-Help (!nl)
+help system for the Pure C compiler (!nl)
+Atari ST
+
+!item [rtf]
+RTF (Rich Text Format) (!nl)
+for exchanging text between different programs and platforms (!nl)
+several
+
+!item [c, pascal]
+Sourcecode (C und Pascal) (!nl)
+the UDO source file will be converted to sourcecode, meaning normal text becomes
+comment, the content of the sourcecode environment becomes C-/Pascal-sourcecode. (!nl)
+several
+
+!item [stg]
+ST-Guide (!nl)
+a hypertext system (!nl)
+Atari ST
+
+!item [info]
+GNU Texinfo (!nl)
+for making online documentations, started with (!T)info 'command'(!t) (!nl)
+Linux, MiNTNet
+
+!item [v]
+Turbo-Vision-Help (!nl)
+creating online helpfiles for DOS programs written with Borland's
+Turbo Vision-Library  (!nl)
+MS-DOS
+
+!item [udo]
+UDO (!nl)
+merges all UDO input files into one big file (!nl)
+all platforms with UDO-support
+
+!item [win, wh4]
+Windows-Help, WinHelp4 (!nl)
+RTF-derived format for producing WinHelp files under Windows (!nl)
+Windows (Win16, Win32)
+!end_xlist
+
+!begin_ignore
+!begin_xlist [htag] !short
+!item [amg]   AmigaGuide
+!item [aqv]   Apple-QuickView
+!item [asc]   ASCII
+!item [drc]   David's Readme Compiler
+!item [hah]   HTML Apple Help
+!item [htag]  HP-Helptag-SGML
+!item [html]  HTML
+!item [hh]    HtmlHelp
+!item [info]  Texinfo
+!item [ipf]   OS/2 IPF format
+!item [ldoc]  Linuxdoc-SGML
+!item [lyx]   LyX
+!item [man]   Manualpage
+!item [nroff] Nroff
+!item [pas]   Pascal-Sourcecode
+!item [pch]   Pure-C-Help
+!item [pdf]   PDFLaTeX
+!item [ps]    PostScript
+!item [rtf]   RTF
+!item [src]   C-Sourcecode
+!item [stg]   ST-Guide
+!item [tex]   (!LaTeX)
+!item [tvh]   Turbo-Vision-Help
+!item [udo]   UDO (Universal Document)
+!item [wh4]   WinHelp4
+!item [win]   WinHelp
+!end_xlist
+!end_ignore
+
+# === EOF ===

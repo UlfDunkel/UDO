@@ -1,0 +1,27 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : general app description
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from udowork.ui)
+#
+################################################################################
+
+(!B)UDO(!b) wandelt Dateien vom eigenen UDO-Format in folgende Formate um:
+AmigaGuide, Apple QuickView, ASCII, David's Readme-Compiler,
+HP-Helptag-SGML, HTML, HTML-Help, OS/2 IPF, (!LaTeX), Linuxdoc-SGML,
+LyX, Manualpage, Nroff, Pure-C-Help, PDF(!LaTeX), PostScript, RTF,
+ST-Guide-Quelltext, Texinfo, Turbo-Vision-Help-Quelltext, UDO und
+WinHelp/WinHelp4-Quelltext.
+
+# === EOF ===

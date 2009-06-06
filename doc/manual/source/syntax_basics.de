@@ -1,0 +1,213 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Basics
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#
+################################################################################
+
+!begin_node Grundlagen
+!html_name  basics
+
+# = = = = =
+
+!begin_node Let's talk about text, Baby!
+!html_name  basics_text
+
+!index Carriage Return
+!index Linefeed
+!index Textdatei
+UDO erwartet als Quelldatei eine Textdatei, wie sie mit jedem
+ASCII-Editor erstellt werden kann. Außer ASCII~9 (Tabulator), ASCII~10
+(Linefeed) und ASCII~13 (Carriage Return) sollten keine Steuerzeichen
+(d.h. keine Zeichen mit einem ASCII-Wert kleiner als 32) benutzt
+werden! Eine Zeile darf nicht länger als 512 Zeichen sein.
+
+UDO kümmert sich bei der Umwandlung selbständig um die Formatierung des
+Textes, sprich um den Zeilenumbruch und die Absatzabstände:
+
+!begin_description
+
+!index Wort
+!item [Wörter] sind Zeichenfolgen, die durch ein oder mehrere Leerzeichen
+oder Tabulatoren voneinander getrennt sind. UDO gibt Wörter durch
+ein Leerzeichen voneinander getrennt aus.
+
+!index Absatz
+!item [Absätze] sind Folgen von Wörter, die durch eine oder mehrere
+Leerzeilen voneinander getrennt in der Quelldatei auftreten. UDO
+sorgt selbständig für den Zeilenumbruch innerhalb von Absätzen
+und gibt automatisch die passende Anzahl von Leerzeilen zwischen
+zwei Absätzen aus.
+
+!end_description
+
+!index Zeichensatz
+Quelltexte können in verschiedenen Zeichensätzen erstellt werden. UDO
+versteht folgende Zeichensätze:
+
+!begin_itemize !short
+!item Atari ST                  ((!KW [code] [[tos!!]])) (!index [!/code])
+!item Apple Macintosh           ((!KW [code] [[mac!!]])) (!index [!/code])
+!item HP Roman 8                ((!KW [code] [[hp8!!]])) (!index [!/code])
+!item IBM-PC                    ((!KW [code] [[dos!!]])) (!index [!/code])
+!item IBM-PC                    ((!KW [code] [[cp437!!]])) (!index [!/code])
+!item ISO Latin 1, Windows ANSI ((!KW [code] [[iso!!]])) (!index [!/code])
+!item ISO Latin 1, Windows ANSI ((!KW [code] [[latin1!!]])) (!index [!/code])
+!item ISO Latin 1, Windows ANSI ((!KW [code] [[iso-8859-11!!]])) (!index [!/code])
+!item OS/2                      ((!KW [code] [[os2!!]])) (!index [!/code])
+!item OS/2                      ((!KW [code] [[cp850!!]])) (!index [!/code])
+!item NeXT                      ((!KW [code] [[next!!]])) (!index [!/code])
+!end_itemize
+
+Beim Start der Konvertierung erwartet UDO den aktuellen
+Systemzeichensatz. Sollen Quelltexte konvertiert werden, die andere
+Zeichensätze benutzen, muss man UDO dies mit den obigen Befehlen
+kenntlich machen. Mehr zu diesem Thema findet man im Kapitel
+""Sonderzeichen"".
+
+!end_node # Let's talk about text, Baby!
+
+# = = = = =
+
+!begin_node Kommandos, Schalter und Platzhalter
+!html_name  basics_commands_switches_placeholders
+
+!begin_blist [Platzhalter:]
+!index Kommando
+
+!item [Kommandos:] Ein UDO-Kommando ist eine mit einem ""!"" beginnende
+Zeilenfolge, die am Anfang einer Zeile, eventuell eingerückt durch
+Leerzeichen oder Tabs, steht. Ein Kommando bewirkt eine Aktion, wie
+z.B. die Ausgabe eines Inhaltsverzeichnisses (siehe (!KW [tableofcontents])).
+
+!index Schalter
+!item [Schalter:] Ein UDO-Schalter ist eine mit einem ""!"" beginnende
+Zeichenfolge, die die Aktionen von UDO oder einem Kommando
+beeinflussen. So gibt es z.B. einen Schalter, der bewirkt, dass 
+Bezeichnungen in englischer Sprache(!N)""Appendix"" statt ""Anhang""(!n)
+ausgegeben werden (siehe (!KW [language])).
+
+Ein Schalter wird nur erkannt, wenn er am Anfang einer Zeile, eventuell
+eingerückt durch Leerzeichen oder Tabs eingerückt, steht.
+
+!index Platzhalter
+
+!item [Platzhalter:] Ein Platzhalter ist eine mit ""!"" beginnende
+Zeichenfolge, die durch runde Klammern eingefasst ist. Ein Platzhalter
+wird von UDO durch eine dem Ausgabeformat zugehörige Zeichenfolge
+ersetzt (z.B. ''(!KK1 [B])'' durch ''(!V){\bf(!v)'').
+
+Platzhalter können an jeder beliebigen Stelle einer Zeile stehen.
+
+!end_blist
+
+!end_node # Kommandos, Schalter und Platzhalter
+
+# = = = = =
+
+!begin_node Kommentare
+!html_name  basics_comments
+
+!index Kommentar
+Es besteht die Möglichkeit, in einer Quelldatei Kommentare einzufügen.
+Ist das erste Zeichen einer Zeile ein ""#"", so fasst UDO diese Zeile als
+Kommentar auf und wertet diese Zeile nicht aus.
+
+Das ""#"" darf nicht eingerückt sein, muss also das erste Zeichen einer
+Zeile sein!
+
+Keine Regel ohne Ausnahme: Innerhalb einer verbatim- oder raw-Umgebug
+werden alle Zeilen ausgegeben, also auch die Zeilen, die mit einem ""#""
+beginnen. Innerhalb dieser Umgebung können also keine Kommentare
+benutzt werden.
+
+!end_node # Kommentare
+
+# = = = = =
+
+!begin_node Vorspann und Hauptteil
+!html_name  basics_preamble_mainpart
+
+!index Hauptteil
+!index Vorspann
+
+Eine Quelldatei besteht immer aus einem Vorspann(!N)auch ""Preambel""(!n) und
+einem Hauptteil.
+
+!index (!kw [begin_document])
+
+Im Vorspann werden grundsätzliche Informationen über den umzuwandelnden
+Text selbst deklariert. Desweiteren können im Vorspann spezielle
+Kommandos plaziert werden, die UDO mitteilen, wie er die Quelldatei
+umwandeln soll(!N)z.B. ob ein kurzes oder ausführliches
+Inhaltsverzeichnis ausgegeben werden soll, ob Begriffe und
+Datumsangaben in deutscher oder englischer Sprache erfolgen sollen
+etc.(!n). Zum Vorspann zählen alle Zeilen, die vor dem Kommando
+(!KW [begin_document]) stehen.
+
+!index (!kw [end_document])
+
+Im Hauptteil schließlich befindet sich der nach Kapiteln, Abschnitten
+und Unterabschnitten strukturierte Inhalt des umzuwandelnden Textes.
+Der Hauptteil schließt mit dem Kommando (!KW [end_document]).
+
+!end_node # Vorspann und Hauptteil
+
+# = = = = =
+
+!begin_node Umgebungen
+!html_name  basics_environments
+
+Eine Umgebung ist ein Teil der Quelldatei, der speziell behandelt
+werden soll. Umgebungen werden jeweils mit (!I)!/begin_(!i) eingeleitet und mit
+(!I)!/end_(!i) beendet. Diese Befehle müssen dabei jeweils am Anfang einer
+Zeile stehen, eventuell eingerückt durch Leerzeichen und/oder
+Tabulatoren.
+
+Es gibt zahlreiche Umgebungen, die Ihnen die Arbeit erleichtern können
+und die die jeweiligen ausgabeformatspezifischen Besonderheiten
+berücksichtigen. Hier eine Übersicht:
+
+!begin_xlist [description-Umgebung:] !short
+!item [appendix-Umgebung:]     Anhang
+!item [center-Umgebung:]       Zentrierungen
+!item [comment-Umgebung:]      Kommentare
+!item [description-Umgebung:]  Beschreibungen
+!item [document-Umgebung:]     Dokument-Inhalt
+!item [enumerate-Umgebung:]    nummerierte Aufzählungen
+!item [flushleft-Umgebung:]    linksbündiger Text
+!item [flushright-Umgebung:]   rechtsbündiger Text
+!item [ignore-Umgebung:]       Textpassagen ignorieren
+!item [itemize-Umgebung:]      einfache Aufzählungen
+!item [linedraw-Umgebung:]     Screenshots darstellen
+!item [preformatted-Umgebung:] vorformatierter Text
+!item [quote-Umgebung:]        Einrückungen
+!item [raw-Umgebung:]          spezielle Befehle des Ausgabeformats
+!item [table-Umgebung:]        Tabellen
+!item [verbatim-Umgebung:]     vorformatierter Text
+!item [xlist-Umgebung:]        Listen
+!item [sourcecode-Umgebung:]   Sourcecode
+!end_xlist
+
+Wie der Text, der innerhalb dieser Umgebungen steht, behandelt wird,
+lesen Sie bitte in den zugehörigen Kapiteln nach.
+
+!end_node # Umgebungen
+
+# = = = = =
+
+!end_node # Grundlagen
+
+# === EOF ===

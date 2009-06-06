@@ -1,0 +1,251 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Practice: FAQ
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from working.ui)
+#
+################################################################################
+
+!begin_node Allgemeine Fragen (FAQ)
+!html_name  faq
+
+!begin_description
+
+# = = =
+
+!item [Was bedeutet ''FAQ''?]
+
+""FAQ"" bedeutet ""Frequently Asked Questions"" und bedeutet
+übersetzt soviel wie ""häufig gestellte Fragen"". Im übertragenen
+Sinn versteht man darunter eine Auflistung eben dieser oft
+gestellten Fragen samt der passenden Antwort.
+
+# = = =
+
+!item [Wieso heißt UDO ''UDO''?]
+
+Als ich mit der Programmierung von UDO begann, brauchte ich einen
+Namen. Mir fiel auf die Schnelle nichts besseres ein als die
+Abkürzung ""UDO"", was als Abkürzung für ""(!B)U(!b)niversal (!B)DO(!b)cument""
+steht.
+
+Übrigens: Der Autor heißt mit Vornamen nicht Udo, sondern Dirk!
+
+# = = =
+
+!item [Wie spricht man ''UDO'' aus?]
+
+''UDO'' wird genauso ausgesprochen wie der Vorname Udo, also ''Uh-Doh''. ''UDO'' wird (!I)nicht(!i) anglophil wie ''Judo'' oder ''You do'' ausgesprochen!
+
+# = = =
+
+!item [Woher bekomme ich die aktuellen Versionen?]
+
+!label Bezugsquellen
+#Aktuelle Versionen von UDO können sich Besitzer eines Modems aus
+#dem Gruppenprogrammteil UDO.Pub der (!idx [Maus Iserlohn MK2]) (++49 2371
+#944925) downloaden. Auf neue Versionen wird in der (!idx [MausNet])-Gruppe
+#(!T)ATARI.NEWS(!t) hingewiesen.
+
+Die aktuellen Versionen sind im (!idx [WWW])
+unter (!url [http://www.udo-open-source.org/] []) erhältlich.
+
+#Interessenten, die kein Modem besitzen und keinen Zugriff auf
+#FTP-Server oder das (!idx [World Wide Web]) haben, können die aktuellen
+#Versionen auch durch Einsenden einer formatierten Diskette samt
+#adressierten und ausreichend frankierten Rückumschlags anfordern.
+
+# = = =
+
+!item [Wird es Portierungen auf andere Systeme geben?]
+
+Von UDO existieren momentan Versionen für folgende Systeme:
+
+!begin_itemize !short
+!item Atari TOS
+# !item	BeOS
+!item DOS, OS/2, Windows
+# !item HP-UX 9.x auf HP-Rechnern der 300/400er und 700/800er Baureihe
+!item Linux x86
+!item Mac~OS
+# !item NeXTStep
+# !item Sinix
+# !item SunOS 5.5
+!end_itemize
+
+UDO wurde komplett in C geschrieben, verzichtet vollkommen auf
+betriebssystemspezifische Routinen. Dadurch könnte die Kommandozeilenversion von UDO theoretisch auf jedes beliebige System portiert werden, für das ein ANSI-C-Compiler existiert.
+
+Wenn Sie an einer Portierung auf ein bestimmtes System interessiert sind und einen Compiler für dieses System besitzen, so (!link [kontaktieren] [Kontaktadresse]) Sie bitte die UDO-Entwickler.
+
+# = = =
+
+!item [Können auch ''systemfremde'' Formate erzeugt werden?]
+
+Mit UDO kann auf man jedem System natürlich auch Formate für
+andere Betriebssysteme erzeugt werden, da die Versionen identisch
+sind. So ist es möglich, mit der Atari-Version WinHelp-Quelltexte
+zu erzeugen oder unter OS/2 mit der DOS-Version ST-Guide-Quelltexte.
+
+Lediglich eine Umsetzung der Sonderzeichen muss ggf. erfolgen.
+Dies kann man z.B. mit GNU-recode durchführen. Auf Wunsch gibt es
+auch bei (!link [mir] [Kontaktadresse]) ein Programm zur Umsetzung der Sonderzeichen in
+Textdateien.
+
+# = = =
+
+!item [Kann man Texte ""hier"" schreiben und ""dort"" konvertieren?]
+
+Ja, denn UDO versteht alle Zeichensätze der Systeme, für die UDO
+erhältlich ist. Somit können Texte unter DOS geschrieben werden
+und auf einem Unix-Rechner konvertiert werden.
+
+Sogar in einer Datei können die Zeichensätze gewechselt werden,
+falls das nötig sein sollte. Durch einen Satz Befehle können Sie
+UDO mitteilen, welcher Zeichensatz in den folgenden Zeilen
+benutzt werden soll.
+
+# = = =
+
+!item [Kann sich die UDO-Syntax noch ändern?]
+
+!index Änderungen der Syntax
+!index Syntaxänderungen
+UDO ist ein Programm, das ständig weiterentwickelt wird. Es
+werden sicherlich auch in Zukunft weitere Kommandos hinzukommen.
+
+Teilweise wird es sich auch nicht vermeiden lassen, die Syntax
+einiger Kommandos zu ändern. Auf solche Änderungen wird aber
+besonders hingewiesen, so dass man die nötigen Anpassungen
+innerhalb von Minuten mit einem Editor vornehmen kann.
+
+# = = =
+
+!item [Wie funktioniert UDO?]
+
+UDO liest die Quelldatei(en) in zwei Durchgängen ein.
+
+Im ersten Durchgang werden Schalter, Makros, Definitionen sowie
+die Namen der Kapitel für das Inhaltsverzeichnis und die
+automatische Referenzierung ermittelt.
+
+Im zweiten Durchgang erfolgt dann die Konvertierung und
+Formatierung des Textes. UDO speichert bis zum Eintreffen einer
+Leerzeile bzw. eines Kommandos den Text in einem internen Puffer
+und gibt dann den eingelesenen Absatz aus bzw. führt das
+jeweilige Kommando aus.
+
+Aus dem letzten Satz folgt: Leerzeilen (!I)und(!i) Kommandos unterteilen Absätze.
+
+# = = =
+
+!item [Wie referenziert UDO?]
+
+!index Automatische Referenzierung
+!index Querverweise
+!index Referenzierung
+UDO legt bei den Hypertext-Formaten (außer beim ST-Guide-Format)
+im Text automatisch Querverweise zu Kapiteln und Sprungmarken an.
+Es werden dabei nur Verweise auf ""andere"" Seiten angelegt, also
+keine Verweise auf Stellen der aktuellen Seite.
+
+!index !autoref
+Mit dem Schaltern (!KW [autoref]) kann man die automatische Referenzierung aus- (Parameter (!I)[off](!i)) und wieder einschalten (Parameter
+(!I)[on](!i)).
+
+# = = =
+
+!item [Wie verweist man auf Stellen des aktuellen Kapitels?]
+
+Da UDO nicht auf der Seite Verweise anlegt, auf der ein Label
+gesetzt wurde, gibt es ein Problem, falls man am Seitenende einen
+Verweis zum Seitenanfang anlegen will. Daher muss man hier einen
+manuellen Querverweis setzen.
+
+!begin_quote
+!begin_verbatim
+!node  Test
+!label Test Anfang
+[...]
+(!link [Zum Seitenanfang] [Test Anfang])
+!end_verbatim
+!end_quote
+
+# = = =
+
+!item [Wie bekomme ich Bilder in ein Inhaltsverzeichnis?]
+
+Dazu muss man auf den Befehl (!KW [tableofcontents]) verzichten und ein
+Kapitel anlegen, in welches das Inhaltsverzeichnis ausgegeben
+wird. In einem normalen Kapitel kann man natürlich Bilder wie
+sonst auch benutzen. Beispiel:
+
+!begin_quote
+!begin_verbatim
+!begin_document
+!maketitle
+!node Inhaltsverzeichnis
+!image foo
+!toc [all]
+
+!node Erstes Kapitel
+!end_verbatim
+!end_quote
+
+# = = =
+
+!item [Welchen Editor kann ich für UDO verwenden?]
+
+Hier einige Vorschläge:
+
+!begin_table [|l|c|c|] !hline
+"e" (e.exe) !! OS/2 !! Bestandteil des Systems
+!hline
+(!url [Kate, KEdit, KWrite] [http://kate.kde.org/]) !! Linux/KDE !! Open Source
+!hline
+(!url [NotePad++] [http://www.froeb-software.de/]) !! Windows !! Freeware
+!hline
+(!url [Pepper] [http://www.slacksolutions.com/]) !! Linux, Mac, Windows !! kommerziell
+!hline
+(!url [SciTe] [http://www.scintilla.org/]) !! Linux, Windows !! Open Source
+!hline
+(!url [SuperEdi] [http://www.wolosoft.com/]) !! Windows !! Freeware
+!hline
+(!url [TextPad] [http://www.texpad.com/]) !! Windows !! Freeware
+!hline
+(!url [UltraEdit32] [http://www.ultraedit.com/]) !! Windows !! kommerziell
+!hline
+!end_table
+
+# Bemerkungen 11.05.2005 - Ulrich Kretschmer:
+# Auswahl-/Testkriterien:
+# a) kommt unter Windows mit Unix/Linux-Zeilenumbrüchen zurecht
+# b) kann überlange Zeilen am Bildschirm umbrechen (word wrap)
+# c) Zeilennummern-Darstellung auf Basis der Datei-Zeilenumbrüche, nicht auf Basis der Bildschirmanzeige
+# Ergebnisse:
+# * BEditor, www.ubesoft.de: (c) funktioniert nicht; eher einfacher Editor
+# * iEdit, www.bitshape.com: kann keine Umbrüche, d.h. (b) nicht erfüllt
+# * Boxer Text Editor, www.boxersoftwae.com: Situation bzgl. Umbrüchen unklar
+# * FoldMaster, www.foldmaster.de: kann keine Umbrüche; "Falteneditor" = interessantes Konzept
+# * NaSTex, www.saschaseidel.de, Freeware: (c) nicht erfüllt; aber (b) einfach umschaltbar
+# * NotePro, www.crystaloffice.com: (a) nicht erfüllt, (b) ja, (c) nicht erfüllt
+# * NoteTab light, www.notetab.com: (c) nicht erfüllt
+# * Pepper:
+# * PFE Programmer's File Editor, www.lancs.ac.uk/people/cpaap/pfe, kann keine Umbrüche, Stand 1999
+
+!end_description
+
+!end_node # Allgemeine Fragen (FAQ)
+
+# === EOF ===

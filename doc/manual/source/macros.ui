@@ -1,0 +1,61 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Macro definitions
+# Language    : all
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (extracted from manual.u)
+#
+################################################################################
+
+!macro UDOR udo(!RELEASE)
+# RELEASE is defined in file _version.ui
+
+!macro a !]
+!define x !(!1)
+!macro  X !
+!macro  KW   (!I)(!link [!(!1) (!2)] [!(!1)])(!i)
+!macro  K1   (!I)(!link [!(!1) (!2)] [!(!1)])(!i)
+!macro  KKW  (!I)(!link [(!(!1)!)] [(!/(!1)!)])(!i)
+!macro  KK2W (!I)(!link [(!(!1) (!2)!)] [(!/(!1)!)])(!i)
+!macro  KKKW (!I)(!link [(!(!1)!)...(!(!2)!)] [(!(!1)!)...(!(!2)!)])(!i)
+!macro  KK1  (!I)(!link [((!X)(!1)!)] [((!X)/(!1)!)])(!i)
+!macro  kw   !(!1)
+!define k1   !(!1)
+!define kkw  (!/(!1))
+!define kkkw (!/(!1))...(!/(!2))
+!define kk1  (!(!1))
+
+
+# ------------------------------------------------------------------------------
+# format-dependent macros
+# ------------------------------------------------------------------------------
+!ifdest [html,hh,stg]
+!macro IMAGES
+!endif
+
+!ifnset IMAGES
+!macro IMAGES images/
+!endif
+
+
+# ------------------------------------------------------------------------------
+# language-dependent macros
+# ------------------------------------------------------------------------------
+!iflang [german]
+!include macros.de
+!endif
+!iflang [english]
+!include macros.en
+!endif
+
+# === EOF ===

@@ -1,0 +1,322 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Special characters
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#
+################################################################################
+
+!begin_node Special characters
+!html_name  special_characters
+
+# = = = = =
+
+!begin_node Double quotes
+!html_name  spec_double_quotes
+
+index Typographical quotes
+!index Quotes !! typographical
+
+Double quotes of the source file will be converted to typographical quotes
+if they are supported by the destination format. The following ASCII
+simulation demonstrates how it works:
+
+!begin_quote
+!begin_verbatim
+Double ""quotes""
+
+       66       99
+Double    quotes
+!end_verbatim
+!end_quote
+
+If you want to display two quotes you have to use
+(!T)(!link [((""!)!)] [((""!)!)])text(!link [((""!)!)] [((""!)!)])(!t) instead.
+
+(!HINTS)
+
+!begin_enumerate
+!index (!kw [no_quotes])
+!item The conversion of these double quotes can be suppressed using the
+switch called (!KW [no_quotes] [[~!!]]).
+
+!item When converting to RTF special RTF commands will be used.
+
+!end_enumerate
+
+!end_node # Double quotes
+
+# = = = = =
+
+!begin_node Double apostrophes
+!html_name  spec_double_apostrophes
+
+Like double quotes UDO can convert double apostrophes into typographical
+apostrophes:
+
+!begin_quote
+!begin_verbatim
+double ''apostrophes''
+!end_verbatim
+!end_quote
+
+will become
+
+!begin_quote
+double ''apostrophes''
+!end_quote
+
+If you want to display two apostrophes you have to use
+(!T)(!link [((''!)!)] [((''!)!)])text(!link [((''!)!)] [((''!)!)])(!t) instead.
+
+(!HINT)
+
+!index (!kw [no_quotes])
+The switch (!KW [no_quotes] [[~!!]]) switches off the conversion of
+these double apostrophes, too.
+
+!end_node # Double apostrophes
+
+# = = = = =
+
+!begin_node Nonbreaking spaces
+!html_name  spec_nonbreaking_spaces
+
+!index Blanks
+!index Tilde
+!index ~
+If you want to insert nonbreaking spaces between two words you have to use
+the tilde ((!link [!~] [Nonbreaking spaces])).
+Non-breaking spaces are also useful to stop UDO and
+the other formats from breaking lines between two words.
+
+Converting to an ASCII format UDO replaces this tildes by blanks. Converting
+to other formats UDO replaces this tildes by commands that have the same
+effect.
+
+!begin_xlist [WinHelp:] !short
+!item [(!LaTeX):]   (!T)!~(!t)
+!item [HTML:]       (!T)&nbsp;(!t)
+!item [RTF:]        (!T)\!~(!t)
+!item [WinHelp:]    (!T)\!~(!t)
+!end_xlist
+
+If you want to display a tilde you have to use (!link [!!~] [Tilde]) instead.
+
+(!HINT)
+
+If you use a tilde inside an external link ((!KKW [url]), (!KKW [xlink])) UDO won't convert it.
+
+!end_node # Nonbreaking spaces
+
+# = = = = =
+
+!begin_node Dashes
+!html_name  spec_dashes
+
+UDO supports --- did you think anything else --- dashs like in this
+sentence.
+
+Dashs are supported by (!LaTeX), Windows Help and RTF. Converting to other
+formats UDO will replace ''(---)'' and ''(--)'' by a single ''-''.
+
+If you want to display three or two ''-'' you have to use
+(!T)(!link [((---!)!)] [((---!)!)])(!t) or
+(!T)(!link [((--!)!)] [((--!)!)])(!t).
+
+!end_node # Dashes
+
+# = = = = =
+
+!begin_node Converting 8 bit chars
+!html_name  spec_converting_8bit_characters
+
+In an UDO source file you can use ""higher"" characters without having to
+know how a character has to look like in a destination format like (!LaTeX)
+or Windows Help. So you can enter a German ''ß'' without any fear, UDO
+converts it for you and it knows that this has to be (!V)&szlig;(!v) for
+HTML or (!V){\ss}(!v) for (!LaTeX).
+
+UDO expects files containing chars of the system charset of your operating
+system. If you run UDO on a MS-DOS computer UDO expects text files that are
+written with the IBM PC character set by default. If UDO runs on an Atari
+computer UDO will expect the TOS character set by default.
+
+But UDO can manage file that are written with another character set, too.
+You have simply to tell UDO which character set your source file uses with
+(!T)!/code [(!CODE)](!t).
+
+Below is an overview of the character sets UDO knows about:
+
+!index DOS character set
+!index Character set !! DOS
+!index OS/2 character set
+!index Character set !! OS/2
+!index HP-Roman-8 character set
+!index Character set !! HP-Roman-8
+!index ANSI character sect
+!index ISO-Latin1 character set
+!index Windows character set
+!index Character set !! ANSI
+!index Character set !! ISO Latin 1
+!index Character set !! Windows
+!index Macintosh character set
+!index Character set !! Macintosh
+!index Atari character set
+!index Character set !! Atari
+!index NeXT character set
+!index Character set !! NeXT
+
+!include charsets.ui
+
+# the following commands:
+
+!begin_ignore
+!begin_xlist [code [dos:!]] !short
+
+!index DOS character set
+!index Character set !! DOS
+!index (!kw [code])
+!item [(!KW [code] [[dos!!]]):]
+IBM-PC, MS-DOS
+
+!index OS/2 character set
+!index Character set !! OS/2
+!index (!kw [code])
+!item [(!KW [code] [[os2!!]]):]
+OS/2
+
+!index HP-Roman-8 character set
+!index Character set !! HP-Roman-8
+!index (!kw [code])
+!item [(!KW [code] [[hp8!!]]):]
+HP Roman 8
+
+!index ANSI character sect
+!index ISO-Latin1 character set
+!index Windows character set
+!index Character set !! ANSI
+!index Character set !! ISO Latin 1
+!index Character set !! Windows
+!index (!kw [code])
+!item [(!KW [code] [[iso!!]]):]
+ISO Latin 1, Windows ANSI
+
+!index Macintosh character set
+!index Character set !! Macintosh
+!index (!kw [code])
+!item [(!KW [code] [[mac!!]]):]
+Apple Macintosh
+
+!index Atari character set
+!index Character set !! Atari
+!index (!kw [code])
+!item [(!KW [code] [[tos!!]]):]
+Atari ST
+
+!index NeXT character set
+!index Character set !! NeXT
+!index (!kw [code])
+!item [(!KW [code] [[next!!]]):]
+NeXT
+
+!end_xlist
+!end_ignore
+
+!smallskip
+
+There are some things you have to remember. Some character sets contain
+characters that aren't available in another one. So you shouldn't use
+characters from the PC graphic character set or the Hebraic characters of
+the Atari character set because they can't be printed in formats like
+(!LaTeX), Windows Help, RTF or HTML. In this case UDO prints an error
+message. You should remove these characters from your source file and find
+another solution.
+
+If source files are converted that don't use the character set of the
+operating system UDO is running on the limitations are even higher. In the
+first step UDO will convert the characters into ISO Latin 1. In  the second
+step UDO will convert the ISO Latin 1 characters into the character set of
+the current operating system. In some cases there's is no possibility to
+convert the characters without any loss. In such a case UDO will print an
+error message.
+
+(!HINT)
+
+If any character was forgotten or a character is converted in
+a wrong way please (!link [send a bug report] [Contact addresses])!
+
+!end_node # Converting 8 bit chars
+
+# = = = = =
+
+!begin_node Universal charset
+!html_name  spec_universal_charset
+
+!index Character set !! universal
+With the commands described in the previous section it is possible
+to transport document files with 8-bit characters systemwide.
+
+If you transport files over the internet, however, that somewhere
+on the way these characters get converted or changed. This
+would be fatal with soruce files using more
+than one character code set.
+
+To enable the exchange of files in this case, UDO offers a
+""universal character set"". This is not really a character set,
+but a way to emulate 8-bit characters by using a sequence of
+several 7-bit characters.
+
+!index (!kw [universal_charset])
+Since the necessary queries and conversions are quite
+computer-bound, you have to tell that the following
+contain ""universal characters"". This is done by
+using the switch (!KW [universal_charset]).
+
+After using (!KW [universal_charset] [[on!!]]) UDO will
+look at every input line and converts universal characters
+to 8-bit characters. The following table shows which input
+sequences are converted to which characters:
+
+!universal_charset [on]
+!begin_table [|l|l|l|] !hline
+Placeholder  !! x from          !! Example
+!hline
+(!/"x)       !! aeiosuyAEIOU    !! (!T)(!/"a)(!t) = (!"a)
+(!/'x)       !! aeiouyAEIOUY    !! (!T)(!/'e)(!t) = (!'e)
+(!/`x)       !! aeiouAEIOU      !! (!T)(!/`i)(!t) = (!`i)
+(!/^x)       !! aeiouAEIOU      !! (!T)(!/^o)(!t) = (!^o)
+(!/&x)       !! ae, oe, AE, OE  !! (!T)(!/&AE)(!t) = (!&AE)
+(!/~x)       !! anoANO          !! (!T)(!/~n)(!t) = (!~n)
+(!/,x)       !! cC              !! (!T)(!/,C)(!t) = (!,C)
+(!/.x)       !! aA              !! (!T)(!/.A)(!t) = (!.A)
+(!/_x)       !! ao              !! (!T)(!/_a)(!t) = (!_a)
+(!/\x)       !! oO              !! (!T)(!/\O)(!t) = (!\O)
+!hline
+!end_table
+
+The german ''(!"s)'' will be created with the placeholder (!/"s).
+If the destination format does not know a character, the best
+possible character will be used, for example ''a'' instead
+of ''(!^a)''.
+
+!universal_charset [off]
+
+!end_node # Universal charset
+
+# = = = = =
+
+!end_node # Special characters
+
+# === EOF ===

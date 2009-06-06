@@ -1,0 +1,91 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands X
+# Language    : German
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#
+################################################################################
+
+!begin_node X!..
+!html_name  cmds_x
+
+# = = = = =
+
+!begin_node (!kw [x])
+!html_name  cmd_x
+
+Indexeintrag bzw. Schlüsselwort setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/x <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [index]).
+
+!item [(!SEEALSO)]
+(!KW [index])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [xlink])
+!html_name  cmd_xlink()
+
+Verweis auf externe Daten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/xlink [<(!TEXT)>] [<link>])(!t)
+
+!item [(!DESCRIPTION)]
+Dient zum Erzeugen von Verweisen auf externe
+Dokumente. Im Unterschied zu (!KKW [link]) werden
+Sonderzeichen innerhalb ""<link>"" nicht umgewandelt. Im
+Beispiel würde bei einem HTML-File ein Querverweis
+auf die Seite der Deutschen Telekom erzeugt. ""<link>""
+kann auch leer sein, dann wird für ""<link>"" der Inhalt
+von ""<text>"" ausgegeben.
+
+Kommt in einem Verweis eine Tilde vor,
+so braucht dieser bei Verwendung im (!KKW [xlink])-Kommando
+(!I)kein(!i) Ausrufezeichen vorangestellt zu werden.
+
+# ToDo: was ist der Unterschied zu !url ?
+
+!item [(!EXAMPLE2)]
+(!T)(!/xlink [Deutsche Telekom] [http://www.dtag.de])(!t) (!nl)
+(!T)(!/xlink [irgendwas] [http://www.domain.de/!~user/index.html])(!t)
+# ToDo: andere Beispiele verwenden!
+
+!item [(!SEEALSO)]
+(!KKW [link]), (!KKW [plink]), (!KKW [url]), (!KW [no_xlinks]), (!link [Querverweise] [Querverweise])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

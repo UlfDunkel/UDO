@@ -1,98 +1,27 @@
-# doc/manual/source/charsets.ui
-# letzte Änderungen: 12.01.2004 / last changes: Jan 12, 2004
-
-
-# siehe Source/version.h, ergänzend chr.h
-# siehe weiterhin udo.a, nach "LOCAL const UDOCHARSET udocharset[MAXCHARSET]=" suchen...
-
-# Links auf Zeichensatztabellen am 12.01.2004 ergänzt
-# zusätzliche Erläuterungen siehe auch http://acspro.atari.org/KeyTab/Modern/006.html (Martin Elsässer)
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Charsets includes
+# Language    : all
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: header introduced
+#
+################################################################################
 
 !iflang [german]
-!index Zeichensatz
-!index Sonderzeichen
-!label Code
-!begin_blist [iso-8859-1:] !short
-# in alphabetischer Reihenfolge!
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# auch als "DOSLatinUS" bekannt
-!item [cp437]   IBM-PC-Zeichensatz, Codepage~437, siehe (!url [http://www.kostis.net/charsets/cp437.htm] [])
-# siehe auch: http://acspro.atari.org/KeyTab/Modern/006004.html
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [cp850]   IBM-PC-Zeichensatz, Codepage~850, siehe (!url [http://www.kostis.net/charsets/cp850.htm] [])
-# siehe auch: http://acspro.atari.org/KeyTab/Modern/006005.html
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [dos]     IBM-PC-Zeichensatz, wie (!KW [code] [[cp437!!]])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [hp8]     HP-Roman-8-Zeichensatz, siehe (!url [http://www.kostis.net/charsets/hproman8.htm] [])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [iso]     ISO-Latin-1-Zeichensatz, siehe (!url [http://www.kostis.net/charsets/iso8859.1.htm] [])
-# siehe auch: http://acspro.atari.org/KeyTab/Modern/006006.html
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [iso-8859-1]  wie (!KW [code] [[iso!!]])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [latin1]  wie (!KW [code] [[iso!!]])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [mac]     Apple-Macintosh-Zeichensatz, siehe (!url [http://www.kostis.net/charsets/applerom.htm] [])
-# siehe auch: http://acspro.atari.org/KeyTab/Modern/006003.html
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [next]    NeXTStep-Zeichensatz, siehe (!url [http://www.kostis.net/charsets/nextstep.htm] [])
-# siehe auch: http://acspro.atari.org/KeyTab/Modern/00600f.html
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [os2]     OS/2-Zeichensatz, wie (!KW [code] [[cp850!!]])
-# Anm.: dieses Kürzel ist im Grunde überflüssig! (U.K. 12.01.2004)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [tos]     Atari-ST-Zeichensatz (TOS), siehe (!url [http://www.kostis.net/charsets/atarist.htm] [])
-# siehe auch: http://acspro.atari.org/KeyTab/Modern/006001.html
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# nachfolgendes hinzugefügt 12.01.2004 - Ulrich Kretschmer
-!item [utf8]    UTF-8
-# siehe auch:
-# http://acspro.atari.org/KeyTab/Modern/006018.html
-# RFC 2279, z.B. ftp://ftp.rfc-editor.org/in-notes/rfc2279.txt
-# http://www.unicode.org/faq/unicode_iso.html
-# http://en2.wikipedia.org/wiki/ISO_10646
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# nachfolgendes hinzugefügt 12.01.2004 - Ulrich Kretschmer
-!item [utf-8]   UTF-8, wie (!KW [code] [[utf8!!]])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!end_blist
+!include charsets.de
+!endif
+!iflang [english]
+!include charsets.en
 !endif
 
-!iflang [english]
-!index Character set
-!index Special chars
-!label Code
-!begin_blist [iso-8859-1:] !short
-# in alphabetical order
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [cp437]   IBM-PC character set, codepage~437, see (!url [http://www.kostis.net/charsets/cp437.htm] [])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [cp850]   IBM-PC character set, codepage~850, see (!url [http://www.kostis.net/charsets/cp850.htm] [])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [dos]     IBM-PC character set, same as (!KW [code] [[cp437!!]])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [hp8]     HP-Roman-8 character set, see (!url [http://www.kostis.net/charsets/hproman8.htm] [])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [iso]     ISO-Latin-1 character set, see (!url [http://www.kostis.net/charsets/iso8859.1.htm] [])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [iso-8859-1]  like (!KW [code] [[iso!!]])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [mac]     Apple-Macintosh character set, see (!url [http://www.kostis.net/charsets/applerom.htm] [])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [next]    NeXTStep character set, see (!url [http://www.kostis.net/charsets/nextstep.htm] [])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [latin1]  like (!KW [code] [[iso!!]])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [os2]     OS/2 character set, same as (!KW [code] [[cp850!!]])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [tos]     Atari-ST character set (TOS), see (!url [http://www.kostis.net/charsets/atarist.htm] [])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# nachfolgendes hinzugefügt 12.01.2004 - Ulrich Kretschmer
-!item [utf8]    UTF-8, (!url [http://www.nada.kth.se/i18n/ucs/unicode-iso10646-oview.html] [])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# nachfolgendes hinzugefügt 12.01.2004 - Ulrich Kretschmer
-!item [utf-8]   UTF-8, same as (!KW [code] [[utf8!!]])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!end_blist
-!endif
+# === EOF ===

@@ -1,0 +1,87 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Macro definitions
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (extracted from manual.u)
+#   fd  Jun 05: FILESPACEQUOTE
+#
+################################################################################
+
+# path macros
+# --------------------
+!macro EXAMPLES       ./examples/en/
+!macro EXAMPLES_DIST  ../../examples/en/
+
+
+!ifdest [win,wh4]
+!macro FORMAT         (!link [<abbreviations>] [Abbreviations])
+!endif
+
+!ifdest [hh,html]
+!macro FORMAT         (!link [&lt;abbreviations&gt;] [Abbreviations])
+!macro COLOR          (!link [&lt;color&gt;] [Colors])
+!macro LANGUAGE       (!link [&lt;language&gt;] [Language])
+!macro OS             (!link [&lt;system&gt;] [Operating systems])
+!macro CODE           (!link [&lt;charset&gt;] [Code])
+!else
+!macro FORMAT         (!link [<abbreviations>] [Abbreviations])
+!macro COLOR          (!link [<color>] [Colors])
+!macro LANGUAGE       (!link [<language>] [Language])
+!macro OS             (!link [<system>] [Operating systems])
+!macro CODE           (!link [<charset>] [Code])
+!endif
+
+
+!macro DocumentationWorkInProgress  The UDO Guide is actually in revision. Intermediate versions are currently only available on the UDO website for online-reading, but not for download.
+!macro FollowingOutdated            (!I)The following text passages are partly outdated and will be revised.(!i)
+
+
+# language-dependent text parts for the UDO history in history.ui (in alphabetical order)
+!macro BUGFIXES       Bugfixes
+!macro CHANGES        Changes
+!macro GENERAL        General
+!macro NEWS           News
+!macro PUBLISHED      (!1) was published on (!2).
+
+
+# language-dependant text parts for the command index (in alphabetical order)
+!macro ABBREV         This is an abbreviation of the command
+!macro CHAR           char
+!macro COMMAND        command
+!macro COMMANDABBREV  command abbreviation
+!macro DESCRIPTION    Description:
+!macro EXAMPLE        Example:
+!macro EXAMPLE2       Examples:
+!macro EXISTSSINCE    Exists since:
+!macro EXISTEDUNTIL   Existed until:
+!macro FILE           file
+!macro FILESPACEQUOTE If the file name contains spaces, it has to be quoted.
+!macro HINT           (!B)Hint:(!b)
+!macro HINTS          (!B)Hints:(!b)
+!macro MAINPART       main part
+!macro MISS           (!idx [Something's still missing here])!..
+!macro NOTEXISTING    This command does not exist anymore.
+!macro PLACEHOLDER    placeholder
+!macro PREAMBLE       preamble
+!macro RENAMEDTO      This command has been renamed to
+!macro SEEALSO        See also:
+!macro SPECIALCHAR    special character
+!macro SWITCH         switch
+!macro SYNTAX         Syntax:
+!macro TEXT           text
+!macro TYPEPOSITION   Type & position:
+!macro USEINSTEAD     Use (!1) instead
+!macro VALUE          value
+
+# === EOF ===

@@ -1,0 +1,812 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands P
+# Language    : English
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#
+################################################################################
+
+!begin_node P!..
+!html_name  cmds_p
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [=pch])
+!html_name  cmd_pch-eq
+
+Query the destination format.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/=pch <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[pch!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [=pdf])
+!html_name  cmd_pdf-eq
+
+Query the destination format.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/=pdf <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[pdf!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [p])
+!html_name  cmd_p
+
+Start a popup chapter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/p [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [pnode]).
+
+!item [(!SEEALSO)]
+(!KW [pnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [p*])
+!html_name  cmd_p_asterisk
+
+Start a hidden popup chapter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/p* [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [pnode*]).
+
+!item [(!SEEALSO)]
+(!KW [pnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [parwidth])
+!html_name  cmd_parwidth
+
+Set the paragraph width.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/parwidth <(!VALUE)>(!t)
+
+!item [(!DESCRIPTION)]
+With this switch you can tell UDO which width it should use for the
+lines it saves. UDO uses 70 by default. You can change this value by
+using a (!T)<value>(!t) between 20 and 200. When converting to
+Windows Help, Apple QuickView or HTML you can use a value that's
+greater than 200 if you use the switch (!KW [use_output_buffer]).
+
+!item [(!EXAMPLE)]
+(!T)!/parwidth 98(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [use_output_buffer])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [pch])
+!html_name  cmd_pch
+
+Query the destination format.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pch <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[pch!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [pdf])
+!html_name  cmd_pdf
+
+Query the destination format.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pdf <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[pdf!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [pdf_high_compression])
+!html_name  cmd_pdf_high_compression
+
+Compress PDF file (high compression rate).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/pdf_high_compression(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble PDFLaTex
+will compress the output file by about 50%. The compression of
+the file takes some time. A similar result with a faster
+compression you will get with (!KW [pdf_medium_compression]).
+
+!item [(!SEEALSO)]
+(!KW [pdf_medium_compression])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [pdf_medium_compression])
+!html_name  cmd_pdf_medium_compression
+
+Compress PDF file (middle compression rate).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/pdf_medium_compression(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble PDFLaTeX
+will compress the output file by about 40%. A better result
+with a slower compression you will get with
+(!KW [pdf_high_compression]).
+
+!item [(!SEEALSO)]
+(!KW [pdf_high_compression])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [pinclude])
+!html_name  cmd_pinclude
+
+Include file in sourcecode environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pinclude <(!FILE)>(!t)
+
+!item [(!DESCRIPTION)]
+""<file>"" will be included and displayed like preformatted text
+inside a sourcecode environment. If you use this command inside
+another environment UDO indents the contents of this file. UDO
+converts tabs according to (!KW [tabwidth]). (!FILESPACEQUOTE)
+
+!item [(!EXAMPLE)]
+(!T)!/pinclude hello.pas(!t)
+
+!item [(!SEEALSO)]
+(!KW [tabwidth]), (!KW [include]), (!KW [sinclude]), (!link [Split documents] [Split documents]), (!link [sourcecode environment] [sourcecode environment])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kkw [plink])
+!html_name  cmd_plink
+
+Create manual page reference ((!LaTeX) only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/plink [<(!TEXT)>] [<link>])(!t)
+
+!item [(!DESCRIPTION)]
+Only useful when converted to (!LaTeX) where it is converted into a
+page reference. Converting into others formats, only ""<text>"" will be output.
+
+(!red)Bei der RTF-Ausgabe erfolgt die Angabe als Hinweis auf die Seitenzahl.(!coloff)
+
+!item [(!EXAMPLE)]
+(!T)(!/plink [word] [label])(!t)
+
+!item [(!SEEALSO)]
+(!KKW [link]), (!KKW [xlink]), (!link [Links] [Links])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [pnode])
+!html_name  cmd_pnode
+
+Start a popup chapter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pnode <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+The same as (!KW [node]) but the contents will be displayed as a popup inside ST-Guide and WinHelp.
+
+!item [(!EXAMPLE)]
+(!T)!/pnode Popup title(!t)
+
+!item [(!SEEALSO)]
+(!KW [psubnode]), (!KW [psubsubnode]), (!KW [begin_pnode]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [pnode*])
+!html_name  cmd_pnode_asterisk
+
+Start a hidden popup chapter.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pnode* <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [pnode]), but here ""<text>""
+will not appear in a table of contents.
+
+!item [(!EXAMPLE)]
+(!T)!/pnode* Popup title(!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.46
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [node*]), (!KW [begin_pnode*]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [pound])
+!html_name  cmd_pound()
+
+Output the (!pound) symbol.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/pound)(!t)
+
+!item [(!DESCRIPTION)]
+This placeholder will be replaced by the pound symbol if
+the destination format supports it. If it doesn't UDO will replace
+this placeholder by ""(!T)GBP(!t)"".
+
+!item [(!EXAMPLE)]
+(!T)(!/pound)(!t) becomes (!pound).
+
+!item [(!EXISTSSINCE)] Version 6.5.8
+
+!item [(!SEEALSO)]
+(!KKW [euro]), Defined macros
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [program])
+!html_name  cmd_program
+
+(!red)Programmnamen für Titelseite definieren.(!coloff)
+
+Set document information.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/program <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [docinfo] [[program!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Title page] [Title page])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [programimage])
+!html_name  cmd_programimage
+
+(!red)Programmgrafik für Titelseite definieren.(!coloff)
+
+Set document information.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/programimage <(!FILE)>(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [docinfo] [[programimage!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Title page] [Title page])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [ps])
+!html_name  cmd_ps
+
+Start a popup section.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ps [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubnode]).
+
+!item [(!SEEALSO)]
+(!KW [psubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [ps*])
+!html_name  cmd_ps_asterisk
+
+Start hidden popup section.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ps* [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubnode*]).
+
+!item [(!SEEALSO)]
+(!KW [psubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [pss])
+!html_name  cmd_pss
+
+Start a popup subsection.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pss [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubnode]).
+
+!item [(!SEEALSO)]
+(!KW [psubsubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [pss*])
+!html_name  cmd_pss_asterisk
+
+Start a hidden popup subsection.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pss* [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubnode*]).
+
+!item [(!SEEALSO)]
+(!KW [psubsubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psss])
+!html_name  cmd_psss
+
+Start a popup paragraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psss [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubsubnode]).
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psss*])
+!html_name  cmd_psss_asterisk
+
+Start a hidden popup paragraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psss* [<(!TEXT)>](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubsubnode*]).
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubnode])
+!html_name  cmd_psubnode
+
+Start a popup section.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubnode <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+The same as (!KW [subnode]) but the contents will be displayed as a
+popup inside ST-Guide and WinHelp.
+
+!item [(!EXAMPLE)]
+(!T)!/psubnode A popup section(!t)
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubsubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubnode*])
+!html_name  cmd_psubnode_asterisk
+
+Start hidden popup section.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubnode* <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [psubnode]), but here ""<text>""
+will not appear in a table of contents.
+
+!item [(!EXAMPLE)]
+(!T)!/psubnode* A hidden popup section(!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.46
+
+!item [(!SEEALSO)]
+(!KW [psubnode]), (!KW [subnode*]), (!KW [begin_pnode*]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubsubnode])
+!html_name  cmd_psubsubnode
+
+Start a popup section.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubnode <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+The same as (!KW [subnode]) but the contents will be displayed as a
+popup inside ST-Guide and WinHelp.
+
+!item [(!EXAMPLE)]
+(!T)!/psubnode A popup subsection(!t)
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubsubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubsubnode*])
+!html_name  cmd_psubsubnode_asterisk
+
+Start a hidden popup subsection.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubnode* <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [psubsubnode]), but here
+""<text>"" will not appear in a table of contents.
+
+!item [(!EXAMPLE)]
+(!T)!/psubsubnode* A hidden popup subsection(!t)
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.46
+
+!item [(!SEEALSO)]
+(!KW [psubsubnode]), (!KW [subsubnode*]), (!KW [begin_pnode*]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubsubsubnode])
+!html_name  cmd_psubsubsubnode
+
+Start a popup subsection.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubsubnode <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+The same as (!KW [subsubnode]) but the contents will be displayed
+as a popup inside ST-Guide and WinHelp.
+
+!item [(!EXAMPLE)]
+(!T)!/psubsubnode A popup subsection(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubsubsubnode*])
+!html_name  cmd_psubsubsubnode_asterisk
+
+Start a hidden popup paragraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubsubnode* <(!TEXT)>(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [psubsubsubnode]), but here
+""<text>"" will not appear in the table of contents.
+
+!item [(!EXAMPLE)]
+(!T)!/psubsubsubnode* A hidden popup paragraph(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode*]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kkw [purple])
+!html_name  cmd_purple
+
+Sets the textcolor purple.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/purple)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Lila.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
+Postscript unterstützt.
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===
