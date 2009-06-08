@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from manual.u)
+#   fd  Jun 08: html_backpage + html_style_name redefined
 #
 ################################################################################
 
@@ -39,13 +40,16 @@
 # ------------------------------------------------------------------------------
 # do some special things for HTML
 # ------------------------------------------------------------------------------
-!ifset [UseForWeb]
+!html_backpage    http://www.udo-open-source.org/?lan=en 'Back to UDO Website'
+
+
+# !ifset [UseForWeb]
 # Documentation for website publishing:
-!html_style_name /udo.css
-!html_backpage   http://www.udo-open-source.org/ 'Back to UDO Open Source (Home)'
-!else
+# !html_style_name /udo.css
+# !html_backpage   http://www.udo-open-source.org/ 'Back to UDO Open Source (Home)'
+# !else
 # Documentation for "normal" users...
-!html_style_name ./udo.css
-!endif
+# !html_style_name ./udo.css
+# !endif
 
 # === EOF ===
