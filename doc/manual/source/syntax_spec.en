@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 08: ignored charset list removed, including charsets.ui
 #
 ################################################################################
 
@@ -180,60 +181,6 @@ Below is an overview of the character sets UDO knows about:
 !index Character set !! NeXT
 
 !include charsets.ui
-
-# the following commands:
-
-!begin_ignore
-!begin_xlist [code [dos:!]] !short
-
-!index DOS character set
-!index Character set !! DOS
-!index (!kw [code])
-!item [(!KW [code] [[dos!!]]):]
-IBM-PC, MS-DOS
-
-!index OS/2 character set
-!index Character set !! OS/2
-!index (!kw [code])
-!item [(!KW [code] [[os2!!]]):]
-OS/2
-
-!index HP-Roman-8 character set
-!index Character set !! HP-Roman-8
-!index (!kw [code])
-!item [(!KW [code] [[hp8!!]]):]
-HP Roman 8
-
-!index ANSI character sect
-!index ISO-Latin1 character set
-!index Windows character set
-!index Character set !! ANSI
-!index Character set !! ISO Latin 1
-!index Character set !! Windows
-!index (!kw [code])
-!item [(!KW [code] [[iso!!]]):]
-ISO Latin 1, Windows ANSI
-
-!index Macintosh character set
-!index Character set !! Macintosh
-!index (!kw [code])
-!item [(!KW [code] [[mac!!]]):]
-Apple Macintosh
-
-!index Atari character set
-!index Character set !! Atari
-!index (!kw [code])
-!item [(!KW [code] [[tos!!]]):]
-Atari ST
-
-!index NeXT character set
-!index Character set !! NeXT
-!index (!kw [code])
-!item [(!KW [code] [[next!!]]):]
-NeXT
-
-!end_xlist
-!end_ignore
 
 !smallskip
 
