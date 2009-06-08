@@ -14,8 +14,23 @@
 # -------
 # 2009:
 #   fd  Jun 05: header introduced
+#   fd  Jun 08: HTML settings adjusted
 #
 ################################################################################
+
+# ----------------------------------------------------------------
+# Settings for HTML and HTML-Help
+# ----------------------------------------------------------------
+#!html_merge_nodes
+#!no_images [html]
+!html_favicon_name    http://www.udo-open-source.org/favicon.ico
+!html_navigation      [line]
+# !html_navigation    [image] img/udo_icon_16.gif
+!html_style_name      css/udo.css
+
+
+
+
 
 # ------------------------------------------------------------------------------
 # Typ für Manualpage setzen  / Set the type of the manual page
@@ -82,16 +97,6 @@
 # ----------------------------------------------------------------
 #!rtf_monofont Courier New
 #!rtf_propfont Times New Roman
-
-
-
-
-
-# ----------------------------------------------------------------
-# Settings for HTML and HTML-Help
-# ----------------------------------------------------------------
-#!html_merge_nodes
-#!no_images [html]
 
 
 
