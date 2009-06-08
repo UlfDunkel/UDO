@@ -68,6 +68,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: history introduced
+#   fd  Jun 08: main chapters reorganized
 #
 ################################################################################
 
@@ -111,6 +112,21 @@
 !include intro.ui
 !endif
 
+# Syntax
+!ifnset [NoSyntax]
+!include syntax.ui
+!endif
+
+# Practice
+!ifnset [NoWorking]
+!include practice.ui
+!endif
+
+# Output formats
+!ifnset [NoFormats]
+!include formats.ui
+!endif
+
 # Installation
 !ifnset [NoInstall]
 !include install.ui
@@ -119,21 +135,6 @@
 # Usage
 !ifnset [NoRunning]
 !include usage.ui
-!endif
-
-# Syntax
-!ifnset [NoSyntax]
-!include syntax.ui
-!endif
-
-# Output formats
-!ifnset [NoFormats]
-!include formats.ui
-!endif
-
-# Practice
-!ifnset [NoWorking]
-!include practice.ui
 !endif
 
 # Appendix
