@@ -21,8 +21,6 @@
 !begin_node Silbentrennung
 !html_name  hyphenation
 
-# 31.01.1996: Hinweise auf zu kurze Zeilen
-
 UDO bietet für das ASCII-, ST-Guide-, Pure-C-Help- und
 Manualpage-Format eine halbautomatische Silbentrennung. Halbautomatisch
 bedeutet, dass Sie in einem Quelltext die Stellen markieren müssen, an
@@ -41,7 +39,7 @@ Bei der Umwandlung ins (!LaTeX)-Format werden die angegebenen Trennstellen
 durch ""\-"" ersetzt. (!LaTeX) weiß dann, dass das Wort nur an den Stellen
 getrennt werden darf.
 
-Bei der Umwandlung ins Rich Text, WinHelp- und HTML-Format werden die
+Bei der Umwandlung ins Rich-Text-, WinHelp- und HTML-Format werden die
 Trennmarken einfach gefiltert.
 
 !index (!k1 [//-])
@@ -53,7 +51,7 @@ Quelltext (!K1 [//-]) angeben.
 !begin_node Lokales Setzen von Trennstellen
 !html_name  hyphenation_patterns_local
 
-Im Quelltext kann man in einem Wort durch ""(!K1 [/-])"" die Stellen markieren, an
+Im Quelltext kann man in einem Wort durch (!K1 [/-]) die Stellen markieren, an
 denen UDO (bzw. (!LaTeX)) das Wort trennen darf. Ein Beispiel:
 
 !begin_quote
@@ -62,7 +60,7 @@ eine halbautomatische Sil!-ben!-tren!-nung.
 !end_verbatim
 !end_quote
 
-Bei der Umwandlung ins (!LaTeX-Format) werden alle ""(!K1 [/-])"" durch ""\-"" ersetzt;
+Bei der Umwandlung ins (!LaTeX-Format) werden alle (!K1 [/-]) durch ""\-"" ersetzt;
 es wird also ""Sil\-ben\-tren\-nung"" ausgegeben. Bei der Umwandlung ins
 ASCII-, ST-Guide-, Pure-C-Help- und Manualpage-Format wird das Wort
 passend aufgetrennt, falls es nicht mehr komplett in eine Zeile passt
