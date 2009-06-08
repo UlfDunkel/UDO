@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 08: etc. -> usw.
 #
 ################################################################################
 
@@ -66,7 +67,7 @@ Quelltext eine fertige WinHelp-Datei zu erstellen.
 
 In dieser Projektdatei befinden sich Informationen wie der Titel des
 Hypertextes, die zusätzlichen Schaltflächen, die Ausmaße des Fensters
-nach dem Öffnen des Hypertextes etc.
+nach dem Öffnen des Hypertextes usw.
 
 UDO überschreibt vorhandene Projektdateien ohne Rückfrage. Wenn Sie
 manuelle Änderungen an einer Projektdatei vorgenommen haben und diese
