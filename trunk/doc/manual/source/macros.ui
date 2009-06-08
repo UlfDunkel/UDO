@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: introduced (extracted from manual.u)
+#   fd  Jun 08: all commands should be formatted in bold tt
 #
 ################################################################################
 
@@ -23,12 +24,12 @@
 !macro a !]
 !define x !(!1)
 !macro  X !
-!macro  KW   (!I)(!link [!(!1) (!2)] [!(!1)])(!i)
-!macro  K1   (!I)(!link [!(!1) (!2)] [!(!1)])(!i)
-!macro  KKW  (!I)(!link [(!(!1)!)] [(!/(!1)!)])(!i)
-!macro  KK2W (!I)(!link [(!(!1) (!2)!)] [(!/(!1)!)])(!i)
-!macro  KKKW (!I)(!link [(!(!1)!)...(!(!2)!)] [(!(!1)!)...(!(!2)!)])(!i)
-!macro  KK1  (!I)(!link [((!X)(!1)!)] [((!X)/(!1)!)])(!i)
+!macro  KW   (!B)(!T)(!link [!(!1) (!2)] [!(!1)])(!t)(!b)
+!macro  K1   (!B)(!T)(!link [!(!1) (!2)] [!(!1)])(!t)(!b)
+!macro  KKW  (!B)(!T)(!link [(!(!1)!)] [(!/(!1)!)])(!t)(!b)
+!macro  KK2W (!B)(!T)(!link [(!(!1) (!2)!)] [(!/(!1)!)])(!t)(!b)
+!macro  KKKW (!B)(!T)(!link [(!(!1)!)...(!(!2)!)] [(!(!1)!)...(!(!2)!)])(!t)(!b)
+!macro  KK1  (!B)(!T)(!link [((!X)(!1)!)] [((!X)/(!1)!)])(!t)(!b)
 !macro  kw   !(!1)
 !define k1   !(!1)
 !define kkw  (!/(!1))
