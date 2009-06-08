@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from working.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -24,7 +25,7 @@
 
 # = = =
 
-!item [Was bedeutet ''FAQ''?]
+!item [Was bedeutet ""FAQ""?]
 
 ""FAQ"" bedeutet ""Frequently Asked Questions"" und bedeutet
 übersetzt soviel wie ""häufig gestellte Fragen"". Im übertragenen
@@ -33,7 +34,7 @@ gestellten Fragen samt der passenden Antwort.
 
 # = = =
 
-!item [Wieso heißt UDO ''UDO''?]
+!item [Wieso heißt UDO ""UDO""?]
 
 Als ich mit der Programmierung von UDO begann, brauchte ich einen
 Namen. Mir fiel auf die Schnelle nichts besseres ein als die
@@ -44,9 +45,9 @@ steht.
 
 # = = =
 
-!item [Wie spricht man ''UDO'' aus?]
+!item [Wie spricht man ""UDO"" aus?]
 
-''UDO'' wird genauso ausgesprochen wie der Vorname Udo, also ''Uh-Doh''. ''UDO'' wird (!I)nicht(!i) anglophil wie ''Judo'' oder ''You do'' ausgesprochen!
+""UDO"" wird genauso ausgesprochen wie der Vorname Udo, also ""Uh-Doh"". ""UDO"" wird (!I)nicht(!i) anglophil wie ""Judo"" oder ""You do"" ausgesprochen!
 
 # = = =
 
@@ -91,7 +92,7 @@ Wenn Sie an einer Portierung auf ein bestimmtes System interessiert sind und ein
 
 # = = =
 
-!item [Können auch ''systemfremde'' Formate erzeugt werden?]
+!item [Können auch ""systemfremde"" Formate erzeugt werden?]
 
 Mit UDO kann auf man jedem System natürlich auch Formate für
 andere Betriebssysteme erzeugt werden, da die Versionen identisch

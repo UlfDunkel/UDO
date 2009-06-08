@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -64,7 +65,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!DESCRIPTION)]
 Dieser Platzhalter wird bei der Umwandlung ins
-(!LaTeX)-Format in ''(!V)\LaTeX{}(!v)'', ansonsten in ""(!V)LaTeX(!v)"" umgewandelt.
+(!LaTeX)-Format in ""(!V)\LaTeX{}(!v)"", ansonsten in ""(!V)LaTeX(!v)"" umgewandelt.
 
 !item [(!EXAMPLE)]
 Aus (!T)(!/LaTeX)(!t) wird (!LaTeX).
@@ -91,7 +92,7 @@ Aus (!T)(!/LaTeX)(!t) wird (!LaTeX).
 
 !item [(!DESCRIPTION)]
 Dieser Platzhalter wird bei der Umwandlung ins
-(!LaTeX)-Format in ''(!V)\LaTeXe{}(!v)'', ansonsten in ""(!V)LaTeX2e(!v)"" umgewandelt.
+(!LaTeX)-Format in ""(!V)\LaTeXe{}(!v)"", ansonsten in ""(!V)LaTeX2e(!v)"" umgewandelt.
 
 !item [(!EXAMPLE)]
 Aus (!T)(!/LaTeXe)(!t) wird (!LaTeXe).
@@ -370,8 +371,8 @@ Mit diesem Schalter können Sie festlegen, in welcher
 Schriftgröße Text erscheinen soll, der in einer
 linedraw-Umgebung steht. Der Schalter kann überall im
 Quelltext verwendet werden. Die kleinste Schriftgröße
-wird mit ''(!V)tiny(!v)'', die größte mit ''(!V)huge(!v)'' gesetzt. Die
-Standardgröße für linedraw-Umgebungen ist ''(!V)normal(!v)''.
+wird mit ""(!V)tiny(!v)"", die größte mit ""(!V)huge(!v)"" gesetzt. Die
+Standardgröße für linedraw-Umgebungen ist ""(!V)normal(!v)"".
 
 !item [(!EXAMPLE)]
 (!T)!/linedrawsize [small](!t)

@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -122,9 +123,9 @@ Universellen Zeichensatz einschalten.
 !item [(!SYNTAX)] (!T)!/universal_charset [ on | off ](!t)
 
 !item [(!DESCRIPTION)]
-''(!KW [universal_charset] [on!!]])'' schaltet die Verwendung des
+""(!KW [universal_charset] [on!!]])"" schaltet die Verwendung des
 universellen Zeichensatzes ein,
-''(!KW [universal_charset] [off!!]])'' wieder aus. Standardm‰ﬂig
+""(!KW [universal_charset] [off!!]])"" wieder aus. Standardm‰ﬂig
 wird der universelle Zeichensatz von UDO nicht
 verwendet, da die Umwandlung der universellen Zeichen
 eine zeitaufwendige Angelegenheit ist.
@@ -879,11 +880,11 @@ Zieldatei als ""Buch"" ausgeben.
 
 !item [(!DESCRIPTION)]
 UDO gibt bei der Umwandlung ins (!LaTeX)-Format (!KW [node]) mit
-''(!V)\chapter(!v)'' anstatt ''(!V)\section(!v)'', (!KW [subnode]) mit
-''(!V)\section(!v)'' anstatt ''(!V)\subsection(!v)'' und
-(!KW [subsubnode]) mit ''(!V)\subsection(!v)'' anstatt
-''(!V)\subsubsection(!v)'' aus. Als Documentstyle bzw. Documentclass
-wird ''(!V)book(!v)'' verwendet. Bei den anderen Formaten wird eine
+""(!V)\chapter(!v)"" anstatt ""(!V)\section(!v)"", (!KW [subnode]) mit
+""(!V)\section(!v)"" anstatt ""(!V)\subsection(!v)"" und
+(!KW [subsubnode]) mit ""(!V)\subsection(!v)"" anstatt
+""(!V)\subsubsection(!v)"" aus. Als Documentstyle bzw. Documentclass
+wird ""(!V)book(!v)"" verwendet. Bei den anderen Formaten wird eine
 (!LaTeX)-‰hnliche Ausgabe erzeugt, d.h. Kapitel werden auch mit
 ""Kapitel #:"" bzw. ""Anhang X:"" beschriftet.
 

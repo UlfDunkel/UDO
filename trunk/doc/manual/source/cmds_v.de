@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -38,7 +39,7 @@ Klartext ausgeben.
 
 !item [(!DESCRIPTION)]
 ""<text>"" wird als Klartext dargestellt, falls möglich.
-Für (!LaTeX) wird ''(!V)\verb+<text>+'(!v)'' ausgegeben, bei allen
+Für (!LaTeX) wird ""(!V)\verb+<text>+'(!v)"" ausgegeben, bei allen
 anderen Formaten erfolgt die gleiche Ausgabe wie bei
 (!KKKW [T] [t]).
 
@@ -98,8 +99,8 @@ Mit diesem Schalter können Sie festlegen, in welcher
 Schriftgröße Text erscheinen soll, der in einer
 verbatim-Umgebung steht. Der Schalter kann überall im
 Quelltext verwendet werden. Die kleinste Schriftgröße
-wird mit ''(!V)tiny(!v)'', die größte mit ''(!V)huge(!v)'' gesetzt. Die
-Standardgröße für verbatim-Umgebungen ist ''(!V)normal(!v)''.
+wird mit ""(!V)tiny(!v)"", die größte mit ""(!V)huge(!v)"" gesetzt. Die
+Standardgröße für verbatim-Umgebungen ist "(!V)normal(!v)"".
 
 !item [(!EXAMPLE)]
 (!T)!/verbatimsize [small](!t)

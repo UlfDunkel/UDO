@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: introduced (extracted from history.ui)
 #   fd  Jun 06: begascde.ui integrated in text
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -667,10 +668,10 @@ unten links !! unten mitte !! unten rechts
  	!end_itemize
  !item [Änderungen:]
  	!begin_itemize !short
- 	 !item (!T)!/html_backpage ../index.html ''Zurück zu UDO-Open-Source''(!t) (!nl)
+ 	 !item (!T)!/html_backpage ../index.html "Zurück zu UDO-Website"(!t) (!nl)
  	       Jetzt kann zusätzlich ein Text übergeben werden, der statt
          des Links in das alt-Attribut eingetragen wird. Der Text muss
-         in einfachen Anführungszeichen stehen (''foo'')
+         in einfachen Anführungszeichen stehen ("foo")
    !item Die Bildunterschrift wird bei der Ausgabe nach RTF nicht
          mehr in Klammern gesetzt.
    !item Die Bilder werden jetzt bei der Ausgabe nach RTF innerhalb
@@ -1227,7 +1228,7 @@ finden hier als Gedächtnisstütze meine komprimierten Anmerkungen aus
           rechtsbündige Ausgabe von Bilder ist somit nun auch möglich.
         !item Die Default-Endung für ASCII-Dateien lautet nun .txt.
         !item Bei der (!LaTeX)-Ausgabe wird innerhalb \verb kein Zeilenumbruch mehr erzeugt.
-        !item DOS-Grafikzeichen werden für WinHelp durch ''+'', ''-'' oder ''|''
+        !item DOS-Grafikzeichen werden für WinHelp durch ""+"", ""-"" oder ""|""
           ersetzt.
         !end_itemize
 

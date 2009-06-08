@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: introduced (extracted from cmdline.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -72,7 +73,7 @@ Erzeugung von Indexdateien unterdrücken.
 
 !item [(--)drc] Die (!U)Quelldatei(!u) wird ins DRC-Format (David's Readme Compiler) umgewandelt.
 
-!item [-D symbol] Setzen des Symbols ''symbol'', welches sich im
+!item [-D symbol] Setzen des Symbols ""symbol"", welches sich im
 Quelltext mit dem Befehl (!KW [ifset]) abfragen lässt.
 
 !item [(--)force-long] Wird diese Option
@@ -180,19 +181,19 @@ welche Dateien andere Dateien nachladen.
 !begin_description
 !item [udo file.u]
 
-Umwandeln der Datei ''(!V)file.u(!v)'' ins ASCII-Format (default) und Ausgabe auf
+Umwandeln der Datei ""(!V)file.u(!v)"" ins ASCII-Format (default) und Ausgabe auf
 die Standardausgabe. Fehlermeldungen werden auf die Standardfehlerausgabe ausgegeben.
 
 !item [udo (--)tex -o output.tex file.u]
 
-Umwandeln der Datei ''(!V)file.u(!v)'' ins (!LaTeX)-Format, Ausgaben werden in die
-Datei ''(!V)output.tex(!v)'' geschrieben, Fehlermeldungen werden in der Datei
-''(!V)output.ult(!v)'' protokolliert.
+Umwandeln der Datei ""(!V)file.u(!v)"" ins (!LaTeX)-Format, Ausgaben werden in die
+Datei ""(!V)output.tex(!v)"" geschrieben, Fehlermeldungen werden in der Datei
+""(!V)output.ult(!v)"" protokolliert.
 
 !item [udo -s -y -l -o ! file.u]
 
-Umwandeln der Datei ''(!V)file.u(!v)'' ins St-Guide-Quelltextformat. Ausgaben
-erfolgen in die Datei ''(!V)file.stg(!v)''. Es werden keine Protokolldatei und
+Umwandeln der Datei ""(!V)file.u(!v)"" ins St-Guide-Quelltextformat. Ausgaben
+erfolgen in die Datei ""(!V)file.stg(!v)"". Es werden keine Protokolldatei und
 keine Datei mit Trennvorschlägen angelegt.
 
 !end_description
@@ -208,7 +209,7 @@ falls (!B)UDOPATH(!b) nicht existiert ((!V)udo.ini(!v) betrifft nur die Atari-GE
 !item [LANG] Legt die zu benutzende Landessprache für Fehlermeldungen
 fest, wenn weder (!B)LC_ALL(!b) noch (!B)LC_MESSAGES(!b) existiert.
 
-!item [LC_ALL] Wenn diese Environmentvariable auf ''german'' gesetzt ist,
+!item [LC_ALL] Wenn diese Environmentvariable auf ""german"" gesetzt ist,
 benutzt (!B)UDO(!b) deutschsprachige Meldungen. Für andere Werte werden
 englischsprachige Meldungen benutzt. Existiert diese Variable nicht,
 wird stattdessen (!B)LC_MESSAGES(!b) überprüft.
@@ -216,7 +217,7 @@ wird stattdessen (!B)LC_MESSAGES(!b) überprüft.
 !item [LC_MESSAGES] Siehe (!B)LC_ALL(!b). Wenn auch diese Variable
 nicht existiert, wird stattdessen (!B)LANG(!b) benutzt.
 
-!item [UDOPATH] In diesem Verzeichnis sucht UDO nach der Datei ''udo.ini''.
+!item [UDOPATH] In diesem Verzeichnis sucht UDO nach der Datei ""udo.ini"".
 Falls (!B)UDOPATH(!b) nicht existiert, wird stattdessen in
 (!B)$HOME(!b) gesucht.
 

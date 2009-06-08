@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -92,7 +93,7 @@ Schriftarten, (!link [Textgestaltung] [Textgestaltung])
 
 !item [(!DESCRIPTION)]
 Dieser Platzhalter wird bei der Umwandlung ins
-(!LaTeX)-Format in ''(!V)\TeX{}(!v)'', ansonsten in ""TeX"" umgewandelt.
+(!LaTeX)-Format in ""(!V)\TeX{}(!v)"", ansonsten in ""TeX"" umgewandelt.
 
 !item [(!EXAMPLE)]
 Aus (!T)(!/TeX)(!t) wird (!TeX).
@@ -403,7 +404,7 @@ UDO erzeugt bei der Umwandlung ins (!LaTeX)-Format
 !item [(!DESCRIPTION)]
 UDO erzeugt bei der Umwandlung ins (!LaTeX)-Format
 spezielle (!LaTeXe)-Kommandos, wie einen Vorspann für
-(!LaTeXe) oder ''(!V)\textbf{!..}(!v)'' anstelle von ''(!V){\bf~!..}(!v)''
+(!LaTeXe) oder ""(!V)\textbf{!..}(!v)"" anstelle von ""(!V){\bf~!..}(!v)""
 bei der Umwandlung von (!KK1 [B]).
 
 !item [(!SEEALSO)]
@@ -604,7 +605,7 @@ Verbatim-Zeichen für (!LaTeX) setzen (nur (!TeX))
 
 !item [(!DESCRIPTION)]
 ""<zeichen>"" wird als Klammerungszeichen für den
-(!LaTeX)-Befehl ''(!V)\verb(!v)'' verwendet. Bei der nächsten
+(!LaTeX)-Befehl ""(!V)\verb(!v)"" verwendet. Bei der nächsten
 Umwandlung von (!KK1 [V]) und (!KK1 [v]) wird dann ""<zeichen>""
 benutzt. Als Standardzeichen benutzt UDO ""+"".
 

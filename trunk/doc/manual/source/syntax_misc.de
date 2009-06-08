@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -52,7 +53,7 @@ Befehl eignet sich im Zusammenhang mit dem (!KW [ifdest])-Kommando dazu, um
 z.B. spezielle (!LaTeX)-Tabellen oder HTML-Formulare einzubinden.
 
 Diese Dokumentation macht übrigens intensiven Gebrauch von diesen
-Möglichkeiten. Die Datei ''(!V)udo.u(!v)'' enthält lediglich wichtige
+Möglichkeiten. Die Datei ""(!V)udo.u(!v)"" enthält lediglich wichtige
 Einstellungen und etliche (!KW [include])-Kommandos, jedoch keine
 einzige Zeile ""sichtbaren"" Textes.
 
@@ -165,7 +166,7 @@ Beispiel wird der Programmname in einen Disclaimer eingebaut, der per
 !index Parameter !! Makros
 
 Seit UDO Release 6 können Makros auch Parameter übergeben werden. Bei
-der Erzeugung eines Makros geben Sie dazu mit ''(!T)(!/1)(!t)'', ''(!T)(!/2)(!t)'' bis ''(!T)(!/9)(!t)''
+der Erzeugung eines Makros geben Sie dazu mit ""(!T)(!/1)(!t)"", ""(!T)(!/2)(!t)"" bis ""(!T)(!/9)(!t)""
 die Position der Parameter an. Um den Makros im Text die Parameter zu
 übergeben, setzen Sie diese in eckige Klammern.
 
@@ -318,7 +319,7 @@ In diesem Beispiel wird nur ein Parameter an die Definition übergeben.
 Trotzdem soll für Nicht-(!LaTeX)-Formate der 2. Parameter ausgegeben
 werden. Sie werden sich vielleicht fragen, warum dies so ist. Nun, bei
 Nicht-(!LaTeX)-Formaten soll nichts ausgegeben werden. Ein zweiter
-Parameter ist nicht vorhanden, demnach leer, und somit wird ''lb (!/2)''
+Parameter ist nicht vorhanden, demnach leer, und somit wird ""lb (!/2)""
 zu nichts expandiert. Dieser Umweg ist leider nötig.
 
 !smallskip
@@ -372,7 +373,7 @@ Gehen wir einmal davon aus, dass wir einen Quelltext geschrieben haben,
 der drei Kapitel enthält. Die ersten beiden Kapitel sind bereits
 fertig, am letzten Kapitel wird noch eifgrig herumgebastelt. Um nun die
 Turn-Around-Zeiten zu minimieren, wollen wir eine Zieldatei erzeugen,
-die nur das dritte Kapitel enthält. Nur wenn das Symbol ''AlleKapitel''
+die nur das dritte Kapitel enthält. Nur wenn das Symbol ""AlleKapitel""
 gesetzt ist, soll die Zieldatei alle Kapitel enthalten:
 
 !begin_quote
@@ -381,15 +382,15 @@ gesetzt ist, soll die Zieldatei alle Kapitel enthalten:
 
 Starten Sie UDO nun ""normal"", wird eine Zieldatei erstellt, die nur das
 dritte Kapitel enthält. Starten Sie UDO hingegen mit der
-Kommandozeilenoption ''(!V)-D~AlleKapitel(!v)'', so werden alle Kapitel umgewandelt.
+Kommandozeilenoption ""(!V)-D~AlleKapitel(!v)"", so werden alle Kapitel umgewandelt.
 
 Das Spielchen kann man natürlich noch etwas ausbauen. Durch Verwendung
 weiterer Symbole kann man gezielt nur einzelne Kapitel oder alle
 zusammen in die Zieldatei aufnehmen. Im folgenden Beispiel wird bei
-Übergabe der Option ''(!V)-D~Kapitel1(!v)'' nur das erste Kapitel in die
-Zieldatei aufgenommen. Übergibt man ''(!V)-D~Kapitel1(!v)'' und ''(!V)-D~Kapitel2(!v)'',
+Übergabe der Option ""(!V)-D~Kapitel1(!v)"" nur das erste Kapitel in die
+Zieldatei aufgenommen. Übergibt man ""(!V)-D~Kapitel1(!v)"" und ""(!V)-D~Kapitel2(!v)"",
 so werden das erste und das zweite Kapitel eingebunden. Übergibt man
-hingegen ''(!V)-D~AlleKapitel(!v)'', so wird die Zieldatei komplett dargestellt:
+hingegen ""(!V)-D~AlleKapitel(!v)"", so wird die Zieldatei komplett dargestellt:
 
 !begin_quote
 !vinclude (!EXAMPLES)symbol2.ui
@@ -409,10 +410,10 @@ AlleKapitel löschen, sofern es gesetzt wurde. Dies funktioniert so:
 !end_quote
 
 In diesem Beispiel wird also zunächst abgefragt, ob das Symbol
-''(!V)AlleKapitel(!v)'' gesetzt ist. In dem Falle wird es durch den Befehl
+""(!V)AlleKapitel(!v)"" gesetzt ist. In dem Falle wird es durch den Befehl
 (!KW [unset]) gelöscht. Die vorherige Abfrage ist deshalb notwendig, damit
 man eine Fehlermeldung seitens UDO vermeidet, falls das Symbol
-''(!V)AlleKapitel(!v)'' einmal nicht gesetzt ist.
+""(!V)AlleKapitel(!v)"" einmal nicht gesetzt ist.
 
 (!HINTS)
 

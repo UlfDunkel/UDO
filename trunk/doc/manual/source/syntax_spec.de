@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -349,9 +350,9 @@ Platzhalter  !! x aus           !! Beispiel
 !hline
 !end_table
 
-Das deutsche ''(!"s)'' wird durch den Platzhalter (!/"s) erzeugt. Kennt das
+Das deutsche ""(!"s)"" wird durch den Platzhalter (!/"s) erzeugt. Kennt das
 Zielformat ein Zeichen nicht, so wird das naheliegendste Zeichen
-benutzt, z.B. ''a'' statt ''(!^a)''.
+benutzt, z.B. ""a"" statt ""(!^a)"".
 !universal_charset [off]
 
 !end_node # Universeller Zeichensatz

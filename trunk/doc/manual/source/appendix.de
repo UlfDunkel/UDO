@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: introduced (extracted from appendix.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -98,8 +99,8 @@ Diese Dokumentation wurde unter Zuhilfenahme folgender Programme
 geschrieben:
 
 !begin_itemize !short
-!item Joe Allan's Own Editor ''Joe'' für MS-DOS und Linux
-!item Allan Phillips' Programmer's File Editor ''PFE''~0.06.01 (der beste
+!item Joe Allan's Own Editor ""Joe"" für MS-DOS und Linux
+!item Allan Phillips' Programmer's File Editor ""PFE""~0.06.01 (der beste
      Editor für Windows 3.1 und Windows 95, den ich kenne)
 !item Phoenix für Windows 3.11 von Application Systems Heidelberg (wird
      jetzt als Fuji Base 1.0 verscherbelt)

@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -216,7 +217,7 @@ Inline Bitmaps benutzen (nur WinHelp4).
 !item [(!DESCRIPTION)]
 Wenn Sie diesen Schalter im Vorspann verwenden, so
 benutzt UDO zur Einbindung der Bilder den RTF-Befehl
-''(!V)\bmcwd(!v)'' anstelle des Befehls ''(!V)\bmc(!v)''. Daraufhin
+""(!V)\bmcwd(!v)"" anstelle des Befehls ""(!V)\bmc(!v)"". Daraufhin
 speichert der Microsoft Helpcompiler die Bilder in
 einem anderen Format in der WinHelp4-Datei, wodurch
 Bilder nicht mehr verzerrt dargestellt werden.
@@ -752,7 +753,7 @@ Inline Bitmaps benutzen (nur WinHelp).
 !item [(!DESCRIPTION)]
 Wenn Sie diesen Schalter im Vorspann verwenden, so
 benutzt UDO zur Einbindung der Bilder den RTF-Befehl
-''(!V)\bmcwd(!v)'' anstelle des Befehls ''(!V)\bmc(!v)''. Daraufhin
+""(!V)\bmcwd(!v)"" anstelle des Befehls ""(!V)\bmc(!v)"". Daraufhin
 speichert der Microsoft Helpcompiler die Bilder in
 einem anderen Format in der WinHelp-Datei, wodurch
 Bilder nicht mehr verzerrt dargestellt werden.

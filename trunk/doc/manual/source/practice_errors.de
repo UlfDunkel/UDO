@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from working.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -47,56 +48,56 @@ vorhergehende Fehler zurückzuführen sind.
 
 !begin_description
 
-!item [''!..'' called twice]
+!item [""!.."" called twice]
 Das angegebene Kommando taucht zweimal oder sogar noch öfters in
 Ihrem Quelltext auf, darf aber nur einmalig benutzt werden.
 
-!item [''!..'' expected]
+!item [""!.."" expected]
 UDO hat den angegebenen Befehl erwartet. Überprüfen Sie, ob jede
 geöffnete Umgebung mit dem richtigen Befehl beendet wurde oder ob
 vielleicht ein (!I)!/begin_*](!i) fehlt.
 
-!item [''!..'' followed by ''!..'']
+!item [""!.."" followed by ""!..""]
 Eine Umgebung wurde mit einem falschen Befehl beendet. Entweder
 haben Sie den falschen Befehl zur Beedigung einer Umgebung
 vergessen oder falsch positioniert.
 
-!item [''!..'' ignored inside preamble]
+!item [""!.."" ignored inside preamble]
 Das angegebene Kommando ist im Vorspann nicht erlaubt. Sorgen Sie
 dafür, dass es nach (!KW [begin_document]) angegeben wird oder löschen
 Sie das Kommando.
 
-!item [''!..'' ignored outside preamble]
+!item [""!.."" ignored outside preamble]
 Das angegebene Kommando ist im Hauptteil nicht erlaubt. Sorgen
 Sie dafür, dass es vor (!KW [begin_document]) angegeben wird oder löschen
 Sie das Kommando.
 
-!item [''!..'' maybe not available in (!LaTex)]
+!item [""!.."" maybe not available in (!LaTex)]
 Das angegebene Zeichen ist sehr wahrscheinlich nicht von (!LaTex)
 darstellbar. Verzichten Sie besser auf das angegebene Zeichen.
 
-!item [''!..'' not active]
+!item [""!.."" not active]
 Eine Schriftart oder Fußnote sollte beendet werden, obwohl Sie
 noch gar nicht begonnen wurde. Beachten Sie, dass die Platzhalter
 mit Großbuchstaben eine Schriftart oder Fußnote beginnen, wogegen
 Platzhalter mit Kleinbuchstaben sie beenden.
 
-!item [''!..'' not available in ISO Latin 1]
+!item [""!.."" not available in ISO Latin 1]
 Das angegebene Zeichen ist im ISO-Latin-1-Zeichensatz nicht
 definiert. UDO kann dieses Zeichen demnach nicht umwandeln.
 
-!item [''!..'' not available in this charset]
+!item [""!.."" not available in this charset]
 Das angegebene Zeichen ist im Systemzeichensatz nicht vorhanden
 und kann demnach nicht dargestellt werden. Weichen Sie, falls
 möglich, auf andere Zeichen aus.
 
-!item [''!..'' still active]
+!item [""!.."" still active]
 Eine Schriftart oder Fußnote soll begonnen werden, obwohl sie
 noch aktiv ist. Entweder fehlt vor der Stelle, an dem dieser
 Fehler auftritt, der Platzhalter zur Beendigung der Schriftart
 bzw. Fußnote oder Sie haben sich verschrieben.
 
-!item [''!..'' without ''!..'']
+!item [""!.."" without ""!..""]
 Sie haben eine Umgebung beendet, obwohl sie noch gar nicht
 begonnen wurde. Entweder ist das Ende-Kommando überflüssig, oder
 aber das Anfangskommando fehlt.
@@ -111,7 +112,7 @@ etc. eine Abfrage begonnen haben.
 # ergänzt 04.01.2004 - Ulrich Kretschmer (vgl. Bug Nr. 43)
 Diese Fehlermeldung wird auch erzeugt, wenn im Quelltext ein (!KW [end_ignore]) ohne zugehöriges (!KW [begin_ignore]) vorkommt.
 
-!item [''!/item'' outside environment]
+!item [""!/item"" outside environment]
 Sie haben einen Aufzählungspunkt außerhalb einer Aufzählung,
 Nummerierung, Beschreibung oder Liste eingesetzt. Sorgen Sie
 dafür, dass der Punkt innerhalb einer solchen Umgebung steht.
@@ -351,7 +352,7 @@ mehrere Zeilen erstreckt oder dessen Ende UDO nicht finden konnte.
 !item [unknown command]
 UDO kennt das angegebene Kommando nicht. Falls Sie ein Wort
 darstellen möchten, dass mit einem Ausrufungszeichen beginnt, so
-müssen Sie dieses durch Einfügen eines ''/'' besonders markieren.
+müssen Sie dieses durch Einfügen eines ""/"" besonders markieren.
 
 !item [use (!/V) and (!/v) in one line]
 (!MISS)

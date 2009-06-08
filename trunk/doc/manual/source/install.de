@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: introduced (extracted from install.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -31,17 +32,17 @@ sinnigerweise "UDO" genannt werden sollte.
 
 Die GEM-Version sollte man im verwendeten Desktop -- ich empfehle,
 Gemini, Thing oder Ease zu benutzen -- als Anwendung für Dateien mit der
-Endung ''(!V)*.u*(!v)'' anmelden.
+Endung ""(!V)*.u*(!v)"" anmelden.
 
 Falls Sie das TTP bevorzugen und mit einem Kommandozeileninterpreter
 (z.B. mit der Mupfel von Stefan Eissing) arbeiten, so kopieren oder
 verschieben Sie 'udo.ttp' in eines der in (!T)$PATH(!t) angegebenen
-Verzeichnisse (z.B. ''(!V)\usr\bin(!v)'').
+Verzeichnisse (z.B. ""(!V)\usr\bin(!v)"").
 
 !begin_ignore
 # auskommentiert 13.01.2004 - Ulrich Kretschmer
 Falls Sie den ST-Guide installiert haben, so sollten Sie '(!UDOR)ger.hyp'
-und ''(!V)(!UDOR)ger.ref(!v)'' in Ihr Verzeichnis kopieren oder verschieben, in dem
+und ""(!V)(!UDOR)ger.ref(!v)"" in Ihr Verzeichnis kopieren oder verschieben, in dem
 Sie auch alle anderen Hypertexte aufbewahren. Nur dann können auch
 andere Hypertexte oder Programme (z.B. ein Editor) auf den
 UDO-Hypertext zugreifen.
@@ -114,7 +115,7 @@ werden. Unabhängig davon ist die Größe zur Laufzeit minimal.
 
 !begin_itemize !short
 !item Laden Sie sich das entsprechende ZIP-File von der UDO-Homepage herunter.
-!item Packen Sie das ZIP-File aus und kopieren Sie die ausführbare Datei ''(!T)udo(!t)'' nach (!T)/usr/bin(!t).
+!item Packen Sie das ZIP-File aus und kopieren Sie die ausführbare Datei ""(!T)udo(!t)"" nach (!T)/usr/bin(!t).
 !end_itemize
 
 Anmerkung: Eine manpage ist derzeit nicht Teil der Mac-OS-X-Distribution.
@@ -194,23 +195,23 @@ für die deutsche Doku (!T)udo-doc-ger(!t).
 
 !begin_ignore
 # auskommentiert 10.01.2004 - Ulrich Kretschmer
-Nach Entpacken des Archivs kopieren Sie das Binary aus ''(!V)bin/(!v)'' in das
-Verzeichnis ''(!V)/usr/local/bin(!v)'' oder in eines der Verzeichnisse Ihres
+Nach Entpacken des Archivs kopieren Sie das Binary aus ""(!V)bin/(!v)"" in das
+Verzeichnis""'(!V)/usr/local/bin(!v)"" oder in eines der Verzeichnisse Ihres
 (!T)$PATH(!t)'s.
 
-Kopieren Sie dann die UDO-Manualpage ''(!V)udo.1(!v)'' nach ''(!V)/usr/man/man1/(!v)''.
+Kopieren Sie dann die UDO-Manualpage ""(!V)udo.1(!v)"" nach ""(!V)/usr/man/man1/(!v)"".
 
 Um sich die Dokumentation von UDO mittels GNU-Info ansehen zu können,
 sollten Sie die Quelltexte der Dokumentation ins Texinfo-Format
 umwandeln, mit Makeinfo bearbeiten und die erhaltenen Dateien in das
 Verzeichnis kopieren ((!V)$INFOPATH(!v)), in dem sich die anderen Info-Dateien
 befinden, sofern sich in der UDO-Distribution noch keine Info-Dateien
-befinden. Die Datei ''(!V)dir(!v)'' muss dort dann noch angepasst werden, indem Sie
+befinden. Die Datei ""(!V)dir(!v)"" muss dort dann noch angepasst werden, indem Sie
 auf die UDO-Dokumentation verweisen.
 
 Desweiteren empfiehlt sich das Anlegen von Shellscripten oder Aliasen,
 um nicht immer alle Optionen angeben zu müssen. Das folgende Script,
-welches man ''(!V)''u2tex''(!v)'' benennen sollte, ruft UDO mit den passenden
+welches man ""(!V)u2tex(!v)"" benennen sollte, ruft UDO mit den passenden
 Optionen auf.
 
 !begin_quote
