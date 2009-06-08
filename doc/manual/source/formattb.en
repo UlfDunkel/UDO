@@ -14,6 +14,8 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formattb.ui)
+#   fd  Jun 08: ignored format list removed
+#   fd  Jun 08: text reviewed, xlist -> blist
 #
 ################################################################################
 
@@ -22,7 +24,7 @@
 	!set var_kuerzel
 !endif
 
-!begin_xlist [linuxdoc ]
+!begin_blist
 
 !item [amg]
 AmigaGuide (!nl)
@@ -36,20 +38,22 @@ Apple
 
 !item [asc]
 ASCII (!nl)
-"Plain" Text (!nl)
+Plain Text (!nl)
 all
 
 !item [drc]
 David's Readme Compiler (!nl)
-DOS program for creating menu-driven ReadMe's as EXE-programs (!nl)
+DOS program for creating menu-driven ReadMe files as EXE-programs (!nl)
 MS-DOS
 
 !item [hah]
-HTML Apple Help (!nl)
+HTML format for Apple Help Books (!nl)
+Mac~OS~X
+
 
 !item [helptag]
 HP-Helptag-SGML (!nl)
-SGML-based hypertext helpsystem for commercial Unices (HP-UX, Sun Solaris, IBM AIX) (!nl)
+SGML-based hypertext help system for commercial Unices (HP-UX, Sun Solaris, IBM AIX) (!nl)
 Unix
 
 !item [html]
@@ -59,7 +63,7 @@ platform-independent
 
 !item [hh]
 HTMLHelp (!nl)
-HTML-related format, for creation of HTML-Help files under windows (!nl)
+HTML-related format, for creation of HTML help files under windows (!nl)
 Win32
 
 !item [tex]
@@ -75,7 +79,7 @@ OS/2
 !item [linuxdoc]
 Linuxdoc-SGML (!nl)
 Linuxdoc-SGML (recently: SGMLtools) is -- like UDO -- a multiformat converter
-which converts its own format to LaTeX, Manualpage, RTF, HTML, Texinfo... (!nl)
+which converts its own format to LaTeX, Manualpage, RTF, HTML, Texinfo, etc. (!nl)
 Unix/Linux
 
 !item [lyx]
@@ -85,12 +89,12 @@ Unix/Linux
 
 !item [man]
 Manualpage (!nl)
-Unix-/Linux-help pages for commandline programs (!nl)
+Unix/Linux help pages for commandline programs (!nl)
 Unix/Linux
 
 !item [nroff]
 NROFF (!nl)
-Unix-/Linux-help pages for commandline programs (!nl)
+Unix/Linux help pages for commandline programs (!nl)
 Unix/Linux
 
 !item [pdflatex]
@@ -107,7 +111,7 @@ several
 !item [pchelp]
 Pure-C-Help (!nl)
 help system for the Pure C compiler (!nl)
-Atari ST
+Atari TOS
 
 !item [rtf]
 RTF (Rich Text Format) (!nl)
@@ -123,7 +127,7 @@ several
 !item [stg]
 ST-Guide (!nl)
 a hypertext system (!nl)
-Atari ST
+Atari TOS
 
 !item [info]
 GNU Texinfo (!nl)
@@ -133,49 +137,18 @@ Linux, MiNTNet
 !item [v]
 Turbo-Vision-Help (!nl)
 creating online helpfiles for DOS programs written with Borland's
-Turbo Vision-Library  (!nl)
+Turbo Vision Library  (!nl)
 MS-DOS
 
 !item [udo]
 UDO (!nl)
 merges all UDO input files into one big file (!nl)
-all platforms with UDO-support
+all platforms with UDO support
 
 !item [win, wh4]
 Windows-Help, WinHelp4 (!nl)
 RTF-derived format for producing WinHelp files under Windows (!nl)
 Windows (Win16, Win32)
-!end_xlist
-
-!begin_ignore
-!begin_xlist [htag] !short
-!item [amg]   AmigaGuide
-!item [aqv]   Apple-QuickView
-!item [asc]   ASCII
-!item [drc]   David's Readme Compiler
-!item [hah]   HTML Apple Help
-!item [htag]  HP-Helptag-SGML
-!item [html]  HTML
-!item [hh]    HtmlHelp
-!item [info]  Texinfo
-!item [ipf]   OS/2 IPF format
-!item [ldoc]  Linuxdoc-SGML
-!item [lyx]   LyX
-!item [man]   Manualpage
-!item [nroff] Nroff
-!item [pas]   Pascal-Sourcecode
-!item [pch]   Pure-C-Help
-!item [pdf]   PDFLaTeX
-!item [ps]    PostScript
-!item [rtf]   RTF
-!item [src]   C-Sourcecode
-!item [stg]   ST-Guide
-!item [tex]   (!LaTeX)
-!item [tvh]   Turbo-Vision-Help
-!item [udo]   UDO (Universal Document)
-!item [wh4]   WinHelp4
-!item [win]   WinHelp
-!end_xlist
-!end_ignore
+!end_blist
 
 # === EOF ===
