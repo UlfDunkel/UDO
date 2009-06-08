@@ -14,6 +14,8 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formattb.ui)
+#   fd  Jun 08: ignored format list removed
+#   fd  Jun 08: text reviewed, xlist -> blist
 #
 ################################################################################
 
@@ -22,7 +24,7 @@
 	!set var_kuerzel
 !endif
 
-!begin_xlist [linuxdoc ]
+!begin_blist
 
 !item [amg]
 AmigaGuide (!nl)
@@ -36,16 +38,17 @@ Apple
 
 !item [asc]
 ASCII (!nl)
-"Plain" Text (!nl)
+Reiner Text (!nl)
 alle
 
 !item [drc]
 David's Readme Compiler (!nl)
-DOS-Programm zur Erzeugung menügesteuerter ReadMe's als EXE-Datei (!nl)
+DOS-Programm zum Erzeugen menügesteuerter Liesmich-Dateien als EXE-Datei (!nl)
 MS-DOS
 
 !item [hah]
-HTML Apple Help (!nl)
+HTML-Format für Apple-Hilfe-Bücher (!nl)
+Mac~OS~X
 
 !item [helptag]
 HP-Helptag-SGML (!nl)
@@ -54,12 +57,12 @@ Unix
 
 !item [html]
 HTML (Hypertext Markup Language) (!nl)
-Seitenauszeichnungssprache, u.a. für Webseiten, Dokumentationen etc. (!nl)
+Seitenauszeichnungssprache, u.a. für Webseiten, Dokumentationen usw. (!nl)
 plattformunabhängig
 
 !item [hh]
 HTMLHelp (!nl)
-zur Erzeugung von HTML-Help-Dateien unter Windows (HTML-Variante mit Erweiterungen) (!nl)
+zum Erzeugen von HTML-Help-Dateien unter Windows (HTML-Variante mit Erweiterungen) (!nl)
 Win32
 
 !item [tex]
@@ -75,12 +78,12 @@ OS/2
 !item [linuxdoc]
 Linuxdoc-SGML (!nl)
 Linuxdoc-SGML (neuerdings: SGMLtools) ist genau wie UDO ein Multiformat-Konverter,
-der sein eigenes Format in LaTeX, Manualpage, RTF, HTML, Texinfo etc. umwandeln kann (!nl)
+der sein eigenes Format in LaTeX, Manualpage, RTF, HTML, Texinfo usw. umwandeln kann (!nl)
 Unix/Linux
 
 !item [lyx]
 LyX (!nl)
-(!LaTeX)-verwandtes Dokumentenverarbeitungsprogramm (!nl)
+(!LaTeX)-verwandtes Dokumentverarbeitungsprogramm (!nl)
 Unix/Linux
 
 !item [man]
@@ -95,19 +98,19 @@ Unix/Linux
 
 !item [pdflatex]
 PDF(!LaTeX) (!nl)
-zur Erzeugung von PDF-Dateien aus (!LaTeX) (!nl)
+zum Erzeugen von PDF-Dateien aus (!LaTeX) (!nl)
 diverse
 
 !item [ps]
 PostScript (!nl)
-geräteunabhängige Seitenbeschreibungssprache, z.B. zur Ansteuerung von Druckern;
-kann zur Erstellung von PDF-Dateien genutzt werden (Ghostscript, Adobe Distiller) (!nl)
+geräteunabhängige Seitenbeschreibungssprache, z.B. zum Ansteuern von Druckern;
+kann zum Erstellen von PDF-Dateien genutzt werden (Ghostscript, Adobe Distiller) (!nl)
 diverse
 
 !item [pchelp]
 Pure-C-Help (!nl)
-Hilfesystem für den Pure C-Compiler (!nl)
-Atari ST
+Hilfesystem für den Pure-C-Compiler (!nl)
+Atari TOS
 
 !item [rtf]
 RTF (Rich Text Format) (!nl)
@@ -123,60 +126,28 @@ diverse
 !item [stg]
 ST-Guide (!nl)
 Hypertextsystem (!nl)
-Atari ST
+Atari TOS
 
 !item [info]
 GNU Texinfo (!nl)
-zur Erzeugung von Online-Dokumentationen mit dem Kommandozeilen-Aufruf
+zum Erzeugen von Online-Dokumentationen mit dem Kommandozeilen-Aufruf
 (!T)info 'command'(!t) (!nl)
 Linux, MiNTNet
 
 !item [v]
 Turbo-Vision-Help (!nl)
-zur Erstellung von  Onlinehilfen für DOS-Programme, die mit Borlands Turbo
-Vision-Library geschrieben wurden (!nl)
+zum Erstellen von Onlinehilfen für DOS-Programme, die mit Borlands Turbo-Vision-Bibliothek geschrieben wurden (!nl)
 MS-DOS
 
 !item [udo]
 UDO (!nl)
-führt alle UDO-Eingabedateien in eine einzige zusammen (!nl)
+führt alle UDO-Eingabedateien in eine einzige Datei zusammen (!nl)
 alle von UDO unterstützten
 
 !item [win, wh4]
 Windows-Help, WinHelp4 (!nl)
-RTF-Variante zur Erzeugung von Win-Help-Dateien unter Windows (!nl)
+RTF-Variante zum Erzeugen von Win-Help-Dateien unter Windows (!nl)
 Windows (Win16, Win32)
-!end_xlist
-
-!begin_ignore
-!begin_xlist [nroff] !short
-!item [amg]   AmigaGuide
-!item [aqv]   Apple-QuickView
-!item [asc]   ASCII
-!item [drc]   David's Readme Compiler
-!item [hah]   HTML Apple Help
-!item [htag]  HP-Helptag-SGML
-!item [html]  HTML
-!item [hh]    HtmlHelp
-!item [info]  Texinfo
-!item [ipf]   OS/2 IPF
-!item [ldoc]  Linuxdoc-SGML
-!item [lyx]   LyX
-!item [man]   Manualpage
-!item [nroff] Nroff
-!item [pas]   Pascal-Sourcecode
-!item [pch]   Pure-C-Help
-!item [pdf]   PDFLaTeX
-!item [ps]    PostScript
-!item [rtf]   RTF
-!item [src]   C-Sourcecode
-!item [stg]   ST-Guide
-!item [tex]   (!LaTeX)
-!item [tvh]   Turbo-Vision-Help
-!item [udo]   UDO (Universal Document)
-!item [wh4]   WinHelp4
-!item [win]   WinHelp
-!end_xlist
-!end_ignore
+!end_blist
 
 # === EOF ===
