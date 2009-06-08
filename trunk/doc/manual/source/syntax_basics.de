@@ -15,6 +15,8 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 08: macro LINELEN added to text
+#   fd  Jun 08: code UTF-8 added
 #
 ################################################################################
 
@@ -33,7 +35,7 @@ UDO erwartet als Quelldatei eine Textdatei, wie sie mit jedem
 ASCII-Editor erstellt werden kann. Außer ASCII~9 (Tabulator), ASCII~10
 (Linefeed) und ASCII~13 (Carriage Return) sollten keine Steuerzeichen
 (d.h. keine Zeichen mit einem ASCII-Wert kleiner als 32) benutzt
-werden! Eine Zeile darf nicht länger als 512 Zeichen sein.
+werden! Eine Zeile darf nicht länger als (!LINELEN) Zeichen sein.
 
 UDO kümmert sich bei der Umwandlung selbständig um die Formatierung des
 Textes, sprich um den Zeilenumbruch und die Absatzabstände:
@@ -59,7 +61,7 @@ Quelltexte können in verschiedenen Zeichensätzen erstellt werden. UDO
 versteht folgende Zeichensätze:
 
 !begin_itemize !short
-!item Atari ST                  ((!KW [code] [[tos!!]])) (!index [!/code])
+!item Atari TOS                 ((!KW [code] [[tos!!]])) (!index [!/code])
 !item Apple Macintosh           ((!KW [code] [[mac!!]])) (!index [!/code])
 !item HP Roman 8                ((!KW [code] [[hp8!!]])) (!index [!/code])
 !item IBM-PC                    ((!KW [code] [[dos!!]])) (!index [!/code])
@@ -70,6 +72,7 @@ versteht folgende Zeichensätze:
 !item OS/2                      ((!KW [code] [[os2!!]])) (!index [!/code])
 !item OS/2                      ((!KW [code] [[cp850!!]])) (!index [!/code])
 !item NeXT                      ((!KW [code] [[next!!]])) (!index [!/code])
+!item Unicode UTF-8             ((!KW [code] [[utf8!!]])) (!index [!/code])
 !end_itemize
 
 Beim Start der Konvertierung erwartet UDO den aktuellen
@@ -144,7 +147,7 @@ benutzt werden.
 !index Hauptteil
 !index Vorspann
 
-Eine Quelldatei besteht immer aus einem Vorspann(!N)auch ""Preambel""(!n) und
+Eine Quelldatei besteht immer aus einem Vorspann(!N)auch ""Präambel""(!n) und
 einem Hauptteil.
 
 !index (!kw [begin_document])
