@@ -14,13 +14,14 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: text reviewed
 #
 ################################################################################
 
 !begin_node Quelltext-Beispiel
 !html_name  syntax_example
 
-Bevor ich ins Detail gehen werde, möchte ich Ihnen an dieser Stelle ein
+Bevor wir ins Detail gehen, möchten wir Ihnen an dieser Stelle ein
 Beispiel eines kompletten Quelltextes zeigen, welches Ihnen auch dazu
 dienen kann, eigene Quelltexte mit UDO zu erstellen:
 
@@ -34,7 +35,7 @@ dienen kann, eigene Quelltexte mit UDO zu erstellen:
 
 Zu Beginn des Quelltextes ist ein Kommentar angegeben, damit man später
 noch auf Anhieb erkennen kann, womit sich der Text befasst. Eine Zeile
-bewertet UDO als Kommantar, wenn das erste Zeichen der Zeile ein ''#''
+bewertet UDO als Kommantar, wenn das erste Zeichen der Zeile ein ""#""
 ist.
 
 Es folgt eine spezielle Zeile für den ST-Guide. Hier wird dem ST-Guide
@@ -60,7 +61,7 @@ Angabe des Datums sorgen (z.B. (!T)!/docinfo [date] 31. Dezember 1999(!t)).
 Im Vorspann werden nun noch einige Schalter gesetzt. Die ersten beiden
 Schalter sorgen bei Hypertexten, deren Kürzel Sie in den eckigen
 Klammern erkennen, für die Ausgabe sogenannter
-''Unterinhaltsverzeichnisse''. In diesen werden dann alle Abschnitte und
+""Unterinhaltsverzeichnisse"". In diesen werden dann alle Abschnitte und
 Unterabschnitte eines Kapitels bzw. alle Unterabschnitte eines
 Abschnittes in Form eines Inhaltsverzeichnisses aufgelistet. Dem Leser
 eines Hypertextes wird es dadurch ermöglicht, direkt zu den zugehörigen
