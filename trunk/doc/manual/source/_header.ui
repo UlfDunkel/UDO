@@ -21,13 +21,17 @@
 # ----------------------------------------------------------------
 # Settings for HTML and HTML-Help
 # ----------------------------------------------------------------
-#!html_merge_nodes
-#!no_images [html]
 !html_favicon_name    http://www.udo-open-source.org/favicon.ico
 !html_navigation      [line]
-# !html_navigation    [image] img/udo_icon_16.gif
 !html_style_name      css/udo.css
+!html_ignore_8bit     iso-8859-1
 
+#!html_merge_subsubnodes
+#!html_modern_layout
+#!html_switch_language english ../eng/udo.html
+
+# MEZ = UTC + 1 h
+!html_header_date +01:00
 
 
 
@@ -154,12 +158,6 @@
 # ------------------------------------------------------
 !win_inline_bitmaps
 !win_high_compression
-#!html_merge_subsubnodes
-#!html_modern_layout
-#!html_switch_language english ../eng/udo.html
-
-# MEZ = UTC + 1 h
-!html_header_date +01:00
 
 
 
