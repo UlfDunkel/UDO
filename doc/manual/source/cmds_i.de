@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -821,9 +822,9 @@ Grafik ausgeben.
 Dieses Kommando erzeugt in der Ausgabedatei Befehle
 zur Einbindung des Bildes. Die Endung der Datei
 sollte nicht übergeben werden, da UDO dies selbst
-erledigt. UDO benutzt ''(!V).img(!v)'' beim ST-Guide, CS(!TeX) und
-Lindner-(!TeX), ''(!V).gif(!v)'' für HTML, ''(!V).msp(!v)'' oder ''(!V).pcx(!v)'' für
-em(!TeX) und ''(!V).bmp(!v)'' für WinHelp, RTF und IPF.
+erledigt. UDO benutzt ""(!V).img(!v)"" beim ST-Guide, CS(!TeX) und
+Lindner-(!TeX), ""(!V).gif(!v)"" für HTML, ""(!V).msp(!v)"" oder ""(!V).pcx(!v)"" für
+em(!TeX) und ""(!V).bmp(!v)"" für WinHelp, RTF und IPF.
 Wird ""<titel>"" angegeben, so wird der Text als Bildunterschrift angegeben.
 
 Die Ausrichtung des Bildes richtet sich nach der
@@ -1053,9 +1054,9 @@ Indexeintrag bzw. Schlüsselwort setzen.
 
 #Ausgabe-Formate
 !item [(!DESCRIPTION)]
-""<text>"" wird für (!LaTeX) als ''(!V)\index~{!..}(!v)'', für WinHelp
-als ''(!V)K{\footnote~K~!..}(!v)'', für RTF als ''(!V){\xe\v~!..}(!v)''
-und für den ST-Guide als ''(!V)@index~!..(!v)'' ausgegeben.
+""<text>"" wird für (!LaTeX) als ""(!V)\index~{!..}(!v)"", für WinHelp
+als ""(!V)K{\footnote~K~!..}(!v)"", für RTF als ""(!V){\xe\v~!..}(!v)""
+und für den ST-Guide als ""(!V)@index~!..(!v)"" ausgegeben.
 ""<text>"" kommt damit bei (!LaTeX) und dem ST-Guide in den
 Index, bei WinHelp kann man im Suchen-Dialog nach
 diesem Schlüsselwort suchen und bekommt die Namen der

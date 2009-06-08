@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -311,7 +312,7 @@ wird!..
 Der HCP akzeptiert in Topicnamen nur Buchstaben, Ziffern und den
 Underscore. Andere Zeichen werden von UDO angepasst!
 
-!item Für den ST-Guide sollte man dem Dateinamen die Zeichen ''(!V)*:\(!v)''
+!item Für den ST-Guide sollte man dem Dateinamen die Zeichen ""(!V)*:\(!v)""
 voranstellen, so dass der ST-Guide in allen in den für ihn angegebenen
 Verzeichnissen aus der in der (!V)ST-GUIDE.INF(!v) angegebenen Variable namens
 (!V)PATHS(!v) nach der Datei sucht.

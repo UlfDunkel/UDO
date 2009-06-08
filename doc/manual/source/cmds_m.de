@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -283,7 +284,7 @@ Dieser Befehl sorgt für die Ausgabe von zwei
 zusätzlichen Leerzeilen und dient dazu, Absätze
 deutlicher voneinander abzuheben. Bei der Umwandlung
 ins (!LaTeX)-Format werden keine drei Leerzeilen sondern
-''(!V)\medskip(!v)'' ausgegeben.
+""(!V)\medskip(!v)"" ausgegeben.
 
 !item [(!SEEALSO)]
 (!KW [smallskip]), (!KW [bigskip])

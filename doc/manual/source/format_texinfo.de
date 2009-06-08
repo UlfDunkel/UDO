@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -22,8 +23,8 @@
 
 Texinfo hat in der GNU-Welt eine größere Bedeutung. Texte, die im
 Texinfo-Format erstellt werden, können mit Plain-(!TeX) als sauber
-gesetzte Anleitung ausgedruckt werden bzw. mit ''Makeinfo'' in einen
-Hypertext umgewandelt werden, welchen man sich mit ''Info'' anzeigen
+gesetzte Anleitung ausgedruckt werden bzw. mit ""Makeinfo"" in einen
+Hypertext umgewandelt werden, welchen man sich mit ""Info"" anzeigen
 kann.
 
 UDO erzeugt auf Systemen, auf denen nur ein 8+3-Dateisystem zur
