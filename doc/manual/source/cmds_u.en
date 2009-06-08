@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -120,8 +121,8 @@ Turn on universal charset.
 !item [(!SYNTAX)] (!T)!/universal_charset [ on | off ](!t)
 
 !item [(!DESCRIPTION)]
-''(!KW [universal_charset] [[on!!]])'' switches on the usage of the
-universal charset, ''(!KW [universal_charset] [[off!!]])'' switches it
+""(!KW [universal_charset] [[on!!]])"" switches on the usage of the
+universal charset, ""(!KW [universal_charset] [[off!!]])"" switches it
 off. UDO won't use the universal charset by default because it takes
 some time to look for and convert these special characters.
 
@@ -219,7 +220,7 @@ Include information page.
 This command switches on the usage of a page with information about
 UDO. This page doesn't appear in tables of contents. If you want to
 tell anybody else about UDO please add this switch to your preamble
-and insert ''UDO(!RELEASE)'' somewhere in your source file. The example shows
+and insert ""UDO(!RELEASE)"" somewhere in your source file. The example shows
 how to add this information page in Windows Help, ST-Guide and Pure C Help.
 
 !item [(!EXAMPLE)]
@@ -864,7 +865,7 @@ Output target file in book style.
 !item [(!DESCRIPTION)]
 When converting into (!LaTeX) UDO outputs (!KW [node]) as (!V)\chapter(!v) instead of
 (!V)\section(!v), (!KW [subnode]) as (!V)\section(!v) instead of (!V)\subsection(!v) and
-(!KW [subsubnode]) as (!V)\subsection(!v) instead of (!V)\subsubsection(!v). It then uses ''(!V)book(!v)'' as document style resp. document class. 
+(!KW [subsubnode]) as (!V)\subsection(!v) instead of (!V)\subsubsection(!v). It then uses ""(!V)book(!v)"" as document style resp. document class. 
 When converting to other formats a booklike output will be made, that
 means that chapters will be output as ""Chapter~#"" resp. ""Appendix~X:"".
 

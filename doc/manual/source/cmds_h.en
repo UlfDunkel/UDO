@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -228,8 +229,8 @@ Change filename extension of images (for HTML-Help).
 Mit diesem Befehl können Sie die Endung der Grafiken
 setzen, die für die folgenden (!KW [image])-Befehle
 verwendet werden soll. Standardmäßig benutzt UDO die
-Endung ''(!V)gif(!v)''. Falls Sie z.B. JPEG-Grafiken benutzen
-und diese Dateien auf ''(!V)jpeg(!v)'' enden, benutzen Sie
+Endung ""(!V)gif(!v)"". Falls Sie z.B. JPEG-Grafiken benutzen
+und diese Dateien auf ""(!V)jpeg(!v)"" enden, benutzen Sie
 einfach untenstehendes Beispiel. (!KW [hh_img_suffix])
 kann beliebig oft aufgerufen werden, so dass einer
 Verwendung verschiedener Grafikformate nichts im Wege steht.
@@ -437,7 +438,7 @@ Change filename extension of images.
 Mit diesem Befehl können Sie die Endung der Grafiken
 setzen, die für die folgenden (!KW [image])-Befehle
 verwendet werden soll. Standardmäßig benutzt UDO die
-Endung ''(!V)tiff(!v)''. (!KW [htag_img_suffix]) kann beliebig oft
+Endung ""(!V)tiff(!v)"". (!KW [htag_img_suffix]) kann beliebig oft
 aufgerufen werden, so dass einer Verwendung verschiedener
 Grafikformate nichts im Wege steht.
 (!coloff)
@@ -1456,8 +1457,8 @@ Change filename extension of images (HTML only).
 Mit diesem Befehl können Sie die Endung der Grafiken
 setzen, die für die folgenden (!KW [image])-Befehle
 verwendet werden soll. Standardmäßig benutzt UDO die
-Endung ''(!V)gif(!v)''. Falls Sie z.B. JPEG-Grafiken benutzen
-und diese Dateien auf ''(!V)jpeg(!v)'' enden, benutzen Sie
+Endung ""(!V)gif(!v)"". Falls Sie z.B. JPEG-Grafiken benutzen
+und diese Dateien auf ""(!V)jpeg(!v)"" enden, benutzen Sie
 einfach untenstehendes Beispiel. (!KW [html_img_suffix])
 kann beliebig oft aufgerufen werden, so dass einer
 Verwendung verschiedener Grafikformate nichts im Wege steht.

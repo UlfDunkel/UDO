@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: introduced (extracted from appendix.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -86,9 +87,9 @@ This documentation has been written with the following software:
 
 !begin_itemize !short
 
-!item Joe Allan's Own Editor ''Joe'' for MS-DOS and Linux
+!item Joe Allan's Own Editor ""Joe"" for MS-DOS and Linux
 
-!item Allan Phillips' Programmer's File Editor ''PFE'' 0.06.01
+!item Allan Phillips' Programmer's File Editor ""PFE"" 0.06.01
 (the best editor for Windows 3.1 and Windows 95 I know)
 
 !item Phoenix for Windows 3.11 by Application Systems Heidelberg

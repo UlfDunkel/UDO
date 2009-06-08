@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -139,27 +140,27 @@ command line:
 !item [-o INDEX.HTML]	(!V).HTML(!v)
 !end_tlist
 
-If you use the option (!T)-o~!(!t) UDO uses ''(!V).htm(!v)'' on operating
-systems with 8+3-filenames and ''(!V).html(!v)'' on operating systems with
+If you use the option (!T)-o~!(!t) UDO uses ""(!V).htm(!v)"" on operating
+systems with 8+3-filenames and ""(!V).html(!v)"" on operating systems with
 long filenames.
 
 !item [The filenames of the URL's are wrong!?] ~
 
 If you use UDO on an operating system that doesn't support long filenames
-but you have used ''(!V)(--)outfile index.html(!v)'' and you copy the saved
-''(!V).htm(!v)'' files to a web server, remember this:
+but you have used ""(!V)(--)outfile index.html(!v)"" and you copy the saved
+""(!V).htm(!v)"" files to a web server, remember this:
 
 !begin_enumerate
-!item	UDO will try to save ''(!V)index.html(!v)'' but TOS and DOS will
-name it ''(!V)index.htm(!v)''.
+!item	UDO will try to save ""(!V)index.html(!v)"" but TOS and DOS will
+name it ""(!V)index.htm(!v)"".
 
-!item	UDO will use for all hypertext links the suffix ''(!V).html(!v)''
-because of the suffix of the ''outfile''. If you use a HTML browser for TOS
-or DOS this browser will open ''(!V)index.html(!v)'' without any problems
-even if there's only a file named ''(!V)index.htm(!v)''.
+!item	UDO will use for all hypertext links the suffix ""(!V).html(!v)""
+because of the suffix of the ""outfile"". If you use a HTML browser for TOS
+or DOS this browser will open ""(!V)index.html(!v)"" without any problems
+even if there's only a file named ""(!V)index.htm(!v)"".
 
 !item	When copying the files to a web server you have to change the
-suffixes from ''(!V).htm(!v)'' to ''(!V).html(!v)''. If you will forget this
+suffixes from ""(!V).htm(!v)"" to ""(!V).html(!v)"". If you will forget this
 all links will be wrong.
 !end_enumerate
 

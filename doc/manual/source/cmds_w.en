@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -206,7 +207,7 @@ Use inline bitmaps (WinHelp4 only).
 
 !item [(!DESCRIPTION)]
 If you use this switch inside the preamble of your source file UDO
-will use the RTF tag ''(!V)\bmcwd(!v)'' instead of ''(!V)\bmc(!v)''
+will use the RTF tag ""(!V)\bmcwd(!v)"" instead of ""(!V)\bmc(!v)""
 for displaying images. In this case, the Microsoft Help Compiler stores images in another format in the WinHelp4 file, which avoids skewed images. Then you cannot use images larger than
 64~KB. Please read the HCP documentation to get more information
 about the differences between these two RTF tags.
@@ -736,7 +737,7 @@ Use inline bitmaps (WinHelp only).
 
 !item [(!DESCRIPTION)]
 If you use this switch inside the preamble of your source file UDO
-will use the RTF tag ''(!V)\bmcwd(!v)'' instead of ''(!V)\bmc(!v)''
+will use the RTF tag ""(!V)\bmcwd(!v)"" instead of ""(!V)\bmc(!v)""
 for displaying images. In this case you cannot use images larger than
 64~KB. Please read the HCP documentation to get more information
 about the differences between these two RTF tags.

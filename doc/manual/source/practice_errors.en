@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from working.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -45,45 +46,45 @@ will disappear because they depend on earlier errors.
 
 !begin_description
 
-!item [''!..'' called twice]
+!item [""!.."" called twice]
 The printed command was used twice or more inside the source file
 even if it's only to be used once.
 
-!item [''!..'' expected]
+!item [""!.."" expected]
 UDO has expected the printed command. Please check if all
 environments were finished with the correct command or if a
 (!I)!/begin_*(!i) is missing.
 
-!item [''!..'' followed by ''!..'']
+!item [""!.."" followed by ""!..""]
 You have finished an environment with an incorrect command or you
 have forgotten to finish it. Another possibility is that you have
 misplaced the (!I)!/end_*(!i) command
 
-!item [''!..'' ignored inside preamble]
+!item [""!.."" ignored inside preamble]
 It's only allowed to use the printed command inside the main part of
 the source file. That means you have to place it after
 (!KW [begin_document]).
 
-!item [''!..'' ignored outside preamble]
+!item [""!.."" ignored outside preamble]
 It's only allowed to use the printed command inside the preamble of
 the source file. That means you have to place it before
 (!KW [begin_document]).
 
-!item [''!..'' maybe not available in (!LaTex)]
+!item [""!.."" maybe not available in (!LaTex)]
 The printed character cannot be used for (!LaTeX). Please try to use
 another character
 
-!item [''!..'' not active]
+!item [""!.."" not active]
 A text style or a footnote shall be finished even if it isn't active.
 Please note that the placeholders contain a capital letter for
 activating a text style. The placeholders that finish a text style
 contain a small letter.
 
-!item [''!..'' not available in ISO Latin 1]
+!item [""!.."" not available in ISO Latin 1]
 ISO Latin1 doesn't contain the printed character. Thus, UDO cannot
 convert the printed character.
 
-!item [''!..'' not available in this charset]
+!item [""!.."" not available in this charset]
 The printed character isn't available in the system character set.
 Thus, UDO cannot convert it. Please try to avoid the printed
 character.
@@ -94,7 +95,7 @@ active. Please note that the placeholders contain a capital letter
 for activating a text style. The placeholders that finish a text
 style contain a small letter.
 
-!item [''!..'' without ''!..'']
+!item [""!.."" without ""!..""]
 You wanted to finish an environment even if it wasn't started before.
 
 !item [!/else without !/if]
@@ -107,7 +108,7 @@ startet a query with (!KW [if]), (!KW [ifdest]) etc.
 # ergänzt 04.01.2004 - Ulrich Kretschmer (vgl. Bug Nr. 43)
 You will also get this error message if you use (!KW [end_ignore]) without according (!KW [begin_ignore]).
 
-!item [''!/item'' outside environment]
+!item [""!/item"" outside environment]
 You have used the (!KW [item]) command outside an itemization,
 enumeration, description or list.
 
@@ -306,7 +307,7 @@ Your source file contains a placeholder that wasn't finished correctly.
 !item [unknown command]
 UDO doesn't know the printed command. If you want to use a word a the
 beginning of a line that begins with an exclamation mark you have to
-mark it with a slash (''/'').
+mark it with a slash (""/"").
 
 !item [use (!/V) and (!/v) in one line]
 (!MISS)

@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -33,7 +34,7 @@ you want to.
 !subsubheading Explanations
 
 At the beginning of this example you can see a comment. A comment is a
-line that begins with a ''#'' immediately.
+line that begins with a ""#"" immediately.
 
 The next line is a special line. This line contains a special command
 for the ST-Guide. If you don't know the ST-Guide just add this line at
@@ -55,8 +56,8 @@ is replaced by the current system date. You can set the date to April
 !index (!kw [subtoc])
 
 The preamble contains some switches. The first to switches are set for
-the output of ''sub-tables-of-contents'' in hypertexts. The abbreviations
-of these hypertexts you will see inside the brackets. In a ''subtoc'' all
+the output of ""sub-tables-of-contents"" in hypertexts. The abbreviations
+of these hypertexts you will see inside the brackets. In a ""subtoc"" all
 subnodes of a node are printed like a table of contents so that readers
 of a hypertext are enabled to directly switch to an interesting
 subnode.

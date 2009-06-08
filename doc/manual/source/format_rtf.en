@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -86,7 +87,7 @@ furthermore it faults correct RTF commands.
 
 !item [Indices aren't imported into StarWriter!?] ~
 
-StarWriter 3.0 ignores the RTF command ''(!V)\xe(!v)'' which is used for
+StarWriter 3.0 ignores the RTF command ""(!V)\xe(!v)"" which is used for
 indices.
 
 !item [Lotus WordPro places chapter numbers outside the text frame!?] ~

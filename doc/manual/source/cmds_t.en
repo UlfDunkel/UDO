@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -425,12 +426,12 @@ Use (!LaTeXe) commands ((!TeX) only).
 !item [(!DESCRIPTION)]
 UDO erzeugt bei der Umwandlung ins (!LaTeX)-Format
 spezielle (!LaTeXe)-Kommandos, wie eine Preambel für
-(!LaTeXe) oder ''(!V)\textbf{!..}(!v)'' anstelle von ''(!V){\bf~!..}(!v)''
+(!LaTeXe) oder ""(!V)\textbf{!..}(!v)"" anstelle von ""(!V){\bf~!..}(!v)""
 bei der Umwandlung von (!KK1 [B]).
 (!coloff)
 !item [(!DESCRIPTION)]
 On (!LaTeX) format output, UDO will output special (!LaTeXe) commands if you use this command
-e.g. ''(!V)\textbf{!..}(!v)'' instead of ''(!V){\bf~!..}(!v)''
+e.g. ""(!V)\textbf{!..}(!v)"" instead of ""(!V){\bf~!..}(!v)""
 
 !item [(!SEEALSO)]
 (!KW [tex_209])

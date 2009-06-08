@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -124,7 +125,7 @@ anstelle einer Kapitelüberschrift die Grafik
 (!coloff)
 !item [(!DESCRIPTION)]
 Converting to Windows Help, HTML or ST-Guide the image called
-''<file>'' is displayed instead of the chapter title if
+""<file>"" is displayed instead of the chapter title if
 (!KW [use_chapter_images]) is used inside the preamble
 
 !item [(!EXAMPLE)]

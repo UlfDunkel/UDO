@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: introduced (extracted from cmdline.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -73,7 +74,7 @@ Normal text becomes comment, the content of the sourcecode environment becomes C
 
 !item [(--)drc] The (!U)source file(!u) will be converted to DRC Format (David's Readme Compiler).
 
-!item [-D symbol] Set the symbol ''symbol'' which can be tested in the source file
+!item [-D symbol] Set the symbol ""symbol"" which can be tested in the source file
 with (!KW [ifset]).
 
 !item [(--)force-long] UDO tries to use long filenames even on
@@ -176,19 +177,19 @@ using the option (!V)-o(!v).
 
 !begin_description
 !item [udo file.u]
-		Convert the source file ''file.u'' to ASCII (default) and print the
+		Convert the source file ""file.u"" to ASCII (default) and print the
 		output to the standard output and error messages to the standard
 		error output.
 
 !item [udo (--)tex -o output.tex file.u]
-		Convert the source file ''(!V)file.u(!v)'' to (!LaTeX) and write the output
-		to the file named ''(!V)output.tex(!v)''. Warnings, error messages
+		Convert the source file ""(!V)file.u(!v)"" to (!LaTeX) and write the output
+		to the file named ""(!V)output.tex(!v)"". Warnings, error messages
 		and additional information will be written to the log file named
-		''(!V)output.ult(!v)''.
+		""(!V)output.ult(!v)"".
 
 !item [udo -s -y -l -o ! file.u]
-		Convert the source file ''(!V)file.u(!v)'' to ST-Guide and write the
-		output to ''(!V)file.stg(!v)''. UDO won't save a log file or a file
+		Convert the source file ""(!V)file.u(!v)"" to ST-Guide and write the
+		output to ""(!V)file.stg(!v)"". UDO won't save a log file or a file
 		with Hyphenation patterns.
 
 !end_description
@@ -208,7 +209,7 @@ UDO looks for the file (!V)udo.ini(!v) in your home directory if
 
 
 !item [LC_ALL]
-		If this is set to ''german'' (!B)UDO(!b) prints German messages.
+		If this is set to ""german"" (!B)UDO(!b) prints German messages.
 		If this variable doesn't exist (!B)LC_MESSAGES(!b) it tested
 		instead.
 

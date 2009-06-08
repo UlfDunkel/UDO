@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: introduced (extracted from history.ui)
 #   fd  Jun 06: begascen.ui integrated in text
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -648,7 +649,7 @@ unten links !! unten mitte !! unten rechts
  	!end_itemize
  !item [Changes:]
  	!begin_itemize !short
- 	 !item (!T)!/html_backpage ../index.html ''Back to UDO open source''(!t) (!nl)
+ 	 !item (!T)!/html_backpage ../index.html ""Back to UDO website""(!t) (!nl)
  	       You can tell UDO to set a special text instead of the link text
  	       in the ""alt"" attribute. The text must be included in single
  	       quotation marks.
@@ -1172,7 +1173,7 @@ cases it was impossible not to change the syntax of some commands.
         !item UDO doesn't break line between (!V)\verb(!v) when
 			converting to (!LaTeX).
         !item Graphic characters of the IBM PC character set will be
-			replaced by ''+'', ''-'' and ''|'' for Windows Help.
+			replaced by ""+"", ""-"" and ""|"" for Windows Help.
         !end_itemize
 
 !item [Syntax changes:]

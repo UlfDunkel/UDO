@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -142,8 +143,8 @@ In first place UDO tries to read in the header of (!V)tiger.msp(!v) when
 reading the command (!KW [image] [tiger A tiger]). If UDO doesn't find
 (!V)tiger.msp(!v) it will try to find (!V)tiger.pcx(!v).
 
-An example shows what kind of macro UDO generates for em(!TeX). ''w'' and
-''h'' represent the width and height of the image:
+An example shows what kind of macro UDO generates for em(!TeX). ""w"" and
+""h"" represent the width and height of the image:
 
 !begin_quote
 !begin_verbatim
@@ -181,8 +182,8 @@ In first place UDO tries to read in the header of (!V)tiger.msp(!v) when
 reading the command (!KW [image] [tiger A tiger]). If UDO doesn't find
 (!V)tiger.msp(!v) it will try to find (!V)tiger.pcx(!v).
 
-An example shows what kind of macro UDO generates for em(!TeX). ''w'' and
-''h'' represent the width and height of the image:
+An example shows what kind of macro UDO generates for em(!TeX). ""w"" and
+""h"" represent the width and height of the image:
 
 !begin_quote
 !begin_verbatim
