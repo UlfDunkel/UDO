@@ -15,6 +15,8 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 08: ignored charset list removed, including charsets.ui
+#   fd  Jun 08: text reviewed
 #
 ################################################################################
 
@@ -59,7 +61,7 @@ so müssen Sie stattdessen (!T)(!link [((""!)!)] [((""!)!)])text(!link [((""!)!)]
 !item Die Umwandlung in typographische Anführungszeichen kann man durch
 den Schalter (!KW [no_quotes] [[~!!]]) im Vorspann ausschalten.
 
-!item Bei der Ausgabe ins Rich Text Format werden spezielle
+!item Bei der Ausgabe ins Rich-Text-Format werden spezielle
 RTF-Kommandos verwendet. Manche Textverarbeitungen wandeln diese
 Kommandos jedoch nicht in deutsche Anführungszeichen um, sondern in die
 englischen Versionen. Daran kann UDO leider nichts ändern.
@@ -77,7 +79,7 @@ englischen Versionen. Daran kann UDO leider nichts ändern.
 Genau wie bei doppelten Anführungszeichen passt UDO auch hier doppelt
 vorkommende Apostrophe an.
 
-Aus!..
+Aus~!..
 
 !begin_quote
 !begin_verbatim
@@ -85,14 +87,14 @@ Hier stehen ''doppelte Apostrophe''.
 !end_verbatim
 !end_quote
 
-!.. wird
+!..~wird
 
 !begin_quote
 Hier stehen ''doppelte Apostrophe''.
 !end_quote
 
 Wenn Sie in der Ausgabedatei doppelte Apostrophe sehen möchten, so
-müssen Sie stattdessen (!T)(!link [((''!)!)] [((''!)!)])text(!link [((''!)!)] [((''!)!)])(!t) angeben.
+müssen Sie stattdessen (!B)(!T)(!link [((''!)!)] [((''!)!)])(!t)(!b)(!T)text(!t)(!B)(!T)(!link [((''!)!)] [((''!)!)])(!t)(!b) angeben.
 
 (!HINT)
 
@@ -111,7 +113,7 @@ Anführungszeichen Einfluss auf die Umsetzung der doppelten Apostrophe.
 !index Tilde
 !index ~
 Möchten Sie zwischen zwei Wörtern ein festes oder mehrere feste
-Leerzeichen angeben, so benutzen Sie dafür die Tilde ((!link [!~] [Festes Leerzeichen])).
+Leerzeichen angeben, so benutzen Sie dafür die Tilde ((!B)(!T)(!link [!~][Festes Leerzeichen])(!t)(!b)).
 Feste Leerzeichen eignen sich (auch) dafür, den Zeilenumbruch an der
 jeweiligen Stelle zu unterbinden.
 
@@ -130,7 +132,7 @@ formatspezifische Zeichenfolgen, die den gleichen Zweck erfüllen:
 !item [WinHelp:]    (!T)\!~(!t)
 !end_xlist
 
-Wenn Sie die Tilde selber ausgeben möchten, so müssen Sie die Zeichenfolge (!link [!!~] [Tilde]) benutzen.
+Wenn Sie die Tilde selber ausgeben möchten, so müssen Sie die Zeichenfolge (!KW [!~]) benutzen.
 
 (!HINT)
 
@@ -145,17 +147,17 @@ umgewandelt, wird also von UDO direkt übernommen.
 !html_name  spec_dashes
 
 !index Minuszeichen
-UDO bietet --- wie sollte es auch anders sein --- eine Möglichkeit,
+UDO bietet -- wie sollte es auch anders sein -- eine Möglichkeit,
 Gedankenstriche (wie hier) bereits im Quelltext anzugeben.
 
 Gedankenstriche werden von (!LaTeX), RTF und WinHelp unterstützt. Bei den
 anderen Formaten werden zwei bzw. drei Minuszeichen durch eines
 ersetzt.
 
-Mit (!T)(---)(!t) können Sie einen langen, mit (!T)(--)(!t) einen kurzen Gedankenstrich
+Mit (!B)(!T)(---)(!t)(!b) können Sie einen langen, mit (!B)(!T)(--)(!t)(!b) einen kurzen Gedankenstrich
 ausgeben. Wenn Sie drei Minuszeichen ausgeben möchten, so müssen Sie
-im Quelltext (!T)(!link [((---!)!)] [((---!)!)])(!t) benutzen. Wenn Sie zwei Minuszeichen ausgeben
-möchten, so müssen Sie im Quelltext (!T)(!link [((--!)!)] [((--!)!)])(!t) benutzen.
+im Quelltext (!B)(!T)(!link [((---!)!)] [((---!)!)])(!t)(!b) benutzen. Wenn Sie zwei Minuszeichen ausgeben
+möchten, so müssen Sie im Quelltext (!B)(!T)(!link [((--!)!)] [((--!)!)])(!t)(!b) benutzen.
 
 !end_node # Gedankenstriche
 
@@ -181,10 +183,10 @@ erwartet Quelltexte mit Zeichen des Atari-Zeichensatzes usw.
 
 UDO kann aber auch Quelltexte verarbeiten, die mit systemfremden
 Zeichensätzen erstellt wurden. Und um es richtig komfortabel zu machen,
-können Quelltexte sogar aus einem Mischmasch von benutzten
-Zeichensätzen bestehen.
+können Quelltexte sogar aus einem Mischmasch benutzter
+Zeichensätze bestehen.
 
-Sie müssen UDO lediglich mittels (!T)!/code [(!CODE)](!t) mitteilen, mit welchem
+Sie müssen UDO lediglich mittels (!B)(!T)!/code [(!CODE)](!t)(!b) mitteilen, mit welchem
 Zeichensatz die folgenden Zeilen erstellt wurden.
 
 Hier eine Übersicht, welches Kürzel für den Zeichensatz benutzt werden kann:
@@ -211,62 +213,6 @@ Hier eine Übersicht, welches Kürzel für den Zeichensatz benutzt werden kann:
 
 !include charsets.ui
 
-!begin_ignore
-# auskommentiert 14.01.2003 - Ulrich Kretschmer (stattdessen include-Datei)
-
-Folgende Befehle stehen zur Verfügung, in den Klammern sehen Sie die Bezeichnung des
-jeweiligen Zeichensatzes:
-!begin_xlist [code [dos:!]] !short
-
-!index DOS-Zeichensatz
-!index Zeichensatz !! DOS
-!index (!kw [code])
-!item [(!KW [code] [[dos!!]]):]
-IBM-PC, MS-DOS
-
-!index OS/2-Zeichensatz
-!index Zeichensatz !! OS/2
-!index (!kw [code])
-!item [(!KW [code] [[os2!!]]):]
-OS/2
-
-!index HP-Roman-8-Zeichensatz
-!index Zeichensatz !! HP-Roman-8
-!index (!kw [code])
-!item [(!KW [code] [[hp8!!]]):]
-HP Roman 8
-
-!index ANSI-Zeichensatz
-!index ISO-Latin1-Zeichensatz
-!index Windows-Zeichensatz
-!index Zeichensatz !! ANSI
-!index Zeichensatz !! ISO Latin 1
-!index Zeichensatz !! Windows
-!index (!kw [code])
-!item [(!KW [code] [[iso!!]]):]
-ISO Latin 1, Windows ANSI
-
-!index Macintosh-Zeichensatz
-!index Zeichensatz !! Macintosh
-!index (!kw [code])
-!item [(!KW [code] [[mac!!]]):]
-Apple Macintosh
-
-!index Atari-Zeichensatz
-!index Zeichensatz !! Atari
-!index (!kw [code])
-!item [(!KW [code] [[tos!!]]):]
-Atari ST
-
-!index NeXT-Zeichensatz
-!index Zeichensatz !! NeXT
-!index (!kw [code])
-!item [(!KW [code] [[next!!]]):]
-NeXT
-
-!end_xlist
-!end_ignore
-
 !smallskip
 
 !index Anpassung !! Sonderzeichen
@@ -274,7 +220,7 @@ NeXT
 !index Sonderzeichen !! Anpassung
 
 Die Anpassung der Sonderzeichen hat jedoch ihre Grenzen. So enthalten
-alle Zeichensätze ein paar Zeichen,die in anderen Zeichensätzen fehlen.
+alle Zeichensätze ein paar Zeichen, die in anderen Zeichensätzen fehlen.
 So ist die Benutzung der Grafikzeichen des DOS-Zeichensatzes oder der
 hebräischen Zeichen des Atari-Zeichensatzes problematisch, da diese zu
 systemspezifisch sind und in anderen Formaten nicht nachgebildet werden
@@ -297,7 +243,7 @@ sollten dann auf die Verwendung dieser Zeichen verzichten.
 (!HINT)
 
 Es kann durchaus sein, dass das eine oder andere Zeichen fehlt oder Zeichen falsch umgesetzt werden.
-Sollten Sie auf solche Zeichen stoßen, so (!link [melden] [Kontaktadresse]) Sie dies bitte unverzüglich.
+Sollten Sie auf solche Zeichen stoßen, (!link [melden Sie uns dies bitte.] [Kontaktadresse])
 Vielen Dank!
 
 !end_node # Umwandlung von 8-bit-Zeichen
@@ -314,11 +260,11 @@ Quelltexte auch mit 8-Bit-Zeichen systemweit weiterzugeben.
 Werden Quelltexte jedoch über das Internet ausgetauscht, kann es
 passieren, dass irgendwo auf dem Übertragungswege 8-Bit-Zeichen
 umgewandelt oder angepasst werden. Dies wäre bei Quelltexten, die
-mehrere Zeichensätze verwenden fatal.
+mehrere Zeichensätze verwenden, fatal.
 
-Um nun den Austausch von Quelltexten auch hier zur ermöglichen, bietet
+Um den Austausch von Quelltexten auch hier zur ermöglichen, bietet
 UDO einen ""universellen Zeichensatz"" an. Es handelt sich hierbei nicht
-wirklich um einen Zeichensatz, sondern vielmehr um eine Möglichkeit,
+wirklich um einen vollständigen Zeichensatz wie z.B. Unicode, sondern vielmehr um eine Möglichkeit,
 8-Bit-Zeichen durch Folgen mehrere 7-Bit-Zeichen zu emulieren.
 
 !index (!kw [universal_charset])
@@ -337,22 +283,24 @@ umgewandelt werden:
 !begin_table [|l|l|l|] !hline
 Platzhalter  !! x aus           !! Beispiel
 !hline
-(!/"x)       !! aeiosuyAEIOU    !! (!T)(!/"a)(!t) = (!"a)
-(!/'x)       !! aeiouyAEIOUY    !! (!T)(!/'e)(!t) = (!'e)
-(!/`x)       !! aeiouAEIOU      !! (!T)(!/`i)(!t) = (!`i)
-(!/^x)       !! aeiouAEIOU      !! (!T)(!/^o)(!t) = (!^o)
-(!/&x)       !! ae, oe, AE, OE  !! (!T)(!/&AE)(!t) = (!&AE)
-(!/!~x)      !! anoANO          !! (!T)(!/!~n)(!t) = (!~n)
-(!/,x)       !! cC              !! (!T)(!/,C)(!t) = (!,C)
-(!/.x)       !! aA              !! (!T)(!/.A)(!t) = (!.A)
-(!/_x)       !! ao              !! (!T)(!/_a)(!t) = (!_a)
-(!/\x)       !! oO              !! (!T)(!/\O)(!t) = (!\O)
+(!/"x)       !! aeiosuyAEIOU    !! (!B)(!T)(!/"a)(!t)(!b) = (!"a)
+(!/'x)       !! aeiouyAEIOUY    !! (!B)(!T)(!/'e)(!t)(!b) = (!'e)
+(!/`x)       !! aeiouAEIOU      !! (!B)(!T)(!/`i)(!t)(!b) = (!`i)
+(!/^x)       !! aeiouAEIOU      !! (!B)(!T)(!/^o)(!t)(!b) = (!^o)
+(!/&x)       !! ae, oe, AE, OE  !! (!B)(!T)(!/&AE)(!t)(!b) = (!&AE)
+(!/!~x)      !! anoANO          !! (!B)(!T)(!/!~n)(!t)(!b) = (!~n)
+(!/,x)       !! cC              !! (!B)(!T)(!/,C)(!t)(!b) = (!,C)
+(!/.x)       !! aA              !! (!B)(!T)(!/.A)(!t)(!b) = (!.A)
+(!/_x)       !! ao              !! (!B)(!T)(!/_a)(!t)(!b) = (!_a)
+(!/\x)       !! oO              !! (!B)(!T)(!/\O)(!t)(!b) = (!\O)
 !hline
 !end_table
 
-Das deutsche ""(!"s)"" wird durch den Platzhalter (!/"s) erzeugt. Kennt das
+Das deutsche ""(!"s)"" wird durch den Platzhalter (!B)(!T)(!/"s)(!t)(!b) erzeugt. Kennt das
 Zielformat ein Zeichen nicht, so wird das naheliegendste Zeichen
 benutzt, z.B. ""a"" statt ""(!^a)"".
+
+Mit (!KW [universal_charset] [[off!!]]) wird die Wandlung dieser Zeichen wieder abgeschaltet.
 !universal_charset [off]
 
 !end_node # Universeller Zeichensatz
