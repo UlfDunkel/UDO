@@ -17,6 +17,7 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from intro.ui)
 #   fd  Jun 05: html_name shortened ('introduction' -> 'intro')
+#   fd  Jun 08: ignored format list removed (is included via formattb.ui)
 #
 ################################################################################
 
@@ -30,31 +31,31 @@
 
 Willkommen zu UDO!
 
-UDO ist ein mächtiges und vielseitiges Werkzeug zur Erstellung von
-Anleitungen oder sonstigen Textdateien, die in einem oder mehreren
+UDO ist ein mächtiges und vielseitiges Werkzeug zum Erstellen von
+Handbüchern, Anleitungen oder sonstigen Textdateien, die in einem oder mehreren
 Formaten benötigt werden. Trotz der Vielseitigkeit ist UDO leicht zu
 bedienen und die UDO-Syntax leicht zu erlernen.
 
-UDOs Vielseitigkeit drückt sich dadurch aus, dass diese Anleitung
-ziemlich umfangreich ist. Dieser Umfang schreckt viele Leute ab, die
-Anleitung einmal komplett durchzulesen. Genau diese Leute sind es aber
-später, die viele Fragen stellen, die diese Anleitung fast alle erklären kann.
+UDOs Vielseitigkeit zeigt sich schon darin, dass dieses Handbuch 
+ziemlich umfangreich ist. Dieser Umfang schreckt viele Leute ab, dieses 
+Handbuch einmal komplett durchzulesen. Genau diese Leute sind es aber
+später, die viele Fragen stellen, die dieses Handbuch fast alle erklären kann.
 
 Aus diesem Grunde sei gleich zu Beginn darauf hingewiesen, dass 
-Sie UDO nur dann effizient einsetzen können, wenn Sie die Anleitung
-einmal komplett durchlesen/überfliegen und mit den mitgelieferten
+Sie UDO nur dann effizient einsetzen können, wenn Sie das Handbuch 
+einmal komplett durchlesen und mit den mitgelieferten
 Beispielen ein wenig herumexperimentieren.
 
-Nehmen Sie sich daher bitte die Zeit, diese Anleitung vom
+Nehmen Sie sich daher bitte die Zeit, das Handbuch vom
 Anfang bis zum Ende durchzublättern. Viele Dinge bleiben dann bereits
-in Ihrem Gedächtnis hängen. Außerdem wissen Sie dann später sofort, wo
+in Ihrem Gedächtnis haften. Außerdem wissen Sie dann später sofort, wo
 Sie etwas nachschlagen können, falls Ihnen der Sinn eines Befehls
 wieder entfallen ist.
 
 Falls Sie dabei Stellen entdecken, in denen Dinge zu kurz, falsch oder
-missverständlich beschrieben worden sind, so (!link [teilen Sie dies bitte mit] [Mailingliste]).
+missverständlich beschrieben worden sind, (!link [teilen Sie uns dies bitte mit] [Mailingliste]).
 
-In der Hoffnung, dass UDO für Sie eine unverzichtbare Hilfe wird und Sie
+Wir hoffen, dass UDO für Sie eine unverzichtbare Hilfe wird und Sie
 mehr Zeit für die wesentlichen Dinge bekommen.
 
 !end_node # Vorwort
@@ -64,7 +65,7 @@ mehr Zeit für die wesentlichen Dinge bekommen.
 !begin_node Was kann UDO und was nicht?
 !html_name  intro_features
 
-UDO wurde ursprünglich entwickelt, um die Erstellung von Anleitungen
+UDO wurde ursprünglich entwickelt, um das Erstellen von Handbüchern und Anleitungen
 zu Computerprogrammen oder vergleichbaren Dokumentationen zu
 vereinfachen, die in (!I)mehreren(!i) Formaten benötigt werden.
 
@@ -77,115 +78,79 @@ Sonderzeichen klarkommt und diese automatisch an das jeweilige Ausgabeformat
 anpasst. Sprich, selbst wenn man nur HTML oder nur (!LaTeX) erzeugen will,
 kann UDO sehr gute Dienste leisten.
 
-Bei alledem ist UDO multilingual, d.h. Sie können Texte in verschiedenen Sprachen erzeugen,
+Dabei ist UDO multilingual, d.h. Sie können Texte in verschiedenen Sprachen erzeugen 
 und UDO wird dabei für die unterstützten Sprachen die jeweils passenden Begriffe für
 "Inhaltsverzeichnis", "Anhang", "Abbildung" oder "Tabelle" ausgeben oder das Datum
 im jeweiligen Format darstellen.
 
-Die Syntax von UDO ist sehr leicht zu erlernen. Zur Erstellung
-einfacher Dateien muss man lediglich Kenntnis von etwa zehn bis
-fünfzehn Befehlen besitzen, also in etwa so viel, wie Sie auch beim
+Die Syntax von UDO ist wirklich leicht zu erlernen. Zum Erstellen 
+einfacher Dateien müssen Sie nur etwa zehn bis 
+fünfzehn Befehle kennen, also etwa so viele, wie Sie auch beim
 Verfassen von HTML- oder (!LaTeX)-Dateien besitzen müssen.
 
-Haben Sie einen Quelltext erstellt, so können Sie diesen in folgende Formate umwandeln:
+Haben Sie Ihr Handbuch als UDO-Quelltext erstellt, so können Sie es in folgende Formate umwandeln:
 
 !include formattb.ui
 
-!begin_ignore
-#Ausgabe-Formate
-!begin_enumerate !short
-  !item AmigaGuide
-  !item Apple QuickView
-  !item ASCII (Text)
-  !item DRC (David's Readme Compiler)
-  !item HP-Helptag-SGML
-  !item HTML (Hypertext Markup Language)
-  !item HTMLHelp
-  !item (!LaTeX) 2.09, (!LaTeXe)
-  !item OS/2 IPF
-  !item Linuxdoc-SGML
-  !item LyX
-  !item Manualpage
-  !item NROFF
-  !item PDF(!LaTeX)
-  !item PostScript
-  !item Pure-C-Help
-  !item RTF (Rich Text Format)
-  !item Sourcecode (C und Pascal)
-  !item ST-Guide
-  !item Texinfo
-  !item Turbo-Vision-Help
-  !item UDO (Universal Document)
-  !item Windows-Help
-!end_enumerate
-!end_ignore
-
-# Einige Formate sind system-/plattformübergreifend austauschbar, einige sind nur auf
-# bestimmten Systemen/Plattformen von Interesse.
-
-UDO erzeugt größtenteils keine (!I)fertigen(!i) Dokumente. In aller Regel
-müssen die von UDO erzeugten Dateien erst noch durch weitere Programme
-bearbeitet werden. So müssen Windows-Help-Quelltexte erst noch durch
+UDO versucht, möglichst fertige Dokumente zu erzeugen. Doch manchmal 
+müssen die von UDO erzeugten Dateien oder Dokumente erst noch durch weitere Programme
+bearbeitet werden. So müssen z.B. Windows-Help-Quelltexte erst noch durch
 den Hypertext-Compiler (!V)HC.EXE(!v) bearbeitet werden, RTF-Dateien mit einer
-Textverarbeitung ausgegeben werden, etc.
+Textverarbeitung ausgegeben werden usw.
 
-UDO versucht, beim Verfassen des Textes soviel Arbeit wie möglich
+UDO versucht, Ihnen beim Verfassen des Textes soviel Arbeit wie möglich
 abzunehmen. Neben der reinen Umwandlung bietet UDO daher je nach Ausgabeformat sinnvolle Nützlichkeiten wie
 
 #TODO: link zu Kopfzeilen fehlt, ebenso das dazugehörige Kapitel
 !begin_itemize !short
-!item automatische Generierung von (!link [Titelseiten] [Titelseite]),
-Kopfzeilen, (!link [Fußnoten] [Fußnoten]), (!link [Inhaltsverzeichnissen] [Inhaltsverzeichnisse]),
+!item automatische Generierung von 
+      (!link [Titelseiten] [Titelseite]), 
+      Kopfzeilen, 
+      (!link [Fußnoten] [Fußnoten]), 
+      (!link [Inhaltsverzeichnissen] [Inhaltsverzeichnisse]),
 !item automatische (!link [Kapitelnummerierung] [Gliederungsebenen]),
 !item (!link [Tabellensatz] [Tabellen]),
 !item automatisches Anlegen von (!link [Querverweisen] [Querverweise]) bei Hypertext-Formaten,
 !item Unterstützung verschiedener (!link [Schriftarten] [Schriftarten]),
 !item automatische Umwandlung von (!link [Umlauten] [Umwandlung von 8-bit-Zeichen])
-und sonstigen (!link [Sonderzeichen] [Sonderzeichen]),
+      und sonstigen (!link [Sonderzeichen] [Sonderzeichen]),
 !item umfangreiche Formatierungsmöglichkeiten mit Erstellung von
-(!link [Aufzählungen] [Aufzählungen]),
-(!link [Listen] [Listen]),
-# 17.01.2004 U.K.: Blocksatz anscheinend nur bei bestimmten Ausgabeformaten (ASCII, STG)
-Blocksatz,
-(!link [zentriertem] [Zentrieren von Zeilen]),
-(!link [rechtsbündigem] [Rechtsbündiger Text]) oder
-(!link [eingerücktem] [Einrücken von Absätzen]) Text,
+      (!link [Aufzählungen] [Aufzählungen]),
+      (!link [Listen] [Listen]),
+      Blocksatz (nur bei bestimmten Ausgabeformaten möglich),
+      (!link [zentriertem] [Zentrieren von Zeilen]),
+      (!link [rechtsbündigem] [Rechtsbündiger Text]) oder
+      (!link [eingerücktem] [Einrücken von Absätzen]) Text,
 !item automatisches Einbinden von (!link [Bildern] [Bilder]) sowie
 !item automatischen Zeilenumbruch mit halbautomatischer (!link [Silbentrennung] [Silbentrennung]).
 !end_itemize
 
 !smallskip
 
-UDO hat seine Stärken und Schwächen. Die Umwandlung ins ASCII-Text-,
-ST-Guide-, HTML-, (!LaTeX)- und WinHelp-Format gehören -- historisch
-bedingt -- sicherlich zu den Stärken dieses Programms. Ausgabeformate
-Linuxdoc-SGML und LyX werden erst seit kurzer Zeit angeboten und
+Wie jedes Programm hat auch UDO seine Stärken und Schwächen. Die Umwandlung in die Formate ASCII-Text,
+ST-Guide, HTML, (!LaTeX) und WinHelp gehören -- historisch
+bedingt -- sicherlich zu den Stärken dieses Programms. Die Ausgabeformate
+Linuxdoc-SGML und LyX werden erst seit einiger Zeit unterstützt und
 wurden noch nicht ausreichend getestet; hier gibt es sicherlich
 noch ein paar Dinge, die geändert werden (müssen).
 
-Einige Dinge stehen ganz oben auf der Wunschliste, wie z.B. die automatische Erzeugung
+Einige Dinge stehen ganz oben auf der Wunschliste, z.B. die automatische Erzeugung
 eines Stichwortverzeichnisses sowie die Ausgabe eines Abbildungs- und
 Tabellenverzeichnisses.
 
 !smallskip
 
-Die Erstellung von komplexen Dokumenten wie Zeitschriften ist mit UDO
+Das Erstellen komplexer Dokumente wie Zeitschriften ist mit UDO
 nicht möglich, da z.B. Bilder nicht frei positioniert oder von Text
-umflossen werden können und UDO keinen Spaltensatz erzeugen kann.
+umflossen werden können und weil UDO keinen Spaltensatz erzeugen kann.
 Dies sind Funktionen, die zum Desktop Publishing gehören und in einem Programm
 wie UDO nichts zu suchen haben.
 
 UDO besitzt keine eingebaute automatische Silbentrennung, sondern bietet nur
 die Möglichkeit, Wörter an vom Autor markierten Stellen zu trennen.
-# Auf eine automatische Silbentrennung wird verzichtet, da dies nur
-# für bestimmte Ausgabeformate relevant wäre.
 
-UDO ist nur ein Textkonverter "in eine Richtung", kann also nur das eigene Format
-in die oben aufgelisteten Formate umwandeln.
-UDO kann keines dieser Formate in das eigene Format umwandeln.
-
-# UDO kann keine Binärformate (z.B. WinWord-Dateien) erzeugen, sondern nur Textformate,
-# also solche, die man mit einem üblichen Editor bearbeiten kann.
+UDO ist nur ein Textkonverter ""in eine Richtung"", kann also nur das eigene Format
+in die oben aufgelisteten Formate umwandeln. UDO kann keines dieser Formate in das eigene Format umwandeln.
 
 !end_node # Was kann UDO und was nicht?
 
@@ -208,7 +173,7 @@ benutzen, welches Sie selbst einsetzen?
 
 !item Sie programmieren und benötigen neben der obligatorischen
 Text-Anleitung (ASCII) noch eine Online-Hilfe oder ein Online-Handbuch in Form
-einer Hilfedatei für Windows, einer HTML-Help Datei,
+einer Hilfedatei für Windows, einer HTML-Help-Datei, eines Apple-Help-Books, 
 einer Dokumentation im HTML-Format, eines ST-Guide/Hyperion-Hypertextes,
 einer Hilfe-Datei für Borlands Turbo-Vision oder einer Hilfedatei bzw.
 Anleitung im GNU-Info-Format?
@@ -299,7 +264,6 @@ UDO hat sich seither zu einem plattformunabhängigen,
 
 !end_quote
 
-# ergänzt 20.12.2003 - Ulrich Kretschmer
 UDO ist seit dem 27.10.2001 Open Source.
 
 !end_node # UDOs Entstehungsgeschichte
@@ -394,25 +358,16 @@ die nicht explizit als solche ausgewiesen sind. Aus dem Fehlen einer
 Kennzeichnung kann nicht geschlossen werden, dass ein Name frei von den
 Rechten Dritter ist.
 
-Atari, TOS und MultiTOS sind Warenzeichen oder eingetragene
-Warenzeichen der Atari Corporation.
-
-Arial und Times New Roman sind eingetragene Warenzeichen der Monotype
-Corporation PLC.
-
-GEM und GEM Desktop sind Warenzeichen oder eingetragene Warenzeichen
-von Digital Research.
-
-Mac, Macintosh, Mac~OS und Mac~OS~X sind eingetragene Warenzeichen von Apple Inc.
-
-MS-DOS, Windows, Windows~95 und Windows~NT sind eingetragene
-Warenzeichen der Microsoft Corporation.
-
-Unix ist ein eingetragenes Warenzeichen von X/Open Company Ltd.
-
-Linux ist ein eingetragenes Warenzeichen von Linus Torvalds.
-
-SUSE und Yast sind eingetragene Warenzeichen der SUSE AG.
+!begin_itemize
+!item Atari, TOS und MultiTOS sind Warenzeichen oder eingetragene Warenzeichen der Atari Corporation.
+!item Arial und Times New Roman sind eingetragene Warenzeichen der Monotype Corporation PLC.
+!item GEM und GEM Desktop sind Warenzeichen oder eingetragene Warenzeichen von Digital Research.
+!item Mac, Macintosh, Mac~OS und Mac~OS~X sind eingetragene Warenzeichen von Apple Inc.
+!item MS-DOS, Windows, Windows~95 und Windows~NT sind eingetragene Warenzeichen der Microsoft Corporation.
+!item Unix ist ein eingetragenes Warenzeichen von X/Open Company Ltd.
+!item Linux ist ein eingetragenes Warenzeichen von Linus Torvalds.
+!item SUSE und Yast sind eingetragene Warenzeichen der SUSE AG.
+!end_itemize
 
 Andere, in dieser Dokumentation genannte Produkte können eingetragene Warenzeichen
 ihrer jeweiligen Hersteller sein.
