@@ -54,7 +54,7 @@ beides zusammengenommen einen Sinn ergeben. Hier würde bei einigen
 Formaten in den Kopfzeilen ""Ein UDO-Bespiel-Quelltext"" ausgegeben. Bei
 (!KW [docinfo] [[date!!]]) wird der Platzhalter (!KKW [today]) durch das aktuelle
 Systemdatum expandiert. Sie können natürlich auch manuell für die
-Angabe des Datums sorgen (z.B. (!T)!/docinfo [date] 31. Dezember 1999(!t)).
+Angabe des Datums sorgen (z.B. (!B)(!T)!/docinfo [date] 31. Dezember 1999(!t)(!b)).
 
 !index (!kw [subsubtoc])
 !index (!kw [subtoc])
@@ -90,7 +90,7 @@ Ausgabeformate ausgegeben werden!
 !index (!kw [maketitle])
 Zu Anfang geben wir eine Titelseite aus, die aus den Informationen aus
 der im oberen Teil des Vorspanns gebildet wird. Das Kommando
-(!KW [maketitle])) sollte -- wenn es benutzt wird -- direkt hinter
+(!KW [maketitle]) sollte -- wenn es benutzt wird -- direkt hinter
 (!KW [begin_document]) angegeben werden. UDO erlaubt zwar auch den
 Einsatz an späterer Stelle, jedoch ist dies weder sinnvoll noch
 unproblematisch.
