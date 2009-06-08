@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from running.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -88,7 +89,7 @@ program that converts the (!LaTeX) files into a DVI file.
 
 !item	[Dest/ST-Guide:] If you choose this menu item UDO calls the
 ST-Guide and tells it to display the converted hypertext (source file
-name, suffix ''(!V).hyp(!v))'').
+name, suffix ""(!V).hyp(!v))"").
 
 !end_tlist
 

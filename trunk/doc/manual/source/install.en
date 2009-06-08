@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: introduced (extracted from install.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -30,12 +31,12 @@ system (e.g. MagiCMac, MagiC-PC, GEMulator) just copy all files to a
 directory that should be named ""UDO"".
 
 The GEM version should be the application for files with the suffix
-''(!V)*.u*(!v)'' so you shall do the neccessary changes in your desktop
+""(!V)*.u*(!v)"" so you shall do the neccessary changes in your desktop
 (Gemini, Thing, Ease, Magxdesk, !..).
 
 If you prefer the TTP version and you are using a command line shell (e.g.
-Mupfel by Stefan Eissing) copy or move ''(!V)udo.ttp(!v)'' to one of the
-directories that is part of (!T)$PATH(!t) (e.g. ''(!V)\usr\bin(!v)'').
+Mupfel by Stefan Eissing) copy or move ""(!V)udo.ttp(!v)"" to one of the
+directories that is part of (!T)$PATH(!t) (e.g. ""(!V)\usr\bin(!v)"").
 
 !begin_ignore
 # auskommentiert 13.01.2004 - Ulrich Kretschmer
@@ -111,7 +112,7 @@ the program with a certain software.
 
 !begin_itemize !short
 !item Download the appropriate ZIP archive from (!url [http://www.udo-open-source.org/] [http://www.udo-open-source.org])
-!item Unpack the ZIP archiv and copy the executable file ''(!T)udo(!t)'' to (!T)/usr/bin(!t).
+!item Unpack the ZIP archiv and copy the executable file ""(!T)udo(!t)"" to (!T)/usr/bin(!t).
 !end_itemize
 Please note: a manpage is currently not part of the Mac~OS~X distribution.
 # English:
@@ -189,10 +190,10 @@ The documentation is currently in revision (outdated in parts).
 
 !begin_ignore
 # auskommentiert 10.01.2004 - Ulrich Kretschmer
-After having extracted the archive copy the files of ''(!V)bin/(!v)''
-to ''(!V)/usr/local/bin(!v)'' or any other directory of (!T)$PATH(!t).
+After having extracted the archive copy the files of ""(!V)bin/(!v)""
+to ""(!V)/usr/local/bin(!v)"" or any other directory of (!T)$PATH(!t).
 
-Copy the manpage ''(!V)udo.1(!v)'' to ''(!V)/usr/man/man1/(!v)''.
+Copy the manpage ""(!V)udo.1(!v)"" to ""(!V)/usr/man/man1/(!v)"".
 
 To read the documentation of UDO with GNU Info convert the UDO source
 files to GNU Texinfo, run Makeinfo and copy the Info file to
@@ -200,7 +201,7 @@ files to GNU Texinfo, run Makeinfo and copy the Info file to
 access to the UDO Info files.
 
 Furthermore you should make some scripts or aliase to simplify calling
-UDO. The following script (named ''(!V)''u2tex''(!v)'') shows how to tell UDO that he shall convert
+UDO. The following script (named ""(!V)u2tex(!v)"") shows how to tell UDO that he shall convert
 the source file to (!LaTeX)):
 
 !begin_quote

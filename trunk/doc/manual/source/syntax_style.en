@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -123,7 +124,7 @@ each operating system.
 !index (!kw [no_umlaute])
 !item	If you use the switch (!KW [no_umlaute]) inside the preamble of
 the source file the items of the first itemize environment will be marked
-with an ''o'' instead of a bullet.
+with an ""o"" instead of a bullet.
 
 !end_enumerate
 
@@ -630,11 +631,11 @@ whereas WordPad95 does not.
 
 Text that is used between (!KKW [N]) and (!KK1 [n]) will be shown as a
 footnote when converting to a format that supports footnotes. Otherwise
-(!KK1 [N]) will be replaced by ''~('', (KK1 [n]) will be replaced by
-'')''.
+(!KK1 [N]) will be replaced by ""~("", (KK1 [n]) will be replaced by
+"")"".
 
 Important hint: Before (!KK1 [N]) you shouldn't use a blank. If you do so
-the footnote mark would ""fly"" without context or before the ''('' you
+the footnote mark would ""fly"" without context or before the ""("" you
 could read two blanks.
 
 This example!..
@@ -814,14 +815,14 @@ has to be used before the table environment, not inside this environment!
 The command (!KW [begin_table]) starts a table, (!KW [end_table])
 finishes and prints the table. After (!KW [begin_table]) you can define
 the justification of the table columns and the usage of vertical lines. Use
-''c'' for a centred row, ''l'' for a left justified row, ''r'' for a
-right justified row and ''|'' for vertical lines inside brackets. If you add
+""c"" for a centred row, ""l"" for a left justified row, ""r"" for a
+right justified row and ""|"" for vertical lines inside brackets. If you add
 a (!KW [hline]) command to this line the table starts with a horizontal
 line.
 
 After having described the layout of the table with the upper line
 you can insert the cells of the table. You have to insert a column in
-one source line and you have to divide the cells by using ''!!''.
+one source line and you have to divide the cells by using ""!!"".
 
 If you want to insert a horizontal line you can use the (!KW [hline])
 command. (!KW [hline]) has to be at the beginning of the line and it has
@@ -852,7 +853,7 @@ lower left cell !! lower cell !! lower right cell
 !hline
 !end_table
 
-Because I used a ''|'' before and after every column they are divided by
+Because I used a ""|"" before and after every column they are divided by
 vertical lines. The table starts with a horizontal line because the
 (!KW [hline]) command was added at the end of (!KW [begin_table]).
 Finally the table ends with a horizontal line because the (!KW [hline])

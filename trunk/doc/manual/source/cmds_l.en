@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -63,7 +64,7 @@ Output the (!LaTeX) symbol.
 !item [(!SYNTAX)] (!T)(!/LaTeX)(!t)
 
 !item [(!DESCRIPTION)]
-This placeholder will be replaced by ''(!V)\LaTeX{}(!v)'' when
+This placeholder will be replaced by ""(!V)\LaTeX{}(!v)"" when
 converting to (!LaTeX). Otherwise it will be replaced by ""(!V)LaTeX(!v)"".
 
 !item [(!EXAMPLE)]
@@ -90,7 +91,7 @@ Output the (!LaTeXe) symbol.
 !item [(!SYNTAX)] (!T)(!/LaTeXe)(!t)
 
 !item [(!DESCRIPTION)]
-This placeholder will be replaced by ''(!V)\LaTeXe{}(!v)'' when
+This placeholder will be replaced by ""(!V)\LaTeXe{}(!v)"" when
 converting to (!LaTeX). Otherwise it will be replaced by ""(!V)LaTeX2e(!v)"".
 
 !item [(!EXAMPLE)]
@@ -367,8 +368,8 @@ Set text size of linedraw environment.
 With this switch you can set the font size of linedraw environments
 if the destination format allows it to use different font sizes. You
 can use this switch wherever you want. The smallest font size is
-activated with ''(!T)tiny(!t)'', the largest one with
-''(!T)huge(!t)''. The default font size is ''(!T)normal(!t)''.
+activated with ""(!T)tiny(!t)"", the largest one with
+""(!T)huge(!t)"". The default font size is ""(!T)normal(!t)"".
 
 !item [(!EXAMPLE)]
 (!T)!/linedrawsize [small](!t)

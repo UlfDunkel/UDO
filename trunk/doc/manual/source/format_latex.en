@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -74,7 +75,7 @@ The first binomial theorem: (!ab2)
 Special characters are translated especially for (!V)makeindex(!v).
 It's not necessary to adjust the UDO-generated (!LaTeX) files.
 
-You have to use a ''(!V)}(!v)'' for any ''(!V){(!v)'' inside an index entry
+You have to use a ""(!V)}(!v)"" for any ""(!V){(!v)" inside an index entry
 and vice versa. Otherwise (!LaTeX) will print an error message.
 
 !end_description

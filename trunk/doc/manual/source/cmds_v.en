@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -38,7 +39,7 @@ Output preformatted text.
 
 !item [(!DESCRIPTION)]
 ""<text>"" will be displayed preformatted if possible.
-When converting to (!LaTeX), ''(!V)\verb+<text>+'(!v)'' will be output,
+When converting to (!LaTeX), ""(!V)\verb+<text>+'(!v)"" will be output,
 otherwise the same output will be generated as for (!KKKW [T] [t]).
 
 !item [(!EXAMPLE)]
@@ -96,8 +97,8 @@ Set font size for verbatim environments.
 With this switch you can set the font size of verbatim environments
 if the destination format allows it to use different font sizes. You
 can use this switch wherever you want. The smallest font size is
-activated with ''(!T)tiny(!t)'', the largest one with
-''(!T)huge(!t)''. The default font size is ''(!T)normal(!t)''.
+activated with ""(!T)tiny(!t)"", the largest one with
+""(!T)huge(!t)"". The default font size is ""(!T)normal(!t)"".
 
 !item [(!EXAMPLE)]
 (!T)!/verbatimsize [small](!t)

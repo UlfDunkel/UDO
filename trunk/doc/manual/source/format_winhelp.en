@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -43,20 +44,20 @@ This can have two reasons:
 !begin_enumerate
 
 !item	The UDO source file contains errors. Please take a look at UDO's log
-file (suffix ''(!V).ulw(!v)'') and correct the errors you will find there.
+file (suffix ""(!V).ulw(!v)"") and correct the errors you will find there.
 If the log file doesn't contain any error messages your source file may
 contain errors UDO hasn't detected.
 
 !item	The HC is working incorrectly. Take a look at the HC's error file
-(suffix ''(!V).err(!v)''). Unfortunately I can't tell you the sense of the
+(suffix ""(!V).err(!v)""). Unfortunately I can't tell you the sense of the
 errors printed in the error file in most cases.
 
 !end_enumerate
 
-!item	[What is the file ''(!V).hpj(!v)'' good for?] ~
+!item	[What is the file ""(!V).hpj(!v)"" good for?] ~
 
 When converting to Windows Help UDO will save an RTF file and a project file
-for the Microsoft Helpcompiler named ''(!V).hpj(!v)''. You have to start the
+for the Microsoft Helpcompiler named ""(!V).hpj(!v)"". You have to start the
 HC by passing the name of this project file to get a Windows Help file.
 
 This project file contains several information e.g. the title of the help
@@ -113,21 +114,21 @@ Description:
 
 !begin_enumerate
 
-!item	The hexadecimal ASCII code of the dash is ''(!T)0x2D(!t)''. The dash
-will be replaced by ''(!T)_2D(!t)''.
+!item	The hexadecimal ASCII code of the dash is ""(!T)0x2D(!t)"". The dash
+will be replaced by ""(!T)_2D(!t)"".
 
-!item	The ''ü'' inside ''Einführung'' is printed in RTF files like
-''(!T)\'FC(!t)''. The ASCII code of the backslash (''\'') is
-''(!T)0x5C(!t)'', so the backslash will be replaced by ''(!T)_5C(!t)''. The
-ASCII code of ''(!T)'(!t)'' is ''(!T)0x27(!t)'', so the apostrophe will be
-replaced by ''(!T)_27(!t)''.
+!item	The ""ü"" inside ""Einführung"" is printed in RTF files like
+""(!T)\'FC(!t)"". The ASCII code of the backslash (""\"") is
+""(!T)0x5C(!t)"", so the backslash will be replaced by ""(!T)_5C(!t)"". The
+ASCII code of ""(!T)'(!t)"" is ""(!T)0x27(!t)"", so the apostrophe will be
+replaced by ""(!T)_27(!t)"".
 
-!item	The blanks will be replaced by ''(!T)_(!t)''
+!item	The blanks will be replaced by ""(!T)_(!t)""
 
 !end_enumerate
 
 Thus the single letter ""ü"" will be replaced by the really long string
-''(!T)_5C_27FC(!t)'' wird. Maybe you want to say that this is quite awkward
+""(!T)_5C_27FC(!t)"" wird. Maybe you want to say that this is quite awkward
 but if UDO would simply replace the ""ü"" by ""FC"" problems would appear
 very soon. Using the upper way the chance that UDO creates a context string
 that is already used is very small.

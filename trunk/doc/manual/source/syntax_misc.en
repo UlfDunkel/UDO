@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -147,8 +148,8 @@ included and the name of the program is defined by a macro:
 
 Since UDO Release 6 you can call macros with parameters. You can set the
 position of the parameters in the (!I)!/macro(!i) command by inserting
-''(!T)(!/1)(!t)'', ''(!T)(!/2)(!t)'' till ''(!T)(!/9)(!t)''. To call a macro
-with parameters you have to write brackets (''[!..]'') around them.
+""(!T)(!/1)(!t)"", ""(!T)(!/2)(!t)"" till ""(!T)(!/9)(!t)"". To call a macro
+with parameters you have to write brackets (""[!..]"") around them.
 
 The following small example shows how to use a macro for text that shall be
 printed in bold-italic style:
@@ -264,9 +265,9 @@ are used the same way you can use macros with parameters. Definitions with
 parameters are a great help to expand UDO's support of a destination format.
 
 You declare definitions like in the upper example. You can tell UDO the
-positions of the parameters by adding ''(!T)(!/1)(!t)'', ''(!T)(!/2)(!t)''
-till ''(!T)(!/9)(!t)''. When you call a definition you have to write
-brackets (''[!..]'') around the parameters.
+positions of the parameters by adding ""(!T)(!/1)(!t)"", ""(!T)(!/2)(!t)""
+till ""(!T)(!/9)(!t)"". When you call a definition you have to write
+brackets (""[!..]"") around the parameters.
 
 In the upper example I have shown you how to make a heading for HTML. When
 using parameters it may look like the following example:
@@ -344,7 +345,7 @@ on set symbols.
 Assuming that you have written a soure file that contains three chapters,
 the first two chapters have been finished and you are still working on the
 third chapter. To mimize the conversion time of UDO you want only to convert
-the last chapter if the symbol ''(!V)AllChapters(!v)'' is set:
+the last chapter if the symbol ""(!V)AllChapters(!v)"" is set:
 
 !begin_quote
 !vinclude (!EXAMPLES)symbol1.ui
@@ -352,15 +353,15 @@ the last chapter if the symbol ''(!V)AllChapters(!v)'' is set:
 
 If you start UDO as you without setting the symbol it will make a
 destination file that contains all chapters. If you set the symbol via
-adding the option ''(!T)-D~AllChapters(!t)'' you will get a destination file
+adding the option ""(!T)-D~AllChapters(!t)"" you will get a destination file
 that contains only the last chapter.
 
 You can even do more. If you use more symbols you can make destination files
 with only one, some or all chapters. If you use the following example and
-you call UDO with the option ''(!T)-D~Chapter1(!t)'' you will get only the
-first chapter. If you call UDO with the options ''(!T)-D~Chapter1(!t)'' and
-''(!T)-D~Chapter2(!t)'' you will get a destination file with the first and
-second chapter. If you call UDO with the option ''(!T)AllChapters(!t)'' you
+you call UDO with the option ""(!T)-D~Chapter1(!t)"" you will get only the
+first chapter. If you call UDO with the options ""(!T)-D~Chapter1(!t)"" and
+""(!T)-D~Chapter2(!t)"" you will get a destination file with the first and
+second chapter. If you call UDO with the option ""(!T)AllChapters(!t)"" you
 will get a complete destination file:
 
 !begin_quote
@@ -372,7 +373,7 @@ the (!KW [unset]) command.
 
 If you want to avoid that all chapters are saved in the destination file you
 can add the following lines to the beginning of your source file. Here the
-symbol ''(!V)AllChapters(!v)'' will be deleted if it's set:
+symbol ""(!V)AllChapters(!v)"" will be deleted if it's set:
 
 !begin_quote
 !vinclude (!EXAMPLES)symbol3.ui
@@ -491,7 +492,7 @@ your source file UDO will add the commands that are necessary for
 converted especially for ""Makeindex"".
 
 !item You have to use the parameters inside brackets. If you want to use a
-bracket inside a parameter you have to insert a ''!''. If you don't
+bracket inside a parameter you have to insert a ""!"". If you don't
 UDO will think that the placeholder ended. An example:
 
 !begin_quote
@@ -674,7 +675,7 @@ preamble or via command line. The (!KW [ifnset]) tests if a symbol is
 As you know you can set symbols via command line by using the option
 (!V)-D(!v) and by the command (!I)!/set(!i).
 
-The following example shows how to test the symbol ''(!V)UseColour(!v)'' and
+The following example shows how to test the symbol ""(!V)UseColour(!v)"" and
 to display the right image:
 
 !begin_quote

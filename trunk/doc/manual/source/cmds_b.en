@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -927,7 +928,7 @@ ausgerichtet werden.
 !item [(!DESCRIPTION)]
 With this command a table is started. For <format> you enter the
 justification of the columns of this table and the position of
-vertical lines. If this command is followed by ''(!KW [hline])'' the table
+vertical lines. If this command is followed by ""(!KW [hline])"" the table
 starts with a horizontal line. The example shows how to make a table
 with three columns where the left column is left justified, the
 second is centered and the last columns is right justified. The table
@@ -1160,7 +1161,7 @@ Dieser Befehl sorgt für die Ausgabe von drei
 zusätzlichen Leerzeilen und dient dazu, Absätze
 deutlicher voneinander abzuheben. Bei der Umwandlung
 ins (!LaTeX)-Format werden keine drei Leerzeilen, sondern
-''(!V)\bigskip(!v)'' ausgegeben.
+""(!V)\bigskip(!v)"" ausgegeben.
 (!coloff)
 !item [(!DESCRIPTION)]
 This command will be simply replaced by ""(!V)\bigskip(!v)"" when

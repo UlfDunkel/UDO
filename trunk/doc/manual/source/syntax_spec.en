@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: quotation changed
 #
 ################################################################################
 
@@ -129,9 +130,9 @@ UDO supports --- did you think anything else --- dashs like in this
 sentence.
 
 Dashs are supported by (!LaTeX), Windows Help and RTF. Converting to other
-formats UDO will replace ''(---)'' and ''(--)'' by a single ''-''.
+formats UDO will replace ""(---)"" and ""(--)"" by a single ""-"".
 
-If you want to display three or two ''-'' you have to use
+If you want to display three or two ""-"" you have to use
 (!T)(!link [((---!)!)] [((---!)!)])(!t) or
 (!T)(!link [((--!)!)] [((--!)!)])(!t).
 
@@ -144,7 +145,7 @@ If you want to display three or two ''-'' you have to use
 
 In an UDO source file you can use ""higher"" characters without having to
 know how a character has to look like in a destination format like (!LaTeX)
-or Windows Help. So you can enter a German ''ß'' without any fear, UDO
+or Windows Help. So you can enter a German ""ß"" without any fear, UDO
 converts it for you and it knows that this has to be (!V)&szlig;(!v) for
 HTML or (!V){\ss}(!v) for (!LaTeX).
 
@@ -306,10 +307,10 @@ Placeholder  !! x from          !! Example
 !hline
 !end_table
 
-The german ''(!"s)'' will be created with the placeholder (!/"s).
+The german ""(!"s)"" will be created with the placeholder (!/"s).
 If the destination format does not know a character, the best
-possible character will be used, for example ''a'' instead
-of ''(!^a)''.
+possible character will be used, for example ""a"" instead
+of ""(!^a)"".
 
 !universal_charset [off]
 
