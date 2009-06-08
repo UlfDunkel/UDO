@@ -171,7 +171,7 @@ Beliebiger Teil des Textes als Label/Bookmark markieren.
 !item [(!DESCRIPTION)]
 Mit diesem Befehl kann ein beliebiger Teil des Textes als
 Label/Bookmark markiert werden kann. Das Kommando wird
-z. Zt. nur für die RTF-Ausgabe unterstützt.
+zur Zeit nur für die RTF-Ausgabe unterstützt.
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
