@@ -16,6 +16,7 @@
 #   fd  Jun 05: introduced (extracted from history.ui)
 #   fd  Jun 06: begascde.ui integrated in text
 #   fd  Jun 08: quotation changed
+#   fd  Jun 08: etc. -> usw.
 #
 ################################################################################
 
@@ -124,7 +125,7 @@ Version 6.5.13
 !item Die 16 Standardfarben existieren jetzt in UDO als Platzhalter
       für die Ausgabe von HTML, RTF, WinHelp, DRC und
       Postscript. Die Farben werden wie folgt angegeben: (!KKW [black]),
-      (!KKW [red]), etc. Abgeschlossen wird jeweils mit (!KKW [coloff]). (!nl)
+      (!KKW [red]) usw. Abgeschlossen wird jeweils mit (!KKW [coloff]). (!nl)
       Version 6.5.9
 # ..............................................................................
 !item Zwei neue Kommandos (!kkkw [INS] [ins]) und (!kkkw [DEL] [del]) zum
@@ -321,7 +322,7 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
     (!T)company(!t) und (!T)category(!t) werden in die Info-Einträge der
     RTF-Datei geschrieben.
 # ..............................................................................
-!item Alle Nodes, Subnodes, etc. werden für die RTF-Ausgabe als
+!item Alle Nodes, Subnodes usw. werden für die RTF-Ausgabe als
       Label/Bookmark markiert. (!nl)
       Version 6.5.9
 # ..............................................................................
@@ -988,7 +989,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
         !item UDO gibt jetzt eine Fehlermeldung aus, wenn (!KW [maketitle])
           benutzt wird, ohne irgendwelche Informationen für die Titelseite
           bereitgestellt zu haben.
-        !item Werden (!KW [heading]), (!KW [subheading]) etc. in einer center-
+        !item Werden (!KW [heading]), (!KW [subheading]) usw. in einer center-
           oder flushright-Umgebung benutzt, so werden die Überschriften
           passend eingerückt.
         !item Wird (!KW [html_keywords]) mehrfach in einem Node benutzt, so
@@ -1042,7 +1043,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
         !item Der Schalter für den Blocksatz heisst nun
           (!KW [use_justification]) anstatt (!kw [use_justified]).
         !item Der Schalter (!kw [html_use_xlist]) existiert nicht mehr.
-        !item (!kw [german]), (!kw [english]), (!kw [french]) etc.
+        !item (!kw [german]), (!kw [english]), (!kw [french]) usw.
            existieren nicht mehr und wurden durch den Befehl (!KW [language])
            ersetzt.
         !item (!kw [no_toc_subnodes]) kann nun durch (!KW [tableofcontents] [!depth 1])
@@ -1060,8 +1061,8 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
         !item Die Format-Spezialbefehle haben sich geändert:
            aus (!kw [asc]) wird (!KW [raw] [[asc!!]]),
            aus (!kw [stg]) wird (!KW [raw] [[stg!!]]),
-           aus (!kw [win]) wird (!KW [raw] [[win!!]]),
-           etc.
+           aus (!kw [win]) wird (!KW [raw] [[win!!]])
+           usw.
            Die Befehle, die nur Zeilen ausgeben, wenn man nicht in das
            passende Format umwandelt, existieren nicht mehr.
         !item Der Schalter (!kw [stg_no_database]) existiert nicht mehr,
@@ -1136,7 +1137,7 @@ finden hier als Gedächtnisstütze meine komprimierten Anmerkungen aus
         !item (!KW [html_backpage]): Zur Angabe einer Rücksprung-URL für die
           Kopfzeile der ersten HTML-Seite.
         !item (!KW [html_keywords]): Zur Erzeugung von Meta-Informationen
-        !item (!KW [html_img_suffix]): Zur Ermöglichung der Einbindung von JPEG-Grafiken etc.
+        !item (!KW [html_img_suffix]): Zur Ermöglichung der Einbindung von JPEG-Grafiken usw.
         !item (!KW [html_nodesize]): Zur Veränderung der Fontgröße von Kapitel-überschriften bei HTML
         !item (!KW [ifos]) und (!KW [ifnos]): Zur Abfrage des Betriebssystems.
         !item (!KW [ignore_headline]), (!KW [ignore_bottomline]): Um Kopf- und/oder
@@ -1220,7 +1221,7 @@ finden hier als Gedächtnisstütze meine komprimierten Anmerkungen aus
         !item Für (!LaTeX)~2.09 und (!LaTeX2e) erzeugt UDO automatisch eine
           Präambel (abschaltbar).
         !item Es können nun wesentlich mehr Kapitel, Tabellenzeilen,
-          Trennvorschläge etc. benutzt werden.
+          Trennvorschläge usw. benutzt werden.
         !item UDO entdeckt wesentlich mehr Syntaxfehler als zuvor.
         !item Bilder werden nun umgebungsabhängig positioniert. Sie werden
           nur noch dann zentriert ausgegeben, wenn der (!KW [image])-Befehl
@@ -1240,7 +1241,7 @@ finden hier als Gedächtnisstütze meine komprimierten Anmerkungen aus
           Umgebungen können nun viel eleganter mit dem Umgebungsparameter (!KW [short]) erstellt werden.
         !item Die zu benutzende Sprache muss nun mit (!KW [language]) gesetzt
           werden. (!KW [language] [[german!!]]) ersetzt demnach den Befehl !german
-          etc.
+          usw.
         !item Beim Index-Befehl können nun bis zu drei Indizes übergeben
           werden.
         !item Der Befehl (!kw [win_html_look]) existiert nicht mehr.
@@ -1347,7 +1348,7 @@ Diese Version wurde am 18. April 1996 veröffentlicht.
         !item Für em(!TeX) werden nun auch PCX-Bilder unterstützt.
         !item Die WinHelp-Ausgabe wurde drastisch erweitert, so z.B.
           werden Buttons im WinHelp-Fenster angelegt, Labels werden
-          direkt angesprungen, etc.
+          direkt angesprungen usw.
         !item Die Atari-Versionen wurden mit den MiNT-Libs PL 46 erstellt.
           Die Probleme mit langen Dateinamen dürften daher der
           Vergangenheit angehören.

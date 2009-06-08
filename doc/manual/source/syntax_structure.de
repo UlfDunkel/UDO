@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: etc. -> usw.
 #
 ################################################################################
 
@@ -58,7 +59,7 @@ Autors ausgegeben werden soll.
 
 !item [(!KW [docinfo] [[company!!]]):]      Firma, für die ein Dokument erstellt wird.
 
-!item [(!KW [docinfo] [[address!!]]):]      Die Straße, Wohnort, Land etc. in der der Autor wohnt.
+!item [(!KW [docinfo] [[address!!]]):]      Die Straße, Wohnort, Land usw. in der der Autor wohnt.
                    Optional kann man natürlich irgendetwas anderes angeben, was dann
                    unterhalb des Namens des Autors ausgegeben wird, wie z.B. Email-Adressen.
 
@@ -119,7 +120,7 @@ Inhaltsverzeichnis ausgegeben wird.
 Neben (!KW [tableofcontents]) gibt es die Befehle (!KW [subtoc]), (!KW [subsubtoc])
 und (!KW [subsubsubtoc]), mit denen Sie alle einem Kapitel
 zugehörigen Abschnitte bzw. alle einem Abschnitt zugehörigen
-Unterabschnitte etc. in der Form eines kleinen Inhaltsverzeichnisses
+Unterabschnitte usw. in der Form eines kleinen Inhaltsverzeichnisses
 angeben können. Sinn und Zweck dieser sogenannten
 ""Unterinhaltsverzeichnisse"" ist es, dem Leser eines Hypertextformates
 (ST-Guide, Pure-C-Help, HTML, WinHelp) das direkte Weiterlesen zu

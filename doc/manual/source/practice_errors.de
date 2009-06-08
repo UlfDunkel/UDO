@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from working.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 08: etc. -> usw.
 #
 ################################################################################
 
@@ -104,11 +105,11 @@ aber das Anfangskommando fehlt.
 
 !item [!/else without !/if]
 In Ihrem Quelltext steht (!KW [else]), ohne dass Sie mit (!KW [if]), (!KW [ifdest])
-etc. eine Abfrage begonnen haben.
+usw. eine Abfrage begonnen haben.
 
 !item [!/endif without !/if]
 In Ihrem Quelltext steht (!KW [endif]), ohne dass Sie mit (!KW [if]), (!KW [ifdest])
-etc. eine Abfrage begonnen haben.
+usw. eine Abfrage begonnen haben.
 # ergänzt 04.01.2004 - Ulrich Kretschmer (vgl. Bug Nr. 43)
 Diese Fehlermeldung wird auch erzeugt, wenn im Quelltext ein (!KW [end_ignore]) ohne zugehöriges (!KW [begin_ignore]) vorkommt.
 

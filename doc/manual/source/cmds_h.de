@@ -16,6 +16,7 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
+#   fd  Jun 08: etc. -> usw.
 #
 ################################################################################
 
@@ -1340,7 +1341,7 @@ erzeugt werden, entstehen kleinere (!nolink [HTML])-Dateien.
 
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, so werden 8-Bit-Zeichen (!I)nicht(!i)
-in (!nolink [HTML])-Entities (&auml; etc.) umgewandelt. Somit ist es möglich, auch von ISO-Latin1
+in (!nolink [HTML])-Entities (&auml; usw.) umgewandelt. Somit ist es möglich, auch von ISO-Latin1
 abweichende Dateien zu erzeugen, ohne das UDO dazwischenfunkt.
 
 Optional kann durch den Parameter <text> ein Codepage übergeben werden.

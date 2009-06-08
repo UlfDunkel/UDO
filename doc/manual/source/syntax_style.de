@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: etc. -> usw.
 #
 ################################################################################
 
@@ -975,7 +976,7 @@ lässt.
 
 !item In den Feldern der Tabelle sind natürlich alle sonstigen
 UDO-Kommandos erlaubt. Sie können dort also auch Schriftarten,
-Querverweise, Indizes etc. verwenden.
+Querverweise, Indizes usw. verwenden.
 
 !end_enumerate
 

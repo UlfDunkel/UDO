@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: etc. -> usw.
 #
 ################################################################################
 
@@ -117,7 +118,7 @@ Zusatznamen eines Kapitels definieren.
 Definiert einen Zweitnamen eines Kapitels. Taucht
 "<text>" im Text auf, werden genauso Querverweise zum
 zugehörigen Kapitel erzeugt wie bei (!KW [label]), (!KW [node]),
-(!KW [subnode]), (!KW [subsubnode]) etc. Sie können (!KW [alias]) mehrfach
+(!KW [subnode]), (!KW [subsubnode]) usw. Sie können (!KW [alias]) mehrfach
 innerhalb eines Kapitels benutzen, jedoch sollte
 <text> nur einmal als Name für einen Alias, Label
 oder ein Kapitel verwendet werden.

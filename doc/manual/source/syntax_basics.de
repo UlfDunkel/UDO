@@ -17,6 +17,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 08: macro LINELEN added to text
 #   fd  Jun 08: code UTF-8 added
+#   fd  Jun 08: etc. -> usw.
 #
 ################################################################################
 
@@ -158,7 +159,7 @@ Kommandos plaziert werden, die UDO mitteilen, wie er die Quelldatei
 umwandeln soll(!N)z.B. ob ein kurzes oder ausführliches
 Inhaltsverzeichnis ausgegeben werden soll, ob Begriffe und
 Datumsangaben in deutscher oder englischer Sprache erfolgen sollen
-etc.(!n). Zum Vorspann zählen alle Zeilen, die vor dem Kommando
+usw.(!n). Zum Vorspann zählen alle Zeilen, die vor dem Kommando
 (!KW [begin_document]) stehen.
 
 !index (!kw [end_document])

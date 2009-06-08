@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 08: etc. -> usw.
 #
 ################################################################################
 
@@ -68,7 +69,7 @@ referenziert und gelangen darüber hinaus auch in den Index des
 Hypertextes.
 
 !item [Wie können Popup-Nodes erzeugt werden?]
-Durch die Befehle (!KW [pnode]) etc. können Kapitel im ST-Guide als
+Durch die Befehle (!KW [pnode]) usw. können Kapitel im ST-Guide als
 Popups dargestellt werden. Dabei ist folgendes zu beachten:
 
 Beim ST-Guide dürfen in einem Popup lediglich 12 Zeilen mit
