@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: introduced (extracted from manual.u)
 #   fd  Jun 05: FILESPACEQUOTE
+#   fd  Jun 09: using more macros for text style formatting
 #
 ################################################################################
 
@@ -29,7 +30,7 @@
 !endif
 
 !ifdest [hh,html]
-!macro FORMAT         (!link [&lt;k&uuml;rzel&gt;] [Ausgabeformat])
+!macro FORMAT         (!link [&lt;kürzel&gt;] [Ausgabeformat])
 !macro COLOR          (!link [&lt;farbe&gt;] [Farben])
 !macro LANGUAGE       (!link [&lt;sprache&gt;] [Sprache])
 !macro OS             (!link [&lt;system&gt;] [Betriebssystem])

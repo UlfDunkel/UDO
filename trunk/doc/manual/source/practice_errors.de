@@ -19,6 +19,7 @@
 #   fd  Jun 09: file reviewed
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 09: using more macros for text style formatting
 #
 ################################################################################
 
@@ -27,7 +28,7 @@
 !begin_node Fehlermeldungen
 !html_name  errors
 
-UDO protokolliert in einer Datei mit dem Suffix (!CODE [.ul?]) alle Fehler, die bei der Umwandlung aufgetreten sind. Die Fehlermeldungen,
+UDO protokolliert in einer Datei mit dem Suffix (!code [.ul?]) alle Fehler, die bei der Umwandlung aufgetreten sind. Die Fehlermeldungen,
 Warnungen und Hinweise haben dabei immer folgenden Aufbau:
 
 !begin_quote
@@ -54,7 +55,7 @@ Ihrem Quelltext auf, darf aber nur einmalig benutzt werden.
 !item [""!.."" expected]
 UDO hat den angegebenen Befehl erwartet. Überprüfen Sie, ob jede
 geöffnete Umgebung mit dem richtigen Befehl beendet wurde oder ob
-vielleicht ein (!CODE [!begin_])!.. fehlt.
+vielleicht ein (!code [!begin_])!.. fehlt.
 
 !item [""!.."" followed by ""!..""]
 Eine Umgebung wurde mit einem falschen Befehl beendet. Entweder
@@ -345,7 +346,7 @@ mehrere Zeilen erstreckt oder dessen Ende UDO nicht finden konnte.
 !item [unknown command]
 UDO kennt das angegebene Kommando nicht. Falls Sie ein Wort
 darstellen möchten, dass mit einem Ausrufungszeichen beginnt, so
-müssen Sie dieses durch Einfügen eines ""(!CODE [/])"" besonders markieren.
+müssen Sie dieses durch Einfügen eines ""(!code [/])"" besonders markieren.
 
 !item [use (!/V) and (!/v) in one line]
 (!MISS)

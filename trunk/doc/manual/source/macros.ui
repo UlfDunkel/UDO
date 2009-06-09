@@ -27,7 +27,7 @@
 !macro  Exclam !
 
 # command parameters without link
-!macro  CODE (!B)(!T)(!1)(!t)(!b)
+!macro  code (!B)(!T)(!1)(!t)(!b)
 
 # command parameters without leading !
 !macro  KP (!B)(!T)(!link [(!1) (!2)][(!1)])(!t)(!b)

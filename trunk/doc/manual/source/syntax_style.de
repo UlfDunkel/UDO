@@ -19,6 +19,7 @@
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: using more macros for text style formatting
 #
 ################################################################################
 
@@ -537,7 +538,7 @@ Aus~!..
 
 (!HINT)
 
-Bei HTML werden die Einrückungen durch (!B)(!T)<blockquote>(!t)(!b) erzeugt.
+Bei HTML werden die Einrückungen durch (!code [<blockquote>]) erzeugt.
 Netscape und CAB geben solche Absätze auch eingerückt aus; Mosaic
 hingegen rückt diese Absätze nicht ein, sondern ermöglicht nur
 die Zuweisung eines speziellen Fonts. Als Defaulteinstellung wird hier
@@ -837,7 +838,7 @@ Dazu stehen mehrere Kommandos zur Verfügung:
 !end_table
 !end_flushleft
 
-Mit dem Kommando (!B)(!T)(!kkw [coloff])(!t)(!b) wird wieder auf die Standardfarbe Schwarz zurückgeschaltet.
+Mit dem Kommando (!KKW [coloff]) wird wieder auf die Standardfarbe Schwarz zurückgeschaltet.
 
 Aus~!..
 !begin_verbatim
@@ -974,7 +975,7 @@ Tabelle umrahmt dargestellt, falls man in der Zeile mit
 nicht, wird die komplette Tabelle ohne Linien dargestellt.
 
 !item Beim ST-Guide werden die Tabellenlinien durch den Grafikbefehl
-(!T)@line(!t) erzeugt. Hier ist es nicht möglich, mehrere Linien
+(!code [@line]) erzeugt. Hier ist es nicht möglich, mehrere Linien
 zwischen den Spalten zu erzeugen, wenn man keine ANSI-Tabellen ausgeben
 lässt.
 
