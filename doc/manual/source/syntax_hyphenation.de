@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 08: text reviewed
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -43,7 +44,7 @@ Bei der Umwandlung ins Rich-Text-, WinHelp- und HTML-Format werden die
 Trennmarken einfach gefiltert.
 
 !index (!k1 [//-])
-Falls Sie die Zeichenfolge (!T)!/-(!t) ausgeben möchten, so müssen Sie im
+Falls Sie die Zeichenfolge (!T)!/-(!t) ausgeben möchten, müssen Sie im
 Quelltext (!K1 [//-]) angeben.
 
 # = = = = =
@@ -137,7 +138,7 @@ wieder einschalten.
 
 Gerade in der Entwicklungsphase einer Dokumentation interessieren
 einen die Warnungen eher weniger. Benutzen Sie dann einfach zu Beginn
-des Dokumentes den Befehl (!KW [sloppy]), so dass in der Logdatei nur noch die
+des Dokumentes den Befehl (!KW [sloppy]), dass in der Logdatei nur noch die
 ""wichtigen"" Dinge zu erkennen sind. Vor der Veröffentlichung der
 Dokumentation sollte man dann den Befehl auskommentieren und die
 Formatierung überprüfen.

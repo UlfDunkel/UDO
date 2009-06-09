@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 08: text reviewed
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -40,7 +41,7 @@ ist.
 
 Es folgt eine spezielle Zeile für den ST-Guide. Hier wird dem ST-Guide
 mitgeteilt, in welche Rubrik der Hypertext in den Katalog einzuordnen
-ist. Kennen Sie sich nicht mit dem ST-Guide aus, so verwenden Sie
+ist. Kennen Sie sich nicht mit dem ST-Guide aus, verwenden Sie
 einfach diese Zeile zu Beginn Ihres Quelltextes.
 
 
@@ -74,7 +75,7 @@ sich jedoch, diese Ausgabe zu automatisieren.
 !index (!kw [no_effects])
 Der Schalter (!KW2 [no_effects] [[asc!!]]) sorgt für die Unterdrückung der
 Schriftarten für das ASCII-Format. Würde dieser Schalter nicht
-angegeben, so würde UDO beim ASCII-Format die in der DFÜ gebräuchlichen
+angegeben, würde UDO beim ASCII-Format die in der DFÜ gebräuchlichen
 Zeichen zur Schriftartumschaltung benutzen.
 
 !index (!kw [use_justification])
@@ -99,7 +100,7 @@ unproblematisch.
 Danach möchten wir, dass UDO ein Inhaltsverzeichnis ausgibt. In diesem
 sind alle Kapitel, Abschnitte und Unterabschnitte des Quelltextes
 aufgelistet. Das oben Gesagte gilt auch hier. Wird der Befehl
-(!KW [tableofcontents]) benutzt, so sollte er direkt hinter
+(!KW [tableofcontents]) benutzt, sollte er direkt hinter
 (!KW [maketitle]) oder (bei Verzicht auf die Ausgabe der Titelseite)
 hinter (!KW [begin_document]) angegeben werden.
 

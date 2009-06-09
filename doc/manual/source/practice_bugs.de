@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from working.ui)
 #   fd  Jun 09: file reviewed
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -33,7 +34,7 @@ Die folgenden Fehler und Probleme sind derzeit bekannt:
       Die Ausgabe von MSP- und PCX-Bitmaps mittels em(!TeX)
       ist immer noch ziemlich ungetestet. Erste Tests verliefen bei uns 
       erfolgreich. Falls die Ausgabe bei Ihnen nicht funktionieren
-      sollte, so verwenden Sie das Kommando (!KW [no_images] [[tex!!]]) und sorgen
+      sollte, verwenden Sie das Kommando (!KW [no_images] [[tex!!]]) und sorgen
       Sie mit der raw-Umgebung bitte selber für die nötige Einbindung
       der Bilder.
 

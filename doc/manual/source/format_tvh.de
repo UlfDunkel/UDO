@@ -16,6 +16,7 @@
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: 'Tip' -> 'Tipp' (NDR)
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -42,7 +43,7 @@ Onlinehilfen für eigene Programme keine Bedeutung hat.
 Der mir vorliegende TVHC Version 1.0 enthält einen bösen Fehler, der
 dazu führt, dass die Quotefunktion --- das Aufheben der Funktion der
 geschweiften Klammer durch doppelte Angabe --- nicht funktioniert.
-Falls der TVHC Ihnen die obige Fehlermeldung präsentiert, so ändern Sie
+Falls der TVHC Ihnen die obige Fehlermeldung präsentiert, ändern Sie
 die Funktion scanForCrossRefs() in tvhc.cpp folgendermaßen um:
 
 !begin_description
@@ -81,7 +82,7 @@ Textpuffers fest, den der TVHC als Zwischenspeicher währen der
 Übersetzung benutzt. Der Puffer ist ziemlich klein dimensioniert, falls
 Sie obige Fehlermeldung erhalten.
 
-Legen Sie einen ausreichen großen Puffer (z.B. 32 KB) an, so dass auch
+Legen Sie einen ausreichen großen Puffer (z.B. 32 KB) an, dass auch
 größere Texte problemlos übersetzt werden.
 
 !begin_quote

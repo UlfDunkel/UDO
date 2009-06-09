@@ -18,6 +18,7 @@
 #   fd  Jun 08: text reviewed
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -123,7 +124,7 @@ Mit (!KW [short])~!..
 !include (!EXAMPLES)itemize4.ui
 !end_quote
 
-Falls Sie keinen Unterschied erkennen sollten, so ist es in dem Format,
+Falls Sie keinen Unterschied erkennen sollten, ist es in dem Format,
 in dem Sie gerade dieses Handbuch lesen, nicht möglich, die
 Zwischenräume zu unterdrücken.
 
@@ -251,7 +252,7 @@ mit dem Schalter (!KW [short]) benutzt wird,~!..
 
 !begin_enumerate
 !item Wenn der zu beschreibende Text eine schließende eckige Klammer
-     enthält, so muss man dieser Klammer ein Ausrufezeichen
+     enthält, muss man dieser Klammer ein Ausrufezeichen
      voranstellen, damit UDO erkennt, dass die folgende eckige Klammer
      auch fett dargestellt werden soll.
 
@@ -362,7 +363,7 @@ Bezüglich dieser Listen-Umgebungen gibt es einige Dinge zu beachten:
 
 !begin_enumerate
 !item Wenn der zu beschreibende Text eine schließende eckige Klammer
-enthält, so muss man dieser Klammer ein Ausrufezeichen
+enthält, muss man dieser Klammer ein Ausrufezeichen
 voranstellen, damit UDO erkennt, dass die folgende eckige Klammer
 noch zum ""linken Teil"" des Punktes zählt.
 
@@ -479,7 +480,7 @@ Zeilen, die innerhalb einer flushleft-Umgebung stehen, werden in der
 Ausgabedatei linksbündig ohne Blocksatz dargestellt.
 
 Die flushleft-Umgebung kann innerhalb anderer Umgebungen verwendet
-werden, auch innerhalb einer anderen flushleft-Umgebung, so sinnlos
+werden, auch innerhalb einer anderen flushleft-Umgebung, sinnlos
 das auch sein mag.
 
 Werden andere Umgebungen innerhalb der flushleft-Umgebung verwendet,
@@ -897,12 +898,12 @@ Ausrufezeichen voneinander getrennt werden. Leere Tabellenfelder
 sollten im Quelltext stets mit einer Tilde (!~) gefüllt werden, da
 diese Tabellen sonst in einigen Browsern unschön dargestellt werden.
 
-Möchten Sie eine horizontale Linie in der Tabelle ausgeben, so benutzen
+Möchten Sie eine horizontale Linie in der Tabelle ausgeben, benutzen
 Sie dazu das Kommando (!KW [hline]). Dieser Befehl muss am Anfang einer
 Zeile und alleine in dieser Zeile stehen.
 
 Falls Sie die obigen Erklärungen mehr verwirrt haben sollten, als Ihnen
-den Tabellensatz zu erläutern, so sehen sich einfach mal folgendes
+den Tabellensatz zu erläutern, sehen sich einfach mal folgendes
 kleines Beispiel an:
 
 !begin_quote
@@ -950,7 +951,7 @@ unten links !! unten mitte !! unten rechts
 !index (!kw [use_ansi_tables])
 UDO bietet einen Schalter an, um die Linien der Tabelle nicht mit den
 ASCII-Zeichen ""+"", ""--"" und ""|"" zu erzeugen. Wird im Vorspann der Schalter
-(!KW [use_ansi_tables]) benutzt, so werden die Linien der Tabelle mit
+(!KW [use_ansi_tables]) benutzt, werden die Linien der Tabelle mit
 Hilfe der Grafikzeichen aus dem PC-Zeichensatz erzeugt. Auf die Formate
 WinHelp, RTF, HTML und (!LateX) hat dieser Schalter keinen Einfluss.
 

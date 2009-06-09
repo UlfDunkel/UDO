@@ -19,6 +19,7 @@
 #   fd  Jun 08: etc. -> usw.
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -68,11 +69,11 @@ Die Produktionsversion 6.6.0 wurde noch nicht veröffentlicht. Die in diesem Absc
     (!T)company(!t) und (!T)category(!t) (!nl)
     Diese Erweiterung ist seit Version 6.5.2 implementiert.
 # ..............................................................................
-!item Endet eine UDO-Eingabezeile mit !\<Zeilenumbruch>, so wird die folgende Zeile
+!item Endet eine UDO-Eingabezeile mit !\<Zeilenumbruch>, wird die folgende Zeile
   von UDO als Fortsetzung der vorhergehenden Zeile aufgefasst. Es können damit mehrere "echte"
   Zeilen aus Sicht von UDO zu einer einzigen "logischen" Eingabezeile zusammengefasst werden.
   Diese Fortsetzungszeilen sind an jeder Stelle im UDO-Quelltext zulässig, auch z.B. in Makros
-  und Definitionen. Steht !\ nicht unmittelbar am Ende einer Zeile, so wird es ignoriert
+  und Definitionen. Steht !\ nicht unmittelbar am Ende einer Zeile, wird es ignoriert
   und als normaler Text ausgegeben. (!nl)
   Eine mögliche Anwendung ist, den Inhalt einer Tabellenzeile auf mehrere Zeilen
   in der Eingabedatei aufzuteilen, um die Lesbarkeit des UDO-Quelltextes zu verbessern. (!nl)
@@ -207,7 +208,7 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
    Seit Version~6.5.16 implementiert.
 # ..............................................................................
 !item Neuer Schalter: (!T)!/html_header_links(!t) (!nl)
-    Ist dieser Schalter gesetzt, so werden je nach Vorgabe
+    Ist dieser Schalter gesetzt, werden je nach Vorgabe
    (!T)<link>(!t)-Elemente im HTML-Header erzeugt. (!nl)
    Dieser Feature-Wunsch #0000053 ist seit Version~6.5.2 implementiert.
 # ..............................................................................
@@ -265,7 +266,7 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
       Version 6.5.9 und 6.5.13
 # ..............................................................................
 !item Beim Modern Layout wird die Tabelle in der linken Spalte, die das
-      Menu zeigt, jetzt mit einer ID namens ""UDO_menu""" versehen, so dass
+      Menu zeigt, jetzt mit einer ID namens ""UDO_menu""" versehen, dass
       das Menu beim Drucken mittels CSS ausgeblendet werden kann. (!nl)
       Version 6.5.9
 # ..............................................................................
@@ -372,7 +373,7 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 !item [(!NEWS)]
 !begin_itemize !short
 # ..............................................................................
-!item Wird der Kommandozeilenparameter --map gesetzt, so wird eine Alias- und MAP-
+!item Wird der Kommandozeilenparameter --map gesetzt, wird eine Alias- und MAP-
       Datei erzeugt. (!nl)
       Version 6.5.13
 # ..............................................................................
@@ -962,7 +963,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
           gesichert werden.
         !item Kommandozeilen-Option (!link [(--)force-short] [Kommandozeilenversion]).
         !item Wird beim Schalter (!KW [use_auto_toptocs]) zusätzlich noch
-          (!KW [no_icons]) angegeben, so werden keine Bilder neben den Verweisen
+          (!KW [no_icons]) angegeben, werden keine Bilder neben den Verweisen
           auf die übergeordneten Kapitel ausgegeben.
         !end_itemize
 
@@ -986,13 +987,13 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
           messbar schneller fertig sein. Probiert es mal aus.
         !item UDO kann nun auch Dateien "includen", die Leerzeichen
           im Namen enthalten.
-        !item Wird (!KW [tabwidth] [0]) benutzt, so wandelt UDO keine TABs
+        !item Wird (!KW [tabwidth] [0]) benutzt, wandelt UDO keine TABs
           mehr in verbatim-/sourcecode-Umgebungen in Leerzeichen um.
         !item UDO gibt jetzt eine Fehlermeldung aus, wenn (!KW [maketitle])
           benutzt wird, ohne irgendwelche Informationen für die Titelseite
           bereitgestellt zu haben.
         !item Werden (!KW [heading]), (!KW [subheading]) usw. in einer center-
-          oder flushright-Umgebung benutzt, so werden die Überschriften
+          oder flushright-Umgebung benutzt, werden die Überschriften
           passend eingerückt.
         !item Wird (!KW [html_keywords]) mehrfach in einem Node benutzt, so
           werden die einzelnen Einträge, mit einem Komma getrennt, in die
@@ -1248,7 +1249,7 @@ finden hier als Gedächtnisstütze meine komprimierten Anmerkungen aus
         !item Der Befehl (!kw [win_html_look]) existiert nicht mehr.
         !item Schattierte, helle, umrandete und umrahmte Schrift wird
           nicht mehr angeboten. Falls man diese Schriftarten unbedingt
-          benötigt, so kann man sich die nötigen Befehle leicht mit
+          benötigt, kann man sich die nötigen Befehle leicht mit
           Definitionen selbst programmieren.
         !end_itemize
 
@@ -1347,7 +1348,7 @@ Diese Version wurde am 18. April 1996 veröffentlicht.
           nicht mehr die Finger mit description- und quote-Umgebungen
           verbiegen.
         !item Für em(!TeX) werden nun auch PCX-Bilder unterstützt.
-        !item Die WinHelp-Ausgabe wurde drastisch erweitert, so z.B.
+        !item Die WinHelp-Ausgabe wurde drastisch erweitert, z.B.
           werden Buttons im WinHelp-Fenster angelegt, Labels werden
           direkt angesprungen usw.
         !item Die Atari-Versionen wurden mit den MiNT-Libs PL 46 erstellt.

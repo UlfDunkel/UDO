@@ -18,6 +18,7 @@
 #   fd  Jun 08: ignored charset list removed, including charsets.ui
 #   fd  Jun 08: text reviewed
 #   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -36,7 +37,7 @@
 Doppelte Anführungszeichen werden bei der Umwandlung durch
 typographische Anführungszeichen(!N)z.B. ""Gänsefüßchen"" unten und oben(!n)
 ersetzt, falls diese vom jeweiligen Format unterstützt werden. Werden
-diese nicht unterstützt, so werden die doppelten Anführungszeichen
+diese nicht unterstützt, werden die doppelten Anführungszeichen
 durch einfache ersetzt.
 
 In der folgenden ASCII-Simulation wird gezeigt, wie das Ergebnis in
@@ -114,7 +115,7 @@ Anführungszeichen Einfluss auf die Umsetzung der doppelten Apostrophe.
 !index Tilde
 !index ~
 Möchten Sie zwischen zwei Wörtern ein festes oder mehrere feste
-Leerzeichen angeben, so benutzen Sie dafür die Tilde ((!B)(!T)(!link [!~][Festes Leerzeichen])(!t)(!b)).
+Leerzeichen angeben, benutzen Sie dafür die Tilde ((!B)(!T)(!link [!~][Festes Leerzeichen])(!t)(!b)).
 Feste Leerzeichen eignen sich (auch) dafür, den Zeilenumbruch an der
 jeweiligen Stelle zu unterbinden.
 
@@ -133,7 +134,7 @@ formatspezifische Zeichenfolgen, die den gleichen Zweck erfüllen:
 !item [WinHelp:]    (!T)\!~(!t)
 !end_xlist
 
-Wenn Sie die Tilde selber ausgeben möchten, so müssen Sie die Zeichenfolge (!KW [!~]) benutzen.
+Wenn Sie die Tilde selber ausgeben möchten, müssen Sie die Zeichenfolge (!KW [!~]) benutzen.
 
 (!HINT)
 
@@ -156,9 +157,9 @@ anderen Formaten werden zwei bzw. drei Minuszeichen durch eines
 ersetzt.
 
 Mit (!B)(!T)(---)(!t)(!b) können Sie einen langen, mit (!B)(!T)(--)(!t)(!b) einen kurzen Gedankenstrich
-ausgeben. Wenn Sie drei Minuszeichen ausgeben möchten, so müssen Sie
+ausgeben. Wenn Sie drei Minuszeichen ausgeben möchten, müssen Sie
 im Quelltext (!B)(!T)(!link [((---!)!)] [((---!)!)])(!t)(!b) benutzen. Wenn Sie zwei Minuszeichen ausgeben
-möchten, so müssen Sie im Quelltext (!B)(!T)(!link [((--!)!)] [((--!)!)])(!t)(!b) benutzen.
+möchten, müssen Sie im Quelltext (!B)(!T)(!link [((--!)!)] [((--!)!)])(!t)(!b) benutzen.
 
 !end_node # Gedankenstriche
 
@@ -178,7 +179,7 @@ wohl ein ""ß"" oder ein ""ä"" in der Ausgabedatei auszusehen hat; UDO
 erledigt die Umwandlung für Sie automatisch.
 
 UDO erwartet Quelltexte mit dem jeweiligen Systemzeichensatz. Nutzen
-Sie UDO auf einem DOS-kompatiblen Rechner, so erwartet UDO Quelltexte,
+Sie UDO auf einem DOS-kompatiblen Rechner, erwartet UDO Quelltexte,
 die mit dem DOS-Zeichensatz geschrieben wurden. Die Atari-Version
 erwartet Quelltexte mit Zeichen des Atari-Zeichensatzes usw.
 
@@ -298,7 +299,7 @@ Platzhalter  !! x aus           !! Beispiel
 !end_table
 
 Das deutsche ""(!"s)"" wird durch den Platzhalter (!B)(!T)(!/"s)(!t)(!b) erzeugt. Kennt das
-Zielformat ein Zeichen nicht, so wird das naheliegendste Zeichen
+Zielformat ein Zeichen nicht, wird das naheliegendste Zeichen
 benutzt, z.B. ""a"" statt ""(!^a)"".
 
 Mit (!KW [universal_charset] [[off!!]]) wird die Wandlung dieser Zeichen wieder abgeschaltet.

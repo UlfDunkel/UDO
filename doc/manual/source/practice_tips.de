@@ -17,6 +17,7 @@
 #   fd  Jun 09: multi-language paragraph added
 #   fd  Jun 09: text reviewed
 #   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -29,7 +30,7 @@
 !html_name  tips_split
 
 Falls Sie eine Dokumentation schreiben, die einen Umfang von 30~kB
-oder mehr hat, so sollten Sie sie in kleine Häppchen aufteilen. Diese
+oder mehr hat, sollten Sie sie in kleine Häppchen aufteilen. Diese
 Dateien können dann mit dem (!KW [include]) an passender Stelle eingeladen
 werden.
 

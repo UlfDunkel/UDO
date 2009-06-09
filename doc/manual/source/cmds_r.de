@@ -16,6 +16,7 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -161,7 +162,7 @@ PostScript unterstützt.
 !item [(!DESCRIPTION)]
 Dieser Platzhalter wird durch das Registermarke-Symbol
 ersetzt, sofern es in dem jeweiligen Zeichensatz
-vorhanden ist. Ist es das nicht, so ersetzt UDO den
+vorhanden ist. Ist es das nicht, ersetzt UDO den
 Platzhalter durch ""(!T)registered(!t)"".
 
 !item [(!EXAMPLE)]
@@ -312,7 +313,7 @@ Seitenumbruch vor Tabelle erzeugen (nur RTF).
 !item [(!SYNTAX)] (!T)!/rtf_keep_tables [on|off](!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter benutzt, so gibt UDO alle folgenden Tabellen so
+Wird dieser Schalter benutzt, gibt UDO alle folgenden Tabellen so
 aus, dass z.B. WinWord Tabellen am Seitenende nicht umbricht, sondern
 den Seitenumbruch vor der Tabelle erzeugt. Mit [off] schaltet man
 diesen Effekt für alle folgenden Tabellen wieder aus. Standard ist [off].
@@ -402,7 +403,7 @@ ASCII- statt RTF-Tabellen erzeugen.
 !item [(!SYNTAX)] (!T)!/rtf_no_tables(!t)
 
 !item [(!DESCRIPTION)]
-Benutzt man diesen Schalter im (!PREAMBLE), so werden
+Benutzt man diesen Schalter im (!PREAMBLE), werden
 Tabellen nicht mit RTF-Kommandos erzeugt, sondern wie
 ASCII-Tabellen in einem nichtproportionalen Font
 ausgegeben. Der Schalter dient dazu, RTF-Dateien auch

@@ -16,6 +16,7 @@
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -45,7 +46,7 @@ Mit den Schaltern (!KW [html_merge_nodes]), (!KW [html_merge_subnodes]),
 (!KW [html_merge_subsubnodes]) oder (!KW [html_merge_subsubsubnodes]) können
 Sie die Aufteilung in mehrere Dateien unterbinden.
 
-Wird im Vorspann (!KW [html_merge_nodes]) benutzt, so wird das gesamte
+Wird im Vorspann (!KW [html_merge_nodes]) benutzt, wird das gesamte
 Dokument in einer Datei gesichert. Dies empfiehlt sich nur
 bei kleinen Dokumenten, die kleiner als 16 KB sind.
 
@@ -109,11 +110,11 @@ in der es Kapitel namens ""Software"", ""Kontaktadressen"" und
 !vinclude (!EXAMPLES)html/software.ui
 !end_description
 
-Wird nun nach HTML umgewandelt, so werden die jeweiligen Kopf- und
+Wird nun nach HTML umgewandelt, werden die jeweiligen Kopf- und
 Fußzeilen ausgegeben. Durch die Referenzierung von UDO werden
 automatisch Links auf die anderen Kapitel angelegt.
 
-Wandelt man nicht nach HTML um, so werden leere Definitionen und
+Wandelt man nicht nach HTML um, werden leere Definitionen und
 Makros erzeugt, wodurch keine Kopf- und Fußzeilen ausgegeben
 werden.
 

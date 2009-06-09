@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from running.ui)
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -96,7 +97,7 @@ Hypertext umgewandelt werden, es können (!LaTeX)-Quellen in eine DVI-Datei
 übersetzt werden, oder Sie können sich die erzeugten HTML-Dateien
 gleich mit CAB ansehen. Der Phantasie sind wenig Grenzen gesetzt.
 
-!item [Ziel/ST-Guide:] Wird dieser Menüeintrag aufgerufen, so ruft UDO
+!item [Ziel/ST-Guide:] Wird dieser Menüeintrag aufgerufen, ruft UDO
 den ST-Guide auf und teilt diesem mit, er möge doch bitte den soeben
 erzeugten Hypertext (Name der Zieldatei mit der Endung '.hyp') 
 anzeigen.
@@ -124,7 +125,7 @@ wird hier erklärt.
 
     !begin_itemize
 
-    !item Anpassen: Ist dieser Button selektiert, so passt die GEM-Version
+    !item Anpassen: Ist dieser Button selektiert, passt die GEM-Version
     den Namen der Zieldatei bei einem Wechsel des Zielformats im
     Hauptdialog an. Die Anpassung ist abhängig davon, welche der folgenden
     Buttons Sie selektieren:
@@ -142,7 +143,7 @@ wird hier erklärt.
         verändert.
         !end_itemize
 
-    !item Anzeigen Ist dieser Buttons selektiert, so wird die nach
+    !item Anzeigen Ist dieser Buttons selektiert, wird die nach
     erfolgter Konvertierung der Zieldatei-Viewer automatisch damit
     beauftragt, die Zieldatei anzuzeigen.
 
@@ -152,12 +153,12 @@ wird hier erklärt.
 
     !begin_itemize
 
-    !item Programmende: Ist dieser Button selektiert, so fragt UDO vor
+    !item Programmende: Ist dieser Button selektiert, fragt UDO vor
     dem Programmende noch einmal mittels einer Alertbox nach, ob Sie sich
     denn nun auch wirklich sicher sind, dieses wunderbare Programm zu
     verlassen. (!grin)
 
-    !item Überschreiben: Falls die Zieldatei bereits existiert, so werden
+    !item Überschreiben: Falls die Zieldatei bereits existiert, werden
     Sie noch einmal gefragt, ob die Datei überschrieben werden soll, falls
     dieser Button selektiert ist.
 
@@ -208,7 +209,7 @@ Buttons erreicht werden.
 !image (!IMAGES)gem_syms
 !end_center
 
-Ist ein Eintrag selektiert, so wird er als vordefiniertes Symbol
+Ist ein Eintrag selektiert, wird er als vordefiniertes Symbol
 behandelt, sonst nicht.
 
 !end_node # GEM-Dialog ""Symbole""
@@ -235,7 +236,7 @@ Im oberen Teil wählen Sie das Zielformat aus.
 Im unteren Teil können Sie den Pfad des Programms angeben. Falls dieses
 Programm keine GEM-Applikation ist, sondern ein TOS-Programm, so
 sollten Sie den entsprechenden Button selektieren. Ist das Programm
-eine GEM-Applikation, und dieses Programm versteht VA_START, so sollten
+eine GEM-Applikation, und dieses Programm versteht VA_START, sollten
 Sie ebenfalls den entsprechenden Button selektieren. Die letzten beiden
 Einstellungen sind übrigens nur von Bedeutung, falls UDO das Starten
 der Programme übernimmt. Schließlich können Sie die Parameter angeben,
@@ -250,16 +251,16 @@ das erfahren Sie nach einem Klick auf den Button ""Hinweise"".
 
 !item
 Zunächst schaut UDO, ob ein AV-Server läuft. Ist (!V)AVSERVER(!v) im
-Environment angegeben oder laufen Gemini oder Thing, so werden
+Environment angegeben oder laufen Gemini oder Thing, werden
 diese mittels AV_PROGSTART damit beauftragt, das jeweilige
 Programm zu starten.
 
 !item
-Ist kein AV-Server vorhanden, so start UDO Programme auf eigene Faust.
+Ist kein AV-Server vorhanden, startet UDO Programme auf eigene Faust.
 
     !begin_itemize
 
-    !item Läuft das Programm als Accessory, so werden die Parameter immer
+    !item Läuft das Programm als Accessory, werden die Parameter immer
     per (!V)VA_START(!v) übermittelt.
 
     !item Läuft das Programm bereits und versteht es (!V)VA_START(!v), so

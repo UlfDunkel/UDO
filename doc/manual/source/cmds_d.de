@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -101,7 +102,7 @@ man im Kapitel ""(!nolink [Definitionen])"".
 !item [(!DESCRIPTION)]
 Dieser Platzhalter wird durch das Grad-Symbol
 ersetzt, sofern es in dem jeweiligen Zeichensatz
-vorhanden ist. Ist es das nicht, so ersetzt UDO den
+vorhanden ist. Ist es das nicht, ersetzt UDO den
 Platzhalter durch ""(!T)Grad(!t)"".
 
 !item [(!EXAMPLE)]
@@ -256,7 +257,7 @@ von HTML ausgegeben.
 ""<text>"" wird auf der (!nolink [Titelseite]) unterhalb des Namens
 des Autors ausgegeben. ""<text>"" findet sonst keine
 weitere Verwendung durch UDO. (!KW [docinfo] [[address!!]]) kann bis zu 15 mal
-angegeben werden, so dass man hier z.B. auch mehrere E-Mail-Adressen auf der
+angegeben werden, dass man hier z.B. auch mehrere E-Mail-Adressen auf der
 Titelseite angeben kann.
 
 !item [company]
@@ -271,14 +272,14 @@ Wenn company benutzt wird, wird auf der Titelseite unter Autor
 Mittels (!KW [docinfo] [[stgdatabase!!]]) kann man angeben, was UDO
 für die @database-Zeile beim ST-Guide-Format ausgeben soll.
 Wird (!KW [docinfo] [[stgdatabase!!]]) nicht
-verwendet, so erzeugt UDO wie gehabt eine Zeile, gebildet aus
+verwendet, erzeugt UDO wie gehabt eine Zeile, gebildet aus
 (!KW [docinfo] [[title!!]]) und (!KW [docinfo] [[program!]]).
 
 !item [drcstatusline]
 Mittels (!KW [docinfo] [[drcstatusline!!]]) kann man den Text setzen,
 den UDO für die Statuszeile verwendet. Fehlt diese Angabe, so
 erzeugt UDO eine Zeile der Art ""(!nolink [Copyright]) (!copyright) by <author>"". Wurde
-(!KW [docinfo] [[author!!]]) nicht angegeben, so erzeugt UDO eine Zeile
+(!KW [docinfo] [[author!!]]) nicht angegeben, erzeugt UDO eine Zeile
 ""Made with UDO"".
 
 !item [keywords]
@@ -309,7 +310,7 @@ Wird für HTML Apple Help benötig. Damit wird das Icon angegeben, welches der App
 anzeigen soll.
 
 !item [webmastername|webmasteremail|webmasterurl]
-Werden Webmaster-Daten angegeben, so erzeugt
+Werden Webmaster-Daten angegeben, erzeugt
 UDO standardmäßig am Ende einer jeden Seite folgendes:
 
 !begin_quote

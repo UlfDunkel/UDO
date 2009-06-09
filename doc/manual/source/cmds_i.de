@@ -20,6 +20,7 @@
 #   fd  Jun 09: !iflang and !ifnlang now reference to language.<ISO>
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -176,9 +177,9 @@ Abfrage des Ausgabeformates.
 !item [(!DESCRIPTION)]
 Dieses Kommando fragt das aktuelle Ausgabeformat ab.
 Stimmt ""<kürzel>"" mit dem Kürzel des Ausgabeformates
-überein, so werden alle Zeilen umgewandelt, die
+überein, werden alle Zeilen umgewandelt, die
 zwischen (!KW [ifdest]) und (!KW [else]) bzw. (!KW [endif]) angegeben
-werden. Stimmt das Kürzel nicht überein, so werden
+werden. Stimmt das Kürzel nicht überein, werden
 nur die Zeilen zwischen (!KW [else]) und (!KW [endif]) ausgewertet,
 sofern (!KW [else]) benutzt wird. Das Beispiel zeigt, wie
 man testen kann, ob die Quelldatei ins ST-Guide- oder
@@ -250,7 +251,7 @@ Dieses Kommando fragt das aktuelle Ausgabeformat ab. Stimmt
 ""<kürzel>"" (!I)nicht(!i) mit dem Kürzel des Ausgabeformates überein,
 so werden alle Zeilen umgewandelt, die zwischen (!KW [ifndest]) und
 (!KW [else]) bzw. (!KW [endif]) angegeben werden. Stimmt das Kürzel
-überein, so werden nur die Zeilen zwischen (!KW [else]) und
+überein, werden nur die Zeilen zwischen (!KW [else]) und
 (!KW [endif]) ausgewertet, sofern (!KW [else]) benutzt wird.
 
 !item [(!EXAMPLE)]
@@ -283,7 +284,7 @@ Abfrage der Ausgabesprache. Hierbei gelten folgende Zeichenketten:
 Dieses Kommando fragt die aktuelle Ausgabesprache ab.
 Wird ein deutscher Text erzeugt und wird als
 ""<sprache>"" (!I)nicht(!i) die Zeichenkette ""german""
-verwendet, so werden alle Zeilen ausgewertet, die bis
+verwendet, werden alle Zeilen ausgewertet, die bis
 (!KW [else]) bzw. (!KW [endif]) angegeben werden. Andernfalls
 werden alle Zeilen ausgewertet, die zwischen (!KW [else])
 und (!KW [endif]) angegeben werden.
@@ -318,7 +319,7 @@ Betriebssystem abfragen. Folgende Kürzel für unterstützte Betriebssysteme stehen
 !item [(!DESCRIPTION)]
 Dieses Kommando testet das aktuelle Betriebssystem,
 unter dem UDO läuft. Enthält ""<systeme>"" (!I)keines(!i) der
-Kürzel der Betriebssysteme, so wandelt UDO alle
+Kürzel der Betriebssysteme, wandelt UDO alle
 Zeilen ab dem folgenden (!KW [else]) um, falls (!KW [else]) benutzt
 wird. Das Beispiel zeigt, wie man abfragen kann, ob
 UDO (!I)nicht(!i) auf einem Apple Macintosh läuft.
@@ -352,7 +353,7 @@ Symbol abfragen.
 Mit diesem Abfragebefehl können Sie testen, ob ein
 Symbol für die Umwandlung (!I)weder(!i) in der Kommandozeile
 mit der Option (!V)-D(!v) noch mit (!KW [set]) gesetzt wurde. Wurde
-""<text>"" nicht gesetzt, so werden alle folgenden Zeilen
+""<text>"" nicht gesetzt, werden alle folgenden Zeilen
 umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht.
 Andernfalls werden nur die Zeilen umgewandelt, die
 (!KW [else]) folgen, sofern die Abfrage einen Sonst-Zweig
@@ -389,7 +390,7 @@ Betriebssystem abfragen. Folgende Kürzel für unterstützte Betriebssysteme stehen
 !item [(!DESCRIPTION)]
 Dieses Kommando testet das aktuelle Betriebssystem,
 auf dem UDO läuft. Enthält ""<systeme>"" eines der
-Kürzel der Betriebssysteme, so wandelt UDO alle
+Kürzel der Betriebssysteme, wandelt UDO alle
 Zeilen zwischen (!KW [ifos]) und (!KW [endif]) bzw. (!KW [else]) um. Das
 Beispiel zeigt, wie man testen kann, ob UDO unter Linux läuft.
 
@@ -420,7 +421,7 @@ Symbol abfragen.
 
 !item [(!DESCRIPTION)]
 Mit diesem Abfragebefehl können Sie testen, ob ein Symbol für die Umwandlung in der Kommandozeile mit
-der Option (!V)-D(!v) gesetzt wurde. Wurde ""<text>"" gesetzt, so werden alle folgenden Zeilen umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht. Andernfalls werden nur die Zeilen umgewandelt, die (!KW [else]) folgen, sofern die Abfrage einen else-Zweig besitzt. Das Beispiel zeigt, wie man abfragt, ob in der Kommandozeile (!V)-D deutsch(!v) benutzt wurde.
+der Option (!V)-D(!v) gesetzt wurde. Wurde ""<text>"" gesetzt, werden alle folgenden Zeilen umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht. Andernfalls werden nur die Zeilen umgewandelt, die (!KW [else]) folgen, sofern die Abfrage einen else-Zweig besitzt. Das Beispiel zeigt, wie man abfragt, ob in der Kommandozeile (!V)-D deutsch(!v) benutzt wurde.
 
 !item [(!EXAMPLE)]
 (!T)!/ifset [deutsch](!t)
@@ -621,7 +622,7 @@ In dem zugehörigen Subsubnode kein ""subsubsubtoc"" ausgeben.
 
 !item [(!DESCRIPTION)]
 Wenn innerhalb eines Subsubnodes dieser Schalter
-gesetzt wird, so wird kein (automatisches) Inhaltsverzeichnis ausgegeben, in welchem die Paragraphen
+gesetzt wird, wird kein (automatisches) Inhaltsverzeichnis ausgegeben, in welchem die Paragraphen
 des Subsubnodes aufgelistet werden.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
@@ -648,7 +649,7 @@ In dem zugehörigen Subnode kein ""subsubtoc"" ausgeben.
 
 !item [(!DESCRIPTION)]
 Wenn innerhalb eines Subnodes dieser Schalter gesetzt
-wird, so wird kein (automatisches) Unterinhaltsverzeichnis ausgegeben.
+wird, wird kein (automatisches) Unterinhaltsverzeichnis ausgegeben.
 
 !item [(!SEEALSO)]
 (!KW [use_auto_subsubtocs]), (!KW [subsubtoc])
@@ -672,7 +673,7 @@ In dem zugehörigen Node kein ""subtoc"" ausgeben.
 
 !item [(!DESCRIPTION)]
 Wenn innerhalb eines Nodes dieser Schalter gesetzt
-wird, so wird kein (automatisches) Unterinhaltsverzeichnis ausgegeben.
+wird, wird kein (automatisches) Unterinhaltsverzeichnis ausgegeben.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
@@ -835,7 +836,7 @@ sollte nicht übergeben werden, da UDO dies selbst
 erledigt. UDO benutzt ""(!V).img(!v)"" beim ST-Guide, CS(!TeX) und
 Lindner-(!TeX), ""(!V).gif(!v)"" für HTML, ""(!V).msp(!v)"" oder ""(!V).pcx(!v)"" für
 em(!TeX) und ""(!V).bmp(!v)"" für WinHelp, RTF und IPF.
-Wird ""<titel>"" angegeben, so wird der Text als Bildunterschrift angegeben.
+Wird ""<titel>"" angegeben, wird der Text als Bildunterschrift angegeben.
 
 Die Ausrichtung des Bildes richtet sich nach der
 eventuell vorhandenen äußeren Umgebung. Zentrierte
@@ -904,7 +905,7 @@ Bild innerhalb einer solchen Umgebung ausgegeben, wird es genauso
 ausgerichtet wie der Text innerhalb der Umgebung, sprich: ein Bild wird
 in einer center-Umgebung zentriert ausgegeben, unabhängig davon, was
 man bei (!KW [image_alignment]) gesetzt hat. Will man ein Bild in einer
-center-Umgebung rechtsbündig ausgeben, so muss man in dem Fall noch
+center-Umgebung rechtsbündig ausgeben, muss man in dem Fall noch
 eine flushright-Umgebung um den (!KW [image])-Befehl setzen.
 
 !item [(!EXAMPLE)]
@@ -935,7 +936,7 @@ Abbildungszähler setzen.
 !item [(!DESCRIPTION)]
 Mit diesem Schalter können Sie die Nummer festlegen,
 die bei der ersten Abbildung ausgegeben werden soll.
-Würde das Beispiel verwendet, so stünde unterhalb der
+Würde das Beispiel verwendet, stünde unterhalb der
 ersten Abbildung folgendes: ""Abbildung 5: !.."".
 
 !item [(!EXAMPLE)]

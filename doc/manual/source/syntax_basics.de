@@ -19,6 +19,7 @@
 #   fd  Jun 08: code UTF-8 added
 #   fd  Jun 08: etc. -> usw.
 #   fd  Jun 08: text reviewed
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -128,7 +129,7 @@ Platzhalter können an jeder beliebigen Stelle einer Zeile stehen.
 
 !index Kommentar
 Es besteht die Möglichkeit, in einer Quelldatei Kommentare einzufügen.
-Ist das erste Zeichen einer Zeile ein ""#"", so fasst UDO diese Zeile als
+Ist das erste Zeichen einer Zeile ein ""#"", fasst UDO diese Zeile als
 Kommentar auf und wertet diese Zeile nicht aus.
 
 Das ""#"" darf nicht eingerückt sein, muss also das erste Zeichen einer
