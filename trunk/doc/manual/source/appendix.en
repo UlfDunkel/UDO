@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: introduced (extracted from appendix.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #
 ################################################################################
 
@@ -25,31 +26,31 @@ You can use source files that don't exceed these maximum values:
 
 !begin_xlist [Sum of chapters, labels and aliases:] !short
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Macros:]                              (!MAXMACRO)
+!item [Macros:]                              (!red)(!MAXMACRO)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Defines:]                             (!MAXDEFINE)
+!item [Defines:]                             (!red)(!MAXDEFINE)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Hyphenation patterns:]                (!MAXHYPHEN)
+!item [Hyphenation patterns:]                (!red)(!MAXHYPHEN)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Sum of chapters, labels and aliases:] 32768
+!item [Sum of chapters, labels and aliases:] (!red)32768(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Characters per line:]                 (!LINELEN)
+!item [Characters per line:]                 (!red)(!LINELEN)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Characters per word:]                 (!MAX_TOKEN_LEN)
+!item [Characters per word:]                 (!red)(!MAX_TOKEN_LEN)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Syllables per word:]                  (!MAXSILBEN)
+!item [Syllables per word:]                  (!red)(!MAXSILBEN)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Words per paragraph:]                 (!MAX_TOKENS)
+!item [Words per paragraph:]                 (!red)(!MAX_TOKENS)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Links per paragraph:]                 (!MAXLINK)
+!item [Links per paragraph:]                 (!red)(!MAXLINK)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Rows per table:]                      (!MAXLINETABLE)
+!item [Rows per table:]                      (!red)(!MAXLINETABLE)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Columns per table:]                   (!MAXCOLUMSTABLE)
+!item [Columns per table:]                   (!red)(!MAXCOLUMSTABLE)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Chars per table cell:]                1000
+!item [Chars per table cell:]                (!red)1000(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Depth of environments:]               6
+!item [Depth of environments:]               (!red)6(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !end_xlist
 
