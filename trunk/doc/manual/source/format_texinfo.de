@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'file' -> 'Datei'
 #
 ################################################################################
 
@@ -41,7 +42,7 @@ UDO entfernt daher diese Sonderzeichen. Falls ein Kapitelname nur
 Sonderzeichen enthält, so werden die Zeichen des Namens in kodierter
 Form ausgegeben.
 
-Formatiert man das Texinfo-File mit (!TeX), so tauchen diese
+Formatiert man die Texinfo-Datei mit (!TeX), so tauchen diese
 Sonderzeichen in den Kapitelüberschiften selbstverständlich auf.
 
 !item [Warum werden Umgebungen nicht ""komprimierte"" dargestellt?]

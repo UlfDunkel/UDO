@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from working.ui)
 #   fd  Jun 09: file reviewed
+#   fd  Jun 09: 'file' -> 'Datei'
 #
 ################################################################################
 
@@ -57,8 +58,8 @@ erzeugten Dateien durch die formatzugehörigen Programmen (siehe
 Klammerinhalt) weiterbearbeiten:
 
 !begin_xlist [.www]
-!item [(!CODE [.err])] Logfile des WinHelp-Compilers ((!T)HC.EXE(!t))
-!item [(!CODE [.h])]   C-Header-File für Turbo-Vision ((!T)TVHC.EXE(!t))
+!item [(!CODE [.err])] Protokolldatei des WinHelp-Compilers ((!T)HC.EXE(!t))
+!item [(!CODE [.h])]   C-Header-Datei für Turbo-Vision ((!T)TVHC.EXE(!t))
 !item [(!CODE [.hlp])] WinHelp-Datei ((!T)HC.EXE(!t)), Turbo-Vision-Help-Datei ((!T)TVHC.EXE(!t)), Pure-C-Help-Datei ((!T)HC.PRG(!t))
 !item [(!CODE [.hyp])] ST-Guide-Hypertext ((!T)HCP.TTP(!t))
 !item [(!CODE [.ref])] ST-Guide-Referenzdatei ((!T)HCP.TTP(!t))

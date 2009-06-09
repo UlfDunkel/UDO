@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 09: 'file' -> 'Datei'
 #
 ################################################################################
 
@@ -74,7 +75,7 @@ Die erste binomische Formel lautet: (!ab2)
 !item [Wie werden Sonderzeichen in Indizes angepasst?]
 
 Sonderzeichen in Indizes werden speziell für makeindex angepasst.
-Es sind also keine zusätzlichen Anpassungen des von UDO erzeugten (!LaTeX)-Files nötig.
+Es sind also keine zusätzlichen Anpassungen der von UDO erzeugten (!LaTeX)-Datei nötig.
 
 !item [Geschweifte Klammern im Indexeintrag erzeugt (!LaTeX)-Fehler!?]
 

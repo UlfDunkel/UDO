@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 09: 'file' -> 'Datei'
 #
 ################################################################################
 
@@ -61,7 +62,7 @@ Verweis auf externe Daten.
 Dient zum Erzeugen von Verweisen auf externe
 Dokumente. Im Unterschied zu (!KKW [link]) werden
 Sonderzeichen innerhalb ""<link>"" nicht umgewandelt. Im
-Beispiel würde bei einem HTML-File ein Querverweis
+Beispiel würde bei einer HTML-Datei ein Querverweis
 auf die Seite der Deutschen Telekom erzeugt. ""<link>""
 kann auch leer sein, dann wird für ""<link>"" der Inhalt
 von ""<text>"" ausgegeben.

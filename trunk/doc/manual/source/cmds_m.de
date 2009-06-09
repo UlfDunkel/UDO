@@ -16,6 +16,7 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'file' -> 'Datei'
 #
 ################################################################################
 
@@ -216,8 +217,8 @@ so wird auch kein res=!.. ausgegeben.
 
 !item [WinHelp:]
 Mit (!KW [mapping] [<wert>]) kann ein numerischer Wert angegeben
-werden, den UDO dann im Map-File für einen Node verwendet. Wird
-kein (!KW [mapping]) verwendet, so sichert UDO einen Eintrag im Map-File
+werden, den UDO dann in der Map-Datei für einen Node verwendet. Wird
+kein (!KW [mapping]) verwendet, so sichert UDO einen Eintrag in der  Map-Datei
 mit seiner internen Nummer, aber nur dann, wenn man eine
 (!KW [win_helpid]) gesetzt hat. Sprich: Ein Eintrag wird nur dann
 erzeugt, wenn man bei einem Node (!KW [mapping]) oder (!KW [win_helpid]) oder beides verwendet.

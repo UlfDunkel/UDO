@@ -17,6 +17,7 @@
 #   fd  Jun 06: begascde.ui integrated in text
 #   fd  Jun 08: quotation changed
 #   fd  Jun 08: etc. -> usw.
+#   fd  Jun 09: 'file' -> 'Datei'
 #
 ################################################################################
 
@@ -1004,15 +1005,14 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
         !item Auf der ersten HTML-Seite wird nur noch dann ein Home-
            Symbol erzeugt, wenn (!KW [html_backpage]) benutzt wird, welches dann
            auf diese Seite zeigt.
-        !item Aus ""Hints"" wurden im Logfile ""Notes"".
-        !item UDO gibt seine Versionsnummer nun zusätzlich im
-           Logfile aus.
+        !item Aus ""Hints"" wurden in der Protokolldatei ""Notes"".
+        !item UDO gibt seine Versionsnummer nun zusätzlich in der Protokolldatei aus.
         !item Bei Verwendung von (!KKW [img]) erzeugt UDO nun auch
            eine Fehlermeldung, falls es die Ausmasse des Bildes nicht
            ermitteln konnte.
         !item Die MAP-Datei für WinHelp hat nun die Endung "".hpc"".
         !item Konnte UDO ein (!KW [chaptericon]) nicht finden, wird dies
-           nun im Logfile bemängelt.
+           nun in der Protokolldatei bemängelt.
         !item Beim Einsatz von (!KW [no_images]) werden beim HTML-Format wie bisher keine
            Browse-Buttons ausgegeben, allerdings wird nicht mehr das
            Linkziel ausgegeben, sondern ASCII-Pfeile, welche zudem mit
@@ -1319,7 +1319,7 @@ Diese Version wurde am 18. April 1996 veröffentlicht.
           WinHelp und HTML
         !item (!KW [use_style_book])
         !item (!kw [win_html_look])
-          WinHelp-Files im HTML-Look mit grauem Hintergrund ausgeben
+          WinHelp-Dateien im HTML-Look mit grauem Hintergrund ausgeben
         !end_itemize
 
 !item [Änderungen:]

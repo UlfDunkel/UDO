@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 09: 'file' -> 'Datei'
 #
 ################################################################################
 
@@ -52,11 +53,11 @@ Kapitels in der Datei angegeben werden, in dem sich auch das
 Kapitel selbst befindet.
 
 Der Schalter (!KW [html_merge_subsubnodes]) sorgt dafür, dass alle
-Unterabschnitte im gleichen File wie der übergeordnete Abschnitt
+Unterabschnitte in der gleichen Datei wie der übergeordnete Abschnitt
 untergebracht werden.
 
 Der Schalter (!KW [html_merge_subsubsubnodes]) schließlich sorgt dafür,
-dass alle Paragraphen im gleichen File wie der übergeordnete
+dass alle Paragraphen in der gleichen Datei wie der übergeordnete
 Unterabschnitt untergebracht werden.
 
 !index Dateinamen
