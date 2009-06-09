@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: using more macros for text style formatting
 #
 ################################################################################
 
@@ -874,7 +875,7 @@ lower left cell !! lower cell !! lower right cell
 UDO offers you a switch called (!KW [use_ansi_tables]). If you use this
 switch inside the preamble the lines of the table are printed by using some
 characters of the IBM
-PC graphic character set instead of (!T)+(!t), (!T)-(!t) and (!T)|(!t) when
+PC graphic character set instead of (!code [+]), (!code [-]) and (!code [|]) when
 converting into an ASCII like format like ASCII or ST-Guide. This switch has
 no effect if you convert to Windows Help, RTF, HTML or (!LaTeX).
 
@@ -897,7 +898,7 @@ lines where you want to. If you use (!KW [hline]) in the
 don't use (!KW [hline]) there will be no line at all in this table.
 
 !item	Converting to ST-Guide the lines of a table are generated with
-(!T)@line(!t). It's not possible to use more than one vertical line between
+(!code [@line]). It's not possible to use more than one vertical line between
 columns or more than one horizontal line.
 
 !item	Inside the cells you can use all other UDO commands like text

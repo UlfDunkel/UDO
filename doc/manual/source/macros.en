@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: introduced (extracted from manual.u)
 #   fd  Jun 05: FILESPACEQUOTE
+#   fd  Jun 09: using more macros for text style formatting
 #
 ################################################################################
 

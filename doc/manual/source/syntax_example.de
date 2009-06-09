@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 08: text reviewed
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: using more macros for text style formatting
 #
 ################################################################################
 
@@ -55,7 +56,7 @@ beides zusammengenommen einen Sinn ergeben. Hier würde bei einigen
 Formaten in den Kopfzeilen ""Ein UDO-Bespiel-Quelltext"" ausgegeben. Bei
 (!KW [docinfo] [[date!!]]) wird der Platzhalter (!KKW [today]) durch das aktuelle
 Systemdatum expandiert. Sie können natürlich auch manuell für die
-Angabe des Datums sorgen (z.B. (!B)(!T)!/docinfo [date] 31. Dezember 1999(!t)(!b)).
+Angabe des Datums sorgen (z.B. mit ""(!KW [docinfo] [[date!!]]) (!code [31.~Dezember~1999])"").
 
 !index (!kw [subsubtoc])
 !index (!kw [subtoc])

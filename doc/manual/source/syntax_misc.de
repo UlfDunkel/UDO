@@ -22,6 +22,7 @@
 #   fd  Jun 09: 'Tip' -> 'Tipp' (NDR)
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 09: using more macros for text style formatting
 #
 ################################################################################
 
@@ -170,7 +171,7 @@ Beispiel wird der Programmname in einen Disclaimer eingebaut, der per
 !index Parameter !! Makros
 
 Seit UDO Release~6 können Makros auch Parameter übergeben werden. Bei
-der Erzeugung eines Makros geben Sie dazu mit ""(!B)(!T)(!/1)(!t)(!b)"", ""(!B)(!T)(!/2)(!t)(!b)"" bis ""(!B)(!T)(!/9)(!t)(!b)""
+der Erzeugung eines Makros geben Sie dazu mit ""(!code [(!/1)])"", ""(!code [(!/2)])"" bis ""(!code [(!/9)])""
 die Position der Parameter an. Um den Makros im Text die Parameter zu
 übergeben, setzen Sie diese in eckige Klammern.
 
@@ -183,7 +184,7 @@ nur einem Parameter aufgerufen wird:
 !end_quote
 
 Die Worte ""fett, kursiv und unterstrichen"" werden bei der Ausgabe dann an die Stelle
-von (!B)(!T)(!/1)(!t)(!b) gesetzt.
+von (!code [(!/1)]) gesetzt.
 
 !smallskip
 
@@ -262,7 +263,7 @@ einzubauen.
 
 !index (!kw [define])
 Die Syntax für eine Definition lautet (!KW [define] [<wort> <text>]). Im
-Gegensatz zu den Makros wird (!B)(!T)<text>(!t)(!b) nicht speziell angepasst, d.h., es
+Gegensatz zu den Makros wird (!code [<text>])) nicht speziell angepasst, d.h., es
 werden keine Umlaute und andere Sonderzeichen angepasst.
 
 Im folgenden Beispiel benutzen wir eine Definition, um nur im
@@ -386,7 +387,7 @@ gesetzt ist, soll die Zieldatei alle Kapitel enthalten:
 
 Starten Sie UDO nun ""normal"", wird eine Zieldatei erstellt, die nur das
 dritte Kapitel enthält. Starten Sie UDO hingegen mit der
-Kommandozeilenoption ""(!B)(!V)-D~AlleKapitel(!v)(!b)"", werden alle Kapitel umgewandelt.
+Kommandozeilenoption ""(!code [-D~AlleKapitel])"", werden alle Kapitel umgewandelt.
 
 Das Spielchen kann man natürlich noch etwas ausbauen. Durch Verwendung
 weiterer Symbole kann man gezielt nur einzelne Kapitel oder alle
@@ -407,7 +408,7 @@ Symbole auch wieder löschen. Dazu bedient man sich des Befehls (!KW [unset]).
 
 Wollen Sie in obigem Beispiel partout verhindern, dass alle Kapitel in
 die Zieldatei eingebunden werden, können Sie zuvor das Symbol
-(!B)(!T)AlleKapitel(!t)(!b) löschen, sofern es gesetzt wurde. Dies funktioniert so:
+(!code [AlleKapitel]) löschen, sofern es gesetzt wurde. Dies funktioniert so:
 
 !begin_quote
 !vinclude (!EXAMPLES)symbol3.ui
@@ -648,8 +649,8 @@ Ausgabe der Zieldatei verwendet wird. Hierbei gelten folgende Zeichenketten:
 !include language.de
 
 Zusätzlich zu den hier genannten Zeichenketten können jeweils auch
-""(!CODE [all])"" und ""(!CODE [none])"" verwendet werden. Bei ""(!CODE [all])"" liefert eine Abfrage
-immer ein wahres Ergebnis, bei ""(!CODE [none])"" immer ein falsches.
+""(!code [all])"" und ""(!code [none])"" verwendet werden. Bei ""(!code [all])"" liefert eine Abfrage
+immer ein wahres Ergebnis, bei ""(!code [none])"" immer ein falsches.
 
 Bei kleineren Texten können Sie so z.B. gleich alle Übersetzungen in
 einem Quelltext unterbringen:
@@ -702,10 +703,10 @@ dem Befehl (!KW [ifnset]), ob Symbole nicht gesetzt sind.
 !index -D
 !index -U
 Wie Sie bereits wissen, können Sie Symbole mit der Kommandozeilenoption
-(!CODE [-D]) und mit dem Befehl (!KW [set]) setzen und mit dem Befehl
+(!code [-D]) und mit dem Befehl (!KW [set]) setzen und mit dem Befehl
 (!KW [unset]) wieder löschen.
 
-Im folgenden Beispiel wird abgefragt, ob das Symbol (!CODE [Farbbilder]) gesetzt
+Im folgenden Beispiel wird abgefragt, ob das Symbol (!code [Farbbilder]) gesetzt
 ist und entsprechend ein passendes Bild eingebunden:
 
 !begin_quote
@@ -718,7 +719,7 @@ ist und entsprechend ein passendes Bild eingebunden:
 !end_verbatim
 !end_quote
 
-Wenn Sie nun UDO mit der Option (!CODE [-D Farbbilder]) aufrufen bzw. vor der
+Wenn Sie nun UDO mit der Option (!code [-D Farbbilder]) aufrufen bzw. vor der
 obigen Abfrage das Kommando (!KW [set] [Farbbilder]) in den Quelltext einbauen,
 so bindet UDO ein Farbbild ein, andernfalls ein monochromes Bild.
 
@@ -740,7 +741,7 @@ UDO läuft. Hierbei gelten folgende Zeichenketten:
 !include os.de
 
 Auch hier gilt, dass zusätzlich zu den genannten Zeichenketten auch
-""(!CODE [all])"" und ""(!CODE [none])"" verwendet werden können.
+""(!code [all])"" und ""(!code [none])"" verwendet werden können.
 
 !index (!kw [ifnos])
 Wiederum existiert ein verwandter Befehl namens (!KW [ifnos]), der abfragt,

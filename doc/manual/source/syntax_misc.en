@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 09: using more macros for text style formatting
 #
 ################################################################################
 

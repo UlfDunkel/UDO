@@ -18,6 +18,7 @@
 #   fd  Jun 09: text reviewed
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: using more macros for text style formatting
 #
 ################################################################################
 
@@ -43,7 +44,7 @@ Ein weiterer Vorteil des Aufteilens ist, dass Sie bestimmte Kapitel
 schnell wiederfinden können, sofern Sie den Dateien sinnvolle Namen
 geben.
 
-Denken Sie auch an mehrsprachige Dokumentationen. Wenn Sie -- wie wir es tun -- z.B. alle deutschen Texte in Dateien mit der Endung (!CODE [.de]) und alle englischen Texte in (!CODE [.en])-Dateien pflegen, behalten Sie noch besseren Überblick über die einzelnen Sprachen und können z.B. aus den (!CODE [.en])-Dateien rasch Kopien für z.B. Französisch erstellen, die Datei-Suffixe der Kopien in (!CODE [.fr]) ändern und dem französischen Übersetzer nur diese Dateien geben.
+Denken Sie auch an mehrsprachige Dokumentationen. Wenn Sie -- wie wir es tun -- z.B. alle deutschen Texte in Dateien mit der Endung (!code [.de]) und alle englischen Texte in (!code [.en])-Dateien pflegen, behalten Sie noch besseren Überblick über die einzelnen Sprachen und können z.B. aus den (!code [.en])-Dateien rasch Kopien für z.B. Französisch erstellen, die Datei-Suffixe der Kopien in (!code [.fr]) ändern und dem französischen Übersetzer nur diese Dateien geben.
 
 Außerdem können Sie leicht und schnell nur Teile der Dokumentation auf
 syntaktische Korrektheit testen. Nehmen wir an, wir haben einen
