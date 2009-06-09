@@ -16,6 +16,7 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: !ifos and !ifnos now reference to os.ui resp. os.<ISO>
 #
 ################################################################################
 
@@ -326,9 +327,10 @@ convert to French.
 # = = = = =
 
 !begin_node (!kw [ifnos])
-!html_name  cmd_ifnox
+!html_name  cmd_ifnos
 
-Query the operating system.
+Query the operating system. The following codes are currently available for supported operating systems:
+!include os.en
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -395,7 +397,9 @@ example shows how to test if the symbol ""british"" isn't set.
 !begin_node (!kw [ifos])
 !html_name  cmd_ifos
 
-Query operating system.
+Query operating system. The following codes are currently available for supported operating systems:
+
+!include os.ui
 
 !begin_xlist [(!TYPEPOSITION)]
 
