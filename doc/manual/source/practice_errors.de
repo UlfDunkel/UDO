@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from working.ui)
 #   fd  Jun 08: quotation changed
 #   fd  Jun 08: etc. -> usw.
+#   fd  Jun 09: file reviewed
 #
 ################################################################################
 
@@ -24,12 +25,7 @@
 !begin_node Fehlermeldungen
 !html_name  errors
 
-# Fehlermeldungen
-# @(#) Fehlermeldungen, Dirk Hagedorn, 26.09.1995
-# @(#) Meldungen werden nun mit Phoenix verwaltet, 22.08.1996
-
-UDO protokolliert in einer Datei, welche die Endung (!V).ul?(!v) besitzt,
-Fehler, die bei der Umwandlung aufgetreten sind. Die Fehlermeldungen,
+UDO protokolliert in einer Datei mit dem Suffix (!CODE [.ul?]) alle Fehler, die bei der Umwandlung aufgetreten sind. Die Fehlermeldungen,
 Warnungen und Hinweise haben dabei immer folgenden Aufbau:
 
 !begin_quote
@@ -40,7 +36,7 @@ Warning: <datei> <zeilennummer>: <text>
 !end_verbatim
 !end_quote
 
-Zur Beseitigung dieser Fehlermeldung schauen Sie sich in der
+Zum Beheben dieser Fehlermeldung(en) schauen Sie sich bitte in der
 angegebenen Datei die betroffene Zeile an und versuchen Sie, den
 angegeben Fehler zu lokalisieren und zu korrigieren. Beginnen Sie dabei
 mit der Korrektur des ersten Fehlers jeder angegebenen Datei und
@@ -56,7 +52,7 @@ Ihrem Quelltext auf, darf aber nur einmalig benutzt werden.
 !item [""!.."" expected]
 UDO hat den angegebenen Befehl erwartet. Überprüfen Sie, ob jede
 geöffnete Umgebung mit dem richtigen Befehl beendet wurde oder ob
-vielleicht ein (!I)!/begin_*](!i) fehlt.
+vielleicht ein (!CODE [!begin_])!.. fehlt.
 
 !item [""!.."" followed by ""!..""]
 Eine Umgebung wurde mit einem falschen Befehl beendet. Entweder
@@ -73,8 +69,9 @@ Das angegebene Kommando ist im Hauptteil nicht erlaubt. Sorgen
 Sie dafür, dass es vor (!KW [begin_document]) angegeben wird oder löschen
 Sie das Kommando.
 
-!item [""!.."" maybe not available in (!LaTex)]
-Das angegebene Zeichen ist sehr wahrscheinlich nicht von (!LaTex)
+# (!LaTex) doesn't work in Item
+!item [""!.."" maybe not available in LaTex]
+Das angegebene Zeichen ist sehr wahrscheinlich nicht von LaTex
 darstellbar. Verzichten Sie besser auf das angegebene Zeichen.
 
 !item [""!.."" not active]
@@ -110,7 +107,6 @@ usw. eine Abfrage begonnen haben.
 !item [!/endif without !/if]
 In Ihrem Quelltext steht (!KW [endif]), ohne dass Sie mit (!KW [if]), (!KW [ifdest])
 usw. eine Abfrage begonnen haben.
-# ergänzt 04.01.2004 - Ulrich Kretschmer (vgl. Bug Nr. 43)
 Diese Fehlermeldung wird auch erzeugt, wenn im Quelltext ein (!KW [end_ignore]) ohne zugehöriges (!KW [begin_ignore]) vorkommt.
 
 !item [""!/item"" outside environment]
@@ -129,22 +125,22 @@ nicht öffnen.
 !item [couldn't open <file> (pass2)]
 Im zweiten der beiden Durchgänge konnte UDO die angegebene Datei
 nicht öffnen. Überprüfen Sie bitte den Dateinamen, den Sie bei
-einem Include-Befehl angegeben haben, löschen Sie das Include-Kommando oder kommentieren Sie es.
+einem include-Kommando angegeben haben, löschen Sie das include-Kommando oder kommentieren Sie es.
 
 !item [couldn't open destination file]
 UDO kann die angegebene Datei nicht öffnen. Überprüfen Sie den
 Dateinamen oder entfernen Sie den Schreibschutz der Datei, falls
-Sie bereits existiert.
+sie bereits existiert.
 
 !item [couldn't open hypfile]
 UDO kann die angegebene Datei nicht öffnen. Überprüfen Sie den
 Dateinamen oder entfernen Sie den Schreibschutz der Datei, falls
-Sie bereits existiert.
+sie bereits existiert.
 
 !item [couldn't open logfile]
 UDO kann die angegebene Datei nicht öffnen. Überprüfen Sie den
 Dateinamen oder entfernen Sie den Schreibschutz der Datei, falls
-Sie bereits existiert.
+sie bereits existiert.
 
 !item [couldn't open source file]
 UDO kann die angegebene Datei nicht öffnen. Überprüfen Sie den
@@ -153,7 +149,7 @@ Dateinamen.
 !item [couldn't open treefile]
 UDO kann die angegebene Datei nicht öffnen. Überprüfen Sie den
 Dateinamen oder entfernen Sie den Schreibschutz der Datei, falls
-Sie bereits existiert.
+sie bereits existiert.
 
 !item [couldn't read BMP header]
 Entweder ist die angegebene Datei nicht vorhanden oder aber es
@@ -200,8 +196,7 @@ Innerhalb eines Absatzes sind lediglich (!MAXLINK) interne und externe
 Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder
 möglich. Teilen Sie den Absatz, in dem dieser manuelle Querverweis benutzt werden soll in zwei Hälften oder entfernen Sie ein paar manuelle Querverweise.
 
-# (!KKW [xlink]) does not work here???
-!item [couldn't replace !/xlink]
+!item [couldn't replace (!KKW [xlink])]
 Ein manueller externer Querverweis konnte nicht ersetzt werden.
 Innerhalb eines Absatzes sind lediglich (!MAXLINK) interne und externe
 Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder
@@ -227,7 +222,7 @@ unterstützt oder Sie haben sich einfach nur verschrieben.
 
 !item [link destination undefined]
 Das Ziel eines manuellen Querverweises ist nicht definiert,
-sprich: es existiert kein Kapitel und kein Label mit einem solchen Namen.
+d.h., es existieren kein Kapitel und kein Label mit einem solchen Namen.
 
 !item [macro contents longer than !.. characters]
 Der Inhalt eines Makros darf maximal die angegebene Anzahl an
@@ -270,13 +265,10 @@ Sie haben versucht, eine Datei ""in sich selbst"" umzuwandeln.
 Übergeben Sie UDO die richtigen Dateinamen in der Kommandozeile.
 
 !item [string buffer overflow]
-# ToDo: ändern!!!
-Bitte verständigen Sie den Autor.
+Dieser Fehler sollte normalerweise nicht auftreten. (!link [Bitte verständigen Sie die UDO-Entwickler.][Kontaktadresse])
 
 !item [too many aliases used]
-Ihr Quelltext benutzt zu viele (!KW [alias])-Befehle. Verzichten Sie auf
-unwichtige Aliase oder schreiben Sie dem Autor, dass Sie eine
-Spezialversion von UDO benötigen.
+Ihr Quelltext benutzt zu viele (!KW [alias])-Befehle. Verzichten Sie auf unwichtige Aliase.
 
 !item [too many columns used]
 Ihr Quelltext benutzt in einer Tabelle zuviele Spalten.
@@ -301,16 +293,14 @@ Trennvorschläge.
 !item [too many items inside enumeration]
 In einer enumerate-Umgebung, die mit Buchstaben gekennzeichnet
 wird, wurden zuviele Aufzählungspunkte eingesetzt. Reduzieren Sie
-die Anzahl der Punkte auf 26 oder benutzen Sie anstelle der
+die Anzahl der Punkte auf~26 oder benutzen Sie anstelle der
 enumerate-Umgebung eine itemize-Umgebung.
 
 !item [too many labels used]
 Ihr Quelltext verwendet zuviele Sprungmarken. Da UDO Kapitel und
 Aliase intern auch als Sprungmarken verwendet, kann diese
 Fehlermeldung auch bei nur wenigen benutzten Labels auftreten,
-wenn viele Kapitel benutzt werden. Abhilfe: Verzichten Sie auf
-einige Labels oder Aliase oder bestellen Sie beim Autor eine
-Spezialversion.
+wenn viele Kapitel benutzt werden. Abhilfe: Verzichten Sie auf einige Labels oder Aliase.
 
 !item [too many labels used in table]
 Ihr Quelltext verwendet zuviele Sprungmarken zwischen zwei Tabellenzeilen.
@@ -353,7 +343,7 @@ mehrere Zeilen erstreckt oder dessen Ende UDO nicht finden konnte.
 !item [unknown command]
 UDO kennt das angegebene Kommando nicht. Falls Sie ein Wort
 darstellen möchten, dass mit einem Ausrufungszeichen beginnt, so
-müssen Sie dieses durch Einfügen eines ""/"" besonders markieren.
+müssen Sie dieses durch Einfügen eines ""(!CODE [/])"" besonders markieren.
 
 !item [use (!/V) and (!/v) in one line]
 (!MISS)
