@@ -25,6 +25,7 @@
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: VALUE macro introduced
 #   fd  Jun 09: LINK macro introduced
+#   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
 #
 ################################################################################
 
@@ -1017,7 +1018,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
         !item Bei Verwendung von (!KKW [img]) erzeugt UDO nun auch
            eine Fehlermeldung, falls es die Ausmasse des Bildes nicht
            ermitteln konnte.
-        !item Die MAP-Datei für WinHelp hat nun die Endung "".hpc"".
+        !item Die MAP-Datei für WinHelp hat nun das Suffix (!code [.hpc]).
         !item Konnte UDO ein (!KW [chaptericon]) nicht finden, wird dies
            nun in der Protokolldatei bemängelt.
         !item Beim Einsatz von (!KW [no_images]) werden beim HTML-Format wie bisher keine
@@ -1234,7 +1235,7 @@ finden hier als Gedächtnisstütze meine komprimierten Anmerkungen aus
           nur noch dann zentriert ausgegeben, wenn der (!KW [image])-Befehl
           innerhalb einer center-Umgebung steht. Die linksbündige oder
           rechtsbündige Ausgabe von Bilder ist somit nun auch möglich.
-        !item Die Default-Endung für ASCII-Dateien lautet nun .txt.
+        !item Die Default-Suffix für ASCII-Dateien lautet nun (!code [.txt]).
         !item Bei der (!LaTeX)-Ausgabe wird innerhalb \verb kein Zeilenumbruch mehr erzeugt.
         !item DOS-Grafikzeichen werden für WinHelp durch ""+"", ""-"" oder ""|""
           ersetzt.

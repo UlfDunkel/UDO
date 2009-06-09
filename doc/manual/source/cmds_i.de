@@ -26,6 +26,7 @@
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 09: LINK macro introduced
+#   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
 #
 ################################################################################
 
@@ -836,7 +837,7 @@ Grafik ausgeben.
 
 !item [(!DESCRIPTION)]
 Dieses Kommando erzeugt in der Ausgabedatei Befehle
-zur Einbindung des Bildes. Die Endung der Datei
+zur Einbindung des Bildes. Das Suffix der Datei
 sollte nicht übergeben werden, da UDO dies selbst
 erledigt. UDO benutzt ""(!V).img(!v)"" beim ST-Guide, CS(!TeX) und
 Lindner-(!TeX), ""(!V).gif(!v)"" für HTML, ""(!V).msp(!v)"" oder ""(!V).pcx(!v)"" für

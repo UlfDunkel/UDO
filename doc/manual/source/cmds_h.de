@@ -25,6 +25,7 @@
 #   fd  Jun 09: WORD macro introduced
 #   fd  Jun 09: NAME macro introduced
 #   fd  Jun 09: LINK macro introduced
+#   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
 #
 ################################################################################
 
@@ -224,7 +225,7 @@ angegeben werden. (!FILESPACEQUOTE)
 !begin_node (!kw [hh_img_suffix])
 !html_name  cmd_img_suffix
 
-Endung der Grafiken für (!nolink [HTML-Help]) ändern.
+Suffixe der Grafiken für (!nolink [HTML-Help]) ändern.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -233,10 +234,10 @@ Endung der Grafiken für (!nolink [HTML-Help]) ändern.
 !item [(!SYNTAX)] (!T)!/hh_img_suffix <endung>(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Befehl können Sie die Endung der Grafiken
+Mit diesem Befehl können Sie das Suffix der Grafiken
 setzen, die für die folgenden (!KW [image])-Befehle
-verwendet werden soll. Standardmäßig benutzt UDO die
-Endung ""(!V)gif(!v)"". Falls Sie z.B. JPEG-Grafiken benutzen
+verwendet werden soll. Standardmäßig benutzt UDO das
+Suffix !code [.gif]). Falls Sie z.B. JPEG-Grafiken benutzen
 und diese Dateien auf ""(!V)jpeg(!v)"" enden, benutzen Sie
 einfach untenstehendes Beispiel. (!KW [hh_img_suffix])
 kann beliebig oft aufgerufen werden, dass einer
@@ -417,7 +418,7 @@ Abfrage des Ausgabeformates.
 !begin_node (!kw [htag_img_suffix])
 !html_name  cmd_htag_img_suffix
 
-Endung der Grafiken für HP-Helptag-SGML ändern.
+Suffixe der Grafiken für HP-Helptag-SGML ändern.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -426,10 +427,10 @@ Endung der Grafiken für HP-Helptag-SGML ändern.
 !item [(!SYNTAX)] (!T)!/htag_img_suffix <endung>(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Befehl können Sie die Endung der Grafiken
+Mit diesem Befehl können Sie das Suffix der Grafiken
 setzen, die für die folgenden (!KW [image])-Befehle
-verwendet werden soll. Standardmäßig benutzt UDO die
-Endung ""(!V)tiff(!v)"". (!KW [htag_img_suffix]) kann beliebig oft
+verwendet werden soll. Standardmäßig benutzt UDO das
+Suffix (!code [.tiff]). (!KW [htag_img_suffix]) kann beliebig oft
 aufgerufen werden, dass einer Verwendung verschiedener
 Grafikformate nichts im Wege steht.
 
@@ -602,7 +603,7 @@ Hintergrungmusik abspielen
 
 !item [(!DESCRIPTION)]
 Mit diesem Kommando kann man Hintergrundmusik für (!nolink [HTML])-Seiten angeben. (!FILE) ist dabei
-der Name der Datei mit Endung. Als Dateiendung sollte möglichst nur MID, AU und WAV verwendet werden.
+der Name der Datei mit Suffix. Als Dateiendung sollte möglichst nur MID, AU und WAV verwendet werden.
 (!VALUE) ist optional und gibt an wie oft das Musikstück wiederholt werden soll. Ohne die Angabe
 wird sie endlos wiederholt.
 
@@ -1373,7 +1374,7 @@ folgendes geschrieben: (!T)<meta http-equiv="content-type" content="text/html;ch
 !begin_node (!kw [html_img_suffix])
 !html_name  cmd_html_img_suffix
 
-Endung der Grafiken für (!nolink [HTML]) ändern.
+Suffixe der Grafiken für (!nolink [HTML]) ändern.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -1382,10 +1383,10 @@ Endung der Grafiken für (!nolink [HTML]) ändern.
 !item [(!SYNTAX)] (!T)!/html_img_suffix <endung>(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Befehl können Sie die Endung der Grafiken
+Mit diesem Befehl können Sie die Suffixe der Grafiken
 setzen, die für die folgenden (!KW [image])-Befehle
-verwendet werden soll. Standardmäßig benutzt UDO die
-Endung ""(!V)gif(!v)"". Falls Sie z.B. JPEG-Grafiken benutzen
+verwendet werden soll. Standardmäßig benutzt UDO das
+Suffix (!code [.gif]). Falls Sie z.B. JPEG-Grafiken benutzen
 und diese Dateien auf ""(!V)jpeg(!v)"" enden, benutzen Sie
 einfach untenstehendes Beispiel. (!KW [html_img_suffix])
 kann beliebig oft aufgerufen werden, dass einer

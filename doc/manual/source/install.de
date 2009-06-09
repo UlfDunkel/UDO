@@ -19,6 +19,7 @@
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 08: 'Homepage' -> 'Website'
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
 #
 ################################################################################
 
@@ -35,8 +36,7 @@ Sie einfach alle Dateien in ein beliebiges Verzeichnis, welches
 sinnigerweise ""UDO"" genannt werden sollte.
 
 Die GEM-Version sollte man im verwendeten Desktop -- ich empfehle,
-Gemini, Thing oder Ease zu benutzen -- als Anwendung für Dateien mit der
-Endung ""(!V)*.u*(!v)"" anmelden.
+Gemini, Thing oder Ease zu benutzen -- als Anwendung für Dateien mit der Dateimaske (!code [*.u*]) anmelden.
 
 Falls Sie das TTP bevorzugen und mit einem Kommandozeileninterpreter
 (z.B. mit der Mupfel von Stefan Eissing) arbeiten, kopieren oder

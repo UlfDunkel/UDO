@@ -19,6 +19,7 @@
 #   fd  Jun 09: 'Sinn machen' -> 'Sinn ergeben' (avoid anglicisms)
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
 #
 ################################################################################
 
@@ -182,8 +183,8 @@ behandelt:
 !item UDO überprüft nicht, ob die Grafiken existieren.
 
 !index (!kw [html_img_suffix])
-!item UDO benutzt als Endung für die Grafiken standardmäßig "".gif"". Mit
-      dem Schalter (!KW [html_img_suffix]) kann die Endung jederzeit verändert
+!item UDO benutzt als Suffix für die Grafiken standardmäßig (!code [.gif]). Mit
+      dem Schalter (!KW [html_img_suffix]) kann das Suffix jederzeit verändert
       werden.
 
 !item Insgesamt dürfen in einem Absatz (!red)(!MAXLINK)(!coloff) Links benutzt werden. Wird

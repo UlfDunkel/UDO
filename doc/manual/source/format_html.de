@@ -18,6 +18,7 @@
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 08: 'Homepage' -> 'Website'
+#   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
 #
 ################################################################################
 
@@ -34,7 +35,7 @@
 Im Gegensatz zu den anderen Formaten erzeugt UDO standardmäßig
 mehrere Dateien, die miteinander verknüpft sind. Für jedes
 Kapitel, jeden Abschnitt und Unterabschnitt wird eine eigene
-Datei mit der Endung (!T).htm[l](!t) angelegt. Die Namen der einzelnen
+Datei mit dem Suffix (!code [.htm[l!]]) angelegt. Die Namen der einzelnen
 Dateien richten sich nach der Nummer und der Position des
 jeweiligen Kapitel. Inhaltsverzeichnis und Titelseite gelangen in
 die Datei, die Sie UDO per Kommandozeile als (!T)(--)outfile(!t) übergeben.
@@ -136,10 +137,10 @@ Um eine Tabelle mit Rahmen darzustellen, müssen Sie bei
 (!KW [begin_table]) den Befehle (!KW [hline]) angeben. Fehlt (!KW [hline]) bei diesem
 Befehl, wird die Tabelle ohne Rahmen dargestellt.
 
-!index HTML !! Dateiendungen
-!item [Wie legt UDO die Endungen der Dateiendungen fest?]
+!index HTML !! Dateiendungen !! Suffixe
+!item [Wie legt UDO die Suffixe der Dateien fest?]
 
-UDO benutzt als Endung für die HTML-Dateien immer die Endung des
+UDO benutzt als Suffix für die HTML-Dateien immer das Suffix des
 in der Kommandozeile mit der Option (!T)(--)outfile(!t) bzw. (!T)-o(!t) übergebenen
 Dateinamens:
 
@@ -150,13 +151,13 @@ Dateinamens:
 !end_tlist
 
 Wenn Sie stattdessen die Option (!T)-o~!(!t) verwenden, benutzt UDO für
-8+3-Dateisysteme immer die Endung (!T).htm(!t), bei Dateisystemen, die
-lange Namen erlauben, hingegen immer die Endung (!T).html(!t).
+8+3-Dateisysteme immer das Suffix (!code [.htm]), bei Dateisystemen, die
+lange Namen erlauben, hingegen immer das Suffix (!code [.html]).
 
 !item [Die Dateinamen bei den Querverweisen stimmen nicht!?]
 
 Falls Sie HTML-Dateien auf einem Betriebssystem erstellen, das 
-keine langen Namen zulässt, Sie als Endung (!T).html(!t) vorgegeben haben
+keine langen Namen zulässt, Sie als Suffix (!code [.html]) vorgegeben haben
 und Sie diese Dateien dann auf einem Web-Server ablegen, so
 müssen Sie folgendes beachten:
 
@@ -164,12 +165,12 @@ müssen Sie folgendes beachten:
 !item UDO versucht zwar, (!T)foo.html(!t) zu sichern, TOS und DOS sichern
 die Datei jedoch nur als (!T)foo.htm(!t).
 
-!item UDO benutzt für alle Querverweise die Endung (!T).html(!t). Wenn nun
+!item UDO benutzt für alle Querverweise das Suffix (!code [.html]). Wenn nun
 ein HTML-Browser unter TOS und DOS versucht, (!T)foo.html(!t) zu
 öffnen, öffnet dieser anstandslos (!T)foo.htm(!t).
 
 !item Nach dem Kopieren der Dateien auf den Web-Server *müssen*
-die Endungen der Dateien von (!T).htm(!t) auf (!T).html(!t) angepasst werden.
+die Suffix der Dateien von (!code [.htm]) auf (!code [.html]) angepasst werden.
 Hier wird (!T)foo.htm(!t) nicht geöffnet, wenn auf (!T)foo.html(!t)
 zugegriffen werden soll!
 !end_enumerate

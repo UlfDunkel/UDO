@@ -19,6 +19,7 @@
 #   fd  Jun 09: 'Sinn machen' -> 'Sinn ergeben' (avoid anglicisms)
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
 #
 ################################################################################
 
@@ -45,7 +46,7 @@ In der ersten Form erfolgen Ausgaben auf die Standardausgabe (stdout),
 Fehlermeldungen werden auf die Standardfehlerausgabe (stderr)
 ausgegeben. In der zweiten Form werden Ausgaben in die
 (!U)Zieldatei(!u) geschrieben, Fehlermeldungen in eine Protokolldatei
-mit der Endung (!V)*.ul*(!v).
+mit der Dateimaske (!code [*.ul*]).
 
 Die Optionen müssen einzeln übergeben werden: (!V)-al(!v) wird nicht als (!V)-a -l(!v)
 interpretiert!
@@ -83,7 +84,7 @@ Quelltext mit dem Befehl (!KW [ifset]) abfragen lässt.
 !item [(--)force-long] Wird diese Option
 benutzt, versucht UDO auch auf den Systemen, die
 standardmässig keine langen Dateinamen unterstützen (TOS, DOS),
-lange Dateinamen zu erzeugen (Endung .html anstatt .htm).
+lange Dateinamen zu erzeugen (Suffix (!code [.html]) anstatt (!code [.htm])).
 
 !item [(--)force-short] Erzwingt unter Betriebssystemen, die lange Dateinamen beherrschen, die Erzeugung von kurzen Dateinamen (8+3).
 
@@ -139,7 +140,7 @@ umgewandelt. Normaler Text wird Kommentar, der Inhalt der Sourcecode-Umgebung wi
 !item [-s, (--)stg] Die (!U)Quelldatei(!u) wird ins ST-Guide-Format umgewandelt.
 
 !item [(--)save-upr] Wird diese Option benutzt, legt UDO eine
-Projekt-Datei mit der Endung (!V).upr(!v) mit einer Liste der benutzten
+Projekt-Datei mit dem Suffix (!code [.upr]) mit einer Liste der benutzten
 und erzeugten Dateien an.
 
 !item [-t, (--)tex] Die (!U)Quelldatei(!u) wird ins (!LaTeX)-Format umgewandelt.
@@ -149,7 +150,7 @@ Ausgabedatei erzeugt, sondern nur eine Protokolldatei und ggf. die Datei mit
 den Rohlingen für die Trennvorschläge.
 
 !item [(--)tree] Wird diese Option benutzt, legt UDO in einer Datei
-mit der Endung (!V).ut?(!v) eine baumartige Übersicht der benutzten Dateien an.
+mit dem Suffix (!code [.ut?]) eine baumartige Übersicht der benutzten Dateien an.
 Bei intensiver Benutzung des Befehls (!KW [include]) sieht man damit,
 welche Dateien andere Dateien nachladen.
 

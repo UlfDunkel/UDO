@@ -16,6 +16,7 @@
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: 'Atari ST' -> 'Atari'
+#   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
 #
 ################################################################################
 
@@ -56,7 +57,7 @@ anderen Kapiteln des Textes zu verzweigen.
 Durch den Schalter (!KW [no_bottomlines] [[pch!!]]) lässt sich die Ausgabe
 dieser Kopfzeilen unterbinden.
 
-!item [Wofür ist diese Datei mit der Endung (!T).cmd(!t)?]
+!item [Wofür ist diese Datei mit dem Suffix .cmd?]
 
 UDO legt während der Umwandlung eine Kommandodatei für den
 Helpcompiler von Pure~C an, welche an diesen zur Erzeugung der

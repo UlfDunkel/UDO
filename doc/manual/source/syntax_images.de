@@ -17,6 +17,7 @@
 #   fd  Jun 09: text reviewed
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
 #
 ################################################################################
 
@@ -33,7 +34,7 @@ jeweiligen Ausgabeformat erzeugt.
 
 !index (!kw [image])
 Zur Einbindung von Bilder bedient man sich des Kommandos (!KW [image]),
-bei dem man den Dateinamen der einzubindenden Datei (ohne Endung!)
+bei dem man den Dateinamen der einzubindenden Datei (ohne Suffix!)
 angeben muss sowie optional eine Bildunterschrift angeben kann.
 
 !index (!kkw [img])
@@ -276,7 +277,7 @@ möchten (siehe oben). Natürlich ist es mit UDO aber auch möglich,
 JPEG-Grafiken einzubinden.
 
 !index (!kw [html_img_suffix])
-Um UDO die Endung der Grafik mitzuteilen, die Sie für das nächste Bild
+Um UDO das Suffix der Grafik mitzuteilen, die Sie für das nächste Bild
 verwenden möchten, benutzen Sie das Kommando (!KW [html_img_suffix]).
 
 Falls der bereits bekannte Tiger nicht als GIF, sondern als JPEG
@@ -298,8 +299,8 @@ der Befehl entsprechend so lauten:
 !end_verbatim
 !end_quote
 
-Beachten Sie, dass die Endung für alle folgenden Grafiken gesetzt wird.
-Falls später wieder ein GIF dargestellt werden soll, muss die Endung
+Beachten Sie, dass das Suffix für alle folgenden Grafiken gesetzt wird.
+Falls später wieder ein GIF dargestellt werden soll, muss das Suffix
 wieder mit (!KW [html_img_suffix] [[gif!!]]) eingestellt werden.
 
 !end_node # *.jpg & HTML
