@@ -16,6 +16,7 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: !ifos and !ifnos now reference to os.ui resp. os.<ISO>
 #
 ################################################################################
 
@@ -297,9 +298,11 @@ und (!KW [endif]) angegeben werden.
 # = = = = =
 
 !begin_node (!kw [ifnos])
-!html_name  cmd_ifnox
+!html_name  cmd_ifnos
 
-Betriebssystem abfragen.
+Betriebssystem abfragen. Folgende Kürzel für unterstützte Betriebssysteme stehen zur Zeit zur Verfügung:
+
+!include os.de
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -368,7 +371,9 @@ Symbol ""deutsch"" nicht gesetzt wurde.
 !begin_node (!kw [ifos])
 !html_name  cmd_ifos
 
-Betriebssystem abfragen.
+Betriebssystem abfragen. Folgende Kürzel für unterstützte Betriebssysteme stehen zur Zeit zur Verfügung:
+
+!include os.ui
 
 !begin_xlist [(!TYPEPOSITION)]
 
