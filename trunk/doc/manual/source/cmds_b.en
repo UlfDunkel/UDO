@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: TEXT macro enhanced
 #
 ################################################################################
 
@@ -36,10 +37,10 @@ Output text in bold.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/B)<(!TEXT)>(!/b)(!t)
+!item [(!SYNTAX)] (!T)(!/B)(!TEXT)(!/b)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" will be displayed in bold text if possible.
+""(!TEXT)"" will be displayed in bold text if possible.
 
 !item [(!EXAMPLE)]
 (!T)(!/B)bold(!/b)(!t)
@@ -62,7 +63,7 @@ Start a ""bold"" list.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/bbl [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/bbl [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [begin_blist]).
@@ -208,10 +209,10 @@ Start a ""bold"" list.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_blist [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/begin_blist [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-Starts a new list. The length of ""<text>"" defines the indent of the
+Starts a new list. The length of ""(!TEXT)"" defines the indent of the
 list. This environment must be finished with (!KW [end_blist]). You
 can use this environment inside other environments. The text you set
 with (!KW [item] [[~!!]]) will be displayed with a bold font.
@@ -474,17 +475,17 @@ Start an italic list.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_ilist [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/begin_ilist [(!TEXT)](!t)
 
 (!red)
 !item [(!DESCRIPTION)]
 Leitet eine neue Listen-Umgebung ein. Diese Umgebung muss mit (!KW [end_ilist]) beendet werden. Die Länge von
-""<text>"" definiert die Tiefe der Einrückung der Aufzählungspunkte. Sie können diese Umgebung auch mit
+""(!TEXT)"" definiert die Tiefe der Einrückung der Aufzählungspunkte. Sie können diese Umgebung auch mit
 anderen (!nolink [Umgebungen]) kombinieren. Die Aufzählungspunkte, die man mit (!KW [item] [[~!!]]) einleitet,
 werden kursiv dargestellt.
 (!coloff)
 !item [(!DESCRIPTION)]
-Starts a new list. The length of ""<text>"" defines the indent of the
+Starts a new list. The length of ""(!TEXT)"" defines the indent of the
 list. This environment must be finished with (!KW [end_ilist]). You
 can use this environment inside other (iltalic list) environments.
 The text you set with (!KW [item] [[~!!]]) will be displayed with an italic font.
@@ -589,13 +590,13 @@ Start new chapter/section/subsection/paragraph.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_node <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/begin_node (!TEXT)(!t)
 
 (!red)
 !item [(!DESCRIPTION)]
 Leitet, abhängig von der momentanen Gliederungsebene,
 ein Kapitel, Abschnitt, Unterabschnitt oder Paragraphen
-mit der Bezeichnung ""<text>"" ein.
+mit der Bezeichnung ""(!TEXT)"" ein.
 Kapitel erscheinen in Inhaltsverzeichnissen.
 (!coloff)
 !item [(!DESCRIPTION)]
@@ -631,10 +632,10 @@ Start new chapter/section/subsection/paragraph without entry in table of content
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_node* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/begin_node* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-This command does the same as (!KW [begin_node]), but here ""<text>"" will not
+This command does the same as (!KW [begin_node]), but here ""(!TEXT)"" will not
 appear in a table of contents.
 
 !item [(!EXAMPLE2)]
@@ -662,13 +663,13 @@ Start new popup-chapter/section/subsection/paragraph.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_pnode <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/begin_pnode (!TEXT)(!t)
 
 (!red)
 !item [(!DESCRIPTION)]
 Leitet, abhängig von der momentanen Gliederungsebene,
 ein Kapitel, Abschnitt, Unterabschnitt oder Paragraphen
-mit der Bezeichnung ""<text>"" ein.
+mit der Bezeichnung ""(!TEXT)"" ein.
 Kapitel erscheinen in Inhaltsverzeichnissen.
 Identisch mit (!KW [begin_node]), der Inhalt wird jedoch beim
 ST-Guide und bei WinHelp als Popup dargestellt.
@@ -705,10 +706,10 @@ Start new popup-chapter/section/subsection/paragraph without entry in table of c
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_pnode* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/begin_pnode* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-This command does the same as (!KW [begin_pnode]), but here ""<text>"" will not
+This command does the same as (!KW [begin_pnode]), but here ""(!TEXT)"" will not
 appear in a table of contents.
 
 !item [(!EXAMPLE2)]
@@ -772,7 +773,7 @@ Output indented text.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_quote [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/begin_quote [(!TEXT)](!t)
 
 (!red)
 !item [(!DESCRIPTION)]
@@ -958,10 +959,10 @@ Start a monospaced list.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_tlist [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/begin_tlist [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-Starts a new list. The length of ""<text>"" defines the indent of the
+Starts a new list. The length of ""(!TEXT)"" defines the indent of the
 list. This environment must be finished with (!KW [end_tlist]). You
 can use this environment inside other environments. The text you set
 with (!KW [item] [[~!!]]) will be displayed with a monospaced font
@@ -1020,20 +1021,20 @@ Start a list.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_xlist [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/begin_xlist [(!TEXT)](!t)
 
 (!red)
 !item [(!DESCRIPTION)]
 Leitet eine neue Listen-Umgebung ein. Diese Umgebung
 muss mit (!KW [end_xlist]) beendet werden. Die Länge von
-""<text>"" definiert die Tiefe der Einrückung der
+""(!TEXT)"" definiert die Tiefe der Einrückung der
 Aufzählungspunkte. Diese Umgebung lässt sich mit
 anderen (!nolink [Umgebungen]) kombiniert verwenden. Die Texte,
 die man mit (!KW [item] [[~!!]]) angibt, werden normal
 dargestellt.
 (!coloff)
 !item [(!DESCRIPTION)]
-Starts a new list. The length of ""<text>"" defines the indent of the
+Starts a new list. The length of ""(!TEXT)"" defines the indent of the
 list. This environment must be finished with (!KW [end_xlist]). You
 can use this environment inside other environments. The text you set
 with (!KW [item] [[~!!]]) will be displayed with the normal font.
@@ -1186,7 +1187,7 @@ Start an italic list.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/bil [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/bil [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [begin_ilist]).
@@ -1269,7 +1270,7 @@ Start new chapter/section/subsection/paragraph.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/bn [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/bn [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [begin_node]).
@@ -1292,7 +1293,7 @@ Start new chapter/section/subsection/paragraph without entry in table of content
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/bn* [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/bn* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [begin_node*]).
@@ -1315,7 +1316,7 @@ Start new popup-chapter/section/subsection/paragraph.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/bp [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/bp [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [begin_pnode]).
@@ -1338,7 +1339,7 @@ Start new popup-chapter/section/subsection/paragraph without entry in table of c
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/bp* [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/bp* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [begin_pnode*]).
@@ -1409,7 +1410,7 @@ Start a monospaced list.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/btl [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/btl [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [begin_tlist]).
@@ -1432,7 +1433,7 @@ Start a list.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/bxl [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/bxl [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [begin_xlist]).

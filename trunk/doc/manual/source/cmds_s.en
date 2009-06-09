@@ -16,6 +16,9 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
 #
 ################################################################################
 
@@ -34,7 +37,7 @@ Query the destination format.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=stg <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=stg (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -61,7 +64,7 @@ Define a symbol.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/set <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/set (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 With this command you can set symbols inside your source file that
@@ -93,7 +96,7 @@ Output a section heading.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/sh [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/sh [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [subheading]).
@@ -202,10 +205,10 @@ Include file in sourcecode environment.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/sinclude <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/sinclude (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
-""<file>"" will be included and displayed like preformatted text
+""(!FILE)"" will be included and displayed like preformatted text
 inside a sourcecode environment. If you use this command inside
 another environment UDO indents the contents of this file. UDO
 converts tabs according to (!KW [tabwidth]).
@@ -282,7 +285,7 @@ Start a section.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/sn [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/sn [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [subnode]).
@@ -305,7 +308,7 @@ Start a hidden section.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/sn* [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/sn* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [subnode*]).
@@ -390,7 +393,7 @@ Output a subsection heading.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/ssh <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/ssh (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [subsubheading]).
@@ -413,7 +416,7 @@ Start a subsection.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/ssn [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/ssn [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [subsubnode]).
@@ -436,7 +439,7 @@ Start a hidden subsection.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/ssn* [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/ssn* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [subsubnode*]).
@@ -459,7 +462,7 @@ Output a paragraph heading.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/sssh [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/sssh [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [subsubsubheading]).
@@ -482,7 +485,7 @@ Start a paragraph.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/sssn [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/sssn [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [subsubsubnode]).
@@ -505,7 +508,7 @@ Start a hidden paragraph.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/sssn* [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/sssn* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [subsubsubnode*]).
@@ -530,7 +533,7 @@ Start a subparagraph.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/ssssn [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/ssssn [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [subsubsubsubnode]).
@@ -558,7 +561,7 @@ Start a hidden subparagraph.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/ssssn* [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/ssssn* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [subsubsubsubnode*]).
@@ -585,7 +588,7 @@ Query the destination format.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/stg <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/stg (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -641,7 +644,7 @@ Set the paragraph width (ST-Guide only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/stg_parwidth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/stg_parwidth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -691,7 +694,7 @@ Straße des Autors für den Adressblock der Titelseite setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/street <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/street (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -721,10 +724,10 @@ Text tiefgestellt ausgeben
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/SUB)[<(!TEXT)>](!/sub)(!t)
+!item [(!SYNTAX)] (!T)(!/SUB)[(!TEXT)](!/sub)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" wird tiefgestellt dargestellt, falls möglich.
+""(!TEXT)"" wird tiefgestellt dargestellt, falls möglich.
 
 !item [(!EXAMPLE)]
 (!T)(!/SUB)tiefgestellt(!/sub)(!t)
@@ -749,10 +752,10 @@ Output a section heading.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/subheading <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/subheading (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-This command outputs out ""<text>"" as a headline using the section
+This command outputs out ""(!TEXT)"" as a headline using the section
 font and fontsize.
 
 !item [(!EXAMPLE)]
@@ -778,10 +781,10 @@ Start a section.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/subnode <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/subnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Starts a new section named ""<text>"". Sections will appear in table of contents.
+Starts a new section named ""(!TEXT)"". Sections will appear in table of contents.
 
 !item [(!EXAMPLE)]
 (!T)!/subnode Section title(!t)
@@ -804,10 +807,10 @@ Start a hidden section.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/subnode* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/subnode* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-This command does the same as (!KW [subnode]), but here ""<text>""
+This command does the same as (!KW [subnode]), but here ""(!TEXT)""
 will not appear in a table of contents.
 
 !item [(!EXAMPLE)]
@@ -832,10 +835,10 @@ Output a subsection heading.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/subsubheading <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/subsubheading (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-This command outputs out ""<text>"" as a headline using the subsubnode
+This command outputs out ""(!TEXT)"" as a headline using the subsubnode
 font and fontsize.
 
 !item [(!EXAMPLE)]
@@ -861,10 +864,10 @@ Start a subsection.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/subsubnode <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/subsubnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Starts a new subsection named ""<text>"". Subsections will appear in table of contents.
+Starts a new subsection named ""(!TEXT)"". Subsections will appear in table of contents.
 
 !item [(!EXAMPLE)]
 (!T)!/subsubnode Subsection title(!t)
@@ -887,11 +890,11 @@ Start a hidden subsection.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/subsubnode* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/subsubnode* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 This command does the same as (!KW [subsubnode]), but here
-""<text>"" will not appear in a table of content
+""(!TEXT)"" will not appear in a table of content
 
 !item [(!EXAMPLE)]
 (!T)!/subsubnode* Hidden subsection title(!t)
@@ -916,10 +919,10 @@ Output a paragraph heading.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/subsubsubheading <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/subsubsubheading (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-This command outputs out ""<text>"" as a headline using the
+This command outputs out ""(!TEXT)"" as a headline using the
 subsubsubnode font and fontsize.
 
 !item [(!EXAMPLE)]
@@ -945,10 +948,10 @@ Start a paragraph.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/subsubsubnode <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/subsubsubnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Starts a new paragraph named ""<text>"". Paragraphs are numbered
+Starts a new paragraph named ""(!TEXT)"". Paragraphs are numbered
 with #.#.#.# and are displayed inside the table of contents
 
 !item [(!EXAMPLE)]
@@ -974,10 +977,10 @@ Start a hidden paragraph.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/subsubsubnode* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/subsubsubnode* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-This command does the same as (!KW [subsubsubnode]), but here ""<text>""
+This command does the same as (!KW [subsubsubnode]), but here ""(!TEXT)""
 will not appear in the table of contents.
 
 !item [(!EXAMPLE)]
@@ -1003,7 +1006,7 @@ List paragraphs.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/subsubsubtoc [(!FORMAT)] !/depth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/subsubsubtoc [(!FORMAT)] !/depth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Lists all paragraphs of a subsection as a table of contents
@@ -1035,10 +1038,10 @@ Set offset of paragraph counter.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/subsubsubtoc_offset <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/subsubsubtoc_offset (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-""<value>"" will be added to the current
+""(!VALUE)"" will be added to the current
 paragraph counter when outputting the number.
 The example shows how to output the first
 paragraph with the number 10. You can also specify
@@ -1070,10 +1073,10 @@ Start a subparagraph.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/subsubsubsubnode <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/subsubsubsubnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Starts a new subparagraph named ""<text>"". Paragraphs are numbered
+Starts a new subparagraph named ""(!TEXT)"". Paragraphs are numbered
 with #.#.#.#.# and are displayed inside the table of contents
 
 !item [(!EXAMPLE)]
@@ -1102,10 +1105,10 @@ Start a hidden subparagraph.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/subsubsubsubnode* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/subsubsubsubnode* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-This command does the same as (!KW [subsubsubsubnode]), but here ""<text>""
+This command does the same as (!KW [subsubsubsubnode]), but here ""(!TEXT)""
 will not appear in the table of contents.
 
 !item [(!EXAMPLE)]
@@ -1169,10 +1172,10 @@ Set offset of subparagraph counter.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/subsubsubsubtoc_offset <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/subsubsubsubtoc_offset (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-""<value>"" will be added to the current
+""(!VALUE)"" will be added to the current
 subparagraph counter when outputting the number.
 The example shows how to output the first
 subparagraph with the number 10. You can also specify
@@ -1203,7 +1206,7 @@ List subsections.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/subsubtoc [(!FORMAT)] !/depth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/subsubtoc [(!FORMAT)] !/depth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Lists all subsections of a section as a table of contents
@@ -1233,10 +1236,10 @@ Set offset of subsection counter.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/subsubtoc_offset <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/subsubtoc_offset (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-""<value>"" will be added to the current
+""(!VALUE)"" will be added to the current
 subsection counter when outputting the number.
 The example shows how to output the first
 subsection with the number 10. You can also specify
@@ -1266,7 +1269,7 @@ List sections.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/subtoc [(!FORMAT)] !/depth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/subtoc [(!FORMAT)] !/depth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Lists all sections of a chapter as a table of contents
@@ -1296,10 +1299,10 @@ Set offset of section counter.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/subtoc_offset <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/subtoc_offset (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-""<value>"" will be added to the current
+""(!VALUE)"" will be added to the current
 section counter when outputting the number.
 The example shows how to output the first
 section with the number 10. You can also specify
@@ -1332,10 +1335,10 @@ Text hochgestellt ausgeben
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/SUP)[<(!TEXT)>](!/sup)(!t)
+!item [(!SYNTAX)] (!T)(!/SUP)[(!TEXT)](!/sup)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" wird hochgestellt dargestellt, falls möglich.
+""(!TEXT)"" wird hochgestellt dargestellt, falls möglich.
 
 !item [(!EXAMPLE)]
 (!T)(!/SUP)superscript(!/sup)(!t)

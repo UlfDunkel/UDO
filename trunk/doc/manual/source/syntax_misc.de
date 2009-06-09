@@ -24,6 +24,8 @@
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: WORD macro introduced
 #
 ################################################################################
 
@@ -263,8 +265,8 @@ können dazu dienen, im endgültigen Text spezielle Kommandos
 einzubauen.
 
 !index (!kw [define])
-Die Syntax für eine Definition lautet (!KW [define] [<wort> <text>]). Im
-Gegensatz zu den Makros wird (!code [<text>])) nicht speziell angepasst, d.h., es
+Die Syntax für eine Definition lautet (!KW [define] [(!WORD) (!TEXT)]). Im
+Gegensatz zu den Makros wird (!code [(!TEXT)])) nicht speziell angepasst, d.h., es
 werden keine Umlaute und andere Sonderzeichen angepasst.
 
 Im folgenden Beispiel benutzen wir eine Definition, um nur im

@@ -19,6 +19,7 @@
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: 'Sinn machen' -> 'Sinn ergeben' (avoid anglicisms)
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: TEXT macro enhanced
 #
 ################################################################################
 
@@ -38,10 +39,10 @@ Fußnote erzeugen.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/N)<(!TEXT)>(!/n)(!t)
+!item [(!SYNTAX)] (!T)(!/N)(!TEXT)(!/n)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" wird als Fußnote oder in Klammern dargestellt.
+""(!TEXT)"" wird als Fußnote oder in Klammern dargestellt.
 Vor (!KK1 [N]) sollte sich kein Leerzeichen, Tabulator oder Zeilenumbruch befinden!
 
 !item [(!EXAMPLE)]
@@ -65,7 +66,7 @@ Kapitel einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/n [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/n [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [node]).
@@ -88,7 +89,7 @@ Kapitel ohne Eintrag im Inhaltsverzeichnis einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/n* [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/n* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [node*]).
@@ -952,10 +953,10 @@ Kapitel einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/node <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/node (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Leitet ein Kapitel mit der Bezeichnung ""<text>"" ein. Kapitel erscheinen in Inhaltsverzeichnissen.
+Leitet ein Kapitel mit der Bezeichnung ""(!TEXT)"" ein. Kapitel erscheinen in Inhaltsverzeichnissen.
 
 !item [(!EXAMPLE)]
 (!T)!/node Titel des Kapitels(!t)
@@ -978,11 +979,11 @@ Kapitel ohne Eintrag im Inhaltsverzeichnis einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/node* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/node* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Dieses Kommando hat die gleiche Funktion wie (!KW [node]),
-mit der Ausnahme, dass ""<text>"" nicht in Inhaltsverzeichnissen erscheint.
+mit der Ausnahme, dass ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
 
 !item [(!EXAMPLE)]
 (!T)!/node* Titel des versteckten Kapitels(!t)
@@ -1007,7 +1008,7 @@ Referenzierung unterdrücken.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/nolink [<(!TEXT)>])(!t)
+!item [(!SYNTAX)] (!T)(!/nolink [(!TEXT)])(!t)
 
 !item [(!DESCRIPTION)]
 Dieser Platzhalter sorgt dafür, dass der ausgegebene Text (Inhalt der Klammern) nicht referenziert wird.
@@ -1057,12 +1058,12 @@ Programmtyp setzen (nur NROFF).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/nroff_type <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/nroff_type (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" wird bei der Ausgabe in NROFF in Klammern in der Kopfzeile ausgegeben. Im Beispiel
+""(!TEXT)"" wird bei der Ausgabe in NROFF in Klammern in der Kopfzeile ausgegeben. Im Beispiel
 würde bei benutztem ""(!KW [docinfo] [[program!!] udo])"" die Kopfzeile
-""udo(1)"" ausgegeben. ""<text>"" wird nicht als Dateiendung benutzt.
+""udo(1)"" ausgegeben. ""(!TEXT)"" wird nicht als Dateiendung benutzt.
 
 !item [(!EXAMPLE)]
 (!T)!/nroff_type 1(!t)

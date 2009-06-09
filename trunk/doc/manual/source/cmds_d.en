@@ -16,6 +16,11 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 09: WORD macro introduced
+#   fd  Jun 09: NAME macro introduced
 #
 ################################################################################
 
@@ -34,7 +39,7 @@ Datumsinformation für Titelseite setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/date <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/date (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -61,11 +66,11 @@ Set a definition.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/define <wort> <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/define (!WORD) (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Sets a (new) definition. When converting UDO will replace every
-""<word>"" by ""<text>"" without converting special chars. When
+""(!WORD)"" by ""(!TEXT)"" without converting special chars. When
 using the example below every ""(!/H1)"" will be replaced by
 ""</H1>"". The difference to a macro: no umlauts or other special
 characters will be converted. Definitions can contain parameters. Read the
@@ -128,10 +133,10 @@ Output deleted text in bold.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/DEL)<(!TEXT)>(!/del)(!t)
+!item [(!SYNTAX)] (!T)(!/DEL)(!TEXT)(!/del)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" wird als Löschung markiert.
+""(!TEXT)"" wird als Löschung markiert.
 
 Bei der HTML-Ausgabe wird die aktuelle Zeit als Attribut datetime
 und die URL ""http://www.udo-open-source.org"" als Attribut cite eingesetzt.
@@ -169,7 +174,7 @@ Specify depth of table of contents.
 
 !item [(!TYPEPOSITION)] (!SWITCH), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/depth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/depth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 This switch, used in conjunction with a command
@@ -203,60 +208,60 @@ Set document information.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/docinfo [<name>] <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/docinfo [(!NAME)] (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 !item [Description:]
-This command is used to set several informations output on the title page. ""<name>"" can have one of the following values:
+This command is used to set several informations output on the title page. ""(!NAME)"" can have one of the following values:
 
 !begin_description
 
 !item [title]
-""<text>"" will be displayed on the title page before the contents of
+""(!TEXT)"" will be displayed on the title page before the contents of
 the program name. It's also used inside the headlines.
 
 !item [program]
-""<text>"" will be displayed on the title page below the title.
-Furthermore ""<text>"" will be used by some destination formats
+""(!TEXT)"" will be displayed on the title page below the title.
+Furthermore ""(!TEXT)"" will be used by some destination formats
 to generate the header line.
 
 !item [programimage]
-""<file>"" will be displayed on the title page if the destination format supports images.
+""(!FILE)"" will be displayed on the title page if the destination format supports images.
 
 !item [version]
-""<text>"" will be given out right below the contents of the program name on
+""(!TEXT)"" will be given out right below the contents of the program name on
 the title page.
 
 !item [date]
-""<text>"" will be displayed on the title page below the contents of
+""(!TEXT)"" will be displayed on the title page below the contents of
 the program version. The example shows how to use the current system
 time for the title page.
 
 !item [author]
-""<text>"" will be used as the name of the author on the title page
+""(!TEXT)"" will be used as the name of the author on the title page
 and for different other purposes.
 
 !item [authorimage]
-""<file>"" will be displayed above the name of the author on the
+""(!FILE)"" will be displayed above the name of the author on the
 title page if the destination format supports images.
 
 !item [authoricon]
-""<file>"" will be displayed as image in the left frame or
+""(!FILE)"" will be displayed as image in the left frame or
 left column when using the frame layout or ""modern"" layout
 of HTML.
 
 !item [address]
-""<text>"" will be given out below the author's name on the
+""(!TEXT)"" will be given out below the author's name on the
 title page. (!KW [docinfo] [[address!!]]) can be used up to 15 times,
 and can contain any address lines, such as email-addresses.
 
 !item [company]
-""<text>"" bezeichnet die Firma, für die ein Dokument erstellt wird.
+""(!TEXT)"" bezeichnet die Firma, für die ein Dokument erstellt wird.
 Wenn company benutzt wird, wird auf der Titelseite unter Autor
 ""für company"" eingefügt.
 
 !item [category]
-""<text>"" bezeichnet eine Kategorie, zu der das Dokument gehört.
+""(!TEXT)"" bezeichnet eine Kategorie, zu der das Dokument gehört.
 
 !item [stgdatabase]
 With this command you can specify the contents of the @database-line
@@ -286,11 +291,11 @@ Bei der HTML-Ausgabe allerdings nur, wenn in einzelnen Dateien nicht
 (!KW [html_description]) benutzt wird. Diese haben also Vorrang. (!nl)
 
 !item [htmltitle]
-""<text>"" will be used as the title of every page (instead of
+""(!TEXT)"" will be used as the title of every page (instead of
 using [title] and [program]).
 
 !item [robots]
-""<text>"" entspricht einer der Robots-Anweisungen, wie sie für Suchmaschinen benutzt werden.
+""(!TEXT)"" entspricht einer der Robots-Anweisungen, wie sie für Suchmaschinen benutzt werden.
 Erlaubt sind "none", "noindex", "index", "nofollow" und "follow".
 
 !item [appletitle]
@@ -316,12 +321,12 @@ any data or use the switch (!KW [no_footers] [[html!!]]) in the preamble,
 UDO will output nothing.
 
 !item [translator]
-""<text>"" describes the name of the localizer who has translated the product or document.
+""(!TEXT)"" describes the name of the localizer who has translated the product or document.
 When translator is used, the title page will show it below author and company as 
 ""Translator: translator"".
 
 !item [distributor]
-""<text>"" describes the company which distributes the product or document.
+""(!TEXT)"" describes the company which distributes the product or document.
 When distributor is used, the title page will show it below author and company as 
 ""Distributor: distributor"".
 
@@ -370,11 +375,11 @@ Setzen von Informationen für das Layout.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/doclayout [(!FORMAT)][<name>] <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/doclayout [(!FORMAT)][(!NAME)] (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Dieses Kommando dient dazu, verschiedene Informationen für
-das Layout. zu setzen. ""<name>"" kann dabei einer
+das Layout. zu setzen. ""(!NAME)"" kann dabei einer
 der folgenden Werte sein:
 
 !begin_description
@@ -464,7 +469,7 @@ Query the destination format.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/drc <text>(!t)
+!item [(!SYNTAX)] (!T)!/drc (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -518,7 +523,7 @@ Assign value to node definition (DRC only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/drc_flags <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/drc_flags (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 This command can be used to assign a value that is output as last numeric value of a node definition when converting to DRC.

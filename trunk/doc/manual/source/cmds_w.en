@@ -17,6 +17,8 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
 #
 ################################################################################
 
@@ -35,7 +37,7 @@ Query the destination format.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=win <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=win (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -116,7 +118,7 @@ Set character width (WinHelp4 only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/wh4_charwidth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/wh4_charwidth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 UDO uses a constant value for calculating the indent of lists and the
@@ -148,7 +150,7 @@ Assign a Help-ID (WinHelp4 only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/wh4_helpid <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/wh4_helpid (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 This command can be used only once per node. The ID will be used like
@@ -316,7 +318,7 @@ Set size of monospaced font (WinHelp4 only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/wh4_monofont_size <wert>(!t)
+!item [(!SYNTAX)] (!T)!/wh4_monofont_size (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 With this command you can set the font size that will be used to display
@@ -375,10 +377,10 @@ Prefix HelpIDs with text (WinHelp4 only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/wh4_prefix_helpids <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/wh4_prefix_helpids (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-If you use this switch in the preamble, every HelpID will be prefixed with ""<text>"".
+If you use this switch in the preamble, every HelpID will be prefixed with ""(!TEXT)"".
 
 !item [(!EXAMPLE)]
 (!T)!/wh4_prefix_helpids UDO(!t)
@@ -431,7 +433,7 @@ Set size of the proportional font (WinHelp4 only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/wh4_propfont_size <wert>(!t)
+!item [(!SYNTAX)] (!T)!/wh4_propfont_size (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 With this command you can set the font that will be used to display
@@ -486,7 +488,7 @@ Query the destination format.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/win <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/win (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -601,7 +603,7 @@ Set character width (WinHelp and QuickView only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/win_charwidth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/win_charwidth (!VALUE)(!t)
 
 (!red)
 !item [(!DESCRIPTION)]
@@ -646,7 +648,7 @@ Assign a Help-ID (WinHelp only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/win_helpid <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/win_helpid (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 This command can be used only once per node. The ID will be used like
@@ -846,7 +848,7 @@ Set monospaced font (WinHelp only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/win_monofont_size <wert>(!t)
+!item [(!SYNTAX)] (!T)!/win_monofont_size (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 With this command you can set the font that will be used to display
@@ -905,10 +907,10 @@ Prefix HelpIDs with text (WinHelp only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/win_prefix_helpids <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/win_prefix_helpids (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-If you use this switch in the preamble, every HelpID will be prefixed with ""<text>"".
+If you use this switch in the preamble, every HelpID will be prefixed with ""(!TEXT)"".
 
 !item [(!EXAMPLE)]
 (!T)!/win_prefix_helpids UDO(!t)
@@ -963,7 +965,7 @@ Set proportional font (WinHelp only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/win_propfont_size <wert>(!t)
+!item [(!SYNTAX)] (!T)!/win_propfont_size (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 With this command you can set the font that will be used to display

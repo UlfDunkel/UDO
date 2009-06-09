@@ -18,6 +18,10 @@
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 09: LINK macro introduced
 #
 ################################################################################
 
@@ -36,7 +40,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=pch <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=pch (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -64,7 +68,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=pdf <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=pdf (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -91,7 +95,7 @@ Popup-Kapitel einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/p [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/p [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [pnode]).
@@ -114,7 +118,7 @@ Popup-Kapitel ohne Eintrag im Inhaltsverzeichnis einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/p* [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/p* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [pnode*]).
@@ -137,14 +141,14 @@ Einstellen der Zeilenbreite.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/parwidth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/parwidth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Schalter kann man die Länge der Zeilen
 einstellen, die UDO erzeugt. Standardmäßig benutzt
-UDO den Wert 70. <wert> kann Werte von 20 bis 200
+UDO den Wert 70. (!VALUE) kann Werte von 20 bis 200
 annehmen. Bei den Formaten WinHelp, QuickView und
-HTML kann <wert> auch größere Werte annehmen, falls
+HTML kann (!VALUE) auch größere Werte annehmen, falls
 der Schalter (!KW [use_output_buffer]) gesetzt wurde.
 
 !item [(!EXAMPLE)]
@@ -171,7 +175,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/pch <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/pch (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -199,7 +203,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/pdf <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/pdf (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -283,10 +287,10 @@ Datei einbinden und in einer sourcecode-Umgebung darstellen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/pinclude <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/pinclude (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
-Öffnet die Datei namens ""<datei>"" und gibt deren Inhalt
+Öffnet die Datei namens ""(!FILE)"" und gibt deren Inhalt
 als Sourcecode an der Stelle aus, an der dieses
 Kommando benutzt wurde. Etwaige Einrückungen werden
 dabei berücksichtigt, Zentrierungen jedoch nicht.
@@ -315,13 +319,13 @@ Manuellen Seitenverweis setzen (nur (!LaTeX)).
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/plink [<(!TEXT)>] [<link>])(!t)
+!item [(!SYNTAX)] (!T)(!/plink [(!TEXT)] [(!LINK)])(!t)
 
 !item [(!DESCRIPTION)]
 Dieser Befehl ist derzeit nur für (!LaTeX) sinnvoll und
 erzeugt einen Seitenbezug auf einen anderen Teil des
 Dokuments. Bei allen anderen Formaten wird nur
-""<text>"" ausgegeben.
+""(!TEXT)"" ausgegeben.
 
 Bei der RTF-Ausgabe erfolgt die Angabe als Hinweis auf die Seitenzahl.
 
@@ -346,7 +350,7 @@ Popup-Kapitel einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/pnode <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/pnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Identisch mit (!KW [node]), der Inhalt wird jedoch beim ST-Guide und bei WinHelp als Popup dargestellt.
@@ -372,11 +376,11 @@ Popup-Kapitel ohne Eintrag im Inhaltsverzeichnis einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/pnode* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/pnode* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Dieses Kommando hat die gleiche Funktion wie (!KW [pnode]),
-mit der Ausnahme, dass ""<text>"" nicht in Inhaltsverzeichnissen erscheint.
+mit der Ausnahme, dass ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
 
 !item [(!EXAMPLE)]
 (!T)!/pnode* Titel des versteckten Popups(!t)
@@ -433,7 +437,7 @@ Programmnamen für Titelseite definieren.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/program <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/program (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -461,7 +465,7 @@ Programmgrafik für Titelseite definieren.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/programimage <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/programimage (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -488,7 +492,7 @@ Popup-Abschnitt einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/ps [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/ps [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [psubnode]).
@@ -511,7 +515,7 @@ Popup-Abschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/ps* [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/ps* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [psubnode*]).
@@ -534,7 +538,7 @@ Popup-Unterabschnitt einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/pss [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/pss [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [psubsubnode]).
@@ -557,7 +561,7 @@ Popup-Unterabschnitt ohne Eintrag im Inhaltsverzeichnis.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/pss* [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/pss* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [psubsubnode*]).
@@ -580,7 +584,7 @@ Popup-Paragraph einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/psss [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/psss [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [psubsubsubnode]).
@@ -603,7 +607,7 @@ Versteckten Popup-Paragraph einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/psss* [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/psss* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [psubsubsubnode*]).
@@ -626,7 +630,7 @@ Popup-Abschnitt einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/psubnode <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/psubnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Identisch mit (!KW [subnode]), der Inhalt wird jedoch beim
@@ -653,10 +657,10 @@ Popup-Abschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/psubnode* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/psubnode* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Dieses Kommando hat die gleiche Funktion wie (!KW [psubnode]), mit der Ausnahme, dass ""<text>"" nicht in
+Dieses Kommando hat die gleiche Funktion wie (!KW [psubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht in
 Inhaltsverzeichnissen erscheint.
 
 !item [(!EXAMPLE)]
@@ -682,7 +686,7 @@ Popup-Unterabschnitt einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/psubsubnode <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/psubsubnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Identisch mit (!KW [subsubnode]), der Inhalt wird jedoch beim ST-Guide und bei WinHelp als Popup dargestellt.
@@ -708,10 +712,10 @@ Popup-Unterabschnitt ohne Eintrag im Inhaltsverzeichnis.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/psubsubnode* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/psubsubnode* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Dieses Kommando hat die gleiche Funktion wie (!KW [psubsubnode]), mit der Ausnahme, dass ""<text>"" nicht in
+Dieses Kommando hat die gleiche Funktion wie (!KW [psubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht in
 Inhaltsverzeichnissen erscheint.
 
 !item [(!EXAMPLE)]
@@ -737,7 +741,7 @@ Popup-Paragraph einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/psubsubsubnode <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/psubsubsubnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Identisch mit (!KW [subsubsubnode]), der Inhalt wird jedoch beim ST-Guide und bei WinHelp als Popup dargestellt.
@@ -765,10 +769,10 @@ Versteckten Popup-Paragraph einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/psubsubsubnode* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/psubsubsubnode* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Dieses Kommando hat die gleiche Funktion wie (!KW [psubsubsubnode]), mit der Ausnahme, dass ""<text>"" nicht
+Dieses Kommando hat die gleiche Funktion wie (!KW [psubsubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht
 in Inhaltsverzeichnissen erscheint.
 
 !item [(!EXAMPLE)]

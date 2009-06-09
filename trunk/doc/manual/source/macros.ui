@@ -16,11 +16,31 @@
 #   fd  Jun 05: introduced (extracted from manual.u)
 #   fd  Jun 08: all commands should be formatted in bold tt
 #   fd  Jun 09: macros x/X renamed to avoid conflicts with other macros and link names
+#   fd  Jun 09: language-dependent macros might better be included first
 #
 ################################################################################
 
+# ------------------------------------------------------------------------------
+# language-dependent macros
+# ------------------------------------------------------------------------------
+!iflang [german]
+!include macros.de
+!endif
+!iflang [english]
+!include macros.en
+!endif
+
+
+
+
+
+# ------------------------------------------------------------------------------
+# language-independent macros
+# ------------------------------------------------------------------------------
 !macro UDOR udo(!RELEASE)
 # RELEASE is defined in file _version.ui
+
+
 
 !macro  a !]
 !define exclam !(!1)
@@ -62,17 +82,6 @@
 
 !ifnset IMAGES
 !macro IMAGES images/
-!endif
-
-
-# ------------------------------------------------------------------------------
-# language-dependent macros
-# ------------------------------------------------------------------------------
-!iflang [german]
-!include macros.de
-!endif
-!iflang [english]
-!include macros.en
 !endif
 
 # === EOF ===

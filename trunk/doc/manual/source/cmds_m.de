@@ -19,6 +19,9 @@
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 09: WORD macro introduced
 #
 ################################################################################
 
@@ -37,7 +40,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=man <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=man (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -64,11 +67,11 @@ Makro definieren.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/macro <wort> <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/macro (!WORD) (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Dieses Kommando definiert ein neues Makro. Bei der
-Umwandlung wird dann ""(!/<wort>)"" durch ""<text>""
+Umwandlung wird dann ""(!/(!WORD))"" durch ""(!TEXT)""
 ersetzt. Im Beispiel würde ""(!/DH)"" durch ""Dirk Hagedorn"" ersetzt.
 
 !item [(!EXAMPLE)]
@@ -119,7 +122,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/man <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/man (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -146,7 +149,7 @@ Zeilen pro Seite setzen (nur Manualpage).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/man_lpp <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/man_lpp (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Setzt die Anzahl der Zeilen pro Seite (""lines per page"") einer Manualpage. Im Fußbereich werden dann
@@ -174,13 +177,13 @@ Programmtyp setzen (nur Manualpage).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/man_type <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/man_type (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" wird bei der Ausgabe in eine Manualpage in
+""(!TEXT)"" wird bei der Ausgabe in eine Manualpage in
 Klammern in der Kopfzeile ausgegeben. Im Beispiel
 würde bei benutztem ""(!KW [docinfo] [[program!!] udo])"" die Kopfzeile
-""udo(1)"" ausgegeben. ""<text>"" wird nicht als Dateiendung benutzt.
+""udo(1)"" ausgegeben. ""(!TEXT)"" wird nicht als Dateiendung benutzt.
 
 !item [(!EXAMPLE)]
 (!T)!/man_type 1(!t)
@@ -205,7 +208,7 @@ Nummer für Node vergeben.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/mapping <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/mapping (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Dieser Befehl wird momentan nur für WinHelp und IPF unterstützt.
@@ -218,7 +221,7 @@ Eintrag res=4711 im IPF-Node-Header. Wird kein (!KW [mapping]) benutzt,
 so wird auch kein res=!.. ausgegeben.
 
 !item [WinHelp:]
-Mit (!KW [mapping] [<wert>]) kann ein numerischer Wert angegeben
+Mit (!KW [mapping] [(!VALUE)]) kann ein numerischer Wert angegeben
 werden, den UDO dann in der Map-Datei für einen Node verwendet. Wird
 kein (!KW [mapping]) verwendet, sichert UDO einen Eintrag in der  Map-Datei
 mit seiner internen Nummer, aber nur dann, wenn man eine

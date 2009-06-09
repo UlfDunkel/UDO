@@ -21,6 +21,10 @@
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro introduced
+#   fd  Jun 09: LINK macro introduced
 #
 ################################################################################
 
@@ -210,10 +214,10 @@ jetzt nicht mehr """Release~6.x Patchlevel~yy"", sondern ""Version~6.x.y""
 # ..............................................................................
 !item Neuer Schalter: (!T)!/html_header_links(!t) (!nl)
     Ist dieser Schalter gesetzt, werden je nach Vorgabe
-   (!T)<link>(!t)-Elemente im HTML-Header erzeugt. (!nl)
+   (!T)(!LINK)(!t)-Elemente im HTML-Header erzeugt. (!nl)
    Dieser Feature-Wunsch #0000053 ist seit Version~6.5.2 implementiert.
 # ..............................................................................
-!item Neuer Schalter: (!T)!/html_header_date [<text>](!t) (!nl)
+!item Neuer Schalter: (!T)!/html_header_date [(!TEXT)](!t) (!nl)
    Bisher wurde zu Beginn jeder HTML-Datei ein Kommentar mit dem Datum der Datei-Erzeugung eingefügt,
    z.B. (!T)<!-- last modified on 29.01.2004 -->(!t). (!nl)
    Nunmehr wird, wenn dieser Schalter gesetzt ist, im HTML-Header ein META-Tag für
@@ -232,12 +236,12 @@ jetzt nicht mehr """Release~6.x Patchlevel~yy"", sondern ""Version~6.x.y""
 !item Das Kommando (!KKW [img]) wurde erweitert. (!nl)
   Feature-Wunsch 0000070; V6.5.18
 # ..............................................................................
-!item Die <link>-Elemente für die Navigation werden nicht mehr automatisch, sondern
+!item Die (!LINK)-Elemente für die Navigation werden nicht mehr automatisch, sondern
    nur noch auf Anforderung in den HTML-Header geschrieben (siehe oben).
 !item Datum/Uhrzeit der Erzeugung der HTML-Datei wird nicht mehr automatisch als Kommentar,
   sondern nur noch auf Anforderung als META-Tag in den HTML-Header geschrieben (siehe oben).
 # ..............................................................................
-!item Bei (!KW [html_ignore_8bit]) kann nun ein optionaler Parameter <text> für die Codepage
+!item Bei (!KW [html_ignore_8bit]) kann nun ein optionaler Parameter (!TEXT) für die Codepage
    übergeben werden.
 # ..............................................................................
 !item (!KW [html_counter_command]) kann jetzt auch in der Preamble benutzt
@@ -300,7 +304,7 @@ jetzt nicht mehr """Release~6.x Patchlevel~yy"", sondern ""Version~6.x.y""
 # ..............................................................................
 !item Bug #0000044 in Version~6.4.1 beseitigt (!nl)
    Wenn (!KW [no_numbers]) gesetzt ist, werden keine Nummern mehr vor
-   die Kapitelnamen innerhalb des <link>-Elementes im HTML-Header geschrieben.
+   die Kapitelnamen innerhalb des (!LINK)-Elementes im HTML-Header geschrieben.
 # ..............................................................................
 !item Bug #0000058 in Version~6.5.8 beseitigt (!nl)
    Falsche UDO-Versionsbezeichnung in HTML-Metatags korrigiert.
@@ -485,7 +489,7 @@ unten links !! unten mitte !! unten rechts
       Falscher ungarischer Akzent korrigiert.
 # ..............................................................................
 !item Bug #0000039 (!nl)
-      (!KW [html_name_prefix]) wurde nicht bei den <link>-Elementen nicht benutzt.
+      (!KW [html_name_prefix]) wurde nicht bei den (!LINK)-Elementen nicht benutzt.
 # ..............................................................................
 
 !end_itemize
@@ -524,7 +528,7 @@ unten links !! unten mitte !! unten rechts
 !begin_itemize !short
 # ..............................................................................
 !item Bug #0000024 in Version 6.2.1 beseitigt (!nl)
-      In den <link>-Elementen wurde alle Subsubnodes aus anderen Subnodes
+      In den (!LINK)-Elementen wurde alle Subsubnodes aus anderen Subnodes
       mit aufgeführt
 !item Bug #0000025 in Version 6.2.1 beseitigt (!nl)
       UDO stürzte ab, wenn Umlaute im Dateinamen oder Domain einer URL
@@ -538,7 +542,7 @@ unten links !! unten mitte !! unten rechts
       umgesetzt (\\~ statt \~).
 !item Bug #0000039 in Version 6.2.1 beseitigt (!nl)
       Obwohl !html_name_prefix gesetzt war, fehlte der entsprechende
-      Zusatz in den <link>-Elementen zur Navigation.
+      Zusatz in den (!LINK)-Elementen zur Navigation.
 # ..............................................................................
 !end_itemize
 !end_description
@@ -778,13 +782,13 @@ unten links !! unten mitte !! unten rechts
 !item Trennzeichen (!T)&shy;(!t) für die Worttrennung in HTML eingefügt
 !item Die Gedankenstriche (!T)&ndash;(!t) und (!T)&mdash;(!t) sowie
       die drei Auslassungspunkte (!T)&hellip;(!t) werden für HTML gesetzt.
-!item Setzen der Links für die Navigation über das Element (!T)<link>(!t).
+!item Setzen der Links für die Navigation über das Element (!T)(!LINK)(!t).
       Folgende Attribute werden unterstützt: (!T)contents, start, first,
       previous, prev, next, last(!t) und (!T)copyright(!t) (!nl)
       Die Links für (!T)first(!t) und (!T)last(!t) sowie (!T)previous(!t)
       gelten nur für CAB (evtl. iCab). Der Link für (!T)copyright(!t)
       zeigt auf aboutudo und wird auch nur dann angelegt. (!nl)
-      CAB unterstützt beim Element (!T)<link>(!t) leider nicht das Attribut
+      CAB unterstützt beim Element (!T)(!LINK)(!t) leider nicht das Attribut
       (!T)target(!t). Daher funktionieren die Links bei der Benutzung
       von Frames nicht so schön.
 !item Werden bei der HTML-Ausgabe Frames erzeugt, wird zusätzlich ein Bereich
@@ -866,8 +870,8 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
  	   (!KW [html_modern_alignment])
 	!item (!KW [html_frames_layout]), (!KW [html_frames_width])
 	    (!KW [html_frames_backcolor]), (!KW [html_frames_backimage]),
-	    (!KW [html_frames_height] [<wert>]),
-	    (!KW [html_frames_position] [<text>]),
+	    (!KW [html_frames_height] [(!VALUE)]),
+	    (!KW [html_frames_position] [(!TEXT)]),
 	    (!KW [html_frames_textcolor]), (!KW [html_frames_linkcolor]),
 	    (!KW [html_frames_alinkcolor]), (!KW [html_frames_vlinkcolor])
 	!item (!KW [html_counter_command])
@@ -889,7 +893,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
 	  (!KW [drc_ucolor]), (!KW [drc_flags])
 	!item (!KW [udolink])
 	!item (!KW [use_auto_toptocs] [[<kürzel>!!]])
-	!item (!KW [error] [<text>])
+	!item (!KW [error] [(!TEXT)])
 	!item (!KW [begin_node*]), (!KW [begin_pnode]),
 	  (!KW [begin_pnode*])
 	!item (!KW [input])
@@ -911,7 +915,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
         !item (!KW [table_alignment])
         !item (!KW [image_alignment])
         !item (!KW [no_popup_headlines])
-        !item (!KW [use_raw_header] [<file>]), (!KW [use_raw_footer] [<file>]),
+        !item (!KW [use_raw_header] [(!FILE)]), (!KW [use_raw_footer] [(!FILE)]),
           (!KW [ignore_raw_header]), (!KW [ignore_raw_footer])
         !item (!KW [win_old_keywords])
         !item (!KW [no_table_lines])

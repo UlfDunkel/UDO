@@ -17,6 +17,9 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
 #
 ################################################################################
 
@@ -35,7 +38,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=rtf <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=rtf (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -62,11 +65,11 @@ Text unverändert innerhalb einer Zeile für angegebene Formate ausgeben.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/raw [(!FORMAT)] [<(!TEXT)>])(!t)
+!item [(!SYNTAX)] (!T)(!/raw [(!FORMAT)] [(!TEXT)])(!t)
 
 !item [(!DESCRIPTION)]
-(!T)<(!TEXT)>(!t) wird nur dann ausgegeben, wenn die Quelldatei in eines der 
-angegebenen Formate umgewandelt wird. (!T)<text>(!t) wird dann 1:1 und ohne 
+(!T)(!TEXT)(!t) wird nur dann ausgegeben, wenn die Quelldatei in eines der 
+angegebenen Formate umgewandelt wird. (!T)(!TEXT)(!t) wird dann 1:1 und ohne 
 Berücksichtigung etwaiger UDO-Kommandos ausgegeben.
 
 (!HINT) Da die abschließende runde Klammer (!T))(!t) sowie die abschließenden 
@@ -98,11 +101,11 @@ Zeile nur für bestimmte Formate ausgeben.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/raw [(!FORMAT)] <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/raw [(!FORMAT)] (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-(!T)<text>(!t) wird nur dann ausgegeben, wenn die Quelldatei
-in eines der angegebenen Formate umgewandelt wird. (!T)<text>(!t)
+(!T)(!TEXT)(!t) wird nur dann ausgegeben, wenn die Quelldatei
+in eines der angegebenen Formate umgewandelt wird. (!T)(!TEXT)(!t)
 wird dann 1:1 und ohne Berücksichtigung etwaiger UDO-Kommandos
 ausgegeben. Diese Zeile zerteilt Absätze genau wie alle anderen Kommandos.
 
@@ -188,10 +191,10 @@ Datei 1:1 einbinden.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/rinclude <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/rinclude (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
-Öffnet die Datei ""<datei>"" und gibt deren Inhalt unformatiert an der
+Öffnet die Datei ""(!FILE)"" und gibt deren Inhalt unformatiert an der
 Stelle aus, an der dieses Kommando benutzt wurde. Der Inhalt der Datei
 wird nicht eingerückt oder zentriert ausgegeben. Die raw-Umgebung dient
 dazu, spezielle Formatbefehle einzubinden. (!FILESPACEQUOTE)
@@ -220,7 +223,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/rtf <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/rtf (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -248,7 +251,7 @@ Zeichenbreite einstellen (nur RTF).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/rtf_add_colour <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/rtf_add_colour (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Kommando könnenzusätzliche Farben (über die 16 Standardfarben
@@ -274,7 +277,7 @@ Zeichenbreite einstellen (nur RTF).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/rtf_charwidth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/rtf_charwidth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 UDO benutzt zur Ausrichtung der xlist-Umgebungen und
@@ -370,7 +373,7 @@ Größe des Monospaced-Font für RTF setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/rtf_monofont_size <wert>(!t)
+!item [(!SYNTAX)] (!T)!/rtf_monofont_size (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Kommando kann man die Größe des Font setzen, der zur
@@ -459,7 +462,7 @@ Größe des Proportional-Font für RTF setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/rtf_propfont_size <wert>(!t)
+!item [(!SYNTAX)] (!T)!/rtf_propfont_size (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Kommando kann man die Größe des Font setzen, der zur

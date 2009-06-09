@@ -17,6 +17,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: TEXT macro enhanced
 #
 ################################################################################
 
@@ -804,7 +805,7 @@ horizontal lines.
 To print tables with UDO you need the following commands:
 
 !begin_enumerate !short
-!item (!KW [table_caption] [<text>])
+!item (!KW [table_caption] [(!TEXT)])
 !item (!KW [begin_table] [[...!!]]) {(!KW [hline])}
 !item (!KW [end_table])
 !item (!KW [hline])

@@ -16,6 +16,8 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: LINK macro introduced
 #
 ################################################################################
 
@@ -33,7 +35,7 @@ Indexeintrag bzw. Schlüsselwort setzen.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/x <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/x (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [index]).
@@ -56,16 +58,16 @@ Verweis auf externe Daten.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/xlink [<(!TEXT)>] [<link>])(!t)
+!item [(!SYNTAX)] (!T)(!/xlink [(!TEXT)] [(!LINK)])(!t)
 
 !item [(!DESCRIPTION)]
 Dient zum Erzeugen von Verweisen auf externe
 Dokumente. Im Unterschied zu (!KKW [link]) werden
-Sonderzeichen innerhalb ""<link>"" nicht umgewandelt. Im
+Sonderzeichen innerhalb ""(!LINK)"" nicht umgewandelt. Im
 Beispiel würde bei einer HTML-Datei ein Querverweis
-auf die Seite der Deutschen Telekom erzeugt. ""<link>""
-kann auch leer sein, dann wird für ""<link>"" der Inhalt
-von ""<text>"" ausgegeben.
+auf die Seite der Deutschen Telekom erzeugt. ""(!LINK)""
+kann auch leer sein, dann wird für ""(!LINK)"" der Inhalt
+von ""(!TEXT)"" ausgegeben.
 
 Kommt in einem Verweis eine Tilde vor,
 so braucht dieser bei Verwendung im (!KKW [xlink])-Kommando

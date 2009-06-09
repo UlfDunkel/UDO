@@ -20,6 +20,7 @@
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: FILE macro enhanced
 #
 ################################################################################
 
@@ -121,11 +122,11 @@ dafür, dass der Punkt innerhalb einer solchen Umgebung steht.
 UDO zeigt Ihnen den Dateinamen und die Zeilennummer, wo sie einen
 Fehler korrigieren sollten.
 
-!item [couldn't open <file> (pass1)]
+!item [couldn't open (!FILE) (pass1)]
 Im ersten der beiden Durchgänge konnte UDO die angegebene Datei
 nicht öffnen.
 
-!item [couldn't open <file> (pass2)]
+!item [couldn't open (!FILE) (pass2)]
 Im zweiten der beiden Durchgänge konnte UDO die angegebene Datei
 nicht öffnen. Überprüfen Sie bitte den Dateinamen, den Sie bei
 einem include-Kommando angegeben haben, löschen Sie das include-Kommando oder kommentieren Sie es.

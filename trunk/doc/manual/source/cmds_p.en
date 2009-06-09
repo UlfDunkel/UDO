@@ -16,6 +16,10 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 09: LINK macro introduced
 #
 ################################################################################
 
@@ -34,7 +38,7 @@ Query the destination format.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=pch <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=pch (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -62,7 +66,7 @@ Query the destination format.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=pdf <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=pdf (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -89,7 +93,7 @@ Start a popup chapter.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/p [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/p [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [pnode]).
@@ -112,7 +116,7 @@ Start a hidden popup chapter.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/p* [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/p* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [pnode*]).
@@ -135,12 +139,12 @@ Set the paragraph width.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/parwidth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/parwidth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 With this switch you can tell UDO which width it should use for the
 lines it saves. UDO uses 70 by default. You can change this value by
-using a (!T)<value>(!t) between 20 and 200. When converting to
+using a (!T)(!VALUE)(!t) between 20 and 200. When converting to
 Windows Help, Apple QuickView or HTML you can use a value that's
 greater than 200 if you use the switch (!KW [use_output_buffer]).
 
@@ -168,7 +172,7 @@ Query the destination format.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/pch <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/pch (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -196,7 +200,7 @@ Query the destination format.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/pdf <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/pdf (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -275,10 +279,10 @@ Include file in sourcecode environment.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/pinclude <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/pinclude (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
-""<file>"" will be included and displayed like preformatted text
+""(!FILE)"" will be included and displayed like preformatted text
 inside a sourcecode environment. If you use this command inside
 another environment UDO indents the contents of this file. UDO
 converts tabs according to (!KW [tabwidth]). (!FILESPACEQUOTE)
@@ -305,11 +309,11 @@ Create manual page reference ((!LaTeX) only).
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/plink [<(!TEXT)>] [<link>])(!t)
+!item [(!SYNTAX)] (!T)(!/plink [(!TEXT)] [(!LINK)])(!t)
 
 !item [(!DESCRIPTION)]
 Only useful when converted to (!LaTeX) where it is converted into a
-page reference. Converting into others formats, only ""<text>"" will be output.
+page reference. Converting into others formats, only ""(!TEXT)"" will be output.
 
 (!red)Bei der RTF-Ausgabe erfolgt die Angabe als Hinweis auf die Seitenzahl.(!coloff)
 
@@ -334,7 +338,7 @@ Start a popup chapter.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/pnode <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/pnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 The same as (!KW [node]) but the contents will be displayed as a popup inside ST-Guide and WinHelp.
@@ -360,10 +364,10 @@ Start a hidden popup chapter.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/pnode* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/pnode* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-This command does the same as (!KW [pnode]), but here ""<text>""
+This command does the same as (!KW [pnode]), but here ""(!TEXT)""
 will not appear in a table of contents.
 
 !item [(!EXAMPLE)]
@@ -422,7 +426,7 @@ Set document information.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/program <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/program (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -452,7 +456,7 @@ Set document information.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/programimage <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/programimage (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -479,7 +483,7 @@ Start a popup section.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/ps [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/ps [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [psubnode]).
@@ -502,7 +506,7 @@ Start hidden popup section.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/ps* [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/ps* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [psubnode*]).
@@ -525,7 +529,7 @@ Start a popup subsection.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/pss [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/pss [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [psubsubnode]).
@@ -548,7 +552,7 @@ Start a hidden popup subsection.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/pss* [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/pss* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [psubsubnode*]).
@@ -571,7 +575,7 @@ Start a popup paragraph.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/psss [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/psss [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [psubsubsubnode]).
@@ -594,7 +598,7 @@ Start a hidden popup paragraph.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/psss* [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/psss* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [psubsubsubnode*]).
@@ -617,7 +621,7 @@ Start a popup section.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/psubnode <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/psubnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 The same as (!KW [subnode]) but the contents will be displayed as a
@@ -644,10 +648,10 @@ Start hidden popup section.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/psubnode* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/psubnode* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-This command does the same as (!KW [psubnode]), but here ""<text>""
+This command does the same as (!KW [psubnode]), but here ""(!TEXT)""
 will not appear in a table of contents.
 
 !item [(!EXAMPLE)]
@@ -673,7 +677,7 @@ Start a popup section.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/psubsubnode <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/psubsubnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 The same as (!KW [subnode]) but the contents will be displayed as a
@@ -700,11 +704,11 @@ Start a hidden popup subsection.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/psubsubnode* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/psubsubnode* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 This command does the same as (!KW [psubsubnode]), but here
-""<text>"" will not appear in a table of contents.
+""(!TEXT)"" will not appear in a table of contents.
 
 !item [(!EXAMPLE)]
 (!T)!/psubsubnode* A hidden popup subsection(!t)
@@ -729,7 +733,7 @@ Start a popup subsection.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/psubsubsubnode <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/psubsubsubnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 The same as (!KW [subsubnode]) but the contents will be displayed
@@ -758,11 +762,11 @@ Start a hidden popup paragraph.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/psubsubsubnode* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/psubsubsubnode* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 This command does the same as (!KW [psubsubsubnode]), but here
-""<text>"" will not appear in the table of contents.
+""(!TEXT)"" will not appear in the table of contents.
 
 !item [(!EXAMPLE)]
 (!T)!/psubsubsubnode* A hidden popup paragraph(!t)

@@ -16,6 +16,7 @@
 #   fd  Jun 05: introduced (extracted from manual.u)
 #   fd  Jun 05: FILESPACEQUOTE
 #   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: some macros enhanced
 #
 ################################################################################
 
@@ -43,6 +44,14 @@
 !macro CODE           (!link [<charset>] [Code])
 !endif
 
+!macro CHAR           <char>
+!macro FILE           <file>
+!macro LINK           <link>
+!macro NAME           <name>
+!macro TEXT           <text>
+!macro VALUE          <value>
+!macro WORD           <word>
+
 
 !macro DocumentationWorkInProgress  The UDO Guide is actually in revision. Intermediate versions are currently only available on the UDO website for online-reading, but not for download.
 !macro FollowingOutdated            (!I)The following text passages are partly outdated and will be revised.(!i)
@@ -58,7 +67,6 @@
 
 # language-dependant text parts for the command index (in alphabetical order)
 !macro ABBREV         This is an abbreviation of the command
-!macro CHAR           char
 !macro COMMAND        command
 !macro COMMANDABBREV  command abbreviation
 !macro DESCRIPTION    Description:
@@ -66,7 +74,6 @@
 !macro EXAMPLE2       Examples:
 !macro EXISTSSINCE    Exists since:
 !macro EXISTEDUNTIL   Existed until:
-!macro FILE           file
 !macro FILESPACEQUOTE If the file name contains spaces, it has to be quoted.
 !macro HINT           (!B)Hint:(!b)
 !macro HINTS          (!B)Hints:(!b)
@@ -80,9 +87,7 @@
 !macro SPECIALCHAR    special character
 !macro SWITCH         switch
 !macro SYNTAX         Syntax:
-!macro TEXT           text
 !macro TYPEPOSITION   Type & position:
 !macro USEINSTEAD     Use (!1) instead
-!macro VALUE          value
 
 # === EOF ===
