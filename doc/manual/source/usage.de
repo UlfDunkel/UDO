@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from running.ui)
+#   fd  Jun 09: 'file' -> 'Datei'
 #
 ################################################################################
 
@@ -90,7 +91,7 @@ erklärt werden:
 !item [Ziel/Programm starten:] In der GEM-Version können Sie für jedes
 Format ein Programm anmelden, welches die Zieldatei weiterverarbeitet.
 So können ST-Guide-Quelltexte direkt aus der GEM-Version in einen
-Hypertext umgewandelt werden, es können (!LaTeX)-Quellen in ein DVI-File
+Hypertext umgewandelt werden, es können (!LaTeX)-Quellen in eine DVI-Datei
 übersetzt werden, oder Sie können sich die erzeugten HTML-Dateien
 gleich mit CAB ansehen. Der Phantasie sind wenig Grenzen gesetzt.
 
@@ -165,15 +166,15 @@ wird hier erklärt.
 
     !begin_itemize
 
-    !item Logfile anlegen: Soll eine Datei erzeugt werden, in der alle
+    !item Protokolldatei anlegen: Soll eine Datei erzeugt werden, in der alle
     Fehlermeldungen protokolliert werden (vergleichbar mit der
     Kommandozeilen-Option (--)no-logfile)?
 
-    !item Hyphenfile anlegen: Soll eine Datei erzeugt werden, in der UDO
+    !item Hyphen-Datei anlegen: Soll eine Datei erzeugt werden, in der UDO
     Trennvorschläge sichert (vergleichbar mit der Kommandozeilen-Option
     (--)no-hypfile)?
 
-    !item Treefile anlegen: Soll eine Datei angelegt werden, in der
+    !item Baumstruktur-Datei anlegen: Soll eine Datei angelegt werden, in der
     Sie den logischen Aufbau aus Include-Dateien erkennen können
     (identisch mit der Kommandozeilen-Option (--)treefile)?
 
@@ -181,7 +182,7 @@ wird hier erklärt.
     Statusmeldungen ausgeben (vergleichbar mit der Kommandozeilen-Option
     (--)verbose)?
 
-    !item Warnungen unterdrücken: Soll UDO im Logfile keine Warnungen
+    !item Warnungen unterdrücken: Soll UDO in der Protokolldatei keine Warnungen
     ausgeben, sondern nur Fehlermeldungen (identisch mit der
     Kommandozeilen-Option (--)no-warnings)?
 

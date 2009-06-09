@@ -16,6 +16,7 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'file' -> 'Datei'
 #
 ################################################################################
 
@@ -159,7 +160,7 @@ Ausgabe einer Node-ID (nur WinHelp4).
 
 !item [(!DESCRIPTION)]
 Dieser Befehl kann maximal einmal pro Node benutzt werden. Ausgegeben
-wird die ID wie ein Alias. Jump-IDs können als C- oder Pascal-Headerfile ausgegeben werden.
+wird die ID wie ein Alias. Jump-IDs können als C- oder Pascal-Header-Datei ausgegeben werden.
 
 !item [(!EXAMPLE)]
 (!T)!/wh4_helpid 0815(!t)
@@ -660,7 +661,7 @@ Ausgabe einer Node-ID (nur WinHelp).
 
 !item [(!DESCRIPTION)]
 Dieser Befehl kann maximal einmal pro Node benutzt werden. Ausgegeben
-wird die ID wie ein Alias. Jump-IDs können als C- oder Pascal-Headerfile ausgegeben werden.
+wird die ID wie ein Alias. Jump-IDs können als C- oder Pascal-Header-Datei ausgegeben werden.
 
 !item [(!EXAMPLE)]
 (!T)!/win_helpid 0815(!t)

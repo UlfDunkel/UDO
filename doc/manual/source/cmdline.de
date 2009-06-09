@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: introduced (extracted from cmdline.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'file' -> 'Datei'
 #
 ################################################################################
 
@@ -141,7 +142,7 @@ und erzeugten Dateien an.
 !item [-t, (--)tex] Die (!U)Quelldatei(!u) wird ins (!LaTeX)-Format umgewandelt.
 
 !item [(--)test] Bei zusätzlicher Angabe dieser Option, wird keine
-Ausgabedatei erzeugt, sondern nur ein Logfile und ggf. die Datei mit
+Ausgabedatei erzeugt, sondern nur eine Protokolldatei und ggf. die Datei mit
 den Rohlingen für die Trennvorschläge.
 
 !item [(--)tree] Wird diese Option benutzt, so legt UDO in einer Datei

@@ -17,6 +17,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 08: etc. -> usw.
 #   fd  Jun 09: text reviewed
+#   fd  Jun 09: 'file' -> 'Datei'
 #
 ################################################################################
 
@@ -47,7 +48,7 @@ auch Kapitel in externe Dateien auszulagern.
 Um den Inhalt von Dateien als Klartext darstellen zu können, nutzen Sie das
 Kommando (!KW [vinclude]) (""verbatim include""). Tip: Das
 Kommando (!KW [vinclude]) eignet sich sehr gut, um Sourcecode oder
-Headerfiles darzustellen.
+Header-Dateien darzustellen.
 
 Falls man direkte Befehle für ein Format nachladen möchte, so kann man
 sich des Kommandos (!KW [rinclude]) (""raw include"") bedienen. Tip: Dieser
@@ -97,7 +98,7 @@ komplettieren.
 !index (!kw [tabwidth])
 
 !item Mit (!KW [vinclude]) lassen sich in Verbindung mit
-(!KW [tabwidth]) sehr leicht Sourcecodes oder Headerfiles darstellen, falls
+(!KW [tabwidth]) sehr leicht Sourcecodes oder Header-Dateien darstellen, falls
 man beispielsweise eine Library oder eine Programmiersprache
 beschreiben möchte.
 !end_enumerate
@@ -443,8 +444,8 @@ Der Befehl zur Angabe eines Indexeintrags lautet folgendermaßen:
 !vinclude (!EXAMPLES)index1.ui
 !end_quote
 
-Der Indexeintrag erscheint dann im Index von (!LaTeX), im Index des mit
-Plain-(!TeX) bearbeiteten Texinfo-Files, im Index des ST-Guide-Hypertextes
+Der Indexeintrag erscheint dann im Index von (!LaTeX), im Index der mit
+Plain-(!TeX) bearbeiteten Texinfo-Datei, im Index des ST-Guide-Hypertextes
 sowie im Stichwortverzeichnis der Textverarbeitung, mit der man die
 RTF-Datei importiert. Bei WinHelp erscheint der Indexeintrag im
 Suchen-Dialog.
@@ -520,7 +521,7 @@ Schalter (!KW [use_nodes_inside_index]) verwendet.
 
 !index Makeindex
 !item Wenn man nach (!LaTeX) umwandelt und Index-Befehle verwendet, so
-fügt UDO in das (!LaTeX)-File die für das Programm ""Makeindex""
+fügt UDO in die (!LaTeX)-Datei die für das Programm ""Makeindex""
 nötige Befehle ein. Sonderzeichen in den Indizes werden bereits
 speziell für Makeindex angepasst.
 

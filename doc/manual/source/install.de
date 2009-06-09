@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: introduced (extracted from install.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'file' -> 'Datei'
 #
 ################################################################################
 
@@ -58,8 +59,8 @@ UDO-Hypertext zugreifen.
 !html_name  installation_dos_win32
 
 !begin_itemize !short
-!item Laden Sie sich das entsprechende ZIP-File von der UDO-Homepage herunter.
-!item Entpacken Sie das ZIP-File in ein beliebiges Verzeichnis.
+!item Laden Sie die entsprechende ZIP-Datei von der UDO-Homepage herunter.
+!item Entpacken Sie die ZIP-Datei in ein beliebiges Verzeichnis.
 !item Nehmen Sie das Verzeichnis, in dem sich die ausführbare Datei (!T)udo.exe(!t) befindet, in Ihre PATH-Liste (DOS: siehe (!T)autoexec.bat(!t); Windows: siehe....?) auf, oder kopieren Sie diese Datei in ein Verzeichnis, das sich bereits in der PATH-Liste befindet.
 !end_itemize
 Da die DOS-Version einen DOS-Extender verwendet, benötigen Sie mindestens eine 80386-CPU.
@@ -76,8 +77,8 @@ Die für frühere UDO-Versionen nötige Installation von RSJ und EMX ist nicht mehr
 !html_name  installation_os2
 
 !begin_itemize !short
-!item Laden Sie sich das entsprechende ZIP-File von der UDO-Homepage herunter.
-!item Packen Sie das ZIP-File in ein beliebiges Verzeichnis aus.
+!item Laden Sie sich die entsprechende ZIP-Datei von der UDO-Homepage herunter.
+!item Entpacken Sie die ZIP-Datei in ein beliebiges Verzeichnis.
 !item Nehmen Sie das Verzeichnis, in dem sich die ausführbare Datei (!T)udo.exe(!t) befindet, in Ihre PATH-Liste (siehe (!T)config.sys(!t)) auf, oder kopieren Sie diese Datei in ein Verzeichnis, das sich bereits in der PATH-Liste befindet.
 !end_itemize
 Die für frühere UDO-Versionen nötige Installation von EMX ist nicht mehr erforderlich.
@@ -114,8 +115,8 @@ werden. Unabhängig davon ist die Größe zur Laufzeit minimal.
 !html_name  installation_mac_x
 
 !begin_itemize !short
-!item Laden Sie sich das entsprechende ZIP-File von der UDO-Homepage herunter.
-!item Packen Sie das ZIP-File aus und kopieren Sie die ausführbare Datei ""(!T)udo(!t)"" nach (!T)/usr/bin(!t).
+!item Laden Sie sich die entsprechende ZIP-Datei von der UDO-Homepage herunter.
+!item Entpacken Sie die ZIP-Datei und kopieren Sie die ausführbare Datei ""(!T)udo(!t)"" nach (!T)/usr/bin(!t).
 !end_itemize
 
 Anmerkung: Eine manpage ist derzeit nicht Teil der Mac-OS-X-Distribution.
@@ -132,7 +133,7 @@ Um in das Verzeichniss zu kommen kann man ber den Menpunkt "Gehe zu/Gehe zum O
 !html_name  installation_mint
 
 !begin_itemize !short
-!item Laden Sie sich das entsprechende rpm-File von der UDO-Homepage herunter.
+!item Laden Sie die entsprechende rpm-Datei von der UDO-Homepage herunter.
 !item Melden Sie sich als (!T)root(!t) an.
 !item Neuinstallation: (!T)rpm -i (!t)(!I)file(!i)(!T).rpm(!t);
 oder wenn bereits ein älteres UDO-rpm installiert war: (!T)rpm -U (!t)(!I)file(!i)(!T).rpm(!t)
@@ -148,7 +149,7 @@ oder wenn bereits ein älteres UDO-rpm installiert war: (!T)rpm -U (!t)(!I)file(!
 !html_name  installation_linux_rpm
 
 !begin_itemize !short
-!item Laden Sie sich das entsprechende rpm-File von der UDO-Homepage herunter.
+!item Laden Sie die entsprechende rpm-Datei von der UDO-Homepage herunter.
 !item Melden Sie sich als (!T)root(!t) an.
 !item Neuinstallation: (!T)rpm -i (!t)(!I)file(!i)(!T).rpm(!t);
 oder wenn bereits ein älteres UDO-rpm installiert war: (!T)rpm -U (!t)(!I)file(!i)(!T).rpm(!t)

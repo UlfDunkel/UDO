@@ -16,6 +16,7 @@
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 08: quotation changed
 #   fd  Jun 08: etc. -> usw.
+#   fd  Jun 09: 'file' -> 'Datei'
 #
 ################################################################################
 
@@ -54,7 +55,7 @@ dann den UDO-Quelltext neu. Falls UDO keine Fehlermeldungen ausgibt, so
 kann es dennoch sein, dass der Quelltext Fehler enthält, UDO diese
 Fehler aber nicht erkannt hat.
 
-!item Der HC macht Murks. Beachten Sie das Errorfile mit der Endung
+!item Der HC macht Murks. Beachten Sie die Fehlerprotokoll-Datei mit der Endung
 (!V).err(!v), welches vom HC angelegt wird. Leider kann ich keine
 Hilfestellung zu den Fehlermeldungen des HC geben, da ich in den
 meisten Fällen selbst nicht weiss, was da schiefläuft.
@@ -86,8 +87,8 @@ von Kopfzeilen unterdrückt.
 
 !item [Wie werden die Kontextstrings ermittelt?]
 
-Falls Sie von anderen WinHelp-Files auf ein mit UDO erzeugtes
-WinHelp-File verzweigen möchten, müssen Sie den Kontextstring des
+Falls Sie von anderen WinHelp-Dateien auf eine mit UDO erzeugte
+WinHelp-Datei verzweigen möchten, müssen Sie den Kontextstring des
 Kapitels kennen.
 
 WinHelp erlaubt in Kontextstrings keine Sonderzeichen. UDO wandelt

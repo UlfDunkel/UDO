@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 09: text reviewed
+#   fd  Jun 09: 'file' -> 'Datei'
 #
 ################################################################################
 
@@ -55,7 +56,7 @@ und rechtsbündig ausgegeben werden.
 !html_name  images_pictures_tex_te
 
 !index (!kw [tex_tetex])
-Wenn man EPS-Grafiken in ein (!LaTeX)-File einbinden möchte, welches mit dem
+Wenn man EPS-Grafiken in eine (!LaTeX)-Datei einbinden möchte, welches mit dem
 te(!TeX) weiterverabeitet werden soll, so (!B)muss(!b) im
 Vorspann das Kommando (!KW [tex_tetex]) gesetzt werden.
 
@@ -88,7 +89,7 @@ Beachten Sie auch die Hinweise für das Lindner-(!TeX).
 !html_name  images_tex_lindner
 
 !index (!kw [tex_lindner])
-Wenn man GEM-Images in ein (!LaTeX)-File einbinden möchte, das mit dem
+Wenn man GEM-Images in eine (!LaTeX)-Datei einbinden möchte, das mit dem
 Linder-(!TeX) weiterverabeitet werden soll, (!B)muss(!b) im Vorspann das
 Kommando (!KW [tex_lindner]) gesetzt werden. Daran erkennt UDO, dass ein
 spezielles Lindner-(!TeX)-Makro zur Einbindung des Bildes erzeugt werden
@@ -129,7 +130,7 @@ verändert wird.
 !html_name  images_tex_csmulti
 
 !index (!kw [tex_strunk])
-Wenn man GEM-Images in ein (!LaTeX)-File einbinden möchte, welches mit dem
+Wenn man GEM-Images in eine (!LaTeX)-Datei einbinden möchte, welches mit dem
 CS-(!TeX) oder Multi(!TeX) weiterverabeitet werden soll, so (!B)muss(!b) im
 Vorspann das Kommando (!KW [tex_strunk]) gesetzt werden.
 
@@ -145,7 +146,7 @@ Umwandlung für das Lindner-(!TeX).
 !html_name  images_emtex_msp
 
 !index (!kw [tex_emtex])
-Um MSP-Bilder in einem em(!TeX)-File einzubinden, müssen Sie im Vorspann den
+Um MSP-Bilder in einer em(!TeX)-Datei einzubinden, müssen Sie im Vorspann den
 Befehl (!KW [tex_emtex]) angeben sowie die Auflösung des jeweiligen
 Ausgabegeräts mit (!KW [tex_dpi]) setzen.
 
@@ -186,7 +187,7 @@ neu setzen.
 !begin_node *.pcx & em(!TeX)
 !html_name  images_emtex_pcx
 
-Um PCX-Bilder in einem em(!TeX)-File einzubinden, müssen Sie im Vorspann den
+Um PCX-Bilder in einer em(!TeX)-Datei einzubinden, müssen Sie im Vorspann den
 Befehl (!KW [tex_emtex]) angeben sowie die Auflösung des jeweiligen
 Ausgabegeräts mit (!KW [tex_dpi]) setzen.
 
@@ -219,7 +220,7 @@ dabei durch die Ausmaße des Bildes ersetzt):
 (!HINT)
 
 Da UDO zunächst versucht, auf Grafiken im MSP-Format zuzugreifen,
-erscheint im Logfile später eine Warnung. Diese können Sie dann bei der
+erscheint in der Protokolldatei später eine Warnung. Diese können Sie dann bei der
 Benutzung von PCX-Grafiken ignorieren.
 
 !end_node # *.pcx & em(!TeX)

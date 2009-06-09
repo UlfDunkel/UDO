@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 08: etc. -> usw.
 #   fd  Jun 08: text reviewed
+#   fd  Jun 09: 'file' -> 'Datei'
 #
 ################################################################################
 
@@ -191,7 +192,7 @@ Kommandozeile übergeben.
 
 !item Bei der Ausgabe ins Rich Text Format wird kein Inhaltsverzeichnis
 ausgegeben! Dieses sollten Sie durch entsprechende Funktionen
-Ihrer bevorzugten Textverarbeitung, mit der Sie das RTF-File
+Ihrer bevorzugten Textverarbeitung, mit der Sie die RTF-Datei
 weiterbearbeiten, erzeugen.
 
 !end_enumerate
