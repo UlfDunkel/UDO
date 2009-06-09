@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 09: text reviewed
 #
 ################################################################################
 
@@ -40,12 +41,12 @@ Ausgabeformaten ist es hingegen nicht möglich, Bilder mitten im Text
 auszugeben. Eine genauere Erklärung dieses Platzhalters finden Sie im
 Befehlsindex.
 
-Seit Release 6 werden Bilder umgebungsabhängig positioniert. Wurden
+Seit Release~6 werden Bilder umgebungsabhängig positioniert. Wurden
 Bilder einst immer zentriert ausgegeben, so werden Bilder nun nur noch
 dann zentriert ausgegeben, wenn der (!KW [image])-Befehl Teil einer
 center-Umgebung ist.
 
-Bilder können also --- wie normaler Text auch --- linksbündig, zentriert
+Bilder können also -- wie normaler Text auch -- linksbündig, zentriert
 und rechtsbündig ausgegeben werden.
 
 # = = = = =
@@ -87,13 +88,13 @@ Beachten Sie auch die Hinweise für das Lindner-(!TeX).
 !html_name  images_tex_lindner
 
 !index (!kw [tex_lindner])
-Wenn man GEM-Images in ein (!LaTeX)-File einbinden möchte, welches mit dem
-Linder-(!TeX) weiterverabeitet werden soll, so (!B)muss(!b) im Vorspann das
+Wenn man GEM-Images in ein (!LaTeX)-File einbinden möchte, das mit dem
+Linder-(!TeX) weiterverabeitet werden soll, (!B)muss(!b) im Vorspann das
 Kommando (!KW [tex_lindner]) gesetzt werden. Daran erkennt UDO, dass ein
 spezielles Lindner-(!TeX)-Makro zur Einbindung des Bildes erzeugt werden
 soll.
 
-UDO macht das dem Lindner-(!TeX) beiliegende Zusatzprogramm namens
+UDO macht das dem Lindner-(!TeX) beiliegende Zusatzprogramm 
 (!T)IMGTOTEX(!t) überflüssig! UDO enthält alle Aufgaben, für die sonst
 (!T)IMGTOTEX(!t) zuständig ist, nämlich das Eintragen bestimmter
 Auflösungswerte in den Header des jeweiligen GEM-Images. Ein Beispiel:
@@ -107,14 +108,14 @@ Auflösungswerte in den Header des jeweiligen GEM-Images. Ein Beispiel:
 !end_quote
 
 UDO liest zunächst den Header der Datei (!V)tiger.img(!v) ein, ermittelt daraus
-die Ausmaße des Bildes und paßt den Header an 100 dpi an, was für die
+die Ausmaße des Bildes und passt den Header an 100~dpi an, was für die
 spätere Ausgabe via DVI-Treibern wichtig ist. In der Zieldatei wird nun
 ein (!TeX)-Makro mit Spezialbefehlen erzeugt, die die Einbindung eines
 Bildes ermöglichen.
 
 (!HINT)
 
-Bei 100 dpi erscheinen Screenshots(!N)jedenfalls auf meinem HP DeskJet
+Bei 100~dpi erscheinen Screenshots(!N)jedenfalls auf meinem HP DeskJet
 510(!n) im Ausdruck in der Originalgröße. (!KW [tex_dpi]) kann vor jedem
 Bild neu gesetzt werden, jedoch sollten das selbe Bild immer in der
 gleichen Größe ausgedruckt werden, da der Image-Header jeweils passend
@@ -144,14 +145,14 @@ Umwandlung für das Lindner-(!TeX).
 !html_name  images_emtex_msp
 
 !index (!kw [tex_emtex])
-Um MSPs in einem em(!TeX)-File einzubinden, müssen Sie im Vorspann den
+Um MSP-Bilder in einem em(!TeX)-File einzubinden, müssen Sie im Vorspann den
 Befehl (!KW [tex_emtex]) angeben sowie die Auflösung des jeweiligen
 Ausgabegeräts mit (!KW [tex_dpi]) setzen.
 
 Die Einbindung erfolgt gemäß der Beschreibung aus (!V)dvidrv.doc(!v) vom em(!TeX).
 
 !index Fehlermeldung
-UDO versucht bei der Angabe von "(!KW [image] [tiger Ein Tiger])" die
+UDO versucht bei der Angabe von (!KW [image][tiger Ein Tiger]) die
 Datei (!V)tiger.msp(!v) zu öffnen und die Ausmaße auszulesen. Schlägt dies
 fehl, wird eine Fehlermeldung ausgegeben und stattdessen versucht,
 (!V)tiger.pcx(!v) zu lesen.
@@ -174,8 +175,8 @@ dabei durch die Ausmaße des Bildes ersetzt):
 
 (!HINT)
 
-Bei einem HP DeskJet 510, der mit 300 dpi druckt, müssen Sie
-(!KW [tex_dpi] [[300!!]]) benutzen. Den Auflösungswert können Sie für jedes Bild
+Bei einem HP DeskJet~510, der mit 300~dpi druckt, müssen Sie
+(!KW [tex_dpi][[300!!]]) benutzen. Den Auflösungswert können Sie für jedes Bild
 neu setzen.
 
 !end_node # *.msp & em(!TeX)
@@ -185,14 +186,14 @@ neu setzen.
 !begin_node *.pcx & em(!TeX)
 !html_name  images_emtex_pcx
 
-Um PCXe in einem em(!TeX)-File einzubinden, müssen Sie im Vorspann den
+Um PCX-Bilder in einem em(!TeX)-File einzubinden, müssen Sie im Vorspann den
 Befehl (!KW [tex_emtex]) angeben sowie die Auflösung des jeweiligen
 Ausgabegeräts mit (!KW [tex_dpi]) setzen.
 
 Die Einbindung erfolgt gemäß der Beschreibung aus (!V)dvidrv.doc(!v) vom
 em(!TeX).
 
-UDO versucht bei der Angabe von "(!KW [image] [tiger Ein Tiger])"
+UDO versucht bei der Angabe von (!KW [image][tiger Ein Tiger])
 zunächst die Datei (!V)tiger.msp(!v) (nicht (!V).pcx(!v)!) einzubinden. Erst wenn
 diese Datei nicht existiert, versucht UDO die Ausmaße der Datei
 (!V)tiger.pcx(!v) zu ermitteln und ein entsprechendes em(!TeX)-Makro zu
@@ -228,38 +229,38 @@ Benutzung von PCX-Grafiken ignorieren.
 !begin_node *.gif & HTML
 !html_name  images_html_gif
 
-UDO kann zur Einbindung von GIFs in eine HTML-Seite entsprechende
+UDO kann zur Einbindung von GIF-Bildern in eine HTML-Seite entsprechende
 HTML-Kommandos erzeugen.
 
 Anders als bei den anderen Formaten wird der zweite Parameter nicht
 als Bildunterschrift, sondern als Alternativtext benutzt.
 
-Aus dem UDO-Befehl "(!KW [image] [tiger Ein Tiger])" wird folgender HTML-Befehl
+Aus dem UDO-Befehl (!KW [image] [tiger Ein Tiger]) wird folgender HTML-Befehl
 erzeugt:
 
 !begin_quote
 !begin_verbatim
-<p align=...>
-<img src="tiger.gif" alt="Ein Tiger" width="200" height="300">
+<p align="...">
+<img src="tiger.gif" alt="Ein Tiger" title="Ein Tiger" width="200" height="300">
 </p><br>
 !end_verbatim
 !end_quote
 
 Wird keine Bildunterschrift angegeben, so fehlt die Angabe des
 Alternativtextes bzw. es wird ein leerer Alternativtext benutzt. Auch
-hier das Beispiel zur Veranschaulichung: Aus "(!KW [image] [../gif/tiger])"
+hier das Beispiel zur Veranschaulichung: Aus (!KW [image] [../gif/tiger])
 wird
 
 !begin_quote
 !begin_verbatim
-<p align=...>
+<p align="...">
 <img src="../gif/tiger.gif" width="200" height="300">
 </p><br>
 !end_verbatim
 !end_quote
 
-Wer die Größenangaben nicht benötigt kann die Ermittlung der
-Ausmaße von Bildern unterbinden. Dazu gibt es das Kommando (!kw [no_img_size]).
+Wenn Sie die Größenangaben nicht benötigen, können Sie die Ermittlung der
+Ausmaße von Bildern unterbinden. Dazu gibt es das Kommando (!KW [no_img_size]).
 
 !end_node # *.gif & HTML
 
@@ -274,10 +275,9 @@ JPEG-Grafiken einzubinden.
 
 !index (!kw [html_img_suffix])
 Um UDO die Endung der Grafik mitzuteilen, die Sie für das nächste Bild
-verwenden möchten, können Sie sich des Befehl (!KW [html_img_suffix])
-bedienen.
+verwenden möchten, benutzen Sie das Kommando (!KW [html_img_suffix]).
 
-Falls nun der bereits bekannte Tiger nicht als GIF, sondern als JPEG
+Falls der bereits bekannte Tiger nicht als GIF, sondern als JPEG
 vorliegt, stellen Sie dem im vorherigen Beispiel gezeigten
 (!KW [image])-Befehl folgende Zeile voran:
 
@@ -312,11 +312,13 @@ Windows-Hilfetext ausgeben. UDO überprüft dabei nicht, ob die
 angegebene Datei existiert! Ein Bild kann mit oder ohne
 Bildunterschrift eingebunden werden.
 
-!begin_enumerate
-!item ohne Bildunterschrift: (!KW [image] [tiger])
+!begin_itemize
+!item ohne Bildunterschrift: (!nl)
+      (!KW [image] [tiger])
 
-!item mit Bildunterschrift: (!KW [image] [tiger Ein Tiger])
-!end_enumerate
+!item mit Bildunterschrift: (!nl)
+      (!KW [image] [tiger Ein Tiger])
+!end_itemize
 
 UDO erzeugt dann folgende RTF-Befehle:
 
@@ -338,7 +340,7 @@ UDO erzeugt dann folgende RTF-Befehle:
 
 !index (!kw [win_inline_bitmaps])
 !item Mit dem Schalter (!KW [win_inline_bitmaps]) werden die Bilder mit
-     anderen Befehlen eingebunden, so dass sie quasi ""hardcoded""
+     anderen Befehlen eingebunden, so dass sie quasi ""hartkodiert""
      übernommen werden.
 !end_enumerate
 
