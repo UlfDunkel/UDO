@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from working.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: text reviewed, HomeSite + TextWrangler editors added
 #
 ################################################################################
 
@@ -23,10 +24,7 @@
 
 !begin_description
 
-# = = =
-
 !item [Was bedeutet ""FAQ""?]
-
 ""FAQ"" bedeutet ""Frequently Asked Questions"" und bedeutet
 übersetzt soviel wie ""häufig gestellte Fragen"". Im übertragenen
 Sinn versteht man darunter eine Auflistung eben dieser oft
@@ -35,42 +33,25 @@ gestellten Fragen samt der passenden Antwort.
 # = = =
 
 !item [Wieso heißt UDO ""UDO""?]
-
-Als ich mit der Programmierung von UDO begann, brauchte ich einen
-Namen. Mir fiel auf die Schnelle nichts besseres ein als die
+Als der ursprüngliche UDO-Entwickler Dirk Hagedorn mit der Programmierung von UDO begann, brauchte er einen
+Namen. Ihm fiel auf die Schnelle nichts besseres ein als die
 Abkürzung ""UDO"", was als Abkürzung für ""(!B)U(!b)niversal (!B)DO(!b)cument""
 steht.
-
-Übrigens: Der Autor heißt mit Vornamen nicht Udo, sondern Dirk!
 
 # = = =
 
 !item [Wie spricht man ""UDO"" aus?]
-
 ""UDO"" wird genauso ausgesprochen wie der Vorname Udo, also ""Uh-Doh"". ""UDO"" wird (!I)nicht(!i) anglophil wie ""Judo"" oder ""You do"" ausgesprochen!
 
 # = = =
 
-!item [Woher bekomme ich die aktuellen Versionen?]
-
 !label Bezugsquellen
-#Aktuelle Versionen von UDO können sich Besitzer eines Modems aus
-#dem Gruppenprogrammteil UDO.Pub der (!idx [Maus Iserlohn MK2]) (++49 2371
-#944925) downloaden. Auf neue Versionen wird in der (!idx [MausNet])-Gruppe
-#(!T)ATARI.NEWS(!t) hingewiesen.
-
-Die aktuellen Versionen sind im (!idx [WWW])
-unter (!url [http://www.udo-open-source.org/] []) erhältlich.
-
-#Interessenten, die kein Modem besitzen und keinen Zugriff auf
-#FTP-Server oder das (!idx [World Wide Web]) haben, können die aktuellen
-#Versionen auch durch Einsenden einer formatierten Diskette samt
-#adressierten und ausreichend frankierten Rückumschlags anfordern.
+!item [Woher bekomme ich die aktuellen Versionen?]
+Die aktuellen Versionen sind unter (!url [http://www.udo-open-source.org/] []) erhältlich.
 
 # = = =
 
 !item [Wird es Portierungen auf andere Systeme geben?]
-
 Von UDO existieren momentan Versionen für folgende Systeme:
 
 !begin_itemize !short
@@ -79,13 +60,13 @@ Von UDO existieren momentan Versionen für folgende Systeme:
 !item DOS, OS/2, Windows
 # !item HP-UX 9.x auf HP-Rechnern der 300/400er und 700/800er Baureihe
 !item Linux x86
-!item Mac~OS
+!item Mac~OS~X
 # !item NeXTStep
 # !item Sinix
 # !item SunOS 5.5
 !end_itemize
 
-UDO wurde komplett in C geschrieben, verzichtet vollkommen auf
+UDO wurde komplett in C geschrieben und verzichtet vollkommen auf
 betriebssystemspezifische Routinen. Dadurch könnte die Kommandozeilenversion von UDO theoretisch auf jedes beliebige System portiert werden, für das ein ANSI-C-Compiler existiert.
 
 Wenn Sie an einer Portierung auf ein bestimmtes System interessiert sind und einen Compiler für dieses System besitzen, so (!link [kontaktieren] [Kontaktadresse]) Sie bitte die UDO-Entwickler.
@@ -93,7 +74,6 @@ Wenn Sie an einer Portierung auf ein bestimmtes System interessiert sind und ein
 # = = =
 
 !item [Können auch ""systemfremde"" Formate erzeugt werden?]
-
 Mit UDO kann auf man jedem System natürlich auch Formate für
 andere Betriebssysteme erzeugt werden, da die Versionen identisch
 sind. So ist es möglich, mit der Atari-Version WinHelp-Quelltexte
@@ -101,15 +81,14 @@ zu erzeugen oder unter OS/2 mit der DOS-Version ST-Guide-Quelltexte.
 
 Lediglich eine Umsetzung der Sonderzeichen muss ggf. erfolgen.
 Dies kann man z.B. mit GNU-recode durchführen. Auf Wunsch gibt es
-auch bei (!link [mir] [Kontaktadresse]) ein Programm zur Umsetzung der Sonderzeichen in
+auch bei (!link [uns] [Kontaktadresse]) ein Programm zur Umsetzung der Sonderzeichen in
 Textdateien.
 
 # = = =
 
 !item [Kann man Texte ""hier"" schreiben und ""dort"" konvertieren?]
-
 Ja, denn UDO versteht alle Zeichensätze der Systeme, für die UDO
-erhältlich ist. Somit können Texte unter DOS geschrieben werden
+erhältlich ist. Somit können Texte z.B. unter DOS geschrieben werden
 und auf einem Unix-Rechner konvertiert werden.
 
 Sogar in einer Datei können die Zeichensätze gewechselt werden,
@@ -119,10 +98,9 @@ benutzt werden soll.
 
 # = = =
 
-!item [Kann sich die UDO-Syntax noch ändern?]
-
 !index Änderungen der Syntax
 !index Syntaxänderungen
+!item [Kann sich die UDO-Syntax noch ändern?]
 UDO ist ein Programm, das ständig weiterentwickelt wird. Es
 werden sicherlich auch in Zukunft weitere Kommandos hinzukommen.
 
@@ -134,7 +112,6 @@ innerhalb von Minuten mit einem Editor vornehmen kann.
 # = = =
 
 !item [Wie funktioniert UDO?]
-
 UDO liest die Quelldatei(en) in zwei Durchgängen ein.
 
 Im ersten Durchgang werden Schalter, Makros, Definitionen sowie
@@ -151,24 +128,22 @@ Aus dem letzten Satz folgt: Leerzeilen (!I)und(!i) Kommandos unterteilen Absätze
 
 # = = =
 
-!item [Wie referenziert UDO?]
-
 !index Automatische Referenzierung
 !index Querverweise
 !index Referenzierung
+!index !autoref
+!item [Wie referenziert UDO?]
 UDO legt bei den Hypertext-Formaten (außer beim ST-Guide-Format)
 im Text automatisch Querverweise zu Kapiteln und Sprungmarken an.
 Es werden dabei nur Verweise auf ""andere"" Seiten angelegt, also
 keine Verweise auf Stellen der aktuellen Seite.
 
-!index !autoref
 Mit dem Schaltern (!KW [autoref]) kann man die automatische Referenzierung aus- (Parameter (!I)[off](!i)) und wieder einschalten (Parameter
 (!I)[on](!i)).
 
 # = = =
 
 !item [Wie verweist man auf Stellen des aktuellen Kapitels?]
-
 Da UDO nicht auf der Seite Verweise anlegt, auf der ein Label
 gesetzt wurde, gibt es ein Problem, falls man am Seitenende einen
 Verweis zum Seitenanfang anlegen will. Daher muss man hier einen
@@ -186,7 +161,6 @@ manuellen Querverweis setzen.
 # = = =
 
 !item [Wie bekomme ich Bilder in ein Inhaltsverzeichnis?]
-
 Dazu muss man auf den Befehl (!KW [tableofcontents]) verzichten und ein
 Kapitel anlegen, in welches das Inhaltsverzeichnis ausgegeben
 wird. In einem normalen Kapitel kann man natürlich Bilder wie
@@ -207,23 +181,27 @@ sonst auch benutzen. Beispiel:
 # = = =
 
 !item [Welchen Editor kann ich für UDO verwenden?]
+UDO-Quelltexte können Sie prinzipiell mit jedem Texteditor schreiben. Einige Editoren bieten jedoch Luxus-Funktionen, die in der Praxis sehr nützlich sein können.
 
-Hier einige Vorschläge:
-
+Hier einige Vorschläge, die natürlich niemals vollständig oder objektiv sein können:
 !begin_table [|l|c|c|] !hline
 "e" (e.exe) !! OS/2 !! Bestandteil des Systems
+!hline
+(!url [HomeSite][http://www.adobe.com/products/homesite/]) !! Windows !! kommerziell
 !hline
 (!url [Kate, KEdit, KWrite] [http://kate.kde.org/]) !! Linux/KDE !! Open Source
 !hline
 (!url [NotePad++] [http://www.froeb-software.de/]) !! Windows !! Freeware
 !hline
-(!url [Pepper] [http://www.slacksolutions.com/]) !! Linux, Mac, Windows !! kommerziell
+(!url [Pepper] [http://www.slacksolutions.com/]) !! Linux, Mac~OS, Windows !! kommerziell
 !hline
 (!url [SciTe] [http://www.scintilla.org/]) !! Linux, Windows !! Open Source
 !hline
 (!url [SuperEdi] [http://www.wolosoft.com/]) !! Windows !! Freeware
 !hline
 (!url [TextPad] [http://www.texpad.com/]) !! Windows !! Freeware
+!hline
+(!url [TextWrangler] [http://www.barebones.com/products/TextWrangler/]) !! Mac~OS~X !! Freeware
 !hline
 (!url [UltraEdit32] [http://www.ultraedit.com/]) !! Windows !! kommerziell
 !hline
