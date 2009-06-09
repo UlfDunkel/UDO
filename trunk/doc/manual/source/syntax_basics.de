@@ -21,6 +21,7 @@
 #   fd  Jun 08: text reviewed
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 09: using more text-formatting macros
 #
 ################################################################################
 
@@ -179,8 +180,8 @@ Der Hauptteil schließt mit dem Kommando (!KW [end_document]).
 !html_name  basics_environments
 
 Eine Umgebung ist ein Teil der Quelldatei, der speziell behandelt
-werden soll. Umgebungen werden jeweils mit (!B)(!V)!/begin_(!v)(!b) eingeleitet und mit
-(!B)(!V)!/end_(!v)(!b) beendet. Diese Befehle müssen dabei jeweils am Anfang einer
+werden soll. Umgebungen werden jeweils mit (!code [!begin_]) eingeleitet und mit
+(!code [!end_]) beendet. Diese Befehle müssen dabei jeweils am Anfang einer
 Zeile stehen, eventuell eingerückt durch Leerzeichen und/oder
 Tabulatoren.
 

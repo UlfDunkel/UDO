@@ -26,6 +26,7 @@
 #   fd  Jun 09: real quotation fixed
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: WORD macro introduced
+#   fd  Jun 09: using more text-formatting macros
 #
 ################################################################################
 
@@ -368,7 +369,7 @@ momentan bei maximal (!red)(!MAXMACRO)(!coloff) pro Quelltext.
 
 Symbole sind benutzerdefinierte inhaltsleere Variablen, welche sich
 durch das Kommando (!KW [set]) und beim Aufruf von UDO durch die
-Kommandozeilenoption (!B)(!V)-D(!v)(!b) setzen und mit dem Kommando (!KW [unset]) auch
+Kommandozeilenoption (!code [-D]) setzen und mit dem Kommando (!KW [unset]) auch
 wieder entfernen lassen. Ob ein Symbol gesetzt oder nicht gesetzt ist, lässt sich
 mit den Abfrage-Befehlen (!KW [ifset]) bzw. (!KW [ifnset]) testen.
 
@@ -395,10 +396,10 @@ Kommandozeilenoption ""(!code [-D~AlleKapitel])"", werden alle Kapitel umgewande
 Das Spielchen kann man natürlich noch etwas ausbauen. Durch Verwendung
 weiterer Symbole kann man gezielt nur einzelne Kapitel oder alle
 zusammen in die Zieldatei aufnehmen. Im folgenden Beispiel wird bei
-Übergabe der Option ""(!B)(!V)-D~Kapitel1(!v)(!b)"" nur das erste Kapitel in die
-Zieldatei aufgenommen. Übergibt man ""(!B)(!V)-D~Kapitel1(!v)(!b)"" und ""(!B)(!V)-D~Kapitel2(!v)(!b)"",
+Übergabe der Option ""(!code [-D~Kapitel1])"" nur das erste Kapitel in die
+Zieldatei aufgenommen. Übergibt man ""(!code [-D~Kapitel1])"" und ""(!code [-D~Kapitel2])"",
 so werden das erste und das zweite Kapitel eingebunden. Übergibt man
-hingegen ""(!B)(!V)-D~AlleKapitel(!v)(!b)"", wird die Zieldatei komplett dargestellt:
+hingegen ""(!code [-D~AlleKapitel])"", wird die Zieldatei komplett dargestellt:
 
 !begin_quote
 !vinclude (!EXAMPLES)symbol2.ui
@@ -418,10 +419,10 @@ die Zieldatei eingebunden werden, können Sie zuvor das Symbol
 !end_quote
 
 In diesem Beispiel wird also zunächst abgefragt, ob das Symbol
-""(!B)(!V)AlleKapitel(!v)(!b)"" gesetzt ist. In dem Falle wird es durch den Befehl
+""(!code [AlleKapitel])"" gesetzt ist. In dem Falle wird es durch den Befehl
 (!KW [unset]) gelöscht. Die vorherige Abfrage ist deshalb notwendig, damit
 man eine Fehlermeldung durch UDO vermeidet, falls das Symbol
-""(!B)(!V)AlleKapitel(!v)(!b)"" einmal nicht gesetzt ist.
+""(!code [AlleKapitel])"" einmal nicht gesetzt ist.
 
 (!HINTS)
 
@@ -585,8 +586,8 @@ ausgegeben wird. Zur Abfrage verwenden Sie die Kürzel der Ausgabeformate:
 !include formattb.ui
 
 Zusätzlich zu den hier genannten Zeichenketten können jeweils auch
-""(!B)(!V)all(!v)(!b)"" und ""(!B)(!V)none(!v)(!b)"" verwendet werden. Bei ""(!B)(!V)all(!v)(!b)"" liefert eine Abfrage
-immer ein wahres Ergebnis, bei ""(!B)(!V)none(!v)(!b)"" immer ein falsches.
+""(!code [all])"" und ""(!code [none])"" verwendet werden. Bei ""(!code [all])"" liefert eine Abfrage
+immer ein wahres Ergebnis, bei ""(!code [none])"" immer ein falsches.
 
 Das folgende Beispiel zeigt, wie man den Titel der Windows-Hilfe
 anders als für die anderen Formate setzt:

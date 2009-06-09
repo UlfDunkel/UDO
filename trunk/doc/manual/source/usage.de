@@ -18,6 +18,7 @@
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
 #
 ################################################################################
 
@@ -100,7 +101,7 @@ gleich mit CAB ansehen. Der Phantasie sind wenig Grenzen gesetzt.
 
 !item [Ziel/ST-Guide:] Wird dieser Menüeintrag aufgerufen, ruft UDO
 den ST-Guide auf und teilt diesem mit, er möge doch bitte den soeben
-erzeugten Hypertext (Name der Zieldatei mit der Endung '.hyp') 
+erzeugten Hypertext (Name der Zieldatei mit dem Suffix (!code [.hyp])) 
 anzeigen.
 
 !end_tlist
@@ -133,13 +134,13 @@ wird hier erklärt.
 
         !begin_itemize
         !item Komplett: UDO übernimmt den kompletten Dateinamen der
-        Quelldatei und passt nur die Endung an.
+        Quelldatei und passt nur das Suffix an.
 
         !item Name und Endung: UDO übernimmt den Namen der Quelldatei und
-        passt die Endung an das ausgewählte Ausgabeformat an. Der Pfad der
+        passt das Suffix an das ausgewählte Ausgabeformat an. Der Pfad der
         Zieldatei wird nicht verändert.
 
-        !item Nur Endung: UDO passt nur die Endung der Zieldatei an das
+        !item Nur Endung: UDO passt nur das Suffix der Zieldatei an das
         jeweilige Ausgabeformat an. Pfad und Name der Zieldatei werden nicht
         verändert.
         !end_itemize

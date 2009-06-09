@@ -20,6 +20,7 @@
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
 #
 ################################################################################
 
@@ -52,21 +53,21 @@ Dafür kann es zwei Gründe geben:
 !begin_enumerate
 
 !item Der UDO-Quelltext enthält Fehler. Schauen Sie sich also
-zunächst die Fehlermeldungen von UDO in der Datei mit der Endung
-(!V).ulw(!v) an, beseitigen Sie etwaige Fehler und konvertieren Sie
+zunächst die Fehlermeldungen von UDO in der Datei mit dem Suffix 
+(!code [.ulw]) an, beseitigen Sie etwaige Fehler und konvertieren Sie
 dann den UDO-Quelltext neu. Falls UDO keine Fehlermeldungen ausgibt, so
 kann es dennoch sein, dass der Quelltext Fehler enthält, UDO diese
 Fehler aber nicht erkannt hat.
 
-!item Der HC macht Murks. Beachten Sie die Fehlerprotokoll-Datei mit der Endung
-(!V).err(!v), welches vom HC angelegt wird. Leider kann ich keine
+!item Der HC macht Murks. Beachten Sie die Fehlerprotokoll-Datei mit dem Suffix (!code [.err]),
+die vom HC angelegt wird. Leider kann ich keine
 Hilfestellung zu den Fehlermeldungen des HC geben, da ich in den
 meisten Fällen selbst nicht weiss, was da schiefläuft.
 !end_enumerate
 
-!item [Wofür ist die Datei mit der Endung ""hpj""?]
+!item [Wofür ist die Datei mit dem Suffix .hpj?]
 UDO erzeugt automatisch eine zum Hypertext gehörende Projektdatei mit
-der Endung (!V).hpj(!v), die dem HC übergeben werden muss, um aus dem
+das Suffix (!code [.hpj]), das dem HC übergeben werden muss, um aus dem
 Quelltext eine fertige WinHelp-Datei zu erstellen.
 
 In dieser Projektdatei befinden sich Informationen wie der Titel des
