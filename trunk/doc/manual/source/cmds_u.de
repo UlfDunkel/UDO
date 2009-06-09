@@ -18,6 +18,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 08: 'Homepage' -> 'Website'
 #
 ################################################################################
 
@@ -88,7 +89,7 @@ Informationsseite einbauen.
 !begin_node (!kw [udolink])
 !html_name  cmd_udolink
 
-Link auf UDO-Homepage erzeugen.
+Link auf UDO-Website erzeugen.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -100,7 +101,7 @@ Link auf UDO-Homepage erzeugen.
 UDO sichert für HTML, WinHelp und ST-Guide eine Datei namens
 ""(!V)udo_wm.[gif,bmp,img](!v)"". Mit diesem Kommando kann man in sein Werk die
 Grafik einbinden. Bei HTML wird zugleich ein Link auf die
-(!url [Homepage] [http://www.udo-open-source.org/]) erzeugt.
+(!url [Website] [http://www.udo-open-source.org/]) erzeugt.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
 
