@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 09: 'lediglich' -> 'nur'
 #
 ################################################################################
 
@@ -115,7 +116,7 @@ warning("TOPIC expected");
 !end_quote
 
 Nach einer Neuübersetzung des TVHC bricht dieser die Umwandlung nicht
-mehr ab, sondern gibt lediglich eine Warnmeldung aus, die Sie
+mehr ab, sondern gibt nur eine Warnmeldung aus, die Sie
 ignorieren können.
 
 !end_description

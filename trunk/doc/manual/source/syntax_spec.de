@@ -17,6 +17,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 08: ignored charset list removed, including charsets.ui
 #   fd  Jun 08: text reviewed
+#   fd  Jun 09: 'lediglich' -> 'nur'
 #
 ################################################################################
 
@@ -186,7 +187,7 @@ Zeichensätzen erstellt wurden. Und um es richtig komfortabel zu machen,
 können Quelltexte sogar aus einem Mischmasch benutzter
 Zeichensätze bestehen.
 
-Sie müssen UDO lediglich mittels (!B)(!T)!/code [(!CODE)](!t)(!b) mitteilen, mit welchem
+Sie müssen UDO nur mittels (!B)(!T)!/code [(!CODE)](!t)(!b) mitteilen, mit welchem
 Zeichensatz die folgenden Zeilen erstellt wurden.
 
 Hier eine Übersicht, welches Kürzel für den Zeichensatz benutzt werden kann:

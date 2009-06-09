@@ -14,13 +14,14 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 09: 'lediglich' -> 'nur'
 #
 ################################################################################
 
 !begin_node Pure-C-Hilfe
 !html_name  format_pch
 
-Das Pure-C-Help-Format wird lediglich für Pure~C, einem Compiler für
+Das Pure-C-Help-Format wird nur für Pure~C, einem Compiler für
 den Atari ST, als Hilfesystem verwendet. Ansonsten hat es keine
 Bedeutung mehr für diesen Rechner.
 

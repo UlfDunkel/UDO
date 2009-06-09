@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from working.ui)
 #   fd  Jun 09: multi-language paragraph added
 #   fd  Jun 09: text reviewed
+#   fd  Jun 09: 'lediglich' -> 'nur'
 #
 ################################################################################
 
@@ -90,7 +91,7 @@ Copyright (!copyright) 1996 bei C. Anfänger
 !end_quote
 
 Bei einem anderen Programm wird wieder fast die gleiche Angabe
-erfolgen, lediglich der Name des Programms und die Versionsnummer
+erfolgen, nur der Name des Programms und die Versionsnummer
 werden sich unterscheiden.
 
 Was liegt also näher, als solch einen Text zu standardisieren?
@@ -103,7 +104,7 @@ Copyright (!copyright) (!ProgrammJahr) bei C. Anfänger
 !end_quote
 
 Im Vorspann einer Datei, die diesen Text einbindet, müssen dann
-lediglich die Makros ""ProgrammName"", ""ProgrammVersion"" und
+nur die Makros ""ProgrammName"", ""ProgrammVersion"" und
 ""ProgrammJahr"" gesetzt werden, im Hauptteil muss diese Datei dann nur
 noch an passender Stelle eingebunden werden:
 

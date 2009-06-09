@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: 'lediglich' -> 'nur'
 #
 ################################################################################
 
@@ -45,7 +46,7 @@ Mit den Schaltern (!KW [html_merge_nodes]), (!KW [html_merge_subnodes]),
 Sie die Aufteilung in mehrere Dateien unterbinden.
 
 Wird im Vorspann (!KW [html_merge_nodes]) benutzt, so wird das gesamte
-Dokument in einer Datei gesichert. Dies empfiehlt sich lediglich
+Dokument in einer Datei gesichert. Dies empfiehlt sich nur
 bei kleinen Dokumenten, die kleiner als 16 KB sind.
 
 (!KW [html_merge_subnodes]) sorgt dafür, dass alle Abschnitte eines

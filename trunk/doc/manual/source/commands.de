@@ -20,6 +20,7 @@
 # 2009:
 #   fd  Jun 05: introduced (from commands.ui)
 #   fd  Jun 05: nodes 'Command description' + 'Colors' are no longer hidden
+#   fd  Jun 09: 'lediglich' -> 'nur'
 #
 ################################################################################
 
@@ -60,7 +61,7 @@ beschrieben, was die Beschreibungen bedeuten.
 
 	Ein Kommando veranlasst UDO, etwas Bestimmtes zu tun, ein Schalter setzt
     bestimmte Informationen, an denen UDO erkennt, wie es demnächst zu
-    verfahren hat, ein Platzhalter wird bei der Umwandlung lediglich
+    verfahren hat, ein Platzhalter wird bei der Umwandlung nur
     durch etwas anderes ersetzt.
 
 	Bei ""Vorspann"" darf man einen Befehl nur im Vorspann des Quelltextes

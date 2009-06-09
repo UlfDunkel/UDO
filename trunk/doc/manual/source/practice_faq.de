@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from working.ui)
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: text reviewed, HomeSite + TextWrangler editors added
+#   fd  Jun 09: 'lediglich' -> 'nur'
 #
 ################################################################################
 
@@ -79,7 +80,7 @@ andere Betriebssysteme erzeugt werden, da die Versionen identisch
 sind. So ist es möglich, mit der Atari-Version WinHelp-Quelltexte
 zu erzeugen oder unter OS/2 mit der DOS-Version ST-Guide-Quelltexte.
 
-Lediglich eine Umsetzung der Sonderzeichen muss ggf. erfolgen.
+Ggf. muss nur eine Umsetzung der Sonderzeichen erfolgen.
 Dies kann man z.B. mit GNU-recode durchführen. Auf Wunsch gibt es
 auch bei (!link [uns] [Kontaktadresse]) ein Programm zur Umsetzung der Sonderzeichen in
 Textdateien.

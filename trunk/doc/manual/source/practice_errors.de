@@ -17,6 +17,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 08: etc. -> usw.
 #   fd  Jun 09: file reviewed
+#   fd  Jun 09: 'lediglich' -> 'nur'
 #
 ################################################################################
 
@@ -177,7 +178,7 @@ richtige Grafikformat handelt.
 
 !item [couldn't replace (!KKW [ilink])]
 Ein manueller Link mit einem ""fließendes"" Bild konnte nicht
-ersetzt werden. Innerhalb eines Absatzes sind lediglich (!MAXLINK)
+ersetzt werden. Innerhalb eines Absatzes sind nur (!MAXLINK)
 interne und externe Querverweise sowie Querverweise auf Seiten
 und ""fließende"" Bilder möglich. Teilen Sie den Absatz, in dem
 dieser manuelle Querverweis benutzt werden soll in zwei Hälften
@@ -185,20 +186,20 @@ oder entfernen Sie ein paar manuelle Querverweise.
 
 !item [couldn't replace (!KKW [img])]
 Ein ""fließendes"" Bild konnte nicht ersetzt werden. Innerhalb
-eines Absatzes sind lediglich (!MAXLINK) interne und externe Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder möglich.
+eines Absatzes sind nur (!MAXLINK) interne und externe Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder möglich.
 Teilen Sie den Absatz, in dem dieser manuelle Querverweis benutzt
 werden soll in zwei Hälften oder entfernen Sie ein paar manuelle
 Querverweise.
 
 !item [couldn't replace (!KKW [link])]
 Ein manueller interner Querverweis konnte nicht ersetzt werden.
-Innerhalb eines Absatzes sind lediglich (!MAXLINK) interne und externe
+Innerhalb eines Absatzes sind nur (!MAXLINK) interne und externe
 Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder
 möglich. Teilen Sie den Absatz, in dem dieser manuelle Querverweis benutzt werden soll in zwei Hälften oder entfernen Sie ein paar manuelle Querverweise.
 
 !item [couldn't replace (!KKW [xlink])]
 Ein manueller externer Querverweis konnte nicht ersetzt werden.
-Innerhalb eines Absatzes sind lediglich (!MAXLINK) interne und externe
+Innerhalb eines Absatzes sind nur (!MAXLINK) interne und externe
 Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder
 möglich. Teilen Sie den Absatz, in dem dieser manuelle Querverweis benutzt werden soll in zwei Hälften oder entfernen Sie ein paar manuelle Querverweise.
 
