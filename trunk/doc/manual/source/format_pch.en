@@ -14,13 +14,14 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 09: 'Atari ST' -> 'Atari'
 #
 ################################################################################
 
 !begin_node Pure C Help
 !html_name  format_pch
 
-The Pure C Help format is only useful for the Pure C compiler on Atari ST
+The Pure C Help format is only useful for the Pure C compiler on Atari 
 for displaying online library descriptions. The format isn't used for any
 other purposes neither on this nor on other computers.
 
