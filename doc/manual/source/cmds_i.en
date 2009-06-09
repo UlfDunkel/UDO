@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: !ifos and !ifnos now reference to os.ui resp. os.<ISO>
+#   fd  Jun 09: !iflang and !ifnlang now reference to language.<ISO>
 #
 ################################################################################
 
@@ -209,7 +210,8 @@ used. The example shows how to test if UDO converts to ST-Guide or Windows Help.
 !begin_node (!kw [iflang])
 !html_name  cmd_iflang
 
-Query the language.
+Query the language. Use the following words to test the language:
+!include language.en
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -295,7 +297,8 @@ convert to HTML.
 !begin_node (!kw [ifnlang])
 !html_name  cmd_ifnlang
 
-Query the language.
+Query the language. Use the following words to test the language:
+!include language.en
 
 !begin_xlist [(!TYPEPOSITION)]
 
