@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 08: quotation changed
 #   fd  Jun 08: etc. -> usw.
+#   fd  Jun 09: text reviewed
 #
 ################################################################################
 
@@ -36,16 +37,16 @@
 
 UDO stellt Ihnen die Kommandos (!KW [include]), (!KW [input]),
 (!KW [vinclude]) und (!KW [rinclude]) zur Verfügung, mit denen Sie die
-Möglichkeit erhalten, ein großes Dokument in mehrere kleine Dateien
+Möglichkeit haben, ein großes Dokument in mehrere kleine Dateien
 aufzuteilen oder identische Passagen mehrfach einzubinden.
 
 (!KW [include]) kann sowohl im Vorspann als auch im Hauptteil benutzt werden.
 Dadurch besteht die Möglichkeit, sowohl Makros und Trennvorschläge als
 auch Kapitel in externe Dateien auszulagern.
 
-Um den Inhalt von Dateien als Klartext darstellen zu können, bedient
-man sich des Kommandos (!KW [vinclude]) ("verbatim include"). Tip: Das
-Kommando (!KW [vinclude]) eignet sich sehr gut, um Sourcecodes oder
+Um den Inhalt von Dateien als Klartext darstellen zu können, nutzen Sie das
+Kommando (!KW [vinclude]) (""verbatim include""). Tip: Das
+Kommando (!KW [vinclude]) eignet sich sehr gut, um Sourcecode oder
 Headerfiles darzustellen.
 
 Falls man direkte Befehle für ein Format nachladen möchte, so kann man
@@ -53,8 +54,8 @@ sich des Kommandos (!KW [rinclude]) (""raw include"") bedienen. Tip: Dieser
 Befehl eignet sich im Zusammenhang mit dem (!KW [ifdest])-Kommando dazu, um
 z.B. spezielle (!LaTeX)-Tabellen oder HTML-Formulare einzubinden.
 
-Diese Dokumentation macht übrigens intensiven Gebrauch von diesen
-Möglichkeiten. Die Datei ""(!V)udo.u(!v)"" enthält lediglich wichtige
+Dieses UDO-Handbuch macht übrigens intensiven Gebrauch von diesen
+Möglichkeiten. Die Hauptdatei ""(!V)manual.u(!v)"" enthält lediglich wichtige
 Einstellungen und etliche (!KW [include])-Kommandos, jedoch keine
 einzige Zeile ""sichtbaren"" Textes.
 
@@ -70,7 +71,7 @@ eine neue Struktur geben zu können.
 
 !item Teilt man Texte in mehrere Dateien auf, die von einer Hauptdatei
 nachgeladen werden, kann dies die Fehlersuche erheblich beschleunigen.
-Durch auskommentieren der Zeilen, die bereits korrekte Kapitel
+Durch Auskommentieren der Zeilen, die bereits korrekte Kapitel
 einladen, kann man sofort sehen, wie UDO das zuletzt bearbeitete
 Kapitel umwandelt.
 
@@ -120,7 +121,7 @@ oder auch
 die zu Endlos-Schleifen führen!
 
 UDO kann derartige Über-Kreuz-Verweise nicht abfangen und liefert als Fehlermeldung
-lediglich "memory allocation failed".
+lediglich ""memory allocation failed"".
 
 !end_node # Verteilte Dokumente
 
@@ -128,9 +129,6 @@ lediglich "memory allocation failed".
 
 !begin_node Makros
 !html_name  misc_macros
-
-# 31.12.1995: Vorformatierte Makros
-# 14.07.1996: Makros mit Parametern
 
 Makros sind benutzerdefinierte Platzhalter, die sich für die
 verschiedensten Dinge eignen.
@@ -140,7 +138,7 @@ Beim Befehl (!KW [macro]) geben Sie zunächst den Bezeichner des Makros an,
 dem sich der Ersetzungstext anschließt. Letzterer kann auch leer sein.
 
 Um im Quelltext später den Inhalt eines Makros ausgeben zu lassen,
-geben Sie den Bezeichner der Makros mit einem führenden Ausrufezeichen
+geben Sie den Bezeichner des Makros mit einem führenden Ausrufezeichen
 und eingeschlossen in runde Klammern an.
 
 Auch hier zunächst ein paar Beispiele:
@@ -152,7 +150,7 @@ Auch hier zunächst ein paar Beispiele:
 !index (!kw [include])
 Diese Makros könnten dazu benutzt werden, sich lästige Tipparbeit zu
 sparen oder Änderungen zu beschleunigen. Ein weiteres Anwendungsgebiet
-ist das Erstellen von standardisierten Texten, deren Inhalt durch
+ist das Erstellen standardisierter Texte, deren Inhalt durch
 Makros an den jeweiligen Quelltext angepasst wird. Im folgenden
 Beispiel wird der Programmname in einen Disclaimer eingebaut, der per
 (!KW [include]) eingebunden wird:
@@ -166,24 +164,21 @@ Beispiel wird der Programmname in einen Disclaimer eingebaut, der per
 !index Makros !! Parameter
 !index Parameter !! Makros
 
-Seit UDO Release 6 können Makros auch Parameter übergeben werden. Bei
-der Erzeugung eines Makros geben Sie dazu mit ""(!T)(!/1)(!t)"", ""(!T)(!/2)(!t)"" bis ""(!T)(!/9)(!t)""
+Seit UDO Release~6 können Makros auch Parameter übergeben werden. Bei
+der Erzeugung eines Makros geben Sie dazu mit ""(!B)(!T)(!/1)(!t)(!b)"", ""(!B)(!T)(!/2)(!t)(!b)"" bis ""(!B)(!T)(!/9)(!t)(!b)""
 die Position der Parameter an. Um den Makros im Text die Parameter zu
 übergeben, setzen Sie diese in eckige Klammern.
 
-Hier ein kleines Beispiel, bei dem ein Makro für die Ausgabe von
-gleichzeitig fettem und kursiven Text definiert wird und später mit
+Hier ein kleines (und zugegebenermaßen geschmackloses) Beispiel, bei dem ein Makro für die Ausgabe von
+Text mit mehreren Textstilattributen gleichzeitig definiert wird und später mit
 nur einem Parameter aufgerufen wird:
 
 !begin_quote
 !vinclude (!EXAMPLES)macro3.ui
 !end_quote
 
-Die Worte ""fett und kursiv"" werden bei der Ausgabe dann an die Stelle
-von (!/1) gesetzt. Das Beispiel ist zugegebenermaßen nicht gerade
-glücklich gewählt, da man mit Schriftarten möglichst sparsam umgehen
-sollte, zeigt aber hier auf einfache Weise, wie man Makros einsetzen
-könnte.
+Die Worte ""fett, kursiv und unterstrichen"" werden bei der Ausgabe dann an die Stelle
+von (!B)(!T)(!/1)(!t)(!b) gesetzt.
 
 !smallskip
 
@@ -192,7 +187,7 @@ könnte.
 !begin_enumerate
 !item Bei der Namensvergabe der Makros sollte man möglichst darauf
 achten, diese nicht wie bereits existente Befehle oder Platzhalter zu
-benennen. So sollten sie ein Makro nicht ""B"" oder ""nl"" benennen, da
+benennen. So sollten sie ein Makro nicht ""B"" oder ""nl"" nennen, da
 dann die Umschaltung in Fettschrift ((!KK1 [B])) oder ein erzwungener
 Zeilenumbruch nicht mehr funktionieren.
 
@@ -200,6 +195,9 @@ Zeilenumbruch nicht mehr funktionieren.
 erlaubt zwar die Benutzung von bis zu (!MAXMACRO) Makros, jedoch verlangsamt
 jedes zusätzliche Makro die Umwandlung der Quelldatei, da jede Zeile
 nach allen Makros durchsucht werden muss.
+
+!item Beachten Sie auch, dass Makro-Definitionen nur im Vorspann, nicht aber im Haupttext Ihres
+      UDO-Dokuments platziert werden dürfen. UDO gibt sonst eine Fehlermeldung aus.
 !end_enumerate
 
 # = = = = =
@@ -210,35 +208,35 @@ nach allen Makros durchsucht werden muss.
 UDO kennt ein paar vordefinierte Makros/Platzhalter:
 
 !begin_table [|l|l|] !hline
-(!KKW [alpha]) !! (!alpha)-Zeichen ausgeben
+(!KKW [alpha])       !! (!B)(!alpha)(!b)-Zeichen ausgeben
 !hline
-(!KKW [beta]) !! (!beta)-Zeichen ausgeben
+(!KKW [beta])        !! (!B)(!beta)(!b)-Zeichen ausgeben
 !hline
-(!KKW [copyright]) !! Copyright-Symbol ausgeben
+(!KKW [copyright])   !! (!B)(!copyright)(!b)-Symbol ausgeben
 !hline
-(!KKW [deg]) !! (!deg)-Zeichen ausgeben
+(!KKW [deg])         !! (!B)(!deg)(!b)-Zeichen ausgeben
 !hline
-(!KKW [euro]) !! (!euro)-Zeichen ausgeben
+(!KKW [euro])        !! (!B)(!euro)(!b)-Zeichen ausgeben
 !hline
-(!KKW [grin]) !! Emoticon ausgeben (!grin)
+(!KKW [grin])        !! (!B)(!grin)(!b)-Emoticon ausgeben
 !hline
-(!KKW [LaTeX]) !! (!LaTeX)-Schriftzug ausgeben
+(!KKW [LaTeX])       !! (!B)(!LaTeX)(!b)-Schriftzug ausgeben
 !hline
-(!KKW [LaTeXe]) !! (!LaTeXe)-Schriftzug ausgeben
+(!KKW [LaTeXe])      !! (!B)(!LaTeXe)(!b)-Schriftzug ausgeben
 !hline
-(!KKW [laugh]) !! Emoticon ausgeben (!laugh)
+(!KKW [laugh])       !! (!B)(!laugh)(!b)-Emoticon ausgeben
 !hline
-(!KKW [pound]) !! (!pound)-Zeichen ausgeben
+(!KKW [pound])       !! (!B)(!pound)(!b)-Zeichen ausgeben
 !hline
-(!KKW [reg]) !! (!reg)-Zeichen ausgeben
+(!KKW [reg])         !! (!B)(!reg)(!b)-Zeichen ausgeben
 !hline
-(!KKW [TeX]) !! (!TeX)-Schriftzug ausgeben
+(!KKW [TeX])         !! (!B)(!TeX)(!b)-Schriftzug ausgeben
 !hline
-(!KKW [tm]) !! (!tm)-Zeichen ausgeben
+(!KKW [tm])          !! (!B)(!tm)(!b)-Zeichen ausgeben
 !hline
-(!KKW [today]) !! Systemdatum in langer Schreibweise ausgeben
+(!KKW [today])       !! Systemdatum in langer Schreibweise ausgeben: (!B)(!today)(!b)
 !hline
-(!KKW [short_today]) !! Systemdatum in kurzer Schreibweise einsetzen
+(!KKW [short_today]) !! Systemdatum in kurzer Schreibweise ausgeben: (!B)(!short_today)(!b)
 !hline
 !end_table
 
@@ -259,7 +257,7 @@ einzubauen.
 
 !index (!kw [define])
 Die Syntax für eine Definition lautet (!KW [define] [<wort> <text>]). Im
-Gegensatz zu den Makros wird (!T)<text>(!t) nicht speziell angepasst, d.h. es
+Gegensatz zu den Makros wird (!B)(!T)<text>(!t)(!b) nicht speziell angepasst, d.h., es
 werden keine Umlaute und andere Sonderzeichen angepasst.
 
 Im folgenden Beispiel benutzen wir eine Definition, um nur im
@@ -290,7 +288,7 @@ Platzhalter nun mit geeigneten Definitionen nachahmen:
 !index Parameter !! Definitionen
 Auch bei den Definitionen können Sie Parameter benutzen. Gerade wenn
 es darum geht, Befehle einiger Formate direkt einzubauen, kann diese
-Möglichkeit der hifreich sein.
+Möglichkeit der hilfreich sein.
 
 Benutzt werden Definitionen, die Parameter enthalten sollen, wie
 Makros mit Parametern. Text, der beim Aufruf einer Definition anstelle
@@ -361,13 +359,13 @@ momentan bei maximal (!MAXMACRO) pro Quelltext.
 
 Symbole sind benutzerdefinierte inhaltsleere Variablen, welche sich
 durch das Kommando (!KW [set]) und beim Aufruf von UDO durch die
-Kommandozeilenoption (!V)-D(!v) setzen und mit dem Kommando (!KW [unset]) auch
-wieder entfernen lassen. Ob ein Symbol (nicht) gesetzt ist, lässt sich
-durch die Abfrage-Befehle (!KW [ifset]) bzw. (!KW [ifnset]) testen.
+Kommandozeilenoption (!B)(!V)-D(!v)(!b) setzen und mit dem Kommando (!KW [unset]) auch
+wieder entfernen lassen. Ob ein Symbol gesetzt oder nicht gesetzt ist, lässt sich
+mit den Abfrage-Befehlen (!KW [ifset]) bzw. (!KW [ifnset]) testen.
 
-Die Einsatzmöglichkeiten von Symbolen sind vielfältig. Im folgenden
-Beispiel werde ich versuchen, Ihnen ein typisches Anwendungsgebiet zu
-zeigen, bei dem man je nach gesetzten Symbolen eine Zieldatei mit
+Die Einsatzmöglichkeiten von Symbolen sind vielfältig. Das folgende 
+Beispiel zeigt Ihnen ein typisches Anwendungsgebiet,
+bei dem man je nach gesetzten Symbolen eine Zieldatei mit
 unterschiedlichem Inhalt erhält.
 
 Gehen wir einmal davon aus, dass wir einen Quelltext geschrieben haben,
@@ -383,38 +381,38 @@ gesetzt ist, soll die Zieldatei alle Kapitel enthalten:
 
 Starten Sie UDO nun ""normal"", wird eine Zieldatei erstellt, die nur das
 dritte Kapitel enthält. Starten Sie UDO hingegen mit der
-Kommandozeilenoption ""(!V)-D~AlleKapitel(!v)"", so werden alle Kapitel umgewandelt.
+Kommandozeilenoption ""(!B)(!V)-D~AlleKapitel(!v)(!b)"", so werden alle Kapitel umgewandelt.
 
 Das Spielchen kann man natürlich noch etwas ausbauen. Durch Verwendung
 weiterer Symbole kann man gezielt nur einzelne Kapitel oder alle
 zusammen in die Zieldatei aufnehmen. Im folgenden Beispiel wird bei
-Übergabe der Option ""(!V)-D~Kapitel1(!v)"" nur das erste Kapitel in die
-Zieldatei aufgenommen. Übergibt man ""(!V)-D~Kapitel1(!v)"" und ""(!V)-D~Kapitel2(!v)"",
+Übergabe der Option ""(!B)(!V)-D~Kapitel1(!v)(!b)"" nur das erste Kapitel in die
+Zieldatei aufgenommen. Übergibt man ""(!B)(!V)-D~Kapitel1(!v)(!b)"" und ""(!B)(!V)-D~Kapitel2(!v)(!b)"",
 so werden das erste und das zweite Kapitel eingebunden. Übergibt man
-hingegen ""(!V)-D~AlleKapitel(!v)"", so wird die Zieldatei komplett dargestellt:
+hingegen ""(!B)(!V)-D~AlleKapitel(!v)(!b)"", so wird die Zieldatei komplett dargestellt:
 
 !begin_quote
 !vinclude (!EXAMPLES)symbol2.ui
 !end_quote
 
-Der Phantasie sind also wenige Grenzen gesetzt!
+Ihrer Phantasie sind hier kaum Grenzen gesetzt!
 
 Wie in der Einführung zu diesem Abschnitt beschrieben, lassen sich
 Symbole auch wieder löschen. Dazu bedient man sich des Befehls (!KW [unset]).
 
 Wollen Sie in obigem Beispiel partout verhindern, dass alle Kapitel in
 die Zieldatei eingebunden werden, so können Sie zuvor das Symbol
-AlleKapitel löschen, sofern es gesetzt wurde. Dies funktioniert so:
+(!B)(!T)AlleKapitel(!t)(!b) löschen, sofern es gesetzt wurde. Dies funktioniert so:
 
 !begin_quote
 !vinclude (!EXAMPLES)symbol3.ui
 !end_quote
 
 In diesem Beispiel wird also zunächst abgefragt, ob das Symbol
-""(!V)AlleKapitel(!v)"" gesetzt ist. In dem Falle wird es durch den Befehl
+""(!B)(!V)AlleKapitel(!v)(!b)"" gesetzt ist. In dem Falle wird es durch den Befehl
 (!KW [unset]) gelöscht. Die vorherige Abfrage ist deshalb notwendig, damit
-man eine Fehlermeldung seitens UDO vermeidet, falls das Symbol
-""(!V)AlleKapitel(!v)"" einmal nicht gesetzt ist.
+man eine Fehlermeldung durch UDO vermeidet, falls das Symbol
+""(!B)(!V)AlleKapitel(!v)(!b)"" einmal nicht gesetzt ist.
 
 (!HINTS)
 
@@ -458,7 +456,7 @@ falls man davon ausgehen kann, dass der Leser bei der Suche nach einem
 Wort auf verschiedene Art und Weise im Indexregister nachschaut.
 
 Falls Sie denken, dass der Leser bei der Suche nach dem Wort
-""Zeilenabstand"" im Index auch unter "Abstand" nachschauen wird,
+""Zeilenabstand"" im Index auch unter ""Abstand"" nachschauen wird,
 sollten Sie beide Indexeinträge vornehmen.
 
 !begin_quote
@@ -512,7 +510,7 @@ im Vorspann unterbinden.
 !item Kapitelüberschriften, Labels und Aliase gelangen standardmäßig
 bei keinem Format in den Index. Sie können dies allerdings
 automatisch von UDO erledigen lassen, indem Sie die Schalter
-!KW [use_nodes_inside_index]), (!KW [use_label_inside_index]) und
+(!KW [use_nodes_inside_index]), (!KW [use_label_inside_index]) und
 (!KW [use_alias_inside_index]) im Vorspann setzen.
 
 !index (!kw [ignore_index])
@@ -578,8 +576,8 @@ ausgegeben wird. Zur Abfrage verwenden Sie die Kürzel der Ausgabeformate:
 !include formattb.ui
 
 Zusätzlich zu den hier genannten Zeichenketten können jeweils auch
-""all"" und ""none"" verwendet werden. Bei ""all"" liefert eine Abfrage
-immer ein wahres Ergebnis, bei ""none"" immer ein falsches.
+""(!B)(!V)all(!v)(!b)"" und ""(!B)(!V)none(!v)(!b)"" verwendet werden. Bei ""(!B)(!V)all(!v)(!b)"" liefert eine Abfrage
+immer ein wahres Ergebnis, bei ""(!B)(!V)none(!v)(!b)"" immer ein falsches.
 
 Das folgende Beispiel zeigt, wie man den Titel der Windows-Hilfe
 anders als für die anderen Formate setzt:
@@ -639,26 +637,14 @@ verpassen:
 Mit dem Befehl (!KW [iflang]) können Sie die Sprache abfragen, die für die
 Ausgabe der Zieldatei verwendet wird. Hierbei gelten folgende Zeichenketten:
 
-!index Sprache
+
 !label Sprache
 !label Sprachen
-!begin_xlist [swedish:] !short
-!item [czech:]   Tschechisch
-!item [danish:]  Dänisch
-!item [dutch:]   Holländisch
-!item [english:] Englisch
-!item [french:]  Französisch
-!item [german:]  Deutsch
-!item [italian:] Italienisch
-!item [latvian:] Lettisch
-!item [polish:]  Polnisch
-!item [spanish:] Spanisch
-!item [swedish:] Schwedisch
-!end_xlist
+!include language.de
 
 Zusätzlich zu den hier genannten Zeichenketten können jeweils auch
-""all"" und ""none"" verwendet werden. Bei ""all"" liefert eine Abfrage
-immer ein wahres Ergebnis, bei ""none"" immer ein falsches.
+""(!CODE [all])"" und ""(!CODE [none])"" verwendet werden. Bei ""(!CODE [all])"" liefert eine Abfrage
+immer ein wahres Ergebnis, bei ""(!CODE [none])"" immer ein falsches.
 
 Bei kleineren Texten können Sie so z.B. gleich alle Übersetzungen in
 einem Quelltext unterbringen:
@@ -689,8 +675,7 @@ also auch so ausdrücken:
 !end_quote
 
 Selbstverständlich können Sie auch bei dieser Abfrage wieder mehrere
-Sprachkürzel angeben. Ein Beispiel brauche ich dafür wohl nicht mehr
-angeben.
+Sprachkürzel angeben.
 
 !end_node # Abfrage der Sprache
 
@@ -712,10 +697,10 @@ dem Befehl (!KW [ifnset]), ob Symbole nicht gesetzt sind.
 !index -D
 !index -U
 Wie Sie bereits wissen, können Sie Symbole mit der Kommandozeilenoption
--D und mit dem Befehl (!KW [set]) setzen und mit dem Befehl
+(!CODE [-D]) und mit dem Befehl (!KW [set]) setzen und mit dem Befehl
 (!KW [unset]) wieder löschen.
 
-Im folgenden Beispiel wird abgefragt, ob das Symbol Farbbilder gesetzt
+Im folgenden Beispiel wird abgefragt, ob das Symbol (!CODE [Farbbilder]) gesetzt
 ist und entsprechend ein passendes Bild eingebunden:
 
 !begin_quote
@@ -728,9 +713,9 @@ ist und entsprechend ein passendes Bild eingebunden:
 !end_verbatim
 !end_quote
 
-Wenn Sie nun UDO mit der Option -D Farbbilder aufrufen bzw. vor der
+Wenn Sie nun UDO mit der Option (!CODE [-D Farbbilder]) aufrufen bzw. vor der
 obigen Abfrage das Kommando (!KW [set] [Farbbilder]) in den Quelltext einbauen,
-so bindet UDO ein Farbbild, andernfalls ein monochromes Bild ein.
+so bindet UDO ein Farbbild ein, andernfalls ein monochromes Bild.
 
 !end_node # Abfrage von Symbolen
 
@@ -746,24 +731,11 @@ so bindet UDO ein Farbbild, andernfalls ein monochromes Bild ein.
 Mit dem Befehl (!KW [ifos]) können Sie das Betriebssystem abfragen, auf dem
 UDO läuft. Hierbei gelten folgende Zeichenketten:
 
-!index Betriebssystem
 !label Betriebssystem
-!begin_xlist [nextstep:] !short
-!item [beos:]     BeOS
-!item [dos:]      DOS
-!item [hpux:]     HP-UX
-!item [linux:]    Linux
-!item [macos:]    Mac~OS
-!item [macosx:]   Mac~OS~X
-!item [nextstep:] NeXTStep
-!item [sinix:]    SINIX
-!item [sunos:]    SunOS
-!item [tos:]      TOS
-!item [win:]      Windows (32-Bit)
-!end_xlist
+!include os.de
 
 Auch hier gilt, dass zusätzlich zu den genannten Zeichenketten auch
-""all"" und ""none"" verwendet werden können.
+""(!CODE [all])"" und ""(!CODE [none])"" verwendet werden können.
 
 !index (!kw [ifnos])
 Wiederum existiert ein verwandter Befehl namens (!KW [ifnos]), der abfragt,
@@ -829,7 +801,6 @@ Dokument auszudrucken ist und damit es einen Index erzeugt:
 
 !label raw-Umgebung
 !item [Die raw-Umgebung]
-
 Will man größere Blöcke im jeweiligen Format angeben, wäre es ziemlich
 mühsam, wenn man jede Zeile mit einem Kürzel beginnen müsste.
 
@@ -847,8 +818,8 @@ Quelltext umgewandelt wird, können spezielle Befehle ausgegeben werden.
 Anwendungsbeispiele wären z.B. komplizierte Tabellen für (!LaTeX) oder
 Formulare für HTML. Letzteres soll hier aufgezeigt werden:
 
-!index HTML !! <FORM>
-!index <FORM>
+!index HTML !! <form>
+!index <form>
 !begin_quote
 !vinclude (!EXAMPLES)raw1.ui
 !end_quote
@@ -864,7 +835,6 @@ Eine weitere Möglichkeit dazu bietet der Befehl (!KW [rinclude]).
 
 !label comment-Umgebung
 !item [Die comment-Umgebung]
-
 Will man größere Blöcke als Kommentar in die Ausgabedatei schreiben, wäre es ziemlich
 mühsam, wenn man jede Zeile mit einem Kürzel beginnen müsste.
 
