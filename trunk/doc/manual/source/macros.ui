@@ -15,34 +15,35 @@
 # 2009:
 #   fd  Jun 05: introduced (extracted from manual.u)
 #   fd  Jun 08: all commands should be formatted in bold tt
+#   fd  Jun 09: macros x/X renamed to avoid conflicts with other macros and link names
 #
 ################################################################################
 
 !macro UDOR udo(!RELEASE)
 # RELEASE is defined in file _version.ui
 
-!macro a !]
-!define x !(!1)
-!macro  X !
+!macro  a !]
+!define exclam !(!1)
+!macro  Exclam !
 
 # command parameters without link
-!macro CODE (!B)(!T)(!1)(!t)(!b)
+!macro  CODE (!B)(!T)(!1)(!t)(!b)
 
 # command parameters without leading !
-!macro KP (!B)(!T)(!link [(!1) (!2)][(!1)])(!t)(!b)
+!macro  KP (!B)(!T)(!link [(!1) (!2)][(!1)])(!t)(!b)
 
 # commands with leading !
-!macro KW   (!B)(!T)(!link [!(!1) (!2)] [!(!1)])(!t)(!b)
-!macro K1   (!B)(!T)(!link [!(!1) (!2)] [!(!1)])(!t)(!b)
+!macro  KW   (!B)(!T)(!link [!(!1) (!2)] [!(!1)])(!t)(!b)
+!macro  K1   (!B)(!T)(!link [!(!1) (!2)] [!(!1)])(!t)(!b)
 
 # commands with round brackets and leading !
-!macro KKW  (!B)(!T)(!link [(!(!1)!)] [(!/(!1)!)])(!t)(!b)
-!macro KK2W (!B)(!T)(!link [(!(!1) (!2)!)] [(!/(!1)!)])(!t)(!b)
-!macro KKKW (!B)(!T)(!link [(!(!1)!)...(!(!2)!)] [(!(!1)!)...(!(!2)!)])(!t)(!b)
-!macro KK1  (!B)(!T)(!link [((!X)(!1)!)] [((!X)/(!1)!)])(!t)(!b)
+!macro  KKW  (!B)(!T)(!link [(!(!1)!)] [(!/(!1)!)])(!t)(!b)
+!macro  KK2W (!B)(!T)(!link [(!(!1) (!2)!)] [(!/(!1)!)])(!t)(!b)
+!macro  KKKW (!B)(!T)(!link [(!(!1)!)...(!(!2)!)] [(!(!1)!)...(!(!2)!)])(!t)(!b)
+!macro  KK1  (!B)(!T)(!link [((!Exclam)(!1)!)] [((!Exclam)/(!1)!)])(!t)(!b)
 
 # ???
-!macro kw   !(!1)
+!macro  kw   !(!1)
 
 # ???
 !define k1   !(!1)
