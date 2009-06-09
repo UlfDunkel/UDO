@@ -22,6 +22,10 @@
 #   fd  Jun 05: nodes 'Command description' + 'Colors' are no longer hidden
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: CHAR macro enhanced
+#   fd  Jun 09: VALUE macro introduced
 #
 ################################################################################
 
@@ -76,17 +80,17 @@ beschrieben, was die Beschreibungen bedeuten.
 
 	!begin_tlist [WsystemeW] !short
 
-	!label <text>
-	!item [<text>] steht für eine Zeichenfolge
+	!label (!TEXT)
+	!item [(!TEXT)] steht für eine Zeichenfolge
 
-	!label <datei>
-	!item [<datei>] steht für einen Dateinamen. (!FILESPACEQUOTE)
+	!label (!FILE)
+	!item [(!FILE)] steht für einen Dateinamen. (!FILESPACEQUOTE)
 
-	!label <wert>
-	!item [<wert>] steht für eine Ziffernfolge
+	!label (!VALUE)
+	!item [(!VALUE)] steht für eine Ziffernfolge
 
-	!label <zeichen>
-	!item [<zeichen>] steht für ein einzelnes Zeichen
+	!label (!CHAR)
+	!item [(!CHAR)] steht für ein einzelnes Zeichen
 
 	!label <kürzel>
 	!item [<kürzel>] steht für die Angabe von Kürzeln der (!link [Ausgabeformate] [Ausgabeformat])

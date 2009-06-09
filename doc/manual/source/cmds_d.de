@@ -19,6 +19,11 @@
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 09: WORD macro introduced
+#   fd  Jun 09: NAME macro introduced
 #
 ################################################################################
 
@@ -37,7 +42,7 @@ Datumsinformation für Titelseite setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/date <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/date (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -64,11 +69,11 @@ Definition setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/define <wort> <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/define (!WORD) (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Dieses Kommando legt eine neue Definition an. Bei der
-Umwandlung wird dann ""<wort>"" durch ""<text>""
+Umwandlung wird dann ""(!WORD)"" durch ""(!TEXT)""
 ersetzt, ohne dass Umlaute oder andere spezielle
 Zeichen umgewandelt werden. Im Beispiel würde ""(!/H1)""
 durch ""</H1>"" ersetzt. (!nolink [Definitionen]) können auch
@@ -132,10 +137,10 @@ Markierung von Löschungen.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/DEL)<(!TEXT)>(!/del)(!t)
+!item [(!SYNTAX)] (!T)(!/DEL)(!TEXT)(!/del)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" wird als Löschung markiert.
+""(!TEXT)"" wird als Löschung markiert.
 
 Bei der HTML-Ausgabe wird die aktuelle Zeit als Attribut datetime
 und die URL ""http://www.udo-open-source.org"" als Attribut cite eingesetzt.
@@ -173,7 +178,7 @@ Tiefe für (!nolink [Inhaltsverzeichnis]) angeben.
 
 !item [(!TYPEPOSITION)] (!SWITCH), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/depth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/depth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Wird dieser Schalter zusammen mit dem Befehl zur
@@ -207,67 +212,67 @@ Dokumentinformationen setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/docinfo [<name>] <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/docinfo [(!NAME)] (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Dieses Kommando dient dazu, verschiedene Informationen für
-die Titelseite zu setzen. ""<name>"" kann dabei einer
+die Titelseite zu setzen. ""(!NAME)"" kann dabei einer
 der folgenden Werte sein:
 
 !begin_description
 
 !item [title]
-""<text>"" wird auf der (!nolink [Titelseite]) vor dem Inhalt von
-(!KW [docinfo] [[program!!]]) ausgegeben. ""<text>"" wird darüber hinaus noch
+""(!TEXT)"" wird auf der (!nolink [Titelseite]) vor dem Inhalt von
+(!KW [docinfo] [[program!!]]) ausgegeben. ""(!TEXT)"" wird darüber hinaus noch
 zur Darstellung von Kopfzeilen bei einigen Formaten herangezogen.
 
 !item [program]
-""<text>"" wird auf der (!nolink [Titelseite]) unterhalb der Titelzeile
-ausgegeben. Desweiteren wird ""<text>"" bei einigen Formaten zur
+""(!TEXT)"" wird auf der (!nolink [Titelseite]) unterhalb der Titelzeile
+ausgegeben. Desweiteren wird ""(!TEXT)"" bei einigen Formaten zur
 Darstellung von Kopfzeilen herangezogen.
 
 !item [programimage]
-Das Bild ""<datei>"" wird unterhalb der (!nolink [Titelzeile]) auf der Titelseite ausgegeben.
+Das Bild ""(!FILE)"" wird unterhalb der (!nolink [Titelzeile]) auf der Titelseite ausgegeben.
 
 !item [version]
-""<text>"" wird unterhalb des Programmnamens auf der (!nolink [Titelseite])
-ausgegeben. Ansonsten findet ""<text>"" keine weitere Verwendung.
+""(!TEXT)"" wird unterhalb des Programmnamens auf der (!nolink [Titelseite])
+ausgegeben. Ansonsten findet ""(!TEXT)"" keine weitere Verwendung.
 
 !item [date]
-""<text>"" wird unterhalb der Versionsinformationen auf der
+""(!TEXT)"" wird unterhalb der Versionsinformationen auf der
 (!nolink [Titelseite]) ausgegeben. Ansonsten werden diese Informationen nicht
 weiter benötigt. Im Beispiel würde auf der Titelseite das aktuelle
 Systemdatum eingesetzt.
 
 !item [author]
-""<text>"" wird als Name des Autors auf der (!nolink [Titelseite]) ausgegeben
+""(!TEXT)"" wird als Name des Autors auf der (!nolink [Titelseite]) ausgegeben
 und für weitere, jedoch sehr spezifische Formatbefehle verwendet. Im
-Text selbst findet ""<text>"" keine weitere Verwendung.
+Text selbst findet ""(!TEXT)"" keine weitere Verwendung.
 
 !item [authorimage]
-""<datei>"" wird als Bild (z.B. ein Logo) zusätzlich direkt über
+""(!FILE)"" wird als Bild (z.B. ein Logo) zusätzlich direkt über
 dem Namen des Autors auf der (!nolink [Titelseite]) ausgegeben, falls das
 (!nolink [Ausgabeformat]) Unterstützung für (!nolink [Bilder]) bietet.
 
 !item [authoricon]
-""<datei>"" wird als Bild (z.B. ein Logo) im linken Frame bzw.
+""(!FILE)"" wird als Bild (z.B. ein Logo) im linken Frame bzw.
 in der linken Spalte beim Frame-Layout bzw. ""modernen"" Layout
 von HTML ausgegeben.
 
 !item [address]
-""<text>"" wird auf der (!nolink [Titelseite]) unterhalb des Namens
-des Autors ausgegeben. ""<text>"" findet sonst keine
+""(!TEXT)"" wird auf der (!nolink [Titelseite]) unterhalb des Namens
+des Autors ausgegeben. ""(!TEXT)"" findet sonst keine
 weitere Verwendung durch UDO. (!KW [docinfo] [[address!!]]) kann bis zu 15 mal
 angegeben werden, dass man hier z.B. auch mehrere E-Mail-Adressen auf der
 Titelseite angeben kann.
 
 !item [company]
-""<text>"" bezeichnet die Firma, für die ein Dokument erstellt wird.
+""(!TEXT)"" bezeichnet die Firma, für die ein Dokument erstellt wird.
 Wenn company benutzt wird, wird auf der Titelseite unter Autor
 ""für company"" eingefügt.
 
 !item [category]
-""<text>"" bezeichnet eine Kategorie, zu der das Dokument gehört.
+""(!TEXT)"" bezeichnet eine Kategorie, zu der das Dokument gehört.
 
 !item [stgdatabase]
 Mittels (!KW [docinfo] [[stgdatabase!!]]) kann man angeben, was UDO
@@ -296,11 +301,11 @@ Bei der HTML-Ausgabe allerdings nur, wenn in einzelnen Dateien nicht
 (!KW [html_description]) benutzt wird. Diese haben also Vorrang. (!nl)
 
 !item [htmltitle]
-""<text>"" wird für den (!nolink [Titel]) jeder Seite benutzt (anstelle der
+""(!TEXT)"" wird für den (!nolink [Titel]) jeder Seite benutzt (anstelle der
 Zusammenfassung von [title] und [program]).
 
 !item [robots]
-""<text>"" entspricht einer der Robots Anweisung wie sie für Suchmaschinen benutzt werden.
+""(!TEXT)"" entspricht einer der Robots Anweisung wie sie für Suchmaschinen benutzt werden.
 Erlaubt sind ""none"", ""noindex"", ""index"", ""nofollow"" und ""follow"".
 
 !item [appletitle]
@@ -327,12 +332,12 @@ Angaben gemacht oder im Vorspann (!KW [no_footers] [[html!!]]) benutzt, so
 gibt UDO nichts aus.
 
 !item [translator]
-""<text>"" bezeichnet den Namen des Übersetzers, der das Produkt oder Dokument übersetzt hat.
+""(!TEXT)"" bezeichnet den Namen des Übersetzers, der das Produkt oder Dokument übersetzt hat.
 Wenn translator benutzt wird, wird auf der Titelseite nach Autor und Firma 
 ""Übersetzung: translator"" eingefügt.
 
 !item [distributor]
-""<text>"" bezeichnet die Firma, die das Produkt oder Dokument vertreibt.
+""(!TEXT)"" bezeichnet die Firma, die das Produkt oder Dokument vertreibt.
 Wenn distributor benutzt wird, wird auf der Titelseite nach Autor und Firma 
 ""Distributor: distributor"" eingefügt.
 
@@ -381,11 +386,11 @@ Setzen von Informationen für das Layout.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/doclayout [(!FORMAT)][<name>] <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/doclayout [(!FORMAT)][(!NAME)] (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Dieses Kommando dient dazu, verschiedene Informationen für
-das Layout. zu setzen. ""<name>"" kann dabei einer
+das Layout. zu setzen. ""(!NAME)"" kann dabei einer
 der folgenden Werte sein:
 
 !begin_description
@@ -475,7 +480,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/drc <text>(!t)
+!item [(!SYNTAX)] (!T)!/drc (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -529,7 +534,7 @@ Wert für Nodefinition festlegen (nur DRC).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/drc_flags <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/drc_flags (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Hiermit kann man den Wert angeben, der als letzter numerischer Wert einer

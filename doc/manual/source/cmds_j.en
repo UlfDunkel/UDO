@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 09: TEXT macro enhanced
 #
 ################################################################################
 
@@ -31,7 +32,7 @@ Assign a Help-ID (WinHelp only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/jumpid <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/jumpid (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 This command only existed in a beta version and has been renamed to (!KW [win_helpid]).

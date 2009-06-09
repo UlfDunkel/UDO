@@ -18,6 +18,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: TEXT macro enhanced
 #
 ################################################################################
 
@@ -37,10 +38,10 @@ Text in Fettschrift ausgeben.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/B)<(!TEXT)>(!/b)(!t)
+!item [(!SYNTAX)] (!T)(!/B)(!TEXT)(!/b)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" wird fett dargestellt, falls möglich.
+""(!TEXT)"" wird fett dargestellt, falls möglich.
 
 !item [(!EXAMPLE)]
 (!T)(!/B)fett(!/b)(!t)
@@ -63,7 +64,7 @@ Eine ""fette"" Liste einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/bbl [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/bbl [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [begin_blist]).
@@ -208,12 +209,12 @@ Eine ""fette"" Liste einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_blist [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/begin_blist [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 Leitet eine neue Listen-Umgebung ein. Diese Umgebung
 muss mit (!KW [end_blist]) beendet werden. Die Länge von
-""<text>"" definiert die Tiefe der Einrückung der
+""(!TEXT)"" definiert die Tiefe der Einrückung der
 Aufzählungspunkte. Diese Umgebung lässt sich mit
 anderen Umgebungen kombiniert verwenden. Die Texte,
 die man mit (!KW [item] [[~!!]]) angibt, werden fett
@@ -453,11 +454,11 @@ Eine ""kursive"" Liste einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_ilist [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/begin_ilist [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 Leitet eine neue Listen-Umgebung ein. Diese Umgebung muss mit (!KW [end_ilist]) beendet werden. Die Länge von
-""<text>"" definiert die Tiefe der Einrückung der Aufzählungspunkte. Sie können diese Umgebung auch mit
+""(!TEXT)"" definiert die Tiefe der Einrückung der Aufzählungspunkte. Sie können diese Umgebung auch mit
 anderen (!nolink [Umgebungen]) kombinieren. Die Aufzählungspunkte, die man mit (!KW [item] [[~!!]]) einleitet,
 werden kursiv dargestellt.
 
@@ -544,12 +545,12 @@ Kapitel/Abschnitt/Unterabschnitt/Paragraph einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_node <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/begin_node (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Leitet, abhängig von der momentanen Gliederungsebene,
 ein Kapitel, Abschnitt, Unterabschnitt oder Paragraphen
-mit der Bezeichnung ""<text>"" ein.
+mit der Bezeichnung ""(!TEXT)"" ein.
 Kapitel erscheinen in Inhaltsverzeichnissen.
 
 !item [(!EXAMPLE2)]
@@ -581,11 +582,11 @@ Kapitel/Abschnitt/Unterabschnitt/Paragraph ohne Eintrag im Inhaltsverzeichnis ei
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_node* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/begin_node* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Dieses Kommando hat die gleiche Funktion wie (!KW [begin_node]),
-mit der Ausnahme, dass ""<text>"" nicht in Inhaltsverzeichnissen erscheint.
+mit der Ausnahme, dass ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
 
 !item [(!EXAMPLE2)]
 (!T)!/begin_node* (!nolink [Titel]) des versteckten Kapitels(!t) (!nl)
@@ -612,12 +613,12 @@ Popup-Kapitel/Abschnitt/Unterabschnitt/Paragraph einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_pnode <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/begin_pnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Leitet, abhängig von der momentanen Gliederungsebene,
 ein Kapitel, Abschnitt, Unterabschnitt oder Paragraphen
-mit der Bezeichnung ""<text>"" ein.
+mit der Bezeichnung ""(!TEXT)"" ein.
 Kapitel erscheinen in Inhaltsverzeichnissen.
 Identisch mit (!KW [begin_node]), der Inhalt wird jedoch beim
 ST-Guide und bei WinHelp als Popup dargestellt.
@@ -647,11 +648,11 @@ Popup-Kapitel/Abschnitt/Unterabschnitt/Paragraph ohne Eintrag im Inhaltsverzeich
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_pnode* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/begin_pnode* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Dieses Kommando hat die gleiche Funktion wie (!KW [begin_pnode]),
-mit der Ausnahme, dass ""<text>"" nicht in Inhaltsverzeichnissen erscheint.
+mit der Ausnahme, dass ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
 
 !item [(!EXAMPLE2)]
 (!T)!/begin_pnode* (!nolink [Titel]) des versteckten Popups(!t) (!nl)
@@ -709,7 +710,7 @@ Umgebungstext eingerückt darstellen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_quote [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/begin_quote [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 Dieses Kommando leitet eine (weitere) quote-Umgebung
@@ -875,12 +876,12 @@ Eine ""nichtproportionale"" Liste einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_tlist [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/begin_tlist [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 Leitet eine neue Listen-Umgebung ein. Diese Umgebung
 muss mit (!KW [end_tlist]) beendet werden. Die Länge von
-""<text>"" definiert die Tiefe der Einrückung der
+""(!TEXT)"" definiert die Tiefe der Einrückung der
 Aufzählungspunkte. Sie können diese Umgebung auch mit
 anderen (!nolink [Umgebungen]) kombinieren. Die
 Die Texte, die man mit (!KW [item] [[~!!]]) angibt, werden mit nichtproportionaler Schrift
@@ -934,12 +935,12 @@ Eine Liste einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/begin_xlist [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/begin_xlist [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 Leitet eine neue Listen-Umgebung ein. Diese Umgebung
 muss mit (!KW [end_xlist]) beendet werden. Die Länge von
-""<text>"" definiert die Tiefe der Einrückung der
+""(!TEXT)"" definiert die Tiefe der Einrückung der
 Aufzählungspunkte. Diese Umgebung lässt sich mit
 anderen (!nolink [Umgebungen]) kombiniert verwenden. Die Texte,
 die man mit (!KW [item] [[~!!]]) angibt, werden normal
@@ -1088,7 +1089,7 @@ Eine ""kursive"" Liste einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/bil [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/bil [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [begin_ilist]).
@@ -1171,7 +1172,7 @@ Kapitel/Abschnitt/Unterabschnitt/Paragraph einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/bn [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/bn [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [begin_node]).
@@ -1194,7 +1195,7 @@ Kapitel/Abschnitt/Unterabschnitt/Paragraph ohne Eintrag im Inhaltsverzeichnis ei
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/bn* [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/bn* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [begin_node*]).
@@ -1217,7 +1218,7 @@ Popup-Kapitel/Abschnitt/Unterabschnitt/Paragraph einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/bp [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/bp [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [begin_pnode]).
@@ -1240,7 +1241,7 @@ Popup-Kapitel/Abschnitt/Unterabschnitt/Paragraph ohne Eintrag im Inhaltsverzeich
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/bp* [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/bp* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [begin_pnode*]).
@@ -1313,7 +1314,7 @@ Eine ""nichtproportionale"" Liste einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/btl [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/btl [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [begin_tlist]).
@@ -1336,7 +1337,7 @@ Eine Liste einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/bxl [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/bxl [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [begin_xlist]).

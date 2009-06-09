@@ -20,6 +20,10 @@
 # 2009:
 #   fd  Jun 05: introduced (from commands.ui)
 #   fd  Jun 05: nodes 'Command description' + 'Colors' are no longer hidden
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: CHAR macro enhanced
+#   fd  Jun 09: VALUE macro introduced
 #
 ################################################################################
 
@@ -70,17 +74,17 @@ descriptions.
 
 	!begin_tlist [WabbreviationsW] !short
 
-	!label <text>
-	!item [<text>] replaces text
+	!label (!TEXT)
+	!item [(!TEXT)] replaces text
 
-	!label <file>
-	!item [<file>] replaces a file name
+	!label (!FILE)
+	!item [(!FILE)] replaces a file name
 
-	!label <value>
-	!item [<value>] replaces a number
+	!label (!VALUE)
+	!item [(!VALUE)] replaces a number
 
-	!label <char>
-	!item [<char>] replacedescriptions a single char
+	!label (!CHAR)
+	!item [(!CHAR)] replacedescriptions a single char
 
 	!label <abbreviations>
 	!item [<abbreviations>] replaces the abbreviation of the (!link [destination formats] [Abbreviations])

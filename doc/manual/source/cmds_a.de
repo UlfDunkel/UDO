@@ -19,6 +19,8 @@
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
 #
 ################################################################################
 
@@ -37,7 +39,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=aqv <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=aqv (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -65,7 +67,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=asc <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=asc (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -92,7 +94,7 @@ Zusatznamen eines Kapitels definieren.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/a [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/a [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [alias]).
@@ -115,15 +117,15 @@ Zusatznamen eines Kapitels definieren.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/alias <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/alias (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Definiert einen Zweitnamen eines Kapitels. Taucht
-""<text>"" im Text auf, werden genauso Querverweise zum
+""(!TEXT)"" im Text auf, werden genauso Querverweise zum
 zugehörigen Kapitel erzeugt wie bei (!KW [label]), (!KW [node]),
 (!KW [subnode]), (!KW [subsubnode]) usw. Sie können (!KW [alias]) mehrfach
 innerhalb eines Kapitels benutzen, jedoch sollte
-<text> nur einmal als Name für einen Alias, Label
+(!TEXT) nur einmal als Name für einen Alias, Label
 oder ein Kapitel verwendet werden.
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.43
@@ -176,7 +178,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/aqv <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/aqv (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -204,7 +206,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/asc <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/asc (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -232,7 +234,7 @@ Namen des Autors setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/author <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/author (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -260,7 +262,7 @@ Logo des Autors für die Titelseite definieren.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/authorimage <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/authorimage (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)

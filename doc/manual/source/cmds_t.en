@@ -17,6 +17,9 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: CHAR macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
 #
 ################################################################################
 
@@ -35,7 +38,7 @@ Query the destination format.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=tex <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=tex (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -64,10 +67,10 @@ Output text in typewriter font face.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/T)<(!TEXT)>(!/t)(!t)
+!item [(!SYNTAX)] (!T)(!/T)(!TEXT)(!/t)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" will be displayed in typewriter font face, if possible. (!red)Diese Schriftart wird von fast allen Ausgabeformaten unterstützt.(!coloff)
+""(!TEXT)"" will be displayed in typewriter font face, if possible. (!red)Diese Schriftart wird von fast allen Ausgabeformaten unterstützt.(!coloff)
 
 !item [(!EXAMPLE)]
 (!T)(!/T)monospaced(!/t)(!t)
@@ -154,7 +157,7 @@ Set title of next table.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/table_caption <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/table_caption (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Use this command to set the title of the next table. You have to use
@@ -183,7 +186,7 @@ Set title of next table.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/table_caption* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/table_caption* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 The difference between this and the (!KW [table_caption]) command
@@ -212,7 +215,7 @@ Set table counter.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/table_counter [<(!VALUE)>](!t)
+!item [(!SYNTAX)] (!T)!/table_counter [(!VALUE)](!t)
 
 !item [(!DESCRIPTION)]
 With this switch you can set the table counter. If you use the lower
@@ -241,7 +244,7 @@ Output table of contents.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/tableofcontents !/depth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/tableofcontents !/depth (!VALUE)(!t)
 
 (!red)
 !item [(!DESCRIPTION)]
@@ -284,21 +287,21 @@ Set tabulator width of verbatim environments.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/tabwidth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/tabwidth (!VALUE)(!t)
 
 (!red)
 !item [(!DESCRIPTION)]
 Enthalten Zeilen einer verbatim-Umgebung Tabulatoren,
 so wandelt UDO diese entsprechend dem angegebenen
-<wert> in Leerzeichen um. Wollen Sie beispielsweise
+(!VALUE) in Leerzeichen um. Wollen Sie beispielsweise
 Sourcecodes darstellen, die sie mit einer
 Tabulatorweite von 4 erstellt haben, so sollten Sie
 das folgende Beispiel vor der verbatim-Umgebung bzw.
 vor (!KW [vinclude]) angeben. (!KW [tabwidth]) kann überall und
-beliebig oft im Quelltext angegeben werden. <wert>
+beliebig oft im Quelltext angegeben werden. (!VALUE)
 wird jeweils für die nächste verbatim-Umgebung
 verwendet. Standardmäßig benutzt UDO den Wert 8.
-Benutzt man 0 als <wert>, so wandelt UDO die Tabulatoren nicht um.
+Benutzt man 0 als (!VALUE), so wandelt UDO die Tabulatoren nicht um.
 (!coloff)
 !item [(!DESCRIPTION)]
 If lines that are part of a verbatim environment contain TABs
@@ -332,7 +335,7 @@ Query the destination format.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/tex <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/tex (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -481,7 +484,7 @@ Set graphic resolution (!TeX) only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/tex_dpi <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/tex_dpi (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Sets the resolution with which images should be output via (!LaTeX).
@@ -652,11 +655,11 @@ Set verbatim character for (!LaTeX) ((!TeX) only)
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/tex_verb <(!CHAR)>(!t)
+!item [(!SYNTAX)] (!T)!/tex_verb (!CHAR)(!t)
 
 !item [(!DESCRIPTION)]
-""<char>"" will be used as the sign for the (!LaTeX) command (!V)\verb(!v). 
-(!red)Bei der nächsten Umwandlung von (!KK1 [V]) und (!KK1 [v]) wird dann ""<zeichen>"" benutzt.(!coloff) 
+""(!CHAR)"" will be used as the sign for the (!LaTeX) command (!V)\verb(!v). 
+(!red)Bei der nächsten Umwandlung von (!KK1 [V]) und (!KK1 [v]) wird dann ""(!CHAR)"" benutzt.(!coloff) 
 ""+"" will be used by default.
 
 !item [(!EXAMPLE)]
@@ -681,7 +684,7 @@ Set document title information.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/title <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/title (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -738,7 +741,7 @@ Output table of contents.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/toc [(!FORMAT)] !/depth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/toc [(!FORMAT)] !/depth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Outputs a table of contents without special page or hypertext
@@ -767,10 +770,10 @@ Set offset of chapter counter.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/toc_offset <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/toc_offset (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-""<value>"" will be added to the current
+""(!VALUE)"" will be added to the current
 chapter counter when outputting a headline or a table of contents.
 The example shows how to output the first
 chapter with the number 10. You can also specify
@@ -848,7 +851,7 @@ Set document information for author's hometown.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/town <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/town (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)

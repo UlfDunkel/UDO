@@ -17,6 +17,10 @@
 #   fd  Jun 06: begascen.ui integrated in text
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro introduced
+#   fd  Jun 09: LINK macro introduced
 #
 ################################################################################
 
@@ -207,11 +211,11 @@ Version 6.5.13
    Seit Version~6.5.16 implementiert.
 # ..............................................................................
 !item New Switch (preamble only): (!T)!/html_header_links(!t) (!nl)
-   If this switch is set, several (!T)<link>(!t) elements are generated in the
+   If this switch is set, several (!T)(!LINK)(!t) elements are generated in the
    HTML header as following. (!nl)
    This feature wish #0000053 has been implemented since version~6.5.2.
 # ..............................................................................
-!item New Switch: (!T)!/html_header_date [<text>](!t) (!nl)
+!item New Switch: (!T)!/html_header_date [(!TEXT)](!t) (!nl)
    Until now, UDO inserted near to the beginning of every HTML file the building date,
    e.g. (!T)<!-- last modified on 2004/01/29 -->(!t). (!nl)
    Now, only if this switch is set, a META element for the building date/time is generated
@@ -230,12 +234,12 @@ Version 6.5.13
 !item Das Kommando (!KKW [img]) wurde erweitert. (!nl)
   Feature-Wunsch 0000070; V6.5.18
 # ..............................................................................
-!item The <link> elements for navigation and chapters are not generated
+!item The (!LINK) elements for navigation and chapters are not generated
     automatically any longer but only on demand (see above).
 !item Creation date/time of the HTML file will be written only on demand
    as META Tag into the HTML header (instead of the former comment). See above.
 # ..............................................................................
-!item While using (!KW [html_ignore_8bit]), you can use now an optional parameter <text>
+!item While using (!KW [html_ignore_8bit]), you can use now an optional parameter (!TEXT)
   for the codepage.
 # ..............................................................................
 !item (!KW [html_counter_command]) kann jetzt auch in der Preamble benutzt
@@ -298,7 +302,7 @@ Version 6.5.13
 # ..............................................................................
 !item Fixed bug #0000044 in version 6.4.1 (!nl)
    If (!KW [no_numbers]) is set, there won't any longer printed numbers in front of the
-   node names in the HTML header <link> elements.
+   node names in the HTML header (!LINK) elements.
 # ..............................................................................
 !item Bug #0000058 in Version~6.5.8 beseitigt (!nl)
    Falsche UDO-Versionsbezeichnung in HTML-Metatags korrigiert.
@@ -472,7 +476,7 @@ unten links !! unten mitte !! unten rechts
       Falscher ungarischer Akzent korrigiert.
 # ..............................................................................
 !item Bug #0000039 (!nl)
-      (!KW [html_name_prefix]) wurde nicht bei den <link>-Elementen nicht benutzt.
+      (!KW [html_name_prefix]) wurde nicht bei den (!LINK)-Elementen nicht benutzt.
 # ..............................................................................
 
 !end_itemize
@@ -511,7 +515,7 @@ unten links !! unten mitte !! unten rechts
 !begin_itemize !short
 # ..............................................................................
 !item Fixed bug #0000024 in version 6.2.1 (!nl)
-      In the <link> elements are listed all subsubnodes of other subnodes
+      In the (!LINK) elements are listed all subsubnodes of other subnodes
 !item Fixed bug #0000025 in version 6.2.1 (!nl)
       UDO chrashed, when umlauts are used in the filename or domain in
       the command (!/url !..).
@@ -523,7 +527,7 @@ unten links !! unten mitte !! unten rechts
       RTF output (\\~ instead of \~).
 !item Fixed bug #0000039 in version 6.2.1 (!nl)
       Although !html_name_prefix was set, the prefix was missed in the
-      <link> elements for navigation.
+      (!LINK) elements for navigation.
 # ..............................................................................
 !end_itemize
 !end_description
@@ -747,14 +751,14 @@ unten links !! unten mitte !! unten rechts
 !item The entities (!T)&ndash;(!t), (!T)&mdash;(!t) and (!T)&hellip;(!t)
       are used for HTML.
 !item Setting links for the navigation through a project of HTML sites
-      via the element (!T)<link>(!t).
+      via the element (!T)(!LINK)(!t).
       The following attributes are suppoerted: (!T)contents, start, first,
       previous, prev, next, last(!t) and (!T)copyright(!t) (!nl)
       The links for (!T)first(!t), (!T)last(!t) and (!T)previous(!t)
       are only vaild for CAB (perhaps iCab). The link for (!T)copyright(!t)
       introduces a link to aboutudo and in this case will be built. (!nl)
       CAB doesn't support the attribute (!T)target(!t), when using the
-      element (!T)<link>(!t). Therfore this link-Element doesn't work so
+      element (!T)(!LINK)(!t). Therfore this link-Element doesn't work so
       properly if frames are used.
 !item If frames are built for HTML output, there will be built a
       <noframes></noframes> area with a table of contents too. Therefor
@@ -831,8 +835,8 @@ cases it was impossible not to change the syntax of some commands.
  	   (!KW [html_modern_alignment])
 	!item (!KW [html_frames_layout]), (!KW [html_frames_width])
 	    (!KW [html_frames_backcolor]), (!KW [html_frames_backimage]),
-	    (!KW [html_frames_height] [<value>]),
-	    (!KW [html_frames_position] [<text>]),
+	    (!KW [html_frames_height] [(!VALUE)]),
+	    (!KW [html_frames_position] [(!TEXT)]),
 	    (!KW [html_frames_textcolor]), (!KW [html_frames_linkcolor]),
 	    (!KW [html_frames_alinkcolor]), (!KW [html_frames_vlinkcolor])
 	!item (!KW [html_counter_command])
@@ -854,7 +858,7 @@ cases it was impossible not to change the syntax of some commands.
 	  (!KW [drc_ucolor]), (!KW [drc_flags])
 	!item (!KW [udolink])
 	!item (!KW [use_auto_toptocs] [[<format>!!]])
-	!item (!KW [error] [<text>])
+	!item (!KW [error] [(!TEXT)])
 	!item (!KW [begin_node*]), (!KW [begin_pnode]),
 	  (!KW [begin_pnode*])
 	!item (!KW [input])
@@ -876,7 +880,7 @@ cases it was impossible not to change the syntax of some commands.
         !item (!KW [table_alignment])
         !item (!KW [image_alignment])
         !item (!KW [no_popup_headlines])
-        !item (!KW [use_raw_header] [<file>]), (!KW [use_raw_footer] [<file>]),
+        !item (!KW [use_raw_header] [(!FILE)]), (!KW [use_raw_footer] [(!FILE)]),
           (!KW [ignore_raw_header]), (!KW [ignore_raw_footer])
         !item (!KW [win_old_keywords])
         !item (!KW [no_table_lines])

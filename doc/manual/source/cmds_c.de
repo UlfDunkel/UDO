@@ -18,6 +18,8 @@
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
 #
 ################################################################################
 
@@ -35,7 +37,7 @@ Grafik für Kapitel angeben.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/chaptericon <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/chaptericon (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 Dieses Kommando gibt den Namen einer Grafik an, welche UDO für
@@ -63,7 +65,7 @@ Grafik für aktives Kapitel angeben.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/chaptericon_active <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/chaptericon_active (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 Hier kann man für den linken Rahmen bzw. für die linke Spalte
@@ -90,7 +92,7 @@ Text für Kapitel-Grafik angeben.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/chaptericon_text <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/chaptericon_text (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Hiermit kann man einen Text unterhalb eines Chaptericons darstellen.
@@ -115,12 +117,12 @@ Kapitelüberschrift durch Grafik ersetzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/chapterimage <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/chapterimage (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 Beim HTML-, ST-Guide- und WinHelp-Format wird
 anstelle einer Kapitelüberschrift die Grafik
-""<datei>"" verwendet, falls im Vorspann der Schalter
+""(!FILE)"" verwendet, falls im Vorspann der Schalter
 (!KW [use_chapter_images]) verwendet wurde.
 
 !item [(!EXAMPLE)]
@@ -146,10 +148,10 @@ Datei einbinden und in einer comment-Umgebung darstellen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/cinclude <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/cinclude (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
-Öffnet die Datei namens ""<datei>"" und gibt deren Inhalt
+Öffnet die Datei namens ""(!FILE)"" und gibt deren Inhalt
 als Kommentar an der Stelle aus, an der dieses
 Kommando benutzt wurde. Etwaige Einrückungen werden
 dabei berücksichtigt, Zentrierungen jedoch nicht.
@@ -420,7 +422,7 @@ Inline-(!nolink [Kommentare]) erzeugen.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/comment [<(!TEXT)>])(!t)
+!item [(!SYNTAX)] (!T)(!/comment [(!TEXT)])(!t)
 
 !item [(!DESCRIPTION)]
 Mit (!KKW [comment]) können Inline-Kommentare für HTML,
@@ -449,10 +451,10 @@ Kommentar in die Ausgabedatei schreiben.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/comment <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/comment (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Dieses Kommando schreibt ""<text>"" als Kommentar auch in die Ausgabedatei, sofern das
+Dieses Kommando schreibt ""(!TEXT)"" als Kommentar auch in die Ausgabedatei, sofern das
 jeweilige Format Kommentare beherrscht.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~11
@@ -505,7 +507,7 @@ Land des Autors für den Adressblock der Titelseite setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/country <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/country (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)

@@ -19,6 +19,9 @@
 #   fd  Jun 09: !language lists all available languages now
 #   fd  Jun 09: !language referencec to lang_ref.<ISO> now
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: LINK macro introduced
 #
 ################################################################################
 
@@ -37,7 +40,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=ldoc <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=ldoc (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -118,7 +121,7 @@ Sprungmarke setzen.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/l <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/l (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [label]).
@@ -141,7 +144,7 @@ Sprungmarke setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/label <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/label (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Definiert eine Sprungmarke, die bei Hypertextformaten
@@ -169,7 +172,7 @@ Beliebiger Teil des Textes als Label/Bookmark markieren.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/label [<(!TEXT)>] [<link>])(!t)
+!item [(!SYNTAX)] (!T)(!/label [(!TEXT)] [(!LINK)])(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Befehl kann ein beliebiger Teil des Textes als
@@ -256,10 +259,10 @@ Datei einbinden und in einer linedraw-Umgebung darstellen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/ldinclude <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/ldinclude (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
-Öffnet die Datei namens ""<datei>"" und gibt deren Inhalt
+Öffnet die Datei namens ""(!FILE)"" und gibt deren Inhalt
 als Grafik an der Stelle aus, an der dieses
 Kommando benutzt wurde. Etwaige Einrückungen werden
 dabei berücksichtigt, Zentrierungen jedoch nicht.
@@ -290,7 +293,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/ldoc <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/ldoc (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -317,7 +320,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/lh <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/lh (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [listheading]).
@@ -403,7 +406,7 @@ Manuellen Querverweis durchführen.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/link [<(!TEXT)>] [<link>])(!t)
+!item [(!SYNTAX)] (!T)(!/link [(!TEXT)] [(!LINK)])(!t)
 
 !item [(!DESCRIPTION)]
 Hiermit können Querverweise auf andere Kapitel oder Sprungmarken vorgenommen werden. Ausführliche Informationen findet man im Abschnitt ""Querverweise"".
@@ -519,7 +522,7 @@ Umgebungen können nun viel eleganter mit dem Umgebungsparameter (!KW [short]) er
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/listheading <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/listheading (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!MISS)
@@ -593,7 +596,7 @@ verwenden. Momentan wird dieser Befehl nur für (!LaTeX) umgewandelt.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/listsubheading <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/listsubheading (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!MISS)
@@ -613,7 +616,7 @@ verwenden. Momentan wird dieser Befehl nur für (!LaTeX) umgewandelt.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/listsubsubheading <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/listsubsubheading (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!MISS)
@@ -633,7 +636,7 @@ verwenden. Momentan wird dieser Befehl nur für (!LaTeX) umgewandelt.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/listsubsubsubheading <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/listsubsubsubheading (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!MISS)
@@ -653,7 +656,7 @@ verwenden. Momentan wird dieser Befehl nur für (!LaTeX) umgewandelt.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/lsh <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/lsh (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [listsubheading]).
@@ -676,7 +679,7 @@ verwenden. Momentan wird dieser Befehl nur für (!LaTeX) umgewandelt.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/lssh <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/lssh (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [listsubsubheading]).
@@ -699,7 +702,7 @@ verwenden. Momentan wird dieser Befehl nur für (!LaTeX) umgewandelt.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/lsssh <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/lsssh (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [listsubsubsubheading]).

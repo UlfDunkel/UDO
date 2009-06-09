@@ -16,6 +16,7 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: TEXT macro enhanced
 #
 ################################################################################
 
@@ -35,10 +36,10 @@ Create a footnote.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/N)<(!TEXT)>(!/n)(!t)
+!item [(!SYNTAX)] (!T)(!/N)(!TEXT)(!/n)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" will be displayed as a footnote or in brakes. Right before
+""(!TEXT)"" will be displayed as a footnote or in brakes. Right before
 (!KK1 [N]) shouldn't be a space, tab or linefeed!
 
 !item [(!EXAMPLE)]
@@ -62,7 +63,7 @@ Start a chapter.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/n [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/n [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [node]).
@@ -85,7 +86,7 @@ Start a hidden chapter.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/n* [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/n* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [node*]).
@@ -933,10 +934,10 @@ Start a chapter.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/node <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/node (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Starts a new chapter named ""<text>"". (!red)Kapitel erscheinen in Inhaltsverzeichnissen.(!coloff)
+Starts a new chapter named ""(!TEXT)"". (!red)Kapitel erscheinen in Inhaltsverzeichnissen.(!coloff)
 
 !item [(!EXAMPLE)]
 (!T)!/node A chapter title(!t)
@@ -959,10 +960,10 @@ Start a hidden chapter.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/node* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/node* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-This command does the same as (!KW [node]), but here ""<text>"" will not
+This command does the same as (!KW [node]), but here ""(!TEXT)"" will not
 appear in a table of contents.
 
 !item [(!EXAMPLE)]
@@ -988,7 +989,7 @@ Suppress referencing.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/nolink [<(!TEXT)>])(!t)
+!item [(!SYNTAX)] (!T)(!/nolink [(!TEXT)])(!t)
 
 !item [(!DESCRIPTION)]
 This placeholder can be used to ensure that the text inside the brackets won't be referenced.
@@ -1038,11 +1039,11 @@ Set program type (NROFF only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/nroff_type <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/nroff_type (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-When converting to NROFF UDO uses ""<text>"" inside the
-headline with brackets. The example and ""(!KW [docinfo] [[program!!] udo])"" would look like ""udo(1)"". UDO doesn't use ""<text>"" as a file suffix.
+When converting to NROFF UDO uses ""(!TEXT)"" inside the
+headline with brackets. The example and ""(!KW [docinfo] [[program!!] udo])"" would look like ""udo(1)"". UDO doesn't use ""(!TEXT)"" as a file suffix.
 
 !item [(!EXAMPLE)]
 (!T)!/nroff_type 1(!t)

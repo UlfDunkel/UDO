@@ -16,6 +16,7 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: TEXT macro enhanced
 #
 ################################################################################
 
@@ -243,7 +244,7 @@ E-Mail-Informationen für die Titelseite setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/email <text>(!t)
+!item [(!SYNTAX)] (!T)!/email (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -920,11 +921,11 @@ Fehlermeldung ausgeben.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/error [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/error [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 Genau wie die Präprozessoranweisung #error eines C-Compilers
-kann man hiermit eine Fehlermeldung erzeugen und ""<text>"" ausgeben.
+kann man hiermit eine Fehlermeldung erzeugen und ""(!TEXT)"" ausgeben.
 UDO bricht beim Eintreffen dieses Kommandos die Konvertierung ab.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5

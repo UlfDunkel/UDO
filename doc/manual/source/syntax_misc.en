@@ -17,6 +17,8 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: WORD macro introduced
 #
 ################################################################################
 
@@ -235,9 +237,9 @@ insert special commands inside the text especially for the destination
 format.
 
 !index (!kw [define])
-The syntax  is (!KW [define] [<word> <text>]). In contrast to macros
-(!T)<text>(!t) will not be converted in a special way. No special
-characters are translated inside (!T)<text>(!t).
+The syntax  is (!KW [define] [(!WORD) (!TEXT)]). In contrast to macros
+(!T)(!TEXT)(!t) will not be converted in a special way. No special
+characters are translated inside (!T)(!TEXT)(!t).
 
 In this example I will demonstrate how to print headlines with HTML:
 

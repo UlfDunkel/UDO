@@ -19,6 +19,12 @@
 #   fd  Jun 08: etc. -> usw.
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 09: WORD macro introduced
+#   fd  Jun 09: NAME macro introduced
+#   fd  Jun 09: LINK macro introduced
 #
 ################################################################################
 
@@ -37,7 +43,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=htag <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=htag (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -65,7 +71,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=html <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=html (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -92,7 +98,7 @@ Eine Kapitel-Überschrift ausgeben.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/h [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/h [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [heading]).
@@ -115,10 +121,10 @@ Eine Kapitel-Überschrift ausgeben.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/heading <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/heading (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Dieser Befehl erzeugt eine Zeile mit ""<text>"", der in
+Dieser Befehl erzeugt eine Zeile mit ""(!TEXT)"", der in
 der gleichen Schriftart und -größe wie eine Kapitel-Überschrift ausgegeben wird.
 
 !item [(!EXAMPLE)]
@@ -194,7 +200,7 @@ Setzen des Hintergrundbildes (nur (!nolink [HTML-Help])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/hh_backimage <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/hh_backimage (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 Setzt das Hintergrundbild für HTML-Help-Seiten. Als Dateiname
@@ -390,7 +396,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/htag <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/htag (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -449,7 +455,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/html <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/html (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -529,7 +535,7 @@ Setzen des Hintergrundbildes (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/html_backimage <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/html_backimage (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 Setzt das Hintergrundbild für HTML-Seiten. Als Dateiname
@@ -592,12 +598,12 @@ Hintergrungmusik abspielen
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/html_bgsound <(!FILE)> <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/html_bgsound (!FILE) (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man Hintergrundmusik für (!nolink [HTML])-Seiten angeben. <(!FILE)> ist dabei
+Mit diesem Kommando kann man Hintergrundmusik für (!nolink [HTML])-Seiten angeben. (!FILE) ist dabei
 der Name der Datei mit Endung. Als Dateiendung sollte möglichst nur MID, AU und WAV verwendet werden.
-<(!VALUE)> ist optional und gibt an wie oft das Musikstück wiederholt werden soll. Ohne die Angabe
+(!VALUE) ist optional und gibt an wie oft das Musikstück wiederholt werden soll. Ohne die Angabe
 wird sie endlos wiederholt.
 
 Gehen Sie sparsam mit dieser Funktion um, es kann für einen Nutzer sehr nervig sein ständig mit Musik
@@ -652,7 +658,7 @@ Counter plazieren (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/html_counter_command <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/html_counter_command (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Was dem Kommando folgt, wird 1:1 in der Fußzeile
@@ -682,7 +688,7 @@ Beschreibung in Metainformationen aufnehmen (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/html_description <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/html_description (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Hiermit kann man die Beschreibung einer Seite in die
@@ -712,7 +718,7 @@ Verzeichnisnamen zuweisen (nur HTML).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/html_dirname <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/html_dirname (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 Taucht dieses Kommando innerhalb eines Kapitels,
@@ -744,7 +750,7 @@ Setzen des Dokumententyp (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_doctype <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/html_doctype (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Kommando kann man den Dokumententyp setzen. Dabei gibt es folgemde
@@ -774,7 +780,7 @@ Setzen der Favoriten-Icons (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/html_favicon_name <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/html_favicon_name (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Kommando könne die Favoriten-Icons gesetzt werden.
@@ -872,7 +878,7 @@ Setzen des Hintergrundbildes für den linken Rahmen (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_frames_backimage <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/html_frames_backimage (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 Setzt das Hintergrundbild für den linken Rahmen in (!nolink [HTML])-Seiten. Als Dateiname
@@ -932,7 +938,7 @@ Setzen des Hintergrundbildes für den linken Rahmen (nur HTML).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_frames_column_image <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/html_frames_column_image (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 Dieser Befehl existierte nur in einer der Beta-Versionen und heißt nun (!KW [html_frames_backimage]).
@@ -990,10 +996,10 @@ Setzen des Frametitel für den Frame des Inhalsverzeichnis beim Frame Layout (nur
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_frames_con_title <text>(!t)
+!item [(!SYNTAX)] (!T)!/html_frames_con_title (!TEXT)(!t)
 !item [(!DESCRIPTION)]
 Setzen des Frametitel für den Frame des Inhalts beim Frame Layout.
-Gibt man zum Beispiel als <text> Inhalt an so wird daraus: (!nl)
+Gibt man zum Beispiel als (!TEXT) Inhalt an so wird daraus: (!nl)
 <frame src="00con.htm" name="UDOcon" marginwidth="0" marginheight="0" title="Inhalt">
 
 !item [(!EXISTSSINCE)] Version 6.5.16
@@ -1016,7 +1022,7 @@ Höhe des Rahmens beim Frames-Layout bestimmen (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_frames_height <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/html_frames_height (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Gibt die Höhe des Frames an, in den die Links bei einem durch
@@ -1045,7 +1051,7 @@ Frames erzeugen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_frames_layout {[<(!TEXT)>]}(!t)
+!item [(!SYNTAX)] (!T)!/html_frames_layout {[(!TEXT)]}(!t)
 
 !item [(!DESCRIPTION)]
 Erzeugt ein Layout ähnlich dem ""modernen"" Tabellenlayout, allerdings wird das
@@ -1055,7 +1061,7 @@ Erzeugt ein Layout ähnlich dem ""modernen"" Tabellenlayout, allerdings wird das
 UDO benutzt folgende Dateinamen, die man selber nicht benutzen
 sollte: (!V)00con.htm[l](!v) und (!V)00toc.htm[l](!v).
 
-Als ""<text>"" können folgende Parameter übergeben werden:
+Als ""(!TEXT)"" können folgende Parameter übergeben werden:
 
 !begin_itemize !short
 !item ""noresize"": Fügt dem Frameset-Tag ""noresize"" hinzu. Die
@@ -1172,10 +1178,10 @@ Setzen des Frametitel für den Frame des Inhalsverzeichnis beim Frame Layout (nur
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_frames_toc_title <text>(!t)
+!item [(!SYNTAX)] (!T)!/html_frames_toc_title (!TEXT)(!t)
 !item [(!DESCRIPTION)]
 Setzen des Frametitel für den Frame des Inhalsverzeichnis beim Frame Layout.
-Gibt man zum Beispiel als <text> Navigation an so wird daraus: (!nl)
+Gibt man zum Beispiel als (!TEXT) Navigation an so wird daraus: (!nl)
 <frame src="00toc.htm" name="UDOtoc" marginwidth="0" marginheight="0" title="Navigation">
 
 !item [(!EXISTSSINCE)] Version 6.5.16
@@ -1223,7 +1229,7 @@ Breite des Rahmens beim Frames-Layout bestimmen (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_frames_width <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/html_frames_width (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Gibt die Breite des Frames an, in den die Links bei einem durch
@@ -1261,7 +1267,7 @@ Setzen des Datums (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_header_date <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/html_header_date (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Ist dieser Schalter gesetzt, setzt UDO im (!nolink [HTML])-Header ein META-Tag für
@@ -1269,13 +1275,13 @@ Datum/Uhrzeit der Datei-Erzeugung
 z.B. (!T)<META name="date" content="2004-01-29T08:49:37+00:00">(!t).
 
 Dabei ist ""+00:00"" der Unterschied von der lokalen Zeit zu UTC
-(Coordinated Universal Time, vormals GMT). Mit dem optionalen Parameter <text>
+(Coordinated Universal Time, vormals GMT). Mit dem optionalen Parameter (!TEXT)
 kann ein Wert für diese Zeitdifferenz übergeben werden.
-Für <text> werden von UDO keine Überprüfungen durchgeführt; der Autor ist selbst
+Für (!TEXT) werden von UDO keine Überprüfungen durchgeführt; der Autor ist selbst
 dafür verantwortlich, einen korrekten Wert zu übergeben.
-Ist <text> leer, wird für den Zeitzonenunterschied ""+00:00"" gesetzt.
+Ist (!TEXT) leer, wird für den Zeitzonenunterschied ""+00:00"" gesetzt.
 
-# max. 6 Zeichen für <text>
+# max. 6 Zeichen für (!TEXT)
 
 !item [(!EXAMPLE)]
 (!T)!/html_header_date +02:00(!t).
@@ -1298,22 +1304,22 @@ Ist <text> leer, wird für den Zeitzonenunterschied ""+00:00"" gesetzt.
 !begin_node (!kw [html_header_links])
 !html_name  cmd_html_header_links
 
-<link>-Elemente setzen (nur (!nolink [HTML])).
+(!LINK)-Elemente setzen (nur (!nolink [HTML])).
 
 !begin_xlist [(!TYPEPOSITION)]
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_header_links <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/html_header_links (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Ist dieser Schalter gesetzt, werden je nach Vorgabe
-(!T)<link>(!t)-Elemente im (!nolink [HTML])-Header erzeugt:
+(!T)(!LINK)(!t)-Elemente im (!nolink [HTML])-Header erzeugt:
 !begin_itemize
-!item Enthält (!T)<text>(!t) ""navigation"", werden die Links zur Navigation erzeugt
+!item Enthält (!T)(!TEXT)(!t) ""navigation"", werden die Links zur Navigation erzeugt
    (<link rel="start" href="index.html" title="Beginn des Dokumentes">, ebenso
    <link rel="home"!.., "contents", "toc", "first", "prev", "previous", "next", "last").
-!item Enthält (!T)<text>(!t) ""chapter"", werden alle Links zu den Kapiteln erzeugt
+!item Enthält (!T)(!TEXT)(!t) ""chapter"", werden alle Links zu den Kapiteln erzeugt
    (<link rel="chapter" href="!.." title="!..">, ebenso für "section").
 !end_itemize
 
@@ -1328,7 +1334,7 @@ erzeugt werden, entstehen kleinere (!nolink [HTML])-Dateien.
 
 # = = = = =
 
-# <text> kann max. 20 Zeichen haben.
+# (!TEXT) kann max. 20 Zeichen haben.
 # siehe auch: http://www.w3.org/TR/1999/REC-html401-19991224/charset.html#doc-char-set
 !begin_node (!kw [html_ignore_8bit])
 !html_name  cmd_html_ignore_8bit
@@ -1339,14 +1345,14 @@ erzeugt werden, entstehen kleinere (!nolink [HTML])-Dateien.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_ignore_8bit <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/html_ignore_8bit (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, werden 8-Bit-Zeichen (!I)nicht(!i)
 in (!nolink [HTML])-Entities (&auml; usw.) umgewandelt. Somit ist es möglich, auch von ISO-Latin1
 abweichende Dateien zu erzeugen, ohne das UDO dazwischenfunkt.
 
-Optional kann durch den Parameter <text> ein Codepage übergeben werden.
+Optional kann durch den Parameter (!TEXT) ein Codepage übergeben werden.
 Zum Beispiel wird mit (!T)!/html_ignore_8bit ISO-8859-2(!t) in die (!nolink [HTML])-Header
 folgendes geschrieben: (!T)<meta http-equiv="content-type" content="text/html;charset=ISO-8859-2">(!t).
 
@@ -1430,10 +1436,10 @@ Verwendung verschiedener Grafikformate nichts im Wege steht.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/html_keywords <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/html_keywords (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" sollte eine durch Kommata getrennte Aufzählung
+""(!TEXT)"" sollte eine durch Kommata getrennte Aufzählung
 von Schlüsselworten sein, die UDO als
 Metainformationen im Header der Datei ausgibt, in die
 das aktueller Kapitel ausgegeben wird. Manche
@@ -1652,7 +1658,7 @@ Setzen des Hintergrundbildes beim ""modernen"" Layout (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_modern_backimage <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/html_modern_backimage (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 Setzt das Hintergrundbild für (!nolink [HTML])-Seiten. Als Dateiname
@@ -1712,7 +1718,7 @@ Setzen des Hintergrundbildes beim ""modernen"" Layout (nur HTML).
 
 !item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_modern_column_image <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/html_modern_column_image (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 Dieser Befehl existierte nur in einer der Beta-Versionen und heißt nun (!KW [html_modern_backimage]).
@@ -1799,7 +1805,7 @@ Breite der linken Spalte beim ""modernen"" Layout bestimmen (nur (!nolink [HTML]
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_modern_width <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/html_modern_width (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Gibt die Breite der linken Spalte an, in die die Links bei einer durch
@@ -1827,7 +1833,7 @@ Nichtproportionalen Zeichensatzes für verbatim-Umgebungen bestimmen (nur (!nolin
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_monofont_name <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/html_monofont_name (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Befehl kann der Font bestimmt werden, der für die
@@ -1856,7 +1862,7 @@ Größe des Fonts für verbatim-Umgebungen bestimmen (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_monofont_size <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/html_monofont_size (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Befehl kann die Größe des Fonts bestimmt werden, der für die
@@ -1885,7 +1891,7 @@ Dateinamen zuweisen (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/html_name <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/html_name (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 Taucht dieses Kommando innerhalb eines Kapitels,
@@ -1919,7 +1925,7 @@ Ausgabenamen ändern (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_name_prefix <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/html_name_prefix (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Wird dieses Kommando im Vorspann benutzt, wird allen
@@ -1950,7 +1956,7 @@ Navigationsleiste verändern
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_navigation [<name>] <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/html_navigation [(!NAME)] (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Kommando kann die Darstellung der Navigations!-leiste angepasst
@@ -1963,7 +1969,7 @@ Wird dieses Kommando im Vorspann angegeben, wird der Navigations!-bereich oben
 am Seitenanfang in einer einzigen Navigationszeile ausgegeben, 
 standardmäßig ohne Ordnersymbole, mit ' > ' getrennt.
 
-Optional kann durch den Parameter <text> ein Separatortext übergeben werden. 
+Optional kann durch den Parameter (!TEXT) ein Separatortext übergeben werden. 
 Dieser wird automatisch vorn und hinten mit einem Leerzeichen ergänzt, damit der Separator 
 nicht an den Kapitelnamen klebt.
 
@@ -2008,7 +2014,7 @@ Bei Angabe eines zusätzlichen Parameters kann ein eigenes Bild als Symbol verwen
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_navigation_image <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/html_navigation_image (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 Wenn der Schalter (!KW [html_navigation_line]) im Vorspann gesetzt ist, wird durch dieses Kommando 
@@ -2034,7 +2040,7 @@ Mit dem optionalen Parameter kann ein eigenes Bild angegeben werden.
 
 # = = = = =
 
-# <text> kann max. 20 Zeichen haben.
+# (!TEXT) kann max. 20 Zeichen haben.
 !ifset OldKeywords
 !begin_node (!kw [html_navigation_line])
 !html_name  cmd_html_navigation_line
@@ -2045,14 +2051,14 @@ Navigationsleiste in einer einzigen Zeile ausgeben (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_navigation_line <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/html_navigation_line (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, wird der Navigationsbereich oben 
 am Seitenanfang in einer einzigen Navigationszeile ausgegeben, 
 standardmäßig ohne Ordnersymbole, mit ' > ' getrennt.
 
-Optional kann durch den Parameter <text> ein Separatortext übergeben werden. 
+Optional kann durch den Parameter (!TEXT) ein Separatortext übergeben werden. 
 Dieser wird automatisch vorn und hinten mit einem Leerzeichen ergänzt, damit der Separator 
 nicht an den Kapitelnamen klebt.
 
@@ -2119,7 +2125,7 @@ Größe der Kapitelüberschriften setzen ((!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/html_nodesize <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/html_nodesize (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Befehl kann man die Größe der Überschriften setzen,
@@ -2152,7 +2158,7 @@ Standardfont bestimmen (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_propfont_name <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/html_propfont_name (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Befehl kann der Standardfont bestimmt werden, der für die
@@ -2181,7 +2187,7 @@ Größe des Standardfonts bestimmen (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_propfont_size <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/html_propfont_size (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Befehl kann die Größe des Standardfonts bestimmt werden, der für die
@@ -2211,10 +2217,10 @@ Einstellen der Robots Anweisung für Suchmaschinen (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/html_robots <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/html_robots (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" entspricht einer der Robots Anweisung wie sie für Suchmaschinen benutzt werden.
+""(!TEXT)"" entspricht einer der Robots Anweisung wie sie für Suchmaschinen benutzt werden.
 Erlaubt sind ""none"", ""noindex"", ""index"", ""nofollow"" und ""follow"". Diese Anweisung hat 
 Vorrang vor (!KW [docinfo] [[robots!!]])
 
@@ -2241,7 +2247,7 @@ JavaScript einbinden (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/html_script_name <(!FILE)>.js(!t)
+!item [(!SYNTAX)] (!T)!/html_script_name (!FILE).js(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Kommando kann ein JavaScript eingebunden werden.
@@ -2264,7 +2270,7 @@ Stylesheet einbinden (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/html_style_name <(!FILE)>.css (!TEXT)(!t)
+!item [(!SYNTAX)] (!T)!/html_style_name (!FILE).css (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Es können beliebig viele Stylesheets für verschiedene
@@ -2292,7 +2298,7 @@ Verweis für weitere Sprachen erzeugen (nur (!nolink [HTML])).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/html_switch_language <sprache> <datei>(!t)
+!item [(!SYNTAX)] (!T)!/html_switch_language <sprache> (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 Wird dieses Kommando im Vorspann benutzt, werden
@@ -2511,7 +2517,7 @@ HTML-Meta-Keywords setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/htmlkeywords <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/htmlkeywords (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Dieses Kommando wurde umbenannt in (!KW [html_keywords]).
@@ -2540,7 +2546,7 @@ Dateinamen zuweisen (nur HTML).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/htmlname <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/htmlname (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 Dieser Befehl existiert nicht mehr und wurde umbenannt in (!KW [html_name]).
@@ -2568,11 +2574,11 @@ Einen Trennvorschlag global setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/hyphen <wort>(!t)
+!item [(!SYNTAX)] (!T)!/hyphen (!WORD)(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Kommando können Sie UDO einen globalen
-Trennvorschlag unterbreiten. In ""<wort>"" sind die
+Trennvorschlag unterbreiten. In ""(!WORD)"" sind die
 Stellen mit der Zeichenfolge !/- zu markieren, an denen
 ein Wort getrennt werden darf. Im folgenden Beispiel
 wird gezeigt, wie man die möglichen Trennstellen des

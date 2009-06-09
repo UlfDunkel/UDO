@@ -16,6 +16,8 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
 #
 ################################################################################
 
@@ -35,11 +37,11 @@ Klartext ausgeben.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/V)<(!TEXT)>(!/v)(!t)
+!item [(!SYNTAX)] (!T)(!/V)(!TEXT)(!/v)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" wird als Klartext dargestellt, falls möglich.
-Für (!LaTeX) wird ""(!V)\verb+<text>+'(!v)"" ausgegeben, bei allen
+""(!TEXT)"" wird als Klartext dargestellt, falls möglich.
+Für (!LaTeX) wird ""(!V)\verb+(!TEXT)+'(!v)"" ausgegeben, bei allen
 anderen Formaten erfolgt die gleiche Ausgabe wie bei
 (!KKKW [T] [t]).
 
@@ -126,7 +128,7 @@ Versionsnummer des Programms für die Titelseite setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/version <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/version (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -153,10 +155,10 @@ Datei einbinden und in einer verbatim-Umgebung darstellen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/vinclude <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/vinclude (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
-Öffnet die Datei namens ""<datei>"" und gibt deren Inhalt
+Öffnet die Datei namens ""(!FILE)"" und gibt deren Inhalt
 als Klartext an der Stelle aus, an der dieses
 Kommando benutzt wurde. Etwaige Einrückungen werden
 dabei berücksichtigt, Zentrierungen jedoch nicht.

@@ -18,6 +18,8 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
 #
 ################################################################################
 
@@ -35,7 +37,7 @@ Set graphic for chapter.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/chaptericon <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/chaptericon (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 You can use this command to tell UDO which graphic
@@ -64,7 +66,7 @@ Set graphic for active chapter.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/chaptericon_active <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/chaptericon_active (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 You can use this command to tell UDO which graphic
@@ -91,10 +93,10 @@ Set text for chapter icon.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/chaptericon_text <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/chaptericon_text (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" will be displayed below the graphic of a (!KW [chaptericon]).
+""(!TEXT)"" will be displayed below the graphic of a (!KW [chaptericon]).
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~7
 
@@ -116,18 +118,18 @@ Replace chapter title with graphic.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/chapterimage <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/chapterimage (!FILE)(!t)
 
 (!red)
 !item [(!DESCRIPTION)]
 Beim HTML-, ST-Guide- und WinHelp-Format wird
 anstelle einer Kapitelüberschrift die Grafik
-""<datei>"" verwendet, falls im Vorspann der Schalter
+""(!FILE)"" verwendet, falls im Vorspann der Schalter
 (!KW [use_chapter_images]) verwendet wurde.
 (!coloff)
 !item [(!DESCRIPTION)]
 Converting to Windows Help, HTML or ST-Guide the image called
-""<file>"" is displayed instead of the chapter title if
+""(!FILE)"" is displayed instead of the chapter title if
 (!KW [use_chapter_images]) is used inside the preamble
 
 !item [(!EXAMPLE)]
@@ -153,10 +155,10 @@ Include file in a comment environment.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/cinclude <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/cinclude (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
-""<file>"" will be included and displayed like preformatted text
+""(!FILE)"" will be included and displayed like preformatted text
 inside a comment environment. If you use this commands inside
 another environment UDO indents the contents of this file. UDO
 converts tabs according to (!KW [tabwidth]). (!FILESPACEQUOTE)
@@ -422,7 +424,7 @@ Write inline comment to destination file.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/comment [<(!TEXT)>])(!t)
+!item [(!SYNTAX)] (!T)(!/comment [(!TEXT)])(!t)
 
 (!red)
 !item [(!DESCRIPTION)]
@@ -432,7 +434,7 @@ Vorspann der Schalter (!KW [use_comments]) benutzt, so werden die
 (!nolink [Kommentare]) auch bei allen anderen Formaten in Klammern ausgegeben.
 (!coloff)
 !item [(!DESCRIPTION)]
-This command writes ""<text>"" as comment into the output file,
+This command writes ""(!TEXT)"" as comment into the output file,
 if the destinations format knows about comments.
 
 !item [(!EXAMPLE)]
@@ -456,10 +458,10 @@ Write comment to destination file.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/comment <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/comment (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-This command writes ""<text>"" as comment into the output file,
+This command writes ""(!TEXT)"" as comment into the output file,
 if the destinations format knows about comments.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~11
@@ -511,7 +513,7 @@ Land des Autors für den Adressblock der Titelseite setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/country <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/country (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)

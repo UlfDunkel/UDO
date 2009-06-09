@@ -22,6 +22,10 @@
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 09: LINK macro introduced
 #
 ################################################################################
 
@@ -40,7 +44,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=info <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=info (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -69,10 +73,10 @@ Text kursiv ausgeben.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/I)[<(!TEXT)>](!/i)(!t)
+!item [(!SYNTAX)] (!T)(!/I)[(!TEXT)](!/i)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" wird kursiv dargestellt, falls möglich.
+""(!TEXT)"" wird kursiv dargestellt, falls möglich.
 
 !item [(!EXAMPLE)]
 (!T)(!/I)kursiv(!/i)(!t)
@@ -95,7 +99,7 @@ Aufzählungspunkt einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/i [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/i [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [item]).
@@ -118,7 +122,7 @@ Indexeinträge im Text angeben.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/idx [<(!TEXT)>] {[<index1>]} {[<index2>]} {[<index3>]})(!t)
+!item [(!SYNTAX)] (!T)(!/idx [(!TEXT)] {[<index1>]} {[<index2>]} {[<index3>]})(!t)
 
 !item [(!DESCRIPTION)]
 Dient zum Erzeugen von Indizes direkt im Quelltext.
@@ -144,7 +148,7 @@ Allgemeine Abfrage beginnen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/if [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/if [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 Dieses Kommando vereint die Abfragekommandos (!KW [iflang]),
@@ -348,13 +352,13 @@ Symbol abfragen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/ifnset [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/ifnset [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Abfragebefehl können Sie testen, ob ein
 Symbol für die Umwandlung (!I)weder(!i) in der Kommandozeile
 mit der Option (!V)-D(!v) noch mit (!KW [set]) gesetzt wurde. Wurde
-""<text>"" nicht gesetzt, werden alle folgenden Zeilen
+""(!TEXT)"" nicht gesetzt, werden alle folgenden Zeilen
 umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht.
 Andernfalls werden nur die Zeilen umgewandelt, die
 (!KW [else]) folgen, sofern die Abfrage einen Sonst-Zweig
@@ -418,11 +422,11 @@ Symbol abfragen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/ifset [<(!TEXT)>](!t)
+!item [(!SYNTAX)] (!T)!/ifset [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Abfragebefehl können Sie testen, ob ein Symbol für die Umwandlung in der Kommandozeile mit
-der Option (!V)-D(!v) gesetzt wurde. Wurde ""<text>"" gesetzt, werden alle folgenden Zeilen umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht. Andernfalls werden nur die Zeilen umgewandelt, die (!KW [else]) folgen, sofern die Abfrage einen else-Zweig besitzt. Das Beispiel zeigt, wie man abfragt, ob in der Kommandozeile (!V)-D deutsch(!v) benutzt wurde.
+der Option (!V)-D(!v) gesetzt wurde. Wurde ""(!TEXT)"" gesetzt, werden alle folgenden Zeilen umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht. Andernfalls werden nur die Zeilen umgewandelt, die (!KW [else]) folgen, sofern die Abfrage einen else-Zweig besitzt. Das Beispiel zeigt, wie man abfragt, ob in der Kommandozeile (!V)-D deutsch(!v) benutzt wurde.
 
 !item [(!EXAMPLE)]
 (!T)!/ifset [deutsch](!t)
@@ -720,7 +724,7 @@ Querverweis mit Grafik (nur WinHelp und HTML).
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/ilink [<(!FILE)>] [<(!TEXT)>] [<link>])(!t)
+!item [(!SYNTAX)] (!T)(!/ilink [(!FILE)] [(!TEXT)] [(!LINK)])(!t)
 
 !item [(!DESCRIPTION)]
 Dieser Platzhalter ist eine Kombination der Platzhalter
@@ -759,10 +763,10 @@ Markierung von Einfügungen.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/INS)<(!TEXT)>(!/ins)(!t)
+!item [(!SYNTAX)] (!T)(!/INS)(!TEXT)(!/ins)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" wird als Einfügung markiert.
+""(!TEXT)"" wird als Einfügung markiert.
 
 Bei der HTML-Ausgabe wird die aktuelle Zeit als Attribut datetime
 und die URL ""http://www.udo-open-source.org"" als Attribut cite eingesetzt.
@@ -800,7 +804,7 @@ Grafik ausgeben.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/image [<(!FILE)>] [<(!TEXT)>])(!t)
+!item [(!SYNTAX)] (!T)(!/image [(!FILE)] [(!TEXT)])(!t)
 
 !item [(!DESCRIPTION)]
 Dieser Befehl wurde umbenannt in (!KKW [img]).
@@ -828,7 +832,7 @@ Grafik ausgeben.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/image <(!FILE)> <titel>(!t)
+!item [(!SYNTAX)] (!T)!/image (!FILE) <titel>(!t)
 
 !item [(!DESCRIPTION)]
 Dieses Kommando erzeugt in der Ausgabedatei Befehle
@@ -866,7 +870,7 @@ Grafik ohne Nummer ausgeben.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/image* <(!FILE)> <titel>(!t)
+!item [(!SYNTAX)] (!T)!/image* (!FILE) <titel>(!t)
 
 !item [(!DESCRIPTION)]
 Der einzige Unterschied zum (!KW [image])-Kommando ist der,
@@ -932,7 +936,7 @@ Abbildungszähler setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/image_counter [<(!VALUE)>](!t)
+!item [(!SYNTAX)] (!T)!/image_counter [(!VALUE)](!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Schalter können Sie die Nummer festlegen,
@@ -962,7 +966,7 @@ Grafik ausgeben.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/img [<(!FILE)>] [<(!TEXT)>])(!t)
+!item [(!SYNTAX)] (!T)(!/img [(!FILE)] [(!TEXT)])(!t)
 
 !item [(!DESCRIPTION)]
 Benutzen Sie dieses Kommando, um ein Bild direkt im
@@ -970,13 +974,13 @@ Text bei der Umwandlung nach HTML oder WinHelp
 auszugeben. Bei der Umwandlung nach HTML wird
 (!T)file.gif(!t), bei WinHelp (!T)file.bmp(!t) benutzt, wobei UDO
 nicht überprüft, ob die jeweiligen Bilder existieren.
-Bei HTML wird ""<text>"" als Alternativtext benutzt. Bei
-den anderen Formaten wird nur ""<text>"" ausgegeben.
+Bei HTML wird ""(!TEXT)"" als Alternativtext benutzt. Bei
+den anderen Formaten wird nur ""(!TEXT)"" ausgegeben.
 
 Seit Version 6.5.18 wurde das Kommando erweitert: (!nl)
-(!T)(!/img [<(!FILE)>] [<(!TEXT)> [<(!TEXT)>]])(!t) (!nl)
+(!T)(!/img [(!FILE)] [(!TEXT) [(!TEXT)]])(!t) (!nl)
 Dies hat nur Auswirkung bei der Ausgabe nach HTML, HTML Apple Help und HTMLHelp.
-Dabei wird der zweite <(!TEXT)> für das Attribut ""title"" benutzt. Ist nur ein <(!TEXT)>
+Dabei wird der zweite (!TEXT) für das Attribut ""title"" benutzt. Ist nur ein (!TEXT)
 vorhanden, bekommen beide Attribute (""alt"" und ""title"") den selben Text. Beispiel:
 
 <img src="d.gif" width="xxx" height="yyy" border="0" alt="text" title="text 2">
@@ -1004,10 +1008,10 @@ Datei einbinden.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/include <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/include (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
-Öffnet die Datei ""<datei>"" und gibt deren
+Öffnet die Datei ""(!FILE)"" und gibt deren
 umgewandelten Inhalt an der Stelle aus, an der dieses
 Kommando benutzt wurde. (!FILESPACEQUOTE)
 
@@ -1032,11 +1036,11 @@ Indexeinträge im Text angeben.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/index [<(!TEXT)>] {[<index1>]} {[<index2>]} {[<index3>]})(!t)
+!item [(!SYNTAX)] (!T)(!/index [(!TEXT)] {[<index1>]} {[<index2>]} {[<index3>]})(!t)
 
 !item [(!DESCRIPTION)]
 Dient zum Erzeugen von Indizes direkt im Quelltext.
-Im Gegensatz zu (!KKW [idx]) wird ""<text>"" nicht ausgegeben,
+Im Gegensatz zu (!KKW [idx]) wird ""(!TEXT)"" nicht ausgegeben,
 es erfolgt also nur ein Eintrag in den Index.
 
 !item [(!EXAMPLE)]
@@ -1062,18 +1066,18 @@ Indexeintrag bzw. Schlüsselwort setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/index <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/index (!TEXT)(!t)
 
 #Ausgabe-Formate
 !item [(!DESCRIPTION)]
-""<text>"" wird für (!LaTeX) als ""(!V)\index~{!..}(!v)"", für WinHelp
+""(!TEXT)"" wird für (!LaTeX) als ""(!V)\index~{!..}(!v)"", für WinHelp
 als ""(!V)K{\footnote~K~!..}(!v)"", für RTF als ""(!V){\xe\v~!..}(!v)""
 und für den ST-Guide als ""(!V)@index~!..(!v)"" ausgegeben.
-""<text>"" kommt damit bei (!LaTeX) und dem ST-Guide in den
+""(!TEXT)"" kommt damit bei (!LaTeX) und dem ST-Guide in den
 Index, bei WinHelp kann man im Suchen-Dialog nach
 diesem Schlüsselwort suchen und bekommt die Namen der
 Kapitel aufgelistet, in denen (!KW [index]) benutzt wurde.
-""<text>"" kann beliebig oft benutzt werden, auch in mehreren Kapiteln.
+""(!TEXT)"" kann beliebig oft benutzt werden, auch in mehreren Kapiteln.
 
 !item [(!EXAMPLE)]
 (!T)!/index Eintrag !! Index(!t)
@@ -1099,7 +1103,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/info <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/info (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -1126,10 +1130,10 @@ Datei einbinden.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/input <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/input (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
-Öffnet die Datei ""<datei>"" und gibt deren
+Öffnet die Datei ""(!FILE)"" und gibt deren
 umgewandelten Inhalt an der Stelle aus, an der dieses
 Kommando benutzt wurde. Im Gegensatz zu (!KW [include])
 sucht (!KW [input]) nur in
@@ -1190,7 +1194,7 @@ Aufzählungspunkt einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/item <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/item (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Leitet einen neuen Aufzählungspunkt einer itemize-Umgebung oder enumerate-Umgebung ein. Dieser wird mit
@@ -1217,7 +1221,7 @@ Aufzählungspunkt einleiten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/item [<(!TEXT)>] <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/item [(!TEXT)] (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Leitet einen neuen Aufzählungspunkt einer

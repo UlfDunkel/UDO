@@ -18,6 +18,9 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: CHAR macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
 #
 ################################################################################
 
@@ -36,7 +39,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=tex <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=tex (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -65,10 +68,10 @@ Text in Schreibmaschinenschrift ausgeben.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/T)<(!TEXT)>(!/t)(!t)
+!item [(!SYNTAX)] (!T)(!/T)(!TEXT)(!/t)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" wird in Schreibmaschinenschrift dargestellt, falls möglich. Diese Schriftart wird von fast allen Ausgabeformaten unterstützt.
+""(!TEXT)"" wird in Schreibmaschinenschrift dargestellt, falls möglich. Diese Schriftart wird von fast allen Ausgabeformaten unterstützt.
 
 !item [(!EXAMPLE)]
 (!T)(!/T)monospaced(!/t)(!t)
@@ -155,7 +158,7 @@ Titel der nächsten Tabelle setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/table_caption <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/table_caption (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Kommando wird der Titel der nächsten
@@ -184,7 +187,7 @@ Titel der nächsten Tabelle setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/table_caption* <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/table_caption* (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Der einzige Unterscheid zum Kommando (!KW [table_caption])
@@ -213,7 +216,7 @@ Tabellenzähler setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/table_counter [<(!VALUE)>](!t)
+!item [(!SYNTAX)] (!T)!/table_counter [(!VALUE)](!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Schalter können Sie die Nummer festlegen,
@@ -244,7 +247,7 @@ Inhaltsverzeichnis ausgeben.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/tableofcontents !/depth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/tableofcontents !/depth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Dieses Kommando gibt ein komplettes Inhaltsverzeichnis aus, welches
@@ -278,20 +281,20 @@ Tabulatorbreite für verbatim-Umgebungen setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/tabwidth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/tabwidth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Enthalten Zeilen einer verbatim-Umgebung Tabulatoren,
 so wandelt UDO diese entsprechend dem angegebenen
-<wert> in Leerzeichen um. Wollen Sie beispielsweise
+(!VALUE) in Leerzeichen um. Wollen Sie beispielsweise
 Sourcecodes darstellen, die sie mit einer
 Tabulatorweite von 4 erstellt haben, sollten Sie
 das folgende Beispiel vor der verbatim-Umgebung bzw.
 vor (!KW [vinclude]) angeben. (!KW [tabwidth]) kann überall und
-beliebig oft im Quelltext angegeben werden. <wert>
+beliebig oft im Quelltext angegeben werden. (!VALUE)
 wird jeweils für die nächste verbatim-Umgebung
 verwendet. Standardmäßig benutzt UDO den Wert 8.
-Benutzt man 0 als <wert>, wandelt UDO die Tabulatoren nicht um.
+Benutzt man 0 als (!VALUE), wandelt UDO die Tabulatoren nicht um.
 
 !item [(!EXAMPLE)]
 (!T)!/tabwidth 4(!t)
@@ -317,7 +320,7 @@ Abfrage des Ausgabeformates.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/tex <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/tex (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -456,7 +459,7 @@ Grafikauflösung setzen (nur (!TeX)).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/tex_dpi <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/tex_dpi (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Setzt die Auflösung, mit der Bilder in (!LaTeX)
@@ -603,12 +606,12 @@ Verbatim-Zeichen für (!LaTeX) setzen (nur (!TeX))
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/tex_verb <(!CHAR)>(!t)
+!item [(!SYNTAX)] (!T)!/tex_verb (!CHAR)(!t)
 
 !item [(!DESCRIPTION)]
-""<zeichen>"" wird als Klammerungszeichen für den
+""(!CHAR)"" wird als Klammerungszeichen für den
 (!LaTeX)-Befehl ""(!V)\verb(!v)"" verwendet. Bei der nächsten
-Umwandlung von (!KK1 [V]) und (!KK1 [v]) wird dann ""<zeichen>""
+Umwandlung von (!KK1 [V]) und (!KK1 [v]) wird dann ""(!CHAR)""
 benutzt. Als Standardzeichen benutzt UDO ""+"".
 
 !item [(!EXAMPLE)]
@@ -633,7 +636,7 @@ Dokumenttitel definieren.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/title <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/title (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -691,7 +694,7 @@ Inhaltsverzeichnis ""alleine"" ausgeben.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/toc [(!FORMAT)] !/depth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/toc [(!FORMAT)] !/depth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Gibt ein komplettes Inhaltsverzeichnis aus. Im
@@ -721,10 +724,10 @@ Offset für die Kapitelnummerierung setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/toc_offset <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/toc_offset (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-""<wert>"" wird bei der Ausgabe der Kapitelnummern zu
+""(!VALUE)"" wird bei der Ausgabe der Kapitelnummern zu
 der aktuellen Nummer hinzugezählt. Im Beispiel würde
 das erste Kapitel mit der Nummer~10 ausgegeben. Es
 können auch negative Werte benutzt werden. Dieser
@@ -800,7 +803,7 @@ Wohnort des Autors für den Adressblock der Titelseite setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/town <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/town (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)

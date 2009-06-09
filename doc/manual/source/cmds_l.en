@@ -19,6 +19,9 @@
 #   fd  Jun 09: !language lists all available languages now
 #   fd  Jun 09: !language referencec to lang_ref.<ISO> now
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: LINK macro introduced
 #
 ################################################################################
 
@@ -37,7 +40,7 @@ Query the destination format.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=ldoc <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=ldoc (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -118,7 +121,7 @@ Set a label.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/l <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/l (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [label]).
@@ -141,7 +144,7 @@ Set a label.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/label <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/label (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Defines a label that will be referenced in hypertexts or can be
@@ -169,7 +172,7 @@ Beliebiger Teil des Textes als Label/Bookmark markieren.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/label [<(!TEXT)>] [<link>])(!t)
+!item [(!SYNTAX)] (!T)(!/label [(!TEXT)] [(!LINK)])(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Befehl kann ein beliebiger Teil des Textes als
@@ -255,10 +258,10 @@ Include file in linedraw environment.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/ldinclude <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/ldinclude (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
-""<file>"" will be included and displayed like preformatted text
+""(!FILE)"" will be included and displayed like preformatted text
 inside a linedraw environment. If you use this command inside
 another environment UDO indents the contents of this file. UDO
 converts tabs according to (!KW [tabwidth]). (!FILESPACEQUOTE)
@@ -287,7 +290,7 @@ Query the destination format.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/ldoc <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/ldoc (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -314,7 +317,7 @@ Query the destination format.
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/lh <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/lh (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [listheading]).
@@ -399,7 +402,7 @@ Create a manual link.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/link [<(!TEXT)>] [<link>])(!t)
+!item [(!SYNTAX)] (!T)(!/link [(!TEXT)] [(!LINK)])(!t)
 
 (!red)
 !item [(!DESCRIPTION)]
@@ -535,7 +538,7 @@ Umgebungen können nun viel eleganter mit dem Umgebungsparameter (!KW [short]) er
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/listheading <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/listheading (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!MISS)
@@ -622,7 +625,7 @@ want to use it. At the moment this command will only be converted for
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/listsubheading <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/listsubheading (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!MISS)
@@ -642,7 +645,7 @@ want to use it. At the moment this command will only be converted for
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/listsubsubheading <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/listsubsubheading (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!MISS)
@@ -662,7 +665,7 @@ want to use it. At the moment this command will only be converted for
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/listsubsubsubheading <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/listsubsubsubheading (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!MISS)
@@ -682,7 +685,7 @@ want to use it. At the moment this command will only be converted for
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/lsh <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/lsh (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [listsubheading]).
@@ -705,7 +708,7 @@ want to use it. At the moment this command will only be converted for
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/lssh <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/lssh (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [listsubsubheading]).
@@ -728,7 +731,7 @@ want to use it. At the moment this command will only be converted for
 
 !item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/lsssh <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/lsssh (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!ABBREV) (!KW [listsubsubsubheading]).

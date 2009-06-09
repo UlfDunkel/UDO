@@ -17,6 +17,9 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 09: WORD macro introduced
 #
 ################################################################################
 
@@ -35,7 +38,7 @@ Query the destination format.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=man <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=man (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -62,11 +65,11 @@ Define a macro.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/macro <word> <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/macro (!WORD) (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Defines a macro. Later on every ""(!/<word>)"" will be replaced by
-""<text>"". When using the lower exmaple every ""(!DH)"" will be
+Defines a macro. Later on every ""(!/(!WORD))"" will be replaced by
+""(!TEXT)"". When using the lower exmaple every ""(!DH)"" will be
 replaced by ""Dirk Hagedorn"".
 
 !item [(!EXAMPLE)]
@@ -116,7 +119,7 @@ Query the destination format.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/man <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/man (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -143,7 +146,7 @@ Set lines per page (manualpage only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/man_lpp <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/man_lpp (!VALUE)(!t)
 
 (!red)
 !item [(!DESCRIPTION)]
@@ -152,7 +155,7 @@ zus‰tzlich Seitennummern ausgegeben. Beim Start der Umwandlung ist die Seitenl‰n
 werden auch keine Fuﬂzeilen ausgegeben.
 (!coloff)
 !item [(!DESCRIPTION)]
-Sets the ""lines per page"" of a manualpage. If <value> is bigger
+Sets the ""lines per page"" of a manualpage. If (!VALUE) is bigger
 than 0 UDO generates footlines with pagenumbers. When UDO starts
 !/man_lpp is undefined and UDO won't generate these footlines.
 
@@ -177,11 +180,11 @@ Set program type (manualpage only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/man_type <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/man_type (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-When converting into a manualpage UDO uses ""<text>"" inside the
-headline with brackets. The example and ""(!KW [docinfo] [[program!!] udo])"" would look like ""udo(1)"". UDO doesn't use ""<text>"" as a file suffix.
+When converting into a manualpage UDO uses ""(!TEXT)"" inside the
+headline with brackets. The example and ""(!KW [docinfo] [[program!!] udo])"" would look like ""udo(1)"". UDO doesn't use ""(!TEXT)"" as a file suffix.
 
 !item [(!EXAMPLE)]
 (!T)!/man_type 1(!t)
@@ -206,7 +209,7 @@ Assign value to node.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/mapping <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/mapping (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 This command is currently only supported for Windows Help and IPF.

@@ -16,6 +16,9 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
 #
 ################################################################################
 
@@ -34,7 +37,7 @@ Query the destination format.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/=rtf <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/=rtf (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -61,11 +64,11 @@ Output text within a line without changes, for defined destination formats.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/raw [(!FORMAT)] [<(!TEXT)>])(!t)
+!item [(!SYNTAX)] (!T)(!/raw [(!FORMAT)] [(!TEXT)])(!t)
 
 !item [(!DESCRIPTION)]
-(!T)<(!TEXT)>(!t) will only be output when converting to one of the specified 
-destination formats. (!T)<text>(!t) will be output then without any conversion.
+(!T)(!TEXT)(!t) will only be output when converting to one of the specified 
+destination formats. (!T)(!TEXT)(!t) will be output then without any conversion.
 
 (!HINT) Because UDO needs to recognize the closing bracket (!T))(!t) as well as 
 the closing square brackets (!T)](!t) of the parameter blocks, it is important 
@@ -96,18 +99,18 @@ Output raw string for destination format.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/raw [(!FORMAT)] <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/raw [(!FORMAT)] (!TEXT)(!t)
 
 (!red)
 !item [(!DESCRIPTION)]
-(!T)<text>(!t) wird nur dann ausgegeben, wenn die Quelldatei
-in eines der angegebenen Formate umgewandelt wird. (!T)<text>(!t)
+(!T)(!TEXT)(!t) wird nur dann ausgegeben, wenn die Quelldatei
+in eines der angegebenen Formate umgewandelt wird. (!T)(!TEXT)(!t)
 wird dann 1:1 und ohne Berücksichtigung etwaiger UDO-Kommandos
 ausgegeben. Diese Zeile zerteilt Absätze genau wie alle anderen Kommandos.
 (!coloff)
 !item [(!DESCRIPTION)]
-""<text>"" will only be output if you convert into
-one of the specified formats. ""<text>"" will be not converted!
+""(!TEXT)"" will only be output if you convert into
+one of the specified formats. ""(!TEXT)"" will be not converted!
 
 !item [(!EXAMPLE)]
 !/raw [stg] @subject Documentation/Utilities
@@ -190,17 +193,17 @@ Include file without conversion.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/rinclude <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/rinclude (!FILE)(!t)
 
 (!red)
 !item [(!DESCRIPTION)]
-Öffnet die Datei ""<datei>"" und gibt deren Inhalt unformatiert an der
+Öffnet die Datei ""(!FILE)"" und gibt deren Inhalt unformatiert an der
 Stelle aus, an der dieses Kommando benutzt wurde. Der Inhalt der Datei
 wird nicht eingerückt oder zentriert ausgegeben. Die raw-Umgebung dient
 dazu, spezielle Formatbefehle einzubinden. (!FILESPACEQUOTE)
 (!coloff)
 !item [(!DESCRIPTION)]
-""<file>"" will be included and output unformatted inside a raw
+""(!FILE)"" will be included and output unformatted inside a raw
 environment. Useful for large tables for (!LaTeX) or HTML.
 
 !item [(!EXAMPLE)]
@@ -227,7 +230,7 @@ Query the destination format.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/rtf <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/rtf (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -255,7 +258,7 @@ Set character width (RTF only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/rtf_add_colour <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/rtf_add_colour (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Kommando könnenzusätzliche Farben (über die 16 Standardfarben
@@ -281,7 +284,7 @@ Set character width (RTF only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/rtf_charwidth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/rtf_charwidth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 UDO uses a constant value for caclulating the indent of lists and the
@@ -372,7 +375,7 @@ Set monospaced font (RTF only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/rtf_monofont_size <wert>(!t)
+!item [(!SYNTAX)] (!T)!/rtf_monofont_size (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 With this command you can set the font that will be used to display
@@ -458,7 +461,7 @@ Set proportional font (RTF only).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/rtf_propfont_size <wert>(!t)
+!item [(!SYNTAX)] (!T)!/rtf_propfont_size (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 With this command you can set the font that will be used to display

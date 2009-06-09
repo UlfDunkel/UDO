@@ -19,6 +19,10 @@
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 08: 'Homepage' -> 'Website'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 09: LINK macro introduced
 #
 ################################################################################
 
@@ -39,10 +43,10 @@ Unterstrichenen Text ausgeben.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/U)<(!TEXT)>(!/u)(!t)
+!item [(!SYNTAX)] (!T)(!/U)(!TEXT)(!/u)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" wird unterstrichen dargestellt, falls möglich.
+""(!TEXT)"" wird unterstrichen dargestellt, falls möglich.
 Diese Schriftart sollte sparsam eingesetzt werden.
 # ToDo: Anmerkungen wg. Hypertextformaten ergänzen
 
@@ -156,7 +160,7 @@ Symbol entfernen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/unset <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/unset (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 Mit diesem Kommando können Symbole, die Sie mit (!KW [set])
@@ -184,16 +188,16 @@ Verweis auf externe Daten.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/url [<(!TEXT)>] [<link>])(!t)
+!item [(!SYNTAX)] (!T)(!/url [(!TEXT)] [(!LINK)])(!t)
 
 !item [(!DESCRIPTION)]
 Dient zum Erzeugen von Verweisen auf externe
 Dokumente. Im Unterschied zu (!KKW [xlink]) wird bei jedem Format ein
 Link auf eine URL angelegt.
 Im Beispiel würde bei einer HTML-Datei ein Querverweis
-auf die Seite der Deutschen Telekom erzeugt. ""<link>""
-kann auch leer sein, dann wird für ""<link>"" der Inhalt
-von ""<text>"" ausgegeben.
+auf die Seite der Deutschen Telekom erzeugt. ""(!LINK)""
+kann auch leer sein, dann wird für ""(!LINK)"" der Inhalt
+von ""(!TEXT)"" ausgegeben.
 
 Kommt in einem Verweis eine Tilde vor,
 so braucht dieser bei Verwendung im (!KKW [url])-Kommando
@@ -749,7 +753,7 @@ Footer im Zielformat einbinden.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/use_raw_footer <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/use_raw_footer (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 Die Datei soll am Ende der Seite 1:1 ausgegeben werden. Wird der
@@ -782,7 +786,7 @@ Header im Zielformat einbinden.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/use_raw_header <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/use_raw_header (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 Die Datei soll am Anfang der Seite 1:1 ausgegeben werden. Wird der
@@ -846,7 +850,7 @@ Kurze Inhaltsverzeichnisse benutzen.
 
 !item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/use_short_tocs [(!FORMAT)] !/depth <(!VALUE)>(!t)
+!item [(!SYNTAX)] (!T)!/use_short_tocs [(!FORMAT)] !/depth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Wird dieses Kommando im Vorspann benutzt, wird für die angegebenen

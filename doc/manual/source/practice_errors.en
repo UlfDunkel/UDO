@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from working.ui)
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 09: FILE macro enhanced
 #
 ################################################################################
 
@@ -117,10 +118,10 @@ enumeration, description or list.
 UDO prints a filename and a line number where you can find the reason
 for the upper printed error message.
 
-!item [couldn't open <file> (pass1)]
+!item [couldn't open (!FILE) (pass1)]
 UDO couldn't open the printed file in the first of two passes.
 
-!item [couldn't open <file> (pass2)]
+!item [couldn't open (!FILE) (pass2)]
 UDO couldn't open the printed file in the second pass. Please check
 the filename you have used for (!KW [include]).
 

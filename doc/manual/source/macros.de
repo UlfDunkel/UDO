@@ -16,6 +16,7 @@
 #   fd  Jun 05: introduced (extracted from manual.u)
 #   fd  Jun 05: FILESPACEQUOTE
 #   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: some macros enhanced
 #
 ################################################################################
 
@@ -43,6 +44,13 @@
 !macro CODE           (!link [<zeichensatz>] [Code])
 !endif
 
+!macro CHAR           <zeichen>
+!macro FILE           <datei>
+!macro LINK           <link>
+!macro NAME           <name>
+!macro TEXT           <text>
+!macro VALUE          <wert>
+!macro WORD           <wort>
 
 !macro DocumentationWorkInProgress  Die UDO-Anleitung ist im Moment in Überarbeitung. Zwischenstände stehen auf der UDO-Website derzeit nur zum Online-Lesen zur Verfügung, aber nicht zum Download.
 !macro FollowingOutdated            (!I)Die nachfolgenden Textpassagen sind z.T. nicht mehr aktuell und sind zur Überarbeitung vorgesehen.(!i)
@@ -58,7 +66,6 @@
 
 # Sprachabhängige Textbausteine für den Befehlsindex (alphabetisch geordnet)
 !macro ABBREV         Dies ist eine Abkürzung für das Kommando
-!macro CHAR           zeichen
 !macro COMMAND        Kommando
 !macro COMMANDABBREV  Kommando-Abkürzung
 !macro DESCRIPTION    Beschreibung:
@@ -66,7 +73,6 @@
 !macro EXAMPLE2       Beispiel:
 !macro EXISTSSINCE    Existiert seit:
 !macro EXISTEDUNTIL   Existierte bis:
-!macro FILE           datei
 !macro FILESPACEQUOTE Enthält der Dateiname Leerzeichen, muss er in Anführungszeichen gesetzt werden.
 !macro HINT           (!B)Hinweis:(!b)
 !macro HINTS          (!B)Hinweise:(!b)
@@ -80,9 +86,7 @@
 !macro SPECIALCHAR    Sonderzeichen
 !macro SWITCH         Schalter
 !macro SYNTAX         Syntax:
-!macro TEXT           text
 !macro TYPEPOSITION   Typ & Position:
 !macro USEINSTEAD     Benutzen Sie stattdessen (!1)
-!macro VALUE          wert
 
 # === EOF ===

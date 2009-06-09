@@ -16,6 +16,8 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
 #
 ################################################################################
 
@@ -35,11 +37,11 @@ Output preformatted text.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/V)<(!TEXT)>(!/v)(!t)
+!item [(!SYNTAX)] (!T)(!/V)(!TEXT)(!/v)(!t)
 
 !item [(!DESCRIPTION)]
-""<text>"" will be displayed preformatted if possible.
-When converting to (!LaTeX), ""(!V)\verb+<text>+'(!v)"" will be output,
+""(!TEXT)"" will be displayed preformatted if possible.
+When converting to (!LaTeX), ""(!V)\verb+(!TEXT)+'(!v)"" will be output,
 otherwise the same output will be generated as for (!KKKW [T] [t]).
 
 !item [(!EXAMPLE)]
@@ -124,7 +126,7 @@ Set document information about version number (of program) for title page.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/version <(!TEXT)>(!t)
+!item [(!SYNTAX)] (!T)!/version (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
@@ -151,10 +153,10 @@ Include file in verbatim environment.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/vinclude <(!FILE)>(!t)
+!item [(!SYNTAX)] (!T)!/vinclude (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
-A file named ""<file>"" will be included and displayed like preformatted text
+A file named ""(!FILE)"" will be included and displayed like preformatted text
 inside a verbatim environment. If you use this command inside
 another environment UDO indents the contents of this file. UDO
 converts tabs according to (!KW [tabwidth]). If the file name contains spaces, it has to be quoted.

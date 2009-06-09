@@ -20,6 +20,7 @@
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: TEXT macro enhanced
 #
 ################################################################################
 
@@ -219,8 +220,8 @@ verschachtelt und mit dem Schalter (!KW [short]) benutzt wird,!..
 Die description-Umgebung ist dafür geeignet, eine Beschreibung von
 mehreren Begriffen zu erzeugen, wobei Begriffe fett dargestellt werden.
 
-Ein Aufzählungspunkt wird durch (!KW [item] [[<text>!!]]) gekennzeichnet,
-wobei ""<text>"" in der Aufzählung fett dargestellt wird.
+Ein Aufzählungspunkt wird durch (!KW [item] [[(!TEXT)!!]]) gekennzeichnet,
+wobei ""(!TEXT)"" in der Aufzählung fett dargestellt wird.
 
 Die description-Umgebung ist mehrfach schachtelbar und lässt sich auch
 mit anderen Umgebungen kobinieren. Hier ein kleines, unverschachteltes
@@ -280,12 +281,12 @@ Die xlist-Umgebung eignet sich, genau wie die description-Umgebung, zur
 Erläuterung von Begriffen. Bei dieser Umgebung werden die
 Beschreibungen der Begriffe jedoch alle untereinander aufgeführt. Wie
 weit die Beschreibungen eingerückt wird, hängt von der Länge des bei
-(!KW [begin_xlist] [[<text>!!]]) übergebenen Textes ab. Die beiden eckigen
+(!KW [begin_xlist] [[(!TEXT)!!]]) übergebenen Textes ab. Die beiden eckigen
 Klammern werden dabei nicht mitgezählt.
 
-Die Umgebung wird mit (!KW [begin_xlist] [[<text>!!]]) eingeleitet und mit
+Die Umgebung wird mit (!KW [begin_xlist] [[(!TEXT)!!]]) eingeleitet und mit
 (!KW [end_xlist]) beendet. Ein Aufzählungsbegriff wird wie bei der
-description-Umgebung durch (!KW [item] [[<text>!!]]) gekennzeichnet.
+description-Umgebung durch (!KW [item] [[(!TEXT)!!]]) gekennzeichnet.
 
 Die Umgebungen können mehrfach verschachtelt benutzt werden und lassen
 sich auch mit anderen Umgebungen kombinieren.
@@ -871,7 +872,7 @@ sollen.
 Um mit UDO Tabellen zu setzen, benötigen Sie folgende Kommandos:
 
 !begin_enumerate !short
-!item (!KW [table_caption] [<text>])
+!item (!KW [table_caption] [(!TEXT)])
 !item (!KW [begin_table] [[...!!]]) {(!KW [hline])}
 !item (!KW [end_table])
 !item (!KW [hline])
