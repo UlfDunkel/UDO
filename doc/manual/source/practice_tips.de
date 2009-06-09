@@ -14,6 +14,8 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from working.ui)
+#   fd  Jun 09: multi-language paragraph added
+#   fd  Jun 09: text reviewed
 #
 ################################################################################
 
@@ -30,14 +32,16 @@ oder mehr hat, so sollten Sie sie in kleine Häppchen aufteilen. Diese
 Dateien können dann mit dem (!KW [include]) an passender Stelle eingeladen
 werden.
 
-Durch die Aufteilung haben Sie den Vorteil, dass Sie die Dokumentation
+Das Aufteilen bietet den Vorteil, dass Sie die Dokumentation
 durch einfaches Verschieben nur einer einzigen Zeile neu gliedern
 können. Wäre der gesamte Quelltext in einer Datei, müssten Sie mit
 einem Editor gleich ganze Blöcke umkopieren.
 
-Ein weiterer Vorteil der Aufteilung ist, dass Sie bestimmte Kapitel
+Ein weiterer Vorteil des Aufteilens ist, dass Sie bestimmte Kapitel
 schnell wiederfinden können, sofern Sie den Dateien sinnvolle Namen
 geben.
+
+Denken Sie auch an mehrsprachige Dokumentationen. Wenn Sie -- wie wir es tun -- z.B. alle deutschen Texte in Dateien mit der Endung (!CODE [.de]) und alle englischen Texte in (!CODE [.en])-Dateien pflegen, behalten Sie noch besseren Überblick über die einzelnen Sprachen und können z.B. aus den (!CODE [.en])-Dateien rasch Kopien für z.B. Französisch erstellen, die Datei-Suffixe der Kopien in (!CODE [.fr]) ändern und dem französischen Übersetzer nur diese Dateien geben.
 
 Außerdem können Sie leicht und schnell nur Teile der Dokumentation auf
 syntaktische Korrektheit testen. Nehmen wir an, wir haben einen
@@ -55,13 +59,13 @@ ganz einfach eine zusätzliche Hauptdatei, die Sie dann umwandeln:
 !vinclude (!EXAMPLES)ch5test.u
 !end_quote
 
-Gerade bei sehr umfangreichen Dokumentationen kann man die Fehlersuche
+Gerade bei sehr umfangreichen Dokumentationen kann man so die Fehlersuche
 und -korrektur drastisch beschleunigen.
 
-Falls Sie sich mal ein Bild davon machen wollen, wie so eine
-Aufteilung aussehen kann, dann schauen Sie sich einmal die Quelltexte
-dieser UDO-Dokumentation an. Stünde diese Dokumentation in einer
-Datei, hätte ich schon längst den Überblick verloren.
+Falls Sie sich ein Bild davon machen wollen, wie so eine
+Aufteilung aussehen kann, dann schauen Sie sich die Quelltexte
+dieses UDO-Handbuchs an. Stünde diese Dokumentation in einer einzigen, großen 
+Datei, hätten wir schon längst den Überblick verloren.
 
 !end_node # Zerteilen Sie große Dokumentationen
 
@@ -129,8 +133,7 @@ Texten ist es jedoch eine sehr große Arbeitserleichterung.
 !html_name  tips_own_commands
 
 UDO unterstützt längst nicht alle Möglichkeiten jedes Ausgabeformates.
-Jedoch ist es unter Zuhilfenahme der Definitionen ein Leichtes, sich
-eigene Befehle zu schreiben oder spezielle Befehle für ein
+Jedoch ist es unter Zuhilfenahme der Definitionen leicht, eigene Befehle zu schreiben oder spezielle Befehle für ein
 Ausgabeformat einzubauen. Die Kenntnis der Syntax des Ausgabeformates
 ist dabei natürlich sehr von Vorteil.
 
