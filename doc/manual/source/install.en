@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: introduced (extracted from install.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 08: 'Homepage' -> 'Website'
 #
 ################################################################################
 
@@ -144,7 +145,7 @@ or if you have an older UDO-rpm installed: (!T)rpm -U (!t)(!I)file(!i)(!T).rpm(!
 !html_name  installation_linux_rpm
 
 !begin_itemize !short
-!item Laden Sie sich das entsprechende rpm-File von der UDO-Homepage herunter.
+!item Laden Sie sich das entsprechende rpm-File von der UDO-Website herunter.
 !item Melden Sie sich als (!T)root(!t) an.
 !item Neuinstallation: (!T)rpm -i (!t)(!I)file(!i)(!T).rpm(!t);
 oder wenn bereits ein älteres UDO-rpm installiert war: (!T)rpm -U (!t)(!I)file(!i)(!T).rpm(!t)

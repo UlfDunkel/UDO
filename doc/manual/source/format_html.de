@@ -17,6 +17,7 @@
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 08: 'Homepage' -> 'Website'
 #
 ################################################################################
 
@@ -96,7 +97,7 @@ Um eigene (!idx [Kopfzeilen]) und (!idx [Fuﬂzeilen]) zu erzeugen, kann man Makro
 benutzen, die man jeweils am Anfang und Ende eines Kapitels
 angibt. Der Inhalt dieser Kapitel erscheint dabei jedoch
 unterhalb der ‹berschrift. Auf folgende Art und Weise wurden
-beispielsweise Kopf- und Fuﬂzeilen meiner WWW-Homepage angelegt,
+beispielsweise Kopf- und Fuﬂzeilen meiner Website angelegt,
 in der es Kapitel namens ""Software"", ""Kontaktadressen"" und
 ""Links"" gibt:
 
