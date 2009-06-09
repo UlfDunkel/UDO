@@ -15,11 +15,12 @@
 # 2009:
 #   fd  Jun 05: introduced (extracted from charsets.ui)
 #   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
 # siehe Source/version.h, ergänzend chr.h
-# siehe weiterhin udo.a, nach "LOCAL const UDOCHARSET udocharset[MAXCHARSET]=" suchen...
+# siehe weiterhin udo.a, nach ""LOCAL const UDOCHARSET udocharset[MAXCHARSET]="" suchen...
 
 # Links auf Zeichensatztabellen am 12.01.2004 ergänzt
 # zusätzliche Erläuterungen siehe auch http://acspro.atari.org/KeyTab/Modern/006.html (Martin Elsässer)
@@ -30,7 +31,7 @@
 !begin_blist [iso-8859-1:] !short
 # in alphabetischer Reihenfolge!
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# auch als "DOSLatinUS" bekannt
+# auch als ""DOSLatinUS"" bekannt
 !item [cp437]   IBM-PC-Zeichensatz, Codepage~437, siehe (!url [http://www.kostis.net/charsets/cp437.htm] [])
 # siehe auch: http://acspro.atari.org/KeyTab/Modern/006004.html
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

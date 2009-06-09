@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 08: text reviewed
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -88,7 +89,7 @@ auftauchen, sollten Sie sich überlegen, ob es nicht vielleicht
 sinnvoller ist, im Vorspann einmal (!KW [hyphen]) zu benutzen.
 
 In diesem Beispiel wird davon ausgegangen, dass in Ihrem Quelltext das
-Wort "Dokumentation" mehrfach auftaucht. Damit Sie nicht bei jedem
+Wort ""Dokumentation"" mehrfach auftaucht. Damit Sie nicht bei jedem
 Wort die Trennstellen lokal setzen müssen, fügen Sie folgenden
 Zeile(n) in den Vorspann des Quelltextes ein:
 

@@ -20,6 +20,7 @@
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -70,8 +71,8 @@ Die Produktionsversion 6.6.0 wurde noch nicht veröffentlicht. Die in diesem Absc
     Diese Erweiterung ist seit Version 6.5.2 implementiert.
 # ..............................................................................
 !item Endet eine UDO-Eingabezeile mit !\<Zeilenumbruch>, wird die folgende Zeile
-  von UDO als Fortsetzung der vorhergehenden Zeile aufgefasst. Es können damit mehrere "echte"
-  Zeilen aus Sicht von UDO zu einer einzigen "logischen" Eingabezeile zusammengefasst werden.
+  von UDO als Fortsetzung der vorhergehenden Zeile aufgefasst. Es können damit mehrere ""echte""
+  Zeilen aus Sicht von UDO zu einer einzigen ""logischen"" Eingabezeile zusammengefasst werden.
   Diese Fortsetzungszeilen sind an jeder Stelle im UDO-Quelltext zulässig, auch z.B. in Makros
   und Definitionen. Steht !\ nicht unmittelbar am Ende einer Zeile, wird es ignoriert
   und als normaler Text ausgegeben. (!nl)
@@ -146,14 +147,14 @@ Version 6.5.13
 # ..............................................................................
 !item Die (!T)!/docinfo(!t)-Optionen (!T)[program](!t) und (!T)[programimage](!t) schließen sich nicht mehr gegenseitig aus, sondern können jetzt gleichzeitig ausgegeben werden. Wenn beide benutzt werden, wird [program] zuerst ausgegeben.
 # ..............................................................................
-!item Die "UDO Community" ist in dem Text ergänzt worden, der von
+!item Die ""UDO Community"" ist in dem Text ergänzt worden, der von
     (!KW [use_about_udo]) ausgegeben wird.
 # ..............................................................................
 !item Die Bezeichnung der einzelnen Versionen wurde geändert. Es heisst
-jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
+jetzt nicht mehr """Release~6.x Patchlevel~yy"", sondern ""Version~6.x.y""
 (x gerade für Produktionsversionen bzw. ungerade für Entwicklerversionen von UDO).
 # ..............................................................................
-!item Die OS/2-Version von UDO sollte sich seit Version~6.5.1 als "UDO for OS/2" melden.
+!item Die OS/2-Version von UDO sollte sich seit Version~6.5.1 als ""UDO for OS/2"" melden.
 # ..............................................................................
 !item (!T)!/code [utf8](!t) oder (!T)!/code [utf-8](!t) wird jetzt unterstützt (seit Version~6.5.1).
 # ..............................................................................
@@ -169,7 +170,7 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 # http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000055
 # ..............................................................................
 !item Bug #0000048 in Version~6.4.1 beseitigt (!nl)
-   Fehlermeldung "unknown command: !html_use_hyphenation".
+   Fehlermeldung ""unknown command: !html_use_hyphenation"".
    Ursache: Kommando fehlte in der Kommandoliste.
 # http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000048
 # ..............................................................................
@@ -251,7 +252,7 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 # ..............................................................................
 !item Der Bereich der Titelseite wird jetzt durch folgendes Konstrukt geklammert:
 
-      <div id=""udo_titlepage""></div> (!nl)
+      <div id="udo_titlepage"></div> (!nl)
       Version 6.5.9
 # ..............................................................................
 !item Bei (!KW [use_raw_header]) und (!KW [use_raw_footer]) werden Makros und Defines
@@ -266,7 +267,7 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
       Version 6.5.9 und 6.5.13
 # ..............................................................................
 !item Beim Modern Layout wird die Tabelle in der linken Spalte, die das
-      Menu zeigt, jetzt mit einer ID namens ""UDO_menu""" versehen, dass
+      Menu zeigt, jetzt mit einer ID namens ""UDO_menu"" versehen, dass
       das Menu beim Drucken mittels CSS ausgeblendet werden kann. (!nl)
       Version 6.5.9
 # ..............................................................................
@@ -347,7 +348,7 @@ jetzt nicht mehr "Release~6.x Patchlevel~yy" sondern "Version~6.x.y"
 # zu RTF
 !item Bug #0000056 in Version~6.4.1 beseitigt (!nl)
    Falsche Berechnung der Ausmaße von Bildern bei der RTF-Ausgabe.
-   Versehentlich wurde dem Parameter "Höhe" die Breite übergeben.
+   Versehentlich wurde dem Parameter ""Höhe"" die Breite übergeben.
 # http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000056
 # ..............................................................................
 !item Bug #0000017 in Version 6.4.1 beseitigt (!nl)
@@ -654,11 +655,11 @@ unten links !! unten mitte !! unten rechts
          ausführlichen Namen bekommen haben (z.~B. foo.php) richtig
          referenziert.
    !item Für die HTML-Ausgabe wird jetzt im Tag <ul> zusätzlich
-         (!T)<ul class=""content"">(!t) ausgegeben. Dadurch kann
+         (!T)<ul class="content">(!t) ausgegeben. Dadurch kann
          man mittels eines Eintrages im Stylesheet
          (!T)(ul.content~{~list-style-type:~none;~})(!t) die
          Aufzählungspunkte in den Inhaltsverzeichnissen vermeiden.
-   !item Bei der HTML-Ausgabe wird jetzt ein (!T)<span style=""page-break-after:always;""></span>(!t)
+   !item Bei der HTML-Ausgabe wird jetzt ein (!T)<span style="page-break-after:always;"></span>(!t)
          gesetzt, dann können Browser, die das verstehen, beim Ausdruck
          einen Seitenumbruch vornehmen.
    !item Die Bildunterschriften werden jetzt als Feld ausgegeben, damit
@@ -985,7 +986,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
         !item Es sind nun 4096 Nodes und Labels/Aliase benutzbar.
         !item Umfangreiche Optimierungen. UDO sollte spürbar und
           messbar schneller fertig sein. Probiert es mal aus.
-        !item UDO kann nun auch Dateien "includen", die Leerzeichen
+        !item UDO kann nun auch Dateien ""includen"", die Leerzeichen
           im Namen enthalten.
         !item Wird (!KW [tabwidth] [0]) benutzt, wandelt UDO keine TABs
           mehr in verbatim-/sourcecode-Umgebungen in Leerzeichen um.
@@ -1020,7 +1021,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
            Linkziel ausgegeben, sondern ASCII-Pfeile, welche zudem mit
            eckigen Klammern und Pipesymbolen voneinander getrennt sind.
            Ausserdem werden nun auch in den
-           "Top-Tocs" keine Bilder mehr benutzt, sondern die Ordnerstruktur
+           ""Top-Tocs"" keine Bilder mehr benutzt, sondern die Ordnerstruktur
            mit ASCII-Zeichen angedeutet.
         !item Die Kommandos (!KW [subtoc]), (!KW [subsubtoc]) und (!KW [subsubsubtoc])
            bewirken nun alle dasselbe, sprich es wird jeweils das einzig

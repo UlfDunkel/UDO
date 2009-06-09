@@ -23,6 +23,7 @@
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -812,7 +813,7 @@ mühsam, wenn man jede Zeile mit einem Kürzel beginnen müsste.
 
 !index !begin_raw
 !index !end_raw
-Daher bietet UDO die "raw-Umgebung" an. Sie wird mit dem Befehl
+Daher bietet UDO die ""raw-Umgebung"" an. Sie wird mit dem Befehl
 (!KW [begin_raw]) begonnen und mit dem Befehl (!KW [end_raw]) beendet.
 
 Genau wie der Inhalt der Zeilen, die mit den obigen Formatkürzeln
@@ -846,7 +847,7 @@ mühsam, wenn man jede Zeile mit einem Kürzel beginnen müsste.
 
 !index !begin_comment
 !index !end_comment
-Daher bietet UDO die "comment-Umgebung" an. Sie wird mit dem Befehl
+Daher bietet UDO die ""comment-Umgebung"" an. Sie wird mit dem Befehl
 (!KW [begin_comment]) begonnen und mit dem Befehl (!KW [end_comment]) beendet.
 
 Genau wie der Inhalt der Zeilen, die mit (!KW [comment])

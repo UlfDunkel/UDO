@@ -17,6 +17,7 @@
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -111,7 +112,7 @@ anzeigen.
 !begin_node GEM-Dialog ""Einstellungen""
 !html_name  usage_gem_settings
 
-Nach Auswahl des Menüeintrags "Optionen, Einstellungen" öffnet sich
+Nach Auswahl des Menüeintrags ""Optionen, Einstellungen"" öffnet sich
 dieser Dialog. Die Bedeutung der in diesem Dialog enthaltenen Buttons
 wird hier erklärt.
 

@@ -18,6 +18,7 @@
 #   fd  Jun 08: etc. -> usw.
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -118,7 +119,7 @@ Zusatznamen eines Kapitels definieren.
 
 !item [(!DESCRIPTION)]
 Definiert einen Zweitnamen eines Kapitels. Taucht
-"<text>" im Text auf, werden genauso Querverweise zum
+""<text>"" im Text auf, werden genauso Querverweise zum
 zugehörigen Kapitel erzeugt wie bei (!KW [label]), (!KW [node]),
 (!KW [subnode]), (!KW [subsubnode]) usw. Sie können (!KW [alias]) mehrfach
 innerhalb eines Kapitels benutzen, jedoch sollte

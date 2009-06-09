@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -25,8 +26,7 @@
 (!B)IPF(!b) ist das Ausgangsformat für die Hilfedateien unter dem Betriebssystem
 (!I)OS/2~Warp(!i) von IBM (sowie für IBM PC-DOS~7).
 
-Das IPF-Format ist ein Textformat. Es ist dokumentiert im "IBM
-OS/2~Warp IPF~Programming Guide" (Publication Number G25H-7110-00).
+Das IPF-Format ist ein Textformat. Es ist dokumentiert im ""IBM OS/2~Warp IPF~Programming Guide"" (Publication Number G25H-7110-00).
 Diese Dokumentation ist online zu lesen auf
 (!url [http://publibfp.boulder.ibm.com/cgi-bin/bookmgr/BOOKS/ej6c2b00/CCONTENTS] [])
 oder im Bookmanager-Format downloadbar. Bookmanager-Dateien sind lesbar mit dem (!url [IBM Library Reader for Windows] [http://www-306.ibm.com/software/applications/office/bkmgr/ilr.html]) oder mit dem
@@ -38,9 +38,9 @@ enthalten.
 Um aus den IPF-Dateien die Hilfedateien zu erzeugen, benötigt man den IPF-Compiler ((!T)IPFC.EXE(!t)). Dieser ist Bestandteil von (kommerziellen) IBM-Entwicklerprodukten (z.B. (!I)OS/2~Developers Toolkit(!i),
 (!I)Visual-Age(!i) Compiler, (!I)IBM Set C++(!i)), zum Herunterladen (als
 OS/2-Version) findet er sich auf
-(!url [http://www.m-petz.de/Download/Download.htm] []) (unter "IPFC-Zubehör") oder auf (!url [http://www.goellnitz-online.de/os2/infseite/ipfc.htm] []).
+(!url [http://www.m-petz.de/Download/Download.htm] []) (unter ""IPFC-Zubehör"") oder auf (!url [http://www.goellnitz-online.de/os2/infseite/ipfc.htm] []).
 # 22.12.2003: lt. http://www.sibyl-archive.org/3/euchk60.html
-# IPFC.EXE (Version 4.0) auch auf der CD "Top OS/2 TOOLS Vol. 6".
+# IPFC.EXE (Version 4.0) auch auf der CD ""Top OS/2 TOOLS Vol. 6"".
 
 Hilfedateien existieren unter OS/2 als HLP- oder INF-Dateien.
 HLP-Dateien werden nur zusammen mit ausführbaren Programmen verwendet,
@@ -57,7 +57,7 @@ INF-Viewer für DOS und Win32 können Sie auf (!url [http://www.labyrinth.net.au/~
 # Inhaltsverzeichnis) - aber die Inhalte kann man nicht anschauen (Fehlermeldungen).
 
 Von IBM gibt es für Windows einen (älteren) 16-bit-Viewer für INF- und HLP-Dateien, der
-Bestandteil des "Just Add Warp"-Paketes ist (downloadbar via
+Bestandteil des ""Just Add Warp""-Paketes ist (downloadbar via
 (!url [ftp://ftp.software.ibm.com/ps/products/os2/tools/jaow/jaow.zip] [])
 oder
 (!url [ftp://ftp.leo.org/pub/comp/os/os2/leo/windows/justaddwarp.zip] []))

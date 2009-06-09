@@ -19,6 +19,7 @@
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -124,7 +125,7 @@ Erläuterungen:
 
 !item Das ""ü"" in Einführung lautet in RTF-Schreibweise
 ""(!T)\'FC(!t)."" ""\"" entspricht ""0x5C"", wird also durch ""_5C""
-ersetzt. ""'"" enspricht ""0x27"", wird also durch ""_27"" ersetzt.
+ersetzt. ""'"" entspricht ""0x27"", wird also durch ""_27"" ersetzt.
 
 !item Die Leerzeichen werden durch ""_"" ersetzt.
 !end_enumerate

@@ -19,6 +19,7 @@
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -72,7 +73,7 @@ Hilfedatei festlegen. Es stehen folgende Farben zur
 Verfügung: black, silver (hellgrau, ehemals ""grey""),
 gray (dunkelgrau, ""gray"", nicht ""grey""!), white, maroon,
 red, purple, fuchsia, green (dunkelgrün), lime (hellgrün),
-olive, yellow, navy, blue, teal und aqua (ehemals "cyan").
+olive, yellow, navy, blue, teal und aqua (ehemals ""cyan"").
 Gleichzeitig passt UDO die Textfarbe
 an. Man sollte möglichst nur Weiß und Grau als
 Hintergrundfarben verwenden; alle anderen Farben sind furchtbar hässlich.
@@ -569,7 +570,7 @@ Hilfedatei festlegen. Es stehen folgende Farben zur
 Verfügung: black, silver (hellgrau, ehemals ""grey""),
 gray (dunkelgrau, ""gray"", nicht ""grey""!), white, maroon,
 red, purple, fuchsia, green (dunkelgrün), lime (hellgrün),
-olive, yellow, navy, blue, teal und aqua (ehemals "cyan").
+olive, yellow, navy, blue, teal und aqua (ehemals ""cyan"").
 Gleichzeitig passt UDO die Textfarbe
 an. Man sollte möglichst nur Weiß und Grau als
 Hintergrundfarben verwenden; alle anderen Farben sind furchtbar hässlich.

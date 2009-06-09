@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -27,7 +28,7 @@
 # multilayered menu structure. Multi-language support. Unlike simple TXT2EXE converters, DRC requires
 # insertion of formatting codes within source files.
 
-David's Readme Compiler ist ein von David Harris (dem Autor des E-Mail-Programms "Pegasus")
+David's Readme Compiler ist ein von David Harris (dem Autor des E-Mail-Programms ""Pegasus"")
 geschriebenes, frei verfügbares MS-DOS-Programm. Es konvertiert einen mit Formatierungsbefehlen
 versehenen Text (=~DRC-Format) in ein ausführbares Viewer-Programm.
 

@@ -12,7 +12,7 @@
 # Notes:
 #    This file contains the command index (in alphabetical order).
 #    Output for commands which are no longer existing will be created 
-#    only if "OldKeywords" was set.
+#    only if 'OldKeywords' was set.
 # ------------------------------------------------------------------------------
 # 
 # History
@@ -21,6 +21,7 @@
 #   fd  Jun 05: introduced (from commands.ui)
 #   fd  Jun 05: nodes 'Command description' + 'Colors' are no longer hidden
 #   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
