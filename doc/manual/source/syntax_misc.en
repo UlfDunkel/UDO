@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #
 ################################################################################
 
@@ -173,7 +174,7 @@ with bold text ((!KK1 [B])) or the newline command ((!KKW [nl])).
 
 !item You shouldn't use too many macros because every additional macro slows
 down the conversion of the source file. The maximum number of macro is
-(!MAXMACRO).
+(!red)(!MAXMACRO)(!coloff).
 
 !end_enumerate
 
@@ -315,7 +316,7 @@ get problems with bold text ((!KK1 [B])) or the newline command ((!KKW [nl])).
 
 !item You shouldn't use too many definitions because every additional
 definition slows down the conversion of the source file. The maximum number
-of definitions is (!MAXMACRO).
+of definitions is (!red)(!MAXMACRO)(!coloff).
 
 !end_enumerate
 
@@ -386,9 +387,9 @@ symbol.
 (!HINTS)
 
 !begin_enumerate
-!item You may use up to (!MAXDEFINE) symbols.
+!item You may use up to (!red)(!MAXDEFINE)(!coloff) symbols.
 
-!item The name of a symbol may be up to (!MAXSYMLEN) characters long.
+!item The name of a symbol may be up to (!red)(!MAXSYMLEN)(!coloff) characters long.
 !end_enumerate
 
 !end_node # Symbols

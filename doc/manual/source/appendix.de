@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: introduced (extracted from appendix.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #
 ################################################################################
 
@@ -35,31 +36,31 @@ Folgende Maximalwerte müssen Sie beim Erstellen der Quelltexte beachten:
 # Anmerkung: die hier verwendeten Definitionen sind in der Datei "manual.u" definiert...
 !begin_xlist [Schachtelungstiefe der Umgebungen:] !short
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Macros:]                           (!MAXMACRO)
+!item [Macros:]                            (!red)(!MAXMACRO)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Defines:]                          (!MAXDEFINE)
+!item [Defines:]                           (!red)(!MAXDEFINE)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Hyphens:]                          (!MAXHYPHEN)
+!item [Hyphens:]                           (!red)(!MAXHYPHEN)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Summe Kapitel, Labels und Aliase:] 32768
+!item [Summe Kapitel, Labels und Aliase:]  (!red)32768(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Zeichen pro Zeile:]                (!LINELEN)
+!item [Zeichen pro Zeile:]                 (!red)(!LINELEN)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Zeichen pro Wort:]                 (!MAX_TOKEN_LEN)
+!item [Zeichen pro Wort:]                  (!red)(!MAX_TOKEN_LEN)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Silben pro Wort:]                  (!MAXSILBEN)
+!item [Silben pro Wort:]                   (!red)(!MAXSILBEN)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Worte pro Absatz:]                 (!MAX_TOKENS)
+!item [Worte pro Absatz:]                  (!red)(!MAX_TOKENS)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Querverweise pro Absatz:]          (!MAXLINK)
+!item [Querverweise pro Absatz:]           (!red)(!MAXLINK)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Zeilen pro Tabelle:]               (!MAXLINETABLE)
+!item [Zeilen pro Tabelle:]                (!red)(!MAXLINETABLE)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Spalten pro Tabelle:]              (!MAXCOLUMSTABLE)
+!item [Spalten pro Tabelle:]               (!red)(!MAXCOLUMSTABLE)(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Zeichen pro Tabellen-Zelle:]       1000
+!item [Zeichen pro Tabellen-Zelle:]        (!red)1000(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Schachtelungstiefe der Umgebungen:] 6
+!item [Schachtelungstiefe der Umgebungen:] (!red)6(!coloff)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !end_xlist
 

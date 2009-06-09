@@ -17,6 +17,7 @@
 #   fd  Jun 08: macro LINELEN added to text
 #   fd  Jun 08: code UTF-8 added
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #
 ################################################################################
 
@@ -34,7 +35,7 @@ UDO expects a text file that you can edit with every ASCII editor. You
 should use only printable characters. That means you shouldn't use any
 characters below ""space"" except ASCII~9 (tab), ASCII~10 (line feed) and
 ASCII~13 (carriage return). A line of a source file shouldn't contain more
-than (!LINELEN) characters.
+than (!red)(!LINELEN)(!coloff) characters.
 
 UDO layouts the destination file itself. That means that it fills in spaces
 between words and lines between paragraphs:

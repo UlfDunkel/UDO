@@ -20,6 +20,7 @@
 #   fd  Jun 08: etc. -> usw.
 #   fd  Jun 08: text reviewed
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #
 ################################################################################
 
@@ -38,7 +39,7 @@ UDO erwartet als Quelldatei eine Textdatei, wie sie mit jedem
 ASCII-Editor erstellt werden kann. Außer ASCII~9 (Tabulator), ASCII~10
 (Linefeed) und ASCII~13 (Carriage Return) sollten keine Steuerzeichen
 (d.h. keine Zeichen mit einem ASCII-Wert kleiner als 32) benutzt
-werden! Eine Zeile darf nicht länger als (!LINELEN) Zeichen sein.
+werden! Eine Zeile darf nicht länger als (!red)(!LINELEN)(!coloff) Zeichen sein.
 
 UDO kümmert sich bei der Umwandlung selbständig um die Formatierung des
 Textes, sprich um den Zeilenumbruch und die Absatzabstände:

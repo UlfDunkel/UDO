@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from working.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #
 ################################################################################
 
@@ -156,26 +157,26 @@ The printed file isn't a PCX image or the file doesn't exist.
 
 !item [couldn't replace (!KKW [ilink])]
 A manual image link couldn't be replaced. You are allowed to use up
-to (!MAXLINK) internal and external links and internal images inside
+to (!red)(!MAXLINK)(!coloff) internal and external links and internal images inside
 each paragraph. Split up the paragraph in two or more parts or delete
 some links.
 
 !item [couldn't replace (!KKW [img])]
 An internal image couldn't be replaced. You are allowed to use up to
-(!MAXLINK) internal and external links and internal images inside
+(!red)(!MAXLINK)(!coloff) internal and external links and internal images inside
 each paragraph. Split up the paragraph in two or more parts or delete
 some links.
 
 !item [couldn't replace (!KKW [link])]
 A manual link couldn't be replaced. You are allowed to use up to
-(!MAXLINK) internal and external links and internal images inside
+(!red)(!MAXLINK)(!coloff) internal and external links and internal images inside
 each paragraph. Split up the paragraph in two or more parts or delete
 some links.
 
 # (!KKW [xlink]) does not work here???
 !item [couldn't replace !/xlink]
 An external link couldn't be replaced. You are allowed to use up to
-(!MAXLINK) internal and external links and internal images inside
+(!red)(!MAXLINK)(!coloff) internal and external links and internal images inside
 each paragraph. Split up the paragraph in two or more parts or delete
 some links.
 
@@ -247,7 +248,7 @@ special version of UDO.
 Your source file contains a table with too many columns.
 
 !item [too many defines used]
-Your source file contains more than (!MAXDEFINE) definitions.
+Your source file contains more than (!red)(!MAXDEFINE)(!coloff) definitions.
 
 !item [too many environments used]
 You have used too many environments nested into one another. Try to layout
@@ -277,7 +278,7 @@ version of UDO.
 Your source file contains too many (!KW [label]) commands.
 
 !item [too many macros used]
-Your source file uses more than (!MAXMACRO) macros
+Your source file uses more than (!red)(!MAXMACRO)(!coloff) macros
 
 !item [too many nodes used]
 Your source file uses too many chapters. If possible try to merge
