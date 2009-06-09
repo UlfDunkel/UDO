@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 09: text reviewed
 #   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -43,7 +44,7 @@ auszugeben. Eine genauere Erklärung dieses Platzhalters finden Sie im
 Befehlsindex.
 
 Seit Release~6 werden Bilder umgebungsabhängig positioniert. Wurden
-Bilder einst immer zentriert ausgegeben, so werden Bilder nun nur noch
+Bilder einst immer zentriert ausgegeben, werden Bilder nun nur noch
 dann zentriert ausgegeben, wenn der (!KW [image])-Befehl Teil einer
 center-Umgebung ist.
 
@@ -57,7 +58,7 @@ und rechtsbündig ausgegeben werden.
 
 !index (!kw [tex_tetex])
 Wenn man EPS-Grafiken in eine (!LaTeX)-Datei einbinden möchte, welches mit dem
-te(!TeX) weiterverabeitet werden soll, so (!B)muss(!b) im
+te(!TeX) weiterverabeitet werden soll, (!B)muss(!b) im
 Vorspann das Kommando (!KW [tex_tetex]) gesetzt werden.
 
 !end_node # *.eps & te(!TeX)
@@ -131,7 +132,7 @@ verändert wird.
 
 !index (!kw [tex_strunk])
 Wenn man GEM-Images in eine (!LaTeX)-Datei einbinden möchte, welches mit dem
-CS-(!TeX) oder Multi(!TeX) weiterverabeitet werden soll, so (!B)muss(!b) im
+CS-(!TeX) oder Multi(!TeX) weiterverabeitet werden soll, (!B)muss(!b) im
 Vorspann das Kommando (!KW [tex_strunk]) gesetzt werden.
 
 Da die Treiber des CS-(!TeX) auch die Spezialbefehle des Lindner-(!TeX)
@@ -247,7 +248,7 @@ erzeugt:
 !end_verbatim
 !end_quote
 
-Wird keine Bildunterschrift angegeben, so fehlt die Angabe des
+Wird keine Bildunterschrift angegeben, fehlt die Angabe des
 Alternativtextes bzw. es wird ein leerer Alternativtext benutzt. Auch
 hier das Beispiel zur Veranschaulichung: Aus (!KW [image] [../gif/tiger])
 wird
@@ -288,7 +289,7 @@ vorliegt, stellen Sie dem im vorherigen Beispiel gezeigten
 !end_verbatim
 !end_quote
 
-Sollte die Grafik nicht tiger.jpg heißen, sondern tiger.jpeg, so muss
+Sollte die Grafik nicht tiger.jpg heißen, sondern tiger.jpeg, muss
 der Befehl entsprechend so lauten:
 
 !begin_quote
@@ -298,7 +299,7 @@ der Befehl entsprechend so lauten:
 !end_quote
 
 Beachten Sie, dass die Endung für alle folgenden Grafiken gesetzt wird.
-Falls später wieder ein GIF dargestellt werden soll, so muss die Endung
+Falls später wieder ein GIF dargestellt werden soll, muss die Endung
 wieder mit (!KW [html_img_suffix] [[gif!!]]) eingestellt werden.
 
 !end_node # *.jpg & HTML
@@ -341,7 +342,7 @@ UDO erzeugt dann folgende RTF-Befehle:
 
 !index (!kw [win_inline_bitmaps])
 !item Mit dem Schalter (!KW [win_inline_bitmaps]) werden die Bilder mit
-     anderen Befehlen eingebunden, so dass sie quasi ""hartkodiert""
+     anderen Befehlen eingebunden, dass sie quasi ""hartkodiert""
      übernommen werden.
 !end_enumerate
 

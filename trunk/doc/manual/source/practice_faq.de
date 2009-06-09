@@ -17,6 +17,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: text reviewed, HomeSite + TextWrangler editors added
 #   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -70,7 +71,7 @@ Von UDO existieren momentan Versionen für folgende Systeme:
 UDO wurde komplett in C geschrieben und verzichtet vollkommen auf
 betriebssystemspezifische Routinen. Dadurch könnte die Kommandozeilenversion von UDO theoretisch auf jedes beliebige System portiert werden, für das ein ANSI-C-Compiler existiert.
 
-Wenn Sie an einer Portierung auf ein bestimmtes System interessiert sind und einen Compiler für dieses System besitzen, so (!link [kontaktieren] [Kontaktadresse]) Sie bitte die UDO-Entwickler.
+Wenn Sie an einer Portierung auf ein bestimmtes System interessiert sind und einen Compiler für dieses System besitzen, (!link [kontaktieren] [Kontaktadresse]) Sie bitte die UDO-Entwickler.
 
 # = = =
 
@@ -107,7 +108,7 @@ werden sicherlich auch in Zukunft weitere Kommandos hinzukommen.
 
 Teilweise wird es sich auch nicht vermeiden lassen, die Syntax
 einiger Kommandos zu ändern. Auf solche Änderungen wird aber
-besonders hingewiesen, so dass man die nötigen Anpassungen
+besonders hingewiesen, dass man die nötigen Anpassungen
 innerhalb von Minuten mit einem Editor vornehmen kann.
 
 # = = =

@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
 #   fd  Jun 08: etc. -> usw.
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -231,7 +232,7 @@ verwendet werden soll. Standardmäßig benutzt UDO die
 Endung ""(!V)gif(!v)"". Falls Sie z.B. JPEG-Grafiken benutzen
 und diese Dateien auf ""(!V)jpeg(!v)"" enden, benutzen Sie
 einfach untenstehendes Beispiel. (!KW [hh_img_suffix])
-kann beliebig oft aufgerufen werden, so dass einer
+kann beliebig oft aufgerufen werden, dass einer
 Verwendung verschiedener Grafikformate nichts im Wege steht.
 
 !item [(!EXAMPLE)]
@@ -422,7 +423,7 @@ Mit diesem Befehl können Sie die Endung der Grafiken
 setzen, die für die folgenden (!KW [image])-Befehle
 verwendet werden soll. Standardmäßig benutzt UDO die
 Endung ""(!V)tiff(!v)"". (!KW [htag_img_suffix]) kann beliebig oft
-aufgerufen werden, so dass einer Verwendung verschiedener
+aufgerufen werden, dass einer Verwendung verschiedener
 Grafikformate nichts im Wege steht.
 
 !item [(!EXAMPLE)]
@@ -1021,7 +1022,7 @@ Gibt die Höhe des Frames an, in den die Links bei einem durch
 (!KW [html_frames_layout]) erzeugten Rahmen gesetzt werden,
 sofern dieser oben oder unten plaziert ist.
 
-Wird statt eines dezimalen Wertes ein Prozentwert angegeben, so gibt auch UDO einen Prozentwert aus.
+Wird statt eines dezimalen Wertes ein Prozentwert angegeben, gibt auch UDO einen Prozentwert aus.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~9
 
@@ -1228,7 +1229,7 @@ Gibt die Breite des Frames an, in den die Links bei einem durch
 (!KW [html_frames_layout]) erzeugten Rahmen gesetzt werden,
 sofern dieser links oder rechts plaziert ist.
 
-Wird statt eines dezimalen Wertes ein Prozentwert angegeben, so gibt auch UDO einen Prozentwert aus.
+Wird statt eines dezimalen Wertes ein Prozentwert angegeben, gibt auch UDO einen Prozentwert aus.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~9
 
@@ -1262,7 +1263,7 @@ Setzen des Datums (nur (!nolink [HTML])).
 !item [(!SYNTAX)] (!T)!/html_header_date <(!TEXT)>(!t)
 
 !item [(!DESCRIPTION)]
-Ist dieser Schalter gesetzt, so setzt UDO im (!nolink [HTML])-Header ein META-Tag für
+Ist dieser Schalter gesetzt, setzt UDO im (!nolink [HTML])-Header ein META-Tag für
 Datum/Uhrzeit der Datei-Erzeugung
 z.B. (!T)<META name="date" content="2004-01-29T08:49:37+00:00">(!t).
 
@@ -1305,7 +1306,7 @@ Ist <text> leer, wird für den Zeitzonenunterschied ""+00:00"" gesetzt.
 !item [(!SYNTAX)] (!T)!/html_header_links <(!TEXT)>(!t)
 
 !item [(!DESCRIPTION)]
-Ist dieser Schalter gesetzt, so werden je nach Vorgabe
+Ist dieser Schalter gesetzt, werden je nach Vorgabe
 (!T)<link>(!t)-Elemente im (!nolink [HTML])-Header erzeugt:
 !begin_itemize
 !item Enthält (!T)<text>(!t) ""navigation"", werden die Links zur Navigation erzeugt
@@ -1340,7 +1341,7 @@ erzeugt werden, entstehen kleinere (!nolink [HTML])-Dateien.
 !item [(!SYNTAX)] (!T)!/html_ignore_8bit <(!TEXT)>(!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann angegeben, so werden 8-Bit-Zeichen (!I)nicht(!i)
+Wird dieser Schalter im Vorspann angegeben, werden 8-Bit-Zeichen (!I)nicht(!i)
 in (!nolink [HTML])-Entities (&auml; usw.) umgewandelt. Somit ist es möglich, auch von ISO-Latin1
 abweichende Dateien zu erzeugen, ohne das UDO dazwischenfunkt.
 
@@ -1380,7 +1381,7 @@ verwendet werden soll. Standardmäßig benutzt UDO die
 Endung ""(!V)gif(!v)"". Falls Sie z.B. JPEG-Grafiken benutzen
 und diese Dateien auf ""(!V)jpeg(!v)"" enden, benutzen Sie
 einfach untenstehendes Beispiel. (!KW [html_img_suffix])
-kann beliebig oft aufgerufen werden, so dass einer
+kann beliebig oft aufgerufen werden, dass einer
 Verwendung verschiedener Grafikformate nichts im Wege steht.
 
 !item [(!EXAMPLE)]
@@ -1469,7 +1470,7 @@ Setzen der Farbe für Links (nur (!nolink [HTML])).
 
 !item [(!DESCRIPTION)]
 Setzt die Farbe, die benutzt wird, um in (!nolink [HTML])-Seiten Links darzustellen.
-Wird der Befehl im Vorspann benutzt, so setzt man damit
+Wird der Befehl im Vorspann benutzt, setzt man damit
 die Standardwerte für alle Seiten inkl. dem Inhaltsverzeichnis.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~1
@@ -1495,7 +1496,7 @@ Nur eine (!nolink [HTML])-Datei erzeugen (nur (!nolink [HTML])).
 !item [(!SYNTAX)] (!T)!/html_merge_nodes(!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann angegeben, so werden
+Wird dieser Schalter im Vorspann angegeben, werden
 alle Kapitel, Abschnitte, Unterabschnitte und
 Paragraphen bei der Umwandlung ins (!nolink [HTML])-Format in einer Datei zusammengefasst.
 
@@ -1522,7 +1523,7 @@ Abschnitte, Unterabschnitte und Paragraphen zusammenfassen (nur (!nolink [HTML])
 !item [(!SYNTAX)] (!T)!/html_merge_subnodes(!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann eingesetzt, so wird
+Wird dieser Schalter im Vorspann eingesetzt, wird
 ein Kapitel samt allen zugehörigen Abschnitten,
 Unterabschnitten und Paragraphen in einer Datei zusammengefasst.
 
@@ -1549,7 +1550,7 @@ Unterabschnitte und Paragraphen zusammenfassen (nur (!nolink [HTML])).
 !item [(!SYNTAX)] (!T)!/html_merge_subsubnodes(!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann eingesetzt, so wird
+Wird dieser Schalter im Vorspann eingesetzt, wird
 ein Abschnitt samt allen zugehörigen Unterabschnitten
 und Paragraphen in einer Datei zusammengefasst.
 
@@ -1576,7 +1577,7 @@ Paragraphen zusammenfassen (nur (!nolink [HTML])).
 !item [(!SYNTAX)] (!T)!/html_merge_subsubsubnodes(!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann eingesetzt, so werden alle Paragraphen eines Unterabschnitts in
+Wird dieser Schalter im Vorspann eingesetzt, werden alle Paragraphen eines Unterabschnitts in
 einer Datei zusammengefasst.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
@@ -1770,11 +1771,11 @@ Dieser Befehl existierte nur in einer der Beta-Versionen und heißt nun (!KW [htm
 !item [(!SYNTAX)] (!T)!/html_modern_layout(!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann angegeben, so wird jede Seite
+Wird dieser Schalter im Vorspann angegeben, wird jede Seite
 als Tabelle dargestellt. Die Tabelle besteht dann aus zwei
 Spalten, wobei in der linken Spalte die (!nolink [Links]) auf die anderen
 Nodes und in der rechten Spalte der Seiteninhalt ausgegeben
-werden. Benutzt man (!KW [chaptericon]) innerhalb eines Nodes, so werden
+werden. Benutzt man (!KW [chaptericon]) innerhalb eines Nodes, werden
 in der linken Spalte Imagelinks angelegt.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~2
@@ -1803,7 +1804,7 @@ Breite der linken Spalte beim ""modernen"" Layout bestimmen (nur (!nolink [HTML]
 Gibt die Breite der linken Spalte an, in die die Links bei einer durch
 (!KW [html_modern_layout]) erzeugten Tabelle gesetzt werden.
 
-Wird statt eines dezimalen Wertes ein Prozentwert angegeben, so gibt auch UDO einen Prozentwert aus.
+Wird statt eines dezimalen Wertes ein Prozentwert angegeben, gibt auch UDO einen Prozentwert aus.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~9
 
@@ -1957,7 +1958,7 @@ werden.
 !begin_description
 
 !item [line]
-Wird dieses Kommando im Vorspann angegeben, so wird der Navigations!-bereich oben 
+Wird dieses Kommando im Vorspann angegeben, wird der Navigations!-bereich oben 
 am Seitenanfang in einer einzigen Navigationszeile ausgegeben, 
 standardmäßig ohne Ordnersymbole, mit ' > ' getrennt.
 
@@ -2009,7 +2010,7 @@ Bei Angabe eines zusätzlichen Parameters kann ein eigenes Bild als Symbol verwen
 !item [(!SYNTAX)] (!T)!/html_navigation_image <(!FILE)>(!t)
 
 !item [(!DESCRIPTION)]
-Wenn der Schalter (!KW [html_navigation_line]) im Vorspann gesetzt ist, so wird durch dieses Kommando 
+Wenn der Schalter (!KW [html_navigation_line]) im Vorspann gesetzt ist, wird durch dieses Kommando 
 am Anfang der Navigationszeile ein einzelnes Ordnersymbol ausgegeben. Dadurch 
 wird die Funktion der Navigationszeile auf den ersten Blick besser verständlich.
 
@@ -2046,7 +2047,7 @@ Navigationsleiste in einer einzigen Zeile ausgeben (nur (!nolink [HTML])).
 !item [(!SYNTAX)] (!T)!/html_navigation_line <(!TEXT)>(!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann angegeben, so wird der Navigationsbereich oben 
+Wird dieser Schalter im Vorspann angegeben, wird der Navigationsbereich oben 
 am Seitenanfang in einer einzigen Navigationszeile ausgegeben, 
 standardmäßig ohne Ordnersymbole, mit ' > ' getrennt.
 
@@ -2348,7 +2349,7 @@ Transparente Navigationsbutton erzeugen (nur (!nolink [HTML])).
 !item [(!SYNTAX)] (!T)!/html_transparent_buttons(!t)
 
 !item [(!DESCRIPTION)]
-Benutzt man diesen Schalter im Vorspann, so erzeugt UDO statt der bisher
+Benutzt man diesen Schalter im Vorspann, erzeugt UDO statt der bisher
 bekannten Navigationsbuttons kleinere, transparente Buttons.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~12

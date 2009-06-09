@@ -18,6 +18,7 @@
 #   fd  Jun 08: etc. -> usw.
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -73,14 +74,14 @@ nach dem Öffnen des Hypertextes usw.
 
 UDO überschreibt vorhandene Projektdateien ohne Rückfrage. Wenn Sie
 manuelle Änderungen an einer Projektdatei vorgenommen haben und diese
-beibehalten möchten, so schreibschützen Sie die Projektdatei.
+beibehalten möchten, schreibschützen Sie die Projektdatei.
 
 !item [Wie werden hier die Kopfzeilen erzeugt?]
 
 UDO erzeugt auf jeder Seite (mit Ausnahme der Titelseite und des
 Inhaltsverzeichnisses) eine Kopfzeile. In dieser befindet sich der Name
 des jeweiligen Kapitels. Kopfzeilen werden als
-""non-scrolling-regions"" angelegt, so dass man auch nach dem Scrollen
+""non-scrolling-regions"" angelegt, dass man auch nach dem Scrollen
 der Seite immer noch den Kapitelnamen erkennen kann.
 
 Durch den Schalter ""(!KW [no_headlines] [[win!!]])"" wird die Ausgabe

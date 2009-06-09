@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -967,7 +968,7 @@ dargestellt.
 !item [(!DESCRIPTION)]
 Dieser Platzhalter wird durch das beta-Symbol
 ersetzt, sofern es in dem jeweiligen Zeichensatz
-vorhanden ist. Ist es das nicht, so ersetzt UDO den
+vorhanden ist. Ist es das nicht, ersetzt UDO den
 Platzhalter durch ""(!T)beta(!t)"".
 
 !item [(!EXAMPLE)]

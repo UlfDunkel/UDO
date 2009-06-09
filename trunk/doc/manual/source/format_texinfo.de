@@ -16,6 +16,7 @@
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -39,10 +40,10 @@ Verfügung, wird .texi benutzt.
 Makeinfo oder Info bekommen Probleme, falls im Namen eines Kapitels
 Sonderzeichen wie Klammern, Kommata oder (Doppel-)Punkte auftauchen.
 UDO entfernt daher diese Sonderzeichen. Falls ein Kapitelname nur
-Sonderzeichen enthält, so werden die Zeichen des Namens in kodierter
+Sonderzeichen enthält, werden die Zeichen des Namens in kodierter
 Form ausgegeben.
 
-Formatiert man die Texinfo-Datei mit (!TeX), so tauchen diese
+Formatiert man die Texinfo-Datei mit (!TeX), tauchen diese
 Sonderzeichen in den Kapitelüberschiften selbstverständlich auf.
 
 !item [Warum werden Umgebungen nicht ""komprimierte"" dargestellt?]

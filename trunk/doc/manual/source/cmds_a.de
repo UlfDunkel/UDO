@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: etc. -> usw.
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -149,7 +150,7 @@ oder ein Kapitel verwendet werden.
 !item [(!DESCRIPTION)]
 Dieser Platzhalter wird durch das alpha-Symbol
 ersetzt, sofern es in dem jeweiligen Zeichensatz
-vorhanden ist. Ist es das nicht, so ersetzt UDO den
+vorhanden ist. Ist es das nicht, ersetzt UDO den
 Platzhalter durch ""(!T)alpha(!t)"".
 
 !item [(!EXAMPLE)]

@@ -18,6 +18,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -212,14 +213,14 @@ Dieser Befehl wird momentan nur für WinHelp und IPF unterstützt.
 !begin_description
 
 !item [IPF:]
-Wird in einem Node (!KW [mapping] [4711]) benutzt, so erzeugt UDO den
+Wird in einem Node (!KW [mapping] [4711]) benutzt, erzeugt UDO den
 Eintrag res=4711 im IPF-Node-Header. Wird kein (!KW [mapping]) benutzt,
 so wird auch kein res=!.. ausgegeben.
 
 !item [WinHelp:]
 Mit (!KW [mapping] [<wert>]) kann ein numerischer Wert angegeben
 werden, den UDO dann in der Map-Datei für einen Node verwendet. Wird
-kein (!KW [mapping]) verwendet, so sichert UDO einen Eintrag in der  Map-Datei
+kein (!KW [mapping]) verwendet, sichert UDO einen Eintrag in der  Map-Datei
 mit seiner internen Nummer, aber nur dann, wenn man eine
 (!KW [win_helpid]) gesetzt hat. Sprich: Ein Eintrag wird nur dann
 erzeugt, wenn man bei einem Node (!KW [mapping]) oder (!KW [win_helpid]) oder beides verwendet.

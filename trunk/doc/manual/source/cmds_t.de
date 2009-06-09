@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -128,7 +129,7 @@ Tabelle innerhalb einer solchen Umgebung ausgegeben, wird sie genauso
 ausgerichtet wie der Text innerhalb der Umgebung, sprich eine Tabelle wird
 in einer center-Umgebung zentriert ausgegeben, unabhängig davon, was
 man bei (!KW [table_alignment]) gesetzt hat. Will man eine Tabelle in einer
-center-Umgebung rechtsbündig ausgeben, so muss man in dem Fall noch
+center-Umgebung rechtsbündig ausgeben, muss man in dem Fall noch
 eine flushright-Umgebung um den (!KW [begin_table])-Befehl setzen.
 
 !item [(!EXAMPLE)]
@@ -217,7 +218,7 @@ Tabellenzähler setzen.
 !item [(!DESCRIPTION)]
 Mit diesem Schalter können Sie die Nummer festlegen,
 die bei der ersten Tabelle ausgegeben werden soll.
-Würde das Beispiel verwendet, so stünde unterhalb der
+Würde das Beispiel verwendet, stünde unterhalb der
 ersten Tabelle folgendes: ""Tabelle~5: !.."".
 
 !item [(!EXAMPLE)]
@@ -284,13 +285,13 @@ Enthalten Zeilen einer verbatim-Umgebung Tabulatoren,
 so wandelt UDO diese entsprechend dem angegebenen
 <wert> in Leerzeichen um. Wollen Sie beispielsweise
 Sourcecodes darstellen, die sie mit einer
-Tabulatorweite von 4 erstellt haben, so sollten Sie
+Tabulatorweite von 4 erstellt haben, sollten Sie
 das folgende Beispiel vor der verbatim-Umgebung bzw.
 vor (!KW [vinclude]) angeben. (!KW [tabwidth]) kann überall und
 beliebig oft im Quelltext angegeben werden. <wert>
 wird jeweils für die nächste verbatim-Umgebung
 verwendet. Standardmäßig benutzt UDO den Wert 8.
-Benutzt man 0 als <wert>, so wandelt UDO die Tabulatoren nicht um.
+Benutzt man 0 als <wert>, wandelt UDO die Tabulatoren nicht um.
 
 !item [(!EXAMPLE)]
 (!T)!/tabwidth 4(!t)
@@ -664,7 +665,7 @@ Dokumenttitel definieren.
 !item [(!DESCRIPTION)]
 Dieser Platzhalter wird durch das Trademark-Symbol
 ersetzt, sofern es in dem jeweiligen Zeichensatz
-vorhanden ist. Ist es das nicht, so ersetzt UDO den
+vorhanden ist. Ist es das nicht, ersetzt UDO den
 Platzhalter durch ""(!T)trademark(!t)"".
 
 !item [(!EXAMPLE)]

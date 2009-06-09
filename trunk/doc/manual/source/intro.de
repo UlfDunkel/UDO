@@ -18,6 +18,7 @@
 #   fd  Jun 05: file introduced (extracted from intro.ui)
 #   fd  Jun 05: html_name shortened ('introduction' -> 'intro')
 #   fd  Jun 08: ignored format list removed (is included via formattb.ui)
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -88,7 +89,7 @@ einfacher Dateien müssen Sie nur etwa zehn bis
 fünfzehn Befehle kennen, also etwa so viele, wie Sie auch beim
 Verfassen von HTML- oder (!LaTeX)-Dateien besitzen müssen.
 
-Haben Sie Ihr Handbuch als UDO-Quelltext erstellt, so können Sie es in folgende Formate umwandeln:
+Haben Sie Ihr Handbuch als UDO-Quelltext erstellt, können Sie es in folgende Formate umwandeln:
 
 !include formattb.ui
 

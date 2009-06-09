@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -256,7 +257,7 @@ Aliase automatisch in den Index übernehmen.
 !item [(!SYNTAX)] (!T)!/use_alias_inside_index [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann angegeben, so werden
+Wird dieser Schalter im Vorspann angegeben, werden
 automatisch alle Aliase im Index der angegebenen Formate angezeigt.
 
 !item [(!EXAMPLE)]
@@ -434,12 +435,12 @@ Automatische Auflistung aller Abschnitte.
 !item [(!SYNTAX)] (!T)!/use_auto_toptocs [(!FORMAT)] {!/no_icons}(!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter eingesetzt, so werden zu Beginn jedes Kapitels
+Wird dieser Schalter eingesetzt, werden zu Beginn jedes Kapitels
 Links auf die übergeordneten Kapitel erzeugt. Der Schalter ist
 verfügbar für HTML, WinHelp und ST-Guide. Wird der Schalter benutzt, so
 sichert UDO ein paar zusätzliche Grafiken, die dann verwendet werden.
 
-Wird zusätzlich noch (!KW [no_icons]) angegeben, so werden keine Bilder
+Wird zusätzlich noch (!KW [no_icons]) angegeben, werden keine Bilder
 neben den Verweisen auf die übergeordneten Kapitel ausgegeben.
 
 !item [(!EXAMPLE)]
@@ -499,7 +500,7 @@ Kommentare erzeugen.
 !item [(!SYNTAX)] (!T)!/use_comments [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Wird im Vorspann dieser Schalter benutzt, so werden Kommentare auch bei allen Formaten, die keine Kommentare beherrschen, diese in Klammern ausgegeben.
+Wird im Vorspann dieser Schalter benutzt, werden Kommentare auch bei allen Formaten, die keine Kommentare beherrschen, diese in Klammern ausgegeben.
 
 !item [(!EXAMPLE)]
 (!T)!/use_comments [html,win,stg](!t)
@@ -612,7 +613,7 @@ Labels automatisch in den Index übernehmen.
 !item [(!SYNTAX)] (!T)!/use_label_inside_index [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann angegeben, so werden
+Wird dieser Schalter im Vorspann angegeben, werden
 automatisch alle Labels im Index der angegebenen Formate angezeigt.
 
 !item [(!EXAMPLE)]
@@ -639,7 +640,7 @@ Automatisch gespiegelte Indizes erzeugen.
 !item [(!SYNTAX)] (!T)!/use_mirrored_indices [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter benutzt, so legt UDO beim Befehl (!KW [index]) oder bei der
+Wird dieser Schalter benutzt, legt UDO beim Befehl (!KW [index]) oder bei der
 PlatzhalterVersion~(!KKW [idx]) auch die ""gespiegelten"" Einträge
 an, falls man einen Doppeleintrag vornimmt. Falls man also diesen
 Schalter benutzt, dann kann man sich bei der Angabe von
@@ -684,7 +685,7 @@ Kapitel automatisch in den Index übernehmen.
 !item [(!SYNTAX)] (!T)!/use_nodes_inside_index [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann angegeben, so werden
+Wird dieser Schalter im Vorspann angegeben, werden
 automatisch alle Kapitelüberschriften im Index der angegebenen Formate angezeigt.
 
 !item [(!EXAMPLE)]
@@ -751,8 +752,8 @@ Footer im Zielformat einbinden.
 
 !item [(!DESCRIPTION)]
 Die Datei soll am Ende der Seite 1:1 ausgegeben werden. Wird der
-Befehl im Vorspann benutzt, so wird für jede Seite die Datei am Ende
-ausgegeben. Wird der Befehl in einem Node benutzt, so wird die Datei
+Befehl im Vorspann benutzt, wird für jede Seite die Datei am Ende
+ausgegeben. Wird der Befehl in einem Node benutzt, wird die Datei
 nur für diesen Node ausgegeben.
 
 Dieser Befehl wird derzeit nur für HTML unterstützt.
@@ -784,8 +785,8 @@ Header im Zielformat einbinden.
 
 !item [(!DESCRIPTION)]
 Die Datei soll am Anfang der Seite 1:1 ausgegeben werden. Wird der
-Befehl im Vorspann benutzt, so wird für jede Seite die Datei am Anfang
-ausgegeben. Wird der Befehl in einem Node benutzt, so wird die Datei
+Befehl im Vorspann benutzt, wird für jede Seite die Datei am Anfang
+ausgegeben. Wird der Befehl in einem Node benutzt, wird die Datei
 nur für diesen Node ausgegeben.
 
 Dieser Befehl wird derzeit nur für HTML und RTF unterstützt.
@@ -816,7 +817,7 @@ Dieser Befehl wird derzeit nur für HTML und RTF unterstützt.
 !item [(!SYNTAX)] (!T)!/use_short_envs [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann angegeben, so werden
+Wird dieser Schalter im Vorspann angegeben, werden
 alle Umgebungen (mit Ausnahme der verbatim-Umgebung)
 ohne zusätzlichen Zwischenräume ausgegeben. Im
 Beispiel würde dieser Schalter für das ASCII-Format gesetzt.
@@ -847,7 +848,7 @@ Kurze Inhaltsverzeichnisse benutzen.
 !item [(!SYNTAX)] (!T)!/use_short_tocs [(!FORMAT)] !/depth <(!VALUE)>(!t)
 
 !item [(!DESCRIPTION)]
-Wird dieses Kommando im Vorspann benutzt, so wird für die angegebenen
+Wird dieses Kommando im Vorspann benutzt, wird für die angegebenen
 Ausgabeformate ein kurzes Inhaltsverzeichnis erzeugt. Im
 Haupt-Inhaltsverzeichnis werden nur die Kapitelnamen und in Kapiteln
 nur die Namen der Abschnitte ausgegeben. Im Beispiel würde der Umfang

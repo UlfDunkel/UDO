@@ -17,6 +17,7 @@
 #   fd  Jun 08: etc. -> usw.
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: 'Sinn machen' -> 'Sinn ergeben' (avoid anglicisms)
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -105,7 +106,7 @@ neuere ST-Guide-Version gibt.
 !item [Der HCP meldet mir den Fehler ""please add...""?]
 
 Falls der HCP die Fehlermeldung ""please add a @subject-command
-to this text"" am Ende der Übersetzung des erzeugten ST-Guide-Quelltextes erzeugt, so haben Sie vergessen, im Vorspann des UDO-Quelltextes folgenden ST-Guide-Spezialbefehl anzugeben:
+to this text"" am Ende der Übersetzung des erzeugten ST-Guide-Quelltextes erzeugt, haben Sie vergessen, im Vorspann des UDO-Quelltextes folgenden ST-Guide-Spezialbefehl anzugeben:
 
 !begin_quote
 !begin_verbatim
@@ -118,13 +119,13 @@ Anstelle der Punkte müssen Sie die Rubriken angegeben werden, in die ein Hyperte
 !item [Wie erzeuge ich eine eigene Titelseite?]
 
 Falls Ihnen das Layout der Titelseite, die UDO mit (!KW [maketitle]) erzeugen
-kann, nicht gefällt, so können Sie sich mit nur wenigen Handgriffen
+kann, nicht gefällt, können Sie sich mit nur wenigen Handgriffen
 Ihre eigene Titelseite erzeugen.
 
 Im folgenden Beispiel wird nach (!KW [begin_document]) nur für den ST-Guide
 eine eigene Titelseite mittels eines Kapitels erzeugt, welches nicht
 im Inhaltsverzeichnis erscheint. Am Ende der Titelseite wird das Wort
-""Inhaltsverzeichnis"" angegeben, so dass ein Link zu eben diesem vom
+""Inhaltsverzeichnis"" angegeben, dass ein Link zu eben diesem vom
 ST-Guide erzeugt wird.
 
 !begin_quote

@@ -17,6 +17,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: text reviewed
 #   fd  Jun 09: 'Sinn machen' -> 'Sinn ergeben' (avoid anglicisms)
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -185,7 +186,7 @@ behandelt:
       werden.
 
 !item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
-      diese Zahl überschritten, so gibt UDO eine Fehlermeldung aus, dass 
+      diese Zahl überschritten, gibt UDO eine Fehlermeldung aus, dass 
       der Link nicht ersetzt werden konnte. Zur Erinnerung: Absätze
       werden durch Leerzeilen getrennt.
 !end_enumerate
@@ -228,7 +229,7 @@ wird~!..
 !item Bei (!LaTeX) kann man nur auf Labels, nicht auf Kapitel verweisen.
 
 !item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
-      diese Zahl überschritten, so gibt UDO eine Fehlermeldung aus, dass 
+      diese Zahl überschritten, gibt UDO eine Fehlermeldung aus, dass 
       der Link nicht ersetzt werden konnte. Zur Erinnerung: Absätze
       werden durch Leerzeilen getrennt.
 !end_enumerate
@@ -318,7 +319,7 @@ wird~!..
       Unterstrich. Andere Zeichen werden von UDO angepasst!
 
 !item Für ST-Guide sollte man dem Dateinamen die Zeichen ""(!V)*:\(!v)""
-      voranstellen, so dass der ST-Guide in allen in den für ihn angegebenen
+      voranstellen, dass der ST-Guide in allen in den für ihn angegebenen
       Verzeichnissen aus der in der (!V)ST-GUIDE.INF(!v) angegebenen Variable namens
       (!V)PATHS(!v) nach der Datei sucht.
 

@@ -17,6 +17,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: 'Sinn machen' -> 'Sinn ergeben' (avoid anglicisms)
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -79,7 +80,7 @@ Erzeugung von Indexdateien unterdrücken.
 Quelltext mit dem Befehl (!KW [ifset]) abfragen lässt.
 
 !item [(--)force-long] Wird diese Option
-benutzt, so versucht UDO auch auf den Systemen, die
+benutzt, versucht UDO auch auf den Systemen, die
 standardmässig keine langen Dateinamen unterstützen (TOS, DOS),
 lange Dateinamen zu erzeugen (Endung .html anstatt .htm).
 
@@ -136,7 +137,7 @@ umgewandelt. Normaler Text wird Kommentar, der Inhalt der Sourcecode-Umgebung wi
 
 !item [-s, (--)stg] Die (!U)Quelldatei(!u) wird ins ST-Guide-Format umgewandelt.
 
-!item [(--)save-upr] Wird diese Option benutzt, so legt UDO eine
+!item [(--)save-upr] Wird diese Option benutzt, legt UDO eine
 Projekt-Datei mit der Endung (!V).upr(!v) mit einer Liste der benutzten
 und erzeugten Dateien an.
 
@@ -146,7 +147,7 @@ und erzeugten Dateien an.
 Ausgabedatei erzeugt, sondern nur eine Protokolldatei und ggf. die Datei mit
 den Rohlingen für die Trennvorschläge.
 
-!item [(--)tree] Wird diese Option benutzt, so legt UDO in einer Datei
+!item [(--)tree] Wird diese Option benutzt, legt UDO in einer Datei
 mit der Endung (!V).ut?(!v) eine baumartige Übersicht der benutzten Dateien an.
 Bei intensiver Benutzung des Befehls (!KW [include]) sieht man damit,
 welche Dateien andere Dateien nachladen.

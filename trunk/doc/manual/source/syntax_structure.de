@@ -17,6 +17,7 @@
 #   fd  Jun 08: etc. -> usw.
 #   fd  Jun 08: text reviewed
 #   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -115,7 +116,7 @@ nicht unproblematisch.
 Der Umfang dieses Inhaltsverzeichnisses lässt sich durch den Schalter
 (!KW [toc]) beeinflussen. Wird dieser Schalter im
 Vorspann mit dem jeweiligen Kürzel des betroffenen Ausgabeformats
-angegeben, so sorgt UDO dafür, dass ein entsprechend eingeschränktes
+angegeben, sorgt UDO dafür, dass ein entsprechend eingeschränktes
 Inhaltsverzeichnis ausgegeben wird.
 
 !index (!kw [subsubsubtoc])
@@ -253,7 +254,7 @@ Beispiel. Die (hier inhaltsleere) Befehlsfolge...
 WinHelp und ST-Guide bieten die Möglichkeit, Texte auch in kleinen
 Dialogen, sogenannten Popups darzustellen. Möchten Sie, dass ein
 Kapitel, Abschnitt, Unterabschnitt, Paragraph oder Unterparagraph in einem Popup dargestellt
-wird, so benutzen Sie hierfür die Befehle
+wird, benutzen Sie hierfür die Befehle
 
 !index (!kw [pnode])
 !index (!kw [psubnode])
@@ -302,7 +303,7 @@ auch referenziert, werden aber nicht nummeriert.
 
 !index (!kw [no_numbers])
 !item UDO nummeriert Kapitel automatisch. Falls man auf die Angabe
-dieser Nummern verzichten möchte, so sollte man den Schalter
+dieser Nummern verzichten möchte, sollte man den Schalter
 (!KW [no_numbers]) im Vorspann setzen.
 !end_enumerate
 

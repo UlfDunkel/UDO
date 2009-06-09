@@ -18,6 +18,7 @@
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: 'Sinn machen' -> 'Sinn ergeben' (avoid anglicisms)
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -462,7 +463,7 @@ Keinen Index erzeugen und Index-Befehle ignorieren.
 !item [(!SYNTAX)] (!T)!/no_index [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann benutzt, so werden
+Wird dieser Schalter im Vorspann benutzt, werden
 für die angegebenen Formate die Befehle (!KW [index]) und
 (!KKW [idx]) ignoriert. Desweiteren wird weder von UDO
 noch vom Zielformat ein Index erzeugt. Im Beispiel
@@ -586,7 +587,7 @@ Ausgabe von Zielformat-Vorspann unterdrücken.
 !item [(!SYNTAX)] (!T)!/no_preamble [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann angegeben, so gibt
+Wird dieser Schalter im Vorspann angegeben, gibt
 UDO für die angegebenen Formate keinen Vorspann aus.
 Das Beispiel zeigt, wie man dafür sorgen kann, dass
 UDO keinen (!LaTeX)-Vorspann erzeugt. Diesen Schalter
@@ -671,7 +672,7 @@ Keine Linien in Tabellen benutzen.
 !item [(!SYNTAX)] (!T)!/no_table_lines [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Benutzt man im Vorspann diesen Schalter, so erzeugt UDO in Tabellen
+Benutzt man im Vorspann diesen Schalter, erzeugt UDO in Tabellen
 keine senkrechten oder waagerechten Linien. Im Beispiel würde UDO keine
 Tabellenlinien für WinHelp und IPF erzeugen.
 
@@ -761,7 +762,7 @@ Im Inhaltsverzeichnis keine Unterabschnitte auflisten.
 !item [(!SYNTAX)] (!T)!/no_toc_subsubnodes [(!FORMAT)<](!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann benutzt, so werden
+Wird dieser Schalter im Vorspann benutzt, werden
 bei den angegebenen Formaten im Inhaltsverzeichnis
 keine Unterabschnitte und Pragraphen aufgelistet.
 
@@ -798,7 +799,7 @@ Im Inhaltsverzeichnis keine Paragraphen auflisten.
 !item [(!SYNTAX)] (!T)!/no_toc_subsubsubnodes [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann benutzt, so werden
+Wird dieser Schalter im Vorspann benutzt, werden
 bei den angegebenen Formaten im Inhaltsverzeichnis
 keine Pragraphen aufgelistet.
 

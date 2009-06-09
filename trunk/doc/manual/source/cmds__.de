@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -174,7 +175,7 @@ Zwei Anführungszeichen ausgeben.
 !item [(!SYNTAX)] (!T)((""))(!t)
 
 !item [(!DESCRIPTION)]
-Wollen Sie zwei Anführungszeichen ausgeben, so müssen Sie diese klammern. Andernfalls würde UDO diese in
+Wollen Sie zwei Anführungszeichen ausgeben, müssen Sie diese klammern. Andernfalls würde UDO diese in
 typographische Anführungszeichen umwandeln.
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.48
@@ -200,7 +201,7 @@ Zwei Apostrophe ausgeben.
 !item [(!SYNTAX)] (!T)((''))(!t)
 
 !item [(!DESCRIPTION)]
-Wollen Sie zwei Apostrophe ausgeben, so müssen Sie diese klammern.
+Wollen Sie zwei Apostrophe ausgeben, müssen Sie diese klammern.
 Andernfalls würde UDO diese in typographische Apostrophe umwandeln.
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.48
@@ -226,7 +227,7 @@ Zwei Minuszeichen ausgeben.
 !item [(!SYNTAX)] (!T)((--))(!t)
 
 !item [(!DESCRIPTION)]
-Wenn Sie zwei Minuszeichen ausgegeben wollen, so müssen Sie diese klammern. Andernfalls würde UDO
+Wenn Sie zwei Minuszeichen ausgegeben wollen, müssen Sie diese klammern. Andernfalls würde UDO
 diese beiden Minuszeichen in einen kurzen Gedankenstrich umwandeln.
 
 !item [(!EXAMPLE)]
@@ -253,7 +254,7 @@ Drei Minuszeichen ausgeben.
 !item [(!SYNTAX)] (!T)((---))(!t)
 
 !item [(!DESCRIPTION)]
-Wenn Sie drei Minuszeichen ausgegeben wollen, so müssen Sie diese klammern. Andernfalls würde UDO
+Wenn Sie drei Minuszeichen ausgegeben wollen, müssen Sie diese klammern. Andernfalls würde UDO
 diese drei Minuszeichen in einen langen Gedankenstrich umwandeln.
 
 !item [(!SEEALSO)]
@@ -415,13 +416,13 @@ Lange Eingabezeile
 !item [(!SYNTAX)] (!T)!!\(!t)
 
 !item [(!DESCRIPTION)]
-Endet eine UDO-Eingabezeile mit !!\<Zeilenumbruch>, so wird die 
+Endet eine UDO-Eingabezeile mit !!\<Zeilenumbruch>, wird die 
 folgende Zeile von UDO als Fortsetzung der vorhergehenden Zeile 
 aufgefasst. Es können damit mehrere "echte" Zeilen aus Sicht von 
 UDO zu einer einzigen "logischen" Eingabezeile zusammengefasst 
 werden. Diese Fortsetzungszeilen sind an jeder Stelle im UDO- 
  Quelltext zulässig, auch z.B. in Makros und Definitionen. Steht 
-!!\ nicht unmittelbar am Ende einer Zeile, so wird es ignoriert 
+!!\ nicht unmittelbar am Ende einer Zeile, wird es ignoriert 
 und als normaler Text ausgegeben.
 
 Eine mögliche Anwendung ist, den Inhalt einer Tabellenzeile auf 

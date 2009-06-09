@@ -20,6 +20,7 @@
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: 'Tip' -> 'Tipp' (NDR)
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -52,7 +53,7 @@ Kommando (!KW [vinclude]) (""verbatim include""). Tipp: Das
 Kommando (!KW [vinclude]) eignet sich sehr gut, um Sourcecode oder
 Header-Dateien darzustellen.
 
-Falls man direkte Befehle für ein Format nachladen möchte, so kann man
+Falls man direkte Befehle für ein Format nachladen möchte, kann man
 sich des Kommandos (!KW [rinclude]) (""raw include"") bedienen. Tipp: Dieser
 Befehl eignet sich im Zusammenhang mit dem (!KW [ifdest])-Kommando dazu, um
 z.B. spezielle (!LaTeX)-Tabellen oder HTML-Formulare einzubinden.
@@ -384,7 +385,7 @@ gesetzt ist, soll die Zieldatei alle Kapitel enthalten:
 
 Starten Sie UDO nun ""normal"", wird eine Zieldatei erstellt, die nur das
 dritte Kapitel enthält. Starten Sie UDO hingegen mit der
-Kommandozeilenoption ""(!B)(!V)-D~AlleKapitel(!v)(!b)"", so werden alle Kapitel umgewandelt.
+Kommandozeilenoption ""(!B)(!V)-D~AlleKapitel(!v)(!b)"", werden alle Kapitel umgewandelt.
 
 Das Spielchen kann man natürlich noch etwas ausbauen. Durch Verwendung
 weiterer Symbole kann man gezielt nur einzelne Kapitel oder alle
@@ -392,7 +393,7 @@ zusammen in die Zieldatei aufnehmen. Im folgenden Beispiel wird bei
 Übergabe der Option ""(!B)(!V)-D~Kapitel1(!v)(!b)"" nur das erste Kapitel in die
 Zieldatei aufgenommen. Übergibt man ""(!B)(!V)-D~Kapitel1(!v)(!b)"" und ""(!B)(!V)-D~Kapitel2(!v)(!b)"",
 so werden das erste und das zweite Kapitel eingebunden. Übergibt man
-hingegen ""(!B)(!V)-D~AlleKapitel(!v)(!b)"", so wird die Zieldatei komplett dargestellt:
+hingegen ""(!B)(!V)-D~AlleKapitel(!v)(!b)"", wird die Zieldatei komplett dargestellt:
 
 !begin_quote
 !vinclude (!EXAMPLES)symbol2.ui
@@ -404,7 +405,7 @@ Wie in der Einführung zu diesem Abschnitt beschrieben, lassen sich
 Symbole auch wieder löschen. Dazu bedient man sich des Befehls (!KW [unset]).
 
 Wollen Sie in obigem Beispiel partout verhindern, dass alle Kapitel in
-die Zieldatei eingebunden werden, so können Sie zuvor das Symbol
+die Zieldatei eingebunden werden, können Sie zuvor das Symbol
 (!B)(!T)AlleKapitel(!t)(!b) löschen, sofern es gesetzt wurde. Dies funktioniert so:
 
 !begin_quote
@@ -517,7 +518,7 @@ automatisch von UDO erledigen lassen, indem Sie die Schalter
 (!KW [use_alias_inside_index]) im Vorspann setzen.
 
 !index (!kw [ignore_index])
-!item Steht in einem Kapitel der Schalter (!KW [ignore_index]), so gelangt die
+!item Steht in einem Kapitel der Schalter (!KW [ignore_index]), gelangt die
 Überschrift nicht in den Index. Auch dann nicht, wenn man den
 Schalter (!KW [use_nodes_inside_index]) verwendet.
 
@@ -529,7 +530,7 @@ speziell für Makeindex angepasst.
 
 !item Die jeweiligen Parameter werden also durch eckige Klammern
 eingefasst. Falls man in einem Parameter eine schließende eckige
-oder runde Klammer benutzen möchte, so muss deren Wirkung mit
+oder runde Klammer benutzen möchte, muss deren Wirkung mit
 einem Ausrufezeichen aufgehoben werden. Geschieht dies nicht, so
 denkt UDO, der Parameter oder der Index-Befehl wäre bereits
 beendet. Ein Beispiel:
@@ -559,9 +560,9 @@ können.
 !index (!kw [else])
 !index (!kw [endif])
 Mit einem (!KW [if])-Befehl wird eine Abfrage eingeleitet. Liefert die
-Abfrage ein wahres Ergebnis, so werden alle Zeilen bis zum Befehl
+Abfrage ein wahres Ergebnis, werden alle Zeilen bis zum Befehl
 (!KW [endif]) bzw. (!KW [else]) von UDO verarbeitet. Liefert die Abfrage ein
-falsches Ergebnis, so werden alle Zeilen bis zu (!KW [endif]) bzw. (!KW [else])
+falsches Ergebnis, werden alle Zeilen bis zu (!KW [endif]) bzw. (!KW [else])
 ignoriert.
 
 # = = = = =

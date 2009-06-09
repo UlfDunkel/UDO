@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -122,7 +123,7 @@ Eine Umgebung ""komprimiert"" ausgeben.
 
 !item [(!DESCRIPTION)]
 Wird dieser Schalter zusammen mit dem Befehl zum
-Beginnen einer Umgebung angegeben, so wird diese
+Beginnen einer Umgebung angegeben, wird diese
 Umgebung in komprimierter Form ausgegeben, sprich es
 werden zwischen den Aufzählungspunkten keine
 zusätzlichen Zwischenräume erzeugt. Das Beispiel
@@ -343,7 +344,7 @@ Datei mit Trennvorschlägen sortieren.
 !item [(!SYNTAX)] (!T)!/sort_hyphen_file [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann benutzt, so liest
+Wird dieser Schalter im Vorspann benutzt, liest
 UDO nach der Umwandlung der Quelldatei die Datei mit
 den gesicherten Trennvorschlägen neu ein, sortiert die
 Zeilen und entfernt doppelte Einträge. Das Beispiel

@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #
 ################################################################################
 
@@ -24,7 +25,7 @@
 Das Rich Text Format (kurz: RTF) dient zum systemweiten Austausch von
 Texten. Dieses Format hat eine klare Definition und kann laufend um
 neue Kommandos erweitert werden. Trifft ein Programm auf einen
-unbekannten RTF-Befehl, so ist dieser zu ignorieren.
+unbekannten RTF-Befehl, ist dieser zu ignorieren.
 
 Leider handeln nicht alle Programme so, sondern interpretieren
 irgendwelchen Unsinn. Selbst Microsoft Word scheint das im eigenen
@@ -69,7 +70,7 @@ UDO benutzt zur Darstellung der doppelten Anführungszeichen und
 Apostrophe die RTF-Befehle (!V)\lquote(!v), (!V)\rquote(!v), (!V)\rdblquote(!v) und
 (!V)\ldblquote(!v). Die Textverarbeitung ist für die Umsetzung dieser gebräuchlichen RTF-Befehle in die korrekten Zeichen zuständig.
 
-Falls Ihre Textverarbeitung diese Befehle nicht kennt, so können
+Falls Ihre Textverarbeitung diese Befehle nicht kennt, können
 Sie die Benutzung dieser Befehle bei der Konvertierung durch den
 Schalter (!KW [no_quotes] [[rtf!!]]) unterbinden.
 
