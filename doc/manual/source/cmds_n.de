@@ -16,6 +16,7 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: 'lediglich' -> 'nur'
 #
 ################################################################################
 
@@ -1035,7 +1036,7 @@ Nichts tun.
 !item [(!SYNTAX)] (!T)!/nop(!t)
 
 !item [(!DESCRIPTION)]
-Dieser Befehl (""no operation"") macht gar nichts und wird lediglich für Debugging-Zwecke eingesetzt.
+Dieser Befehl (""no operation"") macht gar nichts und wird nur für Debugging-Zwecke eingesetzt.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~15
 

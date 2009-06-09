@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 08: etc. -> usw.
+#   fd  Jun 09: 'lediglich' -> 'nur'
 #
 ################################################################################
 
@@ -53,7 +54,7 @@ dieser Kopfzeilen unterbinden.
 Die Referenzierung wird fast komplett dem HCP des ST-Guide
 überlassen.
 
-Lediglich bei den manuell gesetzten Links durch die Befehle
+nur bei den manuell gesetzten Links durch die Befehle
 (!KKW [link]) und (!KKW [xlink]) setzt UDO explizite Querverweise auf
 andere Kapitel oder Labels.
 
@@ -72,7 +73,7 @@ Hypertextes.
 Durch die Befehle (!KW [pnode]) usw. können Kapitel im ST-Guide als
 Popups dargestellt werden. Dabei ist folgendes zu beachten:
 
-Beim ST-Guide dürfen in einem Popup lediglich 12 Zeilen mit
+Beim ST-Guide dürfen in einem Popup nur 12~Zeilen mit
 maximal 60 Zeichen stehen. Außerdem dürfen in einem Popup keine
 Bilder oder Verweise benutzt werden.
 

@@ -19,6 +19,7 @@
 #   fd  Jun 09: !ifos and !ifnos now reference to os.ui resp. os.<ISO>
 #   fd  Jun 09: !iflang and !ifnlang now reference to language.<ISO>
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: 'lediglich' -> 'nur'
 #
 ################################################################################
 
@@ -449,7 +450,7 @@ Ausgabe einer Fußzeile unterdrücken.
 !item [(!DESCRIPTION)]
 Wird dieser Schalter in einem Kapitel angegeben, so
 wird bei diesem Kapitel keine Fußzeile erzeugt. Im
-Gegensatz zu (!KW [no_bottomlines]) wird lediglich bei dem
+Gegensatz zu (!KW [no_bottomlines]) wird nur bei dem
 Kapitel, bei dem (!KW [ignore_bottomline]) benutzt wird, auf
 die Ausgabe einer Kopfzeile verzichtet.
 
@@ -478,7 +479,7 @@ Ausgabe einer Kopfzeile unterdrücken.
 !item [(!DESCRIPTION)]
 Wird dieser Schalter in einem Kapitel angegeben, so
 wird bei diesem Kapitel keine Kopfzeile erzeugt. Im
-Gegensatz zu (!KW [no_headlines]) wird lediglich bei dem
+Gegensatz zu (!KW [no_headlines]) wird nur bei dem
 Kapitel, bei dem (!KW [ignore_headline]) benutzt wird, auf
 die Ausgabe einer Kopfzeile verzichtet.
 
@@ -728,7 +729,7 @@ möglich. Im Beispiel wird das Bild (!V)disk.bmp(!v) bzw.
 (!V)disk.gif(!v) zur Darstellung des Links benutzt, das
 Sprungziel lautet ""Download"". Bei HTML wird als
 Alternativtext ""UDO downloaden"" ausgegeben. Bei allen
-anderen Formaten wird lediglich ""UDO downloaden"" ausgegeben.
+anderen Formaten wird nur ""UDO downloaden"" ausgegeben.
 
 !item [(!EXAMPLE)]
 (!T)(!/ilink [disk] [UDO downloaden] [Download])(!t)
@@ -1034,7 +1035,7 @@ Indexeinträge im Text angeben.
 !item [(!DESCRIPTION)]
 Dient zum Erzeugen von Indizes direkt im Quelltext.
 Im Gegensatz zu (!KKW [idx]) wird ""<text>"" nicht ausgegeben,
-es erfolgt also lediglich ein Eintrag in den Index.
+es erfolgt also nur ein Eintrag in den Index.
 
 !item [(!EXAMPLE)]
 (!T)(!/index [Wort] [Indexeintrag])(!t)
@@ -1129,7 +1130,7 @@ Datei einbinden.
 Öffnet die Datei ""<datei>"" und gibt deren
 umgewandelten Inhalt an der Stelle aus, an der dieses
 Kommando benutzt wurde. Im Gegensatz zu (!KW [include])
-sucht (!KW [input]) lediglich in
+sucht (!KW [input]) nur in
 dem Verzeichnis, welches durch die Umgebungsvariable
 (!V)$UDOINPUTPATH(!v) definiert ist.
 

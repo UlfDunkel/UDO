@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from running.ui)
 #   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: 'lediglich' -> 'nur'
 #
 ################################################################################
 
@@ -83,7 +84,7 @@ starten.
 !end_center
 
 Die Einträge der Menüzeile rufen weitere Dialoge auf bzw. sind
-größtenteils selbsterklärend. Lediglich zwei Menüeinträge sollten hier
+größtenteils selbsterklärend. Nur zwei Menüeinträge sollten hier
 erklärt werden:
 
 !begin_tlist [Ziel/Programm starten:]
@@ -136,7 +137,7 @@ wird hier erklärt.
         passt die Endung an das ausgewählte Ausgabeformat an. Der Pfad der
         Zieldatei wird nicht verändert.
 
-        !item Nur Endung: UDO passt lediglich die Endung der Zieldatei an das
+        !item Nur Endung: UDO passt nur die Endung der Zieldatei an das
         jeweilige Ausgabeformat an. Pfad und Name der Zieldatei werden nicht
         verändert.
         !end_itemize

@@ -16,6 +16,7 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: 'lediglich' -> 'nur'
 #
 ################################################################################
 
@@ -503,7 +504,7 @@ Farbe für ""fetten"" Text bestimmen (nur DRC).
 
 !item [(!DESCRIPTION)]
 Da DRC keine verschiedenen Schriftarten kennt, sondern Text
-lediglich farbig hervorheben kann, kann man mit diesem Befehl
+nur farbig hervorheben kann, kann man mit diesem Befehl
 UDO mitteilen, in welcher Farbe fetter Text dargestellt werden soll.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
@@ -559,7 +560,7 @@ Farbe für ""kursiven"" Text bestimmen (nur DRC).
 
 !item [(!DESCRIPTION)]
 Da DRC keine verschiedenen Schriftarten kennt, sondern Text
-lediglich farbig hervorheben kann, kann man mit diesem Befehl
+nur farbig hervorheben kann, kann man mit diesem Befehl
 UDO mitteilen, in welcher Farbe kursiver Text dargestellt werden soll.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
@@ -586,7 +587,7 @@ Farbe für ""unterstrichenen"" Text bestimmen (nur DRC).
 
 !item [(!DESCRIPTION)]
 Da DRC keine verschiedenen Schriftarten kennt, sondern Text
-lediglich farbig hervorheben kann, kann man mit diesem Befehl
+nur farbig hervorheben kann, kann man mit diesem Befehl
 UDO mitteilen, in welcher Farbe unterstrichener Text dargestellt werden soll.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5

@@ -17,6 +17,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 08: etc. -> usw.
 #   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: 'lediglich' -> 'nur'
 #
 ################################################################################
 
@@ -30,7 +31,7 @@
 !item [WinHelp meint, dass *.rtf und *.hpj keine Hilfedatei sei?]
 
 Weder die eine noch die andere Datei ist eine fertige Hilfedatei
-für Windows. UDO erzeugt lediglich die Quelltexte einer
+für Windows. UDO erzeugt nur die Quelltexte einer
 Hilfedatei, welche noch mit einem Hypertext-Compiler (HC.EXE,
 HC31.EXE, HCP.EXE) übersetzt werden muss.
 
@@ -131,7 +132,7 @@ Sie sehen, dass aus einem ""ü"" die ziemlich lange Zeichenfolge
 ""_5C_27FC"" wird. Dies scheint auf den ersten Blick mehr als
 umständlich und ""doppelt gemoppelt"" zu sein, bringt aber den Vorteil,
 dass die Vergabe von gleichen Kontextstrings bei ähnlichen Kapitelnamen
-ziemlich unwahrscheinlich wird. Würde aus dem ""ü"" lediglich ""FC""
+ziemlich unwahrscheinlich wird. Würde aus dem ""ü"" nur ""FC""
 gemacht, wären Probleme vorprogrammiert.
 
 !item [Warum werden Tabellen nicht zentriert?]
