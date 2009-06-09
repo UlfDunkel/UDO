@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: 'Tip' -> 'Tipp' (NDR)
 #
 ################################################################################
 
@@ -27,7 +28,7 @@ Zuständiger Konverter ist das Programm (!V)TVHC.EXE(!v), das den
 Entwicklungssystemen auch im Sourcecode beiliegt.
 
 Da das Turbo-Vision-Help-Format wohl nur für Programmierer interessant
-sein dürfte, werden hier auch einige Tips gegeben, wie man den TVHC
+sein dürfte, werden hier auch einige Tipps gegeben, wie man den TVHC
 patchen sollte.
 
 Nichtprogrammierer sollten dieses Format meiden, sprich Ihre Hypertexte
