@@ -1,6 +1,6 @@
 !ifdest [html]
-  !define H1 <H1>
-  !define h1 </H1>
+  !define H1 <h1>
+  !define h1 </h1>
 !else
   !define H1
   !define h1
