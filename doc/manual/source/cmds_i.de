@@ -21,6 +21,7 @@
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -978,7 +979,7 @@ Dies hat nur Auswirkung bei der Ausgabe nach HTML, HTML Apple Help und HTMLHelp.
 Dabei wird der zweite <(!TEXT)> für das Attribut ""title"" benutzt. Ist nur ein <(!TEXT)>
 vorhanden, bekommen beide Attribute (""alt"" und ""title"") den selben Text. Beispiel:
 
-<img src=""d.gif"" width=""xxx"" height=""yyy"" border=""0"" alt=""text"" title=""text 2"">
+<img src="d.gif" width="xxx" height="yyy" border="0" alt="text" title="text 2">
 
 !item [(!EXAMPLE)]
 (!T)(!/img [dh] [mein Logo])(!t)

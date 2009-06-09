@@ -18,6 +18,7 @@
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 08: 'Homepage' -> 'Website'
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -31,7 +32,7 @@
 
 Zur Installation von UDO auf einem Atari-(Kompatiblen-)Rechner kopieren
 Sie einfach alle Dateien in ein beliebiges Verzeichnis, welches
-sinnigerweise "UDO" genannt werden sollte.
+sinnigerweise ""UDO"" genannt werden sollte.
 
 Die GEM-Version sollte man im verwendeten Desktop -- ich empfehle,
 Gemini, Thing oder Ease zu benutzen -- als Anwendung für Dateien mit der
@@ -123,7 +124,7 @@ werden. Unabhängig davon ist die Größe zur Laufzeit minimal.
 
 Anmerkung: Eine manpage ist derzeit nicht Teil der Mac-OS-X-Distribution.
 
-Um in das Verzeichniss zu kommen kann man ber den Menpunkt "Gehe zu/Gehe zum Ordner ..." des Finders gehen.
+Um in das Verzeichniss zu kommen kann man ber den Menüpunkt ""Gehe zu/Gehe zum Ordner ..."" des Finders gehen.
 
 (!DocumentationWorkInProgress)
 
@@ -199,8 +200,8 @@ für die deutsche Doku (!T)udo-doc-ger(!t).
 !begin_ignore
 # auskommentiert 10.01.2004 - Ulrich Kretschmer
 Nach Entpacken des Archivs kopieren Sie das Binary aus ""(!V)bin/(!v)"" in das
-Verzeichnis""'(!V)/usr/local/bin(!v)"" oder in eines der Verzeichnisse Ihres
-(!T)$PATH(!t)'s.
+Verzeichnis""(!V)/usr/local/bin(!v)"" oder in eines der Verzeichnisse Ihres
+(!T)$PATH(!t)s.
 
 Kopieren Sie dann die UDO-Manualpage ""(!V)udo.1(!v)"" nach ""(!V)/usr/man/man1/(!v)"".
 

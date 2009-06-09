@@ -623,8 +623,6 @@ Formatbefehle.
 !html_name  style_linegraphics
 !label      linedraw-Umgebung
 
-# "Text-" ergänzt (zur Klarstellung) - U. Kretschmer 07.12.2003
-
 Normalerweise ersetzt UDO DOS-Grafikzeichen durch die ASCII-Zeichen ""+"",
 ""-"" und ""|"", um z.B. DOS-Screenshots halbwegs realistisch
 darzustellen. Eine direkte Einbindung von Screenshots, die DOS-Grafikzeichen

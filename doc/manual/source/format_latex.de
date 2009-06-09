@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -25,7 +26,7 @@
 
 !item [Wie erzeugt UDO die (!LaTeX)-Präambel?]
 
-UDO ""weiss"", in welcher Sprache und mit welchem Dokumentstil die
+UDO ""weiß"", in welcher Sprache und mit welchem Dokumentstil die
 Datei gesetzt und ob Indizes benutzt werden sollen. Anhand dieser
 bekannten Informationen bastelt UDO dann die Präambel für
 (!LaTeX)~2.09 bzw. (!LaTeX2e) zusammen.

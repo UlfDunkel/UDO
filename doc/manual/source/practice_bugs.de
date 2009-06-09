@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from working.ui)
 #   fd  Jun 09: file reviewed
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -46,7 +47,7 @@ Die folgenden Fehler und Probleme sind derzeit bekannt:
 !item [Inhaltsverzeichnisse:]
       In Inhaltsverzeichnissen werden überlange
       Überschriften noch nicht umbrochen. Außerdem werden die Überschriften nicht
-      immer in der gleichen Spalte ausgerichtet (""1.9""-""1.10""-Problem).
+      immer in der gleichen Spalte ausgerichtet (""1.9""--""1.10""-Problem).
 
 !item [Tabellen:]
       Die Breite von Zellen einer Tabelle wird nicht immer sicher

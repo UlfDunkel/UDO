@@ -18,6 +18,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 08: etc. -> usw.
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -1267,7 +1268,7 @@ Ist dieser Schalter gesetzt, setzt UDO im (!nolink [HTML])-Header ein META-Tag f
 Datum/Uhrzeit der Datei-Erzeugung
 z.B. (!T)<META name="date" content="2004-01-29T08:49:37+00:00">(!t).
 
-Dabei ist "+00:00" der Unterschied von der lokalen Zeit zu UTC
+Dabei ist ""+00:00"" der Unterschied von der lokalen Zeit zu UTC
 (Coordinated Universal Time, vormals GMT). Mit dem optionalen Parameter <text>
 kann ein Wert für diese Zeitdifferenz übergeben werden.
 Für <text> werden von UDO keine Überprüfungen durchgeführt; der Autor ist selbst
@@ -2214,10 +2215,10 @@ Einstellen der Robots Anweisung für Suchmaschinen (nur (!nolink [HTML])).
 
 !item [(!DESCRIPTION)]
 ""<text>"" entspricht einer der Robots Anweisung wie sie für Suchmaschinen benutzt werden.
-Erlaubt sind "none", "noindex", "index", "nofollow" und "follow". Diese Anweisung hat 
+Erlaubt sind ""none"", ""noindex"", ""index"", ""nofollow"" und ""follow"". Diese Anweisung hat 
 Vorrang vor (!KW [docinfo] [[robots!!]])
 
-Für HTML Apple Help sind noch "keywords", "segements" und "anchors" erlaubt.
+Für HTML Apple Help sind noch ""keywords"", ""segments"" und ""anchors"" erlaubt.
 
 !item [(!EXISTSSINCE)] Version 6.5.17
 

@@ -18,6 +18,7 @@
 #   fd  Jun 09: text reviewed, HomeSite + TextWrangler editors added
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -27,7 +28,7 @@
 !begin_description
 
 !item [Was bedeutet ""FAQ""?]
-""FAQ"" bedeutet ""Frequently Asked Questions"" und bedeutet
+""FAQ"" bedeutet ""Frequently Asked Questions"" und heißt 
 übersetzt soviel wie ""häufig gestellte Fragen"". Im übertragenen
 Sinn versteht man darunter eine Auflistung eben dieser oft
 gestellten Fragen samt der passenden Antwort.
@@ -187,7 +188,7 @@ UDO-Quelltexte können Sie prinzipiell mit jedem Texteditor schreiben. Einige Edi
 
 Hier einige Vorschläge, die natürlich niemals vollständig oder objektiv sein können:
 !begin_table [|l|c|c|] !hline
-"e" (e.exe) !! OS/2 !! Bestandteil des Systems
+""e"" (e.exe) !! OS/2 !! Bestandteil des Systems
 !hline
 (!url [HomeSite][http://www.adobe.com/products/homesite/]) !! Windows !! kommerziell
 !hline
@@ -218,7 +219,7 @@ Hier einige Vorschläge, die natürlich niemals vollständig oder objektiv sein kön
 # * BEditor, www.ubesoft.de: (c) funktioniert nicht; eher einfacher Editor
 # * iEdit, www.bitshape.com: kann keine Umbrüche, d.h. (b) nicht erfüllt
 # * Boxer Text Editor, www.boxersoftwae.com: Situation bzgl. Umbrüchen unklar
-# * FoldMaster, www.foldmaster.de: kann keine Umbrüche; "Falteneditor" = interessantes Konzept
+# * FoldMaster, www.foldmaster.de: kann keine Umbrüche; ""Falteneditor"" = interessantes Konzept
 # * NaSTex, www.saschaseidel.de, Freeware: (c) nicht erfüllt; aber (b) einfach umschaltbar
 # * NotePro, www.crystaloffice.com: (a) nicht erfüllt, (b) ja, (c) nicht erfüllt
 # * NoteTab light, www.notetab.com: (c) nicht erfüllt

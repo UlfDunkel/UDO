@@ -18,6 +18,7 @@
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -300,7 +301,7 @@ Zusammenfassung von [title] und [program]).
 
 !item [robots]
 ""<text>"" entspricht einer der Robots Anweisung wie sie für Suchmaschinen benutzt werden.
-Erlaubt sind "none", "noindex", "index", "nofollow" und "follow".
+Erlaubt sind ""none"", ""noindex"", ""index"", ""nofollow"" und ""follow"".
 
 !item [appletitle]
 Wird für HTML Apple Help benötig und beschreibt den (!nolink [Titel]) der Hilfe.
@@ -404,8 +405,8 @@ Mögliche Angaben für foo sind Zeichensatznamen, z. B. Arial,
 Times New Roman, sans oder sans serif.
 
 Hinweis: Für die PostScript-Ausgabe gilt zur Zeit: Wenn dort irgendwas
-mit "Helvetica", "Arial" oder "sans-serif" steht wird "Helvetica" gesetzt,
-ansonsten "Times New Roman".
+mit ""Helvetica"", ""Arial"" oder ""sans-serif"" steht wird ""Helvetica"" gesetzt,
+ansonsten ""Times New Roman"".
 
 !item [propfontsize]
 !begin_verbatim

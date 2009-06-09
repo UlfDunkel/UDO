@@ -16,6 +16,7 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -418,8 +419,8 @@ Lange Eingabezeile
 !item [(!DESCRIPTION)]
 Endet eine UDO-Eingabezeile mit !!\<Zeilenumbruch>, wird die 
 folgende Zeile von UDO als Fortsetzung der vorhergehenden Zeile 
-aufgefasst. Es können damit mehrere "echte" Zeilen aus Sicht von 
-UDO zu einer einzigen "logischen" Eingabezeile zusammengefasst 
+aufgefasst. Es können damit mehrere ""echte"" Zeilen aus Sicht von 
+UDO zu einer einzigen ""logischen"" Eingabezeile zusammengefasst 
 werden. Diese Fortsetzungszeilen sind an jeder Stelle im UDO- 
  Quelltext zulässig, auch z.B. in Makros und Definitionen. Steht 
 !!\ nicht unmittelbar am Ende einer Zeile, wird es ignoriert 

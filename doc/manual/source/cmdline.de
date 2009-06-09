@@ -18,6 +18,7 @@
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: 'Sinn machen' -> 'Sinn ergeben' (avoid anglicisms)
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -58,7 +59,7 @@ Der Name der Quelldatei muss als letzter Parameter übergeben werden.
 #Ausgabe-Formate
 !begin_tlist [-W, (--)no-warningslines]
 
-!item [-@ F] UDO liest dann aus der Datei "F" die Optionen. In dieser Datei muss in jeder Zeile genau eine Option stehen.
+!item [-@ F] UDO liest dann aus der Datei ""F"" die Optionen. In dieser Datei muss in jeder Zeile genau eine Option stehen.
 
 !item [-a, (--)asc] Die (!U)Quelldatei(!u) wird ins ASCII-Format umgewandelt.
 
@@ -120,7 +121,7 @@ lange Dateinamen zu erzeugen (Endung .html anstatt .htm).
 
 !item [-n, (--)nroff] Die (!U)Quelldatei(!u) wird ins Nroff-Format umgewandelt.
 
-!item [-o F, (--)outfile F]  (!B)UDO(!b) schreibt seine Ausgaben in die Datei namens "F".
+!item [-o F, (--)outfile F]  (!B)UDO(!b) schreibt seine Ausgaben in die Datei namens ""F"".
 # ergänzt 10.01.2004 - Ulrich Kretschmer
 Mit (!T)-o !(!t) wird als Ausgabedateiname der Name der Quelldatei plus neuer Extension verwendet (z.B. (!T)file.u(!t) wird zu (!T)file.stg(!t)).
 

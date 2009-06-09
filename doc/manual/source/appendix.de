@@ -16,6 +16,7 @@
 #   fd  Jun 05: introduced (extracted from appendix.ui)
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 09: real quotation fixed
 #
 ################################################################################
 
@@ -33,7 +34,7 @@ Folgende Maximalwerte müssen Sie beim Erstellen der Quelltexte beachten:
 # damit bei Bedarf diese Doku anhand des Codes überprüft werden kann
 
 
-# Anmerkung: die hier verwendeten Definitionen sind in der Datei "manual.u" definiert...
+# Anmerkung: die hier verwendeten Definitionen sind in der Datei ""manual.u"" definiert...
 !begin_xlist [Schachtelungstiefe der Umgebungen:] !short
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !item [Macros:]                            (!red)(!MAXMACRO)(!coloff)
