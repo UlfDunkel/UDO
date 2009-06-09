@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
 #
 ################################################################################
 
@@ -537,7 +538,7 @@ Dieser Platzhalter setzt die Schriftfarbe Weiß.
 Abgeschlossen wird mit (!kkw [coloff]).
 
 Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-Postscript unterstützt.
+PostScript unterstützt.
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 

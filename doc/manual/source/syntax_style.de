@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 08: etc. -> usw.
 #   fd  Jun 08: text reviewed
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
 #
 ################################################################################
 
@@ -846,7 +847,7 @@ Aus~!..
 (!red)Farbe in UDO(!coloff)
 
 Das Setzen der Farben wird zur Zeit bei den Formaten HTML, RTF, WinHelp, DRC und
-Postscript unterstützt.
+PostScript unterstützt.
 
 !end_node # Schriftfarben
 
