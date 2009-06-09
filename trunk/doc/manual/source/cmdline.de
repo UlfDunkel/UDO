@@ -16,6 +16,7 @@
 #   fd  Jun 05: introduced (extracted from cmdline.ui)
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: 'Sinn machen' -> 'Sinn ergeben' (avoid anglicisms)
 #
 ################################################################################
 
@@ -166,7 +167,7 @@ welche Dateien andere Dateien nachladen.
 
 !item [-W, (--)no-warnings] UDO gibt keine Warnungen, sondern nur Fehler aus.
 
-!item [-Wl, (--)no-warningslines] Warnungen f‹r Zeilenl‰nge unterdr‹cken. Macht nur Sinn, wenn
+!item [-Wl, (--)no-warningslines] Warnungen f‹r Zeilenl‰nge unterdr‹cken. Ergibt nur Sinn, wenn
           UDO Warnungen ausgeben soll.
 
 !item [-x, (--)linuxdoc] Die (!U)Quelldatei(!u) wird ins Linuxdoc-SGML-Format umgewandelt.
