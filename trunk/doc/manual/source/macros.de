@@ -70,7 +70,7 @@
 !macro HINT           (!B)Hinweis:(!b)
 !macro HINTS          (!B)Hinweise:(!b)
 !macro MAINPART       Hauptteil
-!macro MISS           (!idx [Hier fehlt noch etwas])!..
+!macro MISS           (!idx [Hier fehlt noch etwas])~!..
 !macro NOTEXISTING    Dieser Befehl existiert nicht mehr.
 !macro PLACEHOLDER    Platzhalter
 !macro PREAMBLE       Vorspann
