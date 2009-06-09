@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from working.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: text reviewed, HomeSite + TextWrangler editors added
 #
 ################################################################################
 
@@ -26,7 +27,6 @@
 # = = =
 
 !item [Why is UDO named ""UDO""?] ~
-
 When I began programming UDO I had no better idea than naming it ""UDO"",
 the abbreviation for ""(!B)U(!b)niversal (!B)DO(!b)cument"".
 
@@ -35,7 +35,6 @@ By the way: The author's first name isn't Udo, he's called Dirk!
 # = = =
 
 !item [How to I pronounce ""UDO""?] ~
-
 ""UDO"" is pronounced like the prename Udo: ""Ooh-do"". Pronounce the ""U""
 like the ""u"" in ""butcher"", the ""do"" like the ""do"" in ""document"".
 Please don't pronounce it like ""You do"".
@@ -43,7 +42,6 @@ Please don't pronounce it like ""You do"".
 # = = =
 
 !item [How can I get the current versions?] ~
-
 # You can download the current version via FTP or from the World Wide Web.
 
 #The current versions are always available in the BBS called ""Maus MK2
@@ -66,7 +64,6 @@ the UDO archives.
 # = = =
 
 !item [Will there be versions for other operating systems?] ~
-
 At the moment UDO is available for the following operating systems:
 
 !begin_itemize !short
@@ -90,7 +87,6 @@ If you would like to port UDO to a system which isn't listed above, please (!lin
 # = = =
 
 !item [Can UDO generate formats from other systems?] ~
-
 Sure. E.g. you can run UDO on a Windows PC and save Linuxdoc-SGML files. You
 can run UDO on a Linux PC and save Windows Help files. No problem. UDO has
 the same functions on any operating systems it's available for.
@@ -101,7 +97,6 @@ charsets are not the same.
 # = = =
 
 !item [Can I write my source files ""here"" and translate them ""there""?] ~
-
 Yes, you can e.g. write your source files on a Windows PC and convert them
 on a BeBox or Apple Macintosh. UDO knows the charsets of all operating
 system it's available for. You have only to say UDO which charset was used
@@ -110,10 +105,8 @@ or (!KW [code] [[mac!!]]).
 
 # = = =
 
-!item [May the UDO syntax change in the future?] ~
-
 !index Syntax changes
-
+!item [May the UDO syntax change in the future?] ~
 UDO is that kind of software that is improved day by day. New commands will
 appear in the future, that's for sure.
 
@@ -124,7 +117,6 @@ to get to know about the changes in the past.
 # = = =
 
 !item [How does UDO work?] ~
-
 UDO reads the source file(s) in two passes.
 
 In the first pass UDO reads in the switches, macros, definitions and the
@@ -137,13 +129,11 @@ on reading the source file.
 
 # = = =
 
+!index (!kw [autoref])
 !item [How does UDO reference other parts of the document?] ~
-
 UDO inserts links in hypertext formats (except for the ST-Guide)
 automatically to other parts of the documentation. UDO references chapter
 titles, labels and aliases.
-
-!index (!kw [autoref])
 
 Using the switch (!KW [autoref] [[off!!]]) you can tell UDO not to insert any
 references until you use the switch (!KW [autoref] [[on!!]]).
@@ -151,7 +141,6 @@ references until you use the switch (!KW [autoref] [[on!!]]).
 # = = =
 
 !item [How can I link to parts of the current page?] ~
-
 Because UDO doesn't insert links to labels of the same page you have to
 insert a explicit link to this label by using the (!KKW [link])
 placeholder. An example:
@@ -170,7 +159,6 @@ placeholder. An example:
 # = = =
 
 !item [How can I get images into a table of content?]
-
 You have to make your own table of contents, that means you have to leave
 the (!KW [tableofcontents]) command. An example:
 
@@ -189,11 +177,14 @@ the (!KW [tableofcontents]) command. An example:
 # = = =
 
 !item [Which editor can I use for UDO?]
+UDO-Quelltexte können Sie prinzipiell mit jedem Texteditor schreiben. Einige Editoren bieten jedoch Luxus-Funktionen, die in der Praxis sehr nützlich sein können.
 
-Here are some suggestions:
+Here are some suggestions, die natürlich niemals vollständig oder objektiv sein können:
 
 !begin_table [|l|c|c|] !hline
 "e" (e.exe) !! OS/2 !! part of the system
+!hline
+(!url [HomeSite][http://www.adobe.com/products/homesite/]) !! Windows !! commercial
 !hline
 (!url [Kate, KEdit, KWrite] [http://kate.kde.org/])  !! Linux/KDE !! Open Source
 !hline
@@ -206,6 +197,8 @@ Here are some suggestions:
 (!url [SuperEdi] [http://www.wolosoft.com/]) !! Windows !! Freeware
 !hline
 (!url [TextPad] [http://www.texpad.com/]) !! Windows !! Freeware
+!hline
+(!url [TextWrangler] [http://www.barebones.com/products/TextWrangler/]) !! Mac~OS~X !! Freeware
 !hline
 (!url [UltraEdit32] [http://www.ultraedit.com/]) !! Windows !! commercial
 !hline
