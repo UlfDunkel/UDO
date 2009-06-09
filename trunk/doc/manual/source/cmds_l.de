@@ -16,6 +16,7 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: !language lists all available languages now
 #
 ################################################################################
 
@@ -187,7 +188,33 @@ zur Zeit nur für die RTF-Ausgabe unterstützt.
 !begin_node (!kw [language])
 !html_name  cmd_language
 
-Sprache setzen.
+
+Sprache setzen. Momentan unterstützt UDO folgende Sprachen:
+
+!begin_blist
+!label czech
+!item [czech]   Tschechisch
+!label danish
+!item [danish]  Dänisch
+!label dutch
+!item [dutch]   Holländisch
+!label english
+!item [english] Englisch
+!label french
+!item [french]  Französisch
+!label german
+!item [german]  Deutsch
+!label italian
+!item [italian] Italienisch
+!label latvian
+!item [latvian] Lettisch
+!label polish
+!item [polish]  Polnisch
+!label spanish
+!item [spanish] Spanisch
+!label swedish
+!item [swedish] Schwedisch
+!end_blist
 
 !begin_xlist [(!TYPEPOSITION)]
 
