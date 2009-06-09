@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
 #
 ################################################################################
 
@@ -297,7 +298,7 @@ Dieser Platzhalter setzt die Schriftfarbe Cyan.
 Abgeschlossen wird mit (!kkw [coloff]).
 
 Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-Postscript unterstützt.
+PostScript unterstützt.
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 

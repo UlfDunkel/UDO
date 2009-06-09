@@ -16,6 +16,7 @@
 #   fd  Jun 05: introduced (extracted from history.ui)
 #   fd  Jun 06: begascen.ui integrated in text
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
 #
 ################################################################################
 
@@ -127,7 +128,7 @@ unten links !! unten mitte !! unten rechts
 Version 6.5.13
 # ..............................................................................
 !item 16 standard colors are now defined in UDO as placeholders for HTML, RTF, WinHelp
-      DRC and Postscript output. The colors are used like this: (!KKW [black]),
+      DRC and PostScript output. The colors are used like this: (!KKW [black]),
       (!KKW [red]), etc. Close the color command with (!KKW [coloff]). 
       Version 6.5.9
 # ..............................................................................
@@ -431,7 +432,7 @@ unten links !! unten mitte !! unten rechts
 # ------------------------------------------------------------------------------
 !end_description
 
-!heading Postscript
+!heading PostScript
 # ------------------------------------------------------------------------------
 !begin_description
 !smallskip
@@ -679,7 +680,7 @@ unten links !! unten mitte !! unten rechts
 !item For all entrys the line number will be written.
 !end_itemize
 
-!subheading Postscript
+!subheading PostScript
 !begin_itemize
 !item The standard output of ""about udo"" can't be used for postscript,
       so there is a special one. The output will be done in german if
@@ -717,7 +718,7 @@ unten links !! unten mitte !! unten rechts
 !item New characters for the itemize environment
 !item The font ""Symbol"" can be used.
 !item Internal links (!T)(!/link ...)(!t), external links (!T)(!/xlink ...)(!t)
-      und (!T)(!/url ...)(!t) are transposed for PDF (via Postscript)
+      und (!T)(!/url ...)(!t) are transposed for PDF (via PostScript)
 !item Footnotes are transposed for postscript
 !item Tables are transposed legible with monospaced characters
 !item Commands (!T)!/bigskip(!t), (!T)!/medskip(!t) and (!T)!/smallskip(!t)

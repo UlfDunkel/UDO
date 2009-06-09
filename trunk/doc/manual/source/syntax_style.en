@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
 #
 ################################################################################
 
@@ -780,7 +781,7 @@ From~...
 (!red)Color in UDO(!coloff)
 
 Text color definition is currently supported for the output formats 
-HTML, RTF, WinHelp, DRC and Postscript.
+HTML, RTF, WinHelp, DRC and PostScript.
 
 !end_node # Textcolors
 

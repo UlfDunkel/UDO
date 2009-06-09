@@ -18,6 +18,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 08: etc. -> usw.
 #   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
 #
 ################################################################################
 
@@ -125,7 +126,7 @@ Version 6.5.13
 # ..............................................................................
 !item Die 16 Standardfarben existieren jetzt in UDO als Platzhalter
       für die Ausgabe von HTML, RTF, WinHelp, DRC und
-      Postscript. Die Farben werden wie folgt angegeben: (!KKW [black]),
+      PostScript. Die Farben werden wie folgt angegeben: (!KKW [black]),
       (!KKW [red]) usw. Abgeschlossen wird jeweils mit (!KKW [coloff]). (!nl)
       Version 6.5.9
 # ..............................................................................
@@ -441,7 +442,7 @@ unten links !! unten mitte !! unten rechts
 # ------------------------------------------------------------------------------
 !end_description
 
-!heading Postscript
+!heading PostScript
 # ------------------------------------------------------------------------------
 !begin_description
 !smallskip
@@ -449,7 +450,7 @@ unten links !! unten mitte !! unten rechts
 !begin_itemize !short
 # ..............................................................................
 !item Bug #0000040 in Version 6.2.2 beseitigt (!nl)
-      Beseitigung mehrerer kleiner Fehler in der Postscript-Ausgabe.
+      Beseitigung mehrerer kleiner Fehler in der PostScript-Ausgabe.
       Unter anderem wird in der Fußzeile keine Copyright-Zeichen
       mehr ausgegeben, wenn kein Author gesetzt ist. Die eckigen
       Klammern werden jetzt gequoted (\[ und \] statt [ und ]).
@@ -629,19 +630,19 @@ unten links !! unten mitte !! unten rechts
          umgesetzt.
    !item (!T)!/node1_size foo(!t) (!nl)
           Mit diesem Kommando (Vorspann) kann die Größe der Nodes und Headings
-          bei der Postscript-Ausgabe festgelegt werden (foo: Zeichensatzgröße
+          bei der PostScript-Ausgabe festgelegt werden (foo: Zeichensatzgröße
           in pt).
    !item (!T)!/node2_size foo(!t) (!nl)
          Mit diesem Kommando (Vorspann) kann die Größe der Subnodes und
-         Subheadings bei der Postscript-Ausgabe festgelegt werden (foo:
+         Subheadings bei der PostScript-Ausgabe festgelegt werden (foo:
          Zeichensatzgröße in pt).
    !item (!T)!/node3_size foo(!t) (!nl)
           Mit diesem Kommando (Vorspann) kann die Größe der Subsubnodes und
-          Subsubheadings bei der Postscript-Ausgabe festgelegt werden
+          Subsubheadings bei der PostScript-Ausgabe festgelegt werden
           (foo: Zeichensatzgröße in pt).
    !item (!T)!/node4_size foo(!t) (!nl)
          Mit diesem Kommando (Vorspann) kann die Größe der Subsubsubnodes
-         und Subsubsubheadings bei der Postscript-Ausgabe festgelegt
+         und Subsubsubheadings bei der PostScript-Ausgabe festgelegt
          werden (foo: Zeichensatzgröße in pt).
  	!end_itemize
  !item [Neuheiten:]
@@ -664,7 +665,7 @@ unten links !! unten mitte !! unten rechts
    !item Für RTF wird jetzt eine einzelne Seite erzeugt, die ein
          Ab!-bildungs!-ver!-zeichnis enthält, wenn (!T)!/listoffigures(!t)
          gesetzt ist. Dieses muss nur aktualisiert werden.
-   !item Es werden Vorgaben für das Layout für die Postscript-Ausgabe
+   !item Es werden Vorgaben für das Layout für die PostScript-Ausgabe
          gemacht: Art und Größe des proportionalen und äquidistanten
          Zeichensatzes sowie die Öffnungsparameter für PDF-Dateien.
  	!end_itemize
@@ -700,9 +701,9 @@ unten links !! unten mitte !! unten rechts
 !item Außerdem werden die entsprechenden Zeilennummern geschrieben.
 !end_itemize
 
-!subheading Postscript
+!subheading PostScript
 !begin_itemize
-!item Die Ausgabe in (!T)abo.c(!t) kann derzeit von der Postscript-Ausgabe nicht
+!item Die Ausgabe in (!T)abo.c(!t) kann derzeit von der PostScript-Ausgabe nicht
       benutzt werden, da diese keine zentrierte bzw. rechts!-bündige
       Ausgabe zulässt. Deshalb wird die Standard!-ausgabe verhindert
       und statt!-dessen eine eigene Ausgabe formuliert. Die Ausgabe erfolgt
@@ -720,7 +721,7 @@ unten links !! unten mitte !! unten rechts
       (!T)!/doclayout [ps] [propfontname] foo(!t) (!nl)
       Mögliche Angaben für foo sind Zeichensatznamen, z.~B. Arial,
       Times New Roman, sans oder sans-serif. (!nl)
-      (!B)Hinweis:(!b) Für die Postscriptausgabe gilt, dass für Helvetica,
+      (!B)Hinweis:(!b) Für die PostScript-Ausgabe gilt, dass für Helvetica,
       Arial oder sans-serif immer Helvetica gesetzt wird, ansonsten
       Times New Roman.
 
@@ -728,28 +729,28 @@ unten links !! unten mitte !! unten rechts
       Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
 !item (!T)!/docinfo [keywords] foo(!t) (!nl)
       Ersatz und Erweiterung für (!T)!/html_keywords(!t) (funkioniert
-      derzeit nur für Postscript).
+      derzeit nur für PostScript).
 !item (!T)!/docinfo [description] foo(!t) (!nl)
       Ersatz und Erweiterung für (!T)!/html_description(!t) (funktioniert
-      derzeit nur für Postscript)
-!item Für die Postscript-Ausgabe wird jetzt auch eine Titelseite erzeugt.
+      derzeit nur für PostScript)
+!item Für die PostScript-Ausgabe wird jetzt auch eine Titelseite erzeugt.
 !item Für die Standard-Kopfzeile wird aus ""Titel"" und ""Programm""
       (!T)(!/docinfo)(!t) ein Text erstellt.
 !item Für die Standard-Fusszeile wird aus ""Author"" (!T)(!/docinfo)(!t)
       ein Text erstellt.
 !item Aus den Angaben aus (!T)(!/docinfo)(!t) werden die Angaben für die
       Dokumenten!-informationen einer PDF-Datei zusammen!-gestellt.
-!item Die Description- und Listumgebungen werden für Postscript
+!item Die Description- und Listumgebungen werden für PostScript
       unterstützt.
 !item Neue Aufzählungszeichen für die Itemize-Umgebung.
 !item Der Zeichensatz ""Symbol"" kann benutzt werden.
 !item Interne Links (!T)(!/link ...)(!t), externe Links (!T)(!/xlink ...)(!t)
-      und (!T)(!/url ...)(!t) werden für PDF (via Postscript) umgesetzt.
-!item Fußnoten werden für die Postscriptausgabe umgesetzt.
+      und (!T)(!/url ...)(!t) werden für PDF (via PostScript) umgesetzt.
+!item Fußnoten werden für die PostScript-Ausgabe umgesetzt.
 !item Die Tabellen werden jetzt leserlich mit monospaced Zeichen umgesetzt.
 !item Die Kommandos (!T)!/bigskip(!t), (!T)!/medskip(!t) und (!T)!/smallskip(!t)
       werden jetzt leserlich umgesetzt.
-!item Alle Nodes werden für die Postscript-Ausgabe als ""Named Destination""
+!item Alle Nodes werden für die PostScript-Ausgabe als ""Named Destination""
       angelegt. Es kann also von außerhalb auf jedes Kapitel einer PDF-Datei
       verwiesen werden.
 !item Aus allen Nodes wird ein Bookmark-Verzeichnis für PDF-Dateien erzeugt.

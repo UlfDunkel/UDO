@@ -18,6 +18,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: !language lists all available languages now
 #   fd  Jun 09: !language referencec to lang_ref.<ISO> now
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
 #
 ################################################################################
 
@@ -347,7 +348,7 @@ Dieser Platzhalter setzt die Schriftfarbe Hellgrün.
 Abgeschlossen wird mit (!kkw [coloff]).
 
 Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-Postscript unterstützt.
+PostScript unterstützt.
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 

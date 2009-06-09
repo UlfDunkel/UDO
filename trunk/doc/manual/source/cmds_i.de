@@ -18,6 +18,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: !ifos and !ifnos now reference to os.ui resp. os.<ISO>
 #   fd  Jun 09: !iflang and !ifnlang now reference to language.<ISO>
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
 #
 ################################################################################
 
@@ -766,7 +767,7 @@ und die URL ""http://www.udo-open-source.org"" als Attribut cite eingesetzt.
 Bei der RTF-Ausgabe wird ebenfalls die aktuelle Zeit eingesetzt. Außerdem
 trägt sich UDO als Änderungsautor 1 ein.
 
-Bei WinHelp(4), Apple Quickview und Postscript wird der neue Text in roter
+Bei WinHelp(4), Apple Quickview und PostScript wird der neue Text in roter
 Farbe geschrieben.
 
 Bei allen anderen Formaten wird der eingefügte Text ohne besondere Kennzeichen

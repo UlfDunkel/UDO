@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
 #
 ################################################################################
 
@@ -139,7 +140,7 @@ und die URL ""http://www.udo-open-source.org"" als Attribut cite eingesetzt.
 Bei der RTF-Ausgabe wird ebenfalls die aktuelle Zeit eingesetzt. Außerdem
 trägt sich UDO als Änderungsautor 1 ein.
 
-Bei WinHelp(4), Apple Quickview und Postscript wird der Text wird
+Bei WinHelp(4), Apple Quickview und PostScript wird der Text wird
 durchgestrichen.
 
 Bei ST-Guide und AmigaGuide wird der Text hell dargestellt.
@@ -281,13 +282,13 @@ erzeugt UDO eine Zeile der Art ""(!nolink [Copyright]) (!copyright) by <author>"
 
 !item [keywords]
 (!KW [docinfo] [[keywords!!]]) entspricht dem Kommando (!KW [html_keywords]).
-Kann auch bei Postscript genutzt werden. (!nl)
+Kann auch bei PostScript genutzt werden. (!nl)
 Bei der HTML-Ausgabe allerdings nur, wenn in einzelnen Dateien nicht
 (!KW [html_keywords]) benutzt wird. Diese haben also Vorrang. (!nl)
 
 !item [description]
 (!KW [docinfo] [[description!!]]) entspricht dem Kommando (!KW [html_description]).
-Kann auch bei Postscript genutzt werden. (!nl)
+Kann auch bei PostScript genutzt werden. (!nl)
 Bei der HTML-Ausgabe allerdings nur, wenn in einzelnen Dateien nicht
 (!KW [html_description]) benutzt wird. Diese haben also Vorrang. (!nl)
 
@@ -400,7 +401,7 @@ A4PORTRAIT, A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE
 Mögliche Angaben für foo sind Zeichensatznamen, z. B. Arial,
 Times New Roman, sans oder sans serif.
 
-Hinweis: Für die Postscriptausgabe gilt zur Zeit: Wenn dort irgendwas
+Hinweis: Für die PostScript-Ausgabe gilt zur Zeit: Wenn dort irgendwas
 mit "Helvetica", "Arial" oder "sans-serif" steht wird "Helvetica" gesetzt,
 ansonsten "Times New Roman".
 
