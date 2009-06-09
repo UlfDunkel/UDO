@@ -1,0 +1,52 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : list of supported human languages
+# Language    : German
+# Initial Date: 2009-06-09
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+# 
+# ------------------------------------------------------------------------------
+# 
+# Notes:
+#    This list is shown as a reference in the chapter [command !language].
+#    All other places, where this list should be shown, should use the localized
+#    files (e.g. language.de or language.en) instead, which link to this list labels.
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 09: introduced
+#
+################################################################################
+
+!begin_blist
+!label czech
+!item [czech]   Tschechisch
+!label danish
+!item [danish]  Dänisch
+!label dutch
+!item [dutch]   Holländisch
+!label english
+!item [english] Englisch
+!label french
+!item [french]  Französisch
+!label german
+!item [german]  Deutsch
+!label italian
+!item [italian] Italienisch
+!label latvian
+!item [latvian] Lettisch
+!label polish
+!item [polish]  Polnisch
+!label spanish
+!item [spanish] Spanisch
+!label swedish
+!item [swedish] Schwedisch
+!end_blist
+
+# === EOF ===
