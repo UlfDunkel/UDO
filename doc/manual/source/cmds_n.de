@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: 'Sinn machen' -> 'Sinn ergeben' (avoid anglicisms)
 #
 ################################################################################
 
@@ -866,7 +867,7 @@ Dieser Befehl schaltet die Benutzung von externen
 Verweisen auf WWW-Seiten aus, falls das formatzugehörige Kürzel
 angegeben wurde. Dies ist sinnvoll, falls man einen
 Hypertext mit HTML-Links versehen hat, die jedoch
-weder in einem WinHelp- noch ST-Guide-Hypertext Sinn machen würden.
+weder in einem WinHelp- noch ST-Guide-Hypertext Sinn ergeben würden.
 
 !item [(!EXAMPLE)]
 (!T)!/no_urls [stg](!t)
@@ -925,7 +926,7 @@ Dieser Befehl schaltet die Benutzung von externen
 Verweisen aus, falls das formatzugehörige Kürzel
 angegeben wurde. Dies ist sinnvoll, falls man einen
 Hypertext mit HTML-Links versehen hat, die jedoch
-weder in einem WinHelp- noch ST-Guide-Hypertext Sinn machen würden.
+weder in einem WinHelp- noch ST-Guide-Hypertext Sinn ergeben würden.
 
 !item [(!EXAMPLE)]
 (!T)!/no_xlinks [stg](!t)

@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: text reviewed
+#   fd  Jun 09: 'Sinn machen' -> 'Sinn ergeben' (avoid anglicisms)
 #
 ################################################################################
 
@@ -326,7 +327,7 @@ wird~!..
       Vorspann angeben, bei welchen Formaten externe Verweise umgewandelt
       werden sollen. Dieser Schalter wird z.B. dann benötigt, falls man eine
       Seite mit Verweisen für das Internet angelegt hat, die in einem
-      ST-Guide- oder WinHelp-Hypertext keinen Sinn machen würden.
+      ST-Guide- oder WinHelp-Hypertext keinen Sinn ergeben würden.
 
 !index (!kkw [nolink])
 !item Durch den Platzhalter (!KKW [nolink]) können Sie Text
