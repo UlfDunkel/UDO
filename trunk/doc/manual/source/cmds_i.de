@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: !ifos and !ifnos now reference to os.ui resp. os.<ISO>
+#   fd  Jun 09: !iflang and !ifnlang now reference to language.<ISO>
 #
 ################################################################################
 
@@ -199,7 +200,8 @@ WinHelp-Format umgewandelt wird.
 !begin_node (!kw [iflang])
 !html_name  cmd_iflang
 
-Abfrage der Ausgabesprache.
+Abfrage der Ausgabesprache. Hierbei gelten folgende Zeichenketten:
+!include language.de
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -266,7 +268,8 @@ so werden alle Zeilen umgewandelt, die zwischen (!KW [ifndest]) und
 !begin_node (!kw [ifnlang])
 !html_name  cmd_ifnlang
 
-Abfrage der Ausgabesprache.
+Abfrage der Ausgabesprache. Hierbei gelten folgende Zeichenketten:
+!include language.de
 
 !begin_xlist [(!TYPEPOSITION)]
 
