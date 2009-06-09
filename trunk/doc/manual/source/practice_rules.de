@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from working.ui)
+#   fd  Jun 09: text reviewed
 #
 ################################################################################
 
@@ -25,50 +26,59 @@ bitte einen Blick auf die folgenden Regeln und prägen Sie sie sich
 ein:
 
 !begin_enumerate
-!item (!B)Geben Sie Ihrem Text eine übersichtliche Struktur!(!b)
+!item (!B)Geben Sie Ihrem Text eine übersichtliche Struktur.(!b)
 
-!item (!B)Sprechen Sie den Leser direkt an.(!b)
+!hline
 
-Verwenden Sie ""Sie können !.."" bzw. ""Du kannst"" anstatt ""Man
-kann !.."".
+!item (!B)Sprechen Sie die Leserinnen und Leser direkt an.(!b)
+
+      Verwenden Sie ""Sie können !.."" bzw. ""Du kannst"" anstatt ""Man kann !.."".
+
+!hline
 
 !item (!B)Benutzen Sie Schriftarten sparsam und einheitlich.(!b)
 
-Der übermäßige Einsatz von kursivem, fettem und unterstrichenen
-verwirrt den Leser eher, als das er ihm hilft. Falls Sie
+Der übermäßige Einsatz von (!I)kursivem,(!i) (!B)fettem(!b) und (!U)unterstrichenem(!u) Text
+verwirrt Leser eher, als das er ihnen hilft. Falls Sie
 Schriftarten einsetzen, so tun Sie dies allerdings einheitlich.
-Diese Anleitung stellt Dateinamen grundsätzlich mit einer
-nichtproportionalen Schrift dar, Kommandos werden immer kursiv
-angezeigt.
+
+Dieses Handbuch z.B. stellt (!T)Dateinamen(!t) grundsätzlich mit einer
+nichtproportionalen Schrift dar, (!CODE [Kommandos]) werden immer fett in der nichtproportionalen Schrift angezeigt.
+
+!hline
 
 !item (!B)Fassen Sie sich so kurz wie möglich.(!b)
 
-Holen Sie nicht zuweit aus, sondern kommen Sie möglichst schnell
-auf den Punkt. Der Leser langweilt sich sonst oder wird
-unkonzentriert und überliest womöglich noch die wichtigen
+Holen Sie nicht zu weit aus, sondern kommen Sie möglichst schnell
+auf den Punkt. Leser langweilen sich sonst oder werden 
+unkonzentriert und überlesen womöglich noch die wichtigen
 Stellen.
 
-Ich gebe zu, ich schaffe es meistens auch nicht, mich kurz zu
-fassen. (!grin)
+Okay, wir schaffen es meistens auch nicht, uns kurz zu fassen, wie dieser Text zeigt. (!grin)
+
+!hline
 
 !item (!B)Verwenden Sie kurze Kapitelüberschriften.(!b)
 
-Der Leser wird dann das gewünschte Kapitel beim Überfliegen des
+Leser werden dann das gewünschte Kapitel beim Überfliegen des
 Inhaltsverzeichnisses schneller (wieder)finden. Außerdem nehmen
 Sie UDO dadurch eine Menge Arbeit bei der Referenzierung ab, was
 durch eine schnellere Umwandlung belohnt wird.
 
+!hline
+
 !item (!B)Vermeiden Sie gleichnamige Überschriften.(!b)
 
 Nicht nur dass Sie damit UDO und Hypertext-Compiler verwirren,
-nein, auch der potentielle Leser gerät bei gleichnamigen Kapiteln
-durcheinander.
+nein, auch die Leser geraten bei gleichnamigen Kapiteln durcheinander.
+
+!hline
 
 !item (!B)Gehen Sie sparsam mit Makros und Definitionen um.(!b)
 
 UDO muss jede Zeile bis zu zweimal nach allen benutzten Makros und
 Definitionen durchsuchen. Jedes zusätzliche Makro und jede
-zusätzliche Definition verlangsamt den Umwandlungsvorgang.
+zusätzliche Definition verlangsamen den Umwandlungsvorgang. Wägen Sie selbst ab zwischen Tempo und Komfort.
 
 !end_enumerate
 
