@@ -188,18 +188,15 @@ welche Dateien andere Dateien nachladen.
 
 !begin_description
 !item [udo file.u]
-
 Umwandeln der Datei (!file [file.u]) ins ASCII-Format (default) und Ausgabe auf
 die Standardausgabe. Fehlermeldungen werden auf die Standardfehlerausgabe ausgegeben.
 
 !item [udo (--)tex -o output.tex file.u]
-
 Umwandeln der Datei (!file [file.u]) ins (!LaTeX)-Format, Ausgaben werden in die
 Datei (!file [output.tex]) geschrieben, Fehlermeldungen werden in der Datei
 (!file [output.ult]) protokolliert.
 
 !item [udo -s -y -l -o ! file.u]
-
 Umwandeln der Datei (!file [file.u]) ins St-Guide-Quelltextformat. Ausgaben
 erfolgen in die Datei (!file [file.stg]). Es werden keine Protokolldatei und
 keine Datei mit Trennvorschlägen angelegt.

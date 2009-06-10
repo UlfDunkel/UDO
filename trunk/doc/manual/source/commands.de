@@ -130,14 +130,14 @@ beschrieben, was die Beschreibungen bedeuten.
 !begin_itemize !short
 !item black
 !item silver      (hellgrau, ehemals ""grey"")
-!item gray        (dunkelgrau, ""gray"", nicht ""grey""!!!)
+!item gray        (dunkelgrau -- ""gray"", nicht ""grey""!)
 !item white
 !item maroon
 !item red
 !item purple
 !item fuchsia
-!item green       (dunkelgruen)
-!item lime        (hellgruen)
+!item green       (dunkelgrün)
+!item lime        (hellgrün)
 !item olive
 !item yellow
 !item navy

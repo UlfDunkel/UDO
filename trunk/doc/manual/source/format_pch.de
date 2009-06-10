@@ -18,6 +18,7 @@
 #   fd  Jun 09: 'Atari ST' -> 'Atari'
 #   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
 #   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -31,7 +32,6 @@ Bedeutung mehr für diesen Rechner.
 !begin_description
 
 !item [Wie erzeugt UDO hier Titelseite und Inhaltsverzeichnis?]
-
 UDO erzeugt eine Seite mit den Titelangaben und dem Inhaltsverzeichnis. Da diese Seite bei umfangreicheren Dokumenten ziemlich lang werden kann, empfiehlt es sich, den Schalter
 (!KW [use_short_tocs] [[pch!!]]) im Zusammenhang mit den Schaltern
 (!KW [use_auto_subtocs] [[pch!!]]) und (!KW [use_auto_subsubtocs] [[pch!!]]) zu
@@ -39,7 +39,6 @@ benutzen, damit auch Programmierer mit kleinen Bildschirmen nicht
 den Überblick auf dieser Seite zu verlieren.
 
 !item [Wie kann ich bei Pure-C-Help die Kopfzeilen entfernen?]
-
 UDO erzeugt auf jeder Seite automatisch (!idx [Kopfzeilen]), gebildet aus
 der Überschrift der jeweiligen Seite sowie des Titels der
 Hilfedatei. Durch Anklicken des Titels kann man zur Titelseite
@@ -49,7 +48,6 @@ Durch den Schalter (!KW [no_headlines] [[pch!!]]) lässt sich die Ausgabe
 dieser Kopfzeilen unterbinden.
 
 !item [Und wie die Fußzeilen?]
-
 UDO erzeugt auf jeder Seite automatisch (!idx [Fußzeilen]), in denen
 Verweise auf das vorherige, nachfolgende und/oder übergeordnete
 Kapitel zu finden sind. Diese ermöglichen dem Leser, direkt zu
@@ -59,7 +57,6 @@ Durch den Schalter (!KW [no_bottomlines] [[pch!!]]) lässt sich die Ausgabe
 dieser Kopfzeilen unterbinden.
 
 !item [Wofür ist diese Datei mit dem Suffix .cmd?]
-
 UDO legt während der Umwandlung eine Kommandodatei für den
 Helpcompiler von Pure~C an, welche an diesen zur Erzeugung der
 Helpdatei als Kommando übergeben werden muss.
@@ -69,23 +66,21 @@ UDO überschreibt diese Kommandodatei ohne Rückfrage. Um manuelle
 schreibschützen.
 
 !item [Wie erzeuge ich eine Hilfedatei für Pure~C?]
-
 Bei der Umwandlung des Quelltextes (!file [foo.u]) erzeugt UDO die Dateien
 (!file [foo.scr]) und (!file [foo.cmd]).
 
 Um eine Hilfedatei für Pure~C zu erhalten, müssen Sie (!file [HC.TTP])
 starten und diesem Programm die Kommandodatei (!file [foo.cmd]) übergeben:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 $ e:\purec\hc.ttp foo.cmd
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Unter GEM ziehen Sie einfach die Datei (!file [foo.cmd]) auf (!file [HC.TTP]).
 
 !item [Wie benutzt ich die Hilfedatei mit Pure~C?]
-
 Pure~C erlaubt (leider) nur die Einbindung einer einzigen
 benutzerdefinierten Hilfedatei. Diese trägt den Namen (!file [USR.HLP]) und
 befindet sich im Pure-C-Ordner.

@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -50,11 +51,11 @@ If you want to display (!code [!/-]) you have to use (!K1 [//-]).
 You can set the Hyphenation marks in the source file using ""(!K1 [/-])"". At
 these marks UDO is allowed to split up a word. A short example:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 semi-automatic syl!-labi!-fi!-cation
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 When converting to (!LaTeX) UDO replaces all ""(!K1 [/-])"" by ""\-"". So it would
 look like ""syl\-labi\-fi\-cation"".
@@ -85,11 +86,11 @@ internal list.
 In the following example I expect that the word ""documentation"" is used
 many times in your source file:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !hyphen docu!-men!-ta!-tion
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !end_node # Global definition of hyphenation patterns
 

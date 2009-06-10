@@ -18,6 +18,7 @@
 #   fd  Jun 08: ignored charset list removed, including charsets.ui
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -36,14 +37,14 @@ Double quotes of the source file will be converted to typographical quotes
 if they are supported by the destination format. The following ASCII
 simulation demonstrates how it works:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 Double ""quotes""
 
        66       99
 Double    quotes
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 If you want to display two quotes you have to use (!KP [((""!)!)])(!code [text])(!KP [((""!)!)])) instead.
 
@@ -68,17 +69,17 @@ switch called (!KW [no_quotes] [[~!!]]).
 Like double quotes UDO can convert double apostrophes into typographical
 apostrophes:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 double ''apostrophes''
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 will become
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 double ''apostrophes''
-!end_quote
+(!EXAMPLE_END)
 
 If you want to display two apostrophes you have to use (!KP [((''!)!)])(!code [text])(!KP [((''!)!)]) instead.
 

@@ -18,6 +18,7 @@
 #   fd  Jun 09: 'Tip' -> 'Tipp' (NDR)
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -40,7 +41,6 @@ Onlinehilfen für eigene Programme keine Bedeutung hat.
 !begin_description
 
 !item [TVHC meldet den Fehler ""Unterminated topic reference""!?]
-
 Der mir vorliegende TVHC Version 1.0 enthält einen bösen Fehler, der
 dazu führt, dass die Quotefunktion --- das Aufheben der Funktion der
 geschweiften Klammer durch doppelte Angabe --- nicht funktioniert.
@@ -49,8 +49,7 @@ die Funktion scanForCrossRefs() in tvhc.cpp folgendermaßen um:
 
 !begin_description
 !item [Original:]
-
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 if (line[i+1] == begXRef)
 {
@@ -58,11 +57,10 @@ if (line[i+1] == begXRef)
         ++i;
 }
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !item [Patch:]
-
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 if (line[i] == begXRef)    // [i] statt [i+1]
 {
@@ -70,15 +68,14 @@ if (line[i] == begXRef)    // [i] statt [i+1]
         ++i;
 }
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 !end_description
 
 Nach dieser Änderung sollten Sie den TVHC neu übersetzen, um die
 Änderungen wirksam werden zu lassen.
 
 !item [TVHC meldet den Fehler ""Text too long""!?]
-
-In der Datei tvhc.h legt eine Konstante namens bufferSize die Größe des
+In der Datei (!file [tvhc.h]) legt eine Konstante namens bufferSize die Größe des
 Textpuffers fest, den der TVHC als Zwischenspeicher währen der
 Übersetzung benutzt. Der Puffer ist ziemlich klein dimensioniert, falls
 Sie obige Fehlermeldung erhalten.
@@ -86,17 +83,16 @@ Sie obige Fehlermeldung erhalten.
 Legen Sie einen ausreichen großen Puffer (z.B. 32 KB) an, dass auch
 größere Texte problemlos übersetzt werden.
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 const bufferSize = 32768;
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Nach dieser Änderung sollten Sie den TVHC neu übersetzen, um die
 Änderung wirksam werden zu lassen.
 
 !item [TVHC meldet den Fehler ""TOPIC expected""!?]
-
 Dieser Fehler tritt auf, sobald eine Zeile mit einem Punkt --- dem
 ""commandChar"" --- beginnt. Die mir vorliegende Version bricht darauf
 die Umwandlung ab.
@@ -104,19 +100,19 @@ die Umwandlung ab.
 Dieser Abbruch ist jedoch unnötig, weshalb ich meinen TVHC gepatched
 habe. Falls Sie den Sourcecode vorliegen haben, suchen Sie nach
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 error("TOPIC expected");
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 und ersetzen Sie es durch
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 warning("TOPIC expected");
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Nach einer Neuübersetzung des TVHC bricht dieser die Umwandlung nicht
 mehr ab, sondern gibt nur eine Warnmeldung aus, die Sie

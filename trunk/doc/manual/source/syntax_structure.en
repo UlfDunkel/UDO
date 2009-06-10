@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -202,7 +203,7 @@ Beispiel. Die (hier inhaltsleere) Befehlsfolge...
 
 Watch this example (without text) to understand what I want to say:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !node          A chapter
 !subnode       A section
@@ -210,11 +211,11 @@ Watch this example (without text) to understand what I want to say:
 !subsubsubnode A paragraph
 !node          And a different chapter
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 The table of contents should look like this:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 1  A chapter
    1.1  A section
@@ -223,7 +224,7 @@ The table of contents should look like this:
 
 2  And a different chapter
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Windows Help and ST-Guide may display text in dialog boxes, too. These so
 called popup nodes can be used with the following commands:
@@ -294,7 +295,7 @@ inside the appendix environment. This environment is started with
 Chapters that are part of the appendix are enumerated using letters instead
 of numbers. A short example:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !node  A chapter outside the appendix
 !begin_appendix
@@ -304,11 +305,11 @@ of numbers. A short example:
 !subsubsubnode  A paragraph
 !end_appendix
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 The table of contents should look like this:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 5  A chapter outside the appendix
 
@@ -319,7 +320,7 @@ A  A chapter
         A.1.1  A subsection
                A.1.1.1  A paragraph
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 
 (!HINTS)

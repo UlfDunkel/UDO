@@ -16,6 +16,7 @@
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 09: 'Atari ST' -> 'Atari'
 #   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -70,11 +71,11 @@ UDO saves two file when converting the source fie (!file [foo.u]):
 To get a Pure C Help file you have to call (!file [HC.TTP]) by passing the
 command file (!file [foo.cmd]):
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 $ e:\purec\hc.ttp foo.cmd
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Using GEM just drag (!file [foo.cmd]) onto (!file [HC.TTP]) to start the conversion.
 

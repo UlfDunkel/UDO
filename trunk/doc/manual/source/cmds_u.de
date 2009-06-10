@@ -25,6 +25,7 @@
 #   fd  Jun 09: LINK macro introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -652,19 +653,19 @@ PlatzhalterVersion~(!KKW [idx]) auch die ""gespiegelten"" Einträge
 an, falls man einen Doppeleintrag vornimmt. Falls man also diesen
 Schalter benutzt, dann kann man sich bei der Angabe von
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !index A !! B
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 die folgende Zeile sparen:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !index B !! A
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !item [(!EXAMPLE)]
 (!T)!/use_mirrored_indices [win,stg](!t)

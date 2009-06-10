@@ -17,6 +17,7 @@
 #   fd  Jun 05: FILESPACEQUOTE
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 09: some macros enhanced
+#   fd  Jun 10: EXAMPLE_... macros introduced
 #
 ################################################################################
 
@@ -30,13 +31,28 @@
 !macro FORMAT         (!link [<k\'FCrzel>] [Ausgabeformat])
 !endif
 
+# HTML macro formattings
+# ------------------------------------------------------------------------------
 !ifdest [hh,html]
+!macro EXAMPLE_BEGIN  !rinclude (!EXAMPLES)/html/example_begin.ui
+!macro EXAMPLE_END    !rinclude (!EXAMPLES)/html/example_close.ui
+!macro EXAMPLE_BEFORE !rinclude (!EXAMPLES)/html/example_before.ui
+!macro EXAMPLE_AFTER  !rinclude (!EXAMPLES)/html/example_after.ui
+
 !macro FORMAT         (!link [&lt;kürzel&gt;] [Ausgabeformat])
 !macro COLOR          (!link [&lt;farbe&gt;] [Farben])
 !macro LANGUAGE       (!link [&lt;sprache&gt;] [Sprache])
 !macro OS             (!link [&lt;system&gt;] [Betriebssystem])
 !macro CODE           (!link [&lt;zeichensatz&gt;] [Code])
+
+# other macro formattings
+# ------------------------------------------------------------------------------
 !else
+!macro EXAMPLE_BEGIN  !begin_quote
+!macro EXAMPLE_END    !end_quote
+!macro EXAMPLE_BEFORE (!B)Vorher:(!b) (!nl) !begin_quote
+!macro EXAMPLE_AFTER  (!B)Nachher:(!b) (!nl)
+
 !macro FORMAT         (!link [<kürzel>] [Ausgabeformat])
 !macro COLOR          (!link [<farbe>] [Farben])
 !macro LANGUAGE       (!link [<sprache>] [Sprache])
@@ -44,6 +60,9 @@
 !macro CODE           (!link [<zeichensatz>] [Code])
 !endif
 
+
+# general macro formattings
+# ------------------------------------------------------------------------------
 !macro CHAR           <zeichen>
 !macro FILE           <datei>
 !macro LINK           <link>

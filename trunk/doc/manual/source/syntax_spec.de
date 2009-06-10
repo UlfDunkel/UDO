@@ -21,6 +21,7 @@
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -46,13 +47,13 @@ In der folgenden ASCII-Simulation wird gezeigt, wie das Ergebnis in
 später aussehen kann, wenn das jeweilige Ausgabeformat echte
 Anführungszeichen unterstützt.
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 Echte ""Gänsefüßchen""
 
 Echte ,,Gänsefüßchen´´
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Wenn Sie in der Ausgabedatei doppelte Anführungszeichen sehen möchten,
 so müssen Sie stattdessen (!KP [((""!)!)])(!code [text])(!KP [((""!)!)])) angeben.
@@ -82,19 +83,13 @@ englischen Versionen. Daran kann UDO leider nichts ändern.
 Genau wie bei doppelten Anführungszeichen passt UDO auch hier doppelt
 vorkommende Apostrophe an.
 
-Aus~!..
-
-!begin_quote
+(!EXAMPLE_BEFORE)
 !begin_verbatim
 Hier stehen ''doppelte Apostrophe''.
 !end_verbatim
-!end_quote
-
-!..~wird
-
-!begin_quote
+(!EXAMPLE_AFTER)
 Hier stehen ''doppelte Apostrophe''.
-!end_quote
+(!EXAMPLE_END)
 
 Wenn Sie in der Ausgabedatei doppelte Apostrophe sehen möchten, so
 müssen Sie stattdessen (!KP [((''!)!)])(!code [text])(!KP [((''!)!)]) angeben.

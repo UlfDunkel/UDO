@@ -21,14 +21,12 @@
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
 !begin_node Bilder
 !html_name  images
-
-# 20.01.1996: Einbindung von GIF, MSP und PCX erklärt
-# 22.01.1996: Erläuterungen zu (!/img) eingefügt
 
 UDO ermöglicht die Einbindung von Bildern in den Ausgabeformaten
 ST-Guide, HTML, WinHelp und (!TeX). Dieses Kapitel soll Ihnen erläutern,
@@ -106,12 +104,12 @@ UDO macht das dem Lindner-(!TeX) beiliegende Zusatzprogramm
 Auflösungswerte in den Header des jeweiligen GEM-Images. Ein Beispiel:
 
 !index (!kw [tex_dpi])
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !tex_dpi 100
 !image tiger Ein GEM-Image
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 UDO liest zunächst den Header der Datei (!file [tiger.img]) ein, ermittelt daraus
 die Ausmaße des Bildes und passt den Header an 100~dpi an, was für die
@@ -166,7 +164,7 @@ fehl, wird eine Fehlermeldung ausgegeben und stattdessen versucht,
 Im Beispiel würde UDO folgendes Makro erzeugen ((!code [<w>]) und (!code [<h>]) werden
 dabei durch die Ausmaße des Bildes ersetzt):
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 \begin{figure}[htb]
 \begin{...}
@@ -177,7 +175,7 @@ dabei durch die Ausmaße des Bildes ersetzt):
 \caption{Ein Tiger}
 \end{figure}
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 (!HINT)
 
@@ -208,7 +206,7 @@ schreiben.
 Im Beispiel würde UDO folgendes Makro erzeugen ((!code [<w>]) und (!code [<h>]) werden
 dabei durch die Ausmaße des Bildes ersetzt):
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 \begin{figure}[htb]
 \begin{...}
@@ -219,8 +217,7 @@ dabei durch die Ausmaße des Bildes ersetzt):
 \caption{Ein Tiger}
 \end{figure}
 !end_verbatim
-!end_quote
-
+(!EXAMPLE_END)
 
 (!HINT)
 
@@ -244,26 +241,27 @@ als Bildunterschrift, sondern als Alternativtext benutzt.
 Aus dem UDO-Befehl (!KW [image] [tiger Ein Tiger]) wird folgender HTML-Befehl
 erzeugt:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 <p align="...">
 <img src="tiger.gif" alt="Ein Tiger" title="Ein Tiger" width="200" height="300">
 </p><br>
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Wird keine Bildunterschrift angegeben, fehlt die Angabe des
 Alternativtextes bzw. es wird ein leerer Alternativtext benutzt. Auch
-hier das Beispiel zur Veranschaulichung: Aus (!KW [image] [../gif/tiger])
-wird
+hier das Beispiel zur Veranschaulichung:
 
-!begin_quote
+(!EXAMPLE_BEFORE)
+(!KW [image] [../gif/tiger])
+(!EXAMPLE_AFTER)
 !begin_verbatim
 <p align="...">
 <img src="../gif/tiger.gif" width="200" height="300">
 </p><br>
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Wenn Sie die Größenangaben nicht benötigen, können Sie die Ermittlung der
 Ausmaße von Bildern unterbinden. Dazu gibt es das Kommando (!KW [no_img_size]).
@@ -287,20 +285,20 @@ Falls der bereits bekannte Tiger nicht als GIF, sondern als JPEG
 vorliegt, stellen Sie dem im vorherigen Beispiel gezeigten
 (!KW [image])-Befehl folgende Zeile voran:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !html_img_suffix jpg
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Sollte die Grafik nicht (!file [tiger.jpg]) heißen, sondern (!file [tiger.jpeg]), muss
 der Befehl entsprechend so lauten:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !html_img_suffix jpeg
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Beachten Sie, dass das Suffix für alle folgenden Grafiken gesetzt wird.
 Falls später wieder ein GIF dargestellt werden soll, muss das Suffix
@@ -318,6 +316,7 @@ Windows-Hilfetext ausgeben. UDO überprüft dabei nicht, ob die
 angegebene Datei existiert! Ein Bild kann mit oder ohne
 Bildunterschrift eingebunden werden.
 
+(!EXAMPLE_BEGIN)
 !begin_itemize
 !item ohne Bildunterschrift: (!nl)
       (!KW [image] [tiger])
@@ -325,16 +324,17 @@ Bildunterschrift eingebunden werden.
 !item mit Bildunterschrift: (!nl)
       (!KW [image] [tiger Ein Tiger])
 !end_itemize
+(!EXAMPLE_END)
 
 UDO erzeugt dann folgende RTF-Befehle:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 {\qc \{bmc tiger.bmp\}}\par\pard
 \par
 {\qc (Abbildung 1: Ein Tiger)}\par\pard
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 (!HINTS)
 

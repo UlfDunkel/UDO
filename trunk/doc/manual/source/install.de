@@ -23,6 +23,7 @@
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -127,7 +128,7 @@ werden. Unabhängig davon ist die Größe zur Laufzeit minimal.
 
 Anmerkung: Eine manpage ist derzeit nicht Teil der Mac-OS-X-Distribution.
 
-Um in das Verzeichniss zu kommen kann man ber den Menüpunkt ""Gehe zu/Gehe zum Ordner ..."" des Finders gehen.
+Um in das Verzeichnis zu kommen, kann man über den Menüpunkt ""Gehe zu/Gehe zum Ordner ..."" des Finders gehen.
 
 (!DocumentationWorkInProgress)
 
@@ -221,12 +222,12 @@ um nicht immer alle Optionen angeben zu müssen. Das folgende Script,
 welches man (!file [u2tex]) benennen sollte, ruft UDO mit den passenden
 Optionen auf.
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 #!bin/sh
 udo --tex -o ! $*
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Für die anderen Formate können ähnliche Scripte angelegt werden. In der
 Distribution sollten Sie diese Scripte bereits vorfinden.

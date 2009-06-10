@@ -23,6 +23,7 @@
 #   fd  Jun 09: LINK macro introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -638,19 +639,19 @@ If you use this switch, when using the (!KW [index]) or the
 (!KKW [idx]) placeholder also ""mirrored"" entries are entered
 into the index. For example when using
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !index A !! B
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 you don't need to specify this line:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !index B !! A
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !item [(!EXAMPLE)]
 (!T)!/use_mirrored_indices [win,stg](!t)

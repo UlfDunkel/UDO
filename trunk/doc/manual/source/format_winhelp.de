@@ -24,6 +24,7 @@
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -35,7 +36,6 @@
 !begin_description
 
 !item [WinHelp meint, dass *.rtf und *.hpj keine Hilfedatei sei?]
-
 Weder die eine noch die andere Datei ist eine fertige Hilfedatei
 für Windows. UDO erzeugt nur die Quelltexte einer
 Hilfedatei, welche noch mit einem Hypertext-Compiler (HC.EXE,
@@ -43,14 +43,9 @@ HC31.EXE, HCP.EXE) übersetzt werden muss.
 
 # ToDo: Text aktualisieren
 !item [Woher bekomme ich den Hypertext-Compiler?]
-
-# Den Hypertext-Compiler HC31.EXE bekommen Sie überall dort, wo es auch UDO gibt (siehe Bezugsquellen).
-# Sie finden ihn auch auf dem FTP-Server von Microsoft (ftp.microsoft.com).
-# 13.12.2003: neuer Text - Ulrich Kretschmer
 Den Hypertext-Compiler HC31.EXE können Sie kostenlos vom FTP-Server von Microsoft (ftp.microsoft.com) herunterladen.
 
 !item [Warum will der HC einfach keine HLP-Datei erzeugen?]
-
 Dafür kann es zwei Gründe geben:
 
 !begin_enumerate
@@ -82,7 +77,6 @@ manuelle Änderungen an einer Projektdatei vorgenommen haben und diese
 beibehalten möchten, schreibschützen Sie die Projektdatei.
 
 !item [Wie werden hier die Kopfzeilen erzeugt?]
-
 UDO erzeugt auf jeder Seite (mit Ausnahme der Titelseite und des
 Inhaltsverzeichnisses) eine Kopfzeile. In dieser befindet sich der Name
 des jeweiligen Kapitels. Kopfzeilen werden als
@@ -93,7 +87,6 @@ Durch den Schalter ""(!KW [no_headlines] [[win!!]])"" wird die Ausgabe
 von Kopfzeilen unterdrückt.
 
 !item [Wie werden die Kontextstrings ermittelt?]
-
 Falls Sie von anderen WinHelp-Dateien auf eine mit UDO erzeugte
 WinHelp-Datei verzweigen möchten, müssen Sie den Kontextstring des
 Kapitels kennen.
@@ -114,12 +107,12 @@ mit einem vorangehenden Unterstrich ersetzt.
 
 Ein Beispiel:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 UDO:     !node LaTeX-Einführung Teil 1
 WinHelp: #{footnote # LaTeX_2DEinf_5C_27FChrung_Teil_1}
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Erläuterungen:
 
@@ -127,7 +120,7 @@ Erläuterungen:
 !item Das Minuszeichen entspricht ASCII ""0x2D"", daher wird es durch
 ""_2D"" ersetzt.
 
-!item Das ""ü"" in Einführung lautet in RTF-Schreibweise
+!item Das ""ü"" in ""Einführung"" lautet in RTF-Schreibweise
 ""(!code [\'FC])."" ""\"" entspricht ""0x5C"", wird also durch ""_5C""
 ersetzt. ""'"" entspricht ""0x27"", wird also durch ""_27"" ersetzt.
 
@@ -142,19 +135,16 @@ ziemlich unwahrscheinlich wird. Würde aus dem ""ü"" nur ""FC""
 gemacht, wären Probleme vorprogrammiert.
 
 !item [Warum werden Tabellen nicht zentriert?]
-
 Entweder ist dies wirklich nicht möglich, Tabellen zentriert
 auszugeben, oder aber ich habe bei meiner viertägigen Suche die
 entscheidende Möglichkeit übersehen.
 
 !item [Warum werden in Tabellen keine Linien angezeigt?]
-
 Die Tabellenfunktionen von WinHelp sind ziemlich mager. So ist es
 unmöglich, Linien frei in einer Tabelle zu plazieren. Es ist nur
 möglich, jede Tabellenzelle mit oder ohne Rahmen darzustellen.
 
 !item [Warum sind die Einrückungen bei Listen und Tabellen so groß?]
-
 UDO kennt die Zeichenbreiten der benutzten Zeichensätze nicht. Daher
 benutzt es einen konstanten Wert für jedes Zeichen. Damit ist die
 Einrückung auch bei kursiver fetter Großschrift passend, bei reiner
@@ -163,7 +153,6 @@ Tabellenspalten etwas zu groß, was jedoch eher zu verschmerzen ist, als
 eine zu geringe Einrückung oder Spaltenbreite.
 
 !item [Wie kann ich DOS-Grafikzeichen darstellen?]
-
 Leider gar nicht.
 
 WinHelp weigert sich, die Fonts ""Terminal"" und ""MS LineDraw"" zur
@@ -176,7 +165,6 @@ UDO ersetzt daher DOS-Grafikzeichen durch die ASCII-Zeichen ""+"",
 darzustellen.
 
 !item [Warum sollte ich die Quelltexte mit einem Windows-Editor schreiben?]
-
 Sie können die Laufzeit von UDO positiv beinflussen, wenn Sie
 Quelltexte für eine Windows-Hilfe gleich im Windows-Zeichensatz
 schreiben. UDO braucht in dem Falle keine aufwendige
@@ -187,7 +175,6 @@ UDO anzuzeigen, dass die Texte nicht im DOS-Zeichensatz erstellt
 wurden.
 
 !item [Warum sollte ich die WinHelp-Dateien komprimieren?]
-
 Mit den Schaltern (!KW [win_medium_compression]) und (!KW [win_high_compression])
 sorgen Sie dafür, dass der Help-Compiler die WinHelp-Datei komprimiert.
 Dadurch können Sie die Größe der Datei bis zu 50~% verringern, wobei

@@ -19,6 +19,7 @@
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -47,28 +48,28 @@ another itemize environment.
 
 This short example shows how to write a simple itemize environment:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)itemize1.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. will be printed this way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)itemize1.ui
-!end_quote
+(!EXAMPLE_END)
 
 And this example, where an itemize environment is used inside another
 one !..
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)itemize2.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. will be printed this way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)itemize2.ui
-!end_quote
+(!EXAMPLE_END)
 
 !smallskip
 
@@ -90,27 +91,27 @@ uses (!KW [short]):
 
 Without (!KW [short])!..
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)itemize3.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. will be displayed this way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)itemize3.ui
-!end_quote
+(!EXAMPLE_END)
 
 With (!KW [short])!..
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)itemize4.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. will be displayed this way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)itemize4.ui
-!end_quote
+(!EXAMPLE_END)
 
 If you can't see any difference the destination format doesn't allow it to
 suppress the item separation.
@@ -150,28 +151,28 @@ another itemize environment.
 
 This short example shows how to write a simple itemize environment:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)enum1.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. will be displayed this way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)enum1.ui
-!end_quote
+(!EXAMPLE_END)
 
 In the following example the enumerate environment is used twice and it will
 be compressed because of the usage of (!KW [short]):
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)enum2.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. becomes:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)enum2.ui
-!end_quote
+(!EXAMPLE_END)
 
 (!HINTS)
 
@@ -210,28 +211,28 @@ command inside brackets and will be displayed with bold text.
 The description environment can be used inside other (description)
 environments. This example!..
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)descript1.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. will be displayed this way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)descript1.ui
-!end_quote
+(!EXAMPLE_END)
 
 In this example the description environment is used inside another one and
 the (!KW [short]) is used, too:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)descript2.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. becomes:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)descript2.ui
-!end_quote
+(!EXAMPLE_END)
 
 (!HINTS)
 
@@ -276,29 +277,29 @@ You can use the xlist environment inside other (xlist) environments, too.
 
 This short example!..
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)xlist1.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. will be displayed this way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)xlist1.ui
-!end_quote
+(!EXAMPLE_END)
 
 The command (!KW [short]) can also be used for xlist environments. To get
 a compressed list just add (!KW [short]) at the end of the line that
 contains (!KW [begin_xlist]). Once more a short example:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)xlist2.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. will be displayed this way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)xlist2.ui
-!end_quote
+(!EXAMPLE_END)
 
 
 !label blist environment
@@ -328,15 +329,15 @@ displayed in typewritered text. A tlist environment will be started with
 
 The following example shall demonstrate the results:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)xlist3.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. will be displayed this way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)xlist3.ui
-!end_quote
+(!EXAMPLE_END)
 
 !smallskip
 
@@ -393,15 +394,15 @@ active one text will be printed centered.
 If the following example isn't centered the current documentation format
 doesn't allow it to use centered text.
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)center.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. will be printed in this way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)center.ui
-!end_quote
+(!EXAMPLE_END)
 
 You see that UDO layouts paragraphs of a center environment, too. To insert
 a manual line break use the (!KKW [nl]) command.
@@ -427,15 +428,15 @@ active one text will be printed right justified.
 If the following example isn't printed right justified the current
 documentation format doesn't allow it to use right justified text.
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)flushright.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. will be printed in this way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)flushright.ui
-!end_quote
+(!EXAMPLE_END)
 
 You see that UDO layouts paragraphs of a flushright environment, too. To
 insert a manual line break use the (!KKW [nl]) command.
@@ -465,15 +466,15 @@ active one text will be printed without justification.
 
 This short example!..
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)flushleft.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. will be printed in this way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)flushleft.ui
-!end_quote
+(!EXAMPLE_END)
 
 You see that UDO layouts paragraphs of a flushleft environment, too. To
 insert a manual line break use the (!KKW [nl]) command.
@@ -494,15 +495,15 @@ other environments.
 This environment is useful to emphasize passages. This effect is used in the
 following example:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)quote.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. becomes:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)quote.ui
-!end_quote
+(!EXAMPLE_END)
 
 (!HINT)
 
@@ -644,15 +645,15 @@ could read two blanks.
 
 This example!..
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)footnotes.ui
-!end_quote
+(!EXAMPLE_END)
 
-wird!..
+becomes!..
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)footnotes.ui
-!end_quote
+(!EXAMPLE_END)
 
 Footnotes are supported by these formats:
 
@@ -727,7 +728,7 @@ for sure that you need some knowledge about the destination forma to do
 this. The following example shows how to use ghosted text which is available
 for the ST-Guide:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !ifdest [stg]
   !define G @{G}
@@ -739,7 +740,7 @@ for the ST-Guide:
 
 Normal and (!G)ghosted(!g).
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !end_node # Text styles
 
@@ -835,7 +836,7 @@ to be the only command of this line.
 Here you will see a short example that demonstrates the usage of the upper
 described commands:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !table_caption Tables with UDO
 !begin_table [|l|c|r|] !hline
@@ -844,7 +845,7 @@ lower left cell !! lower cell !! lower right cell
 !hline
 !end_table
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 This example prints a table with two rows and three columns. The first
 column is left justified, the second columns is centred and the third
@@ -925,9 +926,9 @@ a verbatim environment inside a quote environment.
 
 A small example for a C source code with UDO:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)csource.u
-!end_quote
+(!EXAMPLE_END)
 
 Another possibility to include source code
 is offered by the command (!KW [sinclude]).

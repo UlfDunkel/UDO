@@ -16,6 +16,7 @@
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 08: quotation changed
 #   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -25,19 +26,16 @@
 !begin_description
 
 !item [How does UDO create the (!LaTeX) preamble?] ~
-
 UDO knows which language and which document style you use. Furthermore UDO
 knows if you are using indices or not. So UDO knows enough to create the
 (!LaTeX) preamble on its own.
 
 !item [How can I make files for (!LaTeXe)?] ~
-
 By default UDO saves files for (!LaTeX) 2.09. If you use the switch
 (!KW [tex_2e]) inside the preamble UDO will save a preamble and other
 special commands for (!LaTeXe).
 
 !item [I want to use a userdefined preamble!?] ~
-
 In contrast to the previous UDO version UDO Release 6 will save a (!LaTeX)
 preamble automatically for (!LaTeX)~2.09 or (!LaTeXe).
 
@@ -50,12 +48,11 @@ the UDO source file with (!KW [raw] [[tex!!]]) or a raw environment.
 
 The following example shows how you can do this:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)latex/preamble.u
-!end_quote
+(!EXAMPLE_END)
 
 !item [How can I use (!LaTeX) formulas inside the text?] ~
-
 Use a raw environment for complete paragraphs or definitions for floating
 text. An example:
 
@@ -72,7 +69,6 @@ The first binomial theorem: (!ab2)
 !autoref [on]
 
 !item [How does UDO translate special chars in indices?] ~
-
 Special characters are translated especially for (!file [makeindex]).
 It's not necessary to adjust the UDO-generated (!LaTeX) files.
 

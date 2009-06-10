@@ -18,6 +18,7 @@
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 10: using macro (!file [])
 #
 ################################################################################
 
@@ -31,14 +32,13 @@ Hypertext umgewandelt werden, welchen man sich mit ""Info"" anzeigen
 kann.
 
 UDO erzeugt auf Systemen, auf denen nur ein 8+3-Dateisystem zur
-Verfügung steht, die Dateiendung .tex. Stehen lange Dateinamen zur
-Verfügung, wird .texi benutzt.
+Verfügung steht, die Dateiendung (!file [.tex]). Stehen lange Dateinamen zur
+Verfügung, wird (!file [.texi]) benutzt.
 
 !begin_description
 
 !item [Warum werden bei Texinfo die Kapitelnamen verändert?]
-
-Makeinfo oder Info bekommen Probleme, falls im Namen eines Kapitels
+(!file [Makeinfo]) oder (!file [Info]) bekommen Probleme, falls im Namen eines Kapitels
 Sonderzeichen wie Klammern, Kommata oder (Doppel-)Punkte auftauchen.
 UDO entfernt daher diese Sonderzeichen. Falls ein Kapitelname nur
 Sonderzeichen enthält, werden die Zeichen des Namens in kodierter
@@ -48,7 +48,6 @@ Formatiert man die Texinfo-Datei mit (!TeX), tauchen diese
 Sonderzeichen in den Kapitelüberschiften selbstverständlich auf.
 
 !item [Warum werden Umgebungen nicht ""komprimiert"" dargestellt?]
-
 Der Parameter (!KW [short]) kann bei Texinfo nicht funktionieren, da es
 bei Texinfo nicht möglich ist, die Zwischenräume in Umgebungen zu
 unterdrücken.
