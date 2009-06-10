@@ -17,6 +17,7 @@
 #   fd  Jun 08: text reviewed
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 

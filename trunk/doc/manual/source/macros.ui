@@ -46,8 +46,12 @@
 !define exclam !(!1)
 !macro  Exclam !
 
+# paths, file names, extensions, etc.
+!macro  file (!red)(!B)(!I)(!T)(!1)(!t)(!i)(!b)(!coloff)
+
 # command parameters without link
 !macro  code (!B)(!T)(!1)(!t)(!b)
+!macro  verb (!V)(!1)(!v)
 
 # command parameters without leading !
 !macro  KP (!B)(!T)(!link [(!1) (!2)][(!1)])(!t)(!b)
@@ -62,13 +66,15 @@
 !macro  KKKW (!B)(!T)(!link [(!(!1)!)...(!(!2)!)] [(!(!1)!)...(!(!2)!)])(!t)(!b)
 !macro  KK1  (!B)(!T)(!link [((!Exclam)(!1)!)] [((!Exclam)/(!1)!)])(!t)(!b)
 
-# ???
+# unlinked command word with leading !
 !macro  kw   !(!1)
-
-# ???
 !define k1   !(!1)
+
+# unlinked command word with round brackets and leading !
 !define kkw  (!/(!1))
 !define kkkw (!/(!1))...(!/(!2))
+
+# unlinked kommand word with round brackets and without leading !
 !define kk1  (!(!1))
 
 

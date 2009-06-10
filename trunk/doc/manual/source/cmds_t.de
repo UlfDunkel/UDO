@@ -21,6 +21,9 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: CHAR macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -98,10 +101,10 @@ Schriftarten, (!link [Textgestaltung] [Textgestaltung])
 
 !item [(!DESCRIPTION)]
 Dieser Platzhalter wird bei der Umwandlung ins
-(!LaTeX)-Format in ""(!V)\TeX{}(!v)"", ansonsten in ""TeX"" umgewandelt.
+(!LaTeX)-Format in (!code [\TeX{}]), ansonsten in ""TeX"" umgewandelt.
 
 !item [(!EXAMPLE)]
-Aus (!T)(!/TeX)(!t) wird (!TeX).
+Aus (!code [(!/TeX!)]) wird (!TeX).
 
 !item [(!SEEALSO)]
 (!KKW [LaTeX]), (!KKW [LaTeXe]), Vordefinierte Makros
@@ -409,7 +412,7 @@ UDO erzeugt bei der Umwandlung ins (!LaTeX)-Format
 !item [(!DESCRIPTION)]
 UDO erzeugt bei der Umwandlung ins (!LaTeX)-Format
 spezielle (!LaTeXe)-Kommandos, wie einen Vorspann für
-(!LaTeXe) oder ""(!V)\textbf{!..}(!v)"" anstelle von ""(!V){\bf~!..}(!v)""
+(!LaTeXe) oder (!code [\textbf{!..}]) anstelle von (!code [{\bf~!..}])
 bei der Umwandlung von (!KK1 [B]).
 
 !item [(!SEEALSO)]
@@ -610,7 +613,7 @@ Verbatim-Zeichen für (!LaTeX) setzen (nur (!TeX))
 
 !item [(!DESCRIPTION)]
 ""(!CHAR)"" wird als Klammerungszeichen für den
-(!LaTeX)-Befehl ""(!V)\verb(!v)"" verwendet. Bei der nächsten
+(!LaTeX)-Befehl (!code [\verb]) verwendet. Bei der nächsten
 Umwandlung von (!KK1 [V]) und (!KK1 [v]) wird dann ""(!CHAR)""
 benutzt. Als Standardzeichen benutzt UDO ""+"".
 
@@ -669,10 +672,10 @@ Dokumenttitel definieren.
 Dieser Platzhalter wird durch das Trademark-Symbol
 ersetzt, sofern es in dem jeweiligen Zeichensatz
 vorhanden ist. Ist es das nicht, ersetzt UDO den
-Platzhalter durch ""(!T)trademark(!t)"".
+Platzhalter durch ""(!code [trademark])"".
 
 !item [(!EXAMPLE)]
-Aus (!T)(!/tm)(!t) wird (!tm).
+Aus (!code [(!/tm!)]) wird (!tm).
 
 !item [(!EXISTSSINCE)] Version 6.5.8
 
@@ -760,7 +763,7 @@ Systemdatum in langer Schreibweise ausgeben.
 Dieser Platzhalter wird durch das bei der Umwandlung aktuelle Systemdatum in langer Form ersetzt.
 
 !item [(!EXAMPLE)]
-Aus (!T)(!/today)(!t) wird (!today).
+Aus (!code [(!/today!)]) wird (!today).
 
 !item [(!SEEALSO)]
 (!KKW [short_today]), (!KW [language]), Vordefinierte Makros
@@ -784,7 +787,7 @@ Link auf Seitenanfang erzeugen (nur HTML und HTML-Help).
 
 !item [(!DESCRIPTION)]
 UDO sichert für HTML und HTML-Help eine Datei namens
-""(!V)udo_tp.gif(!v)"". Mit diesem Kommando kann man in sein Werk die
+(!file [udo_tp.gif]). Mit diesem Kommando kann man in sein Werk die
 Grafik einbinden. Zugleich wird ein Link auf den Seitenanfang erzeugt.
 
 !end_xlist

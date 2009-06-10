@@ -21,6 +21,7 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -72,7 +73,7 @@ Symbol setzen.
 Mit diesem Kommando können Sie Symbole in einem
 Quelltext setzen, die man durch die Abfrage-Kommandos
 (!KW [ifset]) und (!KW [if]) testen kann. Symbole lassen sich auch
-durch die Option (!V)-D(!v) setzen. Mit dem Befehl (!KW [unset])
+durch die Option (!code [-D]) setzen. Mit dem Befehl (!KW [unset])
 kann man gesetzte Symbole wieder löschen. (!KW [set]) können
 Sie überall im Quelltext benutzen.
 
@@ -162,7 +163,7 @@ Dieser Platzhalter wird durch das bei der Umwandlung
 aktuelle Systemdatum in kurzer Form ersetzt.
 
 !item [(!EXAMPLE)]
-Aus (!T)(!/short_today)(!t) wird (!short_today)
+Aus (!code [(!/short_today!)]) wird (!short_today)
 
 !item [(!SEEALSO)]
 (!KKW [today]), (!KW [language]), Vordefinierte Makros
@@ -251,7 +252,7 @@ ausgegeben werden, wenn ein grober rechter
 Flatterrand erzeugt wird oder bei Benutzung von
 Blocksatz zuviele Leerzeichen in eine Zeile eingefügt
 werden mussten. Bei der Umwandlung ins (!LaTeX)-Format
-erfolgt (!B)keine(!b) Umsetzung in ""(!V)\sloppy(!v)""!
+erfolgt (!B)keine(!b) Umsetzung in (!code [\sloppy])!
 
 !item [(!SEEALSO)]
 (!KW [fussy]), (!link [Fehlermeldungen] [Fehlermeldungen]), (!link [Silbentrennung] [Silbentrennung])
@@ -278,7 +279,7 @@ Dieser Befehl sorgt für die Ausgabe von einer
 zusätzlichen Leerzeile und dient dazu, Absätze
 deutlicher voneinander abzuheben. Bei der Umwandlung
 ins (!LaTeX)-Format wird keine Leerzeile sondern
-""(!V)\smallskip(!v)"" ausgegeben.
+(!code [\smallskip]) ausgegeben.
 
 !item [(!SEEALSO)]
 (!KW [medskip]), (!KW [bigskip])

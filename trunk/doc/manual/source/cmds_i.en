@@ -23,6 +23,9 @@
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 09: LINK macro introduced
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -381,10 +384,10 @@ Query symbol.
 
 !item [(!DESCRIPTION)]
 With this command you can test if a symbol was (!B)not(!b) set with
-the command line option (!T)-D(!t) or with (!KW [set]). If
-(!T)(!TEXT)(!t) wasn't set UDO will convert all lines bewteen
+the command line option (!code [-D]) or with (!KW [set]). If
+(!code [(!TEXT)]) wasn't set UDO will convert all lines bewteen
 (!KW [ifnset]) and (!KW [else]) or (!KW [endif]). If
-(!T)(!TEXT)(!t) was set UDO will convert all lines between
+(!code [(!TEXT)]) was set UDO will convert all lines between
 (!KW [else]) and (!KW [endif]) if (!KW [else]) was used. The
 example shows how to test if the symbol ""british"" isn't set.
 
@@ -460,13 +463,13 @@ Query symbol.
 (!red)
 !item [(!DESCRIPTION)]
 Mit diesem Abfragebefehl können Sie testen, ob ein Symbol für die Umwandlung in der Kommandozeile mit
-der Option (!V)-D(!v) gesetzt wurde. Wurde ""(!TEXT)"" gesetzt, so werden alle folgenden Zeilen umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht. Andernfalls werden nur die Zeilen umgewandelt, die (!KW [else]) folgen, sofern die Abfrage einen else-Zweig besitzt. Das Beispiel zeigt, wie man abfragt, ob in der Kommandozeile (!V)-D deutsch(!v) benutzt wurde.
+der Option (!code [-D]) gesetzt wurde. Wurde ""(!TEXT)"" gesetzt, so werden alle folgenden Zeilen umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht. Andernfalls werden nur die Zeilen umgewandelt, die (!KW [else]) folgen, sofern die Abfrage einen else-Zweig besitzt. Das Beispiel zeigt, wie man abfragt, ob in der Kommandozeile (!code [-D deutsch]) benutzt wurde.
 (!coloff)
 !item [(!DESCRIPTION)]
 With this command you can test if a symbol was set with the command
-line option (!T)-D(!t) or with (!KW [set]). If (!T)(!TEXT)(!t) was
+line option (!code [-D]) or with (!KW [set]). If (!code [(!TEXT)]) was
 set UDO will convert all lines bewteen (!KW [ifset]) and
-(!KW [else]) or (!KW [endif]). If (!T)(!TEXT)(!t) wasn't set UDO
+(!KW [else]) or (!KW [endif]). If (!code [(!TEXT)]) wasn't set UDO
 will convert all lines between (!KW [else]) and (!KW [endif]) if
 (!KW [else]) was used. The example shows how to test if the symbol
 ""british"" was set.
@@ -808,8 +811,8 @@ Dieser Platzhalter ist eine Kombination der Platzhalter
 (!KKW [img]) und (!KKW [link]) und dient dazu,
 einen Querverweis durch eine Grafik zu ermöglichen.
 Dies ist momentan nur beim WinHelp- und HTML-Format
-möglich. Im Beispiel wird das Bild (!V)disk.bmp(!v) bzw.
-(!V)disk.gif(!v) zur Darstellung des Links benutzt, das
+möglich. Im Beispiel wird das Bild (!file [disk.bmp]) bzw.
+(!file [disk.gif]) zur Darstellung des Links benutzt, das
 Sprungziel lautet ""Download"". Bei HTML wird als
 Alternativtext ""UDO downloaden"" ausgegeben. Bei allen
 anderen Formaten wird lediglich ""UDO downloaden"" ausgegeben.
@@ -818,7 +821,7 @@ anderen Formaten wird lediglich ""UDO downloaden"" ausgegeben.
 This placeholder is a combination of (!KKW [img]) and (!KKW [link]) and
 is useful to display an image right inside the text. If you click
 this image you will jump to another part of the document. The example
-shows how to display an image called (!V)disk.[bmp,gif](!v), the link
+shows how to display an image called (!file [disk.![bmp,gif!!]])), the link
 destination is ""Download"". In HTML ""download UDO"" will be used as
 the alternative text. In all other formats only ""download"" UDO will
 be dislayed.
@@ -925,9 +928,9 @@ Include image.
 Dieses Kommando erzeugt in der Ausgabedatei Befehle
 zur Einbindung des Bildes. Die Endung der Datei
 sollte nicht übergeben werden, da UDO dies selbst
-erledigt. UDO benutzt ""(!V).img(!v)"" beim ST-Guide, CS(!TeX) und
-Lindner-(!TeX), ""(!V).gif(!v)"" für HTML, ""(!V).msp(!v)"" oder ""(!V).pcx(!v)"" für
-em(!TeX) und ""(!V).bmp(!v)"" für WinHelp, RTF und IPF.
+erledigt. UDO benutzt (!file [.img]) beim ST-Guide, CS(!TeX) und
+Lindner-(!TeX), (!file [.gif]) für HTML, (!file [.msp]) oder (!file [.pcx]) für
+em(!TeX) und (!file [.bmp]) für WinHelp, RTF und IPF.
 Wird ""<titel>"" angegeben, so wird der Text als Bildunterschrift angegeben.
 # ToDo: folgender Text fehlt in engl. Übersetzung!!
 
@@ -939,9 +942,9 @@ Bilder erhält man demnach, wenn man das (!KW [image])-Kommando in einer center-U
 !item [(!DESCRIPTION)]
 A command to include an image is generated in the destination file,
 if it supports images. You shouldn't pass the suffix of the wanted
-image because UDO itself adds the right one. It will be (!V).img(!v)
-for the ST-Guide, CS(!TeX) and Lindner-(!TeX), (!V).gif(!v) for HTML,
-(!V).msp(!v) or (!V).pcx(!v) for em(!TeX) and (!V).bmp(!v) for
+image because UDO itself adds the right one. It will be (!file [.img])
+for the ST-Guide, CS(!TeX) and Lindner-(!TeX), (!file [.gif]) for HTML,
+(!file [.msp]) or (!file [.pcx]) for em(!TeX) and (!file [.bmp]) for
 Windows Help, RTF and IPF.
 If ""<caption>"" is used it will be output as the title of the image.
 
@@ -1066,12 +1069,12 @@ Output inline images.
 !item [(!DESCRIPTION)]
 Use this placeholder to use an image right inside the text of HTML or
 WinHelp. If another destination format will be used only ""(!TEXT)""
-will be  displayed. When converting to HTML (!T)file.gif(!t) will be used,
-when converting to WinHelp (!T)file.bmp(!t) will be used. UDO doesn't check
+will be  displayed. When converting to HTML, (!file [file.gif]) will be used,
+when converting to WinHelp (!file [file.bmp]) will be used. UDO doesn't check
 if this file exists.
 
 Since version 6.5.18, this command has been enhanced: (!nl)
-(!T)(!/img [(!FILE)] [(!TEXT) [(!TEXT)]])(!t) (!nl)
+(!code [(!/img [(!FILE)!] [(!TEXT) [(!TEXT)!]!]!)]) (!nl)
 This has effects only on HTML, HTML Apple Help and HTML-Help output.
 The second (!TEXT) will then be used for the attribute ""title"". If only one (!TEXT)
 exists, both attributes ('alt' and 'title') get the same text. Example:
@@ -1167,9 +1170,9 @@ Indexeintrag bzw. Schlüsselwort setzen.
 #Ausgabe-Formate
 (!red)
 !item [(!DESCRIPTION)]
-""(!TEXT)"" wird für (!LaTeX) als ""(!V)\index~{!..}(!v)"", für WinHelp
-als ""(!V)K{\footnote~K~!..}(!v)"", für RTF als ""(!V){\xe\v~!..}(!v)""
-und für den ST-Guide als ""(!V)@index~!..(!v)"" ausgegeben.
+""(!TEXT)"" wird für (!LaTeX) als (!code [\index~{!..}]), für WinHelp
+als (!code [K{\footnote~K~!..}]), für RTF als (!code [{\xe\v~!..}])
+und für den ST-Guide als (!code [@index~!..]) ausgegeben.
 ""(!TEXT)"" kommt damit bei (!LaTeX) und dem ST-Guide in den
 Index, bei WinHelp kann man im Suchen-Dialog nach
 diesem Schlüsselwort suchen und bekommt die Namen der
@@ -1177,9 +1180,9 @@ Kapitel aufgelistet, in denen (!KW [index]) benutzt wurde.
 ""(!TEXT)"" kann beliebig oft benutzt werden, auch in mehreren Kapiteln.
 (!coloff)
 !item [(!DESCRIPTION)]
-(!T)(!TEXT)(!t) will pe output as (!T)\index~{!..}(!t) for (!LaTeX),
-(!T)K{\footnote K !..}(!t) for WinHelp, (!T){\xe\v !..}(!t) for RTF
-and (!T)@index !..(!t) for ST-Guide. So, (!T)(!TEXT)(!t) appears in
+(!code [(!TEXT)]) will pe output as (!code [\index~{!..}]) for (!LaTeX),
+(!code [K{\footnote K !..}]) for WinHelp, (!code [{\xe\v !..}]) for RTF
+and (!code [@index !..]) for ST-Guide. So, (!code [(!TEXT)]) appears in
 the index of (!LaTeX) and ST-Guide. WinHelp allows  to search this
 word. You can use this command as many times as you like
 
@@ -1243,13 +1246,13 @@ umgewandelten Inhalt an der Stelle aus, an der dieses
 Kommando benutzt wurde. Im Gegensatz zu (!KW [include])
 sucht (!KW [input]) lediglich in
 dem Verzeichnis, welches durch die Umgebungsvariable
-(!V)$UDOINPUTPATH(!v) definiert ist.
+(!file [$UDOINPUTPATH]) definiert ist.
 (!coloff)
 !item [(!DESCRIPTION)]
 Opens the file named ""file"" and converts its contents.
 In contrast to (!KW [include]) this command
 only looks up the file in the directory
-defined by the environment variable (!V)$UDOINPUTPATH(!v).
+defined by the environment variable (!file [$UDOINPUTPATH]).
 
 !item [(!EXAMPLE)]
 (!T)!/input macros.ui(!t)

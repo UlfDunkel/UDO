@@ -18,6 +18,7 @@
 #   fd  Jun 08: text reviewed, xlist -> blist
 #   fd  Jun 09: platforms formatted in italic
 #   fd  Jun 09: codes re-sorted alphabetically, c + pascal listed separately
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -75,7 +76,7 @@
 
 !item [info]
       GNU Texinfo (!nl)
-      for making online documentations, started with (!T)info 'command'(!t) (!nl)
+      for making online documentations, started with (!code [info 'command']) (!nl)
       (!I)Linux, MiNTNet(!i)
 
 !item [ipf]

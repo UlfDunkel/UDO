@@ -18,6 +18,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -41,7 +42,7 @@ Klartext ausgeben.
 
 !item [(!DESCRIPTION)]
 ""(!TEXT)"" wird als Klartext dargestellt, falls möglich.
-Für (!LaTeX) wird ""(!V)\verb+(!TEXT)+'(!v)"" ausgegeben, bei allen
+Für (!LaTeX) wird (!code [\verb+(!TEXT)+']) ausgegeben, bei allen
 anderen Formaten erfolgt die gleiche Ausgabe wie bei
 (!KKKW [T] [t]).
 
@@ -101,8 +102,8 @@ Mit diesem Schalter können Sie festlegen, in welcher
 Schriftgröße Text erscheinen soll, der in einer
 verbatim-Umgebung steht. Der Schalter kann überall im
 Quelltext verwendet werden. Die kleinste Schriftgröße
-wird mit ""(!V)tiny(!v)"", die größte mit ""(!V)huge(!v)"" gesetzt. Die
-Standardgröße für verbatim-Umgebungen ist ""(!V)normal(!v)"".
+wird mit (!code [tiny]), die größte mit (!code [huge]) gesetzt. Die
+Standardgröße für verbatim-Umgebungen ist (!code [normal]).
 
 !item [(!EXAMPLE)]
 (!T)!/verbatimsize [small](!t)

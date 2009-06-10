@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -67,8 +68,8 @@ Textverarbeitung.
 !item [Die Anführungszeichen werden falsch dargestellt?]
 
 UDO benutzt zur Darstellung der doppelten Anführungszeichen und
-Apostrophe die RTF-Befehle (!V)\lquote(!v), (!V)\rquote(!v), (!V)\rdblquote(!v) und
-(!V)\ldblquote(!v). Die Textverarbeitung ist für die Umsetzung dieser gebräuchlichen RTF-Befehle in die korrekten Zeichen zuständig.
+Apostrophe die RTF-Befehle (!code [\lquote]), (!code [\rquote]), (!code [\rdblquote]) und
+(!code [\ldblquote]). Die Textverarbeitung ist für die Umsetzung dieser gebräuchlichen RTF-Befehle in die korrekten Zeichen zuständig.
 
 Falls Ihre Textverarbeitung diese Befehle nicht kennt, können
 Sie die Benutzung dieser Befehle bei der Konvertierung durch den
@@ -87,7 +88,7 @@ bemängelt sogar korrekte RTF-Tags.
 
 !item [Die Indizes werden nicht von StarWriter 3.0 importiert!?]
 
-StarWriter 3.0 versteht das RTF-Tag (!V)\xe(!v) nicht, welches für das
+StarWriter 3.0 versteht das RTF-Tag (!code [\xe]) nicht, welches für das
 Einbauen von Indizes zuständig ist.
 
 !item [Lotus WordPro plaziert Kapitelnummern außerhalb des Textrahmens!?]

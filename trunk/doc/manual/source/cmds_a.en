@@ -18,6 +18,7 @@
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -129,7 +130,7 @@ oder ein Kapitel verwendet werden.
 !item [(!DESCRIPTION)]
 ""(!TEXT)"" is used as a secondary name of a chapter. UDO references
 an alias like a label or node name. You can use (!I)!/alias(!i)
-inside a chapter more than once. But you should use (!T)(!TEXT)(!t)
+inside a chapter more than once. But you should use (!code [(!TEXT)])
 only once.
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.43
@@ -157,7 +158,7 @@ Output the (!alpha) symbol.
 !item [(!DESCRIPTION)]
 This placeholder will be replaced by the alpha symbol if
 the destination format supports it. If it doesn't UDO will replace
-this placeholder by ""(!T)alpha(!t)"".
+this placeholder by ""(!code [alpha])"".
 
 !item [(!EXAMPLE)]
 (!T)(!/alpha)(!t) becomes (!alpha).
@@ -326,14 +327,14 @@ Turn automatic referencing on/off.
 
 (!red)
 !item [(!DESCRIPTION)]
-Dieser Befehl schaltet die automatische Referenzierung ein ((!T)[on](!t)) oder aus ((!T)[off](!t)). Beim Start der Konvertierung ist die automatische Generierung von
+Dieser Befehl schaltet die automatische Referenzierung ein ((!code [[on!]])) oder aus ((!code [[off!]])). Beim Start der Konvertierung ist die automatische Generierung von
 Querverweisen aktiviert. Bei der Umwandlung ins ST-Guide-Format werden die Befehle in @autorefon bzw.
 @autorefoff umgewandelt.
 (!coloff)
 !item [(!DESCRIPTION)]
 Switches on or off automatic references. When UDO starts it will
 insert references automatically by default. For the ST-Guide UDO
-outputs (!T)@autorefon(!t) or (!T)@autorefoff(!t).
+outputs (!code [@autorefon]) or (!code [@autorefoff]).
 
 !item [(!EXAMPLE)]
 (!T)!/autoref [off](!t)

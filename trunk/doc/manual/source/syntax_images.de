@@ -18,6 +18,9 @@
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -71,8 +74,8 @@ Vorspann das Kommando (!KW [tex_tetex]) gesetzt werden.
 
 Beispiel: (!KW [image]) tiger Ein Tiger
 
-UDO öffnet die Datei (!T)tiger.img(!t) und ermittelt die Ausmaße des Bildes,
-erzeugt in der Ausgabedatei das ST-Guide-Kommando (!T)@limage(!t) und fügt dort
+UDO öffnet die Datei (!file [tiger.img]) und ermittelt die Ausmaße des Bildes,
+erzeugt in der Ausgabedatei das ST-Guide-Kommando (!code [@limage]) und fügt dort
 einen Wert ein, um den das Bild eingerückt werden soll. Dieser Wert
 wird ausgehend von der Breite eines Zeichens aus dem
 Standard-10pt-Systemfont berechnet.
@@ -98,8 +101,8 @@ spezielles Lindner-(!TeX)-Makro zur Einbindung des Bildes erzeugt werden
 soll.
 
 UDO macht das dem Lindner-(!TeX) beiliegende Zusatzprogramm 
-(!T)IMGTOTEX(!t) überflüssig! UDO enthält alle Aufgaben, für die sonst
-(!T)IMGTOTEX(!t) zuständig ist, nämlich das Eintragen bestimmter
+(!file [IMGTOTEX]) überflüssig! UDO enthält alle Aufgaben, für die sonst
+(!file [IMGTOTEX]) zuständig ist, nämlich das Eintragen bestimmter
 Auflösungswerte in den Header des jeweiligen GEM-Images. Ein Beispiel:
 
 !index (!kw [tex_dpi])
@@ -110,7 +113,7 @@ Auflösungswerte in den Header des jeweiligen GEM-Images. Ein Beispiel:
 !end_verbatim
 !end_quote
 
-UDO liest zunächst den Header der Datei (!V)tiger.img(!v) ein, ermittelt daraus
+UDO liest zunächst den Header der Datei (!file [tiger.img]) ein, ermittelt daraus
 die Ausmaße des Bildes und passt den Header an 100~dpi an, was für die
 spätere Ausgabe via DVI-Treibern wichtig ist. In der Zieldatei wird nun
 ein (!TeX)-Makro mit Spezialbefehlen erzeugt, die die Einbindung eines
@@ -152,15 +155,15 @@ Um MSP-Bilder in einer em(!TeX)-Datei einzubinden, müssen Sie im Vorspann den
 Befehl (!KW [tex_emtex]) angeben sowie die Auflösung des jeweiligen
 Ausgabegeräts mit (!KW [tex_dpi]) setzen.
 
-Die Einbindung erfolgt gemäß der Beschreibung aus (!V)dvidrv.doc(!v) vom em(!TeX).
+Die Einbindung erfolgt gemäß der Beschreibung aus (!file [dvidrv.doc]) vom em(!TeX).
 
 !index Fehlermeldung
 UDO versucht bei der Angabe von (!KW [image][tiger Ein Tiger]) die
-Datei (!V)tiger.msp(!v) zu öffnen und die Ausmaße auszulesen. Schlägt dies
+Datei (!file [tiger.msp]) zu öffnen und die Ausmaße auszulesen. Schlägt dies
 fehl, wird eine Fehlermeldung ausgegeben und stattdessen versucht,
-(!V)tiger.pcx(!v) zu lesen.
+(!file [tiger.pcx]) zu lesen.
 
-Im Beispiel würde UDO folgendes Makro erzeugen ((!V)<w>(!v) und (!V)<h>(!v) werden
+Im Beispiel würde UDO folgendes Makro erzeugen ((!code [<w>]) und (!code [<h>]) werden
 dabei durch die Ausmaße des Bildes ersetzt):
 
 !begin_quote
@@ -193,16 +196,16 @@ Um PCX-Bilder in einer em(!TeX)-Datei einzubinden, müssen Sie im Vorspann den
 Befehl (!KW [tex_emtex]) angeben sowie die Auflösung des jeweiligen
 Ausgabegeräts mit (!KW [tex_dpi]) setzen.
 
-Die Einbindung erfolgt gemäß der Beschreibung aus (!V)dvidrv.doc(!v) vom
+Die Einbindung erfolgt gemäß der Beschreibung aus (!file [dvidrv.doc]) vom
 em(!TeX).
 
 UDO versucht bei der Angabe von (!KW [image][tiger Ein Tiger])
-zunächst die Datei (!V)tiger.msp(!v) (nicht (!V).pcx(!v)!) einzubinden. Erst wenn
+zunächst die Datei (!file [tiger.msp]) (nicht (!file [.pcx])!) einzubinden. Erst wenn
 diese Datei nicht existiert, versucht UDO die Ausmaße der Datei
-(!V)tiger.pcx(!v) zu ermitteln und ein entsprechendes em(!TeX)-Makro zu
+(!file [tiger.pcx]) zu ermitteln und ein entsprechendes em(!TeX)-Makro zu
 schreiben.
 
-Im Beispiel würde UDO folgendes Makro erzeugen ((!V)<w>(!v) und (!V)<h>(!v) werden
+Im Beispiel würde UDO folgendes Makro erzeugen ((!code [<w>]) und (!code [<h>]) werden
 dabei durch die Ausmaße des Bildes ersetzt):
 
 !begin_quote
@@ -290,7 +293,7 @@ vorliegt, stellen Sie dem im vorherigen Beispiel gezeigten
 !end_verbatim
 !end_quote
 
-Sollte die Grafik nicht tiger.jpg heißen, sondern tiger.jpeg, muss
+Sollte die Grafik nicht (!file [tiger.jpg]) heißen, sondern (!file [tiger.jpeg]), muss
 der Befehl entsprechend so lauten:
 
 !begin_quote

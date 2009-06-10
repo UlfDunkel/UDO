@@ -20,6 +20,7 @@
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -49,8 +50,7 @@ Anführungszeichen unterstützt.
 !begin_verbatim
 Echte ""Gänsefüßchen""
 
-Echte  Gänsefüßchen"
-      "
+Echte ,,Gänsefüßchen´´
 !end_verbatim
 !end_quote
 
@@ -129,10 +129,10 @@ Bei den anderen Formaten ersetzt UDO die Tilde durch folgende
 formatspezifische Zeichenfolgen, die den gleichen Zweck erfüllen:
 
 !begin_xlist [WinHelp:] !short
-!item [(!LaTeX):]   (!T)!~(!t)
-!item [HTML:]       (!T)&nbsp;(!t)
-!item [RTF:]        (!T)\!~(!t)
-!item [WinHelp:]    (!T)\!~(!t)
+!item [(!LaTeX):]   (!code [!~])
+!item [HTML:]       (!code [&nbsp;])
+!item [RTF:]        (!code [\!~])
+!item [WinHelp:]    (!code [\!~])
 !end_xlist
 
 Wenn Sie die Tilde selber ausgeben möchten, müssen Sie die Zeichenfolge (!KW [!~]) benutzen.
@@ -160,7 +160,7 @@ ersetzt.
 Mit (!KP [(---!)]) können Sie einen langen, mit (!KP [(--!)]) einen kurzen Gedankenstrich
 ausgeben. Wenn Sie drei Minuszeichen ausgeben möchten, müssen Sie
 im Quelltext (!KP [((---!)!)]) benutzen. Wenn Sie zwei Minuszeichen ausgeben
-möchten, müssen Sie im Quelltext (!KP [((--!)!)] ) benutzen.
+möchten, müssen Sie im Quelltext (!KP [((--!)!)]) benutzen.
 
 !end_node # Gedankenstriche
 
@@ -286,20 +286,22 @@ umgewandelt werden:
 !begin_table [|l|l|l|] !hline
 Platzhalter  !! x aus           !! Beispiel
 !hline
-(!/"x)       !! aeiosuyAEIOU    !! (!code [(!/"a)])  = (!"a)
-(!/'x)       !! aeiouyAEIOUY    !! (!code [(!/'e)])  = (!'e)
-(!/`x)       !! aeiouAEIOU      !! (!code [(!/`i)])  = (!`i)
-(!/^x)       !! aeiouAEIOU      !! (!code [(!/^o)])  = (!^o)
-(!/&x)       !! ae, oe, AE, OE  !! (!code [(!/&AE)]) = (!&AE)
-(!/!~x)      !! anoANO          !! (!code [(!/!~n)]) = (!~n)
-(!/,x)       !! cC              !! (!code [(!/,C)])  = (!,C)
-(!/.x)       !! aA              !! (!code [(!/.A)])  = (!.A)
-(!/_x)       !! ao              !! (!code [(!/_a)])  = (!_a)
-(!/\x)       !! oO              !! (!code [(!/\O)])  = (!\O)
+# YYY
+(!/"x)       !! aeiosuyAEIOU    !! (!code [(!/"a!)])  = (!"a)
+(!/'x)       !! aeiouyAEIOUY    !! (!code [(!/'e!)])  = (!'e)
+(!/`x)       !! aeiouAEIOU      !! (!code [(!/`i!)])  = (!`i)
+(!/^x)       !! aeiouAEIOU      !! (!code [(!/^o!)])  = (!^o)
+# YYY
+(!/&x)       !! ae, oe, AE, OE  !! (!code [(!/&AE!)]) = (!&AE)
+(!/!~x)      !! anoANO          !! (!code [(!/!~n!)]) = (!~n)
+(!/,x)       !! cC              !! (!code [(!/,C!)])  = (!,C)
+(!/.x)       !! aA              !! (!code [(!/.A!)])  = (!.A)
+(!/_x)       !! ao              !! (!code [(!/_a!)])  = (!_a)
+(!/\x)       !! oO              !! (!code [(!/\O!)])  = (!\O)
 !hline
 !end_table
 
-Das deutsche ""(!"s)"" wird durch den Platzhalter (!code [(!/"s)]) erzeugt. Kennt das
+Das deutsche ""(!"s)"" wird durch den Platzhalter (!code [(!/"s!)]) erzeugt. Kennt das
 Zielformat ein Zeichen nicht, wird das naheliegendste Zeichen
 benutzt, z.B. ""a"" statt ""(!^a)"".
 

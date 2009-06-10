@@ -17,6 +17,8 @@
 #   fd  Jun 09: file reviewed
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
 #
 ################################################################################
 
@@ -27,31 +29,31 @@ Es folgt eine Auflistung der Dateisuffixe, die Ihnen beim Umgang mit UDO über de
 
 #Ausgabe-Formate
 !begin_xlist [.htm(l):] !short
-!item [(!code [.1])]      Nroff
-!item [(!code [.c])]      C-Quelltext
-!item [(!code [.txt])]    ASCII-Format
-!item [(!code [.man])]    Manualpage-Format
-!item [(!code [.cmd])]    Kommandodatei für den Pure-C-Hilfe-Compiler
-!item [(!code [.hpj])]    Projektdatei für den WinHelp-Hypertext-Compiler (!T)HC.EXE(!t)
-!item [(!code [.htm(l!)])] HTML-Format
-!item [(!code [.lyx])]    LyX-Format
-!item [(!code [.pas])]    Pascal-Quelltext
-!item [(!code [.rtf])]    RTF bzw. WinHelp- oder QuickView-Quelltext
-!item [(!code [.scr])]    Pure-C-Help-Quelltext
-!item [(!code [.sgm(l!)])] Linuxdoc-SGML-Quelltext
-!item [(!code [.stg])]    ST-Guide-Quelltext
-!item [(!code [.txt])]    Turbo-Vision-Help-Quelltext
-!item [(!code [.tex])]    (!LaTeX)-Quelltext
-!item [(!code [.texi])]   Texinfo-Quelltext
+!item [(!file [.1])]      Nroff
+!item [(!file [.c])]      C-Quelltext
+!item [(!file [.txt])]    ASCII-Format
+!item [(!file [.man])]    Manualpage-Format
+!item [(!file [.cmd])]    Kommandodatei für den Pure-C-Hilfe-Compiler
+!item [(!file [.hpj])]    Projektdatei für den WinHelp-Hypertext-Compiler (!file [HC.EXE])
+!item [(!file [.htm(l!)])] HTML-Format
+!item [(!file [.lyx])]    LyX-Format
+!item [(!file [.pas])]    Pascal-Quelltext
+!item [(!file [.rtf])]    RTF bzw. WinHelp- oder QuickView-Quelltext
+!item [(!file [.scr])]    Pure-C-Help-Quelltext
+!item [(!file [.sgm(l!)])] Linuxdoc-SGML-Quelltext
+!item [(!file [.stg])]    ST-Guide-Quelltext
+!item [(!file [.txt])]    Turbo-Vision-Help-Quelltext
+!item [(!file [.tex])]    (!LaTeX)-Quelltext
+!item [(!file [.texi])]   Texinfo-Quelltext
 !end_xlist
 
-Dateien mit dem Suffix (!code [.ul?]) enthalten die Fehlermeldungen und
+Dateien mit dem Suffix (!file [.ul?]) enthalten die Fehlermeldungen und
 Informationen, die UDO während der Umwandlung erzeugt.
 
-Dateien mit dem Suffix (!code [.uh?]) enthalten die Trennvorschläge für das
+Dateien mit dem Suffix (!file [.uh?]) enthalten die Trennvorschläge für das
 ASCII-, ST-Guide- und Pure-C-Help-Format.
 
-Dateien mit dem Suffix (!code [.ut?]) enthalten den ""Include-Tree"", also den
+Dateien mit dem Suffix (!file [.ut?]) enthalten den ""Include-Tree"", also den
 logischen Aufbau aus Include-Dateien Ihres Quelltextes.
 
 Die folgenden Dateisuffixe werden auftauchen, wenn Sie die von UDO
@@ -59,11 +61,11 @@ erzeugten Dateien durch die formatzugehörigen Programmen (siehe
 Klammerinhalt) weiterbearbeiten:
 
 !begin_xlist [.www]
-!item [(!code [.err])] Protokolldatei des WinHelp-Compilers ((!T)HC.EXE(!t))
-!item [(!code [.h])]   C-Header-Datei für Turbo-Vision ((!T)TVHC.EXE(!t))
-!item [(!code [.hlp])] WinHelp-Datei ((!T)HC.EXE(!t)), Turbo-Vision-Help-Datei ((!T)TVHC.EXE(!t)), Pure-C-Help-Datei ((!T)HC.PRG(!t))
-!item [(!code [.hyp])] ST-Guide-Hypertext ((!T)HCP.TTP(!t))
-!item [(!code [.ref])] ST-Guide-Referenzdatei ((!T)HCP.TTP(!t))
+!item [(!file [.err])] Protokolldatei des WinHelp-Compilers ((!file [HC.EXE]))
+!item [(!file [.h])]   C-Header-Datei für Turbo-Vision ((!file [TVHC.EXE]))
+!item [(!file [.hlp])] WinHelp-Datei ((!file [HC.EXE])), Turbo-Vision-Help-Datei ((!file [TVHC.EXE])), Pure-C-Help-Datei ((!file [HC.PRG]))
+!item [(!file [.hyp])] ST-Guide-Hypertext ((!file [HCP.TTP]))
+!item [(!file [.ref])] ST-Guide-Referenzdatei ((!file [HCP.TTP]))
 !end_xlist
 
 !end_node # Erzeugte Dateien

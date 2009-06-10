@@ -15,6 +15,8 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -34,7 +36,7 @@ Microsoft Helpcompiler to get a Windows Help file.
 # ToDo: Text aktualisieren
 !item [Where can I get the Microsoft Helpcompiler?] ~
 
-You can download the Microsoft Helpcompiler (!V)HC31.EXE(!v) from
+You can download the Microsoft Helpcompiler (!file [HC31.EXE]) from
 Microsoft's FTP server (ftp.microsoft.com) free of charge.
 
 !item [Why doesn't want the HC to compile UDO's output?] ~
@@ -44,20 +46,20 @@ This can have two reasons:
 !begin_enumerate
 
 !item	The UDO source file contains errors. Please take a look at UDO's log
-file (suffix ""(!V).ulw(!v)"") and correct the errors you will find there.
+file (suffix (!file [.ulw])) and correct the errors you will find there.
 If the log file doesn't contain any error messages your source file may
 contain errors UDO hasn't detected.
 
 !item	The HC is working incorrectly. Take a look at the HC's error file
-(suffix ""(!V).err(!v)""). Unfortunately I can't tell you the sense of the
+(suffix (!file [.err])). Unfortunately I can't tell you the sense of the
 errors printed in the error file in most cases.
 
 !end_enumerate
 
-!item	[What is the file ""(!V).hpj(!v)"" good for?] ~
+!item	[What is the file (!file [.hpj]) good for?] ~
 
 When converting to Windows Help UDO will save an RTF file and a project file
-for the Microsoft Helpcompiler named ""(!V).hpj(!v)"". You have to start the
+for the Microsoft Helpcompiler named (!file [.hpj]). You have to start the
 HC by passing the name of this project file to get a Windows Help file.
 
 This project file contains several information e.g. the title of the help
@@ -114,21 +116,21 @@ Description:
 
 !begin_enumerate
 
-!item	The hexadecimal ASCII code of the dash is ""(!T)0x2D(!t)"". The dash
-will be replaced by ""(!T)_2D(!t)"".
+!item	The hexadecimal ASCII code of the dash is ""(!code [0x2D])"". The dash
+will be replaced by ""(!code [_2D])"".
 
 !item	The ""ü"" inside ""Einführung"" is printed in RTF files like
-""(!T)\'FC(!t)"". The ASCII code of the backslash (""\"") is
-""(!T)0x5C(!t)"", so the backslash will be replaced by ""(!T)_5C(!t)"". The
-ASCII code of ""(!T)'(!t)"" is ""(!T)0x27(!t)"", so the apostrophe will be
-replaced by ""(!T)_27(!t)"".
+""(!code [\'FC])"". The ASCII code of the backslash (""\"") is
+""(!code [0x5C])"", so the backslash will be replaced by ""(!code [_5C])"". The
+ASCII code of ""(!code ['])"" is ""(!code [0x27])"", so the apostrophe will be
+replaced by ""(!code [_27])"".
 
-!item	The blanks will be replaced by ""(!T)_(!t)""
+!item	The blanks will be replaced by ""(!code [_])""
 
 !end_enumerate
 
 Thus the single letter ""ü"" will be replaced by the really long string
-""(!T)_5C_27FC(!t)"" wird. Maybe you want to say that this is quite awkward
+""(!code [_5C_27FC])"" wird. Maybe you want to say that this is quite awkward
 but if UDO would simply replace the ""ü"" by ""FC"" problems would appear
 very soon. Using the upper way the chance that UDO creates a context string
 that is already used is very small.

@@ -22,6 +22,7 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: LINK macro introduced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -71,10 +72,10 @@ Abfrage des Ausgabeformates.
 
 !item [(!DESCRIPTION)]
 Dieser Platzhalter wird bei der Umwandlung ins
-(!LaTeX)-Format in ""(!V)\LaTeX{}(!v)"", ansonsten in ""(!V)LaTeX(!v)"" umgewandelt.
+(!LaTeX)-Format in (!code [\LaTeX{}]), ansonsten in (!code [LaTeX]) umgewandelt.
 
 !item [(!EXAMPLE)]
-Aus (!T)(!/LaTeX)(!t) wird (!LaTeX).
+Aus (!code [(!/LaTeX!)]) wird (!LaTeX).
 
 !item [(!SEEALSO)]
 (!KKW [TeX]), (!KKW [LaTeXe]), Vordefinierte Makros
@@ -98,10 +99,10 @@ Aus (!T)(!/LaTeX)(!t) wird (!LaTeX).
 
 !item [(!DESCRIPTION)]
 Dieser Platzhalter wird bei der Umwandlung ins
-(!LaTeX)-Format in ""(!V)\LaTeXe{}(!v)"", ansonsten in ""(!V)LaTeX2e(!v)"" umgewandelt.
+(!LaTeX)-Format in (!code [\LaTeXe{}]), ansonsten in (!code [LaTeX2e]) umgewandelt.
 
 !item [(!EXAMPLE)]
-Aus (!T)(!/LaTeXe)(!t) wird (!LaTeXe).
+Aus (!code [!/LaTeXe!)]) wird (!LaTeXe).
 
 !item [(!SEEALSO)]
 (!KKW [TeX]), (!KKW [LaTeX]), Vordefinierte Makros
@@ -239,7 +240,7 @@ Emoticon ausgeben.
 Dieser Platzhalter wird durch einen lachenden Smiley ersetzt, der in Schreibmaschinenschrift ausgegeben wird.
 
 !item [(!EXAMPLE)]
-Aus (!T)(!/laugh)(!t) wird (!laugh)
+Aus (!code [(!/laugh!)]) wird (!laugh)
 
 !item [(!SEEALSO)]
 (!KKW [grin]), Vordefinierte Makros
@@ -380,8 +381,8 @@ Mit diesem Schalter können Sie festlegen, in welcher
 Schriftgröße Text erscheinen soll, der in einer
 linedraw-Umgebung steht. Der Schalter kann überall im
 Quelltext verwendet werden. Die kleinste Schriftgröße
-wird mit ""(!V)tiny(!v)"", die größte mit ""(!V)huge(!v)"" gesetzt. Die
-Standardgröße für linedraw-Umgebungen ist ""(!V)normal(!v)"".
+wird mit (!code [tiny]), die größte mit (!code [huge]) gesetzt. Die
+Standardgröße für linedraw-Umgebungen ist (!code [normal]).
 
 !item [(!EXAMPLE)]
 (!T)!/linedrawsize [small](!t)

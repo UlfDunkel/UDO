@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 10: using macro (!file [])
 #
 ################################################################################
 
@@ -25,9 +26,9 @@ GNU Texinfo is used on many Unix systems to offer the user an online
 hypertext manual and a printed documentation that can be made with
 ""Makeinfo"" or plain (!TeX). Online manuals can be displayed with ""Info"".
 
-On systems with 8+3-filenames UDO saves files with the suffix (!V).tex(!v).
+On systems with 8+3-filenames UDO saves files with the suffix (!file [.tex]).
 If the operating systems supports long filenames UDO uses the suffix
-(!V).texi(!v) instead.
+(!file [.texi]) instead.
 
 !begin_description
 

@@ -15,6 +15,8 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from running.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -89,7 +91,7 @@ program that converts the (!LaTeX) files into a DVI file.
 
 !item	[Dest/ST-Guide:] If you choose this menu item UDO calls the
 ST-Guide and tells it to display the converted hypertext (source file
-name, suffix ""(!V).hyp(!v))"").
+name, suffix (!file [.hyp])).
 
 !end_tlist
 
@@ -157,23 +159,23 @@ described now.
 
 	!item	Save log file: Shall UDO save a log file that contains all
 	error messages, warning messages and additional information
-	(similar to the command line option (!V)(--)no-logfile(!v))?
+	(similar to the command line option (!code [(--!)no-logfile]))?
 
 	!item	Save hyphen file: Shall UDO save a hyphen file with
 	Hyphenation patterns
-	(similar to the command line option (!V)(--)no-hypfile(!v))?
+	(similar to the command line option (!code [(--!)no-hypfile]))?
 
 	!item	Save tree file: Shall UDO save a tree file where you can
 	see the include file structure of your documentation
-	(similar to the command line option (!V)(--)treefile(!v))?
+	(similar to the command line option (!code [(--!)treefile]))?
 
 	!item	Verbose mode: Shall UDO display the status during the
 	conversion
-	(similar to the command line option (!V)(--)verbose(!v))?
+	(similar to the command line option (!code [(--!)verbose]))?
 
 	!item	Suppress warnings: Shall UDO suppress warning messages in
 	the log file
-	(similar to the command line option (!V)(--)no-warnings(!v))?
+	(similar to the command line option (!code [(--!)no-warnings]))?
 
 	!end_itemize
 
@@ -218,8 +220,8 @@ Please select the destination format in the upper half.
 
 In the lower half you can choose the program. If this program isn't a
 GEM application you should check the button ""TOS program"". If it is
-a GEM application and it supports (!V)VA_START(!v) you should check
-the ""Supports (!V)VA_START(!v)"" button. These settings are only used
+a GEM application and it supports (!code [VA_START]) you should check
+the ""Supports (!code [VA_START]) button. These settings are only used
 if UDO starts the programs itself. Finally you can edit the parameters
 UDO shall use when calling the programs. You can use placeholders for
 the name of the current source file and destination file. Click the
@@ -230,7 +232,7 @@ the name of the current source file and destination file. Click the
 !begin_itemize
 
 !item	In first place UDO will look for an AV server. If
-(!V)AVSERVER(!v) is set inside the environment or Gemini or Thing are
+(!code [AVSERVER]) is set inside the environment or Gemini or Thing are
 running, UDO tells them to start the program.
 
 !item	If there's no AV server available UDO starts the programs
@@ -239,14 +241,14 @@ itself.
 	!begin_itemize
 
 	!item	If the program is an accessory the parameters will be
-	transferred via (!V)VA_START(!v).
+	transferred via (!code [VA_START]).
 
 	!item	If the program is already running and it supports
-	(!V)VA_START(!v), UDO will send a (!V)VA_START(!v) message to this
+	(!code [VA_START]), UDO will send a (!code [VA_START]) message to this
 	program.
 
 	!item	In all other cases UDO will start GEM applications with
-	(!V)shel_write()(!v) and TOS programs with (!V)Pexec()(!v).
+	(!code [shel_write()]) and TOS programs with (!file [Pexec()]).
 
 	!end_itemize
 
@@ -300,7 +302,7 @@ limitations of the shareware version will be disabled.
 
 The documentation of UDO can be displayed anytime by pressing the help key
 or clicking the help menu if you have installed the hypertext viewer
-Hyperion (written by Martin Osieka) and if the hypertext (!V)UDO.HYP(!v) is
+Hyperion (written by Martin Osieka) and if the hypertext (!file [UDO.HYP]) is
 installed in the guides folder of Hyperion.
 
 !end_ignore

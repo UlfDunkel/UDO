@@ -16,6 +16,7 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -129,7 +130,7 @@ Dieser Platzhalter wird durch einen grinsenden Smiley
 ersetzt, der in Schreibmaschinenschrift ausgegeben wird.
 
 !item [(!EXAMPLE)]
-Aus (!T)(!/grin)(!t) wird (!grin).
+Aus (!code [(!/grin!)]) wird (!grin).
 
 !item [(!SEEALSO)]
 (!KKW [laugh]), Vordefinierte Makros

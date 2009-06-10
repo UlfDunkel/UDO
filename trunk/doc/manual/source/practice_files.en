@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from working.ui)
+#   fd  Jun 10: using macro (!file [])
 #
 ################################################################################
 
@@ -29,7 +30,7 @@ Using UDO, you may see the follwing file suffixes:
 !item	[.c:]		C source code
 !item	[.cmd:]		command file for the Pure C help compiler
 !item	[.txt:]		ASCII
-!item	[.hpj:]		project file for the Microsoft Help Compiler (!V)HC.EXE(!v)
+!item	[.hpj:]		project file for the Microsoft Help Compiler (!file [HC.EXE])
 !item	[.htm(l):]	HTML
 !item	[.lyx:] 	LyX
 !item	[.man:]		Manualpage
@@ -44,26 +45,26 @@ Using UDO, you may see the follwing file suffixes:
 
 !end_xlist
 
-Files with the suffix (!V).ul?(!v) contain the error messages and warnings
+Files with the suffix (!file [.ul?]) contain the error messages and warnings
 UDO prints while converting the source file.
 
-Files with the suffix (!V).uh?(!v) contain the Hyphenation patterns UDO
+Files with the suffix (!file [.uh?]) contain the Hyphenation patterns UDO
 prints for ASCII, ST-Guide and Pure C Help.
 
-Files with the suffix (!V).ut?(!v) contain the ""include tree"".
+Files with the suffix (!file [.ut?]) contain the ""include tree"".
 
 The following suffixes appear if UDO saves a file that has to be converted
 with another software to get the final result:
 
 !begin_xlist [.www:]
 
-!item	[.err:]	log file of the Microsoft Help Compiler ((!V)HC.EXE(!v))
-!item	[.h:]	C header file for Turbo Vision ((!T)TVHC.EXE(!t))
-!item	[.hlp:]	Windows Help file ((!T)HC.EXE(!t)),
-				Turbo Vision Help file ((!T)TVHC.EXE(!t)),
-				Pure C Help file ((!T)HC.PRG(!t))
-!item	[.hyp:]	ST-Guide hypertext ((!T)HCP.TTP(!t))
-!item	[.ref:]	ST-Guide reference file ((!T)HCP.TTP(!t))
+!item	[.err:]	log file of the Microsoft Help Compiler ((!file [HC.EXE]))
+!item	[.h:]	C header file for Turbo Vision ((!file [TVHC.EXE]))
+!item	[.hlp:]	Windows Help file ((!file [HC.EXE])),
+				Turbo Vision Help file ((!file [TVHC.EXE])),
+				Pure C Help file ((!file [HC.PRG]))
+!item	[.hyp:]	ST-Guide hypertext ((!file [HCP.TTP]))
+!item	[.ref:]	ST-Guide reference file ((!file [HCP.TTP]))
 
 !end_xlist
 

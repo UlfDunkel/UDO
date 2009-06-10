@@ -15,6 +15,8 @@
 # 2009:
 #   fd  Jun 05: introduced (extracted from cmdline.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -42,10 +44,10 @@ Using the first method UDO prints the destination format to the standard
 output (STDOUT) and error messages to the standard error output (STDERR).
 Using the second method UDO writes the destination format to the
 (!U)destination file(!u) and error messages to a log file with the suffix
-(!V).ul?(!v).
+(!file [.ul?]).
 
-You have to pass single options to (!B)UDO(!b): (!V)-al(!v) isn't the same
-as (!V)-a -l(!v)!
+You have to pass single options to (!B)UDO(!b): (!code [-al]) isn't the same
+as (!code [-a -l])!
 
 The name of the source file has to be the last option.
 
@@ -100,7 +102,7 @@ operating systems that normally do not support them.
 
 !item [(--)ipf] The (!U)source file(!u) will be converted to OS/2 IPF.
 
-!item [-l, (--)no-logfile] When using the Option (!V)-o(!v) (!B)UDO(!b) doesn't save a log file.
+!item [-l, (--)no-logfile] When using the Option (!code [-o]) (!B)UDO(!b) doesn't save a log file.
 
 !item [(--)lyx] The (!U)source file(!u) will be converted to LyX.
 
@@ -118,8 +120,8 @@ operating systems that normally do not support them.
 
 !item [-o F, (--)outfile F]  (!B)UDO(!b) writes the output into the file named ""F"".
 # ergänzt 10.01.2004 - Ulrich Kretschmer
-With (!T)-o !(!t), the output filename will be the source filename with new extension
-(e.g. (!T)file.u(!t) becomes (!T)file.stg(!t)).
+With (!code [-o]), the output filename will be the source filename with new extension
+(e.g. (!file [file.u]) becomes (!file [file.stg])).
 
 !item [-p, (--)pchelp] The (!U)source file(!u) will be converted to Pure C Help.
 
@@ -135,7 +137,7 @@ Normal text becomes comment, the content of the sourcecode environment becomes C
 !item [-s, (--)stg] The (!U)source file(!u) will be converted to ST-Guide sourcecode.
 
 !item [(--)save-upr] When using this option (!B)UDO(!b) will save a
-file with the suffix (!V).upr(!v) with a list of all source files,
+file with the suffix (!file [.upr]) with a list of all source files,
 include files and generated files
 
 !item [-t, (--)tex] The (!U)source file(!u) will be converted to (!LaTeX).
@@ -143,7 +145,7 @@ include files and generated files
 !item [(--)test] When using this option (!B)UDO(!b) won't save a destination file.
 
 !item [(--)tree] When using this option (!B)UDO(!b) will save a file with the
-suffix (!V).ut?(!v). In this file you will see a tree with all
+suffix (!file [.ut?]). In this file you will see a tree with all
 files your source file includes.
 
 !item [-u, (--)udo] Generate one file in udo format containing all included source files. 
@@ -167,7 +169,7 @@ This allows to put all source files into one udo file.
 !item [-x, (--)linuxdoc] The (!U)source file(!u) will be converted to Linuxdoc-SGML.
 
 !item [-y, (--)no-hypfile] (!B)UDO(!b) doesn't save a file with Hyphenation hints when
-using the option (!V)-o(!v).
+using the option (!code [-o]).
 
 !end_tlist
 
@@ -182,14 +184,14 @@ using the option (!V)-o(!v).
 		error output.
 
 !item [udo (--)tex -o output.tex file.u]
-		Convert the source file ""(!V)file.u(!v)"" to (!LaTeX) and write the output
-		to the file named ""(!V)output.tex(!v)"". Warnings, error messages
+		Convert the source file (!file [file.u]) to (!LaTeX) and write the output
+		to the file named (!file [output.tex]). Warnings, error messages
 		and additional information will be written to the log file named
-		""(!V)output.ult(!v)"".
+		(!file [output.ult]).
 
 !item [udo -s -y -l -o ! file.u]
-		Convert the source file ""(!V)file.u(!v)"" to ST-Guide and write the
-		output to ""(!V)file.stg(!v)"". UDO won't save a log file or a file
+		Convert the source file (!file [file.u]) to ST-Guide and write the
+		output to (!file [file.stg]). UDO won't save a log file or a file
 		with Hyphenation patterns.
 
 !end_description
@@ -200,8 +202,8 @@ using the option (!V)-o(!v).
 !begin_xlist [UDOINPUTPATH]
 
 !item [HOME]
-UDO looks for the file (!V)udo.ini(!v) in your home directory if
-(!B)UDOPATH(!b) doesn't exist ((!V)udo.ini(!v) is only relevant for the Atari-GEM version of UDO).
+UDO looks for the file (!file [udo.ini]) in your home directory if
+(!B)UDOPATH(!b) doesn't exist ((!file [udo.ini]) is only relevant for the Atari-GEM version of UDO).
 
 !item [LANG]
 		Sets the language UDO shall use for error messages if neither
@@ -218,7 +220,7 @@ UDO looks for the file (!V)udo.ini(!v) in your home directory if
 		(!B)LANG(!b) is tested instead.
 
 !item [UDOPATH]
-		(!B)UDO(!b) looks for the file (!V)udo.ini(!v) in the directory
+		(!B)UDO(!b) looks for the file (!file [udo.ini]) in the directory
 		defined by this variable. If (!B)UDOPATH(!b) doesn't exist
 		(!B)HOME(!b) is tested instead.
 

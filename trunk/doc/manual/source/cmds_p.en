@@ -20,6 +20,7 @@
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 09: LINK macro introduced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -144,7 +145,7 @@ Set the paragraph width.
 !item [(!DESCRIPTION)]
 With this switch you can tell UDO which width it should use for the
 lines it saves. UDO uses 70 by default. You can change this value by
-using a (!T)(!VALUE)(!t) between 20 and 200. When converting to
+using a (!code [(!VALUE)]) between 20 and 200. When converting to
 Windows Help, Apple QuickView or HTML you can use a value that's
 greater than 200 if you use the switch (!KW [use_output_buffer]).
 
@@ -398,7 +399,7 @@ Output the (!pound) symbol.
 !item [(!DESCRIPTION)]
 This placeholder will be replaced by the pound symbol if
 the destination format supports it. If it doesn't UDO will replace
-this placeholder by ""(!T)GBP(!t)"".
+this placeholder by ""(!code [GBP])"".
 
 !item [(!EXAMPLE)]
 (!T)(!/pound)(!t) becomes (!pound).

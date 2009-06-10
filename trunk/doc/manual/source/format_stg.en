@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -56,7 +57,7 @@ HCP.
 !item [How does UDO convert labels?] ~
 
 The UDO command (!KW [label]) will be replaced by the HCP command
-""(!T)@symbol ari(!t)"". You have to check yourself if there's a node
+""(!code [@symbol ari])"". You have to check yourself if there's a node
 or a label existing with the same name.
 
 !item [How can I make popup nodes?] ~

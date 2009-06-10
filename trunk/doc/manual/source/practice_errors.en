@@ -17,6 +17,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 10: using macro (!file [])
 #
 ################################################################################
 
@@ -31,7 +32,7 @@
 
 UDO prints all error messages, warnings and hints that appear when
 converting the source file to files with the suffix
-(!V).ul?(!v). Each message is constructed the following way:
+(!file [.ul?]). Each message is constructed the following way:
 
 !begin_quote
 !begin_verbatim

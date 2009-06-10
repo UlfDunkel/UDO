@@ -18,6 +18,7 @@
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -505,7 +506,7 @@ following example:
 
 (!HINT)
 
-When converting to HTML the tag (!V)<BLOCKQUOTE>(!v) is used.
+When converting to HTML the tag (!code [<blockquote>]) is used.
 Netscape and CAB display paragraphs indented but Mosaic displays them just
 with another font.
 
@@ -530,8 +531,8 @@ is started with (!KW [begin_verbatim]) and finished with
 inside this environment will be indented like normal text.
 
 When converting into (!LaTeX) the commands of UDO will be just
-replaced by the (!LaTeX) commands (!V)\begin{verbatim}(!v) and
-(!V)\end{verbatim}(!v). When converting to another format UDO adjusts
+replaced by the (!LaTeX) commands (!code [\begin{verbatim}]) and
+(!code [\end{verbatim}]). When converting to another format UDO adjusts
 special chars and displays the text with a non-proportional font.
 
 !index (!kw [tabwidth])
@@ -592,8 +593,8 @@ inside this environment will be indented like normal text.
 When converting into RTF, the font ""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm])""
 will be used, other formats will use the DOS character set.
 When converting into (!LaTeX) the commands of UDO will be just
-replaced by the (!LaTeX) commands (!V)\begin{verbatim}(!v) and
-(!V)\end{verbatim}(!v). When converting to another format UDO adjusts
+replaced by the (!LaTeX) commands (!code [\begin{verbatim}]) and
+(!code [\end{verbatim}]). When converting to another format UDO adjusts
 special chars and displays the text with a non-proportional font.
 
 !index (!kw [tabwidth])
@@ -890,7 +891,7 @@ no effect if you convert to Windows Help, RTF, HTML or (!LaTeX).
 
 !item	HTML doesn't allow to define where to use lines. If you use the
 (!KW [hline]) command at the end of (!KW [begin_table]) the table is
-printed via (!V)frame=box(!v). If you don't use (!KW [hline]) it is
+printed via (!code [frame=box]). If you don't use (!KW [hline]) it is
 printed without any lines.
 
 !item	Windows Help doesn't allow it to print centred tables or to print

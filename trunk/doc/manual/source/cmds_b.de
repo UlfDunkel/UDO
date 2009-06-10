@@ -19,6 +19,7 @@
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -970,10 +971,10 @@ dargestellt.
 Dieser Platzhalter wird durch das beta-Symbol
 ersetzt, sofern es in dem jeweiligen Zeichensatz
 vorhanden ist. Ist es das nicht, ersetzt UDO den
-Platzhalter durch ""(!T)beta(!t)"".
+Platzhalter durch ""(!code [beta])"".
 
 !item [(!EXAMPLE)]
-Aus (!T)(!/beta)(!t) wird (!beta).
+Aus (!code [(!/beta!)]) wird (!beta).
 
 !item [(!SEEALSO)]
 (!KKW [alpha]), (!link [Sonderzeichen] [Sonderzeichen]), Vordefinierte Makros
@@ -1069,7 +1070,7 @@ Dieser Befehl sorgt für die Ausgabe von drei
 zusätzlichen Leerzeilen und dient dazu, Absätze
 deutlicher voneinander abzuheben. Bei der Umwandlung
 ins (!LaTeX)-Format werden keine drei Leerzeilen, sondern
-""(!V)\bigskip(!v)"" ausgegeben.
+(!code [\bigskip]) ausgegeben.
 
 !item [(!SEEALSO)]
 (!KW [smallskip]), (!KW [medskip])

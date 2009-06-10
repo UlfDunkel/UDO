@@ -26,6 +26,9 @@
 #   fd  Jun 09: NAME macro introduced
 #   fd  Jun 09: LINK macro introduced
 #   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -209,7 +212,7 @@ muss der komplette Name, also einschließlich Dateiendung,
 angegeben werden. (!FILESPACEQUOTE)
 
 !item [(!EXAMPLE)]
-(!T)!/hh_backimage hintergrund.gif(!t)
+(!T)!/hh_backimage(!t) (!file [hintergrund.gif])
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
 
@@ -237,8 +240,8 @@ Suffixe der Grafiken für (!nolink [HTML-Help]) ändern.
 Mit diesem Befehl können Sie das Suffix der Grafiken
 setzen, die für die folgenden (!KW [image])-Befehle
 verwendet werden soll. Standardmäßig benutzt UDO das
-Suffix !code [.gif]). Falls Sie z.B. JPEG-Grafiken benutzen
-und diese Dateien auf ""(!V)jpeg(!v)"" enden, benutzen Sie
+Suffix (!file [.gif]). Falls Sie z.B. JPEG-Grafiken benutzen
+und diese Dateien auf (!file [.jpeg]) enden, benutzen Sie
 einfach untenstehendes Beispiel. (!KW [hh_img_suffix])
 kann beliebig oft aufgerufen werden, dass einer
 Verwendung verschiedener Grafikformate nichts im Wege steht.
@@ -430,7 +433,7 @@ Suffixe der Grafiken für HP-Helptag-SGML ändern.
 Mit diesem Befehl können Sie das Suffix der Grafiken
 setzen, die für die folgenden (!KW [image])-Befehle
 verwendet werden soll. Standardmäßig benutzt UDO das
-Suffix (!code [.tiff]). (!KW [htag_img_suffix]) kann beliebig oft
+Suffix (!file [.tiff]). (!KW [htag_img_suffix]) kann beliebig oft
 aufgerufen werden, dass einer Verwendung verschiedener
 Grafikformate nichts im Wege steht.
 
@@ -544,7 +547,7 @@ muss der komplette Name, also einschließlich Dateiendung,
 angegeben werden. (!FILESPACEQUOTE)
 
 !item [(!EXAMPLE)]
-(!T)!/html_backimage hintergrund.gif(!t)
+(!T)!/html_backimage(!t) (!file [hintergrund.gif])
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~1
 
@@ -887,7 +890,7 @@ muss der komplette Name, also einschließlich Dateiendung,
 angegeben werden. (!FILESPACEQUOTE)
 
 !item [(!EXAMPLE)]
-(!T)!/html_frames_backimage hintergrund.gif(!t)
+(!T)!/html_frames_backimage(!t) (!file [hintergrund.gif])
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~9
 
@@ -1060,7 +1063,7 @@ Erzeugt ein Layout ähnlich dem ""modernen"" Tabellenlayout, allerdings wird das
 ""modernen"" Layout werden auch hier die sogenannten Chaptericons beachtet.
 
 UDO benutzt folgende Dateinamen, die man selber nicht benutzen
-sollte: (!V)00con.htm[l](!v) und (!V)00toc.htm[l](!v).
+sollte: (!file [00con.htm[l!]]) und (!file [00toc.htm[l!]]).
 
 Als ""(!TEXT)"" können folgende Parameter übergeben werden:
 
@@ -1273,7 +1276,7 @@ Setzen des Datums (nur (!nolink [HTML])).
 !item [(!DESCRIPTION)]
 Ist dieser Schalter gesetzt, setzt UDO im (!nolink [HTML])-Header ein META-Tag für
 Datum/Uhrzeit der Datei-Erzeugung
-z.B. (!T)<META name="date" content="2004-01-29T08:49:37+00:00">(!t).
+z.B. (!code [<META name="date" content="2004-01-29T08:49:37+00:00">]).
 
 Dabei ist ""+00:00"" der Unterschied von der lokalen Zeit zu UTC
 (Coordinated Universal Time, vormals GMT). Mit dem optionalen Parameter (!TEXT)
@@ -1315,12 +1318,12 @@ Ist (!TEXT) leer, wird für den Zeitzonenunterschied ""+00:00"" gesetzt.
 
 !item [(!DESCRIPTION)]
 Ist dieser Schalter gesetzt, werden je nach Vorgabe
-(!T)(!LINK)(!t)-Elemente im (!nolink [HTML])-Header erzeugt:
+(!code [(!LINK)])-Elemente im (!nolink [HTML])-Header erzeugt:
 !begin_itemize
-!item Enthält (!T)(!TEXT)(!t) ""navigation"", werden die Links zur Navigation erzeugt
+!item Enthält (!code [(!TEXT)]) ""navigation"", werden die Links zur Navigation erzeugt
    (<link rel="start" href="index.html" title="Beginn des Dokumentes">, ebenso
    <link rel="home"!.., "contents", "toc", "first", "prev", "previous", "next", "last").
-!item Enthält (!T)(!TEXT)(!t) ""chapter"", werden alle Links zu den Kapiteln erzeugt
+!item Enthält (!code [(!TEXT)]) ""chapter"", werden alle Links zu den Kapiteln erzeugt
    (<link rel="chapter" href="!.." title="!..">, ebenso für "section").
 !end_itemize
 
@@ -1354,8 +1357,8 @@ in (!nolink [HTML])-Entities (&auml; usw.) umgewandelt. Somit ist es möglich, au
 abweichende Dateien zu erzeugen, ohne das UDO dazwischenfunkt.
 
 Optional kann durch den Parameter (!TEXT) ein Codepage übergeben werden.
-Zum Beispiel wird mit (!T)!/html_ignore_8bit ISO-8859-2(!t) in die (!nolink [HTML])-Header
-folgendes geschrieben: (!T)<meta http-equiv="content-type" content="text/html;charset=ISO-8859-2">(!t).
+Zum Beispiel wird mit (!code [!/html_ignore_8bit ISO-8859-2]) in die (!nolink [HTML])-Header
+folgendes geschrieben: (!code [<meta http-equiv="content-type" content="text/html;charset=ISO-8859-2">]).
 
 !item [(!EXAMPLE)]
 (!T)!/html_ignore_8bit ISO-8859-2(!t)
@@ -1386,8 +1389,8 @@ Suffixe der Grafiken für (!nolink [HTML]) ändern.
 Mit diesem Befehl können Sie die Suffixe der Grafiken
 setzen, die für die folgenden (!KW [image])-Befehle
 verwendet werden soll. Standardmäßig benutzt UDO das
-Suffix (!code [.gif]). Falls Sie z.B. JPEG-Grafiken benutzen
-und diese Dateien auf ""(!V)jpeg(!v)"" enden, benutzen Sie
+Suffix (!file [.gif]). Falls Sie z.B. JPEG-Grafiken benutzen
+und diese Dateien auf (!file [.jpeg]) enden, benutzen Sie
 einfach untenstehendes Beispiel. (!KW [html_img_suffix])
 kann beliebig oft aufgerufen werden, dass einer
 Verwendung verschiedener Grafikformate nichts im Wege steht.
@@ -1667,7 +1670,7 @@ muss der komplette Name, also einschließlich Dateiendung,
 angegeben werden. (!FILESPACEQUOTE)
 
 !item [(!EXAMPLE)]
-(!T)!/html_modern_backimage hintergrund.gif(!t)
+(!T)!/html_modern_backimage(!t) (!file [hintergrund.gif])
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~9
 
@@ -1974,10 +1977,11 @@ Optional kann durch den Parameter (!TEXT) ein Separatortext übergeben werden.
 Dieser wird automatisch vorn und hinten mit einem Leerzeichen ergänzt, damit der Separator 
 nicht an den Kapitelnamen klebt.
 
-Die Navigationszeile ist in eine (!T)<div>(!t)-Umgebung mit der CSS-Klasse (!B)UDO_nav_line(!b) eingebettet.
+Die Navigationszeile ist in eine (!code [<div>])-Umgebung mit der CSS-Klasse (!B)UDO_nav_line(!b) eingebettet.
 So kann ihr Inhalt über CSS-Anweisungen weiter formatiert werden.
 
-(!EXAMPLE) (!nl)
+(!EXAMPLE)
+
 (!T)!/html_navigation_line ::(!t) (!nl)
 Kapitel 1 :: Kapitel 1.1 :: Kapitel 1.1.1
 
@@ -1988,7 +1992,8 @@ besser verständlich.
 
 Mit dem optionalen Parameter kann ein eigenes Bild angegeben werden.
 
-(!EXAMPLE) (!nl)
+(!EXAMPLE)
+
 (!T)!/html_navigation_image(!t) (!nl)
 (!img [udo_fo] [Ordner])~~Kapitel 1 > Kapitel 1.1
 
@@ -2064,7 +2069,7 @@ Dieser wird automatisch vorn und hinten mit einem Leerzeichen ergänzt, damit der
 nicht an den Kapitelnamen klebt.
 
 !item [(!HINT)]
-Die Navigationszeile ist in eine (!T)<div>(!t)-Umgebung mit der CSS-Klasse (!B)UDO_nav_line(!b) eingebettet. 
+Die Navigationszeile ist in eine (!code [<div>])-Umgebung mit der CSS-Klasse (!B)UDO_nav_line(!b) eingebettet. 
 So kann ihr Inhalt über CSS-Anweisungen weiter formatiert werden.
 
 !item [(!EXAMPLE)]
@@ -2132,7 +2137,7 @@ Größe der Kapitelüberschriften setzen ((!nolink [HTML])).
 Mit diesem Befehl kann man die Größe der Überschriften setzen,
 die UDO bei der Ausgabe von Kapiteln
 benutzen soll. Benutzt man untenstehendes Beispiel,
-so werden die Überschriften für Nodes mit (!V)<H2>!..</H2>(!v)
+so werden die Überschriften für Nodes mit (!code [<h2>!..</h2>])
 erzeugt, die für Subnodes und Subsubnodes jeweils mit
 einer kleineren Größe. Standardmäßig verwendet UDO den Wert~1.
 

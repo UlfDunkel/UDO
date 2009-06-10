@@ -27,6 +27,8 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: WORD macro introduced
 #   fd  Jun 09: using more text-formatting macros
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -65,7 +67,7 @@ Befehl eignet sich im Zusammenhang mit dem (!KW [ifdest])-Kommando dazu, um
 z.B. spezielle (!LaTeX)-Tabellen oder HTML-Formulare einzubinden.
 
 Dieses UDO-Handbuch macht übrigens intensiven Gebrauch von diesen
-Möglichkeiten. Die Hauptdatei ""(!V)manual.u(!v)"" enthält nur wichtige
+Möglichkeiten. Die Hauptdatei (!file [manual.u]) enthält nur wichtige
 Einstellungen und etliche (!KW [include])-Kommandos, jedoch keine
 einzige Zeile ""sichtbaren"" Textes.
 
@@ -266,8 +268,8 @@ können dazu dienen, im endgültigen Text spezielle Kommandos
 einzubauen.
 
 !index (!kw [define])
-Die Syntax für eine Definition lautet (!KW [define] [(!WORD) (!TEXT)]). Im
-Gegensatz zu den Makros wird (!code [(!TEXT)])) nicht speziell angepasst, d.h., es
+Die Syntax für eine Definition lautet (!KW [define]) (!code [(!WORD)]) (!code [(!TEXT)]). Im
+Gegensatz zu den Makros wird (!code [(!TEXT)]) nicht speziell angepasst, d.h., es
 werden keine Umlaute und andere Sonderzeichen angepasst.
 
 Im folgenden Beispiel benutzen wir eine Definition, um nur im

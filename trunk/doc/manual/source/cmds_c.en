@@ -20,6 +20,7 @@
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -489,7 +490,7 @@ Output the copyright symbol.
 !item [(!DESCRIPTION)]
 This placeholder will be replaced by a special copyright symbol if
 the destination format supports them. If it doesn't UDO will replace
-this placeholder by ""(!T)(c)(!t)"".
+this placeholder by ""(!code [(c!)])"".
 
 !item [(!EXAMPLE)]
 (!T)(!/copyright)(!t) is converted to (!copyright)

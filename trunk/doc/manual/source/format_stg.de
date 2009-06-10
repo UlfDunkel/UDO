@@ -18,6 +18,7 @@
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: 'Sinn machen' -> 'Sinn ergeben' (avoid anglicisms)
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -62,7 +63,7 @@ andere Kapitel oder Labels.
 
 !item [Wie werden Labels umgesetzt?]
 
-UDOs Befehl (!KW [label]) wird in den HCP-Befehl ""(!T)@symbol ari(!t)""
+UDOs Befehl (!KW [label]) wird in den HCP-Befehl ""(!code [@symbol ari])""
 umgesetzt. Dabei ist zu beachten, dass noch kein anderes Kapitel
 oder Label mit gleichem Namen existiert, da der HCP dies
 bemängeln würde.

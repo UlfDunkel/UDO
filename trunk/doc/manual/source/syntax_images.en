@@ -15,6 +15,9 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -64,8 +67,8 @@ same is done here as in the upper section.
 
 Example: (!KW [image]) tiger A Tiger
 
-UDO opens the file (!T)tiger.img(!t) and reads the size of this image. A
-special ST-Guide command called (!T)@limage(!t) is generated and the needed
+UDO opens the file (!file [tiger.img]) and reads the size of this image. A
+special ST-Guide command called (!code [@limage]) is generated and the needed
 parameters are calculated due to the information of the GEM image header.
 
 If you want to display a subtitle add it right after the name of the image
@@ -82,7 +85,7 @@ file. This subtitle will look like ""(Figure x: A tiger)"".
 If you are using Lindner-(!TeX) and you want to include a GEM image into
 your DVI file you have to add (!KW [tex_lindner]) to your preamble.
 
-UDO replaces the tool called (!T)IMGTOTEX(!t) that is part of
+UDO replaces the tool called (!file [IMGTOTEX]) that is part of
 Lindner-(!TeX). UDO has all functions of this tool built in.
 
 To set the size of an image you have to use the (!I)!/tex_dpi(!i) command.
@@ -95,7 +98,7 @@ An example:
 !end_verbatim
 !end_quote
 
-UDO reads in the header of (!V)tiger.img(!v), calculates its size and
+UDO reads in the header of (!file [tiger.img]), calculates its size and
 adjusts the header to 100 dpi. In the destination file a (!TeX) macro will
 be generated that includes this image and displays it with 100 dpi.
 
@@ -137,11 +140,11 @@ file you have to add (!KW [tex_emtex]) to your preamble. Furthermore you
 have to set the resolution of an image via (!KW [tex_dpi]).
 
 The macros for em(!TeX) are generated according to the information of
-(!V)dvidrv.doc(!v) of em(!TeX).
+(!file [dvidrv.doc]) of em(!TeX).
 
-In first place UDO tries to read in the header of (!V)tiger.msp(!v) when
+In first place UDO tries to read in the header of (!file [tiger.msp]) when
 reading the command (!KW [image] [tiger A tiger]). If UDO doesn't find
-(!V)tiger.msp(!v) it will try to find (!V)tiger.pcx(!v).
+(!file [tiger.msp]) it will try to find (!file [tiger.pcx]).
 
 An example shows what kind of macro UDO generates for em(!TeX). ""w"" and
 ""h"" represent the width and height of the image:
@@ -176,11 +179,11 @@ DVI file you have to add (!KW [tex_emtex]) to your preamble. Furthermore
 you have to set the resolution of an image via (!KW [tex_dpi]).
 
 The macros for em(!TeX) are generated according to the information of
-(!V)dvidrv.doc(!v) of em(!TeX).
+(!file [dvidrv.doc]) of em(!TeX).
 
-In first place UDO tries to read in the header of (!V)tiger.msp(!v) when
+In first place UDO tries to read in the header of (!file [tiger.msp]) when
 reading the command (!KW [image] [tiger A tiger]). If UDO doesn't find
-(!V)tiger.msp(!v) it will try to find (!V)tiger.pcx(!v).
+(!file [tiger.msp]) it will try to find (!file [tiger.pcx]).
 
 An example shows what kind of macro UDO generates for em(!TeX). ""w"" and
 ""h"" represent the width and height of the image:
@@ -264,7 +267,7 @@ the following command right before the (!KW [image]) command:
 !end_verbatim
 !end_quote
 
-If the file is named (!V)tiger.jpeg(!v) instead of (!V)tiger.jpg(!v) use the
+If the file is named (!file [tiger.jpeg]) instead of (!file [tiger.jpg]) use the
 following line:
 
 !begin_quote

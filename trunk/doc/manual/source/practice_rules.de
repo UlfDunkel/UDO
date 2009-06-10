@@ -17,6 +17,8 @@
 #   fd  Jun 09: text reviewed
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -44,8 +46,7 @@ Der übermäßige Einsatz von (!I)kursivem,(!i) (!B)fettem(!b) und (!U)unterstriche
 verwirrt Leser eher, als das er ihnen hilft. Falls Sie
 Schriftarten einsetzen, tun Sie dies allerdings einheitlich.
 
-Dieses Handbuch z.B. stellt (!T)Dateinamen(!t) grundsätzlich mit einer
-nichtproportionalen Schrift dar, (!code [Kommandos]) werden immer fett in der nichtproportionalen Schrift angezeigt.
+Dieses Handbuch z.B. stellt (!file [Dateinamen]) grundsätzlich in (!file [dieser Schrift]) dar, (!code [Kommandos]) werden immer in (!code [dieser Schrift]) angezeigt.
 
 !hline
 

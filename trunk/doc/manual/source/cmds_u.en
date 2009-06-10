@@ -21,6 +21,8 @@
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 09: LINK macro introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -98,7 +100,7 @@ Create link to UDO website.
 !item [(!SYNTAX)] (!T)!/udolink(!t)
 
 !item [(!DESCRIPTION)]
-UDO saves a file named ""(!V)udo_wm.[gif,bmp,img](!v)"" when
+UDO saves a file named (!file [udo_wm.[gif,bmp,img]]) when
 converting to HTML, WinHelp or ST-Guide. With this command
 you can include this image. For HTML additionally a link
 to the (!url [website] [http://www.udo-open-source.org/]) is generated.
@@ -158,7 +160,7 @@ Remove a symbol.
 
 !item [(!DESCRIPTION)]
 With this command you can delete a symbol that was set with
-(!KW [set]) or with the command line option (!T)-D(!t). (!red)Dieses Kommando darf überall im
+(!KW [set]) or with the command line option (!code [-D]). (!red)Dieses Kommando darf überall im
 Quelltext verwendet werden.(!coloff)
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~11
@@ -189,8 +191,8 @@ WWW-pages. In contrast to (!KKW [xlink]) always a link
 to a URL will generated.
 
 The example shows how to make a link to a popular
-magazine in a HTML file. If (!V)(!LINK)(!v) is empty the contents of
-(!V)(!TEXT)(!v) is used.
+magazine in a HTML file. If (!LINK) is empty the contents of
+(!TEXT) is used.
 
 Kommt in einem Verweis eine Tilde vor,
 so braucht dieser bei Verwendung im (!KKW [url])-Kommando
@@ -868,9 +870,9 @@ Output target file in book style.
 !item [(!SYNTAX)] (!T)!/use_style_book [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-When converting into (!LaTeX) UDO outputs (!KW [node]) as (!V)\chapter(!v) instead of
-(!V)\section(!v), (!KW [subnode]) as (!V)\section(!v) instead of (!V)\subsection(!v) and
-(!KW [subsubnode]) as (!V)\subsection(!v) instead of (!V)\subsubsection(!v). It then uses ""(!V)book(!v)"" as document style resp. document class. 
+When converting into (!LaTeX) UDO outputs (!KW [node]) as (!code [\chapter]) instead of
+(!code [\section]), (!KW [subnode]) as (!code [\section]) instead of (!code [\subsection]) and
+(!KW [subsubnode]) as (!code [\subsection]) instead of (!code [\subsubsection]). It then uses (!code [book]) as document style resp. document class. 
 When converting to other formats a booklike output will be made, that
 means that chapters will be output as ""Chapter~#"" resp. ""Appendix~X:"".
 

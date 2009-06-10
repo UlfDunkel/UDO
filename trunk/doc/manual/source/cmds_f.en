@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -99,13 +100,13 @@ Activate warning messages for short lines.
 !item [(!DESCRIPTION)]
 Schaltet die Warnung vor kurzen Zeilen wieder ein.
 Bei der Umwandlung ins (!LaTeX)-Format erfolgt (!B)keine(!b)
-Umsetzung in ""(!V)\fussy(!v)""!
+Umsetzung in (!code [\fussy])!
 (!coloff)
 !item [(!DESCRIPTION)]
 Switches on warning messages according to short lines. You can use
 this command wherever you want. The warnings can be disabled with
 (!KW [sloppy]). When converting to (!LaTeX) UDO does (!B)not(!b) convert
-(!KW [fussy]) into ""(!V)\fussy(!v)""!
+(!KW [fussy]) into (!code [\fussy])!
 
 !item [(!SEEALSO)]
 (!KW [sloppy]), (!link [Error messages] [Error messages]), (!link [Hyphenation] [Hyphenation])

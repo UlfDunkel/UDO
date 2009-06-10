@@ -19,6 +19,7 @@
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -210,7 +211,7 @@ Use inline bitmaps (WinHelp4 only).
 
 !item [(!DESCRIPTION)]
 If you use this switch inside the preamble of your source file UDO
-will use the RTF tag ""(!V)\bmcwd(!v)"" instead of ""(!V)\bmc(!v)""
+will use the RTF tag (!code [\bmcwd]) instead of (!code [\bmc])
 for displaying images. In this case, the Microsoft Help Compiler stores images in another format in the WinHelp4 file, which avoids skewed images. Then you cannot use images larger than
 64~KB. Please read the HCP documentation to get more information
 about the differences between these two RTF tags.
@@ -740,7 +741,7 @@ Use inline bitmaps (WinHelp only).
 
 !item [(!DESCRIPTION)]
 If you use this switch inside the preamble of your source file UDO
-will use the RTF tag ""(!V)\bmcwd(!v)"" instead of ""(!V)\bmc(!v)""
+will use the RTF tag (!code [\bmcwd]) instead of (!code [\bmc])
 for displaying images. In this case you cannot use images larger than
 64~KB. Please read the HCP documentation to get more information
 about the differences between these two RTF tags.

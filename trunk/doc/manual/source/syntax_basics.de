@@ -22,6 +22,7 @@
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #   fd  Jun 09: using more text-formatting macros
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -116,7 +117,7 @@ eingerückt durch Leerzeichen oder Tabs eingerückt, steht.
 !item [Platzhalter:] Ein Platzhalter ist eine mit ""!"" beginnende
 Zeichenfolge, die durch runde Klammern eingefasst ist. Ein Platzhalter
 wird von UDO durch eine dem Ausgabeformat zugehörige Zeichenfolge
-ersetzt (z.B. ""(!KK1 [B])"" durch ""(!V){\bf(!v)"").
+ersetzt (z.B. ""(!KK1 [B])"" durch (!code [{\bf])).
 
 Platzhalter können an jeder beliebigen Stelle einer Zeile stehen.
 

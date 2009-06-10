@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -69,7 +70,7 @@ dargestellt. Beachten Sie, dass eine einzige Tilde als
 festes Leerzeichen interpretiert wird.
 
 !item [(!EXAMPLE)]
-Aus (!T)!!~(!t) wird !~.
+Aus (!code [!!~]) wird !~.
 
 !item [(!SEEALSO)]
 (!link [!~] [Festes Leerzeichen]), (!link [Feste Leerzeichen] [Feste Leerzeichen])
@@ -367,7 +368,7 @@ Ein Ausrufungszeichen, gefolgt von zwei Punkten, wandelt UDO in typographische d
 das Ausgabeformat diese anzeigen kann. Ansonsten wandelt UDO !/.. in drei normale Punkte um.
 
 !item [(!EXAMPLE)]
-Aus (!T)!/..(!t) wird !..
+Aus (!code [!/..]) wird !..
 
 !end_xlist
 
@@ -391,7 +392,7 @@ Diese Zeichenfolge wird nach der Umwandlung als !/- dargestellt. Beachten Sie, d
 Trennstelle interpretiert wird.
 
 !item [(!EXAMPLE)]
-Aus (!T)!//-(!t) wird !/-.
+Aus (!code [!//-]) wird !/-.
 
 !item [(!SEEALSO)]
 (!KW [hyphen]), (!K1 [/-])

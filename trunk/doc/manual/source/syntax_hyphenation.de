@@ -17,6 +17,7 @@
 #   fd  Jun 08: text reviewed
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -45,7 +46,7 @@ Bei der Umwandlung ins Rich-Text-, WinHelp- und HTML-Format werden die
 Trennmarken einfach gefiltert.
 
 !index (!k1 [//-])
-Falls Sie die Zeichenfolge (!T)!/-(!t) ausgeben möchten, müssen Sie im
+Falls Sie die Zeichenfolge (!code [!/-]) ausgeben möchten, müssen Sie im
 Quelltext (!K1 [//-]) angeben.
 
 # = = = = =

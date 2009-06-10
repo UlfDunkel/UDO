@@ -15,6 +15,8 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 08: etc. -> usw.
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -46,9 +48,9 @@ Beim Linuxdoc-SGML-Format ist eine xlist-Umgebung nicht vorgesehen.
 Daher wird diese Umgebung hier als description-Umgebung behandelt,
 welche der xlist-Umgebung am ähnlichsten ist.
 
-!item [Linuxdoc-SGML bemängelt (!V)&Aring;(!v)!?]
+!item [Linuxdoc-SGML bemängelt (!code [&Aring;])!?]
 
-Fügen Sie in der Datei (!V)/usr/lib/linuxdoc-sgml/rep/html/general(!v)
+Fügen Sie in der Datei (!file [/usr/lib/linuxdoc-sgml/rep/html/general])
 folgende Zeile ein:
 
 !begin_quote

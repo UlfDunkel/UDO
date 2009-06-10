@@ -16,6 +16,7 @@
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -32,7 +33,7 @@ Das Ausgabeformat ""ASCII"" erzeugt eine Ausgabe in Form einer einzigen Textdate
 !item Die (!idx [Zeilenbreite]) ist standardmäßig auf 70~Zeichen eingestellt und kann
 mit dem Befehl (!KW [parwidth]) verändert werden.
 
-!item Beim Ausgabeformat ""ASCII"" werden Texthervorhebungen wie Fettschrift, kursive oder unterstrichene Wörter mittels (!T)*(!t), (!T)/(!t) und (!T)_(!t) dargestellt, wie sie im Usenet üblich sind. (!nl)
+!item Beim Ausgabeformat ""ASCII"" werden Texthervorhebungen wie Fettschrift, kursive oder unterstrichene Wörter mittels (!code [*]), (!code [/]) und (!code [_]) dargestellt, wie sie im Usenet üblich sind. (!nl)
 Da einige Druckprogramme(!N)z.B. IdeaList für den Atari~ST(!n) diese Hervorhebungen in Druckerbefehle umwandeln können bzw. einige Frontends diese Hervorhebungen unterstützen, zählt UDO diese
 Zeichen bei der Längenermittlung (!I)nicht(!i) mit. Somit können Zeilen, die diese Formatierungen enthalten,
 die eingestellte Zeilenbreite überschreiten. (!nl)

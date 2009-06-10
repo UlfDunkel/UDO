@@ -19,6 +19,7 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -69,7 +70,7 @@ Define a symbol.
 !item [(!DESCRIPTION)]
 With this command you can set symbols inside your source file that
 you can check with (!I)!/ifset(!i) and (!KW [if]). Symbols may alos
-be set by the command line option (!V)-D(!v). With the
+be set by the command line option (!code [-D]). With the
 (!KW [unset]) command you can delete symbols. You can use
 (!KW [set]) wherever you want.
 
@@ -240,7 +241,7 @@ Switch off warnings of short lines.
 Switches off warning messages according short lines. You can use this
 command wherever you want. The warnings can be enabled with !/fussy.
 When converting to (!LaTeX) UDO doesn't convert !/sloppy into
-(!V)\sloppy(!v)!
+(!code [\sloppy])!
 
 !item [(!SEEALSO)]
 (!KW [fussy]), (!link [Error messages] [Error messages]), (!link [Hyphenation] [Hyphenation])
@@ -263,7 +264,7 @@ Output an empty line.
 !item [(!SYNTAX)] (!T)!/smallskip(!t)
 
 !item [(!DESCRIPTION)]
-This command will be simplay replaced by ""(!V)\smallskip(!v)"" when
+This command will be simplay replaced by (!code [\smallskip]) when
 converted to (!LaTeX). Otherwise one additional empty line will be
 generated.
 
