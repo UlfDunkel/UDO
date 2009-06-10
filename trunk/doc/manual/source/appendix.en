@@ -16,6 +16,7 @@
 #   fd  Jun 05: introduced (extracted from appendix.ui)
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 10: using macro (!const [])
 #
 ################################################################################
 
@@ -26,79 +27,34 @@ You can use source files that don't exceed these maximum values:
 
 !begin_xlist [Sum of chapters, labels and aliases:] !short
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Macros:]                              (!red)(!MAXMACRO)(!coloff)
+!item [Macros:]                              (!MAXMACRO)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Defines:]                             (!red)(!MAXDEFINE)(!coloff)
+!item [Defines:]                             (!MAXDEFINE)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Hyphenation patterns:]                (!red)(!MAXHYPHEN)(!coloff)
+!item [Hyphenation patterns:]                (!MAXHYPHEN)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Sum of chapters, labels and aliases:] (!red)32768(!coloff)
+!item [Sum of chapters, labels and aliases:] (!const [32768])
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Characters per line:]                 (!red)(!LINELEN)(!coloff)
+!item [Characters per line:]                 (!LINELEN)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Characters per word:]                 (!red)(!MAX_TOKEN_LEN)(!coloff)
+!item [Characters per word:]                 (!MAX_TOKEN_LEN)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Syllables per word:]                  (!red)(!MAXSILBEN)(!coloff)
+!item [Syllables per word:]                  (!MAXSILBEN)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Words per paragraph:]                 (!red)(!MAX_TOKENS)(!coloff)
+!item [Words per paragraph:]                 (!MAX_TOKENS)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Links per paragraph:]                 (!red)(!MAXLINK)(!coloff)
+!item [Links per paragraph:]                 (!MAXLINK)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Rows per table:]                      (!red)(!MAXLINETABLE)(!coloff)
+!item [Rows per table:]                      (!MAXLINETABLE)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Columns per table:]                   (!red)(!MAXCOLUMSTABLE)(!coloff)
+!item [Columns per table:]                   (!MAXCOLUMSTABLE)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Chars per table cell:]                (!red)1000(!coloff)
+!item [Chars per table cell:]                (!const [1000])
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Depth of environments:]               (!red)6(!coloff)
+!item [Depth of environments:]               (!const [6])
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 !end_xlist
 
 !end_node # UDO's limitations
-
-################################################################################
-# auskommentiert 13.12.2003 (da überholt) - Ulrich Kretschmer
-# Angaben zu den verwendeten Entwicklungswerkzeugen gehören in die Entwickler-Dokumentation.
-!begin_ignore
-!begin_node Programming environment
-!html_name  development
-
-UDO has been developed using the following software:
-
-!begin_xlist [Macintosh:]
-!item [Atari:]
-Pure C 1.1, Pure Profiler 1.0, MiNT-Libs PL 46, SysGem 2.03(!beta),
-Interface 2.3, Programming Tools by Julian F.~Reschke, MagiC-PC 1.01
-
-!item [DOS:]       EMX-GCC 2.6.3 emxfix06, GDB 4.13, PFE
-
-!item [HP-UX:]     GCC 2.7.2
-
-!item [Linux:]     GCC 2.7.2, S.u.S.E. Linux 4.3 mit Kernel 2.0.18, Joe
-
-!item [Macintosh:] CodeWarrior 9 (68K/PPC), ResEdit 2.1
-!end_xlist
-
-Currently I develop UDO on a Pentium~133 running Windows~95 with the EMX-GCC
-and on my Compaq Contura 486-DX50 notebook running Linux.
-
-!medskip
-
-This documentation has been written with the following software:
-
-!begin_itemize !short
-
-!item Joe Allan's Own Editor ""Joe"" for MS-DOS and Linux
-
-!item Allan Phillips' Programmer's File Editor ""PFE"" 0.06.01
-(the best editor for Windows 3.1 and Windows 95 I know)
-
-!item Phoenix for Windows 3.11 by Application Systems Heidelberg
-(also available as Fuji Base 1.0)
-
-!end_itemize
-
-!end_node # Programming environment
-!end_ignore
 
 # === EOF ===

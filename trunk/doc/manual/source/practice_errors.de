@@ -25,6 +25,7 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 10: using macro (!const [])
 #
 ################################################################################
 
@@ -185,7 +186,7 @@ richtige Grafikformat handelt.
 
 !item [couldn't replace (!KKW [ilink])]
 Ein manueller Link mit einem ""fließendes"" Bild konnte nicht
-ersetzt werden. Innerhalb eines Absatzes sind nur (!red)(!MAXLINK)(!coloff)
+ersetzt werden. Innerhalb eines Absatzes sind nur (!MAXLINK)
 interne und externe Querverweise sowie Querverweise auf Seiten
 und ""fließende"" Bilder möglich. Teilen Sie den Absatz, in dem
 dieser manuelle Querverweis benutzt werden soll in zwei Hälften
@@ -193,20 +194,20 @@ oder entfernen Sie ein paar manuelle Querverweise.
 
 !item [couldn't replace (!KKW [img])]
 Ein ""fließendes"" Bild konnte nicht ersetzt werden. Innerhalb
-eines Absatzes sind nur (!red)(!MAXLINK)(!coloff) interne und externe Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder möglich.
+eines Absatzes sind nur (!MAXLINK) interne und externe Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder möglich.
 Teilen Sie den Absatz, in dem dieser manuelle Querverweis benutzt
 werden soll in zwei Hälften oder entfernen Sie ein paar manuelle
 Querverweise.
 
 !item [couldn't replace (!KKW [link])]
 Ein manueller interner Querverweis konnte nicht ersetzt werden.
-Innerhalb eines Absatzes sind nur (!red)(!MAXLINK)(!coloff) interne und externe
+Innerhalb eines Absatzes sind nur (!MAXLINK) interne und externe
 Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder
 möglich. Teilen Sie den Absatz, in dem dieser manuelle Querverweis benutzt werden soll in zwei Hälften oder entfernen Sie ein paar manuelle Querverweise.
 
 !item [couldn't replace (!KKW [xlink])]
 Ein manueller externer Querverweis konnte nicht ersetzt werden.
-Innerhalb eines Absatzes sind nur (!red)(!MAXLINK)(!coloff) interne und externe
+Innerhalb eines Absatzes sind nur (!MAXLINK) interne und externe
 Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder
 möglich. Teilen Sie den Absatz, in dem dieser manuelle Querverweis benutzt werden soll in zwei Hälften oder entfernen Sie ein paar manuelle Querverweise.
 
@@ -282,7 +283,7 @@ Ihr Quelltext benutzt zu viele (!KW [alias])-Befehle. Verzichten Sie auf unwicht
 Ihr Quelltext benutzt in einer Tabelle zuviele Spalten.
 
 !item [too many defines used]
-In Ihrem Quelltext werden mehr als (!red)(!MAXDEFINE)(!coloff) Definitionen benutzt.
+In Ihrem Quelltext werden mehr als (!MAXDEFINE) Definitionen benutzt.
 
 !item [too many environments used]
 In Ihrem Quelltext wurde die maximale Schachtelungstiefe für
@@ -301,7 +302,7 @@ Trennvorschläge.
 !item [too many items inside enumeration]
 In einer enumerate-Umgebung, die mit Buchstaben gekennzeichnet
 wird, wurden zuviele Aufzählungspunkte eingesetzt. Reduzieren Sie
-die Anzahl der Punkte auf~26 oder benutzen Sie anstelle der
+die Anzahl der Punkte auf~(!const [26]) oder benutzen Sie anstelle der
 enumerate-Umgebung eine itemize-Umgebung.
 
 !item [too many labels used]
@@ -314,7 +315,7 @@ wenn viele Kapitel benutzt werden. Abhilfe: Verzichten Sie auf einige Labels ode
 Ihr Quelltext verwendet zuviele Sprungmarken zwischen zwei Tabellenzeilen.
 
 !item [too many macros used]
-In Ihrem Quelltext werden mehr als (!red)(!MAXMACRO)(!coloff) Makros benutzt.
+In Ihrem Quelltext werden mehr als (!MAXMACRO)~Makros benutzt.
 
 !item [too many nodes used]
 In Ihrem Quelltext werden zuviele Kapitel verwendet. Falls

@@ -23,6 +23,7 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 10: using macro (!const [])
 #
 ################################################################################
 
@@ -180,7 +181,7 @@ verschachtelt und mit dem Schalter (!KW [short]) benutzt wird.
 
 !item Bei vielen Punkten sollte man aufpassen, nicht die Grenzen zu
      überschreiten. Wird eine Ebene mit Buchstaben nummeriert, sollte
-     man nicht mehr als 26~Aufzählungspunkte benutzen.
+     man nicht mehr als (!const [26])~Aufzählungspunkte benutzen.
 
 !item Eine ausführliche Erläuterung des Schalters (!KW [short]) finden Sie in
      der Beschreibung zur itemize-Umgebung.

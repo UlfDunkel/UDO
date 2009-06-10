@@ -139,7 +139,7 @@ zur UDO-Gemeinde verwiesen wird:
 (!HINTS)
 
 !begin_enumerate
-!item Insgesamt dürfen in einem Absatz (!red)(!MAXLINK)(!coloff) Links benutzt werden. Wird
+!item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
       diese Zahl überschritten, gibt UDO eine Fehlermeldung aus, dass 
       der Link nicht ersetzt werden konnte. Zur Erinnerung: Absätze
       werden durch Leerzeilen getrennt.
@@ -185,7 +185,7 @@ behandelt:
       dem Schalter (!KW [html_img_suffix]) kann das Suffix jederzeit verändert
       werden.
 
-!item Insgesamt dürfen in einem Absatz (!red)(!MAXLINK)(!coloff) Links benutzt werden. Wird
+!item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
       diese Zahl überschritten, gibt UDO eine Fehlermeldung aus, dass 
       der Link nicht ersetzt werden konnte. Zur Erinnerung: Absätze
       werden durch Leerzeilen getrennt.
@@ -222,7 +222,7 @@ Sie unsere Kontaktinformationen finden.
 !begin_enumerate
 !item Bei (!LaTeX) kann man nur auf Labels, nicht auf Kapitel verweisen.
 
-!item Insgesamt dürfen in einem Absatz (!red)(!MAXLINK)(!coloff) Links benutzt werden. Wird
+!item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
       diese Zahl überschritten, gibt UDO eine Fehlermeldung aus, dass 
       der Link nicht ersetzt werden konnte. Zur Erinnerung: Absätze
       werden durch Leerzeilen getrennt.

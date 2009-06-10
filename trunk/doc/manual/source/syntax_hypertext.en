@@ -133,7 +133,7 @@ The following example shows how to insert a link on the UDO contact information:
 
 !begin_enumerate
 
-!item	You may use up to (!red)(!MAXLINK)(!coloff) links inside a paragraph. If you will use
+!item	You may use up to (!MAXLINK) links inside a paragraph. If you will use
 more links UDO will print an error message.
 
 !item	When converting to hypertext formats UDO checks if the link
@@ -179,7 +179,7 @@ another part of the current document.
 converting to HTML. You can use the command (!KW [html_img_suffix]) to
 change the suffix.
 
-!item	You may use up to (!red)(!MAXLINK)(!coloff) links inside a paragraph. If you will use
+!item	You may use up to (!MAXLINK) links inside a paragraph. If you will use
 more links UDO will print an error message.
 
 !end_enumerate
@@ -221,7 +221,7 @@ contains my contact addresses:
 !item	You can only insert page links to labels and aliases, not to
 chapters when converting to (!LaTeX).
 
-!item	You may use up to (!red)(!MAXLINK)(!coloff) links inside a paragraph. If you will use
+!item	You may use up to (!MAXLINK) links inside a paragraph. If you will use
 more links UDO will print an error message.
 
 !end_enumerate

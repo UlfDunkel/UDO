@@ -19,6 +19,7 @@
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 10: using macro (!const [])
 #
 ################################################################################
 
@@ -364,7 +365,7 @@ weiteren Kapitel angeben, da die Kapitelnummerierung von UDO dann
 fürchterlich durcheinandergeraten könnte.
 
 !item Aufgrund der Tatsache, dass UDO die Kapitel des Anhangs mit
-Buchstaben nummeriert, sollte man im Anhang nicht mehr als 26~Kapitel
+Buchstaben nummeriert, sollte man im Anhang nicht mehr als (!const [26])~Kapitel
 benutzen.
 !end_enumerate
 
