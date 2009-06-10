@@ -17,6 +17,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #   fd  Jun 10: using macro (!const [])
+#   fd  Jun 10: table of limitations reformatted
 #
 ################################################################################
 
@@ -25,35 +26,25 @@
 
 You can use source files that don't exceed these maximum values:
 
-!begin_xlist [Sum of chapters, labels and aliases:] !short
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Macros:]                              (!MAXMACRO)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Defines:]                             (!MAXDEFINE)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Hyphenation patterns:]                (!MAXHYPHEN)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Sum of chapters, labels and aliases:] (!const [32768])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Characters per line:]                 (!LINELEN)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Characters per word:]                 (!MAX_TOKEN_LEN)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Syllables per word:]                  (!MAXSILBEN)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Words per paragraph:]                 (!MAX_TOKENS)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Links per paragraph:]                 (!MAXLINK)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Rows per table:]                      (!MAXLINETABLE)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Columns per table:]                   (!MAXCOLUMSTABLE)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Chars per table cell:]                (!const [1000])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Depth of environments:]               (!const [6])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!end_xlist
+# Hint: The used macros are defined in macros.ui.
+
+!table_caption UDO's limitations
+!begin_table [l|r]
+!hline
+Macros:                               !! (!MAXMACRO)
+Defines:                              !! (!MAXDEFINE)
+Hyphens:                              !! (!MAXHYPHEN)
+Sum of chapters, labels and aliases:  !! (!const [32768])
+Characters per line:                  !! (!LINELEN)
+Characters per word:                  !! (!MAX_TOKEN_LEN)
+Syllables per word:                   !! (!MAXSILBEN)
+Words per paragraph:                  !! (!MAX_TOKENS)
+Links per paragraph:                  !! (!MAXLINK)
+Rows per table:                       !! (!MAXLINETABLE)
+Columns per table:                    !! (!MAXCOLUMSTABLE)
+Chars per table cell:                 !! (!const [1000])
+Depth of environments:                !! (!const [6])
+!end_table
 
 !end_node # UDO's limitations
 

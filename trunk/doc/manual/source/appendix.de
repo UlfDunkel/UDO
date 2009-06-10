@@ -18,6 +18,7 @@
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #   fd  Jun 09: real quotation fixed
 #   fd  Jun 10: using macro (!const [])
+#   fd  Jun 10: table of limitations reformatted
 #
 ################################################################################
 
@@ -26,45 +27,25 @@
 
 Folgende Maximalwerte müssen Sie beim Erstellen der Quelltexte beachten:
 
-# Bearbeitungshinweise für Volker:
-# bitte die nachfolgenden Zahlen auf den aktuellen Stand bringen
-# d.h. wo Du bei Deiner Aktion mit meinen Testdateien die verschiedenen Parameter hochgedreht hast
-# Parameter, die hier evtl. fehlen, bitte ergänzen
-# für jeden Wert als Kommentar dazuschreiben, ab welchem Release usw. der Wert gilt
-# tunlichst hier auch vermerken, wo im Code diese Limitierungen zu finden sind,
-# damit bei Bedarf diese Doku anhand des Codes überprüft werden kann
+# Hint: The used macros are defined in macros.ui.
 
-
-# Anmerkung: die hier verwendeten Definitionen sind in der Datei ""manual.u"" definiert...
-!begin_xlist [Schachtelungstiefe der Umgebungen:] !short
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Macros:]                            (!MAXMACRO)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Defines:]                           (!MAXDEFINE)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Hyphens:]                           (!MAXHYPHEN)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Summe Kapitel, Labels und Aliase:]  (!const [32768])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Zeichen pro Zeile:]                 (!LINELEN)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Zeichen pro Wort:]                  (!MAX_TOKEN_LEN)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Silben pro Wort:]                   (!MAXSILBEN)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Worte pro Absatz:]                  (!MAX_TOKENS)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Querverweise pro Absatz:]           (!MAXLINK)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Zeilen pro Tabelle:]                (!MAXLINETABLE)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Spalten pro Tabelle:]               (!MAXCOLUMSTABLE)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Zeichen pro Tabellen-Zelle:]        (!const [1000])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!item [Schachtelungstiefe der Umgebungen:] (!const [6])
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-!end_xlist
+!table_caption Limitierungen von UDO
+!begin_table [l|r]
+!hline
+Makros:                            !! (!MAXMACRO)
+Defines:                           !! (!MAXDEFINE)
+Hyphens:                           !! (!MAXHYPHEN)
+Summe Kapitel, Labels und Aliase:  !! (!const [32768])
+Zeichen pro Zeile:                 !! (!LINELEN)
+Zeichen pro Wort:                  !! (!MAX_TOKEN_LEN)
+Silben pro Wort:                   !! (!MAXSILBEN)
+Worte pro Absatz:                  !! (!MAX_TOKENS)
+Querverweise pro Absatz:           !! (!MAXLINK)
+Zeilen pro Tabelle:                !! (!MAXLINETABLE)
+Spalten pro Tabelle:               !! (!MAXCOLUMSTABLE)
+Zeichen pro Tabellen-Zelle:        !! (!const [1000])
+Schachtelungstiefe der Umgebungen: !! (!const [6])
+!end_table
 
 !end_node # Limitierungen von UDO
 
