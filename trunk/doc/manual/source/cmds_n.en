@@ -734,7 +734,9 @@ the (!KW [toc]) command.
 
 !end_node
 !endif
-################################################################################
+
+# = = = = =
+
 !ifset OldKeywords
 !begin_node (!kw [no_toc_subsubnodes])
 !html_name  cmd_no_toc_subsubnodes
@@ -768,7 +770,9 @@ the (!KW [toc]) command.
 
 !end_node
 !endif
-################################################################################
+
+# = = = = =
+
 !ifset OldKeywords
 !begin_node (!kw [no_toc_subsubsubnodes])
 !html_name  cmd_no_toc_subsubsubnodes

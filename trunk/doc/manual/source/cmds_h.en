@@ -233,7 +233,6 @@ Change filename extension of images (for HTML-Help).
 
 !item [(!SYNTAX)] (!T)!/html_img_suffix <suffix>(!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Mit diesem Befehl können Sie die Endung der Grafiken
 setzen, die für die folgenden (!KW [image])-Befehle
@@ -243,7 +242,6 @@ und diese Dateien auf (!file [.jpeg]) enden, benutzen Sie
 einfach untenstehendes Beispiel. (!KW [hh_img_suffix])
 kann beliebig oft aufgerufen werden, so dass einer
 Verwendung verschiedener Grafikformate nichts im Wege steht.
-(!coloff)
 !item [(!DESCRIPTION)]
 UDO uses the suffix (!file [.gif]) when converting the image commands for
 HTML-Help by default. If you want to use different image types
@@ -442,7 +440,6 @@ Change filename extension of images.
 
 !item [(!SYNTAX)] (!T)!/htag_img_suffix <endung>(!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Mit diesem Befehl können Sie die Endung der Grafiken
 setzen, die für die folgenden (!KW [image])-Befehle
@@ -450,7 +447,6 @@ verwendet werden soll. Standardmäßig benutzt UDO die
 Endung (!file [tiff]). (!KW [htag_img_suffix]) kann beliebig oft
 aufgerufen werden, so dass einer Verwendung verschiedener
 Grafikformate nichts im Wege steht.
-(!coloff)
 !item [(!DESCRIPTION)]
 UDO uses the suffix ""tiff"" when converting the image commands for
 HP HelpTag SGML by default. If you want to use different image types
@@ -1421,7 +1417,6 @@ Ignore 8-bit characters (HTML only).
 
 !item [(!SYNTAX)] (!T)!/html_ignore_8bit (!TEXT)(!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, so werden 8-Bit-Zeichen (!I)nicht(!i)
 in HTML-Entities (&auml; etc.) umgewandelt. Somit ist es möglich, auch von ISO-Latin1
@@ -1430,7 +1425,6 @@ abweichende Dateien zu erzeugen, ohne das UDO dazwischenfunkt.
 Optional kann durch den Parameter (!TEXT) ein Codepage übergeben werden.
 Zum Beispiel wird mit (!code [!/html_ignore_8bit ISO-8859-2]) in die HTML-Header
 folgendes geschrieben: (!code [<meta http-equiv="content-type" content="text/html;charset=ISO-8859-2">]).
-(!coloff)
 !item [(!DESCRIPTION)]
 If you use this switch in the preamble, 8 bit characters
 won't be converted to HTML entities (&auml; etc.).
@@ -1461,7 +1455,6 @@ Change filename extension of images (HTML only).
 
 !item [(!SYNTAX)] (!T)!/html_img_suffix <endung>(!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Mit diesem Befehl können Sie die Endung der Grafiken
 setzen, die für die folgenden (!KW [image])-Befehle
@@ -1471,7 +1464,6 @@ und diese Dateien auf (!file [.jpeg]) enden, benutzen Sie
 einfach untenstehendes Beispiel. (!KW [html_img_suffix])
 kann beliebig oft aufgerufen werden, so dass einer
 Verwendung verschiedener Grafikformate nichts im Wege steht.
-(!coloff)
 !item [(!DESCRIPTION)]
 UDO uses the suffix (!file [.gif]) when converting the image commands for
 HTML by default. If you want to use different image types you can

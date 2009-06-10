@@ -180,7 +180,6 @@ Query the destination format.
 
 !item [(!SYNTAX)] (!T)!/ifdest [(!FORMAT)](!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Dieses Kommando fragt das aktuelle Ausgabeformat ab.
 Stimmt ""<kürzel>"" mit dem Kürzel des Ausgabeformates
@@ -192,7 +191,6 @@ sofern (!KW [else]) benutzt wird. Das Beispiel zeigt, wie
 man testen kann, ob die Quelldatei ins ST-Guide- oder
 WinHelp-Format umgewandelt wird.
 # ToDo: erfolgt stets eine ODER-Verknüpfung?? (U.K. 17.12.03)
-(!coloff)
 !item [(!DESCRIPTION)]
 This command tests the current destination format. If one of the
 ""<abbreviations>"" matches the abbreviation of the destination
@@ -227,7 +225,6 @@ Query the language. Use the following words to test the language:
 
 !item [(!SYNTAX)] (!T)!/iflang [(!LANGUAGE)](!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Dieses Kommando fragt die aktuelle Ausgabesprache ab.
 Wird ein deutscher Text erzeugt und wird als
@@ -236,7 +233,6 @@ werden alle Zeilen ausgewertet, die bis (!KW [else]) bzw.
 (!KW [endif]) angegeben werden. Andernfalls werden alle
 Zeilen ausgewertet, die zwischen (!KW [else]) und (!KW [endif])
 angegeben werden.
-(!coloff)
 !item [(!DESCRIPTION)]
 This command test the language UDO uses for the destination file. If
 ""<language>"" matches one of the abbreviations for the destination
@@ -270,7 +266,6 @@ Query the destination format.
 
 !item [(!SYNTAX)] (!T)!/ifndest [(!FORMAT)](!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Dieses Kommando fragt das aktuelle Ausgabeformat ab. Stimmt
 ""<kürzel>"" (!I)nicht(!i) mit dem Kürzel des Ausgabeformates überein,
@@ -278,7 +273,6 @@ so werden alle Zeilen umgewandelt, die zwischen (!KW [ifndest]) und
 (!KW [else]) bzw. (!KW [endif]) angegeben werden. Stimmt das Kürzel
 überein, so werden nur die Zeilen zwischen (!KW [else]) und
 (!KW [endif]) ausgewertet, sofern (!KW [else]) benutzt wird.
-(!coloff)
 !item [(!DESCRIPTION)]
 This command tests the current destination format. If (!I)none(!i) of
 the ""<abbreviations>"" match the abbreviation of the destination
@@ -418,14 +412,12 @@ Query operating system. The following codes are currently available for supporte
 
 !item [(!SYNTAX)] (!T)!/ifos [(!OS)](!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Dieses Kommando testet das aktuelle Betriebssystem,
 auf dem UDO läuft. Enthält ""<systeme>"" eines der
 Kürzel der Betriebssysteme, so wandelt UDO alle
 Zeilen zwischen (!KW [ifos]) und (!KW [endif]) bzw. (!KW [else]) um. Das
 Beispiel zeigt, wie man testen kann, ob UDO unter Linux läuft.
-(!coloff)
 !item [(!DESCRIPTION)]
 This command tests the current operating system UDO is running on. If
 ""<systems>"" match one of the abbreviations of the operating systems
@@ -460,11 +452,9 @@ Query symbol.
 
 !item [(!SYNTAX)] (!T)!/ifset [(!TEXT)](!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Mit diesem Abfragebefehl können Sie testen, ob ein Symbol für die Umwandlung in der Kommandozeile mit
 der Option (!code [-D]) gesetzt wurde. Wurde ""(!TEXT)"" gesetzt, so werden alle folgenden Zeilen umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht. Andernfalls werden nur die Zeilen umgewandelt, die (!KW [else]) folgen, sofern die Abfrage einen else-Zweig besitzt. Das Beispiel zeigt, wie man abfragt, ob in der Kommandozeile (!code [-D deutsch]) benutzt wurde.
-(!coloff)
 !item [(!DESCRIPTION)]
 With this command you can test if a symbol was set with the command
 line option (!code [-D]) or with (!KW [set]). If (!code [(!TEXT)]) was
@@ -581,13 +571,11 @@ Suppress referencing a chapter.
 
 !item [(!SYNTAX)] (!T)!/ignore_links(!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Wird dieser Schalter in einem Kapitel angegeben, so
 werden keine automatischen Querverweise auf dieses
 Kapitel angelegt. Manuelle Links sind jedoch
 weiterhin möglich.
-(!coloff)
 !item [(!DESCRIPTION)]
 If this switch is part of a chapter UDO won't insert links to this
 chapter automatically. You are still able to insert links with
@@ -615,14 +603,12 @@ Ignore footer file.
 
 !item [(!SYNTAX)] (!T)!/ignore_raw_footer(!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Darf nur in einem Node benutzt werden und besagt, dass in diesem Node
 die global geltende Footerdatei nicht ausgegeben werden soll. Somit
 kann man einzelne Nodes davor schützen, einen Footer zu erhalten.
 
 Dieser Befehl wird derzeit nur für HTML unterstützt.
-(!coloff)
 !item [(!DESCRIPTION)]
 This command may only be used inside a node
 and suppresses the output of the footer file
@@ -650,14 +636,12 @@ Ignore header file.
 
 !item [(!SYNTAX)] (!T)!/ignore_raw_header(!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Darf nur in einem Node benutzt werden und besagt, dass in diesem Node
 die global geltende Headerdatei nicht ausgegeben werden soll. Somit
 kann man einzelne Nodes davor schützen, einen Header zu erhalten.
 
 Dieser Befehl wird derzeit nur für HTML unterstützt.
-(!coloff)
 !item [(!DESCRIPTION)]
 This command may only be used inside a node
 and suppresses the output of the header file
@@ -687,12 +671,10 @@ Suppress output of ""subsubsubtoc"" in the relevant subsubnode.
 
 !item [(!SYNTAX)] (!T)!/ignore_subsubsubtoc(!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Wenn innerhalb eines Subsubnodes dieser Schalter
 gesetzt wird, so wird kein (automatisches) Inhaltsverzeichnis ausgegeben, in welchem die Paragraphen
 des Subsubnodes aufgelistet werden.
-(!coloff)
 !item [(!DESCRIPTION)]
 If this switch is used inside a subsection UDO won't output a
 ""subsubsubtoc"" which contains all paragraphs of this subsection
@@ -720,11 +702,9 @@ Suppress output of ""subsubtoc"" in the relevant subnode.
 
 !item [(!SYNTAX)] (!T)!/ignore_subsubtoc(!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Wenn innerhalb eines Subnodes dieser Schalter gesetzt
 wird, so wird kein (automatisches) Unterinhaltsverzeichnis ausgegeben.
-(!coloff)
 !item [(!DESCRIPTION)]
 If this switch is used inside a section UDO won't output a
 ""subsubtoc"" which contains all subsections and paragraphs of this
@@ -750,11 +730,9 @@ Suppress output of ""subtoc"" in the relevant node.
 
 !item [(!SYNTAX)] (!T)!/ignore_subtoc(!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Wenn innerhalb eines Nodes dieser Schalter gesetzt
 wird, so wird kein (automatisches) Unterinhaltsverzeichnis ausgegeben.
-(!coloff)
 !item [(!DESCRIPTION)]
 If this switch is used inside a chapter UDO won't output a ""subtoc""
 which contains all sections, subsections and paragraphs of this
@@ -805,7 +783,6 @@ Create link with graphic (WinHelp and HTML only).
 
 !item [(!SYNTAX)] (!T)(!/ilink [(!FILE)] [(!TEXT)] [(!LINK)])(!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Dieser Platzhalter ist eine Kombination der Platzhalter
 (!KKW [img]) und (!KKW [link]) und dient dazu,
@@ -816,7 +793,6 @@ möglich. Im Beispiel wird das Bild (!file [disk.bmp]) bzw.
 Sprungziel lautet ""Download"". Bei HTML wird als
 Alternativtext ""UDO downloaden"" ausgegeben. Bei allen
 anderen Formaten wird lediglich ""UDO downloaden"" ausgegeben.
-(!coloff)
 !item [(!DESCRIPTION)]
 This placeholder is a combination of (!KKW [img]) and (!KKW [link]) and
 is useful to display an image right inside the text. If you click
@@ -923,7 +899,6 @@ Include image.
 
 !item [(!SYNTAX)] (!T)!/image (!FILE) <title>(!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Dieses Kommando erzeugt in der Ausgabedatei Befehle
 zur Einbindung des Bildes. Die Endung der Datei
@@ -938,7 +913,6 @@ Die Ausrichtung des Bildes richtet sich nach der
 eventuell vorhandenen äußeren Umgebung. Zentrierte
 Bilder erhält man demnach, wenn man das (!KW [image])-Kommando in einer center-Umgebung verwendet.
 (!FILESPACEQUOTE)
-(!coloff)
 !item [(!DESCRIPTION)]
 A command to include an image is generated in the destination file,
 if it supports images. You shouldn't pass the suffix of the wanted
@@ -1106,12 +1080,10 @@ Include file.
 
 !item [(!SYNTAX)] (!T)!/include (!FILE)(!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Öffnet die Datei ""(!FILE)"" und gibt deren
 umgewandelten Inhalt an der Stelle aus, an der dieses
 Kommando benutzt wurde. (!FILESPACEQUOTE)
-(!coloff)
 !item [(!DESCRIPTION)]
 Opens the file named ""file"" and converts its contents.
 
@@ -1168,7 +1140,6 @@ Indexeintrag bzw. Schlüsselwort setzen.
 !item [(!SYNTAX)] (!T)!/index (!TEXT)(!t)
 
 #Ausgabe-Formate
-(!red)
 !item [(!DESCRIPTION)]
 ""(!TEXT)"" wird für (!LaTeX) als (!code [\index~{!..}]), für WinHelp
 als (!code [K{\footnote~K~!..}]), für RTF als (!code [{\xe\v~!..}])
@@ -1178,7 +1149,6 @@ Index, bei WinHelp kann man im Suchen-Dialog nach
 diesem Schlüsselwort suchen und bekommt die Namen der
 Kapitel aufgelistet, in denen (!KW [index]) benutzt wurde.
 ""(!TEXT)"" kann beliebig oft benutzt werden, auch in mehreren Kapiteln.
-(!coloff)
 !item [(!DESCRIPTION)]
 (!code [(!TEXT)]) will pe output as (!code [\index~{!..}]) for (!LaTeX),
 (!code [K{\footnote K !..}]) for WinHelp, (!code [{\xe\v !..}]) for RTF
@@ -1239,7 +1209,6 @@ Include file.
 
 !item [(!SYNTAX)] (!T)!/input (!FILE)(!t)
 
-(!red)
 !item [(!DESCRIPTION)]
 Öffnet die Datei ""(!FILE)"" und gibt deren
 umgewandelten Inhalt an der Stelle aus, an der dieses
@@ -1247,7 +1216,6 @@ Kommando benutzt wurde. Im Gegensatz zu (!KW [include])
 sucht (!KW [input]) lediglich in
 dem Verzeichnis, welches durch die Umgebungsvariable
 (!file [$UDOINPUTPATH]) definiert ist.
-(!coloff)
 !item [(!DESCRIPTION)]
 Opens the file named ""file"" and converts its contents.
 In contrast to (!KW [include]) this command

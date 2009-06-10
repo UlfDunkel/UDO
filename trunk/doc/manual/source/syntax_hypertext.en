@@ -297,7 +297,6 @@ following example:
 (!EXAMPLE_BEGIN)
 !include (!EXAMPLES)html/xlink.ui
 (!EXAMPLE_END)
-
 !endif
 
 (!HINTS)

@@ -167,7 +167,7 @@ Oder benutzen Sie Ihre bevorzugte rpm-Oberfläche (z.B. kpackage, krpmview, yast)
 !begin_itemize !short
 !item Download the appropriate deb-package from (!url [http://www.debian.org] [http://www.debian.org/]).
 !item Log in as (!code [root])
-!item (!code [dpkg -i] (!file [file])(!file [.deb])
+!item (!code [dpkg -i]) (!file [file])(!file [.deb])
 !end_itemize
 Or (with Internet connection): (!file [apt-get install udo])
 

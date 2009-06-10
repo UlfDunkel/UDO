@@ -19,7 +19,6 @@
 #   fd  Jun 05: html_name shortened ('introduction' -> 'intro')
 #   fd  Jun 08: ignored format list removed (is included via formattb.ui)
 #   fd  Jun 10: using macro (!file [])
-<br>
 #
 ################################################################################
 
@@ -65,7 +64,6 @@ and you will have more time for the really important things.
 !end_node # Preface
 
 # = = = = =
-
 !begin_node How to read this manual best
 !html_name  intro_manual
 
@@ -75,7 +73,7 @@ Wir haben viele UDO-Funktionen verwendet, um das Handbuch für Sie so praktisch w
 
 !begin_description
 !item [Navigation]
-(!img [udo_hm][Home])~(!img [udo_up][Hoch])~(!img [udo_lf][links])~(!img [udo_rg][rechts])
+(!img [udo_hm][Home])~(!img [udo_up][Up])~(!img [udo_lf][left])~(!img [udo_rg][right])
 
 In der wohl am meisten gelesenen HTML-Variante können Sie bequem über die kleinen Symbole am oberen und unteren Rand jeder Seite zum Anfang des Handbuchs, eine Kapitel-Ebene höher, zum vorigen Kapitel oder zum nächsten Kapitel navigieren. 
 
@@ -88,7 +86,9 @@ Da das UDO-Handbuch eher in die Kategorie ""Technisches Handbuch und Nachschlage
 !item (!code [Code benutzt diese Schriftart.])
 !item (!file [Dateinamen, Pfade und ähnliches werden so dargestellt.])
 !item (!red)Konstanten, die im Programm verwendet werden, sind so dargestellt.(!coloff)
-!item Verknüpfungen zu anderen Kapiteln werden wie sonst auch in Webseiten dargestellt, z.B. (!url [dieser Link zur UDO-Website][http://www.udo-open-source.org/]) oder diese (!link [Verknüpfung zu einem anderen Handbuch-Kapitel][Kontaktadresse]).
+!item Verknüpfungen zu anderen Kapiteln werden wie sonst auch in Webseiten dargestellt, 
+      z.B. (!url [dieser Link zur UDO-Website][http://www.udo-open-source.org/]) 
+      oder diese (!link [Verknüpfung zu einem anderen Handbuch-Kapitel][Contact]).
 !end_itemize
 
 !end_description
@@ -145,22 +145,21 @@ the conversion into the destination format UDO offers you the following
 features:
 
 !begin_itemize	!short
-!item	automatically generated (!link [title pages] [Title page]),
-(!link [tables of contents] [Tables of contents]), head lines
-and (!link [bottom lines] [Footnotes]),
+!item	automatically generated (!link [title pages] [Title page]), 
+      (!link [tables of contents] [Tables of contents]), 
+      head lines and 
+      (!link [bottom lines] [Footnotes]),
 !item	(!link [chapter numbering] [Chapters, sections, subsections and paragraphs]),
 !item	(!link [tables] [Tables]),
 !item	automatically generated (!link [hypertext links] [Links]),
 !item	support for different (!link [text styles] [Text styles]),
-!item	automatic conversion of (!link [umlauts] [Converting 8 bit chars])
-and other (!link [special characters] [Special characters]),
-!item	a large variety of layout commands for making (!link [lists] [Lists]),
-(!link [enumerations] [Enumerations]),
-(!link [descriptions] [Descriptions]),
-justified text,
-(!link [centered] [Centered text]) or
-(!link [indented] [Indented paragraphs]) text or
-text with a (!link [right alignment] [Right justified text]),
+!item	automatic conversion of (!link [umlauts] [Converting 8 bit chars]) and other (!link [special characters] [Special characters]),
+!item	a large variety of layout commands for making (!link [lists] [Lists]), 
+      (!link [enumerations] [Enumerations]), (!link [descriptions] [Descriptions]), 
+      justified text, 
+      (!link [centered] [Centered text]) or 
+      (!link [indented] [Indented paragraphs]) text or 
+      text with a (!link [right alignment] [Right justified text]),
 !item (!link [image] [Images]) support,
 !item automatic line breaks with a half-automatic (!link [Hyphenation] [Hyphenation]).
 !end_itemize
@@ -174,8 +173,6 @@ You will surely find some aspects that have to be changed in the future.
 
 There are some points that UDO can't manage yet but will be found on the wishlist:
 an automatically generated index, list of figures and list of tables.
-# auskommentiert 17.01.2004 - Ulrich Kretschmer
-# Just wait some months and you will get UDO Release~7 with all these features.
 
 !smallskip
 
@@ -186,12 +183,9 @@ These functions are part of desktop publishing and not of a software like UDO.
 
 UDO doesn't support an automatic Hyphenation.
 You have to tell UDO explicitely where it is allowed to split up words.
-# There are only some formats that would profit from an automatic Hyphenation.
 
 UDO is just a ""one way"" converter which converts it's own format into the formats listed above.
 UDO can't convert them into its own format.
-
-# UDO can't make binary formats (like WinWord documents). It can only make text formats.
 
 !end_node # What UDO can('t) do for you
 
@@ -283,7 +277,6 @@ UDO has become to an operating system independent, very powerful and
 
 !end_quote
 
-# ergänzt 20.12.2003 - Ulrich Kretschmer
 UDO ist Open Source since October 27, 2001.
 
 !end_node # The history of UDO
@@ -299,23 +292,23 @@ ist (!link [open source] [Copyright]) since 10/27/2001.
 
 Persons working on the UDO project (in alphabetical ordner):
 !begin_description
-  !item [Denesh Bhabuta] supporting UDO in Great Britain (until 2001)
-  !item [Alexander Clauss] compiling the HP-UX 300/400 version (until 2001)
-  !item [Ulf Dunkel] programming and documentation [since 2006]
-  !item [Dirk Hagedorn] programming and documentation (until 2001)
-  !item [Norbert Hanz] programming (since 2002)
-  !item [Dirk Haun] one of the fathers of UDO
-  !item [Volker Janzen] maintaining the UDO website & develepment infrastructure, programming
-  !item [Patrick Jerchel] managing the mailing list (until 1999)
-  !item [Peter Klasen], the first registered user of UDO
-  !item [Ulrich Kretschmer] maintaining the documentation (since 2003)
-  !item [Christian Krüger] programming the PostScript support
-  !item [Martin Loos] managing the old mailing list (until ca. 1999)
-  !item [Martin Osieka] porting UDO to Mac~OS (until ca. 1999)
-  !item [Thorsten Otto] maintaining the documentation (2001)
-  !item [Rainer Riedl] compiling the BeOS version (until ca. 2001)
-  !item [Gerhard Stoll] programming [since 2003]
-  !item [Tom Thomason] supporting UDO in Sweden (until ca. 2001)
+!item [Denesh Bhabuta] supporting UDO in Great Britain (until 2001)
+!item [Alexander Clauss] compiling the HP-UX 300/400 version (until 2001)
+!item [Ulf Dunkel] programming and documentation [since 2006]
+!item [Dirk Hagedorn] programming and documentation (until 2001)
+!item [Norbert Hanz] programming (since 2002)
+!item [Dirk Haun] one of the fathers of UDO
+!item [Volker Janzen] maintaining the UDO website & develepment infrastructure, programming
+!item [Patrick Jerchel] managing the mailing list (until 1999)
+!item [Peter Klasen], the first registered user of UDO
+!item [Ulrich Kretschmer] maintaining the documentation (since 2003)
+!item [Christian Krüger] programming the PostScript support
+!item [Martin Loos] managing the old mailing list (until ca. 1999)
+!item [Martin Osieka] porting UDO to Mac~OS (until ca. 1999)
+!item [Thorsten Otto] maintaining the documentation (2001)
+!item [Rainer Riedl] compiling the BeOS version (until ca. 2001)
+!item [Gerhard Stoll] programming [since 2003]
+!item [Tom Thomason] supporting UDO in Sweden (until ca. 2001)
 !end_description
 
 !end_node # The UDO community
@@ -324,7 +317,7 @@ Persons working on the UDO project (in alphabetical ordner):
 
 !begin_node Contact the UDO community
 !html_name  intro_contact
-!alias      Contact addresses
+!alias      Contact
 !alias      mailing list
 
 On the UDO website (!url [http://www.udo-open-source.org] [http://www.udo-open-source.org/]) you can find informations for UDO users and developers, especially you can download the latest version of UDO and its documentation.
@@ -362,7 +355,7 @@ limited to, the implied warranties of merchantability and fitness for a
 particular purpose. The entire risk is with you. Should UDO prove defective
 you assume the cost of all necessary servicing, repair or correction.
 
-Nevertheless the UDO Community will be glad if you (!link [send bug reports] [Contact addresses]).
+Nevertheless the UDO Community will be glad if you (!link [send bug reports] [Contact]).
 
 !end_node # Disclaimer
 

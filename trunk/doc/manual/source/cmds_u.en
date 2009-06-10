@@ -101,7 +101,7 @@ Create link to UDO website.
 !item [(!SYNTAX)] (!T)!/udolink(!t)
 
 !item [(!DESCRIPTION)]
-UDO saves a file named (!file [udo_wm.[gif,bmp,img]]) when
+UDO saves a file named (!file [udo_wm.[gif,bmp,img!]]) when
 converting to HTML, WinHelp or ST-Guide. With this command
 you can include this image. For HTML additionally a link
 to the (!url [website] [http://www.udo-open-source.org/]) is generated.
