@@ -17,6 +17,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 08: ignored charset list removed, including charsets.ui
 #   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -44,8 +45,7 @@ Double    quotes
 !end_verbatim
 !end_quote
 
-If you want to display two quotes you have to use
-(!T)(!link [((""!)!)] [((""!)!)])text(!link [((""!)!)] [((""!)!)])(!t) instead.
+If you want to display two quotes you have to use (!KP [((""!)!)])(!code [text])(!KP [((""!)!)])) instead.
 
 (!HINTS)
 
@@ -80,8 +80,7 @@ will become
 double ''apostrophes''
 !end_quote
 
-If you want to display two apostrophes you have to use
-(!T)(!link [((''!)!)] [((''!)!)])text(!link [((''!)!)] [((''!)!)])(!t) instead.
+If you want to display two apostrophes you have to use (!KP [((''!)!)])(!code [text])(!KP [((''!)!)]) instead.
 
 (!HINT)
 
@@ -109,10 +108,10 @@ to other formats UDO replaces this tildes by commands that have the same
 effect.
 
 !begin_xlist [WinHelp:] !short
-!item [(!LaTeX):]   (!T)!~(!t)
-!item [HTML:]       (!T)&nbsp;(!t)
-!item [RTF:]        (!T)\!~(!t)
-!item [WinHelp:]    (!T)\!~(!t)
+!item [(!LaTeX):]   (!code [!~])
+!item [HTML:]       (!code [&nbsp;])
+!item [RTF:]        (!code [\!~])
+!item [WinHelp:]    (!code [\!~])
 !end_xlist
 
 If you want to display a tilde you have to use (!link [!!~] [Tilde]) instead.
@@ -134,9 +133,7 @@ sentence.
 Dashs are supported by (!LaTeX), Windows Help and RTF. Converting to other
 formats UDO will replace ""(---)"" and ""(--)"" by a single ""-"".
 
-If you want to display three or two ""-"" you have to use
-(!T)(!link [((---!)!)] [((---!)!)])(!t) or
-(!T)(!link [((--!)!)] [((--!)!)])(!t).
+If you want to display three or two ""-"" you have to use (!KP [((---!)!)]) or (!KP [((--!)!)]).
 
 !end_node # Dashes
 
@@ -148,8 +145,8 @@ If you want to display three or two ""-"" you have to use
 In an UDO source file you can use ""higher"" characters without having to
 know how a character has to look like in a destination format like (!LaTeX)
 or Windows Help. So you can enter a German ""ß"" without any fear, UDO
-converts it for you and it knows that this has to be (!V)&szlig;(!v) for
-HTML or (!V){\ss}(!v) for (!LaTeX).
+converts it for you and it knows that this has to be (!code [&szlig;]) for
+HTML or (!coe [{\ss}] for (!LaTeX).
 
 UDO expects files containing chars of the system charset of your operating
 system. If you run UDO on a MS-DOS computer UDO expects text files that are

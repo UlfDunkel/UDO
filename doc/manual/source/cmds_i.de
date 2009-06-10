@@ -27,6 +27,9 @@
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 09: LINK macro introduced
 #   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -358,7 +361,7 @@ Symbol abfragen.
 !item [(!DESCRIPTION)]
 Mit diesem Abfragebefehl können Sie testen, ob ein
 Symbol für die Umwandlung (!I)weder(!i) in der Kommandozeile
-mit der Option (!V)-D(!v) noch mit (!KW [set]) gesetzt wurde. Wurde
+mit der Option (!code [-D]) noch mit (!KW [set]) gesetzt wurde. Wurde
 ""(!TEXT)"" nicht gesetzt, werden alle folgenden Zeilen
 umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht.
 Andernfalls werden nur die Zeilen umgewandelt, die
@@ -427,7 +430,7 @@ Symbol abfragen.
 
 !item [(!DESCRIPTION)]
 Mit diesem Abfragebefehl können Sie testen, ob ein Symbol für die Umwandlung in der Kommandozeile mit
-der Option (!V)-D(!v) gesetzt wurde. Wurde ""(!TEXT)"" gesetzt, werden alle folgenden Zeilen umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht. Andernfalls werden nur die Zeilen umgewandelt, die (!KW [else]) folgen, sofern die Abfrage einen else-Zweig besitzt. Das Beispiel zeigt, wie man abfragt, ob in der Kommandozeile (!V)-D deutsch(!v) benutzt wurde.
+der Option (!code [-D]) gesetzt wurde. Wurde ""(!TEXT)"" gesetzt, werden alle folgenden Zeilen umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht. Andernfalls werden nur die Zeilen umgewandelt, die (!KW [else]) folgen, sofern die Abfrage einen else-Zweig besitzt. Das Beispiel zeigt, wie man abfragt, ob in der Kommandozeile (!code [-D deutsch]) benutzt wurde.
 
 !item [(!EXAMPLE)]
 (!T)!/ifset [deutsch](!t)
@@ -732,8 +735,8 @@ Dieser Platzhalter ist eine Kombination der Platzhalter
 (!KKW [img]) und (!KKW [link]) und dient dazu,
 einen Querverweis durch eine Grafik zu ermöglichen.
 Dies ist momentan nur beim WinHelp- und HTML-Format
-möglich. Im Beispiel wird das Bild (!V)disk.bmp(!v) bzw.
-(!V)disk.gif(!v) zur Darstellung des Links benutzt, das
+möglich. Im Beispiel wird das Bild (!file [disk.bmp]) bzw.
+(!file [disk.gif]) zur Darstellung des Links benutzt, das
 Sprungziel lautet ""Download"". Bei HTML wird als
 Alternativtext ""UDO downloaden"" ausgegeben. Bei allen
 anderen Formaten wird nur ""UDO downloaden"" ausgegeben.
@@ -839,9 +842,9 @@ Grafik ausgeben.
 Dieses Kommando erzeugt in der Ausgabedatei Befehle
 zur Einbindung des Bildes. Das Suffix der Datei
 sollte nicht übergeben werden, da UDO dies selbst
-erledigt. UDO benutzt ""(!V).img(!v)"" beim ST-Guide, CS(!TeX) und
-Lindner-(!TeX), ""(!V).gif(!v)"" für HTML, ""(!V).msp(!v)"" oder ""(!V).pcx(!v)"" für
-em(!TeX) und ""(!V).bmp(!v)"" für WinHelp, RTF und IPF.
+erledigt. UDO benutzt (!file [.img]) beim ST-Guide, CS(!TeX) und
+Lindner-(!TeX), (!file [.gif]) für HTML, (!file [.msp]) oder (!file [.pcx]) für
+em(!TeX) und (!file [.bmp]) für WinHelp, RTF und IPF.
 Wird ""<titel>"" angegeben, wird der Text als Bildunterschrift angegeben.
 
 Die Ausrichtung des Bildes richtet sich nach der
@@ -973,7 +976,7 @@ Grafik ausgeben.
 Benutzen Sie dieses Kommando, um ein Bild direkt im
 Text bei der Umwandlung nach HTML oder WinHelp
 auszugeben. Bei der Umwandlung nach HTML wird
-(!T)file.gif(!t), bei WinHelp (!T)file.bmp(!t) benutzt, wobei UDO
+(!file [file.gif]), bei WinHelp (!file [file.bmp]) benutzt, wobei UDO
 nicht überprüft, ob die jeweiligen Bilder existieren.
 Bei HTML wird ""(!TEXT)"" als Alternativtext benutzt. Bei
 den anderen Formaten wird nur ""(!TEXT)"" ausgegeben.
@@ -1071,9 +1074,9 @@ Indexeintrag bzw. Schlüsselwort setzen.
 
 #Ausgabe-Formate
 !item [(!DESCRIPTION)]
-""(!TEXT)"" wird für (!LaTeX) als ""(!V)\index~{!..}(!v)"", für WinHelp
-als ""(!V)K{\footnote~K~!..}(!v)"", für RTF als ""(!V){\xe\v~!..}(!v)""
-und für den ST-Guide als ""(!V)@index~!..(!v)"" ausgegeben.
+""(!TEXT)"" wird für (!LaTeX) als (!code [\index~{!..}]), für WinHelp
+als (!code [K{\footnote~K~!..}]), für RTF als (!code [{\xe\v~!..}])
+und für den ST-Guide als (!code [@index~!..]) ausgegeben.
 ""(!TEXT)"" kommt damit bei (!LaTeX) und dem ST-Guide in den
 Index, bei WinHelp kann man im Suchen-Dialog nach
 diesem Schlüsselwort suchen und bekommt die Namen der
@@ -1139,7 +1142,7 @@ umgewandelten Inhalt an der Stelle aus, an der dieses
 Kommando benutzt wurde. Im Gegensatz zu (!KW [include])
 sucht (!KW [input]) nur in
 dem Verzeichnis, welches durch die Umgebungsvariable
-(!V)$UDOINPUTPATH(!v) definiert ist.
+(!file [$UDOINPUTPATH]) definiert ist.
 
 !item [(!EXAMPLE)]
 (!T)!/input macros.ui(!t)

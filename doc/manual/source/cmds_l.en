@@ -22,6 +22,7 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: LINK macro introduced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -70,8 +71,8 @@ Output the (!LaTeX) symbol.
 !item [(!SYNTAX)] (!T)(!/LaTeX)(!t)
 
 !item [(!DESCRIPTION)]
-This placeholder will be replaced by ""(!V)\LaTeX{}(!v)"" when
-converting to (!LaTeX). Otherwise it will be replaced by ""(!V)LaTeX(!v)"".
+This placeholder will be replaced by (!code [\LaTeX{}]) when
+converting to (!LaTeX). Otherwise it will be replaced by (!code [LaTeX]).
 
 !item [(!EXAMPLE)]
 (!T)(!/LaTeX)(!t) will become (!LaTeX).
@@ -97,8 +98,8 @@ Output the (!LaTeXe) symbol.
 !item [(!SYNTAX)] (!T)(!/LaTeXe)(!t)
 
 !item [(!DESCRIPTION)]
-This placeholder will be replaced by ""(!V)\LaTeXe{}(!v)"" when
-converting to (!LaTeX). Otherwise it will be replaced by ""(!V)LaTeX2e(!v)"".
+This placeholder will be replaced by (!code [\LaTeXe{}]) when
+converting to (!LaTeX). Otherwise it will be replaced by (!code [LaTeX2e]).
 
 !item [(!EXAMPLE)]
 (!T)(!/LaTeXe)(!t) will become (!LaTeXe).
@@ -376,8 +377,8 @@ Set text size of linedraw environment.
 With this switch you can set the font size of linedraw environments
 if the destination format allows it to use different font sizes. You
 can use this switch wherever you want. The smallest font size is
-activated with ""(!T)tiny(!t)"", the largest one with
-""(!T)huge(!t)"". The default font size is ""(!T)normal(!t)"".
+activated with ""(!code [tiny])"", the largest one with
+""(!code [huge])"". The default font size is ""(!code [normal])"".
 
 !item [(!EXAMPLE)]
 (!T)!/linedrawsize [small](!t)

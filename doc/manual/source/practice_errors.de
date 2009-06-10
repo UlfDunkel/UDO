@@ -21,6 +21,9 @@
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -29,7 +32,7 @@
 !begin_node Fehlermeldungen
 !html_name  errors
 
-UDO protokolliert in einer Datei mit dem Suffix (!code [.ul?]) alle Fehler, die bei der Umwandlung aufgetreten sind. Die Fehlermeldungen,
+UDO protokolliert in einer Datei mit dem Suffix (!file [.ul?]) alle Fehler, die bei der Umwandlung aufgetreten sind. Die Fehlermeldungen,
 Warnungen und Hinweise haben dabei immer folgenden Aufbau:
 
 !begin_quote

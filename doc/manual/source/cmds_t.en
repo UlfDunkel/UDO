@@ -20,6 +20,8 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: CHAR macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -96,7 +98,7 @@ Output the (!TeX) symbol.
 !item [(!SYNTAX)] (!T)(!/TeX)(!t)
 
 !item [(!DESCRIPTION)]
-This placeholder will be replaced by (!V)\TeX{}(!v) when converting
+This placeholder will be replaced by (!code [\TeX{}]) when converting
 to (!LaTeX). Otherwise it will be replace by ""TeX"".
 
 !item [(!EXAMPLE)]
@@ -402,7 +404,7 @@ UDO erzeugt bei der Umwandlung ins (!LaTeX)-Format
 (!coloff)
 !item [(!DESCRIPTION)]
 UDO will output special (!LaTeXe) commands if you use this command
-e.g. (!V)\textbf{...}(!v) instead of (!V){\bf ...}(!v)
+e.g. (!code [\textbf{...}]) instead of (!code [{\bf ...}])
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~14
 
@@ -430,12 +432,12 @@ Use (!LaTeXe) commands ((!TeX) only).
 !item [(!DESCRIPTION)]
 UDO erzeugt bei der Umwandlung ins (!LaTeX)-Format
 spezielle (!LaTeXe)-Kommandos, wie eine Preambel für
-(!LaTeXe) oder ""(!V)\textbf{!..}(!v)"" anstelle von ""(!V){\bf~!..}(!v)""
+(!LaTeXe) oder (!code [\textbf{!..}]) anstelle von (!code [{\bf~!..}])
 bei der Umwandlung von (!KK1 [B]).
 (!coloff)
 !item [(!DESCRIPTION)]
 On (!LaTeX) format output, UDO will output special (!LaTeXe) commands if you use this command
-e.g. ""(!V)\textbf{!..}(!v)"" instead of ""(!V){\bf~!..}(!v)""
+e.g. (!code [\textbf{!..}]) instead of (!code [{\bf~!..}])
 
 !item [(!SEEALSO)]
 (!KW [tex_209])
@@ -520,7 +522,7 @@ werden soll.
 (!coloff)
 !item [(!DESCRIPTION)]
 This switch says UDO to generate special em(!TeX) commands to display
-Windows Paintshop Bitmaps ((!V)*.msp(!v)) when using the (!KW [image]) command.
+Windows Paintshop Bitmaps ((!code [*.msp])) when using the (!KW [image]) command.
 
 !item [(!SEEALSO)]
 (!KW [tex_tetex]), (!KW [tex_strunk]), (!KW [tex_lindner]), (!KW [tex_miktex]), (!KW [image]), (!link [Images] [Images])
@@ -658,7 +660,7 @@ Set verbatim character for (!LaTeX) ((!TeX) only)
 !item [(!SYNTAX)] (!T)!/tex_verb (!CHAR)(!t)
 
 !item [(!DESCRIPTION)]
-""(!CHAR)"" will be used as the sign for the (!LaTeX) command (!V)\verb(!v). 
+""(!CHAR)"" will be used as the sign for the (!LaTeX) command (!code [\verb]). 
 (!red)Bei der nächsten Umwandlung von (!KK1 [V]) und (!KK1 [v]) wird dann ""(!CHAR)"" benutzt.(!coloff) 
 ""+"" will be used by default.
 
@@ -716,7 +718,7 @@ Output the (!tm) symbol.
 !item [(!DESCRIPTION)]
 This placeholder will be replaced by the trademark symbol if
 the destination format supports it. If it doesn't UDO will replace
-this placeholder by ""(!T)trademark(!t)"".
+this placeholder by ""(!code [trademark])"".
 
 !item [(!EXAMPLE)]
 (!T)(!/tm)(!t) becomes (!tm).
@@ -830,7 +832,7 @@ Create link to top of page (HTML and HTML-Help only).
 !item [(!SYNTAX)] (!T)!/toplink(!t)
 
 !item [(!DESCRIPTION)]
-UDO saves a file named ""(!V)udo_tp.[gif,bmp,img](!v)"" when
+UDO saves a file named (!file [udo_tp.[gif,bmp,img]]) when
 converting to HTML or HTML-Help. With this command
 you can include this image. Additionally a link
 to the top of the page is generated.

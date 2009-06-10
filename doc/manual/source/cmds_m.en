@@ -20,6 +20,7 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 09: WORD macro introduced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -292,10 +293,10 @@ Dieser Befehl sorgt für die Ausgabe von zwei
 zusätzlichen Leerzeilen und dient dazu, Absätze
 deutlicher voneinander abzuheben. Bei der Umwandlung
 ins (!LaTeX)-Format werden keine zwei Leerzeilen, sondern
-""(!V)\medskip(!v)"" ausgegeben.
+(!code [medskip]) ausgegeben.
 (!coloff)
 !item [(!DESCRIPTION)]
-This command will be simply replaced by ""(!V)\medskip(!v)"" when
+This command will be simply replaced by (!code [\medskip]) when
 converted to (!LaTeX). Otherwise two additional empty lines will be generated.
 
 !item [(!SEEALSO)]

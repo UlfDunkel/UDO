@@ -14,6 +14,8 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -22,7 +24,7 @@
 
 This format is used to make online manuals for DOS programs that are
 compiled with Borland's Turbo Vision library. UDO's output has to be
-converted with (!V)TVHC.EXE(!v). The source code of (!V)TVHC.EXE(!v) is
+converted with (!file [TVHC.EXE]). The source code of (!file [TVHC.EXE]) is
 available and you have to change some parts because it contains some bugs.
 
 If you aren't an author that programs software that uses the Turbo Vision
@@ -34,7 +36,7 @@ library you shouldn't use this format.
 
 My TVHC version 1.0 contains an ugly bug. Due to this bug you cannot quote
 brackets by using them twice. If your TVHC prints the upper error message
-look for the function (!V)scanForCrossRefs()(!v) in (!V)tvhc.cpp(!v) and
+look for the function (!code [scanForCrossRefs(!)]) in (!file [tvhc.cpp]) and
 patch it like this:
 
 !begin_description
@@ -67,7 +69,7 @@ After having changed the source code you should recompile TVHC to enable the cha
 
 !item [TVHC prints the error message ""Text too long""!?] ~
 
-The file (!V)tvhc.h(!v) contains a constant number named (!V)bufferSize(!v)
+The file (!file [tvhc.h]) contains a constant number named (!code [bufferSize])
 that defines the maximum size of the text buffer. This text buffer is a
 little bit small. You should increase the buffer size e.g. to 32~KB to
 suppress the upper error message:

@@ -21,6 +21,7 @@
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 09: WORD macro introduced
 #   fd  Jun 09: NAME macro introduced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -105,10 +106,10 @@ Output the (!deg) symbol.
 !item [(!DESCRIPTION)]
 This placeholder will be replaced by the degree symbol if
 the destination format supports it. If it doesn't UDO will replace
-this placeholder by ""(!T)Grad(!t)"".
+this placeholder by ""(!code [Grad])"".
 
 !item [(!EXAMPLE)]
-(!T)(!/deg)(!t) becomes (!deg).
+(!code [(!/deg!)]) becomes (!deg).
 
 !item [(!EXISTSSINCE)] Version 6.5.8
 

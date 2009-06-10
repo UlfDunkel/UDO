@@ -22,6 +22,7 @@
 #   fd  Jun 09: real quotation fixed
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -223,7 +224,7 @@ Inline Bitmaps benutzen (nur WinHelp4).
 !item [(!DESCRIPTION)]
 Wenn Sie diesen Schalter im Vorspann verwenden, so
 benutzt UDO zur Einbindung der Bilder den RTF-Befehl
-""(!V)\bmcwd(!v)"" anstelle des Befehls ""(!V)\bmc(!v)"". Daraufhin
+(!code [\bmcwd]) anstelle des Befehls (!code [\bmc]). Daraufhin
 speichert der Microsoft Helpcompiler die Bilder in
 einem anderen Format in der WinHelp4-Datei, wodurch
 Bilder nicht mehr verzerrt dargestellt werden.
@@ -759,7 +760,7 @@ Inline Bitmaps benutzen (nur WinHelp).
 !item [(!DESCRIPTION)]
 Wenn Sie diesen Schalter im Vorspann verwenden, so
 benutzt UDO zur Einbindung der Bilder den RTF-Befehl
-""(!V)\bmcwd(!v)"" anstelle des Befehls ""(!V)\bmc(!v)"". Daraufhin
+(!code [\bmcwd]) anstelle des Befehls (!code [\bmc]). Daraufhin
 speichert der Microsoft Helpcompiler die Bilder in
 einem anderen Format in der WinHelp-Datei, wodurch
 Bilder nicht mehr verzerrt dargestellt werden.

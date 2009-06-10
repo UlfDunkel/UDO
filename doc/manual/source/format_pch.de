@@ -17,6 +17,7 @@
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: 'Atari ST' -> 'Atari'
 #   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
+#   fd  Jun 10: using macro (!file [])
 #
 ################################################################################
 
@@ -69,11 +70,11 @@ schreibschützen.
 
 !item [Wie erzeuge ich eine Hilfedatei für Pure~C?]
 
-Bei der Umwandlung des Quelltextes (!T)foo.u(!t) erzeugt UDO die Dateien
-(!T)foo.scr(!t) und (!T)foo.cmd(!t).
+Bei der Umwandlung des Quelltextes (!file [foo.u]) erzeugt UDO die Dateien
+(!file [foo.scr]) und (!file [foo.cmd]).
 
-Um eine Hilfedatei für Pure~C zu erhalten, müssen Sie (!T)HC.TTP(!t)
-starten und diesem Programm die Kommandodatei (!T)foo.cmd(!t) übergeben:
+Um eine Hilfedatei für Pure~C zu erhalten, müssen Sie (!file [HC.TTP])
+starten und diesem Programm die Kommandodatei (!file [foo.cmd]) übergeben:
 
 !begin_quote
 !begin_verbatim
@@ -81,17 +82,17 @@ $ e:\purec\hc.ttp foo.cmd
 !end_verbatim
 !end_quote
 
-Unter GEM ziehen Sie einfach die Datei (!T)foo.cmd(!t) auf (!T)HC.TTP(!t).
+Unter GEM ziehen Sie einfach die Datei (!file [foo.cmd]) auf (!file [HC.TTP]).
 
 !item [Wie benutzt ich die Hilfedatei mit Pure~C?]
 
 Pure~C erlaubt (leider) nur die Einbindung einer einzigen
-benutzerdefinierten Hilfedatei. Diese trägt den Namen (!T)USR.HLP(!t) und
+benutzerdefinierten Hilfedatei. Diese trägt den Namen (!file [USR.HLP]) und
 befindet sich im Pure-C-Ordner.
 
 Um eine eigene Hilfedatei zu benutzen, sichern Sie die alte
-Hilfedatei (z.B. durch Umbenennen in (!T)USR.HLX(!t)) und kopieren Sie
-die eigene, in (!T)USR.HLP(!t) umbenannte Hilfedatei in den Pure-C-Ordner.
+Hilfedatei (z.B. durch Umbenennen in (!file [USR.HLX])) und kopieren Sie
+die eigene, in (!file [USR.HLP]) umbenannte Hilfedatei in den Pure-C-Ordner.
 
 !end_description
 

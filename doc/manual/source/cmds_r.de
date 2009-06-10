@@ -20,6 +20,7 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -68,13 +69,13 @@ Text unverändert innerhalb einer Zeile für angegebene Formate ausgeben.
 !item [(!SYNTAX)] (!T)(!/raw [(!FORMAT)] [(!TEXT)])(!t)
 
 !item [(!DESCRIPTION)]
-(!T)(!TEXT)(!t) wird nur dann ausgegeben, wenn die Quelldatei in eines der 
-angegebenen Formate umgewandelt wird. (!T)(!TEXT)(!t) wird dann 1:1 und ohne 
+(!code [(!TEXT)]) wird nur dann ausgegeben, wenn die Quelldatei in eines der 
+angegebenen Formate umgewandelt wird. (!code [(!TEXT)]) wird dann 1:1 und ohne 
 Berücksichtigung etwaiger UDO-Kommandos ausgegeben.
 
-(!HINT) Da die abschließende runde Klammer (!T))(!t) sowie die abschließenden 
-eckigen Klammern (!T)](!t) für die Parameter-Blöcke von UDO erkannt werden müssen, 
-ist es wichtig, diese beiden Zeichen mit (!T)!(!t) zu schützen, falls sie im 
+(!HINT) Da die abschließende runde Klammer (!code [!)]) sowie die abschließenden 
+eckigen Klammern (!code [!]]) für die Parameter-Blöcke von UDO erkannt werden müssen, 
+ist es wichtig, diese beiden Zeichen mit (!code [!!]) zu schützen, falls sie im 
 auszugebenden Inhalt selbst vorkommen sollen.
 
 !item [(!EXAMPLE)]
@@ -104,8 +105,8 @@ Zeile nur für bestimmte Formate ausgeben.
 !item [(!SYNTAX)] (!T)!/raw [(!FORMAT)] (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-(!T)(!TEXT)(!t) wird nur dann ausgegeben, wenn die Quelldatei
-in eines der angegebenen Formate umgewandelt wird. (!T)(!TEXT)(!t)
+(!code [(!TEXT)]) wird nur dann ausgegeben, wenn die Quelldatei
+in eines der angegebenen Formate umgewandelt wird. (!code [(!TEXT)])
 wird dann 1:1 und ohne Berücksichtigung etwaiger UDO-Kommandos
 ausgegeben. Diese Zeile zerteilt Absätze genau wie alle anderen Kommandos.
 
@@ -166,10 +167,10 @@ PostScript unterstützt.
 Dieser Platzhalter wird durch das Registermarke-Symbol
 ersetzt, sofern es in dem jeweiligen Zeichensatz
 vorhanden ist. Ist es das nicht, ersetzt UDO den
-Platzhalter durch ""(!T)registered(!t)"".
+Platzhalter durch ""(!code [registered])"".
 
 !item [(!EXAMPLE)]
-Aus (!T)(!/reg)(!t) wird (!reg).
+Aus (!code [(!/reg!)]) wird (!reg).
 
 !item [(!EXISTSSINCE)] Version 6.5.8
 

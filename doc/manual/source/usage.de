@@ -19,6 +19,9 @@
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
 #   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -101,7 +104,7 @@ gleich mit CAB ansehen. Der Phantasie sind wenig Grenzen gesetzt.
 
 !item [Ziel/ST-Guide:] Wird dieser Menüeintrag aufgerufen, ruft UDO
 den ST-Guide auf und teilt diesem mit, er möge doch bitte den soeben
-erzeugten Hypertext (Name der Zieldatei mit dem Suffix (!code [.hyp])) 
+erzeugten Hypertext (Name der Zieldatei mit dem Suffix (!file [.hyp])) 
 anzeigen.
 
 !end_tlist
@@ -203,7 +206,7 @@ wird hier erklärt.
 
 Die GEM-Version ermöglicht es Ihnen genau wie die
 Kommandozeilen-Version, bereits vor der eigentlichen Konvertierung
-Symbole zu setzen. Was bei der Kommandozeilen-Version mit der Option (!V)-D(!v)
+Symbole zu setzen. Was bei der Kommandozeilen-Version mit der Option (!code [-D])
 erledigt wird, kann hier durch Eingabe und Selektion der zugehörigen
 Buttons erreicht werden.
 
@@ -252,7 +255,7 @@ das erfahren Sie nach einem Klick auf den Button ""Hinweise"".
 !begin_itemize
 
 !item
-Zunächst schaut UDO, ob ein AV-Server läuft. Ist (!V)AVSERVER(!v) im
+Zunächst schaut UDO, ob ein AV-Server läuft. Ist (!code [AVSERVER]) im
 Environment angegeben oder laufen Gemini oder Thing, werden
 diese mittels AV_PROGSTART damit beauftragt, das jeweilige
 Programm zu starten.
@@ -263,13 +266,13 @@ Ist kein AV-Server vorhanden, startet UDO Programme auf eigene Faust.
     !begin_itemize
 
     !item Läuft das Programm als Accessory, werden die Parameter immer
-    per (!V)VA_START(!v) übermittelt.
+    per (!code [VA_START]) übermittelt.
 
-    !item Läuft das Programm bereits und versteht es (!V)VA_START(!v), so
-    verschickt UDO eine (!V)VA_START(!v)-Meldung an eben dieses Programm.
+    !item Läuft das Programm bereits und versteht es (!code [VA_START]), so
+    verschickt UDO eine (!code [VA_START])-Meldung an eben dieses Programm.
 
-    !item Andernfalls werden GEM-Programme per (!V)shel_write()(!v), TOS-Programme
-    per (!V)Pexec()(!v) gestartet.
+    !item Andernfalls werden GEM-Programme per (!code [shel_write(!)]), TOS-Programme
+    per (!code [Pexec(!)]) gestartet.
 
     !end_itemize
 !end_itemize
@@ -318,7 +321,7 @@ erscheint eine Fehlermeldung mit einem Verweis auf die Protokolldatei.
 
 Die Dokumentation zu UDO kann jederzeit aus dem Dialog heraus über die
 Hilfetaste bzw. das Hilfemenü aufgerufen werden, falls sie den
-Hypertext-Viewer Hyperion besitzen und sich der Hypertext (!V)UDO.HYP(!v) in
+Hypertext-Viewer Hyperion besitzen und sich der Hypertext (!file [UDO.HYP]) in
 dessen Guides-Ordner befindet.
 
 !end_ignore

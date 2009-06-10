@@ -20,6 +20,9 @@
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -183,7 +186,7 @@ behandelt:
 !item UDO überprüft nicht, ob die Grafiken existieren.
 
 !index (!kw [html_img_suffix])
-!item UDO benutzt als Suffix für die Grafiken standardmäßig (!code [.gif]). Mit
+!item UDO benutzt als Suffix für die Grafiken standardmäßig (!file [.gif]). Mit
       dem Schalter (!KW [html_img_suffix]) kann das Suffix jederzeit verändert
       werden.
 
@@ -320,10 +323,10 @@ wird~!..
       Der HCP akzeptiert in Topicnamen nur Buchstaben, Ziffern und den
       Unterstrich. Andere Zeichen werden von UDO angepasst!
 
-!item Für ST-Guide sollte man dem Dateinamen die Zeichen ""(!V)*:\(!v)""
+!item Für ST-Guide sollte man dem Dateinamen die Zeichen (!file [*:\])
       voranstellen, dass der ST-Guide in allen in den für ihn angegebenen
-      Verzeichnissen aus der in der (!V)ST-GUIDE.INF(!v) angegebenen Variable namens
-      (!V)PATHS(!v) nach der Datei sucht.
+      Verzeichnissen aus der in der (!file [ST-GUIDE.INF]) angegebenen Variable namens
+      (!code [PATHS]) nach der Datei sucht.
 
 !index (!kw [no_xlinks])
 !item Durch den Schalter (!KW [no_xlinks] [[~!!]]) können Sie im

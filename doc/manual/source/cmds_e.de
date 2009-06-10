@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -977,10 +978,10 @@ Liste beenden.
 Dieser Platzhalter wird durch das Euro-Symbol
 ersetzt, sofern es in dem jeweiligen Zeichensatz
 vorhanden ist. Ist es das nicht, ersetzt UDO den
-Platzhalter durch ""(!T)EUR(!t)"".
+Platzhalter durch ""(!code [EUR])"".
 
 !item [(!EXAMPLE)]
-Aus (!T)(!/euro)(!t) wird (!euro).
+Aus (!code [(!/euro!)]) wird (!euro).
 
 !item [(!EXISTSSINCE)] Version 6.5.8
 

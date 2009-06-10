@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 09: 'Atari ST' -> 'Atari'
+#   fd  Jun 10: using macro (!file [])
 #
 ################################################################################
 
@@ -52,9 +53,9 @@ table of contents.
 Using the switch (!KW [no_bottomlines] [[pch!!]]) you can suppress the output
 of these bottomlines.
 
-!item [What can I do with the file with the suffix (!T).cmd(!t)?] ~
+!item [What can I do with the file with the suffix .cmd?] ~
 
-UDO saves a command file for the Pure C Help compiler (!V)HC.TTP(!v). You
+UDO saves a command file for the Pure C Help compiler (!file [HC.TTP]). You
 have to call the HC by passing the name of this command file to get a
 compiled help file.
 
@@ -63,11 +64,11 @@ you want to protect your own changes to this file.
 
 !item [How do I build a help file for Pure~C?] ~
 
-UDO saves two file when converting the source fie (!V)foo.u(!v):
-(!V)foo.scr(!v) and (!V)foo.cmd(!v).
+UDO saves two file when converting the source fie (!file [foo.u]):
+(!file [foo.scr]) and (!file [foo.cmd]).
 
-To get a Pure C Help file you have to call (!V)HC.TTP(!v) by passing the
-command file (!V)foo.cmd(!v):
+To get a Pure C Help file you have to call (!file [HC.TTP]) by passing the
+command file (!file [foo.cmd]):
 
 !begin_quote
 !begin_verbatim
@@ -75,15 +76,15 @@ $ e:\purec\hc.ttp foo.cmd
 !end_verbatim
 !end_quote
 
-Using GEM just drag (!V)foo.cmd(!v) onto (!V)HC.TTP(!v) to start the conversion.
+Using GEM just drag (!file [foo.cmd]) onto (!file [HC.TTP]) to start the conversion.
 
 !item [How can I install this help file?] ~
 
 Pure C can display on user defined help file. This file has to be named
-(!V)USR.HLP(!v) and it has to be placed inside the Pure C directory.
+(!file [USR.HLP]) and it has to be placed inside the Pure C directory.
 
-To install your help file backup the original (!V)USR.HLP(!v), rename your
-help file to (!V)USR.HLP(!v) and copy it to the Pure C directory.
+To install your help file backup the original (!file [USR.HLP]), rename your
+help file to (!file [USR.HLP]) and copy it to the Pure C directory.
 
 !end_description
 

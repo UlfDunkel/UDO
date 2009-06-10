@@ -21,6 +21,8 @@
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 09: real quotation fixed
 #   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
 #
 ################################################################################
 
@@ -46,7 +48,7 @@ Ein weiterer Vorteil des Aufteilens ist, dass Sie bestimmte Kapitel
 schnell wiederfinden können, sofern Sie den Dateien sinnvolle Namen
 geben.
 
-Denken Sie auch an mehrsprachige Dokumentationen. Wenn Sie -- wie wir es tun -- z.B. alle deutschen Texte in Dateien mit dem Suffix (!code [.de]) und alle englischen Texte in (!code [.en])-Dateien pflegen, behalten Sie noch besseren Überblick über die einzelnen Sprachen und können z.B. aus den (!code [.en])-Dateien rasch Kopien für z.B. Französisch erstellen, die Datei-Suffixe der Kopien in (!code [.fr]) ändern und dem französischen Übersetzer nur diese Dateien geben.
+Denken Sie auch an mehrsprachige Dokumentationen. Wenn Sie -- wie wir es tun -- z.B. alle deutschen Texte in Dateien mit dem Suffix (!file [.de]) und alle englischen Texte in (!file [.en])-Dateien pflegen, behalten Sie noch besseren Überblick über die einzelnen Sprachen und können z.B. aus den (!file [.en])-Dateien rasch Kopien für z.B. Französisch erstellen, die Datei-Suffixe der Kopien in (!file [.fr]) ändern und dem französischen Übersetzer nur diese Dateien geben.
 
 Außerdem können Sie leicht und schnell nur Teile der Dokumentation auf
 syntaktische Korrektheit testen. Nehmen wir an, wir haben einen

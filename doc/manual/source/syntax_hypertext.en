@@ -16,6 +16,9 @@
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -171,7 +174,7 @@ another part of the current document.
 !item	UDO won't check if the images exist.
 
 !index (!kw [html_img_suffix])
-!item	By default UDO uses ""(!V).gif(!v)"" as the suffix for images when
+!item	By default UDO uses (!file [.gif]) as the suffix for images when
 converting to HTML. You can use the command (!KW [html_img_suffix]) to
 change the suffix.
 
@@ -304,9 +307,9 @@ following example:
 must contain only numbers and characters form the alphabet. All other
 characters will be converted by UDO.
 
-!item	You should use ""(!V)*:\(!v)"" at the beginning of an external link
+!item	You should use (!file [*:\]) at the beginning of an external link
 for the ST-Guide to tell it to look for the hypertext in all directories you
-defined with (!V)PATHS(!v) in your (!V)ST-GUIDE.INF(!v).
+defined with (!code [PATHS]) in your (!file [ST-GUIDE.INF]).
 
 !index (!kw [no_xlinks])
 !item Using the switch called (!KW [no_xlinks]) you can

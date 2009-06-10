@@ -17,6 +17,7 @@
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: 'Tip' -> 'Tipp' (NDR)
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 10: using macro (!file [])
 #
 ################################################################################
 
@@ -25,7 +26,7 @@
 
 Dieses Format wird benutzt, um Onlinehilfen für DOS-Programme zu
 erstellen, die mit Borlands Turbo-Vision-Library geschrieben wurden.
-Zuständiger Konverter ist das Programm (!V)TVHC.EXE(!v), das den
+Zuständiger Konverter ist das Programm (!file [TVHC.EXE]), das den
 Entwicklungssystemen auch im Sourcecode beiliegt.
 
 Da das Turbo-Vision-Help-Format wohl nur für Programmierer interessant

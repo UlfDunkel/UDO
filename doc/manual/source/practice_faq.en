@@ -42,24 +42,9 @@ Please don't pronounce it like ""You do"".
 # = = =
 
 !item [How can I get the current versions?] ~
-# You can download the current version via FTP or from the World Wide Web.
-
-#The current versions are always available in the BBS called ""Maus MK2
-#Iserlohn-Kalthof"" (+49 2371 944925) in the ""Gruppenprogrammteil UDO.Pub"".
-#After the login press [P] for ""Programmteil"", press [G] for
-#""Gruppenprogrammteil"" and enter ""UDO.Pub"". You can list all archives by
-#pressing [A] (""Ausführliche Liste"") and [L] (output list). Remember
-#the number of the archive and start the download by pressing [D] and
-#entering the number of the archives.
-
-To download the current version from the World Wide Web open the URL
-(!T)(!url [http://www.udo-open-source.org/] [])(!t). Here you will find links to
+You can always download the current version from the UDO website at 
+(!url [http://www.udo-open-source.org/] []). Here you will find links to
 the UDO archives.
-
-#If you don't own a modem and you don't have access to the Internet you can
-#get the current version by simply sending me a formatted floppy disk besides
-#a readdressed envelope and 2~DM for stamps. Please tell me which operating
-#system you use.
 
 # = = =
 

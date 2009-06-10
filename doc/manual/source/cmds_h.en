@@ -22,6 +22,9 @@
 #   fd  Jun 09: WORD macro introduced
 #   fd  Jun 09: NAME macro introduced
 #   fd  Jun 09: LINK macro introduced
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -206,7 +209,7 @@ of HTML-Help pages. You have to use the complete
 name, including extension, of the file name. (!FILESPACEQUOTE)
 
 !item [(!EXAMPLE)]
-(!T)!/hh_backimage hintergrund.gif(!t)
+(!T)!/hh_backimage(!t) (!file [hintergrund.gif])
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
 
@@ -235,17 +238,17 @@ Change filename extension of images (for HTML-Help).
 Mit diesem Befehl können Sie die Endung der Grafiken
 setzen, die für die folgenden (!KW [image])-Befehle
 verwendet werden soll. Standardmäßig benutzt UDO die
-Endung ""(!V)gif(!v)"". Falls Sie z.B. JPEG-Grafiken benutzen
-und diese Dateien auf ""(!V)jpeg(!v)"" enden, benutzen Sie
+Endung (!file [.gif]). Falls Sie z.B. JPEG-Grafiken benutzen
+und diese Dateien auf (!file [.jpeg]) enden, benutzen Sie
 einfach untenstehendes Beispiel. (!KW [hh_img_suffix])
 kann beliebig oft aufgerufen werden, so dass einer
 Verwendung verschiedener Grafikformate nichts im Wege steht.
 (!coloff)
 !item [(!DESCRIPTION)]
-UDO uses the suffix ""gif"" when converting the image commands for
+UDO uses the suffix (!file [.gif]) when converting the image commands for
 HTML-Help by default. If you want to use different image types
 you can redefine the image suffix with this command. The
-example below shows how to change the image suffix to ""jpeg"". You can use
+example below shows how to change the image suffix to (!code [jpeg]). You can use
 (!KW [hh_img_suffix]) as often as you want so you can redefine
 the image suffix right before every image.
 
@@ -444,7 +447,7 @@ Change filename extension of images.
 Mit diesem Befehl können Sie die Endung der Grafiken
 setzen, die für die folgenden (!KW [image])-Befehle
 verwendet werden soll. Standardmäßig benutzt UDO die
-Endung ""(!V)tiff(!v)"". (!KW [htag_img_suffix]) kann beliebig oft
+Endung (!file [tiff]). (!KW [htag_img_suffix]) kann beliebig oft
 aufgerufen werden, so dass einer Verwendung verschiedener
 Grafikformate nichts im Wege steht.
 (!coloff)
@@ -566,7 +569,7 @@ of HTML pages. You have to use the complete
 name, including extension, of the file name. (!FILESPACEQUOTE)
 
 !item [(!EXAMPLE)]
-(!T)!/html_backimage background.gif(!t)
+(!T)!/html_backimage(!t) (!file [background.gif])
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~1
 
@@ -942,7 +945,7 @@ for the left frame of HTML pages. You have to use the complete
 name, including extension, of the file name.
 
 !item [(!EXAMPLE)]
-(!T)!/html_frames_backimage hintergrund.gif(!t)
+(!T)!/html_frames_backimage(!t) (!file [hintergrund.gif])
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~9
 
@@ -1114,7 +1117,7 @@ but the table of contents will be displayed in a separate frame.
 As with the ""modern"" layout, chapter icons will be recognized.
 
 UDO uses following file names, which you should not
-use yourself: (!V)00con.htm[l](!v) and (!V)00toc.htm[l](!v).
+use yourself: (!file [00con.htm[l!]]) and (!file [00toc.htm[l!]]).
 
 ""(!TEXT)"" can be some of the following values:
 
@@ -1330,7 +1333,7 @@ Setzen des Datums (nur HTML).
 !item [(!DESCRIPTION)]
 Ist dieser Schalter gesetzt, so setzt UDO im HTML-Header ein META-Tag für
 Datum/Uhrzeit der Datei-Erzeugung
-z.B. (!T)<META name="date" content="2004-01-29T08:49:37+00:00">(!t).
+z.B. (!code [<META name="date" content="2004-01-29T08:49:37+00:00">]).
 
 Dabei ist "+00:00" der Unterschied von der lokalen Zeit zu UTC
 (Coordinated Universal Time, vormals GMT). Mit dem optionalen Parameter (!TEXT)
@@ -1373,12 +1376,12 @@ Ist (!TEXT) leer, wird für den Zeitzonenunterschied ""+00:00"" gesetzt.
 (!red)
 !item [(!DESCRIPTION)]
 Ist dieser Schalter gesetzt, so werden je nach Vorgabe
-(!T)(!LINK)(!t)-Elemente im HTML-Header erzeugt:
+(!code [(!LINK)])-Elemente im HTML-Header erzeugt:
 !begin_itemize
-!item Enthält (!T)(!TEXT)(!t) ""navigation"", werden die Links zur Navigation erzeugt
+!item Enthält (!code [(!TEXT)]) ""navigation"", werden die Links zur Navigation erzeugt
    (<link rel="start" href="index.html" title="Beginn des Dokumentes">, ebenso
    <link rel="home"!.., "contents", "toc", "first", "prev", "previous", "next", "last").
-!item Enthält (!T)(!TEXT)(!t) ""chapter"", werden alle Links zu den Kapiteln erzeugt
+!item Enthält (!code [(!TEXT)]) ""chapter"", werden alle Links zu den Kapiteln erzeugt
    (<link rel="chapter" href="!.." title="!..">, ebenso für "section").
 !end_itemize
 
@@ -1386,7 +1389,7 @@ Dadurch, dass die Link-Elemente nicht mehr automatisch, sondern nur noch auf Anf
 erzeugt werden, entstehen kleinere HTML-Dateien.
 (!coloff)
 !item [(!DESCRIPTION)]
-If this switch is set, several (!T)(!LINK)(!t) elements are generated in the HTML header as following:
+If this switch is set, several (!code [(!LINK)]) elements are generated in the HTML header as following:
 !begin_itemize
 !item If (!TEXT) contains ""navigation"", links for navigation are generated
    (<link rel="start" href="index.html" title="Begin of the document">, just as
@@ -1425,8 +1428,8 @@ in HTML-Entities (&auml; etc.) umgewandelt. Somit ist es möglich, auch von ISO-L
 abweichende Dateien zu erzeugen, ohne das UDO dazwischenfunkt.
 
 Optional kann durch den Parameter (!TEXT) ein Codepage übergeben werden.
-Zum Beispiel wird mit (!T)!/html_ignore_8bit ISO-8859-2(!t) in die HTML-Header
-folgendes geschrieben: (!T)<meta http-equiv="content-type" content="text/html;charset=ISO-8859-2">(!t).
+Zum Beispiel wird mit (!code [!/html_ignore_8bit ISO-8859-2]) in die HTML-Header
+folgendes geschrieben: (!code [<meta http-equiv="content-type" content="text/html;charset=ISO-8859-2">]).
 (!coloff)
 !item [(!DESCRIPTION)]
 If you use this switch in the preamble, 8 bit characters
@@ -1463,17 +1466,17 @@ Change filename extension of images (HTML only).
 Mit diesem Befehl können Sie die Endung der Grafiken
 setzen, die für die folgenden (!KW [image])-Befehle
 verwendet werden soll. Standardmäßig benutzt UDO die
-Endung ""(!V)gif(!v)"". Falls Sie z.B. JPEG-Grafiken benutzen
-und diese Dateien auf ""(!V)jpeg(!v)"" enden, benutzen Sie
+Endung (!file [.gif]). Falls Sie z.B. JPEG-Grafiken benutzen
+und diese Dateien auf (!file [.jpeg]) enden, benutzen Sie
 einfach untenstehendes Beispiel. (!KW [html_img_suffix])
 kann beliebig oft aufgerufen werden, so dass einer
 Verwendung verschiedener Grafikformate nichts im Wege steht.
 (!coloff)
 !item [(!DESCRIPTION)]
-UDO uses the suffix ""gif"" when converting the image commands for
+UDO uses the suffix (!file [.gif]) when converting the image commands for
 HTML by default. If you want to use different image types you can
 redefine the image suffix with this command. The lower example shows
-how to change the image suffix to ""jpeg"". You can use
+how to change the image suffix to (!code [jpeg]). You can use
 (!KW [html_img_suffix]) as often as you want so you can redefine
 the image suffix right before every image.
 
@@ -1538,7 +1541,7 @@ werden die einzelnen Einträge, mit einem Komma getrennt, in die
 Metainformationen aufgenommen.
 (!coloff)
 !item [(!DESCRIPTION)]
-(!T)""(!TEXT)""(!t) should be a comma separated list of keywords. This list
+(!code [""(!TEXT)""]) should be a comma separated list of keywords. This list
 will be output by UDO inside the header of the HTML file that
 contains the chapter where you used this comand. Some Internat
 machines are taking these information for referencing the HTML pages.
@@ -1773,7 +1776,7 @@ the ""modern"" layout. You have to use the complete
 name, including extension, of the file name.
 
 !item [(!EXAMPLE)]
-(!T)!/html_modern_backimage hintergrund.gif(!t)
+(!T)!/html_modern_backimage(!t) (!file [hintergrund.gif])
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~9
 
@@ -2021,7 +2024,7 @@ spätere HTML-Datei verwendet.
 !item [(!DESCRIPTION)]
 If you use this command inside a chapter, section, subsection or
 paragraph, ""(!FILE)"" is used as the name of the HTML file instead of
-(!T)CCSSUUPP(!t) (CC chapter, SS section, UU subsection, PP paragraph).
+(!code [CCSSUUPP]) (CC chapter, SS section, UU subsection, PP paragraph).
 
 !item [(!EXAMPLE)]
 (!T)!/html_name software(!t)
@@ -2100,11 +2103,11 @@ Optional kann durch den Parameter (!TEXT) ein Separatortext übergeben werden.
 Dieser wird automatisch vorn und hinten mit einem Leerzeichen ergänzt, damit der Separator 
 nicht an den Kapitelnamen klebt.
 
-Die Navigationszeile ist in eine (!T)<div>(!t)-Umgebung mit der CSS-Klasse (!B)UDO_nav_line(!b) eingebettet.
+Die Navigationszeile ist in eine (!code [<div>])-Umgebung mit der CSS-Klasse (!B)UDO_nav_line(!b) eingebettet.
 So kann ihr Inhalt über CSS-Anweisungen weiter formatiert werden.
 
 (!EXAMPLE) (!nl)
-(!T)!/html_navigation_line ::(!t) (!nl)
+(!code [!/html_navigation_line ::]) (!nl)
 Kapitel 1 :: Kapitel 1.1 :: Kapitel 1.1.1
 
 !item [image]
@@ -2115,7 +2118,7 @@ besser verständlich.
 Mit dem optionalen Parameter kann ein eigenes Bild angegeben werden.
 
 (!EXAMPLE) (!nl)
-(!T)!/html_navigation_image(!t) (!nl)
+(!code [!/html_navigation_image]) (!nl)
 (!img [udo_fo] [Ordner])~~Kapitel 1 > Kapitel 1.1
 
 !end_description
@@ -2189,7 +2192,7 @@ It will be enclosed by blanks automatically to avoid that the
 node names are glued to the separator text.
 
 !item [(!HINT)]
-The navigation line is embedded in a (!T)<div>(!t) environment with the CSS class (!B)UDO_nav_line(!b). 
+The navigation line is embedded in a (!code [<div>]) environment with the CSS class (!B)UDO_nav_line(!b). 
 So you can format its content with CSS commands.
 
 !item [(!EXAMPLE)]
@@ -2263,14 +2266,14 @@ Set size of headings (HTML only).
 Mit diesem Befehl kann man die Größe der Überschriften setzen,
 die UDO bei der Ausgabe von Kapiteln
 benutzen soll. Benutzt man untenstehendes Beispiel,
-so werden die Überschriften für Nodes mit (!V)<H2>!..</H2>(!v)
+so werden die Überschriften für Nodes mit (!code [<h2>!..</h2>])
 erzeugt, die für Subnodes und Subsubnodes jeweils mit
 einer kleineren Größe. Standardmäßig verwendet UDO den Wert~1.
 (!coloff)
 !item [(!DESCRIPTION)]
 You can set the font size of the HTML headlines with this switch. By
-default UDO will use  value of 1. That means, that UDO will output (!V)<H1>...</H1>(!v) for chapters, (!V)<H2>...</H2>(!v) for sections
-etc. The example shows how to tell UDO that it should output (!V)<H2>...</H2>(!v) for chapters etc.
+default UDO will use  value of 1. That means, that UDO will output (!code [<h1>...</h1>]) for chapters, (!code [<h2>...</h2>]) for sections
+etc. The example shows how to tell UDO that it should output (!code [<h2>...</h2>]) for chapters etc.
 
 !item [(!EXAMPLE)]
 (!T)!/html_nodesize 2(!t)
@@ -2732,7 +2735,7 @@ wird gezeigt, wie man die möglichen Trennstellen des
 Wortes ""Silbentrennung"" setzen kann.
 (!coloff)
 !item [(!DESCRIPTION)]
-You can set Hyphenation marks ((!T)!/-(!t)) with this command for
+You can set Hyphenation marks ((!code [!/-])) with this command for
 a word for the whole text. The example shows how to tell UDO where
 it's allowed to split up the word ""Hyphenation"".
 

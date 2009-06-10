@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 10: using macro (!file [])
 #
 ################################################################################
 
@@ -72,10 +73,10 @@ The first binomial theorem: (!ab2)
 
 !item [How does UDO translate special chars in indices?] ~
 
-Special characters are translated especially for (!V)makeindex(!v).
+Special characters are translated especially for (!file [makeindex]).
 It's not necessary to adjust the UDO-generated (!LaTeX) files.
 
-You have to use a ""(!V)}(!v)"" for any ""(!V){(!v)" inside an index entry
+You have to use a (!file [}]) for any (!file [{(!v)" inside an index entry
 and vice versa. Otherwise (!LaTeX) will print an error message.
 
 !end_description

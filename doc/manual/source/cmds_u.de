@@ -23,6 +23,8 @@
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 09: LINK macro introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -103,7 +105,7 @@ Link auf UDO-Website erzeugen.
 
 !item [(!DESCRIPTION)]
 UDO sichert für HTML, WinHelp und ST-Guide eine Datei namens
-""(!V)udo_wm.[gif,bmp,img](!v)"". Mit diesem Kommando kann man in sein Werk die
+(!file [udo_wm.[gif,bmp,img!]]). Mit diesem Kommando kann man in sein Werk die
 Grafik einbinden. Bei HTML wird zugleich ein Link auf die
 (!url [Website] [http://www.udo-open-source.org/]) erzeugt.
 
@@ -164,7 +166,7 @@ Symbol entfernen.
 
 !item [(!DESCRIPTION)]
 Mit diesem Kommando können Symbole, die Sie mit (!KW [set])
-oder der Kommandozeilenoption (!V)-D(!v) gesetzt haben,
+oder der Kommandozeilenoption (!code [-D]) gesetzt haben,
 wieder entfernen. Dieses Kommando darf überall im
 Quelltext verwendet werden.
 
@@ -887,11 +889,11 @@ Zieldatei als ""Buch"" ausgeben.
 
 !item [(!DESCRIPTION)]
 UDO gibt bei der Umwandlung ins (!LaTeX)-Format (!KW [node]) mit
-""(!V)\chapter(!v)"" anstatt ""(!V)\section(!v)"", (!KW [subnode]) mit
-""(!V)\section(!v)"" anstatt ""(!V)\subsection(!v)"" und
-(!KW [subsubnode]) mit ""(!V)\subsection(!v)"" anstatt
-""(!V)\subsubsection(!v)"" aus. Als Documentstyle bzw. Documentclass
-wird ""(!V)book(!v)"" verwendet. Bei den anderen Formaten wird eine
+(!code [\chapter]) anstatt (!code [\section]), (!KW [subnode]) mit
+(!code [\section]) anstatt (!code [\subsection]) und
+(!KW [subsubnode]) mit (!code [\subsection]) anstatt
+(!code [\subsubsection]) aus. Als Documentstyle bzw. Documentclass
+wird (!code [book]) verwendet. Bei den anderen Formaten wird eine
 (!LaTeX)-ähnliche Ausgabe erzeugt, d.h. Kapitel werden auch mit
 ""Kapitel #:"" bzw. ""Anhang X:"" beschriftet.
 

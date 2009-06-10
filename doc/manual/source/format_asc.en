@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -30,8 +31,8 @@ The "ascii" output generates a single text file with "plain" text.
 !item The paragraph width can be changed with the (!KW [parwidth]) command.
 UDO uses a value of 70~characters by default.
 
-!item Text styles like bold, italic or underlined are generated with the characters (!T)*(!t), (!T)/(!t) and
-(!T)_(!t) (as common in the Usenet). (!nl)
+!item Text styles like bold, italic or underlined are generated with the characters (!code [*]), (!code [/]) and
+(!code [_]) (as common in the Usenet). (!nl)
 Because of the existence of some print tools(!N)e.g. IdeaList for Atari~ST(!n)
 and newsreaders knowing these text styles UDO doesn't count these special characters. Lines containing such formatting characters can become longer than the specified paragraph width. (!nl)
 If you want to suppress the output of these characters you can use the

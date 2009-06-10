@@ -21,6 +21,8 @@
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: VALUE macro introduced
 #   fd  Jun 09: LINK macro introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -68,12 +70,12 @@ developer versions.
 # ..............................................................................
 !item New output format HTML Apple Help (!nl)
   Basically this is HTML but with tiny changes Therefore, two new arguments have been 
-  implemented for (!KW [docinfo]): (!T)AppleTitle(!t) and 
-  (!T)AppleIcon(!t) (!nl)
+  implemented for (!KW [docinfo]): (!code [AppleTitle]) and 
+  (!code [AppleIcon]) (!nl)
   This extension is available since version~6.5.17.
 # ..............................................................................
 !item (!KW [docinfo]) has two new arguments: (!nl)
-    (!T)company(!t) and (!T)category(!t) (!nl)
+    (!code [company]) and (!code [category]) (!nl)
     This extension has been implemented since version 6.5.2
 # ..............................................................................
 !item Having an UDO input line ending with !\<line break>, UDO takes the following line as
@@ -149,7 +151,7 @@ Version 6.5.13
 !item [(!CHANGES)]
 !begin_itemize !short
 # ..............................................................................
-!item The (!T)!/docinfo(!t) options (!T)[program](!t) and (!T)[programimage](!t) no longer exclude each other but can be used simultaneously now. If you use both, [program] will be output first.
+!item The (!code [!/docinfo]) options (!code [[program!]]) and (!code [[programimage!]]) no longer exclude each other but can be used simultaneously now. If you use both, [program] will be output first.
 # ..............................................................................
 !item The UDO Community was added to output of (!KW [use_about_udo]).
 # ..............................................................................
@@ -159,7 +161,7 @@ Version 6.5.13
 # ..............................................................................
 !item UDO for OS/2 should identify itself with "UDO for OS/2" (since version~6.5.1).
 # ..............................................................................
-!item (!T)!/code [utf8](!t) (same as (!T)!/code [utf-8](!t)) will be supported now (since version~6.5.1).
+!item (!code [!/code [utf8!]]) (same as (!code [!/code [utf-8!]])) will be supported now (since version~6.5.1).
 # ..............................................................................
 !end_itemize
 # ------------------------------------------------------------------------------
@@ -202,22 +204,22 @@ Version 6.5.13
   (!KW [html_navigation]) [image] (!nl)
   These new commands are available since version~6.5.20.
 # ..............................................................................
-!item New commands: (!T)!/html_robots(!t), (!KW [docinfo]) [robots] (!nl)
+!item New commands: (!code [!/html_robots]), (!KW [docinfo]) [robots] (!nl)
       Use them for creating robots commands for search engines. (!nl)
-      (!KW [docinfo]) [robots] is only written if single manual pages don't use (!KW [html_robots]). So (!T)!/html_robots(!t) has a higher priority than (!KW [docinfo]) [robots]. Implemented since version~6.5.17.
+      (!KW [docinfo]) [robots] is only written if single manual pages don't use (!KW [html_robots]). So (!code [!/html_robots]) has a higher priority than (!KW [docinfo]) [robots]. Implemented since version~6.5.17.
 # ..............................................................................
-!item Neue Kommandos: (!T)!/html_frames_toc_title(!t), (!T)!/html_frames_con_title(!t) (!nl)
+!item Neue Kommandos: (!code [!/html_frames_toc_title]), (!code [!/html_frames_con_title]) (!nl)
    Dienen zum Setzen der Framentitel beim Frame Layout.
    Seit Version~6.5.16 implementiert.
 # ..............................................................................
-!item New Switch (preamble only): (!T)!/html_header_links(!t) (!nl)
-   If this switch is set, several (!T)(!LINK)(!t) elements are generated in the
+!item New Switch (preamble only): (!code [!/html_header_links]) (!nl)
+   If this switch is set, several (!code [(!LINK)]) elements are generated in the
    HTML header as following. (!nl)
    This feature wish #0000053 has been implemented since version~6.5.2.
 # ..............................................................................
-!item New Switch: (!T)!/html_header_date [(!TEXT)](!t) (!nl)
+!item New Switch: (!code [!/html_header_date [(!TEXT)!]]) (!nl)
    Until now, UDO inserted near to the beginning of every HTML file the building date,
-   e.g. (!T)<!-- last modified on 2004/01/29 -->(!t). (!nl)
+   e.g. (!code [<!!-- last modified on 2004/01/29 -->]). (!nl)
    Now, only if this switch is set, a META element for the building date/time is generated
    in the HTML Header. (!nl)
    This feature wish #0000054 has been implemented since version 6.5.2.
@@ -324,8 +326,8 @@ Version 6.5.13
       geschrieben werden. (!nl)
       Version 6.5.9
 # ..............................................................................
-!item The (!T)!/docinfo(!t) entries (!T)subject(!t), (!T)keywords!(!t),
-   (!T)company(!t) and (!T)category(!t) are written into the info values
+!item The (!code [!/docinfo]) entries (!code [subject]), (!code [keywords]),
+   (!code [company]) and (!code [category]) are written into the info values
    of RTF files.
 # ..............................................................................
 !item Alle Nodes, Subnodes, etc. werden für die RTF-Ausgabe als
@@ -356,7 +358,7 @@ Version 6.5.13
 !item Fixed bug #0000017 in version~6.4.1 (!nl)
    Error message: ""couldn't read BMP header of <udo_mw.bmp>. No such file or directory."" (!nl)
    New behavior: If you convert a document to RTF for the first time and the
-   UDO link image (!T)udo_mw.bmp(!t) doesn't exist, there will be given a note,
+   UDO link image (!file [udo_mw.bmp]) doesn't exist, there will be given a note,
    that you may translate the document again to complete it. (!nl)
    The image will be found now on TOS compatible computers too.
 # http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000017
@@ -614,19 +616,19 @@ unten links !! unten mitte !! unten rechts
 !begin_description
  !item [New commands:]
  	!begin_itemize !short
-   !item (!T)!/html_default_hyphenation(!t) (!nl)
+   !item (!code [!/html_default_hyphenation]) (!nl)
          Only if this command is set, the Hyphenation marks for
-         the HTML output are converted to (!T)&shy;(!t)
-   !item (!T)!/node1_size foo(!t) (!nl)
+         the HTML output are converted to (!code [&shy;])
+   !item (!code [!/node1_size foo]) (!nl)
           This command sets the fontsize of nodes and headings for
           postscript output (foo: fontsize in pt).
-   !item (!T)!/node2_size foo(!t) (!nl)
+   !item (!code [!/node2_size foo]) (!nl)
          This command sets the fontsize of subnodes and subheadings for
          postscript output (foo: fontsize in pt).
-   !item (!T)!/node3_size foo(!t) (!nl)
+   !item (!code [!/node3_size foo]) (!nl)
          This command sets the fontsize of subsubnodes and subsubheadings
          for postscript output (foo: fontsize in pt).
-   !item (!T)!/node4_size foo(!t) (!nl)
+   !item (!code [!/node4_size foo]) (!nl)
          This command sets the fontsize of subsubsubnodes and
          subsubsubheadings for postscript output (foo: fontsize in pt).
  	!end_itemize
@@ -635,26 +637,26 @@ unten links !! unten mitte !! unten rechts
  	 !item In the first file of the HTML output ist set a meta tag for
  	       AppleTitle/JobTimerHelp.
  	 !item All nodes, which got a special name (e.g. foo.php) by
- 	       (!T)!/html_name(!t) are referenced correct now.
-   !item The table of contents ist included in the tag (!T)<ul>(!t).
-         This tag is extended to (!T)<ul class=""content"">(!t).
+ 	       (!code [!/html_name]) are referenced correct now.
+   !item The table of contents ist included in the tag (!code [<ul>]).
+         This tag is extended to (!code [<ul class="content">]).
          Therefore you can choose, weather the bullets in front of
          every item should be drawn or not. You can control it by
          ul.content~{~list-style-type:~none;~} in a CSS file.
-   !item For every (!T)!/newpage(!t) there will be given out a
-         (!T)<span style=""page-break-after:always;""></span>(!t).
+   !item For every (!code [!/newpage]) there will be given out a
+         (!code [<span style="page-break-after:always;"></span>]).
          So user agents who knows about it, can make a pge break.
    !item The image captions will be put out as a field for RTF output.
          Therefore a table of images could be created.
    !item There would be build a speacial page with a macro of a list of
-         figures for the RTF output, even if (!T)!/listoffigure(!t)
+         figures for the RTF output, even if (!code [!/listoffigure])
          ist set. The macro must be executed in the word processor.
    !item The default values are set for kind and heightness of fonts
          and who PDF files will be opened.
  	!end_itemize
  !item [Changes:]
  	!begin_itemize !short
- 	 !item (!T)!/html_backpage ../index.html ""Back to UDO website""(!t) (!nl)
+ 	 !item (!code [!/html_backpage ../index.html "Back to UDO website"]) (!nl)
  	       You can tell UDO to set a special text instead of the link text
  	       in the ""alt"" attribute. The text must be included in single
  	       quotation marks.
@@ -677,10 +679,10 @@ unten links !! unten mitte !! unten rechts
 !subheading General
 !begin_itemize !short
 !item All index entrys up to fourth level will be written in the
-      project file ((!T)*.upr(!t))
-!item The entrys for (!T)!/label(!t) and (!T)!/alias(!t) will
-      be written in the project file ((!T)*.upr(!t)).
-!item All heading entrys will be written in the project file ((!T)*.upr(!t)).
+      project file ((!file [*.upr]))
+!item The entrys for (!code [!/label]) and (!code [!/alias]) will
+      be written in the project file ((!file [*.upr])).
+!item All heading entrys will be written in the project file ((!file [*.upr])).
 !item For all entrys the line number will be written.
 !end_itemize
 
@@ -692,73 +694,73 @@ unten links !! unten mitte !! unten rechts
 !item New function for postscript output included, to hide characters
       which can be interpreted as postscript code.
 !item New command for the document layout (!nl)
-      (!T)!/doclayout [ps] [paper] foo(!t) (!nl)
+      (!code [!/doclayout [ps!] [paper!] foo]) (!nl)
       Possible values for foo: A3PORTRAIT, A3LANDSCAPE, A4PORTRAIT,
       A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE.
 
-      (!T)!/doclayout [ps] [openMode] foo(!t) (!nl)
+      (!code [!/doclayout [ps!] [openMode!] foo]) (!nl)
       You can find possible values for foo in the pdfmark primer.
 
-      (!T)!/doclayout [ps] [propfontname] foo(!t) (!nl)
+      (!code [!/doclayout [ps!] [propfontname!] foo]) (!nl)
       Possible value for foo are fontnames like Arial, Times New Roman,
       ans or sans serif (!nl)
       (!B)Hint:(!b) For postscript output will be set Helvetica if
       helvetica, Arial or sans serif is set, otherwise times New Roman
 
-      (!T)!/doclayout [ps] [propfontsize] foo(!t) (!nl)
+      (!code [!/doclayout [ps!] [propfontsize!] foo]) (!nl)
       Possible values for foo are fontsizes with unit pt
-!item (!T)!/docinfo [keywords] foo(!t) (!nl)
-      Replacement for (!T)!/html_keywords(!t) (works only for postscript)
-!item (!T)!/docinfo [description] foo(!t) (!nl)
-      Replacement for (!T)!/html_description(!t) (works only for postscript)
+!item (!code [!/docinfo [keywords!] foo]) (!nl)
+      Replacement for (!code [!/html_keywords]) (works only for postscript)
+!item (!code [!/docinfo [description!] foo]) (!nl)
+      Replacement for (!code [!/html_description]) (works only for postscript)
 !item There is built a titlepage for postscript output now.
 !item For the standard heading line the title and programm items are
-      extracted from (!T)(!/docinfo)(!t)
+      extracted from (!code [(!/docinfo!)])
 !item For the standard footer line the author item is extracted from
-      (!T)(!/docinfo)(!t)
+      (!code [(!/docinfo!)])
 !item The document info of a PDF file is build from the values of
-      the (!T)(!/docinfo)(!t)
+      the (!code [(!/docinfo!)])
 !item Description- and list environments are supported for postscript
 !item New characters for the itemize environment
 !item The font ""Symbol"" can be used.
-!item Internal links (!T)(!/link ...)(!t), external links (!T)(!/xlink ...)(!t)
-      und (!T)(!/url ...)(!t) are transposed for PDF (via PostScript)
+!item Internal links (!code [!/link ...!)]), external links (!code [(!/xlink ...!)])
+      und (!code [(!/url ...!)]) are transposed for PDF (via PostScript)
 !item Footnotes are transposed for postscript
 !item Tables are transposed legible with monospaced characters
-!item Commands (!T)!/bigskip(!t), (!T)!/medskip(!t) and (!T)!/smallskip(!t)
+!item Commands (!code [!/bigskip]), (!code [!/medskip]) and (!code [!/smallskip])
       are transposed legible now.
 !item All nodes are set as ""Named Destination"", so it is possible to
       link from outside directly to every node of a pdf file.
 !item With data from all nodes is built a bookmark content table
-!item Table of contents will be put out, if (!T)!/tableofcontents(!t) is set
-!item (!T)!/label(!t) will be transposed to a ""Named Destination""
+!item Table of contents will be put out, if (!code [!/tableofcontents]) is set
+!item (!code [!/label]) will be transposed to a ""Named Destination""
 !end_itemize
 
 !subheading Hypertext Markup Language (HTML)
 !begin_itemize
 !item New commands for the HTML output: (!nl)
-      (!T)!/html_style_name foo(!t) (!nl)
+      (!code [!/html_style_name foo]) (!nl)
       Set an external stylesheet for all files of a project
 
-      (!T)!/html_script_name foo(!t) (!nl)
+      (!code [!/html_script_name foo]) (!nl)
       Set an external script for all files of a project
 
-      (!T)!/html_favicon_name foo(!t) (!nl)
+      (!code [!/html_favicon_name foo]) (!nl)
       Set an favicon for all files of a project
 
       (!B)Important:(!b) This commands may be changed in future possibly.
-!item Character (!T)&shy;(!t) for hyphenation in HTML included
-!item The entities (!T)&ndash;(!t), (!T)&mdash;(!t) and (!T)&hellip;(!t)
+!item Character (!code [&shy;]) for hyphenation in HTML included
+!item The entities (!code [&ndash;]), (!code [&mdash;]) and (!code [&hellip;])
       are used for HTML.
 !item Setting links for the navigation through a project of HTML sites
-      via the element (!T)(!LINK)(!t).
-      The following attributes are suppoerted: (!T)contents, start, first,
-      previous, prev, next, last(!t) and (!T)copyright(!t) (!nl)
-      The links for (!T)first(!t), (!T)last(!t) and (!T)previous(!t)
-      are only vaild for CAB (perhaps iCab). The link for (!T)copyright(!t)
+      via the element (!code [(!LINK)]).
+      The following attributes are suppoerted: (!code [contents]), (!code [start]), (!code [first]),
+      (!code [previous]), (!code [prev]), (!code [next]), (!code [last]) and (!code [copyright]) (!nl)
+      The links for (!code [first]), (!code [last]) and (!code [previous])
+      are only vaild for CAB (perhaps iCab). The link for (!code [copyright])
       introduces a link to aboutudo and in this case will be built. (!nl)
-      CAB doesn't support the attribute (!T)target(!t), when using the
-      element (!T)(!LINK)(!t). Therfore this link-Element doesn't work so
+      CAB doesn't support the attribute (!code [target]), when using the
+      element (!code [(!LINK)]). Therfore this link-Element doesn't work so
       properly if frames are used.
 !item If frames are built for HTML output, there will be built a
       <noframes></noframes> area with a table of contents too. Therefor
@@ -778,22 +780,12 @@ unten links !! unten mitte !! unten rechts
 !begin_node Changes until Release 6 Patchlevel 14
 !html_name  history_release_6_until_PL14
 
-# auskommentiert 07.12.2003 - Ulrich Kretschmer:
-# Dieses Release wurde noch gar nicht veröffentlicht.
-# UDO7 hasn't been released yet.
-
 (!PUBLISHED [Release~6 Patchlevel~14] [July 11, 1999])
 
 You will find here a very compressed list of the major changes
 compared to the last release. UDO supports now more destination formats, it
 supports new features and there were fixed a lot of bugs. In some
 cases it was impossible not to change the syntax of some commands.
-
-# auskommentiert 07.12.2003 - Ulrich Kretschmer
-# Registrierte Benutzer, die sich die Zwischenversionen beschafft haben,
-# finden hier als Gedächtnisstütze meine komprimierten Anmerkungen aus
-# (!T)rel6-7.txt(!t).
-# # Dieser Text existierte in der englischen Doku nicht!
 
 !begin_description
 
@@ -1174,8 +1166,8 @@ cases it was impossible not to change the syntax of some commands.
 			image you have to use the (!KW [image]) command inside a
 			center environment. Thus, you can print left and right
 			justified images, too.
-        !item The suffix for ASCII files is now (!V).txt(!v).
-        !item UDO doesn't break line between (!V)\verb(!v) when
+        !item The suffix for ASCII files is now (!file [.txt]).
+        !item UDO doesn't break line between (!code [verb]) when
 			converting to (!LaTeX).
         !item Graphic characters of the IBM PC character set will be
 			replaced by ""+"", ""-"" and ""|"" for Windows Help.

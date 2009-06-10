@@ -24,6 +24,7 @@
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 09: WORD macro introduced
 #   fd  Jun 09: NAME macro introduced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -109,10 +110,10 @@ man im Kapitel ""(!nolink [Definitionen])"".
 Dieser Platzhalter wird durch das Grad-Symbol
 ersetzt, sofern es in dem jeweiligen Zeichensatz
 vorhanden ist. Ist es das nicht, ersetzt UDO den
-Platzhalter durch ""(!T)Grad(!t)"".
+Platzhalter durch ""(!code [Grad])"".
 
 !item [(!EXAMPLE)]
-Aus (!T)(!/deg)(!t) wird (!deg).
+Aus (!code [(!/deg!)]) wird (!deg).
 
 !item [(!EXISTSSINCE)] Version 6.5.8
 

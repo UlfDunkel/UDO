@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 10: using macro (!file [])
 #
 ################################################################################
 
@@ -35,7 +36,7 @@ java-basierten (!url [IBM Softcopy Reader] [http://www-306.ibm.com/software/appl
 Eine IPF-Dokumentation ist außerdem in der Online-Hilfe des IPFC-Programms
 enthalten.
 
-Um aus den IPF-Dateien die Hilfedateien zu erzeugen, benötigt man den IPF-Compiler ((!T)IPFC.EXE(!t)). Dieser ist Bestandteil von (kommerziellen) IBM-Entwicklerprodukten (z.B. (!I)OS/2~Developers Toolkit(!i),
+Um aus den IPF-Dateien die Hilfedateien zu erzeugen, benötigt man den IPF-Compiler ((!file [IPFC.EXE])). Dieser ist Bestandteil von (kommerziellen) IBM-Entwicklerprodukten (z.B. (!I)OS/2~Developers Toolkit(!i),
 (!I)Visual-Age(!i) Compiler, (!I)IBM Set C++(!i)), zum Herunterladen (als
 OS/2-Version) findet er sich auf
 (!url [http://www.m-petz.de/Download/Download.htm] []) (unter ""IPFC-Zubehör"") oder auf (!url [http://www.goellnitz-online.de/os2/infseite/ipfc.htm] []).
@@ -46,7 +47,7 @@ Hilfedateien existieren unter OS/2 als HLP- oder INF-Dateien.
 HLP-Dateien werden nur zusammen mit ausführbaren Programmen verwendet,
 INF-Dateien können eigenständig betrachtet werden, entweder durch
 Doppelklick auf der Arbeitsoberfläche (Workplace Shell) oder auf der
-Kommandozeile mit (!T)VIEW(!t).
+Kommandozeile mit (!file [VIEW]).
 
 Achtung: Das Dateiformat von HLP-Dateien unter OS/2 hat nichts mit dem
 von HLP-Dateien unter Windows zu tun!
@@ -62,7 +63,7 @@ Bestandteil des ""Just Add Warp""-Paketes ist (downloadbar via
 oder
 (!url [ftp://ftp.leo.org/pub/comp/os/os2/leo/windows/justaddwarp.zip] []))
 (ca. 3,4~MB). Nach dem Installieren werden folgende Dateien aus den
-Verzeichnis (!T)\JUST_ADD(!t) benötigt: (!T)IPF.DLL(!t), (!T)LIBIPX.DLL(!t), (!T)LIBIPX.LIB(!t), (!T)VIEW.EXE(!t), (!T)VIEWH.HLP(!t) sowie (!T)XVIEW.PAL(!t) (der Rest des Softwarepaketes ist irrelevant).
+Verzeichnis (!file [\JUST_ADD]) benötigt: (!file [IPF.DLL]), (!file [LIBIPX.DLL]), (!file [LIBIPX.LIB]), (!file [VIEW.EXE]), (!file [VIEWH.HLP]) sowie (!file [XVIEW.PAL]) (der Rest des Softwarepaketes ist irrelevant).
 
 # Notizen 22.12.2003:
 # Info zum Thema: siehe auch noch auf http://www.hypermake.de/english/n024.html

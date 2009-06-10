@@ -20,6 +20,7 @@
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -483,7 +484,7 @@ jeweilige Format Kommentare beherrscht.
 Dieser Platzhalter wird durch das (!nolink [Copyright])-Symbol
 ersetzt, sofern es in dem jeweiligen Zeichensatz
 vorhanden ist. Ist es das nicht, ersetzt UDO den
-Platzhalter durch ""(!T)(c)(!t)"".
+Platzhalter durch ""(!code [(c!)])"".
 
 !item [(!EXAMPLE)]
 Aus (!T)(!/copyright)(!t) wird (!copyright)

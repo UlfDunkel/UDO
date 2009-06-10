@@ -20,6 +20,9 @@
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
 #   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -46,9 +49,9 @@ In der ersten Form erfolgen Ausgaben auf die Standardausgabe (stdout),
 Fehlermeldungen werden auf die Standardfehlerausgabe (stderr)
 ausgegeben. In der zweiten Form werden Ausgaben in die
 (!U)Zieldatei(!u) geschrieben, Fehlermeldungen in eine Protokolldatei
-mit der Dateimaske (!code [*.ul*]).
+mit der Dateimaske (!file [*.ul*]).
 
-Die Optionen müssen einzeln übergeben werden: (!V)-al(!v) wird nicht als (!V)-a -l(!v)
+Die Optionen müssen einzeln übergeben werden: (!code [-al]) wird nicht als (!code [-a -l])
 interpretiert!
 
 Der Name der Quelldatei muss als letzter Parameter übergeben werden.
@@ -84,7 +87,7 @@ Quelltext mit dem Befehl (!KW [ifset]) abfragen lässt.
 !item [(--)force-long] Wird diese Option
 benutzt, versucht UDO auch auf den Systemen, die
 standardmässig keine langen Dateinamen unterstützen (TOS, DOS),
-lange Dateinamen zu erzeugen (Suffix (!code [.html]) anstatt (!code [.htm])).
+lange Dateinamen zu erzeugen (Suffix (!file [.html]) anstatt (!file [.htm])).
 
 !item [(--)force-short] Erzwingt unter Betriebssystemen, die lange Dateinamen beherrschen, die Erzeugung von kurzen Dateinamen (8+3).
 
@@ -124,7 +127,7 @@ lange Dateinamen zu erzeugen (Suffix (!code [.html]) anstatt (!code [.htm])).
 
 !item [-o F, (--)outfile F]  (!B)UDO(!b) schreibt seine Ausgaben in die Datei namens ""F"".
 # ergänzt 10.01.2004 - Ulrich Kretschmer
-Mit (!T)-o !(!t) wird als Ausgabedateiname der Name der Quelldatei plus neuer Extension verwendet (z.B. (!T)file.u(!t) wird zu (!T)file.stg(!t)).
+Mit (!code [-o]) wird als Ausgabedateiname der Name der Quelldatei plus neuer Extension verwendet (z.B. (!file [file.u]) wird zu (!file [file.stg])).
 
 !item [-p, (--)pchelp] Die (!U)Quelldatei(!u) wird ins Pure-C-Help-Quelltextformat umgewandelt.
 
@@ -140,7 +143,7 @@ umgewandelt. Normaler Text wird Kommentar, der Inhalt der Sourcecode-Umgebung wi
 !item [-s, (--)stg] Die (!U)Quelldatei(!u) wird ins ST-Guide-Format umgewandelt.
 
 !item [(--)save-upr] Wird diese Option benutzt, legt UDO eine
-Projekt-Datei mit dem Suffix (!code [.upr]) mit einer Liste der benutzten
+Projekt-Datei mit dem Suffix (!file [.upr]) mit einer Liste der benutzten
 und erzeugten Dateien an.
 
 !item [-t, (--)tex] Die (!U)Quelldatei(!u) wird ins (!LaTeX)-Format umgewandelt.
@@ -150,7 +153,7 @@ Ausgabedatei erzeugt, sondern nur eine Protokolldatei und ggf. die Datei mit
 den Rohlingen für die Trennvorschläge.
 
 !item [(--)tree] Wird diese Option benutzt, legt UDO in einer Datei
-mit dem Suffix (!code [.ut?]) eine baumartige Übersicht der benutzten Dateien an.
+mit dem Suffix (!file [.ut?]) eine baumartige Übersicht der benutzten Dateien an.
 Bei intensiver Benutzung des Befehls (!KW [include]) sieht man damit,
 welche Dateien andere Dateien nachladen.
 
@@ -186,19 +189,19 @@ welche Dateien andere Dateien nachladen.
 !begin_description
 !item [udo file.u]
 
-Umwandeln der Datei ""(!V)file.u(!v)"" ins ASCII-Format (default) und Ausgabe auf
+Umwandeln der Datei (!file [file.u]) ins ASCII-Format (default) und Ausgabe auf
 die Standardausgabe. Fehlermeldungen werden auf die Standardfehlerausgabe ausgegeben.
 
 !item [udo (--)tex -o output.tex file.u]
 
-Umwandeln der Datei ""(!V)file.u(!v)"" ins (!LaTeX)-Format, Ausgaben werden in die
-Datei ""(!V)output.tex(!v)"" geschrieben, Fehlermeldungen werden in der Datei
-""(!V)output.ult(!v)"" protokolliert.
+Umwandeln der Datei (!file [file.u]) ins (!LaTeX)-Format, Ausgaben werden in die
+Datei (!file [output.tex]) geschrieben, Fehlermeldungen werden in der Datei
+(!file [output.ult]) protokolliert.
 
 !item [udo -s -y -l -o ! file.u]
 
-Umwandeln der Datei ""(!V)file.u(!v)"" ins St-Guide-Quelltextformat. Ausgaben
-erfolgen in die Datei ""(!V)file.stg(!v)"". Es werden keine Protokolldatei und
+Umwandeln der Datei (!file [file.u]) ins St-Guide-Quelltextformat. Ausgaben
+erfolgen in die Datei (!file [file.stg]). Es werden keine Protokolldatei und
 keine Datei mit Trennvorschlägen angelegt.
 
 !end_description
@@ -208,8 +211,8 @@ keine Datei mit Trennvorschlägen angelegt.
 !subsubheading Umgebungsvariablen
 !begin_xlist [UDOINPUTPATH]
 
-!item [HOME] Im Homeverzeichnis wird nach der Datei (!V)udo.ini(!v) gesucht,
-falls (!B)UDOPATH(!b) nicht existiert ((!V)udo.ini(!v) betrifft nur die Atari-GEM-Version von UDO).
+!item [HOME] Im Homeverzeichnis wird nach der Datei (!file [udo.ini]) gesucht,
+falls (!B)UDOPATH(!b) nicht existiert ((!file [udo.ini]) betrifft nur die Atari-GEM-Version von UDO).
 
 !item [LANG] Legt die zu benutzende Landessprache für Fehlermeldungen
 fest, wenn weder (!B)LC_ALL(!b) noch (!B)LC_MESSAGES(!b) existiert.

@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -64,8 +65,8 @@ text processor and not a bug of UDO.
 
 !item [Quotes aren't imported correctly, why?] ~
 
-UDO uses the RTF commands (!V)\lquote(!v), (!V)\rquote(!v),
-(!V)\rdblquote(!v) and (!V)\ldblquote(!v) for displaying the typographical
+UDO uses the RTF commands (!code [\lquote]), (!code [\rquote]),
+(!code [\rdblquote]) and (!code [\ldblquote]) for displaying the typographical
 quotes and apostrophes. Your text processor has to know these common RTF
 commands.
 
@@ -87,7 +88,7 @@ furthermore it faults correct RTF commands.
 
 !item [Indices aren't imported into StarWriter!?] ~
 
-StarWriter 3.0 ignores the RTF command ""(!V)\xe(!v)"" which is used for
+StarWriter 3.0 ignores the RTF command (!code [\xe]) which is used for
 indices.
 
 !item [Lotus WordPro places chapter numbers outside the text frame!?] ~

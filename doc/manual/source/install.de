@@ -20,6 +20,9 @@
 #   fd  Jun 08: 'Homepage' -> 'Website'
 #   fd  Jun 09: real quotation fixed
 #   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -36,17 +39,17 @@ Sie einfach alle Dateien in ein beliebiges Verzeichnis, welches
 sinnigerweise ""UDO"" genannt werden sollte.
 
 Die GEM-Version sollte man im verwendeten Desktop -- ich empfehle,
-Gemini, Thing oder Ease zu benutzen -- als Anwendung für Dateien mit der Dateimaske (!code [*.u*]) anmelden.
+Gemini, Thing oder Ease zu benutzen -- als Anwendung für Dateien mit der Dateimaske (!file [*.u*]) anmelden.
 
 Falls Sie das TTP bevorzugen und mit einem Kommandozeileninterpreter
 (z.B. mit der Mupfel von Stefan Eissing) arbeiten, kopieren oder
-verschieben Sie 'udo.ttp' in eines der in (!T)$PATH(!t) angegebenen
-Verzeichnisse (z.B. ""(!V)\usr\bin(!v)"").
+verschieben Sie (!file [udo.ttp]) in eines der in (!file [$PATH]) angegebenen
+Verzeichnisse (z.B. (!file [\usr\bin])).
 
 !begin_ignore
 # auskommentiert 13.01.2004 - Ulrich Kretschmer
 Falls Sie den ST-Guide installiert haben, sollten Sie '(!UDOR)ger.hyp'
-und ""(!V)(!UDOR)ger.ref(!v)"" in Ihr Verzeichnis kopieren oder verschieben, in dem
+und (!file [(!UDOR)ger.ref]) in Ihr Verzeichnis kopieren oder verschieben, in dem
 Sie auch alle anderen Hypertexte aufbewahren. Nur dann können auch
 andere Hypertexte oder Programme (z.B. ein Editor) auf den
 UDO-Hypertext zugreifen.
@@ -64,7 +67,7 @@ UDO-Hypertext zugreifen.
 !begin_itemize !short
 !item Laden Sie die entsprechende ZIP-Datei von der UDO-Website herunter.
 !item Entpacken Sie die ZIP-Datei in ein beliebiges Verzeichnis.
-!item Nehmen Sie das Verzeichnis, in dem sich die ausführbare Datei (!T)udo.exe(!t) befindet, in Ihre PATH-Liste (DOS: siehe (!T)autoexec.bat(!t); Windows: siehe....?) auf, oder kopieren Sie diese Datei in ein Verzeichnis, das sich bereits in der PATH-Liste befindet.
+!item Nehmen Sie das Verzeichnis, in dem sich die ausführbare Datei (!file [udo.exe]) befindet, in Ihre PATH-Liste (DOS: siehe (!file [autoexec.bat]); Windows: siehe....?) auf, oder kopieren Sie diese Datei in ein Verzeichnis, das sich bereits in der PATH-Liste befindet.
 !end_itemize
 Da die DOS-Version einen DOS-Extender verwendet, benötigen Sie mindestens eine 80386-CPU.
 
@@ -82,7 +85,7 @@ Die für frühere UDO-Versionen nötige Installation von RSJ und EMX ist nicht mehr
 !begin_itemize !short
 !item Laden Sie sich die entsprechende ZIP-Datei von der UDO-Website herunter.
 !item Entpacken Sie die ZIP-Datei in ein beliebiges Verzeichnis.
-!item Nehmen Sie das Verzeichnis, in dem sich die ausführbare Datei (!T)udo.exe(!t) befindet, in Ihre PATH-Liste (siehe (!T)config.sys(!t)) auf, oder kopieren Sie diese Datei in ein Verzeichnis, das sich bereits in der PATH-Liste befindet.
+!item Nehmen Sie das Verzeichnis, in dem sich die ausführbare Datei (!file [udo.exe]) befindet, in Ihre PATH-Liste (siehe (!file [config.sys])) auf, oder kopieren Sie diese Datei in ein Verzeichnis, das sich bereits in der PATH-Liste befindet.
 !end_itemize
 Die für frühere UDO-Versionen nötige Installation von EMX ist nicht mehr erforderlich.
 
@@ -119,7 +122,7 @@ werden. Unabhängig davon ist die Größe zur Laufzeit minimal.
 
 !begin_itemize !short
 !item Laden Sie sich die entsprechende ZIP-Datei von der UDO-Website herunter.
-!item Entpacken Sie die ZIP-Datei und kopieren Sie die ausführbare Datei ""(!T)udo(!t)"" nach (!T)/usr/bin(!t).
+!item Entpacken Sie die ZIP-Datei und kopieren Sie die ausführbare Datei (!file [udo]) nach (!file [/usr/bin]).
 !end_itemize
 
 Anmerkung: Eine manpage ist derzeit nicht Teil der Mac-OS-X-Distribution.
@@ -137,9 +140,9 @@ Um in das Verzeichniss zu kommen kann man ber den Menüpunkt ""Gehe zu/Gehe zum 
 
 !begin_itemize !short
 !item Laden Sie die entsprechende rpm-Datei von der UDO-Website herunter.
-!item Melden Sie sich als (!T)root(!t) an.
-!item Neuinstallation: (!T)rpm -i (!t)(!I)file(!i)(!T).rpm(!t);
-oder wenn bereits ein älteres UDO-rpm installiert war: (!T)rpm -U (!t)(!I)file(!i)(!T).rpm(!t)
+!item Melden Sie sich als (!code [root]) an.
+!item Neuinstallation: (!code [rpm -i]) (!file [file])(!file [.rpm]);
+oder wenn bereits ein älteres UDO-rpm installiert war: (!code [rpm -U]) (!file [file])(!file [.rpm])
 !end_itemize
 
 (!DocumentationWorkInProgress)
@@ -153,9 +156,9 @@ oder wenn bereits ein älteres UDO-rpm installiert war: (!T)rpm -U (!t)(!I)file(!
 
 !begin_itemize !short
 !item Laden Sie die entsprechende rpm-Datei von der UDO-Website herunter.
-!item Melden Sie sich als (!T)root(!t) an.
-!item Neuinstallation: (!T)rpm -i (!t)(!I)file(!i)(!T).rpm(!t);
-oder wenn bereits ein älteres UDO-rpm installiert war: (!T)rpm -U (!t)(!I)file(!i)(!T).rpm(!t)
+!item Melden Sie sich als (!code [root]) an.
+!item Neuinstallation: (!code [rpm -i]) (!file [file])(!file [.rpm]);
+oder wenn bereits ein älteres UDO-rpm installiert war: (!code [rpm -U]) (!file [file])(!file [.rpm])
 !end_itemize
 Oder benutzen Sie Ihre bevorzugte rpm-Oberfläche (z.B. kpackage, krpmview, yast).
 
@@ -170,13 +173,13 @@ Oder benutzen Sie Ihre bevorzugte rpm-Oberfläche (z.B. kpackage, krpmview, yast)
 
 !begin_itemize !short
 !item Laden Sie sich das entsprechende deb-Paket von (!url [http://www.debian.org] [http://www.debian.org/]) herunter.
-!item Melden Sie sich als (!T)root(!t) an.
-!item (!T)dpkg -i (!t)(!I)file(!i)(!T).deb(!t)
+!item Melden Sie sich als (!code [root]) an.
+!item (!code [dpkg -i]) (!file [file])(!file[.deb])
 !end_itemize
-Oder (bei Internetverbindung): (!T)apt-get install udo(!t)
+Oder (bei Internetverbindung): (!code [apt-get install udo])
 
-Der Paketname für die englische Dokumentation lautet (!T)udo-doc(!t),
-für die deutsche Doku (!T)udo-doc-ger(!t).
+Der Paketname für die englische Dokumentation lautet (!file [udo-doc]),
+für die deutsche Doku (!file [udo-doc-ger]).
 
 (!DocumentationWorkInProgress)
 
@@ -189,33 +192,33 @@ für die deutsche Doku (!T)udo-doc-ger(!t).
 
 !begin_itemize !short
 !item Das UDO-Quelltextarchiv von der UDO-Website herunterladen.
-!item Quelltextarchiv auspacken: (!T)tar xzf udo_xxx_src.tar.gz(!t)
-!item wechseln Sie ins Verzeichnis (!T)Source(!t)
-!item (!T)make -f Makefile.linux(!t)
-!item Kopieren Sie die ausführbare UDO-Datei nach (!V)/usr/local/bin(!v) oder in eines der Verzeichnisse Ihres (!T)$PATH(!t)'s.
-!item wechseln Sie ins Verzeichnis (!T)doc/manpage(!t) und starten Sie das Skript (!T)create_manpage_de(!t) oder (!T)create_manpage_en(!t). Kopieren Sie dann die UDO-Manualpage (!V)udo.1(!v) nach (!V)/usr/man/man1/(!v).
-!item Um die UDO-Dokumentation ins HTML-Format zu konvertieren, wechseln Sie ins Verzeichnis (!T)doc/manual/source(!t) und starten Sie das Skript (!T)create_manual_de_html(!t) -- die Dokumentation wird ins Verzeichnis (!T)doc/manual/html-de(!t) geschrieben.
+!item Quelltextarchiv auspacken: (!code [tar xzf]) (!file [udo_xxx_src.tar.gz])
+!item wechseln Sie ins Verzeichnis (!file [Source])
+!item (!code [make -f]) (!file [Makefile.linux])
+!item Kopieren Sie die ausführbare UDO-Datei nach (!file [/usr/local/bin]) oder in eines der Verzeichnisse Ihres (!file [$PATH])'s.
+!item wechseln Sie ins Verzeichnis (!file [doc/manpage]) und starten Sie das Skript (!file [create_manpage_de]) oder (!file [create_manpage_en]). Kopieren Sie dann die UDO-Manualpage (!file [udo.1]) nach (!file [/usr/man/man1/]).
+!item Um die UDO-Dokumentation ins HTML-Format zu konvertieren, wechseln Sie ins Verzeichnis (!file [doc/manual/source]) und starten Sie das Skript (!file [create_manual_de_html]) -- die Dokumentation wird ins Verzeichnis (!file [doc/manual/html-de]) geschrieben.
 !end_itemize
 
 !begin_ignore
 # auskommentiert 10.01.2004 - Ulrich Kretschmer
-Nach Entpacken des Archivs kopieren Sie das Binary aus ""(!V)bin/(!v)"" in das
-Verzeichnis""(!V)/usr/local/bin(!v)"" oder in eines der Verzeichnisse Ihres
-(!T)$PATH(!t)s.
+Nach Entpacken des Archivs kopieren Sie das Binary aus (!file [bin/]) in das
+Verzeichnis (!file [/usr/local/bin]) oder in eines der Verzeichnisse Ihres
+(!file [$PATH])s.
 
-Kopieren Sie dann die UDO-Manualpage ""(!V)udo.1(!v)"" nach ""(!V)/usr/man/man1/(!v)"".
+Kopieren Sie dann die UDO-Manualpage (!file [udo.1]) nach (!file [/usr/man/man1/]).
 
 Um sich die Dokumentation von UDO mittels GNU-Info ansehen zu können,
 sollten Sie die Quelltexte der Dokumentation ins Texinfo-Format
 umwandeln, mit Makeinfo bearbeiten und die erhaltenen Dateien in das
-Verzeichnis kopieren ((!V)$INFOPATH(!v)), in dem sich die anderen Info-Dateien
+Verzeichnis kopieren ((!file [$INFOPATH])), in dem sich die anderen Info-Dateien
 befinden, sofern sich in der UDO-Distribution noch keine Info-Dateien
-befinden. Die Datei ""(!V)dir(!v)"" muss dort dann noch angepasst werden, indem Sie
+befinden. Die Datei (!file [dir]) muss dort dann noch angepasst werden, indem Sie
 auf die UDO-Dokumentation verweisen.
 
 Desweiteren empfiehlt sich das Anlegen von Shellscripten oder Aliasen,
 um nicht immer alle Optionen angeben zu müssen. Das folgende Script,
-welches man ""(!V)u2tex(!v)"" benennen sollte, ruft UDO mit den passenden
+welches man (!file [u2tex]) benennen sollte, ruft UDO mit den passenden
 Optionen auf.
 
 !begin_quote

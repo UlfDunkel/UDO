@@ -19,6 +19,7 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -67,12 +68,12 @@ Output text within a line without changes, for defined destination formats.
 !item [(!SYNTAX)] (!T)(!/raw [(!FORMAT)] [(!TEXT)])(!t)
 
 !item [(!DESCRIPTION)]
-(!T)(!TEXT)(!t) will only be output when converting to one of the specified 
-destination formats. (!T)(!TEXT)(!t) will be output then without any conversion.
+(!code [(!TEXT)]) will only be output when converting to one of the specified 
+destination formats. (!code [(!TEXT)]) will be output then without any conversion.
 
-(!HINT) Because UDO needs to recognize the closing bracket (!T))(!t) as well as 
-the closing square brackets (!T)](!t) of the parameter blocks, it is important 
-to protect these characters with (!T)!(!t) if you want to use them in the content 
+(!HINT) Because UDO needs to recognize the closing bracket (!code [!)]) as well as 
+the closing square brackets (!code [!]]) of the parameter blocks, it is important 
+to protect these characters with (!code [!!]) if you want to use them in the content 
 themselves.
 
 !item [(!EXAMPLE)]
@@ -103,8 +104,8 @@ Output raw string for destination format.
 
 (!red)
 !item [(!DESCRIPTION)]
-(!T)(!TEXT)(!t) wird nur dann ausgegeben, wenn die Quelldatei
-in eines der angegebenen Formate umgewandelt wird. (!T)(!TEXT)(!t)
+(!code [(!TEXT)]) wird nur dann ausgegeben, wenn die Quelldatei
+in eines der angegebenen Formate umgewandelt wird. (!code [(!TEXT)])
 wird dann 1:1 und ohne Berücksichtigung etwaiger UDO-Kommandos
 ausgegeben. Diese Zeile zerteilt Absätze genau wie alle anderen Kommandos.
 (!coloff)
@@ -168,7 +169,7 @@ Output the (!reg) symbol.
 !item [(!DESCRIPTION)]
 This placeholder will be replaced by the registermarke symbol if
 the destination format supports it. If it doesn't UDO will replace
-this placeholder by ""(!T)registered(!t)"".
+this placeholder by ""(!code [registered])"".
 
 !item [(!EXAMPLE)]
 (!T)(!/reg)(!t) becomes (!reg).

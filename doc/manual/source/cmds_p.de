@@ -22,6 +22,7 @@
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 09: LINK macro introduced
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -411,10 +412,10 @@ mit der Ausnahme, dass ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
 Dieser Platzhalter wird durch das Pfund-Symbol
 ersetzt, sofern es in dem jeweiligen Zeichensatz
 vorhanden ist. Ist es das nicht, ersetzt UDO den
-Platzhalter durch ""(!T)GBP(!t)"".
+Platzhalter durch ""(!code [GBP])"".
 
 !item [(!EXAMPLE)]
-Aus (!T)(!/pound)(!t) wird (!pound).
+Aus (!code [(!/pound!)]) wird (!pound).
 
 !item [(!EXISTSSINCE)] Version 6.5.8
 

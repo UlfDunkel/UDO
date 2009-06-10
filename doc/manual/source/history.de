@@ -26,6 +26,9 @@
 #   fd  Jun 09: VALUE macro introduced
 #   fd  Jun 09: LINK macro introduced
 #   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
 #
 ################################################################################
 
@@ -67,12 +70,12 @@ Die Produktionsversion 6.6.0 wurde noch nicht veröffentlicht. Die in diesem Absc
 # ..............................................................................
 !item Neues Ausgabeformat HTML Apple Help (!nl)
   Ist im Prinzip nichts anderes als HTML, allerdings mit kleinen Änderungen. Deshalb
-  gibt es auch für (!KW [docinfo]) zwei neue Argumente: (!T)AppleTitle(!t) und 
-  (!T)AppleIcon(!t) (!nl)
+  gibt es auch für (!KW [docinfo]) zwei neue Argumente: (!code [AppleTitle]) und 
+  (!code [AppleIcon]) (!nl)
   Dieses Feature ist seit Version~6.5.17 verfügbar.
 # ..............................................................................
 !item (!KW [docinfo]) hat zwei neue Argumente: (!nl)
-    (!T)company(!t) und (!T)category(!t) (!nl)
+    (!code [company]) und (!code [category]) (!nl)
     Diese Erweiterung ist seit Version 6.5.2 implementiert.
 # ..............................................................................
 !item Endet eine UDO-Eingabezeile mit !\<Zeilenumbruch>, wird die folgende Zeile
@@ -150,7 +153,7 @@ Version 6.5.13
 !item [(!CHANGES)]
 !begin_itemize !short
 # ..............................................................................
-!item Die (!T)!/docinfo(!t)-Optionen (!T)[program](!t) und (!T)[programimage](!t) schließen sich nicht mehr gegenseitig aus, sondern können jetzt gleichzeitig ausgegeben werden. Wenn beide benutzt werden, wird [program] zuerst ausgegeben.
+!item Die (!code [!/docinfo])-Optionen (!code [[program!]]) und (!code [[programimage!]]) schließen sich nicht mehr gegenseitig aus, sondern können jetzt gleichzeitig ausgegeben werden. Wenn beide benutzt werden, wird [program] zuerst ausgegeben.
 # ..............................................................................
 !item Die ""UDO Community"" ist in dem Text ergänzt worden, der von
     (!KW [use_about_udo]) ausgegeben wird.
@@ -161,7 +164,7 @@ jetzt nicht mehr """Release~6.x Patchlevel~yy"", sondern ""Version~6.x.y""
 # ..............................................................................
 !item Die OS/2-Version von UDO sollte sich seit Version~6.5.1 als ""UDO for OS/2"" melden.
 # ..............................................................................
-!item (!T)!/code [utf8](!t) oder (!T)!/code [utf-8](!t) wird jetzt unterstützt (seit Version~6.5.1).
+!item (!code [!/code [utf8!]]) oder (!code [!/code [utf-8!]]) wird jetzt unterstützt (seit Version~6.5.1).
 # ..............................................................................
 !end_itemize
 # ------------------------------------------------------------------------------
@@ -205,22 +208,22 @@ jetzt nicht mehr """Release~6.x Patchlevel~yy"", sondern ""Version~6.x.y""
   (!KW [html_navigation]) [image] (!nl)
   Diese Features sind seit Version~6.5.20 verfügbar.
 # ..............................................................................
-!item Neue Kommandos: (!T)!/html_robots(!t), (!KW [docinfo]) [robots] (!nl)
+!item Neue Kommandos: (!code [!/html_robots]), (!KW [docinfo]) [robots] (!nl)
       Dienen zum Setzen der Robots Anweisungen für Suchmaschinen. (!nl)
-      (!KW [docinfo]) [robots] wird nur geschrieben, wenn in einzelnen Dateien nicht (!KW [html_robots]) benutzt wird. (!T)!/html_robots(!t) hat also Vorrang vor (!KW [docinfo]) [robots]. Seit Version~6.5.17 implementiert.
+      (!KW [docinfo]) [robots] wird nur geschrieben, wenn in einzelnen Dateien nicht (!KW [html_robots]) benutzt wird. (!code [!/html_robots]) hat also Vorrang vor (!KW [docinfo]) [robots]. Seit Version~6.5.17 implementiert.
 # ..............................................................................
-!item Neue Kommandos: (!T)!/html_frames_toc_title(!t), (!T)!/html_frames_con_title(!t) (!nl)
+!item Neue Kommandos: (!code [!/html_frames_toc_title]), (!code [!/html_frames_con_title]) (!nl)
    Dienen zum Setzen der Framentitel beim Frame Layout.
    Seit Version~6.5.16 implementiert.
 # ..............................................................................
-!item Neuer Schalter: (!T)!/html_header_links(!t) (!nl)
+!item Neuer Schalter: (!code [!/html_header_links]) (!nl)
     Ist dieser Schalter gesetzt, werden je nach Vorgabe
-   (!T)(!LINK)(!t)-Elemente im HTML-Header erzeugt. (!nl)
+   (!code [(!LINK)])-Elemente im HTML-Header erzeugt. (!nl)
    Dieser Feature-Wunsch #0000053 ist seit Version~6.5.2 implementiert.
 # ..............................................................................
-!item Neuer Schalter: (!T)!/html_header_date [(!TEXT)](!t) (!nl)
+!item Neuer Schalter: (!code [!/html_header_date [(!TEXT)!]]) (!nl)
    Bisher wurde zu Beginn jeder HTML-Datei ein Kommentar mit dem Datum der Datei-Erzeugung eingefügt,
-   z.B. (!T)<!-- last modified on 29.01.2004 -->(!t). (!nl)
+   z.B. (!code [<!!-- last modified on 29.01.2004 -->]). (!nl)
    Nunmehr wird, wenn dieser Schalter gesetzt ist, im HTML-Header ein META-Tag für
    Datum/Uhrzeit der Datei-Erzeugung erzeugt. (!nl)
    Dieser Feature-Wunsch #0000054 ist seit Version~6.5.2 implementiert.
@@ -327,8 +330,8 @@ jetzt nicht mehr """Release~6.x Patchlevel~yy"", sondern ""Version~6.x.y""
       geschrieben werden. (!nl)
       Version 6.5.9
 # ..............................................................................
-!item Die (!T)!/docinfo(!t)-Einträge (!T)subject(!t), (!T)keywords(!t),
-    (!T)company(!t) und (!T)category(!t) werden in die Info-Einträge der
+!item Die (!code [!/docinfo])-Einträge (!code [subject]), (!code [keywords]),
+    (!code [company]) und (!code [category]) werden in die Info-Einträge der
     RTF-Datei geschrieben.
 # ..............................................................................
 !item Alle Nodes, Subnodes usw. werden für die RTF-Ausgabe als
@@ -358,7 +361,7 @@ jetzt nicht mehr """Release~6.x Patchlevel~yy"", sondern ""Version~6.x.y""
 # ..............................................................................
 !item Bug #0000017 in Version 6.4.1 beseitigt (!nl)
    Fehlermeldung: ""couldn't read BMP header of <udo_mw.bmp>. No such file or directory."" (!nl)
-   Neuer Zustand: Wenn beim ersten Übersetzungslauf nach RTF das UDO-Link-Bild (!T)udo_mw.bmp(!t) noch
+   Neuer Zustand: Wenn beim ersten Übersetzungslauf nach RTF das UDO-Link-Bild (!file [udo_mw.bmp]) noch
    nicht vorhanden ist, wird jetzt ein Hinweis ausgegeben, das Dokument ein
    weiteres Mal zu übersetzen, um es zu vervollständigen. (!nl)
    Das UDO-Bild wird jetzt auch auf TOS-kompatiblen Computern gefunden.
@@ -631,23 +634,23 @@ unten links !! unten mitte !! unten rechts
 !begin_description
  !item [Neue Befehle:]
  	!begin_itemize !short
-   !item (!T)!/html_default_hyphenation(!t) (!nl)
+   !item (!code [!/html_default_hyphenation]) (!nl)
          Nur wenn dieses Kommando gesetzt ist, werden die bedingten
-         Trennstriche (!T)!/-(!t) bei der HTML-Ausgabe in (!T)&shy;(!t)
+         Trennstriche (!code [!/-]) bei der HTML-Ausgabe in (!code [&shy;])
          umgesetzt.
-   !item (!T)!/node1_size foo(!t) (!nl)
+   !item (!code [!/node1_size foo]) (!nl)
           Mit diesem Kommando (Vorspann) kann die Größe der Nodes und Headings
           bei der PostScript-Ausgabe festgelegt werden (foo: Zeichensatzgröße
           in pt).
-   !item (!T)!/node2_size foo(!t) (!nl)
+   !item (!code [!/node2_size foo]) (!nl)
          Mit diesem Kommando (Vorspann) kann die Größe der Subnodes und
          Subheadings bei der PostScript-Ausgabe festgelegt werden (foo:
          Zeichensatzgröße in pt).
-   !item (!T)!/node3_size foo(!t) (!nl)
+   !item (!code [!/node3_size foo]) (!nl)
           Mit diesem Kommando (Vorspann) kann die Größe der Subsubnodes und
           Subsubheadings bei der PostScript-Ausgabe festgelegt werden
           (foo: Zeichensatzgröße in pt).
-   !item (!T)!/node4_size foo(!t) (!nl)
+   !item (!code [!/node4_size foo]) (!nl)
          Mit diesem Kommando (Vorspann) kann die Größe der Subsubsubnodes
          und Subsubsubheadings bei der PostScript-Ausgabe festgelegt
          werden (foo: Zeichensatzgröße in pt).
@@ -656,21 +659,21 @@ unten links !! unten mitte !! unten rechts
  	!begin_itemize !short
  	 !item In der ersten Datei der HTML-Ausgabe wird jetzt ein Meta-Tag
  	       für AppleTitle/JobTimerHelp angelegt.
-   !item Jetzt werden auch Nodes, die mit (!V)!/html_name(!v) einen
+   !item Jetzt werden auch Nodes, die mit (!KW [html_name]) einen
          ausführlichen Namen bekommen haben (z.~B. foo.php) richtig
          referenziert.
    !item Für die HTML-Ausgabe wird jetzt im Tag <ul> zusätzlich
-         (!T)<ul class="content">(!t) ausgegeben. Dadurch kann
+         (!code [<ul class="content">]) ausgegeben. Dadurch kann
          man mittels eines Eintrages im Stylesheet
-         (!T)(ul.content~{~list-style-type:~none;~})(!t) die
+         (!code [(ul.content~{~list-style-type:~none;~}!)]) die
          Aufzählungspunkte in den Inhaltsverzeichnissen vermeiden.
-   !item Bei der HTML-Ausgabe wird jetzt ein (!T)<span style="page-break-after:always;"></span>(!t)
+   !item Bei der HTML-Ausgabe wird jetzt ein (!code [<span style="page-break-after:always;"></span>])
          gesetzt, dann können Browser, die das verstehen, beim Ausdruck
          einen Seitenumbruch vornehmen.
    !item Die Bildunterschriften werden jetzt als Feld ausgegeben, damit
          ein Abbildungs!-ver!-zeichnis erstellt werden kann.
    !item Für RTF wird jetzt eine einzelne Seite erzeugt, die ein
-         Ab!-bildungs!-ver!-zeichnis enthält, wenn (!T)!/listoffigures(!t)
+         Ab!-bildungs!-ver!-zeichnis enthält, wenn (!code [!/listoffigures])
          gesetzt ist. Dieses muss nur aktualisiert werden.
    !item Es werden Vorgaben für das Layout für die PostScript-Ausgabe
          gemacht: Art und Größe des proportionalen und äquidistanten
@@ -678,7 +681,7 @@ unten links !! unten mitte !! unten rechts
  	!end_itemize
  !item [Änderungen:]
  	!begin_itemize !short
- 	 !item (!T)!/html_backpage ../index.html "Zurück zu UDO-Website"(!t) (!nl)
+ 	 !item (!code [!/html_backpage ../index.html "Zurück zur UDO-Website"]) (!nl)
  	       Jetzt kann zusätzlich ein Text übergeben werden, der statt
          des Links in das alt-Attribut eingetragen wird. Der Text muss
          in einfachen Anführungszeichen stehen ("foo")
@@ -701,16 +704,16 @@ unten links !! unten mitte !! unten rechts
 !subheading Allgemeines
 !begin_itemize !short
 !item Alle Indexeinträge bis zur vierten Stufe werden in die
-      Projektdatei ((!T)*.upr(!t)) geschrieben.
-!item Die Einträge für (!T)!/label(!t) und (!T)!/alias(!t) werden
-      in die Projektdatei ((!T)*.upr(!t)) geschrieben.
-!item Alle Heading-Einträge werden in die Projektdatei ((!T)*.upr(!t)) geschrieben.
+      Projektdatei ((!file [*.upr])) geschrieben.
+!item Die Einträge für (!code [!/label]) und (!code [!/alias]) werden
+      in die Projektdatei ((!file [*.upr])) geschrieben.
+!item Alle Heading-Einträge werden in die Projektdatei ((!file [*.upr])) geschrieben.
 !item Außerdem werden die entsprechenden Zeilennummern geschrieben.
 !end_itemize
 
 !subheading PostScript
 !begin_itemize
-!item Die Ausgabe in (!T)abo.c(!t) kann derzeit von der PostScript-Ausgabe nicht
+!item Die Ausgabe in (!file [abo.c]) kann derzeit von der PostScript-Ausgabe nicht
       benutzt werden, da diese keine zentrierte bzw. rechts!-bündige
       Ausgabe zulässt. Deshalb wird die Standard!-ausgabe verhindert
       und statt!-dessen eine eigene Ausgabe formuliert. Die Ausgabe erfolgt
@@ -718,79 +721,79 @@ unten links !! unten mitte !! unten rechts
 !item Neue Funktion, um einige Zeichen, die ein Post!-script-Inter!-preter
       als Teil des Codes inter!-pretieren würde, abzufangen.
 !item Neues Kommando für das Dokumentenlayout: (!nl)
-      (!T)!/doclayout [ps] [paper] foo(!t) (!nl)
+      (!code [!/doclayout [ps!] [paper!] foo]) (!nl)
       Möglich Angaben für foo sind A3PORTRAIT, A3LANDSCAPE, A4PORTRAIT,
       A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE.
 
-      (!T)!/doclayout [ps] [openMode] foo(!t) (!nl)
+      (!code [!/doclayout [ps!] [openMode!] foo]) (!nl)
       Mögliche Angaben stehen in der Dokumentation zu den pdf-marks.
 
-      (!T)!/doclayout [ps] [propfontname] foo(!t) (!nl)
+      (!code [!/doclayout [ps!] [propfontname!] foo]) (!nl)
       Mögliche Angaben für foo sind Zeichensatznamen, z.~B. Arial,
       Times New Roman, sans oder sans-serif. (!nl)
       (!B)Hinweis:(!b) Für die PostScript-Ausgabe gilt, dass für Helvetica,
       Arial oder sans-serif immer Helvetica gesetzt wird, ansonsten
       Times New Roman.
 
-      (!T)!/doclayout [ps] [propfontsize] foo(!t) (!nl)
+      (!code [!/doclayout [ps!] [propfontsize!] foo]) (!nl)
       Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
-!item (!T)!/docinfo [keywords] foo(!t) (!nl)
-      Ersatz und Erweiterung für (!T)!/html_keywords(!t) (funkioniert
+!item (!code [!/docinfo [keywords!] foo]) (!nl)
+      Ersatz und Erweiterung für (!code [!/html_keywords]) (funkioniert
       derzeit nur für PostScript).
-!item (!T)!/docinfo [description] foo(!t) (!nl)
-      Ersatz und Erweiterung für (!T)!/html_description(!t) (funktioniert
+!item (!code [!/docinfo [description!] foo]) (!nl)
+      Ersatz und Erweiterung für (!code [!/html_description]) (funktioniert
       derzeit nur für PostScript)
 !item Für die PostScript-Ausgabe wird jetzt auch eine Titelseite erzeugt.
 !item Für die Standard-Kopfzeile wird aus ""Titel"" und ""Programm""
-      (!T)(!/docinfo)(!t) ein Text erstellt.
-!item Für die Standard-Fusszeile wird aus ""Author"" (!T)(!/docinfo)(!t)
+      (!code [(!/docinfo!)]) ein Text erstellt.
+!item Für die Standard-Fusszeile wird aus ""Author"" (!code [(!/docinfo!)])
       ein Text erstellt.
-!item Aus den Angaben aus (!T)(!/docinfo)(!t) werden die Angaben für die
+!item Aus den Angaben aus (!code [(!/docinfo!)]) werden die Angaben für die
       Dokumenten!-informationen einer PDF-Datei zusammen!-gestellt.
 !item Die Description- und Listumgebungen werden für PostScript
       unterstützt.
 !item Neue Aufzählungszeichen für die Itemize-Umgebung.
 !item Der Zeichensatz ""Symbol"" kann benutzt werden.
-!item Interne Links (!T)(!/link ...)(!t), externe Links (!T)(!/xlink ...)(!t)
-      und (!T)(!/url ...)(!t) werden für PDF (via PostScript) umgesetzt.
+!item Interne Links (!code [!/link ...!)]), externe Links (!code [(!/xlink ...!)])
+      und (!code [(!/url ...!)]) werden für PDF (via PostScript) umgesetzt.
 !item Fußnoten werden für die PostScript-Ausgabe umgesetzt.
 !item Die Tabellen werden jetzt leserlich mit monospaced Zeichen umgesetzt.
-!item Die Kommandos (!T)!/bigskip(!t), (!T)!/medskip(!t) und (!T)!/smallskip(!t)
+!item Die Kommandos (!code [!/bigskip]), (!code [!/medskip]) und (!code [!/smallskip])
       werden jetzt leserlich umgesetzt.
 !item Alle Nodes werden für die PostScript-Ausgabe als ""Named Destination""
       angelegt. Es kann also von außerhalb auf jedes Kapitel einer PDF-Datei
       verwiesen werden.
 !item Aus allen Nodes wird ein Bookmark-Verzeichnis für PDF-Dateien erzeugt.
-!item Wenn (!T)!/tableofcontents(!t) gesetzt ist, wird ein Inhaltsverzeichnis
+!item Wenn (!code [!/tableofcontents]) gesetzt ist, wird ein Inhaltsverzeichnis
       ausgegeben.
-!item Für (!T)!/label(!t) wird ein ""Named Destination"" gesetzt.
+!item Für (!code [!/label]) wird ein ""Named Destination"" gesetzt.
 !end_itemize
 
 !subheading Hypertext Markup Language (HTML)
 !begin_itemize
 !item Neue Kommandos für die HTML-Ausgabe: (!nl)
-      (!T)!/html_style_name foo(!t) (!nl)
+      (!code [!/html_style_name foo]) (!nl)
       Zum Setzen eines externen Stylesheets für alle Dateien eines Projektes.
 
-      (!T)!/html_script_name foo(!t) (!nl)
+      (!code [!/html_script_name foo]) (!nl)
       Zum Setzen eines externen Scriptes für alle Dateien eines Projektes.
 
-      (!T)!/html_favicon_name foo(!t) (!nl)
+      (!code [!/html_favicon_name foo]) (!nl)
       Zum Setzen eines Faforiten-Icons für alle Dateien eines Projektes.
 
       (!B)Achtung:(!b) Möglicherweise werden die Kommandos nochmal
       geändert.
-!item Trennzeichen (!T)&shy;(!t) für die Worttrennung in HTML eingefügt
-!item Die Gedankenstriche (!T)&ndash;(!t) und (!T)&mdash;(!t) sowie
-      die drei Auslassungspunkte (!T)&hellip;(!t) werden für HTML gesetzt.
-!item Setzen der Links für die Navigation über das Element (!T)(!LINK)(!t).
-      Folgende Attribute werden unterstützt: (!T)contents, start, first,
-      previous, prev, next, last(!t) und (!T)copyright(!t) (!nl)
-      Die Links für (!T)first(!t) und (!T)last(!t) sowie (!T)previous(!t)
-      gelten nur für CAB (evtl. iCab). Der Link für (!T)copyright(!t)
+!item Trennzeichen (!code [&shy;]) für die Worttrennung in HTML eingefügt
+!item Die Gedankenstriche (!code [&ndash;]) und (!code [&mdash;]) sowie
+      die drei Auslassungspunkte (!code [&hellip;]) werden für HTML gesetzt.
+!item Setzen der Links für die Navigation über das Element (!code [(!LINK)]).
+      Folgende Attribute werden unterstützt: (!code [contents]), (!code [start]), (!code [first]),
+      (!code [previous]), (!code [prev]), (!code [next]), (!code [last]) und (!code [copyright]) (!nl)
+      Die Links für (!code [first]) und (!code [last]) sowie (!code [previous])
+      gelten nur für CAB (evtl. iCab). Der Link für (!code [copyright])
       zeigt auf aboutudo und wird auch nur dann angelegt. (!nl)
-      CAB unterstützt beim Element (!T)(!LINK)(!t) leider nicht das Attribut
-      (!T)target(!t). Daher funktionieren die Links bei der Benutzung
+      CAB unterstützt beim Element (!code [(!LINK)]) leider nicht das Attribut
+      (!code [target]). Daher funktionieren die Links bei der Benutzung
       von Frames nicht so schön.
 !item Werden bei der HTML-Ausgabe Frames erzeugt, wird zusätzlich ein Bereich
       <noframes></noframes> mit Inhaltsverzeichnis gesetzt, damit auch
@@ -812,24 +815,14 @@ unten links !! unten mitte !! unten rechts
 !begin_node Änderungen bis Release 6 Patchlevel 14
 !html_name  history_release_6_until_PL14
 
-# auskommentiert 07.12.2003 - Ulrich Kretschmer:
-# Dieses Release wurde noch gar nicht veröffentlicht.
-# UDO7 hasn't been released yet.
-
 (!PUBLISHED [Release~6 Patchlevel~14] [11.07.1999])
 
 Hier eine kleine Übersicht der wichtigsten Änderungen zum letzten Release.
-# zur letzten öffentlichen Version.
+
 In den letzten Jahren wurden einige neue Formate,
 etliche neue Features eingebaut und einige Fehlerbeseitigungen
 vorgenommen. Auch hier hat es in der Zwischenzeit wieder nicht
 vermeiden lassen, die Syntax einiger Befehle zu ändern.
-
-# auskommentiert 07.12.2003 - Ulrich Kretschmer
-# Registrierte Benutzer, die sich die Zwischenversionen beschafft haben,
-# finden hier als Gedächtnisstütze meine komprimierten Anmerkungen aus
-# (!T)rel6-7.txt(!t).
-# # Dieser Text existierte in der englischen Doku nicht!
 
 !begin_description
 
@@ -1018,7 +1011,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
         !item Bei Verwendung von (!KKW [img]) erzeugt UDO nun auch
            eine Fehlermeldung, falls es die Ausmasse des Bildes nicht
            ermitteln konnte.
-        !item Die MAP-Datei für WinHelp hat nun das Suffix (!code [.hpc]).
+        !item Die MAP-Datei für WinHelp hat nun das Suffix (!file [.hpc]).
         !item Konnte UDO ein (!KW [chaptericon]) nicht finden, wird dies
            nun in der Protokolldatei bemängelt.
         !item Beim Einsatz von (!KW [no_images]) werden beim HTML-Format wie bisher keine
@@ -1098,14 +1091,6 @@ Hier eine kleine Übersicht der wichtigsten Änderungen zur letzten
 etliche neue Features eingebaut und einige Fehlerbeseitigungen
 vorgenommen. Auch hier hat es in der Zwischenzeit wieder nicht
 vermeiden lassen, die Syntax einiger Befehle zu ändern.
-
-# auskommentiert 13.12.2003 - Ulrich Kretschmer
-# Text existierte in der englischen Version nicht
-!begin_ignore
-Registrierte Benutzer, die sich die Zwischenversionen beschafft haben,
-finden hier als Gedächtnisstütze meine komprimierten Anmerkungen aus
-(!T)rel5-6.txt(!t).
-!end_ignore
 
 !begin_description
 
@@ -1235,7 +1220,7 @@ finden hier als Gedächtnisstütze meine komprimierten Anmerkungen aus
           nur noch dann zentriert ausgegeben, wenn der (!KW [image])-Befehl
           innerhalb einer center-Umgebung steht. Die linksbündige oder
           rechtsbündige Ausgabe von Bilder ist somit nun auch möglich.
-        !item Die Default-Suffix für ASCII-Dateien lautet nun (!code [.txt]).
+        !item Die Default-Suffix für ASCII-Dateien lautet nun (!file [.txt]).
         !item Bei der (!LaTeX)-Ausgabe wird innerhalb \verb kein Zeilenumbruch mehr erzeugt.
         !item DOS-Grafikzeichen werden für WinHelp durch ""+"", ""-"" oder ""|""
           ersetzt.
