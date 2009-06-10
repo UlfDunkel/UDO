@@ -737,11 +737,11 @@ Start a popup subsection.
 !item [(!SYNTAX)] (!T)!/psubsubsubnode (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-The same as (!KW [subsubnode]) but the contents will be displayed
+The same as (!KW [subsubsubnode]) but the contents will be displayed
 as a popup inside ST-Guide and WinHelp.
 
 !item [(!EXAMPLE)]
-(!T)!/psubsubnode A popup subsection(!t)
+(!T)!/psubsubsubnode A popup subsection(!t)
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
@@ -771,6 +771,64 @@ This command does the same as (!KW [psubsubsubnode]), but here
 
 !item [(!EXAMPLE)]
 (!T)!/psubsubsubnode* A hidden popup paragraph(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode*]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubsubsubsubnode])
+!html_name  cmd_psubsubsubsubnode
+
+Start a popup subsection.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+The same as (!KW [subsubsubsubnode]) but the contents will be displayed
+as a popup inside ST-Guide and WinHelp.
+
+!item [(!EXAMPLE)]
+(!T)!/psubsubsubsubnode A popup subsection(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode]), (!link [Structure] [Structure])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubsubsubsubnode*])
+!html_name  cmd_psubsubsubsubnode_asterisk
+
+Start a hidden popup paragraph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubsubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command does the same as (!KW [psubsubsubsubnode]), but here
+""(!TEXT)"" will not appear in the table of contents.
+
+!item [(!EXAMPLE)]
+(!T)!/psubsubsubsubnode* A hidden popup paragraph(!t)
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
