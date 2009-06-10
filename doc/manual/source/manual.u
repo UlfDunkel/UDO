@@ -70,6 +70,7 @@
 #   fd  Jun 05: history introduced
 #   fd  Jun 08: main chapters reorganized
 #   fd  Jun 08: _def.ui included
+#   fd  Jun 10: _def.ui no longer required -> macros.ui
 #
 ################################################################################
 
@@ -78,7 +79,6 @@
 # ------------------------------------------------------------------------------
 !code [iso]
 
-!include _def.ui                          # defines
 !include _header.ui                       # switches
 !include _lang.ui                         # language of this document
 !include _version.ui                      # version numbers
