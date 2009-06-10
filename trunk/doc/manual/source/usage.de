@@ -22,6 +22,7 @@
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using ndash instead of mdash in German texts
 #
 ################################################################################
 
@@ -308,8 +309,8 @@ stellt man dies im zugehörigen Popup ein und wählt über den zweiten
 [Auswählen]-Knopf einen anderen Ordner aus.
 
 Welche Dateien nun konkret von UDO erzeugt werden sollen, kann über die
-Gruppe von Schaltern --- deren Beschriftung hoffentlich selbsterklärend
-ist --- eingestellt werden. Die Einstellung des Ausgabeanzeige-Popups
+Gruppe von Schaltern -- deren Beschriftung hoffentlich selbsterklärend
+ist -- eingestellt werden. Die Einstellung des Ausgabeanzeige-Popups
 bestimmt die Geschwindigkeit mit der UDO seine Arbeit erledigt bzw. wie
 kooperativ und mitteilsam es dabei ist. Kooperativ bedeutet in diesem
 Fall, dass man, während UDO beschäftigt ist, mit einer anderen
