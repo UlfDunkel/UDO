@@ -130,7 +130,6 @@ Having written an UDO source file, you can convert it into the following formats
 As you can see some formats are just interesting for specific systems/platforms,
 but you can also see that the list contains come formats that can be used
 on nearly any existing system/platform.
-!end_ignore
 
 In most cases UDO doesn't make files that are ready to use because have to
 run a further software to view, print or convert the document. E.g. you have
@@ -274,7 +273,6 @@ and documentation is now a hundred times larger than it was in former days.
 
 UDO has become to an operating system independent, very powerful and
 --- proverbially said --- universal tool.
-
 !end_quote
 
 UDO ist Open Source since October 27, 2001.

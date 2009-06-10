@@ -41,7 +41,7 @@ UDO erwartet als Quelldatei eine Textdatei, wie sie mit jedem
 ASCII-Editor erstellt werden kann. Außer ASCII~9 (Tabulator), ASCII~10
 (Linefeed) und ASCII~13 (Carriage Return) sollten keine Steuerzeichen
 (d.h. keine Zeichen mit einem ASCII-Wert kleiner als 32) benutzt
-werden! Eine Zeile darf nicht länger als (!red)(!LINELEN)(!coloff) Zeichen sein.
+werden! Eine Zeile darf nicht länger als (!LINELEN) Zeichen sein.
 
 UDO kümmert sich bei der Umwandlung selbständig um die Formatierung des
 Textes, sprich um den Zeilenumbruch und die Absatzabstände:
@@ -97,13 +97,13 @@ kenntlich machen. Mehr zu diesem Thema findet man im Kapitel
 !begin_blist [Platzhalter:]
 !index Kommando
 
-!item [Kommandos:] Ein UDO-Kommando ist eine mit einem ""!"" beginnende
+!item [Kommandos:] Ein UDO-Kommando ist eine mit einem (!code [!!]) beginnende
 Zeilenfolge, die am Anfang einer Zeile, eventuell eingerückt durch
 Leerzeichen oder Tabs, steht. Ein Kommando bewirkt eine Aktion, wie
 z.B. die Ausgabe eines Inhaltsverzeichnisses (siehe (!KW [tableofcontents])).
 
 !index Schalter
-!item [Schalter:] Ein UDO-Schalter ist eine mit einem ""!"" beginnende
+!item [Schalter:] Ein UDO-Schalter ist eine mit einem (!code [!!]) beginnende
 Zeichenfolge, die die Aktionen von UDO oder einem Kommando
 beeinflussen. So gibt es z.B. einen Schalter, der bewirkt, dass 
 Bezeichnungen in englischer Sprache(!N)""Appendix"" statt ""Anhang""(!n)
@@ -114,7 +114,7 @@ eingerückt durch Leerzeichen oder Tabs eingerückt, steht.
 
 !index Platzhalter
 
-!item [Platzhalter:] Ein Platzhalter ist eine mit ""!"" beginnende
+!item [Platzhalter:] Ein Platzhalter ist eine mit (!code [!!]) beginnende
 Zeichenfolge, die durch runde Klammern eingefasst ist. Ein Platzhalter
 wird von UDO durch eine dem Ausgabeformat zugehörige Zeichenfolge
 ersetzt (z.B. ""(!KK1 [B])"" durch (!code [{\bf])).
@@ -132,14 +132,14 @@ Platzhalter können an jeder beliebigen Stelle einer Zeile stehen.
 
 !index Kommentar
 Es besteht die Möglichkeit, in einer Quelldatei Kommentare einzufügen.
-Ist das erste Zeichen einer Zeile ein ""#"", fasst UDO diese Zeile als
+Ist das erste Zeichen einer Zeile ein (!code [#]), fasst UDO diese Zeile als
 Kommentar auf und wertet diese Zeile nicht aus.
 
-Das ""#"" darf nicht eingerückt sein, muss also das erste Zeichen einer
+Das (!code [#]) darf nicht eingerückt sein, muss also das erste Zeichen einer
 Zeile sein!
 
-Keine Regel ohne Ausnahme: Innerhalb einer verbatim- oder raw-Umgebug
-werden alle Zeilen ausgegeben, also auch die Zeilen, die mit einem ""#""
+Keine Regel ohne Ausnahme: Innerhalb einer verbatim- oder raw-Umgebung
+werden alle Zeilen ausgegeben, also auch die Zeilen, die mit einem (!code [#])
 beginnen. Innerhalb dieser Umgebung können also keine Kommentare
 benutzt werden.
 

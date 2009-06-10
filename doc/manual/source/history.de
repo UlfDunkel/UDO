@@ -30,6 +30,7 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 10: using macro (!const [])
 #
 ################################################################################
 
@@ -413,7 +414,7 @@ jetzt nicht mehr """Release~6.x Patchlevel~yy"", sondern ""Version~6.x.y""
 !begin_itemize !short
 # ..............................................................................
 # zu ST_Guide
-!item Horizontale Linien können länger als 126 Zeichen sein. (!nl)
+!item Horizontale Linien können länger als (!const [126])~Zeichen sein. (!nl)
       Version 6.5.16
 # ..............................................................................
 !end_itemize

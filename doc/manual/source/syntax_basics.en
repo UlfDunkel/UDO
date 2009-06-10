@@ -36,7 +36,7 @@ UDO expects a text file that you can edit with every ASCII editor. You
 should use only printable characters. That means you shouldn't use any
 characters below ""space"" except ASCII~9 (tab), ASCII~10 (line feed) and
 ASCII~13 (carriage return). A line of a source file shouldn't contain more
-than (!red)(!LINELEN)(!coloff) characters.
+than (!LINELEN) characters.
 
 UDO layouts the destination file itself. That means that it fills in spaces
 between words and lines between paragraphs:

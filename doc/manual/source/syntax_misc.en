@@ -22,6 +22,7 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 10: using macro (!const [])
 #
 ################################################################################
 
@@ -180,7 +181,7 @@ with bold text ((!KK1 [B])) or the newline command ((!KKW [nl])).
 
 !item You shouldn't use too many macros because every additional macro slows
 down the conversion of the source file. The maximum number of macro is
-(!red)(!MAXMACRO)(!coloff).
+(!MAXMACRO).
 
 !end_enumerate
 
@@ -322,7 +323,7 @@ get problems with bold text ((!KK1 [B])) or the newline command ((!KKW [nl])).
 
 !item You shouldn't use too many definitions because every additional
 definition slows down the conversion of the source file. The maximum number
-of definitions is (!red)(!MAXMACRO)(!coloff).
+of definitions is (!MAXMACRO).
 
 !end_enumerate
 
@@ -393,9 +394,9 @@ symbol.
 (!HINTS)
 
 !begin_enumerate
-!item You may use up to (!red)(!MAXDEFINE)(!coloff) symbols.
+!item You may use up to (!MAXDEFINE) symbols.
 
-!item The name of a symbol may be up to (!red)(!MAXSYMLEN)(!coloff) characters long.
+!item The name of a symbol may be up to (!const [(!MAXSYMLEN)]) characters long.
 !end_enumerate
 
 !end_node # Symbols
