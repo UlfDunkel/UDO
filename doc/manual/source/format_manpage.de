@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 10: using ndash instead of mdash in German texts
 #
 ################################################################################
 
@@ -39,7 +40,7 @@ Kopfzeile/n in runden Klammern dargestellt.
 
 !item [Wieso gibt UDO kein Inhaltsverzeichnis aus?]
 Inhaltsverzeichnisse sind in Manualpages sind mehr als unüblich. Bei
-kurzen Beschreibungen --- und dafür sind Manualpages gedacht --- sind
+kurzen Beschreibungen -- und dafür sind Manualpages gedacht -- sind
 auch keine Inhaltsverzeichnisse nötig.
 
 !end_description

@@ -23,11 +23,12 @@
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using ndash instead of mdash in German texts
 #
 ################################################################################
 
 !subheading Name
-udo --- Dateien vom UDO-Format in andere Formate umwandeln
+udo -- Dateien vom UDO-Format in andere Formate umwandeln
 
 # = = = = =
 

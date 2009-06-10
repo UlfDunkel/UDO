@@ -19,6 +19,7 @@
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 10: using ndash instead of mdash in German texts
 #
 ################################################################################
 
@@ -42,8 +43,8 @@ Onlinehilfen für eigene Programme keine Bedeutung hat.
 
 !item [TVHC meldet den Fehler ""Unterminated topic reference""!?]
 Der mir vorliegende TVHC Version 1.0 enthält einen bösen Fehler, der
-dazu führt, dass die Quotefunktion --- das Aufheben der Funktion der
-geschweiften Klammer durch doppelte Angabe --- nicht funktioniert.
+dazu führt, dass die Quotefunktion -- das Aufheben der Funktion der
+geschweiften Klammer durch doppelte Angabe -- nicht funktioniert.
 Falls der TVHC Ihnen die obige Fehlermeldung präsentiert, ändern Sie
 die Funktion scanForCrossRefs() in tvhc.cpp folgendermaßen um:
 
@@ -93,8 +94,8 @@ Nach dieser Änderung sollten Sie den TVHC neu übersetzen, um die
 Änderung wirksam werden zu lassen.
 
 !item [TVHC meldet den Fehler ""TOPIC expected""!?]
-Dieser Fehler tritt auf, sobald eine Zeile mit einem Punkt --- dem
-""commandChar"" --- beginnt. Die mir vorliegende Version bricht darauf
+Dieser Fehler tritt auf, sobald eine Zeile mit einem Punkt -- dem
+""commandChar"" -- beginnt. Die mir vorliegende Version bricht darauf
 die Umwandlung ab.
 
 Dieser Abbruch ist jedoch unnötig, weshalb ich meinen TVHC gepatched
