@@ -33,7 +33,9 @@ Ansonsten ist UDO Open Source und unterliegt der GNU GENERAL PUBLIC LICENSE
 # ------------------------------------------------------------------------------
 # GNU General Public license
 # ------------------------------------------------------------------------------
+!hline
 !include gnu.en
+!hline
 
 !medskip
 (!B)Anmerkung(!b): Eine deutsche Übersetzung der GPL ist auf (!url [http://www.suse.de/de/private/support/licenses/gpl.html] []) zu finden.

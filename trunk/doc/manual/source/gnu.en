@@ -17,8 +17,6 @@
 #
 ################################################################################
 
-!hline
-
 !begin_center
 		    GNU GENERAL PUBLIC LICENSE (!nl)
 		       Version 2, June 1991
@@ -386,7 +384,5 @@ consider it more useful to permit linking proprietary applications with the
 library.  If this is what you want to do, use the GNU Library General
 Public License instead of this License.
 !end_quote
-
-!hline
 
 # === EOF ===
