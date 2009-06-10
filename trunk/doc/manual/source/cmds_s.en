@@ -523,8 +523,6 @@ Start a hidden paragraph.
 
 # = = = = =
 
-!begin_ignore
-# Diese Funktion steht derzeit nicht zur Verfügung.
 !begin_node (!kw [ssssn])
 !html_name  cmd_ssssn
 
@@ -547,12 +545,9 @@ Start a subparagraph.
 !end_xlist
 
 !end_node
-!end_ignore
 
 # = = = = =
 
-!begin_ignore
-# Diese Funktion steht derzeit nicht zur Verfügung.
 !begin_node (!kw [ssssn*])
 !html_name  cmd_ssssn_asterisk
 
@@ -575,7 +570,6 @@ Start a hidden subparagraph.
 !end_xlist
 
 !end_node
-!end_ignore
 
 # = = = = =
 
@@ -1063,8 +1057,6 @@ chapters of the appendix.
 
 # = = = = =
 
-!begin_ignore
-# Diese Funktion steht derzeit nicht zur Verfügung.
 !begin_node (!kw [subsubsubsubnode])
 !html_name  cmd_subsubsubsubnode
 
@@ -1091,12 +1083,9 @@ with #.#.#.#.# and are displayed inside the table of contents
 !end_xlist
 
 !end_node
-!end_ignore
 
 # = = = = =
 
-!begin_ignore
-# Diese Funktion steht derzeit nicht zur Verfügung.
 !begin_node (!kw [subsubsubsubnode*])
 !html_name  cmd_subsubsubsubnode_asterisk
 
@@ -1123,7 +1112,6 @@ will not appear in the table of contents.
 !end_xlist
 
 !end_node
-!end_ignore
 
 # = = = = =
 
