@@ -218,6 +218,7 @@ Abschnitte, Unterabschnitte, Paragraphen und Unterparagraphen bezeichnet werden.
 !index (!kw [subsubsubsubnode])
 !index (!kw [begin_node])
 
+
 Durch das Kommando (!KW [node]) setzen Sie den Anfang für ein neues
 Kapitel und übergeben zugleich die Kapitelüberschrift. Genauso
 funktionieren die Kommandos (!KW [subnode]) für einen Abschnitt,
@@ -286,7 +287,7 @@ aufgeführt werden. Dazu benutzen Sie die Befehle
 !item (!KW [subnode*]) für Abschnitte,
 !item (!KW [subsubnode*]) für Unterabschnitte,
 !item (!KW [subsubsubnode*]) für Paragraphen,
-!item (!KW [subsubsubsbnode*]) für Paragraphen, 
+!item (!KW [subsubsubsubnode*]) für Paragraphen, 
 !item (!KW [pnode*]) für Popup-Kapitel,
 !item (!KW [psubnode*]) für Popup-Abschnitte,
 !item (!KW [psubsubnode*]) für Popup-Unterabschnitte,

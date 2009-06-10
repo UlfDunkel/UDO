@@ -622,6 +622,29 @@ Versteckten Popup-Paragraph einleiten.
 
 # = = = = =
 
+!begin_node (!kw [pssss*])
+!html_name  cmd_pssss_asterisk
+
+Versteckten Popup-Paragraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psss* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubsubsubnode*]).
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
 !begin_node (!kw [psubnode])
 !html_name  cmd_psubnode
 
@@ -778,6 +801,63 @@ in Inhaltsverzeichnissen erscheint.
 
 !item [(!EXAMPLE)]
 (!T)!/psubsubsubnode* Ein versteckter Popup-Unterabschnitt(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode*]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubsubsubsubnode])
+!html_name  cmd_psubsubsubsubnode
+
+Popup-Paragraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Identisch mit (!KW [subsubsubsubnode]), der Inhalt wird jedoch beim ST-Guide und bei WinHelp als Popup dargestellt.
+
+!item [(!EXAMPLE)]
+(!T)!/psubsubsubsubnode Ein Popup-Unterabschnitt(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [begin_pnode]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubsubsubsubnode*])
+!html_name  cmd_psubsubsubsubnode_asterisk
+
+Versteckten Popup-Paragraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubsubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie (!KW [psubsubsubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht
+in Inhaltsverzeichnissen erscheint.
+
+!item [(!EXAMPLE)]
+(!T)!/psubsubsubsubnode* Ein versteckter Popup-Unterabschnitt(!t)
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 

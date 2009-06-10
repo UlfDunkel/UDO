@@ -538,8 +538,6 @@ Paragraph ohne Eintrag im Inhaltsverzeichnis einleiten.
 
 # = = = = =
 
-!begin_ignore
-# Diese Funktion steht derzeit nicht zur Verfügung.
 !begin_node (!kw [ssssn])
 !html_name  cmd_ssssn
 
@@ -562,12 +560,9 @@ Unterparagraph einleiten.
 !end_xlist
 
 !end_node
-!end_ignore
 
 # = = = = =
 
-!begin_ignore
-# Diese Funktion steht derzeit nicht zur Verfügung.
 !begin_node (!kw [ssssn*])
 !html_name  cmd_ssssn_asterisk
 
@@ -590,7 +585,6 @@ Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
 !end_xlist
 
 !end_node
-!end_ignore
 
 # = = = = =
 
@@ -1081,8 +1075,6 @@ Schalter hat keine Wirkung auf Kapitel des Anhangs.
 
 # = = = = =
 
-!begin_ignore
-# Diese Funktion steht derzeit nicht zur Verfügung.
 !begin_node (!kw [subsubsubsubnode])
 !html_name  cmd_subsubsubsubnode
 
@@ -1109,12 +1101,9 @@ und wird mit #.#.#.#.# nummeriert.
 !end_xlist
 
 !end_node
-!end_ignore
 
 # = = = = =
 
-!begin_ignore
-# Diese Funktion steht derzeit nicht zur Verfügung.
 !begin_node (!kw [subsubsubsubnode*])
 !html_name  cmd_subsubsubsubnode_asterisk
 
@@ -1141,7 +1130,6 @@ in Inhaltsverzeichnissen erscheint.
 !end_xlist
 
 !end_node
-!end_ignore
 
 # = = = = =
 
