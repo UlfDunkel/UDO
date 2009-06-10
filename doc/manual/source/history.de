@@ -29,6 +29,7 @@
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -108,7 +109,7 @@ Das hier ist Zelle 1 !! Das hier ist Zelle 2 !! Das hier ist Zelle 3
 # ..............................................................................
 !item In der Tabellenumgebung können Kommentare eingefügt werden.
       Beispiel:
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !begin_table [|l|c|r|] !hline
 # Dies ist ein Kommendtar
@@ -117,12 +118,12 @@ unten links !! unten mitte !! unten rechts
 !hline
 !end_table
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 Version 6.5.13
 # ..............................................................................
 !item In der Tabellenumgebung können Labels eingefügt werden.
       Beispiel:
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !begin_table [|l|c|r|] !hline
 !label test
@@ -131,7 +132,7 @@ unten links !! unten mitte !! unten rechts
 !hline
 !end_table
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 Version 6.5.13
 # ..............................................................................
 !item Die 16 Standardfarben existieren jetzt in UDO als Platzhalter

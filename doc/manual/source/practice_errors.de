@@ -24,6 +24,7 @@
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -35,13 +36,13 @@
 UDO protokolliert in einer Datei mit dem Suffix (!file [.ul?]) alle Fehler, die bei der Umwandlung aufgetreten sind. Die Fehlermeldungen,
 Warnungen und Hinweise haben dabei immer folgenden Aufbau:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
   Error: <datei> <zeilennummer>: <text>
 Warning: <datei> <zeilennummer>: <text>
    Hint: <datei> <zeilennummer>: <text>
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Zum Beheben dieser Fehlermeldung(en) schauen Sie sich bitte in der
 angegebenen Datei die betroffene Zeile an und versuchen Sie, den

@@ -22,6 +22,7 @@
 #   fd  Jun 09: WORD macro introduced
 #   fd  Jun 09: NAME macro introduced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -310,12 +311,12 @@ anzeigen soll.
 If you specify webmaster informations, UDO will
 output following lines at the end of each page:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 Copyright (!copyright) <webmastername> [<webmasteremail>|<webmasterurl>]
 Last updated on (!today)
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 <webmasterurl> has priority over <webmasteremail>. If you don't specify
 any data or use the switch (!KW [no_footers] [[html!!]]) in the preamble,

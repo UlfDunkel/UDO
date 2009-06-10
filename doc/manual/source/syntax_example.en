@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 08: quotation changed
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -25,11 +26,9 @@ Before going into details I want to show you how an UDO source file may
 look like. You can use this example to make your own source files if
 you want to.
 
-!hline
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES_DIST)example.u
-!end_quote
-!hline
+(!EXAMPLE_END)
 
 !subsubheading Explanations
 

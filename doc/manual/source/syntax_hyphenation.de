@@ -18,6 +18,7 @@
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -57,11 +58,11 @@ Quelltext (!K1 [//-]) angeben.
 Im Quelltext kann man in einem Wort durch (!K1 [/-]) die Stellen markieren, an
 denen UDO (bzw. (!LaTeX)) das Wort trennen darf. Ein Beispiel:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 eine halbautomatische Sil!-ben!-tren!-nung.
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Bei der Umwandlung ins (!LaTeX-Format) werden alle (!K1 [/-]) durch ""\-"" ersetzt;
 es wird also ""Sil\-ben\-tren\-nung"" ausgegeben. Bei der Umwandlung ins
@@ -94,12 +95,12 @@ Wort ""Dokumentation"" mehrfach auftaucht. Damit Sie nicht bei jedem
 Wort die Trennstellen lokal setzen müssen, fügen Sie folgenden
 Zeile(n) in den Vorspann des Quelltextes ein:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !hyphen Do!-ku!-men!-ta!-tio!-nen
 !hyphen Do!-ku!-men!-ta!-tion
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 In diesem Beispiel wurde zusätzlich der Trennvorschlag für den Plural
 angegeben, da dieser anders getrennt werden muss. Der Plural muss, wenn

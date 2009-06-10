@@ -21,6 +21,7 @@
 #   fd  Jun 09: WORD macro introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -129,9 +130,9 @@ empty, too.
 
 Let me show you some examples:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)macro1.ui
-!end_quote
+(!EXAMPLE_END)
 
 !index (!kw [include])
 Macros can help you to save time when typing often used long words.
@@ -143,9 +144,9 @@ instead of the name of the program etc. These standardized texts can be
 included with (!KW [include]). In the following example a disclaimer is
 included and the name of the program is defined by a macro:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)macro2.ui
-!end_quote
+(!EXAMPLE_END)
 
 !smallskip
 
@@ -160,9 +161,9 @@ with parameters you have to write brackets (""[!..]"") around them.
 The following small example shows how to use a macro for text that shall be
 printed in bold-italic style:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)macro3.ui
-!end_quote
+(!EXAMPLE_END)
 
 The ""(!/1)"" in the macro line will be replaced by the words ""bold and
 italic"".
@@ -245,9 +246,9 @@ characters are translated inside (!code [(!TEXT)]).
 
 In this example I will demonstrate how to print headlines with HTML:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)define1.ui
-!end_quote
+(!EXAMPLE_END)
 
 !smallskip
 
@@ -258,9 +259,9 @@ commands for (!LaTeX) that you now have to simulate with the
 
 !index \linebreak
 !index \nolinebreak
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)define2.ui
-!end_quote
+(!EXAMPLE_END)
 
 !smallskip
 
@@ -278,9 +279,9 @@ brackets (""[!..]"") around the parameters.
 In the upper example I have shown you how to make a heading for HTML. When
 using parameters it may look like the following example:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)define3.ui
-!end_quote
+(!EXAMPLE_END)
 
 As you can see in this example you can write format depending commands UDO
 doesn't support already.
@@ -288,9 +289,9 @@ doesn't support already.
 The upper (!LaTeX) example can be defined nicer, too. If you use parameters
 you can provide all available (!LaTeX) commands in one definition:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)define4.ui
-!end_quote
+(!EXAMPLE_END)
 
 In this example only one parameter is used but the non-(!LaTeX) definition
 contains a second parameter. You may ask yourself why it has to be like
@@ -353,9 +354,9 @@ the first two chapters have been finished and you are still working on the
 third chapter. To mimize the conversion time of UDO you want only to convert
 the last chapter if the symbol (!code [AllChapters]) is set:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)symbol1.ui
-!end_quote
+(!EXAMPLE_END)
 
 If you start UDO as you without setting the symbol it will make a
 destination file that contains all chapters. If you set the symbol via
@@ -370,9 +371,9 @@ first chapter. If you call UDO with the options ""(!code [-D~Chapter1])"" and
 second chapter. If you call UDO with the option ""(!code [AllChapters])"" you
 will get a complete destination file:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)symbol2.ui
-!end_quote
+(!EXAMPLE_END)
 
 As I descriped at the beginning of this section you can delete symbols with
 the (!KW [unset]) command.
@@ -381,9 +382,9 @@ If you want to avoid that all chapters are saved in the destination file you
 can add the following lines to the beginning of your source file. Here the
 symbol (!code [AllChapters]) will be deleted if it's set:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)symbol3.ui
-!end_quote
+(!EXAMPLE_END)
 
 In first place it will be testet if the symbol is set. If you don't test the
 symbol UDO will print an error message if you want to delete an unused
@@ -414,9 +415,9 @@ commands as often as possible.
 
 To add an entry with the (!KW [index]) command use it this way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)index1.ui
-!end_quote
+(!EXAMPLE_END)
 
 The entry appears inside the index of (!LaTeX),
 inside the index of a Texinfo file that was printed with (!TeX),
@@ -432,9 +433,9 @@ entry in different ways.
 If you think that a reader might look for ""Index entry"" or ""Entry,
 Index"" you should use the following index commands:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)index2.ui
-!end_quote
+(!EXAMPLE_END)
 
 !smallskip
 
@@ -501,12 +502,12 @@ converted especially for ""Makeindex"".
 bracket inside a parameter you have to insert a ""!"". If you don't
 UDO will think that the placeholder ended. An example:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 wrong: (!idx [Copyright (c) 1995])
 right: (!idx [Copyright (c!) 1995])
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !end_enumerate
 
@@ -552,7 +553,7 @@ returns a false value.
 The following example shows how to set a special document title for Windows
 Help:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !ifdest [win]
 !docinfo [title] The Windows Help to
@@ -560,14 +561,14 @@ Help:
 !docinfo [title] The guide to
 !endif
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !index (!kw [ifndest])
 The (!KW [ifndest]) command is related to (!KW [ifdest]). But
 (!KW [ifndest]) will check if you do (!I)not(!i) convert to the given
 destination format. Thus you can write the upper example this way, too:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !ifndest [win]
 !docinfo [title] The guide to
@@ -575,14 +576,14 @@ destination format. Thus you can write the upper example this way, too:
 !docinfo [title] The Windows Help to
 !endif
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 You can pass more than one abbreviation to the query command. If you do so
 the query returns a true value if one or more abbreviations match the
 current destination format. The next example shows how to set a special
 document title for hypertext formats:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !ifdest [win,html,stg,htag]
 !docinfo [title] The hypertext to
@@ -590,7 +591,7 @@ document title for hypertext formats:
 !docinfo [title] The guide to
 !endif
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !end_node # Testing the destination format
 
@@ -618,7 +619,7 @@ returns a false value.
 If you write a small documentation you can enter all langaguages to a single
 source file:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !iflang [german]
 !docinfo [title] Die Benutzeranleitung zu
@@ -626,14 +627,14 @@ source file:
 !docinfo [title] The User's Guide to
 !endif
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !index (!kw [ifnlang])
 The (!KW [ifnlang]) command is related to (!KW [iflang]). But
 (!KW [ifnlang]) will check if you do (!I)not(!i) convert to the given
 destination language. Thus you can write the upper example this way, too:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !ifnlang [german]
 !docinfo [title] The User's Guide to
@@ -641,7 +642,7 @@ destination language. Thus you can write the upper example this way, too:
 !docinfo [title] Die Benutzeranleitung zu
 !endif
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 It goes without saying that you can test more than one language.
 
@@ -671,7 +672,7 @@ As you know you can set symbols via command line by using the option
 The following example shows how to test the symbol (!code [UseColour]) and
 to display the right image:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !ifset [UseColor]
 !image colour/tiger
@@ -679,7 +680,7 @@ to display the right image:
 !image mono/tiger
 !endif
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 If you call UDO with passing the option (!code [-D~UseColor]) or if you set
 the symbol with (!KW [set] [UseColor]) inside the preamble UDO will display
@@ -734,16 +735,16 @@ to use the (!KW [raw]) command:
 The next example shows how to insert a line that will only be printed
 for the ASCII format:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)asc1.ui
-!end_quote
+(!EXAMPLE_END)
 
 The next example shows how to insert a line that appears in all formats
 except ASCII:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)asc2.ui
-!end_quote
+(!EXAMPLE_END)
 
 The contents of the line will be printed without the command and
 without converting the text of the line. These commands split up text
@@ -753,9 +754,9 @@ commands aren't useful to insert a line into a paragraph!
 You can use these commands to insert special commands like parts of
 the preamble for (!LaTeX):
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)latex/index.ui
-!end_quote
+(!EXAMPLE_END)
 
 !begin_description
 
@@ -778,9 +779,9 @@ source code:
 
 !index HTML !! <FORM>
 !index <FORM>
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)raw1.ui
-!end_quote
+(!EXAMPLE_END)
 
 To say it once more: Text that is part of a raw environment is printed ""as
 is"". That means that it's not converted and not indented. If you will

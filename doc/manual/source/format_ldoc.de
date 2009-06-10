@@ -17,6 +17,7 @@
 #   fd  Jun 08: etc. -> usw.
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -43,21 +44,19 @@ schnell ändern.
 !begin_description
 
 !item [Die xlist-Umgebung wird als description-Umgebung ausgegeben!?]
-
 Beim Linuxdoc-SGML-Format ist eine xlist-Umgebung nicht vorgesehen.
 Daher wird diese Umgebung hier als description-Umgebung behandelt,
 welche der xlist-Umgebung am ähnlichsten ist.
 
 !item [Linuxdoc-SGML bemängelt (!code [&Aring;])!?]
-
 Fügen Sie in der Datei (!file [/usr/lib/linuxdoc-sgml/rep/html/general])
 folgende Zeile ein:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 <!entity Aring sdata "&Aring;" >
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !end_description
 

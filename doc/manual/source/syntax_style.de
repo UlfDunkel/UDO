@@ -22,6 +22,7 @@
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -59,30 +60,20 @@ eingerückt durch Leerzeichen oder Tabulatoren.
 Die itemize-Umgebung kann mehrfach verschachtelt benutzt werden und
 lässt sich auch mit anderen Umgebungen kombinieren.
 
-Aus diesem kurzen Beispiel~!..
-
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)itemize1.ui
-!end_quote
+(!EXAMPLE_AFTER)
+!include  (!EXAMPLES)itemize1.ui
+(!EXAMPLE_END)
 
-!..~wird:
+Hier ein kleines Beispiel, in dem die itemize-Umgebung
+verschachtelt benutzt wird.
 
-!begin_quote
-!include (!EXAMPLES)itemize1.ui
-!end_quote
-
-Und aus diesem kleinen Beispiel, in dem die itemize-Umgebung
-verschachtelt benutzt wird,~!..
-
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)itemize2.ui
-!end_quote
-
-!..~erhält man
-
-!begin_quote
-!include (!EXAMPLES)itemize2.ui
-!end_quote
+(!EXAMPLE_AFTER)
+!include  (!EXAMPLES)itemize2.ui
+(!EXAMPLE_END)
 
 !smallskip
 
@@ -105,31 +96,25 @@ Beispiel wird er eingesetzt:
 
 Ohne (!KW [short])~!..
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)itemize3.ui
-!end_quote
-
+(!EXAMPLE_END)
 !..~ergibt dies:
-
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)itemize3.ui
-!end_quote
-
+(!EXAMPLE_END)
 Mit (!KW [short])~!..
-
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)itemize4.ui
-!end_quote
-
+(!EXAMPLE_END)
 !..~ergibt dies:
-
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)itemize4.ui
-!end_quote
+(!EXAMPLE_END)
 
 Falls Sie keinen Unterschied erkennen sollten, ist es in dem Format,
 in dem Sie gerade dieses Handbuch lesen, nicht möglich, die
-Zwischenräume zu unterdrücken.
+Zwischenräume zu unterdrücken, oder sie wurden z.B. bei HTML über eine CSS-Anweisung fixiert.
 
 !smallskip
 
@@ -165,30 +150,21 @@ werden jeweils mit dem Kommando (!KW [item]) gekennzeichnet.
 
 Die enumerate-Umgebung ist auch mehrfach schachtelbar und mit anderen
 Umgebungen kombinierbar. Hier ein kleines, unverschachteltes Beispiel:
-Aus!..
 
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)enum1.ui
-!end_quote
-
-!.. wird:
-
-!begin_quote
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)enum1.ui
-!end_quote
+(!EXAMPLE_END)
 
-Und aus diesem kleinen Beispiel, in dem die enumerate-Umgebung
-verschachtelt und mit dem Schalter (!KW [short]) benutzt wird,!..
+Hier ein kleines Beispiel, in dem die enumerate-Umgebung
+verschachtelt und mit dem Schalter (!KW [short]) benutzt wird.
 
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)enum2.ui
-!end_quote
-
-!..erhält man
-
-!begin_quote
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)enum2.ui
-!end_quote
+(!EXAMPLE_END)
 
 (!HINTS)
 
@@ -226,30 +202,22 @@ wobei ""(!TEXT)"" in der Aufzählung fett dargestellt wird.
 
 Die description-Umgebung ist mehrfach schachtelbar und lässt sich auch
 mit anderen Umgebungen kobinieren. Hier ein kleines, unverschachteltes
-Beispiel: Aus~!..
+Beispiel:
 
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)descript1.ui
-!end_quote
-
-!..~wird:
-
-!begin_quote
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)descript1.ui
-!end_quote
+(!EXAMPLE_END)
 
-Aus diesem Beispiel, in dem die description-Umgebung verschachtelt und
-mit dem Schalter (!KW [short]) benutzt wird,~!..
+In diesem Beispiel wird die description-Umgebung verschachtelt und
+mit dem Schalter (!KW [short]) benutzt.
 
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)descript2.ui
-!end_quote
-
-!..~erhält man
-
-!begin_quote
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)descript2.ui
-!end_quote
+(!EXAMPLE_END)
 
 (!HINTS)
 
@@ -292,34 +260,22 @@ description-Umgebung durch (!KW [item] [[(!TEXT)!!]]) gekennzeichnet.
 Die Umgebungen können mehrfach verschachtelt benutzt werden und lassen
 sich auch mit anderen Umgebungen kombinieren.
 
-Aus!..
-
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)xlist1.ui
-!end_quote
-
-!.. wird:
-
-!begin_quote
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)xlist1.ui
-!end_quote
-
+(!EXAMPLE_END)
 
 Der bereits in den vorherigen Kapiteln besprochene Schalter
 (!KW [short]) lässt sich auch bei den Listen einsetzen. Um eine
 ""komprimierte"" Liste zu erzeugen, geben Sie einfach den Schalter am
 Ende der Zeile an. Auch hier ein Beispiel:
 
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)xlist2.ui
-!end_quote
-
-!.. wird so ausgegeben:
-
-!begin_quote
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)xlist2.ui
-!end_quote
-
+(!EXAMPLE_END)
 
 !label blist-Umgebung
 !label ilist-Umgebung
@@ -350,15 +306,11 @@ nichtproportional ausgegeben. Die tlist-Umgebung wird mit
 Das folgende Beispiel soll demonstrieren, wie das Ergebnis aussieht.
 Zunächst der UDO-Quelltext:
 
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)xlist3.ui
-!end_quote
-
-Das Ergebnis sieht dann so aus:
-
-!begin_quote
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)xlist3.ui
-!end_quote
+(!EXAMPLE_END)
 
 !smallskip
 
@@ -418,17 +370,13 @@ wieder aktiv ist, wird Text zentriert ausgegeben.
 
 Falls das folgende kleine Beispiel nicht zentriert wird, liegt das
 daran, dass das Format der Dokumentation, die Sie gerade lesen, keine
-Zentrierungen zulässt. Aus~!..
+Zentrierungen zulässt.
 
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)center.ui
-!end_quote
-
-!..~wird:
-
-!begin_quote
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)center.ui
-!end_quote
+(!EXAMPLE_END)
 
 Wie man sieht, formatiert UDO Absätze auch hier. Um einen manuellen
 Zeilenumbruch zu setzen, bedient man sich des Befehls (!KKW [nl]), vor dem unbedingt ein Leerzeichen stehen muss.
@@ -456,17 +404,13 @@ ausgegeben.
 
 Falls das folgende kleine Beispiel nicht rechtsbündig dargestellt wird,
 so liegt das daran, dass das Format der Dokumentation, die Sie gerade
-lesen, keinen rechtsbündigen Text zulässt. Aus~!..
+lesen, keinen rechtsbündigen Text zulässt.
 
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)flushright.ui
-!end_quote
-
-!..~wird:
-
-!begin_quote
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)flushright.ui
-!end_quote
+(!EXAMPLE_END)
 
 Wie man sieht, formatiert UDO Absätze auch hier. Um einen manuellen
 Zeilenumbruch zu setzen, bedient man sich des Befehls (!KKW [nl]), vor dem unbedingt ein Leerzeichen stehen muss.
@@ -483,8 +427,8 @@ Zeilen, die innerhalb einer flushleft-Umgebung stehen, werden in der
 Ausgabedatei linksbündig ohne Blocksatz dargestellt.
 
 Die flushleft-Umgebung kann innerhalb anderer Umgebungen verwendet
-werden, auch innerhalb einer anderen flushleft-Umgebung, sinnlos
-das auch sein mag.
+werden, auch innerhalb einer anderen flushleft-Umgebung, so sinnlos
+das auch normalerweise sein mag.
 
 Werden andere Umgebungen innerhalb der flushleft-Umgebung verwendet,
 dann werden diese wie sonst auch ausgegeben. Erst wenn die
@@ -494,17 +438,11 @@ Die flushleft-Umgebung eignet sich dafür, Text bei den Formaten
 linksbündig auszugeben, die sonst standardmäßig Blocksatz erzeugen.
 Ein Beispiel:
 
-Aus~!..
-
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)flushleft.ui
-!end_quote
-
-!..~wird:
-
-!begin_quote
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)flushleft.ui
-!end_quote
+(!EXAMPLE_END)
 
 Wie man sieht, formatiert UDO Absätze auch hier. Um einen manuellen
 Zeilenumbruch zu setzen, bedient man sich des Befehls (!KKW [nl]), vor dem unbedingt ein Leerzeichen stehen muss.
@@ -526,17 +464,11 @@ Diese Umgebung eignet sich dazu, Textpassagen deutlicher vom
 restlichen Text abzuheben. Dieser Effekt wurde auch bei folgendem
 Beispiel erzielt:
 
-Aus~!..
-
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)quote.ui
-!end_quote
-
-!..~wird:
-
-!begin_quote
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)quote.ui
-!end_quote
+(!EXAMPLE_END)
 
 (!HINT)
 
@@ -696,17 +628,11 @@ der Bezug weniger klar erkenntlich wird! Unterstützt das Ausgabeformat
 keine Fußnoten, gibt UDO vor der öffnenden Klammer zusätzlich noch das
 fehlende Leerzeichen aus.
 
-Aus~!..
-
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)footnotes.ui
-!end_quote
-
-wird~!..
-
-!begin_quote
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)footnotes.ui
-!end_quote
+(!EXAMPLE_END)
 
 Fußnoten werden von folgenden Formaten unterstützt:
 
@@ -741,13 +667,14 @@ Fußnoten werden von folgenden Formaten unterstützt:
 UDO ermöglicht Ihnen, bereits im Quelltext festzulegen, in welcher
 Schriftart Worte oder Sätze im Ausgabeformat erscheinen soll.
 
-!include (!EXAMPLES)effects.ui
-
 Um für eine Textpassage eine passende Schriftart zu setzen, müssen Sie
 diese mit den zugehörigen Platzhaltern klammern. Lange Rede, kurzer
-Sinn, hier der Quelltext, der den oberen Absatz erzeugt hat:
-
+Sinn, hier ein Beispiel:
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)effects.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)effects.ui
+(!EXAMPLE_END)
 
 In der folgenden Tabelle können Sie ablesen, durch welche Kommandos
 die Schriftarten im jeweiligen Format erzeugt werden:
@@ -793,7 +720,7 @@ erstellen. Dazu muss man natürlich Kenntnis der Formatbefehle des
 jeweiligen Formates haben. Im folgenden Beispiel wird gezeigt, wie man
 die vom ST-Guide unterstützte helle Schrift ein- und ausschalten kann:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !ifdest [stg]
   !define G @{G}
@@ -805,7 +732,7 @@ die vom ST-Guide unterstützte helle Schrift ein- und ausschalten kann:
 
 Normal und (!G)ghosted(!g).
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !end_node # Schriftarten
 
@@ -840,14 +767,13 @@ Dazu stehen mehrere Kommandos zur Verfügung:
 
 Mit dem Kommando (!KKW [coloff]) wird wieder auf die Standardfarbe Schwarz zurückgeschaltet.
 
-Aus~!..
+(!EXAMPLE_BEFORE)
 !begin_verbatim
 (!red)Farbe in UDO(!coloff)
 !end_verbatim
-
-!..~wird:
-
+(!EXAMPLE_AFTER)
 (!red)Farbe in UDO(!coloff)
+(!EXAMPLE_END)
 
 Das Setzen der Farben wird zur Zeit bei den Formaten HTML, RTF, WinHelp, DRC und
 PostScript unterstützt.
@@ -907,7 +833,7 @@ Falls Sie die obigen Erklärungen mehr verwirrt haben sollten, als Ihnen
 den Tabellensatz zu erläutern, sehen sich einfach mal folgendes
 kleines Beispiel an:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !table_caption Tabellen mit UDO
 !begin_table [|l|c|r|] !hline
@@ -916,18 +842,20 @@ unten links !! unten mitte !! unten rechts
 !hline
 !end_table
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Dieses Beispiel erzeugt folgende Tabelle, die aus zwei Zeilen und drei
 Spalten besteht, wobei die erste Spalte linksbündig, die zweite Spalte
 zentriert und die dritte Spalte rechtsbündig ausgegeben wird:
 
+(!EXAMPLE_BEGIN)
 !table_caption Tabellen mit UDO
 !begin_table [|l|c|r|] !hline
 links !! mitte !! rechts
 unten links !! unten mitte !! unten rechts
 !hline
 !end_table
+(!EXAMPLE_END)
 
 Da vor und nach jeder Spalte ein ""|"" angegeben ist, werden die Spalten
 durch vertikale Linien voneinander getrennt. Die Tabelle beginnt mit
@@ -941,12 +869,13 @@ zeigt, wie die obige Tabelle, aber bei der keine Linien benutzt
 werden. Dies wird dadurch ermöglicht, indem man kein ""|"" und kein
 (!KW [hline]) verwendet. Das Ergebnis:
 
-
+(!EXAMPLE_BEGIN)
 !table_caption Ein weiteres Beispiel
 !begin_table [lcr]
 links !! mitte !! rechts
 unten links !! unten mitte !! unten rechts
 !end_table
+(!EXAMPLE_END)
 
 
 !index (!kw [use_ansi_tables])
@@ -1000,9 +929,9 @@ verbatim-Umgebung, die wiederum in einer quote-Umgebung steht.
 
 Ein kleines Beispiel für einen C-Sourcecode mit UDO:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)csource.u
-!end_quote
+(!EXAMPLE_END)
 
 Eine weitere Möglichkeit, Sourcecode auszugeben, bietet der
 Befehl (!KW [sinclude]).

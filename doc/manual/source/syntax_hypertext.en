@@ -19,6 +19,7 @@
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -34,11 +35,11 @@
 Using the command (!KW [label]) you can set labels inside the source
 file. An example:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !label example
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 When converting to the hypertext formats Windows Help, HTML, ST-Guide
 and Pure C Help UDO inserts references inside the text to this label
@@ -86,13 +87,13 @@ links UDO offers you the placeholders called (!KKW [link]),
 If you want to use a ""("" or a ""]"" inside a link you have to
 quote it with an exclamation mark:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 Wrong: (!link [Brackets])] [Link])
 Right: (!link [Brackets!]!)] [Link])
                        ----
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 # = = = = =
 
@@ -118,15 +119,15 @@ and how UDO converts it:
 # geändert 20.12.2003 - Ulrich Kretschmer
 The following example shows how to insert a link on the UDO contact information:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)link.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. will be displayed this way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)link.ui
-!end_quote
+(!EXAMPLE_END)
 
 (!HINTS)
 
@@ -203,15 +204,15 @@ Especially for (!LaTeX) there's existing the (!KKW [plink])
 The following example shows how to insert a page like to the page that
 contains my contact addresses:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)plink.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. will be displayed this way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)plink.ui
-!end_quote
+(!EXAMPLE_END)
 
 (!HINTS)
 
@@ -257,45 +258,45 @@ in the link destination, too.
 How to use external links inside an ST-Guide file is descriped in the
 following example:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)stg/xlink.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. will be displayed this way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)stg/xlink.ui
-!end_quote
+(!EXAMPLE_END)
 !endif
 
 !ifdest [win,wh4]
 How to use external links inside a Windows Help file is descriped in the
 following example:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)winhelp/xlink.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. will be displayed this way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)winhelp/xlink.ui
-!end_quote
+(!EXAMPLE_END)
 !endif
 
 !ifdest [html,hh]
 How to use external links inside an HTML file is descriped in the
 following example:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)html/xlink.ui
-!end_quote
+(!EXAMPLE_END)
 
 !.. will be displayed this way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !include (!EXAMPLES)html/xlink.ui
-!end_quote
+(!EXAMPLE_END)
 
 !endif
 

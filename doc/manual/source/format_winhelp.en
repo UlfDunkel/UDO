@@ -17,6 +17,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -105,12 +106,12 @@ their hexadecimal value with a leading underscore.
 
 An example with German words:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 UDO:     !node LaTeX-Einführung Teil 1
 WinHelp: #{footnote # LaTeX_2DEinf_5C_27FChrung_Teil_1}
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Description:
 

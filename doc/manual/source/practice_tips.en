@@ -18,6 +18,7 @@
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -45,16 +46,16 @@ Furthermore you can test or convert only some parts of the documentation.
 My be you have a documentation with five chapters. Write a preamble file, a
 main file and five files that contain the chapters:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)main.u
-!end_quote
+(!EXAMPLE_END)
 
 If you now want to convert a single chapter you simply edit another main
 file:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)ch5test.u
-!end_quote
+(!EXAMPLE_END)
 
 If you use this method you will be able to find errors in a large
 documentation more quickly.
@@ -79,14 +80,12 @@ standardized copyright text. May be you have a written a program that
 contains this copyright note:
 
 !autoref [off]
-!begin_quote
-
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 ""Hello, World!"" Version 8.15 (!nl)
 Copyright (!copyright) 1996 by C. Rookie
 !end_verbatim
-
-!end_quote
+(!EXAMPLE_END)
 !autoref [on]
 
 Your next program contains a similar text, only the name of the program and
@@ -94,14 +93,12 @@ the version number differ. Wouldn't it be better to use a standardized text
 any time you write the documentation of a new software?
 
 !autoref [off]
-!begin_quote
-
+!(!EXAMPLE_BEGIN)
 !begin_verbatim
 ""(!PrgName)"" Version (!PrgVersion) (!nl)
 Copyright (!copyright) (!PrgYear) by C. Rookie
 !end_verbatim
-
-!end_quote
+(!EXAMPLE_END)
 !autoref [on]
 
 Here the name, the version number and the years will be replaced by the
@@ -110,8 +107,7 @@ the upper text to a sinlge file you can use it for many documentations where
 only the macros have to be defined.
 
 !autoref [off]
-!begin_quote
-
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !macro PrgName    Hello, World!
 !macro PrgVersion 8.15
@@ -121,8 +117,7 @@ only the macros have to be defined.
 ...
 !include copyleft.ui
 !end_verbatim
-
-!end_quote
+(!EXAMPLE_END)
 !autoref [on]
 
 It's true that this is only a small example. But you can make more complex
@@ -142,9 +137,9 @@ only need some knowledge about the destination format.
 The following example shows how to write commands for changing the font size
 for (!LaTeX), HTML, Windows Help and RTF:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES_DIST)font_size.u
-!end_quote
+(!EXAMPLE_END)
 
 !end_node # Write your own commands
 

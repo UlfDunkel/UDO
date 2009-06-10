@@ -23,6 +23,7 @@
 #   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -55,16 +56,16 @@ syntaktische Korrektheit testen. Nehmen wir an, wir haben einen
 Quelltext mit fünf Kapiteln. Erstellen Sie eine Datei mit den globalen
 Schaltern, eine Hauptdatei und fünf Dateien mit dem Kapiteltext:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)main.u
-!end_quote
+(!EXAMPLE_END)
 
 Falls Sie nun einmal nur ein Kapitel umwandeln wollen, erstellen Sie
 ganz einfach eine zusätzliche Hauptdatei, die Sie dann umwandeln:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)ch5test.u
-!end_quote
+(!EXAMPLE_END)
 
 Gerade bei sehr umfangreichen Dokumentationen kann man so die Fehlersuche
 und -korrektur drastisch beschleunigen.
@@ -89,12 +90,12 @@ unter Zuhilfenahme von Makros kleinere Standardtexte erstellen.
 
 Nehmen wir an, unsere Copyrightangabe sieht so aus:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 ""Hello, World!"" Version 8.15 (!nl)
 Copyright (!copyright) 1996 bei C. Anfänger
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Bei einem anderen Programm wird wieder fast die gleiche Angabe
 erfolgen, nur der Name des Programms und die Versionsnummer
@@ -102,19 +103,19 @@ werden sich unterscheiden.
 
 Was liegt also näher, als solch einen Text zu standardisieren?
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 ""(!ProgrammName)"" Version (!ProgrammVersion) (!nl)
 Copyright (!copyright) (!ProgrammJahr) bei C. Anfänger
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Im Vorspann einer Datei, die diesen Text einbindet, müssen dann
 nur die Makros ""ProgrammName"", ""ProgrammVersion"" und
 ""ProgrammJahr"" gesetzt werden, im Hauptteil muss diese Datei dann nur
 noch an passender Stelle eingebunden werden:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !macro ProgrammName    Hello, World!
 !macro ProgrammVersion 8.15
@@ -124,7 +125,7 @@ noch an passender Stelle eingebunden werden:
 ...
 !include copyleft.ui
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Dieser Text kann dann wieder beim nächsten Projekt eingesetzt werden,
 indem man einfach die Makros anders definiert.
@@ -148,9 +149,9 @@ Das folgende Beispiel zeigt, wie man Befehle zur Änderungen der
 Schriftgröße im (!LaTeX)-, HTML-, WinHelp- und Rich Text Format einbauen
 kann:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES_DIST)font_size.u
-!end_quote
+(!EXAMPLE_END)
 
 !end_node # Schreiben Sie Ihre eigenen Kommandos
 

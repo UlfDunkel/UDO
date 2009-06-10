@@ -25,6 +25,7 @@
 #   fd  Jun 09: WORD macro introduced
 #   fd  Jun 09: NAME macro introduced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -320,13 +321,13 @@ anzeigen soll.
 Werden Webmaster-Daten angegeben, erzeugt
 UDO standardm‰ﬂig am Ende einer jeden Seite folgendes:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 Copyright (!copyright) by <webmastername> [<webmasteremail>|<webmasterurl>]
 
 Letzte Aktualisierung am (!today)
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 <webmasterurl> hat Priorit‰t vor <webmasteremail>. Werden keine
 Angaben gemacht oder im Vorspann (!KW [no_footers] [[html!!]]) benutzt, so

@@ -22,6 +22,7 @@
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -34,7 +35,6 @@
 !index Aufteilung
 !index HTML !! Aufteilung
 !item [Wie kann man die Aufteilung in mehrere Dateien unterbinden?]
-
 Im Gegensatz zu den anderen Formaten erzeugt UDO standardmäßig
 mehrere Dateien, die miteinander verknüpft sind. Für jedes
 Kapitel, jeden Abschnitt und Unterabschnitt wird eine eigene
@@ -69,9 +69,8 @@ Unterabschnitt untergebracht werden.
 
 !index Dateinamen
 !index HTML !! Dateinamen
-!item [Mir gefallen die Dateinamen bei der HTML-Ausgabe nicht!/]
-
 !index !html_name
+!item [Mir gefallen die Dateinamen bei der HTML-Ausgabe nicht!/]
 Durch den Befehl (!KW [html_name]) können Sie einem Kapitel einen
 bestimmten Namen zuweisen, den UDO für die jeweilige Datei
 anstelle der etwas kryptischen Namen wie etwa ""0a1009.htm""
@@ -82,7 +81,6 @@ benutzt.
 !index udo_rg.gif
 !index udo_up.gif
 !item [Wie bekommt man diese scheußlichen Kopfzeilen weg?]
-
 UDO erzeugt standardmäßig auf jeder HTML-Seite eine Kopfzeile,
 anhand derer man das Thema (gebildet aus den Daten von (!KW [docinfo] [[title!!]]) und
 (!KW [docinfo] [[program!!]])) des Hypertextes erkennen kann. Desweiteren werden Links
@@ -96,7 +94,6 @@ Durch den Schalter (!KW [no_headlines] [[html!!]]) kann die Ausgabe der
 Kopfzeilen und der Grafiken unterbunden werden.
 
 !item [Wie kann man bequem eigene Kopf- und Fußzeilen erzeugen?]
-
 Um eigene (!idx [Kopfzeilen]) und (!idx [Fußzeilen]) zu erzeugen, kann man Makros
 benutzen, die man jeweils am Anfang und Ende eines Kapitels
 angibt. Der Inhalt dieser Kapitel erscheint dabei jedoch
@@ -107,12 +104,14 @@ in der es Kapitel namens ""Software"", ""Kontaktadressen"" und
 
 !begin_description
 !item [Hauptdatei:]
-
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)html/headfoot.ui
+(!EXAMPLE_END)
 
 !item [software.ui:]
-
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)html/software.ui
+(!EXAMPLE_END)
 !end_description
 
 Wird nun nach HTML umgewandelt, werden die jeweiligen Kopf- und
@@ -131,7 +130,6 @@ Verwendung von (!KW [use_raw_header]) bzw. (!KW [use_raw_footer]).
 !index Rahmen
 !index Tabelle
 !item [Mal wird eine Tabelle umrahmt dargestellt, mal nicht!?]
-
 Bei HTML kann man leider nur angeben, ob die gesamte Tabelle
 umrahmt werden soll oder ob sie gar nicht mit einem Rahmen
 dargestellt werden soll.
@@ -142,7 +140,6 @@ Befehl, wird die Tabelle ohne Rahmen dargestellt.
 
 !index HTML !! Dateiendungen !! Suffixe
 !item [Wie legt UDO die Suffixe der Dateien fest?]
-
 UDO benutzt als Suffix für die HTML-Dateien immer das Suffix des
 in der Kommandozeile mit der Option (!code [(--!)outfile]) bzw. (!code [-o]) übergebenen
 Dateinamens:
@@ -158,7 +155,6 @@ Wenn Sie stattdessen die Option (!code [-o~!]) verwenden, benutzt UDO für
 lange Namen erlauben, hingegen immer das Suffix (!file [.html]).
 
 !item [Die Dateinamen bei den Querverweisen stimmen nicht!?]
-
 Falls Sie HTML-Dateien auf einem Betriebssystem erstellen, das 
 keine langen Namen zulässt, Sie als Suffix (!code [.html]) vorgegeben haben
 und Sie diese Dateien dann auf einem Web-Server ablegen, so
@@ -181,7 +177,6 @@ zugegriffen werden soll!
 !index Hintergrundmusik
 !index HTML !! Hintergrundmusik
 !item [Wie kann ich Hintergrundmusik einbinden?]
-
 Hier für steht das Kommonado (!KW [html_bgsound]) zur Verfügung.
 
 !end_description

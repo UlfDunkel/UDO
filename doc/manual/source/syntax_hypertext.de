@@ -23,6 +23,7 @@
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -38,11 +39,11 @@
 Mit dem Befehl (!KW [label]) können im Quelltext sogenannte Sprungmarken
 (""Labels"") gesetzt werden. Ein Beispiel für ein solches Label:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !label Beispiel
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Bei den Hypertextformaten ST-Guide, HTML, WinHelp und Pure-C-Help
 werden solche Sprungmarken automatisch referenziert, d.h., UDO legt automatisch Querverweise zu diesen Sprungmarken an. Bei
@@ -95,13 +96,13 @@ Falls innerhalb eines der Link-Befehle ""("" oder ""]""
 benutzt werden, muss man diese Zeichen quoten, damit UDO den Befehl korrekt
 umsetzen kann. Beispiel:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 Falsch:  (!link [Klammern])] [Verweis])
 Richtig: (!link [Klammern!]!)] [Verweis])
                          ----
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 # = = = = =
 
@@ -129,17 +130,11 @@ aktuellen Dokument nehmen:
 Hier ein Beispiel, bei dem auf den Abschnitt mit den Kontaktinformationen
 zur UDO-Gemeinde verwiesen wird:
 
-Aus~!..
-
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)link.ui
-!end_quote
-
-wird~!..
-
-!begin_quote
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)link.ui
-!end_quote
+(!EXAMPLE_END)
 
 (!HINTS)
 
@@ -216,17 +211,11 @@ andere Seiten zu nehmen:
 Hier ein Beispiel, bei dem auf die Seite verwiesen wird, auf der
 Sie unsere Kontaktinformationen finden.
 
-Aus~!..
-
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)plink.ui
-!end_quote
-
-wird~!..
-
-!begin_quote
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)plink.ui
-!end_quote
+(!EXAMPLE_END)
 
 (!HINTS)
 
@@ -269,51 +258,32 @@ Tilde keine Sonderzeichen angepasst werden (kann bei Pfadangaben fatal sein!).
 !ifdest [stg]
 Hier ein paar kurze Beispiele für externe Verweise in einem ST-Guide-Hypertext.
 
-Aus~!..
-
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)stg/xlink.ui
-!end_quote
-
-wird~!..
-
-!begin_quote
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)stg/xlink.ui
-!end_quote
+(!EXAMPLE_END)
 !endif
 
 !ifdest [win,wh4]
 Hier ein paar kurze Beispiele für externe Verweise in einem WinHelp-Datei.
 
-Aus~!..
-
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)winhelp/xlink.ui
-!end_quote
-
-wird~!..
-
-!begin_quote
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)winhelp/xlink.ui
-!end_quote
+(!EXAMPLE_END)
 !endif
 
 !ifdest [html,hh]
 Hier ein paar kurze Beispiele für externe Verweise in einer
 HTML-Datei.
 
-Aus~!..
-
-!begin_quote
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)html/xlink.ui
-!end_quote
-
-wird~!..
-
-!begin_quote
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)html/xlink.ui
-!end_quote
-
+(!EXAMPLE_END)
 !endif
 
 (!HINTS)

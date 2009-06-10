@@ -18,6 +18,7 @@
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -34,13 +35,13 @@ UDO prints all error messages, warnings and hints that appear when
 converting the source file to files with the suffix
 (!file [.ul?]). Each message is constructed the following way:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
   Error: <file> <line number>: <text>
 Warning: <file> <line number>: <text>
    Hint: <file> <line number>: <text>
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 If you want to avoid these errors, warnings and hints open the printed file,
 go to the printed line and try to find the error. Start with the first

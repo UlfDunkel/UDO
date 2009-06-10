@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -97,11 +98,11 @@ If the HCP prints the error message ""please add a @subject-command to this
 text"" at the end of converting the STG file you have forgotten to insert
 a line like the following one at the beginning of your UDO source file:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !stg @subject "Documentation/Utilities"
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !item [How can i create a user-defined title page for ST-Guide?]
 
@@ -113,9 +114,9 @@ ST-Guide. It uses a ""hidden"" node that contains the word ""Contents"" at
 the end. The ST-Guide will insert a link to the table of contents due to
 this word.
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)stg/title.ui
-!end_quote
+(!EXAMPLE_END)
 
 !item [Why it is better not to use justified text?]
 

@@ -16,6 +16,7 @@
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -42,11 +43,11 @@ UDO is forced to handle it like a description environment.
 
 Add the following line to (!file [/usr/lib/linuxdoc-sgml/rep/html/general]):
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 <!entity Aring sdata "&Aring;" >
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !end_description
 

@@ -19,6 +19,7 @@
 #   fd  Jun 09: 'Sinn machen' -> 'Sinn ergeben' (avoid anglicisms)
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -28,12 +29,10 @@
 !begin_description
 
 !item [Warum erscheinen Bilder bei mir nicht zentriert?]
-
 Beschaffen Sie sich die aktuelle ST-Guide-Version. ST-Guide Release 15
 kann Bilder selbständig zentrieren.
 
 !item [Wie werden die Titelseite und das Inhaltsverzeichnis erzeugt?]
-
 Titelseite und Inhaltsverzeichnis werden jeweils auf einer
 eigenen Seite dargestellt. Die Titelseite hat dabei den Namen
 ""Titel"", dem Inhaltsverzeichnis wird dabei der primäre Name
@@ -45,7 +44,6 @@ den Namen des erzeugten Hypertextes. Um das Inhaltsverzeichnis
 darzustellen, übergibt man zusätzlich ""Main"". Wie man dem ST-Guide mitteilt, welche Seite welchen Hypertextes anzuzeigen ist, findet man in der Beschreibung zum HCP.
 
 !item [Wie entferne ich die Kopfzeilen?]
-
 UDO erzeugt standardmäßig auf jeder Seite eine Kopfzeile,
 gebildet aus dem Titel und dem Namen des im Hypertext besprochenen Programms. Die Kopfzeilen werden unterstrichen dargestellt.
 
@@ -53,7 +51,6 @@ Durch den Schalter (!KW [no_headlines] [[stg!!]]) lässt sich die Ausgabe
 dieser Kopfzeilen unterbinden.
 
 !item [Wie wird beim ST-Guide referenziert?]
-
 Die Referenzierung wird fast komplett dem HCP des ST-Guide
 überlassen.
 
@@ -62,7 +59,6 @@ nur bei den manuell gesetzten Links durch die Befehle
 andere Kapitel oder Labels.
 
 !item [Wie werden Labels umgesetzt?]
-
 UDOs Befehl (!KW [label]) wird in den HCP-Befehl ""(!code [@symbol ari])""
 umgesetzt. Dabei ist zu beachten, dass noch kein anderes Kapitel
 oder Label mit gleichem Namen existiert, da der HCP dies
@@ -85,7 +81,6 @@ aber nicht darauf, ob man zuviele Zeilen, Verweise oder Bilder
 benutzt hat.
 
 !item [In den Popup-Nodes steht am Ende immer eine Leerzeile, wieso?]
-
 UDO bearbeitet einen Quelltext Zeile für Zeile. Beim Auftreten
 einer Leerzeile oder eines Kommandos wird der letzte Absatz samt
 einer zusätzlichen Leerzeile ausgegeben.
@@ -94,7 +89,6 @@ Dies ist auch bei den Popup-Nodes nicht anders. Das Problem lässt
 sich leider nicht lösen.
 
 !item [In Tabellen sind manche Zellen verschoben, warum?]
-
 Der ST-Guide besitzt eine eingebaute Italic-Korrektur, die leider
 auch bei Tabellen zuschlägt und Leerzeichen einfügt. Das ist ein
 Problem des ST-Guide und kann nur von dessen Autor, Holger Weets,
@@ -105,20 +99,18 @@ werden, möglichst auf Kursivschrift verzichten, solange es keine
 neuere ST-Guide-Version gibt.
 
 !item [Der HCP meldet mir den Fehler ""please add...""?]
-
 Falls der HCP die Fehlermeldung ""please add a @subject-command
 to this text"" am Ende der Übersetzung des erzeugten ST-Guide-Quelltextes erzeugt, haben Sie vergessen, im Vorspann des UDO-Quelltextes folgenden ST-Guide-Spezialbefehl anzugeben:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
-!stg @subject ""...""
+!stg @subject "..."
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Anstelle der Punkte müssen Sie die Rubriken angegeben werden, in die ein Hypertext eingeordnet werden kann. Bei einem kleinen Tool geben Sie z.B. ""Dokumentation/Utilities"" an. Weitere Informationen zu diesem Thema findet man in der Dokumentation des ST-Guide.
 
 !item [Wie erzeuge ich eine eigene Titelseite?]
-
 Falls Ihnen das Layout der Titelseite, die UDO mit (!KW [maketitle]) erzeugen
 kann, nicht gefällt, können Sie sich mit nur wenigen Handgriffen
 Ihre eigene Titelseite erzeugen.
@@ -129,12 +121,11 @@ im Inhaltsverzeichnis erscheint. Am Ende der Titelseite wird das Wort
 ""Inhaltsverzeichnis"" angegeben, dass ein Link zu eben diesem vom
 ST-Guide erzeugt wird.
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)stg/title.ui
-!end_quote
+(!EXAMPLE_END)
 
 !item [Warum ist es besser, auf Blocksatz zu verzichten?]
-
 ""Warum das denn?"", werden Sie sich vielleicht fragen. Nun, mit
 Hyperion/HypC gibt es von Martin Osieka ein Programmpaket für den
 Apple Macintosh, mit dem man ST-Guide-Hypertexte auch hier schreiben,

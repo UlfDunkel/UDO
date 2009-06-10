@@ -19,6 +19,7 @@
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -152,14 +153,14 @@ gesetzt wurde, gibt es ein Problem, falls man am Seitenende einen
 Verweis zum Seitenanfang anlegen will. Daher muss man hier einen
 manuellen Querverweis setzen.
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !node  Test
 !label Test Anfang
 [...]
 (!link [Zum Seitenanfang] [Test Anfang])
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 # = = =
 
@@ -169,7 +170,7 @@ Kapitel anlegen, in welches das Inhaltsverzeichnis ausgegeben
 wird. In einem normalen Kapitel kann man natürlich Bilder wie
 sonst auch benutzen. Beispiel:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !begin_document
 !maketitle
@@ -179,7 +180,7 @@ sonst auch benutzen. Beispiel:
 
 !node Erstes Kapitel
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 # = = =
 

@@ -18,6 +18,7 @@
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -28,11 +29,9 @@ Bevor wir ins Detail gehen, möchten wir Ihnen an dieser Stelle ein
 Beispiel eines kompletten Quelltextes zeigen, welches Ihnen auch dazu
 dienen kann, eigene Quelltexte mit UDO zu erstellen:
 
-!hline
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES_DIST)example.u
-!end_quote
-!hline
+(!EXAMPLE_END)
 
 !subsubheading Erläuterungen
 

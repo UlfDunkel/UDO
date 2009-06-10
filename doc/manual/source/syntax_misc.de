@@ -29,6 +29,7 @@
 #   fd  Jun 09: using more text-formatting macros
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -155,9 +156,9 @@ und eingeschlossen in runde Klammern an.
 
 Auch hier zunächst ein paar Beispiele:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)macro1.ui
-!end_quote
+(!EXAMPLE_END)
 
 !index (!kw [include])
 Diese Makros könnten dazu benutzt werden, sich lästiges Abschreiben zu
@@ -167,9 +168,9 @@ Makros an den jeweiligen Quelltext angepasst wird. Im folgenden
 Beispiel wird der Programmname in einen Disclaimer eingebaut, der per
 (!KW [include]) eingebunden wird:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)macro2.ui
-!end_quote
+(!EXAMPLE_END)
 
 !smallskip
 
@@ -185,9 +186,9 @@ Hier ein kleines (und zugegebenermaßen geschmackloses) Beispiel, bei dem ein Mak
 Text mit mehreren Textstilattributen gleichzeitig definiert wird und später mit
 nur einem Parameter aufgerufen wird:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)macro3.ui
-!end_quote
+(!EXAMPLE_END)
 
 Die Worte ""fett, kursiv und unterstrichen"" werden bei der Ausgabe dann an die Stelle
 von (!code [(!/1)]) gesetzt.
@@ -275,9 +276,9 @@ werden keine Umlaute und andere Sonderzeichen angepasst.
 Im folgenden Beispiel benutzen wir eine Definition, um nur im
 HTML-Format ein Wort als Überschrift auszugeben:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)define1.ui
-!end_quote
+(!EXAMPLE_END)
 
 !smallskip
 
@@ -290,9 +291,9 @@ Platzhalter nun mit geeigneten Definitionen nachahmen:
 
 !index \linebreak
 !index \nolinebreak
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)define2.ui
-!end_quote
+(!EXAMPLE_END)
 
 !smallskip
 
@@ -311,9 +312,9 @@ Im obigen Beispiel habe ich Ihnen gezeigt, wie man eine Überschrift für
 HTML erzeugen könnte. Benutzt man Parameter, könnte man Überschriften
 wesentlich eleganter erzeugen:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)define3.ui
-!end_quote
+(!EXAMPLE_END)
 
 Sie sehen, dass Sie mit diesem Befehl einige Möglichkeiten haben,
 spezielle Funktionen eines Formates nachzubilden, die UDO standardmäßig
@@ -322,9 +323,9 @@ nicht zur Verfügung stellt.
 Das obige Beispiel für (!LaTeX) ließe sich mit einer parametrischen
 Definition übrigens viel eleganter lösen:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)define4.ui
-!end_quote
+(!EXAMPLE_END)
 
 In diesem Beispiel wird nur ein Parameter an die Definition übergeben.
 Trotzdem soll für Nicht-(!LaTeX)-Formate der 2. Parameter ausgegeben
@@ -387,9 +388,9 @@ Turn-Around-Zeiten zu minimieren, wollen wir eine Zieldatei erzeugen,
 die nur das dritte Kapitel enthält. Nur wenn das Symbol ""AlleKapitel""
 gesetzt ist, soll die Zieldatei alle Kapitel enthalten:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)symbol1.ui
-!end_quote
+(!EXAMPLE_END)
 
 Starten Sie UDO nun ""normal"", wird eine Zieldatei erstellt, die nur das
 dritte Kapitel enthält. Starten Sie UDO hingegen mit der
@@ -403,9 +404,9 @@ Zieldatei aufgenommen. Übergibt man ""(!code [-D~Kapitel1])"" und ""(!code [-D~K
 so werden das erste und das zweite Kapitel eingebunden. Übergibt man
 hingegen ""(!code [-D~AlleKapitel])"", wird die Zieldatei komplett dargestellt:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)symbol2.ui
-!end_quote
+(!EXAMPLE_END)
 
 Ihrer Phantasie sind hier kaum Grenzen gesetzt!
 
@@ -416,9 +417,9 @@ Wollen Sie in obigem Beispiel partout verhindern, dass alle Kapitel in
 die Zieldatei eingebunden werden, können Sie zuvor das Symbol
 (!code [AlleKapitel]) löschen, sofern es gesetzt wurde. Dies funktioniert so:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)symbol3.ui
-!end_quote
+(!EXAMPLE_END)
 
 In diesem Beispiel wird also zunächst abgefragt, ob das Symbol
 ""(!code [AlleKapitel])"" gesetzt ist. In dem Falle wird es durch den Befehl
@@ -451,9 +452,9 @@ können und sollten mehrfach angegeben werden.
 
 Der Befehl zur Angabe eines Indexeintrags lautet folgendermaßen:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)index1.ui
-!end_quote
+(!EXAMPLE_END)
 
 Der Indexeintrag erscheint dann im Index von (!LaTeX), im Index der mit
 Plain-(!TeX) bearbeiteten Texinfo-Datei, im Index des ST-Guide-Hypertextes
@@ -471,9 +472,9 @@ Falls Sie denken, dass der Leser bei der Suche nach dem Wort
 ""Zeilenabstand"" im Index auch unter ""Abstand"" nachschauen wird,
 sollten Sie beide Indexeinträge vornehmen.
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)index2.ui
-!end_quote
+(!EXAMPLE_END)
 
 !smallskip
 
@@ -543,12 +544,12 @@ einem Ausrufezeichen aufgehoben werden. Geschieht dies nicht, so
 denkt UDO, der Parameter oder der Index-Befehl wäre bereits
 beendet. Ein Beispiel:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 Falsch:  (!idx [Copyright (c) 1995])
 Richtig: (!idx [Copyright (c!) 1995])
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !end_enumerate
 
@@ -594,7 +595,7 @@ immer ein wahres Ergebnis, bei ""(!code [none])"" immer ein falsches.
 Das folgende Beispiel zeigt, wie man den Titel der Windows-Hilfe
 anders als für die anderen Formate setzt:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !ifdest [win]
 !docinfo [title] Die Windows-Hilfe zu
@@ -602,14 +603,14 @@ anders als für die anderen Formate setzt:
 !docinfo [title] Die Anleitung zu
 !endif
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !index (!kw [ifndest])
 Verwandt mit dem (!KW [ifdest])-Befehl ist der Befehl (!KW [ifndest]). Hier wird
 abgefragt, ob man (!I)nicht(!i) in ein Format ausgibt. Das obige Beispiel lässt
 sich demnach auch folgendermaßen darstellen:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !ifndest [win]
 !docinfo [title] Die Anleitung zu
@@ -617,7 +618,7 @@ sich demnach auch folgendermaßen darstellen:
 !docinfo [title] Die Windows-Hilfe zu
 !endif
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Bei den Abfragen können Sie natürlich auch mehrere Formatkürzel
 angeben. Die Abfrage liefert dann ein wahres Ergebnis, wenn mindestens
@@ -625,7 +626,7 @@ ein Kürzel mit dem Ausgabeformat übereinstimmt. Mit folgender Abfrage
 können Sie z.B. den Hypertextformaten einen besonderen Titel
 verpassen:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !ifdest [win,html,stg,htag]
 !docinfo [title] Der Hypertext zu
@@ -633,7 +634,7 @@ verpassen:
 !docinfo [title] Die Anleitung zu
 !endif
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !end_node # Abfrage des Zielformats
 
@@ -649,7 +650,6 @@ verpassen:
 Mit dem Befehl (!KW [iflang]) können Sie die Sprache abfragen, die für die
 Ausgabe der Zieldatei verwendet wird. Hierbei gelten folgende Zeichenketten:
 
-
 !label Sprache
 !label Sprachen
 !include language.de
@@ -661,7 +661,7 @@ immer ein wahres Ergebnis, bei ""(!code [none])"" immer ein falsches.
 Bei kleineren Texten können Sie so z.B. gleich alle Übersetzungen in
 einem Quelltext unterbringen:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !iflang [german]
 !docinfo [title] Die Benutzeranleitung zu
@@ -669,14 +669,14 @@ einem Quelltext unterbringen:
 !docinfo [title] The User's Guide to
 !endif
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !index (!kw [ifnlang])
 Auch hier gibt es den verwandten Befehl (!KW [ifnlang]), der abfragt, ob
 (!I)nicht(!i) in eine Sprache ausgegeben wird. Das obige Beispiel ließe sich
 also auch so ausdrücken:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !ifnlang [german]
 !docinfo [title] The User's Guide to
@@ -684,7 +684,7 @@ also auch so ausdrücken:
 !docinfo [title] Die Benutzeranleitung zu
 !endif
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Selbstverständlich können Sie auch bei dieser Abfrage wieder mehrere
 Sprachkürzel angeben.
@@ -715,7 +715,7 @@ Wie Sie bereits wissen, können Sie Symbole mit der Kommandozeilenoption
 Im folgenden Beispiel wird abgefragt, ob das Symbol (!code [Farbbilder]) gesetzt
 ist und entsprechend ein passendes Bild eingebunden:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !ifset [Farbbilder]
 !image colour/tiger
@@ -723,7 +723,7 @@ ist und entsprechend ein passendes Bild eingebunden:
 !image mono/tiger
 !endif
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Wenn Sie nun UDO mit der Option (!code [-D Farbbilder]) aufrufen bzw. vor der
 obigen Abfrage das Kommando (!KW [set] [Farbbilder]) in den Quelltext einbauen,
@@ -782,16 +782,16 @@ werden kann:
 Um beispielsweise eine Zeile nur in das ASCII-Format auszugeben, gibt
 man folgendes an:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)asc1.ui
-!end_quote
+(!EXAMPLE_END)
 
 Um eine Zeile in allen Formaten außer dem ASCII-Format auszugeben,
 gibt man folgendes an:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)asc2.ui
-!end_quote
+(!EXAMPLE_END)
 
 Der Inhalt dieser Zeilen wird ohne das Kommando selbst, ohne
 Berücksichtigung von UDO-Kommandos und ohne Umwandlung von
@@ -805,9 +805,9 @@ einzufügen. Im folgenden Beispiel wird gezeigt, welche Kommandos man in
 einen Quelltext einfügen muss, damit (!LaTeX) weiß, mit welchem Stil ein
 Dokument auszudrucken ist und damit es einen Index erzeugt:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)latex/index.ui
-!end_quote
+(!EXAMPLE_END)
 
 !begin_description
 
@@ -832,9 +832,10 @@ Formulare für HTML. Letzteres soll hier aufgezeigt werden:
 
 !index HTML !! <form>
 !index <form>
-!begin_quote
+(!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)raw1.ui
-!end_quote
+(!EXAMPLE_END)
+
 
 Um noch einmal den Unterschied zur verbatim-Umgebung klarzumachen: Der
 Text einer verbatim-Umgebung wird 1:1 (!I)dargestellt(!i). Würden Sie

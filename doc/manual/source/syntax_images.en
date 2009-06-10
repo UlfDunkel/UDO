@@ -18,6 +18,7 @@
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -91,12 +92,12 @@ Lindner-(!TeX). UDO has all functions of this tool built in.
 To set the size of an image you have to use the (!I)!/tex_dpi(!i) command.
 An example:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !tex_dpi 100
 !image tiger A GEM image
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 UDO reads in the header of (!file [tiger.img]), calculates its size and
 adjusts the header to 100 dpi. In the destination file a (!TeX) macro will
@@ -149,7 +150,7 @@ reading the command (!KW [image] [tiger A tiger]). If UDO doesn't find
 An example shows what kind of macro UDO generates for em(!TeX). ""w"" and
 ""h"" represent the width and height of the image:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 \begin{figure}[htb]
 \begin{...}
@@ -160,7 +161,7 @@ An example shows what kind of macro UDO generates for em(!TeX). ""w"" and
 \caption{A tiger}
 \end{figure}
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 (!HINT)
 
@@ -188,7 +189,7 @@ reading the command (!KW [image] [tiger A tiger]). If UDO doesn't find
 An example shows what kind of macro UDO generates for em(!TeX). ""w"" and
 ""h"" represent the width and height of the image:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 \begin{figure}[htb]
 \begin{...}
@@ -199,7 +200,7 @@ An example shows what kind of macro UDO generates for em(!TeX). ""w"" and
 \caption{A tiger}
 \end{figure}
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !smallskip
 
@@ -221,24 +222,24 @@ For HTML the second parameter of the (!KW [image]) command will be used as
 the alternative text. The command (!KW [image] [tiger A tiger]) will be
 converted into the following HTML commands:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 <p align=...>
 <img src="tiger.gif" alt="(Figure 1: A tiger)" width="200" height="300">
 </p><br>
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 If you don't set the title of this image UDO doesn't output an alternative
 text. The command (!KW [image] [tiger]) will be converted into this:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 <p align=...>
 <img src="../gif/tiger.gif" width="200" height="300">
 </p><br>
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Wer die Größenangaben nicht benötigt kann die Ermittlung der
 Ausmaße von Bildern unterbinden. Dazu gibt es das Kommando (!kw [no_img_size]).
@@ -261,20 +262,20 @@ To tell UDO which suffix you want to use the next time you use the
 If the upper tiger isn't inside a GIF but inside a JPEG image you can insert
 the following command right before the (!KW [image]) command:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !html_img_suffix jpg
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 If the file is named (!file [tiger.jpeg]) instead of (!file [tiger.jpg]) use the
 following line:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !html_img_suffix jpeg
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 The setting is used for all following images. If you want to display a GIF
 next time you have to use (!KW [html_img_suffix] [gif]) before the next
@@ -300,13 +301,13 @@ the image in the help file.
 
 UDO will then generate these commands:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 {\qc \{bmc tiger.bmp\}}\par\pard
 \par
 {\qc (Figure 1: A tiger)}\par\pard
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 (!HINTS)
 

@@ -18,6 +18,7 @@
 #   fd  Jun 08: 'Homepage' -> 'Website'
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -119,7 +120,7 @@ the program with a certain software.
 !end_itemize
 Please note: a manpage is currently not part of the Mac~OS~X distribution.
 # English:
-Um in das Verzeichniss zu kommen kann man über den Menüpunkt "Gehe zu/Gehe zum Ordner ..." des Finders gehen.
+Um in das Verzeichnis zu kommen, kann man über den Menüpunkt "Gehe zu/Gehe zum Ordner ..." des Finders gehen.
 
 (!DocumentationWorkInProgress)
 
@@ -207,12 +208,12 @@ Furthermore you should make some scripts or aliase to simplify calling
 UDO. The following script (named (!file [u2tex])) shows how to tell UDO that he shall convert
 the source file to (!LaTeX)):
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 #!bin/sh
 udo --tex -o ! $*
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 You can make similar scripts for the other destination formats if you
 want. The UDO distribution already contains some scripts.

@@ -18,6 +18,7 @@
 #   fd  Jun 08: text reviewed
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -223,10 +224,8 @@ funktionieren die Kommandos (!KW [subnode]) für einen Abschnitt,
 einen Paragraph und (!KW [subsubsubsubnode]) für einen Unterparagraph. Optional können sie die einzelnen Gliederungsebenen
 auch mit (!KW [begin_node]) und (!KW [end_node]) schachteln.
 
-Da Bilder oft mehr sagen als tausend Worte, hier ein kleines
-Beispiel. Die (hier inhaltsleere) Befehlsfolge...
-
-!begin_quote
+Da Bilder oft mehr sagen als tausend Worte, hier ein kleines Beispiel. Die (hier inhaltsleere) Befehlsfolge~!..
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !node             Ein Kapitel
 !subnode          Ein Abschnitt
@@ -235,11 +234,10 @@ Beispiel. Die (hier inhaltsleere) Befehlsfolge...
 !subsubsubsubnode Ein Unterparagraph
 !node             Ein neues Kapitel
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
-!..stellt UDO im Inhaltsverzeichnis folgendermaßen dar:
-
-!begin_quote
+!..~stellt UDO im Inhaltsverzeichnis folgendermaßen dar:
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 1  Ein Kapitel
    1.1  Ein Abschnitt
@@ -249,7 +247,7 @@ Beispiel. Die (hier inhaltsleere) Befehlsfolge...
 
 2  Ein neues Kapitel
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 WinHelp und ST-Guide bieten die Möglichkeit, Texte auch in kleinen
 Dialogen, sogenannten Popups darzustellen. Möchten Sie, dass ein
@@ -326,7 +324,7 @@ Kapitel, die im Anhang stehen, werden mit Großbuchstaben
 gekennzeichnet; Abschnitte und Unterabschnitte werden auch hier
 durchnummeriert. Auch hier zur Verdeutlichung ein kleines Beispiel:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !node Ein Kapitel außerhalb des Anhangs
 !begin_appendix
@@ -337,11 +335,11 @@ durchnummeriert. Auch hier zur Verdeutlichung ein kleines Beispiel:
 !subsubsubsubnode Ein Unterparagraph
 !end_appendix
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 Im Inhaltsverzeichnis werden Sie dann folgendes lesen können:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 5  Ein Kapitel außerhalb des Anhangs
 
@@ -353,7 +351,7 @@ A  Ein Kapitel
               A.1.1.1 Ein Paragraph
                       A.1.1.1.1 Ein Unterparagraph
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 (!HINTS)
 

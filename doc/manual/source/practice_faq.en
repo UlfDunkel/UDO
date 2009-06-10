@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from working.ui)
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: text reviewed, HomeSite + TextWrangler editors added
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -131,14 +132,14 @@ insert a explicit link to this label by using the (!KKW [link])
 placeholder. An example:
 
 !autoref [off]
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !node  Test
 !label Test top
 [...]
 (!link [Back to top of page] [Test top])
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 !autoref [on]
 
 # = = =
@@ -147,7 +148,7 @@ placeholder. An example:
 You have to make your own table of contents, that means you have to leave
 the (!KW [tableofcontents]) command. An example:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !begin_document
 !maketitle
@@ -157,7 +158,7 @@ the (!KW [tableofcontents]) command. An example:
 
 !node First chapter
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 # = = =
 

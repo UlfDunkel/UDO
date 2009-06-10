@@ -16,6 +16,7 @@
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
 #
 ################################################################################
 
@@ -41,8 +42,7 @@ patch it like this:
 
 !begin_description
 !item [Original Version:]
-
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 if (line[i+1] == begXRef)
 {
@@ -50,11 +50,10 @@ if (line[i+1] == begXRef)
         ++i;
 }
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 !item [Patched version:]
-
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 if (line[i] == begXRef)    // [i] statt [i+1]
 {
@@ -62,7 +61,7 @@ if (line[i] == begXRef)    // [i] statt [i+1]
         ++i;
 }
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 !end_description
 
 After having changed the source code you should recompile TVHC to enable the changes.
@@ -74,11 +73,11 @@ that defines the maximum size of the text buffer. This text buffer is a
 little bit small. You should increase the buffer size e.g. to 32~KB to
 suppress the upper error message:
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 const bufferSize = 32768;
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 After having changed the buffer size you should recompile TVHC to enable the
 changes.
@@ -92,19 +91,19 @@ line. My TVHC stops if it reads such a line.
 But there's no need to stop the conversion. Thus I have patched my TVHC. I
 have replaced this line
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 error("TOPIC expected");
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 with
 
-!begin_quote
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 warning("TOPIC expected");
 !end_verbatim
-!end_quote
+(!EXAMPLE_END)
 
 If you recompile the TVHC it will print a warning and it will go on
 converting the source file instead of printing an error message.
