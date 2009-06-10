@@ -17,19 +17,14 @@
 # 2009:
 #   fd  Jun 05: header added; file reformatted
 #   fd  Jun 06: dates updated
+#   fd  Jun 10: macro DATE removed (not really required)
 #
 ################################################################################
 
 !macro RELEASE  6
-!macro VERSION  (!RELEASE).5.20 beta (rev. 709)
-
-!iflang [english]
-!macro DATE     2009-06-06
-!else
-!macro DATE     06.06.2009
-!endif
+!macro VERSION  (!RELEASE).5.20 beta (rev. 774)
 
 !docinfo [version]  (!VERSION)
-!docinfo [date]     (!DATE)
+!docinfo [date]     (!today)
 
 # === EOF ===
