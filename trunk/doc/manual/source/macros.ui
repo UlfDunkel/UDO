@@ -17,6 +17,7 @@
 #   fd  Jun 08: all commands should be formatted in bold tt
 #   fd  Jun 09: macros x/X renamed to avoid conflicts with other macros and link names
 #   fd  Jun 09: language-dependent macros might better be included first
+#   fd  Jun 10: defines from _def.ui integrated here, using new macro (!const [])
 #
 ################################################################################
 
@@ -40,7 +41,19 @@
 !macro UDOR udo(!RELEASE)
 # RELEASE is defined in file _version.ui
 
+!macro const           (!red)(!1)(!coloff)
 
+!macro MAXLINK         (!const [200])
+!macro MAXMACRO        (!const [1000])
+!macro MAXDEFINE       (!const [128])
+!macro MAXHYPHEN       (!const [4096])
+!macro LINELEN         (!const [4092])
+!macro MAX_TOKEN_LEN   (!const [199])
+!macro MAXSILBEN       (!const [32])
+!macro MAX_TOKENS      (!const [800])
+!macro MAXSYMLEN       (!const [32])
+!macro MAXLINETABLE    (!const [600])
+!macro MAXCOLUMSTABLE  (!const [64])
 
 !macro  a !]
 !define exclam !(!1)
