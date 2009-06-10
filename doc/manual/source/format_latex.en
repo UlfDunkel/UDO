@@ -72,7 +72,7 @@ The first binomial theorem: (!ab2)
 Special characters are translated especially for (!file [makeindex]).
 It's not necessary to adjust the UDO-generated (!LaTeX) files.
 
-You have to use a (!file [}]) for any (!file [{(!v)" inside an index entry
+You have to use a (!code [}]) for any (!code [{]) inside an index entry
 and vice versa. Otherwise (!LaTeX) will print an error message.
 
 !end_description

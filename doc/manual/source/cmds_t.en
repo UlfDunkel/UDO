@@ -832,7 +832,7 @@ Create link to top of page (HTML and HTML-Help only).
 !item [(!SYNTAX)] (!T)!/toplink(!t)
 
 !item [(!DESCRIPTION)]
-UDO saves a file named (!file [udo_tp.[gif,bmp,img]]) when
+UDO saves a file named (!file [udo_tp.[gif,bmp,img!]]) when
 converting to HTML or HTML-Help. With this command
 you can include this image. Additionally a link
 to the top of the page is generated.

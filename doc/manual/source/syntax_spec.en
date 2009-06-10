@@ -202,7 +202,7 @@ error message.
 (!HINT)
 
 If any character was forgotten or a character is converted in
-a wrong way please (!link [send a bug report] [Contact addresses])!
+a wrong way please (!link [send a bug report] [Contact])!
 
 !end_node # Converting 8 bit chars
 

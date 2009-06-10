@@ -68,7 +68,7 @@ UDO was completely written in highly portable C. The source code doesn't
 call any system specific functions. Due to this fact UDO could be ported to
 any operating system a C compiler is existing for.
 
-If you would like to port UDO to a system which isn't listed above, please (!link [contact] [Contact addresses]) the UDO developer team.
+If you would like to port UDO to a system which isn't listed above, please (!link [contact] [Contact]) the UDO developer team.
 
 # = = =
 
