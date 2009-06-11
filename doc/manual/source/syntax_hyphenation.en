@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from syntax.ui)
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 11: typo
 #
 ################################################################################
 
@@ -88,7 +89,7 @@ many times in your source file:
 
 (!EXAMPLE_BEGIN)
 !begin_verbatim
-!hyphen docu!-men!-ta!-tion
+!hyphen do!-cu!-men!-ta!-tion
 !end_verbatim
 (!EXAMPLE_END)
 

@@ -17,6 +17,7 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 11: typo
 #
 ################################################################################
 
@@ -55,7 +56,7 @@ if (line[i+1] == begXRef)
 !item [Patched version:]
 (!EXAMPLE_BEGIN)
 !begin_verbatim
-if (line[i] == begXRef)    // [i] statt [i+1]
+if (line[i] == begXRef)    // [i] instead of [i+1]
 {
     strdel(line, i, 1);
         ++i;
