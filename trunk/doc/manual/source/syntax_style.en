@@ -20,6 +20,7 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 11: EXAMPLE_... macros optimized
 #
 ################################################################################
 
@@ -48,26 +49,18 @@ another itemize environment.
 
 This short example shows how to write a simple itemize environment:
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)itemize1.ui
-(!EXAMPLE_END)
-
-!.. will be printed this way:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)itemize1.ui
 (!EXAMPLE_END)
 
 And this example, where an itemize environment is used inside another
 one !..
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)itemize2.ui
-(!EXAMPLE_END)
-
-!.. will be printed this way:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)itemize2.ui
 (!EXAMPLE_END)
 
@@ -89,27 +82,19 @@ The following two examples show how to use the (!KW [short]) command and
 which effects this command has. The first example doesn't, the second one
 uses (!KW [short]):
 
-Without (!KW [short])!..
+Without (!KW [short]):
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)itemize3.ui
-(!EXAMPLE_END)
-
-!.. will be displayed this way:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)itemize3.ui
 (!EXAMPLE_END)
 
-With (!KW [short])!..
+With (!KW [short]):
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)itemize4.ui
-(!EXAMPLE_END)
-
-!.. will be displayed this way:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)itemize4.ui
 (!EXAMPLE_END)
 
@@ -151,26 +136,18 @@ another itemize environment.
 
 This short example shows how to write a simple itemize environment:
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)enum1.ui
-(!EXAMPLE_END)
-
-!.. will be displayed this way:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)enum1.ui
 (!EXAMPLE_END)
 
 In the following example the enumerate environment is used twice and it will
 be compressed because of the usage of (!KW [short]):
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)enum2.ui
-(!EXAMPLE_END)
-
-!.. becomes:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)enum2.ui
 (!EXAMPLE_END)
 
@@ -209,28 +186,20 @@ A word that has to be described is used with the (!KW [item])
 command inside brackets and will be displayed with bold text.
 
 The description environment can be used inside other (description)
-environments. This example!..
+environments.
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)descript1.ui
-(!EXAMPLE_END)
-
-!.. will be displayed this way:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)descript1.ui
 (!EXAMPLE_END)
 
 In this example the description environment is used inside another one and
 the (!KW [short]) is used, too:
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)descript2.ui
-(!EXAMPLE_END)
-
-!.. becomes:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)descript2.ui
 (!EXAMPLE_END)
 
@@ -275,15 +244,9 @@ has to used inside the brackets of the (!KW [item]) command.
 
 You can use the xlist environment inside other (xlist) environments, too.
 
-This short example!..
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)xlist1.ui
-(!EXAMPLE_END)
-
-!.. will be displayed this way:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)xlist1.ui
 (!EXAMPLE_END)
 
@@ -291,13 +254,9 @@ The command (!KW [short]) can also be used for xlist environments. To get
 a compressed list just add (!KW [short]) at the end of the line that
 contains (!KW [begin_xlist]). Once more a short example:
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)xlist2.ui
-(!EXAMPLE_END)
-
-!.. will be displayed this way:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)xlist2.ui
 (!EXAMPLE_END)
 
@@ -329,13 +288,9 @@ displayed in typewritered text. A tlist environment will be started with
 
 The following example shall demonstrate the results:
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)xlist3.ui
-(!EXAMPLE_END)
-
-!.. will be displayed this way:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)xlist3.ui
 (!EXAMPLE_END)
 
@@ -394,13 +349,9 @@ active one text will be printed centered.
 If the following example isn't centered the current documentation format
 doesn't allow it to use centered text.
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)center.ui
-(!EXAMPLE_END)
-
-!.. will be printed in this way:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)center.ui
 (!EXAMPLE_END)
 
@@ -428,13 +379,9 @@ active one text will be printed right justified.
 If the following example isn't printed right justified the current
 documentation format doesn't allow it to use right justified text.
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)flushright.ui
-(!EXAMPLE_END)
-
-!.. will be printed in this way:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)flushright.ui
 (!EXAMPLE_END)
 
@@ -464,15 +411,9 @@ If you use other environments inside a flushleft environment they will be
 layouted like in all other cases. Only when the flushleft environment is the
 active one text will be printed without justification.
 
-This short example!..
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)flushleft.ui
-(!EXAMPLE_END)
-
-!.. will be printed in this way:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)flushleft.ui
 (!EXAMPLE_END)
 
@@ -495,13 +436,9 @@ other environments.
 This environment is useful to emphasize passages. This effect is used in the
 following example:
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)quote.ui
-(!EXAMPLE_END)
-
-!.. becomes:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)quote.ui
 (!EXAMPLE_END)
 
@@ -643,15 +580,9 @@ Important hint: Before (!KK1 [N]) you shouldn't use a blank. If you do so
 the footnote mark would ""fly"" without context or before the ""("" you
 could read two blanks.
 
-This example!..
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)footnotes.ui
-(!EXAMPLE_END)
-
-becomes!..
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)footnotes.ui
 (!EXAMPLE_END)
 

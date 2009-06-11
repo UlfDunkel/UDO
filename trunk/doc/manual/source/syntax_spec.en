@@ -19,6 +19,7 @@
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 11: EXAMPLE_... macros optimized
 #
 ################################################################################
 
@@ -41,8 +42,8 @@ simulation demonstrates how it works:
 !begin_verbatim
 Double ""quotes""
 
-       66       99
-Double    quotes
+       66      99
+Double   quotes
 !end_verbatim
 (!EXAMPLE_END)
 
@@ -69,15 +70,11 @@ switch called (!KW [no_quotes] [[~!!]]).
 Like double quotes UDO can convert double apostrophes into typographical
 apostrophes:
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !begin_verbatim
 double ''apostrophes''
 !end_verbatim
-(!EXAMPLE_END)
-
-will become
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 double ''apostrophes''
 (!EXAMPLE_END)
 

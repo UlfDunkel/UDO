@@ -20,6 +20,7 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 10: EXAMPLE_... macros optimized
 #
 ################################################################################
 
@@ -116,16 +117,11 @@ and how UDO converts it:
 !item [else:]    a word (see "the link")
 !end_xlist
 
-# geändert 20.12.2003 - Ulrich Kretschmer
 The following example shows how to insert a link on the UDO contact information:
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)link.ui
-(!EXAMPLE_END)
-
-!.. will be displayed this way:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)link.ui
 (!EXAMPLE_END)
 
@@ -204,13 +200,9 @@ Especially for (!LaTeX) there's existing the (!KKW [plink])
 The following example shows how to insert a page like to the page that
 contains my contact addresses:
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)plink.ui
-(!EXAMPLE_END)
-
-!.. will be displayed this way:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)plink.ui
 (!EXAMPLE_END)
 
@@ -258,13 +250,9 @@ in the link destination, too.
 How to use external links inside an ST-Guide file is descriped in the
 following example:
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)stg/xlink.ui
-(!EXAMPLE_END)
-
-!.. will be displayed this way:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)stg/xlink.ui
 (!EXAMPLE_END)
 !endif
@@ -273,13 +261,9 @@ following example:
 How to use external links inside a Windows Help file is descriped in the
 following example:
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)winhelp/xlink.ui
-(!EXAMPLE_END)
-
-!.. will be displayed this way:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)winhelp/xlink.ui
 (!EXAMPLE_END)
 !endif
@@ -288,13 +272,9 @@ following example:
 How to use external links inside an HTML file is descriped in the
 following example:
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)html/xlink.ui
-(!EXAMPLE_END)
-
-!.. will be displayed this way:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_AFTER)
 !include (!EXAMPLES)html/xlink.ui
 (!EXAMPLE_END)
 !endif
