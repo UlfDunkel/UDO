@@ -23,6 +23,7 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 10: using macro (!const [])
+#   fd  Jun 11: typos
 #
 ################################################################################
 
@@ -762,11 +763,10 @@ the preamble for (!LaTeX):
 !begin_description
 
 !label raw environment
-!item [The raw environment]
-
 !index !begin_raw
 !index !end_raw
 
+!item [The raw environment]
 But it happens that you want to insert large passages only for one
 format with special commands. You could add one of the upper commands
 at the beginning of each line, sure. But to make it easier for you to insert
@@ -778,8 +778,8 @@ can e.g. insert complex tables for (!LaTeX) or forms for HTML with the raw
 environment. The following example shows how to enter HTML forms to your
 source code:
 
-!index HTML !! <FORM>
-!index <FORM>
+!index HTML !! <form>
+!index <form>
 (!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)raw1.ui
 (!EXAMPLE_END)
