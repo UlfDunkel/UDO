@@ -22,6 +22,7 @@
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 12: macro renamed: CODE -> CHARSET
 #
 ################################################################################
 
@@ -184,7 +185,7 @@ Zeichensätzen erstellt wurden. Und um es richtig komfortabel zu machen,
 können Quelltexte sogar aus einem Mischmasch benutzter
 Zeichensätze bestehen.
 
-Sie müssen UDO nur mittels (!KW [code] [(!CODE)]) mitteilen, mit welchem
+Sie müssen UDO nur mittels (!KW [code]) (!CHARSET) mitteilen, mit welchem
 Zeichensatz die folgenden Zeilen erstellt wurden.
 
 Hier eine Übersicht, welches Kürzel für den Zeichensatz benutzt werden kann:
