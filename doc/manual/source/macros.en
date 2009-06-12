@@ -40,11 +40,11 @@
 !macro EXAMPLE_BEFORE !rinclude (!EXAMPLES)/html/example_before.ui
 !macro EXAMPLE_AFTER  !rinclude (!EXAMPLES)/html/example_after.ui
 
-!macro FORMAT         (!B)(!T)(!link [&lt;abbreviations&gt;] [Abbreviations])(!t)(!b)
-!macro COLOR          (!B)(!T)(!link [&lt;color&gt;] [Colors])(!t)(!b)
-!macro LANGUAGE       (!B)(!T)(!link [&lt;language&gt;] [Language])(!t)(!b)
-!macro OS             (!B)(!T)(!link [&lt;system&gt;] [Operating systems])(!t)(!b)
-!macro CHARSET        (!B)(!T)(!link [&lt;charset&gt;] [Code])(!t)(!b)
+!macro FORMAT         (!B)(!T)(!link [[&lt;abbreviations&gt;] [Abbreviations!]])(!t)(!b)
+!macro COLOR          (!B)(!T)(!link [[&lt;color&gt;] [Colors!]])(!t)(!b)
+!macro LANGUAGE       (!B)(!T)(!link [[&lt;language&gt;] [Language!]])(!t)(!b)
+!macro OS             (!B)(!T)(!link [[&lt;system&gt;] [Operating systems!]])(!t)(!b)
+!macro CHARSET        (!B)(!T)(!link [[&lt;charset&gt;] [Code!]])(!t)(!b)
 
 # other macro formattings
 # ------------------------------------------------------------------------------
@@ -54,11 +54,11 @@
 !macro EXAMPLE_BEFORE (!B)Before:(!b) (!nl) !begin_quote
 !macro EXAMPLE_AFTER  (!B)Afterwards:(!b) (!nl)
 
-!macro FORMAT         (!link [<abbreviations>] [Abbreviations])
-!macro COLOR          (!link [<color>] [Colors])
-!macro LANGUAGE       (!link [<language>] [Language])
-!macro OS             (!link [<system>] [Operating systems])
-!macro CHARSET        (!link [<charset>] [Code])
+!macro FORMAT         [(!link [<abbreviations>] [Abbreviations])]
+!macro COLOR          [(!link [<color>] [Colors])]
+!macro LANGUAGE       [(!link [<language>] [Language])]
+!macro OS             [(!link [<system>] [Operating systems])]
+!macro CHARSET        [(!link [<charset>] [Code])]
 !endif
 
 !macro CHAR           <char>
