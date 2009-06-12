@@ -21,6 +21,7 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 12: macro renamed: CODE -> CHARSET
 #
 ################################################################################
 
@@ -180,7 +181,7 @@ Auf einen anderen Zeichensatz umschalten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/code [(!CODE)](!t)
+!item [(!SYNTAX)] (!T)!/code(!t) (!CHARSET)
 
 !item [(!DESCRIPTION)]
 UDO erwartet nach diesem Kommando Texte oder

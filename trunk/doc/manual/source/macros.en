@@ -18,6 +18,7 @@
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 09: some macros enhanced
 #   fd  Jun 10: EXAMPLE_... macros introduced
+#   fd  Jun 12: macro renamed: CODE -> CHARSET
 #
 ################################################################################
 
@@ -39,11 +40,11 @@
 !macro EXAMPLE_BEFORE !rinclude (!EXAMPLES)/html/example_before.ui
 !macro EXAMPLE_AFTER  !rinclude (!EXAMPLES)/html/example_after.ui
 
-!macro FORMAT         (!link [&lt;abbreviations&gt;] [Abbreviations])
-!macro COLOR          (!link [&lt;color&gt;] [Colors])
-!macro LANGUAGE       (!link [&lt;language&gt;] [Language])
-!macro OS             (!link [&lt;system&gt;] [Operating systems])
-!macro CODE           (!link [&lt;charset&gt;] [Code])
+!macro FORMAT         (!B)(!T)(!link [&lt;abbreviations&gt;] [Abbreviations])(!t)(!b)
+!macro COLOR          (!B)(!T)(!link [&lt;color&gt;] [Colors])(!t)(!b)
+!macro LANGUAGE       (!B)(!T)(!link [&lt;language&gt;] [Language])(!t)(!b)
+!macro OS             (!B)(!T)(!link [&lt;system&gt;] [Operating systems])(!t)(!b)
+!macro CHARSET        (!B)(!T)(!link [&lt;charset&gt;] [Code])(!t)(!b)
 
 # other macro formattings
 # ------------------------------------------------------------------------------
@@ -57,7 +58,7 @@
 !macro COLOR          (!link [<color>] [Colors])
 !macro LANGUAGE       (!link [<language>] [Language])
 !macro OS             (!link [<system>] [Operating systems])
-!macro CODE           (!link [<charset>] [Code])
+!macro CHARSET        (!link [<charset>] [Code])
 !endif
 
 !macro CHAR           <char>
