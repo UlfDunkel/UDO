@@ -1,0 +1,19 @@
+!index Farben
+!begin_itemize !short
+!item (!black)Schwarz(!coloff)
+!item (!silver)Hellgrau(!coloff)
+!item (!gray)(Dunkel-)Grau(!coloff)
+!item (!white)Weiß(!coloff)
+!item (!maroon)Kastanienbraun(!coloff)
+!item (!red)Rot(!coloff)
+!item (!purple)Lila(!coloff)
+!item (!fuchsia)Magenta(!coloff)
+!item (!green)Grün(!coloff)
+!item (!lime)Hellgrün(!coloff)
+!item (!olive)Olivgrün(!coloff)
+!item (!yellow)Gelb(!coloff)
+!item (!navy)Marineblau(!coloff)
+!item (!blue)Blau(!coloff)
+!item (!teal)Blaugrün(!coloff)
+!item (!aqua)Cyan(!coloff)
+!end_itemize
