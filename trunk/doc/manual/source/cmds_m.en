@@ -21,6 +21,7 @@
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 09: WORD macro introduced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -262,8 +263,7 @@ Sets the textcolor maroon.
 Dieser Platzhalter setzt die Schriftfarbe Kastanienbraun.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -271,6 +271,15 @@ PostScript unterstützt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!lime)Hellgrün(!coloff) erscheint in der Farbe Hellgrün.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!lime)Hellgrün(!coloff) erscheint in der Farbe Hellgrün.
+(!EXAMPLE_END)
 
 !end_node
 
@@ -300,9 +309,22 @@ This command will be simply replaced by (!code [\medskip]) when
 converted to (!LaTeX). Otherwise two additional empty lines will be generated.
 
 !item [(!SEEALSO)]
-(!KW [smallskip]), (!KW [bigskip])
+(!KW [bigskip]), (!KW [smallskip])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!LOREM)
+!medskip
+(!LOREM)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!LOREM)
+!medskip
+(!LOREM)
+(!EXAMPLE_END)
 
 !end_node
 

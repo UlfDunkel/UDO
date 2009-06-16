@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: LINK macro introduced
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -37,7 +38,7 @@ Set index entry or keyword.
 !item [(!SYNTAX)] (!T)!/x (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [index]).
+(!ABBREV) (!KW [index])
 
 !item [(!SEEALSO)]
 (!KW [index])

@@ -25,6 +25,7 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -38,12 +39,12 @@
 !item [WinHelp meint, dass *.rtf und *.hpj keine Hilfedatei sei?]
 Weder die eine noch die andere Datei ist eine fertige Hilfedatei
 für Windows. UDO erzeugt nur die Quelltexte einer
-Hilfedatei, welche noch mit einem Hypertext-Compiler (HC.EXE,
-HC31.EXE, HCP.EXE) übersetzt werden muss.
+Hilfedatei, welche noch mit einem Hypertext-Compiler ((!file [HC.EXE]),
+(!file [HC31.EXE]), (!file [HCP.EXE])) übersetzt werden muss.
 
 # ToDo: Text aktualisieren
 !item [Woher bekomme ich den Hypertext-Compiler?]
-Den Hypertext-Compiler HC31.EXE können Sie kostenlos vom FTP-Server von Microsoft (ftp.microsoft.com) herunterladen.
+Den Hypertext-Compiler (!file [HC31.EXE]) können Sie kostenlos vom FTP-Server von Microsoft (ftp.microsoft.com) herunterladen.
 
 !item [Warum will der HC einfach keine HLP-Datei erzeugen?]
 Dafür kann es zwei Gründe geben:
@@ -160,8 +161,8 @@ Anzeige des Textes zu verwenden. Stattdessen benutzt WinHelp einen
 Ersatzfont aus der Roman-, Script- oder Symbol-Familie, die leider alle
 keine DOS-Grafikzeichen enthalten.
 
-UDO ersetzt daher DOS-Grafikzeichen durch die ASCII-Zeichen ""+"",
-""-"" und ""|"", um z.B. DOS-Screenshots halbwegs realistisch
+UDO ersetzt daher DOS-Grafikzeichen durch die ASCII-Zeichen ""(!code[+])"",
+""(!code[--])"" und ""(!code[|])"", um z.B. DOS-Screenshots halbwegs realistisch
 darzustellen.
 
 !item [Warum sollte ich die Quelltexte mit einem Windows-Editor schreiben?]

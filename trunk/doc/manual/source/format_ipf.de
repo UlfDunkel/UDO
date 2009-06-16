@@ -16,6 +16,7 @@
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 09: real quotation fixed
 #   fd  Jun 10: using macro (!file [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -36,8 +37,8 @@ java-basierten (!url [IBM Softcopy Reader] [http://www-306.ibm.com/software/appl
 Eine IPF-Dokumentation ist außerdem in der Online-Hilfe des IPFC-Programms
 enthalten.
 
-Um aus den IPF-Dateien die Hilfedateien zu erzeugen, benötigt man den IPF-Compiler ((!file [IPFC.EXE])). Dieser ist Bestandteil von (kommerziellen) IBM-Entwicklerprodukten (z.B. (!I)OS/2~Developers Toolkit(!i),
-(!I)Visual-Age(!i) Compiler, (!I)IBM Set C++(!i)), zum Herunterladen (als
+Um aus den IPF-Dateien die Hilfedateien zu erzeugen, benötigt man den IPF-Compiler ((!file [IPFC.EXE])). Dieser ist Bestandteil von (kommerziellen) IBM-Entwicklerprodukten (z.B. OS/2~Developers Toolkit,
+Visual-Age Compiler, IBM Set C++), zum Herunterladen (als
 OS/2-Version) findet er sich auf
 (!url [http://www.m-petz.de/Download/Download.htm] []) (unter ""IPFC-Zubehör"") oder auf (!url [http://www.goellnitz-online.de/os2/infseite/ipfc.htm] []).
 # 22.12.2003: lt. http://www.sibyl-archive.org/3/euchk60.html
@@ -49,7 +50,7 @@ INF-Dateien können eigenständig betrachtet werden, entweder durch
 Doppelklick auf der Arbeitsoberfläche (Workplace Shell) oder auf der
 Kommandozeile mit (!file [VIEW]).
 
-Achtung: Das Dateiformat von HLP-Dateien unter OS/2 hat nichts mit dem
+(!B)Achtung:(!b) Das Dateiformat von HLP-Dateien unter OS/2 hat nichts mit dem
 von HLP-Dateien unter Windows zu tun!
 
 Ein alternativer INF-Viewer für OS/2 ist (!url [NewView] [http://www.os2voice.org/VNL/past_issues/VNL0900H/vnewsf6.htm]).

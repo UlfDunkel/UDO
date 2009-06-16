@@ -17,6 +17,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -46,7 +47,7 @@ Using the second method UDO writes the destination format to the
 (!U)destination file(!u) and error messages to a log file with the suffix
 (!file [.ul?]).
 
-You have to pass single options to (!B)UDO(!b): (!code [-al]) isn't the same
+You have to pass single options to UDO: (!code [-al]) isn't the same
 as (!code [-a -l])!
 
 The name of the source file has to be the last option.
@@ -90,19 +91,19 @@ operating systems that normally do not support them.
 
 !item [-h, (--)html] The (!U)source file(!u) will be converted to HTML.
 
-!item [(--)hah] Die (!U)Quelldatei(!u) wird ins HTML Apple Help Format umgewandelt.
+!item [(--)hah] Die (!file [Quelldatei]) wird ins HTML Apple Help Format umgewandelt.
 
 !item [-hh, (--)htmlhelp] The (!U)source file(!u) will be converted to HTML-Help.
 
 !item [(--)help] Outputs a help page and quits.
 
-!item [-H, (--)hold] You have to press a key before (!B)UDO(!b) finishes.
+!item [-H, (--)hold] You have to press a key before UDO finishes.
 
 !item [-i, (--)info] The (!U)source file(!u) will be converted to GNU Texinfo.
 
 !item [(--)ipf] The (!U)source file(!u) will be converted to OS/2 IPF.
 
-!item [-l, (--)no-logfile] When using the Option (!code [-o]) (!B)UDO(!b) doesn't save a log file.
+!item [-l, (--)no-logfile] When using the Option (!code [-o]) UDO doesn't save a log file.
 
 !item [(--)lyx] The (!U)source file(!u) will be converted to LyX.
 
@@ -118,7 +119,7 @@ operating systems that normally do not support them.
 
 !item [-n, (--)nroff] The (!U)source file(!u) will be converted to Nroff.
 
-!item [-o F, (--)outfile F]  (!B)UDO(!b) writes the output into the file named ""F"".
+!item [-o F, (--)outfile F]  UDO writes the output into the file named ""F"".
 # ergänzt 10.01.2004 - Ulrich Kretschmer
 With (!code [-o]), the output filename will be the source filename with new extension
 (e.g. (!file [file.u]) becomes (!file [file.stg])).
@@ -130,21 +131,21 @@ Normal text becomes comment, the content of the sourcecode environment becomes C
 
 !item [(--)ps] The (!U)source file(!u) will be converted to PostScript.
 
-!item [-q, (--)quiet] (!B)UDO(!b) won't print anything to STDOUT or STDERR.
+!item [-q, (--)quiet] UDO won't print anything to STDOUT or STDERR.
 
 !item [-r, (--)rtf] The (!U)source file(!u) will be converted to Richt Text Format (RTF).
 
 !item [-s, (--)stg] The (!U)source file(!u) will be converted to ST-Guide sourcecode.
 
-!item [(--)save-upr] When using this option (!B)UDO(!b) will save a
+!item [(--)save-upr] When using this option UDO will save a
 file with the suffix (!file [.upr]) with a list of all source files,
 include files and generated files
 
 !item [-t, (--)tex] The (!U)source file(!u) will be converted to (!LaTeX).
 
-!item [(--)test] When using this option (!B)UDO(!b) won't save a destination file.
+!item [(--)test] When using this option UDO won't save a destination file.
 
-!item [(--)tree] When using this option (!B)UDO(!b) will save a file with the
+!item [(--)tree] When using this option UDO will save a file with the
 suffix (!file [.ut?]). In this file you will see a tree with all
 files your source file includes.
 
@@ -153,9 +154,9 @@ This allows to put all source files into one udo file.
 
 !item [-v, (--)vision] The (!U)source file(!u) will be converted to Turbo Vision Help.
 
-!item [(--)verbose] (!B)UDO(!b) will print some status information while converting the source file.
+!item [(--)verbose] UDO will print some status information while converting the source file.
 
-!item [(--)version] Outputs version information and quits (!B)UDO(!b).
+!item [(--)version] Outputs version information and quits UDO.
 
 !item [-w, (--)win] The (!U)source file(!u) will be converted to Windows Help sourcecode.
 
@@ -168,7 +169,7 @@ This allows to put all source files into one udo file.
 
 !item [-x, (--)linuxdoc] The (!U)source file(!u) will be converted to Linuxdoc-SGML.
 
-!item [-y, (--)no-hypfile] (!B)UDO(!b) doesn't save a file with Hyphenation hints when
+!item [-y, (--)no-hypfile] UDO doesn't save a file with Hyphenation hints when
 using the option (!code [-o]).
 
 !end_tlist
@@ -211,7 +212,7 @@ UDO looks for the file (!file [udo.ini]) in your home directory if
 
 
 !item [LC_ALL]
-		If this is set to ""german"" (!B)UDO(!b) prints German messages.
+		If this is set to ""german"" UDO prints German messages.
 		If this variable doesn't exist (!B)LC_MESSAGES(!b) it tested
 		instead.
 
@@ -220,12 +221,12 @@ UDO looks for the file (!file [udo.ini]) in your home directory if
 		(!B)LANG(!b) is tested instead.
 
 !item [UDOPATH]
-		(!B)UDO(!b) looks for the file (!file [udo.ini]) in the directory
+		UDO looks for the file (!file [udo.ini]) in the directory
 		defined by this variable. If (!B)UDOPATH(!b) doesn't exist
 		(!B)HOME(!b) is tested instead.
 
 !item [UDOINPUTPATH]
-		(!B)UDO(!b) looks for files included by the (!KW [input]) command
+		UDO looks for files included by the (!KW [input]) command
 		in the directory defined by this variable.
 
 !end_xlist

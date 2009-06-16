@@ -19,6 +19,8 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: html_name no longer uses CAPITAL letters
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -28,7 +30,7 @@
 # = = = = =
 
 !begin_node (!kkkw [V] [v])
-!html_name  cmd_V()
+!html_name  cmd_v()
 !label (!kk1 [/V])
 !label (!kk1 [/v])
 

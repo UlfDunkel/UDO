@@ -21,6 +21,7 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 11: EXAMPLE_... macros optimized
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -442,12 +443,6 @@ following example:
 !include (!EXAMPLES)quote.ui
 (!EXAMPLE_END)
 
-(!HINT)
-
-When converting to HTML the tag (!code [<blockquote>]) is used.
-Netscape and CAB display paragraphs indented but Mosaic displays them just
-with another font.
-
 !end_node # Indented paragraphs
 
 # = = = = =
@@ -455,8 +450,6 @@ with another font.
 !begin_node Preformatted text
 !html_name  style_preformatted_text
 !label      verbatim environment
-
-# 22.01.1996: Hinweis auf die raw-Umgebung
 
 UDO layouts the text of the source file on its own. But sometimes you don't
 want that because you want to display preformatted things like parts of a
@@ -518,7 +511,7 @@ file as you entered it.
 !label      linedraw environment
 
 Normally UDO will replace all DOS graphic characters by the ASCCI characters
-""+"", ""-"" and ""|"". So including DOS screenshots is not possible.
+""(!code [+])"", ""(!code [--])"" and ""(!code [|])"". So including DOS screenshots is not possible.
 
 To display DOS screenshots you can use the linedraw environment,
 which is started with (!KW [begin_linedraw]) and finished with
@@ -551,16 +544,13 @@ be inside a linedraw environment UDO offers you the command
 
 !smallskip
 
-(!HINTS)
+(!HINT)
 
 !begin_enumerate
 
 !item	Because the text of a linedraw environment is indented like
 normal text you shouldn't use extra spaces at the beginning of each
 line.
-
-!item Word for Windows displays the graphics correctly,
-whereas WordPad95 does not.
 
 !end_enumerate
 
@@ -573,12 +563,12 @@ whereas WordPad95 does not.
 
 Text that is used between (!KKW [N]) and (!KK1 [n]) will be shown as a
 footnote when converting to a format that supports footnotes. Otherwise
-(!KK1 [N]) will be replaced by ""~("", (KK1 [n]) will be replaced by
-"")"".
+(!KK1 [N]) will be replaced by ""(!code [~(])"", (KK1 [n]) will be replaced by
+""(!code [!)])"".
 
-Important hint: Before (!KK1 [N]) you shouldn't use a blank. If you do so
-the footnote mark would ""fly"" without context or before the ""("" you
-could read two blanks.
+Important hint: In front of (!KK1 [N]) you shouldn't use a blank. If you do so
+the footnote mark would ""fly"" without context or before the opening bracket ""(!code [(])"" you
+could read a blank.
 
 (!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)footnotes.ui
@@ -628,22 +618,8 @@ paragraph was made:
 
 In this table you will see in which way the placeholders will be replaced:
 
-#Ausgabe-Formate
-!begin_table [|l|l|l|l|l|l|l|] !hline
-UDO        !! ASCII         !! ST-Guide         !! LaTeX               !! RTF          !! WinHelp         !! HTML
-!hline
-(!KK1 [B]) !! (!V)*(!v)     !! (!V)@{B}(!v)     !! (!V){\bf(!v)        !! (!V){\b(!v)  !! (!V){\b(!v)     !! (!V)<B>(!v)
-(!KK1 [b]) !! (!V)*(!v)     !! (!V)@{b}(!v)     !! (!V)}(!v)           !! (!V)}(!v)    !! (!V)}(!v)       !! (!V)</B>(!v)
-(!KK1 [I]) !! (!V)/(!v)     !! (!V)@{I}(!v)     !! (!V){\it(!v)        !! (!V){\i(!v)  !! (!V){\i(!v)     !! (!V)<I>(!v)
-(!KK1 [i]) !! (!V)/(!v)     !! (!V)@{i}(!v)     !! (!V)}(!v)           !! (!V)}(!v)    !! (!V)}(!v)       !! (!V)</I>(!v)
-(!KK1 [U]) !! (!V)_(!v)     !! (!V)@{U}(!v)     !! (!V){\underline(!v) !! (!V){\ul(!v) !! (!V){\ul(!v)    !! (!V)<U>(!v)
-(!KK1 [u]) !! (!V)_(!v)     !! (!V)@{u}(!v)     !! (!V)}(!v)           !! (!V)}(!v)    !! (!V)}(!v)       !! (!V)</U>(!v)
-(!KK1 [V]) !! (!V) (!v)     !! (!V)    (!v)     !! (!V)\verb+(!v)      !! (!V){\f1(!v) !! (!V){\f1(!v)    !! (!V)<PRE>(!v)
-(!KK1 [v]) !! (!V) (!v)     !! (!V)    (!v)     !! (!V)+(!v)           !! (!V)}(!v)    !! (!V)}(!v)       !! (!V)</PRE>(!v)
-(!KK1 [T]) !! (!V) (!v)     !! (!V)    (!v)     !! (!V){\tt(!v)        !! (!V){\f1(!v) !! (!V){\f1(!v)    !! (!V)<TT>(!v)
-(!KK1 [t]) !! (!V) (!v)     !! (!V)    (!v)     !! (!V)}(!v)           !! (!V)}(!v)    !! (!V)}(!v)       !! (!V)</TT>(!v)
-!hline
-!end_table
+# Text Style output formats
+!include _styles.ui
 
 !index (!kw [no_effects])
 As you see here for the ASCII format there will be used the text style
@@ -738,7 +714,7 @@ horizontal lines.
 To print tables with UDO you need the following commands:
 
 !begin_enumerate !short
-!item (!KW [table_caption] [(!TEXT)])
+!item (!KW [table_caption]) (!C)[(!TEXT)](!c)
 !item (!KW [begin_table] [[...!!]]) {(!KW [hline])}
 !item (!KW [end_table])
 !item (!KW [hline])
@@ -751,8 +727,8 @@ has to be used before the table environment, not inside this environment!
 The command (!KW [begin_table]) starts a table, (!KW [end_table])
 finishes and prints the table. After (!KW [begin_table]) you can define
 the justification of the table columns and the usage of vertical lines. Use
-""c"" for a centred row, ""l"" for a left justified row, ""r"" for a
-right justified row and ""|"" for vertical lines inside brackets. If you add
+""(!code[c])"" for a centred row, ""(!code[l])"" for a left justified row, ""(!code[r]"" for a
+right justified row, and ""(!code[|])"" for vertical lines inside brackets. If you add
 a (!KW [hline]) command to this line the table starts with a horizontal
 line.
 
@@ -789,7 +765,7 @@ lower left cell !! lower cell !! lower right cell
 !hline
 !end_table
 
-Because I used a ""|"" before and after every column they are divided by
+Because I used a ""(!code[|])"" before and after every column they are divided by
 vertical lines. The table starts with a horizontal line because the
 (!KW [hline]) command was added at the end of (!KW [begin_table]).
 Finally the table ends with a horizontal line because the (!KW [hline])

@@ -19,6 +19,7 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -66,7 +67,12 @@ same is done here as in the upper section.
 !begin_node *.img & ST-Guide
 !html_name  images_stg
 
-Example: (!KW [image]) tiger A Tiger
+Beispiel:
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!image tiger A Tiger
+!end_verbatim
+(!EXAMPLE_END)
 
 UDO opens the file (!file [tiger.img]) and reads the size of this image. A
 special ST-Guide command called (!code [@limage]) is generated and the needed
@@ -90,8 +96,8 @@ UDO replaces the tool called (!file [IMGTOTEX]) that is part of
 Lindner-(!TeX). UDO has all functions of this tool built in.
 
 To set the size of an image you have to use the (!I)!/tex_dpi(!i) command.
-An example:
 
+An example:
 (!EXAMPLE_BEGIN)
 !begin_verbatim
 !tex_dpi 100
@@ -219,21 +225,29 @@ images from Paintbrush PCX you can ignore the warning printed by UDO.
 UDO can generate HTML commands to include a GIF. 
 
 For HTML the second parameter of the (!KW [image]) command will be used as
-the alternative text. The command (!KW [image] [tiger A tiger]) will be
-converted into the following HTML commands:
+the alternative text.
 
-(!EXAMPLE_BEGIN)
+
+(!EXAMPLE_BEFORE)
 !begin_verbatim
-<p align=...>
+!image tiger A Tiger
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+<p align="...">
 <img src="tiger.gif" alt="(Figure 1: A tiger)" width="200" height="300">
 </p><br>
 !end_verbatim
 (!EXAMPLE_END)
 
 If you don't set the title of this image UDO doesn't output an alternative
-text. The command (!KW [image] [tiger]) will be converted into this:
+text.
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!image /..gif/tiger
+!end_verbatim
+(!EXAMPLE_AFTER)
 !begin_verbatim
 <p align=...>
 <img src="../gif/tiger.gif" width="200" height="300">

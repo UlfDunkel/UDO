@@ -19,6 +19,8 @@
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: html_name no longer uses CAPITAL letters
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -28,7 +30,7 @@
 # = = = = =
 
 !begin_node (!kkkw [B] [b])
-!html_name  cmd_B()
+!html_name  cmd_b()
 !label (!kk1 [/B])
 !label (!kk1 [/b])
 
@@ -67,7 +69,7 @@ Start a ""bold"" list.
 !item [(!SYNTAX)] (!T)!/bbl [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [begin_blist]).
+(!ABBREV) (!KW [begin_blist])
 
 !item [(!SEEALSO)]
 (!KW [begin_blist])
@@ -90,7 +92,7 @@ Display centered text.
 !item [(!SYNTAX)] (!T)!/bc(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [begin_center]).
+(!ABBREV) (!KW [begin_center])
 
 !item [(!SEEALSO)]
 (!KW [begin_center])
@@ -113,7 +115,7 @@ Start a description.
 !item [(!SYNTAX)] (!T)!/bd(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [begin_description]).
+(!ABBREV) (!KW [begin_description])
 
 !item [(!SEEALSO)]
 (!KW [begin_description])
@@ -136,7 +138,7 @@ Start an enumeration.
 !item [(!SYNTAX)] (!T)!/be(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [begin_enumerate]).
+(!ABBREV) (!KW [begin_enumerate])
 
 !item [(!SEEALSO)]
 (!KW [begin_enumerate])
@@ -221,7 +223,7 @@ with (!KW [item] [[~!!]]) will be displayed with a bold font.
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~4
 
 !item [(!SEEALSO)]
-(!KW [end_blist]), (!KW [item] [[~!!]]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!KW [begin_xlist]), (!link [Lists] [Lists]), (!link [Environments] [Environments])
+(!KW [end_blist]), (!KW [item]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!KW [begin_xlist]), (!link [Lists] [Lists]), (!link [Environments] [Environments])
 
 !end_xlist
 
@@ -320,7 +322,7 @@ inside other (description) environments. Text that stands between the
 brackets of (!KW [item] [[~!!]]) will be output with bold text.
 
 !item [(!SEEALSO)]
-(!KW [end_description]), (!KW [item] [[~!!]]), (!link [Descriptions] [Descriptions]), (!KW [short]), (!KW [use_short_envs])
+(!KW [end_description]), (!KW [item]), (!link [Descriptions] [Descriptions]), (!KW [short]), (!KW [use_short_envs])
 
 !end_xlist
 
@@ -335,7 +337,7 @@ Start the main part of the document.
 
 !begin_xlist [(!TYPEPOSITION)]
 
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+!item [(!TYPEPOSITION)] (!COMMANDOBLIGATE), (!PREAMBLE)
 
 !item [(!SYNTAX)] (!T)!/begin_document(!t)
 
@@ -494,7 +496,7 @@ The text you set with (!KW [item] [[~!!]]) will be displayed with an italic font
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~4
 
 !item [(!SEEALSO)]
-(!KW [end_ilist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_xlist]), (!KW [begin_tlist]), (!link [Lists] [Lists])
+(!KW [end_ilist]), (!KW [item]), (!KW [begin_blist]), (!KW [begin_xlist]), (!KW [begin_tlist]), (!link [Lists] [Lists])
 
 !end_xlist
 
@@ -971,7 +973,7 @@ with (!KW [item] [[~!!]]) will be displayed with a monospaced font
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~4
 
 !item [(!SEEALSO)]
-(!KW [end_tlist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_xlist]), (!link [Lists] [Lists])
+(!KW [end_tlist]), (!KW [item]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_xlist]), (!link [Lists] [Lists])
 
 !end_xlist
 
@@ -1041,7 +1043,7 @@ can use this environment inside other environments. The text you set
 with (!KW [item] [[~!!]]) will be displayed with the normal font.
 
 !item [(!SEEALSO)]
-(!KW [end_xlist]), (!KW [item] [[~!!]]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!link [Lists] [Lists]), (!KW [short]), (!KW [use_short_envs])
+(!KW [end_xlist]), (!KW [item]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!link [Lists] [Lists]), (!KW [short]), (!KW [use_short_envs])
 
 !end_xlist
 
@@ -1089,7 +1091,7 @@ Start left justified text.
 !item [(!SYNTAX)] (!T)!/bfl(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [begin_flushleft]).
+(!ABBREV) (!KW [begin_flushleft])
 
 !item [(!SEEALSO)]
 (!KW [begin_flushleft])
@@ -1113,7 +1115,7 @@ Start right justified text.
 !item [(!SYNTAX)] (!T)!/bfr(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [begin_flushright]).
+(!ABBREV) (!KW [begin_flushright])
 
 !item [(!SEEALSO)]
 (!KW [begin_flushright])
@@ -1136,7 +1138,7 @@ Start an itemization environment.
 !item [(!SYNTAX)] (!T)!/bi(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [begin_itemize]).
+(!ABBREV) (!KW [begin_itemize])
 
 !item [(!SEEALSO)]
 (!KW [begin_itemize])
@@ -1171,9 +1173,22 @@ This command will be simply replaced by (!code [\bigskip]) when
 converted to (!LaTeX). Otherwise three additional empty lines will be generated.
 
 !item [(!SEEALSO)]
-(!KW [smallskip]), (!KW [medskip])
+(!KW [medskip]), (!KW [smallskip])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!LOREM)
+!bigskip
+(!LOREM)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!LOREM)
+!bigskip
+(!LOREM)
+(!EXAMPLE_END)
 
 !end_node
 
@@ -1191,7 +1206,7 @@ Start an italic list.
 !item [(!SYNTAX)] (!T)!/bil [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [begin_ilist]).
+(!ABBREV) (!KW [begin_ilist])
 
 !item [(!SEEALSO)]
 (!KW [begin_ilist])
@@ -1218,8 +1233,7 @@ Sets the textcolor black.
 Dieser Platzhalter setzt die Schriftfarbe Schwarz.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -1227,6 +1241,15 @@ PostScript unterstützt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!red)Das Wort (!black)Schwarz(!red) erscheint in der Farbe Schwarz.(!coloff)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!red)Das Wort (!black)Schwarz(!red) erscheint in der Farbe Schwarz.(!coloff)
+(!EXAMPLE_END)
 
 !end_node
 
@@ -1248,8 +1271,7 @@ Sets the textcolor blue.
 Dieser Platzhalter setzt die Schriftfarbe Blau.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -1257,6 +1279,15 @@ PostScript unterstützt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!blue)Blau(!coloff) erscheint in der Farbe Blau.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!blue)Blau(!coloff) erscheint in der Farbe Blau.
+(!EXAMPLE_END)
 
 !end_node
 
@@ -1274,7 +1305,7 @@ Start new chapter/section/subsection/paragraph.
 !item [(!SYNTAX)] (!T)!/bn [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [begin_node]).
+(!ABBREV) (!KW [begin_node])
 
 !item [(!SEEALSO)]
 (!KW [begin_node])
@@ -1297,7 +1328,7 @@ Start new chapter/section/subsection/paragraph without entry in table of content
 !item [(!SYNTAX)] (!T)!/bn* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [begin_node*]).
+(!ABBREV) (!KW [begin_node*])
 
 !item [(!SEEALSO)]
 (!KW [begin_node*])
@@ -1320,7 +1351,7 @@ Start new popup-chapter/section/subsection/paragraph.
 !item [(!SYNTAX)] (!T)!/bp [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [begin_pnode]).
+(!ABBREV) (!KW [begin_pnode])
 
 !item [(!SEEALSO)]
 (!KW [begin_pnode])
@@ -1343,7 +1374,7 @@ Start new popup-chapter/section/subsection/paragraph without entry in table of c
 !item [(!SYNTAX)] (!T)!/bp* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [begin_pnode*]).
+(!ABBREV) (!KW [begin_pnode*])
 
 !item [(!SEEALSO)]
 (!KW [begin_pnode*])
@@ -1366,7 +1397,7 @@ Output indented text.
 !item [(!SYNTAX)] (!T)!/bq(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [begin_quote]).
+(!ABBREV) (!KW [begin_quote])
 
 !item [(!SEEALSO)]
 (!KW [begin_quote])
@@ -1414,7 +1445,7 @@ Start a monospaced list.
 !item [(!SYNTAX)] (!T)!/btl [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [begin_tlist]).
+(!ABBREV) (!KW [begin_tlist])
 
 !item [(!SEEALSO)]
 (!KW [begin_tlist])
@@ -1437,7 +1468,7 @@ Start a list.
 !item [(!SYNTAX)] (!T)!/bxl [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [begin_xlist]).
+(!ABBREV) (!KW [begin_xlist])
 
 !item [(!SEEALSO)]
 (!KW [begin_xlist])

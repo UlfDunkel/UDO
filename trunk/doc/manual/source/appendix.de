@@ -19,6 +19,7 @@
 #   fd  Jun 09: real quotation fixed
 #   fd  Jun 10: using macro (!const [])
 #   fd  Jun 10: table of limitations reformatted
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -33,7 +34,9 @@ Folgende Maximalwerte müssen Sie beim Erstellen der Quelltexte beachten:
 !begin_table [l|r]
 !hline
 Makros:                            !! (!MAXMACRO)
+Länge eines !/macro-Textwertes:    !! (!const [256])
 Defines:                           !! (!MAXDEFINE)
+Länge eines !/define-Textwertes:   !! (!const [256])
 Hyphens:                           !! (!MAXHYPHEN)
 Summe Kapitel, Labels und Aliase:  !! (!const [32768])
 Zeichen pro Zeile:                 !! (!LINELEN)

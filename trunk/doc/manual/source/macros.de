@@ -19,6 +19,7 @@
 #   fd  Jun 09: some macros enhanced
 #   fd  Jun 10: EXAMPLE_... macros introduced
 #   fd  Jun 12: macro renamed: CODE -> CHARSET
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -40,11 +41,11 @@
 !macro EXAMPLE_BEFORE !rinclude (!EXAMPLES)/html/example_before.ui
 !macro EXAMPLE_AFTER  !rinclude (!EXAMPLES)/html/example_after.ui
 
-!macro FORMAT         (!B)(!T)(!link [[&lt;kürzel&gt;!]] [Ausgabeformat])(!t)(!b)
-!macro COLOR          (!B)(!T)(!link [[&lt;farbe&gt;!]] [Farben])(!t)(!b)
-!macro LANGUAGE       (!B)(!T)(!link [[&lt;sprache&gt;!]] [Sprache])(!t)(!b)
-!macro OS             (!B)(!T)(!link [[&lt;system&gt;!]] [Betriebssystem])(!t)(!b)
-!macro CHARSET        (!B)(!T)(!link [[&lt;zeichensatz&gt;!]] [Code])(!t)(!b)
+!macro FORMAT         (!link [&lt;kürzel&gt;] [Ausgabeformat])
+!macro COLOR          (!link [&lt;farbe&gt;] [Farben])
+!macro LANGUAGE       (!link [&lt;sprache&gt;] [Sprache])
+!macro OS             (!link [&lt;system&gt;] [Betriebssystem])
+!macro CHARSET        (!link [&lt;zeichensatz&gt;] [Code])
 
 # other macro formattings
 # ------------------------------------------------------------------------------
@@ -54,11 +55,11 @@
 !macro EXAMPLE_BEFORE (!B)Vorher:(!b) (!nl) !begin_quote
 !macro EXAMPLE_AFTER  (!B)Nachher:(!b) (!nl)
 
-!macro FORMAT         [(!link [<kürzel>] [Ausgabeformat])]
-!macro COLOR          [(!link [<farbe>] [Farben])]
-!macro LANGUAGE       [(!link [<sprache>] [Sprache])]
-!macro OS             [(!link [<system>] [Betriebssystem])]
-!macro CHARSET        [(!link [<zeichensatz>] [Code])]
+!macro FORMAT         (!link [<kürzel>] [Ausgabeformat])
+!macro COLOR          (!link [<farbe>] [Farben])
+!macro LANGUAGE       (!link [<sprache>] [Sprache])
+!macro OS             (!link [<system>] [Betriebssystem])
+!macro CHARSET        (!link [<zeichensatz>] [Code])
 !endif
 
 
@@ -72,7 +73,7 @@
 !macro VALUE          <wert>
 !macro WORD           <wort>
 
-!macro DocumentationWorkInProgress  Die UDO-Anleitung ist im Moment in Überarbeitung. Zwischenstände stehen auf der UDO-Website derzeit nur zum Online-Lesen zur Verfügung, aber nicht zum Download.
+# !macro DocumentationWorkInProgress  Die UDO-Anleitung ist im Moment in Überarbeitung. Zwischenstände stehen auf der UDO-Website derzeit nur zum Online-Lesen zur Verfügung, aber nicht zum Download.
 !macro FollowingOutdated            (!I)Die nachfolgenden Textpassagen sind z.T. nicht mehr aktuell und sind zur Überarbeitung vorgesehen.(!i)
 
 
@@ -85,28 +86,31 @@
 
 
 # Sprachabhängige Textbausteine für den Befehlsindex (alphabetisch geordnet)
-!macro ABBREV         Dies ist eine Abkürzung für das Kommando
-!macro COMMAND        Kommando
-!macro COMMANDABBREV  Kommando-Abkürzung
-!macro DESCRIPTION    Beschreibung:
-!macro EXAMPLE        Beispiel:
-!macro EXAMPLE2       Beispiel:
-!macro EXISTSSINCE    Existiert seit:
-!macro EXISTEDUNTIL   Existierte bis:
-!macro FILESPACEQUOTE Enthält der Dateiname Leerzeichen, muss er in Anführungszeichen gesetzt werden.
-!macro HINT           (!B)Hinweis:(!b)
-!macro HINTS          (!B)Hinweise:(!b)
-!macro MAINPART       Hauptteil
-!macro MISS           (!idx [Hier fehlt noch etwas])~!..
-!macro NOTEXISTING    Dieser Befehl existiert nicht mehr.
-!macro PLACEHOLDER    Platzhalter
-!macro PREAMBLE       Vorspann
-!macro RENAMEDTO      Dieses Kommando (!1) wurde umbenannt zu
-!macro SEEALSO        Siehe auch:
-!macro SPECIALCHAR    Sonderzeichen
-!macro SWITCH         Schalter
-!macro SYNTAX         Syntax:
-!macro TYPEPOSITION   Typ & Position:
-!macro USEINSTEAD     Benutzen Sie stattdessen (!1)
+!macro ABBREV          Abkürzung für das Kommando
+!macro COLORSUPPORT    Farbbefehle werden z.Zt. nur bei den Formaten HTML, RTF, WinHelp, DRC und PostScript unterstützt.
+!macro COMMAND         Kommando
+!macro COMMANDABBREV   Kommando-Abkürzung
+!macro COMMANDOBLIGATE Pflicht-Kommando
+!macro DESCRIPTION     Beschreibung:
+!macro EXAMPLE         Beispiel:
+!macro EXAMPLE2        Beispiel:
+!macro EXISTSSINCE     Existiert seit:
+!macro EXISTEDUNTIL    Existierte bis:
+!macro FILESPACEQUOTE  Enthält der Dateiname Leerzeichen, muss er in Anführungszeichen gesetzt werden.
+!macro HINT            (!B)Hinweis:(!b)
+!macro HINTS           (!B)Hinweise:(!b)
+!macro IN_HTML_HEADER  (!gray)(!I)Ausgabe erfolgt im Seiten-Header:(!i)(!coloff)
+!macro MAINPART        Hauptteil
+!macro MISS            (!red)(!idx [Für dieses Kapitel existiert noch kein Text.])(!coloff)
+!macro NOTEXISTING     Dieser Befehl existiert nicht mehr.
+!macro PLACEHOLDER     Platzhalter
+!macro PREAMBLE        Vorspann
+!macro RENAMEDTO       Dieses Kommando (!1) wurde umbenannt zu
+!macro SEEALSO         Siehe auch:
+!macro SPECIALCHAR     Sonderzeichen
+!macro SWITCH          Schalter
+!macro SYNTAX          Syntax:
+!macro TYPEPOSITION    Typ & Position:
+!macro USEINSTEAD      Benutzen Sie stattdessen (!1)
 
 # === EOF ===

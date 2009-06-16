@@ -19,9 +19,11 @@
 # -------
 # 2009:
 #   fd  Jun 09: introduced
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
+Momentan gelten folgende Zeichenketten:
 !index Sprache
 !begin_xlist [swedish] !short
 !item [(!KP [czech])]   Tschechisch

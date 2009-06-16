@@ -15,11 +15,13 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
 !begin_node David's Readme Compiler
 !html_name  format_drc
+!alias      DRC
 
 # Kurz-Info: http://www.palmtoppaper.com/ptphtml/43/43c00021.htm
 

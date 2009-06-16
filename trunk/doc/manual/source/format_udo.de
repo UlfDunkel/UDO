@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 09: real quotation fixed
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -22,7 +23,7 @@
 !html_name  format_udo
 !alias      UDO-Output
 
-Das Ausgabeformat ""UDO"" führt alle UDO-Eingabedateien in eine einzige zusammen.
+Das Ausgabeformat ""UDO"" führt alle UDO-Eingabedateien zu einer einzigen Datei zusammen.
 
 !end_node # UDO (Universal Document)
 

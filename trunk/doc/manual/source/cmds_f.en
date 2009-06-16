@@ -18,6 +18,7 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -71,8 +72,7 @@ Sets the textcolor fuchsia.
 Dieser Platzhalter setzt die Schriftfarbe Magenta.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -80,6 +80,15 @@ PostScript unterstützt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!fuchsia)Magenta(!coloff) erscheint in der Farbe Magenta.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!fuchsia)Magenta(!coloff) erscheint in der Farbe Magenta.
+(!EXAMPLE_END)
 
 !end_node
 

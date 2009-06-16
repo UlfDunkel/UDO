@@ -21,6 +21,7 @@
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 11: EXAMPLE_... macros optimized
 #   fd  Jun 12: macro renamed: CODE -> CHARSET
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -130,9 +131,9 @@ UDO supports --- did you think anything else --- dashs like in this
 sentence.
 
 Dashs are supported by (!LaTeX), Windows Help and RTF. Converting to other
-formats UDO will replace ""(---)"" and ""(--)"" by a single ""-"".
+formats UDO will replace ""(---)"" and ""(--)"" by a single ""(!code[--])"".
 
-If you want to display three or two ""-"" you have to use (!KP [((---!)!)]) or (!KP [((--!)!)]).
+If you want to display three or two ""(!code[--])"" you have to use (!KP [((---!)!)]) or (!KP [((--!)!)]).
 
 !end_node # Dashes
 
@@ -154,7 +155,7 @@ computer UDO will expect the TOS character set by default.
 
 But UDO can manage file that are written with another character set, too.
 You have simply to tell UDO which character set your source file uses with
-(!KW [code]) (!CHARSET).
+(!KW [code]) (!C)[(!CHARSET)](!c).
 
 Below is an overview of the character sets UDO knows about:
 
@@ -238,16 +239,17 @@ sequences are converted to which characters:
 !begin_table [|l|l|l|] !hline
 Placeholder  !! x from          !! Example
 !hline
-(!/"x)       !! aeiosuyAEIOU    !! (!code [(!/"a)])  = (!"a)
-(!/'x)       !! aeiouyAEIOUY    !! (!code [(!/'e)])  = (!'e)
-(!/`x)       !! aeiouAEIOU      !! (!code [(!/`i)])  = (!`i)
-(!/^x)       !! aeiouAEIOU      !! (!code [(!/^o)])  = (!^o)
-(!/&x)       !! ae, oe, AE, OE  !! (!code [(!/&AE)]) = (!&AE)
-(!/~x)       !! anoANO          !! (!code [(!/~n)])  = (!~n)
-(!/,x)       !! cC              !! (!code [(!/,C)])  = (!,C)
-(!/.x)       !! aA              !! (!code [(!/.A)])  = (!.A)
-(!/_x)       !! ao              !! (!code [(!/_a)])  = (!_a)
-(!/\x)       !! oO              !! (!code [(!/\O)])  = (!\O)
+(!/"x)       !! aeiosuyAEIOU    !! (!B)(!T)(!/"a)(!t)(!b)  = (!"a)
+(!/'x)       !! aeiouyAEIOUY    !! (!code [(!/'e!)])       = (!'e)
+(!/`x)       !! aeiouAEIOU      !! (!code [(!/`i!)])       = (!`i)
+(!/^x)       !! aeiouAEIOU      !! (!code [(!/^o!)])       = (!^o)
+(!/&x)       !! ae, oe, AE, OE  !! (!B)(!T)(!/&AE)(!t)(!b) = (!&AE)
+# YYY: fd:2009-06-12:  Why is the tilde-n not shown properly?!?
+(!/!~x)      !! anoANO          !! (!code [(!/!~n!)])      = (!~n)
+(!/,x)       !! cC              !! (!code [(!/,C!)])       = (!,C)
+(!/.x)       !! aA              !! (!code [(!/.A!)])       = (!.A)
+(!/_x)       !! ao              !! (!code [(!/_a!)])       = (!_a)
+(!/\x)       !! oO              !! (!code [(!/\O!)])       = (!\O)
 !hline
 !end_table
 

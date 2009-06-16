@@ -14,12 +14,13 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
-!begin_node HTML Apple Help
+!begin_node Apple Help Book (HTML)
 !html_name  format_hah
-!label      HTML Apple Help
+!label      Apple Help Book (HTML)
 
 # ToDo: Infos about HTML Apple Help
 (!MISS)

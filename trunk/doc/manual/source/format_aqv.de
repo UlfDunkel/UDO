@@ -14,12 +14,12 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
-!begin_node Apple-QuickView
+!begin_node Apple QuickView
 !html_name  format_aqv
-!alias      Apple QuickView
 
 Apple QuickView ist ein Hypertext-Format, das unter älteren Mac-OS-Versionen verwendet wurde.
 Es wurde von der Firma Altura ((!url [http://www.altura.com] [http://www.altura.com/])) definiert.

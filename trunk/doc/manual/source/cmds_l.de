@@ -23,6 +23,7 @@
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: LINK macro introduced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -74,13 +75,19 @@ Abfrage des Ausgabeformates.
 Dieser Platzhalter wird bei der Umwandlung ins
 (!LaTeX)-Format in (!code [\LaTeX{}]), ansonsten in (!code [LaTeX]) umgewandelt.
 
-!item [(!EXAMPLE)]
-Aus (!code [(!/LaTeX!)]) wird (!LaTeX).
-
 !item [(!SEEALSO)]
 (!KKW [TeX]), (!KKW [LaTeXe]), Vordefinierte Makros
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!LaTeX)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!LaTeX)
+(!EXAMPLE_END)
 
 !end_node
 
@@ -101,13 +108,19 @@ Aus (!code [(!/LaTeX!)]) wird (!LaTeX).
 Dieser Platzhalter wird bei der Umwandlung ins
 (!LaTeX)-Format in (!code [\LaTeXe{}]), ansonsten in (!code [LaTeX2e]) umgewandelt.
 
-!item [(!EXAMPLE)]
-Aus (!code [!/LaTeXe!)]) wird (!LaTeXe).
-
 !item [(!SEEALSO)]
 (!KKW [TeX]), (!KKW [LaTeX]), Vordefinierte Makros
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!LaTeXe)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!LaTeXe)
+(!EXAMPLE_END)
 
 !end_node
 
@@ -125,7 +138,7 @@ Sprungmarke setzen.
 !item [(!SYNTAX)] (!T)!/l (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [label]).
+(!ABBREV) (!KW [label])
 
 !item [(!SEEALSO)]
 (!KW [label])
@@ -151,13 +164,21 @@ Sprungmarke setzen.
 Definiert eine Sprungmarke, die bei Hypertextformaten
 automatisch referenziert wird und auf die man durch die Link-Befehle verweisen kann.
 
-!item [(!EXAMPLE)]
-(!T)!/label Sprungmarke(!t)
-
 !item [(!SEEALSO)]
-(!link [Sprungmarken] [Sprungmarken]), (!link [Querverweise] [Querverweise]), (!kkw [label]), (!KKW [link]), (!KKW [plink])
+(!link [Sprungmarken] [Sprungmarken]), (!link [Querverweise] [Querverweise]), (!KKW [label]), (!KKW [link]), (!KKW [plink])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!label Sprungmarke
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+<a name="Sprungmarke"></a>
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -183,7 +204,7 @@ zur Zeit nur für die RTF-Ausgabe unterstützt.
 !item [(!EXISTSSINCE)] Version 6.5.9
 
 !item [(!SEEALSO)]
-(!link [Sprungmarken] [Sprungmarken]), (!link [Querverweise] [Querverweise]), (!kw [label]), (!KKW [link]), (!KKW [plink])
+(!link [Sprungmarken] [Sprungmarken]), (!link [Querverweise] [Querverweise]), (!KW [label]), (!KKW [link]), (!KKW [plink])
 
 !end_xlist
 
@@ -194,10 +215,7 @@ zur Zeit nur für die RTF-Ausgabe unterstützt.
 !begin_node (!kw [language])
 !html_name  cmd_language
 
-
-Sprache setzen. Momentan unterstützt UDO folgende Sprachen:
-
-!include lang_ref.de
+Ausgabe-Sprache für UDO setzen.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -208,11 +226,9 @@ Sprache setzen. Momentan unterstützt UDO folgende Sprachen:
 !item [(!DESCRIPTION)]
 Mit diesem Kommando können Sie die Sprache der Begriffe setzen, die UDO
 für z.B. ""Kapitel"" oder ""Inhaltsverzeichnis"" benutzen soll. UDO
-verwendet standardmäßig deutschsprachige Ausdrücke. Das Beispiel zeigt,
-wie man die Ausgabesprache auf ""Englisch"" setzen kann.
+verwendet standardmäßig deutschsprachige Ausdrücke.
 
-!item [(!EXAMPLE)]
-(!T)!/language english(!t)
+!include lang_ref.de
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~16
 
@@ -220,6 +236,24 @@ wie man die Ausgabesprache auf ""Englisch"" setzen kann.
 (!KW [iflang]), (!KW [ifnlang]), (!KKW [today])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!language english
+!ifset [english]
+Output English text.
+!else
+Englischen Text nicht ausgeben.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifset [english]
+Output English text.
+!else
+Englischen Text nicht ausgeben.
+!endif
+(!EXAMPLE_END)
 
 !end_node
 
@@ -239,13 +273,19 @@ Emoticon ausgeben.
 !item [(!DESCRIPTION)]
 Dieser Platzhalter wird durch einen lachenden Smiley ersetzt, der in Schreibmaschinenschrift ausgegeben wird.
 
-!item [(!EXAMPLE)]
-Aus (!code [(!/laugh!)]) wird (!laugh)
-
 !item [(!SEEALSO)]
 (!KKW [grin]), Vordefinierte Makros
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!laugh)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!laugh)
+(!EXAMPLE_END)
 
 !end_node
 
@@ -270,15 +310,21 @@ dabei berücksichtigt, Zentrierungen jedoch nicht.
 Tabulatoren werden abhängig von (!KW [tabwidth])
 umgewandelt. (!FILESPACEQUOTE)
 
-!item [(!EXAMPLE)]
-(!T)!/ldinclude hello.c(!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
 
 !item [(!SEEALSO)]
 (!KW [tabwidth]), (!KW [include]), (!KW [linedrawsize]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [linedraw-Umgebung] [linedraw-Umgebung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ldinclude hello.c
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ldinclude (!EXAMPLES)hello.c
+(!EXAMPLE_END)
 
 !end_node
 
@@ -324,7 +370,7 @@ Abfrage des Ausgabeformates.
 !item [(!SYNTAX)] (!T)!/lh (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [listheading]).
+(!ABBREV) (!KW [listheading])
 
 !item [(!SEEALSO)]
 (!KW [listheading])
@@ -335,7 +381,6 @@ Abfrage des Ausgabeformates.
 
 # = = = = =
 
-# ToDo: Englisch
 !begin_node (!kkw [lime])
 !html_name  cmd_lime
 
@@ -351,8 +396,7 @@ Setzt die Schriftfarbe Hellgrün.
 Dieser Platzhalter setzt die Schriftfarbe Hellgrün.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -360,6 +404,15 @@ PostScript unterstützt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!lime)Hellgrün(!coloff) erscheint in der Farbe Hellgrün.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!lime)Hellgrün(!coloff) erscheint in der Farbe Hellgrün.
+(!EXAMPLE_END)
 
 !end_node
 
@@ -384,15 +437,25 @@ Quelltext verwendet werden. Die kleinste Schriftgröße
 wird mit (!code [tiny]), die größte mit (!code [huge]) gesetzt. Die
 Standardgröße für linedraw-Umgebungen ist (!code [normal]).
 
-!item [(!EXAMPLE)]
-(!T)!/linedrawsize [small](!t)
+(!B)Hinweis:(!b) Wenn -- wie in diesem Handbuch -- die Schriftgröße sich in der HTML-Darstellung nicht ändert, kann es daran liegen, dass Sie eine CSS-Formatierung für vorformattierten Text ((!code [<pre>])) definiert haben.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
 
 !item [(!SEEALSO)]
-(!link [linedraw-Umgebung] [linedraw-Umgebung]), (!KW [html_monofont_size]), (!KW [verbatimsize])
+(!KW [html_monofont_size]), (!KW [ldinclude]), (!KW [verbatimsize]), (!link [linedraw-Umgebung] [linedraw-Umgebung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!linedrawsize [small]
+!ldinclude hello.c
+!end_verbatim
+(!EXAMPLE_AFTER)
+!linedrawsize [small]
+!ldinclude (!EXAMPLES)hello.c
+(!EXAMPLE_END)
 
 !end_node
 
@@ -412,13 +475,19 @@ Manuellen Querverweis durchführen.
 !item [(!DESCRIPTION)]
 Hiermit können Querverweise auf andere Kapitel oder Sprungmarken vorgenommen werden. Ausführliche Informationen findet man im Abschnitt ""Querverweise"".
 
-!item [(!EXAMPLE)]
-(!T)(!/link [mir] [Kontaktadresse])(!t)
-
 !item [(!SEEALSO)]
 (!KKW [xlink]), (!KKW [plink]), (!link [Querverweise] [Querverweise])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Möchten Sie (!link [Kontakt] [Kontaktadresse]) mit den UDO-Entwicklern aufnehmen?
+!end_verbatim
+(!EXAMPLE_AFTER)
+Möchten Sie (!link [Kontakt] [Kontaktadresse]) mit den UDO-Entwicklern aufnehmen?
+(!EXAMPLE_END)
 
 !end_node
 
@@ -660,7 +729,7 @@ verwenden. Momentan wird dieser Befehl nur für (!LaTeX) umgewandelt.
 !item [(!SYNTAX)] (!T)!/lsh (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [listsubheading]).
+(!ABBREV) (!KW [listsubheading])
 
 !item [(!SEEALSO)]
 (!KW [listsubheading])
@@ -683,7 +752,7 @@ verwenden. Momentan wird dieser Befehl nur für (!LaTeX) umgewandelt.
 !item [(!SYNTAX)] (!T)!/lssh (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [listsubsubheading]).
+(!ABBREV) (!KW [listsubsubheading])
 
 !item [(!SEEALSO)]
 (!KW [listsubsubheading])
@@ -706,7 +775,7 @@ verwenden. Momentan wird dieser Befehl nur für (!LaTeX) umgewandelt.
 !item [(!SYNTAX)] (!T)!/lsssh (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [listsubsubsubheading]).
+(!ABBREV) (!KW [listsubsubsubheading])
 
 !item [(!SEEALSO)]
 (!KW [listsubsubsubheading])

@@ -26,6 +26,8 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: html_name no longer uses CAPITAL letters
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -35,7 +37,7 @@
 # = = = = =
 
 !begin_node (!kkkw [U] [u])
-!html_name  cmd_U()
+!html_name  cmd_u()
 
 !label (!kk1 [/U])
 !label (!kk1 [/u])
@@ -50,16 +52,22 @@ Unterstrichenen Text ausgeben.
 
 !item [(!DESCRIPTION)]
 ""(!TEXT)"" wird unterstrichen dargestellt, falls möglich.
-Diese Schriftart sollte sparsam eingesetzt werden.
-# ToDo: Anmerkungen wg. Hypertextformaten ergänzen
 
-!item [(!EXAMPLE)]
-(!T)(!/U)unterstrichen(!/u)(!t)
+(!B)Hinweis:(!b) Diese Schriftart sollte sparsam eingesetzt werden. Denken Sie z.B. beim HTML-Format daran, dass standardmäßig Hypertext-Links in HTML-Seiten unterstrichen werden, so dass man dort erwartet, auf jeden unterstrichenen Text klicken zu können, um eine andere Seite aufzurufen.
 
 !item [(!SEEALSO)]
 Schriftarten, (!link [Textgestaltung] [Textgestaltung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort ""unterstrichen"" wird (!U)unterstrichen(!u) ausgegeben.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort ""unterstrichen"" wird (!U)unterstrichen(!u) ausgegeben.
+(!EXAMPLE_END)
 
 !end_node
 
@@ -140,15 +148,24 @@ wird der universelle Zeichensatz von UDO nicht
 verwendet, da die Umwandlung der universellen Zeichen
 eine zeitaufwendige Angelegenheit ist.
 
-!item [(!EXAMPLE)]
-(!T)!/universal_charset [on](!t)
-
 !item [(!EXISTSSINCE)] Release~4 Version~0.48
 
 !item [(!SEEALSO)]
 (!link [Universeller Zeichensatz] [Universeller Zeichensatz])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!universal_charset [on]
+(!`A) bient(!^o)t~!
+!end_verbatim
+(!EXAMPLE_AFTER)
+!universal_charset [on]
+(!`A) bient(!^o)t~!
+!universal_charset [off]
+(!EXAMPLE_END)
 
 !end_node
 
@@ -196,20 +213,9 @@ Verweis auf externe Daten.
 !item [(!DESCRIPTION)]
 Dient zum Erzeugen von Verweisen auf externe
 Dokumente. Im Unterschied zu (!KKW [xlink]) wird bei jedem Format ein
-Link auf eine URL angelegt.
-Im Beispiel würde bei einer HTML-Datei ein Querverweis
-auf die Seite der Deutschen Telekom erzeugt. ""(!LINK)""
-kann auch leer sein, dann wird für ""(!LINK)"" der Inhalt
-von ""(!TEXT)"" ausgegeben.
+Link auf eine URL angelegt. ""(!LINK)"" kann auch leer sein, dann wird für ""(!LINK)"" der Inhalt von ""(!TEXT)"" ausgegeben. Nutzen Sie das z.B., wenn der URL auch lesbar sein soll.
 
-Kommt in einem Verweis eine Tilde vor,
-so braucht dieser bei Verwendung im (!KKW [url])-Kommando
-(!I)kein(!i) Ausrufezeichen vorangestellt zu werden.
-
-!item [(!EXAMPLE2)]
-(!T)(!/url [Deutsche Telekom] [http://www.dtag.de])(!t) (!nl)
-(!T)(!/url [irgendwas] [http://www.domain.de/!~user/index.html])(!t)
-# ToDo: andere Beispiele verwenden
+Kommt in einem Verweis eine Tilde vor, so braucht sie bei Verwendung im (!KKW [url])-Kommando (!I)nicht(!i) durch ein Ausrufezeichen geschützt zu werden.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~12
 
@@ -217,6 +223,19 @@ so braucht dieser bei Verwendung im (!KKW [url])-Kommando
 (!KKW [link]), (!KKW [plink]), (!KKW [xlink]), (!KW [no_xlinks]), (!link [Querverweise] [Querverweise])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!url [BugTracker der UDO-Website] [http://bugs.udo-open-source.org/]) | 
+(!url [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
+(!url [http://www.google.de/] [])
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!url [BugTracker der UDO-Website] [http://bugs.udo-open-source.org/]) | 
+(!url [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
+(!url [http://www.google.de/] [])
+(!EXAMPLE_END)
 
 !end_node
 
@@ -236,18 +255,22 @@ Informationsseite einbauen.
 !item [(!DESCRIPTION)]
 Die Benutzung dieses Schalters erzeugt am Ende der erzeugten Datei
 (sofern das zugehörige Format als Kürzel übergeben wurde) eine kleine
-Seite mit Informationen zu UDO. Wer ein bisschen Werbung für UDO machen
-möchte, sollte dieses Kommando im Vorspann einsetzen und im Quelltext
-das Wort ""UDO(!RELEASE)"" einmal unterbringen, da diese Werbeseite nicht im
+Seite mit Informationen zu UDO. Wenn Sie ein bisschen Werbung für UDO machen
+möchten, setzen Sie dieses Kommando im Vorspann ein und bringen Sie im Quelltext
+das Wort ""UDO(!RELEASE)"" mindestens einmal unter, da diese Werbeseite nicht im
 Inhaltsverzeichnis aufgeführt wird.
-
-!item [(!EXAMPLE)]
-(!T)!/use_about_udo [stg,win](!t)
 
 !item [(!SEEALSO)]
 (!KW [udolink])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_about_udo [stg,win,html]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -268,15 +291,19 @@ Aliase automatisch in den Index übernehmen.
 Wird dieser Schalter im Vorspann angegeben, werden
 automatisch alle Aliase im Index der angegebenen Formate angezeigt.
 
-!item [(!EXAMPLE)]
-(!T)!/use_alias_inside_index [win,stg](!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~10
 
 !item [(!SEEALSO)]
 (!link [Indizes] [Indizes]), (!KW [no_index]), (!KW [index]), (!KW [alias])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_alias_inside_index [win,stg]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -299,15 +326,19 @@ werden bei den angegebenen Formaten die Tabellen mit
 den Grafikzeichen aus dem DOS-Zeichensatz erzeugt.
 Der Schalter ist wirkungslos für (!LaTeX), WinHelp und HTML.
 
-!item [(!EXAMPLE)]
-(!T)!/use_ansi_tables [stg](!t)
-
 !item [(!EXISTSSINCE)] Release~4 Version~0.47
 
 !item [(!SEEALSO)]
 (!KW [begin_table]), (!link [Tabellen] [Tabellen])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_ansi_tables [stg]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -330,15 +361,19 @@ automatisch Help-IDs sichert, die an die Kapitelnamen angelehnt sind,
 sofern nicht manuell eine Help-ID mit (!KW [win_helpid]) oder
 (!KW [wh4_helpid]) gesetzt wird.
 
-!item [(!EXAMPLE)]
-(!T)!/use_auto_helpids [win](!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~13
 
 !item [(!SEEALSO)]
 (!KW [win_helpid]), (!KW [wh4_helpid])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_auto_helpids [win]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -359,15 +394,19 @@ Automatische Auflistung aller Paragraphen.
 Schaltet den automatischen internen Aufruf des (!KW [subsubsubtoc])-Kommandos ein. Am Ende eines jeden
 Abschnitts werden dann automatisch alle dem Unterabschnitt zugehörigen Paragraphen in Form eines Inhaltsverzeichnisses ausgegeben.
 
-!item [(!EXAMPLE)]
-(!T)!/use_auto_subsubsubtocs [html,pch,stg,win](!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
 !item [(!SEEALSO)]
 (!KW [subsubsubtoc]), (!KW [ignore_subsubsubtoc]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_auto_subsubsubtocs [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -390,13 +429,17 @@ Schaltet den automatischen internen Aufruf des
 Abschnitts werden dann automatisch alle dem Abschnitt
 zugehörigen Unterabschnitte in Form eines Inhaltsverzeichnisses ausgegeben.
 
-!item [(!EXAMPLE)]
-(!T)!/use_auto_subsubtocs [html,pch,stg,win](!t)
-
 !item [(!SEEALSO)]
 (!KW [subsubtoc]), (!KW [ignore_subsubtoc]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_auto_subsubtocs [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -419,13 +462,17 @@ Schaltet den automatischen internen Aufruf des
 werden dann automatisch alle dem Kapitel zugehörigen
 Abschnitte in Form eines Inhaltsverzeichnisses ausgegeben.
 
-!item [(!EXAMPLE)]
-(!T)!/use_auto_subtocs [html,pch,stg,win](!t)
-
 !item [(!SEEALSO)]
 (!KW [subtoc]), (!KW [ignore_subtoc]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_auto_subtocs [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -451,15 +498,19 @@ sichert UDO ein paar zusätzliche Grafiken, die dann verwendet werden.
 Wird zusätzlich noch (!KW [no_icons]) angegeben, werden keine Bilder
 neben den Verweisen auf die übergeordneten Kapitel ausgegeben.
 
-!item [(!EXAMPLE)]
-(!T)!/use_auto_toptocs [html,stg,win](!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
 
 !item [(!SEEALSO)]
 (!KW [html_navigation]), (!KW [use_auto_subtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_auto_toptocs [html,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -482,15 +533,19 @@ anstelle von Kapitelüberschriften werden sollen,
 falls bei einem Kapitel (!KW [chapterimage]) benutzt wird
 und die angegebene Datei vorhanden ist.
 
-!item [(!EXAMPLE)]
-(!T)!/use_chapter_images [html,win,stg](!t)
-
 !item [(!EXISTSSINCE)] Release~4 Version~0.43
 
 !item [(!SEEALSO)]
 (!KW [chapterimage])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_chapter_images [html,win,stg]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -510,13 +565,17 @@ Kommentare erzeugen.
 !item [(!DESCRIPTION)]
 Wird im Vorspann dieser Schalter benutzt, werden Kommentare auch bei allen Formaten, die keine Kommentare beherrschen, diese in Klammern ausgegeben.
 
-!item [(!EXAMPLE)]
-(!T)!/use_comments [html,win,stg](!t)
-
 !item [(!SEEALSO)]
 (!KW [comment]), (!KW [begin_comment]), (!KKW [comment])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_comments [html,win,stg]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -537,13 +596,17 @@ Formfeed-Befehl mit ausgeben.
 Mit diesem Schalter kann man UDO mitteilen, dass beim (!KW [newpage])-Befehl bei ASCII-Formaten ein Formfeed
 (ASCII~12) ausgegeben werden soll.
 
-!item [(!EXAMPLE)]
-(!T)!/use_formfeed [asc](!t)
-
 !item [(!SEEALSO)]
 (!KW [man_lpp]), (!KW [newpage])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_formfeed [asc]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -567,12 +630,16 @@ Schalter keine Rolle, da dort immer Blocksatz erzeugt
 wird. Für WinHelp und HTML spielt der Schalter auch
 keine Rolle, da dort kein Blocksatz erzeugt werden kann.
 
-!item [(!EXAMPLE)]
-(!T)!/use_justification [asc](!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~0
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_justification [asc]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -593,7 +660,6 @@ Blocksatz einschalten.
 !item [(!DESCRIPTION)]
 (!NOTEXISTING)
 (!USEINSTEAD[]) (!KW [use_justification])
-# Dieser Befehl existiert nicht mehr und wurde umbenannt in (!KW [use_justification]).
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
@@ -624,13 +690,17 @@ Labels automatisch in den Index übernehmen.
 Wird dieser Schalter im Vorspann angegeben, werden
 automatisch alle Labels im Index der angegebenen Formate angezeigt.
 
-!item [(!EXAMPLE)]
-(!T)!/use_label_inside_index [win,stg](!t)
-
 !item [(!SEEALSO)]
 (!link [Indizes] [Indizes]), (!KW [no_index]), (!KW [index]), (!KW [label])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_label_inside_index [win,stg]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -667,15 +737,20 @@ die folgende Zeile sparen:
 !end_verbatim
 (!EXAMPLE_END)
 
-!item [(!EXAMPLE)]
-(!T)!/use_mirrored_indices [win,stg](!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~0
 
 !item [(!SEEALSO)]
 (!link [Indizes] [Indizes]), (!KW [no_index]), (!KW [index]), (!KKW [idx])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_mirrored_indices [win,stg]
+!end_verbatim
+(!EXAMPLE_END)
+
 
 !end_node
 
@@ -696,15 +771,19 @@ Kapitel automatisch in den Index übernehmen.
 Wird dieser Schalter im Vorspann angegeben, werden
 automatisch alle Kapitelüberschriften im Index der angegebenen Formate angezeigt.
 
-!item [(!EXAMPLE)]
-(!T)!/use_nodes_inside_index [win,stg](!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~10
 
 !item [(!SEEALSO)]
 (!link [Indizes] [Indizes]), (!KW [no_index]), (!KW [index]), (!KW [node])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_nodes_inside_index [win,stg]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -733,15 +812,19 @@ Umwandlungsdauer negativ beeinflusst, benutzt UDO
 standardmäßig keinen Ausgabepuffer. Im Beispiel
 würden Ausgabepuffer für WinHelp und HTML angefordert.
 
-!item [(!EXAMPLE)]
-(!T)!/use_output_buffer [win,html](!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
 !item [(!SEEALSO)]
 (!KW [parwidth])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_output_buffer [win,html]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -766,15 +849,19 @@ nur für diesen Node ausgegeben.
 
 Dieser Befehl wird derzeit nur für HTML unterstützt.
 
-!item [(!EXAMPLE)]
-(!T)!/use_raw_footer footer.html(!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~10
 
 !item [(!SEEALSO)]
 (!KW [use_raw_header]), (!KW [ignore_raw_footer])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!/use_raw_footer footer.html
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -799,15 +886,19 @@ nur für diesen Node ausgegeben.
 
 Dieser Befehl wird derzeit nur für HTML und RTF unterstützt.
 
-!item [(!EXAMPLE)]
-(!T)!/use_raw_header header.html(!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~10
 
 !item [(!SEEALSO)]
 (!KW [use_raw_footer]), (!KW [ignore_raw_header])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_raw_header header.html
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -830,15 +921,19 @@ alle Umgebungen (mit Ausnahme der verbatim-Umgebung)
 ohne zusätzlichen Zwischenräume ausgegeben. Im
 Beispiel würde dieser Schalter für das ASCII-Format gesetzt.
 
-!item [(!EXAMPLE)]
-(!T)!/use_short_envs [asc](!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~15
 
 !item [(!SEEALSO)]
 (!KW [begin_itemize]), (!KW [begin_enumerate]), (!KW [begin_description]), (!KW [begin_xlist]), (!KW [short]), (!KW [use_short_tocs]), (!link [Umgebungen] [Umgebungen])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_short_envs [asc]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -865,13 +960,17 @@ der Inhaltsverzeichnisse bei allen Ausgabeformaten eingeschränkt.
 #!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
 #!item [Existiert wieder seit:] Release~6 Patchlevel~5
 
-!item [(!EXAMPLE)]
-(!T)!/use_short_tocs [all](!t)
-
 !item [(!SEEALSO)]
 (!KW [depth]), (!KW [tableofcontents]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse]), (!KW [use_short_envs]), (!link [Umgebungen] [Umgebungen])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_short_tocs [all]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -898,15 +997,19 @@ wird (!code [book]) verwendet. Bei den anderen Formaten wird eine
 (!LaTeX)-ähnliche Ausgabe erzeugt, d.h. Kapitel werden auch mit
 ""Kapitel #:"" bzw. ""Anhang X:"" beschriftet.
 
-!item [(!EXAMPLE)]
-(!T)!/use_style_book [tex](!t)
-
 !item [(!EXISTSSINCE)] Release~4 Version~0.47
 
 !item [(!SEEALSO)]
 (!KW [no_preamble])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_style_book [tex]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -956,15 +1059,19 @@ Da die Ausgabe der xlist-Umgebung beim HTML-Format ziemlich kritisch
 ist, werden xlist-Umgebung standardmäßig wie description-Umgebungen
 behandelt. Durch die Angabe dieses Schalters im Vorspann werden
 xlist-Umgebungen jedoch wie beim ASCII-Format -- geklammert mit dem
-Preformatted-Tag -- ausgegeben.
-
-!item [(!EXAMPLE)]
-(!T)!/use_xlist [html](!t)
+(!code [<pre>...</pre>])-Tag -- ausgegeben.
 
 !item [(!SEEALSO)]
 (!link [Listen] [Listen]), (!link [Beschreibungen] [Beschreibungen])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_xlist [html]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 !endif

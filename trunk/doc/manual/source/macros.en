@@ -19,6 +19,7 @@
 #   fd  Jun 09: some macros enhanced
 #   fd  Jun 10: EXAMPLE_... macros introduced
 #   fd  Jun 12: macro renamed: CODE -> CHARSET
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -70,7 +71,7 @@
 !macro WORD           <word>
 
 
-!macro DocumentationWorkInProgress  The UDO Guide is actually in revision. Intermediate versions are currently only available on the UDO website for online-reading, but not for download.
+# !macro DocumentationWorkInProgress  The UDO Guide is actually in revision. Intermediate versions are currently only available on the UDO website for online-reading, but not for download.
 !macro FollowingOutdated            (!I)The following text passages are partly outdated and will be revised.(!i)
 
 
@@ -83,28 +84,31 @@
 
 
 # language-dependant text parts for the command index (in alphabetical order)
-!macro ABBREV         This is an abbreviation of the command
-!macro COMMAND        command
-!macro COMMANDABBREV  command abbreviation
-!macro DESCRIPTION    Description:
-!macro EXAMPLE        Example:
-!macro EXAMPLE2       Examples:
-!macro EXISTSSINCE    Exists since:
-!macro EXISTEDUNTIL   Existed until:
-!macro FILESPACEQUOTE If the file name contains spaces, it has to be quoted.
-!macro HINT           (!B)Hint:(!b)
-!macro HINTS          (!B)Hints:(!b)
-!macro MAINPART       main part
-!macro MISS           (!idx [Something's still missing here])!..
-!macro NOTEXISTING    This command does not exist anymore.
-!macro PLACEHOLDER    placeholder
-!macro PREAMBLE       preamble
-!macro RENAMEDTO      This command has been renamed to
-!macro SEEALSO        See also:
-!macro SPECIALCHAR    special character
-!macro SWITCH         switch
-!macro SYNTAX         Syntax:
-!macro TYPEPOSITION   Type & position:
-!macro USEINSTEAD     Use (!1) instead
+!macro ABBREV          abbreviation of the command
+!macro COLORSUPPORT    Farbbefehle werden z.Zt. nur bei den Formaten HTML, RTF, WinHelp, DRC und PostScript unterstützt.
+!macro COMMAND         command
+!macro COMMANDABBREV   command~abbreviation
+!macro COMMANDOBLIGATE obligate~command
+!macro DESCRIPTION     Description:
+!macro EXAMPLE         Example:
+!macro EXAMPLE2        Examples:
+!macro EXISTSSINCE     Exists since:
+!macro EXISTEDUNTIL    Existed until:
+!macro FILESPACEQUOTE  If the file name contains spaces, it has to be quoted.
+!macro HINT            (!B)Hint:(!b)
+!macro HINTS           (!B)Hints:(!b)
+!macro IN_HTML_HEADER  (!gray)(!I)Ausgabe erfolgt im Seiten-Header:(!i)(!coloff)
+!macro MAINPART        main part
+!macro MISS            (!idx [Something's still missing here])!..
+!macro NOTEXISTING     This command does not exist anymore.
+!macro PLACEHOLDER     placeholder
+!macro PREAMBLE        preamble
+!macro RENAMEDTO       This command has been renamed to
+!macro SEEALSO         See also:
+!macro SPECIALCHAR     special character
+!macro SWITCH          switch
+!macro SYNTAX          Syntax:
+!macro TYPEPOSITION    Type & position:
+!macro USEINSTEAD      Use (!1) instead
 
 # === EOF ===

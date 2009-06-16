@@ -20,6 +20,8 @@
 #   fd  Jun 09: 'Sinn machen' -> 'Sinn ergeben' (avoid anglicisms)
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 16: html_name no longer uses CAPITAL letters
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -29,7 +31,7 @@
 # = = = = =
 
 !begin_node (!kkkw [N] [n])
-!html_name  cmd_N()
+!html_name  cmd_n()
 !label (!kk1 [/N])
 !label (!kk1 [/n])
 
@@ -43,15 +45,22 @@ Fußnote erzeugen.
 
 !item [(!DESCRIPTION)]
 ""(!TEXT)"" wird als Fußnote oder in Klammern dargestellt.
-Vor (!KK1 [N]) sollte sich kein Leerzeichen, Tabulator oder Zeilenumbruch befinden!
 
-!item [(!EXAMPLE)]
-(!T)der Text(!/N)die Fußnote(!/n)(!t)
+(!B)Wichtig:(!b) Vor (!KK1 [N]) sollte sich kein Leerzeichen, Tabulator oder Zeilenumbruch befinden!
 
 !item [(!SEEALSO)]
 (!link [Fußnoten] [Fußnoten])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+der Text(!N)die Fußnote(!n)
+!end_verbatim
+(!EXAMPLE_AFTER)
+der Text(!N)die Fußnote(!n)
+(!EXAMPLE_END)
 
 !end_node
 
@@ -69,7 +78,7 @@ Kapitel einleiten.
 !item [(!SYNTAX)] (!T)!/n [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [node]).
+(!ABBREV) (!KW [node])
 
 !item [(!SEEALSO)]
 (!KW [node])
@@ -92,7 +101,7 @@ Kapitel ohne Eintrag im Inhaltsverzeichnis einleiten.
 !item [(!SYNTAX)] (!T)!/n* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [node*]).
+(!ABBREV) (!KW [node*])
 
 !item [(!SEEALSO)]
 (!KW [node*])
@@ -119,8 +128,7 @@ Setzt die Schriftfarbe auf Marineblau.
 Dieser Platzhalter setzt die Schriftfarbe Marineblau.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -128,6 +136,15 @@ PostScript unterstützt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!navy)Marineblau(!coloff) erscheint in der Farbe Marineblau.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!navy)Marineblau(!coloff) erscheint in der Farbe Marineblau.
+(!EXAMPLE_END)
 
 !end_node
 
@@ -173,10 +190,18 @@ Vor (!KKW [nl]) (!B)muss(!b) ein (festes) Leerzeichen stehen! Nach
 (!KKW [nl]) muss ebenfalls ein (festes) Leerzeichen stehen
 oder (!KKW [nl]) muss das letzte Wort einer Zeile sein.
 
-!item [(!EXAMPLE)]
-(!T)Ein manueller (!/nl) Zeilenumbruch(!t)
-
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Ein manueller (!nl) Zeilenumbruch und noch ein (!nl)
+manueller Zeilenumbruch.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Ein manueller (!nl) Zeilenumbruch und noch ein (!nl)
+manueller Zeilenumbruch.
+(!EXAMPLE_END)
 
 !end_node
 
@@ -199,13 +224,33 @@ Zieldatei durch ae, oe, ue, ss, Ae, Oe und Ue
 ausgegeben. Im Beispiel würde dies bei der Umwandlung
 ins Manualpage-Format geschehen.
 
-!item [(!EXAMPLE)]
-(!T)!/no_8bit [man](!t)
-
 !item [(!SEEALSO)]
 (!link [Sonderzeichen] [Sonderzeichen]), (!KW [no_umlaute])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!no_8bit [man]
+
+# Hauptteil:
+!begin_node Ärger
+Ärgerlich ist es öfters, wie man weiß, überhaupt 
+ärgerlich in der Öffentlichkeit seine 
+Überheblichkeit zu zeigen.
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+[MeinBuch](1)                                            [MeinBuch](1)
+
+                                AERGER
+
+Aergerlich ist es oefters, wie man weiss, ueberhaupt aergerlich in der 
+Oeffentlichkeit seine Ueberheblichkeit zu zeigen.
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -228,15 +273,19 @@ Erzeugung von Fußzeilen der jeweiligen Ausgabeformate
 unterbinden. Im Beispiel würde dies bei der
 Umwandlung ins Pure-C-Help-Format geschehen.
 
-!item [(!EXAMPLE)]
-(!T)!/no_bottomlines [pch](!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
 !item [(!SEEALSO)]
 (!KW [no_headlines]), (!KW [no_footers]), (!KW [ignore_bottomline])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_bottomlines [pch]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -245,7 +294,7 @@ Umwandlung ins Pure-C-Help-Format geschehen.
 !begin_node (!kw [no_buttons])
 !html_name  cmd_no_buttons
 
-Keine Browsebuttons erzeugen (nur WinHelp).
+Keine Navigations-Buttons erzeugen (nur WinHelp).
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -255,7 +304,7 @@ Keine Browsebuttons erzeugen (nur WinHelp).
 
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann benutzt, werden keine Befehle in die
-Projekt-Datei geschrieben, die Browse-Buttons in der Hilfe-Datei erzeugen.
+Projekt-Datei geschrieben, die Navigations-Buttons in der Hilfe-Datei erzeugen.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~7
 
@@ -282,13 +331,23 @@ wie (!KK1 [B]) werden dann nicht in Schriftarten
 umgewandelt, sondern einfach gefiltert. Im Beispiel
 würden diese bei der Umwandlung ins ASCII-Format nicht benutzt.
 
-!item [(!EXAMPLE)]
-(!T)!/no_effects [asc](!t)
-
 !item [(!SEEALSO)]
 (!link [Schriftarten] [Schriftarten])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!no_effects [asc,html]
+
+# Hauptteil:
+Dieser Text soll (!B)fett(!b) dargestellt werden, außer im ASCII- oder HTML-Format.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Dieser Text soll fett dargestellt werden, außer im ASCII- oder HTML-Format.
+(!EXAMPLE_END)
 
 !end_node
 
@@ -311,15 +370,19 @@ Erzeugung der Webmasterangaben in der Fußzeile der jeweiligen Ausgabeformate
 unterbinden, sofern diese vorhanden sind. Im Beispiel würde dies bei der
 Umwandlung ins HTML-Format geschehen.
 
-!item [(!EXAMPLE)]
-(!T)!/no_footers [html](!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~2
 
 !item [(!SEEALSO)]
 (!KW [no_bottomlines])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_footers [html]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -342,13 +405,17 @@ Erzeugung von Titelzeilen der jeweiligen Ausgabeformate
 unterbinden. Im Beispiel würde dies bei der
 Umwandlung ins WinHelp-Format geschehen.
 
-!item [(!EXAMPLE)]
-(!T)!/no_headlines [win](!t)
-
 !item [(!SEEALSO)]
 (!KW [no_bottomlines]), (!KW [no_popup_headlines]), (!KW [ignore_headline])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_headlines [win]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -370,8 +437,15 @@ Mit diesem Kommando lässt sich die Ausgabe von
 Bildern neben den Verweisen auf die übergeordneten
 Kapitel in Inhaltsverzeichnissen unterdrücken.
 
-!item [(!EXAMPLE2)]
-(!T)
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~13
+
+!item [(!SEEALSO)]
+(!KW [use_auto_toptocs])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !ifdest [stg]
         !use_auto_toptocs [all] !no_icons
@@ -379,14 +453,7 @@ Kapitel in Inhaltsverzeichnissen unterdrücken.
         !use_auto_toptocs [all]
 !endif
 !end_verbatim
-(!t)
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~13
-
-!item [(!SEEALSO)]
-(!KW [use_auto_toptocs])
-
-!end_xlist
+(!EXAMPLE_END)
 
 !end_node
 
@@ -408,13 +475,17 @@ Mit diesem Kommando lässt sich die Ausgabe von Befehlen zur Ausgabe von Bildern
 für ein Ausgabeformat unterbinden; (!KW [image]) wird dann einfach ignoriert.
 Im Beispiel würden keine Befehle zur Ausgabe von Bildern beim HTML-Format erzeugt.
 
-!item [(!EXAMPLE)]
-(!T)!/no_images [html](!t)
-
 !item [(!SEEALSO)]
 (!KW [image]), (!KKW [img]), (!link [Bilder] [Bilder])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_images [html]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -432,14 +503,15 @@ Ermittlung der Ausmaße von Bildern unterbinden.
 !item [(!SYNTAX)] (!T)!/no_img_size [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-UDO ermittelt nun für Bilder im GIF-Format die jeweiligen Ausmaße und
-gibt diese dann beim HTML-Format beim IMG-Tag an. UDO sucht die GIFs
+UDO ermittelt nun für Bilder im GIF- oder JPEG-Format die jeweiligen Ausmaße und
+gibt diese dann beim HTML-Format beim (!code [<img>])-Tag an. UDO sucht die Bilder 
 ausgehend vom Ausgabeverzeichnis, bastelt sich also den Dateinamen aus
 Laufwerk und Pfad der Ausgabedatei und dem bei (!KW [image]) angebenen
 Dateinamen zusammen. Mit diesem Schalter kann man die Ermittlung der Ausmaße deaktivieren.
 
-!item [(!EXAMPLE)]
-(!T)!/no_img_size [html](!t)
+(!B)Tipp:(!b) Falls Sie in Ihrer HTML-Dokumentation viele Bilder ständig aktualisieren, ist es sinnvoll, diesen Schalter zu nutzen, da Sie dann einfach nur die Bilder auf dem Server austauschen können, nicht aber die HTML-Seiten neu generieren müssen.
+
+(!B)Hinweis:(!b) Wenn Sie den Schalter (!I)nicht(!i) nutzen, ermittelt UDO nicht nur die Ausmaße jedes Bildes, sondern prüft natürlich auch, ob das jeweilige Bild überhaupt im angegebenen Pfad vorhanden ist. Daher können Sie das Ermitteln der Bildgröße während der Entwicklungsphase Ihrer Dokumentation auch sehr gut nutzen, um zu kontrollieren, ob alle benötigten Bilder auch vorhanden sind. Ein Blick in das von UDO erzeugte Ausgabeprotokoll hilft dann, fehlende Bilder rasch zu ermitteln.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~9
 
@@ -447,6 +519,36 @@ Dateinamen zusammen. Mit diesem Schalter kann man die Ermittlung der Ausmaße dea
 (!KW [image]), (!KKW [img]), (!link [Bilder] [Bilder])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!no_img_size [html]
+
+# Hauptteil:
+!image img/udo_icon_16
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+<img src="img/udo_icon_16.gif" alt="" title="" border="0">
+!end_verbatim
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+# !no_img_size [html]
+
+# Hauptteil:
+!image img/udo_icon_16 UDO-Icon
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+<img src="img/udo_icon_16.gif" alt="UDO-Icon" title="UDO-Icon" border="0" width="16" height="16">
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -465,20 +567,24 @@ Keinen Index erzeugen und Index-Befehle ignorieren.
 
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann benutzt, werden
-für die angegebenen Formate die Befehle (!KW [index]) und
+für die angegebenen Formate die Befehle (!KW [index]), (!KKW [index]) und
 (!KKW [idx]) ignoriert. Desweiteren wird weder von UDO
 noch vom Zielformat ein Index erzeugt. Im Beispiel
 würden keine Indizes für das RTF ausgegeben.
 
-!item [(!EXAMPLE)]
-(!T)!/no_index [rtf](!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
 !item [(!SEEALSO)]
-(!KW [index]), (!KKW [idx])
+(!KW [index]), (!KKW [index]), (!KKW [idx])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_index [rtf]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -501,15 +607,19 @@ Verweisen aus, falls das formatzugehörige Kürzel
 angegeben wurde. Dies ist sinnvoll, falls man z.B.
 in einem RTF-Dokument den Text ""siehe !.."" unterdrücken will.
 
-!item [(!EXAMPLE)]
-(!T)!/no_links [rtf](!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~6
 
 !item [(!SEEALSO)]
 (!KKW [link]), (!KW [no_xlinks]), (!KKW [nolink]), (!link [Querverweise] [Querverweise])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_links [rtf]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -532,13 +642,17 @@ Kapitelnummern aus. In Inhaltsverzeichnissen werden
 dann nur die Kapitelnamen ausgegeben. Im Beispiel
 wird dies für das WinHelp-Format und für HTML gemacht.
 
-!item [(!EXAMPLE)]
-(!T)!/no_numbers [win,html](!t)
-
 !item [(!SEEALSO)]
 (!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_numbers [win,html]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -562,15 +676,19 @@ bei Popup-Nodes unterbinden. Titelzeilen für normales
 Nodes werden weiterhin erzeugt. Im Beispiel würde dies bei der
 Umwandlung ins WinHelp-Format geschehen.
 
-!item [(!EXAMPLE)]
-(!T)!/no_popup_headlines [win](!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~9
 
 !item [(!SEEALSO)]
 (!KW [no_bottomlines]), (!KW [no_headlines])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_popup_headlines [win]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -595,12 +713,16 @@ UDO keinen (!LaTeX)-Vorspann erzeugt. Diesen Schalter
 sollte man nur dann verwenden, wenn man ausreichend
 Kenntnis über das jeweilige Zielformat besitzt.
 
-!item [(!EXAMPLE)]
-(!T)!/no_preamble [tex](!t)
-
 !item [(!EXISTSSINCE)] Release~4 Version~0.47
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_preamble [tex]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -620,15 +742,27 @@ Keine typographischen Anführungsstriche benutzen.
 !item [(!DESCRIPTION)]
 Schaltet die Umwandlung von doppelten in echte
 Anführungszeichen und Apostrophen aus. Doppelte
-Anführungszeichen und Apostrope werden dann durch einfache ersetzt.
-
-!item [(!EXAMPLE)]
-(!T)!/no_quotes [asc,man](!t)
+Anführungszeichen und Apostrophe werden dann durch einfache ersetzt.
 
 !item [(!SEEALSO)]
 (!link [("")] [("")]), (!link [Doppelte Anführungszeichen] [Doppelte Anführungszeichen]), (!link [('')] [('')]), (!link [Doppelte Apostrophe] [Doppelte Apostrophe])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!no_quotes [asc,man]
+
+# Hauptteil:
+Da fragte der Richter: ""Stimmt es, dass Sie neulich zum Zeugen ''Du Idiot'' gesagt haben?""
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+Da fragte der Richter: "Stimmt es, dass Sie neulich zum Zeugen 'Du Idiot' gesagt haben?"
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -677,15 +811,19 @@ Benutzt man im Vorspann diesen Schalter, erzeugt UDO in Tabellen
 keine senkrechten oder waagerechten Linien. Im Beispiel würde UDO keine
 Tabellenlinien für WinHelp und IPF erzeugen.
 
-!item [(!EXAMPLE)]
-(!T)!/no_table_lines [win,ipf](!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~11
 
 !item [(!SEEALSO)]
 (!KW [begin_table]), (!link [Tabellen] [Tabellen])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_table_lines [win,ipf]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -734,9 +872,6 @@ Eine andere Möglichkeit, die Tiefe der Ausgabe des
 Inhaltsverzeichnisses zu beeinflussen, ist die Verwendung
 des Parameters (!KW [depth]) bei (!KW [toc]).
 
-!item [(!EXAMPLE)]
-(!T)!/no_toc_subnodes [win](!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~8
 
 !item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
@@ -745,6 +880,13 @@ des Parameters (!KW [depth]) bei (!KW [toc]).
 (!KW [tableofcontents]), (!KW [toc]), (!KW [depth]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_toc_subnodes [win]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 !endif
@@ -771,9 +913,6 @@ Eine andere Möglichkeit, die Tiefe der Ausgabe des
 Inhaltsverzeichnisses zu beeinflussen, ist die Verwendung
 des Parameters (!KW [depth]) bei (!KW [toc]).
 
-!item [(!EXAMPLE)]
-(!T)!/no_toc_subsubnodes [win,stg,html](!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~8
 
 !item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
@@ -782,6 +921,13 @@ des Parameters (!KW [depth]) bei (!KW [toc]).
 (!KW [tableofcontents]), (!KW [toc]), (!KW [depth]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_toc_subsubnodes [win,stg,html]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 !endif
@@ -808,9 +954,6 @@ Eine andere Möglichkeit, die Tiefe der Ausgabe des
 Inhaltsverzeichnisses zu beeinflussen, ist die Verwendung
 des Parameters (!KW [depth]) bei (!KW [toc]).
 
-!item [(!EXAMPLE)]
-(!T)!/no_toc_subsubsubnodes [win,stg,html](!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~8
 
 !item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
@@ -819,6 +962,13 @@ des Parameters (!KW [depth]) bei (!KW [toc]).
 (!KW [tableofcontents]), (!KW [toc]), (!KW [depth]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_toc_subsubsubnodes [win,stg,html]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 !endif
@@ -839,15 +989,36 @@ Keine Umlaute benutzen.
 Umlaute, die im Quelltext vorkommen, werden in der Zieldatei durch ae, oe, ue, ss, Ae, Oe und Ue
 ausgegeben. Im Beispiel würde dies bei der Umwandlung ins Manualpage-Format geschehen.
 
-!item [(!EXAMPLE)]
-(!T)!/no_umlaute [man](!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
 !item [(!SEEALSO)]
 (!link [Sonderzeichen] [Sonderzeichen]), (!KW [no_8bit])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!no_umlaute [man]
+
+# Hauptteil:
+!begin_node Ärger
+Ärgerlich ist es öfters, wie man weiß, überhaupt
+ärgerlich in der Öffentlichkeit seine
+Überheblichkeit zu zeigen.
+
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+[MeinBuch](1)                                            [MeinBuch](1)
+
+                                AERGER
+
+Aergerlich ist es oefters, wie man weiss, ueberhaupt aergerlich in der
+Oeffentlichkeit seine Ueberheblichkeit zu zeigen.
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -871,13 +1042,17 @@ angegeben wurde. Dies ist sinnvoll, falls man einen
 Hypertext mit HTML-Links versehen hat, die jedoch
 weder in einem WinHelp- noch ST-Guide-Hypertext Sinn ergeben würden.
 
-!item [(!EXAMPLE)]
-(!T)!/no_urls [stg](!t)
-
 !item [(!SEEALSO)]
 (!KKW [url]), (!KW [no_links]), (!KW [no_xlinks]), (!link [Querverweise] [Querverweise])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_urls [stg]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -898,15 +1073,19 @@ Keine Umlaute in verbatim-Umgebungen verwenden.
 Umlaute, die im Quelltext innerhalb einer verbatim-Umgebung vorkommen, werden in der Zieldatei durch ae,
 oe, ue, ss, Ae, Oe und Ue ausgegeben. Im Beispiel würde dies bei der Umwandlung ins (!LaTeX)-Format geschehen.
 
-!item [(!EXAMPLE)]
-(!T)!/no_verbatim_umlaute [tex](!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
 !item [(!SEEALSO)]
 (!KW [begin_verbatim]), (!KW [end_verbatim]), (!link [Vorformatierter Text] [Vorformatierter Text])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_verbatim_umlaute [tex]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -930,15 +1109,19 @@ angegeben wurde. Dies ist sinnvoll, falls man einen
 Hypertext mit HTML-Links versehen hat, die jedoch
 weder in einem WinHelp- noch ST-Guide-Hypertext Sinn ergeben würden.
 
-!item [(!EXAMPLE)]
-(!T)!/no_xlinks [stg](!t)
-
 !item [(!EXISTSSINCE)] Release~4 Version~0.44
 
 !item [(!SEEALSO)]
 (!KKW [xlink]), (!KW [no_links]), (!link [Querverweise] [Querverweise])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!no_xlinks [stg]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -958,13 +1141,19 @@ Kapitel einleiten.
 !item [(!DESCRIPTION)]
 Leitet ein Kapitel mit der Bezeichnung ""(!TEXT)"" ein. Kapitel erscheinen in Inhaltsverzeichnissen.
 
-!item [(!EXAMPLE)]
-(!T)!/node Titel des Kapitels(!t)
-
 !item [(!SEEALSO)]
 (!KW [pnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!node Titel des Kapitels
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading Titel des Kapitels
+(!EXAMPLE_END)
 
 !end_node
 
@@ -985,15 +1174,21 @@ Kapitel ohne Eintrag im Inhaltsverzeichnis einleiten.
 Dieses Kommando hat die gleiche Funktion wie (!KW [node]),
 mit der Ausnahme, dass ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
 
-!item [(!EXAMPLE)]
-(!T)!/node* Titel des versteckten Kapitels(!t)
-
 !item [(!EXISTSSINCE)] Release~4 Version~0.46
 
 !item [(!SEEALSO)]
 (!KW [node]), (!KW [pnode*]), (!KW [begin_node*]), (!link [Gliederung] [Gliederung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!node* Titel des versteckten Kapitels
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading Titel des versteckten Kapitels
+(!EXAMPLE_END)
 
 !end_node
 
@@ -1011,10 +1206,7 @@ Referenzierung unterdrücken.
 !item [(!SYNTAX)] (!T)(!/nolink [(!TEXT)])(!t)
 
 !item [(!DESCRIPTION)]
-Dieser Platzhalter sorgt dafür, dass der ausgegebene Text (Inhalt der Klammern) nicht referenziert wird.
-
-!item [(!EXAMPLE)]
-(!T)(!nolink [hallo])(!t)
+Dieser Platzhalter sorgt dafür, dass der ausgegebene Text (Inhalt der eckigen Klammern) nicht referenziert wird.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~2
 
@@ -1022,6 +1214,15 @@ Dieser Platzhalter sorgt dafür, dass der ausgegebene Text (Inhalt der Klammern) 
 (!KW [no_links]), (!KKW [link])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!nolink [UDO])
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!nolink [UDO])
+(!EXAMPLE_END)
 
 !end_node
 
@@ -1061,17 +1262,33 @@ Programmtyp setzen (nur NROFF).
 !item [(!SYNTAX)] (!T)!/nroff_type (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-""(!TEXT)"" wird bei der Ausgabe in NROFF in Klammern in der Kopfzeile ausgegeben. Im Beispiel
-würde bei benutztem ""(!KW [docinfo] [[program!!] udo])"" die Kopfzeile
-""udo(1)"" ausgegeben. ""(!TEXT)"" wird nicht als Dateiendung benutzt.
-
-!item [(!EXAMPLE)]
-(!T)!/nroff_type 1(!t)
+""(!TEXT)"" wird bei der Ausgabe in NROFF in Klammern in der Kopfzeile ausgegeben. ""(!TEXT)"" wird nicht als Dateisuffix benutzt.
 
 !item [(!SEEALSO)]
 (!KW [man_type])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!docinfo [program] [udo]
+!nroff_type (!RELEASE)
+
+# Hauptteil:
+!begin_node Einleitung
+...
+!end_node
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+[udo](6)                                 [udo](6)
+
+                    EINLEITUNG
+...
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 

@@ -15,6 +15,7 @@
 # 2009:
 #   fd  Jun 05: header introduced
 #   fd  Jun 08: HTML settings adjusted
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -25,13 +26,17 @@
 !html_navigation      [line]
 !html_style_name      css/udo.css
 !html_ignore_8bit     iso-8859-1
+!html_img_suffix      gif
+
+# !html_transparent_buttons
+
 
 #!html_merge_subsubnodes
 #!html_modern_layout
 #!html_switch_language english ../eng/udo.html
 
 # MEZ = UTC + 1 h
-!html_header_date +01:00
+# !html_header_date +01:00
 
 
 
@@ -125,8 +130,8 @@
 # ----------------------------------------------------------------
 # General switches
 # ----------------------------------------------------------------
-!use_justification	[asc]
-#!use_about_udo		[all]
+!use_justification      [asc]
+!use_about_udo          [html]
 
 !use_nodes_inside_index [stg,win,wh4,html,pch,asc,ipf,hh,info]
 !use_label_inside_index [stg,win,wh4,html,pch,asc,ipf,hh,info]
@@ -148,7 +153,6 @@
 
 !use_style_book         [tex,asc,rtf,win,aqv,lyx]
 !sort_hyphen_file       [asc,stg,pch]
-
 
 
 

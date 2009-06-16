@@ -23,6 +23,7 @@
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: LINK macro introduced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -125,7 +126,7 @@ Set a label.
 !item [(!SYNTAX)] (!T)!/l (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [label]).
+(!ABBREV) (!KW [label])
 
 !item [(!SEEALSO)]
 (!KW [label])
@@ -321,7 +322,7 @@ Query the destination format.
 !item [(!SYNTAX)] (!T)!/lh (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [listheading]).
+(!ABBREV) (!KW [listheading])
 
 !item [(!SEEALSO)]
 (!KW [listheading])
@@ -348,8 +349,7 @@ Sets the textcolor lime.
 Dieser Platzhalter setzt die Schriftfarbe Hellgrün.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -357,6 +357,15 @@ PostScript unterstützt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!lime)Hellgrün(!coloff) erscheint in der Farbe Hellgrün.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!lime)Hellgrün(!coloff) erscheint in der Farbe Hellgrün.
+(!EXAMPLE_END)
 
 !end_node
 
@@ -689,7 +698,7 @@ want to use it. At the moment this command will only be converted for
 !item [(!SYNTAX)] (!T)!/lsh (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [listsubheading]).
+(!ABBREV) (!KW [listsubheading])
 
 !item [(!SEEALSO)]
 (!KW [listsubheading])
@@ -712,7 +721,7 @@ want to use it. At the moment this command will only be converted for
 !item [(!SYNTAX)] (!T)!/lssh (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [listsubsubheading]).
+(!ABBREV) (!KW [listsubsubheading])
 
 !item [(!SEEALSO)]
 (!KW [listsubsubheading])
@@ -735,7 +744,7 @@ want to use it. At the moment this command will only be converted for
 !item [(!SYNTAX)] (!T)!/lsssh (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [listsubsubsubheading]).
+(!ABBREV) (!KW [listsubsubsubheading])
 
 !item [(!SEEALSO)]
 (!KW [listsubsubsubheading])

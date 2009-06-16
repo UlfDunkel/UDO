@@ -23,6 +23,7 @@
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #   fd  Jun 09: using more text-formatting macros
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -94,34 +95,37 @@ kenntlich machen. Mehr zu diesem Thema findet man im Kapitel
 !begin_node Kommandos, Schalter und Platzhalter
 !html_name  basics_commands_switches_placeholders
 
-(!code [!!])
-
-
 !begin_description
 !index Kommando
 !item [Kommandos]
-Ein UDO-Kommando ist eine mit einem (!code [!!!]) beginnende
-Zeilenfolge, die am Anfang einer Zeile, eventuell eingerückt durch
-Leerzeichen oder Tabs, steht. Ein Kommando bewirkt eine Aktion, wie
+Ein UDO-Kommando ist eine mit einem (!EXCLAM) beginnende
+Zeilenfolge. Ein Kommando bewirkt eine Aktion, wie
 z.B. die Ausgabe eines Inhaltsverzeichnisses (siehe (!KW [tableofcontents])).
+
+Ein Kommando wird nur erkannt, wenn es am Anfang einer Zeile steht, eventuell
+eingerückt durch Leerzeichen oder Tabs eingerückt.
+
+Kommandos können nur aus (!EXCLAM) und dem eigentlichen Kommando-Bezeichner bestehen, aber auch weitere Parameter erwarten. Genaueres zu den einzelnen Kommandos finden Sie im Befehlsindex.
 
 !index Schalter
 !item [Schalter]
-Ein UDO-Schalter ist eine mit einem (!code [!!]) beginnende
+Ein UDO-Schalter ist eine mit einem (!EXCLAM) beginnende
 Zeichenfolge, die die Aktionen von UDO oder einem Kommando
 beeinflussen. So gibt es z.B. einen Schalter, der bewirkt, dass 
 Bezeichnungen in englischer Sprache(!N)""Appendix"" statt ""Anhang""(!n)
 ausgegeben werden (siehe (!KW [language])).
 
-Ein Schalter wird nur erkannt, wenn er am Anfang einer Zeile, eventuell
-eingerückt durch Leerzeichen oder Tabs eingerückt, steht.
+Ein Schalter wird nur erkannt, wenn er am Anfang einer Zeile steht, eventuell
+eingerückt durch Leerzeichen oder Tabs eingerückt.
+
+Schalter können nur aus (!EXCLAM) und dem eigentlichen Schalter-Bezeichner bestehen, aber auch weitere Parameter erwarten. Genaueres zu den einzelnen Schaltern finden Sie im Befehlsindex.
 
 !index Platzhalter
 !item [Platzhalter]
-Ein Platzhalter ist eine mit (!code [!!]) beginnende
-Zeichenfolge, die durch runde Klammern eingefasst ist. Ein Platzhalter
+Ein Platzhalter ist eine mit (!OPEN_EXCLAM) beginnende
+Zeichenfolge, die durch (!code [!)]) beendet wird. Ein Platzhalter
 wird von UDO durch eine dem Ausgabeformat zugehörige Zeichenfolge
-ersetzt (z.B. ""(!KK1 [B])"" durch (!code [{\bf])).
+ersetzt, z.B. ""(!KK1 [B])"" durch ""(!code [{\bf])"" für (!LaTeX) oder ""(!code [<b>])"" für HTML.
 
 Platzhalter können an jeder beliebigen Stelle einer Zeile stehen.
 

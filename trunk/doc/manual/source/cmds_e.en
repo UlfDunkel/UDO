@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -37,7 +38,7 @@ Finish a list.
 !item [(!SYNTAX)] (!T)!/ebl(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_blist]).
+(!ABBREV) (!KW [end_blist])
 
 !item [(!SEEALSO)]
 (!KW [end_blist])
@@ -60,7 +61,7 @@ Finish a center environment.
 !item [(!SYNTAX)] (!T)!/ec(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_center]).
+(!ABBREV) (!KW [end_center])
 
 !item [(!SEEALSO)]
 (!KW [end_center])
@@ -83,7 +84,7 @@ Finish a description.
 !item [(!SYNTAX)] (!T)!/ed(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_description]).
+(!ABBREV) (!KW [end_description])
 
 !item [(!SEEALSO)]
 (!KW [end_description])
@@ -107,7 +108,7 @@ Finish an enumeration.
 !item [(!SYNTAX)] (!T)!/ee(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_enumerate]).
+(!ABBREV) (!KW [end_enumerate])
 
 !item [(!SEEALSO)]
 (!KW [end_enumerate])
@@ -130,7 +131,7 @@ Finish left justified text.
 !item [(!SYNTAX)] (!T)!/efl(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_flushleft]).
+(!ABBREV) (!KW [end_flushleft])
 
 !item [(!SEEALSO)]
 (!KW [end_flushleft])
@@ -153,7 +154,7 @@ Finish right justified text.
 !item [(!SYNTAX)] (!T)!/efr(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_flushright]).
+(!ABBREV) (!KW [end_flushright])
 
 !item [(!SEEALSO)]
 (!KW [begin_flushright])
@@ -176,7 +177,7 @@ Finish an itemization.
 !item [(!SYNTAX)] (!T)!/ei(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_itemize]).
+(!ABBREV) (!KW [end_itemize])
 
 !item [(!SEEALSO)]
 (!KW [end_itemize])
@@ -199,7 +200,7 @@ Finish a list.
 !item [(!SYNTAX)] (!T)!/eil(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_ilist]).
+(!ABBREV) (!KW [end_ilist])
 
 !item [(!SEEALSO)]
 (!KW [end_ilist])
@@ -276,7 +277,7 @@ Finish a chapter/section/subsection/paragraph.
 !item [(!SYNTAX)] (!T)!/en(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_node]).
+(!ABBREV) (!KW [end_node])
 
 !item [(!SEEALSO)]
 (!KW [end_node])
@@ -328,7 +329,7 @@ Finishes the latest blist (""bold list"") environment.
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~4
 
 !item [(!SEEALSO)]
-(!KW [begin_blist]), (!KW [item] [[~!!]]), (!link [Lists] [Lists])
+(!KW [begin_blist]), (!KW [item]), (!link [Lists] [Lists])
 
 !end_xlist
 
@@ -397,7 +398,7 @@ Finish a description.
 This command finishes the latest description environment.
 
 !item [(!SEEALSO)]
-(!KW [begin_description]), (!KW [item] [[~!!]]), (!link [Descriptions] [Descriptions])
+(!KW [begin_description]), (!KW [item]), (!link [Descriptions] [Descriptions])
 
 !end_xlist
 
@@ -412,7 +413,7 @@ Finish the document.
 
 !begin_xlist [(!TYPEPOSITION)]
 
-!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+!item [(!TYPEPOSITION)] (!COMMANDOBLIGATE), (!MAINPART)
 
 !item [(!SYNTAX)] (!T)!/end_document(!t)
 
@@ -543,7 +544,7 @@ Finishes the latest ilist (""italic list"") environment.
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~4
 
 !item [(!SEEALSO)]
-(!KW [begin_ilist]), (!KW [item] [[~!!]]), (!link [Lists] [Lists])
+(!KW [begin_ilist]), (!KW [item]), (!link [Lists] [Lists])
 
 !end_xlist
 
@@ -758,7 +759,7 @@ Finishes the latest tlist environment.
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~4
 
 !item [(!SEEALSO)]
-(!KW [begin_tlist]), (!KW [item] [[~!!]]), (!link [Lists] [Lists])
+(!KW [begin_tlist]), (!KW [item]), (!link [Lists] [Lists])
 
 !end_xlist
 
@@ -804,7 +805,7 @@ Finish a list.
 Finishes the latest xlist environment.
 
 !item [(!SEEALSO)]
-(!KW [begin_xlist]), (!KW [item] [[~!!]]), (!link [Lists] [Lists])
+(!KW [begin_xlist]), (!KW [item]), (!link [Lists] [Lists])
 
 !end_xlist
 
@@ -900,7 +901,7 @@ Finish indented text.
 !item [(!SYNTAX)] (!T)!/eq(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_quote]).
+(!ABBREV) (!KW [end_quote])
 
 !item [(!SEEALSO)]
 (!KW [end_quote])
@@ -924,12 +925,12 @@ Output out an error message.
 
 (!red)
 !item [(!DESCRIPTION)]
-Genau wie die Präprozessoranweisung #error eines C-Compilers
+Genau wie die Präprozessoranweisung (!code [#error]) eines C-Compilers
 kann man hiermit eine Fehlermeldung erzeugen und ""(!TEXT)"" ausgeben.
 UDO bricht beim Eintreffen dieses Kommandos die Konvertierung ab.
 (!coloff)
 !item [(!DESCRIPTION)]
-Similar to the preprocessor command #error of a C compiler
+Similar to the preprocessor command (!code [#error]) of a C compiler
 you can use this command to generate an error message.
 UDO will stop processing the input file then.
 
@@ -956,7 +957,7 @@ Finish a list.
 !item [(!SYNTAX)] (!T)!/etl(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_tlist]).
+(!ABBREV) (!KW [end_tlist])
 
 !item [(!SEEALSO)]
 (!KW [end_tlist])
@@ -1009,7 +1010,7 @@ Finish a list.
 !item [(!SYNTAX)] (!T)!/exl(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_xlist]).
+(!ABBREV) (!KW [end_xlist])
 
 !item [(!SEEALSO)]
 (!KW [end_xlist])

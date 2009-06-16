@@ -22,6 +22,8 @@
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: html_name no longer uses CAPITAL letters
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -59,7 +61,7 @@ Query the destination format.
 # = = = = =
 
 !begin_node (!kkkw [T] [t])
-!html_name  cmd_T()
+!html_name  cmd_t()
 !label (!kk1 [/T])
 !label (!kk1 [/t])
 
@@ -87,7 +89,7 @@ Text styles, (!link [Text styling] [Text styling])
 # = = = = =
 
 !begin_node (!kkw [TeX])
-!html_name  cmd_TeX()
+!html_name  cmd_tex()
 
 Output the (!TeX) symbol.
 
@@ -371,8 +373,7 @@ Sets the textcolor teal.
 Dieser Platzhalter setzt die Schriftfarbe Blaugrün.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -380,6 +381,15 @@ PostScript unterstützt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!teal)Blaugrün(!coloff) erscheint in der Farbe Blaugrün.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!teal)Blaugrün(!coloff) erscheint in der Farbe Blaugrün.
+(!EXAMPLE_END)
 
 !end_node
 
@@ -662,7 +672,7 @@ Set verbatim character for (!LaTeX) ((!TeX) only)
 !item [(!DESCRIPTION)]
 ""(!CHAR)"" will be used as the sign for the (!LaTeX) command (!code [\verb]). 
 (!red)Bei der nächsten Umwandlung von (!KK1 [V]) und (!KK1 [v]) wird dann ""(!CHAR)"" benutzt.(!coloff) 
-""+"" will be used by default.
+""(!code[+])"" will be used by default.
 
 !item [(!EXAMPLE)]
 (!T)!/tex_verb |(!t)

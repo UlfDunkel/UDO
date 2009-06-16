@@ -19,6 +19,7 @@
 #   fd  Jun 09: real quotation fixed
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -40,7 +41,7 @@ Es gibt zwei Möglichkeiten, diese Trennstellen zu setzen:
 !end_enumerate
 
 Bei der Umwandlung ins (!LaTeX)-Format werden die angegebenen Trennstellen
-durch ""\-"" ersetzt. (!LaTeX) weiß dann, dass das Wort nur an den Stellen
+durch ""(!code [\-])"" ersetzt. (!LaTeX) weiß dann, dass das Wort nur an den Stellen
 getrennt werden darf.
 
 Bei der Umwandlung ins Rich-Text-, WinHelp- und HTML-Format werden die
@@ -64,7 +65,7 @@ eine halbautomatische Sil!-ben!-tren!-nung.
 !end_verbatim
 (!EXAMPLE_END)
 
-Bei der Umwandlung ins (!LaTeX-Format) werden alle (!K1 [/-]) durch ""\-"" ersetzt;
+Bei der Umwandlung ins (!LaTeX)-Format werden alle (!K1 [/-]) durch ""(!code [\-])"" ersetzt;
 es wird also ""Sil\-ben\-tren\-nung"" ausgegeben. Bei der Umwandlung ins
 ASCII-, ST-Guide-, Pure-C-Help- und Manualpage-Format wird das Wort
 passend aufgetrennt, falls es nicht mehr komplett in eine Zeile passt

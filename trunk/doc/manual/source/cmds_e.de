@@ -18,6 +18,7 @@
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -38,7 +39,7 @@ Liste beenden.
 !item [(!SYNTAX)] (!T)!/ebl(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_blist]).
+(!ABBREV) (!KW [end_blist])
 
 !item [(!SEEALSO)]
 (!KW [end_blist])
@@ -61,7 +62,7 @@ Die (letzte) center-Umgebung beenden.
 !item [(!SYNTAX)] (!T)!/ec(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_center]).
+(!ABBREV) (!KW [end_center])
 
 !item [(!SEEALSO)]
 (!KW [end_center])
@@ -84,7 +85,7 @@ Letzte description-Umgebung beenden.
 !item [(!SYNTAX)] (!T)!/ed(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_description]).
+(!ABBREV) (!KW [end_description])
 
 !item [(!SEEALSO)]
 (!KW [end_description])
@@ -107,7 +108,7 @@ Letzte nummerierte Aufzählung beenden.
 !item [(!SYNTAX)] (!T)!/ee(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_enumerate]).
+(!ABBREV) (!KW [end_enumerate])
 
 !item [(!SEEALSO)]
 (!KW [end_enumerate])
@@ -130,7 +131,7 @@ Umgebung für linksbündigen Text schließen.
 !item [(!SYNTAX)] (!T)!/efl(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_flushleft]).
+(!ABBREV) (!KW [end_flushleft])
 
 !item [(!SEEALSO)]
 (!KW [end_flushleft])
@@ -153,7 +154,7 @@ Umgebung für rechtsbündigen Text schließen.
 !item [(!SYNTAX)] (!T)!/efr(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_flushright]).
+(!ABBREV) (!KW [end_flushright])
 
 !item [(!SEEALSO)]
 (!KW [begin_flushright])
@@ -176,7 +177,7 @@ Letzte einfache Aufzählung beenden.
 !item [(!SYNTAX)] (!T)!/ei(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_itemize]).
+(!ABBREV) (!KW [end_itemize])
 
 !item [(!SEEALSO)]
 (!KW [end_itemize])
@@ -199,7 +200,7 @@ Liste beenden.
 !item [(!SYNTAX)] (!T)!/eil(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_ilist]).
+(!ABBREV) (!KW [end_ilist])
 
 !item [(!SEEALSO)]
 (!KW [end_ilist])
@@ -275,7 +276,7 @@ Kapitel/Abschnitt/Unterabschnitt/Paragraph beenden.
 !item [(!SYNTAX)] (!T)!/en(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_node]).
+(!ABBREV) (!KW [end_node])
 
 !item [(!SEEALSO)]
 (!KW [end_node])
@@ -328,7 +329,7 @@ Beendet die letzte blist-Umgebung.
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~4
 
 !item [(!SEEALSO)]
-(!KW [begin_blist]), (!KW [item] [[~!!]]), (!link [Listen] [Listen])
+(!KW [begin_blist]), (!KW [item]), (!link [Listen] [Listen])
 
 !end_xlist
 
@@ -397,7 +398,7 @@ Letzte (!nolink [description-Umgebung]) beenden.
 Beendet die letzte description-Umgebung.
 
 !item [(!SEEALSO)]
-(!KW [begin_description]), (!KW [item] [[~!!]]), (!link [Beschreibungen] [Beschreibungen])
+(!KW [begin_description]), (!KW [item]), (!link [Beschreibungen] [Beschreibungen])
 
 !end_xlist
 
@@ -412,7 +413,7 @@ Ende des Dokumentes setzen.
 
 !begin_xlist [(!TYPEPOSITION)]
 
-!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+!item [(!TYPEPOSITION)] (!COMMANDOBLIGATE), (!MAINPART)
 
 !item [(!SYNTAX)] (!T)!/end_document(!t)
 
@@ -544,7 +545,7 @@ Beendet die letzte ilist-Umgebung.
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~4
 
 !item [(!SEEALSO)]
-(!KW [begin_ilist]), (!KW [item] [[~!!]]), (!link [Listen] [Listen])
+(!KW [begin_ilist]), (!KW [item]), (!link [Listen] [Listen])
 
 !end_xlist
 
@@ -759,7 +760,7 @@ Beendet die letzte (!nolink [tlist-Umgebung]).
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~4
 
 !item [(!SEEALSO)]
-(!KW [begin_tlist]), (!KW [item] [[~!!]]), (!link [Listen] [Listen])
+(!KW [begin_tlist]), (!KW [item]), (!link [Listen] [Listen])
 
 !end_xlist
 
@@ -805,7 +806,7 @@ Liste beenden.
 Beendet die letzte (!nolink [xlist-Umgebung]).
 
 !item [(!SEEALSO)]
-(!KW [begin_xlist]), (!KW [item] [[~!!]]), (!link [Listen] [Listen])
+(!KW [begin_xlist]), (!KW [item]), (!link [Listen] [Listen])
 
 !end_xlist
 
@@ -902,7 +903,7 @@ Letzte Absatzeinrückung aufheben.
 !item [(!SYNTAX)] (!T)!/eq(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_quote]).
+(!ABBREV) (!KW [end_quote])
 
 !item [(!SEEALSO)]
 (!KW [end_quote])
@@ -925,7 +926,7 @@ Fehlermeldung ausgeben.
 !item [(!SYNTAX)] (!T)!/error [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-Genau wie die Präprozessoranweisung #error eines C-Compilers
+Genau wie die Präprozessoranweisung (!code [#error]) eines C-Compilers
 kann man hiermit eine Fehlermeldung erzeugen und ""(!TEXT)"" ausgeben.
 UDO bricht beim Eintreffen dieses Kommandos die Konvertierung ab.
 
@@ -952,7 +953,7 @@ Liste beenden.
 !item [(!SYNTAX)] (!T)!/etl(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_tlist]).
+(!ABBREV) (!KW [end_tlist])
 
 !item [(!SEEALSO)]
 (!KW [end_tlist])
@@ -980,15 +981,22 @@ ersetzt, sofern es in dem jeweiligen Zeichensatz
 vorhanden ist. Ist es das nicht, ersetzt UDO den
 Platzhalter durch ""(!code [EUR])"".
 
-!item [(!EXAMPLE)]
-Aus (!code [(!/euro!)]) wird (!euro).
-
 !item [(!EXISTSSINCE)] Version 6.5.8
 
 !item [(!SEEALSO)]
 (!KKW [pound]), Vordefinierte Makros
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!euro)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!euro)
+(!EXAMPLE_END)
+
 
 !end_node
 
@@ -1006,7 +1014,7 @@ Liste beenden.
 !item [(!SYNTAX)] (!T)!/exl(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [end_xlist]).
+(!ABBREV) (!KW [end_xlist])
 
 !item [(!SEEALSO)]
 (!KW [end_xlist])

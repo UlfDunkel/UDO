@@ -23,6 +23,7 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -73,20 +74,21 @@ Hintergrundfarbe für WinHelp4 setzen.
 !item [(!DESCRIPTION)]
 Mit diesem Kommando können Sie Hintergrundfarbe der
 Hilfedatei festlegen. Es stehen folgende Farben zur
-Verfügung: black, silver (hellgrau, ehemals ""grey""),
-gray (dunkelgrau, ""gray"", nicht ""grey""!), white, maroon,
-red, purple, fuchsia, green (dunkelgrün), lime (hellgrün),
-olive, yellow, navy, blue, teal und aqua (ehemals ""cyan"").
-Gleichzeitig passt UDO die Textfarbe
-an. Man sollte möglichst nur Weiß und Grau als
-Hintergrundfarben verwenden; alle anderen Farben sind furchtbar hässlich.
+Verfügung:
+!include colorcmd.de
 
-!item [(!EXAMPLE)]
-(!T)!/wh4_backcolor gray(!t)
+Gleichzeitig passt UDO die Textfarbe an.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~11
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!wh4_backcolor gray
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -137,10 +139,7 @@ Großschrift noch richtig formatiert wird. Bei
 normaler Schrift kann es jedoch sein, dass die Zeichen
 zu weit eingerückt werden oder dass Tabellenzellen zu
 breit erscheinen. Mit diesem Schalter können sie den
-Berechnungswert anpassen. Standardmäßig benutzt UDO den Wert 150.
-
-!item [(!EXAMPLE)]
-(!T)!/wh4_charwidth 100(!t)
+Berechnungswert anpassen. Standardmäßig benutzt UDO den Wert (!const [150]).
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~11
 
@@ -148,6 +147,13 @@ Berechnungswert anpassen. Standardmäßig benutzt UDO den Wert 150.
 (!link [Tabellen] [Tabellen]), (!link [Listen] [Listen])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!wh4_charwidth 100
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -168,15 +174,19 @@ Ausgabe einer Node-ID (nur WinHelp4).
 Dieser Befehl kann maximal einmal pro Node benutzt werden. Ausgegeben
 wird die ID wie ein Alias. Jump-IDs können als C- oder Pascal-Header-Datei ausgegeben werden.
 
-!item [(!EXAMPLE)]
-(!T)!/wh4_helpid 0815(!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~11
 
 !item [(!SEEALSO)]
 (!KW [mapping]), (!KW [use_auto_helpids]), (!KW [wh4_prefix_helpids])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!wh4_helpid 0815
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -213,7 +223,7 @@ Kompressionsrate von ca. 50~%. Die Komprimierung dauert relativ lange.
 !begin_node (!kw [wh4_inline_bitmaps])
 !html_name  cmd_wh4_inline_bitmaps
 
-Inline Bitmaps benutzen (nur WinHelp4).
+Inline-Bitmaps benutzen (nur WinHelp4).
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -225,12 +235,12 @@ Inline Bitmaps benutzen (nur WinHelp4).
 Wenn Sie diesen Schalter im Vorspann verwenden, so
 benutzt UDO zur Einbindung der Bilder den RTF-Befehl
 (!code [\bmcwd]) anstelle des Befehls (!code [\bmc]). Daraufhin
-speichert der Microsoft Helpcompiler die Bilder in
+speichert der Microsoft-Helpcompiler die Bilder in
 einem anderen Format in der WinHelp4-Datei, wodurch
 Bilder nicht mehr verzerrt dargestellt werden.
-Allerdings dürfen Bilder dann nicht größer als 64~KB
+Allerdings dürfen Bilder dann nicht größer als (!const [64])~KB
 sein. Nähere Informationen über den Unterschied
-zwischen den beiden RTF-Befehlen findet man in der Dokumentation zum HCP.
+zwischen den beiden RTF-Befehlen finden Sie in der Dokumentation zum (!file [HCP]).
 
 !item [(!SEEALSO)]
 (!KW [image])
@@ -312,15 +322,19 @@ Mit diesem Kommando kann man den Font setzen, der zur
 Darstellung von Klartext benutzt werden soll. Als
 Standard verwendet UDO den Font ""Courier New"".
 
-!item [(!EXAMPLE)]
-(!T)!/wh4_monofont Courier(!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~15
 
 !item [(!SEEALSO)]
 (!KW [wh4_propfont]), (!KW [wh4_monofont_size])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!wh4_monofont Courier
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -341,10 +355,7 @@ Größe des Monospaced-Font für WinHelp4 setzen.
 !item [(!DESCRIPTION)]
 Mit diesem Kommando kann man die Größe des Font setzen, der zur
 Darstellung von Klartext benutzt werden soll. Als
-Standard verwendet UDO 10~pt.
-
-!item [(!EXAMPLE)]
-(!T)!/wh4_monofont_size 10(!t)
+Standard verwendet UDO (!const [10])~pt.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~15
 
@@ -352,6 +363,13 @@ Standard verwendet UDO 10~pt.
 (!KW [wh4_monofont])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!wh4_monofont_size 12
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -372,15 +390,19 @@ Alte Keywords erzeugen (nur WinHelp4).
 Benutzt man im Vorspann diesen Schalter, erzeugt UDO wieder wie vor einiger Zeit WinHelp-Keywords,
 die aus dem Namen eines Nodes, Alias oder Labels gebildet werden.
 
-!item [(!EXAMPLE)]
-(!T)!/wh4_old_keywords(!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~11
 
 !item [(!SEEALSO)]
 (!KW [mapping]), (!KW [wh4_helpid]), (!KW [use_auto_helpids])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!wh4_old_keywords
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -400,15 +422,19 @@ Text vor HelpIDs stellen (nur WinHelp4).
 !item [(!DESCRIPTION)]
 Benutzt man im Vorspann diesen Schalter, wird jeder HelpID der ""(!TEXT)"" beim sichern vorangestellt.
 
-!item [(!EXAMPLE)]
-(!T)!/wh4_prefix_helpids UDO(!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~13
 
 !item [(!SEEALSO)]
 (!KW [mapping]), (!KW [wh4_helpid]), (!KW [use_auto_helpids])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!wh4_prefix_helpids UDO
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -429,15 +455,19 @@ Mit diesem Kommando kann man den Font setzen, der zur
 Darstellung des Hilfstextes einer Windows-Hilfe-Datei
 benutzt werden soll. Als Standard verwendet UDO den Font ""MS Sans Serif"".
 
-!item [(!EXAMPLE)]
-(!T)!/wh4_propfont Arial(!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~11
 
 !item [(!SEEALSO)]
 (!KW [wh4_monofont]), (!KW [wh4_propfont_size])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!wh4_propfont Arial
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -457,10 +487,7 @@ Größe für den Proportional-Font für WinHelp4 setzen.
 !item [(!DESCRIPTION)]
 Mit diesem Kommando kann man die Größe für den Font setzen, der zur
 Darstellung des Hilfstextes einer Windows-Hilfe-Datei
-benutzt werden soll. Als Standard verwendet UDO 8~pt.
-
-!item [(!EXAMPLE)]
-(!T)!/wh4_propfont_size 10(!t)
+benutzt werden soll. Als Standard verwendet UDO (!const [8])~pt.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~15
 
@@ -468,6 +495,13 @@ benutzt werden soll. Als Standard verwendet UDO 8~pt.
 (!KW [wh4_propfont])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!wh4_propfont_size 10
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -542,8 +576,7 @@ Setzt die Schriftfarbe Weiß.
 Dieser Platzhalter setzt die Schriftfarbe Weiß.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -551,6 +584,15 @@ PostScript unterstützt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!white)Weiß(!coloff) erscheint in der Farbe Weiß.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!white)Weiß(!coloff) erscheint in der Farbe Weiß.
+(!EXAMPLE_END)
 
 !end_node
 
@@ -570,20 +612,21 @@ Hintergrundfarbe für WinHelp setzen.
 !item [(!DESCRIPTION)]
 Mit diesem Kommando können Sie Hintergrundfarbe der
 Hilfedatei festlegen. Es stehen folgende Farben zur
-Verfügung: black, silver (hellgrau, ehemals ""grey""),
-gray (dunkelgrau, ""gray"", nicht ""grey""!), white, maroon,
-red, purple, fuchsia, green (dunkelgrün), lime (hellgrün),
-olive, yellow, navy, blue, teal und aqua (ehemals ""cyan"").
-Gleichzeitig passt UDO die Textfarbe
-an. Man sollte möglichst nur Weiß und Grau als
-Hintergrundfarben verwenden; alle anderen Farben sind furchtbar hässlich.
+Verfügung:
+!include colorcmd.de
 
-!item [(!EXAMPLE)]
-(!T)!/win_backcolor gray(!t)
+Gleichzeitig passt UDO die Textfarbe an.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!win_backcolor gray
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -638,10 +681,7 @@ Großschrift noch richtig formatiert wird. Bei
 normaler Schrift kann es jedoch sein, dass die Zeichen
 zu weit eingerückt werden oder das Tabellenzellen zu
 breit erscheinen. Mit diesem Schalter können sie den
-Berechnungswert anpassen. Standardmäßig benutzt UDO den Wert 150.
-
-!item [(!EXAMPLE)]
-(!T)!/win_charwidth 100(!t)
+Berechnungswert anpassen. Standardmäßig benutzt UDO den Wert (!const [150]).
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~4
 
@@ -649,6 +689,13 @@ Berechnungswert anpassen. Standardmäßig benutzt UDO den Wert 150.
 (!link [Tabellen] [Tabellen]), (!link [Listen] [Listen])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!win_charwidth 100
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -669,15 +716,19 @@ Ausgabe einer Node-ID (nur WinHelp).
 Dieser Befehl kann maximal einmal pro Node benutzt werden. Ausgegeben
 wird die ID wie ein Alias. Jump-IDs können als C- oder Pascal-Header-Datei ausgegeben werden.
 
-!item [(!EXAMPLE)]
-(!T)!/win_helpid 0815(!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~8
 
 !item [(!SEEALSO)]
 (!KW [mapping]), (!KW [use_auto_helpids]), (!KW [win_prefix_helpids])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!win_helpid 0815
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -749,7 +800,7 @@ bzw. (!KW [win_monofont]) gewählt werden.
 !begin_node (!kw [win_inline_bitmaps])
 !html_name  cmd_win_inline_bitmaps
 
-Inline Bitmaps benutzen (nur WinHelp).
+Inline-Bitmaps benutzen (nur WinHelp).
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -761,12 +812,12 @@ Inline Bitmaps benutzen (nur WinHelp).
 Wenn Sie diesen Schalter im Vorspann verwenden, so
 benutzt UDO zur Einbindung der Bilder den RTF-Befehl
 (!code [\bmcwd]) anstelle des Befehls (!code [\bmc]). Daraufhin
-speichert der Microsoft Helpcompiler die Bilder in
+speichert der Microsoft-Helpcompiler die Bilder in
 einem anderen Format in der WinHelp-Datei, wodurch
 Bilder nicht mehr verzerrt dargestellt werden.
-Allerdings dürfen Bilder dann nicht größer als 64~KB
+Allerdings dürfen Bilder dann nicht größer als (!const [64])~KB
 sein. Nähere Informationen über den Unterschied
-zwischen den beiden RTF-Befehlen findet man in der Dokumentation zum HCP.
+zwischen den beiden RTF-Befehlen findet man in der Dokumentation zum (!file [HCP]).
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
@@ -849,15 +900,19 @@ Namen des Monospaced-Font für WinHelp setzen.
 Mit diesem Kommando kann man den Font setzen, der zur
 Darstellung von Klartext benutzt werden soll. Als Standard verwendet UDO den Font ""Courier New"".
 
-!item [(!EXAMPLE)]
-(!T)!/win_monofont Courier(!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~15
 
 !item [(!SEEALSO)]
 (!KW [win_propfont]), (!KW [win_monofont_size])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!win_monofont Courier
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -878,10 +933,7 @@ Größe des Monospaced-Font für WinHelp setzen.
 !item [(!DESCRIPTION)]
 Mit diesem Kommando kann man die Größe des Font setzen, der zur
 Darstellung von Klartext benutzt werden soll.
-Als Standard verwendet UDO 10~pt.
-
-!item [(!EXAMPLE)]
-(!T)!/win_monofont_size 10(!t)
+Als Standard verwendet UDO (!const [10])~pt.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~15
 
@@ -889,6 +941,13 @@ Als Standard verwendet UDO 10~pt.
 (!KW [win_monofont])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!win_monofont_size 12
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -910,15 +969,19 @@ Benutzt man im Vorspann diesen Schalter,
 so erzeugt UDO wieder wie vor einiger Zeit WinHelp-Keywords,
 die aus dem Namen eines Nodes, Alias oder Labels gebildet werden.
 
-!item [(!EXAMPLE)]
-(!T)!/win_old_keywords(!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~11
 
 !item [(!SEEALSO)]
 (!KW [mapping]), (!KW [win_helpid]), (!KW [use_auto_helpids])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!win_old_keywords
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -938,15 +1001,19 @@ Text vor HelpIDs stellen (nur WinHelp).
 !item [(!DESCRIPTION)]
 Benutzt man im Vorspann diesen Schalter, wird jeder HelpID der ""(!TEXT)"" beim sichern vorangestellt.
 
-!item [(!EXAMPLE)]
-(!T)!/win_prefix_helpids UDO(!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~13
 
 !item [(!SEEALSO)]
 (!KW [mapping]), (!KW [win_helpid]), (!KW [use_auto_helpids])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!win_prefix_helpids UDO
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -968,15 +1035,19 @@ Mit diesem Kommando kann man den Font setzen, der zur
 Darstellung des Hilfstextes einer Windows-Hilfe-Datei
 benutzt werden soll. Als Standard verwendet UDO den Font ""Times New Roman"".
 
-!item [(!EXAMPLE)]
-(!T)!/win_propfont Arial(!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~12
 
 !item [(!SEEALSO)]
 (!KW [win_monofont]), (!KW [win_propfont_size])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!win_propfont Arial
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -997,10 +1068,7 @@ Größe des Proportional-Font für WinHelp setzen.
 !item [(!DESCRIPTION)]
 Mit diesem Kommando kann man die Größe des Font setzen, der zur
 Darstellung des Hilfstextes einer Windows-Hilfe-Datei
-benutzt werden soll. Als Standard verwendet UDO 11~pt.
-
-!item [(!EXAMPLE)]
-(!T)!/win_propfont_size 10(!t)
+benutzt werden soll. Als Standard verwendet UDO (!const [11])~pt.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~15
 
@@ -1008,6 +1076,13 @@ benutzt werden soll. Als Standard verwendet UDO 11~pt.
 (!KW [win_propfont])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!win_propfont_size 10
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 

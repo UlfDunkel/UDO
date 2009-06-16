@@ -18,6 +18,7 @@
 #   fd  Jun 09: 'file' -> 'Datei'
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: LINK macro introduced
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -38,7 +39,7 @@ Indexeintrag bzw. Schlüsselwort setzen.
 !item [(!SYNTAX)] (!T)!/x (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [index]).
+(!ABBREV) (!KW [index])
 
 !item [(!SEEALSO)]
 (!KW [index])
@@ -69,21 +70,27 @@ auf die Seite der Deutschen Telekom erzeugt. ""(!LINK)""
 kann auch leer sein, dann wird für ""(!LINK)"" der Inhalt
 von ""(!TEXT)"" ausgegeben.
 
-Kommt in einem Verweis eine Tilde vor,
-so braucht dieser bei Verwendung im (!KKW [xlink])-Kommando
-(!I)kein(!i) Ausrufezeichen vorangestellt zu werden.
+Kommt in einem Verweis eine Tilde vor, so braucht sie bei Verwendung im (!KKW [xlink])-Kommando (!I)nicht(!i) durch ein Ausrufezeichen geschützt zu werden.
 
 # ToDo: was ist der Unterschied zu !url ?
-
-!item [(!EXAMPLE2)]
-(!T)(!/xlink [Deutsche Telekom] [http://www.dtag.de])(!t) (!nl)
-(!T)(!/xlink [irgendwas] [http://www.domain.de/!~user/index.html])(!t)
-# ToDo: andere Beispiele verwenden!
 
 !item [(!SEEALSO)]
 (!KKW [link]), (!KKW [plink]), (!KKW [url]), (!KW [no_xlinks]), (!link [Querverweise] [Querverweise])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!xlink [BugTracker der UDO-Website] [http://bugs.udo-open-source.org/]) | 
+(!xlink [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
+(!xlink [http://www.google.de/] [])
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!xlink [BugTracker der UDO-Website] [http://bugs.udo-open-source.org/]) | 
+(!xlink [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
+(!xlink [http://www.google.de/] [])
+(!EXAMPLE_END)
 
 !end_node
 

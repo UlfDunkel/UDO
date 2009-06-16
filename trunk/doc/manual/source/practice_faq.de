@@ -20,6 +20,7 @@
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -142,8 +143,8 @@ im Text automatisch Querverweise zu Kapiteln und Sprungmarken an.
 Es werden dabei nur Verweise auf ""andere"" Seiten angelegt, also
 keine Verweise auf Stellen der aktuellen Seite.
 
-Mit dem Schaltern (!KW [autoref]) kann man die automatische Referenzierung aus- (Parameter (!I)[off](!i)) und wieder einschalten (Parameter
-(!I)[on](!i)).
+Mit dem Schaltern (!KW [autoref]) kann man die automatische Referenzierung aus- (Parameter (!C)[off](!c)) und wieder einschalten (Parameter
+(!C)[on](!c)).
 
 # = = =
 

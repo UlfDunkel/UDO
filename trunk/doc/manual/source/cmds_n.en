@@ -17,6 +17,8 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 16: html_name no longer uses CAPITAL letters
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -26,7 +28,7 @@
 # = = = = =
 
 !begin_node (!kkkw [N] [n])
-!html_name  cmd_N()
+!html_name  cmd_n()
 !label (!kk1 [/N])
 !label (!kk1 [/n])
 
@@ -66,7 +68,7 @@ Start a chapter.
 !item [(!SYNTAX)] (!T)!/n [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [node]).
+(!ABBREV) (!KW [node])
 
 !item [(!SEEALSO)]
 (!KW [node])
@@ -89,7 +91,7 @@ Start a hidden chapter.
 !item [(!SYNTAX)] (!T)!/n* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [node*]).
+(!ABBREV) (!KW [node*])
 
 !item [(!SEEALSO)]
 (!KW [node*])
@@ -116,8 +118,7 @@ Sets the textcolor navy.
 Dieser Platzhalter setzt die Schriftfarbe Marineblau.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -125,6 +126,15 @@ PostScript unterstützt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!navy)Marineblau(!coloff) erscheint in der Farbe Marineblau.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!navy)Marineblau(!coloff) erscheint in der Farbe Marineblau.
+(!EXAMPLE_END)
 
 !end_node
 

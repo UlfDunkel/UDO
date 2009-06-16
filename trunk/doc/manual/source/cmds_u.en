@@ -24,6 +24,8 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: html_name no longer uses CAPITAL letters
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -33,7 +35,7 @@
 # = = = = =
 
 !begin_node (!kkkw [U] [u])
-!html_name  cmd_U()
+!html_name  cmd_u()
 
 !label (!kk1 [/U])
 !label (!kk1 [/u])
