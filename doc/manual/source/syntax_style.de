@@ -24,6 +24,7 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 10: using macro (!const [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -198,7 +199,7 @@ verschachtelt und mit dem Schalter (!KW [short]) benutzt wird.
 Die description-Umgebung ist dafür geeignet, eine Beschreibung von
 mehreren Begriffen zu erzeugen, wobei Begriffe fett dargestellt werden.
 
-Ein Aufzählungspunkt wird durch (!KW [item] [[(!TEXT)!!]]) gekennzeichnet,
+Ein Aufzählungspunkt wird durch (!KW [item]) (!C)[(!TEXT)](!c) gekennzeichnet,
 wobei ""(!TEXT)"" in der Aufzählung fett dargestellt wird.
 
 Die description-Umgebung ist mehrfach schachtelbar und lässt sich auch
@@ -251,12 +252,12 @@ Die xlist-Umgebung eignet sich, genau wie die description-Umgebung, zur
 Erläuterung von Begriffen. Bei dieser Umgebung werden die
 Beschreibungen der Begriffe jedoch alle untereinander aufgeführt. Wie
 weit die Beschreibungen eingerückt wird, hängt von der Länge des bei
-(!KW [begin_xlist] [[(!TEXT)!!]]) übergebenen Textes ab. Die beiden eckigen
+(!KW [begin_xlist]) (!C)[(!TEXT)](!c) übergebenen Textes ab. Die beiden eckigen
 Klammern werden dabei nicht mitgezählt.
 
-Die Umgebung wird mit (!KW [begin_xlist] [[(!TEXT)!!]]) eingeleitet und mit
+Die Umgebung wird mit (!KW [begin_xlist]) (!C)[(!TEXT)](!c) eingeleitet und mit
 (!KW [end_xlist]) beendet. Ein Aufzählungsbegriff wird wie bei der
-description-Umgebung durch (!KW [item] [[(!TEXT)!!]]) gekennzeichnet.
+description-Umgebung durch (!KW [item]) (!C)[(!TEXT)](!c) gekennzeichnet.
 
 Die Umgebungen können mehrfach verschachtelt benutzt werden und lassen
 sich auch mit anderen Umgebungen kombinieren.
@@ -471,14 +472,6 @@ Beispiel erzielt:
 !include (!EXAMPLES)quote.ui
 (!EXAMPLE_END)
 
-(!HINT)
-
-Bei HTML werden die Einrückungen durch (!code [<blockquote>]) erzeugt.
-Netscape und CAB geben solche Absätze auch eingerückt aus; Mosaic
-hingegen rückt diese Absätze nicht ein, sondern ermöglicht nur
-die Zuweisung eines speziellen Fonts. Als Defaulteinstellung wird hier
-ein kursiver Font benutzt.
-
 !end_node # Einrücken von Absätzen
 
 # = = = = =
@@ -558,8 +551,8 @@ Formatbefehle.
 !html_name  style_linegraphics
 !label      linedraw-Umgebung
 
-Normalerweise ersetzt UDO DOS-Grafikzeichen durch die ASCII-Zeichen ""+"",
-""-"" und ""|"", um z.B. DOS-Screenshots halbwegs realistisch
+Normalerweise ersetzt UDO DOS-Grafikzeichen durch die ASCII-Zeichen ""(!code [+])"",
+""(!code [--])"" und ""(!code [|])"", um z.B. DOS-Screenshots halbwegs realistisch
 darzustellen. Eine direkte Einbindung von Screenshots, die DOS-Grafikzeichen
 enthalten, ist daher nicht möglich.
 
@@ -577,7 +570,7 @@ wird der vorformatierte Text zusätzlich eingerückt.
 Bei Nicht-RTF-Formaten wird auf den DOS-Zeichensatz umgeschaltet,
 bei RTF wird der Zeichensatz ""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm])""
 benutzt. Bei der Ausgabe ins (!LaTeX)-Format werden die Befehle
-(!V)\begin{verbatim}(!v) und (!V)\end{verbatim}(!v) ausgegeben. Bei den
+(!code [\begin{verbatim}]) und (!code [\end{verbatim}]) ausgegeben. Bei den
 anderen Formaten wird (falls nötig) ein nichtproportionaler Font
 eingestellt und werden Sonderzeichen automatisch angepasst.
 
@@ -597,7 +590,7 @@ Befehlskombination aus (!KW [begin_linedraw]), (!KW [include]) und
 
 !smallskip
 
-(!HINTS)
+(!HINT)
 
 !begin_enumerate
 !item Da andere Umgebungen im Quelltext eingerückt werden können,
@@ -606,8 +599,6 @@ Befehlskombination aus (!KW [begin_linedraw]), (!KW [include]) und
      Leerzeichen bei der Ausgabe des vorformatierten Textes übernommen
      werden und dieser dann in der späteren Ausgabedatei zuweit rechts
      stehen würde, falls Sie den Text der linedraw-Umgebung einrücken.
-
-!item Word für Windows zeigt die Passagen korrekt an, WordPad95 hingegen nicht (warum auch immer).
 
 !end_enumerate
 
@@ -620,13 +611,13 @@ Befehlskombination aus (!KW [begin_linedraw]), (!KW [include]) und
 
 Text, der durch (!KK1 [N]) und (!KK1 [n]) eingefasst wird, wird in eine Fußnote
 umgewandelt, sofern das Ausgabeformat Fußnoten unterstützt. Bei den
-anderen Ausgabeformaten wird (!KK1 [N]) einfach durch ""~("" und (!KK1 [n]) durch
-"")"" ersetzt; die Fußnote erscheint hier also einfach in Klammern.
+anderen Ausgabeformaten wird (!KK1 [N]) einfach durch ""(!code [~(])"" und (!KK1 [n]) durch
+""(!code [!)])"" ersetzt; die Fußnote erscheint hier also einfach in Klammern.
 
-Wichtig: Vor (!KK1 [N]) sollte kein Leerzeichen stehen, da sonst die
+(!B)Wichtig:(!b) Vor (!KK1 [N]) sollte kein Leerzeichen stehen, da sonst die
 Fußnotenmarkierung später in der Ausgabedatei frei im Raum steht und
 der Bezug weniger klar erkenntlich wird! Unterstützt das Ausgabeformat
-keine Fußnoten, gibt UDO vor der öffnenden Klammer zusätzlich noch das
+keine Fußnoten, gibt UDO vor der öffnenden Klammer (!code [(]) zusätzlich noch das
 fehlende Leerzeichen aus.
 
 (!EXAMPLE_BEFORE)
@@ -680,26 +671,8 @@ Sinn, hier ein Beispiel:
 In der folgenden Tabelle können Sie ablesen, durch welche Kommandos
 die Schriftarten im jeweiligen Format erzeugt werden:
 
-#Ausgabe-Formate
-!begin_table [|l|l|l|l|l|l|l|] !hline
-UDO          !! ASCII     !! ST-Guide     !! LaTeX               !! RTF                 !! WinHelp      !! HTML
-!hline
-(!KK1 [B])   !! (!V)*(!v) !! (!V)@{B}(!v) !! (!V){\bf(!v)        !! (!V){\b(!v)         !! (!V){\b(!v)  !! (!V)<b>(!v)
-(!KK1 [b])   !! (!V)*(!v) !! (!V)@{b}(!v) !! (!V)}(!v)           !! (!V)}(!v)           !! (!V)}(!v)    !! (!V)</b>(!v)
-(!KK1 [I])   !! (!V)/(!v) !! (!V)@{I}(!v) !! (!V){\it(!v)        !! (!V){\i(!v)         !! (!V){\i(!v)  !! (!V)<i>(!v)
-(!KK1 [i])   !! (!V)/(!v) !! (!V)@{i}(!v) !! (!V)}(!v)           !! (!V)}(!v)           !! (!V)}(!v)    !! (!V)</i>(!v)
-(!KK1 [U])   !! (!V)_(!v) !! (!V)@{U}(!v) !! (!V){\underline(!v) !! (!V){\ul(!v)        !! (!V){\ul(!v) !! (!V)<u>(!v)
-(!KK1 [u])   !! (!V)_(!v) !! (!V)@{u}(!v) !! (!V)}(!v)           !! (!V)}(!v)           !! (!V)}(!v)    !! (!V)</u>(!v)
-(!KK1 [V])   !! (!V) (!v) !! (!V)    (!v) !! (!V)\verb+(!v)      !! (!V){\f1(!v)        !! (!V){\f1(!v) !! (!V)<pre>(!v)
-(!KK1 [v])   !! (!V) (!v) !! (!V)    (!v) !! (!V)+(!v)           !! (!V)}(!v)           !! (!V)}(!v)    !! (!V)</pre>(!v)
-(!KK1 [T])   !! (!V) (!v) !! (!V)    (!v) !! (!V){\tt(!v)        !! (!V){\f1(!v)        !! (!V){\f1(!v) !! (!V)<t>(!v)
-(!KK1 [t])   !! (!V) (!v) !! (!V)    (!v) !! (!V)}(!v)           !! (!V)}(!v)           !! (!V)}(!v)    !! (!V)</tt>(!v)
-(!KK1 [SUB]) !! (!V) (!v) !! (!V)    (!v) !! (!V)$_{\mbox{(!v)   !! (!V)\sub(!v)        !! (!V) (!v)    !! (!V)<sub>(!v)
-(!KK1 [sub]) !! (!V) (!v) !! (!V)    (!v) !! (!V)}}${(!v)        !! (!V)\nosupersub(!v) !! (!V) (!v)    !! (!V)</sub>(!v)
-(!KK1 [SUP]) !! (!V) (!v) !! (!V)    (!v) !! (!V)$^{\mbox{(!v)   !! (!V)\super(!v)      !! (!V) (!v)    !! (!V)<sup>(!v)
-(!KK1 [sup]) !! (!V) (!v) !! (!V)    (!v) !! (!V)}}${(!v)        !! (!V)\nosupersub(!v) !! (!V) (!v)    !! (!V)</sup>(!v)
-!hline
-!end_table
+# Textstil-Ausgabeformate
+!include _styles.ui
 
 Wie man sieht, werden bei der Ausgabe ins ASCII-Format die Zeichen zur
 Einschaltung von Schriftarten benutzt, wie sie im Usenet üblich
@@ -742,42 +715,12 @@ Normal und (!G)ghosted(!g).
 !begin_node Schriftfarben
 !html_name  style_textcolors
 
-UDO unterstützt das Einstellen bestimmter Schriftfarben im Ausgabeformat. 
-Dazu stehen mehrere Kommandos zur Verfügung:
+UDO unterstützt verschiedene Systemfarben für die Textgestaltung. Zur Zeit sind es folgende Farben:
 
-!begin_flushleft
-!begin_table [ll]
-(!KK1 [black])   !! (!black)Schwarz(!coloff)
-(!KK1 [silver])  !! (!silver)Hellgrau(!coloff)
-(!KK1 [gray])    !! (!gray)(Dunkel-)Grau(!coloff)
-(!KK1 [white])   !! (!white)Weiß(!coloff)
-(!KK1 [maroon])  !! (!maroon)Kastanienbraun(!coloff)
-(!KK1 [red])     !! (!red)Rot(!coloff)
-(!KK1 [purple])  !! (!purple)Lila(!coloff)
-(!KK1 [fuchsia]) !! (!fuchsia)Magenta(!coloff)
-(!KK1 [green])   !! (!green)Grün(!coloff)
-(!KK1 [lime])    !! (!lime)Hellgrün(!coloff)
-(!KK1 [olive])   !! (!olive)Olivgrün(!coloff)
-(!KK1 [yellow])  !! (!yellow)Gelb(!coloff)
-(!KK1 [navy])    !! (!navy)Marineblau(!coloff)
-(!KK1 [blue])    !! (!blue)Blau(!coloff)
-(!KK1 [teal])    !! (!teal)Blaugrün(!coloff)
-(!KK1 [aqua])    !! (!aqua)Cyan(!coloff)
-!end_table
-!end_flushleft
+!index Farben
+!include colors.de
 
-Mit dem Kommando (!KKW [coloff]) wird wieder auf die Standardfarbe Schwarz zurückgeschaltet.
-
-(!EXAMPLE_BEFORE)
-!begin_verbatim
-(!red)Farbe in UDO(!coloff)
-!end_verbatim
-(!EXAMPLE_AFTER)
-(!red)Farbe in UDO(!coloff)
-(!EXAMPLE_END)
-
-Das Setzen der Farben wird zur Zeit bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !end_node # Schriftfarben
 
@@ -800,7 +743,7 @@ sollen.
 Um mit UDO Tabellen zu setzen, benötigen Sie folgende Kommandos:
 
 !begin_enumerate !short
-!item (!KW [table_caption] [(!TEXT)])
+!item (!KW [table_caption]) (!C)[(!TEXT)](!c)
 !item (!KW [begin_table] [[...!!]]) {(!KW [hline])}
 !item (!KW [end_table])
 !item (!KW [hline])
@@ -814,9 +757,9 @@ darf also nicht innerhalb dieser Umgebung stehen.
 Das Kommando (!KW [begin_table]) leitet eine Tabelle ein. Das Ende der
 Tabelle wird mit (!KW [end_table]) angegeben. Direkt nach
 (!KW [begin_table]) können Sie angeben, wie die Spalten der Tabelle
-ausgerichtet werden sollen (l=linksbündig, c=zentriert, r=rechtsbündig)
+ausgerichtet werden sollen (""(!code[l])"" = linksbündig, ""(!code[c])"" = zentriert, ""(!code[r])"" = rechtsbündig)
 und vor und nach welchen Spalten vertikale Linien gezogen werden sollen
-(durch das Symbol ""|""). Folgt diesen Angaben noch das Kommando
+(durch das Symbol ""(!code[|])""). Folgt diesen Angaben noch das Kommando
 (!KW [hline]), beginnt die Tabelle mit einer horizontalen Linie.
 
 Nachdem Sie das Format der Tabelle angegeben haben, folgt der
@@ -858,7 +801,7 @@ unten links !! unten mitte !! unten rechts
 !end_table
 (!EXAMPLE_END)
 
-Da vor und nach jeder Spalte ein ""|"" angegeben ist, werden die Spalten
+Da vor und nach jeder Spalte ein ""(!code[|])"" angegeben ist, werden die Spalten
 durch vertikale Linien voneinander getrennt. Die Tabelle beginnt mit
 einer horizontalen Linie, da bereits in der Zeile mit
 (!KW [begin_table]) ein (!KW [hline]) angegeben wurde. Schließlich endet die
@@ -867,7 +810,7 @@ ein (!KW [hline]) angegeben wurde.
 
 Hier noch ein weiteres Beispiel einer Tabelle, die den gleichen Inhalt
 zeigt, wie die obige Tabelle, aber bei der keine Linien benutzt
-werden. Dies wird dadurch ermöglicht, indem man kein ""|"" und kein
+werden. Dies wird dadurch ermöglicht, indem man kein ""(!code[|])"" und kein
 (!KW [hline]) verwendet. Das Ergebnis:
 
 (!EXAMPLE_BEGIN)
@@ -881,10 +824,10 @@ unten links !! unten mitte !! unten rechts
 
 !index (!kw [use_ansi_tables])
 UDO bietet einen Schalter an, um die Linien der Tabelle nicht mit den
-ASCII-Zeichen ""+"", ""--"" und ""|"" zu erzeugen. Wird im Vorspann der Schalter
+ASCII-Zeichen ""(!code[+])"", ""--"" und ""(!code[|])"" zu erzeugen. Wird im Vorspann der Schalter
 (!KW [use_ansi_tables]) benutzt, werden die Linien der Tabelle mit
 Hilfe der Grafikzeichen aus dem PC-Zeichensatz erzeugt. Auf die Formate
-WinHelp, RTF, HTML und (!LateX) hat dieser Schalter keinen Einfluss.
+WinHelp, RTF, HTML und (!LaTeX) hat dieser Schalter keinen Einfluss.
 
 !smallskip
 
@@ -894,7 +837,7 @@ WinHelp, RTF, HTML und (!LateX) hat dieser Schalter keinen Einfluss.
 !item Tabellen werden immer zentriert ausgegeben.
 
 !item In HTML kann man die Benutzung von Linien nicht frei festlegen,
-daher werden Tabellen dort immer mit frame=box erzeugt, falls man in
+daher werden Tabellen dort immer mit (!code [frame=box]) erzeugt, falls man in
 der Zeile mit (!KW [begin_table]) den Befehl (!KW [hline]) benutzt.
 
 !item Für WinHelp werden die Möglichkeiten zur Tabellenausgabe

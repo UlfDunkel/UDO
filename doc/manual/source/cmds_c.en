@@ -22,6 +22,7 @@
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 12: macro renamed: CODE -> CHARSET
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -403,8 +404,7 @@ Abschalten der gesetzen Schriftfarbe.
 !item [(!DESCRIPTION)]
 Dieser Platzhalter wird die gesetzt die Schriftfarbe abgeschlossen.
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -412,6 +412,15 @@ PostScript unterstützt.
 Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!red)Nach dem Platzhalter coloff(!coloff) erscheint Text wieder in der Standardfarbe Schwarz.
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!red)Nach dem Platzhalter coloff(!coloff) erscheint Text wieder in der Standardfarbe Schwarz.
+(!EXAMPLE_END)
 
 !end_node
 

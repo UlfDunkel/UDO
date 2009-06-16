@@ -14,10 +14,11 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from udowork.ui)
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
-(!B)UDO(!b) converts files from its own UDO format into the following formats:
+UDO converts files from its own UDO format into the following formats:
 AmigaGuide, Apple QuickView, ASCII, David's Readme-Compiler,
 HP-Helptag-SGML, HTML, HTML-Help, OS/2 IPF, (!LaTeX), Linuxdoc-SGML,
 LyX, Manualpage, Nroff, Pure-C-Help, PDF(!LaTeX), PostScript, RTF,

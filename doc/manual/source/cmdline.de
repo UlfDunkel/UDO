@@ -24,6 +24,7 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using ndash instead of mdash in German texts
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -33,8 +34,8 @@ udo -- Dateien vom UDO-Format in andere Formate umwandeln
 # = = = = =
 
 !subheading Synopsis
-udo [-acdDfghHilmnpPqrstuvwWxy4]    (!U)(!V)Quelldatei(!v)(!u) (!nl)
-udo [-acdDfghHilmnpPqrstuvwWxy4] -o (!U)(!V)Zieldatei(!v)(!u) (!U)(!V)Quelldatei(!v)(!u)
+udo [-acdDfghHilmnpPqrstuvwWxy4]    (!U)(!file [Quelldatei])(!u) (!nl)
+udo [-acdDfghHilmnpPqrstuvwWxy4] -o (!U)(!file [Zieldatei])(!u) (!U)(!file [Quelldatei])(!u)
 
 # = = = = =
 
@@ -49,13 +50,13 @@ udo [-acdDfghHilmnpPqrstuvwWxy4] -o (!U)(!V)Zieldatei(!v)(!u) (!U)(!V)Quelldatei
 In der ersten Form erfolgen Ausgaben auf die Standardausgabe (stdout),
 Fehlermeldungen werden auf die Standardfehlerausgabe (stderr)
 ausgegeben. In der zweiten Form werden Ausgaben in die
-(!U)Zieldatei(!u) geschrieben, Fehlermeldungen in eine Protokolldatei
+(!file [Zieldatei]) geschrieben, Fehlermeldungen in eine (!file [Protokolldatei])
 mit der Dateimaske (!file [*.ul*]).
 
 Die Optionen müssen einzeln übergeben werden: (!code [-al]) wird nicht als (!code [-a -l])
 interpretiert!
 
-Der Name der Quelldatei muss als letzter Parameter übergeben werden.
+Der Name der (!file [Quelldatei]) muss als letzter Parameter übergeben werden.
 
 # = = = = =
 
@@ -66,13 +67,13 @@ Der Name der Quelldatei muss als letzter Parameter übergeben werden.
 
 !item [-@ F] UDO liest dann aus der Datei ""F"" die Optionen. In dieser Datei muss in jeder Zeile genau eine Option stehen.
 
-!item [-a, (--)asc] Die (!U)Quelldatei(!u) wird ins ASCII-Format umgewandelt.
+!item [-a, (--)asc] Die (!file [Quelldatei]) wird ins ASCII-Format umgewandelt.
 
-!item [(--)amg] Die (!U)Quelldatei(!u) wird ins AmigaGuide-Format umgewandelt.
+!item [(--)amg] Die (!file [Quelldatei]) wird ins AmigaGuide-Format umgewandelt.
 
-!item [(--)aqv, (--)quickview] Die (!U)Quelldatei(!u) wird ins Apple-QuickView-Format umgewandelt.
+!item [(--)aqv, (--)quickview] Die (!file [Quelldatei]) wird ins Apple-QuickView-Format umgewandelt.
 
-!item [-c, (--)c] Die (!U)Quelldatei(!u) wird in C-Sourcecode
+!item [-c, (--)c] Die (!file [Quelldatei]) wird in C-Sourcecode
 umgewandelt. Normaler Text wird Kommentar, der Inhalt der Sourcecode-Umgebung wird C-Code.
 
 !item [(--)check] Zusätzliche Überprüfungen aktivieren.
@@ -80,7 +81,7 @@ umgewandelt. Normaler Text wird Kommentar, der Inhalt der Sourcecode-Umgebung wi
 !item [-d, (--)no-idxfile]
 Erzeugung von Indexdateien unterdrücken.
 
-!item [(--)drc] Die (!U)Quelldatei(!u) wird ins DRC-Format (David's Readme Compiler) umgewandelt.
+!item [(--)drc] Die (!file [Quelldatei]) wird ins DRC-Format (David's Readme Compiler) umgewandelt.
 
 !item [-D symbol] Setzen des Symbols ""symbol"", welches sich im
 Quelltext mit dem Befehl (!KW [ifset]) abfragen lässt.
@@ -92,29 +93,29 @@ lange Dateinamen zu erzeugen (Suffix (!file [.html]) anstatt (!file [.htm])).
 
 !item [(--)force-short] Erzwingt unter Betriebssystemen, die lange Dateinamen beherrschen, die Erzeugung von kurzen Dateinamen (8+3).
 
-!item [-f, (--)pdflatex] Die (!U)Quelldatei(!u) wird in PDF(!LaTeX)-Quellcode umgewandelt.
+!item [-f, (--)pdflatex] Die (!file [Quelldatei]) wird in PDF(!LaTeX)-Quellcode umgewandelt.
 
-!item [-g, (--)helptag] Die (!U)Quelldatei(!u) wird ins HP-Helptag-SGML-Format umgewandelt.
+!item [-g, (--)helptag] Die (!file [Quelldatei]) wird ins HP-Helptag-SGML-Format umgewandelt.
 
 !item [(--)help] Ausgabe einer Hilfsseite, die diese Optionen erklärt.
 
-!item [-h, (--)html] Die (!U)Quelldatei(!u) wird ins HTML-Format umgewandelt.
+!item [-h, (--)html] Die (!file [Quelldatei]) wird ins HTML-Format umgewandelt.
 
-!item [(--)hah] Die (!U)Quelldatei(!u) wird ins HTML Apple Help Format umgewandelt.
+!item [(--)hah] Die (!file [Quelldatei]) wird ins HTML Apple Help Format umgewandelt.
 
-!item [-hh, (--)htmlhelp] Die (!U)Quelldatei(!u) wird ins HTML-Help-Format umgewandelt.
+!item [-hh, (--)htmlhelp] Die (!file [Quelldatei]) wird ins HTML-Help-Format umgewandelt.
 
-!item [-H, (--)hold] (!B)UDO(!b) wartet am Programmende auf einen Tastendruck.
+!item [-H, (--)hold] UDO wartet am Programmende auf einen Tastendruck.
 
-!item [-i, (--)info] Die (!U)Quelldatei(!u) wird ins GNU-Texinfo-Format umgewandelt.
+!item [-i, (--)info] Die (!file [Quelldatei]) wird ins GNU-Texinfo-Format umgewandelt.
 
-!item [(--)ipf] Die (!U)Quelldatei(!u) wird ins OS/2 IPF-Format umgewandelt.
+!item [(--)ipf] Die (!file [Quelldatei]) wird ins OS/2 IPF-Format umgewandelt.
 
-!item [-l, (--)no-logfile] (!B)UDO(!b) legt (bei gleichzeitiger Verwendung von -o) keine Protokolldatei an.
+!item [-l, (--)no-logfile] UDO legt (bei gleichzeitiger Verwendung von -o) keine Protokolldatei an.
 
-!item [(--)lyx] Die (!U)Quelldatei(!u) wird ins LyX-Format umgewandelt.
+!item [(--)lyx] Die (!file [Quelldatei]) wird ins LyX-Format umgewandelt.
 
-!item [-m, (--)man] Die (!U)Quelldatei(!u) wird ins Manualpage-Format umgewandelt.
+!item [-m, (--)man] Die (!file [Quelldatei]) wird ins Manualpage-Format umgewandelt.
 
 !item [(--)map] Erzeugt eine Header-Datei für C, in denen Konstanten mit allen WinHelp-Jump-IDs ausgegeben werden.
 
@@ -124,30 +125,29 @@ lange Dateinamen zu erzeugen (Suffix (!file [.html]) anstatt (!file [.htm])).
 
 !item [(--)map-vb] Erzeugt eine Map-Datei der WinHelp-Jump-IDs für Visual Basic.
 
-!item [-n, (--)nroff] Die (!U)Quelldatei(!u) wird ins Nroff-Format umgewandelt.
+!item [-n, (--)nroff] Die (!file [Quelldatei]) wird ins Nroff-Format umgewandelt.
 
-!item [-o F, (--)outfile F]  (!B)UDO(!b) schreibt seine Ausgaben in die Datei namens ""F"".
-# ergänzt 10.01.2004 - Ulrich Kretschmer
+!item [-o F, (--)outfile F]  UDO schreibt seine Ausgaben in die Datei namens ""F"".
 Mit (!code [-o]) wird als Ausgabedateiname der Name der Quelldatei plus neuer Extension verwendet (z.B. (!file [file.u]) wird zu (!file [file.stg])).
 
-!item [-p, (--)pchelp] Die (!U)Quelldatei(!u) wird ins Pure-C-Help-Quelltextformat umgewandelt.
+!item [-p, (--)pchelp] Die (!file [Quelldatei]) wird ins Pure-C-Help-Quelltextformat umgewandelt.
 
-!item [-P, (--)pascal] Die (!U)Quelldatei(!u) wird in Pascal-Sourcecode
+!item [-P, (--)pascal] Die (!file [Quelldatei]) wird in Pascal-Sourcecode
 umgewandelt. Normaler Text wird Kommentar, der Inhalt der Sourcecode-Umgebung wird C-Code.
 
-!item [(--)ps] Die (!U)Quelldatei(!u) wird ins PostScript-Format umgewandelt.
+!item [(--)ps] Die (!file [Quelldatei]) wird ins PostScript-Format umgewandelt.
 
 !item [-q, (--)quiet] Die Ausgabe von Statusmeldungen wird unterdrückt.
 
-!item [-r, (--)rtf] Die (!U)Quelldatei(!u) wird ins Rich-Text-Format (RTF) umgewandelt.
+!item [-r, (--)rtf] Die (!file [Quelldatei]) wird ins Rich-Text-Format (RTF) umgewandelt.
 
-!item [-s, (--)stg] Die (!U)Quelldatei(!u) wird ins ST-Guide-Format umgewandelt.
+!item [-s, (--)stg] Die (!file [Quelldatei]) wird ins ST-Guide-Format umgewandelt.
 
 !item [(--)save-upr] Wird diese Option benutzt, legt UDO eine
 Projekt-Datei mit dem Suffix (!file [.upr]) mit einer Liste der benutzten
 und erzeugten Dateien an.
 
-!item [-t, (--)tex] Die (!U)Quelldatei(!u) wird ins (!LaTeX)-Format umgewandelt.
+!item [-t, (--)tex] Die (!file [Quelldatei]) wird ins (!LaTeX)-Format umgewandelt.
 
 !item [(--)test] Bei zusätzlicher Angabe dieser Option, wird keine
 Ausgabedatei erzeugt, sondern nur eine Protokolldatei und ggf. die Datei mit
@@ -159,27 +159,27 @@ Bei intensiver Benutzung des Befehls (!KW [include]) sieht man damit,
 welche Dateien andere Dateien nachladen.
 
 !item [-u, (--)udo] Erzeugt eine Datei im UDO-Format, die sämtliche inkludierten UDO-Quelltexte enthält.
-# Die (!U)Quelldatei(!u) wird ins UDO-Format umgewandelt.
+# Die (!file [Quelldatei]) wird ins UDO-Format umgewandelt.
 
-!item [-v, (--)vision] Die (!U)Quelldatei(!u) wird ins Turbo-Vision-Help-Format umgewandelt.
+!item [-v, (--)vision] Die (!file [Quelldatei]) wird ins Turbo-Vision-Help-Format umgewandelt.
 
 !item [(--)verbose] Bei der Konvertierung werden zusätzlich Informationen
 über die gerade bearbeitete Datei und das gerade bearbeitete Kapitel ausgegeben.
 
-!item [(--)version] Ausgabe der Version von (!B)UDO(!b).
+!item [(--)version] Ausgabe der Version von UDO.
 
-!item [-w, (--)win] Die (!U)Quelldatei(!u) wird ins WinHelp-Quelltextformat umgewandelt.
+!item [-w, (--)win] Die (!file [Quelldatei]) wird ins WinHelp-Quelltextformat umgewandelt.
 
-!item [-4, (--)win4] Die (!U)Quelldatei(!u) wird ins WinHelp4-Quelltextformat umgewandelt.
+!item [-4, (--)win4] Die (!file [Quelldatei]) wird ins WinHelp4-Quelltextformat umgewandelt.
 
 !item [-W, (--)no-warnings] UDO gibt keine Warnungen, sondern nur Fehler aus.
 
-!item [-Wl, (--)no-warningslines] Warnungen fÜr Zeilenlänge unterdrÜcken. Ergibt nur Sinn, wenn
+!item [-Wl, (--)no-warningslines] Warnungen für Zeilenlänge unterdrücken. Ergibt nur Sinn, wenn
           UDO Warnungen ausgeben soll.
 
-!item [-x, (--)linuxdoc] Die (!U)Quelldatei(!u) wird ins Linuxdoc-SGML-Format umgewandelt.
+!item [-x, (--)linuxdoc] Die (!file [Quelldatei]) wird ins Linuxdoc-SGML-Format umgewandelt.
 
-!item [-y, (--)no-hypfile] (!B)UDO(!b) legt (bei gleichzeitiger Verwendung von -o) keine Datei mit Trennvorschlägen an.
+!item [-y, (--)no-hypfile] UDO legt (bei gleichzeitiger Verwendung von (!code [-o])) keine Datei mit Trennvorschlägen an.
 
 !end_tlist
 
@@ -216,14 +216,14 @@ falls (!B)UDOPATH(!b) nicht existiert ((!file [udo.ini]) betrifft nur die Atari-
 fest, wenn weder (!B)LC_ALL(!b) noch (!B)LC_MESSAGES(!b) existiert.
 
 !item [LC_ALL] Wenn diese Environmentvariable auf ""german"" gesetzt ist,
-benutzt (!B)UDO(!b) deutschsprachige Meldungen. Für andere Werte werden
+benutzt UDO deutschsprachige Meldungen. Für andere Werte werden
 englischsprachige Meldungen benutzt. Existiert diese Variable nicht,
 wird stattdessen (!B)LC_MESSAGES(!b) überprüft.
 
 !item [LC_MESSAGES] Siehe (!B)LC_ALL(!b). Wenn auch diese Variable
 nicht existiert, wird stattdessen (!B)LANG(!b) benutzt.
 
-!item [UDOPATH] In diesem Verzeichnis sucht UDO nach der Datei ""udo.ini"".
+!item [UDOPATH] In diesem Verzeichnis sucht UDO nach der Datei (!file [udo.ini]).
 Falls (!B)UDOPATH(!b) nicht existiert, wird stattdessen in
 (!B)$HOME(!b) gesucht.
 

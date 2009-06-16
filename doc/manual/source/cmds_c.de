@@ -22,6 +22,7 @@
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 12: macro renamed: CODE -> CHARSET
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -127,15 +128,19 @@ anstelle einer Kapitelüberschrift die Grafik
 ""(!FILE)"" verwendet, falls im Vorspann der Schalter
 (!KW [use_chapter_images]) verwendet wurde.
 
-!item [(!EXAMPLE)]
-(!T)!/chapterimage udo(!t)
-
 !item [(!EXISTSSINCE)] Release~4 Version~0.43
 
 !item [(!SEEALSO)]
 (!link [Bilder] [Bilder]), (!KW [use_chapter_images])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!chapterimage udo
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -160,13 +165,17 @@ dabei berücksichtigt, Zentrierungen jedoch nicht.
 Tabulatoren werden abhängig von (!KW [tabwidth])
 umgewandelt. (!FILESPACEQUOTE)
 
-!item [(!EXAMPLE)]
-(!T)!/cinclude hello.txt(!t)
-
 !item [(!SEEALSO)]
 (!KW [include]), (!KW [begin_comment]), (!KW [comment]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [comment-Umgebung] [comment-Umgebung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!cinclude hello.txt
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -181,7 +190,7 @@ Auf einen anderen Zeichensatz umschalten.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/code(!t) (!CHARSET)
+!item [(!SYNTAX)] (!T)!/code(!t) [(!CHARSET)]
 
 !item [(!DESCRIPTION)]
 UDO erwartet nach diesem Kommando Texte oder
@@ -401,8 +410,7 @@ Abschalten der gesetzen Schriftfarbe.
 !item [(!DESCRIPTION)]
 Dieser Platzhalter wird die gesetzt die Schriftfarbe abgeschlossen.
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -410,6 +418,15 @@ PostScript unterstützt.
 Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!red)Nach dem Platzhalter coloff(!coloff) erscheint Text wieder in der Standardfarbe Schwarz.
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!red)Nach dem Platzhalter coloff(!coloff) erscheint Text wieder in der Standardfarbe Schwarz.
+(!EXAMPLE_END)
 
 !end_node
 
@@ -432,13 +449,25 @@ WinHelp, RTF, Quickview, C und Pascal erzeugt werden. Wird im
 Vorspann der Schalter (!KW [use_comments]) benutzt, werden die
 (!nolink [Kommentare]) auch bei allen anderen Formaten in Klammern ausgegeben.
 
-!item [(!EXAMPLE)]
-(!T)(!/comment [Was soll das?])(!t)
-
 !item [(!SEEALSO)]
 (!link [Kommentare] [Kommentare]), (!KW [comment]), (!link [comment-Umgebung] [comment-Umgebung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!comment [Was soll das?])
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [html]
+!begin_verbatim
+<!-- Was soll das? -->
+!end_verbatim
+!else
+(!comment [Was soll das?])
+!endif
+(!EXAMPLE_END)
 
 !end_node
 
@@ -473,7 +502,7 @@ jeweilige Format Kommentare beherrscht.
 !begin_node (!kkw [copyright])
 !html_name  cmd_copyright()
 
-(!nolink [Copyright])-Symbol ausgeben.
+Copyright-Symbol ausgeben.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -482,18 +511,24 @@ jeweilige Format Kommentare beherrscht.
 !item [(!SYNTAX)] (!T)(!/copyright)(!t)
 
 !item [(!DESCRIPTION)]
-Dieser Platzhalter wird durch das (!nolink [Copyright])-Symbol
+Dieser Platzhalter wird durch das Copyright-Symbol
 ersetzt, sofern es in dem jeweiligen Zeichensatz
 vorhanden ist. Ist es das nicht, ersetzt UDO den
 Platzhalter durch ""(!code [(c!)])"".
-
-!item [(!EXAMPLE)]
-Aus (!T)(!/copyright)(!t) wird (!copyright)
 
 !item [(!SEEALSO)]
 Vordefinierte Makros
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!copyright)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!copyright)
+(!EXAMPLE_END)
 
 !end_node
 

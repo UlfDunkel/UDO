@@ -4,6 +4,6 @@ Eine rechtsbündige Zeile.
 Ein rechtsbündiger Absatz,
 der vorher formatiert wird.
 
-Ein rechtsbündiger Absatz mit
-(!nl) manuellem Zeilenumbruch
+Ein rechtsbündiger Absatz mit (!nl)
+manuellem Zeilenumbruch
 !end_flushright

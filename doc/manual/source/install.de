@@ -24,6 +24,7 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -56,8 +57,6 @@ andere Hypertexte oder Programme (z.B. ein Editor) auf den
 UDO-Hypertext zugreifen.
 !end_ignore
 
-(!DocumentationWorkInProgress)
-
 !end_node # Installation der TOS- und GEM-Version (Atari)
 
 # = = = = =
@@ -74,8 +73,6 @@ Da die DOS-Version einen DOS-Extender verwendet, benötigen Sie mindestens eine 8
 
 Die für frühere UDO-Versionen nötige Installation von RSJ und EMX ist nicht mehr erforderlich.
 
-(!DocumentationWorkInProgress)
-
 !end_node # Installation der Version für DOS bzw. Windows (32-bit)
 
 # = = = = =
@@ -89,8 +86,6 @@ Die für frühere UDO-Versionen nötige Installation von RSJ und EMX ist nicht mehr
 !item Nehmen Sie das Verzeichnis, in dem sich die ausführbare Datei (!file [udo.exe]) befindet, in Ihre PATH-Liste (siehe (!file [config.sys])) auf, oder kopieren Sie diese Datei in ein Verzeichnis, das sich bereits in der PATH-Liste befindet.
 !end_itemize
 Die für frühere UDO-Versionen nötige Installation von EMX ist nicht mehr erforderlich.
-
-(!DocumentationWorkInProgress)
 
 !end_node # Installation der OS/2-Version (32-bit)
 
@@ -112,8 +107,6 @@ PowerPC-Rechner lauffähig. Bei Platzmangel im Dateisystem kann UDO mit
 einem entsprechenden Programm auf eine native Version verkleinert
 werden. Unabhängig davon ist die Größe zur Laufzeit minimal.
 
-(!DocumentationWorkInProgress)
-
 !end_node # Installation der Macintosh-Version (Mac~OS 9)
 
 # = = = = =
@@ -128,9 +121,15 @@ werden. Unabhängig davon ist die Größe zur Laufzeit minimal.
 
 Anmerkung: Eine manpage ist derzeit nicht Teil der Mac-OS-X-Distribution.
 
-Um in das Verzeichnis zu kommen, kann man über den Menüpunkt ""Gehe zu/Gehe zum Ordner ..."" des Finders gehen.
+(!HINT)
 
-(!DocumentationWorkInProgress)
+Das Verzeichnis (!file [/usr/bin]) wird im Finder normalerweise nicht angezeigt. Um es zu öffnen, geben Sie es im Menüpunkt ""Gehe zu/Gehe zum Ordner ..."" des Finders ein.
+
+Sie können auch -- sofern gewünscht -- sämtliche unsichtbaren Dateien und Verzeichnisse im Finder sichtbar schalten. Um unsichtbare Dateien und Ordner im Finder zu sehen, starten Sie das Terminal-Programm (Programme > Dienstprogramme > Terminal) und geben Sie dort ein:
+
+(!code [defaults write com.apple.finder AppleShowAllFiles TRUE])
+
+Damit die Änderungen wirksam werden, müssen Sie den Finder einmal neustarten.
 
 !end_node # Installation der Macintosh-Version (Mac~OS~X)
 
@@ -142,11 +141,9 @@ Um in das Verzeichnis zu kommen, kann man über den Menüpunkt ""Gehe zu/Gehe zum 
 !begin_itemize !short
 !item Laden Sie die entsprechende rpm-Datei von der UDO-Website herunter.
 !item Melden Sie sich als (!code [root]) an.
-!item Neuinstallation: (!code [rpm -i]) (!file [file])(!file [.rpm]);
-oder wenn bereits ein älteres UDO-rpm installiert war: (!code [rpm -U]) (!file [file])(!file [.rpm])
+!item Für eine Neuinstallation geben Sie ein: (!code [rpm -i]) (!file [file])(!file [.rpm])
+!item Für ein Upgrade (wenn bereits ein älteres UDO-rpm installiert war): (!code [rpm -U]) (!file [file])(!file [.rpm])
 !end_itemize
-
-(!DocumentationWorkInProgress)
 
 !end_node # Installation der FreeMiNT-Version
 
@@ -158,12 +155,10 @@ oder wenn bereits ein älteres UDO-rpm installiert war: (!code [rpm -U]) (!file [
 !begin_itemize !short
 !item Laden Sie die entsprechende rpm-Datei von der UDO-Website herunter.
 !item Melden Sie sich als (!code [root]) an.
-!item Neuinstallation: (!code [rpm -i]) (!file [file])(!file [.rpm]);
-oder wenn bereits ein älteres UDO-rpm installiert war: (!code [rpm -U]) (!file [file])(!file [.rpm])
+!item Für eine Neuinstallation geben Sie ein: (!code [rpm -i]) (!file [file])(!file [.rpm])
+!item Für ein Upgrade (wenn bereits ein älteres UDO-rpm installiert war): (!code [rpm -U]) (!file [file])(!file [.rpm])
 !end_itemize
 Oder benutzen Sie Ihre bevorzugte rpm-Oberfläche (z.B. kpackage, krpmview, yast).
-
-(!DocumentationWorkInProgress)
 
 !end_node # Installation des rpm-Paketes für Linux
 
@@ -181,8 +176,6 @@ Oder (bei Internetverbindung): (!code [apt-get install udo])
 
 Der Paketname für die englische Dokumentation lautet (!file [udo-doc]),
 für die deutsche Doku (!file [udo-doc-ger]).
-
-(!DocumentationWorkInProgress)
 
 !end_node # Installation des Paketes für Debian Linux
 
@@ -238,8 +231,6 @@ Linuxdoc-SGML-Version fehlen ein paar Entities. Werfen Sie daher kurz
 einen Blick in die FAQ in der Mitte dieser Anleitung, falls
 Linuxdoc-SGML Fehlermeldungen erzeugen sollte.
 !end_ignore
-
-Die Dokumentation befindet sich derzeit in Überarbeitung und ist z.T. nicht auf dem aktuellen Stand.
 
 !end_node # Installation aus den Quelltexten unter Linux
 

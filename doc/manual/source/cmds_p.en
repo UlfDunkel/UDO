@@ -21,6 +21,7 @@
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 09: LINK macro introduced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -97,7 +98,7 @@ Start a popup chapter.
 !item [(!SYNTAX)] (!T)!/p [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [pnode]).
+(!ABBREV) (!KW [pnode])
 
 !item [(!SEEALSO)]
 (!KW [pnode])
@@ -120,7 +121,7 @@ Start a hidden popup chapter.
 !item [(!SYNTAX)] (!T)!/p* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [pnode*]).
+(!ABBREV) (!KW [pnode*])
 
 !item [(!SEEALSO)]
 (!KW [pnode*])
@@ -487,7 +488,7 @@ Start a popup section.
 !item [(!SYNTAX)] (!T)!/ps [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [psubnode]).
+(!ABBREV) (!KW [psubnode])
 
 !item [(!SEEALSO)]
 (!KW [psubnode])
@@ -510,7 +511,7 @@ Start hidden popup section.
 !item [(!SYNTAX)] (!T)!/ps* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [psubnode*]).
+(!ABBREV) (!KW [psubnode*])
 
 !item [(!SEEALSO)]
 (!KW [psubnode*])
@@ -533,7 +534,7 @@ Start a popup subsection.
 !item [(!SYNTAX)] (!T)!/pss [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [psubsubnode]).
+(!ABBREV) (!KW [psubsubnode])
 
 !item [(!SEEALSO)]
 (!KW [psubsubnode])
@@ -556,7 +557,7 @@ Start a hidden popup subsection.
 !item [(!SYNTAX)] (!T)!/pss* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [psubsubnode*]).
+(!ABBREV) (!KW [psubsubnode*])
 
 !item [(!SEEALSO)]
 (!KW [psubsubnode*])
@@ -579,7 +580,7 @@ Start a popup paragraph.
 !item [(!SYNTAX)] (!T)!/psss [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [psubsubsubnode]).
+(!ABBREV) (!KW [psubsubsubnode])
 
 !item [(!SEEALSO)]
 (!KW [psubsubsubnode])
@@ -602,7 +603,7 @@ Start a hidden popup paragraph.
 !item [(!SYNTAX)] (!T)!/psss* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [psubsubsubnode*]).
+(!ABBREV) (!KW [psubsubsubnode*])
 
 !item [(!SEEALSO)]
 (!KW [psubsubsubnode*])
@@ -857,8 +858,7 @@ Sets the textcolor purple.
 Dieser Platzhalter setzt die Schriftfarbe Lila.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -866,6 +866,15 @@ PostScript unterstützt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!purple)Lila(!coloff) erscheint in der Farbe Lila.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!purple)Lila(!coloff) erscheint in der Farbe Lila.
+(!EXAMPLE_END)
 
 !end_node
 

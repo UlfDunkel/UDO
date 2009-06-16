@@ -16,6 +16,7 @@
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -69,8 +70,7 @@ Sets the textcolor green.
 Dieser Platzhalter setzt die Schriftfarbe Grün.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -78,6 +78,15 @@ PostScript unterstützt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!green)Grün(!coloff) erscheint in der Farbe Grün.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!green)Grün(!coloff) erscheint in der Farbe Grün.
+(!EXAMPLE_END)
 
 !end_node
 
@@ -99,8 +108,7 @@ Sets the textcolor (dark) gray.
 Dieser Platzhalter setzt die Schriftfarbe (Dunkel-)Grau.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -108,6 +116,15 @@ PostScript unterstützt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!gray)Dunkelgrau(!coloff) erscheint in der Farbe Dunkelgrau.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!gray)Dunkelgrau(!coloff) erscheint in der Farbe Dunkelgrau.
+(!EXAMPLE_END)
 
 !end_node
 

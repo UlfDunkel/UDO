@@ -23,6 +23,8 @@
 #   fd  Jun 09: NAME macro introduced
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: html_name no longer uses CAPITAL letters
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -125,7 +127,7 @@ Defined macros
 
 # ToDo: Englisch
 !begin_node (!kkkw [DEL] [del])
-!html_name  cmd_DEL_del
+!html_name  cmd_del
 !label (!kk1 [/DEL])
 !label (!kk1 [/del])
 

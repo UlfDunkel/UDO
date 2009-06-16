@@ -22,6 +22,7 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -98,7 +99,7 @@ Zusatznamen eines Kapitels definieren.
 !item [(!SYNTAX)] (!T)!/a [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [alias]).
+(!ABBREV) (!KW [alias])
 
 !item [(!SEEALSO)]
 (!KW [alias])
@@ -157,13 +158,56 @@ ersetzt, sofern es in dem jeweiligen Zeichensatz
 vorhanden ist. Ist es das nicht, ersetzt UDO den
 Platzhalter durch ""(!code [alpha])"".
 
-!item [(!EXAMPLE)]
-Aus (!code [(!/alpha!)]) wird (!alpha).
-
 !item [(!SEEALSO)]
 (!KKW [beta]), (!link [Sonderzeichen] [Sonderzeichen]), Vordefinierte Makros
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!alpha)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!alpha)
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [aqua])
+!html_name  cmd_aqua
+
+Setzt die Schriftfarbe Cyan.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/aqua)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Cyan.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!aqua)Cyan(!coloff) erscheint in der Farbe Cyan.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!aqua)Cyan(!coloff) erscheint in der Farbe Cyan.
+(!EXAMPLE_END)
 
 !end_node
 
@@ -281,36 +325,6 @@ Logo des Autors für die Titelseite definieren.
 
 # = = = = =
 
-# ToDo: Englisch
-!begin_node (!kkw [aqua])
-!html_name  cmd_aqua
-
-Setzt die Schriftfarbe Cyan.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)(!/aqua)(!t)
-
-!item [(!DESCRIPTION)]
-Dieser Platzhalter setzt die Schriftfarbe Cyan.
-Abgeschlossen wird mit (!kkw [coloff]).
-
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
-
-!item [(!EXISTSSINCE)] Version 6.5.9
-
-!item [(!SEEALSO)]
-(!KKW [coloff]), Schriftfarben
-
-!end_xlist
-
-!end_node
-
-# = = = = =
-
 !begin_node (!kw [autoref])
 !html_name  cmd_autoref
 
@@ -324,11 +338,8 @@ Automatische Referenzierung ein-/ausschalten.
 
 !item [(!DESCRIPTION)]
 Dieser Befehl schaltet die automatische Referenzierung ein ((!code [[on!]])) oder aus ((!code [[off!]])). Beim Start der Konvertierung ist die automatische Generierung von
-Querverweisen aktiviert. Bei der Umwandlung ins ST-Guide-Format werden die Befehle in @autorefon bzw.
-@autorefoff umgewandelt.
-
-!item [(!EXAMPLE)]
-(!T)!/autoref [off](!t)
+Querverweisen aktiviert. Bei der Umwandlung ins ST-Guide-Format werden die Befehle in (!code [@autorefon]) bzw.
+(!code [@autorefoff]) umgewandelt.
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.47
 
@@ -336,6 +347,13 @@ Querverweisen aktiviert. Bei der Umwandlung ins ST-Guide-Format werden die Befeh
 (!link [Querverweise] [Querverweise])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!autoref [off]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -356,13 +374,17 @@ Referenzierung bei Items ein-/ausschalten.
 Hiermit kann man einstellen, ob UDO die Items einer description-Umgebung oder xlist-Umgebung
 referenzieren soll. Beim Start von UDO ist die Referenzierung der Items standardmäßig aktiviert.
 
-!item [(!EXAMPLE)]
-(!T)!/autoref_items [off](!t)
-
 !item [(!SEEALSO)]
-(!link [Beschreibungen] [Beschreibungen]), (!link [Listen] [Listen]), (!KW [item] [[~!!]])
+(!link [Beschreibungen] [Beschreibungen]), (!link [Listen] [Listen]), (!KW [item])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!autoref_items [off]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 

@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from working.ui)
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -45,7 +46,7 @@ the switch (!KW [no_numbers] [[win!!]]) in the preamble.
 !item	[Tables of contents:]
 In the tables of contents long chapter titles aren't sized to the current
 document width yet. Chapter titles may also appear in different columns
-(""1.9""-""1.10"" problem).
+(""1.9""(!code[--])""1.10"" problem).
 
 !end_description
 

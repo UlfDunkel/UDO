@@ -18,6 +18,7 @@
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #   fd  Jun 10: using macro (!const [])
 #   fd  Jun 10: table of limitations reformatted
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -32,7 +33,9 @@ You can use source files that don't exceed these maximum values:
 !begin_table [l|r]
 !hline
 Macros:                               !! (!MAXMACRO)
+Length of !/macro text value:         !! (!const [256])
 Defines:                              !! (!MAXDEFINE)
+Length of !/define text value:        !! (!const [256])
 Hyphens:                              !! (!MAXHYPHEN)
 Sum of chapters, labels and aliases:  !! (!const [32768])
 Characters per line:                  !! (!LINELEN)

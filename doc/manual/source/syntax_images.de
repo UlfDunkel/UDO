@@ -22,6 +22,7 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -70,13 +71,18 @@ Vorspann das Kommando (!KW [tex_tetex]) gesetzt werden.
 !begin_node *.img & ST-Guide
 !html_name  images_stg
 
-Beispiel: (!KW [image]) tiger Ein Tiger
+Beispiel:
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!image tiger Ein Tiger
+!end_verbatim
+(!EXAMPLE_END)
 
 UDO öffnet die Datei (!file [tiger.img]) und ermittelt die Ausmaße des Bildes,
 erzeugt in der Ausgabedatei das ST-Guide-Kommando (!code [@limage]) und fügt dort
 einen Wert ein, um den das Bild eingerückt werden soll. Dieser Wert
 wird ausgehend von der Breite eines Zeichens aus dem
-Standard-10pt-Systemfont berechnet.
+Standard-10-pt-Systemfont berechnet.
 
 Falls wie in diesem Beispiel eine Bildunterschrift angegeben wird,
 wird diese, versehen mit ""(Abbildung x: Ein Tiger)"", ebenfalls unter
@@ -101,8 +107,9 @@ soll.
 UDO macht das dem Lindner-(!TeX) beiliegende Zusatzprogramm 
 (!file [IMGTOTEX]) überflüssig! UDO enthält alle Aufgaben, für die sonst
 (!file [IMGTOTEX]) zuständig ist, nämlich das Eintragen bestimmter
-Auflösungswerte in den Header des jeweiligen GEM-Images. Ein Beispiel:
+Auflösungswerte in den Header des jeweiligen GEM-Images.
 
+Ein Beispiel:
 !index (!kw [tex_dpi])
 (!EXAMPLE_BEGIN)
 !begin_verbatim
@@ -238,10 +245,11 @@ HTML-Kommandos erzeugen.
 Anders als bei den anderen Formaten wird der zweite Parameter nicht
 als Bildunterschrift, sondern als Alternativtext benutzt.
 
-Aus dem UDO-Befehl (!KW [image] [tiger Ein Tiger]) wird folgender HTML-Befehl
-erzeugt:
-
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!image tiger EinTiger
+!end_verbatim
+(!EXAMPLE_AFTER)
 !begin_verbatim
 <p align="...">
 <img src="tiger.gif" alt="Ein Tiger" title="Ein Tiger" width="200" height="300">
@@ -254,7 +262,9 @@ Alternativtextes bzw. es wird ein leerer Alternativtext benutzt. Auch
 hier das Beispiel zur Veranschaulichung:
 
 (!EXAMPLE_BEFORE)
-(!KW [image] [../gif/tiger])
+!begin_verbatim
+!image ../gif/tiger
+!end_verbatim
 (!EXAMPLE_AFTER)
 !begin_verbatim
 <p align="...">

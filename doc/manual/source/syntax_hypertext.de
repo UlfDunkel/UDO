@@ -24,6 +24,7 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -118,13 +119,13 @@ Mit dem (!KKW [link])-Befehl können Sie Bezug auf andere Stellen im
 aktuellen Dokument nehmen:
 
 !begin_xlist [ST-Guide:] !short
-!item [UDO:]      (!KK2W [link] [[ein Wort!!][der Verweis!!]])
-!item [HTML:]     <a href="file.htm#der Verweis">ein Wort</a>
-!item [(!LaTeX):]    ein Wort (siehe \ref{der Verweis})
-!item [ST-Guide:] @{"ein Wort" link "der Verweis"}
-!item [WinHelp:]  {\uldb ein Wort}{\v der_Verweis}
-!item [Turbo:]    {ein Wort:der_Verweis}
-!item [sonst:]    ein Wort (siehe "der Verweis")
+!item [UDO:]      (!KK2W [link] [[ein Text!!][der Verweis!!]])
+!item [HTML:]     <a href="file.htm#der Verweis">ein Text</a>
+!item [(!LaTeX):]    ein Text (siehe \ref{der Verweis})
+!item [ST-Guide:] @{"ein Text" link "der Verweis"}
+!item [WinHelp:]  {\uldb ein Text}{\v der_Verweis}
+!item [Turbo:]    {ein Text:der_Verweis}
+!item [sonst:]    ein Text (siehe "der Verweis")
 !end_xlist
 
 Hier ein Beispiel, bei dem auf den Abschnitt mit den Kontaktinformationen
@@ -141,8 +142,8 @@ zur UDO-Gemeinde verwiesen wird:
 !begin_enumerate
 !item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
       diese Zahl überschritten, gibt UDO eine Fehlermeldung aus, dass 
-      der Link nicht ersetzt werden konnte. Zur Erinnerung: Absätze
-      werden durch Leerzeilen getrennt.
+      der Link nicht ersetzt werden konnte. (!nl)
+      Zur Erinnerung: Absätze werden durch Leerzeilen getrennt.
 
 !item Bei der Umwandlung ins HTML- oder WinHelp-Format wird überprüft,
       ob der benutzte Verweis vorhanden ist. Ist er es nicht, gibt

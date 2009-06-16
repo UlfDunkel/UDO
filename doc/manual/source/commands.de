@@ -41,16 +41,19 @@ beschrieben, was die Beschreibungen bedeuten.
 # Bei den Hypertexten eine Tabelle anbieten, von der aus man die
 # nach dem Alphabet sortierten Unterkapitel erreichen kann
 !ifdest [win,wh4,html,hh,stg,amg,pch,tvh,aqv]
-	!ignore_subtoc
-	!hline
-	!begin_table [llllll]
-	A!.. !! B!.. !! C!.. !! D!.. !! E!.. !! F!..
-	G!.. !! H!.. !! I!.. !! J!.. !! K!.. !! L!..
-	M!.. !! N!.. !! O!.. !! P!.. !! Q!.. !! R!..
-	S!.. !! T!.. !! U!.. !! V!.. !! W!.. !! X!..
-	Y!.. !! Z!..
-	*!..
-	!end_table
+
+!medskip
+   
+!ignore_subtoc
+!begin_table [llllll]
+A!.. !! B!.. !! C!.. !! D!.. !! E!.. !! F!.. !! G!.. !! H!.. 
+I!.. !! J!.. !! K!.. !! L!.. !! M!.. !! N!.. !! O!.. !! P!..
+Q!.. !! R!.. !! S!.. !! T!.. !! U!.. !! V!.. !! W!.. !! X!..
+Y!.. !! Z!..
+*!..
+!end_table
+
+!medskip
 
 !endif
 
@@ -59,21 +62,26 @@ beschrieben, was die Beschreibungen bedeuten.
 !begin_node Befehlserklärung
 !html_name  cmds_explanation
 
+In den nachfolgenden Kapiteln werden sämtliche von UDO unterstützten Befehle detailliert erklärt. Dabei werden immer wieder gleiche Kategorien verwendet, damit Sie auf einen Blick sehen, was mit welchem Befehl möglich ist. Diese Kategorien werden nachfolgend erklärt.
+
 !begin_description
 
-!item	[Typ & Position:]
-	Der Typ des Befehls und die Position, wo der Befehl benutzt werden darf.
+!item	[Typ:]
+   !begin_blist
+   !item [(!COMMANDOBLIGATE)] Ein (!COMMANDOBLIGATE) muss in jedem UDO-Quelltext stehen, sonst gibt UDO eine Fehlermeldung aus.
+   !item [(!COMMAND)] Ein (!COMMAND) veranlasst UDO, etwas Bestimmtes zu tun.
+   !item [(!COMMANDABBREV)] Für einige häufig genutzte Kommandos gibt es Kurzformen, die durch ""(!COMMANDABBREV)"" im Typ angegeben werden.
+   !item [(!SWITCH)] Ein (!SWITCH) setzt bestimmte Informationen, an denen UDO erkennt, wie es demnächst zu verfahren hat.
+   !item [(!PLACEHOLDER)] Ein (!PLACEHOLDER) wird bei der Umwandlung nur durch etwas anderes ersetzt.
+   !item [(!SPECIALCHAR)] (!SPECIALCHAR) sind festgelegte Zeichenfolgen, die etwas Bestimmtes bewirken.
+   !end_blist
 
-	Ein Kommando veranlasst UDO, etwas Bestimmtes zu tun, ein Schalter setzt
-    bestimmte Informationen, an denen UDO erkennt, wie es demnächst zu
-    verfahren hat, ein Platzhalter wird bei der Umwandlung nur
-    durch etwas anderes ersetzt.
-
-	Bei ""Vorspann"" darf man einen Befehl nur im Vorspann des Quelltextes
-    (also vor (!KW [begin_document])) einsetzen, bei ""Hauptteil"" darf
-    man einen Befehl nur im Hauptteil des Quelltextes (also nach
-    (!KW [begin_document])) einsetzen, bei ""Vorspann & Hauptteil"" darf
-    man einen Befehl überall einsetzen.
+!item [Position:]
+   !begin_blist
+   !item [Vorspann] Bei ""Vorspann"" darf man einen Befehl nur im Vorspann des Quelltextes (also vor (!KW [begin_document])) einsetzen.
+   !item [Hauptteil] Bei ""Hauptteil"" darf man einen Befehl nur im Hauptteil des Quelltextes (also nach (!KW [begin_document])) einsetzen.
+   !item [Vorspann & Hauptteil] Bei ""Vorspann & Hauptteil"" darf man einen Befehl überall einsetzen.
+   !end_blist
 
 !item	[Syntax:]
 	Hier sieht man, wie man den Befehl einsetzen muss.
@@ -109,12 +117,18 @@ beschrieben, was die Beschreibungen bedeuten.
 
 	!end_tlist
 
-!item	[Beispiel:]
-	Hier findet man eventuell ein kurzes Beispiel für den jeweiligen Befehl.
+!item	[Beschreibung:]
+	Hier wird der jeweilige UDO-Befehl genauer erklärt.
+
+!item [Existiert seit:]
+   Dieses Feld gibt an, ab welcher Version von UDO dieser Befehl verwendet werden kann. Ggf. müssen Sie Ihre eingesetzte UDO-Version aktualisieren, wenn ein neuer Befehl bei Ihnen noch nicht funktioniert.
 
 !item	[Siehe auch:]
 	Hier sind verwandte Befehle oder Themen ausgelistet, die
 	in direktem Zusammenhang mit dem beschriebenen Befehl stehen.
+
+!item	[Beispiel:]
+	Hier sehen Sie eventuell kurze Beispiele für den jeweiligen Befehl und seine Wirkung im Zielformat.
 
 !end_description
 
@@ -125,26 +139,20 @@ beschrieben, was die Beschreibungen bedeuten.
 !begin_node Farben
 !html_name  cmds_colors
 
-!index Farben
-!label Farben
-!begin_itemize !short
-!item black
-!item silver      (hellgrau, ehemals ""grey"")
-!item gray        (dunkelgrau -- ""gray"", nicht ""grey""!)
-!item white
-!item maroon
-!item red
-!item purple
-!item fuchsia
-!item green       (dunkelgrün)
-!item lime        (hellgrün)
-!item olive
-!item yellow
-!item navy
-!item blue
-!item teal
-!item aqua        (ehemals ""cyan"")
-!end_itemize
+UDO unterstützt das Einstellen bestimmter Schriftfarben im Ausgabeformat. 
+Dazu stehen mehrere Kommandos zur Verfügung:
+
+!include colorcmd.de
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!red)Farbe in UDO(!coloff)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!red)Farbe in UDO(!coloff)
+(!EXAMPLE_END)
+
+(!COLORSUPPORT)
 
 !end_node # Farben
 

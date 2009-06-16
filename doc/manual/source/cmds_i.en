@@ -26,6 +26,8 @@
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: html_name no longer uses CAPITAL letters
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -63,7 +65,7 @@ Query the destination format.
 # = = = = =
 
 !begin_node (!kkkw [I] [i])
-!html_name  cmd_I()
+!html_name  cmd_i()
 !label (!kk1 [/I])
 !label (!kk1 [/i])
 
@@ -102,7 +104,7 @@ Start an item.
 !item [(!SYNTAX)] (!T)!/i [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [item]).
+(!ABBREV) (!KW [item])
 
 !item [(!SEEALSO)]
 (!KW [item])
@@ -818,7 +820,7 @@ be dislayed.
 
 # ToDo: Englisch
 !begin_node (!kkkw [INS] [ins])
-!html_name  cmd_INS_ins
+!html_name  cmd_ins
 !label (!kk1 [/INS])
 !label (!kk1 [/ins])
 

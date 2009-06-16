@@ -14,10 +14,11 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
-!begin_node PDF(!LaTeX)
+!begin_node PDF (!LaTeX)
 !html_name  format_pdf
 
 (!MISS)

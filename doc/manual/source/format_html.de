@@ -23,12 +23,15 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
 !begin_node HTML (Hypertext Markup Language)
 !html_name  format_html
 !label      HTML
+
+HTML ist eines der meistgenutzten Zielformate, die mit UDO erzeugt werden. Es ist zudem eines der meistgenutzten Formate für Online-Dokumentationen. Logischerweise gibt es zum HTML-Ausgabeformat auch die meisten Fragen. Hier sind die häufigsten als FAQ zusammengefasst.
 
 !begin_description
 
@@ -73,7 +76,7 @@ Unterabschnitt untergebracht werden.
 !item [Mir gefallen die Dateinamen bei der HTML-Ausgabe nicht!/]
 Durch den Befehl (!KW [html_name]) können Sie einem Kapitel einen
 bestimmten Namen zuweisen, den UDO für die jeweilige Datei
-anstelle der etwas kryptischen Namen wie etwa ""0a1009.htm""
+anstelle der etwas kryptischen Namen wie etwa (!file [0a1009.htm])
 benutzt.
 
 !index HTML !! Kopfzeile
@@ -145,12 +148,12 @@ in der Kommandozeile mit der Option (!code [(--!)outfile]) bzw. (!code [-o]) übe
 Dateinamens:
 
 !begin_tlist [-o INDEX.HTML] !short
-!item [-o index.htm]  .htm
-!item [-o index.html] .html
-!item [-o INDEX.HTML] .HTML
+!item [(!C)-o index.htm(!c)]  (!file [.htm])
+!item [(!C)-o index.html(!c)] (!file [.html])
+!item [(!C)-o INDEX.HTML(!c)] (!file [.HTML])
 !end_tlist
 
-Wenn Sie stattdessen die Option (!code [-o~!]) verwenden, benutzt UDO für
+Wenn Sie stattdessen die Option (!C)-o~!(!c) verwenden, benutzt UDO für
 8+3-Dateisysteme immer das Suffix (!file [.htm]), bei Dateisystemen, die
 lange Namen erlauben, hingegen immer das Suffix (!file [.html]).
 
@@ -168,7 +171,7 @@ die Datei jedoch nur als (!file [foo.htm]).
 ein HTML-Browser unter TOS und DOS versucht, (!file [foo.html]) zu
 öffnen, öffnet dieser anstandslos (!file [foo.htm]).
 
-!item Nach dem Kopieren der Dateien auf den Web-Server *müssen*
+!item Nach dem Kopieren der Dateien auf den Web-Server (!B)müssen(!b)
 die Suffix der Dateien von (!file [.htm]) auf (!file [.html]) angepasst werden.
 Hier wird (!file [foo.htm]) nicht geöffnet, wenn auf (!file [foo.html])
 zugegriffen werden soll!

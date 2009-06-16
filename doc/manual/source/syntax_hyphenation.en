@@ -17,6 +17,7 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 11: typo
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -36,7 +37,7 @@ You have two possibilities to set the Hyphenation patterns:
 !item Global definition using the (!KW [hyphen]) command
 !end_enumerate
 
-When converting to (!LaTeX) the marks will be replaced by ""\-"". Then
+When converting to (!LaTeX) the marks will be replaced by ""(!code [\-])"". Then
 (!LaTeX) knows that a word can be split at these positions.
 
 When converting to RTF, Windows Help and HTML the marks are deleted.
@@ -58,7 +59,7 @@ semi-automatic syl!-labi!-fi!-cation
 !end_verbatim
 (!EXAMPLE_END)
 
-When converting to (!LaTeX) UDO replaces all ""(!K1 [/-])"" by ""\-"". So it would
+When converting to (!LaTeX) UDO replaces all ""(!K1 [/-])"" by ""(!code [\-])"". So it would
 look like ""syl\-labi\-fi\-cation"".
 
 When converting to ASCII, ST-Guide, Pure C Help and Manualpage the word is split

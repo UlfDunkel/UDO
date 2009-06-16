@@ -38,21 +38,27 @@ descriptions.
 
 # Hypertext formats will print a table with the alphabet
 !ifdest [win,wh4,html,hh,stg,amg,pch,tvh,aqv]
+   !medskip
+   
 	!ignore_subtoc
-	!hline
 	!begin_table [llllll]
-	A!.. !! B!.. !! C!.. !! D!.. !! E!.. !! F!..
-	G!.. !! H!.. !! I!.. !! J!.. !! K!.. !! L!..
-	M!.. !! N!.. !! O!.. !! P!.. !! Q!.. !! R!..
-	S!.. !! T!.. !! U!.. !! V!.. !! W!.. !! X!..
+	A!.. !! B!.. !! C!.. !! D!.. !! E!.. !! F!.. !! G!.. !! H!.. 
+   I!.. !! J!.. !! K!.. !! L!.. !! M!.. !! N!.. !! O!.. !! P!..
+   Q!.. !! R!.. !! S!.. !! T!.. !! U!.. !! V!.. !! W!.. !! X!..
 	Y!.. !! Z!..
 	*!..
 	!end_table
+
+   !medskip
+
+!endif
 
 # = = = = =
 
 !begin_node Command description
 !html_name  cmds_explanation
+
+In den nachfolgenden Kapiteln werden sämtliche von UDO unterstützten Befehle detailliert erklärt. Dabei werden immer wieder gleiche Kategorien verwendet, damit Sie auf einen Blick sehen, was mit welchem Befehl möglich ist. Diese Kategorien werden nachfolgend erklärt.
 
 !begin_description
 

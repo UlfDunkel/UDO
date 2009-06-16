@@ -25,6 +25,7 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 10: using macro (!const [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -1172,7 +1173,7 @@ cases it was impossible not to change the syntax of some commands.
         !item UDO doesn't break line between (!code [verb]) when
 			converting to (!LaTeX).
         !item Graphic characters of the IBM PC character set will be
-			replaced by ""+"", ""-"" and ""|"" for Windows Help.
+			replaced by ""(!code[+])"", ""(!code[--])"" and ""(!code[|])"" for Windows Help.
         !end_itemize
 
 !item [Syntax changes:]
@@ -1199,7 +1200,7 @@ cases it was impossible not to change the syntax of some commands.
 
 # = = = = =
 
-# Änderungen UDO5 gegenüber UDO4
+# Änderungen UDO5 gegenüber UDO~4
 !begin_node Changes from Release 4 to 5
 !html_name  history_release_4_to_5
 
@@ -1324,7 +1325,7 @@ Instead of!..
 
 # = = = = =
 
-# Änderungen UDO4 gegenüber UDO3
+# Änderungen UDO~4 gegenüber UDO3
 !begin_node Changes from Release 3 to 4
 !html_name  history_release_3_to_4
 

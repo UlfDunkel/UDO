@@ -19,6 +19,8 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: html_name no longer uses CAPITAL letters
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -28,7 +30,7 @@
 # = = = = =
 
 !begin_node (!kkkw [V] [v])
-!html_name  cmd_V()
+!html_name  cmd_v()
 !label (!kk1 [/V])
 !label (!kk1 [/v])
 
@@ -42,17 +44,23 @@ Klartext ausgeben.
 
 !item [(!DESCRIPTION)]
 ""(!TEXT)"" wird als Klartext dargestellt, falls möglich.
-Für (!LaTeX) wird (!code [\verb+(!TEXT)+']) ausgegeben, bei allen
+Für (!LaTeX) wird (!C)\verb+(!TEXT)+'(!c) ausgegeben, bei allen
 anderen Formaten erfolgt die gleiche Ausgabe wie bei
 (!KKKW [T] [t]).
-
-!item [(!EXAMPLE)]
-(!T)(!/V)Klartext(!/v)(!t)
 
 !item [(!SEEALSO)]
 Schriftarten, (!link [Textgestaltung] [Textgestaltung]), (!KKKW [T] [t]), (!KW [tex_verb])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort ""Klartext"" wird als (!V)Klartext(!v) ausgegeben.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort ""Klartext"" wird als (!V)Klartext(!v) ausgegeben.
+(!EXAMPLE_END)
 
 !end_node
 
@@ -105,15 +113,25 @@ Quelltext verwendet werden. Die kleinste Schriftgröße
 wird mit (!code [tiny]), die größte mit (!code [huge]) gesetzt. Die
 Standardgröße für verbatim-Umgebungen ist (!code [normal]).
 
-!item [(!EXAMPLE)]
-(!T)!/verbatimsize [small](!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~11
 
 !item [(!SEEALSO)]
 (!link [verbatim-Umgebung] [verbatim-Umgebung]), (!KW [html_monofont_size])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!verbatimsize [small]
+Ich bin ein Text, der in kleiner Schrift in einer verbatim-Umgebung ausgegeben werden soll.
+!end_verbatim
+(!EXAMPLE_AFTER)
+!verbatimsize [small]
+!begin_verbatim
+Ich bin ein Text, der in kleiner Schrift in einer verbatim-Umgebung ausgegeben werden soll.
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -166,13 +184,19 @@ dabei berücksichtigt, Zentrierungen jedoch nicht.
 Tabulatoren werden abhängig von (!KW [tabwidth])
 umgewandelt. (!FILESPACEQUOTE)
 
-!item [(!EXAMPLE)]
-(!T)!/vinclude hello.c(!t)
-
 !item [(!SEEALSO)]
 (!KW [tabwidth]), (!KW [include]), (!KW [verbatimsize]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [verbatim-Umgebung] [verbatim-Umgebung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!vinclude hello.c
+!end_verbatim
+(!EXAMPLE_AFTER)
+!vinclude (!EXAMPLES)hello.c
+(!EXAMPLE_END)
 
 !end_node
 

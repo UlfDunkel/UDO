@@ -18,6 +18,7 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -162,7 +163,7 @@ I don't know the reason but Windows Help won't use the fonts ""Terminal"" or
 use the upper fonts that contain the graphic characters.
 
 Thus UDO will replace the graphic characters of the IBM-PC character set by
-""+"", ""-"" or ""|"".
+""(!code[+])"", ""(!code[--])"" or ""(!code[|])"".
 
 !item [Why should I write the source files with a Windows editor?]
 

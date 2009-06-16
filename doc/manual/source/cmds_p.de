@@ -23,6 +23,7 @@
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 09: LINK macro introduced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -99,7 +100,7 @@ Popup-Kapitel einleiten.
 !item [(!SYNTAX)] (!T)!/p [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [pnode]).
+(!ABBREV) (!KW [pnode])
 
 !item [(!SEEALSO)]
 (!KW [pnode])
@@ -122,7 +123,7 @@ Popup-Kapitel ohne Eintrag im Inhaltsverzeichnis einleiten.
 !item [(!SYNTAX)] (!T)!/p* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [pnode*]).
+(!ABBREV) (!KW [pnode*])
 
 !item [(!SEEALSO)]
 (!KW [pnode*])
@@ -147,13 +148,10 @@ Einstellen der Zeilenbreite.
 !item [(!DESCRIPTION)]
 Mit diesem Schalter kann man die Länge der Zeilen
 einstellen, die UDO erzeugt. Standardmäßig benutzt
-UDO den Wert 70. (!VALUE) kann Werte von 20 bis 200
+UDO den Wert (!const [70]). (!VALUE) kann Werte von (!const [20]) bis (!const [200])
 annehmen. Bei den Formaten WinHelp, QuickView und
 HTML kann (!VALUE) auch größere Werte annehmen, falls
 der Schalter (!KW [use_output_buffer]) gesetzt wurde.
-
-!item [(!EXAMPLE)]
-(!T)!/parwidth 98(!t)
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
@@ -161,6 +159,26 @@ der Schalter (!KW [use_output_buffer]) gesetzt wurde.
 (!KW [use_output_buffer])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!parwidth 42
+
+# Hauptteil:
+Ich bin ein langer Text, der sich immer wiederholt. Ich bin ein langer Text, der sich immer wiederholt. Ich bin ein langer Text, der sich immer wiederholt. Ich bin ein langer Text, der sich immer wiederholt.
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+Ich bin ein langer Text, der sich immer 
+wiederholt. Ich bin ein langer Text, der 
+sich immer wiederholt. Ich bin ein langer 
+Text, der sich immer wiederholt. Ich bin 
+ein langer Text, der sich immer 
+wiederholt.
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -298,19 +316,24 @@ dabei berücksichtigt, Zentrierungen jedoch nicht.
 Tabulatoren werden abhängig von (!KW [tabwidth])
 umgewandelt. (!FILESPACEQUOTE)
 
-!item [(!EXAMPLE)]
-(!T)!/pinclude hello.pas(!t)
-
 !item [(!SEEALSO)]
-(!KW [tabwidth]), (!KW [include]), (!KW [sinclude]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [sourcecode-Umgebung] [sourcecode-Umgebung])
+(!KW [tabwidth]), (!KW [include]), (!KW [cinclude]), (!KW [ldinclude]), (!KW [sinclude]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [sourcecode-Umgebung] [sourcecode-Umgebung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!pinclude hello.pas
+!end_verbatim
+(!EXAMPLE_AFTER)
+!pinclude (!EXAMPLES)hello.pas
+(!EXAMPLE_END)
 
 !end_node
 
 # = = = = =
 
-# ToDo: Englisch
 !begin_node (!kkw [plink])
 !html_name  cmd_plink
 
@@ -330,13 +353,17 @@ Dokuments. Bei allen anderen Formaten wird nur
 
 Bei der RTF-Ausgabe erfolgt die Angabe als Hinweis auf die Seitenzahl.
 
-!item [(!EXAMPLE)]
-(!T)(!/plink [Wort] [Sprungmarke])(!t)
-
 !item [(!SEEALSO)]
 (!KKW [link]), (!KKW [xlink]), (!link [Querverweise] [Querverweise])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+(!plink [Wort] [Sprungmarke])
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -356,13 +383,19 @@ Popup-Kapitel einleiten.
 !item [(!DESCRIPTION)]
 Identisch mit (!KW [node]), der Inhalt wird jedoch beim ST-Guide und bei WinHelp als Popup dargestellt.
 
-!item [(!EXAMPLE)]
-(!T)!/pnode Titel des Popups(!t)
-
 !item [(!SEEALSO)]
 (!KW [psubnode]), (!KW [psubsubnode]), (!KW [begin_pnode]), (!link [Gliederung] [Gliederung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!pnode Titel des Popups
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading Titel des Popups
+(!EXAMPLE_END)
 
 !end_node
 
@@ -383,15 +416,21 @@ Popup-Kapitel ohne Eintrag im Inhaltsverzeichnis einleiten.
 Dieses Kommando hat die gleiche Funktion wie (!KW [pnode]),
 mit der Ausnahme, dass ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
 
-!item [(!EXAMPLE)]
-(!T)!/pnode* Titel des versteckten Popups(!t)
-
 !item [(!EXISTSSINCE)] Release~4 Version~0.46
 
 !item [(!SEEALSO)]
 (!KW [pnode]), (!KW [node*]), (!KW [begin_pnode*]), (!link [Gliederung] [Gliederung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!pnode* Titel des versteckten Popups
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading Titel des versteckten Popups
+(!EXAMPLE_END)
 
 !end_node
 
@@ -414,15 +453,21 @@ ersetzt, sofern es in dem jeweiligen Zeichensatz
 vorhanden ist. Ist es das nicht, ersetzt UDO den
 Platzhalter durch ""(!code [GBP])"".
 
-!item [(!EXAMPLE)]
-Aus (!code [(!/pound!)]) wird (!pound).
-
 !item [(!EXISTSSINCE)] Version 6.5.8
 
 !item [(!SEEALSO)]
 (!KKW [euro]), Vordefinierte Makros
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!pound)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!pound)
+(!EXAMPLE_END)
 
 !end_node
 
@@ -496,7 +541,7 @@ Popup-Abschnitt einleiten.
 !item [(!SYNTAX)] (!T)!/ps [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [psubnode]).
+(!ABBREV) (!KW [psubnode])
 
 !item [(!SEEALSO)]
 (!KW [psubnode])
@@ -519,7 +564,7 @@ Popup-Abschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
 !item [(!SYNTAX)] (!T)!/ps* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [psubnode*]).
+(!ABBREV) (!KW [psubnode*])
 
 !item [(!SEEALSO)]
 (!KW [psubnode*])
@@ -542,7 +587,7 @@ Popup-Unterabschnitt einleiten.
 !item [(!SYNTAX)] (!T)!/pss [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [psubsubnode]).
+(!ABBREV) (!KW [psubsubnode])
 
 !item [(!SEEALSO)]
 (!KW [psubsubnode])
@@ -565,7 +610,7 @@ Popup-Unterabschnitt ohne Eintrag im Inhaltsverzeichnis.
 !item [(!SYNTAX)] (!T)!/pss* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [psubsubnode*]).
+(!ABBREV) (!KW [psubsubnode*])
 
 !item [(!SEEALSO)]
 (!KW [psubsubnode*])
@@ -588,7 +633,7 @@ Popup-Paragraph einleiten.
 !item [(!SYNTAX)] (!T)!/psss [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [psubsubsubnode]).
+(!ABBREV) (!KW [psubsubsubnode])
 
 !item [(!SEEALSO)]
 (!KW [psubsubsubnode])
@@ -611,7 +656,7 @@ Versteckten Popup-Paragraph einleiten.
 !item [(!SYNTAX)] (!T)!/psss* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [psubsubsubnode*]).
+(!ABBREV) (!KW [psubsubsubnode*])
 
 !item [(!SEEALSO)]
 (!KW [psubsubsubnode*])
@@ -634,7 +679,7 @@ Versteckten Popup-Paragraph einleiten.
 !item [(!SYNTAX)] (!T)!/psss* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [psubsubsubsubnode*]).
+(!ABBREV) (!KW [psubsubsubsubnode*])
 
 !item [(!SEEALSO)]
 (!KW [psubsubsubsubnode*])
@@ -660,13 +705,19 @@ Popup-Abschnitt einleiten.
 Identisch mit (!KW [subnode]), der Inhalt wird jedoch beim
 ST-Guide und bei WinHelp als Popup dargestellt.
 
-!item [(!EXAMPLE)]
-(!T)!/psubnode Ein Popup-Abschnitt(!t)
-
 !item [(!SEEALSO)]
 (!KW [pnode]), (!KW [psubsubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode]), (!link [Gliederung] [Gliederung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubnode Ein Popup-Abschnitt
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subheading Ein Popup-Abschnitt
+(!EXAMPLE_END)
 
 !end_node
 
@@ -687,15 +738,21 @@ Popup-Abschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
 Dieses Kommando hat die gleiche Funktion wie (!KW [psubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht in
 Inhaltsverzeichnissen erscheint.
 
-!item [(!EXAMPLE)]
-(!T)!/psubnode* Ein versteckter Popup-Abschnitt(!t)
-
 !item [(!EXISTSSINCE)] Release~4 Version~0.46
 
 !item [(!SEEALSO)]
 (!KW [psubnode]), (!KW [subnode*]), (!KW [begin_pnode*]), (!link [Gliederung] [Gliederung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubnode* Ein versteckter Popup-Abschnitt
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subheading Ein versteckter Popup-Abschnitt
+(!EXAMPLE_END)
 
 !end_node
 
@@ -715,13 +772,19 @@ Popup-Unterabschnitt einleiten.
 !item [(!DESCRIPTION)]
 Identisch mit (!KW [subsubnode]), der Inhalt wird jedoch beim ST-Guide und bei WinHelp als Popup dargestellt.
 
-!item [(!EXAMPLE)]
-(!T)!/psubsubnode Ein Popup-Unterabschnitt(!t)
-
 !item [(!SEEALSO)]
 (!KW [pnode]), (!KW [psubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode]), (!link [Gliederung] [Gliederung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubsubnode Ein Popup-Unterabschnitt
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubheading Ein Popup-Unterabschnitt
+(!EXAMPLE_END)
 
 !end_node
 
@@ -742,15 +805,21 @@ Popup-Unterabschnitt ohne Eintrag im Inhaltsverzeichnis.
 Dieses Kommando hat die gleiche Funktion wie (!KW [psubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht in
 Inhaltsverzeichnissen erscheint.
 
-!item [(!EXAMPLE)]
-(!T)!/psubsubnode* Ein versteckter Popup-Unterabschnitt(!t)
-
 !item [(!EXISTSSINCE)] Release~4 Version~0.46
 
 !item [(!SEEALSO)]
 (!KW [psubsubnode]), (!KW [subsubnode*]), (!KW [begin_pnode*]), (!link [Gliederung] [Gliederung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubsubnode* Ein versteckter Popup-Unterabschnitt
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubheading Ein versteckter Popup-Unterabschnitt
+(!EXAMPLE_END)
 
 !end_node
 
@@ -770,15 +839,21 @@ Popup-Paragraph einleiten.
 !item [(!DESCRIPTION)]
 Identisch mit (!KW [subsubsubnode]), der Inhalt wird jedoch beim ST-Guide und bei WinHelp als Popup dargestellt.
 
-!item [(!EXAMPLE)]
-(!T)!/psubsubsubnode Ein Popup-Unterabschnitt(!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
 !item [(!SEEALSO)]
 (!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [begin_pnode]), (!link [Gliederung] [Gliederung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubsubsubnode Ein Popup-Paragraph
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubheading Ein Popup-Paragraph
+(!EXAMPLE_END)
 
 !end_node
 
@@ -799,15 +874,21 @@ Versteckten Popup-Paragraph einleiten.
 Dieses Kommando hat die gleiche Funktion wie (!KW [psubsubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht
 in Inhaltsverzeichnissen erscheint.
 
-!item [(!EXAMPLE)]
-(!T)!/psubsubsubnode* Ein versteckter Popup-Unterabschnitt(!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
 !item [(!SEEALSO)]
 (!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode*]), (!link [Gliederung] [Gliederung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubsubsubnode* Ein versteckter Popup-Paragraph
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubheading Ein versteckter Popup-Paragraph
+(!EXAMPLE_END)
 
 !end_node
 
@@ -816,7 +897,7 @@ in Inhaltsverzeichnissen erscheint.
 !begin_node (!kw [psubsubsubsubnode])
 !html_name  cmd_psubsubsubsubnode
 
-Popup-Paragraph einleiten.
+Popup-Unterparagraph einleiten.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -827,15 +908,21 @@ Popup-Paragraph einleiten.
 !item [(!DESCRIPTION)]
 Identisch mit (!KW [subsubsubsubnode]), der Inhalt wird jedoch beim ST-Guide und bei WinHelp als Popup dargestellt.
 
-!item [(!EXAMPLE)]
-(!T)!/psubsubsubsubnode Ein Popup-Unterabschnitt(!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
 !item [(!SEEALSO)]
 (!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [begin_pnode]), (!link [Gliederung] [Gliederung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubsubsubsubnode Ein Popup-Unterparagraph
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubheading Ein Popup-Unterparagraph
+(!EXAMPLE_END)
 
 !end_node
 
@@ -844,7 +931,7 @@ Identisch mit (!KW [subsubsubsubnode]), der Inhalt wird jedoch beim ST-Guide und
 !begin_node (!kw [psubsubsubsubnode*])
 !html_name  cmd_psubsubsubsubnode_asterisk
 
-Versteckten Popup-Paragraph einleiten.
+Versteckten Popup-Unterparagraph einleiten.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -856,15 +943,21 @@ Versteckten Popup-Paragraph einleiten.
 Dieses Kommando hat die gleiche Funktion wie (!KW [psubsubsubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht
 in Inhaltsverzeichnissen erscheint.
 
-!item [(!EXAMPLE)]
-(!T)!/psubsubsubsubnode* Ein versteckter Popup-Unterabschnitt(!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
 !item [(!SEEALSO)]
 (!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode*]), (!link [Gliederung] [Gliederung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubsubsubsubnode* Ein versteckter Popup-Unterparagraph
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubheading Ein versteckter Popup-Unterparagraph
+(!EXAMPLE_END)
 
 !end_node
 
@@ -886,8 +979,7 @@ Setzt die Schriftfarbe Lila.
 Dieser Platzhalter setzt die Schriftfarbe Lila.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -895,6 +987,15 @@ PostScript unterstützt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!purple)Lila(!coloff) erscheint in der Farbe Lila.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!purple)Lila(!coloff) erscheint in der Farbe Lila.
+(!EXAMPLE_END)
 
 !end_node
 

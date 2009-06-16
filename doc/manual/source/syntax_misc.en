@@ -24,6 +24,7 @@
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 10: using macro (!const [])
 #   fd  Jun 11: typos
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -95,25 +96,24 @@ code or a library.
 !end_enumerate
 
 # hinzugefügt 02.02.2004 - Ulrich Kretschmer
-(!B)Warning(!b): Avoid constructions like
+(!B)Warning(!b): Avoid constructions like these which cause infinite loops:
 !begin_xlist !short
-!item [a.ui:] (!V)!include b.ui(!v)
-!item [b.ui:] (!V)!include a.ui(!v)
+!item [a.ui:] (!C)!include(!c) (!file [b.ui])
+!item [b.ui:] (!C)!include(!c) (!file [a.ui])
 !end_xlist
 or
 !begin_xlist !short
-!item [a.ui:] (!V)!include b.ui(!v)
+!item [a.ui:] (!C)!include(!c) (!file [b.ui])
 	!begin_xlist !short
-	!item [b.ui:] (!V)!include c.ui(!v)
+	!item [b.ui:] (!C)!include(!c) (!file [c.ui])
 		!begin_xlist !short
-		!item [c.ui:] (!V)!include a.ui(!v)
+		!item [c.ui:] (!C)!include(!c) (!file [a.ui])
 		!end_xlist
 	!end_xlist
 !end_xlist
-which cause infinite loops!
 
 UDO can't recognize such overcross references. You get only a (less informative)
-error message "memory allocation failed".
+error message ""memory allocation failed"".
 
 !end_node # Split documents
 
@@ -397,7 +397,7 @@ symbol.
 !begin_enumerate
 !item You may use up to (!MAXDEFINE) symbols.
 
-!item The name of a symbol may be up to (!const [(!MAXSYMLEN)]) characters long.
+!item The name of a symbol may be up to (!MAXSYMLEN) characters long.
 !end_enumerate
 
 !end_node # Symbols
@@ -501,7 +501,7 @@ your source file UDO will add the commands that are necessary for
 converted especially for ""Makeindex"".
 
 !item You have to use the parameters inside brackets. If you want to use a
-bracket inside a parameter you have to insert a ""!"". If you don't
+bracket inside a parameter you have to insert a (!EXCLAM). If you don't
 UDO will think that the placeholder ended. An example:
 
 (!EXAMPLE_BEGIN)

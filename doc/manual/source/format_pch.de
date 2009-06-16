@@ -19,11 +19,13 @@
 #   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
 !begin_node Pure-C-Hilfe
 !html_name  format_pch
+!alias      Pure C Help
 
 Das Pure-C-Help-Format wird nur für Pure~C, einem Compiler für
 den Atari, als Hilfesystem verwendet. Ansonsten hat es keine

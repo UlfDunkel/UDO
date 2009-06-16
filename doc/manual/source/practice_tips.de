@@ -24,6 +24,7 @@
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -111,8 +112,8 @@ Copyright (!copyright) (!ProgrammJahr) bei C. Anfänger
 (!EXAMPLE_END)
 
 Im Vorspann einer Datei, die diesen Text einbindet, müssen dann
-nur die Makros ""ProgrammName"", ""ProgrammVersion"" und
-""ProgrammJahr"" gesetzt werden, im Hauptteil muss diese Datei dann nur
+nur die Makros ""(!code [ProgrammName])"", ""(!code [ProgrammVersion])"" und
+""(!code [ProgrammJahr])"" gesetzt werden, im Hauptteil muss diese Datei dann nur
 noch an passender Stelle eingebunden werden:
 
 (!EXAMPLE_BEGIN)

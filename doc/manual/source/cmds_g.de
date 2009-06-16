@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -70,8 +71,7 @@ Setzt die Schriftfarbe Grün.
 Dieser Platzhalter setzt die Schriftfarbe Grün.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -79,6 +79,15 @@ PostScript unterstützt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!green)Grün(!coloff) erscheint in der Farbe Grün.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!green)Grün(!coloff) erscheint in der Farbe Grün.
+(!EXAMPLE_END)
 
 !end_node
 
@@ -100,8 +109,7 @@ Setzt die Schriftfarbe (Dunkel-)Grau.
 Dieser Platzhalter setzt die Schriftfarbe (Dunkel-)Grau.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -109,6 +117,15 @@ PostScript unterstützt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!gray)Dunkelgrau(!coloff) erscheint in der Farbe Dunkelgrau.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!gray)Dunkelgrau(!coloff) erscheint in der Farbe Dunkelgrau.
+(!EXAMPLE_END)
 
 !end_node
 
@@ -129,13 +146,19 @@ Emoticon ausgeben.
 Dieser Platzhalter wird durch einen grinsenden Smiley
 ersetzt, der in Schreibmaschinenschrift ausgegeben wird.
 
-!item [(!EXAMPLE)]
-Aus (!code [(!/grin!)]) wird (!grin).
-
 !item [(!SEEALSO)]
 (!KKW [laugh]), Vordefinierte Makros
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!grin)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!grin)
+(!EXAMPLE_END)
 
 !end_node
 

@@ -18,6 +18,7 @@
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -25,10 +26,11 @@
 !html_name  format_html
 !label      HTML
 
+HTML ist eines der meistgenutzten Zielformate, die mit UDO erzeugt werden. Es ist zudem eines der meistgenutzten Formate für Online-Dokumentationen. Logischerweise gibt es zum HTML-Ausgabeformat auch die meisten Fragen. Hier sind die häufigsten als FAQ zusammengefasst.
+
 !begin_description
 
 !item	[How can I tell UDO not make files for each chapter?] ~
-
 In contrast to the other formats UDO saves a separate HTML file for each
 chapter by default. UDO names these files by using the chapter numbers. The
 title page and the table of contents will be saved in the file you passed in
@@ -67,7 +69,6 @@ subsections.
 !index !/html_name
 
 !item [I don't like the names of the HTML files! ] ~
-
 Using the command (!KW [html_name]) inside a chapter, section, subsection
 or paragraph you can tell UDO which filename it shall use instead of using
 a filename like "01020304.html".
@@ -91,7 +92,6 @@ Using the switch (!KW [no_headlines] [[html!!]]) inside the preamble you can
 tell UDO not to generate these headlines.
 
 !item [How can I easily make my own headlines or bottomlines?] ~
-
 !index Headlines
 !index Bottomlines
 
@@ -122,7 +122,6 @@ appear when using (!code [!/HEAD]) or (!code [!/FOOT]).
 !index	HTML !! Table frames
 
 !item [Sometimes a table has a frame, sometimes it hasn't!?] ~
-
 Unfortunately HTML only allows to use tables with or without frames. You
 cannot use table lines where you want to.
 
@@ -133,7 +132,6 @@ that contains (!KW [begin_table]). If you don't want a frame don't use
 !index	HTML !! Suffixes
 
 !item [Which suffixes does UDO use for HTML files?] ~
-
 By default UDO uses the suffix of the (!code [(--!)outfile]) you used in the
 command line:
 
@@ -148,7 +146,6 @@ systems with 8+3-filenames and (!file [.html]) on operating systems with
 long filenames.
 
 !item [The filenames of the URL's are wrong!?] ~
-
 If you use UDO on an operating system that doesn't support long filenames
 but you have used (!code [(--)outfile index.html]) and you copy the saved
 (!file [.htm]) files to a web server, remember this:

@@ -21,6 +21,7 @@
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -69,18 +70,14 @@ Text unverändert innerhalb einer Zeile für angegebene Formate ausgeben.
 !item [(!SYNTAX)] (!T)(!/raw [(!FORMAT)] [(!TEXT)])(!t)
 
 !item [(!DESCRIPTION)]
-(!code [(!TEXT)]) wird nur dann ausgegeben, wenn die Quelldatei in eines der 
-angegebenen Formate umgewandelt wird. (!code [(!TEXT)]) wird dann 1:1 und ohne 
+(!TEXT) wird nur dann ausgegeben, wenn die Quelldatei in eines der 
+angegebenen Formate umgewandelt wird. (!TEXT) wird dann 1:1 und ohne 
 Berücksichtigung etwaiger UDO-Kommandos ausgegeben.
 
 (!HINT) Da die abschließende runde Klammer (!code [!)]) sowie die abschließenden 
 eckigen Klammern (!code [!]]) für die Parameter-Blöcke von UDO erkannt werden müssen, 
-ist es wichtig, diese beiden Zeichen mit (!code [!!]) zu schützen, falls sie im 
+ist es wichtig, diese beiden Zeichen mit (!EXCLAM) zu schützen, falls sie im 
 auszugebenden Inhalt selbst vorkommen sollen.
-
-!item [(!EXAMPLE)]
-(!/raw [stg] [@subject Dokumentation/Zubehör]) (!nl)
-(!/raw [asc] [Die runde Klammer !) und die eckige Klammer !] müssen hier geschützt werden.])
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~7
 
@@ -88,6 +85,14 @@ auszugebenden Inhalt selbst vorkommen sollen.
 (!KW [ifdest]), (!KW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+(!raw [stg] [@subject Dokumentation/Zubehör])
+(!raw [asc] [Die runde Klammer !) und die eckige Klammer !] müssen hier geschützt werden.])
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -105,18 +110,22 @@ Zeile nur für bestimmte Formate ausgeben.
 !item [(!SYNTAX)] (!T)!/raw [(!FORMAT)] (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-(!code [(!TEXT)]) wird nur dann ausgegeben, wenn die Quelldatei
-in eines der angegebenen Formate umgewandelt wird. (!code [(!TEXT)])
+(!TEXT) wird nur dann ausgegeben, wenn die Quelldatei
+in eines der angegebenen Formate umgewandelt wird. (!TEXT)
 wird dann 1:1 und ohne Berücksichtigung etwaiger UDO-Kommandos
 ausgegeben. Diese Zeile zerteilt Absätze genau wie alle anderen Kommandos.
-
-!item [(!EXAMPLE)]
-!/raw [stg] @subject Documentation/Utilities
 
 !item [(!SEEALSO)]
 (!KW [ifdest]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!raw [stg] @subject Documentation/Utilities
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -138,8 +147,7 @@ Setzt die Schriftfarbe Rot.
 Dieser Platzhalter setzt die Schriftfarbe Rot.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -148,6 +156,15 @@ PostScript unterstützt.
 
 !end_xlist
 
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!red)Rot(!coloff) erscheint in der Farbe Rot.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!red)Rot(!coloff) erscheint in der Farbe Rot.
+(!EXAMPLE_END)
+
 !end_node
 
 # = = = = =
@@ -155,7 +172,7 @@ PostScript unterstützt.
 !begin_node (!kkw [reg])
 !html_name  cmd_reg()
 
-(!reg)-Zeichen ausgeben.
+Registermarke-Symbol ausgeben.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -169,15 +186,21 @@ ersetzt, sofern es in dem jeweiligen Zeichensatz
 vorhanden ist. Ist es das nicht, ersetzt UDO den
 Platzhalter durch ""(!code [registered])"".
 
-!item [(!EXAMPLE)]
-Aus (!code [(!/reg!)]) wird (!reg).
-
 !item [(!EXISTSSINCE)] Version 6.5.8
 
 !item [(!SEEALSO)]
 (!KKW [tm]), Vordefinierte Makros
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!reg)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!reg)
+(!EXAMPLE_END)
 
 !end_node
 
@@ -200,15 +223,21 @@ Stelle aus, an der dieses Kommando benutzt wurde. Der Inhalt der Datei
 wird nicht eingerückt oder zentriert ausgegeben. Die raw-Umgebung dient
 dazu, spezielle Formatbefehle einzubinden. (!FILESPACEQUOTE)
 
-!item [(!EXAMPLE)]
-(!T)!/rinclude table.tex(!t)
-
 !item [(!EXISTSSINCE)] Release~4 Version~0.41
 
 !item [(!SEEALSO)]
 (!KW [include]), (!KW [vinclude]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [raw-Umgebung] [raw-Umgebung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!rinclude htmlform.ui
+!end_verbatim
+(!EXAMPLE_AFTER)
+!rinclude (!EXAMPLES)html/htmlform.ui
+(!EXAMPLE_END)
 
 !end_node
 
@@ -255,15 +284,18 @@ Zeichenbreite einstellen (nur RTF).
 !item [(!SYNTAX)] (!T)!/rtf_add_colour (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando könnenzusätzliche Farben (über die 16 Standardfarben
-hinaus) in den Kopf einer RTF-Datei geschrieben werden.
-
-!item [(!EXAMPLE)]
-(!T)!/rtf_addcolour \red153\green204\blue255(!t)
+Mit diesem Kommando können zusätzliche Farben (über die (!const [16])~Standardfarben hinaus) in den Kopf einer RTF-Datei geschrieben werden.
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!rtf_addcolour \red153\green204\blue255
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -289,10 +321,7 @@ Großschrift noch richtig formatiert wird. Bei
 normaler Schrift kann es jedoch sein, dass die Zeichen
 zu weit eingerückt werden oder dass Tabellenzellen zu
 breit erscheinen. Mit diesem Schalter können sie den
-Berechnungswert anpassen. Standardmäßig benutzt UDO den Wert 150.
-
-!item [(!EXAMPLE)]
-(!T)!/rtf_charwidth 100(!t)
+Berechnungswert anpassen. Standardmäßig benutzt UDO den Wert (!const [150]).
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~4
 
@@ -300,6 +329,13 @@ Berechnungswert anpassen. Standardmäßig benutzt UDO den Wert 150.
 (!link [Tabellen] [Tabellen]), (!link [Listen] [Listen])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!rtf_charwidth 100
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -319,11 +355,8 @@ Seitenumbruch vor Tabelle erzeugen (nur RTF).
 !item [(!DESCRIPTION)]
 Wird dieser Schalter benutzt, gibt UDO alle folgenden Tabellen so
 aus, dass z.B. WinWord Tabellen am Seitenende nicht umbricht, sondern
-den Seitenumbruch vor der Tabelle erzeugt. Mit [off] schaltet man
-diesen Effekt für alle folgenden Tabellen wieder aus. Standard ist [off].
-
-!item [(!EXAMPLE)]
-(!T)!/rtf_keep_tables [on](!t)
+den Seitenumbruch vor der Tabelle erzeugt. Mit (!code [[off!]]) schaltet man
+diesen Effekt für alle folgenden Tabellen wieder aus. Standard ist (!code [[off!]]).
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~6
 
@@ -331,6 +364,13 @@ diesen Effekt für alle folgenden Tabellen wieder aus. Standard ist [off].
 (!KW [rtf_no_tables]), (!link [Tabellen] [Tabellen]), (!link [Listen] [Listen])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!rtf_keep_tables [on]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -352,13 +392,17 @@ Mit diesem Kommando kann man den Font setzen, der zur
 Darstellung von Klartext benutzt werden soll. Als
 Standard verwendet UDO den Font ""Courier New"".
 
-!item [(!EXAMPLE)]
-(!T)!/rtf_monofont Monospace 821(!t)
-
 !item [(!SEEALSO)]
 (!KW [rtf_propfont]), (!KW [rtf_monofont_size])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!rtf_monofont Monospace 821
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -379,10 +423,7 @@ Größe des Monospaced-Font für RTF setzen.
 !item [(!DESCRIPTION)]
 Mit diesem Kommando kann man die Größe des Font setzen, der zur
 Darstellung von Klartext benutzt werden soll.
-Als Standard verwendet UDO 10~pt.
-
-!item [(!EXAMPLE)]
-(!T)!/rtf_monofont_size 10(!t)
+Als Standard verwendet UDO (!const[10])~pt.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~15
 
@@ -390,6 +431,13 @@ Als Standard verwendet UDO 10~pt.
 (!KW [rtf_monofont])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!rtf_monofont_size 12
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -441,19 +489,22 @@ Mit diesem Kommando kann man den Font setzen, der zur
 Darstellung von Fließtext und Überschriften benutzt
 werden soll. Als Standard verwendet UDO den Font ""Times New Roman"".
 
-!item [(!EXAMPLE)]
-(!T)!/rtf_propfont Dutch 801 Roman(!t)
-
 !item [(!SEEALSO)]
 (!KW [rtf_monofont]), (!KW [rtf_propfont_size])
 
 !end_xlist
 
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!rtf_propfont Dutch 801 Roman
+!end_verbatim
+(!EXAMPLE_END)
+
 !end_node
 
 # = = = = =
 
-# ToDo: englisch
 !begin_node (!kw [rtf_propfont_size])
 !html_name  cmd_rtf_propfont_size
 
@@ -468,10 +519,7 @@ Größe des Proportional-Font für RTF setzen.
 !item [(!DESCRIPTION)]
 Mit diesem Kommando kann man die Größe des Font setzen, der zur
 Darstellung von Fließtext und Überschriften benutzt
-werden soll. Als Standard verwendet UDO 11~pt.
-
-!item [(!EXAMPLE)]
-(!T)!/rtf_propfont_size 10(!t)
+werden soll. Als Standard verwendet UDO (!const[11])~pt.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~15
 
@@ -479,6 +527,13 @@ werden soll. Als Standard verwendet UDO 11~pt.
 (!KW [rtf_propfont])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!rtf_propfont_size 10
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 

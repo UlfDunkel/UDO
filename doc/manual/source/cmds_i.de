@@ -30,6 +30,8 @@
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: html_name no longer uses CAPITAL letters
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -67,7 +69,7 @@ Abfrage des Ausgabeformates.
 # = = = = =
 
 !begin_node (!kkkw [I] [i])
-!html_name  cmd_I()
+!html_name  cmd_i()
 !label (!kk1 [/I])
 !label (!kk1 [/i])
 
@@ -82,13 +84,19 @@ Text kursiv ausgeben.
 !item [(!DESCRIPTION)]
 ""(!TEXT)"" wird kursiv dargestellt, falls möglich.
 
-!item [(!EXAMPLE)]
-(!T)(!/I)kursiv(!/i)(!t)
-
 !item [(!SEEALSO)]
 Schriftarten, (!link [Textgestaltung] [Textgestaltung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!I)kursiv(!i)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!I)kursiv(!i)
+(!EXAMPLE_END)
 
 !end_node
 
@@ -106,7 +114,7 @@ Aufzählungspunkt einleiten.
 !item [(!SYNTAX)] (!T)!/i [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [item]).
+(!ABBREV) (!KW [item])
 
 !item [(!SEEALSO)]
 (!KW [item])
@@ -131,13 +139,19 @@ Indexeinträge im Text angeben.
 !item [(!DESCRIPTION)]
 Dient zum Erzeugen von Indizes direkt im Quelltext.
 
-!item [(!EXAMPLE)]
-(!T)(!/idx [Wort] [Indexeintrag])(!t)
-
 !item [(!SEEALSO)]
 (!link [Indizes] [Indizes]), (!KKW [index]), (!KW [no_index]), (!KW [index])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!idx [Wort] [Indexeintrag])
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!idx [Wort] [Indexeintrag])
+(!EXAMPLE_END)
 
 !end_node
 
@@ -158,15 +172,25 @@ Allgemeine Abfrage beginnen.
 Dieses Kommando vereint die Abfragekommandos (!KW [iflang]),
 (!KW [ifdest]), (!KW [ifset]) und (!KW [ifos]). Das (etwas unglücklich gewählte) Beispiel zeigt, wie man abfragen kann, ob der Quelltext nach HTML oder mit deutschsprachigen Ausdrücken übersetzt wird.
 
-!item [(!EXAMPLE)]
-(!T)!/if [german,html](!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~11
 
 !item [(!SEEALSO)]
 (!KW [iflang]), (!KW [ifdest]), (!KW [ifset]), (!KW [ifos]), (!link [Abfragebefehle] [Abfragebefehle])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!if [html,german]
+Dieser Text erscheint nur im deutschen HTML-Handbuch.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!if [html,german]
+Dieser Text erscheint nur im deutschen HTML-Handbuch.
+!endif
+(!EXAMPLE_END)
 
 !end_node
 
@@ -195,15 +219,25 @@ man testen kann, ob die Quelldatei ins ST-Guide- oder
 WinHelp-Format umgewandelt wird.
 # ToDo: erfolgt stets eine ODER-Verknüpfung?? (U.K. 17.12.03)
 
-!item [(!EXAMPLE)]
-(!T)!/ifdest [stg,win](!t)
-
 !item [(!EXISTSSINCE)] Release~4 Version~0.41
 
 !item [(!SEEALSO)]
 (!KW [else]), (!KW [endif]), (!KW [ifndest]), (!KW [if]), (!link [Abfragebefehle] [Abfragebefehle])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ifdest [html,stg,win]
+Dieser Text erscheint nur in den Handbuch-Formaten HTML, ST-Guide und WinHelp.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [html,stg,win]
+Dieser Text erscheint nur in den Handbuch-Formaten HTML, ST-Guide und WinHelp.
+!endif
+(!EXAMPLE_END)
 
 !end_node
 
@@ -212,8 +246,7 @@ WinHelp-Format umgewandelt wird.
 !begin_node (!kw [iflang])
 !html_name  cmd_iflang
 
-Abfrage der Ausgabesprache. Hierbei gelten folgende Zeichenketten:
-!include language.de
+Abfrage der Ausgabesprache.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -224,14 +257,13 @@ Abfrage der Ausgabesprache. Hierbei gelten folgende Zeichenketten:
 !item [(!DESCRIPTION)]
 Dieses Kommando fragt die aktuelle Ausgabesprache ab.
 Wird ein deutscher Text erzeugt und wird als
-""<sprache>"" die Zeichenkette ""german"" verwendet, so
+""(!LANGUAGE)"" die Zeichenkette ""(!code [german])"" verwendet, so
 werden alle Zeilen ausgewertet, die bis (!KW [else]) bzw.
 (!KW [endif]) angegeben werden. Andernfalls werden alle
 Zeilen ausgewertet, die zwischen (!KW [else]) und (!KW [endif])
 angegeben werden.
 
-!item [(!EXAMPLE)]
-(!T)!/iflang [english](!t)
+!include language.de
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.47
 
@@ -239,6 +271,25 @@ angegeben werden.
 (!KW [ifnlang]), (!KW [ifdest]), (!KW [language]), (!link [Abfragebefehle] [Abfragebefehle])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!iflang [english]
+This text is visible only in the English manual.
+!endif
+!iflang [german]
+Dieser Text ist nur im deutschen Handbuch sichtbar.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!iflang [english]
+This text is only visible in the English manual.
+!endif
+!iflang [german]
+Dieser Text ist nur im deutschen Handbuch sichtbar.
+!endif
+(!EXAMPLE_END)
 
 !end_node
 
@@ -263,15 +314,29 @@ so werden alle Zeilen umgewandelt, die zwischen (!KW [ifndest]) und
 überein, werden nur die Zeilen zwischen (!KW [else]) und
 (!KW [endif]) ausgewertet, sofern (!KW [else]) benutzt wird.
 
-!item [(!EXAMPLE)]
-(!T)!/ifndest [html](!t)
-
 !item [(!EXISTSSINCE)] Release~4 Version~0.47
 
 !item [(!SEEALSO)]
 (!KW [else]), (!KW [endif]), (!KW [ifdest]), (!link [Abfragebefehle] [Abfragebefehle])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ifndest [html]
+Dieser Text erscheint nicht in der HTML-Version des Handbuchs.
+!else
+Aber dieser Text erscheint in der HTML-Version des Handbuchs.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifndest [html]
+Dieser Text erscheint nicht in der HTML-Version des Handbuchs.
+!else
+Aber dieser Text erscheint in der HTML-Version des Handbuchs.
+!endif
+(!EXAMPLE_END)
 
 !end_node
 
@@ -280,8 +345,7 @@ so werden alle Zeilen umgewandelt, die zwischen (!KW [ifndest]) und
 !begin_node (!kw [ifnlang])
 !html_name  cmd_ifnlang
 
-Abfrage der Ausgabesprache. Hierbei gelten folgende Zeichenketten:
-!include language.de
+Abfrage der Ausgabesprache.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -292,14 +356,13 @@ Abfrage der Ausgabesprache. Hierbei gelten folgende Zeichenketten:
 !item [(!DESCRIPTION)]
 Dieses Kommando fragt die aktuelle Ausgabesprache ab.
 Wird ein deutscher Text erzeugt und wird als
-""<sprache>"" (!I)nicht(!i) die Zeichenkette ""german""
+""(!LANGUAGE)"" (!I)nicht(!i) die Zeichenkette ""(!code [german])""
 verwendet, werden alle Zeilen ausgewertet, die bis
 (!KW [else]) bzw. (!KW [endif]) angegeben werden. Andernfalls
 werden alle Zeilen ausgewertet, die zwischen (!KW [else])
 und (!KW [endif]) angegeben werden.
 
-!item [(!EXAMPLE)]
-(!T)!/ifnlang [english](!t)
+!include language.de
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.47
 
@@ -307,6 +370,23 @@ und (!KW [endif]) angegeben werden.
 (!KW [iflang]), (!KW [ifdest]), (!KW [language]), (!link [Abfragebefehle] [Abfragebefehle])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ifnlang [english]
+Dieser Text erscheint nicht im englischen Handbuch.
+!else
+But this text will be visible in the English manual.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifnlang [english]
+Dieser Text erscheint nicht im englischen Handbuch.
+!else
+But this text will be visible in the English manual.
+!endif
+(!EXAMPLE_END)
 
 !end_node
 
@@ -327,14 +407,11 @@ Betriebssystem abfragen. Folgende Kürzel für unterstützte Betriebssysteme stehen
 
 !item [(!DESCRIPTION)]
 Dieses Kommando testet das aktuelle Betriebssystem,
-unter dem UDO läuft. Enthält ""<systeme>"" (!I)keines(!i) der
+unter dem UDO läuft. Enthält ""(!OS)"" (!I)keines(!i) der
 Kürzel der Betriebssysteme, wandelt UDO alle
 Zeilen ab dem folgenden (!KW [else]) um, falls (!KW [else]) benutzt
 wird. Das Beispiel zeigt, wie man abfragen kann, ob
-UDO (!I)nicht(!i) auf einem Apple Macintosh läuft.
-
-!item [(!EXAMPLE)]
-(!T)!/ifnos [macos](!t)
+UDO (!I)nicht(!i) auf einem aktuellen Apple Macintosh läuft.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~16
 
@@ -342,6 +419,23 @@ UDO (!I)nicht(!i) auf einem Apple Macintosh läuft.
 (!KW [ifos]), (!link [Abfragebefehle] [Abfragebefehle])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ifnos [macosx]
+Was zum Teufel ist schon Mac~OS~X?
+!else
+Mac~OS~X ist das coolste Betriebssystem zur Zeit.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifnos [macosx]
+Was zum Teufel ist schon Mac~OS~X?
+!else
+Mac~OS~X ist das coolste Betriebssystem zur Zeit.
+!endif
+(!EXAMPLE_END)
 
 !end_node
 
@@ -369,15 +463,25 @@ Andernfalls werden nur die Zeilen umgewandelt, die
 besitzt. Das Beispiel zeigt, wie man abfragt, ob das
 Symbol ""deutsch"" nicht gesetzt wurde.
 
-!item [(!EXAMPLE)]
-(!T)!/ifnset [deutsch](!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~10
 
 !item [(!SEEALSO)]
 (!KW [ifset]), (!link [Abfragebefehle] [Abfragebefehle])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ifnset [deutsch]
+This doesn't seem to be a German documentation.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifnset [deutsch]
+This doesn't seem to be a German documentation.
+!endif
+(!EXAMPLE_END)
 
 !end_node
 
@@ -398,13 +502,10 @@ Betriebssystem abfragen. Folgende Kürzel für unterstützte Betriebssysteme stehen
 
 !item [(!DESCRIPTION)]
 Dieses Kommando testet das aktuelle Betriebssystem,
-auf dem UDO läuft. Enthält ""<systeme>"" eines der
+auf dem UDO läuft. Enthält ""(!OS)"" eines der
 Kürzel der Betriebssysteme, wandelt UDO alle
 Zeilen zwischen (!KW [ifos]) und (!KW [endif]) bzw. (!KW [else]) um. Das
 Beispiel zeigt, wie man testen kann, ob UDO unter Linux läuft.
-
-!item [(!EXAMPLE)]
-(!T)!/ifos [linux](!t)
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~16
 
@@ -412,6 +513,23 @@ Beispiel zeigt, wie man testen kann, ob UDO unter Linux läuft.
 (!KW [ifnos]), (!link [Abfragebefehle] [Abfragebefehle])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ifos [linux]
+UDO läuft gerade unter Linux.
+!else
+UDO läuft momentan definitiv nicht unter Linux.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifos [linux]
+UDO läuft gerade unter Linux.
+!else
+UDO läuft momentan definitiv nicht unter Linux.
+!endif
+(!EXAMPLE_END)
 
 !end_node
 
@@ -432,15 +550,27 @@ Symbol abfragen.
 Mit diesem Abfragebefehl können Sie testen, ob ein Symbol für die Umwandlung in der Kommandozeile mit
 der Option (!code [-D]) gesetzt wurde. Wurde ""(!TEXT)"" gesetzt, werden alle folgenden Zeilen umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht. Andernfalls werden nur die Zeilen umgewandelt, die (!KW [else]) folgen, sofern die Abfrage einen else-Zweig besitzt. Das Beispiel zeigt, wie man abfragt, ob in der Kommandozeile (!code [-D deutsch]) benutzt wurde.
 
-!item [(!EXAMPLE)]
-(!T)!/ifset [deutsch](!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~10
 
 !item [(!SEEALSO)]
 (!KW [ifnset]), (!link [Abfragebefehle] [Abfragebefehle])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ifset [deutsch]
+Das Symbol ""deutsch"" wurde gesetzt!
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!set [deutsch]
+!ifset [deutsch]
+Das Symbol ""deutsch"" wurde gesetzt!
+!endif
+!unset [deutsch]
+(!EXAMPLE_END)
 
 !end_node
 
@@ -735,14 +865,11 @@ Dieser Platzhalter ist eine Kombination der Platzhalter
 (!KKW [img]) und (!KKW [link]) und dient dazu,
 einen Querverweis durch eine Grafik zu ermöglichen.
 Dies ist momentan nur beim WinHelp- und HTML-Format
-möglich. Im Beispiel wird das Bild (!file [disk.bmp]) bzw.
-(!file [disk.gif]) zur Darstellung des Links benutzt, das
-Sprungziel lautet ""Download"". Bei HTML wird als
-Alternativtext ""UDO downloaden"" ausgegeben. Bei allen
-anderen Formaten wird nur ""UDO downloaden"" ausgegeben.
-
-!item [(!EXAMPLE)]
-(!T)(!/ilink [disk] [UDO downloaden] [Download])(!t)
+möglich. Im Beispiel wird das Bild (!file [udo_icon_16.bmp]) bzw.
+(!file [udo_icon_16.gif]) zur Darstellung des Links benutzt, das
+Sprungziel lautet ""Installation"". Bei HTML wird als
+Alternativtext ""UDO installieren"" ausgegeben. Bei allen
+anderen Formaten wird nur ""UDO installieren"" ausgegeben.
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.47
 
@@ -751,13 +878,21 @@ anderen Formaten wird nur ""UDO downloaden"" ausgegeben.
 
 !end_xlist
 
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!ilink [img/udo_icon_16] [UDO installieren] [Installation])
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!ilink [img/udo_icon_16] [UDO installieren] [Installation])
+(!EXAMPLE_END)
+
 !end_node
 
 # = = = = =
 
-# ToDo: Englisch
 !begin_node (!kkkw [INS] [ins])
-!html_name  cmd_INS_ins
+!html_name  cmd_ins
 !label (!kk1 [/INS])
 !label (!kk1 [/ins])
 
@@ -772,20 +907,13 @@ Markierung von Einfügungen.
 !item [(!DESCRIPTION)]
 ""(!TEXT)"" wird als Einfügung markiert.
 
-Bei der HTML-Ausgabe wird die aktuelle Zeit als Attribut datetime
-und die URL ""http://www.udo-open-source.org"" als Attribut cite eingesetzt.
+Bei der HTML-Ausgabe wird der URL ""http://www.udo-open-source.org"" als Attribut (!code [cite]) und die aktuelle Zeit als Attribut (!code [datetime]) eingesetzt.
 
-Bei der RTF-Ausgabe wird ebenfalls die aktuelle Zeit eingesetzt. Außerdem
-trägt sich UDO als Änderungsautor 1 ein.
+Bei der RTF-Ausgabe wird ebenfalls die aktuelle Zeit eingesetzt. Außerdem trägt sich UDO als Änderungsautor 1 ein.
 
-Bei WinHelp(4), Apple Quickview und PostScript wird der neue Text in roter
-Farbe geschrieben.
+Bei WinHelp(4), Apple Quickview und PostScript wird der neue Text in roter Farbe geschrieben.
 
-Bei allen anderen Formaten wird der eingefügte Text ohne besondere Kennzeichen
-geschrieben.
-
-!item [(!EXAMPLE)]
-(!T)(!/INS)Einfügungen(!/ins)(!t)
+Bei allen anderen Formaten wird der eingefügte Text ohne besondere Kennzeichen geschrieben.
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -793,6 +921,20 @@ geschrieben.
 (!link [Textgestaltung] [Textgestaltung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!INS)Einfügungen(!ins)
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [html]
+!begin_verbatim
+<ins cite="http://www.udo-open-source.org" datetime="2009-06-16T01:03:32+01:00">Einfügungen</ins>
+!end_verbatim
+!endif
+(!INS)Einfügungen(!ins)
+(!EXAMPLE_END)
 
 !end_node
 
@@ -852,14 +994,20 @@ eventuell vorhandenen äußeren Umgebung. Zentrierte
 Bilder erhält man demnach, wenn man das (!KW [image])-Kommando in einer center-Umgebung verwendet.
 (!FILESPACEQUOTE)
 
-!item [(!EXAMPLE)]
-(!T)!/image tiger(!t)
-
 !item [(!SEEALSO)]
 (!KW [no_images]), (!KKW [img]), (!KW [image*]), (!link [Bilder] [Bilder]), (!KW [html_img_suffix]),
 (!KW [no_img_size])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!image img/udo_icon_16 UDO-Icon
+!end_verbatim
+(!EXAMPLE_AFTER)
+!image img/udo_icon_16 UDO-Icon
+(!EXAMPLE_END)
 
 !end_node
 
@@ -880,15 +1028,21 @@ Grafik ohne Nummer ausgeben.
 Der einzige Unterschied zum (!KW [image])-Kommando ist der,
 dass in der Bildunterschrift keine Abbildungsnummer ausgegeben wird.
 
-!item [(!EXAMPLE)]
-(!T)!/image* tiger Dies ist ein Tiger(!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~0
 
 !item [(!SEEALSO)]
 (!KW [no_images]), (!KKW [img]), (!KW [image]), (!link [Bilder] [Bilder]), (!KW [html_img_suffix])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!image* img/udo_icon_16 UDO-Icon
+!end_verbatim
+(!EXAMPLE_AFTER)
+!image* img/udo_icon_16 UDO-Icon
+(!EXAMPLE_END)
 
 !end_node
 
@@ -917,15 +1071,19 @@ man bei (!KW [image_alignment]) gesetzt hat. Will man ein Bild in einer
 center-Umgebung rechtsbündig ausgeben, muss man in dem Fall noch
 eine flushright-Umgebung um den (!KW [image])-Befehl setzen.
 
-!item [(!EXAMPLE)]
-(!T)!/image_alignment right(!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~9
 
 !item [(!SEEALSO)]
 (!KW [image]), (!KW [image*]), (!KKW [img]), (!KW [table_alignment]), (!link [Bilder] [Bilder])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!image_alignment right
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -948,15 +1106,26 @@ die bei der ersten Abbildung ausgegeben werden soll.
 Würde das Beispiel verwendet, stünde unterhalb der
 ersten Abbildung folgendes: ""Abbildung 5: !.."".
 
-!item [(!EXAMPLE)]
-(!T)!/image_counter 5(!t)
-
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~15
 
 !item [(!SEEALSO)]
 (!link [Bilder] [Bilder]), (!KW [image])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!image_counter 5
+
+# Hauptteil:
+!image img/udo_icon_16 UDO-Icon
+!end_verbatim
+(!EXAMPLE_AFTER)
+!image img/udo_icon_16 UDO-Icon
+Abbildung 5: UDO-Icon
+(!EXAMPLE_END)
 
 !end_node
 
@@ -970,7 +1139,7 @@ Grafik ausgeben.
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/img [(!FILE)] [(!TEXT)])(!t)
+!item [(!SYNTAX)] (!T)(!/img [(!FILE)] [(!TEXT)] {[(!TEXT)]})(!t)
 
 !item [(!DESCRIPTION)]
 Benutzen Sie dieses Kommando, um ein Bild direkt im
@@ -978,26 +1147,33 @@ Text bei der Umwandlung nach HTML oder WinHelp
 auszugeben. Bei der Umwandlung nach HTML wird
 (!file [file.gif]), bei WinHelp (!file [file.bmp]) benutzt, wobei UDO
 nicht überprüft, ob die jeweiligen Bilder existieren.
+
 Bei HTML wird ""(!TEXT)"" als Alternativtext benutzt. Bei
 den anderen Formaten wird nur ""(!TEXT)"" ausgegeben.
 
-Seit Version 6.5.18 wurde das Kommando erweitert: (!nl)
-(!T)(!/img [(!FILE)] [(!TEXT) [(!TEXT)]])(!t) (!nl)
-Dies hat nur Auswirkung bei der Ausgabe nach HTML, HTML Apple Help und HTMLHelp.
-Dabei wird der zweite (!TEXT) für das Attribut ""title"" benutzt. Ist nur ein (!TEXT)
-vorhanden, bekommen beide Attribute (""alt"" und ""title"") den selben Text. Beispiel:
+Das zweite, optionale {[(!TEXT)]} hat nur Auswirkung bei der Ausgabe nach HTML, HTML Apple Help und HTMLHelp. Er wird für das Attribut ""title"" benutzt. Ist nur ein (!TEXT) vorhanden, bekommen beide Attribute (""(!code [alt])"" und ""(!code [title])"") denselben Text, siehe Beispiel.
 
-<img src="d.gif" width="xxx" height="yyy" border="0" alt="text" title="text 2">
-
-!item [(!EXAMPLE)]
-(!T)(!/img [dh] [mein Logo])(!t)
-
-!item [(!EXISTSSINCE)] Release~4 Version~0.48
+!item [(!EXISTSSINCE)] Release~4 Version~0.48; Erweiterung in Version 6.5.18
 
 !item [(!SEEALSO)]
 (!link [Bilder] [Bilder]), (!KW [image]), (!KW [no_img_size])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!img [img/udo_icon_16] [UDO-Icon 1])
+(!img [img/udo_icon_16] [UDO-Icon 2] [Halten Sie mal den Mauszeiger auf das Bild.])
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+<img src="img/udo_icon_16.gif" alt="UDO-Icon 1" title="UDO-Icon 1" border="0" width="16" height="16">
+<img src="img/udo_icon_16.gif" alt="UDO-Icon 2" title="Halten Sie mal den Mauszeiger auf das Bild." border="0" width="16" height="16">
+!end_verbatim
+(!img [img/udo_icon_16] [UDO-Icon 1])
+(!img [img/udo_icon_16] [UDO-Icon 2] [Halten Sie mal den Mauszeiger auf das Bild.])
+(!EXAMPLE_END)
 
 !end_node
 
@@ -1019,13 +1195,19 @@ Datei einbinden.
 umgewandelten Inhalt an der Stelle aus, an der dieses
 Kommando benutzt wurde. (!FILESPACEQUOTE)
 
-!item [(!EXAMPLE)]
-(!T)!/include macros.ui(!t)
-
 !item [(!SEEALSO)]
 (!KW [vinclude]), (!KW [rinclude]), (!KW [input]), (!link [Verteilte Dokumente] [Verteilte Dokumente])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!include os.de
+!end_verbatim
+(!EXAMPLE_AFTER)
+!include os.de
+(!EXAMPLE_END)
 
 !end_node
 
@@ -1047,15 +1229,25 @@ Dient zum Erzeugen von Indizes direkt im Quelltext.
 Im Gegensatz zu (!KKW [idx]) wird ""(!TEXT)"" nicht ausgegeben,
 es erfolgt also nur ein Eintrag in den Index.
 
-!item [(!EXAMPLE)]
-(!T)(!/index [Wort] [Indexeintrag])(!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~6
 
 !item [(!SEEALSO)]
 (!link [Indizes] [Indizes]), (!KKW [idx]), (!KW [no_index]), (!KW [index])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!index [Wort])
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!index [Wort])
+(!EXAMPLE_END)
+
+# YYY fd:2009-06-16: testen
+
+(!red)Die erweiterten Parameter {[<index1>]} {[<index2>]} {[<index3>]} scheinen nicht zu funktionieren.(!coloff)
 
 !end_node
 
@@ -1083,15 +1275,21 @@ diesem Schlüsselwort suchen und bekommt die Namen der
 Kapitel aufgelistet, in denen (!KW [index]) benutzt wurde.
 ""(!TEXT)"" kann beliebig oft benutzt werden, auch in mehreren Kapiteln.
 
-!item [(!EXAMPLE)]
-(!T)!/index Eintrag !! Index(!t)
-
 !item [(!EXISTSSINCE)] Release~4 Version~0.48
 
 !item [(!SEEALSO)]
 (!link [Indizes] [Indizes]), (!KW [no_index]), (!KKW [idx])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!index Eintrag !! Index
+!end_verbatim
+(!EXAMPLE_AFTER)
+!index Eintrag !! Index
+(!EXAMPLE_END)
 
 !end_node
 
@@ -1144,15 +1342,21 @@ sucht (!KW [input]) nur in
 dem Verzeichnis, welches durch die Umgebungsvariable
 (!file [$UDOINPUTPATH]) definiert ist.
 
-!item [(!EXAMPLE)]
-(!T)!/input macros.ui(!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
 
 !item [(!SEEALSO)]
 (!KW [include]), (!KW [vinclude]), (!KW [rinclude]), (!link [Verteilte Dokumente] [Verteilte Dokumente])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!input os.de
+!end_verbatim
+(!EXAMPLE_AFTER)
+!include os.de
+(!EXAMPLE_END)
 
 !end_node
 
@@ -1204,13 +1408,31 @@ Aufzählungspunkt einleiten.
 Leitet einen neuen Aufzählungspunkt einer itemize-Umgebung oder enumerate-Umgebung ein. Dieser wird mit
 einer Marke bzw. mit einem alphanumerischen Wert gekennzeichnet.
 
-!item [(!EXAMPLE)]
-(!T)!/item Dies ist der nächste Aufzählungspunkt(!t)
-
 !item [(!SEEALSO)]
 (!KW [item] [[~!!]]), (!link [Aufzählungen] [Aufzählungen]), (!link [Nummerierungen] [Nummerierungen])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_itemize
+!item Dies ist ein Aufzählungspunkt in einer itemize-Umgebung
+!end_itemize
+
+!begin_enumerate
+!item Dies ist ein Aufzählungspunkt in einer enumerate-Umgebung.
+!end_enumerate
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_itemize
+!item Dies ist ein Aufzählungspunkt in einer itemize-Umgebung
+!end_itemize
+
+!begin_enumerate
+!item Dies ist ein Aufzählungspunkt in einer enumerate-Umgebung.
+!end_enumerate
+(!EXAMPLE_END)
 
 !end_node
 
@@ -1229,17 +1451,98 @@ Aufzählungspunkt einleiten.
 
 !item [(!DESCRIPTION)]
 Leitet einen neuen Aufzählungspunkt einer
-description-Umgebung oder einer xlist-Umgebung ein.
+description-Umgebung oder einer blist-Umgebung, ilist-Umgebung oder xlist-Umgebung ein.
 Der Text, der in eckige Klammern eingefasst wird, wird
-bei der description-Umgebung in der Ausgabedatei fett dargestellt.
-
-!item [(!EXAMPLE)]
-(!T)!/item [Titel:] Beschreibung(!t)
+bei der description-Umgebung und der blist-Umgebung in der Ausgabedatei fett dargestellt, bei der blist-Umgebung kursiv und bei der xlist-Umgebung normal.
 
 !item [(!SEEALSO)]
 (!KW [item]), (!link [Beschreibungen] [Beschreibungen]), (!link [Listen] [Listen])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_description
+!item [description-Umgebung] Dies ist ein Aufzählungspunkt in einer description-Umgebung.
+!item [description-Umgebung]
+Dies ist ein zweiter Aufzählungspunkt in einer description-Umgebung.
+!item [description-Umgebung]
+      Dies ist ein dritter Aufzählungspunkt in einer description-Umgebung.
+!end_description
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_description
+!item [description-Umgebung] Dies ist ein Aufzählungspunkt in einer description-Umgebung.
+!item [description-Umgebung]
+Dies ist ein zweiter Aufzählungspunkt in einer description-Umgebung.
+!item [description-Umgebung]
+      Dies ist ein dritter Aufzählungspunkt in einer description-Umgebung.
+!end_description
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_blist
+!item [blist-Umgebung] Dies ist ein Aufzählungspunkt in einer blist-Umgebung.
+!item [blist-Umgebung]
+Dies ist ein zweiter Aufzählungspunkt in einer blist-Umgebung.
+!item [blist-Umgebung]
+      Dies ist ein dritter Aufzählungspunkt in einer blist-Umgebung.
+!end_blist
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_blist
+!item [blist-Umgebung] Dies ist ein Aufzählungspunkt in einer blist-Umgebung.
+!item [blist-Umgebung]
+Dies ist ein zweiter Aufzählungspunkt in einer blist-Umgebung.
+!item [blist-Umgebung]
+      Dies ist ein dritter Aufzählungspunkt in einer blist-Umgebung.
+!end_blist
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_ilist
+!item [ilist-Umgebung] Dies ist ein Aufzählungspunkt in einer ilist-Umgebung.
+!item [ilist-Umgebung]
+Dies ist ein zweiter Aufzählungspunkt in einer ilist-Umgebung.
+!item [ilist-Umgebung]
+      Dies ist ein dritter Aufzählungspunkt in einer ilist-Umgebung.
+!end_ilist
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_ilist
+!item [ilist-Umgebung] Dies ist ein Aufzählungspunkt in einer ilist-Umgebung.
+!item [ilist-Umgebung]
+Dies ist ein zweiter Aufzählungspunkt in einer ilist-Umgebung.
+!item [ilist-Umgebung]
+      Dies ist ein dritter Aufzählungspunkt in einer ilist-Umgebung.
+!end_ilist
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_xlist
+!item [xlist-Umgebung] Dies ist ein Aufzählungspunkt in einer xlist-Umgebung.
+!item [xlist-Umgebung]
+Dies ist ein zweiter Aufzählungspunkt in einer xlist-Umgebung.
+!item [xlist-Umgebung]
+      Dies ist ein dritter Aufzählungspunkt in einer xlist-Umgebung.
+!end_xlist
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_xlist
+!item [xlist-Umgebung] Dies ist ein Aufzählungspunkt in einer xlist-Umgebung.
+!item [xlist-Umgebung]
+Dies ist ein zweiter Aufzählungspunkt in einer xlist-Umgebung.
+!item [xlist-Umgebung]
+      Dies ist ein dritter Aufzählungspunkt in einer xlist-Umgebung.
+!end_xlist
+(!EXAMPLE_END)
 
 !end_node
 

@@ -20,6 +20,7 @@
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -73,7 +74,7 @@ destination formats. (!code [(!TEXT)]) will be output then without any conversio
 
 (!HINT) Because UDO needs to recognize the closing bracket (!code [!)]) as well as 
 the closing square brackets (!code [!]]) of the parameter blocks, it is important 
-to protect these characters with (!code [!!]) if you want to use them in the content 
+to protect these characters with (!EXCLAM) if you want to use them in the content 
 themselves.
 
 !item [(!EXAMPLE)]
@@ -141,8 +142,7 @@ Sets the textcolor red.
 Dieser Platzhalter setzt die Schriftfarbe Rot.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -150,6 +150,15 @@ PostScript unterstützt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!red)Rot(!coloff) erscheint in der Farbe Rot.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!red)Rot(!coloff) erscheint in der Farbe Rot.
+(!EXAMPLE_END)
 
 !end_node
 

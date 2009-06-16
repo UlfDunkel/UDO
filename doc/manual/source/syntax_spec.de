@@ -23,6 +23,7 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 12: macro renamed: CODE -> CHARSET
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -57,7 +58,7 @@ Echte ,,Gänsefüßchen´´
 (!EXAMPLE_END)
 
 Wenn Sie in der Ausgabedatei doppelte Anführungszeichen sehen möchten,
-so müssen Sie stattdessen (!KP [((""!)!)])(!code [text])(!KP [((""!)!)])) angeben.
+so müssen Sie stattdessen (!KP [((""!)!)])(!code [text])(!KP [((""!)!)]) angeben.
 
 (!HINTS)
 
@@ -185,7 +186,7 @@ Zeichensätzen erstellt wurden. Und um es richtig komfortabel zu machen,
 können Quelltexte sogar aus einem Mischmasch benutzter
 Zeichensätze bestehen.
 
-Sie müssen UDO nur mittels (!KW [code]) (!CHARSET) mitteilen, mit welchem
+Sie müssen UDO nur mittels (!KW [code]) (!C)[(!CHARSET)](!c) mitteilen, mit welchem
 Zeichensatz die folgenden Zeilen erstellt wurden.
 
 Hier eine Übersicht, welches Kürzel für den Zeichensatz benutzt werden kann:
@@ -282,18 +283,17 @@ umgewandelt werden:
 !begin_table [|l|l|l|] !hline
 Platzhalter  !! x aus           !! Beispiel
 !hline
-# YYY
-(!/"x)       !! aeiosuyAEIOU    !! (!code [(!/"a!)])  = (!"a)
-(!/'x)       !! aeiouyAEIOUY    !! (!code [(!/'e!)])  = (!'e)
-(!/`x)       !! aeiouAEIOU      !! (!code [(!/`i!)])  = (!`i)
-(!/^x)       !! aeiouAEIOU      !! (!code [(!/^o!)])  = (!^o)
-# YYY
-(!/&x)       !! ae, oe, AE, OE  !! (!code [(!/&AE!)]) = (!&AE)
-(!/!~x)      !! anoANO          !! (!code [(!/!~n!)]) = (!~n)
-(!/,x)       !! cC              !! (!code [(!/,C!)])  = (!,C)
-(!/.x)       !! aA              !! (!code [(!/.A!)])  = (!.A)
-(!/_x)       !! ao              !! (!code [(!/_a!)])  = (!_a)
-(!/\x)       !! oO              !! (!code [(!/\O!)])  = (!\O)
+(!/"x)       !! aeiosuyAEIOU    !! (!B)(!T)(!/"a)(!t)(!b)  = (!"a)
+(!/'x)       !! aeiouyAEIOUY    !! (!code [(!/'e!)])       = (!'e)
+(!/`x)       !! aeiouAEIOU      !! (!code [(!/`i!)])       = (!`i)
+(!/^x)       !! aeiouAEIOU      !! (!code [(!/^o!)])       = (!^o)
+(!/&x)       !! ae, oe, AE, OE  !! (!B)(!T)(!/&AE)(!t)(!b) = (!&AE)
+# YYY: fd:2009-06-12:  Why is the tilde-n not shown properly?!?
+(!/!~x)      !! anoANO          !! (!code [(!/!~n!)])      = (!~n)
+(!/,x)       !! cC              !! (!code [(!/,C!)])       = (!,C)
+(!/.x)       !! aA              !! (!code [(!/.A!)])       = (!.A)
+(!/_x)       !! ao              !! (!code [(!/_a!)])       = (!_a)
+(!/\x)       !! oO              !! (!code [(!/\O!)])       = (!\O)
 !hline
 !end_table
 
@@ -302,6 +302,8 @@ Zielformat ein Zeichen nicht, wird das naheliegendste Zeichen
 benutzt, z.B. ""a"" statt ""(!^a)"".
 
 Mit (!KW [universal_charset] [[off!!]]) wird die Wandlung dieser Zeichen wieder abgeschaltet.
+
+(!~n)
 !universal_charset [off]
 
 !end_node # Universeller Zeichensatz

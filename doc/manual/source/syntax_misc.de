@@ -31,6 +31,7 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 10: using macro (!const [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -116,23 +117,21 @@ man beispielsweise eine Library oder eine Programmiersprache
 beschreiben möchte.
 !end_enumerate
 
-# hinzugefügt 02.02.2004 - Ulrich Kretschmer
-(!B)Achtung(!b): Vermeiden Sie Konstruktionen wie
+(!B)Achtung(!b): Vermeiden Sie Konstruktionen wie diese, die zu Endlos-Schleifen führen:
 !begin_xlist !short
-!item [a.ui:] (!V)!include b.ui(!v)
-!item [b.ui:] (!V)!include a.ui(!v)
+!item [a.ui:] (!C)!include(!c) (!file [b.ui])
+!item [b.ui:] (!C)!include(!c) (!file [a.ui])
 !end_xlist
 oder auch
 !begin_xlist !short
-!item [a.ui:] (!V)!include b.ui(!v)
+!item [a.ui:] (!C)!include(!c) (!file [b.ui])
 	!begin_xlist !short
-	!item [b.ui:] (!V)!include c.ui(!v)
+	!item [b.ui:] (!C)!include(!c) (!file [c.ui])
 		!begin_xlist !short
-		!item [c.ui:] (!V)!include a.ui(!v)
+		!item [c.ui:] (!C)!include(!c) (!file [a.ui])
 		!end_xlist
 	!end_xlist
 !end_xlist
-die zu Endlos-Schleifen führen!
 
 UDO kann derartige Über-Kreuz-Verweise nicht abfangen und liefert als Fehlermeldung
 nur ""memory allocation failed"".
@@ -179,7 +178,7 @@ Beispiel wird der Programmname in einen Disclaimer eingebaut, der per
 !index Parameter !! Makros
 
 Seit UDO Release~6 können Makros auch Parameter übergeben werden. Bei
-der Erzeugung eines Makros geben Sie dazu mit ""(!code [(!/1)])"", ""(!code [(!/2)])"" bis ""(!code [(!/9)])""
+der Erzeugung eines Makros geben Sie dazu mit ""(!C)(!1)(!c)"", ""(!C)(!2)(!c)"" bis ""(!C)(!9)(!c)""
 die Position der Parameter an. Um den Makros im Text die Parameter zu
 übergeben, setzen Sie diese in eckige Klammern.
 
@@ -192,7 +191,7 @@ nur einem Parameter aufgerufen wird:
 (!EXAMPLE_END)
 
 Die Worte ""fett, kursiv und unterstrichen"" werden bei der Ausgabe dann an die Stelle
-von (!code [(!/1)]) gesetzt.
+von ""(!C)(!1)(!c)"" gesetzt.
 
 !smallskip
 
@@ -201,7 +200,7 @@ von (!code [(!/1)]) gesetzt.
 !begin_enumerate
 !item Bei der Namensvergabe der Makros sollte man möglichst darauf
 achten, diese nicht wie bereits existente Befehle oder Platzhalter zu
-benennen. So sollten sie ein Makro nicht ""B"" oder ""nl"" nennen, da
+benennen. So sollten sie ein Makro nicht ""(!code [B])"" oder ""(!code [nl])"" nennen, da
 dann die Umschaltung in Fettschrift ((!KK1 [B])) oder ein erzwungener
 Zeilenumbruch nicht mehr funktionieren.
 
@@ -270,8 +269,8 @@ können dazu dienen, im endgültigen Text spezielle Kommandos
 einzubauen.
 
 !index (!kw [define])
-Die Syntax für eine Definition lautet (!KW [define]) (!code [(!WORD)]) (!code [(!TEXT)]). Im
-Gegensatz zu den Makros wird (!code [(!TEXT)]) nicht speziell angepasst, d.h., es
+Die Syntax für eine Definition lautet (!KW [define]) (!C)[(!WORD)](!c) (!C)[(!TEXT)](!c). Im
+Gegensatz zu den Makros wird (!C)[(!WORD)](!c) nicht speziell angepasst, d.h., es
 werden keine Umlaute und andere Sonderzeichen angepasst.
 
 Im folgenden Beispiel benutzen wir eine Definition, um nur im
@@ -284,7 +283,7 @@ HTML-Format ein Wort als Überschrift auszugeben:
 !smallskip
 
 Wie Sie sehen, können Sie mit diesen Definitionen spezielle Befehle des
-Ausgabeformates einbauen, die UDO standardmäßig nicht anbietet. In UDO4
+Ausgabeformates einbauen, die UDO standardmäßig nicht anbietet. In UDO~4
 gab es mal einen Satz Spezialplatzhalter, die nur für (!LaTeX) vorhanden
 waren. Da diese Platzhalter selten gebraucht wurden, die Umwandlung
 eines Quelltextes daher zumeist unnötig bremste, muss man diese
@@ -332,7 +331,7 @@ In diesem Beispiel wird nur ein Parameter an die Definition übergeben.
 Trotzdem soll für Nicht-(!LaTeX)-Formate der 2. Parameter ausgegeben
 werden. Sie werden sich vielleicht fragen, warum dies so ist. Nun, bei
 Nicht-(!LaTeX)-Formaten soll nichts ausgegeben werden. Ein zweiter
-Parameter ist nicht vorhanden, demnach leer, und somit wird ""lb (!/2)""
+Parameter ist nicht vorhanden, demnach leer, und somit wird ""(!C)lb (!/2)(!c)""
 zu nichts expandiert. Dieser Umweg ist leider nötig.
 
 !smallskip
@@ -433,7 +432,7 @@ man eine Fehlermeldung durch UDO vermeidet, falls das Symbol
 !begin_enumerate
 !item Es sind maximal (!MAXDEFINE) Symbole erlaubt.
 
-!item Der Bezeichner eines Symbols darf maximal (!const [(!MAXSYMLEN)]) Zeichen lang sein.
+!item Der Bezeichner eines Symbols darf maximal (!MAXSYMLEN) Zeichen lang sein.
 !end_enumerate
 
 !end_node # Symbole
@@ -649,7 +648,7 @@ verpassen:
 !index (!kw [iflang])
 
 Mit dem Befehl (!KW [iflang]) können Sie die Sprache abfragen, die für die
-Ausgabe der Zieldatei verwendet wird. Hierbei gelten folgende Zeichenketten:
+Ausgabe der Zieldatei verwendet wird.
 
 !label Sprache
 !label Sprachen

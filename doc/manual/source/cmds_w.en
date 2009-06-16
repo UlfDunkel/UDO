@@ -20,6 +20,7 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -523,8 +524,7 @@ Sets the textcolor white.
 Dieser Platzhalter setzt die Schriftfarbe Weiﬂ.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterst¸tzt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -532,6 +532,15 @@ PostScript unterst¸tzt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!white)Weiﬂ(!coloff) erscheint in der Farbe Weiﬂ.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!white)Weiﬂ(!coloff) erscheint in der Farbe Weiﬂ.
+(!EXAMPLE_END)
 
 !end_node
 

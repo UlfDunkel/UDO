@@ -25,6 +25,7 @@
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -101,7 +102,7 @@ Output a chapter headline.
 !item [(!SYNTAX)] (!T)!/h [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [heading]).
+(!ABBREV) (!KW [heading])
 
 !item [(!SEEALSO)]
 (!KW [heading])

@@ -18,6 +18,7 @@
 #   fd  Jun 09: macros x/X renamed to avoid conflicts with other macros and link names
 #   fd  Jun 09: language-dependent macros might better be included first
 #   fd  Jun 10: defines from _def.ui integrated here, using new macro (!const [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -59,12 +60,21 @@
 !define exclam !(!1)
 !macro  Exclam !
 
+# universal characters, which do not work properly with the following (!code []) macro
+!macro EXCLAM       (!B)(!T)!(!t)(!b)
+!macro OPEN_EXCLAM  (!B)(!T)(!(!t)(!b)
+
+
 # paths, file names, extensions, etc.
+# !macro  file (!teal)(!B)(!I)(!T)(!1)(!t)(!i)(!b)(!coloff)
 !macro  file (!red)(!B)(!I)(!T)(!1)(!t)(!i)(!b)(!coloff)
 
 # command parameters without link
-!macro  code (!B)(!T)(!1)(!t)(!b)
-!macro  verb (!V)(!1)(!v)
+!macro  C    (!B)(!T)
+!macro  c    (!t)(!b)
+!macro  code (!C)(!1)(!c)
+
+!macro  verb (!T)(!1)(!t)
 
 # command parameters without leading !
 !macro  KP (!B)(!T)(!link [(!1) (!2)][(!1)])(!t)(!b)
@@ -90,6 +100,10 @@
 # unlinked kommand word with round brackets and without leading !
 !define kk1  (!(!1))
 
+
+
+# Lorem Ipsum
+!macro LOREM  Lorem ipsum dolor sit amet, consectetuer sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
 
 
 # ------------------------------------------------------------------------------

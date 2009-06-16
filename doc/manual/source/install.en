@@ -19,6 +19,7 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -49,8 +50,6 @@ If you have installed the ST-Guide you should copy or move UDO's hypertext
 all your other hypertexts.
 !end_ignore
 
-(!DocumentationWorkInProgress)
-
 !end_node # Installing the Atari version
 
 # = = = = =
@@ -67,8 +66,6 @@ Running the DOS version, your computer must have a 80386 CPU (or higher).
 
 Older UDO versions needed the installation of RSJ and EMX. This software is no longer necessary.
 
-(!DocumentationWorkInProgress)
-
 !end_node # Installing the version for DOS or Windows (32-bit)
 
 # = = = = =
@@ -83,8 +80,6 @@ Older UDO versions needed the installation of RSJ and EMX. This software is no l
 !end_itemize
 
 Older UDO versions needed the installation of EMX. This software is no longer necessary.
-
-(!DocumentationWorkInProgress)
 
 !end_node # Installation the OS/2 version (32-bit)
 
@@ -105,8 +100,6 @@ UDO is available as a fat-binary so it will run both on a 68k Macintosh and
 a PowerPC Macintosh. If you want to save some disk space you may be smaller
 the program with a certain software.
 
-(!DocumentationWorkInProgress)
-
 !end_node # Installing the Macintosh version (Mac~OS 9)
 
 # = = = = =
@@ -119,10 +112,16 @@ the program with a certain software.
 !item Unpack the ZIP archiv and copy the executable file (!file [udo]) to (!file [/usr/bin]).
 !end_itemize
 Please note: a manpage is currently not part of the Mac~OS~X distribution.
-# English:
-Um in das Verzeichnis zu kommen, kann man über den Menüpunkt "Gehe zu/Gehe zum Ordner ..." des Finders gehen.
 
-(!DocumentationWorkInProgress)
+(!HINT)
+
+Das Verzeichnis (!file [/usr/bin]) wird im Finder normalerweise nicht angezeigt. Um es zu öffnen, geben Sie es im Menüpunkt ""Gehe zu/Gehe zum Ordner ..."" des Finders ein.
+
+Sie können auch -- sofern gewünscht -- sämtliche unsichtbaren Dateien und Verzeichnisse im Finder sichtbar schalten. Um unsichtbare Dateien und Ordner im Finder zu sehen, starten Sie das Terminal-Programm (Applications > Dienstprogramme > Terminal) und geben Sie dort ein:
+
+(!code [defaults write com.apple.finder AppleShowAllFiles TRUE])
+
+Damit die Änderungen wirksam werden, müssen Sie den Finder einmal neustarten.
 
 !end_node # Installing the Macintosh version (Mac~OS~X)
 
@@ -134,11 +133,9 @@ Um in das Verzeichnis zu kommen, kann man über den Menüpunkt "Gehe zu/Gehe zum O
 !begin_itemize !short
 !item Download the appropriate ZIP archive from (!url [http://www.udo-open-source.org/] [http://www.udo-open-source.org])
 !item Log in as (!code [root])
-!item first installation: (!code [rpm -i]) (!file [file])(!file [.rpm]);
-or if you have an older UDO-rpm installed: (!code [rpm -U]) (!file [file])(!file [.rpm])
+!item For a new installation enter: (!code [rpm -i]) (!file [file])(!file [.rpm])
+!item For an upgrade (if you have an older UDO-rpm installed): (!code [rpm -U]) (!file [file])(!file [.rpm])
 !end_itemize
-
-(!DocumentationWorkInProgress)
 
 !end_node # Installing the FreeMiNT version
 
@@ -150,12 +147,10 @@ or if you have an older UDO-rpm installed: (!code [rpm -U]) (!file [file])(!file
 !begin_itemize !short
 !item Laden Sie sich das entsprechende rpm-File von der UDO-Website herunter.
 !item Melden Sie sich als (!code [root]) an.
-!item Neuinstallation: (!code [rpm -i]) (!file [file])(!file [.rpm]);
-oder wenn bereits ein älteres UDO-rpm installiert war: (!code [rpm -U]) (!file [file])(!file [.rpm])
+!item For a new installation enter: (!code [rpm -i]) (!file [file])(!file [.rpm])
+!item For an upgrade (if you have an older UDO-rpm installed): (!code [rpm -U]) (!file [file])(!file [.rpm])
 !end_itemize
 Oder benutzen Sie Ihre bevorzugte rpm-Oberfläche (z.B. kpackage, krpmview, yast).
-
-(!DocumentationWorkInProgress)
 
 !end_node # Installing the Linux rpm package
 
@@ -222,8 +217,6 @@ Hint for users of Linux-SGML: My version doesn't contain all possible
 entities. Just take a look ate the Linuxdoc-SGML FAQ in the middle of
 this documentation if Linuxdoc-SGML prints an error message.
 !end_ignore
-
-The documentation is currently in revision (outdated in parts).
 
 !end_node # Installing from source under Linux
 

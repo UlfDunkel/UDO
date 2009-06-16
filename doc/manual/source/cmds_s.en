@@ -20,6 +20,7 @@
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -100,7 +101,7 @@ Output a section heading.
 !item [(!SYNTAX)] (!T)!/sh [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [subheading]).
+(!ABBREV) (!KW [subheading])
 
 !item [(!SEEALSO)]
 (!KW [subheading])
@@ -183,8 +184,7 @@ Sets the textcolor silver (light gray).
 Dieser Platzhalter setzt die Schriftfarbe Hellgrau.
 Abgeschlossen wird mit (!kkw [coloff]).
 
-Wird nur bei den Formaten HTML, RTF, WinHelp, DRC und
-PostScript unterstützt.
+(!COLORSUPPORT)
 
 !item [(!EXISTSSINCE)] Version 6.5.9
 
@@ -192,6 +192,15 @@ PostScript unterstützt.
 (!KKW [coloff]), Schriftfarben
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!silver)Hellgrau(!coloff) erscheint in der Farbe Hellgrau.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!silver)Hellgrau(!coloff) erscheint in der Farbe Hellgrau.
+(!EXAMPLE_END)
 
 !end_node
 
@@ -269,9 +278,22 @@ converted to (!LaTeX). Otherwise one additional empty line will be
 generated.
 
 !item [(!SEEALSO)]
-(!KW [medskip]), (!KW [bigskip])
+(!KW [bigskip]), (!KW [medskip])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!LOREM)
+!smallskip
+(!LOREM)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!LOREM)
+!smallskip
+(!LOREM)
+(!EXAMPLE_END)
 
 !end_node
 
@@ -289,7 +311,7 @@ Start a section.
 !item [(!SYNTAX)] (!T)!/sn [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [subnode]).
+(!ABBREV) (!KW [subnode])
 
 !item [(!SEEALSO)]
 (!KW [subnode])
@@ -312,7 +334,7 @@ Start a hidden section.
 !item [(!SYNTAX)] (!T)!/sn* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [subnode*]).
+(!ABBREV) (!KW [subnode*])
 
 !item [(!SEEALSO)]
 (!KW [subnode*])
@@ -397,7 +419,7 @@ Output a subsection heading.
 !item [(!SYNTAX)] (!T)!/ssh (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [subsubheading]).
+(!ABBREV) (!KW [subsubheading])
 
 !item [(!SEEALSO)]
 (!KW [subsubheading])
@@ -420,7 +442,7 @@ Start a subsection.
 !item [(!SYNTAX)] (!T)!/ssn [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [subsubnode]).
+(!ABBREV) (!KW [subsubnode])
 
 !item [(!SEEALSO)]
 (!KW [subsubnode])
@@ -443,7 +465,7 @@ Start a hidden subsection.
 !item [(!SYNTAX)] (!T)!/ssn* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [subsubnode*]).
+(!ABBREV) (!KW [subsubnode*])
 
 !item [(!SEEALSO)]
 (!KW [subsubnode*])
@@ -466,7 +488,7 @@ Output a paragraph heading.
 !item [(!SYNTAX)] (!T)!/sssh [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [subsubsubheading]).
+(!ABBREV) (!KW [subsubsubheading])
 
 !item [(!SEEALSO)]
 (!KW [subsubsubheading])
@@ -489,7 +511,7 @@ Start a paragraph.
 !item [(!SYNTAX)] (!T)!/sssn [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [subsubsubnode]).
+(!ABBREV) (!KW [subsubsubnode])
 
 !item [(!SEEALSO)]
 (!KW [subsubsubnode])
@@ -512,7 +534,7 @@ Start a hidden paragraph.
 !item [(!SYNTAX)] (!T)!/sssn* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [subsubsubnode*]).
+(!ABBREV) (!KW [subsubsubnode*])
 
 !item [(!SEEALSO)]
 (!KW [subsubsubnode*])
@@ -535,7 +557,7 @@ Start a subparagraph.
 !item [(!SYNTAX)] (!T)!/ssssn [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [subsubsubsubnode]).
+(!ABBREV) (!KW [subsubsubsubnode])
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~14
 
@@ -560,7 +582,7 @@ Start a hidden subparagraph.
 !item [(!SYNTAX)] (!T)!/ssssn* [(!TEXT)](!t)
 
 !item [(!DESCRIPTION)]
-(!ABBREV) (!KW [subsubsubsubnode*]).
+(!ABBREV) (!KW [subsubsubsubnode*])
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~14
 
@@ -709,7 +731,7 @@ Straße des Autors für den Adressblock der Titelseite setzen.
 
 # TodDo: Englisch
 !begin_node (!kkkw [SUB] [sub])
-!html_name  cmd_SUB_sub
+!html_name  cmd_subscript
 !label (!kk1 [/SUB])
 !label (!kk1 [/sub])
 
@@ -1314,7 +1336,7 @@ chapters of the appendix.
 
 # TodDo: Englisch
 !begin_node (!kkkw [SUP] [sup])
-!html_name  cmd_SUP_sup
+!html_name  cmd_superscript
 !label (!kk1 [/SUP])
 !label (!kk1 [/sup])
 

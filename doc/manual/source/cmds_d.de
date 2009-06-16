@@ -26,6 +26,8 @@
 #   fd  Jun 09: NAME macro introduced
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: html_name no longer uses CAPITAL letters
+#   fd  Jun 16: great review session #1
 #
 ################################################################################
 
@@ -77,13 +79,10 @@ Definition setzen.
 Dieses Kommando legt eine neue Definition an. Bei der
 Umwandlung wird dann ""(!WORD)"" durch ""(!TEXT)""
 ersetzt, ohne dass Umlaute oder andere spezielle
-Zeichen umgewandelt werden. Im Beispiel würde ""(!/H1)""
-durch ""</H1>"" ersetzt. (!nolink [Definitionen]) können auch
+Zeichen umgewandelt werden. Im Beispiel würde ""(!code [(!/h1!)])""
+durch ""(!code [</h1>])"" ersetzt. (!nolink [Definitionen]) können auch
 Paramater enthalten. Nähere Informationen dazu findet
-man im Kapitel ""(!nolink [Definitionen])"".
-
-!item [(!EXAMPLE)]
-(!T)!/define H1 </H1>(!t)
+man im Kapitel ""Definitionen"".
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.37
 
@@ -91,6 +90,13 @@ man im Kapitel ""(!nolink [Definitionen])"".
 (!link [Definitionen] [Definitionen])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!define h1 </h1>
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -113,9 +119,6 @@ ersetzt, sofern es in dem jeweiligen Zeichensatz
 vorhanden ist. Ist es das nicht, ersetzt UDO den
 Platzhalter durch ""(!code [Grad])"".
 
-!item [(!EXAMPLE)]
-Aus (!code [(!/deg!)]) wird (!deg).
-
 !item [(!EXISTSSINCE)] Version 6.5.8
 
 !item [(!SEEALSO)]
@@ -123,13 +126,22 @@ Vordefinierte Makros
 
 !end_xlist
 
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+10~(!deg)C
+!end_verbatim
+(!EXAMPLE_AFTER)
+10~(!deg)C
+(!EXAMPLE_END)
+
 !end_node
 
 # = = = = =
 
 # ToDo: Englisch
 !begin_node (!kkkw [DEL] [del])
-!html_name  cmd_DEL_del
+!html_name  cmd_del
 !label (!kk1 [/DEL])
 !label (!kk1 [/del])
 
@@ -157,15 +169,26 @@ Bei ST-Guide und AmigaGuide wird der Text hell dargestellt.
 
 Bei allen anderen Formaten wird der gelöschte Text in eckige Klammern gesetzt. 
 
-!item [(!EXAMPLE)]
-(!T)(!/DEL)Löschungen(!/del)(!t)
-
 !item [(!EXISTSSINCE)] Version 6.5.9
 
 !item [(!SEEALSO)]
 (!link [Textgestaltung] [Textgestaltung])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!DEL)Löschungen(!del)
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifdest [html]
+!begin_verbatim
+<del cite="http://www.udo-open-source.org" datetime="2009-06-14T14:55:20+01:00">Löschungen</del>
+!end_verbatim
+!endif
+(!DEL)Löschungen(!del)
+(!EXAMPLE_END)
 
 !end_node
 
@@ -189,9 +212,6 @@ legt er die Tiefe des ausgegebenen Verzeichnisses fest.
 Das Beispiel zeigt, wie man ein (!nolink [Inhaltsverzeichnis]) ausgibt,
 das nur die Nodes (1.~Ebene) enthält.
 
-!item [(!EXAMPLE)]
-(!T)!/tableofcontents !/depth 1(!t)
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~2
 
 !item [(!SEEALSO)]
@@ -199,6 +219,13 @@ das nur die Nodes (1.~Ebene) enthält.
 (!KW [subtoc]), (!KW [subsubtoc]), (!KW [subsubsubtoc])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!tableofcontents !depth 1
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -349,8 +376,15 @@ Die Werte Einträge stehen als Defines zur Verfügung in der Form
 (!KW [UDO_xxx)], also z. B. (!KW [UDO_title]). Natürlich ist dies nur der
 Fall, wenn sie vorher definiert worden sind.
 
-!item [(!EXAMPLE2)]
-(!T)
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!link [Titelseite] [Titelseite])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !docinfo [title] Die Windows-Hilfe zu
 !docinfo [program] UDO
@@ -365,14 +399,7 @@ Fall, wenn sie vorher definiert worden sind.
 !docinfo [authorimage] dh
 !docinfo [date] (!today)
 !end_verbatim
-(!t)
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [maketitle]), (!link [Titelseite] [Titelseite])
-
-!end_xlist
+(!EXAMPLE_END)
 
 !end_node
 
@@ -398,27 +425,32 @@ der folgenden Werte sein:
 !begin_description
 
 !item [paper]
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !doclayout [ps] [paper] foo
 !end_verbatim
-Mögliche Angaben für foo sind: A3PORTRAIT, A3LANDSCAPE,
-A4PORTRAIT, A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE
+(!EXAMPLE_END)
+Mögliche Angaben für foo sind: A3PORTRAIT, A3LANDSCAPE, A4PORTRAIT, A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE.
 
 !item [propfontname]
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !doclayout [ps] [propfontname] foo
 !end_verbatim
+(!EXAMPLE_END)
 Mögliche Angaben für foo sind Zeichensatznamen, z. B. Arial,
 Times New Roman, sans oder sans serif.
 
-Hinweis: Für die PostScript-Ausgabe gilt zur Zeit: Wenn dort irgendwas
-mit ""Helvetica"", ""Arial"" oder ""sans-serif"" steht wird ""Helvetica"" gesetzt,
-ansonsten ""Times New Roman"".
+(!B)Hinweis:(!b) Für die PostScript-Ausgabe gilt zur Zeit: Wenn dort irgendwas
+mit ""Helvetica"", ""Arial"" oder ""sans-serif"" steht, wird ""Helvetica"" gesetzt,
+sonst ""Times New Roman"".
 
 !item [propfontsize]
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !doclayout [ps] [propfontsize] foo
 !end_verbatim
+(!EXAMPLE_END)
 Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
 
 !item [monofontname]
@@ -427,33 +459,41 @@ Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
 Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
 
 !item [node1size]
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !doclayout [ps,rtf] [node1size] foo
 !end_verbatim
+(!EXAMPLE_END)
 Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
 
 seit Release~6 Patchlevel~16
 
 !item [node2size]
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !doclayout [ps,rtf] [node2size] foo
 !end_verbatim
+(!EXAMPLE_END)
 Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
 
 seit Release~6 Patchlevel~16
 
 !item [node3size]
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !doclayout [ps,rtf] [node3size] foo
 !end_verbatim
+(!EXAMPLE_END)
 Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
 
 seit Release~6 Patchlevel~16
 
 !item [node4size]
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 !doclayout [ps,rtf] [node4size] foo
 !end_verbatim
+(!EXAMPLE_END)
 Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
 
 seit Release~6 Patchlevel~16
@@ -539,11 +579,8 @@ Wert für Nodefinition festlegen (nur DRC).
 !item [(!SYNTAX)] (!T)!/drc_flags (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-Hiermit kann man den Wert angeben, der als letzter numerischer Wert einer
-Nodedefinition gesetzt werden soll.
-
-!item [(!EXAMPLE)]
-(!T)!/drc_flags 6(!t)
+Hiermit kann man den Wert angeben, der als letzter nummerischer Wert einer
+Node-Definition gesetzt werden soll.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~7
 
@@ -551,6 +588,13 @@ Nodedefinition gesetzt werden soll.
 (!KW [drc_bcolor]), (!KW [drc_icolor]), (!KW [drc_ucolor])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!drc_flags 6
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
