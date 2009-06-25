@@ -23,6 +23,7 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 16: great review session #1
+#   fd  Jun 25: NDR: 'plazieren' -> 'platzieren'
 #
 ################################################################################
 
@@ -40,7 +41,7 @@ bei dem man den Dateinamen der einzubindenden Datei (ohne Suffix!)
 angeben muss sowie optional eine Bildunterschrift angeben kann.
 
 !index (!kkw [img])
-Um Bilder bei HTML und WinHelp mitten im Text zu plazieren, kann man
+Um Bilder bei HTML und WinHelp mitten im Text zu platzieren, kann man
 sich des Platzhalters (!KKW [img]) bedienen. Bei den anderen
 Ausgabeformaten ist es hingegen nicht möglich, Bilder mitten im Text
 auszugeben. Eine genauere Erklärung dieses Platzhalters finden Sie im

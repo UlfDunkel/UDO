@@ -26,6 +26,7 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 16: great review session #1
+#   fd  Jun 25: NDR: 'plazieren' -> 'platzieren'
 #
 ################################################################################
 
@@ -142,7 +143,7 @@ entscheidende Möglichkeit übersehen.
 
 !item [Warum werden in Tabellen keine Linien angezeigt?]
 Die Tabellenfunktionen von WinHelp sind ziemlich mager. So ist es
-unmöglich, Linien frei in einer Tabelle zu plazieren. Es ist nur
+unmöglich, Linien frei in einer Tabelle zu platzieren. Es ist nur
 möglich, jede Tabellenzelle mit oder ohne Rahmen darzustellen.
 
 !item [Warum sind die Einrückungen bei Listen und Tabellen so groß?]
