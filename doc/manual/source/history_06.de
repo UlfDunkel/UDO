@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from history.de)
+#   fd  Jun 25: 'die URL' -> 'der URL' (it refers to 'locator')
 #
 ################################################################################
 
@@ -64,7 +65,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !item (!kw [country]): 
          Zusätzliche Titelseiten-Information
    !item (!KW [html_backpage]): 
-         Zur Angabe einer Rücksprung-URL für die Kopfzeile der ersten HTML-Seite.
+         Zur Angabe eines Rücksprung-URL für die Kopfzeile der ersten HTML-Seite.
    !item (!KW [html_keywords]): 
          Zur Erzeugung von Meta-Informationen
    !item (!KW [html_img_suffix]): 

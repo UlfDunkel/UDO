@@ -28,6 +28,7 @@
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 16: html_name no longer uses CAPITAL letters
 #   fd  Jun 16: great review session #1
+#   fd  Jun 25: 'die URL' -> 'der URL' (it refers to 'locator')
 #
 ################################################################################
 
@@ -157,7 +158,7 @@ Markierung von Löschungen.
 ""(!TEXT)"" wird als Löschung markiert.
 
 Bei der HTML-Ausgabe wird die aktuelle Zeit als Attribut datetime
-und die URL ""http://www.udo-open-source.org"" als Attribut cite eingesetzt.
+und der URL ""http://www.udo-open-source.org"" als Attribut cite eingesetzt.
 
 Bei der RTF-Ausgabe wird ebenfalls die aktuelle Zeit eingesetzt. Außerdem
 trägt sich UDO als Änderungsautor 1 ein.

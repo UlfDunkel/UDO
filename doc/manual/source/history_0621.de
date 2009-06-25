@@ -14,6 +14,7 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from history.de)
+#   fd  Jun 25: 'die URL' -> 'der URL' (it refers to 'locator')
 #
 ################################################################################
 
@@ -44,7 +45,7 @@
          In den (!LINK)-Elementen wurde alle Subsubnodes aus anderen Subnodes
          mit aufgeführt
    !item Bug #0000025 in Version 6.2.1 beseitigt (!nl)
-         UDO stürzte ab, wenn Umlaute im Dateinamen oder Domain einer URL
+         UDO stürzte ab, wenn Umlaute im Dateinamen oder Domain eines URL
          im Kommando (!/url !..) vorkamen.
    !item Bug #0000029 in Version 6.2.1 beseitigt (!nl)
          Bei (!/url !..) wurde bei der RTF-Ausgabe das führende

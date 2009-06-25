@@ -31,6 +31,7 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 16: great review session #1
 #   fd  Jun 25: NDR: 'plazieren' -> 'platzieren'
+#   fd  Jun 25: 'die URL' -> 'der URL' (it refers to 'locator')
 #
 ################################################################################
 
@@ -643,7 +644,7 @@ Rücksprung-URL angeben.
 !item [(!SYNTAX)] (!T)!/html_backpage <URL> '(!TEXT)'(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando können Sie eine URL angeben, die
+Mit diesem Kommando können Sie einen URL angeben, der
 für den Verweis für den ""Go~up""-Button in der
 Kopfzeile der Hauptseite bei HTML-Dateien verwendet werden soll.
 Zuusätzlich können Sie einen Verweistext mit angeben.
