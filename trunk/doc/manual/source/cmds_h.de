@@ -30,6 +30,7 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 16: great review session #1
+#   fd  Jun 25: NDR: 'plazieren' -> 'platzieren'
 #
 ################################################################################
 
@@ -749,7 +750,7 @@ Sorgt für die Ausrichtung der Buttons beim ""modernen"" Layout.
 !begin_node (!kw [html_counter_command])
 !html_name  cmd_html_counter_command
 
-Zähler plazieren (nur HTML).
+Zähler platzieren (nur HTML).
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -759,7 +760,7 @@ Zähler plazieren (nur HTML).
 
 !item [(!DESCRIPTION)]
 Was dem Kommando folgt, wird 1:1 in der Fußzeile
-ausgegeben, sodass man den Zähler optisch besser plazieren kann.
+ausgegeben, sodass man den Zähler optisch besser platzieren kann.
 Beim ""modernen"" Layout und beim Frames-Layout wird der Zähler in
 der rechten Spalte dargestellt.
 
@@ -1198,7 +1199,7 @@ Höhe des Rahmens beim Frames-Layout bestimmen (nur HTML).
 !item [(!DESCRIPTION)]
 Gibt die Höhe des Frames an, in den die Links bei einem durch
 (!KW [html_frames_layout]) erzeugten Rahmen gesetzt werden,
-sofern dieser oben oder unten plaziert ist.
+sofern dieser oben oder unten platziert ist.
 
 Wird statt eines dezimalen Wertes ein Prozentwert angegeben, gibt auch UDO einen Prozentwert aus.
 
@@ -1417,7 +1418,7 @@ Breite des Rahmens beim Frames-Layout bestimmen (nur HTML).
 !item [(!DESCRIPTION)]
 Gibt die Breite des Frames an, in den die Links bei einem durch
 (!KW [html_frames_layout]) erzeugten Rahmen gesetzt werden,
-sofern dieser links oder rechts plaziert ist.
+sofern dieser links oder rechts platziert ist.
 
 Wird statt eines dezimalen Wertes ein Prozentwert angegeben, gibt auch UDO einen Prozentwert aus.
 

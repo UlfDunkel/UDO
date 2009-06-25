@@ -16,6 +16,7 @@
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 10: using macro (!code [])
+#   fd  Jun 25: NDR: 'plazieren' -> 'platzieren'
 #
 ################################################################################
 
@@ -84,7 +85,7 @@ bemängelt sogar korrekte RTF-Tags.
 StarWriter 3.0 versteht das RTF-Tag (!code [\xe]) nicht, welches für das
 Einbauen von Indizes zuständig ist.
 
-!item [Lotus WordPro plaziert Kapitelnummern außerhalb des Textrahmens!?]
+!item [Lotus WordPro platziert Kapitelnummern außerhalb des Textrahmens!?]
 Tja, wenn ich wüsste, was WordPro sich dabei denkt, dann könnte
 ich etwas dazu sagen. Andere Textverarbeitungen stellen die
 Kapitelnummern korrekt dar.
