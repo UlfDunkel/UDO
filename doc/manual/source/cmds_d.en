@@ -25,6 +25,7 @@
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 16: html_name no longer uses CAPITAL letters
 #   fd  Jun 16: great review session #1
+#   fd  Aug 17: 'information' never used in plural in English!
 #
 ################################################################################
 
@@ -216,7 +217,7 @@ Set document information.
 
 !item [(!DESCRIPTION)]
 !item [Description:]
-This command is used to set several informations output on the title page. ""(!NAME)"" can have one of the following values:
+This command is used to add various information output to the title page. ""(!NAME)"" can have one of the following values:
 
 !begin_description
 
@@ -310,7 +311,7 @@ Wird für HTML-Apple-Help benötigt. Damit wird das Icon angegeben, welches der Ap
 anzeigen soll.
 
 !item [webmastername|webmasteremail|webmasterurl]
-If you specify webmaster informations, UDO will
+If you specify webmaster information, UDO will
 output following lines at the end of each page:
 
 (!EXAMPLE_BEGIN)

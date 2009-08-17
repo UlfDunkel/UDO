@@ -19,6 +19,7 @@
 #   fd  Jun 05: html_name shortened ('introduction' -> 'intro')
 #   fd  Jun 08: ignored format list removed (is included via formattb.ui)
 #   fd  Jun 10: using macro (!file [])
+#   fd  Aug 17: 'information' never used in plural in English!
 #
 ################################################################################
 
@@ -318,7 +319,7 @@ Persons working on the UDO project (in alphabetical ordner):
 !alias      Contact
 !alias      mailing list
 
-On the UDO website (!url [http://www.udo-open-source.org] [http://www.udo-open-source.org/]) you can find informations for UDO users and developers, especially you can download the latest version of UDO and its documentation.
+On the UDO website (!url [http://www.udo-open-source.org] [http://www.udo-open-source.org/]) you can find information for UDO users and developers, especially you can download the latest version of UDO and its documentation.
 
 Using the following (!B)mailing lists(!b), you can contact the UDO community:
 
