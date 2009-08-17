@@ -19,6 +19,7 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 16: html_name no longer uses CAPITAL letters
 #   fd  Jun 16: great review session #1
+#   fd  Aug 17: 'information' never used in plural in English!
 #
 ################################################################################
 
@@ -306,7 +307,7 @@ The example shows how to switch it of when converting to ASCII.
 !begin_node (!kw [no_footers])
 !html_name  cmd_no_footers
 
-Do not insert webmaster informations in bottom lines.
+Do not insert webmaster information in bottom lines.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -316,7 +317,7 @@ Do not insert webmaster informations in bottom lines.
 
 !item [(!DESCRIPTION)]
 This switch will turn off the automatic generation
-if webmaster informations in the bottom line
+if webmaster information in the bottom line
 of the page. The example shows how to
 switch it of when converting to HTML.
 

@@ -26,6 +26,7 @@
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 10: using macro (!const [])
 #   fd  Jun 16: great review session #1
+#   fd  Aug 17: 'information' never used in plural in English!
 #
 ################################################################################
 
@@ -946,7 +947,7 @@ cases it was impossible not to change the syntax of some commands.
           sourcecode environments.
         !item UDO generate an error message now when using
           (!KW [maketitle]) without having set any
-          informations for the title page.
+          information for the title page.
         !item If you use (!KW [heading]), (!KW [subheading]) etc. in
           a center or flushright environment, the headings will
           be justified accordingly.
@@ -1003,7 +1004,7 @@ cases it was impossible not to change the syntax of some commands.
            , (!kw [code_hp8])
            , (!kw [code_iso]), (!kw [code_mac]), (!kw [code_next])
            and (!kw [code_tos])
-        !item The commands to set informations for the title page
+        !item The commands to set information for the title page
            have changed. Instead of (!kw [title]), (!kw [program])
            , (!kw [version]), (!kw [date]), (!kw [author]), (!kw [street])
            , (!kw [town]), (!kw [country]) and (!kw [email]) the new
