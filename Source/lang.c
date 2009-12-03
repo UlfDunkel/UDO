@@ -41,12 +41,14 @@
 *  2009:
 *    fd  Apr 23: Polish encoding set to ISO-8859-2 (hard encoded)
 *    fd  Jun 04: !docinfo [translator] introduced
+*    fd  Dec 03: - Swedish month names should be used in lowercase (Karl-Johan Nor´en)
+*                - more Swedish adjustments
 *
 ******************************************|************************************/
 
 /*******************************************************************************
 *
-*     CONSTANTS
+*     DEFINES
 *
 ******************************************|************************************/
 
@@ -71,75 +73,81 @@ const char *id_lang_c= "@(#) lang.c       $Date$";
 #include <time.h>
 #include "portab.h"
 
-#include "version.h"    /* WICHTIGE Makros!                                     */
-#include "constant.h"   /* WICHTIGE Makros!                                     */
-#include "udo_type.h"   /* diverse Typen                                        */
-#include "chr.h"        /* Zeichensatzumwandlungen                      */
-#include "toc.h"        /* !node, !alias, !label, !toc          */
-#include "udo.h"        /* globale Prototypen                           */
+#include "version.h"                      /* IMPORTANT macros! */ 
+#include "constant.h"                     /* IMPORTANT macros! */
+#include "udo_type.h"                     /* several type definitions */
+#include "chr.h"                          /* character code maps */
+#include "toc.h"                          /* !node, !alias, !label, !toc */
+#include "udo.h"                          /* global prototypes */
 
 #include "export.h"
 
 
-/*      ############################################################
-        # Konstanten
-        ############################################################    */
+
+
+
+/*******************************************************************************
+*
+*     CONSTANTS DEFINITIONS
+*
+******************************************|************************************/
+
 /*      ------------------------------------------------------
         Datum-Konstanten (Umlaut in Maerz besonders beachten!)
         Innerhalb init_lang() und init_lang_date() werden
         die Zeichen des "Universal Charset" angepasst.
         ------------------------------------------------------  */
 
-/* Deutsch */
+/* German */
 LOCAL const char *MONTH_GER[] =
 {
    "Januar", "Februar", "M(!\"a)rz", "April", "Mai", "Juni",
    "Juli", "August", "September", "Oktober", "November", "Dezember"
 };
 
-/* Daenisch */ /* V6.5.18 */
+/* Danish */
 LOCAL const char *MONTH_DAE[] =
 {
    "Januar", "Februar", "Marts", "April", "Maj", "Juni",
    "Juli", "August", "September", "Oktober", "November", "December"
 };
 
-/* Niederlaendisch */
+/* Dutch */
 LOCAL const char *MONTH_DUT[] =
 {
    "januari", "februari", "maart", "april", "mei", "juni",
    "juli", "augustus", "september", "oktober", "november", "december"
 };
 
-/* Englisch */
+/* English */
 LOCAL const char *MONTH_ENG[] =
 {
    "January", "February", "March", "April", "May", "June",
    "July", "August", "September", "October", "November", "December"
 };
 
-/* Franzoesisch */
+/* French */
 LOCAL const char *MONTH_FRA[] =
 {
    "janvier", "f(!'e)vrier", "mars", "avril", "mai", "juin",
    "juillet", "ao(!^u)t", "septembre", "octobre", "novembre", "d(!'e)cembre"
 };
 
-/* Italienisch */
+/* Italian */
 LOCAL const char *MONTH_ITA[] =
 {
    "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
    "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
 };
 
-/* Schwedisch */
+/* Swedish */
 LOCAL const char *MONTH_SWE[] =
 {
-   "Januari", "Februari", "Mars", "April", "Maj", "Juni",
-   "Juli", "Augusti", "September", "Oktober", "November", "December"
+   "januari", "februari", "mars", "april", "maj", "juni",
+   "juli", "augusti", "september", "oktober", "november", "december"
 };
 
-/* Spanisch */
+/* Spanish */
 LOCAL const char *MONTH_SPA[] =
 {
    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -190,65 +198,71 @@ LOCAL const char *MONTH_POL[] =
         # Strings fuer die ausgewaehlte Sprache setzen (destlang)
         ############################################################    */
 
-/*      --------------------------------------------------------------
-        init_lang_date()
-        Setzt Uhrzeit und Datum abhaengig von der jeweiligen Sprache
-        --------------------------------------------------------------  */
-GLOBAL void init_lang_date ( void )
+/*******************************************************************************
+*
+*  init_lang_date():
+*     set time and date to the desired language
+*
+*  Out:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void init_lang_date(void)
 {
-   time_t      timer;        /* */
+   time_t       timer;        /* */
    struct tm  *zeit;         /* */
-   int         old_charset;  /* */
+   int          old_charset;  /* */
 
 
    time(&timer);
    zeit = localtime(&timer);
 
-   iDateDay   = zeit->tm_mday;  /* Global sichern z.B. fuer RTF */
-   iDateMonth = zeit->tm_mon+1;
-   iDateYear  = zeit->tm_year+1900;
+   iDateDay   = zeit->tm_mday;            /* Global sichern z.B. fuer RTF */
+   iDateMonth = zeit->tm_mon + 1;
+   iDateYear  = zeit->tm_year + 1900;
    iDateHour  = zeit->tm_hour;
    iDateMin   = zeit->tm_min;
    iDateSec   = zeit->tm_sec;
 
    switch (destlang)
    {
-   case TOENG:     /* Englisch */
+   case TOENG:     /* English */
       sprintf(lang.today, "%s %d, %d", MONTH_ENG[zeit->tm_mon], zeit->tm_mday, 1900+zeit->tm_year);
       sprintf(lang.short_today, "%0d/%02d/%02d", 1900+zeit->tm_year, zeit->tm_mon+1, zeit->tm_mday);
       break;
 
-   case TOFRA:     /* Franzoesisch */
+   case TOFRA:     /* French */
       sprintf(lang.today, "%d %s %d", zeit->tm_mday, MONTH_FRA[zeit->tm_mon], 1900+zeit->tm_year);
       sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
       break;
 
-   case TOITA:     /* Italienisch */
+   case TOITA:     /* Italian */
       sprintf(lang.today, "%d. %s %d", zeit->tm_mday, MONTH_ITA[zeit->tm_mon], 1900+zeit->tm_year);
       sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
       break;
 
-   case TOSWE:     /* Schwedisch */
-      sprintf(lang.today, "%s %d, %d", MONTH_SWE[zeit->tm_mon], zeit->tm_mday, 1900+zeit->tm_year);
+   case TOSWE:     /* Swedish */
+      sprintf(lang.today, "%d %s %d", zeit->tm_mday, MONTH_SWE[zeit->tm_mon], 1900+zeit->tm_year);
       sprintf(lang.short_today, "%0d-%02d-%02d", 1900+zeit->tm_year, zeit->tm_mon+1, zeit->tm_mday);
       break;
 
-   case TOSPA:     /* Spanisch */
+   case TOSPA:     /* Spanish */
       sprintf(lang.today, "%d. %s %d", zeit->tm_mday, MONTH_SPA[zeit->tm_mon], 1900+zeit->tm_year);
       sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
       break;
 
-   case TODUT:     /* Hollaendisch */
+   case TODUT:     /* Dutch */
       sprintf(lang.today, "%d %s %d", zeit->tm_mday, MONTH_DUT[zeit->tm_mon], 1900+zeit->tm_year);
       sprintf(lang.short_today, "%02d-%02d-%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
       break;
 
-   case TODAN:     /* Daenisch */ /* V6.5.18 */
+   case TODAN:     /* Danish */
       sprintf(lang.today, "%d %s %d", zeit->tm_mday, MONTH_DAE[zeit->tm_mon], 1900+zeit->tm_year);
       sprintf(lang.short_today, "%02d-%02d-%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
       break;
 
-   case TOCZE:     /* Czech */ /* v6.5.19 */
+   case TOCZE:     /* Czech */
       sprintf(lang.today, "%d. %s %d", zeit->tm_mday, MONTH_CZE[zeit->tm_mon], 1900+zeit->tm_year);
       sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
       break;
@@ -263,7 +277,7 @@ GLOBAL void init_lang_date ( void )
       sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
       break;
 
-   default:        /* Deutsch ist default */
+   default:        /* German is default */
       sprintf(lang.today, "%d. %s %d", zeit->tm_mday, MONTH_GER[zeit->tm_mon], 1900+zeit->tm_year);
       sprintf(lang.short_today, "%02d.%02d.%d", zeit->tm_mday, zeit->tm_mon+1, 1900+zeit->tm_year);
    }
@@ -278,21 +292,32 @@ GLOBAL void init_lang_date ( void )
 
    iCharset = old_charset;
 
-}  /* init_lang_date */
+}  /* init_lang_date() */
 
 
-/*      --------------------------------------------------------------
-        init_lang() initialisiert die von UDO benutzen Ausdruecke in
-        der jeweiligen Sprache. Sonderzeichen muessen im Universal
-        Charset angegeben werden.
-        --------------------------------------------------------------  */
-GLOBAL void init_lang ( void )
+
+
+
+/*******************************************************************************
+*
+*  init_lang():
+*     initialize the UDO defined strings for the desired language.
+*
+*  Note:
+*     Special characters have to be defined in the Universal Charset (so far).
+*
+*  Out:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void init_lang(void)
 {
    memset(&lang, 0, sizeof(LANG));
 
    switch (destlang)       
    {
-   case TODUT:     /* Rogier_Cobben@nextjk.stuyts.nl */
+   case TODUT:                            /* Rogier_Cobben@nextjk.stuyts.nl */
       strcpy(lang.preface,    "Voorwoord");
       strcpy(lang.chapter,    "Hoofdstuk");
       strcpy(lang.title,      "Titel");
@@ -307,17 +332,16 @@ GLOBAL void init_lang ( void )
       strcpy(lang.see,        "zie");
       strcpy(lang.also,       "zie ook");
       strcpy(lang.by,         "door");
-      strcpy(lang.fur,        "voor"); /* New in V6.5.2 [NHz] */
+      strcpy(lang.fur,        "voor");
       strcpy(lang.up,         "&Omhoog");
       strcpy(lang.exit,       "Be i&ndigen");
       strcpy(lang.unknown,    "Onbekend");
       strcpy(lang.update,     "Last updated on");
-      strcpy(lang.lcid,       "LCID=0x413 0x0 0x0 ;Dutch");   /* V6.5.18 */
+      strcpy(lang.lcid,       "LCID=0x413 0x0 0x0 ;Dutch");
       strcpy(lang.html_home,  "Home");
       strcpy(lang.html_up,    "Up");
       strcpy(lang.html_prev,  "Prev");
       strcpy(lang.html_next,  "Next");
-      /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "nl");
       strcpy(lang.html_start, "Begin of the document");
       strcpy(lang.translator, "Translator:");
@@ -339,7 +363,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.see,        "see");
       strcpy(lang.also,       "see also");
       strcpy(lang.by,         "by");
-      strcpy(lang.fur,        "for"); /* New in V6.5.2 [NHz] */
+      strcpy(lang.fur,        "for");
       strcpy(lang.up,         "&Up");
       strcpy(lang.exit,       "E&xit");
       strcpy(lang.unknown,    "Unknown");
@@ -349,19 +373,19 @@ GLOBAL void init_lang ( void )
       strcpy(lang.html_up,    "Up");
       strcpy(lang.html_prev,  "Prev");
       strcpy(lang.html_next,  "Next");
-      /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "en");
       strcpy(lang.html_start, "Begin of the document");
       strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Distributor:");
       break;
 
-   case TOFRA:             /* vergleiche german.sty von LaTeX */
+   case TOFRA:                            /* vergleiche german.sty von LaTeX */
+                                         /* corrections by Didier Briel (ddc@imaginet.fr) */
       strcpy(lang.preface,    "Pr(!'e)face");
       strcpy(lang.chapter,    "Chapitre");
       strcpy(lang.title,      "Titre");
       strcpy(lang.appendix,   "Annexe");
-      strcpy(lang.contents,   "Sommaire");    /* r6pl13: laut Didier Briel (ddc@imaginet.fr) */
+      strcpy(lang.contents,   "Sommaire");
       strcpy(lang.listfigure, "Table des figures");
       strcpy(lang.listtable,  "Liste des tableaux");
       strcpy(lang.figure,     "Figure");
@@ -371,27 +395,22 @@ GLOBAL void init_lang ( void )
       strcpy(lang.see,        "voir");
       strcpy(lang.also,       "voir aussi");
       strcpy(lang.by,         "de");
-      strcpy(lang.fur,        "pour"); /* New in V6.5.2 [NHz] */
+      strcpy(lang.fur,        "pour");
       strcpy(lang.up,         "&Haut");
       strcpy(lang.exit,       "&Fin");
       strcpy(lang.unknown,    "Inconnu");
-      strcpy(lang.update,     "Derni(!`e)re mise (!`a) jour le");             /* r6pl13: laut Didier Briel (ddc@imaginet.fr) */
+      strcpy(lang.update,     "Derni(!`e)re mise (!`a) jour le");
       strcpy(lang.lcid,       "LCID=0x40c 0x0 0x0 ;French (France)");
       strcpy(lang.html_home,  "Home");
       strcpy(lang.html_up,    "Up");
       strcpy(lang.html_prev,  "Prev");
       strcpy(lang.html_next,  "Next");
-      /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "fr");
       strcpy(lang.html_start, "Begin of the document");
       strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Distribution :");
 
-      /* Strings mit Sonderzeichen anpassen */
-      uni2ascii(lang.preface);
-     
-      /* Changed in r6pl17 [NHz] */
-      /* uni2ascii(lang.contents);*/
+      uni2ascii(lang.preface);               /* adjust strings with special characters */
       uni2ascii(lang.update);
       break;
 
@@ -420,7 +439,6 @@ GLOBAL void init_lang ( void )
       strcpy(lang.html_up,    "Up");
       strcpy(lang.html_prev,  "Prev");
       strcpy(lang.html_next,  "Next");
-      /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "it");
       strcpy(lang.html_start, "Begin of the document");
       strcpy(lang.translator, "Translator:");
@@ -452,14 +470,12 @@ GLOBAL void init_lang ( void )
       strcpy(lang.html_up,    "Up");
       strcpy(lang.html_prev,  "Prev");
       strcpy(lang.html_next,  "Next");
-      /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "es");
       strcpy(lang.html_start, "Begin of the document");
       strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Distributor:");
       
-      /* Strings mit Sonderzeichen anpassen */
-      uni2ascii(lang.chapter);
+      uni2ascii(lang.chapter);               /* adjust strings with special characters */
       uni2ascii(lang.title);
       uni2ascii(lang.appendix);
       uni2ascii(lang.index);
@@ -467,41 +483,44 @@ GLOBAL void init_lang ( void )
       uni2ascii(lang.also);
       break;
    
-   case TOSWE:
+   case TOSWE:                            /* adjusted by Karl-Johan Nor´en */
       strcpy(lang.preface,    "F(!\"o)rord");
       strcpy(lang.chapter,    "Kapitel");
       strcpy(lang.title,      "Titel");
       strcpy(lang.appendix,   "Appendix");
-      strcpy(lang.contents,   "Inneh(!.a)ll");
-      strcpy(lang.listfigure, "Lista av Figurer");
-      strcpy(lang.listtable,  "Lista av Tabeller");
-      strcpy(lang.figure,     "Figurer");
-      strcpy(lang.table,      "Tabeller");
+      strcpy(lang.contents,   "Inneh(!.a)llsf(!\"o)rteckning");
+      strcpy(lang.listfigure, "Figurer");
+      strcpy(lang.listtable,  "Tabeller");
+      strcpy(lang.figure,     "Figur");
+      strcpy(lang.table,      "Tabell");
       strcpy(lang.index,      "Index");
       strcpy(lang.page,       "Sida");
       strcpy(lang.see,        "se");
       strcpy(lang.also,       "se (!\"a)ven");
       strcpy(lang.by,         "av");
-      strcpy(lang.fur,        "f(!\"o)r"); /* New in V6.5.2 [NHz] */
+      strcpy(lang.fur,        "f(!\"o)r");
       strcpy(lang.up,         "&Upp");
       strcpy(lang.exit,       "Avsluta");
-      strcpy(lang.unknown,    "Unknown");
-      strcpy(lang.update,     "Last updated on");
+      strcpy(lang.unknown,    "Ok(!\"a)nd");
+      strcpy(lang.update,     "Senast uppdaterad");
       strcpy(lang.lcid,       "LCID=0x41d 0x0 0x0 ;Swedish (Sweden)");
       strcpy(lang.html_home,  "Home");
       strcpy(lang.html_up,    "Up");
       strcpy(lang.html_prev,  "Prev");
       strcpy(lang.html_next,  "Next");
-      /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "sv");
-      strcpy(lang.html_start, "Begin of the document");
-      strcpy(lang.translator, "Translator:");
-      strcpy(lang.distributor,"Distributor:");
+      strcpy(lang.html_start, "Dokumentets b(!\"o)rjan");
+      strcpy(lang.translator, "Övers(!\"a)ttare:");
+      strcpy(lang.distributor,"Distribut(!\"o)r:");
       
-      /* Strings mit Sonderzeichen anpassen */
-      uni2ascii(lang.preface);
+      uni2ascii(lang.preface);               /* adjust strings with special characters */
       uni2ascii(lang.contents);
       uni2ascii(lang.also);
+      uni2ascii(lang.fur);
+      uni2ascii(lang.unknown);
+      uni2ascii(lang.html_start);
+      uni2ascii(lang.translator);
+      uni2ascii(lang.distributor);
       break;
    
    case TODAN:                /* V6.5.18 */
@@ -534,7 +553,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Distributor:");
       
-      uni2ascii(lang.appendix);
+      uni2ascii(lang.appendix);               /* adjust strings with special characters */
       uni2ascii(lang.also);
       uni2ascii(lang.html_next);
       break;
@@ -569,7 +588,7 @@ GLOBAL void init_lang ( void )
       strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Distributor:");
 
-      uni2ascii(lang.preface);
+      uni2ascii(lang.preface);               /* adjust strings with special characters */
       uni2ascii(lang.appendix);
       uni2ascii(lang.listfigure);
       uni2ascii(lang.figure);
@@ -651,6 +670,8 @@ GLOBAL void init_lang ( void )
       strcpy(lang.html_start, "Dokumenta sâkums");
       strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Izplatîtâjs:");
+
+               /* adjust strings with special characters */
 /*
       uni2ascii(lang.preface);
       uni2ascii(lang.appendix);
@@ -723,17 +744,18 @@ GLOBAL void init_lang ( void )
       strcpy(lang.html_up,    "Up");
       strcpy(lang.html_prev,  "Prev");
       strcpy(lang.html_next,  "Next");
-      /* New in r6pl16 [NHz] */
       strcpy(lang.html_lang,  "de");
       strcpy(lang.html_start, "Beginn des Dokumentes");
       strcpy(lang.translator, "(!\"U)bersetzung:");
       strcpy(lang.distributor,"Distributor:");
       
-      uni2ascii(lang.fur); /* New in V6.5.2 [NHz] */
+      uni2ascii(lang.fur);               /* adjust strings with special characters */
       uni2ascii(lang.translator);
    }
    
    toc_init_lang();
 
-}       /*init_lang*/
+}  /* init_lang() */
+
+/* +++ EOF +++ */
 
