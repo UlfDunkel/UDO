@@ -18,11 +18,12 @@
 #   fd  Jun 05: header added; file reformatted
 #   fd  Jun 06: dates updated
 #   fd  Jun 10: macro DATE removed (not really required)
+#   fd  Dec 15: #788 released (enhancement in !html_navigation)
 #
 ################################################################################
 
 !macro RELEASE  6
-!macro VERSION  (!RELEASE).5.20 beta (rev. 774)
+!macro VERSION  (!RELEASE).5.20 beta (rev. 788)
 
 !docinfo [version]  (!VERSION)
 !docinfo [date]     (!today)
