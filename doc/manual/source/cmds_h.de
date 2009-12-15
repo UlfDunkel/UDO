@@ -32,6 +32,7 @@
 #   fd  Jun 16: great review session #1
 #   fd  Jun 25: NDR: 'plazieren' -> 'platzieren'
 #   fd  Jun 25: 'die URL' -> 'der URL' (it refers to 'locator')
+#   fd  Dec 15: chapter html_navigation enhanced
 #
 ################################################################################
 
@@ -2231,8 +2232,6 @@ Dateinamen, die für HTML erzeugt werden, der angegebene Text vorangestellt.
 
 # = = = = =
 
-# ToDo: Englisch, Rechtschreibung ;-)
-
 !begin_node (!kw [html_navigation])
 !html_name  cmd_html_navigation
 
@@ -2267,6 +2266,21 @@ Durch dieses Kommando wird am Anfang der Navigationszeile standardmäßig ein einz
 
 !end_description
 
+Zudem wird am Ende jeder Navigationszeile ein Link auf die Index-Seite eingefügt. Dieser Link ist zur Zeit nicht abschaltbar und sollte z.B. mit CSS-Anweisungen entsprechend positioniert werden. Er wird in eine (!code [<span>])-Umgebung mit der CSS-Klasse (!code [UDO_nav_index]) eingebettet.
+
+(!EXAMPLE)
+!begin_verbatim
+.UDO_nav_index {
+   position: absolute;
+   right: 8px;
+   padding: 0 0 0 8px;
+   border-width: 0 0 0 1px;
+   border-style: solid;
+   border-color: #888888;
+}
+!end_verbatim
+(!EXAMPLE_END)
+
 !item [(!EXISTSSINCE)] Version 6.5.20
 
 !item [(!SEEALSO)]
@@ -2279,7 +2293,7 @@ Durch dieses Kommando wird am Anfang der Navigationszeile standardmäßig ein einz
 !html_navigation [line]
 !end_verbatim
 (!EXAMPLE_AFTER)
-Kapitel 1 > Kapitel 1.1 > Kapitel 1.1.1
+Kapitel 1 > Kapitel 1.1 > Kapitel 1.1.1 Index
 (!EXAMPLE_END)
 
 (!EXAMPLE_BEFORE)
@@ -2287,7 +2301,7 @@ Kapitel 1 > Kapitel 1.1 > Kapitel 1.1.1
 !html_navigation [image]
 !end_verbatim
 (!EXAMPLE_AFTER)
-(!img [udo_fo] [Ordner]) ~~Kapitel 1 > Kapitel 1.1 > Kapitel 1.1.1
+(!img [udo_fo] [Ordner]) Kapitel 1 > Kapitel 1.1 > Kapitel 1.1.1 Index
 (!EXAMPLE_END)
 
 (!EXAMPLE_BEFORE)
@@ -2296,7 +2310,7 @@ Kapitel 1 > Kapitel 1.1 > Kapitel 1.1.1
 !html_navigation [image] img/udo_icon_16
 !end_verbatim
 (!EXAMPLE_AFTER)
-(!img [img/udo_icon_16] [UDO]) ~~Kapitel 1 :: Kapitel 1.1 :: Kapitel 1.1.1
+(!img [img/udo_icon_16] [UDO]) Kapitel 1 :: Kapitel 1.1 :: Kapitel 1.1.1 Index
 (!EXAMPLE_END)
 
 !end_node
