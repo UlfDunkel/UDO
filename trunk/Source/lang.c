@@ -43,6 +43,7 @@
 *    fd  Jun 04: !docinfo [translator] introduced
 *    fd  Dec 03: - Swedish month names should be used in lowercase (Karl-Johan Nor´en)
 *                - more Swedish adjustments
+*    fd  Dec 16: lang.translator adjusted (fr)
 *
 ******************************************|************************************/
 
@@ -407,7 +408,7 @@ GLOBAL void init_lang(void)
       strcpy(lang.html_next,  "Next");
       strcpy(lang.html_lang,  "fr");
       strcpy(lang.html_start, "Begin of the document");
-      strcpy(lang.translator, "Translator:");
+      strcpy(lang.translator, "Traducteur :");
       strcpy(lang.distributor,"Distribution :");
 
       uni2ascii(lang.preface);               /* adjust strings with special characters */
