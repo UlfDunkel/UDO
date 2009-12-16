@@ -11197,9 +11197,9 @@ const int    currdepth)                 /* current node depth */
       if (html_navigation_line)
       {
                                           /* create link to Index page */
-         voutlnf("\n <span class=\"UDO_nav_index\"><a href=\"indexudo.htm\">%s</a></span>\n", lang.index);
+         voutlnf("\n <span class=\"UDO_nav_index\"><a href=\"indexudo.htm\">%s</a></span>", lang.index);
                                           /* close CSS class div */
-         outln("\n</div> <!-- UDO_nav_line -->\n");
+         outln("</div> <!-- UDO_nav_line -->\n");
       }
 
       if (html_doctype < XHTML_STRICT)
