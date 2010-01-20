@@ -46,6 +46,9 @@
 *  2009:
 *    fd  May 26: closing bracket in <br%s> added
 *    fd  Dec 15: do_toptoc() creates a link to the Index page now (should be formatted using CSS commands)
+*  2010:
+*    fd  Jan 20: - file partly reformatted
+*                - save_html_index() now converts labels using label2html()
 *
 ******************************************|************************************/
 
@@ -99,16 +102,22 @@ const char *id_toc_c= "@(#) toc.c       $DATE$";
 #include "udomem.h"
 
 
-/*      ############################################################
-        # Makros & Konstanten
-        ############################################################    */
-#define TOC_TOC         0       /* Inhaltsverzeichnis   */
-#define TOC_NODE1       1       /* !node                                */
-#define TOC_NODE2       2       /* !subnode                             */
-#define TOC_NODE3       3       /* !subsubnode                  */
-#define TOC_NODE4       4       /* !subsubsubnode               */
-#define TOC_NODE5       5       /* !subsubsubnode               */
-#define TOC_NONE        6       /* weder noch                   */
+
+
+
+/*******************************************************************************
+*
+*     MACROS + CONSTANTS
+*
+******************************************|************************************/
+
+#define TOC_TOC         0                 /* table of content */
+#define TOC_NODE1       1                 /* !node */
+#define TOC_NODE2       2                 /* !subnode */
+#define TOC_NODE3       3                 /* !subsubnode */
+#define TOC_NODE4       4                 /* !subsubsubnode */
+#define TOC_NODE5       5                 /* !subsubsubsubnode */
+#define TOC_NONE        6                 /* neither nor ... :-) */
 
 LOCAL const char *FRAME_NAME_TOC="UDOtoc";
 LOCAL const char *FRAME_NAME_CON="UDOcon";
@@ -118,76 +127,86 @@ LOCAL const char *FRAME_FILE_CON="00con";
 
 LOCAL const char *HTML_LABEL_CONTENTS="UDOTOC";
 
-/*      ############################################################
-        # lokale Variablen
-        ############################################################    */
-LOCAL BOOLEAN   toc_available;                          /* Inhaltsverzeichnis existiert         */
-LOCAL BOOLEAN   apx_available;                          /* Anhang existiert                                     */
 
-LOCAL TOCITEM   *toc[MAXTOCS];                          /* Zeiger auf Inhaltsverzeichnis        */
-LOCAL int               p1_toc_counter;                         /* Zaehler fuer das toc[]-Array         */
-LOCAL int               p2_toc_counter;
 
-LOCAL int               p1_toctype;                                     /* Typ des aktuellen Kapitels           */
-LOCAL int               p2_toctype;                                     /* Typ des aktuellen Kapitels           */
 
-LOCAL LABEL             *lab[MAXLABELS];                        /* Array mit Zeigern auf Labels         */
-LOCAL int               p1_lab_counter;                         /* Zaehler                                                      */
-LOCAL int               p2_lab_counter;                         /* Zaehler, 2. Durchgang                        */
+
+/*******************************************************************************
+*
+*     LOCAL VARIABLES
+*
+******************************************|************************************/
+
+LOCAL BOOLEAN    toc_available;           /* Inhaltsverzeichnis existiert */
+LOCAL BOOLEAN    apx_available;           /* Anhang existiert */
+
+LOCAL TOCITEM   *toc[MAXTOCS];            /* Zeiger auf Inhaltsverzeichnis */
+LOCAL int        p1_toc_counter;          /* Zaehler fuer das toc[]-Array */
+LOCAL int        p2_toc_counter;
+
+LOCAL int        p1_toctype;              /* Typ des aktuellen Kapitels */
+LOCAL int        p2_toctype;              /* Typ des aktuellen Kapitels */
+
+LOCAL LABEL     *lab[MAXLABELS];          /* Array mit Zeigern auf Labels */
+LOCAL int        p1_lab_counter;          /* Zaehler */
+LOCAL int        p2_lab_counter;          /* Zaehler, 2. Durchgang */
 
 /* New in V6.5.9 [NHz] */
-LOCAL STYLE             *style[MAXSTYLES];              /* Array mit Zeigern auf Stylesheets            */
-LOCAL int               p1_style_counter;                               /* Zaehler                                                      */
+LOCAL STYLE      *style[MAXSTYLES];       /* Array mit Zeigern auf Stylesheets */
+LOCAL int         p1_style_counter;       /* Zaehler */
 
-LOCAL REFERENCE refs[MAXREFERENCES+1];          /* Referenzen   */
-LOCAL int               refs_counter;                           /* Zaehler              */
+LOCAL REFERENCE   refs[MAXREFERENCES+1];  /* Referenzen   */
+LOCAL int         refs_counter;           /* Zaehler */
 
-LOCAL int               p1_toc_n1, p1_toc_n2, p1_toc_n3, p1_toc_n4, p1_toc_n5;  /* absolut */
-LOCAL int               p1_apx_n1, p1_apx_n2, p1_apx_n3, p1_apx_n4, p1_apx_n5;
+                                          /* absolut */
+LOCAL int         p1_toc_n1, p1_toc_n2, p1_toc_n3, p1_toc_n4, p1_toc_n5;
+LOCAL int         p1_apx_n1, p1_apx_n2, p1_apx_n3, p1_apx_n4, p1_apx_n5;
 
-LOCAL int               p1_toc_nr1, p1_toc_nr2, p1_toc_nr3, p1_toc_nr4, p1_toc_nr5;     /* Anzeige */
-LOCAL int               p1_apx_nr1, p1_apx_nr2, p1_apx_nr3, p1_apx_nr4, p1_apx_nr5;
+                                          /* Anzeige */
+LOCAL int         p1_toc_nr1, p1_toc_nr2, p1_toc_nr3, p1_toc_nr4, p1_toc_nr5;
+LOCAL int         p1_apx_nr1, p1_apx_nr2, p1_apx_nr3, p1_apx_nr4, p1_apx_nr5;
 
-LOCAL int               p2_toc_n1, p2_toc_n2, p2_toc_n3, p2_toc_n4, p2_toc_n5;
-LOCAL int               p2_apx_n1, p2_apx_n2, p2_apx_n3, p2_apx_n4, p2_apx_n5;
+LOCAL int         p2_toc_n1, p2_toc_n2, p2_toc_n3, p2_toc_n4, p2_toc_n5;
+LOCAL int         p2_apx_n1, p2_apx_n2, p2_apx_n3, p2_apx_n4, p2_apx_n5;
 
-LOCAL int               curr_n1_index;
-LOCAL int               curr_n2_index;
-LOCAL int               curr_n3_index;
-LOCAL int               curr_n4_index;  /* [GS] */
+LOCAL int         curr_n1_index;
+LOCAL int         curr_n2_index;
+LOCAL int         curr_n3_index;
+LOCAL int         curr_n4_index;          /* [GS] */
 
-LOCAL int               last_n1_index;          /* toc[]-Indizes fuer Titelzeilen       */
-LOCAL int               last_n2_index;
-LOCAL int               last_n3_index;
-LOCAL int               last_n4_index;
-LOCAL int               last_n5_index;          /* [GS] */
+LOCAL int         last_n1_index;          /* toc[]-Indizes fuer Titelzeilen */
+LOCAL int         last_n2_index;
+LOCAL int         last_n3_index;
+LOCAL int         last_n4_index;
+LOCAL int         last_n5_index;          /* [GS] */
 
-LOCAL int               active_nodetype;        /* Flag fuer check_endnode()            */
+LOCAL int         active_nodetype;        /* Flag fuer check_endnode() */
 
-LOCAL char              form_t1_n1[80], form_t1_n2[80], form_t1_n3[80], form_t1_n4[80], form_t1_n5[80];
-LOCAL char              form_t2_n2[80], form_t2_n3[80], form_t2_n4[80], form_t2_n5[80];
-LOCAL char              form_t3_n3[80], form_t3_n4[80], form_t3_n5[80];
-LOCAL char              form_t4_n4[80], form_t4_n5[80];
-LOCAL char              form_t5_n5[80];
+LOCAL char        form_t1_n1[80], form_t1_n2[80], form_t1_n3[80], form_t1_n4[80], form_t1_n5[80];
+LOCAL char        form_t2_n2[80], form_t2_n3[80], form_t2_n4[80], form_t2_n5[80];
+LOCAL char        form_t3_n3[80], form_t3_n4[80], form_t3_n5[80];
+LOCAL char        form_t4_n4[80], form_t4_n5[80];
+LOCAL char        form_t5_n5[80];
 
-LOCAL char              form_a1_n1[80], form_a1_n2[80], form_a1_n3[80], form_a1_n4[80], form_a1_n5[80];
-LOCAL char              form_a2_n2[80], form_a2_n3[80], form_a2_n4[80], form_a2_n5[80];
-LOCAL char              form_a3_n3[80], form_a3_n4[80], form_a3_n5[80];
-LOCAL char              form_a4_n4[80], form_a4_n5[80];
-LOCAL char              form_a5_n5[80];
+LOCAL char        form_a1_n1[80], form_a1_n2[80], form_a1_n3[80], form_a1_n4[80], form_a1_n5[80];
+LOCAL char        form_a2_n2[80], form_a2_n3[80], form_a2_n4[80], form_a2_n5[80];
+LOCAL char        form_a3_n3[80], form_a3_n4[80], form_a3_n5[80];
+LOCAL char        form_a4_n4[80], form_a4_n5[80];
+LOCAL char        form_a5_n5[80];
 
-LOCAL char              toc_list_top[64], toc_list_end[64];     /*r6pl2*/
-LOCAL char              use_toc_list_commands;                          /*r6pl2*/
+LOCAL char        toc_list_top[64],
+                  toc_list_end[64];       /*r6pl2*/
+LOCAL char        use_toc_list_commands;  /*r6pl2*/
 
-LOCAL char              allowed_next_chars[64]; /* r5pl10 */
-LOCAL char              allowed_prev_chars[64];
+LOCAL char        allowed_next_chars[64]; /* r5pl10 */
+LOCAL char        allowed_prev_chars[64];
 
-LOCAL char              footer_buffer[512];             /* Puffer fuer den Footer */    /*r6pl2 */
+LOCAL char        footer_buffer[512];     /* Puffer fuer den Footer */ /*r6pl2 */
 
-LOCAL char              html_target[64];
+LOCAL char        html_target[64];
 
-LOCAL char              *html_frames_toc_title;         /* V6.5.16 [GS] */
-LOCAL char              *html_frames_con_title;         /* V6.5.16 [GS] */
+LOCAL char       *html_frames_toc_title;  /* V6.5.16 [GS] */
+LOCAL char       *html_frames_con_title;  /* V6.5.16 [GS] */
 
 
 
@@ -199,336 +218,469 @@ LOCAL char              *html_frames_con_title;         /* V6.5.16 [GS] */
 *
 ******************************************|************************************/
 
-LOCAL void output_aliasses ( void );
+LOCAL void output_aliasses(void);
 
-LOCAL BOOLEAN add_ref ( const char *r );
-LOCAL void replace_refs ( char *s );
-LOCAL void string2reference ( char *ref, const LABEL *l, const BOOLEAN for_toc,
-                                                         const char *pic, const unsigned int uiW, const unsigned int uiH  );
+LOCAL BOOLEAN add_ref(const char *r);
+LOCAL void replace_refs(char *s);
+LOCAL void string2reference(char *ref, const LABEL *l, const BOOLEAN for_toc, const char *pic, const unsigned int uiW, const unsigned int uiH);
 
-LOCAL BOOLEAN output_raw_file ( const char *filename );
+LOCAL BOOLEAN output_raw_file(const char *filename);
 
-LOCAL void stg_header ( const char *numbers, const char *nodename, BOOLEAN is_popup );
+LOCAL void stg_header(const char *numbers, const char *nodename, BOOLEAN is_popup);
 
-LOCAL void pch_headline ( char *s );
-LOCAL void pch_bottomline ( void );
-LOCAL void output_pch_header ( const char *numbers, const char *name );
+LOCAL void pch_headline(char *s);
+LOCAL void pch_bottomline(void);
+LOCAL void output_pch_header(const char *numbers, const char *name);
 
-LOCAL void tvh_bottomline ( void );
-LOCAL void output_vision_header ( const char *numbers, const char *name );
+LOCAL void tvh_bottomline(void);
+LOCAL void output_vision_header(const char *numbers, const char *name);
 
-LOCAL void output_texinfo_node ( const char *name );
+LOCAL void output_texinfo_node(const char *name);
 
-LOCAL void win_headline ( char *name, BOOLEAN popup );
-LOCAL void output_win_header ( const char *name, const BOOLEAN insivisble );
+LOCAL void win_headline(char *name, BOOLEAN popup);
+LOCAL void output_win_header(const char *name, const BOOLEAN insivisble);
 
-LOCAL char *get_html_filename ( const int tocindex, char *s );
+LOCAL char *get_html_filename(const int tocindex, char *s);
 
-LOCAL void output_html_meta ( BOOLEAN keywords );
-LOCAL void output_html_doctype ( void );
-LOCAL BOOLEAN html_new_file ( void );
-LOCAL void get_giflink_data ( const int index, char *name, unsigned int *width, unsigned int *height );
-LOCAL void html_index_giflink ( const int idxEnabled, const int idxDisabled, const char *sep );
-LOCAL void html_home_giflink ( const int idxEnabled, const int idxDisabled, const char *sep );
-LOCAL void html_back_giflink ( const int idxEnabled, const int idxDisabled, const char *sep );
-LOCAL void html_hb_line ( BOOLEAN head );
-LOCAL void html_node_bar_modern ( void );
-LOCAL void html_node_bar_frames ( void );
+LOCAL void output_html_meta(BOOLEAN keywords);
+LOCAL void output_html_doctype(void);
+LOCAL BOOLEAN html_new_file(void);
+LOCAL void get_giflink_data(const int index, char *name, unsigned int *width, unsigned int *height);
+LOCAL void html_index_giflink(const int idxEnabled, const int idxDisabled, const char *sep);
+LOCAL void html_home_giflink(const int idxEnabled, const int idxDisabled, const char *sep);
+LOCAL void html_back_giflink(const int idxEnabled, const int idxDisabled, const char *sep);
+LOCAL void html_hb_line(BOOLEAN head);
+LOCAL void html_node_bar_modern(void);
+LOCAL void html_node_bar_frames(void);
 
-LOCAL void set_inside_node1 ( void );
-LOCAL void make_node ( const BOOLEAN popup, const BOOLEAN invisible );
-LOCAL void set_inside_node2 ( void );
-LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible );
-LOCAL void set_inside_node3 ( void );
-LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible );
-LOCAL void set_inside_node4 ( void );
-LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible );
+LOCAL void set_inside_node1(void);
+LOCAL void make_node(const BOOLEAN popup, const BOOLEAN invisible);
+LOCAL void set_inside_node2(void);
+LOCAL void make_subnode(const BOOLEAN popup, const BOOLEAN invisible);
+LOCAL void set_inside_node3(void);
+LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible);
+LOCAL void set_inside_node4(void);
+LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible);
 
-LOCAL void tocline_make_bold ( char *s, const int depth );
-LOCAL void tocline_handle_1st ( BOOLEAN *f );
-LOCAL void convert_toc_item ( TOCITEM *t );
-LOCAL void output_appendix_line ( void );
-LOCAL void toc_link_output ( const int depth ); /* New in r6pl16 [NHz] */
-LOCAL void toc_output ( const int depth );
-LOCAL void apx_output ( const int depth );
-LOCAL void subtoc_output ( const int depth );
-LOCAL void subapx_output ( const int depth );
-LOCAL void subsubtoc_output ( const int depth );
-LOCAL void subsubapx_output ( const int depth );
-LOCAL void subsubsubtoc_output ( const int depth );
-LOCAL void subsubsubapx_output ( const int depth );
-LOCAL void subsubsubsubtoc_output ( void );
-LOCAL void subsubsubsubapx_output ( void );
+LOCAL void tocline_make_bold(char *s, const int depth);
+LOCAL void tocline_handle_1st(BOOLEAN *f);
+LOCAL void convert_toc_item(TOCITEM *t);
+LOCAL void output_appendix_line(void);
+LOCAL void toc_link_output(const int depth ); /* New in r6pl16 [NHz] */
+LOCAL void toc_output(const int depth);
+LOCAL void apx_output(const int depth);
+LOCAL void subtoc_output(const int depth);
+LOCAL void subapx_output(const int depth);
+LOCAL void subsubtoc_output(const int depth);
+LOCAL void subsubapx_output(const int depth);
+LOCAL void subsubsubtoc_output(const int depth);
+LOCAL void subsubsubapx_output(const int depth);
+LOCAL void subsubsubsubtoc_output(void);
+LOCAL void subsubsubsubapx_output(void);
 
-LOCAL void do_toc ( const int depth );
-LOCAL void do_subtoc ( const int depth );
-LOCAL void do_subsubtoc ( const int depth );
-LOCAL void do_subsubsubtoc ( const int depth );
-LOCAL void do_subsubsubsubtoc ( void );
+LOCAL void do_toc(const int depth);
+LOCAL void do_subtoc(const int depth);
+LOCAL void do_subsubtoc(const int depth);
+LOCAL void do_subsubsubtoc(const int depth);
+LOCAL void do_subsubsubsubtoc(void);
 
-LOCAL void do_toptoc ( const int current_node );
+LOCAL void do_toptoc(const int current_node);
 
-LOCAL int get_toccmd_depth ( void );
+LOCAL int get_toccmd_depth(void);
 
-LOCAL TOCITEM *init_new_toc_entry ( const int toctype, const BOOLEAN invisible );
-LOCAL BOOLEAN add_toc_to_toc ( void );
+LOCAL TOCITEM *init_new_toc_entry(const int toctype, const BOOLEAN invisible);
+LOCAL BOOLEAN add_toc_to_toc(void);
 
-/*LOCAL void free_toc_data ( char **var );*/
+/*LOCAL void free_toc_data(char **var );*/
 
-/*      ------------------------------------------------------------------      */
 
-/*      ############################################################
-        #
-        # Zu welchem Node gehoert ein Label (fuer ST-Guide, Texinfo, Pure-C-Help)
-        #
-        #
-        # ->    link:   Name des Linkstexts
-        # <-    node:   Name des Nodes, in dem das Label benutzt wird
-        #               ti:             TOC-Index des Nodes/Labels/Alias
-        #               li:             LAB-Index des Nodes/Labels/Alias
-        #               isnode: TRUE:   ist ein Label
-        #                               FALSE:  ist ein Node oder Alias
-        #               TRUE:   Label existiert
-        #               FALSE:  Label existiert nicht
-        #
-        ############################################################    */
-GLOBAL BOOLEAN is_node_link ( const char *link, char *node, int *ti, BOOLEAN *isnode, int *li )
+
+
+
+
+
+
+
+
+/*******************************************************************************
+*
+*     LOCAL PROCEDURES
+*
+******************************************|************************************/
+
+/*******************************************************************************
+*
+*  is_node_link():
+*     Zu welchem Node gehoert ein Label (fuer ST-Guide, Texinfo, Pure-C-Help)
+*
+*  ->  link:   Name des Linkstexts
+*  <-  node:   Name des Nodes, in dem das Label benutzt wird
+*              ti:             TOC-Index des Nodes/Labels/Alias
+*              li:             LAB-Index des Nodes/Labels/Alias
+*              isnode: TRUE:   ist ein Label
+*                              FALSE:  ist ein Node oder Alias
+*              TRUE:   Label existiert
+*              FALSE:  Label existiert nicht
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN is_node_link(
+
+const char       *link,          /* */
+char             *node,          /* */
+int              *ti,            /* */
+BOOLEAN          *isnode,        /* */
+int              *li)            /* */
 {
-        register int i;
-        BOOLEAN ret= FALSE;
-
-        node[0]= EOS;
-        *isnode= FALSE;
-
-        if (link[0]==EOS)
-        {       return FALSE;
-        }
-
-        for (i=1; i<=p1_lab_counter; i++)
-        {       if (strcmp(lab[i]->name, link)==0)
-                {       if (lab[i]->is_node)
-                        {       *isnode= TRUE;
-                        }
-                        *li= i;
-                        *ti= lab[i]->tocindex;
-                        lab[i]->referenced = TRUE;
-                        strcpy(node, toc[*ti]->name);
-                        ret= TRUE;
-                        break;
-                }
-        }
-
-        return ret;
-}       /* is_node_link */
-
-GLOBAL int getLabelIndexFromTocIndex ( int *li, const int ti )
-{
-        *li= toc[ti]->labindex;
-        return *li;
-}
+   register int   i;             /* */
+   BOOLEAN        ret = FALSE;   /* */
 
 
-LOCAL void output_helpid(int tocindex)
-{
-        char    s[256];
+   node[0] = EOS;
+   *isnode = FALSE;
 
-        s[0] = '\0';
-        if ( toc[tocindex]->helpid!=NULL )
-        {
-                um_strcpy(s, toc[tocindex]->helpid, 256, "output_helpid[1]");
-        } else if (use_auto_helpids)
-        {
-                node2WinAutoID(s, toc[tocindex]->name);
-        }
-        if (s[0] != '\0')
-        {
-                switch(desttype)
-                {
-                        case TOSTG:
-                        case TOAMG:
-                                voutlnf("@alias \"%s\"", s);
-                                break;  
-                        case TOWIN:
-                        case TOWH4:
-                        case TOAQV:
-                                voutlnf("#{\\footnote # %s}", s);
-                                break;
-            
-                        case TOHAH:             /* V6.5.17 */
-                        case TOHTM:
-                        case TOMHH:
-            label2html(s);      /*r6pl2*/
-            voutlnf("<a name=\"%s\"></a>", s);
-                                break;  
+   if (link[0] == EOS)
+   {
+      return FALSE;
+   }
+   
+   for (i = 1; i <= p1_lab_counter; i++)
+   {
+      if (strcmp(lab[i]->name, link) == 0)
+      {
+         if (lab[i]->is_node)
+         {
+            *isnode = TRUE;
+         }
          
-                        case TOLDS:
-                                voutlnf("<label id=\"%s\">", s);
-                                break;  
-                        case TOTEX:     /* r5pl9 */
-                        case TOPDL:
-                                voutlnf("\\label{%s}", s);
-                                break;
-                        case TOLYX:     /* <???> */
-                                break;
-                }
-        }
+         *li = i;
+         *ti = lab[i]->tocindex;
+         lab[i]->referenced = TRUE;
+         strcpy(node, toc[*ti]->name);
+         ret = TRUE;
+         break;
+      }
+   }
+   
+   return ret;
 }
 
-/*      ############################################################
-        #
-        # Aliasse eines Kapitels ausgeben. Diese muessen nach der
-        # Node-Angabe erfolgen.
-        #
-        ############################################################    */
-LOCAL void output_aliasses ( void )
+
+
+
+
+/*******************************************************************************
+*
+*  getLabelIndexFromTocIndex():
+*     ??? (description missing)
+*
+*  return:
+*     ???
+*
+******************************************|************************************/
+
+GLOBAL int getLabelIndexFromTocIndex(
+
+int        *li,  /* */
+const int   ti)  /* */
 {
-        register int i;
-        int start;
-        char    s[256], keyword[256];
-
-        /* Fuer Pure C Help und Turbo Vision Help werden die Aliasse zusammen */
-        /* mit *nodes ausgegeben */
-
-/*#if 1*/
-        start= toc[p2_toc_counter]->labindex;   /* r6pl2 */
-/*#else
-        start= 1;
-#endif*/
-
-        if (start<=0)
-        {       return;
-        }
-
-        for (i=start; i<=p1_lab_counter; i++)
-        {       /* r5pl6: aktuellen Zaehler mit Alias-Zugehoerigkeit vergleichen */
-                if ( lab[i]->is_alias && p2_toc_counter==lab[i]->tocindex )
-                {       switch(desttype)
-                        {
-                                case TOSTG:
-                                        strcpy(s, lab[i]->name);
-                                        node2stg(s);
-                                        convert_tilde(s);
-                                        voutlnf("@alias \"%s\"", s);
-                                        break;  
-                                case TOWIN:
-                                case TOWH4:
-                                case TOAQV:
-                                        um_strcpy(s, lab[i]->name, 256, "output_aliasses[1]");
-                                        del_internal_styles(s);
-                                        convert_tilde(s);
-                                        if (use_alias_inside_index && !no_index)
-                                        {       um_strcpy(keyword, s, 256, "output_aliasses[2]");
-                                                winspecials2ascii(keyword);
-                                                voutlnf("K{\\footnote K %s}", keyword);
-                                        }
-                                        alias2NrWinhelp(s, i);
-                                        voutlnf("#{\\footnote # %s}", s);
-                                        if (bDocWinOldKeywords)
-                                        {       um_strcpy(s, lab[i]->name, 256, "output_aliasses[3]");
-                                                del_internal_styles(s);
-                                                node2winhelp(s);
-                                                voutlnf("#{\\footnote # %s}", s);
-                                        }
-                                        break;
-                                case TORTF:
-                                        um_strcpy(s, lab[i]->name, 256, "output_aliasses[4]");
-                                        del_internal_styles(s);
-                                        convert_tilde(s);
-                                        if (use_alias_inside_index && !no_index)
-                                        {       um_strcpy(keyword, s, 256, "output_aliasses[5]");
-                                                winspecials2ascii(keyword);
-                                                voutlnf("{\\xe\\v %s}", keyword);
-                                        }
-                                        break;
-                                case TOHAH:             /* V6.5.17 */
-                                case TOHTM:
-                                case TOMHH:
-                                        um_strcpy(s, lab[i]->name, 256, "output_aliasses [6]");
-                                        convert_tilde(s);
-
-               label2html(s);   /* r6pl2 */
-               voutlnf("<a name=\"%s\"></a>", s);
-                                        break;
-
-                                case TOLDS:
-                                        um_strcpy(s, lab[i]->name, 256, "output_aliasses[7]");
-                                        convert_tilde(s);
-                                        voutlnf("<label id=\"%s\">", s);
-                                        break;  
-                                case TOTEX:     /* r5pl9 */
-                                case TOPDL:
-                                        um_strcpy(s, lab[i]->name, 256, "output_aliasses[8]");
-                                        convert_tilde(s);
-                                        label2tex(s);
-                                        voutlnf("\\label{%s}", s);
-                                        break;
-                                case TOLYX:     /* <???> */
-                                        break;
-
-                        }
-                }
-        }
-
-        /* r6pl2: Jump-ID ausgeben */
-        output_helpid(p2_toc_counter);
-
-}       /* output_aliasses */
+   *li = toc[ti]->labindex;
+    return *li;
+}
 
 
 
-/*      ############################################################
-        # allgemeine Referenz-Routinen
-        # Bei Formaten, bei denen Nodes und Labels selbstaendig
-        # referenziert werden muessen, koennen folgende Routinen
-        # benutzt werden.
-        ############################################################    */
-GLOBAL void reset_refs ( void )
+
+
+/*******************************************************************************
+*
+*  output_helpid():
+*     ??? (description missing)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void output_helpid(
+
+int      tocindex)  /* */
 {
-        register int i;
+   char  s[256];    /* */
 
-        if ( refs_counter>=0 )
-        {       for (i=0; i<=refs_counter; i++)
-                {       refs[i].entry[0]= EOS;
-                        refs[i].magic[0]= EOS;
-                }
-        }
+   s[0] = '\0';
+   
+   if (toc[tocindex]->helpid!=NULL)
+   {
+      um_strcpy(s, toc[tocindex]->helpid, 256, "output_helpid[1]");
+   }
+   else if (use_auto_helpids)
+   {
+      node2WinAutoID(s, toc[tocindex]->name);
+   }
+   
+   if (s[0] != '\0')
+   {
+      switch(desttype)
+      {
+      case TOSTG:
+      case TOAMG:
+         voutlnf("@alias \"%s\"", s);
+         break;
+         
+      case TOWIN:
+      case TOWH4:
+      case TOAQV:
+         voutlnf("#{\\footnote # %s}", s);
+         break;
+      
+      case TOHAH:                         /* V6.5.17 */
+      case TOHTM:
+      case TOMHH:
+         label2html(s);                   /*r6pl2*/
+         voutlnf("<a name=\"%s\"></a>", s);
+         break;  
+      
+      case TOLDS:
+         voutlnf("<label id=\"%s\">", s);
+         break;
+         
+      case TOTEX:                         /* r5pl9 */
+      case TOPDL:
+         voutlnf("\\label{%s}", s);
+         break;
+         
+      case TOLYX:                         /* <???> */
+         break;
+      }
+   }
+}
 
-        refs_counter= -1;
-}       /* reset_refs */
 
 
-LOCAL BOOLEAN add_ref ( const char *r )
+
+
+/*******************************************************************************
+*
+*  output_aliasses():
+*     Aliasse eines Kapitels ausgeben. Diese muessen nach der Node-Angabe erfolgen.
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void output_aliasses(void)
 {
-        if (refs_counter<MAXREFERENCES)
-        {       refs_counter++;
+   register int   i;             /* */
+   int            start;         /* */
+   char           s[256],        /* */
+                  keyword[256];  /* */
+   
+   /* Fuer Pure C Help und Turbo Vision Help werden die Aliasse zusammen */
+   /* mit *nodes ausgegeben */
+   
+/* #if 1 */
+   start = toc[p2_toc_counter]->labindex; /* r6pl2 */
+/* #else
+   start = 1;
+#endif */
+   
+   if (start <= 0)
+      return;
+   
+   for (i = start; i <= p1_lab_counter; i++)
+   {
+                                          /* r5pl6: aktuellen Zaehler mit Alias-Zugehoerigkeit vergleichen */
+      if (lab[i]->is_alias && p2_toc_counter == lab[i]->tocindex)
+      {
+         switch (desttype)
+         {
+         case TOSTG:
+            strcpy(s, lab[i]->name);
+            node2stg(s);
+            convert_tilde(s);
+            voutlnf("@alias \"%s\"", s);
+            break;
+            
+         case TOWIN:
+         case TOWH4:
+         case TOAQV:
+            um_strcpy(s, lab[i]->name, 256, "output_aliasses[1]");
+            del_internal_styles(s);
+            convert_tilde(s);
+            
+            if (use_alias_inside_index && !no_index)
+            {
+               um_strcpy(keyword, s, 256, "output_aliasses[2]");
+               winspecials2ascii(keyword);
+               voutlnf("K{\\footnote K %s}", keyword);
+            }
+            
+            alias2NrWinhelp(s, i);
+            voutlnf("#{\\footnote # %s}", s);
+            
+            if (bDocWinOldKeywords)
+            {
+               um_strcpy(s, lab[i]->name, 256, "output_aliasses[3]");
+               del_internal_styles(s);
+               node2winhelp(s);
+               voutlnf("#{\\footnote # %s}", s);
+            }
+            
+            break;
+            
+         case TORTF:
+            um_strcpy(s, lab[i]->name, 256, "output_aliasses[4]");
+            del_internal_styles(s);
+            convert_tilde(s);
+            
+            if (use_alias_inside_index && !no_index)
+            {
+               um_strcpy(keyword, s, 256, "output_aliasses[5]");
+               winspecials2ascii(keyword);
+               voutlnf("{\\xe\\v %s}", keyword);
+            }
+            
+            break;
+            
+         case TOHAH:                      /* V6.5.17 */
+         case TOHTM:
+         case TOMHH:
+            um_strcpy(s, lab[i]->name, 256, "output_aliasses [6]");
+            convert_tilde(s);
+            
+            label2html(s);                /* r6pl2 */
+            voutlnf("<a name=\"%s\"></a>", s);
+            break;
+            
+         case TOLDS:
+            um_strcpy(s, lab[i]->name, 256, "output_aliasses[7]");
+            convert_tilde(s);
+            voutlnf("<label id=\"%s\">", s);
+            break;
+            
+         case TOTEX:                      /* r5pl9 */
+         case TOPDL:
+            um_strcpy(s, lab[i]->name, 256, "output_aliasses[8]");
+            convert_tilde(s);
+            label2tex(s);
+            voutlnf("\\label{%s}", s);
+            break;
+            
+         case TOLYX:                      /* <???> */
+            break;
+         }
+      }
+   }
+   
+   output_helpid(p2_toc_counter);         /* r6pl2: Jump-ID ausgeben */
+}
 
-                if (refs_counter+OFFSET_REF==(int) '~')         /* r5pl8 */
-                {       refs_counter++;
-                }
-                if (refs_counter+OFFSET_REF==(int) '\177')      /* r5pl8 */
-                {       refs_counter++;
-                }
-
-                sprintf(refs[refs_counter].magic, "\033%c%c\033",
-                        C_REF_MAGIC, refs_counter+OFFSET_REF);
-                strcpy(refs[refs_counter].entry, r);
-
-                return TRUE;
-        }
-
-        return FALSE;
-}       /* add_ref */
 
 
-LOCAL void replace_refs ( char *s )
+
+
+/*******************************************************************************
+*
+*  reset_refs():
+*     allgemeine Referenz-Routinen
+*
+*  Bei Formaten, bei denen Nodes und Labels selbstaendig referenziert werden muessen,
+*  koennen folgende Routinen benutzt werden.
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void reset_refs(void)
 {
-        register int i;
-        if (refs_counter>=0)
-        {       for (i=0; i<=refs_counter; i++)
-                {       replace_once(s, refs[i].magic, refs[i].entry);
-                }
-        }
-}       /* replace_refs */
+   register int   i;  /* counter */
+   
+   if (refs_counter >= 0)
+   {
+      for (i = 0; i <= refs_counter; i++)
+      {
+         refs[i].entry[0]= EOS;
+         refs[i].magic[0]= EOS;
+      }
+   }
+   
+   refs_counter = -1;
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  add_ref():
+*     ??? (description missing)
+*
+*  return:
+*     ???
+*
+******************************************|************************************/
+
+LOCAL BOOLEAN add_ref(
+
+const char  *r)  /* */
+{
+   if (refs_counter < MAXREFERENCES)
+   {
+      refs_counter++;
+      
+                                          /* r5pl8 */
+      if (refs_counter + OFFSET_REF == (int)'~')
+      {
+         refs_counter++;
+      }
+      
+                                          /* r5pl8 */
+      if (refs_counter + OFFSET_REF == (int)'\177')
+      {
+         refs_counter++;
+      }
+      
+      sprintf(refs[refs_counter].magic, "\033%c%c\033", C_REF_MAGIC, refs_counter+OFFSET_REF);
+      strcpy(refs[refs_counter].entry, r);
+      
+      return TRUE;
+   }
+   
+   return FALSE;
+}
+
+
+
+
+/*******************************************************************************
+*
+*  replace_refs():
+*     ??? (description missing)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void replace_refs(
+
+char             *s)  /* */
+{
+   register int   i;  /* */
+   
+   
+   if (refs_counter >= 0)
+   {
+      for (i = 0; i <= refs_counter; i++)
+      {
+         replace_once(s, refs[i].magic, refs[i].entry);
+      }
+   }
+}
 
 
 
@@ -537,7 +689,7 @@ LOCAL void replace_refs ( char *s )
 /*******************************************************************************
 *
 *  string2reference():
-*     ??? (description)
+*     ??? (description missing)
 *
 *  return:
 *     -
@@ -546,24 +698,25 @@ LOCAL void replace_refs ( char *s )
 
 LOCAL void string2reference(
 
-char                *ref,                        /* */
-const LABEL         *l,                          /* */
-const BOOLEAN        for_toc,                    /* */
-const char          *pic,                        /* */
-const unsigned int   uiW,                        /* */
-const unsigned int   uiH)                        /* */
+char                *ref,                 /* */
+const LABEL         *l,                   /* */
+const BOOLEAN        for_toc,             /* */
+const char          *pic,                 /* */
+const unsigned int   uiW,                 /* */
+const unsigned int   uiH)                 /* */
 {
-   char             s[512],                     /* */
-                     n[512],                     /* */
-                     sNoSty[512],                /* */
-                     hfn[512],                   /* */
-                     sGifSize[80];               /* */
-   int                   ti,                         /* */
-                     ui;                         /* */
-   BOOLEAN           same_file = FALSE;          /* TRUE: reference is in same file */
-   char             *htmlfilename,               /* */
-                     suff[MYFILE_SUFF_LEN + 1];  /* */
-   char              closer[8] = "\0";           /* single tag closer mark in XHTML */
+   char              s[512],              /* */
+                     n[512],              /* */
+                     sNoSty[512],         /* */
+                     hfn[512],            /* */
+                     sGifSize[80];        /* */
+   int               ti,                  /* */
+                     ui;                  /* */
+   BOOLEAN           same_file = FALSE;   /* TRUE: reference is in same file */
+   char             *htmlfilename,        /* */
+                                          /* */
+                     suff[MYFILE_SUFF_LEN + 1];
+   char              closer[8] = "\0";    /* single tag closer mark in XHTML */
    
    
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
@@ -779,15 +932,13 @@ const unsigned int   uiH)                        /* */
          {
             if (l->is_node || l->is_alias)
             {
-               sprintf(ref, "<a href=\"%s%s\"%s>%s</a>",
                                           /* Changed in r6pl16 [NHz] */
-                  htmlfilename, suff, html_target, n);
+               sprintf(ref, "<a href=\"%s%s\"%s>%s</a>",htmlfilename, suff, html_target, n);
             }
             else
             {
-               sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",
                                           /* Changed in r6pl16 [NHz] */
-                  htmlfilename, suff, sNoSty, html_target, n);
+               sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",htmlfilename, suff, sNoSty, html_target, n);
             }
          }
          else
@@ -801,7 +952,7 @@ const unsigned int   uiH)                        /* */
             
             if (l->is_node || l->is_alias)
             {
-               sprintf(ref, "<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+               sprintf(ref, "<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>", 
                   htmlfilename, suff, html_target, pic, n, n, sGifSize, closer);
             }
             else
@@ -823,28 +974,28 @@ const unsigned int   uiH)                        /* */
             {                             /* Hier muss noch unterschieden werden, wenn */
                                           /* gemerged wird. Dann ein # einfuegen!!!! */
                                           /* ti oben bereits aus tocindex gesetzt */
-               if (   (html_merge_node2 && toc[ti]->n2 > 0)
-                   || (html_merge_node3 && toc[ti]->n3 > 0)
-                   || (html_merge_node4 && toc[ti]->n4 > 0)
-                   || (html_merge_node5 && toc[ti]->n5 > 0)
-                  )
+               if (    (html_merge_node2 && toc[ti]->n2 > 0)
+                    || (html_merge_node3 && toc[ti]->n3 > 0)
+                    || (html_merge_node4 && toc[ti]->n4 > 0)
+                    || (html_merge_node5 && toc[ti]->n5 > 0)
+                 )
                {
-                  sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",
                                           /* Changed in r6pl16 [NHz] */
+                  sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",
                      htmlfilename, suff, sNoSty, html_target, n);
                }
                else
                {
-                  sprintf(ref, "<a href=\"%s%s\"%s>%s</a>",
                                           /* Changed in r6pl16 [NHz] */
+                  sprintf(ref, "<a href=\"%s%s\"%s>%s</a>",
                      htmlfilename, suff, html_target, n);
                }
             }
          }
          else
          {
-            sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",
                                           /* Changed in r6pl16 [NHz] */
+            sprintf(ref, "<a href=\"%s%s#%s\"%s>%s</a>",
                htmlfilename, suff, sNoSty, html_target, n);
          }
       }
@@ -904,1243 +1055,1672 @@ const unsigned int   uiH)                        /* */
       replace_udo_tilde(ref);
       replace_udo_nbsp(ref);
    }
-
-}       /* string2reference */
-
+}
 
 
-GLOBAL void auto_references ( char *s, const BOOLEAN for_toc, const char *pic,
-                                                         const unsigned int uiWidth, const unsigned int uiHeight)
+
+
+
+/*******************************************************************************
+*
+*  auto_references():
+*     ??? (description missing)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void auto_references(
+
+char                *s,             /* */
+const BOOLEAN        for_toc,       /* */
+const char          *pic,           /* */
+const unsigned int   uiWidth,       /* */
+const unsigned int   uiHeight)      /* */
 {
-        register int i;
-        char    the_ref[512], *pos, *ptr, *found_pos, *searchpos;
-        char    nextchar, prevchar;
-        int found_lab;
-        size_t  found_len, ll;
-        BOOLEAN ref_it;
-        BOOLEAN ignore_it;
-        BOOLEAN next_ok, prev_ok;
-        BOOLEAN found_one, found_ok;
-        LABEL *labptr;
+   register int      i;             /* counter */
+   char              the_ref[512],  /* */
+                    *pos,           /* */
+                    *ptr,           /* */
+                    *found_pos,     /* */
+                    *searchpos;     /* */
+   char              nextchar,      /* */
+                     prevchar;      /* */
+   int               found_lab;     /* */
+   size_t            found_len,     /* */
+                     ll;            /* */
+   BOOLEAN           ref_it;        /* */
+   BOOLEAN           ignore_it;     /* */
+   BOOLEAN           next_ok,       /* */
+                     prev_ok;       /* */
+   BOOLEAN           found_one,     /* */
+                     found_ok;      /* */
+   LABEL            *labptr;        /* */
+   
+   
+   if (bDocAutorefOff)
+      return;
+   
+   /* Automatische Referenzen werden nur fuer Inhaltsverzeichnisse */
+   /* gesetzt. Andere Referenzen muessen wie bei TeX mit !link */
+   /* manuell erzeugt werden! */
 
-        if (bDocAutorefOff)
-        {       return;
-        }
+   if (desttype == TOINF && !for_toc)
+      return;
+   
+   reset_refs();
+   
+   do
+   {
+      found_lab = -1;
+      found_len =  0;
+      found_pos =  s;
+   
+      for (i = 1; i < MAXLABELS; i++)
+      {
+         labptr = lab[i];
+   
+         if (labptr == NULL)
+            break;
+   
+                                          /* r5pl15 */
+         if (for_toc || (!for_toc && !labptr->ignore_links))
+         {
+            searchpos = s;
+   
+            found_one = TRUE;
+            found_ok  = FALSE;
+            
+            while (found_one && !found_ok)
+            {
+               ptr = searchpos;
+            
+               while ( (pos = strstr(ptr, labptr->name)) != NULL)
+               {
+                  ignore_it = FALSE;
+            
+                  if ( pos - 2 >= s)
+                  {
+                                          /* r5pl9: vorher <' ' */
+                     if (pos[-2] == '\033' && pos[-1] < '\010')
+                     {
+                        ptr = pos + 2;
+                        ignore_it = TRUE;
+                     }
+                  }
+            
+                  if (!ignore_it)
+                     break;
+               }
+   
+               if (pos != NULL)
+               {
+                  found_one = TRUE;
+   
+                  ll = labptr->len;       /* r5pl10: Laenge wird in add_label() vorberechnet */
+   
+                  if (ll > found_len)
+                  {
+                     nextchar = pos[ll];
 
-        if (desttype==TOINF && !for_toc)
-        {       /* Automatische Referenzen werden nur fuer Inhaltsverzeichnisse */
-                /* gesetzt. Andere Referenzen muessen wie bei TeX mit !link */
-                /* manuell erzeugt werden! */
-                return;
-        }
-
-        reset_refs();
-
-        do
-        {
-                found_lab= -1;
-                found_len= 0;
-                found_pos= s;
-
-                for (i=1; i<MAXLABELS; i++)
-                {
-                        labptr= lab[i];
-
-                        if (labptr==NULL)
-                        {       break;
-                        }
-
-                        if ( for_toc || (!for_toc && !labptr->ignore_links) )   /* r5pl15 */
-                        {
-                                searchpos= s;
-
-                                found_one= TRUE;
-                                found_ok= FALSE;
-
-                                while ( found_one && !found_ok )
-                                {
-                                        ptr= searchpos;
-
-                                        while ( (pos=strstr(ptr, labptr->name))!=NULL )
-                                        {
-                                                ignore_it= FALSE;
-
-                                                if ( (pos-2>=s) )
-                                                {       if ( pos[-2]=='\033' && pos[-1]<'\010') /* r5pl9: vorher <' ' */
-                                                        {       ptr= pos+2;
-                                                                ignore_it= TRUE;
-                                                        }
-                                                }
-
-                                                if (!ignore_it)
-                                                {       break;
-                                                }
-                                        }
-
-                                        if ( pos!=NULL )
-                                        {
-                                                found_one= TRUE;
-
-                                                ll= labptr->len;        /* r5pl10: Laenge wird in add_label() vorberechnet */
-
-                                                if ( ll > found_len )
-                                                {
-                                                        nextchar= pos[ll];
-                                                        if (pos==s)
-                                                        {       prevchar= EOS;
-                                                        }
-                                                        else
-                                                        {       prevchar= pos[-1];
-                                                        }
-
-                                                        prev_ok= ( prevchar==EOS || strchr(allowed_prev_chars, prevchar)!=NULL );
-                                                        next_ok= ( nextchar==EOS || strchr(allowed_next_chars, nextchar)!=NULL );
-
-                                                        if ( prev_ok && next_ok )
-                                                        {       found_lab= i;
-                                                                found_len= ll;
-                                                                found_pos= pos;
-                                                                found_ok= TRUE;
-                                                        }
-                                                        else
-                                                        {       searchpos= pos+1;
-                                                                found_ok= FALSE;
-                                                        }
-                                                }
-                                                else
-                                                {       searchpos= pos+1;
-                                                        found_ok= FALSE;
-                                                }/* ll > found_len */
-                                        }
-                                        else
-                                        {       /* pos==NULL */
-                                                found_one= FALSE;
-                                                found_ok= FALSE;
-                                                searchpos+= labptr->len;
-                                        }
-
-                                }/* while (!found_and_ok) */
-
-                        }/* !ignore_links */
-
-                }/* for */
-
-                if (found_lab >= 0)
-                {       ref_it= TRUE;
-                        lab[found_lab]->referenced= TRUE;       /* r6pl9 */
-
-                        /* Hier dafuer sorgen, dass nicht innerhalb eines Nodes */
-                        /* referenziert wird, wenn man nicht im Inhaltsverzeichnis ist */
-
-                        if (!for_toc)
-                        {       if (p2_toc_counter==lab[found_lab]->tocindex)
-                                {       ref_it= FALSE;
-                                }
-                        }
-
-                        if (ref_it)
-                        {       string2reference(the_ref, lab[found_lab], for_toc, pic, uiWidth, uiHeight);
-                                add_ref(the_ref);
-                        }
-                        else
-                        {       add_ref(lab[found_lab]->name);
-                        }
-
-                        replace_once(found_pos, lab[found_lab]->name, refs[refs_counter].magic);
-
-                }/* found_lab>=0 */
-
-        }       while (found_lab>=0);
-
-        replace_refs(s);
-
-}       /* auto_references */
+                     if (pos == s)
+                        prevchar = EOS;
+                     else
+                        prevchar = pos[-1];
+   
+                     prev_ok = (prevchar == EOS || strchr(allowed_prev_chars, prevchar) != NULL);
+                     next_ok = (nextchar == EOS || strchr(allowed_next_chars, nextchar) != NULL);
+   
+                     if (prev_ok && next_ok)
+                     {
+                        found_lab = i;
+                        found_len = ll;
+                        found_pos = pos;
+                        found_ok  = TRUE;
+                     }
+                     else
+                     {
+                        searchpos = pos + 1;
+                        found_ok  = FALSE;
+                     }
+                  }
+                  else
+                  {
+                     searchpos = pos + 1;
+                     found_ok  = FALSE;
+                     
+                  }  /* ll > found_len */
+                  
+               }
+               else
+               {
+                  /* pos == NULL */
+                  found_one = FALSE;
+                  found_ok  = FALSE;
+                  searchpos += labptr->len;
+               }
+   
+            }  /* while (!found_and_ok) */
+   
+         }  /* !ignore_links */
+   
+      }  /* for */
+   
+      if (found_lab >= 0)
+      {
+         ref_it = TRUE;
+                                          /* r6pl9 */
+         lab[found_lab]->referenced = TRUE;
+   
+         /* Hier dafuer sorgen, dass nicht innerhalb eines Nodes */
+         /* referenziert wird, wenn man nicht im Inhaltsverzeichnis ist */
+   
+         if (!for_toc)
+         {
+            if (p2_toc_counter == lab[found_lab]->tocindex)
+            {
+               ref_it = FALSE;
+            }
+         }
+   
+         if (ref_it)
+         {
+            string2reference(the_ref, lab[found_lab], for_toc, pic, uiWidth, uiHeight);
+            add_ref(the_ref);
+         }
+         else
+         {
+            add_ref(lab[found_lab]->name);
+         }
+   
+         replace_once(found_pos, lab[found_lab]->name, refs[refs_counter].magic);
+   
+      }  /* found_lab>=0 */
+   
+   }  while (found_lab>=0);
+   
+   replace_refs(s);
+}
 
 
 
-/*      ############################################################
-        #
-        # Ende eines Kapitels testen und ggf. setzen
-        #
-        ############################################################    */
-GLOBAL void check_endnode ( void )
+
+
+/*******************************************************************************
+*
+*  check_endnode():
+*     Ende eines Kapitels testen und ggf. setzen
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void check_endnode(void)
 {
-        if (active_nodetype!=TOC_NONE)
-        {
-                switch (active_nodetype)
-                {       case TOC_NODE1:
-                                if (use_auto_subtocs)
-                                {       do_subtoc(subtocs1_depth);
-                                }
-                                break;
-                        case TOC_NODE2:
-                                if (use_auto_subsubtocs)
-                                {       do_subsubtoc(subtocs2_depth);
-                                }
-                                break;
-                        case TOC_NODE3:
-                                if (use_auto_subsubsubtocs)
-                                {       do_subsubsubtoc(subtocs3_depth);
-                                }
-                                break;
-                        case TOC_NODE4:
-                                if (use_auto_subsubsubsubtocs)
-                                {       do_subsubsubsubtoc();
-                                }
-                                break;
-                }
+   if (active_nodetype != TOC_NONE)
+   {
+      switch (active_nodetype)
+      {
+      case TOC_NODE1:
+         if (use_auto_subtocs)
+            do_subtoc(subtocs1_depth);
+            
+         break;
+         
+      case TOC_NODE2:
+         if (use_auto_subsubtocs)
+            do_subsubtoc(subtocs2_depth);
+            
+         break;
+         
+      case TOC_NODE3:
+         if (use_auto_subsubsubtocs)
+            do_subsubsubtoc(subtocs3_depth);
+            
+         break;
+         
+      case TOC_NODE4:
+         if (use_auto_subsubsubsubtocs)
+            do_subsubsubsubtoc();
+            
+         break;
+      }
+      
+      switch (desttype)
+      {
+      case TOSTG:
+      case TOAMG:
+         outln("@endnode");
+         outln("");
+         break;
+         
+      case TOPCH:
+         pch_bottomline();
+         outln("\\end");
+         break;
+         
+      case TOTVH:
+         tvh_bottomline();
+         break;
+         
+      case TOWIN:
+      case TOWH4:
+      case TOAQV:
+         outln("}\\page");
+         break;
+         
+      case TOHAH:                         /* V6.5.17 */
+      case TOHTM:
+      case TOMHH:
+         break;
+      }
+      
+      active_nodetype = TOC_NONE;
+      bInsidePopup = FALSE;
+   }
+}
 
-                switch (desttype)
-                {
-                        case TOSTG:
-                        case TOAMG:
-                                outln("@endnode");
-                                outln("");
-                                break;
-                        case TOPCH:
-                                pch_bottomline();
-                                outln("\\end");
-                                break;
-                        case TOTVH:
-                                tvh_bottomline();
-                                break;
-                        case TOWIN:
-                        case TOWH4:
-                        case TOAQV:
-                                outln("}\\page");
-                                break;
-                        case TOHAH:             /* V6.5.17 */
-                        case TOHTM:
-                        case TOMHH:
-                                break;
-                }
-
-                active_nodetype= TOC_NONE;
-                bInsidePopup= FALSE;
-        }
-
-}       /* check_endnode */
 
 
-/*      ############################################################
-        #
-        #       Raw-Header einlesen und unver„ndert ausgeben (r6pl10)
-        #
-        ############################################################    */
-LOCAL BOOLEAN output_raw_file ( const char *filename )
+
+
+/*******************************************************************************
+*
+*  output_raw_file():
+*     Raw-Header einlesen und unveraendert ausgeben (r6pl10)
+*
+*  return:
+*     ???
+*
+******************************************|************************************/
+
+LOCAL BOOLEAN output_raw_file(
+
+const char     *filename)           /* */
 {
-        MYTEXTFILE *file;
-        char s[1024], old_filename[512], tmp_filename[512];
-        size_t len;
+   MYTEXTFILE  *file;               /* */
+   char         s[1024],            /* */
+                old_filename[512],  /* */
+                tmp_filename[512];  /* */
+   size_t       len;                /* */
+   
+   
+   um_strcpy(old_filename, filename, 512, "output_raw_file[1]");
+   um_strcpy(tmp_filename, filename, 512, "output_raw_file[2]");
+   
+   build_include_filename(tmp_filename, "");
+   
+   file = myTextOpen(tmp_filename);
+   
+   if (!file)
+   {
+      um_strcpy(tmp_filename, old_filename, 512, "output_raw_file[3]");
+      file = myTextOpen(tmp_filename);
+   }
+   
+   if (!file)
+      return FALSE;
+   
+   while (myTextGetline(s, 1024, file))
+   {
+      len = strlen(s);
+      
+      while ( (len>0) && (((UCHAR) s[len-1]) <= 32) )
+      {
+         s[len-1]= EOS;
+         len--;
+      }
+      
+      replace_macros(s);                  /* New in V6.5.9 [NHz] */
+   
+      outln(s);
+   }
+   
+   myTextClose(file);
+   
+   return TRUE;
+}
 
-        um_strcpy(old_filename, filename, 512, "output_raw_file[1]");
-        um_strcpy(tmp_filename, filename, 512, "output_raw_file[2]");
-
-        build_include_filename(tmp_filename, "");
-
-        file = myTextOpen(tmp_filename);
-
-        if (!file)
-        {
-                um_strcpy(tmp_filename, old_filename, 512, "output_raw_file[3]");
-                file = myTextOpen(tmp_filename);
-        }
-
-        if (!file)
-        {
-                return FALSE;
-        }
-
-        while (myTextGetline(s, 1024, file))
-        {
-                len= strlen(s);
-                while (  (len>0) && (((UCHAR) s[len-1])<=32) )
-                {       s[len-1]= EOS;
-                        len--;
-                }
-                /* New in V6.5.9 [NHz] */
-                replace_macros(s);
-
-                outln(s);
-        }
-
-        myTextClose(file);
-
-        return TRUE;
-
-}       /* output_raw_file */
 
 
-/* Changed in V6.5.9 [NHz] */
-GLOBAL BOOLEAN check_output_raw_header ( void )
+
+
+/*******************************************************************************
+*
+*  check_output_raw_header():
+*     ??? (description missing)
+*
+*  Note: changed in V6.5.9 [NHz]
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN check_output_raw_header(void)
 {
-        if (!toc[p2_toc_counter]->ignore_raw_header)
-        {
-                if (toc[p2_toc_counter]->raw_header_filename!=NULL)
-                {
-                        return(output_raw_file(toc[p2_toc_counter]->raw_header_filename));
-                }
-                else
-                {
-                        if (sDocRawHeaderFilename[0]!=EOS)
-                        {
-                                return(output_raw_file(sDocRawHeaderFilename));
-                        }
-                }
-        }
-        return(FALSE);
+   if (!toc[p2_toc_counter]->ignore_raw_header)
+   {
+      if (toc[p2_toc_counter]->raw_header_filename!=NULL)
+      {
+         return(output_raw_file(toc[p2_toc_counter]->raw_header_filename));
+      }
+      else
+      {
+         if (sDocRawHeaderFilename[0] != EOS)
+         {
+            return(output_raw_file(sDocRawHeaderFilename));
+         }
+      }
+   }
+   
+   return(FALSE);
+}
 
-}       /* check_output_raw_header */
 
 
-/* Changed in V6.5.9 [NHz] */
-GLOBAL BOOLEAN check_output_raw_footer ( BOOLEAN lastNode )
+
+
+/*******************************************************************************
+*
+*  check_output_raw_footer():
+*     ??? (description missing)
+*
+*  Note: changed in V6.5.9 [NHz]
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN check_output_raw_footer(
+
+BOOLEAN   lastNode)    /* */
 {
-        int offset= 1;
+   int    offset = 1;  /* */
+   
+   
+   if (lastNode)
+      offset = 0;
+   
+   /* p2_toc_counter bereits hochgezaehlt, daher 1 abziehen, */
+   /* aber nur dann, wenn es nicht der letzte Node ist (bei  */
+   /* !end_document tritt das auf) !!! */
+   
+   if (!toc[p2_toc_counter-offset]->ignore_raw_footer)
+   {
+      if (toc[p2_toc_counter-offset]->raw_footer_filename != NULL)
+      {
+         return(output_raw_file(toc[p2_toc_counter-offset]->raw_footer_filename));
+      }
+      else
+      {
+         if (sDocRawFooterFilename[0] != EOS)
+         {
+            return(output_raw_file(sDocRawFooterFilename));
+         }
+      }
+   }
+   
+   return(FALSE);
+}
 
-        if (lastNode)
-        {
-                offset= 0;
-        }
-
-        /* p2_toc_counter bereits hochgezaehlt, daher 1 abziehen,       */
-        /* aber nur dann, wenn es nicht der letzte Node ist (bei        */
-        /* !end_document tritt das auf)!!!!                                                     */
-
-        if (!toc[p2_toc_counter-offset]->ignore_raw_footer)
-        {
-                if (toc[p2_toc_counter-offset]->raw_footer_filename!=NULL)
-                {
-                        return(output_raw_file(toc[p2_toc_counter-offset]->raw_footer_filename));
-                }
-                else
-                {
-                        if (sDocRawFooterFilename[0]!=EOS)
-                        {
-                                return(output_raw_file(sDocRawFooterFilename));
-                        }
-                }
-        }
-        return(FALSE);
-
-}       /* check_output_raw_footer */
 
 
-/*      ############################################################
-        #
-        # Topline fuer die formatierte ASCII-Ausgabe
-        # darf NICHT outln() aufrufen, da sonst Rekursion
-        #
-        ############################################################    */
-GLOBAL void man_headline ( void )
+
+
+/*******************************************************************************
+*
+*  man_headline():
+*     Topline fuer die formatierte ASCII-Ausgabe
+*
+*  Note:
+*     darf NICHT outln() aufrufen, da sonst Rekursion!
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void man_headline(void)
 {
-        char    n[256];
-        char    s1[256];
-        size_t  spaces, s1l;
-
-        if (no_headlines)
-        {       return;
-        }
-
-        if (titdat.program==NULL)
-        {       return;
-        }
-
-        if (sDocManType[0]!=EOS)
-        {       sprintf(s1, "%s%s(%s)%s", BOLD_ON, titdat.program, sDocManType, BOLD_OFF);
-        }
-        else
-        {       sprintf(s1, "%s%s%s", BOLD_ON, titdat.program, BOLD_OFF);
-        }
-
-        s1l=strlen(s1) - strlen(BOLD_ON) - strlen(BOLD_OFF);
-
-        spaces= zDocParwidth-2*s1l;
-
-        sprintf(n, "%s%*s%-*s", s1, (int) spaces, "", (int) s1l, s1);
-
-        c_internal_styles(n);
-
-        fprintf(outfile.file, " %s\n\n", n);
-
-        iManPageLines= 2;
-
-}       /*man_headline*/
+   char     n[256];   /* */
+   char     s1[256];  /* */
+   size_t   spaces,   /* */
+            s1l;      /* */
+   
+   if (no_headlines)
+      return;
+   
+   if (titdat.program == NULL)
+      return;
+   
+   if (sDocManType[0]!=EOS)
+      sprintf(s1, "%s%s(%s)%s", BOLD_ON, titdat.program, sDocManType, BOLD_OFF);
+   else
+      sprintf(s1, "%s%s%s", BOLD_ON, titdat.program, BOLD_OFF);
+   
+   s1l = strlen(s1) - strlen(BOLD_ON) - strlen(BOLD_OFF);
+   
+   spaces = zDocParwidth - 2 * s1l;
+   
+   sprintf(n, "%s%*s%-*s", s1, (int) spaces, "", (int) s1l, s1);
+   
+   c_internal_styles(n);
+   
+   fprintf(outfile.file, " %s\n\n", n);
+   
+   iManPageLines = 2;
+}
 
 
-GLOBAL void man_bottomline ( void )
+
+
+
+/*******************************************************************************
+*
+*  man_bottomline():
+*     Bottomline fuer die formatierte ASCII-Ausgabe
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void man_bottomline(void)
 {
-        char n[256];
+   char n[256];  /* */
+   
 
-        sprintf(n, "- %d -", iManPagePages+1);
-        strcenter(n, zDocParwidth);     
-        fprintf(outfile.file, "\n%s\n\n", n);
-
-}       /* man_bottomline */
-
+   sprintf(n, "- %d -", iManPagePages+1);
+   strcenter(n, zDocParwidth);     
+   fprintf(outfile.file, "\n%s\n\n", n);
+}
 
 
-/*      ############################################################
-        #
-        # Topline fuer den ST-Guide
-        #
-        ############################################################    */
-GLOBAL void stg_headline ( const char *numbers, const char *nodename )
+
+
+
+/*******************************************************************************
+*
+*  stg_headline():
+*     Topline fuer den ST-Guide
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void stg_headline(
+
+const char  *numbers,      /* */
+const char  *nodename)     /* */
 {
-        char    n[512], s[512];
-        size_t  i, sooft, platz_links, sl;
+   char      n[512],       /* */
+             s[512];       /* */
+   size_t    i,            /* counter */
+             sooft,        /* */
+             platz_links,  /* */
+             sl;           /* */
+   
+   
+   do_toptoc(toc[p2_toc_counter]->toctype);
+   
+   if (no_headlines)
+      return;
+   
+   strcpy(s, numbers);
+   
+   if (s[0] != EOS)
+      um_strcat(s, " ", 512, "stg_headline [1]");
+   
+   if (nodename[0] == EOS)
+      tokcat(s, 512);
+   else
+      um_strcat(s, nodename, 512, "stg_headline [2]");
+   
+   replace_udo_quotes(s);
+   delete_all_divis(s);
+   
+   replace_2at_by_1at(s);
+   
+   if (titdat.program != NULL)
+      sl = strlen(titdat.program);
+   else
+      sl = 0;
+   
+   platz_links = zDocParwidth - sl - 1;
+   
+   if (toklen(s) > platz_links)
+   {
+      n[0] = EOS;
+      strncat(n, s, platz_links - 4);     /*r6pl4: 2 Leerzeichen */
+      strcat(n, "...  ");
+   }
+   else
+   {
+      strcpy(n, s);
+      sooft = zDocParwidth - toklen(s) - sl;
+   
+      for (i = 0; i < sooft; i++)
+         strcat(n, " ");                  /* <???>: Optimierbar! */
+   }
+   
+   replace_1at_by_2at(s);
+   
+   if (titdat.program!=NULL)
+      strcat(n, titdat.program);
+   
+   c_internal_styles(n);
+   replace_udo_tilde(n);
+   replace_udo_nbsp(n);
+   
+   if (desttype == TOSTG)
+      voutlnf("@{U}%s@{u}", n);
+   else
+      voutlnf("@{U}%s@{UU}", n);
+   
+   outln("");
+}
 
-        do_toptoc(toc[p2_toc_counter]->toctype);
-
-        if (no_headlines) return;
-
-        strcpy(s, numbers);
-
-        if (s[0]!=EOS)
-        {       um_strcat(s, " ", 512, "stg_headline [1]");
-        }
-
-        if (nodename[0]==EOS)
-        {       tokcat(s, 512);
-        }
-        else
-        {       um_strcat(s, nodename, 512, "stg_headline [2]");
-        }
-
-        replace_udo_quotes(s);
-        delete_all_divis(s);
-
-        replace_2at_by_1at(s);
-
-        if (titdat.program!=NULL)
-        {       sl= strlen(titdat.program);
-        }
-        else
-        {       sl= 0;
-        }
-
-        platz_links= zDocParwidth-sl-1;
-
-        if (toklen(s)>platz_links)
-        {       n[0]= EOS;
-                strncat(n, s, platz_links-4);   /*r6pl4: 2 Leerzeichen */
-                strcat(n, "...  ");
-        }
-        else
-        {       strcpy(n, s);
-                sooft= zDocParwidth-toklen(s)-sl;
-
-                for (i=0; i<sooft; i++)
-                {       strcat(n, " ");                 /* <???>: Optimierbar! */
-                }
-        }
-
-        replace_1at_by_2at(s);
-
-        if (titdat.program!=NULL)
-        {       strcat(n, titdat.program);
-        }
-
-        c_internal_styles(n);
-        replace_udo_tilde(n);
-        replace_udo_nbsp(n);
-
-        if (desttype==TOSTG)
-                voutlnf("@{U}%s@{u}", n);
-        else
-                voutlnf("@{U}%s@{UU}", n);
-
-        outln("");
-
-}       /* stg_headline */
 
 
-LOCAL void stg_header ( const char *numbers, const char *nodename, BOOLEAN is_popup )
+
+
+/*******************************************************************************
+*
+*  stg_header():
+*     Header fuer den ST-Guide
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void stg_header(
+
+const char  *numbers,   /* */
+const char  *nodename,  /* */
+BOOLEAN      is_popup)  /* */
 {
-        char    n[512];
-        int ti;
-        BOOLEAN flag;
+   char      n[512];    /* */
+   int       ti;        /* */
+   BOOLEAN   flag;      /* */
+   
+   
+   output_aliasses();
+   
+   ti = p2_toc_counter;
+   
+   if (ti >= 0)
+   {
+      if (toc[ti]->ignore_links)
+         outln("@noref");
+   
+      if (use_chapter_images && toc[ti]->image != NULL)
+      {       
+         strcpy(n, toc[ti]->image);
+         change_sep_suffix(n, ".img");
+         c_begin_center();                /* R6r5pl1 */
+         flag = c_img_output(n, "", FALSE);
+         c_end_center();
 
-        output_aliasses();
-
-        ti= p2_toc_counter;
-
-        if (ti>=0)
-        {
-                if (toc[ti]->ignore_links)
-                {       outln("@noref");
-                }
-
-                if (use_chapter_images && toc[ti]->image!=NULL)
-                {       
-                        strcpy(n, toc[ti]->image);
-                        change_sep_suffix(n, ".img");
-                        c_begin_center();       /* R6r5pl1 */
-                        flag= c_img_output(n, "", FALSE);
-                        c_end_center();
-                        if (flag)
-                        {       return;
-                        }
-                }
-        }
-
-        if (!is_popup)  
-        {       stg_headline(numbers, nodename);
-        }
-
-}       /* stg_header */
+         if (flag)
+            return;
+      }
+   }
+   
+   if (!is_popup)  
+      stg_headline(numbers, nodename);
+}
 
 
 
 
-/*      ############################################################
-        #
-        # Topline und Bottomlines fuer PC-HELP
-        #
-        ############################################################    */
-LOCAL void pch_headline ( char *s )
+
+/*******************************************************************************
+*
+*  pch_headline():
+*     Topline fuer PC-HELP
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void pch_headline(
+
+char       *s)            /* */
 {
-        char    n[512];
-        size_t  i, sooft, platz_links, pl;
+   char     n[512];       /* */
+   size_t   i,            /* */
+            sooft,        /* */
+            platz_links,  /* */
+            pl;           /* */
+            
+   
+   if (no_headlines)
+      return;
+   
+   pl = 0;
+   
+   if (titdat.program!=NULL)
+      pl = strlen(titdat.program);
+   
+   platz_links = zDocParwidth - pl - 1;
+   
+   if (strlen(s) > platz_links)
+   {
+      n[0] = EOS;
+      strncat(n, s, platz_links - 3);
+      strcat(n, "...");
+   }
+   else
+   {
+      strcpy(n, s);
+      sooft = zDocParwidth-strlen(s) - pl;
+   
+      for (i = 0; i < sooft; i++)
+      {
+         strcat(n, " ");                  /* <???> optimierbar */
+      }
+   }
+   
+   if (titdat.program != NULL)            /* r5pl6: Abfragen, ob Programmname vorhanden ist */
+   {
+      if (uses_tableofcontents)
+      {
+         strcat(n, PCH_LINK);    
+         strcat(n, titdat.program);
+         strcat(n, PCH_LINK);
+      }
+      else
+      {
+         strcat(n, titdat.program);
+      }
+   }
+   
+   replace_udo_quotes(n);
+   delete_all_divis(n);
+   c_internal_styles(n);
+   replace_udo_tilde(n);
+   replace_udo_nbsp(n);
+   
+   outln(n);
+   
+   output_ascii_line("-", zDocParwidth);
+}
 
-        if (no_headlines)
-        {       return;
-        }
-
-        pl=0;
-        if (titdat.program!=NULL)
-        {       pl= strlen(titdat.program);
-        }
-
-        platz_links= zDocParwidth-pl-1;
-
-        if (strlen(s)>platz_links)
-        {       n[0]= EOS;
-                strncat(n, s, platz_links-3);
-                strcat(n, "...");
-        }
-        else
-        {       strcpy(n, s);
-                sooft= zDocParwidth-strlen(s)-pl;
-
-                for (i=0; i<sooft; i++)
-                {       strcat(n, " ");         /* <???> optimierbar */
-                }
-        }
-
-        /* r5pl6: Abfragen, ob Programmname vorhanden ist */
-        if (titdat.program!=NULL)
-        {       if (uses_tableofcontents)
-                {       strcat(n, PCH_LINK);    
-                        strcat(n, titdat.program);
-                        strcat(n, PCH_LINK);
-                }
-                else
-                {       strcat(n, titdat.program);
-                }
-        }
-
-        replace_udo_quotes(n);
-        delete_all_divis(n);
-        c_internal_styles(n);
-        replace_udo_tilde(n);
-        replace_udo_nbsp(n);
-
-        outln(n);
-
-        output_ascii_line("-", zDocParwidth);
-
-}       /*pch_headline*/
 
 
-LOCAL void pch_bottomline ( void )
+
+
+/*******************************************************************************
+*
+*  pch_bottomline():
+*     Bottomline fuer PC-HELP
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void pch_bottomline(void)
 {
-        int             ci, pi, ni, ui;
-        char    s[256];
-        char    *up, *pp, *np;  /*r6pl2: ueber Zeiger, Umkopieren unnoetig */
+   int    ci,      /* */
+          pi,      /* */
+          ni,      /* */
+          ui;      /* */
+   char   s[256];  /* */
+   char  *up,      /* */                  /*r6pl2: ueber Zeiger, Umkopieren unnoetig */
+         *pp,      /* */
+         *np;      /* */
+         
+   
+   if (no_bottomlines)
+      return;
+   
+   up = pp = np = NULL;
+   
+   if (uses_tableofcontents)              /*r6pl2*/
+   {
+      up = lang.contents;
+      pp = lang.contents;
+   }
+   
+   ci = p2_toc_counter;
+   pi = toc[ci]->prev_index;
+   ni = toc[ci]->next_index;
+   ui = 0;
+   
+   switch (toc[ci]->toctype)
+   {
+   case TOC_NODE2:
+      ui = toc[ci]->up_n1_index;
+      break;
+   case TOC_NODE3:
+      ui = toc[ci]->up_n2_index;
+      break;
+   case TOC_NODE4:
+      ui = toc[ci]->up_n3_index;
+      break;
+   case TOC_NODE5:
+      ui = toc[ci]->up_n4_index;
+      break;
+   }
+   
+   if (ui > 0)
+      up = toc[ui]->name;
+   if (pi > 0)
+      pp = toc[pi]->name;
+   if (ni > 0)
+      np = toc[ni]->name;
+   
+   output_ascii_line("-", zDocParwidth);
+   
+   if (up !=NULL)
+   {
+      if (strchr(up, '"') != NULL)
+      {
+         strcpy(s, up);
+         node2pchelp(s);
+         voutlnf("[^^^^] \\link(\"%s\")%s\\# ", s, up);
+      }
+      else
+      {
+         voutlnf("[^^^^] \\#%s\\#", up);
+      }
+   }
+   
+   if (pp != NULL)
+   {
+      if (strchr(pp, '"') != NULL)
+      {
+         strcpy(s, pp);
+         node2pchelp(s);
+         voutlnf("[<<<<] \\link(\"%s\")%s\\# ", s, pp);
+      }
+      else
+      {
+         voutlnf("[<<<<] \\#%s\\#", pp);
+      }
+   }
+   
+   if (np != NULL)           
+   {
+      if (np[0] != EOS)
+      {
+         if (strchr(np, '"') != NULL)
+         {
+            strcpy(s, np);
+            node2pchelp(s);
+            voutlnf("[>>>>] \\link(\"%s\")%s\\# ", s, np);
+         }
+         else
+         {
+            voutlnf("[>>>>] \\#%s\\#", np);
+         }
+      }
+   }
+   
+   outln("");
+}
 
-        if (no_bottomlines)
-        {       return;
-        }
-
-        up= pp= np= NULL;
-
-        if (uses_tableofcontents)               /*r6pl2*/
-        {       up= lang.contents;
-                pp= lang.contents;
-        }
-
-        ci=p2_toc_counter;
-        pi=toc[ci]->prev_index;
-        ni=toc[ci]->next_index;
-        ui= 0;
-
-        switch(toc[ci]->toctype)
-        {       case TOC_NODE2: ui= toc[ci]->up_n1_index;       break;
-                case TOC_NODE3: ui= toc[ci]->up_n2_index;       break;
-                case TOC_NODE4: ui= toc[ci]->up_n3_index;       break;
-                case TOC_NODE5: ui= toc[ci]->up_n4_index;       break;
-        }
-
-        if (ui>0)       up= toc[ui]->name;
-        if (pi>0)       pp= toc[pi]->name;
-        if (ni>0)       np= toc[ni]->name;
-
-        output_ascii_line("-", zDocParwidth);
-
-        if (up!=NULL)
-        {       if (strchr(up, '"')!=NULL)
-                {       strcpy(s, up);
-                        node2pchelp(s);
-                        voutlnf("[^^^^] \\link(\"%s\")%s\\# ", s, up);
-                }
-                else
-                {       voutlnf("[^^^^] \\#%s\\#", up);
-                }
-        }
-
-        if (pp!=NULL)
-        {       if (strchr(pp, '"')!=NULL)
-                {       strcpy(s, pp);
-                        node2pchelp(s);
-                        voutlnf("[<<<<] \\link(\"%s\")%s\\# ", s, pp);
-                }
-                else
-                {       voutlnf("[<<<<] \\#%s\\#", pp);
-                }
-        }
-
-        if (np!=NULL)           
-        {       if (np[0]!=EOS)
-                {       if (strchr(np, '"')!=NULL)
-                        {       strcpy(s, np);
-                                node2pchelp(s);
-                                voutlnf("[>>>>] \\link(\"%s\")%s\\# ", s, np);
-                        }
-                        else
-                        {       voutlnf("[>>>>] \\#%s\\#", np);
-                        }
-                }
-        }
-
-        outln("");
-
-}       /* pch_bottomline */
 
 
-LOCAL void output_pch_header ( const char *numbers, const char *name )
+
+
+/*******************************************************************************
+*
+*  output_pch_header():
+*     ??? (description missing)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void output_pch_header(
+
+const char       *numbers,  /* */
+const char       *name)     /* */
 {
-        char    n[256], q[256];
-        int start;
-        register int i;
+   char           n[256],   /* */
+                  q[256];   /* */
+   int            start;    /* */
+   register int   i;        /* */
 
-        outln("");
-        outln("screen(");
+   
+   outln("");
+   outln("screen(");
+   
+/* #if 1 */
+   start = toc[p2_toc_counter]->labindex;
+/* #else
+   start = 1;
+   #endif
+*/
+   
+   for (i = start; i < MAXLABELS; i++)
+   {
+      if (lab[i] != NULL)
+      {
+         if (lab[i]->tocindex == p2_toc_counter)
+         {
+            strcpy(q, lab[i]->name);
+            node2pchelp(q);
+            sprintf(n, "  capsensitive(\"%s\")", q);
 
-/*#if 1*/
-        start= toc[p2_toc_counter]->labindex;
-/*#else
-        start= 1;
-#endif*/
-
-        for (i=start; i<MAXLABELS; i++)
-        {       if ( lab[i]!=NULL )
-                {       if ( lab[i]->tocindex==p2_toc_counter )
-                        {       strcpy(q, lab[i]->name);
-                                node2pchelp(q);
-                                sprintf(n, "  capsensitive(\"%s\")", q);
-                                if ( i+1<MAXLABELS && lab[i+1]!=NULL )
-                                {       if ( lab[i+1]->tocindex==p2_toc_counter )
-                                        {       strcat(n, ",");
-                                        }
-                                }
-                                replace_all_copyright(n);
-                                replace_udo_tilde(n);
-                                replace_udo_nbsp(n);
-                                outln(n);
-                        }
-                        else
-                        {       if (lab[i]->tocindex>p2_toc_counter)    /* r5pl6 */
-                                {       break;
-                                }
-                        }
-                }
-                else
-                {       break;
-                }
-        }
-
-        outln(")");
-
-        do_toptoc(toc[p2_toc_counter]->toctype);
-
-        sprintf(n, "%s%s", numbers, name);
-        pch_headline(n);
-        outln("");
-
-}       /* output_pch_header */
+            if (i + 1 < MAXLABELS && lab[i+1] != NULL)
+            {
+               if (lab[i+1]->tocindex == p2_toc_counter)
+               {
+                  strcat(n, ",");
+               }
+            }
+            
+            replace_all_copyright(n);
+            replace_udo_tilde(n);
+            replace_udo_nbsp(n);
+            outln(n);
+         }
+         else
+         {
+                                          /* r5pl6 */
+            if (lab[i]->tocindex>p2_toc_counter)
+            {
+               break;
+            }
+         }
+      }
+      else
+      {
+         break;
+      }
+   }
+   
+   outln(")");
+   
+   do_toptoc(toc[p2_toc_counter]->toctype);
+   
+   sprintf(n, "%s%s", numbers, name);
+   pch_headline(n);
+   outln("");
+}
 
 
 
 
-/*      ############################################################
-        #
-        # Headline und Bottomlines fuer Turbo-Vision-Help
-        #
-        ############################################################    */
-GLOBAL void tvh_headline ( const char *s )
+
+/*******************************************************************************
+*
+*  output_pch_header():
+*     Headline fuer Turbo-Vision-Help
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void tvh_headline(
+
+const char  *s)       /* */
 {
-        char n[256];
-        size_t  nl;
+   char      n[256];  /* */
+   size_t    nl;      /* */
+   
+   
+   sprintf(n, " %s \334", s);
+   outln(n);
+   
+   nl = strlen(n);
+   
+   strcpy(n, "  ");
+   
+   while (strlen(n) < nl)
+   {
+      strcat(n, "\337");
+   }
+   
+   outln(n);
+   outln("");
+}
 
-        sprintf(n, " %s \334", s);
-        outln(n);
-        nl=strlen(n);
-
-        strcpy(n, "  ");
-        while (strlen(n)<nl)
-        {       strcat(n, "\337");
-        }
-        outln(n);
-        outln("");
-
-}       /* tvh_headline */
 
 
-LOCAL void tvh_bottomline ( void )
+
+
+/*******************************************************************************
+*
+*  output_pch_header():
+*     Bottomline fuer Turbo-Vision-Help
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void tvh_bottomline(void)
 {
-        int             ci, pi, ni, ui;
-        char    up[256], pp[256], np[256];
-        char    up2[256], pp2[256], np2[256];
+   int    ci,        /* */
+          pi,        /* */
+          ni,        /* */
+          ui;        /* */
+   char   up[256],   /* */
+          pp[256],   /* */
+          np[256];   /* */
+   char   up2[256],  /* */
+          pp2[256],  /* */
+          np2[256];  /* */
+   
+   
+   if (no_bottomlines)
+      return;
+   
+   c_hline();
+   
+   strcpy(up, lang.contents);
+   strcpy(pp, lang.contents);
+   
+   np[0] = EOS;
+   
+   ci = p2_toc_counter;
+   pi = toc[ci]->prev_index;
+   ni = toc[ci]->next_index;
+   ui = 0;
+   
+   switch (toc[ci]->toctype)
+   {
+   case TOC_NODE2:
+      ui = toc[ci]->up_n1_index;
+      break;
+   case TOC_NODE3:
+      ui = toc[ci]->up_n2_index;
+      break;
+   case TOC_NODE4:
+      ui = toc[ci]->up_n3_index;
+      break;
+   case TOC_NODE5:
+      ui = toc[ci]->up_n4_index;
+      break;
+   }
+   
+   if (ui > 0)
+      strcpy(up, toc[ui]->name);
+      
+   if (pi > 0)
+      strcpy(pp, toc[pi]->name);
+      
+   if (ni > 0)
+      strcpy(np, toc[ni]->name);
+   
+   strcpy(up2, up);
+   node2vision(up2);
+   
+   strcpy(pp2, pp);
+   node2vision(pp2);
+   
+   strcpy(np2, np);
+   node2vision(np2);
+   
+   voutlnf("  { \036 :%s}", up2);
+   voutf(" {%s:%s}", "\021\304", pp2);
+   
+   if (np[0] != EOS)
+      voutlnf("\301{%s:%s}", "\304\020", np2);
+   else
+      outln("\331");
+   
+   outln("");
+}
 
-        if (no_bottomlines)
-        {       return;
-        }
-
-        c_hline();
-
-        strcpy(up, lang.contents);
-        strcpy(pp, lang.contents);
-        np[0]= EOS;
-
-        ci=p2_toc_counter;
-        pi=toc[ci]->prev_index;
-        ni=toc[ci]->next_index;
-        ui= 0;
-
-        switch(toc[ci]->toctype)
-        {       case TOC_NODE2: ui= toc[ci]->up_n1_index;       break;
-                case TOC_NODE3: ui= toc[ci]->up_n2_index;       break;
-                case TOC_NODE4: ui= toc[ci]->up_n3_index;       break;
-                case TOC_NODE5: ui= toc[ci]->up_n4_index;       break;
-        }
-
-        if (ui>0)       strcpy(up, toc[ui]->name);
-        if (pi>0)       strcpy(pp, toc[pi]->name);
-        if (ni>0)       strcpy(np, toc[ni]->name);
-
-        strcpy(up2, up);        node2vision(up2);
-        strcpy(pp2, pp);        node2vision(pp2);
-        strcpy(np2, np);        node2vision(np2);
 
 
-        voutlnf("  { \036 :%s}", up2);
-        voutf(" {%s:%s}", "\021\304", pp2);
-
-        if (np[0]!=EOS)
-        {       voutlnf("\301{%s:%s}", "\304\020", np2);
-        }
-        else
-        {       outln("\331");
-        }
-
-        outln("");
-
-}       /* tvh_bottomline */
 
 
-/*      ############################################################
-        # Turbo-Vision-Help-Node-Header erzeugen
-        ############################################################    */
-LOCAL void output_vision_header ( const char *numbers, const char *name )
+/*******************************************************************************
+*
+*  output_vision_header():
+*     Turbo-Vision-Help-Node-Header erzeugen
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void output_vision_header(
+
+const char       *numbers,  /* */
+const char       *name)     /* */
 {
-        char n[512], l[512];
-        register int i;
-        size_t nl;
+   char           n[512],   /* */
+                  l[512];   /* */
+   register int   i;        /* */
+   size_t         nl;       /* */
+   
+   
+   strcpy(n, ".topic ");
+   
+   for (i = 1; i < MAXLABELS; i++)
+   {
+      if (lab[i] != NULL)
+      {
+         if (lab[i]->tocindex == p2_toc_counter)
+         {
+            strcpy(l, lab[i]->name);
+            node2vision(l);
+            strcat(n, l);
+            strcat(n, ",");
+         }
+                                          /* r5pl6 */
+         else if (lab[i]->tocindex > p2_toc_counter)
+               break;
+      }
+      else
+         break;
+   }
+   
+   nl = strlen(n);
+      
+   if (n[nl-1] == ',')                    /* Letztes Komma im .topic entfernen */
+   {
+      n[nl-1] = EOS;
+   }
+   
+   outln(n);
+   
+   sprintf(n, "%s%s", numbers, name);
+   tvh_headline(n);
+}
 
-        strcpy(n, ".topic ");
-
-        for (i=1; i<MAXLABELS; i++)
-        {       if (lab[i]!=NULL)
-                {       if ( lab[i]->tocindex==p2_toc_counter )
-                        {       strcpy(l, lab[i]->name);
-                                node2vision(l);
-                                strcat(n, l);
-                                strcat(n, ",");
-                        }
-                        else
-                        {       if (lab[i]->tocindex>p2_toc_counter)    /* r5pl6 */
-                                {       break;
-                                }
-                        }
-                }
-                else
-                {       break;
-                }
-        }
-
-        /* Letztes Komma im .topic entfernen */
-        nl= strlen(n);
-        if ( n[nl-1]==',' )
-        {       n[nl-1]= EOS;
-        }
-
-        outln(n);
-
-        sprintf(n, "%s%s", numbers, name);
-        tvh_headline(n);
-
-}       /* output_vision_header */
 
 
 
-/*      ############################################################
-        #
-        # Nodeline fuer Texinfo
-        #
-        ############################################################    */
-LOCAL void output_texinfo_node ( const char *name )
+
+/*******************************************************************************
+*
+*  output_texinfo_node():
+*     Nodeline fuer Texinfo
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void output_texinfo_node(
+
+const char  *name)     /* */
 {
-        int ci, pi, ni, ui;
-        char n[512], pp[256], np[256], up[256];
+   int       ci,       /* */
+             pi,       /* */
+             ni,       /* */
+             ui;       /* */
+   char      n[512],   /* */
+             pp[256],  /* */
+             np[256],  /* */
+             up[256];  /* */
+   
+   
+   strcpy(n, name);
+   strcpy(up, "Top");
+   strcpy(np, "");                        /* r5pl8: vorher "Top" */
+   strcpy(pp, "Top");
+   
+   ci = p2_toc_counter;
+   pi = toc[ci]->prev_index;
+   ni = toc[ci]->next_index;
+   ui = 0;
+   
+   switch(toc[ci]->toctype)
+   {
+   case TOC_NODE2:
+      ui = toc[ci]->up_n1_index;
+      break;
+   case TOC_NODE3:
+      ui = toc[ci]->up_n2_index;
+      break;
+   case TOC_NODE4:
+      ui = toc[ci]->up_n3_index;
+      break;
+   case TOC_NODE5:
+      ui = toc[ci]->up_n4_index;
+      break;
+   }
+   
+   if (ui > 0)
+      strcpy(up, toc[ui]->name);
+      
+   if (pi > 0)
+      strcpy(pp, toc[pi]->name);
+      
+   if (ni > 0)
+      strcpy(np, toc[ni]->name);
+   
+   node2texinfo(n);
+   node2texinfo(np);
+   node2texinfo(pp);
+   node2texinfo(up);
+   
+   outln("");
+   
+   voutlnf("@node %s, %s, %s, %s", n, np, pp, up);
+}
 
-        strcpy(n, name);
-        strcpy(up, "Top");
-        strcpy(np, "");         /* r5pl8: vorher "Top" */
-        strcpy(pp, "Top");
-
-        ci= p2_toc_counter;
-        pi= toc[ci]->prev_index;
-        ni= toc[ci]->next_index;
-        ui= 0;
-        switch(toc[ci]->toctype)
-        {       case TOC_NODE2: ui= toc[ci]->up_n1_index;       break;
-                case TOC_NODE3: ui= toc[ci]->up_n2_index;       break;
-                case TOC_NODE4: ui= toc[ci]->up_n3_index;       break;
-                case TOC_NODE5: ui= toc[ci]->up_n4_index;       break;
-        }
-
-        if (ui>0)       strcpy(up, toc[ui]->name);
-        if (pi>0)       strcpy(pp, toc[pi]->name);
-        if (ni>0)       strcpy(np, toc[ni]->name);
-
-        node2texinfo(n);
-        node2texinfo(np);
-        node2texinfo(pp);
-        node2texinfo(up);
-
-        outln("");
-
-        voutlnf("@node %s, %s, %s, %s", n, np, pp, up);
-
-}       /* output_texinfo_node */
 
 
 
 
-/*      ############################################################
-        #
-        # Topline fuer WinHelp
-        #
-        ############################################################    */
-LOCAL void win_headline ( char *name, BOOLEAN popup )
+/*******************************************************************************
+*
+*  win_headline():
+*     Topline fuer WinHelp
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void win_headline(
+
+char     *name,    /* */
+BOOLEAN   popup)   /* */
 {
-        char n[512], fs[32];
-        int     ti;
-
-        ti= p2_toc_counter;
-
-        if (use_chapter_images)
-        {       
-                if (ti>=0 && toc[ti]->image!=NULL)
-                {       um_strcpy(n, toc[ti]->image, 512, "win_headline[1]");
-                        c_begin_center();       /* r6pl1 */
-                        c_bmp_output(n, "", FALSE);
-                        c_end_center();         /* r6pl1 */
-                        return;
-                }
-        }
-
-        /* r5pl16: Headlines wirklich unterdruecken */
-        if (no_headlines || toc[ti]->ignore_headline || (no_popup_headlines && popup))
-        {       return;
-        }
-
-        c_win_styles(name);
-
-        if (!popup)
-        {       outln("\\keepn");
-        }
-
-        do_toptoc(toc[ti]->toctype);    /*r6pl5*/
-
-        sprintf(fs, "\\fs%d", iDocPropfontSize + 14);
-
-        if (popup)
-        {       voutlnf("{%s{\\b %s}}\\par\\pard\\par", fs, name);
-        }
-        else
-        {       voutlnf("{%s{\\b\\sa20\\sb20 %s}}\\par\\pard\\par", fs, name);
-        }
-
-}       /* win_headline */
+   char   n[512],  /* */
+          fs[32];  /* */
+   int    ti;      /* */
+   
+   
+   ti = p2_toc_counter;
+   
+   if (use_chapter_images)
+   {       
+      if (ti >= 0 && toc[ti]->image != NULL)
+      {
+         um_strcpy(n, toc[ti]->image, 512, "win_headline[1]");
+         c_begin_center();                /* r6pl1 */
+         c_bmp_output(n, "", FALSE);
+         c_end_center();                  /* r6pl1 */
+         return;
+      }
+   }
+   
+                                          /* r5pl16: Headlines wirklich unterdruecken */
+   if (no_headlines || toc[ti]->ignore_headline || (no_popup_headlines && popup))
+      return;
+   
+   c_win_styles(name);
+   
+   if (!popup)
+      outln("\\keepn");
+   
+   do_toptoc(toc[ti]->toctype);    /*r6pl5*/
+   
+   sprintf(fs, "\\fs%d", iDocPropfontSize + 14);
+   
+   if (popup)
+      voutlnf("{%s{\\b %s}}\\par\\pard\\par", fs, name);
+   else
+      voutlnf("{%s{\\b\\sa20\\sb20 %s}}\\par\\pard\\par", fs, name);
+}
 
 
 
-LOCAL void output_win_header ( const char *name, const BOOLEAN invisible )
+
+
+/*******************************************************************************
+*
+*  output_win_header():
+*     Header fuer WinHelp
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void output_win_header(
+
+const char     *name,           /* */
+const BOOLEAN   invisible)      /* */
 {
-        char    n[512], f[512], cbb[512];
-        int             ci, ui;
-        char    hlp_name[256];
+   char         n[512],         /* */
+                f[512],         /* */
+                cbb[512];       /* */
+   int          ci,             /* */
+                ui;             /* */
+   char         hlp_name[256];  /* */
+   
+   const char *btn_disable = "!{\\footnote ! DisableButton(\"BTN_UP\") }";
+   const char *btn_enable  = "!{\\footnote ! EnableButton(\"BTN_UP\");";
+   const char *btn_change  = "ChangeButtonBinding(\"BTN_UP\", \"JumpID(%s, `%s') \") }";
 
-        const char *btn_disable= "!{\\footnote ! DisableButton(\"BTN_UP\") }";
-        const char *btn_enable= "!{\\footnote ! EnableButton(\"BTN_UP\");";
-        const char *btn_change= "ChangeButtonBinding(\"BTN_UP\", \"JumpID(%s, `%s') \") }";
+   
+   if (desttype == TOAQV)                 /* r5pl6 */
+      strcpy(hlp_name, "qchPath");
+   else
+      sprintf(hlp_name, "`%s.hlp'", outfile.name);
+   
+   um_strcpy(n, name, 512, "output_win_header[1]");
 
-        if (desttype==TOAQV)    /* r5pl6 */
-        {       strcpy(hlp_name, "qchPath");
-        }
-        else
-        {       sprintf(hlp_name, "`%s.hlp'", outfile.name);
-        }
+   del_internal_styles(n);                /* r5pl3 */
+   
+   outln("{");
+   
+                                          /* r5pl10 */
+   if (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index)
+   {
+      um_strcpy(f, n, 512, "output_win_header[2]");
+      winspecials2ascii(f);
+      voutlnf("K{\\footnote K %s}", f);
+   }
+   
+   if (bDocWinOldKeywords)
+   {
+      um_strcpy(f, n, 512, "output_win_header[3]");
+      node2winhelp(f);
+      voutlnf("#{\\footnote # %s}", f);
+   }
+   
+                                          /* r6pl2 */
+   node2NrWinhelp(f, toc[p2_toc_counter]->labindex);
 
-        um_strcpy(n, name, 512, "output_win_header[1]");
-        del_internal_styles(n); /* r5pl3 */
+   voutlnf("#{\\footnote # %s}", f);
 
-        outln("{");
-
-        if (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index)  /* r5pl10 */
-        {       um_strcpy(f, n, 512, "output_win_header[2]");
-                winspecials2ascii(f);
-                voutlnf("K{\\footnote K %s}", f);
-        }
-
-        if (bDocWinOldKeywords)
-        {       um_strcpy(f, n, 512, "output_win_header[3]");
-                node2winhelp(f);
-                voutlnf("#{\\footnote # %s}", f);
-        }
-
-        node2NrWinhelp(f, toc[p2_toc_counter]->labindex);       /* r6pl2 */
-        voutlnf("#{\\footnote # %s}", f);
-        if (toc[p2_toc_counter]->mapping>=0)
-        {       voutlnf("#{\\footnote # %d}", toc[p2_toc_counter]->mapping);
-        }
-        voutlnf("${\\footnote $ %s}", n);       /* r5pl3 */
-
-        if (!no_buttons)        /* r6pl8 */
-        {
-                if (!invisible) /* r5pl12: versteckte Kapitel nicht mit in die Browse-Sequence einbinden */
-                {       outln(win_browse);
-                }
-
-                cbb[0]= EOS;
-                ci= p2_toc_counter;
-                ui= 0;
-                switch(toc[ci]->toctype)
-                {       case TOC_NODE2: ui= toc[ci]->up_n1_index;       break;
-                        case TOC_NODE3: ui= toc[ci]->up_n2_index;       break;
-                        case TOC_NODE4: ui= toc[ci]->up_n3_index;       break;
-                        case TOC_NODE5: ui= toc[ci]->up_n4_index;       break;
-                }
-
-                if (ui==0)
-                {       if (called_tableofcontents)
-                        {
-                                node2NrWinhelp(n, 0);
-                                sprintf(cbb, btn_change, hlp_name, n);  /* r5pl6 */
-                                outln(btn_enable);
-                                outln(cbb);
-                        }
-                        else
-                        {       outln(btn_disable);
-                        }
-                }
-                else
-                {
-                        node2NrWinhelp(n, toc[ui]->labindex);
-                        sprintf(cbb, btn_change, hlp_name, n);  /* r5pl6 */
-                        outln(btn_enable);
-                        outln(cbb);
-                }
-        }
-
-}       /* output_win_header */
-
+   if (toc[p2_toc_counter]->mapping>=0)
+   {
+      voutlnf("#{\\footnote # %d}", toc[p2_toc_counter]->mapping);
+   }
+   
+   voutlnf("${\\footnote $ %s}", n);      /* r5pl3 */
+   
+   if (!no_buttons)                       /* r6pl8 */
+   {
+      if (!invisible)                     /* r5pl12: versteckte Kapitel nicht mit in die Browse-Sequence einbinden */
+      {
+         outln(win_browse);
+      }
+   
+      cbb[0] = EOS;
+      ci = p2_toc_counter;
+      ui = 0;
+      
+      switch(toc[ci]->toctype)
+      {
+      case TOC_NODE2:
+         ui = toc[ci]->up_n1_index;
+         break;
+      case TOC_NODE3:
+         ui = toc[ci]->up_n2_index;
+         break;
+      case TOC_NODE4:
+         ui = toc[ci]->up_n3_index;
+         break;
+      case TOC_NODE5:
+         ui = toc[ci]->up_n4_index;
+         break;
+      }
+      
+      if (ui == 0)
+      {
+         if (called_tableofcontents)
+         {
+            node2NrWinhelp(n, 0);
+                                          /* r5pl6 */
+            sprintf(cbb, btn_change, hlp_name, n);
+            outln(btn_enable);
+            outln(cbb);
+         }
+         else
+         {
+            outln(btn_disable);
+         }
+      }
+      else
+      {
+         node2NrWinhelp(n, toc[ui]->labindex);
+                                          /* r5pl6 */
+         sprintf(cbb, btn_change, hlp_name, n);
+         outln(btn_enable);
+         outln(cbb);
+      }
+   }
+}
 
 
 
 
-/*      ########################################################################
-        # Dateinamen fuer HTML abhaengig vom aktuellen Node ermitteln. UDO
-        # splittet die Files selbstaendig und benoetigt u.a. fuer die
-        # Referenzen einen eindeutigen Dateinamen. Daher gelangen die Nummern
-        # der Kapitel in den Dateinamen. Problem: Ab Kapitel 255 ist's mit der
-        # Eindeutigkeit vorbei. Zurueckgeliefert wird nur der Name, kein Suffix
-        ########################################################################        */
-LOCAL char *get_html_filename ( const int tocindex, char *s )
-{       
-        /*
-                The buffer in tmp_n? is with 17 chars a bit small.
-                I inserted the following constant to easier use.
-                The buffer increase was neccesary because it of
-                bug #0000026 and perhaps #0000004.
-                Perhaps its better to check if this buffer is big
-                enough! Will try this later [vj]
-        */
-        #define MAX_TMP_NX      100
-        char tmp_n1[MAX_TMP_NX], tmp_n2[MAX_TMP_NX], tmp_n3[MAX_TMP_NX], tmp_n4[MAX_TMP_NX],
-             tmp_n5[MAX_TMP_NX];
-        int ti;
-        int hexwidth;   /* r6pl2 */
+
+/*******************************************************************************
+*
+*  get_html_filename():
+*     Dateinamen fuer HTML abhaengig vom aktuellen Node ermitteln.
+*
+*  Note:
+*     UDO splittet die Files selbstaendig und benoetigt u.a. fuer die
+*     Referenzen einen eindeutigen Dateinamen. Daher gelangen die Nummern
+*     der Kapitel in den Dateinamen. Problem: Ab Kapitel 255 ist's mit der
+*     Eindeutigkeit vorbei. Zurueckgeliefert wird nur der Name, kein Suffix
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL char *get_html_filename(
+
+const int   tocindex,            /* */
+char       *s)                   /* */
+{
+   /*
+      The buffer in tmp_n? is with 17 chars a bit small.
+      I inserted the following constant to easier use.
+      The buffer increase was neccesary because it of
+      bug #0000026 and perhaps #0000004.
+      Perhaps its better to check if this buffer is big
+      enough! Will try this later [vj]
+   */
+#define MAX_TMP_NX      100
+
+char        tmp_n1[MAX_TMP_NX],  /* */
+            tmp_n2[MAX_TMP_NX],  /* */
+            tmp_n3[MAX_TMP_NX],  /* */
+            tmp_n4[MAX_TMP_NX],  /* */
+            tmp_n5[MAX_TMP_NX];  /* */
+int         ti;                  /* */
+int         hexwidth;            /* */    /* r6pl2 */
+
 
 #if USE_LONG_FILENAMES
-        if (!bForceShort)
-        {
-                hexwidth= 3;            /* -> 001002003004.html */
-        }
-        else
-        {
-                hexwidth= 2;            /* -> 01020304.htm */
-        }
+   if (!bForceShort)
+      hexwidth = 3;                       /* -> 001002003004.html */
+   else
+      hexwidth = 2;                       /* -> 01020304.htm */
 #else
-        if (bForceLong) /*r6pl2*/
-        {       hexwidth= 3;            /* -> 001002003004.html */
-        }
-        else
-        {       hexwidth= 2;            /* -> 01020304.htm */
-        }
+   if (bForceLong)                        /*r6pl2*/
+      hexwidth = 3;                       /* -> 001002003004.html */
+   else
+      hexwidth = 2;                       /* -> 01020304.htm */
 #endif
 
-        ti= tocindex;
+   ti = tocindex;
 
-        if (outfile.file!=stdout || (bTestmode && outfile.full[0]!=EOS) )
-        {
-                s[0]= EOS;
-
-                tmp_n1[0]= EOS;
-                tmp_n2[0]= EOS;
-                tmp_n3[0]= EOS;
-                tmp_n4[0]= EOS;
-                tmp_n5[0]= EOS;
-
-                if (html_merge_node1)                           /* Nodes nicht splitten */
-                {       um_strcpy(tmp_n1, outfile.name, MAX_TMP_NX, "get_html_filename[1]");    /* Verweis auf Hauptfile */
-                }
-                else
-                {
-                        ti= tocindex;                                   /* default */
+   if (outfile.file != stdout || (bTestmode && outfile.full[0] != EOS) )
+   {
+      s[0] = EOS;
+   
+      tmp_n1[0] = EOS;
+      tmp_n2[0] = EOS;
+      tmp_n3[0] = EOS;
+      tmp_n4[0] = EOS;
+      tmp_n5[0] = EOS;
+      
+      if (html_merge_node1)               /* Nodes nicht splitten */
+      {
+                                          /* Verweis auf Hauptfile */
+         um_strcpy(tmp_n1, outfile.name, MAX_TMP_NX, "get_html_filename[1]");
+      }
+      else
+      {
+         ti = tocindex;                   /* default */
 /* Nur zum Debuggen */
-/*#if 0
-                        if (ti<0)
-                        {       fprintf(stderr, "ti<0\n");
-                        }
-                        if (ti>MAXTOCS)
-                        {       fprintf(stderr, "ti>MAXTOCS\n");
-                        }
-                        if (toc[tocindex]==NULL)
-                        {       fprintf(stderr, "toc[tocindex]==NULL\n");
-                        }
-#endif*/
-                        switch (toc[tocindex]->toctype)
-                        {
-                                case TOC_NODE5:
-                                        if (html_merge_node5)   ti= toc[tocindex]->up_n4_index;
-                                        if (html_merge_node4)   ti= toc[tocindex]->up_n3_index;
-                                        if (html_merge_node3)   ti= toc[tocindex]->up_n2_index;
-                                        if (html_merge_node2)   ti= toc[tocindex]->up_n1_index;
-                                        break;
-                                case TOC_NODE4:
-                                        if (html_merge_node4)   ti= toc[tocindex]->up_n3_index;
-                                        if (html_merge_node3)   ti= toc[tocindex]->up_n2_index;
-                                        if (html_merge_node2)   ti= toc[tocindex]->up_n1_index;
-                                        break;
-                                case TOC_NODE3:
-                                        if (html_merge_node3)   ti= toc[tocindex]->up_n2_index;
-                                        if (html_merge_node2)   ti= toc[tocindex]->up_n1_index;
-                                        break;
-                                case TOC_NODE2:
-                                        if (html_merge_node2)   ti= toc[tocindex]->up_n1_index;
-                                        break;
-                        }
+/* #if 0
+         if (ti < 0)
+         {
+            fprintf(stderr, "ti < 0\n");
+         }
 
-                        if (toc[ti]->filename[0]!=EOS)
-                        {       
-                                /* New in r6pl16 [NHz] */
-                                {
-                                        char dummy[MAX_TMP_NX], name[MAX_TMP_NX], suff[MAX_TMP_NX]; /* v6.3.12 [vj] See constant definition above */
+         if (ti > MAXTOCS)
+         {
+            fprintf(stderr, "ti > MAXTOCS\n");
+         }
+         
+         if (toc[tocindex] == NULL)
+         {
+            fprintf(stderr, "toc[tocindex] == NULL\n");
+         }
+   #endif */
+   
+         switch (toc[tocindex]->toctype)
+         {
+         case TOC_NODE5:
+            if (html_merge_node5)
+               ti = toc[tocindex]->up_n4_index;
+               
+            if (html_merge_node4)
+               ti = toc[tocindex]->up_n3_index;
+               
+            if (html_merge_node3)
+               ti = toc[tocindex]->up_n2_index;
+               
+            if (html_merge_node2)
+               ti = toc[tocindex]->up_n1_index;
+               
+            break;
+            
+         case TOC_NODE4:
+            if (html_merge_node4)
+               ti = toc[tocindex]->up_n3_index;
+               
+            if (html_merge_node3)
+               ti = toc[tocindex]->up_n2_index;
+               
+            if (html_merge_node2)
+               ti = toc[tocindex]->up_n1_index;
+               
+            break;
+            
+         case TOC_NODE3:
+            if (html_merge_node3)
+               ti = toc[tocindex]->up_n2_index;
+               
+            if (html_merge_node2)
+               ti = toc[tocindex]->up_n1_index;
+               
+            break;
+            
+         case TOC_NODE2:
+            if (html_merge_node2)
+               ti = toc[tocindex]->up_n1_index;
+               
+            break;
+         }
+   
+         if (toc[ti]->filename[0] != EOS)
+         {       
+                                          /* New in r6pl16 [NHz] */
+            {
+                                          /* v6.3.12 [vj] See constant definition above */
+               char   dummy[MAX_TMP_NX],  /* */
+                      name[MAX_TMP_NX],   /* */
+                      suff[MAX_TMP_NX];   /* */
+                      
+   
+               fsplit(toc[ti]->filename, dummy, dummy, name, suff);
+   
+               if (strcmp(suff, ""))
+                  sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, name, suff);
+               else
+                  sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, outfile.suff);
+            }
+   
+            um_strcpy(tmp_n1, toc[ti]->filename, MAX_TMP_NX, "get_html_filename[2]");
+         }
+         else
+         {
+            if (toc[ti]->appendix)
+            {
+               sprintf(tmp_n1, "_%c", 'a' + toc[ti]->n1 - 1);
+            }
+            else
+            {
+               if (toc[ti]->n1 == 0)
+               {
+                  um_strcpy(tmp_n1, old_outfile.name, MAX_TMP_NX, "get_html_filename[3]");
+               }
+               else
+               {
+                  sprintf(tmp_n1, "%0*x", hexwidth, toc[ti]->n1);
+               }
+            }
 
-                                        fsplit(toc[ti]->filename, dummy, dummy, name, suff);
+            if (toc[ti]->n2>0 && !html_merge_node2) 
+            {
+               sprintf(tmp_n2, "%0*x", hexwidth, toc[ti]->n2);
+            }
+   
+            if (toc[ti]->n3>0 && !html_merge_node3)
+            {
+               sprintf(tmp_n3, "%0*x", hexwidth, toc[ti]->n3);
+            }
+   
+            if (toc[ti]->n4>0 && !html_merge_node4)
+            {
+               sprintf(tmp_n4, "%0*x", hexwidth, toc[ti]->n4);
+            }
+            
+   /* ToDo: [GS] Problem, wie man bei einen Dateinamen mit 8 Zeichen den Node 5 darstellt */
 
-                                        if(strcmp(suff, ""))
-                                                sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, name, suff);
-                                        else
-                                                sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, outfile.suff);
-                                }
-
-                                um_strcpy(tmp_n1, toc[ti]->filename, MAX_TMP_NX, "get_html_filename[2]");
-                        }
-                        else
-                        {       if (toc[ti]->appendix)
-                                {       sprintf(tmp_n1, "_%c", 'a' + toc[ti]->n1 - 1);
-                                }
-                                else
-                                {       if (toc[ti]->n1==0)
-                                        {       um_strcpy(tmp_n1, old_outfile.name, MAX_TMP_NX, "get_html_filename[3]");
-                                        }
-                                        else
-                                        {       sprintf(tmp_n1, "%0*x", hexwidth, toc[ti]->n1);
-                                        }
-                                }
-                                if (toc[ti]->n2>0 && !html_merge_node2) 
-                                {       sprintf(tmp_n2, "%0*x", hexwidth, toc[ti]->n2);
-                                }
-
-                                if (toc[ti]->n3>0 && !html_merge_node3)
-                                {       sprintf(tmp_n3, "%0*x", hexwidth, toc[ti]->n3);
-                                }
-
-                                if (toc[ti]->n4>0 && !html_merge_node4)
-                                {       sprintf(tmp_n4, "%0*x", hexwidth, toc[ti]->n4);
-                                }
-/* ToDo: [GS] Problem, wie man bei einen Dateinamen mit 8 Zeichen den Node 5 darstellt */
-                                if (toc[ti]->n5>0 && !html_merge_node5)
-                                {       if ( hexwidth == 3 )                    /* Long filename */
-                                                sprintf(tmp_n5, "%0*x", hexwidth, toc[ti]->n5);
-                                        else
-                                                sprintf(tmp_n4, "%0*x", hexwidth, toc[ti]->n5+100);
-                                }
-                        }
-                }
-                if ( hexwidth == 3 )                    /* Long filename */
-                        sprintf(s, "%s%s%s%s%s", tmp_n1, tmp_n2, tmp_n3, tmp_n4, tmp_n5);
-                else
-                        sprintf(s, "%s%s%s%s", tmp_n1, tmp_n2, tmp_n3, tmp_n4);
-        }
-        else
-        {
+            if (toc[ti]->n5>0 && !html_merge_node5)
+            {
+               if (hexwidth == 3)         /* Long filename */
+                  sprintf(tmp_n5, "%0*x", hexwidth, toc[ti]->n5);
+               else
+                  sprintf(tmp_n4, "%0*x", hexwidth, toc[ti]->n5+100);
+            }
+         }
+      }
+      
+      if (hexwidth == 3)                  /* Long filename */
+         sprintf(s, "%s%s%s%s%s", tmp_n1, tmp_n2, tmp_n3, tmp_n4, tmp_n5);
+      else
+         sprintf(s, "%s%s%s%s", tmp_n1, tmp_n2, tmp_n3, tmp_n4);
+   }
+   else
+   {
 #if USE_LONG_FILENAMES
-                if (!bForceShort)
-                {       strcpy(s, "stdout.html");       /* r5pl11 */
-                }
-                else
-                {       strcpy(s, "stdout.htm");        /* r5pl11 */
-                }
+      if (!bForceShort)
+         strcpy(s, "stdout.html");        /* r5pl11 */
+      else
+         strcpy(s, "stdout.htm");         /* r5pl11 */
 #else
-                if (bForceLong)
-                {       strcpy(s, "stdout.html");       /* r5pl11 */
-                }
-                else
-                {       strcpy(s, "stdout.htm");        /* r5pl11 */
-                }
+      if (bForceLong)
+         strcpy(s, "stdout.html");        /* r5pl11 */
+      else
+         strcpy(s, "stdout.htm");         /* r5pl11 */
 #endif
-        }
+   }
+   
+   if (s[0] == EOS)
+   {
+      fprintf(stderr, "! empty filename: %d,%d,%d,%d (%d)\n",
+         toc[ti]->n1,
+         toc[ti]->n2,
+         toc[ti]->n3,
+         toc[ti]->n4,
+         toc[ti]->appendix);
+         
+      fprintf(stderr, "! using 'error' instead\n");
+      fprintf(stderr, "! please inform the author (%s)!\n", UDO_URL);
+      strcpy(s, "error");
+   }
+   
+   return s;
+}
 
 
-        if (s[0]==EOS)
-        {
-                fprintf(stderr, "! empty filename: %d,%d,%d,%d (%d)\n",
-                        toc[ti]->n1,
-                        toc[ti]->n2,
-                        toc[ti]->n3,
-                        toc[ti]->n4,
-                        toc[ti]->appendix);
-                fprintf(stderr, "! using 'error' instead\n");
-                fprintf(stderr, "! please inform the author (%s)!\n", UDO_URL);
-                strcpy(s, "error");
-        }
-
-        return s;
-
-}       /*get_html_filename*/
 
 
 
+/*******************************************************************************
+*
+*  html_make_file():
+*     Neue Datei fuer HTML anlegen, Header und Metainfos ausgeben
+*
+*  Note:
+*     wird nur fuer das jeweils aktuelle Kapitel aufgerufen
+*     (durch html_new_file())
+*
+*  return:
+*     ???
+*
+******************************************|************************************/
 
-/*      ############################################################
-        # Neue Datei fuer HTML anlegen, Header und Metainfos ausgeben
-        # wird nur fuer das jeweils aktuelle Kapitel aufgerufen
-        # (durch html_new_file())
-        ############################################################    */
-LOCAL BOOLEAN html_make_file ( void )
+LOCAL BOOLEAN html_make_file(void)
 {
-/*#if 0
-        int ti= p2_toc_counter;
-#endif*/
-
-        if (outfile.name[0]==EOS)
-        {       return FALSE;
-        }
-
-        if (bOutOpened)
-        {       fclose(outfile.file);   /* close the already opened file */
-                bOutOpened= FALSE;
-        }
-
+   if (outfile.name[0] == EOS)
+      return FALSE;
+   
+   if (bOutOpened)
+   {
+      fclose(outfile.file);               /* close the already opened file */
+      bOutOpened = FALSE;
+   }
+   
 #if 0
-        if (html_use_folders)
-        {       
-                if (toc[ti]->dirname[0]!=EOS)
-                {       sprintf(outfile.path, "%s%s", old_outfile.path, toc[ti]->dirname);
-                }
-                else
-                {       sprintf(outfile.path, "%s%04X", old_outfile.path, toc[ti]->n1);
-                }
-
-                if (toc[ti]->toctype==TOC_NODE1)
-                {       /* Verzeichnis anlegen, falls nicht vorhanden */
-                        if (toc[ti]->n2==0 && toc[ti]->n3==0 && toc[ti]->n4==0)
-                        {       char sDir[512];
-                                sprintf(sDir, "%s%s", outfile.driv, outfile.path);
-                                my_mkdir(sDir);
-                        }
-                }
-
-                strcat(outfile.path, "\\");
-        }
+   if (html_use_folders)
+   {       
+      if (toc[ti]->dirname[0] != EOS)
+         sprintf(outfile.path, "%s%s", old_outfile.path, toc[ti]->dirname);
+      else
+         sprintf(outfile.path, "%s%04X", old_outfile.path, toc[ti]->n1);
+   
+      if (toc[ti]->toctype == TOC_NODE1)
+      {                                   /* Verzeichnis anlegen, falls nicht vorhanden */
+         if (toc[ti]->n2 == 0 && toc[ti]->n3 == 0 && toc[ti]->n4 == 0)
+         {
+            char   sDir[512];  /* */
+            
+            
+            sprintf(sDir, "%s%s", outfile.driv, outfile.path);
+            my_mkdir(sDir);
+         }
+      }
+   
+      strcat(outfile.path, "\\");
+   }
 #endif
+   
+   {                                      /* New in r6pl16 [NHz] */
+      char   dummy[MAX_TMP_NX],  /* */    /* v6.3.12 [vj] See constant definition in get_html_filename */
+             name[MAX_TMP_NX],   /* */
+             suff[MAX_TMP_NX];   /* */
+          
+   
+      um_strcpy(name, outfile.name, MAX_TMP_NX, "html_make_file[1]");
+      fsplit(outfile.name, dummy, dummy, name, suff);
+   
+      if (strcmp(suff, ""))
+      {
+         sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, name, suff);
+      }
+      else
+         sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, outfile.suff);
+   }
 
-        /* New in r6pl16 [NHz] */
-        {
-                char dummy[MAX_TMP_NX], name[MAX_TMP_NX], suff[MAX_TMP_NX]; /* v6.3.12 [vj] See constant definition in get_html_filename */
-
-                um_strcpy(name, outfile.name, MAX_TMP_NX, "html_make_file[1]");
-                fsplit(outfile.name, dummy, dummy, name, suff);
-
-                if(strcmp(suff, ""))
-                {
-                        sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, name, suff);
-                }
-                else
-                        sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, outfile.suff);
-        }
-/*      sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, outfile.suff);*/
-
-        if (!bTestmode) 
-        {       outfile.file= myFwopen(outfile.full, TOHTM);
-                if (!outfile.file)
-                {       error_open_outfile(outfile.full);
-                        warning_err_destination();
-                        bErrorDetected= TRUE;
-                        bFatalErrorDetected= TRUE;
-                        return FALSE;
-                }
-                bOutOpened= TRUE;
-                save_upr_entry_outfile(outfile.full);
-        }
-
-        return TRUE;
-}       /* html_make_file */
+/*
+   sprintf(outfile.full, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, outfile.suff);
+*/
+   
+   if (!bTestmode) 
+   {
+      outfile.file = myFwopen(outfile.full, TOHTM);
+      
+      if (!outfile.file)
+      {
+         error_open_outfile(outfile.full);
+         warning_err_destination();
+         bErrorDetected = TRUE;
+         bFatalErrorDetected = TRUE;
+         return FALSE;
+      }
+      
+      bOutOpened = TRUE;
+      save_upr_entry_outfile(outfile.full);
+   }
+   
+   return TRUE;
+}
 
 
 
@@ -2281,7 +2861,7 @@ BOOLEAN    keywords)             /* */
          /* New in V6.5.9 [NHz] */
          else
          {
-            if ( titdat.keywords != NULL )
+            if (titdat.keywords != NULL)
             {
                voutlnf("<meta name=\"Keywords\" content=\"%s\"%s>", titdat.keywords, closer);
             }
@@ -2293,7 +2873,7 @@ BOOLEAN    keywords)             /* */
          }
          else                             /* New in V6.5.9 [NHz] [docinfo] */
          {
-            if (titdat.description != NULL )
+            if (titdat.description != NULL)
             {
                voutlnf("<meta name=\"Description\" content=\"%s\"%s>", titdat.description, closer);
             }
@@ -2594,7 +3174,7 @@ BOOLEAN    keywords)             /* */
       voutlnf("<link rel=\"shortcut icon\" href=\"%s\"%s>", sDocFavIcon, closer);
    
         /* New in V6.5.20 [GS] */
-        if ( toc[p2_toc_counter]->bgsound[0] != '\0' )
+        if (toc[p2_toc_counter]->bgsound[0] != '\0')
                 voutlnf("<bgsound src=%s>", toc[p2_toc_counter]->bgsound);
 
 }  /* output_html_meta */
@@ -2603,152 +3183,196 @@ BOOLEAN    keywords)             /* */
 
 
 
-LOCAL void output_html_doctype ( void )
-{
-        /* Changed in r6pl16 [NHz] */
-        switch(html_doctype)
-        {
-                case HTML_OLD:
-                        outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN\">");
-                        break;
-                case HTML_STRICT:
-                        outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"");
-                        outln("        \"http://www.w3.org/TR/html4/strict.dtd\">");
-                        break;
-                case HTML_TRANS:
-                        outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"");
-                        outln("        \"http://www.w3.org/TR/html4/loose.dtd\">");
-                        break;
-                case XHTML_STRICT:
-                        outln("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>");
-                        outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"");
-                        outln("        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
-                        break;
-                case XHTML_TRANS:
-                        outln("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>");
-                        outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"");
-                        outln("        \"http://www.w3.org/TR/xhtml1/DTD/xhtm1-transitional.dtd\">");
-                        break;
-        }
+/*******************************************************************************
+*
+*  output_html_doctype():
+*     ??? (description missing)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
 
+LOCAL void output_html_doctype(void)
+{
+   switch (html_doctype)                  /* Changed in r6pl16 [NHz] */
+   {
+   case HTML_OLD:
+      outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN\">");
+      break;
+      
+   case HTML_STRICT:
+      outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"");
+      outln("        \"http://www.w3.org/TR/html4/strict.dtd\">");
+      break;
+      
+   case HTML_TRANS:
+      outln("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"");
+      outln("        \"http://www.w3.org/TR/html4/loose.dtd\">");
+      break;
+      
+   case XHTML_STRICT:
+      outln("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>");
+      outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"");
+      outln("        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
+      break;
+      
+   case XHTML_TRANS:
+      outln("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>");
+      outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"");
+      outln("        \"http://www.w3.org/TR/xhtml1/DTD/xhtm1-transitional.dtd\">");
+      break;
+   }
+   
    if (html_header_date)                  /* fixed in v6.5.19 */
       voutlnf("<!-- last modified on %s -->", lang.short_today);
-
-}       /* output_html_doctype */
-
+}
 
 
-LOCAL BOOLEAN html_new_file ( void )
+
+
+
+/*******************************************************************************
+*
+*  html_new_file():
+*     ??? (description missing)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL BOOLEAN html_new_file(void)
 {
-        char t[512], xml_lang[15], xml_ns[40];
+   char   t[512],        /* */
+          xml_lang[15],  /* */
+          xml_ns[40];    /* */
+          
+   
+   if (outfile.file == stdout && !bTestmode)
+      return TRUE;
+   
+   check_endnode();                       /* Bisherige Datei erst einmal schliessen */
 
-        if (outfile.file==stdout && !bTestmode)
-        {       return TRUE;
-        }
-
-        /* Bisherige Datei erst einmal schliessen */
-        check_endnode();
-        voutf("%s", sHtmlPropfontEnd);
-        check_output_raw_footer(FALSE); /*r6pl10*/
-    outln("</body>");
-    outln("</html>");
-
-        /* Dateinamen der neuen Datei ermitteln */
+   voutf("%s", sHtmlPropfontEnd);
+   check_output_raw_footer(FALSE);        /*r6pl10*/
+   outln("</body>");
+   outln("</html>");
+   
+                                          /* Dateinamen der neuen Datei ermitteln */
 #if 1
-        sprintf(outfile.name, "%s%s", html_name_prefix, toc[p2_toc_counter]->filename);
+   sprintf(outfile.name, "%s%s", html_name_prefix, toc[p2_toc_counter]->filename);
 #else
-        strcpy(outfile.name, toc[p2_toc_counter]->filename);
+   strcpy(outfile.name, toc[p2_toc_counter]->filename);
 #endif
-
-        if (!html_make_file())  /* r6pl4 */
-        {       return FALSE;
-        }
-
-        output_html_doctype();
-
-        /* Header anlegen, Aktueller Node ist bekannt */
-
-        /* Changed in V6.5.9 [NHz] */
-        if(html_doctype >= XHTML_STRICT)
-        {
-                sprintf(xml_lang, " xml:lang=\"%s\"", lang.html_lang);
-                sprintf(xml_ns, " xmlns=\"http://www.w3.org/1999/xhtml\"");
-        }
-        else
-        {
-                xml_lang[0] = EOS;
-                xml_ns[0] = EOS;
-        }
-        voutlnf("<html%s lang=\"%s\"%s>", xml_ns, lang.html_lang, xml_lang);
-        outln("<head>");
-        outln("<title>");
-
-        if (desttype==TOHTM || desttype==TOHAH)
-        {
-                if (titdat.htmltitle!=NULL && titdat.htmltitle[0]!=EOS)
-                {       strcpy(t, titdat.htmltitle);    /*r6pl5*/
-                }
-                else
-                {       strcpy(t, titleprogram);
-                }
-        }
-        else
-        {       t[0]= EOS;
-        }
-
-        if ( toc[p2_toc_counter]!=NULL )
-        {               if (t[0]!=EOS)
-                {       strcat(t, ": ");
-                }
-                strcat(t, toc[p2_toc_counter]->name);
-        }
-        outln(t);
-
-        outln("</title>");
-        output_html_meta(TRUE);
-        outln("</head>");
-
-        if ( toc[p2_toc_counter]!=NULL )
-        {       out("<body");
-                if (toc[p2_toc_counter]->backimage[0]!=EOS)
-                {       voutf(" background=\"%s\"", toc[p2_toc_counter]->backimage);
-                }
-                if (toc[p2_toc_counter]->backcolor[0]!=EOS)
-                {       voutf(" bgcolor=\"%s\"", toc[p2_toc_counter]->backcolor);
-                }
-                if (toc[p2_toc_counter]->textcolor[0]!=EOS)
-                {       voutf(" text=\"%s\"", toc[p2_toc_counter]->textcolor);
-                }
-                if (toc[p2_toc_counter]->linkcolor[0]!=EOS)
-                {       voutf(" link=\"%s\"", toc[p2_toc_counter]->linkcolor);
-                }
-                if (toc[p2_toc_counter]->alinkcolor[0]!=EOS)
-                {       voutf(" alink=\"%s\"", toc[p2_toc_counter]->alinkcolor);
-                }
-                if (toc[p2_toc_counter]->vlinkcolor[0]!=EOS)
-                {       voutf(" vlink=\"%s\"", toc[p2_toc_counter]->vlinkcolor);
-                }
-                outln(">");
-        }
-        else
-        {       outln("<body>");
-        }
-
-        check_output_raw_header();      /*r6pl10*/
-
-        outln(sHtmlPropfontStart);
-
-        output_aliasses();      /* r5pl9 */
-
-        if (desttype==TOHTM || desttype==TOHAH)
-        {       html_headline();
-        }
-        else
-        {       hh_headline();
-        }
-
-        return TRUE;
-}       /* html_new_file */
+   
+   if (!html_make_file())                 /* r6pl4 */
+      return FALSE;
+   
+   output_html_doctype();
+   
+                                          /* Header anlegen, Aktueller Node ist bekannt */
+   if (html_doctype >= XHTML_STRICT)      /* Bisherige Datei erst einmal schliessen */
+   {
+      sprintf(xml_lang, " xml:lang=\"%s\"", lang.html_lang);
+      sprintf(xml_ns, " xmlns=\"http://www.w3.org/1999/xhtml\"");
+   }
+   else
+   {
+      xml_lang[0] = EOS;
+      xml_ns[0] = EOS;
+   }
+   
+   voutlnf("<html%s lang=\"%s\"%s>", xml_ns, lang.html_lang, xml_lang);
+   outln("<head>");
+   outln("<title>");
+   
+   if (desttype == TOHTM || desttype == TOHAH)
+   {
+      if (titdat.htmltitle != NULL && titdat.htmltitle[0] != EOS)
+      {
+         strcpy(t, titdat.htmltitle);     /*r6pl5*/
+      }
+      else
+      {
+         strcpy(t, titleprogram);
+      }
+   }
+   else
+   {
+      t[0] = EOS;
+   }
+   
+   if (toc[p2_toc_counter] != NULL)
+   {
+      if (t[0] != EOS)
+      {
+         strcat(t, ": ");
+      }
+      
+      strcat(t, toc[p2_toc_counter]->name);
+   }
+   
+   outln(t);
+   
+   outln("</title>");
+   output_html_meta(TRUE);
+   outln("</head>");
+   
+   if (toc[p2_toc_counter] != NULL)
+   {
+      out("<body");
+      
+      if (toc[p2_toc_counter]->backimage[0]!=EOS)
+      {
+         voutf(" background=\"%s\"", toc[p2_toc_counter]->backimage);
+      }
+      
+      if (toc[p2_toc_counter]->backcolor[0] != EOS)
+      {
+         voutf(" bgcolor=\"%s\"", toc[p2_toc_counter]->backcolor);
+      }
+      
+      if (toc[p2_toc_counter]->textcolor[0] != EOS)
+      {
+         voutf(" text=\"%s\"", toc[p2_toc_counter]->textcolor);
+      }
+      
+      if (toc[p2_toc_counter]->linkcolor[0] != EOS)
+      {
+         voutf(" link=\"%s\"", toc[p2_toc_counter]->linkcolor);
+      }
+      
+      if (toc[p2_toc_counter]->alinkcolor[0] != EOS)
+      {
+         voutf(" alink=\"%s\"", toc[p2_toc_counter]->alinkcolor);
+      }
+      
+      if (toc[p2_toc_counter]->vlinkcolor[0] != EOS)
+      {
+         voutf(" vlink=\"%s\"", toc[p2_toc_counter]->vlinkcolor);
+      }
+      
+      outln(">");
+   }
+   else
+   {
+      outln("<body>");
+   }
+   
+   check_output_raw_header();             /*r6pl10*/
+   
+   outln(sHtmlPropfontStart);
+   
+   output_aliasses();                     /* r5pl9 */
+   
+   if (desttype == TOHTM || desttype == TOHAH)
+      html_headline();
+   else
+      hh_headline();
+   
+   return TRUE;
+}
 
 
 
@@ -2856,7 +3480,7 @@ const char  *t)                 /* */
 }       /*output_html_header*/
 
 
-LOCAL void get_giflink_data ( const int index, char *name, unsigned int *width, unsigned int *height )
+LOCAL void get_giflink_data(const int index, char *name, unsigned int *width, unsigned int *height)
 {
         name[0]= EOS;
         *width= *height= 0;
@@ -4325,7 +4949,7 @@ LOCAL void html_node_bar_frames(void)
 }       /* html_node_bar_frames */
 
 
-GLOBAL void html_headline ( void )
+GLOBAL void html_headline(void)
 {
         char bgCmd[512];
 
@@ -4368,7 +4992,7 @@ GLOBAL void html_headline ( void )
 }       /* html_headline */
 
 
-GLOBAL void html_bottomline ( void )
+GLOBAL void html_bottomline(void)
 {
         if (html_modern_layout)
         {
@@ -4407,7 +5031,7 @@ GLOBAL void html_bottomline ( void )
 
 
 
-GLOBAL void html_footer ( void )
+GLOBAL void html_footer(void)
 {
         BOOLEAN has_name, has_email, has_url, has_mailurl;
         BOOLEAN has_counter, has_main_counter;
@@ -4417,7 +5041,7 @@ GLOBAL void html_footer ( void )
         has_counter=    (toc[p2_toc_counter]->counter_command!=NULL);
         has_main_counter=       (sCounterCommand[0]!=EOS);
 
-        if(!has_counter && !has_main_counter)
+        if (!has_counter && !has_main_counter)
         {
                 if (no_footers || toc[p2_toc_counter]->ignore_footer)
                 {       return;
@@ -4443,13 +5067,13 @@ GLOBAL void html_footer ( void )
                 outln(toc[p2_toc_counter]->counter_command);
         }
         /* New in V6.5.9 [NHz] */
-        else if(has_main_counter)
+        else if (has_main_counter)
         {
                 outln(sCounterCommand);
         }
 
         /* New in V6.5.9 [NHz] */
-        if(no_footers)
+        if (no_footers)
                 return;
 
 
@@ -4569,14 +5193,14 @@ LOCAL MYFILE   udofile;
 /* --------------------------------------------------------------
    * Dateinamen zusammenbasteln
    --------------------------------------------------------------  */
-LOCAL void udofile_adjust_index ( void )
+LOCAL void udofile_adjust_index(void)
 {
 
 #if HAVE_TMPNAM
 
    char t[512];
 
-   if ( tmpnam(t)!=NULL )
+   if (tmpnam(t)!=NULL)
    {  
       strcpy(udofile.full, t);
    }
@@ -4590,13 +5214,13 @@ LOCAL void udofile_adjust_index ( void )
 
    tp= NULL;
 
-   if ( (tp=getenv("TEMP"))==NULL )
-   {  if ( (tp=getenv("TMP"))==NULL )
+   if ((tp=getenv("TEMP"))==NULL)
+   {  if ((tp=getenv("TMP"))==NULL)
       {  tp=getenv("TMPDIR");
       }
    }
 
-   if ( tp!=NULL )
+   if (tp!=NULL)
    {  fsplit(tp, tmp_driv, tmp_path, tmp_name, tmp_suff);
       strcpy(udofile.driv, tmp_driv);
       strcpy(udofile.path, tmp_path);
@@ -4683,6 +5307,7 @@ GLOBAL BOOLEAN save_html_index(void)
    char        *tocname;         /* */
    char        *escapedtocname;  /* */
    char         jumplist[2048];  /* buffer string for A-Z navigation bar */
+   char         thisc_buf[42];   /* buffer string for converted thisc */
    
    
    num_index = 0;                         /* first we count how much we entries need */
@@ -4709,7 +5334,7 @@ GLOBAL BOOLEAN save_html_index(void)
    fprintf(uif, "!code [sys]\n");
    fprintf(uif, "!sloppy\n\n");
    fprintf(uif, "!node* %s\n", lang.index);
-   fprintf(uif, "!html_name indexudo\n" );
+   fprintf(uif, "!html_name indexudo\n");
    
    if (!bDocAutorefOff)
       fprintf(uif, "!autoref [off]\n");
@@ -4730,7 +5355,7 @@ GLOBAL BOOLEAN save_html_index(void)
    
    for (j = 1; j <= p1_lab_counter; j++)
    {
-      if (lab[j] != NULL  && lab[j]->ignore_index == FALSE )
+      if (lab[j] != NULL  && lab[j]->ignore_index == FALSE)
       {
          html_index[num_index].toc_index = lab[j]->tocindex;
          html_index[num_index].is_node   = lab[j]->is_node;
@@ -4772,17 +5397,23 @@ GLOBAL BOOLEAN save_html_index(void)
       
       thisc = toupper(thisc);             /* always use capitalized index chars (issue #76) */
       
+      strcpy(thisc_buf,&thisc);
+      thisc_buf[1] = 0;                   /* close C string! */
+      label2html(thisc_buf);
+      
+      printf("LABEL:-->%s<\n",thisc_buf);
+      
       if (thisc != lastc)
       {
                                           /* set anchor entry for index A-Z list */
          
          if (lastc == EOS)
-            sprintf(dummy, "<a href=\"%s%c\">%c</a>\n", "#", thisc, thisc);
+            sprintf(dummy, "<a href=\"%s%s\">%c</a>\n", "#", thisc_buf, thisc);
          else
-            sprintf(dummy, " | <a href=\"%s%c\">%c</a>\n", "#", thisc, thisc);
+            sprintf(dummy, " | <a href=\"%s%s\">%c</a>\n", "#", thisc_buf, thisc);
          
          strcat(jumplist, dummy);
-   
+         
          lastc = thisc;
       }
    }
@@ -4807,6 +5438,12 @@ GLOBAL BOOLEAN save_html_index(void)
       
       thisc = toupper(thisc);             /* always use capitalized index chars (issue #76) */
       
+      strcpy(thisc_buf,&thisc);
+      thisc_buf[1] = 0;                   /* close C string! */
+      label2html(thisc_buf);
+      
+      printf("LABEL:-->%s<\n",thisc_buf);
+      
       if (thisc != lastc)
       {
          if (lastc != EOS)                /* close previous character group of index entries */
@@ -4817,11 +5454,11 @@ GLOBAL BOOLEAN save_html_index(void)
          
          if (num_index > 100)             /* set jump entry for index A-Z list */
          {
-            fprintf(uif, "<span class=\"UDO_index_name\"><a name=\"%c\">%c</a></span>%s\n",
-               thisc, thisc, HTML_BR);
+            fprintf(uif, "<span class=\"UDO_index_name\"><a name=\"%s\">%c</a></span>%s\n",
+               thisc_buf, thisc, HTML_BR);
          }
          else
-            fprintf(uif, "<a name=\"%c\"></a>\n", thisc);
+            fprintf(uif, "<a name=\"%s\"></a>\n", thisc_buf);
          
          lastc = thisc;
       }
@@ -4863,6 +5500,7 @@ GLOBAL BOOLEAN save_html_index(void)
             da der gcc sonst meckert: "toc.c:3940:17: warning: unknown escape sequence '\#'" */
             fprintf(uif, "<a href=\"%s%s%s%s\">%s</a>",
                htmlname, outfile.suff, "#", cLabel, escapedtocname);
+            
             fprintf(uif, "%s\n", HTML_BR);   /* end the entry line */
          }
       }
@@ -4899,7 +5537,7 @@ GLOBAL BOOLEAN save_html_index(void)
 /* --------------------------------------------------------------
    --------------------------------------------------------------  */
 
-GLOBAL void add_pass1_index_udo ( void )
+GLOBAL void add_pass1_index_udo(void)
 {
    save_html_index();
    token_reset();
@@ -4912,7 +5550,7 @@ GLOBAL void add_pass1_index_udo ( void )
         #
         ############################################################    */
 
-GLOBAL void hh_headline ( void )
+GLOBAL void hh_headline(void)
 {
 #if 0
         if (!no_headlines)
@@ -4922,7 +5560,7 @@ GLOBAL void hh_headline ( void )
 }       /* hh_headline */
 
 
-GLOBAL void hh_bottomline ( void )
+GLOBAL void hh_bottomline(void)
 {
 #if 0
         if (!no_bottomlines)
@@ -4933,7 +5571,7 @@ GLOBAL void hh_bottomline ( void )
 
 
 
-LOCAL void print_htmlhelp_contents ( FILE *file, const char *indent, const int ti )
+LOCAL void print_htmlhelp_contents(FILE *file, const char *indent, const int ti)
 {
         char filename[512], tocname[512];
 
@@ -4960,7 +5598,7 @@ LOCAL void print_htmlhelp_contents ( FILE *file, const char *indent, const int t
 }       /* print_htmlhelp_contents */
 
 
-GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
+GLOBAL BOOLEAN save_htmlhelp_contents(const char* filename)
 {
         FILE *file;
 
@@ -5000,7 +5638,7 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
                 {
                         convert_toc_item(toc[i]);
 
-                        if ( !inApx && toc[i]->appendix)
+                        if (!inApx && toc[i]->appendix)
                         {       /* r6pl13: Anhang mit ausgeben, hier den ersten Node im Anhang */
                                 inApx= TRUE;
                                 if (last_n)             fprintf(file, "</ul>\n");
@@ -5018,9 +5656,9 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
                         }
 /* ToDo: last_ssssn */
 
-                        if ( toc[i]->n1 != 0 )
+                        if (toc[i]->n1 != 0)
                         {
-                                if ( toc[i]->toctype==TOC_NODE1 )
+                                if (toc[i]->toctype==TOC_NODE1)
                                 {       /* Ein Kapitel */       
 
                                         if (last_sn)    {       fprintf(file, "\t</ul>\n");                                                     last_sn= FALSE;         }
@@ -5032,7 +5670,7 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
                                 }/* TOC_NODE1 */
                                         
                                         
-                                if ( toc[i]->toctype==TOC_NODE2 )
+                                if (toc[i]->toctype==TOC_NODE2)
                                 {       /* Ein Abschnitt */
                                         if (last_n)             {       fprintf(file, "\t<ul>\n");                                      last_n= FALSE;          }
                                         if (last_ssn)   {       fprintf(file, "\t\t</ul>\n");                           last_ssn= FALSE;        }
@@ -5042,7 +5680,7 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
 
                                 }/* TOC_NODE2 */
                                         
-                                if ( toc[i]->toctype==TOC_NODE3 )
+                                if (toc[i]->toctype==TOC_NODE3)
                                 {       /* Ein Unterabschnitt */
                                         if (last_n)             {       fprintf(file, "<ul>\n\t<ul>\n");        last_n= FALSE;          }
                                         if (last_sn)    {       fprintf(file, "\t\t<ul>\n");            last_sn= FALSE;         }
@@ -5053,7 +5691,7 @@ GLOBAL BOOLEAN save_htmlhelp_contents ( const char* filename )
                                 }/* TOC_NODE3 */
                                         
                                         
-                                if ( toc[i]->toctype==TOC_NODE4 )
+                                if (toc[i]->toctype==TOC_NODE4)
                                 {       /* Ein Paragraph */
                                         if (last_n)             {       fprintf(file, "\t<ul>\n\t\t<ul>\n\t\t\t<ul>\n");        last_n= FALSE;          }
                                         if (last_sn)    {       fprintf(file, "\t<ul>\n\t\t<ul>\n");                            last_sn= FALSE;         }
@@ -5102,7 +5740,7 @@ LOCAL int comp_index(const void *_p1, const void *_p2)
 }
 
 
-GLOBAL BOOLEAN save_htmlhelp_index ( const char* filename )
+GLOBAL BOOLEAN save_htmlhelp_index(const char* filename)
 {
         FILE *file;
         size_t i;
@@ -5215,7 +5853,7 @@ GLOBAL BOOLEAN save_htmlhelp_index ( const char* filename )
         # Kapitelkommandos
         #
         ############################################################    */
-LOCAL void set_inside_node1 ( void )
+LOCAL void set_inside_node1(void)
 {
         active_nodetype= TOC_NODE1;
 }
@@ -5277,7 +5915,7 @@ const BOOLEAN   invisible)         /* */
    p2_lab_counter++;                      /*r6pl2*/
    p2_toctype= TOC_NODE1;                 /*r6pl5*/
    
-   if ( (desttype == TOHTM || desttype == TOHAH) && !html_merge_node1)
+   if ((desttype == TOHTM || desttype == TOHAH) && !html_merge_node1)
    {
       check_endnode();
       html_bottomline();
@@ -5860,7 +6498,7 @@ const BOOLEAN   invisible)         /* */
       if (show_variable.source_filename)  /* V6.5.19 */
                                           /* V6.5.18 */
          voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, 
-            toc[p2_toc_counter]->source_line );
+            toc[p2_toc_counter]->source_line);
       
       break;
       
@@ -5888,31 +6526,31 @@ const BOOLEAN   invisible)         /* */
 /* node_iv-Funktionen als Invisible-Flag statt TRUE der Wert von                */
 /* (desttype!=TOINF) benutzt. Kurz und elegant, nicht?                                  */
 
-GLOBAL void c_node ( void )
+GLOBAL void c_node(void)
 {       make_node (FALSE, FALSE);
 }       /* c_node */
 
-GLOBAL void c_node_iv ( void )
+GLOBAL void c_node_iv(void)
 {       make_node (FALSE, (desttype!=TOINF));   /* r5pl15 */
 }       /* c_node */
 
-GLOBAL void c_pnode ( void )
+GLOBAL void c_pnode(void)
 {       make_node (TRUE, FALSE);
 }       /* c_pnode */
 
-GLOBAL void c_pnode_iv ( void )
+GLOBAL void c_pnode_iv(void)
 {       make_node (TRUE, (desttype!=TOINF));    /* r5pl15 */
 }       /* c_pnode */
 
 
 
 
-LOCAL void set_inside_node2 ( void )
+LOCAL void set_inside_node2(void)
 {
         active_nodetype= TOC_NODE2;
 }
 
-LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
+LOCAL void make_subnode(const BOOLEAN popup, const BOOLEAN invisible)
 {
         char    n[512], name[512], stgname[512], hx_start[16], hx_end[16], sTemp[512];
         char    numbers[512], nameNoSty[512], k[512]; /* Changed in V6.5.9 [NHz] */
@@ -5937,7 +6575,7 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
         p2_lab_counter++;               /*r6pl2*/
         p2_toctype= TOC_NODE2;  /*r6pl5*/
 
-        if ( (desttype==TOHTM || desttype==TOHAH) && !html_merge_node2)
+        if ((desttype==TOHTM || desttype==TOHAH) && !html_merge_node2)
         {       check_endnode();
                 html_bottomline();
         }
@@ -6029,7 +6667,7 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
                         set_inside_node2();
                         if (invisible)
                         {       (use_style_book)        ? voutlnf("\n\\section*{%s}", name)
-                                                                        : voutlnf("\n\\subsection*{%s}", name );
+                                                                        : voutlnf("\n\\subsection*{%s}", name);
                         }
                         else
                         {       (use_style_book)        ? voutlnf("\n\\section{%s}", name)
@@ -6082,7 +6720,7 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
                         node2stg(name);
 
                         outln("");
-                        if ( !do_index )
+                        if (!do_index)
                         {       outln("@indexoff");
                         }
                         if (popup)
@@ -6091,7 +6729,7 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
                         else
                         {       voutlnf("@node \"%s\"", name);
                         }
-                        if ( !do_index )
+                        if (!do_index)
                         {       outln("@indexon");
                         }
 
@@ -6351,7 +6989,7 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
             voutlnf("%s<a name=\"%s\">%s%s</a>%s",hx_start, nameNoSty, numbers, name, hx_end);
                         }
                         if (show_variable.source_filename) /* V6.5.19 */
-                                voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line );
+                                voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line);
 
                         break;
 
@@ -6373,29 +7011,29 @@ LOCAL void make_subnode ( const BOOLEAN popup, const BOOLEAN invisible )
 }       /*make_subnode*/
 
 
-GLOBAL void c_subnode ( void )
+GLOBAL void c_subnode(void)
 {       make_subnode (FALSE, FALSE);
 }       /* c_subnode */
 
-GLOBAL void c_subnode_iv ( void )
+GLOBAL void c_subnode_iv(void)
 {       make_subnode (FALSE, (desttype!=TOINF));        /* r5pl15 */
 }       /* c_subnode */
 
-GLOBAL void c_psubnode ( void )
+GLOBAL void c_psubnode(void)
 {       make_subnode (TRUE, FALSE);
 }       /* c_psubnode */
 
-GLOBAL void c_psubnode_iv ( void )
+GLOBAL void c_psubnode_iv(void)
 {       make_subnode (TRUE, (desttype!=TOINF)); /* r5pl15 */
 }       /* c_psubnode */
 
 
-LOCAL void set_inside_node3 ( void )
+LOCAL void set_inside_node3(void)
 {
         active_nodetype= TOC_NODE3;
 }
 
-LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
+LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible)
 {
         char    n[512], name[512], stgname[512], hx_start[16], hx_end[16], sTemp[512];
         char    numbers[512], nameNoSty[512], k[512];   /* New in V6.5.9 [NHz] */
@@ -6420,7 +7058,7 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
         p2_lab_counter++;               /*r6pl2*/
         p2_toctype= TOC_NODE3;  /*r6pl5*/
 
-        if ( (desttype==TOHTM || desttype==TOHAH) && !html_merge_node3)
+        if ((desttype==TOHTM || desttype==TOHAH) && !html_merge_node3)
         {       check_endnode();
                 html_bottomline();
         }
@@ -6562,7 +7200,7 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
                         node2stg(name);
 
                         outln("");
-                        if ( !do_index )
+                        if (!do_index)
                         {       outln("@indexoff");
                         }
                         if (popup)
@@ -6571,7 +7209,7 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
                         else
                         {       voutlnf("@node \"%s\"", name);
                         }
-                        if ( !do_index )
+                        if (!do_index)
                         {       outln("@indexon");
                         }
 
@@ -6834,7 +7472,7 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
             voutlnf("%s<a name=\"%s\">%s%s</a>%s",hx_start, nameNoSty, numbers, name, hx_end);
                         }
                         if (show_variable.source_filename) /* V6.5.19 */
-                                voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line );
+                                voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line);
 
                         break;
 
@@ -6857,29 +7495,29 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 }       /*make_subsubnode*/
 
 
-GLOBAL void c_subsubnode ( void )
+GLOBAL void c_subsubnode(void)
 {       make_subsubnode (FALSE, FALSE);
 }       /* c_subsubnode */
 
-GLOBAL void c_subsubnode_iv ( void )
+GLOBAL void c_subsubnode_iv(void)
 {       make_subsubnode (FALSE, (desttype!=TOINF));     /* r5pl15 */
 }       /* c_subsubnode */
 
-GLOBAL void c_psubsubnode ( void )
+GLOBAL void c_psubsubnode(void)
 {       make_subsubnode (TRUE, FALSE);
 }       /* c_psubsubnode */
 
-GLOBAL void c_psubsubnode_iv ( void )
+GLOBAL void c_psubsubnode_iv(void)
 {       make_subsubnode (TRUE, (desttype!=TOINF));      /* r5pl15 */
 }       /* c_psubsubnode */
 
 
-LOCAL void set_inside_node4 ( void )
+LOCAL void set_inside_node4(void)
 {
         active_nodetype= TOC_NODE4;
 }
 
-LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
+LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible)
 {
         char    n[512], name[512], stgname[512], hx_start[16], hx_end[16], sTemp[512];
         char    numbers[512], nameNoSty[512], k[512];   /* New in V6.5.9 [NHz] */
@@ -7046,7 +7684,7 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
                         node2stg(name);
 
                         outln("");
-                        if ( !do_index )
+                        if (!do_index)
                         {       outln("@indexoff");
                         }
                         if (popup)
@@ -7055,7 +7693,7 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
                         else
                         {       voutlnf("@node \"%s\"", name);
                         }
-                        if ( !do_index )
+                        if (!do_index)
                         {       outln("@indexon");
                         }
 
@@ -7318,7 +7956,7 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
             voutlnf("%s<a name=\"%s\">%s%s</a>%s",      hx_start, nameNoSty, numbers, name, hx_end);
                         }
                         if (show_variable.source_filename) /* V6.5.19 */
-                                voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line );
+                                voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line);
 
                         break;
 
@@ -7341,29 +7979,29 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 }       /*make_subsubsubnode*/
 
 
-GLOBAL void c_subsubsubnode ( void )
+GLOBAL void c_subsubsubnode(void)
 {       make_subsubsubnode (FALSE, FALSE);
 }       /* c_subsubsubnode */
 
-GLOBAL void c_subsubsubnode_iv ( void )
+GLOBAL void c_subsubsubnode_iv(void)
 {       make_subsubsubnode (FALSE, (desttype!=TOINF));  /* r5pl15 */
 }       /* c_subsubsubnode */
 
-GLOBAL void c_psubsubsubnode ( void )
+GLOBAL void c_psubsubsubnode(void)
 {       make_subsubsubnode (TRUE, FALSE);
 }       /* c_psubsubsubnode */
 
-GLOBAL void c_psubsubsubnode_iv ( void )
+GLOBAL void c_psubsubsubnode_iv(void)
 {       make_subsubsubnode (TRUE, (desttype!=TOINF));   /* r5pl15 */
 }       /* c_psubsubsubnode */
 
 
-LOCAL void set_inside_node5 ( void )
+LOCAL void set_inside_node5(void)
 {
         active_nodetype= TOC_NODE5;
 }
 
-LOCAL void make_subsubsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
+LOCAL void make_subsubsubsubnode( const BOOLEAN popup, const BOOLEAN invisible)
 {
         char    n[512], name[512], stgname[512], hx_start[16], hx_end[16], sTemp[512];
         char    numbers[512], nameNoSty[512], k[512];
@@ -7527,7 +8165,7 @@ LOCAL void make_subsubsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
                         node2stg(name);
 
                         outln("");
-                        if ( !do_index )
+                        if (!do_index)
                         {       outln("@indexoff");
                         }
                         if (popup)
@@ -7536,7 +8174,7 @@ LOCAL void make_subsubsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
                         else
                         {       voutlnf("@node \"%s\"", name);
                         }
-                        if ( !do_index )
+                        if (!do_index)
                         {       outln("@indexon");
                         }
 
@@ -7794,7 +8432,7 @@ LOCAL void make_subsubsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
             voutlnf("%s<a name=\"%s\">%s%s</a>%s",      hx_start, nameNoSty, numbers, name, hx_end);
                         }
                         if (show_variable.source_filename) /* V6.5.19 */
-                                voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line );
+                                voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line);
 
                         break;
 
@@ -7817,25 +8455,25 @@ LOCAL void make_subsubsubsubnode( const BOOLEAN popup, const BOOLEAN invisible )
 }       /*make_subsubsubsubnode*/
 
 
-GLOBAL void c_subsubsubsubnode ( void )
+GLOBAL void c_subsubsubsubnode(void)
 {       make_subsubsubsubnode (FALSE, FALSE);
 }       /* c_subsubsubsubnode */
 
-GLOBAL void c_subsubsubsubnode_iv ( void )
+GLOBAL void c_subsubsubsubnode_iv(void)
 {       make_subsubsubsubnode (FALSE, (desttype!=TOINF));       /* r5pl15 */
 }       /* c_subsubsubsubnode */
 
-GLOBAL void c_psubsubsubsubnode ( void )
+GLOBAL void c_psubsubsubsubnode(void)
 {       make_subsubsubsubnode (TRUE, FALSE);
 }       /* c_psubsubsubnode */
 
-GLOBAL void c_psubsubsubsubnode_iv ( void )
+GLOBAL void c_psubsubsubsubnode_iv(void)
 {       make_subsubsubsubnode (TRUE, (desttype!=TOINF));        /* r5pl15 */
 }       /* c_psubsubsubsubnode */
 
 
 
-GLOBAL void c_endnode ( void )
+GLOBAL void c_endnode(void)
 {
         check_endnode();
 }       /* c_endnode */
@@ -7845,7 +8483,7 @@ GLOBAL void c_endnode ( void )
 /*      ############################################################
         # r6pl5: neue Kommandos
         ############################################################    */
-GLOBAL void c_begin_node ( void )
+GLOBAL void c_begin_node(void)
 {
         check_endnode();
 
@@ -7875,7 +8513,7 @@ GLOBAL void c_begin_node ( void )
 }       /* c_begin_node */
 
 
-GLOBAL void c_begin_node_iv ( void )
+GLOBAL void c_begin_node_iv(void)
 {
         check_endnode();
 
@@ -7905,7 +8543,7 @@ GLOBAL void c_begin_node_iv ( void )
 }       /* c_begin_node_iv */
 
 
-GLOBAL void c_begin_pnode ( void )
+GLOBAL void c_begin_pnode(void)
 {
         check_endnode();
 
@@ -7935,7 +8573,7 @@ GLOBAL void c_begin_pnode ( void )
 }       /* c_begin_pnode */
 
 
-GLOBAL void c_begin_pnode_iv ( void )
+GLOBAL void c_begin_pnode_iv(void)
 {
         check_endnode();
 
@@ -7964,7 +8602,7 @@ GLOBAL void c_begin_pnode_iv ( void )
 
 }       /* c_begin_pnode_iv */
 
-GLOBAL void c_end_node ( void )
+GLOBAL void c_end_node(void)
 {
         check_endnode();
 
@@ -7989,7 +8627,7 @@ GLOBAL void c_end_node ( void )
         #       zeitraubende Weg ueber auto_references() entfaellt.
         #
         ############################################################    */
-LOCAL void tocline_make_bold ( char *s, const int depth )
+LOCAL void tocline_make_bold(char *s, const int depth)
 {
         if (depth>1)    /* r6pl5: >1 statt ==1 */
         {
@@ -8026,7 +8664,7 @@ LOCAL void tocline_make_bold ( char *s, const int depth )
 }       /* tocline_make_bold */
 
 
-LOCAL void tocline_handle_1st ( BOOLEAN *f )
+LOCAL void tocline_handle_1st(BOOLEAN *f)
 {
         if (*f)
         {       switch (desttype)
@@ -8048,7 +8686,7 @@ LOCAL void tocline_handle_1st ( BOOLEAN *f )
 
 
 
-LOCAL void convert_toc_item ( TOCITEM *t )
+LOCAL void convert_toc_item(TOCITEM *t)
 {
         if (!t->converted)
         {       replace_macros(t->name);
@@ -8065,7 +8703,7 @@ LOCAL void convert_toc_item ( TOCITEM *t )
 
 /* New in r6pl15 [NHz] */
 /* Output of bookmarks for postscript/PDF */
-GLOBAL BOOLEAN bookmarks_ps ( void )
+GLOBAL BOOLEAN bookmarks_ps(void)
 {
         register int i;
         int li, apxstart;
@@ -8085,15 +8723,15 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
                 {
                         convert_toc_item(toc[i]);
 
-                        if ( toc[i]->appendix )
+                        if (toc[i]->appendix)
                         {
                                 apxstart= i;    /* fuer unten merken */
                                 break;                  /* r5pl6: Es kann nur einen Anhang geben */
                         }
                         else
-                        {       if ( toc[i]->n1 != 0 )
+                        {       if (toc[i]->n1 != 0)
                                 {
-                                        if ( toc[i]->toctype==TOC_NODE1 )
+                                        if (toc[i]->toctype==TOC_NODE1)
                                         {       /* Ein Kapitel */       
 
                                                 li= toc[i]->labindex;
@@ -8110,7 +8748,7 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
                                         }/* TOC_NODE1 */
 
 
-                                        if ( toc[i]->toctype==TOC_NODE2 )
+                                        if (toc[i]->toctype==TOC_NODE2)
                                         {       /* Ein Abschnitt */
 
                                                 li= toc[i]->labindex;
@@ -8127,7 +8765,7 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
                                                                                         toc[i]->count_n3);
                                         }/* TOC_NODE2 */
 
-                                        if ( toc[i]->toctype==TOC_NODE3 )
+                                        if (toc[i]->toctype==TOC_NODE3)
                                         {       /* Ein Unterabschnitt */
 
                                                 li= toc[i]->labindex;
@@ -8145,7 +8783,7 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
                                                                                         toc[i]->count_n4);
                                         }/* TOC_NODE3 */
 
-                                        if ( toc[i]->toctype==TOC_NODE4 )
+                                        if (toc[i]->toctype==TOC_NODE4)
                                         {       /* Ein Paragraph */
 
                                                 li= toc[i]->labindex;
@@ -8163,7 +8801,7 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
                                                                                         n, s);
                                         }/* TOC_NODE4 */
 
-                                        if ( toc[i]->toctype==TOC_NODE5 )
+                                        if (toc[i]->toctype==TOC_NODE5)
                                         {       /* Ein Paragraph */ /* ToDo: ??? */
 
                                                 li= toc[i]->labindex;
@@ -8201,11 +8839,11 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
                 {
                         convert_toc_item(toc[i]);
 
-                        if ( toc[i]->appendix )
+                        if (toc[i]->appendix)
                         {
-                                if ( toc[i]->n1 != 0 )
+                                if (toc[i]->n1 != 0)
                                 {
-                                        if ( toc[i]->toctype==TOC_NODE1 )
+                                        if (toc[i]->toctype==TOC_NODE1)
                                         {       /* Ein Kapitel */       
 
                                                 li= toc[i]->labindex;
@@ -8222,7 +8860,7 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
                                         }/* TOC_NODE1 */
 
 
-                                        if ( toc[i]->toctype==TOC_NODE2 )
+                                        if (toc[i]->toctype==TOC_NODE2)
                                         {       /* Ein Abschnitt */
 
                                                 li= toc[i]->labindex;
@@ -8240,7 +8878,7 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
                                                                                         toc[i]->count_n3);
                                         }/* TOC_NODE2 */
 
-                                        if ( toc[i]->toctype==TOC_NODE3 )
+                                        if (toc[i]->toctype==TOC_NODE3)
                                         {       /* Ein Unterabschnitt */
 
                                                 li= toc[i]->labindex;
@@ -8258,7 +8896,7 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
                                                                                         toc[i]->count_n4);
                                         }/* TOC_NODE3 */
 
-                                        if ( toc[i]->toctype==TOC_NODE4 )
+                                        if (toc[i]->toctype==TOC_NODE4)
                                         {       /* Ein Paragraph */
 
                                                 li= toc[i]->labindex;
@@ -8276,7 +8914,7 @@ GLOBAL BOOLEAN bookmarks_ps ( void )
                                                                                         n, s);
                                         }/* TOC_NODE4 */
 
-                                        if ( toc[i]->toctype==TOC_NODE5 )
+                                        if (toc[i]->toctype==TOC_NODE5)
                                         {       /* Ein Paragraph */     /* ToDo: ??? */
 
                                                 li= toc[i]->labindex;
@@ -8352,7 +8990,7 @@ const int         depth)                /* */
             switch (depth)
             {
             case 1:                       /* node */
-               if ( (toc[i]->toctype == TOC_NODE1) && !(toc[i]->appendix) )
+               if ((toc[i]->toctype == TOC_NODE1) && !(toc[i]->appendix))
                {                          /* Ein Kapitel */     
                   sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
                   htmlfilename = hfn;
@@ -8386,9 +9024,9 @@ const int         depth)                /* */
                {                          /* subnode */ 
                
                /* Changed in r6.2pl1 [NHz]; I'm not sure, if this makes sense, but it doesn't disturb */
-                  if (    (toc[toc[i]->up_n1_index]->nr1 + toc_offset == toc[last_n1_index]->nr1 + toc_offset) 
+                  if (   (toc[toc[i]->up_n1_index]->nr1 + toc_offset == toc[last_n1_index]->nr1 + toc_offset) 
                        &&     (toc[i]->up_n1_index == last_n1_index)
-                     )
+                    )
                   {
                      sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
                      htmlfilename = hfn;
@@ -8424,15 +9062,15 @@ const int         depth)                /* */
                {                          /* a subsubnode */    
                
                   /* Changed in r6.2pl1 [NHz] */
-                  if (   (toc[toc[i]->up_n2_index]->nr2 + subtoc_offset == toc[last_n2_index]->nr2 + subtoc_offset)
+                  if (  (toc[toc[i]->up_n2_index]->nr2 + subtoc_offset == toc[last_n2_index]->nr2 + subtoc_offset)
                        &&    (toc[i]->up_n2_index == last_n2_index)
-                     )
+                    )
                   {
                      sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
                      htmlfilename = hfn;
                      
                      /* Feststellen, ob die Referenz im gleichen File liegt */
-                     if ( (html_merge_node3 == FALSE) && (strcmp(htmlfilename, outfile.name) != 0) )
+                     if ((html_merge_node3 == FALSE) && (strcmp(htmlfilename, outfile.name) != 0))
                      {
                         if (strchr(htmlfilename, '.') != NULL)
                            strcpy(suff, "");
@@ -8461,15 +9099,15 @@ const int         depth)                /* */
                if (toc[i]->toctype == TOC_NODE4)
                {                          /* a subsubsubnode */ 
                
-                  if (   (toc[toc[i]->up_n3_index]->nr3 + subsubtoc_offset == toc[last_n3_index]->nr3 + subsubtoc_offset)
+                  if (  (toc[toc[i]->up_n3_index]->nr3 + subsubtoc_offset == toc[last_n3_index]->nr3 + subsubtoc_offset)
                        &&    (toc[i]->up_n3_index == last_n3_index)
-                     )
+                    )
                   {
                      sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
                      htmlfilename = hfn;
                      
                      /* Feststellen, ob die Referenz im gleichen File liegt */
-                     if ( (html_merge_node4 == FALSE) && (strcmp(htmlfilename, outfile.name) != 0) )
+                     if ((html_merge_node4 == FALSE) && (strcmp(htmlfilename, outfile.name) != 0))
                      {
                         if (strchr(htmlfilename, '.') != NULL)
                            strcpy(suff, "");
@@ -8495,14 +9133,14 @@ const int         depth)                /* */
                break;
 
             case 5:
-               if ( (toc[i]->toctype == TOC_NODE1) && (toc[i]->appendix) )
+               if ((toc[i]->toctype == TOC_NODE1) && (toc[i]->appendix))
                {                          /* a subsubsubnode */ 
                
                   sprintf(hfn, "%s%s", html_name_prefix, toc[i]->filename);
                   htmlfilename = hfn;
                
                   /* Feststellen, ob die Referenz im gleichen File liegt */
-                  if ( (html_merge_node1 == FALSE) && (strcmp(htmlfilename, outfile.name) != 0) )
+                  if ((html_merge_node1 == FALSE) && (strcmp(htmlfilename, outfile.name) != 0))
                   {
                      if (strchr(htmlfilename, '.') != NULL)
                         strcpy(suff, "");
@@ -8595,7 +9233,7 @@ const int         depth)              /* */
                if (toc[i]->toctype == TOC_NODE1)
                {                          /* Ein Kapitel */     
    
-                  if ( (leerzeile) && (depth > 1) )
+                  if ((leerzeile) && (depth > 1))
                   {
                      switch (desttype)
                      {
@@ -8960,7 +9598,7 @@ const int         depth)              /* */
 
 
 
-LOCAL void apx_output ( const int depth )
+LOCAL void apx_output(const int depth)
 {
         register int i;
         int li;
@@ -8999,13 +9637,13 @@ LOCAL void apx_output ( const int depth )
                 {
                         convert_toc_item(toc[i]);
 
-                        if ( toc[i]->appendix )
-                        {       if ( toc[i]->n1 != 0 )
+                        if (toc[i]->appendix)
+                        {       if (toc[i]->n1 != 0)
                                 {
-                                        if ( toc[i]->toctype==TOC_NODE1 )
+                                        if (toc[i]->toctype==TOC_NODE1)
                                         {       /* Ein Kapitel */
 
-                                                if ( (leerzeile) && (depth>1) )
+                                                if ((leerzeile) && (depth>1))
                                                 {       
                      switch(desttype)
                                                         {
@@ -9073,7 +9711,7 @@ LOCAL void apx_output ( const int depth )
 
                                         if (depth>1)
                                         {
-                                                if ( toc[i]->toctype==TOC_NODE2 )
+                                                if (toc[i]->toctype==TOC_NODE2)
                                                 {       /* Ein Abschnitt */
                                                         if (use_toc_list_commands)      /* r6pl2: vorher: desttype==TOHTM */
                                                         {       if (last_n)
@@ -9112,7 +9750,7 @@ LOCAL void apx_output ( const int depth )
 
                                         if (depth>2)
                                         {
-                                                if ( toc[i]->toctype==TOC_NODE3 )
+                                                if (toc[i]->toctype==TOC_NODE3)
                                                 {       /* Ein Unterabschnitt */
                                                         if (use_toc_list_commands)      /* r6pl2: vorher: desttype==TOHTM */
                                                         {       if (last_n)
@@ -9151,7 +9789,7 @@ LOCAL void apx_output ( const int depth )
 
                                         if (depth>3)
                                         {
-                                                if ( toc[i]->toctype==TOC_NODE4 )
+                                                if (toc[i]->toctype==TOC_NODE4)
                                                 {       /* Ein Paragraph */
                                                         if (use_toc_list_commands)      /* r6pl2: vorher: desttype==TOHTM */
                                                         {       if (last_n)
@@ -9196,7 +9834,7 @@ LOCAL void apx_output ( const int depth )
 
                                         if (depth>4)
                                         {
-                                                if ( toc[i]->toctype==TOC_NODE5 )
+                                                if (toc[i]->toctype==TOC_NODE5)
                                                 {       /* Ein Paragraph */
                                                         if (use_toc_list_commands)      /* r6pl2: vorher: desttype==TOHTM */
                                                         {       if (last_n)
@@ -9276,7 +9914,7 @@ LOCAL void apx_output ( const int depth )
 }       /* apx_output */
 
 
-LOCAL void subtoc_output ( const int depth )
+LOCAL void subtoc_output(const int depth)
 {
         register int i;
         int li;
@@ -9293,11 +9931,11 @@ LOCAL void subtoc_output ( const int depth )
         {       return;
         }
 
-        if ( p1_toc_counter<=0 )
+        if (p1_toc_counter<=0)
         {       return;
         }
 
-        if ( toc[p2_toc_counter]->ignore_subtoc )       /* r5pl6 */
+        if (toc[p2_toc_counter]->ignore_subtoc )       /* r5pl6 */
         {       return;
         }
 
@@ -9313,19 +9951,19 @@ LOCAL void subtoc_output ( const int depth )
                 {
                         convert_toc_item(toc[i]);
 
-                        if ( toc[i]->appendix )
+                        if (toc[i]->appendix)
                         {       break;  /* r5pl6: Nach dem ersten Anhang-Node kommt nichts mehr */
                         }
 
-                        if ( toc[i]->n1>p2_toc_n1 )
+                        if (toc[i]->n1>p2_toc_n1)
                         {       break;  /* r5pl6: Das waren alle */
                         }
 
-                        if ( toc[i]->n1!=0 )
+                        if (toc[i]->n1!=0)
                         {
-                                if ( toc[i]->n1 == p2_toc_n1 )
+                                if (toc[i]->n1 == p2_toc_n1)
                                 {
-                                        if ( toc[i]->toctype==TOC_NODE2 )
+                                        if (toc[i]->toctype==TOC_NODE2)
                                         {       /* Ein Abschnitt */
                                                 if (use_toc_list_commands)      /* r6pl2: vorher: desttype==TOHTM */
                                                 {       if (last_ssn)
@@ -9363,7 +10001,7 @@ LOCAL void subtoc_output ( const int depth )
 
                                         if (depth>1)
                                         {
-                                                if ( toc[i]->toctype==TOC_NODE3 )
+                                                if (toc[i]->toctype==TOC_NODE3)
                                                 {       /* Ein Unterabschnitt */
                                                         if (use_toc_list_commands)      /* r6pl2: vorher: desttype==TOHTM */
                                                         {       if (last_sn)
@@ -9404,7 +10042,7 @@ LOCAL void subtoc_output ( const int depth )
 
                                         if (depth>2)
                                         {
-                                                if ( toc[i]->toctype==TOC_NODE4 )
+                                                if (toc[i]->toctype==TOC_NODE4)
                                                 {       /* Ein Paragraph */
                                                         if (use_toc_list_commands)      /* r6pl2: vorher: desttype==TOHTM */
                                                         {       if (last_sn)
@@ -9446,7 +10084,7 @@ LOCAL void subtoc_output ( const int depth )
 
                                         if (depth>3)
                                         {
-                                                if ( toc[i]->toctype==TOC_NODE5 )
+                                                if (toc[i]->toctype==TOC_NODE5)
                                                 {       /* Ein Paragraph */                                     /* ToDo: ?? */
                                                         if (use_toc_list_commands)      /* r6pl2: vorher: desttype==TOHTM */
                                                         {       if (last_sn)
@@ -9548,7 +10186,7 @@ LOCAL void subtoc_output ( const int depth )
 
 
 
-LOCAL void subapx_output ( const int depth )
+LOCAL void subapx_output(const int depth)
 {
         register int i;
         int li;
@@ -9566,11 +10204,11 @@ LOCAL void subapx_output ( const int depth )
         {       return;
         }
 
-        if ( p1_toc_counter<=0 )
+        if (p1_toc_counter<=0)
         {       return;
         }
 
-        if ( toc[p2_toc_counter]->ignore_subtoc )       /* r5pl6 */
+        if (toc[p2_toc_counter]->ignore_subtoc )       /* r5pl6 */
         {       return;
         }
 
@@ -9583,15 +10221,15 @@ LOCAL void subapx_output ( const int depth )
                 {
                         convert_toc_item(toc[i]);
 
-                        if ( toc[i]->appendix && toc[i]->n1!=0 )
+                        if (toc[i]->appendix && toc[i]->n1!=0)
                         {
-                                if ( toc[i]->n1>p2_apx_n1 )
+                                if (toc[i]->n1>p2_apx_n1)
                                 {       break;  /* r5pl6: das waren dann alle */
                                 }
 
-                                if ( toc[i]->n1 == p2_apx_n1 )
+                                if (toc[i]->n1 == p2_apx_n1)
                                 {
-                                        if ( toc[i]->toctype==TOC_NODE2 )
+                                        if (toc[i]->toctype==TOC_NODE2)
                                         {       /* Ein Abschnitt */
                                                 if (use_toc_list_commands)      /* r6pl2: vorher: desttype==TOHTM */
                                                 {       if (last_ssn)
@@ -9626,7 +10264,7 @@ LOCAL void subapx_output ( const int depth )
 
                                         if (depth>1)
                                         {
-                                                if ( toc[i]->toctype==TOC_NODE3 )
+                                                if (toc[i]->toctype==TOC_NODE3)
                                                 {       /* Ein Unterabschnitt */
                                                         if (use_toc_list_commands)      /* r6pl2: vorher: desttype==TOHTM */
                                                         {       if (last_sn)
@@ -9662,7 +10300,7 @@ LOCAL void subapx_output ( const int depth )
 
                                         if (depth>2)
                                         {
-                                                if ( toc[i]->toctype==TOC_NODE4 )
+                                                if (toc[i]->toctype==TOC_NODE4)
                                                 {       /* Ein Paragraph */
                                                         if (use_toc_list_commands)      /* r6pl2: vorher: desttype==TOHTM */
                                                         {       if (last_sn)
@@ -9703,7 +10341,7 @@ LOCAL void subapx_output ( const int depth )
 
                                         if (depth>3)
                                         {
-                                                if ( toc[i]->toctype==TOC_NODE5 )
+                                                if (toc[i]->toctype==TOC_NODE5)
                                                 {       /* Ein Paragraph */                                     /* ToDo: ??? */
                                                         if (use_toc_list_commands)      /* r6pl2: vorher: desttype==TOHTM */
                                                         {       if (last_sn)
@@ -9804,7 +10442,7 @@ LOCAL void subapx_output ( const int depth )
 }       /*subapx_output*/
 
 
-LOCAL void subsubtoc_output ( const int depth )
+LOCAL void subsubtoc_output(const int depth)
 {
         register int i;
         int li;
@@ -9820,15 +10458,15 @@ LOCAL void subsubtoc_output ( const int depth )
         {       return;
         }
 
-        if ( p1_toc_counter<=0 )
+        if (p1_toc_counter<=0)
         {       return;
         }
 
-        if ( toc[p2_toc_counter]->ignore_subtoc )       /* r5pl6 */
+        if (toc[p2_toc_counter]->ignore_subtoc )       /* r5pl6 */
         {       return;
         }
 
-        if ( last_n2_index==0 ) /* r5pl6 */
+        if (last_n2_index==0 ) /* r5pl6 */
         {       return;                         /* Wer benutzt !subsubtoc in einem Node? */
         }
 
@@ -9844,25 +10482,25 @@ LOCAL void subsubtoc_output ( const int depth )
                 {
                         convert_toc_item(toc[i]);
 
-                        if ( toc[i]->appendix )
+                        if (toc[i]->appendix)
                         {       break;  /* r5pl6: Nach dem ersten Anhang-Node kommt nichts mehr */
                         }
 
-                        if ( toc[i]->n1>p2_toc_n1 )
+                        if (toc[i]->n1>p2_toc_n1)
                         {       break;  /* r5pl6: Das waren dann alle */
                         }
 
-                        if ( toc[i]->n1!=0 )
+                        if (toc[i]->n1!=0)
                         {
-                                if ( toc[i]->n1 == p2_toc_n1 )
+                                if (toc[i]->n1 == p2_toc_n1)
                                 {
-                                        if ( toc[i]->n2>p2_toc_n2 )
+                                        if (toc[i]->n2>p2_toc_n2)
                                         {       break;  /* r5pl6: Das waren dann alle */
                                         }
 
-                                        if ( toc[i]->n2==p2_toc_n2 )
+                                        if (toc[i]->n2==p2_toc_n2)
                                         {
-                                                if ( toc[i]->toctype==TOC_NODE3 )
+                                                if (toc[i]->toctype==TOC_NODE3)
                                                 {       /* Ein Unterabschnitt */
 
                                                         if (use_toc_list_commands)      /* r6pl2: vorher: desttype==TOHTM */
@@ -9896,7 +10534,7 @@ LOCAL void subsubtoc_output ( const int depth )
                                                 }/* TOC_NODE3 */
 
                                                 if (depth>1)
-                                                {       if ( toc[i]->toctype==TOC_NODE4 )
+                                                {       if (toc[i]->toctype==TOC_NODE4)
                                                         {       /* Ein Paragraph */
 
                                                                 if (use_toc_list_commands)      /* r6pl2: vorher: desttype==TOHTM */
@@ -9933,7 +10571,7 @@ LOCAL void subsubtoc_output ( const int depth )
                                                 }
 
                                                 if (depth>2)
-                                                {       if ( toc[i]->toctype==TOC_NODE5 )
+                                                {       if (toc[i]->toctype==TOC_NODE5)
                                                         {       /* Ein Paragraph */
 
                                                                 if (use_toc_list_commands)      /* r6pl2: vorher: desttype==TOHTM */
@@ -10021,7 +10659,7 @@ LOCAL void subsubtoc_output ( const int depth )
 
 
 
-LOCAL void subsubapx_output ( const int depth )
+LOCAL void subsubapx_output(const int depth)
 {
         register int i;
         int li;
@@ -10037,15 +10675,15 @@ LOCAL void subsubapx_output ( const int depth )
         {       return;
         }
 
-        if ( p1_toc_counter<=0 )
+        if (p1_toc_counter<=0)
         {       return;
         }
 
-        if ( toc[p2_toc_counter]->ignore_subtoc )       /* r5pl6 */
+        if (toc[p2_toc_counter]->ignore_subtoc )       /* r5pl6 */
         {       return;
         }
 
-        if ( last_n2_index==0 ) /* r5pl6 */
+        if (last_n2_index==0 ) /* r5pl6 */
         {       return;                         /* Wer benutzt !subsubtoc in einem Node? */
         }
 
@@ -10061,21 +10699,21 @@ LOCAL void subsubapx_output ( const int depth )
                 {
                         convert_toc_item(toc[i]);
 
-                        if ( toc[i]->appendix && toc[i]->n1!=0 )
+                        if (toc[i]->appendix && toc[i]->n1!=0)
                         {
-                                if (  toc[i]->n1>p2_apx_n1 )
+                                if ( toc[i]->n1>p2_apx_n1)
                                 {       break;  /* r5pl6: Das waren dann alle */
                                 }
 
-                                if ( toc[i]->n1 == p2_apx_n1 )
+                                if (toc[i]->n1 == p2_apx_n1)
                                 {
-                                        if ( toc[i]->n2>p2_apx_n2 )
+                                        if (toc[i]->n2>p2_apx_n2)
                                         {       break;  /* r5pl6: Das waren dann alle */
                                         }
 
-                                        if ( toc[i]->n2==p2_apx_n2 )
+                                        if (toc[i]->n2==p2_apx_n2)
                                         {
-                                                if ( toc[i]->toctype==TOC_NODE3 )
+                                                if (toc[i]->toctype==TOC_NODE3)
                                                 {       /* Ein Unterabschnitt */
 
                                                         if (use_toc_list_commands)      /* r6pl2: vorher: desttype==TOHTM */
@@ -10106,7 +10744,7 @@ LOCAL void subsubapx_output ( const int depth )
                                                 }/* TOC_NODE3 */
 
                                                 if (depth>1)
-                                                {       if ( toc[i]->toctype==TOC_NODE4 )
+                                                {       if (toc[i]->toctype==TOC_NODE4)
                                                         {       /* Ein Paragraph */
 
                                                                 if (use_toc_list_commands)      /* r6pl2: vorher: desttype==TOHTM */
@@ -10143,7 +10781,7 @@ LOCAL void subsubapx_output ( const int depth )
                                                 }
 
                                                 if (depth>2)
-                                                {       if ( toc[i]->toctype==TOC_NODE5 )
+                                                {       if (toc[i]->toctype==TOC_NODE5)
                                                         {       /* Ein Paragraph */
 
                                                                 if (use_toc_list_commands)      /* r6pl2: vorher: desttype==TOHTM */
@@ -10226,7 +10864,7 @@ LOCAL void subsubapx_output ( const int depth )
         bDocAutorefOff= old;
 }       /*subsubapx_output*/
 
-LOCAL void subsubsubtoc_output ( const int depth )
+LOCAL void subsubsubtoc_output(const int depth)
 {
         register int i;
         int li;
@@ -10241,19 +10879,19 @@ LOCAL void subsubsubtoc_output ( const int depth )
         {       return;
         }
 
-        if ( p1_toc_counter<=0 )
+        if (p1_toc_counter<=0)
         {       return;
         }
 
-        if ( toc[p2_toc_counter]->ignore_subtoc )       /* r5pl6 */
+        if (toc[p2_toc_counter]->ignore_subtoc )       /* r5pl6 */
         {       return;
         }
 
-        if ( last_n2_index==0 ) /* r5pl6 */
+        if (last_n2_index==0 ) /* r5pl6 */
         {       return;                         /* Wer benutzt !subsubsubtoc in einem Node? */
         }
 
-        if ( last_n3_index==0 ) /* r5pl6 */
+        if (last_n3_index==0 ) /* r5pl6 */
         {       return;                         /* Wer benutzt !subsubsubtoc in einem Subnode? */
         }
 
@@ -10269,31 +10907,31 @@ LOCAL void subsubsubtoc_output ( const int depth )
                 {
                         convert_toc_item(toc[i]);
 
-                        if ( toc[i]->appendix )
+                        if (toc[i]->appendix)
                         {       break;  /* r5pl6: Nach dem ersten Anhang-Node kommt nichts mehr */
                         }
 
-                        if ( toc[i]->n1>p2_toc_n1 )
+                        if (toc[i]->n1>p2_toc_n1)
                         {       break;  /* r5pl6: Das waren dann alle */
                         }
 
-                        if ( toc[i]->n1!=0 )
+                        if (toc[i]->n1!=0)
                         {
-                                if ( toc[i]->n1 == p2_toc_n1 )
+                                if (toc[i]->n1 == p2_toc_n1)
                                 {
-                                        if ( toc[i]->n2>p2_toc_n2 )
+                                        if (toc[i]->n2>p2_toc_n2)
                                         {       break;  /* r5pl6: Das waren dann alle */
                                         }
 
-                                        if ( toc[i]->n2==p2_toc_n2 )
+                                        if (toc[i]->n2==p2_toc_n2)
                                         {
-                                                if ( toc[i]->n3>p2_toc_n3 )
+                                                if (toc[i]->n3>p2_toc_n3)
                                                 {       break;  /* r5pl6: Das waren dann alle */
                                                 }
 
-                                                if ( toc[i]->n3==p2_toc_n3 )
+                                                if (toc[i]->n3==p2_toc_n3)
                                                 {
-                                                        if ( toc[i]->toctype==TOC_NODE4 )
+                                                        if (toc[i]->toctype==TOC_NODE4)
                                                         {       /* Ein Paragraph */
 
                                                                 if (use_toc_list_commands)
@@ -10325,7 +10963,7 @@ LOCAL void subsubsubtoc_output ( const int depth )
                                                         }/* TOC_NODE4 */
 
                                                         if (depth>1)
-                                                        {       if ( toc[i]->toctype==TOC_NODE5 )
+                                                        {       if (toc[i]->toctype==TOC_NODE5)
                                                                 {       /* Ein Paragraph */
         
                                                                         if (use_toc_list_commands)
@@ -10414,7 +11052,7 @@ LOCAL void subsubsubtoc_output ( const int depth )
 }       /*subsubsubtoc_output*/
 
 
-LOCAL void subsubsubapx_output ( const int depth )
+LOCAL void subsubsubapx_output(const int depth)
 {
         register int i;
         int li;
@@ -10429,19 +11067,19 @@ LOCAL void subsubsubapx_output ( const int depth )
         {       return;
         }
 
-        if ( p1_toc_counter<=0 )
+        if (p1_toc_counter<=0)
         {       return;
         }
 
-        if ( toc[p2_toc_counter]->ignore_subtoc )       /* r5pl6 */
+        if (toc[p2_toc_counter]->ignore_subtoc )       /* r5pl6 */
         {       return;
         }
 
-        if ( last_n2_index==0 ) /* r5pl6 */
+        if (last_n2_index==0 ) /* r5pl6 */
         {       return;                         /* Wer benutzt !subsubsubtoc in einem Node? */
         }
 
-        if ( last_n3_index==0 ) /* r5pl6 */
+        if (last_n3_index==0 ) /* r5pl6 */
         {       return;                         /* Wer benutzt !subsubsubtoc in einem Subnode? */
         }
 
@@ -10457,27 +11095,27 @@ LOCAL void subsubsubapx_output ( const int depth )
                 {
                         convert_toc_item(toc[i]);
 
-                        if ( toc[i]->appendix && toc[i]->n1!=0 )
+                        if (toc[i]->appendix && toc[i]->n1!=0)
                         {
-                                if (  toc[i]->n1>p2_apx_n1 )
+                                if ( toc[i]->n1>p2_apx_n1)
                                 {       break;  /* r5pl6: Das waren dann alle */
                                 }
 
-                                if ( toc[i]->n1 == p2_apx_n1 )
+                                if (toc[i]->n1 == p2_apx_n1)
                                 {
-                                        if ( toc[i]->n2>p2_apx_n2 )
+                                        if (toc[i]->n2>p2_apx_n2)
                                         {       break;  /* r5pl6: Das waren dann alle */
                                         }
 
-                                        if ( toc[i]->n2==p2_apx_n2 )
+                                        if (toc[i]->n2==p2_apx_n2)
                                         {
-                                                if ( toc[i]->n3>p2_apx_n3 )
+                                                if (toc[i]->n3>p2_apx_n3)
                                                 {       break;  /* r5pl6: Das waren alle */
                                                 }
 
-                                                if ( toc[i]->n3==p2_apx_n3 )
+                                                if (toc[i]->n3==p2_apx_n3)
                                                 {
-                                                        if ( toc[i]->toctype==TOC_NODE4 )
+                                                        if (toc[i]->toctype==TOC_NODE4)
                                                         {       /* Ein Paragraph */
 
                                                                 if (use_toc_list_commands)
@@ -10509,7 +11147,7 @@ LOCAL void subsubsubapx_output ( const int depth )
                                                         }/* TOC_NODE4 */
 
                                                         if (depth>1)
-                                                        {       if ( toc[i]->toctype==TOC_NODE5 )
+                                                        {       if (toc[i]->toctype==TOC_NODE5)
                                                                 {       /* Ein Paragraph */
         
                                                                         if (use_toc_list_commands)
@@ -10598,7 +11236,7 @@ LOCAL void subsubsubapx_output ( const int depth )
         bDocAutorefOff= old;
 }       /*subsubsubapx_output*/
 
-LOCAL void subsubsubsubtoc_output ( void )
+LOCAL void subsubsubsubtoc_output(void)
 {
         register int i;
         int li;
@@ -10611,23 +11249,23 @@ LOCAL void subsubsubsubtoc_output ( void )
         {       return;
         }
 
-        if ( p1_toc_counter<=0 )
+        if (p1_toc_counter<=0)
         {       return;
         }
 
-        if ( toc[p2_toc_counter]->ignore_subtoc )       /* r5pl6 */
+        if (toc[p2_toc_counter]->ignore_subtoc )       /* r5pl6 */
         {       return;
         }
 
-        if ( last_n2_index==0 ) /* r5pl6 */
+        if (last_n2_index==0 ) /* r5pl6 */
         {       return;                         /* Wer benutzt !subsubsubtoc in einem Node? */
         }
 
-        if ( last_n3_index==0 ) /* r5pl6 */
+        if (last_n3_index==0 ) /* r5pl6 */
         {       return;                         /* Wer benutzt !subsubsubtoc in einem Subnode? */
         }
 
-        if ( last_n4_index==0 ) /* r5pl6 */
+        if (last_n4_index==0 ) /* r5pl6 */
         {       return;                         /* Wer benutzt !subsubsubtoc in einem Subnode? */
         }
 
@@ -10643,38 +11281,38 @@ LOCAL void subsubsubsubtoc_output ( void )
                 {
                         convert_toc_item(toc[i]);
 
-                        if ( toc[i]->appendix )
+                        if (toc[i]->appendix)
                         {       break;  /* r5pl6: Nach dem ersten Anhang-Node kommt nichts mehr */
                         }
 
-                        if ( toc[i]->n1>p2_toc_n1 )
+                        if (toc[i]->n1>p2_toc_n1)
                         {       break;  /* r5pl6: Das waren dann alle */
                         }
 
-                        if ( toc[i]->n1!=0 )
+                        if (toc[i]->n1!=0)
                         {
-                                if ( toc[i]->n1 == p2_toc_n1 )
+                                if (toc[i]->n1 == p2_toc_n1)
                                 {
-                                        if ( toc[i]->n2>p2_toc_n2 )
+                                        if (toc[i]->n2>p2_toc_n2)
                                         {       break;  /* r5pl6: Das waren dann alle */
                                         }
 
-                                        if ( toc[i]->n2==p2_toc_n2 )
+                                        if (toc[i]->n2==p2_toc_n2)
                                         {
-                                                if ( toc[i]->n3>p2_toc_n3 )
+                                                if (toc[i]->n3>p2_toc_n3)
                                                 {       break;  /* r5pl6: Das waren dann alle */
                                                 }
 
-                                                if ( toc[i]->n3==p2_toc_n3 )
+                                                if (toc[i]->n3==p2_toc_n3)
                                                 {
 
-                                                        if ( toc[i]->n4>p2_toc_n4 )
+                                                        if (toc[i]->n4>p2_toc_n4)
                                                         {       break;  /* r5pl6: Das waren dann alle */
                                                         }
         
-                                                        if ( toc[i]->n4==p2_toc_n4 )
+                                                        if (toc[i]->n4==p2_toc_n4)
                                                         {
-                                                                if ( toc[i]->toctype==TOC_NODE5 )
+                                                                if (toc[i]->toctype==TOC_NODE5)
                                                                 {       /* Ein Paragraph */
         
                                                                         li= toc[i]->labindex;
@@ -10742,7 +11380,7 @@ LOCAL void subsubsubsubtoc_output ( void )
         bDocAutorefOff= old;
 }       /*subsubsubtoc_output*/
 
-LOCAL void subsubsubsubapx_output ( void )
+LOCAL void subsubsubsubapx_output(void)
 {
         register int i;
         int li;
@@ -10755,23 +11393,23 @@ LOCAL void subsubsubsubapx_output ( void )
         {       return;
         }
 
-        if ( p1_toc_counter<=0 )
+        if (p1_toc_counter<=0)
         {       return;
         }
 
-        if ( toc[p2_toc_counter]->ignore_subtoc )       /* r5pl6 */
+        if (toc[p2_toc_counter]->ignore_subtoc )       /* r5pl6 */
         {       return;
         }
 
-        if ( last_n2_index==0 ) /* r5pl6 */
+        if (last_n2_index==0 ) /* r5pl6 */
         {       return;                         /* Wer benutzt !subsubsubtoc in einem Node? */
         }
 
-        if ( last_n3_index==0 ) /* r5pl6 */
+        if (last_n3_index==0 ) /* r5pl6 */
         {       return;                         /* Wer benutzt !subsubsubtoc in einem Subnode? */
         }
 
-        if ( last_n4_index==0 ) /* r5pl6 */
+        if (last_n4_index==0 ) /* r5pl6 */
         {       return;                         /* Wer benutzt !subsubsubtoc in einem Subnode? */
         }
 
@@ -10787,31 +11425,31 @@ LOCAL void subsubsubsubapx_output ( void )
                 {
                         convert_toc_item(toc[i]);
 
-                        if ( toc[i]->appendix && toc[i]->n1!=0 )
+                        if (toc[i]->appendix && toc[i]->n1!=0)
                         {
-                                if (  toc[i]->n1>p2_apx_n1 )
+                                if ( toc[i]->n1>p2_apx_n1)
                                 {       break;  /* r5pl6: Das waren dann alle */
                                 }
 
-                                if ( toc[i]->n1 == p2_apx_n1 )
+                                if (toc[i]->n1 == p2_apx_n1)
                                 {
-                                        if ( toc[i]->n2>p2_apx_n2 )
+                                        if (toc[i]->n2>p2_apx_n2)
                                         {       break;  /* r5pl6: Das waren dann alle */
                                         }
 
-                                        if ( toc[i]->n2==p2_apx_n2 )
+                                        if (toc[i]->n2==p2_apx_n2)
                                         {
-                                                if ( toc[i]->n3>p2_apx_n3 )
+                                                if (toc[i]->n3>p2_apx_n3)
                                                 {       break;  /* r5pl6: Das waren alle */
                                                 }
 
-                                                if ( toc[i]->n3==p2_apx_n3 )
+                                                if (toc[i]->n3==p2_apx_n3)
                                                 {
-                                                        if ( toc[i]->n4>p2_apx_n4 )
+                                                        if (toc[i]->n4>p2_apx_n4)
                                                         {       break;  /* r5pl6: Das waren alle */
                                                         }
 
-                                                        if ( toc[i]->toctype==TOC_NODE5 )
+                                                        if (toc[i]->toctype==TOC_NODE5)
                                                         {       /* Ein Paragraph */
 
                                                                 li= toc[i]->labindex;
@@ -10879,7 +11517,7 @@ LOCAL void subsubsubsubapx_output ( void )
 }       /*subsubsubapx_output*/
 
 
-LOCAL void do_toc ( const int depth )
+LOCAL void do_toc(const int depth)
 {
         if (desttype==TORTF)
         {       return;
@@ -10895,7 +11533,7 @@ LOCAL void do_toc ( const int depth )
 }       /* do_toc */
 
 
-LOCAL void do_subtoc ( const int depth )
+LOCAL void do_subtoc(const int depth)
 {
         if (desttype==TORTF)
         {       return;
@@ -10904,7 +11542,7 @@ LOCAL void do_subtoc ( const int depth )
 }       /* do_subtoc */
 
 
-LOCAL void do_subsubtoc ( const int depth )
+LOCAL void do_subsubtoc(const int depth)
 {
         if (desttype==TORTF)
         {       return;
@@ -10912,7 +11550,7 @@ LOCAL void do_subsubtoc ( const int depth )
         (bInsideAppendix) ? subsubapx_output(depth) : subsubtoc_output(depth);
 }       /* do_subtoc */
 
-LOCAL void do_subsubsubtoc ( const int depth )
+LOCAL void do_subsubsubtoc(const int depth)
 {
         if (desttype==TORTF)
         {       return;
@@ -10921,7 +11559,7 @@ LOCAL void do_subsubsubtoc ( const int depth )
 }       /* do_subtoc */
 
 
-LOCAL void do_subsubsubsubtoc ( void )
+LOCAL void do_subsubsubsubtoc(void)
 {
         if (desttype==TORTF)
         {       return;
@@ -11339,7 +11977,7 @@ const int    currdepth)                 /* current node depth */
 }       /* do_toptoc */
 
 
-LOCAL int get_toccmd_depth ( void )
+LOCAL int get_toccmd_depth(void)
 {
         register int i;
         int ret;
@@ -11362,12 +12000,12 @@ LOCAL int get_toccmd_depth ( void )
 }       /* get_toccmd_depth */
 
 
-GLOBAL void c_toc ( void )
+GLOBAL void c_toc(void)
 {
         BOOLEAN flag= FALSE;
         int d;
 
-        if ( is_for_desttype(&flag, "!toc") )
+        if (is_for_desttype(&flag, "!toc"))
         {
                 d= get_toccmd_depth();
                 if (d==0)
@@ -11388,13 +12026,13 @@ GLOBAL void c_toc ( void )
 }       /* c_toc */
 
 
-GLOBAL void c_subtoc ( void )
+GLOBAL void c_subtoc(void)
 {
         BOOLEAN flag= FALSE;
         int d;
 
         /* token[0] enthaelt das !sub*toc-Kommando */
-        if ( is_for_desttype(&flag, token[0]) )
+        if (is_for_desttype(&flag, token[0]))
         {
                 switch (active_nodetype)
                 {
@@ -11422,7 +12060,7 @@ GLOBAL void c_subtoc ( void )
 }       /* c_subtoc */
 
 
-GLOBAL void c_listoffigures ( void )
+GLOBAL void c_listoffigures(void)
 {
         check_endnode();
 
@@ -11449,7 +12087,7 @@ GLOBAL void c_listoffigures ( void )
 }       /* c_listoffigures */
 
 
-GLOBAL void c_listoftables ( void )
+GLOBAL void c_listoftables(void)
 {
         check_endnode();
 
@@ -11477,7 +12115,7 @@ GLOBAL void c_listoftables ( void )
 
 
 
-LOCAL void output_appendix_line ( void )
+LOCAL void output_appendix_line(void)
 {
         switch (desttype)
         {
@@ -11529,7 +12167,7 @@ LOCAL void output_appendix_line ( void )
 }       /* output_appendix_line */
 
 
-GLOBAL void c_tableofcontents ( void )
+GLOBAL void c_tableofcontents(void)
 {
         char    n[256], 
          name[256], 
@@ -11583,17 +12221,17 @@ GLOBAL void c_tableofcontents ( void )
                         outln(n);
 
                         if (called_maketitle)
-                        {       if ( titdat.title!=NULL)        voutlnf("@center %s @*", titdat.title);
-                                if ( titdat.program!=NULL)      voutlnf("@center %s @*", titdat.program);
-                                if ( titdat.version!=NULL)      voutlnf("@center %s @*", titdat.version);
-                                if ( titdat.date!=NULL)         voutlnf("@center %s @*", titdat.date);
-                                if ( titdat.author!=NULL )
+                        {       if (titdat.title!=NULL)        voutlnf("@center %s @*", titdat.title);
+                                if (titdat.program!=NULL)      voutlnf("@center %s @*", titdat.program);
+                                if (titdat.version!=NULL)      voutlnf("@center %s @*", titdat.version);
+                                if (titdat.date!=NULL)         voutlnf("@center %s @*", titdat.date);
+                                if (titdat.author!=NULL)
                                 {       outln("@sp 1");
                                         voutlnf("@center %s", lang.by);
                                         outln("@sp 1");
                                         voutlnf("@center %s @*", titdat.author);
                                 }
-                                if ( address_counter>0)
+                                if (address_counter>0)
                                 {       for (i=1; i<=address_counter; i++)
                                         {       if (titdat.address[i]!=NULL)
                                                 {       voutlnf("@center %s @*", titdat.address[i]);
@@ -11719,7 +12357,7 @@ GLOBAL void c_tableofcontents ( void )
                                 {       sprintf(hlp_name, "`%s.hlp'", outfile.name);
                                 }
 
-                                if ( called_maketitle )
+                                if (called_maketitle)
                                 {       outln("!{\\footnote ! EnableButton(\"BTN_UP\");");
                                         voutlnf("ChangeButtonBinding(\"BTN_UP\", \"JumpID(%s, `%s')\") }",
                                                 hlp_name, WIN_TITLE_NODE_NAME);
@@ -11862,7 +12500,7 @@ GLOBAL void c_tableofcontents ( void )
         # Ein Label im zweiten Durchgang ausgeben
         #
         ############################################################    */
-GLOBAL void c_label ( void )
+GLOBAL void c_label(void)
 {
         char    sLabel[512], sTemp[512];
 
@@ -11960,7 +12598,7 @@ GLOBAL void c_label ( void )
 }       /* c_label */
 
 
-GLOBAL void c_alias ( void )
+GLOBAL void c_alias(void)
 {
         p2_lab_counter++;       /*r6pl2*/
 }       /* c_alias */
@@ -11975,7 +12613,7 @@ GLOBAL void c_alias ( void )
         # tocindex:     Position des Labels in toc[]
         #
         ############################################################    */
-GLOBAL int add_label ( const char *label, const BOOLEAN isn, const BOOLEAN isp )
+GLOBAL int add_label(const char *label, const BOOLEAN isn, const BOOLEAN isp)
 {
         LABEL   *labptr;
 
@@ -12006,9 +12644,9 @@ GLOBAL int add_label ( const char *label, const BOOLEAN isn, const BOOLEAN isp )
 
         /* Set label in project file */
 
-        if(!isn) /* Only labels which aren't nodes */
+        if (!isn) /* Only labels which aren't nodes */
 
-                save_upr_entry_label (sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine );
+                save_upr_entry_label (sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine);
 
         p1_lab_counter++;
         lab[p1_lab_counter]= labptr;
@@ -12056,7 +12694,7 @@ GLOBAL int add_label ( const char *label, const BOOLEAN isn, const BOOLEAN isp )
         # Ein Alias ist ein Zweitname (Drittname, ...) eines Nodes
         #
         ############################################################    */
-GLOBAL BOOLEAN add_alias ( const char *alias, const BOOLEAN isp )
+GLOBAL BOOLEAN add_alias(const char *alias, const BOOLEAN isp)
 {
         LABEL   *labptr;
 
@@ -12085,7 +12723,7 @@ GLOBAL BOOLEAN add_alias ( const char *alias, const BOOLEAN isp )
 
         /* Set alias in project file */
 
-        save_upr_entry_alias (sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine );
+        save_upr_entry_alias (sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine);
 
         p1_lab_counter++;
         lab[p1_lab_counter]= labptr;
@@ -12131,7 +12769,7 @@ GLOBAL BOOLEAN add_alias ( const char *alias, const BOOLEAN isp )
         # Inhaltsverzeichnis erweitern
         #
         ############################################################    */
-GLOBAL void set_ignore_headline ( void )        /* r5pl12 */
+GLOBAL void set_ignore_headline(void )        /* r5pl12 */
 {
         if (p1_toc_counter<0)   return;
         if (toc[p1_toc_counter]==NULL)  return;
@@ -12141,7 +12779,7 @@ GLOBAL void set_ignore_headline ( void )        /* r5pl12 */
 }       /* set_ignore_headline */
 
 
-GLOBAL void set_ignore_bottomline ( void )      /* r6pl10 */
+GLOBAL void set_ignore_bottomline(void )      /* r6pl10 */
 {
         if (p1_toc_counter<0)   return;
         if (toc[p1_toc_counter]==NULL)  return;
@@ -12151,7 +12789,7 @@ GLOBAL void set_ignore_bottomline ( void )      /* r6pl10 */
 }       /* set_ignore_bottomline */
 
 
-GLOBAL void set_raw_header_filename ( void )
+GLOBAL void set_raw_header_filename(void)
 {
         char *ptr, s[512];
 
@@ -12182,7 +12820,7 @@ GLOBAL void set_raw_header_filename ( void )
 }       /* set_raw_header_filename */
 
 
-GLOBAL void set_raw_footer_filename ( void )
+GLOBAL void set_raw_footer_filename(void)
 {
         char *ptr, s[512];
 
@@ -12213,7 +12851,7 @@ GLOBAL void set_raw_footer_filename ( void )
 }       /* set_raw_footer_filename */
 
 
-GLOBAL void set_ignore_raw_header ( void )      /* r6pl10 */
+GLOBAL void set_ignore_raw_header(void )      /* r6pl10 */
 {
         if (p1_toc_counter<0)   return;
         if (toc[p1_toc_counter]==NULL)  return;
@@ -12223,7 +12861,7 @@ GLOBAL void set_ignore_raw_header ( void )      /* r6pl10 */
 }       /* set_ignore_raw_header */
 
 
-GLOBAL void set_ignore_raw_footer ( void )      /* r6pl10 */
+GLOBAL void set_ignore_raw_footer(void )      /* r6pl10 */
 {
         if (p1_toc_counter<0)   return;
         if (toc[p1_toc_counter]==NULL)  return;
@@ -12233,7 +12871,7 @@ GLOBAL void set_ignore_raw_footer ( void )      /* r6pl10 */
 }       /* set_ignore_raw_footer */
 
 
-GLOBAL void set_ignore_footer ( void )  /* r6pl2 */
+GLOBAL void set_ignore_footer(void )  /* r6pl2 */
 {
         if (p1_toc_counter<0)   return;
         if (toc[p1_toc_counter]==NULL)  return;
@@ -12243,7 +12881,7 @@ GLOBAL void set_ignore_footer ( void )  /* r6pl2 */
 }       /* set_ignore_footer */
 
 
-GLOBAL void set_ignore_title ( void )   /* r6pl13 */
+GLOBAL void set_ignore_title(void )   /* r6pl13 */
 {
         if (p1_toc_counter<0)   return;
         if (toc[p1_toc_counter]==NULL)  return;
@@ -12252,7 +12890,7 @@ GLOBAL void set_ignore_title ( void )   /* r6pl13 */
 
 }       /* set_ignore_title */
 
-GLOBAL void set_ignore_links ( void )   /* r5pl8 */
+GLOBAL void set_ignore_links(void )   /* r5pl8 */
 {
         int li;
 
@@ -12270,7 +12908,7 @@ GLOBAL void set_ignore_links ( void )   /* r5pl8 */
 }       /* set_ignore_links */
 
 
-GLOBAL void set_ignore_index ( void )   /* r5pl10 */
+GLOBAL void set_ignore_index(void )   /* r5pl10 */
 {
         int li;
 
@@ -12288,7 +12926,7 @@ GLOBAL void set_ignore_index ( void )   /* r5pl10 */
 }       /* set_ignore_index */
 
 
-GLOBAL void set_ignore_subtoc ( void )  /* r5pl6 */
+GLOBAL void set_ignore_subtoc(void )  /* r5pl6 */
 {
 
         if (p1_toc_counter<0)   return;
@@ -12299,7 +12937,7 @@ GLOBAL void set_ignore_subtoc ( void )  /* r5pl6 */
 }       /* set_ignore_subtoc */
 
 
-GLOBAL void set_helpid ( void )
+GLOBAL void set_helpid(void)
 {
         char id[512], *ptr;
 
@@ -12327,7 +12965,7 @@ GLOBAL void set_helpid ( void )
 }       /* set_helpid */
 
 
-GLOBAL void set_mapping ( void )
+GLOBAL void set_mapping(void)
 {
         char map[512];
         int m;
@@ -12356,7 +12994,7 @@ GLOBAL void set_mapping ( void )
 
 
 /* New in r6pl16 [NHz] */
-GLOBAL void set_html_doctype ( void )
+GLOBAL void set_html_doctype(void)
 {
         char s[512];
 
@@ -12386,11 +13024,11 @@ GLOBAL void set_html_doctype ( void )
 
 
 /* New feature #0000054 in V6.5.2 [NHz] */
-GLOBAL void set_html_header_date ( void )
+GLOBAL void set_html_header_date(void)
 {
         tokcpy2(html_header_date_zone, 9);
 
-        if(((html_header_date_zone[0] != '+') &&
+        if (((html_header_date_zone[0] != '+') &&
                 (html_header_date_zone[0] != '-')) ||
                 isdigit(html_header_date_zone[1] == 0) ||
                 isdigit(html_header_date_zone[2] == 0) ||
@@ -12408,7 +13046,7 @@ GLOBAL void set_html_header_date ( void )
 
 
 /* New feature #0000053 in V6.5.2 [NHz] */
-GLOBAL void set_html_header_links ( void )
+GLOBAL void set_html_header_links(void)
 {
         char *kind;
         char possible[]="navigation chapter";
@@ -12421,9 +13059,9 @@ GLOBAL void set_html_header_links ( void )
         }
 
         kind = strtok(html_header_links_kind, " ");
-        while(kind != NULL)
+        while (kind != NULL)
         {
-                if(strstr(possible, kind)==NULL)
+                if (strstr(possible, kind)==NULL)
                         error_argument_header_links(kind);
 
                 kind = strtok(NULL, " ");
@@ -12435,7 +13073,7 @@ GLOBAL void set_html_header_links ( void )
 }       /* set_html_header_links */
 
 
-GLOBAL void set_html_frames_layout ( void )
+GLOBAL void set_html_frames_layout(void)
 {
         char s[512];
 
@@ -12458,7 +13096,7 @@ GLOBAL void set_html_frames_layout ( void )
 }       /* set_html_frames_layout */
 
 
-GLOBAL void set_html_counter_command ( void )
+GLOBAL void set_html_counter_command(void)
 {
         char k[512], *ptr;
 
@@ -12488,7 +13126,7 @@ GLOBAL void set_html_counter_command ( void )
 }       /* set_html_counter_command */
 
 
-GLOBAL void set_html_filename ( void )
+GLOBAL void set_html_filename(void)
 {
         char *ptr;
 
@@ -12508,13 +13146,13 @@ GLOBAL void set_html_filename ( void )
         strncat(ptr, tmp_name, MAX_FILENAME_LEN);
 
         /* New in r6pl16 [NHz] */
-        if(strcmp(tmp_suff, ""))
+        if (strcmp(tmp_suff, ""))
                 strncat(ptr, tmp_suff, 6);
 
 }       /* set_html_filename */
 
 
-GLOBAL void set_html_filename_prefix ( void )
+GLOBAL void set_html_filename_prefix(void)
 {
         if (desttype!=TOHTM && desttype!=TOHAH ) /* New TOHAH; V6.5.17 */
                 return;
@@ -12528,7 +13166,7 @@ GLOBAL void set_html_filename_prefix ( void )
 }       /* set_html_filename_prefix */
 
 
-GLOBAL void set_html_dirname ( void )
+GLOBAL void set_html_dirname(void)
 {
         char *ptr;
 
@@ -12554,7 +13192,7 @@ GLOBAL void set_html_dirname ( void )
 }       /* set_html_dirname */
 
 
-GLOBAL void set_html_switch_language ( void )
+GLOBAL void set_html_switch_language(void)
 {
         if (desttype!=TOHTM && desttype!=TOMHH && desttype!=TOHAH ) /* New TOHAH; V6.5.17 */
         {       return;
@@ -12583,7 +13221,7 @@ GLOBAL void set_html_switch_language ( void )
 }       /* set_html_switch_language */
 
 
-GLOBAL void set_html_color ( const int which )
+GLOBAL void set_html_color(const int which)
 {
         char color[256], *ptr;
         BOOLEAN ret;
@@ -12654,13 +13292,13 @@ GLOBAL void set_html_color ( const int which )
 ******************************************|************************************/
 
 /* New in v6.5.20 [GS] */
-GLOBAL void set_html_bgsound ( void )
+GLOBAL void set_html_bgsound(void)
 {
         char *ptr, *dest;
         char    filename[512];
         char loop [40], sTemp[1024];
 
-        if ( desttype!=TOHTM )
+        if (desttype!=TOHTM)
                 return;
 
         if (p1_toc_counter<0)   return;
@@ -12695,14 +13333,14 @@ GLOBAL void set_html_bgsound ( void )
 
         replace_char(filename, "\\", "/");
 
-        if ( loop[0] == EOS )
-                sprintf ( dest, "\"%s\" loop=\"infinitie\"", filename );
+        if (loop[0] == EOS)
+                sprintf(dest, "\"%s\" loop=\"infinitie\"", filename);
         else
-                sprintf ( dest, "\"%s\" loop=\"%s\"", filename, loop );
+                sprintf(dest, "\"%s\" loop=\"%s\"", filename, loop);
 }       /* set_html_bgsound */
 
 
-GLOBAL void set_html_backimage ( void )
+GLOBAL void set_html_backimage(void)
 {
         char *ptr, *dest;
         char sTemp[512];
@@ -12747,7 +13385,7 @@ GLOBAL void set_html_backimage ( void )
 
 
 /* New in r6pl15 [NHz] */
-GLOBAL void set_html_style ( void )
+GLOBAL void set_html_style(void)
 {
         STYLE *styleptr;
         char sTemp[512], *ptr;
@@ -12773,8 +13411,8 @@ GLOBAL void set_html_style ( void )
 
         /* Set style in project file (not yet) */
 
-/*      if(!isn)*/ /* Only labels which aren't nodes */
-/*              save_upr_entry_label (sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine );
+/*      if (!isn)*/ /* Only labels which aren't nodes */
+/*              save_upr_entry_label (sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine);
 */
 
         p1_style_counter++;
@@ -12786,7 +13424,7 @@ GLOBAL void set_html_style ( void )
 
         tokcpy2(sTemp, 512);
 
-        if(sTemp[0]=='\'')
+        if (sTemp[0]=='\'')
         {
                 lang = strcspn(sTemp+1, "'");
                 strncpy(styleptr->href, sTemp+1, lang);
@@ -12800,7 +13438,7 @@ GLOBAL void set_html_style ( void )
 
         for(i=1;i<p1_style_counter;i++)
         {
-                if(!strcmp(styleptr->href, style[i]->href))
+                if (!strcmp(styleptr->href, style[i]->href))
                 {
                         p1_style_counter--;
                         return;
@@ -12808,16 +13446,16 @@ GLOBAL void set_html_style ( void )
         }
 
         ptr = strstr(sTemp, "media=");
-        if(ptr != NULL)
+        if (ptr != NULL)
         {
                 lang = strcspn(ptr+6, " \0");
                 strncpy(styleptr->media, ptr+6, lang);
                 styleptr->media[lang] = EOS;
         }
         ptr = strstr(sTemp, "title=");
-        if(ptr != NULL)
+        if (ptr != NULL)
         {
-                if(strchr(ptr+6, '\''))
+                if (strchr(ptr+6, '\''))
                 {
                         lang = strcspn(ptr+7, "'");
                         strncpy(styleptr->title, ptr+7, lang);
@@ -12830,7 +13468,7 @@ GLOBAL void set_html_style ( void )
                 styleptr->title[lang] = EOS;
         }
         ptr = strstr(sTemp, "alternate");
-        if(ptr != NULL)
+        if (ptr != NULL)
                 styleptr->alternate = TRUE;
         else
                 styleptr->alternate = FALSE;
@@ -12842,7 +13480,7 @@ GLOBAL void set_html_style ( void )
 
 
 /* New in r6pl15 [NHz] */
-GLOBAL void set_html_script ( void )
+GLOBAL void set_html_script(void)
 {
         char *ptr, *dest;
         char sTemp[512];
@@ -12888,7 +13526,7 @@ GLOBAL void set_html_script ( void )
 
 
 /* New in r6pl15 [NHz] */
-GLOBAL void set_html_favicon ( void )
+GLOBAL void set_html_favicon(void)
 {
         char *ptr, *dest;
         char sTemp[512];
@@ -12932,7 +13570,7 @@ GLOBAL void set_html_favicon ( void )
 }       /* set_html_favicon */
 
 
-GLOBAL void set_html_keywords ( void )
+GLOBAL void set_html_keywords(void)
 {
 #define HTML_KW_SIZE    2048
         char k[HTML_KW_SIZE], *ptr, oldk[HTML_KW_SIZE], *oldptr; /* Buffer increased from 1kB to 2kB */
@@ -12982,7 +13620,7 @@ GLOBAL void set_html_keywords ( void )
 }       /* set_html_keyword */
 
 
-GLOBAL void set_html_description ( void )
+GLOBAL void set_html_description(void)
 {
         char d[1024], *ptr, oldd[1024], *oldptr;
         size_t newsize;
@@ -13031,7 +13669,7 @@ GLOBAL void set_html_description ( void )
 }       /* set_html_description */
 
 /* new since V6.5.17 */
-GLOBAL void set_html_robots ( void )
+GLOBAL void set_html_robots(void)
 {
         char d[1024], *ptr;
 
@@ -13046,14 +13684,14 @@ GLOBAL void set_html_robots ( void )
         auto_quote_chars(d, TRUE);
         replace_udo_quotes(d);
 
-        if ( strcmp ( d, "none") != 0 )
-        {       if ( strcmp ( d, "noindex") != 0 )
-                {       if ( strcmp ( d, "index") != 0 )
-                        {       if ( strcmp ( d, "nofollow") != 0 )
-                                {       if ( strcmp ( d, "follow") != 0 )
-                                        {       if ( strcmp ( d, "keywords") != 0 )     /* For HTML Apple Help */
-                                                {       if ( strcmp ( d, "segements") != 0 )    /* For HTML Apple Help */
-                                                        {       if ( strcmp ( d, "anchors") != 0 )      /* For HTML Apple Help */
+        if (strcmp(d, "none") != 0)
+        {       if (strcmp(d, "noindex") != 0)
+                {       if (strcmp(d, "index") != 0)
+                        {       if (strcmp(d, "nofollow") != 0)
+                                {       if (strcmp(d, "follow") != 0)
+                                        {       if (strcmp(d, "keywords") != 0 )     /* For HTML Apple Help */
+                                                {       if (strcmp(d, "segements") != 0 )    /* For HTML Apple Help */
+                                                        {       if (strcmp(d, "anchors") != 0 )      /* For HTML Apple Help */
                                                                 {       error_syntax_error();
                                                                         return;
                                                                 }
@@ -13078,7 +13716,7 @@ GLOBAL void set_html_robots ( void )
 
 }       /* set_html_robots */
 
-GLOBAL void set_html_special_color ( char *hc )
+GLOBAL void set_html_special_color(char *hc)
 {
         char color[256];
         BOOLEAN ret;
@@ -13113,7 +13751,7 @@ GLOBAL void set_html_special_color ( char *hc )
 }       /* set_html_special_color */
 
 
-GLOBAL void set_html_modern_width ( void )
+GLOBAL void set_html_modern_width(void)
 {
         int width;
 
@@ -13136,7 +13774,7 @@ GLOBAL void set_html_modern_width ( void )
 }       /* set_html_modern_width */
 
 
-GLOBAL void set_html_modern_alignment ( void )
+GLOBAL void set_html_modern_alignment(void)
 {
         char s[256];
 
@@ -13161,7 +13799,7 @@ GLOBAL void set_html_modern_alignment ( void )
 
 
 
-GLOBAL void set_html_modern_backimage ( void )
+GLOBAL void set_html_modern_backimage(void)
 {
         char *ptr;
         char sTemp[512];
@@ -13195,7 +13833,7 @@ GLOBAL void set_html_modern_backimage ( void )
 
 
 /* New in v6.5.16 [GS] */
-GLOBAL void set_html_frames_toc_title ( void )
+GLOBAL void set_html_frames_toc_title(void)
 {
         char d[1024], *ptr;
 
@@ -13206,8 +13844,8 @@ GLOBAL void set_html_frames_toc_title ( void )
         auto_quote_chars(d, TRUE);
         replace_udo_quotes(d);
 
-        if ( html_frames_toc_title !=NULL )
-                um_free ( html_frames_toc_title );
+        if (html_frames_toc_title !=NULL)
+                um_free(html_frames_toc_title);
 
         {       ptr= (char *) um_malloc(1+strlen(d)*sizeof(char));
 
@@ -13224,7 +13862,7 @@ GLOBAL void set_html_frames_toc_title ( void )
 }       /* set_html_frames_toc_title */
 
 /* New in 6.5.16 [GS] */
-GLOBAL void set_html_frames_con_title ( void )
+GLOBAL void set_html_frames_con_title(void)
 {
         char d[1024], *ptr;
 
@@ -13235,8 +13873,8 @@ GLOBAL void set_html_frames_con_title ( void )
         auto_quote_chars(d, TRUE);
         replace_udo_quotes(d);
 
-        if ( html_frames_con_title !=NULL )
-                um_free ( html_frames_con_title );
+        if (html_frames_con_title !=NULL)
+                um_free(html_frames_con_title);
 
         {       ptr= (char *) um_malloc(1+strlen(d)*sizeof(char));
 
@@ -13252,7 +13890,7 @@ GLOBAL void set_html_frames_con_title ( void )
 
 }       /* set_html_frames_con_title */
 
-GLOBAL void set_html_frames_width ( void )
+GLOBAL void set_html_frames_width(void)
 {
         int width;
 
@@ -13274,7 +13912,7 @@ GLOBAL void set_html_frames_width ( void )
 
 }       /* set_html_frames_width */
 
-GLOBAL void set_html_frames_height ( void )
+GLOBAL void set_html_frames_height(void)
 {
         int height;
 
@@ -13297,7 +13935,7 @@ GLOBAL void set_html_frames_height ( void )
 }       /* set_html_frames_height */
 
 
-GLOBAL void set_html_frames_position ( void )
+GLOBAL void set_html_frames_position(void)
 {
         if (p1_toc_counter<0)   return;
         if (toc[p1_toc_counter]==NULL)  return;
@@ -13326,7 +13964,7 @@ GLOBAL void set_html_frames_position ( void )
 }       /* set_html_frames_position */
 
 
-GLOBAL void set_html_frames_alignment ( void )
+GLOBAL void set_html_frames_alignment(void)
 {
         char s[256];
 
@@ -13350,7 +13988,7 @@ GLOBAL void set_html_frames_alignment ( void )
 }       /* set_html_frames_alignment */
 
 
-GLOBAL void set_html_frames_backimage ( void )
+GLOBAL void set_html_frames_backimage(void)
 {
         char *ptr;
         char sTemp[512];
@@ -13383,7 +14021,7 @@ GLOBAL void set_html_frames_backimage ( void )
 }       /* set_html_frames_backimage */
 
 
-GLOBAL void set_html_button_alignment ( void )
+GLOBAL void set_html_button_alignment(void)
 {
         char s[256];
 
@@ -13407,7 +14045,7 @@ GLOBAL void set_html_button_alignment ( void )
 }       /* set_html_button_alignment */
 
 
-GLOBAL void set_chapter_image ( void )
+GLOBAL void set_chapter_image(void)
 {
         char s[512], *ptr;
 
@@ -13453,7 +14091,7 @@ GLOBAL void set_chapter_image ( void )
 
 
 
-GLOBAL void set_chapter_icon ( void )
+GLOBAL void set_chapter_icon(void)
 {
         char s[512], *ptr;
 
@@ -13492,7 +14130,7 @@ GLOBAL void set_chapter_icon ( void )
                 path_adjust_separator(s);
                 if (!get_gif_size(s, &toc[p1_toc_counter]->uiIconWidth, &toc[p1_toc_counter]->uiIconHeight))
                 {
-                        error_read_gif(s);
+                        error_read_gif (s);
                 }
         }
 
@@ -13512,7 +14150,7 @@ GLOBAL void set_chapter_icon ( void )
 }       /* set_chapter_icon */
 
 
-GLOBAL void set_chapter_icon_active ( void )
+GLOBAL void set_chapter_icon_active(void)
 {
         char s[512], *ptr;
 
@@ -13556,7 +14194,7 @@ GLOBAL void set_chapter_icon_active ( void )
 }       /* set_chapter_icon_active */
 
 
-GLOBAL void set_chapter_icon_text ( void )
+GLOBAL void set_chapter_icon_text(void)
 {
         char s[512], *ptr;
 
@@ -13583,7 +14221,7 @@ GLOBAL void set_chapter_icon_text ( void )
 
 /* Das Inhaltsverzeichnis selber in toc[] einsetzen */  /* r5pl6 */
 /* Wird fuer Formate benoetigt, die toc[0] benutzen */
-LOCAL BOOLEAN add_toc_to_toc ( void )
+LOCAL BOOLEAN add_toc_to_toc(void)
 {
         TOCITEM *tocptr;
 
@@ -13619,7 +14257,7 @@ GLOBAL void toc_init_lang(void)
 }
 
 
-LOCAL TOCITEM *init_new_toc_entry ( const int toctype, const BOOLEAN invisible )
+LOCAL TOCITEM *init_new_toc_entry(const int toctype, const BOOLEAN invisible)
 {
         TOCITEM *tocptr;
 
@@ -13649,7 +14287,7 @@ LOCAL TOCITEM *init_new_toc_entry ( const int toctype, const BOOLEAN invisible )
 
         /* Set node in project file */
 
-        save_upr_entry_node (toctype, sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine );
+        save_upr_entry_node (toctype, sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine);
 #if 1
         c_styles(tocptr->name);
 
@@ -13674,7 +14312,7 @@ LOCAL TOCITEM *init_new_toc_entry ( const int toctype, const BOOLEAN invisible )
         }
 
         tocptr->toctype=                        toctype;
-        strcpy ( tocptr->source_filename, sCurrFileName);       /* V6.5.18 */
+        strcpy(tocptr->source_filename, sCurrFileName);       /* V6.5.18 */
         tocptr->source_line=            uiCurrFileLine;                 /* V6.5.18 */
         tocptr->converted=                      FALSE;
         tocptr->ignore_subtoc=          FALSE;
@@ -13736,7 +14374,7 @@ LOCAL TOCITEM *init_new_toc_entry ( const int toctype, const BOOLEAN invisible )
 
 
 /* Nicht LOCAL: wird von abo.c und udo.c benutzt! */
-GLOBAL BOOLEAN add_node_to_toc ( const BOOLEAN popup, const BOOLEAN invisible )
+GLOBAL BOOLEAN add_node_to_toc(const BOOLEAN popup, const BOOLEAN invisible)
 {
         TOCITEM *tocptr;
         int             li;
@@ -13903,7 +14541,7 @@ GLOBAL BOOLEAN add_node_to_toc ( const BOOLEAN popup, const BOOLEAN invisible )
 
 
 
-GLOBAL BOOLEAN add_subnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisible )
+GLOBAL BOOLEAN add_subnode_to_toc(const BOOLEAN popup, const BOOLEAN invisible)
 {
         TOCITEM *tocptr;
         int li;
@@ -14071,7 +14709,7 @@ GLOBAL BOOLEAN add_subnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisible
 
 
 
-GLOBAL BOOLEAN  add_subsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisible )
+GLOBAL BOOLEAN  add_subsubnode_to_toc(const BOOLEAN popup, const BOOLEAN invisible)
 {
         TOCITEM *tocptr;
         int li;
@@ -14225,7 +14863,7 @@ GLOBAL BOOLEAN  add_subsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN invis
 
 
 
-GLOBAL BOOLEAN  add_subsubsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisible )
+GLOBAL BOOLEAN  add_subsubsubnode_to_toc(const BOOLEAN popup, const BOOLEAN invisible)
 {
         TOCITEM *tocptr;
         int li;
@@ -14353,7 +14991,7 @@ GLOBAL BOOLEAN  add_subsubsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN in
 
 
 
-GLOBAL BOOLEAN  add_subsubsubsubnode_to_toc ( const BOOLEAN popup, const BOOLEAN invisible )
+GLOBAL BOOLEAN  add_subsubsubsubnode_to_toc(const BOOLEAN popup, const BOOLEAN invisible)
 {
         TOCITEM *tocptr;
         int li;
@@ -14538,7 +15176,7 @@ typedef struct _tWinMapData
 }       tWinMapData;
 
 
-LOCAL BOOLEAN save_the_alias ( const char *filename, const char *suffix, tWinMapData *data )
+LOCAL BOOLEAN save_the_alias(const char *filename, const char *suffix, tWinMapData *data)
 {
         register int i;
         int map;
@@ -14553,7 +15191,7 @@ LOCAL BOOLEAN save_the_alias ( const char *filename, const char *suffix, tWinMap
         {       return FALSE;
         }
 
-        if( file!=NULL )
+        if ( file!=NULL)
 
                 setvbuf(file, NULL, _IOFBF, 8192);
 
@@ -14603,7 +15241,7 @@ LOCAL BOOLEAN save_the_alias ( const char *filename, const char *suffix, tWinMap
                                                 toc[i]->filename,
                                                 outfile.suff,
                                                 toc[i]->name
-                                );
+                               );
                 }
         }
 
@@ -14612,7 +15250,7 @@ LOCAL BOOLEAN save_the_alias ( const char *filename, const char *suffix, tWinMap
         return TRUE;    
 }
 
-GLOBAL BOOLEAN save_htmlhelp_alias ( void )
+GLOBAL BOOLEAN save_htmlhelp_alias(void)
 {
         tWinMapData data;
         BOOLEAN flag;
@@ -14627,7 +15265,7 @@ GLOBAL BOOLEAN save_htmlhelp_alias ( void )
 }       /* save_htmlhelp_alias */
 
 
-LOCAL BOOLEAN save_the_map ( const char *filename, const char *suffix, tWinMapData *data )
+LOCAL BOOLEAN save_the_map(const char *filename, const char *suffix, tWinMapData *data)
 {
         register int i;
         int map;
@@ -14643,7 +15281,7 @@ LOCAL BOOLEAN save_the_map ( const char *filename, const char *suffix, tWinMapDa
         }
         /* v6.9.10 [me] Einen Puffer zur Beschleunigung zuordnen */
 
-        if( file!=NULL )
+        if ( file!=NULL)
 
                 setvbuf(file, NULL, _IOFBF, 8192);
 
@@ -14701,7 +15339,7 @@ LOCAL BOOLEAN save_the_map ( const char *filename, const char *suffix, tWinMapDa
                                 toc[i]->name,
                                 toc[i]->filename,
                                 outfile.suff
-                        );
+                       );
 
 /* old:
                         fprintf(file, "%s %-*s%s\t%s%04X%s\t%s %s %s\n",
@@ -14715,7 +15353,7 @@ LOCAL BOOLEAN save_the_map ( const char *filename, const char *suffix, tWinMapDa
                                                 data->remOn,
                                                 toc[i]->name,
                                                 data->remOff
-                                );
+                               );
 */
                 }
         }
@@ -14724,7 +15362,7 @@ LOCAL BOOLEAN save_the_map ( const char *filename, const char *suffix, tWinMapDa
 
         return TRUE;    
 }
-GLOBAL BOOLEAN save_htmlhelp_map ( void )
+GLOBAL BOOLEAN save_htmlhelp_map(void)
 {
         tWinMapData data;
         BOOLEAN flag;
@@ -14742,7 +15380,7 @@ GLOBAL BOOLEAN save_htmlhelp_map ( void )
 }       /* save_winhelp_map_c */
 
 
-GLOBAL BOOLEAN save_winhelp_map_c ( void )
+GLOBAL BOOLEAN save_winhelp_map_c(void)
 {
         tWinMapData data;
         BOOLEAN flag;
@@ -14760,7 +15398,7 @@ GLOBAL BOOLEAN save_winhelp_map_c ( void )
 }       /* save_winhelp_map_c */
 
 
-GLOBAL BOOLEAN save_winhelp_map_pas ( void )
+GLOBAL BOOLEAN save_winhelp_map_pas(void)
 {
         tWinMapData data;
         BOOLEAN flag;
@@ -14780,7 +15418,7 @@ GLOBAL BOOLEAN save_winhelp_map_pas ( void )
 }       /* save_winhelp_map_pas */
 
 
-GLOBAL BOOLEAN save_winhelp_map_vb ( void )
+GLOBAL BOOLEAN save_winhelp_map_vb(void)
 {
         tWinMapData data;
         BOOLEAN flag;
@@ -14800,7 +15438,7 @@ GLOBAL BOOLEAN save_winhelp_map_vb ( void )
 }       /* save_winhelp_map_vb */
 
 
-GLOBAL BOOLEAN save_winhelp_map_gfa ( void )
+GLOBAL BOOLEAN save_winhelp_map_gfa(void)
 {
         tWinMapData data;
         BOOLEAN flag;
@@ -14820,7 +15458,7 @@ GLOBAL BOOLEAN save_winhelp_map_gfa ( void )
 }       /* save_winhelp_map_gfa */
 
 
-GLOBAL BOOLEAN save_winhelp4_cnt ( void )
+GLOBAL BOOLEAN save_winhelp4_cnt(void)
 {
         FILE *cntfile;
 
@@ -14864,15 +15502,15 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
                         {
                                 convert_toc_item(toc[i]);
 
-                                if ( toc[i]->appendix )
+                                if (toc[i]->appendix)
                                 {
                                         apxstart= i;    /* fuer unten merken */
                                         break;                  /* r5pl6: Es kann nur einen Anhang geben */
                                 }
                                 else
-                                {       if ( toc[i]->n1 != 0 )
+                                {       if (toc[i]->n1 != 0)
                                         {
-                                                if ( toc[i]->toctype==TOC_NODE1 )
+                                                if (toc[i]->toctype==TOC_NODE1)
                                                 {       /* Ein Kapitel */       
 
                                                         li= toc[i]->labindex;
@@ -14901,7 +15539,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
                                                 }/* TOC_NODE1 */
 
 
-                                                if ( toc[i]->toctype==TOC_NODE2 )
+                                                if (toc[i]->toctype==TOC_NODE2)
                                                 {       /* Ein Abschnitt */
                                                         li= toc[i]->labindex;
                                                         node2NrWinhelp(sID, li);
@@ -14928,7 +15566,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
                                                         n4HadChildren= FALSE;
                                                 }/* TOC_NODE2 */
 
-                                                if ( toc[i]->toctype==TOC_NODE3 )
+                                                if (toc[i]->toctype==TOC_NODE3)
                                                 {       /* Ein Unterabschnitt */
                                                         li= toc[i]->labindex;
                                                         node2NrWinhelp(sID, li);
@@ -14955,7 +15593,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
                                                         n4HadChildren= FALSE;
                                                 }/* TOC_NODE3 */
 
-                                                if ( toc[i]->toctype==TOC_NODE4 )
+                                                if (toc[i]->toctype==TOC_NODE4)
                                                 {       /* Ein Paragraph */
                                                         li= toc[i]->labindex;
                                                         node2NrWinhelp(sID, li);
@@ -14982,7 +15620,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
                                                 }/* TOC_NODE4 */
 
 
-                                                if ( toc[i]->toctype==TOC_NODE5 )
+                                                if (toc[i]->toctype==TOC_NODE5)
                                                 {       /* Ein Paragraph */
                                                         li= toc[i]->labindex;
                                                         node2NrWinhelp(sID, li);
@@ -15026,11 +15664,11 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
                                 {
                                         convert_toc_item(toc[i]);
 
-                                        if ( toc[i]->appendix )
+                                        if (toc[i]->appendix)
                                         {
-                                                if ( toc[i]->n1 != 0 )
+                                                if (toc[i]->n1 != 0)
                                                 {
-                                                        if ( toc[i]->toctype==TOC_NODE1 )
+                                                        if (toc[i]->toctype==TOC_NODE1)
                                                         {       /* Ein Kapitel */       
 
                                                                 li= toc[i]->labindex;
@@ -15060,7 +15698,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
                                                         }/* TOC_NODE1 */
 
 
-                                                        if ( toc[i]->toctype==TOC_NODE2 )
+                                                        if (toc[i]->toctype==TOC_NODE2)
                                                         {       /* Ein Abschnitt */
                                                                 li= toc[i]->labindex;
                                                                 node2NrWinhelp(sID, li);
@@ -15088,7 +15726,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
 
                                                         }/* TOC_NODE2 */
 
-                                                        if ( toc[i]->toctype==TOC_NODE3 )
+                                                        if (toc[i]->toctype==TOC_NODE3)
                                                         {       /* Ein Unterabschnitt */
                                                                 li= toc[i]->labindex;
                                                                 node2NrWinhelp(sID, li);
@@ -15115,7 +15753,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
                                                                 n4HadChildren= FALSE;
                                                         }/* TOC_NODE3 */
 
-                                                        if ( toc[i]->toctype==TOC_NODE4 )
+                                                        if (toc[i]->toctype==TOC_NODE4)
                                                         {       /* Ein Paragraph */
                                                                 li= toc[i]->labindex;
                                                                 node2NrWinhelp(sID, li);
@@ -15142,7 +15780,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
                                                         }/* TOC_NODE4 */
 
 
-                                                        if ( toc[i]->toctype==TOC_NODE5 )
+                                                        if (toc[i]->toctype==TOC_NODE5)
                                                         {       /* Ein Paragraph */                             /* ToDo: ??? */
                                                                 li= toc[i]->labindex;
                                                                 node2NrWinhelp(sID, li);
@@ -15185,7 +15823,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt ( void )
         # bekannt ist, d.h. zwischen pass1() und pass2()
         #
         ############################################################    */
-LOCAL void init_toc_forms_numbers ( void )
+LOCAL void init_toc_forms_numbers(void)
 {
         switch (desttype)
         {
@@ -15426,7 +16064,7 @@ LOCAL void init_toc_forms_numbers ( void )
 }       /* init_toc_forms_numbers */
 
 
-LOCAL void init_toc_forms_no_numbers ( void )
+LOCAL void init_toc_forms_no_numbers(void)
 {
         char s[32];
 
@@ -15652,7 +16290,7 @@ LOCAL void init_toc_forms_no_numbers ( void )
 
 
 
-GLOBAL void init_module_toc_pass2 ( void )
+GLOBAL void init_module_toc_pass2(void)
 {
         char sF[128], sS[128];
 
@@ -15776,7 +16414,7 @@ GLOBAL void init_module_toc_pass2 ( void )
         # Modulcheck
         #
         ############################################################    */
-GLOBAL BOOLEAN check_module_toc_pass1 ( void )
+GLOBAL BOOLEAN check_module_toc_pass1(void)
 {
         int i, j;
         char s[512], sTyp[32], sNode[256];
@@ -15862,17 +16500,17 @@ GLOBAL BOOLEAN check_module_toc_pass1 ( void )
 
                                                 if (html_merge_node5)
                                                 {
-                                                        checkString= ( (toc[i]->n1 != toc[j]->n1) || (toc[i]->n2 != toc[j]->n2) || (toc[i]->n3 != toc[j]->n3) || (toc[i]->n4 != toc[j]->n4));
+                                                        checkString=((toc[i]->n1 != toc[j]->n1) || (toc[i]->n2 != toc[j]->n2) || (toc[i]->n3 != toc[j]->n3) || (toc[i]->n4 != toc[j]->n4));
                                                 }
 
                                                 if (html_merge_node4)
                                                 {
-                                                        checkString= ( (toc[i]->n1 != toc[j]->n1) || (toc[i]->n2 != toc[j]->n2) || (toc[i]->n3 != toc[j]->n3));
+                                                        checkString=((toc[i]->n1 != toc[j]->n1) || (toc[i]->n2 != toc[j]->n2) || (toc[i]->n3 != toc[j]->n3));
                                                 }
 
                                                 if (html_merge_node3)
                                                 {
-                                                        checkString= ( (toc[i]->n1 != toc[j]->n1) || (toc[i]->n2 != toc[j]->n2) );
+                                                        checkString=((toc[i]->n1 != toc[j]->n1) || (toc[i]->n2 != toc[j]->n2));
                                                 }
 
                                                 if (html_merge_node2)
@@ -15902,7 +16540,7 @@ GLOBAL BOOLEAN check_module_toc_pass1 ( void )
 }       /* check_module_toc_pass1 */
 
 
-GLOBAL BOOLEAN check_module_toc_pass2 ( void )
+GLOBAL BOOLEAN check_module_toc_pass2(void)
 {
         int i;
         char s[512];
@@ -15933,7 +16571,7 @@ GLOBAL BOOLEAN check_module_toc_pass2 ( void )
         # Modulinit
         #
         ############################################################    */
-GLOBAL void init_module_toc ( void )
+GLOBAL void init_module_toc(void)
 {
         register int i;
 
@@ -16119,7 +16757,7 @@ GLOBAL void init_module_toc ( void )
 /*
 v6.5.0 [vj] auskommentiert, um eine Compilerwarnung zu entfernen
 Diese Methode wird im Moment nicht mehr benötigt (siehe exit_module_toc)
-LOCAL void free_toc_data ( char **var )
+LOCAL void free_toc_data(char **var)
 {
         if (*var!=NULL)
         {       um_free(*var);
@@ -16128,7 +16766,7 @@ LOCAL void free_toc_data ( char **var )
 }
 */
 
-GLOBAL void exit_module_toc ( void )
+GLOBAL void exit_module_toc(void)
 {
         /*
         r6.3.19[vj]: Der folgende Code wurde auskommentiert, um zu überprüfen,
@@ -16143,17 +16781,17 @@ GLOBAL void exit_module_toc ( void )
         {
                 if (toc[i]!=NULL)
                 {
-                        free_toc_data( &(toc[i]->counter_command) );
-                        free_toc_data( &(toc[i]->keywords) );
-                        free_toc_data( &(toc[i]->description) );
-                        free_toc_data( &(toc[i]->robots) );
-                        free_toc_data( &(toc[i]->helpid) );
-                        free_toc_data( &(toc[i]->image) );
-                        free_toc_data( &(toc[i]->icon) );
-                        free_toc_data( &(toc[i]->icon_active) );
-                        free_toc_data( &(toc[i]->icon_text) );
-                        free_toc_data( &(toc[i]->raw_header_filename) );
-                        free_toc_data( &(toc[i]->raw_footer_filename) );
+                        free_toc_data( &(toc[i]->counter_command));
+                        free_toc_data( &(toc[i]->keywords));
+                        free_toc_data( &(toc[i]->description));
+                        free_toc_data( &(toc[i]->robots));
+                        free_toc_data( &(toc[i]->helpid));
+                        free_toc_data( &(toc[i]->image));
+                        free_toc_data( &(toc[i]->icon));
+                        free_toc_data( &(toc[i]->icon_active));
+                        free_toc_data( &(toc[i]->icon_text));
+                        free_toc_data( &(toc[i]->raw_header_filename));
+                        free_toc_data( &(toc[i]->raw_footer_filename));
                         um_free(toc[i]);
                         toc[i]= NULL;
                 }
