@@ -14041,6 +14041,27 @@ GLOBAL void set_html_button_alignment(void)
 }       /* set_html_button_alignment */
 
 
+GLOBAL void set_html_quotes(void)
+{
+   char   s[256];  /* buffer for parameter string */
+
+   
+   tokcpy2(s, 256);                       /* get command parameters */
+   
+   if (strstr(s, "classic") != NULL)
+   {
+      html_quotes = QUOTES_CLASSIC; /* ALIGN_CENT; */
+      return;
+   }
+   
+   if (strstr(s, "tags") != NULL)
+   {
+      html_quotes = QUOTES_TAGS;
+      return;
+   }
+}
+
+
 GLOBAL void set_chapter_image(void)
 {
         char s[512], *ptr;

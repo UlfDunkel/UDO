@@ -39,6 +39,8 @@
 *    fd  Nov 14: TOPOL introduced
 *  2009:
 *    fd  Jun 08: reformattings, TAB -> '   '
+*  2010:
+*    fd  Jan 20: new: QUOTES_...
 *
 ******************************************|************************************/
 
@@ -159,6 +161,9 @@
 #define ALIGN_CENT            0           /* alignment-Befehle */
 #define ALIGN_LEFT            1
 #define ALIGN_RIGH            2
+
+#define QUOTES_CLASSIC        0           /* use "&quot;" for HTML quotes */
+#define QUOTES_TAGS           1           /* use "<q>" + "</q>" for HTML quotes */
 
 #define POS_LEFT              0           /* Frames-Positionen */
 #define POS_RIGHT             1

@@ -215,9 +215,8 @@ LOCAL void specials2win ( char *s );
 LOCAL void specials2rtf ( char *s );
 LOCAL void texvar2ascii ( char *s );
 
-LOCAL void c_quotes_apostrophes ( char *s,
-                const char *aon, const char *aoff,
-                const char *qon, const char *qoff );
+   /* replace single or double quotation marks from UDO format to system characters */
+LOCAL void c_quotes_apostrophes(char *s, const char *aon, const char *aoff, const char *qon, const char *qoff );
 
 LOCAL void str2manbold( char *d, const char *s );
 LOCAL void str2manunder( char *d, const char *s );
@@ -2109,371 +2108,453 @@ GLOBAL void c_rtf_quotes ( char *s )
 
 
 
-/*      ------------------------------------------------------------
-        c_quotes_apostrophes()
-        Ersetzen doppelter Anfuehrungszeichen und Apostrophe durch
-        die jeweiligen Systemzeichen.
-        ->      aon:    Oeffnendes Apostroph
-                aoff:   Schliessendes Apostroph
-                qon:    Oeffnendes Anfuehrungszeichen
-                qoff:   Schliessendes Anfuehrungszeichen
-        ------------------------------------------------------------    */
-LOCAL void c_quotes_apostrophes ( char *s,
-                const char *aon, const char *aoff,
-                const char *qon, const char *qoff )
+
+/*******************************************************************************
+*
+*  c_quotes_apostrophes():
+*     replace single or double quotation marks from UDO format to system characters
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void c_quotes_apostrophes(
+
+char        *s,     /* ^ string */
+const char  *aon,   /* ^ opening single quote */
+const char  *aoff,  /* ^ closing single quote */
+const char  *qon,   /* ^ opening double quote */
+const char  *qoff)  /* ^ closing single quote */
 {
-        while (strstr(s, "''")!=NULL)
-        {       (b1stApost) ? replace_once(s, "''", aon) : replace_once(s, "''", aoff);
-                b1stApost= !b1stApost;
-        }
+   while (strstr(s, "''") != NULL)
+   {
+      (b1stApost) ? replace_once(s, "''", aon) : replace_once(s, "''", aoff);
+      b1stApost = !b1stApost;
+   }
+   
+   while (strstr(s, "\"\"") != NULL)
+   {
+      (b1stQuote) ? replace_once(s, "\"\"", qon) : replace_once(s, "\"\"", qoff);
+      b1stQuote = !b1stQuote;
+   }
+}
 
-        while (strstr(s, "\"\"")!=NULL)
-        {       (b1stQuote) ? replace_once(s, "\"\"", qon) : replace_once(s, "\"\"", qoff);
-                b1stQuote= !b1stQuote;
-        }
-
-}       /* c_quotes_apostrophes */
 
 
 
 
-/*      ------------------------------------------------------------
-        c_vars()
-        Ersetzen von vordefinierten Platzhaltern und speziellen
-        Zeichenfolgen wie "", '', !.. oder (--)
-        <->     s:      String
-        ------------------------------------------------------------    */
-GLOBAL void c_vars ( char *s )
+/*******************************************************************************
+*
+*  c_vars():
+*     replace pre-defined placeholders and special strings, like:
+*     "", '', !.., or (--)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void c_vars(
+
+char *s)
 {
-        replace_all(s, "(!today)", lang.today);
-        replace_all(s, "(!short_today)", lang.short_today);
+   replace_all(s, "(!today)", lang.today);
+   replace_all(s, "(!short_today)", lang.short_today);
 
-        /* Anfuehrungszeichen und Apostrophe */
+   
+   /* === quotation marks === */
+   
+   qreplace_all(s, "(\"\")", 4, TEMPO_S,  TEMPO_S_LEN);
+   qreplace_all(s, "('')",   4, TEMPO_S2, TEMPO_S2_LEN);
+   
+   switch (desttype)
+   {
+   case TOTEX:
+   case TOPDL:
+      switch (destlang)
+      {
+      case TOGER:
+         c_quotes_apostrophes(s, "`", "'", "\"`", "\"'");
+         break;
+      default:
+         c_quotes_apostrophes(s, "`", "'", "``", "''");
+         break;
+      }
+      
+      qreplace_all(s, TEMPO_S,  TEMPO_S_LEN,  "\\symbol{34}\\symbol{34}", 22);
+      qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "\\symbol{39}\\symbol{39}", 22);
+      break;
+      
+   case TOLYX:
+      switch (destlang)
+      {
+      case TOGER:
+         c_quotes_apostrophes(s,
+            "'", "'",
+            "\\begin_inset"INDENT_S"Quotes"INDENT_S"gld\\end_inset"INDENT_S,
+            "\\begin_inset"INDENT_S"Quotes"INDENT_S"grd\\end_inset"INDENT_S);
+         break;                          
+      case TOFRA:
+         c_quotes_apostrophes(s,
+            "'", "'",
+            "\\begin_inset"INDENT_S"Quotes"INDENT_S"fld\\end_inset"INDENT_S,
+            "\\begin_inset"INDENT_S"Quotes"INDENT_S"frd\\end_inset"INDENT_S);
+         break;                          
+      default:
+         c_quotes_apostrophes(s,
+            "'", "'",
+            "\\begin_inset"INDENT_S"Quotes"INDENT_S"eld\\end_inset"INDENT_S,
+            "\\begin_inset"INDENT_S"Quotes"INDENT_S"erd\\end_inset"INDENT_S);
+         break;
+      }
+      
+      break;
+      
+   case TORTF:
+      if (no_quotes)
+      {
+         qreplace_all(s, "\"\"", 2, "\"", 1);
+         qreplace_all(s, "''",   2, "'",  1);
+      }
+      else
+      {                                   /* PL6 */
+         /* Ohne schliessende Leerzeichen, damit nicht Tokens daraus werden! */
+         /* Die Leerzeichen werden in c_rtf_quotes() hinzugefuegt!                       */
+         c_quotes_apostrophes(s, "\\lquote", "\\rquote", "\\ldblquote", "\\rdblquote");
+      }
+      
+      qreplace_all(s, TEMPO_S,  TEMPO_S_LEN,  "\"\"", 2);
+      qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''",   2);
+      break;
+      
+   case TOWIN:
+   case TOAQV:
+      if (no_quotes)
+      {
+         qreplace_all(s, "\"\"", 2, "\"", 1);
+         qreplace_all(s, "''", 2, "'", 1);
+      }
+      else
+      {
+         switch (destlang)
+         {
+         case TOGER:
+            c_quotes_apostrophes(s, "{\\'91}", "{\\'92}", "{\\'84}", "{\\'93}");
+            break;
+         default:
+            c_quotes_apostrophes(s, "\\'91", "\\'92", "\\'93", "\\'94");
+            break;
+         }
+      }
+      
+      qreplace_all(s, TEMPO_S,  TEMPO_S_LEN,  "\"\"", 2);
+      qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''",   2);
+      break;
+      
+   case TOLDS:     
+      c_quotes_apostrophes(s, "`", "'", "``", "''");
+      qreplace_all(s, TEMPO_S,  TEMPO_S_LEN,  "\"\"", 2);
+      qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''",   2);
+      break;
+      
+   case TOHPH:     
+      c_quotes_apostrophes(s, "`", "'", "<quote>", "<\\quote>");
+      qreplace_all(s, TEMPO_S,  TEMPO_S_LEN,  "\"\"", 2);
+      qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''",   2);
+      break;
+      
+   case TOHAH:                            /* V6.5.17 */
+   case TOHTM:                            /*r6pl5*/
+   case TOMHH:
+      switch (html_quotes)
+      {
+      case QUOTES_CLASSIC:
+         c_quotes_apostrophes(s, "`", "'", "&quot;", "&quot;");
+         break;
+      case QUOTES_TAGS:
+      default:
+         c_quotes_apostrophes(s, "<q>", "</q>", "<q>", "</q>");
+      }
+      
+      qreplace_all(s, TEMPO_S,  TEMPO_S_LEN,  "&quot;&quot;", 12);
+      qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''",            2);
+      break;
+      
+   case TOKPS:                            /* Changed in V6.5.6 [NHz] */
+      {       
+         switch (destlang)
+         {
+         case TOGER:                      /* according to table in ud2ps.h */
+            c_quotes_apostrophes(s, "\\220", "\\221", "\\226", "\\225");
+            break;
+         case TOFRA:                      /* according to table in ud2ps.h */
+            c_quotes_apostrophes(s, "\\222", "\\223", "\\253", "\\273");
+            break;
+         case TONOR:
+            c_quotes_apostrophes(s, "\\<", "\\>", "\\\\\\(", "\\\\\\)");
+            break;
+         default:
+            c_quotes_apostrophes(s, "'", "'", "\"", "\"");
+            break;
+         }
+      }
+      
+      qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "\"\"", 2);
+      qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
+      break;
+   
+   default:
+      c_quotes_apostrophes(s, "`", "'", "\"", "\"");
+      qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "\"\"", 2);
+      qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
+      break;
+   }
+   
+   
+   /* === Miscellaneous === */
 
-        qreplace_all(s, "(\"\")", 4, TEMPO_S, TEMPO_S_LEN);
-        qreplace_all(s, "('')", 4, TEMPO_S2, TEMPO_S2_LEN);
+   switch (desttype)
+   {
+   case TOTEX:
+   case TOPDL:
+      qreplace_all(s, "!..",           3, "\\ldots ",        7);
+      qreplace_all(s, "(---)",         5, "-{}-{}-",         7);
+      qreplace_all(s, "(--)",          4, "-{}-",            4);
+      qreplace_all(s, "(!grin)",       7, "\\verb/;-)/",    10);
+      qreplace_all(s, "(!laugh)",      8, "\\verb/:-)/",    10);
+      qreplace_all(s, "(!TeX)",        6, "\\TeX{}",         6);
+      qreplace_all(s, "(!LaTeX)",      8, "\\LaTeX{}",       8);
+      qreplace_all(s, "(!LaTeXe)",     9, "\\LaTeXe{}",      9);
+      qreplace_all(s, "(!copyright)", 12, "\\copyright{}",  12);
+      qreplace_all(s, "(!alpha)",      8, "$\\alpha$",       8);
+      qreplace_all(s, "(!beta)",       7, "$\\beta$",        7);
+      
+                                          /* New in V6.5.8 [NHz] */
+      qreplace_all(s, "(!euro)",       7, "\\euro",          5);
+      qreplace_all(s, "(!pound)",      8, "GBP",             3);
+      qreplace_all(s, "(!reg)",        6, "\\registered{}", 13);
+      qreplace_all(s, "(!tm)",         5, "\\trademark{}",  12);
+      qreplace_all(s, "(!deg)",        6, "$^{o}$",          6);
+      break;
+      
+   case TOLYX:
+      replace_all(s, "(!grin)", "\\family"INDENT_S"typewriter"INDENT_S";-)\\family"INDENT_S"default"INDENT_S);
+      replace_all(s, "(!laugh)", "\\family"INDENT_S"typewriter"INDENT_S":-)\\family"INDENT_S"default"INDENT_S);
 
-        switch(desttype)
-        {
-                case TOTEX:
-                case TOPDL:
-                        switch (destlang)
-                        {       case TOGER:     c_quotes_apostrophes(s, "`", "'", "\"`", "\"'");        break;
-                                default:        c_quotes_apostrophes(s, "`", "'", "``", "''");          break;
-                        }
-                        qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "\\symbol{34}\\symbol{34}", 22);
-                        qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "\\symbol{39}\\symbol{39}", 22);
-                        break;
-                case TOLYX:
-                        switch (destlang)
-                        {
-                                case TOGER:
-                                        c_quotes_apostrophes(s,
-                                                "'", "'",
-                                                "\\begin_inset"INDENT_S"Quotes"INDENT_S"gld\\end_inset"INDENT_S,
-                                                "\\begin_inset"INDENT_S"Quotes"INDENT_S"grd\\end_inset"INDENT_S);
-                                        break;                          
-                                case TOFRA:
-                                        c_quotes_apostrophes(s,
-                                                "'", "'",
-                                                "\\begin_inset"INDENT_S"Quotes"INDENT_S"fld\\end_inset"INDENT_S,
-                                                "\\begin_inset"INDENT_S"Quotes"INDENT_S"frd\\end_inset"INDENT_S);
-                                        break;                          
-                                default:
-                                        c_quotes_apostrophes(s,
-                                                "'", "'",
-                                                "\\begin_inset"INDENT_S"Quotes"INDENT_S"eld\\end_inset"INDENT_S,
-                                                "\\begin_inset"INDENT_S"Quotes"INDENT_S"erd\\end_inset"INDENT_S);
-                                        break;
-                        }
-                        break;
-                case TORTF:
-                        if (no_quotes)
-                        {
-                                qreplace_all(s, "\"\"", 2, "\"", 1);
-                                qreplace_all(s, "''", 2, "'", 1);
-                        }
-                        else
-                        {       /* PL6 */
-                                /* Ohne schliessende Leerzeichen, damit nicht Tokens daraus werden! */
-                                /* Die Leerzeichen werden in c_rtf_quotes() hinzugefuegt!                       */
-                                c_quotes_apostrophes(s, "\\lquote", "\\rquote", "\\ldblquote", "\\rdblquote");
-                        }
-                        qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "\"\"", 2);
-                        qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
-                        break;
-                case TOWIN:
-                case TOAQV:
-                        if (no_quotes)
-                        {
-                                qreplace_all(s, "\"\"", 2, "\"", 1);
-                                qreplace_all(s, "''", 2, "'", 1);
-                        }
-                        else
-                        {       switch (destlang)
-                                {       case TOGER:     c_quotes_apostrophes(s, "{\\'91}", "{\\'92}", "{\\'84}", "{\\'93}");    break;
-                                        default:        c_quotes_apostrophes(s, "\\'91", "\\'92", "\\'93", "\\'94");    break;
-                                }
-                        }
-                        qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "\"\"", 2);
-                        qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
-                        break;
-                case TOLDS:     
-                        c_quotes_apostrophes(s, "`", "'", "``", "''");
-                        qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "\"\"", 2);
-                        qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
-                        break;
-                case TOHPH:     
-                        c_quotes_apostrophes(s, "`", "'", "<quote>", "<\\quote>");
-                        qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "\"\"", 2);
-                        qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
-                        break;
-                case TOHAH:     /* V6.5.17 */
-                case TOHTM:     /*r6pl5*/
-                case TOMHH:
-                        c_quotes_apostrophes(s, "`", "'", "&quot;", "&quot;");
-                        qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "&quot;&quot;", 12);
-                        qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
-                        break;
-                /* Changed in V6.5.6 [NHz] */
-                case TOKPS:
-                        {       
-                                switch (destlang)
-                                {       case TOGER:     /* according to table in ud2ps.h */
-                                                                                        c_quotes_apostrophes(s, "\\220", "\\221", "\\226", "\\225");
-                                                                                        break;
-                                        case TOFRA:     /* according to table in ud2ps.h */
-                                                                                        c_quotes_apostrophes(s, "\\222", "\\223", "\\253", "\\273");
-                                                                                        break;
-                                        case TONOR:     c_quotes_apostrophes(s, "\\<", "\\>", "\\\\\\(", "\\\\\\)");
-                                                                                        break;
-                                        default:                c_quotes_apostrophes(s, "'", "'", "\"", "\"");
-                                                                                        break;
-                                }
-                        }
-                        qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "\"\"", 2);
-                        qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
-                        break;
-                default:
-                        c_quotes_apostrophes(s, "`", "'", "\"", "\"");
-                        qreplace_all(s, TEMPO_S, TEMPO_S_LEN, "\"\"", 2);
-                        qreplace_all(s, TEMPO_S2, TEMPO_S2_LEN, "''", 2);
-                        break;
-        }
+                                          /* New in V6.5.8 [NHz] */
+      qreplace_all(s, "(!euro)",  7, "EUR",   3);
+      qreplace_all(s, "(!pound)", 8, "GBP",   3);
+      qreplace_all(s, "(!reg)",   6, "(r)",   3);
+      qreplace_all(s, "(!tm)",    5, "(tm)",  4);
+      qreplace_all(s, "(!deg)",   6, " Grad", 5);
+      specials2ascii(s);
+      texvar2ascii(s);
+      break;
+      
+   case TOINF:
+      qreplace_all(s, "(!grin)",       7, "@code{;-)}",   10);
+      qreplace_all(s, "(!laugh)",      8, "@code{:-)}",   10);
+      qreplace_all(s, "(!TeX)",        6, "@TeX{}",        6);
+      qreplace_all(s, "(!copyright)", 12, "@copyright{}", 12);
+
+                                          /* New in V6.5.8 [NHz] */
+      qreplace_all(s, "(!euro)",       7, "EUR",   3);
+      qreplace_all(s, "(!pound)",      8, "GBP",   3);
+      qreplace_all(s, "(!reg)",        6, "(r)",   3);
+      qreplace_all(s, "(!tm)",         5, "(tm)",  4);
+      qreplace_all(s, "(!deg)",        6, " Grad", 5);
+      specials2info(s);
+      texvar2ascii(s);
+      break;
+      
+   case TOSTG:
+   case TOAMG:
+   case TOPCH:
+      qreplace_all(s, "(!copyright)", 12, COPY_S,  COPY_S_LEN);
+      qreplace_all(s, "(!grin)",       7, ";-)",   3);
+      qreplace_all(s, "(!laugh)",      8, ":-)",   3);
+      qreplace_all(s, "(!alpha)",      8, ALPHA_S, ALPHA_S_LEN);
+      qreplace_all(s, "(!beta)",       7, BETA_S,  BETA_S_LEN);
+
+                                          /* New in V6.5.8 [NHz] */
+      qreplace_all(s, "(!euro)",       7, "EUR",   3);
+      qreplace_all(s, "(!pound)",      8, "GBP",   3);
+      qreplace_all(s, "(!reg)",        6, "(r)",   3);
+      qreplace_all(s, "(!tm)",         5, "(tm)",  4);
+      qreplace_all(s, "(!deg)",        6, " Grad", 5);
+      specials2ascii(s);
+      texvar2ascii(s);
+      break;
+      
+   case TOKPS:
+      qreplace_all(s, "(!copyright)", 12, COPY_S,  COPY_S_LEN);
+      qreplace_all(s, "(!grin)",       7, ";-\\)", 4); /* New in r6pl15 [NHz] */
+      qreplace_all(s, "(!laugh)",      8, ":-\\)", 4);
+      qreplace_all(s, "(!alpha)",      8, ALPHA_S, ALPHA_S_LEN);
+      qreplace_all(s, "(!beta)",       7, BETA_S,  BETA_S_LEN);
+
+                                          /* New in V6.5.8 [NHz] */
+      qreplace_all(s, "(!euro)",       7, "\\200", 4);
+      qreplace_all(s, "(!pound)",      8, "\\243", 4);
+      qreplace_all(s, "(!reg)",        6, "\\256", 3);
+      qreplace_all(s, "(!tm)",         5, "\\215", 4);
+      qreplace_all(s, "(!deg)",        6, "\\201", 4);
+
+/*    For future use, but commented because of some problems */
+/*    qreplace_all(s, "\\(--\\)", 6, "--", 2);
+*/
+                                          /* Changed in V6.5.5 [NHz] */
+      specials2ps(s);
+/*    specials2ascii(s);
+*/
+      texvar2ascii(s);
+      break;
+      
+   case TOASC:
+   case TODRC:
+   case TOMAN:
+   case TONRO:
+   case TOTVH:                            /* PL10 */
+   case TOSRC:                            /* PL16 */
+   case TOSRP:
+      qreplace_all(s, "(!grin)",  7, ";-)",   3);
+      qreplace_all(s, "(!laugh)", 8, ":-)",   3);
+      qreplace_all(s, "(!alpha)", 8, ALPHA_S, ALPHA_S_LEN);
+      qreplace_all(s, "(!beta)",  7, BETA_S,  BETA_S_LEN);
+
+                                          /* New in V6.5.8 [NHz] */
+      qreplace_all(s, "(!euro)",  7, "EUR",   3);
+      qreplace_all(s, "(!pound)", 8, "GBP",   3);
+      qreplace_all(s, "(!reg)",   6, "(r)",   3);
+      qreplace_all(s, "(!tm)",    5, "(tm)",  4);
+      qreplace_all(s, "(!deg)",   6, " Grad", 5);
+      specials2ascii(s);
+      texvar2ascii(s);
+      break;
+      
+   case TOIPF:
+      qreplace_all(s, "(!grin)",  7, ";-)",       3);
+      qreplace_all(s, "(!laugh)", 8, "&colon.-)", 9);
+      qreplace_all(s, "(!alpha)", 8, ALPHA_S,     ALPHA_S_LEN);
+      qreplace_all(s, "(!beta)",  7, BETA_S,      BETA_S_LEN);
+
+                                          /* New in V6.5.8 [NHz] */
+      qreplace_all(s, "(!euro)",  7, "EUR",       3);
+      qreplace_all(s, "(!pound)", 8, "GBP",       3);
+      qreplace_all(s, "(!reg)",   6, "(r)",       3);
+      qreplace_all(s, "(!tm)",    5, "(tm)",      4);
+      qreplace_all(s, "(!deg)",   6, " Grad",     5);
+      specials2ipf(s);
+      texvar2ascii(s);
+      break;
+      
+   case TORTF:
+      qreplace_all(s, "(!grin)",       7, "{\\f1 ;-)}", 9);
+      qreplace_all(s, "(!laugh)",      8, "{\\f1 :-)}", 9);
+      qreplace_all(s, "(!alpha)",      8, "alpha",      5);
+      qreplace_all(s, "(!beta)",       7, "beta",       4);
+      qreplace_all(s, "(!copyright)", 12, "\\'A9",      4);
+
+                                          /* New in V6.5.8 [NHz] */
+      qreplace_all(s, "(!euro)",       7, "\\'80",      4);
+      qreplace_all(s, "(!pound)",      8, "\\'A3",      4);
+      qreplace_all(s, "(!reg)",        6, "\\'AE",      4);
+      qreplace_all(s, "(!tm)",         5, "\\'99",      4);
+      qreplace_all(s, "(!deg)",        6, "\\'B0",      4);
+      specials2rtf(s);
+      texvar2ascii(s);
+      break;
+      
+   case TOWIN:
+   case TOAQV:
+      qreplace_all(s, "(!grin)",       7, "{\\f1 ;-)}", 9);
+      qreplace_all(s, "(!laugh)",      8, "{\\f1 :-)}", 9);
+      qreplace_all(s, "(!alpha)",      8, "{\\f2 a}",   7);
+      qreplace_all(s, "(!beta)",       7, "{\\f2 b}",   7);
+      qreplace_all(s, "(!copyright)", 12, "\\'A9",      4);
+
+                                          /* New in V6.5.8 [NHz] */
+      qreplace_all(s, "(!euro)",       7, "EUR",        3);
+      qreplace_all(s, "(!pound)",      8, "GBP",        3);
+      qreplace_all(s, "(!reg)",        6, "\\'AE",      4);
+      qreplace_all(s, "(!tm)",         5, "(tm)",       4);
+      qreplace_all(s, "(!deg)",        6, "\\'B0",      4);
+      specials2win(s);
+      texvar2ascii(s);
+      break;
+      
+   case TOWH4:
+      qreplace_all(s, "(!grin)",       7, "{\\f1 ;-)}", 9);
+      qreplace_all(s, "(!laugh)",      8, "{\\f1 :-)}", 9);
+      qreplace_all(s, "(!alpha)",      8, "{\\f2 a}",   7);
+      qreplace_all(s, "(!beta)",       7, "{\\f2 b}",   7);
+      qreplace_all(s, "(!copyright)", 12, "\\'A9",      4);
+
+                                          /* New in V6.5.8 [NHz] */
+      qreplace_all(s, "(!euro)",       7, "\\'80",      4);
+      qreplace_all(s, "(!pound)",      8, "\\'A3",      4);
+      qreplace_all(s, "(!reg)",        6, "\\'AE",      4);
+      qreplace_all(s, "(!tm)",         5, "(tm)",       4);
+      qreplace_all(s, "(!deg)",        6, "\\'B0",      4);
+      specials2ascii(s);
+      texvar2ascii(s);
+      break;
+      
+   case TOHAH:                            /* V6.5.17 */
+   case TOHTM:
+   case TOMHH:
+      qreplace_all(s, "(!grin)",       7, "<TT>;-)</TT>", 12);
+      qreplace_all(s, "(!laugh)",      8, "<TT>:-)</TT>", 12);
+      qreplace_all(s, "(!copyright)", 12, "&copy;",        6);
+
+                                          /* New in V6.5.8 [NHz] */
+      qreplace_all(s, "(!euro)",       7, "&euro;",        6);
+      qreplace_all(s, "(!pound)",      8, "&pound;",       7);
+      qreplace_all(s, "(!reg)",        6, "&reg;",         5);
+      qreplace_all(s, "(!tm)",         5, "&trade;",       7);
+      qreplace_all(s, "(!deg)",        6, "&deg;",         5);
+      
+                                          /* Changed in r6pl15 [NHz] */
+      specials2html(s);
+      
+/*    specials2ascii(s);
+*/
+      texvar2ascii(s);
+      break;
+      
+   case TOLDS:
+      qreplace_all(s, "(!grin)",  7, "<tt/;-)/", 8);
+      qreplace_all(s, "(!laugh)", 8, "<tt/:-)/", 8);
+
+                                          /* New in V6.5.8 [NHz] */
+      qreplace_all(s, "(!euro)",  7, "EUR",      3);
+      qreplace_all(s, "(!pound)", 8, "GBP",      3);
+      qreplace_all(s, "(!reg)",   6, "(r)",      3);
+      qreplace_all(s, "(!tm)",    5, "(tm)",     4);
+      qreplace_all(s, "(!deg)",   6, " Grad",    5);
+      specials2ascii(s);
+      texvar2ascii(s);
+      break;
+      
+   case TOHPH:
+      qreplace_all(s, "(!grin)",  7, "<ex>;-)<\\ex>", 12);
+      qreplace_all(s, "(!laugh)", 8, "<ex>:-)<\\ex>", 12);
+
+                                          /* New in V6.5.8 [NHz] */
+      qreplace_all(s, "(!euro)",  7, "EUR",            3);
+      qreplace_all(s, "(!pound)", 8, "GBP",            3);
+      qreplace_all(s, "(!reg)",   6, "(r)",            3);
+      qreplace_all(s, "(!tm)",    5, "(tm)",           4);
+      qreplace_all(s, "(!deg)",   6, " Grad",          5);
+      specials2ascii(s);
+      texvar2ascii(s);
+      break;
+   }
+}
 
 
-        /* Sonstiges */
-        switch(desttype)
-        {
-                case TOTEX:
-                case TOPDL:
-                        qreplace_all(s, "!..", 3, "\\ldots ", 7);
-                        qreplace_all(s, "(---)", 5, "-{}-{}-", 7);
-                        qreplace_all(s, "(--)", 4, "-{}-", 4);
-                        qreplace_all(s, "(!grin)", 7, "\\verb/;-)/", 10);
-                        qreplace_all(s, "(!laugh)", 8, "\\verb/:-)/", 10);
-                        qreplace_all(s, "(!TeX)", 6, "\\TeX{}", 6);
-                        qreplace_all(s, "(!LaTeX)", 8, "\\LaTeX{}", 8);
-                        qreplace_all(s, "(!LaTeXe)", 9, "\\LaTeXe{}", 9);
-                        qreplace_all(s, "(!copyright)", 12, "\\copyright{}", 12);
-                        qreplace_all(s, "(!alpha)", 8, "$\\alpha$", 8);
-                        qreplace_all(s, "(!beta)", 7, "$\\beta$", 7);
-                        /* New in V6.5.8 [NHz] */
-                        qreplace_all(s, "(!euro)", 7, "\\euro", 5);
-                        qreplace_all(s, "(!pound)", 8, "GBP", 3);
-                        qreplace_all(s, "(!reg)", 6, "\\registered{}", 13);
-                        qreplace_all(s, "(!tm)", 5, "\\trademark{}", 12);
-                        qreplace_all(s, "(!deg)", 6, "$^{o}$", 6);
-                        break;
-                case TOLYX:
-                        replace_all(s, "(!grin)", "\\family"INDENT_S"typewriter"INDENT_S";-)\\family"INDENT_S"default"INDENT_S);
-                        replace_all(s, "(!laugh)", "\\family"INDENT_S"typewriter"INDENT_S":-)\\family"INDENT_S"default"INDENT_S);
-                        /* New in V6.5.8 [NHz] */
-                        qreplace_all(s, "(!euro)", 7, "EUR", 3);
-                        qreplace_all(s, "(!pound)", 8, "GBP", 3);
-                        qreplace_all(s, "(!reg)", 6, "(r)", 3);
-                        qreplace_all(s, "(!tm)", 5, "(tm)", 4);
-                        qreplace_all(s, "(!deg)", 6, " Grad", 5);
-                        specials2ascii(s);
-                        texvar2ascii(s);
-                        break;
-                case TOINF:
-                        qreplace_all(s, "(!grin)", 7, "@code{;-)}", 10);
-                        qreplace_all(s, "(!laugh)", 8, "@code{:-)}", 10);
-                        qreplace_all(s, "(!TeX)", 6, "@TeX{}", 6);
-                        qreplace_all(s, "(!copyright)", 12, "@copyright{}", 12);
-                        /* New in V6.5.8 [NHz] */
-                        qreplace_all(s, "(!euro)", 7, "EUR", 3);
-                        qreplace_all(s, "(!pound)", 8, "GBP", 3);
-                        qreplace_all(s, "(!reg)", 6, "(r)", 3);
-                        qreplace_all(s, "(!tm)", 5, "(tm)", 4);
-                        qreplace_all(s, "(!deg)", 6, " Grad", 5);
-                        specials2info(s);
-                        texvar2ascii(s);
-                        break;
-                case TOSTG:
-                case TOAMG:
-                case TOPCH:
-                        qreplace_all(s, "(!copyright)", 12, COPY_S, COPY_S_LEN);
-                        qreplace_all(s, "(!grin)", 7, ";-)", 3);
-                        qreplace_all(s, "(!laugh)", 8, ":-)", 3);
-                        qreplace_all(s, "(!alpha)", 8, ALPHA_S, ALPHA_S_LEN);
-                        qreplace_all(s, "(!beta)", 7, BETA_S, BETA_S_LEN);
-                        /* New in V6.5.8 [NHz] */
-                        qreplace_all(s, "(!euro)", 7, "EUR", 3);
-                        qreplace_all(s, "(!pound)", 8, "GBP", 3);
-                        qreplace_all(s, "(!reg)", 6, "(r)", 3);
-                        qreplace_all(s, "(!tm)", 5, "(tm)", 4);
-                        qreplace_all(s, "(!deg)", 6, " Grad", 5);
-                        specials2ascii(s);
-                        texvar2ascii(s);
-                        break;
-                case TOKPS:
-                        qreplace_all(s, "(!copyright)", 12, COPY_S, COPY_S_LEN);
-                        qreplace_all(s, "(!grin)", 7, ";-\\)", 4); /* New in r6pl15 [NHz] */
-                        qreplace_all(s, "(!laugh)", 8, ":-\\)", 4);
-                        qreplace_all(s, "(!alpha)", 8, ALPHA_S, ALPHA_S_LEN);
-                        qreplace_all(s, "(!beta)", 7, BETA_S, BETA_S_LEN);
-                        /* New in V6.5.8 [NHz] */
-                        qreplace_all(s, "(!euro)", 7, "\\200", 4);
-                        qreplace_all(s, "(!pound)", 8, "\\243", 4);
-                        qreplace_all(s, "(!reg)", 6, "\\256", 3);
-                        qreplace_all(s, "(!tm)", 5, "\\215", 4);
-                        qreplace_all(s, "(!deg)", 6, "\\201", 4);
-/*                      qreplace_all(s, "\\(--\\)", 6, "--", 2);*/
-                        /* For future use, but commented because of some problems */
 
-                        /* Changed in V6.5.5 [NHz] */
-                        specials2ps(s);
-                        /*specials2ascii(s);*/
-                        texvar2ascii(s);
-                        break;
-                case TOASC:
-                case TODRC:
-                case TOMAN:
-                case TONRO:
-                case TOTVH:     /* PL10 */
-                case TOSRC:     /* PL16 */
-                case TOSRP:
-                        qreplace_all(s, "(!grin)", 7, ";-)", 3);
-                        qreplace_all(s, "(!laugh)", 8, ":-)", 3);
-                        qreplace_all(s, "(!alpha)", 8, ALPHA_S, ALPHA_S_LEN);
-                        qreplace_all(s, "(!beta)", 7, BETA_S, BETA_S_LEN);
-                        /* New in V6.5.8 [NHz] */
-                        qreplace_all(s, "(!euro)", 7, "EUR", 3);
-                        qreplace_all(s, "(!pound)", 8, "GBP", 3);
-                        qreplace_all(s, "(!reg)", 6, "(r)", 3);
-                        qreplace_all(s, "(!tm)", 5, "(tm)", 4);
-                        qreplace_all(s, "(!deg)", 6, " Grad", 5);
-                        specials2ascii(s);
-                        texvar2ascii(s);
-                        break;
-                case TOIPF:
-                        qreplace_all(s, "(!grin)", 7, ";-)", 3);
-                        qreplace_all(s, "(!laugh)", 8, "&colon.-)", 9);
-                        qreplace_all(s, "(!alpha)", 8, ALPHA_S, ALPHA_S_LEN);
-                        qreplace_all(s, "(!beta)", 7, BETA_S, BETA_S_LEN);
-                        /* New in V6.5.8 [NHz] */
-                        qreplace_all(s, "(!euro)", 7, "EUR", 3);
-                        qreplace_all(s, "(!pound)", 8, "GBP", 3);
-                        qreplace_all(s, "(!reg)", 6, "(r)", 3);
-                        qreplace_all(s, "(!tm)", 5, "(tm)", 4);
-                        qreplace_all(s, "(!deg)", 6, " Grad", 5);
-                        specials2ipf(s);
-                        texvar2ascii(s);
-                        break;
-                case TORTF:
-                        qreplace_all(s, "(!grin)", 7, "{\\f1 ;-)}", 9);
-                        qreplace_all(s, "(!laugh)", 8, "{\\f1 :-)}", 9);
-                        qreplace_all(s, "(!alpha)", 8, "alpha", 5);
-                        qreplace_all(s, "(!beta)", 7, "beta", 4);
-                        qreplace_all(s, "(!copyright)", 12, "\\'A9", 4);
-                        /* New in V6.5.8 [NHz] */
-                        qreplace_all(s, "(!euro)", 7, "\\'80", 4);
-                        qreplace_all(s, "(!pound)", 8, "\\'A3", 4);
-                        qreplace_all(s, "(!reg)", 6, "\\'AE", 4);
-                        qreplace_all(s, "(!tm)", 5, "\\'99", 4);
-                        qreplace_all(s, "(!deg)", 6, "\\'B0", 4);
-                        specials2rtf(s);
-                        texvar2ascii(s);
-                        break;
-                case TOWIN:
-                case TOAQV:
-                        qreplace_all(s, "(!grin)", 7, "{\\f1 ;-)}", 9);
-                        qreplace_all(s, "(!laugh)", 8, "{\\f1 :-)}", 9);
-                        qreplace_all(s, "(!alpha)", 8, "{\\f2 a}", 7);
-                        qreplace_all(s, "(!beta)", 7, "{\\f2 b}", 7);
-                        qreplace_all(s, "(!copyright)", 12, "\\'A9", 4);
-                        /* New in V6.5.8 [NHz] */
-                        qreplace_all(s, "(!euro)", 7, "EUR", 3);
-                        qreplace_all(s, "(!pound)", 8, "GBP", 3);
-                        qreplace_all(s, "(!reg)", 6, "\\'AE", 4);
-                        qreplace_all(s, "(!tm)", 5, "(tm)", 4);
-                        qreplace_all(s, "(!deg)", 6, "\\'B0", 4);
-                        specials2win(s);
-                        texvar2ascii(s);
-                        break;
-                case TOWH4:
-                        qreplace_all(s, "(!grin)", 7, "{\\f1 ;-)}", 9);
-                        qreplace_all(s, "(!laugh)", 8, "{\\f1 :-)}", 9);
-                        qreplace_all(s, "(!alpha)", 8, "{\\f2 a}", 7);
-                        qreplace_all(s, "(!beta)", 7, "{\\f2 b}", 7);
-                        qreplace_all(s, "(!copyright)", 12, "\\'A9", 4);
-                        /* New in V6.5.8 [NHz] */
-                        qreplace_all(s, "(!euro)", 7, "\\'80", 4);
-                        qreplace_all(s, "(!pound)", 8, "\\'A3", 4);
-                        qreplace_all(s, "(!reg)", 6, "\\'AE", 4);
-                        qreplace_all(s, "(!tm)", 5, "(tm)", 4);
-                        qreplace_all(s, "(!deg)", 6, "\\'B0", 4);
-                        specials2ascii(s);
-                        texvar2ascii(s);
-                        break;
-                case TOHAH:             /* V6.5.17 */
-                case TOHTM:
-                case TOMHH:
-                        qreplace_all(s, "(!grin)", 7, "<TT>;-)</TT>", 12);
-                        qreplace_all(s, "(!laugh)", 8, "<TT>:-)</TT>", 12);
-                        qreplace_all(s, "(!copyright)", 12, "&copy;", 6);
-                        /* New in V6.5.8 [NHz] */
-                        qreplace_all(s, "(!euro)", 7, "&euro;", 6);
-                        qreplace_all(s, "(!pound)", 8, "&pound;", 7);
-                        qreplace_all(s, "(!reg)", 6, "&reg;", 5);
-                        qreplace_all(s, "(!tm)", 5, "&trade;", 7);
-                        qreplace_all(s, "(!deg)", 6, "&deg;", 5);
-
-                        /* Changed in r6pl15 [NHz] */
-
-                        specials2html(s);
-
-/*                      specials2ascii(s); */
-                        texvar2ascii(s);
-                        break;
-                case TOLDS:
-                        qreplace_all(s, "(!grin)", 7, "<tt/;-)/", 8);
-                        qreplace_all(s, "(!laugh)", 8, "<tt/:-)/", 8);
-                        /* New in V6.5.8 [NHz] */
-                        qreplace_all(s, "(!euro)", 7, "EUR", 3);
-                        qreplace_all(s, "(!pound)", 8, "GBP", 3);
-                        qreplace_all(s, "(!reg)", 6, "(r)", 3);
-                        qreplace_all(s, "(!tm)", 5, "(tm)", 4);
-                        qreplace_all(s, "(!deg)", 6, " Grad", 5);
-                        specials2ascii(s);
-                        texvar2ascii(s);
-                        break;
-                case TOHPH:
-                        qreplace_all(s, "(!grin)", 7, "<ex>;-)<\\ex>", 12);
-                        qreplace_all(s, "(!laugh)", 8, "<ex>:-)<\\ex>", 12);
-                        /* New in V6.5.8 [NHz] */
-                        qreplace_all(s, "(!euro)", 7, "EUR", 3);
-                        qreplace_all(s, "(!pound)", 8, "GBP", 3);
-                        qreplace_all(s, "(!reg)", 6, "(r)", 3);
-                        qreplace_all(s, "(!tm)", 5, "(tm)", 4);
-                        qreplace_all(s, "(!deg)", 6, " Grad", 5);
-                        specials2ascii(s);
-                        texvar2ascii(s);
-                        break;
-        }
-}       /* c_vars */
 
 
 /*      ############################################################
