@@ -33,6 +33,8 @@
 #   fd  Jun 25: NDR: 'plazieren' -> 'platzieren'
 #   fd  Jun 25: 'die URL' -> 'der URL' (it refers to 'locator')
 #   fd  Dec 15: chapter html_navigation enhanced
+# 2010:
+#   fd  Jan 20: chapter html_quotes introduced
 #
 ################################################################################
 
@@ -2477,6 +2479,56 @@ Anzeige von Text in HTML-Dateien benutzt wird.
 !html_propfont_size -1
 !end_verbatim
 (!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [html_quotes])
+!html_name  cmd_html_quotes
+
+Ausgabe der An-/Abführungszeichen in HTML festlegen
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/html_quotes [(!NAME)](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando kann die Darstellung der An- und Abführungszeichen in HTML angepasst werden. Dabei sind für [(!NAME)] folgende Parameter möglich.
+
+!begin_description
+
+!item [tags]
+HTML-Anführungszeichen werden als (!code [<q>]) bzw. (!code [</q>]) ausgegeben. Es empfiehlt sich, in einer .CSS-Datei zu steuern, wie diese Quote-Tags je nach Sprache umgesetzt werden sollen.
+
+(!EXAMPLE)
+Hier sind CSS-Anweisungen für verschiedene An-/Abführungszeichen in verschiedenen Sprachen.
+!begin_verbatim
+:lang(cs) { quotes:"\00BB"      "\00AB"      "\203A"      "\2039";      }
+:lang(de) { quotes:"\00BB"      "\00AB"      "\203A"      "\2039";      }
+:lang(en) { quotes:"\201C"      "\201D"      "\2018"      "\2019";      }
+:lang(fr) { quotes:"\00AB\00A0" "\00A0\00BB" "\2039\00A0" "\00A0\203A"; }
+
+q:before   { content:open-quote;  color:#2E4793; }
+q:after    { content:close-quote; color:#2E4793; }
+q q:before { content:open-quote;  color:Green;   }
+q q:after  { content:close-quote; color:Green;   }
+!end_verbatim
+(!EXAMPLE_END)
+
+!item [classic]
+HTML-Anführungszeichen werden als (!code [&quot;]) ausgegeben.
+
+!end_description
+
+!item [(!EXISTSSINCE)] Release~6.5.20
+
+!item [(!SEEALSO)]
+(!KW [html_modern_layout])
+
+!end_xlist
 
 !end_node
 
