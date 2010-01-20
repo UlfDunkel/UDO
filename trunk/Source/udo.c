@@ -44,6 +44,8 @@
 *  2009:
 *    ggs Jan 11: Change year
 *    fd  Jun 08: TAB -> '   ', reformattings
+*  2010:
+*    fd  Jan 20: set_html_quotes()
 *
 ******************************************|************************************/
 
@@ -462,6 +464,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[]=
    { "!html_script_name",      "",         c_tunix,   TRUE,   CMD_ALWAYS   }, /* New in r6pl15 [NHz] */
    { "!html_favicon_name",      "",         c_tunix,   TRUE,   CMD_ALWAYS   }, /* New in r6pl15 [NHz] */
    { "!html_button_alignment",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
+   { "!html_quotes",               "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
    { "!html_switch_language",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
    { "!html_use_hyphenation",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   }, /* Fixed Bug #0000048 [NHz] */
    { "!html_transparent_buttons",   "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
@@ -8076,6 +8079,13 @@ LOCAL BOOLEAN pass1_check_preamble_commands ( void )
          {   set_html_button_alignment();
             return TRUE;
          }
+         
+         if (strcmp(token[0], "!html_quotes") == 0)
+         {
+            set_html_quotes();
+            return TRUE;
+         }
+         
          if ( strcmp(token[0], "!html_transparent_buttons")==0 )
          {   html_transparent_buttons= TRUE;
             return TRUE;
@@ -11498,7 +11508,8 @@ GLOBAL void init_vars ( void )
    sDocHtmlBackpage[0]=      EOS;
    sDocHtmlPropfontName[0]=   EOS;
    sDocHtmlPropfontSize[0]=   EOS;
-   html_button_alignment=      ALIGN_CENT;   /*r6pl6*/
+   html_button_alignment     = ALIGN_CENT;   /*r6pl6*/
+   html_quotes               = QUOTES_TAGS;
    html_use_folders=         FALSE;      /*r6pl6*/
    sDocHtmlSwitchLanguage[0]=   EOS;      /*r6pl12*/
    iDocHtmlSwitchLanguage=      -1;         /*r6pl12*/

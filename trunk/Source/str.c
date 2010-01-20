@@ -509,70 +509,94 @@ GLOBAL int qreplace_last ( char *source,
 
 
 
-/* ------------------------------------------------------------
-   qreplace_all() ersetzt in <s> alle <rep> durch <by>
-   ------------------------------------------------------------   */
-GLOBAL int qreplace_all (  char *source,
-                     const char *replace,
-                     const size_t rlen,
-                     const char *by,
-                     const size_t blen
-                  )
+
+
+/*******************************************************************************
+*
+*  qreplace_all():
+*     replace all <rep> by <by> in <s>
+*
+*  return:
+*     1 = replacement was successful
+*     0 = error
+*
+******************************************|************************************/
+
+GLOBAL int qreplace_all(
+
+char          *source,   /* */
+const char    *replace,  /* */
+const size_t   rlen,     /* */
+const char    *by,       /* */
+const size_t   blen)     /* */
 {
-   char  *found;
-   size_t   flen, i;
+   char       *found;    /* */
+   size_t      flen,     /* */
+               i;        /* */
 
 #if CHECK_REPLACE_LEN
-   if (rlen!=strlen(replace))
-   {  fprintf(stdout, "Fehler in qreplace_all:\n");
+   if (rlen != strlen(replace))
+   {
+      fprintf(stdout, "Fehler in qreplace_all:\n");
       fprintf(stdout, "rlen= %d\n", rlen);
       fprintf(stdout, "strlen(%s)= %d\n", replace, strlen(replace));
    }
-   if (blen!=strlen(by))
-   {  fprintf(stdout, "Fehler in qreplace_all:\n");
+   
+   if (blen != strlen(by))
+   {
+      fprintf(stdout, "Fehler in qreplace_all:\n");
       fprintf(stdout, "blen= %d\n", blen);
       fprintf(stdout, "strlen(%s)= %d\n", by, strlen(by));
    }
 #endif
    
-   if ( source[0]=='\0' )     return 0;
-   if ( replace[0]=='\0' )    return 0;
+   if (source[0]  == '\0')
+      return 0;
+      
+   if (replace[0] == '\0')
+      return 0;
 
-   if ( (found= strstr(source, replace))==NULL )   return 0;
+   if ( (found = strstr(source, replace)) == NULL)
+      return 0;
 
-   if (rlen==blen)
+   if (rlen == blen)
    {
-      while ( found!=NULL )
+      while (found != NULL)
       {
-         for (i=0; i<blen; i++)
-         {  found[i]= by[i];
+         for (i = 0; i < blen; i++)
+         {
+            found[i] = by[i];
          }
-         found= strstr(found+blen, replace);
+         
+         found = strstr(found + blen, replace);
       }
+      
       return 1;
    }
 
-   while ( found!=NULL )
-   {  flen= strlen(found);
+   while (found != NULL)
+   {
+      flen = strlen(found);
 
-      /* Zu Ersetzendes entfernen */
-      memmove(found, found+rlen, flen-rlen+1);
+                                          /* Zu Ersetzendes entfernen */
+      memmove(found, found + rlen, flen - rlen + 1);
    
-      /* Platz schaffen fuer neues und dorthin kopieren */
-      if ( by[0]!=EOS )
-      {  flen= strlen(found);
-         memmove(found+blen, found, flen+1);
+      if (by[0] != EOS)                   /* Platz schaffen fuer neues und dorthin kopieren */
+      {
+         flen = strlen(found);
+         memmove(found + blen, found, flen + 1);
          memcpy(found, by, blen);
-         found= strstr(found+blen, replace);
+         found = strstr(found + blen, replace);
       }
       else
-      {  found= strstr(found, replace);
+      {
+         found = strstr(found, replace);
       }
       
    }
 
    return 1;
-}  /* qreplace_all */
+}
 
 
 
