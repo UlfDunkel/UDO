@@ -5401,8 +5401,6 @@ GLOBAL BOOLEAN save_html_index(void)
       thisc_buf[1] = 0;                   /* close C string! */
       label2html(thisc_buf);
       
-      printf("LABEL:-->%s<\n",thisc_buf);
-      
       if (thisc != lastc)
       {
                                           /* set anchor entry for index A-Z list */
@@ -5441,8 +5439,6 @@ GLOBAL BOOLEAN save_html_index(void)
       strcpy(thisc_buf,&thisc);
       thisc_buf[1] = 0;                   /* close C string! */
       label2html(thisc_buf);
-      
-      printf("LABEL:-->%s<\n",thisc_buf);
       
       if (thisc != lastc)
       {
