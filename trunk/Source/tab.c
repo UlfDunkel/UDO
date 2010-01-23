@@ -41,6 +41,8 @@
 *    DH  Oct 02: last DH version
 *  2008:
 *    fd  Nov 28: MAX_CELLS_LEN increased from 1024 to 4096
+*  2010:
+*    fd  Jan 23: converted all German umlauts in comments into plain ASCII
 *
 ******************************************|************************************/
 
@@ -926,7 +928,7 @@ LOCAL void table_output_html ( void )
                         if(found != NULL)
                         {
                                 tokposition=strcspn(tab_cell[y][x], "!");
-                                um_strncpy(token_buffer, tab_cell[y][x], tokposition, MAX_TOKEN_LEN+1, "table_output_html[3]"); /* <???> Pufferüberlauf möglich? Wie groß kann hier token wirklich sein? */
+                                um_strncpy(token_buffer, tab_cell[y][x], tokposition, MAX_TOKEN_LEN+1, "table_output_html[3]"); /* <???> Pufferueberlauf moeglich? Wie gross kann hier token wirklich sein? */
                                 token_buffer[tokposition]=EOS;
 
                                 del_whitespaces (token_buffer); /* Delete Whitespaces before checking for additions */

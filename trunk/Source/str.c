@@ -1,28 +1,57 @@
-/* ############################################################
-   # @(#) str.c
-   # @(#)
-   # @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
-   # @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)
-   #
-   # This program is free software; you can redistribute it and/or
-   # modify it under the terms of the GNU General Public License
-   # as published by the Free Software Foundation; either version 2
-   # of the License, or (at your option) any later version.
-   # 
-   # This program is distributed in the hope that it will be useful,
-   # but WITHOUT ANY WARRANTY; without even the implied warranty of
-   # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   # GNU General Public License for more details.
-   # 
-   # You should have received a copy of the GNU General Public License
-   # along with this program; if not, write to the Free Software
-   # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-   ############################################################   */
+/*******************************************************************************
+*
+*  Project name : UDO
+*  Module name  : str.c
+*  Symbol prefix: str
+*
+*  Copyright    : 1995-2001 Dirk Hagedorn
+*  Open Source  : since 2001
+*
+*                 This program is free software; you can redistribute it and/or
+*                 modify it under the terms of the GNU General Public License
+*                 as published by the Free Software Foundation; either version 2
+*                 of the License, or (at your option) any later version.
+*                 
+*                 This program is distributed in the hope that it will be useful,
+*                 but WITHOUT ANY WARRANTY; without even the implied warranty of
+*                 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*                 GNU General Public License for more details.
+*                 
+*                 You should have received a copy of the GNU General Public License
+*                 along with this program; if not, write to the Free Software
+*                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*  Description  : ???
+*
+*-------------------------------------------------------------------------------
+*
+*  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
+*  Co-Authors   : Ulf Dunkel (fd)
+*  Write access : fd
+*
+*  Notes        : Please add yourself as co-author when you change this file.
+*
+*-------------------------------------------------------------------------------
+*  Things to do : -
+*
+*-------------------------------------------------------------------------------
+*  History:
+*
+*  2010:
+*    fd  Jan 23: converted all German umlauts in comments into plain ASCII
+*
+******************************************|************************************/
 
 #ifndef ID_STR_C
 #define  ID_STR_C
 const char *id_str_c= "@(#) str.c       10.03.1997";
 #endif
+
+/*******************************************************************************
+*
+*     INCLUDE FILES
+*
+******************************************|************************************/
 
 #include "import.h"
 #include <stdio.h>
@@ -40,7 +69,7 @@ const char *id_str_c= "@(#) str.c       10.03.1997";
 /*
    #################################################################
    #
-   # strcat und strcpy Wrapper, die Puffergrenzen checken k”nnen
+   # strcat und strcpy Wrapper, die Puffergrenzen checken koennen
    #
    #################################################################
 */
@@ -64,7 +93,7 @@ GLOBAL char *um_strcpy(char *dest, const char *src, size_t max, const char *plac
       return dest;
    }
 
-   slen=(size_t)strlen(src); /* Stringlänge bestimmen */
+   slen=(size_t)strlen(src); /* Stringlaenge bestimmen */
    if (((size_t)slen+1)<max) /* Testen obs  */
    {
       return strcpy(dest, src);
@@ -1126,7 +1155,7 @@ char  *string)  /* ^string to be edited */
 /*  ----------------------------------------------
     Die nationalen Sonderzeichen werden auf die entsprechenden Vokale umgemappt
     und somit direkt hinter sie sortiert.
-    Die Tabelle wandelt auch gleichzeitig nach Grožbuchstaben
+    Die Tabelle wandelt auch gleichzeitig nach Grossbuchstaben
     ----------------------------------------------  */
 
 static unsigned char sort_tab[] = 

@@ -42,7 +42,8 @@
 *    DH  Oct 02: last DH version
 *  2010:
 *    fd  Jan 20: new: html_quotes
-*    fd  Jan 23: file reformatted
+*    fd  Jan 23: - file reformatted
+*                - converted all German umlauts in comments into plain ASCII
 *
 ******************************************|************************************/
 
@@ -114,7 +115,7 @@ GLOBAL int         iDocLinedrawSize;      /* Fontgroesse fuer linedraw-Umgebung 
 
 GLOBAL char        sCurrFileName[512];    /* Gerade aktive Datei */
 GLOBAL UINT        uiCurrFileLine;        /* und die aktuelle Zeilen-Nr. */
-GLOBAL UINT        uiMultiLines;          /* Anzahl zusammengefügter Zeilen (0=nicht zusammengefügt, 1=eine Zeile angehängt) */
+GLOBAL UINT        uiMultiLines;          /* Anzahl zusammengefuegter Zeilen (0=nicht zusammengefuegt, 1=eine Zeile angehaengt) */
 
 GLOBAL BOOLEAN     b1stQuote;             /* flag for "real" double quotation marks */
 GLOBAL BOOLEAN     b1stApost;             /* flag for 'real' single quotation marks */

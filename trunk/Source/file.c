@@ -1,24 +1,53 @@
-/*	#################################################################
-	# @(#) file.c
-	# @(#)
-	# @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
-	# @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)
-	#
-	# This program is free software; you can redistribute it and/or
-	# modify it under the terms of the GNU General Public License
-	# as published by the Free Software Foundation; either version 2
-	# of the License, or (at your option) any later version.
-	# 
-	# This program is distributed in the hope that it will be useful,
-	# but WITHOUT ANY WARRANTY; without even the implied warranty of
-	# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	# GNU General Public License for more details.
-	# 
-	# You should have received a copy of the GNU General Public License
-	# along with this program; if not, write to the Free Software
-	# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-	#
-	#################################################################	*/
+/*******************************************************************************
+*
+*  Project name : UDO
+*  Module name  : file.c
+*  Symbol prefix: file
+*
+*  Copyright    : 1995-2001 Dirk Hagedorn
+*  Open Source  : since 2001
+*
+*                 This program is free software; you can redistribute it and/or
+*                 modify it under the terms of the GNU General Public License
+*                 as published by the Free Software Foundation; either version 2
+*                 of the License, or (at your option) any later version.
+*                 
+*                 This program is distributed in the hope that it will be useful,
+*                 but WITHOUT ANY WARRANTY; without even the implied warranty of
+*                 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*                 GNU General Public License for more details.
+*                 
+*                 You should have received a copy of the GNU General Public License
+*                 along with this program; if not, write to the Free Software
+*                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*  Description  : ???
+*
+*-------------------------------------------------------------------------------
+*
+*  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
+*  Co-Authors   : Ulf Dunkel (fd)
+*  Write access : fd
+*
+*  Notes        : Please add yourself as co-author when you change this file.
+*
+*-------------------------------------------------------------------------------
+*  Things to do : -
+*
+*-------------------------------------------------------------------------------
+*  History:
+*
+*  2010:
+*    fd  Jan 23: converted all German umlauts in comments into plain ASCII
+*
+******************************************|************************************/
+
+/*******************************************************************************
+*
+*     INCLUDE FILES
+*
+******************************************|************************************/
+
 #include	"import.h"
 #include	<stdio.h>	
 #include	<string.h>	
@@ -99,7 +128,7 @@ GLOBAL MYTEXTFILE *myTextOpen ( const char *filename )
 	/*             wenn diese gem. den Konventionen einer anderen   */
 	/*             Plattform codiert sind. Daher Ausweichen auf     */
 	/*             fread und selbst '\n' und '\r' erkennen. Dazu    */
-	/*             muž hier die Datei bin„r ge”ffnet werden!         */
+	/*             muss hier die Datei binaer geoeffnet werden!         */
   #ifndef __fast_file
 	tf->file= fopen(filename, "rb");
   #else
@@ -114,7 +143,7 @@ GLOBAL MYTEXTFILE *myTextOpen ( const char *filename )
 	}
 	else
 	{
-		/* v6.5.13 [vj] Dieser Befehl darf natürlich nur ausgeführt werden,
+		/* v6.5.13 [vj] Dieser Befehl darf natuerlich nur ausgefuehrt werden,
                         wenn tf-file != NULL ist, sonst crashed UDO an
                         dieser Stelle */
 		setvbuf(tf->file, NULL, _IOFBF, 8192);
@@ -189,7 +218,7 @@ GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf )
 	BOOLEAN cont;
 
 	/* This indicates how many lines have been added with \! to the current line */
-	uiMultiLines=-1; /* 0=Es wurden keine Zeilen zusammengefügt, 1=Es wurde eine Zeile angehängt, 2=Es wurden zwei Zeilen angehängt, ...*/
+	uiMultiLines=-1; /* 0=Es wurden keine Zeilen zusammengefuegt, 1=Es wurde eine Zeile angehaengt, 2=Es wurden zwei Zeilen angehaengt, ...*/
 
 	do {
 		cont=FALSE;
@@ -206,31 +235,31 @@ GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf )
 		}
 		string[sl] = '\0';
 
-		/* v6.5.9 [me] den String am Ende der Zeile krzen und */
+		/* v6.5.9 [me] den String am Ende der Zeile kuerzen und */
 		/*             die passende Anzahl von Zeichen wieder  */
 		/*             in den Input-Stream stellen.            */
 		for( s_ptr=string ; *s_ptr!='\n' && *s_ptr!='\r' && *s_ptr!='\0' ; s_ptr++ )
 		{
-			/* Reine Z„hlschleife, daher gibt es hier nichts zu tun */
+			/* Reine Zaehlschleife, daher gibt es hier nichts zu tun */
 		}
 
-		/* v6.5.10 [me]	Die neue Stringl„nge wird bestimmt, um eine */
-		/*						erneute Z„hlung der Zeichen zu vermeiden!   */
+		/* v6.5.10 [me]	Die neue Stringlaenge wird bestimmt, um eine */
+		/*						erneute Zaehlung der Zeichen zu vermeiden!   */
 		sl = (s_ptr - string);
 
-		/* Bei den Zeichen fr neue Zeile innehalten */
+		/* Bei den Zeichen fuer neue Zeile innehalten */
 		if( *s_ptr=='\n' || *s_ptr=='\r' )
 		{
 			/* Den zu verarbeitenden String abteilen */
 			char ch = *s_ptr;
 			*(s_ptr++) = '\0';
 
-			/* Das n„chste zu lesende Zeichen der neuen Zeile suchen */
+			/* Das naechste zu lesende Zeichen der neuen Zeile suchen */
 			if( (*s_ptr=='\n' || *s_ptr=='\r') && *s_ptr!=ch )
 				s_ptr++;
 
 
-			/* Nun genau so viele Zeichen zurckgeben, wie nun in s_ptr zu viel gelesen wurden */
+			/* Nun genau so viele Zeichen zurueckgeben, wie nun in s_ptr zu viel gelesen wurden */
 			fseek(tf->file, -(long)strlen(s_ptr), SEEK_CUR);
 		}
   #else

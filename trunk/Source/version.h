@@ -40,6 +40,9 @@
 *
 *  2009:
 *    ggs Jan 11: Change year
+*  2010:
+*    fd  Jan 23: - year updated
+*                - converted all German umlauts in comments into plain ASCII
 *
 ******************************************|************************************/
 
@@ -72,8 +75,8 @@
 /* ------------------------------------------------------------
    Copyright Meldung
    ------------------------------------------------------------   */
-#define COPYRIGHT           "Copyright (C) 1995-2001 by Dirk Hagedorn\nCopyright (C) 2001-2009 by The UDO Community"
-#define UDO_COPYRIGHT_TEXT  "Copyright (!copyright) 1995-2001 by Dirk Hagedorn\t(!nl)\nCopyright (!copyright) 2001-2009 by The UDO Community\t(!nl)\n"
+#define COPYRIGHT           "Copyright (C) 1995-2001 by Dirk Hagedorn\nCopyright (C) 2001-2010 by The UDO Community"
+#define UDO_COPYRIGHT_TEXT  "Copyright (!copyright) 1995-2001 by Dirk Hagedorn\t(!nl)\nCopyright (!copyright) 2001-2010 by The UDO Community\t(!nl)\n"
 
 /* ------------------------------------------------------------
    Zeichensaetze
@@ -108,7 +111,7 @@
 #define HAVE_TMPNAM          0
 #endif
 
-/* OS/2 Support: OS/2 verhält sich wie DOS */
+/* OS/2 Support: OS/2 verhaelt sich wie DOS */
 #ifdef __OS2__
 #define __MSDOS__
 #endif
