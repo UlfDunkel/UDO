@@ -79,3 +79,5 @@ GLOBAL void *um_malloc2(size_t size, char *file, int line );
 GLOBAL void *um_realloc(void *block, size_t size);
 GLOBAL void um_free(void *memblock);
 #endif
+
+/* +++ EOF +++ */
