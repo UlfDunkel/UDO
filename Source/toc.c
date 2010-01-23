@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**(TAB=0)**********************************************************************
 *
 *  Project name : UDO
 *  Module name  : toc.c
@@ -50,6 +50,8 @@
 *    fd  Jan 20: - file partly reformatted
 *                - save_html_index() now converts labels using label2html()
 *    fd  Jan 23: converted all German umlauts in comments into plain ASCII
+*    fd  Jan 24: html_footer() handles all 16 combinations of 
+*                  webmasterurl, webmastername, webmastermailurl, webmasteremail
 *
 ******************************************|************************************/
 
@@ -112,21 +114,21 @@ const char *id_toc_c= "@(#) toc.c       $DATE$";
 *
 ******************************************|************************************/
 
-#define TOC_TOC         0                 /* table of content */
-#define TOC_NODE1       1                 /* !node */
-#define TOC_NODE2       2                 /* !subnode */
-#define TOC_NODE3       3                 /* !subsubnode */
-#define TOC_NODE4       4                 /* !subsubsubnode */
-#define TOC_NODE5       5                 /* !subsubsubsubnode */
-#define TOC_NONE        6                 /* neither nor ... :-) */
+#define TOC_TOC    0                      /* table of content */
+#define TOC_NODE1  1                      /* !node */
+#define TOC_NODE2  2                      /* !subnode */
+#define TOC_NODE3  3                      /* !subsubnode */
+#define TOC_NODE4  4                      /* !subsubsubnode */
+#define TOC_NODE5  5                      /* !subsubsubsubnode */
+#define TOC_NONE   6                      /* neither nor ... :-) */
 
-LOCAL const char *FRAME_NAME_TOC="UDOtoc";
-LOCAL const char *FRAME_NAME_CON="UDOcon";
+LOCAL const char  *FRAME_NAME_TOC = "UDOtoc";
+LOCAL const char  *FRAME_NAME_CON = "UDOcon";
 
-LOCAL const char *FRAME_FILE_TOC="00toc";
-LOCAL const char *FRAME_FILE_CON="00con";
+LOCAL const char  *FRAME_FILE_TOC = "00toc";
+LOCAL const char  *FRAME_FILE_CON = "00con";
 
-LOCAL const char *HTML_LABEL_CONTENTS="UDOTOC";
+LOCAL const char  *HTML_LABEL_CONTENTS = "UDOTOC";
 
 
 
@@ -422,7 +424,7 @@ int      tocindex)  /* */
    
    if (s[0] != '\0')
    {
-      switch(desttype)
+      switch (desttype)
       {
       case TOSTG:
       case TOAMG:
@@ -901,27 +903,27 @@ const unsigned int   uiH)                 /* */
       if (ui == 0)
       {
          um_strcpy(hfn, outfile.name, 512, "string2reference[14]");
-         htmlfilename= hfn;
+         htmlfilename = hfn;
       }
       else
       {
 /* #if 1 */
          sprintf(hfn, "%s%s", html_name_prefix, toc[ui]->filename);
-         htmlfilename= hfn;
+         htmlfilename = hfn;
 /*
 #else
-         htmlfilename= toc[ui]->filename;
+         htmlfilename = toc[ui]->filename;
 #endif
 */
       }
       
-      /* Feststellen, ob die Referenz im gleichen File liegt */
+                                          /* Feststellen, ob die Referenz im gleichen File liegt */
       if (strcmp(htmlfilename, outfile.name) == 0)
       {
          same_file = TRUE;
       }
       
-      /* New in r6pl16 [NHz] */
+                                          /* New in r6pl16 [NHz] */
       if (strchr(htmlfilename, '.') != NULL)
          strcpy(suff, "");
       else
@@ -1014,8 +1016,8 @@ const unsigned int   uiH)                 /* */
       replace_udo_tilde(n);
       replace_udo_nbsp(n);
       
-      /* Changed in r6.2pl1 [NHz] */
-      /* V6.5.20 [CS] Start */
+                                          /* Changed in r6.2pl1 [NHz] */
+                                          /* V6.5.20 [CS] Start */
       sprintf(ref, "%s \\hidelink{\\pdfstartlink goto num %d %s\\pdfendlink}", n, l->labindex, n);
       
 /* old:
@@ -1024,7 +1026,7 @@ const unsigned int   uiH)                 /* */
 */
       break;
       
-   /* New in r6pl15 [NHz] */
+                                          /* New in r6pl15 [NHz] */
    case TOKPS:
       um_strcpy(n, l->name, 512, "string2reference[16]");
       replace_udo_tilde(n);
@@ -3477,70 +3479,87 @@ const char  *t)                 /* */
    check_output_raw_header();             /*r6pl10*/
    
    voutlnf("%s", sHtmlPropfontStart);
-   
-}       /*output_html_header*/
+}
 
 
-LOCAL void get_giflink_data(const int index, char *name, unsigned int *width, unsigned int *height)
+
+
+
+/*******************************************************************************
+*
+*  get_giflink_data():
+*     ??? (description missing)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void get_giflink_data(
+
+const int      index,   /* */
+char          *name,    /* */
+unsigned int  *width,   /* */
+unsigned int  *height)  /* */
 {
-        name[0]= EOS;
-        *width= *height= 0;
-
-        switch (index)
-        {
-                case GIF_HM_INDEX:
-                        strcpy(name, GIF_HM_NAME);
-                        *width= uiGifHmWidth;
-                        *height= uiGifHmHeight;
-                        break;
-                case GIF_UP_INDEX:
-                        strcpy(name, GIF_UP_NAME);
-                        *width= uiGifUpWidth;
-                        *height= uiGifUpHeight;
-                        break;
-                case GIF_LF_INDEX:
-                        strcpy(name, GIF_LF_NAME);
-                        *width= uiGifLfWidth;
-                        *height= uiGifLfHeight;
-                        break;
-                case GIF_RG_INDEX:
-                        strcpy(name, GIF_RG_NAME);
-                        *width= uiGifRgWidth;
-                        *height= uiGifRgHeight;
-                        break;
-                case GIF_NOHM_INDEX:
-                        strcpy(name, GIF_NOHM_NAME);
-                        *width= uiGifNoHmWidth;
-                        *height= uiGifNoHmHeight;
-                        break;
-                case GIF_NOUP_INDEX:
-                        strcpy(name, GIF_NOUP_NAME);
-                        *width= uiGifNoUpWidth;
-                        *height= uiGifNoUpHeight;
-                        break;
-                case GIF_NOLF_INDEX:
-                        strcpy(name, GIF_NOLF_NAME);
-                        *width= uiGifNoLfWidth;
-                        *height= uiGifNoLfHeight;
-                        break;
-                case GIF_NORG_INDEX:
-                        strcpy(name, GIF_NORG_NAME);
-                        *width= uiGifNoRgWidth;
-                        *height= uiGifNoRgHeight;
-                        break;
-                case GIF_GER_INDEX:
-                        strcpy(name, GIF_GER_NAME);
-                        *width= uiGifGerWidth;
-                        *height= uiGifGerHeight;
-                        break;
-                case GIF_ENG_INDEX:
-                        strcpy(name, GIF_ENG_NAME);
-                        *width= uiGifEngWidth;
-                        *height= uiGifEngHeight;
-                        break;
-        }
-
-}       /* get_giflink_data */
+   name[0] = EOS;                         /* clear name */
+   
+   *width  = *height = 0;
+   
+   switch (index)
+   {
+   case GIF_HM_INDEX:                     /* Home */
+      strcpy(name, GIF_HM_NAME);
+      *width  = uiGifHmWidth;
+      *height = uiGifHmHeight;
+      break;
+   case GIF_UP_INDEX:                     /* Up */
+      strcpy(name, GIF_UP_NAME);
+      *width  = uiGifUpWidth;
+      *height = uiGifUpHeight;
+      break;
+   case GIF_LF_INDEX:                     /* Left */
+      strcpy(name, GIF_LF_NAME);
+      *width  = uiGifLfWidth;
+      *height = uiGifLfHeight;
+      break;
+   case GIF_RG_INDEX:                     /* Right */
+      strcpy(name, GIF_RG_NAME);
+      *width  = uiGifRgWidth;
+      *height = uiGifRgHeight;
+      break;
+   case GIF_NOHM_INDEX:                   /* Home (disabled) */
+      strcpy(name, GIF_NOHM_NAME);
+      *width  = uiGifNoHmWidth;
+      *height = uiGifNoHmHeight;
+      break;
+   case GIF_NOUP_INDEX:                   /* Up (disabled) */
+      strcpy(name, GIF_NOUP_NAME);
+      *width  = uiGifNoUpWidth;
+      *height = uiGifNoUpHeight;
+      break;
+   case GIF_NOLF_INDEX:                   /* LEft (disabled) */
+      strcpy(name, GIF_NOLF_NAME);
+      *width  = uiGifNoLfWidth;
+      *height = uiGifNoLfHeight;
+      break;
+   case GIF_NORG_INDEX:                   /* Right (disabled) */
+      strcpy(name, GIF_NORG_NAME);
+      *width  = uiGifNoRgWidth;
+      *height = uiGifNoRgHeight;
+      break;
+   case GIF_GER_INDEX:                    /* German */
+      strcpy(name, GIF_GER_NAME);
+      *width  = uiGifGerWidth;
+      *height = uiGifGerHeight;
+      break;
+   case GIF_ENG_INDEX:                    /* English */
+      strcpy(name, GIF_ENG_NAME);
+      *width  = uiGifEngWidth;
+      *height = uiGifEngHeight;
+      break;
+   }
+}
 
 
 
@@ -3628,8 +3647,7 @@ const char       *sep)               /* */
          voutlnf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", sGifName, sGifSize, closer);
       }
    }
-   
-}       /* html_index_giflink */
+}
 
 
 
@@ -3722,8 +3740,7 @@ const char       *sep)               /* */
                         sFile, outfile.suff, sTarget, sGifName, lang.html_home, lang.html_home, sGifSize, closer);
       }
    }
-   
-}       /* html_home_giflink */
+}
 
 
 
@@ -3746,14 +3763,14 @@ const int         idxDisabled,       /* */
 const char       *sep)               /* */
 {
    char           target[64],        /* */
-   backpage[256],     /* */
-   href[256],         /* */
-   alt[256],          /* */
-   *tok;               /* */
+                  backpage[256],     /* */
+                  href[256],         /* */
+                  alt[256],          /* */
+                 *tok;               /* */
    char           sGifSize[128],     /* */
-   sGifName[256];     /* */
+                  sGifName[256];     /* */
    unsigned int   uiW,               /* */
-   uiH;               /* */
+                  uiH;               /* */
    char           closer[8] = "\0";  /* single tag closer mark in XHTML */
    
    
@@ -3764,7 +3781,7 @@ const char       *sep)               /* */
    
    if (sDocHtmlBackpage[0] != EOS)
    {
-      /* New in r6pl16 [NHz] */
+                                          /* New in r6pl16 [NHz] */
       strcpy(backpage, sDocHtmlBackpage);
       tok = strtok(backpage, "\'");
       strcpy(href, tok);
@@ -3784,11 +3801,11 @@ const char       *sep)               /* */
          sprintf(target, " target=\"_top\"");
       }
    
-      /* Changed in r6pl16 [NHz] */
+                                          /* Changed in r6pl16 [NHz] */
       if (no_images)
       {
          voutlnf("%s<a href=\"%s\"%s>%s</a>", sep, href, target, alt);
-      } /* changed */
+      }                                   /* changed */
       else
       {
          get_giflink_data(idxEnabled, sGifName, &uiW, &uiH);
@@ -3799,7 +3816,7 @@ const char       *sep)               /* */
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         /* Changed in r6pl16 [NHz] */
+                                          /* Changed in r6pl16 [NHz] */
          voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
             href, target, sGifName, alt, alt, sGifSize, closer);
       }
@@ -3823,8 +3840,7 @@ const char       *sep)               /* */
          voutlnf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", sGifName, sGifSize, closer);
       }
    }
-   
-}       /* html_back_giflink */
+}
 
 
 
@@ -3854,7 +3870,7 @@ BOOLEAN           head)              /* */
                   sTarget[64],       /* */
                  *colptr;            /* */
    BOOLEAN        old_autorefoff;    /* */
-   BOOLEAN            for_main_file;     /* */
+   BOOLEAN        for_main_file;     /* */
    unsigned int   uiW,               /* */
                   uiH;               /* */
    char           closer[8] = "\0";  /* single tag closer mark in XHTML */
@@ -3863,14 +3879,14 @@ BOOLEAN           head)              /* */
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
       strcpy(closer, " /");
    
-   /* Herausfinden, fuer welchen Node die Kopf- und Fusszeile   */
-   /* ausgegeben werden soll. Beim mergen ist der Index nicht   */
-   /* immer gleich dem Nodezaehler im 2. Durchlauf!                     */
+   /* Herausfinden, fuer welchen Node die Kopf- und Fusszeile */
+   /* ausgegeben werden soll. Beim Mergen ist der Index nicht */
+   /* immer gleich dem Nodezaehler im 2. Durchlauf! */
    
-   /* Um das Tildenproblem zu loesen, muss ueber lab[]                  */
-   /* gegangen werden, da nur dort die Tilden noch nicht                */
-   /* bearbeitet wurden und nur so die Referenzen fuer die              */
-   /* Kopfzeilen gefunden werden!                                                               */
+   /* Um das Tildenproblem zu loesen, muss ueber lab[] */
+   /* gegangen werden, da nur dort die Tilden noch nicht */
+   /* bearbeitet wurden und nur so die Referenzen fuer die */
+   /* Kopfzeilen gefunden werden! */
    
    ti = p2_toc_counter;
    
@@ -3969,14 +3985,14 @@ BOOLEAN           head)              /* */
 #endif
    
    /* ------------------------------------------------ */
-   /* Verweis auf die Homepage erzeugen                         */
+   /* Verweis auf die Homepage erzeugen                */
    /* ------------------------------------------------ */
    
    html_home_giflink(GIF_HM_INDEX, GIF_NOHM_INDEX, "[ ");
    
    
    /* ------------------------------------------------ */
-   /* Verweis auf das uebergeordnete Kapitel erzeugen   */
+   /* Verweis auf das uebergeordnete Kapitel erzeugen  */
    /* ------------------------------------------------ */
    
    switch (toc[ti]->toctype)
@@ -4105,17 +4121,17 @@ BOOLEAN           head)              /* */
    
    /* --------------------------------------------------- */
    /* Verweis auf die vorherige Seite erzeugen            */
-   /* default:                 das letzte Kapitel         */
-   /* !html_merge_node1:       kein Aufruf dieser Routine */
-   /* !html_merge_node2:                der letzte !node            */
-   /* !html_merge_node3:                der letzte !subnode         */
-   /* !html_merge_node4:                der letzte !subsubnode      */
+   /* default:            das letzte Kapitel              */
+   /* !html_merge_node1:  kein Aufruf dieser Routine      */
+   /* !html_merge_node2:  der letzte !node                */
+   /* !html_merge_node3:  der letzte !subnode             */
+   /* !html_merge_node4:  der letzte !subsubnode          */
    /* --------------------------------------------------- */
+   
    if (for_main_file)
    {
 #if 1
-      /* Deaktivierten Link/Bild ausgeben */
-      if (no_images)
+      if (no_images)                      /* Deaktivierten Link/Bild ausgeben */
       {
          outln("| &lt;&lt;&lt;");
       }
@@ -4126,7 +4142,7 @@ BOOLEAN           head)              /* */
          
          if (uiW != 0 && uiH != 0)
          {
-                sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
+            sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
          voutlnf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
@@ -4170,8 +4186,7 @@ BOOLEAN           head)              /* */
          else
          {
 #if 1
-            /* disabled nach links */
-            if (no_images)
+            if (no_images)                /* disabled nach links */
             {
                outln("| &lt;&lt;&lt;");
             }
@@ -4221,34 +4236,25 @@ BOOLEAN           head)              /* */
                i = 0;
             }
          }
-         else
+         else if (html_merge_node3)
          {
-            if (html_merge_node3)
+            if (toc[i]->toctype != TOC_NODE1 && toc[i]->toctype != TOC_NODE2)
             {
-               if (toc[i]->toctype != TOC_NODE1 && toc[i]->toctype != TOC_NODE2)
-               {
-                  i = 0;
-               }
+               i = 0;
             }
-            else
+         }
+         else if (html_merge_node4)
+         {
+            if (toc[i]->toctype != TOC_NODE1 && toc[i]->toctype != TOC_NODE2 && toc[i]->toctype != TOC_NODE3)
             {
-               if (html_merge_node4)
-               {
-                  if (toc[i]->toctype != TOC_NODE1 && toc[i]->toctype != TOC_NODE2 && toc[i]->toctype != TOC_NODE3)
-                  {
-                     i = 0;
-                  }
-               }
-               else
-               {
-                       if (html_merge_node5)
-                       {
-                          if (toc[i]->toctype != TOC_NODE1 && toc[i]->toctype != TOC_NODE2 && toc[i]->toctype != TOC_NODE3 && toc[i]->toctype != TOC_NODE4)
-                          {
-                             i = 0;
-                          }
-                       }
-                    }
+               i = 0;
+            }
+         }
+         else if (html_merge_node5)
+         {
+            if (toc[i]->toctype != TOC_NODE1 && toc[i]->toctype != TOC_NODE2 && toc[i]->toctype != TOC_NODE3 && toc[i]->toctype != TOC_NODE4)
+            {
+               i = 0;
             }
          }
       }
@@ -4382,8 +4388,7 @@ BOOLEAN           head)              /* */
    }
    
    bDocAutorefOff = old_autorefoff;
-   
-}       /* html_hb_line */
+}
 
 
 
@@ -4946,235 +4951,329 @@ LOCAL void html_node_bar_frames(void)
    outln(rowOff);
    outln("</table>");
    outln(divOff);
-   
-}       /* html_node_bar_frames */
+}
 
+
+
+
+
+/*******************************************************************************
+*
+*  html_headline():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
 
 GLOBAL void html_headline(void)
 {
-        char bgCmd[512];
+   char   bgCmd[512];  /* */
+   
+   
+   if (html_modern_layout)
+   {
+      bgCmd[0] = EOS;
+      
+      if (html_modern_backimage[0] != EOS)
+         sprintf(bgCmd, " background=\"%s\"", html_modern_backimage);
 
-        if (html_modern_layout)
-        {
-                bgCmd[0]= EOS;
-                if (html_modern_backimage[0]!=EOS)
-                {       sprintf(bgCmd, " background=\"%s\"", html_modern_backimage);
-                }
-                outln("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">");
-                outln("<tr>");
-                if (html_modern_backcolor[0]!=EOS)
-                {       voutlnf("<td valign=\"top\" width=\"%s\" bgcolor=\"%s\"%s>%s",
-                                html_modern_width, html_modern_backcolor, bgCmd,
-                                sHtmlPropfontStart);
-                }
-                else
-                {       voutlnf("<td valign=\"top\" width=\"%s\"%s>%s", html_modern_width, bgCmd,
-                                                sHtmlPropfontStart);
-                }
-                html_node_bar_modern();
-                voutlnf("%s</td>", sHtmlPropfontEnd);
+      outln("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">");
+      outln("<tr>");
+      
+      if (html_modern_backcolor[0] != EOS)
+      {
+         voutlnf("<td valign=\"top\" width=\"%s\" bgcolor=\"%s\"%s>%s",
+            html_modern_width,            /* */
+            html_modern_backcolor,        /* */
+            bgCmd,                        /* */
+            sHtmlPropfontStart);          /* */
+      }
+      else
+      {
+         voutlnf("<td valign=\"top\" width=\"%s\"%s>%s", 
+            html_modern_width,            /* */
+            bgCmd,                        /* */
+            sHtmlPropfontStart);          /* */
+      }
+      
+      html_node_bar_modern();
+      voutlnf("%s</td>", sHtmlPropfontEnd);
+
 #if 0
-                outln("<td valign=\"top\" width=\"8\">&nbsp;</td>");    /*r6pl3*/
+                                          /*r6pl3*/
+      outln("<td valign=\"top\" width=\"8\">&nbsp;</td>");
 #endif
-                voutlnf("<td valign=\"top\" width=\"100%%\">%s", sHtmlPropfontStart);
-        }
 
-        if (!no_headlines)
-        {       html_hb_line(TRUE);
-        }
+      voutlnf("<td valign=\"top\" width=\"100%%\">%s", sHtmlPropfontStart);
+   }
+   
+   if (!no_headlines)
+      html_hb_line(TRUE);
 
 #if 1
-        if (html_modern_layout || html_frames_layout)
-        {
-                outln("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\"><tr>");
-                voutlnf("<td valign=\"top\" width=\"8\">&nbsp;</td><td valign=\"top\" width=\"100%%\">%s", sHtmlPropfontStart);
-        }
+   if (html_modern_layout || html_frames_layout)
+   {
+      outln("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n<tr>");
+      voutlnf("<td valign=\"top\" width=\"8\">&nbsp;</td><td valign=\"top\" width=\"100%%\">%s", sHtmlPropfontStart);
+   }
 #endif
-}       /* html_headline */
+}
 
+
+
+
+
+/*******************************************************************************
+*
+*  html_bottomline():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
 
 GLOBAL void html_bottomline(void)
 {
-        if (html_modern_layout)
-        {
-                voutlnf("%s", sHtmlPropfontEnd);
-                html_footer();
+   if (html_modern_layout)
+   {
+      voutlnf("%s", sHtmlPropfontEnd);
+      html_footer();
 #if 1
-                outln("</td></tr></table>");
+      outln("</td></tr></table>");
 #endif
-                if (!no_bottomlines)
-                {       html_hb_line(FALSE);
-                }
-                voutlnf("%s</td></tr>", sHtmlPropfontEnd);
-                outln("</table>");
-                return;
-        }
+      if (!no_bottomlines)
+         html_hb_line(FALSE);
 
-        if (html_frames_layout)
-        {
-                voutlnf("%s", sHtmlPropfontEnd);
-                html_footer();
+      voutlnf("%s</td></tr>", sHtmlPropfontEnd);
+      outln("</table>");
+      return;
+   }
+
+   if (html_frames_layout)
+   {
+      voutlnf("%s", sHtmlPropfontEnd);
+      html_footer();
 #if 1
-                outln("</td></tr></table>");
+      outln("</td></tr></table>");
 #endif
-                if (!no_bottomlines)
-                {       html_hb_line(FALSE);
-                }
-                return;
-        }
+      if (!no_bottomlines)
+         html_hb_line(FALSE);
+      
+      return;
+   }
 
-        html_footer();
-        if (!no_bottomlines)
-        {       html_hb_line(FALSE);
-        }
+   html_footer();
+   
+   if (!no_bottomlines)
+      html_hb_line(FALSE);
+}
 
-}       /* html_bottomline */
 
 
+
+
+/*******************************************************************************
+*
+*  html_footer():
+*     outputs address segment with copyright notes webmaster URL, and email
+*
+*  return:
+*     -
+*
+******************************************|************************************/
 
 GLOBAL void html_footer(void)
 {
-        BOOLEAN has_name, has_email, has_url, has_mailurl;
-        BOOLEAN has_counter, has_main_counter;
-        char s[512];
+   BOOLEAN   has_counter,       /* */
+             has_main_counter;  /* */
+   char      s[512];            /* */
+   int       has_content = 0;   /* flags */
+   
+   
+                                          /* Changed in V6.5.9 [NHz] */
+   has_counter = (toc[p2_toc_counter]->counter_command != NULL);
 
-        /* Changed in V6.5.9 [NHz] */
-        has_counter=    (toc[p2_toc_counter]->counter_command!=NULL);
-        has_main_counter=       (sCounterCommand[0]!=EOS);
+   has_main_counter = (sCounterCommand[0] != EOS);
+   
+   if (!has_counter && !has_main_counter)
+      if (no_footers || toc[p2_toc_counter]->ignore_footer)
+         return;
+   
+   if (titdat.webmasterurl     != NULL)
+      has_content  = 0x1000;
 
-        if (!has_counter && !has_main_counter)
-        {
-                if (no_footers || toc[p2_toc_counter]->ignore_footer)
-                {       return;
-                }
-        }
+   if (titdat.webmastername    != NULL)
+      has_content += 0x0100;
 
-        has_name=               (titdat.webmastername!=NULL);
-        has_email=              (titdat.webmasteremail!=NULL);
-        has_url=                (titdat.webmasterurl!=NULL);
-        has_mailurl=    (titdat.webmastermailurl!=NULL);
+   if (titdat.webmastermailurl != NULL)
+      has_content += 0x0010;
 
-        if (has_counter || has_main_counter || has_name || has_email || has_url || has_mailurl)
-        {
+   if (titdat.webmasteremail   != NULL)
+      has_content += 0x0001;
+                                          /* draw a horizontal line */   
+   if (has_counter || has_main_counter || has_content)
+   {
       if (html_doctype < XHTML_STRICT)
          outln(HTML_HR);
       else
          outln(XHTML_HR);
-        }
+   }
+   
+   if (has_counter)                       /* r6pl4: Counterkommando ausgeben */
+   {
+      outln(toc[p2_toc_counter]->counter_command);
+   }
+   else if (has_main_counter)             /* New in V6.5.9 [NHz] */
+   {
+      outln(sCounterCommand);
+   }
+   
+   if (no_footers)                        /* New in V6.5.9 [NHz] */
+      return;
+   
+   if (footer_buffer[0] != EOS)
+   {
+      outln(footer_buffer);
+      return;
+   }
+   
+   
+   if (!has_content)
+   {
+      no_footers = TRUE;
+      return;
+   }
+   
+                                          /* output address segment */
+   sprintf(footer_buffer, "<address>%sCopyright &copy; ", sHtmlPropfontStart);
+   
+   s[0] = EOS;                            /* clear buffer */
+   
+   switch (has_content)
+   {
+   case 0x1111:                           /* has_url + has_name + has_mailurl + has_email */
+      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
+         titdat.webmasterurl, 
+         titdat.webmastername,
+         titdat.webmastermailurl, 
+         titdat.webmasteremail);
+      break;
+         
+   case 0x1110:                           /* has_url + has_name + has_mailurl             */
+      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
+         titdat.webmasterurl, 
+         titdat.webmastername,
+         titdat.webmastermailurl, 
+         titdat.webmastermailurl);
+      break;
+      
+   case 0x1101:                           /* has_url + has_name               + has_email */
+      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
+         titdat.webmasterurl, 
+         titdat.webmastername,
+         titdat.webmasteremail, 
+         titdat.webmasteremail);
+      break;
+      
+   case 0x1100:                           /* has_url + has_name                           */
+      sprintf(s, "<a href=\"%s\">%s</a>",
+         titdat.webmasterurl, 
+         titdat.webmastername);
+      break;
+      
+   case 0x1011:                           /* has_url            + has_mailurl + has_email */
+      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
+         titdat.webmasterurl, 
+         titdat.webmasterurl,
+         titdat.webmastermailurl, 
+         titdat.webmasteremail);
+      break;
+   
+   case 0x1010:                           /* has_url            + has_mailurl             */
+      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
+         titdat.webmasterurl, 
+         titdat.webmasterurl,
+         titdat.webmastermailurl, 
+         titdat.webmastermailurl);
+      break;
+         
+   case 0x1001:                           /* has_url                        + has_mailurl */
+      sprintf(s, "<a href=\"mailto:%s\">%s</a>",
+         titdat.webmasterurl, 
+         titdat.webmastername);
+      break;
+         
+   case 0x1000:                           /* has_url                                      */
+      sprintf(s, "<a href=\"mailto:%s\">%s</a>",
+         titdat.webmasterurl, 
+         titdat.webmasterurl);
+         break;
+      break;
 
-        /* r6pl4: Counterkommando ausgeben */
-        if (has_counter)
-        {
-                outln(toc[p2_toc_counter]->counter_command);
-        }
-        /* New in V6.5.9 [NHz] */
-        else if (has_main_counter)
-        {
-                outln(sCounterCommand);
-        }
+   case 0x0111:                           /*           has_name + has_mailurl + has_email */
+      sprintf(s, "%s <a href=\"mailto:%s\">%s</a>",
+         titdat.webmastername,
+         titdat.webmastermailurl, 
+         titdat.webmasteremail);
+      break;
 
-        /* New in V6.5.9 [NHz] */
-        if (no_footers)
-                return;
+   case 0x0110:                           /*           has_name + has_mailurl             */
+      sprintf(s, "%s (<a href=\"mailto:%s\">%s</a>)",
+         titdat.webmastername,
+         titdat.webmastermailurl, 
+         titdat.webmastermailurl);
+      break;
 
+   case 0x0101:                           /*           has_name               + has_email */
+      sprintf(s, "%s (<a href=\"mailto:%s\">%s</a>)",
+         titdat.webmastername,
+         titdat.webmasteremail, 
+         titdat.webmasteremail);
+      break;
 
-        if (footer_buffer[0]!=EOS)
-        {       outln(footer_buffer);
-                return;
-        }
+   case 0x0100:                           /*           has_name                           */
+      sprintf(s, "%s",
+         titdat.webmastername);
+      break;
 
+   case 0x0011:                           /*                      has_mailurl + has_email */
+      sprintf(s, "<a href=\"mailto:%s\">%s</a>",
+         titdat.webmastermailurl, 
+         titdat.webmasteremail);
+      break;
 
-        if (!has_name && !has_email && !has_url && !has_mailurl)
-        {       no_footers= TRUE;
-                return;
-        }
+   case 0x0010:                           /*                      has_mailurl             */
+      sprintf(s, "<a href=\"mailto:%s\">%s</a>",
+         titdat.webmastermailurl, 
+         titdat.webmastermailurl);
+      break;
 
-        sprintf(footer_buffer, "<address>%sCopyright &copy; ", sHtmlPropfontStart);
-
-        s[0]= EOS;
-        if (has_name)
-        {
-                if (has_url && (has_email || has_mailurl))
-                {
-                        if (has_mailurl && has_email)
-                        {       sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"%s\">%s</a>)",
-                                        titdat.webmasterurl, titdat.webmastername,
-                                        titdat.webmastermailurl, titdat.webmasteremail);
-                        }
-                        else
-                        {
-                                if (has_mailurl)
-                                {       /* Keine sinvolle Ausgabe moeglich */
-                                }
-                                else
-                                {       sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
-                                                titdat.webmasterurl, titdat.webmastername,
-                                                titdat.webmasteremail, titdat.webmasteremail);
-                                }
-                        }
-
-                }
-
-                if (has_url && !has_email && !has_mailurl)
-                {       sprintf(s, "<a href=\"%s\">%s</a>",
-                                 titdat.webmasterurl, titdat.webmastername);
-                }
-
-                if (!has_url && (has_email || has_mailurl))
-                {
-                        if (has_mailurl)
-                        {       sprintf(s, "<a href=\"%s\">%s</a>",
-                                        titdat.webmastermailurl, titdat.webmastername);
-                        }
-                        else
-                        {       sprintf(s, "<a href=\"mailto:%s\">%s</a>",
-                                        titdat.webmasteremail, titdat.webmastername);
-                        }
-                }
-
-                if (!has_url && !has_email && !has_mailurl)
-                {       strcpy(s, titdat.webmastername);
-                }
-        }
-        else
-        {
-                if (has_email || has_mailurl)
-                {
-                        if (has_mailurl)
-                        {       sprintf(s, "<a href=\"%s\">%s</a>",
-                                        titdat.webmastermailurl, titdat.webmasteremail);
-                        }
-                        else
-                        {       sprintf(s, "<a href=\"mailto:%s\">%s</a>",
-                                        titdat.webmasteremail, titdat.webmasteremail);
-                        }
-                }
-                else
-                {       if (has_url)
-                        {       sprintf(s, "<a href=\"%s\">%s</a>",
-                                        titdat.webmasterurl, titdat.webmasterurl);
-                        }
-                }
-        }
-
-        strcat(footer_buffer, s);
+   case 0x0001:                           /*                                    has_email */
+      sprintf(s, "%s",
+         titdat.webmasteremail, 
+         titdat.webmasteremail);
+   }
+   
+   strcat(footer_buffer, s);
    
    if (html_doctype < XHTML_STRICT)
-        strcat(footer_buffer, "<br>\n");
+   strcat(footer_buffer, "<br>\n");
    else
-        strcat(footer_buffer, "<br />\n");
-
-        strcpy(s, lang.update);
-        auto_quote_chars(s, TRUE);
-        strcat(footer_buffer, s);
-        strcat(footer_buffer, " ");
-        strcat(footer_buffer, lang.today);
-        strcat(footer_buffer, sHtmlPropfontEnd);
-        strcat(footer_buffer, "</address>\n");
-
-        outln(footer_buffer);
-
-}       /* html_footer */
+   strcat(footer_buffer, "<br />\n");
+   
+   strcpy(s, lang.update);
+   auto_quote_chars(s, TRUE);
+   strcat(footer_buffer, s);
+   strcat(footer_buffer, " ");
+   strcat(footer_buffer, lang.today);
+   strcat(footer_buffer, sHtmlPropfontEnd);
+   strcat(footer_buffer, "</address>\n");
+   
+   outln(footer_buffer);
+}
 
 
 /* --------------------------------------------------------------
