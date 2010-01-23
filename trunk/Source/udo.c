@@ -30,7 +30,10 @@
 *  Notes        : Please add yourself as co-author when you change this file.
 *
 *-------------------------------------------------------------------------------
-*  Things to do : re-write UDO string and encoding engine for full Unicode support 
+*  Things to do : - re-write UDO string and encoding engine for full Unicode support
+*
+*                 - Check if UDOCOMMAND.reset should really be in structure;
+*                   there is only one command ("!item") which should not be reset!
 *
 *-------------------------------------------------------------------------------
 *  History:
@@ -46,6 +49,7 @@
 *    fd  Jun 08: TAB -> '   ', reformattings
 *  2010:
 *    fd  Jan 20: set_html_quotes()
+*    fd  Jan 23: partly reformatted
 *
 ******************************************|************************************/
 
@@ -79,164 +83,102 @@ const char *id_udo_c= "@(#) udo.c       $Date$";
 #include <ctype.h>
 #include "portab.h"
 
-#include "version.h"   /* WICHTIGE Makros!               */
-#include "constant.h"   /* WICHTIGE Makros!               */
-#include "commands.h"   /* UDO-Kommandos               */
-#include "udo_type.h"   /* diverse Typen               */
+#include "version.h"                      /* WICHTIGE Makros! */
+#include "constant.h"                     /* WICHTIGE Makros! */
+#include "commands.h"                     /* UDO-Kommandos */
+#include "udo_type.h"                     /* diverse Typen */
 
-#include "abo.h"      /* Ausgabe einer Infoseite         */
-#include "cfg.h"      /* Konfiguration lesen/schreiben   */
-#include "chr.h"      /* Zeichensatzumwandlungen         */
-#include "env.h"      /* Umgebungen verwalten            */
-#include "file.h"      /* Aufsplitten von Dateinamen      */
-#include "img.h"      /* Ausgabe/Einbindung von Grafiken   */
-#include "lang.h"      /* ausgewaehlte Sprache            */   /* V6.5.18 */
-#include "msg.h"      /* Fehlermeldungen erzeugen         */
-#include "par.h"      /* (!...) Parameter bearbeiten      */
-#include "str.h"      /* Manipulation von Strings         */
-#include "sty.h"      /* Textstilumwandlungen            */
-#include "tab.h"      /* Tabellensatz                  */
-#include "toc.h"      /* !node, !alias, !label, !toc      */
-#include "toc_html.h"   /* HTML Teile fr !node, !alias, !label, !toc*/ /* V6.5.20 */
-#include "tp.h"         /* Titelseite (!maketitle)         */
+#include "abo.h"                          /* Ausgabe einer Infoseite */
+#include "cfg.h"                          /* Konfiguration lesen/schreiben */
+#include "chr.h"                          /* Zeichensatzumwandlungen */
+#include "env.h"                          /* Umgebungen verwalten */
+#include "file.h"                         /* Aufsplitten von Dateinamen */
+#include "img.h"                          /* Ausgabe/Einbindung von Grafiken */
+#include "lang.h"                         /* ausgewaehlte Sprache */   /* V6.5.18 */
+#include "msg.h"                          /* Fehlermeldungen erzeugen */
+#include "par.h"                          /* (!...) Parameter bearbeiten */
+#include "str.h"                          /* Manipulation von Strings */
+#include "sty.h"                          /* Textstilumwandlungen */
+#include "tab.h"                          /* Tabellensatz */
+#include "toc.h"                          /* !node, !alias, !label, !toc */
+#include "toc_html.h"                     /* HTML parts for !node, !alias, !label, !toc */ /* V6.5.20 */
+#include "tp.h"                           /* Titelseite (!maketitle) */
 
-#include "gui.h"      /* Funktionen GUI-/CLI-Version      */
+#include "gui.h"                          /* Funktionen GUI-/CLI-Version */
 
 #include "export.h"
-#include "udo.h"      /* globale Prototypen            */
-#include "udomem.h"     /* Memory-Management                */
+#include "udo.h"                          /* globale Prototypen */
+#include "udomem.h"                       /* Memory-Management */
 
 
 
-/*   ############################################################
-   # Makros
-   ############################################################   */
+
+
+/*******************************************************************************
+*
+*     MACRO DEFINITIONS
+*
+******************************************|************************************/
 
 #if !__AddLFToNL__
-#define NL "\n"
+# define NL "\n"
 #else
-#define NL "\n\r"   /* MO */
+# define NL "\n\r"                        /* MO */
 #endif
 
+   /* -- IF-Stack fuer !if-Umgebungen sowie Flags fuer pass1() und pass2() --- */
 
-/*   ############################################################
-   #
-   # lokale Variablen
-   #
-   ############################################################   */
+#define IF_NONE        0
+#define IF_GENERAL     1
+#define IF_DEST        2
+#define IF_LANG        3
+#define IF_SET         4
+#define IF_OS          5
+
+#define MAX_IF_STACK  32                  /*r6pl2: 32 statt 10, auf Nummer sicher */
+
+#define CMD_ALWAYS          0             /* used in UDO function table */
+#define CMD_ONLY_PREAMBLE   1
+#define CMD_ONLY_MAINPART   2
 
 
-LOCAL BOOLEAN      format_needs_exact_toklen;
-LOCAL BOOLEAN      format_uses_output_buffer;
-LOCAL BOOLEAN      format_protect_commands;
 
-LOCAL BOOLEAN      out_lf_needed;         /* Fehlt noch ein Linefeed? */
-LOCAL unsigned int   outlines;            /* Anzahl gesicherter Zeilen */
 
-LOCAL char      *tobuffer;               /* Puffer fuer token_output()         */
-LOCAL size_t   tomaxlen;               /* spaeteste Umbruchstelle in t_o()      */
 
-LOCAL BOOLEAN   bDocSloppy;               /* Kurze Zeilen bemaengeln?            */
-LOCAL BOOLEAN   no_verbatim_umlaute;      /* In verbatim Umlaute entfernen?      */
-LOCAL BOOLEAN   use_output_buffer;         /* Erst puffern, dann ausgeben?         */
+/*******************************************************************************
+*
+*     TYPE DEFINITIONS
+*
+******************************************|************************************/
 
-LOCAL char      timer_start[16];         /* Uhrzeiten fuer Start und Stopp      */
-LOCAL char      timer_stop[16];
-
-LOCAL char      silbe[MAXSILBEN][MAX_TOKEN_LEN+1]; /* Ein Array mit Silben            */
-LOCAL int      silben_counter;            /* Der passende Zaehler               */
-
-LOCAL BOOLEAN   bHypSaved;
-LOCAL BOOLEAN   bIdxSaved;
-LOCAL BOOLEAN   bTreeSaved;
-LOCAL BOOLEAN   bCmdSaved;
-LOCAL BOOLEAN   bHpjSaved;
-LOCAL BOOLEAN   bCntSaved;
-LOCAL BOOLEAN   bUPRSaved;
-LOCAL BOOLEAN   bMapSavedC, bMapSavedPas, bMapSavedVB, bMapSavedGFA;
-LOCAL BOOLEAN   bHhpSaved, bHhcSaved, bHhkSaved;
-
-LOCAL int   iFilesOpened;                  /* Anzahl geoeffneter Files      */
-LOCAL UINT   uiFileLines[MAXFILECOUNTER];         /* Zeilen geoeffneter Files      */
-LOCAL char   sFileNames[MAXFILECOUNTER][512+1];   /* Namen geoeffneter Files      */
-
-/*   ------------------------------------------------------------------------   */
-
-/* IF-Stack fuer !if-Umgebungen sowie Flags fuer pass1() und pass2() */
-#define   IF_NONE      0
-#define   IF_GENERAL   1
-#define   IF_DEST      2
-#define   IF_LANG      3
-#define   IF_SET      4
-#define   IF_OS      5
-
-typedef struct _if_stack_item
-{   int      kind;
-   BOOLEAN   ignore;
-   char   filename[512];
-   UINT   fileline;
-}   IF_STACK_ITEM;
-
-#define   MAX_IF_STACK   32   /*r6pl2: 32 statt 10, auf Nummer sicher */
-
-LOCAL IF_STACK_ITEM      if_stack[MAX_IF_STACK+1];
-LOCAL int            counter_if_stack;
-
-/*   ------------------------------------------------------------------------   */
-
-LOCAL unsigned long      lPass1Lines, lPass2Lines;         /* fuer die Prozentangabe */
-
-/*   ------------------------------------------------------------------------   */
-
-typedef struct _hyplist
+typedef struct _if_stack_item             /* */
 {
-   char   data[128];
-   struct _hyplist   *next;
-}   HYPLIST;
+   int       kind;                        /* */
+   BOOLEAN   ignore;                      /* */
+   char      filename[512];               /* */
+   UINT      fileline;                    /* */
+}  IF_STACK_ITEM;
 
-LOCAL HYPLIST *hyplist;
 
-/*   ------------------------------------------------------------------------   */
+typedef struct _hyplist                   /* */
+{
+   char              data[128];           /* */
+   struct _hyplist  *next;                /* */
+}  HYPLIST;
 
 typedef struct _idxlist
 {
-   char   letter;                  /* Hier soll der Eintrag einsortiert werden */
-   int      depth;                  /* Indextiefe: 1, 2 oder 3 */
-   char   chapter[MAX_NODE_LEN+1];   /* In diesem Kapitel gesetzt */
-   char   idx[3][128];            /* Die Index-Daten */
-   struct _idxlist   *next;
-}   IDXLIST;
+   char              letter;              /* Hier soll der Eintrag einsortiert werden */
+   int               depth;               /* Indextiefe: 1, 2 oder 3 */
+                                          /* In diesem Kapitel gesetzt */
+   char              chapter[MAX_NODE_LEN + 1];
+   char              idx[3][128];         /* Die Index-Daten */
+   struct _idxlist  *next;
+}  IDXLIST;
 
-LOCAL IDXLIST *idxlist;
+typedef void (*CMDPROC)(void);
 
-
-/*   ############################################################
-   #
-   # lokale Prototypen
-   #
-   ############################################################   */
-#include "udolocal.h"
-
-
-/*   ############################################################
-   #
-   # Funktionen
-   #
-   # die Tabellen sollten nach der Wahrscheinlichkeit sortiert
-   # werden, mit dem ein Kommando aufgerufen wird, um Suchzeiten
-   # zu verringern. Die Kapitel-Kommandos sollten dabei ganz
-   # oben stehen, weniger gebraeuchliche Kommandos ganz zum
-   # Schluss.
-   #
-   ############################################################   */
-#define   CMD_ALWAYS         0
-#define   CMD_ONLY_PREAMBLE   1
-#define   CMD_ONLY_MAINPART   2
-
-typedef   void (*CMDPROC)(void);
-
-
-typedef struct _udocommand                /* ---- Funktionentabelle ----          */
+typedef struct _udocommand                /* ---- Funktionentabelle ---- */
 {
    char     *magic;                       /* UDO-Kommando */
    char     *macut;                       /* Shortcut des Kommandos */
@@ -245,338 +187,419 @@ typedef struct _udocommand                /* ---- Funktionentabelle ----        
    int       pos;                         /* Erlaubnis Vorspann/Hauptteil */
 }  UDOCOMMAND;
 
-LOCAL const UDOCOMMAND udoCmdSeq[]=
+
+
+
+
+/*******************************************************************************
+*
+*     UNINITIALIZED LOCAL VARIABLES
+*
+******************************************|************************************/
+
+#include "udolocal.h"                     /* local prototypes */
+
+LOCAL BOOLEAN   format_needs_exact_toklen;
+LOCAL BOOLEAN   format_uses_output_buffer;
+LOCAL BOOLEAN   format_protect_commands;
+
+LOCAL BOOLEAN   out_lf_needed;            /* Fehlt noch ein Linefeed? */
+LOCAL unsigned int   outlines;            /* Anzahl gesicherter Zeilen */
+
+LOCAL char     *tobuffer;                 /* Puffer fuer token_output() */
+LOCAL size_t    tomaxlen;                 /* spaeteste Umbruchstelle in t_o() */
+
+LOCAL BOOLEAN   bDocSloppy;               /* Kurze Zeilen bemaengeln? */
+LOCAL BOOLEAN   no_verbatim_umlaute;      /* In verbatim Umlaute entfernen? */
+LOCAL BOOLEAN   use_output_buffer;        /* Erst puffern, dann ausgeben? */
+
+LOCAL char      timer_start[16];          /* Uhrzeiten fuer Start und Stopp */
+LOCAL char      timer_stop[16];
+
+                                          /* Ein Array mit Silben */
+LOCAL char      silbe[MAXSILBEN][MAX_TOKEN_LEN + 1];
+LOCAL int       silben_counter;           /* Der passende Zaehler */
+
+LOCAL BOOLEAN   bHypSaved;
+LOCAL BOOLEAN   bIdxSaved;
+LOCAL BOOLEAN   bTreeSaved;
+LOCAL BOOLEAN   bCmdSaved;
+LOCAL BOOLEAN   bHpjSaved;
+LOCAL BOOLEAN   bCntSaved;
+LOCAL BOOLEAN   bUPRSaved;
+LOCAL BOOLEAN   bMapSavedC, 
+                bMapSavedPas, 
+                bMapSavedVB, 
+                bMapSavedGFA;
+LOCAL BOOLEAN   bHhpSaved, 
+                bHhcSaved, 
+                bHhkSaved;
+
+LOCAL int       iFilesOpened;             /* Anzahl geoeffneter Files */
+                                          /* Zeilen geoeffneter Files */
+LOCAL UINT      uiFileLines[MAXFILECOUNTER];
+                                          /* Namen geoeffneter Files */
+LOCAL char      sFileNames[MAXFILECOUNTER][512 + 1];
+
+LOCAL IF_STACK_ITEM   if_stack[MAX_IF_STACK + 1];
+LOCAL int             counter_if_stack;
+
+LOCAL unsigned long   lPass1Lines,        /* fuer die Prozentangabe */ 
+                      lPass2Lines;
+
+LOCAL HYPLIST  *hyplist;                  /* */
+LOCAL IDXLIST  *idxlist;                  /* */
+
+
+
+
+
+/*******************************************************************************
+*
+*     UDO FUNCTION TABLE
+*     ==================
+*
+*     Note:
+*     Die Tabellen sollten nach der Wahrscheinlichkeit sortiert
+*     werden, mit dem ein Kommando aufgerufen wird, um Suchzeiten
+*     zu verringern. Die Kapitel-Kommandos sollten dabei ganz
+*     oben stehen, weniger gebraeuchliche Kommandos ganz zum Schluss.
+*
+******************************************|************************************/
+
+LOCAL const UDOCOMMAND udoCmdSeq[] =
 {
-   { "!node",                  "!n",      c_node,               TRUE,   CMD_ONLY_MAINPART   },
-   { "!subnode",               "!sn",      c_subnode,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!subsubnode",            "!ssn",      c_subsubnode,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!subsubsubnode",            "!sssn",   c_subsubsubnode,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!subsubsubsubnode",         "!ssssn",   c_subsubsubsubnode,   TRUE,   CMD_ONLY_MAINPART   },
-   { "!node*",                  "!n*",      c_node_iv,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!subnode*",               "!sn*",      c_subnode_iv,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!subsubnode*",            "!ssn*",   c_subsubnode_iv,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!subsubsubnode*",         "!sssn*",   c_subsubsubnode_iv,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!subsubsubsubnode*",      "!ssssn*",   c_subsubsubsubnode_iv,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!pnode",                  "!p",      c_pnode,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!psubnode",               "!ps",      c_psubnode,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!psubsubnode",            "!pss",      c_psubsubnode,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!psubsubsubnode",         "!psss",   c_psubsubsubnode,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!psubsubsubsubnode",      "!pssss",   c_psubsubsubsubnode,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!pnode*",               "!p*",      c_pnode_iv,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!psubnode*",               "!ps*",      c_psubnode_iv,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!psubsubnode*",            "!pss*",   c_psubsubnode_iv,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!psubsubsubnode*",         "!psss*",   c_psubsubsubnode_iv,   TRUE,   CMD_ONLY_MAINPART   },
-   { "!psubsubsubsubnode*",      "!pssss*",   c_psubsubsubsubnode_iv,   TRUE,   CMD_ONLY_MAINPART   },
-   { "!begin_node",            "!bn",      c_begin_node,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!begin_node*",            "!bn*",      c_begin_node_iv,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!begin_pnode",            "!bp",      c_begin_pnode,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!begin_pnode*",            "!bp*",      c_begin_pnode_iv,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!end_node",               "!en",      c_end_node,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!item",                  "!i",      c_item,               FALSE,   CMD_ONLY_MAINPART   },
-   { "!begin_itemize",            "!bi",      c_begin_itemize,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!end_itemize",            "!ei",      c_end_itemize,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!begin_enumerate",         "!be",      c_begin_enumerate,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!end_enumerate",            "!ee",      c_end_enumerate,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!begin_description",         "!bd",      c_begin_description,   TRUE,   CMD_ONLY_MAINPART   },
-   { "!end_description",         "!ed",      c_end_description,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!begin_xlist",            "!bxl",      c_begin_xlist,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!end_xlist",               "!exl",      c_end_xlist,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!begin_blist",            "!bbl",      c_begin_blist,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!end_blist",               "!ebl",      c_end_blist,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!begin_ilist",            "!bil",      c_begin_ilist,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!end_ilist",               "!eil",      c_end_ilist,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!begin_tlist",            "!btl",      c_begin_tlist,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!end_tlist",               "!etl",      c_end_tlist,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!begin_quote",            "!bq",      c_begin_quote,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!end_quote",               "!eq",      c_end_quote,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!begin_center",            "!bc",      c_begin_center,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!end_center",            "!ec",      c_end_center,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!begin_flushright",         "!bfr",      c_begin_flushright,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!end_flushright",         "!efr",      c_end_flushright,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!begin_flushleft",         "!bfl",      c_begin_flushleft,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!end_flushleft",            "!efl",      c_end_flushleft,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!label",                  "!l",      c_label,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!alias",                  "!a",      c_alias,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!index",                  "!x",      c_index,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!heading",               "!h",      c_heading,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!subheading",            "!sh",      c_subheading,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!subsubheading",            "!ssh",      c_subsubheading,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!subsubsubheading",         "!sssh",   c_subsubsubheading,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!subsubsubsubheading",      "!ssssh",   c_subsubsubsubheading,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!listheading",            "!lh",      c_listheading,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!listsubheading",         "!lsh",      c_listsubheading,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!listsubsubheading",         "!lssh",   c_listsubsubheading,   TRUE,   CMD_ONLY_MAINPART   },
-   { "!listsubsubsubheading",      "!lsssh",   c_listsubsubsubheading,   TRUE,   CMD_ONLY_MAINPART   },
-   { "!listsubsubsubsubheading",      "!lssssh",   c_listsubsubsubsubheading,   TRUE,   CMD_ONLY_MAINPART   },
-   { "!jumpid",               "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!win_helpid",            "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!wh4_helpid",            "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!mapping",               "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!html_name",               "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!html_dirname",            "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!html_keywords",            "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!html_description",         "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!html_robots",            "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   }, /* new V6.5.17 */
-   { "!html_bgsound",         "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   }, /* new V6.5.20 */
-   { "!html_backimage",         "",         c_tunix,            TRUE,   CMD_ALWAYS         },
-   { "!html_backcolor",         "",         c_tunix,            TRUE,   CMD_ALWAYS         },
-   { "!html_textcolor",         "",         c_tunix,            TRUE,   CMD_ALWAYS         },
-   { "!html_linkcolor",         "",         c_tunix,            TRUE,   CMD_ALWAYS         },
-   { "!html_alinkcolor",         "",         c_tunix,            TRUE,   CMD_ALWAYS         },
-   { "!html_vlinkcolor",         "",         c_tunix,            TRUE,   CMD_ALWAYS         },
-   { "!html_verbatim_backcolor",   "",         c_verbatim_backcolor,   TRUE,   CMD_ALWAYS         },
-   { "!html_counter_command",      "",         c_tunix,            TRUE,   CMD_ALWAYS   },   /* Changed in V6.5.9 */
-   { "!html_javascript",         "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!hh_backimage",            "",         c_tunix,            TRUE,   CMD_ALWAYS         },
-   { "!hh_backcolor",            "",         c_tunix,            TRUE,   CMD_ALWAYS         },
-   { "!hh_textcolor",            "",         c_tunix,            TRUE,   CMD_ALWAYS         },
-   { "!hh_linkcolor",            "",         c_tunix,            TRUE,   CMD_ALWAYS         },
-   { "!hh_alinkcolor",            "",         c_tunix,            TRUE,   CMD_ALWAYS         },
-   { "!hh_vlinkcolor",            "",         c_tunix,            TRUE,   CMD_ALWAYS         },
-   { "!hh_verbatim_backcolor",      "",         c_verbatim_backcolor,   TRUE,   CMD_ALWAYS         },
-   { "!chapterimage",            "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!chaptericon",            "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!chaptericon_active",      "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!chaptericon_text",         "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!newpage",               "",         c_newpage,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!comment",               "",         c_comment,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!include",               "",         c_include,            TRUE,   CMD_ALWAYS         },
-   { "!vinclude",               "",         c_include_verbatim,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!rinclude",               "",         c_include_raw,         TRUE,   CMD_ALWAYS         },
-   { "!sinclude",               "",         c_include_src,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!cinclude",               "",         c_include_comment,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!ldinclude",               "",         c_include_linedraw,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!pinclude",               "",         c_include_preformatted,   TRUE,   CMD_ONLY_MAINPART   },
-   { "!input",                  "",         c_input,            TRUE,   CMD_ALWAYS         },
-   { "!image",                  "",         c_image,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!image*",               "",         c_image_nonr,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!bigskip",               "",         c_bigskip,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!medskip",               "",         c_medskip,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!smallskip",               "",         c_smallskip,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!tex_dpi",               "",         c_tex_dpi,            TRUE,   CMD_ALWAYS         },
-   { "!tex_verb",               "",         c_tex_verb,            TRUE,   CMD_ALWAYS         },
-   { "!maketitle",               "",         c_maketitle,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!tableofcontents",         "",         c_tableofcontents,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!listoffigures",            "",         c_listoffigures,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!listoftables",            "",         c_listoftables,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!toc",                  "",         c_toc,               TRUE,   CMD_ONLY_MAINPART   },
-   { "!subtoc",               "",         c_subtoc,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!subsubtoc",               "",         c_subtoc,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!subsubsubtoc",            "",         c_subtoc,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!subsubsubsubtoc",      "",         c_subtoc,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!begin_appendix",         "",         c_begin_appendix,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!end_appendix",            "",         c_end_appendix,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!begin_document",         "",         c_begin_document,      TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!end_document",            "",         c_end_document,         TRUE,   CMD_ONLY_MAINPART   },
-   { "!sloppy",               "",         c_sloppy,            TRUE,   CMD_ALWAYS         },
-   { "!fussy",                  "",         c_fussy,            TRUE,   CMD_ALWAYS         },
-   { "!code",                  "",         c_code,               TRUE,   CMD_ALWAYS         },
-   { "!autoref",               "",         c_autoref,            TRUE,   CMD_ALWAYS         },
-   { "!autoref_items",            "",         c_autoref_items,      TRUE,   CMD_ALWAYS         },
-   { "!hline",                  "",         c_hline,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!table_caption",            "",         c_table_caption,      TRUE,   CMD_ONLY_MAINPART   },
-   { "!table_caption*",         "",         c_table_caption_nonr,   TRUE,   CMD_ONLY_MAINPART   },
-   { "!universal_charset",         "",         c_universal_charset,   TRUE,   CMD_ALWAYS         },
-   { "!win_charwidth",            "",         c_win_charwidth,      TRUE,   CMD_ALWAYS         },
-   { "!wh4_charwidth",            "",         c_wh4_charwidth,      TRUE,   CMD_ALWAYS         },
-   { "!rtf_charwidth",            "",         c_rtf_charwidth,      TRUE,   CMD_ALWAYS         },
-   { "!rtf_add_colour",            "",         c_rtf_add_colour,      TRUE,   CMD_ONLY_PREAMBLE         },   /* in V6.5.9 [NHz] */
-   { "!rtf_keep_tables",         "",         c_rtf_keep_tables,      TRUE,   CMD_ALWAYS         },
-   { "!html_img_suffix",         "",         c_html_img_suffix,      TRUE,   CMD_ALWAYS         },
-   { "!html_nodesize",            "",         c_html_nodesize,      TRUE,   CMD_ALWAYS         },
-   { "!htag_img_suffix",         "",         c_htag_img_suffix,      TRUE,   CMD_ALWAYS         },
-   { "!tabwidth",               "",         c_tabwidth,            TRUE,   CMD_ALWAYS         },
-   { "!verbatimsize",            "",         c_verbatimsize,         TRUE,   CMD_ALWAYS         },
-   { "!linedrawsize",            "",         c_linedrawsize,         TRUE,   CMD_ALWAYS         },
-   { "!set",                  "",         c_set,               TRUE,   CMD_ALWAYS         },
-   { "!unset",                  "",         c_unset,            TRUE,   CMD_ALWAYS         },
-   { "!drc_bcolor",            "",         c_drc_bcolor,         TRUE,   CMD_ALWAYS         },
-   { "!drc_icolor",            "",         c_drc_icolor,         TRUE,   CMD_ALWAYS         },
-   { "!drc_ucolor",            "",         c_drc_ucolor,         TRUE,   CMD_ALWAYS         },
-   { "!use_raw_header",         "",         c_tunix,            TRUE,   CMD_ALWAYS   },
-   { "!use_raw_footer",         "",         c_tunix,            TRUE,   CMD_ALWAYS   },
-   { "!udolink",               "",         c_udolink,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!toplink",               "",         c_toplink,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!endnode",               "",         c_endnode,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!ignore_subtoc",            "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!ignore_subsubtoc",         "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!ignore_subsubsubtoc",      "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!ignore_subsubsubsubtoc",   "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!ignore_links",            "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!ignore_index",            "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!ignore_title",            "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!ignore_headline",         "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!ignore_bottomline",         "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!ignore_raw_header",         "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!ignore_raw_footer",         "",         c_tunix,            TRUE,   CMD_ONLY_MAINPART   },
-   { "!macro",                  "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!define",               "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!hyphen",               "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!docinfo",               "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!doclayout",               "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   }, /* New in r6pl15 [NHz] */
-   { "!toc_offset",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!subtoc_offset",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!subsubtoc_offset",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!subsubsubtoc_offset",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!subsubsubsubtoc_offset",   "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!table_counter",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!table_alignment",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!image_counter",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!image_alignment",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!tex_lindner",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!tex_strunk",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!tex_emtex",               "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!tex_miktex",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!tex_tetex",               "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!tex_2e",               "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_name_prefix",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_no_xlist",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_backpage",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_propfont_name",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_propfont_size",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_monofont_name",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_monofont_size",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_merge_nodes",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_merge_subnodes",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_merge_subsubnodes",   "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_merge_subsubsubnodes",   "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_merge_subsubsubsubnodes",   "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_ignore_8bit",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-    { "!html_navigation",           "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   }, /* New in v6.5.20 [gs] */
-   { "!html_modern_layout",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_modern_width",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_modern_alignment",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_modern_backcolor",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_modern_backimage",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_frames_layout",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_frames_width",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_frames_alignment",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_frames_height",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_frames_position",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_frames_backcolor",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_frames_textcolor",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_frames_linkcolor",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_frames_alinkcolor",   "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_frames_vlinkcolor",   "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_frames_backimage",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_doctype",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },   /* New in r6pl16 [NHz] */
-   { "!html_style_name",      "",         c_tunix,   TRUE,   CMD_ALWAYS   }, /* New in r6pl15 [NHz] */
-   { "!html_script_name",      "",         c_tunix,   TRUE,   CMD_ALWAYS   }, /* New in r6pl15 [NHz] */
-   { "!html_favicon_name",      "",         c_tunix,   TRUE,   CMD_ALWAYS   }, /* New in r6pl15 [NHz] */
-   { "!html_button_alignment",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_quotes",               "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_switch_language",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_use_hyphenation",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   }, /* Fixed Bug #0000048 [NHz] */
-   { "!html_transparent_buttons",   "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_use_folders",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!html_header_date",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   }, /* New feature #0000054 in V6.5.2 [NHz] */
-   { "!html_header_links",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   }, /* New feature #0000053 in V6.5.2 [NHz] */
-   { "!html_frames_toc_title",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   }, /* New in V6.5.16 [GS] */
-   { "!html_frames_con_title",       "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   }, /* New in V6.5.16 [GS] */
-   { "!rtf_propfont",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!rtf_monofont",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!rtf_propfont_size",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!rtf_monofont_size",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!rtf_no_tables",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!win_propfont",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!win_monofont",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!win_propfont_size",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!win_monofont_size",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!win_backcolor",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!win_textcolor",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!win_linkcolor",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!win_background",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!win_inline_bitmaps",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!win_high_compression",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!win_medium_compression",   "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!win_old_keywords",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!wh4_propfont",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!wh4_monofont",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!wh4_propfont_size",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!wh4_monofont_size",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!wh4_backcolor",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!wh4_textcolor",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!wh4_background",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!wh4_inline_bitmaps",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!wh4_high_compression",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!wh4_medium_compression",   "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!wh4_old_keywords",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!win_prefix_helpids",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!wh4_prefix_helpids",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!pdf_high_compression",      "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!pdf_medium_compression",   "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!parwidth",               "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!sort_hyphen_file",         "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!man_lpp",               "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!man_type",               "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!drc_flags",               "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!nroff_type",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!language",               "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },
-   { "!break",                  "",         c_break,            TRUE,   CMD_ALWAYS         },
-   { "!error",                  "",         c_error,            TRUE,   CMD_ALWAYS         },
-   { "!nop",                  "",         c_nop,               TRUE,   CMD_ALWAYS         },
-   { "!show_variable",            "",         cmd_outside_preamble,   TRUE,   CMD_ONLY_PREAMBLE   },      /* V6.5.19 */
+   { "!node",                         "!n",      c_node,                    TRUE,  CMD_ONLY_MAINPART },
+   { "!subnode",                      "!sn",     c_subnode,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubnode",                   "!ssn",    c_subsubnode,              TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubnode",                "!sssn",   c_subsubsubnode,           TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubnode",             "!ssssn",  c_subsubsubsubnode,        TRUE,  CMD_ONLY_MAINPART },
+   { "!node*",                        "!n*",     c_node_iv,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!subnode*",                     "!sn*",    c_subnode_iv,              TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubnode*",                  "!ssn*",   c_subsubnode_iv,           TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubnode*",               "!sssn*",  c_subsubsubnode_iv,        TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubnode*",            "!ssssn*", c_subsubsubsubnode_iv,     TRUE,  CMD_ONLY_MAINPART },
+   { "!pnode",                        "!p",      c_pnode,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!psubnode",                     "!ps",     c_psubnode,                TRUE,  CMD_ONLY_MAINPART },
+   { "!psubsubnode",                  "!pss",    c_psubsubnode,             TRUE,  CMD_ONLY_MAINPART },
+   { "!psubsubsubnode",               "!psss",   c_psubsubsubnode,          TRUE,  CMD_ONLY_MAINPART },
+   { "!psubsubsubsubnode",            "!pssss",  c_psubsubsubsubnode,       TRUE,  CMD_ONLY_MAINPART },
+   { "!pnode*",                       "!p*",     c_pnode_iv,                TRUE,  CMD_ONLY_MAINPART },
+   { "!psubnode*",                    "!ps*",    c_psubnode_iv,             TRUE,  CMD_ONLY_MAINPART },
+   { "!psubsubnode*",                 "!pss*",   c_psubsubnode_iv,          TRUE,  CMD_ONLY_MAINPART },
+   { "!psubsubsubnode*",              "!psss*",  c_psubsubsubnode_iv,       TRUE,  CMD_ONLY_MAINPART },
+   { "!psubsubsubsubnode*",           "!pssss*", c_psubsubsubsubnode_iv,    TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_node",                   "!bn",     c_begin_node,              TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_node*",                  "!bn*",    c_begin_node_iv,           TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_pnode",                  "!bp",     c_begin_pnode,             TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_pnode*",                 "!bp*",    c_begin_pnode_iv,          TRUE,  CMD_ONLY_MAINPART },
+   { "!end_node",                     "!en",     c_end_node,                TRUE,  CMD_ONLY_MAINPART },
+   { "!item",                         "!i",      c_item,                    FALSE, CMD_ONLY_MAINPART },
+   { "!begin_itemize",                "!bi",     c_begin_itemize,           TRUE,  CMD_ONLY_MAINPART },
+   { "!end_itemize",                  "!ei",     c_end_itemize,             TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_enumerate",              "!be",     c_begin_enumerate,         TRUE,  CMD_ONLY_MAINPART },
+   { "!end_enumerate",                "!ee",     c_end_enumerate,           TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_description",            "!bd",     c_begin_description,       TRUE,  CMD_ONLY_MAINPART },
+   { "!end_description",              "!ed",     c_end_description,         TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_xlist",                  "!bxl",    c_begin_xlist,             TRUE,  CMD_ONLY_MAINPART },
+   { "!end_xlist",                    "!exl",    c_end_xlist,               TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_blist",                  "!bbl",    c_begin_blist,             TRUE,  CMD_ONLY_MAINPART },
+   { "!end_blist",                    "!ebl",    c_end_blist,               TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_ilist",                  "!bil",    c_begin_ilist,             TRUE,  CMD_ONLY_MAINPART },
+   { "!end_ilist",                    "!eil",    c_end_ilist,               TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_tlist",                  "!btl",    c_begin_tlist,             TRUE,  CMD_ONLY_MAINPART },
+   { "!end_tlist",                    "!etl",    c_end_tlist,               TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_quote",                  "!bq",     c_begin_quote,             TRUE,  CMD_ONLY_MAINPART },
+   { "!end_quote",                    "!eq",     c_end_quote,               TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_center",                 "!bc",     c_begin_center,            TRUE,  CMD_ONLY_MAINPART },
+   { "!end_center",                   "!ec",     c_end_center,              TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_flushright",             "!bfr",    c_begin_flushright,        TRUE,  CMD_ONLY_MAINPART },
+   { "!end_flushright",               "!efr",    c_end_flushright,          TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_flushleft",              "!bfl",    c_begin_flushleft,         TRUE,  CMD_ONLY_MAINPART },
+   { "!end_flushleft",                "!efl",    c_end_flushleft,           TRUE,  CMD_ONLY_MAINPART },
+   { "!label",                        "!l",      c_label,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!alias",                        "!a",      c_alias,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!index",                        "!x",      c_index,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!heading",                      "!h",      c_heading,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!subheading",                   "!sh",     c_subheading,              TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubheading",                "!ssh",    c_subsubheading,           TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubheading",             "!sssh",   c_subsubsubheading,        TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubheading",          "!ssssh",  c_subsubsubsubheading,     TRUE,  CMD_ONLY_MAINPART },
+   { "!listheading",                  "!lh",     c_listheading,             TRUE,  CMD_ONLY_MAINPART },
+   { "!listsubheading",               "!lsh",    c_listsubheading,          TRUE,  CMD_ONLY_MAINPART },
+   { "!listsubsubheading",            "!lssh",   c_listsubsubheading,       TRUE,  CMD_ONLY_MAINPART },
+   { "!listsubsubsubheading",         "!lsssh",  c_listsubsubsubheading,    TRUE,  CMD_ONLY_MAINPART },
+   { "!listsubsubsubsubheading",      "!lssssh", c_listsubsubsubsubheading, TRUE,  CMD_ONLY_MAINPART },
+   { "!jumpid",                       "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!win_helpid",                   "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!wh4_helpid",                   "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!mapping",                      "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!html_name",                    "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!html_dirname",                 "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!html_keywords",                "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!html_description",             "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!html_robots",                  "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART }, /* new V6.5.17 */
+   { "!html_bgsound",                 "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART }, /* new V6.5.20 */
+   { "!html_backimage",               "",        c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!html_backcolor",               "",        c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!html_textcolor",               "",        c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!html_linkcolor",               "",        c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!html_alinkcolor",              "",        c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!html_vlinkcolor",              "",        c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!html_verbatim_backcolor",      "",        c_verbatim_backcolor,      TRUE,  CMD_ALWAYS },
+   { "!html_counter_command",         "",        c_tunix,                   TRUE,  CMD_ALWAYS },   /* Changed in V6.5.9 */
+   { "!html_javascript",              "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!hh_backimage",                 "",        c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!hh_backcolor",                 "",        c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!hh_textcolor",                 "",        c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!hh_linkcolor",                 "",        c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!hh_alinkcolor",                "",        c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!hh_vlinkcolor",                "",        c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!hh_verbatim_backcolor",        "",        c_verbatim_backcolor,      TRUE,  CMD_ALWAYS },
+   { "!chapterimage",                 "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!chaptericon",                  "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!chaptericon_active",           "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!chaptericon_text",             "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!newpage",                      "",        c_newpage,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!comment",                      "",        c_comment,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!include",                      "",        c_include,                 TRUE,  CMD_ALWAYS },
+   { "!vinclude",                     "",        c_include_verbatim,        TRUE,  CMD_ONLY_MAINPART },
+   { "!rinclude",                     "",        c_include_raw,             TRUE,  CMD_ALWAYS },
+   { "!sinclude",                     "",        c_include_src,             TRUE,  CMD_ONLY_MAINPART },
+   { "!cinclude",                     "",        c_include_comment,         TRUE,  CMD_ONLY_MAINPART },
+   { "!ldinclude",                    "",        c_include_linedraw,        TRUE,  CMD_ONLY_MAINPART },
+   { "!pinclude",                     "",        c_include_preformatted,    TRUE,  CMD_ONLY_MAINPART },
+   { "!input",                        "",        c_input,                   TRUE,  CMD_ALWAYS },
+   { "!image",                        "",        c_image,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!image*",                       "",        c_image_nonr,              TRUE,  CMD_ONLY_MAINPART },
+   { "!bigskip",                      "",        c_bigskip,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!medskip",                      "",        c_medskip,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!smallskip",                    "",        c_smallskip,               TRUE,  CMD_ONLY_MAINPART },
+   { "!tex_dpi",                      "",        c_tex_dpi,                 TRUE,  CMD_ALWAYS },
+   { "!tex_verb",                     "",        c_tex_verb,                TRUE,  CMD_ALWAYS },
+   { "!maketitle",                    "",        c_maketitle,               TRUE,  CMD_ONLY_MAINPART },
+   { "!tableofcontents",              "",        c_tableofcontents,         TRUE,  CMD_ONLY_MAINPART },
+   { "!listoffigures",                "",        c_listoffigures,           TRUE,  CMD_ONLY_MAINPART },
+   { "!listoftables",                 "",        c_listoftables,            TRUE,  CMD_ONLY_MAINPART },
+   { "!toc",                          "",        c_toc,                     TRUE,  CMD_ONLY_MAINPART },
+   { "!subtoc",                       "",        c_subtoc,                  TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubtoc",                    "",        c_subtoc,                  TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubtoc",                 "",        c_subtoc,                  TRUE,  CMD_ONLY_MAINPART },
+   { "!subsubsubsubtoc",              "",        c_subtoc,                  TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_appendix",               "",        c_begin_appendix,          TRUE,  CMD_ONLY_MAINPART },
+   { "!end_appendix",                 "",        c_end_appendix,            TRUE,  CMD_ONLY_MAINPART },
+   { "!begin_document",               "",        c_begin_document,          TRUE,  CMD_ONLY_PREAMBLE },
+   { "!end_document",                 "",        c_end_document,            TRUE,  CMD_ONLY_MAINPART },
+   { "!sloppy",                       "",        c_sloppy,                  TRUE,  CMD_ALWAYS },
+   { "!fussy",                        "",        c_fussy,                   TRUE,  CMD_ALWAYS },
+   { "!code",                         "",        c_code,                    TRUE,  CMD_ALWAYS },
+   { "!autoref",                      "",        c_autoref,                 TRUE,  CMD_ALWAYS },
+   { "!autoref_items",                "",        c_autoref_items,           TRUE,  CMD_ALWAYS },
+   { "!hline",                        "",        c_hline,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!table_caption",                "",        c_table_caption,           TRUE,  CMD_ONLY_MAINPART },
+   { "!table_caption*",               "",        c_table_caption_nonr,      TRUE,  CMD_ONLY_MAINPART },
+   { "!universal_charset",            "",        c_universal_charset,       TRUE,  CMD_ALWAYS },
+   { "!win_charwidth",                "",        c_win_charwidth,           TRUE,  CMD_ALWAYS },
+   { "!wh4_charwidth",                "",        c_wh4_charwidth,           TRUE,  CMD_ALWAYS },
+   { "!rtf_charwidth",                "",        c_rtf_charwidth,           TRUE,  CMD_ALWAYS },
+   { "!rtf_add_colour",               "",        c_rtf_add_colour,          TRUE,  CMD_ONLY_PREAMBLE },   /* in V6.5.9 [NHz] */
+   { "!rtf_keep_tables",              "",        c_rtf_keep_tables,         TRUE,  CMD_ALWAYS },
+   { "!html_img_suffix",              "",        c_html_img_suffix,         TRUE,  CMD_ALWAYS },
+   { "!html_nodesize",                "",        c_html_nodesize,           TRUE,  CMD_ALWAYS },
+   { "!htag_img_suffix",              "",        c_htag_img_suffix,         TRUE,  CMD_ALWAYS },
+   { "!tabwidth",                     "",        c_tabwidth,                TRUE,  CMD_ALWAYS },
+   { "!verbatimsize",                 "",        c_verbatimsize,            TRUE,  CMD_ALWAYS },
+   { "!linedrawsize",                 "",        c_linedrawsize,            TRUE,  CMD_ALWAYS },
+   { "!set",                          "",        c_set,                     TRUE,  CMD_ALWAYS },
+   { "!unset",                        "",        c_unset,                   TRUE,  CMD_ALWAYS },
+   { "!drc_bcolor",                   "",        c_drc_bcolor,              TRUE,  CMD_ALWAYS },
+   { "!drc_icolor",                   "",        c_drc_icolor,              TRUE,  CMD_ALWAYS },
+   { "!drc_ucolor",                   "",        c_drc_ucolor,              TRUE,  CMD_ALWAYS },
+   { "!use_raw_header",               "",        c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!use_raw_footer",               "",        c_tunix,                   TRUE,  CMD_ALWAYS },
+   { "!udolink",                      "",        c_udolink,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!toplink",                      "",        c_toplink,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!endnode",                      "",        c_endnode,                 TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_subtoc",                "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_subsubtoc",             "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_subsubsubtoc",          "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_subsubsubsubtoc",       "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_links",                 "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_index",                 "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_title",                 "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_headline",              "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_bottomline",            "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_raw_header",            "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!ignore_raw_footer",            "",        c_tunix,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!macro",                        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!define",                       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!hyphen",                       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!docinfo",                      "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!doclayout",                    "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE }, /* New in r6pl15 [NHz] */
+   { "!toc_offset",                   "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!subtoc_offset",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!subsubtoc_offset",             "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!subsubsubtoc_offset",          "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!subsubsubsubtoc_offset",       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!table_counter",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!table_alignment",              "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!image_counter",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!image_alignment",              "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!tex_lindner",                  "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!tex_strunk",                   "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!tex_emtex",                    "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!tex_miktex",                   "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!tex_tetex",                    "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!tex_2e",                       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_name_prefix",             "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_no_xlist",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_backpage",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_propfont_name",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_propfont_size",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_monofont_name",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_monofont_size",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_merge_nodes",             "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_merge_subnodes",          "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_merge_subsubnodes",       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_merge_subsubsubnodes",    "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_merge_subsubsubsubnodes", "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_ignore_8bit",             "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_navigation",              "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE }, /* New in v6.5.20 [gs] */
+   { "!html_modern_layout",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_modern_width",            "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_modern_alignment",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_modern_backcolor",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_modern_backimage",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_layout",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_width",            "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_alignment",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_height",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_position",         "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_backcolor",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_textcolor",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_linkcolor",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_alinkcolor",       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_vlinkcolor",       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_frames_backimage",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_doctype",                 "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },   /* New in r6pl16 [NHz] */
+   { "!html_style_name",              "",        c_tunix,                   TRUE,  CMD_ALWAYS }, /* New in r6pl15 [NHz] */
+   { "!html_script_name",             "",        c_tunix,                   TRUE,  CMD_ALWAYS }, /* New in r6pl15 [NHz] */
+   { "!html_favicon_name",            "",        c_tunix,                   TRUE,  CMD_ALWAYS }, /* New in r6pl15 [NHz] */
+   { "!html_button_alignment",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_quotes",                  "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_switch_language",         "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_use_hyphenation",         "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE }, /* Fixed Bug #0000048 [NHz] */
+   { "!html_transparent_buttons",     "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_use_folders",             "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!html_header_date",             "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE }, /* New feature #0000054 in V6.5.2 [NHz] */
+   { "!html_header_links",            "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE }, /* New feature #0000053 in V6.5.2 [NHz] */
+   { "!html_frames_toc_title",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE }, /* New in V6.5.16 [GS] */
+   { "!html_frames_con_title",        "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE }, /* New in V6.5.16 [GS] */
+   { "!rtf_propfont",                 "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!rtf_monofont",                 "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!rtf_propfont_size",            "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!rtf_monofont_size",            "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!rtf_no_tables",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_propfont",                 "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_monofont",                 "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_propfont_size",            "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_monofont_size",            "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_backcolor",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_textcolor",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_linkcolor",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_background",               "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_inline_bitmaps",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_high_compression",         "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_medium_compression",       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_old_keywords",             "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_propfont",                 "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_monofont",                 "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_propfont_size",            "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_monofont_size",            "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_backcolor",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_textcolor",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_background",               "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_inline_bitmaps",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_high_compression",         "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_medium_compression",       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_old_keywords",             "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!win_prefix_helpids",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!wh4_prefix_helpids",           "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!pdf_high_compression",         "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!pdf_medium_compression",       "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!parwidth",                     "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!sort_hyphen_file",             "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!man_lpp",                      "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!man_type",                     "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!drc_flags",                    "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!nroff_type",                   "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!language",                     "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },
+   { "!break",                        "",        c_break,                   TRUE,  CMD_ALWAYS },
+   { "!error",                        "",        c_error,                   TRUE,  CMD_ALWAYS },
+   { "!nop",                          "",        c_nop,                     TRUE,  CMD_ALWAYS },
+   { "!show_variable",                "",        cmd_outside_preamble,      TRUE,  CMD_ONLY_PREAMBLE },      /* V6.5.19 */
 };
 
-#define   MAXSWITCH   41
 
-LOCAL const UDOSWITCH udoswitch[MAXSWITCH+1]=
+#define MAXSWITCH  41
+
+LOCAL const UDOSWITCH udoswitch[MAXSWITCH + 1] =
 {
-   { "!use_auto_subtocs",         &use_auto_subtocs      ,   'i',   "!depth",      &subtocs1_depth   },
-   { "!use_auto_subsubtocs",      &use_auto_subsubtocs   ,   'i',   "!depth",      &subtocs2_depth   },
-   { "!use_auto_subsubsubtocs",   &use_auto_subsubsubtocs   ,   'i',   "!depth",      &subtocs3_depth   },
-   { "!use_auto_subsubsubsubtocs",   &use_auto_subsubsubsubtocs   ,   'i',   "!depth",      &subtocs4_depth   },
-   { "!use_auto_toptocs",         &use_auto_toptocs      ,   'b',   "!no_icons",   &no_auto_toptocs_icons   },
-   { "!use_short_envs",         &use_short_envs         ,   '\0',   "",            NULL         },
-   { "!use_short_tocs",         &use_short_tocs         ,   '\0',   "",            NULL         },
-   { "!use_formfeed",            &use_formfeed         ,   '\0',   "",            NULL         },
-   { "!use_chapter_images",      &use_chapter_images      ,   '\0',   "",            NULL         },
-   { "!use_about_udo",            &use_about_udo         ,   '\0',   "",            NULL         },
-   { "!use_ansi_tables",         &use_ansi_tables      ,   '\0',   "",            NULL         },
-   { "!use_style_book",         &use_style_book         ,   '\0',   "",            NULL         },
-   { "!use_justification",         &use_justification      ,   '\0',   "",            NULL         },
-   { "!use_output_buffer",         &use_output_buffer      ,   '\0',   "",            NULL         },
-   { "!use_nodes_inside_index",   &use_nodes_inside_index   ,   '\0',   "",            NULL         },
-   { "!use_alias_inside_index",   &use_alias_inside_index   ,   '\0',   "",            NULL         },
-   { "!use_label_inside_index",   &use_label_inside_index   ,   '\0',   "",            NULL         },
-   { "!use_udo_index",            &use_udo_index         ,   '\0',   "",            NULL         },
-   { "!use_mirrored_indices",      &use_mirrored_indices   ,   '\0',   "",            NULL         },
-   { "!use_comments",            &use_comments         ,   '\0',   "",            NULL         },
-   { "!use_auto_helpids",         &use_auto_helpids      ,   '\0',   "",            NULL         },
-   { "!no_index",               &no_index            ,   '\0',   "",            NULL         },
-   { "!no_images",               &no_images            ,   '\0',   "",            NULL         },
-   { "!no_img_size",            &no_img_size         ,   '\0',   "",            NULL         },
-   { "!no_numbers",            &no_numbers            ,   '\0',   "",            NULL         },
-   { "!no_umlaute",            &no_umlaute            ,   '\0',   "",            NULL         },
-   { "!no_8bit",               &no_umlaute            ,   '\0',   "",            NULL         },
-   { "!no_xlinks",               &no_xlinks            ,   '\0',   "",            NULL         },
-   { "!no_urls",               &no_urls            ,   '\0',   "",            NULL         },
-   { "!no_links",               &no_links            ,   '\0',   "",            NULL         },
-   { "!no_verbatim_umlaute",      &no_verbatim_umlaute   ,   '\0',   "",            NULL         },
-   { "!no_effects",            &no_effects            ,   '\0',   "",            NULL         },
-   { "!no_quotes",               &no_quotes            ,   '\0',   "",            NULL         },
-   { "!no_preamble",            &no_preamble         ,   '\0',   "",            NULL         },
-   { "!no_titles",               &no_titles            ,   '\0',   "",            NULL         },
-   { "!no_headlines",            &no_headlines         ,   '\0',   "",            NULL         },
-   { "!no_bottomlines",         &no_bottomlines         ,   '\0',   "",            NULL         },
-   { "!no_popup_headlines",      &no_popup_headlines      ,   '\0',   "",            NULL         },
-   { "!no_footers",            &no_footers            ,   '\0',   "",            NULL         },
-   { "!no_buttons",            &no_buttons            ,   '\0',   "",            NULL         },
-   { "!no_sourcecode",            &no_sourcecode         ,   '\0',   "",            NULL         },
-   { "!no_table_lines",         &no_table_lines         ,   '\0',   "",            NULL         },
+   { "!use_auto_subtocs",          &use_auto_subtocs,          'i',  "!depth",    &subtocs1_depth },
+   { "!use_auto_subsubtocs",       &use_auto_subsubtocs,       'i',  "!depth",    &subtocs2_depth },
+   { "!use_auto_subsubsubtocs",    &use_auto_subsubsubtocs,    'i',  "!depth",    &subtocs3_depth },
+   { "!use_auto_subsubsubsubtocs", &use_auto_subsubsubsubtocs, 'i',  "!depth",    &subtocs4_depth },
+   { "!use_auto_toptocs",          &use_auto_toptocs,          'b',  "!no_icons", &no_auto_toptocs_icons },
+   { "!use_short_envs",            &use_short_envs,            '\0', "",          NULL },
+   { "!use_short_tocs",            &use_short_tocs,            '\0', "",          NULL },
+   { "!use_formfeed",              &use_formfeed,              '\0', "",          NULL },
+   { "!use_chapter_images",        &use_chapter_images,        '\0', "",          NULL },
+   { "!use_about_udo",             &use_about_udo,             '\0', "",          NULL },
+   { "!use_ansi_tables",           &use_ansi_tables,           '\0', "",          NULL },
+   { "!use_style_book",            &use_style_book,            '\0', "",          NULL },
+   { "!use_justification",         &use_justification,         '\0', "",          NULL },
+   { "!use_output_buffer",         &use_output_buffer,         '\0', "",          NULL },
+   { "!use_nodes_inside_index",    &use_nodes_inside_index,    '\0', "",          NULL },
+   { "!use_alias_inside_index",    &use_alias_inside_index,    '\0', "",          NULL },
+   { "!use_label_inside_index",    &use_label_inside_index,    '\0', "",          NULL },
+   { "!use_udo_index",             &use_udo_index,             '\0', "",          NULL },
+   { "!use_mirrored_indices",      &use_mirrored_indices,      '\0', "",          NULL },
+   { "!use_comments",              &use_comments,              '\0', "",          NULL },
+   { "!use_auto_helpids",          &use_auto_helpids,          '\0', "",          NULL },
+   { "!no_index",                  &no_index,                  '\0', "",          NULL },
+   { "!no_images",                 &no_images,                 '\0', "",          NULL },
+   { "!no_img_size",               &no_img_size,               '\0', "",          NULL },
+   { "!no_numbers",                &no_numbers,                '\0', "",          NULL },
+   { "!no_umlaute",                &no_umlaute,                '\0', "",          NULL },
+   { "!no_8bit",                   &no_umlaute,                '\0', "",          NULL },
+   { "!no_xlinks",                 &no_xlinks,                 '\0', "",          NULL },
+   { "!no_urls",                   &no_urls,                   '\0', "",          NULL },
+   { "!no_links",                  &no_links,                  '\0', "",          NULL },
+   { "!no_verbatim_umlaute",       &no_verbatim_umlaute,       '\0', "",          NULL },
+   { "!no_effects",                &no_effects,                '\0', "",          NULL },
+   { "!no_quotes",                 &no_quotes,                 '\0', "",          NULL },
+   { "!no_preamble",               &no_preamble,               '\0', "",          NULL },
+   { "!no_titles",                 &no_titles,                 '\0', "",          NULL },
+   { "!no_headlines",              &no_headlines,              '\0', "",          NULL },
+   { "!no_bottomlines",            &no_bottomlines,            '\0', "",          NULL },
+   { "!no_popup_headlines",        &no_popup_headlines,        '\0', "",          NULL },
+   { "!no_footers",                &no_footers,                '\0', "",          NULL },
+   { "!no_buttons",                &no_buttons,                '\0', "",          NULL },
+   { "!no_sourcecode",             &no_sourcecode,             '\0', "",          NULL },
+   { "!no_table_lines",            &no_table_lines,            '\0', "",          NULL },
 };
 
 
-typedef struct _udolanguage      /* ---- Sprachentabelle ----   */
+typedef struct _udolanguage               /* ---- Sprachentabelle ---- */
 {
-   char   *magic;         /* UDO-Kommando               */
-   int   langval;         /* zugehoerige Sprache         */
-}   UDOLANGUAGE;
+   char  *magic;   /* UDO-Kommando */
+   int    langval; /* zugehoerige Sprache */
+}  UDOLANGUAGE;
 
 
-#define MAXLANGUAGE     14
+#define MAXLANGUAGE  14
 
-LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE]=
+LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE] =
 {
    {"czech",      TOCZE},
    {"danish",     TODAN},
@@ -596,391 +619,610 @@ LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE]=
 
 
 
-typedef struct _udocharset      /* ---- Zeichensatztabelle ----   */
+typedef struct _udocharset                /* ---- Zeichensatztabelle ---- */
 {
-   char   *magic;         /* code-Parameter            */
-   int   codepage;            /* zugehoeriger Zeichensatz      */
+   char *magic;     /* code-Parameter */
+   int   codepage;  /* zugehoeriger Zeichensatz */
 }   UDOCHARSET;
 
-#define   MAXCHARSET   15
+#define MAXCHARSET  15
 
-LOCAL const UDOCHARSET udocharset[MAXCHARSET]=
+LOCAL const UDOCHARSET udocharset[MAXCHARSET] =
 {
-   { "dos",      CODE_437      },
-   { "os2",      CODE_850      },
-   { "cp437",      CODE_437      },
-   { "cp850",      CODE_850      },
-   { "hp8",      CODE_HP8      },
-   { "iso-8859-1",   CODE_LAT1      },
-   { "iso",      CODE_LAT1      },
-   { "latin1",      CODE_LAT1      },
-   { "mac",      CODE_MAC      },
-   { "next",      CODE_NEXT      },
-   { "tos",      CODE_TOS      },
-   { "utf-8",      CODE_UTF8      },
-   { "utf8",      CODE_UTF8      },
-   { "sys",      SYSTEM_CHARSET   },
-   { "win",      CODE_LAT1      },
+   {"dos",        CODE_437      },
+   {"os2",        CODE_850      },
+   {"cp437",      CODE_437      },
+   {"cp850",      CODE_850      },
+   {"hp8",        CODE_HP8      },
+   {"iso-8859-1", CODE_LAT1     },
+   {"iso",        CODE_LAT1     },
+   {"latin1",     CODE_LAT1     },
+   {"mac",        CODE_MAC      },
+   {"next",       CODE_NEXT     },
+   {"tos",        CODE_TOS      },
+   {"utf-8",      CODE_UTF8     },
+   {"utf8",       CODE_UTF8     },
+   {"sys",        SYSTEM_CHARSET},
+   {"win",        CODE_LAT1     },
 };
 
 GLOBAL char compile_date[11] = "\0";
 GLOBAL char compile_time[9]  = "\0";
 
 
-/*   ######################################################################
-   #
-   # Zentrale Ausgabe-Routinen. Hier werden Strings in eine Datei
-   # geschrieben. Nirgends im Sourcecode wird direkt ins Outfile
-   # geschrieben, es laeuft alles ueber outln(), out() unf voutlnf()
-   #
-   ######################################################################   */
 
-#define   MAN_HEADLINES      2
-#define   MAN_BOTTOMLINES      3
 
-GLOBAL void outln (const char *s)
-{   /* Aenderungen muessen auch in voutf() beruecksichtigt werden!!! */
-   if (desttype==TOMAN && iManPageLength>0)
-   {   if (iManPageLines>=iManPageLength-MAN_BOTTOMLINES)
-      {   man_bottomline();
+
+
+
+
+
+
+/*******************************************************************************
+*
+*     CENTRAL OUTPUT ROUTINES
+*     =======================
+*
+*     Note:
+*     Hier werden Strings in eine Datei geschrieben. 
+*     Nirgends im Sourcecode wird direkt ins Outfile geschrieben, 
+*     es laeuft alles ueber outln(), out() und voutlnf()
+*
+******************************************|************************************/
+
+#define MAN_HEADLINES    2
+#define MAN_BOTTOMLINES  3
+
+/*******************************************************************************
+*
+*  outln():
+*     ?
+*
+*  Notes:
+*     Aenderungen muessen auch in voutf() beruecksichtigt werden!!!
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void outln(
+
+const char  *s)  /* */
+{
+   if (desttype == TOMAN && iManPageLength > 0)
+   {
+      if (iManPageLines >= iManPageLength - MAN_BOTTOMLINES)
+      {
+         man_bottomline();
          iManPagePages++;
-         iManPageLines= 0;
+         iManPageLines = 0;
+         
          if (out_lf_needed)
-         {   if (!bTestmode)
-            {   fprintf(outfile.file, NL);
+         {
+            if (!bTestmode)
+            {
+               fprintf(outfile.file, NL);
             }
+            
             outlines++;
          }
+         
          man_headline();
       }
+
       iManPageLines++;
    }
-
+   
    if (!bTestmode)
-   {   fprintf(outfile.file, "%s" NL, s);
+   {
+      fprintf(outfile.file, "%s" NL, s);
    }
-
+   
    outlines++;
-   out_lf_needed= FALSE;
-}   /* outln */
+   out_lf_needed = FALSE;
+}
 
 
-GLOBAL void voutlnf ( const char *fmt, ... )
+
+
+
+/*******************************************************************************
+*
+*  voutlnf():
+*     ?
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void voutlnf(
+
+const char *fmt,  /* */
+            ...)  /* */
 {
-   va_list ap;
+   va_list  ap;   /* */
 
+   
    if (!bTestmode)
-   {   va_start(ap, fmt);
+   {
+      va_start(ap, fmt);
       vfprintf(outfile.file, fmt, ap);
       va_end(ap);
    }
+   
    outln("");
-}   /* voutlnf */
+}
 
 
 
-GLOBAL void out (const char *s)
-{   /* Aenderungen muessen auch in voutf() beruecksichtigt werden!!! */
-   if (!bTestmode)
-   {   fprintf(outfile.file, "%s", s);
-   }
-   out_lf_needed= TRUE;
-}   /* out */
 
 
+/*******************************************************************************
+*
+*  out():
+*     ?
+*
+*  Notes:
+*     Aenderungen muessen auch in voutf() beruecksichtigt werden!!!
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
 
-GLOBAL void voutf ( const char *fmt, ... )
+GLOBAL void out(
+
+const char  *s)  /* */
 {
-   va_list ap;
+   if (!bTestmode)
+   {
+      fprintf(outfile.file, "%s", s);
+   }
+   
+   out_lf_needed = TRUE;
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  out():
+*     ?
+*
+*  Notes:
+*     Aenderungen muessen auch in voutf() beruecksichtigt werden!!!
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void voutf(
+
+const char  *fmt,  /* */
+             ...)  /* */
+{
+   va_list   ap;   /* */
 
    if (!bTestmode)
-   {   va_start(ap, fmt);
+   {
+      va_start(ap, fmt);
       vfprintf(outfile.file, fmt, ap);
       va_end(ap);
    }
-   out_lf_needed= TRUE;
-}   /* voutf */
+   
+   out_lf_needed = TRUE;
+}
 
 
 
-/*   ######################################################################
-   #
-   #     String-Manipulation
-   #
-   ######################################################################   */
-/*   ----------------------------------------------------------------------
-   stringcenter()
-   Aufgabe:   Zentriert einen String innerhalb <length> Zeichen
-            Ist der String laenger, wird er nicht gekuerzt
-   ->   length: Laenge des zentrierten Strings
-   <->   string:   Zeiger auf den String
-   ----------------------------------------------------------------------   */
-GLOBAL void stringcenter (char *string, size_t length)
+
+
+
+
+
+
+
+/*******************************************************************************
+*
+*     STRING MANIPULATIONS
+*     ====================
+*
+******************************************|************************************/
+
+/*******************************************************************************
+*
+*  stringcenter():
+*     Zentriert einen String innerhalb <length> Zeichen
+*
+*  Notes:
+*     Ist der String laenger, wird er nicht gekuerzt.
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void stringcenter(
+
+char       *string,  /* ^ original string */
+size_t      length)  /* length of centered string */
 {
-   char   s[256];
-   size_t   sl, add;
+   char     s[256];  /* */
+   size_t   sl,      /* string length */
+            add;     /* */
 
-   sl = toklen(string);
-
-   if (sl>=length)
-   {   return;
-   }
-
-   add= (length-sl)/2;   
-   memset(s, ' ', add+1);
-   s[add+1]= EOS;
-   strcpy(s+add, string);
-   strcpy(string, s);
-
-}   /* stringcenter */
-
-
-
-/*   ----------------------------------------------------------------------
-   strcenter()
-   Aufgabe:   Zentriert einen String innerhalb <length> Zeichen
-            oder kuerzt ihn, wenn er zu lang ist
-   ->   length: Laenge des zentrierten Strings
-   <->   string:   Zeiger auf den String
-   ----------------------------------------------------------------------   */
-GLOBAL void strcenter(char *string, size_t length)
-{
-   char   s[256];
-   size_t   sl, add;
-
-   sl = toklen(string);
-
-   if (sl==length)
-   {   return;
-   }
-
-   if ( sl > length)
-   {   /* Der String ist laenger als die uebergebene Laenge, also */
-      /* nicht zentrieren, sondern String kuerzen. */
-      string[length] = EOS;
+   if (length > 255)                      /* avoid buffer overflow */
+   {
+      printf("Warning: stringcenter(): length must not exceed 255!\n");
       return;
    }
 
-   add= (length-sl)/2;
-   memset(s, ' ', add+1);
-   s[add+1]= EOS;
-   strcpy(s+add, string);
-   strcpy(string, s);
+   sl = toklen(string);                   /* get real length of string */
 
-}   /* strcenter */
+   if (sl >= length)                      /* too long? */
+      return;
+   
+   add = (length - sl) / 2;               /* compute additional space */
+   
+   memset(s, ' ', add + 1);               /* fill left part of buffer with spaces */
+
+   s[add + 1] = EOS;                      /* close C string buffer! */
+
+   strcpy(s + add, string);               /* add string to buffer (so it's centered) */
+   
+   strcpy(string, s);                     /* return centered string */
+}
 
 
 
-/*   ------------------------------------------------------------
-   outlncenter()
-   Aufgabe:   Ausgabe eines zentrierten Strings
-   ->         s:   der String
-   ------------------------------------------------------------   */
-GLOBAL void outlncenter ( char *s )
+
+
+/*******************************************************************************
+*
+*  strcenter():
+*     zentriert einen String innerhalb <length> Zeichen oder kuerzt ihn, wenn er zu lang ist
+*
+*  Notes:
+*     Ist der String laenger, wird er nicht gekuerzt.
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void strcenter(
+
+char       *string,  /* ^ original string */
+size_t      length)  /* length of centered string */
 {
-   char tmp[512];
+   char     s[256];  /* */
+   size_t   sl,      /* string length */
+            add;     /* */
+            
 
-   strcpy(tmp, s);
-
-   strcenter(tmp, zDocParwidth);
-
-   outln(tmp);
-}   /*outlncenter*/
-
-
-
-/*   ------------------------------------------------------------
-   outlncenter()
-   Aufgabe:   Ausgabe eines zentrierten Strings mit Auffuellen
-            durch Leerzeichen (fuer DRC)
-   ->         s:   der String
-   ------------------------------------------------------------   */
-GLOBAL void outlncenterfill ( char *s )
-{
-   char tmp[512];
-   size_t sl;
-
-   sl=strlen(tmp);
-   if (sl<511)
+   if (length > 255)                      /* avoid buffer overflow */
    {
-      strcpy(tmp, s);
-
-      strcenter(tmp, zDocParwidth);
-
-      sl=strlen(tmp); /* Neue Länge von tmp ermitteln */
-      while (sl<zDocParwidth)
-      {
-         if (sl<511)
-         {
-            strcat(tmp, " ");
-            sl++;
-         }
-         else
-         {
-            printf("Warning: outlncenterfill: Buffer overrun [2] prevented\n");
-            break;
-         }
-      }
-
-      outln(tmp);
+      printf("Warning: strcenter(): length must not exceed 255!\n");
+      return;
    }
-   else
+
+   sl = toklen(string);                   /* get real length of string */
+
+   if (sl == length)                      /* nothing to do? */
+      return;
+   
+   if (sl > length)                       /* string is longer then requested! */
    {
-      printf("Warning: outlncenterfill: Buffer overrun [1] prevented\n");
+      string[length] = EOS;               /* cut off string! */
+      return;
    }
-}   /*outlncenterfill*/
+
+   add = (length - sl) / 2;               /* compute additional space */
+   
+   memset(s, ' ', add + 1);               /* fill left part of buffer with spaces */
+
+   s[add + 1] = EOS;                      /* close C string buffer! */
+
+   strcpy(s + add, string);               /* add string to buffer (so it's centered) */
+   
+   strcpy(string, s);                     /* return centered string */
+}
 
 
 
-/*   ----------------------------------------------------------------------
-   strright()
-   Aufgabe:   Formatiert einen String rechtsbuendig auf <length> Zeichen
-            Falls er zu lang ist, wird er gekuerzt.
-   ->   length: Laenge des rechtsbuendigen Strings
-   <->   string:   Zeiger auf den String
-   ----------------------------------------------------------------------   */
-GLOBAL void strright(char *string, size_t length)
+
+
+/*******************************************************************************
+*
+*  outlncenter():
+*     Ausgabe eines zentrierten Strings
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void outlncenter(
+
+char     *s)         /* ^ original string */
 {
-   char   s[256];
-   size_t   sl, add;
+   char   tmp[512];  /* string buffer */
 
-   sl = toklen(string);
+   
+   strcpy(tmp, s);                        /* copy string for conversion */
 
-   if (sl==length)
-   {   return;
+   strcenter(tmp, zDocParwidth);          /* convert string */
+
+   outln(tmp);                            /* output centered string */
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  outlncenterfill():
+*     Ausgabe eines zentrierten Strings mit Auffuellen durch Leerzeichen (fuer DRC)
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void outlncenterfill(
+
+char       *s)         /* ^ original string */
+{
+   char     tmp[513];  /* string buffer */
+   size_t   sl;        /* string length */
+
+   
+   sl = strlen(s);                        /* get length of string */
+   
+   if (sl > 512)
+   {
+      printf("Warning: outlncenterfill(): string must not be longer than 512 characters\n");
+      return;
    }
 
-   if ( sl > length)
-   {   /* Der String ist laenger als die uebergebene Laenge, also */
-      /* nicht ausrichten, sondern String kuerzen. */
-      string[length] = EOS;
+   strcpy(tmp, s);                        /* copy string for conversion */
+
+   strcenter(tmp, zDocParwidth);          /* center string */
+
+   sl = strlen(tmp);                      /* get length of converted string */
+
+   if (sl > 512)
+   {
+      printf("Warning: outlncenterfill(): centered string must not be longer than 512 characters\n");
+      return;
+   }
+
+   
+   while (sl < zDocParwidth)              /* fill right part of centered string */
+   {
+      strcat(tmp, " ");                   /* with spaces */
+      sl++;
+   }
+
+   outln(tmp);                            /* output converted string */
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  strright():
+*     Formatiert einen String rechtsbuendig auf <length> Zeichen
+*
+*  Note:
+*     Falls er zu lang ist, wird er gekuerzt.
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void strright(
+
+char       *string,  /* ^ original string */
+size_t      length)  /* length of right-justified string */
+{
+   char     s[256];  /* string buffer */
+   size_t   sl,      /* string length */
+            add;     /* */
+            
+
+   sl = toklen(string);                   /* get length of string */
+
+   if (sl == length)                      /* nothing to do */
+      return;
+
+   if (sl > length)                       /* string too long! */
+   {
+      string[length] = EOS;               /* cut off! */
       return;
    }
 
 #if 1
    /* Diese Methode ist um Faktor 5 schneller als sprintf() */
 
-   add= length - sl;
-   memset(s, ' ', add+1);
-   s[add+1]= EOS;
-   strcpy(s+add, string);
+   add = length - sl;
+   memset(s, ' ', add + 1);
+   s[add + 1] = EOS;
+   strcpy(s + add, string);
 #else
    sprintf(s, "%*s", length, string);
 #endif
 
    strcpy(string, s);
-
-}   /* strright */
-
+}
 
 
-/*   ----------------------------------------------------------
-   Blocksatz fuer Strings, die nicht mit einem   Space beginnen
-   ->   s:      Auszurichtender String
-      len:   Breite
-   ----------------------------------------------------------   */
-#define   MAXBLANKPOS      256
 
-LOCAL size_t    blankpos[MAXBLANKPOS+1];   /* Positionen der Blanks   */
-LOCAL BOOLEAN   justify_from_right;         /* Blanks rechts einfuegen?   */
 
-LOCAL void strjustify ( char *s, size_t len )
+
+/*******************************************************************************
+*
+*  strjustify():
+*     Blocksatz fuer Strings, die nicht mit einem Space beginnen
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+#define MAXBLANKPOS  256
+
+LOCAL size_t    blankpos[MAXBLANKPOS+1];  /* Positionen der Blanks */
+LOCAL BOOLEAN   justify_from_right;       /* Blanks rechts einfuegen? */
+
+LOCAL void strjustify(
+
+char        *s,          /* ^ original string */
+size_t       len)        /* */
 {
-   size_t   sl, tl, i;
-   int count, pos, j;
-   BOOLEAN   is_verbed;
+   size_t    sl,         /* string length */
+             tl,         /* */
+             i;          /* counter */
+   int       count,      /* */
+             pos,        /* */
+             j;          /* */
+   BOOLEAN   is_verbed;  /* */
+   
 
-   if (s[0]==' ' || s[0]==EOS)
-   {   return;
-   }
+   if (s[0] == ' ' || s[0] == EOS)        /* string starts with space or is empty? */
+      return;
 
-   if ( len>MAXBLANKPOS )
-   {   return;
-   }
-
-   tl= toklen(s);
-
-   if (tl>len)
-   {   return;
-   }
-
-   sl= strlen(s);
-
-   count= -1;
-
-   is_verbed= styleflag.verbatim;
-
-   for (i=0; i<sl; i++)
+   if (len > MAXBLANKPOS)                 /* string too long! */
    {
-      if (!is_verbed)      /* Nur die, die nicht in (!V)...(!v) stehen */
-      {   if (s[i]==' ')
-         {   count++;
-            blankpos[count]= i;
+      printf("Warning: outlncenterfill(): string must not be longer than % characters\n", MAXBLANKPOS - 1);
+      return;
+   }
+
+   tl = toklen(s);                        /* get real length of string */
+
+   if (tl > len)                          /* string longer than required */
+      return;
+
+   sl = strlen(s);
+
+   count = -1;
+
+   is_verbed = styleflag.verbatim;
+
+   for (i = 0; i < sl; i++)
+   {
+      if (!is_verbed)                     /* Nur die, die nicht in (!V)...(!v) stehen */
+      {
+         if (s[i] == ' ')
+         {
+            count++;
+            blankpos[count] = i;
          }
       }
 
-      if ( s[i]==STYLEMAGIC[0] && s[i+1]==STYLEMAGIC[1] )
-      {   switch (s[i+2])
-         {   case C_VERB_ON:      is_verbed= TRUE;   break;
-            case C_VERB_OFF:   is_verbed= FALSE;   break;
+      if (s[i] == STYLEMAGIC[0] && s[i + 1] == STYLEMAGIC[1])
+      {
+         switch (s[i + 2])
+         {
+         case C_VERB_ON:
+            is_verbed = TRUE;
+            break;
+            
+         case C_VERB_OFF:
+            is_verbed = FALSE;
+            break;
          }
-         i+= 4;
+         
+         i += 4;
       }
    }
 
-   if (count<0)
-   {   return;
-   }
+   if (count < 0)
+      return;
 
    if (justify_from_right)
-   {   pos= count;
-      while (tl<len)
-      {   strinsert(s+blankpos[pos], " ");
+   {
+      pos = count;
+
+      while (tl < len)
+      {
+         strinsert(s + blankpos[pos], " ");
          tl++;
-         for (j=pos; j<=count; j++)
-         {   blankpos[j]++;
-         }
+         
+         for (j = pos; j <= count; j++)
+            blankpos[j]++;
+         
          pos--;
-         if (pos<0)
-         {   pos= count;
-         }
+         
+         if (pos < 0)
+            pos = count;
       }
    }
    else
-   {   pos= 0;
-      while (tl<len)
-      {   strinsert(s+blankpos[pos], " ");
+   {
+      pos = 0;
+      
+      while (tl < len)
+      {
+         strinsert(s + blankpos[pos], " ");
          tl++;
-         for (j=pos; j<=count; j++)
-         {   blankpos[j]++;
-         }
+         
+         for (j = pos; j <= count; j++)
+            blankpos[j]++;
+         
          pos++;
-         if (pos>count)
-         {   pos= 0;
-         }
+         
+         if (pos > count)
+            pos= 0;
       }
    }
 
-   justify_from_right= !justify_from_right;
+   justify_from_right = !justify_from_right;
+}
 
-}   /* strjustify */
 
 
-/*   ------------------------------------------------------------
-   output_ascii_line()
-   Aufgabe:   Ausgabe einer Linie
-   ->   c:      das Zeichen, aus dem die Linie bestehen soll
-      len:   die Laenge der Linie
-   ------------------------------------------------------------   */
-GLOBAL void output_ascii_line ( const char *c, const size_t len )
+
+
+/*******************************************************************************
+*
+*  output_ascii_line():
+*     output a line with a repeated character
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void output_ascii_line(
+
+const char    *c,       /* das Zeichen, aus dem die Linie bestehen soll */
+const size_t   len)     /* die Laenge der Linie */
 {
-   char s[512];
+   char        s[512];  /* buffer */
 
-   memset(s, c[0], len);
-   s[len]= EOS;
-   outln(s);   
+   
+   memset(s, c[0], len);                  /* fill buffer with character */
+   s[len] = EOS;                          /* close C string! */
+   
+   outln(s);                              /* output */
+}
 
-}   /*output_ascii_line*/
+
+
+
+
+
+
 
 
 
@@ -990,7 +1232,7 @@ GLOBAL void output_ascii_line ( const char *c, const size_t len )
    # Vorspann oder nur ausserhalb des Vorspanns benutzt
    # werden duerfen.
    #
-   ############################################################   */
+   ############################################################ */
 LOCAL void cmd_outside_preamble ( void )
 {
    if (bInsideDocument)   
@@ -1011,7 +1253,7 @@ LOCAL void cmd_inside_preamble ( void )
    # Testen, ob ein Kommando fuer die Ausgabesprache bzw.
    # das Ausgabeformat oder das aktuelle OS bestimmt ist
    #
-   ############################################################   */
+   ############################################################ */
 LOCAL BOOLEAN str_for_destlang ( const char *s )
 {
    BOOLEAN flag= FALSE;
@@ -1173,7 +1415,7 @@ LOCAL BOOLEAN str_for_os ( const char *s )
    #
    # Farben (gemaess W3C-HTML3.2-DTD)
    #
-   ############################################################   */
+   ############################################################ */
 
 typedef struct _udocolor
 {   int val;
@@ -1370,7 +1612,7 @@ LOCAL void set_wh4_linkcolor (char *s, const int c)
    #
    # Testen, ob bei einem Kommando [on] oder [off] benutzt wird
    #
-   ############################################################   */
+   ############################################################ */
 LOCAL BOOLEAN check_on ( void )
 {
    char n[512];
@@ -1392,7 +1634,7 @@ LOCAL BOOLEAN check_off ( void )
    #
    # Symbole (Commandline-Definitionen) verwalten
    #
-   ############################################################   */
+   ############################################################ */
 GLOBAL void del_udosymbol ( const char *s )
 {
    BOOLEAN found= FALSE;
@@ -1476,7 +1718,7 @@ LOCAL void c_unset ( void )
    #
    # Horizontale Trennlinien ausgeben
    #
-   ############################################################   */
+   ############################################################ */
 GLOBAL void c_hline ( void )
 {
    int indent;
@@ -1554,7 +1796,7 @@ GLOBAL void c_hline ( void )
    #  1: p > q
    #  0: p == q
    #
-   ############################################################   */
+   ############################################################ */
 
 LOCAL int idxlist_compare (IDXLIST *p, IDXLIST *q)
 {
@@ -1616,7 +1858,7 @@ LOCAL IDXLIST *idxlist_sort (IDXLIST *p)
       return p;
 }
 
-/*   ------------------------------------------------------------   */
+/*   ------------------------------------------------------------ */
 
 LOCAL IDXLIST * new_idxlist_item ( void )
 {
@@ -1919,7 +2161,7 @@ LOCAL void print_info_index ( void )
       Achtung: Es duerfen keine zwei gleiche Indexeintraege benutzt
       werden, da Info sonst den falschen Node anspringt. Daher
       werden hier zur Not Zahlen in Klammern angefuegt.
-      ------------------------------------------------------------   */
+      ------------------------------------------------------------ */
 
    do
    {
@@ -2011,7 +2253,7 @@ LOCAL void print_raw_index ( void )
    print_index() sorgt fuer die Ausgabe eines
    Indexregisters und wird von c_end_document()
    aufgerufen.   r5pl6
-   --------------------------------------------------   */
+   -------------------------------------------------- */
 GLOBAL void print_index ( void )
 {
    if (no_index || !bCalledIndex)
@@ -2048,7 +2290,7 @@ GLOBAL void print_index ( void )
    <Object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
       <param name="Keyword" value="MyKLink">
    </OBJECT>
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 GLOBAL void output_htmlhelp_index ( const int count, const char *x0, const char *x1, const char *x2 )
 {
    outln("<OBJECT type=\"application/x-oleobject\" classid=\"clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e\">");
@@ -2074,7 +2316,7 @@ GLOBAL void output_htmlhelp_index ( const int count, const char *x0, const char 
 /*   --------------------------------------------------------------
    c_index()
    Bearbeiten des Kommandos !index idx1 [!! idx2 [!! idx3]]
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_index ( void )
 {
    char    idx[512];
@@ -2314,7 +2556,7 @@ LOCAL void c_index ( void )
    #
    # Ueberschriften erzeugen
    #
-   ############################################################   */
+   ############################################################ */
 LOCAL void c_heading ( void )
 {
    char name[512], n[512], align[64];
@@ -3357,7 +3599,7 @@ LOCAL void c_listsubsubsubsubheading(void)
    #
    # Seitenumbruch erzeugen (!newpage)
    #
-   ############################################################   */
+   ############################################################ */
 GLOBAL void c_newpage( void )
 {
 
@@ -3405,11 +3647,11 @@ GLOBAL void c_newpage( void )
 
 /*   ############################################################
    # Diverses
-   ############################################################   */
+   ############################################################ */
 /*   --------------------------------------------------------------
    c_tunix()
    Macht gar nichts (wer haette das gedacht)
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_tunix ( void )
 {
    return;
@@ -3418,7 +3660,7 @@ LOCAL void c_tunix ( void )
 
 /*   --------------------------------------------------------------
    c_debug(): Macht auch nichts -> fuer's Testen
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 GLOBAL void c_debug ( void )
 {
 }   /* c_debug */
@@ -3431,7 +3673,7 @@ GLOBAL void c_debug ( void )
    Variable nop_detected zu togglen. Daher eignet sich !nop
    erstklassig zum Debuggen, in dem man in problematischen
    Quelltext vor die jeweilige Stelle !nop einfuegt.
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_nop ( void )
 {
    bNopDetected= !bNopDetected;
@@ -3442,7 +3684,7 @@ LOCAL void c_nop ( void )
    Sobald !break im Quelltext auftritt, wird die Uebersetzung
    abgebrochen. Seit Rel.5 PL17 ist !break ein "richtige"
    Kommando, kann daher auch zwischen Abfragebefehlen stehen.
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_break ( void )
 {
    bBreakInside= TRUE;
@@ -3456,7 +3698,7 @@ LOCAL void c_break ( void )
    c_error()
    Bei !error werden die folgenden Zeichen ausgegeben (auch
    im Logfile) und das Programm beendet.
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_error ( void )
 {
    char e[512];
@@ -3475,7 +3717,7 @@ LOCAL void c_error ( void )
    c_sloppy() / c_fussy()
    Togglen des internen Flags, ob kurze Zeilen bemaengelt werden
    sollen.
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_sloppy ( void )
 {
    bDocSloppy= TRUE;
@@ -3492,14 +3734,14 @@ LOCAL void c_fussy ( void )
    c_code()
    Zeichensatz intern umstellen. iCharset wird an einigen Stellen
    in chr.c abgefragt, besonders in recode()
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_code ( void )
 {
    char s[256];
    int i;
 
-   /* r6pl2: Neue Version "!code iso"   */
-   /* vorher: "!code_iso" etc.         */
+   /* r6pl2: Neue Version "!code iso" */
+   /* vorher: "!code_iso" etc. */
 
    if (token[1][0]==EOS)
    {   error_missing_parameter("!code");
@@ -3527,7 +3769,7 @@ LOCAL void c_code ( void )
    Bearbeiten der Kommandos !autoref [off] und !autoref [on]
    Wenn autoref_off==TRUE so erzeugt UDO in toc.c keine
    automatischen Querverweise im Outfile
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_autoref ( void )
 {
    BOOLEAN newoff;
@@ -3569,7 +3811,7 @@ LOCAL void c_autoref ( void )
    !autoref_items [on]
    Wenn autoref_items_off==TRUE so ruft UDO in env.c bei c_item()
    keine automatische Referenzierung 
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_autoref_items ( void )
 {
    BOOLEAN newoff;
@@ -3601,7 +3843,7 @@ LOCAL void c_autoref_items ( void )
    Bearbeiten des Kommandos universal_charset [off] / [on]
    Wenn universal_charset_on==TRUE, so werden Strings wie
    ("a) oder ("U) in ae oder Ue umgewandelt.
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_universal_charset ( void )
 {
    BOOLEAN newon;
@@ -3635,7 +3877,7 @@ LOCAL void c_universal_charset ( void )
    ausgegeben, da˜ WinWord sie auf einer Seite zusammenhaengend
    darstellt. Ansonsten bricht WinWord auch innerhalb einer
    Tabelle um.
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_rtf_keep_tables ( void )
 {
    if ( token_counter<=1 )
@@ -3652,7 +3894,7 @@ LOCAL void c_rtf_keep_tables ( void )
 /*   --------------------------------------------------------------
    c_verbatim_backcolor()
    Hintergrundfarbe fuer HTML-verbatim-Umgebungen setzen
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_verbatim_backcolor ( void )
 {
    char color[256];
@@ -3933,12 +4175,12 @@ GLOBAL void c_toplink(void)
    # Formatabhaengige Kommandos
    #
    #
-   ############################################################   */
+   ############################################################ */
 
 /*   --------------------------------------------------------------
    c_tex_dpi()
    Setzen des DPI-Wertes zur Ausgabe von Bildern mit LaTeX
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_tex_dpi ( void )
 {
    iTexDPI= atoi(token[1]);
@@ -3952,7 +4194,7 @@ LOCAL void c_tex_dpi ( void )
 /*   --------------------------------------------------------------
    c_tex_verb()
    Setzen des Zeichens, welches fuer \verb... verwendet wird
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_tex_verb ( void )
 {
    cTexVerb= token[1][0];
@@ -3969,7 +4211,7 @@ LOCAL void c_tex_verb ( void )
    Die Zeichenbreiten werden zur Berechnung von Einrueckungen
    in Listen und Tabellen verwendet und koennen von UDO nicht
    ueber das System abgefragt werden.
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_win_charwidth ( void )
 {
    iDocCharwidth= atoi(token[1]);
@@ -4002,7 +4244,7 @@ LOCAL void c_rtf_charwidth ( void )
 /*   --------------------------------------------------------------
    c_rtf_add_colour
    Setzen zusaetzlicher Farben im Kopf der RTF-Datei
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_rtf_add_colour ( void )
 {
    um_strncpy(sDocColour, token[1], 50, 512, "c_rtf_add_colour[1]");
@@ -4017,7 +4259,7 @@ LOCAL void c_rtf_add_colour ( void )
    c_html_img_suffix()
    Setzen der Endung, die UDO beim !image- und (!img)-Befehl
    fuer HTML verwenden soll. Default: .gif
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_html_img_suffix ( void )
 {
    sDocImgSuffix[0]= EOS;
@@ -4037,7 +4279,7 @@ LOCAL void c_html_img_suffix ( void )
    c_html_nodesize()
    Setzen, welche Groesse fuer die Erzeugung von Ueberschriften
    verwendet werden soll. Default: 1 -> <H1>...</H1>
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_html_nodesize ( void )
 {
    html_nodesize= atoi(token[1]);
@@ -4057,7 +4299,7 @@ LOCAL void c_html_nodesize ( void )
 /*   --------------------------------------------------------------
    htag_img_suffix()
    Setzen der Bildendung fuer HP-Helptag-SGML. Default: .tiff
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_htag_img_suffix ( void )
 {
    sDocImgSuffix[0]= EOS;
@@ -4075,7 +4317,7 @@ LOCAL void c_htag_img_suffix ( void )
 /*   --------------------------------------------------------------
    c_tabwidth()
    Setzen der Tabulator-Positionen fuer Verbatim-Umgebungen
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_tabwidth ( void )
 {
    bDocTabwidth= atoi(token[1]);
@@ -4093,7 +4335,7 @@ LOCAL void c_tabwidth ( void )
 /*   --------------------------------------------------------------
    c_verbatimsize()
    Setzen der Fontgroesse von verbatim-Umgebungen
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_verbatimsize ( void )
 {
    if (strstr(token[1], "normal"))
@@ -4129,7 +4371,7 @@ LOCAL void c_verbatimsize ( void )
 /*   --------------------------------------------------------------
    c_linedrawsize()
    Setzen der Fontgroesse von linedraw-Umgebungen
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_linedrawsize ( void )
 {
    if (strstr(token[1], "normal"))
@@ -4170,7 +4412,7 @@ LOCAL void c_linedrawsize ( void )
    Die Funktion erhaelt eine unbearbeitete Zeile, also koennen
    die Befehle noch eingerueckt sein!
    Beispiel: !raw [tex] \documentstyle[german]{article}
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void c_check_raw ( char *s )
 {
    size_t contlen;
@@ -4240,7 +4482,7 @@ LOCAL void c_check_raw ( char *s )
    convert_image()
    Bearbeiten des !image-Kommandos samt Weitergabe der Infos an
    die Funktionen in img.c   
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void convert_image ( const BOOLEAN visible )
 {
    char   filename[512], caption[512], sTemp[1024];
@@ -4334,7 +4576,7 @@ LOCAL void convert_image ( const BOOLEAN visible )
          break;
       case TOPDL:
          c_internal_styles(caption);
-         /* build_image_filename(filename, ".png");   */
+         /* build_image_filename(filename, ".png"); */
          qreplace_all(filename, "\\_", 2, "_", 1);
          c_png_output(filename, caption, ".png", visible);
          break;
@@ -4390,7 +4632,7 @@ LOCAL void c_image_nonr ( void )
    # Include, Einbinden von weiteren Dateien mittels
    # !include, !vinclude, !rinclude, !sinclude und !cinclude
    #
-   ############################################################   */
+   ############################################################ */
 /* nicht LOCAL, da in abo.c benutzt */
 GLOBAL void c_include ( void )
 {
@@ -4737,7 +4979,7 @@ LOCAL void c_input ( void )
    # Silbentrennung
    #
    #
-   ############################################################   */
+   ############################################################ */
 LOCAL void str2silben(
 
 char *s)
@@ -4825,12 +5067,12 @@ char *s)
    # Tokenverwaltung
    #
    #
-   ############################################################   */
+   ############################################################ */
 /*   --------------------------------------------------------------
    check_parwidth()
    Testen, ob der Benutzer bei !parwith etwas brauchbares
    angegeben hat.
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 
 LOCAL void check_parwidth (void)
 {
@@ -4872,7 +5114,7 @@ LOCAL void check_parwidth (void)
    moeglich sein. Da in der Zeile noch Ersetzungen stattfinden
    koennen, sollte der Buffer zehnmal so gross sein wie die
    maximale Zeilenlaenge.
-   ------------------------------------------------------------   */
+   ------------------------------------------------------------ */
 LOCAL BOOLEAN malloc_token_output_buffer ( void )
 {
    const size_t bs[6]=   { 32768L, 16384L, 8192L, 4096L, 2048L };
@@ -4909,7 +5151,7 @@ LOCAL BOOLEAN malloc_token_output_buffer ( void )
 /*   --------------------------------------------------------------
    free_token_output_buffer() gibt den oben angeforderten
    Speicher wieder frei.
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void free_token_output_buffer ( void )
 {
 
@@ -4927,7 +5169,7 @@ LOCAL void free_token_output_buffer ( void )
    Falls der Puffer verwendet wird, entstehen furchtbar lange
    Zeilen, die man schlecht nachbearbeiten koennte. Daher
    werden hier ein paar LFs an geeigneter Stelle eingefuegt.
-   ------------------------------------------------------------   */
+   ------------------------------------------------------------ */
 LOCAL void insert_nl_token_buffer ( void )
 {
    char   *ptr, *start;
@@ -4960,7 +5202,7 @@ LOCAL void insert_nl_token_buffer ( void )
    toklen()
    toklen ermittelt die Laenge eines Strings, die er haette,
    wenn alle UDO-Spezialitaeten umgewandelt worden waeren.
-   ------------------------------------------------------------   */
+   ------------------------------------------------------------ */
 GLOBAL size_t toklen ( char *s )
 {
    char n[5];
@@ -5102,7 +5344,7 @@ GLOBAL size_t toklen ( char *s )
    tokcat haengt alle ab dem zweiten Token (token[1]) an einen
    String an, getrennt durch ein Leerzeichen.
         maxlen gibt die maximale Größe des Puffers in s an
-   ------------------------------------------------------------   */
+   ------------------------------------------------------------ */
 GLOBAL void tokcat ( char *s, size_t maxlen )
 {
    register int i;
@@ -5139,7 +5381,7 @@ GLOBAL void tokcat ( char *s, size_t maxlen )
    befinden sich alle danach mit Ausnahme des Kommandos aus
    token[0] alle Tokens, die durch Leerzeichen getrennt wurden.
         maxlen gibt die maximale Größe des Puffers in s an
-   ------------------------------------------------------------   */
+   ------------------------------------------------------------ */
 GLOBAL void tokcpy2 ( char *s, size_t maxlen )
 {
    s[0]= EOS;
@@ -5151,7 +5393,7 @@ GLOBAL void tokcpy2 ( char *s, size_t maxlen )
    output_hyphen_line()
    Kurze Zeilen bemaengeln und Wort in die Hyphendatei sichern
    ->   s:   Das ueberlange Wort
-   ------------------------------------------------------------   */
+   ------------------------------------------------------------ */
 LOCAL void output_hyphen_line ( const char *s )
 {
    /* Erst oeffnen, wenn die Datei gebraucht wird */
@@ -5187,7 +5429,7 @@ LOCAL void output_hyphen_line ( const char *s )
    zur Ausgabe mittels output_hyphen_line() vor.
    ->   len:   Laenge der kurzen Zeile
       t:      Das nicht trennbare Wort
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void warning_short_line ( const size_t len, const char *t )
 {
    char   next[128], *ptr;
@@ -5195,9 +5437,9 @@ LOCAL void warning_short_line ( const size_t len, const char *t )
    int      nr;
    BOOLEAN   flag;
 
-   /* Wenn im naechsten Token bereits ein Trennvorschlag steckt,   */
-   /* dann die Zeile nicht bemaengeln, da offensichtlich nicht      */
-   /* besser getrennt werden kann.                           */
+   /* Wenn im naechsten Token bereits ein Trennvorschlag steckt, */
+   /* dann die Zeile nicht bemaengeln, da offensichtlich nicht */
+   /* besser getrennt werden kann. */
    if (strstr(t, DIVIS_S)!=NULL)
    {   return;
    }
@@ -5217,8 +5459,8 @@ LOCAL void warning_short_line ( const size_t len, const char *t )
 
    if (!bNoHypfile)
    {
-      /* Nur den Teil des Wortes bis zum ersten Minus oder   */
-      /* Leerzeichen ausgeben.                        */
+      /* Nur den Teil des Wortes bis zum ersten Minus oder */
+      /* Leerzeichen ausgeben. */
 
       ptr=strchr(next, '-');
       if (ptr!=NULL)
@@ -5230,8 +5472,8 @@ LOCAL void warning_short_line ( const size_t len, const char *t )
       {   ptr[0]= EOS;
       }
 
-      /* Falls ein Wort nur einen Vokal enthaelt, dann macht es   */
-      /* keinen Sinn, dieses Wort in die Hyphendatei zu schreiben   */
+      /* Falls ein Wort nur einen Vokal enthaelt, dann macht es */
+      /* keinen Sinn, dieses Wort in die Hyphendatei zu schreiben */
 
       nr= 0;
       for (i=0; i<strlen(next); i++)
@@ -5280,7 +5522,7 @@ LOCAL void warning_short_line ( const size_t len, const char *t )
    str2tok()
    Nimmt sich einen String, pflueckt in auseinander und kopiert
    die enthaltenen Worte nach token[]
-   ------------------------------------------------------------   */
+   ------------------------------------------------------------ */
 GLOBAL void str2tok ( char *s )
 {
    char      *tok;
@@ -5315,7 +5557,7 @@ GLOBAL void str2tok ( char *s )
    Die Strings muessen alle geleert werden, da fast nirgends
    der token_counter getestet wird.
    nicht LOCAL, wird von abo.c benutzt
-   ------------------------------------------------------------   */
+   ------------------------------------------------------------ */
 GLOBAL void token_reset ( void )
 {
    register int i;
@@ -5331,7 +5573,7 @@ GLOBAL void token_reset ( void )
    to_check_rtf_quote_indent() Subfunktion von token_output()
    Quote-Umgebungen rechts einruecken. Bei RTFs wird \ri
    angehaengt, bei ASCII-Formaten der umbruch verringert.
-   ------------------------------------------------------------   */
+   ------------------------------------------------------------ */
 LOCAL void to_check_rtf_quote_indent ( char *s )
 {
    char   t[80];
@@ -5369,7 +5611,7 @@ LOCAL void to_check_rtf_quote_indent ( char *s )
    eine spezielle Funktion
    ->   u:   Anzahl der Leerzeichen, um die eine Zeile eingerueckt
          werden muss.
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void to_check_quote_indent ( size_t *u )
 {
    int   i, val;
@@ -5407,7 +5649,7 @@ LOCAL void to_check_quote_indent ( size_t *u )
    
 
    ##############################################################
-   ##############################################################   */
+   ############################################################## */
 
 /*******************************************************************************
 *
@@ -6017,7 +6259,7 @@ BOOLEAN           reset_internals)        /* */
             case TOAMG:
             case TOPCH:
 #if 0
-               /* z wurde, ausser bei der Zentrierung  */
+               /* z wurde, ausser bei der Zentrierung */
                /* nicht veraendert. len_zeile hat also */
                /* noch den richtigen Wert. */
 
@@ -6102,7 +6344,7 @@ BOOLEAN           reset_internals)        /* */
             /* Changed in V6.5.6 [NHz] */
                strcat(z, " ");
    /*          replace_last (z, "\n", " \n");
-   */
+ */
          }
 
 
@@ -6503,7 +6745,7 @@ BOOLEAN           reset_internals)        /* */
    tokenize()
    Zeilen mittels str2tok() in Tokens wandeln und eventuell
    enthaltene Kommandos ausfuehren.
-   ------------------------------------------------------------   */
+   ------------------------------------------------------------ */
 GLOBAL void tokenize ( char *s)
 {
    BOOLEAN   newtoken= FALSE;
@@ -6611,7 +6853,7 @@ GLOBAL void tokenize ( char *s)
    #
    # Pfadseparator und Fileendung anpassen
    #
-   ############################################################   */
+   ############################################################ */
 GLOBAL void change_sep_suffix ( char *full, const char *suff )
 {
    fsplit(full, tmp_driv, tmp_path, tmp_name, tmp_suff);
@@ -6638,7 +6880,7 @@ GLOBAL void change_sep_suffix ( char *full, const char *suff )
    # Hyphendatei sortieren und Dupes entfernen
    # Die Sortierroutine entstammt den C-Snippets
    #
-   ############################################################   */
+   ############################################################ */
 LOCAL int hyplist_compare (HYPLIST *p, HYPLIST *q)
 {
    return my_stricmp(p->data, q->data);
@@ -6682,7 +6924,7 @@ LOCAL HYPLIST *hyplist_sort (HYPLIST *p)
       return p;
 }
 
-/*   ------------------------------------------------------------   */
+/*   ------------------------------------------------------------ */
 
 LOCAL HYPLIST *new_hyplist_item ( void )
 {
@@ -6781,7 +7023,7 @@ LOCAL void sort_hypfile ( const char *name )
    # und Pfad des Infiles verwendet.
    # Bug: UDO kommt nicht mit "udo -o ! ../udo.u" klar.
    #
-   ############################################################   */
+   ############################################################ */
 GLOBAL void build_search_file ( char *d, const char *suff )
 {
    char   tmp_path2[MYFILE_PATH_LEN+1];
@@ -6840,7 +7082,7 @@ GLOBAL void build_search_file ( char *d, const char *suff )
    # Dateinamen komplettieren, ausgehend vom Pfad der
    # Ausgabedatei
    #
-   ############################################################   */
+   ############################################################ */
 GLOBAL void build_search_file_output ( char *d, const char *suff )
 {
    char   tmp_path2[MYFILE_PATH_LEN+1];
@@ -6911,7 +7153,7 @@ GLOBAL void build_search_file_output ( char *d, const char *suff )
    # !include Bar\foo   ->   C:\Foo\Bar\foo.(suff)
    #   (4)               relatives Verzeichnis:
    #                  Laufwerk und Pfad des Infiles
-   ############################################################   */
+   ############################################################ */
 GLOBAL void build_include_filename ( char *d, const char *suff )
 {
 
@@ -7006,7 +7248,7 @@ GLOBAL void build_include_filename ( char *d, const char *suff )
    # !image Bar\foo   ->   C:\Foo\Bar\foo.gif
    #   (4)               relatives Verzeichnis:
    #                  Laufwerk und Pfad des Outfiles
-   ############################################################   */
+   ############################################################ */
 GLOBAL void build_image_filename ( char *d, const char *suff )
 {
 
@@ -7090,7 +7332,7 @@ GLOBAL void build_image_filename ( char *d, const char *suff )
    #
    # Preambel fuer einige Formate ausgeben
    #
-   ############################################################   */
+   ############################################################ */
 LOCAL void output_preamble ( void )
 {
    char s[512];
@@ -7274,12 +7516,12 @@ LOCAL void output_preamble ( void )
    # werden, gesetzt, und die Zeile geleert, so dass sie nicht
    # weiter bearbeitet wird. (r5pl6)
    #
-   ############################################################   */
+   ############################################################ */
 /*   --------------------------------------------------------------
    clear_if_stack()
    leert den Stack der !if-Umgebungen. Muss vor pass1() und
    pass2() aufgerufen werden, am besten in udo()
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void clear_if_stack ( void )
 {
    register int i;
@@ -7299,7 +7541,7 @@ LOCAL void clear_if_stack ( void )
    Umgebung auf den Stack. Falls ignore==TRUE, werden alle Zeilen
    bis "!else" oder "!endif" von pass1() und pass2() nicht
    bearbeitet
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void push_if_stack ( int kind, BOOLEAN ignore )
 {
    if (counter_if_stack<MAX_IF_STACK)
@@ -7318,7 +7560,7 @@ LOCAL void push_if_stack ( int kind, BOOLEAN ignore )
 
 /*   --------------------------------------------------------------
    holt bei "!endif" die letzte !if-Umgebung vom Stack
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void pop_if_stack ( void )
 {
    if (counter_if_stack>0)
@@ -7334,7 +7576,7 @@ LOCAL void pop_if_stack ( void )
 
 /*   --------------------------------------------------------------
    wird beim Eintreffen von "!else" aufgerufen
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void toggle_if_stack ( void )
 {
    if (counter_if_stack>0)
@@ -7350,7 +7592,7 @@ LOCAL void toggle_if_stack ( void )
 /*   --------------------------------------------------------------
    testet, ob das ignore-Flag bei *einer* der !if-Umgebungen
    gesetzt ist
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL BOOLEAN is_if_stack_ignore ( void )
 {
    register int i;
@@ -7373,7 +7615,7 @@ LOCAL BOOLEAN is_if_stack_ignore ( void )
 /*   --------------------------------------------------------------
    leert den String, damit er nicht weiterbearbeitet wird
    im 2. Durchgang wird der letzte Absatz ausgegeben
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void pass_check_free_line ( char *zeile, int pnr )
 {
    if (pnr==PASS2 && token_counter>0)
@@ -7387,7 +7629,7 @@ LOCAL void pass_check_free_line ( char *zeile, int pnr )
    pass_check_if()
    Ueberprueft Zeilen auf die Abfragebefehle und leitete dann
    die notfalls noetigen Schritte ein (Setzen der Ignore-Flags)
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void pass_check_if (char *zeile, int pnr)
 {
    BOOLEAN ignore, match;
@@ -7523,7 +7765,7 @@ LOCAL void pass_check_if (char *zeile, int pnr)
    # Moegliche Syntax:
    # !no_* [<formate>]
    # !use_* [<formate>] !<parameter> <wert>
-   ############################################################   */
+   ############################################################ */
 LOCAL void get_switch_par ( const UDOSWITCH *us )
 {
    register int i;
@@ -8322,7 +8564,7 @@ LOCAL BOOLEAN pass1_check_everywhere_commands ( void )
    #
    # Spezielle Umgebungen fuer Pass 1 testen
    #
-   ############################################################   */
+   ############################################################ */
 LOCAL void pass1_check_environments ( char *zeile )
 {
    /* Verbatim-Umgebung */
@@ -8434,7 +8676,7 @@ LOCAL void pass1_check_environments ( char *zeile )
    #
    # Zeilen einlesen und Inhaltsverzeichnis ermitteln (Pass One)
    #
-   ############################################################   */
+   ############################################################ */
 
 #define   USE_PASS1_OUTPUT   0   
 
@@ -8555,8 +8797,8 @@ LOCAL BOOLEAN pass1 (char *datei)
             del_whitespaces(zeile);
 
             if ( (zeile[0]==META_C) && (zeile[1]!=QUOTE_C) )
-            {   /* Erster Parameter von !macro und !define   */
-               /* darf nicht gequotet werden!            */
+            {   /* Erster Parameter von !macro und !define */
+               /* darf nicht gequotet werden! */
                if (!bInsideDocument)
                {   if ( strncmp(zeile, "!define", 7)==0 )
                   {   token_reset();
@@ -8661,7 +8903,7 @@ LOCAL BOOLEAN pass1 (char *datei)
                      6.3.11 [vj]: the len of current_node_name_sys is defined as CNNS_LEN in constant.h
                      Perhaps we should habe a look, if this copy function can be done
                      in an if, because this copy needs time <????>
-                   */
+ */
                      um_strcpy(current_node_name_sys, zeile, CNNS_LEN, "pass1: current_node_name_sys");
 
 
@@ -8990,8 +9232,8 @@ LOCAL BOOLEAN pass1 (char *datei)
       PASS1_READ_NEXT_LINE:
 #endif
 
-      /* Das obige Label kann direkt angesprungen werden   */
-      /* und ueberspringt somit ueberfluessige Abfragen   */
+      /* Das obige Label kann direkt angesprungen werden */
+      /* und ueberspringt somit ueberfluessige Abfragen */
 
    }   /* while (fgets) */
 
@@ -9012,7 +9254,7 @@ LOCAL BOOLEAN pass1 (char *datei)
    #
    # Eine Zeile einer verbatim-Umgebung ausgeben
    #
-   ############################################################   */
+   ############################################################ */
 LOCAL void output_verbatim_line ( char *zeile )
 {
    char indent[128];
@@ -9156,7 +9398,7 @@ LOCAL void output_verbatim_line ( char *zeile )
    #
    # Eine Zeile einer linedraw-Umgebung ausgeben (nur RTF)
    #
-   ############################################################   */
+   ############################################################ */
 LOCAL void output_linedraw_line ( char *zeile )
 {
    char indent[128];
@@ -9184,7 +9426,7 @@ LOCAL void output_linedraw_line ( char *zeile )
    #
    # Eine Zeile einer verbatim-Umgebung ausgeben
    #
-   ############################################################   */
+   ############################################################ */
 LOCAL void output_comment_line ( char *zeile )
 {
    switch (desttype)
@@ -9256,7 +9498,7 @@ LOCAL void c_comment ( void )
    #
    # Spezielle Umgebungen fuer Pass 2 testen
    #
-   ############################################################   */
+   ############################################################ */
 LOCAL void pass2_check_environments ( char *zeile )
 {
    char *found;
@@ -9486,7 +9728,7 @@ LOCAL void pass2_check_environments ( char *zeile )
    # Zeilen ausgeben/bearbeiten, falls eine spezielle Umgebung
    # in Pass 2 aktiv ist
    #
-   ############################################################   */
+   ############################################################ */
 LOCAL void pass2_check_env_output ( char *zeile )
 {
    switch (pflag[PASS2].env)
@@ -9553,7 +9795,7 @@ LOCAL void pass2_check_env_output ( char *zeile )
    # Zeilen einlesen und umwandeln (Pass 2)
    #
    #
-   ############################################################   */
+   ############################################################ */
 LOCAL BOOLEAN pass2 (char *datei)
 {
    MYTEXTFILE    *file;
@@ -9677,7 +9919,7 @@ LOCAL BOOLEAN pass2 (char *datei)
                /* Changed in V6.5.5 [NHz]
                                          * v6.5.7 [vj] c_commands_inside(zeile, *TRUE* instead of FALSE)
                                          *             closes bug #0000059
-                                         */
+ */
                c_commands_inside(zeile, TRUE);
 
                replace_macros(zeile);
@@ -9732,7 +9974,7 @@ LOCAL BOOLEAN pass2 (char *datei)
 
 /*   ############################################################
    # Eintraege fuer das Projectfile anlegen
-   ############################################################   */
+   ############################################################ */
 GLOBAL void save_upr_entry_infile ( const char *filename )
 {
    if (bUseUPRfile && bUPRopened)   /*r6pl12*/
@@ -9803,7 +10045,7 @@ GLOBAL void save_upr_entry_index ( const int level, const char *filename, const 
 
 /*   ############################################################
    # Commandofile fuer Pure-C-Helpcompiler anlegen
-   ############################################################   */
+   ############################################################ */
 LOCAL void save_pchelp_commandfile ( void )
 {
    FILE   *cmdfile;
@@ -9832,7 +10074,7 @@ LOCAL void save_pchelp_commandfile ( void )
 
 /*   ############################################################
    # Projektdatei fuer WinHelpcompiler anlegen
-   ############################################################   */
+   ############################################################ */
 LOCAL void save_winhelp_project ( void )
 {
    FILE   *hpjfile;
@@ -9889,7 +10131,7 @@ LOCAL void save_winhelp_project ( void )
 
    fprintf(hpjfile, "ErrorLog= %s.err\n", outfile.name);
 
-   /* Weitere Optionen einbauen. Versteht QuickView die?   */
+   /* Weitere Optionen einbauen. Versteht QuickView die? */
    fprintf(hpjfile, "Warning=3\n");   
    fprintf(hpjfile, "Report=TRUE\n");
 
@@ -10092,7 +10334,7 @@ LOCAL void save_winhelp4_project ( void )
 
 /*   ############################################################
    # Projektdatei fuer HTML-Help anlegen
-   ############################################################   */
+   ############################################################ */
 LOCAL void save_htmlhelp_project ( void )
 {
    FILE   *hhpfile;
@@ -10168,28 +10410,28 @@ LOCAL void save_htmlhelp_project ( void )
    #
    # wichtige formatabhaengige Konvertierung-Flags setzen
    #
-   ############################################################   */
+   ############################################################ */
 LOCAL void set_format_flags ( void )
 {
-   /*   Bei manchen Formaten ist es fuer die Laengenberechnung   */
-   /*   einer Zeile enorm wichtig, die Laenge ohne UDO-         */
-   /*   Spezialitaeten zu kennen (STG, PCH, ASC...)            */
-   /*   Bei manchen ist es hingegen wurscht, wie lang eine      */
-   /*   Zeile wird (RTF, HTML, WinHelp, ...)               */
+   /*   Bei manchen Formaten ist es fuer die Laengenberechnung */
+   /*   einer Zeile enorm wichtig, die Laenge ohne UDO- */
+   /*   Spezialitaeten zu kennen (STG, PCH, ASC...) */
+   /*   Bei manchen ist es hingegen wurscht, wie lang eine */
+   /*   Zeile wird (RTF, HTML, WinHelp, ...) */
    format_needs_exact_toklen= FALSE;
 
-   /*   Bei den Formaten, bei denen referenziert wird und bei   */
-   /*   denen die Laenge einer Ausgabezeile egal ist, sollte   */
-   /*   erst dann referenziert werden, wenn der ganze Absatz   */
-   /*   moeglichst in einer Zeile enthalten ist, damit nicht   */
-   /*   durch einen vorzeitigen Umbruch Links verloren gehen.   */
+   /*   Bei den Formaten, bei denen referenziert wird und bei */
+   /*   denen die Laenge einer Ausgabezeile egal ist, sollte */
+   /*   erst dann referenziert werden, wenn der ganze Absatz */
+   /*   moeglichst in einer Zeile enthalten ist, damit nicht */
+   /*   durch einen vorzeitigen Umbruch Links verloren gehen. */
    format_uses_output_buffer= FALSE;
 
 
-   /*   Die Kommandos einiger Formate muessen vor der Veraen-   */
-   /*   derung durch die Referenzierung geschuetzt werden.      */
-   /*   z.B. WinHelp und HTML. Dort waere es fatal, wuerde UDO   */
-   /*   \li, \footnote oder dergleichen referenzieren!         */
+   /*   Die Kommandos einiger Formate muessen vor der Veraen- */
+   /*   derung durch die Referenzierung geschuetzt werden. */
+   /*   z.B. WinHelp und HTML. Dort waere es fatal, wuerde UDO */
+   /*   \li, \footnote oder dergleichen referenzieren! */
    format_protect_commands= FALSE;
 
    switch (desttype)
@@ -10248,9 +10490,9 @@ LOCAL void set_format_flags ( void )
          break;
    }
 
-   /*   Wenn ein Format den Puffer benoetigt, muss das   */
-   /*   toklen-Flag unbedingt FALSE sein, da toklen()   */
-   /*   sonst Speicherbereiche ueberschreibt!!!         */
+   /*   Wenn ein Format den Puffer benoetigt, muss das */
+   /*   toklen-Flag unbedingt FALSE sein, da toklen() */
+   /*   sonst Speicherbereiche ueberschreibt!!! */
 
    if (format_uses_output_buffer)
    {   format_needs_exact_toklen= FALSE;
@@ -10266,7 +10508,7 @@ LOCAL void set_format_flags ( void )
    # Hauptroutine
    #
    #
-   ############################################################   */
+   ############################################################ */
 LOCAL void show_udo_intro ( void )
 {
    show_status_info("");
@@ -10312,8 +10554,8 @@ GLOBAL BOOLEAN udo (char *datei)
    fTreefile= stderr;   bTreeopened= FALSE;   bTreeSaved= FALSE;
    fUPRfile= stderr;   bUPRopened= FALSE;   bUPRSaved= FALSE;
 
-   /* Erstmal testen, ob die Datei vorhanden ist, damit nicht unnoetig   */
-   /* Dateien angelegt werden.    0.47                           */
+   /* Erstmal testen, ob die Datei vorhanden ist, damit nicht unnoetig */
+   /* Dateien angelegt werden.    0.47 */
 
    strcpy(tmp, datei);
 
@@ -10517,7 +10759,7 @@ GLOBAL BOOLEAN udo (char *datei)
                                    verzeichnisse erzeugt werden
                v6.3.15 [vj] Die if-Abfrage bleibt drin, für den Fall das ein ähnlicher Fehler nochmal
                auftritt, er wird dann vielleicht früher erkannt
-            */
+ */
                                 if (bInsideAppendix)
                                 {
                                         bInsideAppendix=FALSE;
@@ -10765,7 +11007,7 @@ GLOBAL BOOLEAN udo (char *datei)
    # Es werden keine Indexfiles, Hyphenfiles erzeugt,
    # jedoch Logfile und Treefile.
    #
-   ############################################################   */
+   ############################################################ */
 LOCAL BOOLEAN passU (char *datei)
 {
    MYTEXTFILE    *file;
@@ -10941,8 +11183,8 @@ GLOBAL BOOLEAN udo2udo (char *datei)
    fLogfile= stderr;   bLogopened= FALSE;
    fTreefile= stderr;   bTreeopened= FALSE;   bTreeSaved= FALSE;
 
-   /* Erstmal testen, ob die Datei vorhanden ist, damit nicht unnoetig   */
-   /* Dateien angelegt werden.    0.47                           */
+   /* Erstmal testen, ob die Datei vorhanden ist, damit nicht unnoetig */
+   /* Dateien angelegt werden.    0.47 */
 
    strcpy(tmp, datei);
 
@@ -11216,7 +11458,7 @@ GLOBAL BOOLEAN udo2udo (char *datei)
    get_timestr()
    Ermittelt die aktuelle Uhrzeit
    ->   t:   String, der danach die Zeit in Form HH:MM:SS enthaelt
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void get_timestr ( char *t )
 {
    time_t      timer;
@@ -11236,7 +11478,7 @@ LOCAL void get_timestr ( char *t )
    #
    # Globale und lokale Variablen initialisieren
    #
-   ############################################################   */
+   ############################################################ */
 LOCAL void init_vars_texinfo ( void )
 {
    if (desttype==TOINF)
@@ -11321,7 +11563,7 @@ LOCAL void init_vars_win ( void )
    In den Funktionen duerfen keine Werte gesetzt werden, die
    von pass1() veraendert werden koennen, da ansonsten die
    ausgelesenen Daten hinfaellig werden
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void init_vars_spec ( void )
 {
    init_vars_nroff();
@@ -11336,19 +11578,19 @@ LOCAL void init_vars_spec ( void )
 
 /*   --------------------------------------------------------------
    init_modules() initialisiert die anderen Module
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL void init_modules ( void )
 {
-   init_module_about();   /* Werbeseite            */
-   init_module_chars();   /* Zeichenumwandlungen      */
-   init_module_env();      /* Umgebungen            */
-   init_module_img();      /* Bilder               */
-   init_module_msg();      /* Fehlermeldungen         */
-   init_module_par();      /* Parameter            */
-   init_module_sty();      /* Stile etc.             */
-   init_module_tab();      /* tabellensatz            */
-   init_module_toc();      /* Inhaltsverzeichnis(se)   */
-   init_module_tp();      /* Titelseite            */
+   init_module_about();   /* Werbeseite */
+   init_module_chars();   /* Zeichenumwandlungen */
+   init_module_env();      /* Umgebungen */
+   init_module_img();      /* Bilder */
+   init_module_msg();      /* Fehlermeldungen */
+   init_module_par();      /* Parameter */
+   init_module_sty();      /* Stile etc. */
+   init_module_tab();      /* tabellensatz */
+   init_module_toc();      /* Inhaltsverzeichnis(se) */
+   init_module_tp();      /* Titelseite */
 
    init_vars_spec();
 
@@ -11370,7 +11612,7 @@ LOCAL void exit_modules ( void )
 
 /*   --------------------------------------------------------------
    check_modules_pass*() startet die Check-Funktionen der Module
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 LOCAL BOOLEAN check_modules_pass1 ( void )
 {
    if (!check_module_toc_pass1())   return FALSE;
@@ -11389,7 +11631,7 @@ LOCAL BOOLEAN check_modules_pass2 ( void )
 /*   ----------------------------------------------------------------------
    getMonth() extrahiert aus Datums-String im __DATE__-Format
    den Monat als int
-   ----------------------------------------------------------------------   */
+   ---------------------------------------------------------------------- */
 LOCAL int getMonth( const char *date_string )
 {
    if( my_strnicmp(date_string, "Jan", 3)==0 )
@@ -11421,16 +11663,16 @@ LOCAL int getMonth( const char *date_string )
 
 /*   --------------------------------------------------------------
    Default-Werte setzen
-   --------------------------------------------------------------   */
+   -------------------------------------------------------------- */
 GLOBAL void init_vars ( void )
 {
    register int i;
 
    cursor_working();
 
-   /*   --------------------------------------------------   */
-   /*   UDOs Kontrollvariablen initialisieren            */
-   /*   --------------------------------------------------   */
+   /*   -------------------------------------------------- */
+   /*   UDOs Kontrollvariablen initialisieren */
+   /*   -------------------------------------------------- */
 
    bNopDetected= FALSE;
 
@@ -11477,9 +11719,9 @@ GLOBAL void init_vars ( void )
    for (i=0; i<MAX_UDOSYMBOLS; udosymbol[i++][0]= EOS) ;
 
 
-   /*   --------------------------------------------------   */
-   /*   Dokumentvariablen und -flags initialisieren         */
-   /*   --------------------------------------------------   */
+   /*   -------------------------------------------------- */
+   /*   Dokumentvariablen und -flags initialisieren */
+   /*   -------------------------------------------------- */
 
    for (i=0; i<MAXSWITCH; *(udoswitch[i++].flag)= FALSE) ;
 
@@ -11609,7 +11851,7 @@ GLOBAL void init_vars ( void )
    #
    # Dateinamen und -endungen anpassen
    #
-   ######################################################################   */
+   ###################################################################### */
 LOCAL void logfile_adjust ( void )
 {
    char   suff[MYFILE_SUFF_LEN+1];
@@ -11656,7 +11898,7 @@ GLOBAL void dest_special_adjust ( void )
 {
 
    /* -------------------------------------------------- */
-   /* Endung und Dateinamen des Logfiles setzen          */
+   /* Endung und Dateinamen des Logfiles setzen */
    /* -------------------------------------------------- */
    sLogfull[0]= EOS;
    logfile_adjust();
@@ -11668,7 +11910,7 @@ GLOBAL void dest_special_adjust ( void )
    sTreefull[strlen(sTreefull)-2]= 't';
 
    /* -------------------------------------------------- */
-   /* Endung des Indexfiles setzen (wie oben, nur 'x')   */
+   /* Endung des Indexfiles setzen (wie oben, nur 'x') */
    /* -------------------------------------------------- */
    strcpy(sIdxfull, sLogfull);
    sIdxfull[strlen(sIdxfull)-2]= 'x';
@@ -11690,7 +11932,7 @@ GLOBAL void dest_special_adjust ( void )
    }
 
    /* -------------------------------------------------- */
-   /* Restliche Dateinamen setzen                    */
+   /* Restliche Dateinamen setzen */
    /* -------------------------------------------------- */
    sprintf(sCmdfull, "%s%s%s%s", outfile.driv, outfile.path, outfile.name, ".cmd");
    sprintf(sMapNoSuff, "%s%s%s", outfile.driv, outfile.path, outfile.name);
@@ -11810,6 +12052,5 @@ GLOBAL void dest_adjust ( void )
 }   /* dest_adjust */
 
 
-/*   ######################################################################
-   # udo.c
-   ######################################################################   */
+/* +++ EOF +++ */
+

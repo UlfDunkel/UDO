@@ -253,30 +253,42 @@ GLOBAL char *strinsert ( char *string, const char *insert)
 
 
 
+
 /* ############################################################
    #
    # Ersetzen von einzelnen Zeichen
    #
    ############################################################   */
-/* ------------------------------------------------------------
-   replace_char() ersetzt in <string> das erste Zeichen von
-   <replace> durch das erste Zeichen von <by>
-   ------------------------------------------------------------   */
-GLOBAL void replace_char ( char *string, const char *replace, const char *by )
-{
-   char *ptr;
-   
-   ptr= string;
 
-   while (*ptr!=EOS)
+/*******************************************************************************
+*
+*  replace_char():
+*     replaces all occurrences of <search> by <replace> in <string>
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void replace_char(
+
+char        *string,   /* ^string to be edited */
+const char  *search,   /* ^search string */
+const char  *replace)  /* ^replace string */
+{
+   char     *ptr;      /* ^edit string */
+
+   
+   ptr = string;                          /* set ^ to begin of edit string */
+
+   while (*ptr != EOS)                    /* check whole edit string */
    {
-      if (*ptr==*replace)
-      {  *ptr= *by;
-      }
+      if (*ptr == *search)                /* character found! */
+        *ptr = *replace;                  /* replace it */
+      
       ptr++;
    }
-
-}  /* replace_char */
+}
 
 
 
@@ -349,55 +361,92 @@ GLOBAL int replace_last ( char *source, const char *replace, const char *by)
 
 
 
-/* ------------------------------------------------------------
-   replace_all() ersetzt in <s> alle <rep> durch <by>
-   ------------------------------------------------------------   */
-GLOBAL int replace_all ( char *source, const char *replace, const char *by)
+
+
+/*******************************************************************************
+*
+*  replace_all():
+*     replaces all occurrences of <search> by <replace> in string <source>
+*
+*  Return:
+*     1 = success
+*     2 = error
+*
+******************************************|************************************/
+
+GLOBAL int replace_all(
+
+   char        *source,   /* ^string to be edited */
+   const char  *search,   /* ^search string to be replaced */
+   const char  *replace)  /* ^replacement string */
 {
-   char  *found;
-   size_t   rlen, blen, flen, i;
+   char       *found;     /* ^ found character */
+   size_t      slen,      /* length of search string */
+               rlen,      /* length of replacement string */
+               flen,      /* length of found string */
+               i;         /* counter */
    
-   if ( source[0]=='\0' )     return 0;
-   if ( replace[0]=='\0' )    return 0;
+   
+   if (source[0]  == '\0')                /* empty edit string? */
+      return 0;                           /* not allowed! */
+      
+   if (replace[0] == '\0')                /* empty search string? */
+      return 0;                           /* not allowed! */
 
-   if ( (found= strstr(source, replace))==NULL )   return 0;
+                                          /* search string not in edit string? */
+   if ( (found = strstr(source, search)) == NULL )
+      return 0;
 
-   rlen=strlen(replace);
-   blen= strlen(by);
+   slen = strlen(search);
+   rlen = strlen(replace);
 
-   if (rlen==blen)
+   /* --- simple method: --- */
+   
+   if (slen == rlen)                      /* search + replace string lengths are equal */
    {
-      while ( found!=NULL )
+      while (found != NULL)               /* still something found! */
       {
-         for (i=0; i<blen; i++)
-         {  found[i]= by[i];
-         }
-         found= strstr(found+blen, replace);
+         for (i = 0; i < rlen; i++)       /* replace characters in edit string */
+            found[i] = replace[i];             
+
+                                          /* find next position of replacement string */
+         found = strstr(found + rlen, search);
       }
-      return 1;
+      
+      return 1;                           /* done! */
    }
 
-   while ( found!=NULL )
-   {
-      flen= strlen(found);
+   /* --- complex method: --- */
+   /* search + replace string lengths are different */
 
-      /* Zu Ersetzendes entfernen */
-      memmove(found, found+rlen, flen-rlen+1);
+   while (found != NULL)                  /* still something found: */
+   {
+      flen = strlen(found);               /* get length of remaining edit string */
+
+                                          /* Zu Ersetzendes entfernen */
+      memmove(found, found + slen, flen - slen + 1);
    
-      /* Platz schaffen fuer neues und dorthin kopieren */
-      if ( by[0]!=EOS )
-      {  flen= strlen(found);
-         memmove(found+blen, found, flen+1);
-         memcpy(found, by, blen);
-         found= strstr(found+blen, replace);
+
+      if (replace[0] != EOS)              /* replacement string must not be empty! */
+      {
+         flen = strlen(found);            /* get new length of remaining edit string */
+                                          /* Platz schaffen fuer neues und dorthin kopieren */
+         memmove(found + rlen, found, flen + 1);
+         memcpy(found, replace, rlen);    /* insert replacement string */
+
+                                          /* find next position of replacement string */
+         found = strstr(found + rlen, search);
       }
       else
-      {  found= strstr(found, replace);
+      {
+         found = strstr(found, search);
       }
    }
    
-   return 1;
-}  /*replace_all*/
+   return 1;                              /* done! */
+}
+
+
 
 
 
@@ -1035,30 +1084,43 @@ GLOBAL void my_strlwr ( char *string )
 #endif
 }  /* my_strlwr */
 
+
+
+
+
 /* New V6.5.20 [gs] */
-/*  ----------------------------------------------
-    Wandelt ein String nach DIN 5007-1
-    (fuer Woerter verwendet, etwas Lexika)
-    - „ und ae sind gleich
-    - ” und oe sind gleich
-    -  und ue sind gleich
-    - ž und ss sind gleich
-    ----------------------------------------------  */
+/*******************************************************************************
+*
+*  str_din_5007_1():
+*     converts a string in DIN 5007-1 style
+*
+*  Note:
+*     use it for glossaries, index pages, etc.
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
 
-GLOBAL void str_din_5007_1 ( char *string )
+GLOBAL void str_din_5007_1(
+
+char  *string)  /* ^string to be edited */
 {
-   if ( string[0] == EOS )
-      return;
+   if (string[0] == EOS)                  /* string is empty? */
+      return;                             /* done! */
    
-   replace_char ( string, "„", "ae" );
-   replace_char ( string, "”", "oe" );
-   replace_char ( string, "", "ue" );
-   replace_all  ( string, "ž", "ss" );
+   replace_all(string, "„", "ae");        /* what about ENCODING here? */
+   replace_all(string, "”", "oe");
+   replace_all(string, "", "ue");
+   replace_all(string, "ž", "ss");
+   replace_all(string, "Ž", "Ae");
+   replace_all(string, "™", "Oe");
+   replace_all(string, "š", "Ue");
+}
 
-   replace_char ( string, "Ž", "Ae" );
-   replace_char ( string, "™", "Oe" );
-   replace_char ( string, "š", "Ue" );
-}    /* str_din_5007_1 */
+
+
+
 
 /* New V6.5.20 [gs] */
 /*  ----------------------------------------------
@@ -1125,7 +1187,7 @@ char              *s2)  /* */
    {
       c1 = sort_tab[(unsigned char)*s1];
       c2 = sort_tab[(unsigned char)*s2];
-      
+
       s1++;
       s2++;
    } 
