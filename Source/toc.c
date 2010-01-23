@@ -49,6 +49,7 @@
 *  2010:
 *    fd  Jan 20: - file partly reformatted
 *                - save_html_index() now converts labels using label2html()
+*    fd  Jan 23: converted all German umlauts in comments into plain ASCII
 *
 ******************************************|************************************/
 
@@ -4704,7 +4705,7 @@ GLOBAL void html_save_frameset(void)
    outln("</noframes>");
    outln("</html>");
    
-   /* Das Inhaltverzeichnis fÅr den linken Frame ausgeben */
+   /* Das Inhaltverzeichnis fuer den linken Frame ausgeben */
    
 #if 1
    sprintf(outfile.name, "%s%s", html_name_prefix, FRAME_FILE_TOC);
@@ -4761,7 +4762,7 @@ GLOBAL void html_save_frameset(void)
    outln("</body>");
    outln("</html>");
    
-   /* Neue Datei fÅr das erste Kapitel anlegen */
+   /* Neue Datei fuer das erste Kapitel anlegen */
    
    sprintf(outfile.name, "%s%s", html_name_prefix, FRAME_FILE_CON);
    html_make_file();
@@ -6863,7 +6864,7 @@ LOCAL void make_subnode(const BOOLEAN popup, const BOOLEAN invisible)
                         set_inside_node2();
                         outln(rtf_pardpar);
 
-                        /* r6pl6: Indizes fÅr RTF */
+                        /* r6pl6: Indizes fuer RTF */
                         if (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index)
                         {       strcpy(n, name);
                                 winspecials2ascii(n);
@@ -7344,7 +7345,7 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible)
                         set_inside_node3();
                         outln(rtf_pardpar);
 
-                        /* r6pl6: Indizes fÅr RTF */
+                        /* r6pl6: Indizes fuer RTF */
                         if (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index)
                         {       strcpy(n, name);
                                 winspecials2ascii(n);
@@ -7827,7 +7828,7 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible)
                         set_inside_node4();
                         outln(rtf_pardpar);
 
-                        /* r6pl6: Indizes fÅr RTF */
+                        /* r6pl6: Indizes fuer RTF */
                         if (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index)
                         {       strcpy(n, name);
                                 winspecials2ascii(n);
@@ -8104,12 +8105,12 @@ LOCAL void make_subsubsubsubnode( const BOOLEAN popup, const BOOLEAN invisible)
                 case TOPDL:
                         set_inside_node5();
                         if (invisible)
-                        {       (use_style_book)        ? voutlnf("\n\\paragraph*{%s}", name)  /* ToDo: Was muû hier hin? */
-                                                                        : voutlnf("\n\\subparagraph*{%s}", name);   /* ToDo: Was muû hier hin? */
+                        {       (use_style_book)        ? voutlnf("\n\\paragraph*{%s}", name)  /* ToDo: Was muss hier hin? */
+                                                                        : voutlnf("\n\\subparagraph*{%s}", name);   /* ToDo: Was muss hier hin? */
                         }
                         else
-                        {       (use_style_book)        ? voutlnf("\n\\paragraph{%s}", name)  /* ToDo: Was muû hier hin? */
-                                                                        : voutlnf("\n\\subparagraph{%s}", name);   /* ToDo: Was muû hier hin? */
+                        {       (use_style_book)        ? voutlnf("\n\\paragraph{%s}", name)  /* ToDo: Was muss hier hin? */
+                                                                        : voutlnf("\n\\subparagraph{%s}", name);   /* ToDo: Was muss hier hin? */
                         }
                         label2tex(name);                                /*r6pl2*/
                         voutlnf("\\label{%s}", name);   /*r6pl2*/
@@ -8125,12 +8126,12 @@ LOCAL void make_subsubsubsubnode( const BOOLEAN popup, const BOOLEAN invisible)
                         set_inside_node5();
                         out("\\layout ");
                         if (invisible)
-                        {       (use_style_book)        ? outln("Subsubsection*")         /* ToDo: Was muû hier hin? */
-                                                                        : outln("Paragraph*");  /* ToDo: Was muû hier hin? */
+                        {       (use_style_book)        ? outln("Subsubsection*")         /* ToDo: Was muss hier hin? */
+                                                                        : outln("Paragraph*");  /* ToDo: Was muss hier hin? */
                         }
                         else
-                        {       (use_style_book)        ? outln("Subsubsection")  /* ToDo: Was muû hier hin? */
-                                                                        : outln("Paragraph");  /* ToDo: Was muû hier hin? */
+                        {       (use_style_book)        ? outln("Subsubsection")  /* ToDo: Was muss hier hin? */
+                                                                        : outln("Paragraph");  /* ToDo: Was muss hier hin? */
                         }
                         indent2space(name);
                         outln(name);
@@ -8140,11 +8141,11 @@ LOCAL void make_subsubsubsubnode( const BOOLEAN popup, const BOOLEAN invisible)
                         set_inside_node5();
                         output_texinfo_node(name);
                         if (bInsideAppendix)
-                        {       voutlnf("@appendixsubsubsec %s", name);  /* ToDo: Was muû hier hin? */
+                        {       voutlnf("@appendixsubsubsec %s", name);  /* ToDo: Was muss hier hin? */
                         }
                         else
-                        {       (invisible) ?   (voutlnf("@subsubheading %s", name))  /* ToDo: Was muû hier hin? */
-                                                        :       (voutlnf("@subsubsection %s", name));  /* ToDo: Was muû hier hin? */
+                        {       (invisible) ?   (voutlnf("@subsubheading %s", name))  /* ToDo: Was muss hier hin? */
+                                                        :       (voutlnf("@subsubsection %s", name));  /* ToDo: Was muss hier hin? */
                         }
                         break;
 
@@ -8303,7 +8304,7 @@ LOCAL void make_subsubsubsubnode( const BOOLEAN popup, const BOOLEAN invisible)
                         set_inside_node5();
                         outln(rtf_pardpar);
 
-                        /* r6pl6: Indizes fÅr RTF */
+                        /* r6pl6: Indizes fuer RTF */
                         if (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index)
                         {       strcpy(n, name);
                                 winspecials2ascii(n);
@@ -8861,7 +8862,7 @@ GLOBAL BOOLEAN bookmarks_ps(void)
 
                                                 li= toc[i]->labindex;
 
-                                                /*um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[11]"); v6.3.12 [vj] entfernt, da die n‰chste zeile gleich ist */
+                                                /*um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[11]"); v6.3.12 [vj] entfernt, da die naechste zeile gleich ist */
                                                 /* Changed in r6pl16 [NHz] */
                                                 um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[12]");
                                                 um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[13]");
@@ -16773,7 +16774,7 @@ GLOBAL void init_module_toc(void)
 
 /*
 v6.5.0 [vj] auskommentiert, um eine Compilerwarnung zu entfernen
-Diese Methode wird im Moment nicht mehr benˆtigt (siehe exit_module_toc)
+Diese Methode wird im Moment nicht mehr benoetigt (siehe exit_module_toc)
 LOCAL void free_toc_data(char **var)
 {
         if (*var!=NULL)
@@ -16786,11 +16787,11 @@ LOCAL void free_toc_data(char **var)
 GLOBAL void exit_module_toc(void)
 {
         /*
-        r6.3.19[vj]: Der folgende Code wurde auskommentiert, um zu ¸berpr¸fen,
-        ob sich hieraus ein Geschwindigkeitsvorteil erlangen l‰ﬂt. Wird der
-        Speicher hier nicht freigegeben, wird das sp‰ter um_exit tun,
+        r6.3.19[vj]: Der folgende Code wurde auskommentiert, um zu ueberpruefen,
+        ob sich hieraus ein Geschwindigkeitsvorteil erlangen laesst. Wird der
+        Speicher hier nicht freigegeben, wird das spaeter um_exit tun,
         das die Speicherbereiche viel effizienter freigeben kann.
-        Bitte nicht lˆschen, da er sp‰ter vielleicht wieder rein kommt!
+        Bitte nicht loeschen, da er spaeter vielleicht wieder rein kommt!
 
         register int i;
 

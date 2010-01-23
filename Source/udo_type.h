@@ -42,6 +42,8 @@
 *
 *  2009:
 *    fd  Jun 04: !docinfo [translator] introduced
+*  2010:
+*    fd  Jan 23: converted all German umlauts in comments into plain ASCII
 *
 ******************************************|************************************/
 
@@ -86,7 +88,7 @@ typedef struct _lang
 	char	also[32];				/* siehe auch				*/
 	char	by[16];					/* von						*/
 	/* New in V6.5.2 [NHz] */
-	char	fur[16];					/* fÅr						*/
+	char	fur[16];					/* fuer						*/
 	char	up[8];					/* Hoch (WinHelp)			*/
 	char	exit[10];				/* Beenden (WinHelp)		*/
 	char	today[32];				/* 28. Februar 1995			*/

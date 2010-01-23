@@ -49,7 +49,8 @@
 *    fd  Jun 08: TAB -> '   ', reformattings
 *  2010:
 *    fd  Jan 20: set_html_quotes()
-*    fd  Jan 23: partly reformatted
+*    fd  Jan 23: - partly reformatted
+*                - converted all German umlauts in comments into plain ASCII
 *
 ******************************************|************************************/
 
@@ -5343,20 +5344,20 @@ GLOBAL size_t toklen ( char *s )
    tokcat()
    tokcat haengt alle ab dem zweiten Token (token[1]) an einen
    String an, getrennt durch ein Leerzeichen.
-        maxlen gibt die maximale Größe des Puffers in s an
+        maxlen gibt die maximale Groesse des Puffers in s an
    ------------------------------------------------------------ */
 GLOBAL void tokcat ( char *s, size_t maxlen )
 {
    register int i;
    char errbuf[128];
-   size_t m=0; /* Länge des bisherigen Strings mitzählen */
+   size_t m=0; /* Laenge des bisherigen Strings mitzaehlen */
 
    for (i=1; i<token_counter; i++)
-   {       /* Hier wird auf m die Länge des neues Token addiert, plus
-                   1 Byte für das abschließende Nullbyte, sowie auch das evtl.
-                   eingefügte Leerzeichen */
+   {       /* Hier wird auf m die Laenge des neues Token addiert, plus
+                   1 Byte fuer das abschliessende Nullbyte, sowie auch das evtl.
+                   eingefuegte Leerzeichen */
                 m+=strlen(token[i])+2;
-                /* Wenn die neue Größe unterhalb der Puffergröße bleibt,
+                /* Wenn die neue Groesse unterhalb der Puffergroesse bleibt,
                    ist ja alles okay */
       if (m<maxlen)
       {
@@ -5366,7 +5367,7 @@ GLOBAL void tokcat ( char *s, size_t maxlen )
          }
       }
    }
-        /* Wenn die Puffergrenze überschritten oder erreicht wurde,
+        /* Wenn die Puffergrenze ueberschritten oder erreicht wurde,
            wird die Warnung ausgegeben. Ggf. sollte hier auch UDO abgebrochen
            werden */
    if (m>=maxlen)
@@ -5380,7 +5381,7 @@ GLOBAL void tokcat ( char *s, size_t maxlen )
    tokcpy2() leert den String und ruft tokcat auf. In <s>
    befinden sich alle danach mit Ausnahme des Kommandos aus
    token[0] alle Tokens, die durch Leerzeichen getrennt wurden.
-        maxlen gibt die maximale Größe des Puffers in s an
+        maxlen gibt die maximale Groesse des Puffers in s an
    ------------------------------------------------------------ */
 GLOBAL void tokcpy2 ( char *s, size_t maxlen )
 {
@@ -10184,7 +10185,7 @@ LOCAL void save_winhelp_project ( void )
       }
 
       if (use_about_udo)
-      {   /*r6pl5: Button fr UDO einbauen */
+      {   /*r6pl5: Button fuer UDO einbauen */
          sprintf(n, "CreateButton(\"BTN_UDO\", \"UDO%s\", \"JumpID(%s, `%s')\")",
             UDO_REL, hlp_name, WIN_UDO_NODE_NAME);
          fprintf(hpjfile, "%s\n", n);
@@ -10292,7 +10293,7 @@ LOCAL void save_winhelp4_project ( void )
       }
 
       if (use_about_udo)
-      {   /*r6pl5: Button fr UDO einbauen */
+      {   /*r6pl5: Button fuer UDO einbauen */
          sprintf(n, "CreateButton(\"BTN_UDO\", \"UDO%s\", \"JumpID(`%s.hlp>win1', `%s')\")",
             UDO_REL, outfile.name, WIN_UDO_NODE_NAME);
          fprintf(hpjfile, "%s\n", n);
@@ -10757,15 +10758,15 @@ GLOBAL BOOLEAN udo (char *datei)
                                    damit -vor allem bei der HTML-Ausgabe- die
                                    Kapitelnummern stimmen und die Unterinhalts-
                                    verzeichnisse erzeugt werden
-               v6.3.15 [vj] Die if-Abfrage bleibt drin, für den Fall das ein ähnlicher Fehler nochmal
-               auftritt, er wird dann vielleicht früher erkannt
+               v6.3.15 [vj] Die if-Abfrage bleibt drin, fuer den Fall, dass ein aehnlicher Fehler nochmal
+               auftritt, er wird dann vielleicht frueher erkannt
  */
                                 if (bInsideAppendix)
                                 {
                                         bInsideAppendix=FALSE;
                                         printf("Warning: bInsideAppendix=TRUE - fixed it\n");
                                 }
-                                /* v6.3.15 [vj] Diese Meldung brauchen wir nun nicht mehr, die verwirrt bloß :-)
+                                /* v6.3.15 [vj] Diese Meldung brauchen wir nun nicht mehr, die verwirrt bloss :-)
             else
                                 {
                                         printf("Note: bInsideAppendix NOT fixed :-)\n");
@@ -11824,7 +11825,7 @@ GLOBAL void init_vars ( void )
    cursor_active();
 
    /*   --------------------------------------------------- */
-   /*   Variablen für Compile-Zeit und Datum initialisieren */
+   /*   Variablen fuer Compile-Zeit und Datum initialisieren */
    /*   --------------------------------------------------- */
 
    if( compile_date[0]=='\0' )

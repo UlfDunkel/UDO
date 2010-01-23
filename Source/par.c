@@ -1,27 +1,57 @@
-/*	############################################################
-	# @(#) par.c
-	# @(#)
-	# @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
-	# @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)
-	#
-	# This program is free software; you can redistribute it and/or
-	# modify it under the terms of the GNU General Public License
-	# as published by the Free Software Foundation; either version 2
-	# of the License, or (at your option) any later version.
-	# 
-	# This program is distributed in the hope that it will be useful,
-	# but WITHOUT ANY WARRANTY; without even the implied warranty of
-	# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	# GNU General Public License for more details.
-	# 
-	# You should have received a copy of the GNU General Public License
-	# along with this program; if not, write to the Free Software
-	# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-	############################################################	*/
+/*******************************************************************************
+*
+*  Project name : UDO
+*  Module name  : par.c
+*  Symbol prefix: par
+*
+*  Copyright    : 1995-2001 Dirk Hagedorn
+*  Open Source  : since 2001
+*
+*                 This program is free software; you can redistribute it and/or
+*                 modify it under the terms of the GNU General Public License
+*                 as published by the Free Software Foundation; either version 2
+*                 of the License, or (at your option) any later version.
+*                 
+*                 This program is distributed in the hope that it will be useful,
+*                 but WITHOUT ANY WARRANTY; without even the implied warranty of
+*                 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*                 GNU General Public License for more details.
+*                 
+*                 You should have received a copy of the GNU General Public License
+*                 along with this program; if not, write to the Free Software
+*                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*  Description  : ???
+*
+*-------------------------------------------------------------------------------
+*
+*  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
+*  Co-Authors   : Ulf Dunkel (fd)
+*  Write access : fd
+*
+*  Notes        : Please add yourself as co-author when you change this file.
+*
+*-------------------------------------------------------------------------------
+*  Things to do : -
+*
+*-------------------------------------------------------------------------------
+*  History:
+*
+*  2010:
+*    fd  Jan 23: converted all German umlauts in comments into plain ASCII
+*
+******************************************|************************************/
+
 #ifndef ID_PAR_C
 #define ID_PAR_C
 const char *id_par_c= "@(#) par.c       19.07.1999";
 #endif
+
+/*******************************************************************************
+*
+*     INCLUDE FILES
+*
+******************************************|************************************/
 
 #include "import.h"
 #include <stdio.h>
@@ -3465,11 +3495,11 @@ GLOBAL void init_module_par ( void )
 GLOBAL void exit_module_par ( void )
 {
 	/*
-        r6.3.19[vj]: Der folgende Code wurde auskommentiert, um zu überprüfen,
-        ob sich hieraus ein Geschwindigkeitsvorteil erlangen läßt. Wird der
-        Speicher hier nicht freigegeben, wird das später um_exit tun,
+        r6.3.19[vj]: Der folgende Code wurde auskommentiert, um zu ueberpruefen,
+        ob sich hieraus ein Geschwindigkeitsvorteil erlangen laesst. Wird der
+        Speicher hier nicht freigegeben, wird das spaeter um_exit tun,
         das die Speicherbereiche viel effizienter freigeben kann.
-        Bitte nicht löschen, da er später vielleicht wieder rein kommt!
+        Bitte nicht loeschen, da er spaeter vielleicht wieder rein kommt!
 
         int	i;
 

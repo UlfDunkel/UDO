@@ -46,6 +46,8 @@
 *    ggs Jan 11: Bullet for the !begin_itemize, will always use in ST-Guide
 *    fd  Jun 04: !docinfo [translator] introduced
 *    fd  Jun 08: TAB -> '   '
+*  2010:
+*    fd  Jan 23: converted all German umlauts in comments into plain ASCII
 *
 ******************************************|************************************/
 
@@ -3230,7 +3232,7 @@ GLOBAL void c_begin_document ( void )
          voutlnf("\\f0\\fs%d", iDocPropfontSize);   
 
          if(!check_output_raw_header()) /* New in V6.5.9 [NHz];
-         hier muss auch der Fussteil Åbergeben werden, sonst
+         hier muss auch der Fussteil uebergeben werden, sonst
          funktioniert es in RTF nicht? */
          {
             if (titleprogram[0]!=EOS)

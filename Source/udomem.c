@@ -1,27 +1,44 @@
-/*	##############################################################
-	# @(#) udo.c
-	# @(#)
-	# @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
-	# @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)
-	#
-	# This program is free software; you can redistribute it and/or
-	# modify it under the terms of the GNU General Public License
-	# as published by the Free Software Foundation; either version 2
-	# of the License, or (at your option) any later version.
-	# 
-	# This program is distributed in the hope that it will be useful,
-	# but WITHOUT ANY WARRANTY; without even the implied warranty of
-	# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	# GNU General Public License for more details.
-	# 
-	# You should have received a copy of the GNU General Public License
-	# along with this program; if not, write to the Free Software
-	# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-	# 
-	##############################################################
-	# Start:	Januar 1995
-	# Version:	2. Oktober 2001
-	##############################################################	*/
+/*******************************************************************************
+*
+*  Project name : UDO
+*  Module name  : udomem.c
+*  Symbol prefix: udo
+*
+*  Copyright    : 1995-2001 Dirk Hagedorn
+*  Open Source  : since 2001
+*
+*                 This program is free software; you can redistribute it and/or
+*                 modify it under the terms of the GNU General Public License
+*                 as published by the Free Software Foundation; either version 2
+*                 of the License, or (at your option) any later version.
+*                 
+*                 This program is distributed in the hope that it will be useful,
+*                 but WITHOUT ANY WARRANTY; without even the implied warranty of
+*                 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*                 GNU General Public License for more details.
+*                 
+*                 You should have received a copy of the GNU General Public License
+*                 along with this program; if not, write to the Free Software
+*                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*-------------------------------------------------------------------------------
+*
+*  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
+*  Co-Authors   : Ulf Dunkel (fd)
+*  Write access : fd
+*
+*  Notes        : Please add yourself as co-author when you change this file.
+*
+*-------------------------------------------------------------------------------
+*  Things to do : -
+*
+*-------------------------------------------------------------------------------
+*  History:
+*
+*  2010:
+*    fd  Jan 23: - converted all German umlauts in comments into plain ASCII
+*
+******************************************|************************************/
 
 #ifndef ID_UDOMEM_C
 #define ID_UDOMEM_C
@@ -88,7 +105,7 @@ GLOBAL void exit_um(void)
 	printf("Memory statistic: %d malloc, %d free, %d bad checks, %d bad ends\n", um_malloc_count, um_free_count, um_free_error_count, um_free_endbroken_count);
 #endif
 #endif
-	/* Falls es jetzt noch belegten Speicher gibt, räumen wir den auf */
+	/* Falls es jetzt noch belegten Speicher gibt, raeumen wir den auf */
 	if (anker != NULL)
 	{
 		/* Hier wird die Speicherliste entlang gelaufen */
@@ -247,7 +264,7 @@ GLOBAL void um_free(void *memblock)
 					}
 					um_free_count++;
 					free(tanker->block); /* Speicher freigeben */
-					/* Verwaltungselement aus der Kette aushängen */
+					/* Verwaltungselement aus der Kette aushaengen */
 					if (last==NULL)
 					{
 						/* Wurzel neu setzen, da wir das erste Element der Liste freigeben */
