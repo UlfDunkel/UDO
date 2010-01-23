@@ -44,6 +44,7 @@
 *    fd  Jan 20: new: html_quotes
 *    fd  Jan 23: - file reformatted
 *                - converted all German umlauts in comments into plain ASCII
+*                - SHOW_VARAIABLE -> SHOW_VAR
 *
 ******************************************|************************************/
 
@@ -250,7 +251,7 @@ GLOBAL BOOLEAN     html_use_folders;      /* Ordnerstruktur erzeugen? */
                                           /* Transparente Buttons benutzen? */
 GLOBAL BOOLEAN     html_transparent_buttons;
 
-GLOBAL SHOW_VARAIABLE   show_variable;    /* New in V6.5.19 */
+GLOBAL SHOW_VAR    show_variable;         /* New in V6.5.19 */
 
 GLOBAL BOOLEAN     html_navigation_line;  /* v6.5.19[fd] TRUE: show navigation levels in one line without folder symbols */
                                           /* v6.5.19[fd] string which separates navigation levels (default: '&gt; ') */
