@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**(TAB=0)**********************************************************************
 *
 *  Project name : UDO
 *  Module name  : udo.c
@@ -58,6 +58,7 @@
 *                - converted all German umlauts in comments into plain ASCII
 *    fd  Jan 28: c_subsubsubsubheading() adjusted
 *    fd  Jan 29: file reformatted and tidied up
+*    fd  Jan 30: pass1() no longer parses comment lines
 *
 ******************************************|************************************/
 
@@ -11370,140 +11371,129 @@ char           *datei)           /* */
          return FALSE;
       }
 
-#if 0
-      /* Was passiert bei den rekursiven Aufrufen mit goto? */
-      if (zeile[0]=='#')
+      if (zeile[0] != '#')                /* don't parse comment lines at all! */
       {
-         goto PASS1_READ_NEXT_LINE;
-      }
-#endif
-
-
-      len = strlen(zeile);
+         len = strlen(zeile);
       
-      while ( (len > 0) && (((UCHAR) zeile[len - 1]) <= 32) )
-      {
-         zeile[len - 1] = EOS;
-         len--;
-      }
+         while ( (len > 0) && (((UCHAR) zeile[len - 1]) <= 32) )
+         {
+            zeile[len - 1] = EOS;
+            len--;
+         }
 
-      if (zeile[0] != '#')                /* Kommentare nicht recoden */
-      {
          recode(zeile, iCharset);
          convert_sz(zeile);
-      }
-
-      if ((zeile[0] != '#') && (zeile[0] != EOS) && (pflag[PASS1].env == ENV_NONE) )
-      {
-         pass_check_if(zeile, PASS1);
-      }
 
 
-
-      if ( (zeile[0] != '#') && (zeile[0] != EOS) && (pflag[PASS1].ignore_line == 0) )
-      {
-         pass1_check_environments(zeile);
-      }
-
-
-      if (zeile[0] != EOS)
-      {
-         if ((pflag[PASS1].ignore_line == 0) && (pflag[PASS1].env == ENV_NONE) )
+         if ( (zeile[0] != EOS) && (pflag[PASS1].env == ENV_NONE) )
          {
-            del_whitespaces(zeile);
+            pass_check_if(zeile, PASS1);
+         }
 
-            if ((zeile[0] == META_C) && (zeile[1] != QUOTE_C) )
+         if ( (zeile[0] != EOS) && (pflag[PASS1].ignore_line == 0) )
+         {
+            pass1_check_environments(zeile);
+         }
+
+
+         if (zeile[0] != EOS)
+         {
+            if ((pflag[PASS1].ignore_line == 0) && (pflag[PASS1].env == ENV_NONE) )
             {
-               /* Erster Parameter von !macro und !define darf nicht gequotet werden! */
-               
-               if (!bInsideDocument)
+               del_whitespaces(zeile);
+
+               if ((zeile[0] == META_C) && (zeile[1] != QUOTE_C) )
                {
-                  protect = 0;            /* reset protector */
-                  
-                  if (strncmp(zeile, "!macro",  6) == 0)
-                     protect = 1;
-                  else if (strncmp(zeile, "!define", 7) == 0)
-                     protect = 2;
-                  
-                  if (protect)
+                  /* Erster Parameter von !macro und !define darf nicht gequotet werden! */
+               
+                  if (!bInsideDocument)
                   {
-                     token_reset();
-                     
-                     if (strstr(zeile, "!\\") != NULL)
+                     protect = 0;         /* reset protector */
+                  
+                     if (strncmp(zeile, "!macro",  6) == 0)
+                        protect = 1;
+                     else if (strncmp(zeile, "!define", 7) == 0)
+                        protect = 2;
+                  
+                     if (protect)
                      {
-                        char   tmp_zeile[512];  /* */
-                        long   lang;            /* */
-
-                        do
+                        token_reset();
+                     
+                        if (strstr(zeile, "!\\") != NULL)
                         {
-                           myTextGetline(tmp_zeile, LINELEN, file);
+                           char   tmp_zeile[512];  /* */
+                           long   lang;            /* */
 
-                           lang = strlen(zeile);
+                           do
+                           {
+                              myTextGetline(tmp_zeile, LINELEN, file);
 
-                           zeile[lang - 2] = EOS;
+                              lang = strlen(zeile);
 
-                           strcat(zeile, tmp_zeile);
+                              zeile[lang - 2] = EOS;
+
+                              strcat(zeile, tmp_zeile);
 
                                           /* v6.5.5 [vj] */
-                           uiFileLines[iFilesOpened] = uiFileLines[iFilesOpened] + 1 + uiMultiLines;
-                           uiCurrFileLine = uiFileLines[iFilesOpened];
+                              uiFileLines[iFilesOpened] = uiFileLines[iFilesOpened] + 1 + uiMultiLines;
+                              uiCurrFileLine = uiFileLines[iFilesOpened];
 
-                           lPass1Lines++;
+                              lPass1Lines++;
                            
-                        } while (strstr(tmp_zeile, "!\\") != NULL);
+                           } while (strstr(tmp_zeile, "!\\") != NULL);
                         
-                     }  /* if (strstr(zeile, "!\\" != NULL) */
+                        }  /* if (strstr(zeile, "!\\" != NULL) */
 
 
-                     str2tok(zeile);
+                        str2tok(zeile);
                      
-                     switch (protect)
-                     {
-                     case 1:
-                        add_macro();
-                        break;
+                        switch (protect)
+                        {
+                        case 1:
+                           add_macro();
+                           break;
                         
-                     case 2:
-                        add_define();
+                        case 2:
+                           add_define();
+                        }
+                     
+                        zeile[0] = EOS;
                      }
-                     
-                     zeile[0] = EOS;
+
+                     if (strncmp(zeile, CMD_SET, 4) == 0)
+                     {
+                        token_reset();
+                        str2tok(zeile);
+                        zeile[0] = EOS;
+                        tokcpy2(zeile, LINELEN);
+                        add_udosymbol(zeile);
+                        zeile[0] = EOS;
+                     }
+
+                     if (strncmp(zeile, CMD_UNSET, 6) == 0)
+                     {
+                        token_reset();
+                        str2tok(zeile);
+                        zeile[0] = EOS;
+                        tokcpy2(zeile, LINELEN);
+                        del_udosymbol(zeile);
+                        zeile[0] = EOS;
+                     }
                   }
 
-                  if (strncmp(zeile, CMD_SET, 4) == 0)
+                  /* <???> Problem/Bug: Falls man Makros wie !macro INC !include ... */
+                  /* verwendet, dann wird das nicht erkannt, da oben auf */
+                  /* zeile[0][0]==META_C getestet wird. */
+                  /* Ergebnis: !include wird dann nicht erkannt, die Prozentzahlen */
+                  /* stimmen im 2. Durchlauf nicht mehr. */
+
+                  if (zeile[0] != EOS)
                   {
-                     token_reset();
-                     str2tok(zeile);
-                     zeile[0] = EOS;
-                     tokcpy2(zeile, LINELEN);
-                     add_udosymbol(zeile);
-                     zeile[0] = EOS;
-                  }
+                     /* New in r6pl15 [NHz] */
 
-                  if (strncmp(zeile, CMD_UNSET, 6) == 0)
-                  {
-                     token_reset();
-                     str2tok(zeile);
-                     zeile[0] = EOS;
-                     tokcpy2(zeile, LINELEN);
-                     del_udosymbol(zeile);
-                     zeile[0] = EOS;
-                  }
-               }
+                     /* Set node name for project file */
 
-               /* <???> Problem/Bug: Falls man Makros wie !macro INC !include ... */
-               /* verwendet, dann wird das nicht erkannt, da oben auf */
-               /* zeile[0][0]==META_C getestet wird. */
-               /* Ergebnis: !include wird dann nicht erkannt, die Prozentzahlen */
-               /* stimmen im 2. Durchlauf nicht mehr. */
-
-               if (zeile[0] != EOS)
-               {
-                  /* New in r6pl15 [NHz] */
-
-                  /* Set node name for project file */
-
-/*                if ((strstr(zeile, "node") != NULL) || (strstr(zeile, "heading") != NULL) )
+/*                   if ((strstr(zeile, "node") != NULL) || (strstr(zeile, "heading") != NULL) )
 */
 
 /*                   6.3.10 [vj]: used um_strcpy to prevent buffer overrun known as the "bInsideAppendix-Bug"
@@ -11512,407 +11502,409 @@ char           *datei)           /* */
                      Perhaps we should habe a look, if this copy function can be done
                      in an if, because this copy needs time <????>
  */
-                  um_strcpy(current_node_name_sys, zeile, CNNS_LEN, "pass1: current_node_name_sys");
+                     um_strcpy(current_node_name_sys, zeile, CNNS_LEN, "pass1: current_node_name_sys");
 
-                  if (no_umlaute)
-                  {
-                     umlaute2ascii(zeile);
-                  }
+                     if (no_umlaute)
+                     {
+                        umlaute2ascii(zeile);
+                     }
                   
-                  auto_quote_chars(zeile, FALSE);
-                  replace_macros(zeile);
-                  replace_defines(zeile);
+                     auto_quote_chars(zeile, FALSE);
+                     replace_macros(zeile);
+                     replace_defines(zeile);
 
-                  c_divis(zeile);
-                  c_vars(zeile);
-                  c_tilde(zeile);         /* r5pl9 */
-                  c_styles(zeile);        /* r6pl2 */
-                  c_internal_index(zeile, FALSE);
-               }
-
-
-               /* Dies darf nicht mit in die obige Klammer! */
-               token_reset();
-               str2tok(zeile);
+                     c_divis(zeile);
+                     c_vars(zeile);
+                     c_tilde(zeile);         /* r5pl9 */
+                     c_styles(zeile);        /* r6pl2 */
+                     c_internal_index(zeile, FALSE);
+                  }
 
 
-               if ((bInsideDocument) && (token[0][0] != EOS) )
-               {
+                  /* Dies darf nicht mit in die obige Klammer! */
+                  token_reset();
+                  str2tok(zeile);
+
+
+                  if ((bInsideDocument) && (token[0][0] != EOS) )
+                  {
                                           /* Kommandos, die nur im Hauptteil erlaubt sind */
-                  if (strcmp(token[0], "!node") == 0 || strcmp(token[0], "!n") == 0)
-                  {
-                     add_node_to_toc(NODE_NORMAL, NODE_VISIBLE);
-                     bInsidePopup = FALSE;
-                  }
-                  else if (strcmp(token[0], "!node*") == 0 || strcmp(token[0], "!n*") == 0)
-                  {
-                     add_node_to_toc(NODE_NORMAL, NODE_INVISIBLE);
-                     bInsidePopup = FALSE;
-                  }
-                  else if (strcmp(token[0], "!subnode") == 0 || strcmp(token[0], "!sn") == 0)
-                  {
-                     add_subnode_to_toc(NODE_NORMAL, NODE_VISIBLE);
-                     bInsidePopup= FALSE;
-                  }
-                  else if (strcmp(token[0], "!subnode*") == 0 || strcmp(token[0], "!sn*") == 0)
-                  {
-                     add_subnode_to_toc(NODE_NORMAL, NODE_INVISIBLE);
-                     bInsidePopup= FALSE;
-                  }
-                  else if (strcmp(token[0], "!subsubnode") == 0 || strcmp(token[0], "!ssn") == 0)
-                  {
-                     add_subsubnode_to_toc(NODE_NORMAL, NODE_VISIBLE);
-                     bInsidePopup= FALSE;
-                  }
-                  else  if (strcmp(token[0], "!subsubnode*") == 0 || strcmp(token[0], "!ssn*") == 0)
-                  {
-                     add_subsubnode_to_toc(NODE_NORMAL, NODE_INVISIBLE);
-                     bInsidePopup= FALSE;
-                  }
-                  else if (strcmp(token[0], "!subsubsubnode") == 0 || strcmp(token[0], "!sssn") == 0)
-                  {
-                     add_subsubsubnode_to_toc(NODE_NORMAL, NODE_VISIBLE);
-                     bInsidePopup= FALSE;
-                  }
-                  else if (strcmp(token[0], "!subsubsubnode*") == 0 || strcmp(token[0], "!sssn*") == 0)
-                  {
-                     add_subsubsubnode_to_toc(NODE_NORMAL, NODE_INVISIBLE);
-                     bInsidePopup= FALSE;
-                  }
-                  else if (strcmp(token[0], "!pnode") == 0 || strcmp(token[0], "!p") == 0)
-                  {
-                     add_node_to_toc(NODE_POPUP, NODE_VISIBLE);
-                     bInsidePopup= TRUE;
-                  }
-                  else if (strcmp(token[0], "!pnode*") == 0 || strcmp(token[0], "!p*") == 0)
-                  {
-                     add_node_to_toc(NODE_POPUP, NODE_INVISIBLE);
-                     bInsidePopup= TRUE;
-                  }
-                  else if (strcmp(token[0], "!psubnode") == 0 || strcmp(token[0], "!ps") == 0)
-                  {
-                     add_subnode_to_toc(NODE_POPUP, NODE_VISIBLE);
-                     bInsidePopup= TRUE;
-                  }
-                  else if (strcmp(token[0], "!psubnode*") == 0 || strcmp(token[0], "!ps*") == 0)
-                  {
-                     add_subnode_to_toc(NODE_POPUP, NODE_INVISIBLE);
-                     bInsidePopup= TRUE;
-                  }
-                  else if (strcmp(token[0], "!psubsubnode") == 0 || strcmp(token[0], "!pss") == 0)
-                  {
-                     add_subsubnode_to_toc(NODE_POPUP, NODE_VISIBLE);
-                     bInsidePopup= TRUE;
-                  }
-                  else if (strcmp(token[0], "!psubsubnode*") == 0 || strcmp(token[0], "!pss*") == 0)
-                  {
-                     add_subsubnode_to_toc(NODE_POPUP, NODE_INVISIBLE);
-                     bInsidePopup= TRUE;
-                  }
-                  else if (strcmp(token[0], "!psubsubsubnode") == 0 || strcmp(token[0], "!psss") == 0)
-                  {
-                     add_subsubsubnode_to_toc(NODE_POPUP, NODE_VISIBLE);
-                     bInsidePopup= TRUE;
-                  }
-                  else if (strcmp(token[0], "!psubsubsubnode*") == 0 || strcmp(token[0], "!psss*") == 0)
-                  {
-                     add_subsubsubnode_to_toc(NODE_POPUP, NODE_INVISIBLE);
-                     bInsidePopup= TRUE;
-                  }
-                  else if (strcmp(token[0], "!begin_node") == 0 || strcmp(token[0], "!bn") == 0)
-                  {
-                     toc_begin_node(NODE_NORMAL, NODE_VISIBLE);
-                     bInsidePopup= FALSE;
-                  }
-                  else if (strcmp(token[0], "!begin_node*") == 0 || strcmp(token[0], "!bn*") == 0)
-                  {
-                     toc_begin_node(NODE_NORMAL, NODE_INVISIBLE);
-                     bInsidePopup= FALSE;
-                  }
-                  else if (strcmp(token[0], "!begin_pnode") == 0 || strcmp(token[0], "!bp") == 0)
-                  {
-                     toc_begin_node(NODE_POPUP, NODE_VISIBLE);
-                     bInsidePopup= TRUE;
-                  }
-                  else if (strcmp(token[0], "!begin_pnode*") == 0 || strcmp(token[0], "!bp*") == 0)
-                  {
-                     toc_begin_node(NODE_POPUP, NODE_INVISIBLE);
-                     bInsidePopup= TRUE;
-                  }
-                  else if (strcmp(token[0], "!end_node") == 0 || strcmp(token[0], "!en") == 0)
-                  {
-                     toc_end_node();
-                     bInsidePopup= FALSE;
-                  }
-                  else if (strcmp(token[0], "!heading") == 0 || strcmp(token[0], "!h") == 0)
-                  {
-                     save_upr_entry_heading (1, sCurrFileName, strchr(current_node_name_sys, ' ') + 1, uiCurrFileLine);
-                  }
-                  else if (strcmp(token[0], "!subheading") == 0 || strcmp(token[0], "!sh") == 0)
-                  {
-                     save_upr_entry_heading (2, sCurrFileName, strchr(current_node_name_sys, ' ') + 1, uiCurrFileLine);
-                  }
-                  else if (strcmp(token[0], "!subsubheading") == 0 || strcmp(token[0], "!ssh") == 0)
-                  {
-                     save_upr_entry_heading (3, sCurrFileName, strchr(current_node_name_sys, ' ') + 1, uiCurrFileLine);
-                  }
-                  else if (strcmp(token[0], "!subsubsubheading") == 0 || strcmp(token[0], "!sssh") == 0)
-                  {
-                     save_upr_entry_heading (4, sCurrFileName, strchr(current_node_name_sys, ' ') + 1, uiCurrFileLine);
-                  }
-                  else if (strcmp(token[0], "!alias") == 0 || strcmp(token[0], "!a") == 0)
-                  {
-                     tokcpy2(tmp, 512);
-                     add_alias(tmp, bInsidePopup);
-                  }
-                  else if (strcmp(token[0], "!index") == 0 || strcmp(token[0], "!x") == 0)
-                  {
-                     bCalledIndex = TRUE;
-                  }
-                  else if (strcmp(token[0], "!mapping") == 0)
-                  {
-                     set_mapping();
-                  }
-                  else if (strcmp(token[0], "!win_helpid") == 0)
-                  {
-                     set_helpid();
-                  }
-                  else if (strcmp(token[0], "!jumpid") == 0)   /* Alter Kommandoname */
-                  {
-                     set_helpid();
-                  }
-                  else if (strcmp(token[0], "!html_img_suffix") == 0)
-                  {
-                     c_html_img_suffix();
-                  }
-                  else if (strcmp(token[0], "!chapterimage") == 0)
-                  {
-                     set_chapter_image();
-                  }
-                  else if (strcmp(token[0], "!chaptericon") == 0)
-                  {
-                     set_chapter_icon();
-                  }
-                  else if (strcmp(token[0], "!chaptericon_active") == 0)
-                  {
-                     set_chapter_icon_active();
-                  }
-                  else if (strcmp(token[0], "!chaptericon_text") == 0)
-                  {
-                     set_chapter_icon_text();
-                  }
-                  else if (strcmp(token[0], "!ignore_subtoc") == 0)
-                  {
-                     set_ignore_subtoc();
-                  }
-                  else if (strcmp(token[0], "!ignore_subsubtoc") == 0)
-                  {
-                     set_ignore_subtoc();
-                  }
-                  else if (strcmp(token[0], "!ignore_subsubsubtoc") == 0)
-                  {
-                     set_ignore_subtoc();
-                  }
-                  else if (strcmp(token[0], "!ignore_subsubsubsubtoc") == 0)
-                  {
-                     set_ignore_subtoc();
-                  }
-                  else if (strcmp(token[0], "!ignore_links") == 0)
-                  {
-                     set_ignore_links();
-                  }
-                  else if (strcmp(token[0], "!ignore_index") == 0)
-                  {
-                     set_ignore_index();
-                  }
-                  else if (strcmp(token[0], "!ignore_title") == 0)
-                  {
-                     set_ignore_title();
-                  }
-                  else if (strcmp(token[0], "!ignore_headline") == 0)
-                  {
-                     set_ignore_headline();
-                  }
-                  else if (strcmp(token[0], "!ignore_bottomline") == 0)
-                  {
-                     set_ignore_bottomline();
-                  }
-                  else if (strcmp(token[0], "!ignore_raw_header") == 0)
-                  {
-                     set_ignore_raw_header();
-                  }
-                  else if (strcmp(token[0], "!ignore_raw_footer") == 0)
-                  {
-                     set_ignore_raw_footer();
-                  }
-                  else if (strcmp(token[0], "!maketitle") == 0)
-                  {
-                     uses_maketitle = TRUE;
-                  }
-                  else if (strcmp(token[0], "!tableofcontents") == 0)
-                  {
-                     uses_tableofcontents = TRUE;
-                  }
-                  else if (strcmp(token[0], "!begin_appendix") == 0)
-                  {
-                     pflag[PASS1].inside_apx = TRUE;
-                  }
-                  else if (strcmp(token[0], "!end_appendix") == 0)
-                  {
-                     ;
-                     /* pflag[PASS1].inside_apx = FALSE; */ /* 0.44 */
-                  }
-                  else if (pass1_check_main_commands())
-                  {
-                     zeile[0] = EOS;
-                  }
-                  else if (pass1_check_everywhere_commands())
-                  {
-                     zeile[0] = EOS;
-                  }
-                  
-               }  /* if ((bInsideDocument) && (token[0][0] != EOS) ) */
+                     if (strcmp(token[0], "!node") == 0 || strcmp(token[0], "!n") == 0)
+                     {
+                        add_node_to_toc(NODE_NORMAL, NODE_VISIBLE);
+                        bInsidePopup = FALSE;
+                     }
+                     else if (strcmp(token[0], "!node*") == 0 || strcmp(token[0], "!n*") == 0)
+                     {
+                        add_node_to_toc(NODE_NORMAL, NODE_INVISIBLE);
+                        bInsidePopup = FALSE;
+                     }
+                     else if (strcmp(token[0], "!subnode") == 0 || strcmp(token[0], "!sn") == 0)
+                     {
+                        add_subnode_to_toc(NODE_NORMAL, NODE_VISIBLE);
+                        bInsidePopup = FALSE;
+                     }
+                     else if (strcmp(token[0], "!subnode*") == 0 || strcmp(token[0], "!sn*") == 0)
+                     {
+                        add_subnode_to_toc(NODE_NORMAL, NODE_INVISIBLE);
+                        bInsidePopup = FALSE;
+                     }
+                     else if (strcmp(token[0], "!subsubnode") == 0 || strcmp(token[0], "!ssn") == 0)
+                     {
+                        add_subsubnode_to_toc(NODE_NORMAL, NODE_VISIBLE);
+                        bInsidePopup = FALSE;
+                     }
+                     else if (strcmp(token[0], "!subsubnode*") == 0 || strcmp(token[0], "!ssn*") == 0)
+                     {
+                        add_subsubnode_to_toc(NODE_NORMAL, NODE_INVISIBLE);
+                        bInsidePopup = FALSE;
+                     }
+                     else if (strcmp(token[0], "!subsubsubnode") == 0 || strcmp(token[0], "!sssn") == 0)
+                     {
+                        add_subsubsubnode_to_toc(NODE_NORMAL, NODE_VISIBLE);
+                        bInsidePopup = FALSE;
+                     }
+                     else if (strcmp(token[0], "!subsubsubnode*") == 0 || strcmp(token[0], "!sssn*") == 0)
+                     {
+                        add_subsubsubnode_to_toc(NODE_NORMAL, NODE_INVISIBLE);
+                        bInsidePopup = FALSE;
+                     }
+                     else if (strcmp(token[0], "!pnode") == 0 || strcmp(token[0], "!p") == 0)
+                     {
+                        add_node_to_toc(NODE_POPUP, NODE_VISIBLE);
+                        bInsidePopup = TRUE;
+                     }
+                     else if (strcmp(token[0], "!pnode*") == 0 || strcmp(token[0], "!p*") == 0)
+                     {
+                        add_node_to_toc(NODE_POPUP, NODE_INVISIBLE);
+                        bInsidePopup = TRUE;
+                     }
+                     else if (strcmp(token[0], "!psubnode") == 0 || strcmp(token[0], "!ps") == 0)
+                     {
+                        add_subnode_to_toc(NODE_POPUP, NODE_VISIBLE);
+                        bInsidePopup = TRUE;
+                     }
+                     else if (strcmp(token[0], "!psubnode*") == 0 || strcmp(token[0], "!ps*") == 0)
+                     {
+                        add_subnode_to_toc(NODE_POPUP, NODE_INVISIBLE);
+                        bInsidePopup = TRUE;
+                     }
+                     else if (strcmp(token[0], "!psubsubnode") == 0 || strcmp(token[0], "!pss") == 0)
+                     {
+                        add_subsubnode_to_toc(NODE_POPUP, NODE_VISIBLE);
+                        bInsidePopup = TRUE;
+                     }
+                     else if (strcmp(token[0], "!psubsubnode*") == 0 || strcmp(token[0], "!pss*") == 0)
+                     {
+                        add_subsubnode_to_toc(NODE_POPUP, NODE_INVISIBLE);
+                        bInsidePopup = TRUE;
+                     }
+                     else if (strcmp(token[0], "!psubsubsubnode") == 0 || strcmp(token[0], "!psss") == 0)
+                     {
+                        add_subsubsubnode_to_toc(NODE_POPUP, NODE_VISIBLE);
+                        bInsidePopup = TRUE;
+                     }
+                     else if (strcmp(token[0], "!psubsubsubnode*") == 0 || strcmp(token[0], "!psss*") == 0)
+                     {
+                        add_subsubsubnode_to_toc(NODE_POPUP, NODE_INVISIBLE);
+                        bInsidePopup = TRUE;
+                     }
+                     else if (strcmp(token[0], "!begin_node") == 0 || strcmp(token[0], "!bn") == 0)
+                     {
+                        toc_begin_node(NODE_NORMAL, NODE_VISIBLE);
+                        bInsidePopup = FALSE;
+                     }
+                     else if (strcmp(token[0], "!begin_node*") == 0 || strcmp(token[0], "!bn*") == 0)
+                     {
+                        toc_begin_node(NODE_NORMAL, NODE_INVISIBLE);
+                        bInsidePopup = FALSE;
+                     }
+                     else if (strcmp(token[0], "!begin_pnode") == 0 || strcmp(token[0], "!bp") == 0)
+                     {
+                        toc_begin_node(NODE_POPUP, NODE_VISIBLE);
+                        bInsidePopup = TRUE;
+                     }
+                     else if (strcmp(token[0], "!begin_pnode*") == 0 || strcmp(token[0], "!bp*") == 0)
+                     {
+                        toc_begin_node(NODE_POPUP, NODE_INVISIBLE);
+                        bInsidePopup = TRUE;
+                     }
+                     else if (strcmp(token[0], "!end_node") == 0 || strcmp(token[0], "!en") == 0)
+                     {
+                        toc_end_node();
+                        bInsidePopup = FALSE;
+                     }
+                     else if (strcmp(token[0], "!heading") == 0 || strcmp(token[0], "!h") == 0)
+                     {
+                        save_upr_entry_heading (1, sCurrFileName, strchr(current_node_name_sys, ' ') + 1, uiCurrFileLine);
+                     }
+                     else if (strcmp(token[0], "!subheading") == 0 || strcmp(token[0], "!sh") == 0)
+                     {
+                        save_upr_entry_heading (2, sCurrFileName, strchr(current_node_name_sys, ' ') + 1, uiCurrFileLine);
+                     }
+                     else if (strcmp(token[0], "!subsubheading") == 0 || strcmp(token[0], "!ssh") == 0)
+                     {
+                        save_upr_entry_heading (3, sCurrFileName, strchr(current_node_name_sys, ' ') + 1, uiCurrFileLine);
+                     }
+                     else if (strcmp(token[0], "!subsubsubheading") == 0 || strcmp(token[0], "!sssh") == 0)
+                     {
+                        save_upr_entry_heading (4, sCurrFileName, strchr(current_node_name_sys, ' ') + 1, uiCurrFileLine);
+                     }
+                     else if (strcmp(token[0], "!alias") == 0 || strcmp(token[0], "!a") == 0)
+                     {
+                        tokcpy2(tmp, 512);
+                        add_alias(tmp, bInsidePopup);
+                     }
+                     else if (strcmp(token[0], "!index") == 0 || strcmp(token[0], "!x") == 0)
+                     {
+                        bCalledIndex = TRUE;
+                     }
+                     else if (strcmp(token[0], "!mapping") == 0)
+                     {
+                        set_mapping();
+                     }
+                     else if (strcmp(token[0], "!win_helpid") == 0)
+                     {
+                        set_helpid();
+                     }
+                     else if (strcmp(token[0], "!jumpid") == 0)   /* Alter Kommandoname */
+                     {
+                        set_helpid();
+                     }
+                     else if (strcmp(token[0], "!html_img_suffix") == 0)
+                     {
+                        c_html_img_suffix();
+                     }
+                     else if (strcmp(token[0], "!chapterimage") == 0)
+                     {
+                        set_chapter_image();
+                     }
+                     else if (strcmp(token[0], "!chaptericon") == 0)
+                     {
+                        set_chapter_icon();
+                     }
+                     else if (strcmp(token[0], "!chaptericon_active") == 0)
+                     {
+                        set_chapter_icon_active();
+                     }
+                     else if (strcmp(token[0], "!chaptericon_text") == 0)
+                     {
+                        set_chapter_icon_text();
+                     }
+                     else if (strcmp(token[0], "!ignore_subtoc") == 0)
+                     {
+                        set_ignore_subtoc();
+                     }
+                     else if (strcmp(token[0], "!ignore_subsubtoc") == 0)
+                     {
+                        set_ignore_subtoc();
+                     }
+                     else if (strcmp(token[0], "!ignore_subsubsubtoc") == 0)
+                     {
+                        set_ignore_subtoc();
+                     }
+                     else if (strcmp(token[0], "!ignore_subsubsubsubtoc") == 0)
+                     {
+                        set_ignore_subtoc();
+                     }
+                     else if (strcmp(token[0], "!ignore_links") == 0)
+                     {
+                        set_ignore_links();
+                     }
+                     else if (strcmp(token[0], "!ignore_index") == 0)
+                     {
+                        set_ignore_index();
+                     }
+                     else if (strcmp(token[0], "!ignore_title") == 0)
+                     {
+                        set_ignore_title();
+                     }
+                     else if (strcmp(token[0], "!ignore_headline") == 0)
+                     {
+                        set_ignore_headline();
+                     }
+                     else if (strcmp(token[0], "!ignore_bottomline") == 0)
+                     {
+                        set_ignore_bottomline();
+                     }
+                     else if (strcmp(token[0], "!ignore_raw_header") == 0)
+                     {
+                        set_ignore_raw_header();
+                     }
+                     else if (strcmp(token[0], "!ignore_raw_footer") == 0)
+                     {
+                        set_ignore_raw_footer();
+                     }
+                     else if (strcmp(token[0], "!maketitle") == 0)
+                     {
+                        uses_maketitle = TRUE;
+                     }
+                     else if (strcmp(token[0], "!tableofcontents") == 0)
+                     {
+                        uses_tableofcontents = TRUE;
+                     }
+                     else if (strcmp(token[0], "!begin_appendix") == 0)
+                     {
+                        pflag[PASS1].inside_apx = TRUE;
+                     }
+                     else if (strcmp(token[0], "!end_appendix") == 0)
+                     {
+                        ;
+                        /* pflag[PASS1].inside_apx = FALSE; */ /* 0.44 */
+                     }
+                     else if (pass1_check_main_commands())
+                     {
+                        zeile[0] = EOS;
+                     }
+                     else if (pass1_check_everywhere_commands())
+                     {
+                        zeile[0] = EOS;
+                     }
+                     
+                  }  /* if ((bInsideDocument) && (token[0][0] != EOS) ) */
 
 
                                           /* Kommandos, die nur im Vorspann erlaubt sind */
-               if ( (!bInsideDocument) && (token[0][0] != EOS) )
-               {
-                  if (strcmp(token[0], CMD_BEGIN_DOCUMENT) == 0)
+                  if ( (!bInsideDocument) && (token[0][0] != EOS) )
                   {
-                     bInsideDocument = TRUE;
-                  }
-                  else if (strcmp(token[0], "!hyphen") == 0)
-                  {
-                     add_hyphen();
-                  }
-                  else if (strcmp(token[0], "!docinfo") == 0)
-                  {
-                     if (set_docinfo())
+                     if (strcmp(token[0], CMD_BEGIN_DOCUMENT) == 0)
                      {
-                        token[0][0] = EOS;
+                        bInsideDocument = TRUE;
                      }
-                  }
-                  else if (strcmp(token[0], "!doclayout") == 0)
-                  {
-                     if (set_doclayout())
+                     else if (strcmp(token[0], "!hyphen") == 0)
                      {
-                        token[0][0] = EOS;
+                        add_hyphen();
                      }
-                  }
-                  else if (strcmp(token[0], "!show_variable") == 0)
-                  {
-                     if (set_show_variable())
+                     else if (strcmp(token[0], "!docinfo") == 0)
                      {
-                        token[0][0] = EOS;
+                        if (set_docinfo())
+                        {
+                           token[0][0] = EOS;
+                        }
                      }
-                  }
-                  else if (pass1_check_preamble_commands())
-                  {
-                     zeile[0] = EOS;
-                  }
-                  else if (pass1_check_everywhere_commands())
-                  {
-                     zeile[0] = EOS;
-                  }
+                     else if (strcmp(token[0], "!doclayout") == 0)
+                     {
+                        if (set_doclayout())
+                        {
+                           token[0][0] = EOS;
+                        }
+                     }
+                     else if (strcmp(token[0], "!show_variable") == 0)
+                     {
+                        if (set_show_variable())
+                        {
+                           token[0][0] = EOS;
+                        }
+                     }
+                     else if (pass1_check_preamble_commands())
+                     {
+                        zeile[0] = EOS;
+                     }
+                     else if (pass1_check_everywhere_commands())
+                     {
+                        zeile[0] = EOS;
+                     }
 
-               }  /* if ( (!bInsideDocument) && (token[0][0] != EOS) ) */
+                  }  /* if ( (!bInsideDocument) && (token[0][0] != EOS) ) */
 
 
 
                                           /* Kommandos, die ueberall erlaubt sind... */
-               if (token[0][0] != EOS)
-               {
-                  if (strcmp(token[0], "!nop") == 0)
+                  if (token[0][0] != EOS)
                   {
-                     bNopDetected = !bNopDetected;
-                  }
-                  else if (strcmp(token[0], "!label") == 0 || strcmp(token[0], "!l") == 0)
+                     if (strcmp(token[0], "!nop") == 0)
+                     {
+                        bNopDetected = !bNopDetected;
+                     }
+                     else if (strcmp(token[0], "!label") == 0 || strcmp(token[0], "!l") == 0)
+                     {
+                        tokcpy2(tmp, 512);
+                        replace_udo_quotes(tmp);
+                        add_label(tmp, FALSE, bInsidePopup);
+                     }
+                     else if (strcmp(token[0], "!include") == 0)
+                     {
+                        c_include();
+                     }
+                     else if (strcmp(token[0], "!input") == 0)
+                     {
+                        c_input();
+                     }
+                     else if (strcmp(token[0], "!rinclude") == 0)
+                     {
+                        c_include_raw();
+                     }
+                     else if (strcmp(token[0], "!vinclude") == 0)
+                     {
+                        c_include_verbatim();
+                     }
+                     else if (strcmp(token[0], "!pinclude") == 0)
+                     {
+                        c_include_preformatted();
+                     }
+                     else if (strcmp(token[0], "!sinclude") == 0)
+                     {
+                        c_include_src();
+                     }
+                     else if (strcmp(token[0], "!cinclude") == 0)
+                     {
+                        c_include_comment();
+                     }
+                     else if (strcmp(token[0], "!ldinclude") == 0)
+                     {
+                        c_include_linedraw();
+                     }
+                     else if (strcmp(token[0], "!code") == 0)
+                     {
+                        c_code();
+                     }
+                     else if (strcmp(token[0], "!universal_charset") == 0)
+                     {
+                        c_universal_charset();
+                     }
+                     else if (strcmp(token[0], "!break") == 0)
+                     {
+                        bBreakInside = TRUE;
+                     }
+                     else if (strcmp(token[0], "!error") == 0)
+                     {
+                        c_error();
+                     }
+                     else if (strcmp(token[0], "!use_raw_header") == 0)
+                     {
+                        set_raw_header_filename();
+                     }
+                     else if (strcmp(token[0], "!use_raw_footer") == 0)
+                     {
+                        set_raw_footer_filename();
+                     }
+                     else if (pass1_check_everywhere_commands())
+                     {
+                        zeile[0] = EOS;
+                     }
+
+                  }  /* if (token[0][0] != EOS) */
+
+               }   /* if (zeile[0] == META_C) */
+
+            }   /* if (!pflag[PASS1].ignore_line...) */
+         
+            else
+            {
+               if ( (pflag[PASS1].ignore_line == 0) && (pflag[PASS1].env == ENV_TABLE) )
+               {
+                  if ( strcmp(token[0], "!label") == 0 || strcmp(token[0], "!l") == 0 )
                   {
                      tokcpy2(tmp, 512);
                      replace_udo_quotes(tmp);
                      add_label(tmp, FALSE, bInsidePopup);
                   }
-                  else if (strcmp(token[0], "!include") == 0)
-                  {
-                     c_include();
-                  }
-                  else if (strcmp(token[0], "!input") == 0)
-                  {
-                     c_input();
-                  }
-                  else if (strcmp(token[0], "!rinclude") == 0)
-                  {
-                     c_include_raw();
-                  }
-                  else if (strcmp(token[0], "!vinclude") == 0)
-                  {
-                     c_include_verbatim();
-                  }
-                  else if (strcmp(token[0], "!pinclude") == 0)
-                  {
-                     c_include_preformatted();
-                  }
-                  else if (strcmp(token[0], "!sinclude") == 0)
-                  {
-                     c_include_src();
-                  }
-                  else if (strcmp(token[0], "!cinclude") == 0)
-                  {
-                     c_include_comment();
-                  }
-                  else if (strcmp(token[0], "!ldinclude") == 0)
-                  {
-                     c_include_linedraw();
-                  }
-                  else if (strcmp(token[0], "!code") == 0)
-                  {
-                     c_code();
-                  }
-                  else if (strcmp(token[0], "!universal_charset") == 0)
-                  {
-                     c_universal_charset();
-                  }
-                  else if (strcmp(token[0], "!break") == 0)
-                  {
-                     bBreakInside = TRUE;
-                  }
-                  else if (strcmp(token[0], "!error") == 0)
-                  {
-                     c_error();
-                  }
-                  else if (strcmp(token[0], "!use_raw_header") == 0)
-                  {
-                     set_raw_header_filename();
-                  }
-                  else if (strcmp(token[0], "!use_raw_footer") == 0)
-                  {
-                     set_raw_footer_filename();
-                  }
-                  else if (pass1_check_everywhere_commands())
-                  {
-                     zeile[0] = EOS;
-                  }
-
-               }
-
-            }   /* if (zeile[0]==META_C) */
-
-         }   /* if (!pflag[PASS1].ignore_line...) */
-         
-         else
-         {
-            if ( (pflag[PASS1].ignore_line == 0) && (pflag[PASS1].env == ENV_TABLE) )
-            {
-               if ( strcmp(token[0], "!label") == 0 || strcmp(token[0], "!l") == 0 )
-               {
-                  tokcpy2(tmp, 512);
-                  replace_udo_quotes(tmp);
-                  add_label(tmp, FALSE, bInsidePopup);
                }
             }
-         }
+            
+         }  /* if (zeile[0] != EOS) */
          
-      }  /* if (zeile[0] != EOS) */
+      }  /* if (zeile[0] != '#') */
 
    }  /* while (fgets) */
 
