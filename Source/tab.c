@@ -863,137 +863,224 @@ LOCAL void test_for_addition(char *cell)
         }
 }       /* test_for_addition */
 
-LOCAL void table_output_html ( void )
+
+
+
+
+/*******************************************************************************
+*
+*  table_output_html():
+*     ??? (description missing)
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void table_output_html(void)
 {
-        int             y, x, i;
-        char    f[LINELEN], alignOn[64]; /* r6.3.18[vj]: f is now LINELEN chars long instead of 512 */
-        char    token_buffer[LINELEN];   /* v6.5.3[vj]: New buffer needed for table extension */
-        BOOLEAN inside_center, inside_right, inside_left;
+   int       y, 
+             x, 
+             i;
+   char      f[LINELEN],                  /* r6.3.18[vj]: f is now LINELEN chars long instead of 512 */
+             alignOn[64];
+   char      token_buffer[LINELEN];       /* v6.5.3[vj]: New buffer needed for table extension */
+   BOOLEAN   inside_center, 
+             inside_right, 
+             inside_left;
+             
 
-        inside_center= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_CENT);
-        inside_right= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_RIGH);
-        inside_left= (iEnvLevel>0 && iEnvType[iEnvLevel]==ENV_LEFT);
+   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
+   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
+   inside_left   = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_LEFT);
 
-        if (!inside_center && !inside_right && !inside_left)
-        {
-                switch (table_alignment)        /*r6pl9*/
-                {
-                        case ALIGN_CENT:        inside_center= TRUE;    break;
-                        case ALIGN_RIGH:        inside_right= TRUE;             break;
-                }
-        }
+   if (!inside_center && !inside_right && !inside_left)
+   {
+      switch (table_alignment)            /*r6pl9*/
+      {
+      case ALIGN_CENT:
+         inside_center = TRUE;
+         break;
+         
+      case ALIGN_RIGH:
+         inside_right = TRUE;
+      }
+   }
+   
+   strcpy(alignOn, "left");
+   
+   if (inside_center)
+      um_strcpy(alignOn, "center", 64, "table_output_html[1]");
+      
+   if (inside_right)
+      um_strcpy(alignOn, "right", 64, "table_output_html[2]");
 
-        strcpy(alignOn, "left");
-        if (inside_center)      um_strcpy(alignOn, "center", 64, "table_output_html[1]");
-        if (inside_right)       um_strcpy(alignOn, "right", 64, "table_output_html[2]");
+   voutf("<div align=\"%s\">", alignOn);
 
-        voutf("<div align=\"%s\">", alignOn);
+   if (tab_toplines > 0)
+   {
+      outln("<table border=\"1\" frame=\"box\">");
+   }
+   else
+   {
+      outln("<table border=\"0\">");
+   }
 
-        if (tab_toplines>0)
-        {       outln("<table border=\"1\" frame=\"box\">");
-        }
-        else
-        {       outln("<table border=\"0\">");
-        }
+   if (tab_caption[0] != EOS)
+   {
+      if (tab_caption_visible)
+      {
+         voutlnf("<caption align=\"bottom\">%s %d: %s</caption>", lang.table, tab_counter, tab_caption);
+      }
+      else
+      {
+         voutlnf("<caption align=\"bottom\">%s</caption>", tab_caption);
+      }
+   }
+   
+   for (y = 0; y <= tab_h; y++)
+   {
+      outln("<tr>");
 
-        if (tab_caption[0]!=EOS)
-        {
-                if (tab_caption_visible)
-                {       voutlnf("<caption align=\"bottom\">%s %d: %s</caption>", lang.table, tab_counter, tab_caption);
-                }
-                else
-                {       voutlnf("<caption align=\"bottom\">%s</caption>", tab_caption);
-                }
-        }
+      for (x = 0; x <= tab_w; x++)
+      {                                   /* New in r6pl16 [NHz] */
+         char    *found = NULL;  /* */
+         size_t   tokposition;   /* */
 
-        for (y=0; y<=tab_h; y++)
-        {       outln("<tr>");
-                for (x=0; x<=tab_w; x++)
-                {       /* New in r6pl16 [NHz] */
 
-                        char *found = NULL; /*, *token = NULL;*/
-                        size_t tokposition;
+         /* addition takes the extra options per cell, so it needs to be cleaned */
+         
+         addition[0] = EOS;
 
-                        addition[0] = EOS; /* addition takes the extra options per cell, so it needs to be cleaned */
-                        token_buffer[0] = EOS; /* This is the buffer where we keep the per cell format information */
-                        /* This BOOLEAN flags are possibly set in test_for_addition */
-                        addition_has_align=FALSE;
-                        addition_has_valign=FALSE;
-                        addition_col_offset=0;
 
-                        /* some tables have empty cells, so always check befor using tab_cell entries */
-                        if (tab_cell[y][x]!=NULL)
-                            found = strstr(tab_cell[y][x], "!?");
+         /* This is the buffer where we keep the per cell format information */
+         
+         token_buffer[0] = EOS;
 
-                        if(found != NULL)
-                        {
-                                tokposition=strcspn(tab_cell[y][x], "!");
-                                um_strncpy(token_buffer, tab_cell[y][x], tokposition, MAX_TOKEN_LEN+1, "table_output_html[3]"); /* <???> Pufferueberlauf moeglich? Wie gross kann hier token wirklich sein? */
-                                token_buffer[tokposition]=EOS;
 
-                                del_whitespaces (token_buffer); /* Delete Whitespaces before checking for additions */
-                                test_for_addition(token_buffer);
+         /* This BOOLEAN flags are possibly set in test_for_addition */
+         
+         addition_has_align  = FALSE;
+         addition_has_valign = FALSE;
+         addition_col_offset = 0;
 
-                                tab_cell[y][x] = found+2;
+         /* some tables have empty cells, so always check befor using tab_cell entries */
+         
+         if (tab_cell[y][x] != NULL)
+            found = strstr(tab_cell[y][x], "!?");
 
-                        }
+         if (found != NULL)
+         {
+            tokposition = strcspn(tab_cell[y][x], "!");
+            um_strncpy(token_buffer, tab_cell[y][x], tokposition, MAX_TOKEN_LEN+1, "table_output_html[3]"); /* <???> Pufferueberlauf moeglich? Wie gross kann hier token wirklich sein? */
+            token_buffer[tokposition] = EOS;
 
-                        /*switch(tab_just[x])
-                        {       case TAB_CENTER:        voutf("  <td align=\"center\" valign=\"top\"%s>", addition);    break;
-                                case TAB_RIGHT:         voutf("  <td align=\"right\" valign=\"top\"%s>", addition);     break;
-                                default:                        voutf("  <td align=\"left\" valign=\"top\"%s>", addition);      break;
-                        }*/
-                        /* Everything not set in test_for_addition is now set here */
-                        switch(tab_just[x])
-                        {       case TAB_CENTER:        if (!addition_has_align) um_strcat(addition, " align=\"center\"", TAB_ADDITION_LEN, "table_output_html[3-1-0]");
-                                                                        if (!addition_has_valign) um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-1]");
-                                                                        break;
-                                case TAB_RIGHT:         if (!addition_has_align) um_strcat(addition, " align=\"right\"", TAB_ADDITION_LEN, "table_output_html[3-1-2]");
-                                                                        if (!addition_has_valign) um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-3]");
-                                                                        break;
-                                default:                        if (!addition_has_align) um_strcat(addition, " align=\"left\"", TAB_ADDITION_LEN, "table_output_html[3-1-4]");
-                                                                        if (!addition_has_valign) um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-5]");
-                                                                        break;
-                        }
-                        voutf("  <td%s>", addition);
-                        /* If there is a colspan, we need to supress empty cols */
-                        if (addition_col_offset>0) x=x+addition_col_offset-1;
-                        out(sHtmlPropfontStart);
-                        if ( tab_cell[y][x]!=NULL )
-                        {       um_strcpy(f, tab_cell[y][x], LINELEN, "table_output_html[4]");
-                                auto_quote_chars(f, FALSE);
-                                replace_defines(f);
-                                c_commands_inside(f, FALSE);
-                                replace_udo_quotes(f);
-                                c_vars(f);
-                                c_internal_styles(f);
-                                auto_references(f, FALSE, "", 0, 0);    /* PL7 <???> */
-                                replace_placeholders(f);
-                                replace_udo_tilde(f);
-                                replace_udo_nbsp(f);
-                                out(f);
-                        }
-                        out(sHtmlPropfontEnd);
-                        outln("</td>"); /* PL14: "</td>" statt " " */
-                }
-                outln("</tr>");         /* PL14: "</tr>" statt "" */
+                                          /* Delete Whitespaces before checking for additions */
+            del_whitespaces (token_buffer);
+            test_for_addition(token_buffer);
 
-            if (tab_label[y]>0)
-            {   for (i=0; i<tab_label[y]; i++)
-                {       if ( tab_label_cell[y][i] != NULL )
-                        {       str2tok(tab_label_cell[y][i]);
-                                        if (token_counter>0)
-                                                c_label();
-                                }
-                                token_reset();
-                }
+            tab_cell[y][x] = found + 2;
+         }
+
+/*       switch(tab_just[x])
+         {
+         case TAB_CENTER:
+            voutf("  <td align=\"center\" valign=\"top\"%s>", addition);
+            break;
+         case TAB_RIGHT:
+            voutf("  <td align=\"right\" valign=\"top\"%s>", addition);
+            break;
+         default:
+            voutf("  <td align=\"left\" valign=\"top\"%s>", addition);
+         }
+*/
+
+         /* Everything not set in test_for_addition is now set here */
+
+         switch (tab_just[x])
+         {
+         case TAB_CENTER:
+            if (!addition_has_align)
+               um_strcat(addition, " align=\"center\"", TAB_ADDITION_LEN, "table_output_html[3-1-0]");
+
+            if (!addition_has_valign)
+               um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-1]");
+               
+            break;
+
+         case TAB_RIGHT:
+            if (!addition_has_align)
+               um_strcat(addition, " align=\"right\"", TAB_ADDITION_LEN, "table_output_html[3-1-2]");
+
+            if (!addition_has_valign)
+               um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-3]");
+
+            break;
+
+         default:
+            if (!addition_has_align)
+               um_strcat(addition, " align=\"left\"", TAB_ADDITION_LEN, "table_output_html[3-1-4]");
+
+            if (!addition_has_valign)
+               um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-5]");
+         }
+         
+         voutf("  <td%s>", addition);
+
+         /* If there is a colspan, we need to supress empty cols */
+
+         if (addition_col_offset > 0)
+            x = x + addition_col_offset - 1;
+
+         out(sHtmlPropfontStart);
+         
+         if (tab_cell[y][x] != NULL)
+         {
+            um_strcpy(f, tab_cell[y][x], LINELEN, "table_output_html[4]");
+            auto_quote_chars(f, FALSE);
+            replace_defines(f);
+            c_commands_inside(f, FALSE);
+            replace_udo_quotes(f);
+            c_vars(f);
+            c_internal_styles(f);
+                                          /* PL7 <???> */
+            auto_references(f, FALSE, "", 0, 0);
+            replace_placeholders(f);
+            replace_udo_tilde(f);
+            replace_udo_nbsp(f);
+            out(f);
+         }
+
+         out(sHtmlPropfontEnd);
+         outln("</td>");                  /* PL14: "</td>" statt " " */
+      }
+      
+      outln("</tr>");                     /* PL14: "</tr>" statt "" */
+
+      if (tab_label[y] > 0)
+      {
+         for (i = 0; i < tab_label[y]; i++)
+         {
+            if (tab_label_cell[y][i] != NULL)
+            {
+               str2tok(tab_label_cell[y][i]);
+               
+               if (token_counter > 0)
+                  c_label();
             }
-        }
+
+            token_reset();
+         }
+      }
+      
+   }  /* for (y = 0; y <= tab_h; y++) */
+
+   outln("</table></div>");
+
+} /* table_output_html() */
 
 
-        outln("</table></div>");
 
-}       /* table_output_html */
 
 
 LOCAL void table_output_tex ( void )

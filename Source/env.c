@@ -2255,7 +2255,7 @@ GLOBAL void c_begin_enumerate(void)
 /*******************************************************************************
 *
 *  c_begin_description():
-*     ??? (description missing)
+*     output begin of description environment
 *
 *  Return:
 *     -
@@ -3307,24 +3307,20 @@ GLOBAL void c_item(void)
    case TOHAH:
    case TOHTM:
    case TOMHH:
-      switch (iEnvType[iEnvLevel])
+      switch (iEnvType[iEnvLevel])        /* which kind of environment item? */
       {
-      case ENV_ITEM:
-      case ENV_ENUM:
-         if (!bEnv1stItem[iEnvLevel])
-         {
+      case ENV_ITEM:                      /* <ul> list item */
+      case ENV_ENUM:                      /* <ol> list item */
+         if (!bEnv1stItem[iEnvLevel])     /* not the first <li>? */
             outln("</li>");               /* r6pl6: </li> ausgeben */
-         }
          
-         strcpy(sBig, "<li>");
+         strcpy(sBig, "<li>");            /* output <li> */
          break;
          
       case ENV_DESC:
                                           /* New in V6.5.11 [NHz] */
-         if (!bEnv1stItem[iEnvLevel])
-         {
-            outln("</dd>");
-         }
+         if (!bEnv1stItem[iEnvLevel])     /* not the first <dd>? */
+            outln("</dd>");               /* close previous one */
 
          token[0][0] = EOS;
          sBig[0] = EOS;
