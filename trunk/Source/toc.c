@@ -52,6 +52,8 @@
 *    fd  Jan 23: converted all German umlauts in comments into plain ASCII
 *    fd  Jan 24: html_footer() handles all 16 combinations of 
 *                  webmasterurl, webmastername, webmastermailurl, webmasteremail
+*    fd  Jan 25: save_html_index() does no longer list the indexudo page in itself
+*    fd  Feb 03: c_label(): issue #84 fixed
 *
 ******************************************|************************************/
 
@@ -103,6 +105,7 @@ const char *id_toc_c= "@(#) toc.c       $DATE$";
 #include "export.h"
 #include "toc.h"
 #include "udomem.h"
+#include "encoding.h"                      /* sort_CODE_...[] */
 
 
 
@@ -210,6 +213,23 @@ LOCAL char        html_target[64];
 
 LOCAL char       *html_frames_toc_title;  /* V6.5.16 [GS] */
 LOCAL char       *html_frames_con_title;  /* V6.5.16 [GS] */
+
+
+
+
+
+/*******************************************************************************
+*
+*     TYPE DEFINITIONS
+*
+******************************************|************************************/
+
+typedef struct   _hmtl_index              /* index output for HTML */
+   {
+   int       toc_index;                   /* # of found label for TOC */
+   BOOLEAN   is_node;                     /* the label is the caption (?) */
+   char      tocname[512];                /* label or node name */
+}  HTML_INDEX;
 
 
 
@@ -466,7 +486,7 @@ int      tocindex)  /* */
 /*******************************************************************************
 *
 *  output_aliasses():
-*     Aliasse eines Kapitels ausgeben. Diese muessen nach der Node-Angabe erfolgen.
+*     Aliase eines Kapitels ausgeben. Diese muessen nach der Node-Angabe erfolgen.
 *
 *  return:
 *     -
@@ -5210,7 +5230,6 @@ GLOBAL void html_footer(void)
       sprintf(s, "<a href=\"mailto:%s\">%s</a>",
          titdat.webmasterurl, 
          titdat.webmasterurl);
-         break;
       break;
 
    case 0x0111:                           /*           has_name + has_mailurl + has_email */
@@ -5276,17 +5295,8 @@ GLOBAL void html_footer(void)
 }
 
 
-/* --------------------------------------------------------------
-   *
-   *  Index output for HTML
-   *
-   --------------------------------------------------------------  */
 
-typedef struct _hmtl_index {
-   int toc_index;
-   BOOLEAN is_node;     /* The label is the caption   */
-   char tocname[512];
-} HTML_INDEX;
+
 
 LOCAL MYFILE   udofile;
 
@@ -5359,18 +5369,21 @@ LOCAL int comp_index_html(
 const void  *_p1,              /* */
 const void  *_p2)              /* */
 {
-   char      p1_tocname[512];  /* */
-   char      p2_tocname[512];  /* */
-   
+   char      p1_tocname[512];  /* buffer for 1st entry name in TOC */
+   char      p2_tocname[512];  /* buffer for 2nd entry name in TOC */
 
+                                          /* cast the pointers to right structure */
    const HTML_INDEX *p1 = (const HTML_INDEX *)_p1;
    const HTML_INDEX *p2 = (const HTML_INDEX *)_p2;
 
-   strcpy(p1_tocname, p1->tocname);
-   html2sys(p1_tocname);                  /* V6.5.20 [gs] */
-   
+   strcpy(p1_tocname, p1->tocname);       /* copy the entry names */
    strcpy(p2_tocname, p2->tocname);
-   html2sys(p2_tocname);                  /* V6.5.20 [gs] */
+
+   if (!html_ignore_8bit)
+      html2sys(p1_tocname);               /* V6.5.20 [gs] */
+   
+   if (!html_ignore_8bit)
+      html2sys(p2_tocname);               /* V6.5.20 [gs] */
 
                                           /* Instead of strcmp v6.5.20 [gs] */
    return str_sort_cmp(p1_tocname, p2_tocname);
@@ -5398,7 +5411,7 @@ GLOBAL BOOLEAN save_html_index(void)
    int          j;               /* counter */
    size_t       num_index;       /* # of entries in index file */
    HTML_INDEX  *html_index;      /* ^ to HTML_INDEX array */
-   char         thisc,           /* single char for comparison */
+   size_t       thisc,           /* single char for comparison */
                 lastc;           /* last char from comparison */
    char         htmlname[512];   /* */
    char         dummy[512];      /* */
@@ -5408,9 +5421,10 @@ GLOBAL BOOLEAN save_html_index(void)
    char        *escapedtocname;  /* */
    char         jumplist[2048];  /* buffer string for A-Z navigation bar */
    char         thisc_buf[42];   /* buffer string for converted thisc */
+   size_t     (*psort);          /* ^ to sort_CODE_xxx[] arrays */
+
    
-   
-   num_index = 0;                         /* first we count how much we entries need */
+   num_index = 0;                         /* first we count how much entries we need */
    
    for (j = 1; j <= p1_lab_counter; j++)  /* check all collected labels */
    {
@@ -5421,11 +5435,9 @@ GLOBAL BOOLEAN save_html_index(void)
    if (num_index == 0)                    /* index file will not be created */
       return FALSE;
 
-   
-   udofile_adjust_index();
-   
+   udofile_adjust_index();                /* create temp. file name */
 
-   uif= myFwopen(udofile.full, TOASC);    /* create temporary index file */
+   uif = myFwopen(udofile.full, TOASC);   /* create temporary index file */
 
    if (!uif)                              /* no file pointer */
       return FALSE;
@@ -5449,6 +5461,7 @@ GLOBAL BOOLEAN save_html_index(void)
       return FALSE;
    }
    
+   
    /* --- create index array --- */
    
    num_index = 0;
@@ -5459,10 +5472,11 @@ GLOBAL BOOLEAN save_html_index(void)
       {
          html_index[num_index].toc_index = lab[j]->tocindex;
          html_index[num_index].is_node   = lab[j]->is_node;
-         
+
+                                          /* set ^ to name field in structure */
          tocname = html_index[num_index].tocname;
-         strcpy(tocname, lab[j]->name);
-         
+         strcpy(tocname, lab[j]->name);   /* copy name to structure */
+
          replace_macros(tocname);
          c_internal_styles(tocname);
          delete_all_divis(tocname);
@@ -5471,9 +5485,12 @@ GLOBAL BOOLEAN save_html_index(void)
          del_html_styles(tocname);
          
          num_index++;
-                                          /* V6.5.20 [gs] */
-         if (strcmp (tocname, HTML_LABEL_CONTENTS) == 0)
-            num_index--;                  /* ignore HTML_LABEL_CONTENTS */
+                                          /* ignore Table of Contents! */
+         if (strcmp(tocname, HTML_LABEL_CONTENTS) == 0)
+            num_index--;
+                                          /* ignore indexudo page! */
+         if (strcmp(tocname, lang.index) == 0)
+            num_index--;
       }
    }
    
@@ -5481,9 +5498,24 @@ GLOBAL BOOLEAN save_html_index(void)
    /* --- sort the index --- */
    
    qsort(html_index, num_index, sizeof(HTML_INDEX), comp_index_html);
-   
+
    
    /* --- create index A-Z jumplist --- */
+   
+   switch (iCharset)                      /* use the right tables! ;-) */
+   {
+   case CODE_TOS:
+      psort = sort_CODE_TOS;
+      break;
+   
+   case CODE_MAC:
+      psort = sort_CODE_MAC;
+      break;
+   
+   case CODE_LAT1:
+      psort = sort_CODE_LAT1;
+   }
+
    
    lastc = EOS;                           /* clear buffer for last character */
    
@@ -5491,20 +5523,23 @@ GLOBAL BOOLEAN save_html_index(void)
    
    for (i = 0; i < num_index; i++)
    {
-      strcpy(dummy, &html_index[i].tocname[0]);
-      html2sys(dummy);                    /* convert HTML characters to system characters */
-      thisc = dummy[0];                   /* use first character for comparison */
+      strcpy(dummy, html_index[i].tocname);
       
-      thisc = toupper(thisc);             /* always use capitalized index chars (issue #76) */
+      if (!html_ignore_8bit)
+         html2sys(dummy);                 /* convert HTML characters to system characters */
+
+      thisc = (size_t)dummy[0];           /* use first character for comparison */
+      thisc = psort[thisc];               /* convert special characters (e.g. AE lig to 'A') */
       
-      strcpy(thisc_buf,&thisc);
+      thisc_buf[0] = (char)thisc;
       thisc_buf[1] = 0;                   /* close C string! */
-      label2html(thisc_buf);
+      
+      label2html(thisc_buf);              /* convert critical characters to HTML standards */
+      
       
       if (thisc != lastc)
       {
                                           /* set anchor entry for index A-Z list */
-         
          if (lastc == EOS)
             sprintf(dummy, "<a href=\"%s%s\">%c</a>\n", "#", thisc_buf, thisc);
          else
@@ -5529,14 +5564,18 @@ GLOBAL BOOLEAN save_html_index(void)
    
    for (i = 0; i < num_index; i++)
    {
-                                          /* V6.5.20 [gs] */
-      strcpy(dummy, &html_index[i].tocname[0]);
-      html2sys(dummy);                    /* convert HTML characters to system characters - V6.5.20 [gs] */
-      thisc = dummy[0];                   /* V6.5.20 [gs] */
+      strcpy(dummy, html_index[i].tocname);
       
-      thisc = toupper(thisc);             /* always use capitalized index chars (issue #76) */
+      if (!html_ignore_8bit)
+         html2sys(dummy);                 /* convert HTML characters to system characters  */
+
+      thisc = (size_t)dummy[0];                   /* V6.5.20 [gs] */
+      thisc = psort[thisc];            /* convert special characters (e.g. AE lig to 'A') */
+      /*
+      thisc = toupper(thisc);   */          /* always use capitalized index chars (issue #76) */
       
-      strcpy(thisc_buf,&thisc);
+/*      strcpy(thisc_buf,&thisc); */
+      thisc_buf[0] = (char)thisc;
       thisc_buf[1] = 0;                   /* close C string! */
       label2html(thisc_buf);
       
@@ -5606,7 +5645,7 @@ GLOBAL BOOLEAN save_html_index(void)
    
    fprintf(uif, "</p>\n\n");
    
-   fprintf(uif, jumplist);                /* output A-Z jumplist */
+   fprintf(uif, jumplist);                /* repeat A-Z jumplist */
    
    fprintf(uif, "!end_raw\n");
    
@@ -5623,12 +5662,15 @@ GLOBAL BOOLEAN save_html_index(void)
    c_include();   
    
    remove(udofile.full);
-   
-   um_free((void *) html_index);
+
+   um_free((void *)html_index);
    
    return TRUE;
-   
-}  /* save_html_index */
+}
+
+
+
+
 
 /* --------------------------------------------------------------
    --------------------------------------------------------------  */
@@ -12591,107 +12633,146 @@ GLOBAL void c_tableofcontents(void)
 
 
 
-/*      ############################################################
-        #
-        # Ein Label im zweiten Durchgang ausgeben
-        #
-        ############################################################    */
+
+/*******************************************************************************
+*
+*  c_label():
+*     output a label in 2nd pass
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
 GLOBAL void c_label(void)
 {
-        char    sLabel[512], sTemp[512];
+   char   sLabel[512],  /* */
+          sTemp[512];   /* */
 
-        /* Tokens umkopieren */
-        tokcpy2(sLabel, 512);
 
-        if (sLabel[0]==EOS)
-        {       error_missing_parameter(CMD_LABEL);
-                return;
-        }
+   tokcpy2(sLabel, 512);                  /* Tokens umkopieren */
 
-        p2_lab_counter++;       /*r6pl2*/
+   if (sLabel[0] == EOS)
+   {
+      error_missing_parameter(CMD_LABEL);
+      return;
+   }
 
-        replace_udo_quotes(sLabel);
-        convert_tilde(sLabel);
+   p2_lab_counter++;                      /*r6pl2*/
 
-        switch(desttype)
-        {
-                case TOTEX:
-                        label2tex(sLabel);
-                        c_divis(sLabel);
-                        c_vars(sLabel);
-                        voutlnf("\\label{%s}", sLabel);
-                        break;
-                case TOPDL:
-                        label2tex(sLabel);
-                        c_divis(sLabel);
-                        c_vars(sLabel);
-                        voutlnf("\\pdfdest num %d fitbh", p2_lab_counter);
-                        break;
-                case TOLYX:
-                        outln("");
-                        outln("\\layout Standard");
-                        voutlnf("\\begin_inset Label %s", sLabel);
-                        outln("");
-                        voutlnf("\\end_inset");
-                        outln("");
-                        break;
-                case TOSTG:
-                        node2stg(sLabel);
-                        c_divis(sLabel);
-                        if (use_label_inside_index && !no_index)
-                        {       voutlnf("@symbol ari \"%s\"", sLabel);
-                        }
-                        else
-                        {       voutlnf("@symbol ar \"%s\"", sLabel);
-                        }
-                        break;
+   replace_udo_quotes(sLabel);
+   convert_tilde(sLabel);
+
+   switch (desttype)
+   {
+   case TOTEX:
+      label2tex(sLabel);
+      c_divis(sLabel);
+      c_vars(sLabel);
+      voutlnf("\\label{%s}", sLabel);
+      break;
       
-                case TOHAH:                         /* HTML Apple Help (since V6.5.17) */
-                case TOHTM:                         /* HTML */
-                case TOMHH:                         /* Microsoft HTML Help */
+      
+   case TOPDL:
+      label2tex(sLabel);
+      c_divis(sLabel);
+      c_vars(sLabel);
+      voutlnf("\\pdfdest num %d fitbh", p2_lab_counter);
+      break;
+      
+      
+   case TOLYX:
+      outln("");
+      outln("\\layout Standard");
+      voutlnf("\\begin_inset Label %s", sLabel);
+      outln("");
+      voutlnf("\\end_inset");
+      outln("");
+      break;
+   
+      
+   case TOSTG:
+      node2stg(sLabel);
+      c_divis(sLabel);
+      
+      if (use_label_inside_index && !no_index)
+         voutlnf("@symbol ari \"%s\"", sLabel);
+      else
+         voutlnf("@symbol ar \"%s\"", sLabel);
+      
+      break;
+      
+
+   case TOHAH:                            /* HTML Apple Help (since V6.5.17) */
+   case TOHTM:                            /* HTML */
+   case TOMHH:                            /* Microsoft HTML Help */
                                           /* v 6.5.19 [fd] */
-         if (!no_index && use_label_inside_index)
+      if (!no_index && use_label_inside_index)
+      {
+         label2html(sLabel);              /* r6pl2 */
+
+                                          /* check if we're in description environment */
+         if ( (iEnvLevel > 0) && (iEnvType[iEnvLevel] == ENV_DESC) )
          {
-                 label2html(sLabel);           /* r6pl2 */
-                                          /* r5pl14 */
-            voutlnf("<a name=\"%s\"></a>", sLabel);
+                                          /* if this is the first item of the description environment */
+            if (bEnv1stItem[iEnvLevel] == 1)
+               voutlnf("<dd><a name=\"%s\"></a></dd>", sLabel);
+            else
+               voutlnf("<a name=\"%s\"></a>", sLabel);
          }
-                        break;
-         
-                case TOLDS:
-                        voutlnf("<label id=\"%s\">", sLabel);
-                        break;
-                case TOWIN:
-                case TOWH4:
-                case TOAQV:
-                        if (use_label_inside_index && !no_index)        /* r5pl10 */
-                        {       voutf("K{\\footnote K %s}", sLabel);
-                        }
-                        if (bDocWinOldKeywords)
-                        {       strcpy(sTemp, sLabel);
-                                del_internal_styles(sTemp);
-                                node2winhelp(sTemp);
-                                voutlnf("#{\\footnote # %s}", sTemp);
-                        }
-                        label2NrWinhelp(sLabel, p2_lab_counter);
-                        voutf("#{\\footnote # %s}", sLabel);
-                        break;
-                case TORTF:
-                        if (use_label_inside_index && !no_index)        /* r6pl6 */
-                        {       voutf("{\\xe\\v %s}", sLabel);
-                        }
-                        break;
+      }
+   
+      break;
+   
+   
+   case TOLDS:
+      voutlnf("<label id=\"%s\">", sLabel);
+      break;
+      
+      
+   case TOWIN:
+   case TOWH4:
+   case TOAQV:
+                                          /* r5pl10 */
+      if (use_label_inside_index && !no_index)
+      {
+          voutf("K{\\footnote K %s}", sLabel);
+      }
+      
+      if (bDocWinOldKeywords)
+      {
+         strcpy(sTemp, sLabel);
+         del_internal_styles(sTemp);
+         node2winhelp(sTemp);
+         voutlnf("#{\\footnote # %s}", sTemp);
+      }
+      
+      label2NrWinhelp(sLabel, p2_lab_counter);
+      voutf("#{\\footnote # %s}", sLabel);
+      break;
+      
+      
+   case TORTF:
+                                          /* r6pl6 */
+      if (use_label_inside_index && !no_index)
+      {
+         voutf("{\\xe\\v %s}", sLabel);
+      }
+      
+      break;
 
-                /* New in r6pl15 [NHz] */
-                case TOKPS:
-                        /* Fixed Bug #0000040 in r6.3pl16 [NHz] */
-                        node2postscript(sLabel, KPS_NAMEDEST);
-                        voutlnf("/%s NameDest", sLabel);
-                        /* Must be changed if (!label ...) is possible */
-                        break;
-        }
 
-}       /* c_label */
+   case TOKPS:                            /* New in r6pl15 [NHz] */
+                                          /* Fixed Bug #0000040 in r6.3pl16 [NHz] */
+      node2postscript(sLabel, KPS_NAMEDEST);
+      voutlnf("/%s NameDest", sLabel);
+      /* Must be changed if (!label ...) is possible */
+   }
+   
+}  /* c_label() */
+
+
+
 
 
 GLOBAL void c_alias(void)
