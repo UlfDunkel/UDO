@@ -3151,7 +3151,7 @@ char  *s)  /* ^ string */
 /*******************************************************************************
 *
 *  c_quotes_apostrophes():
-*     replace single or double quotation marks from UDO format to system characters
+*     replace single or double quotation marks from UDO format to system quotation marks
 *
 *  return:
 *     -
@@ -3261,7 +3261,8 @@ char *s)  /* ^ string */
       else
       {                                   /* PL6 */
          /* Ohne schliessende Leerzeichen, damit nicht Tokens daraus werden! */
-         /* Die Leerzeichen werden in c_rtf_quotes() hinzugefuegt!                       */
+         /* Die Leerzeichen werden in c_rtf_quotes() hinzugefuegt! */
+         
          c_quotes_apostrophes(s, "\\lquote", "\\rquote", "\\ldblquote", "\\rdblquote");
       }
       
