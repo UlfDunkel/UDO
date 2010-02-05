@@ -56,6 +56,7 @@
 *    fd  Feb 03: c_label(): issue #84 fixed
 *    fd  Feb 04: - c_label(): decision for <dd> now depends on bDescDDOpen
 *                - more functions tidied up and reformatted
+*    fd  Feb 05: init_new_toc_entry(): toc[] structure cleared before usage
 *
 ******************************************|************************************/
 
@@ -115,7 +116,7 @@ const char *id_toc_c= "@(#) toc.c       $DATE$";
 
 /*******************************************************************************
 *
-*     MACROS + CONSTANTS
+*     MACRO DEFINITIONS
 *
 ******************************************|************************************/
 
@@ -126,6 +127,16 @@ const char *id_toc_c= "@(#) toc.c       $DATE$";
 #define TOC_NODE4  4                      /* !subsubsubnode */
 #define TOC_NODE5  5                      /* !subsubsubsubnode */
 #define TOC_NONE   6                      /* neither nor ... :-) */
+
+
+
+
+
+/*******************************************************************************
+*
+*     LOCAL CONSTANTS
+*
+******************************************|************************************/
 
 LOCAL const char  *FRAME_NAME_TOC = "UDOtoc";
 LOCAL const char  *FRAME_NAME_CON = "UDOcon";
@@ -279,13 +290,16 @@ LOCAL void html_node_bar_modern(void);
 LOCAL void html_node_bar_frames(void);
 
 LOCAL void set_inside_node1(void);
-LOCAL void make_node(const BOOLEAN popup, const BOOLEAN invisible);
 LOCAL void set_inside_node2(void);
-LOCAL void make_subnode(const BOOLEAN popup, const BOOLEAN invisible);
 LOCAL void set_inside_node3(void);
-LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible);
 LOCAL void set_inside_node4(void);
-LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible);
+LOCAL void set_inside_node5(void);
+
+LOCAL void make_node(const BOOLEAN popup, const BOOLEAN invisible);
+LOCAL void make_subnode(const BOOLEAN popup, const BOOLEAN invisible);
+LOCAL void make_subsubnode(const BOOLEAN popup, const BOOLEAN invisible);
+LOCAL void make_subsubsubnode(const BOOLEAN popup, const BOOLEAN invisible);
+LOCAL void make_subsubsubsubnode(const BOOLEAN popup, const BOOLEAN invisible);
 
 LOCAL void tocline_make_bold(char *s, const int depth);
 LOCAL void tocline_handle_1st(BOOLEAN *f);
@@ -317,6 +331,7 @@ LOCAL TOCITEM *init_new_toc_entry(const int toctype, const BOOLEAN invisible);
 LOCAL BOOLEAN add_toc_to_toc(void);
 
 /*LOCAL void free_toc_data(char **var );*/
+
 
 
 
@@ -430,7 +445,7 @@ int      tocindex)  /* */
 
    s[0] = '\0';
    
-   if (toc[tocindex]->helpid!=NULL)
+   if (toc[tocindex]->helpid != NULL)
    {
       um_strcpy(s, toc[tocindex]->helpid, 256, "output_helpid[1]");
    }
@@ -2193,7 +2208,7 @@ const char  *name)     /* */
    ni = toc[ci]->next_index;
    ui = 0;
    
-   switch(toc[ci]->toctype)
+   switch (toc[ci]->toctype)
    {
    case TOC_NODE2:
       ui = toc[ci]->up_n1_index;
@@ -2365,7 +2380,7 @@ const BOOLEAN   invisible)      /* */
       ci = p2_toc_counter;
       ui = 0;
       
-      switch(toc[ci]->toctype)
+      switch (toc[ci]->toctype)
       {
       case TOC_NODE2:
          ui = toc[ci]->up_n1_index;
@@ -5983,19 +5998,19 @@ GLOBAL BOOLEAN save_htmlhelp_index(const char* filename)
 }       /* save_htmlhelp_index */
 
 
-/*      ############################################################
-        #
-        # Kapitelkommandos
-        #
-        ############################################################    */
-LOCAL void set_inside_node1(void)
-{
-        active_nodetype= TOC_NODE1;
-}
 
 
 
 
+
+
+
+
+/*******************************************************************************
+*
+*     CHAPTER COMMANDS
+*
+******************************************|************************************/
 
 /*******************************************************************************
 *
@@ -6009,8 +6024,8 @@ LOCAL void set_inside_node1(void)
 
 LOCAL void make_node(
 
-const BOOLEAN   popup,             /* */
-const BOOLEAN   invisible)         /* */
+const BOOLEAN   popup,             /* TRUE: this is a popup node */
+const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
 {
    char         n[512],            /* */
                 name[512],         /* */
@@ -6651,41 +6666,26 @@ const BOOLEAN   invisible)         /* */
       output_aliasses();
    }
    
-}       /*make_node*/
+}  /* make_node() */
 
 
 
 
 
-/* r5pl15: Texinfo kennt keine versteckten Kapitel, daher wird bei den  */
-/* node_iv-Funktionen als Invisible-Flag statt TRUE der Wert von                */
-/* (desttype!=TOINF) benutzt. Kurz und elegant, nicht?                                  */
+/*******************************************************************************
+*
+*  make_subnode():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
 
-GLOBAL void c_node(void)
-{       make_node (FALSE, FALSE);
-}       /* c_node */
+LOCAL void make_subnode(
 
-GLOBAL void c_node_iv(void)
-{       make_node (FALSE, (desttype!=TOINF));   /* r5pl15 */
-}       /* c_node */
-
-GLOBAL void c_pnode(void)
-{       make_node (TRUE, FALSE);
-}       /* c_pnode */
-
-GLOBAL void c_pnode_iv(void)
-{       make_node (TRUE, (desttype!=TOINF));    /* r5pl15 */
-}       /* c_pnode */
-
-
-
-
-LOCAL void set_inside_node2(void)
-{
-        active_nodetype= TOC_NODE2;
-}
-
-LOCAL void make_subnode(const BOOLEAN popup, const BOOLEAN invisible)
+const BOOLEAN   popup,             /* TRUE: this is a popup node */
+const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
 {
         char    n[512], name[512], stgname[512], hx_start[16], hx_end[16], sTemp[512];
         char    numbers[512], nameNoSty[512], k[512]; /* Changed in V6.5.9 [NHz] */
@@ -6795,7 +6795,7 @@ LOCAL void make_subnode(const BOOLEAN popup, const BOOLEAN invisible)
         do_index= (use_nodes_inside_index && !no_index &&
                                         !toc[p2_toc_counter]->ignore_index);    /* r5pl10 */
 
-        switch(desttype)
+        switch (desttype)
         {
                 case TOTEX:
                 case TOPDL:
@@ -7143,32 +7143,26 @@ LOCAL void make_subnode(const BOOLEAN popup, const BOOLEAN invisible)
                         break;
         }
 
-}       /*make_subnode*/
+}  /* make_subnode() */
 
 
-GLOBAL void c_subnode(void)
-{       make_subnode (FALSE, FALSE);
-}       /* c_subnode */
-
-GLOBAL void c_subnode_iv(void)
-{       make_subnode (FALSE, (desttype!=TOINF));        /* r5pl15 */
-}       /* c_subnode */
-
-GLOBAL void c_psubnode(void)
-{       make_subnode (TRUE, FALSE);
-}       /* c_psubnode */
-
-GLOBAL void c_psubnode_iv(void)
-{       make_subnode (TRUE, (desttype!=TOINF)); /* r5pl15 */
-}       /* c_psubnode */
 
 
-LOCAL void set_inside_node3(void)
-{
-        active_nodetype= TOC_NODE3;
-}
 
-LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible)
+/*******************************************************************************
+*
+*  make_subsubnode():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void make_subsubnode(
+
+const BOOLEAN   popup,             /* TRUE: this is a popup node */
+const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
 {
         char    n[512], name[512], stgname[512], hx_start[16], hx_end[16], sTemp[512];
         char    numbers[512], nameNoSty[512], k[512];   /* New in V6.5.9 [NHz] */
@@ -7275,7 +7269,7 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible)
         do_index= (use_nodes_inside_index && !no_index &&
                                         !toc[p2_toc_counter]->ignore_index);    /* r5pl10 */
 
-        switch(desttype)
+        switch (desttype)
         {
                 case TOTEX:
                 case TOPDL:
@@ -7627,32 +7621,26 @@ LOCAL void make_subsubnode( const BOOLEAN popup, const BOOLEAN invisible)
                         break;
         }
 
-}       /*make_subsubnode*/
+}  /* make_subsubnode() */
 
 
-GLOBAL void c_subsubnode(void)
-{       make_subsubnode (FALSE, FALSE);
-}       /* c_subsubnode */
-
-GLOBAL void c_subsubnode_iv(void)
-{       make_subsubnode (FALSE, (desttype!=TOINF));     /* r5pl15 */
-}       /* c_subsubnode */
-
-GLOBAL void c_psubsubnode(void)
-{       make_subsubnode (TRUE, FALSE);
-}       /* c_psubsubnode */
-
-GLOBAL void c_psubsubnode_iv(void)
-{       make_subsubnode (TRUE, (desttype!=TOINF));      /* r5pl15 */
-}       /* c_psubsubnode */
 
 
-LOCAL void set_inside_node4(void)
-{
-        active_nodetype= TOC_NODE4;
-}
 
-LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible)
+/*******************************************************************************
+*
+*  make_subsubsubnode():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void make_subsubsubnode(
+
+const BOOLEAN   popup,             /* TRUE: this is a popup node */
+const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
 {
         char    n[512], name[512], stgname[512], hx_start[16], hx_end[16], sTemp[512];
         char    numbers[512], nameNoSty[512], k[512];   /* New in V6.5.9 [NHz] */
@@ -7756,7 +7744,7 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible)
         do_index= (use_nodes_inside_index && !no_index &&
                                         !toc[p2_toc_counter]->ignore_index);    /* r5pl10 */
 
-        switch(desttype)
+        switch (desttype)
         {
                 case TOTEX:
                 case TOPDL:
@@ -8111,32 +8099,26 @@ LOCAL void make_subsubsubnode( const BOOLEAN popup, const BOOLEAN invisible)
                         break;
         }
 
-}       /*make_subsubsubnode*/
+}  /* make_subsubsubnode() */
 
 
-GLOBAL void c_subsubsubnode(void)
-{       make_subsubsubnode (FALSE, FALSE);
-}       /* c_subsubsubnode */
-
-GLOBAL void c_subsubsubnode_iv(void)
-{       make_subsubsubnode (FALSE, (desttype!=TOINF));  /* r5pl15 */
-}       /* c_subsubsubnode */
-
-GLOBAL void c_psubsubsubnode(void)
-{       make_subsubsubnode (TRUE, FALSE);
-}       /* c_psubsubsubnode */
-
-GLOBAL void c_psubsubsubnode_iv(void)
-{       make_subsubsubnode (TRUE, (desttype!=TOINF));   /* r5pl15 */
-}       /* c_psubsubsubnode */
 
 
-LOCAL void set_inside_node5(void)
-{
-        active_nodetype= TOC_NODE5;
-}
 
-LOCAL void make_subsubsubsubnode( const BOOLEAN popup, const BOOLEAN invisible)
+/*******************************************************************************
+*
+*  make_subsubsubsubnode():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void make_subsubsubsubnode(
+
+const BOOLEAN   popup,             /* TRUE: this is a popup node */
+const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
 {
         char    n[512], name[512], stgname[512], hx_start[16], hx_end[16], sTemp[512];
         char    numbers[512], nameNoSty[512], k[512];
@@ -8237,7 +8219,7 @@ LOCAL void make_subsubsubsubnode( const BOOLEAN popup, const BOOLEAN invisible)
         do_index= (use_nodes_inside_index && !no_index &&
                                         !toc[p2_toc_counter]->ignore_index);    /* r5pl10 */
 
-        switch(desttype)
+        switch (desttype)
         {
                 case TOTEX:
                 case TOPDL:
@@ -8587,7 +8569,247 @@ LOCAL void make_subsubsubsubnode( const BOOLEAN popup, const BOOLEAN invisible)
                         break;
         }
 
-}       /*make_subsubsubsubnode*/
+}  /* make_subsubsubsubnode() */
+
+
+
+
+
+/*******************************************************************************
+*
+*  c_node():
+*     wrapper for make_node()
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void c_node(void)
+{
+   make_node(FALSE, FALSE);
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  c_node_iv():
+*     wrapper for make_node()
+*
+*  Notes:
+*     r5pl15:
+*     Texinfo kennt keine versteckten Kapitel, daher wird bei den 
+*     node_iv-Funktionen als Invisible-Flag statt TRUE der Wert von 
+*     (desttype != TOINF) benutzt. Kurz und elegant, nicht?
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void c_node_iv(void)
+{
+   make_node(FALSE, (desttype != TOINF)); /* r5pl15 */
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  c_pnode():
+*     wrapper for make_node()
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void c_pnode(void)
+{
+   make_node(TRUE, FALSE);
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  c_pnode_iv():
+*     wrapper for make_node()
+*
+*  Notes:
+*     r5pl15:
+*     Texinfo kennt keine versteckten Kapitel, daher wird bei den 
+*     node_iv-Funktionen als Invisible-Flag statt TRUE der Wert von 
+*     (desttype != TOINF) benutzt. Kurz und elegant, nicht?
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void c_pnode_iv(void)
+{
+   make_node(TRUE, (desttype != TOINF));  /* r5pl15 */
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  set_inside_node1():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void set_inside_node1(void)
+{
+   active_nodetype = TOC_NODE1;
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  set_inside_node2():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void set_inside_node2(void)
+{
+   active_nodetype = TOC_NODE2;
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  set_inside_node3():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void set_inside_node3(void)
+{
+   active_nodetype = TOC_NODE3;
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  set_inside_node4():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void set_inside_node4(void)
+{
+   active_nodetype = TOC_NODE4;
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  set_inside_node5():
+*     ??? (description)
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void set_inside_node5(void)
+{
+   active_nodetype = TOC_NODE5;
+}
+
+
+
+
+
+
+
+GLOBAL void c_subnode(void)
+{       make_subnode (FALSE, FALSE);
+}       /* c_subnode */
+
+GLOBAL void c_subnode_iv(void)
+{       make_subnode (FALSE, (desttype!=TOINF));        /* r5pl15 */
+}       /* c_subnode */
+
+GLOBAL void c_psubnode(void)
+{       make_subnode (TRUE, FALSE);
+}       /* c_psubnode */
+
+GLOBAL void c_psubnode_iv(void)
+{       make_subnode (TRUE, (desttype!=TOINF)); /* r5pl15 */
+}       /* c_psubnode */
+
+
+GLOBAL void c_subsubnode(void)
+{       make_subsubnode (FALSE, FALSE);
+}       /* c_subsubnode */
+
+GLOBAL void c_subsubnode_iv(void)
+{       make_subsubnode (FALSE, (desttype!=TOINF));     /* r5pl15 */
+}       /* c_subsubnode */
+
+GLOBAL void c_psubsubnode(void)
+{       make_subsubnode (TRUE, FALSE);
+}       /* c_psubsubnode */
+
+GLOBAL void c_psubsubnode_iv(void)
+{       make_subsubnode (TRUE, (desttype!=TOINF));      /* r5pl15 */
+}       /* c_psubsubnode */
+
+
+GLOBAL void c_subsubsubnode(void)
+{       make_subsubsubnode (FALSE, FALSE);
+}       /* c_subsubsubnode */
+
+GLOBAL void c_subsubsubnode_iv(void)
+{       make_subsubsubnode (FALSE, (desttype!=TOINF));  /* r5pl15 */
+}       /* c_subsubsubnode */
+
+GLOBAL void c_psubsubsubnode(void)
+{       make_subsubsubnode (TRUE, FALSE);
+}       /* c_psubsubsubnode */
+
+GLOBAL void c_psubsubsubnode_iv(void)
+{       make_subsubsubnode (TRUE, (desttype!=TOINF));   /* r5pl15 */
+}       /* c_psubsubsubnode */
+
 
 
 GLOBAL void c_subsubsubsubnode(void)
@@ -8615,142 +8837,221 @@ GLOBAL void c_endnode(void)
 
 
 
-/*      ############################################################
-        # r6pl5: neue Kommandos
-        ############################################################    */
+
+
+/*******************************************************************************
+*
+*  c_begin_node():
+*     ??? (description missing)
+*
+*  Notes:
+*     r6pl5: new commands
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
 GLOBAL void c_begin_node(void)
 {
-        check_endnode();
+   check_endnode();
+   
+   switch (p2_toctype)
+   {
+   case TOC_NONE:
+      c_node();
+      break;
+   case TOC_NODE1:
+      c_subnode();
+      break;
+   case TOC_NODE2:
+      c_subsubnode();
+      break;
+   case TOC_NODE3:
+      c_subsubsubnode();
+      break;
+   case TOC_NODE4:
+      c_subsubsubsubnode();
+      break;
+   default:
+      warning_node_too_deep();
+      c_subsubsubsubnode();
+   }
+}
 
-        switch (p2_toctype)
-        {
-                case TOC_NONE:
-                        c_node();
-                        break;
-                case TOC_NODE1:
-                        c_subnode();
-                        break;
-                case TOC_NODE2:
-                        c_subsubnode();
-                        break;
-                case TOC_NODE3:
-                        c_subsubsubnode();
-                        break;
-                case TOC_NODE4:
-                        c_subsubsubsubnode();
-                        break;
-                default:
-                        warning_node_too_deep();
-                        c_subsubsubsubnode();
-                        break;
-        }
 
-}       /* c_begin_node */
 
+
+
+/*******************************************************************************
+*
+*  c_begin_node_iv():
+*     ??? (description missing)
+*
+*  Notes:
+*     r6pl5: new commands
+*
+*  return:
+*     -
+*
+******************************************|************************************/
 
 GLOBAL void c_begin_node_iv(void)
 {
-        check_endnode();
+   check_endnode();
+   
+   switch (p2_toctype)
+   {
+   case TOC_NONE:
+      c_node_iv();
+      break;
+   case TOC_NODE1:
+      c_subnode_iv();
+      break;
+   case TOC_NODE2:
+      c_subsubnode_iv();
+      break;
+   case TOC_NODE3:
+      c_subsubsubnode_iv();
+      break;
+   case TOC_NODE4:
+      c_subsubsubsubnode_iv();
+      break;
+   default:
+      warning_node_too_deep();
+      c_subsubsubsubnode_iv();
+   }
+}
 
-        switch (p2_toctype)
-        {
-                case TOC_NONE:
-                        c_node_iv();                    
-                        break;
-                case TOC_NODE1:
-                        c_subnode_iv();                 
-                        break;
-                case TOC_NODE2:
-                        c_subsubnode_iv();              
-                        break;
-                case TOC_NODE3:
-                        c_subsubsubnode_iv();   
-                        break;
-                case TOC_NODE4:
-                        c_subsubsubsubnode_iv();        
-                        break;
-                default:
-                        warning_node_too_deep();
-                        c_subsubsubsubnode_iv();        
-                        break;
-        }
 
-}       /* c_begin_node_iv */
 
+
+
+/*******************************************************************************
+*
+*  c_begin_pnode():
+*     ??? (description missing)
+*
+*  Notes:
+*     r6pl5: new commands
+*
+*  return:
+*     -
+*
+******************************************|************************************/
 
 GLOBAL void c_begin_pnode(void)
 {
-        check_endnode();
+   check_endnode();
+   
+   switch (p2_toctype)
+   {
+   case TOC_NONE:
+      c_pnode();
+      break;
+   case TOC_NODE1:
+      c_psubnode();
+      break;
+   case TOC_NODE2:
+      c_psubsubnode();
+      break;
+   case TOC_NODE3:
+      c_psubsubsubnode();
+      break;
+   case TOC_NODE4:
+      c_psubsubsubsubnode();
+      break;
+   default:
+      warning_node_too_deep();
+      c_psubsubsubsubnode();
+   }
+}
 
-        switch (p2_toctype)
-        {
-                case TOC_NONE:
-                        c_pnode();                      
-                        break;
-                case TOC_NODE1:
-                        c_psubnode();           
-                        break;
-                case TOC_NODE2:
-                        c_psubsubnode();        
-                        break;
-                case TOC_NODE3:
-                        c_psubsubsubnode();     
-                        break;
-                case TOC_NODE4:
-                        c_psubsubsubsubnode();  
-                        break;
-                default:
-                        warning_node_too_deep();
-                        c_psubsubsubsubnode();  
-                        break;
-        }
 
-}       /* c_begin_pnode */
 
+
+
+/*******************************************************************************
+*
+*  c_begin_pnode_iv():
+*     ??? (description missing)
+*
+*  Notes:
+*     r6pl5: new commands
+*
+*  return:
+*     -
+*
+******************************************|************************************/
 
 GLOBAL void c_begin_pnode_iv(void)
 {
-        check_endnode();
+   check_endnode();
+   
+   switch (p2_toctype)
+   {
+   case TOC_NONE:
+      c_pnode_iv();
+      break;
+   case TOC_NODE1:
+      c_psubnode_iv();
+      break;
+   case TOC_NODE2:
+      c_psubsubnode_iv();
+      break;
+   case TOC_NODE3:
+      c_psubsubsubnode_iv();
+      break;
+   case TOC_NODE4:
+      c_psubsubsubsubnode_iv();
+      break;
+   default:
+      warning_node_too_deep();
+      c_psubsubsubsubnode_iv();
+   }
+}
 
-        switch (p2_toctype)
-        {
-                case TOC_NONE:
-                        c_pnode_iv();                   
-                        break;
-                case TOC_NODE1:
-                        c_psubnode_iv();                
-                        break;
-                case TOC_NODE2:
-                        c_psubsubnode_iv();             
-                        break;
-                case TOC_NODE3:
-                        c_psubsubsubnode_iv();  
-                        break;
-                case TOC_NODE4:
-                        c_psubsubsubsubnode_iv();       
-                        break;
-                default:
-                        warning_node_too_deep();
-                        c_psubsubsubsubnode_iv();       
-                        break;
-        }
 
-}       /* c_begin_pnode_iv */
+
+
+
+/*******************************************************************************
+*
+*  c_end_node():
+*     ??? (description missing)
+*
+*  Notes:
+*     r6pl5: new commands
+*
+*  return:
+*     -
+*
+******************************************|************************************/
 
 GLOBAL void c_end_node(void)
 {
-        check_endnode();
+   check_endnode();
 
-        switch (p2_toctype)
-        {
-                case TOC_NODE1: p2_toctype= TOC_NONE;   break;
-                case TOC_NODE2: p2_toctype= TOC_NODE1;  break;
-                case TOC_NODE3: p2_toctype= TOC_NODE2;  break;
-                case TOC_NODE4: p2_toctype= TOC_NODE3;  break;
-                case TOC_NODE5: p2_toctype= TOC_NODE4;  break;
-        }
+   switch (p2_toctype)
+   {
+   case TOC_NODE1:
+      p2_toctype = TOC_NONE;
+      break;
+   case TOC_NODE2:
+      p2_toctype = TOC_NODE1;
+      break;
+   case TOC_NODE3:
+      p2_toctype = TOC_NODE2;
+      break;
+   case TOC_NODE4:
+      p2_toctype = TOC_NODE3;
+      break;
+   case TOC_NODE5:
+      p2_toctype = TOC_NODE4;
+   }
+}
 
-}       /* c_end_node */
+
 
 
 
@@ -9780,7 +10081,7 @@ LOCAL void apx_output(const int depth)
 
                                                 if ((leerzeile) && (depth>1))
                                                 {       
-                     switch(desttype)
+                     switch (desttype)
                                                         {
                      case TOHAH: /* V6.5.17 */
                      case TOHTM:
@@ -10266,7 +10567,7 @@ LOCAL void subtoc_output(const int depth)
         }
 
         if (output_done)
-        {       switch(desttype)
+        {       switch (desttype)
                 {       case TOHAH: /* V6.5.17 */
                         case TOHTM:
                         case TOMHH:
@@ -10522,7 +10823,7 @@ LOCAL void subapx_output(const int depth)
         }
 
         if (output_done)
-        {       switch(desttype)
+        {       switch (desttype)
                 {
                         case TOHAH: /* V6.5.17 */
                         case TOHTM:
@@ -10750,7 +11051,7 @@ LOCAL void subsubtoc_output(const int depth)
         }
 
         if (output_done)
-        {       switch(desttype)
+        {       switch (desttype)
                 {
                         case TOHAH: /* V6.5.17 */
                         case TOHTM:
@@ -10960,7 +11261,7 @@ LOCAL void subsubapx_output(const int depth)
         }
 
         if (output_done)
-        {       switch(desttype)
+        {       switch (desttype)
                 {
                         case TOHAH: /* V6.5.17 */
                         case TOHTM:
@@ -11139,7 +11440,7 @@ LOCAL void subsubsubtoc_output(const int depth)
         }
 
         if (output_done)
-        {       switch(desttype)
+        {       switch (desttype)
                 {
                         case TOHAH: /* V6.5.17 */
                         case TOHTM:
@@ -11323,7 +11624,7 @@ LOCAL void subsubsubapx_output(const int depth)
         }
 
         if (output_done)
-        {       switch(desttype)
+        {       switch (desttype)
                 {
                         case TOHAH: /* V6.5.17 */
                         case TOHTM:
@@ -11480,7 +11781,7 @@ LOCAL void subsubsubsubtoc_output(void)
         }
 
         if (output_done)
-        {       switch(desttype)
+        {       switch (desttype)
                 {
                         case TOHAH: /* V6.5.17 */
                         case TOHTM:
@@ -11615,7 +11916,7 @@ LOCAL void subsubsubsubapx_output(void)
         }
 
         if (output_done)
-        {       switch(desttype)
+        {       switch (desttype)
                 {
                         case TOHAH: /* V6.5.17 */
                         case TOHTM:
@@ -12199,7 +12500,7 @@ GLOBAL void c_listoffigures(void)
 {
         check_endnode();
 
-        switch(desttype)
+        switch (desttype)
         {
                 case TOTEX:
                 case TOPDL:
@@ -12226,7 +12527,7 @@ GLOBAL void c_listoftables(void)
 {
         check_endnode();
 
-        switch(desttype)
+        switch (desttype)
         {
                 case TOTEX:
                 case TOPDL:
@@ -12329,7 +12630,7 @@ GLOBAL void c_tableofcontents(void)
         }
 
 
-        switch(desttype)
+        switch (desttype)
         {
                 case TOTEX:
                 case TOPDL:
@@ -13455,6 +13756,8 @@ GLOBAL void set_html_color(const int which)
 
 
 
+
+
 /*******************************************************************************
 *
 *  set_html_bgsound():
@@ -14413,157 +14716,215 @@ GLOBAL void set_chapter_icon_text(void)
 }       /* set_chapter_icon_text */
 
 
-/* Das Inhaltsverzeichnis selber in toc[] einsetzen */  /* r5pl6 */
-/* Wird fuer Formate benoetigt, die toc[0] benutzen */
+
+
+
+/*******************************************************************************
+*
+*  add_toc_to_toc():
+*     add TOC page (indexudo) to toc[0]
+*
+*  Notes:
+*     Used for output formats which require toc[0].
+*
+*  Return:
+*      TRUE: everything's fine
+*     FALSE: error
+*
+******************************************|************************************/
+
 LOCAL BOOLEAN add_toc_to_toc(void)
 {
-        TOCITEM *tocptr;
-
-        tocptr= (TOCITEM *) um_malloc(sizeof(TOCITEM));
-
-        if (tocptr==NULL)
-        {       return FALSE;
-        }
-
-        memset(tocptr, 0, sizeof(TOCITEM));
-
-        strcpy(tocptr->name,    lang.contents);
-        strcpy(tocptr->filename, FRAME_FILE_CON);
-
-        tocptr->invisible=              TRUE;
-        tocptr->toctype=                TOC_TOC;
-
-        tocptr->prev_index=             0;
-        tocptr->next_index=             1;
-
-        tocptr->mapping = -1;
-
-        toc[0]= tocptr;
-
-        return TRUE;
-
-}       /* add_toc_to_toc */
+   TOCITEM  *tocptr;  /* ^ to TOCITEM structure */
 
 
-GLOBAL void toc_init_lang(void)
-{
-        strcpy(toc[0]->name, lang.contents);
+                                          /* get memory for new TOC structure */
+   tocptr = (TOCITEM *)um_malloc(sizeof(TOCITEM));
+ 
+   if (tocptr == NULL)                    /* memory error */
+      return FALSE;
+
+   memset(tocptr, 0, sizeof(TOCITEM));    /* clear whole (uninitialized) content first */
+
+   strcpy(tocptr->name,     lang.contents);
+   strcpy(tocptr->filename, FRAME_FILE_CON);
+
+   tocptr->invisible  = TRUE;
+   tocptr->toctype    = TOC_TOC;
+   tocptr->prev_index = 0;
+   tocptr->next_index = 1;
+   tocptr->mapping    = -1;
+   
+   toc[0] = tocptr;
+
+   return TRUE;
 }
 
 
-LOCAL TOCITEM *init_new_toc_entry(const int toctype, const BOOLEAN invisible)
+
+
+
+/*******************************************************************************
+*
+*  toc_init_lang():
+*     add TOC title to toc[0]
+*
+*  Notes:
+*     This function is only called by init_lang().
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void toc_init_lang(void)
 {
-        TOCITEM *tocptr;
-
-        if (p1_toc_counter>=MAXTOCS)            /* r5pl2 */
-        {       error_too_many_node();
-                bBreakInside= TRUE;
-                return NULL;
-        }
-
-        tocptr= (TOCITEM *) um_malloc(sizeof(TOCITEM));
-
-        if (tocptr==NULL)
-        {       return NULL;
-        }
-
-        tokcpy2(tocptr->name, MAX_NODE_LEN+1);
-
-        if (tocptr->name[0]==EOS)                       /* r5pl14 */
-        {       error_fatal_error("missing node name");
-                bFatalErrorDetected= TRUE;
-                um_free(tocptr);
-                return NULL;
-        }
+   strcpy(toc[0]->name, lang.contents);
+}
 
 
-        /* New in r6pl15 [NHz] */
 
-        /* Set node in project file */
 
-        save_upr_entry_node (toctype, sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine);
+
+/*******************************************************************************
+*
+*  toc_init_lang():
+*     add TOC title to toc[0]
+*
+*  Notes:
+*     This function is only called by init_lang().
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL TOCITEM *init_new_toc_entry(
+
+const int       toctype,    /* */
+const BOOLEAN   invisible)  /* TRUE: node is invisible */
+{
+   TOCITEM     *tocptr;     /* ^ into toc[] structure */
+
+
+   if (p1_toc_counter >= MAXTOCS)         /* r5pl2 */
+   {
+      error_too_many_node();
+      bBreakInside = TRUE;
+      return NULL;
+   }
+
+                                          /* get memory for new TOC structure */
+   tocptr = (TOCITEM *)um_malloc(sizeof(TOCITEM));
+ 
+   if (tocptr == NULL)                    /* memory error */
+      return FALSE;
+
+   memset(tocptr, 0, sizeof(TOCITEM));    /* clear whole (uninitialized) content first */
+
+   tokcpy2(tocptr->name, MAX_NODE_LEN + 1);
+
+   if (tocptr->name[0] == EOS)            /* r5pl14 */
+   {
+      error_fatal_error("missing node name");
+      bFatalErrorDetected = TRUE;
+      um_free(tocptr);
+      return NULL;
+   }
+                                          /* New in r6pl15 [NHz] */
+                                          /* Set node in project file */
+   save_upr_entry_node(toctype, sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine);
+   
 #if 1
-        c_styles(tocptr->name);
+   c_styles(tocptr->name);
 
-        switch (desttype)                                       /* r5pl3 */
-        {       case TOWIN:
-                case TOWH4:
-                case TOAQV:
-                        c_win_styles(tocptr->name);
-                        break;
-                case TORTF:
-                        c_rtf_styles(tocptr->name);
-                        c_rtf_quotes(tocptr->name);
-                        break;
-                default:
-                        c_internal_styles(tocptr->name);
-                        break;
-        }
+   switch (desttype)                      /* r5pl3 */
+   {
+   case TOWIN:
+   case TOWH4:
+   case TOAQV:
+      c_win_styles(tocptr->name);
+      break;
+      
+   case TORTF:
+      c_rtf_styles(tocptr->name);
+      c_rtf_quotes(tocptr->name);
+      break;
+      
+   default:
+      c_internal_styles(tocptr->name);
+   }
 #endif
 
-        if (desttype==TOPCH)
-        {       replace_all_copyright(tocptr->name);
-        }
+   if (desttype == TOPCH)                 /* Pure C Help */
+      replace_all_copyright(tocptr->name);
 
-        tocptr->toctype=                        toctype;
-        strcpy(tocptr->source_filename, sCurrFileName);       /* V6.5.18 */
-        tocptr->source_line=            uiCurrFileLine;                 /* V6.5.18 */
-        tocptr->converted=                      FALSE;
-        tocptr->ignore_subtoc=          FALSE;
-        tocptr->ignore_links=           FALSE;
-        tocptr->ignore_index=           FALSE;
-        tocptr->ignore_title=           FALSE;  /*r6pl13*/
-        tocptr->ignore_headline=        FALSE;
-        tocptr->ignore_bottomline=      FALSE;
-        tocptr->raw_header_filename= NULL;      /*r6pl10*/
-        tocptr->raw_footer_filename= NULL;      /*r6pl10*/
-        tocptr->ignore_raw_header=      FALSE;  /*r6pl10*/
-        tocptr->ignore_raw_footer=      FALSE;  /*r6pl10*/
-        tocptr->ignore_footer=          FALSE;  /*r6pl2*/
-        tocptr->filename[0]=            EOS;
-        tocptr->dirname[0]=                     EOS;
-        tocptr->counter_command=        NULL;
-        tocptr->keywords=                       NULL;
-        tocptr->description=            NULL;   /*r6pl5*/
-        tocptr->robots=                         NULL;   /*V6.5.17*/
-   tocptr->bgsound[0]=                  '\0';       /* V6.5.20 [GS] */
-        tocptr->helpid=                         NULL;
-        tocptr->mapping=                        -1;
-        tocptr->image=                          NULL;
-        tocptr->uiImageWidth=           0;
-        tocptr->uiImageHeight=          0;
-        tocptr->icon=                           NULL;
-        tocptr->uiIconWidth=            0;
-        tocptr->uiIconHeight=           0;
-        tocptr->icon_active=            NULL;
-        tocptr->uiIconActiveWidth=      0;
-        tocptr->uiIconActiveHeight=     0;
-        tocptr->icon_text=                      NULL;
-        tocptr->has_children=           FALSE;  /*r6pl5*/
-        tocptr->count_n2=                       0;              /*r6pl8*/
-        tocptr->count_n3=                       0;              /*r6pl8*/
-        tocptr->count_n4=                       0;              /*r6pl8*/
-        tocptr->count_n5=                       0;              /*r6pl8*/
-        strcpy(tocptr->backimage, sDocBackImage);
-        strcpy(tocptr->backcolor, sDocBackColor);
-        strcpy(tocptr->textcolor, sDocTextColor);
-        strcpy(tocptr->linkcolor, sDocLinkColor);
-        strcpy(tocptr->alinkcolor, sDocAlinkColor);
-        strcpy(tocptr->vlinkcolor, sDocVlinkColor);
+#if 0
+   /* fd:2010-02-05: only set non Null values explicitely! */
+   
+   tocptr->converted           = FALSE;
+   tocptr->ignore_subtoc       = FALSE;
+   tocptr->ignore_links        = FALSE;
+   tocptr->ignore_index        = FALSE;
+   tocptr->ignore_title        = FALSE;   /*r6pl13*/
+   tocptr->ignore_headline     = FALSE;
+   tocptr->ignore_bottomline   = FALSE;
+   tocptr->raw_header_filename = NULL;    /*r6pl10*/
+   tocptr->raw_footer_filename = NULL;    /*r6pl10*/
+   tocptr->ignore_raw_header   = FALSE;   /*r6pl10*/
+   tocptr->ignore_raw_footer   = FALSE;   /*r6pl10*/
+   tocptr->ignore_footer       = FALSE;   /*r6pl2*/
+   tocptr->filename[0]         = EOS;
+   tocptr->dirname[0]          = EOS;
+   tocptr->counter_command     = NULL;
+   tocptr->keywords            = NULL;
+   tocptr->description         = NULL;    /*r6pl5*/
+   tocptr->robots              = NULL;    /*V6.5.17*/
+   tocptr->bgsound[0]          = '\0';    /* V6.5.20 [GS] */
+   tocptr->helpid              = NULL;
+   tocptr->image               = NULL;
+   tocptr->uiImageWidth        = 0;
+   tocptr->uiImageHeight       = 0;
+   tocptr->icon                = NULL;
+   tocptr->uiIconWidth         = 0;
+   tocptr->uiIconHeight        = 0;
+   tocptr->icon_active         = NULL;
+   tocptr->uiIconActiveWidth   = 0;
+   tocptr->uiIconActiveHeight  = 0;
+   tocptr->icon_text           = NULL;
+   tocptr->has_children        = FALSE;   /*r6pl5*/
+   tocptr->count_n2            = 0;       /*r6pl8*/
+   tocptr->count_n3            = 0;       /*r6pl8*/
+   tocptr->count_n4            = 0;       /*r6pl8*/
+   tocptr->count_n5            = 0;       /*r6pl8*/
+#endif
+   
+                                          /* V6.5.18 */
+   strcpy(tocptr->source_filename, sCurrFileName);
+   
+   tocptr->toctype             = toctype;
+   tocptr->source_line         = uiCurrFileLine;
+   tocptr->mapping             = -1;
 
-        /* r5pl15: Texinfo kennt keine versteckten Nodes, daher fuer */
-        /* Texinfo das invisible-Flag immer aus FALSE setzen. */
-        if (desttype==TOINF)
-        {       tocptr->invisible= FALSE;
-        }
-        else
-        {       tocptr->invisible= invisible;
-        }
+   strcpy(tocptr->backimage,  sDocBackImage);
+   strcpy(tocptr->backcolor,  sDocBackColor);
+   strcpy(tocptr->textcolor,  sDocTextColor);
+   strcpy(tocptr->linkcolor,  sDocLinkColor);
+   strcpy(tocptr->alinkcolor, sDocAlinkColor);
+   strcpy(tocptr->vlinkcolor, sDocVlinkColor);
 
-        p1_toctype= toctype;
+   /* r5pl15: Texinfo kennt keine versteckten Nodes, daher fuer */
+   /* Texinfo das invisible-Flag immer aus FALSE setzen. */
+   
+   if (desttype == TOINF)
+      tocptr->invisible = FALSE;
+   else
+      tocptr->invisible = invisible;
 
-        return tocptr;
-}       /* init_new_toc_entry */
+   p1_toctype = toctype;
+
+   return tocptr;
+}
 
 
 
@@ -15311,37 +15672,96 @@ GLOBAL BOOLEAN  add_subsubsubsubnode_to_toc(const BOOLEAN popup, const BOOLEAN i
 
 
 
-GLOBAL BOOLEAN toc_begin_node (const BOOLEAN popup, const BOOLEAN invisible)
+
+/*******************************************************************************
+*
+*  toc_begin_node():
+*     wrapper for add_<...>node_to_toc()
+*
+*  Notes:
+*     This function is called in UDO.C:pass1() to handle the various levels of
+*        !begin_node
+*        !begin_node*
+*        !begin_pnode
+*        !begin_pnode*
+*     which do NOT indicate the chapter hierarchy in themselves, like the older
+*     commands do, like e.g.
+*        !node
+*        !subnode
+*        !subsubnode
+*        !subsubsubnode
+*        !subsubsubsubnode
+*
+*  Return:
+*      TRUE: everything's fine
+*     FALSE: error
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN toc_begin_node(
+
+const BOOLEAN   popup, 
+const BOOLEAN   invisible)
 {
-        BOOLEAN ret;
+   switch (p1_toctype)
+   {
+   case TOC_NONE:
+      return add_node_to_toc(popup, invisible);
 
-        switch(p1_toctype)
-        {
-                case TOC_NONE:  ret= add_node_to_toc(popup, invisible);                         break;
-                case TOC_NODE1: ret= add_subnode_to_toc(popup, invisible);                      break;
-                case TOC_NODE2: ret= add_subsubnode_to_toc(popup, invisible);           break;
-                case TOC_NODE3: ret= add_subsubsubnode_to_toc(popup, invisible);        break;
-                case TOC_NODE4: ret= add_subsubsubsubnode_to_toc(popup, invisible);     break;
-                default:                ret= add_subsubsubsubnode_to_toc(popup, invisible);     break;
-        }
+   case TOC_NODE1:
+      return add_subnode_to_toc(popup, invisible);
 
-        return ret;
+   case TOC_NODE2:
+      return add_subsubnode_to_toc(popup, invisible);
 
-}       /* toc_begin_node */
+   case TOC_NODE3:
+      return add_subsubsubnode_to_toc(popup, invisible);
+
+   case TOC_NODE4:
+      return add_subsubsubsubnode_to_toc(popup, invisible);
+
+   default:
+      return add_subsubsubsubnode_to_toc(popup, invisible);
+   }
+}
 
 
-GLOBAL void toc_end_node (void)
+
+
+
+/*******************************************************************************
+*
+*  toc_end_node():
+*     ???
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void toc_end_node(void)
 {
-        switch(p1_toctype)
-        {
-                case TOC_NODE1: p1_toctype= TOC_NONE;   break;
-                case TOC_NODE2: p1_toctype= TOC_NODE1;  break;
-                case TOC_NODE3: p1_toctype= TOC_NODE2;  break;
-                case TOC_NODE4: p1_toctype= TOC_NODE3;  break;
-                case TOC_NODE5: p1_toctype= TOC_NODE4;  break;
-        }
+   switch (p1_toctype)
+   {
+   case TOC_NODE1:
+      p1_toctype = TOC_NONE;
+      break;
+   case TOC_NODE2:
+      p1_toctype = TOC_NODE1;
+      break;
+   case TOC_NODE3:
+      p1_toctype = TOC_NODE2;
+      break;
+   case TOC_NODE4:
+      p1_toctype = TOC_NODE3;
+      break;
+   case TOC_NODE5:
+      p1_toctype = TOC_NODE4;
+   }
+}
 
-}       /* toc_end_node */
+
+
 
 
 GLOBAL int is_current_node(int tocindex)
@@ -15844,7 +16264,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt(void)
             case TOC_NODE5:
                fprintf(cntfile, "5 %s=%s\n", sName, sID);
                
-            }  /* switch() */
+            }  /* switch () */
 
          }  /* toc[i]->n1 > 0 */
 
@@ -15997,7 +16417,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt(void)
                case TOC_NODE5:
                   fprintf(cntfile, "6 %s=%s\n", sName, sID);
 
-               }  /* switch() */
+               }  /* switch () */
 
             }  /* toc[i]->n1 > 0 */
 
@@ -16305,7 +16725,7 @@ LOCAL void init_toc_forms_no_numbers(void)
 {
    char   s[32];  /* */
 
-   switch(desttype)
+   switch (desttype)
    {
    case TOAQV:
    case TOWIN:
