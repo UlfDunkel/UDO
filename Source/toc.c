@@ -54,6 +54,8 @@
 *                  webmasterurl, webmastername, webmastermailurl, webmasteremail
 *    fd  Jan 25: save_html_index() does no longer list the indexudo page in itself
 *    fd  Feb 03: c_label(): issue #84 fixed
+*    fd  Feb 04: - c_label(): decision for <dd> now depends on bDescDDOpen
+*                - more functions tidied up and reformatted
 *
 ******************************************|************************************/
 
@@ -157,7 +159,7 @@ LOCAL LABEL     *lab[MAXLABELS];          /* Array mit Zeigern auf Labels */
 LOCAL int        p1_lab_counter;          /* Zaehler */
 LOCAL int        p2_lab_counter;          /* Zaehler, 2. Durchgang */
 
-/* New in V6.5.9 [NHz] */
+                                          /* New in V6.5.9 [NHz] */
 LOCAL STYLE      *style[MAXSTYLES];       /* Array mit Zeigern auf Stylesheets */
 LOCAL int         p1_style_counter;       /* Zaehler */
 
@@ -336,27 +338,22 @@ LOCAL BOOLEAN add_toc_to_toc(void);
 *  is_node_link():
 *     Zu welchem Node gehoert ein Label (fuer ST-Guide, Texinfo, Pure-C-Help)
 *
-*  ->  link:   Name des Linkstexts
-*  <-  node:   Name des Nodes, in dem das Label benutzt wird
-*              ti:             TOC-Index des Nodes/Labels/Alias
-*              li:             LAB-Index des Nodes/Labels/Alias
-*              isnode: TRUE:   ist ein Label
-*                              FALSE:  ist ein Node oder Alias
-*              TRUE:   Label existiert
-*              FALSE:  Label existiert nicht
+*  Return:
+*      TRUE: label exists
+*     FALSE: label doesn't exist
 *
 ******************************************|************************************/
 
 GLOBAL BOOLEAN is_node_link(
 
-const char       *link,          /* */
-char             *node,          /* */
-int              *ti,            /* */
-BOOLEAN          *isnode,        /* */
-int              *li)            /* */
+const char       *link,          /* ^ link text name */
+char             *node,          /* ^ node name which uses this label */
+int              *ti,            /* TOC index of node/label/alias */
+BOOLEAN          *isnode,        /* TRUE: is label, FALSE: is node or alias */
+int              *li)            /* LAB index of node/label/alias */
 {
-   register int   i;             /* */
-   BOOLEAN        ret = FALSE;   /* */
+   register int   i;             /* counter*/
+   BOOLEAN        ret = FALSE;   /* TRUE: label exists, FALSE: label does not exist*/
 
 
    node[0] = EOS;
@@ -12714,8 +12711,7 @@ GLOBAL void c_label(void)
                                           /* check if we're in description environment */
          if ( (iEnvLevel > 0) && (iEnvType[iEnvLevel] == ENV_DESC) )
          {
-                                          /* if this is the first item of the description environment */
-            if (bEnv1stItem[iEnvLevel] == 1)
+            if (!bDescDDOpen)             /* DD hasn't been opened yet */
                voutlnf("<dd><a name=\"%s\"></a></dd>", sLabel);
             else
                voutlnf("<a name=\"%s\"></a>", sLabel);
@@ -15368,7 +15364,7 @@ typedef struct _tWinMapData
 {
         char remOn[16], remOff[16];
         char cmd[32];                                   /* #define                      const           */
-        char varOp[16];                                 /*                                      =                       */
+        char varOp[16];                                 /*                       =                       */
         char hexPre[16], hexSuf[16];    /* 0x                           $                       */
         char compiler[32];                              /* C, Pascal, Visual-Basic, ... */
 }       tWinMapData;
@@ -15656,1365 +15652,1575 @@ GLOBAL BOOLEAN save_winhelp_map_gfa(void)
 }       /* save_winhelp_map_gfa */
 
 
+
+
+
+
+
+/*******************************************************************************
+*
+*  save_winhelp4_cnt():
+*     ??? (description missing)
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
+
 GLOBAL BOOLEAN save_winhelp4_cnt(void)
 {
-        FILE *cntfile;
+   FILE          *cntfile;                /* */
+   register int   i;                      /* */
+   int            li,                     /* */
+                  apxstart;               /* */
+   char           sName[512],             /* */
+                  sMisc[512],             /* */
+                  sID[128];               /* */
+   BOOLEAN        n1HadChildren = FALSE;  /* */
+   BOOLEAN        n2HadChildren = FALSE;  /* */
+   BOOLEAN        n3HadChildren = FALSE;  /* */
+   BOOLEAN        n4HadChildren = FALSE;  /* */
+   
 
-        register int i;
-        int li, apxstart;
-        char sName[512], sMisc[512], sID[128];
-        BOOLEAN n1HadChildren= FALSE;
-        BOOLEAN n2HadChildren= FALSE;
-        BOOLEAN n3HadChildren= FALSE;
-        BOOLEAN n4HadChildren= FALSE;
+   cntfile = myFwopen(sCntfull, FTCNT);
 
-        cntfile= myFwopen(sCntfull, FTCNT);
+   if (cntfile == NULL)
+      return FALSE;
 
-        if (cntfile == NULL)
-        {       return FALSE;
-        }
+   save_upr_entry_outfile(sCntfull);
 
-        save_upr_entry_outfile(sCntfull);
+   if (p1_toc_counter >= 0)
+      goto DONE;
 
-        if (p1_toc_counter > 0)
-        {
-                fprintf(cntfile, ":Base %s.hlp>main\n", outfile.name);
-                fprintf(cntfile, ":Index %s.hlp\n", outfile.name);
+   
+   fprintf(cntfile, ":Base %s.hlp>main\n", outfile.name);
+   fprintf(cntfile, ":Index %s.hlp\n", outfile.name);
 
-                strcpy(sMisc, titleprogram);
-                win2sys(sMisc);
-                if (sMisc[0]!=EOS)
-                {       fprintf(cntfile, ":Title %s\n", sMisc);
-                }
+   strcpy(sMisc, titleprogram);
+   win2sys(sMisc);
+   
+   if (sMisc[0] != EOS)
+   {
+      fprintf(cntfile, ":Title %s\n", sMisc);
+   }
 
-                if (uses_tableofcontents)
-                {       node2NrWinhelp(sMisc, 0);
-                        fprintf(cntfile, "1 %s=%s\n", lang.contents, sMisc);
-                }
+   if (uses_tableofcontents)
+   {
+      node2NrWinhelp(sMisc, 0);
+      fprintf(cntfile, "1 %s=%s\n", lang.contents, sMisc);
+   }
 
-                apxstart= 1;
+   apxstart = 1;
 
-                for (i=1; i<=p1_toc_counter; i++)
-                {
-                        if (toc[i]!=NULL && !toc[i]->invisible)
-                        {
-                                convert_toc_item(toc[i]);
+   for (i = 1; i <= p1_toc_counter; i++)
+   {
+      if (toc[i] != NULL && !toc[i]->invisible)
+      {
+         convert_toc_item(toc[i]);
 
-                                if (toc[i]->appendix)
-                                {
-                                        apxstart= i;    /* fuer unten merken */
-                                        break;                  /* r5pl6: Es kann nur einen Anhang geben */
-                                }
-                                else
-                                {       if (toc[i]->n1 != 0)
-                                        {
-                                                if (toc[i]->toctype==TOC_NODE1)
-                                                {       /* Ein Kapitel */       
+         if (toc[i]->appendix)
+         {
+            apxstart = i;              /* fuer unten merken */
+            break;                     /* r5pl6: Es kann nur einen Anhang geben */
+         }
+         else if (toc[i]->n1 != 0)
+         {
+            li = toc[i]->labindex;
+            node2NrWinhelp(sID, li);
+               
+            if (no_numbers)
+               strcpy(sName, toc[i]->name);
+            else
+            {
+               switch (toc[i]->toctype)
+               {
+               case TOC_NODE1:
+                  sprintf(sName, "[%d] %s",
+                        toc[i]->nr1 + toc_offset,
+                        toc[i]->name);
+                  break;
+                  
+               case TOC_NODE2:
+                  sprintf(sName, "[%d.%d] %s",
+                        toc[i]->nr1 + toc_offset,
+                        toc[i]->nr2 + subtoc_offset,
+                        toc[i]->name);
+                  break;
+                  
+               case TOC_NODE3:
+                  sprintf(sName, "[%d.%d.%d] %s",
+                        toc[i]->nr1 + toc_offset,
+                        toc[i]->nr2 + subtoc_offset,
+                        toc[i]->nr3 + subsubtoc_offset,
+                        toc[i]->name);
+                  break;
+                  
+               case TOC_NODE4:
+                  sprintf(sName, "[%d.%d.%d.%d] %s",
+                     toc[i]->nr1 + toc_offset,
+                     toc[i]->nr2 + subtoc_offset,
+                     toc[i]->nr3 + subsubtoc_offset,
+                     toc[i]->nr4 + subsubsubtoc_offset,
+                     toc[i]->name);
+                  break;
+                  
+               case TOC_NODE5:
+                  sprintf(sName, "[%d.%d.%d.%d.%d] %s",
+                        toc[i]->nr1 + toc_offset,
+                        toc[i]->nr2 + subtoc_offset,
+                        toc[i]->nr3 + subsubtoc_offset,
+                        toc[i]->nr4 + subsubsubtoc_offset,
+                        toc[i]->nr5 + subsubsubsubtoc_offset,
+                        toc[i]->name);
+               }
+            }
+               
+            win2sys(sName);
+            
+            switch (toc[i]->toctype)
+            {
+            case TOC_NODE1:
+               if (n1HadChildren || toc[i]->has_children)
+               {
+                  fprintf(cntfile, "1 %s\n", sName);
+                  fprintf(cntfile, "2 %s=%s\n", sName, sID);
+                  n1HadChildren = TRUE;
+               }
+               else
+               {
+                  fprintf(cntfile, "1 %s=%s\n", sName, sID);
+               }
 
-                                                        li= toc[i]->labindex;
-                                                        node2NrWinhelp(sID, li);
-                                                        if (no_numbers)
-                                                        {       strcpy(sName, toc[i]->name);
-                                                        }
-                                                        else
-                                                        {       sprintf(sName, "[%d] %s",
-                                                                        toc[i]->nr1+toc_offset,
-                                                                        toc[i]->name);
-                                                        }
-                                                        win2sys(sName);
-                                                        if (n1HadChildren || toc[i]->has_children)
-                                                        {       fprintf(cntfile, "1 %s\n", sName);
-                                                                fprintf(cntfile, "2 %s=%s\n", sName, sID);
-                                                                n1HadChildren= TRUE;
-                                                        }
-                                                        else
-                                                        {       fprintf(cntfile, "1 %s=%s\n", sName, sID);
-                                                        }
+               n2HadChildren = FALSE;
+               n3HadChildren = FALSE;
+               n4HadChildren = FALSE;
+               break;
+            
+            case TOC_NODE2:
+               if (n2HadChildren || toc[i]->has_children)
+               {
+                  fprintf(cntfile, "2 %s\n", sName);
+                  fprintf(cntfile, "3 %s=%s\n", sName, sID);
+                  n2HadChildren = TRUE;
+               }
+               else
+               {
+                  fprintf(cntfile, "2 %s=%s\n", sName, sID);
+               }
 
-                                                        n2HadChildren= FALSE;
-                                                        n3HadChildren= FALSE;
-                                                        n4HadChildren= FALSE;
-                                                }/* TOC_NODE1 */
+               n3HadChildren = FALSE;
+               n4HadChildren = FALSE;
+               break;
+            
+            case TOC_NODE3:
+               if (n3HadChildren || toc[i]->has_children)
+               {
+                  fprintf(cntfile, "3 %s\n", sName);
+                  fprintf(cntfile, "4 %s=%s\n", sName, sID);
+                  n3HadChildren = TRUE;
+               }
+               else
+               {
+                  fprintf(cntfile, "3 %s=%s\n", sName, sID);
+               }
 
+               n4HadChildren = FALSE;
+               break;
+            
+            case TOC_NODE4:
+               if (n4HadChildren || toc[i]->has_children)
+               {
+                  fprintf(cntfile, "4 %s\n", sName);
+                  fprintf(cntfile, "5 %s=%s\n", sName, sID);
+                  n4HadChildren = TRUE;
+               }
+               else
+               {
+                  fprintf(cntfile, "4 %s=%s\n", sName, sID);
+               }
+               
+               break;
+            
+            case TOC_NODE5:
+               fprintf(cntfile, "5 %s=%s\n", sName, sID);
+               
+            }  /* switch() */
 
-                                                if (toc[i]->toctype==TOC_NODE2)
-                                                {       /* Ein Abschnitt */
-                                                        li= toc[i]->labindex;
-                                                        node2NrWinhelp(sID, li);
-                                                        if (no_numbers)
-                                                        {       strcpy(sName, toc[i]->name);
-                                                        }
-                                                        else
-                                                        {       sprintf(sName, "[%d.%d] %s",
-                                                                        toc[i]->nr1+toc_offset,
-                                                                        toc[i]->nr2+subtoc_offset,
-                                                                        toc[i]->name);
-                                                        }
-                                                        win2sys(sName);
-                                                        if (n2HadChildren || toc[i]->has_children)
-                                                        {       fprintf(cntfile, "2 %s\n", sName);
-                                                                fprintf(cntfile, "3 %s=%s\n", sName, sID);
-                                                                n2HadChildren= TRUE;
-                                                        }
-                                                        else
-                                                        {       fprintf(cntfile, "2 %s=%s\n", sName, sID);
-                                                        }
+         }  /* toc[i]->n1 > 0 */
 
-                                                        n3HadChildren= FALSE;
-                                                        n4HadChildren= FALSE;
-                                                }/* TOC_NODE2 */
+      }  /* toc[i]!=NULL && !toc[i]->invisible */
 
-                                                if (toc[i]->toctype==TOC_NODE3)
-                                                {       /* Ein Unterabschnitt */
-                                                        li= toc[i]->labindex;
-                                                        node2NrWinhelp(sID, li);
-                                                        if (no_numbers)
-                                                        {       strcpy(sName, toc[i]->name);
-                                                        }
-                                                        else
-                                                        {       sprintf(sName, "[%d.%d.%d] %s",
-                                                                        toc[i]->nr1+toc_offset,
-                                                                        toc[i]->nr2+subtoc_offset,
-                                                                        toc[i]->nr3+subsubtoc_offset,
-                                                                        toc[i]->name);
-                                                        }
-                                                        win2sys(sName);
-                                                        if (n3HadChildren || toc[i]->has_children)
-                                                        {       fprintf(cntfile, "3 %s\n", sName);
-                                                                fprintf(cntfile, "4 %s=%s\n", sName, sID);
-                                                                n3HadChildren= TRUE;
-                                                        }
-                                                        else
-                                                        {       fprintf(cntfile, "3 %s=%s\n", sName, sID);
-                                                        }
-
-                                                        n4HadChildren= FALSE;
-                                                }/* TOC_NODE3 */
-
-                                                if (toc[i]->toctype==TOC_NODE4)
-                                                {       /* Ein Paragraph */
-                                                        li= toc[i]->labindex;
-                                                        node2NrWinhelp(sID, li);
-                                                        if (no_numbers)
-                                                        {       strcpy(sName, toc[i]->name);
-                                                        }
-                                                        else
-                                                        {       sprintf(sName, "[%d.%d.%d.%d] %s",
-                                                                        toc[i]->nr1+toc_offset,
-                                                                        toc[i]->nr2+subtoc_offset,
-                                                                        toc[i]->nr3+subsubtoc_offset,
-                                                                        toc[i]->nr4+subsubsubtoc_offset,
-                                                                        toc[i]->name);
-                                                        }
-                                                        win2sys(sName);
-                                                        if (n4HadChildren || toc[i]->has_children)
-                                                        {       fprintf(cntfile, "4 %s\n", sName);
-                                                                fprintf(cntfile, "5 %s=%s\n", sName, sID);
-                                                                n4HadChildren= TRUE;
-                                                        }
-                                                        else
-                                                        {       fprintf(cntfile, "4 %s=%s\n", sName, sID);
-                                                        }
-                                                }/* TOC_NODE4 */
-
-
-                                                if (toc[i]->toctype==TOC_NODE5)
-                                                {       /* Ein Paragraph */
-                                                        li= toc[i]->labindex;
-                                                        node2NrWinhelp(sID, li);
-                                                        if (no_numbers)
-                                                        {       strcpy(sName, toc[i]->name);
-                                                        }
-                                                        else
-                                                        {       sprintf(sName, "[%d.%d.%d.%d.%d] %s",
-                                                                        toc[i]->nr1+toc_offset,
-                                                                        toc[i]->nr2+subtoc_offset,
-                                                                        toc[i]->nr3+subsubtoc_offset,
-                                                                        toc[i]->nr4+subsubsubtoc_offset,
-                                                                        toc[i]->nr5+subsubsubsubtoc_offset,
-                                                                        toc[i]->name);
-                                                        }
-                                                        win2sys(sName);
-                                                        fprintf(cntfile, "5 %s=%s\n", sName, sID);
-                                                }/* TOC_NODE5 */
-
-                                        }/* toc[i]->n1 > 0 */
-
-                                }/* !toc[i]->appendix */
-
-                        }/* toc[i]!=NULL && !toc[i]->invisible */
-
-                }/* for */
+   }  /* for */
 
 
-                if (apx_available)
-                {
-                        n1HadChildren= FALSE;
-                        n2HadChildren= FALSE;
-                        n3HadChildren= FALSE;
-                        n4HadChildren= FALSE;
+   if (!apx_available)
+      goto DONE;
 
-                        fprintf(cntfile, "1 %s\n", lang.appendix);
+   n1HadChildren = FALSE;
+   n2HadChildren = FALSE;
+   n3HadChildren = FALSE;
+   n4HadChildren = FALSE;
 
-                        for (i=apxstart; i<=p1_toc_counter; i++)
-                        {
-                                if (toc[i]!=NULL && !toc[i]->invisible)
-                                {
-                                        convert_toc_item(toc[i]);
+   fprintf(cntfile, "1 %s\n", lang.appendix);
 
-                                        if (toc[i]->appendix)
-                                        {
-                                                if (toc[i]->n1 != 0)
-                                                {
-                                                        if (toc[i]->toctype==TOC_NODE1)
-                                                        {       /* Ein Kapitel */       
+   for (i = apxstart; i <= p1_toc_counter; i++)
+   {
+      if (toc[i] != NULL && !toc[i]->invisible)
+      {
+         convert_toc_item(toc[i]);
 
-                                                                li= toc[i]->labindex;
-                                                                node2NrWinhelp(sID, li);
-                                                                if (no_numbers)
-                                                                {       strcpy(sName, toc[i]->name);
-                                                                }
-                                                                else
-                                                                {       sprintf(sName, "[%c] %s",
-                                                                                'A'-1+toc[i]->nr1,
-                                                                                toc[i]->name);
-                                                                }
-                                                                win2sys(sName);
-                                                                if (n1HadChildren || toc[i]->has_children)
-                                                                {       fprintf(cntfile, "2 %s\n", sName);
-                                                                        fprintf(cntfile, "3 %s=%s\n", sName, sID);
-                                                                        n1HadChildren= TRUE;
-                                                                }
-                                                                else
-                                                                {       fprintf(cntfile, "2 %s=%s\n", sName, sID);
-                                                                }
+         if (toc[i]->appendix)
+         {
+            if (toc[i]->n1 != 0)
+            {
+               li = toc[i]->labindex;
+               node2NrWinhelp(sID, li);
+               
+               if (no_numbers)
+                  strcpy(sName, toc[i]->name);
+               else
+               {
+                  switch (toc[i]->toctype)
+                  {
+                  case TOC_NODE1:
+                     sprintf(sName, "[%c] %s",
+                           'A' - 1 + toc[i]->nr1,
+                           toc[i]->name);
+                           break;
+                           
+                  case TOC_NODE2:
+                     sprintf(sName, "[%c.%d] %s",
+                           'A' - 1 + toc[i]->nr1,
+                           toc[i]->nr2,
+                           toc[i]->name);
+                           break;
+                           
+                  case TOC_NODE3:
+                     sprintf(sName, "[%c.%d.%d] %s",
+                           'A' - 1 + toc[i]->nr1,
+                           toc[i]->nr2,
+                           toc[i]->nr3,
+                           toc[i]->name);
+                           break;
+                           
+                  case TOC_NODE4:
+                     sprintf(sName, "[%c.%d.%d.%d] %s",
+                           'A' - 1 + toc[i]->nr1,
+                           toc[i]->nr2,
+                           toc[i]->nr3,
+                           toc[i]->nr4,
+                           toc[i]->name);
+                           break;
+                           
+                  case TOC_NODE5:
+                     sprintf(sName, "[%c.%d.%d.%d.%d] %s",
+                           'A' - 1 + toc[i]->nr1,
+                           toc[i]->nr2,
+                           toc[i]->nr3,
+                           toc[i]->nr4,
+                           toc[i]->nr5,
+                           toc[i]->name);
+                  }
+               }
+               
+               win2sys(sName);
+                  
+               switch (toc[i]->toctype)
+               {
+               case TOC_NODE1:
+                  if (n1HadChildren || toc[i]->has_children)
+                  {
+                     fprintf(cntfile, "2 %s\n", sName);
+                     fprintf(cntfile, "3 %s=%s\n", sName, sID);
+                     n1HadChildren = TRUE;
+                  }
+                  else
+                  {
+                     fprintf(cntfile, "2 %s=%s\n", sName, sID);
+                  }
 
-                                                                n2HadChildren= FALSE;
-                                                                n3HadChildren= FALSE;
-                                                                n4HadChildren= FALSE;
+                  n2HadChildren = FALSE;
+                  n3HadChildren = FALSE;
+                  n4HadChildren = FALSE;
+                  break;
+               
+               
+               case TOC_NODE2:
+                  if (n2HadChildren || toc[i]->has_children)
+                  {
+                     fprintf(cntfile, "3 %s\n", sName);
+                     fprintf(cntfile, "4 %s=%s\n", sName, sID);
+                     n2HadChildren = TRUE;
+                  }
+                  else
+                  {
+                     fprintf(cntfile, "3 %s=%s\n", sName, sID);
+                  }
 
-                                                        }/* TOC_NODE1 */
+                  n3HadChildren = FALSE;
+                  n4HadChildren = FALSE;
+                  break;
+               
+               
+               case TOC_NODE3:
+                  if (n3HadChildren || toc[i]->has_children)
+                  {
+                     fprintf(cntfile, "4 %s\n", sName);
+                     fprintf(cntfile, "5 %s=%s\n", sName, sID);
+                     n3HadChildren = TRUE;
+                  }
+                  else
+                  {
+                     fprintf(cntfile, "4 %s=%s\n", sName, sID);
+                  }
 
+                  
+                  n4HadChildren = FALSE;
+                  break;
+               
+               
+               case TOC_NODE4:
+                  if (n4HadChildren || toc[i]->has_children)
+                  {
+                     fprintf(cntfile, "5 %s\n", sName);
+                     fprintf(cntfile, "6 %s=%s\n", sName, sID);
+                     n4HadChildren = TRUE;
+                  }
+                  else
+                  {
+                     fprintf(cntfile, "5 %s=%s\n", sName, sID);
+                  }
+                  
+                  break;
+               
+               
+               case TOC_NODE5:
+                  fprintf(cntfile, "6 %s=%s\n", sName, sID);
 
-                                                        if (toc[i]->toctype==TOC_NODE2)
-                                                        {       /* Ein Abschnitt */
-                                                                li= toc[i]->labindex;
-                                                                node2NrWinhelp(sID, li);
-                                                                if (no_numbers)
-                                                                {       strcpy(sName, toc[i]->name);
-                                                                }
-                                                                else
-                                                                {       sprintf(sName, "[%c.%d] %s",
-                                                                                'A'-1+toc[i]->nr1,
-                                                                                toc[i]->nr2,
-                                                                                toc[i]->name);
-                                                                }
-                                                                win2sys(sName);
-                                                                if (n2HadChildren || toc[i]->has_children)
-                                                                {       fprintf(cntfile, "3 %s\n", sName);
-                                                                        fprintf(cntfile, "4 %s=%s\n", sName, sID);
-                                                                        n2HadChildren= TRUE;
-                                                                }
-                                                                else
-                                                                {       fprintf(cntfile, "3 %s=%s\n", sName, sID);
-                                                                }
+               }  /* switch() */
 
-                                                                n3HadChildren= FALSE;
-                                                                n4HadChildren= FALSE;
+            }  /* toc[i]->n1 > 0 */
 
-                                                        }/* TOC_NODE2 */
+         }  /* !toc[i]->appendix */
 
-                                                        if (toc[i]->toctype==TOC_NODE3)
-                                                        {       /* Ein Unterabschnitt */
-                                                                li= toc[i]->labindex;
-                                                                node2NrWinhelp(sID, li);
-                                                                if (no_numbers)
-                                                                {       strcpy(sName, toc[i]->name);
-                                                                }
-                                                                else
-                                                                {       sprintf(sName, "[%c.%d.%d] %s",
-                                                                                'A'-1+toc[i]->nr1,
-                                                                                toc[i]->nr2,
-                                                                                toc[i]->nr3,
-                                                                                toc[i]->name);
-                                                                }
-                                                                win2sys(sName);
-                                                                if (n3HadChildren || toc[i]->has_children)
-                                                                {       fprintf(cntfile, "4 %s\n", sName);
-                                                                        fprintf(cntfile, "5 %s=%s\n", sName, sID);
-                                                                        n3HadChildren= TRUE;
-                                                                }
-                                                                else
-                                                                {       fprintf(cntfile, "4 %s=%s\n", sName, sID);
-                                                                }
+      }  /* toc[i]!=NULL && !toc[i]->invisible */
 
-                                                                n4HadChildren= FALSE;
-                                                        }/* TOC_NODE3 */
+   }  /* for */
 
-                                                        if (toc[i]->toctype==TOC_NODE4)
-                                                        {       /* Ein Paragraph */
-                                                                li= toc[i]->labindex;
-                                                                node2NrWinhelp(sID, li);
-                                                                if (no_numbers)
-                                                                {       strcpy(sName, toc[i]->name);
-                                                                }
-                                                                else
-                                                                {       sprintf(sName, "[%c.%d.%d.%d] %s",
-                                                                                'A'-1+toc[i]->nr1,
-                                                                                toc[i]->nr2,
-                                                                                toc[i]->nr3,
-                                                                                toc[i]->nr4,
-                                                                                toc[i]->name);
-                                                                }
-                                                                win2sys(sName);
-                                                                if (n4HadChildren || toc[i]->has_children)
-                                                                {       fprintf(cntfile, "5 %s\n", sName);
-                                                                        fprintf(cntfile, "6 %s=%s\n", sName, sID);
-                                                                        n4HadChildren= TRUE;
-                                                                }
-                                                                else
-                                                                {       fprintf(cntfile, "5 %s=%s\n", sName, sID);
-                                                                }
-                                                        }/* TOC_NODE4 */
-
-
-                                                        if (toc[i]->toctype==TOC_NODE5)
-                                                        {       /* Ein Paragraph */                             /* ToDo: ??? */
-                                                                li= toc[i]->labindex;
-                                                                node2NrWinhelp(sID, li);
-                                                                if (no_numbers)
-                                                                {       strcpy(sName, toc[i]->name);
-                                                                }
-                                                                else
-                                                                {       sprintf(sName, "[%c.%d.%d.%d.%d] %s",
-                                                                                'A'-1+toc[i]->nr1,
-                                                                                toc[i]->nr2,
-                                                                                toc[i]->nr3,
-                                                                                toc[i]->nr4,
-                                                                                toc[i]->nr5,
-                                                                                toc[i]->name);
-                                                                }
-                                                                win2sys(sName);
-                                                                fprintf(cntfile, "6 %s=%s\n", sName, sID);
-                                                        }/* TOC_NODE5 */
-
-                                                }/* toc[i]->n1 > 0 */
-
-                                        }/* !toc[i]->appendix */
-
-                                }/* toc[i]!=NULL && !toc[i]->invisible */
-
-                        }/* for */
-                }
-        }
-
-        fclose(cntfile);
-        return TRUE;
-}       /* save_winhelp4_cnt */
+DONE:
+   fclose(cntfile);
+   
+   return TRUE;
+}
 
 
 
-/*      ############################################################
-        #
-        # Formatstrings fuer die Inhaltsverzeichnisse initialisieren
-        # Dies muss geschehen, wenn der Status von !no_numbers
-        # bekannt ist, d.h. zwischen pass1() und pass2()
-        #
-        ############################################################    */
+
+
+/*******************************************************************************
+*
+*  init_toc_forms_numbers():
+*     initialize format strings for tables of content
+*
+*  Notes:
+*     This is required when the state of !no_numbers is known, i.e.
+*     between pass1() and pass2().
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
 LOCAL void init_toc_forms_numbers(void)
 {
-        switch (desttype)
-        {
-                case TOAQV:
-                case TOWIN:
-                        strcpy(form_t1_n1, "\\li320\\fi-320\\tx320 %d\\tab{%s}\\par\\pard");
-/* 560 */       strcpy(form_t1_n2, "\\li880\\fi-560\\tx880 %d.%d\\tab{%s}\\par\\pard");
-/* 920 */       strcpy(form_t1_n3, "\\li1800\\fi-920\\tx1800 %d.%d.%d\\tab{%s}\\par\\pard");
-/*1000 */       strcpy(form_t1_n4, "\\li2800\\fi-1000\\tx2800 %d.%d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_t1_n5, "\\li2800\\fi-1000\\tx2800 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
-                        strcpy(form_t2_n2, "\\li480\\fi-480\\tx480 %d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_t2_n3, "\\li1400\\fi-920\\tx1400 %d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_t2_n4, "\\li2400\\fi-1000\\tx2400 %d.%d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_t2_n5, "\\li2400\\fi-1000\\tx2400 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
-                        strcpy(form_t3_n3, "\\li880\\fi-880\\tx880 %d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_t3_n4, "\\li1800\\fi-920\\tx1800 %d.%d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_t3_n5, "\\li1800\\fi-920\\tx1800 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
-                        strcpy(form_t4_n4, "\\li880\\fi-880\\tx880 %d.%d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_t4_n5, "\\li880\\fi-880\\tx880 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
-                        strcpy(form_t5_n5, "\\li880\\fi-880\\tx880 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
+   switch (desttype)
+   {
+   case TOAQV:
+   case TOWIN:
+      strcpy(form_t1_n1, "\\li320\\fi-320\\tx320 %d\\tab{%s}\\par\\pard");
+                                          /* 560 */
+      strcpy(form_t1_n2, "\\li880\\fi-560\\tx880 %d.%d\\tab{%s}\\par\\pard");
+                                          /* 920 */
+      strcpy(form_t1_n3, "\\li1800\\fi-920\\tx1800 %d.%d.%d\\tab{%s}\\par\\pard");
+                                          /*1000 */
+      strcpy(form_t1_n4, "\\li2800\\fi-1000\\tx2800 %d.%d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_t1_n5, "\\li2800\\fi-1000\\tx2800 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
+      strcpy(form_t2_n2, "\\li480\\fi-480\\tx480 %d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_t2_n3, "\\li1400\\fi-920\\tx1400 %d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_t2_n4, "\\li2400\\fi-1000\\tx2400 %d.%d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_t2_n5, "\\li2400\\fi-1000\\tx2400 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
+      strcpy(form_t3_n3, "\\li880\\fi-880\\tx880 %d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_t3_n4, "\\li1800\\fi-920\\tx1800 %d.%d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_t3_n5, "\\li1800\\fi-920\\tx1800 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
+      strcpy(form_t4_n4, "\\li880\\fi-880\\tx880 %d.%d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_t4_n5, "\\li880\\fi-880\\tx880 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
+      strcpy(form_t5_n5, "\\li880\\fi-880\\tx880 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
 
-                        strcpy(form_a1_n1, "\\li320\\fi-320\\tx320 %c\\tab{%s}\\par\\pard");
-/* 560 */       strcpy(form_a1_n2, "\\li880\\fi-560\\tx880 %c.%d\\tab{%s}\\par\\pard");
-/* 920 */       strcpy(form_a1_n3, "\\li1800\\fi-920\\tx1800 %c.%d.%d\\tab{%s}\\par\\pard");
-/*1000 */       strcpy(form_a1_n4, "\\li2800\\fi-1000\\tx2800 %c.%d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_a1_n5, "\\li2800\\fi-1000\\tx2800 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
-                        strcpy(form_a2_n2, "\\li480\\fi-480\\tx480 %c.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_a2_n3, "\\li1400\\fi-920\\tx1400 %c.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_a2_n4, "\\li2400\\fi-1000\\tx2400 %c.%d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_a2_n5, "\\li2400\\fi-1000\\tx2400 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
-                        strcpy(form_a3_n3, "\\li880\\fi-880\\tx880 %c.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_a3_n4, "\\li1800\\fi-920\\tx1800 %c.%d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_a3_n5, "\\li1800\\fi-920\\tx1800 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
-                        strcpy(form_a4_n4, "\\li880\\fi-880\\tx880 %c.%d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_a4_n5, "\\li880\\fi-880\\tx880 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
-                        strcpy(form_a5_n5, "\\li880\\fi-880\\tx880 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
-                        break;
+      strcpy(form_a1_n1, "\\li320\\fi-320\\tx320 %c\\tab{%s}\\par\\pard");
+                                          /* 560 */
+      strcpy(form_a1_n2, "\\li880\\fi-560\\tx880 %c.%d\\tab{%s}\\par\\pard");
+                                          /* 920 */
+      strcpy(form_a1_n3, "\\li1800\\fi-920\\tx1800 %c.%d.%d\\tab{%s}\\par\\pard");
+                                          /*1000 */
+      strcpy(form_a1_n4, "\\li2800\\fi-1000\\tx2800 %c.%d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_a1_n5, "\\li2800\\fi-1000\\tx2800 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
+      strcpy(form_a2_n2, "\\li480\\fi-480\\tx480 %c.%d\\tab{%s}\\par\\pard");
+      strcpy(form_a2_n3, "\\li1400\\fi-920\\tx1400 %c.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_a2_n4, "\\li2400\\fi-1000\\tx2400 %c.%d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_a2_n5, "\\li2400\\fi-1000\\tx2400 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
+      strcpy(form_a3_n3, "\\li880\\fi-880\\tx880 %c.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_a3_n4, "\\li1800\\fi-920\\tx1800 %c.%d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_a3_n5, "\\li1800\\fi-920\\tx1800 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
+      strcpy(form_a4_n4, "\\li880\\fi-880\\tx880 %c.%d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_a4_n5, "\\li880\\fi-880\\tx880 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
+      strcpy(form_a5_n5, "\\li880\\fi-880\\tx880 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard");/* ToDo: ??? */
+      break;
 
 
-                case TOWH4:
-                        strcpy(form_t1_n1, "\\li300\\fi-300\\tx300 %d\\tab{%s}\\par\\pard");
-/* 560 */       strcpy(form_t1_n2, "\\li800\\fi-500\\tx800 %d.%d\\tab{%s}\\par\\pard");
-/* 920 */       strcpy(form_t1_n3, "\\li1600\\fi-800\\tx1600 %d.%d.%d\\tab{%s}\\par\\pard");
-/*1000 */       strcpy(form_t1_n4, "\\li2600\\fi-1000\\tx2600 %d.%d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_t1_n5, "\\li2600\\fi-1000\\tx2600 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
-                        strcpy(form_t2_n2, "\\li400\\fi-400\\tx400 %d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_t2_n3, "\\li1300\\fi-920\\tx1300 %d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_t2_n4, "\\li2200\\fi-1000\\tx2200 %d.%d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_t2_n5, "\\li2200\\fi-1000\\tx2200 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
-                        strcpy(form_t3_n3, "\\li800\\fi-800\\tx800 %d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_t3_n4, "\\li1600\\fi-920\\tx1600 %d.%d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_t3_n5, "\\li1600\\fi-920\\tx1600 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
-                        strcpy(form_t4_n4, "\\li800\\fi-800\\tx800 %d.%d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_t4_n5, "\\li800\\fi-800\\tx800 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
-                        strcpy(form_t5_n5, "\\li800\\fi-800\\tx800 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
+   case TOWH4:
+      strcpy(form_t1_n1, "\\li300\\fi-300\\tx300 %d\\tab{%s}\\par\\pard");
+                                          /* 560 */
+      strcpy(form_t1_n2, "\\li800\\fi-500\\tx800 %d.%d\\tab{%s}\\par\\pard");
+                                          /* 920 */
+      strcpy(form_t1_n3, "\\li1600\\fi-800\\tx1600 %d.%d.%d\\tab{%s}\\par\\pard");
+                                          /*1000 */
+      strcpy(form_t1_n4, "\\li2600\\fi-1000\\tx2600 %d.%d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_t1_n5, "\\li2600\\fi-1000\\tx2600 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
+      strcpy(form_t2_n2, "\\li400\\fi-400\\tx400 %d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_t2_n3, "\\li1300\\fi-920\\tx1300 %d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_t2_n4, "\\li2200\\fi-1000\\tx2200 %d.%d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_t2_n5, "\\li2200\\fi-1000\\tx2200 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
+      strcpy(form_t3_n3, "\\li800\\fi-800\\tx800 %d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_t3_n4, "\\li1600\\fi-920\\tx1600 %d.%d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_t3_n5, "\\li1600\\fi-920\\tx1600 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
+      strcpy(form_t4_n4, "\\li800\\fi-800\\tx800 %d.%d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_t4_n5, "\\li800\\fi-800\\tx800 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
+      strcpy(form_t5_n5, "\\li800\\fi-800\\tx800 %d.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
 
-                        strcpy(form_a1_n1, "\\li300\\fi-300\\tx300 %c\\tab{%s}\\par\\pard");
-/* 560 */       strcpy(form_a1_n2, "\\li800\\fi-500\\tx800 %c.%d\\tab{%s}\\par\\pard");
-/* 920 */       strcpy(form_a1_n3, "\\li1600\\fi-800\\tx1600 %c.%d.%d\\tab{%s}\\par\\pard");
-/*1000 */       strcpy(form_a1_n4, "\\li2600\\fi-1000\\tx2600 %c.%d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_a1_n5, "\\li2600\\fi-1000\\tx2600 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
-                        strcpy(form_a2_n2, "\\li400\\fi-400\\tx400 %c.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_a2_n3, "\\li1300\\fi-920\\tx1300 %c.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_a2_n4, "\\li2200\\fi-1000\\tx2200 %c.%d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_a2_n5, "\\li2200\\fi-1000\\tx2200 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
-                        strcpy(form_a3_n3, "\\li800\\fi-800\\tx800 %c.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_a3_n4, "\\li1600\\fi-920\\tx1600 %c.%d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_a3_n5, "\\li1600\\fi-920\\tx1600 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
-                        strcpy(form_a4_n4, "\\li800\\fi-800\\tx800 %c.%d.%d.%d\\tab{%s}\\par\\pard");
-                        strcpy(form_a4_n5, "\\li800\\fi-800\\tx800 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
-                        strcpy(form_a5_n5, "\\li800\\fi-800\\tx800 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
-                        break;
+      strcpy(form_a1_n1, "\\li300\\fi-300\\tx300 %c\\tab{%s}\\par\\pard");
+                                          /* 560 */
+      strcpy(form_a1_n2, "\\li800\\fi-500\\tx800 %c.%d\\tab{%s}\\par\\pard");
+                                          /* 920 */
+      strcpy(form_a1_n3, "\\li1600\\fi-800\\tx1600 %c.%d.%d\\tab{%s}\\par\\pard");
+                                          /*1000 */
+      strcpy(form_a1_n4, "\\li2600\\fi-1000\\tx2600 %c.%d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_a1_n5, "\\li2600\\fi-1000\\tx2600 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
+      strcpy(form_a2_n2, "\\li400\\fi-400\\tx400 %c.%d\\tab{%s}\\par\\pard");
+      strcpy(form_a2_n3, "\\li1300\\fi-920\\tx1300 %c.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_a2_n4, "\\li2200\\fi-1000\\tx2200 %c.%d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_a2_n5, "\\li2200\\fi-1000\\tx2200 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
+      strcpy(form_a3_n3, "\\li800\\fi-800\\tx800 %c.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_a3_n4, "\\li1600\\fi-920\\tx1600 %c.%d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_a3_n5, "\\li1600\\fi-920\\tx1600 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
+      strcpy(form_a4_n4, "\\li800\\fi-800\\tx800 %c.%d.%d.%d\\tab{%s}\\par\\pard");
+      strcpy(form_a4_n5, "\\li800\\fi-800\\tx800 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
+      strcpy(form_a5_n5, "\\li800\\fi-800\\tx800 %c.%d.%d.%d.%d\\tab{%s}\\par\\pard"); /* ToDo: ??? */
+      break;
+      
 
-                case TOHAH:                     /* V6.5.17 */
-                case TOHTM:
-                case TOMHH:
-                        strcpy(form_t1_n1, "<li>%2d %s</li>");
-                        strcpy(form_t1_n2, "<li>%2d.%d %s</li>");
-                        strcpy(form_t1_n3, "<li>%2d.%d.%d %s</li>");
-                        strcpy(form_t1_n4, "<li>%2d.%d.%d.%d %s</li>");
-                        strcpy(form_t1_n5, "<li>%2d.%d.%d.%d.%d %s</li>");
-                        strcpy(form_t2_n2, form_t1_n2);
-                        strcpy(form_t2_n3, form_t1_n3);
-                        strcpy(form_t2_n4, form_t1_n4);
-                        strcpy(form_t2_n5, form_t1_n5);
-                        strcpy(form_t3_n3, form_t1_n3);
-                        strcpy(form_t3_n4, form_t1_n4);
-                        strcpy(form_t3_n5, form_t1_n5);
-                        strcpy(form_t4_n4, form_t1_n4);
-                        strcpy(form_t4_n5, form_t1_n5);
-                        strcpy(form_t5_n5, form_t1_n5);
+   case TOHAH:
+   case TOHTM:
+   case TOMHH:
+      strcpy(form_t1_n1, "<li>%2d %s</li>");
+      strcpy(form_t1_n2, "<li>%2d.%d %s</li>");
+      strcpy(form_t1_n3, "<li>%2d.%d.%d %s</li>");
+      strcpy(form_t1_n4, "<li>%2d.%d.%d.%d %s</li>");
+      strcpy(form_t1_n5, "<li>%2d.%d.%d.%d.%d %s</li>");
+      strcpy(form_t2_n2, form_t1_n2);
+      strcpy(form_t2_n3, form_t1_n3);
+      strcpy(form_t2_n4, form_t1_n4);
+      strcpy(form_t2_n5, form_t1_n5);
+      strcpy(form_t3_n3, form_t1_n3);
+      strcpy(form_t3_n4, form_t1_n4);
+      strcpy(form_t3_n5, form_t1_n5);
+      strcpy(form_t4_n4, form_t1_n4);
+      strcpy(form_t4_n5, form_t1_n5);
+      strcpy(form_t5_n5, form_t1_n5);
 
-                        strcpy(form_a1_n1, "<li>%c %s</li>");
-                        strcpy(form_a1_n2, "<li>%c.%d %s</li>");
-                        strcpy(form_a1_n3, "<li>%c.%d.%d %s</li>");
-                        strcpy(form_a1_n4, "<li>%c.%d.%d.%d %s</li>");
-                        strcpy(form_a1_n5, "<li>%c.%d.%d.%d.%d %s</li>");
-                        strcpy(form_a2_n2, form_a1_n2);
-                        strcpy(form_a2_n3, form_a1_n3);
-                        strcpy(form_a2_n4, form_a1_n4);
-                        strcpy(form_a2_n5, form_a1_n5);
-                        strcpy(form_a3_n3, form_a1_n3);
-                        strcpy(form_a3_n4, form_a1_n4);
-                        strcpy(form_a3_n5, form_a1_n5);
-                        strcpy(form_a4_n4, form_a1_n4);
-                        strcpy(form_a4_n5, form_a1_n5);
-                        strcpy(form_a5_n5, form_a1_n5);
-                        break;
+      strcpy(form_a1_n1, "<li>%c %s</li>");
+      strcpy(form_a1_n2, "<li>%c.%d %s</li>");
+      strcpy(form_a1_n3, "<li>%c.%d.%d %s</li>");
+      strcpy(form_a1_n4, "<li>%c.%d.%d.%d %s</li>");
+      strcpy(form_a1_n5, "<li>%c.%d.%d.%d.%d %s</li>");
+      strcpy(form_a2_n2, form_a1_n2);
+      strcpy(form_a2_n3, form_a1_n3);
+      strcpy(form_a2_n4, form_a1_n4);
+      strcpy(form_a2_n5, form_a1_n5);
+      strcpy(form_a3_n3, form_a1_n3);
+      strcpy(form_a3_n4, form_a1_n4);
+      strcpy(form_a3_n5, form_a1_n5);
+      strcpy(form_a4_n4, form_a1_n4);
+      strcpy(form_a4_n5, form_a1_n5);
+      strcpy(form_a5_n5, form_a1_n5);
+      break;
+      
 
-                case TOTEX:
-                case TOPDL:
-                        strcpy(form_t1_n1, "\\item %d %s");
-                        strcpy(form_t1_n2, "\\item %d.%d %s");
-                        strcpy(form_t1_n3, "\\item %d.%d.%d %s");
-                        strcpy(form_t1_n4, "\\item %d.%d.%d.%d %s");
-                        strcpy(form_t1_n5, "\\item %d.%d.%d.%d.%d %s");
-                        strcpy(form_t2_n2, form_t1_n2);
-                        strcpy(form_t2_n3, form_t1_n3);
-                        strcpy(form_t2_n4, form_t1_n4);
-                        strcpy(form_t2_n5, form_t1_n5);
-                        strcpy(form_t3_n3, form_t1_n3);
-                        strcpy(form_t3_n4, form_t1_n4);
-                        strcpy(form_t3_n5, form_t1_n5);
-                        strcpy(form_t4_n4, form_t1_n4);
-                        strcpy(form_t4_n5, form_t1_n5);
-                        strcpy(form_t5_n5, form_t1_n5);
+   case TOTEX:
+   case TOPDL:
+      strcpy(form_t1_n1, "\\item %d %s");
+      strcpy(form_t1_n2, "\\item %d.%d %s");
+      strcpy(form_t1_n3, "\\item %d.%d.%d %s");
+      strcpy(form_t1_n4, "\\item %d.%d.%d.%d %s");
+      strcpy(form_t1_n5, "\\item %d.%d.%d.%d.%d %s");
+      strcpy(form_t2_n2, form_t1_n2);
+      strcpy(form_t2_n3, form_t1_n3);
+      strcpy(form_t2_n4, form_t1_n4);
+      strcpy(form_t2_n5, form_t1_n5);
+      strcpy(form_t3_n3, form_t1_n3);
+      strcpy(form_t3_n4, form_t1_n4);
+      strcpy(form_t3_n5, form_t1_n5);
+      strcpy(form_t4_n4, form_t1_n4);
+      strcpy(form_t4_n5, form_t1_n5);
+      strcpy(form_t5_n5, form_t1_n5);
 
-                        strcpy(form_a1_n1, "\\item %d %s");
-                        strcpy(form_a1_n2, "\\item %d.%d %s");
-                        strcpy(form_a1_n3, "\\item %d.%d.%d %s");
-                        strcpy(form_a1_n4, "\\item %d.%d.%d.%d %s");
-                        strcpy(form_a1_n5, "\\item %d.%d.%d.%d.%d %s");
-                        strcpy(form_a2_n2, form_t1_n2);
-                        strcpy(form_a2_n3, form_t1_n3);
-                        strcpy(form_a2_n4, form_t1_n4);
-                        strcpy(form_a2_n5, form_t1_n5);
-                        strcpy(form_a3_n3, form_t1_n3);
-                        strcpy(form_a3_n4, form_t1_n4);
-                        strcpy(form_a3_n5, form_t1_n5);
-                        strcpy(form_a4_n4, form_t1_n4);
-                        strcpy(form_a4_n5, form_t1_n5);
-                        strcpy(form_a5_n5, form_t1_n5);
-                        break;
+      strcpy(form_a1_n1, "\\item %d %s");
+      strcpy(form_a1_n2, "\\item %d.%d %s");
+      strcpy(form_a1_n3, "\\item %d.%d.%d %s");
+      strcpy(form_a1_n4, "\\item %d.%d.%d.%d %s");
+      strcpy(form_a1_n5, "\\item %d.%d.%d.%d.%d %s");
+      strcpy(form_a2_n2, form_t1_n2);
+      strcpy(form_a2_n3, form_t1_n3);
+      strcpy(form_a2_n4, form_t1_n4);
+      strcpy(form_a2_n5, form_t1_n5);
+      strcpy(form_a3_n3, form_t1_n3);
+      strcpy(form_a3_n4, form_t1_n4);
+      strcpy(form_a3_n5, form_t1_n5);
+      strcpy(form_a4_n4, form_t1_n4);
+      strcpy(form_a4_n5, form_t1_n5);
+      strcpy(form_a5_n5, form_t1_n5);
+      break;
 
-                /* New in r6pl15 [NHz] */
-                case TOKPS:
-                        strcpy(form_t1_n1, "(%2d ) udoshow %s newline");
-                        strcpy(form_t1_n2, "(   %2d.%d ) udoshow %s newline");
-                        strcpy(form_t1_n3, "(         %2d.%d.%d ) udoshow  %s newline");
-                        strcpy(form_t1_n4, "(               %2d.%d.%d.%d ) udoshow %s newline");
-                        strcpy(form_t1_n5, "(                     %2d.%d.%d.%d.%d ) udoshow %s newline");
-                        strcpy(form_t2_n2, "(%2d.%d ) udoshow %s newline");
-                        strcpy(form_t2_n3, "(      %2d.%d.%d ) udoshow %s newline");
-                        strcpy(form_t2_n4, "(            %2d.%d.%d.%d ) udoshow %s newline");
-                        strcpy(form_t2_n5, "(                  %2d.%d.%d.%d.%d ) udoshow %s newline");
-                        strcpy(form_t3_n3, "(%2d.%d.%d ) udoshow %s newline");
-                        strcpy(form_t3_n4, "(         %2d.%d.%d.%d ) udoshow %s newline");
-                        strcpy(form_t3_n5, "(              %2d.%d.%d.%d.%d ) udoshow %s newline");
-                        strcpy(form_t4_n4, "(%2d.%d.%d.%d ) udoshow %s newline");
-                        strcpy(form_t4_n5, "(     %2d.%d.%d.%d.%d ) udoshow %s newline");
-                        strcpy(form_t5_n5, "(%2d.%d.%d.%d.%d ) udoshow %s newline");
 
-                        strcpy(form_a1_n1, "( %c ) udoshow %s newline");
-                        strcpy(form_a1_n2, "(    %c.%d ) udoshow %s newline");
-                        strcpy(form_a1_n3, "(         %c.%d.%d ) udoshow  %s newline");
-                        strcpy(form_a1_n4, "(                 %c.%d.%d.%d ) udoshow %s newline");
-                        strcpy(form_a1_n5, "(                     %c.%d.%d.%d.%d ) udoshow %s newline");
-                        strcpy(form_a2_n2, "( %c.%d ) udoshow %s newline");
-                        strcpy(form_a2_n3, "(      %c.%d.%d ) udoshow %s newline");
-                        strcpy(form_a2_n4, "(              %c.%d.%d.%d ) udoshow %s newline");
-                        strcpy(form_a2_n5, "(                  %c.%d.%d.%d.%d ) udoshow %s newline");
-                        strcpy(form_a3_n3, "( %c.%d.%d ) udoshow %s newline");
-                        strcpy(form_a3_n4, "(         %c.%d.%d.%d ) udoshow %s newline");
-                        strcpy(form_a3_n5, "(             %c.%d.%d.%d.%d ) udoshow %s newline");
-                        strcpy(form_a4_n4, "( %c.%d.%d.%d ) udoshow %s newline");
-                        strcpy(form_a4_n5, "(     %c.%d.%d.%d.%d ) udoshow %s newline");
-                        strcpy(form_a5_n5, "( %c.%d.%d.%d.%d ) udoshow %s newline");
-                        break;
+                                          /* New in r6pl15 [NHz] */
+   case TOKPS:
+      strcpy(form_t1_n1, "(%2d ) udoshow %s newline");
+      strcpy(form_t1_n2, "(   %2d.%d ) udoshow %s newline");
+      strcpy(form_t1_n3, "(         %2d.%d.%d ) udoshow  %s newline");
+      strcpy(form_t1_n4, "(               %2d.%d.%d.%d ) udoshow %s newline");
+      strcpy(form_t1_n5, "(                     %2d.%d.%d.%d.%d ) udoshow %s newline");
+      strcpy(form_t2_n2, "(%2d.%d ) udoshow %s newline");
+      strcpy(form_t2_n3, "(      %2d.%d.%d ) udoshow %s newline");
+      strcpy(form_t2_n4, "(            %2d.%d.%d.%d ) udoshow %s newline");
+      strcpy(form_t2_n5, "(                  %2d.%d.%d.%d.%d ) udoshow %s newline");
+      strcpy(form_t3_n3, "(%2d.%d.%d ) udoshow %s newline");
+      strcpy(form_t3_n4, "(         %2d.%d.%d.%d ) udoshow %s newline");
+      strcpy(form_t3_n5, "(              %2d.%d.%d.%d.%d ) udoshow %s newline");
+      strcpy(form_t4_n4, "(%2d.%d.%d.%d ) udoshow %s newline");
+      strcpy(form_t4_n5, "(     %2d.%d.%d.%d.%d ) udoshow %s newline");
+      strcpy(form_t5_n5, "(%2d.%d.%d.%d.%d ) udoshow %s newline");
 
-/*              case TOKPS:
-                        strcpy(form_t1_n1, "(%2d  %s) show newline");
-                        strcpy(form_t1_n2, "(   %2d.%d  %s) show newline");
-                        strcpy(form_t1_n3, "(        %2d.%d.%d  %s) show newline");
-                        strcpy(form_t1_n4, "(               %2d.%d.%d.%d  %s) show newline");
-                        strcpy(form_t2_n2, "(%2d.%d  %s) show newline");
-                        strcpy(form_t2_n3, "(     %2d.%d.%d  %s) show newline");
-                        strcpy(form_t2_n4, "(            %2d.%d.%d.%d  %s) show newline");
-                        strcpy(form_t3_n3, "(%2d.%d.%d  %s) show newline");
-                        strcpy(form_t3_n4, "(       %2d.%d.%d.%d  %s) show newline");
-                        strcpy(form_t4_n4, "(%2d.%d.%d.%d  %s) show newline");
+      strcpy(form_a1_n1, "( %c ) udoshow %s newline");
+      strcpy(form_a1_n2, "(    %c.%d ) udoshow %s newline");
+      strcpy(form_a1_n3, "(         %c.%d.%d ) udoshow  %s newline");
+      strcpy(form_a1_n4, "(                 %c.%d.%d.%d ) udoshow %s newline");
+      strcpy(form_a1_n5, "(                     %c.%d.%d.%d.%d ) udoshow %s newline");
+      strcpy(form_a2_n2, "( %c.%d ) udoshow %s newline");
+      strcpy(form_a2_n3, "(      %c.%d.%d ) udoshow %s newline");
+      strcpy(form_a2_n4, "(              %c.%d.%d.%d ) udoshow %s newline");
+      strcpy(form_a2_n5, "(                  %c.%d.%d.%d.%d ) udoshow %s newline");
+      strcpy(form_a3_n3, "( %c.%d.%d ) udoshow %s newline");
+      strcpy(form_a3_n4, "(         %c.%d.%d.%d ) udoshow %s newline");
+      strcpy(form_a3_n5, "(             %c.%d.%d.%d.%d ) udoshow %s newline");
+      strcpy(form_a4_n4, "( %c.%d.%d.%d ) udoshow %s newline");
+      strcpy(form_a4_n5, "(     %c.%d.%d.%d.%d ) udoshow %s newline");
+      strcpy(form_a5_n5, "( %c.%d.%d.%d.%d ) udoshow %s newline");
+      break;
 
-                        strcpy(form_a1_n1, "( %c  %s) show newline");
-                        strcpy(form_a1_n2, "(    %c.%d  %s) show newline");
-                        strcpy(form_a1_n3, "(         %c.%d.%d  %s) show newline");
-                        strcpy(form_a1_n4, "(                %c.%d.%d.%d  %s) show newline");
-                        strcpy(form_a2_n2, "( %c.%d  %s) show newline");
-                        strcpy(form_a2_n3, "(    %c.%d.%d  %s) show newline");
-                        strcpy(form_a2_n4, "(           %c.%d.%d.%d  %s) show newline");
-                        strcpy(form_a3_n3, "( %c.%d.%d  %s) show newline");
-                        strcpy(form_a3_n4, "(        %c.%d.%d.%d  %s) show newline");
-                        strcpy(form_a4_n4, "( %c.%d.%d.%d  %s) show newline");
-                        break;
+/*
+   case TOKPS:
+      strcpy(form_t1_n1, "(%2d  %s) show newline");
+      strcpy(form_t1_n2, "(   %2d.%d  %s) show newline");
+      strcpy(form_t1_n3, "(        %2d.%d.%d  %s) show newline");
+      strcpy(form_t1_n4, "(               %2d.%d.%d.%d  %s) show newline");
+      strcpy(form_t2_n2, "(%2d.%d  %s) show newline");
+      strcpy(form_t2_n3, "(     %2d.%d.%d  %s) show newline");
+      strcpy(form_t2_n4, "(            %2d.%d.%d.%d  %s) show newline");
+      strcpy(form_t3_n3, "(%2d.%d.%d  %s) show newline");
+      strcpy(form_t3_n4, "(       %2d.%d.%d.%d  %s) show newline");
+      strcpy(form_t4_n4, "(%2d.%d.%d.%d  %s) show newline");
+
+      strcpy(form_a1_n1, "( %c  %s) show newline");
+      strcpy(form_a1_n2, "(    %c.%d  %s) show newline");
+      strcpy(form_a1_n3, "(         %c.%d.%d  %s) show newline");
+      strcpy(form_a1_n4, "(                %c.%d.%d.%d  %s) show newline");
+      strcpy(form_a2_n2, "( %c.%d  %s) show newline");
+      strcpy(form_a2_n3, "(    %c.%d.%d  %s) show newline");
+      strcpy(form_a2_n4, "(           %c.%d.%d.%d  %s) show newline");
+      strcpy(form_a3_n3, "( %c.%d.%d  %s) show newline");
+      strcpy(form_a3_n4, "(        %c.%d.%d.%d  %s) show newline");
+      strcpy(form_a4_n4, "( %c.%d.%d.%d  %s) show newline");
+      break;
 */
-                default:
-                        strcpy(form_t1_n1, "%2d  %s");
-                        strcpy(form_t1_n2, "   %2d.%d  %s");
-                        strcpy(form_t1_n3, "        %2d.%d.%d  %s");
-                        strcpy(form_t1_n4, "               %2d.%d.%d.%d  %s");
-                        strcpy(form_t1_n5, "                      %2d.%d.%d.%d.%d  %s");
-                        strcpy(form_t2_n2, "%2d.%d  %s");
-                        strcpy(form_t2_n3, "     %2d.%d.%d  %s");
-                        strcpy(form_t2_n4, "            %2d.%d.%d.%d  %s");
-                        strcpy(form_t2_n5, "                   %2d.%d.%d.%d.%d  %s");
-                        strcpy(form_t3_n3, "%2d.%d.%d  %s");
-                        strcpy(form_t3_n4, "       %2d.%d.%d.%d  %s");
-                        strcpy(form_t3_n5, "              %2d.%d.%d.%d.%d  %s");
-                        strcpy(form_t4_n4, "%2d.%d.%d.%d  %s");
-                        strcpy(form_t4_n5, "       %2d.%d.%d.%d.%d  %s");
-                        strcpy(form_t5_n5, "%2d.%d.%d.%d.%d  %s");
 
-                        strcpy(form_a1_n1, " %c  %s");
-                        strcpy(form_a1_n2, "    %c.%d  %s");
-                        strcpy(form_a1_n3, "         %c.%d.%d  %s");
-                        strcpy(form_a1_n4, "                %c.%d.%d.%d  %s");
-                        strcpy(form_a1_n5, "                       %c.%d.%d.%d.%d  %s");
-                        strcpy(form_a2_n2, " %c.%d  %s");
-                        strcpy(form_a2_n3, "    %c.%d.%d  %s");
-                        strcpy(form_a2_n4, "           %c.%d.%d.%d  %s");
-                        strcpy(form_a2_n5, "                  %c.%d.%d.%d.%d  %s");
-                        strcpy(form_a3_n3, " %c.%d.%d  %s");
-                        strcpy(form_a3_n4, "        %c.%d.%d.%d  %s");
-                        strcpy(form_a3_n5, "               %c.%d.%d.%d.%d  %s");
-                        strcpy(form_a4_n4, " %c.%d.%d.%d  %s");
-                        strcpy(form_a4_n5, "        %c.%d.%d.%d.%d  %s");
-                        break;
-        }
 
-}       /* init_toc_forms_numbers */
+   default:
+      strcpy(form_t1_n1, "%2d  %s");
+      strcpy(form_t1_n2, "   %2d.%d  %s");
+      strcpy(form_t1_n3, "        %2d.%d.%d  %s");
+      strcpy(form_t1_n4, "               %2d.%d.%d.%d  %s");
+      strcpy(form_t1_n5, "                      %2d.%d.%d.%d.%d  %s");
+      strcpy(form_t2_n2, "%2d.%d  %s");
+      strcpy(form_t2_n3, "     %2d.%d.%d  %s");
+      strcpy(form_t2_n4, "            %2d.%d.%d.%d  %s");
+      strcpy(form_t2_n5, "                   %2d.%d.%d.%d.%d  %s");
+      strcpy(form_t3_n3, "%2d.%d.%d  %s");
+      strcpy(form_t3_n4, "       %2d.%d.%d.%d  %s");
+      strcpy(form_t3_n5, "              %2d.%d.%d.%d.%d  %s");
+      strcpy(form_t4_n4, "%2d.%d.%d.%d  %s");
+      strcpy(form_t4_n5, "       %2d.%d.%d.%d.%d  %s");
+      strcpy(form_t5_n5, "%2d.%d.%d.%d.%d  %s");
 
+      strcpy(form_a1_n1, " %c  %s");
+      strcpy(form_a1_n2, "    %c.%d  %s");
+      strcpy(form_a1_n3, "         %c.%d.%d  %s");
+      strcpy(form_a1_n4, "                %c.%d.%d.%d  %s");
+      strcpy(form_a1_n5, "                       %c.%d.%d.%d.%d  %s");
+      strcpy(form_a2_n2, " %c.%d  %s");
+      strcpy(form_a2_n3, "    %c.%d.%d  %s");
+      strcpy(form_a2_n4, "           %c.%d.%d.%d  %s");
+      strcpy(form_a2_n5, "                  %c.%d.%d.%d.%d  %s");
+      strcpy(form_a3_n3, " %c.%d.%d  %s");
+      strcpy(form_a3_n4, "        %c.%d.%d.%d  %s");
+      strcpy(form_a3_n5, "               %c.%d.%d.%d.%d  %s");
+      strcpy(form_a4_n4, " %c.%d.%d.%d  %s");
+      strcpy(form_a4_n5, "        %c.%d.%d.%d.%d  %s");
+   }
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  init_toc_forms_no_numbers():
+*     ??? (description missing)
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
 
 LOCAL void init_toc_forms_no_numbers(void)
 {
-        char s[32];
+   char   s[32];  /* */
 
-        switch(desttype)
-        {       case TOAQV:
-                case TOWIN:
-                case TOWH4:
-                        strcpy(form_t1_n1, "{%s}\\par\\pard");
-                        strcpy(form_t1_n2, "\\li560{%s}\\par\\pard");
-                        strcpy(form_t1_n3, "\\li1120{%s}\\par\\pard");
-                        strcpy(form_t1_n4, "\\li1680{%s}\\par\\pard");
-                        strcpy(form_t1_n5, "\\li1680{%s}\\par\\pard"); /* ToDo: ??? */
-                        strcpy(form_t2_n2, "{%s}\\par\\pard");
-                        strcpy(form_t2_n3, "\\li560{%s}\\par\\pard");
-                        strcpy(form_t2_n4, "\\li1120{%s}\\par\\pard");
-                        strcpy(form_t2_n5, "\\li1120{%s}\\par\\pard"); /* ToDo: ??? */
-                        strcpy(form_t3_n3, "{%s}\\par\\pard");
-                        strcpy(form_t3_n4, "\\li560{%s}\\par\\pard");
-                        strcpy(form_t3_n5, "\\li560{%s}\\par\\pard"); /* ToDo: ??? */
-                        strcpy(form_t4_n4, "{%s}\\par\\pard");
-                        strcpy(form_t4_n5, "{%s}\\par\\pard"); /* ToDo: ??? */
-                        strcpy(form_t5_n5, "{%s}\\par\\pard"); /* ToDo: ??? */
+   switch(desttype)
+   {
+   case TOAQV:
+   case TOWIN:
+   case TOWH4:
+      strcpy(form_t1_n1, "{%s}\\par\\pard");
+      strcpy(form_t1_n2, "\\li560{%s}\\par\\pard");
+      strcpy(form_t1_n3, "\\li1120{%s}\\par\\pard");
+      strcpy(form_t1_n4, "\\li1680{%s}\\par\\pard");
+      strcpy(form_t1_n5, "\\li1680{%s}\\par\\pard"); /* ToDo: ??? */
+      strcpy(form_t2_n2, "{%s}\\par\\pard");
+      strcpy(form_t2_n3, "\\li560{%s}\\par\\pard");
+      strcpy(form_t2_n4, "\\li1120{%s}\\par\\pard");
+      strcpy(form_t2_n5, "\\li1120{%s}\\par\\pard"); /* ToDo: ??? */
+      strcpy(form_t3_n3, "{%s}\\par\\pard");
+      strcpy(form_t3_n4, "\\li560{%s}\\par\\pard");
+      strcpy(form_t3_n5, "\\li560{%s}\\par\\pard"); /* ToDo: ??? */
+      strcpy(form_t4_n4, "{%s}\\par\\pard");
+      strcpy(form_t4_n5, "{%s}\\par\\pard"); /* ToDo: ??? */
+      strcpy(form_t5_n5, "{%s}\\par\\pard"); /* ToDo: ??? */
 
-                        strcpy(form_a1_n1, form_t1_n1);
-                        strcpy(form_a1_n2, form_t1_n2);
-                        strcpy(form_a1_n3, form_t1_n3);
-                        strcpy(form_a1_n4, form_t1_n4);
-                        strcpy(form_a1_n5, form_t1_n5);
-                        strcpy(form_a2_n2, form_t2_n2);
-                        strcpy(form_a2_n3, form_t2_n3);
-                        strcpy(form_a2_n4, form_t2_n4);
-                        strcpy(form_a2_n5, form_t2_n5);
-                        strcpy(form_a3_n3, form_t3_n3);
-                        strcpy(form_a3_n4, form_t3_n4);
-                        strcpy(form_a3_n5, form_t3_n5);
-                        strcpy(form_a4_n4, form_t4_n4);
-                        strcpy(form_a4_n5, form_t4_n5);
-                        strcpy(form_a5_n5, form_t5_n5);
-                        break;
+      strcpy(form_a1_n1, form_t1_n1);
+      strcpy(form_a1_n2, form_t1_n2);
+      strcpy(form_a1_n3, form_t1_n3);
+      strcpy(form_a1_n4, form_t1_n4);
+      strcpy(form_a1_n5, form_t1_n5);
+      strcpy(form_a2_n2, form_t2_n2);
+      strcpy(form_a2_n3, form_t2_n3);
+      strcpy(form_a2_n4, form_t2_n4);
+      strcpy(form_a2_n5, form_t2_n5);
+      strcpy(form_a3_n3, form_t3_n3);
+      strcpy(form_a3_n4, form_t3_n4);
+      strcpy(form_a3_n5, form_t3_n5);
+      strcpy(form_a4_n4, form_t4_n4);
+      strcpy(form_a4_n5, form_t4_n5);
+      strcpy(form_a5_n5, form_t5_n5);
+      break;
+      
 
-                case TOHAH:                     /* V6.5.17 */
-                case TOHTM:
-                case TOMHH:
-                        strcpy(s, "<li>%s</li>");
+   case TOHAH:
+   case TOHTM:
+   case TOMHH:
+      strcpy(s, "<li>%s</li>");
 
-                        strcpy(form_t1_n1, s);
-                        strcpy(form_t1_n2, s);
-                        strcpy(form_t1_n3, s);
-                        strcpy(form_t1_n4, s);
-                        strcpy(form_t1_n5, s);
-                        strcpy(form_t2_n2, s);
-                        strcpy(form_t2_n3, s);
-                        strcpy(form_t2_n4, s);
-                        strcpy(form_t2_n4, s);
-                        strcpy(form_t3_n3, s);
-                        strcpy(form_t3_n4, s);
-                        strcpy(form_t3_n5, s);
-                        strcpy(form_t4_n4, s);
-                        strcpy(form_t4_n5, s);
-                        strcpy(form_t5_n5, s);
+      strcpy(form_t1_n1, s);
+      strcpy(form_t1_n2, s);
+      strcpy(form_t1_n3, s);
+      strcpy(form_t1_n4, s);
+      strcpy(form_t1_n5, s);
+      strcpy(form_t2_n2, s);
+      strcpy(form_t2_n3, s);
+      strcpy(form_t2_n4, s);
+      strcpy(form_t2_n4, s);
+      strcpy(form_t3_n3, s);
+      strcpy(form_t3_n4, s);
+      strcpy(form_t3_n5, s);
+      strcpy(form_t4_n4, s);
+      strcpy(form_t4_n5, s);
+      strcpy(form_t5_n5, s);
 
-                        strcpy(form_a1_n1, s);
-                        strcpy(form_a1_n2, s);
-                        strcpy(form_a1_n3, s);
-                        strcpy(form_a1_n4, s);
-                        strcpy(form_a1_n5, s);
-                        strcpy(form_a2_n2, s);
-                        strcpy(form_a2_n3, s);
-                        strcpy(form_a2_n4, s);
-                        strcpy(form_a2_n5, s);
-                        strcpy(form_a3_n3, s);
-                        strcpy(form_a3_n4, s);
-                        strcpy(form_a3_n5, s);
-                        strcpy(form_a4_n4, s);
-                        strcpy(form_a4_n5, s);
-                        strcpy(form_a5_n5, s);
-                        break;
+      strcpy(form_a1_n1, s);
+      strcpy(form_a1_n2, s);
+      strcpy(form_a1_n3, s);
+      strcpy(form_a1_n4, s);
+      strcpy(form_a1_n5, s);
+      strcpy(form_a2_n2, s);
+      strcpy(form_a2_n3, s);
+      strcpy(form_a2_n4, s);
+      strcpy(form_a2_n5, s);
+      strcpy(form_a3_n3, s);
+      strcpy(form_a3_n4, s);
+      strcpy(form_a3_n5, s);
+      strcpy(form_a4_n4, s);
+      strcpy(form_a4_n5, s);
+      strcpy(form_a5_n5, s);
+      break;
+      
 
-                case TOTEX:
-                case TOPDL:
-                        strcpy(s, "\\item %s");
+   case TOTEX:
+   case TOPDL:
+      strcpy(s, "\\item %s");
 
-                        strcpy(form_t1_n1, s);
-                        strcpy(form_t1_n2, s);
-                        strcpy(form_t1_n3, s);
-                        strcpy(form_t1_n4, s);
-                        strcpy(form_t1_n5, s);
-                        strcpy(form_t2_n2, s);
-                        strcpy(form_t2_n3, s);
-                        strcpy(form_t2_n4, s);
-                        strcpy(form_t2_n4, s);
-                        strcpy(form_t3_n3, s);
-                        strcpy(form_t3_n4, s);
-                        strcpy(form_t3_n5, s);
-                        strcpy(form_t4_n4, s);
-                        strcpy(form_t4_n5, s);
-                        strcpy(form_t5_n5, s);
+      strcpy(form_t1_n1, s);
+      strcpy(form_t1_n2, s);
+      strcpy(form_t1_n3, s);
+      strcpy(form_t1_n4, s);
+      strcpy(form_t1_n5, s);
+      strcpy(form_t2_n2, s);
+      strcpy(form_t2_n3, s);
+      strcpy(form_t2_n4, s);
+      strcpy(form_t2_n4, s);
+      strcpy(form_t3_n3, s);
+      strcpy(form_t3_n4, s);
+      strcpy(form_t3_n5, s);
+      strcpy(form_t4_n4, s);
+      strcpy(form_t4_n5, s);
+      strcpy(form_t5_n5, s);
 
-                        strcpy(form_a1_n1, s);
-                        strcpy(form_a1_n2, s);
-                        strcpy(form_a1_n3, s);
-                        strcpy(form_a1_n4, s);
-                        strcpy(form_a1_n5, s);
-                        strcpy(form_a2_n2, s);
-                        strcpy(form_a2_n3, s);
-                        strcpy(form_a2_n4, s);
-                        strcpy(form_a2_n5, s);
-                        strcpy(form_a3_n3, s);
-                        strcpy(form_a3_n4, s);
-                        strcpy(form_a3_n5, s);
-                        strcpy(form_a4_n4, s);
-                        strcpy(form_a4_n5, s);
-                        strcpy(form_a5_n5, s);
-                        break;
+      strcpy(form_a1_n1, s);
+      strcpy(form_a1_n2, s);
+      strcpy(form_a1_n3, s);
+      strcpy(form_a1_n4, s);
+      strcpy(form_a1_n5, s);
+      strcpy(form_a2_n2, s);
+      strcpy(form_a2_n3, s);
+      strcpy(form_a2_n4, s);
+      strcpy(form_a2_n5, s);
+      strcpy(form_a3_n3, s);
+      strcpy(form_a3_n4, s);
+      strcpy(form_a3_n5, s);
+      strcpy(form_a4_n4, s);
+      strcpy(form_a4_n5, s);
+      strcpy(form_a5_n5, s);
+      break;
+      
 
-                case TOINF:
-                        strcpy(s, "%s");
+   case TOINF:
+      strcpy(s, "%s");
 
-                        strcpy(form_t1_n1, s);
-                        strcpy(form_t1_n2, s);
-                        strcpy(form_t1_n3, s);
-                        strcpy(form_t1_n4, s);
-                        strcpy(form_t1_n5, s);
-                        strcpy(form_t2_n2, s);
-                        strcpy(form_t2_n3, s);
-                        strcpy(form_t2_n4, s);
-                        strcpy(form_t2_n4, s);
-                        strcpy(form_t3_n3, s);
-                        strcpy(form_t3_n4, s);
-                        strcpy(form_t3_n5, s);
-                        strcpy(form_t4_n4, s);
-                        strcpy(form_t4_n5, s);
-                        strcpy(form_t5_n5, s);
+      strcpy(form_t1_n1, s);
+      strcpy(form_t1_n2, s);
+      strcpy(form_t1_n3, s);
+      strcpy(form_t1_n4, s);
+      strcpy(form_t1_n5, s);
+      strcpy(form_t2_n2, s);
+      strcpy(form_t2_n3, s);
+      strcpy(form_t2_n4, s);
+      strcpy(form_t2_n4, s);
+      strcpy(form_t3_n3, s);
+      strcpy(form_t3_n4, s);
+      strcpy(form_t3_n5, s);
+      strcpy(form_t4_n4, s);
+      strcpy(form_t4_n5, s);
+      strcpy(form_t5_n5, s);
 
-                        strcpy(form_a1_n1, s);
-                        strcpy(form_a1_n2, s);
-                        strcpy(form_a1_n3, s);
-                        strcpy(form_a1_n4, s);
-                        strcpy(form_a1_n5, s);
-                        strcpy(form_a2_n2, s);
-                        strcpy(form_a2_n3, s);
-                        strcpy(form_a2_n4, s);
-                        strcpy(form_a2_n5, s);
-                        strcpy(form_a3_n3, s);
-                        strcpy(form_a3_n4, s);
-                        strcpy(form_a3_n5, s);
-                        strcpy(form_a4_n4, s);
-                        strcpy(form_a4_n5, s);
-                        strcpy(form_a5_n5, s);
-                        break;
+      strcpy(form_a1_n1, s);
+      strcpy(form_a1_n2, s);
+      strcpy(form_a1_n3, s);
+      strcpy(form_a1_n4, s);
+      strcpy(form_a1_n5, s);
+      strcpy(form_a2_n2, s);
+      strcpy(form_a2_n3, s);
+      strcpy(form_a2_n4, s);
+      strcpy(form_a2_n5, s);
+      strcpy(form_a3_n3, s);
+      strcpy(form_a3_n4, s);
+      strcpy(form_a3_n5, s);
+      strcpy(form_a4_n4, s);
+      strcpy(form_a4_n5, s);
+      strcpy(form_a5_n5, s);
+      break;
+      
 
-                /* New in r6pl15 [NHz] */
-                case TOKPS:
-                        strcpy(form_t1_n1, " %s newline");
-                        strcpy(form_t1_n2, "    %s newline");
-                        strcpy(form_t1_n3, "       %s newline");
-                        strcpy(form_t1_n4, "          %s newline");
-                        strcpy(form_t1_n5, "             %s newline");
-                        strcpy(form_t2_n2, " %s newline");
-                        strcpy(form_t2_n3, "    %s newline");
-                        strcpy(form_t2_n4, "       %s newline");
-                        strcpy(form_t2_n5, "          %s newline");
-                        strcpy(form_t3_n3, " %s newline");
-                        strcpy(form_t3_n4, "    %s newline");
-                        strcpy(form_t3_n5, "      %s newline");
-                        strcpy(form_t4_n4, " %s newline");
-                        strcpy(form_t4_n5, "   %s newline");
-                        strcpy(form_t5_n5, " %s newline");
+                                          /* New in r6pl15 [NHz] */
+   case TOKPS:
+      strcpy(form_t1_n1, " %s newline");
+      strcpy(form_t1_n2, "    %s newline");
+      strcpy(form_t1_n3, "       %s newline");
+      strcpy(form_t1_n4, "          %s newline");
+      strcpy(form_t1_n5, "             %s newline");
+      strcpy(form_t2_n2, " %s newline");
+      strcpy(form_t2_n3, "    %s newline");
+      strcpy(form_t2_n4, "       %s newline");
+      strcpy(form_t2_n5, "          %s newline");
+      strcpy(form_t3_n3, " %s newline");
+      strcpy(form_t3_n4, "    %s newline");
+      strcpy(form_t3_n5, "      %s newline");
+      strcpy(form_t4_n4, " %s newline");
+      strcpy(form_t4_n5, "   %s newline");
+      strcpy(form_t5_n5, " %s newline");
 
-                        strcpy(form_a1_n1, " %s newline");
-                        strcpy(form_a1_n2, "    %s newline");
-                        strcpy(form_a1_n3, "       %s newline");
-                        strcpy(form_a1_n4, "          %s newline");
-                        strcpy(form_a1_n5, "             %s newline");
-                        strcpy(form_a2_n2, " %s newline");
-                        strcpy(form_a2_n3, "    %s newline");
-                        strcpy(form_a2_n4, "       %s newline");
-                        strcpy(form_a2_n5, "          %s newline");
-                        strcpy(form_a3_n3, " %s newline");
-                        strcpy(form_a3_n4, "    %s newline");
-                        strcpy(form_a3_n5, "       %s newline");
-                        strcpy(form_a4_n4, " %s newline");
-                        strcpy(form_a4_n5, "    %s newline");
-                        strcpy(form_a5_n5, " %s newline");
-                        break;
+      strcpy(form_a1_n1, " %s newline");
+      strcpy(form_a1_n2, "    %s newline");
+      strcpy(form_a1_n3, "       %s newline");
+      strcpy(form_a1_n4, "          %s newline");
+      strcpy(form_a1_n5, "             %s newline");
+      strcpy(form_a2_n2, " %s newline");
+      strcpy(form_a2_n3, "    %s newline");
+      strcpy(form_a2_n4, "       %s newline");
+      strcpy(form_a2_n5, "          %s newline");
+      strcpy(form_a3_n3, " %s newline");
+      strcpy(form_a3_n4, "    %s newline");
+      strcpy(form_a3_n5, "       %s newline");
+      strcpy(form_a4_n4, " %s newline");
+      strcpy(form_a4_n5, "    %s newline");
+      strcpy(form_a5_n5, " %s newline");
+      break;
+      
 
-                default:
-                        strcpy(form_t1_n1, " %s");
-                        strcpy(form_t1_n2, "    %s");
-                        strcpy(form_t1_n3, "       %s");
-                        strcpy(form_t1_n4, "          %s");
-                        strcpy(form_t1_n5, "             %s");
-                        strcpy(form_t2_n2, " %s");
-                        strcpy(form_t2_n3, "    %s");
-                        strcpy(form_t2_n4, "       %s");
-                        strcpy(form_t2_n5, "          %s");
-                        strcpy(form_t3_n3, " %s");
-                        strcpy(form_t3_n4, "    %s");
-                        strcpy(form_t3_n5, "       %s");
-                        strcpy(form_t4_n4, " %s");
-                        strcpy(form_t4_n5, "    %s");
-                        strcpy(form_t5_n5, " %s");
+   default:
+      strcpy(form_t1_n1, " %s");
+      strcpy(form_t1_n2, "    %s");
+      strcpy(form_t1_n3, "       %s");
+      strcpy(form_t1_n4, "          %s");
+      strcpy(form_t1_n5, "             %s");
+      strcpy(form_t2_n2, " %s");
+      strcpy(form_t2_n3, "    %s");
+      strcpy(form_t2_n4, "       %s");
+      strcpy(form_t2_n5, "          %s");
+      strcpy(form_t3_n3, " %s");
+      strcpy(form_t3_n4, "    %s");
+      strcpy(form_t3_n5, "       %s");
+      strcpy(form_t4_n4, " %s");
+      strcpy(form_t4_n5, "    %s");
+      strcpy(form_t5_n5, " %s");
 
-                        strcpy(form_a1_n1, " %s");
-                        strcpy(form_a1_n2, "    %s");
-                        strcpy(form_a1_n3, "       %s");
-                        strcpy(form_a1_n4, "          %s");
-                        strcpy(form_a1_n5, "             %s");
-                        strcpy(form_a2_n2, " %s");
-                        strcpy(form_a2_n3, "    %s");
-                        strcpy(form_a2_n4, "       %s");
-                        strcpy(form_a2_n5, "          %s");
-                        strcpy(form_a3_n3, " %s");
-                        strcpy(form_a3_n4, "    %s");
-                        strcpy(form_a3_n5, "       %s");
-                        strcpy(form_a4_n4, " %s");
-                        strcpy(form_a4_n5, "    %s");
-                        strcpy(form_a5_n5, " %s");
-                        break;
-        }
-
-}       /* init_toc_forms_no_numbers */
+      strcpy(form_a1_n1, " %s");
+      strcpy(form_a1_n2, "    %s");
+      strcpy(form_a1_n3, "       %s");
+      strcpy(form_a1_n4, "          %s");
+      strcpy(form_a1_n5, "             %s");
+      strcpy(form_a2_n2, " %s");
+      strcpy(form_a2_n3, "    %s");
+      strcpy(form_a2_n4, "       %s");
+      strcpy(form_a2_n5, "          %s");
+      strcpy(form_a3_n3, " %s");
+      strcpy(form_a3_n4, "    %s");
+      strcpy(form_a3_n5, "       %s");
+      strcpy(form_a4_n4, " %s");
+      strcpy(form_a4_n5, "    %s");
+      strcpy(form_a5_n5, " %s");
+   }
+}
 
 
+
+
+
+/*******************************************************************************
+*
+*  init_module_toc_pass2():
+*     ??? (description missing)
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
 
 GLOBAL void init_module_toc_pass2(void)
 {
-        char sF[128], sS[128];
+   char   sF[128],  /* */
+          sS[128];  /* */
+   
+   
+   form_t1_n1[0] = EOS;
+   form_t1_n2[0] = EOS;
+   form_t1_n3[0] = EOS;
+   
+   form_t2_n2[0] = EOS;
+   form_t2_n3[0] = EOS;
+   
+   form_t3_n3[0] = EOS;
+   
 
-        form_t1_n1[0]= EOS;             form_t1_n2[0]= EOS;             form_t1_n3[0]= EOS;
-        form_a1_n1[0]= EOS;             form_a1_n2[0]= EOS;             form_a1_n3[0]= EOS;
+   form_a1_n1[0] = EOS;
+   form_a1_n2[0] = EOS;
+   form_a1_n3[0] = EOS;
 
-        form_t2_n2[0]= EOS;             form_t2_n3[0]= EOS;
-        form_a2_n2[0]= EOS;             form_a2_n3[0]= EOS;
+   form_a2_n2[0] = EOS;
+   form_a2_n3[0] = EOS;
 
-        form_t3_n3[0]= EOS;
-        form_a3_n3[0]= EOS;
+   form_a3_n3[0] = EOS;
+   
 
-        if (no_numbers)
-        {       init_toc_forms_no_numbers();
-        }
-        else
-        {       init_toc_forms_numbers();
-        }
-
-        /*r6pl5: die Reinkarnation von !use_short_tocs*/
-        if (use_short_tocs)
-        {       subtocs1_depth= 1;
-                subtocs2_depth= 1;
-                subtocs3_depth= 1;
-                subtocs4_depth= 1;
-        }
-
-        if (subtocs1_depth<=0 || subtocs1_depth>9)
-        {       subtocs1_depth= 9;
-        }
-
-        if (subtocs2_depth<=0 || subtocs2_depth>9)
-        {       subtocs2_depth= 9;
-        }
-
-        if (subtocs3_depth<=0 || subtocs3_depth>9)
-        {       subtocs3_depth= 9;
-        }
-
-        if (subtocs4_depth<=0 || subtocs4_depth>9)
-        {       subtocs4_depth= 9;
-        }
-        /* Die Formatkommando angeben, die fuer die Inhaltsausgabe */
-        /* verwendet werden, um die Einrueckungen der Listen */
-        /* zu erzeugen */
-        switch (desttype)       /* r6pl2 */
-        {
-                case TOHAH:                     /* V6.5.17 */
-                case TOHTM:
-                case TOMHH:
-                        /* Changed in r6pl16 [NHz] */
-                        strcpy(toc_list_top,    "<ul class=\"content\">");
-                        strcpy(toc_list_end,    "</ul>\n");
-                        use_toc_list_commands= TRUE;
-                        break;
-                case TOTEX:
-                case TOPDL:
-                        strcpy(toc_list_top,    "\\begin{itemize}\n\\itemsep 0pt\n\\parsep 0pt\n\\parskip 0pt");
-                        strcpy(toc_list_end,    "\\end{itemize}");
-                        use_toc_list_commands= TRUE;
-                        break;
-                default:
-                        toc_list_top[0]= EOS;
-                        toc_list_end[0]= EOS;
-                        use_toc_list_commands= FALSE;
-                        break;
-        }
-
-        if (html_frames_layout)
-        {       sprintf(html_target, " target=\"%s\"", FRAME_NAME_CON);
-        }
-        else
-        {       html_target[0]= EOS;
-        }
-
-        /* Font-Tags vorbestimmen */
-
-        sF[0]= 0;
-        sS[0]= 0;
-        sHtmlPropfontStart[0]= EOS;
-        sHtmlPropfontEnd[0]= EOS;
-        iDocHtmlPropfontSize= 0;
-
-        if (sDocHtmlPropfontName[0]!=EOS)
-        {       sprintf(sF, " face=\"%s\"", sDocHtmlPropfontName);
-        }
-        if (sDocHtmlPropfontSize[0]!=EOS)
-        {       sprintf(sS, " size=\"%s\"", sDocHtmlPropfontSize);
-                iDocHtmlPropfontSize= atoi(sDocHtmlPropfontSize);
-        }
-
-        if (sF[0]!=EOS || sS[0]!=EOS)
-        {       sprintf(sHtmlPropfontStart, "<font%s%s>", sF, sS);
-                strcpy(sHtmlPropfontEnd, "</font>");
-        }
-
-        sF[0]= 0;
-        sS[0]= 0;
-        sHtmlMonofontStart[0]= EOS;
-        sHtmlMonofontEnd[0]= EOS;
-        iDocHtmlMonofontSize= 0;
-
-        if (sDocHtmlMonofontName[0]!=EOS)
-        {       sprintf(sF, " face=\"%s\"", sDocHtmlMonofontName);
-        }
-        if (sDocHtmlMonofontSize[0]!=EOS)
-        {       sprintf(sS, " size=\"%s\"", sDocHtmlMonofontSize);
-                iDocHtmlMonofontSize= atoi(sDocHtmlMonofontSize);
-        }
-
-        if (sF[0]!=EOS || sS[0]!=EOS)
-        {       sprintf(sHtmlMonofontStart, "<font%s%s>", sF, sS);
-                strcpy(sHtmlMonofontEnd, "</font>");
-        }
-
-}       /* init_module_toc_pass2 */
+   if (no_numbers)
+      init_toc_forms_no_numbers();
+   else
+      init_toc_forms_numbers();
 
 
-/*      ############################################################
-        #
-        # Modulcheck
-        #
-        ############################################################    */
+   /*r6pl5: die Reinkarnation von !use_short_tocs */
+   
+   if (use_short_tocs)
+   {
+      subtocs1_depth = 1;
+      subtocs2_depth = 1;
+      subtocs3_depth = 1;
+      subtocs4_depth = 1;
+   }
+
+   if (subtocs1_depth <= 0 || subtocs1_depth > 9)
+      subtocs1_depth = 9;
+
+   if (subtocs2_depth <= 0 || subtocs2_depth > 9)
+      subtocs2_depth = 9;
+
+   if (subtocs3_depth <= 0 || subtocs3_depth > 9)
+      subtocs3_depth = 9;
+
+   if (subtocs4_depth <= 0 || subtocs4_depth > 9)
+       subtocs4_depth = 9;
+
+
+   /* Die Formatkommando angeben, die fuer die Inhaltsausgabe */
+   /* verwendet werden, um die Einrueckungen der Listen zu erzeugen */
+
+   switch (desttype)                      /* r6pl2 */
+   {
+   case TOHAH:
+   case TOHTM:
+   case TOMHH:
+                                          /* Changed in r6pl16 [NHz] */
+      strcpy(toc_list_top, "<ul class=\"content\">");
+      strcpy(toc_list_end, "</ul>\n");
+      
+      use_toc_list_commands= TRUE;
+      break;
+      
+      
+   case TOTEX:
+   case TOPDL:
+      strcpy(toc_list_top, "\\begin{itemize}\n\\itemsep 0pt\n\\parsep 0pt\n\\parskip 0pt");
+      strcpy(toc_list_end, "\\end{itemize}");
+      
+      use_toc_list_commands = TRUE;
+      break;
+      
+      
+   default:
+      toc_list_top[0] = EOS;
+      toc_list_end[0] = EOS;
+      use_toc_list_commands = FALSE;
+   }
+
+   if (html_frames_layout)
+      sprintf(html_target, " target=\"%s\"", FRAME_NAME_CON);
+   else
+      html_target[0] = EOS;
+
+
+   /* Font-Tags vorbestimmen */
+
+   sF[0] = 0;
+   sS[0] = 0;
+   
+   sHtmlPropfontStart[0] = EOS;
+   sHtmlPropfontEnd[0]   = EOS;
+   iDocHtmlPropfontSize  = 0;
+
+   if (sDocHtmlPropfontName[0] != EOS)
+   {
+      sprintf(sF, " face=\"%s\"", sDocHtmlPropfontName);
+   }
+   
+   if (sDocHtmlPropfontSize[0] != EOS)
+   {
+      sprintf(sS, " size=\"%s\"", sDocHtmlPropfontSize);
+      iDocHtmlPropfontSize= atoi(sDocHtmlPropfontSize);
+   }
+
+   if (sF[0] != EOS || sS[0] != EOS)
+   {
+      sprintf(sHtmlPropfontStart, "<font%s%s>", sF, sS);
+      strcpy(sHtmlPropfontEnd, "</font>");
+   }
+
+   sF[0] = 0;
+   sS[0] = 0;
+   
+   sHtmlMonofontStart[0] = EOS;
+   sHtmlMonofontEnd[0]   = EOS;
+   iDocHtmlMonofontSize  = 0;
+
+   if (sDocHtmlMonofontName[0] != EOS)
+   {
+      sprintf(sF, " face=\"%s\"", sDocHtmlMonofontName);
+   }
+   
+   if (sDocHtmlMonofontSize[0] != EOS)
+   {
+      sprintf(sS, " size=\"%s\"", sDocHtmlMonofontSize);
+      iDocHtmlMonofontSize= atoi(sDocHtmlMonofontSize);
+   }
+
+   if (sF[0] != EOS || sS[0] != EOS)
+   {
+      sprintf(sHtmlMonofontStart, "<font%s%s>", sF, sS);
+      strcpy(sHtmlMonofontEnd, "</font>");
+   }
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  check_module_toc_pass1():
+*     ??? (description missing)
+*
+*  Return:
+*      TRUE: check was OK
+*     FALSE: an issue has been found
+*
+******************************************|************************************/
+
 GLOBAL BOOLEAN check_module_toc_pass1(void)
 {
-        int i, j;
-        char s[512], sTyp[32], sNode[256];
-        BOOLEAN ret= TRUE;
-        BOOLEAN checkString;
-
-        /* Schauen, ob bei Hypertextformaten Dinge eindeutig benutzt werden */
-        switch (desttype)
-        {
-                case TOHAH:                     /* V6.5.17 */
-                case TOHTM:
-                case TOMHH:
-                case TOWIN:
-                case TOWH4:
-                case TOPCH:
-                case TOSTG:
-                case TOAMG:
-                case TOTEX:
-                case TOPDL:
-                        show_status_info("Checking nodes, labels and aliases...");
-                        for (i=1; i<=p1_lab_counter; i++)
-                        {
-                                for (j=i+1; j<=p1_lab_counter; j++)
-                                {
-                                        if (strcmp(lab[i]->name, lab[j]->name)==0)
-                                        {
-                                                sprintf(s, "label \"%s\" used twice", lab[i]->name);
-                                                fatal_message(s);
-
-                                                sNode[0]= EOS;
-                                                strcpy(sTyp, "as a label");
-                                                if (lab[i]->is_node)
-                                                {       strcpy(sTyp, "as a node");
-                                                }
-                                                if (lab[i]->is_alias)
-                                                {       strcpy(sTyp, "as an alias");
-                                                }
-                                                if (!lab[i]->is_node)
-                                                {       sprintf(sNode, " in node '%s'", toc[lab[i]->tocindex]->name);
-                                                }
-                                                sprintf(s, "1. %s%s", sTyp, sNode);
-                                                note_message(s);
-
-                                                sNode[0]= EOS;
-                                                strcpy(sTyp, "as a label");
-                                                if (lab[j]->is_node)
-                                                {       strcpy(sTyp, "as a node");
-                                                }
-                                                if (lab[j]->is_alias)
-                                                {       strcpy(sTyp, "as an alias");
-                                                }
-                                                if (!lab[j]->is_node)
-                                                {       sprintf(sNode, " in node '%s'", toc[lab[j]->tocindex]->name);
-                                                }
-                                                sprintf(s, "2. %s%s", sTyp, sNode);
-                                                note_message(s);
-
-                                                ret= FALSE;
-                                        }
-                                }
-                        }
-                        break;
-        }
-
-        /* Doppelt vergebene HTML-Dateinamen testen, dabei das Mergen non Nodes beachten */
-        /* Werden Nodes in einer Datei vereint, dann besitzen die unteren Ebenen den */
-        /* gleichen Dateinamen wie die obere Ebene! r6pl13 */
-
-        switch (desttype)
-        {
-                case TOHAH:                     /* V6.5.17 */
-                case TOHTM:
-                case TOMHH:
-                        if (!html_merge_node1)
-                        {
-                                show_status_info("Checking HTML file names...");
-
-                                for (i=0; i<p1_toc_counter; i++)
-                                {
-                                        for (j=i+1; j<p1_toc_counter; j++)
-                                        {
-                                                checkString= FALSE;
-
-                                                if (html_merge_node5)
-                                                {
-                                                        checkString=((toc[i]->n1 != toc[j]->n1) || (toc[i]->n2 != toc[j]->n2) || (toc[i]->n3 != toc[j]->n3) || (toc[i]->n4 != toc[j]->n4));
-                                                }
-
-                                                if (html_merge_node4)
-                                                {
-                                                        checkString=((toc[i]->n1 != toc[j]->n1) || (toc[i]->n2 != toc[j]->n2) || (toc[i]->n3 != toc[j]->n3));
-                                                }
-
-                                                if (html_merge_node3)
-                                                {
-                                                        checkString=((toc[i]->n1 != toc[j]->n1) || (toc[i]->n2 != toc[j]->n2));
-                                                }
-
-                                                if (html_merge_node2)
-                                                {
-                                                        checkString= (toc[i]->n1 != toc[j]->n1);
-                                                }
+   int       i,            /* counter */
+             j;            /* cunter */
+   char      s[512],       /* */
+             sTyp[32],     /* */
+             sNode[256];   /* */
+   BOOLEAN   ret = TRUE;   /* */
+   BOOLEAN   checkString;  /* */
 
 
-                                                if (checkString && strcmp(toc[i]->filename, toc[j]->filename)==0)
-                                                {
-                                                        sprintf(s, "file name \"%s\" used in \"%s\" and \"%s\"",
-                                                                toc[i]->filename,
-                                                                toc[i]->name,
-                                                                toc[j]->name);
+   /* --- Schauen, ob bei Hypertextformaten Dinge eindeutig benutzt werden --- */
 
-                                                        fatal_message(s);
-                                                        ret= FALSE;
-                                                }
-                                        }
-                                }
-                        }
-                        break;
-        }
+   switch (desttype)
+   {
+   case TOHAH:
+   case TOHTM:
+   case TOMHH:
+   case TOWIN:
+   case TOWH4:
+   case TOPCH:
+   case TOSTG:
+   case TOAMG:
+   case TOTEX:
+   case TOPDL:
+      show_status_info("Checking nodes, labels and aliases...");
+      
+      for (i = 1; i <= p1_lab_counter; i++)
+      {
+         for (j = i + 1; j <= p1_lab_counter; j++)
+         {
+            if (strcmp(lab[i]->name, lab[j]->name) == 0)
+            {
+               sprintf(s, "label \"%s\" used twice", lab[i]->name);
+               fatal_message(s);
 
-        return ret;
+               sNode[0] = EOS;
+               strcpy(sTyp, "as a label");
+               
+               if (lab[i]->is_node)
+                  strcpy(sTyp, "as a node");
+               
+               if (lab[i]->is_alias)
+                  strcpy(sTyp, "as an alias");
 
-}       /* check_module_toc_pass1 */
+               if (!lab[i]->is_node)
+                  sprintf(sNode, " in node '%s'", toc[lab[i]->tocindex]->name);
+               
+               sprintf(s, "1. %s%s", sTyp, sNode);
+               note_message(s);
 
+               sNode[0] = EOS;
+               strcpy(sTyp, "as a label");
+
+               if (lab[j]->is_node)
+                  strcpy(sTyp, "as a node");
+
+               if (lab[j]->is_alias)
+                  strcpy(sTyp, "as an alias");
+
+               if (!lab[j]->is_node)
+                  sprintf(sNode, " in node '%s'", toc[lab[j]->tocindex]->name);
+
+               sprintf(s, "2. %s%s", sTyp, sNode);
+               note_message(s);
+
+               ret = FALSE;
+            }
+         }
+      }
+   }
+
+   /* --- Doppelt vergebene HTML-Dateinamen testen, dabei das Mergen non Nodes beachten --- */
+   /* Werden Nodes in einer Datei vereint, dann besitzen die unteren Ebenen den */
+   /* gleichen Dateinamen wie die obere Ebene! r6pl13 */
+
+   switch (desttype)
+   {
+   case TOHAH:
+   case TOHTM:
+   case TOMHH:
+      if (!html_merge_node1)
+      {
+         show_status_info("Checking HTML file names...");
+
+         for (i = 0; i < p1_toc_counter; i++)
+         {
+            for (j = i + 1; j < p1_toc_counter; j++)
+            {
+               checkString = FALSE;
+
+               if (html_merge_node5)
+               {
+                  checkString = (    (toc[i]->n1 != toc[j]->n1)
+                                  || (toc[i]->n2 != toc[j]->n2)
+                                  || (toc[i]->n3 != toc[j]->n3)
+                                  || (toc[i]->n4 != toc[j]->n4) );
+               }
+
+               if (html_merge_node4)
+               {
+                  checkString = (    (toc[i]->n1 != toc[j]->n1)
+                                  || (toc[i]->n2 != toc[j]->n2)
+                                  || (toc[i]->n3 != toc[j]->n3) );
+               }
+
+               if (html_merge_node3)
+               {
+                  checkString = (    (toc[i]->n1 != toc[j]->n1)
+                                  || (toc[i]->n2 != toc[j]->n2) );
+               }
+
+               if (html_merge_node2)
+               {
+                  checkString = (toc[i]->n1 != toc[j]->n1);
+               }
+
+
+               if (checkString && strcmp(toc[i]->filename, toc[j]->filename) == 0)
+               {
+                  sprintf(s, "file name \"%s\" used in \"%s\" and \"%s\"",
+                     toc[i]->filename,
+                     toc[i]->name,
+                     toc[j]->name);
+
+                  fatal_message(s);
+                  ret = FALSE;
+               }
+            }
+         }
+      }
+   }
+
+   return ret;
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  check_module_toc_pass2():
+*     pass 2 check: see if labels or aliases have been (auto-)referenced
+*
+*  Return:
+*     TRUE
+*
+******************************************|************************************/
 
 GLOBAL BOOLEAN check_module_toc_pass2(void)
 {
-        int i;
-        char s[512];
+   int    i;       /* counter */
+   char   s[512];  /* */
+   
+   
+   show_status_info("");
+   show_status_info("Checking usage of labels and aliases...");
+   
+   for (i = 1; i < p1_lab_counter; i++)
+   {
+      if (!lab[i]->referenced)
+      {
+         if (!lab[i]->is_node)
+         {
+            sprintf(s, "label/alias '%s' in node '%s' wasn't referenced",
+               lab[i]->name,
+               toc[lab[i]->tocindex]->name);
 
-        show_status_info("");
-        show_status_info("Checking usage of labels and aliases...");
-        for (i=1; i<p1_lab_counter; i++)
-        {
-                if (!lab[i]->referenced)
-                {
-                        if (!lab[i]->is_node)
-                        {
-                                sprintf(s, "label/alias '%s' in node '%s' wasn't referenced",
-                                        lab[i]->name,
-                                        toc[lab[i]->tocindex]->name);
-                                note_message(s);
-                        }
-                }
-        }
-
-        return TRUE;
-}       /* check_module_toc_pass2 */
+            note_message(s);
+         }
+      }
+   }
+   
+   return TRUE;
+}
 
 
 
-/*      ############################################################
-        #
-        # Modulinit
-        #
-        ############################################################    */
+
+
+/*******************************************************************************
+*
+*  init_module_toc():
+*     initialize TOC module
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
+
 GLOBAL void init_module_toc(void)
 {
-        register int i;
-
-        /*      --------------------------------------------------------------  */
-        /*      In diesen Flags merkt sich UDO, welche Art von Node gerade              */
-        /*      aktiv ist (!node, !subnode, etc.)                                                               */
-        /*      --------------------------------------------------------------  */
-        active_nodetype= TOC_NONE;
+   register int   i;  /* */
 
 
-        /*      --------------------------------------------------------------  */
-        /*      toc_offset enthaelt einen Offset fuer die Kapitelnumerierung    */
-        /*      Das erste Kapitel erhaelt dann die Nummer (1+toc_offset)                */
-        /*      toc_offset kann auch negativ werden.                                                    */
-        /*      Die anderen Offsets entsprechend                                                                */
-        /*      --------------------------------------------------------------  */
-        toc_offset= 0;
-        subtoc_offset= 0;
-        subsubtoc_offset= 0;
-        subsubsubtoc_offset= 0;
-        subsubsubsubtoc_offset= 0;              /* [GS] */
+   /* -------------------------------------------------------------- */
+   /* In diesen Flags merkt sich UDO, welche Art von Node gerade     */
+   /* aktiv ist (!node, !subnode, etc.)                              */
+   /* -------------------------------------------------------------- */
+   
+   active_nodetype = TOC_NONE;
 
 
-        /*      --------------------------------------------------------------  */
-        /*      Zeiger auf den aktuellen Node, Subnode und Subsubnode                   */
-        /*      Mit diesen Variablen kann man toc[] direkt adressieren                  */
-        /*      --------------------------------------------------------------  */
-        curr_n1_index= 0;
-        curr_n2_index= 0;
-        curr_n3_index= 0;
-        curr_n4_index= 0;               /* [GS] */
+   /* -------------------------------------------------------------- */
+   /* toc_offset enthaelt einen Offset fuer die Kapitelnumerierung   */
+   /* Das erste Kapitel erhaelt dann die Nummer (1 + toc_offset)     */
+   /* toc_offset kann auch negativ werden.                           */
+   /* Die anderen Offsets entsprechend                               */
+   /* -------------------------------------------------------------- */
+   
+   toc_offset             = 0;
+   subtoc_offset          = 0;
+   subsubtoc_offset       = 0;
+   subsubsubtoc_offset    = 0;
+   subsubsubsubtoc_offset = 0;            /* [GS] */
 
 
-        /*      --------------------------------------------------------------  */
-        /*      Wenn auch nur ein Node existiert, dann kann ein !toc                    */
-        /*      ausgegeben werden. toc_available wird dann TRUE                                 */
-        /*      --------------------------------------------------------------  */
-        toc_available= FALSE;
-        apx_available= FALSE;
+   /* -------------------------------------------------------------- */
+   /* Zeiger auf den aktuellen Node, Subnode und Subsubnode          */
+   /* Mit diesen Variablen kann man toc[] direkt adressieren         */
+   /* -------------------------------------------------------------- */
+   
+   curr_n1_index = 0;
+   curr_n2_index = 0;
+   curr_n3_index = 0;
+   curr_n4_index = 0;                     /* [GS] */
 
 
-        /*      --------------------------------------------------------------  */
-        /*      Hier werden die absoluten Kapitelnummern vermerkt. Diese                */
-        /*      Nummern weichen von den Nummern in den Inhaltsverzeichnissen    */
-        /*      ab, falls unsichtbare Nodes (!node*) benutzt werden.                    */
-        /*      Beispiele:                                                                                                              */
-        /*      1  Node:        n1=1, n2=0, n3=0, n4=0                                                  */
-        /*      1.2  Node:      n1=1, n2=2, n3=0, n4=0                                                  */
-        /*      1.2.3  Node:    n1=1, n2=2, n3=3, n4=0                                                  */
-        /*      1.2.3.4  Node:  n1=1, n2=2, n3=3, n4=4                                                  */
-        /*      --------------------------------------------------------------  */
-        p1_toc_n1= 0;   p1_toc_n2= 0;   p1_toc_n3= 0;   p1_toc_n4= 0;   p1_toc_n5= 0;
-        p1_apx_n1= 0;   p1_apx_n2= 0;   p1_apx_n3= 0;   p1_apx_n4= 0;   p1_apx_n5= 0;
-
-        p2_toc_n1= 0;   p2_toc_n2= 0;   p2_toc_n3= 0;   p2_toc_n4= 0;   p2_toc_n5= 0;
-        p2_apx_n1= 0;   p2_apx_n2= 0;   p2_apx_n3= 0;   p2_apx_n4= 0;   p2_apx_n5= 0;
+   /* -------------------------------------------------------------- */
+   /* Wenn auch nur ein Node existiert, dann kann ein !toc           */
+   /* ausgegeben werden. toc_available wird dann TRUE                */
+   /* -------------------------------------------------------------- */
+   
+   toc_available = FALSE;
+   apx_available = FALSE;
 
 
-        /*      --------------------------------------------------------------  */
-        /*      Hier nun die Nummern, wie sie im Inhaltsverzeichis erscheinen   */
-        /*      --------------------------------------------------------------  */
-        p1_toc_nr1= 0;  p1_toc_nr2= 0;  p1_toc_nr3= 0;  p1_toc_nr4= 0; p1_toc_nr5= 0;
-        p1_apx_nr1= 0;  p1_apx_nr2= 0;  p1_apx_nr3= 0;  p1_apx_nr4= 0;  p1_apx_nr5= 0;
+   /* -------------------------------------------------------------- */
+   /* Hier werden die absoluten Kapitelnummern vermerkt. Diese       */
+   /* Nummern weichen von den Nummern in den Inhaltsverzeichnissen   */
+   /* ab, falls unsichtbare Nodes (!node*) benutzt werden.           */
+   /* Beispiele:                                                     */
+   /* 1  Node:        n1=1, n2=0, n3=0, n4=0                         */
+   /* 1.2  Node:      n1=1, n2=2, n3=0, n4=0                         */
+   /* 1.2.3  Node:    n1=1, n2=2, n3=3, n4=0                         */
+   /* 1.2.3.4  Node:  n1=1, n2=2, n3=3, n4=4                         */
+   /* -------------------------------------------------------------- */
+   
+   p1_toc_n1 = 0;
+   p1_toc_n2 = 0;
+   p1_toc_n3 = 0;
+   p1_toc_n4 = 0;
+   p1_toc_n5 = 0;
+   
+   p2_toc_n1 = 0;
+   p2_toc_n2 = 0;
+   p2_toc_n3 = 0;
+   p2_toc_n4 = 0;
+   p2_toc_n5 = 0;
+   
+   p1_apx_n1 = 0;
+   p1_apx_n2 = 0;
+   p1_apx_n3 = 0;
+   p1_apx_n4 = 0;
+   p1_apx_n5 = 0;
+
+   p2_apx_n1 = 0;
+   p2_apx_n2 = 0;
+   p2_apx_n3 = 0;
+   p2_apx_n4 = 0;
+   p2_apx_n5 = 0;
+
+
+   /* -------------------------------------------------------------- */
+   /* Hier nun die Nummern, wie sie im Inhaltsverzeichis erscheinen  */
+   /* -------------------------------------------------------------- */
+   
+   p1_toc_nr1 = 0;
+   p1_toc_nr2 = 0;
+   p1_toc_nr3 = 0;
+   p1_toc_nr4 = 0;
+   p1_toc_nr5 = 0;
+   
+   p1_apx_nr1 = 0;
+   p1_apx_nr2 = 0;
+   p1_apx_nr3 = 0;
+   p1_apx_nr4 = 0;
+   p1_apx_nr5 = 0;
+
+
+   /* -------------------------------------------------------------- */
+   /* In diesen Variablen werden die Indizes der letzten Kapitel     */
+   /* gesichert. Sie sind sehr wichtig, um die Links zu den          */
+   /* uebergeordneten Kapiteln in Hypertexten ohne lange Sucherei    */
+   /* erstellen zu koennen.                                          */
+   /* -------------------------------------------------------------- */
+   
+   last_n1_index = 0;
+   last_n2_index = 0;
+   last_n3_index = 0;
+   last_n4_index = 0;
+   last_n5_index = 0;                     /* [GS] */
+
+
+   /* -------------------------------------------------------------- */
+   /* Dieses Flag wird TRUE gesetzt, wenn das Inhaltsverzeichnis     */
+   /* mit !tableofcontents aufgerufen wird. Nodes koenne dann auf    */
+   /* dieses Inhaltsverzeichnis verweisen (z.B: ST-Guide per @toc)   */
+   /* -------------------------------------------------------------- */
+   
+   called_tableofcontents = FALSE;
+
+
+   /* -------------------------------------------------------------- */
+   /* Dieses Flag wird TRUE gesetzt, wenn die vierte Gliederungs-    */
+   /* Ebene benutzt wird. In der LaTeX-Preambel mussen dann einige   */
+   /* Befehle zusaetzlich ausgegeben werden.                         */
+   /* -------------------------------------------------------------- */
+   
+   called_subsubsubsubnode = FALSE;       /* [GS] */
+
+
+   /* -------------------------------------------------------------- */
+   /* p1_toc_counter enthaelt die Anzahl der in pass1() eingelesenen */
+   /* Eintraege fuer das toc[]-Array. Nach pass1() enthaelt          */
+   /* toc[p1_toc_counter] die Daten des letzten Kapitels.            */
+   /* p2_toc_counter ist entsprechend ein Zaehler fuer den pass2().  */
+   /* Waehren pass2() zeigt p2_toc_counter auf den aktuellen Eintrag */
+   /* des toc[]-Arrays.                                              */
+   /* -------------------------------------------------------------- */
+   
+   p1_toc_counter = 0;
+   p2_toc_counter = 0;      
+
+
+   /* -------------------------------------------------------------- */
+   /* toc[]-Array ausnullen und Inhaltsverzeichnis "eintragen"       */
+   /* -------------------------------------------------------------- */
+
+   for (i = 0; i < MAXTOCS; i++)
+      toc[i] = NULL;
+
+   add_toc_to_toc();                      /* r5pl6 */
+
+
+   /* -------------------------------------------------------------- */
+   /* lab[]-Array mit den Daten der referenzierbaren Stellen des     */
+   /* Dokumentes ausnullen und Zaehler zuruecksetzen.                */
+   /* -------------------------------------------------------------- */
+
+   for (i = 0; i < MAXLABELS; i++)
+      lab[i] = NULL;
+      
+   p1_lab_counter = 0;
+   p2_lab_counter = 0;
+
+
+   /* -------------------------------------------------------------- */
+   /* Kapitelzaehler zuruecksetzen                                   */
+   /* -------------------------------------------------------------- */
+
+   all_nodes             = 0;             /* r5pl7 */
+   all_subnodes          = 0;
+   all_subsubnodes       = 0;
+   all_subsubsubnodes    = 0;
+   all_subsubsubsubnodes = 0;             /* [GS] */
+
+
+   /* -------------------------------------------------------------- */
+   /* Die Zeichen setzen, die beim Referenzieren vor und nach einem  */
+   /* gefundenen Label erlaubt sind.                                 */
+   /* -------------------------------------------------------------- */
+
+   sprintf(allowed_next_chars, "\033 !\"#$%%&'()*+,-./:;<=>?@[\\]^_`{|}~%c%c%c", TILDE_C, NBSP_C, INDENT_C);
+   
+   strcpy(allowed_prev_chars, allowed_next_chars);
+
+
+   uses_tableofcontents = FALSE;          /* r5pl12 */
+
+   current_chapter_name[0] = EOS;         /* r5pl16 */
+   current_chapter_nr[0]   = EOS;         /* r5pl16 */
+
+   footer_buffer[0] = EOS;                /* r6pl2 */
+
+   subtocs1_depth = 9;                    /*r6pl2*/
+   subtocs2_depth = 9;                    /*r6pl2*/
+   subtocs3_depth = 9;                    /*r6pl2*/
+   subtocs4_depth = 9;                    /*r6pl2*/
+
+   no_auto_toptocs_icons = FALSE;         /*r6pl13*/
+
+   strcpy(html_modern_width, "128");      /*r6pl8*/
+   
+   html_modern_backcolor[0]  = EOS;       /*r6pl6*/
+
+   strcpy(html_frames_width, "128");      /*r6pl8*/
+   strcpy(html_frames_height, "64");      /*r6pl9*/
+   
+   html_frames_backcolor[0]  = EOS;       /*r6pl6*/
+   html_frames_textcolor[0]  = EOS;       /*r6pl9*/
+   html_frames_linkcolor[0]  = EOS;       /*r6pl9*/
+   html_frames_alinkcolor[0] = EOS;       /*r6pl9*/
+   html_frames_vlinkcolor[0] = EOS;       /*r6pl9*/
+   html_frames_position      = POS_LEFT;  /*r6pl9*/
+   html_frames_backimage[0]  = EOS;
+   html_name_prefix[0]       = EOS;       /*r6pl12*/
+
+   p1_toctype = TOC_NONE;                 /*r6pl5*/
+   p2_toctype = TOC_NONE;                 /*r6pl5*/
+
+   sHtmlPropfontStart[0] = EOS;           /*r6pl7*/
+   sHtmlPropfontEnd[0]   = EOS;           /*r6pl7*/
+
+   sHtmlMonofontStart[0] = EOS;           /*r6pl7*/
+   sHtmlMonofontEnd[0]   = EOS;           /*r6pl7*/
+
+   html_frames_toc_title = NULL;          /* 6.5.16 */
+   html_frames_con_title = NULL;          /* 6.5.16 */
+}
 
 
 
-        /*      --------------------------------------------------------------  */
-        /*      In diesen Variablen werden die Indizes der letzten Kapitel              */
-        /*      gesichert. Sie sind sehr wichtig, um die Links zu den                   */
-        /*      uebergeordneten Kapiteln in Hypertexten ohne lange Sucherei             */
-        /*      erstellen zu koennen.                                                                                   */
-        /*      --------------------------------------------------------------  */
-        last_n1_index= 0;
-        last_n2_index= 0;
-        last_n3_index= 0;
-        last_n4_index= 0;
-        last_n5_index= 0;               /* [GS] */
 
 
-        /*      --------------------------------------------------------------  */
-        /*      Dieses Flag wird TRUE gesetzt, wenn das Inhaltsverzeichnis              */
-        /*      mit !tableofcontents aufgerufen wird. Nodes koenne dann auf             */
-        /*      dieses Inhaltsverzeichnis verweisen (z.B: ST-Guide per @toc)    */
-        /*      --------------------------------------------------------------  */
-        called_tableofcontents= FALSE;
-
-        /*      --------------------------------------------------------------  */
-        /*      Dieses Flag wird TRUE gesetzt, wenn die vierte Gliederungs-             */
-        /*      Ebene benutzt wird. In der LaTeX-Preambel mussen dann einige    */
-        /*      Befehle zusaetzlich ausgegeben werden.                                                  */
-        /*      --------------------------------------------------------------  */
-        called_subsubsubsubnode= FALSE; /* [GS] */
-
-
-        /*      --------------------------------------------------------------  */
-        /*      p1_toc_counter enthaelt die Anzahl der in pass1() eingelesenen  */
-        /*      Eintraege fuer das toc[]-Array. Nach pass1() enthaelt                   */
-        /*      toc[p1_toc_counter] die Daten des letzten Kapitels.                             */
-        /*      p2_toc_counter ist entsprechend ein Zaehler fuer den pass2().   */
-        /*      Waehren pass2() zeigt p2_toc_counter auf den aktuellen Eintrag  */
-        /*      des toc[]-Arrays.                                                                                               */
-        /*      --------------------------------------------------------------  */
-        p1_toc_counter= 0;
-        p2_toc_counter= 0;      
-
-
-        /*      --------------------------------------------------------------  */
-        /*      toc[]-Array ausnullen und Inhaltsverzeichnis "eintragen"                */
-        /*      --------------------------------------------------------------  */
-        for (i=0; i<MAXTOCS; toc[i++]= NULL) ;
-        add_toc_to_toc();       /* r5pl6 */
-
-
-        /*      --------------------------------------------------------------  */
-        /*      lab[]-Array mit den Daten der referenzierbaren Stellen des              */
-        /*      Dokumentes ausnullen und Zaehler zuruecksetzen.                                 */
-        /*      --------------------------------------------------------------  */
-        for (i=0; i<MAXLABELS; lab[i++]= NULL) ;
-        p1_lab_counter= 0;
-        p2_lab_counter= 0;
-
-        /*      --------------------------------------------------------------  */
-        /*      Kapitelzaehler zuruecksetzen                                                                    */
-        /*      --------------------------------------------------------------  */
-
-        all_nodes= 0;                   /* r5pl7 */
-        all_subnodes= 0;
-        all_subsubnodes= 0;
-        all_subsubsubnodes= 0;
-        all_subsubsubsubnodes= 0;  /* [GS] */
-
-
-        /*      --------------------------------------------------------------  */
-        /*      Die Zeichen setzen, die beim Referenzieren vor und nach einem   */
-        /*      gefundenen Label erlaubt sind.                                                                  */
-        /*      --------------------------------------------------------------  */
-
-        sprintf(allowed_next_chars, "\033 !\"#$%%&'()*+,-./:;<=>?@[\\]^_`{|}~%c%c%c", TILDE_C, NBSP_C, INDENT_C);
-        strcpy(allowed_prev_chars, allowed_next_chars);
-
-
-        uses_tableofcontents= FALSE;    /* r5pl12 */
-
-        current_chapter_name[0]= EOS;   /* r5pl16 */
-        current_chapter_nr[0]= EOS;             /* r5pl16 */
-
-        footer_buffer[0]= EOS;                  /* r6pl2 */
-
-        subtocs1_depth= 9;                              /*r6pl2*/
-        subtocs2_depth= 9;                              /*r6pl2*/
-        subtocs3_depth= 9;                              /*r6pl2*/
-        subtocs4_depth= 9;                              /*r6pl2*/
-
-        no_auto_toptocs_icons= FALSE;   /*r6pl13*/
-
-        strcpy(html_modern_width, "128");               /*r6pl8*/
-        html_modern_backcolor[0]= EOS;                  /*r6pl6*/
-
-        strcpy(html_frames_width, "128");               /*r6pl8*/
-        strcpy(html_frames_height, "64");               /*r6pl9*/
-        html_frames_backcolor[0]= EOS;                  /*r6pl6*/
-        html_frames_textcolor[0]= EOS;                  /*r6pl9*/
-        html_frames_linkcolor[0]= EOS;                  /*r6pl9*/
-        html_frames_alinkcolor[0]= EOS;                 /*r6pl9*/
-        html_frames_vlinkcolor[0]= EOS;                 /*r6pl9*/
-        html_frames_position= POS_LEFT;                 /*r6pl9*/
-        html_frames_backimage[0]= EOS;
-        html_name_prefix[0]= EOS;                               /*r6pl12*/
-
-        p1_toctype= TOC_NONE;   /*r6pl5*/
-        p2_toctype= TOC_NONE;   /*r6pl5*/
-
-        sHtmlPropfontStart[0]= EOS;             /*r6pl7*/
-        sHtmlPropfontEnd[0]= EOS;               /*r6pl7*/
-
-        sHtmlMonofontStart[0]= EOS;             /*r6pl7*/
-        sHtmlMonofontEnd[0]= EOS;               /*r6pl7*/
-
-        html_frames_toc_title = NULL;           /* 6.5.16 */
-        html_frames_con_title = NULL;           /* 6.5.16 */
-}       /* init_module_toc */
+/*******************************************************************************
+*
+*  free_toc_data():
+*     exit TOC module
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
 
 /*
-v6.5.0 [vj] auskommentiert, um eine Compilerwarnung zu entfernen
-Diese Methode wird im Moment nicht mehr benoetigt (siehe exit_module_toc)
-LOCAL void free_toc_data(char **var)
+v6.5.0 [vj] auskommentiert, um eine Compilerwarnung zu entfernen.
+Diese Methode wird im Moment nicht mehr benoetigt (siehe exit_module_toc).
+
+LOCAL void free_toc_data(
+
+char **var)
 {
-        if (*var!=NULL)
-        {       um_free(*var);
-                *var= NULL;
-        }
+   if (*var != NULL)
+   {
+      um_free(*var);
+      *var = NULL;
+   }
 }
 */
 
+
+
+
+
+/*******************************************************************************
+*
+*  exit_module_toc():
+*     exit TOC module
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
 GLOBAL void exit_module_toc(void)
 {
-        /*
-        r6.3.19[vj]: Der folgende Code wurde auskommentiert, um zu ueberpruefen,
-        ob sich hieraus ein Geschwindigkeitsvorteil erlangen laesst. Wird der
-        Speicher hier nicht freigegeben, wird das spaeter um_exit tun,
-        das die Speicherbereiche viel effizienter freigeben kann.
-        Bitte nicht loeschen, da er spaeter vielleicht wieder rein kommt!
+/*
+   r6.3.19[vj]: Der folgende Code wurde auskommentiert, um zu ueberpruefen,
+   ob sich hieraus ein Geschwindigkeitsvorteil erlangen laesst. Wird der
+   Speicher hier nicht freigegeben, wird das spaeter um_exit tun,
+   das die Speicherbereiche viel effizienter freigeben kann.
+   
+   Bitte nicht loeschen, da er spaeter vielleicht wieder rein kommt!
 
-        register int i;
+   register int   i;  / counter /
 
-        for (i=MAXTOCS-1; i>=0; i--)
-        {
-                if (toc[i]!=NULL)
-                {
-                        free_toc_data( &(toc[i]->counter_command));
-                        free_toc_data( &(toc[i]->keywords));
-                        free_toc_data( &(toc[i]->description));
-                        free_toc_data( &(toc[i]->robots));
-                        free_toc_data( &(toc[i]->helpid));
-                        free_toc_data( &(toc[i]->image));
-                        free_toc_data( &(toc[i]->icon));
-                        free_toc_data( &(toc[i]->icon_active));
-                        free_toc_data( &(toc[i]->icon_text));
-                        free_toc_data( &(toc[i]->raw_header_filename));
-                        free_toc_data( &(toc[i]->raw_footer_filename));
-                        um_free(toc[i]);
-                        toc[i]= NULL;
-                }
-        }
 
-        for (i=MAXLABELS-1; i>=0; i--)
-        {
-                if (lab[i]!=NULL)
-                {
-                        um_free(lab[i]);
-                }
-        }
+   for (i = MAXTOCS - 1; i >= 0; i--)
+   {
+      if (toc[i] != NULL)
+      {
+         free_toc_data(&(toc[i]->counter_command));
+         free_toc_data(&(toc[i]->keywords));
+         free_toc_data(&(toc[i]->description));
+         free_toc_data(&(toc[i]->robots));
+         free_toc_data(&(toc[i]->helpid));
+         free_toc_data(&(toc[i]->image));
+         free_toc_data(&(toc[i]->icon));
+         free_toc_data(&(toc[i]->icon_active));
+         free_toc_data(&(toc[i]->icon_text));
+         free_toc_data(&(toc[i]->raw_header_filename));
+         free_toc_data(&(toc[i]->raw_footer_filename));
 
-        / New in V6.5.9 [NHz] /
-        for (i=MAXSTYLES-1; i>=0; i--)
-        {
-                if (style[i]!=NULL)
-                {
-                        um_free(style[i]);
-                }
-        }*/
+         um_free(toc[i]);
+         
+         toc[i] = NULL;
+      }
+   }
+
+   for (i = MAXLABELS - 1; i >= 0; i--)
+   {
+      if (lab[i] != NULL)
+      {
+         um_free(lab[i]);
+      }
+   }
+
+                                          / New in V6.5.9 [NHz] /
+   for (i = MAXSTYLES - 1; i >= 0; i--)
+   {
+      if (style[i] != NULL)
+      {
+         um_free(style[i]);
+      }
+   }
+*/
 
 }       /* exit_module_toc */
 
 
-/*      ############################################################
-        # toc.c
-        ############################################################    */
+/* +++ EOF +++ */
