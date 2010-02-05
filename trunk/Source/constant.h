@@ -41,6 +41,7 @@
 *    fd  Jun 08: reformattings, TAB -> '   '
 *  2010:
 *    fd  Jan 20: new: QUOTES_...
+*    fd  Feb 05: MAX_TOKEN_LEN increased from 199 to 2048 (fix for issue #36)
 *
 ******************************************|************************************/
 
@@ -175,7 +176,7 @@
 #define PASSU                 2
 
 #define LINELEN            4092           /* max. Zeilenlaenge */
-#define MAX_TOKEN_LEN       199           /* max. Tokenlaenge, v6.3.9: 199 (alt: 128) */
+#define MAX_TOKEN_LEN      2048           /* max. Tokenlaenge, v6.3.9: 199 (alt: 128) */
 #define MAX_TOKENS          800           /* max. Worte in einem Absatz */
 
 #define CNNS_LEN        LINELEN           /* 6.3.11 [vj] needed for current_node_name_sys (see toc.h) */

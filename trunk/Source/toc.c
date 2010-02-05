@@ -57,6 +57,7 @@
 *    fd  Feb 04: - c_label(): decision for <dd> now depends on bDescDDOpen
 *                - more functions tidied up and reformatted
 *    fd  Feb 05: init_new_toc_entry(): toc[] structure cleared before usage
+*                - set_html_keywords(): now uses MAX_TOKEN_LEN, to avoid issues in str2tok
 *
 ******************************************|************************************/
 
@@ -14046,54 +14047,85 @@ GLOBAL void set_html_favicon(void)
 }       /* set_html_favicon */
 
 
+
+
+
+/*******************************************************************************
+*
+*  set_html_keywords():
+*     Set the HTML keywords
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
 GLOBAL void set_html_keywords(void)
 {
-#define HTML_KW_SIZE    2048
-        char k[HTML_KW_SIZE], *ptr, oldk[HTML_KW_SIZE], *oldptr; /* Buffer increased from 1kB to 2kB */
-        size_t newsize;
+   char      k[MAX_TOKEN_LEN],     /* */
+            *ptr,                  /* */
+             oldk[MAX_TOKEN_LEN],  /* */
+            *oldptr;               /* */
+   size_t    newsize;              /* */
 
-        if (p1_toc_counter<0)   return;
-        if (toc[p1_toc_counter]==NULL)  return;
-        if (token[1][0]==EOS)   return;
 
-        tokcpy2(k, HTML_KW_SIZE);
-        c_vars(k);
-        qdelete_all(k, "!-", 2);
+   if (p1_toc_counter < 0)
+      return;
+      
+   if (toc[p1_toc_counter] == NULL)
+      return;
+      
+   if (token[1][0] == EOS)
+      return;
 
-        auto_quote_chars(k, TRUE);
-        replace_udo_quotes(k);
 
-        if (toc[p1_toc_counter]->keywords!=NULL)
-        {       /* r6pl5: Keywords bereits vorhanden, neue anhaengen */
-                oldptr= toc[p1_toc_counter]->keywords;
-                um_strcpy(oldk, oldptr, HTML_KW_SIZE, "\n!html_keywords too long in this line\nset_html_keywords [1]");
-                newsize= strlen(oldk) + strlen(k) + 3;
+   tokcpy2(k, MAX_TOKEN_LEN);
+   c_vars(k);
+   qdelete_all(k, "!-", 2);
 
-                ptr= (char *) um_realloc(oldptr, newsize);
-                if (!ptr)
-                {       error_malloc_failed();
-                        bFatalErrorDetected= TRUE;
-                }
-                else
-                {       
-                        sprintf(ptr, "%s, %s", oldk, k);
-                        toc[p1_toc_counter]->keywords= ptr;
-                }
-        }
-        else
-        {       ptr= (char *) um_malloc(1+strlen(k)*sizeof(char));
+   auto_quote_chars(k, TRUE);
+   replace_udo_quotes(k);
 
-                if (!ptr)
-                {       error_malloc_failed();
-                        bFatalErrorDetected= TRUE;
-                }
-                else
-                {       strcpy(ptr, k);
-                        toc[p1_toc_counter]->keywords= ptr;
-                }
-        }
+   if (toc[p1_toc_counter]->keywords != NULL)
+   {                                      /* r6pl5: Keywords bereits vorhanden, neue anhaengen */
+      oldptr = toc[p1_toc_counter]->keywords;
+      
+      um_strcpy(oldk, oldptr, MAX_TOKEN_LEN + 1, "\n!html_keywords too long in this line\nset_html_keywords [1]");
+      
+      newsize = strlen(oldk) + strlen(k) + 3;
 
-}       /* set_html_keyword */
+      ptr = (char *)um_realloc(oldptr, newsize);
+      
+      if (!ptr)
+      {
+         error_malloc_failed();
+         bFatalErrorDetected = TRUE;
+      }
+      else
+      {       
+         sprintf(ptr, "%s, %s", oldk, k);
+         toc[p1_toc_counter]->keywords = ptr;
+      }
+   }
+   else
+   {
+      ptr = (char *)um_malloc(1 + strlen(k) * sizeof(char));
+
+      if (!ptr)
+      {
+         error_malloc_failed();
+         bFatalErrorDetected = TRUE;
+      }
+      else
+      {
+         strcpy(ptr, k);
+         toc[p1_toc_counter]->keywords = ptr;
+      }
+   }
+}
+
+
+
 
 
 GLOBAL void set_html_description(void)
