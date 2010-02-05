@@ -56,8 +56,9 @@
 *    fd  Feb 03: c_label(): issue #84 fixed
 *    fd  Feb 04: - c_label(): decision for <dd> now depends on bDescDDOpen
 *                - more functions tidied up and reformatted
-*    fd  Feb 05: init_new_toc_entry(): toc[] structure cleared before usage
+*    fd  Feb 05: - init_new_toc_entry(): toc[] structure cleared before usage
 *                - set_html_keywords(): now uses MAX_TOKEN_LEN, to avoid issues in str2tok
+*                - save_html_index(): Index jump line output fixed
 *
 ******************************************|************************************/
 
@@ -1135,8 +1136,10 @@ const unsigned int   uiHeight)      /* */
    LABEL            *labptr;        /* */
    
    
-   if (bDocAutorefOff)
+   if (bDocAutorefOff)                    /* it's so simple! */
       return;
+   
+   
    
    /* Automatische Referenzen werden nur fuer Inhaltsverzeichnisse */
    /* gesetzt. Andere Referenzen muessen wie bei TeX mit !link */
@@ -5461,7 +5464,7 @@ GLOBAL BOOLEAN save_html_index(void)
    fprintf(uif, "!node* %s\n", lang.index);
    fprintf(uif, "!html_name indexudo\n");
    
-   if (!bDocAutorefOff)
+   if (!bDocAutorefOff)                   /* don't auto-reference the index page! */
       fprintf(uif, "!autoref [off]\n");
 
                                           /* we need memory */   
@@ -5554,9 +5557,9 @@ GLOBAL BOOLEAN save_html_index(void)
       {
                                           /* set anchor entry for index A-Z list */
          if (lastc == EOS)
-            sprintf(dummy, "<a href=\"%s%s\">%c</a>\n", "#", thisc_buf, thisc);
+            sprintf(dummy, "<a href=\"%s%s\">%c</a>\n", "#", thisc_buf, (char)thisc);
          else
-            sprintf(dummy, " | <a href=\"%s%s\">%c</a>\n", "#", thisc_buf, thisc);
+            sprintf(dummy, " | <a href=\"%s%s\">%c</a>\n", "#", thisc_buf, (char)thisc);
          
          strcat(jumplist, dummy);
          
