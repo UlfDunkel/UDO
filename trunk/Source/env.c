@@ -48,6 +48,7 @@
 *  2010:
 *    fd  Jan 23: converted all German umlauts in comments into plain ASCII
 *    fd  Feb 03: file reformatted and tidied up
+*    fd  Feb 05: c_end_enumerate() outputs an empty HTML code line (for readability)
 *
 ******************************************|************************************/
 
@@ -3174,7 +3175,7 @@ GLOBAL void c_item(void)
       switch (iEnvType[iEnvLevel])
       {
       case ENV_ITEM:
-         ll= strlen_indent();
+         ll = strlen_indent();
          sprintf(sBig, "\\pard\\ \\tqr\\tx%d\\tx%d\\li%d\\fi-%d\\qj\\tab %s\\tab", ll-167, ll, ll, ll, itemchar[iItemLevel]);
          break;
          
@@ -3185,7 +3186,7 @@ GLOBAL void c_item(void)
          sprintf(sBig, "\\pard\\tqr\\tx%d\\tx%d\\li%d\\fi-%d\\qj\\tab %s\\tab", ll-167, ll, ll, ll, s);
          break;
          
-       case ENV_DESC:
+      case ENV_DESC:
          token[0][0] = EOS;
          sBig[0] = EOS;
          
@@ -3219,7 +3220,7 @@ GLOBAL void c_item(void)
          sprintf(sBig, "\\pard\\li%d\\fi-%d\\qj %s", ll, 567, sTemp);
          break;
          
-       case ENV_LIST:
+      case ENV_LIST:
          token[0][0] = EOS;
          sBig[0] = EOS;
          
@@ -3322,6 +3323,8 @@ GLOBAL void c_item(void)
          if (!bEnv1stItem[iEnvLevel])     /* not the first <dd>? */
             outln("</dd>");               /* close previous one */
 
+         bDescDDOpen = FALSE;             /* close DD flag anyway */
+         
          token[0][0] = EOS;
          sBig[0] = EOS;
          
@@ -3347,6 +3350,7 @@ GLOBAL void c_item(void)
             um_strcpy(sBig, "<dt>&nbsp;</dt>\n<dd>", 1024, "c_item[22]");
          }
          
+         bDescDDOpen = TRUE;              /* open DD flag */
          break;
 
       case ENV_LIST:
@@ -4007,6 +4011,7 @@ GLOBAL void c_end_description(void)
    case TOHTM:
    case TOMHH:
       outln("</dd>\n</dl>\n");            /* Changed in V6.5.11 [NHz] */
+      bDescDDOpen = FALSE;                /* close DD flag anyway */
       break;
       
    case TOHPH:
@@ -4099,7 +4104,7 @@ GLOBAL void c_end_enumerate(void)
    case TOHTM:
    case TOMHH:
       outln("</li>");                     /* r6pl6: Mit </li> */
-      outln("</ol>");
+      outln("</ol>\n");
       break;
       
    case TOHPH:
