@@ -29,7 +29,7 @@ const char *id_charset_h= "@(#) chr_tos.h   27.12.1998";
 #endif
 
 #ifndef THIS_CHARSET
-#define THIS_CHARSET"TOS"
+#define THIS_CHARSET  "TOS"
 #endif
 
 /*------------------------------------------------------------*/
