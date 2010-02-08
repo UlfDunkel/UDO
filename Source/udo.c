@@ -61,6 +61,8 @@
 *    fd  Jan 30: pass1() no longer parses comment lines
 *    fd  Feb 05: - pass1() no longer parses empty lines
 *                - pass1(): bugfix for issue #77
+*    fd  Feb 06: pass2(): optimized
+*    fd  Feb 08: description environment items are no longer closed here, but in ENV.C
 *
 ******************************************|************************************/
 
@@ -7584,21 +7586,6 @@ BOOLEAN           reset_internals)        /* */
             strcat(z, "<div align=\"right\">");
          else if (!inside_env)
             strcat(z, "<p>");
-         else if (bEnv1stPara[iEnvLevel])
-            bEnv1stPara[iEnvLevel] = FALSE;
-         else if (html_doctype < XHTML_STRICT)
-            strcat(z, "<br>");            /* was "<p>" */
-         else
-            strcat(z, "<br />");          /* was "<p>" */
-      }
-      else if (inside_env)
-      {
-         if (bEnv1stPara[iEnvLevel])
-            bEnv1stPara[iEnvLevel] = FALSE;
-         else if (html_doctype < XHTML_STRICT)
-            strcat(z, "<br>");
-         else
-            strcat(z, "<br />");
       }
 
       break;
@@ -7641,7 +7628,7 @@ BOOLEAN           reset_internals)        /* */
       if (inside_env)
       {
          if (bEnv1stPara[iEnvLevel])
-            bEnv1stPara[iEnvLevel]= FALSE;
+            bEnv1stPara[iEnvLevel] = FALSE;
          else
             outln(" newline");
       }
@@ -8000,7 +7987,7 @@ BOOLEAN           reset_internals)        /* */
          case TOAQV:
             c_win_styles(z);
 
-            /* Einen kleinen Maengel der Umgebungen TAB+SPACE beseitigen */
+            /* Einen kleinen Mangel der Umgebungen TAB+SPACE beseitigen */
             qreplace_all(z, "\\tab  ", 6, "\\tab ", 5);
             auto_references(z, FALSE, "", 0, 0);
             break;
@@ -8421,8 +8408,7 @@ BOOLEAN           reset_internals)        /* */
       case TOKPS:
          /* Deleted in r6pl15 [NHz] */
 /*       outln("newline");
-*/
-         break;
+*/       ;
       }
 
    }  /* if (inside_short) */
@@ -8440,28 +8426,9 @@ BOOLEAN           reset_internals)        /* */
       case TOHAH:                         /* V6.5.17 */
       case TOHTM:
       case TOMHH:
-         if (!inside_short)
-         {
-            if (inside_center || inside_right)
-               outln("</div>");
-            else if (inside_env)
-            {
-               if (html_doctype < XHTML_STRICT)
-                  outln("<br>");          /* was "<br />&nbsp;" */
-               else
-                  outln("<br />");        /* was "<br />&nbsp;" */
-            }
-            else
-               outln("</p>\n");
-         }
-         else if (inside_env)
-         {
-            if (html_doctype < XHTML_STRICT)
-               outln("<br>");             /* was "<br />&nbsp;" */
-            else
-               outln("<br />");           /* was "<br />&nbsp;" */
-         }
-         else
+         if (inside_center || inside_right)
+            outln("</div>");
+         else if (!inside_env)
             outln("</p>\n");
          
          break;
@@ -12724,6 +12691,10 @@ char           *datei)           /* */
       }
 
 
+      if (zeile[0] == '#')                /* don't parse comment lines, but empty lines! */
+         goto NEXT_LINE;
+      
+      
       /* --- remove all line feed and whitespace characters at the end of line --- */
       
       len = strlen(zeile);
@@ -12735,7 +12706,7 @@ char           *datei)           /* */
       }
 
 
-      if ( (zeile[0] != EOS) && (zeile[0] != '#') )
+      if (zeile[0] != EOS)
       {
          recode(zeile, iCharset);
          convert_sz(zeile);
@@ -12751,77 +12722,63 @@ char           *datei)           /* */
          }
       }
 
-      if ( (zeile[0] != '#') && (zeile[0] != EOS) && (pflag[PASS2].env == ENV_NONE) )
+      if ( (zeile[0] != EOS) && (pflag[PASS2].env == ENV_NONE) )
       {
          pass_check_if(zeile, PASS2);
       }
 
-#if 0
-      if (pflag[PASS2].ignore_line > 0)
-      {
-         goto AFTER_IGNORED;
-      }
-#endif
 
-      /* Spezielle Umgebungen (verbatim, raw, table, sourcecode) testen. */
-      /* Gesucht wird nur nach !begin... bzw !end... */
-      
-      if (zeile[0] != '#' && pflag[PASS2].ignore_line == 0)
-      {
-         pass2_check_environments(zeile);
-      }
-
-      /* Ausgabe/Bearbeitung der aktuellen Zeile, falls eine */
-      /* spezielle Umgebung aktiv ist */
-      
       if (pflag[PASS2].ignore_line == 0)
       {
+         /* Spezielle Umgebungen (verbatim, raw, table, sourcecode) testen. */
+         /* Gesucht wird nur nach !begin... bzw !end... */
+
+         pass2_check_environments(zeile);
+
+         /* Ausgabe/Bearbeitung der aktuellen Zeile, falls eine */
+         /* spezielle Umgebung aktiv ist */
+      
          pass2_check_env_output(zeile);
       }
 
       /* Keine spezielle Umgebung aktiv, also Zeile auswerten und */
       /* beim Auftreten einer Leerzeile den Absatz ausgeben */
       
-      if (    (pflag[PASS2].ignore_line == 0)
-           && (pflag[PASS2].env == ENV_NONE)
-         )
+      if ( (pflag[PASS2].ignore_line == 0) && (pflag[PASS2].env == ENV_NONE) )
       {
          if (zeile[0] != EOS )
          {
-            if (zeile[0] != '#')
-            {
-               del_whitespaces(zeile);
-               
-               if (no_umlaute)
-                  umlaute2ascii(zeile);
-               
-               auto_quote_chars(zeile, FALSE);
+            del_whitespaces(zeile);
+            
+            if (no_umlaute)
+               umlaute2ascii(zeile);
+            
+            auto_quote_chars(zeile, FALSE);
 
-               /* Changed in V6.5.5 [NHz]
-                * v6.5.7 [vj] c_commands_inside(zeile, *TRUE* instead of FALSE)
-                *             closes bug #0000059
-                */
-                
-               c_commands_inside(zeile, TRUE);
+            /* Changed in V6.5.5 [NHz]
+             * v6.5.7 [vj] c_commands_inside(zeile, *TRUE* instead of FALSE)
+             *             closes bug #0000059
+             */
+             
+            c_commands_inside(zeile, TRUE);
 
-               replace_macros(zeile);
-               c_divis(zeile);
-               c_vars(zeile);
-               c_tilde(zeile);
-               c_styles(zeile);
+            replace_macros(zeile);
+            c_divis(zeile);
+            c_vars(zeile);
+            c_tilde(zeile);
+            c_styles(zeile);
 
-               /* v6.5.7 [vj] old position and parameters (see above)
-                * please keep this comment for information;
-                * v6.5.9 [NHz] put in again, otherwise commands inside
-                * macros are not translated; I think we need both
-                */
-                
-               c_commands_inside(zeile, FALSE);
+            /* v6.5.7 [vj] old position and parameters (see above)
+             * please keep this comment for information;
+             * v6.5.9 [NHz] put in again, otherwise commands inside
+             * macros are not translated; I think we need both
+             */
+             
+            c_commands_inside(zeile, FALSE);
 
-               replace_defines(zeile);
+            replace_defines(zeile);
 
-               tokenize(zeile);
-            }
+            tokenize(zeile);
          }
          else if (token_counter > 0)      /* Leerzeile */
          {  
@@ -12829,6 +12786,8 @@ char           *datei)           /* */
          }
       }
 
+NEXT_LINE:
+      ;
    }   /* while (fgets) */
 
 
