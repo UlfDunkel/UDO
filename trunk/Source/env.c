@@ -49,6 +49,7 @@
 *    fd  Jan 23: converted all German umlauts in comments into plain ASCII
 *    fd  Feb 03: file reformatted and tidied up
 *    fd  Feb 05: c_end_enumerate() outputs an empty HTML code line (for readability)
+*    fd  Feb 08: issue #79 fixed (weird empty lines on "!autoref []" in description environments
 *
 ******************************************|************************************/
 
@@ -2710,7 +2711,7 @@ GLOBAL void c_begin_tlist(void)
 *     get the content of !item [...] and copy it into 1st token, ] included
 *
 *  Notes:
-*     Gesucht wird die erse eckige Klammer, die nicht durch ein ! gequotet wird.
+*     Gesucht wird die erste eckige Klammer, die nicht durch ein ! gequotet wird.
 *
 *     PL10: fast komplett neu, wegen Quotefunktion
 *
@@ -2838,7 +2839,6 @@ GLOBAL void c_item(void)
 
    bEnv1stPara[iEnvLevel] = TRUE;
 
-
    tokens_contain_item = TRUE;
 
    switch (desttype)
@@ -2852,9 +2852,7 @@ GLOBAL void c_item(void)
       case ENV_DESC:
       case ENV_LIST:
          if (token[1][0] == '[')
-         {
             add_description();
-         }
       }
       
       break;
@@ -3315,13 +3313,24 @@ GLOBAL void c_item(void)
          if (!bEnv1stItem[iEnvLevel])     /* not the first <li>? */
             outln("</li>");               /* r6pl6: </li> ausgeben */
          
+         bEnv1stItem[iEnvLevel] = FALSE;  /* switch off 1st Item state anyway */
+         
          strcpy(sBig, "<li>");            /* output <li> */
          break;
          
-      case ENV_DESC:
-                                          /* New in V6.5.11 [NHz] */
-         if (!bEnv1stItem[iEnvLevel])     /* not the first <dd>? */
-            outln("</dd>");               /* close previous one */
+      case ENV_DESC:                      /* New in V6.5.11 [NHz] */
+         if (bDescDDOpen)                 /* handle still open <dd> tag first: */
+         {
+            if (!bEnvShort[iEnvLevel])    /* additional linefeed? */
+            {
+               if (html_doctype < XHTML_STRICT)
+                  out("<br>");
+               else
+                  out("<br />");
+            }
+            
+            outln("</dd>");               /* close previous <dd> tag */
+         }
 
          bDescDDOpen = FALSE;             /* close DD flag anyway */
          
@@ -3337,9 +3346,7 @@ GLOBAL void c_item(void)
             replace_udo_quotes(sBig);
             
             if (!bDocAutorefItemsOff)
-            {
                auto_references(sBig, FALSE, "", 0, 0);
-            }
             
             c_internal_styles(sBig);
             strinsert(sBig, "<dt>");
@@ -3349,7 +3356,9 @@ GLOBAL void c_item(void)
          {
             um_strcpy(sBig, "<dt>&nbsp;</dt>\n<dd>", 1024, "c_item[22]");
          }
-         
+
+         bEnv1stPara[iEnvLevel] = TRUE;
+         bEnv1stItem[iEnvLevel] = TRUE;
          bDescDDOpen = TRUE;              /* open DD flag */
          break;
 
@@ -3392,9 +3401,7 @@ GLOBAL void c_item(void)
             replace_udo_quotes(sBig);
             
             if (!bDocAutorefItemsOff)
-            {
                auto_references(sBig, FALSE, "", 0, 0);
-            }
             
             c_internal_styles(sBig);
             strinsert(sBig, sHtmlPropfontStart);
@@ -3711,7 +3718,8 @@ GLOBAL void c_item(void)
       
    }  /* switch (desttype) */
    
-   bEnv1stItem[iEnvLevel] = FALSE;
+/*   bEnv1stItem[iEnvLevel] = FALSE;
+*/
 
 }  /* c_item() */
 
@@ -3996,7 +4004,7 @@ GLOBAL void c_end_description(void)
       break;
       
    case TOLYX:
-      if (iEnvLevel>0)
+      if (iEnvLevel > 0)
       {
          outln("\\end_deeper");
       }
@@ -4010,6 +4018,14 @@ GLOBAL void c_end_description(void)
    case TOHAH:
    case TOHTM:
    case TOMHH:
+      if (!bEnvShort[iEnvLevel + 1])      /* iEnvLevel has already been descreased! */
+      {
+         if (html_doctype < XHTML_STRICT)
+            out("<br>");
+         else
+            out("<br />");
+      }
+      
       outln("</dd>\n</dl>\n");            /* Changed in V6.5.11 [NHz] */
       bDescDDOpen = FALSE;                /* close DD flag anyway */
       break;
