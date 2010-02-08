@@ -77,15 +77,16 @@
 ******************************************|************************************/
 
 GLOBAL int       iEnvLevel;               /* Zaehler fuer Umgebungen         */
-GLOBAL int       iEnvType[MAXENVLEVEL+1]; /* Typ der Umgebung (ENV_ITEM, ...   */
+                                          /* Typ der Umgebung (ENV_ITEM, ...   */
+GLOBAL int       iEnvType[MAXENVLEVEL + 1];
                                           /* Einrueckungstiefe einer Umgebung   */
-GLOBAL int       iEnvIndent[MAXENVLEVEL+1];
+GLOBAL int       iEnvIndent[MAXENVLEVEL + 1];
                                           /* Zusammengequetscht?            */
-GLOBAL BOOLEAN   bEnvShort[MAXENVLEVEL+1];
+GLOBAL BOOLEAN   bEnvShort[MAXENVLEVEL + 1];
                                           /* Ist das naechste !item das erste? */
-GLOBAL BOOLEAN   bEnv1stItem[MAXENVLEVEL+1];
+GLOBAL BOOLEAN   bEnv1stItem[MAXENVLEVEL + 1];
                                           /* Erster Absatz des !item?         */
-GLOBAL BOOLEAN   bEnv1stPara[MAXENVLEVEL+1];
+GLOBAL BOOLEAN   bEnv1stPara[MAXENVLEVEL + 1];
 
 GLOBAL int       iItemLevel;              /* Zaehler fuer itemize-Umgebungen   */
 GLOBAL int       iEnumLevel;              /* Zaehler fuer enumerate-Umgeb.   */
