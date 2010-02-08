@@ -59,6 +59,7 @@
 *    fd  Feb 05: - init_new_toc_entry(): toc[] structure cleared before usage
 *                - set_html_keywords(): now uses MAX_TOKEN_LEN, to avoid issues in str2tok
 *                - save_html_index(): Index jump line output fixed
+*    fd  Feb 06: make_node(): usage of set_inside_node1() generalized
 *
 ******************************************|************************************/
 
@@ -796,6 +797,7 @@ const unsigned int   uiH)                 /* */
       }
       
       break;
+
       
    case TOIPF:                            /* r6pl7 */
       um_strcpy(n, l->name, 512, "string2reference[2]");
@@ -815,6 +817,7 @@ const unsigned int   uiH)                 /* */
       sprintf(ref, ":link refid=%s reftype=hd.%s:elink.", s, n);
       break;
       
+      
    case TOSTG:                            /* r5pl16 */
       if (l->ignore_links)
       {
@@ -832,6 +835,7 @@ const unsigned int   uiH)                 /* */
       }
       
       break;
+      
       
    case TOAMG:
       um_strcpy(s, l->name, 512, "string2reference[4]");
@@ -854,6 +858,7 @@ const unsigned int   uiH)                 /* */
       sprintf(ref, "@{\"%s\" link \"%s\"}", s, n);
       break;
       
+      
    case TOTVH:
       um_strcpy(n, l->name, 512, "string2reference[6]");
       replace_udo_tilde(n);
@@ -862,6 +867,7 @@ const unsigned int   uiH)                 /* */
       node2vision(s);
       sprintf(ref, "{%s:%s}", n, s);
       break;
+      
       
    case TOPCH:
       um_strcpy(n, l->name, 512, "string2reference[8]");
@@ -887,12 +893,14 @@ const unsigned int   uiH)                 /* */
       
       break;
       
+      
    case TOLDS:
       um_strcpy(n, l->name, 512, "string2reference[10]");
       replace_udo_tilde(n);
       replace_udo_nbsp(n);
       sprintf(ref, "<ref id=\"%s\" name=\"%s\">", n, n);
       break;
+      
       
    case TOINF:
       um_strcpy(n, l->name, 512, "string2reference[11]");
@@ -901,6 +909,7 @@ const unsigned int   uiH)                 /* */
       node2texinfo(n);
       sprintf(ref, "* %s::", n);
       break;
+      
       
    case TOHAH:                            /* V6.5.17 */
    case TOHTM:
@@ -1110,11 +1119,11 @@ const unsigned int   uiH)                 /* */
 
 GLOBAL void auto_references(
 
-char                *s,             /* */
-const BOOLEAN        for_toc,       /* */
-const char          *pic,           /* */
-const unsigned int   uiWidth,       /* */
-const unsigned int   uiHeight)      /* */
+char                *s,             /* ^ string to check */
+const BOOLEAN        for_toc,       /* TRUE: use auto reference for TOC */
+const char          *pic,           /* also images can be referenced (used in string2reference()) */
+const unsigned int   uiWidth,       /* image width */
+const unsigned int   uiHeight)      /* image height */
 {
    register int      i;             /* counter */
    char              the_ref[512],  /* */
@@ -5295,9 +5304,9 @@ GLOBAL void html_footer(void)
    strcat(footer_buffer, s);
    
    if (html_doctype < XHTML_STRICT)
-   strcat(footer_buffer, "<br>\n");
+      strcat(footer_buffer, "<br>\n");
    else
-   strcat(footer_buffer, "<br />\n");
+      strcat(footer_buffer, "<br />\n");
    
    strcpy(s, lang.update);
    auto_quote_chars(s, TRUE);
@@ -6141,7 +6150,7 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
    
    nr1 = toc[p2_toc_counter]->nr1;
    
-   (bInsideAppendix) ? (chapter= nr1) : (chapter= nr1+toc_offset);
+   (bInsideAppendix) ? (chapter = nr1) : (chapter = nr1 + toc_offset);
    
    n[0] = EOS;
    numbers[0] = EOS;
@@ -6179,12 +6188,12 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
                                           /* r5pl10 */
    do_index = (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index);
    
+   set_inside_node1();
+   
    switch (desttype)
    {
    case TOTEX:
    case TOPDL:
-      set_inside_node1();
-      
       if (invisible)
       {
          (use_style_book) ? voutlnf("\n\\chapter*{%s}", name) : voutlnf("\n\\section*{%s}", name);
@@ -6208,7 +6217,6 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
       break;
    
    case TOLYX:
-      set_inside_node1();
       out("\\layout ");
       
       if (invisible)
@@ -6225,7 +6233,6 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
       break;
    
    case TOINF:
-      set_inside_node1();
       output_texinfo_node(name);
       
       if (bInsideAppendix)
@@ -6239,8 +6246,6 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
       break;
    
    case TOTVH:
-      set_inside_node1();
-      
       if (numbers[0] != EOS)
          strcat(numbers, " ");
          
@@ -6248,7 +6253,6 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
       break;
    
    case TOSTG:
-      set_inside_node1();
       bInsidePopup = popup;
    
       replace_2at_by_1at(name);
@@ -6288,8 +6292,6 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
       break;
    
    case TOAMG:
-      set_inside_node1();
-      
       replace_2at_by_1at(name);
       
       node2stg(name);
@@ -6314,7 +6316,6 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
       break;
    
    case TOMAN:
-      set_inside_node1();
       outln("");
       my_strupr(name);
       sprintf(n, " %s%s%s", BOLD_ON, name, BOLD_OFF);
@@ -6323,7 +6324,6 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
       break;
       
    case TONRO:
-      set_inside_node1();
       my_strupr(name);
       sprintf(n, ".SH %s", name);
       c_internal_styles(n);
@@ -6331,7 +6331,6 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
       break;
       
    case TOASC:
-      set_inside_node1();
       outln("");
       outln("");
       
@@ -6359,8 +6358,6 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
       break;
       
    case TOKPS:
-      set_inside_node1();
-   
       if (use_style_book)
       {
          (bInsideAppendix) ? sprintf(n, "%s %s", lang.appendix, numbers) : sprintf(n, "%s %s", lang.chapter, numbers);
@@ -6403,7 +6400,6 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
    break;
    
    case TODRC:
-      set_inside_node1();
       outln("%%*");
       
       if (p2_toc_counter + 1 <= p1_toc_counter && toc[p2_toc_counter + 1]->toctype == TOC_NODE2)
@@ -6420,7 +6416,6 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
       break;
       
    case TOIPF:
-      set_inside_node1();
                                           /* r6pl2 */
       node2NrIPF(n, toc[p2_toc_counter]->labindex);
       map[0] = EOS;
@@ -6443,7 +6438,6 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
       
    case TOSRC:
    case TOSRP:
-      set_inside_node1();
       outln("");
       outln("");
       
@@ -6462,12 +6456,8 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
       break;
       
    case TORTF:
-      set_inside_node1();
-      
       if (use_style_book)
-      {
          c_newpage();
-      }
       
       outln(rtf_pardpar);
       
@@ -6559,8 +6549,6 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
    case TOWIN:
    case TOWH4:
    case TOAQV:
-      set_inside_node1();
-      
       output_win_header(name, invisible);
       output_aliasses();
       
@@ -6580,8 +6568,6 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
       break;
       
    case TOPCH:
-      set_inside_node1();
-      
       if (numbers[0] != EOS)
          strcat(numbers, " ");
 
@@ -6608,7 +6594,6 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
             outln(XHTML_HR);
       }
       
-      set_inside_node1();
       flag = FALSE;
       
       do_toptoc(TOC_NODE1);               /*r6pl5*/
@@ -6657,15 +6642,12 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
       break;
       
    case TOLDS:
-      set_inside_node1();
-
       (use_style_book) ? voutlnf("<chapter>%s<label id=\"%s\">", name, name) : voutlnf("<sect>%s<label id=\"%s\">", name, name);
       output_aliasses();                  /* r5pl8 */
       outln("<p>");
       break;
    
    case TOHPH:
-      set_inside_node1();
       (use_style_book) ? voutlnf("<chapter>%s", name) : voutlnf("<s1>%s", name);
       output_aliasses();
    }
