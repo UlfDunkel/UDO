@@ -778,6 +778,7 @@ ein URL auf ein Zitat übergeben werden.
 !end_verbatim
 !else
 !begin_quote [id=myid cite=http://www.udo-open-source.org]
+!end_qoute
 !endif
 (!EXAMPLE_END)
 
