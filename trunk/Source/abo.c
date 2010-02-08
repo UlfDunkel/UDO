@@ -322,7 +322,7 @@ GLOBAL void output_about_udo(void)
    fprintf(uif, "!html_name %s\n", strUdoHtmlName);
    fprintf(uif, "!win_helpid %s\n\n", WIN_UDO_NODE_NAME);
    
-   if (!bDocAutorefOff)
+   if (!bDocAutorefOff)                   /* don't auto-reference the 'About UDO' page */
       fprintf(uif, "!autoref [off]\n");
    
    
