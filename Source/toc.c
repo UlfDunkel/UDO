@@ -66,6 +66,7 @@
 *                - save_html_index() debugged: (char)thisc
 *                - init_toc_forms_numbers(): HTML format strings changed to avoid leading ' '
 *                - toc_output() + its sub functions adjusted, using TOCL_HTM / TOCL_TEX
+*                - save_html_index(): sorting fixed
 *
 ******************************************|************************************/
 
@@ -5389,8 +5390,8 @@ const void  *_p2)              /* */
    char      p2_tocname[512];  /* buffer for 2nd entry name in TOC */
 
                                           /* cast the pointers to right structure */
-   const HTML_INDEX *p1 = (const HTML_INDEX *)_p1;
-   const HTML_INDEX *p2 = (const HTML_INDEX *)_p2;
+   HTML_INDEX *p1 = (HTML_INDEX *)_p1;
+   HTML_INDEX *p2 = (HTML_INDEX *)_p2;
 
    strcpy(p1_tocname, p1->tocname);       /* copy the entry names */
    strcpy(p2_tocname, p2->tocname);
@@ -5427,7 +5428,7 @@ GLOBAL BOOLEAN save_html_index(void)
    int          j;               /* counter */
    size_t       num_index;       /* # of entries in index file */
    HTML_INDEX  *html_index;      /* ^ to HTML_INDEX array */
-   size_t       thisc,           /* single char for comparison */
+   unsigned     thisc,           /* single char for comparison */
                 lastc;           /* last char from comparison */
    char         htmlname[512];   /* */
    char         dummy[512];      /* */
@@ -5437,7 +5438,8 @@ GLOBAL BOOLEAN save_html_index(void)
    char        *escapedtocname;  /* */
    char         jumplist[4096];  /* buffer string for A-Z navigation bar */
    char         thisc_buf[42];   /* buffer string for converted thisc */
-   size_t     (*psort);          /* ^ to sort_CODE_xxx[] arrays */
+   unsigned   (*psort);          /* ^ to sort_CODE_xxx[] arrays */
+   unsigned   (*plig)[3];        /* ^ t CODE_xxx_lig[][] arrays (unused here so far!) */
 
    
    num_index = 0;                         /* first we count how much entries we need */
@@ -5516,22 +5518,28 @@ GLOBAL BOOLEAN save_html_index(void)
    qsort(html_index, num_index, sizeof(HTML_INDEX), comp_index_html);
 
    
-   /* --- create index A-Z jumplist --- */
-   
    switch (iCharset)                      /* use the right tables! ;-) */
    {
    case CODE_TOS:
       psort = sort_CODE_TOS;
+      plig  = CODE_TOS_lig;
       break;
    
    case CODE_MAC:
       psort = sort_CODE_MAC;
+      plig  = CODE_MAC_lig;
       break;
    
    case CODE_LAT1:
+   default:
       psort = sort_CODE_LAT1;
+      plig  = CODE_LAT1_lig;
    }
+   
+   plig = plig;                           /* unused so far */
 
+   
+   /* --- create index A-Z jumplist --- */
    
    lastc = EOS;                           /* clear buffer for last character */
    
@@ -5544,12 +5552,11 @@ GLOBAL BOOLEAN save_html_index(void)
       if (!html_ignore_8bit)
          html2sys(dummy);                 /* convert HTML characters to system characters */
 
-      thisc = (size_t)dummy[0];           /* use first character for comparison */
+      thisc = dummy[0] & 0x00FF;          /* use first character for comparison */
 
-/*    thisc = psort[thisc];
-*/               /* convert special characters (e.g. AE lig to 'A') */
+      thisc = psort[thisc];               /* convert special characters (e.g. AE lig to 'A') */
 
-      thisc = toupper((char)thisc);       /* always use capitalized index chars (issue #76) */
+      thisc = toupper(thisc);             /* always use capitalized index chars (issue #76) */
       
       thisc_buf[0] = (char)thisc;
       thisc_buf[1] = 0;                   /* close C string! */
@@ -5589,16 +5596,16 @@ GLOBAL BOOLEAN save_html_index(void)
       if (!html_ignore_8bit)
          html2sys(dummy);                 /* convert HTML characters to system characters  */
 
-      thisc = (size_t)dummy[0];                   /* V6.5.20 [gs] */
+      thisc = dummy[0] & 0x00FF;          /* use first character for comparison */
 
-/*    thisc = psort[thisc];
-*/            /* convert special characters (e.g. AE lig to 'A') */
+      thisc = psort[thisc];               /* convert special characters (e.g. AE lig to 'A') */
 
-      thisc = toupper((char)thisc);             /* always use capitalized index chars (issue #76) */
+      thisc = toupper(thisc);             /* always use capitalized index chars (issue #76) */
       
       thisc_buf[0] = (char)thisc;
       thisc_buf[1] = 0;                   /* close C string! */
-      label2html(thisc_buf);
+      
+      label2html(thisc_buf);              /* convert critical characters to HTML standards */
       
       if (thisc != lastc)
       {
