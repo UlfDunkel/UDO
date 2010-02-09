@@ -35,14 +35,13 @@
 *  Things to do : - tabs2spaces(): check size of n[] (might be 4096 chars now!)
 *                 - tabs2spaces(): check new faster method of strcat()
 *
-*                 - str_sort_cmp(): under construction!!!
-*
 *-------------------------------------------------------------------------------
 *  History:
 *
 *  2010:
 *    fd  Jan 23: converted all German umlauts in comments into plain ASCII
 *    fd  Jan 28: file reformatted and tidied up
+*    fd  Feb 09: str_sort_cmp(): done (so far ;-))
 *
 ******************************************|************************************/
 
@@ -1631,16 +1630,16 @@ size_t       len)  /* # of chars to compare */
 
 GLOBAL int str_sort_cmp(
 
-char       *s1,           /* ^ 1st string for comparison */
-char       *s2)           /* ^ 2nd string for comparison */
+char         *s1,           /* ^ 1st string for comparison */
+char         *s2)           /* ^ 2nd string for comparison */
 {
-   int      i = 0;        /* counter */
-   size_t   c1,           /* Unicode char value (up to 4 bytes!) */
-            c2;           /* Unicode char value (up to 4 bytes!) */
-   char     lgc[2] = "";  /* ligature char buffer */
-   char     lig[3] = "";  /* ligature string buffer */
-   size_t  (*psort);      /* ^ to sort_CODE_xxx[] arrays */
-   size_t  (*plig)[3];    /* ^ to CODE_xxx_lig[][] arrays */
+   int        i = 0;        /* counter */
+   size_t     c1,           /* Unicode char value (up to 4 bytes!) */
+              c2;           /* Unicode char value (up to 4 bytes!) */
+   char       lgc[2] = "";  /* ligature char buffer */
+   char       lig[3] = "";  /* ligature string buffer */
+   unsigned (*psort);       /* ^ to sort_CODE_xxx[] arrays */
+   unsigned (*plig)[3];     /* ^ to CODE_xxx_lig[][] arrays */
    
             
    if (!s1)                               /* s1 doesn't exist? */
