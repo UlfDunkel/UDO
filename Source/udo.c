@@ -63,6 +63,7 @@
 *                - pass1(): bugfix for issue #77
 *    fd  Feb 06: pass2(): optimized
 *    fd  Feb 08: description environment items are no longer closed here, but in ENV.C
+*    fd  Feb 09: pass2_check_environment(): made a little bit faster
 *
 ******************************************|************************************/
 
@@ -12227,6 +12228,9 @@ char     *zeile)  /* */
 {
    char  *found;  /* */
    
+   
+   if (zeile[0] == EOS)                   /* don't check empty lines! */
+      return;   
 
                                           /* ---Verbatim-Umgebung--- */
    if (pflag[PASS2].env == ENV_NONE || pflag[PASS2].env == ENV_VERBATIM)
@@ -13893,13 +13897,14 @@ GLOBAL BOOLEAN udo
          add_pass1_about_udo();
       }
 
-      if (desttype == TOHTM || desttype == TOHAH)
+      switch (desttype)
       {
+      case TOHTM:
+      case TOHAH:
          if (!no_index)
-         {
             add_pass1_index_udo();
-         }
       }
+
 
 
       if (malloc_token_output_buffer())   /* Speicher anfordern */
