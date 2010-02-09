@@ -574,13 +574,36 @@ GLOBAL void error_syntax_error ( void )
 {	error_msg_solo("syntax error");
 }
 
-GLOBAL void error_end_without_begin ( const char *se, const char *sb )
+
+
+
+
+/*******************************************************************************
+*
+*  error_end_without_begin():
+*     throw error message about !end_xxx without !begin_xxx
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void error_end_without_begin(
+
+const char  *se,      /* */
+const char  *sb)      /* */
 {
-	char m[512];
+	char      m[512];  /* */
+	
+	
 	sprintf(m, "'%s' without '%s'", se, sb);
 	errlnpos(m);
 	error_counter++;
 }
+
+
+
+
 
 GLOBAL void error_wrong_end ( const char *sb, const char *se )
 {
