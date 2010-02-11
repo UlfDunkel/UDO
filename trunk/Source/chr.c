@@ -4,6 +4,9 @@
 *  Module name  : chr.c
 *  Symbol prefix: chr
 *
+*  Description  : This module contains routines which convert strings between ISO and
+*                 the system font. There are also functions which replace characters.
+*
 *  Copyright    : 1995-2001 Dirk Hagedorn
 *  Open Source  : since 2001
 *
@@ -20,10 +23,6 @@
 *                 You should have received a copy of the GNU General Public License
 *                 along with this program; if not, write to the Free Software
 *                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*
-*  Description  : This module contains routines which convert strings between ISO and
-*                 the system font. There are also function which replace character.
-*                 
 *
 *-------------------------------------------------------------------------------
 *
