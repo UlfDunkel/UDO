@@ -306,6 +306,8 @@ LOCAL void iso2sys(char *s);
 
    /* convert ISO encoding into TOS encoding */
 
+LOCAL void iso2tos(char *s);
+
 #if !defined(__MACOS__) && !defined(__MACOSX__)
    /* convert Mac encoding into ISO encoding */
 LOCAL void mac2iso(char *s);
@@ -561,7 +563,7 @@ char *s)
 # ifndef __TOS__
 
    if ((desttype == TOSTG) || (desttype == TOPCH) )
-      iso2tos(s)
+	   iso2tos(s);
    else
 # endif
       iso2system(s);
