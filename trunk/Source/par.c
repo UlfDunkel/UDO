@@ -634,7 +634,7 @@ char       *entry)  /* */
          speccmd_counter++;
       }
       
-      if (speccmd_counter + OFFSET_SPECCMD == (int)'\177')
+      if (speccmd_counter + OFFSET_SPECCMD == (int)127)
       {
          speccmd_counter++;
       }

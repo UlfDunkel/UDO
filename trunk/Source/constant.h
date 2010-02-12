@@ -42,6 +42,7 @@
 *  2010:
 *    fd  Jan 20: new: QUOTES_...
 *    fd  Feb 05: MAX_TOKEN_LEN increased from 199 to 2048 (fix for issue #36)
+*    fd  Feb 12: BS_C, BS_S
 *
 ******************************************|************************************/
 
@@ -429,6 +430,8 @@
 #define DIVIS_S          "\032"
 #define DIVIS_S_LEN           1
 
+#define BS_C             '\010'           /* Backspace */
+#define BS_S             "\010"
 
 #define ESC_C            '\033'           /* Escape-Zeichen = \e */
 #define ESC_S            "\033"
