@@ -67,6 +67,7 @@
 *                - init_toc_forms_numbers(): HTML format strings changed to avoid leading ' '
 *                - toc_output() + its sub functions adjusted, using TOCL_HTM / TOCL_TEX
 *                - save_html_index(): sorting fixed
+*    fd  Feb 12: some octal chars resolved into constant macros
 *
 ******************************************|************************************/
 
@@ -689,7 +690,7 @@ const char  *r)  /* */
       }
       
                                           /* r5pl8 */
-      if (refs_counter + OFFSET_REF == (int)'\177')
+      if (refs_counter + OFFSET_REF == (int)127)
       {
          refs_counter++;
       }
@@ -1203,7 +1204,7 @@ const unsigned int   uiHeight)      /* image height */
                   if ( pos - 2 >= s)
                   {
                                           /* r5pl9: vorher <' ' */
-                     if (pos[-2] == '\033' && pos[-1] < '\010')
+                     if (pos[-2] == ESC_C && pos[-1] < BS_C)
                      {
                         ptr = pos + 2;
                         ignore_it = TRUE;

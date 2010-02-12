@@ -64,6 +64,7 @@
 *    fd  Feb 06: pass2(): optimized
 *    fd  Feb 08: description environment items are no longer closed here, but in ENV.C
 *    fd  Feb 09: pass2_check_environment(): made a little bit faster
+*    fd  Feb 12: some octal chars resolved into constant macros
 *
 ******************************************|************************************/
 
@@ -6932,7 +6933,7 @@ char       *s)     /* */
       case DIVIS_C:                       /* Laenge 0 */
          break;
 
-      case '\033':
+      case ESC_C:
          ptr++;
          
          switch (*ptr)
@@ -6984,7 +6985,7 @@ char       *s)     /* */
             }
             
                                           /* skip ESC sequences */
-            while (*ptr != EOS && *ptr != '\033')
+            while (*ptr != EOS && *ptr != ESC_C)
                ptr++;
             
             break;
@@ -6992,7 +6993,7 @@ char       *s)     /* */
             
          default:
                                           /* skip ESC sequences */
-            while (*ptr != EOS && *ptr != '\033')
+            while (*ptr != EOS && *ptr != ESC_C)
                ptr++;
                
             break;
