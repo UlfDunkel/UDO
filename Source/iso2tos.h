@@ -65,7 +65,7 @@ const char  *id_iso2tos_h = "@(#) iso2tos.h   $date$";
 typedef struct _iso2tos
 {
    unsigned char   iso;                   /* */
-   unsigned char   sys;                   /* */
+   unsigned char   charsys;               /* */
 }  ISO2TOS;
 
 
@@ -196,7 +196,7 @@ LOCAL const ISO2TOS   iso2tos_item[128] =
    {250, 163},                            /* 'u*/
    {251, 150},                            /* ^u*/
    {252, 129},                            /* "u*/
-   {253  'y'},                            /* 'y*//* !!!! */
+   {253, 'y'},                            /* 'y*//* !!!! */
    {254,   0},                            /* |B*//* !!!! */
    {255, 152}                             /* "y*/
 };
