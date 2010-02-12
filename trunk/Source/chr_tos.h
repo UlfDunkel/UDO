@@ -77,7 +77,7 @@ const char  *id_charset_h = "@(#) chr_tos.h   $date$";
 typedef struct _iso2sys
 {
    unsigned char   iso;                   /* */
-   unsigned char   sys;                   /* */
+   unsigned char   charsys;               /* */
 }  ISO2SYS;
 
 
@@ -106,7 +106,7 @@ LOCAL const ISO2SYS iso2sys_item[128] =
    {148,   0},                            /* "" (99u) *//* !!!! */
    {149, 249},                            /* #bullet */
    {150, '-'},                            /* -- *//* !!!! */
-   {151, -'},                            /* --- *//* !!!! */
+   {151, '-'},                            /* --- *//* !!!! */
    {152, '~'},                            /* !~ *//* !!!! */
    {153, 191},                            /* #tm */
    {154, 's'},                            /* vs */

@@ -69,7 +69,7 @@
 #define LOCAL      static
 
 #ifndef UNUSED
-#define UNUSED(x)  x = x                  /* tell compiler that variable seems to be used */
+#define UNUSED(x)  if (x) {;}             /* tell compiler that variable seems to be used */
 #endif
 
 

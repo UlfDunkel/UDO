@@ -73,7 +73,7 @@ const char  *id_charset_h = "@(#) chr_  .h    $date$";
 typedef struct _ansi2ascii
 {
    unsigned char   iso;                   /* */
-   unsigned char   sys;                   /* */
+   unsigned char   charsys;               /* */
 }  ANSI2ASCII;
 
 
