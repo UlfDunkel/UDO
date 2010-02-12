@@ -43,57 +43,62 @@
 *  2010:
 *    fd  Jan 23: - year updated
 *                - converted all German umlauts in comments into plain ASCII
+*    fd  Feb 12: comments reformatted
 *
 ******************************************|************************************/
 
 #ifndef VERSION_H
 #define VERSION_H
 
-/* ------------------------------------------------------------
-   Einige Flags um Neuentwicklungen zu (de)aktivieren
-   ------------------------------------------------------------   */
-#define USE_HTML_FOLDERS     0  /* Ordnerstruktur erzeugen?       */
-#define USE_OLD_BUILD_FILE   1  /* build_search_file() benutzen?  */
-#define USE_MYTEXTFILE       0  /* Eigene Dateiroutinen benutzen? */
 
 
-/* ------------------------------------------------------------
-   Debugging-Flags
-   ------------------------------------------------------------   */
-#define CHECK_REPLACE_LEN    0  /* qreplace*() checken? */
 
 
-/* ------------------------------------------------------------
-   Release-Nummer und Patchlevel setzen
-   ------------------------------------------------------------   */
+/*******************************************************************************
+*
+*     MACRO DEFINITIONS
+*
+******************************************|************************************/
+
+   /* --- Einige Flags um Neuentwicklungen zu (de)aktivieren --- */
+
+#define USE_HTML_FOLDERS     0            /* Ordnerstruktur erzeugen?       */
+#define USE_OLD_BUILD_FILE   1            /* build_search_file() benutzen?  */
+#define USE_MYTEXTFILE       0            /* Eigene Dateiroutinen benutzen? */
+
+
+   /* --- Debugging-Flags --- */
+   
+#define CHECK_REPLACE_LEN    0            /* qreplace*() checken? */
+
+
+   /* --- Release-Nummer und Patchlevel setzen --- */
+
 #define UDO_REL     "6"
 #define UDO_SUBVER  "5"
 #define UDO_PL      "20 beta (rev. 683)"
 #define UDO_URL     "http://www.udo-open-source.org"
 #define UDO_MADE    "Made with UDO"
 
-/* ------------------------------------------------------------
-   Copyright Meldung
-   ------------------------------------------------------------   */
+   /* --- Copyright Meldung --- */
+
 #define COPYRIGHT           "Copyright (C) 1995-2001 by Dirk Hagedorn\nCopyright (C) 2001-2010 by The UDO Community"
 #define UDO_COPYRIGHT_TEXT  "Copyright (!copyright) 1995-2001 by Dirk Hagedorn\t(!nl)\nCopyright (!copyright) 2001-2010 by The UDO Community\t(!nl)\n"
 
-/* ------------------------------------------------------------
-   Zeichensaetze
-   ------------------------------------------------------------   */
-#define CODE_LAT1    0     /* ISO Latin 1                   */
-#define CODE_DOS     1     /* IBM PC                        */
-#define CODE_437     1     /* DOS Codepage 437 (wie IBM PC) */
-#define CODE_TOS     2     /* Atari ST                      */
-#define CODE_HP8     3     /* HP-Roman-8                    */
-#define CODE_MAC     4     /* Apple Macintosh               */
-#define CODE_NEXT    5     /* NextSTep                      */
-#define CODE_850     6     /* DOS Codepage 850              */
-#define CODE_UTF8    7     /* UTF-8 (e.g. for BeOS)         */
+   /* --- Zeichensaetze --- */
 
-/* ------------------------------------------------------------
-   Compiler- und system abhaengige Dinge setzen
-   ------------------------------------------------------------   */
+#define CODE_LAT1    0                    /* ISO Latin 1                   */
+#define CODE_DOS     1                    /* IBM PC                        */
+#define CODE_437     1                    /* DOS Codepage 437 (wie IBM PC) */
+#define CODE_TOS     2                    /* Atari ST                      */
+#define CODE_HP8     3                    /* HP-Roman-8                    */
+#define CODE_MAC     4                    /* Apple Macintosh               */
+#define CODE_NEXT    5                    /* NextSTep                      */
+#define CODE_850     6                    /* DOS Codepage 850              */
+#define CODE_UTF8    7                    /* UTF-8 (e.g. for BeOS)         */
+
+   /* --- Compiler- und systemabhaengige Dinge setzen --- */
+
 #ifdef __TOS__
 #define UDO_OS               "TOS"
 #define USE_SLASH            0
@@ -111,7 +116,7 @@
 #define HAVE_TMPNAM          0
 #endif
 
-/* OS/2 Support: OS/2 verhaelt sich wie DOS */
+                                          /* OS/2 Support: OS/2 verhaelt sich wie DOS */
 #ifdef __OS2__
 #define __MSDOS__
 #endif
@@ -362,10 +367,15 @@
 #endif   /* VERSION_H */
 
 
-/* ------------------------------------------------------------
-   Definitionen testen und ggf. abbrechen, falls etwas nicht
-   angelegt wurde.
-   ------------------------------------------------------------   */
+
+
+
+/*******************************************************************************
+*
+*     ERROR OUTPUT
+*
+******************************************|************************************/
+
 #ifndef UDO_OS
 #error  "UDO_OS not defined!"
 #endif
