@@ -45,12 +45,12 @@
 ******************************************|************************************/
 
 #ifndef ID_CHARSET_H
-#define   ID_CHARSET_H
+#define ID_CHARSET_H
 const char *id_charset_h= "@(#) chr_iso.h   16.07.1998";
 #endif
 
-#ifndef   THIS_CHARSET
-#define   THIS_CHARSET   "ISO Latin1"
+#ifndef THIS_CHARSET
+#define THIS_CHARSET   "ISO Latin1"
 #endif
 
 

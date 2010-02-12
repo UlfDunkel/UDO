@@ -68,7 +68,7 @@ typedef struct _iso2sys
    char            charsys;               /* */
 }  ISO2SYS;
 
-LOCAL const ISO2SYS iso2sys_item[128]=
+LOCAL const ISO2SYS   iso2sys_item[128] =
 {
    { 128, 0      },                       /* null */
    { 129, 0      },                       /* null */
