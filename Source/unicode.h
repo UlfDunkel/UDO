@@ -1393,7 +1393,7 @@
 
 
    /* ------ 2300-23FF: Miscellaneous Technical ------ */
-#define U_ReversedNotSign                            /* 0x2310 */
+#define U_ReversedNotSign                               0x2310
 
    /* ------ 2400-243F: Control Pictures ------ */
    /* ------ 2440-245F: Optical Character Recognition ------ */
