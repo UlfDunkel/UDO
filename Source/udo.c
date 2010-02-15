@@ -65,6 +65,8 @@
 *    fd  Feb 08: description environment items are no longer closed here, but in ENV.C
 *    fd  Feb 09: pass2_check_environment(): made a little bit faster
 *    fd  Feb 12: some octal chars resolved into constant macros
+*    fd  Feb 15: - new: !code_source [] + c_code_source() -> iEncodingSource
+*                - new: !code_target [] + c_code_target() -> iEncodingTarget
 *
 ******************************************|************************************/
 
@@ -455,6 +457,8 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
    { "!sloppy",                       "",        c_sloppy,                  TRUE,  CMD_ALWAYS },
    { "!fussy",                        "",        c_fussy,                   TRUE,  CMD_ALWAYS },
    { "!code",                         "",        c_code,                    TRUE,  CMD_ALWAYS },
+   { "!code_source",                  "",        c_code_source,             TRUE,  CMD_ALWAYS },
+   { "!code_target",                  "",        c_code_target,             TRUE,  CMD_ALWAYS },
    { "!autoref",                      "",        c_autoref,                 TRUE,  CMD_ALWAYS },
    { "!autoref_items",                "",        c_autoref_items,           TRUE,  CMD_ALWAYS },
    { "!hline",                        "",        c_hline,                   TRUE,  CMD_ONLY_MAINPART },
@@ -4901,6 +4905,90 @@ LOCAL void c_code(void)
       if (strstr(s, udocharset[i].magic) != NULL)
       {
          iCharset = udocharset[i].codepage;
+         return;
+      }
+   }
+
+   error_no_charset(s);
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  c_code_source():
+*     change internal encoding
+*
+*  Notes:
+*     Reacts on the UDO command "!code_source [xxx]" and sets iEncodingSource.
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void c_code_source(void)
+{
+   char   s[256];  /* */
+   int    i;       /* */
+
+   if (token[1][0] == EOS)                /* this command needs a parameter */
+   {
+      error_missing_parameter("!code_source");
+      return;
+   }
+
+   tokcpy2(s, 256);
+
+   for (i = 0; i < MAXCHARSET; i++)
+   {
+      if (strstr(s, udocharset[i].magic) != NULL)
+      {
+         iEncodingSource = udocharset[i].codepage;
+         return;
+      }
+   }
+
+   error_no_charset(s);
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  c_code_target():
+*     change internal encoding
+*
+*  Notes:
+*     Reacts on the UDO command "!code_target [xxx]" and sets iEncodingTarget.
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void c_code_target(void)
+{
+   char   s[256];  /* */
+   int    i;       /* */
+
+   if (token[1][0] == EOS)                /* this command needs a parameter */
+   {
+      error_missing_parameter("!code_target");
+      return;
+   }
+
+   tokcpy2(s, 256);
+
+   for (i = 0; i < MAXCHARSET; i++)
+   {
+      if (strstr(s, udocharset[i].magic) != NULL)
+      {
+         iEncodingTarget = udocharset[i].codepage;
          return;
       }
    }
@@ -11829,6 +11917,14 @@ char           *datei)           /* */
                   else if (strcmp(token[0], "!code") == 0)
                   {
                      c_code();
+                  }
+                  else if (strcmp(token[0], "!code_source") == 0)
+                  {
+                     c_code_source();
+                  }
+                  else if (strcmp(token[0], "!code_target") == 0)
+                  {
+                     c_code_target();
                   }
                   else if (strcmp(token[0], "!universal_charset") == 0)
                   {
