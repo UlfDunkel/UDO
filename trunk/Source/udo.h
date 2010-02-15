@@ -45,6 +45,7 @@
 *    fd  Jan 23: - file reformatted
 *                - converted all German umlauts in comments into plain ASCII
 *                - SHOW_VARAIABLE -> SHOW_VAR
+*    fd  Feb 15: new: iEncodingSource, iEncodingTarget
 *
 ******************************************|************************************/
 
@@ -74,6 +75,8 @@ GLOBAL BOOLEAN     bNopDetected;          /* Fuer Debugging-Zwecke */
 GLOBAL int         desttype;              /* Ausgabeformat  (TOASC, ...) */
 GLOBAL int         destlang;              /* Ausgabesprache (TOENG, ...) */
 GLOBAL int         iCharset;              /* Eingabe-Zeichensatz */
+GLOBAL int         iEncodingSource;       /* encoding of UDO source documents */
+GLOBAL int         iEncodingTarget;       /* encoding of target document */
 
 GLOBAL int         iDateDay, 
                    iDateMonth, 
