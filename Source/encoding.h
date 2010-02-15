@@ -295,8 +295,7 @@ static unsigned   sort_CODE_LAT1[] =      /* CODE_LAT1 */
    0x00a4,                                /* 0xa4  U_CurrencySign */
    0x00a5,                                /* 0xa5  U_YenSign */
    0x00a6,                                /* 0xa6  U_BrokenVerticalBar */
-   0x00a7,                                /* 0x
-   }a7  U_SectionSign */
+   0x00a7,                                /* 0xa7  U_SectionSign */
    0x00a8,                                /* 0xa8  U_Diaeresis */
    0x00a9,                                /* 0xa9  U_CopyrightSign */
    0x00aa,                                /* 0xaa  U_FeminineOrdinalIndicator */
@@ -940,8 +939,8 @@ static unsigned   sort_CODE_MAC[] =       /* CODE_MAC */
    U_LatinCapitalLetterU,                 /* 0x9e  U_LatinSmallLetterUWithCircumflex */
    U_LatinCapitalLetterU,                 /* 0x9f  U_LatinSmallLetterUWithDiaeresis */
                                           
-   U_SP,                                  /* 0xa0  U_Dagger */
-   U_ExclamationMark,                     /* 0xa1  U_DegreeSign */
+   0x00a0,                                /* 0xa0  U_Dagger */
+   0x00a0,                                /* 0xa1  U_DegreeSign */
    0x00a2,                                /* 0xa2  U_CentSign */
    0x00a3,                                /* 0xa3  U_PoundSign */
    0x00a4,                                /* 0xa4  U_SectionSign */
