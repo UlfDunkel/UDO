@@ -73,9 +73,9 @@ const char *id_str_c= "@(#) str.c       $DATE$";
 #include "version.h"
 #include "msg.h"
 #include "udomem.h"
-#include "_iso.h"
-#include "_mac.h"
-#include "_tos.h"
+#include "u_iso.h"
+#include "u_mac.h"
+#include "u_tos.h"
 
 
 
