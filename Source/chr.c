@@ -144,6 +144,14 @@ const char *id_chr_c= "@(#) chr.c       $DATE$";
 #include "export.h"
 #include "chr.h"
 
+#include "_dos.h"
+#include "_hp.h"
+#include "_iso.h"
+#include "_mac.h"
+#include "_next.h"
+#include "_tos.h"
+
+
 
 
 
@@ -1262,6 +1270,160 @@ char             *s)  /* ^ string */
 
 GLOBAL void recode(
 
+char         *zeile,             /* ^ line */
+int           char_set)          /* iCharset */
+{
+   char      *ptr;               /* */
+   int        idx;               /* */
+   unsigned (*pUsrc);            /* */
+   unsigned (*pUtrg);            /* */
+   char       sSource[16] = "";  /* */
+   char       sTarget[16] = "";  /* */
+   unsigned   i;                 /* */
+   
+
+   if (iEncodingSource < 0)
+      iEncodingSource = char_set;
+   
+   if (iEncodingTarget < 0)
+      iEncodingTarget = char_set;
+   
+   if (iEncodingSource == iEncodingTarget)
+      return;
+      
+   
+   switch (iEncodingSource)
+   {
+   case CODE_437:
+      pUsrc = u_CODE_437;
+      strcpy(sSource, "DOS (cp437)");
+      break;
+      
+   case CODE_850:
+      pUsrc = u_CODE_850;
+      strcpy(sSource, "DOS (cp850)");
+      break;
+      
+   case CODE_HP8:
+      pUsrc = u_CODE_HP8;
+      strcpy(sSource, "HP-Roman8");
+      break;
+   
+   case CODE_MAC:
+      pUsrc = u_CODE_MAC;
+      strcpy(sSource, "Mac");
+      break;
+   
+   case CODE_NEXT:
+      pUsrc = u_CODE_NEXT;
+      strcpy(sSource, "NeXTSTEP");
+      break;
+   
+   case CODE_TOS:
+      pUsrc = u_CODE_TOS;
+      strcpy(sSource, "TOS");
+      break;
+   
+   case CODE_LAT1:
+   default:
+      pUsrc = u_CODE_ISO;
+      strcpy(sSource, "ISO Latin 1");
+   }
+   
+   switch (iEncodingTarget)
+   {
+   case CODE_437:
+      pUtrg = u_CODE_437;
+      strcpy(sTarget, "DOS (cp437)");
+      break;
+      
+   case CODE_850:
+      pUtrg = u_CODE_850;
+      strcpy(sTarget, "DOS (cp850)");
+      break;
+      
+   case CODE_HP8:
+      pUtrg = u_CODE_HP8;
+      strcpy(sTarget, "HP-Roman8");
+      break;
+   
+   case CODE_MAC:
+      pUtrg = u_CODE_MAC;
+      strcpy(sTarget, "Mac");
+      break;
+   
+   case CODE_NEXT:
+      pUtrg = u_CODE_NEXT;
+      strcpy(sTarget, "NeXTSTEP");
+      break;
+   
+   case CODE_TOS:
+      pUtrg = u_CODE_TOS;
+      strcpy(sTarget, "TOS");
+      break;
+   
+   case CODE_LAT1:
+   default:
+      pUtrg = u_CODE_ISO;
+      strcpy(sTarget, "ISO Latin 1");
+   }
+   
+   ptr = get_8bit_ptr(zeile);
+   
+   if (!ptr)
+      return;
+   
+   while (*ptr)                           /* check whole string */
+   {
+      idx = (UCHAR)*ptr;                  /* get char value */
+      
+      if (idx > 127)                      /* */
+      {
+         if (pUsrc[idx] != U_NIL)         /* check if conversion is possible */
+         {
+            for (i = 128; i < 256; i++)
+               if (pUtrg[i] == pUsrc[idx])
+               {
+                  *ptr = pUtrg[i];
+                  break;
+               }
+         }
+         else                             /* conversion is not possible */
+         {
+            warning_cannot_recode(*ptr, sSource, sTarget);
+
+/*          *ptr = '?';
+*/
+         }
+      }
+
+      ptr++;                              /* next character */
+   }
+}
+
+
+
+
+
+#if 0
+/*******************************************************************************
+*
+*  recode():
+*     recode a line into another encoding
+*
+*  Notes:
+*     Es wird zunaechst das erste 8-Bit-Zeichen gesucht, da[mit?] in *2iso() 
+*     und iso2sys() nicht die 7-Bit-Zeichen zweimal uebersprungen werden muessen.
+*     Ist kein 8-Bit-Zeichen enthalten, so spart man sich zwei Aufrufe mit 
+*     nutzlosen 128-Schritt-Schleifen.
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void recode(
+
 char     *zeile,     /* ^ line */
 int       char_set)  /* iCharset */
 {
@@ -1382,6 +1544,7 @@ int       char_set)  /* iCharset */
 /* #endif */
     }
 }
+#endif
 
 
 
