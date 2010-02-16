@@ -1281,6 +1281,8 @@ int           char_set)          /* iCharset */
    char       sSource[42] = "";  /* */
    char       sTarget[42] = "";  /* */
    unsigned   i;                 /* */
+   unsigned   (*psort);          /* ^ to sort_CODE_xxx[] arrays */
+   unsigned   (*plig)[3];        /* ^ t CODE_xxx_lig[][] arrays (unused here so far!) */
    
 
    if (iEncodingSource < 0)
@@ -1304,6 +1306,8 @@ int           char_set)          /* iCharset */
    
    case CODE_CP1250:
       pUsrc = u_CODE_CP1250;
+      plig  = CODE_CP1250_lig;
+      psort = sort_CODE_CP1250;
       strcpy(sSource, "Windows codepage 1250");
       break;
       
@@ -1314,6 +1318,8 @@ int           char_set)          /* iCharset */
    
    case CODE_MAC:
       pUsrc = u_CODE_MAC;
+      plig  = CODE_MAC_lig;
+      psort = sort_CODE_MAC;
       strcpy(sSource, "Mac");
       break;
    
@@ -1324,12 +1330,16 @@ int           char_set)          /* iCharset */
    
    case CODE_TOS:
       pUsrc = u_CODE_TOS;
+      plig  = CODE_TOS_lig;
+      psort = sort_CODE_TOS;
       strcpy(sSource, "TOS");
       break;
    
    case CODE_LAT1:
    default:
       pUsrc = u_CODE_LAT1;
+      plig  = CODE_LAT1_lig;
+      psort = sort_CODE_LAT1;
       strcpy(sSource, "ISO Latin 1");
    }
    
@@ -1375,6 +1385,10 @@ int           char_set)          /* iCharset */
       pUtrg = u_CODE_LAT1;
       strcpy(sTarget, "ISO Latin 1");
    }
+   
+   UNUSED(plig);
+   UNUSED(psort);
+   
    
    /* --- force format requirements --- */
    

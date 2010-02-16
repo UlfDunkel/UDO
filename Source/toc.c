@@ -68,6 +68,7 @@
 *                - toc_output() + its sub functions adjusted, using TOCL_HTM / TOCL_TEX
 *                - save_html_index(): sorting fixed
 *    fd  Feb 12: some octal chars resolved into constant macros
+*    fd  Feb 16: CODE_CP1250_lig, sort_CODE_CP1250 added
 *
 ******************************************|************************************/
 
@@ -5537,15 +5538,9 @@ GLOBAL BOOLEAN save_html_index(void)
 
    switch (iEncodingTarget)               /* use the right tables! ;-) */
    {
-   case CODE_TOS:
-      psort = sort_CODE_TOS;
-      plig  = CODE_TOS_lig;
-      pumap = u_CODE_TOS;
-      break;
-   
    case CODE_CP1250:
-      psort = sort_CODE_LAT1;
-      plig  = CODE_LAT1_lig;
+      psort = sort_CODE_CP1250;
+      plig  = CODE_CP1250_lig;
       pumap = u_CODE_CP1250;
       break;
    
@@ -5553,6 +5548,12 @@ GLOBAL BOOLEAN save_html_index(void)
       psort = sort_CODE_MAC;
       plig  = CODE_MAC_lig;
       pumap = u_CODE_MAC;
+      break;
+   
+   case CODE_TOS:
+      psort = sort_CODE_TOS;
+      plig  = CODE_TOS_lig;
+      pumap = u_CODE_TOS;
       break;
    
    case CODE_LAT1:
