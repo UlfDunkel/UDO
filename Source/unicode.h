@@ -32,9 +32,12 @@
 *             - 0300-036F: Combining Diacritical Marks
 *     Aug 19: - E000-F8FF: defining swap characters for CZE CFN fonts
 *  2010:
-*    fd Jan 25: - 05D0-05EA: some Hebrew characters added for TOS
-*               - various mathematical characters added (0x22..)
-*               - 0370-03FF: Greek (incomplete, just the main alphabeth)
+*    fd  Jan 25: - 05D0-05EA: some Hebrew characters added for TOS
+*                - various mathematical characters added (0x22..)
+*                - 0370-03FF: Greek (incomplete, just the main alphabeth)
+*    fd  Feb 15: - 25A0-25FF completed
+*                - 2580-259F completed
+*    fd  Feb 16: tiny adjustments
 *
 ******************************************|************************************/
 /*KEY _NAME="unicode definitions" */
@@ -526,7 +529,7 @@
 #define U_LatinCapitalLetterSchwa                       0x018F  /*  */
 #define U_LatinCapitalLetterEpsilon                     0x0190  /*  */
 #define U_LatinCapitalLetterFWithHook                   0x0191  /*  */
-#define U_LatinSmallLetterScriptF                       0x0192  /* florijn */
+#define U_LatinSmallLetterScriptF                       0x0192  /* LATIN SMALL LETTER F WITH HOOK, florijn */
 #define U_LatinCapitalLetterGWithHook                   0x0193  /*  */
 #define U_LatinCapitalLetterGamma                       0x0194  /*  */
 #define U_LatinSmallLetterHV                            0x0195  /*  */
@@ -973,7 +976,7 @@
 #define U_GreekCapitalLetterChi                         0x03A7
 #define U_GreekCapitalLetterPsi                         0x03A8
 #define U_GreekCapitalLetterOmega                       0x03A9
-   /* ... */                                         /* 0x2200 .. 0x2211 */
+   /* ... */                                         /* 0x03AA .. 0x03B0 */
 #define U_GreekSmallLetterAlpha                         0x03B1
 #define U_GreekSmallLetterBeta                          0x03B2
 #define U_GreekSmallLetterGamma                         0x03B3
@@ -1393,26 +1396,282 @@
 
 
    /* ------ 2300-23FF: Miscellaneous Technical ------ */
+
+   /* ... */                                         /* 0x2300 .. 0x230F */
 #define U_ReversedNotSign                               0x2310
+   /* ... */                                         /* 0x2311 .. 0x231F */
+#define U_TopHalfIntegral                               0x2320
+#define U_BottomHalfIntegral                            0x2321
+
 
    /* ------ 2400-243F: Control Pictures ------ */
    /* ------ 2440-245F: Optical Character Recognition ------ */
    /* ------ 2460-24FF: Enclosed Alphanumerics ------ */
    /* ------ 2500-257F: Box Drawing ------ */
+
+#define U_BoxDrawingsLightHorizontal                    0x2500
+#define U_BoxDrawingsHeavyHorizontal                    0x2501
+#define U_BoxDrawingsLightVertical                      0x2502
+#define U_BoxDrawingsHeavyVertical                      0x2503
+#define U_BoxDrawingsLightTripleDashHorizontal          0x2504
+#define U_BoxDrawingsHeavyTripleDashHorizontal          0x2505
+#define U_BoxDrawingsLightTripleDashVertical            0x2506
+#define U_BoxDrawingsHeavyTripleDashVertical            0x2507
+#define U_BoxDrawingsLightQuadrupleDashHorizontal       0x2508
+#define U_BoxDrawingsHeavyQuadrupleDashHorizontal       0x2509
+#define U_BoxDrawingsLightQuadrupleDashVertical         0x250A
+#define U_BoxDrawingsHeavyQuadrupleDashVertical         0x250B
+#define U_BoxDrawingsLightDownAndRight                  0x250C
+#define U_BoxDrawingsDownLightAndRightHeavy             0x250D
+#define U_BoxDrawingsDownHeavyAndRightLight             0x250E
+#define U_BoxDrawingsHeavyDownAndRight                  0x250F
+#define U_BoxDrawingsLightDownAndLeft                   0x2510
+#define U_BoxDrawingsDownLightAndLeftHeavy              0x2511
+#define U_BoxDrawingsDownHeavyAndLeftLight              0x2512
+#define U_BoxDrawingsHeavyDownAndLeft                   0x2513
+#define U_BoxDrawingsLightUpAndRight                    0x2514
+#define U_BoxDrawingsUpLightAndRightHeavy               0x2515
+#define U_BoxDrawingsUpHeavyAndRightLight               0x2516
+#define U_BoxDrawingsHeavyUpAndRight                    0x2517
+#define U_BoxDrawingsLightUpAndLeft                     0x2518
+#define U_BoxDrawingsUpLightAndLeftHeavy                0x2519
+#define U_BoxDrawingsUpHeavyAndLeftLight                0x251A
+#define U_BoxDrawingsHeavyUpAndLeft                     0x251B
+#define U_BoxDrawingsLightVerticalAndRight              0x251C
+#define U_BoxDrawingsVerticalLightAndRightHeavy         0x251D
+#define U_BoxDrawingsUpHeavyAndRightDownLight           0x251E
+#define U_BoxDrawingsDownHeavyAndRightUpLight           0x251F
+#define U_BoxDrawingsVerticalHeavyAndRightLight         0x2520
+#define U_BoxDrawingsDownLightAndRightUpHeavy           0x2521
+#define U_BoxDrawingsUpLightAndRightDownHeavy           0x2522
+#define U_BoxDrawingsHeavyVerticalAndRight              0x2523
+#define U_BoxDrawingsLightVerticalAndLeft               0x2524
+#define U_BoxDrawingsVerticalLightAndLeftHeavy          0x2525
+#define U_BoxDrawingsUpHeavyAndLeftDownLight            0x2526
+#define U_BoxDrawingsDownHeavyAndLeftUpLight            0x2527
+#define U_BoxDrawingsVerticalHeavyAndLeftLight          0x2528
+#define U_BoxDrawingsDownLightAndLeftUpHeavy            0x2529
+#define U_BoxDrawingsUpLightAndLeftDownHeavy            0x252A
+#define U_BoxDrawingsHeavyVerticalAndLeft               0x252B
+#define U_BoxDrawingsLightDownAndHorizontal             0x252C
+#define U_BoxDrawingsLeftHeavyAndRightDownLight         0x252D
+#define U_BoxDrawingsRightHeavyAndLeftDownLight         0x252E
+#define U_BoxDrawingsDownLightAndHorizontalHeavy        0x252F
+#define U_BoxDrawingsDownHeavyAndHorizontalLight        0x2530
+#define U_BoxDrawingsRightLightAndLeftDownHeavy         0x2531
+#define U_BoxDrawingsLeftLightAndRightDownHeavy         0x2532
+#define U_BoxDrawingsHeavyDownAndHorizontal             0x2533
+#define U_BoxDrawingsLightUpAndHorizontal               0x2534
+#define U_BoxDrawingsLeftHeavyAndRightUpLight           0x2535
+#define U_BoxDrawingsRightHeavyAndLeftUpLight           0x2536
+#define U_BoxDrawingsUpLightAndHorizontalHeavy          0x2537
+#define U_BoxDrawingsUpHeavyAndHorizontalLight          0x2538
+#define U_BoxDrawingsRightLightAndLeftUpHeavy           0x2539
+#define U_BoxDrawingsLeftLightAndRightUpHeavy           0x253A
+#define U_BoxDrawingsHeavyUpAndHorizontal               0x253B
+#define U_BoxDrawingsLightVerticalAndHorizontal         0x253C
+#define U_BoxDrawingsLeftHeavyAndRightVerticalLight     0x253D
+#define U_BoxDrawingsRightHeavyAndLeftVerticalLight     0x253E
+#define U_BoxDrawingsVerticalLightAndHorizontalHeavy    0x253F
+#define U_BoxDrawingsUpHeavyAndDownHorizontalLight      0x2540
+#define U_BoxDrawingsDownHeavyAndUpHorizontalLight      0x2541
+#define U_BoxDrawingsVerticalHeavyAndHorizontalLight    0x2542
+#define U_BoxDrawingsLeftUpHeavyAndRightDownLight       0x2543
+#define U_BoxDrawingsRightUpHeavyAndLeftDownLight       0x2544
+#define U_BoxDrawingsLeftDownHeavyAndRightUpLight       0x2545
+#define U_BoxDrawingsRightDownHeavyAndLeftUpLight       0x2546
+#define U_BoxDrawingsDownLightAndUpHorizontalHeavy      0x2547
+#define U_BoxDrawingsUpLightAndDownHorizontalHeavy      0x2548
+#define U_BoxDrawingsRightLightAndLeftVerticalHeavy     0x2549
+#define U_BoxDrawingsLeftLightAndRightVerticalHeavy     0x254A
+#define U_BoxDrawingsHeavyVerticalAndHorizontal         0x254B
+#define U_BoxDrawingsLightDoubleDashHorizontal          0x254C
+#define U_BoxDrawingsHeavyDoubleDashHorizontal          0x254D
+#define U_BoxDrawingsLightDoubleDashVertical            0x254E
+#define U_BoxDrawingsHeavyDoubleDashVertical            0x254F
+#define U_BoxDrawingsDoubleHorizontal                   0x2550
+#define U_BoxDrawingsDoubleVertical                     0x2551
+#define U_BoxDrawingsDownSingleAndRightDouble           0x2552
+#define U_BoxDrawingsDownDoubleAndRightSingle           0x2553
+#define U_BoxDrawingsDoubleDownAndRight                 0x2554
+#define U_BoxDrawingsDownSingleAndLeftDouble            0x2555
+#define U_BoxDrawingsDownDoubleAndLeftSingle            0x2556
+#define U_BoxDrawingsDoubleDownAndLeft                  0x2557
+#define U_BoxDrawingsUpSingleAndRightDouble             0x2558
+#define U_BoxDrawingsUpDoubleAndRightSingle             0x2559
+#define U_BoxDrawingsDoubleUpAndRight                   0x255A
+#define U_BoxDrawingsUpSingleAndLeftDouble              0x255B
+#define U_BoxDrawingsUpDoubleAndLeftSingle              0x255C
+#define U_BoxDrawingsDoubleUpAndLeft                    0x255D
+#define U_BoxDrawingsVerticalSingleAndRightDouble       0x255E
+#define U_BoxDrawingsVerticalDoubleAndRightSingle       0x255F
+#define U_BoxDrawingsDoubleVerticalAndRight             0x2560
+#define U_BoxDrawingsVerticalSingleAndLeftDouble        0x2561
+#define U_BoxDrawingsVerticalDoubleAndLeftSingle        0x2562
+#define U_BoxDrawingsDoubleVerticalAndLeft              0x2563
+#define U_BoxDrawingsDownSingleAndHorizontalDouble      0x2564
+#define U_BoxDrawingsDownDoubleAndHorizontalSingle      0x2565
+#define U_BoxDrawingsDoubleDownAndHorizontal            0x2566
+#define U_BoxDrawingsUpSingleAndHorizontalDouble        0x2567
+#define U_BoxDrawingsUpDoubleAndHorizontalSingle        0x2568
+#define U_BoxDrawingsDoubleUpAndHorizontal              0x2569
+#define U_BoxDrawingsVerticalSingleAndHorizontalDouble  0x256A
+#define U_BoxDrawingsVerticalDoubleAndHorizontalSingle  0x256B
+#define U_BoxDrawingsDoubleVerticalAndHorizontal        0x256C
+#define U_BoxDrawingsLightArcDownAndRight               0x256D
+#define U_BoxDrawingsLightArcDownAndLeft                0x256E
+#define U_BoxDrawingsLightArcUpAndLeft                  0x256F
+#define U_BoxDrawingsLightArcUpAndRight                 0x2570
+#define U_BoxDrawingsLightDiagonalUpperRightToLowerLeft 0x2571
+#define U_BoxDrawingsLightDiagonalUpperLeftToLowerRight 0x2572
+#define U_BoxDrawingsLightDiagonalCross                 0x2573
+#define U_BoxDrawingsLightLeft                          0x2574
+#define U_BoxDrawingsLightUp                            0x2575
+#define U_BoxDrawingsLightRight                         0x2576
+#define U_BoxDrawingsLightDown                          0x2577
+#define U_BoxDrawingsHeavyLeft                          0x2578
+#define U_BoxDrawingsHeavyUp                            0x2579
+#define U_BoxDrawingsHeavyRight                         0x257A
+#define U_BoxDrawingsHeavyDown                          0x257B
+#define U_BoxDrawingsLightLeftAndHeavyRight             0x257C
+#define U_BoxDrawingsLightUpAndHeavyDown                0x257D
+#define U_BoxDrawingsHeavyLeftAndLightRight             0x257E
+#define U_BoxDrawingsHeavyUpAndLightDown                0x257F
+
+
    /* ------ 2580-259F: Block Elements ------ */
 
-   /* ------ 25A0-25FF: Geometric Shapes ------ */
+#define U_UpperHalfBlock                                0x2580
+#define U_LowerOneEighthBlock                           0x2581
+#define U_LowerOneQuarterBlock                          0x2582
+#define U_LowerThreeEighthsBlock                        0x2583
+#define U_LowerHalfBlock                                0x2584
+#define U_LowerFiveEighthsBlock                         0x2585
+#define U_LowerThreeQuartersBlock                       0x2586
+#define U_LoverSevenEighthsBlock                        0x2587
+#define U_FullBlock                                     0x2588
+#define U_LeftSevenEighthsBlock                         0x2589
+#define U_LeftThreeQuartersBlock                        0x258A
+#define U_LeftFiveEighthsBlock                          0x258B
+#define U_LeftHalfBlock                                 0x258C
+#define U_LeftThreeEighthsBlock                         0x258D
+#define U_LeftOneQuarterBlock                           0x258E
+#define U_LeftOneEighthBlock                            0x258F
+#define U_RightHalfBlock                                0x2590
+#define U_LightShade                                    0x2591
+#define U_MediumShade                                   0x2592
+#define U_DarkShade                                     0x2593
+#define U_UpperOneEighthBlock                           0x2594
+#define U_rightOneEighthBlock                           0x2595
+#define U_QuadrantLowerLeft                             0x2596
+#define U_QuadrantLowerRight                            0x2597
+#define U_QuadrantUpperLeft                             0x2598
+#define U_QuadrantUpperLeftAndLowerLeftAndLowerRight    0x2599
+#define U_QuadrantUpperLeftAndLowerRight                0x259A
+#define U_QuadrantUpperLeftAndUpperRightAndLowerLeft    0x259B
+#define U_QuadrantUpperLeftAndUpperRightAndLowerRight   0x259C
+#define U_QuadrantUpperRight                            0x259D
+#define U_QuadrantUpperRightAndLowerLeft                0x259E
+#define U_QuadrantUpperRightAndLowerLeftAndLowerRight   0x259F
 
-   /*        N.B.: Not all definitions listed yet!!! */
+
+   /* ------ 25A0-25FF: Geometric Shapes ------ */
 #define U_BlackSquare                                   0x25A0
 #define U_WhiteSquare                                   0x25A1
-   /* ... */                                         /* 0x25A2 .. 0x25B5 */
+#define U_WhiteSquareWithRoundedCorners                 0x25A2
+#define U_WhiteSquareContainingBlackSmallSquare         0x25A3
+#define U_SquareWithHorizontalFill                      0x25A4
+#define U_SquareWithVerticalFill                        0x25A5
+#define U_SquareWithOrthogonalCrosshatchFill            0x25A6
+#define U_SquareWithUpperLeftToLowerRightFill           0x25A7
+#define U_SquareWithUpperRightToLowerLeftFill           0x25A8
+#define U_SquareWithDiagonaCrosshatchFill               0x25A9
+#define U_BlackSmallSquare                              0x25AA
+#define U_WhiteSmallSquare                              0x25AB
+#define U_BlackRectangle                                0x25AC
+#define U_WhiteRectangle                                0x25AD
+#define U_BlackVerticalRectangle                        0x25AE
+#define U_WhiteVerticalRectangle                        0x25AF
+#define U_BlackParallelogram                            0x25B0
+#define U_WhiteParallelogram                            0x25B1
+#define U_BlackUpPointingTriangle                       0x25B2
+#define U_WhiteUpPointingTriangle                       0x25B3
+#define U_BlackUpPointingSmallTriangle                  0x25B4
+#define U_WhiteUpPointingSmallTriangle                  0x25B5
 #define U_BlackRightPointingTriangle                    0x25B6
-   /* ... */                                         /* 0x25B7 .. 0x25BF */
+#define U_WhiteRightPointingTriangle                    0x25B7
+#define U_BlackRightPointingSmallTriangle               0x25B8
+#define U_BlackWhitePointingSmallTriangle               0x25B9
+#define U_BlackRightPointingPointer                     0x25BA
+#define U_WhiteRightPointingPointer                     0x25BB
+#define U_BlackDownPointingTriangle                     0x25BC
+#define U_WhiteDownPointingTriangle                     0x25BD
+#define U_BlackDownPointingSmallTriangle                0x25BE
+#define U_WhiteDownPointingSmallTriangle                0x25BF
 #define U_BlackLeftPointingTriangle                     0x25C0
-   /* ... */                                         /* 0x25C1 .. 0x25C9 */
+#define U_WhiteLeftPointingTriangle                     0x25C1
+#define U_BlackLeftPointingSmallTriangle                0x25C2
+#define U_WhiteLeftPointingSmallTriangle                0x25C3
+#define U_BlackLeftPointingPointer                      0x25C4
+#define U_WhiteLeftPointingPointer                      0x25C5
+#define U_BlackDiamond                                  0x25C6
+#define U_WhiteDiamond                                  0x25C7
+#define U_WhiteDiamondContainingBlackSmallDiamond       0x25C8
+#define U_Fisheye                                       0x25C9
 #define U_Lozenge                                       0x25CA
-   /* ... */                                         /* 0x25CB .. */
+#define U_WhiteCircle                                   0x25CB
+#define U_DottedCircle                                  0x25CC
+#define U_CircleWithVerticalFill                        0x25CD
+#define U_Bullseye                                      0x25CE
+#define U_BlackCircle                                   0x25CF
+#define U_CircleWithLeftHalfBlack                       0x25D0
+#define U_CircleWithRightHalfBlack                      0x25D1
+#define U_CircleWithLowerHalfBlack                      0x25D2
+#define U_CircleWithUpperHalfBlack                      0x25D3
+#define U_CircleWithUpperRightQuadrantBlack             0x25D4
+#define U_CircleWithAllButUpperLeftQuadrantBlack        0x25D5
+#define U_LeftHalfBlackCircle                           0x25D6
+#define U_RightHalfBlackCircle                          0x25D7
+#define U_InverseBullet                                 0x25D8
+#define U_InverseWhiteCircle                            0x25D9
+#define U_UpperHalfInverseWhiteCircle                   0x25DA
+#define U_LowerHalfInverseWhiteCircle                   0x25DB
+#define U_UpperLeftQuadrantCircularArc                  0x25DC
+#define U_UpperRightQuadrantCircularArc                 0x25DD
+#define U_LowerRightQuadrantCircularArc                 0x25DE
+#define U_LowerLeftQuadrantCircularArc                  0x25DF
+#define U_UpperHalfCircle                               0x25E0
+#define U_LowerHalfCircle                               0x25E1  
+#define U_BlackLowerRightTriangle                       0x25E2
+#define U_BlackLowerLeftTriangle                        0x25E3
+#define U_BlackUpperLeftTriangle                        0x25E4
+#define U_BlackUpperRightTriangle                       0x25E5
+#define U_WhiteBullet                                   0x25E6
+#define U_SquareWithLeftHalfBlack                       0x25E7
+#define U_SquareWithRightHalfBlack                      0x25E8
+#define U_SquareWithUpperLeftDiagonalHalfBlack          0x25E9
+#define U_SquareWithLowerRightDiagonalHalfBlack         0x25EA
+#define U_WhiteSquareWithVerticalBisectingLine          0x25EB
+#define U_WhiteUpPointingTriangleWithDot                0x25EC
+#define U_UpPointingTriangleWithLeftHalfBlack           0x25ED
+#define U_UpPointingTriangleWithRightHalfBlack          0x25EE
+#define U_LargeCircle                                   0x25EF
+#define U_WhiteSquareWithUpperLeftQuadrant              0x25F0
+#define U_WhiteSquareWithLowerLeftQuadrant              0x25F1
+#define U_WhiteSquareWithLowerRightQuadrant             0x25F2
+#define U_WhiteSquareWithUpperRightQuadrant             0x25F3
+#define U_WhiteCircleWithUpperLeftQuadrant              0x25F4
+#define U_WhiteCircleWithLowerLeftQuadrant              0x25F5
+#define U_WhiteCircleWithLowerRightQuadrant             0x25F6
+#define U_WhiteCircleWithUpperRightQuadrant             0x25F7
+#define U_UpperLeftTriangle                             0x25F8
+#define U_UpperRightTriangle                            0x25F9
+#define U_LowerLeftTriangle                             0x25FA
+#define U_WhiteMediumSquare                             0x25FB
+#define U_BlackMediumSquare                             0x25FC
+#define U_WhiteMediumSmallSquare                        0x25FD
+#define U_BlackMediumSmallSquare                        0x25FE
+#define U_LowerRightTriangle                            0x25FF
 
 
    /* ------ 2600-26FF: Miscellaneous Symbols ------ */
