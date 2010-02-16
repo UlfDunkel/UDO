@@ -126,6 +126,7 @@ const char *id_udo_c= "@(#) udo.c       $Date$";
 #include "export.h"
 #include "udo.h"                          /* globale Prototypen */
 #include "udomem.h"                       /* Memory-Management */
+#include "recode.h"
 
 
 
@@ -11445,8 +11446,10 @@ char           *datei)           /* */
             len--;
          }
 
+/*
          recode(zeile, iCharset);
          convert_sz(zeile);
+*/
 
 
          if (pflag[PASS1].env == ENV_NONE)
@@ -13966,6 +13969,10 @@ GLOBAL BOOLEAN udo
    b1stApost              = TRUE;
    iCharset               = SYSTEM_CHARSET;
    bDocUniversalCharsetOn = FALSE;
+   
+   iEncodingSource        = -1;
+   iEncodingTarget        = -1;
+   
 
    show_udo_intro();
 
