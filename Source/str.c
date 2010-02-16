@@ -4,6 +4,8 @@
 *  Module name  : str.c
 *  Symbol prefix: str
 *
+*  Description  : This module contains various string manipulation functions.
+*
 *  Copyright    : 1995-2001 Dirk Hagedorn
 *  Open Source  : since 2001
 *
@@ -21,8 +23,6 @@
 *                 along with this program; if not, write to the Free Software
 *                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 *
-*  Description  : This module contains various string manipulation functions.
-*
 *-------------------------------------------------------------------------------
 *
 *  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
@@ -34,6 +34,7 @@
 *-------------------------------------------------------------------------------
 *  Things to do : - tabs2spaces(): check size of n[] (might be 4096 chars now!)
 *                 - tabs2spaces(): check new faster method of strcat()
+*                 - str_sort_tmp(): add more tables when available
 *
 *-------------------------------------------------------------------------------
 *  History:
@@ -42,6 +43,7 @@
 *    fd  Jan 23: converted all German umlauts in comments into plain ASCII
 *    fd  Jan 28: file reformatted and tidied up
 *    fd  Feb 09: str_sort_cmp(): done (so far ;-))
+*    fd  Feb 16: str_sort_cmp(): adjusted to new encoding tables
 *
 ******************************************|************************************/
 
@@ -65,15 +67,14 @@ const char *id_str_c= "@(#) str.c       $DATE$";
 #include <string.h>
 #include <ctype.h>
 #include "portab.h"
-
 #include "export.h"
 #include "str.h"
 #include "version.h"
-
 #include "msg.h"
-
 #include "udomem.h"
-#include "encoding.h"                     /* sorting code tables */
+#include "_iso.h"
+#include "_mac.h"
+#include "_tos.h"
 
 
 
@@ -85,8 +86,7 @@ const char *id_str_c= "@(#) str.c       $DATE$";
 *
 ******************************************|************************************/
 
-extern int   iCharset;                    /* udo.h: Eingabe-Zeichensatz */
-
+extern int   iEncodingTarget;             /* udo.h: target encoding */
 
 
 
@@ -718,7 +718,7 @@ const size_t   rlen)     /* */
 
 /*******************************************************************************
 *
-*  xxxxxxxxxxxxxxxxxxxxxxxxxx():
+*  qreplace_last():
 *     quickly replace last occurrence of <search> by <replace> in <string>
 *
 *  Notes:
@@ -1639,7 +1639,11 @@ char         *s2)           /* ^ 2nd string for comparison */
    char       lgc[2] = "";  /* ligature char buffer */
    char       lig[3] = "";  /* ligature string buffer */
    unsigned (*psort);       /* ^ to sort_CODE_xxx[] arrays */
+   unsigned (*pumap);       /* ^ to u_CODE_xxx[] arrays */
    unsigned (*plig)[3];     /* ^ to CODE_xxx_lig[][] arrays */
+   char      *psbuf;        /* ^ char begin */
+   size_t     len1,         /* length of original 1st string */
+              len2;         /* length of original 2nd string */
    
             
    if (!s1)                               /* s1 doesn't exist? */
@@ -1649,26 +1653,41 @@ char         *s2)           /* ^ 2nd string for comparison */
       return 1;                           /* so s1 is greater */
 
 
-   switch (iCharset)                      /* use the right tables! ;-) */
+   switch (iEncodingTarget)               /* use the right tables! ;-) */
    {
    case CODE_TOS:
       plig  = CODE_TOS_lig;
       psort = sort_CODE_TOS;
+      pumap = u_CODE_TOS;
+      break;
+   
+   case CODE_CP1250:
+      plig = CODE_LAT1_lig;
+      psort = sort_CODE_LAT1;
+      pumap = u_CODE_CP1250;
       break;
    
    case CODE_MAC:
       plig  = CODE_MAC_lig;
       psort = sort_CODE_MAC;
+      pumap = u_CODE_MAC;
       break;
    
    case CODE_LAT1:
    default:
       plig  = CODE_LAT1_lig;
       psort = sort_CODE_LAT1;
+      pumap = u_CODE_LAT1;
    }
-
+   
+   UNUSED(pumap);
+   
+   len1 = strlen(s1);
+   len2 = strlen(s2);
+   
+   
    /* --- resolve ligature characters with more than one character --- */
-
+   
    while (plig[i][0] != 0x00)             /* EOL not reached */
    {
       lgc[0] = plig[i][0];                /* get ligature character */
@@ -1683,32 +1702,57 @@ char         *s2)           /* ^ 2nd string for comparison */
       i++;                                /* next ligature */
    }
 
-   my_strupr(s1);                         /* we compare uppercase only */
-   my_strupr(s2);
+
+   /* --- 'flatten' extended characters --- */
+   
+   psbuf = s1;                            /* remember begin of st string */
+   
+   do
+   {
+      c1 = psort[*s1 & 0x00FF];
+      *s1++ = c1;
+   }
+   while (c1 != EOS);
+   
+   s1 = psbuf;                            /* restore ^ 1st string */
+   
+   psbuf = s2;                            /* remember begin of 2nd string */
+   
+   do
+   {
+      c2 = psort[*s2 & 0x00FF];
+      *s2++ = c2;
+   }
+   while (c2 != EOS);
+   
+   s2 = psbuf;                            /* restore ^ 2nd string */
+   
+   
+   s1 = strupr(s1);                       /* we compare UPPERCASE */
+   s2 = strupr(s2);
 
    
    do                                     /* --- compare characters --- */
    {
-      c1 = psort[*s1];
-      c2 = psort[*s2];
+      c1 = *s1;
+      c2 = *s2;
       
       s1++;
       s2++;
    }
    while (c1 != '\0' && c1 == c2);
    
-   if (c1 == c2)
-      return 0;
-
-/*   
-   if (c1 == '\0')
-      return -1;
    
-   if (c2 == '\0')
-      return 1;
+   /* --- result --- */
    
-   return (c1 - c2);
-*/
+   if (c1 == c2)                          /* strings seem to be identical */
+   {
+      if (len1 == len2)                   /* even string lengths are identical */
+         return 0;                        /* THEY ARE IDENTICAL! */
+      
+      return (len1 < len2) ? 1 : -1;      /* compare string lengths of originals */
+                                          /* e.g. 'ae' is lower than '"a' */
+   }
 
    return (c1 < c2) ? -1 : 1;
 }

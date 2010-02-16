@@ -4,6 +4,12 @@
 *  Module name  : toc.c
 *  Symbol prefix: toc
 *
+*  Description  : This module contains routines which handle chapters, labels, aliases,
+*                 table of contents and automatic referencing.
+*
+*                 Please find a detailed description of all variables in
+*                 init_module_toc().
+*
 *  Copyright    : 1995-2001 Dirk Hagedorn
 *  Open Source  : since 2001
 *
@@ -20,12 +26,6 @@
 *                 You should have received a copy of the GNU General Public License
 *                 along with this program; if not, write to the Free Software
 *                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*
-*  Description  : This module contains routines which handle chapters, labels, aliases,
-*                 table of contents and automatic referencing.
-*
-*                 Please find a detailed description of all variables in
-*                 init_module_toc().
 *
 *-------------------------------------------------------------------------------
 *
@@ -119,7 +119,10 @@ const char *id_toc_c= "@(#) toc.c       $DATE$";
 #include "export.h"
 #include "toc.h"
 #include "udomem.h"
-#include "encoding.h"                      /* sort_CODE_...[] */
+
+#include "_iso.h"
+#include "_mac.h"
+#include "_tos.h"
 
 
 
@@ -5453,6 +5456,7 @@ GLOBAL BOOLEAN save_html_index(void)
    char         jumplist[4096];  /* buffer string for A-Z navigation bar */
    char         thisc_buf[42];   /* buffer string for converted thisc */
    unsigned   (*psort);          /* ^ to sort_CODE_xxx[] arrays */
+   unsigned   (*pumap);          /* ^ to u_CODE_xxx[] arrays */
    unsigned   (*plig)[3];        /* ^ t CODE_xxx_lig[][] arrays (unused here so far!) */
 
    
@@ -5475,39 +5479,6 @@ GLOBAL BOOLEAN save_html_index(void)
       return FALSE;
    
    fprintf(uif, "!newpage\n");            /* output index page stuff in UDO format */
-
-/*   fprintf(uif, "!code [sys]\n");
-*/
-
-#if 0
-   for (i = 0; i < MAXCHARSET; i++)       /* swap encoding! */
-   {
-      if (udocharset[i].codepage == iEncodingTarget)
-      {
-         fprintf(uif, "!code_source [%s]\n", udocharset[i].magic);
-         break;
-      }
-   }
-   for (i = 0; i < MAXCHARSET; i++)       /* swap encoding! */
-   {
-      if (udocharset[i].codepage == iEncodingSource)
-      {
-         fprintf(uif, "!code_target [%s]\n", udocharset[i].magic);
-         break;
-      }
-   }
-#endif
-
-   for (i = 0; i < MAXCHARSET; i++)       /* swap encoding! */
-   {
-      if (udocharset[i].codepage == iEncodingTarget)
-      {
-         fprintf(uif, "!code_source [%s]\n", udocharset[i].magic);
-         fprintf(uif, "!code_target [%s]\n", udocharset[i].magic);
-         break;
-      }
-   }
-
    fprintf(uif, "!sloppy\n\n");
    fprintf(uif, "!node* %s\n", lang.index);
    fprintf(uif, "!html_name indexudo\n");
@@ -5563,25 +5534,36 @@ GLOBAL BOOLEAN save_html_index(void)
    
    qsort(html_index, num_index, sizeof(HTML_INDEX), comp_index_html);
 
+
    switch (iEncodingTarget)               /* use the right tables! ;-) */
    {
    case CODE_TOS:
       psort = sort_CODE_TOS;
       plig  = CODE_TOS_lig;
+      pumap = u_CODE_TOS;
+      break;
+   
+   case CODE_CP1250:
+      psort = sort_CODE_LAT1;
+      plig  = CODE_LAT1_lig;
+      pumap = u_CODE_CP1250;
       break;
    
    case CODE_MAC:
       psort = sort_CODE_MAC;
       plig  = CODE_MAC_lig;
+      pumap = u_CODE_MAC;
       break;
    
    case CODE_LAT1:
    default:
       psort = sort_CODE_LAT1;
       plig  = CODE_LAT1_lig;
+      pumap = u_CODE_LAT1;
    }
    
-   plig = plig;                           /* unused so far */
+   UNUSED(plig);
+   UNUSED(pumap);
 
    
    /* --- create index A-Z jumplist --- */
