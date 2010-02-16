@@ -458,7 +458,7 @@
 #define U_LatinSmallLetterOWithMacron                   0x014D  /*  */
 #define U_LatinCapitalLetterOWithBreve                  0x014E  /*  */
 #define U_LatinSmallLetterOWithBreve                    0x014F  /*  */
-#define U_LatinCapitalLetterOWithDoubleAcute            0x0140  /*  */
+#define U_LatinCapitalLetterOWithDoubleAcute            0x0150  /*  */
 #define U_LatinSmallLetterOWithDoubleAcute              0x0151  /*  */
 #define U_LatinCapitalLigatureOE                        0x0152  /*  */
 #define U_LatinSmallLigatureOE                          0x0153  /*  */
