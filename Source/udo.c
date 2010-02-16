@@ -67,6 +67,7 @@
 *    fd  Feb 12: some octal chars resolved into constant macros
 *    fd  Feb 15: - new: !code_source [] + c_code_source() -> iEncodingSource
 *                - new: !code_target [] + c_code_target() -> iEncodingTarget
+*    fd  Feb 16: udocharset: "cp1250" added
 *
 ******************************************|************************************/
 
@@ -223,21 +224,22 @@ typedef struct _udocolor                  /* colors (according to W3C HTML3.2 DT
 
 UDOCHARSET udocharset[MAXCHARSET] =
 {
-   {"dos",        CODE_437      },
-   {"os2",        CODE_850      },
-   {"cp437",      CODE_437      },
-   {"cp850",      CODE_850      },
-   {"hp8",        CODE_HP8      },
-   {"iso-8859-1", CODE_LAT1     },
-   {"iso",        CODE_LAT1     },
-   {"latin1",     CODE_LAT1     },
-   {"mac",        CODE_MAC      },
-   {"next",       CODE_NEXT     },
-   {"tos",        CODE_TOS      },
-   {"utf-8",      CODE_UTF8     },
-   {"utf8",       CODE_UTF8     },
-   {"sys",        SYSTEM_CHARSET},
-   {"win",        CODE_LAT1     },
+   {"dos",        CODE_437      },        /*  0 */
+   {"os2",        CODE_850      },        /*  1 */
+   {"cp437",      CODE_437      },        /*  2 */
+   {"cp850",      CODE_850      },        /*  3 */
+   {"hp8",        CODE_HP8      },        /*  4 */
+   {"iso-8859-1", CODE_LAT1     },        /*  5 */
+   {"iso",        CODE_LAT1     },        /*  6 */
+   {"latin1",     CODE_LAT1     },        /*  7 */
+   {"mac",        CODE_MAC      },        /*  8 */
+   {"next",       CODE_NEXT     },        /*  9 */
+   {"tos",        CODE_TOS      },        /* 10 */
+   {"utf-8",      CODE_UTF8     },        /* 11 */
+   {"utf8",       CODE_UTF8     },        /* 12 */
+   {"sys",        SYSTEM_CHARSET},        /* 13 */
+   {"win",        CODE_LAT1     },        /* 14 */
+   {"cp1250",     CODE_CP1250   },        /* 15 */
 };
 
 
