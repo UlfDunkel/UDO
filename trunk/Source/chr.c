@@ -1329,7 +1329,7 @@ int           char_set)          /* iCharset */
    
    case CODE_LAT1:
    default:
-      pUsrc = u_CODE_ISO;
+      pUsrc = u_CODE_LAT1;
       strcpy(sSource, "ISO Latin 1");
    }
    
@@ -1372,7 +1372,7 @@ int           char_set)          /* iCharset */
    
    case CODE_LAT1:
    default:
-      pUtrg = u_CODE_ISO;
+      pUtrg = u_CODE_LAT1;
       strcpy(sTarget, "ISO Latin 1");
    }
    

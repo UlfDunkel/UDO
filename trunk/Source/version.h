@@ -96,6 +96,9 @@
 #define CODE_NEXT    5                    /* NextSTep                      */
 #define CODE_850     6                    /* DOS Codepage 850              */
 #define CODE_UTF8    7                    /* UTF-8 (e.g. for BeOS)         */
+#define CODE_CP1250  8                    /* Windows codepage 1250         */
+
+#define CODE_TOTAL   9                    /* # of supported encodings */
 
    /* --- Compiler- und systemabhaengige Dinge setzen --- */
 
