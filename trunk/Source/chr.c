@@ -1278,8 +1278,8 @@ int           char_set)          /* iCharset */
    int        idx;               /* */
    unsigned (*pUsrc);            /* */
    unsigned (*pUtrg);            /* */
-   char       sSource[16] = "";  /* */
-   char       sTarget[16] = "";  /* */
+   char       sSource[42] = "";  /* */
+   char       sTarget[42] = "";  /* */
    unsigned   i;                 /* */
    
 
@@ -1300,6 +1300,11 @@ int           char_set)          /* iCharset */
    case CODE_850:
       pUsrc = u_CODE_850;
       strcpy(sSource, "DOS (cp850)");
+      break;
+   
+   case CODE_CP1250:
+      pUsrc = u_CODE_CP1250;
+      strcpy(sSource, "Windows codepage 1250");
       break;
       
    case CODE_HP8:
@@ -1338,6 +1343,11 @@ int           char_set)          /* iCharset */
    case CODE_850:
       pUtrg = u_CODE_850;
       strcpy(sTarget, "DOS (cp850)");
+      break;
+      
+   case CODE_CP1250:
+      pUtrg = u_CODE_CP1250;
+      strcpy(sTarget, "Windows codepage 1250");
       break;
       
    case CODE_HP8:
