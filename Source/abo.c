@@ -45,6 +45,7 @@
 *    DH  Oct 02: last DH version
 *  2010:
 *    fd  Jan 30: file reformatted and tidied up
+*    fd  Feb 16: udofile is global now (udo.h)
 *
 ******************************************|************************************/
 
@@ -97,10 +98,8 @@ const char *id_abo_c= "@(#) abo.c       $DATE$";
 *
 ******************************************|************************************/
 
-LOCAL char     strUdoNodeName[32];        /* */
-LOCAL char     strUdoHtmlName[32];        /* */
-
-LOCAL MYFILE   udofile;                   /* */
+LOCAL char      strUdoNodeName[32];        /* */
+LOCAL char      strUdoHtmlName[32];        /* */
 
 
 

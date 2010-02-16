@@ -221,6 +221,27 @@ typedef struct _udocolor                  /* colors (according to W3C HTML3.2 DT
 #define MAX_UDOCOLOR 17
 
 
+UDOCHARSET udocharset[MAXCHARSET] =
+{
+   {"dos",        CODE_437      },
+   {"os2",        CODE_850      },
+   {"cp437",      CODE_437      },
+   {"cp850",      CODE_850      },
+   {"hp8",        CODE_HP8      },
+   {"iso-8859-1", CODE_LAT1     },
+   {"iso",        CODE_LAT1     },
+   {"latin1",     CODE_LAT1     },
+   {"mac",        CODE_MAC      },
+   {"next",       CODE_NEXT     },
+   {"tos",        CODE_TOS      },
+   {"utf-8",      CODE_UTF8     },
+   {"utf8",       CODE_UTF8     },
+   {"sys",        SYSTEM_CHARSET},
+   {"win",        CODE_LAT1     },
+};
+
+
+
 
 
 
@@ -663,7 +684,6 @@ typedef struct _udolanguage               /* ---- Sprachentabelle ---- */
    int    langval;                        /* zugehoerige Sprache */
 }  UDOLANGUAGE;
 
-
 #define MAXLANGUAGE  14
 
 LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE] =
@@ -686,35 +706,13 @@ LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE] =
 
 
 
-typedef struct _udocharset                /* ---- Zeichensatztabelle ---- */
-{
-   char *magic;     /* code-Parameter */
-   int   codepage;  /* zugehoeriger Zeichensatz */
-}   UDOCHARSET;
 
-#define MAXCHARSET  15
+GLOBAL char   compile_date[11] = "\0";
+GLOBAL char   compile_time[9]  = "\0";
 
-LOCAL const UDOCHARSET udocharset[MAXCHARSET] =
-{
-   {"dos",        CODE_437      },
-   {"os2",        CODE_850      },
-   {"cp437",      CODE_437      },
-   {"cp850",      CODE_850      },
-   {"hp8",        CODE_HP8      },
-   {"iso-8859-1", CODE_LAT1     },
-   {"iso",        CODE_LAT1     },
-   {"latin1",     CODE_LAT1     },
-   {"mac",        CODE_MAC      },
-   {"next",       CODE_NEXT     },
-   {"tos",        CODE_TOS      },
-   {"utf-8",      CODE_UTF8     },
-   {"utf8",       CODE_UTF8     },
-   {"sys",        SYSTEM_CHARSET},
-   {"win",        CODE_LAT1     },
-};
 
-GLOBAL char compile_date[11] = "\0";
-GLOBAL char compile_time[9]  = "\0";
+
+
 
 
 
@@ -11446,11 +11444,12 @@ char           *datei)           /* */
             len--;
          }
 
-/*
-         recode(zeile, iCharset);
-         convert_sz(zeile);
-*/
-
+                                          /* don't recode twice! */
+         if (stricmp(tmp_datei,udofile.full)) 
+         {
+            recode(zeile, iCharset);
+/*          convert_sz(zeile); */
+         }
 
          if (pflag[PASS1].env == ENV_NONE)
             pass_check_if(zeile, PASS1);
@@ -12810,10 +12809,13 @@ char           *datei)           /* */
       }
 
 
-      if (zeile[0] != EOS)
+      if (stricmp(tmp_datei,udofile.full))/* don't recode twice! */
       {
-         recode(zeile, iCharset);
-         convert_sz(zeile);
+         if (zeile[0] != EOS)
+         {
+            recode(zeile, iCharset);
+/*          convert_sz(zeile); */
+         }
       }
 
       if (pflag[PASS2].env == ENV_NONE)

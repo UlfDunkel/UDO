@@ -45,6 +45,7 @@
 *    fd  Jan 23: - file reformatted
 *                - converted all German umlauts in comments into plain ASCII
 *                - SHOW_VARAIABLE -> SHOW_VAR
+*    fd  Feb 16: more stuff globalized
 *
 ******************************************|************************************/
 
@@ -54,8 +55,31 @@
 *
 ******************************************|************************************/
 
-extern char   compile_date[11];
-extern char   compile_time[9];
+extern char   compile_date[];
+extern char   compile_time[];
+
+
+
+
+
+#ifndef __UDO_H__
+#define __UDO_H__
+
+/*******************************************************************************
+*
+*     TYPE DEFINITIONS
+*
+******************************************|************************************/
+
+typedef struct _udocharset         /* ---- Zeichensatztabelle ---- */
+{
+   char *magic;     /* code-Parameter */
+   int   codepage;  /* zugehoeriger Zeichensatz */
+}   UDOCHARSET;
+
+#define MAXCHARSET  15
+
+#endif  /* __UDO_H__ */
 
 
 
@@ -66,6 +90,8 @@ extern char   compile_time[9];
 *     GLOBAL UNINITIALIZED VARIABLES
 *
 ******************************************|************************************/
+
+GLOBAL MYFILE      udofile;               /* */
 
 GLOBAL int         iUdopass;              /* PASS1 oder PASS2 */
 
@@ -540,5 +566,5 @@ GLOBAL void save_upr_entry_label(const char *filename, const char *title, const 
    /* ? */
 GLOBAL void save_upr_entry_index(const int level, const char *filename, const char *title, const long line ); /* New in r6pl15 [NHz] */
 
-/* +++ EOF +++ */
 
+/* +++ EOF +++ */

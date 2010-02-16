@@ -148,6 +148,19 @@ const char *id_toc_c= "@(#) toc.c       $DATE$";
 
 /*******************************************************************************
 *
+*     EXTENAL REFERENCES
+*
+******************************************|************************************/
+
+extern UDOCHARSET   udocharset[];         /* UDO.C: */
+
+
+
+
+
+
+/*******************************************************************************
+*
 *     LOCAL CONSTANTS
 *
 ******************************************|************************************/
@@ -5316,7 +5329,7 @@ GLOBAL void html_footer(void)
 
 
 
-LOCAL MYFILE   udofile;
+/* GLOBAL MYFILE   udofile; */
 
 /* --------------------------------------------------------------
    * Dateinamen zusammenbasteln
@@ -5462,7 +5475,39 @@ GLOBAL BOOLEAN save_html_index(void)
       return FALSE;
    
    fprintf(uif, "!newpage\n");            /* output index page stuff in UDO format */
-   fprintf(uif, "!code [sys]\n");
+
+/*   fprintf(uif, "!code [sys]\n");
+*/
+
+#if 0
+   for (i = 0; i < MAXCHARSET; i++)       /* swap encoding! */
+   {
+      if (udocharset[i].codepage == iEncodingTarget)
+      {
+         fprintf(uif, "!code_source [%s]\n", udocharset[i].magic);
+         break;
+      }
+   }
+   for (i = 0; i < MAXCHARSET; i++)       /* swap encoding! */
+   {
+      if (udocharset[i].codepage == iEncodingSource)
+      {
+         fprintf(uif, "!code_target [%s]\n", udocharset[i].magic);
+         break;
+      }
+   }
+#endif
+
+   for (i = 0; i < MAXCHARSET; i++)       /* swap encoding! */
+   {
+      if (udocharset[i].codepage == iEncodingTarget)
+      {
+         fprintf(uif, "!code_source [%s]\n", udocharset[i].magic);
+         fprintf(uif, "!code_target [%s]\n", udocharset[i].magic);
+         break;
+      }
+   }
+
    fprintf(uif, "!sloppy\n\n");
    fprintf(uif, "!node* %s\n", lang.index);
    fprintf(uif, "!html_name indexudo\n");
@@ -5518,8 +5563,7 @@ GLOBAL BOOLEAN save_html_index(void)
    
    qsort(html_index, num_index, sizeof(HTML_INDEX), comp_index_html);
 
-   
-   switch (iCharset)                      /* use the right tables! ;-) */
+   switch (iEncodingTarget)               /* use the right tables! ;-) */
    {
    case CODE_TOS:
       psort = sort_CODE_TOS;
