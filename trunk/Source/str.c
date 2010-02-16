@@ -43,7 +43,8 @@
 *    fd  Jan 23: converted all German umlauts in comments into plain ASCII
 *    fd  Jan 28: file reformatted and tidied up
 *    fd  Feb 09: str_sort_cmp(): done (so far ;-))
-*    fd  Feb 16: str_sort_cmp(): adjusted to new encoding tables
+*    fd  Feb 16: - str_sort_cmp(): adjusted to new encoding tables
+*                - CODE_CP1250_lig, sort_CODE_CP1250 added
 *
 ******************************************|************************************/
 
@@ -1662,8 +1663,8 @@ char         *s2)           /* ^ 2nd string for comparison */
       break;
    
    case CODE_CP1250:
-      plig = CODE_LAT1_lig;
-      psort = sort_CODE_LAT1;
+      plig = CODE_CP1250_lig;
+      psort = sort_CODE_CP1250;
       pumap = u_CODE_CP1250;
       break;
    
