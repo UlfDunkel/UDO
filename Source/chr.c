@@ -43,6 +43,7 @@
 *    ggs Dec 12: output for ST-Guide and PureC Help always uses CODE_TOS
 *  2010:
 *    fd  Jan 26: file reformatted and tidied up
+*    fd  Feb 16: recode(): forces target encoding for several output formats
 *
 ******************************************|************************************/
 
@@ -1288,9 +1289,6 @@ int           char_set)          /* iCharset */
    if (iEncodingTarget < 0)
       iEncodingTarget = char_set;
    
-   if (iEncodingSource == iEncodingTarget)
-      return;
-      
    
    switch (iEncodingSource)
    {
@@ -1368,7 +1366,28 @@ int           char_set)          /* iCharset */
       strcpy(sTarget, "ISO Latin 1");
    }
    
-   ptr = get_8bit_ptr(zeile);
+   /* --- force format requirements --- */
+   
+   switch (desttype)
+   {
+   case TOSTG:                            /* ST-Guide */
+   case TOPCH:                            /* Pure C Help */
+      iEncodingTarget = CODE_TOS;
+      strcpy(sTarget, "TOS");
+      break;
+   
+   case TOAMG:                            /* AmigaGuide */
+   case TOWIN:                            /* Windows Help */
+      iEncodingTarget = CODE_LAT1;
+      strcpy(sTarget, "ISO Latin 1");
+   }
+      
+                                          /* nothing to do */   
+   if (iEncodingSource == iEncodingTarget)
+      return;
+   
+
+   ptr = get_8bit_ptr(zeile);             /* set ^ to first high-ASCII char */
    
    if (!ptr)
       return;
@@ -1384,7 +1403,7 @@ int           char_set)          /* iCharset */
             for (i = 128; i < 256; i++)
                if (pUtrg[i] == pUsrc[idx])
                {
-                  *ptr = pUtrg[i];
+                  *ptr = i;
                   break;
                }
          }
@@ -1392,6 +1411,7 @@ int           char_set)          /* iCharset */
          {
             warning_cannot_recode(*ptr, sSource, sTarget);
 
+                                         /* pass un-mappable char through */
 /*          *ptr = '?';
 */
          }
