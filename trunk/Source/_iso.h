@@ -4,7 +4,9 @@
 *  Module name  : u_437.h
 *  Symbol prefix: u_
 *
-*  Description  : Unicode named codepage for ISO encoding (cp1252)
+*  Description  : Unicode named codepage for ISO encoding:
+*                 The used codepage is cp1252, which is identical to iso-8859-1
+*                 except the slots 0x80-0x9f.
 *
 *  Open Source  : since 2001
 *
@@ -331,3 +333,4 @@ static unsigned   u_CODE_ISO[] =          /* CODE_ISO */
 };
 
 
+/* +++ EOF +++ */
