@@ -31,13 +31,14 @@
 *  Notes        : Please add yourself as co-author when you change this file.
 *
 *-------------------------------------------------------------------------------
-*  Things to do : - try to assign the three unnamed chars in uCODE_TOS[] -> U_NIL
+*  Things to do : -
 *
 *-------------------------------------------------------------------------------
 *  History:
 *
 *  2010:
 *    fd  Feb 15: file introduced
+*    fd  Feb 16: table adjusted, based on <http://www.kostis.net/charsets/atarist.htm>
 *
 ******************************************|************************************/
 
@@ -286,13 +287,13 @@ static unsigned   u_CODE_TOS[] =          /* CODE_TOS */
    U_HebrewLetterResh,                    /* 0xd5  U_HebrewLetterResh */
    U_HebrewLetterShin,                    /* 0xd6  U_HebrewLetterShin */
    U_HebrewLetterTav,                     /* 0xd7  U_HebrewLetterTav */
-   U_HebrewLetterNun,                     /* 0xd8  U_HebrewLetterNun */
+   U_HebrewLetterFinalNun,                /* 0xd8  U_HebrewLetterFinalNun */
    U_HebrewLetterFinalKaf,                /* 0xd9  U_HebrewLetterFinalKaf */
    U_HebrewLetterFinalMem,                /* 0xda  U_HebrewLetterFinalMem */
    U_HebrewLetterFinalPe,                 /* 0xdb  U_HebrewLetterFinalPe */
    U_HebrewLetterFinalTsadi,              /* 0xdc  U_HebrewLetterFinalTsadi */
    U_SectionSign,                         /* 0xdd  U_SectionSign */
-   U_ModifierLetterCircumflexAccent,      /* 0xde  U_ModifierLetterCircumflexAccent */
+   U_LogicalAnd,                          /* 0xde  LOGICAL AND */
    U_Infinity,                            /* 0xdf  U_Infinity */
                                           
    U_GreekSmallLetterAlpha,               /* 0xe0  U_GreekSmallLetterAlpha */
@@ -303,12 +304,12 @@ static unsigned   u_CODE_TOS[] =          /* CODE_TOS */
    U_GreekSmallLetterSigma,               /* 0xe5  U_GreekSmallLetterSigma */
    U_GreekSmallLetterMu,                  /* 0xe6  U_GreekSmallLetterMu */
    U_GreekSmallLetterTau,                 /* 0xe7  U_GreekSmallLetterTau */
-   U_NIL,                                 /* 0xe8  ??? */
-   U_NIL,                                 /* 0xe9  ??? */
+   U_GreekCapitalLetterPhi,               /* 0xe8  GREEK CAPITAL LETTER PHI */
+   U_GreekCapitalLetterTheta,             /* 0xe9  GREEK CAPITAL LETTER THETA */
    U_GreekCapitalLetterOmega,             /* 0xea  U_GreekCapitalLetterOmega */
    U_GreekSmallLetterDelta,               /* 0xeb  U_GreekSmallLetterDelta */
    U_ContourIntegral,                     /* 0xec  U_ContourIntegral */
-   U_NIL,                                 /* 0xed  ??? */
+   U_GreekSmallLetterPhi,                 /* 0xed  GREEK SMALL LETTER PHI */
    U_ElementOf,                           /* 0xee  U_ElementOf */
    U_Intersection,                        /* 0xef  U_Intersection */
                                           
