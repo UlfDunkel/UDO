@@ -45,7 +45,8 @@
 *    fd  Jan 23: - file reformatted
 *                - converted all German umlauts in comments into plain ASCII
 *                - SHOW_VARAIABLE -> SHOW_VAR
-*    fd  Feb 16: more stuff globalized
+*    fd  Feb 16: - more stuff globalized
+*                - MAXCHARSET increased for CODE_CP1250
 *
 ******************************************|************************************/
 
@@ -77,7 +78,7 @@ typedef struct _udocharset         /* ---- Zeichensatztabelle ---- */
    int   codepage;  /* zugehoeriger Zeichensatz */
 }   UDOCHARSET;
 
-#define MAXCHARSET  15
+#define MAXCHARSET  16
 
 #endif  /* __UDO_H__ */
 
