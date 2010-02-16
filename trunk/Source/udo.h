@@ -45,7 +45,6 @@
 *    fd  Jan 23: - file reformatted
 *                - converted all German umlauts in comments into plain ASCII
 *                - SHOW_VARAIABLE -> SHOW_VAR
-*    fd  Feb 15: new: iEncodingSource, iEncodingTarget
 *
 ******************************************|************************************/
 
