@@ -145,12 +145,12 @@ const char *id_chr_c= "@(#) chr.c       $DATE$";
 #include "export.h"
 #include "chr.h"
 
-#include "_dos.h"
-#include "_hp.h"
-#include "_iso.h"
-#include "_mac.h"
-#include "_next.h"
-#include "_tos.h"
+#include "u_dos.h"
+#include "u_hp.h"
+#include "u_iso.h"
+#include "u_mac.h"
+#include "u_next.h"
+#include "u_tos.h"
 
 
 
