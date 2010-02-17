@@ -47,6 +47,14 @@
 *    fd  Feb 17: - CODE_437_lig[], sort_CODE_437[] + CODE_850_lig[], sort_CODE_850[] added
 *                - CODE_HP_lig[] + sort_CODE_HP[] added
 *                - CODE_NEXT_lig[] + sort_CODE_NEXT[] added
+*                - cp850iso() and stuff removed
+*                - cp437iso() and stuff removed
+*                - hp82iso() and stuff removed
+*                - iso2tos() and stuff removed
+*                - mac2iso() and stuff removed
+*                - next2iso() and stuff removed
+*                - tos2iso() and stuff removed
+*                - utf82iso() and stuff removed
 *
 ******************************************|************************************/
 
@@ -92,53 +100,34 @@ const char *id_chr_c= "@(#) chr.c       $DATE$";
 
 #ifdef __TOS__
 #include "chr_tos.h"
-#else
-#include "tos2iso.h"
-#include "iso2tos.h"
 #endif
 
 #ifdef __MSDOS__
 #include "chr_437.h"
-#else
-#include "437iso.h"
 #endif
 
 #ifdef __MSDOS850__
 #include "chr_850.h"
-#else
-#include "850iso.h"
 #endif
 
 #ifdef __HPUX_ROMAN8__
 #include "chr_hp8.h"
-#else
-#include "hp82iso.h"
 #endif
 
 #if __NEXTSTEP__
 #include "chr_next.h"
-#else
-#include "next2iso.h"
 #endif
 
 /* #if __BEOS__           */
 /* #include "chr_utf8.h"  */
-/* #else                  */
-/* #include "utf82iso.h"  */
 /* #endif                 */
-
-#include "utf82iso.h"
 
 #if __MACOS__
 #include "chr_mac.h"
-#else
-#include "mac2iso.h"
 #endif
 
 #if __MACOSX__
 #include "chr_mac.h"
-#else
-#include "mac2iso.h"
 #endif
 
 #if USE_LATIN1_CHARSET
@@ -315,40 +304,6 @@ LOCAL void iso2system(char *s);
 
    /* convert ISO encoding into desired system encoding */
 LOCAL void iso2sys(char *s);
-
-   /* convert ISO encoding into TOS encoding */
-
-LOCAL void iso2tos(char *s);
-
-#if !defined(__MACOS__) && !defined(__MACOSX__)
-   /* convert Mac encoding into ISO encoding */
-LOCAL void mac2iso(char *s);
-#endif
-
-   /* convert UTF-8 encoding into ISO encoding */
-LOCAL void utf82iso(char *s);
-
-#ifndef __NEXTSTEP__
-   /* convert NextStep encoding into ISO encoding */
-LOCAL void next2iso(char *s);
-#endif
-
-   /* convert Atari TOS encoding into ISO encoding */
-LOCAL void tos2iso(char *s);
-
-   /* convert Codepage 437 encoding into ISO encoding */
-LOCAL void cp437iso(char *s);
-
-   /* convert Codepage 850 encoding into ISO encoding */
-LOCAL void cp850iso(char *s);
-
-   /* convert DOS encoded section sign into ISO encoded section sign */
-LOCAL void section2iso(char *s);
-
-#ifndef __HPUX_ROMAN8__
-   /* convert HP Roman 8 encoding into ISO encoding */
-LOCAL void hp82iso(char *s);
-#endif
 
 LOCAL void specials2ascii(char *s);
 LOCAL void specials2ipf(char *s);
@@ -567,7 +522,6 @@ char *s)
    {
    case TOSTG:
    case TOPCH:
-      iso2tos(s);
       return;
    }
    
@@ -575,438 +529,12 @@ char *s)
 # ifndef __TOS__
 
    if ((desttype == TOSTG) || (desttype == TOPCH) )
-	   iso2tos(s);
+      ;
    else
 # endif
       iso2system(s);
 #endif
 }
-
-
-
-
-
-#ifndef __TOS__
-/*******************************************************************************
-*
-*  iso2tos():
-*     convert ISO encoding into TOS encoding
-*
-*  Notes:
-*     The ISO source encoding is determined by the UDO preamble command:
-*     !code [iso]
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void iso2tos(
-
-char     *s)    /* ^ string */
-{
-   char  *ptr;  /* ^ position in string */
-   int    idx;  /* index in conversion table */
-
-
-   ptr = s;                               /* set ^ to begin of string */
-
-   while (*ptr != EOS)                    /* check whole string */
-   {
-      if ( ((UCHAR)*ptr) > 127)           /* only convert high-ASCII characters */
-      {
-         idx = ((UCHAR)*ptr) - 128;       /* conversion table starts with ASCII 128! */
-
-                                          /* check if conversion is possible */
-         if (iso2tos_item[idx].charsys != EOS)
-         {
-            *ptr = iso2tos_item[idx].charsys;
-         }
-         else                             /* conversion is not possible */
-         {
-            warning_cannot_recode(*ptr, "Latin1", "system charset");
-            *ptr= '?';
-         }
-      }
-#ifdef __MSDOS__
-      else
-      {
-         if (*ptr == '\247')              /* U_SectionSign (paragraph) */
-         {
-            *ptr = '\025';
-         }
-      }
-#endif
-#ifdef __MSDOS850__
-      else
-      {
-         if (*ptr == '\247')              /* U_SectionSign (paragraph) */
-         {
-            *ptr = '\025';
-         }
-      }
-#endif
-
-      ptr++;                              /* next character */
-   }
-}
-#endif  /* #ifndef __TOS__ */
-
-
-
-
-
-#if !defined(__MACOS__) && !defined(__MACOSX__)
-/*******************************************************************************
-*
-*  mac2iso():
-*     convert Mac encoding into ISO encoding
-*
-*  Notes:
-*     The Mac source encoding is determined by the UDO preamble command:
-*     !code [mac]
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void mac2iso(
-
-char     *s)    /* ^ string */
-{
-   char  *ptr;  /* ^ position in string */
-   int    idx;  /* index in conversion table */
-
-
-   ptr = s;                               /* set ^ to begin of string */
-
-   while (*ptr != EOS)                    /* check whole string */
-   {
-      if ( ((UCHAR)*ptr) > 127)           /* only convert high-ASCII characters */
-      {
-         idx = ((UCHAR)*ptr) - 128;       /* conversion table starts with ASCII 128! */
-
-                                          /* check if conversion is possible */
-         if (mac2iso_item[idx].iso != EOS)
-         {
-            *ptr = mac2iso_item[idx].iso;
-         }
-         else                             /* conversion is not possible */
-         {
-            warning_cannot_recode(*ptr, "MacOS", "Latin1");
-            *ptr= '?';
-         }
-      }
-
-      ptr++;                              /* next character */
-   }
-}
-#endif  /* __MACOS__ */
-
-
-
-
-
-/* #ifndef __BEOS__ */
-/*******************************************************************************
-*
-*  utf82iso():
-*     convert UTF-8 encoding into ISO encoding
-*
-*  Notes:
-*     The Mac source encoding is determined by the UDO preamble command:
-*     !code [utf8]    (or)
-*     !code [utf-8]
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void utf82iso(
-
-char     *s)           /* ^ string */
-{
-   char  *ptr,         /* ^ position in string */
-          sUTF[16],    /* */
-          onechar[1];  /* */
-   int    i,           /* counter */
-          bytes;       /* */
-BOOLEAN   found;       /* flag */
-
-
-   ptr = s;                               /* set ^ to begin of string */
-
-   if (*ptr == EOS)                       /* empty string */
-      return;
-
-   strcpy(onechar, " ");
-
-   while (*ptr != EOS)                    /* check whole string */
-   {
-                                          /* UTF-8-Zeichen gefunden */
-      if ( ((UCHAR)*ptr > 127) && (((UCHAR)*ptr & 0xC0) != 0x80) )
-      {                                   /* nun herausfinden, wieviele Bytes insgesamt vorliegen */
-         bytes = ((UCHAR) *ptr >> 5) & 0x03;
-
-         switch (bytes)
-         {
-         case 2:                          /* 0xC.. , also zwei Bytes */
-            if (ptr[1] != EOS)
-            {
-               found = FALSE;
-
-               for (i = 0; i < 128; i++)
-               {
-                  if (    ((UCHAR)ptr[0] == utf82iso_item[i].utf8[0])
-                       && ((UCHAR)ptr[1] == utf82iso_item[i].utf8[1]) )
-                  {
-                     onechar[0] = utf82iso_item[i].latin1;
-                     qreplace_once(ptr, (char *)utf82iso_item[i].utf8, 2, onechar, 1);
-                     found = TRUE;
-                     break;
-                  }
-               }
-               
-               if (!found)
-               {
-                  sprintf(sUTF, "%X %X", ptr[0], ptr[1]);
-                  warning_cannot_recode_utf8(sUTF, "Latin1");
-                  ptr++;
-               }
-            }
-            
-            break;
-
-         case 3:                          /* 0xE.. , also drei Bytes */
-            if (ptr[1]!=EOS && ptr[2]!=EOS)
-            {
-               sprintf(sUTF, "%X %X %X", ptr[0], ptr[1], ptr[2]);
-               warning_cannot_recode_utf8(sUTF, "Latin1");
-               ptr+= 2;
-            }
-
-            break;
-
-         default:
-            warning_cannot_recode(*ptr, "UTF-8", "Latin1");
-         }
-      }
-
-      ptr++;                              /* next character */
-      
-   }  /* while (*ptr != EOS) */
-}
-/* #endif */    /* #ifndef __BEOS__ */
-
-
-
-
-
-#ifndef __NEXTSTEP__
-/*******************************************************************************
-*
-*  next2iso():
-*     convert NextStep encoding into ISO encoding
-*
-*  Notes:
-*     The NextStep source encoding is determined by the UDO preamble command:
-*     !code [next]
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void next2iso(
-
-char     *s)    /* ^ string */
-{
-   char  *ptr;  /* ^ position in string */
-   int    idx;  /* index in conversion table */
-
-
-   ptr = s;                               /* set ^ to begin of string */
-
-   while (*ptr != EOS)                    /* check whole string */
-   {
-      if ( ((UCHAR)*ptr) > 127)           /* only convert high-ASCII characters */
-      {
-         idx = ((UCHAR)*ptr) - 128;       /* conversion table starts with ASCII 128! */
-
-                                          /* check if conversion is possible */
-         if (next2iso_item[idx].iso != EOS)
-         {
-            *ptr = next2iso_item[idx].iso;
-         }
-         else                             /* conversion is not possible */
-         {
-            warning_cannot_recode(*ptr, "NeXTSTep", "Latin1");
-            *ptr= '?';
-         }
-      }
-
-      ptr++;                              /* next character */
-   }
-}
-#endif  /* __NEXTSTEP__ */
-
-
-
-
-
-#ifndef __TOS__
-/*******************************************************************************
-*
-*  tos2iso():
-*     convert Atari TOS encoding into ISO encoding
-*
-*  Notes:
-*     The Atari TOS source encoding is determined by the UDO preamble command:
-*     !code [tos]
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void tos2iso(
-
-char     *s)    /* ^ string */
-{
-   char  *ptr;  /* ^ position in string */
-   int    idx;  /* index in conversion table */
-
-
-   ptr = s;                               /* set ^ to begin of string */
-
-   while (*ptr != EOS)                    /* check whole string */
-   {
-      if ( ((UCHAR)*ptr) > 127)           /* only convert high-ASCII characters */
-      {
-         idx = ((UCHAR)*ptr) - 128;       /* conversion table starts with ASCII 128! */
-
-                                          /* check if conversion is possible */
-         if (tos2iso_item[idx].iso != EOS)
-         {
-            *ptr = tos2iso_item[idx].iso;
-         }
-         else                             /* conversion is not possible */
-         {
-            warning_cannot_recode(*ptr, "TOS", "Latin1");
-            *ptr= '?';
-         }
-      }
-
-      ptr++;                              /* next character */
-   }
-}
-#endif  /* __TOS__ */
-
-
-
-
-
-#ifndef __MSDOS__
-/*******************************************************************************
-*
-*  cp437iso():
-*     convert Codepage 437 encoding into ISO encoding
-*
-*  Notes:
-*     The Codepage 437 source encoding is determined by the UDO preamble command:
-*     !code [cp437]
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void cp437iso(
-
-char     *s)    /* ^ string */
-{
-   char  *ptr;  /* ^ position in string */
-   int    idx;  /* index in conversion table */
-
-
-   ptr = s;                               /* set ^ to begin of string */
-
-   while (*ptr != EOS)                    /* check whole string */
-   {
-      if ( ((UCHAR)*ptr) > 127)           /* only convert high-ASCII characters */
-      {
-         idx = ((UCHAR)*ptr) - 128;       /* conversion table starts with ASCII 128! */
-
-                                          /* check if conversion is possible */
-         if (cp437iso_item[idx].iso != EOS)
-         {
-            *ptr = cp437iso_item[idx].iso;
-         }
-         else                             /* conversion is not possible */
-         {
-            warning_cannot_recode(*ptr, "cp437", "Latin1");
-            *ptr= '?';
-         }
-      }
-
-      ptr++;                              /* next character */
-   }
-}
-#endif  /* __MSDOS__ */
-
-
-
-
-
-#ifndef __MSDOS850__
-/*******************************************************************************
-*
-*  cp850iso():
-*     convert Codepage 850 encoding into ISO encoding
-*
-*  Notes:
-*     The Codepage 850 source encoding is determined by the UDO preamble command:
-*     !code [cp850]
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void cp850iso(
-
-char     *s)    /* ^ string */
-{
-   char  *ptr;  /* ^ position in string */
-   int    idx;  /* index in conversion table */
-
-
-   ptr = s;                               /* set ^ to begin of string */
-
-   while (*ptr != EOS)                    /* check whole string */
-   {
-      if ( ((UCHAR)*ptr) > 127)           /* only convert high-ASCII characters */
-      {
-         idx = ((UCHAR)*ptr) - 128;       /* conversion table starts with ASCII 128! */
-
-                                          /* check if conversion is possible */
-         if (cp850iso_item[idx].iso != EOS)
-         {
-            *ptr = cp850iso_item[idx].iso;
-         }
-         else                             /* conversion is not possible */
-         {
-            warning_cannot_recode(*ptr, "cp850", "Latin1");
-            *ptr= '?';
-         }
-      }
-
-      ptr++;                              /* next character */
-   }
-}
-#endif  /* __MSDOS850__ */
 
 
 
@@ -1046,58 +574,6 @@ char     *s)    /* ^ string */
 
 
 
-#ifndef __HPUX_ROMAN8__
-/*******************************************************************************
-*
-*  hp82iso():
-*     convert HP Roman 8 encoding into ISO encoding
-*
-*  Notes:
-*     The HP Roman 8 source encoding is determined by the UDO preamble command:
-*     !code [hp8]
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void hp82iso(
-
-char     *s)    /* ^ string */
-{
-   char  *ptr;  /* ^ position in string */
-   int    idx;  /* index in conversion table */
-
-
-   ptr = s;                               /* set ^ to begin of string */
-
-   while (*ptr != EOS)                    /* check whole string */
-   {
-      if ( ((UCHAR)*ptr) > 127)           /* only convert high-ASCII characters */
-      {
-         idx = ((UCHAR)*ptr) - 128;       /* conversion table starts with ASCII 128! */
-
-                                          /* check if conversion is possible */
-         if (hp82iso_item[idx].iso != EOS)
-         {
-            *ptr = hp82iso_item[idx].iso;
-         }
-         else                             /* conversion is not possible */
-         {
-            warning_cannot_recode(*ptr, "HP Roman 8", "Latin1");
-            *ptr= '?';
-         }
-      }
-
-      ptr++;                              /* next character */
-   }
-}
-#endif  /* __HPUX_ROMAN8__ */
-
-
-
-
-
 /*******************************************************************************
 *
 *  recode_always():
@@ -1123,42 +599,36 @@ int    char_set)  /* isn't this identical to iCharset??? */
 
 #if !defined(__MACOS__) && !defined(__MACOSX__)
    case CODE_MAC:
-      mac2iso(zeile);
       iso2system(zeile);
       break;
 #endif
 
 #ifndef __TOS__
    case CODE_TOS:
-      tos2iso(zeile);
       iso2system(zeile);
       break;
 #endif
 
 #ifndef __MSDOS__
    case CODE_437:
-      cp437iso(zeile);
       iso2system(zeile);
       break;
 #endif
 
 #ifndef __MSDOS850__
    case CODE_850:
-      cp850iso(zeile);
       iso2system(zeile);
       break;
 #endif
 
 #ifndef __HPUX_ROMAN8__
    case CODE_HP8:
-      hp82iso(zeile);
       iso2system(zeile);
       break;
 #endif
 
 #ifndef __NEXTSTEP__
    case CODE_NEXT:
-      next2iso(zeile);
       iso2system(zeile);
       break;
 #endif
@@ -1498,7 +968,6 @@ int       char_set)  /* iCharset */
 
       if (ptr)
       {
-         mac2iso(ptr);
          iso2sys(ptr);
       }
       
@@ -1511,7 +980,6 @@ int       char_set)  /* iCharset */
       
       if (ptr)
       {
-         tos2iso(ptr);
          iso2sys(ptr);
       }
       
@@ -1524,7 +992,6 @@ int       char_set)  /* iCharset */
       
       if (ptr)
       {
-         cp437iso(ptr);
          iso2sys(ptr);
       }
 
@@ -1544,7 +1011,6 @@ int       char_set)  /* iCharset */
       
       if (ptr)
       {
-         cp850iso(ptr);
          iso2sys(ptr);
       }
       
@@ -1565,7 +1031,6 @@ int       char_set)  /* iCharset */
       
       if (ptr)
       {
-         hp82iso(ptr);
          iso2sys(ptr);
       }
       
@@ -1578,7 +1043,6 @@ int       char_set)  /* iCharset */
 
       if (ptr)
       {
-         next2iso(ptr);
          iso2sys(ptr);
       }
       
@@ -1591,7 +1055,6 @@ int       char_set)  /* iCharset */
       
       if (ptr)
       {
-         utf82iso(ptr);
          iso2sys(ptr);
       }
       
