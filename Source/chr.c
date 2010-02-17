@@ -44,6 +44,7 @@
 *  2010:
 *    fd  Jan 26: file reformatted and tidied up
 *    fd  Feb 16: recode(): forces target encoding for several output formats
+*    fd  Feb 17: CODE_437_lig[], sort_CODE_437[] + CODE_850_lig[], sort_CODE_850[] added
 *
 ******************************************|************************************/
 
@@ -1296,11 +1297,15 @@ int           char_set)          /* iCharset */
    {
    case CODE_437:
       pUsrc = u_CODE_437;
+      plig  = CODE_437_lig;
+      psort = sort_CODE_437;
       strcpy(sSource, "DOS (cp437)");
       break;
       
    case CODE_850:
       pUsrc = u_CODE_850;
+      plig  = CODE_850_lig;
+      psort = sort_CODE_850;
       strcpy(sSource, "DOS (cp850)");
       break;
    
