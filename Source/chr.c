@@ -55,6 +55,7 @@
 *                - next2iso() and stuff removed
 *                - tos2iso() and stuff removed
 *                - utf82iso() and stuff removed
+*                - iso2sys(), iso2system() and stuff removed
 *
 ******************************************|************************************/
 
@@ -299,12 +300,6 @@ LOCAL const QUOTECOMMAND quotecommand[MAXQUOTECMD] =
    /* convert (UDO's) universal characters into miscellaneous encodings */
 LOCAL void uni2misc(char *s);
 
-   /* convert ISO encoding into desired system encoding */
-LOCAL void iso2system(char *s);
-
-   /* convert ISO encoding into desired system encoding */
-LOCAL void iso2sys(char *s);
-
 LOCAL void specials2ascii(char *s);
 LOCAL void specials2ipf(char *s);
 LOCAL void specials2info(char *s);
@@ -406,140 +401,6 @@ char             *s)  /* ^ string */
 
 
 
-/*******************************************************************************
-*
-*  iso2system():
-*     convert ISO encoding into desired system encoding
-*
-*  Notes:
-*     The ISO source encoding is determined by the UDO preamble command:
-*     !code [iso]
-*
-*     The function iso2system() ALWAYS converts, while iso2sys() only converts 
-*     when it should not convert into an encoding which doesn't use ANSI
-*     (like RTF, WinHelp)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void iso2system(
-
-char     *s)    /* ^ string */
-{
-   char  *ptr;  /* ^ position in string */
-   int    idx;  /* index in conversion table */
-
-
-   ptr = s;                               /* set ^ to begin of string */
-
-   while (*ptr != EOS)                    /* check whole string */
-   {
-      if ( ((UCHAR)*ptr) > 127)           /* only convert high-ASCII characters */
-      {
-         idx = ((UCHAR)*ptr) - 128;       /* conversion table starts with ASCII 128! */
-
-                                          /* check if conversion is possible */
-         if (iso2sys_item[idx].charsys != EOS)
-         {
-            *ptr = iso2sys_item[idx].charsys;
-         }
-         else                             /* conversion is not possible */
-         {
-            warning_cannot_recode(*ptr, "Latin1", "system charset");
-            *ptr= '?';
-         }
-      }
-#ifdef __MSDOS__
-      else
-      {
-         if (*ptr == '\247')              /* U_SectionSign (paragraph) */
-         {
-            *ptr = '\025';
-         }
-      }
-#endif
-#ifdef __MSDOS850__
-      else
-      {
-         if (*ptr == '\247')              /* U_SectionSign (paragraph) */
-         {
-            *ptr = '\025';
-         }
-      }
-#endif
-
-      ptr++;                              /* next character */
-   }
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  iso2sys():
-*     convert ISO encoding into desired system encoding
-*
-*  Notes:
-*     The ISO source encoding is determined by the UDO preamble command:
-*     !code [iso]
-*
-*     The function iso2system() ALWAYS converts, while iso2sys() only converts 
-*     when it should not convert into an encoding which doesn't use ANSI
-*     (like RTF, WinHelp)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void iso2sys(
-
-char *s)
-{
-                                          /* Changed: Fixed Bug #0000040 in r6.3pl16 [NHz] */
-                                          /* Supplement of desttype==TOKPS */
-   if (iCharset == CODE_LAT1)             /* PL14: TOLYX */
-   {
-      switch (desttype)
-      {
-      case TOWIN:
-      case TOWH4:
-      case TORTF:
-      case TOAQV:
-      case TOLYX:
-      case TOKPS:
-         return;
-      }
-   }
-            
-#if USE_LATIN1_CHARSET
-
-   switch (desttype)
-   {
-   case TOSTG:
-   case TOPCH:
-      return;
-   }
-   
-# else
-# ifndef __TOS__
-
-   if ((desttype == TOSTG) || (desttype == TOPCH) )
-      ;
-   else
-# endif
-      iso2system(s);
-#endif
-}
-
-
-
-
-
 #if !defined(__MSDOS__) && !defined(__MSDOS850__)
 /*******************************************************************************
 *
@@ -574,6 +435,7 @@ char     *s)    /* ^ string */
 
 
 
+#if 0
 /*******************************************************************************
 *
 *  recode_always():
@@ -634,6 +496,7 @@ int    char_set)  /* isn't this identical to iCharset??? */
 #endif
    }
 }
+#endif  /* #if 0 */
 
 
 
@@ -730,12 +593,6 @@ char             *s)  /* ^ string */
 *
 *  recode():
 *     recode a line into another encoding
-*
-*  Notes:
-*     Es wird zunaechst das erste 8-Bit-Zeichen gesucht, da[mit?] in *2iso() 
-*     und iso2sys() nicht die 7-Bit-Zeichen zweimal uebersprungen werden muessen.
-*     Ist kein 8-Bit-Zeichen enthalten, so spart man sich zwei Aufrufe mit 
-*     nutzlosen 128-Schritt-Schleifen.
 *
 *  Return:
 *     -
@@ -930,144 +787,6 @@ int           char_set)          /* iCharset */
 
 
 
-#if 0
-/*******************************************************************************
-*
-*  recode():
-*     recode a line into another encoding
-*
-*  Notes:
-*     Es wird zunaechst das erste 8-Bit-Zeichen gesucht, da[mit?] in *2iso() 
-*     und iso2sys() nicht die 7-Bit-Zeichen zweimal uebersprungen werden muessen.
-*     Ist kein 8-Bit-Zeichen enthalten, so spart man sich zwei Aufrufe mit 
-*     nutzlosen 128-Schritt-Schleifen.
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void recode(
-
-char     *zeile,     /* ^ line */
-int       char_set)  /* iCharset */
-{
-   char  *ptr;       /*  */
-
-   switch (char_set)
-   {
-#if !USE_LATIN1_CHARSET
-   case CODE_LAT1:
-      iso2sys(zeile);
-      break;
-#endif
-
-#if !defined (__MACOS__) && !defined(__MACOSX__)
-   case CODE_MAC:
-      ptr = get_8bit_ptr(zeile);
-
-      if (ptr)
-      {
-         iso2sys(ptr);
-      }
-      
-      break;
-#endif
-
-#ifndef __TOS__
-   case CODE_TOS:
-      ptr = get_8bit_ptr(zeile);
-      
-      if (ptr)
-      {
-         iso2sys(ptr);
-      }
-      
-      break;
-#endif
-
-#ifndef __MSDOS__
-   case CODE_437:
-      ptr = get_8bit_ptr(zeile);
-      
-      if (ptr)
-      {
-         iso2sys(ptr);
-      }
-
-      ptr = get_section_ptr(zeile);
-
-      if (ptr)
-      {
-         section2iso(ptr);
-      }
-      
-      break;
-#endif
-
-#ifndef __MSDOS850__
-   case CODE_850:
-      ptr = get_8bit_ptr(zeile);
-      
-      if (ptr)
-      {
-         iso2sys(ptr);
-      }
-      
-/*    ptr = get_section_ptr(zeile);
-
-      if (ptr)
-      {
-         section2iso(ptr);
-      }
-*/
-
-      break;
-#endif
-
-#ifndef __HPUX_ROMAN8__
-   case CODE_HP8:
-      ptr = get_8bit_ptr(zeile);
-      
-      if (ptr)
-      {
-         iso2sys(ptr);
-      }
-      
-      break;
-#endif
-
-#ifndef __NEXTSTEP__
-   case CODE_NEXT:
-      ptr = get_8bit_ptr(zeile);
-
-      if (ptr)
-      {
-         iso2sys(ptr);
-      }
-      
-      break;
-#endif
-
-/* #ifndef      __BEOS__ */
-   case CODE_UTF8:
-      ptr = get_8bit_ptr(zeile);
-      
-      if (ptr)
-      {
-         iso2sys(ptr);
-      }
-      
-      break;
-/* #endif */
-    }
-}
-#endif
-
-
-
-
-
 /*******************************************************************************
 *
 *  win2sys():
@@ -1233,7 +952,7 @@ const int   style)   /* */
       return (0);
 
    strcpy(d, s);                          /* copy string */
-   recode_always(d, iCharset);
+/*   recode_always(d, iCharset); */
    strcat(d, "W");                        /* Breitenausgleiche */
 
    pixel = 0;
