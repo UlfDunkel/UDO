@@ -1925,6 +1925,13 @@
 #define U_NIL                                           0xFFFF
 
 
+/* !!!!! WARNING !!!!! */
+/* ------------------- */
+/* As soon as Unicode constants > 0xFFFF are defined, */
+/* the relevant tables must no longer use 'unsigned (int)', */
+/* but have to switch to 'unsigned long'. */
+
+
    /* ====== More Unicode character groups defined in general ====== */
    /*       (set defines where you need them)                        */
 
