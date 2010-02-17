@@ -56,6 +56,7 @@
 *                - tos2iso() and stuff removed
 *                - utf82iso() and stuff removed
 *                - iso2sys(), iso2system() and stuff removed
+*                - section2iso() removed (unused)
 *
 ******************************************|************************************/
 
@@ -396,40 +397,6 @@ char             *s)  /* ^ string */
          replace_all(s, unitab[i].uni, unitab[i].lyx);
    }
 }
-
-
-
-
-
-#if !defined(__MSDOS__) && !defined(__MSDOS850__)
-/*******************************************************************************
-*
-*  section2iso():
-*     convert DOS encoded section sign into ISO encoded section sign
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void section2iso(
-
-char     *s)    /* ^ string */
-{
-   char  *ptr;  /* ^ position in string */
-
-
-   ptr = s;                               /* set ^ to begin of string */
-
-   while (*ptr != EOS)                    /* check whole string */
-   {
-      if ( ((UCHAR)*ptr) == '\025')       /* DOS section sign found? */
-         *ptr= '\247';                    /* convert it */
-
-      ptr++;                              /* next character */
-   }
-}
-#endif
 
 
 
