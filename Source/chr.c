@@ -65,6 +65,7 @@
 *                - auto_quote_chars() adjusted
 *                - recode(): UTF-8 output enabled
 *                - recode(): UTF-8 input enabled
+*                - bstr_to_utf8() debugged
 *
 ******************************************|************************************/
 
@@ -612,16 +613,16 @@ unsigned           ucode)
    memset(utf,0,9);                       /* clear buffer */
    temp = (unsigned long)ucode;
    
-   if (temp < 0x00000800)                 /* 0000 0000-0000 007F -> 0xxxxxxx */
+   if (temp < 0x0080)                     /* 0000 0000-0000 007F -> 0xxxxxxx */
    {
       utf[0] = temp;
    }
-   else if (temp < 0x00000800)            /* 0000 0080-0000 07FF -> 110xxxxx 10xxxxxx */
+   else if (temp < 0x0800)                /* 0000 0080-0000 07FF -> 110xxxxx 10xxxxxx */
    {
       utf[0] = (0xC0 | (temp >> 6));
       utf[1] = (0x80 | (temp & 0x3F));
    }
-   else if (temp < 0x00010000)            /* 0000 0800-0000 FFFF -> 1110xxxx 10xxxxxx 10xxxxxx */
+   else if (temp <= 0xFFFF)               /* 0000 0800-0000 FFFF -> 1110xxxx 10xxxxxx 10xxxxxx */
    {
       utf[0] = (0xE0 | (temp >> 12));
       utf[1] = (0x80 | ((temp >> 6) & 0x3F));
