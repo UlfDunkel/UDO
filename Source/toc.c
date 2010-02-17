@@ -69,7 +69,8 @@
 *                - save_html_index(): sorting fixed
 *    fd  Feb 12: some octal chars resolved into constant macros
 *    fd  Feb 16: CODE_CP1250_lig, sort_CODE_CP1250 added
-*    fd  Feb 17: CODE_437_lig[], sort_CODE_437[] + CODE_850_lig[], sort_CODE_850[] added
+*    fd  Feb 17: - CODE_437_lig[], sort_CODE_437[] + CODE_850_lig[], sort_CODE_850[] added
+*                - CODE_HP_lig[] + sort_CODE_HP[] added
 *
 ******************************************|************************************/
 
@@ -123,6 +124,7 @@ const char *id_toc_c= "@(#) toc.c       $DATE$";
 #include "udomem.h"
 
 #include "u_dos.h"
+#include "u_hp.h"
 #include "u_iso.h"
 #include "u_mac.h"
 #include "u_tos.h"
@@ -5556,6 +5558,12 @@ GLOBAL BOOLEAN save_html_index(void)
       psort = sort_CODE_CP1250;
       plig  = CODE_CP1250_lig;
       pumap = u_CODE_CP1250;
+      break;
+   
+   case CODE_HP8:
+      psort = sort_CODE_HP8;
+      plig  = CODE_HP8_lig;
+      pumap = u_CODE_HP8;
       break;
    
    case CODE_MAC:
