@@ -1,26 +1,53 @@
-/*	############################################################
-	# @(#) cli.c (Kommandozeilen-Version)
-	# @(#)
-	# @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
-	# @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)
-	#
-	# This program is free software; you can redistribute it and/or
-	# modify it under the terms of the GNU General Public License
-	# as published by the Free Software Foundation; either version 2
-	# of the License, or (at your option) any later version.
-	# 
-	# This program is distributed in the hope that it will be useful,
-	# but WITHOUT ANY WARRANTY; without even the implied warranty of
-	# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	# GNU General Public License for more details.
-	# 
-	# You should have received a copy of the GNU General Public License
-	# along with this program; if not, write to the Free Software
-	# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-	############################################################	*/
+/**(TAB=0)**********************************************************************
+*
+*  Project name : UDO
+*  Module name  : cli.c
+*  Symbol prefix: cli
+*
+*  Description  : functions for command line interpreter version of UDO
+*
+*  Copyright    : 1995-2001 Dirk Hagedorn
+*  Open Source  : since 2001
+*
+*                 This program is free software; you can redistribute it and/or
+*                 modify it under the terms of the GNU General Public License
+*                 as published by the Free Software Foundation; either version 2
+*                 of the License, or (at your option) any later version.
+*                 
+*                 This program is distributed in the hope that it will be useful,
+*                 but WITHOUT ANY WARRANTY; without even the implied warranty of
+*                 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*                 GNU General Public License for more details.
+*                 
+*                 You should have received a copy of the GNU General Public License
+*                 along with this program; if not, write to the Free Software
+*                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*-------------------------------------------------------------------------------
+*
+*  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
+*  Co-Authors   : Ulf Dunkel (fd)
+*  Write access : fd
+*
+*  Notes        : Please add yourself as co-author when you change this file.
+*
+*-------------------------------------------------------------------------------
+*  Things to do : - tidy up!
+*
+*-------------------------------------------------------------------------------
+*  History:
+*
+*  2010:
+*    fd  Feb 17: new file header
+*                - hp82iso() and stuff removed
+*                - mac2iso() and stuff removed
+*                - tos2iso() and stuff removed
+*
+******************************************|************************************/
+
 #ifndef ID_CLI_C
 #define ID_CLI_C
-const char *id_cli_c= "@(#) cli.c       06.04.2006";
+const char *id_cli_c = "@(#) cli.c       $DATE$";
 #endif
 
 #include	"import.h"
@@ -479,17 +506,7 @@ extern const char *id_img_win_h;
 extern const char *id_img_stg_h;
 extern const char *id_charset_h;
 
-#ifndef __HPUX_ROMAN8__
-extern const char *id_hp82iso_h;
-#endif
 
-#if !defined(__MACOS__) && !defined(__MACOSX__)
-extern const char *id_mac2iso_h;
-#endif
-
-#if !defined(__TOS__)
-extern const char *id_tos2iso_h;
-#endif
 
 /*	----------------------------------------------------------------------
 	show_ident() listet die Identstrings
@@ -522,18 +539,6 @@ LOCAL void show_ident ( void )
 	fprintf(stdout, "%s\n", id_img_html_h+5);
 	fprintf(stdout, "%s\n", id_img_win_h+5);
 	fprintf(stdout, "%s\n", id_img_stg_h+5);
-
-#ifndef __HPUX_ROMAN8__
-	fprintf(stdout, "%s\n", id_hp82iso_h+5);
-#endif
-
-#if !defined(__MACOS__) && !defined(__MACOSX__)
-	fprintf(stdout, "%s\n", id_mac2iso_h+5);
-#endif
-
-#if !defined(__TOS__)
-	fprintf(stdout, "%s\n", id_tos2iso_h+5);
-#endif
 
 }	/* show_ident */
 
@@ -901,3 +906,6 @@ int main ( int argc, const char *argv[] )
 	return 0;
 
 }	/* main */
+
+
+/* +++ EOF +++ */
