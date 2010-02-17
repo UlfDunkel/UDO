@@ -45,7 +45,8 @@
 *    fd  Feb 09: str_sort_cmp(): done (so far ;-))
 *    fd  Feb 16: - str_sort_cmp(): adjusted to new encoding tables
 *                - CODE_CP1250_lig, sort_CODE_CP1250 added
-*    fd  Feb 17: CODE_437_lig[], sort_CODE_437[] + CODE_850_lig[], sort_CODE_850[] added
+*    fd  Feb 17: - CODE_437_lig[], sort_CODE_437[] + CODE_850_lig[], sort_CODE_850[] added
+*                - CODE_HP_lig[] + sort_CODE_HP[] added
 *
 ******************************************|************************************/
 
@@ -76,6 +77,7 @@ const char *id_str_c= "@(#) str.c       $DATE$";
 #include "udomem.h"
 
 #include "u_dos.h"
+#include "u_hp.h"
 #include "u_iso.h"
 #include "u_mac.h"
 #include "u_tos.h"
@@ -1675,6 +1677,12 @@ char         *s2)           /* ^ 2nd string for comparison */
       plig = CODE_CP1250_lig;
       psort = sort_CODE_CP1250;
       pumap = u_CODE_CP1250;
+      break;
+   
+   case CODE_HP8:
+      plig  = CODE_HP8_lig;
+      psort = sort_CODE_HP8;
+      pumap = u_CODE_HP8;
       break;
    
    case CODE_MAC:

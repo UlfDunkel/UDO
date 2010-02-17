@@ -44,7 +44,8 @@
 *  2010:
 *    fd  Jan 26: file reformatted and tidied up
 *    fd  Feb 16: recode(): forces target encoding for several output formats
-*    fd  Feb 17: CODE_437_lig[], sort_CODE_437[] + CODE_850_lig[], sort_CODE_850[] added
+*    fd  Feb 17: - CODE_437_lig[], sort_CODE_437[] + CODE_850_lig[], sort_CODE_850[] added
+*                - CODE_HP_lig[] + sort_CODE_HP[] added
 *
 ******************************************|************************************/
 
@@ -1318,6 +1319,8 @@ int           char_set)          /* iCharset */
       
    case CODE_HP8:
       pUsrc = u_CODE_HP8;
+      plig  = CODE_HP8_lig;
+      psort = sort_CODE_HP8;
       strcpy(sSource, "HP-Roman8");
       break;
    
