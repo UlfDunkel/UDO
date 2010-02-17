@@ -31,9 +31,7 @@
 *  Notes        : Please add yourself as co-author when you change this file.
 *
 *-------------------------------------------------------------------------------
-*  Things to do : - re-write UDO string and encoding engine for full Unicode support
-*
-*                 - Check if UDOCOMMAND.reset should really be in structure;
+*  Things to do : - Check if UDOCOMMAND.reset should really be in structure;
 *                   there is only one command ("!item") which should not be reset!
 *
 *                 - str_for_os(): check if preprocessor commands are really required!

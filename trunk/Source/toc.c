@@ -36,7 +36,7 @@
 *  Notes        : Please add yourself as co-author when you change this file.
 *
 *-------------------------------------------------------------------------------
-*  Things to do : - re-write UDO string and encoding engine for full Unicode support 
+*  Things to do : -
 *
 *-------------------------------------------------------------------------------
 *  History:

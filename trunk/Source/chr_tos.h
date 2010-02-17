@@ -32,8 +32,7 @@
 *  Notes        : Please add yourself as co-author when you change this file.
 *
 *-------------------------------------------------------------------------------
-*  Things to do : re-write UDO string and encoding engine for full Unicode support 
-*                 - try to assign the three unnamed chars in uCODE_TOS[] -> U_NIL
+*  Things to do : -
 *
 *-------------------------------------------------------------------------------
 *  History:
