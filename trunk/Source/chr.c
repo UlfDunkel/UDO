@@ -57,6 +57,7 @@
 *                - utf82iso() and stuff removed
 *                - iso2sys(), iso2system() and stuff removed
 *                - section2iso() removed (unused)
+*                - ansi2dos() removed
 *
 ******************************************|************************************/
 
@@ -98,7 +99,6 @@ const char *id_chr_c= "@(#) chr.c       $DATE$";
 #include "udo.h"
 #include "chr_all.h"
 #include "chr_ttf.h"
-#include "ansi2dos.h"
 
 #ifdef __TOS__
 #include "chr_tos.h"
@@ -840,52 +840,6 @@ char             *s)            /* ^ to string */
       one[0] = html7bit[i].c;             /* get HTML character (e.g. '&') */
                                           /* replace it (e.g. by '&amp;') */
       replace_all(s, html7bit[i].quoted, one);
-   }
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  ansi2dos():
-*     recode Windows characters into DOS characters
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void ansi2dos(
-
-char             *s)    /* ^ string */
-{
-   char          *ptr;  /* ^ position in string */
-   register int   idx;  /* index in conversion table */
-
-
-   ptr = s;                               /* set ^ to begin of string */
-
-   while (*ptr != EOS)                    /* check whole string */
-   {
-      if ( ((UCHAR)*ptr) > 127)           /* only convert high-ASCII characters */
-      {
-         idx = ((UCHAR)*ptr) - 128;       /* conversion table starts with ASCII 128! */
-
-                                          /* check if conversion is possible */
-         if (ansi2dos_item[idx].dos != EOS)
-         {
-            *ptr = ansi2dos_item[idx].dos;
-         }
-         else                             /* conversion is not possible */
-         {
-            warning_cannot_recode(*ptr, "Latin1", "system charset");
-            *ptr= '?';
-         }
-      }
-
-      ptr++;                              /* next character */
    }
 }
 
