@@ -47,6 +47,7 @@
 *                - CODE_CP1250_lig, sort_CODE_CP1250 added
 *    fd  Feb 17: - CODE_437_lig[], sort_CODE_437[] + CODE_850_lig[], sort_CODE_850[] added
 *                - CODE_HP_lig[] + sort_CODE_HP[] added
+*                - CODE_NEXT_lig[] + sort_CODE_NEXT[] added
 *
 ******************************************|************************************/
 
@@ -80,6 +81,7 @@ const char *id_str_c= "@(#) str.c       $DATE$";
 #include "u_hp.h"
 #include "u_iso.h"
 #include "u_mac.h"
+#include "u_next.h"
 #include "u_tos.h"
 
 
@@ -1689,6 +1691,12 @@ char         *s2)           /* ^ 2nd string for comparison */
       plig  = CODE_MAC_lig;
       psort = sort_CODE_MAC;
       pumap = u_CODE_MAC;
+      break;
+   
+   case CODE_NEXT:
+      plig  = CODE_NEXT_lig;
+      psort = sort_CODE_NEXT;
+      pumap = u_CODE_NEXT;
       break;
    
    case CODE_TOS:

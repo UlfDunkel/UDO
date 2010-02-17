@@ -46,6 +46,7 @@
 *    fd  Feb 16: recode(): forces target encoding for several output formats
 *    fd  Feb 17: - CODE_437_lig[], sort_CODE_437[] + CODE_850_lig[], sort_CODE_850[] added
 *                - CODE_HP_lig[] + sort_CODE_HP[] added
+*                - CODE_NEXT_lig[] + sort_CODE_NEXT[] added
 *
 ******************************************|************************************/
 
@@ -1333,6 +1334,8 @@ int           char_set)          /* iCharset */
    
    case CODE_NEXT:
       pUsrc = u_CODE_NEXT;
+      plig  = CODE_NEXT_lig;
+      psort = sort_CODE_NEXT;
       strcpy(sSource, "NeXTSTEP");
       break;
    
