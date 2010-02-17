@@ -39,6 +39,7 @@
 *
 *  2010:
 *    fd  Feb 10: header updated, file reformatted and tidied up (TAB-free)
+*    fd  Feb 17: ansi2dos() removed
 *
 ******************************************|************************************/
 
@@ -105,7 +106,6 @@ GLOBAL void uni2ascii(char * s);
 
 GLOBAL void win2sys(char * s);
 GLOBAL void html2sys(char * s);
-GLOBAL void ansi2dos(char * s);
 GLOBAL int calc_ttf_twip(const char *s, const int font, const int style);
 
 GLOBAL void replace_udo_quotes(char * s);

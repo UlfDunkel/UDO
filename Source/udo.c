@@ -68,6 +68,7 @@
 *    fd  Feb 15: - new: !code_source [] + c_code_source() -> iEncodingSource
 *                - new: !code_target [] + c_code_target() -> iEncodingTarget
 *    fd  Feb 16: udocharset: "cp1250" added
+*    fd  Feb 17: ansi2dos() removed
 *
 ******************************************|************************************/
 
@@ -13227,11 +13228,14 @@ LOCAL void save_winhelp_project(void)
    strcpy(n, titleprogram);
    del_right_spaces(n);
    win2sys(n);
+
+/* fd:2010-02-17: no longer required thanks to new recode() method:
    
    if (desttype == TOWIN && iCharset != CODE_437) 
    {
       ansi2dos(n);
    }
+*/
    
    qdelete_all(n, "\\~", 2);
    qdelete_all(n, "~", 1);
@@ -13251,10 +13255,13 @@ LOCAL void save_winhelp_project(void)
       strcpy(n, titdat.author);
       win2sys(n);
       
+/* fd:2010-02-17: no longer required thanks to new recode() method:
+
       if (desttype == TOWIN && iCharset != CODE_437)
       {
          ansi2dos(n);
       }
+*/
       
       qdelete_all(n, "\\~", 2);
       qdelete_all(n, "~", 1);
