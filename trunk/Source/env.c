@@ -50,6 +50,7 @@
 *    fd  Feb 03: file reformatted and tidied up
 *    fd  Feb 05: c_end_enumerate() outputs an empty HTML code line (for readability)
 *    fd  Feb 08: issue #79 fixed (weird empty lines on "!autoref []" in description environments
+*    fd  Feb 17: win2sys() -> recode_chrtab()
 *
 ******************************************|************************************/
 
@@ -2589,7 +2590,7 @@ int       listkind)     /* */
    case TOWIN:
    case TOWH4:
    case TOAQV:
-      win2sys(sWidth);                    /* PL15 */
+      recode_chrtab(sWidth,CHRTAB_ANSI);
       
       ll = (int)toklen(sWidth);
 

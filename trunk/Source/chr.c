@@ -47,6 +47,7 @@
 *    fd  Feb 17: - CODE_437_lig[], sort_CODE_437[] + CODE_850_lig[], sort_CODE_850[] added
 *                - CODE_HP_lig[] + sort_CODE_HP[] added
 *                - CODE_NEXT_lig[] + sort_CODE_NEXT[] added
+*                - various chartab[] merged here
 *                - cp850iso() and stuff removed
 *                - cp437iso() and stuff removed
 *                - hp82iso() and stuff removed
@@ -58,6 +59,11 @@
 *                - iso2sys(), iso2system() and stuff removed
 *                - section2iso() removed (unused)
 *                - ansi2dos() removed
+*                - win2sys() rewritten and generalized as recode_chrtab()
+*                - html2sys() merged into recode_chrtab()
+*                - umlaute2sys() merged into recode_chrtab()
+*                - auto_quote_chars() adjusted
+*                - recode(): UTF-8 output enabled
 *
 ******************************************|************************************/
 
@@ -205,6 +211,18 @@ typedef struct _quotecommand
 } QUOTECOMMAND;
 
 
+typedef struct _chartable
+{
+   unsigned   uname;                      /* Unicode name for character */
+   char      *ascii;                      /* ASCII (7bit!) representation, if any */
+   char      *ansi;                       /* Ansi, used for WinHelp, RTF, etc. */
+   char      *tex;                        /* TeX */
+   char      *html;                       /* HTML */
+   char      *ps;                         /* PostScript */
+}  CHARTABLE;
+
+
+
 
 
 
@@ -217,6 +235,15 @@ typedef struct _quotecommand
 LOCAL BOOLEAN   last_aqc_verb;            /* */
 LOCAL int       texinfo_np_counter;       /* Non-Printable-Texinfo-Node-Counter ;-) */
 
+
+
+
+
+/*******************************************************************************
+*
+*    INITIALIZED VARIABLES
+*
+******************************************|************************************/
 
 LOCAL char *html_specs[HTML_SPEC_MAX] =   /* list of supported HTML specials */
 {
@@ -292,6 +319,216 @@ LOCAL const QUOTECOMMAND quotecommand[MAXQUOTECMD] =
 
 
 
+CHARTABLE   chrtab[][6] =                 /* sorted alphabetically ;-) */
+{
+/*  Unicode name                          ASCII    Ansi                 TeX               HTML        PS         */
+/* ------------------------------------------------------------------------------------------------------------- */
+   { U_AcuteAccent,                       "'",     "\\'B4",             "\\`{}",          "&#180;",   "\\264"  },
+   { U_AlmostEqualTo,                     "",      "{\\f2 \\'BB}",      "$\\approx$",     "",         "?"      },
+   { U_BottomHalfIntegral,                "",      "\\'A7",             "$\\div$",        "&#247;",   "\\367"  },
+   { U_Breve,                             "",      "",                  "\\u{ }",         "",         "?"      },
+   { U_BrokenVerticalBar,                 "|",     "\\'A6",             "$\\mid$",        "&#166;",   "\\246"  },    /* broken-vertical-line */
+   { U_Bullet,                            "*",     "\\'95",             "$\\bullet$",     "&#149;",   "\\225"  },
+   { U_BulletOperator,                    "*",     "\\'95",             "$\\bullet$",     "&#149;",   "\\225"  },
+   { U_Caron,                             "",      "",                  "\\v{ }",         "",         ""       },
+   { U_Cedilla,                           ",",     "\\'B8",             "\\c{ }",         "&#184;",   "\\270"  },
+   { U_CentSign,                          "ct",    "\\'A2",             "cent",           "&#162;",   "\\242"  },
+   { U_CircumflexAccent,                  "",      "\\~",               "~",              "&nbsp;",   ""       },    /* ~ */
+   { U_CombiningCircumflexAccent,         "",      "\\'F7",             "\\^{ }",         "^",        ""       },
+   { U_CombiningGraveAccent,              "",      "\\'91",             "`",              "&#145;",   ""       },
+   { U_CombiningTilde,                    "~",     "~",                 "\\~{ }",         "~",        ""       },
+   { U_ContourIntegral,                   "",      "{\\f2 \\'A5}",      "$\\infty$",      "",         ""       },
+   { U_CopyrightSign,                     "(C)",   "\\'A9",             "\\copyright{}",  "&copy;",   "\\251"  },
+   { U_CurrencySign,                      "",      "\\'A4",             "",               "&#164;",   "\\244"  },    /* general-currency sign */
+   { U_Dagger,                            "",      "\\'86",             "\\dag{}",        "&#134;",   "\\206"  },
+   { U_DegreeSign,                        "",      "\\'B0",             "$\\circ$",       "&#176;",   "\\260"  },
+   { U_Diaeresis,                         "\"",    "\\'A8",             "\\\"{ }",        "&#168;",   "\\250"  },
+   { U_DivisionSign,                      ":",     "{\\F2 \\'B8}",      "$\\div$",        "&#247;",   "\\367"  },
+   { U_DotAbove,                          ".",     "\\'B7",             "\\.{ }",         "&#183;",   "\\267"  },
+   { U_DoubleAcuteAccent,                 "",      "{\\f2 \\'B2}",      "\\H{ }",         "",         ""       },
+   { U_DoubleDagger,                      "",      "\\'87",             "$\\ddagger$",    "&#135;",   "\\207"  },
+
+   /* check these! */
+   { U_DoubleLow9QuotationMark,           "",      "\\'89",             "",               "&#137;",   "\\211"  },
+   { U_DoubleLow9QuotationMark,           "",      "\\'84",             "``",             "&#132;",   ""       },
+
+   { U_ElementOf,                         "",      "{\\f2 e}",          "$\\epsilon$",    "",         ""       },
+   { U_EmDash,                            "---",   "\\'97",             "---",            "&#151;",   "\\227"  },
+   { U_EnDash,                            "--",    "\\'96",             "--",             "&#150;",   "\\226"  },
+   { U_EuroSign,                          "EUR",   "\\'A4",             "",               "&#164;",   "?"      },
+   { U_FeminineOrdinalIndicator,          "",      "\\'AA",             "\\b{a}",         "&#170;",   "\\252"  },
+   { U_FractionSlash,                     "/",     "{\\f2 \\'A4}",      "/",              "/",        "/"      },
+   { U_FullBlock,                         "*",     "\\'95",             "$\\bullet$",     "&#149;",   ""       },
+   { U_GraveAccent,                       "`",     "`",                 "`",              "`",        ""       },    /* ` */
+   { U_GreaterThanOrEqualTo,              ">=",    "{\\f2 \\'B3}",      "$\\geq$",        "",         ""       },
+   { U_GreekCapitalLetterGamma,           "",      "{\\f2 G}",          "$\\Gamma$",      "",         ""       },
+   { U_GreekCapitalLetterOmega,           "",      "{\\f2 W}",          "$\\Omega$",      "",         ""       },
+   { U_GreekCapitalLetterPhi,             "",      "{\\f2 F}",          "$\\Phi$",        "",         ""       },
+   { U_GreekCapitalLetterSigma,           "",      "{\\f2 S}",          "$\\Sigma$",      "",         ""       },
+   { U_GreekCapitalLetterTheta,           "",      "{\\f2 f}",          "$\\Theta$",      "",         ""       },
+   { U_GreekSmallLetterAlpha,             "",      "{\\f2 a}",          "$\\alpha$",      "",         ""       },
+   { U_GreekSmallLetterBeta,              "",      "\\'DF",             "{\\ss}",         "&szlig;",  "\\337"  },
+   { U_GreekSmallLetterDelta,             "",      "{\\f2 d}",          "$\\delta$",      "",         ""       },
+   { U_GreekSmallLetterEpsilon,           "",      "{\\f2 e}",          "$\\epsilon$",    "",         ""       },
+   { U_GreekSmallLetterMu,                "",      "\\'B5",             "$\\mu$",         "&#181;",   "\\265"  },
+   { U_GreekSmallLetterPhi,               "",      "\\'F8",             "$\\phi$",        "&#248;",   "\\370"  },
+   { U_GreekSmallLetterPi,                "",      "{\\f2 p}",          "$\\pi$",         "",         ""       },
+   { U_GreekSmallLetterSigma,             "",      "{\\f2 s}",          "$\\sigma$",      "",         ""       },
+   { U_GreekSmallLetterTau,               "",      "{\\f2 t}",          "$\\tau$",        "",         ""       },
+   { U_HorizontalEllipsis,                "...",   "\\'85",             "\\ldots{}",      "&#133;",   "\\205"  },
+   { U_HyphenMinus,                       "-",     "-",                 "--",             "&#150;",   ""       },
+   { U_IdenticalTo,                       "",      "{\\f2 \\'BA}",      "$\\equiv$",      "",         ""       },
+   { U_Increment,                         "",      "{\\f2 D}",          "$\\Delta$",      "",         "?"      },
+   { U_Infinity,                          "",      "{\\f2 \\'A5}",      "$\\infty$",      "&nbsp;",   ""       },
+   { U_Integral,                          "",      "",                  "",               "",         ""       },
+   { U_Intersection,                      "",      "{\\f2 h}",          "$\\eta$",        "",         ""       },
+   { U_InvertedExclamationMark,           "!",     "\\'A1",             "!`",             "&#161;",   "\\241"  },
+   { U_InvertedQuestionMark,              "?",     "\\'BF",             "?`",             "&#191;",   "\\277"  },
+   { U_LatinCapitalLetterAWithAcute,      "A",     "\\'C1",             "\\'{A}",         "&Aacute;", "\\301"  },
+   { U_LatinCapitalLetterAWithCircumflex, "A",     "\\'C2",             "\\^{A}",         "&Acirc;",  "\\302"  },
+   { U_LatinCapitalLetterAWithDiaeresis,  "Ae",    "\\'C4",             "\\\"{A}",        "&Auml;",   "\\304"  },
+   { U_LatinCapitalLetterAWithGrave,      "A",     "\\'C0",             "\\`{A}",         "&Agrave;", "\\300"  },
+   { U_LatinCapitalLetterAWithRingAbove,  "A",     "\\'C5",             "{\\AA}",         "&Aring;",  "\\305"  },
+   { U_LatinCapitalLetterAWithTilde,      "A",     "\\'C3",             "\\~{A}",         "&Atilde;", "\\303"  },
+   { U_LatinCapitalLetterCWithCedilla,    "C",     "\\'C7",             "\\c{C}",         "&Ccedil;", "\\307"  },
+   { U_LatinCapitalLetterEth,             "TH",    "\\'D0",             "",               "&#208;",   "\\320"  },    /* ETH */
+   { U_LatinCapitalLetterEWithAcute,      "E",     "\\'C9",             "\\'{E}",         "&Eacute;", "\\311"  },
+   { U_LatinCapitalLetterEWithCircumflex, "E",     "\\'CA",             "\\^{E}",         "&Ecirc;",  "\\312"  },
+   { U_LatinCapitalLetterEWithDiaeresis,  "E",     "\\'CB",             "\\\"{E}",        "&Euml;",   "\\313"  },
+   { U_LatinCapitalLetterEWithGrave,      "E",     "\\'C8",             "\\`{E}",         "&Egrave;", "\\310"  },
+   { U_LatinCapitalLetterIWithAcute,      "I",     "\\'CD",             "\\'{I}",         "&Iacute;", "\\315"  },
+   { U_LatinCapitalLetterIWithCircumflex, "I",     "\\'CE",             "\\^{I}",         "&Icirc;",  "\\316"  },
+   { U_LatinCapitalLetterIWithDiaeresis,  "I",     "\\'CF",             "\\\"{I}",        "&Iuml;",   "\\317"  },
+   { U_LatinCapitalLetterIWithGrave,      "I",     "\\'CC",             "\\`{I}",         "&Igrave;", "\\314"  },
+   { U_LatinCapitalLetterLWithStroke,     "L",     "",                  "",               "",         ""       },    /* L/ <???> */
+   { U_LatinCapitalLetterNWithTilde,      "N",     "\\'D1",             "\\~{N}",         "&Ntilde;", "\\321"  },
+   { U_LatinCapitalLetterOSlash,          "O",     "\\'D8",             "{\\O}",          "&Oslash;", "\\330"  },
+   { U_LatinCapitalLetterOWithAcute,      "O",     "\\'D3",             "\\'{O}",         "&Oacute;", "\\323"  },
+   { U_LatinCapitalLetterOWithCircumflex, "O",     "\\'D4",             "\\^{O}",         "&Ocirc;",  "\\324"  },
+   { U_LatinCapitalLetterOWithDiaeresis,  "Oe",    "\\'D6",             "{\\\"O}",        "&Ouml;",   "\\326"  },
+   { U_LatinCapitalLetterOWithGrave,      "O",     "\\'D2",             "\\`{O}",         "&Ograve;", "\\322"  },
+   { U_LatinCapitalLetterOWithTilde,      "O",     "\\'D5",             "\\~{O}",         "&Otilde;", "\\325"  },
+   { U_LatinCapitalLetterSWithCaron,      "S",     "\\'8A",             "\\v{S}",         "&#138;",   ""       },
+   { U_LatinCapitalLetterThorn,           "TH",    "\\'DE",             "",               "&#222;",   "\\336"  },    /* THORN */
+   { U_LatinCapitalLetterUWithAcute,      "U",     "\\'DA",             "\\'{U}",         "&Uacute;", "\\332"  },
+   { U_LatinCapitalLetterUWithCircumflex, "U",     "\\'DB",             "\\^{U}",         "&Ucirc;",  "\\333"  },
+   { U_LatinCapitalLetterUWithDiaeresis,  "Ue",    "\\'DC",             "{\\\"U}",        "&Uuml;",   "\\334"  },
+   { U_LatinCapitalLetterUWithGrave,      "U",     "\\'D9",             "\\`{U}",         "&Ugrave;", "\\331"  },
+   { U_LatinCapitalLetterYWithAcute,      "Y",     "\\'DD",             "\\'{Y}",         "&Yacute;", "\\335"  },
+   { U_LatinCapitalLetterYWithDiaeresis,  "Y",     "\\'9F",             "\\\"{Y}",        "&Yuml;",   "?"      },
+   { U_LatinCapitalLigatureAE,            "AE",    "\\'C6",             "{\\AE}",         "&AElig;",  "\\306"  },
+   { U_LatinCapitalLigatureIJ,            "IJ",    "IJ",                "IJ",             "IJ",       "ij"     },
+   { U_LatinCapitalLigatureOE,            "OE",    "\\'8C",             "{\\OE}",         "&#140;",   "\\214"  },
+   { U_LatinSmallLetterAWithAcute,        "a",     "\\'E1",             "\\'{a}",         "&aacute;", "\\341"  },
+   { U_LatinSmallLetterAWithCircumflex,   "a",     "\\'E2",             "\\^{a}",         "&acirc;",  "\\342"  },
+   { U_LatinSmallLetterAWithDiaeresis,    "ae",    "\\'E4",             "{\\\"a}",        "&auml;",   "\\344"  },
+   { U_LatinSmallLetterAWithGrave,        "a",     "\\'E0",             "\\`{a}",         "&agrave;", "\\340"  },
+   { U_LatinSmallLetterAWithRingAbove,    "a",     "\\'E5",             "{\\aa}",         "&aring;",  "\\345"  },
+   { U_LatinSmallLetterAWithTilde,        "a",     "\\'E3",             "\\~{a}",         "&atilde;", "\\343"  },
+   { U_LatinSmallLetterCWithCedilla,      "c",     "\\'E7",             "\\c{c}",         "&ccedil;", "\\347"  },
+   { U_LatinSmallLetterDotlessI,          "i",     "\\'B9",             "$^1$",           "&#185;",   "\\271"  },
+   { U_LatinSmallLetterEth,               "th",    "\\'F0",             "",               "&#240;",   "\\360"  },    /* eth */
+   { U_LatinSmallLetterEWithAcute,        "e",     "\\'E9",             "\\'{e}",         "&eacute;", "\\351"  },
+   { U_LatinSmallLetterEWithCircumflex,   "e",     "\\'EA",             "\\^{e}",         "&ecirc;",  "\\352"  },
+   { U_LatinSmallLetterEWithDiaeresis,    "e",     "\\'EB",             "\\\"{e}",        "&euml;",   "\\353"  },
+   { U_LatinSmallLetterEWithGrave,        "e",     "\\'E8",             "\\`{e}",         "&egrave;", "\\350"  },
+   { U_LatinSmallLetterIWithAcute,        "i",     "\\'ED",             "\\'{i}",         "&iacute;", "\\355"  },
+   { U_LatinSmallLetterIWithCircumflex,   "i",     "\\'EE",             "\\^{i}",         "&icirc;",  "\\356"  },
+   { U_LatinSmallLetterIWithDiaeresis,    "i",     "\\'EF",             "\\\"{i}",        "&iuml;",   "\\357"  },
+   { U_LatinSmallLetterIWithGrave,        "i",     "\\'EC",             "\\`{i}",         "&igrave;", "\\354"  },
+   { U_LatinSmallLetterLWithStroke,       "l",     "",                  "",               "",         ""       },    /* l/ <???> */
+   { U_LatinSmallLetterNWithTilde,        "n",     "\\'F1",             "\\~{n}",         "&ntilde;", "\\361"  },
+   { U_LatinSmallLetterOSlash,            "o",     "\\'F8",             "{\\o}",          "&oslash;", "\\370"  },
+   { U_LatinSmallLetterOWithAcute,        "o",     "\\'F3",             "\\'{o}",         "&oacute;", "\\363"  },
+   { U_LatinSmallLetterOWithCircumflex,   "o",     "\\'F4",             "\\^{o}",         "&ocirc;",  "\\364"  },
+   { U_LatinSmallLetterOWithDiaeresis,    "oe",    "\\'F6",             "{\\\"o}",        "&ouml;",   "\\366"  },
+   { U_LatinSmallLetterOWithGrave,        "o",     "\\'F2",             "\\`{o}",         "&ograve;", "\\362"  },
+   { U_LatinSmallLetterOWithTilde,        "o",     "\\'F5",             "\\~{o}",         "&otilde;", "\\365"  },
+   { U_LatinSmallLetterScriptF,           "f",     "\\'83",             "$f$",            "&#166;",   "\\203"  },
+   { U_LatinSmallLetterSharpS,            "ss",    "\\'DF",             "{\\ss}",         "&szlig;",  "\\337"  },
+   { U_LatinSmallLetterSWithCaron,        "s",     "\\'9A",             "\\v{s}",         "&#154;",   ""       },
+   { U_LatinSmallLetterThorn,             "th",    "\\'FE",             "",               "&#254;",   "\\376"  },    /* thorn */
+   { U_LatinSmallLetterUWithAcute,        "u",     "\\'FA",             "\\'{u}",         "&uacute;", "\\372"  },
+   { U_LatinSmallLetterUWithCircumflex,   "u",     "\\'FB",             "\\^{u}",         "&ucirc;",  "\\373"  },
+   { U_LatinSmallLetterUWithDiaeresis,    "ue",    "\\'FC",             "\\\"{u}",        "&uuml;",   "\\371"  },
+   { U_LatinSmallLetterUWithGrave,        "u",     "\\'F9",             "\\`{u}",         "&ugrave;", "\\371"  },
+   { U_LatinSmallLetterYWithAcute,        "y",     "\\'FD",             "\\'{y}",         "&yacute;", "\\375"  },
+   { U_LatinSmallLetterYWithDiaeresis,    "y",     "\\'FF",             "\\\"{y}",        "&yuml;",   "\\377"  },
+   { U_LatinSmallLigatureAE,              "ae",    "\\'E6",             "{\\ae}",         "&aelig;",  "\\346"  },
+   { U_LatinSmallLigatureFI,              "fi",    "fi",                "fi",             "fi",       "?"      },
+   { U_LatinSmallLigatureFL,              "fl",    "fl",                "fl",             "fl",       "?"      },
+   { U_LatinSmallLigatureIJ,              "ij",    "ij",                "ij",             "ij",       "ij"     },
+   { U_LatinSmallLigatureOE,              "oe",    "\\'9C",             "{\\oe}",         "&#156;",   "\\234"  },
+
+   /* check these! */
+   { U_LeftDoubleQuotationMark,           "",      "\\'93",             "``",             "&#147;",   "\\223"  },
+   { U_LeftDoubleQuotationMark,           "",      "\\'94",             "''",             "&#148;",   ""       },
+   { U_LeftDoubleQuotationMark,           "",      "\\'B4",             "\\'{ }",         "&#180;",   ""       },
+
+   { U_LeftPointingGuillemet,             "<<",    "\\'AB",             "\"<",            "&#171;",   "\\253"  },
+   { U_LeftPointingSingleGuillemet,       "<",     "<",                 "$<$",            "&lt;",     "<"      },
+   { U_LeftSingleQuotationMark,           "",      "\\'91",             "`",              "&#145;",   "\\221"  },
+   { U_LessThanOrEqualTo,                 "<=",    "{\\f2 \\'A3}",      "$\\leq$",        "",         ""       },
+   { U_LiraSign,                          "ITL",   "",                  "",               "&#163;",   ""       },   /* dp */
+   { U_LogicalAnd,                        "",      "\\'F7",             "$\\wedge$",      "&#136;",   "\\367"  },
+   { U_Lozenge,                           "",      "{\\f2 \\'E0}",      "$\\Diamond$",    "",         "?"      },
+   { U_Macron,                            "_",     "\\'AF",             "",               "&#175;",   "\\257"  },
+   { U_MasculineOrdinalIndicator,         "",      "\\'BA",             "\\b{o}",         "&#186;",   "\\272"  },
+   { U_MicroSign,                         "",      "\\'B5",             "$\\mu$",         "&#181;",   "\\265"  },
+   { U_MiddleDot,                         "*",     "\\'B7",             "$\\bullet$",     "&#183;",   "\\267"  },
+   { U_ModifierLetterCircumflexAccent,    "",      "\\'F7",             "\\^{ }",         "^",        "^"      },
+   { U_MultiplicationSign,                "x",     "\\'D7",             "$\\times$",      "&#215;",   "\\327"  },
+   { U_NAryProduct,                       "",      "{\\f2 P}",          "$\\Pi$",         "",         ""       },
+   { U_NArySummation,                     "",      "{\\f2 S}",          "$\\Sigma$",      "",         ""       },
+   { U_NB_SP,                             " ",     "\\~",               "~",              "&nbsp;",   "\\24ß"  },
+   { U_NotEqualTo,                        "",      "{\\f2 \\'B9}",      "$\\neq$",        "&#172;",   "\\254"  },
+   { U_NotSign,                           "",      "\\'AC",             "$\\neq$",        "&#172;",   "\\254"  },
+   { U_Ogonek,                            ",",     "",                  "",               "",         "?"      },   /* <???> */
+   { U_ParagraphSign,                     "Par.",  "\\'B6",             "\\P{}",          "&#182;",   "\\266"  },
+   { U_PartialDifferential,               "",      "{\\f2 \\'B6}",      "$\\partial$",    "",         ""       },
+   { U_PerMilleSign,                      "0/00",  "\\'89",             "",               "&#137;",   ""       },
+   { U_PesetaSign,                        "ss",    "\\'DF",             "{\\ss}",         "&szlig;",  "\\337"  },
+   { U_PlusMinusSign,                     "+/-",   "\\'B1",             "$\\pm$",         "&#177;",   "\\261"  },
+   { U_PoundSign,                         "GBP",   "\\'A3",             "\\pounds{}",     "&#163;",   "\\243"  },
+   { U_RegisteredSign,                    "(R)",   "\\'AE",             "(R)",            "&#174;",   "\\256"  },
+   { U_ReversedNotSign,                   "",      "",                  "",               "",         ""       },
+   { U_RightDoubleQuotationMark,          "",      "\\'94",             "''",             "&#148;",   "\\224"  },
+   { U_RightPointingGuillemet,            ">>",    "\\'BB",             "\">",            "&#187;",   "\\273"  },
+   { U_RightPointingSingleGuillemet,      ">",     ">",                 "$>$",            "&gt;",     ">"      },
+   { U_RightSingleQuotationMark,          "",      "\\'92",             "'",              "&#146;",   "\\222"  },
+   { U_RingAbove,                         "",      "\\'B0",             "$\\circ$",       "&#176;",   "\\260"  },
+
+   /* check these! */
+   { U_SectionSign,                       "",      "\\'A7",             "\\S{}",          "&sect;",   "\\167"  },
+   { U_SectionSign,                       "",      "\\'A7",             "\\S{}",          "&sect;",   "\\247"  },
+
+   /* check these! */
+   { U_SingleLow9QuotationMark,           "",      "\\'84",             "``",             "&#132;",   "\\204"  },
+   { U_SingleLow9QuotationMark,           "",      "\\'B8",             "\\c{ }",         "&#184;",   ""       },
+
+   { U_SmallTilde,                        "~",     "~",                 "\\~{ }",         "~",        "~"      },
+   { U_SoftHyphen,                        "",      "\\'AD",             "\\-",            "&#173;",   "\\255"  },
+   { U_SquareRoot,                        "",      "{\\f2 \\'D6}",      "$\\surd$",       "",         "?"      },
+   { U_SuperscriptLatinSmallLetterN,      "n",     "",                  "$^n$",           "",         ""       },
+   { U_SuperscriptOne,                    "1",     "\\'B9",             "$^1$",           "&#185;",   "\\271"  },
+   { U_SuperscriptThree,                  "3",     "\\'B3",             "$^3$",           "&#179;",   "\\263"  },
+   { U_SuperscriptTwo,                    "2",     "\\'B2",             "$^2$",           "&#178;",   "\\262"  },
+   { U_Tilde,                             "~",     "\\'98",             "$\\symbol{94}$", "~",        ""       },   /* !~ */
+   { U_TopHalfIntegral,                   "",      "",                  "",               "",         ""       },
+   { U_TradeMarkSign,                     "(TM)",  "\\'99",             "(TM)",           "&#153;",   "\\231"  },
+   { U_VulgarFractionOneHalf,             "1/2",   "\\'BD",             "$\\frac{1}{2}$", "&#189;",   "\\275"  },
+   { U_VulgarFractionOneQuarter,          "1/4",   "\\'BC",             "$\\frac{1}{4}$", "&#188;",   "\\274"  },
+   { U_VulgarFractionThreeQuarters,       "3/4",   "\\'BE",             "$\\frac{3}{4}$", "&#180;",   "\\276"  },
+   { U_YenSign,                           "JPY",   "\\'A5",             "yen",            "&#165;",   "\\245"  },
+
+   /* list terminator */
+   { U_NIL,                               "",      "",                  "",               "",         ""       }
+};
+
+
+
+
+
 /*******************************************************************************
 *
 *     LOCAL PROTOTYPES
@@ -314,6 +551,8 @@ LOCAL void c_quotes_apostrophes(char *s, const char *aon, const char *aoff, cons
 LOCAL void str2manbold(char *d, const char *s);
 LOCAL void str2manunder(char *d, const char *s);
 
+   /* convert Unicode value into UTF-8 bytes */
+LOCAL char *bstr_to_utf8(unsigned ucode);
 
 
 
@@ -328,6 +567,106 @@ LOCAL void str2manunder(char *d, const char *s);
 *     LOCAL FUNCTIONS
 *
 ******************************************|************************************/
+
+/*******************************************************************************
+*
+*  bstr_to_utf8():
+*     convert Unicode value into UTF-8 bytes
+*
+*  Notes:
+*
+*     Table 3-6. UTF-8 Bit Distribution (source: www.unicode.org)
+*     ------------------------------------------------------------------
+*     Scalar Value                1st Byte  2nd Byte  3rd Byte  4th Byte
+*     00000000 0xxxxxxx           0xxxxxxx
+*     00000yyy yyxxxxxx           110yyyyy  10xxxxxx
+*     zzzzyyyy yyxxxxxx           1110zzzz  10yyyyyy  10xxxxxx
+*     000uuuuu zzzzyyyy yyxxxxxx  11110uuu  10uuzzzz  10yyyyyy  10xxxxxx
+*     ------------------------------------------------------------------
+*
+*  Mnemonic of bit map:
+*     0nnnnnnn = single-byte char                (00 .. 7F)
+*     10nnnnnn = following byte in a n-byte char (80 .. BF)
+*     110nnnnn = first byte of a 2-byte char     (C0 .. DF)
+*     1110nnnn = first byte of a 3-byte char     (E0 .. EF)
+*     11110nnn = first byte of a 4-byte char     (F0 .. F7)
+*
+*  General source found at:
+*     http://www.codeguru.com/forum/archive/index.php/t-288665.html
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
+
+
+LOCAL char *bstr_to_utf8(
+
+unsigned      ucode)
+{
+   char       utf[9];
+   unsigned long  temp;
+   
+   
+   memset(utf,0,9);                       /* clear buffer */
+   temp = (unsigned long)ucode;
+   
+   if (temp < 0x00000080)                 /* 0000 0000-0000 007F -> 0xxxxxxx */
+   {
+      utf[0] = temp;
+   }
+   else if (temp < 0x00000800)            /* 0000 0080-0000 07FF -> 110xxxxx 10xxxxxx */
+   {
+      utf[0] = (0xC0 | (temp >> 6));
+      utf[1] = (0x80 | (temp & 0x3F));
+   }
+   else if (temp < 0x00010000)            /* 0000 0800-0000 FFFF -> 1110xxxx 10xxxxxx 10xxxxxx */
+   {
+      utf[0] = (0xE0 | (temp >> 12));
+      utf[1] = (0x80 | ((temp >> 6) & 0x3F));
+      utf[2] = (0x80 | (temp & 0x3F));
+   }
+
+#if 0
+   /* fd:2010-02-17: faded, because UNICODE.H does not define Unicode constants > 0xFFFF yet! */
+
+   else if (temp < 0x00200000)            /* 0001 0000-001F FFFF -> 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx */
+   {
+      utf[0] = (0xF0 | (temp >> 18));
+      utf[1] = (0x80 | ((temp >> 12) & 0x3F));
+      utf[2] = (0x80 | ((temp >> 6) & 0x3F));
+      utf[3] = (0x80 | (temp & 0x3F));
+   }
+#endif  /* #if 0 */
+
+#if 0
+   /* fd:2010-02-17: faded, because UTF-8 cannot have more than 4 bytes! */
+   
+   else if (temp < 0x04000000)            /* 0020 0000-03FF FFFF 111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx */
+   {
+      utf[0] = (0xF8 | (temp >> 24)));
+      utf[1] = (0x80 | ((temp >> 18) & 0x3F)));
+      utf[2] = (0x80 | ((temp >> 12) & 0x3F)));
+      utf[3] = (0x80 | ((temp >> 6) & 0x3F)));
+      utf[4] = (0x80 | (temp & 0x3F)));
+   }
+   else if (temp < 0x80000000)            /* 0400 0000-7FFF FFFF 1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx */
+   {
+      utf[0] = (0xFC | (temp >> 30)));
+      utf[1] = (0x80 | ((temp >> 24) & 0x3F)));
+      utf[2] = (0x80 | ((temp >> 18) & 0x3F)));
+      utf[3] = (0x80 | ((temp >> 12) & 0x3F)));
+      utf[4] = (0x80 | ((temp >> 6) & 0x3F)));
+      utf[5] = (0x80 | (temp & 0x3F)));
+   }
+#endif  /* #if 0 */
+
+   return utf;                            /* return a null-terminated string */
+}
+
+
+
+
 
 /*******************************************************************************
 *
@@ -388,7 +727,7 @@ char             *s)  /* ^ string */
          replace_all(s, uni2sys[i].uni, (const char *) uni2sys[i].system);
 
       if (no_umlaute)                     /* target encoding must not use umlauts */
-         umlaute2ascii(s);                /* convert all umlauts to pure ASCII */
+         recode_chrtab(s,CHRTAB_ASCII);   /* convert all umlauts to pure ASCII */
 
       break;
 
@@ -549,7 +888,7 @@ char             *s)  /* ^ string */
    }
 
    if (no_umlaute)                        /* target encoding must not use umlauts */
-      umlaute2ascii(s);                   /* convert all umlauts to pure ASCII */
+      recode_chrtab(s,CHRTAB_ASCII);      /* convert all umlauts to pure ASCII */
 }
 
 
@@ -572,12 +911,12 @@ char         *zeile,             /* ^ line */
 int           char_set)          /* iCharset */
 {
    char      *ptr;               /* */
-   int        idx;               /* */
-   unsigned (*pUsrc);            /* */
-   unsigned (*pUtrg);            /* */
-   char       sSource[42] = "";  /* */
-   char       sTarget[42] = "";  /* */
-   unsigned   i;                 /* */
+   unsigned   idx;               /* */
+   unsigned (*pUsrc);            /* ^ encoding table for source encoding */
+   unsigned (*pUtrg);            /* ^ encoding table for target encoding */
+   char       sSource[42] = "";  /* source encoding name, human-readable */
+   char       sTarget[42] = "";  /* target encoding name, human-readable */
+   unsigned   i;                 /* counter */
    unsigned   (*psort);          /* ^ to sort_CODE_xxx[] arrays */
    unsigned   (*plig)[3];        /* ^ t CODE_xxx_lig[][] arrays (unused here so far!) */
    
@@ -640,6 +979,10 @@ int           char_set)          /* iCharset */
       strcpy(sSource, "TOS");
       break;
    
+   case CODE_UTF8:
+      strcpy(sSource, "UTF-8");
+      break;
+   
    case CODE_LAT1:
    default:
       pUsrc = u_CODE_LAT1;
@@ -685,6 +1028,10 @@ int           char_set)          /* iCharset */
       strcpy(sTarget, "TOS");
       break;
    
+   case CODE_UTF8:
+      strcpy(sTarget, "UTF-8");
+      break;
+   
    case CODE_LAT1:
    default:
       pUtrg = u_CODE_LAT1;
@@ -714,27 +1061,62 @@ int           char_set)          /* iCharset */
                                           /* nothing to do */   
    if (iEncodingSource == iEncodingTarget)
       return;
-   
 
    ptr = get_8bit_ptr(zeile);             /* set ^ to first high-ASCII char */
    
    if (!ptr)
       return;
    
+   if (iEncodingTarget == CODE_UTF8)
+   {
+      char  sbuf[LINELEN];
+      char  cbuf[9];
+      int   i;
+      
+      
+      memset(sbuf,0,LINELEN);
+      memset(cbuf,0,9);
+      
+      
+      for (i = 0; i < strlen(zeile); i++)
+      {
+         idx = (UCHAR)zeile[i];
+         
+         if (idx < 128)
+         {
+            cbuf[0] = idx;
+            cbuf[1] = EOS;
+            strcat(sbuf,cbuf);
+         }
+         else if (pUsrc[idx] != U_NIL)
+         {
+            strcpy(cbuf,bstr_to_utf8(pUsrc[idx]));
+            
+            strcat(sbuf,cbuf);
+         }
+      }
+      
+      strcpy(zeile,sbuf);
+      
+      return;
+   }   
+
    while (*ptr)                           /* check whole string */
    {
       idx = (UCHAR)*ptr;                  /* get char value */
-      
-      if (idx > 127)                      /* */
+
+      if (idx > 127)                      /* handle BYTE encodings */
       {
          if (pUsrc[idx] != U_NIL)         /* check if conversion is possible */
          {
             for (i = 128; i < 256; i++)
+            {
                if (pUtrg[i] == pUsrc[idx])
                {
                   *ptr = i;
                   break;
                }
+            }
          }
          else                             /* conversion is not possible */
          {
@@ -756,40 +1138,145 @@ int           char_set)          /* iCharset */
 
 /*******************************************************************************
 *
-*  win2sys():
-*     recode a string with Windows characters (used for TITLE option)
+*  recode_chrtab():
+*     recode a string characters or strings from chrtab[]
 *
 *  Return:
 *     -
 *
 ******************************************|************************************/
 
-GLOBAL void win2sys(
+GLOBAL void recode_chrtab(
 
-char             *s)        /* ^ string */
+char             *s,              /* ^ string */
+int               type)           /* CHRTAB_... (CHR.H) */
 {
-   register int   i;        /* counter */
-   char           one[2];   /* one char buffer */
-   char           four[5];  /* four chars buffer */
-   char          *ptr;      /* ^ into string */
+   register int   i = 0;          /* counter for string */
+   register int   j = 0;          /* counter for chrtab[] */
+   unsigned     (*pUtrg);         /* ^ encoding table for target encoding */
+   unsigned       idx;            /* Unicode index of char */
+   char           sbuf[LINELEN];  /* buffer the whole string */
+   char           cbuf[2];        /* buffer for one char */
 
 
    if (s[0] == EOS)                       /* empty string */
       return;
-
-   strcpy(one, " ");                      /* clear buffer */
-
-   for (i = 0; i < 128; i++)
+   
+   switch (iEncodingTarget)               /* get the right encoding table! */
    {
-      if (chrtab[i].ansi[0] == '\\')
+   case CODE_437:
+      pUtrg = u_CODE_437;
+      break;
+      
+   case CODE_850:
+      pUtrg = u_CODE_850;
+      break;
+      
+   case CODE_CP1250:
+      pUtrg = u_CODE_CP1250;
+      break;
+      
+   case CODE_HP8:
+      pUtrg = u_CODE_HP8;
+      break;
+   
+   case CODE_MAC:
+      pUtrg = u_CODE_MAC;
+      break;
+   
+   case CODE_NEXT:
+      pUtrg = u_CODE_NEXT;
+      break;
+   
+   case CODE_TOS:
+      pUtrg = u_CODE_TOS;
+      break;
+   
+   case CODE_LAT1:
+   default:
+      pUtrg = u_CODE_LAT1;
+   }
+   
+   memset(sbuf,0,LINELEN);
+   memset(cbuf,0,2);
+
+   for (i = 0; i < strlen(s); i++)        /* */
+   {
+      idx = (UCHAR)s[i];                  /* get Unicode index of char */
+      
+      if (idx > 127)                      /* convertable char */
       {
-         one[0] = chrtab[i].charsystem;
-         replace_all(s, chrtab[i].ansi, one);
+         j = 0;
+         
+         while (chrtab[j]->uname != U_NIL)/* check for end of table! */
+         {
+                                          /* identical Unicode name found! */
+            if (chrtab[j]->uname == pUtrg[idx])
+            {
+            
+               switch (type)
+               {
+               case CHRTAB_ASCII:
+                                          /* we have do replace something */
+                  if (chrtab[j]->ascii[0] != EOS)
+                  {                       /* add replacement string to buffer */
+                     strcat(sbuf,chrtab[j]->ascii);
+                     break;
+                  }
+                  
+                  break;
+               
+               case CHRTAB_ANSI:
+                                          /* we have do replace something */
+                  if (chrtab[j]->ansi[0] != EOS)
+                  {                       /* add replacement string to buffer */
+                     strcat(sbuf,chrtab[j]->ansi);
+                     break;
+                  }
+                  
+                  break;
+               
+               case CHRTAB_HTML:
+                                          /* we have do replace something */
+                  if (chrtab[j]->html[0] != EOS)
+                  {                       /* add replacement string to buffer */
+                     strcat(sbuf,chrtab[j]->html);
+                     break;
+                  }
+                  
+                  break;
+               
+               }
+            }
+            
+            j++;                          /* next chrtab[] entry */
+         }
+      }
+      else
+      {
+         cbuf[0] = s[i];                  /* convert char to string */
+         strcat(sbuf,cbuf);               /* add to buffer */
       }
    }
+   
+   strcpy(s, sbuf);                       /* return converted string */
 
-   replace_char(s, "\236", "\341");       /* Noch das sz anpassen */
+   switch (type)
+   {
+   case CHRTAB_HTML:
+      for (i = 0; i < MAXHTML7BIT; i++)   /* convert special HTML characters */
+      {
+         cbuf[0] = html7bit[i].c;         /* get HTML character (e.g. '&') */
+                                          /* replace it (e.g. by '&amp;') */
+         replace_all(s, html7bit[i].quoted, cbuf);
+      }
+   }      
 
+
+      
+#if 0
+   /* fd:2010-02-17: old stuff from win2sys() */
+   
    strcpy(four, "    ");                  /* clear other buffer */
    
                                           /* Nicht umwandelbare Zeichen entfernen */
@@ -802,45 +1289,7 @@ char             *s)        /* ^ string */
 
       delete_all(s, four);
    }
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  html2sys():
-*     String mit HTML-Zeichen in Systemzeichen wandeln
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void html2sys(
-
-char             *s)            /* ^ to string */
-{
-   register int   i;            /* counter */
-   char           one[2] = "";  /* cleared string buffer */
-   
-   
-   if (s[0] == EOS)                       /* empty string */
-      return;
-   
-   for (i = 0; i < 128; i++)              /* convert lower ASCII part */
-   {
-      one[0] = chrtab[i].charsystem;
-      replace_all(s, chrtab[i].html, one);
-   }
-   
-   for (i = 0; i < MAXHTML7BIT; i++)      /* convert special HTML characters */
-   {
-      one[0] = html7bit[i].c;             /* get HTML character (e.g. '&') */
-                                          /* replace it (e.g. by '&amp;') */
-      replace_all(s, html7bit[i].quoted, one);
-   }
+#endif
 }
 
 
@@ -1185,49 +1634,6 @@ char  *s)  /* ^ string */
 
 /*******************************************************************************
 *
-*  umlaute2ascii():
-*     convert German umlauts into their 7bit versions
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-GLOBAL void umlaute2ascii(
-
-char  *s)  /* ^ string */
-{
-   int      id;           /* */
-   size_t   i = 0;        /* counter */
-   char     one[2] = "";  /* char buffer */
-   
-
-   if (s[0] == EOS)                       /* empty string */
-      return;
-
-   while (s[i] != EOS)                    /* check whole string */
-   {
-      if ( ((UCHAR)s[i]) > 127)           /* only convert high-ASCII characters */
-      {
-         id = ((UCHAR)s[i]) - 128;        /* conversion table starts with ASCII 128! */
-
-         if (chrtab[id].ascii[0] != EOS)  /* check if conversion is possible */
-         {
-            one[0] = s[i];
-            replace_all(s + i, one, chrtab[id].ascii);
-         }
-      }
-      
-      i++;                                /* next character */
-   }
-}
-
-
-
-
-
-/*******************************************************************************
-*
 *  label2tex():
 *     replace or remove all chars which are not allowed in a TeX label "\label{...}"
 *
@@ -1369,7 +1775,7 @@ char       *n)            /* ^ node name */
    if (n[0] == EOS)                       /* empty string */
       return;
 
-   umlaute2ascii(n);
+   recode_chrtab(n,CHRTAB_ASCII);
    replace_udo_quotes(n);
    delete_all_divis(n);
 
@@ -1425,8 +1831,8 @@ const char  *n)       /* name */
       return;
 
    strcpy(s, n);                          /* copy name */
-   win2sys(s);
-   umlaute2ascii(s);
+   recode_chrtab(s,CHRTAB_ANSI);
+   recode_chrtab(s,CHRTAB_ASCII);
    replace_udo_quotes(s);
    delete_all_divis(s);
 
@@ -1832,7 +2238,7 @@ char       *n)            /* ^ string */
    if (n[0] == EOS)                       /* empty string */
       return;
 
-   umlaute2ascii(n);
+   recode_chrtab(n,CHRTAB_ASCII);
    replace_udo_quotes(n);
    delete_all_divis(n);
    replace_udo_tilde(n);
@@ -3134,21 +3540,6 @@ char        *s)               /* ^ string */
 
 /*******************************************************************************
 *
-*  XXXXXXXXXXXXXXXXXXXXX():
-*     ??? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-
-
-
-
-
-/*******************************************************************************
-*
 *  auto_quote_chars():
 *     ??? (description missing)
 *  
@@ -3163,7 +3554,9 @@ char             *s,              /* ^ string */
 BOOLEAN           all)            /* */
 {
    register int   i,              /* */
-                  tabidx;         /* */
+                  j;              /* counter for chrtab[] */
+   unsigned       idx;
+   unsigned     (*pUtrg);         /* ^ encoding table for target encoding */
    char          *ptr,            /* */
                  *oldptr;         /* */
    const char    *ptr_quoted;     /* */
@@ -3179,10 +3572,46 @@ BOOLEAN           all)            /* */
    if (s[0] == EOS)                       /* empty string */
       return;
 
-   if (no_umlaute)
-      umlaute2ascii(s);
+   switch (iEncodingTarget)               /* get the right encoding table! */
+   {
+   case CODE_437:
+      pUtrg = u_CODE_437;
+      break;
+      
+   case CODE_850:
+      pUtrg = u_CODE_850;
+      break;
+      
+   case CODE_CP1250:
+      pUtrg = u_CODE_CP1250;
+      break;
+      
+   case CODE_HP8:
+      pUtrg = u_CODE_HP8;
+      break;
+   
+   case CODE_MAC:
+      pUtrg = u_CODE_MAC;
+      break;
+   
+   case CODE_NEXT:
+      pUtrg = u_CODE_NEXT;
+      break;
+   
+   case CODE_TOS:
+      pUtrg = u_CODE_TOS;
+      break;
+   
+   case CODE_LAT1:
+   default:
+      pUtrg = u_CODE_LAT1;
+   }
+   
 
-   switch(desttype)
+   if (no_umlaute)
+      recode_chrtab(s,CHRTAB_ASCII);
+
+   switch (desttype)
    {
    case TOASC:                            /* Hier muss nicht gequotet werden! */
    case TODRC:
@@ -3194,6 +3623,7 @@ BOOLEAN           all)            /* */
    case TOINF:
    case TOSRC:
    case TOSRP:
+#if 0
 #ifdef __TOS__
       replace_all(s, BETA_S, "\236");
 #endif
@@ -3203,6 +3633,8 @@ BOOLEAN           all)            /* */
 #ifdef __MSDOS850__
       replace_all(s, "\236", "\341");
 #endif
+#endif /* #if 0 */
+
       if (bDocUniversalCharsetOn)
          uni2ascii(s);
 
@@ -3413,15 +3845,28 @@ BOOLEAN           all)            /* */
          if ((all) || (!styleflag.verbatim && !aqc_verb) )
          {
             found = FALSE;
+            
+            idx = (UCHAR)*ptr;
 
-            if (((UCHAR) ptr[0]) > 127 )
+            if (idx > 127)
             {
-               tabidx = ((UCHAR) ptr[0]) - 128;
-
-               if (chrtab[tabidx].tex[0] != EOS)
+               j = 0;
+         
+                                          /* check for end of table! */
+               while (chrtab[j]->uname != U_NIL)
                {
-                  ptr_quoted = chrtab[tabidx].tex;
-                  found = TRUE;
+                                          /* identical Unicode name found! */
+                  if (chrtab[j]->uname == pUtrg[idx])
+                  {
+                     if (chrtab[j]->tex[0] != EOS)
+                     {
+                        ptr_quoted = chrtab[j]->tex;
+                        found = TRUE;
+                        break;
+                     }
+                  }
+                  
+                  j++;
                }
             }
             else
@@ -3442,7 +3887,7 @@ BOOLEAN           all)            /* */
                if ((UCHAR) ptr[0] >= 127)
                {
                   warning_no_texchar(ptr[0]);     /* PL12 */
-                  sprintf(s_temp, "$\\symbol{%d}$", (UCHAR) ptr[0]);
+                  sprintf(s_temp, "$\\symbol{%d}$", idx);
                   ptr_quoted = s_temp;
                }
             }
@@ -3480,28 +3925,32 @@ BOOLEAN           all)            /* */
       case TORTF:
          found = FALSE;
 
-         if (((UCHAR) ptr[0]) > 127 )
-         {
-            /* Wie bei WinHelp */
-            if (iCharset != CODE_LAT1)
-            {
-               tabidx = ((UCHAR) ptr[0]) - 128;
+         idx = (UCHAR)*ptr;
 
-               if (chrtab[tabidx].ansi[0] != EOS)
+         if (idx > 127)
+         {
+            j = 0;
+        
+                                          /* check for end of table! */
+            while (chrtab[j]->uname != U_NIL)
+            {
+                                          /* identical Unicode name found! */
+               if (chrtab[j]->uname == pUtrg[idx])
                {
-                  ptr_quoted = chrtab[tabidx].ansi;
-                  found = TRUE;
+                  if (chrtab[j]->ansi[0] != EOS)
+                  {
+                     ptr_quoted = chrtab[j]->ansi;
+                     found = TRUE;
+                     break;
+                  }
                }
-               else
-               {
-                  warning_cannot_recode(ptr[0], "system charset", "Windows ANSI");
-                  ptr[0] = '?';
-               }
+                 
+               j++;
             }
 
             if (!found)
             {
-               sprintf(s_temp, "\\'%X", (UCHAR) ptr[0]);
+               sprintf(s_temp, "\\'%X", idx);
                ptr_quoted = s_temp;
             }
          }
@@ -3522,27 +3971,32 @@ BOOLEAN           all)            /* */
       case TOKPS:
          found = FALSE;
 
-         if (((UCHAR) ptr[0]) > 127)
-         {       
-            if (iCharset != CODE_LAT1)
-            {
-               tabidx = ((UCHAR) ptr[0]) - 128;
+         idx = (UCHAR)*ptr;
 
-               if (chrtab[tabidx].ps[0] != EOS)
+         if (idx > 127)
+         {
+            j = 0;
+        
+                                          /* check for end of table! */
+            while (chrtab[j]->uname != U_NIL)
+            {
+                                          /* identical Unicode name found! */
+               if (chrtab[j]->uname == pUtrg[idx])
                {
-                  ptr_quoted = chrtab[tabidx].ps;
-                  found = TRUE;
+                  if (chrtab[j]->ps[0] != EOS)
+                  {
+                     ptr_quoted = chrtab[j]->ps;
+                     found = TRUE;
+                     break;
+                  }
                }
-               else
-               {
-                  warning_cannot_recode(ptr[0], "system charset", "Windows ANSI");
-                  ptr[0] = '?';
-               }
+                 
+               j++;
             }
 
             if (!found)
             {
-               sprintf(s_temp, "\\%03o", (UCHAR) ptr[0]);
+               sprintf(s_temp, "\\%03o", idx);
                ptr_quoted = s_temp;
             }
          }
@@ -3580,27 +4034,32 @@ BOOLEAN           all)            /* */
       case TOAQV:
          found = FALSE;
 
-         if (((UCHAR) ptr[0]) > 127)
-         {
-            if (iCharset != CODE_LAT1)
-            {
-               tabidx = ((UCHAR) ptr[0]) - 128;
+         idx = (UCHAR)*ptr;
 
-               if (chrtab[tabidx].ansi[0] != EOS)
+         if (idx > 127)
+         {
+            j = 0;
+        
+                                          /* check for end of table! */
+            while (chrtab[j]->uname != U_NIL)
+            {
+                                          /* identical Unicode name found! */
+               if (chrtab[j]->uname == pUtrg[idx])
                {
-                  ptr_quoted = chrtab[tabidx].ansi;
-                  found = TRUE;
+                  if (chrtab[j]->ansi[0] != EOS)
+                  {
+                     ptr_quoted = chrtab[j]->ansi;
+                     found = TRUE;
+                     break;
+                  }
                }
-               else
-               {
-                  warning_cannot_recode(ptr[0], "system charset", "Windows ANSI");
-                  ptr[0] = '?';
-               }
+                 
+               j++;
             }
 
             if (!found)
             {
-               sprintf(s_temp, "\\'%X", ((UCHAR) ptr[0]) );
+               sprintf(s_temp, "\\'%X", idx);
                ptr_quoted = s_temp;
             }
          }
@@ -3625,27 +4084,36 @@ BOOLEAN           all)            /* */
             ptr_quoted = s_temp;
          }
          break;
+         
 
       case TOHAH:                         /* HTML Apple Help (since V6.5.17) */
       case TOHTM:                         /* HTML */
       case TOMHH:                         /* Microsoft HTML Help */
          found = FALSE;
 
-         if (((UCHAR) ptr[0]) > 127)
-         {
-            if (!html_ignore_8bit)
-            {
-               tabidx = ((UCHAR) ptr[0]) - 128;
+         idx = (UCHAR)*ptr;
 
-               if (chrtab[tabidx].html[0] != EOS)
+         if (idx > 127 && !html_ignore_8bit)
+         {
+            j = 0;
+        
+                                          /* check for end of table! */
+            while (chrtab[j]->uname != U_NIL)
+            {
+                                          /* identical Unicode name found! */
+               if (chrtab[j]->uname == pUtrg[idx])
                {
-                  ptr_quoted = chrtab[tabidx].html;
-                  found= TRUE;
+                  if (chrtab[j]->html[0] != EOS)
+                  {
+                     ptr_quoted = chrtab[j]->html;
+                     found = TRUE;
+                     break;
+                  }
+                  else
+                     warning_no_isochar(ptr[0]);
                }
-               else
-               {
-                  warning_no_isochar(ptr[0]);
-               }
+                 
+               j++;
             }
          }
          else
@@ -3673,22 +4141,34 @@ BOOLEAN           all)            /* */
             }
          }
          break;
+         
 
       case TOLDS:
          found = FALSE;
 
-         if (((UCHAR) ptr[0]) > 127)
-         {
-            tabidx = ((UCHAR) ptr[0]) - 128;
+         idx = (UCHAR)*ptr;
 
-            if (chrtab[tabidx].html[0] != EOS)
+         if (idx > 127)
+         {
+            j = 0;
+        
+                                          /* check for end of table! */
+            while (chrtab[j]->uname != U_NIL)
             {
-               ptr_quoted = chrtab[tabidx].html;
-               found = TRUE;
-            }
-            else
-            {
-               warning_no_isochar(ptr[0]);
+                                          /* identical Unicode name found! */
+               if (chrtab[j]->uname == pUtrg[idx])
+               {
+                  if (chrtab[j]->html[0] != EOS)
+                  {
+                     ptr_quoted = chrtab[j]->html;
+                     found = TRUE;
+                     break;
+                  }
+                  else
+                     warning_no_isochar(idx);
+               }
+                 
+               j++;
             }
          }
          else
@@ -3704,22 +4184,34 @@ BOOLEAN           all)            /* */
             }
          }
          break;
+         
 
       case TOHPH:
          found = FALSE;
 
-         if (((UCHAR) ptr[0]) > 127)
-         {
-            tabidx = ((UCHAR) ptr[0]) - 128;
+         idx = (UCHAR)*ptr;
 
-            if (chrtab[tabidx].html[0] != EOS)
+         if (idx > 127)
+         {
+            j = 0;
+        
+                                          /* check for end of table! */
+            while (chrtab[j]->uname != U_NIL)
             {
-               ptr_quoted = chrtab[tabidx].html;
-               found= TRUE;
-            }
-            else
-            {
-               warning_no_isochar(ptr[0]);
+                                          /* identical Unicode name found! */
+               if (chrtab[j]->uname == pUtrg[idx])
+               {
+                  if (chrtab[j]->html[0] != EOS)
+                  {
+                     ptr_quoted = chrtab[j]->html;
+                     found = TRUE;
+                     break;
+                  }
+                  else
+                     warning_no_isochar(idx);
+               }
+                 
+               j++;
             }
          }
          else
@@ -3734,7 +4226,6 @@ BOOLEAN           all)            /* */
                }
             }
          }
-         break;
 
       }  /* switch (desttype) */
 

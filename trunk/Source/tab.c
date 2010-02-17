@@ -43,6 +43,8 @@
 *    fd  Nov 28: MAX_CELLS_LEN increased from 1024 to 4096
 *  2010:
 *    fd  Jan 23: converted all German umlauts in comments into plain ASCII
+*    fd  Feb 17: umlaute2sys() merged into recode_chrtab()
+
 *
 ******************************************|************************************/
 
@@ -341,12 +343,15 @@ GLOBAL BOOLEAN table_add_line ( char *s )
         replace_char(s, "\t", " ");
         qdelete_all(s, "!-", 2);
 
-        if (no_umlaute) umlaute2ascii(s);
+        if (no_umlaute)
+           recode_chrtab(s,CHRTAB_ASCII);
+        
         replace_macros(s);
                 
         if (desttype!=TOTEX && desttype!=TOPDL)
-        {       c_styles(s);
-                check_styles(s);
+        {
+           c_styles(s);
+           check_styles(s);
         }
 
         switch (desttype)
