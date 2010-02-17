@@ -71,6 +71,7 @@
 *    fd  Feb 16: CODE_CP1250_lig, sort_CODE_CP1250 added
 *    fd  Feb 17: - CODE_437_lig[], sort_CODE_437[] + CODE_850_lig[], sort_CODE_850[] added
 *                - CODE_HP_lig[] + sort_CODE_HP[] added
+*                - CODE_NEXT_lig[] + sort_CODE_NEXT[] added
 *
 ******************************************|************************************/
 
@@ -127,6 +128,7 @@ const char *id_toc_c= "@(#) toc.c       $DATE$";
 #include "u_hp.h"
 #include "u_iso.h"
 #include "u_mac.h"
+#include "u_next.h"
 #include "u_tos.h"
 
 
@@ -5564,6 +5566,12 @@ GLOBAL BOOLEAN save_html_index(void)
       psort = sort_CODE_HP8;
       plig  = CODE_HP8_lig;
       pumap = u_CODE_HP8;
+      break;
+   
+   case CODE_NEXT:
+      plig  = CODE_NEXT_lig;
+      psort = sort_CODE_NEXT;
+      pumap = u_CODE_NEXT;
       break;
    
    case CODE_MAC:
