@@ -32,8 +32,7 @@
 *  Notes        : Please add yourself as co-author when you change this file.
 *
 *-------------------------------------------------------------------------------
-*  Things to do : - re-write UDO string and encoding engine for full Unicode support
-*                 - output_about_udo(): check if TOKPS does still not support this
+*  Things to do : - output_about_udo(): check if TOKPS does still not support this
 *                 - remove about_unregistered()
 *
 *-------------------------------------------------------------------------------

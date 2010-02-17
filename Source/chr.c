@@ -33,7 +33,7 @@
 *  Notes        : Please add yourself as co-author when you change this file.
 *
 *-------------------------------------------------------------------------------
-*  Things to do : re-write UDO string and encoding engine for full Unicode support 
+*  Things to do : -
 *
 *-------------------------------------------------------------------------------
 *  History:
@@ -64,6 +64,7 @@
 *                - umlaute2sys() merged into recode_chrtab()
 *                - auto_quote_chars() adjusted
 *                - recode(): UTF-8 output enabled
+*                - recode(): UTF-8 input enabled
 *
 ******************************************|************************************/
 
@@ -602,16 +603,16 @@ LOCAL char *bstr_to_utf8(unsigned ucode);
 
 LOCAL char *bstr_to_utf8(
 
-unsigned      ucode)
+unsigned           ucode)
 {
-   char       utf[9];
-   unsigned long  temp;
+   char            utf[9];
+   unsigned long   temp;
    
    
    memset(utf,0,9);                       /* clear buffer */
    temp = (unsigned long)ucode;
    
-   if (temp < 0x00000080)                 /* 0000 0000-0000 007F -> 0xxxxxxx */
+   if (temp < 0x00000800)                 /* 0000 0000-0000 007F -> 0xxxxxxx */
    {
       utf[0] = temp;
    }
@@ -662,6 +663,109 @@ unsigned      ucode)
 #endif  /* #if 0 */
 
    return utf;                            /* return a null-terminated string */
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  utf8_to_bstr():
+*     convert UTF-8 bytes into Unicode value
+*
+*  Notes:
+*     see bstr_to_utf8()
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
+
+unsigned utf8_to_bstr(
+
+const char   *sz, 
+int           len)
+{
+   int        i = 0;
+   unsigned   temp;
+   
+   
+   while (i < len)
+   {
+      if ((sz[i] & 0x80) == 0)            /* 0000 0000-0000 007F 0xxxxxxx */
+      {
+         temp = sz[i];
+         ++i;
+      }
+      else if ((sz[i] & 0xE0) == 0xC0)    /* 0000 0080-0000 07FF 110xxxxx 10xxxxxx */
+      {
+         temp = (sz[i] & 0x1F);
+         temp <<= 6;
+         temp += (sz[i + 1] & 0x3F);
+         i += 2;
+      }
+      else if ((sz[i] & 0xF0) == 0xE0)    /* 0000 0800-0000 FFFF 1110xxxx 10xxxxxx 10xxxxxx */
+      {
+         temp = (sz[i] & 0x0F);
+         temp <<= 6;
+         temp += (sz[i + 1] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 2] & 0x3F);
+         i += 3;
+      }
+      else if ((sz[i] & 0xF8) == 0xF0)    /* 0001 0000-001F FFFF 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx */
+      {
+         temp = (sz[i] & 0x07);
+         temp <<= 6;
+         temp += (sz[i + 1] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 2] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 3] & 0x3F);
+         i += 4;
+      }
+
+#if 0
+   /* fd:2010-02-17: faded for now */
+
+      else if ((sz[i] & 0xFC) == 0xF8)    /* 0020 0000-03FF FFFF 111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx */
+      {
+         temp = (sz[i] & 0x03);
+         temp <<= 6;
+         temp += (sz[i + 1] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 2] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 3] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 4] & 0x3F);
+         i += 5;
+      }
+      else if ((sz[i] & 0xFE) == 0xFC)    /* 0400 0000-7FFF FFFF 1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx */
+      {
+         temp = (sz[i] & 0x01);
+         temp <<= 6;
+         temp += (sz[i + 1] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 2] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 3] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 4] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 5] & 0x3F);
+         i += 6;
+      }
+#endif   /* #if 0 */
+
+      else
+      {
+         temp = '?';
+      }
+   }
+   
+   return temp;
 }
 
 
@@ -1067,20 +1171,99 @@ int           char_set)          /* iCharset */
    if (!ptr)
       return;
    
-   if (iEncodingTarget == CODE_UTF8)
+   
+   /* --- UTF-8 to 1-byte recoding --- */
+   
+   if (iEncodingSource == CODE_UTF8)      /* convert UTF-8 to 1-byte format first */
    {
-      char  sbuf[LINELEN];
-      char  cbuf[9];
-      int   i;
+      char  sbuf[LINELEN];  /* line buffer */
+      char  cbuf[9];        /* chars buffer */
+      int   j;              /* counter */
+      int   len;            /* >1 = convert n-byte UTF value */
+
+
+      memset(sbuf,0,LINELEN);
+      memset(cbuf,0,9);
+      
+      for (j = 0; j < strlen(zeile); j++)
+      {
+         idx = (UCHAR)zeile[j];
+         
+         if (idx < 128)                   /* 0000 0000-0000 007F 0xxxxxxx */
+         {
+            cbuf[0] = idx;
+            cbuf[1] = EOS;
+            strcat(sbuf,cbuf);
+            len = 0;
+         }
+         else if ((idx & 0xE0) == 0xC0)   /* 0000 0080-0000 07FF 110xxxxx 10xxxxxx */
+         {
+            cbuf[0] = idx;
+            j++;
+            cbuf[1] = (UCHAR)zeile[j];
+            cbuf[2] = EOS;
+            len = 2;
+         }
+         else if ((idx & 0xF0) == 0xE0)   /* 0000 0800-0000 FFFF 1110xxxx 10xxxxxx 10xxxxxx */
+         {
+            cbuf[0] = idx;
+            j++;
+            cbuf[1] = (UCHAR)zeile[j];
+            j++;
+            cbuf[2] = (UCHAR)zeile[j];
+            cbuf[3] = EOS;
+            len = 3;
+         }
+         else if ((idx & 0xF8) == 0xF0)   /* 0001 0000-001F FFFF 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx */
+         {
+            cbuf[0] = idx;
+            j++;
+            cbuf[1] = (UCHAR)zeile[j];
+            j++;
+            cbuf[2] = (UCHAR)zeile[j];
+            j++;
+            cbuf[3] = (UCHAR)zeile[j];
+            cbuf[4] = EOS;
+            len = 4;
+         }
+         
+         if (len > 0)
+         {
+            idx = utf8_to_bstr(cbuf,len);
+
+            for (i = 128; i < 256; i++)
+            {
+               if (pUtrg[i] == idx)
+               {
+                  cbuf[0] = idx;
+                  cbuf[1] = EOS;
+                  strcat(sbuf,cbuf);
+                  break;
+               }
+            }
+         }
+      }
+      
+      strcpy(zeile,sbuf);                 /* restore line */
+      return;                             /* we're done already! */
+   }
+   
+   
+   /* --- 1-byte to UTF-8 recoding --- */
+   
+   if (iEncodingTarget == CODE_UTF8)      /* convert 1-byte format to UTF-8 first */
+   {
+      char  sbuf[LINELEN];  /* line buffer */
+      char  cbuf[9];        /* chars buffer */
+      int   j;              /* counter */
       
       
       memset(sbuf,0,LINELEN);
       memset(cbuf,0,9);
       
-      
-      for (i = 0; i < strlen(zeile); i++)
+      for (j = 0; j < strlen(zeile); j++)
       {
-         idx = (UCHAR)zeile[i];
+         idx = (UCHAR)zeile[j];
          
          if (idx < 128)
          {
@@ -1096,10 +1279,12 @@ int           char_set)          /* iCharset */
          }
       }
       
-      strcpy(zeile,sbuf);
-      
-      return;
+      strcpy(zeile,sbuf);                 /* restore line */
+      return;                             /* we're done already */
    }   
+   
+  
+   /* --- 1-byte to 1-byte recoding --- */
 
    while (*ptr)                           /* check whole string */
    {
