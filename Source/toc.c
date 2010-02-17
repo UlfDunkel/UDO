@@ -72,6 +72,7 @@
 *    fd  Feb 17: - CODE_437_lig[], sort_CODE_437[] + CODE_850_lig[], sort_CODE_850[] added
 *                - CODE_HP_lig[] + sort_CODE_HP[] added
 *                - CODE_NEXT_lig[] + sort_CODE_NEXT[] added
+*                - win2sys() -> recode_chrtab()
 *
 ******************************************|************************************/
 
@@ -5420,11 +5421,11 @@ const void  *_p2)              /* */
    strcpy(p1_tocname, p1->tocname);       /* copy the entry names */
    strcpy(p2_tocname, p2->tocname);
 
-   if (!html_ignore_8bit)
-      html2sys(p1_tocname);               /* V6.5.20 [gs] */
-   
-   if (!html_ignore_8bit)
-      html2sys(p2_tocname);               /* V6.5.20 [gs] */
+   if (!html_ignore_8bit)                 /* V6.5.20 [gs] */
+   {
+      recode_chrtab(p1_tocname,CHRTAB_HTML);
+      recode_chrtab(p2_tocname,CHRTAB_HTML);
+   }
 
                                           /* Instead of strcmp v6.5.20 [gs] */
    return str_sort_cmp(p1_tocname, p2_tocname);
@@ -5608,7 +5609,7 @@ GLOBAL BOOLEAN save_html_index(void)
       strcpy(dummy, html_index[i].tocname);
       
       if (!html_ignore_8bit)
-         html2sys(dummy);                 /* convert HTML characters to system characters */
+         recode_chrtab(dummy,CHRTAB_HTML);/* convert HTML characters to system characters */
 
       thisc = dummy[0] & 0x00FF;          /* use first character for comparison */
 
@@ -5652,7 +5653,7 @@ GLOBAL BOOLEAN save_html_index(void)
       strcpy(dummy, html_index[i].tocname);
       
       if (!html_ignore_8bit)
-         html2sys(dummy);                 /* convert HTML characters to system characters  */
+         recode_chrtab(dummy,CHRTAB_HTML);/* convert HTML characters to system characters  */
 
       thisc = dummy[0] & 0x00FF;          /* use first character for comparison */
 
@@ -6129,7 +6130,8 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
    
    tokcpy2(name, 512);
    strcpy(stgname, name);                 /* r5pl14 */
-   
+
+
    if (name[0] == EOS)
    {
       error_missing_parameter("!node");
@@ -17036,7 +17038,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt(void)
    fprintf(cntfile, ":Index %s.hlp\n", outfile.name);
 
    strcpy(sMisc, titleprogram);
-   win2sys(sMisc);
+   recode_chrtab(sMisc,CHRTAB_ANSI);
    
    if (sMisc[0] != EOS)
    {
@@ -17114,7 +17116,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt(void)
                }
             }
                
-            win2sys(sName);
+            recode_chrtab(sName,CHRTAB_ANSI);
             
             switch (toc[i]->toctype)
             {
@@ -17262,7 +17264,7 @@ GLOBAL BOOLEAN save_winhelp4_cnt(void)
                   }
                }
                
-               win2sys(sName);
+               recode_chrtab(sName,CHRTAB_ANSI);
                   
                switch (toc[i]->toctype)
                {

@@ -68,7 +68,9 @@
 *    fd  Feb 15: - new: !code_source [] + c_code_source() -> iEncodingSource
 *                - new: !code_target [] + c_code_target() -> iEncodingTarget
 *    fd  Feb 16: udocharset: "cp1250" added
-*    fd  Feb 17: ansi2dos() removed
+*    fd  Feb 17: - ansi2dos() removed
+*                - win2sys() -> recode_chrtab()
+*                - umlaute2sys() merged into recode_chrtab()
 *
 ******************************************|************************************/
 
@@ -11573,7 +11575,7 @@ char           *datei)           /* */
                um_strcpy(current_node_name_sys, zeile, CNNS_LEN, "pass1: current_node_name_sys");
 
                if (no_umlaute)
-                  umlaute2ascii(zeile);
+                  recode_chrtab(zeile,CHRTAB_ASCII);
             
                auto_quote_chars(zeile, FALSE);
                replace_macros(zeile);
@@ -12030,7 +12032,7 @@ char       *zeile)        /* */
 
    if (no_verbatim_umlaute)
    {
-      umlaute2ascii(zeile);
+      recode_chrtab(zeile,CHRTAB_ASCII);
    }
 
    if (strchr(zeile, '\t') != NULL)        /* TABs in Leerzeichen umwandeln */
@@ -12860,7 +12862,7 @@ char           *datei)           /* */
             del_whitespaces(zeile);
             
             if (no_umlaute)
-               umlaute2ascii(zeile);
+               recode_chrtab(zeile,CHRTAB_ASCII);
             
             auto_quote_chars(zeile, FALSE);
 
@@ -13227,7 +13229,7 @@ LOCAL void save_winhelp_project(void)
    fprintf(hpjfile, "[OPTIONS]\n");
    strcpy(n, titleprogram);
    del_right_spaces(n);
-   win2sys(n);
+   recode_chrtab(n,CHRTAB_ANSI);
 
 /* fd:2010-02-17: no longer required thanks to new recode() method:
    
@@ -13253,7 +13255,7 @@ LOCAL void save_winhelp_project(void)
    if (titdat.author != NULL)             /* Pl12 */
    {
       strcpy(n, titdat.author);
-      win2sys(n);
+      recode_chrtab(n,CHRTAB_ANSI);
       
 /* fd:2010-02-17: no longer required thanks to new recode() method:
 
@@ -13405,7 +13407,7 @@ LOCAL void save_winhelp4_project(void)
    strcpy(n, titleprogram);
    
    del_right_spaces(n);
-   win2sys(n);
+   recode_chrtab(n,CHRTAB_ANSI);
    
    qdelete_all(n, "\\~", 2);
    qdelete_all(n, "~", 1);
@@ -13418,7 +13420,7 @@ LOCAL void save_winhelp4_project(void)
    if (titdat.author != NULL)             /* Pl12 */
    {
       strcpy(n, titdat.author);
-      win2sys(n);
+      recode_chrtab(n,CHRTAB_ANSI);
       qdelete_all(n, "\\~", 2);
       qdelete_all(n, "~", 1);
       fprintf(hpjfile, "COPYRIGHT=(c) by %s\n", n);
@@ -13521,7 +13523,7 @@ LOCAL void save_htmlhelp_project(void)
    fprintf(hhpfile, "[OPTIONS]\n");
                                 
    strcpy(sTitle, titleprogram);          /* Windows-Umlaute benutzen, also nicht "titleprogram"! */
-   html2sys(sTitle);
+   recode_chrtab(sTitle,CHRTAB_HTML);
    
    fprintf(hhpfile, "Title=%s\n", sTitle);
    fprintf(hhpfile, "Compatibility=1.0\n");

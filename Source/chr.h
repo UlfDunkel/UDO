@@ -39,12 +39,26 @@
 *
 *  2010:
 *    fd  Feb 10: header updated, file reformatted and tidied up (TAB-free)
-*    fd  Feb 17: ansi2dos() removed
+*    fd  Feb 17: - ansi2dos() removed
+*                - win2sys() & html2sys() & umlaute2ascii() -> recode_chrtab()
+*                - CHRTAB_... introduced
 *
 ******************************************|************************************/
 
 #ifndef __UDOCHR__
 #define __UDOCHR__
+
+
+
+
+
+/*******************************************************************************
+*
+*     INCLUDE FILES
+*
+******************************************|************************************/
+
+#include "unicode.h"
 
 
 
@@ -67,26 +81,33 @@
 #define TTF_10PT          0
 #define TTF_11PT          1
 
-/* New in r6pl16 [NHz] */
+   /* New in r6pl16 [NHz] */
 #define KPS_CONTENT       0
 #define KPS_BOOKMARK      1
 #define KPS_NAMEDEST      2
 
-/* New: Fixed bug #0000040 in r6.2pl2 [NHz] */
+   /* New: Fixed bug #0000040 in r6.2pl2 [NHz] */
 #define KPS_PS2DOCINFO    3
 #define KPS_DOCINFO2PS    4
 #define KPS_NODENAME      5
 
 
-/* new in v6.5.19 [fd] */
-/* this is a list of UDO supported special HTML characters */
+   /* new in v6.5.19 [fd] */
+   /* this is a list of UDO supported special HTML characters */
 #define HTML_SPEC_HELLIP  0
 #define HTML_SPEC_MDASH   1
 #define HTML_SPEC_NDASH   2
 #define HTML_SPEC_SHY     3
 #define HTML_SPEC_MAX     4
 
-#endif   /* __UDOCHR__ */
+
+   /* --- indicators for usage of recode_chrtab() --- */
+#define CHRTAB_ASCII      0
+#define CHRTAB_ANSI       1
+#define CHRTAB_TEX        2
+#define CHRTAB_HTML       3
+#define CHRTAB_PS         4
+
 
 
 
@@ -94,7 +115,7 @@
 
 /*******************************************************************************
 *
-*     MACRO DEFINITIONS
+*     GLOBAL FUNCTION PROTOTYPES
 *
 ******************************************|************************************/
 
@@ -104,8 +125,8 @@ GLOBAL void recode(char *zeile, int char_set);
 
 GLOBAL void uni2ascii(char * s);
 
-GLOBAL void win2sys(char * s);
-GLOBAL void html2sys(char * s);
+GLOBAL void recode_chrtab(char * s, int type);
+
 GLOBAL int calc_ttf_twip(const char *s, const int font, const int style);
 
 GLOBAL void replace_udo_quotes(char * s);
@@ -117,8 +138,6 @@ GLOBAL void indent2space(char * s);
 GLOBAL void space2indent(char * s);
 GLOBAL void nbsp2space(char * s);
 GLOBAL void space2nbsp(char * s);
-
-GLOBAL void umlaute2ascii(char *s);
 
 GLOBAL void label2tex(char * s);
 GLOBAL void label2html(char * s);
@@ -164,6 +183,9 @@ GLOBAL void auto_quote_texindex(char * s);
 GLOBAL void auto_quote_linedraw(char * s);
 
 GLOBAL void init_module_chars(void);
+
+
+#endif   /* __UDOCHR__ */
 
 
 /* +++ EOF +++ */
