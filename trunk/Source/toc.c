@@ -69,6 +69,7 @@
 *                - save_html_index(): sorting fixed
 *    fd  Feb 12: some octal chars resolved into constant macros
 *    fd  Feb 16: CODE_CP1250_lig, sort_CODE_CP1250 added
+*    fd  Feb 17: CODE_437_lig[], sort_CODE_437[] + CODE_850_lig[], sort_CODE_850[] added
 *
 ******************************************|************************************/
 
@@ -121,6 +122,7 @@ const char *id_toc_c= "@(#) toc.c       $DATE$";
 #include "toc.h"
 #include "udomem.h"
 
+#include "u_dos.h"
 #include "u_iso.h"
 #include "u_mac.h"
 #include "u_tos.h"
@@ -5538,6 +5540,18 @@ GLOBAL BOOLEAN save_html_index(void)
 
    switch (iEncodingTarget)               /* use the right tables! ;-) */
    {
+   case CODE_437:
+      psort = sort_CODE_437;
+      plig = CODE_437_lig;
+      pumap = u_CODE_437;
+      break;
+   
+   case CODE_850:
+      psort = sort_CODE_850;
+      plig = CODE_850_lig;
+      pumap = u_CODE_850;
+      break;
+   
    case CODE_CP1250:
       psort = sort_CODE_CP1250;
       plig  = CODE_CP1250_lig;

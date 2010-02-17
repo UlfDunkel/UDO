@@ -45,6 +45,7 @@
 *    fd  Feb 09: str_sort_cmp(): done (so far ;-))
 *    fd  Feb 16: - str_sort_cmp(): adjusted to new encoding tables
 *                - CODE_CP1250_lig, sort_CODE_CP1250 added
+*    fd  Feb 17: CODE_437_lig[], sort_CODE_437[] + CODE_850_lig[], sort_CODE_850[] added
 *
 ******************************************|************************************/
 
@@ -73,6 +74,8 @@ const char *id_str_c= "@(#) str.c       $DATE$";
 #include "version.h"
 #include "msg.h"
 #include "udomem.h"
+
+#include "u_dos.h"
 #include "u_iso.h"
 #include "u_mac.h"
 #include "u_tos.h"
@@ -1656,10 +1659,16 @@ char         *s2)           /* ^ 2nd string for comparison */
 
    switch (iEncodingTarget)               /* use the right tables! ;-) */
    {
-   case CODE_TOS:
-      plig  = CODE_TOS_lig;
-      psort = sort_CODE_TOS;
-      pumap = u_CODE_TOS;
+   case CODE_437:
+      plig = CODE_437_lig;
+      psort = sort_CODE_437;
+      pumap = u_CODE_437;
+      break;
+   
+   case CODE_850:
+      plig = CODE_850_lig;
+      psort = sort_CODE_850;
+      pumap = u_CODE_850;
       break;
    
    case CODE_CP1250:
@@ -1672,6 +1681,12 @@ char         *s2)           /* ^ 2nd string for comparison */
       plig  = CODE_MAC_lig;
       psort = sort_CODE_MAC;
       pumap = u_CODE_MAC;
+      break;
+   
+   case CODE_TOS:
+      plig  = CODE_TOS_lig;
+      psort = sort_CODE_TOS;
+      pumap = u_CODE_TOS;
       break;
    
    case CODE_LAT1:
