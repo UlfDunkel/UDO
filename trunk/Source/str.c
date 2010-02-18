@@ -48,7 +48,8 @@
 *    fd  Feb 17: - CODE_437_lig[], sort_CODE_437[] + CODE_850_lig[], sort_CODE_850[] added
 *                - CODE_HP_lig[] + sort_CODE_HP[] added
 *                - CODE_NEXT_lig[] + sort_CODE_NEXT[] added
-*    fd  Feb 18: str_UTF_sort_cmp(), str_flatten(), str_sort_flatten_cmp()
+*    fd  Feb 18: - str_UTF_sort_cmp(), str_flatten(), str_sort_flatten_cmp()
+*                  CODE_LAT2
 *
 ******************************************|************************************/
 
@@ -1795,6 +1796,11 @@ char  *zeile)  /* ^ string */
       psort = sort_CODE_HP8;
       break;
    
+   case CODE_LAT2:
+      plig  = CODE_LAT2_lig;
+      psort = sort_CODE_LAT2;
+      break;
+   
    case CODE_MAC:
       plig  = CODE_MAC_lig;
       psort = sort_CODE_MAC;
@@ -1908,6 +1914,12 @@ char         *s2)           /* ^ 2nd string for comparison */
       plig  = CODE_HP8_lig;
       psort = sort_CODE_HP8;
       pumap = u_CODE_HP8;
+      break;
+   
+   case CODE_LAT2:
+      plig  = CODE_LAT2_lig;
+      psort = sort_CODE_LAT2;
+      pumap = u_CODE_LAT2;
       break;
    
    case CODE_MAC:

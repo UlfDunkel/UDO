@@ -44,6 +44,7 @@
 *    fd  Jan 23: - year updated
 *                - converted all German umlauts in comments into plain ASCII
 *    fd  Feb 12: comments reformatted
+*    fd  Feb 18: CODE_LAT2
 *
 ******************************************|************************************/
 
@@ -87,7 +88,7 @@
 
    /* --- Zeichensaetze --- */
 
-#define CODE_LAT1    0                    /* ISO Latin 1                   */
+#define CODE_LAT1    0                    /* ISO Latin 1  (codepage 1252!) */
 #define CODE_DOS     1                    /* IBM PC                        */
 #define CODE_437     1                    /* DOS Codepage 437 (wie IBM PC) */
 #define CODE_TOS     2                    /* Atari ST                      */
@@ -97,8 +98,9 @@
 #define CODE_850     6                    /* DOS Codepage 850              */
 #define CODE_UTF8    7                    /* UTF-8 (e.g. for BeOS)         */
 #define CODE_CP1250  8                    /* Windows codepage 1250         */
+#define CODE_LAT2    9                    /* ISO Latin 2 (iso-8859-2)      */
 
-#define CODE_TOTAL   9                    /* # of supported encodings */
+#define CODE_TOTAL   10                   /* # of supported encodings */
 
    /* --- Compiler- und systemabhaengige Dinge setzen --- */
 

@@ -66,6 +66,7 @@
 *                - recode(): UTF-8 output enabled
 *                - recode(): UTF-8 input enabled
 *                - bstr_to_utf8() debugged
+*    fd  Feb 18: - CODE_LAT2
 *
 ******************************************|************************************/
 
@@ -1063,6 +1064,13 @@ int           char_set)          /* iCharset */
       strcpy(sSource, "HP-Roman8");
       break;
    
+   case CODE_LAT2:
+      pUsrc = u_CODE_LAT2;
+      plig  = CODE_LAT2_lig;
+      psort = sort_CODE_LAT2;
+      strcpy(sSource, "ISO Latin 2");
+      break;
+   
    case CODE_MAC:
       pUsrc = u_CODE_MAC;
       plig  = CODE_MAC_lig;
@@ -1116,6 +1124,11 @@ int           char_set)          /* iCharset */
    case CODE_HP8:
       pUtrg = u_CODE_HP8;
       strcpy(sTarget, "HP-Roman8");
+      break;
+   
+   case CODE_LAT2:
+      pUtrg = u_CODE_LAT2;
+      strcpy(sTarget, "ISO Latin 2");
       break;
    
    case CODE_MAC:
@@ -1364,6 +1377,10 @@ int               type)           /* CHRTAB_... (CHR.H) */
       
    case CODE_HP8:
       pUtrg = u_CODE_HP8;
+      break;
+   
+   case CODE_LAT2:
+      pUtrg = u_CODE_LAT2;
       break;
    
    case CODE_MAC:
@@ -3774,6 +3791,10 @@ BOOLEAN           all)            /* */
       
    case CODE_HP8:
       pUtrg = u_CODE_HP8;
+      break;
+   
+   case CODE_LAT2:
+      pUtrg = u_CODE_LAT2;
       break;
    
    case CODE_MAC:
