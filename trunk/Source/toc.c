@@ -73,6 +73,7 @@
 *                - CODE_HP_lig[] + sort_CODE_HP[] added
 *                - CODE_NEXT_lig[] + sort_CODE_NEXT[] added
 *                - win2sys() -> recode_chrtab()
+*    fd  Feb 18: str_UTF_sort_cmp()
 *
 ******************************************|************************************/
 
@@ -5428,7 +5429,13 @@ const void  *_p2)              /* */
    }
 
                                           /* Instead of strcmp v6.5.20 [gs] */
-   return str_sort_cmp(p1_tocname, p2_tocname);
+   switch (iEncodingTarget)
+   {
+   case CODE_UTF8:                        /* n-byte encodings */
+      return str_UTF_sort_cmp(p1_tocname, p2_tocname);
+   default:                               /* 1-byte encodings */
+      return str_sort_cmp(p1_tocname, p2_tocname);
+   }
 }
 
 

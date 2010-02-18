@@ -119,6 +119,8 @@
 *
 ******************************************|************************************/
 
+GLOBAL unsigned utf8_to_bstr(const char *sz, int len);
+
 GLOBAL void convert_sz(char * s);
 
 GLOBAL void recode(char *zeile, int char_set);
