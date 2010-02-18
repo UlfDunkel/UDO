@@ -78,7 +78,7 @@ typedef struct _udocharset         /* ---- Zeichensatztabelle ---- */
    int   codepage;  /* zugehoeriger Zeichensatz */
 }   UDOCHARSET;
 
-#define MAXCHARSET  16
+#define MAXCHARSET  18
 
 #endif  /* __UDO_H__ */
 

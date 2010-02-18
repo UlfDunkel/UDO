@@ -69,6 +69,7 @@
 *    fd  Feb 17: - ansi2dos() removed
 *                - win2sys() -> recode_chrtab()
 *                - umlaute2sys() merged into recode_chrtab()
+*    fd  Feb 18: CODE_LAT2
 *
 ******************************************|************************************/
 
@@ -240,8 +241,11 @@ UDOCHARSET udocharset[MAXCHARSET] =
    {"sys",        SYSTEM_CHARSET},        /* 13 */
    {"win",        CODE_LAT1     },        /* 14 */
    {"cp1250",     CODE_CP1250   },        /* 15 */
+   {"iso-8859-2", CODE_LAT2     },        /* 16 */
+   {"latin2",     CODE_LAT2     },        /* 17 */
 };
 
+/* !!! adjust MAXCHARSET in UDO.H, when this table is changed !!! */
 
 
 
