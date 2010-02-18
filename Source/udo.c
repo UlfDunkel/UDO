@@ -128,7 +128,6 @@ const char *id_udo_c= "@(#) udo.c       $Date$";
 #include "export.h"
 #include "udo.h"                          /* globale Prototypen */
 #include "udomem.h"                       /* Memory-Management */
-#include "recode.h"
 
 
 
