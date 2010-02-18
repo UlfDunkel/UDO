@@ -73,7 +73,8 @@
 *                - CODE_HP_lig[] + sort_CODE_HP[] added
 *                - CODE_NEXT_lig[] + sort_CODE_NEXT[] added
 *                - win2sys() -> recode_chrtab()
-*    fd  Feb 18: str_UTF_sort_cmp()
+*    fd  Feb 18: - str_UTF_sort_cmp()
+*                - save_html_index() uses a new approach with flattened HTML_INDEX.sortname
 *
 ******************************************|************************************/
 
@@ -125,13 +126,6 @@ const char *id_toc_c= "@(#) toc.c       $DATE$";
 #include "export.h"
 #include "toc.h"
 #include "udomem.h"
-
-#include "u_dos.h"
-#include "u_hp.h"
-#include "u_iso.h"
-#include "u_mac.h"
-#include "u_next.h"
-#include "u_tos.h"
 
 
 
@@ -281,6 +275,8 @@ typedef struct   _hmtl_index              /* index output for HTML */
    int       toc_index;                   /* # of found label for TOC */
    BOOLEAN   is_node;                     /* the label is the caption (?) */
    char      tocname[512];                /* label or node name */
+   char      sortname[512];               /* 'flattened' label or node name */
+   char      sortchar;                    /* char for sorting purposes */
 }  HTML_INDEX;
 
 
@@ -5419,8 +5415,8 @@ const void  *_p2)              /* */
    HTML_INDEX *p1 = (HTML_INDEX *)_p1;
    HTML_INDEX *p2 = (HTML_INDEX *)_p2;
 
-   strcpy(p1_tocname, p1->tocname);       /* copy the entry names */
-   strcpy(p2_tocname, p2->tocname);
+   strcpy(p1_tocname, p1->sortname);      /* copy the entry names */
+   strcpy(p2_tocname, p2->sortname);
 
    if (!html_ignore_8bit)                 /* V6.5.20 [gs] */
    {
@@ -5428,14 +5424,22 @@ const void  *_p2)              /* */
       recode_chrtab(p2_tocname,CHRTAB_HTML);
    }
 
-                                          /* Instead of strcmp v6.5.20 [gs] */
+#if 0
+
+   /* fd:2010-02-18: no longer required as we flatten HTML_INDEX.sortname first! */
+   
    switch (iEncodingTarget)
    {
    case CODE_UTF8:                        /* n-byte encodings */
       return str_UTF_sort_cmp(p1_tocname, p2_tocname);
+      
    default:                               /* 1-byte encodings */
       return str_sort_cmp(p1_tocname, p2_tocname);
    }
+#endif
+
+                                          /* Instead of strcmp v6.5.20 [gs] */
+   return str_sort_cmp(p1_tocname, p2_tocname);
 }
 
 
@@ -5470,9 +5474,6 @@ GLOBAL BOOLEAN save_html_index(void)
    char        *escapedtocname;  /* */
    char         jumplist[4096];  /* buffer string for A-Z navigation bar */
    char         thisc_buf[42];   /* buffer string for converted thisc */
-   unsigned   (*psort);          /* ^ to sort_CODE_xxx[] arrays */
-   unsigned   (*pumap);          /* ^ to u_CODE_xxx[] arrays */
-   unsigned   (*plig)[3];        /* ^ t CODE_xxx_lig[][] arrays (unused here so far!) */
 
    
    num_index = 0;                         /* first we count how much entries we need */
@@ -5534,6 +5535,12 @@ GLOBAL BOOLEAN save_html_index(void)
          replace_udo_nbsp(tocname);
          del_html_styles(tocname);
          
+                                          /* copy the name as we are going to flatten it */
+         strcpy(html_index[num_index].sortname, tocname);
+         
+                                          /* get character for sorting purposes */
+         html_index[num_index].sortchar = str_flatten(html_index[num_index].sortname);
+         
          num_index++;
                                           /* ignore Table of Contents! */
          if (strcmp(tocname, HTML_LABEL_CONTENTS) == 0)
@@ -5545,66 +5552,11 @@ GLOBAL BOOLEAN save_html_index(void)
    }
    
    
-   /* --- sort the index --- */
+   /* --- sort the index (by HTML_INDEX.sortname!) --- */
    
    qsort(html_index, num_index, sizeof(HTML_INDEX), comp_index_html);
 
 
-   switch (iEncodingTarget)               /* use the right tables! ;-) */
-   {
-   case CODE_437:
-      psort = sort_CODE_437;
-      plig = CODE_437_lig;
-      pumap = u_CODE_437;
-      break;
-   
-   case CODE_850:
-      psort = sort_CODE_850;
-      plig = CODE_850_lig;
-      pumap = u_CODE_850;
-      break;
-   
-   case CODE_CP1250:
-      psort = sort_CODE_CP1250;
-      plig  = CODE_CP1250_lig;
-      pumap = u_CODE_CP1250;
-      break;
-   
-   case CODE_HP8:
-      psort = sort_CODE_HP8;
-      plig  = CODE_HP8_lig;
-      pumap = u_CODE_HP8;
-      break;
-   
-   case CODE_NEXT:
-      plig  = CODE_NEXT_lig;
-      psort = sort_CODE_NEXT;
-      pumap = u_CODE_NEXT;
-      break;
-   
-   case CODE_MAC:
-      psort = sort_CODE_MAC;
-      plig  = CODE_MAC_lig;
-      pumap = u_CODE_MAC;
-      break;
-   
-   case CODE_TOS:
-      psort = sort_CODE_TOS;
-      plig  = CODE_TOS_lig;
-      pumap = u_CODE_TOS;
-      break;
-   
-   case CODE_LAT1:
-   default:
-      psort = sort_CODE_LAT1;
-      plig  = CODE_LAT1_lig;
-      pumap = u_CODE_LAT1;
-   }
-   
-   UNUSED(plig);
-   UNUSED(pumap);
-
-   
    /* --- create index A-Z jumplist --- */
    
    lastc = EOS;                           /* clear buffer for last character */
@@ -5613,22 +5565,12 @@ GLOBAL BOOLEAN save_html_index(void)
    
    for (i = 0; i < num_index; i++)
    {
-      strcpy(dummy, html_index[i].tocname);
-      
-      if (!html_ignore_8bit)
-         recode_chrtab(dummy,CHRTAB_HTML);/* convert HTML characters to system characters */
+      thisc = html_index[i].sortchar;
 
-      thisc = dummy[0] & 0x00FF;          /* use first character for comparison */
-
-      thisc = psort[thisc];               /* convert special characters (e.g. AE lig to 'A') */
-
-      thisc = toupper(thisc);             /* always use capitalized index chars (issue #76) */
-      
       thisc_buf[0] = (char)thisc;
       thisc_buf[1] = 0;                   /* close C string! */
       
       label2html(thisc_buf);              /* convert critical characters to HTML standards */
-      
       
       if (thisc != lastc)
       {
@@ -5657,17 +5599,8 @@ GLOBAL BOOLEAN save_html_index(void)
    
    for (i = 0; i < num_index; i++)
    {
-      strcpy(dummy, html_index[i].tocname);
-      
-      if (!html_ignore_8bit)
-         recode_chrtab(dummy,CHRTAB_HTML);/* convert HTML characters to system characters  */
+      thisc = html_index[i].sortchar;     /* use first character for comparison */
 
-      thisc = dummy[0] & 0x00FF;          /* use first character for comparison */
-
-      thisc = psort[thisc];               /* convert special characters (e.g. AE lig to 'A') */
-
-      thisc = toupper(thisc);             /* always use capitalized index chars (issue #76) */
-      
       thisc_buf[0] = (char)thisc;
       thisc_buf[1] = 0;                   /* close C string! */
       
@@ -5692,6 +5625,11 @@ GLOBAL BOOLEAN save_html_index(void)
          lastc = thisc;
       }
       
+      strcpy(dummy, html_index[i].tocname);
+      
+      if (!html_ignore_8bit)
+         recode_chrtab(dummy,CHRTAB_HTML);/* convert HTML characters to system characters  */
+
       get_html_filename(html_index[i].toc_index, htmlname);
    
       /* v6.5.15 [vj] need to make a copy of this, because we need to change it */

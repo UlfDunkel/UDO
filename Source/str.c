@@ -48,7 +48,7 @@
 *    fd  Feb 17: - CODE_437_lig[], sort_CODE_437[] + CODE_850_lig[], sort_CODE_850[] added
 *                - CODE_HP_lig[] + sort_CODE_HP[] added
 *                - CODE_NEXT_lig[] + sort_CODE_NEXT[] added
-*    fd  Feb 18: str_UTF_sort_cmp()
+*    fd  Feb 18: str_UTF_sort_cmp(), str_flatten(), str_sort_flatten_cmp()
 *
 ******************************************|************************************/
 
@@ -1630,8 +1630,227 @@ size_t       len)  /* # of chars to compare */
 
 /*******************************************************************************
 *
-*  str_sort_cmp():
-*     Compares two index entries.
+*  str_flatten():
+*     flatten a given string to 7bit-ASCII
+*
+*  Notes:
+*     Because qsort() is implemented in a way that the structures which have to
+*     be compared cannot be changed, we cannot get this sort char directly in 
+*     the routines which are used for comparison (e.g. str_sort_cmp()).
+*
+*  return:
+*     <zeile> -> flattened
+*     1st char
+*
+******************************************|************************************/
+
+GLOBAL char str_flatten(
+
+char  *zeile)  /* ^ string */
+{
+   int        i = 0;          /* counter for table entries */
+   int        j = 0;          /* counter for chars of <zeile> */
+   int        len;            /* indicator for byte length of UTF char */
+   unsigned (*plig)[3];       /* ^ to CODE_xxx_lig[][] arrays */
+   unsigned (*psort);         /* ^ to sort_CODE_xxx[] arrays */
+   unsigned (*pusort)[2];     /* ^ to sort_CODE_UTF[] array */
+   char       sbuf[LINELEN];  /* line buffer */
+   char       cbuf[9];        /* chars buffer */
+   char       lgc[2] = "";    /* ligature char buffer */
+   char       lig[3] = "";    /* ligature string buffer */
+   unsigned   idx;            /* Unicode */
+   size_t     c1;             /* char value (up to 4 bytes!) */
+   int        found;          /* TRUE: Unicode found in relevant table */
+
+
+   if (!zeile)                            /* empty string? */
+      return EOS;
+   
+   if (iEncodingTarget == CODE_UTF8)      /* Unicode first */
+   {
+      plig   = CODE_UTF_lig;
+      pusort = sort_CODE_UTF;
+
+      memset(sbuf,0,LINELEN);
+      memset(cbuf,0,9);
+      
+      for (j = 0; j < strlen(zeile); j++)
+      {
+         idx = (UCHAR)zeile[j];
+         
+         if (idx < 128)                   /* 0000 0000-0000 007F 0xxxxxxx */
+         {
+            cbuf[0] = idx;
+            cbuf[1] = EOS;
+            strcat(sbuf,cbuf);
+            len = 0;
+         }
+         else if ((idx & 0xE0) == 0xC0)   /* 0000 0080-0000 07FF 110xxxxx 10xxxxxx */
+         {
+            cbuf[0] = idx;
+            j++;
+            cbuf[1] = (UCHAR)zeile[j];
+            cbuf[2] = EOS;
+            len = 2;
+         }
+         else if ((idx & 0xF0) == 0xE0)   /* 0000 0800-0000 FFFF 1110xxxx 10xxxxxx 10xxxxxx */
+         {
+            cbuf[0] = idx;
+            j++;
+            cbuf[1] = (UCHAR)zeile[j];
+            j++;
+            cbuf[2] = (UCHAR)zeile[j];
+            cbuf[3] = EOS;
+            len = 3;
+         }
+         else if ((idx & 0xF8) == 0xF0)   /* 0001 0000-001F FFFF 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx */
+         {
+            cbuf[0] = idx;
+            j++;
+            cbuf[1] = (UCHAR)zeile[j];
+            j++;
+            cbuf[2] = (UCHAR)zeile[j];
+            j++;
+            cbuf[3] = (UCHAR)zeile[j];
+            cbuf[4] = EOS;
+            len = 4;
+         }
+       
+         if (len > 0)
+         {
+            idx = utf8_to_bstr(cbuf,len);
+            found = FALSE;
+            i = 0;
+         
+            while (plig[i][0] != 0x00)    /* is it a ligature? */
+            {
+               if (idx == plig[i][0])     /* ligature character found */
+               {
+                  cbuf[0] = plig[i][1];   /* compose ligature replacement string */
+                  cbuf[1] = plig[i][2];   /* lig[2] must always be 0 (C string!) */
+                  cbuf[2] = EOS;
+                  strcat(sbuf,cbuf);
+                  found = TRUE;           /* this character is done! */
+               }
+
+               if (found)                 /* was a ligature */
+                  break;
+            
+               i++;                       /* check next ligature */
+            }
+             
+            if (!found)                   /* was a ligature */
+            {
+               i = 0;
+         
+                                          /* is it a Unicode which we should replace? */
+               while (pusort[i][0] != 0x00)
+               {
+                                          /* Unicode found */
+                  if (idx == pusort[i][0])
+                  {
+                     cbuf[0] = pusort[i][1];
+                     cbuf[1] = EOS;
+                     strcat(sbuf,cbuf);
+                     found = TRUE;
+                  }
+            
+                  if (found)
+                     break;
+             
+                  i++;
+               }
+            }
+         }
+         
+      }  /* for (j ...) */
+         
+      strcpy(zeile,sbuf);                 /* restore line */
+         
+      zeile = strupr(zeile);              /* we want to compare UPPERCASE */
+      
+      return zeile[0];
+   }
+   
+
+   switch (iEncodingTarget)               /* 1-byte encodings */
+   {
+   case CODE_437:
+      plig = CODE_437_lig;
+      psort = sort_CODE_437;
+      break;
+   
+   case CODE_850:
+      plig = CODE_850_lig;
+      psort = sort_CODE_850;
+      break;
+   
+   case CODE_CP1250:
+      plig = CODE_CP1250_lig;
+      psort = sort_CODE_CP1250;
+      break;
+   
+   case CODE_HP8:
+      plig  = CODE_HP8_lig;
+      psort = sort_CODE_HP8;
+      break;
+   
+   case CODE_MAC:
+      plig  = CODE_MAC_lig;
+      psort = sort_CODE_MAC;
+      break;
+   
+   case CODE_NEXT:
+      plig  = CODE_NEXT_lig;
+      psort = sort_CODE_NEXT;
+      break;
+   
+   case CODE_TOS:
+      plig  = CODE_TOS_lig;
+      psort = sort_CODE_TOS;
+      break;
+   
+   case CODE_LAT1:
+   default:
+      plig  = CODE_LAT1_lig;
+      psort = sort_CODE_LAT1;
+   }
+
+
+   /* --- resolve ligature characters with more than one character --- */
+   
+   while (plig[i][0] != 0x00)             /* EOL not reached */
+   {
+      lgc[0] = plig[i][0];                /* get ligature character */
+                                          /* lgc[1] must always be 0 (C string!) */
+      
+      lig[0] = plig[i][1];                /* compose ligature replacement string */
+      lig[1] = plig[i][2];                /* lig[2] must always be 0 (C string!) */
+
+      replace_all(zeile, lgc, lig);
+
+      i++;                                /* next ligature */
+   }
+
+   do                                     /* flatten extended characters */
+   {
+      c1 = psort[*zeile & 0x00FF];
+      *zeile++ = c1;
+   }
+   while (c1 != EOS);
+
+
+   return zeile[0];
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  str_sort_flatten_cmp():
+*     flatten two strings and compare them
 *
 *  return:
 *     -1: s1  < s2
@@ -1640,7 +1859,7 @@ size_t       len)  /* # of chars to compare */
 *
 ******************************************|************************************/
 
-GLOBAL int str_sort_cmp(
+GLOBAL int str_sort_flatten_cmp(
 
 char         *s1,           /* ^ 1st string for comparison */
 char         *s2)           /* ^ 2nd string for comparison */
@@ -1800,7 +2019,7 @@ char         *s2)           /* ^ 2nd string for comparison */
 /*******************************************************************************
 *
 *  str_UTF_sort_cmp():
-*     Compares two index entries.
+*     compares two Unicode encoded strings
 *
 *  return:
 *     -1: s1  < s2
@@ -1983,6 +2202,61 @@ char         *s2)             /* ^ 2nd string for comparison */
       return (len1 < len2) ? 1 : -1;      /* compare string lengths of originals */
                                           /* e.g. 'ae' is lower than '"a' */
    }
+
+   return (c1 < c2) ? -1 : 1;
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  str_sort_cmp():
+*     Compares two ASCII (!) index entries.
+*
+*  return:
+*     -1: s1  < s2
+*      0: s1 == s2
+*      1: s1  > s2
+*
+******************************************|************************************/
+
+GLOBAL int str_sort_cmp(
+
+char         *s1,           /* ^ 1st string for comparison */
+char         *s2)           /* ^ 2nd string for comparison */
+{
+   size_t     c1,           /* char value (up to 4 bytes!) */
+              c2;           /* char value (up to 4 bytes!) */
+   
+            
+   if (!s1)                               /* s1 doesn't exist? */
+      return (s2) ? -1 : 0;               /* return s2 > s1 or both don't exist */
+   
+   if (!s2)                               /* s2 doesn't exist? */
+      return 1;                           /* so s1 is greater */
+
+
+   s1 = strupr(s1);                       /* we compare UPPERCASE */
+   s2 = strupr(s2);
+
+   
+   do                                     /* --- compare characters --- */
+   {
+      c1 = *s1;
+      c2 = *s2;
+      
+      s1++;
+      s2++;
+   }
+   while (c1 != '\0' && c1 == c2);
+   
+   
+   /* --- result --- */
+   
+   if (c1 == c2)                          /* strings seem to be identical */
+      return 0;
 
    return (c1 < c2) ? -1 : 1;
 }
