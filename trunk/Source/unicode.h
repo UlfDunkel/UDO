@@ -615,7 +615,7 @@
 
 #define U_LatinSmallLetterTurnedE                       0x01DD  /*  */
 #define U_LatinCapitalLetterAWithDiaeresisAndMacron     0x01DE  /*  */
-#define U_LatinSmallLetterAWithDiaeresiAndMacron        0x01DF  /*  */
+#define U_LatinSmallLetterAWithDiaeresisAndMacron       0x01DF  /*  */
 #define U_LatinCapitalLetterAWithDotAboveAndMacron      0x01E0  /*  */
 #define U_LatinSmallLetterAWithDotAboveAndMacron        0x01E1  /*  */
 #define U_LatinCapitalLetterAEWithMacron                0x01E2  /*  */
@@ -636,7 +636,7 @@
 #define U_LatinCapitalLetterDZ                          0x01F1  /*  */
 #define U_LatinCapitalLetterDWithSmallLetterZ           0x01F2  /*  */
 #define U_LatinSmallLetterDZ                            0x01F3  /*  */
-#define U_LatinCapitalLeterGWithAcute                   0x01F4  /*  */
+#define U_LatinCapitalLetterGWithAcute                  0x01F4  /*  */
 #define U_LatinSmallLetterGWithAcute                    0x01F5  /*  */
 #define U_LatinCapitalLetterHwair                       0x01F6  /*  */
 #define U_LatinCapitalLetterWynn                        0x01F7  /*  */
@@ -1073,7 +1073,7 @@
 
    /*        Spaces: */
 #define U_EnQuad                                        0x2000  /*  */
-#define U_EmQhad                                        0x2001  /*  */
+#define U_EmQuad                                        0x2001  /*  */
 #define U_EnSpace                                       0x2002  /*  */
 #define U_EmSpace                                       0x2003  /*  */
 #define U_ThreePerEmSpace                               0x2004  /*  */
