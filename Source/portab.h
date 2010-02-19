@@ -39,6 +39,7 @@
 *
 *  2010:
 *    fd  Feb 11: file reformatted and tidied up, TAB-free
+*    fd  Feb 19: NIL introduced
 *
 ******************************************|************************************/
 
@@ -64,6 +65,7 @@
 #define UCHAR      unsigned char
 #define UINT       unsigned int
 
+#define NIL        (-1)                   /* 'invalid' indicator */
 #define EOS        '\0'
 
 #define LOCAL      static

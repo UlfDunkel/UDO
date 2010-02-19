@@ -47,9 +47,16 @@
 *                - SHOW_VARAIABLE -> SHOW_VAR
 *    fd  Feb 16: - more stuff globalized
 *                - MAXCHARSET increased for CODE_CP1250
-*    fd  Feb 19: - MAXCHARSET increased for CODE_CP1257
+*    fd  Feb 19: - MAXCHARSET removed
 *
 ******************************************|************************************/
+
+#ifndef __UDO_H__
+#define __UDO_H__
+
+
+
+
 
 /*******************************************************************************
 *
@@ -59,29 +66,6 @@
 
 extern char   compile_date[];
 extern char   compile_time[];
-
-
-
-
-
-#ifndef __UDO_H__
-#define __UDO_H__
-
-/*******************************************************************************
-*
-*     TYPE DEFINITIONS
-*
-******************************************|************************************/
-
-typedef struct _udocharset         /* ---- Zeichensatztabelle ---- */
-{
-   char *magic;     /* code-Parameter */
-   int   codepage;  /* zugehoeriger Zeichensatz */
-}   UDOCHARSET;
-
-#define MAXCHARSET  20
-
-#endif  /* __UDO_H__ */
 
 
 
@@ -567,6 +551,9 @@ GLOBAL void save_upr_entry_alias(const char *filename, const char *title, const 
 GLOBAL void save_upr_entry_label(const char *filename, const char *title, const long line ); /* New in r6pl15 [NHz] */
    /* ? */
 GLOBAL void save_upr_entry_index(const int level, const char *filename, const char *title, const long line ); /* New in r6pl15 [NHz] */
+
+
+#endif  /* __UDO_H__ */
 
 
 /* +++ EOF +++ */
