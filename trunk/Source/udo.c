@@ -70,6 +70,7 @@
 *                - win2sys() -> recode_chrtab()
 *                - umlaute2sys() merged into recode_chrtab()
 *    fd  Feb 18: CODE_LAT2
+*    fd  Feb 19: CODE_CP1257; MAXCHARSET removed; udocharset[] resorted for relevance
 *
 ******************************************|************************************/
 
@@ -223,31 +224,38 @@ typedef struct _udocolor                  /* colors (according to W3C HTML3.2 DT
 #define MAX_UDOCOLOR 17
 
 
-UDOCHARSET udocharset[MAXCHARSET] =
+typedef struct _udocharset                /* list of encoding mnemonics */
 {
-   {"dos",        CODE_437      },        /*  0 */
-   {"os2",        CODE_850      },        /*  1 */
-   {"cp437",      CODE_437      },        /*  2 */
-   {"cp850",      CODE_850      },        /*  3 */
-   {"hp8",        CODE_HP8      },        /*  4 */
-   {"iso-8859-1", CODE_LAT1     },        /*  5 */
-   {"iso",        CODE_LAT1     },        /*  6 */
-   {"latin1",     CODE_LAT1     },        /*  7 */
-   {"mac",        CODE_MAC      },        /*  8 */
-   {"next",       CODE_NEXT     },        /*  9 */
-   {"tos",        CODE_TOS      },        /* 10 */
-   {"utf-8",      CODE_UTF8     },        /* 11 */
-   {"utf8",       CODE_UTF8     },        /* 12 */
-   {"sys",        SYSTEM_CHARSET},        /* 13 */
-   {"win",        CODE_LAT1     },        /* 14 */
-   {"cp1250",     CODE_CP1250   },        /* 15 */
-   {"iso-8859-2", CODE_LAT2     },        /* 16 */
-   {"latin2",     CODE_LAT2     },        /* 17 */
-   {"cp1257",     CODE_CP1257   },        /* 18 */
-   {"baltic",     CODE_CP1257   },        /* 19 */
-};
+   char  *magic;                          /* encoding mnemonic */
+   int    codepage;                       /* relevant encoding # */
+}   UDOCHARSET;
 
-/* !!! adjust MAXCHARSET in UDO.H, when this table is changed !!! */
+
+UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
+{
+   {"iso",        CODE_LAT1     },        /*  */
+   {"latin1",     CODE_LAT1     },        /*  */
+   {"iso-8859-1", CODE_LAT1     },        /*  */
+   {"win",        CODE_LAT1     },        /*  */
+   {"utf-8",      CODE_UTF8     },        /*  */
+   {"utf8",       CODE_UTF8     },        /*  */
+   {"mac",        CODE_MAC      },        /*  */
+   {"tos",        CODE_TOS      },        /*  */
+   {"dos",        CODE_437      },        /*  */
+   {"cp437",      CODE_437      },        /*  */
+   {"os2",        CODE_850      },        /*  */
+   {"cp850",      CODE_850      },        /*  */
+   {"hp8",        CODE_HP8      },        /*  */
+   {"next",       CODE_NEXT     },        /*  */
+   {"sys",        SYSTEM_CHARSET},        /*  */
+   {"iso-8859-2", CODE_LAT2     },        /*  */
+   {"latin2",     CODE_LAT2     },        /*  */
+   {"cp1250",     CODE_CP1250   },        /*  */
+   {"cp1257",     CODE_CP1257   },        /*  */
+   {"baltic",     CODE_CP1257   },        /*  */
+   
+   {"",           NIL           }         /* list terminator */
+};
 
 
 
@@ -4897,7 +4905,7 @@ LOCAL void c_fussy(void)
 LOCAL void c_code(void)
 {
    char   s[256];  /* */
-   int    i;       /* */
+   int    i = 0;   /* counter for udocharset[] */
 
    if (token[1][0] == EOS)                /* this command needs a parameter */
    {
@@ -4907,13 +4915,15 @@ LOCAL void c_code(void)
 
    tokcpy2(s, 256);
 
-   for (i = 0; i < MAXCHARSET; i++)
+   while (udocharset[i].magic[0] != EOS)
    {
       if (strstr(s, udocharset[i].magic) != NULL)
       {
          iCharset = udocharset[i].codepage;
          return;
       }
+      
+      i++;
    }
 
    error_no_charset(s);
@@ -4939,7 +4949,7 @@ LOCAL void c_code(void)
 LOCAL void c_code_source(void)
 {
    char   s[256];  /* */
-   int    i;       /* */
+   int    i = 0;   /* counter for udocharset[] */
 
    if (token[1][0] == EOS)                /* this command needs a parameter */
    {
@@ -4949,13 +4959,15 @@ LOCAL void c_code_source(void)
 
    tokcpy2(s, 256);
 
-   for (i = 0; i < MAXCHARSET; i++)
+   while (udocharset[i].magic[0] != EOS)
    {
       if (strstr(s, udocharset[i].magic) != NULL)
       {
          iEncodingSource = udocharset[i].codepage;
          return;
       }
+      
+      i++;
    }
 
    error_no_charset(s);
@@ -4981,7 +4993,7 @@ LOCAL void c_code_source(void)
 LOCAL void c_code_target(void)
 {
    char   s[256];  /* */
-   int    i;       /* */
+   int    i = 0;   /* counter for udocharset[] */
 
    if (token[1][0] == EOS)                /* this command needs a parameter */
    {
@@ -4991,13 +5003,15 @@ LOCAL void c_code_target(void)
 
    tokcpy2(s, 256);
 
-   for (i = 0; i < MAXCHARSET; i++)
+   while (udocharset[i].magic[0] != EOS)
    {
       if (strstr(s, udocharset[i].magic) != NULL)
       {
          iEncodingTarget = udocharset[i].codepage;
          return;
       }
+      
+      i++;
    }
 
    error_no_charset(s);
