@@ -47,6 +47,7 @@
 *                - SHOW_VARAIABLE -> SHOW_VAR
 *    fd  Feb 16: - more stuff globalized
 *                - MAXCHARSET increased for CODE_CP1250
+*    fd  Feb 19: - MAXCHARSET increased for CODE_CP1257
 *
 ******************************************|************************************/
 
@@ -78,7 +79,7 @@ typedef struct _udocharset         /* ---- Zeichensatztabelle ---- */
    int   codepage;  /* zugehoeriger Zeichensatz */
 }   UDOCHARSET;
 
-#define MAXCHARSET  18
+#define MAXCHARSET  20
 
 #endif  /* __UDO_H__ */
 
