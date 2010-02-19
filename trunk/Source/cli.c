@@ -42,6 +42,7 @@
 *                - hp82iso() and stuff removed
 *                - mac2iso() and stuff removed
 *                - tos2iso() and stuff removed
+*    fd  Feb 19: id_charset_h removed
 *
 ******************************************|************************************/
 
@@ -504,7 +505,6 @@ extern const char *id_udomem_c;     /* V6.5.20 [gs] */
 extern const char *id_img_html_h;
 extern const char *id_img_win_h;
 extern const char *id_img_stg_h;
-extern const char *id_charset_h;
 
 
 
@@ -535,7 +535,6 @@ LOCAL void show_ident ( void )
 
 	fprintf(stdout, "\n");
 
-	fprintf(stdout, "%s\n", id_charset_h+5);
 	fprintf(stdout, "%s\n", id_img_html_h+5);
 	fprintf(stdout, "%s\n", id_img_win_h+5);
 	fprintf(stdout, "%s\n", id_img_stg_h+5);
