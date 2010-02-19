@@ -23,10 +23,12 @@
 *  Description  : New UDO Memory-Layer (new in 6.3.3)
 *                 Written by vj
 *
-*                 Use um_malloc instead of malloc, um_realloc 
-*                 instead of realloc and um_free instead of free.
+*                 Use
+*                 - um_malloc()  instead of malloc()
+*                 - um_realloc() instead of realloc() 
+*                 - um_free()    instead of free()
 *
-*                 Please don't use malloc, realloc or free in UDO!
+*                 Again: Please don't use malloc(), realloc() or free() in UDO!
 *
 *-------------------------------------------------------------------------------
 *
