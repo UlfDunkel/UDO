@@ -72,6 +72,7 @@
 *                - uni2ascii() rewritten, using the generalized table u_CODE_UDO
 *                - uni2misc() supports !html_ignore_8bit
 *                - recode() supports !html_ignore_8bit
+*                - uni2ascii() renamed -> recode_udo()
 *
 ******************************************|************************************/
 
@@ -909,7 +910,7 @@ char             *s)  /* ^ string */
    case TOHTM:
    case TOMHH:
       if (html_ignore_8bit)
-         uni2ascii(s);
+         recode_udo(s);
       else
       {
          for (i = 0; i < UNITABLESIZE; i++)
@@ -1070,7 +1071,7 @@ char  *s)  /* ^ string */
 
 /*******************************************************************************
 *
-*  uni2ascii():
+*  recode_udo():
 *     convert (UDO's) universal characters into target encoding
 *
 *  Return:
@@ -1078,7 +1079,7 @@ char  *s)  /* ^ string */
 *
 ******************************************|************************************/
 
-GLOBAL void uni2ascii(
+GLOBAL void recode_udo(
 
 char             *s)        /* ^ string */
 {
@@ -1308,7 +1309,7 @@ int           char_set)          /* iCharset */
    if (!ptr)
    {
       if (bDocUniversalCharsetOn)         /* clear UDO universal chars */
-         uni2ascii(zeile);
+         recode_udo(zeile);
 
       return;
    }
@@ -1388,7 +1389,7 @@ int           char_set)          /* iCharset */
       strcpy(zeile,sbuf);                 /* restore line */
 
       if (bDocUniversalCharsetOn)         /* clear UDO universal chars */
-         uni2ascii(zeile);
+         recode_udo(zeile);
 
       return;                             /* we're done already! */
    }
@@ -1427,7 +1428,7 @@ int           char_set)          /* iCharset */
       strcpy(zeile,sbuf);                 /* restore line */
 
       if (bDocUniversalCharsetOn)         /* clear UDO universal chars */
-         uni2ascii(zeile);
+         recode_udo(zeile);
 
       return;                             /* we're done already */
    }   
@@ -1465,7 +1466,7 @@ int           char_set)          /* iCharset */
       ptr++;                              /* next character */
 
       if (bDocUniversalCharsetOn)         /* clear UDO universal chars */
-         uni2ascii(zeile);
+         recode_udo(zeile);
    }
 }
 
@@ -3989,7 +3990,7 @@ BOOLEAN           all)            /* */
 #endif /* #if 0 */
 
       if (bDocUniversalCharsetOn)
-         uni2ascii(s);
+         recode_udo(s);
 
       /* r6pl2: Neue Version: immer quoten */
       /* nicht auf !raw !stg testen, da dies im wichtigen pass2() */

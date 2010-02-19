@@ -44,6 +44,8 @@
 *    fd  Dec 03: - Swedish month names should be used in lowercase (Karl-Johan Nor´en)
 *                - more Swedish adjustments
 *    fd  Dec 16: lang.translator adjusted (fr)
+*  2010:
+*    fd  Feb 19: uni2ascii() renamed -> recode_udo()
 *
 ******************************************|************************************/
 
@@ -284,7 +286,7 @@ GLOBAL void init_lang_date(void)
    }
 
 
-   uni2ascii(lang.today);
+   recode_udo(lang.today);
 
    old_charset = iCharset;          /* r6pl2: sonst wird M"arz falsch ausgegeben, */
    iCharset = SYSTEM_CHARSET;       /* falls man Latin1 fuer WinHelp benutzt. */
@@ -411,8 +413,8 @@ GLOBAL void init_lang(void)
       strcpy(lang.translator, "Traducteur :");
       strcpy(lang.distributor,"Distribution :");
 
-      uni2ascii(lang.preface);               /* adjust strings with special characters */
-      uni2ascii(lang.update);
+      recode_udo(lang.preface);               /* adjust strings with special characters */
+      recode_udo(lang.update);
       break;
 
    case TOITA:                /* laut "g.morando@agora.stm.it" */
@@ -476,12 +478,12 @@ GLOBAL void init_lang(void)
       strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Distributor:");
       
-      uni2ascii(lang.chapter);               /* adjust strings with special characters */
-      uni2ascii(lang.title);
-      uni2ascii(lang.appendix);
-      uni2ascii(lang.index);
-      uni2ascii(lang.page);
-      uni2ascii(lang.also);
+      recode_udo(lang.chapter);               /* adjust strings with special characters */
+      recode_udo(lang.title);
+      recode_udo(lang.appendix);
+      recode_udo(lang.index);
+      recode_udo(lang.page);
+      recode_udo(lang.also);
       break;
    
    case TOSWE:                            /* adjusted by Karl-Johan Nor´en */
@@ -514,14 +516,14 @@ GLOBAL void init_lang(void)
       strcpy(lang.translator, "Övers(!\"a)ttare:");
       strcpy(lang.distributor,"Distribut(!\"o)r:");
       
-      uni2ascii(lang.preface);               /* adjust strings with special characters */
-      uni2ascii(lang.contents);
-      uni2ascii(lang.also);
-      uni2ascii(lang.fur);
-      uni2ascii(lang.unknown);
-      uni2ascii(lang.html_start);
-      uni2ascii(lang.translator);
-      uni2ascii(lang.distributor);
+      recode_udo(lang.preface);               /* adjust strings with special characters */
+      recode_udo(lang.contents);
+      recode_udo(lang.also);
+      recode_udo(lang.fur);
+      recode_udo(lang.unknown);
+      recode_udo(lang.html_start);
+      recode_udo(lang.translator);
+      recode_udo(lang.distributor);
       break;
    
    case TODAN:                /* V6.5.18 */
@@ -554,9 +556,9 @@ GLOBAL void init_lang(void)
       strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Distributor:");
       
-      uni2ascii(lang.appendix);               /* adjust strings with special characters */
-      uni2ascii(lang.also);
-      uni2ascii(lang.html_next);
+      recode_udo(lang.appendix);               /* adjust strings with special characters */
+      recode_udo(lang.also);
+      recode_udo(lang.html_next);
       break;
 
    case TOCZE:
@@ -589,18 +591,18 @@ GLOBAL void init_lang(void)
       strcpy(lang.translator, "Translator:");
       strcpy(lang.distributor,"Distributor:");
 
-      uni2ascii(lang.preface);               /* adjust strings with special characters */
-      uni2ascii(lang.appendix);
-      uni2ascii(lang.listfigure);
-      uni2ascii(lang.figure);
-      uni2ascii(lang.index);
-      uni2ascii(lang.also);
-      uni2ascii(lang.unknown);
-      uni2ascii(lang.update);
-      uni2ascii(lang.html_home);
-      uni2ascii(lang.html_prev);
-      uni2ascii(lang.html_next);
-      uni2ascii(lang.html_start);
+      recode_udo(lang.preface);               /* adjust strings with special characters */
+      recode_udo(lang.appendix);
+      recode_udo(lang.listfigure);
+      recode_udo(lang.figure);
+      recode_udo(lang.index);
+      recode_udo(lang.also);
+      recode_udo(lang.unknown);
+      recode_udo(lang.update);
+      recode_udo(lang.html_home);
+      recode_udo(lang.html_prev);
+      recode_udo(lang.html_next);
+      recode_udo(lang.html_start);
       break;
 
 /* fd:20061122: x-mac-ce encoding temporarily faded
@@ -674,18 +676,18 @@ GLOBAL void init_lang(void)
 
                /* adjust strings with special characters */
 /*
-      uni2ascii(lang.preface);
-      uni2ascii(lang.appendix);
-      uni2ascii(lang.listfigure);
-      uni2ascii(lang.figure);
-      uni2ascii(lang.index);
-      uni2ascii(lang.also);
-      uni2ascii(lang.unknown);
-      uni2ascii(lang.update);
-      uni2ascii(lang.html_home);
-      uni2ascii(lang.html_prev);
-      uni2ascii(lang.html_next);
-      uni2ascii(lang.html_start);
+      recode_udo(lang.preface);
+      recode_udo(lang.appendix);
+      recode_udo(lang.listfigure);
+      recode_udo(lang.figure);
+      recode_udo(lang.index);
+      recode_udo(lang.also);
+      recode_udo(lang.unknown);
+      recode_udo(lang.update);
+      recode_udo(lang.html_home);
+      recode_udo(lang.html_prev);
+      recode_udo(lang.html_next);
+      recode_udo(lang.html_start);
 */
       break;
 
@@ -750,8 +752,8 @@ GLOBAL void init_lang(void)
       strcpy(lang.translator, "(!\"U)bersetzung:");
       strcpy(lang.distributor,"Distributor:");
       
-      uni2ascii(lang.fur);               /* adjust strings with special characters */
-      uni2ascii(lang.translator);
+      recode_udo(lang.fur);               /* adjust strings with special characters */
+      recode_udo(lang.translator);
    }
    
    toc_init_lang();

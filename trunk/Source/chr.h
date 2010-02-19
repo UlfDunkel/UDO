@@ -42,6 +42,7 @@
 *    fd  Feb 17: - ansi2dos() removed
 *                - win2sys() & html2sys() & umlaute2ascii() -> recode_chrtab()
 *                - CHRTAB_... introduced
+*    fd  Feb 19: uni2ascii() renamed -> recode_udo()
 *
 ******************************************|************************************/
 
@@ -125,7 +126,7 @@ GLOBAL void convert_sz(char * s);
 
 GLOBAL void recode(char *zeile, int char_set);
 
-GLOBAL void uni2ascii(char * s);
+GLOBAL void recode_udo(char * s);
 
 GLOBAL void recode_chrtab(char * s, int type);
 
