@@ -67,6 +67,11 @@
 *                - recode(): UTF-8 input enabled
 *                - bstr_to_utf8() debugged
 *    fd  Feb 18: - CODE_LAT2
+*    fd  Feb 19: - CODE_CP1257
+*                - unicode2chars()
+*                - uni2ascii() rewritten, using the generalized table u_CODE_UDO
+*                - uni2misc() supports !html_ignore_8bit
+*                - recode() supports !html_ignore_8bit
 *
 ******************************************|************************************/
 
@@ -155,7 +160,7 @@ const char *id_chr_c= "@(#) chr.c       $DATE$";
 #include "u_mswin.h"
 #include "u_next.h"
 #include "u_tos.h"
-
+#include "u_udo.h"                        /* u_CODE_UDO[] */
 
 
 
@@ -539,6 +544,12 @@ CHARTABLE   chrtab[][6] =                 /* sorted alphabetically ;-) */
 *
 ******************************************|************************************/
 
+   /* convert Unicode value into UTF-8 bytes */
+LOCAL char *bstr_to_utf8(unsigned ucode);
+
+   /* get char(s!) from Unicode value */
+LOCAL char *unicode2char(unsigned unicode);
+
    /* convert (UDO's) universal characters into miscellaneous encodings */
 LOCAL void uni2misc(char *s);
 
@@ -555,8 +566,6 @@ LOCAL void c_quotes_apostrophes(char *s, const char *aon, const char *aoff, cons
 LOCAL void str2manbold(char *d, const char *s);
 LOCAL void str2manunder(char *d, const char *s);
 
-   /* convert Unicode value into UTF-8 bytes */
-LOCAL char *bstr_to_utf8(unsigned ucode);
 
 
 
@@ -685,7 +694,7 @@ unsigned           ucode)
 *
 ******************************************|************************************/
 
-unsigned utf8_to_bstr(
+GLOBAL unsigned utf8_to_bstr(
 
 const char   *sz, 
 int           len)
@@ -777,6 +786,92 @@ int           len)
 
 /*******************************************************************************
 *
+*  unicode2chars():
+*     get char(s!) from Unicode value
+*
+*  return:
+*     ^ string with char(s)
+*
+******************************************|************************************/
+
+LOCAL char *unicode2char(
+
+unsigned   unicode)     /* ^ 1st string for comparison */
+{
+   int        i = 0;    /* counter */
+   unsigned (*pumap);   /* ^ to u_CODE_xxx[] arrays */
+   char       cbuf[8];  /* */
+   
+            
+   if (unicode == U_NIL)                  /* nothing to do */
+      return "";
+   
+   if (iEncodingTarget == CODE_UTF8)      /* Unicode first! */
+      return bstr_to_utf8(unicode);
+   
+
+   switch (iEncodingTarget)               /* use the right tables! ;-) */
+   {
+   case CODE_437:
+      pumap = u_CODE_437;
+      break;
+   
+   case CODE_850:
+      pumap = u_CODE_850;
+      break;
+   
+   case CODE_CP1250:
+      pumap = u_CODE_CP1250;
+      break;
+   
+   case CODE_CP1257:
+      pumap = u_CODE_CP1257;
+      break;
+   
+   case CODE_HP8:
+      pumap = u_CODE_HP8;
+      break;
+   
+   case CODE_LAT2:
+      pumap = u_CODE_LAT2;
+      break;
+   
+   case CODE_MAC:
+      pumap = u_CODE_MAC;
+      break;
+   
+   case CODE_NEXT:
+      pumap = u_CODE_NEXT;
+      break;
+   
+   case CODE_TOS:
+      pumap = u_CODE_TOS;
+      break;
+   
+   case CODE_LAT1:
+   default:
+      pumap = u_CODE_LAT1;
+   }
+   
+   for (i = 128; i < 256; i++)
+   {
+      if (pumap[i] == unicode)            /* found! */
+      {
+         cbuf[0] = i;                     /* compose string */
+         cbuf[1] = EOS;
+         return cbuf;
+      }
+   }   
+
+   return "";
+}
+
+
+
+
+
+/*******************************************************************************
+*
 *  uni2misc():
 *     convert (UDO's) universal characters into miscellaneous encodings
 *
@@ -813,6 +908,16 @@ char             *s)  /* ^ string */
    case TOHAH:
    case TOHTM:
    case TOMHH:
+      if (html_ignore_8bit)
+         uni2ascii(s);
+      else
+      {
+         for (i = 0; i < UNITABLESIZE; i++)
+            replace_all(s, unitab[i].uni, unitab[i].html);
+      }
+      
+      break;
+
    case TOLDS:
    case TOHPH:
       for (i = 0; i < UNITABLESIZE; i++)
@@ -966,10 +1071,7 @@ char  *s)  /* ^ string */
 /*******************************************************************************
 *
 *  uni2ascii():
-*     convert (UDO's) universal characters into system encoding or target encoding
-*
-*  Notes:
-*     ???
+*     convert (UDO's) universal characters into target encoding
 *
 *  Return:
 *     -
@@ -978,20 +1080,28 @@ char  *s)  /* ^ string */
 
 GLOBAL void uni2ascii(
 
-char             *s)  /* ^ string */
+char             *s)        /* ^ string */
 {
-   register int   i;  /* counter */
-   
+   register int   i = 0;    /* counter */
+   char           cbuf[8];  /* char */
 
    if (s[0] == EOS)                       /* empty string */
       return;
 
-   if (strstr(s, "(!") == NULL)           /* No UDO command header found */
+   if (strstr(s, "(!") == NULL)           /* no UDO command header found */
       return;
 
-   for (i = 0; i < UNI2SYSTABSIZE; i++)   /* uni2sys[] depends on encoding! */
+   while (u_CODE_UDO[i]->udo[0] != EOS)   /* check whole table */
    {
-      replace_all(s, uni2sys[i].uni, (const char *)uni2sys[i].system);
+                                          /* get recoded replacement char(s) */
+      strcpy(cbuf, unicode2char(u_CODE_UDO[i]->unicode));
+                                          /* replace all existances */
+      replace_all(s, u_CODE_UDO[i]->udo, cbuf);
+      
+      if (strstr(s, "(!") == NULL)        /* no further UDO command header found */
+         break;
+      
+      i++;
    }
 
    if (no_umlaute)                        /* target encoding must not use umlauts */
@@ -1192,12 +1302,16 @@ int           char_set)          /* iCharset */
                                           /* nothing to do */   
    if (iEncodingSource == iEncodingTarget)
       return;
-
+   
    ptr = get_8bit_ptr(zeile);             /* set ^ to first high-ASCII char */
    
    if (!ptr)
+   {
+      if (bDocUniversalCharsetOn)         /* clear UDO universal chars */
+         uni2ascii(zeile);
+
       return;
-   
+   }
    
    /* --- UTF-8 to 1-byte recoding --- */
    
@@ -1272,6 +1386,10 @@ int           char_set)          /* iCharset */
       }
       
       strcpy(zeile,sbuf);                 /* restore line */
+
+      if (bDocUniversalCharsetOn)         /* clear UDO universal chars */
+         uni2ascii(zeile);
+
       return;                             /* we're done already! */
    }
    
@@ -1307,6 +1425,10 @@ int           char_set)          /* iCharset */
       }
       
       strcpy(zeile,sbuf);                 /* restore line */
+
+      if (bDocUniversalCharsetOn)         /* clear UDO universal chars */
+         uni2ascii(zeile);
+
       return;                             /* we're done already */
    }   
    
@@ -1341,6 +1463,9 @@ int           char_set)          /* iCharset */
       }
 
       ptr++;                              /* next character */
+
+      if (bDocUniversalCharsetOn)         /* clear UDO universal chars */
+         uni2ascii(zeile);
    }
 }
 
