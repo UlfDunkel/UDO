@@ -46,6 +46,7 @@
 *    fd  Jan 23: - converted all German umlauts in comments into plain ASCII
 *                - file tidied up
 *                - SHOW_VARAIABLE -> SHOW_VAR
+*    fd  Feb 19: LANG adjusted
 *
 ******************************************|************************************/
 
@@ -103,37 +104,37 @@ typedef struct _lang                      /* language strings */
 {
    char   preface[32];                    /* Vorwort */
    char   chapter[32];                    /* Kapitel */
+   char   title[32];                      /* Titel */
    char   appendix[32];                   /* Anhang */
    char   contents[32];                   /* Inhaltsverzeichnis */
-   char   title[32];                      /* Titel */
+   char   listfigure[32];                 /* Abbildungsverzeichnis */
+   char   listtable[32];                  /* Tabellenverzeichnis */
    char   figure[32];                     /* Abbildung */
    char   table[32];                      /* Tabelle */
    char   index[32];                      /* Index */
-   char   listfigure[32];                 /* Abbildungsverzeichnis */
-   char   listtable[32];                  /* Tabellenverzeichnis */
    char   page[32];                       /* Seite */
    char   see[32];                        /* siehe */
    char   also[32];                       /* siehe auch */
-   char   by[16];                         /* von */
-                                          /* New in V6.5.2 [NHz] */
-   char   fur[16];                        /* fuer */
-   char   up[8];                          /* Hoch (WinHelp) */
-   char   exit[10];                       /* Beenden (WinHelp) */
-   char   today[32];                      /* 28. Februar 1995 */
-   char   short_today[32];                /* 28.02.1995 */
-   char   update[64];                     /* Last updated on (HTML) */
+   char   by[32];                         /* von */
+   char   fur[32];                        /* fuer  ("for" cannot be used -> C keyword) */
+   char   up[32];                          /* Hoch (WinHelp) */
+   char   exit[32];                       /* Beenden (WinHelp) */
    char   unknown[32];                    /* Unbekannt, Unknown etc. */
+   char   update[64];                     /* Last updated on (HTML) */
+   char   lcid[64];                       /* LCID fuer WinHelp4 */
    char   html_home[32];                  /* "Home" */
    char   html_up[32];                    /* "Hoch" */
    char   html_prev[32];                  /* "Zurueck" */
    char   html_next[32];                  /* "Weiter" */
-   char   lcid[64];                       /* LCID fuer WinHelp4 */
-                                          /* New in r6pl16 [NHz] */
-   char   html_lang[15];                  /* Sprachenkuerzel */
+   char   html_lang[16];                  /* Sprachenkuerzel */
    char   html_start[32];                 /* "Start" */
-   
    char   translator[32];                 /* "Translator" */
    char   distributor[32];                /* "Distributor" */
+   
+   /* --- these are filled in by UDO! --- */
+   
+   char   today[32];                      /* 28. Februar 1995 */
+   char   short_today[32];                /* 28.02.1995 */
 }  LANG;
 
 
