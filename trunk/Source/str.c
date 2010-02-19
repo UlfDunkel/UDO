@@ -50,7 +50,8 @@
 *                - CODE_NEXT_lig[] + sort_CODE_NEXT[] added
 *    fd  Feb 18: - str_UTF_sort_cmp(), str_flatten(), str_sort_flatten_cmp()
 *                  CODE_LAT2
-*    fd  Feb 19: CODE_CP1257
+*    fd  Feb 19: - CODE_CP1257
+*                - str_flatten() debugged for 1-byte encodings
 *
 ******************************************|************************************/
 
@@ -1661,6 +1662,7 @@ char  *zeile)  /* ^ string */
    char       cbuf[9];        /* chars buffer */
    char       lgc[2] = "";    /* ligature char buffer */
    char       lig[3] = "";    /* ligature string buffer */
+   char      *psbuf;          /* ^ string begin */
    unsigned   idx;            /* Unicode */
    size_t     c1;             /* char value (up to 4 bytes!) */
    int        found;          /* TRUE: Unicode found in relevant table */
@@ -1772,7 +1774,7 @@ char  *zeile)  /* ^ string */
          
       zeile = strupr(zeile);              /* we want to compare UPPERCASE */
       
-      return zeile[0];
+      return zeile[0];                    /* used for Index page */
    }
    
 
@@ -1845,6 +1847,8 @@ char  *zeile)  /* ^ string */
       i++;                                /* next ligature */
    }
 
+   psbuf = zeile;                         /* remember begin of string */
+   
    do                                     /* flatten extended characters */
    {
       c1 = psort[*zeile & 0x00FF];
@@ -1852,8 +1856,9 @@ char  *zeile)  /* ^ string */
    }
    while (c1 != EOS);
 
+   zeile = strupr(psbuf);                 /* restore ^ to begin of string */
 
-   return zeile[0];
+   return zeile[0];                       /* used for Index page */
 }
 
 
@@ -1985,7 +1990,7 @@ char         *s2)           /* ^ 2nd string for comparison */
 
    /* --- 'flatten' extended characters --- */
    
-   psbuf = s1;                            /* remember begin of st string */
+   psbuf = s1;                            /* remember begin of 1st string */
    
    do
    {
