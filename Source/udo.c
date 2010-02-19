@@ -70,7 +70,8 @@
 *                - win2sys() -> recode_chrtab()
 *                - umlaute2sys() merged into recode_chrtab()
 *    fd  Feb 18: CODE_LAT2
-*    fd  Feb 19: CODE_CP1257; MAXCHARSET removed; udocharset[] resorted for relevance
+*    fd  Feb 19: - CODE_CP1257; MAXCHARSET removed; udocharset[] resorted for relevance
+*                - c_universal_charset() debugged
 *
 ******************************************|************************************/
 
@@ -5008,6 +5009,8 @@ LOCAL void c_code_target(void)
       if (strstr(s, udocharset[i].magic) != NULL)
       {
          iEncodingTarget = udocharset[i].codepage;
+         
+         init_lang();                     /* recode LANG */
          return;
       }
       
@@ -5123,11 +5126,16 @@ LOCAL void c_autoref_items(void)
 /*******************************************************************************
 *
 *  c_universal_charset():
-*     handle the universal_charset commands
+*     handle the !universal_charset command
 *
 *  Notes:
-*     !autoref_items [on] = UDO strings like ("a) or ("U) are converted into their 
-*     equivalents (ae or Ue).
+*     !universal_charset [on] = 
+*     UDO universal char strings like (!"a) or (!"U) are converted into 
+*     their recoded equivalents ("ae" or "Ue").
+*
+*     All UDO source documents seem to be parsed twice (2nd run from a TMP file),
+*     so we should avoid to throw error messages when a switch is set again
+*     just by re-parsing the same content.
 *
 *  return:
 *     -
@@ -5147,16 +5155,19 @@ LOCAL void c_universal_charset(void)
 
    newon = check_on();
 
-   if (newon && bDocUniversalCharsetOn)
+   if (iUdopass < PASS2)                  /* don't react twice on the same switch! */
    {
-      error_not_active(CMD_UNIVERSAL_CHARSET);
-      return;
-   }
+      if (newon && bDocUniversalCharsetOn)
+      {
+         error_still_active(CMD_UNIVERSAL_CHARSET);
+         return;
+      }
 
-   if (!newon && !bDocUniversalCharsetOn)
-   {
-      error_still_active(CMD_UNIVERSAL_CHARSET);
-      return;
+      if (!newon && !bDocUniversalCharsetOn)
+      {
+         error_not_active(CMD_UNIVERSAL_CHARSET);
+         return;
+      }
    }
 
    bDocUniversalCharsetOn = newon;
@@ -10260,7 +10271,6 @@ LOCAL BOOLEAN pass1_check_preamble_commands(void)
             destlang = udolanguage[i].langval;
             
             init_lang();
-            init_lang_date();
             
             return TRUE;
          }
@@ -13989,8 +13999,10 @@ GLOBAL BOOLEAN udo
 
    destlang = TOGER;
 
+   iEncodingSource        = -1;
+   iEncodingTarget        = -1;
+
    init_lang();
-   init_lang_date();
 
    bBreakInside           = FALSE;
    bInsideDocument        = FALSE;
@@ -13999,11 +14011,8 @@ GLOBAL BOOLEAN udo
    b1stApost              = TRUE;
    iCharset               = SYSTEM_CHARSET;
    bDocUniversalCharsetOn = FALSE;
-   
-   iEncodingSource        = -1;
-   iEncodingTarget        = -1;
-   
 
+   
    show_udo_intro();
 
 
@@ -14043,7 +14052,6 @@ GLOBAL BOOLEAN udo
 
       if (malloc_token_output_buffer())   /* Speicher anfordern */
       {
-         init_lang_date();                /* Kann IMHO weg */
          check_parwidth();
 
 
@@ -14762,7 +14770,6 @@ char        *datei)        /* */
    destlang = TOGER;
 
    init_lang();
-   init_lang_date();
 
    bBreakInside           = FALSE;
    bInsideDocument        = FALSE;
@@ -14786,7 +14793,6 @@ char        *datei)        /* */
    {
       if (malloc_token_output_buffer())   /* Speicher anfordern */
       {
-         init_lang_date();                /* Kann IMHO weg */
          check_parwidth();
 
          /* itemchar wird erst nach pass1() gesetzt */
