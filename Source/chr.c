@@ -74,6 +74,7 @@
 *                - recode() supports !html_ignore_8bit
 *                - uni2ascii() renamed -> recode_udo()
 *                - recode() debugged for UTF-8 -> 1-byte encoding
+*                - recode(): U_ReplacementCharacter or '*' for unsupported chars
 *
 ******************************************|************************************/
 
@@ -1335,9 +1336,9 @@ int           char_set)          /* iCharset */
          
          if (len > 0)
          {
-            idx = utf8_to_bstr(cbuf,len);
+            idx = utf8_to_bstr(cbuf,len); /* get Unicode */
 
-            for (i = 128; i < 256; i++)
+            for (i = 128; i < 256; i++)   /* check if target encoding supports this char */
             {
                if (pUtrg[i] == idx)
                {
@@ -1347,6 +1348,14 @@ int           char_set)          /* iCharset */
                   break;
                }
             }
+                                          /* no valid character found */
+            if (idx < 256)
+               cbuf[0] = idx;             /* show strange char */
+            else
+               cbuf[0] = '*';             /* no ANSI character */
+            
+            cbuf[1] = EOS;
+            strcat(sbuf,cbuf);
          }
       }
       
@@ -1375,16 +1384,20 @@ int           char_set)          /* iCharset */
       {
          idx = (UCHAR)zeile[j];
          
-         if (idx < 128)
+         if (idx < 128)                   /* low-ASCII char */
          {
             cbuf[0] = idx;
             cbuf[1] = EOS;
             strcat(sbuf,cbuf);
          }
-         else if (pUsrc[idx] != U_NIL)
+         else if (pUsrc[idx] != U_NIL)    /* valid Unicode */
          {
             strcpy(cbuf,bstr_to_utf8(pUsrc[idx]));
-            
+            strcat(sbuf,cbuf);
+         }
+         else                             /* wrong source encoding or invalid char */
+         {
+            strcpy(cbuf,bstr_to_utf8(U_ReplacementCharacter));
             strcat(sbuf,cbuf);
          }
       }
