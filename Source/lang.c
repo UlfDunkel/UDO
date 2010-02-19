@@ -4,6 +4,10 @@
 *  Module name  : lang.c
 *  Symbol prefix: lang
 *
+*  Description  : This file handles all language-specific, localizable strings 
+*                 used by UDO. Keep in mind that the localizable strings are 
+*                 UTF-8 encoded since UDO v7.
+*
 *  Copyright    : 1995-2001 Dirk Hagedorn
 *  Open Source  : since 2001
 *
