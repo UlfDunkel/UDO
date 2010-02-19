@@ -73,6 +73,7 @@
 *                - uni2misc() supports !html_ignore_8bit
 *                - recode() supports !html_ignore_8bit
 *                - uni2ascii() renamed -> recode_udo()
+*                - recode() debugged for UTF-8 -> 1-byte encoding
 *
 ******************************************|************************************/
 
@@ -1340,7 +1341,7 @@ int           char_set)          /* iCharset */
             {
                if (pUtrg[i] == idx)
                {
-                  cbuf[0] = idx;
+                  cbuf[0] = i;            /* use char from THIS codepage slot! */
                   cbuf[1] = EOS;
                   strcat(sbuf,cbuf);
                   break;
