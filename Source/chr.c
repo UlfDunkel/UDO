@@ -115,42 +115,6 @@ const char *id_chr_c= "@(#) chr.c       $DATE$";
 #include "chr_all.h"
 #include "chr_ttf.h"
 
-#ifdef __TOS__
-#include "chr_tos.h"
-#endif
-
-#ifdef __MSDOS__
-#include "chr_437.h"
-#endif
-
-#ifdef __MSDOS850__
-#include "chr_850.h"
-#endif
-
-#ifdef __HPUX_ROMAN8__
-#include "chr_hp8.h"
-#endif
-
-#if __NEXTSTEP__
-#include "chr_next.h"
-#endif
-
-/* #if __BEOS__           */
-/* #include "chr_utf8.h"  */
-/* #endif                 */
-
-#if __MACOS__
-#include "chr_mac.h"
-#endif
-
-#if __MACOSX__
-#include "chr_mac.h"
-#endif
-
-#if USE_LATIN1_CHARSET
-#include "chr_iso.h"
-#endif
-
 #include "export.h"
 #include "chr.h"
 
