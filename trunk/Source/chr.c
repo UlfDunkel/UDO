@@ -936,8 +936,7 @@ char             *s)  /* ^ string */
       break;
 
    case TOPCH:
-      for (i = 0; i < UNI2SYSTABSIZE; i++)
-         replace_all(s, uni2sys[i].uni, (const char *) uni2sys[i].system);
+      recode_udo(s);
 
       if (no_umlaute)                     /* target encoding must not use umlauts */
          recode_chrtab(s,CHRTAB_ASCII);   /* convert all umlauts to pure ASCII */
