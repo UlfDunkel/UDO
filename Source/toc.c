@@ -15641,14 +15641,11 @@ GLOBAL void toc_init_lang(void)
 
 /*******************************************************************************
 *
-*  toc_init_lang():
-*     add TOC title to toc[0]
-*
-*  Notes:
-*     This function is only called by init_lang().
+*  init_new_toc_entry():
+*     ???
 *
 *  Return:
-*     -
+*     ???
 *
 ******************************************|************************************/
 
