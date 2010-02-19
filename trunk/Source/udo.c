@@ -243,6 +243,8 @@ UDOCHARSET udocharset[MAXCHARSET] =
    {"cp1250",     CODE_CP1250   },        /* 15 */
    {"iso-8859-2", CODE_LAT2     },        /* 16 */
    {"latin2",     CODE_LAT2     },        /* 17 */
+   {"cp1257",     CODE_CP1257   },        /* 18 */
+   {"baltic",     CODE_CP1257   },        /* 19 */
 };
 
 /* !!! adjust MAXCHARSET in UDO.H, when this table is changed !!! */

@@ -45,6 +45,7 @@
 *                - converted all German umlauts in comments into plain ASCII
 *    fd  Feb 12: comments reformatted
 *    fd  Feb 18: CODE_LAT2
+*    fd  Feb 19: CODE_CP1257
 *
 ******************************************|************************************/
 
@@ -99,8 +100,9 @@
 #define CODE_UTF8    7                    /* UTF-8 (e.g. for BeOS)         */
 #define CODE_CP1250  8                    /* Windows codepage 1250         */
 #define CODE_LAT2    9                    /* ISO Latin 2 (iso-8859-2)      */
+#define CODE_CP1257  10                   /* Microsoft Windows codepage 1257 "Baltic" */
 
-#define CODE_TOTAL   10                   /* # of supported encodings */
+#define CODE_TOTAL   11                   /* # of supported encodings */
 
    /* --- Compiler- und systemabhaengige Dinge setzen --- */
 

@@ -152,6 +152,7 @@ const char *id_chr_c= "@(#) chr.c       $DATE$";
 #include "u_hp.h"
 #include "u_iso.h"
 #include "u_mac.h"
+#include "u_mswin.h"
 #include "u_next.h"
 #include "u_tos.h"
 
@@ -1057,6 +1058,13 @@ int           char_set)          /* iCharset */
       strcpy(sSource, "Windows codepage 1250");
       break;
       
+   case CODE_CP1257:
+      pUsrc = u_CODE_CP1257;
+      plig  = CODE_CP1257_lig;
+      psort = sort_CODE_CP1257;
+      strcpy(sSource, "Windows codepage 1257");
+      break;
+      
    case CODE_HP8:
       pUsrc = u_CODE_HP8;
       plig  = CODE_HP8_lig;
@@ -1119,6 +1127,11 @@ int           char_set)          /* iCharset */
    case CODE_CP1250:
       pUtrg = u_CODE_CP1250;
       strcpy(sTarget, "Windows codepage 1250");
+      break;
+      
+   case CODE_CP1257:
+      pUtrg = u_CODE_CP1257;
+      strcpy(sTarget, "Windows codepage 1257");
       break;
       
    case CODE_HP8:
@@ -1373,6 +1386,10 @@ int               type)           /* CHRTAB_... (CHR.H) */
       
    case CODE_CP1250:
       pUtrg = u_CODE_CP1250;
+      break;
+      
+   case CODE_CP1257:
+      pUtrg = u_CODE_CP1257;
       break;
       
    case CODE_HP8:
@@ -3787,6 +3804,10 @@ BOOLEAN           all)            /* */
       
    case CODE_CP1250:
       pUtrg = u_CODE_CP1250;
+      break;
+      
+   case CODE_CP1257:
+      pUtrg = u_CODE_CP1257;
       break;
       
    case CODE_HP8:

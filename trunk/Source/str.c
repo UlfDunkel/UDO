@@ -50,6 +50,7 @@
 *                - CODE_NEXT_lig[] + sort_CODE_NEXT[] added
 *    fd  Feb 18: - str_UTF_sort_cmp(), str_flatten(), str_sort_flatten_cmp()
 *                  CODE_LAT2
+*    fd  Feb 19: CODE_CP1257
 *
 ******************************************|************************************/
 
@@ -85,6 +86,7 @@ const char *id_str_c= "@(#) str.c       $DATE$";
 #include "u_hp.h"
 #include "u_iso.h"
 #include "u_mac.h"
+#include "u_mswin.h"
 #include "u_next.h"
 #include "u_tos.h"
 #include "u_utf.h"
@@ -1791,6 +1793,11 @@ char  *zeile)  /* ^ string */
       psort = sort_CODE_CP1250;
       break;
    
+   case CODE_CP1257:
+      plig = CODE_CP1257_lig;
+      psort = sort_CODE_CP1257;
+      break;
+   
    case CODE_HP8:
       plig  = CODE_HP8_lig;
       psort = sort_CODE_HP8;
@@ -1908,6 +1915,12 @@ char         *s2)           /* ^ 2nd string for comparison */
       plig = CODE_CP1250_lig;
       psort = sort_CODE_CP1250;
       pumap = u_CODE_CP1250;
+      break;
+   
+   case CODE_CP1257:
+      plig = CODE_CP1257_lig;
+      psort = sort_CODE_CP1257;
+      pumap = u_CODE_CP1257;
       break;
    
    case CODE_HP8:
