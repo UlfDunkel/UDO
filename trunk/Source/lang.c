@@ -51,6 +51,7 @@
 *  2010:
 *    fd  Feb 19: - uni2ascii() renamed -> recode_udo()
 *                - init_lang_date() + init_lang() generalized
+*                - init_lang_date() debugged: don't recode a const string via pointer :-(
 *
 ******************************************|************************************/
 
@@ -117,11 +118,11 @@ const char *id_lang_c= "@(#) lang.c       $Date$";
 
 GLOBAL void init_lang_date(void)
 {
-   time_t      timer;         /* */
-   struct tm  *zeit;          /* */
-   char       *month = NULL;  /* ^ month name in MONTHS[] */ 
-   int         i = 0;         /* counter for MONTHS[] */
-   int         iEncBuf;       /* buffer for iEncodingSource */
+   time_t      timer;                  /* */
+   struct tm  *zeit;                   /* */
+   char        month[MONTH_LEN] = "";  /* ^ month name in MONTHS[] */ 
+   int         i = 0;                  /* counter for MONTHS[] */
+   int         iEncBuf;                /* buffer for iEncodingSource */
 
 
    time(&timer);
@@ -138,14 +139,13 @@ GLOBAL void init_lang_date(void)
    {
       if (MONTHS[i].lan == destlang)      /* desired language found */
       {                                   /* remember month name */
-         month = MONTHS[i].month[zeit->tm_mon];
+         strcpy(month, MONTHS[i].month[zeit->tm_mon]);
          break;                           /* done! */
       }
       
       i++;                                /* next language */
    }
    
-
    iEncBuf = iEncodingSource;
    iEncodingSource = CODE_UTF8;
       
@@ -295,5 +295,5 @@ GLOBAL void init_lang(void)
    toc_init_lang();
 }
 
-/* +++ EOF +++ */
 
+/* +++ EOF +++ */
