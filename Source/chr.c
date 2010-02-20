@@ -75,6 +75,7 @@
 *                - uni2ascii() renamed -> recode_udo()
 *                - recode() debugged for UTF-8 -> 1-byte encoding
 *                - recode(): U_ReplacementCharacter or '*' for unsupported chars
+*    fd  Feb 20: CODE_CP1251
 *
 ******************************************|************************************/
 
@@ -791,6 +792,10 @@ unsigned   unicode)     /* ^ 1st string for comparison */
       pumap = u_CODE_CP1250;
       break;
    
+   case CODE_CP1251:
+      pumap = u_CODE_CP1251;
+      break;
+   
    case CODE_CP1257:
       pumap = u_CODE_CP1257;
       break;
@@ -1134,6 +1139,13 @@ int           char_set)          /* iCharset */
       strcpy(sSource, "Windows codepage 1250");
       break;
       
+   case CODE_CP1251:
+      pUsrc = u_CODE_CP1251;
+      plig  = CODE_CP1251_lig;
+      psort = sort_CODE_CP1251;
+      strcpy(sSource, "Windows codepage 1251");
+      break;
+      
    case CODE_CP1257:
       pUsrc = u_CODE_CP1257;
       plig  = CODE_CP1257_lig;
@@ -1203,6 +1215,11 @@ int           char_set)          /* iCharset */
    case CODE_CP1250:
       pUtrg = u_CODE_CP1250;
       strcpy(sTarget, "Windows codepage 1250");
+      break;
+      
+   case CODE_CP1251:
+      pUtrg = u_CODE_CP1251;
+      strcpy(sTarget, "Windows codepage 1251");
       break;
       
    case CODE_CP1257:
@@ -1489,6 +1506,10 @@ int               type)           /* CHRTAB_... (CHR.H) */
       
    case CODE_CP1250:
       pUtrg = u_CODE_CP1250;
+      break;
+      
+   case CODE_CP1251:
+      pUtrg = u_CODE_CP1251;
       break;
       
    case CODE_CP1257:
@@ -3907,6 +3928,10 @@ BOOLEAN           all)            /* */
       
    case CODE_CP1250:
       pUtrg = u_CODE_CP1250;
+      break;
+      
+   case CODE_CP1251:
+      pUtrg = u_CODE_CP1251;
       break;
       
    case CODE_CP1257:

@@ -72,6 +72,7 @@
 *    fd  Feb 18: CODE_LAT2
 *    fd  Feb 19: - CODE_CP1257; MAXCHARSET removed; udocharset[] resorted for relevance
 *                - c_universal_charset() debugged
+*    fd  Feb 20: CODE_CP1251
 *
 ******************************************|************************************/
 
@@ -252,6 +253,7 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
    {"iso-8859-2", CODE_LAT2     },        /*  */
    {"latin2",     CODE_LAT2     },        /*  */
    {"cp1250",     CODE_CP1250   },        /*  */
+   {"cp1251",     CODE_CP1251   },        /*  */
    {"cp1257",     CODE_CP1257   },        /*  */
    {"baltic",     CODE_CP1257   },        /*  */
    
