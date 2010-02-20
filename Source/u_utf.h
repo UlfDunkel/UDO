@@ -38,6 +38,7 @@
 *
 *  2010:
 *    fd  Feb 18: file introduced
+*    fd  Feb 20: more ligatures added
 *
 ******************************************|************************************/
 
@@ -66,55 +67,67 @@
 
 static unsigned   CODE_UTF_lig[][3] =     /* CODE_UTF character ligatures */
 {
-   { U_LatinCapitalLetterAWithDiaeresis,          U_LatinCapitalLetterA, U_LatinCapitalLetterE },  /* 0x00C4 */
-   { U_LatinCapitalLetterAWithRingAbove,          U_LatinCapitalLetterA, U_LatinCapitalLetterO },  /* 0x00C5 */
-   { U_LatinCapitalLigatureAE,                    U_LatinCapitalLetterA, U_LatinCapitalLetterE },  /* 0x00C6 */
-   { U_LatinCapitalLetterEWithDiaeresis,          U_LatinCapitalLetterE, U_LatinCapitalLetterE },  /* 0x00CB */
-   { U_LatinCapitalLetterIWithDiaeresis,          U_LatinCapitalLetterI, U_LatinCapitalLetterE },  /* 0x00CF */
-   { U_LatinCapitalLetterOWithDiaeresis,          U_LatinCapitalLetterO, U_LatinCapitalLetterE },  /* 0x00D6 */
-   { U_LatinCapitalLetterOSlash,                  U_LatinCapitalLetterO, U_LatinCapitalLetterE },  /* 0x00D8 */
-   { U_LatinCapitalLetterUWithDiaeresis,          U_LatinCapitalLetterU, U_LatinCapitalLetterE },  /* 0x00DC */
-   { U_LatinSmallLetterSharpS,                    U_LatinSmallLetterS,   U_LatinSmallLetterS   },  /* 0x00DF */
-   { U_LatinSmallLetterAWithDiaeresis,            U_LatinSmallLetterA,   U_LatinSmallLetterE   },  /* 0x00E4 */
-   { U_LatinSmallLetterAWithRingAbove,            U_LatinSmallLetterA,   U_LatinSmallLetterO   },  /* 0x00E5 */
-   { U_LatinSmallLigatureAE,                      U_LatinSmallLetterA,   U_LatinSmallLetterE   },  /* 0x00E6 */
-   { U_LatinSmallLetterEWithDiaeresis,            U_LatinSmallLetterE,   U_LatinSmallLetterE   },  /* 0x00EB */
-   { U_LatinSmallLetterIWithDiaeresis,            U_LatinSmallLetterI,   U_LatinSmallLetterE   },  /* 0x00EF */
-   { U_LatinSmallLetterOWithDiaeresis,            U_LatinSmallLetterO,   U_LatinSmallLetterE   },  /* 0x00F6 */
-   { U_LatinSmallLetterOSlash,                    U_LatinSmallLetterO,   U_LatinSmallLetterE   },  /* 0x00F8 */
-   { U_LatinSmallLetterUWithDiaeresis,            U_LatinSmallLetterU,   U_LatinSmallLetterE   },  /* 0x00FC */
-   { U_LatinSmallLetterYWithDiaeresis,            U_LatinSmallLetterY,   U_LatinSmallLetterE   },  /* 0x00FF */
-   { U_LatinCapitalLigatureIJ,                    U_LatinCapitalLetterI, U_LatinCapitalLetterJ },  /* 0x0132 */
-   { U_LatinSmallLigatureIJ,                      U_LatinSmallLetterI,   U_LatinSmallLetterJ   },  /* 0x0133 */
-   { U_LatinCapitalLigatureOE,                    U_LatinCapitalLetterO, U_LatinCapitalLetterE },  /* 0x0152 */
-   { U_LatinSmallLigatureOE,                      U_LatinSmallLetterO,   U_LatinSmallLetterE   },  /* 0x0153 */
-   { U_LatinCapitalLetterUWithRingAbove,          U_LatinCapitalLetterU, U_LatinCapitalLetterO },  /* 0x016E */
-   { U_LatinSmallLetterUWithRingAbove,            U_LatinSmallLetterU,   U_LatinSmallLetterO   },  /* 0x016F */
-   { U_LatinCapitalLetterYWithDiaeresis,          U_LatinCapitalLetterY, U_LatinCapitalLetterE },  /* 0x0178 */
-   { U_LatinSmallLetterHV,                        U_LatinSmallLetterH,   U_LatinSmallLetterV   },  /* 0x0195 */
-   { U_LatinCapitalLetterOI,                      U_LatinCapitalLetterO, U_LatinCapitalLetterI },  /* 0x01A2 */
-   { U_LatinSmallLetterOI,                        U_LatinSmallLetterO,   U_LatinSmallLetterI   },  /* 0x01A3 */
-   { U_LatinLetterYR,                             U_LatinSmallLetterY,   U_LatinCapitalLetterR },  /* 0x01A6 */
-   { U_LatinCapitalLetterLJ,                      U_LatinCapitalLetterL, U_LatinCapitalLetterJ },  /* 0x01C7 */
-   { U_LatinCapitalLetterLWithSmallLetterJ,       U_LatinCapitalLetterL, U_LatinSmallLetterJ   },  /* 0x01C8 */
-   { U_LatinSmallLetterLJ,                        U_LatinSmallLetterL,   U_LatinSmallLetterJ   },  /* 0x01C9 */
-   { U_LatinCapitalLetterNJ,                      U_LatinCapitalLetterN, U_LatinCapitalLetterJ },  /* 0x01CA */
-   { U_LatinCapitalLetterNWithSmallLetterJ,       U_LatinCapitalLetterN, U_LatinSmallLetterJ   },  /* 0x01CB */
-   { U_LatinSmallLetterNJ,                        U_LatinSmallLetterN,   U_LatinSmallLetterJ   },  /* 0x01CC */
-   { U_LatinCapitalLetterUWithDiaeresisAndMacron, U_LatinCapitalLetterU, U_LatinCapitalLetterE },  /* 0x01D5 */
-   { U_LatinSmallLetterUWithDiaeresisAndMacron,   U_LatinSmallLetterU,   U_LatinSmallLetterE   },  /* 0x01D6 */
-   { U_LatinCapitalLetterUWithDiaeresisAndCaron,  U_LatinCapitalLetterU, U_LatinCapitalLetterE },  /* 0x01D9 */
-   { U_LatinSmallLetterUWithDiaeresisAndCaron,    U_LatinSmallLetterU,   U_LatinSmallLetterE   },  /* 0x01DA */
-   { U_LatinCapitalLetterAWithDiaeresisAndMacron, U_LatinCapitalLetterA, U_LatinCapitalLetterE },  /* 0x01DE */
-   { U_LatinSmallLetterAWithDiaeresisAndMacron,   U_LatinSmallLetterA,   U_LatinSmallLetterE   },  /* 0x01DF */
-   { U_LatinCapitalLetterDZ,                      U_LatinCapitalLetterD, U_LatinCapitalLetterZ },  /* 0x01F1 */
-   { U_LatinCapitalLetterDWithSmallLetterZ,       U_LatinCapitalLetterD, U_LatinSmallLetterZ   },  /* 0x01F2 */
-   { U_LatinSmallLetterDZ,                        U_LatinSmallLetterD,   U_LatinSmallLetterZ   },  /* 0x01F3 */
-   { U_LatinCapitalLetterOU,                      U_LatinCapitalLetterO, U_LatinCapitalLetterU },  /* 0x0222 */
-   { U_LatinSmallLetterOU,                        U_LatinSmallLetterO,   U_LatinSmallLetterU   },  /* 0x0223 */
-   { U_LatinCapitalLetterOWithDiaeresisAndMacron, U_LatinCapitalLetterO, U_LatinCapitalLetterE },  /* 0x022A */
-   { U_LatinSmallLetterOWithDiaeresisAndMacron,   U_LatinSmallLetterO,   U_LatinSmallLetterE   },  /* 0x022B */
-   { 0x0000,                                      U_NIL,                 U_NIL}                    /* list terminator */
+   { U_LatinCapitalLetterAWithDiaeresis,          U_LatinCapitalLetterA,     U_LatinCapitalLetterE      },  /* 0x00C4 */
+   { U_LatinCapitalLetterAWithRingAbove,          U_LatinCapitalLetterA,     U_LatinCapitalLetterO      },  /* 0x00C5 */
+   { U_LatinCapitalLigatureAE,                    U_LatinCapitalLetterA,     U_LatinCapitalLetterE      },  /* 0x00C6 */
+   { U_LatinCapitalLetterEWithDiaeresis,          U_LatinCapitalLetterE,     U_LatinCapitalLetterE      },  /* 0x00CB */
+   { U_LatinCapitalLetterIWithDiaeresis,          U_LatinCapitalLetterI,     U_LatinCapitalLetterE      },  /* 0x00CF */
+   { U_LatinCapitalLetterOWithDiaeresis,          U_LatinCapitalLetterO,     U_LatinCapitalLetterE      },  /* 0x00D6 */
+   { U_LatinCapitalLetterOSlash,                  U_LatinCapitalLetterO,     U_LatinCapitalLetterE      },  /* 0x00D8 */
+   { U_LatinCapitalLetterUWithDiaeresis,          U_LatinCapitalLetterU,     U_LatinCapitalLetterE      },  /* 0x00DC */
+   { U_LatinSmallLetterSharpS,                    U_LatinSmallLetterS,       U_LatinSmallLetterS        },  /* 0x00DF */
+   { U_LatinSmallLetterAWithDiaeresis,            U_LatinSmallLetterA,       U_LatinSmallLetterE        },  /* 0x00E4 */
+   { U_LatinSmallLetterAWithRingAbove,            U_LatinSmallLetterA,       U_LatinSmallLetterO        },  /* 0x00E5 */
+   { U_LatinSmallLigatureAE,                      U_LatinSmallLetterA,       U_LatinSmallLetterE        },  /* 0x00E6 */
+   { U_LatinSmallLetterEWithDiaeresis,            U_LatinSmallLetterE,       U_LatinSmallLetterE        },  /* 0x00EB */
+   { U_LatinSmallLetterIWithDiaeresis,            U_LatinSmallLetterI,       U_LatinSmallLetterE        },  /* 0x00EF */
+   { U_LatinSmallLetterOWithDiaeresis,            U_LatinSmallLetterO,       U_LatinSmallLetterE        },  /* 0x00F6 */
+   { U_LatinSmallLetterOSlash,                    U_LatinSmallLetterO,       U_LatinSmallLetterE        },  /* 0x00F8 */
+   { U_LatinSmallLetterUWithDiaeresis,            U_LatinSmallLetterU,       U_LatinSmallLetterE        },  /* 0x00FC */
+   { U_LatinSmallLetterYWithDiaeresis,            U_LatinSmallLetterY,       U_LatinSmallLetterE        },  /* 0x00FF */
+   { U_LatinCapitalLigatureIJ,                    U_LatinCapitalLetterI,     U_LatinCapitalLetterJ      },  /* 0x0132 */
+   { U_LatinSmallLigatureIJ,                      U_LatinSmallLetterI,       U_LatinSmallLetterJ        },  /* 0x0133 */
+   { U_LatinCapitalLigatureOE,                    U_LatinCapitalLetterO,     U_LatinCapitalLetterE      },  /* 0x0152 */
+   { U_LatinSmallLigatureOE,                      U_LatinSmallLetterO,       U_LatinSmallLetterE        },  /* 0x0153 */
+   { U_LatinCapitalLetterUWithRingAbove,          U_LatinCapitalLetterU,     U_LatinCapitalLetterO      },  /* 0x016E */
+   { U_LatinSmallLetterUWithRingAbove,            U_LatinSmallLetterU,       U_LatinSmallLetterO        },  /* 0x016F */
+   { U_LatinCapitalLetterYWithDiaeresis,          U_LatinCapitalLetterY,     U_LatinCapitalLetterE      },  /* 0x0178 */
+   { U_LatinSmallLetterHV,                        U_LatinSmallLetterH,       U_LatinSmallLetterV        },  /* 0x0195 */
+   { U_LatinCapitalLetterOI,                      U_LatinCapitalLetterO,     U_LatinCapitalLetterI      },  /* 0x01A2 */
+   { U_LatinSmallLetterOI,                        U_LatinSmallLetterO,       U_LatinSmallLetterI        },  /* 0x01A3 */
+   { U_LatinLetterYR,                             U_LatinSmallLetterY,       U_LatinCapitalLetterR      },  /* 0x01A6 */
+   { U_LatinCapitalLetterLJ,                      U_LatinCapitalLetterL,     U_LatinCapitalLetterJ      },  /* 0x01C7 */
+   { U_LatinCapitalLetterLWithSmallLetterJ,       U_LatinCapitalLetterL,     U_LatinSmallLetterJ        },  /* 0x01C8 */
+   { U_LatinSmallLetterLJ,                        U_LatinSmallLetterL,       U_LatinSmallLetterJ        },  /* 0x01C9 */
+   { U_LatinCapitalLetterNJ,                      U_LatinCapitalLetterN,     U_LatinCapitalLetterJ      },  /* 0x01CA */
+   { U_LatinCapitalLetterNWithSmallLetterJ,       U_LatinCapitalLetterN,     U_LatinSmallLetterJ        },  /* 0x01CB */
+   { U_LatinSmallLetterNJ,                        U_LatinSmallLetterN,       U_LatinSmallLetterJ        },  /* 0x01CC */
+   { U_LatinCapitalLetterUWithDiaeresisAndMacron, U_LatinCapitalLetterU,     U_LatinCapitalLetterE      },  /* 0x01D5 */
+   { U_LatinSmallLetterUWithDiaeresisAndMacron,   U_LatinSmallLetterU,       U_LatinSmallLetterE        },  /* 0x01D6 */
+   { U_LatinCapitalLetterUWithDiaeresisAndCaron,  U_LatinCapitalLetterU,     U_LatinCapitalLetterE      },  /* 0x01D9 */
+   { U_LatinSmallLetterUWithDiaeresisAndCaron,    U_LatinSmallLetterU,       U_LatinSmallLetterE        },  /* 0x01DA */
+   { U_LatinCapitalLetterAWithDiaeresisAndMacron, U_LatinCapitalLetterA,     U_LatinCapitalLetterE      },  /* 0x01DE */
+   { U_LatinSmallLetterAWithDiaeresisAndMacron,   U_LatinSmallLetterA,       U_LatinSmallLetterE        },  /* 0x01DF */
+   { U_LatinCapitalLetterDZ,                      U_LatinCapitalLetterD,     U_LatinCapitalLetterZ      },  /* 0x01F1 */
+   { U_LatinCapitalLetterDWithSmallLetterZ,       U_LatinCapitalLetterD,     U_LatinSmallLetterZ        },  /* 0x01F2 */
+   { U_LatinSmallLetterDZ,                        U_LatinSmallLetterD,       U_LatinSmallLetterZ        },  /* 0x01F3 */
+   { U_LatinCapitalLetterOU,                      U_LatinCapitalLetterO,     U_LatinCapitalLetterU      },  /* 0x0222 */
+   { U_LatinSmallLetterOU,                        U_LatinSmallLetterO,       U_LatinSmallLetterU        },  /* 0x0223 */
+   { U_LatinCapitalLetterOWithDiaeresisAndMacron, U_LatinCapitalLetterO,     U_LatinCapitalLetterE      },  /* 0x022A */
+   { U_LatinSmallLetterOWithDiaeresisAndMacron,   U_LatinSmallLetterO,       U_LatinSmallLetterE        },  /* 0x022B */
+
+   { U_CyrillicCapitalLigatureEnGhe,              U_CyrillicCapitalLetterEn, U_CyrillicCapitalLetterGhe },  /* 0x04A4 */
+   { U_CyrillicSmallLigatureEnGhe,                U_CyrillicSmallLetterEn,   U_CyrillicSmallLetterGhe   },  /* 0x04A5 */
+   { U_CyrillicCapitalLigatureTeTse,              U_CyrillicCapitalLetterTe, U_CyrillicCapitalLetterTse },  /* 0x04B4 */
+   { U_CyrillicSmallLigatureTeTse,                U_CyrillicSmallLetterTe,   U_CyrillicSmallLetterTse   },  /* 0x04B5 */
+   { U_CyrillicCapitalLigatureAIe,                U_CyrillicCapitalLetterA,  U_CyrillicCapitalLetterIe  },  /* 0x04D4 */
+   { U_CyrillicSmallLigatureAIe,                  U_CyrillicSmallLetterA,    U_CyrillicSmallLetterIe    },  /* 0x04D5 */
+   
+   { U_LatinSmallLigatureFF,                      U_LatinSmallLetterF,       U_LatinSmallLetterF        },  /* 0xFB00 */
+   { U_LatinSmallLigatureFI,                      U_LatinSmallLetterF,       U_LatinSmallLetterI        },  /* 0xFB01 */
+   { U_LatinSmallLigatureFL,                      U_LatinSmallLetterF,       U_LatinSmallLetterL        },  /* 0xFB02 */
+
+   { 0x0000,                                      U_NIL,                     U_NIL}                         /* list terminator */
 };
 
 
@@ -481,6 +494,7 @@ static unsigned   sort_CODE_UTF[][2] =    /* CODE_UTF */
    { U_LatinSmallLetterOWithDotAboveAndMacron      , U_LatinSmallLetterO   }, /* 0x0231 */
    { U_LatinCapitalLetterYWithMacron               , U_LatinCapitalLetterY }, /* 0x0232 */
    { U_LatinSmallLetterYWithMacron                 , U_LatinSmallLetterY   }, /* 0x0233 */
+   
    { 0x0000                                        , U_NIL                 }  /* list terminator */
 };
 
