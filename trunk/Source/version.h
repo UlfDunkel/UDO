@@ -46,6 +46,7 @@
 *    fd  Feb 12: comments reformatted
 *    fd  Feb 18: CODE_LAT2
 *    fd  Feb 19: CODE_CP1257
+*    fd  Feb 20: CODE_CP1251
 *
 ******************************************|************************************/
 
@@ -89,20 +90,21 @@
 
    /* --- Zeichensaetze --- */
 
-#define CODE_LAT1    0                    /* ISO Latin 1  (codepage 1252!) */
-#define CODE_DOS     1                    /* IBM PC                        */
+#define CODE_LAT1    0                    /* Microsoft Windows codepage 1252 aka ISO Latin 1 */
+#define CODE_DOS     1                    /* IBM PC */
 #define CODE_437     1                    /* DOS Codepage 437 (wie IBM PC) */
-#define CODE_TOS     2                    /* Atari ST                      */
-#define CODE_HP8     3                    /* HP-Roman-8                    */
-#define CODE_MAC     4                    /* Apple Macintosh               */
-#define CODE_NEXT    5                    /* NextSTep                      */
-#define CODE_850     6                    /* DOS Codepage 850              */
-#define CODE_UTF8    7                    /* UTF-8 (e.g. for BeOS)         */
-#define CODE_CP1250  8                    /* Windows codepage 1250         */
-#define CODE_LAT2    9                    /* ISO Latin 2 (iso-8859-2)      */
+#define CODE_TOS     2                    /* Atari TOS */
+#define CODE_HP8     3                    /* Hewlett Packard Roman-8 */
+#define CODE_MAC     4                    /* Apple Macintosh */
+#define CODE_NEXT    5                    /* NextSTep */
+#define CODE_850     6                    /* DOS Codepage 850 */
+#define CODE_UTF8    7                    /* UTF-8 (e.g. for BeOS) */
+#define CODE_CP1250  8                    /* Microsoft Windows codepage 1250 "CE" */
+#define CODE_LAT2    9                    /* ISO Latin 2 (iso-8859-2) */
 #define CODE_CP1257  10                   /* Microsoft Windows codepage 1257 "Baltic" */
+#define CODE_CP1251  11                   /* Microsoft Windows codepage 1251 "Russian" */
 
-#define CODE_TOTAL   11                   /* # of supported encodings */
+#define CODE_TOTAL   12                   /* # of supported encodings */
 
    /* --- Compiler- und systemabhaengige Dinge setzen --- */
 

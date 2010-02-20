@@ -52,6 +52,7 @@
 *                  CODE_LAT2
 *    fd  Feb 19: - CODE_CP1257
 *                - str_flatten() debugged for 1-byte encodings
+*    fd  Feb 20: CODE_CP1251
 *
 ******************************************|************************************/
 
@@ -1795,6 +1796,11 @@ char  *zeile)  /* ^ string */
       psort = sort_CODE_CP1250;
       break;
    
+   case CODE_CP1251:
+      plig = CODE_CP1251_lig;
+      psort = sort_CODE_CP1251;
+      break;
+   
    case CODE_CP1257:
       plig = CODE_CP1257_lig;
       psort = sort_CODE_CP1257;
@@ -1920,6 +1926,12 @@ char         *s2)           /* ^ 2nd string for comparison */
       plig = CODE_CP1250_lig;
       psort = sort_CODE_CP1250;
       pumap = u_CODE_CP1250;
+      break;
+   
+   case CODE_CP1251:
+      plig = CODE_CP1251_lig;
+      psort = sort_CODE_CP1251;
+      pumap = u_CODE_CP1251;
       break;
    
    case CODE_CP1257:

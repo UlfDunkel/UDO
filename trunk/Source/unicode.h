@@ -38,6 +38,7 @@
 *    fd  Feb 15: - 25A0-25FF completed
 *                - 2580-259F completed
 *    fd  Feb 16: tiny adjustments
+*    fd  Feb 19: 0400-04FF: Cyrillic
 *
 ******************************************|************************************/
 /*KEY _NAME="unicode definitions" */
@@ -1005,6 +1006,280 @@
 
 
    /* ------ 0400-04FF: Cyrillic ------ */
+
+   /*        Cyrillic extensions: */
+#define U_CyrillicCapitalLetterIeWithGrave              0x0400
+#define U_CyrillicCapitalLetterIo                       0x0401
+#define U_CyrillicCapitalLetterDje                      0x0402
+#define U_CyrillicCapitalLetterGje                      0x0403
+#define U_CyrillicCapitalLetterUkrainianIe              0x0404
+#define U_CyrillicCapitalLetterDze                      0x0405
+#define U_CyrillicCapitalLetterByelorussianUkrainianI   0x0406
+#define U_CyrillicCapitalLetterYi                       0x0407
+#define U_CyrillicCapitalLetterJe                       0x0408
+#define U_CyrillicCapitalLetterLje                      0x0409
+#define U_CyrillicCapitalLetterNje                      0x040A
+#define U_CyrillicCapitalLetterTshe                     0x040B
+#define U_CyrillicCapitalLetterKje                      0x040C
+#define U_CyrillicCapitalLetterIWithGrave               0x040D
+#define U_CyrillicCapitalLetterShortU                   0x040E
+#define U_CyrillicCapitalLetterDzhe                     0x040F
+
+   /*        Basic Russian alphabet: */
+#define U_CyrillicCapitalLetterA                        0x0410
+#define U_CyrillicCapitalLetterBe                       0x0411
+#define U_CyrillicCapitalLetterVe                       0x0412
+#define U_CyrillicCapitalLetterGhe                      0x0413
+#define U_CyrillicCapitalLetterDe                       0x0414
+#define U_CyrillicCapitalLetterIe                       0x0415
+#define U_CyrillicCapitalLetterZhe                      0x0416
+#define U_CyrillicCapitalLetterZe                       0x0417
+#define U_CyrillicCapitalLetterI                        0x0418
+#define U_CyrillicCapitalLetterShortI                   0x0419
+#define U_CyrillicCapitalLetterKa                       0x041A
+#define U_CyrillicCapitalLetterEl                       0x041B
+#define U_CyrillicCapitalLetterEm                       0x041C
+#define U_CyrillicCapitalLetterEn                       0x041D
+#define U_CyrillicCapitalLetterO                        0x041E
+#define U_CyrillicCapitalLetterPe                       0x041F
+#define U_CyrillicCapitalLetterEr                       0x0420
+#define U_CyrillicCapitalLetterEs                       0x0421
+#define U_CyrillicCapitalLetterTe                       0x0422
+#define U_CyrillicCapitalLetterU                        0x0423
+#define U_CyrillicCapitalLetterEf                       0x0424
+#define U_CyrillicCapitalLetterHa                       0x0425
+#define U_CyrillicCapitalLetterTse                      0x0426
+#define U_CyrillicCapitalLetterChe                      0x0427
+#define U_CyrillicCapitalLetterSha                      0x0428
+#define U_CyrillicCapitalLetterShcha                    0x0429
+#define U_CyrillicCapitalLetterHardSign                 0x042A
+#define U_CyrillicCapitalLetterYeru                     0x042B
+#define U_CyrillicCapitalLetterSoftSign                 0x042C
+#define U_CyrillicCapitalLetterE                        0x042D
+#define U_CyrillicCapitalLetterYu                       0x042E
+#define U_CyrillicCapitalLetterYa                       0x042F
+
+#define U_CyrillicSmallLetterA                          0x0430
+#define U_CyrillicSmallLetterBe                         0x0431
+#define U_CyrillicSmallLetterVe                         0x0432
+#define U_CyrillicSmallLetterGhe                        0x0433
+#define U_CyrillicSmallLetterDe                         0x0434
+#define U_CyrillicSmallLetterIe                         0x0435
+#define U_CyrillicSmallLetterZhe                        0x0436
+#define U_CyrillicSmallLetterZe                         0x0437
+#define U_CyrillicSmallLetterI                          0x0438
+#define U_CyrillicSmallLetterShortI                     0x0439
+#define U_CyrillicSmallLetterKa                         0x043A
+#define U_CyrillicSmallLetterEl                         0x043B
+#define U_CyrillicSmallLetterEm                         0x043C
+#define U_CyrillicSmallLetterEn                         0x043D
+#define U_CyrillicSmallLetterO                          0x043E
+#define U_CyrillicSmallLetterPe                         0x043F
+#define U_CyrillicSmallLetterEr                         0x0440
+#define U_CyrillicSmallLetterEs                         0x0441
+#define U_CyrillicSmallLetterTe                         0x0442
+#define U_CyrillicSmallLetterU                          0x0443
+#define U_CyrillicSmallLetterEf                         0x0444
+#define U_CyrillicSmallLetterHa                         0x0445
+#define U_CyrillicSmallLetterTse                        0x0446
+#define U_CyrillicSmallLetterChe                        0x0447
+#define U_CyrillicSmallLetterSha                        0x0448
+#define U_CyrillicSmallLetterShcha                      0x0449
+#define U_CyrillicSmallLetterHardSign                   0x044A
+#define U_CyrillicSmallLetterYeru                       0x044B
+#define U_CyrillicSmallLetterSoftSign                   0x044C
+#define U_CyrillicSmallLetterE                          0x044D
+#define U_CyrillicSmallLetterYu                         0x044E
+#define U_CyrillicSmallLetterYa                         0x044F
+
+   /*        Cyrillic extensions: */
+#define U_CyrillicSmallLetterIeWithGrave                0x0450
+#define U_CyrillicSmallLetterIo                         0x0451
+#define U_CyrillicSmallLetterDje                        0x0452
+#define U_CyrillicSmallLetterGje                        0x0453
+#define U_CyrillicSmallLetterUkrainianIe                0x0454
+#define U_CyrillicSmallLetterDze                        0x0455
+#define U_CyrillicSmallLetterByelorussianUkrainianI     0x0456
+#define U_CyrillicSmallLetterYi                         0x0457
+#define U_CyrillicSmallLetterJe                         0x0458
+#define U_CyrillicSmallLetterLje                        0x0459
+#define U_CyrillicSmallLetterNje                        0x045A
+#define U_CyrillicSmallLetterTshe                       0x045B
+#define U_CyrillicSmallLetterKje                        0x045C
+#define U_CyrillicSmallLetterIWithGrave                 0x045D
+#define U_CyrillicSmallLetterShortU                     0x045E
+#define U_CyrillicSmallLetterDzhe                       0x045F
+
+   /*        Cyrillic extensions: */
+#define U_CyrillicCapitalLetterOmega                    0x0460
+#define U_CyrillicSmallLetterOmega                      0x0461
+#define U_CyrillicCapitalLetterYat                      0x0462
+#define U_CyrillicSmallLetterYat                        0x0463
+#define U_CyrillicCapitalLetterIotifiedE                0x0464
+#define U_CyrillicSmallLetterIotifiedE                  0x0465
+#define U_CyrillicCapitalLetterLittleYus                0x0466
+#define U_CyrillicSmallLetterLittleYus                  0x0467
+#define U_CyrillicCapitalLetterIotifiedLittleYus        0x0468
+#define U_CyrillicSmallLetterIotifiedLittleYus          0x0469
+#define U_CyrillicCapitalLetterBigYus                   0x046A
+#define U_CyrillicSmallLetterBigYus                     0x046B
+#define U_CyrillicCapitalLetterIotifiedBigYus           0x046C
+#define U_CyrillicSmallLetterIotifiedBigYus             0x046D
+#define U_CyrillicCapitalLetterKsi                      0x046E
+#define U_CyrillicSmallLetterKsi                        0x046F
+#define U_CyrillicCapitalLetterPsi                      0x0470
+#define U_CyrillicSmallLetterPsi                        0x0471
+#define U_CyrillicCapitalLetterFita                     0x0472
+#define U_CyrillicSmallLetterFita                       0x0473
+#define U_CyrillicCapitalLetterIzhitsa                  0x0474
+#define U_CyrillicSmallLetterIzhitsa                    0x0475
+#define U_CyrillicCapitalLetterIzhitsaWithDoubleGraveAccent    0x0476
+#define U_CyrillicSmallLetterIzhitsaWithDoubleGraveAccent      0x0477
+#define U_CyrillicCapitalLetterUk                       0x0478
+#define U_CyrillicSmallLetterUk                         0x0479
+#define U_CyrillicCapitalLetterRoundOmega               0x047A
+#define U_CyrillicSmallLetterRoundOmega                 0x047B
+#define U_CyrillicCapitalLetterOmegaWithTitlo           0x047C
+#define U_CyrillicSmallLetterOmegaWithTitlo             0x047D
+#define U_CyrillicCapitalLetterOt                       0x047E
+#define U_CyrillicSmallLetterOt                         0x047F
+#define U_CyrillicCapitalLetterKoppa                    0x0480
+#define U_CyrillicSmallLetterKoppa                      0x0481
+
+   /*        Cyrillic extensions: */
+#define U_CyrillicThousandsSign                         0x0482
+#define U_CombiningCyrillicTitlo                        0x0483
+#define U_CombiningCyrillicPalatalization               0x0484
+#define U_CombiningCyrillicDasiaPneumata                0x0485
+#define U_CombiningCyrillicPsiliPneumata                0x0486
+#define U_CombiningCyrillicPokrytie                     0x0487
+#define U_CombiningCyrillicHundredThousandsSign         0x0488
+#define U_CombiningCyrillicMillionsSign                 0x0489
+
+   /*        Extended Cyrillic: */
+#define U_CyrillicCapitalLetterShortIWithTail           0x048A
+#define U_CyrillicSmallLetterShortIWithTail             0x048B
+#define U_CyrillicCapitalLetterSemisoftSign             0x048C
+#define U_CyrillicSmallLetterSemisoftSign               0x048D
+#define U_CyrillicCapitalLetterErWithTick               0x048E
+#define U_CyrillicSmallLetterErWithTick                 0x048F
+#define U_CyrillicCapitalLetterGheWithUpturn            0x0490
+#define U_CyrillicSmallLetterGheWithUpturn              0x0491
+#define U_CyrillicCapitalLetterGheWithStroke            0x0492
+#define U_CyrillicSmallLetterGheWithStroke              0x0493
+#define U_CyrillicCapitalLetterGheWithMiddleHook        0x0494
+#define U_CyrillicSmallLetterGheWithMiddleHook          0x0495
+#define U_CyrillicCapitalLetterZheWithDescender         0x0496
+#define U_CyrillicSmallLetterZheWithDescender           0x0497
+#define U_CyrillicCapitalLetterZeWithDescender          0x0498
+#define U_CyrillicSmallLetterZeWithDescender            0x0499
+#define U_CyrillicCapitalLetterKaWithDescender          0x049A
+#define U_CyrillicSmallLetterKaWithDescender            0x049B
+#define U_CyrillicCapitalLetterKaWithVerticalStroke     0x049C
+#define U_CyrillicSmallLetterKaWithVerticalStroke       0x049D
+#define U_CyrillicCapitalLetterKaWithStroke             0x049E
+#define U_CyrillicSmallLetterKaWithStroke               0x049F
+#define U_CyrillicCapitalLetterBashkirKa                0x04A0
+#define U_CyrillicSmallLetterBashkirKa                  0x04A1
+#define U_CyrillicCapitalLetterEnWithDescender          0x04A2
+#define U_CyrillicSmallLetterEnWithDescender            0x04A3
+#define U_CyrillicCapitalLigatureEnGhe                  0x04A4
+#define U_CyrillicSmallLigatureEnGhe                    0x04A5
+#define U_CyrillicCapitalLetterPeWithMiddleHook         0x04A6
+#define U_CyrillicSmallLetterPeWithMiddleHook           0x04A7
+#define U_CyrillicCapitalLetterAbkhasianHa              0x04A8
+#define U_CyrillicSmallLetterAbkhasianHa                0x04A9
+#define U_CyrillicCapitalLetterEsWithDescender          0x04AA
+#define U_CyrillicSmallLetterEsWithDescender            0x04AB
+#define U_CyrillicCapitalLetterTeWithDescender          0x04AC
+#define U_CyrillicSmallLetterTeWithDescender            0x04AD
+#define U_CyrillicCapitalLetterStraightU                0x04AE
+#define U_CyrillicSmallLetterStraightU                  0x04AF
+#define U_CyrillicCapitalLetterStraightUWithStroke      0x04B0
+#define U_CyrillicSmallLetterStraightUWithStroke        0x04B1
+#define U_CyrillicCapitalLetterHaWithDescender          0x04B2
+#define U_CyrillicSmallLetterHaWithDescender            0x04B3
+#define U_CyrillicCapitalLigatureTeTse                  0x04B4
+#define U_CyrillicSmallLigatureTeTse                    0x04B5
+#define U_CyrillicCapitalLetterCheWithDescender         0x04B6
+#define U_CyrillicSmallLetterCheWithDescender           0x04B7
+#define U_CyrillicCapitalLetterCheWithVerticalStroke    0x04B8
+#define U_CyrillicSmallLetterCheWithVerticalStroke      0x04B9
+#define U_CyrillicCapitalLetterShha                     0x04BA
+#define U_CyrillicSmallLetterShha                       0x04BB
+#define U_CyrillicCapitalLetterAbkhasianChe             0x04BC
+#define U_CyrillicSmallLetterAbkhasianChe               0x04BD
+#define U_CyrillicCapitalLetterAbkhasianCheWithDescender    0x04BE
+#define U_CyrillicSmallLetterAbkhasianCheWithDescender      0x04BF
+
+#define U_CyrillicLetterPalochka                        0x04C0
+#define U_CyrillicCapitalLetterZheWithBreve             0x04C1
+#define U_CyrillicSmallLetterZheWithBreve               0x04C2
+#define U_CyrillicCapitalLetterKaWithHook               0x04C3
+#define U_CyrillicSmallLetterKaWithHook                 0x04C4
+#define U_CyrillicCapitalLetterElWithTail               0x04C5
+#define U_CyrillicSmallLetterElWithTail                 0x04C6
+#define U_CyrillicCapitalLetterEnWithHook               0x04C7
+#define U_CyrillicSmallLetterEnWithHook                 0x04C8
+#define U_CyrillicCapitalLetterEnWithTail               0x04C9
+#define U_CyrillicSmallLetterEnWithTail                 0x04CA
+#define U_CyrillicCapitalLetterKhakassianChe            0x04CB
+#define U_CyrillicSmallLetterKhakassianChe              0x04CC
+#define U_CyrillicCapitalLetterEmWithTail               0x04CD
+#define U_CyrillicSmallLetterEmWithTail                 0x04CE
+#define U_CyrillicSmallLetterPalochka                   0x04CF
+#define U_CyrillicCapitalLetterAWithBreve               0x04D0
+#define U_CyrillicSmallLetterAWithBreve                 0x04D1
+#define U_CyrillicCapitalLetterAWithDiaeresis           0x04D2
+#define U_CyrillicSmallLetterAWithDiaeresis             0x04D3
+#define U_CyrillicCapitalLigatureAIe                    0x04D4
+#define U_CyrillicSmallLigatureAIe                      0x04D5
+#define U_CyrillicCapitalLetterIeWithBreve              0x04D6
+#define U_CyrillicSmallLetterIeWithBreve                0x04D7
+#define U_CyrillicCapitalLetterSchwa                    0x04D8
+#define U_CyrillicSmallLetterSchwa                      0x04D9
+#define U_CyrillicCapitalLetterSchwaWithDiaeresis       0x04DA
+#define U_CyrillicSmallLetterSchwaWithDiaeresis         0x04DB
+#define U_CyrillicCapitalLetterZheWithDiaeresis         0x04DC
+#define U_CyrillicSmallLetterZheWithDiaeresis           0x04DD
+#define U_CyrillicCapitalLetterZeWithDiaeresis          0x04DE
+#define U_CyrillicSmallLetterZeWithDiaeresis            0x04DF
+#define U_CyrillicCapitalLetterAbkhasianDze             0x04E0
+#define U_CyrillicSmallLetterAbkhasianDze               0x04E1
+#define U_CyrillicCapitalLetterIWithMacron              0x04E2
+#define U_CyrillicSmallLetterIWithMacron                0x04E3
+#define U_CyrillicCapitalLetterIWithDiaeresis           0x04E4
+#define U_CyrillicSmallLetterIWithDiaeresis             0x04E5
+#define U_CyrillicCapitalLetterOWithDiaeresis           0x04E6
+#define U_CyrillicSmallLetterOWithDiaeresis             0x04E7
+#define U_CyrillicCapitalLetterBarredO                  0x04E8
+#define U_CyrillicSmallLetterBarredO                    0x04E9
+#define U_CyrillicCapitalLetterBarredOWithDiaeresis     0x04EA
+#define U_CyrillicSmallLetterBarredOWithDiaeresis       0x04EB
+#define U_CyrillicCapitalLetterEwithDiaeresis           0x04EC
+#define U_CyrillicSmallLetterEwithDiaeresis             0x04ED
+#define U_CyrillicCapitalLetterUWithMacron              0x04EE
+#define U_CyrillicSmallLetterUWithMacron                0x04EF
+#define U_CyrillicCapitalLetterUWithDiaeresis           0x04F0
+#define U_CyrillicSmallLetterUWithDiaeresis             0x04F1
+#define U_CyrillicCapitalLetterUWithDoubleAcute         0x04F2
+#define U_CyrillicSmallLetterUWithDoubleAcute           0x04F3
+#define U_CyrillicCapitalLetterCheWithDiaeresis         0x04F4
+#define U_CyrillicSmallLetterCheWithDiaeresis           0x04F5
+#define U_CyrillicCapitalLetterGheWithDescender         0x04F6
+#define U_CyrillicSmallLetterGheWithDescender           0x04F7
+#define U_CyrillicCapitalLetterYeruWithDiaeresis        0x04F8
+#define U_CyrillicSmallLetterYeruWithDiaeresis          0x04F9
+
+   /*        Additions for Nivkh: */
+#define U_CyrillicCapitalLetterGheWithStrokeAndHook     0x04FA
+#define U_CyrillicSmallLetterGheWithStrokeAndHook       0x04FB
+#define U_CyrillicCapitalLetterHaWithHook               0x04FC
+#define U_CyrillicSmallLetterHaWithHook                 0x04FD
+#define U_CyrillicCapitalLetterHaWithStroke             0x04FE
+#define U_CyrillicSmallLetterHaWithStroke               0x04FF
+
+
    /* ------ 0500-052F: Cyrillic Supplementary ------ */
    /* ------ 0530-058F: Armenian ------ */
    /* ------ 0590-05FF: Hebrew ------ */
