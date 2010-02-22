@@ -75,7 +75,8 @@
 *                - uni2ascii() renamed -> recode_udo()
 *                - recode() debugged for UTF-8 -> 1-byte encoding
 *                - recode(): U_ReplacementCharacter or '*' for unsupported chars
-*    fd  Feb 20: CODE_CP1251
+*    fd  Feb 20: - CODE_CP1251
+*                - utf8_to_uchar()
 *
 ******************************************|************************************/
 
@@ -512,12 +513,6 @@ CHARTABLE   chrtab[][6] =                 /* sorted alphabetically ;-) */
 *
 ******************************************|************************************/
 
-   /* convert Unicode value into UTF-8 bytes */
-LOCAL char *bstr_to_utf8(unsigned ucode);
-
-   /* get char(s!) from Unicode value */
-LOCAL char *unicode2char(unsigned unicode);
-
    /* convert (UDO's) universal characters into miscellaneous encodings */
 LOCAL void uni2misc(char *s);
 
@@ -548,299 +543,6 @@ LOCAL void str2manunder(char *d, const char *s);
 *     LOCAL FUNCTIONS
 *
 ******************************************|************************************/
-
-/*******************************************************************************
-*
-*  bstr_to_utf8():
-*     convert Unicode value into UTF-8 bytes
-*
-*  Notes:
-*
-*     Table 3-6. UTF-8 Bit Distribution (source: www.unicode.org)
-*     ------------------------------------------------------------------
-*     Scalar Value                1st Byte  2nd Byte  3rd Byte  4th Byte
-*     00000000 0xxxxxxx           0xxxxxxx
-*     00000yyy yyxxxxxx           110yyyyy  10xxxxxx
-*     zzzzyyyy yyxxxxxx           1110zzzz  10yyyyyy  10xxxxxx
-*     000uuuuu zzzzyyyy yyxxxxxx  11110uuu  10uuzzzz  10yyyyyy  10xxxxxx
-*     ------------------------------------------------------------------
-*
-*  Mnemonic of bit map:
-*     0nnnnnnn = single-byte char                (00 .. 7F)
-*     10nnnnnn = following byte in a n-byte char (80 .. BF)
-*     110nnnnn = first byte of a 2-byte char     (C0 .. DF)
-*     1110nnnn = first byte of a 3-byte char     (E0 .. EF)
-*     11110nnn = first byte of a 4-byte char     (F0 .. F7)
-*
-*  General source found at:
-*     http://www.codeguru.com/forum/archive/index.php/t-288665.html
-*
-*  Return:
-*     ???
-*
-******************************************|************************************/
-
-
-LOCAL char *bstr_to_utf8(
-
-unsigned           ucode)
-{
-   char            utf[9];
-   unsigned long   temp;
-   
-   
-   memset(utf,0,9);                       /* clear buffer */
-   temp = (unsigned long)ucode;
-   
-   if (temp < 0x0080)                     /* 0000 0000-0000 007F -> 0xxxxxxx */
-   {
-      utf[0] = temp;
-   }
-   else if (temp < 0x0800)                /* 0000 0080-0000 07FF -> 110xxxxx 10xxxxxx */
-   {
-      utf[0] = (0xC0 | (temp >> 6));
-      utf[1] = (0x80 | (temp & 0x3F));
-   }
-   else if (temp <= 0xFFFF)               /* 0000 0800-0000 FFFF -> 1110xxxx 10xxxxxx 10xxxxxx */
-   {
-      utf[0] = (0xE0 | (temp >> 12));
-      utf[1] = (0x80 | ((temp >> 6) & 0x3F));
-      utf[2] = (0x80 | (temp & 0x3F));
-   }
-
-#if 0
-   /* fd:2010-02-17: faded, because UNICODE.H does not define Unicode constants > 0xFFFF yet! */
-
-   else if (temp < 0x00200000)            /* 0001 0000-001F FFFF -> 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx */
-   {
-      utf[0] = (0xF0 | (temp >> 18));
-      utf[1] = (0x80 | ((temp >> 12) & 0x3F));
-      utf[2] = (0x80 | ((temp >> 6) & 0x3F));
-      utf[3] = (0x80 | (temp & 0x3F));
-   }
-#endif  /* #if 0 */
-
-#if 0
-   /* fd:2010-02-17: faded, because UTF-8 cannot have more than 4 bytes! */
-   
-   else if (temp < 0x04000000)            /* 0020 0000-03FF FFFF 111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx */
-   {
-      utf[0] = (0xF8 | (temp >> 24)));
-      utf[1] = (0x80 | ((temp >> 18) & 0x3F)));
-      utf[2] = (0x80 | ((temp >> 12) & 0x3F)));
-      utf[3] = (0x80 | ((temp >> 6) & 0x3F)));
-      utf[4] = (0x80 | (temp & 0x3F)));
-   }
-   else if (temp < 0x80000000)            /* 0400 0000-7FFF FFFF 1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx */
-   {
-      utf[0] = (0xFC | (temp >> 30)));
-      utf[1] = (0x80 | ((temp >> 24) & 0x3F)));
-      utf[2] = (0x80 | ((temp >> 18) & 0x3F)));
-      utf[3] = (0x80 | ((temp >> 12) & 0x3F)));
-      utf[4] = (0x80 | ((temp >> 6) & 0x3F)));
-      utf[5] = (0x80 | (temp & 0x3F)));
-   }
-#endif  /* #if 0 */
-
-   return utf;                            /* return a null-terminated string */
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  utf8_to_bstr():
-*     convert UTF-8 bytes into Unicode value
-*
-*  Notes:
-*     see bstr_to_utf8()
-*
-*  Return:
-*     ???
-*
-******************************************|************************************/
-
-GLOBAL unsigned utf8_to_bstr(
-
-const char   *sz, 
-int           len)
-{
-   int        i = 0;
-   unsigned   temp;
-   
-   
-   while (i < len)
-   {
-      if ((sz[i] & 0x80) == 0)            /* 0000 0000-0000 007F 0xxxxxxx */
-      {
-         temp = sz[i];
-         ++i;
-      }
-      else if ((sz[i] & 0xE0) == 0xC0)    /* 0000 0080-0000 07FF 110xxxxx 10xxxxxx */
-      {
-         temp = (sz[i] & 0x1F);
-         temp <<= 6;
-         temp += (sz[i + 1] & 0x3F);
-         i += 2;
-      }
-      else if ((sz[i] & 0xF0) == 0xE0)    /* 0000 0800-0000 FFFF 1110xxxx 10xxxxxx 10xxxxxx */
-      {
-         temp = (sz[i] & 0x0F);
-         temp <<= 6;
-         temp += (sz[i + 1] & 0x3F);
-         temp <<= 6;
-         temp += (sz[i + 2] & 0x3F);
-         i += 3;
-      }
-      else if ((sz[i] & 0xF8) == 0xF0)    /* 0001 0000-001F FFFF 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx */
-      {
-         temp = (sz[i] & 0x07);
-         temp <<= 6;
-         temp += (sz[i + 1] & 0x3F);
-         temp <<= 6;
-         temp += (sz[i + 2] & 0x3F);
-         temp <<= 6;
-         temp += (sz[i + 3] & 0x3F);
-         i += 4;
-      }
-
-#if 0
-   /* fd:2010-02-17: faded for now */
-
-      else if ((sz[i] & 0xFC) == 0xF8)    /* 0020 0000-03FF FFFF 111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx */
-      {
-         temp = (sz[i] & 0x03);
-         temp <<= 6;
-         temp += (sz[i + 1] & 0x3F);
-         temp <<= 6;
-         temp += (sz[i + 2] & 0x3F);
-         temp <<= 6;
-         temp += (sz[i + 3] & 0x3F);
-         temp <<= 6;
-         temp += (sz[i + 4] & 0x3F);
-         i += 5;
-      }
-      else if ((sz[i] & 0xFE) == 0xFC)    /* 0400 0000-7FFF FFFF 1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx */
-      {
-         temp = (sz[i] & 0x01);
-         temp <<= 6;
-         temp += (sz[i + 1] & 0x3F);
-         temp <<= 6;
-         temp += (sz[i + 2] & 0x3F);
-         temp <<= 6;
-         temp += (sz[i + 3] & 0x3F);
-         temp <<= 6;
-         temp += (sz[i + 4] & 0x3F);
-         temp <<= 6;
-         temp += (sz[i + 5] & 0x3F);
-         i += 6;
-      }
-#endif   /* #if 0 */
-
-      else
-      {
-         temp = '?';
-      }
-   }
-   
-   return temp;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  unicode2chars():
-*     get char(s!) from Unicode value
-*
-*  return:
-*     ^ string with char(s)
-*
-******************************************|************************************/
-
-LOCAL char *unicode2char(
-
-unsigned   unicode)     /* ^ 1st string for comparison */
-{
-   int        i = 0;    /* counter */
-   unsigned (*pumap);   /* ^ to u_CODE_xxx[] arrays */
-   char       cbuf[8];  /* */
-   
-            
-   if (unicode == U_NIL)                  /* nothing to do */
-      return "";
-   
-   if (iEncodingTarget == CODE_UTF8)      /* Unicode first! */
-      return bstr_to_utf8(unicode);
-   
-
-   switch (iEncodingTarget)               /* use the right tables! ;-) */
-   {
-   case CODE_437:
-      pumap = u_CODE_437;
-      break;
-   
-   case CODE_850:
-      pumap = u_CODE_850;
-      break;
-   
-   case CODE_CP1250:
-      pumap = u_CODE_CP1250;
-      break;
-   
-   case CODE_CP1251:
-      pumap = u_CODE_CP1251;
-      break;
-   
-   case CODE_CP1257:
-      pumap = u_CODE_CP1257;
-      break;
-   
-   case CODE_HP8:
-      pumap = u_CODE_HP8;
-      break;
-   
-   case CODE_LAT2:
-      pumap = u_CODE_LAT2;
-      break;
-   
-   case CODE_MAC:
-      pumap = u_CODE_MAC;
-      break;
-   
-   case CODE_NEXT:
-      pumap = u_CODE_NEXT;
-      break;
-   
-   case CODE_TOS:
-      pumap = u_CODE_TOS;
-      break;
-   
-   case CODE_LAT1:
-   default:
-      pumap = u_CODE_LAT1;
-   }
-   
-   for (i = 128; i < 256; i++)
-   {
-      if (pumap[i] == unicode)            /* found! */
-      {
-         cbuf[0] = i;                     /* compose string */
-         cbuf[1] = EOS;
-         return cbuf;
-      }
-   }   
-
-   return "";
-}
-
-
-
-
 
 /*******************************************************************************
 *
@@ -1004,6 +706,405 @@ int    char_set)  /* isn't this identical to iCharset??? */
 
 /*******************************************************************************
 *
+*  unicode2chars():
+*     get char(s!) from Unicode value
+*
+*  return:
+*     ^ string with char(s)
+*
+******************************************|************************************/
+
+GLOBAL char *unicode2char(
+
+unsigned   unicode)     /* ^ 1st string for comparison */
+{
+   int        i = 0;    /* counter */
+   unsigned (*pumap);   /* ^ to u_CODE_xxx[] arrays */
+   char       cbuf[8];  /* */
+   
+            
+   if (unicode == U_NIL)                  /* nothing to do */
+      return "";
+   
+   if (iEncodingTarget == CODE_UTF8)      /* Unicode first! */
+      return bstr_to_utf8(unicode);
+   
+
+   switch (iEncodingTarget)               /* use the right tables! ;-) */
+   {
+   case CODE_437:
+      pumap = u_CODE_437;
+      break;
+   
+   case CODE_850:
+      pumap = u_CODE_850;
+      break;
+   
+   case CODE_CP1250:
+      pumap = u_CODE_CP1250;
+      break;
+   
+   case CODE_CP1251:
+      pumap = u_CODE_CP1251;
+      break;
+   
+   case CODE_CP1257:
+      pumap = u_CODE_CP1257;
+      break;
+   
+   case CODE_HP8:
+      pumap = u_CODE_HP8;
+      break;
+   
+   case CODE_LAT2:
+      pumap = u_CODE_LAT2;
+      break;
+   
+   case CODE_MAC:
+      pumap = u_CODE_MAC;
+      break;
+   
+   case CODE_NEXT:
+      pumap = u_CODE_NEXT;
+      break;
+   
+   case CODE_TOS:
+      pumap = u_CODE_TOS;
+      break;
+   
+   case CODE_LAT1:
+   default:
+      pumap = u_CODE_LAT1;
+   }
+   
+   for (i = 128; i < 256; i++)
+   {
+      if (pumap[i] == unicode)            /* found! */
+      {
+         cbuf[0] = i;                     /* compose string */
+         cbuf[1] = EOS;
+         return cbuf;
+      }
+   }   
+
+   return "";
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  utf8_to_bstr():
+*     convert UTF-8 bytes into Unicode codepoint value (known length of byte stream!)
+*
+*  Notes:
+*     see bstr_to_utf8()
+*
+*  Return:
+*     Unicode codepoint
+*
+******************************************|************************************/
+
+GLOBAL unsigned utf8_to_bstr(
+
+const char   *sz, 
+int           len)
+{
+   int        i = 0;
+   unsigned   temp;
+   
+   
+   while (i < len)
+   {
+      if ((sz[i] & 0x80) == 0)            /* 0000 0000-0000 007F 0xxxxxxx */
+      {
+         temp = sz[i];
+         ++i;
+      }
+      else if ((sz[i] & 0xE0) == 0xC0)    /* 0000 0080-0000 07FF 110xxxxx 10xxxxxx */
+      {
+         temp = (sz[i] & 0x1F);
+         temp <<= 6;
+         temp += (sz[i + 1] & 0x3F);
+         i += 2;
+      }
+      else if ((sz[i] & 0xF0) == 0xE0)    /* 0000 0800-0000 FFFF 1110xxxx 10xxxxxx 10xxxxxx */
+      {
+         temp = (sz[i] & 0x0F);
+         temp <<= 6;
+         temp += (sz[i + 1] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 2] & 0x3F);
+         i += 3;
+      }
+      else if ((sz[i] & 0xF8) == 0xF0)    /* 0001 0000-001F FFFF 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx */
+      {
+         temp = (sz[i] & 0x07);
+         temp <<= 6;
+         temp += (sz[i + 1] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 2] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 3] & 0x3F);
+         i += 4;
+      }
+
+#if 0
+   /* fd:2010-02-17: faded for now */
+
+      else if ((sz[i] & 0xFC) == 0xF8)    /* 0020 0000-03FF FFFF 111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx */
+      {
+         temp = (sz[i] & 0x03);
+         temp <<= 6;
+         temp += (sz[i + 1] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 2] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 3] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 4] & 0x3F);
+         i += 5;
+      }
+      else if ((sz[i] & 0xFE) == 0xFC)    /* 0400 0000-7FFF FFFF 1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx */
+      {
+         temp = (sz[i] & 0x01);
+         temp <<= 6;
+         temp += (sz[i + 1] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 2] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 3] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 4] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 5] & 0x3F);
+         i += 6;
+      }
+#endif   /* #if 0 */
+
+      else
+      {
+         temp = '?';
+      }
+   }
+   
+   return temp;
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  utf8_to_uchar():
+*     convert UTF-8 bytes into Unicode char (unknown length of byte stream)
+*
+*  Notes:
+*     see bstr_to_utf8()
+*
+*  Return:
+*     Unicode codepoint
+*
+******************************************|************************************/
+
+GLOBAL unsigned utf8_to_uchar(
+
+const char   *sz)
+{
+   int        i = 0;         /* ^ into string */
+   unsigned   temp;          /* buffer for Unicode codepoint value */
+   BOOLEAN    done = FALSE;  /* TRUE: 1st Unicode char found */
+   
+   
+   while (i < strlen(sz))                 /* whole string */
+   {
+      if ((sz[i] & 0x80) == 0)            /* 0000 0000-0000 007F 0xxxxxxx */
+      {
+         temp = sz[i];
+         done = TRUE;
+      }
+      else if ((sz[i] & 0xE0) == 0xC0)    /* 0000 0080-0000 07FF 110xxxxx 10xxxxxx */
+      {
+         temp = (sz[i] & 0x1F);
+         temp <<= 6;
+         temp += (sz[i + 1] & 0x3F);
+         done = TRUE;
+      }
+      else if ((sz[i] & 0xF0) == 0xE0)    /* 0000 0800-0000 FFFF 1110xxxx 10xxxxxx 10xxxxxx */
+      {
+         temp = (sz[i] & 0x0F);
+         temp <<= 6;
+         temp += (sz[i + 1] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 2] & 0x3F);
+         done = TRUE;
+      }
+      else if ((sz[i] & 0xF8) == 0xF0)    /* 0001 0000-001F FFFF 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx */
+      {
+         temp = (sz[i] & 0x07);
+         temp <<= 6;
+         temp += (sz[i + 1] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 2] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 3] & 0x3F);
+         done = TRUE;
+      }
+
+#if 0
+   /* fd:2010-02-17: faded for now */
+
+      else if ((sz[i] & 0xFC) == 0xF8)    /* 0020 0000-03FF FFFF 111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx */
+      {
+         temp = (sz[i] & 0x03);
+         temp <<= 6;
+         temp += (sz[i + 1] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 2] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 3] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 4] & 0x3F);
+         i += 5;
+      }
+      else if ((sz[i] & 0xFE) == 0xFC)    /* 0400 0000-7FFF FFFF 1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx */
+      {
+         temp = (sz[i] & 0x01);
+         temp <<= 6;
+         temp += (sz[i + 1] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 2] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 3] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 4] & 0x3F);
+         temp <<= 6;
+         temp += (sz[i + 5] & 0x3F);
+         i += 6;
+      }
+#endif   /* #if 0 */
+
+      else
+      {
+         temp = '?';
+         done = TRUE;
+      }
+      
+      if (done)
+         break;
+   }
+   
+   return temp;
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  bstr_to_utf8():
+*     convert Unicode value into UTF-8 bytes
+*
+*  Notes:
+*
+*     Table 3-6. UTF-8 Bit Distribution (source: www.unicode.org)
+*     ------------------------------------------------------------------
+*     Scalar Value                1st Byte  2nd Byte  3rd Byte  4th Byte
+*     00000000 0xxxxxxx           0xxxxxxx
+*     00000yyy yyxxxxxx           110yyyyy  10xxxxxx
+*     zzzzyyyy yyxxxxxx           1110zzzz  10yyyyyy  10xxxxxx
+*     000uuuuu zzzzyyyy yyxxxxxx  11110uuu  10uuzzzz  10yyyyyy  10xxxxxx
+*     ------------------------------------------------------------------
+*
+*  Mnemonic of bit map:
+*     0nnnnnnn = single-byte char                (00 .. 7F)
+*     10nnnnnn = following byte in a n-byte char (80 .. BF)
+*     110nnnnn = first byte of a 2-byte char     (C0 .. DF)
+*     1110nnnn = first byte of a 3-byte char     (E0 .. EF)
+*     11110nnn = first byte of a 4-byte char     (F0 .. F7)
+*
+*  General source found at:
+*     http://www.codeguru.com/forum/archive/index.php/t-288665.html
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
+
+GLOBAL char *bstr_to_utf8(
+
+unsigned           ucode)
+{
+   char            utf[9];
+   unsigned long   temp;
+   
+   
+   memset(utf,0,9);                       /* clear buffer */
+   temp = (unsigned long)ucode;
+   
+   if (temp < 0x0080)                     /* 0000 0000-0000 007F -> 0xxxxxxx */
+   {
+      utf[0] = temp;
+   }
+   else if (temp < 0x0800)                /* 0000 0080-0000 07FF -> 110xxxxx 10xxxxxx */
+   {
+      utf[0] = (0xC0 | (temp >> 6));
+      utf[1] = (0x80 | (temp & 0x3F));
+   }
+   else if (temp <= 0xFFFF)               /* 0000 0800-0000 FFFF -> 1110xxxx 10xxxxxx 10xxxxxx */
+   {
+      utf[0] = (0xE0 | (temp >> 12));
+      utf[1] = (0x80 | ((temp >> 6) & 0x3F));
+      utf[2] = (0x80 | (temp & 0x3F));
+   }
+
+#if 0
+   /* fd:2010-02-17: faded, because UNICODE.H does not define Unicode constants > 0xFFFF yet! */
+
+   else if (temp < 0x00200000)            /* 0001 0000-001F FFFF -> 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx */
+   {
+      utf[0] = (0xF0 | (temp >> 18));
+      utf[1] = (0x80 | ((temp >> 12) & 0x3F));
+      utf[2] = (0x80 | ((temp >> 6) & 0x3F));
+      utf[3] = (0x80 | (temp & 0x3F));
+   }
+#endif  /* #if 0 */
+
+#if 0
+   /* fd:2010-02-17: faded, because UTF-8 cannot have more than 4 bytes! */
+   
+   else if (temp < 0x04000000)            /* 0020 0000-03FF FFFF 111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx */
+   {
+      utf[0] = (0xF8 | (temp >> 24)));
+      utf[1] = (0x80 | ((temp >> 18) & 0x3F)));
+      utf[2] = (0x80 | ((temp >> 12) & 0x3F)));
+      utf[3] = (0x80 | ((temp >> 6) & 0x3F)));
+      utf[4] = (0x80 | (temp & 0x3F)));
+   }
+   else if (temp < 0x80000000)            /* 0400 0000-7FFF FFFF 1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx */
+   {
+      utf[0] = (0xFC | (temp >> 30)));
+      utf[1] = (0x80 | ((temp >> 24) & 0x3F)));
+      utf[2] = (0x80 | ((temp >> 18) & 0x3F)));
+      utf[3] = (0x80 | ((temp >> 12) & 0x3F)));
+      utf[4] = (0x80 | ((temp >> 6) & 0x3F)));
+      utf[5] = (0x80 | (temp & 0x3F)));
+   }
+#endif  /* #if 0 */
+
+   return utf;                            /* return a null-terminated string */
+}
+
+
+
+
+
+/*******************************************************************************
+*
 *  convert_sz():
 *     convert encoding of German ss ligature
 *
@@ -1107,6 +1208,7 @@ int           char_set)          /* iCharset */
    unsigned   i;                 /* counter */
    unsigned   (*psort);          /* ^ to sort_CODE_xxx[] arrays */
    unsigned   (*plig)[3];        /* ^ t CODE_xxx_lig[][] arrays (unused here so far!) */
+   BOOLEAN    found = FALSE;     /* TRUE: char found */
    
 
    if (iEncodingSource < 0)
@@ -1355,6 +1457,8 @@ int           char_set)          /* iCharset */
          {
             idx = utf8_to_bstr(cbuf,len); /* get Unicode */
 
+            found = FALSE;
+            
             for (i = 128; i < 256; i++)   /* check if target encoding supports this char */
             {
                if (pUtrg[i] == idx)
@@ -1362,17 +1466,17 @@ int           char_set)          /* iCharset */
                   cbuf[0] = i;            /* use char from THIS codepage slot! */
                   cbuf[1] = EOS;
                   strcat(sbuf,cbuf);
+                  found = TRUE;
                   break;
                }
             }
-                                          /* no valid character found */
-            if (idx < 256)
-               cbuf[0] = idx;             /* show strange char */
-            else
-               cbuf[0] = '*';             /* no ANSI character */
             
-            cbuf[1] = EOS;
-            strcat(sbuf,cbuf);
+            if (!found)                   /* no valid character found */
+            {
+               cbuf[0] = '*';             /* no ANSI character */
+               cbuf[1] = EOS;
+               strcat(sbuf,cbuf);
+            }
          }
       }
       
