@@ -1,47 +1,69 @@
-/*	############################################################
-	# @(#) file.h
-	# @(#)
-	# @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
-	# @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)
-	#
-	# This program is free software; you can redistribute it and/or
-	# modify it under the terms of the GNU General Public License
-	# as published by the Free Software Foundation; either version 2
-	# of the License, or (at your option) any later version.
-	# 
-	# This program is distributed in the hope that it will be useful,
-	# but WITHOUT ANY WARRANTY; without even the implied warranty of
-	# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	# GNU General Public License for more details.
-	# 
-	# You should have received a copy of the GNU General Public License
-	# along with this program; if not, write to the Free Software
-	# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-	# 
-	############################################################	*/
+/**(TAB=0)**********************************************************************
+*
+*  Project name : UDO
+*  Module name  : file.h
+*  Symbol prefix: file
+*
+*  Description  : ???
+*
+*  Copyright    : 1995-2001 Dirk Hagedorn
+*  Open Source  : since 2001
+*
+*                 This program is free software; you can redistribute it and/or
+*                 modify it under the terms of the GNU General Public License
+*                 as published by the Free Software Foundation; either version 2
+*                 of the License, or (at your option) any later version.
+*                 
+*                 This program is distributed in the hope that it will be useful,
+*                 but WITHOUT ANY WARRANTY; without even the implied warranty of
+*                 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*                 GNU General Public License for more details.
+*                 
+*                 You should have received a copy of the GNU General Public License
+*                 along with this program; if not, write to the Free Software
+*                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*-------------------------------------------------------------------------------
+*
+*  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
+*  Co-Authors   : Gerhard Stoll (ggs), Ulf Dunkel
+*  Write access : ggs, fd
+*
+*  Notes        : Please add yourself as co-author when you change this file.
+*
+*-------------------------------------------------------------------------------
+*  Things to do : -
+*
+*-------------------------------------------------------------------------------
+*  History:
+*
+*  2010:
+*    fd  Feb 22: header adjusted
+*
+******************************************|************************************/
 
 #ifndef __UDOFILE__
-#define	__UDOFILE__
+#define   __UDOFILE__
 
 #include "version.h"
 #include "udo_type.h"
 
-/*	############################################################
-	# Typen
-	############################################################	*/
+/*   ############################################################
+   # Typen
+   ############################################################   */
 typedef struct _mytextfile
 {
-	FILE	*file;
-	fpos_t	filelen;
-	char	*buffer;
-	char	*bufptr;
-	char	*bufend;
-}	MYTEXTFILE;
+   FILE   *file;
+   fpos_t   filelen;
+   char   *buffer;
+   char   *bufptr;
+   char   *bufend;
+}   MYTEXTFILE;
 
 
-/*	############################################################
-	# Globale Routinen
-	############################################################	*/
+/*   ############################################################
+   # Globale Routinen
+   ############################################################   */
 
 GLOBAL MYTEXTFILE *myTextOpen ( const char *filename );
 GLOBAL char *myTextGetline ( char *string, size_t n, MYTEXTFILE *tf );
@@ -60,20 +82,20 @@ GLOBAL FILE * myFwbopen ( const char *filename, const int filetype );
 GLOBAL MYFILE *my_fopen ( const char *filename, const char *mode );
 GLOBAL BOOLEAN my_fclose ( MYFILE *myfile );
 
-GLOBAL void path_adjust_separator ( char *s );
+GLOBAL void path_adjust_separator(char *s);
 
 
 #if USE_HTML_FOLDERS
 
-GLOBAL BOOLEAN my_mkdir ( char *s );
+GLOBAL BOOLEAN my_mkdir(char *s);
 
 #endif /* USE_HTML_FOLDERS */
 
-/*	##############################################################
-	# MO: Funktion zum Setzen von Dateityp und -creator.
-	# Uebergeben werden die von UDO definierten Kennungen fuer die
-	# verschiedenen Dateiformate.
-	##############################################################	*/
+/*   ##############################################################
+   # MO: Funktion zum Setzen von Dateityp und -creator.
+   # Uebergeben werden die von UDO definierten Kennungen fuer die
+   # verschiedenen Dateiformate.
+   ##############################################################   */
 
 #if USE_SETFILETYPE
 extern void SetFileType( const char *fileName, int fileKind);
@@ -83,3 +105,7 @@ extern void SetFileType( const char *fileName, int fileKind);
 
 
 #endif /* __UDOFILE__ */
+
+
+/* +++ EOF +++ */
+

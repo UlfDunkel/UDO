@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**(TAB=0)**********************************************************************
 *
 *  Project name : UDO
 *  Module name  : version.h
@@ -27,8 +27,8 @@
 *-------------------------------------------------------------------------------
 *
 *  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
-*  Co-Authors   : Gerhard Stoll (ggs)
-*  Write access : ggs
+*  Co-Authors   : Gerhard Stoll (ggs), Ulf Dunkel
+*  Write access : ggs, fd
 *
 *  Notes        : Please add yourself as co-author when you change this file.
 *

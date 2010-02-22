@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**(TAB=0)**********************************************************************
 *
 *  Project name : UDO
 *  Module name  : udo.h
@@ -48,6 +48,7 @@
 *    fd  Feb 16: - more stuff globalized
 *                - MAXCHARSET increased for CODE_CP1250
 *    fd  Feb 19: - MAXCHARSET removed
+*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -129,8 +130,8 @@ GLOBAL int         iDocVerbatimSize;      /* Fontgroesse fuer verbatim-Umgebung 
 GLOBAL int         iDocLinedrawSize;      /* Fontgroesse fuer linedraw-Umgebung */
 
 GLOBAL char        sCurrFileName[512];    /* Gerade aktive Datei */
-GLOBAL UINT        uiCurrFileLine;        /* und die aktuelle Zeilen-Nr. */
-GLOBAL UINT        uiMultiLines;          /* Anzahl zusammengefuegter Zeilen (0=nicht zusammengefuegt, 1=eine Zeile angehaengt) */
+GLOBAL UWORD       uiCurrFileLine;        /* und die aktuelle Zeilen-Nr. */
+GLOBAL UWORD       uiMultiLines;          /* Anzahl zusammengefuegter Zeilen (0=nicht zusammengefuegt, 1=eine Zeile angehaengt) */
 
 GLOBAL BOOLEAN     b1stQuote;             /* flag for "real" double quotation marks */
 GLOBAL BOOLEAN     b1stApost;             /* flag for 'real' single quotation marks */

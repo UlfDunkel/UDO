@@ -44,6 +44,7 @@
 *                - CHRTAB_... introduced
 *    fd  Feb 19: uni2ascii() renamed -> recode_udo()
 *    fd  Feb 20: utf8_to_uchar()
+*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -122,16 +123,16 @@
 ******************************************|************************************/
 
    /* convert UTF-8 bytes into Unicode codepoint value (known length of byte stream!) */
-GLOBAL unsigned utf8_to_bstr(const char *sz, int len);
+GLOBAL UWORD utf8_to_bstr(const char *sz, int len);
 
    /* convert UTF-8 bytes into Unicode char (unknown length of byte stream) */
-GLOBAL unsigned utf8_to_uchar(const char *sz);
+GLOBAL UWORD utf8_to_uchar(const char *sz);
 
    /* convert Unicode value into UTF-8 bytes */
-GLOBAL char *bstr_to_utf8(unsigned ucode);
+GLOBAL char *bstr_to_utf8(UWORD ucode);
 
    /* get char(s!) from Unicode value */
-GLOBAL char *unicode2char(unsigned unicode);
+GLOBAL char *unicode2char(UWORD unicode);
 
 
 GLOBAL void convert_sz(char * s);

@@ -39,6 +39,7 @@
 *  2010:
 *    fd  Feb 15: file introduced
 *    fd  Feb 16: ligatures and sorting tables moved from encoding.h
+*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -76,7 +77,7 @@
 *
 ******************************************|************************************/
 
-static unsigned   u_CODE_MAC[] =          /* CODE_MAC */
+static UWORD   u_CODE_MAC[] =             /* CODE_MAC */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -359,7 +360,7 @@ static unsigned   u_CODE_MAC[] =          /* CODE_MAC */
 *
 ******************************************|************************************/
 
-static unsigned   CODE_MAC_lig[][3] =     /* CODE_MAC character ligatures */
+static UWORD   CODE_MAC_lig[][3] =        /* CODE_MAC character ligatures */
 {
    {0x0080, U_LatinCapitalLetterA, U_LatinCapitalLetterE},    /* 0x0080  U_LatinCapitalLetterAWithDiaeresis */
    {0x0085, U_LatinCapitalLetterO, U_LatinCapitalLetterE},    /* 0x0085  U_LatinCapitalLetterOWithDiaeresis */
@@ -399,7 +400,7 @@ static unsigned   CODE_MAC_lig[][3] =     /* CODE_MAC character ligatures */
 *
 ******************************************|************************************/
 
-static unsigned   sort_CODE_MAC[] =       /* CODE_MAC */
+static UWORD   sort_CODE_MAC[] =          /* CODE_MAC */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */

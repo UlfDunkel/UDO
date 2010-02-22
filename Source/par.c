@@ -41,6 +41,7 @@
 *    fd  Jan 23: converted all German umlauts in comments into plain ASCII
 *    fd  Feb 05: - file partly reformatted, TAB-free now
 *                - replace_placeholders(): issue #12 fixed
+*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -3154,18 +3155,18 @@ LOCAL void c_internal_time(char *s, const BOOLEAN inside_b4_macro )
 
 LOCAL void c_internal_image(
 
-char             *s,                 /* */
-const BOOLEAN     inside_b4_macro)   /* */
+char           *s,                 /* */
+const BOOLEAN   inside_b4_macro)   /* */
 {
-   int            pnr = 0,           /* */
-                  count;             /* */
-   char           s_entry[1024],     /* */
-                  sGifSize[80],      /* */
-                  sGifName[512];     /* */
-   BOOLEAN        flag;              /* */
-   unsigned int   uiW,               /* */
-                  uiH;               /* */
-   char           closer[8] = "\0";  /* single tag closer mark in XHTML */
+   int          pnr = 0,           /* */
+                count;             /* */
+   char         s_entry[1024],     /* */
+                sGifSize[80],      /* */
+                sGifName[512];     /* */
+   BOOLEAN      flag;              /* */
+   UWORD        uiW,               /* */
+                uiH;               /* */
+   char         closer[8] = "\0";  /* single tag closer mark in XHTML */
 
    
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
@@ -3460,9 +3461,9 @@ GLOBAL void c_commands_inside(char *s, const BOOLEAN inside_b4_macro )
 
 GLOBAL void replace_hyphens(
 
-char    *s)   /* ^ character */
+char     *s)   /* ^ character */
 {
-   UINT   h;   /* hyphen index */
+   UWORD  h;   /* hyphen index */
 
         
    if (hyphen_counter == 0)
@@ -3558,7 +3559,7 @@ LOCAL BOOLEAN md_uses_parameters(const char *s )
    ############################################################ */
 GLOBAL void replace_macros(char *s )
 {
-   UINT i;
+   UWORD   i;
 
    if (strstr(s, "(!")==NULL)
    {   return;
@@ -3665,7 +3666,7 @@ GLOBAL BOOLEAN add_macro(void)
    ############################################################ */
 GLOBAL void replace_defines(char *s )
 {
-   UINT   i;
+   UWORD   i;
 
    if (strstr(s, "(!")==NULL)
    {   return;

@@ -38,6 +38,7 @@
 *
 *  2010:
 *    fd  Feb 19: file introduced (content merged from CHR_xxx.h files)
+*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -62,13 +63,13 @@
 
 typedef struct _udo2utf
 {
-   char      *udo;                        /* UDO universal character string */
-   unsigned   unicode;                    /* Unicode */
-   unsigned   uni2ascii;                  /* 7-bit ASCII Unicode */
-   char      *win;                        /* */
-   char      *tex;                        /* */
-   char      *html;                       /* */
-   char      *lyx;                        /* */
+   char   *udo;                           /* UDO universal character string */
+   UWORD   unicode;                       /* Unicode */
+   UWORD   uni2ascii;                     /* 7-bit ASCII Unicode */
+   char   *win;                           /* */
+   char   *tex;                           /* */
+   char   *html;                          /* */
+   char   *lyx;                           /* */
 }  UDO2UTF;
 
 

@@ -1,22 +1,47 @@
-/*	############################################################
-	# @(#) udomem.h
-	# @(#)
-	# @(#) Copyright (c) 2003 by Volker Janzen
-	#
-	# This program is free software; you can redistribute it and/or
-	# modify it under the terms of the GNU General Public License
-	# as published by the Free Software Foundation; either version 2
-	# of the License, or (at your option) any later version.
-	#
-	# This program is distributed in the hope that it will be useful,
-	# but WITHOUT ANY WARRANTY; without even the implied warranty of
-	# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	# GNU General Public License for more details.
-	#
-	# You should have received a copy of the GNU General Public License
-	# along with this program; if not, write to the Free Software
-	# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-	############################################################	*/
+/**(TAB=0)**********************************************************************
+*
+*  Project name : UDO
+*  Module name  : udomem.h
+*  Symbol prefix: um_
+*
+*  Description  : ???
+*
+*  Copyright    : Copyright (c) 2003 by Volker Janzen
+*  Open Source  : since 2001
+*
+*                 This program is free software; you can redistribute it and/or
+*                 modify it under the terms of the GNU General Public License
+*                 as published by the Free Software Foundation; either version 2
+*                 of the License, or (at your option) any later version.
+*                 
+*                 This program is distributed in the hope that it will be useful,
+*                 but WITHOUT ANY WARRANTY; without even the implied warranty of
+*                 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*                 GNU General Public License for more details.
+*                 
+*                 You should have received a copy of the GNU General Public License
+*                 along with this program; if not, write to the Free Software
+*                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*-------------------------------------------------------------------------------
+*
+*  Author       : Volker Janzen
+*  Co-Authors   : Ulf Dunkel (fd)
+*  Write access : fd
+*
+*  Notes        : Please add yourself as co-author when you change this file.
+*
+*-------------------------------------------------------------------------------
+*  Things to do : -
+*
+*-------------------------------------------------------------------------------
+*  History:
+*
+*  2010:
+*    fd  Feb 22: header adjusted
+*
+******************************************|************************************/
+
 #ifndef UDO_MEMORY
 #define UDO_MEMORY
 /*
@@ -42,32 +67,32 @@
  * Note: at the moment I don't know for which compiler this will be need, so its
  * always undef
  */
-#undef	UM_PRINTF_USE_LD
-#ifdef	__TOS__
-#define	UM_PRINTF_USE_LD
+#undef   UM_PRINTF_USE_LD
+#ifdef   __TOS__
+#define   UM_PRINTF_USE_LD
 #endif
-#ifdef	__LINUX__
-#define	UM_PRINTF_USE_LD
+#ifdef   __LINUX__
+#define   UM_PRINTF_USE_LD
 #endif
 /*
  * Declarations for vars that keep memory management information
  */
-extern long um_malloc_count;	/* This counts the number of um_malloc calls */
-extern long um_free_count;	/* Counts the um_free calls */
-extern int memory_error;	/* This indicates a broken memory management */
-extern char endstring[];	/* This is the const string, that holds the ending string of memory blocks */
+extern long um_malloc_count;   /* This counts the number of um_malloc calls */
+extern long um_free_count;   /* Counts the um_free calls */
+extern int memory_error;   /* This indicates a broken memory management */
+extern char endstring[];   /* This is the const string, that holds the ending string of memory blocks */
 extern size_t endstring_len; /* For better performance this var saves the string length of endstring */
 /*
  * Structure definitions
  */
 typedef struct _memory_list
 {
-	long check;
-	void *block;
-	char *endmark;
-	char file[30];
-	int line;
-	struct _memory_list *next;
+   long check;
+   void *block;
+   char *endmark;
+   char file[30];
+   int line;
+   struct _memory_list *next;
 } MEMLIST;
 /*
  * This is the UDO memory interface. Use it instead of malloc or mfree!
@@ -79,5 +104,6 @@ GLOBAL void *um_malloc2(size_t size, char *file, int line );
 GLOBAL void *um_realloc(void *block, size_t size);
 GLOBAL void um_free(void *memblock);
 #endif
+
 
 /* +++ EOF +++ */
