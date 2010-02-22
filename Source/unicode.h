@@ -1256,8 +1256,8 @@
 #define U_CyrillicSmallLetterBarredO                    0x04E9
 #define U_CyrillicCapitalLetterBarredOWithDiaeresis     0x04EA
 #define U_CyrillicSmallLetterBarredOWithDiaeresis       0x04EB
-#define U_CyrillicCapitalLetterEwithDiaeresis           0x04EC
-#define U_CyrillicSmallLetterEwithDiaeresis             0x04ED
+#define U_CyrillicCapitalLetterEWithDiaeresis           0x04EC
+#define U_CyrillicSmallLetterEWithDiaeresis             0x04ED
 #define U_CyrillicCapitalLetterUWithMacron              0x04EE
 #define U_CyrillicSmallLetterUWithMacron                0x04EF
 #define U_CyrillicCapitalLetterUWithDiaeresis           0x04F0
