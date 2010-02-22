@@ -14,23 +14,23 @@
 *  History:
 *
 *  2002:
-*     Aug 03: - file introduced
-*             - 0000-007F: C0 Controls and Basic Latin
-*             - 0080-00FF: C1 Controls and Latin-1 Supplement
-*             - 0100-017F: Latin Extended-A
-*             - 0180-024F: Latin Extended-B
-*             - "Unicode to ANSI transforming codepages" introduced
-*     Aug 04: - Unicode range definitions completed in general, using the
-*               data provided at "http://www.unicode.org/charts/"
-*     Aug 05: 20A0-20CF (Currency Symbols) introduced
-*     Aug 06: - 2000-206F: General Punctuation
-*             - 02B0-02FF: Spacing Modifier Letters
-*             - 2100-214F: Letterlike Symbols
-*     Aug 13: - 2200-22FF: Mathematical Operators (some)
-*             - 25A0-25FF: Geometric Shapes (some)
-*     Aug 14: - 2600-26FF: Miscellaneous Symbols
-*             - 0300-036F: Combining Diacritical Marks
-*     Aug 19: - E000-F8FF: defining swap characters for CZE CFN fonts
+*    fd  Aug 03: - file introduced
+*                - 0000-007F: C0 Controls and Basic Latin
+*                - 0080-00FF: C1 Controls and Latin-1 Supplement
+*                - 0100-017F: Latin Extended-A
+*                - 0180-024F: Latin Extended-B
+*                - "Unicode to ANSI transforming codepages" introduced
+*    fd  Aug 04: - Unicode range definitions completed in general, using the
+*                  data provided at "http://www.unicode.org/charts/"
+*    fd  Aug 05: 20A0-20CF (Currency Symbols) introduced
+*    fd  Aug 06: - 2000-206F: General Punctuation
+*                - 02B0-02FF: Spacing Modifier Letters
+*                - 2100-214F: Letterlike Symbols
+*    fd  Aug 13: - 2200-22FF: Mathematical Operators (some)
+*                - 25A0-25FF: Geometric Shapes (some)
+*    fd  Aug 14: - 2600-26FF: Miscellaneous Symbols
+*                - 0300-036F: Combining Diacritical Marks
+*    fd  Aug 19: - E000-F8FF: defining swap characters for CZE CFN fonts
 *  2010:
 *    fd  Jan 25: - 05D0-05EA: some Hebrew characters added for TOS
 *                - various mathematical characters added (0x22..)
@@ -39,7 +39,8 @@
 *                - 2580-259F completed
 *    fd  Feb 16: tiny adjustments
 *    fd  Feb 19: 0400-04FF: Cyrillic
-*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*                - 0370-03ff completed (Greek)
 *
 ******************************************|************************************/
 /*KEY _NAME="unicode definitions" */
@@ -951,8 +952,51 @@
 
    /* ------ 0370-03FF: Greek and Coptic ------ */
 
-   /*        N.B.: Not all definitions listed yet!!! */
-   /* ... */                                         /* 0x0370 ..0x0390  */
+   /*        Archaic letters: */
+#define U_GreekCapitalLetterHeta                        0x0370
+#define U_GreekSmallLetterHeta                          0x0371
+#define U_GreekCapitalLetterArchaicSampi                0x0372
+#define U_GreekSmallLetterArchaicSampi                  0x0373
+
+   /*        Numeral signs: */
+#define U_GreekNumeralSign                              0x0374
+#define U_GreekLowerNumeralSign                         0x0375
+
+   /*        Archaic letters: */
+#define U_GreekCapitalLetterPamphylianDigamma           0x0376
+#define U_GreekSmallLetterPamphylianDigamma             0x0377
+
+   /*        Iota subscript: */
+#define U_GreekYpogegrammeni                            0x037A
+
+   /*        Lowercase of editorial symbols: */
+#define U_GreekSmallReversedLunateSigmaSymbol           0x037B
+#define U_GreekSmallDottedLunateSigmaSymbol             0x037C
+#define U_GreekSmallReversedDottedLunateSigmaSymbol     0x037D
+
+   /*        Punctuation: */
+#define U_GreekQuestionMark                             0x037E
+
+   /*        Spacing accent marks: */
+#define U_GreekTonus                                    0x0384
+#define U_GreekDialytikaTonos                           0x0385
+
+   /*        Letter: */
+#define U_GreekCapitalLetterAlphaWithTonos              0x0386
+
+   /*        Punctuation: */
+#define U_GreekAnoTeleia                                0x0387
+
+   /*        Letter: */
+#define U_GreekCapitalLetterEpsilonWithTonos            0x0388
+#define U_GreekCapitalLetterEtaWithTonos                0x0389
+#define U_GreekCapitalLetterIotaWithTonos               0x038A
+/* #define U_Greekxxx                                   0x038B */  /* reserved */
+#define U_GreekCapitalLetterOmicronWithTonos            0x038C
+/* #define U_Greekxxx                                   0x038D */  /* reserved */
+#define U_GreekCapitalLetterUpsilonWithTonos            0x038E
+#define U_GreekCapitalLetterOmegaWithTonos              0x038F
+#define U_GreekSmallLetterIotaWithDialytikaAndTonos     0x0390
 #define U_GreekCapitalLetterAlpha                       0x0391
 #define U_GreekCapitalLetterBeta                        0x0392
 #define U_GreekCapitalLetterGamma                       0x0393
@@ -966,7 +1010,7 @@
 #define U_GreekCapitalLetterLamda                       0x039B
 #define U_GreekCapitalLetterMu                          0x039C
 #define U_GreekCapitalLetterNu                          0x039D
-#define U_GreekCapitalLetterXI                          0x039E
+#define U_GreekCapitalLetterXi                          0x039E
 #define U_GreekCapitalLetterOmicron                     0x039F
 #define U_GreekCapitalLetterPi                          0x03A0
 #define U_GreekCapitalLetterRho                         0x03A1
@@ -978,7 +1022,13 @@
 #define U_GreekCapitalLetterChi                         0x03A7
 #define U_GreekCapitalLetterPsi                         0x03A8
 #define U_GreekCapitalLetterOmega                       0x03A9
-   /* ... */                                         /* 0x03AA .. 0x03B0 */
+#define U_GreekCapitalLetterIotaWithDialytika           0x03AA
+#define U_GreekCapitalLetterUpsilonWithDialytika        0x03AB
+#define U_GreekSmallLetterAlphaWithTonos                0x03AC
+#define U_GreekSmallLetterEpsilonWithTonos              0x03AD
+#define U_GreekSmallLetterEtaWithTonos                  0x03AE
+#define U_GreekSmallLetterIotaWithTonos                 0x03AF
+#define U_GreekSmallLetterUpsilonWithDialytikaAndTonos  0x03B0
 #define U_GreekSmallLetterAlpha                         0x03B1
 #define U_GreekSmallLetterBeta                          0x03B2
 #define U_GreekSmallLetterGamma                         0x03B3
@@ -992,7 +1042,7 @@
 #define U_GreekSmallLetterLamda                         0x03BB
 #define U_GreekSmallLetterMu                            0x03BC
 #define U_GreekSmallLetterNu                            0x03BD
-#define U_GreekSmallLetterXI                            0x03BE
+#define U_GreekSmallLetterXi                            0x03BE
 #define U_GreekSmallLetterOmicron                       0x03BF
 #define U_GreekSmallLetterPi                            0x03C0
 #define U_GreekSmallLetterRho                           0x03C1
@@ -1004,7 +1054,82 @@
 #define U_GreekSmallLetterChi                           0x03C7
 #define U_GreekSmallLetterPsi                           0x03C8
 #define U_GreekSmallLetterOmega                         0x03C9
+#define U_GreekSmallLetterIotaWithDialytika             0x03CA
+#define U_GreekSmallLetterUpsilonWithDialytika          0x03CB
+#define U_GreekSmallLetterOmicronWithTonos              0x03CC
+#define U_GreekSmallLetterUpsilonWithTonos              0x03CD
+#define U_GreekSmallLetterOmegaWithTonos                0x03CE
 
+   /*        Variant letterforms: */
+#define U_GreekCapitalKaiSymbol                         0x03CF
+#define U_GreekBetaSymbol                               0x03D0
+#define U_GreekThetaSymbol                              0x03D1
+#define U_GreekUpsilonWithHookSymbol                    0x03D2
+#define U_GreekUpsilonWithAcuteAndHookSymbol            0x03D3
+#define U_GreekUpsilonWithDiaeresisAndHookSymbol        0x03D4
+#define U_GreekPhiSymbol                                0x03D5
+#define U_GreekPiSymbol                                 0x03D6
+#define U_GreekKaiSymbol                                0x03D7
+
+   /*        Archaic letters: */
+#define U_GreekLetterArchaicKoppa                       0x03D8
+#define U_GreekSmallLetterArchaicKoppa                  0x03D9
+#define U_GreekLetterStigma                             0x03DA
+#define U_GreekSmallLetterStigma                        0x03DB
+#define U_GreekLetterDigamma                            0x03DC
+#define U_GreekSmallLetterDigamma                       0x03DD
+#define U_GreekLetterKoppa                              0x03DE
+#define U_GreekSmallLetterKoppa                         0x03DF
+#define U_GreekLetterSampi                              0x03E0
+#define U_GreekSmallLetterSampi                         0x03E1
+
+   /*        Coptic letters derived from Demotic: */
+#define U_CopticCapitalLetterShei                       0x03E2
+#define U_CopticSmallLetterShei                         0x03E3
+#define U_CopticCapitalLetterFei                        0x03E4
+#define U_CopticSmallLetterFei                          0x03E5
+#define U_CopticCapitalLetterKhei                       0x03E6
+#define U_CopticSmallLetterKhei                         0x03E7
+#define U_CopticCapitalLetterHori                       0x03E8
+#define U_CopticSmallLetterHori                         0x03E9
+#define U_CopticCapitalLetterGangia                     0x03EA
+#define U_CopticSmallLetterGangia                       0x03EB
+#define U_CopticCapitalLetterShima                      0x03EC
+#define U_CopticSmallLetterShima                        0x03ED
+#define U_CopticCapitalLetterDei                        0x03EE
+#define U_CopticSmallLetterDei                          0x03EF
+
+   /*        Variant letterforms: */
+#define U_GreekKappaSymbol                              0x03F0
+#define U_GreekRhoSymbol                                0x03F1
+#define U_GreekLunateSigmaSymbol                        0x03F2
+
+   /*        Additional letter: */
+#define U_GreekLetterYot                                0x03F3
+
+   /*        Variant letterforms and symbols: */
+#define U_GreekCapitalThetaSymbol                       0x03F4
+#define U_GreekLunateEpsilonSymbol                      0x03F5
+#define U_GreekReversedLunateEpsilonSymbol              0x03F6
+
+   /*        Additional archaic letters for Bactrian: */
+#define U_GreekCapitalLetterSho                         0x03F7
+#define U_GreekSmallLetterSho                           0x03F8
+
+   /*        Variant Letterform: */
+#define U_GreekCapitalLunateSigmaSymbol                 0x03F9
+
+   /*        Archaic letters: */
+#define U_GreekCapitalLetterSan                         0x03FA
+#define U_GreekSmallLetterSan                           0x03FB
+
+   /*        Symbol: */
+#define U_GreekRhoWithStrokeSymbol                      0x03FC
+
+   /*        Editorial symbols: */
+#define U_GreekCapitalReversedLunateSigmaSymbol         0x03FD
+#define U_GreekCapitalDottedLunateSigmaSymbol           0x03FE
+#define U_GreekCapitalReversedDottedLunateSigmaSymbol   0x03FF
 
    /* ------ 0400-04FF: Cyrillic ------ */
 

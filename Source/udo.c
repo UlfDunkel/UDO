@@ -73,7 +73,8 @@
 *    fd  Feb 19: - CODE_CP1257; MAXCHARSET removed; udocharset[] resorted for relevance
 *                - c_universal_charset() debugged
 *    fd  Feb 20: CODE_CP1251
-*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*                - CODE_CP1253 (Greek)
 *
 ******************************************|************************************/
 
@@ -255,6 +256,9 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
    {"latin2",     CODE_LAT2     },        /*  */
    {"cp1250",     CODE_CP1250   },        /*  */
    {"cp1251",     CODE_CP1251   },        /*  */
+   {"russian",    CODE_CP1251   },        /*  */
+   {"cp1253",     CODE_CP1253   },        /*  */
+   {"greek",      CODE_CP1253   },        /*  */
    {"cp1257",     CODE_CP1257   },        /*  */
    {"baltic",     CODE_CP1257   },        /*  */
    

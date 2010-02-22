@@ -53,7 +53,8 @@
 *    fd  Feb 19: - CODE_CP1257
 *                - str_flatten() debugged for 1-byte encodings
 *    fd  Feb 20: CODE_CP1251
-*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*                - CODE_CP1253   
 *
 ******************************************|************************************/
 
@@ -1811,6 +1812,11 @@ char  *zeile)  /* ^ string */
       psort = sort_CODE_CP1251;
       break;
    
+   case CODE_CP1253:
+      plig = CODE_CP1253_lig;
+      psort = sort_CODE_CP1253;
+      break;
+   
    case CODE_CP1257:
       plig = CODE_CP1257_lig;
       psort = sort_CODE_CP1257;
@@ -1946,6 +1952,12 @@ char       *s2)           /* ^ 2nd string for comparison */
       plig = CODE_CP1251_lig;
       psort = sort_CODE_CP1251;
       pumap = u_CODE_CP1251;
+      break;
+   
+   case CODE_CP1253:
+      plig = CODE_CP1253_lig;
+      psort = sort_CODE_CP1253;
+      pumap = u_CODE_CP1253;
       break;
    
    case CODE_CP1257:
