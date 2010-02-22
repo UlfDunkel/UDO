@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**(TAB=0)**********************************************************************
 *
 *  UNICODE.H   : Character Definitions
 *
@@ -39,6 +39,7 @@
 *                - 2580-259F completed
 *    fd  Feb 16: tiny adjustments
 *    fd  Feb 19: 0400-04FF: Cyrillic
+*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 /*KEY _NAME="unicode definitions" */
@@ -2203,8 +2204,8 @@
 /* !!!!! WARNING !!!!! */
 /* ------------------- */
 /* As soon as Unicode constants > 0xFFFF are defined, */
-/* the relevant tables must no longer use 'unsigned (int)', */
-/* but have to switch to 'unsigned long'. */
+/* the relevant tables must no longer use UWORD, */
+/* but have to switch to ULONG. */
 
 
    /* ====== More Unicode character groups defined in general ====== */

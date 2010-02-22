@@ -42,6 +42,7 @@
 *    fd  Feb 15: file introduced
 *    fd  Feb 16: CODE_437_lig[] + sort_CODE_437[] added
 *    fd  Feb 17: CODE_850_lig[] + sort_CODE_850[] added
+*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -65,7 +66,7 @@
 *
 ******************************************|************************************/
 
-static unsigned   u_CODE_437[] =          /* CODE_437 */
+static UWORD   u_CODE_437[] =             /* CODE_437 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -353,7 +354,7 @@ static unsigned   u_CODE_437[] =          /* CODE_437 */
 *
 ******************************************|************************************/
 
-static unsigned   CODE_437_lig[][3] =  /* CODE_437 character ligatures */
+static UWORD   CODE_437_lig[][3] =     /* CODE_437 character ligatures */
 {
    {0x00fc, U_LatinSmallLetterU,   U_LatinSmallLetterE},      /* 0x81  - 0x00fc:  LATIN SMALL LETTER U WITH DIAERESIS */
    {0x00e4, U_LatinSmallLetterA,   U_LatinSmallLetterE},      /* 0x84  - 0x00e4:  LATIN SMALL LETTER A WITH DIAERESIS */
@@ -385,7 +386,7 @@ static unsigned   CODE_437_lig[][3] =  /* CODE_437 character ligatures */
 *
 ******************************************|************************************/
 
-static unsigned   sort_CODE_437[] =       /* CODE_437 */
+static UWORD   sort_CODE_437[] =          /* CODE_437 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -680,7 +681,7 @@ static unsigned   sort_CODE_437[] =       /* CODE_437 */
 *
 ******************************************|************************************/
 
-static unsigned   u_CODE_850[] =          /* CODE_850 */
+static UWORD   u_CODE_850[] =             /* CODE_850 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -958,7 +959,7 @@ static unsigned   u_CODE_850[] =          /* CODE_850 */
 *
 ******************************************|************************************/
 
-static unsigned   CODE_850_lig[][3] =  /* CODE_850 character ligatures */
+static UWORD   CODE_850_lig[][3] =        /* CODE_850 character ligatures */
 {
    {0x00fc, U_LatinSmallLetterU,   U_LatinSmallLetterE},      /* 0x81  - 0x00fc:  LATIN SMALL LETTER U WITH DIAERESIS */
    {0x00e4, U_LatinSmallLetterA,   U_LatinSmallLetterE},      /* 0x84  - 0x00e4:  LATIN SMALL LETTER A WITH DIAERESIS */
@@ -994,7 +995,7 @@ static unsigned   CODE_850_lig[][3] =  /* CODE_850 character ligatures */
 *
 ******************************************|************************************/
 
-static unsigned   sort_CODE_850[] =       /* CODE_850 */
+static UWORD   sort_CODE_850[] =          /* CODE_850 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */

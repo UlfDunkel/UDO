@@ -75,6 +75,7 @@
 *                - win2sys() -> recode_chrtab()
 *    fd  Feb 18: - str_UTF_sort_cmp()
 *                - save_html_index() uses a new approach with flattened HTML_INDEX.sortname
+*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -259,11 +260,11 @@ LOCAL char       *html_frames_con_title;  /* V6.5.16 [GS] */
 
 typedef struct   _hmtl_index              /* index output for HTML */
    {
-   int        toc_index;                  /* # of found label for TOC */
-   BOOLEAN    is_node;                    /* the label is the caption (?) */
-   char       tocname[512];               /* label or node name */
-   char       sortname[512];              /* 'flattened' label or node name */
-   unsigned   codepoint;                  /* Unicode codepoint for sorting purposes */
+   int       toc_index;                   /* # of found label for TOC */
+   BOOLEAN   is_node;                     /* the label is the caption (?) */
+   char      tocname[512];                /* label or node name */
+   char      sortname[512];               /* 'flattened' label or node name */
+   UWORD     codepoint;                   /* Unicode codepoint for sorting purposes */
 }  HTML_INDEX;
 
 
@@ -280,7 +281,7 @@ LOCAL void output_aliasses(void);
 
 LOCAL BOOLEAN add_ref(const char *r);
 LOCAL void replace_refs(char *s);
-LOCAL void string2reference(char *ref, const LABEL *l, const BOOLEAN for_toc, const char *pic, const unsigned int uiW, const unsigned int uiH);
+LOCAL void string2reference(char *ref, const LABEL *l, const BOOLEAN for_toc, const char *pic, const UWORD uiW, const UWORD uiH);
 
 LOCAL BOOLEAN output_raw_file(const char *filename);
 
@@ -303,7 +304,7 @@ LOCAL char *get_html_filename(const int tocindex, char *s);
 LOCAL void output_html_meta(BOOLEAN keywords);
 LOCAL void output_html_doctype(void);
 LOCAL BOOLEAN html_new_file(void);
-LOCAL void get_giflink_data(const int index, char *name, unsigned int *width, unsigned int *height);
+LOCAL void get_giflink_data(const int index, char *name, UWORD *width, UWORD *height);
 LOCAL void html_index_giflink(const int idxEnabled, const int idxDisabled, const char *sep);
 LOCAL void html_home_giflink(const int idxEnabled, const int idxDisabled, const char *sep);
 LOCAL void html_back_giflink(const int idxEnabled, const int idxDisabled, const char *sep);
@@ -757,25 +758,25 @@ char             *s)  /* */
 
 LOCAL void string2reference(
 
-char                *ref,                 /* */
-const LABEL         *l,                   /* */
-const BOOLEAN        for_toc,             /* */
-const char          *pic,                 /* */
-const unsigned int   uiW,                 /* */
-const unsigned int   uiH)                 /* */
+char           *ref,                 /* */
+const LABEL    *l,                   /* */
+const BOOLEAN   for_toc,             /* */
+const char     *pic,                 /* */
+const UWORD     uiW,                 /* */
+const UWORD     uiH)                 /* */
 {
-   char              s[512],              /* */
-                     n[512],              /* */
-                     sNoSty[512],         /* */
-                     hfn[512],            /* */
-                     sGifSize[80];        /* */
-   int               ti,                  /* */
-                     ui;                  /* */
-   BOOLEAN           same_file = FALSE;   /* TRUE: reference is in same file */
-   char             *htmlfilename,        /* */
-                                          /* */
-                     suff[MYFILE_SUFF_LEN + 1];
-   char              closer[8] = "\0";    /* single tag closer mark in XHTML */
+   char         s[512],              /* */
+                n[512],              /* */
+                sNoSty[512],         /* */
+                hfn[512],            /* */
+                sGifSize[80];        /* */
+   int          ti,                  /* */
+                ui;                  /* */
+   BOOLEAN      same_file = FALSE;   /* TRUE: reference is in same file */
+   char        *htmlfilename,        /* */
+                                     /* */
+                suff[MYFILE_SUFF_LEN + 1];
+   char         closer[8] = "\0";    /* single tag closer mark in XHTML */
    
    
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
@@ -1140,30 +1141,30 @@ const unsigned int   uiH)                 /* */
 
 GLOBAL void auto_references(
 
-char                *s,             /* ^ string to check */
-const BOOLEAN        for_toc,       /* TRUE: use auto reference for TOC */
-const char          *pic,           /* also images can be referenced (used in string2reference()) */
-const unsigned int   uiWidth,       /* image width */
-const unsigned int   uiHeight)      /* image height */
+char             *s,             /* ^ string to check */
+const BOOLEAN     for_toc,       /* TRUE: use auto reference for TOC */
+const char       *pic,           /* also images can be referenced (used in string2reference()) */
+const UWORD       uiWidth,       /* image width */
+const UWORD       uiHeight)      /* image height */
 {
-   register int      i;             /* counter */
-   char              the_ref[512],  /* */
-                    *pos,           /* */
-                    *ptr,           /* */
-                    *found_pos,     /* */
-                    *searchpos;     /* */
-   char              nextchar,      /* */
-                     prevchar;      /* */
-   int               found_lab;     /* */
-   size_t            found_len,     /* */
-                     ll;            /* */
-   BOOLEAN           ref_it;        /* */
-   BOOLEAN           ignore_it;     /* */
-   BOOLEAN           next_ok,       /* */
-                     prev_ok;       /* */
-   BOOLEAN           found_one,     /* */
-                     found_ok;      /* */
-   LABEL            *labptr;        /* */
+   register int   i;             /* counter */
+   char           the_ref[512],  /* */
+                 *pos,           /* */
+                 *ptr,           /* */
+                 *found_pos,     /* */
+                 *searchpos;     /* */
+   char           nextchar,      /* */
+                  prevchar;      /* */
+   int            found_lab;     /* */
+   size_t         found_len,     /* */
+                  ll;            /* */
+   BOOLEAN        ref_it;        /* */
+   BOOLEAN        ignore_it;     /* */
+   BOOLEAN        next_ok,       /* */
+                  prev_ok;       /* */
+   BOOLEAN        found_one,     /* */
+                  found_ok;      /* */
+   LABEL         *labptr;        /* */
    
    
    if (bDocAutorefOff)                    /* it's so simple! */
@@ -1436,7 +1437,7 @@ const char     *filename)           /* */
    {
       len = strlen(s);
       
-      while ( (len>0) && (((UCHAR) s[len-1]) <= 32) )
+      while ( (len>0) && (((UBYTE)s[len-1]) <= 32) )
       {
          s[len-1]= EOS;
          len--;
@@ -3563,10 +3564,10 @@ const char  *t)                 /* */
 
 LOCAL void get_giflink_data(
 
-const int      index,   /* */
-char          *name,    /* */
-unsigned int  *width,   /* */
-unsigned int  *height)  /* */
+const int   index,   /* */
+char       *name,    /* */
+UWORD      *width,   /* */
+UWORD      *height)  /* */
 {
    name[0] = EOS;                         /* clear name */
    
@@ -3643,17 +3644,17 @@ unsigned int  *height)  /* */
 
 LOCAL void html_index_giflink(
 
-const int         idxEnabled,        /* */
-const int         idxDisabled,       /* */
-const char       *sep)               /* */
+const int    idxEnabled,        /* */
+const int    idxDisabled,       /* */
+const char  *sep)               /* */
 {
-   char           sTarget[64],       /* */
-                  sFile[64],         /* */
-                  sGifSize[80],      /* */
-                  sGifName[256];     /* */
-   unsigned int   uiW,               /* */
-                  uiH;               /* */
-   char           closer[8] = "\0";  /* single tag closer mark in XHTML */
+   char      sTarget[64],       /* */
+             sFile[64],         /* */
+             sGifSize[80],      /* */
+             sGifName[256];     /* */
+   UWORD     uiW,               /* */
+             uiH;               /* */
+   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
 
    
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
@@ -3731,17 +3732,17 @@ const char       *sep)               /* */
 
 LOCAL void html_home_giflink(
 
-const int         idxEnabled,        /* */
-const int         idxDisabled,       /* */
-const char       *sep)               /* */
+const int    idxEnabled,        /* */
+const int    idxDisabled,       /* */
+const char  *sep)               /* */
 {
-   char           sTarget[64],       /* */
-                  sFile[64];         /* */
-   char           sGifSize[128],     /* */
-                  sGifName[256];     /* */
-   unsigned int   uiW,               /* */
-                  uiH;               /* */
-   char           closer[8] = "\0";  /* single tag closer mark in XHTML */
+   char      sTarget[64],       /* */
+             sFile[64];         /* */
+   char      sGifSize[128],     /* */
+             sGifName[256];     /* */
+   UWORD     uiW,               /* */
+             uiH;               /* */
+   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
 
    
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
@@ -3824,20 +3825,20 @@ const char       *sep)               /* */
 
 LOCAL void html_back_giflink(
 
-const int         idxEnabled,        /* */
-const int         idxDisabled,       /* */
-const char       *sep)               /* */
+const int    idxEnabled,        /* */
+const int    idxDisabled,       /* */
+const char  *sep)               /* */
 {
-   char           target[64],        /* */
-                  backpage[256],     /* */
-                  href[256],         /* */
-                  alt[256],          /* */
-                 *tok;               /* */
-   char           sGifSize[128],     /* */
-                  sGifName[256];     /* */
-   unsigned int   uiW,               /* */
-                  uiH;               /* */
-   char           closer[8] = "\0";  /* single tag closer mark in XHTML */
+   char      target[64],        /* */
+             backpage[256],     /* */
+             href[256],         /* */
+             alt[256],          /* */
+            *tok;               /* */
+   char      sGifSize[128],     /* */
+             sGifName[256];     /* */
+   UWORD     uiW,               /* */
+             uiH;               /* */
+   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
    
    
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
@@ -3924,22 +3925,22 @@ const char       *sep)               /* */
 
 LOCAL void html_hb_line(
 
-BOOLEAN           head)              /* */
+BOOLEAN      head)              /* */
 {
-   int            i,                 /* */
-                  ti,                /* */
-                  li;                /* */
-   char           s[512],            /* */
-                  anchor[512],       /* */
-                  sGifSize[128],     /* */
-                  sGifFile[128],     /* */
-                  sTarget[64],       /* */
-                 *colptr;            /* */
-   BOOLEAN        old_autorefoff;    /* */
-   BOOLEAN        for_main_file;     /* */
-   unsigned int   uiW,               /* */
-                  uiH;               /* */
-   char           closer[8] = "\0";  /* single tag closer mark in XHTML */
+   int       i,                 /* */
+             ti,                /* */
+             li;                /* */
+   char      s[512],            /* */
+             anchor[512],       /* */
+             sGifSize[128],     /* */
+             sGifFile[128],     /* */
+             sTarget[64],       /* */
+            *colptr;            /* */
+   BOOLEAN   old_autorefoff;    /* */
+   BOOLEAN   for_main_file;     /* */
+   UWORD     uiW,               /* */
+             uiH;               /* */
+   char      closer[8] = "\0";  /* single tag closer mark in XHTML */
 
    
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
@@ -4454,7 +4455,7 @@ LOCAL void html_node_bar_modern(void)
 {
    register int   i;                 /* */
    int            li;                /* */
-   unsigned int   uiW,               /* */
+   UWORD          uiW,               /* */
                   uiH;               /* */
    char           the_ref[1024],     /* */
                  *ptrImg,            /* */
@@ -4838,7 +4839,7 @@ LOCAL void html_node_bar_frames(void)
 {
    register int   i;                 /* */
    int            li;                /* */
-   unsigned int   uiW,               /* */
+   UWORD          uiW,               /* */
                   uiH;               /* */
    char           the_ref[1024],     /* */
                  *ptr,               /* */
@@ -5451,7 +5452,7 @@ GLOBAL BOOLEAN save_html_index(void)
    int          j;                /* counter */
    size_t       num_index;        /* # of entries in index file */
    HTML_INDEX  *html_index;       /* ^ to HTML_INDEX array */
-   unsigned     thisc,            /* single char for comparison */
+   UWORD        thisc,            /* single char for comparison */
                 lastc;            /* last char from comparison */
    char         htmlname[512];    /* */
    char         dummy[512];       /* */

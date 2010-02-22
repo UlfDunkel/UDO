@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**(TAB=0)**********************************************************************
 *
 *  Project name : UDO
 *  Module name  : tp.h
@@ -23,7 +23,7 @@
 *
 *  Description  : This module contains routines which handle the environment
 *                 Routinen, die die Ausgabe der zahlreichen Umgebungen
-*	               verwalten und fuer token_output() vorbereiten
+*                 verwalten und fuer token_output() vorbereiten
 *
 *
 *-------------------------------------------------------------------------------
@@ -42,6 +42,7 @@
 *
 *  2009:
 *    fd  Jun 04: !docinfo [translator] introduced
+*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -70,36 +71,36 @@
 
 typedef struct _titledata                 /* ---- Titelseiteninfos ---- */
 {
-   char          *title;                  /* Titelzeile */
-   char          *program;                /* Programmname */
-   char          *date;                   /* Datum */
-   char          *version;                /* Version */
-   char          *author;                 /* Name des Autors */
-   char          *address[MAXADDRESS+1];  /* Adresse */
-   char          *webmastername;          /* Fuer HTML */
-   char          *webmasteremail;         /* Fuer HTML */
-   char          *webmastermailurl;       /* Fuer HTML */
-   char          *webmasterurl;           /* Fuer HTML */
-   char          *programimage;           /* program image */
-   char          *authorimage;            /* author's funny face image */
-   char          *authoricon;             /* -> Modern/Frames */
-   char          *authoricon_active;      /* -> Modern/Frames */
-   char          *appletitle;             /* for HTML Apple Help V6.5.17 */
-   char          *appleicon;              /* for HTML Apple Help V6.5.17 */
-   unsigned int   authoriconWidth;        /* */
-   unsigned int   authoriconHeight;       /* */
-   unsigned int   authoriconActiveWidth;  /* */
-   unsigned int   authoriconActiveHeight; /* */
-   char          *keywords;               /* New in r6pl15 [NHz] */
-   char          *description;            /* New in r6pl15 [NHz] */
-   char          *robots;                 /* New in V6.5.17 */
-   char          *company;                /* New in V6.5.2 [NHz] */
-   char          *category;               /* New in V6.5.2 [NHz] */
-   char          *drc_statusline;
-   char          *stg_database;
-   char          *htmltitle;              /* <title>         */
-   char          *translator;             /* translator name */
-   char          *distributor;            /* distributor name */
+   char   *title;                         /* Titelzeile */
+   char   *program;                       /* Programmname */
+   char   *date;                          /* Datum */
+   char   *version;                       /* Version */
+   char   *author;                        /* Name des Autors */
+   char   *address[MAXADDRESS + 1];       /* Adresse */
+   char   *webmastername;                 /* for HTML */
+   char   *webmasteremail;                /* for HTML */
+   char   *webmastermailurl;              /* for HTML */
+   char   *webmasterurl;                  /* for HTML */
+   char   *programimage;                  /* program image */
+   char   *authorimage;                   /* author's funny face image */
+   char   *authoricon;                    /* -> Modern/Frames */
+   char   *authoricon_active;             /* -> Modern/Frames */
+   char   *appletitle;                    /* for HTML Apple Help V6.5.17 */
+   char   *appleicon;                     /* for HTML Apple Help V6.5.17 */
+   UWORD   authoriconWidth;               /* */
+   UWORD   authoriconHeight;              /* */
+   UWORD   authoriconActiveWidth;         /* */
+   UWORD   authoriconActiveHeight;        /* */
+   char   *keywords;                      /* New in r6pl15 [NHz] */
+   char   *description;                   /* New in r6pl15 [NHz] */
+   char   *robots;                        /* New in V6.5.17 */
+   char   *company;                       /* New in V6.5.2 [NHz] */
+   char   *category;                      /* New in V6.5.2 [NHz] */
+   char   *drc_statusline;
+   char   *stg_database;
+   char   *htmltitle;                     /* <title>         */
+   char   *translator;                    /* translator name */
+   char   *distributor;                   /* distributor name */
 
 }   TITLEDATA;
 
@@ -114,18 +115,18 @@ typedef struct _titledata                 /* ---- Titelseiteninfos ---- */
 
 typedef struct                            /* Paper Format */
 {
-   char          *paper;                  /* paper format */
-   unsigned int   width_mm10;             /* width  in 10th of a mm */
-   unsigned int   height_mm10;            /* height in 10th of a mm */
-   unsigned int   width_pt;               /* */
-   unsigned int   height_pt;              /* */
-   unsigned int   margintop_pt;           /* */
-   unsigned int   marginleft_pt;          /* */
-   unsigned int   marginright_pt;         /* */
-   unsigned int   marginbottom_pt;        /* */
-   unsigned int   width_twips;            /* */
-   unsigned int   height_twips;           /* */
-   BOOLEAN        landscape;              /* TRUE: landscape, FALSE: portrait */
+   char     *paper;                       /* paper format */
+   UWORD     width_mm10;                  /* width  in 10th of a mm */
+   UWORD     height_mm10;                 /* height in 10th of a mm */
+   UWORD     width_pt;                    /* */
+   UWORD     height_pt;                   /* */
+   UWORD     margintop_pt;                /* */
+   UWORD     marginleft_pt;               /* */
+   UWORD     marginright_pt;              /* */
+   UWORD     marginbottom_pt;             /* */
+   UWORD     width_twips;                 /* */
+   UWORD     height_twips;                /* */
+   BOOLEAN   landscape;                   /* TRUE: landscape, FALSE: portrait */
 } PAPERFORMAT;
 
 
@@ -140,23 +141,23 @@ typedef struct                            /* Paper Format */
 
 typedef struct                            /* ---- Layoutinfos ---- */
 {
-   char          *paper;                  /* Papierformat */
-   char          *pagemode;               /* HowToOpen */
-   char          *viewerpreferences;      /* */
-   char          *pagelayout;             /* */
-   char          *fitwindow;              /* */
-   char          *openpage;               /* */
-   char          *hidetoolbar;            /* */
-   char          *hidemenubar;            /* */
-   char          *propfontname;           /* */
-   unsigned int   propfontsize;           /* */
-   char          *monofontname;           /* */
-   unsigned int   monofontsize;           /* */
-   unsigned int   node1size;              /* New in r6pl16 [NHz] */
-   unsigned int   node2size;              /* New in r6pl16 [NHz] */
-   unsigned int   node3size;              /* New in r6pl16 [NHz] */
-   unsigned int   node4size;              /* New in r6pl16 [NHz] */
-   unsigned int   node5size;
+   char   *paper;                         /* Papierformat */
+   char   *pagemode;                      /* HowToOpen */
+   char   *viewerpreferences;             /* */
+   char   *pagelayout;                    /* */
+   char   *fitwindow;                     /* */
+   char   *openpage;                      /* */
+   char   *hidetoolbar;                   /* */
+   char   *hidemenubar;                   /* */
+   char   *propfontname;                  /* */
+   UWORD   propfontsize;                  /* */
+   char   *monofontname;                  /* */
+   UWORD   monofontsize;                  /* */
+   UWORD   node1size;                     /* New in r6pl16 [NHz] */
+   UWORD   node2size;                     /* New in r6pl16 [NHz] */
+   UWORD   node3size;                     /* New in r6pl16 [NHz] */
+   UWORD   node4size;                     /* New in r6pl16 [NHz] */
+   UWORD   node5size;
 }  LAYOUTDATA;
 
 

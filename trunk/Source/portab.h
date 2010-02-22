@@ -40,6 +40,7 @@
 *  2010:
 *    fd  Feb 11: file reformatted and tidied up, TAB-free
 *    fd  Feb 19: NIL introduced
+*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -61,10 +62,6 @@
 #define FALSE  0
 #endif
 
-#define BOOLEAN    int
-#define UCHAR      unsigned char
-#define UINT       unsigned int
-
 #define NIL        (-1)                   /* 'invalid' indicator */
 #define EOS        '\0'
 
@@ -73,6 +70,25 @@
 #ifndef UNUSED
 #define UNUSED(x)  if (x) {;}             /* tell compiler that variable seems to be used */
 #endif
+
+
+
+
+
+/*******************************************************************************
+*
+*     TYPE DEFINITIONS
+*
+******************************************|************************************/
+
+typedef int             BOOLEAN;          /* boolean type */
+typedef void            VOID;             /* void type */
+typedef signed char     SBYTE;            /* signed 8 bit integer */
+typedef unsigned char   UBYTE;            /* unsigned 8 bit integer */
+typedef signed int      SWORD;            /* signed 16 bit integer */
+typedef unsigned int    UWORD;            /* unsigned 16 bit integer */
+typedef signed long     SLONG;            /* signed 32 bit integer */
+typedef unsigned long   ULONG;            /* unsigned 32 bit integer */
 
 
 

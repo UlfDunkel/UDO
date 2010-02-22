@@ -1,4 +1,4 @@
-/*******************************************************************************
+/**(TAB=0)**********************************************************************
 *
 *  Project name : UDO
 *  Module name  : str.c
@@ -53,6 +53,7 @@
 *    fd  Feb 19: - CODE_CP1257
 *                - str_flatten() debugged for 1-byte encodings
 *    fd  Feb 20: CODE_CP1251
+*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -1275,7 +1276,7 @@ char     *s)    /* ^ string */
    
    while (*ptr != EOS)                    /* check whole string */
    {
-      if ((UCHAR)*ptr > 127)              /* gotcha! */
+      if ((UBYTE)*ptr > 127)              /* gotcha! */
          return ptr;
       
       ptr++;                              /* next char */
@@ -1313,7 +1314,7 @@ char     *s)    /* ^ string */
    
    while (*ptr != EOS)                    /* check whole string */
    {
-      if ((UCHAR)*ptr == '\025')          /* gotcha! */
+      if ((UBYTE)*ptr == '\025')          /* gotcha! */
          return ptr;
       
       ptr++;                              /* next char */
@@ -1649,25 +1650,25 @@ size_t       len)  /* # of chars to compare */
 *
 ******************************************|************************************/
 
-GLOBAL unsigned str_flatten(
+GLOBAL UWORD str_flatten(
 
 char  *zeile)  /* ^ string */
 {
-   int        i = 0;               /* counter for table entries */
-   int        j = 0;               /* counter for chars of <zeile> */
-   int        len;                 /* indicator for byte length of UTF char */
-   unsigned (*plig)[3];            /* ^ to CODE_xxx_lig[][] arrays */
-   unsigned (*psort);              /* ^ to sort_CODE_xxx[] arrays */
-   unsigned (*pusort)[2];          /* ^ to sort_CODE_UTF[] array */
-   char       sbuf[LINELEN] = "";  /* line buffer */
-   char       cbuf[9] = "";        /* chars buffer */
-   char       lgc[2] = "";         /* ligature char buffer */
-   char       lig[3] = "";         /* ligature string buffer */
-   char      *psbuf;               /* ^ string begin */
-   unsigned   idx;                 /* Unicode codepoint */
-   BOOLEAN    found = FALSE;       /* TRUE: 1-byte Unicode found in relevant table */
-   BOOLEAN    ligature = FALSE;    /* TRUE: ligature found */
-   BOOLEAN    flattened = FALSE;   /* TRUE: char has been flattened */
+   int       i = 0;               /* counter for table entries */
+   int       j = 0;               /* counter for chars of <zeile> */
+   int       len;                 /* indicator for byte length of UTF char */
+   UWORD   (*plig)[3];            /* ^ to CODE_xxx_lig[][] arrays */
+   UWORD   (*psort);              /* ^ to sort_CODE_xxx[] arrays */
+   UWORD   (*pusort)[2];          /* ^ to sort_CODE_UTF[] array */
+   char      sbuf[LINELEN] = "";  /* line buffer */
+   char      cbuf[9] = "";        /* chars buffer */
+   char      lgc[2] = "";         /* ligature char buffer */
+   char      lig[3] = "";         /* ligature string buffer */
+   char     *psbuf;               /* ^ string begin */
+   UWORD     idx;                 /* Unicode codepoint */
+   BOOLEAN   found = FALSE;       /* TRUE: 1-byte Unicode found in relevant table */
+   BOOLEAN   ligature = FALSE;    /* TRUE: ligature found */
+   BOOLEAN   flattened = FALSE;   /* TRUE: char has been flattened */
 
 
    if (!zeile)                            /* empty string? */
@@ -1683,7 +1684,7 @@ char  *zeile)  /* ^ string */
       
       for (j = 0; j < strlen(zeile); j++)
       {
-         idx = (UCHAR)zeile[j];           /* get Unicode codepoint */
+         idx = (UBYTE)zeile[j];           /* get Unicode codepoint */
          found = FALSE;
          
          if (idx < 128)                   /* 0000 0000-0000 007F 0xxxxxxx */
@@ -1697,7 +1698,7 @@ char  *zeile)  /* ^ string */
          {
             cbuf[0] = idx;
             j++;
-            cbuf[1] = (UCHAR)zeile[j];
+            cbuf[1] = (UBYTE)zeile[j];
             cbuf[2] = EOS;
             len = 2;
          }
@@ -1705,9 +1706,9 @@ char  *zeile)  /* ^ string */
          {
             cbuf[0] = idx;
             j++;
-            cbuf[1] = (UCHAR)zeile[j];
+            cbuf[1] = (UBYTE)zeile[j];
             j++;
-            cbuf[2] = (UCHAR)zeile[j];
+            cbuf[2] = (UBYTE)zeile[j];
             cbuf[3] = EOS;
             len = 3;
          }
@@ -1715,11 +1716,11 @@ char  *zeile)  /* ^ string */
          {
             cbuf[0] = idx;
             j++;
-            cbuf[1] = (UCHAR)zeile[j];
+            cbuf[1] = (UBYTE)zeile[j];
             j++;
-            cbuf[2] = (UCHAR)zeile[j];
+            cbuf[2] = (UBYTE)zeile[j];
             j++;
-            cbuf[3] = (UCHAR)zeile[j];
+            cbuf[3] = (UBYTE)zeile[j];
             cbuf[4] = EOS;
             len = 4;
          }
@@ -1898,20 +1899,20 @@ char  *zeile)  /* ^ string */
 
 GLOBAL int str_sort_flatten_cmp(
 
-char         *s1,           /* ^ 1st string for comparison */
-char         *s2)           /* ^ 2nd string for comparison */
+char       *s1,           /* ^ 1st string for comparison */
+char       *s2)           /* ^ 2nd string for comparison */
 {
-   int        i = 0;        /* counter */
-   size_t     c1,           /* Unicode char value (up to 4 bytes!) */
-              c2;           /* Unicode char value (up to 4 bytes!) */
-   char       lgc[2] = "";  /* ligature char buffer */
-   char       lig[3] = "";  /* ligature string buffer */
-   unsigned (*psort);       /* ^ to sort_CODE_xxx[] arrays */
-   unsigned (*pumap);       /* ^ to u_CODE_xxx[] arrays */
-   unsigned (*plig)[3];     /* ^ to CODE_xxx_lig[][] arrays */
-   char      *psbuf;        /* ^ char begin */
-   size_t     len1,         /* length of original 1st string */
-              len2;         /* length of original 2nd string */
+   int      i = 0;        /* counter */
+   size_t   c1,           /* Unicode char value (up to 4 bytes!) */
+            c2;           /* Unicode char value (up to 4 bytes!) */
+   char     lgc[2] = "";  /* ligature char buffer */
+   char     lig[3] = "";  /* ligature string buffer */
+   UWORD  (*psort);       /* ^ to sort_CODE_xxx[] arrays */
+   UWORD  (*pumap);       /* ^ to u_CODE_xxx[] arrays */
+   UWORD  (*plig)[3];     /* ^ to CODE_xxx_lig[][] arrays */
+   char    *psbuf;        /* ^ char begin */
+   size_t   len1,         /* length of original 1st string */
+            len2;         /* length of original 2nd string */
    
             
    if (!s1)                               /* s1 doesn't exist? */
@@ -2085,24 +2086,24 @@ char         *s2)           /* ^ 2nd string for comparison */
 
 GLOBAL int str_UTF_sort_cmp(
 
-char         *s1,             /* ^ 1st string for comparison */
-char         *s2)             /* ^ 2nd string for comparison */
+char       *s1,             /* ^ 1st string for comparison */
+char       *s2)             /* ^ 2nd string for comparison */
 {
-   int        i = 0;          /* counter for table entries */
-   int        j = 0;          /* counter for chars of <zeile> */
-   int        k = 0;          /* counter for s1 + s2 */
-   int        len;            /* indicator for byte length of UTF char */
-   size_t     c1,             /* Unicode char value (up to 4 bytes!) */
-              c2;             /* Unicode char value (up to 4 bytes!) */
-   unsigned (*psort)[2];      /* ^ to sort_CODE_xxx[] arrays */
-   unsigned (*plig)[3];       /* ^ to CODE_xxx_lig[][] arrays */
-   size_t     len1,           /* length of original 1st string */
-              len2;           /* length of original 2nd string */
-   char       sbuf[LINELEN];  /* line buffer */
-   char       cbuf[9];        /* chars buffer */
-   unsigned   idx;            /* Unicode */
-   int        found;          /* TRUE: Unicode found in relevant table */
-   char      *zeile;          /* ^ to s1 or s2 */
+   int      i = 0;          /* counter for table entries */
+   int      j = 0;          /* counter for chars of <zeile> */
+   int      k = 0;          /* counter for s1 + s2 */
+   int      len;            /* indicator for byte length of UTF char */
+   size_t   c1,             /* Unicode char value (up to 4 bytes!) */
+            c2;             /* Unicode char value (up to 4 bytes!) */
+   UWORD  (*psort)[2];      /* ^ to sort_CODE_xxx[] arrays */
+   UWORD  (*plig)[3];       /* ^ to CODE_xxx_lig[][] arrays */
+   size_t   len1,           /* length of original 1st string */
+            len2;           /* length of original 2nd string */
+   char     sbuf[LINELEN];  /* line buffer */
+   char     cbuf[9];        /* chars buffer */
+   UWORD    idx;            /* Unicode */
+   int      found;          /* TRUE: Unicode found in relevant table */
+   char    *zeile;          /* ^ to s1 or s2 */
    
             
    if (!s1)                               /* s1 doesn't exist? */
@@ -2134,7 +2135,7 @@ char         *s2)             /* ^ 2nd string for comparison */
       
          for (j = 0; j < strlen(zeile); j++)
          {
-            idx = (UCHAR)zeile[j];
+            idx = (UBYTE)zeile[j];
          
             if (idx < 128)                /* 0000 0000-0000 007F 0xxxxxxx */
             {
@@ -2147,7 +2148,7 @@ char         *s2)             /* ^ 2nd string for comparison */
             {
                cbuf[0] = idx;
                j++;
-               cbuf[1] = (UCHAR)zeile[j];
+               cbuf[1] = (UBYTE)zeile[j];
                cbuf[2] = EOS;
                len = 2;
             }
@@ -2155,9 +2156,9 @@ char         *s2)             /* ^ 2nd string for comparison */
             {
                cbuf[0] = idx;
                j++;
-               cbuf[1] = (UCHAR)zeile[j];
+               cbuf[1] = (UBYTE)zeile[j];
                j++;
-               cbuf[2] = (UCHAR)zeile[j];
+               cbuf[2] = (UBYTE)zeile[j];
                cbuf[3] = EOS;
                len = 3;
             }
@@ -2165,11 +2166,11 @@ char         *s2)             /* ^ 2nd string for comparison */
             {
                cbuf[0] = idx;
                j++;
-               cbuf[1] = (UCHAR)zeile[j];
+               cbuf[1] = (UBYTE)zeile[j];
                j++;
-               cbuf[2] = (UCHAR)zeile[j];
+               cbuf[2] = (UBYTE)zeile[j];
                j++;
-               cbuf[3] = (UCHAR)zeile[j];
+               cbuf[3] = (UBYTE)zeile[j];
                cbuf[4] = EOS;
                len = 4;
             }

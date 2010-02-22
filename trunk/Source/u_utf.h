@@ -39,6 +39,7 @@
 *  2010:
 *    fd  Feb 18: file introduced
 *    fd  Feb 20: more ligatures added
+*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -65,7 +66,7 @@
 *
 ******************************************|************************************/
 
-static unsigned   CODE_UTF_lig[][3] =     /* CODE_UTF character ligatures */
+static UWORD   CODE_UTF_lig[][3] =        /* CODE_UTF character ligatures */
 {
    { U_LatinCapitalLetterAWithDiaeresis,          U_LatinCapitalLetterA,     U_LatinCapitalLetterE      },  /* 0x00C4 */
    { U_LatinCapitalLetterAWithRingAbove,          U_LatinCapitalLetterA,     U_LatinCapitalLetterO      },  /* 0x00C5 */
@@ -143,7 +144,7 @@ static unsigned   CODE_UTF_lig[][3] =     /* CODE_UTF character ligatures */
 *
 ******************************************|************************************/
 
-static unsigned   sort_CODE_UTF[][2] =    /* CODE_UTF */
+static UWORD   sort_CODE_UTF[][2] =       /* CODE_UTF */
 {
    { U_LatinCapitalLetterAWithGrave                , U_LatinCapitalLetterA }, /* 0x00C0 */
    { U_LatinCapitalLetterAWithAcute                , U_LatinCapitalLetterA }, /* 0x00C1 */

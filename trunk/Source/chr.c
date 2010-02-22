@@ -77,6 +77,7 @@
 *                - recode(): U_ReplacementCharacter or '*' for unsupported chars
 *    fd  Feb 20: - CODE_CP1251
 *                - utf8_to_uchar()
+*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -182,7 +183,7 @@ const char *id_chr_c= "@(#) chr.c       $DATE$";
 
 typedef struct _quotecommand
 {
-  char    *cmd;                           /* String PL6: vorher UCHAR */
+  char    *cmd;                           /* String PL6: vorher UBYTE */
   size_t   cmdlen;                        /* Laenge des Kommandos (need speed ;-))*/
   char    *abb;                           /* Kommandoabkuerzung */
   size_t   abblen;                        /* Laenge der Abkuerzung */
@@ -191,12 +192,12 @@ typedef struct _quotecommand
 
 typedef struct _chartable
 {
-   unsigned   uname;                      /* Unicode name for character */
-   char      *ascii;                      /* ASCII (7bit!) representation, if any */
-   char      *ansi;                       /* Ansi, used for WinHelp, RTF, etc. */
-   char      *tex;                        /* TeX */
-   char      *html;                       /* HTML */
-   char      *ps;                         /* PostScript */
+   UWORD   uname;                         /* Unicode name for character */
+   char   *ascii;                         /* ASCII (7bit!) representation, if any */
+   char   *ansi;                          /* Ansi, used for WinHelp, RTF, etc. */
+   char   *tex;                           /* TeX */
+   char   *html;                          /* HTML */
+   char   *ps;                            /* PostScript */
 }  CHARTABLE;
 
 
@@ -716,11 +717,11 @@ int    char_set)  /* isn't this identical to iCharset??? */
 
 GLOBAL char *unicode2char(
 
-unsigned   unicode)     /* ^ 1st string for comparison */
+UWORD       unicode)  /* ^ 1st string for comparison */
 {
-   int        i = 0;    /* counter */
-   unsigned (*pumap);   /* ^ to u_CODE_xxx[] arrays */
-   char       cbuf[8];  /* */
+   int      i = 0;    /* counter */
+   UWORD  (*pumap);   /* ^ to u_CODE_xxx[] arrays */
+   char     cbuf[8];  /* */
    
             
    if (unicode == U_NIL)                  /* nothing to do */
@@ -807,13 +808,13 @@ unsigned   unicode)     /* ^ 1st string for comparison */
 *
 ******************************************|************************************/
 
-GLOBAL unsigned utf8_to_bstr(
+GLOBAL UWORD utf8_to_bstr(
 
-const char   *sz, 
-int           len)
+const char  *sz,     /* */
+int          len)    /* */
 {
-   int        i = 0;
-   unsigned   temp;
+   int       i = 0;  /* */
+   UWORD     temp;   /* */
    
    
    while (i < len)
@@ -910,13 +911,13 @@ int           len)
 *
 ******************************************|************************************/
 
-GLOBAL unsigned utf8_to_uchar(
+GLOBAL UWORD utf8_to_uchar(
 
-const char   *sz)
+const char  *sz)            /* */
 {
-   int        i = 0;         /* ^ into string */
-   unsigned   temp;          /* buffer for Unicode codepoint value */
-   BOOLEAN    done = FALSE;  /* TRUE: 1st Unicode char found */
+   int       i = 0;         /* ^ into string */
+   UWORD     temp;          /* buffer for Unicode codepoint value */
+   BOOLEAN   done = FALSE;  /* TRUE: 1st Unicode char found */
    
    
    while (i < strlen(sz))                 /* whole string */
@@ -1037,14 +1038,14 @@ const char   *sz)
 
 GLOBAL char *bstr_to_utf8(
 
-unsigned           ucode)
+UWORD      ucode)
 {
-   char            utf[9];
-   unsigned long   temp;
+   char    utf[9];
+   ULONG   temp;
    
    
    memset(utf,0,9);                       /* clear buffer */
-   temp = (unsigned long)ucode;
+   temp = (ULONG)ucode;
    
    if (temp < 0x0080)                     /* 0000 0000-0000 007F -> 0xxxxxxx */
    {
@@ -1196,19 +1197,19 @@ char             *s)        /* ^ string */
 
 GLOBAL void recode(
 
-char         *zeile,             /* ^ line */
-int           char_set)          /* iCharset */
+char        *zeile,             /* ^ line */
+int          char_set)          /* iCharset */
 {
-   char      *ptr;               /* */
-   unsigned   idx;               /* */
-   unsigned (*pUsrc);            /* ^ encoding table for source encoding */
-   unsigned (*pUtrg);            /* ^ encoding table for target encoding */
-   char       sSource[42] = "";  /* source encoding name, human-readable */
-   char       sTarget[42] = "";  /* target encoding name, human-readable */
-   unsigned   i;                 /* counter */
-   unsigned   (*psort);          /* ^ to sort_CODE_xxx[] arrays */
-   unsigned   (*plig)[3];        /* ^ t CODE_xxx_lig[][] arrays (unused here so far!) */
-   BOOLEAN    found = FALSE;     /* TRUE: char found */
+   char     *ptr;               /* */
+   UWORD     idx;               /* */
+   UWORD   (*pUsrc);            /* ^ encoding table for source encoding */
+   UWORD   (*pUtrg);            /* ^ encoding table for target encoding */
+   char      sSource[42] = "";  /* source encoding name, human-readable */
+   char      sTarget[42] = "";  /* target encoding name, human-readable */
+   UWORD     i;                 /* counter */
+   UWORD   (*psort);            /* ^ to sort_CODE_xxx[] arrays */
+   UWORD   (*plig)[3];          /* ^ t CODE_xxx_lig[][] arrays (unused here so far!) */
+   BOOLEAN   found = FALSE;     /* TRUE: char found */
    
 
    if (iEncodingSource < 0)
@@ -1413,7 +1414,7 @@ int           char_set)          /* iCharset */
       
       for (j = 0; j < strlen(zeile); j++)
       {
-         idx = (UCHAR)zeile[j];
+         idx = (UBYTE)zeile[j];
          
          if (idx < 128)                   /* 0000 0000-0000 007F 0xxxxxxx */
          {
@@ -1426,7 +1427,7 @@ int           char_set)          /* iCharset */
          {
             cbuf[0] = idx;
             j++;
-            cbuf[1] = (UCHAR)zeile[j];
+            cbuf[1] = (UBYTE)zeile[j];
             cbuf[2] = EOS;
             len = 2;
          }
@@ -1434,9 +1435,9 @@ int           char_set)          /* iCharset */
          {
             cbuf[0] = idx;
             j++;
-            cbuf[1] = (UCHAR)zeile[j];
+            cbuf[1] = (UBYTE)zeile[j];
             j++;
-            cbuf[2] = (UCHAR)zeile[j];
+            cbuf[2] = (UBYTE)zeile[j];
             cbuf[3] = EOS;
             len = 3;
          }
@@ -1444,11 +1445,11 @@ int           char_set)          /* iCharset */
          {
             cbuf[0] = idx;
             j++;
-            cbuf[1] = (UCHAR)zeile[j];
+            cbuf[1] = (UBYTE)zeile[j];
             j++;
-            cbuf[2] = (UCHAR)zeile[j];
+            cbuf[2] = (UBYTE)zeile[j];
             j++;
-            cbuf[3] = (UCHAR)zeile[j];
+            cbuf[3] = (UBYTE)zeile[j];
             cbuf[4] = EOS;
             len = 4;
          }
@@ -1503,7 +1504,7 @@ int           char_set)          /* iCharset */
       
       for (j = 0; j < strlen(zeile); j++)
       {
-         idx = (UCHAR)zeile[j];
+         idx = (UBYTE)zeile[j];
          
          if (idx < 128)                   /* low-ASCII char */
          {
@@ -1536,7 +1537,7 @@ int           char_set)          /* iCharset */
 
    while (*ptr)                           /* check whole string */
    {
-      idx = (UCHAR)*ptr;                  /* get char value */
+      idx = (UBYTE)*ptr;                  /* get char value */
 
       if (idx > 127)                      /* handle BYTE encodings */
       {
@@ -1589,8 +1590,8 @@ int               type)           /* CHRTAB_... (CHR.H) */
 {
    register int   i = 0;          /* counter for string */
    register int   j = 0;          /* counter for chrtab[] */
-   unsigned     (*pUtrg);         /* ^ encoding table for target encoding */
-   unsigned       idx;            /* Unicode index of char */
+   UWORD        (*pUtrg);         /* ^ encoding table for target encoding */
+   UWORD          idx;            /* Unicode index of char */
    char           sbuf[LINELEN];  /* buffer the whole string */
    char           cbuf[2];        /* buffer for one char */
 
@@ -1650,7 +1651,7 @@ int               type)           /* CHRTAB_... (CHR.H) */
 
    for (i = 0; i < strlen(s); i++)        /* */
    {
-      idx = (UCHAR)s[i];                  /* get Unicode index of char */
+      idx = (UBYTE)s[i];                  /* get Unicode index of char */
       
       if (idx > 127)                      /* convertable char */
       {
@@ -1783,7 +1784,7 @@ const int   style)   /* */
       case TTF_BOLD:
          for (i = 0; i < strlen(d); i++)
          {
-            pixel += width_times_11_bold[(UCHAR)d[i]];
+            pixel += width_times_11_bold[(UBYTE)d[i]];
             pixel++;
          }
          
@@ -1792,7 +1793,7 @@ const int   style)   /* */
       case TTF_ITALIC:
          for (i = 0; i < strlen(d); i++)
          {
-            pixel += width_times_11_italic[(UCHAR)d[i]];
+            pixel += width_times_11_italic[(UBYTE)d[i]];
             pixel++;
          }
          
@@ -1801,7 +1802,7 @@ const int   style)   /* */
       default:
          for (i = 0; i < strlen(d); i++)
          {
-            pixel += width_times_11_regular[(UCHAR)d[i]];
+            pixel += width_times_11_regular[(UBYTE)d[i]];
             pixel++;
          }
       }
@@ -1814,7 +1815,7 @@ const int   style)   /* */
       case TTF_BOLD:
          for (i = 0; i < strlen(d); i++)
          {
-            pixel += width_courier_10_bold[(UCHAR)d[i]];
+            pixel += width_courier_10_bold[(UBYTE)d[i]];
             pixel++;
          }
          
@@ -1823,7 +1824,7 @@ const int   style)   /* */
       case TTF_ITALIC:
          for (i = 0; i < strlen(d); i++)
          {
-            pixel += width_courier_10_italic[(UCHAR)d[i]];
+            pixel += width_courier_10_italic[(UBYTE)d[i]];
             pixel++;
          }
          
@@ -1832,7 +1833,7 @@ const int   style)   /* */
       default:
          for (i = 0; i < strlen(d); i++)
          {
-            pixel += width_courier_10_regular[(UCHAR)d[i]];
+            pixel += width_courier_10_regular[(UBYTE)d[i]];
             pixel++;
          }
       }
@@ -1845,7 +1846,7 @@ const int   style)   /* */
       case TTF_BOLD:
          for (i = 0; i < strlen(d); i++)
          {
-            pixel += width_arial_10_bold[(UCHAR)d[i]];
+            pixel += width_arial_10_bold[(UBYTE)d[i]];
             pixel++;
          }
          
@@ -1854,7 +1855,7 @@ const int   style)   /* */
       case TTF_ITALIC:
          for (i = 0; i < strlen(d); i++)
          {
-            pixel += width_arial_10_italic[(UCHAR)d[i]];
+            pixel += width_arial_10_italic[(UBYTE)d[i]];
             pixel++;
          }
 
@@ -1863,7 +1864,7 @@ const int   style)   /* */
       default:
          for (i = 0; i <strlen(d); i++)
          {
-            pixel += width_arial_10_regular[(UCHAR)d[i]];
+            pixel += width_arial_10_regular[(UBYTE)d[i]];
             pixel++;
          }
       }
@@ -2177,7 +2178,7 @@ char     *s)               /* ^ to label name */
       if (*ptr == '.')
          goto LABEL2HTML_NEXT;
 
-      sprintf(val, "_%X", (UCHAR)*ptr);
+      sprintf(val, "_%X", (UBYTE)*ptr);
       one[0] = *ptr;
       replace_once(ptr, one, val);
 
@@ -2239,7 +2240,7 @@ char       *n)            /* ^ node name */
       }
       else
       {
-         sprintf(v, "_%X", (UCHAR)n[i]);
+         sprintf(v, "_%X", (UBYTE)n[i]);
          strcat(t, v);
       }
    }
@@ -2704,7 +2705,7 @@ char       *n)            /* ^ string */
       }
       else
       {
-         sprintf(v, "_%X", (UCHAR) n[i]);
+         sprintf(v, "_%X", (UBYTE)n[i]);
          strcat(t, v);
       }
    }
@@ -4003,8 +4004,8 @@ BOOLEAN           all)            /* */
 {
    register int   i,              /* */
                   j;              /* counter for chrtab[] */
-   unsigned       idx;
-   unsigned     (*pUtrg);         /* ^ encoding table for target encoding */
+   UWORD          idx;
+   UWORD        (*pUtrg);         /* ^ encoding table for target encoding */
    char          *ptr,            /* */
                  *oldptr;         /* */
    const char    *ptr_quoted;     /* */
@@ -4306,7 +4307,7 @@ BOOLEAN           all)            /* */
          {
             found = FALSE;
             
-            idx = (UCHAR)*ptr;
+            idx = (UBYTE)*ptr;
 
             if (idx > 127)
             {
@@ -4333,7 +4334,7 @@ BOOLEAN           all)            /* */
             {
                for (i = 0; i < MAXTEX7BIT; i++)
                {
-                  if (( /*(UCHAR)*/ ptr[0]) == tex7bit[i].c)
+                  if (( /*(UBYTE)*/ ptr[0]) == tex7bit[i].c)
                   {
                      ptr_quoted = tex7bit[i].quoted;
                      found = TRUE;
@@ -4344,7 +4345,7 @@ BOOLEAN           all)            /* */
 
             if (!found)
             {
-               if ((UCHAR) ptr[0] >= 127)
+               if ((UBYTE) ptr[0] >= 127)
                {
                   warning_no_texchar(ptr[0]);     /* PL12 */
                   sprintf(s_temp, "$\\symbol{%d}$", idx);
@@ -4359,7 +4360,7 @@ BOOLEAN           all)            /* */
 
          for (i = 0; i < MAXLYX7BIT; i++)
          {
-            if (( /*(UCHAR)*/ ptr[0]) == lyx7bit[i].c)
+            if (( /*(UBYTE)*/ ptr[0]) == lyx7bit[i].c)
             {
                ptr_quoted = lyx7bit[i].quoted;
                found = TRUE;
@@ -4373,7 +4374,7 @@ BOOLEAN           all)            /* */
 
          for (i = 0; i < MAXIPF7BIT; i++)
          {
-            if (( /*(UCHAR)*/ ptr[0]) == ipf7bit[i].c)
+            if (( /*(UBYTE)*/ ptr[0]) == ipf7bit[i].c)
             {
                ptr_quoted = ipf7bit[i].quoted;
                found = TRUE;
@@ -4385,7 +4386,7 @@ BOOLEAN           all)            /* */
       case TORTF:
          found = FALSE;
 
-         idx = (UCHAR)*ptr;
+         idx = (UBYTE)*ptr;
 
          if (idx > 127)
          {
@@ -4431,7 +4432,7 @@ BOOLEAN           all)            /* */
       case TOKPS:
          found = FALSE;
 
-         idx = (UCHAR)*ptr;
+         idx = (UBYTE)*ptr;
 
          if (idx > 127)
          {
@@ -4494,7 +4495,7 @@ BOOLEAN           all)            /* */
       case TOAQV:
          found = FALSE;
 
-         idx = (UCHAR)*ptr;
+         idx = (UBYTE)*ptr;
 
          if (idx > 127)
          {
@@ -4527,7 +4528,7 @@ BOOLEAN           all)            /* */
          {
             for (i = 0; i < MAXWIN7BIT; i++)
             {
-               if ((/*(UCHAR)*/ ptr[0]) == win7bit[i].c)
+               if ((/*(UBYTE)*/ ptr[0]) == win7bit[i].c)
                {
                   ptr_quoted = win7bit[i].quoted;
                   found = TRUE;
@@ -4551,7 +4552,7 @@ BOOLEAN           all)            /* */
       case TOMHH:                         /* Microsoft HTML Help */
          found = FALSE;
 
-         idx = (UCHAR)*ptr;
+         idx = (UBYTE)*ptr;
 
          if (idx > 127 && !html_ignore_8bit)
          {
@@ -4606,7 +4607,7 @@ BOOLEAN           all)            /* */
       case TOLDS:
          found = FALSE;
 
-         idx = (UCHAR)*ptr;
+         idx = (UBYTE)*ptr;
 
          if (idx > 127)
          {
@@ -4649,7 +4650,7 @@ BOOLEAN           all)            /* */
       case TOHPH:
          found = FALSE;
 
-         idx = (UCHAR)*ptr;
+         idx = (UBYTE)*ptr;
 
          if (idx > 127)
          {
@@ -4788,9 +4789,9 @@ char             *s)              /* ^ string */
 
    while (ptr[0] != EOS)
    {
-      if ( ((UCHAR)ptr[0]) > 127)
+      if ( ((UBYTE)ptr[0]) > 127)
       {
-         sprintf(sTemp, "\\'%X", (UCHAR)ptr[0]);
+         sprintf(sTemp, "\\'%X", (UBYTE)ptr[0]);
          sChar[0] = ptr[0];
          qreplace_once(ptr, sChar, 1, sTemp, 4);
          ptr += 3;

@@ -73,6 +73,7 @@
 *    fd  Feb 19: - CODE_CP1257; MAXCHARSET removed; udocharset[] resorted for relevance
 *                - c_universal_charset() debugged
 *    fd  Feb 20: CODE_CP1251
+*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -179,7 +180,7 @@ typedef struct _if_stack_item             /* */
    int       kind;                        /* */
    BOOLEAN   ignore;                      /* */
    char      filename[512];               /* */
-   UINT      fileline;                    /* */
+   UWORD     fileline;                    /* */
 }  IF_STACK_ITEM;
 
 
@@ -309,7 +310,7 @@ LOCAL BOOLEAN   format_uses_output_buffer;
 LOCAL BOOLEAN   format_protect_commands;
 
 LOCAL BOOLEAN   out_lf_needed;            /* Fehlt noch ein Linefeed? */
-LOCAL unsigned int   outlines;            /* Anzahl gesicherter Zeilen */
+LOCAL UWORD     outlines;                 /* Anzahl gesicherter Zeilen */
 
 LOCAL char     *tobuffer;                 /* Puffer fuer token_output() */
 LOCAL size_t    tomaxlen;                 /* spaeteste Umbruchstelle in t_o() */
@@ -342,15 +343,15 @@ LOCAL BOOLEAN   bHhpSaved,
 
 LOCAL int       iFilesOpened;             /* Anzahl geoeffneter Files */
                                           /* Zeilen geoeffneter Files */
-LOCAL UINT      uiFileLines[MAXFILECOUNTER];
+LOCAL UWORD     uiFileLines[MAXFILECOUNTER];
                                           /* Namen geoeffneter Files */
 LOCAL char      sFileNames[MAXFILECOUNTER][512 + 1];
 
 LOCAL IF_STACK_ITEM   if_stack[MAX_IF_STACK + 1];
 LOCAL int             counter_if_stack;
 
-LOCAL unsigned long   lPass1Lines,        /* fuer die Prozentangabe */ 
-                      lPass2Lines;
+LOCAL ULONG     lPass1Lines,              /* fuer die Prozentangabe */ 
+                lPass2Lines;
 
 LOCAL HYPLIST  *hyplist;                  /* */
 LOCAL IDXLIST  *idxlist;                  /* */
@@ -11472,7 +11473,7 @@ char           *datei)           /* */
       {
          len = strlen(zeile);
       
-         while ( (len > 0) && (((UCHAR) zeile[len - 1]) <= 32) )
+         while ( (len > 0) && (((UBYTE)zeile[len - 1]) <= 32) )
          {
             zeile[len - 1] = EOS;
             len--;
@@ -12836,7 +12837,7 @@ char           *datei)           /* */
       
       len = strlen(zeile);
       
-      while ( (len > 0) && (((UCHAR)zeile[len - 1]) <= 32) )
+      while ( (len > 0) && (((UBYTE)zeile[len - 1]) <= 32) )
       {
          zeile[len - 1] = EOS;
          len--;
@@ -14499,7 +14500,7 @@ char           *datei)                       /* */
 
       len = strlen(zeile);
       
-      while ( (len > 0) && (((UCHAR)zeile[len - 1]) <= 32) )
+      while ( (len > 0) && (((UBYTE)zeile[len - 1]) <= 32) )
       {
          zeile[len - 1]= EOS;
          len--;

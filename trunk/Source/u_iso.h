@@ -44,6 +44,7 @@
 *                - CODE_CP1250_lig, sort_CODE_CP1250 added
 *    fd  Feb 18: CODE_LAT2
 *    fd  Feb 19: all Microsoft Windows codepage encodings moved to u_mswin.h
+*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -67,7 +68,7 @@
 *
 ******************************************|************************************/
 
-static unsigned   u_CODE_LAT2[] =         /* CODE_LAT2 */
+static UWORD   u_CODE_LAT2[] =            /* CODE_LAT2 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -344,7 +345,7 @@ static unsigned   u_CODE_LAT2[] =         /* CODE_LAT2 */
 *
 ******************************************|************************************/
 
-static unsigned   CODE_LAT2_lig[][3] =    /* CODE_LAT2 character ligatures */
+static UWORD   CODE_LAT2_lig[][3] =       /* CODE_LAT2 character ligatures */
 {
    { U_LatinCapitalLetterAWithDiaeresis, U_LatinCapitalLetterA, U_LatinCapitalLetterE },  /* 0xC4   0x00C4   LATIN CAPITAL LETTER A WITH DIAERESIS */
    { U_LatinCapitalLetterAWithRingAbove, U_LatinCapitalLetterA, U_LatinCapitalLetterO },  /* 0xC5   0x0139   LATIN CAPITAL LETTER L WITH ACUTE */
@@ -375,7 +376,7 @@ static unsigned   CODE_LAT2_lig[][3] =    /* CODE_LAT2 character ligatures */
 *
 ******************************************|************************************/
 
-static unsigned   sort_CODE_LAT2[] =      /* CODE_LAT2 */
+static UWORD   sort_CODE_LAT2[] =         /* CODE_LAT2 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */

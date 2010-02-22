@@ -1,28 +1,48 @@
-/* ############################################################
-   # @(#) commands.h: Kommando- und Platzhalterbezeichner
-   # @(#)
-   # @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
-   # @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)
-   #
-   # This program is free software; you can redistribute it and/or
-   # modify it under the terms of the GNU General Public License
-   # as published by the Free Software Foundation; either version 2
-   # of the License, or (at your option) any later version.
-   # 
-   # This program is distributed in the hope that it will be useful,
-   # but WITHOUT ANY WARRANTY; without even the implied warranty of
-   # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   # GNU General Public License for more details.
-   # 
-   # You should have received a copy of the GNU General Public License
-   # along with this program; if not, write to the Free Software
-   # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-   # 
-   #
-   # demnaechst ein Modul cmd.c anlegen, das die Strings
-   # global zur Verfuegung stellt, um das Binary kleiner
-   # zu halten und den Praeprozessor zu entlasten
-   ############################################################   */
+/**(TAB=0)**********************************************************************
+*
+*  Project name : UDO
+*  Module name  : commands.h
+*  Symbol prefix: commands
+*
+*  Description  : Kommando- und Platzhalterbezeichner
+*
+*  Copyright    : 1995-2001 Dirk Hagedorn
+*  Open Source  : since 2001
+*
+*                 This program is free software; you can redistribute it and/or
+*                 modify it under the terms of the GNU General Public License
+*                 as published by the Free Software Foundation; either version 2
+*                 of the License, or (at your option) any later version.
+*                 
+*                 This program is distributed in the hope that it will be useful,
+*                 but WITHOUT ANY WARRANTY; without even the implied warranty of
+*                 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*                 GNU General Public License for more details.
+*                 
+*                 You should have received a copy of the GNU General Public License
+*                 along with this program; if not, write to the Free Software
+*                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*-------------------------------------------------------------------------------
+*
+*  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
+*  Co-Authors   : Gerhard Stoll (ggs), Ulf Dunkel
+*  Write access : ggs, fd
+*
+*  Notes        : Please add yourself as co-author when you change this file.
+*
+*-------------------------------------------------------------------------------
+*  Things to do : - demnaechst ein Modul cmd.c anlegen, das die Strings global 
+*                   zur Verfuegung stellt, um das Binary kleiner zu halten 
+*                   und den Praeprozessor zu entlasten
+*
+*-------------------------------------------------------------------------------
+*  History:
+*
+*  2010:
+*    fd  Feb 22: header adjusted
+*
+******************************************|************************************/
 
 /* --------------------------------------------------   */
 /* Schriftumschaltungen                                 */
@@ -279,7 +299,7 @@
 #define rtf_inv_node2  "\\s10\\ql\\b\\f0"
 #define rtf_inv_node3  "\\s11\\ql\\b\\f0"
 #define rtf_inv_node4  "\\s12\\ql\\b\\f0"
-#define rtf_inv_node5  "\\s12\\ql\\b\\f0"						/* ToDo: ??? */
+#define rtf_inv_node5  "\\s12\\ql\\b\\f0"                  /* ToDo: ??? */
 
 #define rtf_linedraw   "\\s13\\ql\\f2"
 
@@ -310,6 +330,4 @@
 #define PCH_LINK  "\\#"
 
 
-/* ############################################################
-   # commands.h
-   ############################################################   */
+/* +++ EOF +++ */

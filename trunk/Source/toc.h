@@ -40,6 +40,7 @@
 *  2010:
 *    fd  Jan 20: new: html_quotes()
 *    fd  Feb 05: file reformatted and tidied up; TAB-free
+*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *
 ******************************************|************************************/
 
@@ -109,95 +110,87 @@ typedef struct _style                     /* style sheets */
 
 typedef struct _tocitem                   /* entries for the Table Of Contents (TOC) */
 {
-   char           name[MAX_NODE_LEN + 1]; /* Der Eintrag selber */
-   int            n1;                     /* Kapitelnummer (absolut) */
-   int            n2;                     /* Abschnittnummer (absolut) */
-   int            n3;                     /* Unterabschnittnummer   (absolut) */
-   int            n4;                     /* Unterabschnittnummer   (absolut) */
-   int            n5;                     /* Unterabschnittnummer   (absolut) */
-   int            nr1,nr2,nr3,nr4,nr5;    /* Inhaltsverzeichnis-Nummern */
-   BOOLEAN        appendix;               /* TRUE = Steht im Anhang */
-   int            toctype;                /* !node, !subnode oder !subsubnode */
+   char      name[MAX_NODE_LEN + 1];      /* Der Eintrag selber */
+   int       n1;                          /* Kapitelnummer (absolut) */
+   int       n2;                          /* Abschnittnummer (absolut) */
+   int       n3;                          /* Unterabschnittnummer   (absolut) */
+   int       n4;                          /* Unterabschnittnummer   (absolut) */
+   int       n5;                          /* Unterabschnittnummer   (absolut) */
+   int       nr1,nr2,nr3,nr4,nr5;         /* Inhaltsverzeichnis-Nummern */
+   BOOLEAN   appendix;                    /* TRUE = Steht im Anhang */
+   int       toctype;                     /* !node, !subnode oder !subsubnode */
                                           /* Filename der Sourcecodedatei */   /* V6.5.18 */
-   char           source_filename[MYFILE_FULL_LEN];
-   long           source_line;            /* Zeile im Sourcecode ab der der Node beginnt */   /* V6.5.18 */
-                                          /* HTML-Filename */   /* r5pl3 */
-   char           filename[MAX_FILENAME_LEN + 1];
-                                          /* HTML-Verzeichnisname */   /* r6pl6 */
-   char           dirname[MAX_FILENAME_LEN + 1];
-   char          *keywords;               /* HTML-Keywords */   /* r5pl3 */
-   char          *description;            /* HTML-Description */   /* r6pl5 */
-   char          *robots;                 /* HTML-Robots */   /* V6.5.17 */
-   char          *counter_command;        /* HTML-Kommandos fuer Counter */   /* r5pl4 */
-   
-                                          /* HTML <BODY BGCOLOR=...> */   /* r6pl1 */
-   char           backcolor[MAX_COLOR_LEN + 1];
-                                          /* HTML <BODY TEXT=...> */   /* r6pl1 */
-   char           textcolor[MAX_COLOR_LEN + 1];
-                                          /* HTML <BODY LINK=...> */   /* r6pl1 */
-   char           linkcolor[MAX_COLOR_LEN + 1];
-                                          /* HTML <BODY ALINK=...> */   /* r6pl1 */
-   char           alinkcolor[MAX_COLOR_LEN + 1];
-                                          /* HTML <BODY VLINK=...> */   /* r6pl1 */
-   char           vlinkcolor[MAX_COLOR_LEN + 1];
+   char      source_filename[MYFILE_FULL_LEN];
+   long      source_line;                 /* Zeile im Sourcecode ab der der Node beginnt */   /* V6.5.18 */
+   char      filename[MAX_FILENAME_LEN+1];/* HTML-Filename */   /* r5pl3 */
+   char      dirname[MAX_FILENAME_LEN+1]; /* HTML-Verzeichnisname */   /* r6pl6 */
+   char     *keywords;                    /* HTML-Keywords */   /* r5pl3 */
+   char     *description;                 /* HTML-Description */   /* r6pl5 */
+   char     *robots;                      /* HTML-Robots */   /* V6.5.17 */
+   char     *counter_command;             /* HTML-Kommandos fuer Counter */   /* r5pl4 */
+   char      backcolor[MAX_COLOR_LEN+1];  /* HTML <BODY BGCOLOR=...> */   /* r6pl1 */
+   char      textcolor[MAX_COLOR_LEN+1];  /* HTML <BODY TEXT=...> */   /* r6pl1 */
+   char      linkcolor[MAX_COLOR_LEN+1];  /* HTML <BODY LINK=...> */   /* r6pl1 */
+   char      alinkcolor[MAX_COLOR_LEN+1]; /* HTML <BODY ALINK=...> */   /* r6pl1 */
+   char      vlinkcolor[MAX_COLOR_LEN+1]; /* HTML <BODY VLINK=...> */   /* r6pl1 */
                                           /* HTML <BODY BGCOLOR=...> */   /* r6pl12 */
-   char           modern_backcolor[MAX_COLOR_LEN + 1];
+   char      modern_backcolor[MAX_COLOR_LEN + 1];
                                           /* HTML <BODY TEXT=...> */   /* r6pl12 */
-   char           modern_textcolor[MAX_COLOR_LEN + 1];
+   char      modern_textcolor[MAX_COLOR_LEN + 1];
                                           /* HTML <BODY LINK=...> */   /* r6pl12 */
-   char           modern_linkcolor[MAX_COLOR_LEN + 1];
+   char      modern_linkcolor[MAX_COLOR_LEN + 1];
                                           /* HTML <BODY ALINK=...> */   /* r6pl12 */
-   char           modern_alinkcolor[MAX_COLOR_LEN + 1];
+   char      modern_alinkcolor[MAX_COLOR_LEN + 1];
                                           /* HTML <BODY VLINK=...> */   /* r6pl12 */
-   char           modern_vlinkcolor[MAX_COLOR_LEN + 1];
+   char      modern_vlinkcolor[MAX_COLOR_LEN + 1];
                                           /* HTML <BODY BACKGROUND=...> */   /* r6pl1 */
-   char           backimage[MAX_IMAGE_LEN + 1];
+   char      backimage[MAX_IMAGE_LEN + 1];
                                           /* HTML <style> r6pl15 [NHz] */
-   char           style_name[MAX_IMAGE_LEN + 1];
+   char      style_name[MAX_IMAGE_LEN + 1];
                                           /* HTML < SCRIPT> r6pl15 [NHz] */
-   char           script_name[MAX_IMAGE_LEN + 1];
+   char      script_name[MAX_IMAGE_LEN + 1];
                                           /* HTML < FAVICON> r6pl15 [NHz] */
-   char           favicon_name[MAX_IMAGE_LEN + 1];
+   char      favicon_name[MAX_IMAGE_LEN + 1];
                                           /* HTML < bgsound> V6.5.20 [GS] */
-   char           bgsound[MYFILE_FULL_LEN + 1];
+   char      bgsound[MYFILE_FULL_LEN + 1];
 
-   char          *image;                  /* Grafik anstelle Kapitelnamen */
-   unsigned int   uiImageWidth;           /* Breite und Hoehe des Bildes */ 
-   unsigned int   uiImageHeight;
-   char          *icon;                   /* Icon fuer modernes Layout */
-   unsigned int   uiIconWidth;            /* Breite und Hoehe des Icons */ 
-   unsigned int   uiIconHeight;
-   char          *icon_active;            /* Icon fuer    -""- (aktive Seite) */
-   unsigned int   uiIconActiveWidth;      /* Breite und Hoehe des Icons */ 
-   unsigned int   uiIconActiveHeight;
-   char          *icon_text;              /* Icontext fuer modernes Layout */
-   char          *helpid;                 /* Eine Jump-ID, wie ein Alias */
-   int            mapping;                /* Eine Jump-ID fuer WinHelp/IPF */   /* r6pl7 */
-   BOOLEAN        invisible;              /* TRUE = Nicht ins Inhaltsverzeichnis */
-   BOOLEAN        converted;              /* Bereits Makros etc. angepasst? */
-   int            labindex;               /* lab[]-Position */   /* r5pl6 */
-   int            prev_index;             /* toc[]-Position des HTML-Vorgaengers */   /* r5pl6 */
-   int            next_index;             /* toc[]-Position des HTML-Nachfolgers */   /* r5pl6 */
-   int            up_n1_index;            /* toc[]-Position oberhalb */
-   int            up_n2_index;
-   int            up_n3_index;
-   int            up_n4_index;
-   int            count_n2;               /* Anzahl enthaltener Subnodes */   /* r6pl8 */
-   int            count_n3;               /* Anzahl enthaltener Subsubnodes */   /* r6pl8 */
-   int            count_n4;               /* Anzahl enthaltener Subsubsub... */   /* r6pl8 */
-   int            count_n5;               /* Anzahl enthaltener Subsubsubsub... */   /* r6pl8 */
-   BOOLEAN        ignore_subtoc;          /* ignore !use_auto_subtoc */   /* r5pl6 */
-   BOOLEAN        ignore_links;           /* Keine Links auf dieses anlegen */   /* r5pl8 */
-   BOOLEAN        ignore_index;           /* Keinen Indexeintrag anlegen */   /* r5pl10 */
-   BOOLEAN        ignore_title;           /* Keine Ueberschrift erzeugen */   /* r6pl13 */
-   BOOLEAN        ignore_headline;        /* Keine Kopfzeile erzeugen */   /* r5pl12 */
-   BOOLEAN        ignore_bottomline;      /* Keine Fusszeile erzeugen */   /* r5pl12 */
-   BOOLEAN        ignore_footer;          /* Keinen Footer erzeugen */   /* r6pl2 */
-   char          *raw_header_filename;    /* */                              /* r6pl10*/
-   char          *raw_footer_filename;    /* */                          /* r6pl10*/
-   BOOLEAN        ignore_raw_header;      /* Keinen Userdef-Header einlesen? */   /* r6pl10 */
-   BOOLEAN        ignore_raw_footer;      /* Keinen Userdef-Footer einlesen? */   /* r6pl10 */
-   BOOLEAN        has_children;           /* Hat der Node einen Subnode etc.? */
+   char     *image;                       /* Grafik anstelle Kapitelnamen */
+   UWORD     uiImageWidth;                /* Breite und Hoehe des Bildes */ 
+   UWORD     uiImageHeight;
+   char     *icon;                        /* Icon fuer modernes Layout */
+   UWORD     uiIconWidth;                 /* Breite und Hoehe des Icons */ 
+   UWORD     uiIconHeight;
+   char     *icon_active;                 /* Icon fuer    -""- (aktive Seite) */
+   UWORD     uiIconActiveWidth;           /* Breite und Hoehe des Icons */ 
+   UWORD     uiIconActiveHeight;
+   char     *icon_text;                   /* Icontext fuer modernes Layout */
+   char     *helpid;                      /* Eine Jump-ID, wie ein Alias */
+   int       mapping;                     /* Eine Jump-ID fuer WinHelp/IPF */   /* r6pl7 */
+   BOOLEAN   invisible;                   /* TRUE = Nicht ins Inhaltsverzeichnis */
+   BOOLEAN   converted;                   /* Bereits Makros etc. angepasst? */
+   int       labindex;                    /* lab[]-Position */   /* r5pl6 */
+   int       prev_index;                  /* toc[]-Position des HTML-Vorgaengers */   /* r5pl6 */
+   int       next_index;                  /* toc[]-Position des HTML-Nachfolgers */   /* r5pl6 */
+   int       up_n1_index;                 /* toc[]-Position oberhalb */
+   int       up_n2_index;
+   int       up_n3_index;
+   int       up_n4_index;
+   int       count_n2;                    /* Anzahl enthaltener Subnodes */   /* r6pl8 */
+   int       count_n3;                    /* Anzahl enthaltener Subsubnodes */   /* r6pl8 */
+   int       count_n4;                    /* Anzahl enthaltener Subsubsub... */   /* r6pl8 */
+   int       count_n5;                    /* Anzahl enthaltener Subsubsubsub... */   /* r6pl8 */
+   BOOLEAN   ignore_subtoc;               /* ignore !use_auto_subtoc */   /* r5pl6 */
+   BOOLEAN   ignore_links;                /* Keine Links auf dieses anlegen */   /* r5pl8 */
+   BOOLEAN   ignore_index;                /* Keinen Indexeintrag anlegen */   /* r5pl10 */
+   BOOLEAN   ignore_title;                /* Keine Ueberschrift erzeugen */   /* r6pl13 */
+   BOOLEAN   ignore_headline;             /* Keine Kopfzeile erzeugen */   /* r5pl12 */
+   BOOLEAN   ignore_bottomline;           /* Keine Fusszeile erzeugen */   /* r5pl12 */
+   BOOLEAN   ignore_footer;               /* Keinen Footer erzeugen */   /* r6pl2 */
+   char     *raw_header_filename;         /* */                              /* r6pl10*/
+   char     *raw_footer_filename;         /* */                          /* r6pl10*/
+   BOOLEAN   ignore_raw_header;           /* Keinen Userdef-Header einlesen? */   /* r6pl10 */
+   BOOLEAN   ignore_raw_footer;           /* Keinen Userdef-Footer einlesen? */   /* r6pl10 */
+   BOOLEAN   has_children;                /* Hat der Node einen Subnode etc.? */
 
 }  TOCITEM, *pTOCITEM;
 
@@ -278,7 +271,7 @@ GLOBAL BOOLEAN is_node_link(const char *link, char *node, int *ti, BOOLEAN *isno
 GLOBAL int getLabelIndexFromTocIndex(int *li, const int ti);
 
 GLOBAL void reset_refs(void);
-GLOBAL void auto_references(char *s, const BOOLEAN for_toc, const char *pic, const unsigned int uiWidth, const unsigned int uiHeight);
+GLOBAL void auto_references(char *s, const BOOLEAN for_toc, const char *pic, const UWORD uiWidth, const UWORD uiHeight);
 
 GLOBAL void check_endnode(void);
 
