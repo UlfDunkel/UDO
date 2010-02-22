@@ -259,11 +259,11 @@ LOCAL char       *html_frames_con_title;  /* V6.5.16 [GS] */
 
 typedef struct   _hmtl_index              /* index output for HTML */
    {
-   int       toc_index;                   /* # of found label for TOC */
-   BOOLEAN   is_node;                     /* the label is the caption (?) */
-   char      tocname[512];                /* label or node name */
-   char      sortname[512];               /* 'flattened' label or node name */
-   char      sortchar;                    /* char for sorting purposes */
+   int        toc_index;                  /* # of found label for TOC */
+   BOOLEAN    is_node;                    /* the label is the caption (?) */
+   char       tocname[512];               /* label or node name */
+   char       sortname[512];              /* 'flattened' label or node name */
+   unsigned   codepoint;                  /* Unicode codepoint for sorting purposes */
 }  HTML_INDEX;
 
 
@@ -5446,21 +5446,22 @@ const void  *_p2)              /* */
 
 GLOBAL BOOLEAN save_html_index(void)
 {
-   FILE        *uif;             /* ^ to temporary index file */
-   size_t       i;               /* counter */
-   int          j;               /* counter */
-   size_t       num_index;       /* # of entries in index file */
-   HTML_INDEX  *html_index;      /* ^ to HTML_INDEX array */
-   unsigned     thisc,           /* single char for comparison */
-                lastc;           /* last char from comparison */
-   char         htmlname[512];   /* */
-   char         dummy[512];      /* */
-   char         suff[100];       /* */
-   char         cLabel[512];     /* */
-   char        *tocname;         /* */
-   char        *escapedtocname;  /* */
-   char         jumplist[4096];  /* buffer string for A-Z navigation bar */
-   char         thisc_buf[42];   /* buffer string for converted thisc */
+   FILE        *uif;              /* ^ to temporary index file */
+   size_t       i;                /* counter */
+   int          j;                /* counter */
+   size_t       num_index;        /* # of entries in index file */
+   HTML_INDEX  *html_index;       /* ^ to HTML_INDEX array */
+   unsigned     thisc,            /* single char for comparison */
+                lastc;            /* last char from comparison */
+   char         htmlname[512];    /* */
+   char         dummy[512];       /* */
+   char         suff[100];        /* */
+   char         cLabel[512];      /* */
+   char        *tocname;          /* */
+   char        *escapedtocname;   /* */
+   char         jumplist[4096];   /* buffer string for A-Z navigation bar */
+   char         thisc_char[42];   /* buffer string for converted thisc */
+   char         thisc_label[42];  /* buffer string for HTML convenient converted thisc */
 
    
    num_index = 0;                         /* first we count how much entries we need */
@@ -5526,7 +5527,7 @@ GLOBAL BOOLEAN save_html_index(void)
          strcpy(html_index[num_index].sortname, tocname);
          
                                           /* get character for sorting purposes */
-         html_index[num_index].sortchar = str_flatten(html_index[num_index].sortname);
+         html_index[num_index].codepoint = str_flatten(html_index[num_index].sortname);
          
          num_index++;
                                           /* ignore Table of Contents! */
@@ -5552,20 +5553,20 @@ GLOBAL BOOLEAN save_html_index(void)
    
    for (i = 0; i < num_index; i++)
    {
-      thisc = html_index[i].sortchar;
-
-      thisc_buf[0] = (char)thisc;
-      thisc_buf[1] = 0;                   /* close C string! */
+      thisc = html_index[i].codepoint;
       
-      label2html(thisc_buf);              /* convert critical characters to HTML standards */
+      strcpy(thisc_label,unicode2char(thisc));
+      strcpy(thisc_char, thisc_label);    /* just convert it once, we need it often */
+
+      label2html(thisc_label);            /* convert critical characters to HTML standards */
       
       if (thisc != lastc)
       {
                                           /* set anchor entry for index A-Z list */
          if (lastc == EOS)
-            sprintf(dummy, "<a href=\"%s%s\">%c</a>\n", "#", thisc_buf, (char)thisc);
+            sprintf(dummy, "<a href=\"%s%s\">%s</a>\n", "#", thisc_label, thisc_char);
          else
-            sprintf(dummy, " | <a href=\"%s%s\">%c</a>\n", "#", thisc_buf, (char)thisc);
+            sprintf(dummy, " | <a href=\"%s%s\">%s</a>\n", "#", thisc_label, thisc_char);
          
          strcat(jumplist, dummy);
          
@@ -5586,12 +5587,12 @@ GLOBAL BOOLEAN save_html_index(void)
    
    for (i = 0; i < num_index; i++)
    {
-      thisc = html_index[i].sortchar;     /* use first character for comparison */
-
-      thisc_buf[0] = (char)thisc;
-      thisc_buf[1] = 0;                   /* close C string! */
+      thisc = html_index[i].codepoint;
       
-      label2html(thisc_buf);              /* convert critical characters to HTML standards */
+      strcpy(thisc_label,unicode2char(thisc));
+      strcpy(thisc_char, thisc_label);    /* just convert it once, we need it often */
+
+      label2html(thisc_label);            /* convert critical characters to HTML standards */
       
       if (thisc != lastc)
       {
@@ -5603,11 +5604,11 @@ GLOBAL BOOLEAN save_html_index(void)
          
          if (num_index > 100)             /* set jump entry for index A-Z list */
          {
-            fprintf(uif, "<span class=\"UDO_index_name\"><a name=\"%s\">%c</a></span>%s\n",
-               thisc_buf, (char)thisc, HTML_BR);
+            fprintf(uif, "<span class=\"UDO_index_name\"><a name=\"%s\">%s</a></span>%s\n",
+               thisc_label, thisc_char, HTML_BR);
          }
          else
-            fprintf(uif, "<a name=\"%s\"></a>\n", thisc_buf);
+            fprintf(uif, "<a name=\"%s\"></a>\n", thisc_label);
          
          lastc = thisc;
       }

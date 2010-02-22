@@ -1645,28 +1645,29 @@ size_t       len)  /* # of chars to compare */
 *
 *  return:
 *     <zeile> -> flattened
-*     1st char
+*     Unicode codepoint of 1st char of flattened <zeile>
 *
 ******************************************|************************************/
 
-GLOBAL char str_flatten(
+GLOBAL unsigned str_flatten(
 
 char  *zeile)  /* ^ string */
 {
-   int        i = 0;          /* counter for table entries */
-   int        j = 0;          /* counter for chars of <zeile> */
-   int        len;            /* indicator for byte length of UTF char */
-   unsigned (*plig)[3];       /* ^ to CODE_xxx_lig[][] arrays */
-   unsigned (*psort);         /* ^ to sort_CODE_xxx[] arrays */
-   unsigned (*pusort)[2];     /* ^ to sort_CODE_UTF[] array */
-   char       sbuf[LINELEN];  /* line buffer */
-   char       cbuf[9];        /* chars buffer */
-   char       lgc[2] = "";    /* ligature char buffer */
-   char       lig[3] = "";    /* ligature string buffer */
-   char      *psbuf;          /* ^ string begin */
-   unsigned   idx;            /* Unicode */
-   size_t     c1;             /* char value (up to 4 bytes!) */
-   int        found;          /* TRUE: Unicode found in relevant table */
+   int        i = 0;               /* counter for table entries */
+   int        j = 0;               /* counter for chars of <zeile> */
+   int        len;                 /* indicator for byte length of UTF char */
+   unsigned (*plig)[3];            /* ^ to CODE_xxx_lig[][] arrays */
+   unsigned (*psort);              /* ^ to sort_CODE_xxx[] arrays */
+   unsigned (*pusort)[2];          /* ^ to sort_CODE_UTF[] array */
+   char       sbuf[LINELEN] = "";  /* line buffer */
+   char       cbuf[9] = "";        /* chars buffer */
+   char       lgc[2] = "";         /* ligature char buffer */
+   char       lig[3] = "";         /* ligature string buffer */
+   char      *psbuf;               /* ^ string begin */
+   unsigned   idx;                 /* Unicode codepoint */
+   BOOLEAN    found = FALSE;       /* TRUE: 1-byte Unicode found in relevant table */
+   BOOLEAN    ligature = FALSE;    /* TRUE: ligature found */
+   BOOLEAN    flattened = FALSE;   /* TRUE: char has been flattened */
 
 
    if (!zeile)                            /* empty string? */
@@ -1682,14 +1683,15 @@ char  *zeile)  /* ^ string */
       
       for (j = 0; j < strlen(zeile); j++)
       {
-         idx = (UCHAR)zeile[j];
+         idx = (UCHAR)zeile[j];           /* get Unicode codepoint */
+         found = FALSE;
          
          if (idx < 128)                   /* 0000 0000-0000 007F 0xxxxxxx */
          {
             cbuf[0] = idx;
             cbuf[1] = EOS;
-            strcat(sbuf,cbuf);
-            len = 0;
+            len = 1;
+            found = TRUE;
          }
          else if ((idx & 0xE0) == 0xC0)   /* 0000 0080-0000 07FF 110xxxxx 10xxxxxx */
          {
@@ -1722,60 +1724,67 @@ char  *zeile)  /* ^ string */
             len = 4;
          }
        
-         if (len > 0)
+         if (len > 1)                     /* get Unicode codepoint for composed chars */
          {
-            idx = utf8_to_bstr(cbuf,len);
-            found = FALSE;
+            idx = utf8_to_bstr(cbuf,len); /* Unicode codepoint found */
             i = 0;
+            ligature = FALSE;
          
             while (plig[i][0] != 0x00)    /* is it a ligature? */
             {
                if (idx == plig[i][0])     /* ligature character found */
                {
-                  cbuf[0] = plig[i][1];   /* compose ligature replacement string */
-                  cbuf[1] = plig[i][2];   /* lig[2] must always be 0 (C string!) */
-                  cbuf[2] = EOS;
+                  strcpy(cbuf,unicode2char(plig[i][1]));
                   strcat(sbuf,cbuf);
-                  found = TRUE;           /* this character is done! */
+                  strcpy(cbuf,unicode2char(plig[i][2]));
+                  strcat(sbuf,cbuf);
+                  ligature = TRUE;
+                  break;
                }
 
-               if (found)                 /* was a ligature */
+               if (ligature)              /* was a ligature */
                   break;
-            
+                  
                i++;                       /* check next ligature */
             }
              
-            if (!found)                   /* was a ligature */
+            if (!ligature)                /* was a ligature */
             {
                i = 0;
-         
+               flattened = FALSE;
                                           /* is it a Unicode which we should replace? */
                while (pusort[i][0] != 0x00)
                {
                                           /* Unicode found */
                   if (idx == pusort[i][0])
-                  {
-                     cbuf[0] = pusort[i][1];
-                     cbuf[1] = EOS;
+                  {                       /* use flattened Unicode */
+                     strcpy(cbuf,unicode2char(pusort[i][1]));
                      strcat(sbuf,cbuf);
-                     found = TRUE;
+                     flattened = TRUE;
                   }
             
-                  if (found)
+                  if (flattened)
                      break;
              
                   i++;
                }
+               
+               if (!flattened)            /* no flattened Unicode found */
+                  found = TRUE;           /* use original Unicode */
             }
          }
          
+         if (found)                       /* use original Unicode char */
+            strcat(sbuf,cbuf);            /* we assume it is still in the buffer! */
+         
       }  /* for (j ...) */
-         
+
+     
       strcpy(zeile,sbuf);                 /* restore line */
-         
-      zeile = strupr(zeile);              /* we want to compare UPPERCASE */
-      
-      return zeile[0];                    /* used for Index page */
+      zeile = strupr(zeile);              /* we want to compare UPPERCASE (if possible) */
+
+      idx = utf8_to_uchar(zeile);         /* get codepoint for 1st char */
+      return idx;                         /* */
    }
    
 
@@ -1857,14 +1866,18 @@ char  *zeile)  /* ^ string */
    
    do                                     /* flatten extended characters */
    {
-      c1 = psort[*zeile & 0x00FF];
-      *zeile++ = c1;
+      idx = psort[*zeile & 0x00FF];       /* get Unicode codepoint */
+      
+      strcpy(cbuf, unicode2char(idx));    /* get 1-byte codepage char */
+      strcat(sbuf, cbuf);
+      zeile++;      
    }
-   while (c1 != EOS);
+   while (idx != EOS);
 
    zeile = strupr(psbuf);                 /* restore ^ to begin of string */
-
-   return zeile[0];                       /* used for Index page */
+   
+   idx = psort[*zeile & 0x00FF];          /* get Unicode codepoint of first (maybe flattened) char */
+   return idx;                            /* used for Index page */
 }
 
 
