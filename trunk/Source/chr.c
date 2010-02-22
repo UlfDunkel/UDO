@@ -77,7 +77,8 @@
 *                - recode(): U_ReplacementCharacter or '*' for unsupported chars
 *    fd  Feb 20: - CODE_CP1251
 *                - utf8_to_uchar()
-*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*                - CODE_CP1253
 *
 ******************************************|************************************/
 
@@ -749,6 +750,10 @@ UWORD       unicode)  /* ^ 1st string for comparison */
       pumap = u_CODE_CP1251;
       break;
    
+   case CODE_CP1253:
+      pumap = u_CODE_CP1253;
+      break;
+   
    case CODE_CP1257:
       pumap = u_CODE_CP1257;
       break;
@@ -1249,6 +1254,13 @@ int          char_set)          /* iCharset */
       strcpy(sSource, "Windows codepage 1251");
       break;
       
+   case CODE_CP1253:
+      pUsrc = u_CODE_CP1253;
+      plig  = CODE_CP1253_lig;
+      psort = sort_CODE_CP1253;
+      strcpy(sSource, "Windows codepage 1253");
+      break;
+      
    case CODE_CP1257:
       pUsrc = u_CODE_CP1257;
       plig  = CODE_CP1257_lig;
@@ -1323,6 +1335,11 @@ int          char_set)          /* iCharset */
    case CODE_CP1251:
       pUtrg = u_CODE_CP1251;
       strcpy(sTarget, "Windows codepage 1251");
+      break;
+      
+   case CODE_CP1253:
+      pUtrg = u_CODE_CP1253;
+      strcpy(sTarget, "Windows codepage 1253");
       break;
       
    case CODE_CP1257:
@@ -1615,6 +1632,10 @@ int               type)           /* CHRTAB_... (CHR.H) */
       
    case CODE_CP1251:
       pUtrg = u_CODE_CP1251;
+      break;
+      
+   case CODE_CP1253:
+      pUtrg = u_CODE_CP1253;
       break;
       
    case CODE_CP1257:
@@ -4037,6 +4058,10 @@ BOOLEAN           all)            /* */
       
    case CODE_CP1251:
       pUtrg = u_CODE_CP1251;
+      break;
+      
+   case CODE_CP1253:
+      pUtrg = u_CODE_CP1253;
       break;
       
    case CODE_CP1257:

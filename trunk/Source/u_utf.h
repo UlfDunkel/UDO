@@ -39,7 +39,8 @@
 *  2010:
 *    fd  Feb 18: file introduced
 *    fd  Feb 20: more ligatures added
-*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 22: - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*                - Greek sort chars added
 *
 ******************************************|************************************/
 
@@ -497,136 +498,227 @@ static UWORD   sort_CODE_UTF[][2] =       /* CODE_UTF */
    { U_LatinSmallLetterYWithMacron                 , U_LatinSmallLetterY   }, /* 0x0233 */
 
 
+   /* ------ 0370-03FF: Greek and Coptic ------ */
+
+   { U_GreekSmallLetterHeta                        , U_GreekCapitalLetterHeta             },  /* 0x0371 */
+   { U_GreekSmallLetterArchaicSampi                , U_GreekCapitalLetterArchaicSampi     },  /* 0x0373 */
+   { U_GreekSmallLetterPamphylianDigamma           , U_GreekCapitalLetterPamphylianDigamma},  /* 0x0377 */
+   { U_GreekSmallReversedLunateSigmaSymbol         , U_GreekCapitalLetterSigma            },  /* 0x037B */
+   { U_GreekSmallDottedLunateSigmaSymbol           , U_GreekCapitalLetterSigma            },  /* 0x037C */
+   { U_GreekSmallReversedDottedLunateSigmaSymbol   , U_GreekCapitalLetterSigma            },  /* 0x037D */
+   { U_GreekCapitalLetterAlphaWithTonos            , U_GreekCapitalLetterAlpha            },  /* 0x0386 */
+   { U_GreekCapitalLetterEpsilonWithTonos          , U_GreekCapitalLetterEpsilon          },  /* 0x0388 */
+   { U_GreekCapitalLetterEtaWithTonos              , U_GreekCapitalLetterEta              },  /* 0x0389 */
+   { U_GreekCapitalLetterIotaWithTonos             , U_GreekCapitalLetterIota             },  /* 0x038A */
+   { U_GreekCapitalLetterOmicronWithTonos          , U_GreekCapitalLetterOmicron          },  /* 0x038C */
+   { U_GreekCapitalLetterUpsilonWithTonos          , U_GreekCapitalLetterUpsilon          },  /* 0x038E */
+   { U_GreekCapitalLetterOmegaWithTonos            , U_GreekCapitalLetterOmega            },  /* 0x038F */
+   { U_GreekSmallLetterIotaWithDialytikaAndTonos   , U_GreekCapitalLetterIota             },  /* 0x0390 */
+   { U_GreekCapitalLetterIotaWithDialytika         , U_GreekCapitalLetterIota             },  /* 0x03AA */
+   { U_GreekCapitalLetterUpsilonWithDialytika      , U_GreekCapitalLetterUpsilon          },  /* 0x03AB */
+   { U_GreekSmallLetterAlphaWithTonos              , U_GreekCapitalLetterAlpha            },  /* 0x03AC */
+   { U_GreekSmallLetterEpsilonWithTonos            , U_GreekCapitalLetterEpsilon          },  /* 0x03AD */
+   { U_GreekSmallLetterEtaWithTonos                , U_GreekCapitalLetterEta              },  /* 0x03AE */
+   { U_GreekSmallLetterIotaWithTonos               , U_GreekCapitalLetterIota             },  /* 0x03AF */
+   { U_GreekSmallLetterUpsilonWithDialytikaAndTonos, U_GreekCapitalLetterUpsilon          },  /* 0x03B0 */
+   { U_GreekSmallLetterAlpha                       , U_GreekCapitalLetterAlpha            },  /* 0x03B1 */
+   { U_GreekSmallLetterBeta                        , U_GreekCapitalLetterBeta             },  /* 0x03B2 */
+   { U_GreekSmallLetterGamma                       , U_GreekCapitalLetterGamma            },  /* 0x03B3 */
+   { U_GreekSmallLetterDelta                       , U_GreekCapitalLetterDelta            },  /* 0x03B4 */
+   { U_GreekSmallLetterEpsilon                     , U_GreekCapitalLetterEpsilon          },  /* 0x03B5 */
+   { U_GreekSmallLetterZeta                        , U_GreekCapitalLetterZeta             },  /* 0x03B6 */
+   { U_GreekSmallLetterEta                         , U_GreekCapitalLetterEta              },  /* 0x03B7 */
+   { U_GreekSmallLetterTheta                       , U_GreekCapitalLetterTheta            },  /* 0x03B8 */
+   { U_GreekSmallLetterIota                        , U_GreekCapitalLetterIota             },  /* 0x03B9 */
+   { U_GreekSmallLetterKappa                       , U_GreekCapitalLetterKappa            },  /* 0x03BA */
+   { U_GreekSmallLetterLamda                       , U_GreekCapitalLetterLamda            },  /* 0x03BB */
+   { U_GreekSmallLetterMu                          , U_GreekCapitalLetterMu               },  /* 0x03BC */
+   { U_GreekSmallLetterNu                          , U_GreekCapitalLetterNu               },  /* 0x03BD */
+   { U_GreekSmallLetterXi                          , U_GreekCapitalLetterXi               },  /* 0x03BE */
+   { U_GreekSmallLetterOmicron                     , U_GreekCapitalLetterOmicron          },  /* 0x03BF */
+   { U_GreekSmallLetterPi                          , U_GreekCapitalLetterPi               },  /* 0x03C0 */
+   { U_GreekSmallLetterRho                         , U_GreekCapitalLetterRho              },  /* 0x03C1 */
+   { U_GreekSmallLetterFinalSigma                  , U_GreekCapitalLetterSigma            },  /* 0x03C2 */
+   { U_GreekSmallLetterSigma                       , U_GreekCapitalLetterSigma            },  /* 0x03C3 */
+   { U_GreekSmallLetterTau                         , U_GreekCapitalLetterTau              },  /* 0x03C4 */
+   { U_GreekSmallLetterUpsilon                     , U_GreekCapitalLetterUpsilon          },  /* 0x03C5 */
+   { U_GreekSmallLetterPhi                         , U_GreekCapitalLetterPhi              },  /* 0x03C6 */
+   { U_GreekSmallLetterChi                         , U_GreekCapitalLetterChi              },  /* 0x03C7 */
+   { U_GreekSmallLetterPsi                         , U_GreekCapitalLetterPsi              },  /* 0x03C8 */
+   { U_GreekSmallLetterOmega                       , U_GreekCapitalLetterOmega            },  /* 0x03C9 */
+   { U_GreekSmallLetterIotaWithDialytika           , U_GreekCapitalLetterIota             },  /* 0x03CA */
+   { U_GreekSmallLetterUpsilonWithDialytika        , U_GreekCapitalLetterUpsilon          },  /* 0x03CB */
+   { U_GreekSmallLetterOmicronWithTonos            , U_GreekCapitalLetterOmicron          },  /* 0x03CC */
+   { U_GreekSmallLetterUpsilonWithTonos            , U_GreekCapitalLetterUpsilon          },  /* 0x03CD */
+   { U_GreekSmallLetterOmegaWithTonos              , U_GreekCapitalLetterOmega            },  /* 0x03CE */
+   { U_GreekBetaSymbol                             , U_GreekCapitalLetterBeta             },  /* 0x03D0 */
+   { U_GreekThetaSymbol                            , U_GreekCapitalLetterTheta            },  /* 0x03D1 */
+   { U_GreekUpsilonWithHookSymbol                  , U_GreekCapitalLetterUpsilon          },  /* 0x03D2 */
+   { U_GreekUpsilonWithAcuteAndHookSymbol          , U_GreekCapitalLetterUpsilon          },  /* 0x03D3 */
+   { U_GreekUpsilonWithDiaeresisAndHookSymbol      , U_GreekCapitalLetterUpsilon          },  /* 0x03D4 */
+   { U_GreekPhiSymbol                              , U_GreekCapitalLetterPhi              },  /* 0x03D5 */
+   { U_GreekPiSymbol                               , U_GreekCapitalLetterPi               },  /* 0x03D6 */
+   { U_GreekKaiSymbol                              , U_GreekCapitalKaiSymbol              },  /* 0x03D7 */
+   { U_GreekSmallLetterArchaicKoppa                , U_GreekLetterArchaicKoppa            },  /* 0x03D9 */
+   { U_GreekSmallLetterStigma                      , U_GreekLetterStigma                  },  /* 0x03DB */
+   { U_GreekSmallLetterDigamma                     , U_GreekLetterDigamma                 },  /* 0x03DD */
+   { U_GreekSmallLetterKoppa                       , U_GreekLetterKoppa                   },  /* 0x03DF */
+   { U_GreekSmallLetterSampi                       , U_GreekLetterSampi                   },  /* 0x03E1 */
+   { U_CopticSmallLetterShei                       , U_CopticCapitalLetterShei            },  /* 0x03E3 */
+   { U_CopticSmallLetterFei                        , U_CopticCapitalLetterFei             },  /* 0x03E5 */
+   { U_CopticSmallLetterKhei                       , U_CopticCapitalLetterKhei            },  /* 0x03E7 */
+   { U_CopticSmallLetterHori                       , U_CopticCapitalLetterHori            },  /* 0x03E9 */
+   { U_CopticSmallLetterGangia                     , U_CopticCapitalLetterGangia          },  /* 0x03EB */
+   { U_CopticSmallLetterShima                      , U_CopticCapitalLetterShima           },  /* 0x03ED */
+   { U_CopticSmallLetterDei                        , U_CopticCapitalLetterDei             },  /* 0x03EF */
+   { U_GreekKappaSymbol                            , U_GreekCapitalLetterKappa            },  /* 0x03F0 */
+   { U_GreekRhoSymbol                              , U_GreekCapitalLetterRho              },  /* 0x03F1 */
+   { U_GreekLunateSigmaSymbol                      , U_GreekCapitalLetterSigma            },  /* 0x03F2 */
+   { U_GreekCapitalThetaSymbol                     , U_GreekCapitalLetterTheta            },  /* 0x03F4 */
+   { U_GreekLunateEpsilonSymbol                    , U_GreekCapitalLetterEpsilon          },  /* 0x03F5 */
+   { U_GreekReversedLunateEpsilonSymbol            , U_GreekCapitalLetterEpsilon          },  /* 0x03F6 */
+   { U_GreekSmallLetterSho                         , U_GreekCapitalLetterSho              },  /* 0x03F8 */
+   { U_GreekCapitalLunateSigmaSymbol               , U_GreekCapitalLetterSigma            },  /* 0x03F9 */
+   { U_GreekSmallLetterSan                         , U_GreekCapitalLetterSan              },  /* 0x03FB */
+   { U_GreekRhoWithStrokeSymbol                    , U_GreekCapitalLetterRho              },  /* 0x03FC */
+   { U_GreekCapitalReversedLunateSigmaSymbol       , U_GreekCapitalLetterSigma            },  /* 0x03FD */
+   { U_GreekCapitalDottedLunateSigmaSymbol         , U_GreekCapitalLetterSigma            },  /* 0x03FE */
+   { U_GreekCapitalReversedDottedLunateSigmaSymbol , U_GreekCapitalLetterSigma            },  /* 0x03FF */
+
+
+
+   /* ------ 0400-04FF: Cyrillic ------ */
+
    { U_CyrillicCapitalLetterIeWithGrave                  , U_CyrillicCapitalLetterIe      },  /* 0x0400 */
    { U_CyrillicCapitalLetterUkrainianIe                  , U_CyrillicCapitalLetterIe      },  /* 0x0404 */
    { U_CyrillicCapitalLetterByelorussianUkrainianI       , U_CyrillicCapitalLetterI       },  /* 0x0406 */
    { U_CyrillicCapitalLetterIWithGrave                   , U_CyrillicCapitalLetterI       },  /* 0x040D */
    { U_CyrillicCapitalLetterShortU                       , U_CyrillicCapitalLetterU       },  /* 0x040E */
    { U_CyrillicCapitalLetterShortI                       , U_CyrillicCapitalLetterI       },  /* 0x0419 */
-   { U_CyrillicSmallLetterShortI                         , U_CyrillicSmallLetterI         },  /* 0x0439 */
-   { U_CyrillicSmallLetterIeWithGrave                    , U_CyrillicSmallLetterIe        },  /* 0x0450 */
-   { U_CyrillicSmallLetterUkrainianIe                    , U_CyrillicSmallLetterIe        },  /* 0x0454 */
-   { U_CyrillicSmallLetterByelorussianUkrainianI         , U_CyrillicSmallLetterI         },  /* 0x0456 */
-   { U_CyrillicSmallLetterIWithGrave                     , U_CyrillicSmallLetterI         },  /* 0x045D */
-   { U_CyrillicSmallLetterShortU                         , U_CyrillicSmallLetterU         },  /* 0x045E */
+   { U_CyrillicSmallLetterShortI                         , U_CyrillicCapitalLetterI       },  /* 0x0439 */
+   { U_CyrillicSmallLetterIeWithGrave                    , U_CyrillicCapitalLetterIe      },  /* 0x0450 */
+   { U_CyrillicSmallLetterUkrainianIe                    , U_CyrillicCapitalLetterIe      },  /* 0x0454 */
+   { U_CyrillicSmallLetterByelorussianUkrainianI         , U_CyrillicCapitalLetterI       },  /* 0x0456 */
+   { U_CyrillicSmallLetterIWithGrave                     , U_CyrillicCapitalLetterI       },  /* 0x045D */
+   { U_CyrillicSmallLetterShortU                         , U_CyrillicCapitalLetterU       },  /* 0x045E */
    { U_CyrillicCapitalLetterIotifiedE                    , U_CyrillicCapitalLetterE       },  /* 0x0464 */
-   { U_CyrillicSmallLetterIotifiedE                      , U_CyrillicSmallLetterE         },  /* 0x0465 */
+   { U_CyrillicSmallLetterIotifiedE                      , U_CyrillicCapitalLetterE       },  /* 0x0465 */
    { U_CyrillicCapitalLetterIzhitsaWithDoubleGraveAccent , U_CyrillicCapitalLetterIzhitsa },  /* 0x0476 */
-   { U_CyrillicSmallLetterIzhitsaWithDoubleGraveAccent   , U_CyrillicSmallLetterIzhitsa   },  /* 0x0477 */
+   { U_CyrillicSmallLetterIzhitsaWithDoubleGraveAccent   , U_CyrillicCapitalLetterIzhitsa },  /* 0x0477 */
    { U_CyrillicCapitalLetterRoundOmega                   , U_CyrillicCapitalLetterOmega   },  /* 0x047A */
-   { U_CyrillicSmallLetterRoundOmega                     , U_CyrillicSmallLetterOmega     },  /* 0x047B */
+   { U_CyrillicSmallLetterRoundOmega                     , U_CyrillicCapitalLetterOmega   },  /* 0x047B */
    { U_CyrillicCapitalLetterOmegaWithTitlo               , U_CyrillicCapitalLetterOmega   },  /* 0x047C */
-   { U_CyrillicSmallLetterOmegaWithTitlo                 , U_CyrillicSmallLetterOmega     },  /* 0x047D */
+   { U_CyrillicSmallLetterOmegaWithTitlo                 , U_CyrillicCapitalLetterOmega   },  /* 0x047D */
    { U_CyrillicCapitalLetterShortIWithTail               , U_CyrillicCapitalLetterI       },  /* 0x048A */
-   { U_CyrillicSmallLetterShortIWithTail                 , U_CyrillicSmallLetterI         },  /* 0x048B */
+   { U_CyrillicSmallLetterShortIWithTail                 , U_CyrillicCapitalLetterI       },  /* 0x048B */
    { U_CyrillicCapitalLetterErWithTick                   , U_CyrillicCapitalLetterEr      },  /* 0x048E */
-   { U_CyrillicSmallLetterErWithTick                     , U_CyrillicSmallLetterEr        },  /* 0x048F */
+   { U_CyrillicSmallLetterErWithTick                     , U_CyrillicCapitalLetterEr      },  /* 0x048F */
    { U_CyrillicCapitalLetterGheWithUpturn                , U_CyrillicCapitalLetterGhe     },  /* 0x0490 */
-   { U_CyrillicSmallLetterGheWithUpturn                  , U_CyrillicSmallLetterGhe       },  /* 0x0491 */
+   { U_CyrillicSmallLetterGheWithUpturn                  , U_CyrillicCapitalLetterGhe     },  /* 0x0491 */
    { U_CyrillicCapitalLetterGheWithStroke                , U_CyrillicCapitalLetterGhe     },  /* 0x0492 */
-   { U_CyrillicSmallLetterGheWithStroke                  , U_CyrillicSmallLetterGhe       },  /* 0x0493 */
+   { U_CyrillicSmallLetterGheWithStroke                  , U_CyrillicCapitalLetterGhe     },  /* 0x0493 */
    { U_CyrillicCapitalLetterGheWithMiddleHook            , U_CyrillicCapitalLetterGhe     },  /* 0x0494 */
-   { U_CyrillicSmallLetterGheWithMiddleHook              , U_CyrillicSmallLetterGhe       },  /* 0x0495 */
+   { U_CyrillicSmallLetterGheWithMiddleHook              , U_CyrillicCapitalLetterGhe     },  /* 0x0495 */
    { U_CyrillicCapitalLetterZheWithDescender             , U_CyrillicCapitalLetterZhe     },  /* 0x0496 */
-   { U_CyrillicSmallLetterZheWithDescender               , U_CyrillicSmallLetterZhe       },  /* 0x0497 */
+   { U_CyrillicSmallLetterZheWithDescender               , U_CyrillicCapitalLetterZhe     },  /* 0x0497 */
    { U_CyrillicCapitalLetterZeWithDescender              , U_CyrillicCapitalLetterZe      },  /* 0x0498 */
-   { U_CyrillicSmallLetterZeWithDescender                , U_CyrillicSmallLetterZe        },  /* 0x0499 */
+   { U_CyrillicSmallLetterZeWithDescender                , U_CyrillicCapitalLetterZe      },  /* 0x0499 */
    { U_CyrillicCapitalLetterKaWithDescender              , U_CyrillicCapitalLetterKa      },  /* 0x049A */
-   { U_CyrillicSmallLetterKaWithDescender                , U_CyrillicSmallLetterKa        },  /* 0x049B */
+   { U_CyrillicSmallLetterKaWithDescender                , U_CyrillicCapitalLetterKa      },  /* 0x049B */
    { U_CyrillicCapitalLetterKaWithVerticalStroke         , U_CyrillicCapitalLetterKa      },  /* 0x049C */
-   { U_CyrillicSmallLetterKaWithVerticalStroke           , U_CyrillicSmallLetterKa        },  /* 0x049D */
+   { U_CyrillicSmallLetterKaWithVerticalStroke           , U_CyrillicCapitalLetterKa      },  /* 0x049D */
    { U_CyrillicCapitalLetterKaWithStroke                 , U_CyrillicCapitalLetterKa      },  /* 0x049E */
-   { U_CyrillicSmallLetterKaWithStroke                   , U_CyrillicSmallLetterKa        },  /* 0x049F */
+   { U_CyrillicSmallLetterKaWithStroke                   , U_CyrillicCapitalLetterKa      },  /* 0x049F */
    { U_CyrillicCapitalLetterBashkirKa                    , U_CyrillicCapitalLetterKa      },  /* 0x04A0 */
-   { U_CyrillicSmallLetterBashkirKa                      , U_CyrillicSmallLetterKa        },  /* 0x04A1 */
+   { U_CyrillicSmallLetterBashkirKa                      , U_CyrillicCapitalLetterKa      },  /* 0x04A1 */
    { U_CyrillicCapitalLetterEnWithDescender              , U_CyrillicCapitalLetterEn      },  /* 0x04A2 */
-   { U_CyrillicSmallLetterEnWithDescender                , U_CyrillicSmallLetterEn        },  /* 0x04A3 */
+   { U_CyrillicSmallLetterEnWithDescender                , U_CyrillicCapitalLetterEn      },  /* 0x04A3 */
    { U_CyrillicCapitalLigatureEnGhe                      , U_CyrillicCapitalLetterEn      },  /* 0x04A4 */
-   { U_CyrillicSmallLigatureEnGhe                        , U_CyrillicSmallLetterEn        },  /* 0x04A5 */
+   { U_CyrillicSmallLigatureEnGhe                        , U_CyrillicCapitalLetterEn      },  /* 0x04A5 */
    { U_CyrillicCapitalLetterPeWithMiddleHook             , U_CyrillicCapitalLetterPe      },  /* 0x04A6 */
-   { U_CyrillicSmallLetterPeWithMiddleHook               , U_CyrillicSmallLetterPe        },  /* 0x04A7 */
+   { U_CyrillicSmallLetterPeWithMiddleHook               , U_CyrillicCapitalLetterPe      },  /* 0x04A7 */
    { U_CyrillicCapitalLetterAbkhasianHa                  , U_CyrillicCapitalLetterHa      },  /* 0x04A8 */
-   { U_CyrillicSmallLetterAbkhasianHa                    , U_CyrillicSmallLetterHa        },  /* 0x04A9 */
+   { U_CyrillicSmallLetterAbkhasianHa                    , U_CyrillicCapitalLetterHa      },  /* 0x04A9 */
    { U_CyrillicCapitalLetterEsWithDescender              , U_CyrillicCapitalLetterEs      },  /* 0x04AA */
-   { U_CyrillicSmallLetterEsWithDescender                , U_CyrillicSmallLetterEs        },  /* 0x04AB */
+   { U_CyrillicSmallLetterEsWithDescender                , U_CyrillicCapitalLetterEs      },  /* 0x04AB */
    { U_CyrillicCapitalLetterTeWithDescender              , U_CyrillicCapitalLetterTe      },  /* 0x04AC */
-   { U_CyrillicSmallLetterTeWithDescender                , U_CyrillicSmallLetterTe        },  /* 0x04AD */
+   { U_CyrillicSmallLetterTeWithDescender                , U_CyrillicCapitalLetterTe      },  /* 0x04AD */
    { U_CyrillicCapitalLetterStraightU                    , U_CyrillicCapitalLetterU       },  /* 0x04AE */
-   { U_CyrillicSmallLetterStraightU                      , U_CyrillicSmallLetterU         },  /* 0x04AF */
+   { U_CyrillicSmallLetterStraightU                      , U_CyrillicCapitalLetterU       },  /* 0x04AF */
    { U_CyrillicCapitalLetterStraightUWithStroke          , U_CyrillicCapitalLetterU       },  /* 0x04B0 */
-   { U_CyrillicSmallLetterStraightUWithStroke            , U_CyrillicSmallLetterU         },  /* 0x04B1 */
+   { U_CyrillicSmallLetterStraightUWithStroke            , U_CyrillicCapitalLetterU       },  /* 0x04B1 */
    { U_CyrillicCapitalLetterHaWithDescender              , U_CyrillicCapitalLetterHa      },  /* 0x04B2 */
-   { U_CyrillicSmallLetterHaWithDescender                , U_CyrillicSmallLetterHa        },  /* 0x04B3 */
+   { U_CyrillicSmallLetterHaWithDescender                , U_CyrillicCapitalLetterHa      },  /* 0x04B3 */
    { U_CyrillicCapitalLigatureTeTse                      , U_CyrillicCapitalLetterTe      },  /* 0x04B4 */
-   { U_CyrillicSmallLigatureTeTse                        , U_CyrillicSmallLetterTe        },  /* 0x04B5 */
+   { U_CyrillicSmallLigatureTeTse                        , U_CyrillicCapitalLetterTe      },  /* 0x04B5 */
    { U_CyrillicCapitalLetterCheWithDescender             , U_CyrillicCapitalLetterChe     },  /* 0x04B6 */
-   { U_CyrillicSmallLetterCheWithDescender               , U_CyrillicSmallLetterChe       },  /* 0x04B7 */
+   { U_CyrillicSmallLetterCheWithDescender               , U_CyrillicCapitalLetterChe     },  /* 0x04B7 */
    { U_CyrillicCapitalLetterCheWithVerticalStroke        , U_CyrillicCapitalLetterChe     },  /* 0x04B8 */
-   { U_CyrillicSmallLetterCheWithVerticalStroke          , U_CyrillicSmallLetterChe       },  /* 0x04B9 */
+   { U_CyrillicSmallLetterCheWithVerticalStroke          , U_CyrillicCapitalLetterChe     },  /* 0x04B9 */
    { U_CyrillicCapitalLetterAbkhasianChe                 , U_CyrillicCapitalLetterChe     },  /* 0x04BC */
-   { U_CyrillicSmallLetterAbkhasianChe                   , U_CyrillicSmallLetterChe       },  /* 0x04BD */
+   { U_CyrillicSmallLetterAbkhasianChe                   , U_CyrillicCapitalLetterChe     },  /* 0x04BD */
    { U_CyrillicCapitalLetterAbkhasianCheWithDescender    , U_CyrillicCapitalLetterChe     },  /* 0x04BE */
-   { U_CyrillicSmallLetterAbkhasianCheWithDescender      , U_CyrillicSmallLetterChe       },  /* 0x04BF */
+   { U_CyrillicSmallLetterAbkhasianCheWithDescender      , U_CyrillicCapitalLetterChe     },  /* 0x04BF */
    { U_CyrillicCapitalLetterZheWithBreve                 , U_CyrillicCapitalLetterZhe     },  /* 0x04C1 */
-   { U_CyrillicSmallLetterZheWithBreve                   , U_CyrillicSmallLetterZhe       },  /* 0x04C2 */
+   { U_CyrillicSmallLetterZheWithBreve                   , U_CyrillicCapitalLetterZhe     },  /* 0x04C2 */
    { U_CyrillicCapitalLetterKaWithHook                   , U_CyrillicCapitalLetterKa      },  /* 0x04C3 */
-   { U_CyrillicSmallLetterKaWithHook                     , U_CyrillicSmallLetterKa        },  /* 0x04C4 */
+   { U_CyrillicSmallLetterKaWithHook                     , U_CyrillicCapitalLetterKa      },  /* 0x04C4 */
    { U_CyrillicCapitalLetterElWithTail                   , U_CyrillicCapitalLetterEl      },  /* 0x04C5 */
-   { U_CyrillicSmallLetterElWithTail                     , U_CyrillicSmallLetterEl        },  /* 0x04C6 */
+   { U_CyrillicSmallLetterElWithTail                     , U_CyrillicCapitalLetterEl      },  /* 0x04C6 */
    { U_CyrillicCapitalLetterEnWithHook                   , U_CyrillicCapitalLetterEn      },  /* 0x04C7 */
-   { U_CyrillicSmallLetterEnWithHook                     , U_CyrillicSmallLetterEn        },  /* 0x04C8 */
+   { U_CyrillicSmallLetterEnWithHook                     , U_CyrillicCapitalLetterEn      },  /* 0x04C8 */
    { U_CyrillicCapitalLetterEnWithTail                   , U_CyrillicCapitalLetterEn      },  /* 0x04C9 */
-   { U_CyrillicSmallLetterEnWithTail                     , U_CyrillicSmallLetterEn        },  /* 0x04CA */
+   { U_CyrillicSmallLetterEnWithTail                     , U_CyrillicCapitalLetterEn      },  /* 0x04CA */
    { U_CyrillicCapitalLetterKhakassianChe                , U_CyrillicCapitalLetterChe     },  /* 0x04CB */
-   { U_CyrillicSmallLetterKhakassianChe                  , U_CyrillicSmallLetterChe       },  /* 0x04CC */
+   { U_CyrillicSmallLetterKhakassianChe                  , U_CyrillicCapitalLetterChe     },  /* 0x04CC */
    { U_CyrillicCapitalLetterEmWithTail                   , U_CyrillicCapitalLetterEm      },  /* 0x04CD */
-   { U_CyrillicSmallLetterEmWithTail                     , U_CyrillicSmallLetterEm        },  /* 0x04CE */
+   { U_CyrillicSmallLetterEmWithTail                     , U_CyrillicCapitalLetterEm      },  /* 0x04CE */
    { U_CyrillicCapitalLetterAWithBreve                   , U_CyrillicCapitalLetterA       },  /* 0x04D0 */
-   { U_CyrillicSmallLetterAWithBreve                     , U_CyrillicSmallLetterA         },  /* 0x04D1 */
+   { U_CyrillicSmallLetterAWithBreve                     , U_CyrillicCapitalLetterA       },  /* 0x04D1 */
    { U_CyrillicCapitalLetterAWithDiaeresis               , U_CyrillicCapitalLetterA       },  /* 0x04D2 */
-   { U_CyrillicSmallLetterAWithDiaeresis                 , U_CyrillicSmallLetterA         },  /* 0x04D3 */
+   { U_CyrillicSmallLetterAWithDiaeresis                 , U_CyrillicCapitalLetterA       },  /* 0x04D3 */
    { U_CyrillicCapitalLigatureAIe                        , U_CyrillicCapitalLetterA       },  /* 0x04D4 */
-   { U_CyrillicSmallLigatureAIe                          , U_CyrillicSmallLetterA         },  /* 0x04D5 */
+   { U_CyrillicSmallLigatureAIe                          , U_CyrillicCapitalLetterA       },  /* 0x04D5 */
    { U_CyrillicCapitalLetterIeWithBreve                  , U_CyrillicCapitalLetterIe      },  /* 0x04D6 */
-   { U_CyrillicSmallLetterIeWithBreve                    , U_CyrillicSmallLetterIe        },  /* 0x04D7 */
+   { U_CyrillicSmallLetterIeWithBreve                    , U_CyrillicCapitalLetterIe      },  /* 0x04D7 */
    { U_CyrillicCapitalLetterSchwaWithDiaeresis           , U_CyrillicCapitalLetterSchwa   },  /* 0x04DA */
-   { U_CyrillicSmallLetterSchwaWithDiaeresis             , U_CyrillicSmallLetterSchwa     },  /* 0x04DB */
+   { U_CyrillicSmallLetterSchwaWithDiaeresis             , U_CyrillicCapitalLetterSchwa   },  /* 0x04DB */
    { U_CyrillicCapitalLetterZheWithDiaeresis             , U_CyrillicCapitalLetterZhe     },  /* 0x04DC */
-   { U_CyrillicSmallLetterZheWithDiaeresis               , U_CyrillicSmallLetterZhe       },  /* 0x04DD */
+   { U_CyrillicSmallLetterZheWithDiaeresis               , U_CyrillicCapitalLetterZhe     },  /* 0x04DD */
    { U_CyrillicCapitalLetterZeWithDiaeresis              , U_CyrillicCapitalLetterZe      },  /* 0x04DE */
-   { U_CyrillicSmallLetterZeWithDiaeresis                , U_CyrillicSmallLetterZe        },  /* 0x04DF */
+   { U_CyrillicSmallLetterZeWithDiaeresis                , U_CyrillicCapitalLetterZe      },  /* 0x04DF */
    { U_CyrillicCapitalLetterAbkhasianDze                 , U_CyrillicCapitalLetterDze     },  /* 0x04E0 */
-   { U_CyrillicSmallLetterAbkhasianDze                   , U_CyrillicSmallLetterDze       },  /* 0x04E1 */
+   { U_CyrillicSmallLetterAbkhasianDze                   , U_CyrillicCapitalLetterDze     },  /* 0x04E1 */
    { U_CyrillicCapitalLetterIWithMacron                  , U_CyrillicCapitalLetterI       },  /* 0x04E2 */
-   { U_CyrillicSmallLetterIWithMacron                    , U_CyrillicSmallLetterI         },  /* 0x04E3 */
+   { U_CyrillicSmallLetterIWithMacron                    , U_CyrillicCapitalLetterI       },  /* 0x04E3 */
    { U_CyrillicCapitalLetterIWithDiaeresis               , U_CyrillicCapitalLetterI       },  /* 0x04E4 */
-   { U_CyrillicSmallLetterIWithDiaeresis                 , U_CyrillicSmallLetterI         },  /* 0x04E5 */
+   { U_CyrillicSmallLetterIWithDiaeresis                 , U_CyrillicCapitalLetterI       },  /* 0x04E5 */
    { U_CyrillicCapitalLetterOWithDiaeresis               , U_CyrillicCapitalLetterO       },  /* 0x04E6 */
-   { U_CyrillicSmallLetterOWithDiaeresis                 , U_CyrillicSmallLetterO         },  /* 0x04E7 */
+   { U_CyrillicSmallLetterOWithDiaeresis                 , U_CyrillicCapitalLetterO       },  /* 0x04E7 */
    { U_CyrillicCapitalLetterBarredO                      , U_CyrillicCapitalLetterO       },  /* 0x04E8 */
-   { U_CyrillicSmallLetterBarredO                        , U_CyrillicSmallLetterO         },  /* 0x04E9 */
+   { U_CyrillicSmallLetterBarredO                        , U_CyrillicCapitalLetterO       },  /* 0x04E9 */
    { U_CyrillicCapitalLetterBarredOWithDiaeresis         , U_CyrillicCapitalLetterO       },  /* 0x04EA */
-   { U_CyrillicSmallLetterBarredOWithDiaeresis           , U_CyrillicSmallLetterO         },  /* 0x04EB */
+   { U_CyrillicSmallLetterBarredOWithDiaeresis           , U_CyrillicCapitalLetterO       },  /* 0x04EB */
    { U_CyrillicCapitalLetterEWithDiaeresis               , U_CyrillicCapitalLetterE       },  /* 0x04EC */
-   { U_CyrillicSmallLetterEWithDiaeresis                 , U_CyrillicSmallLetterE         },  /* 0x04ED */
+   { U_CyrillicSmallLetterEWithDiaeresis                 , U_CyrillicCapitalLetterE       },  /* 0x04ED */
    { U_CyrillicCapitalLetterUWithMacron                  , U_CyrillicCapitalLetterU       },  /* 0x04EE */
-   { U_CyrillicSmallLetterUWithMacron                    , U_CyrillicSmallLetterU         },  /* 0x04EF */
+   { U_CyrillicSmallLetterUWithMacron                    , U_CyrillicCapitalLetterU       },  /* 0x04EF */
    { U_CyrillicCapitalLetterUWithDiaeresis               , U_CyrillicCapitalLetterU       },  /* 0x04F0 */
-   { U_CyrillicSmallLetterUWithDiaeresis                 , U_CyrillicSmallLetterU         },  /* 0x04F1 */
+   { U_CyrillicSmallLetterUWithDiaeresis                 , U_CyrillicCapitalLetterU       },  /* 0x04F1 */
    { U_CyrillicCapitalLetterUWithDoubleAcute             , U_CyrillicCapitalLetterU       },  /* 0x04F2 */
-   { U_CyrillicSmallLetterUWithDoubleAcute               , U_CyrillicSmallLetterU         },  /* 0x04F3 */
+   { U_CyrillicSmallLetterUWithDoubleAcute               , U_CyrillicCapitalLetterU       },  /* 0x04F3 */
    { U_CyrillicCapitalLetterCheWithDiaeresis             , U_CyrillicCapitalLetterChe     },  /* 0x04F4 */
-   { U_CyrillicSmallLetterCheWithDiaeresis               , U_CyrillicSmallLetterChe       },  /* 0x04F5 */
+   { U_CyrillicSmallLetterCheWithDiaeresis               , U_CyrillicCapitalLetterChe     },  /* 0x04F5 */
    { U_CyrillicCapitalLetterGheWithDescender             , U_CyrillicCapitalLetterGhe     },  /* 0x04F6 */
-   { U_CyrillicSmallLetterGheWithDescender               , U_CyrillicSmallLetterGhe       },  /* 0x04F7 */
+   { U_CyrillicSmallLetterGheWithDescender               , U_CyrillicCapitalLetterGhe     },  /* 0x04F7 */
    { U_CyrillicCapitalLetterYeruWithDiaeresis            , U_CyrillicCapitalLetterYeru    },  /* 0x04F8 */
-   { U_CyrillicSmallLetterYeruWithDiaeresis              , U_CyrillicSmallLetterYeru      },  /* 0x04F9 */
+   { U_CyrillicSmallLetterYeruWithDiaeresis              , U_CyrillicCapitalLetterYeru    },  /* 0x04F9 */
    { U_CyrillicCapitalLetterGheWithStrokeAndHook         , U_CyrillicCapitalLetterGhe     },  /* 0x04FA */
-   { U_CyrillicSmallLetterGheWithStrokeAndHook           , U_CyrillicSmallLetterGhe       },  /* 0x04FB */
+   { U_CyrillicSmallLetterGheWithStrokeAndHook           , U_CyrillicCapitalLetterGhe     },  /* 0x04FB */
    { U_CyrillicCapitalLetterHaWithHook                   , U_CyrillicCapitalLetterHa      },  /* 0x04FC */
-   { U_CyrillicSmallLetterHaWithHook                     , U_CyrillicSmallLetterHa        },  /* 0x04FD */
+   { U_CyrillicSmallLetterHaWithHook                     , U_CyrillicCapitalLetterHa      },  /* 0x04FD */
    { U_CyrillicCapitalLetterHaWithStroke                 , U_CyrillicCapitalLetterHa      },  /* 0x04FE */
-   { U_CyrillicSmallLetterHaWithStroke                   , U_CyrillicSmallLetterHa        },  /* 0x04FF */
+   { U_CyrillicSmallLetterHaWithStroke                   , U_CyrillicCapitalLetterHa      },  /* 0x04FF */
 
    { 0x0000, U_NIL}  /* list terminator */
 };

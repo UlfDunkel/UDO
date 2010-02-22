@@ -47,6 +47,7 @@
 *    fd  Feb 18: CODE_LAT2
 *    fd  Feb 19: CODE_CP1257
 *    fd  Feb 20: CODE_CP1251
+*    fd  Feb 22: CODE_CP1253
 *
 ******************************************|************************************/
 
@@ -103,8 +104,9 @@
 #define CODE_LAT2    9                    /* ISO Latin 2 (iso-8859-2) */
 #define CODE_CP1257  10                   /* Microsoft Windows codepage 1257 "Baltic" */
 #define CODE_CP1251  11                   /* Microsoft Windows codepage 1251 "Russian" */
+#define CODE_CP1253  12                   /* Microsoft Windows codepage 1253 "Greek" */
 
-#define CODE_TOTAL   12                   /* # of supported encodings */
+#define CODE_TOTAL   13                   /* # of supported encodings */
 
    /* --- Compiler- und systemabhaengige Dinge setzen --- */
 
