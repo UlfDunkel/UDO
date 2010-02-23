@@ -55,7 +55,9 @@
 *    fd  Feb 20: CODE_CP1251
 *    fd  Feb 22: - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *                - CODE_CP1253
-*    fd  Feb 23: CODE_MAC_CE
+*    fd  Feb 23: - CODE_MAC_CE
+*                - CODE_LAT2 -> CODE_LATIN2
+*                - CODE_LATIN1
 *
 ******************************************|************************************/
 
@@ -1828,9 +1830,14 @@ char  *zeile)  /* ^ string */
       psort = sort_CODE_HP8;
       break;
    
-   case CODE_LAT2:
-      plig  = CODE_LAT2_lig;
-      psort = sort_CODE_LAT2;
+   case CODE_LATIN1:
+      plig  = CODE_LATIN1_lig;
+      psort = sort_CODE_LATIN1;
+      break;
+   
+   case CODE_LATIN2:
+      plig  = CODE_LATIN2_lig;
+      psort = sort_CODE_LATIN2;
       break;
    
    case CODE_MAC:
@@ -1978,10 +1985,16 @@ char       *s2)           /* ^ 2nd string for comparison */
       pumap = u_CODE_HP8;
       break;
    
-   case CODE_LAT2:
-      plig  = CODE_LAT2_lig;
-      psort = sort_CODE_LAT2;
-      pumap = u_CODE_LAT2;
+   case CODE_LATIN1:
+      plig  = CODE_LATIN1_lig;
+      psort = sort_CODE_LATIN1;
+      pumap = u_CODE_LATIN1;
+      break;
+   
+   case CODE_LATIN2:
+      plig  = CODE_LATIN2_lig;
+      psort = sort_CODE_LATIN2;
+      pumap = u_CODE_LATIN2;
       break;
    
    case CODE_MAC:
