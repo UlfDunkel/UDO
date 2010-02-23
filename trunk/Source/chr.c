@@ -79,7 +79,8 @@
 *                - utf8_to_uchar()
 *    fd  Feb 22: - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *                - CODE_CP1253
-*    fd  Feb 23: CODE_MAC_CE
+*    fd  Feb 23: - CODE_MAC_CE
+*                - CODE_LAT1 -> CODE_CP1252
 *
 ******************************************|************************************/
 
@@ -648,7 +649,7 @@ int    char_set)  /* isn't this identical to iCharset??? */
    switch (char_set)
    {
 #if !USE_LATIN1_CHARSET
-   case CODE_LAT1:
+   case CODE_CP1252:
       iso2system(zeile);
       break;
 #endif
@@ -783,9 +784,9 @@ UWORD       unicode)  /* ^ 1st string for comparison */
       pumap = u_CODE_TOS;
       break;
    
-   case CODE_LAT1:
+   case CODE_CP1252:
    default:
-      pumap = u_CODE_LAT1;
+      pumap = u_CODE_CP1252;
    }
    
    for (i = 128; i < 256; i++)
@@ -1319,12 +1320,12 @@ int          char_set)          /* iCharset */
       strcpy(sSource, "UTF-8");
       break;
    
-   case CODE_LAT1:
+   case CODE_CP1252:
    default:
-      pUsrc = u_CODE_LAT1;
-      plig  = CODE_LAT1_lig;
-      psort = sort_CODE_LAT1;
-      strcpy(sSource, "ISO Latin 1");
+      pUsrc = u_CODE_CP1252;
+      plig  = CODE_CP1252_lig;
+      psort = sort_CODE_CP1252;
+      strcpy(sSource, "Windows cp1252 (Win Latin 1)");
    }
    
    switch (iEncodingTarget)
@@ -1393,10 +1394,10 @@ int          char_set)          /* iCharset */
       strcpy(sTarget, "UTF-8");
       break;
    
-   case CODE_LAT1:
+   case CODE_CP1252:
    default:
-      pUtrg = u_CODE_LAT1;
-      strcpy(sTarget, "ISO Latin 1");
+      pUtrg = u_CODE_CP1252;
+      strcpy(sTarget, "Windows cp1252 (Win Latin 1)");
    }
    
    UNUSED(plig);
@@ -1415,8 +1416,8 @@ int          char_set)          /* iCharset */
    
    case TOAMG:                            /* AmigaGuide */
    case TOWIN:                            /* Windows Help */
-      iEncodingTarget = CODE_LAT1;
-      strcpy(sTarget, "ISO Latin 1");
+      iEncodingTarget = CODE_CP1252;
+      strcpy(sTarget, "Windows cp1252 (Win Latin 1)");
    }
       
                                           /* nothing to do */   
@@ -1683,9 +1684,9 @@ int               type)           /* CHRTAB_... (CHR.H) */
       pUtrg = u_CODE_TOS;
       break;
    
-   case CODE_LAT1:
+   case CODE_CP1252:
    default:
-      pUtrg = u_CODE_LAT1;
+      pUtrg = u_CODE_CP1252;
    }
    
    memset(sbuf,0,LINELEN);
@@ -4113,9 +4114,9 @@ BOOLEAN           all)            /* */
       pUtrg = u_CODE_TOS;
       break;
    
-   case CODE_LAT1:
+   case CODE_CP1252:
    default:
-      pUtrg = u_CODE_LAT1;
+      pUtrg = u_CODE_CP1252;
    }
    
 

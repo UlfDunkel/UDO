@@ -1853,10 +1853,10 @@ char  *zeile)  /* ^ string */
       psort = sort_CODE_TOS;
       break;
    
-   case CODE_LAT1:
+   case CODE_CP1252:
    default:
-      plig  = CODE_LAT1_lig;
-      psort = sort_CODE_LAT1;
+      plig  = CODE_CP1252_lig;
+      psort = sort_CODE_CP1252;
    }
 
 
@@ -2008,11 +2008,11 @@ char       *s2)           /* ^ 2nd string for comparison */
       pumap = u_CODE_TOS;
       break;
    
-   case CODE_LAT1:
+   case CODE_CP1252:
    default:
-      plig  = CODE_LAT1_lig;
-      psort = sort_CODE_LAT1;
-      pumap = u_CODE_LAT1;
+      plig  = CODE_CP1252_lig;
+      psort = sort_CODE_CP1252;
+      pumap = u_CODE_CP1252;
    }
    
    UNUSED(pumap);
