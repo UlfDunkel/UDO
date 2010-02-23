@@ -4,6 +4,8 @@
 *  Module name  : version.h
 *  Symbol prefix: version
 *
+*  Description  : Compiler- und systemabhaengige Defines setzen
+*
 *  Copyright    : 1995-2001 Dirk Hagedorn
 *  Open Source  : since 2001
 *
@@ -20,9 +22,6 @@
 *                 You should have received a copy of the GNU General Public License
 *                 along with this program; if not, write to the Free Software
 *                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*
-*  Description  :  Compiler- und systemabhaengige Defines setzen
-*
 *
 *-------------------------------------------------------------------------------
 *
@@ -52,6 +51,8 @@
 *                - CODE_LAT1 -> CODE_CP1252
 *                - CODE_LAT2 -> CODE_LATIN2
 *                - CODE_LATIN1
+*                - UDO_PL -> UDO_BUILD (no more patchlevels)
+*                - v7.00 RC1
 *
 ******************************************|************************************/
 
@@ -82,9 +83,9 @@
 
    /* --- Release-Nummer und Patchlevel setzen --- */
 
-#define UDO_REL     "6"
-#define UDO_SUBVER  "5"
-#define UDO_PL      "20 beta (rev. 683)"
+#define UDO_REL     "7"
+#define UDO_SUBVER  "00 RC1"
+#define UDO_BUILD   "(build 915)"
 #define UDO_URL     "http://www.udo-open-source.org"
 #define UDO_MADE    "Made with UDO"
 

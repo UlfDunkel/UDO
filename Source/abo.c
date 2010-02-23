@@ -45,6 +45,7 @@
 *  2010:
 *    fd  Jan 30: file reformatted and tidied up
 *    fd  Feb 16: udofile is global now (udo.h)
+*    fd  Feb 23: UDO_PL -> UDO_BUILD (no more patchlevels)
 *
 ******************************************|************************************/
 
@@ -207,7 +208,7 @@ FILE  *f)  /* ^ aboutudo file */
    fprintf(f, "Dieser Text wurde erzeugt mit\n");
    fprintf(f, "\n");
    fprintf(f, "(!B)UDO(!b)\t(!nl)\n");
-   fprintf(f, "Version %s.%s.%s\t(!nl)\n", UDO_REL, UDO_SUBVER, UDO_PL);
+   fprintf(f, "Version %s.%s %s\t(!nl)\n", UDO_REL, UDO_SUBVER, UDO_BUILD);
    fprintf(f, "%s\n", UDO_OS);
    fprintf(f, "\n");
    fprintf(f, UDO_COPYRIGHT_TEXT);
@@ -248,7 +249,7 @@ FILE  *f)  /* ^ aboutudo file */
    fprintf(f, "This text was made with\n");
    fprintf(f, "\n");
    fprintf(f, "(!B)UDO(!b)\t(!nl)\n");
-   fprintf(f, "Version %s.%s.%s\t(!nl)\n", UDO_REL, UDO_SUBVER, UDO_PL);
+   fprintf(f, "Version %s.%s %s\t(!nl)\n", UDO_REL, UDO_SUBVER, UDO_BUILD);
    fprintf(f, "%s\n", UDO_OS);
    fprintf(f, "\n");
    fprintf(f, UDO_COPYRIGHT_TEXT);

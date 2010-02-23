@@ -76,6 +76,7 @@
 *    fd  Feb 18: - str_UTF_sort_cmp()
 *                - save_html_index() uses a new approach with flattened HTML_INDEX.sortname
 *    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 23: UDO_PL -> UDO_BUILD (no more patchlevels)
 *
 ******************************************|************************************/
 
@@ -2909,8 +2910,8 @@ BOOLEAN    keywords)             /* */
    }
 
    /* Changed in V6.5.5 [NHz] */
-   voutlnf("<meta name=\"Generator\" content=\"UDO %s.%s.%s for %s\"%s>",
-      UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS, closer);
+   voutlnf("<meta name=\"Generator\" content=\"UDO %s.%s %s for %s\"%s>",
+      UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS, closer);
 
    if (titdat.author != NULL)
    {
@@ -5780,8 +5781,8 @@ GLOBAL BOOLEAN save_htmlhelp_contents(const char* filename)
         fprintf(file, "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n");
    fprintf(file, "<html>\n");
    fprintf(file, "<head>\n");
-        fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Version %s.%s.%s for %s\">\n",
-                                                UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
+        fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Version %s.%s %s for %s\">\n",
+                                                UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS);
         fprintf(file, "<!-- Sitemap 1.0 -->\n");
         fprintf(file, "</head>\n");
         fprintf(file, "<body>\n");
@@ -5944,8 +5945,8 @@ GLOBAL BOOLEAN save_htmlhelp_index(const char* filename)
         fprintf(file, "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n");
         fprintf(file, "<html>\n");
         fprintf(file, "<head>\n");
-        fprintf(file, "<meta name=\"Generator\" content=\"UDO Version %s.%s.%s for %s\">\n",
-                                                UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
+        fprintf(file, "<meta name=\"Generator\" content=\"UDO Version %s.%s %s for %s\">\n",
+                                                UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS);
         if (titdat.author != NULL)
                 fprintf(file, "<meta name=\"Author\" content=\"%s\">\n", titdat.author);
         fprintf(file, "<!-- Sitemap 1.0 -->\n");

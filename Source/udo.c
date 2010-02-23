@@ -79,6 +79,7 @@
 *                - CODE_LAT1 -> CODE_CP1252
 *                - CODE_LAT2 -> CODE_LATIN2
 *                - CODE_LATIN1
+*                - UDO_PL -> UDO_BUILD (no more patchlevels)
 *
 ******************************************|************************************/
 
@@ -9618,7 +9619,7 @@ LOCAL void output_preamble(void)
       
       
    case TOLYX:
-      voutlnf("# This file was created by UDO Version %s.%s.%s", UDO_REL, UDO_SUBVER, UDO_PL);
+      voutlnf("# This file was created by UDO Version %s.%s %s", UDO_REL, UDO_SUBVER, UDO_BUILD);
       outln("# UDO (C) 1995-2001 by Dirk Hagedorn (info@dirk-hagedorn.de)");
       outln("# UDO (C) 2001-2010 by The UDO Community (www.udo-open-source.org)");
       outln("\\lyxformat 2.10");
@@ -9695,7 +9696,7 @@ LOCAL void output_preamble(void)
       }
       else
       {
-         voutlnf("Made with UDO Version %s.%s.%s", UDO_REL, UDO_SUBVER, UDO_PL);
+         voutlnf("Made with UDO Version %s.%s %s", UDO_REL, UDO_SUBVER, UDO_BUILD);
       }
 
       if (uses_maketitle)
@@ -13781,7 +13782,7 @@ LOCAL void set_format_flags(void)
 LOCAL void show_udo_intro(void)
 {
    show_status_info("");
-   sprintf(sInfMsg, "This is UDO Version %s.%s.%s for %s", UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
+   sprintf(sInfMsg, "This is UDO Version %s.%s %s for %s", UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS);
    show_status_loginfo(sInfMsg);
    show_status_loginfo(COPYRIGHT);
    sprintf(sInfMsg, "UDO is Open Source (see %s for further information).", UDO_URL);
