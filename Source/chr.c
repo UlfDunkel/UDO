@@ -81,6 +81,8 @@
 *                - CODE_CP1253
 *    fd  Feb 23: - CODE_MAC_CE
 *                - CODE_LAT1 -> CODE_CP1252
+*                - CODE_LAT2 -> CODE_LATIN2
+*                - CODE_LATIN1
 *
 ******************************************|************************************/
 
@@ -764,8 +766,12 @@ UWORD       unicode)  /* ^ 1st string for comparison */
       pumap = u_CODE_HP8;
       break;
    
-   case CODE_LAT2:
-      pumap = u_CODE_LAT2;
+   case CODE_LATIN1:
+      pumap = u_CODE_LATIN1;
+      break;
+   
+   case CODE_LATIN2:
+      pumap = u_CODE_LATIN2;
       break;
    
    case CODE_MAC:
@@ -1281,10 +1287,17 @@ int          char_set)          /* iCharset */
       strcpy(sSource, "HP-Roman8");
       break;
    
-   case CODE_LAT2:
-      pUsrc = u_CODE_LAT2;
-      plig  = CODE_LAT2_lig;
-      psort = sort_CODE_LAT2;
+   case CODE_LATIN1:
+      pUsrc = u_CODE_LATIN1;
+      plig  = CODE_LATIN1_lig;
+      psort = sort_CODE_LATIN1;
+      strcpy(sSource, "ISO Latin 1");
+      break;
+   
+   case CODE_LATIN2:
+      pUsrc = u_CODE_LATIN2;
+      plig  = CODE_LATIN2_lig;
+      psort = sort_CODE_LATIN2;
       strcpy(sSource, "ISO Latin 2");
       break;
    
@@ -1325,7 +1338,7 @@ int          char_set)          /* iCharset */
       pUsrc = u_CODE_CP1252;
       plig  = CODE_CP1252_lig;
       psort = sort_CODE_CP1252;
-      strcpy(sSource, "Windows cp1252 (Win Latin 1)");
+      strcpy(sSource, "Windows codepage 1252 (Win Latin 1)");
    }
    
    switch (iEncodingTarget)
@@ -1365,8 +1378,13 @@ int          char_set)          /* iCharset */
       strcpy(sTarget, "HP-Roman8");
       break;
    
-   case CODE_LAT2:
-      pUtrg = u_CODE_LAT2;
+   case CODE_LATIN1:
+      pUtrg = u_CODE_LATIN1;
+      strcpy(sTarget, "ISO Latin 1");
+      break;
+   
+   case CODE_LATIN2:
+      pUtrg = u_CODE_LATIN2;
       strcpy(sTarget, "ISO Latin 2");
       break;
    
@@ -1397,7 +1415,7 @@ int          char_set)          /* iCharset */
    case CODE_CP1252:
    default:
       pUtrg = u_CODE_CP1252;
-      strcpy(sTarget, "Windows cp1252 (Win Latin 1)");
+      strcpy(sTarget, "Windows codepage 1252 (Win Latin 1)");
    }
    
    UNUSED(plig);
@@ -1417,7 +1435,7 @@ int          char_set)          /* iCharset */
    case TOAMG:                            /* AmigaGuide */
    case TOWIN:                            /* Windows Help */
       iEncodingTarget = CODE_CP1252;
-      strcpy(sTarget, "Windows cp1252 (Win Latin 1)");
+      strcpy(sTarget, "Windows codepage 1252 (Win Latin 1)");
    }
       
                                           /* nothing to do */   
@@ -1664,8 +1682,12 @@ int               type)           /* CHRTAB_... (CHR.H) */
       pUtrg = u_CODE_HP8;
       break;
    
-   case CODE_LAT2:
-      pUtrg = u_CODE_LAT2;
+   case CODE_LATIN1:
+      pUtrg = u_CODE_LATIN1;
+      break;
+   
+   case CODE_LATIN2:
+      pUtrg = u_CODE_LATIN2;
       break;
    
    case CODE_MAC:
@@ -4094,8 +4116,12 @@ BOOLEAN           all)            /* */
       pUtrg = u_CODE_HP8;
       break;
    
-   case CODE_LAT2:
-      pUtrg = u_CODE_LAT2;
+   case CODE_LATIN1:
+      pUtrg = u_CODE_LATIN1;
+      break;
+   
+   case CODE_LATIN2:
+      pUtrg = u_CODE_LATIN2;
       break;
    
    case CODE_MAC:

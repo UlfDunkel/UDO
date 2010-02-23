@@ -77,6 +77,8 @@
 *                - CODE_CP1253 (Greek)
 *    fd  Feb 23: - CODE_MAC_CE
 *                - CODE_LAT1 -> CODE_CP1252
+*                - CODE_LAT2 -> CODE_LATIN2
+*                - CODE_LATIN1
 *
 ******************************************|************************************/
 
@@ -251,8 +253,10 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
    {"greek",      CODE_CP1253   },        /*  */
    {"cp1257",     CODE_CP1257   },        /*  */
    {"baltic",     CODE_CP1257   },        /*  */
-   {"iso-8859-2", CODE_LAT2     },        /*  */
-   {"latin2",     CODE_LAT2     },        /*  */
+   {"iso-8859-1", CODE_LATIN1   },        /*  */
+   {"latin1",     CODE_LATIN1   },        /*  */
+   {"iso-8859-2", CODE_LATIN2   },        /*  */
+   {"latin2",     CODE_LATIN2   },        /*  */
    {"mac",        CODE_MAC      },        /*  */
    {"mac_ce",     CODE_MAC_CE   },        /*  */
    {"tos",        CODE_TOS      },        /*  */
