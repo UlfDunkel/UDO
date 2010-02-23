@@ -83,6 +83,8 @@
 *                - CODE_LAT1 -> CODE_CP1252
 *                - CODE_LAT2 -> CODE_LATIN2
 *                - CODE_LATIN1
+*                - bstr_to_utf8() adjusted, using ^string instead of local string
+*                - adjustments from Xcode's complaints for strupr()
 *
 ******************************************|************************************/
 
@@ -231,10 +233,10 @@ LOCAL int       texinfo_np_counter;       /* Non-Printable-Texinfo-Node-Counter 
 
 LOCAL char *html_specs[HTML_SPEC_MAX] =   /* list of supported HTML specials */
 {
-   {"&hellip;"},
-   {"&mdash;"},
-   {"&ndash;"},
-   {"&shy;"}
+   "&hellip;",
+   "&mdash;",
+   "&ndash;",
+   "&shy;"
 };
 
 
@@ -722,19 +724,21 @@ int    char_set)  /* isn't this identical to iCharset??? */
 
 GLOBAL char *unicode2char(
 
-UWORD       unicode)  /* ^ 1st string for comparison */
+UWORD       unicode,  /* ^ 1st string for comparison */
+char       *cbuf)
 {
    int      i = 0;    /* counter */
    UWORD  (*pumap);   /* ^ to u_CODE_xxx[] arrays */
-   char     cbuf[8];  /* */
    
             
    if (unicode == U_NIL)                  /* nothing to do */
       return "";
    
    if (iEncodingTarget == CODE_UTF8)      /* Unicode first! */
-      return bstr_to_utf8(unicode);
-   
+   {
+      bstr_to_utf8(unicode,cbuf);
+      return cbuf;
+   }
 
    switch (iEncodingTarget)               /* use the right tables! ;-) */
    {
@@ -1055,10 +1059,10 @@ const char  *sz)            /* */
 
 GLOBAL char *bstr_to_utf8(
 
-UWORD      ucode)
+UWORD      ucode,  /* */
+char      *utf)    /* */
 {
-   char    utf[9];
-   ULONG   temp;
+   ULONG   temp;   /* */
    
    
    memset(utf,0,9);                       /* clear buffer */
@@ -1184,7 +1188,7 @@ char             *s)        /* ^ string */
    while (u_CODE_UDO[i]->udo[0] != EOS)   /* check whole table */
    {
                                           /* get recoded replacement char(s) */
-      strcpy(cbuf, unicode2char(u_CODE_UDO[i]->unicode));
+      unicode2char(u_CODE_UDO[i]->unicode,cbuf);
                                           /* replace all existances */
       replace_all(s, u_CODE_UDO[i]->udo, cbuf);
       
@@ -1567,12 +1571,12 @@ int          char_set)          /* iCharset */
          }
          else if (pUsrc[idx] != U_NIL)    /* valid Unicode */
          {
-            strcpy(cbuf,bstr_to_utf8(pUsrc[idx]));
+            bstr_to_utf8(pUsrc[idx],cbuf);
             strcat(sbuf,cbuf);
          }
          else                             /* wrong source encoding or invalid char */
          {
-            strcpy(cbuf,bstr_to_utf8(U_ReplacementCharacter));
+            bstr_to_utf8(U_ReplacementCharacter,cbuf);
             strcat(sbuf,cbuf);
          }
       }

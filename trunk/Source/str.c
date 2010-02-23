@@ -58,6 +58,8 @@
 *    fd  Feb 23: - CODE_MAC_CE
 *                - CODE_LAT2 -> CODE_LATIN2
 *                - CODE_LATIN1
+*                - unicode2char() adjusted, using ^string instead of local string
+*                - adjustments from Xcode's complaints for strupr()
 *
 ******************************************|************************************/
 
@@ -1739,9 +1741,9 @@ char  *zeile)  /* ^ string */
             {
                if (idx == plig[i][0])     /* ligature character found */
                {
-                  strcpy(cbuf,unicode2char(plig[i][1]));
+                  unicode2char(plig[i][1],cbuf);
                   strcat(sbuf,cbuf);
-                  strcpy(cbuf,unicode2char(plig[i][2]));
+                  unicode2char(plig[i][2],cbuf);
                   strcat(sbuf,cbuf);
                   ligature = TRUE;
                   break;
@@ -1763,7 +1765,7 @@ char  *zeile)  /* ^ string */
                                           /* Unicode found */
                   if (idx == pusort[i][0])
                   {                       /* use flattened Unicode */
-                     strcpy(cbuf,unicode2char(pusort[i][1]));
+                     unicode2char(pusort[i][1],cbuf);
                      strcat(sbuf,cbuf);
                      flattened = TRUE;
                   }
@@ -1786,7 +1788,7 @@ char  *zeile)  /* ^ string */
 
      
       strcpy(zeile,sbuf);                 /* restore line */
-      zeile = strupr(zeile);              /* we want to compare UPPERCASE (if possible) */
+      my_strupr(zeile);                   /* we want to compare UPPERCASE (if possible) */
 
       idx = utf8_to_uchar(zeile);         /* get codepoint for 1st char */
       return idx;                         /* */
@@ -1888,13 +1890,14 @@ char  *zeile)  /* ^ string */
    {
       idx = psort[*zeile & 0x00FF];       /* get Unicode codepoint */
       
-      strcpy(cbuf, unicode2char(idx));    /* get 1-byte codepage char */
+      unicode2char(idx,cbuf);             /* get 1-byte codepage char */
       strcat(sbuf, cbuf);
       zeile++;      
    }
    while (idx != EOS);
 
-   zeile = strupr(psbuf);                 /* restore ^ to begin of string */
+   my_strupr(psbuf);                      /* restore ^ to begin of string */
+   strcpy(zeile, psbuf);
    
    idx = psort[*zeile & 0x00FF];          /* get Unicode codepoint of first (maybe flattened) char */
    return idx;                            /* used for Index page */
@@ -2075,10 +2078,8 @@ char       *s2)           /* ^ 2nd string for comparison */
    
    s2 = psbuf;                            /* restore ^ 2nd string */
    
-   
-   s1 = strupr(s1);                       /* we compare UPPERCASE */
-   s2 = strupr(s2);
-
+   my_strupr(s1);                         /* we compare UPPERCASE */
+   my_strupr(s2);
    
    do                                     /* --- compare characters --- */
    {
@@ -2267,8 +2268,8 @@ char       *s2)             /* ^ 2nd string for comparison */
       
    }
 
-   s1 = strupr(s1);                       /* we compare UPPERCASE */
-   s2 = strupr(s2);
+   my_strupr(s1);                         /* we compare UPPERCASE */
+   my_strupr(s2);
    
    len1 = strlen(s1);
    len2 = strlen(s2);
@@ -2331,8 +2332,8 @@ char         *s2)           /* ^ 2nd string for comparison */
       return 1;                           /* so s1 is greater */
 
 
-   s1 = strupr(s1);                       /* we compare UPPERCASE */
-   s2 = strupr(s2);
+   my_strupr(s1);                         /* we compare UPPERCASE */
+   my_strupr(s2);
 
    
    do                                     /* --- compare characters --- */
