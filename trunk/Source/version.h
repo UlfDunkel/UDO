@@ -48,6 +48,7 @@
 *    fd  Feb 19: CODE_CP1257
 *    fd  Feb 20: CODE_CP1251
 *    fd  Feb 22: CODE_CP1253
+*    fd  Feb 23: CODE_MAC_CE
 *
 ******************************************|************************************/
 
@@ -105,8 +106,9 @@
 #define CODE_CP1257  10                   /* Microsoft Windows codepage 1257 "Baltic" */
 #define CODE_CP1251  11                   /* Microsoft Windows codepage 1251 "Russian" */
 #define CODE_CP1253  12                   /* Microsoft Windows codepage 1253 "Greek" */
+#define CODE_MAC_CE  13                   /* Apple Central Europe */
 
-#define CODE_TOTAL   13                   /* # of supported encodings */
+#define CODE_TOTAL   14                   /* # of supported encodings */
 
    /* --- Compiler- und systemabhaengige Dinge setzen --- */
 

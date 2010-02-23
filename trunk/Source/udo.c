@@ -75,6 +75,7 @@
 *    fd  Feb 20: CODE_CP1251
 *    fd  Feb 22: - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *                - CODE_CP1253 (Greek)
+*    fd  Feb 23: CODE_MAC_CE
 *
 ******************************************|************************************/
 
@@ -261,6 +262,7 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
    {"greek",      CODE_CP1253   },        /*  */
    {"cp1257",     CODE_CP1257   },        /*  */
    {"baltic",     CODE_CP1257   },        /*  */
+   {"mac_ce",     CODE_MAC_CE   },        /*  */
    
    {"",           NIL           }         /* list terminator */
 };

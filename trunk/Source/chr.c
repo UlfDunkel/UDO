@@ -79,6 +79,7 @@
 *                - utf8_to_uchar()
 *    fd  Feb 22: - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *                - CODE_CP1253
+*    fd  Feb 23: CODE_MAC_CE
 *
 ******************************************|************************************/
 
@@ -770,6 +771,10 @@ UWORD       unicode)  /* ^ 1st string for comparison */
       pumap = u_CODE_MAC;
       break;
    
+   case CODE_MAC_CE:
+      pumap = u_CODE_MAC_CE;
+      break;
+   
    case CODE_NEXT:
       pumap = u_CODE_NEXT;
       break;
@@ -1289,6 +1294,13 @@ int          char_set)          /* iCharset */
       strcpy(sSource, "Mac");
       break;
    
+   case CODE_MAC_CE:
+      pUsrc = u_CODE_MAC_CE;
+      plig  = CODE_MAC_CE_lig;
+      psort = sort_CODE_MAC_CE;
+      strcpy(sSource, "Mac CE");
+      break;
+   
    case CODE_NEXT:
       pUsrc = u_CODE_NEXT;
       plig  = CODE_NEXT_lig;
@@ -1360,6 +1372,11 @@ int          char_set)          /* iCharset */
    case CODE_MAC:
       pUtrg = u_CODE_MAC;
       strcpy(sTarget, "Mac");
+      break;
+   
+   case CODE_MAC_CE:
+      pUtrg = u_CODE_MAC;
+      strcpy(sTarget, "Mac CE");
       break;
    
    case CODE_NEXT:
@@ -1652,6 +1669,10 @@ int               type)           /* CHRTAB_... (CHR.H) */
    
    case CODE_MAC:
       pUtrg = u_CODE_MAC;
+      break;
+   
+   case CODE_MAC_CE:
+      pUtrg = u_CODE_MAC_CE;
       break;
    
    case CODE_NEXT:
@@ -4078,6 +4099,10 @@ BOOLEAN           all)            /* */
    
    case CODE_MAC:
       pUtrg = u_CODE_MAC;
+      break;
+   
+   case CODE_MAC_CE:
+      pUtrg = u_CODE_MAC_CE;
       break;
    
    case CODE_NEXT:
