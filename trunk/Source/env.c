@@ -51,6 +51,7 @@
 *    fd  Feb 05: c_end_enumerate() outputs an empty HTML code line (for readability)
 *    fd  Feb 08: issue #79 fixed (weird empty lines on "!autoref []" in description environments
 *    fd  Feb 17: win2sys() -> recode_chrtab()
+*    fd  Feb 23: UDO_PL -> UDO_BUILD (no more patchlevels)
 *
 ******************************************|************************************/
 
@@ -4406,7 +4407,7 @@ GLOBAL void c_begin_document(void)
          if (titdat.author != NULL)
             voutlnf("  /Author (%s)", titdat.author);
          
-         voutlnf("  /Creator (UDO Version %s.%s.%s for %s)", UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
+         voutlnf("  /Creator (UDO Version %s.%s %s for %s)", UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS);
          voutlnf("  /CreationDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
          voutlnf("  /ModDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
          
@@ -4660,7 +4661,7 @@ GLOBAL void c_begin_document(void)
       outln("\\sectd\\pgndec\\headery1134\\footery1134\\cols1\\colsx567\\pgndec");
 
                                           /* New in V6.5.9 [NHz] */
-      voutlnf("{\\*\\revtbl {Unknown;}{UDO Version %s.%s.%s;}}", UDO_REL, UDO_SUBVER, UDO_PL);
+      voutlnf("{\\*\\revtbl {Unknown;}{UDO Version %s.%s %s;}}", UDO_REL, UDO_SUBVER, UDO_BUILD);
 
       voutlnf("\\f0\\fs%d", iDocPropfontSize);   
 
@@ -4777,7 +4778,7 @@ GLOBAL void c_begin_document(void)
 
       /* ---- About UDO ---- */
       
-      voutlnf("  {\\doccomm UDO Version %s.%s.%s}", UDO_REL, UDO_SUBVER, UDO_PL);
+      voutlnf("  {\\doccomm UDO Version %s.%s %s}", UDO_REL, UDO_SUBVER, UDO_BUILD);
 
       /* ---- Erstellungsdatum & Sonstiges ---- */
       
@@ -4989,7 +4990,7 @@ GLOBAL void c_begin_document(void)
          voutlnf("  /Keywords (%s)", titdat.keywords);
       }
       
-      voutlnf("  /Creator (UDO Version %s.%s.%s for %s)", UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
+      voutlnf("  /Creator (UDO Version %s.%s %s for %s)", UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS);
       voutlnf("  /CreationDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
       voutlnf("  /ModDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
       outln("/DOCINFO pdfmark\n");
@@ -5172,7 +5173,7 @@ GLOBAL void c_end_document(void)
          memset(n, '#', 62);   n[62] = EOS;
          outln("");
          voutlnf("%s  %s", sSrcRemOn, n);
-         voutlnf("    # @(#) %s%s - made with UDO Version %s.%s.%s for %s", outfile.name, outfile.suff, UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS);
+         voutlnf("    # @(#) %s%s - made with UDO Version %s.%s %s for %s", outfile.name, outfile.suff, UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS);
          voutlnf("    %s %s", n, sSrcRemOff);
       }
       
@@ -5199,9 +5200,9 @@ GLOBAL void c_end_document(void)
          outln("actx acty moveto");
          
          if (destlang == TOGER)
-            voutlnf("(Version %s.%s.%s) (%s) (%s) aboutUDO_ger", UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS, UDO_URL);
+            voutlnf("(Version %s.%s %s) (%s) (%s) aboutUDO_ger", UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS, UDO_URL);
          else
-            voutlnf("(Version %s.%s.%s) (%s) (%s) aboutUDO_eng", UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS, UDO_URL);
+            voutlnf("(Version %s.%s %s) (%s) (%s) aboutUDO_eng", UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS, UDO_URL);
             
          outln("newpage");
       }

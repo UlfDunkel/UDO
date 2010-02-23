@@ -44,6 +44,7 @@
 *                - tos2iso() and stuff removed
 *    fd  Feb 19: id_charset_h removed
 *    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 23: UDO_PL -> UDO_BUILD (no more patchlevels)
 *
 ******************************************|************************************/
 
@@ -482,8 +483,8 @@ GLOBAL BOOLEAN break_action ( void )
 LOCAL void show_version ( void )
 {
    /* fprintf(stdout, "\n%s\n", strPrgname); v6.4.1[vj]: commented out (wished by Ulrich Kretschmer) */
-   fprintf(stdout, "UDO Version %s.%s.%s for %s, %s %s\n",
-            UDO_REL, UDO_SUBVER, UDO_PL, UDO_OS, compile_date, compile_time);
+   fprintf(stdout, "UDO Version %s.%s %s for %s, %s %s\n",
+            UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS, compile_date, compile_time);
    fprintf(stdout, "%s\n", COPYRIGHT);
    sprintf(sInfMsg, "UDO is Open Source (see %s for further information).\n", UDO_URL);
    fprintf(stdout, sInfMsg);
