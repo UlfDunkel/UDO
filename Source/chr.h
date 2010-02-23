@@ -45,6 +45,7 @@
 *    fd  Feb 19: uni2ascii() renamed -> recode_udo()
 *    fd  Feb 20: utf8_to_uchar()
 *    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 23: some prototypes adjusted
 *
 ******************************************|************************************/
 
@@ -129,10 +130,10 @@ GLOBAL UWORD utf8_to_bstr(const char *sz, int len);
 GLOBAL UWORD utf8_to_uchar(const char *sz);
 
    /* convert Unicode value into UTF-8 bytes */
-GLOBAL char *bstr_to_utf8(UWORD ucode);
+GLOBAL char *bstr_to_utf8(UWORD ucode, char *s);
 
    /* get char(s!) from Unicode value */
-GLOBAL char *unicode2char(UWORD unicode);
+GLOBAL char *unicode2char(UWORD unicode, char *s);
 
 
 GLOBAL void convert_sz(char * s);

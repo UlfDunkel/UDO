@@ -80,6 +80,7 @@
 *                - CODE_LAT2 -> CODE_LATIN2
 *                - CODE_LATIN1
 *                - UDO_PL -> UDO_BUILD (no more patchlevels)
+*                - adjustments from Xcode's complaints for stricmp()
 *
 ******************************************|************************************/
 
@@ -11490,7 +11491,7 @@ char           *datei)           /* */
          }
 
                                           /* don't recode twice! */
-         if (stricmp(tmp_datei,udofile.full)) 
+         if (my_stricmp(tmp_datei,udofile.full)) 
          {
             recode(zeile, iCharset);
 /*          convert_sz(zeile); */
@@ -12854,7 +12855,8 @@ char           *datei)           /* */
       }
 
 
-      if (stricmp(tmp_datei,udofile.full))/* don't recode twice! */
+                                          /* don't recode twice! */
+      if (my_stricmp(tmp_datei,udofile.full))
       {
          if (zeile[0] != EOS)
          {

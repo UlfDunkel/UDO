@@ -76,7 +76,8 @@
 *    fd  Feb 18: - str_UTF_sort_cmp()
 *                - save_html_index() uses a new approach with flattened HTML_INDEX.sortname
 *    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
-*    fd  Feb 23: UDO_PL -> UDO_BUILD (no more patchlevels)
+*    fd  Feb 23: - UDO_PL -> UDO_BUILD (no more patchlevels)
+*                - unicode2char() adjusted, using ^string instead of local string
 *
 ******************************************|************************************/
 
@@ -5557,7 +5558,7 @@ GLOBAL BOOLEAN save_html_index(void)
    {
       thisc = html_index[i].codepoint;
       
-      strcpy(thisc_label,unicode2char(thisc));
+      unicode2char(thisc,thisc_label);
       strcpy(thisc_char, thisc_label);    /* just convert it once, we need it often */
 
       label2html(thisc_label);            /* convert critical characters to HTML standards */
@@ -5591,7 +5592,7 @@ GLOBAL BOOLEAN save_html_index(void)
    {
       thisc = html_index[i].codepoint;
       
-      strcpy(thisc_label,unicode2char(thisc));
+      unicode2char(thisc,thisc_label);
       strcpy(thisc_char, thisc_label);    /* just convert it once, we need it often */
 
       label2html(thisc_label);            /* convert critical characters to HTML standards */
