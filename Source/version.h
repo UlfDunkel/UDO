@@ -48,7 +48,8 @@
 *    fd  Feb 19: CODE_CP1257
 *    fd  Feb 20: CODE_CP1251
 *    fd  Feb 22: CODE_CP1253
-*    fd  Feb 23: CODE_MAC_CE
+*    fd  Feb 23: - CODE_MAC_CE
+*                - CODE_LAT1 -> CODE_CP1252
 *
 ******************************************|************************************/
 
@@ -92,7 +93,7 @@
 
    /* --- Zeichensaetze --- */
 
-#define CODE_LAT1    0                    /* Microsoft Windows codepage 1252 aka ISO Latin 1 */
+#define CODE_CP1252  0                    /* Microsoft Windows codepage 1252 */
 #define CODE_DOS     1                    /* IBM PC */
 #define CODE_437     1                    /* DOS Codepage 437 (wie IBM PC) */
 #define CODE_TOS     2                    /* Atari TOS */
@@ -178,7 +179,7 @@
 #define USE_SLASH            0
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   1
-#define SYSTEM_CHARSET       CODE_LAT1
+#define SYSTEM_CHARSET       CODE_CP1252
 #define HAVE_STRUPR          1
 #define HAVE_STRLWR          1
 #define HAVE_STRICMP         1
@@ -195,7 +196,7 @@
 #define USE_SLASH            1
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   1
-#define SYSTEM_CHARSET       CODE_LAT1
+#define SYSTEM_CHARSET       CODE_CP1252
 #define HAVE_STRUPR          0
 #define HAVE_STRLWR          0
 #define HAVE_STRICMP         0
@@ -212,7 +213,7 @@
 #define USE_SLASH            1
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   1
-#define SYSTEM_CHARSET       CODE_LAT1
+#define SYSTEM_CHARSET       CODE_CP1252
 #define HAVE_STRUPR          0
 #define HAVE_STRLWR          0
 #define HAVE_STRICMP         0
@@ -229,7 +230,7 @@
 #define USE_SLASH            1
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   1
-#define SYSTEM_CHARSET       CODE_LAT1
+#define SYSTEM_CHARSET       CODE_CP1252
 #define HAVE_STRUPR          1
 #define HAVE_STRLWR          1
 #define HAVE_STRICMP         0
@@ -246,7 +247,7 @@
 #define USE_SLASH            1
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   1
-#define SYSTEM_CHARSET       CODE_LAT1
+#define SYSTEM_CHARSET       CODE_CP1252
 #define HAVE_STRUPR          0
 #define HAVE_STRLWR          0
 #define HAVE_STRICMP         0
@@ -263,7 +264,7 @@
 #define USE_SLASH            1
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   1
-#define SYSTEM_CHARSET       CODE_LAT1
+#define SYSTEM_CHARSET       CODE_CP1252
 #define HAVE_STRUPR          0
 #define HAVE_STRLWR          0
 #define HAVE_STRICMP         0
@@ -280,7 +281,7 @@
 #define USE_SLASH            1
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   1
-#define SYSTEM_CHARSET       CODE_LAT1
+#define SYSTEM_CHARSET       CODE_CP1252
 #define HAVE_STRUPR          1
 #define HAVE_STRLWR          0
 #define HAVE_STRICMP         0

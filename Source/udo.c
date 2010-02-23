@@ -75,7 +75,8 @@
 *    fd  Feb 20: CODE_CP1251
 *    fd  Feb 22: - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *                - CODE_CP1253 (Greek)
-*    fd  Feb 23: CODE_MAC_CE
+*    fd  Feb 23: - CODE_MAC_CE
+*                - CODE_LAT1 -> CODE_CP1252
 *
 ******************************************|************************************/
 
@@ -238,31 +239,29 @@ typedef struct _udocharset                /* list of encoding mnemonics */
 
 UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
 {
-   {"iso",        CODE_LAT1     },        /*  */
-   {"latin1",     CODE_LAT1     },        /*  */
-   {"iso-8859-1", CODE_LAT1     },        /*  */
-   {"win",        CODE_LAT1     },        /*  */
+   {"sys",        SYSTEM_CHARSET},        /*  */
    {"utf-8",      CODE_UTF8     },        /*  */
    {"utf8",       CODE_UTF8     },        /*  */
-   {"mac",        CODE_MAC      },        /*  */
-   {"tos",        CODE_TOS      },        /*  */
-   {"dos",        CODE_437      },        /*  */
-   {"cp437",      CODE_437      },        /*  */
-   {"os2",        CODE_850      },        /*  */
-   {"cp850",      CODE_850      },        /*  */
-   {"hp8",        CODE_HP8      },        /*  */
-   {"next",       CODE_NEXT     },        /*  */
-   {"sys",        SYSTEM_CHARSET},        /*  */
-   {"iso-8859-2", CODE_LAT2     },        /*  */
-   {"latin2",     CODE_LAT2     },        /*  */
    {"cp1250",     CODE_CP1250   },        /*  */
    {"cp1251",     CODE_CP1251   },        /*  */
    {"russian",    CODE_CP1251   },        /*  */
+   {"cp1252",     CODE_CP1252   },        /*  */
+   {"win",        CODE_CP1252   },        /*  */
    {"cp1253",     CODE_CP1253   },        /*  */
    {"greek",      CODE_CP1253   },        /*  */
    {"cp1257",     CODE_CP1257   },        /*  */
    {"baltic",     CODE_CP1257   },        /*  */
+   {"iso-8859-2", CODE_LAT2     },        /*  */
+   {"latin2",     CODE_LAT2     },        /*  */
+   {"mac",        CODE_MAC      },        /*  */
    {"mac_ce",     CODE_MAC_CE   },        /*  */
+   {"tos",        CODE_TOS      },        /*  */
+   {"cp437",      CODE_437      },        /*  */
+   {"dos",        CODE_437      },        /*  */
+   {"cp850",      CODE_850      },        /*  */
+   {"os2",        CODE_850      },        /*  */
+   {"hp8",        CODE_HP8      },        /*  */
+   {"next",       CODE_NEXT     },        /*  */
    
    {"",           NIL           }         /* list terminator */
 };

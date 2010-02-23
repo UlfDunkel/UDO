@@ -8,7 +8,7 @@
 *
 *                 - u_CODE_CP1250[]: cp1250 ("Central European")
 *                 - u_CODE_CP1251[]: cp1251 ("Russian")
-*                 - u_CODE_LAT1[]  : cp1252 ("Western")
+*                 - u_CODE_CP1252[]: cp1252 ("Western")
 *                 - u_CODE_CP1253[]: cp1253 ("Greek")
 *                 - u_CODE_CP1257[]: cp1257 ("Baltic")
 *
@@ -48,6 +48,7 @@
 *    fd  Feb 20: - CODE_CP1251 (Russian)
 *    fd  Feb 22: - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *                - CODE_CP1253 (Greek)
+*    fd  Feb 23: CODE_LAT1 -> CODE_CP1252
 *
 ******************************************|************************************/
 
@@ -1255,7 +1256,7 @@ static UWORD   sort_CODE_CP1251[] =       /* CODE_CP1251 */
 
 /******************************************************************************
 *
-*  u_CODE_LAT1[]:
+*  u_CODE_CP1252[]:
 *     Unicode named codepage for Microsoft Windows encoding codepage 1252
 *
 *  Name:             cp1252 to Unicode table
@@ -1267,7 +1268,7 @@ static UWORD   sort_CODE_CP1251[] =       /* CODE_CP1251 */
 *
 ******************************************|************************************/
 
-static UWORD   u_CODE_LAT1[] =            /* CODE_LAT1 */
+static UWORD   u_CODE_CP1252[] =          /* CODE_CP1252 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -1542,15 +1543,15 @@ static UWORD   u_CODE_LAT1[] =            /* CODE_LAT1 */
 
 /******************************************************************************
 *
-*  CODE_LAT1_lig[]:
+*  CODE_CP1252_lig[]:
 *     list of ligatures:
 *
-*  CODE_LAT1_lig[0] is the original ligature character
-*  CODE_LAT1_lig[1] + CODE_LAT1_lig[2] are the resolved ligature characters
+*  CODE_CP1252_lig[0] is the original ligature character
+*  CODE_CP1252_lig[1] + CODE_CP1252_lig[2] are the resolved ligature characters
 *
 ******************************************|************************************/
 
-static UWORD   CODE_LAT1_lig[][3] =       /* CODE_LAT1 character ligatures */
+static UWORD   CODE_CP1252_lig[][3] =     /* CODE_CP1252 character ligatures */
 {
    {0x008c, U_LatinCapitalLetterO, U_LatinCapitalLetterE},    /* 0x008c  U_LatinCapitalLigatureOE */
    {0x009c, U_LatinSmallLetterO,   U_LatinSmallLetterE},      /* 0x009c  U_LatinSmallLigatureOE */
@@ -1580,13 +1581,13 @@ static UWORD   CODE_LAT1_lig[][3] =       /* CODE_LAT1 character ligatures */
 
 /******************************************************************************
 *
-*  CODE_LAT1 sorting table:
+*  CODE_CP1252 sorting table:
 *
 *  table format: sortingCharacter, (ANSI hex value  |  Original character)
 *
 ******************************************|************************************/
 
-static UWORD    sort_CODE_LAT1[] =        /* CODE_LAT1 */
+static UWORD    sort_CODE_CP1252[] =      /* CODE_CP1252 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
