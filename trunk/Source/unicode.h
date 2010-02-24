@@ -41,6 +41,7 @@
 *    fd  Feb 19: 0400-04FF: Cyrillic
 *    fd  Feb 22: - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *                - 0370-03ff completed (Greek)
+*    fd  Feb 24: - 0590-05FF completed (Hebrew)
 *
 ******************************************|************************************/
 /*KEY _NAME="unicode definitions" */
@@ -1408,7 +1409,72 @@
 
    /* ------ 0500-052F: Cyrillic Supplementary ------ */
    /* ------ 0530-058F: Armenian ------ */
+   
    /* ------ 0590-05FF: Hebrew ------ */
+
+   /*        Cantillation marks: */
+#define U_HebrewAccentEtnahta                           0x0591
+#define U_HebrewAccentSegol                             0x0592
+#define U_HebrewAccentShalshelet                        0x0593
+#define U_HebrewAccentZaqefQatan                        0x0594
+#define U_HebrewAccentZaqefGadol                        0x0595
+#define U_HebrewAccentTipeha                            0x0596
+#define U_HebrewAccentRevia                             0x0597
+#define U_HebrewAccentZarqa                             0x0598
+#define U_HebrewAccentPashta                            0x0599
+#define U_HebrewAccentYetiv                             0x059A
+#define U_HebrewAccentTevir                             0x059B
+#define U_HebrewAccentGeresh                            0x059C
+#define U_HebrewAccentGereshMuqdam                      0x059D
+#define U_HebrewAccentGershayim                         0x059E
+#define U_HebrewAccentQarneyPara                        0x059F
+#define U_HebrewAccentTelishaGedola                     0x05A0
+#define U_HebrewAccentPazer                             0x05A1
+#define U_HebrewAccentAtnahHafukh                       0x05A2
+#define U_HebrewAccentMunah                             0x05A3
+#define U_HebrewAccentMahapakh                          0x05A4
+#define U_HebrewAccentMerkha                            0x05A5
+#define U_HebrewAccentMerkhaKefula                      0x05A6
+#define U_HebrewAccentDarga                             0x05A7
+#define U_HebrewAccentQadma                             0x05A8
+#define U_HebrewAccentTelishaQetana                     0x05A9
+#define U_HebrewAccentYerahBenYomo                      0x05AA
+#define U_HebrewAccentOle                               0x05AB
+#define U_HebrewAccentIluy                              0x05AC
+#define U_HebrewAccentDehi                              0x05AD
+#define U_HebrewAccentZinor                             0x05AE
+#define U_HebrewMarkasoraCircle                         0x05AF
+   
+   /*        Points and punctuation: */
+#define U_HebrewPointSheva                              0x05B0
+#define U_HebrewPointHatafSegol                         0x05B1
+#define U_HebrewPointHatafPatah                         0x05B2
+#define U_HebrewPointHatafQamats                        0x05B3
+#define U_HebrewPointHiriq                              0x05B4
+#define U_HebrewPointTsere                              0x05B5
+#define U_HebrewPointSegol                              0x05B6
+#define U_HebrewPointPatah                              0x05B7
+#define U_HebrewPointQamats                             0x05B8
+#define U_HebrewPointHolam                              0x05B9
+#define U_HebrewPointHolamHaserForVav                   0x05BA
+#define U_HebrewPointQubuts                             0x05BB
+#define U_HebrewPointDageshOrMapiq                      0x05BC
+#define U_HebrewPointMeteg                              0x05BD
+#define U_HebrewPunctuationMaqaf                        0x05BE
+#define U_HebrewPointRafe                               0x05BF
+#define U_HebrewPunctuationPaseq                        0x05C0
+#define U_HebrewPointShinDot                            0x05C1
+#define U_HebrewPointSinDot                             0x05C2
+#define U_HebrewPunctuationSofPasuq                     0x05C3
+
+   /*        Puncta extraordinaria: */
+#define U_HebrewMarkUpperDot                            0x05C4
+#define U_HebrewMarkLowerDot                            0x05C5
+
+   /*        Points and punctuation: */
+#define U_HebrewPunctuationNunHafukha                   0x05C6
+#define U_HebrewPointQamatsQatan                        0x05C7
+
 #define U_HebrewLetterAlef                              0x05D0
 #define U_HebrewLetterBet                               0x05D1
 #define U_HebrewLetterGimel                             0x05D2
@@ -1436,6 +1502,16 @@
 #define U_HebrewLetterResh                              0x05E8
 #define U_HebrewLetterShin                              0x05E9
 #define U_HebrewLetterTav                               0x05EA
+
+   /*        Yiddish digraphs: */
+#define U_HebrewLigatureYiddishDoubleVav                0x05F0
+#define U_HebrewLigatureYiddishVavYod                   0x05F1
+#define U_HebrewLigatureYiddishDoubleYod                0x05F2
+
+   /*        Additional punctuation: */
+#define U_HebrewPunctuationGeresh                       0x05F3
+#define U_HebrewPunctuationGershayim                    0x05F4
+
 
    /* ------ 0600-06FF: Arabic ------ */
    /* ------ 0700-074F: Syriac ------ */

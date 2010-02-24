@@ -60,7 +60,8 @@
 *                - CODE_LATIN1
 *                - unicode2char() adjusted, using ^string instead of local string
 *                - adjustments from Xcode's complaints for strupr()
-*    fd  Feb 24: CODE_CP1254 (Turkish)
+*    fd  Feb 24: - CODE_CP1254 (Turkish)
+*                - CODE_CP1255 (Hebrew)
 *
 ******************************************|************************************/
 
@@ -1828,6 +1829,11 @@ char  *zeile)  /* ^ string */
       psort = sort_CODE_CP1254;
       break;
    
+   case CODE_CP1255:
+      plig = CODE_CP1255_lig;
+      psort = sort_CODE_CP1255;
+      break;
+   
    case CODE_CP1257:
       plig = CODE_CP1257_lig;
       psort = sort_CODE_CP1257;
@@ -1986,6 +1992,12 @@ char       *s2)           /* ^ 2nd string for comparison */
       plig = CODE_CP1254_lig;
       psort = sort_CODE_CP1254;
       pumap = u_CODE_CP1254;
+      break;
+   
+   case CODE_CP1255:
+      plig = CODE_CP1255_lig;
+      psort = sort_CODE_CP1255;
+      pumap = u_CODE_CP1255;
       break;
    
    case CODE_CP1257:
