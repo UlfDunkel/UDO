@@ -42,6 +42,7 @@
 *    fd  Feb 22: - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *                - 0370-03ff completed (Greek)
 *    fd  Feb 24: - 0590-05FF completed (Hebrew)
+*                - 0600-06FF: Arabic
 *
 ******************************************|************************************/
 /*KEY _NAME="unicode definitions" */
@@ -1514,6 +1515,326 @@
 
 
    /* ------ 0600-06FF: Arabic ------ */
+   
+   /*        Subtending marks: */
+#define U_ArabicNumberSign                              0x0600
+#define U_ArabicSignSanah                               0x0601
+#define U_ArabicFootnoteMarker                          0x0602
+#define U_ArabicSignSafha                               0x0603
+/* #define U_0604                                       0xFFFF      */
+/* #define U_0605                                       0xFFFF      */
+
+   /*        Radix symbols: */
+#define U_ArabicIndicCubeRoot                           0x0606
+#define U_ArabicIndicFourthRoot                         0x0607
+
+   /*        Letterlike symbol: */
+#define U_ArabicRay                                     0x0608
+
+   /*        Punctuation: */
+#define U_ArabicIndicPerMilleSign                       0x0609
+#define U_ArabicIndicPerTenThousandSign                 0x060A
+
+   /*        Currency sign: */
+#define U_AfghaniSign                                   0x060B
+
+   /*        Punctuation: */
+#define U_ArabicComma                                   0x060C
+#define U_ArabicDateSeparator                           0x060D
+
+   /*        Poetic marks: */
+#define U_ArabicPoeticVerseSign                         0x060E
+#define U_ArabicSignMisra                               0x060F
+
+   /*        Honorifics: */
+#define U_ArabicSignSallallahouAlayheWassallam          0x0610
+#define U_ArabicSignAlayheAssallam                      0x0611
+#define U_ArabicSignRahmatullahAlayhe                   0x0612
+#define U_ArabicSignRadiAllahouAnhu                     0x0613
+#define U_ArabicSignTakhallus                           0x0614
+
+   /*        Koranic annotation sign: */
+#define U_ArabicSmallHighTah                            0x0615
+
+   /*        Extended Arabic mark: */
+#define U_ArabicSmallHighLigatureAlefWithLamWithYeh     0x0616
+
+   /*        Koranic annotation signs: */
+#define U_ArabicSmallHighZain                           0x0617
+#define U_ArabicSmallFatha                              0x0618
+#define U_ArabicSmallDamma                              0x0619
+#define U_ArabicSmallKasra                              0x061A
+
+   /*        Punctuation: */
+#define U_ArabicSemicolon                               0x061B
+/* #define U_061C   <reserved>                          0xFFFF      */
+/* #define U_061D   <reserved>                          0xFFFF      */
+#define U_ArabicTripleDotPunctuationMark                0x061E
+#define U_ArabicQuestionMark                            0x061F
+
+   /*        Based on ISO 8859-6: */
+/* #define U_0620   <reserved>                          0xFFFF      */
+#define U_ArabicLetterHamza                             0x0621
+#define U_ArabicLetterAlefWithMaddaAbove                0x0622
+#define U_ArabicLetterAlefWithHamzaAbove                0x0623
+#define U_ArabicLetterWawWithHamzaAbove                 0x0624
+#define U_ArabicLetterAlefWithHamzaBelow                0x0625
+#define U_ArabicLetterYehWithHamzaAbove                 0x0626
+#define U_ArabicLetterAlef                              0x0627
+#define U_ArabicLetterBeh                               0x0628
+#define U_ArabicLetterTehMarbuta                        0x0629
+#define U_ArabicLetterTeh                               0x062A
+#define U_ArabicLetterTheh                              0x062B
+#define U_ArabicLetterJeem                              0x062C
+#define U_ArabicLetterHah                               0x062D
+#define U_ArabicLetterKhah                              0x062E
+#define U_ArabicLetterDal                               0x062F
+#define U_ArabicLetterThal                              0x0630
+#define U_ArabicLetterReh                               0x0631
+#define U_ArabicLetterZain                              0x0632
+#define U_ArabicLetterSeen                              0x0633
+#define U_ArabicLetterSheen                             0x0634
+#define U_ArabicLetterSad                               0x0635
+#define U_ArabicLetterDad                               0x0636
+#define U_ArabicLetterTah                               0x0637
+#define U_ArabicLetterZah                               0x0638
+#define U_ArabicLetterAin                               0x0639
+#define U_ArabicLetterGhain                             0x063A
+
+   /*        Additions for early Persian and Azerbaijani: */
+#define U_ArabicLetterKehehWithTwoDotsAbove             0x063B
+#define U_ArabicLetterKehehWithThreeDotsBelow           0x063C
+#define U_ArabicLetterFarsiYehWithInvertedV             0x063D
+#define U_ArabicLetterFarsiYehWithTwoDotsAbove          0x063E
+#define U_ArabicLetterFarsiYehWithThreeDotsAbove        0x063F
+
+   /*        Based on ISO 8859-6: */
+#define U_ArabicTatweel                                 0x0640
+#define U_ArabicLetterFeh                               0x0641
+#define U_ArabicLetterQaf                               0x0642
+#define U_ArabicLetterKaf                               0x0643
+#define U_ArabicLetterLam                               0x0644
+#define U_ArabicLetterMeem                              0x0645
+#define U_ArabicLetterNoon                              0x0646
+#define U_ArabicLetterHeh                               0x0647
+#define U_ArabicLetterWaw                               0x0648
+#define U_ArabicLetterAlefMaksura                       0x0649
+#define U_ArabicLetterYeh                               0x064A
+
+   /*        Points from ISO 8859-6: */
+#define U_ArabicFathatan                                0x064B
+#define U_ArabicDammatan                                0x064C
+#define U_ArabicKasratan                                0x064D
+#define U_ArabicFatha                                   0x064E
+#define U_ArabicDamma                                   0x064F
+#define U_ArabicKasra                                   0x0650
+#define U_ArabicShadda                                  0x0651
+#define U_ArabicSukun                                   0x0652
+
+   /*        Combining maddah and hamza: */
+#define U_ArabicMaddahAbove                             0x0653
+#define U_ArabicHamzaAbove                              0x0654
+#define U_ArabicHamzaBelow                              0x0655
+
+   /*        Other combining marks: */
+#define U_ArabicSubscriptAlef                           0x0656
+#define U_ArabicInvertedDamma                           0x0657
+#define U_ArabicMarkNoonGhunna                          0x0658
+#define U_ArabicZwarakay                                0x0659
+#define U_ArabicVowelSignSmallVAbove                    0x065A
+#define U_ArabicVowelSignInvertedSmallVAbove            0x065B
+#define U_ArabicVowelSignDotBelow                       0x065C
+#define U_ArabicReversedDamma                           0x065D
+#define U_ArabicFathaWithTwoDots                        0x065E
+/* #define U_065F                                       0xFFFF      */
+
+   /*        Arabic-Indic digits: */
+#define U_ArabicIndicDigitZero                          0x0660
+#define U_ArabicIndicDigitOne                           0x0661
+#define U_ArabicIndicDigitTwo                           0x0662
+#define U_ArabicIndicDigitThree                         0x0663
+#define U_ArabicIndicDigitFour                          0x0664
+#define U_ArabicIndicDigitFive                          0x0665
+#define U_ArabicIndicDigitSix                           0x0666
+#define U_ArabicIndicDigitSeven                         0x0667
+#define U_ArabicIndicDigitEight                         0x0668
+#define U_ArabicIndicDigitNine                          0x0669
+
+   /*        Punctuation: */
+#define U_ArabicPercentSign                             0x066A
+#define U_ArabicDecimalSeparator                        0x066B
+#define U_ArabicThousandsSeparator                      0x066C
+#define U_ArabicFivePointedStar                         0x066D
+
+   /*        Archaic letters: */
+#define U_ArabicLetterDotlessBeh                        0x066E
+#define U_ArabicLetterDotlessQaf                        0x066F
+
+   /*        Point: */
+#define U_ArabicLetterSuperscriptAlef                   0x0670
+
+   /*        Extended Arabic letters: */
+#define U_ArabicLetterAlefWasla                         0x0671
+#define U_ArabicLetterAlefWithWavyHamzaAbove            0x0672
+#define U_ArabicLetterAlefWithWavyHamzaBelow            0x0673
+#define U_ArabicLetterHighHamza                         0x0674
+#define U_ArabicLetterHighHamzaAlef                     0x0675
+#define U_ArabicLetterHighHamzaWas                      0x0676
+#define U_ArabicLetterUWithHamzaAbove                   0x0677
+#define U_ArabicLetterHighHamzaYeh                      0x0678
+#define U_ArabicLetterTteh                              0x0679
+#define U_ArabicLetterTteheh                            0x067A
+#define U_ArabicLetterBeeh                              0x067B
+#define U_ArabicLetterTehWithRing                       0x067C
+#define U_ArabicLetterTehWithThreeDotsAboveDownwards    0x067D
+#define U_ArabicLetterPeh                               0x067E
+#define U_ArabicLetterTeheh                             0x067F
+#define U_ArabicLetterBeheh                             0x0680
+#define U_ArabicLetterHahWithHamzaAbove                 0x0681
+#define U_ArabicLetterHahWithTwoDotsVerticalAbove       0x0682
+#define U_ArabicLetterNyeh                              0x0683
+#define U_ArabicLetterDyeh                              0x0684
+#define U_ArabicLetterHahWithThreeDotsAbove             0x0685
+#define U_ArabicLetterTcheh                             0x0686
+#define U_ArabicLetterTcheheh                           0x0687
+#define U_ArabicLetterDdal                              0x0688
+#define U_ArabicLetterDdalWithRing                      0x0689
+#define U_ArabicLetterDalWithDotBelow                   0x068A
+#define U_ArabicLetterDalWithDotBelowndSmallTah         0x068B
+#define U_ArabicLetterDahal                             0x068C
+#define U_ArabicLetterDdahal                            0x068D
+#define U_ArabicLetterDul                               0x068E
+#define U_ArabicLetterDalWithThreeDotsAboveDownwards    0x068F
+#define U_ArabicLetterDalWithFourDotsAbove              0x0690
+#define U_ArabicLetterRreh                              0x0691
+#define U_ArabicLetterRehWithSmallV                     0x0692
+#define U_ArabicLetterRehWithRing                       0x0693
+#define U_ArabicLetterRehWithDotBelow                   0x0694
+#define U_ArabicLetterRehWithSmallVBelow                0x0695
+#define U_ArabicLetterRehWithDotBelowAndDotAbove        0x0696
+#define U_ArabicLetterRehWithTwoDotsAbove               0x0697
+#define U_ArabicLetterJeh                               0x0698
+#define U_ArabicLetterRehWithFourDotsAbove              0x0699
+#define U_ArabicLetterSeenWithDotBelowAndDotAbove       0x069A
+#define U_ArabicLetterSeenWithThreeDotsBelow            0x069B
+#define U_ArabicLetterSeenWithThreeDotsBelowAndThreeDotsAbove    0x069C
+#define U_ArabicLetterSadWithTwoDotsBelow               0x069D
+#define U_ArabicLetterSadWithThreeDotsAbove             0x069E
+#define U_ArabicLetterTahWithThreeDotsAbove             0x069F
+#define U_ArabicLetterAinWithThreeDotsAbove             0x06A0
+#define U_ArabicLetterDotlessFeh                        0x06A1
+#define U_ArabicLetterFehWithDotMovedBelow              0x06A2
+#define U_ArabicLetterFehWithDotBelow                   0x06A3
+#define U_ArabicLetterVeh                               0x06A4
+#define U_ArabicLetterFehWithThreeDotsBelow             0x06A5
+#define U_ArabicLetterPeheh                             0x06A6
+#define U_ArabicLetterQafWithDotAbove                   0x06A7
+#define U_ArabicLetterQafWithThreeDotsAbove             0x06A8
+#define U_ArabicLetterKeheh                             0x06A9
+#define U_ArabicLetterSwashKaf                          0x06AA
+#define U_ArabicLetterKafWithRing                       0x06AB
+#define U_ArabicLetterKafWithDotAbove                   0x06AC
+#define U_ArabicLetterNg                                0x06AD
+#define U_ArabicLetterKafWithThreeDotsBelow             0x06AE
+#define U_ArabicLetterGaf                               0x06AF
+#define U_ArabicLetterGafWithRing                       0x06B0
+#define U_ArabicLetterNgoeh                             0x06B1
+#define U_ArabicLetterGafWithTwoDotsBelow               0x06B2
+#define U_ArabicLetterGueh                              0x06B3
+#define U_ArabicLetterGafWithThreeDotsAbove             0x06B4
+#define U_ArabicLetterLamWithSmallV                     0x06B5
+#define U_ArabicLetterLamWithDotAbove                   0x06B6
+#define U_ArabicLetterLamWithThreeDotsAbove             0x06B7
+#define U_ArabicLetterLamWithThreeDotsBelow             0x06B8
+#define U_ArabicLetterNoonWithDotBelow                  0x06B9
+#define U_ArabicLetterNoonGhunna                        0x06BA
+#define U_ArabicLetterRnoon                             0x06BB
+#define U_ArabicLetterNoonWithRing                      0x06BC
+#define U_ArabicLetterNoonWithThreeDotsAbove            0x06BD
+#define U_ArabicLetterHehDoachashmee                    0x06BE
+#define U_ArabicLetterTchehWithDotAbove                 0x06BF
+#define U_ArabicLetterHehWithYehAbove                   0x06C0
+#define U_ArabicLetterHehGoal                           0x06C1
+#define U_ArabicLetterHehGoalWithHamzaAbove             0x06C2
+#define U_ArabicLetterTehMarbutaGoal                    0x06C3
+#define U_ArabicLetterWawWithRing                       0x06C4
+#define U_ArabicLetterKirghizOe                         0x06C5
+#define U_ArabicLetterOe                                0x06C6
+#define U_ArabicLetterU                                 0x06C7
+#define U_ArabicLetterYu                                0x06C8
+#define U_ArabicLetterKirghizYu                         0x06C9
+#define U_ArabicLetterWawWithTwoDotsAbove               0x06CA
+#define U_ArabicLetterVe                                0x06CB
+#define U_ArabicLetterFarsiYeh                          0x06CC
+#define U_ArabicLetterYehWithTail                       0x06CD
+#define U_ArabicLetterYehWithSMallV                     0x06CE
+#define U_ArabicLetterWawWithDotAbove                   0x06CF
+#define U_ArabicLetterE                                 0x06D0
+#define U_ArabicLetterYehWithThreeDotsBelow             0x06D1
+#define U_ArabicLetterYehBarree                         0x06D2
+#define U_ArabicLetterYeeBarreeWithHamzaAbove           0x06D3
+
+   /*        Punctuation: */
+#define U_ArabicFullStop                                0x06D4
+
+   /*        Extended Arabic letter: */
+#define U_ArabicLetterAe                                0x06D5
+
+   /*        Koranic annotation signs: */
+#define U_ArabicSmallHighLigatureSadWithLamWithAlefMaksura   0x06D6
+#define U_ArabicSmallHighLigatureQafWithLamWithAlefMaksura   0x06D7
+#define U_ArabicSmallHighMeemInitialForm                0x06D8
+#define U_ArabicSmallHighLamAlef                        0x06D9
+#define U_ArabicSmallHighJeem                           0x06DA
+#define U_ArabicSmallHighThreeDots                      0x06DB
+#define U_ArabicSmallHighSeen                           0x06DC
+#define U_ArabicEndOfAyah                               0x06DD
+#define U_ArabicStartOfRubElHizb                        0x06DE
+#define U_ArabicSmallHighRoundedZero                    0x06DF
+#define U_ArabicSmallHighUprightRectangularZero         0x06E0
+#define U_ArabicSmallHighDotlessHeadOfKhah              0x06E1
+#define U_ArabicSmallHighMeemIsolatedForm               0x06E2
+#define U_ArabicSmallLowSeen                            0x06E3
+#define U_ArabicSmallHighMadda                          0x06E4
+#define U_ArabicSmallWaw                                0x06E5
+#define U_ArabicSmallYeh                                0x06E6
+#define U_ArabicSmallHighYeh                            0x06E7
+#define U_ArabicSmallHighNoon                           0x06E8
+#define U_ArabicPlaceOfSajdah                           0x06E9
+#define U_ArabicEmptyCentreLowStop                      0x06EA
+#define U_ArabicEmptyCentreHighStop                     0x06EB
+#define U_ArabicRoundedHighStopithFilledCentre          0x06EC
+#define U_ArabicSmallLowMeem                            0x06ED
+
+   /*        Extended Arabic letters for Parkari: */
+#define U_ArabicLetterDalWithInvertedV                  0x06EE
+#define U_ArabicLetterRehWithInvertedV                  0x06EF
+
+   /*        Extended Arabic-Indic digits: */
+#define U_ExtendedArabicIndicDigitZero                  0x06F0
+#define U_ExtendedArabicIndicDigitOne                   0x06F1
+#define U_ExtendedArabicIndicDigitTwo                   0x06F2
+#define U_ExtendedArabicIndicDigitThree                 0x06F3
+#define U_ExtendedArabicIndicDigitFour                  0x06F4
+#define U_ExtendedArabicIndicDigitFive                  0x06F5
+#define U_ExtendedArabicIndicDigitSix                   0x06F6
+#define U_ExtendedArabicIndicDigitSeven                 0x06F7
+#define U_ExtendedArabicIndicDigitEight                 0x06F8
+#define U_ExtendedArabicIndicDigitNine                  0x06F9
+
+   /*        Extended Arabic letters: */
+#define U_ArabicLetterSheenWithDotBelow                 0x06FA
+#define U_ArabicLetterDadWithDotBelow                   0x06FB
+#define U_ArabicLetterGhainWithDotBelow                 0x06FC
+
+   /*        Signs for Sindhi: */
+#define U_ArabicSignSindhiAmpersand                     0x06FD
+#define U_ArabicSignSindhiPostpositionMen               0x06FE
+
+   /*        Extended Arabic letter for Parkari: */
+#define U_ArabicLetterHehWithInvertedV                  0x06FF
+
+
    /* ------ 0700-074F: Syriac ------ */
    /* ------ 0780-07BF: Thaana ------ */
    /* ------ 0900-097F: Devanagari ------ */
@@ -1531,7 +1852,7 @@
    /* ------ 1000-109F: Myanmar ------ */
    /* ------ 10A0-10FF: Georgian ------ */
    /* ------ 1100-11FF: Hangul Jamo ------ */
-   /* ------ 1200-137F Ethiopic ------ */
+   /* ------ 1200-137F: Ethiopic ------ */
    /* ------ 13A0-13FF: Cherokee ------ */
    /* ------ 1400-167F: Unified Canadian Aboriginal Syllabics ------ */
    /* ------ 1680-169F: Ogham ------ */
