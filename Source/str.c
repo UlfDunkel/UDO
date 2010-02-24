@@ -34,6 +34,8 @@
 *-------------------------------------------------------------------------------
 *  Things to do : - tabs2spaces(): check size of n[] (might be 4096 chars now!)
 *                 - tabs2spaces(): check new faster method of strcat()
+*                 - my_strupr(): check why the wrapper is defined as void
+*                 - my_strlwr(): check why the wrapper is defined as void
 *
 *-------------------------------------------------------------------------------
 *  History:
