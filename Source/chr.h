@@ -46,6 +46,11 @@
 *    fd  Feb 20: utf8_to_uchar()
 *    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  Feb 23: some prototypes adjusted
+*    fd  Feb 24: - new: chr_codepage()
+*                - new: chr_codepage_name()
+*                - new: chr_sort_codepage()
+*                - new: chr_usort_codepage()
+*                - new: chr_ligatures()
 *
 ******************************************|************************************/
 
@@ -201,6 +206,20 @@ GLOBAL void auto_quote_linedraw(char * s);
 
 GLOBAL void init_module_chars(void);
 
+   /* get ^ to desired codepage */
+GLOBAL UWORD *chr_codepage(int encoding);
+
+   /* get human-readable name of desired codepage */
+GLOBAL char *chr_codepage_name(int encoding);
+
+   /* get ^ to desired codepage for sorting purposes */
+GLOBAL UWORD *chr_sort_codepage(int encoding);
+
+   /* get ^ to desired Unicode sorting table */
+GLOBAL VOID *chr_usort_codepage(int encoding);
+
+   /* get ^ to desired table of ligatures */
+GLOBAL VOID *chr_ligatures(int encoding);
 
 #endif   /* __UDOCHR__ */
 
