@@ -12,6 +12,7 @@
 *                 - u_CODE_CP1253[]: cp1253 ("Greek")
 *                 - u_CODE_CP1254[]: cp1254 ("Turkish")
 *                 - u_CODE_CP1255[]: cp1255 ("Hebrew")
+*                 - u_CODE_CP1256[]: cp1256 ("Arabic")
 *                 - u_CODE_CP1257[]: cp1257 ("Baltic")
 *
 *  Open Source  : since 2001
@@ -53,6 +54,7 @@
 *    fd  Feb 23: CODE_LAT1 -> CODE_CP1252
 *    fd  Feb 24: - CODE_CP1254 (Turkish)
 *                - CODE_CP1255 (Hebrew)
+*                - CODE_CP1256 (Arabic)
 *
 ******************************************|************************************/
 
@@ -3619,7 +3621,592 @@ static UWORD   sort_CODE_CP1255[] =       /* CODE_CP1255 */
    U_NIL,                                 /* 0xFC            UNDEFINED */
    U_LeftToRightMark,                     /* 0xFD   0x200E   LEFT-TO-RIGHT MARK */
    U_RightToLeftMark,                     /* 0xFE   0x200F   RIGHT-TO-LEFT MARK */
-   U_NIL,                                 /* 0xFF            UNDEFINED */
+   U_NIL                                  /* 0xFF            UNDEFINED */
+};
+
+
+
+
+
+
+
+
+
+
+/******************************************************************************
+*
+*  u_CODE_CP1256[]:
+*     Unicode named codepage for Microsoft Windows encoding codepage 1256 ("Arabic")
+*
+*  Name:             cp1256 to Unicode table
+*  Unicode version:  2.0
+*  Table version:    2.01
+*  Table format:     Format A
+*  Date:             1999-05-01
+*  Contact:          Shawn.Steele@microsoft.com
+*
+******************************************|************************************/
+
+static UWORD   u_CODE_CP1256[] =          /* CODE_CP1256 */
+{
+   U_NUL,                                 /* 0x00  NULl */
+   U_SOH,                                 /* 0x01  Start Of Heading */
+   U_STX,                                 /* 0x02  Start of TeXt */
+   U_ETX,                                 /* 0x03  End of TeXt */
+   U_EOT,                                 /* 0x04  End Of Transmission */
+   U_ENQ,                                 /* 0x05  ENQuiry */
+   U_ACK,                                 /* 0x06  ACKnowledge */
+   U_BEL,                                 /* 0x07  BELl */
+   U_BS,                                  /* 0x08  BackSpace */
+   U_HT,                                  /* 0x09  Horizontal Tabulation */
+   U_LF,                                  /* 0x0a  Line Feed */
+   U_VT,                                  /* 0x0b  Vertical Tabulation */
+   U_FF,                                  /* 0x0c  Form Feed */
+   U_CR,                                  /* 0x0d  Carriage Return */
+   U_SO,                                  /* 0x0e  Shift Out */
+   U_SI,                                  /* 0x0f  Shift In */
+   U_DLE,                                 /* 0x10  Data Link Escape */
+   U_DC1,                                 /* 0x11  Device Control 1 */
+   U_DC2,                                 /* 0x12  Device Control 2 */
+   U_DC3,                                 /* 0x13  Device Control 3 */
+   U_DC4,                                 /* 0x14  Device Control 4 */
+   U_NAK,                                 /* 0x15  Negative AcKnowledge */
+   U_SYN,                                 /* 0x16  SYNchronous idle */
+   U_ETB,                                 /* 0x17  End of Transmission Block */
+   U_CAN,                                 /* 0x18  CANcel */
+   U_EM,                                  /* 0x19  End of Medium */
+   U_SUB,                                 /* 0x1a  SUBstitute */
+   U_ESC,                                 /* 0x1b  ESCape */
+   U_FS,                                  /* 0x1c  File Separator */
+   U_GS,                                  /* 0x1d  Group Separator */
+   U_RS,                                  /* 0x1e  Record Separator */
+   U_US,                                  /* 0x1f  Unit Separator */
+
+   U_SP,                                  /* 0x20  SPace */
+   U_ExclamationMark,                     /* 0x21  ! */
+   U_QuotationMark,                       /* 0x22  " */
+   U_NumberSign,                          /* 0x23  # */
+   U_DollarSign,                          /* 0x24  $ */
+   U_PercentSign,                         /* 0x25  % */
+   U_Ampersand,                           /* 0x26  & */
+   U_Apostrophe,                          /* 0x27  ' */
+   U_OpeningParenthesis,                  /* 0x28  ( */
+   U_ClosingParenthesis,                  /* 0x29  ) */
+   U_Asterisk,                            /* 0x2A  * */
+   U_PlusSign,                            /* 0x2B  + */
+   U_Comma,                               /* 0x2C  , */
+   U_HyphenMinus,                         /* 0x2D  - */
+   U_Period,                              /* 0x2E  . */
+   U_Slash,                               /* 0x2F  / */
+   U_Digit0,                              /* 0x30  0 */
+   U_Digit1,                              /* 0x31  1 */
+   U_Digit2,                              /* 0x32  2 */
+   U_Digit3,                              /* 0x33  3 */
+   U_Digit4,                              /* 0x34  4 */
+   U_Digit5,                              /* 0x35  5 */
+   U_Digit6,                              /* 0x36  6 */
+   U_Digit7,                              /* 0x37  7 */
+   U_Digit8,                              /* 0x38  8 */
+   U_Digit9,                              /* 0x39  9 */
+   U_Colon,                               /* 0x3A  : */
+   U_Semicolon,                           /* 0x3B  ; */
+   U_LessThanSign,                        /* 0x3C  < */
+   U_EqualsSign,                          /* 0x3D  = */
+   U_GreaterThanSign,                     /* 0x3E  > */
+   U_QuestionMark,                        /* 0x3F  ? */
+   U_CommercialAt,                        /* 0x40  @ */
+   U_LatinCapitalLetterA,                 /* 0x41  A */
+   U_LatinCapitalLetterB,                 /* 0x42  B */
+   U_LatinCapitalLetterC,                 /* 0x43  C */
+   U_LatinCapitalLetterD,                 /* 0x44  D */
+   U_LatinCapitalLetterE,                 /* 0x45  E */
+   U_LatinCapitalLetterF,                 /* 0x46  F */
+   U_LatinCapitalLetterG,                 /* 0x47  G */
+   U_LatinCapitalLetterH,                 /* 0x48  H */
+   U_LatinCapitalLetterI,                 /* 0x49  I */
+   U_LatinCapitalLetterJ,                 /* 0x4A  J */
+   U_LatinCapitalLetterK,                 /* 0x4B  K */
+   U_LatinCapitalLetterL,                 /* 0x4C  L */
+   U_LatinCapitalLetterM,                 /* 0x4D  M */
+   U_LatinCapitalLetterN,                 /* 0x4E  N */
+   U_LatinCapitalLetterO,                 /* 0x4F  O */
+   U_LatinCapitalLetterP,                 /* 0x50  P */
+   U_LatinCapitalLetterQ,                 /* 0x51  Q */
+   U_LatinCapitalLetterR,                 /* 0x52  R */
+   U_LatinCapitalLetterS,                 /* 0x53  S */
+   U_LatinCapitalLetterT,                 /* 0x54  T */
+   U_LatinCapitalLetterU,                 /* 0x55  U */
+   U_LatinCapitalLetterV,                 /* 0x56  V */
+   U_LatinCapitalLetterW,                 /* 0x57  W */
+   U_LatinCapitalLetterX,                 /* 0x58  X */
+   U_LatinCapitalLetterY,                 /* 0x59  Y */
+   U_LatinCapitalLetterZ,                 /* 0x5A  Z */
+   U_OpeningSquareBracket,                /* 0x5B  [ */
+   U_Backslash,                           /* 0x5C  \ */
+   U_ClosingSquareBracket,                /* 0x5D  ] */
+   U_CircumflexAccent,                    /* 0x5E  ^ */
+   U_SpacingUnderscore,                   /* 0x5F  _ */
+   U_GraveAccent,                         /* 0x60  ` */
+   U_LatinSmallLetterA,                   /* 0x61  a */
+   U_LatinSmallLetterB,                   /* 0x62  b */
+   U_LatinSmallLetterC,                   /* 0x63  c */
+   U_LatinSmallLetterD,                   /* 0x64  d */
+   U_LatinSmallLetterE,                   /* 0x65  e */
+   U_LatinSmallLetterF,                   /* 0x66  f */
+   U_LatinSmallLetterG,                   /* 0x67  g */
+   U_LatinSmallLetterH,                   /* 0x68  h */
+   U_LatinSmallLetterI,                   /* 0x69  i */
+   U_LatinSmallLetterJ,                   /* 0x6A  j */
+   U_LatinSmallLetterK,                   /* 0x6B  k */
+   U_LatinSmallLetterL,                   /* 0x6C  l */
+   U_LatinSmallLetterM,                   /* 0x6D  m */
+   U_LatinSmallLetterN,                   /* 0x6E  n */
+   U_LatinSmallLetterO,                   /* 0x6F  o */
+   U_LatinSmallLetterP,                   /* 0x70  p */
+   U_LatinSmallLetterQ,                   /* 0x71  q */
+   U_LatinSmallLetterR,                   /* 0x72  r */
+   U_LatinSmallLetterS,                   /* 0x73  s */
+   U_LatinSmallLetterT,                   /* 0x74  t */
+   U_LatinSmallLetterU,                   /* 0x75  u */
+   U_LatinSmallLetterV,                   /* 0x76  v */
+   U_LatinSmallLetterW,                   /* 0x77  w */
+   U_LatinSmallLetterX,                   /* 0x78  x */
+   U_LatinSmallLetterY,                   /* 0x79  y */
+   U_LatinSmallLetterZ,                   /* 0x7A  z */
+   U_OpeningCurlyBracket,                 /* 0x7B  { */
+   U_VerticalLine,                        /* 0x7C  | */
+   U_ClosingCurlyBracket,                 /* 0x7D  } */
+   U_Tilde,                               /* 0x7E  ~ */
+   U_DEL,                                 /* 0x7F  Delete */
+
+   U_EuroSign,                            /* 0x80   0x20AC   EURO SIGN */
+   U_ArabicLetterPeh,                     /* 0x81   0x067E   ARABIC LETTER PEH */
+   U_SingleLow9QuotationMark,             /* 0x82   0x201A   SINGLE LOW-9 QUOTATION MARK */
+   U_LatinSmallLetterScriptF,             /* 0x83   0x0192   LATIN SMALL LETTER F WITH HOOK */
+   U_DoubleLow9QuotationMark,             /* 0x84   0x201E   DOUBLE LOW-9 QUOTATION MARK */
+   U_HorizontalEllipsis,                  /* 0x85   0x2026   HORIZONTAL ELLIPSIS */
+   U_Dagger,                              /* 0x86   0x2020   DAGGER */
+   U_DoubleDagger,                        /* 0x87   0x2021   DOUBLE DAGGER */
+   U_ModifierLetterCircumflexAccent,      /* 0x88   0x02C6   MODIFIER LETTER CIRCUMFLEX ACCENT */
+   U_PerMilleSign,                        /* 0x89   0x2030   PER MILLE SIGN */
+   U_ArabicLetterTteh,                    /* 0x8A   0x0679   ARABIC LETTER TTEH */
+   U_LeftPointingSingleGuillemet,         /* 0x8B   0x2039   SINGLE LEFT-POINTING ANGLE QUOTATION MARK */
+   U_LatinCapitalLigatureOE,              /* 0x8C   0x0152   LATIN CAPITAL LIGATURE OE */
+   U_ArabicLetterTcheh,                   /* 0x8D   0x0686   ARABIC LETTER TCHEH */
+   U_ArabicLetterJeh,                     /* 0x8E   0x0698   ARABIC LETTER JEH */
+   U_ArabicLetterDdal,                    /* 0x8F   0x0688   ARABIC LETTER DDAL */
+   U_ArabicLetterGaf,                     /* 0x90   0x06AF   ARABIC LETTER GAF */
+   U_LeftSingleQuotationMark,             /* 0x91   0x2018   LEFT SINGLE QUOTATION MARK */
+   U_RightSingleQuotationMark,            /* 0x92   0x2019   RIGHT SINGLE QUOTATION MARK */
+   U_LeftDoubleQuotationMark,             /* 0x93   0x201C   LEFT DOUBLE QUOTATION MARK */
+   U_RightDoubleQuotationMark,            /* 0x94   0x201D   RIGHT DOUBLE QUOTATION MARK */
+   U_Bullet,                              /* 0x95   0x2022   BULLET */
+   U_EnDash,                              /* 0x96   0x2013   EN DASH */
+   U_EmDash,                              /* 0x97   0x2014   EM DASH */
+   U_ArabicLetterKeheh,                   /* 0x98   0x06A9   ARABIC LETTER KEHEH */
+   U_TradeMarkSign,                       /* 0x99   0x2122   TRADE MARK SIGN */
+   U_ArabicLetterRreh,                    /* 0x9A   0x0691   ARABIC LETTER RREH */
+   U_RightPointingSingleGuillemet,        /* 0x9B   0x203A   SINGLE RIGHT-POINTING ANGLE QUOTATION MARK */
+   U_LatinSmallLigatureOE,                /* 0x9C   0x0153   LATIN SMALL LIGATURE OE */
+   U_ZeroWidthNonJoiner,                  /* 0x9D   0x200C   ZERO WIDTH NON-JOINER */
+   U_ZeroWidthJoiner,                     /* 0x9E   0x200D   ZERO WIDTH JOINER */
+   U_ArabicLetterNoonGhunna,              /* 0x9F   0x06BA   ARABIC LETTER NOON GHUNNA */
+   U_NB_SP,                               /* 0xA0   0x00A0   NO-BREAK SPACE */
+   U_ArabicComma,                         /* 0xA1   0x060C   ARABIC COMMA */
+   U_CentSign,                            /* 0xA2   0x00A2   CENT SIGN */
+   U_PoundSign,                           /* 0xA3   0x00A3   POUND SIGN */
+   U_CurrencySign,                        /* 0xA4   0x00A4   CURRENCY SIGN */
+   U_YenSign,                             /* 0xA5   0x00A5   YEN SIGN */
+   U_BrokenVerticalBar,                   /* 0xA6   0x00A6   BROKEN BAR */
+   U_SectionSign,                         /* 0xA7   0x00A7   SECTION SIGN */
+   U_Diaeresis,                           /* 0xA8   0x00A8   DIAERESIS */
+   U_CopyrightSign,                       /* 0xA9   0x00A9   COPYRIGHT SIGN */
+   U_ArabicLetterHehDoachashmee,          /* 0xAA   0x06BE   ARABIC LETTER HEH DOACHASHMEE */
+   U_LeftPointingGuillemet,               /* 0xAB   0x00AB   LEFT-POINTING DOUBLE ANGLE QUOTATION MARK */
+   U_NotSign,                             /* 0xAC   0x00AC   NOT SIGN */
+   U_SoftHyphen,                          /* 0xAD   0x00AD   SOFT HYPHEN */
+   U_RegisteredSign,                      /* 0xAE   0x00AE   REGISTERED SIGN */
+   U_Macron,                              /* 0xAF   0x00AF   MACRON */
+   U_DegreeSign,                          /* 0xB0   0x00B0   DEGREE SIGN */
+   U_PlusMinusSign,                       /* 0xB1   0x00B1   PLUS-MINUS SIGN */
+   U_SuperscriptTwo,                      /* 0xB2   0x00B2   SUPERSCRIPT TWO */
+   U_SuperscriptThree,                    /* 0xB3   0x00B3   SUPERSCRIPT THREE */
+   U_AcuteAccent,                         /* 0xB4   0x00B4   ACUTE ACCENT */
+   U_MicroSign,                           /* 0xB5   0x00B5   MICRO SIGN */
+   U_ParagraphSign,                       /* 0xB6   0x00B6   PILCROW SIGN */
+   U_MiddleDot,                           /* 0xB7   0x00B7   MIDDLE DOT */
+   U_Cedilla,                             /* 0xB8   0x00B8   CEDILLA */
+   U_SuperscriptOne,                      /* 0xB9   0x00B9   SUPERSCRIPT ONE */
+   U_ArabicSemicolon,                     /* 0xBA   0x061B   ARABIC SEMICOLON */
+   U_RightPointingGuillemet,              /* 0xBB   0x00BB   RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK */
+   U_VulgarFractionOneQuarter,            /* 0xBC   0x00BC   VULGAR FRACTION ONE QUARTER */
+   U_VulgarFractionOneHalf,               /* 0xBD   0x00BD   VULGAR FRACTION ONE HALF */
+   U_VulgarFractionThreeQuarters,         /* 0xBE   0x00BE   VULGAR FRACTION THREE QUARTERS */
+   U_ArabicQuestionMark,                  /* 0xBF   0x061F   ARABIC QUESTION MARK */
+   U_ArabicLetterHehGoal,                 /* 0xC0   0x06C1   ARABIC LETTER HEH GOAL */
+   U_ArabicLetterHamza,                   /* 0xC1   0x0621   ARABIC LETTER HAMZA */
+   U_ArabicLetterAlefWithMaddaAbove,      /* 0xC2   0x0622   ARABIC LETTER ALEF WITH MADDA ABOVE */
+   U_ArabicLetterAlefWithHamzaAbove,      /* 0xC3   0x0623   ARABIC LETTER ALEF WITH HAMZA ABOVE */
+   U_ArabicLetterWawWithHamzaAbove,       /* 0xC4   0x0624   ARABIC LETTER WAW WITH HAMZA ABOVE */
+   U_ArabicLetterAlefWithHamzaBelow,      /* 0xC5   0x0625   ARABIC LETTER ALEF WITH HAMZA BELOW */
+   U_ArabicLetterYehWithHamzaAbove,       /* 0xC6   0x0626   ARABIC LETTER YEH WITH HAMZA ABOVE */
+   U_ArabicLetterAlef,                    /* 0xC7   0x0627   ARABIC LETTER ALEF */
+   U_ArabicLetterBeh,                     /* 0xC8   0x0628   ARABIC LETTER BEH */
+   U_ArabicLetterTehMarbuta,              /* 0xC9   0x0629   ARABIC LETTER TEH MARBUTA */
+   U_ArabicLetterTeh,                     /* 0xCA   0x062A   ARABIC LETTER TEH */
+   U_ArabicLetterTheh,                    /* 0xCB   0x062B   ARABIC LETTER THEH */
+   U_ArabicLetterJeem,                    /* 0xCC   0x062C   ARABIC LETTER JEEM */
+   U_ArabicLetterHah,                     /* 0xCD   0x062D   ARABIC LETTER HAH */
+   U_ArabicLetterKhah,                    /* 0xCE   0x062E   ARABIC LETTER KHAH */
+   U_ArabicLetterDal,                     /* 0xCF   0x062F   ARABIC LETTER DAL */
+   U_ArabicLetterThal,                    /* 0xD0   0x0630   ARABIC LETTER THAL */
+   U_ArabicLetterReh,                     /* 0xD1   0x0631   ARABIC LETTER REH */
+   U_ArabicLetterZain,                    /* 0xD2   0x0632   ARABIC LETTER ZAIN */
+   U_ArabicLetterSeen,                    /* 0xD3   0x0633   ARABIC LETTER SEEN */
+   U_ArabicLetterSheen,                   /* 0xD4   0x0634   ARABIC LETTER SHEEN */
+   U_ArabicLetterSad,                     /* 0xD5   0x0635   ARABIC LETTER SAD */
+   U_ArabicLetterDad,                     /* 0xD6   0x0636   ARABIC LETTER DAD */
+   U_MultiplicationSign,                  /* 0xD7   0x00D7   MULTIPLICATION SIGN */
+   U_ArabicLetterTah,                     /* 0xD8   0x0637   ARABIC LETTER TAH */
+   U_ArabicLetterZah,                     /* 0xD9   0x0638   ARABIC LETTER ZAH */
+   U_ArabicLetterAin,                     /* 0xDA   0x0639   ARABIC LETTER AIN */
+   U_ArabicLetterGhain,                   /* 0xDB   0x063A   ARABIC LETTER GHAIN */
+   U_ArabicTatweel,                       /* 0xDC   0x0640   ARABIC TATWEEL */
+   U_ArabicLetterFeh,                     /* 0xDD   0x0641   ARABIC LETTER FEH */
+   U_ArabicLetterQaf,                     /* 0xDE   0x0642   ARABIC LETTER QAF */
+   U_ArabicLetterKaf,                     /* 0xDF   0x0643   ARABIC LETTER KAF */
+   U_LatinSmallLetterAWithGrave,          /* 0xE0   0x00E0   LATIN SMALL LETTER A WITH GRAVE */
+   U_ArabicLetterLam,                     /* 0xE1   0x0644   ARABIC LETTER LAM */
+   U_LatinSmallLetterAWithCircumflex,     /* 0xE2   0x00E2   LATIN SMALL LETTER A WITH CIRCUMFLEX */
+   U_ArabicLetterMeem,                    /* 0xE3   0x0645   ARABIC LETTER MEEM */
+   U_ArabicLetterNoon,                    /* 0xE4   0x0646   ARABIC LETTER NOON */
+   U_ArabicLetterHeh,                     /* 0xE5   0x0647   ARABIC LETTER HEH */
+   U_ArabicLetterWaw,                     /* 0xE6   0x0648   ARABIC LETTER WAW */
+   U_LatinSmallLetterCWithCedilla,        /* 0xE7   0x00E7   LATIN SMALL LETTER C WITH CEDILLA */
+   U_LatinSmallLetterEWithGrave,          /* 0xE8   0x00E8   LATIN SMALL LETTER E WITH GRAVE */
+   U_LatinSmallLetterEWithAcute,          /* 0xE9   0x00E9   LATIN SMALL LETTER E WITH ACUTE */
+   U_LatinSmallLetterEWithCircumflex,     /* 0xEA   0x00EA   LATIN SMALL LETTER E WITH CIRCUMFLEX */
+   U_LatinSmallLetterEWithDiaeresis,      /* 0xEB   0x00EB   LATIN SMALL LETTER E WITH DIAERESIS */
+   U_ArabicLetterAlefMaksura,             /* 0xEC   0x0649   ARABIC LETTER ALEF MAKSURA */
+   U_ArabicLetterYeh,                     /* 0xED   0x064A   ARABIC LETTER YEH */
+   U_LatinSmallLetterIWithCircumflex,     /* 0xEE   0x00EE   LATIN SMALL LETTER I WITH CIRCUMFLEX */
+   U_LatinSmallLetterIWithDiaeresis,      /* 0xEF   0x00EF   LATIN SMALL LETTER I WITH DIAERESIS */
+   U_ArabicFathatan,                      /* 0xF0   0x064B   ARABIC FATHATAN */
+   U_ArabicDammatan,                      /* 0xF1   0x064C   ARABIC DAMMATAN */
+   U_ArabicKasratan,                      /* 0xF2   0x064D   ARABIC KASRATAN */
+   U_ArabicFatha,                         /* 0xF3   0x064E   ARABIC FATHA */
+   U_LatinSmallLetterOWithCircumflex,     /* 0xF4   0x00F4   LATIN SMALL LETTER O WITH CIRCUMFLEX */
+   U_ArabicDamma,                         /* 0xF5   0x064F   ARABIC DAMMA */
+   U_ArabicKasra,                         /* 0xF6   0x0650   ARABIC KASRA */
+   U_DivisionSign,                        /* 0xF7   0x00F7   DIVISION SIGN */
+   U_ArabicShadda,                        /* 0xF8   0x0651   ARABIC SHADDA */
+   U_LatinSmallLetterUWithGrave,          /* 0xF9   0x00F9   LATIN SMALL LETTER U WITH GRAVE */
+   U_ArabicSukun,                         /* 0xFA   0x0652   ARABIC SUKUN */
+   U_LatinSmallLetterUWithCircumflex,     /* 0xFB   0x00FB   LATIN SMALL LETTER U WITH CIRCUMFLEX */
+   U_LatinSmallLetterUWithDiaeresis,      /* 0xFC   0x00FC   LATIN SMALL LETTER U WITH DIAERESIS */
+   U_LeftToRightMark,                     /* 0xFD   0x200E   LEFT-TO-RIGHT MARK */
+   U_RightToLeftMark,                     /* 0xFE   0x200F   RIGHT-TO-LEFT MARK */
+   U_ArabicLetterYehBarree                /* 0xFF   0x06D2   ARABIC LETTER YEH BARREE */
+};
+
+
+
+
+
+/******************************************************************************
+*
+*  CODE_CP1256_lig[]:
+*     list of ligatures:
+*
+*  CODE_CP1256_lig[0] is the original ligature character
+*  CODE_CP1256_lig[1] + CODE_CP1256_lig[2] are the resolved ligature characters
+*
+******************************************|************************************/
+
+static UWORD   CODE_CP1256_lig[][3] =     /* CODE_CP1256 character ligatures */
+{
+   { U_LatinCapitalLigatureOE,         U_LatinCapitalLetterO, U_LatinCapitalLetterE },   /* 0x8C   0x0152   LATIN CAPITAL LIGATURE OE */
+   { U_LatinSmallLigatureOE,           U_LatinCapitalLetterO, U_LatinCapitalLetterE },   /* 0x9C   0x0153   LATIN SMALL LIGATURE OE */
+   { U_LatinSmallLetterEWithDiaeresis, U_LatinCapitalLetterE, U_LatinCapitalLetterE },   /* 0xEB   0x00EB   LATIN SMALL LETTER E WITH DIAERESIS */
+   { U_LatinSmallLetterIWithDiaeresis, U_LatinCapitalLetterI, U_LatinCapitalLetterE },   /* 0xEF   0x00EF   LATIN SMALL LETTER I WITH DIAERESIS */
+   { U_LatinSmallLetterUWithDiaeresis, U_LatinCapitalLetterU, U_LatinCapitalLetterE },   /* 0xFC   0x00FC   LATIN SMALL LETTER U WITH DIAERESIS */
+
+   {0x0000, U_NIL, U_NIL}                 /* list terminator */
+};
+
+
+
+
+
+/******************************************************************************
+*
+*  CODE_CP1256 sorting table:
+*
+*  table format: sortingCharacter, (ANSI hex value  |  Original character)
+*  
+*
+******************************************|************************************/
+
+static UWORD   sort_CODE_CP1256[] =       /* CODE_CP1256 */
+{
+   U_NUL,                                 /* 0x00  NULl */
+   U_SOH,                                 /* 0x01  Start Of Heading */
+   U_STX,                                 /* 0x02  Start of TeXt */
+   U_ETX,                                 /* 0x03  End of TeXt */
+   U_EOT,                                 /* 0x04  End Of Transmission */
+   U_ENQ,                                 /* 0x05  ENQuiry */
+   U_ACK,                                 /* 0x06  ACKnowledge */
+   U_BEL,                                 /* 0x07  BELl */
+   U_BS,                                  /* 0x08  BackSpace */
+   U_HT,                                  /* 0x09  Horizontal Tabulation */
+   U_LF,                                  /* 0x0a  Line Feed */
+   U_VT,                                  /* 0x0b  Vertical Tabulation */
+   U_FF,                                  /* 0x0c  Form Feed */
+   U_CR,                                  /* 0x0d  Carriage Return */
+   U_SO,                                  /* 0x0e  Shift Out */
+   U_SI,                                  /* 0x0f  Shift In */
+   U_DLE,                                 /* 0x10  Data Link Escape */
+   U_DC1,                                 /* 0x11  Device Control 1 */
+   U_DC2,                                 /* 0x12  Device Control 2 */
+   U_DC3,                                 /* 0x13  Device Control 3 */
+   U_DC4,                                 /* 0x14  Device Control 4 */
+   U_NAK,                                 /* 0x15  Negative AcKnowledge */
+   U_SYN,                                 /* 0x16  SYNchronous idle */
+   U_ETB,                                 /* 0x17  End of Transmission Block */
+   U_CAN,                                 /* 0x18  CANcel */
+   U_EM,                                  /* 0x19  End of Medium */
+   U_SUB,                                 /* 0x1a  SUBstitute */
+   U_ESC,                                 /* 0x1b  ESCape */
+   U_FS,                                  /* 0x1c  File Separator */
+   U_GS,                                  /* 0x1d  Group Separator */
+   U_RS,                                  /* 0x1e  Record Separator */
+   U_US,                                  /* 0x1f  Unit Separator */
+
+   U_SP,                                  /* 0x20  SPace */
+   U_ExclamationMark,                     /* 0x21  ! */
+   U_QuotationMark,                       /* 0x22  " */
+   U_NumberSign,                          /* 0x23  # */
+   U_DollarSign,                          /* 0x24  $ */
+   U_PercentSign,                         /* 0x25  % */
+   U_Ampersand,                           /* 0x26  & */
+   U_Apostrophe,                          /* 0x27  ' */
+   U_OpeningParenthesis,                  /* 0x28  ( */
+   U_ClosingParenthesis,                  /* 0x29  ) */
+   U_Asterisk,                            /* 0x2A  * */
+   U_PlusSign,                            /* 0x2B  + */
+   U_Comma,                               /* 0x2C  , */
+   U_HyphenMinus,                         /* 0x2D  - */
+   U_Period,                              /* 0x2E  . */
+   U_Slash,                               /* 0x2F  / */
+   U_Digit0,                              /* 0x30  0 */
+   U_Digit1,                              /* 0x31  1 */
+   U_Digit2,                              /* 0x32  2 */
+   U_Digit3,                              /* 0x33  3 */
+   U_Digit4,                              /* 0x34  4 */
+   U_Digit5,                              /* 0x35  5 */
+   U_Digit6,                              /* 0x36  6 */
+   U_Digit7,                              /* 0x37  7 */
+   U_Digit8,                              /* 0x38  8 */
+   U_Digit9,                              /* 0x39  9 */
+   U_Colon,                               /* 0x3A  : */
+   U_Semicolon,                           /* 0x3B  ; */
+   U_LessThanSign,                        /* 0x3C  < */
+   U_EqualsSign,                          /* 0x3D  = */
+   U_GreaterThanSign,                     /* 0x3E  > */
+   U_QuestionMark,                        /* 0x3F  ? */
+   U_CommercialAt,                        /* 0x40  @ */
+   U_LatinCapitalLetterA,                 /* 0x41  A */
+   U_LatinCapitalLetterB,                 /* 0x42  B */
+   U_LatinCapitalLetterC,                 /* 0x43  C */
+   U_LatinCapitalLetterD,                 /* 0x44  D */
+   U_LatinCapitalLetterE,                 /* 0x45  E */
+   U_LatinCapitalLetterF,                 /* 0x46  F */
+   U_LatinCapitalLetterG,                 /* 0x47  G */
+   U_LatinCapitalLetterH,                 /* 0x48  H */
+   U_LatinCapitalLetterI,                 /* 0x49  I */
+   U_LatinCapitalLetterJ,                 /* 0x4A  J */
+   U_LatinCapitalLetterK,                 /* 0x4B  K */
+   U_LatinCapitalLetterL,                 /* 0x4C  L */
+   U_LatinCapitalLetterM,                 /* 0x4D  M */
+   U_LatinCapitalLetterN,                 /* 0x4E  N */
+   U_LatinCapitalLetterO,                 /* 0x4F  O */
+   U_LatinCapitalLetterP,                 /* 0x50  P */
+   U_LatinCapitalLetterQ,                 /* 0x51  Q */
+   U_LatinCapitalLetterR,                 /* 0x52  R */
+   U_LatinCapitalLetterS,                 /* 0x53  S */
+   U_LatinCapitalLetterT,                 /* 0x54  T */
+   U_LatinCapitalLetterU,                 /* 0x55  U */
+   U_LatinCapitalLetterV,                 /* 0x56  V */
+   U_LatinCapitalLetterW,                 /* 0x57  W */
+   U_LatinCapitalLetterX,                 /* 0x58  X */
+   U_LatinCapitalLetterY,                 /* 0x59  Y */
+   U_LatinCapitalLetterZ,                 /* 0x5A  Z */
+   U_OpeningSquareBracket,                /* 0x5B  [ */
+   U_Backslash,                           /* 0x5C  \ */
+   U_ClosingSquareBracket,                /* 0x5D  ] */
+   U_CircumflexAccent,                    /* 0x5E  ^ */
+   U_SpacingUnderscore,                   /* 0x5F  _ */
+   U_GraveAccent,                         /* 0x60  ` */
+   U_LatinCapitalLetterA,                 /* 0x61  a */
+   U_LatinCapitalLetterB,                 /* 0x62  b */
+   U_LatinCapitalLetterC,                 /* 0x63  c */
+   U_LatinCapitalLetterD,                 /* 0x64  d */
+   U_LatinCapitalLetterE,                 /* 0x65  e */
+   U_LatinCapitalLetterF,                 /* 0x66  f */
+   U_LatinCapitalLetterG,                 /* 0x67  g */
+   U_LatinCapitalLetterH,                 /* 0x68  h */
+   U_LatinCapitalLetterI,                 /* 0x69  i */
+   U_LatinCapitalLetterJ,                 /* 0x6A  j */
+   U_LatinCapitalLetterK,                 /* 0x6B  k */
+   U_LatinCapitalLetterL,                 /* 0x6C  l */
+   U_LatinCapitalLetterM,                 /* 0x6D  m */
+   U_LatinCapitalLetterN,                 /* 0x6E  n */
+   U_LatinCapitalLetterO,                 /* 0x6F  o */
+   U_LatinCapitalLetterP,                 /* 0x70  p */
+   U_LatinCapitalLetterQ,                 /* 0x71  q */
+   U_LatinCapitalLetterR,                 /* 0x72  r */
+   U_LatinCapitalLetterS,                 /* 0x73  s */
+   U_LatinCapitalLetterT,                 /* 0x74  t */
+   U_LatinCapitalLetterU,                 /* 0x75  u */
+   U_LatinCapitalLetterV,                 /* 0x76  v */
+   U_LatinCapitalLetterW,                 /* 0x77  w */
+   U_LatinCapitalLetterX,                 /* 0x78  x */
+   U_LatinCapitalLetterY,                 /* 0x79  y */
+   U_LatinCapitalLetterZ,                 /* 0x7A  z */
+   U_OpeningCurlyBracket,                 /* 0x7B  { */
+   U_VerticalLine,                        /* 0x7C  | */
+   U_ClosingCurlyBracket,                 /* 0x7D  } */
+   U_Tilde,                               /* 0x7E  ~ */
+   U_DEL,                                 /* 0x7F  Delete */
+
+   U_EuroSign,                            /* 0x80   0x20AC   EURO SIGN */
+   U_ArabicLetterPeh,                     /* 0x81   0x067E   ARABIC LETTER PEH */
+   U_SingleLow9QuotationMark,             /* 0x82   0x201A   SINGLE LOW-9 QUOTATION MARK */
+   U_LatinCapitalLetterF,                 /* 0x83   0x0192   LATIN SMALL LETTER F WITH HOOK */
+   U_DoubleLow9QuotationMark,             /* 0x84   0x201E   DOUBLE LOW-9 QUOTATION MARK */
+   U_HorizontalEllipsis,                  /* 0x85   0x2026   HORIZONTAL ELLIPSIS */
+   U_Dagger,                              /* 0x86   0x2020   DAGGER */
+   U_DoubleDagger,                        /* 0x87   0x2021   DOUBLE DAGGER */
+   U_ModifierLetterCircumflexAccent,      /* 0x88   0x02C6   MODIFIER LETTER CIRCUMFLEX ACCENT */
+   U_PerMilleSign,                        /* 0x89   0x2030   PER MILLE SIGN */
+   U_ArabicLetterTteh,                    /* 0x8A   0x0679   ARABIC LETTER TTEH */
+   U_LeftPointingSingleGuillemet,         /* 0x8B   0x2039   SINGLE LEFT-POINTING ANGLE QUOTATION MARK */
+   U_LatinCapitalLetterO,                 /* 0x8C   0x0152   LATIN CAPITAL LIGATURE OE */
+   U_ArabicLetterTcheh,                   /* 0x8D   0x0686   ARABIC LETTER TCHEH */
+   U_ArabicLetterJeh,                     /* 0x8E   0x0698   ARABIC LETTER JEH */
+   U_ArabicLetterDdal,                    /* 0x8F   0x0688   ARABIC LETTER DDAL */
+   U_ArabicLetterGaf,                     /* 0x90   0x06AF   ARABIC LETTER GAF */
+   U_LeftSingleQuotationMark,             /* 0x91   0x2018   LEFT SINGLE QUOTATION MARK */
+   U_RightSingleQuotationMark,            /* 0x92   0x2019   RIGHT SINGLE QUOTATION MARK */
+   U_LeftDoubleQuotationMark,             /* 0x93   0x201C   LEFT DOUBLE QUOTATION MARK */
+   U_RightDoubleQuotationMark,            /* 0x94   0x201D   RIGHT DOUBLE QUOTATION MARK */
+   U_Bullet,                              /* 0x95   0x2022   BULLET */
+   U_EnDash,                              /* 0x96   0x2013   EN DASH */
+   U_EmDash,                              /* 0x97   0x2014   EM DASH */
+   U_ArabicLetterKeheh,                   /* 0x98   0x06A9   ARABIC LETTER KEHEH */
+   U_TradeMarkSign,                       /* 0x99   0x2122   TRADE MARK SIGN */
+   U_ArabicLetterRreh,                    /* 0x9A   0x0691   ARABIC LETTER RREH */
+   U_RightPointingSingleGuillemet,        /* 0x9B   0x203A   SINGLE RIGHT-POINTING ANGLE QUOTATION MARK */
+   U_LatinCapitalLetterO,                 /* 0x9C   0x0153   LATIN SMALL LIGATURE OE */
+   U_ZeroWidthNonJoiner,                  /* 0x9D   0x200C   ZERO WIDTH NON-JOINER */
+   U_ZeroWidthJoiner,                     /* 0x9E   0x200D   ZERO WIDTH JOINER */
+   U_ArabicLetterNoon,                    /* 0x9F   0x06BA   ARABIC LETTER NOON GHUNNA */
+   U_NB_SP,                               /* 0xA0   0x00A0   NO-BREAK SPACE */
+   U_ArabicComma,                         /* 0xA1   0x060C   ARABIC COMMA */
+   U_CentSign,                            /* 0xA2   0x00A2   CENT SIGN */
+   U_PoundSign,                           /* 0xA3   0x00A3   POUND SIGN */
+   U_CurrencySign,                        /* 0xA4   0x00A4   CURRENCY SIGN */
+   U_YenSign,                             /* 0xA5   0x00A5   YEN SIGN */
+   U_BrokenVerticalBar,                   /* 0xA6   0x00A6   BROKEN BAR */
+   U_SectionSign,                         /* 0xA7   0x00A7   SECTION SIGN */
+   U_Diaeresis,                           /* 0xA8   0x00A8   DIAERESIS */
+   U_CopyrightSign,                       /* 0xA9   0x00A9   COPYRIGHT SIGN */
+   U_ArabicLetterHeh,                     /* 0xAA   0x06BE   ARABIC LETTER HEH DOACHASHMEE */
+   U_LeftPointingGuillemet,               /* 0xAB   0x00AB   LEFT-POINTING DOUBLE ANGLE QUOTATION MARK */
+   U_NotSign,                             /* 0xAC   0x00AC   NOT SIGN */
+   U_SoftHyphen,                          /* 0xAD   0x00AD   SOFT HYPHEN */
+   U_RegisteredSign,                      /* 0xAE   0x00AE   REGISTERED SIGN */
+   U_Macron,                              /* 0xAF   0x00AF   MACRON */
+   U_DegreeSign,                          /* 0xB0   0x00B0   DEGREE SIGN */
+   U_PlusMinusSign,                       /* 0xB1   0x00B1   PLUS-MINUS SIGN */
+   U_SuperscriptTwo,                      /* 0xB2   0x00B2   SUPERSCRIPT TWO */
+   U_SuperscriptThree,                    /* 0xB3   0x00B3   SUPERSCRIPT THREE */
+   U_AcuteAccent,                         /* 0xB4   0x00B4   ACUTE ACCENT */
+   U_MicroSign,                           /* 0xB5   0x00B5   MICRO SIGN */
+   U_ParagraphSign,                       /* 0xB6   0x00B6   PILCROW SIGN */
+   U_MiddleDot,                           /* 0xB7   0x00B7   MIDDLE DOT */
+   U_Cedilla,                             /* 0xB8   0x00B8   CEDILLA */
+   U_SuperscriptOne,                      /* 0xB9   0x00B9   SUPERSCRIPT ONE */
+   U_ArabicSemicolon,                     /* 0xBA   0x061B   ARABIC SEMICOLON */
+   U_RightPointingGuillemet,              /* 0xBB   0x00BB   RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK */
+   U_VulgarFractionOneQuarter,            /* 0xBC   0x00BC   VULGAR FRACTION ONE QUARTER */
+   U_VulgarFractionOneHalf,               /* 0xBD   0x00BD   VULGAR FRACTION ONE HALF */
+   U_VulgarFractionThreeQuarters,         /* 0xBE   0x00BE   VULGAR FRACTION THREE QUARTERS */
+   U_ArabicQuestionMark,                  /* 0xBF   0x061F   ARABIC QUESTION MARK */
+   U_ArabicLetterHeh,                     /* 0xC0   0x06C1   ARABIC LETTER HEH GOAL */
+   U_ArabicLetterHamza,                   /* 0xC1   0x0621   ARABIC LETTER HAMZA */
+   U_ArabicLetterAlef,                    /* 0xC2   0x0622   ARABIC LETTER ALEF WITH MADDA ABOVE */
+   U_ArabicLetterAlef,                    /* 0xC3   0x0623   ARABIC LETTER ALEF WITH HAMZA ABOVE */
+   U_ArabicLetterWaw,                     /* 0xC4   0x0624   ARABIC LETTER WAW WITH HAMZA ABOVE */
+   U_ArabicLetterAlef,                    /* 0xC5   0x0625   ARABIC LETTER ALEF WITH HAMZA BELOW */
+   U_ArabicLetterYeh,                     /* 0xC6   0x0626   ARABIC LETTER YEH WITH HAMZA ABOVE */
+   U_ArabicLetterAlef,                    /* 0xC7   0x0627   ARABIC LETTER ALEF */
+   U_ArabicLetterBeh,                     /* 0xC8   0x0628   ARABIC LETTER BEH */
+   U_ArabicLetterTeh,                     /* 0xC9   0x0629   ARABIC LETTER TEH MARBUTA */
+   U_ArabicLetterTeh,                     /* 0xCA   0x062A   ARABIC LETTER TEH */
+   U_ArabicLetterTheh,                    /* 0xCB   0x062B   ARABIC LETTER THEH */
+   U_ArabicLetterJeem,                    /* 0xCC   0x062C   ARABIC LETTER JEEM */
+   U_ArabicLetterHah,                     /* 0xCD   0x062D   ARABIC LETTER HAH */
+   U_ArabicLetterKhah,                    /* 0xCE   0x062E   ARABIC LETTER KHAH */
+   U_ArabicLetterDal,                     /* 0xCF   0x062F   ARABIC LETTER DAL */
+   U_ArabicLetterThal,                    /* 0xD0   0x0630   ARABIC LETTER THAL */
+   U_ArabicLetterReh,                     /* 0xD1   0x0631   ARABIC LETTER REH */
+   U_ArabicLetterZain,                    /* 0xD2   0x0632   ARABIC LETTER ZAIN */
+   U_ArabicLetterSeen,                    /* 0xD3   0x0633   ARABIC LETTER SEEN */
+   U_ArabicLetterSheen,                   /* 0xD4   0x0634   ARABIC LETTER SHEEN */
+   U_ArabicLetterSad,                     /* 0xD5   0x0635   ARABIC LETTER SAD */
+   U_ArabicLetterDad,                     /* 0xD6   0x0636   ARABIC LETTER DAD */
+   U_MultiplicationSign,                  /* 0xD7   0x00D7   MULTIPLICATION SIGN */
+   U_ArabicLetterTah,                     /* 0xD8   0x0637   ARABIC LETTER TAH */
+   U_ArabicLetterZah,                     /* 0xD9   0x0638   ARABIC LETTER ZAH */
+   U_ArabicLetterAin,                     /* 0xDA   0x0639   ARABIC LETTER AIN */
+   U_ArabicLetterGhain,                   /* 0xDB   0x063A   ARABIC LETTER GHAIN */
+   U_ArabicTatweel,                       /* 0xDC   0x0640   ARABIC TATWEEL */
+   U_ArabicLetterFeh,                     /* 0xDD   0x0641   ARABIC LETTER FEH */
+   U_ArabicLetterQaf,                     /* 0xDE   0x0642   ARABIC LETTER QAF */
+   U_ArabicLetterKaf,                     /* 0xDF   0x0643   ARABIC LETTER KAF */
+   U_LatinCapitalLetterA,                 /* 0xE0   0x00E0   LATIN SMALL LETTER A WITH GRAVE */
+   U_ArabicLetterLam,                     /* 0xE1   0x0644   ARABIC LETTER LAM */
+   U_LatinCapitalLetterA,                 /* 0xE2   0x00E2   LATIN SMALL LETTER A WITH CIRCUMFLEX */
+   U_ArabicLetterMeem,                    /* 0xE3   0x0645   ARABIC LETTER MEEM */
+   U_ArabicLetterNoon,                    /* 0xE4   0x0646   ARABIC LETTER NOON */
+   U_ArabicLetterHeh,                     /* 0xE5   0x0647   ARABIC LETTER HEH */
+   U_ArabicLetterWaw,                     /* 0xE6   0x0648   ARABIC LETTER WAW */
+   U_LatinCapitalLetterC,                 /* 0xE7   0x00E7   LATIN SMALL LETTER C WITH CEDILLA */
+   U_LatinCapitalLetterE,                 /* 0xE8   0x00E8   LATIN SMALL LETTER E WITH GRAVE */
+   U_LatinCapitalLetterE,                 /* 0xE9   0x00E9   LATIN SMALL LETTER E WITH ACUTE */
+   U_LatinCapitalLetterE,                 /* 0xEA   0x00EA   LATIN SMALL LETTER E WITH CIRCUMFLEX */
+   U_LatinCapitalLetterE,                 /* 0xEB   0x00EB   LATIN SMALL LETTER E WITH DIAERESIS */
+   U_ArabicLetterAlef,                    /* 0xEC   0x0649   ARABIC LETTER ALEF MAKSURA */
+   U_ArabicLetterYeh,                     /* 0xED   0x064A   ARABIC LETTER YEH */
+   U_LatinCapitalLetterI,                 /* 0xEE   0x00EE   LATIN SMALL LETTER I WITH CIRCUMFLEX */
+   U_LatinCapitalLetterI,                 /* 0xEF   0x00EF   LATIN SMALL LETTER I WITH DIAERESIS */
+   U_ArabicFathatan,                      /* 0xF0   0x064B   ARABIC FATHATAN */
+   U_ArabicDammatan,                      /* 0xF1   0x064C   ARABIC DAMMATAN */
+   U_ArabicKasratan,                      /* 0xF2   0x064D   ARABIC KASRATAN */
+   U_ArabicFatha,                         /* 0xF3   0x064E   ARABIC FATHA */
+   U_LatinCapitalLetterO,                 /* 0xF4   0x00F4   LATIN SMALL LETTER O WITH CIRCUMFLEX */
+   U_ArabicDamma,                         /* 0xF5   0x064F   ARABIC DAMMA */
+   U_ArabicKasra,                         /* 0xF6   0x0650   ARABIC KASRA */
+   U_DivisionSign,                        /* 0xF7   0x00F7   DIVISION SIGN */
+   U_ArabicShadda,                        /* 0xF8   0x0651   ARABIC SHADDA */
+   U_LatinCapitalLetterU,                 /* 0xF9   0x00F9   LATIN SMALL LETTER U WITH GRAVE */
+   U_ArabicSukun,                         /* 0xFA   0x0652   ARABIC SUKUN */
+   U_LatinCapitalLetterU,                 /* 0xFB   0x00FB   LATIN SMALL LETTER U WITH CIRCUMFLEX */
+   U_LatinCapitalLetterU,                 /* 0xFC   0x00FC   LATIN SMALL LETTER U WITH DIAERESIS */
+   U_LeftToRightMark,                     /* 0xFD   0x200E   LEFT-TO-RIGHT MARK */
+   U_RightToLeftMark,                     /* 0xFE   0x200F   RIGHT-TO-LEFT MARK */
+   U_ArabicLetterYeh                      /* 0xFF   0x06D2   ARABIC LETTER YEH BARREE */
 };
 
 

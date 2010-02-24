@@ -83,6 +83,7 @@
 *                - adjustments from Xcode's complaints for stricmp()
 *    fd  Feb 24: - CODE_CP1254 (Turkish)
 *                - CODE_CP1255 (Hebrew)
+*                - CODE_CP1256 (Arabic)
 *
 ******************************************|************************************/
 
@@ -259,6 +260,8 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
    {"turkish",    CODE_CP1254   },        /*  */
    {"cp1255",     CODE_CP1255   },        /*  */
    {"hebrew" ,    CODE_CP1255   },        /*  */
+   {"cp1256",     CODE_CP1256   },        /*  */
+   {"arabic" ,    CODE_CP1256   },        /*  */
    {"cp1257",     CODE_CP1257   },        /*  */
    {"baltic",     CODE_CP1257   },        /*  */
    {"iso-8859-1", CODE_LATIN1   },        /*  */

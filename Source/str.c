@@ -62,6 +62,7 @@
 *                - adjustments from Xcode's complaints for strupr()
 *    fd  Feb 24: - CODE_CP1254 (Turkish)
 *                - CODE_CP1255 (Hebrew)
+*                - CODE_CP1256 (Arabic)
 *
 ******************************************|************************************/
 
@@ -1834,6 +1835,11 @@ char  *zeile)  /* ^ string */
       psort = sort_CODE_CP1255;
       break;
    
+   case CODE_CP1256:
+      plig = CODE_CP1256_lig;
+      psort = sort_CODE_CP1256;
+      break;
+   
    case CODE_CP1257:
       plig = CODE_CP1257_lig;
       psort = sort_CODE_CP1257;
@@ -1998,6 +2004,12 @@ char       *s2)           /* ^ 2nd string for comparison */
       plig = CODE_CP1255_lig;
       psort = sort_CODE_CP1255;
       pumap = u_CODE_CP1255;
+      break;
+   
+   case CODE_CP1256:
+      plig = CODE_CP1256_lig;
+      psort = sort_CODE_CP1256;
+      pumap = u_CODE_CP1256;
       break;
    
    case CODE_CP1257:
