@@ -85,6 +85,7 @@
 *                - CODE_CP1255 (Hebrew)
 *                - CODE_CP1256 (Arabic)
 *                - CODE_CP1258 (Vietnamese)
+*                - udocharset[]: more mnemonics as used in Unix command iconv
 *
 ******************************************|************************************/
 
@@ -247,40 +248,103 @@ typedef struct _udocharset                /* list of encoding mnemonics */
 
 UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
 {
-   {"sys",        SYSTEM_CHARSET},        /*  */
-   {"utf-8",      CODE_UTF8     },        /*  */
-   {"utf8",       CODE_UTF8     },        /*  */
-   {"cp1250",     CODE_CP1250   },        /*  */
-   {"cp1251",     CODE_CP1251   },        /*  */
-   {"russian",    CODE_CP1251   },        /*  */
-   {"cp1252",     CODE_CP1252   },        /*  */
-   {"win",        CODE_CP1252   },        /*  */
-   {"cp1253",     CODE_CP1253   },        /*  */
-   {"greek",      CODE_CP1253   },        /*  */
-   {"cp1254",     CODE_CP1254   },        /*  */
-   {"turkish",    CODE_CP1254   },        /*  */
-   {"cp1255",     CODE_CP1255   },        /*  */
-   {"hebrew" ,    CODE_CP1255   },        /*  */
-   {"cp1256",     CODE_CP1256   },        /*  */
-   {"arabic" ,    CODE_CP1256   },        /*  */
-   {"cp1257",     CODE_CP1257   },        /*  */
-   {"baltic",     CODE_CP1257   },        /*  */
-   {"cp1258",     CODE_CP1258   },        /*  */
-   {"iso-8859-1", CODE_LATIN1   },        /*  */
-   {"latin1",     CODE_LATIN1   },        /*  */
-   {"iso-8859-2", CODE_LATIN2   },        /*  */
-   {"latin2",     CODE_LATIN2   },        /*  */
-   {"mac",        CODE_MAC      },        /*  */
-   {"mac_ce",     CODE_MAC_CE   },        /*  */
-   {"tos",        CODE_TOS      },        /*  */
-   {"cp437",      CODE_437      },        /*  */
-   {"dos",        CODE_437      },        /*  */
-   {"cp850",      CODE_850      },        /*  */
-   {"os2",        CODE_850      },        /*  */
-   {"hp8",        CODE_HP8      },        /*  */
-   {"next",       CODE_NEXT     },        /*  */
+   {"sys",                 SYSTEM_CHARSET},
+
+   {"utf-8",               CODE_UTF8     },
+   {"utf8",                CODE_UTF8     },
    
-   {"",           NIL           }         /* list terminator */
+   {"cp1250",              CODE_CP1250   },
+   {"ms-ee",               CODE_CP1250   },
+   {"windows-1250",        CODE_CP1250   },
+   
+   {"cp1251",              CODE_CP1251   },
+   {"ms-cyrl",             CODE_CP1251   },
+   {"windows-1251",        CODE_CP1251   },
+   {"russian",             CODE_CP1251   },
+   
+   {"cp1252",              CODE_CP1252   },
+   {"ms-ansi",             CODE_CP1252   },
+   {"windows-1252",        CODE_CP1253   },
+   {"WIN",                 CODE_CP1252   },
+
+   {"cp1253",              CODE_CP1253   },
+   {"greek",               CODE_CP1253   },
+   {"ms-greek",            CODE_CP1253   },
+   {"windows-1253",        CODE_CP1253   },
+   
+   {"CP1254",              CODE_CP1254   },
+   {"ms-turk",             CODE_CP1254   },
+   {"turkish",             CODE_CP1254   },
+   {"windows-1254",        CODE_CP1254   },
+
+   {"cp1255",              CODE_CP1255   },
+   {"hebrew" ,             CODE_CP1255   },
+   {"ms-hebr",             CODE_CP1255   },
+   {"windows-1255",        CODE_CP1255   },
+
+   {"cp1256",              CODE_CP1256   },
+   {"arabic" ,             CODE_CP1256   },
+   {"ms-arab",             CODE_CP1256   },
+   {"windows-1256",        CODE_CP1256   },
+
+   {"cp1257",              CODE_CP1257   },
+   {"baltic",              CODE_CP1257   },
+   {"winbaltrim",          CODE_CP1257   },
+   {"windows-1257",        CODE_CP1257   },
+
+   {"cp1258",              CODE_CP1258   },
+   {"windows-1258",        CODE_CP1258   },
+
+   {"iso-8859-1",          CODE_LATIN1   },
+   {"iso-ir-100",          CODE_LATIN1   },
+   {"iso8859-1",           CODE_LATIN1   },
+   {"iso_8859-1",          CODE_LATIN1   },
+   {"latin1",              CODE_LATIN1   },
+   {"l1",                  CODE_LATIN1   },
+   {"csisolatin1",         CODE_LATIN1   },
+   
+   {"iso-8859-2",          CODE_LATIN2   },
+   {"iso-it-101",          CODE_LATIN2   },
+   {"iso8859-2",           CODE_LATIN2   },
+   {"iso_8859-2",          CODE_LATIN2   },
+   {"latin2",              CODE_LATIN2   },
+   {"l2",                  CODE_LATIN2   },
+   {"csisolatin2",         CODE_LATIN2   },
+   
+   {"mac",                 CODE_MAC      },
+   {"macintosh",           CODE_MAC      },
+   {"macroman",            CODE_MAC      },
+   {"csmacintosh",         CODE_MAC      },
+   
+   {"mac_ce",              CODE_MAC_CE   },
+   {"maccentraleurope",    CODE_MAC_CE   },
+   
+   {"tos",                 CODE_TOS      },
+   {"atari",               CODE_TOS      },
+   {"atarist",             CODE_TOS      },
+   
+   {"437",                 CODE_437      },
+   {"cp437",               CODE_437      },
+   {"ibm437",              CODE_437      },
+   {"cspc8codepage437",    CODE_437      },
+   {"dos",                 CODE_437      },
+   
+   {"850",                 CODE_850      },
+   {"cp850",               CODE_850      },
+   {"ibm850",              CODE_850      },
+   {"cspc850multilingual", CODE_850      },
+   {"os2",                 CODE_850      },
+   
+   {"hp8",                 CODE_HP8      },
+   {"hp-roman8",           CODE_HP8      },
+   {"r8",                  CODE_HP8      },
+   {"roman8",              CODE_HP8      },
+   {"cshproman8",          CODE_HP8      },
+   
+   {"next",                CODE_NEXT     },
+   {"nextstep",            CODE_NEXT     },
+   
+   {"", NIL}                              /* list terminator */
 };
 
 
@@ -4941,6 +5005,8 @@ LOCAL void c_code(void)
 
    tokcpy2(s, 256);
 
+   my_strlwr(s);                          /* the mnemonics are LOWERCASE */
+
    while (udocharset[i].magic[0] != EOS)
    {
       if (strstr(s, udocharset[i].magic) != NULL)
@@ -4985,6 +5051,8 @@ LOCAL void c_code_source(void)
 
    tokcpy2(s, 256);
 
+   my_strlwr(s);                          /* the mnemonics are LOWERCASE */
+   
    while (udocharset[i].magic[0] != EOS)
    {
       if (strstr(s, udocharset[i].magic) != NULL)
@@ -5028,6 +5096,8 @@ LOCAL void c_code_target(void)
    }
 
    tokcpy2(s, 256);
+
+   my_strlwr(s);                          /* the mnemonics are LOWERCASE */
 
    while (udocharset[i].magic[0] != EOS)
    {
