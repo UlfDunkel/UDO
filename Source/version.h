@@ -56,6 +56,7 @@
 *    fd  Feb 24: - CODE_CP1254 (Turkish)
 *                - CODE_CP1255 (Hebrew)
 *                - CODE_CP1256 (Arabic)
+*                - CODE_CP1258 (Vietnamese)
 *
 ******************************************|************************************/
 
@@ -118,8 +119,9 @@
 #define CODE_CP1254   15                  /* Microsoft Windows codepage 1254 "Turkish" */
 #define CODE_CP1255   16                  /* Microsoft Windows codepage 1255 "Hebrew" */
 #define CODE_CP1256   17                  /* Microsoft Windows codepage 1256 "Arabic" */
+#define CODE_CP1258   18                  /* Microsoft Windows codepage 1258 "Vietnamese" */
 
-#define CODE_TOTAL    18                  /* # of supported encodings */
+#define CODE_TOTAL    19                  /* # of supported encodings */
 
    /* --- Compiler- und systemabhaengige Dinge setzen --- */
 

@@ -55,6 +55,7 @@
 *    fd  Feb 24: - CODE_CP1254 (Turkish)
 *                - CODE_CP1255 (Hebrew)
 *                - CODE_CP1256 (Arabic)
+*                - CODE_CP1258 (Vietnamese)
 *
 ******************************************|************************************/
 
@@ -363,36 +364,37 @@ static UWORD   u_CODE_CP1250[] =          /* CODE_CP1250 */
 
 static UWORD   CODE_CP1250_lig[][3] =     /* CODE_CP1250 character ligatures */
 {
-   {0x0160, U_LatinCapitalLetterS, U_LatinSmallLetterJ},      /* 0x8A   0x0160  LATIN CAPITAL LETTER S WITH CARON */
-   {0x0164, U_LatinCapitalLetterT, U_LatinSmallLetterJ},      /* 0x8D   0x0164  LATIN CAPITAL LETTER T WITH CARON */
-   {0x017D, U_LatinCapitalLetterZ, U_LatinSmallLetterJ},      /* 0x8E   0x017D  LATIN CAPITAL LETTER Z WITH CARON */
-   {0x0161, U_LatinSmallLetterS,   U_LatinSmallLetterJ},      /* 0x9A   0x0161  LATIN SMALL LETTER S WITH CARON */
-   {0x0165, U_LatinSmallLetterT,   U_LatinSmallLetterJ},      /* 0x9D   0x0165  LATIN SMALL LETTER T WITH CARON */
-   {0x017E, U_LatinSmallLetterZ,   U_LatinSmallLetterJ},      /* 0x9E   0x017E  LATIN SMALL LETTER Z WITH CARON */
-   {0x013D, U_LatinCapitalLetterL, U_LatinSmallLetterJ},      /* 0xBC   0x013D  LATIN CAPITAL LETTER L WITH CARON */
-   {0x013E, U_LatinSmallLetterL,   U_LatinSmallLetterJ},      /* 0xBE   0x013E  LATIN SMALL LETTER L WITH CARON */
-   {0x00C4, U_LatinCapitalLetterA, U_LatinSmallLetterE},      /* 0xC4   0x00C4  LATIN CAPITAL LETTER A WITH DIAERESIS */
-   {0x010C, U_LatinCapitalLetterC, U_LatinSmallLetterJ},      /* 0xC8   0x010C  LATIN CAPITAL LETTER C WITH CARON */
-   {0x00CB, U_LatinCapitalLetterE, U_LatinSmallLetterE},      /* 0xCB   0x00CB  LATIN CAPITAL LETTER E WITH DIAERESIS */
-   {0x011A, U_LatinCapitalLetterE, U_LatinSmallLetterJ},      /* 0xCC   0x011A  LATIN CAPITAL LETTER E WITH CARON */
-   {0x010E, U_LatinCapitalLetterD, U_LatinSmallLetterJ},      /* 0xCF   0x010E  LATIN CAPITAL LETTER D WITH CARON */
-   {0x0147, U_LatinCapitalLetterN, U_LatinSmallLetterJ},      /* 0xD2   0x0147  LATIN CAPITAL LETTER N WITH CARON */
-   {0x00D6, U_LatinCapitalLetterO, U_LatinSmallLetterE},      /* 0xD6   0x00D6  LATIN CAPITAL LETTER O WITH DIAERESIS */
-   {0x0158, U_LatinCapitalLetterR, U_LatinSmallLetterJ},      /* 0xD8   0x0158  LATIN CAPITAL LETTER R WITH CARON */
-   {0x016E, U_LatinCapitalLetterU, U_LatinSmallLetterO},      /* 0xD9   0x016E  LATIN CAPITAL LETTER U WITH RING ABOVE */
-   {0x00DC, U_LatinCapitalLetterU, U_LatinSmallLetterE},      /* 0xDC   0x00DC  LATIN CAPITAL LETTER U WITH DIAERESIS */
-   {0x00DF, U_LatinSmallLetterS,   U_LatinSmallLetterS},      /* 0xDF   0x00DF  LATIN SMALL LETTER SHARP S */
-   {0x00E4, U_LatinSmallLetterA,   U_LatinSmallLetterE},      /* 0xE4   0x00E4  LATIN SMALL LETTER A WITH DIAERESIS */
-   {0x010D, U_LatinSmallLetterC,   U_LatinSmallLetterJ},      /* 0xE8   0x010D  LATIN SMALL LETTER C WITH CARON */
-   {0x00EB, U_LatinSmallLetterE,   U_LatinSmallLetterE},      /* 0xEB   0x00EB  LATIN SMALL LETTER E WITH DIAERESIS */
-   {0x011B, U_LatinSmallLetterE,   U_LatinSmallLetterJ},      /* 0xEC   0x011B  LATIN SMALL LETTER E WITH CARON */
-   {0x010F, U_LatinSmallLetterD,   U_LatinSmallLetterJ},      /* 0xEF   0x010F  LATIN SMALL LETTER D WITH CARON */
-   {0x0148, U_LatinSmallLetterN,   U_LatinSmallLetterJ},      /* 0xF2   0x0148  LATIN SMALL LETTER N WITH CARON */
-   {0x00F6, U_LatinSmallLetterO,   U_LatinSmallLetterE},      /* 0xF6   0x00F6  LATIN SMALL LETTER O WITH DIAERESIS */
-   {0x0159, U_LatinSmallLetterR,   U_LatinSmallLetterJ},      /* 0xF8   0x0159  LATIN SMALL LETTER R WITH CARON */
-   {0x016F, U_LatinSmallLetterU,   U_LatinSmallLetterO},      /* 0xF9   0x016F  LATIN SMALL LETTER U WITH RING ABOVE */
-   {0x00FC, U_LatinSmallLetterU,   U_LatinSmallLetterE},      /* 0xFC   0x00FC  LATIN SMALL LETTER U WITH DIAERESIS */
-   {0x0000, U_NIL                , U_NIL}                     /* list terminator */
+   { U_LatinCapitalLetterSWithCaron,      U_LatinCapitalLetterS, U_LatinCapitalLetterJ },   /* 0x8A   0x0160  LATIN CAPITAL LETTER S WITH CARON */
+   { U_LatinCapitalLetterTWithCaron,      U_LatinCapitalLetterT, U_LatinCapitalLetterJ },   /* 0x8D   0x0164  LATIN CAPITAL LETTER T WITH CARON */
+   { U_LatinCapitalLetterZWithCaron,      U_LatinCapitalLetterZ, U_LatinCapitalLetterJ },   /* 0x8E   0x017D  LATIN CAPITAL LETTER Z WITH CARON */
+   { U_LatinSmallLetterSWithCaron,        U_LatinCapitalLetterS, U_LatinCapitalLetterJ },   /* 0x9A   0x0161  LATIN SMALL LETTER S WITH CARON */
+   { U_LatinSmallLetterTWithCaron,        U_LatinCapitalLetterT, U_LatinCapitalLetterJ },   /* 0x9D   0x0165  LATIN SMALL LETTER T WITH CARON */
+   { U_LatinSmallLetterZWithCaron,        U_LatinCapitalLetterZ, U_LatinCapitalLetterJ },   /* 0x9E   0x017E  LATIN SMALL LETTER Z WITH CARON */
+   { U_LatinCapitalLetterLWithCaron,      U_LatinCapitalLetterL, U_LatinCapitalLetterJ },   /* 0xBC   0x013D  LATIN CAPITAL LETTER L WITH CARON */
+   { U_LatinSmallLetterLWithCaron,        U_LatinCapitalLetterL, U_LatinCapitalLetterJ },   /* 0xBE   0x013E  LATIN SMALL LETTER L WITH CARON */
+   { U_LatinCapitalLetterAWithDiaeresis,  U_LatinCapitalLetterA, U_LatinCapitalLetterE },   /* 0xC4   0x00C4  LATIN CAPITAL LETTER A WITH DIAERESIS */
+   { U_LatinCapitalLetterCWithCaron,      U_LatinCapitalLetterC, U_LatinCapitalLetterJ },   /* 0xC8   0x010C  LATIN CAPITAL LETTER C WITH CARON */
+   { U_LatinCapitalLetterEWithDiaeresis,  U_LatinCapitalLetterE, U_LatinCapitalLetterE },   /* 0xCB   0x00CB  LATIN CAPITAL LETTER E WITH DIAERESIS */
+   { U_LatinCapitalLetterEWithCaron,      U_LatinCapitalLetterE, U_LatinCapitalLetterJ },   /* 0xCC   0x011A  LATIN CAPITAL LETTER E WITH CARON */
+   { U_LatinCapitalLetterDWithCaron,      U_LatinCapitalLetterD, U_LatinCapitalLetterJ },   /* 0xCF   0x010E  LATIN CAPITAL LETTER D WITH CARON */
+   { U_LatinCapitalLetterNWithCaron,      U_LatinCapitalLetterN, U_LatinCapitalLetterJ },   /* 0xD2   0x0147  LATIN CAPITAL LETTER N WITH CARON */
+   { U_LatinCapitalLetterOWithDiaeresis,  U_LatinCapitalLetterO, U_LatinCapitalLetterE },   /* 0xD6   0x00D6  LATIN CAPITAL LETTER O WITH DIAERESIS */
+   { U_LatinCapitalLetterRWithCaron,      U_LatinCapitalLetterR, U_LatinCapitalLetterJ },   /* 0xD8   0x0158  LATIN CAPITAL LETTER R WITH CARON */
+   { U_LatinCapitalLetterUWithRingAbove,  U_LatinCapitalLetterU, U_LatinCapitalLetterO },   /* 0xD9   0x016E  LATIN CAPITAL LETTER U WITH RING ABOVE */
+   { U_LatinCapitalLetterUWithDiaeresis,  U_LatinCapitalLetterU, U_LatinCapitalLetterE },   /* 0xDC   0x00DC  LATIN CAPITAL LETTER U WITH DIAERESIS */
+   { U_LatinSmallLetterSharpS,            U_LatinCapitalLetterS, U_LatinCapitalLetterS },   /* 0xDF   0x00DF  LATIN SMALL LETTER SHARP S */
+   { U_LatinSmallLetterAWithDiaeresis,    U_LatinCapitalLetterA, U_LatinCapitalLetterE },   /* 0xE4   0x00E4  LATIN SMALL LETTER A WITH DIAERESIS */
+   { U_LatinSmallLetterCWithCaron,        U_LatinCapitalLetterC, U_LatinCapitalLetterJ },   /* 0xE8   0x010D  LATIN SMALL LETTER C WITH CARON */
+   { U_LatinSmallLetterEWithDiaeresis,    U_LatinCapitalLetterE, U_LatinCapitalLetterE },   /* 0xEB   0x00EB  LATIN SMALL LETTER E WITH DIAERESIS */
+   { U_LatinSmallLetterEWithCaron,        U_LatinCapitalLetterE, U_LatinCapitalLetterJ },   /* 0xEC   0x011B  LATIN SMALL LETTER E WITH CARON */
+   { U_LatinSmallLetterDWithCaron,        U_LatinCapitalLetterD, U_LatinCapitalLetterJ },   /* 0xEF   0x010F  LATIN SMALL LETTER D WITH CARON */
+   { U_LatinSmallLetterNWithCaron,        U_LatinCapitalLetterN, U_LatinCapitalLetterJ },   /* 0xF2   0x0148  LATIN SMALL LETTER N WITH CARON */
+   { U_LatinSmallLetterOWithDiaeresis,    U_LatinCapitalLetterO, U_LatinCapitalLetterE },   /* 0xF6   0x00F6  LATIN SMALL LETTER O WITH DIAERESIS */
+   { U_LatinSmallLetterRWithCaron,        U_LatinCapitalLetterR, U_LatinCapitalLetterJ },   /* 0xF8   0x0159  LATIN SMALL LETTER R WITH CARON */
+   { U_LatinSmallLetterUWithRingAbove,    U_LatinCapitalLetterU, U_LatinCapitalLetterO },   /* 0xF9   0x016F  LATIN SMALL LETTER U WITH RING ABOVE */
+   { U_LatinSmallLetterUWithDiaeresis,    U_LatinCapitalLetterU, U_LatinCapitalLetterE },   /* 0xFC   0x00FC  LATIN SMALL LETTER U WITH DIAERESIS */
+   
+   {0x0000, U_NIL, U_NIL}                 /* list terminator */
 };
 
 
@@ -508,32 +510,32 @@ static UWORD   sort_CODE_CP1250[] =       /* CODE_CP1250 */
    U_CircumflexAccent,                    /* 0x5E  ^ */
    U_SpacingUnderscore,                   /* 0x5F  _ */
    U_GraveAccent,                         /* 0x60  ` */
-   U_LatinSmallLetterA,                   /* 0x61  a */
-   U_LatinSmallLetterB,                   /* 0x62  b */
-   U_LatinSmallLetterC,                   /* 0x63  c */
-   U_LatinSmallLetterD,                   /* 0x64  d */
-   U_LatinSmallLetterE,                   /* 0x65  e */
-   U_LatinSmallLetterF,                   /* 0x66  f */
-   U_LatinSmallLetterG,                   /* 0x67  g */
-   U_LatinSmallLetterH,                   /* 0x68  h */
-   U_LatinSmallLetterI,                   /* 0x69  i */
-   U_LatinSmallLetterJ,                   /* 0x6A  j */
-   U_LatinSmallLetterK,                   /* 0x6B  k */
-   U_LatinSmallLetterL,                   /* 0x6C  l */
-   U_LatinSmallLetterM,                   /* 0x6D  m */
-   U_LatinSmallLetterN,                   /* 0x6E  n */
-   U_LatinSmallLetterO,                   /* 0x6F  o */
-   U_LatinSmallLetterP,                   /* 0x70  p */
-   U_LatinSmallLetterQ,                   /* 0x71  q */
-   U_LatinSmallLetterR,                   /* 0x72  r */
-   U_LatinSmallLetterS,                   /* 0x73  s */
-   U_LatinSmallLetterT,                   /* 0x74  t */
-   U_LatinSmallLetterU,                   /* 0x75  u */
-   U_LatinSmallLetterV,                   /* 0x76  v */
-   U_LatinSmallLetterW,                   /* 0x77  w */
-   U_LatinSmallLetterX,                   /* 0x78  x */
-   U_LatinSmallLetterY,                   /* 0x79  y */
-   U_LatinSmallLetterZ,                   /* 0x7A  z */
+   U_LatinCapitalLetterA,                 /* 0x61  a */
+   U_LatinCapitalLetterB,                 /* 0x62  b */
+   U_LatinCapitalLetterC,                 /* 0x63  c */
+   U_LatinCapitalLetterD,                 /* 0x64  d */
+   U_LatinCapitalLetterE,                 /* 0x65  e */
+   U_LatinCapitalLetterF,                 /* 0x66  f */
+   U_LatinCapitalLetterG,                 /* 0x67  g */
+   U_LatinCapitalLetterH,                 /* 0x68  h */
+   U_LatinCapitalLetterI,                 /* 0x69  i */
+   U_LatinCapitalLetterJ,                 /* 0x6A  j */
+   U_LatinCapitalLetterK,                 /* 0x6B  k */
+   U_LatinCapitalLetterL,                 /* 0x6C  l */
+   U_LatinCapitalLetterM,                 /* 0x6D  m */
+   U_LatinCapitalLetterN,                 /* 0x6E  n */
+   U_LatinCapitalLetterO,                 /* 0x6F  o */
+   U_LatinCapitalLetterP,                 /* 0x70  p */
+   U_LatinCapitalLetterQ,                 /* 0x71  q */
+   U_LatinCapitalLetterR,                 /* 0x72  r */
+   U_LatinCapitalLetterS,                 /* 0x73  s */
+   U_LatinCapitalLetterT,                 /* 0x74  t */
+   U_LatinCapitalLetterU,                 /* 0x75  u */
+   U_LatinCapitalLetterV,                 /* 0x76  v */
+   U_LatinCapitalLetterW,                 /* 0x77  w */
+   U_LatinCapitalLetterX,                 /* 0x78  x */
+   U_LatinCapitalLetterY,                 /* 0x79  y */
+   U_LatinCapitalLetterZ,                 /* 0x7A  z */
    U_OpeningCurlyBracket,                 /* 0x7B  { */
    U_VerticalLine,                        /* 0x7C  | */
    U_ClosingCurlyBracket,                 /* 0x7D  } */
@@ -566,12 +568,12 @@ static UWORD   sort_CODE_CP1250[] =       /* CODE_CP1250 */
    U_EmDash,                              /* 0x97   0x2014  EM DASH */
    U_NIL,                                 /* 0x98           UNDEFINED */
    U_TradeMarkSign,                       /* 0x99   0x2122  TRADE MARK SIGN */
-   U_LatinSmallLetterS,                   /* 0x9A   0x0161  LATIN SMALL LETTER S WITH CARON */
+   U_LatinCapitalLetterS,                 /* 0x9A   0x0161  LATIN SMALL LETTER S WITH CARON */
    U_RightPointingSingleGuillemet,        /* 0x9B   0x203A  SINGLE RIGHT-POINTING ANGLE QUOTATION MARK */
-   U_LatinSmallLetterS,                   /* 0x9C   0x015B  LATIN SMALL LETTER S WITH ACUTE */
-   U_LatinSmallLetterT,                   /* 0x9D   0x0165  LATIN SMALL LETTER T WITH CARON */
-   U_LatinSmallLetterZ,                   /* 0x9E   0x017E  LATIN SMALL LETTER Z WITH CARON */
-   U_LatinSmallLetterZ,                   /* 0x9F   0x017A  LATIN SMALL LETTER Z WITH ACUTE */
+   U_LatinCapitalLetterS,                 /* 0x9C   0x015B  LATIN SMALL LETTER S WITH ACUTE */
+   U_LatinCapitalLetterT,                 /* 0x9D   0x0165  LATIN SMALL LETTER T WITH CARON */
+   U_LatinCapitalLetterZ,                 /* 0x9E   0x017E  LATIN SMALL LETTER Z WITH CARON */
+   U_LatinCapitalLetterZ,                 /* 0x9F   0x017A  LATIN SMALL LETTER Z WITH ACUTE */
    U_NB_SP,                               /* 0xA0   0x00A0  NO-BREAK SPACE */
    U_Caron,                               /* 0xA1   0x02C7  CARON */
    U_Breve,                               /* 0xA2   0x02D8  BREVE */
@@ -597,13 +599,13 @@ static UWORD   sort_CODE_CP1250[] =       /* CODE_CP1250 */
    U_ParagraphSign,                       /* 0xB6   0x00B6  PILCROW SIGN */
    U_MiddleDot,                           /* 0xB7   0x00B7  MIDDLE DOT */
    U_Cedilla,                             /* 0xB8   0x00B8  CEDILLA */
-   U_LatinSmallLetterA,                   /* 0xB9   0x0105  LATIN SMALL LETTER A WITH OGONEK */
-   U_LatinSmallLetterS,                   /* 0xBA   0x015F  LATIN SMALL LETTER S WITH CEDILLA */
+   U_LatinCapitalLetterA,                 /* 0xB9   0x0105  LATIN SMALL LETTER A WITH OGONEK */
+   U_LatinCapitalLetterS,                 /* 0xBA   0x015F  LATIN SMALL LETTER S WITH CEDILLA */
    U_RightPointingGuillemet,              /* 0xBB   0x00BB  RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK */
    U_LatinCapitalLetterL,                 /* 0xBC   0x013D  LATIN CAPITAL LETTER L WITH CARON */
    U_DoubleAcuteAccent,                   /* 0xBD   0x02DD  DOUBLE ACUTE ACCENT */
-   U_LatinSmallLetterL,                   /* 0xBE   0x013E  LATIN SMALL LETTER L WITH CARON */
-   U_LatinSmallLetterZ,                   /* 0xBF   0x017C  LATIN SMALL LETTER Z WITH DOT ABOVE */
+   U_LatinCapitalLetterL,                 /* 0xBE   0x013E  LATIN SMALL LETTER L WITH CARON */
+   U_LatinCapitalLetterZ,                 /* 0xBF   0x017C  LATIN SMALL LETTER Z WITH DOT ABOVE */
    U_LatinCapitalLetterR,                 /* 0xC0   0x0154  LATIN CAPITAL LETTER R WITH ACUTE */
    U_LatinCapitalLetterA,                 /* 0xC1   0x00C1  LATIN CAPITAL LETTER A WITH ACUTE */
    U_LatinCapitalLetterA,                 /* 0xC2   0x00C2  LATIN CAPITAL LETTER A WITH CIRCUMFLEX */
@@ -635,38 +637,38 @@ static UWORD   sort_CODE_CP1250[] =       /* CODE_CP1250 */
    U_LatinCapitalLetterU,                 /* 0xDC   0x00DC  LATIN CAPITAL LETTER U WITH DIAERESIS */
    U_LatinCapitalLetterY,                 /* 0xDD   0x00DD  LATIN CAPITAL LETTER Y WITH ACUTE */
    U_LatinCapitalLetterT,                 /* 0xDE   0x0162  LATIN CAPITAL LETTER T WITH CEDILLA */
-   U_LatinSmallLetterSharpS,              /* 0xDF   0x00DF  LATIN SMALL LETTER SHARP S */
-   U_LatinSmallLetterR,                   /* 0xE0   0x0155  LATIN SMALL LETTER R WITH ACUTE */
-   U_LatinSmallLetterA,                   /* 0xE1   0x00E1  LATIN SMALL LETTER A WITH ACUTE */
-   U_LatinSmallLetterA,                   /* 0xE2   0x00E2  LATIN SMALL LETTER A WITH CIRCUMFLEX */
-   U_LatinSmallLetterA,                   /* 0xE3   0x0103  LATIN SMALL LETTER A WITH BREVE */
-   U_LatinSmallLetterA,                   /* 0xE4   0x00E4  LATIN SMALL LETTER A WITH DIAERESIS */
-   U_LatinSmallLetterL,                   /* 0xE5   0x013A  LATIN SMALL LETTER L WITH ACUTE */
-   U_LatinSmallLetterC,                   /* 0xE6   0x0107  LATIN SMALL LETTER C WITH ACUTE */
-   U_LatinSmallLetterC,                   /* 0xE7   0x00E7  LATIN SMALL LETTER C WITH CEDILLA */
-   U_LatinSmallLetterC,                   /* 0xE8   0x010D  LATIN SMALL LETTER C WITH CARON */
-   U_LatinSmallLetterE,                   /* 0xE9   0x00E9  LATIN SMALL LETTER E WITH ACUTE */
-   U_LatinSmallLetterE,                   /* 0xEA   0x0119  LATIN SMALL LETTER E WITH OGONEK */
-   U_LatinSmallLetterE,                   /* 0xEB   0x00EB  LATIN SMALL LETTER E WITH DIAERESIS */
-   U_LatinSmallLetterE,                   /* 0xEC   0x011B  LATIN SMALL LETTER E WITH CARON */
-   U_LatinSmallLetterI,                   /* 0xED   0x00ED  LATIN SMALL LETTER I WITH ACUTE */
-   U_LatinSmallLetterI,                   /* 0xEE   0x00EE  LATIN SMALL LETTER I WITH CIRCUMFLEX */
-   U_LatinSmallLetterD,                   /* 0xEF   0x010F  LATIN SMALL LETTER D WITH CARON */
-   U_LatinSmallLetterD,                   /* 0xF0   0x0111  LATIN SMALL LETTER D WITH STROKE */
-   U_LatinSmallLetterN,                   /* 0xF1   0x0144  LATIN SMALL LETTER N WITH ACUTE */
-   U_LatinSmallLetterN,                   /* 0xF2   0x0148  LATIN SMALL LETTER N WITH CARON */
-   U_LatinSmallLetterO,                   /* 0xF3   0x00F3  LATIN SMALL LETTER O WITH ACUTE */
-   U_LatinSmallLetterO,                   /* 0xF4   0x00F4  LATIN SMALL LETTER O WITH CIRCUMFLEX */
-   U_LatinSmallLetterO,                   /* 0xF5   0x0151  LATIN SMALL LETTER O WITH DOUBLE ACUTE */
-   U_LatinSmallLetterO,                   /* 0xF6   0x00F6  LATIN SMALL LETTER O WITH DIAERESIS */
+   U_LatinCapitalLetterS,                 /* 0xDF   0x00DF  LATIN SMALL LETTER SHARP S */
+   U_LatinCapitalLetterR,                 /* 0xE0   0x0155  LATIN SMALL LETTER R WITH ACUTE */
+   U_LatinCapitalLetterA,                 /* 0xE1   0x00E1  LATIN SMALL LETTER A WITH ACUTE */
+   U_LatinCapitalLetterA,                 /* 0xE2   0x00E2  LATIN SMALL LETTER A WITH CIRCUMFLEX */
+   U_LatinCapitalLetterA,                 /* 0xE3   0x0103  LATIN SMALL LETTER A WITH BREVE */
+   U_LatinCapitalLetterA,                 /* 0xE4   0x00E4  LATIN SMALL LETTER A WITH DIAERESIS */
+   U_LatinCapitalLetterL,                 /* 0xE5   0x013A  LATIN SMALL LETTER L WITH ACUTE */
+   U_LatinCapitalLetterC,                 /* 0xE6   0x0107  LATIN SMALL LETTER C WITH ACUTE */
+   U_LatinCapitalLetterC,                 /* 0xE7   0x00E7  LATIN SMALL LETTER C WITH CEDILLA */
+   U_LatinCapitalLetterC,                 /* 0xE8   0x010D  LATIN SMALL LETTER C WITH CARON */
+   U_LatinCapitalLetterE,                 /* 0xE9   0x00E9  LATIN SMALL LETTER E WITH ACUTE */
+   U_LatinCapitalLetterE,                 /* 0xEA   0x0119  LATIN SMALL LETTER E WITH OGONEK */
+   U_LatinCapitalLetterE,                 /* 0xEB   0x00EB  LATIN SMALL LETTER E WITH DIAERESIS */
+   U_LatinCapitalLetterE,                 /* 0xEC   0x011B  LATIN SMALL LETTER E WITH CARON */
+   U_LatinCapitalLetterI,                 /* 0xED   0x00ED  LATIN SMALL LETTER I WITH ACUTE */
+   U_LatinCapitalLetterI,                 /* 0xEE   0x00EE  LATIN SMALL LETTER I WITH CIRCUMFLEX */
+   U_LatinCapitalLetterD,                 /* 0xEF   0x010F  LATIN SMALL LETTER D WITH CARON */
+   U_LatinCapitalLetterD,                 /* 0xF0   0x0111  LATIN SMALL LETTER D WITH STROKE */
+   U_LatinCapitalLetterN,                 /* 0xF1   0x0144  LATIN SMALL LETTER N WITH ACUTE */
+   U_LatinCapitalLetterN,                 /* 0xF2   0x0148  LATIN SMALL LETTER N WITH CARON */
+   U_LatinCapitalLetterO,                 /* 0xF3   0x00F3  LATIN SMALL LETTER O WITH ACUTE */
+   U_LatinCapitalLetterO,                 /* 0xF4   0x00F4  LATIN SMALL LETTER O WITH CIRCUMFLEX */
+   U_LatinCapitalLetterO,                 /* 0xF5   0x0151  LATIN SMALL LETTER O WITH DOUBLE ACUTE */
+   U_LatinCapitalLetterO,                 /* 0xF6   0x00F6  LATIN SMALL LETTER O WITH DIAERESIS */
    U_DivisionSign,                        /* 0xF7   0x00F7  DIVISION SIGN */
-   U_LatinSmallLetterR,                   /* 0xF8   0x0159  LATIN SMALL LETTER R WITH CARON */
-   U_LatinSmallLetterU,                   /* 0xF9   0x016F  LATIN SMALL LETTER U WITH RING ABOVE */
-   U_LatinSmallLetterU,                   /* 0xFA   0x00FA  LATIN SMALL LETTER U WITH ACUTE */
-   U_LatinSmallLetterU,                   /* 0xFB   0x0171  LATIN SMALL LETTER U WITH DOUBLE ACUTE */
-   U_LatinSmallLetterU,                   /* 0xFC   0x00FC  LATIN SMALL LETTER U WITH DIAERESIS */
-   U_LatinSmallLetterY,                   /* 0xFD   0x00FD  LATIN SMALL LETTER Y WITH ACUTE */
-   U_LatinSmallLetterT,                   /* 0xFE   0x0163  LATIN SMALL LETTER T WITH CEDILLA */
+   U_LatinCapitalLetterR,                 /* 0xF8   0x0159  LATIN SMALL LETTER R WITH CARON */
+   U_LatinCapitalLetterU,                 /* 0xF9   0x016F  LATIN SMALL LETTER U WITH RING ABOVE */
+   U_LatinCapitalLetterU,                 /* 0xFA   0x00FA  LATIN SMALL LETTER U WITH ACUTE */
+   U_LatinCapitalLetterU,                 /* 0xFB   0x0171  LATIN SMALL LETTER U WITH DOUBLE ACUTE */
+   U_LatinCapitalLetterU,                 /* 0xFC   0x00FC  LATIN SMALL LETTER U WITH DIAERESIS */
+   U_LatinCapitalLetterY,                 /* 0xFD   0x00FD  LATIN SMALL LETTER Y WITH ACUTE */
+   U_LatinCapitalLetterT,                 /* 0xFE   0x0163  LATIN SMALL LETTER T WITH CEDILLA */
    U_DotAbove                             /* 0xFF   0x02D9  DOT ABOVE */
 };
 
@@ -1089,32 +1091,32 @@ static UWORD   sort_CODE_CP1251[] =       /* CODE_CP1251 */
    U_CircumflexAccent,                    /* 0x5E  ^ */
    U_SpacingUnderscore,                   /* 0x5F  _ */
    U_GraveAccent,                         /* 0x60  ` */
-   U_LatinSmallLetterA,                   /* 0x61  a */
-   U_LatinSmallLetterB,                   /* 0x62  b */
-   U_LatinSmallLetterC,                   /* 0x63  c */
-   U_LatinSmallLetterD,                   /* 0x64  d */
-   U_LatinSmallLetterE,                   /* 0x65  e */
-   U_LatinSmallLetterF,                   /* 0x66  f */
-   U_LatinSmallLetterG,                   /* 0x67  g */
-   U_LatinSmallLetterH,                   /* 0x68  h */
-   U_LatinSmallLetterI,                   /* 0x69  i */
-   U_LatinSmallLetterJ,                   /* 0x6A  j */
-   U_LatinSmallLetterK,                   /* 0x6B  k */
-   U_LatinSmallLetterL,                   /* 0x6C  l */
-   U_LatinSmallLetterM,                   /* 0x6D  m */
-   U_LatinSmallLetterN,                   /* 0x6E  n */
-   U_LatinSmallLetterO,                   /* 0x6F  o */
-   U_LatinSmallLetterP,                   /* 0x70  p */
-   U_LatinSmallLetterQ,                   /* 0x71  q */
-   U_LatinSmallLetterR,                   /* 0x72  r */
-   U_LatinSmallLetterS,                   /* 0x73  s */
-   U_LatinSmallLetterT,                   /* 0x74  t */
-   U_LatinSmallLetterU,                   /* 0x75  u */
-   U_LatinSmallLetterV,                   /* 0x76  v */
-   U_LatinSmallLetterW,                   /* 0x77  w */
-   U_LatinSmallLetterX,                   /* 0x78  x */
-   U_LatinSmallLetterY,                   /* 0x79  y */
-   U_LatinSmallLetterZ,                   /* 0x7A  z */
+   U_LatinCapitalLetterA,                 /* 0x61  a */
+   U_LatinCapitalLetterB,                 /* 0x62  b */
+   U_LatinCapitalLetterC,                 /* 0x63  c */
+   U_LatinCapitalLetterD,                 /* 0x64  d */
+   U_LatinCapitalLetterE,                 /* 0x65  e */
+   U_LatinCapitalLetterF,                 /* 0x66  f */
+   U_LatinCapitalLetterG,                 /* 0x67  g */
+   U_LatinCapitalLetterH,                 /* 0x68  h */
+   U_LatinCapitalLetterI,                 /* 0x69  i */
+   U_LatinCapitalLetterJ,                 /* 0x6A  j */
+   U_LatinCapitalLetterK,                 /* 0x6B  k */
+   U_LatinCapitalLetterL,                 /* 0x6C  l */
+   U_LatinCapitalLetterM,                 /* 0x6D  m */
+   U_LatinCapitalLetterN,                 /* 0x6E  n */
+   U_LatinCapitalLetterO,                 /* 0x6F  o */
+   U_LatinCapitalLetterP,                 /* 0x70  p */
+   U_LatinCapitalLetterQ,                 /* 0x71  q */
+   U_LatinCapitalLetterR,                 /* 0x72  r */
+   U_LatinCapitalLetterS,                 /* 0x73  s */
+   U_LatinCapitalLetterT,                 /* 0x74  t */
+   U_LatinCapitalLetterU,                 /* 0x75  u */
+   U_LatinCapitalLetterV,                 /* 0x76  v */
+   U_LatinCapitalLetterW,                 /* 0x77  w */
+   U_LatinCapitalLetterX,                 /* 0x78  x */
+   U_LatinCapitalLetterY,                 /* 0x79  y */
+   U_LatinCapitalLetterZ,                 /* 0x7A  z */
    U_OpeningCurlyBracket,                 /* 0x7B  { */
    U_VerticalLine,                        /* 0x7C  | */
    U_ClosingCurlyBracket,                 /* 0x7D  } */
@@ -1124,7 +1126,7 @@ static UWORD   sort_CODE_CP1251[] =       /* CODE_CP1251 */
    U_CyrillicCapitalLetterDje,            /* 0x80   0x0402   CYRILLIC CAPITAL LETTER DJE */
    U_CyrillicCapitalLetterGje,            /* 0x81   0x0403   CYRILLIC CAPITAL LETTER GJE */
    U_SingleLow9QuotationMark,             /* 0x82   0x201A   SINGLE LOW-9 QUOTATION MARK */
-   U_CyrillicSmallLetterGje,              /* 0x83   0x0453   CYRILLIC SMALL LETTER GJE */
+   U_CyrillicCapitalLetterGje,            /* 0x83   0x0453   CYRILLIC SMALL LETTER GJE */
    U_DoubleLow9QuotationMark,             /* 0x84   0x201E   DOUBLE LOW-9 QUOTATION MARK */
    U_HorizontalEllipsis,                  /* 0x85   0x2026   HORIZONTAL ELLIPSIS */
    U_Dagger,                              /* 0x86   0x2020   DAGGER */
@@ -1137,7 +1139,7 @@ static UWORD   sort_CODE_CP1251[] =       /* CODE_CP1251 */
    U_CyrillicCapitalLetterKje,            /* 0x8D   0x040C   CYRILLIC CAPITAL LETTER KJE */
    U_CyrillicCapitalLetterTshe,           /* 0x8E   0x040B   CYRILLIC CAPITAL LETTER TSHE */
    U_CyrillicCapitalLetterDzhe,           /* 0x8F   0x040F   CYRILLIC CAPITAL LETTER DZHE */
-   U_CyrillicSmallLetterDje,              /* 0x90   0x0452   CYRILLIC SMALL LETTER DJE */
+   U_CyrillicCapitalLetterDje,            /* 0x90   0x0452   CYRILLIC SMALL LETTER DJE */
    U_LeftSingleQuotationMark,             /* 0x91   0x2018   LEFT SINGLE QUOTATION MARK */
    U_RightSingleQuotationMark,            /* 0x92   0x2019   RIGHT SINGLE QUOTATION MARK */
    U_LeftDoubleQuotationMark,             /* 0x93   0x201C   LEFT DOUBLE QUOTATION MARK */
@@ -1147,15 +1149,15 @@ static UWORD   sort_CODE_CP1251[] =       /* CODE_CP1251 */
    U_EmDash,                              /* 0x97   0x2014   EM DASH */
    U_NIL,                                 /* 0x98            UNDEFINED */
    U_TradeMarkSign,                       /* 0x99   0x2122   TRADE MARK SIGN */
-   U_CyrillicSmallLetterLje,              /* 0x9A   0x0459   CYRILLIC SMALL LETTER LJE */
+   U_CyrillicCapitalLetterLje,            /* 0x9A   0x0459   CYRILLIC SMALL LETTER LJE */
    U_RightPointingSingleGuillemet,        /* 0x9B   0x203A   SINGLE RIGHT-POINTING ANGLE QUOTATION MARK */
-   U_CyrillicSmallLetterNje,              /* 0x9C   0x045A   CYRILLIC SMALL LETTER NJE */
-   U_CyrillicSmallLetterTshe,             /* 0x9D   0x045C   CYRILLIC SMALL LETTER KJE */
-   U_CyrillicSmallLetterKje,              /* 0x9E   0x045B   CYRILLIC SMALL LETTER TSHE */
-   U_CyrillicSmallLetterDzhe,             /* 0x9F   0x045F   CYRILLIC SMALL LETTER DZHE */
+   U_CyrillicCapitalLetterNje,            /* 0x9C   0x045A   CYRILLIC SMALL LETTER NJE */
+   U_CyrillicCapitalLetterTshe,           /* 0x9D   0x045C   CYRILLIC SMALL LETTER KJE */
+   U_CyrillicCapitalLetterKje,            /* 0x9E   0x045B   CYRILLIC SMALL LETTER TSHE */
+   U_CyrillicCapitalLetterDzhe,           /* 0x9F   0x045F   CYRILLIC SMALL LETTER DZHE */
    U_NB_SP,                               /* 0xA0   0x00A0   NO-BREAK SPACE */
    U_CyrillicCapitalLetterU,              /* 0xA1   0x040E   CYRILLIC CAPITAL LETTER SHORT U */
-   U_CyrillicSmallLetterU,                /* 0xA2   0x045E   CYRILLIC SMALL LETTER SHORT U */
+   U_CyrillicCapitalLetterU,              /* 0xA2   0x045E   CYRILLIC SMALL LETTER SHORT U */
    U_CyrillicCapitalLetterJe,             /* 0xA3   0x0408   CYRILLIC CAPITAL LETTER JE */
    U_CurrencySign,                        /* 0xA4   0x00A4   CURRENCY SIGN */
    U_CyrillicCapitalLetterGhe,            /* 0xA5   0x0490   CYRILLIC CAPITAL LETTER GHE WITH UPTURN */
@@ -1172,19 +1174,19 @@ static UWORD   sort_CODE_CP1251[] =       /* CODE_CP1251 */
    U_DegreeSign,                          /* 0xB0   0x00B0   DEGREE SIGN */
    U_PlusMinusSign,                       /* 0xB1   0x00B1   PLUS-MINUS SIGN */
    U_CyrillicCapitalLetterI,              /* 0xB2   0x0406   CYRILLIC CAPITAL LETTER BYELORUSSIAN-UKRAINIAN I */
-   U_CyrillicSmallLetterI,                /* 0xB3   0x0456   CYRILLIC SMALL LETTER BYELORUSSIAN-UKRAINIAN I */
-   U_CyrillicSmallLetterGhe,              /* 0xB4   0x0491   CYRILLIC SMALL LETTER GHE WITH UPTURN */
+   U_CyrillicCapitalLetterI,              /* 0xB3   0x0456   CYRILLIC SMALL LETTER BYELORUSSIAN-UKRAINIAN I */
+   U_CyrillicCapitalLetterGhe,            /* 0xB4   0x0491   CYRILLIC SMALL LETTER GHE WITH UPTURN */
    U_MicroSign,                           /* 0xB5   0x00B5   MICRO SIGN */
    U_ParagraphSign,                       /* 0xB6   0x00B6   PILCROW SIGN */
    U_MiddleDot,                           /* 0xB7   0x00B7   MIDDLE DOT */
-   U_CyrillicSmallLetterIo,               /* 0xB8   0x0451   CYRILLIC SMALL LETTER IO */
+   U_CyrillicCapitalLetterIo,             /* 0xB8   0x0451   CYRILLIC SMALL LETTER IO */
    U_NumeroSign,                          /* 0xB9   0x2116   NUMERO SIGN */
-   U_CyrillicSmallLetterIe,               /* 0xBA   0x0454   CYRILLIC SMALL LETTER UKRAINIAN IE */
+   U_CyrillicCapitalLetterIe,             /* 0xBA   0x0454   CYRILLIC SMALL LETTER UKRAINIAN IE */
    U_RightPointingGuillemet,              /* 0xBB   0x00BB   RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK */
-   U_CyrillicSmallLetterJe,               /* 0xBC   0x0458   CYRILLIC SMALL LETTER JE */
+   U_CyrillicCapitalLetterJe,             /* 0xBC   0x0458   CYRILLIC SMALL LETTER JE */
    U_CyrillicCapitalLetterDze,            /* 0xBD   0x0405   CYRILLIC CAPITAL LETTER DZE */
-   U_CyrillicSmallLetterDze,              /* 0xBE   0x0455   CYRILLIC SMALL LETTER DZE */
-   U_CyrillicSmallLetterYi,               /* 0xBF   0x0457   CYRILLIC SMALL LETTER YI */
+   U_CyrillicCapitalLetterDze,            /* 0xBE   0x0455   CYRILLIC SMALL LETTER DZE */
+   U_CyrillicCapitalLetterYi,             /* 0xBF   0x0457   CYRILLIC SMALL LETTER YI */
    U_CyrillicCapitalLetterA,              /* 0xC0   0x0410   CYRILLIC CAPITAL LETTER A */
    U_CyrillicCapitalLetterBe,             /* 0xC1   0x0411   CYRILLIC CAPITAL LETTER BE */
    U_CyrillicCapitalLetterVe,             /* 0xC2   0x0412   CYRILLIC CAPITAL LETTER VE */
@@ -1217,38 +1219,38 @@ static UWORD   sort_CODE_CP1251[] =       /* CODE_CP1251 */
    U_CyrillicCapitalLetterE,              /* 0xDD   0x042D   CYRILLIC CAPITAL LETTER E */
    U_CyrillicCapitalLetterYu,             /* 0xDE   0x042E   CYRILLIC CAPITAL LETTER YU */
    U_CyrillicCapitalLetterYa,             /* 0xDF   0x042F   CYRILLIC CAPITAL LETTER YA */
-   U_CyrillicSmallLetterA,                /* 0xE0   0x0430   CYRILLIC SMALL LETTER A */
-   U_CyrillicSmallLetterBe,               /* 0xE1   0x0431   CYRILLIC SMALL LETTER BE */
-   U_CyrillicSmallLetterVe,               /* 0xE2   0x0432   CYRILLIC SMALL LETTER VE */
-   U_CyrillicSmallLetterGhe,              /* 0xE3   0x0433   CYRILLIC SMALL LETTER GHE */
-   U_CyrillicSmallLetterDe,               /* 0xE4   0x0434   CYRILLIC SMALL LETTER DE */
-   U_CyrillicSmallLetterIe,               /* 0xE5   0x0435   CYRILLIC SMALL LETTER IE */
-   U_CyrillicSmallLetterZhe,              /* 0xE6   0x0436   CYRILLIC SMALL LETTER ZHE */
-   U_CyrillicSmallLetterZe,               /* 0xE7   0x0437   CYRILLIC SMALL LETTER ZE */
-   U_CyrillicSmallLetterI,                /* 0xE8   0x0438   CYRILLIC SMALL LETTER I */
-   U_CyrillicSmallLetterI,                /* 0xE9   0x0439   CYRILLIC SMALL LETTER SHORT I */
-   U_CyrillicSmallLetterKa,               /* 0xEA   0x043A   CYRILLIC SMALL LETTER KA */
-   U_CyrillicSmallLetterEl,               /* 0xEB   0x043B   CYRILLIC SMALL LETTER EL */
-   U_CyrillicSmallLetterEm,               /* 0xEC   0x043C   CYRILLIC SMALL LETTER EM */
-   U_CyrillicSmallLetterEn,               /* 0xED   0x043D   CYRILLIC SMALL LETTER EN */
-   U_CyrillicSmallLetterO,                /* 0xEE   0x043E   CYRILLIC SMALL LETTER O */
-   U_CyrillicSmallLetterPe,               /* 0xEF   0x043F   CYRILLIC SMALL LETTER PE */
-   U_CyrillicSmallLetterEr,               /* 0xF0   0x0440   CYRILLIC SMALL LETTER ER */
-   U_CyrillicSmallLetterEs,               /* 0xF1   0x0441   CYRILLIC SMALL LETTER ES */
-   U_CyrillicSmallLetterTe,               /* 0xF2   0x0442   CYRILLIC SMALL LETTER TE */
-   U_CyrillicSmallLetterU,                /* 0xF3   0x0443   CYRILLIC SMALL LETTER U */
-   U_CyrillicSmallLetterEf,               /* 0xF4   0x0444   CYRILLIC SMALL LETTER EF */
-   U_CyrillicSmallLetterHa,               /* 0xF5   0x0445   CYRILLIC SMALL LETTER HA */
-   U_CyrillicSmallLetterTse,              /* 0xF6   0x0446   CYRILLIC SMALL LETTER TSE */
-   U_CyrillicSmallLetterChe,              /* 0xF7   0x0447   CYRILLIC SMALL LETTER CHE */
-   U_CyrillicSmallLetterSha,              /* 0xF8   0x0448   CYRILLIC SMALL LETTER SHA */
-   U_CyrillicSmallLetterShcha,            /* 0xF9   0x0449   CYRILLIC SMALL LETTER SHCHA */
-   U_CyrillicSmallLetterHardSign,         /* 0xFA   0x044A   CYRILLIC SMALL LETTER HARD SIGN */
-   U_CyrillicSmallLetterYeru,             /* 0xFB   0x044B   CYRILLIC SMALL LETTER YERU */
-   U_CyrillicSmallLetterSoftSign,         /* 0xFC   0x044C   CYRILLIC SMALL LETTER SOFT SIGN */
-   U_CyrillicSmallLetterE,                /* 0xFD   0x044D   CYRILLIC SMALL LETTER E */
-   U_CyrillicSmallLetterYu,               /* 0xFE   0x044E   CYRILLIC SMALL LETTER YU */
-   U_CyrillicSmallLetterYa                /* 0xFF   0x044F   CYRILLIC SMALL LETTER YA */
+   U_CyrillicCapitalLetterA,              /* 0xE0   0x0430   CYRILLIC SMALL LETTER A */
+   U_CyrillicCapitalLetterBe,             /* 0xE1   0x0431   CYRILLIC SMALL LETTER BE */
+   U_CyrillicCapitalLetterVe,             /* 0xE2   0x0432   CYRILLIC SMALL LETTER VE */
+   U_CyrillicCapitalLetterGhe,            /* 0xE3   0x0433   CYRILLIC SMALL LETTER GHE */
+   U_CyrillicCapitalLetterDe,             /* 0xE4   0x0434   CYRILLIC SMALL LETTER DE */
+   U_CyrillicCapitalLetterIe,             /* 0xE5   0x0435   CYRILLIC SMALL LETTER IE */
+   U_CyrillicCapitalLetterZhe,            /* 0xE6   0x0436   CYRILLIC SMALL LETTER ZHE */
+   U_CyrillicCapitalLetterZe,             /* 0xE7   0x0437   CYRILLIC SMALL LETTER ZE */
+   U_CyrillicCapitalLetterI,              /* 0xE8   0x0438   CYRILLIC SMALL LETTER I */
+   U_CyrillicCapitalLetterI,              /* 0xE9   0x0439   CYRILLIC SMALL LETTER SHORT I */
+   U_CyrillicCapitalLetterKa,             /* 0xEA   0x043A   CYRILLIC SMALL LETTER KA */
+   U_CyrillicCapitalLetterEl,             /* 0xEB   0x043B   CYRILLIC SMALL LETTER EL */
+   U_CyrillicCapitalLetterEm,             /* 0xEC   0x043C   CYRILLIC SMALL LETTER EM */
+   U_CyrillicCapitalLetterEn,             /* 0xED   0x043D   CYRILLIC SMALL LETTER EN */
+   U_CyrillicCapitalLetterO,              /* 0xEE   0x043E   CYRILLIC SMALL LETTER O */
+   U_CyrillicCapitalLetterPe,             /* 0xEF   0x043F   CYRILLIC SMALL LETTER PE */
+   U_CyrillicCapitalLetterEr,             /* 0xF0   0x0440   CYRILLIC SMALL LETTER ER */
+   U_CyrillicCapitalLetterEs,             /* 0xF1   0x0441   CYRILLIC SMALL LETTER ES */
+   U_CyrillicCapitalLetterTe,             /* 0xF2   0x0442   CYRILLIC SMALL LETTER TE */
+   U_CyrillicCapitalLetterU,              /* 0xF3   0x0443   CYRILLIC SMALL LETTER U */
+   U_CyrillicCapitalLetterEf,             /* 0xF4   0x0444   CYRILLIC SMALL LETTER EF */
+   U_CyrillicCapitalLetterHa,             /* 0xF5   0x0445   CYRILLIC SMALL LETTER HA */
+   U_CyrillicCapitalLetterTse,            /* 0xF6   0x0446   CYRILLIC SMALL LETTER TSE */
+   U_CyrillicCapitalLetterChe,            /* 0xF7   0x0447   CYRILLIC SMALL LETTER CHE */
+   U_CyrillicCapitalLetterSha,            /* 0xF8   0x0448   CYRILLIC SMALL LETTER SHA */
+   U_CyrillicCapitalLetterShcha,          /* 0xF9   0x0449   CYRILLIC SMALL LETTER SHCHA */
+   U_CyrillicCapitalLetterHardSign,       /* 0xFA   0x044A   CYRILLIC SMALL LETTER HARD SIGN */
+   U_CyrillicCapitalLetterYeru,           /* 0xFB   0x044B   CYRILLIC SMALL LETTER YERU */
+   U_CyrillicCapitalLetterSoftSign,       /* 0xFC   0x044C   CYRILLIC SMALL LETTER SOFT SIGN */
+   U_CyrillicCapitalLetterE,              /* 0xFD   0x044D   CYRILLIC SMALL LETTER E */
+   U_CyrillicCapitalLetterYu,             /* 0xFE   0x044E   CYRILLIC SMALL LETTER YU */
+   U_CyrillicCapitalLetterYa              /* 0xFF   0x044F   CYRILLIC SMALL LETTER YA */
 };
 
 
@@ -1559,26 +1561,27 @@ static UWORD   u_CODE_CP1252[] =          /* CODE_CP1252 */
 
 static UWORD   CODE_CP1252_lig[][3] =     /* CODE_CP1252 character ligatures */
 {
-   {0x008c, U_LatinCapitalLetterO, U_LatinCapitalLetterE},    /* 0x008c  U_LatinCapitalLigatureOE */
-   {0x009c, U_LatinSmallLetterO,   U_LatinSmallLetterE},      /* 0x009c  U_LatinSmallLigatureOE */
-   {0x009f, U_LatinCapitalLetterY, U_LatinSmallLetterE},      /* 0x009f  U_LatinCapitalLetterYWithDiaeresis */
-   {0x00c4, U_LatinCapitalLetterA, U_LatinSmallLetterE},      /* 0x00c4  U_LatinCapitalLetterAWithDiaeresis */
-   {0x00c6, U_LatinCapitalLetterA, U_LatinCapitalLetterE},    /* 0x00c6  U_LatinCapitalLigatureAE */
-   {0x00cb, U_LatinCapitalLetterE, U_LatinSmallLetterE},      /* 0x00cb  U_LatinCapitalLetterEWithDiaeresis */
-   {0x00cf, U_LatinCapitalLetterI, U_LatinSmallLetterE},      /* 0x00cf  U_LatinCapitalLetterIWithDiaeresis */
-   {0x00d6, U_LatinCapitalLetterO, U_LatinSmallLetterE},      /* 0x00d6  U_LatinCapitalLetterOWithDiaeresis */
-   {0x00d8, U_LatinCapitalLetterO, U_LatinCapitalLetterE},    /* 0x00d8  U_LatinCapitalLetterOSlash */
-   {0x00dc, U_LatinCapitalLetterU, U_LatinSmallLetterE},      /* 0x00dc  U_LatinCapitalLetterUWithDiaeresis */
-   {0x00df, U_LatinCapitalLetterS, U_LatinSmallLetterS},      /* 0x00df  U_LatinSmallLetterSharpS */
-   {0x00e4, U_LatinCapitalLetterA, U_LatinSmallLetterE},      /* 0x00e4  U_LatinSmallLetterAWithDiaeresis */
-   {0x00e6, U_LatinCapitalLetterA, U_LatinSmallLetterE},      /* 0x00e6  U_LatinSmallLigatureAE */
-   {0x00eb, U_LatinCapitalLetterE, U_LatinSmallLetterE},      /* 0x00eb  U_LatinSmallLetterEWithDiaeresis */
-   {0x00ef, U_LatinCapitalLetterI, U_LatinSmallLetterE},      /* 0x00ef  U_LatinSmallLetterIWithDiaeresis */
-   {0x00f6, U_LatinCapitalLetterO, U_LatinSmallLetterE},      /* 0x00f6  U_LatinSmallLetterOWithDiaeresis */
-   {0x00f8, U_LatinCapitalLetterO, U_LatinSmallLetterE},      /* 0x00f8  U_LatinSmallLetterOSlash */
-   {0x00fc, U_LatinCapitalLetterU, U_LatinSmallLetterE},      /* 0x00fc  U_LatinSmallLetterUWithDiaeresis */
-   {0x00ff, U_LatinCapitalLetterY, U_LatinSmallLetterE},      /* 0x00ff  U_LatinSmallLetterYWithDiaeresis */
-   {0x0000, U_NIL                , U_NIL}                     /* list terminator */
+   { U_LatinCapitalLigatureOE,            U_LatinCapitalLetterO, U_LatinCapitalLetterE},    /* 0x008c  U_LatinCapitalLigatureOE */
+   { U_LatinSmallLigatureOE,              U_LatinCapitalLetterO, U_LatinCapitalLetterE},    /* 0x009c  U_LatinSmallLigatureOE */
+   { U_LatinCapitalLetterYWithDiaeresis,  U_LatinCapitalLetterY, U_LatinCapitalLetterE},    /* 0x009f  U_LatinCapitalLetterYWithDiaeresis */
+   { U_LatinCapitalLetterAWithDiaeresis,  U_LatinCapitalLetterA, U_LatinCapitalLetterE},    /* 0x00c4  U_LatinCapitalLetterAWithDiaeresis */
+   { U_LatinCapitalLigatureAE,            U_LatinCapitalLetterA, U_LatinCapitalLetterE},    /* 0x00c6  U_LatinCapitalLigatureAE */
+   { U_LatinCapitalLetterEWithDiaeresis,  U_LatinCapitalLetterE, U_LatinCapitalLetterE},    /* 0x00cb  U_LatinCapitalLetterEWithDiaeresis */
+   { U_LatinCapitalLetterIWithDiaeresis,  U_LatinCapitalLetterI, U_LatinCapitalLetterE},    /* 0x00cf  U_LatinCapitalLetterIWithDiaeresis */
+   { U_LatinCapitalLetterOWithDiaeresis,  U_LatinCapitalLetterO, U_LatinCapitalLetterE},    /* 0x00d6  U_LatinCapitalLetterOWithDiaeresis */
+   { U_LatinCapitalLetterOSlash,          U_LatinCapitalLetterO, U_LatinCapitalLetterE},    /* 0x00d8  U_LatinCapitalLetterOSlash */
+   { U_LatinCapitalLetterUWithDiaeresis,  U_LatinCapitalLetterU, U_LatinCapitalLetterE},    /* 0x00dc  U_LatinCapitalLetterUWithDiaeresis */
+   { U_LatinSmallLetterSharpS,            U_LatinCapitalLetterS, U_LatinCapitalLetterS},    /* 0x00df  U_LatinSmallLetterSharpS */
+   { U_LatinSmallLetterAWithDiaeresis,    U_LatinCapitalLetterA, U_LatinCapitalLetterE},    /* 0x00e4  U_LatinSmallLetterAWithDiaeresis */
+   { U_LatinSmallLigatureAE,              U_LatinCapitalLetterA, U_LatinCapitalLetterE},    /* 0x00e6  U_LatinSmallLigatureAE */
+   { U_LatinSmallLetterEWithDiaeresis,    U_LatinCapitalLetterE, U_LatinCapitalLetterE},    /* 0x00eb  U_LatinSmallLetterEWithDiaeresis */
+   { U_LatinSmallLetterIWithDiaeresis,    U_LatinCapitalLetterI, U_LatinCapitalLetterE},    /* 0x00ef  U_LatinSmallLetterIWithDiaeresis */
+   { U_LatinSmallLetterOWithDiaeresis,    U_LatinCapitalLetterO, U_LatinCapitalLetterE},    /* 0x00f6  U_LatinSmallLetterOWithDiaeresis */
+   { U_LatinSmallLetterOSlash,            U_LatinCapitalLetterO, U_LatinCapitalLetterE},    /* 0x00f8  U_LatinSmallLetterOSlash */
+   { U_LatinSmallLetterUWithDiaeresis,    U_LatinCapitalLetterU, U_LatinCapitalLetterE},    /* 0x00fc  U_LatinSmallLetterUWithDiaeresis */
+   { U_LatinSmallLetterYWithDiaeresis,    U_LatinCapitalLetterY, U_LatinCapitalLetterE},    /* 0x00ff  U_LatinSmallLetterYWithDiaeresis */
+   
+   {0x0000, U_NIL, U_NIL}                 /* list terminator */
 };
 
 
@@ -1693,32 +1696,32 @@ static UWORD    sort_CODE_CP1252[] =      /* CODE_CP1252 */
    U_CircumflexAccent,                    /* 0x5E  ^ */
    U_SpacingUnderscore,                   /* 0x5F  _ */
    U_GraveAccent,                         /* 0x60  ` */
-   U_LatinSmallLetterA,                   /* 0x61  a */
-   U_LatinSmallLetterB,                   /* 0x62  b */
-   U_LatinSmallLetterC,                   /* 0x63  c */
-   U_LatinSmallLetterD,                   /* 0x64  d */
-   U_LatinSmallLetterE,                   /* 0x65  e */
-   U_LatinSmallLetterF,                   /* 0x66  f */
-   U_LatinSmallLetterG,                   /* 0x67  g */
-   U_LatinSmallLetterH,                   /* 0x68  h */
-   U_LatinSmallLetterI,                   /* 0x69  i */
-   U_LatinSmallLetterJ,                   /* 0x6A  j */
-   U_LatinSmallLetterK,                   /* 0x6B  k */
-   U_LatinSmallLetterL,                   /* 0x6C  l */
-   U_LatinSmallLetterM,                   /* 0x6D  m */
-   U_LatinSmallLetterN,                   /* 0x6E  n */
-   U_LatinSmallLetterO,                   /* 0x6F  o */
-   U_LatinSmallLetterP,                   /* 0x70  p */
-   U_LatinSmallLetterQ,                   /* 0x71  q */
-   U_LatinSmallLetterR,                   /* 0x72  r */
-   U_LatinSmallLetterS,                   /* 0x73  s */
-   U_LatinSmallLetterT,                   /* 0x74  t */
-   U_LatinSmallLetterU,                   /* 0x75  u */
-   U_LatinSmallLetterV,                   /* 0x76  v */
-   U_LatinSmallLetterW,                   /* 0x77  w */
-   U_LatinSmallLetterX,                   /* 0x78  x */
-   U_LatinSmallLetterY,                   /* 0x79  y */
-   U_LatinSmallLetterZ,                   /* 0x7A  z */
+   U_LatinCapitalLetterA,                 /* 0x61  a */
+   U_LatinCapitalLetterB,                 /* 0x62  b */
+   U_LatinCapitalLetterC,                 /* 0x63  c */
+   U_LatinCapitalLetterD,                 /* 0x64  d */
+   U_LatinCapitalLetterE,                 /* 0x65  e */
+   U_LatinCapitalLetterF,                 /* 0x66  f */
+   U_LatinCapitalLetterG,                 /* 0x67  g */
+   U_LatinCapitalLetterH,                 /* 0x68  h */
+   U_LatinCapitalLetterI,                 /* 0x69  i */
+   U_LatinCapitalLetterJ,                 /* 0x6A  j */
+   U_LatinCapitalLetterK,                 /* 0x6B  k */
+   U_LatinCapitalLetterL,                 /* 0x6C  l */
+   U_LatinCapitalLetterM,                 /* 0x6D  m */
+   U_LatinCapitalLetterN,                 /* 0x6E  n */
+   U_LatinCapitalLetterO,                 /* 0x6F  o */
+   U_LatinCapitalLetterP,                 /* 0x70  p */
+   U_LatinCapitalLetterQ,                 /* 0x71  q */
+   U_LatinCapitalLetterR,                 /* 0x72  r */
+   U_LatinCapitalLetterS,                 /* 0x73  s */
+   U_LatinCapitalLetterT,                 /* 0x74  t */
+   U_LatinCapitalLetterU,                 /* 0x75  u */
+   U_LatinCapitalLetterV,                 /* 0x76  v */
+   U_LatinCapitalLetterW,                 /* 0x77  w */
+   U_LatinCapitalLetterX,                 /* 0x78  x */
+   U_LatinCapitalLetterY,                 /* 0x79  y */
+   U_LatinCapitalLetterZ,                 /* 0x7A  z */
    U_OpeningCurlyBracket,                 /* 0x7B  { */
    U_VerticalLine,                        /* 0x7C  | */
    U_ClosingCurlyBracket,                 /* 0x7D  } */
@@ -1728,7 +1731,7 @@ static UWORD    sort_CODE_CP1252[] =      /* CODE_CP1252 */
    U_EuroSign,                            /* 0x80  U_EuroSign */
    U_NIL,                                 /* 0x81  --- UNDEFINED --- */
    U_SingleLow9QuotationMark,             /* 0x82  U_SingleLow9QuotationMark */
-   U_LatinSmallLetterScriptF,             /* 0x83  U_LatinSmallLetterScriptF */
+   U_LatinCapitalLetterF,                 /* 0x83  U_LatinSmallLetterScriptF */
    U_DoubleLow9QuotationMark,             /* 0x84  U_DoubleLow9QuotationMark */
    U_HorizontalEllipsis,                  /* 0x85  U_HorizontalEllipsis */
    U_Dagger,                              /* 0x86  U_Dagger */
@@ -1737,7 +1740,7 @@ static UWORD    sort_CODE_CP1252[] =      /* CODE_CP1252 */
    U_PerMilleSign,                        /* 0x89  U_PerMilleSign */
    U_LatinCapitalLetterS,                 /* 0x8a  U_LatinCapitalLetterSWithCaron */
    U_LeftPointingSingleGuillemet,         /* 0x8b  U_LeftPointingSingleGuillemet */
-   U_LatinCapitalLigatureOE,              /* 0x8c  U_LatinCapitalLigatureOE */
+   U_LatinCapitalLetterO,                 /* 0x8c  U_LatinCapitalLigatureOE */
    U_NIL,                                 /* 0x8d  --- UNDEFINED --- */
    U_LatinCapitalLetterZ,                 /* 0x8e  U_LatinCapitalLetterZWithCaron */
    U_NIL,                                 /* 0x8f  --- UNDEFINED --- */
@@ -1752,11 +1755,11 @@ static UWORD    sort_CODE_CP1252[] =      /* CODE_CP1252 */
    U_EmDash,                              /* 0x97  U_EmDash */
    U_SmallTilde,                          /* 0x98  U_SmallTilde */
    U_TradeMarkSign,                       /* 0x99  U_TradeMarkSign */
-   U_LatinSmallLetterS,                   /* 0x9a  U_LatinSmallLetterSWithCaron */
+   U_LatinCapitalLetterS,                 /* 0x9a  U_LatinSmallLetterSWithCaron */
    U_RightPointingSingleGuillemet,        /* 0x9b  U_RightPointingSingleGuillemet */
-   U_LatinSmallLigatureOE,                /* 0x9c  U_LatinSmallLigatureOE */
+   U_LatinCapitalLetterO,                 /* 0x9c  U_LatinSmallLigatureOE */
    U_NIL,                                 /* 0x9d  --- UNDEFINED --- */
-   U_LatinSmallLetterZ,                   /* 0x9e  U_LatinSmallLetterZWithCaron */
+   U_LatinCapitalLetterZ,                 /* 0x9e  U_LatinSmallLetterZWithCaron */
    U_LatinCapitalLetterY,                 /* 0x9f  U_LatinCapitalLetterYWithDiaeresis */
                                           
    U_NB_SP,                               /* 0xa0  U_NB_SP */
@@ -1799,7 +1802,7 @@ static UWORD    sort_CODE_CP1252[] =      /* CODE_CP1252 */
    U_LatinCapitalLetterA,                 /* 0xc3  U_LatinCapitalLetterAWithTilde */
    U_LatinCapitalLetterA,                 /* 0xc4  U_LatinCapitalLetterAWithDiaeresis */
    U_LatinCapitalLetterA,                 /* 0xc5  U_LatinCapitalLetterAWithRingAbove */
-   U_LatinCapitalLigatureAE,              /* 0xc6  U_LatinCapitalLigatureAE */
+   U_LatinCapitalLetterA,                 /* 0xc6  U_LatinCapitalLigatureAE */
    U_LatinCapitalLetterC,                 /* 0xc7  U_LatinCapitalLetterCWithCedilla */
    U_LatinCapitalLetterE,                 /* 0xc8  U_LatinCapitalLetterEWithGrave */
    U_LatinCapitalLetterE,                 /* 0xc9  U_LatinCapitalLetterEWithAcute */
@@ -1825,41 +1828,41 @@ static UWORD    sort_CODE_CP1252[] =      /* CODE_CP1252 */
    U_LatinCapitalLetterU,                 /* 0xdc  U_LatinCapitalLetterUWithDiaeresis */
    U_LatinCapitalLetterY,                 /* 0xdd  U_LatinCapitalLetterYWithAcute */
    U_LatinCapitalLetterThorn,             /* 0xde  U_LatinCapitalLetterThorn */
-   U_LatinSmallLetterSharpS,              /* 0xdf  U_LatinSmallLetterSharpS */
+   U_LatinCapitalLetterS,                 /* 0xdf  U_LatinSmallLetterSharpS */
                                           
-   U_LatinSmallLetterA,                   /* 0xe0  U_LatinSmallLetterAWithGrave */
-   U_LatinSmallLetterA,                   /* 0xe1  U_LatinSmallLetterAWithAcute */
-   U_LatinSmallLetterA,                   /* 0xe2  U_LatinSmallLetterAWithCircumflex */
-   U_LatinSmallLetterA,                   /* 0xe3  U_LatinSmallLetterAWithTilde */
-   U_LatinSmallLetterA,                   /* 0xe4  U_LatinSmallLetterAWithDiaeresis */
-   U_LatinSmallLetterA,                   /* 0xe5  U_LatinSmallLetterAWithRingAbove */
-   U_LatinSmallLigatureAE,                /* 0xe6  U_LatinSmallLigatureAE */
-   U_LatinSmallLetterC,                   /* 0xe7  U_LatinSmallLetterCWithCedilla */
-   U_LatinSmallLetterE,                   /* 0xe8  U_LatinSmallLetterEWithGrave */
-   U_LatinSmallLetterE,                   /* 0xe9  U_LatinSmallLetterEWithAcute */
-   U_LatinSmallLetterE,                   /* 0xea  U_LatinSmallLetterEWithCircumflex */
-   U_LatinSmallLetterE,                   /* 0xeb  U_LatinSmallLetterEWithDiaeresis */
-   U_LatinSmallLetterI,                   /* 0xec  U_LatinSmallLetterIWithGrave */
-   U_LatinSmallLetterI,                   /* 0xed  U_LatinSmallLetterIWithAcute */
-   U_LatinSmallLetterI,                   /* 0xee  U_LatinSmallLetterIWithCircumflex */
-   U_LatinSmallLetterI,                   /* 0xef  U_LatinSmallLetterIWithDiaeresis */
+   U_LatinCapitalLetterA,                 /* 0xe0  U_LatinSmallLetterAWithGrave */
+   U_LatinCapitalLetterA,                 /* 0xe1  U_LatinSmallLetterAWithAcute */
+   U_LatinCapitalLetterA,                 /* 0xe2  U_LatinSmallLetterAWithCircumflex */
+   U_LatinCapitalLetterA,                 /* 0xe3  U_LatinSmallLetterAWithTilde */
+   U_LatinCapitalLetterA,                 /* 0xe4  U_LatinSmallLetterAWithDiaeresis */
+   U_LatinCapitalLetterA,                 /* 0xe5  U_LatinSmallLetterAWithRingAbove */
+   U_LatinCapitalLetterA,                 /* 0xe6  U_LatinSmallLigatureAE */
+   U_LatinCapitalLetterC,                 /* 0xe7  U_LatinSmallLetterCWithCedilla */
+   U_LatinCapitalLetterE,                 /* 0xe8  U_LatinSmallLetterEWithGrave */
+   U_LatinCapitalLetterE,                 /* 0xe9  U_LatinSmallLetterEWithAcute */
+   U_LatinCapitalLetterE,                 /* 0xea  U_LatinSmallLetterEWithCircumflex */
+   U_LatinCapitalLetterE,                 /* 0xeb  U_LatinSmallLetterEWithDiaeresis */
+   U_LatinCapitalLetterI,                 /* 0xec  U_LatinSmallLetterIWithGrave */
+   U_LatinCapitalLetterI,                 /* 0xed  U_LatinSmallLetterIWithAcute */
+   U_LatinCapitalLetterI,                 /* 0xee  U_LatinSmallLetterIWithCircumflex */
+   U_LatinCapitalLetterI,                 /* 0xef  U_LatinSmallLetterIWithDiaeresis */
                                           
    U_LatinSmallLetterEth,                 /* 0xf0  U_LatinSmallLetterEth */
-   U_LatinSmallLetterN,                   /* 0xf1  U_LatinSmallLetterNWithTilde */
-   U_LatinSmallLetterO,                   /* 0xf2  U_LatinSmallLetterOWithGrave */
-   U_LatinSmallLetterO,                   /* 0xf3  U_LatinSmallLetterOWithAcute */
-   U_LatinSmallLetterO,                   /* 0xf4  U_LatinSmallLetterOWithCircumflex */
-   U_LatinSmallLetterO,                   /* 0xf5  U_LatinSmallLetterOWithTilde */
-   U_LatinSmallLetterO,                   /* 0xf6  U_LatinSmallLetterOWithDiaeresis */
+   U_LatinCapitalLetterN,                 /* 0xf1  U_LatinSmallLetterNWithTilde */
+   U_LatinCapitalLetterO,                 /* 0xf2  U_LatinSmallLetterOWithGrave */
+   U_LatinCapitalLetterO,                 /* 0xf3  U_LatinSmallLetterOWithAcute */
+   U_LatinCapitalLetterO,                 /* 0xf4  U_LatinSmallLetterOWithCircumflex */
+   U_LatinCapitalLetterO,                 /* 0xf5  U_LatinSmallLetterOWithTilde */
+   U_LatinCapitalLetterO,                 /* 0xf6  U_LatinSmallLetterOWithDiaeresis */
    U_DivisionSign,                        /* 0xf7  U_DivisionSign */
-   U_LatinSmallLetterO,                   /* 0xf8  U_LatinSmallLetterOSlash */
-   U_LatinSmallLetterU,                   /* 0xf9  U_LatinSmallLetterUWithGrave */
-   U_LatinSmallLetterU,                   /* 0xfa  U_LatinSmallLetterUWithAcute */
-   U_LatinSmallLetterU,                   /* 0xfb  U_LatinSmallLetterUWithCircumflex */
-   U_LatinSmallLetterU,                   /* 0xfc  U_LatinSmallLetterUWithDiaeresis */
-   U_LatinSmallLetterY,                   /* 0xfd  U_LatinSmallLetterYWithAcute */
+   U_LatinCapitalLetterO,                 /* 0xf8  U_LatinSmallLetterOSlash */
+   U_LatinCapitalLetterU,                 /* 0xf9  U_LatinSmallLetterUWithGrave */
+   U_LatinCapitalLetterU,                 /* 0xfa  U_LatinSmallLetterUWithAcute */
+   U_LatinCapitalLetterU,                 /* 0xfb  U_LatinSmallLetterUWithCircumflex */
+   U_LatinCapitalLetterU,                 /* 0xfc  U_LatinSmallLetterUWithDiaeresis */
+   U_LatinCapitalLetterY,                 /* 0xfd  U_LatinSmallLetterYWithAcute */
    U_LatinSmallLetterThorn,               /* 0xfe  U_LatinSmallLetterThorn */
-   U_LatinSmallLetterY                    /* 0xff  U_LatinSmallLetterYWithDiaeresis */
+   U_LatinCapitalLetterY                  /* 0xff  U_LatinSmallLetterYWithDiaeresis */
 };
 
 
@@ -2282,32 +2285,32 @@ static UWORD   sort_CODE_CP1253[] =       /* CODE_CP1253 */
    U_CircumflexAccent,                    /* 0x5E  ^ */
    U_SpacingUnderscore,                   /* 0x5F  _ */
    U_GraveAccent,                         /* 0x60  ` */
-   U_LatinSmallLetterA,                   /* 0x61  a */
-   U_LatinSmallLetterB,                   /* 0x62  b */
-   U_LatinSmallLetterC,                   /* 0x63  c */
-   U_LatinSmallLetterD,                   /* 0x64  d */
-   U_LatinSmallLetterE,                   /* 0x65  e */
-   U_LatinSmallLetterF,                   /* 0x66  f */
-   U_LatinSmallLetterG,                   /* 0x67  g */
-   U_LatinSmallLetterH,                   /* 0x68  h */
-   U_LatinSmallLetterI,                   /* 0x69  i */
-   U_LatinSmallLetterJ,                   /* 0x6A  j */
-   U_LatinSmallLetterK,                   /* 0x6B  k */
-   U_LatinSmallLetterL,                   /* 0x6C  l */
-   U_LatinSmallLetterM,                   /* 0x6D  m */
-   U_LatinSmallLetterN,                   /* 0x6E  n */
-   U_LatinSmallLetterO,                   /* 0x6F  o */
-   U_LatinSmallLetterP,                   /* 0x70  p */
-   U_LatinSmallLetterQ,                   /* 0x71  q */
-   U_LatinSmallLetterR,                   /* 0x72  r */
-   U_LatinSmallLetterS,                   /* 0x73  s */
-   U_LatinSmallLetterT,                   /* 0x74  t */
-   U_LatinSmallLetterU,                   /* 0x75  u */
-   U_LatinSmallLetterV,                   /* 0x76  v */
-   U_LatinSmallLetterW,                   /* 0x77  w */
-   U_LatinSmallLetterX,                   /* 0x78  x */
-   U_LatinSmallLetterY,                   /* 0x79  y */
-   U_LatinSmallLetterZ,                   /* 0x7A  z */
+   U_LatinCapitalLetterA,                 /* 0x61  a */
+   U_LatinCapitalLetterB,                 /* 0x62  b */
+   U_LatinCapitalLetterC,                 /* 0x63  c */
+   U_LatinCapitalLetterD,                 /* 0x64  d */
+   U_LatinCapitalLetterE,                 /* 0x65  e */
+   U_LatinCapitalLetterF,                 /* 0x66  f */
+   U_LatinCapitalLetterG,                 /* 0x67  g */
+   U_LatinCapitalLetterH,                 /* 0x68  h */
+   U_LatinCapitalLetterI,                 /* 0x69  i */
+   U_LatinCapitalLetterJ,                 /* 0x6A  j */
+   U_LatinCapitalLetterK,                 /* 0x6B  k */
+   U_LatinCapitalLetterL,                 /* 0x6C  l */
+   U_LatinCapitalLetterM,                 /* 0x6D  m */
+   U_LatinCapitalLetterN,                 /* 0x6E  n */
+   U_LatinCapitalLetterO,                 /* 0x6F  o */
+   U_LatinCapitalLetterP,                 /* 0x70  p */
+   U_LatinCapitalLetterQ,                 /* 0x71  q */
+   U_LatinCapitalLetterR,                 /* 0x72  r */
+   U_LatinCapitalLetterS,                 /* 0x73  s */
+   U_LatinCapitalLetterT,                 /* 0x74  t */
+   U_LatinCapitalLetterU,                 /* 0x75  u */
+   U_LatinCapitalLetterV,                 /* 0x76  v */
+   U_LatinCapitalLetterW,                 /* 0x77  w */
+   U_LatinCapitalLetterX,                 /* 0x78  x */
+   U_LatinCapitalLetterY,                 /* 0x79  y */
+   U_LatinCapitalLetterZ,                 /* 0x7A  z */
    U_OpeningCurlyBracket,                 /* 0x7B  { */
    U_VerticalLine,                        /* 0x7C  | */
    U_ClosingCurlyBracket,                 /* 0x7D  } */
@@ -2317,7 +2320,7 @@ static UWORD   sort_CODE_CP1253[] =       /* CODE_CP1253 */
    U_EuroSign,                            /* 0x80   0x20AC   EURO SIGN */
    U_NIL,                                 /* 0x81            UNDEFINED */
    U_SingleLow9QuotationMark,             /* 0x82   0x201A   SINGLE LOW-9 QUOTATION MARK */
-   U_LatinSmallLetterF,                   /* 0x83   0x0192   LATIN SMALL LETTER F WITH HOOK */
+   U_LatinCapitalLetterF,                 /* 0x83   0x0192   LATIN SMALL LETTER F WITH HOOK */
    U_DoubleLow9QuotationMark,             /* 0x84   0x201E   DOUBLE LOW-9 QUOTATION MARK */
    U_HorizontalEllipsis,                  /* 0x85   0x2026   HORIZONTAL ELLIPSIS */
    U_Dagger,                              /* 0x86   0x2020   DAGGER */
@@ -4512,19 +4515,19 @@ static UWORD   CODE_CP1257_lig[][3] =     /* CODE_CP1257 character ligatures */
 {
    {U_LatinCapitalLetterOSlash,         U_LatinCapitalLetterO, U_LatinCapitalLetterE}, /* 0xA8   0x00D8   LATIN CAPITAL LETTER O WITH STROKE */
    {U_LatinCapitalLigatureAE,           U_LatinCapitalLetterA, U_LatinCapitalLetterE}, /* 0xAF   0x00C6   LATIN CAPITAL LETTER AE */
-   {U_LatinSmallLetterOSlash,           U_LatinSmallLetterO,   U_LatinSmallLetterE},   /* 0xB8   0x00F8   LATIN SMALL LETTER O WITH STROKE */
-   {U_LatinSmallLigatureAE,             U_LatinCapitalLetterA, U_LatinSmallLetterE},   /* 0xBF   0x00E6   LATIN SMALL LETTER AE */
-   {U_LatinCapitalLetterAWithDiaeresis, U_LatinCapitalLetterA, U_LatinSmallLetterE},   /* 0xC4   0x00C4   LATIN CAPITAL LETTER A WITH DIAERESIS */
-   {U_LatinCapitalLetterAWithRingAbove, U_LatinCapitalLetterA, U_LatinSmallLetterO},   /* 0xC5   0x00C5   LATIN CAPITAL LETTER A WITH RING ABOVE */
-   {U_LatinCapitalLetterOWithDiaeresis, U_LatinCapitalLetterO, U_LatinSmallLetterE},   /* 0xD6   0x00D6   LATIN CAPITAL LETTER O WITH DIAERESIS */
-   {U_LatinCapitalLetterUWithDiaeresis, U_LatinCapitalLetterU, U_LatinSmallLetterE},   /* 0xDC   0x00DC   LATIN CAPITAL LETTER U WITH DIAERESIS */
-   {U_LatinSmallLetterSharpS,           U_LatinSmallLetterS,   U_LatinSmallLetterS},   /* 0xDF   0x00DF   LATIN SMALL LETTER SHARP S */
-   {U_LatinSmallLetterAWithDiaeresis,   U_LatinSmallLetterA,   U_LatinSmallLetterE},   /* 0xE4   0x00E4   LATIN SMALL LETTER A WITH DIAERESIS */
-   {U_LatinSmallLetterAWithRingAbove,   U_LatinSmallLetterA,   U_LatinSmallLetterO},   /* 0xE5   0x00E5   LATIN SMALL LETTER A WITH RING ABOVE */
-   {U_LatinSmallLetterOWithDiaeresis,   U_LatinSmallLetterO,   U_LatinSmallLetterE},   /* 0xF6   0x00F6   LATIN SMALL LETTER O WITH DIAERESIS */
-   {U_LatinSmallLetterUWithDiaeresis,   U_LatinSmallLetterU,   U_LatinSmallLetterE},   /* 0xFC   0x00FC   LATIN SMALL LETTER U WITH DIAERESIS */
+   {U_LatinSmallLetterOSlash,           U_LatinCapitalLetterO, U_LatinCapitalLetterE}, /* 0xB8   0x00F8   LATIN SMALL LETTER O WITH STROKE */
+   {U_LatinSmallLigatureAE,             U_LatinCapitalLetterA, U_LatinCapitalLetterE}, /* 0xBF   0x00E6   LATIN SMALL LETTER AE */
+   {U_LatinCapitalLetterAWithDiaeresis, U_LatinCapitalLetterA, U_LatinCapitalLetterE}, /* 0xC4   0x00C4   LATIN CAPITAL LETTER A WITH DIAERESIS */
+   {U_LatinCapitalLetterAWithRingAbove, U_LatinCapitalLetterA, U_LatinCapitalLetterO}, /* 0xC5   0x00C5   LATIN CAPITAL LETTER A WITH RING ABOVE */
+   {U_LatinCapitalLetterOWithDiaeresis, U_LatinCapitalLetterO, U_LatinCapitalLetterE}, /* 0xD6   0x00D6   LATIN CAPITAL LETTER O WITH DIAERESIS */
+   {U_LatinCapitalLetterUWithDiaeresis, U_LatinCapitalLetterU, U_LatinCapitalLetterE}, /* 0xDC   0x00DC   LATIN CAPITAL LETTER U WITH DIAERESIS */
+   {U_LatinSmallLetterSharpS,           U_LatinCapitalLetterS, U_LatinCapitalLetterS}, /* 0xDF   0x00DF   LATIN SMALL LETTER SHARP S */
+   {U_LatinSmallLetterAWithDiaeresis,   U_LatinCapitalLetterA, U_LatinCapitalLetterE}, /* 0xE4   0x00E4   LATIN SMALL LETTER A WITH DIAERESIS */
+   {U_LatinSmallLetterAWithRingAbove,   U_LatinCapitalLetterA, U_LatinCapitalLetterO}, /* 0xE5   0x00E5   LATIN SMALL LETTER A WITH RING ABOVE */
+   {U_LatinSmallLetterOWithDiaeresis,   U_LatinCapitalLetterO, U_LatinCapitalLetterE}, /* 0xF6   0x00F6   LATIN SMALL LETTER O WITH DIAERESIS */
+   {U_LatinSmallLetterUWithDiaeresis,   U_LatinCapitalLetterU, U_LatinCapitalLetterE}, /* 0xFC   0x00FC   LATIN SMALL LETTER U WITH DIAERESIS */
 
-   {0x0000,                             U_NIL,                 U_NIL}                  /* list terminator */
+   {0x0000, U_NIL, U_NIL}                 /* list terminator */
 };
 
 
@@ -4540,6 +4543,291 @@ static UWORD   CODE_CP1257_lig[][3] =     /* CODE_CP1257 character ligatures */
 ******************************************|************************************/
 
 static UWORD   sort_CODE_CP1257[] =       /* CODE_CP1257 */
+{
+   U_NUL,                                 /* 0x00  NULl */
+   U_SOH,                                 /* 0x01  Start Of Heading */
+   U_STX,                                 /* 0x02  Start of TeXt */
+   U_ETX,                                 /* 0x03  End of TeXt */
+   U_EOT,                                 /* 0x04  End Of Transmission */
+   U_ENQ,                                 /* 0x05  ENQuiry */
+   U_ACK,                                 /* 0x06  ACKnowledge */
+   U_BEL,                                 /* 0x07  BELl */
+   U_BS,                                  /* 0x08  BackSpace */
+   U_HT,                                  /* 0x09  Horizontal Tabulation */
+   U_LF,                                  /* 0x0a  Line Feed */
+   U_VT,                                  /* 0x0b  Vertical Tabulation */
+   U_FF,                                  /* 0x0c  Form Feed */
+   U_CR,                                  /* 0x0d  Carriage Return */
+   U_SO,                                  /* 0x0e  Shift Out */
+   U_SI,                                  /* 0x0f  Shift In */
+   U_DLE,                                 /* 0x10  Data Link Escape */
+   U_DC1,                                 /* 0x11  Device Control 1 */
+   U_DC2,                                 /* 0x12  Device Control 2 */
+   U_DC3,                                 /* 0x13  Device Control 3 */
+   U_DC4,                                 /* 0x14  Device Control 4 */
+   U_NAK,                                 /* 0x15  Negative AcKnowledge */
+   U_SYN,                                 /* 0x16  SYNchronous idle */
+   U_ETB,                                 /* 0x17  End of Transmission Block */
+   U_CAN,                                 /* 0x18  CANcel */
+   U_EM,                                  /* 0x19  End of Medium */
+   U_SUB,                                 /* 0x1a  SUBstitute */
+   U_ESC,                                 /* 0x1b  ESCape */
+   U_FS,                                  /* 0x1c  File Separator */
+   U_GS,                                  /* 0x1d  Group Separator */
+   U_RS,                                  /* 0x1e  Record Separator */
+   U_US,                                  /* 0x1f  Unit Separator */
+
+   U_SP,                                  /* 0x20  SPace */
+   U_ExclamationMark,                     /* 0x21  ! */
+   U_QuotationMark,                       /* 0x22  " */
+   U_NumberSign,                          /* 0x23  # */
+   U_DollarSign,                          /* 0x24  $ */
+   U_PercentSign,                         /* 0x25  % */
+   U_Ampersand,                           /* 0x26  & */
+   U_Apostrophe,                          /* 0x27  ' */
+   U_OpeningParenthesis,                  /* 0x28  ( */
+   U_ClosingParenthesis,                  /* 0x29  ) */
+   U_Asterisk,                            /* 0x2A  * */
+   U_PlusSign,                            /* 0x2B  + */
+   U_Comma,                               /* 0x2C  , */
+   U_HyphenMinus,                         /* 0x2D  - */
+   U_Period,                              /* 0x2E  . */
+   U_Slash,                               /* 0x2F  / */
+   U_Digit0,                              /* 0x30  0 */
+   U_Digit1,                              /* 0x31  1 */
+   U_Digit2,                              /* 0x32  2 */
+   U_Digit3,                              /* 0x33  3 */
+   U_Digit4,                              /* 0x34  4 */
+   U_Digit5,                              /* 0x35  5 */
+   U_Digit6,                              /* 0x36  6 */
+   U_Digit7,                              /* 0x37  7 */
+   U_Digit8,                              /* 0x38  8 */
+   U_Digit9,                              /* 0x39  9 */
+   U_Colon,                               /* 0x3A  : */
+   U_Semicolon,                           /* 0x3B  ; */
+   U_LessThanSign,                        /* 0x3C  < */
+   U_EqualsSign,                          /* 0x3D  = */
+   U_GreaterThanSign,                     /* 0x3E  > */
+   U_QuestionMark,                        /* 0x3F  ? */
+   U_CommercialAt,                        /* 0x40  @ */
+   U_LatinCapitalLetterA,                 /* 0x41  A */
+   U_LatinCapitalLetterB,                 /* 0x42  B */
+   U_LatinCapitalLetterC,                 /* 0x43  C */
+   U_LatinCapitalLetterD,                 /* 0x44  D */
+   U_LatinCapitalLetterE,                 /* 0x45  E */
+   U_LatinCapitalLetterF,                 /* 0x46  F */
+   U_LatinCapitalLetterG,                 /* 0x47  G */
+   U_LatinCapitalLetterH,                 /* 0x48  H */
+   U_LatinCapitalLetterI,                 /* 0x49  I */
+   U_LatinCapitalLetterJ,                 /* 0x4A  J */
+   U_LatinCapitalLetterK,                 /* 0x4B  K */
+   U_LatinCapitalLetterL,                 /* 0x4C  L */
+   U_LatinCapitalLetterM,                 /* 0x4D  M */
+   U_LatinCapitalLetterN,                 /* 0x4E  N */
+   U_LatinCapitalLetterO,                 /* 0x4F  O */
+   U_LatinCapitalLetterP,                 /* 0x50  P */
+   U_LatinCapitalLetterQ,                 /* 0x51  Q */
+   U_LatinCapitalLetterR,                 /* 0x52  R */
+   U_LatinCapitalLetterS,                 /* 0x53  S */
+   U_LatinCapitalLetterT,                 /* 0x54  T */
+   U_LatinCapitalLetterU,                 /* 0x55  U */
+   U_LatinCapitalLetterV,                 /* 0x56  V */
+   U_LatinCapitalLetterW,                 /* 0x57  W */
+   U_LatinCapitalLetterX,                 /* 0x58  X */
+   U_LatinCapitalLetterY,                 /* 0x59  Y */
+   U_LatinCapitalLetterZ,                 /* 0x5A  Z */
+   U_OpeningSquareBracket,                /* 0x5B  [ */
+   U_Backslash,                           /* 0x5C  \ */
+   U_ClosingSquareBracket,                /* 0x5D  ] */
+   U_CircumflexAccent,                    /* 0x5E  ^ */
+   U_SpacingUnderscore,                   /* 0x5F  _ */
+   U_GraveAccent,                         /* 0x60  ` */
+   U_LatinCapitalLetterA,                 /* 0x61  a */
+   U_LatinCapitalLetterB,                 /* 0x62  b */
+   U_LatinCapitalLetterC,                 /* 0x63  c */
+   U_LatinCapitalLetterD,                 /* 0x64  d */
+   U_LatinCapitalLetterE,                 /* 0x65  e */
+   U_LatinCapitalLetterF,                 /* 0x66  f */
+   U_LatinCapitalLetterG,                 /* 0x67  g */
+   U_LatinCapitalLetterH,                 /* 0x68  h */
+   U_LatinCapitalLetterI,                 /* 0x69  i */
+   U_LatinCapitalLetterJ,                 /* 0x6A  j */
+   U_LatinCapitalLetterK,                 /* 0x6B  k */
+   U_LatinCapitalLetterL,                 /* 0x6C  l */
+   U_LatinCapitalLetterM,                 /* 0x6D  m */
+   U_LatinCapitalLetterN,                 /* 0x6E  n */
+   U_LatinCapitalLetterO,                 /* 0x6F  o */
+   U_LatinCapitalLetterP,                 /* 0x70  p */
+   U_LatinCapitalLetterQ,                 /* 0x71  q */
+   U_LatinCapitalLetterR,                 /* 0x72  r */
+   U_LatinCapitalLetterS,                 /* 0x73  s */
+   U_LatinCapitalLetterT,                 /* 0x74  t */
+   U_LatinCapitalLetterU,                 /* 0x75  u */
+   U_LatinCapitalLetterV,                 /* 0x76  v */
+   U_LatinCapitalLetterW,                 /* 0x77  w */
+   U_LatinCapitalLetterX,                 /* 0x78  x */
+   U_LatinCapitalLetterY,                 /* 0x79  y */
+   U_LatinCapitalLetterZ,                 /* 0x7A  z */
+   U_OpeningCurlyBracket,                 /* 0x7B  { */
+   U_VerticalLine,                        /* 0x7C  | */
+   U_ClosingCurlyBracket,                 /* 0x7D  } */
+   U_Tilde,                               /* 0x7E  ~ */
+   U_DEL,                                 /* 0x7F  Delete */
+
+   U_EuroSign,                            /* 0x80   0x20AC   EURO SIGN */
+   U_NIL,                                 /* 0x81            UNDEFINED */
+   U_SingleLow9QuotationMark,             /* 0x82   0x201A   SINGLE LOW-9 QUOTATION MARK */
+   U_NIL,                                 /* 0x83            UNDEFINED */
+   U_DoubleLow9QuotationMark,             /* 0x84   0x201E   DOUBLE LOW-9 QUOTATION MARK */
+   U_HorizontalEllipsis,                  /* 0x85   0x2026   HORIZONTAL ELLIPSIS */
+   U_Dagger,                              /* 0x86   0x2020   DAGGER */
+   U_DoubleDagger,                        /* 0x87   0x2021   DOUBLE DAGGER */
+   U_NIL,                                 /* 0x88            UNDEFINED */
+   U_PerMilleSign,                        /* 0x89   0x2030   PER MILLE SIGN */
+   U_NIL,                                 /* 0x8A            UNDEFINED */
+   U_LeftPointingSingleGuillemet,         /* 0x8B   0x2039   SINGLE LEFT-POINTING ANGLE QUOTATION MARK */
+   U_NIL,                                 /* 0x8C            UNDEFINED */
+   U_Diaeresis,                           /* 0x8D   0x00A8   DIAERESIS */
+   U_Caron,                               /* 0x8E   0x02C7   CARON */
+   U_Cedilla,                             /* 0x8F   0x00B8   CEDILLA */
+   U_NIL,                                 /* 0x90            UNDEFINED */
+   U_LeftSingleQuotationMark,             /* 0x91   0x2018   LEFT SINGLE QUOTATION MARK */
+   U_RightSingleQuotationMark,            /* 0x92   0x2019   RIGHT SINGLE QUOTATION MARK */
+   U_LeftDoubleQuotationMark,             /* 0x93   0x201C   LEFT DOUBLE QUOTATION MARK */
+   U_RightDoubleQuotationMark,            /* 0x94   0x201D   RIGHT DOUBLE QUOTATION MARK */
+   U_Bullet,                              /* 0x95   0x2022   BULLET */
+   U_EnDash,                              /* 0x96   0x2013   EN DASH */
+   U_EmDash,                              /* 0x97   0x2014   EM DASH */
+   U_NIL,                                 /* 0x98            UNDEFINED */
+   U_TradeMarkSign,                       /* 0x99   0x2122   TRADE MARK SIGN */
+   U_NIL,                                 /* 0x9A            UNDEFINED */
+   U_RightPointingSingleGuillemet,        /* 0x9B   0x203A   SINGLE RIGHT-POINTING ANGLE QUOTATION MARK */
+   U_NIL,                                 /* 0x9C            UNDEFINED */
+   U_Macron,                              /* 0x9D   0x00AF   MACRON */
+   U_Ogonek,                              /* 0x9E   0x02DB   OGONEK */
+   U_NIL,                                 /* 0x9F            UNDEFINED */
+   U_NB_SP,                               /* 0xA0   0x00A0   NO-BREAK SPACE */
+   U_NIL,                                 /* 0xA1            UNDEFINED */
+   U_CentSign,                            /* 0xA2   0x00A2   CENT SIGN */
+   U_PoundSign,                           /* 0xA3   0x00A3   POUND SIGN */
+   U_CurrencySign,                        /* 0xA4   0x00A4   CURRENCY SIGN */
+   U_NIL,                                 /* 0xA5            UNDEFINED */
+   U_BrokenVerticalBar,                   /* 0xA6   0x00A6   BROKEN BAR */
+   U_SectionSign,                         /* 0xA7   0x00A7   SECTION SIGN */
+   U_LatinCapitalLetterO,                 /* 0xA8   0x00D8   LATIN CAPITAL LETTER O WITH STROKE */
+   U_CopyrightSign,                       /* 0xA9   0x00A9   COPYRIGHT SIGN */
+   U_LatinCapitalLetterR,                 /* 0xAA   0x0156   LATIN CAPITAL LETTER R WITH CEDILLA */
+   U_LeftPointingGuillemet,               /* 0xAB   0x00AB   LEFT-POINTING DOUBLE ANGLE QUOTATION MARK */
+   U_NotSign,                             /* 0xAC   0x00AC   NOT SIGN */
+   U_SoftHyphen,                          /* 0xAD   0x00AD   SOFT HYPHEN */
+   U_RegisteredSign,                      /* 0xAE   0x00AE   REGISTERED SIGN */
+   U_LatinCapitalLetterA,                 /* 0xAF   0x00C6   LATIN CAPITAL LETTER AE */
+   U_DegreeSign,                          /* 0xB0   0x00B0   DEGREE SIGN */
+   U_PlusMinusSign,                       /* 0xB1   0x00B1   PLUS-MINUS SIGN */
+   U_SuperscriptTwo,                      /* 0xB2   0x00B2   SUPERSCRIPT TWO */
+   U_SuperscriptThree,                    /* 0xB3   0x00B3   SUPERSCRIPT THREE */
+   U_AcuteAccent,                         /* 0xB4   0x00B4   ACUTE ACCENT */
+   U_MicroSign,                           /* 0xB5   0x00B5   MICRO SIGN */
+   U_ParagraphSign,                       /* 0xB6   0x00B6   PILCROW SIGN */
+   U_MiddleDot,                           /* 0xB7   0x00B7   MIDDLE DOT */
+   U_LatinCapitalLetterO,                 /* 0xB8   0x00F8   LATIN SMALL LETTER O WITH STROKE */
+   U_SuperscriptOne,                      /* 0xB9   0x00B9   SUPERSCRIPT ONE */
+   U_LatinCapitalLetterR,                 /* 0xBA   0x0157   LATIN SMALL LETTER R WITH CEDILLA */
+   U_RightPointingGuillemet,              /* 0xBB   0x00BB   RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK */
+   U_VulgarFractionOneQuarter,            /* 0xBC   0x00BC   VULGAR FRACTION ONE QUARTER */
+   U_VulgarFractionOneHalf,               /* 0xBD   0x00BD   VULGAR FRACTION ONE HALF */
+   U_VulgarFractionThreeQuarters,         /* 0xBE   0x00BE   VULGAR FRACTION THREE QUARTERS */
+   U_LatinCapitalLetterA,                 /* 0xBF   0x00E6   LATIN SMALL LETTER AE */
+   U_LatinCapitalLetterA,                 /* 0xC0   0x0104   LATIN CAPITAL LETTER A WITH OGONEK */
+   U_LatinCapitalLetterI,                 /* 0xC1   0x012E   LATIN CAPITAL LETTER I WITH OGONEK */
+   U_LatinCapitalLetterA,                 /* 0xC2   0x0100   LATIN CAPITAL LETTER A WITH MACRON */
+   U_LatinCapitalLetterC,                 /* 0xC3   0x0106   LATIN CAPITAL LETTER C WITH ACUTE */
+   U_LatinCapitalLetterA,                 /* 0xC4   0x00C4   LATIN CAPITAL LETTER A WITH DIAERESIS */
+   U_LatinCapitalLetterA,                 /* 0xC5   0x00C5   LATIN CAPITAL LETTER A WITH RING ABOVE */
+   U_LatinCapitalLetterE,                 /* 0xC6   0x0118   LATIN CAPITAL LETTER E WITH OGONEK */
+   U_LatinCapitalLetterE,                 /* 0xC7   0x0112   LATIN CAPITAL LETTER E WITH MACRON */
+   U_LatinCapitalLetterC,                 /* 0xC8   0x010C   LATIN CAPITAL LETTER C WITH CARON */
+   U_LatinCapitalLetterE,                 /* 0xC9   0x00C9   LATIN CAPITAL LETTER E WITH ACUTE */
+   U_LatinCapitalLetterZ,                 /* 0xCA   0x0179   LATIN CAPITAL LETTER Z WITH ACUTE */
+   U_LatinCapitalLetterE,                 /* 0xCB   0x0116   LATIN CAPITAL LETTER E WITH DOT ABOVE */
+   U_LatinCapitalLetterG,                 /* 0xCC   0x0122   LATIN CAPITAL LETTER G WITH CEDILLA */
+   U_LatinCapitalLetterK,                 /* 0xCD   0x0136   LATIN CAPITAL LETTER K WITH CEDILLA */
+   U_LatinCapitalLetterI,                 /* 0xCE   0x012A   LATIN CAPITAL LETTER I WITH MACRON */
+   U_LatinCapitalLetterL,                 /* 0xCF   0x013B   LATIN CAPITAL LETTER L WITH CEDILLA */
+   U_LatinCapitalLetterS,                 /* 0xD0   0x0160   LATIN CAPITAL LETTER S WITH CARON */
+   U_LatinCapitalLetterN,                 /* 0xD1   0x0143   LATIN CAPITAL LETTER N WITH ACUTE */
+   U_LatinCapitalLetterN,                 /* 0xD2   0x0145   LATIN CAPITAL LETTER N WITH CEDILLA */
+   U_LatinCapitalLetterO,                 /* 0xD3   0x00D3   LATIN CAPITAL LETTER O WITH ACUTE */
+   U_LatinCapitalLetterO,                 /* 0xD4   0x014C   LATIN CAPITAL LETTER O WITH MACRON */
+   U_LatinCapitalLetterO,                 /* 0xD5   0x00D5   LATIN CAPITAL LETTER O WITH TILDE */
+   U_LatinCapitalLetterO,                 /* 0xD6   0x00D6   LATIN CAPITAL LETTER O WITH DIAERESIS */
+   U_MultiplicationSign,                  /* 0xD7   0x00D7   MULTIPLICATION SIGN */
+   U_LatinCapitalLetterU,                 /* 0xD8   0x0172   LATIN CAPITAL LETTER U WITH OGONEK */
+   U_LatinCapitalLetterL,                 /* 0xD9   0x0141   LATIN CAPITAL LETTER L WITH STROKE */
+   U_LatinCapitalLetterS,                 /* 0xDA   0x015A   LATIN CAPITAL LETTER S WITH ACUTE */
+   U_LatinCapitalLetterU,                 /* 0xDB   0x016A   LATIN CAPITAL LETTER U WITH MACRON */
+   U_LatinCapitalLetterU,                 /* 0xDC   0x00DC   LATIN CAPITAL LETTER U WITH DIAERESIS */
+   U_LatinCapitalLetterZ,                 /* 0xDD   0x017B   LATIN CAPITAL LETTER Z WITH DOT ABOVE */
+   U_LatinCapitalLetterZ,                 /* 0xDE   0x017D   LATIN CAPITAL LETTER Z WITH CARON */
+   U_LatinCapitalLetterS,                 /* 0xDF   0x00DF   LATIN SMALL LETTER SHARP S */
+   U_LatinCapitalLetterA,                 /* 0xE0   0x0105   LATIN SMALL LETTER A WITH OGONEK */
+   U_LatinCapitalLetterI,                 /* 0xE1   0x012F   LATIN SMALL LETTER I WITH OGONEK */
+   U_LatinCapitalLetterA,                 /* 0xE2   0x0101   LATIN SMALL LETTER A WITH MACRON */
+   U_LatinCapitalLetterC,                 /* 0xE3   0x0107   LATIN SMALL LETTER C WITH ACUTE */
+   U_LatinCapitalLetterA,                 /* 0xE4   0x00E4   LATIN SMALL LETTER A WITH DIAERESIS */
+   U_LatinCapitalLetterA,                 /* 0xE5   0x00E5   LATIN SMALL LETTER A WITH RING ABOVE */
+   U_LatinCapitalLetterE,                 /* 0xE6   0x0119   LATIN SMALL LETTER E WITH OGONEK */
+   U_LatinCapitalLetterE,                 /* 0xE7   0x0113   LATIN SMALL LETTER E WITH MACRON */
+   U_LatinCapitalLetterC,                 /* 0xE8   0x010D   LATIN SMALL LETTER C WITH CARON */
+   U_LatinCapitalLetterE,                 /* 0xE9   0x00E9   LATIN SMALL LETTER E WITH ACUTE */
+   U_LatinCapitalLetterZ,                 /* 0xEA   0x017A   LATIN SMALL LETTER Z WITH ACUTE */
+   U_LatinCapitalLetterE,                 /* 0xEB   0x0117   LATIN SMALL LETTER E WITH DOT ABOVE */
+   U_LatinCapitalLetterG,                 /* 0xEC   0x0123   LATIN SMALL LETTER G WITH CEDILLA */
+   U_LatinCapitalLetterK,                 /* 0xED   0x0137   LATIN SMALL LETTER K WITH CEDILLA */
+   U_LatinCapitalLetterI,                 /* 0xEE   0x012B   LATIN SMALL LETTER I WITH MACRON */
+   U_LatinCapitalLetterL,                 /* 0xEF   0x013C   LATIN SMALL LETTER L WITH CEDILLA */
+   U_LatinCapitalLetterS,                 /* 0xF0   0x0161   LATIN SMALL LETTER S WITH CARON */
+   U_LatinCapitalLetterN,                 /* 0xF1   0x0144   LATIN SMALL LETTER N WITH ACUTE */
+   U_LatinCapitalLetterN,                 /* 0xF2   0x0146   LATIN SMALL LETTER N WITH CEDILLA */
+   U_LatinCapitalLetterO,                 /* 0xF3   0x00F3   LATIN SMALL LETTER O WITH ACUTE */
+   U_LatinCapitalLetterO,                 /* 0xF4   0x014D   LATIN SMALL LETTER O WITH MACRON */
+   U_LatinCapitalLetterO,                 /* 0xF5   0x00F5   LATIN SMALL LETTER O WITH TILDE */
+   U_LatinCapitalLetterO,                 /* 0xF6   0x00F6   LATIN SMALL LETTER O WITH DIAERESIS */
+   U_DivisionSign,                        /* 0xF7   0x00F7   DIVISION SIGN */
+   U_LatinCapitalLetterU,                 /* 0xF8   0x0173   LATIN SMALL LETTER U WITH OGONEK */
+   U_LatinCapitalLetterL,                 /* 0xF9   0x0142   LATIN SMALL LETTER L WITH STROKE */
+   U_LatinCapitalLetterS,                 /* 0xFA   0x015B   LATIN SMALL LETTER S WITH ACUTE */
+   U_LatinCapitalLetterU,                 /* 0xFB   0x016B   LATIN SMALL LETTER U WITH MACRON */
+   U_LatinCapitalLetterU,                 /* 0xFC   0x00FC   LATIN SMALL LETTER U WITH DIAERESIS */
+   U_LatinCapitalLetterZ,                 /* 0xFD   0x017C   LATIN SMALL LETTER Z WITH DOT ABOVE */
+   U_LatinCapitalLetterZ,                 /* 0xFE   0x017E   LATIN SMALL LETTER Z WITH CARON */
+   U_DotAbove                             /* 0xFF   0x02D9   DOT ABOVE */
+};
+
+
+
+
+
+
+
+
+
+
+/******************************************************************************
+*
+*  u_CODE_CP1258[]:
+*     Unicode named codepage for Microsoft Windows encoding codepage 1258 ("Vietnamese")
+*
+*  Name:             cp1258 to Unicode table
+*  Unicode version:  2.0
+*  Table version:    2.01
+*  Table format:     Format A
+*  Date:             1998-04-15
+*  Contact:          Shawn.Steele@microsoft.com
+*
+******************************************|************************************/
+
+static UWORD   u_CODE_CP1258[] =          /* CODE_CP1258 */
 {
    U_NUL,                                 /* 0x00  NULl */
    U_SOH,                                 /* 0x01  Start Of Heading */
@@ -4674,19 +4962,19 @@ static UWORD   sort_CODE_CP1257[] =       /* CODE_CP1257 */
    U_EuroSign,                            /* 0x80   0x20AC   EURO SIGN */
    U_NIL,                                 /* 0x81            UNDEFINED */
    U_SingleLow9QuotationMark,             /* 0x82   0x201A   SINGLE LOW-9 QUOTATION MARK */
-   U_NIL,                                 /* 0x83            UNDEFINED */
+   U_LatinSmallLetterScriptF,             /* 0x83   0x0192   LATIN SMALL LETTER F WITH HOOK */
    U_DoubleLow9QuotationMark,             /* 0x84   0x201E   DOUBLE LOW-9 QUOTATION MARK */
    U_HorizontalEllipsis,                  /* 0x85   0x2026   HORIZONTAL ELLIPSIS */
    U_Dagger,                              /* 0x86   0x2020   DAGGER */
    U_DoubleDagger,                        /* 0x87   0x2021   DOUBLE DAGGER */
-   U_NIL,                                 /* 0x88            UNDEFINED */
+   U_ModifierLetterCircumflexAccent,      /* 0x88   0x02C6   MODIFIER LETTER CIRCUMFLEX ACCENT */
    U_PerMilleSign,                        /* 0x89   0x2030   PER MILLE SIGN */
    U_NIL,                                 /* 0x8A            UNDEFINED */
    U_LeftPointingSingleGuillemet,         /* 0x8B   0x2039   SINGLE LEFT-POINTING ANGLE QUOTATION MARK */
-   U_NIL,                                 /* 0x8C            UNDEFINED */
-   U_Diaeresis,                           /* 0x8D   0x00A8   DIAERESIS */
-   U_Caron,                               /* 0x8E   0x02C7   CARON */
-   U_Cedilla,                             /* 0x8F   0x00B8   CEDILLA */
+   U_LatinCapitalLigatureOE,              /* 0x8C   0x0152   LATIN CAPITAL LIGATURE OE */
+   U_NIL,                                 /* 0x8D            UNDEFINED */
+   U_NIL,                                 /* 0x8E            UNDEFINED */
+   U_NIL,                                 /* 0x8F            UNDEFINED */
    U_NIL,                                 /* 0x90            UNDEFINED */
    U_LeftSingleQuotationMark,             /* 0x91   0x2018   LEFT SINGLE QUOTATION MARK */
    U_RightSingleQuotationMark,            /* 0x92   0x2019   RIGHT SINGLE QUOTATION MARK */
@@ -4695,30 +4983,30 @@ static UWORD   sort_CODE_CP1257[] =       /* CODE_CP1257 */
    U_Bullet,                              /* 0x95   0x2022   BULLET */
    U_EnDash,                              /* 0x96   0x2013   EN DASH */
    U_EmDash,                              /* 0x97   0x2014   EM DASH */
-   U_NIL,                                 /* 0x98            UNDEFINED */
+   U_SmallTilde,                          /* 0x98   0x02DC   SMALL TILDE */
    U_TradeMarkSign,                       /* 0x99   0x2122   TRADE MARK SIGN */
    U_NIL,                                 /* 0x9A            UNDEFINED */
    U_RightPointingSingleGuillemet,        /* 0x9B   0x203A   SINGLE RIGHT-POINTING ANGLE QUOTATION MARK */
-   U_NIL,                                 /* 0x9C            UNDEFINED */
-   U_Macron,                              /* 0x9D   0x00AF   MACRON */
-   U_Ogonek,                              /* 0x9E   0x02DB   OGONEK */
-   U_NIL,                                 /* 0x9F            UNDEFINED */
+   U_LatinSmallLigatureOE,                /* 0x9C   0x0153   LATIN SMALL LIGATURE OE */
+   U_NIL,                                 /* 0x9D            UNDEFINED */
+   U_NIL,                                 /* 0x9E            UNDEFINED */
+   U_LatinCapitalLetterYWithDiaeresis,    /* 0x9F   0x0178   LATIN CAPITAL LETTER Y WITH DIAERESIS */
    U_NB_SP,                               /* 0xA0   0x00A0   NO-BREAK SPACE */
-   U_NIL,                                 /* 0xA1            UNDEFINED */
+   U_InvertedExclamationMark,             /* 0xA1   0x00A1   INVERTED EXCLAMATION MARK */
    U_CentSign,                            /* 0xA2   0x00A2   CENT SIGN */
    U_PoundSign,                           /* 0xA3   0x00A3   POUND SIGN */
    U_CurrencySign,                        /* 0xA4   0x00A4   CURRENCY SIGN */
-   U_NIL,                                 /* 0xA5            UNDEFINED */
-   U_BrokenVerticalBar,                   /* 0xA6   0x00A6   BROKEN BAR */
+   U_YenSign,                             /* 0xA5   0x00A5   YEN SIGN */
+   U_YenSign,                             /* 0xA6   0x00A6   BROKEN BAR */
    U_SectionSign,                         /* 0xA7   0x00A7   SECTION SIGN */
-   U_LatinCapitalLetterO,                 /* 0xA8   0x00D8   LATIN CAPITAL LETTER O WITH STROKE */
+   U_Diaeresis,                           /* 0xA8   0x00A8   DIAERESIS */
    U_CopyrightSign,                       /* 0xA9   0x00A9   COPYRIGHT SIGN */
-   U_LatinCapitalLetterR,                 /* 0xAA   0x0156   LATIN CAPITAL LETTER R WITH CEDILLA */
+   U_FeminineOrdinalIndicator,            /* 0xAA   0x00AA   FEMININE ORDINAL INDICATOR */
    U_LeftPointingGuillemet,               /* 0xAB   0x00AB   LEFT-POINTING DOUBLE ANGLE QUOTATION MARK */
    U_NotSign,                             /* 0xAC   0x00AC   NOT SIGN */
    U_SoftHyphen,                          /* 0xAD   0x00AD   SOFT HYPHEN */
    U_RegisteredSign,                      /* 0xAE   0x00AE   REGISTERED SIGN */
-   U_LatinCapitalLetterA,                 /* 0xAF   0x00C6   LATIN CAPITAL LETTER AE */
+   U_Macron,                              /* 0xAF   0x00AF   MACRON */
    U_DegreeSign,                          /* 0xB0   0x00B0   DEGREE SIGN */
    U_PlusMinusSign,                       /* 0xB1   0x00B1   PLUS-MINUS SIGN */
    U_SuperscriptTwo,                      /* 0xB2   0x00B2   SUPERSCRIPT TWO */
@@ -4727,78 +5015,393 @@ static UWORD   sort_CODE_CP1257[] =       /* CODE_CP1257 */
    U_MicroSign,                           /* 0xB5   0x00B5   MICRO SIGN */
    U_ParagraphSign,                       /* 0xB6   0x00B6   PILCROW SIGN */
    U_MiddleDot,                           /* 0xB7   0x00B7   MIDDLE DOT */
-   U_LatinSmallLetterO,                   /* 0xB8   0x00F8   LATIN SMALL LETTER O WITH STROKE */
+   U_Cedilla,                             /* 0xB8   0x00B8   CEDILLA */
    U_SuperscriptOne,                      /* 0xB9   0x00B9   SUPERSCRIPT ONE */
-   U_LatinSmallLetterR,                   /* 0xBA   0x0157   LATIN SMALL LETTER R WITH CEDILLA */
+   U_SuperscriptOne,                      /* 0xBA   0x00BA   MASCULINE ORDINAL INDICATOR */
    U_RightPointingGuillemet,              /* 0xBB   0x00BB   RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK */
    U_VulgarFractionOneQuarter,            /* 0xBC   0x00BC   VULGAR FRACTION ONE QUARTER */
-   U_VulgarFractionOneHalf,               /* 0xBD   0x00BD   VULGAR FRACTION ONE HALF */
+   U_VulgarFractionOneQuarter,            /* 0xBD   0x00BD   VULGAR FRACTION ONE HALF */
    U_VulgarFractionThreeQuarters,         /* 0xBE   0x00BE   VULGAR FRACTION THREE QUARTERS */
-   U_LatinSmallLetterA,                   /* 0xBF   0x00E6   LATIN SMALL LETTER AE */
-   U_LatinCapitalLetterA,                 /* 0xC0   0x0104   LATIN CAPITAL LETTER A WITH OGONEK */
-   U_LatinCapitalLetterI,                 /* 0xC1   0x012E   LATIN CAPITAL LETTER I WITH OGONEK */
-   U_LatinCapitalLetterA,                 /* 0xC2   0x0100   LATIN CAPITAL LETTER A WITH MACRON */
-   U_LatinCapitalLetterC,                 /* 0xC3   0x0106   LATIN CAPITAL LETTER C WITH ACUTE */
+   U_InvertedQuestionMark,                /* 0xBF   0x00BF   INVERTED QUESTION MARK */
+   U_LatinCapitalLetterAWithGrave,        /* 0xC0   0x00C0   LATIN CAPITAL LETTER A WITH GRAVE */
+   U_LatinCapitalLetterAWithAcute,        /* 0xC1   0x00C1   LATIN CAPITAL LETTER A WITH ACUTE */
+   U_LatinCapitalLetterAWithCircumflex,   /* 0xC2   0x00C2   LATIN CAPITAL LETTER A WITH CIRCUMFLEX */
+   U_LatinCapitalLetterAWithBreve,        /* 0xC3   0x0102   LATIN CAPITAL LETTER A WITH BREVE */
+   U_LatinCapitalLetterAWithDiaeresis,    /* 0xC4   0x00C4   LATIN CAPITAL LETTER A WITH DIAERESIS */
+   U_LatinCapitalLetterAWithRingAbove,    /* 0xC5   0x00C5   LATIN CAPITAL LETTER A WITH RING ABOVE */
+   U_LatinCapitalLigatureAE,              /* 0xC6   0x00C6   LATIN CAPITAL LETTER AE */
+   U_LatinCapitalLetterCWithCedilla,      /* 0xC7   0x00C7   LATIN CAPITAL LETTER C WITH CEDILLA */
+   U_LatinCapitalLetterEWithGrave,        /* 0xC8   0x00C8   LATIN CAPITAL LETTER E WITH GRAVE */
+   U_LatinCapitalLetterEWithAcute,        /* 0xC9   0x00C9   LATIN CAPITAL LETTER E WITH ACUTE */
+   U_LatinCapitalLetterEWithCircumflex,   /* 0xCA   0x00CA   LATIN CAPITAL LETTER E WITH CIRCUMFLEX */
+   U_LatinCapitalLetterEWithDiaeresis,    /* 0xCB   0x00CB   LATIN CAPITAL LETTER E WITH DIAERESIS */
+   U_CombiningGraveAccent,                /* 0xCC   0x0300   COMBINING GRAVE ACCENT */
+   U_LatinCapitalLetterIWithAcute,        /* 0xCD   0x00CD   LATIN CAPITAL LETTER I WITH ACUTE */
+   U_LatinCapitalLetterIWithCircumflex,   /* 0xCE   0x00CE   LATIN CAPITAL LETTER I WITH CIRCUMFLEX */
+   U_LatinCapitalLetterIWithDiaeresis,    /* 0xCF   0x00CF   LATIN CAPITAL LETTER I WITH DIAERESIS */
+   U_LatinCapitalLetterDWithStroke,       /* 0xD0   0x0110   LATIN CAPITAL LETTER D WITH STROKE */
+   U_LatinCapitalLetterNWithTilde,        /* 0xD1   0x00D1   LATIN CAPITAL LETTER N WITH TILDE */
+   U_CombiningHookAbove,                  /* 0xD2   0x0309   COMBINING HOOK ABOVE */
+   U_LatinCapitalLetterOWithAcute,        /* 0xD3   0x00D3   LATIN CAPITAL LETTER O WITH ACUTE */
+   U_LatinCapitalLetterOWithCircumflex,   /* 0xD4   0x00D4   LATIN CAPITAL LETTER O WITH CIRCUMFLEX */
+   U_LatinCapitalLetterOWithHorn,         /* 0xD5   0x01A0   LATIN CAPITAL LETTER O WITH HORN */
+   U_LatinCapitalLetterOWithDiaeresis,    /* 0xD6   0x00D6   LATIN CAPITAL LETTER O WITH DIAERESIS */
+   U_MultiplicationSign,                  /* 0xD7   0x00D7   MULTIPLICATION SIGN */
+   U_LatinCapitalLetterOSlash,            /* 0xD8   0x00D8   LATIN CAPITAL LETTER O WITH STROKE */
+   U_LatinCapitalLetterUWithGrave,        /* 0xD9   0x00D9   LATIN CAPITAL LETTER U WITH GRAVE */
+   U_LatinCapitalLetterUWithAcute,        /* 0xDA   0x00DA   LATIN CAPITAL LETTER U WITH ACUTE */
+   U_LatinCapitalLetterUWithCircumflex,   /* 0xDB   0x00DB   LATIN CAPITAL LETTER U WITH CIRCUMFLEX */
+   U_LatinCapitalLetterUWithDiaeresis,    /* 0xDC   0x00DC   LATIN CAPITAL LETTER U WITH DIAERESIS */
+   U_LatinCapitalLetterUWithHorn,         /* 0xDD   0x01AF   LATIN CAPITAL LETTER U WITH HORN */
+   U_CombiningTilde,                      /* 0xDE   0x0303   COMBINING TILDE */
+   U_LatinSmallLetterSharpS,              /* 0xDF   0x00DF   LATIN SMALL LETTER SHARP S */
+   U_LatinSmallLetterAWithGrave,          /* 0xE0   0x00E0   LATIN SMALL LETTER A WITH GRAVE */
+   U_LatinSmallLetterAWithAcute,          /* 0xE1   0x00E1   LATIN SMALL LETTER A WITH ACUTE */
+   U_LatinSmallLetterAWithCircumflex,     /* 0xE2   0x00E2   LATIN SMALL LETTER A WITH CIRCUMFLEX */
+   U_LatinSmallLetterAWithBreve,          /* 0xE3   0x0103   LATIN SMALL LETTER A WITH BREVE */
+   U_LatinSmallLetterAWithDiaeresis,      /* 0xE4   0x00E4   LATIN SMALL LETTER A WITH DIAERESIS */
+   U_LatinSmallLetterAWithRingAbove,      /* 0xE5   0x00E5   LATIN SMALL LETTER A WITH RING ABOVE */
+   U_LatinSmallLigatureAE,                /* 0xE6   0x00E6   LATIN SMALL LETTER AE */
+   U_LatinSmallLetterCWithCedilla,        /* 0xE7   0x00E7   LATIN SMALL LETTER C WITH CEDILLA */
+   U_LatinSmallLetterEWithGrave,          /* 0xE8   0x00E8   LATIN SMALL LETTER E WITH GRAVE */
+   U_LatinSmallLetterEWithAcute,          /* 0xE9   0x00E9   LATIN SMALL LETTER E WITH ACUTE */
+   U_LatinSmallLetterEWithCircumflex,     /* 0xEA   0x00EA   LATIN SMALL LETTER E WITH CIRCUMFLEX */
+   U_LatinSmallLetterEWithDiaeresis,      /* 0xEB   0x00EB   LATIN SMALL LETTER E WITH DIAERESIS */
+   U_CombiningAcuteAccent,                /* 0xEC   0x0301   COMBINING ACUTE ACCENT */
+   U_LatinSmallLetterIWithAcute,          /* 0xED   0x00ED   LATIN SMALL LETTER I WITH ACUTE */
+   U_LatinSmallLetterIWithCircumflex,     /* 0xEE   0x00EE   LATIN SMALL LETTER I WITH CIRCUMFLEX */
+   U_LatinSmallLetterIWithDiaeresis,      /* 0xEF   0x00EF   LATIN SMALL LETTER I WITH DIAERESIS */
+   U_LatinSmallLetterDWithStroke,         /* 0xF0   0x0111   LATIN SMALL LETTER D WITH STROKE */
+   U_LatinSmallLetterNWithTilde,          /* 0xF1   0x00F1   LATIN SMALL LETTER N WITH TILDE */
+   U_CombiningDotBelow,                   /* 0xF2   0x0323   COMBINING DOT BELOW */
+   U_LatinSmallLetterOWithAcute,          /* 0xF3   0x00F3   LATIN SMALL LETTER O WITH ACUTE */
+   U_LatinSmallLetterOWithCircumflex,     /* 0xF4   0x00F4   LATIN SMALL LETTER O WITH CIRCUMFLEX */
+   U_LatinSmallLetterOWithHorn,           /* 0xF5   0x01A1   LATIN SMALL LETTER O WITH HORN */
+   U_LatinSmallLetterOWithDiaeresis,      /* 0xF6   0x00F6   LATIN SMALL LETTER O WITH DIAERESIS */
+   U_DivisionSign,                        /* 0xF7   0x00F7   DIVISION SIGN */
+   U_LatinSmallLetterOSlash,              /* 0xF8   0x00F8   LATIN SMALL LETTER O WITH STROKE */
+   U_LatinSmallLetterUWithGrave,          /* 0xF9   0x00F9   LATIN SMALL LETTER U WITH GRAVE */
+   U_LatinSmallLetterUWithAcute,          /* 0xFA   0x00FA   LATIN SMALL LETTER U WITH ACUTE */
+   U_LatinSmallLetterUWithCircumflex,     /* 0xFB   0x00FB   LATIN SMALL LETTER U WITH CIRCUMFLEX */
+   U_LatinSmallLetterUWithDiaeresis,      /* 0xFC   0x00FC   LATIN SMALL LETTER U WITH DIAERESIS */
+   U_LatinSmallLetterUWithHorn,           /* 0xFD   0x01B0   LATIN SMALL LETTER U WITH HORN */
+   U_DongSign,                            /* 0xFE   0x20AB   DONG SIGN */
+   U_LatinSmallLetterYWithDiaeresis       /* 0xFF   0x00FF   LATIN SMALL LETTER Y WITH DIAERESIS */
+};
+
+
+
+
+
+/******************************************************************************
+*
+*  CODE_CP1258_lig[]:
+*     list of ligatures:
+*
+*  CODE_CP1258_lig[0] is the original ligature character
+*  CODE_CP1258_lig[1] + CODE_CP1258_lig[2] are the resolved ligature characters
+*
+******************************************|************************************/
+
+static UWORD   CODE_CP1258_lig[][3] =     /* CODE_CP1258 character ligatures */
+{
+   { U_LatinCapitalLigatureOE,            U_LatinCapitalLetterO, U_LatinCapitalLetterE},   /* 0x8C   0x0152   LATIN CAPITAL LIGATURE OE */
+   { U_LatinSmallLigatureOE,              U_LatinCapitalLetterO, U_LatinCapitalLetterE},   /* 0x9C   0x0153   LATIN SMALL LIGATURE OE */
+   { U_LatinCapitalLetterYWithDiaeresis,  U_LatinCapitalLetterY, U_LatinCapitalLetterE},   /* 0x9F   0x0178   LATIN CAPITAL LETTER Y WITH DIAERESIS */
+   { U_LatinCapitalLetterAWithDiaeresis,  U_LatinCapitalLetterA, U_LatinCapitalLetterE},   /* 0xC4   0x00C4   LATIN CAPITAL LETTER A WITH DIAERESIS */
+   { U_LatinCapitalLetterAWithRingAbove,  U_LatinCapitalLetterA, U_LatinCapitalLetterO},   /* 0xC5   0x00C5   LATIN CAPITAL LETTER A WITH RING ABOVE */
+   { U_LatinCapitalLigatureAE,            U_LatinCapitalLetterA, U_LatinCapitalLetterE},   /* 0xC6   0x00C6   LATIN CAPITAL LETTER AE */
+   { U_LatinCapitalLetterEWithDiaeresis,  U_LatinCapitalLetterE, U_LatinCapitalLetterE},   /* 0xCB   0x00CB   LATIN CAPITAL LETTER E WITH DIAERESIS */
+   { U_LatinCapitalLetterIWithDiaeresis,  U_LatinCapitalLetterI, U_LatinCapitalLetterE},   /* 0xCF   0x00CF   LATIN CAPITAL LETTER I WITH DIAERESIS */
+   { U_LatinCapitalLetterOWithDiaeresis,  U_LatinCapitalLetterO, U_LatinCapitalLetterE},   /* 0xD6   0x00D6   LATIN CAPITAL LETTER O WITH DIAERESIS */
+   { U_LatinCapitalLetterOSlash,          U_LatinCapitalLetterO, U_LatinCapitalLetterE},   /* 0xD8   0x00D8   LATIN CAPITAL LETTER O WITH STROKE */
+   { U_LatinCapitalLetterUWithDiaeresis,  U_LatinCapitalLetterU, U_LatinCapitalLetterE},   /* 0xDC   0x00DC   LATIN CAPITAL LETTER U WITH DIAERESIS */
+   { U_LatinSmallLetterSharpS,            U_LatinCapitalLetterS, U_LatinCapitalLetterS},   /* 0xDF   0x00DF   LATIN SMALL LETTER SHARP S */
+   { U_LatinSmallLetterAWithDiaeresis,    U_LatinCapitalLetterA, U_LatinCapitalLetterE},   /* 0xE4   0x00E4   LATIN SMALL LETTER A WITH DIAERESIS */
+   { U_LatinSmallLetterAWithRingAbove,    U_LatinCapitalLetterA, U_LatinCapitalLetterO},   /* 0xE5   0x00E5   LATIN SMALL LETTER A WITH RING ABOVE */
+   { U_LatinSmallLigatureAE,              U_LatinCapitalLetterA, U_LatinCapitalLetterE},   /* 0xE6   0x00E6   LATIN SMALL LETTER AE */
+   { U_LatinSmallLetterEWithDiaeresis,    U_LatinCapitalLetterE, U_LatinCapitalLetterE},   /* 0xEB   0x00EB   LATIN SMALL LETTER E WITH DIAERESIS */
+   { U_LatinSmallLetterIWithDiaeresis,    U_LatinCapitalLetterI, U_LatinCapitalLetterE},   /* 0xEF   0x00EF   LATIN SMALL LETTER I WITH DIAERESIS */
+   { U_LatinSmallLetterOWithDiaeresis,    U_LatinCapitalLetterO, U_LatinCapitalLetterE},   /* 0xF6   0x00F6   LATIN SMALL LETTER O WITH DIAERESIS */
+   { U_LatinSmallLetterOSlash,            U_LatinCapitalLetterO, U_LatinCapitalLetterE},   /* 0xF8   0x00F8   LATIN SMALL LETTER O WITH STROKE */
+   { U_LatinSmallLetterUWithDiaeresis,    U_LatinCapitalLetterU, U_LatinCapitalLetterE},   /* 0xFC   0x00FC   LATIN SMALL LETTER U WITH DIAERESIS */
+   { U_LatinSmallLetterYWithDiaeresis,    U_LatinCapitalLetterY, U_LatinCapitalLetterE},   /* 0xFF   0x00FF   LATIN SMALL LETTER Y WITH DIAERESIS */
+
+   {0x0000, U_NIL, U_NIL}                 /* list terminator */
+};
+
+
+
+
+
+/******************************************************************************
+*
+*  CODE_CP1258 sorting table:
+*
+*  table format: sortingCharacter, (ANSI hex value  |  Original character)
+*
+******************************************|************************************/
+
+static UWORD   sort_CODE_CP1258[] =       /* CODE_CP1258 */
+{
+   U_NUL,                                 /* 0x00  NULl */
+   U_SOH,                                 /* 0x01  Start Of Heading */
+   U_STX,                                 /* 0x02  Start of TeXt */
+   U_ETX,                                 /* 0x03  End of TeXt */
+   U_EOT,                                 /* 0x04  End Of Transmission */
+   U_ENQ,                                 /* 0x05  ENQuiry */
+   U_ACK,                                 /* 0x06  ACKnowledge */
+   U_BEL,                                 /* 0x07  BELl */
+   U_BS,                                  /* 0x08  BackSpace */
+   U_HT,                                  /* 0x09  Horizontal Tabulation */
+   U_LF,                                  /* 0x0a  Line Feed */
+   U_VT,                                  /* 0x0b  Vertical Tabulation */
+   U_FF,                                  /* 0x0c  Form Feed */
+   U_CR,                                  /* 0x0d  Carriage Return */
+   U_SO,                                  /* 0x0e  Shift Out */
+   U_SI,                                  /* 0x0f  Shift In */
+   U_DLE,                                 /* 0x10  Data Link Escape */
+   U_DC1,                                 /* 0x11  Device Control 1 */
+   U_DC2,                                 /* 0x12  Device Control 2 */
+   U_DC3,                                 /* 0x13  Device Control 3 */
+   U_DC4,                                 /* 0x14  Device Control 4 */
+   U_NAK,                                 /* 0x15  Negative AcKnowledge */
+   U_SYN,                                 /* 0x16  SYNchronous idle */
+   U_ETB,                                 /* 0x17  End of Transmission Block */
+   U_CAN,                                 /* 0x18  CANcel */
+   U_EM,                                  /* 0x19  End of Medium */
+   U_SUB,                                 /* 0x1a  SUBstitute */
+   U_ESC,                                 /* 0x1b  ESCape */
+   U_FS,                                  /* 0x1c  File Separator */
+   U_GS,                                  /* 0x1d  Group Separator */
+   U_RS,                                  /* 0x1e  Record Separator */
+   U_US,                                  /* 0x1f  Unit Separator */
+
+   U_SP,                                  /* 0x20  SPace */
+   U_ExclamationMark,                     /* 0x21  ! */
+   U_QuotationMark,                       /* 0x22  " */
+   U_NumberSign,                          /* 0x23  # */
+   U_DollarSign,                          /* 0x24  $ */
+   U_PercentSign,                         /* 0x25  % */
+   U_Ampersand,                           /* 0x26  & */
+   U_Apostrophe,                          /* 0x27  ' */
+   U_OpeningParenthesis,                  /* 0x28  ( */
+   U_ClosingParenthesis,                  /* 0x29  ) */
+   U_Asterisk,                            /* 0x2A  * */
+   U_PlusSign,                            /* 0x2B  + */
+   U_Comma,                               /* 0x2C  , */
+   U_HyphenMinus,                         /* 0x2D  - */
+   U_Period,                              /* 0x2E  . */
+   U_Slash,                               /* 0x2F  / */
+   U_Digit0,                              /* 0x30  0 */
+   U_Digit1,                              /* 0x31  1 */
+   U_Digit2,                              /* 0x32  2 */
+   U_Digit3,                              /* 0x33  3 */
+   U_Digit4,                              /* 0x34  4 */
+   U_Digit5,                              /* 0x35  5 */
+   U_Digit6,                              /* 0x36  6 */
+   U_Digit7,                              /* 0x37  7 */
+   U_Digit8,                              /* 0x38  8 */
+   U_Digit9,                              /* 0x39  9 */
+   U_Colon,                               /* 0x3A  : */
+   U_Semicolon,                           /* 0x3B  ; */
+   U_LessThanSign,                        /* 0x3C  < */
+   U_EqualsSign,                          /* 0x3D  = */
+   U_GreaterThanSign,                     /* 0x3E  > */
+   U_QuestionMark,                        /* 0x3F  ? */
+   U_CommercialAt,                        /* 0x40  @ */
+   U_LatinCapitalLetterA,                 /* 0x41  A */
+   U_LatinCapitalLetterB,                 /* 0x42  B */
+   U_LatinCapitalLetterC,                 /* 0x43  C */
+   U_LatinCapitalLetterD,                 /* 0x44  D */
+   U_LatinCapitalLetterE,                 /* 0x45  E */
+   U_LatinCapitalLetterF,                 /* 0x46  F */
+   U_LatinCapitalLetterG,                 /* 0x47  G */
+   U_LatinCapitalLetterH,                 /* 0x48  H */
+   U_LatinCapitalLetterI,                 /* 0x49  I */
+   U_LatinCapitalLetterJ,                 /* 0x4A  J */
+   U_LatinCapitalLetterK,                 /* 0x4B  K */
+   U_LatinCapitalLetterL,                 /* 0x4C  L */
+   U_LatinCapitalLetterM,                 /* 0x4D  M */
+   U_LatinCapitalLetterN,                 /* 0x4E  N */
+   U_LatinCapitalLetterO,                 /* 0x4F  O */
+   U_LatinCapitalLetterP,                 /* 0x50  P */
+   U_LatinCapitalLetterQ,                 /* 0x51  Q */
+   U_LatinCapitalLetterR,                 /* 0x52  R */
+   U_LatinCapitalLetterS,                 /* 0x53  S */
+   U_LatinCapitalLetterT,                 /* 0x54  T */
+   U_LatinCapitalLetterU,                 /* 0x55  U */
+   U_LatinCapitalLetterV,                 /* 0x56  V */
+   U_LatinCapitalLetterW,                 /* 0x57  W */
+   U_LatinCapitalLetterX,                 /* 0x58  X */
+   U_LatinCapitalLetterY,                 /* 0x59  Y */
+   U_LatinCapitalLetterZ,                 /* 0x5A  Z */
+   U_OpeningSquareBracket,                /* 0x5B  [ */
+   U_Backslash,                           /* 0x5C  \ */
+   U_ClosingSquareBracket,                /* 0x5D  ] */
+   U_CircumflexAccent,                    /* 0x5E  ^ */
+   U_SpacingUnderscore,                   /* 0x5F  _ */
+   U_GraveAccent,                         /* 0x60  ` */
+   U_LatinCapitalLetterA,                 /* 0x61  a */
+   U_LatinCapitalLetterB,                 /* 0x62  b */
+   U_LatinCapitalLetterC,                 /* 0x63  c */
+   U_LatinCapitalLetterD,                 /* 0x64  d */
+   U_LatinCapitalLetterE,                 /* 0x65  e */
+   U_LatinCapitalLetterF,                 /* 0x66  f */
+   U_LatinCapitalLetterG,                 /* 0x67  g */
+   U_LatinCapitalLetterH,                 /* 0x68  h */
+   U_LatinCapitalLetterI,                 /* 0x69  i */
+   U_LatinCapitalLetterJ,                 /* 0x6A  j */
+   U_LatinCapitalLetterK,                 /* 0x6B  k */
+   U_LatinCapitalLetterL,                 /* 0x6C  l */
+   U_LatinCapitalLetterM,                 /* 0x6D  m */
+   U_LatinCapitalLetterN,                 /* 0x6E  n */
+   U_LatinCapitalLetterO,                 /* 0x6F  o */
+   U_LatinCapitalLetterP,                 /* 0x70  p */
+   U_LatinCapitalLetterQ,                 /* 0x71  q */
+   U_LatinCapitalLetterR,                 /* 0x72  r */
+   U_LatinCapitalLetterS,                 /* 0x73  s */
+   U_LatinCapitalLetterT,                 /* 0x74  t */
+   U_LatinCapitalLetterU,                 /* 0x75  u */
+   U_LatinCapitalLetterV,                 /* 0x76  v */
+   U_LatinCapitalLetterW,                 /* 0x77  w */
+   U_LatinCapitalLetterX,                 /* 0x78  x */
+   U_LatinCapitalLetterY,                 /* 0x79  y */
+   U_LatinCapitalLetterZ,                 /* 0x7A  z */
+   U_OpeningCurlyBracket,                 /* 0x7B  { */
+   U_VerticalLine,                        /* 0x7C  | */
+   U_ClosingCurlyBracket,                 /* 0x7D  } */
+   U_Tilde,                               /* 0x7E  ~ */
+   U_DEL,                                 /* 0x7F  Delete */
+
+   U_EuroSign,                            /* 0x80   0x20AC   EURO SIGN */
+   U_NIL,                                 /* 0x81            UNDEFINED */
+   U_SingleLow9QuotationMark,             /* 0x82   0x201A   SINGLE LOW-9 QUOTATION MARK */
+   U_LatinCapitalLetterF,                 /* 0x83   0x0192   LATIN SMALL LETTER F WITH HOOK */
+   U_DoubleLow9QuotationMark,             /* 0x84   0x201E   DOUBLE LOW-9 QUOTATION MARK */
+   U_HorizontalEllipsis,                  /* 0x85   0x2026   HORIZONTAL ELLIPSIS */
+   U_Dagger,                              /* 0x86   0x2020   DAGGER */
+   U_DoubleDagger,                        /* 0x87   0x2021   DOUBLE DAGGER */
+   U_ModifierLetterCircumflexAccent,      /* 0x88   0x02C6   MODIFIER LETTER CIRCUMFLEX ACCENT */
+   U_PerMilleSign,                        /* 0x89   0x2030   PER MILLE SIGN */
+   U_NIL,                                 /* 0x8A            UNDEFINED */
+   U_LeftPointingSingleGuillemet,         /* 0x8B   0x2039   SINGLE LEFT-POINTING ANGLE QUOTATION MARK */
+   U_LatinCapitalLetterO,                 /* 0x8C   0x0152   LATIN CAPITAL LIGATURE OE */
+   U_NIL,                                 /* 0x8D            UNDEFINED */
+   U_NIL,                                 /* 0x8E            UNDEFINED */
+   U_NIL,                                 /* 0x8F            UNDEFINED */
+   U_NIL,                                 /* 0x90            UNDEFINED */
+   U_LeftSingleQuotationMark,             /* 0x91   0x2018   LEFT SINGLE QUOTATION MARK */
+   U_RightSingleQuotationMark,            /* 0x92   0x2019   RIGHT SINGLE QUOTATION MARK */
+   U_LeftDoubleQuotationMark,             /* 0x93   0x201C   LEFT DOUBLE QUOTATION MARK */
+   U_RightDoubleQuotationMark,            /* 0x94   0x201D   RIGHT DOUBLE QUOTATION MARK */
+   U_Bullet,                              /* 0x95   0x2022   BULLET */
+   U_EnDash,                              /* 0x96   0x2013   EN DASH */
+   U_EmDash,                              /* 0x97   0x2014   EM DASH */
+   U_SmallTilde,                          /* 0x98   0x02DC   SMALL TILDE */
+   U_TradeMarkSign,                       /* 0x99   0x2122   TRADE MARK SIGN */
+   U_NIL,                                 /* 0x9A            UNDEFINED */
+   U_RightPointingSingleGuillemet,        /* 0x9B   0x203A   SINGLE RIGHT-POINTING ANGLE QUOTATION MARK */
+   U_LatinCapitalLetterO,                 /* 0x9C   0x0153   LATIN SMALL LIGATURE OE */
+   U_NIL,                                 /* 0x9D            UNDEFINED */
+   U_NIL,                                 /* 0x9E            UNDEFINED */
+   U_LatinCapitalLetterY,                 /* 0x9F   0x0178   LATIN CAPITAL LETTER Y WITH DIAERESIS */
+   U_NB_SP,                               /* 0xA0   0x00A0   NO-BREAK SPACE */
+   U_InvertedExclamationMark,             /* 0xA1   0x00A1   INVERTED EXCLAMATION MARK */
+   U_CentSign,                            /* 0xA2   0x00A2   CENT SIGN */
+   U_PoundSign,                           /* 0xA3   0x00A3   POUND SIGN */
+   U_CurrencySign,                        /* 0xA4   0x00A4   CURRENCY SIGN */
+   U_YenSign,                             /* 0xA5   0x00A5   YEN SIGN */
+   U_YenSign,                             /* 0xA6   0x00A6   BROKEN BAR */
+   U_SectionSign,                         /* 0xA7   0x00A7   SECTION SIGN */
+   U_Diaeresis,                           /* 0xA8   0x00A8   DIAERESIS */
+   U_CopyrightSign,                       /* 0xA9   0x00A9   COPYRIGHT SIGN */
+   U_FeminineOrdinalIndicator,            /* 0xAA   0x00AA   FEMININE ORDINAL INDICATOR */
+   U_LeftPointingGuillemet,               /* 0xAB   0x00AB   LEFT-POINTING DOUBLE ANGLE QUOTATION MARK */
+   U_NotSign,                             /* 0xAC   0x00AC   NOT SIGN */
+   U_SoftHyphen,                          /* 0xAD   0x00AD   SOFT HYPHEN */
+   U_RegisteredSign,                      /* 0xAE   0x00AE   REGISTERED SIGN */
+   U_Macron,                              /* 0xAF   0x00AF   MACRON */
+   U_DegreeSign,                          /* 0xB0   0x00B0   DEGREE SIGN */
+   U_PlusMinusSign,                       /* 0xB1   0x00B1   PLUS-MINUS SIGN */
+   U_SuperscriptTwo,                      /* 0xB2   0x00B2   SUPERSCRIPT TWO */
+   U_SuperscriptThree,                    /* 0xB3   0x00B3   SUPERSCRIPT THREE */
+   U_AcuteAccent,                         /* 0xB4   0x00B4   ACUTE ACCENT */
+   U_MicroSign,                           /* 0xB5   0x00B5   MICRO SIGN */
+   U_ParagraphSign,                       /* 0xB6   0x00B6   PILCROW SIGN */
+   U_MiddleDot,                           /* 0xB7   0x00B7   MIDDLE DOT */
+   U_Cedilla,                             /* 0xB8   0x00B8   CEDILLA */
+   U_SuperscriptOne,                      /* 0xB9   0x00B9   SUPERSCRIPT ONE */
+   U_SuperscriptOne,                      /* 0xBA   0x00BA   MASCULINE ORDINAL INDICATOR */
+   U_RightPointingGuillemet,              /* 0xBB   0x00BB   RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK */
+   U_VulgarFractionOneQuarter,            /* 0xBC   0x00BC   VULGAR FRACTION ONE QUARTER */
+   U_VulgarFractionOneQuarter,            /* 0xBD   0x00BD   VULGAR FRACTION ONE HALF */
+   U_VulgarFractionThreeQuarters,         /* 0xBE   0x00BE   VULGAR FRACTION THREE QUARTERS */
+   U_InvertedQuestionMark,                /* 0xBF   0x00BF   INVERTED QUESTION MARK */
+   U_LatinCapitalLetterA,                 /* 0xC0   0x00C0   LATIN CAPITAL LETTER A WITH GRAVE */
+   U_LatinCapitalLetterA,                 /* 0xC1   0x00C1   LATIN CAPITAL LETTER A WITH ACUTE */
+   U_LatinCapitalLetterA,                 /* 0xC2   0x00C2   LATIN CAPITAL LETTER A WITH CIRCUMFLEX */
+   U_LatinCapitalLetterA,                 /* 0xC3   0x0102   LATIN CAPITAL LETTER A WITH BREVE */
    U_LatinCapitalLetterA,                 /* 0xC4   0x00C4   LATIN CAPITAL LETTER A WITH DIAERESIS */
    U_LatinCapitalLetterA,                 /* 0xC5   0x00C5   LATIN CAPITAL LETTER A WITH RING ABOVE */
-   U_LatinCapitalLetterE,                 /* 0xC6   0x0118   LATIN CAPITAL LETTER E WITH OGONEK */
-   U_LatinCapitalLetterE,                 /* 0xC7   0x0112   LATIN CAPITAL LETTER E WITH MACRON */
-   U_LatinCapitalLetterC,                 /* 0xC8   0x010C   LATIN CAPITAL LETTER C WITH CARON */
+   U_LatinCapitalLetterA,                 /* 0xC6   0x00C6   LATIN CAPITAL LETTER AE */
+   U_LatinCapitalLetterC,                 /* 0xC7   0x00C7   LATIN CAPITAL LETTER C WITH CEDILLA */
+   U_LatinCapitalLetterE,                 /* 0xC8   0x00C8   LATIN CAPITAL LETTER E WITH GRAVE */
    U_LatinCapitalLetterE,                 /* 0xC9   0x00C9   LATIN CAPITAL LETTER E WITH ACUTE */
-   U_LatinCapitalLetterZ,                 /* 0xCA   0x0179   LATIN CAPITAL LETTER Z WITH ACUTE */
-   U_LatinCapitalLetterE,                 /* 0xCB   0x0116   LATIN CAPITAL LETTER E WITH DOT ABOVE */
-   U_LatinCapitalLetterG,                 /* 0xCC   0x0122   LATIN CAPITAL LETTER G WITH CEDILLA */
-   U_LatinCapitalLetterK,                 /* 0xCD   0x0136   LATIN CAPITAL LETTER K WITH CEDILLA */
-   U_LatinCapitalLetterI,                 /* 0xCE   0x012A   LATIN CAPITAL LETTER I WITH MACRON */
-   U_LatinCapitalLetterL,                 /* 0xCF   0x013B   LATIN CAPITAL LETTER L WITH CEDILLA */
-   U_LatinCapitalLetterS,                 /* 0xD0   0x0160   LATIN CAPITAL LETTER S WITH CARON */
-   U_LatinCapitalLetterN,                 /* 0xD1   0x0143   LATIN CAPITAL LETTER N WITH ACUTE */
-   U_LatinCapitalLetterN,                 /* 0xD2   0x0145   LATIN CAPITAL LETTER N WITH CEDILLA */
+   U_LatinCapitalLetterE,                 /* 0xCA   0x00CA   LATIN CAPITAL LETTER E WITH CIRCUMFLEX */
+   U_LatinCapitalLetterE,                 /* 0xCB   0x00CB   LATIN CAPITAL LETTER E WITH DIAERESIS */
+   U_CombiningGraveAccent,                /* 0xCC   0x0300   COMBINING GRAVE ACCENT */
+   U_LatinCapitalLetterI,                 /* 0xCD   0x00CD   LATIN CAPITAL LETTER I WITH ACUTE */
+   U_LatinCapitalLetterI,                 /* 0xCE   0x00CE   LATIN CAPITAL LETTER I WITH CIRCUMFLEX */
+   U_LatinCapitalLetterI,                 /* 0xCF   0x00CF   LATIN CAPITAL LETTER I WITH DIAERESIS */
+   U_LatinCapitalLetterD,                 /* 0xD0   0x0110   LATIN CAPITAL LETTER D WITH STROKE */
+   U_LatinCapitalLetterN,                 /* 0xD1   0x00D1   LATIN CAPITAL LETTER N WITH TILDE */
+   U_CombiningHookAbove,                  /* 0xD2   0x0309   COMBINING HOOK ABOVE */
    U_LatinCapitalLetterO,                 /* 0xD3   0x00D3   LATIN CAPITAL LETTER O WITH ACUTE */
-   U_LatinCapitalLetterO,                 /* 0xD4   0x014C   LATIN CAPITAL LETTER O WITH MACRON */
-   U_LatinCapitalLetterO,                 /* 0xD5   0x00D5   LATIN CAPITAL LETTER O WITH TILDE */
+   U_LatinCapitalLetterO,                 /* 0xD4   0x00D4   LATIN CAPITAL LETTER O WITH CIRCUMFLEX */
+   U_LatinCapitalLetterO,                 /* 0xD5   0x01A0   LATIN CAPITAL LETTER O WITH HORN */
    U_LatinCapitalLetterO,                 /* 0xD6   0x00D6   LATIN CAPITAL LETTER O WITH DIAERESIS */
    U_MultiplicationSign,                  /* 0xD7   0x00D7   MULTIPLICATION SIGN */
-   U_LatinCapitalLetterU,                 /* 0xD8   0x0172   LATIN CAPITAL LETTER U WITH OGONEK */
-   U_LatinCapitalLetterL,                 /* 0xD9   0x0141   LATIN CAPITAL LETTER L WITH STROKE */
-   U_LatinCapitalLetterS,                 /* 0xDA   0x015A   LATIN CAPITAL LETTER S WITH ACUTE */
-   U_LatinCapitalLetterU,                 /* 0xDB   0x016A   LATIN CAPITAL LETTER U WITH MACRON */
+   U_LatinCapitalLetterO,                 /* 0xD8   0x00D8   LATIN CAPITAL LETTER O WITH STROKE */
+   U_LatinCapitalLetterU,                 /* 0xD9   0x00D9   LATIN CAPITAL LETTER U WITH GRAVE */
+   U_LatinCapitalLetterU,                 /* 0xDA   0x00DA   LATIN CAPITAL LETTER U WITH ACUTE */
+   U_LatinCapitalLetterU,                 /* 0xDB   0x00DB   LATIN CAPITAL LETTER U WITH CIRCUMFLEX */
    U_LatinCapitalLetterU,                 /* 0xDC   0x00DC   LATIN CAPITAL LETTER U WITH DIAERESIS */
-   U_LatinCapitalLetterZ,                 /* 0xDD   0x017B   LATIN CAPITAL LETTER Z WITH DOT ABOVE */
-   U_LatinCapitalLetterZ,                 /* 0xDE   0x017D   LATIN CAPITAL LETTER Z WITH CARON */
-   U_LatinSmallLetterS,                   /* 0xDF   0x00DF   LATIN SMALL LETTER SHARP S */
-   U_LatinSmallLetterA,                   /* 0xE0   0x0105   LATIN SMALL LETTER A WITH OGONEK */
-   U_LatinSmallLetterI,                   /* 0xE1   0x012F   LATIN SMALL LETTER I WITH OGONEK */
-   U_LatinSmallLetterA,                   /* 0xE2   0x0101   LATIN SMALL LETTER A WITH MACRON */
-   U_LatinSmallLetterC,                   /* 0xE3   0x0107   LATIN SMALL LETTER C WITH ACUTE */
-   U_LatinSmallLetterA,                   /* 0xE4   0x00E4   LATIN SMALL LETTER A WITH DIAERESIS */
-   U_LatinSmallLetterA,                   /* 0xE5   0x00E5   LATIN SMALL LETTER A WITH RING ABOVE */
-   U_LatinSmallLetterE,                   /* 0xE6   0x0119   LATIN SMALL LETTER E WITH OGONEK */
-   U_LatinSmallLetterE,                   /* 0xE7   0x0113   LATIN SMALL LETTER E WITH MACRON */
-   U_LatinSmallLetterC,                   /* 0xE8   0x010D   LATIN SMALL LETTER C WITH CARON */
-   U_LatinSmallLetterE,                   /* 0xE9   0x00E9   LATIN SMALL LETTER E WITH ACUTE */
-   U_LatinSmallLetterZ,                   /* 0xEA   0x017A   LATIN SMALL LETTER Z WITH ACUTE */
-   U_LatinSmallLetterE,                   /* 0xEB   0x0117   LATIN SMALL LETTER E WITH DOT ABOVE */
-   U_LatinSmallLetterG,                   /* 0xEC   0x0123   LATIN SMALL LETTER G WITH CEDILLA */
-   U_LatinSmallLetterK,                   /* 0xED   0x0137   LATIN SMALL LETTER K WITH CEDILLA */
-   U_LatinSmallLetterI,                   /* 0xEE   0x012B   LATIN SMALL LETTER I WITH MACRON */
-   U_LatinSmallLetterL,                   /* 0xEF   0x013C   LATIN SMALL LETTER L WITH CEDILLA */
-   U_LatinSmallLetterS,                   /* 0xF0   0x0161   LATIN SMALL LETTER S WITH CARON */
-   U_LatinSmallLetterN,                   /* 0xF1   0x0144   LATIN SMALL LETTER N WITH ACUTE */
-   U_LatinSmallLetterN,                   /* 0xF2   0x0146   LATIN SMALL LETTER N WITH CEDILLA */
-   U_LatinSmallLetterO,                   /* 0xF3   0x00F3   LATIN SMALL LETTER O WITH ACUTE */
-   U_LatinSmallLetterO,                   /* 0xF4   0x014D   LATIN SMALL LETTER O WITH MACRON */
-   U_LatinSmallLetterO,                   /* 0xF5   0x00F5   LATIN SMALL LETTER O WITH TILDE */
-   U_LatinSmallLetterO,                   /* 0xF6   0x00F6   LATIN SMALL LETTER O WITH DIAERESIS */
+   U_LatinCapitalLetterU,                 /* 0xDD   0x01AF   LATIN CAPITAL LETTER U WITH HORN */
+   U_CombiningTilde,                      /* 0xDE   0x0303   COMBINING TILDE */
+   U_LatinCapitalLetterS,                 /* 0xDF   0x00DF   LATIN SMALL LETTER SHARP S */
+   U_LatinCapitalLetterA,                 /* 0xE0   0x00E0   LATIN SMALL LETTER A WITH GRAVE */
+   U_LatinCapitalLetterA,                 /* 0xE1   0x00E1   LATIN SMALL LETTER A WITH ACUTE */
+   U_LatinCapitalLetterA,                 /* 0xE2   0x00E2   LATIN SMALL LETTER A WITH CIRCUMFLEX */
+   U_LatinCapitalLetterA,                 /* 0xE3   0x0103   LATIN SMALL LETTER A WITH BREVE */
+   U_LatinCapitalLetterA,                 /* 0xE4   0x00E4   LATIN SMALL LETTER A WITH DIAERESIS */
+   U_LatinCapitalLetterA,                 /* 0xE5   0x00E5   LATIN SMALL LETTER A WITH RING ABOVE */
+   U_LatinCapitalLetterA,                 /* 0xE6   0x00E6   LATIN SMALL LETTER AE */
+   U_LatinCapitalLetterC,                 /* 0xE7   0x00E7   LATIN SMALL LETTER C WITH CEDILLA */
+   U_LatinCapitalLetterE,                 /* 0xE8   0x00E8   LATIN SMALL LETTER E WITH GRAVE */
+   U_LatinCapitalLetterE,                 /* 0xE9   0x00E9   LATIN SMALL LETTER E WITH ACUTE */
+   U_LatinCapitalLetterE,                 /* 0xEA   0x00EA   LATIN SMALL LETTER E WITH CIRCUMFLEX */
+   U_LatinCapitalLetterE,                 /* 0xEB   0x00EB   LATIN SMALL LETTER E WITH DIAERESIS */
+   U_CombiningAcuteAccent,                /* 0xEC   0x0301   COMBINING ACUTE ACCENT */
+   U_LatinCapitalLetterI,                 /* 0xED   0x00ED   LATIN SMALL LETTER I WITH ACUTE */
+   U_LatinCapitalLetterI,                 /* 0xEE   0x00EE   LATIN SMALL LETTER I WITH CIRCUMFLEX */
+   U_LatinCapitalLetterI,                 /* 0xEF   0x00EF   LATIN SMALL LETTER I WITH DIAERESIS */
+   U_LatinCapitalLetterD,                 /* 0xF0   0x0111   LATIN SMALL LETTER D WITH STROKE */
+   U_LatinCapitalLetterN,                 /* 0xF1   0x00F1   LATIN SMALL LETTER N WITH TILDE */
+   U_CombiningDotBelow,                   /* 0xF2   0x0323   COMBINING DOT BELOW */
+   U_LatinCapitalLetterO,                 /* 0xF3   0x00F3   LATIN SMALL LETTER O WITH ACUTE */
+   U_LatinCapitalLetterO,                 /* 0xF4   0x00F4   LATIN SMALL LETTER O WITH CIRCUMFLEX */
+   U_LatinCapitalLetterO,                 /* 0xF5   0x01A1   LATIN SMALL LETTER O WITH HORN */
+   U_LatinCapitalLetterO,                 /* 0xF6   0x00F6   LATIN SMALL LETTER O WITH DIAERESIS */
    U_DivisionSign,                        /* 0xF7   0x00F7   DIVISION SIGN */
-   U_LatinSmallLetterU,                   /* 0xF8   0x0173   LATIN SMALL LETTER U WITH OGONEK */
-   U_LatinSmallLetterL,                   /* 0xF9   0x0142   LATIN SMALL LETTER L WITH STROKE */
-   U_LatinSmallLetterS,                   /* 0xFA   0x015B   LATIN SMALL LETTER S WITH ACUTE */
-   U_LatinSmallLetterU,                   /* 0xFB   0x016B   LATIN SMALL LETTER U WITH MACRON */
-   U_LatinSmallLetterU,                   /* 0xFC   0x00FC   LATIN SMALL LETTER U WITH DIAERESIS */
-   U_LatinSmallLetterZ,                   /* 0xFD   0x017C   LATIN SMALL LETTER Z WITH DOT ABOVE */
-   U_LatinSmallLetterZ,                   /* 0xFE   0x017E   LATIN SMALL LETTER Z WITH CARON */
-   U_DotAbove                             /* 0xFF   0x02D9   DOT ABOVE */
+   U_LatinCapitalLetterO,                 /* 0xF8   0x00F8   LATIN SMALL LETTER O WITH STROKE */
+   U_LatinCapitalLetterU,                 /* 0xF9   0x00F9   LATIN SMALL LETTER U WITH GRAVE */
+   U_LatinCapitalLetterU,                 /* 0xFA   0x00FA   LATIN SMALL LETTER U WITH ACUTE */
+   U_LatinCapitalLetterU,                 /* 0xFB   0x00FB   LATIN SMALL LETTER U WITH CIRCUMFLEX */
+   U_LatinCapitalLetterU,                 /* 0xFC   0x00FC   LATIN SMALL LETTER U WITH DIAERESIS */
+   U_LatinCapitalLetterU,                 /* 0xFD   0x01B0   LATIN SMALL LETTER U WITH HORN */
+   U_DongSign,                            /* 0xFE   0x20AB   DONG SIGN */
+   U_LatinCapitalLetterY                  /* 0xFF   0x00FF   LATIN SMALL LETTER Y WITH DIAERESIS */
 };
 
 

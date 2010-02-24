@@ -88,6 +88,7 @@
 *    fd  Feb 24: - CODE_CP1254 (Turkish)
 *                - CODE_CP1255 (Hebrew)
 *                - CODE_CP1256 (Arabic)
+*                - CODE_CP1258 (Vietnamese)
 *
 ******************************************|************************************/
 
@@ -781,6 +782,10 @@ char       *cbuf)
       pumap = u_CODE_CP1257;
       break;
    
+   case CODE_CP1258:
+      pumap = u_CODE_CP1258;
+      break;
+   
    case CODE_HP8:
       pumap = u_CODE_HP8;
       break;
@@ -1320,6 +1325,13 @@ int          char_set)          /* iCharset */
       strcpy(sSource, "Windows codepage 1257");
       break;
       
+   case CODE_CP1258:
+      pUsrc = u_CODE_CP1258;
+      plig  = CODE_CP1258_lig;
+      psort = sort_CODE_CP1258;
+      strcpy(sSource, "Windows codepage 1258");
+      break;
+      
    case CODE_HP8:
       pUsrc = u_CODE_HP8;
       plig  = CODE_HP8_lig;
@@ -1426,6 +1438,11 @@ int          char_set)          /* iCharset */
    case CODE_CP1257:
       pUtrg = u_CODE_CP1257;
       strcpy(sTarget, "Windows codepage 1257");
+      break;
+      
+   case CODE_CP1258:
+      pUtrg = u_CODE_CP1258;
+      strcpy(sTarget, "Windows codepage 1258");
       break;
       
    case CODE_HP8:
@@ -1743,6 +1760,10 @@ int               type)           /* CHRTAB_... (CHR.H) */
       
    case CODE_CP1257:
       pUtrg = u_CODE_CP1257;
+      break;
+      
+   case CODE_CP1258:
+      pUtrg = u_CODE_CP1258;
       break;
       
    case CODE_HP8:
@@ -4189,6 +4210,10 @@ BOOLEAN           all)            /* */
       
    case CODE_CP1257:
       pUtrg = u_CODE_CP1257;
+      break;
+      
+   case CODE_CP1258:
+      pUtrg = u_CODE_CP1258;
       break;
       
    case CODE_HP8:

@@ -34,7 +34,6 @@
 *-------------------------------------------------------------------------------
 *  Things to do : - tabs2spaces(): check size of n[] (might be 4096 chars now!)
 *                 - tabs2spaces(): check new faster method of strcat()
-*                 - str_sort_tmp(): add more tables when available
 *
 *-------------------------------------------------------------------------------
 *  History:
@@ -63,6 +62,7 @@
 *    fd  Feb 24: - CODE_CP1254 (Turkish)
 *                - CODE_CP1255 (Hebrew)
 *                - CODE_CP1256 (Arabic)
+*                - CODE_CP1258 (Vietnamese)
 *
 ******************************************|************************************/
 
@@ -1845,6 +1845,11 @@ char  *zeile)  /* ^ string */
       psort = sort_CODE_CP1257;
       break;
    
+   case CODE_CP1258:
+      plig = CODE_CP1258_lig;
+      psort = sort_CODE_CP1258;
+      break;
+   
    case CODE_HP8:
       plig  = CODE_HP8_lig;
       psort = sort_CODE_HP8;
@@ -2016,6 +2021,12 @@ char       *s2)           /* ^ 2nd string for comparison */
       plig = CODE_CP1257_lig;
       psort = sort_CODE_CP1257;
       pumap = u_CODE_CP1257;
+      break;
+   
+   case CODE_CP1258:
+      plig = CODE_CP1258_lig;
+      psort = sort_CODE_CP1258;
+      pumap = u_CODE_CP1258;
       break;
    
    case CODE_HP8:

@@ -84,6 +84,7 @@
 *    fd  Feb 24: - CODE_CP1254 (Turkish)
 *                - CODE_CP1255 (Hebrew)
 *                - CODE_CP1256 (Arabic)
+*                - CODE_CP1258 (Vietnamese)
 *
 ******************************************|************************************/
 
@@ -264,6 +265,7 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
    {"arabic" ,    CODE_CP1256   },        /*  */
    {"cp1257",     CODE_CP1257   },        /*  */
    {"baltic",     CODE_CP1257   },        /*  */
+   {"cp1258",     CODE_CP1258   },        /*  */
    {"iso-8859-1", CODE_LATIN1   },        /*  */
    {"latin1",     CODE_LATIN1   },        /*  */
    {"iso-8859-2", CODE_LATIN2   },        /*  */
