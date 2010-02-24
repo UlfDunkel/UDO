@@ -3370,7 +3370,8 @@ GLOBAL void c_item(void)
          
          if (!bEnv1stItem[iEnvLevel])
          {
-            voutlnf("%s</td></tr>", sHtmlPropfontEnd);
+            voutlnf("%s</td></tr>\n", sHtmlPropfontEnd);
+            bEnv1stItem[iEnvLevel] = FALSE;
          }
          
          if (token[1][0] == '[')
@@ -3409,15 +3410,17 @@ GLOBAL void c_item(void)
             strinsert(sBig, sHtmlPropfontStart);
             strinsert(sBig, "<tr><td nowrap=\"nowrap\" valign=\"top\">");
             strcat(sBig, sHtmlPropfontEnd);
-            strcat(sBig, "</td><td valign=\"top\">");
+            strcat(sBig, "</td>\n<td valign=\"top\">");
             strcat(sBig, sHtmlPropfontStart);
 /*          strcat(sBig, "<p>");
 */
          }
          else
          {
-            sprintf(sBig, "<tr><td>&nbsp;</td><td>%s", sHtmlPropfontStart);
+            sprintf(sBig, "<tr><td>&nbsp;</td>\n<td>%s", sHtmlPropfontStart);
          }
+         
+         bEnv1stItem[iEnvLevel] = FALSE;
          
          /* Dafuer sorgen, dass in token_output() nicht noch */
          /* ein <P> vor <TR> gesetzt wird! */
@@ -3853,7 +3856,7 @@ int   listkind)  /* */
    case TOHAH:
    case TOHTM:
    case TOMHH:
-      voutlnf("%s</td></tr></table>", sHtmlPropfontEnd);
+      voutlnf("%s</td></tr>\n</table>\n", sHtmlPropfontEnd);
       html_ignore_p = FALSE;              /*r6pl6*/
       break;
       
