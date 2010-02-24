@@ -81,6 +81,7 @@
 *                - CODE_LATIN1
 *                - UDO_PL -> UDO_BUILD (no more patchlevels)
 *                - adjustments from Xcode's complaints for stricmp()
+*    fd  Feb 24: CODE_CP1254 (Turkish)
 *
 ******************************************|************************************/
 
@@ -253,6 +254,8 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
    {"win",        CODE_CP1252   },        /*  */
    {"cp1253",     CODE_CP1253   },        /*  */
    {"greek",      CODE_CP1253   },        /*  */
+   {"cp1254",     CODE_CP1254   },        /*  */
+   {"turkish",    CODE_CP1254   },        /*  */
    {"cp1257",     CODE_CP1257   },        /*  */
    {"baltic",     CODE_CP1257   },        /*  */
    {"iso-8859-1", CODE_LATIN1   },        /*  */

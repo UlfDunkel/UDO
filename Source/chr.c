@@ -85,6 +85,7 @@
 *                - CODE_LATIN1
 *                - bstr_to_utf8() adjusted, using ^string instead of local string
 *                - adjustments from Xcode's complaints for strupr()
+*    fd  Feb 24: CODE_CP1254 (Turkish)
 *
 ******************************************|************************************/
 
@@ -762,6 +763,10 @@ char       *cbuf)
       pumap = u_CODE_CP1253;
       break;
    
+   case CODE_CP1254:
+      pumap = u_CODE_CP1254;
+      break;
+   
    case CODE_CP1257:
       pumap = u_CODE_CP1257;
       break;
@@ -1277,6 +1282,13 @@ int          char_set)          /* iCharset */
       strcpy(sSource, "Windows codepage 1253");
       break;
       
+   case CODE_CP1254:
+      pUsrc = u_CODE_CP1254;
+      plig  = CODE_CP1254_lig;
+      psort = sort_CODE_CP1254;
+      strcpy(sSource, "Windows codepage 1254");
+      break;
+      
    case CODE_CP1257:
       pUsrc = u_CODE_CP1257;
       plig  = CODE_CP1257_lig;
@@ -1370,6 +1382,11 @@ int          char_set)          /* iCharset */
    case CODE_CP1253:
       pUtrg = u_CODE_CP1253;
       strcpy(sTarget, "Windows codepage 1253");
+      break;
+      
+   case CODE_CP1254:
+      pUtrg = u_CODE_CP1254;
+      strcpy(sTarget, "Windows codepage 1254");
       break;
       
    case CODE_CP1257:
@@ -1676,6 +1693,10 @@ int               type)           /* CHRTAB_... (CHR.H) */
       
    case CODE_CP1253:
       pUtrg = u_CODE_CP1253;
+      break;
+      
+   case CODE_CP1254:
+      pUtrg = u_CODE_CP1254;
       break;
       
    case CODE_CP1257:
@@ -4110,6 +4131,10 @@ BOOLEAN           all)            /* */
       
    case CODE_CP1253:
       pUtrg = u_CODE_CP1253;
+      break;
+      
+   case CODE_CP1254:
+      pUtrg = u_CODE_CP1254;
       break;
       
    case CODE_CP1257:

@@ -53,6 +53,7 @@
 *                - CODE_LATIN1
 *                - UDO_PL -> UDO_BUILD (no more patchlevels)
 *                - v7.00 RC1
+*    fd  Feb 24: CODE_CP1254 (Turkish)
 *
 ******************************************|************************************/
 
@@ -112,8 +113,9 @@
 #define CODE_CP1253   12                  /* Microsoft Windows codepage 1253 "Greek" */
 #define CODE_MAC_CE   13                  /* Apple Central Europe */
 #define CODE_LATIN1   14                  /* ISO Latin 2 (iso-8859-2) */
+#define CODE_CP1254   15                  /* Microsoft Windows codepage 1254 "Turkish" */
 
-#define CODE_TOTAL    15                  /* # of supported encodings */
+#define CODE_TOTAL    16                  /* # of supported encodings */
 
    /* --- Compiler- und systemabhaengige Dinge setzen --- */
 
