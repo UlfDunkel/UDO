@@ -42,6 +42,7 @@
 *    fd  Feb 05: - file partly reformatted, TAB-free now
 *                - replace_placeholders(): issue #12 fixed
 *    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 24: replace_placeholders() debugged
 *
 ******************************************|************************************/
 
@@ -911,6 +912,7 @@ char             *s)              /* ^ line */
    register int   i;              /* counter */
    int            replaced = -1;  /* */
    size_t         len;            /* length of entry */
+   char          *here;           /* ^ phold[i].entry in <s> */
    
    
    if (phold_counter >= 0)
@@ -926,9 +928,14 @@ char             *s)              /* ^ line */
          if (replace_once(s, phold[i].magic, phold[i].entry))
          {
             len = strlen(phold[i].entry); /* get length of entry */
+                                          /* find entry in string */
+            here = strstr(s,phold[i].entry);
             
+            if (here[len] == ' ')         /* check if there is really a space! */
+            {
                                           /* remove the no longer required space behind */
-            memmove(s + len, s + len + 1, strlen(s) - len);
+               memmove(here + len, here + len + 1, len);
+            }
             
             phold[i].magic[0] = EOS;      /* clear magic */
             replaced++;
