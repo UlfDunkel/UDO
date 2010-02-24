@@ -94,6 +94,7 @@
 *                - new: chr_sort_codepage()
 *                - new: chr_usort_codepage()
 *                - new: chr_ligatures()
+*                - unicode2char() debugged
 *
 ******************************************|************************************/
 
@@ -756,7 +757,7 @@ char       *cbuf)
    if (pumap == NULL)                     /* no codepage for Unicode!!! */
       return "";
    
-   for (i = 128; i < 256; i++)
+   for (i = 0; i < 256; i++)              /* get ALL chars */
    {
       if (pumap[i] == unicode)            /* found! */
       {
