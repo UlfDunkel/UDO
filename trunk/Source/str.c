@@ -63,6 +63,7 @@
 *                - CODE_CP1255 (Hebrew)
 *                - CODE_CP1256 (Arabic)
 *                - CODE_CP1258 (Vietnamese)
+*                - access to codepages generalized
 *
 ******************************************|************************************/
 
@@ -93,15 +94,6 @@ const char *id_str_c= "@(#) str.c       $DATE$";
 #include "udomem.h"
 #include "constant.h"                     /* LINELEN */
 #include "chr.h"                          /* utf8_to_bstr() */
-
-#include "u_dos.h"
-#include "u_hp.h"
-#include "u_iso.h"
-#include "u_mac.h"
-#include "u_mswin.h"
-#include "u_next.h"
-#include "u_tos.h"
-#include "u_utf.h"
 
 
 
@@ -1685,8 +1677,8 @@ char  *zeile)  /* ^ string */
    
    if (iEncodingTarget == CODE_UTF8)      /* Unicode first */
    {
-      plig   = CODE_UTF_lig;
-      pusort = sort_CODE_UTF;
+      plig   = chr_ligatures(iEncodingTarget);
+      pusort = chr_usort_codepage(iEncodingTarget);
 
       memset(sbuf,0,LINELEN);
       memset(cbuf,0,9);
@@ -1796,100 +1788,9 @@ char  *zeile)  /* ^ string */
       idx = utf8_to_uchar(zeile);         /* get codepoint for 1st char */
       return idx;                         /* */
    }
-   
 
-   switch (iEncodingTarget)               /* 1-byte encodings */
-   {
-   case CODE_437:
-      plig = CODE_437_lig;
-      psort = sort_CODE_437;
-      break;
-   
-   case CODE_850:
-      plig = CODE_850_lig;
-      psort = sort_CODE_850;
-      break;
-   
-   case CODE_CP1250:
-      plig = CODE_CP1250_lig;
-      psort = sort_CODE_CP1250;
-      break;
-   
-   case CODE_CP1251:
-      plig = CODE_CP1251_lig;
-      psort = sort_CODE_CP1251;
-      break;
-   
-   case CODE_CP1253:
-      plig = CODE_CP1253_lig;
-      psort = sort_CODE_CP1253;
-      break;
-   
-   case CODE_CP1254:
-      plig = CODE_CP1254_lig;
-      psort = sort_CODE_CP1254;
-      break;
-   
-   case CODE_CP1255:
-      plig = CODE_CP1255_lig;
-      psort = sort_CODE_CP1255;
-      break;
-   
-   case CODE_CP1256:
-      plig = CODE_CP1256_lig;
-      psort = sort_CODE_CP1256;
-      break;
-   
-   case CODE_CP1257:
-      plig = CODE_CP1257_lig;
-      psort = sort_CODE_CP1257;
-      break;
-   
-   case CODE_CP1258:
-      plig = CODE_CP1258_lig;
-      psort = sort_CODE_CP1258;
-      break;
-   
-   case CODE_HP8:
-      plig  = CODE_HP8_lig;
-      psort = sort_CODE_HP8;
-      break;
-   
-   case CODE_LATIN1:
-      plig  = CODE_LATIN1_lig;
-      psort = sort_CODE_LATIN1;
-      break;
-   
-   case CODE_LATIN2:
-      plig  = CODE_LATIN2_lig;
-      psort = sort_CODE_LATIN2;
-      break;
-   
-   case CODE_MAC:
-      plig  = CODE_MAC_lig;
-      psort = sort_CODE_MAC;
-      break;
-   
-   case CODE_MAC_CE:
-      plig  = CODE_MAC_CE_lig;
-      psort = sort_CODE_MAC_CE;
-      break;
-   
-   case CODE_NEXT:
-      plig  = CODE_NEXT_lig;
-      psort = sort_CODE_NEXT;
-      break;
-   
-   case CODE_TOS:
-      plig  = CODE_TOS_lig;
-      psort = sort_CODE_TOS;
-      break;
-   
-   case CODE_CP1252:
-   default:
-      plig  = CODE_CP1252_lig;
-      psort = sort_CODE_CP1252;
-   }
+   psort = chr_sort_codepage(iEncodingTarget);   
+   plig  = chr_ligatures(iEncodingTarget);
 
 
    /* --- resolve ligature characters with more than one character --- */
@@ -1953,7 +1854,6 @@ char       *s2)           /* ^ 2nd string for comparison */
    char     lgc[2] = "";  /* ligature char buffer */
    char     lig[3] = "";  /* ligature string buffer */
    UWORD  (*psort);       /* ^ to sort_CODE_xxx[] arrays */
-   UWORD  (*pumap);       /* ^ to u_CODE_xxx[] arrays */
    UWORD  (*plig)[3];     /* ^ to CODE_xxx_lig[][] arrays */
    char    *psbuf;        /* ^ char begin */
    size_t   len1,         /* length of original 1st string */
@@ -1967,119 +1867,9 @@ char       *s2)           /* ^ 2nd string for comparison */
       return 1;                           /* so s1 is greater */
 
 
-   switch (iEncodingTarget)               /* use the right tables! ;-) */
-   {
-   case CODE_437:
-      plig = CODE_437_lig;
-      psort = sort_CODE_437;
-      pumap = u_CODE_437;
-      break;
-   
-   case CODE_850:
-      plig = CODE_850_lig;
-      psort = sort_CODE_850;
-      pumap = u_CODE_850;
-      break;
-   
-   case CODE_CP1250:
-      plig = CODE_CP1250_lig;
-      psort = sort_CODE_CP1250;
-      pumap = u_CODE_CP1250;
-      break;
-   
-   case CODE_CP1251:
-      plig = CODE_CP1251_lig;
-      psort = sort_CODE_CP1251;
-      pumap = u_CODE_CP1251;
-      break;
-   
-   case CODE_CP1253:
-      plig = CODE_CP1253_lig;
-      psort = sort_CODE_CP1253;
-      pumap = u_CODE_CP1253;
-      break;
-   
-   case CODE_CP1254:
-      plig = CODE_CP1254_lig;
-      psort = sort_CODE_CP1254;
-      pumap = u_CODE_CP1254;
-      break;
-   
-   case CODE_CP1255:
-      plig = CODE_CP1255_lig;
-      psort = sort_CODE_CP1255;
-      pumap = u_CODE_CP1255;
-      break;
-   
-   case CODE_CP1256:
-      plig = CODE_CP1256_lig;
-      psort = sort_CODE_CP1256;
-      pumap = u_CODE_CP1256;
-      break;
-   
-   case CODE_CP1257:
-      plig = CODE_CP1257_lig;
-      psort = sort_CODE_CP1257;
-      pumap = u_CODE_CP1257;
-      break;
-   
-   case CODE_CP1258:
-      plig = CODE_CP1258_lig;
-      psort = sort_CODE_CP1258;
-      pumap = u_CODE_CP1258;
-      break;
-   
-   case CODE_HP8:
-      plig  = CODE_HP8_lig;
-      psort = sort_CODE_HP8;
-      pumap = u_CODE_HP8;
-      break;
-   
-   case CODE_LATIN1:
-      plig  = CODE_LATIN1_lig;
-      psort = sort_CODE_LATIN1;
-      pumap = u_CODE_LATIN1;
-      break;
-   
-   case CODE_LATIN2:
-      plig  = CODE_LATIN2_lig;
-      psort = sort_CODE_LATIN2;
-      pumap = u_CODE_LATIN2;
-      break;
-   
-   case CODE_MAC:
-      plig  = CODE_MAC_lig;
-      psort = sort_CODE_MAC;
-      pumap = u_CODE_MAC;
-      break;
-   
-   case CODE_MAC_CE:
-      plig  = CODE_MAC_CE_lig;
-      psort = sort_CODE_MAC_CE;
-      pumap = u_CODE_MAC_CE;
-      break;
-   
-   case CODE_NEXT:
-      plig  = CODE_NEXT_lig;
-      psort = sort_CODE_NEXT;
-      pumap = u_CODE_NEXT;
-      break;
-   
-   case CODE_TOS:
-      plig  = CODE_TOS_lig;
-      psort = sort_CODE_TOS;
-      pumap = u_CODE_TOS;
-      break;
-   
-   case CODE_CP1252:
-   default:
-      plig  = CODE_CP1252_lig;
-      psort = sort_CODE_CP1252;
-      pumap = u_CODE_CP1252;
-   }
-   
-   UNUSED(pumap);
-   
+   psort = chr_sort_codepage(iEncodingTarget);
+   plig  = chr_ligatures(iEncodingTarget);
+
    len1 = strlen(s1);
    len2 = strlen(s2);
    
@@ -2180,7 +1970,7 @@ char       *s2)             /* ^ 2nd string for comparison */
    int      len;            /* indicator for byte length of UTF char */
    size_t   c1,             /* Unicode char value (up to 4 bytes!) */
             c2;             /* Unicode char value (up to 4 bytes!) */
-   UWORD  (*psort)[2];      /* ^ to sort_CODE_xxx[] arrays */
+   UWORD  (*pusort)[2];     /* ^ to sort_CODE_xxx[] arrays */
    UWORD  (*plig)[3];       /* ^ to CODE_xxx_lig[][] arrays */
    size_t   len1,           /* length of original 1st string */
             len2;           /* length of original 2nd string */
@@ -2198,16 +1988,15 @@ char       *s2)             /* ^ 2nd string for comparison */
       return 1;                           /* so s1 is greater */
 
 
-   switch (iEncodingTarget)               /* use the right tables! ;-) */
-   {
-   case CODE_UTF8:
-      plig  = CODE_UTF_lig;
-      psort = sort_CODE_UTF;
-   }
-   
+   if (iEncodingTarget != CODE_UTF8)      /* should never happen! */
+      return 0;
+
    
    if (iEncodingTarget == CODE_UTF8)      /* convert UTF-8 to 1-byte format first */
    {
+      plig   = chr_ligatures(iEncodingTarget);
+      pusort = chr_usort_codepage(iEncodingTarget);
+      
       for (k = 0; k < 2; k++)
       {
          if (k == 0)
@@ -2288,12 +2077,12 @@ char       *s2)             /* ^ 2nd string for comparison */
                   i = 0;
             
                                           /* is it a Unicode which we should replace? */
-                  while (psort[i][0] != 0x00)
+                  while (pusort[i][0] != 0x00)
                   {
                                           /* Unicode found */
-                     if (idx == psort[i][0])
+                     if (idx == pusort[i][0])
                      {
-                        cbuf[0] = psort[i][1];
+                        cbuf[0] = pusort[i][1];
                         cbuf[1] = EOS;
                         strcat(sbuf,cbuf);
                         found = TRUE;

@@ -4,8 +4,8 @@
 *  Module name  : chr.c
 *  Symbol prefix: chr
 *
-*  Description  : This module contains routines which convert strings between ISO and
-*                 the system font. There are also functions which replace characters.
+*  Description  : This module contains routines which convert strings between all
+*                 supported encodings. There are also functions which replace characters.
 *
 *  Copyright    : 1995-2001 Dirk Hagedorn
 *  Open Source  : since 2001
@@ -89,6 +89,11 @@
 *                - CODE_CP1255 (Hebrew)
 *                - CODE_CP1256 (Arabic)
 *                - CODE_CP1258 (Vietnamese)
+*                - new: chr_codepage()
+*                - new: chr_codepage_name()
+*                - new: chr_sort_codepage()
+*                - new: chr_usort_codepage()
+*                - new: chr_ligatures()
 *
 ******************************************|************************************/
 
@@ -141,6 +146,8 @@ const char *id_chr_c= "@(#) chr.c       $DATE$";
 #include "u_mswin.h"
 #include "u_next.h"
 #include "u_tos.h"
+#include "u_utf.h"
+
 #include "u_udo.h"                        /* u_CODE_UDO[] */
 
 
@@ -744,80 +751,10 @@ char       *cbuf)
       return cbuf;
    }
 
-   switch (iEncodingTarget)               /* use the right tables! ;-) */
-   {
-   case CODE_437:
-      pumap = u_CODE_437;
-      break;
+   pumap = chr_codepage(iEncodingTarget); /* get ^ to codepage */
    
-   case CODE_850:
-      pumap = u_CODE_850;
-      break;
-   
-   case CODE_CP1250:
-      pumap = u_CODE_CP1250;
-      break;
-   
-   case CODE_CP1251:
-      pumap = u_CODE_CP1251;
-      break;
-   
-   case CODE_CP1253:
-      pumap = u_CODE_CP1253;
-      break;
-   
-   case CODE_CP1254:
-      pumap = u_CODE_CP1254;
-      break;
-   
-   case CODE_CP1255:
-      pumap = u_CODE_CP1255;
-      break;
-   
-   case CODE_CP1256:
-      pumap = u_CODE_CP1256;
-      break;
-   
-   case CODE_CP1257:
-      pumap = u_CODE_CP1257;
-      break;
-   
-   case CODE_CP1258:
-      pumap = u_CODE_CP1258;
-      break;
-   
-   case CODE_HP8:
-      pumap = u_CODE_HP8;
-      break;
-   
-   case CODE_LATIN1:
-      pumap = u_CODE_LATIN1;
-      break;
-   
-   case CODE_LATIN2:
-      pumap = u_CODE_LATIN2;
-      break;
-   
-   case CODE_MAC:
-      pumap = u_CODE_MAC;
-      break;
-   
-   case CODE_MAC_CE:
-      pumap = u_CODE_MAC_CE;
-      break;
-   
-   case CODE_NEXT:
-      pumap = u_CODE_NEXT;
-      break;
-   
-   case CODE_TOS:
-      pumap = u_CODE_TOS;
-      break;
-   
-   case CODE_CP1252:
-   default:
-      pumap = u_CODE_CP1252;
-   }
+   if (pumap == NULL)                     /* no codepage for Unicode!!! */
+      return "";
    
    for (i = 128; i < 256; i++)
    {
@@ -1248,8 +1185,6 @@ int          char_set)          /* iCharset */
    char      sSource[42] = "";  /* source encoding name, human-readable */
    char      sTarget[42] = "";  /* target encoding name, human-readable */
    UWORD     i;                 /* counter */
-   UWORD   (*psort);            /* ^ to sort_CODE_xxx[] arrays */
-   UWORD   (*plig)[3];          /* ^ t CODE_xxx_lig[][] arrays (unused here so far!) */
    BOOLEAN   found = FALSE;     /* TRUE: char found */
    
 
@@ -1259,240 +1194,13 @@ int          char_set)          /* iCharset */
    if (iEncodingTarget < 0)
       iEncodingTarget = char_set;
    
+
+   pUsrc = chr_codepage(iEncodingSource);
+   pUtrg = chr_codepage(iEncodingTarget);
    
-   switch (iEncodingSource)
-   {
-   case CODE_437:
-      pUsrc = u_CODE_437;
-      plig  = CODE_437_lig;
-      psort = sort_CODE_437;
-      strcpy(sSource, "DOS (cp437)");
-      break;
+   strcpy(sSource, chr_codepage_name(iEncodingSource));
+   strcpy(sTarget, chr_codepage_name(iEncodingTarget));
       
-   case CODE_850:
-      pUsrc = u_CODE_850;
-      plig  = CODE_850_lig;
-      psort = sort_CODE_850;
-      strcpy(sSource, "DOS (cp850)");
-      break;
-   
-   case CODE_CP1250:
-      pUsrc = u_CODE_CP1250;
-      plig  = CODE_CP1250_lig;
-      psort = sort_CODE_CP1250;
-      strcpy(sSource, "Windows codepage 1250");
-      break;
-      
-   case CODE_CP1251:
-      pUsrc = u_CODE_CP1251;
-      plig  = CODE_CP1251_lig;
-      psort = sort_CODE_CP1251;
-      strcpy(sSource, "Windows codepage 1251");
-      break;
-      
-   case CODE_CP1253:
-      pUsrc = u_CODE_CP1253;
-      plig  = CODE_CP1253_lig;
-      psort = sort_CODE_CP1253;
-      strcpy(sSource, "Windows codepage 1253");
-      break;
-      
-   case CODE_CP1254:
-      pUsrc = u_CODE_CP1254;
-      plig  = CODE_CP1254_lig;
-      psort = sort_CODE_CP1254;
-      strcpy(sSource, "Windows codepage 1254");
-      break;
-      
-   case CODE_CP1255:
-      pUsrc = u_CODE_CP1255;
-      plig  = CODE_CP1255_lig;
-      psort = sort_CODE_CP1255;
-      strcpy(sSource, "Windows codepage 1255");
-      break;
-      
-   case CODE_CP1256:
-      pUsrc = u_CODE_CP1256;
-      plig  = CODE_CP1256_lig;
-      psort = sort_CODE_CP1256;
-      strcpy(sSource, "Windows codepage 1256");
-      break;
-      
-   case CODE_CP1257:
-      pUsrc = u_CODE_CP1257;
-      plig  = CODE_CP1257_lig;
-      psort = sort_CODE_CP1257;
-      strcpy(sSource, "Windows codepage 1257");
-      break;
-      
-   case CODE_CP1258:
-      pUsrc = u_CODE_CP1258;
-      plig  = CODE_CP1258_lig;
-      psort = sort_CODE_CP1258;
-      strcpy(sSource, "Windows codepage 1258");
-      break;
-      
-   case CODE_HP8:
-      pUsrc = u_CODE_HP8;
-      plig  = CODE_HP8_lig;
-      psort = sort_CODE_HP8;
-      strcpy(sSource, "HP-Roman8");
-      break;
-   
-   case CODE_LATIN1:
-      pUsrc = u_CODE_LATIN1;
-      plig  = CODE_LATIN1_lig;
-      psort = sort_CODE_LATIN1;
-      strcpy(sSource, "ISO Latin 1");
-      break;
-   
-   case CODE_LATIN2:
-      pUsrc = u_CODE_LATIN2;
-      plig  = CODE_LATIN2_lig;
-      psort = sort_CODE_LATIN2;
-      strcpy(sSource, "ISO Latin 2");
-      break;
-   
-   case CODE_MAC:
-      pUsrc = u_CODE_MAC;
-      plig  = CODE_MAC_lig;
-      psort = sort_CODE_MAC;
-      strcpy(sSource, "Mac");
-      break;
-   
-   case CODE_MAC_CE:
-      pUsrc = u_CODE_MAC_CE;
-      plig  = CODE_MAC_CE_lig;
-      psort = sort_CODE_MAC_CE;
-      strcpy(sSource, "Mac CE");
-      break;
-   
-   case CODE_NEXT:
-      pUsrc = u_CODE_NEXT;
-      plig  = CODE_NEXT_lig;
-      psort = sort_CODE_NEXT;
-      strcpy(sSource, "NeXTSTEP");
-      break;
-   
-   case CODE_TOS:
-      pUsrc = u_CODE_TOS;
-      plig  = CODE_TOS_lig;
-      psort = sort_CODE_TOS;
-      strcpy(sSource, "TOS");
-      break;
-   
-   case CODE_UTF8:
-      strcpy(sSource, "UTF-8");
-      break;
-   
-   case CODE_CP1252:
-   default:
-      pUsrc = u_CODE_CP1252;
-      plig  = CODE_CP1252_lig;
-      psort = sort_CODE_CP1252;
-      strcpy(sSource, "Windows codepage 1252 (Win Latin 1)");
-   }
-   
-   switch (iEncodingTarget)
-   {
-   case CODE_437:
-      pUtrg = u_CODE_437;
-      strcpy(sTarget, "DOS (cp437)");
-      break;
-      
-   case CODE_850:
-      pUtrg = u_CODE_850;
-      strcpy(sTarget, "DOS (cp850)");
-      break;
-      
-   case CODE_CP1250:
-      pUtrg = u_CODE_CP1250;
-      strcpy(sTarget, "Windows codepage 1250");
-      break;
-      
-   case CODE_CP1251:
-      pUtrg = u_CODE_CP1251;
-      strcpy(sTarget, "Windows codepage 1251");
-      break;
-      
-   case CODE_CP1253:
-      pUtrg = u_CODE_CP1253;
-      strcpy(sTarget, "Windows codepage 1253");
-      break;
-      
-   case CODE_CP1254:
-      pUtrg = u_CODE_CP1254;
-      strcpy(sTarget, "Windows codepage 1254");
-      break;
-      
-   case CODE_CP1255:
-      pUtrg = u_CODE_CP1255;
-      strcpy(sTarget, "Windows codepage 1255");
-      break;
-      
-   case CODE_CP1256:
-      pUtrg = u_CODE_CP1256;
-      strcpy(sTarget, "Windows codepage 1256");
-      break;
-      
-   case CODE_CP1257:
-      pUtrg = u_CODE_CP1257;
-      strcpy(sTarget, "Windows codepage 1257");
-      break;
-      
-   case CODE_CP1258:
-      pUtrg = u_CODE_CP1258;
-      strcpy(sTarget, "Windows codepage 1258");
-      break;
-      
-   case CODE_HP8:
-      pUtrg = u_CODE_HP8;
-      strcpy(sTarget, "HP-Roman8");
-      break;
-   
-   case CODE_LATIN1:
-      pUtrg = u_CODE_LATIN1;
-      strcpy(sTarget, "ISO Latin 1");
-      break;
-   
-   case CODE_LATIN2:
-      pUtrg = u_CODE_LATIN2;
-      strcpy(sTarget, "ISO Latin 2");
-      break;
-   
-   case CODE_MAC:
-      pUtrg = u_CODE_MAC;
-      strcpy(sTarget, "Mac");
-      break;
-   
-   case CODE_MAC_CE:
-      pUtrg = u_CODE_MAC;
-      strcpy(sTarget, "Mac CE");
-      break;
-   
-   case CODE_NEXT:
-      pUtrg = u_CODE_NEXT;
-      strcpy(sTarget, "NeXTSTEP");
-      break;
-   
-   case CODE_TOS:
-      pUtrg = u_CODE_TOS;
-      strcpy(sTarget, "TOS");
-      break;
-   
-   case CODE_UTF8:
-      strcpy(sTarget, "UTF-8");
-      break;
-   
-   case CODE_CP1252:
-   default:
-      pUtrg = u_CODE_CP1252;
-      strcpy(sTarget, "Windows codepage 1252 (Win Latin 1)");
-   }
-   
-   UNUSED(plig);
-   UNUSED(psort);
-   
    
    /* --- force format requirements --- */
    
@@ -1501,13 +1209,13 @@ int          char_set)          /* iCharset */
    case TOSTG:                            /* ST-Guide */
    case TOPCH:                            /* Pure C Help */
       iEncodingTarget = CODE_TOS;
-      strcpy(sTarget, "TOS");
+      strcpy(sTarget, chr_codepage_name(iEncodingTarget));
       break;
    
    case TOAMG:                            /* AmigaGuide */
    case TOWIN:                            /* Windows Help */
       iEncodingTarget = CODE_CP1252;
-      strcpy(sTarget, "Windows codepage 1252 (Win Latin 1)");
+      strcpy(sTarget, chr_codepage_name(iEncodingTarget));
    }
       
                                           /* nothing to do */   
@@ -1723,81 +1431,8 @@ int               type)           /* CHRTAB_... (CHR.H) */
 
    if (s[0] == EOS)                       /* empty string */
       return;
-   
-   switch (iEncodingTarget)               /* get the right encoding table! */
-   {
-   case CODE_437:
-      pUtrg = u_CODE_437;
-      break;
-      
-   case CODE_850:
-      pUtrg = u_CODE_850;
-      break;
-      
-   case CODE_CP1250:
-      pUtrg = u_CODE_CP1250;
-      break;
-      
-   case CODE_CP1251:
-      pUtrg = u_CODE_CP1251;
-      break;
-      
-   case CODE_CP1253:
-      pUtrg = u_CODE_CP1253;
-      break;
-      
-   case CODE_CP1254:
-      pUtrg = u_CODE_CP1254;
-      break;
-      
-   case CODE_CP1255:
-      pUtrg = u_CODE_CP1255;
-      break;
-      
-   case CODE_CP1256:
-      pUtrg = u_CODE_CP1256;
-      break;
-      
-   case CODE_CP1257:
-      pUtrg = u_CODE_CP1257;
-      break;
-      
-   case CODE_CP1258:
-      pUtrg = u_CODE_CP1258;
-      break;
-      
-   case CODE_HP8:
-      pUtrg = u_CODE_HP8;
-      break;
-   
-   case CODE_LATIN1:
-      pUtrg = u_CODE_LATIN1;
-      break;
-   
-   case CODE_LATIN2:
-      pUtrg = u_CODE_LATIN2;
-      break;
-   
-   case CODE_MAC:
-      pUtrg = u_CODE_MAC;
-      break;
-   
-   case CODE_MAC_CE:
-      pUtrg = u_CODE_MAC_CE;
-      break;
-   
-   case CODE_NEXT:
-      pUtrg = u_CODE_NEXT;
-      break;
-   
-   case CODE_TOS:
-      pUtrg = u_CODE_TOS;
-      break;
-   
-   case CODE_CP1252:
-   default:
-      pUtrg = u_CODE_CP1252;
-   }
+
+   pUtrg = chr_codepage(iEncodingTarget); /* get the right encoding table! */
    
    memset(sbuf,0,LINELEN);
    memset(cbuf,0,2);
@@ -4174,81 +3809,7 @@ BOOLEAN           all)            /* */
    if (s[0] == EOS)                       /* empty string */
       return;
 
-   switch (iEncodingTarget)               /* get the right encoding table! */
-   {
-   case CODE_437:
-      pUtrg = u_CODE_437;
-      break;
-      
-   case CODE_850:
-      pUtrg = u_CODE_850;
-      break;
-      
-   case CODE_CP1250:
-      pUtrg = u_CODE_CP1250;
-      break;
-      
-   case CODE_CP1251:
-      pUtrg = u_CODE_CP1251;
-      break;
-      
-   case CODE_CP1253:
-      pUtrg = u_CODE_CP1253;
-      break;
-      
-   case CODE_CP1254:
-      pUtrg = u_CODE_CP1254;
-      break;
-      
-   case CODE_CP1255:
-      pUtrg = u_CODE_CP1255;
-      break;
-      
-   case CODE_CP1256:
-      pUtrg = u_CODE_CP1256;
-      break;
-      
-   case CODE_CP1257:
-      pUtrg = u_CODE_CP1257;
-      break;
-      
-   case CODE_CP1258:
-      pUtrg = u_CODE_CP1258;
-      break;
-      
-   case CODE_HP8:
-      pUtrg = u_CODE_HP8;
-      break;
-   
-   case CODE_LATIN1:
-      pUtrg = u_CODE_LATIN1;
-      break;
-   
-   case CODE_LATIN2:
-      pUtrg = u_CODE_LATIN2;
-      break;
-   
-   case CODE_MAC:
-      pUtrg = u_CODE_MAC;
-      break;
-   
-   case CODE_MAC_CE:
-      pUtrg = u_CODE_MAC_CE;
-      break;
-   
-   case CODE_NEXT:
-      pUtrg = u_CODE_NEXT;
-      break;
-   
-   case CODE_TOS:
-      pUtrg = u_CODE_TOS;
-      break;
-   
-   case CODE_CP1252:
-   default:
-      pUtrg = u_CODE_CP1252;
-   }
-   
+   pUtrg = chr_codepage(iEncodingTarget); /* get the right encoding table! */
 
    if (no_umlaute)
       recode_chrtab(s,CHRTAB_ASCII);
@@ -5015,6 +4576,367 @@ GLOBAL void init_module_chars(void)
 {
    last_aqc_verb      = FALSE;            /* */
    texinfo_np_counter = 0;                /* */
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  chr_codepage():
+*     get ^ to desired codepage
+*
+*  Notes:
+*     UTF-8 has no codepage and will return NULL
+*
+*  Return:
+*     ^ codepage
+*
+******************************************|************************************/
+
+GLOBAL UWORD *chr_codepage(
+
+int   encoding)  /* # of encoding */
+{
+   switch (encoding)
+   {
+   case CODE_437:
+      return u_CODE_437;
+   
+   case CODE_850:
+      return u_CODE_850;
+   
+   case CODE_CP1250:
+      return u_CODE_CP1250;
+   
+   case CODE_CP1251:
+      return u_CODE_CP1251;
+   
+   case CODE_CP1253:
+      return u_CODE_CP1253;
+
+   case CODE_CP1254:
+      return u_CODE_CP1254;
+   
+   case CODE_CP1255:
+      return u_CODE_CP1255;
+   
+   case CODE_CP1256:
+      return u_CODE_CP1256;
+   
+   case CODE_CP1257:
+      return u_CODE_CP1257;
+   
+   case CODE_CP1258:
+      return u_CODE_CP1258;
+   
+   case CODE_HP8:
+      return u_CODE_HP8;
+   
+   case CODE_LATIN1:
+      return u_CODE_LATIN1;
+   
+   case CODE_LATIN2:
+      return u_CODE_LATIN2;
+   
+   case CODE_MAC:
+      return u_CODE_MAC;
+   
+   case CODE_MAC_CE:
+      return u_CODE_MAC_CE;
+   
+   case CODE_NEXT:
+      return u_CODE_NEXT;
+   
+   case CODE_TOS:
+      return u_CODE_TOS;
+
+   case CODE_UTF8:
+      return NULL;                        /* no codepage! */
+   
+   case CODE_CP1252:
+   default:
+      return u_CODE_CP1252;
+   }
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  chr_ligatures():
+*     get ^ to desired table of ligatures
+*
+*  Return:
+*     ^ table of ligatures
+*
+******************************************|************************************/
+
+GLOBAL VOID *chr_ligatures(
+
+int   encoding)  /* # of encoding */
+{
+   switch (encoding)
+   {
+   case CODE_437:
+      return CODE_437_lig;
+      
+   case CODE_850:
+      return CODE_850_lig;
+   
+   case CODE_CP1250:
+      return CODE_CP1250_lig;
+      
+   case CODE_CP1251:
+      return CODE_CP1251_lig;
+      
+   case CODE_CP1253:
+      return CODE_CP1253_lig;
+      
+   case CODE_CP1254:
+      return CODE_CP1254_lig;
+      
+   case CODE_CP1255:
+      return CODE_CP1255_lig;
+      
+   case CODE_CP1256:
+      return CODE_CP1256_lig;
+      
+   case CODE_CP1257:
+      return CODE_CP1257_lig;
+      
+   case CODE_CP1258:
+      return CODE_CP1258_lig;
+      
+   case CODE_HP8:
+      return CODE_HP8_lig;
+   
+   case CODE_LATIN1:
+      return CODE_LATIN1_lig;
+   
+   case CODE_LATIN2:
+      return CODE_LATIN2_lig;
+   
+   case CODE_MAC:
+      return CODE_MAC_lig;
+   
+   case CODE_MAC_CE:
+      return CODE_MAC_CE_lig;
+   
+   case CODE_NEXT:
+      return CODE_NEXT_lig;
+   
+   case CODE_TOS:
+      return CODE_TOS_lig;
+   
+   case CODE_UTF8:
+      return CODE_UTF_lig;
+   
+   case CODE_CP1252:
+   default:
+      return CODE_CP1252_lig;
+   }
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  chr_sort_codepage():
+*     get ^ to desired codepage for sorting purposes
+*
+*  Notes:
+*     UTF-8 has a two-dimensional sort array, which will be handled directly
+*     in chr_usort_codepage().
+*
+*  Return:
+*     ^ codepage
+*
+******************************************|************************************/
+
+GLOBAL UWORD *chr_sort_codepage(
+
+int   encoding)  /* # of encoding */
+{
+   switch (encoding)
+   {
+   case CODE_437:
+      return sort_CODE_437;
+   
+   case CODE_850:
+      return sort_CODE_850;
+   
+   case CODE_CP1250:
+      return sort_CODE_CP1250;
+   
+   case CODE_CP1251:
+      return sort_CODE_CP1251;
+   
+   case CODE_CP1253:
+      return sort_CODE_CP1253;
+
+   case CODE_CP1254:
+      return sort_CODE_CP1254;
+   
+   case CODE_CP1255:
+      return sort_CODE_CP1255;
+   
+   case CODE_CP1256:
+      return sort_CODE_CP1256;
+   
+   case CODE_CP1257:
+      return sort_CODE_CP1257;
+   
+   case CODE_CP1258:
+      return sort_CODE_CP1258;
+   
+   case CODE_HP8:
+      return sort_CODE_HP8;
+   
+   case CODE_LATIN1:
+      return sort_CODE_LATIN1;
+   
+   case CODE_LATIN2:
+      return sort_CODE_LATIN2;
+   
+   case CODE_MAC:
+      return sort_CODE_MAC;
+   
+   case CODE_MAC_CE:
+      return sort_CODE_MAC_CE;
+   
+   case CODE_NEXT:
+      return sort_CODE_NEXT;
+   
+   case CODE_TOS:
+      return sort_CODE_TOS;
+
+   case CODE_UTF8:
+      return NULL;
+   
+   case CODE_CP1252:
+   default:
+      return sort_CODE_CP1252;
+   }
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  chr_usort_codepage():
+*     get ^ to desired Unicode sorting table
+*
+*  Return:
+*     ^ codepage
+*
+******************************************|************************************/
+
+GLOBAL VOID *chr_usort_codepage(
+
+int   encoding)  /* # of encoding */
+{
+   switch (encoding)
+   {
+   case CODE_UTF8:
+      return sort_CODE_UTF;
+   
+   default:
+      return NULL;
+   }
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  chr_codepage_name():
+*     get human-readable name of desired codepage
+*
+*  Notes:
+*     String length must not exceed 40 chars!
+*
+*  Return:
+*     codepage name 
+*
+******************************************|************************************/
+
+GLOBAL char *chr_codepage_name(
+
+int   encoding)  /* # of encoding */
+{
+   /* Length: 1234567890123456789012345678901234567890 */
+   
+   switch (encoding)
+   {
+   case CODE_437:
+      return "DOS (cp437)";
+      
+   case CODE_850:
+      return "DOS (cp850)";
+      
+   case CODE_CP1250:
+      return "Windows codepage 1250 (Central Europe)";
+      
+   case CODE_CP1251:
+      return "Windows codepage 1251 (Russian)";
+      
+   case CODE_CP1253:
+      return "Windows codepage 1253 (Greek)";
+      
+   case CODE_CP1254:
+      return "Windows codepage 1254 (Turkish)";
+      
+   case CODE_CP1255:
+      return "Windows codepage 1255 (Hebrew)";
+      
+   case CODE_CP1256:
+      return "Windows codepage 1256 (Arabic)";
+      
+   case CODE_CP1257:
+      return "Windows codepage 1257 (Baltic)";
+      
+   case CODE_CP1258:
+      return "Windows codepage 1258 (Vietnamese)";
+      
+   case CODE_HP8:
+      return "HP-Roman8";
+   
+   case CODE_LATIN1:
+      return "ISO 8859-1 (Latin 1)";
+   
+   case CODE_LATIN2:
+      return "ISO 8859-2 (Latin 2)";
+   
+   case CODE_MAC:
+      return "Mac";
+   
+   case CODE_MAC_CE:
+      return "Mac CE";
+   
+   case CODE_NEXT:
+      return "NeXTSTEP";
+   
+   case CODE_TOS:
+      return "Atari TOS";
+   
+   case CODE_UTF8:
+      return "UTF-8";
+   
+   case CODE_CP1252:
+      return "Windows codepage 1252 (Western)";
+   }
+   
+   return "unknown codepage!!!";
 }
 
 
