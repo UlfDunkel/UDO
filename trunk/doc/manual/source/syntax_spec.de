@@ -24,6 +24,9 @@
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 12: macro renamed: CODE -> CHARSET
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Feb 25: - chapter 'Converting 8-bit characters' partly rewritten
+#               - universal charset table enhanced
 #
 ################################################################################
 
@@ -186,7 +189,7 @@ Zeichensätzen erstellt wurden. Und um es richtig komfortabel zu machen,
 können Quelltexte sogar aus einem Mischmasch benutzter
 Zeichensätze bestehen.
 
-Sie müssen UDO nur mittels (!KW [code]) (!C)[(!CHARSET)](!c) mitteilen, mit welchem
+Sie müssen UDO nur mittels (!KW [code]) (!C)(!CHARSET)(!c) mitteilen, mit welchem
 Zeichensatz die folgenden Zeilen erstellt wurden.
 
 Hier eine Übersicht, welches Kürzel für den Zeichensatz benutzt werden kann:
@@ -213,38 +216,17 @@ Hier eine Übersicht, welches Kürzel für den Zeichensatz benutzt werden kann:
 
 !include charsets.ui
 
-!smallskip
-
 !index Anpassung !! Sonderzeichen
 !index Grafikzeichen
 !index Sonderzeichen !! Anpassung
-
-Die Anpassung der Sonderzeichen hat jedoch ihre Grenzen. So enthalten
-alle Zeichensätze ein paar Zeichen, die in anderen Zeichensätzen fehlen.
-So ist die Benutzung der Grafikzeichen des DOS-Zeichensatzes oder der
-hebräischen Zeichen des Atari-Zeichensatzes problematisch, da diese zu
-systemspezifisch sind und in anderen Formaten nicht nachgebildet werden
-können. Auch auf die Verwendung mathematischer Zeichen sollte möglichst
-verzichtet werden, da diese zumeist in anderen Zeichensätzen fehlen.
-
 !index Systemfremde Zeichensätze
 !index Zeichensatz !! systemfremde
-Werden systemfremde Zeichensätze verarbeitet, sind die Einschränkungen
-noch etwas größer, da UDO intern zunächst Texte in den
-ISO-Latin-1-Zeichensatz umwandelt, der als größter gemeinsamer Nenner
-angesehen werden kann. Erst dann wird von ISO-Latin-1 in den jeweiligen
-Systemzeichensatz umgewandelt. Auf diesem Wege können im ungünstigen
-Fall manche Zeichen nicht umgewandelt werden.
 
-!index Fehlermeldung
-UDO wird in einem solchen Fall eine Fehlermeldung ausgeben. Sie
-sollten dann auf die Verwendung dieser Zeichen verzichten.
+Wenn Sie sog. 1-Byte-Codepages (alle von UDO unterstützten Codepages mit Ausnahme von Unicode) verwenden und eine andere Codepage für die UDO-Dokumente als für die Ausgabe-Dokumente nutzen, müssen Sie ggf. beachten, dass alle Codepages unterschiedlich belegt sind. Eine Codepage ist eine Sammlung von 256 Zeichen aus dem Gesamtvorrat aller Zeichen, die mittlerweile unter dem Unicode-Standard definiert sind.
 
-(!HINT)
+Wenn Sie z.B. Ihr UDO-Dokument im DOS-Zeichensatz erstellt haben und darin DOS-Grafikzeichen verwenden, das Zielformat aber z.B. Apple MacRoman ist, können die DOS-Grafikzeichen nicht abgebildet werden. Wenn Sie die hebräischen Zeichen des Atari-TOS-Zeichensatzes benutzt haben, werden Sie in den meisten anderen Codepages Pech mit der Abbildung dieser Zeichen haben.
 
-Es kann durchaus sein, dass das eine oder andere Zeichen fehlt oder Zeichen falsch umgesetzt werden.
-Sollten Sie auf solche Zeichen stoßen, (!link [melden Sie uns dies bitte.] [Kontaktadresse])
-Vielen Dank!
+In diesen Fällen empfehlen wir, als Zielformat UTF-8 zu verwenden, sofern das für das Zielformat möglich ist. Denn intern werden sämtliche Codepages im Unicode-Format geführt, so dass z.B. ein hebräisches Alef aus dem TOS-Zeichensatz auch in UTF-8 oder Windows-Codepage 1255 richtig wiedergegeben wird.
 
 !end_node # Umwandlung von 8-bit-Zeichen
 
@@ -254,21 +236,12 @@ Vielen Dank!
 !html_name  spec_universal_charset
 
 !index Zeichensatz !! universeller
-Mit den im vorherigen Abschnitt beschriebenen Befehlen ist es möglich,
-Quelltexte auch mit 8-Bit-Zeichen systemweit weiterzugeben.
+Falls ein Zielformat Unicode nicht unterstützt, ist es mit UDO trotzdem möglich, Quelltexte auch mit 8-Bit-Zeichen systemweit weiterzugeben.
 
-Werden Quelltexte jedoch über das Internet ausgetauscht, kann es
-passieren, dass irgendwo auf dem Übertragungswege 8-Bit-Zeichen
-umgewandelt oder angepasst werden. Dies wäre bei Quelltexten, die
-mehrere Zeichensätze verwenden, fatal.
-
-Um den Austausch von Quelltexten auch hier zur ermöglichen, bietet
-UDO einen ""universellen Zeichensatz"" an. Es handelt sich hierbei nicht
-wirklich um einen vollständigen Zeichensatz wie z.B. Unicode, sondern vielmehr um eine Möglichkeit,
-8-Bit-Zeichen durch Folgen mehrere 7-Bit-Zeichen zu emulieren.
+UDO bietet einen ""universellen Zeichensatz"" an. Es handelt sich hierbei nicht wirklich um einen vollständigen Zeichensatz wie z.B. Unicode, sondern vielmehr um eine Möglichkeit, 8-Bit-Zeichen durch Folgen mehrere 7-Bit-Zeichen zu emulieren.
 
 !index (!kw [universal_charset])
-Da die nötigen Abfragen und Umwandlungen sehr rechenintensiv sind, muss
+Da die nötigen Abfragen und Umwandlungen Mehraufwand bedeuten, muss
 man UDO mitteilen, dass die folgenden Zeilen ""universelle Zeichen""
 enthalten. Dies geschieht durch den Einsatz des Schalters
 (!KW [universal_charset]).
@@ -281,19 +254,21 @@ umgewandelt werden:
 
 !universal_charset [on]
 !begin_table [|l|l|l|] !hline
-Platzhalter  !! x aus           !! Beispiel
+(!B)Platzhalter(!b)  !! (!B)x aus(!b)  !! (!B)Beispiel(!b)
 !hline
-(!/"x)       !! aeiosuyAEIOU    !! (!B)(!T)(!/"a)(!t)(!b)  = (!"a)
-(!/'x)       !! aeiouyAEIOUY    !! (!code [(!/'e!)])       = (!'e)
-(!/`x)       !! aeiouAEIOU      !! (!code [(!/`i!)])       = (!`i)
-(!/^x)       !! aeiouAEIOU      !! (!code [(!/^o!)])       = (!^o)
-(!/&x)       !! ae, oe, AE, OE  !! (!B)(!T)(!/&AE)(!t)(!b) = (!&AE)
-# YYY: fd:2009-06-12:  Why is the tilde-n not shown properly?!?
-(!/!~x)      !! anoANO          !! (!code [(!/!~n!)])      = (!~n)
-(!/,x)       !! cC              !! (!code [(!/,C!)])       = (!,C)
-(!/.x)       !! aA              !! (!code [(!/.A!)])       = (!.A)
-(!/_x)       !! ao              !! (!code [(!/_a!)])       = (!_a)
-(!/\x)       !! oO              !! (!code [(!/\O!)])       = (!\O)
+(!/"x)               !! AEIOUaeiosuy   !! (!B)(!T)(!/"a)(!t)(!b)  = (!"a)
+(!/'x)               !! AEIOUYaeiouy   !! (!code [(!/'e!)])       = (!'e)
+(!/`x)               !! AEIOUaeiou     !! (!code [(!/`i!)])       = (!`i)
+(!/^x)               !! AEIOUaeiou     !! (!code [(!/^o!)])       = (!^o)
+(!/&x)               !! AE, OE, ae, oe !! (!B)(!T)(!/&AE)(!t)(!b) = (!&AE)
+(!/!~x)              !! ANOano         !! (!code [(!/!~n!)])      = (!~n)
+(!/,x)               !! Cc             !! (!code [(!/,C!)])       = (!,C)
+(!/.x)               !! Aa             !! (!code [(!/.A!)])       = (!.A)
+(!/_x)               !! ao             !! (!code [(!/_a!)])       = (!_a)
+(!/_x)               !! !/?            !! (!code [(!/_?!)])       = (!_?)
+(!/\x)               !! Oo             !! (!code [(!/\O!)])       = (!\O)
+(!//x)               !! Oo             !! (!code [(!//o!)])       = (!/o)
+(!/#x)               !! PS             !! (!code [(!/#S!)])       = (!#S)
 !hline
 !end_table
 
@@ -302,8 +277,6 @@ Zielformat ein Zeichen nicht, wird das naheliegendste Zeichen
 benutzt, z.B. ""a"" statt ""(!^a)"".
 
 Mit (!KW [universal_charset] [[off!!]]) wird die Wandlung dieser Zeichen wieder abgeschaltet.
-
-(!~n)
 !universal_charset [off]
 
 !end_node # Universeller Zeichensatz

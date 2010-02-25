@@ -22,6 +22,9 @@
 #   fd  Jun 11: EXAMPLE_... macros optimized
 #   fd  Jun 12: macro renamed: CODE -> CHARSET
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Feb 25: - chapter 'Converting 8-bit characters' partly rewritten
+#               - universal charset table enhanced
 #
 ################################################################################
 
@@ -130,23 +133,21 @@ If you use a tilde inside an external link ((!KKW [url]), (!KKW [xlink])) UDO wo
 UDO supports --- did you think anything else --- dashs like in this
 sentence.
 
-Dashs are supported by (!LaTeX), Windows Help and RTF. Converting to other
-formats UDO will replace ""(---)"" and ""(--)"" by a single ""(!code[--])"".
+Dashes are supported by (!LaTeX), RTF, and WinHelp. The other formats replace those two or three minus characters by one.
 
-If you want to display three or two ""(!code[--])"" you have to use (!KP [((---!)!)]) or (!KP [((--!)!)]).
+If you want to create a long dash, use (!KP [(---!)]). A medium dash is created with (!KP [(--!)]). But if you have to output three minus characters, in a row, you have to use (!KP [((---!)!)]) in your source text. Use (!KP [((--!)!)]) accordingly in the source text, to get two minus characters.
 
 !end_node # Dashes
 
 # = = = = =
 
-!begin_node Converting 8 bit chars
+!begin_node Converting 8-bit characters
 !html_name  spec_converting_8bit_characters
 
 In an UDO source file you can use ""higher"" characters without having to
 know how a character has to look like in a destination format like (!LaTeX)
-or Windows Help. So you can enter a German ""ß"" without any fear, UDO
-converts it for you and it knows that this has to be (!code [&szlig;]) for
-HTML or (!coe [{\ss}] for (!LaTeX).
+or Windows Help. So you can enter a German ""ß"" or ""ä"" without any fear, UDO
+converts it for you automatically.
 
 UDO expects files containing chars of the system charset of your operating
 system. If you run UDO on a MS-DOS computer UDO expects text files that are
@@ -180,28 +181,11 @@ Below is an overview of the character sets UDO knows about:
 
 !include charsets.ui
 
-!smallskip
+When you use so-called 1-byte codepages (all codepages supported by UDO, except Unicode) and use one codepage for your UDO documents, but a different one for your output documents, you might want to keep in mind that all codepages have different settings. A codepage is a collection of 256 characters from the whole range of all characters which have been defined in the Unicode standard already.
 
-There are some things you have to remember. Some character sets contain
-characters that aren't available in another one. So you shouldn't use
-characters from the PC graphic character set or the Hebraic characters of
-the Atari character set because they can't be printed in formats like
-(!LaTeX), Windows Help, RTF or HTML. In this case UDO prints an error
-message. You should remove these characters from your source file and find
-another solution.
+Imagine you have created an UDO document using the DOS encoding and use DOS graphic signs, but your target format is e.g. Apple MacRoman. Then you will not be able to see your DOS graphic signs. When you have used the Hebrew letters from the Atari TOS encoding, you will not be lucky to see them in most other codepages.
 
-If source files are converted that don't use the character set of the
-operating system UDO is running on the limitations are even higher. In the
-first step UDO will convert the characters into ISO Latin 1. In  the second
-step UDO will convert the ISO Latin 1 characters into the character set of
-the current operating system. In some cases there's is no possibility to
-convert the characters without any loss. In such a case UDO will print an
-error message.
-
-(!HINT)
-
-If any character was forgotten or a character is converted in
-a wrong way please (!link [send a bug report] [Contact])!
+In these cases we recommend to use UTF-8, if it is available for the target format. Internally, UDO keeps all codepages in Unicode format so you will be able to use e.g. the Hebrew Alef from the TOS character set and see it properly even in UTF-8 and Windows codepage 1255.
 
 !end_node # Converting 8 bit chars
 
@@ -237,19 +221,21 @@ sequences are converted to which characters:
 
 !universal_charset [on]
 !begin_table [|l|l|l|] !hline
-Placeholder  !! x from          !! Example
+(!B)Placeholder(!b)  !! (!B)x from(!b)  !! (!B)Example(!b)
 !hline
-(!/"x)       !! aeiosuyAEIOU    !! (!B)(!T)(!/"a)(!t)(!b)  = (!"a)
-(!/'x)       !! aeiouyAEIOUY    !! (!code [(!/'e!)])       = (!'e)
-(!/`x)       !! aeiouAEIOU      !! (!code [(!/`i!)])       = (!`i)
-(!/^x)       !! aeiouAEIOU      !! (!code [(!/^o!)])       = (!^o)
-(!/&x)       !! ae, oe, AE, OE  !! (!B)(!T)(!/&AE)(!t)(!b) = (!&AE)
-# YYY: fd:2009-06-12:  Why is the tilde-n not shown properly?!?
-(!/!~x)      !! anoANO          !! (!code [(!/!~n!)])      = (!~n)
-(!/,x)       !! cC              !! (!code [(!/,C!)])       = (!,C)
-(!/.x)       !! aA              !! (!code [(!/.A!)])       = (!.A)
-(!/_x)       !! ao              !! (!code [(!/_a!)])       = (!_a)
-(!/\x)       !! oO              !! (!code [(!/\O!)])       = (!\O)
+(!/"x)               !! AEIOUaeiosuy   !! (!B)(!T)(!/"a)(!t)(!b)  = (!"a)
+(!/'x)               !! AEIOUYaeiouy   !! (!code [(!/'e!)])       = (!'e)
+(!/`x)               !! AEIOUaeiou     !! (!code [(!/`i!)])       = (!`i)
+(!/^x)               !! AEIOUaeiou     !! (!code [(!/^o!)])       = (!^o)
+(!/&x)               !! AE, OE, ae, oe !! (!B)(!T)(!/&AE)(!t)(!b) = (!&AE)
+(!/!~x)              !! ANOano         !! (!code [(!/!~n!)])      = (!~n)
+(!/,x)               !! Cc             !! (!code [(!/,C!)])       = (!,C)
+(!/.x)               !! Aa             !! (!code [(!/.A!)])       = (!.A)
+(!/_x)               !! ao             !! (!code [(!/_a!)])       = (!_a)
+(!/_x)               !! !/?            !! (!code [(!/_?!)])       = (!_?)
+(!/\x)               !! Oo             !! (!code [(!/\O!)])       = (!\O)
+(!//x)               !! Oo             !! (!code [(!//o!)])       = (!/o)
+(!/#x)               !! PS             !! (!code [(!/#S!)])       = (!#S)
 !hline
 !end_table
 
