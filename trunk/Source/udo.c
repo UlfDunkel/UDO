@@ -1,4 +1,4 @@
-/**(TAB=0)**********************************************************************
+/*******************************************************************************
 *
 *  Project name : UDO
 *  Module name  : udo.c
@@ -56,12 +56,8 @@
 *                - converted all German umlauts in comments into plain ASCII
 *    fd  Jan 28: c_subsubsubsubheading() adjusted
 *    fd  Jan 29: file reformatted and tidied up
-*    fd  Jan 30: pass1() no longer parses comment lines
-*    fd  Feb 05: - pass1() no longer parses empty lines
-*                - pass1(): bugfix for issue #77
-*    fd  Feb 06: pass2(): optimized
+*    fd  Feb 05: pass1(): bugfix for issue #77
 *    fd  Feb 08: description environment items are no longer closed here, but in ENV.C
-*    fd  Feb 09: pass2_check_environment(): made a little bit faster
 *    fd  Feb 12: some octal chars resolved into constant macros
 *    fd  Feb 15: - new: !code_source [] + c_code_source() -> iEncodingSource
 *                - new: !code_target [] + c_code_target() -> iEncodingTarget
@@ -239,7 +235,7 @@ typedef struct _udocolor                  /* colors (according to W3C HTML3.2 DT
 #define MAX_UDOCOLOR 17
 
 
-typedef struct _udocharset                /* list of encoding mnemonics */
+typedef struct _udocharset               /* list of encoding mnemonics */
 {
    char  *magic;                          /* encoding mnemonic */
    int    codepage;                       /* relevant encoding # */
@@ -790,6 +786,7 @@ typedef struct _udolanguage               /* ---- Sprachentabelle ---- */
    int    langval;                        /* zugehoerige Sprache */
 }  UDOLANGUAGE;
 
+
 #define MAXLANGUAGE  14
 
 LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE] =
@@ -812,13 +809,8 @@ LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE] =
 
 
 
-
-GLOBAL char   compile_date[11] = "\0";
-GLOBAL char   compile_time[9]  = "\0";
-
-
-
-
+GLOBAL char compile_date[11] = "\0";
+GLOBAL char compile_time[9]  = "\0";
 
 
 
@@ -5052,7 +5044,7 @@ LOCAL void c_code_source(void)
    tokcpy2(s, 256);
 
    my_strlwr(s);                          /* the mnemonics are LOWERCASE */
-   
+
    while (udocharset[i].magic[0] != EOS)
    {
       if (strstr(s, udocharset[i].magic) != NULL)
@@ -5257,7 +5249,7 @@ LOCAL void c_universal_charset(void)
          error_still_active(CMD_UNIVERSAL_CHARSET);
          return;
       }
-
+      
       if (!newon && !bDocUniversalCharsetOn)
       {
          error_not_active(CMD_UNIVERSAL_CHARSET);
@@ -6487,13 +6479,11 @@ LOCAL void c_include_preformatted(void)
       case PASS1:
          pass1(name);
          break;
-         
       case PASS2:
          output_begin_verbatim();
          pass2(name);
          output_end_verbatim();
          break;
-         
       case PASSU:
          outln("!begin_preformatted");
          passU(name);
@@ -6668,13 +6658,11 @@ LOCAL void c_include_src(void)
       case PASS1:
          pass1(name);
          break;
-         
       case PASS2:
          output_begin_sourcecode();
          pass2(name);
          output_end_sourcecode();
          break;
-         
       case PASSU:
          outln("!begin_sourcecode");
          passU(name);
@@ -11560,31 +11548,43 @@ char           *datei)           /* */
          return FALSE;
       }
 
-                                          /* don't parse empty and comment lines at all! */
-      if ( (zeile[0] != '#') && (zeile[0] != EOS) )
+#if 0
+      /* Was passiert bei den rekursiven Aufrufen mit goto? */
+      if (zeile[0]=='#')
       {
-         len = strlen(zeile);
+         goto PASS1_READ_NEXT_LINE;
+      }
+#endif
+
+
+      len = strlen(zeile);
       
-         while ( (len > 0) && (((UBYTE)zeile[len - 1]) <= 32) )
-         {
-            zeile[len - 1] = EOS;
-            len--;
-         }
-
+      while ( (len > 0) && (((UBYTE)zeile[len - 1]) <= 32) )
+      {
+         zeile[len - 1] = EOS;
+         len--;
+      }
                                           /* don't recode twice! */
-         if (my_stricmp(tmp_datei,udofile.full)) 
-         {
-            recode(zeile, iCharset);
-/*          convert_sz(zeile); */
-         }
+      if (my_stricmp(tmp_datei,udofile.full)) 
+      {
+         recode(zeile, iCharset);
+      }
 
-         if (pflag[PASS1].env == ENV_NONE)
-            pass_check_if(zeile, PASS1);
-
-         if (pflag[PASS1].ignore_line == 0)
-            pass1_check_environments(zeile);
+      if ((zeile[0] != '#') && (zeile[0] != EOS) && (pflag[PASS1].env == ENV_NONE) )
+      {
+         pass_check_if(zeile, PASS1);
+      }
 
 
+
+      if ( (zeile[0] != '#') && (zeile[0] != EOS) && (pflag[PASS1].ignore_line == 0) )
+      {
+         pass1_check_environments(zeile);
+      }
+
+
+      if (zeile[0] != EOS)
+      {
          if ((pflag[PASS1].ignore_line == 0) && (pflag[PASS1].env == ENV_NONE) )
          {
             del_whitespaces(zeile);
@@ -11595,24 +11595,23 @@ char           *datei)           /* */
                replace_macros(zeile);     /* replace macros right here because they might contain */
                                           /*  PASS1 commands, like !node, etc. */
 
-
-            if ( (zeile[0] == META_C) && (zeile[1] != QUOTE_C) )
+            if ((zeile[0] == META_C) && (zeile[1] != QUOTE_C) )
             {
                /* Erster Parameter von !macro und !define darf nicht gequotet werden! */
-            
+               
                if (!bInsideDocument)
                {
-                  protect = 0;         /* reset protector */
-               
+                  protect = 0;            /* reset protector */
+                  
                   if (strncmp(zeile, "!macro",  6) == 0)
                      protect = 1;
                   else if (strncmp(zeile, "!define", 7) == 0)
                      protect = 2;
-               
+                  
                   if (protect)
                   {
                      token_reset();
-                  
+                     
                      if (strstr(zeile, "!\\") != NULL)
                      {
                         char   tmp_zeile[512];  /* */
@@ -11628,29 +11627,29 @@ char           *datei)           /* */
 
                            strcat(zeile, tmp_zeile);
 
-                                       /* v6.5.5 [vj] */
+                                          /* v6.5.5 [vj] */
                            uiFileLines[iFilesOpened] = uiFileLines[iFilesOpened] + 1 + uiMultiLines;
                            uiCurrFileLine = uiFileLines[iFilesOpened];
 
                            lPass1Lines++;
-                        
+                           
                         } while (strstr(tmp_zeile, "!\\") != NULL);
-                     
+                        
                      }  /* if (strstr(zeile, "!\\" != NULL) */
 
 
                      str2tok(zeile);
-                  
+                     
                      switch (protect)
                      {
                      case 1:
                         add_macro();
                         break;
-                     
+                        
                      case 2:
                         add_define();
                      }
-                  
+                     
                      zeile[0] = EOS;
                   }
 
@@ -11681,33 +11680,36 @@ char           *datei)           /* */
                /* Ergebnis: !include wird dann nicht erkannt, die Prozentzahlen */
                /* stimmen im 2. Durchlauf nicht mehr. */
 
-               /* New in r6pl15 [NHz] */
+               if (zeile[0] != EOS)
+               {
+                  /* New in r6pl15 [NHz] */
 
-               /* Set node name for project file */
+                  /* Set node name for project file */
 
-/*             if ((strstr(zeile, "node") != NULL) || (strstr(zeile, "heading") != NULL) )
+/*                if ((strstr(zeile, "node") != NULL) || (strstr(zeile, "heading") != NULL) )
 */
 
 /*                   6.3.10 [vj]: used um_strcpy to prevent buffer overrun known as the "bInsideAppendix-Bug"
 
-               6.3.11 [vj]: the len of current_node_name_sys is defined as CNNS_LEN in constant.h
-               Perhaps we should have a look, if this copy function can be done
-               in an if, because this copy needs time <????>
-*/
-               um_strcpy(current_node_name_sys, zeile, CNNS_LEN, "pass1: current_node_name_sys");
+                     6.3.11 [vj]: the len of current_node_name_sys is defined as CNNS_LEN in constant.h
+                     Perhaps we should habe a look, if this copy function can be done
+                     in an if, because this copy needs time <????>
+ */
+                  um_strcpy(current_node_name_sys, zeile, CNNS_LEN, "pass1: current_node_name_sys");
 
-               if (no_umlaute)
-                  recode_chrtab(zeile,CHRTAB_ASCII);
-            
-               auto_quote_chars(zeile, FALSE);
-               replace_macros(zeile);
-               replace_defines(zeile);
+                  if (no_umlaute)
+                     recode_chrtab(zeile,CHRTAB_ASCII);
+                  
+                  auto_quote_chars(zeile, FALSE);
+                  replace_macros(zeile);
+                  replace_defines(zeile);
 
-               c_divis(zeile);
-               c_vars(zeile);
-               c_tilde(zeile);         /* r5pl9 */
-               c_styles(zeile);        /* r6pl2 */
-               c_internal_index(zeile, FALSE);
+                  c_divis(zeile);
+                  c_vars(zeile);
+                  c_tilde(zeile);         /* r5pl9 */
+                  c_styles(zeile);        /* r6pl2 */
+                  c_internal_index(zeile, FALSE);
+               }
 
 
                /* Dies darf nicht mit in die obige Klammer! */
@@ -11717,7 +11719,7 @@ char           *datei)           /* */
 
                if ((bInsideDocument) && (token[0][0] != EOS) )
                {
-                                       /* Kommandos, die nur im Hauptteil erlaubt sind */
+                                          /* Kommandos, die nur im Hauptteil erlaubt sind */
                   if (strcmp(token[0], "!node") == 0 || strcmp(token[0], "!n") == 0)
                   {
                      add_node_to_toc(NODE_NORMAL, NODE_VISIBLE);
@@ -11731,97 +11733,97 @@ char           *datei)           /* */
                   else if (strcmp(token[0], "!subnode") == 0 || strcmp(token[0], "!sn") == 0)
                   {
                      add_subnode_to_toc(NODE_NORMAL, NODE_VISIBLE);
-                     bInsidePopup = FALSE;
+                     bInsidePopup= FALSE;
                   }
                   else if (strcmp(token[0], "!subnode*") == 0 || strcmp(token[0], "!sn*") == 0)
                   {
                      add_subnode_to_toc(NODE_NORMAL, NODE_INVISIBLE);
-                     bInsidePopup = FALSE;
+                     bInsidePopup= FALSE;
                   }
                   else if (strcmp(token[0], "!subsubnode") == 0 || strcmp(token[0], "!ssn") == 0)
                   {
                      add_subsubnode_to_toc(NODE_NORMAL, NODE_VISIBLE);
-                     bInsidePopup = FALSE;
+                     bInsidePopup= FALSE;
                   }
-                  else if (strcmp(token[0], "!subsubnode*") == 0 || strcmp(token[0], "!ssn*") == 0)
+                  else  if (strcmp(token[0], "!subsubnode*") == 0 || strcmp(token[0], "!ssn*") == 0)
                   {
                      add_subsubnode_to_toc(NODE_NORMAL, NODE_INVISIBLE);
-                     bInsidePopup = FALSE;
+                     bInsidePopup= FALSE;
                   }
                   else if (strcmp(token[0], "!subsubsubnode") == 0 || strcmp(token[0], "!sssn") == 0)
                   {
                      add_subsubsubnode_to_toc(NODE_NORMAL, NODE_VISIBLE);
-                     bInsidePopup = FALSE;
+                     bInsidePopup= FALSE;
                   }
                   else if (strcmp(token[0], "!subsubsubnode*") == 0 || strcmp(token[0], "!sssn*") == 0)
                   {
                      add_subsubsubnode_to_toc(NODE_NORMAL, NODE_INVISIBLE);
-                     bInsidePopup = FALSE;
+                     bInsidePopup= FALSE;
                   }
                   else if (strcmp(token[0], "!pnode") == 0 || strcmp(token[0], "!p") == 0)
                   {
                      add_node_to_toc(NODE_POPUP, NODE_VISIBLE);
-                     bInsidePopup = TRUE;
+                     bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!pnode*") == 0 || strcmp(token[0], "!p*") == 0)
                   {
                      add_node_to_toc(NODE_POPUP, NODE_INVISIBLE);
-                     bInsidePopup = TRUE;
+                     bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!psubnode") == 0 || strcmp(token[0], "!ps") == 0)
                   {
                      add_subnode_to_toc(NODE_POPUP, NODE_VISIBLE);
-                     bInsidePopup = TRUE;
+                     bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!psubnode*") == 0 || strcmp(token[0], "!ps*") == 0)
                   {
                      add_subnode_to_toc(NODE_POPUP, NODE_INVISIBLE);
-                     bInsidePopup = TRUE;
+                     bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!psubsubnode") == 0 || strcmp(token[0], "!pss") == 0)
                   {
                      add_subsubnode_to_toc(NODE_POPUP, NODE_VISIBLE);
-                     bInsidePopup = TRUE;
+                     bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!psubsubnode*") == 0 || strcmp(token[0], "!pss*") == 0)
                   {
                      add_subsubnode_to_toc(NODE_POPUP, NODE_INVISIBLE);
-                     bInsidePopup = TRUE;
+                     bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!psubsubsubnode") == 0 || strcmp(token[0], "!psss") == 0)
                   {
                      add_subsubsubnode_to_toc(NODE_POPUP, NODE_VISIBLE);
-                     bInsidePopup = TRUE;
+                     bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!psubsubsubnode*") == 0 || strcmp(token[0], "!psss*") == 0)
                   {
                      add_subsubsubnode_to_toc(NODE_POPUP, NODE_INVISIBLE);
-                     bInsidePopup = TRUE;
+                     bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!begin_node") == 0 || strcmp(token[0], "!bn") == 0)
                   {
                      toc_begin_node(NODE_NORMAL, NODE_VISIBLE);
-                     bInsidePopup = FALSE;
+                     bInsidePopup= FALSE;
                   }
                   else if (strcmp(token[0], "!begin_node*") == 0 || strcmp(token[0], "!bn*") == 0)
                   {
                      toc_begin_node(NODE_NORMAL, NODE_INVISIBLE);
-                     bInsidePopup = FALSE;
+                     bInsidePopup= FALSE;
                   }
                   else if (strcmp(token[0], "!begin_pnode") == 0 || strcmp(token[0], "!bp") == 0)
                   {
                      toc_begin_node(NODE_POPUP, NODE_VISIBLE);
-                     bInsidePopup = TRUE;
+                     bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!begin_pnode*") == 0 || strcmp(token[0], "!bp*") == 0)
                   {
                      toc_begin_node(NODE_POPUP, NODE_INVISIBLE);
-                     bInsidePopup = TRUE;
+                     bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!end_node") == 0 || strcmp(token[0], "!en") == 0)
                   {
                      toc_end_node();
-                     bInsidePopup = FALSE;
+                     bInsidePopup= FALSE;
                   }
                   else if (strcmp(token[0], "!heading") == 0 || strcmp(token[0], "!h") == 0)
                   {
@@ -11953,7 +11955,7 @@ char           *datei)           /* */
                }  /* if ((bInsideDocument) && (token[0][0] != EOS) ) */
 
 
-                                       /* Kommandos, die nur im Vorspann erlaubt sind */
+                                          /* Kommandos, die nur im Vorspann erlaubt sind */
                if ( (!bInsideDocument) && (token[0][0] != EOS) )
                {
                   if (strcmp(token[0], CMD_BEGIN_DOCUMENT) == 0)
@@ -11998,7 +12000,7 @@ char           *datei)           /* */
 
 
 
-                                       /* Kommandos, die ueberall erlaubt sind... */
+                                          /* Kommandos, die ueberall erlaubt sind... */
                if (token[0][0] != EOS)
                {
                   if (strcmp(token[0], "!nop") == 0)
@@ -12080,12 +12082,12 @@ char           *datei)           /* */
                      zeile[0] = EOS;
                   }
 
-               }  /* if (token[0][0] != EOS) */
+               }
 
-            }   /* if (zeile[0] == META_C) */
+            }   /* if (zeile[0]==META_C) */
 
          }   /* if (!pflag[PASS1].ignore_line...) */
-      
+         
          else
          {
             if ( (pflag[PASS1].ignore_line == 0) && (pflag[PASS1].env == ENV_TABLE) )
@@ -12099,7 +12101,7 @@ char           *datei)           /* */
             }
          }
          
-      }  /* if (empty line or comment) */
+      }  /* if (zeile[0] != EOS) */
 
    }  /* while (fgets) */
 
@@ -12153,9 +12155,7 @@ char       *zeile)        /* */
    }
 
    if (no_verbatim_umlaute)
-   {
       recode_chrtab(zeile,CHRTAB_ASCII);
-   }
 
    if (strchr(zeile, '\t') != NULL)        /* TABs in Leerzeichen umwandeln */
    {
@@ -12454,9 +12454,6 @@ char     *zeile)  /* */
 {
    char  *found;  /* */
    
-   
-   if (zeile[0] == EOS)                   /* don't check empty lines! */
-      return;   
 
                                           /* ---Verbatim-Umgebung--- */
    if (pflag[PASS2].env == ENV_NONE || pflag[PASS2].env == ENV_VERBATIM)
@@ -12921,10 +12918,6 @@ char           *datei)           /* */
       }
 
 
-      if (zeile[0] == '#')                /* don't parse comment lines, but empty lines! */
-         goto NEXT_LINE;
-      
-      
       /* --- remove all line feed and whitespace characters at the end of line --- */
       
       len = strlen(zeile);
@@ -12939,11 +12932,7 @@ char           *datei)           /* */
                                           /* don't recode twice! */
       if (my_stricmp(tmp_datei,udofile.full))
       {
-         if (zeile[0] != EOS)
-         {
-            recode(zeile, iCharset);
-/*          convert_sz(zeile); */
-         }
+         recode(zeile, iCharset);
       }
 
       if (pflag[PASS2].env == ENV_NONE)
@@ -12956,63 +12945,77 @@ char           *datei)           /* */
          }
       }
 
-      if ( (zeile[0] != EOS) && (pflag[PASS2].env == ENV_NONE) )
+      if ( (zeile[0] != '#') && (zeile[0] != EOS) && (pflag[PASS2].env == ENV_NONE) )
       {
          pass_check_if(zeile, PASS2);
       }
 
+#if 0
+      if (pflag[PASS2].ignore_line > 0)
+      {
+         goto AFTER_IGNORED;
+      }
+#endif
 
+      /* Spezielle Umgebungen (verbatim, raw, table, sourcecode) testen. */
+      /* Gesucht wird nur nach !begin... bzw !end... */
+      
+      if (zeile[0] != '#' && pflag[PASS2].ignore_line == 0)
+      {
+         pass2_check_environments(zeile);
+      }
+
+      /* Ausgabe/Bearbeitung der aktuellen Zeile, falls eine */
+      /* spezielle Umgebung aktiv ist */
+      
       if (pflag[PASS2].ignore_line == 0)
       {
-         /* Spezielle Umgebungen (verbatim, raw, table, sourcecode) testen. */
-         /* Gesucht wird nur nach !begin... bzw !end... */
-
-         pass2_check_environments(zeile);
-
-         /* Ausgabe/Bearbeitung der aktuellen Zeile, falls eine */
-         /* spezielle Umgebung aktiv ist */
-      
          pass2_check_env_output(zeile);
       }
 
       /* Keine spezielle Umgebung aktiv, also Zeile auswerten und */
       /* beim Auftreten einer Leerzeile den Absatz ausgeben */
       
-      if ( (pflag[PASS2].ignore_line == 0) && (pflag[PASS2].env == ENV_NONE) )
+      if (    (pflag[PASS2].ignore_line == 0)
+           && (pflag[PASS2].env == ENV_NONE)
+         )
       {
          if (zeile[0] != EOS )
          {
-            del_whitespaces(zeile);
-            
-            if (no_umlaute)
-               recode_chrtab(zeile,CHRTAB_ASCII);
-            
-            auto_quote_chars(zeile, FALSE);
+            if (zeile[0] != '#')
+            {
+               del_whitespaces(zeile);
+               
+               if (no_umlaute)
+                  recode_chrtab(zeile,CHRTAB_ASCII);
+               
+               auto_quote_chars(zeile, FALSE);
 
-            /* Changed in V6.5.5 [NHz]
-             * v6.5.7 [vj] c_commands_inside(zeile, *TRUE* instead of FALSE)
-             *             closes bug #0000059
-             */
-             
-            c_commands_inside(zeile, TRUE);
+               /* Changed in V6.5.5 [NHz]
+                * v6.5.7 [vj] c_commands_inside(zeile, *TRUE* instead of FALSE)
+                *             closes bug #0000059
+                */
+                
+               c_commands_inside(zeile, TRUE);
 
-            replace_macros(zeile);
-            c_divis(zeile);
-            c_vars(zeile);
-            c_tilde(zeile);
-            c_styles(zeile);
+               replace_macros(zeile);
+               c_divis(zeile);
+               c_vars(zeile);
+               c_tilde(zeile);
+               c_styles(zeile);
 
-            /* v6.5.7 [vj] old position and parameters (see above)
-             * please keep this comment for information;
-             * v6.5.9 [NHz] put in again, otherwise commands inside
-             * macros are not translated; I think we need both
-             */
-             
-            c_commands_inside(zeile, FALSE);
+               /* v6.5.7 [vj] old position and parameters (see above)
+                * please keep this comment for information;
+                * v6.5.9 [NHz] put in again, otherwise commands inside
+                * macros are not translated; I think we need both
+                */
+                
+               c_commands_inside(zeile, FALSE);
 
-            replace_defines(zeile);
+               replace_defines(zeile);
 
-            tokenize(zeile);
+               tokenize(zeile);
+            }
          }
          else if (token_counter > 0)      /* Leerzeile */
          {  
@@ -13020,8 +13023,6 @@ char           *datei)           /* */
          }
       }
 
-NEXT_LINE:
-      ;
    }   /* while (fgets) */
 
 
@@ -13353,9 +13354,9 @@ LOCAL void save_winhelp_project(void)
    strcpy(n, titleprogram);
    del_right_spaces(n);
    recode_chrtab(n,CHRTAB_ANSI);
-
-/* fd:2010-02-17: no longer required thanks to new recode() method:
    
+/* fd:2010-02-17: no longer required thanks to new recode() method:
+
    if (desttype == TOWIN && iCharset != CODE_437) 
    {
       ansi2dos(n);
@@ -14107,10 +14108,9 @@ GLOBAL BOOLEAN udo
    b1stApost              = TRUE;
    iCharset               = SYSTEM_CHARSET;
    bDocUniversalCharsetOn = FALSE;
-
    
-   show_udo_intro();
 
+   show_udo_intro();
 
    logln_warnings_errors();
 
@@ -14143,7 +14143,6 @@ GLOBAL BOOLEAN udo
          if (!no_index)
             add_pass1_index_udo();
       }
-
 
 
       if (malloc_token_output_buffer())   /* Speicher anfordern */
