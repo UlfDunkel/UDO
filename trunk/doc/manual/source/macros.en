@@ -20,6 +20,8 @@
 #   fd  Jun 10: EXAMPLE_... macros introduced
 #   fd  Jun 12: macro renamed: CODE -> CHARSET
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Feb 24: macro IMPORTANT
 #
 ################################################################################
 
@@ -97,6 +99,7 @@
 !macro FILESPACEQUOTE  If the file name contains spaces, it has to be quoted.
 !macro HINT            (!B)Hint:(!b)
 !macro HINTS           (!B)Hints:(!b)
+!macro IMPORTANT       (!B)(!red)Important:(!coloff)(!b)
 !macro IN_HTML_HEADER  (!gray)(!I)Ausgabe erfolgt im Seiten-Header:(!i)(!coloff)
 !macro MAINPART        main part
 !macro MISS            (!idx [Something's still missing here])!..
