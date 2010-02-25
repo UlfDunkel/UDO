@@ -24,6 +24,7 @@
 !index Zeichensatz
 !index Sonderzeichen
 !label Codepage
+!label Code
 UDO unterstützt verschiedenste Codepages für verschiedenste Systeme. Nachfolgend sind alle derzeit unterstützten Systeme und Codepages mit z.T. mehreren Bezeichnern für die gleiche Codepage aufgeführt. Es spielt keine Rolle, ob Sie den Bezeichner in Groß- oder Kleinschreibung eingeben. (Die Bezeichner orientieren sich an den früheren UDO-Bezeichnern und denen, die das Unix-Kommando (!C)iconv(!c) unterstützt.)
 
 !begin_table [r|l|l]
