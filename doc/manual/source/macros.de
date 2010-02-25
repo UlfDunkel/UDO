@@ -20,6 +20,8 @@
 #   fd  Jun 10: EXAMPLE_... macros introduced
 #   fd  Jun 12: macro renamed: CODE -> CHARSET
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Feb 24: macro IMPORTANT
 #
 ################################################################################
 
@@ -35,16 +37,16 @@
 
 # HTML macro formattings
 # ------------------------------------------------------------------------------
-!ifdest [hh,html]
+!ifdest [hh,hah,html]
 !macro EXAMPLE_BEGIN  !rinclude (!EXAMPLES)/html/example_begin.ui
 !macro EXAMPLE_END    !rinclude (!EXAMPLES)/html/example_close.ui
 !macro EXAMPLE_BEFORE !rinclude (!EXAMPLES)/html/example_before.ui
 !macro EXAMPLE_AFTER  !rinclude (!EXAMPLES)/html/example_after.ui
 
-!macro FORMAT         (!link [&lt;kürzel&gt;] [Ausgabeformat])
-!macro COLOR          (!link [&lt;farbe&gt;] [Farben])
-!macro LANGUAGE       (!link [&lt;sprache&gt;] [Sprache])
-!macro OS             (!link [&lt;system&gt;] [Betriebssystem])
+!macro FORMAT         (!link [&lt;kürzel&lt;] [Ausgabeformat])
+!macro COLOR          (!link [&lt;farbe&lt;] [Farben])
+!macro LANGUAGE       (!link [&lt;sprache&lt;] [Sprache])
+!macro OS             (!link [&lt;system&lt;] [Betriebssystem])
 !macro CHARSET        (!link [&lt;zeichensatz&gt;] [Code])
 
 # other macro formattings
@@ -99,6 +101,7 @@
 !macro FILESPACEQUOTE  Enthält der Dateiname Leerzeichen, muss er in Anführungszeichen gesetzt werden.
 !macro HINT            (!B)Hinweis:(!b)
 !macro HINTS           (!B)Hinweise:(!b)
+!macro IMPORTANT       (!B)(!red)Wichtig:(!coloff)(!b)
 !macro IN_HTML_HEADER  (!gray)(!I)Ausgabe erfolgt im Seiten-Header:(!i)(!coloff)
 !macro MAINPART        Hauptteil
 !macro MISS            (!red)(!idx [Für dieses Kapitel existiert noch kein Text.])(!coloff)
