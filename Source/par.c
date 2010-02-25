@@ -43,6 +43,7 @@
 *                - replace_placeholders(): issue #12 fixed
 *    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  Feb 24: replace_placeholders() debugged
+*    fd  Feb 25: replace_placeholders() debugged
 *
 ******************************************|************************************/
 
@@ -900,6 +901,12 @@ char        *rawtext)  /* */
 *     placeholders need to be followed by a space character. This routine also 
 *     removes this trailing character after the placeholde has been replaced.
 *
+*  Example:
+*     s = "<li> this is a list entry"
+*     phold[i].entry = "<li>"
+*     here = 0
+*    
+*
 *  Return:
 *     -
 *
@@ -911,7 +918,8 @@ char             *s)              /* ^ line */
 {
    register int   i;              /* counter */
    int            replaced = -1;  /* */
-   size_t         len;            /* length of entry */
+   size_t         elen;           /* length of entry */
+   size_t         slen;           /* length of <s> */
    char          *here;           /* ^ phold[i].entry in <s> */
    
    
@@ -927,14 +935,16 @@ char             *s)              /* ^ line */
       {
          if (replace_once(s, phold[i].magic, phold[i].entry))
          {
-            len = strlen(phold[i].entry); /* get length of entry */
+            elen = strlen(phold[i].entry);/* get length of entry */
                                           /* find entry in string */
             here = strstr(s,phold[i].entry);
             
-            if (here[len] == ' ')         /* check if there is really a space! */
+            if (here[elen] == ' ')        /* check if there is really a space behind! */
             {
+               slen = strlen(s);
                                           /* remove the no longer required space behind */
-               memmove(here + len, here + len + 1, len);
+               memmove(here + elen, here + elen + 1, slen - elen - 1);
+               s[slen - 1] = EOS;         /* shorten string */
             }
             
             phold[i].magic[0] = EOS;      /* clear magic */
