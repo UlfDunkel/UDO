@@ -22,6 +22,7 @@
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 11: EXAMPLE_... macros optimized
 #   fd  Jun 16: great review session #1
+#   fd  Dec 15: typo
 #
 ################################################################################
 
@@ -727,7 +728,7 @@ has to be used before the table environment, not inside this environment!
 The command (!KW [begin_table]) starts a table, (!KW [end_table])
 finishes and prints the table. After (!KW [begin_table]) you can define
 the justification of the table columns and the usage of vertical lines. Use
-""(!code[c])"" for a centred row, ""(!code[l])"" for a left justified row, ""(!code[r]"" for a
+""(!code[c])"" for a centred row, ""(!code[l])"" for a left justified row, ""(!code[r])"" for a
 right justified row, and ""(!code[|])"" for vertical lines inside brackets. If you add
 a (!KW [hline]) command to this line the table starts with a horizontal
 line.
