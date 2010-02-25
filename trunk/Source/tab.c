@@ -46,7 +46,8 @@
 *  2010:
 *    fd  Jan 23: converted all German umlauts in comments into plain ASCII
 *    fd  Feb 17: umlaute2sys() merged into recode_chrtab()
-*    fd  Feb 25: file tidied up
+*    fd  Feb 25: - file tidied up
+*                - table_add_line() handled Universal Characters now
 *
 ******************************************|************************************/
 
@@ -478,6 +479,8 @@ char       *s)    /* */
 
    replace_char(s, "\t", " ");            /* Nun aus der Zeile die Felder auslesen */
    qdelete_all(s, "!-", 2);
+
+   recode_udo(s);                         /* these have never ever been handled in UDO tables before! */
 
    if (no_umlaute)
       recode_chrtab(s,CHRTAB_ASCII);
