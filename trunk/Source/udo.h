@@ -255,7 +255,6 @@ GLOBAL BOOLEAN     html_merge_node3;      /* Subsubnodes nicht splitten? */
 GLOBAL BOOLEAN     html_merge_node4;      /* Subsubsubnodes nicht splitten? */
 GLOBAL BOOLEAN     html_merge_node5;      /* Subsubsubsubnodes nicht splitten? */
 GLOBAL BOOLEAN     html_no_xlist;         /* xlist- durch description-Umgebung ersetzen? */
-GLOBAL BOOLEAN     html_ignore_p;         /* Internes Flag, ob <P> in token_output() ignoriert werden soll. */
 GLOBAL BOOLEAN     html_ignore_8bit;      /* ae nicht in &auml; wandeln? */
 GLOBAL BOOLEAN     html_modern_layout;    /* Modernes 2-Spalten-Layout? */
 GLOBAL BOOLEAN     html_frames_layout;    /* Frames fuer HTML benutzen? */
