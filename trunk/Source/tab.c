@@ -48,6 +48,8 @@
 *    fd  Feb 17: umlaute2sys() merged into recode_chrtab()
 *    fd  Feb 25: - file tidied up
 *                - table_add_line() handled Universal Characters now
+*    fd  Feb 27: table_output_html(): additional feed before table output when
+*                  inside other environments
 *
 ******************************************|************************************/
 
@@ -1197,7 +1199,7 @@ size_t    clen;           /* */
 /*******************************************************************************
 *
 *  table_output_html():
-*     ??? (description missing)
+*     nomen est omen
 *
 *  Return:
 *     -
@@ -1215,11 +1217,13 @@ LOCAL void table_output_html(void)
    BOOLEAN   inside_center, 
              inside_right, 
              inside_left;
+   BOOLEAN   inside_env;
              
 
-   inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
-   inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
-   inside_left   = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_LEFT);
+   inside_center = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_CENT);
+   inside_right  = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
+   inside_left   = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_LEFT);
+   inside_env    = (iItemLevel > 0 || iEnumLevel > 0 || iDescLevel > 0 || iListLevel > 0);
 
    if (!inside_center && !inside_right && !inside_left)
    {
@@ -1242,7 +1246,36 @@ LOCAL void table_output_html(void)
    if (inside_right)
       um_strcpy(alignOn, "right", 64, "table_output_html[2]");
 
-   voutf("<div align=\"%s\">", alignOn);
+   if (inside_env)                        /* we're inside another environment! */
+   {
+      switch (iEnvType[iEnvLevel])
+      {
+      case ENV_ITEM:
+      case ENV_ENUM:
+      case ENV_LIST:
+         if (bEnvShort[iEnvLevel])
+         {
+            if (html_doctype < XHTML_STRICT)
+               outln("<br>\n");
+            else
+               outln("<br />\n");
+         }
+         else
+         {
+            if (html_doctype < XHTML_STRICT)
+               outln("<br><br>\n");
+            else
+              outln("<br /><br />\n");
+         }
+         
+         break;
+      
+      case ENV_DESC:
+         ;                                /* we're fine in description environments (so far ;-)) */
+      }
+   }
+
+   voutf("\n<div align=\"%s\">\n", alignOn);
 
    if (tab_toplines > 0)
    {
@@ -1402,7 +1435,7 @@ LOCAL void table_output_html(void)
       
    }  /* for (y = 0; y <= tab_h; y++) */
 
-   outln("</table></div>");
+   outln("</table>\n</div>");
 
 } /* table_output_html() */
 
