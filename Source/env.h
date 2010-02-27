@@ -41,6 +41,7 @@
 *
 *  2010:
 *    fd  Feb 04: header updated; bDescDDOpen introduced
+*    fd  Feb 26: new: bParagraphOpen
 *
 ******************************************|************************************/
 
@@ -97,6 +98,7 @@ GLOBAL BOOLEAN   bCalledEndDocument;      /* */
 GLOBAL BOOLEAN   bCalledBeginDocument;    /* */
 
 GLOBAL BOOLEAN   bDescDDOpen;             /* TRUE: description env.: <dd> open */
+GLOBAL BOOLEAN   bParagraphOpen;          /* TRUE: <p> has been output */
 
 
 
