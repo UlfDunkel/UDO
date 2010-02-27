@@ -82,6 +82,8 @@
 *                - CODE_CP1256 (Arabic)
 *                - CODE_CP1258 (Vietnamese)
 *                - udocharset[]: more mnemonics as used in Unix command iconv
+*    fd  Feb 26: token_output() no longer adds ' ' behind placeholder token (issue #12)
+*    fd  Feb 27: HTML output for ENV_DESC, ENV_LIST + other environments adjusted
 *
 ******************************************|************************************/
 
@@ -5589,7 +5591,8 @@ GLOBAL void c_udolink (void)
          voutlnf("%s%s", sTemp, nodename);
       }
       
-      outln("</p>");
+      outln("</p>\n");
+      bParagraphOpen = FALSE;
       break;
       
    case TOWIN:
@@ -7783,7 +7786,12 @@ BOOLEAN           reset_internals)        /* */
    case TOHAH:                            /* HTML Apple Help V6.5.17 */
    case TOHTM:                            /* HTML */
    case TOMHH:                            /* Microsoft HTML Help */
-      if (!inside_short)
+      if (inside_short)
+      {
+         if (!bParagraphOpen)
+            bParagraphOpen = TRUE;
+      }
+      else
       {
          if (inside_center)
             strcat(z, "<div align=\"center\">");
@@ -7791,6 +7799,19 @@ BOOLEAN           reset_internals)        /* */
             strcat(z, "<div align=\"right\">");
          else if (!inside_env)
             strcat(z, "<p>");
+         else
+         {
+            switch (iEnvType[iEnvLevel])
+            {
+            case ENV_DESC:
+            case ENV_LIST:
+               if (!bParagraphOpen)
+               {
+                  strcat(z, "<p>");
+                  bParagraphOpen = TRUE;
+               }
+            }
+         }
       }
 
       break;
@@ -8010,7 +8031,11 @@ BOOLEAN           reset_internals)        /* */
             {
                strcat(z, token[i]);
 
-               if (i == 0 && use_justification)
+                                    /* this line has placeholders */
+                                    /* one of which is currently handled */
+               if ( (phold_counter >= 0) && (!strcmp(token[i], phold[i].magic)) )
+                  ;                 /* don't insert space character after placeholders! */
+               else if (i == 0 && use_justification)
                   strcat(z, INDENT_S);
                else
                   strcat(z, " ");
@@ -8262,7 +8287,7 @@ BOOLEAN           reset_internals)        /* */
          }  /* if */
 
 
-         if (use_justification )
+         if (use_justification)
          {
             if (i < token_counter && !just_linefeed && !inside_center && !inside_right && !inside_left)
             {
@@ -8583,104 +8608,132 @@ BOOLEAN           reset_internals)        /* */
    /* Leerzeilen dann ausgeben, wenn der Absatz sich nicht in einer */
    /* komprimierten Umgebung befindet. */
 
-   if (inside_short)
+   switch (desttype)
    {
-      switch (desttype)
-      {
-      case TOWIN:
-      case TOWH4:
-      case TOAQV:
-      case TORTF:
+   case TOWIN:
+   case TOWH4:
+   case TOAQV:
+   case TORTF:
+      if (inside_short)
          outln(rtf_parpard);
-         break;
-
-      case TOSRC:
-      case TOSRP:
-         outln(sSrcRemOff);
-         break;
-
-      case TOHAH:                         /* V6.5.17 */
-      case TOHTM:
-      case TOMHH:
-         html_ignore_p = FALSE;
-         break;
-
-      case TOTEX:
-      case TOPDL:
-         outln("");
-         break;
-
-      case TOKPS:
-         /* Deleted in r6pl15 [NHz] */
-/*       outln("newline");
-*/       ;
-      }
-
-   }  /* if (inside_short) */
-   else
-   {
-      switch (desttype)
-      {
-      case TOWIN:
-      case TOWH4:
-      case TOAQV:
-      case TORTF:
+      else
          outln("\\par\\pard\\par");
-         break;
+         
+      break;
 
-      case TOHAH:                         /* V6.5.17 */
-      case TOHTM:
-      case TOMHH:
+   case TOHAH:
+   case TOHTM:
+   case TOMHH:
+      if (inside_short)
+      {
+         html_ignore_p = FALSE;
+
+         if (bParagraphOpen)
+         {         
+            switch (iEnvType[iEnvLevel])
+            {
+            case ENV_DESC:
+               if (html_doctype < XHTML_STRICT)
+                  outln("<br>\n");
+               else
+                  outln("<br />\n");
+                  
+               break;
+
+            case ENV_LIST:
+               if (html_doctype < XHTML_STRICT)
+                  outln("<br>");
+               else
+                  outln("<br />");
+                  
+               break;
+
+#if 0 
+/* fd: 2010-02-26: always !short in <ul> + <ol> environments */
+            default: 
+               if (html_doctype < XHTML_STRICT)
+                  out("<br>");
+               else
+                  out("<br />");
+#endif
+            }
+         }
+         
+         bParagraphOpen = FALSE;
+
+      }
+      else
+      {
          if (inside_center || inside_right)
             outln("</div>");
          else if (!inside_env)
             outln("</p>\n");
-         
-         break;
-
-      case TOHPH:
-         outln("");
-         break;
-
-      case TONRO:
-         if (!inside_env)
-            outln("");
-         
-         break;
-
-      case TOLDS:
-         if (inside_quote)
-            outln("</quote>");
-         else
-            outln("");
-         
-         break;
-
-      case TOINF:
-         if (inside_center)
-            outln("@center");
-
-         outln("");
-         break;
-
-      case TOSRC:
-      case TOSRP:
-         outln(sSrcRemOff);
-         break;
-
-      case TOIPF:
-         break;
-
-      case TOKPS:
-         /* Changed in r6pl15 [NHz] */
-         outln("newline");
-/*       outln("newline newline");
+         else                             /* environment */
+         {
+            if (bParagraphOpen)
+            {
+               switch (iEnvType[iEnvLevel])
+               {
+               case ENV_DESC:
+                  outln("</p>\n");
+                  break;
+                  
+               case ENV_LIST:
+                  outln("</p>");
+                  break;
+#if 0               
+/* fd:2010-02-26: always !short in <ul> + <ol> environments  */
+               default:
+                  ;
+/*                out("</p>");
 */
-         break;
+#endif
+               }
+            }
 
-      default:
-         outln("");
+            bParagraphOpen = FALSE;
+         }
       }
+
+      break;
+
+   case TONRO:
+      if (!inside_env)
+         outln("");
+         
+      break;
+
+   case TOLDS:
+      if (inside_quote)
+         outln("</quote>");
+      else
+         outln("");
+         
+      break;
+
+   case TOINF:
+      if (inside_center)
+         outln("@center");
+
+      outln("");
+      break;
+
+   case TOSRC:
+   case TOSRP:
+      outln(sSrcRemOff);
+      break;
+
+   case TOIPF:
+      break;
+
+   case TOKPS:
+      if (!inside_short)
+         outln("newline");
+         
+      break;
+
+   default:
+      outln("");
    }
 
    token_reset();
@@ -15462,6 +15515,9 @@ GLOBAL void init_vars(void)
    bInsidePopup    = FALSE;
    bInsideAppendix = FALSE;
    bInsideDocument = FALSE;
+   
+   bDescDDOpen     = FALSE;
+   bParagraphOpen  = FALSE;
 
    out_lf_needed = FALSE;
 

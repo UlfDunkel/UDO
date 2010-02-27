@@ -44,6 +44,7 @@
 *    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  Feb 24: replace_placeholders() debugged
 *    fd  Feb 25: replace_placeholders() debugged
+*    fd  Feb 26: replace_placeholders() debugged
 *
 ******************************************|************************************/
 
@@ -115,8 +116,6 @@ LOCAL MACROS       *macros[MAXMACROS];    /* Array auf Zeiger mit Makros */
 
 LOCAL DEFS         *defs[MAXDEFS];        /* Array auf Zeiger mit defines */
 
-LOCAL PLACEHOLDER   phold[MAXPHOLDS + 1]; /* Platzhalter */
-LOCAL int           phold_counter;
 
                                           /* Platzhalter */
 LOCAL SPECCMD       speccmd[MAXSPECCMDS + 1];
@@ -895,18 +894,6 @@ char        *rawtext)  /* */
 *  replace_placeholders():
 *     replace the internal placeholder commands by human-readable content
 *
-*  Notes:
-*     UDO replaces the commands by internal placeholder commands which are later
-*     replaced by the real desired content. Due to the way of tokenization, these 
-*     placeholders need to be followed by a space character. This routine also 
-*     removes this trailing character after the placeholde has been replaced.
-*
-*  Example:
-*     s = "<li> this is a list entry"
-*     phold[i].entry = "<li>"
-*     here = 0
-*    
-*
 *  Return:
 *     -
 *
@@ -918,10 +905,7 @@ char             *s)              /* ^ line */
 {
    register int   i;              /* counter */
    int            replaced = -1;  /* */
-   size_t         elen;           /* length of entry */
-   size_t         slen;           /* length of <s> */
-   char          *here;           /* ^ phold[i].entry in <s> */
-   
+
    
    if (phold_counter >= 0)
    {
@@ -933,22 +917,13 @@ char             *s)              /* ^ line */
       
       for (i = phold_counter; i >= 0; i--)
       {
-         if (replace_once(s, phold[i].magic, phold[i].entry))
+         if (phold[i].magic[0] != EOS)
          {
-            elen = strlen(phold[i].entry);/* get length of entry */
-                                          /* find entry in string */
-            here = strstr(s,phold[i].entry);
-            
-            if (here[elen] == ' ')        /* check if there is really a space behind! */
+            if (replace_once(s, phold[i].magic, phold[i].entry))
             {
-               slen = strlen(s);
-                                          /* remove the no longer required space behind */
-               memmove(here + elen, here + elen + 1, slen - elen - 1);
-               s[slen - 1] = EOS;         /* shorten string */
+               phold[i].magic[0] = EOS;   /* clear magic */
+               replaced++;
             }
-            
-            phold[i].magic[0] = EOS;      /* clear magic */
-            replaced++;
          }
       }
       
