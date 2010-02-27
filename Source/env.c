@@ -1999,6 +1999,7 @@ GLOBAL void c_begin_itemize(void)
    iEnvType[iEnvLevel]    = ENV_ITEM;
    env_kind[iEnvLevel]    = 0;
    iEnvIndent[iEnvLevel]  = 0;
+   
    bEnv1stItem[iEnvLevel] = TRUE;
    bEnv1stPara[iEnvLevel] = TRUE;
    
@@ -2055,26 +2056,12 @@ GLOBAL void c_begin_itemize(void)
       if (bParagraphOpen)                 /* paragraph still open?!? */
       {
          if (!bEnvShort[iEnvLevel])       /* no short environment */
-         {
-            switch (iEnvType[iEnvLevel])
-            {
-            case ENV_DESC:
-               outln("</p>\n");           /* close previous paragraph first */
-               break;
-               
-            case ENV_LIST:
-               outln("</p>");             /* close previous paragraph first */
-               break;
-            
-            default:
-               out("</p>");               /* close previous paragraph first */
-            }
-         }
+            outln("</p>\n");              /* close previous paragraph first */
       }
       
       bParagraphOpen = FALSE;
          
-      outln("\n<ul>");
+      outln("<ul>");
       break;
       
       
@@ -2143,6 +2130,7 @@ GLOBAL void c_begin_enumerate(void)
    env_kind[iEnvLevel]    = 0;
    enum_count[iEnvLevel]  = 0;
    iEnvIndent[iEnvLevel]  = 0;
+
    bEnv1stItem[iEnvLevel] = TRUE;
    bEnv1stPara[iEnvLevel] = TRUE;
    
@@ -2224,7 +2212,7 @@ GLOBAL void c_begin_enumerate(void)
       
       bParagraphOpen = FALSE;
          
-      out("\n<ol");
+      out("<ol");
       
       switch (iEnumLevel)                 /*r6pl5: HTML 3.2 Moeglichkeiten nutzen */
       {
@@ -3355,23 +3343,23 @@ GLOBAL void c_item(void)
       case ENV_ITEM:                      /* <ul> list item */
       case ENV_ENUM:                      /* <ol> list item */
          if (!bEnv1stItem[iEnvLevel])     /* not the first <li>? */
+         {
+            if (!bEnvShort[iEnvLevel])
+               out("</p>");
+               
             outln("</li>");               /* r6pl6: </li> ausgeben */
+         }
          
          bEnv1stItem[iEnvLevel] = FALSE;  /* switch off 1st Item state anyway */
          
          strcpy(sBig, "<li>");            /* output <li> */
-         bParagraphOpen = FALSE;
-         
-/* fd:2010-02-26: always !short in <ul> + <ol> environments
 
          if (!bEnvShort[iEnvLevel])
-         {
-            strcat(sBig, "<p>");
-            bParagraphOpen = TRUE;
-         }
- */       
-         
+            strcat(sBig, "<p>");          /* output <p> */
+
+         bEnv1stPara[iEnvLevel] = TRUE;   /* 1st paragraph */
          break;
+
          
       case ENV_DESC:                      /* New in V6.5.11 [NHz] */
          if (bDescDDOpen)                 /* handle still open <dd> tag first: */
@@ -3436,17 +3424,6 @@ GLOBAL void c_item(void)
          
          if (!bEnv1stItem[iEnvLevel])
          {
-            if (bParagraphOpen)
-               if (bEnvShort[iEnvLevel])
-               {
-                  if (html_doctype < XHTML_STRICT)
-                    outln("<br>");
-                   else
-                     outln("<br />");
-               }
-               else
-                  out("</p>");
-                  
             voutlnf("%s</td></tr>\n", sHtmlPropfontEnd);
             bEnv1stItem[iEnvLevel] = FALSE;
             bParagraphOpen = FALSE;
@@ -3490,10 +3467,6 @@ GLOBAL void c_item(void)
             strcat(sBig, sHtmlPropfontEnd);
             strcat(sBig, "</td>\n<td valign=\"top\">");
             strcat(sBig, sHtmlPropfontStart);
-            
-            if (!bEnvShort[iEnvLevel])
-               strcat(sBig, "\n<p>");
-            
          }
          else
          {
@@ -3502,11 +3475,6 @@ GLOBAL void c_item(void)
          
          bParagraphOpen = TRUE;
          bEnv1stItem[iEnvLevel] = FALSE;
-         
-         /* Dafuer sorgen, dass in token_output() nicht noch */
-         /* ein <P> vor <TR> gesetzt wird! */
-
-         html_ignore_p = TRUE;
          
       }  /* switch (iEnvType[iEnvLevel]) */
 
@@ -3945,7 +3913,6 @@ int   listkind)  /* */
 
       outln("</td></tr>\n</table>\n");
 
-      html_ignore_p = FALSE;              /*r6pl6*/
       bParagraphOpen = FALSE;
       break;
       
@@ -4220,6 +4187,9 @@ GLOBAL void c_end_enumerate(void)
    case TOHAH:
    case TOHTM:
    case TOMHH:
+      if (!bEnvShort[iEnvLevel + 1])
+         out("</p>");
+         
       outln("</li>");                     /* r6pl6: Mit </li> */
       outln("</ol>\n");
       break;
@@ -4316,6 +4286,9 @@ GLOBAL void c_end_itemize(void)
    case TOHAH:
    case TOHTM:
    case TOMHH:
+      if (!bEnvShort[iEnvLevel + 1])
+         out("</p>");
+         
       outln("</li>");                     /* r6pl6: mit </li> */
       outln("</ul>\n");
       break;

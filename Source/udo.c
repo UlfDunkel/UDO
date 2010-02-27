@@ -7674,9 +7674,117 @@ size_t  *u)    /* # of spaces to indent a line */
 *     format and output paragraphs
 *
 *  Notes:
-*     token_output() ist eines der Herzstuecke von UDO. Hier
-*     werden Absaetze formatiert und ausgegeben. Hier durchzusteigen
-*     faellt mir langsam selber schwer. ;-) (says Dirk ...)
+*     token_output() is one of the central functions within UDO. It is called 
+*     when all tokens of a paragraph have been collected. A 'token' is anything 
+*     like a single word which has been detected by checking the word separators, 
+*     e.g. ' ' and '\t'. (The end of a paragraph is detected by two line feeds 
+*     in a row or by a new UDO command.)
+*
+*     Within token_output() a full paragraph (or name it a 'section') is output.
+*     Some formats even control the width of lines within a paragraph here.
+*     We can specially treat the start and the end of a paragraph.
+*
+*  Example:
+*     In ENV_ITEM environment, this function will be called three times for this 
+*     source:
+*
+*     # ---snip---
+*     !begin_itemize
+*     !item This is an item.
+*
+*     It has three paragraphs.
+*
+*     This is the last paragraph.
+*     !end_itemize
+*     # ---snap---
+*
+*     In this example, somewhere else the start of the ENV_ITEM is output:
+*     # ---snip---
+*     "<ul>\n"
+*     # ---snap---
+*
+*     The 1st call of token_output() has these tokens:
+*
+*     token[0] = "<pseudocode for '<li>'"
+*     token[1] = "This"
+*     token[2] = "is"
+*     token[3] = "an"
+*     token[4] = "item."
+*     token[5] = ""             <-- Indicates the end of this paragraph content.
+*
+*     It will be output as paragraph like this (after the pseudocode has been converted):
+*
+*     # ---snip---
+*     "<li>This is an item.\n"
+*     # ---snap---
+*
+*     Depending on the environment type, we have to decide whether to close the 
+*     already output paragraph or to just remember that a first paragraph has been
+*     output, in order to be able and handle some kind of space between paragraphs
+*     just before we output the next paragraph(s).
+*
+*     The 2nd call of token_output() has these tokens:
+*
+*     token[0] = "It"
+*     token[1] = "has"
+*     token[2] = "three"
+*     token[3] = "paragraphs"
+*     token[4] = ""             <-- Indicates the end of this paragraph content.
+*
+*     It will be output as paragraph like this:
+*
+*     # ---snip---
+*     "It has three paragraphs.\n"
+*     # ---snap---
+*
+*     The 3rd call of token_output() has these tokens:
+*
+*     token[0] = "This"
+*     token[1] = "is"
+*     token[2] = "the"
+*     token[3] = "last"
+*     token[4] = "paragraph."
+*     token[5] = ""             <-- Indicates the end of this paragraph content.
+*
+*     It will be output as paragraph like this:
+*
+*     # ---snip---
+*     "This is the last paragraph.\n"
+*     # ---snap---
+*
+*     Somewhere else, the end of the ENV_ITEM is output:
+*
+*     # ---snip---
+*     "</li>\n</ul>\n"
+*     # ---snap---
+*
+*
+*  ENV_ITEM + ENV_ENUM implementation:
+*     In e.g. HTML output, we treat various ENV_... differently:
+*
+*     ENV_ITEM + ENV_ENUM:
+*     !short format example:
+*
+*     # ---snip---
+*     <ul> | <ol>
+*     <li>[content of 1st paragraph]<br>
+*
+*     [content of next paragraph(s)]</li>
+*     </ul> | </ol>
+*     # ---snap---
+*
+*     non-!short format example:
+*
+*     <ul> | <ol>
+*     <li><p>[content of 1st paragraph]<br>
+*
+*     [content of next paragraph(s)]</p></li>
+*     </ul> | </ol>
+*
+*     Note that multiple paragraphs within one <li>...</li> are not separated by
+*     inserting additional </p><p> but with <br><br>, which is much easier because 
+*     we avoid too splendid listings and can handle the additional space between 
+*     paragraphs IN FRONT of any paragraph succeeding the 1st paragraph.
 *
 *  return:
 *     -
@@ -7690,18 +7798,19 @@ BOOLEAN           reset_internals)        /* */
    register int   i,                      /* */
                   j;                      /* */
    int            silb;                   /* */
-   char          *z = tobuffer;           /* */
+   char          *z = tobuffer;           /* buffer for paragraph content output */
    char           sIndent[512];           /* */
-   size_t         umbruch;                /* */
-   BOOLEAN        newline = FALSE;        /* */
+   size_t         umbruch;                /* computes the line width for several formats */
+   BOOLEAN        newline = FALSE;        /* TRUE: (!nl) detected, we have to output some linefeed */
+                                          /*   or a line has become too long and must be wrapped */
    BOOLEAN        just_linefeed = FALSE;  /* */
    BOOLEAN        use_token;              /* */
-   BOOLEAN        inside_center,          /* */
-                  inside_right,           /* */
-                  inside_left,            /* */
-                  inside_quote;           /* */
-   BOOLEAN        inside_short,           /* */
-                  inside_env,             /* */
+   BOOLEAN        inside_center,          /* TRUE: we're inside an ENV_CENT */
+                  inside_right,           /* TRUE: we're inside an ENV_RIGH */
+                  inside_left,            /* TRUE: we're inside an ENV_LEFT */
+                  inside_quote;           /* TRUE: we're inside an ENV_QUOT */
+   BOOLEAN        inside_short,           /* TRUE: this environment should be output 'compressed' */
+                  inside_env,             /* TRUE: we're inside ENV_ITEM | ENV_ENUM | ENV_DESC | ENV_LIST */
                   inside_fussy;           /* */
    size_t         sl,                     /* */
                   len_zeile,              /* */
@@ -7761,8 +7870,14 @@ BOOLEAN           reset_internals)        /* */
    len_zeile = 0;
 
 
-   if ((token[0][0] != ' ') && (token[0][0] != INDENT_C) )
+   if ( (token[0][0] != ' ') && (token[0][0] != INDENT_C) )
       strcat_indent(z);
+
+
+
+
+
+   /* --- treat START of paragraph --- */
 
    switch (desttype)
    {
@@ -7786,32 +7901,56 @@ BOOLEAN           reset_internals)        /* */
    case TOHAH:                            /* HTML Apple Help V6.5.17 */
    case TOHTM:                            /* HTML */
    case TOMHH:                            /* Microsoft HTML Help */
-      if (inside_short)
+   
+      if (inside_center)                  /* centered text */
       {
-         if (!bParagraphOpen)
-            bParagraphOpen = TRUE;
+         if (!inside_short)
+            strcat(z, "<div align=\"center\">\n");
       }
-      else
+      else if (inside_right)              /* right-justified text */
       {
-         if (inside_center)
-            strcat(z, "<div align=\"center\">");
-         else if (inside_right)
-            strcat(z, "<div align=\"right\">");
-         else if (!inside_env)
+         if (!inside_short)
+            strcat(z, "<div align=\"right\">\n");
+      }
+      else if (!inside_env)               /* ordinary text in a <p>...</p> */
+      {
+         if (!inside_short)
             strcat(z, "<p>");
-         else
+      }
+      else                                /* inside any ENV_... */
+      {
+         switch (iEnvType[iEnvLevel])
          {
-            switch (iEnvType[iEnvLevel])
+         case ENV_ITEM:
+         case ENV_ENUM:
+         case ENV_LIST:
+            if (!bEnv1stPara[iEnvLevel])  /* horizontal space BEFORE (!) 2nd and succeeding paragraphs */
             {
-            case ENV_DESC:
-            case ENV_LIST:
-               if (!bParagraphOpen)
+               if (inside_short)
                {
-                  strcat(z, "<p>");
-                  bParagraphOpen = TRUE;
+                  if (html_doctype < XHTML_STRICT)
+                     strcat(z, "<br>\n\n");
+                  else
+                     strcat(z, "<br />\n\n");
+               }
+               else
+               {
+                  if (html_doctype < XHTML_STRICT)
+                     strcat(z, "<br><br>\n\n");
+                  else
+                     strcat(z, "<br /><br />\n\n");
                }
             }
+            
+            break;
+            
+         case ENV_DESC:
+            if (!bParagraphOpen)
+               if (!inside_short)
+                  strcat(z, "<p>");
          }
+         
+         bParagraphOpen = TRUE;           /* this paragraph is OPEN now */
       }
 
       break;
@@ -7869,6 +8008,9 @@ BOOLEAN           reset_internals)        /* */
    }  /* switch (desttype) */
 
 
+
+
+
    if (format_protect_commands)
    {
       strcpy(sIndent, z);
@@ -7885,6 +8027,12 @@ BOOLEAN           reset_internals)        /* */
          voutf("%s\\fs%d ", rtf_norm, iDocPropfontSize);
       }
    }
+
+
+
+
+
+   /* --- now COMPOSE the paragraph content --- */
 
    while (i < token_counter)
    {
@@ -8035,6 +8183,7 @@ BOOLEAN           reset_internals)        /* */
                                     /* one of which is currently handled */
                if ( (phold_counter >= 0) && (!strcmp(token[i], phold[i].magic)) )
                   ;                 /* don't insert space character after placeholders! */
+                  
                else if (i == 0 && use_justification)
                   strcat(z, INDENT_S);
                else
@@ -8059,7 +8208,7 @@ BOOLEAN           reset_internals)        /* */
 
             } /* if (token[i][0] != EOS) */
 
-            newline= FALSE;
+            newline = FALSE;
 
          } /* if ((len_zeile + len_token) <= umbruch) */
 
@@ -8139,7 +8288,7 @@ BOOLEAN           reset_internals)        /* */
 
 
 
-      if (newline)
+      if (newline)                  /* we have to wrap this line */
       {
          check_styles(z);
          replace_udo_quotes(z);
@@ -8257,7 +8406,7 @@ BOOLEAN           reset_internals)        /* */
          /* Kurze Zeilen bemaengeln, wenn sloppy nicht gesetzt ist */
          /* <???> "i + 1 < token_counter", nicht "i < token_counter"? */
 
-         if ((inside_fussy) && (z[0] != EOS) && (i + 1 < token_counter) && (!just_linefeed) )
+         if ( (inside_fussy) && (z[0] != EOS) && (i + 1 < token_counter) && (!just_linefeed) )
          {
             switch (desttype)
             {
@@ -8317,7 +8466,7 @@ BOOLEAN           reset_internals)        /* */
          replace_udo_nbsp(z);
 
 
-         switch (desttype)                   /* Letztes Leerzeichen entfernen */
+         switch (desttype)                   /* remove last space, added by concatenating the tokens */
          {
          case TORTF:
          case TOWIN:
@@ -8376,7 +8525,11 @@ BOOLEAN           reset_internals)        /* */
             check_styles_asc_last_line(z);
          }
 
-         /* Endlich kann die Zeile ausgegeben werden */
+
+
+
+
+         /* --- Endlich kann die Zeile ausgegeben werden --- */
          outln(z);
 
          /* Schonmal die naechste Zeile vorbereiten. */
@@ -8430,6 +8583,11 @@ BOOLEAN           reset_internals)        /* */
 
    }  /* while (i < token_counter) */
 
+
+
+
+
+   /* --- output the (maybe last of multiple) line output --- */
 
    if (z[0] != EOS)
    {
@@ -8552,8 +8710,7 @@ BOOLEAN           reset_internals)        /* */
       replace_udo_tilde(z);
       replace_udo_nbsp(z);
 
-      /* Letztes Leerzeichen entfernen */
-      switch (desttype)
+      switch (desttype)                   /* remove last space, added by concatenating the tokens */
       {
       case TORTF:
       case TOWIN:
@@ -8594,7 +8751,7 @@ BOOLEAN           reset_internals)        /* */
       case TOHAH:                         /* HTML Apple Help */
       case TOHTM:                         /* HTML */
       case TOMHH:                         /* Microsoft HTML Help */
-         out(z);                          /* don't close last line in paragraph! */
+         out(z);                          /* no line feed here (which would be done by outln(z)) ! */
          break;
 
       default:
@@ -8605,8 +8762,10 @@ BOOLEAN           reset_internals)        /* */
 
    check_verb_style();                    /* r5pl16 */
 
-   /* Leerzeilen dann ausgeben, wenn der Absatz sich nicht in einer */
-   /* komprimierten Umgebung befindet. */
+
+
+
+   /* --- treat END of paragraph --- */
 
    switch (desttype)
    {
@@ -8624,78 +8783,71 @@ BOOLEAN           reset_internals)        /* */
    case TOHAH:
    case TOHTM:
    case TOMHH:
-      if (inside_short)
+      if (inside_center || inside_right)
       {
-         html_ignore_p = FALSE;
-
-         if (bParagraphOpen)
-         {         
-            switch (iEnvType[iEnvLevel])
-            {
-            case ENV_DESC:
-               if (html_doctype < XHTML_STRICT)
-                  outln("<br>\n");
-               else
-                  outln("<br />\n");
-                  
-               break;
-
-            case ENV_LIST:
-               if (html_doctype < XHTML_STRICT)
-                  outln("<br>");
-               else
-                  outln("<br />");
-                  
-               break;
-
-#if 0 
-/* fd: 2010-02-26: always !short in <ul> + <ol> environments */
-            default: 
-               if (html_doctype < XHTML_STRICT)
-                  out("<br>");
-               else
-                  out("<br />");
-#endif
-            }
-         }
-         
-         bParagraphOpen = FALSE;
-
+         outln("\n</div>\n");
       }
-      else
+      else if (!inside_env)               /* close ordinary paragraph */
       {
-         if (inside_center || inside_right)
-            outln("</div>");
-         else if (!inside_env)
-            outln("</p>\n");
-         else                             /* environment */
+         outln("</p>\n");
+      }
+      else                                /* we're inside any ENV_... */
+      {
+         switch (iEnvType[iEnvLevel])
          {
+         case ENV_ITEM:
+         case ENV_ENUM:
+         case ENV_LIST:
+            bEnv1stPara[iEnvLevel] = FALSE;
+            break;
+            
+         case ENV_DESC:
             if (bParagraphOpen)
             {
-               switch (iEnvType[iEnvLevel])
+               if (inside_short)
                {
-               case ENV_DESC:
+                  if (html_doctype < XHTML_STRICT)
+                     outln("<br>\n");
+                  else
+                     outln("<br />\n");
+               }
+               else
+               {
                   outln("</p>\n");
-                  break;
-                  
-               case ENV_LIST:
-                  outln("</p>");
-                  break;
-#if 0               
-/* fd:2010-02-26: always !short in <ul> + <ol> environments  */
-               default:
-                  ;
-/*                out("</p>");
-*/
-#endif
                }
             }
+            
+            bParagraphOpen = FALSE;       /* this paragraph inside an ENV_DESC is done */
+            break;
 
+#if 0
+         case ENV_LIST:
+            if (!bEnv1stPara[iEnvLevel])
+            {
+               if (inside_short)
+               {
+                  if (html_doctype < XHTML_STRICT)
+                     outln("<br>\n");
+                  else
+                     outln("<br />\n");
+               }
+               else
+               {
+                  if (html_doctype < XHTML_STRICT)
+                     outln("ENDLIST<br><br>\n");
+                  else
+                     outln("<br /><br />\n");
+               }
+            }
+            
             bParagraphOpen = FALSE;
+            bEnv1stPara[iEnvLevel] = FALSE;
+#endif
          }
       }
 
       break;
+
 
    case TONRO:
       if (!inside_env)
@@ -12497,11 +12649,12 @@ LOCAL void c_comment(void)
 *     check special environments in pass 2
 *
 *  Return:
-*     -
+*      TRUE: force (!nl) after the end of this environment
+*     FALSE: don't force (!nl)
 *
 ******************************************|************************************/
 
-LOCAL void pass2_check_environments(
+LOCAL BOOLEAN pass2_check_environments(
 
 char     *zeile)  /* */
 {
@@ -12523,7 +12676,7 @@ char     *zeile)  /* */
                
             zeile[0] = EOS;
             output_begin_verbatim();
-            return;
+            return FALSE;
          }
       }
       else if ( (found = strstr(zeile, CMD_END_VERBATIM)) != NULL)
@@ -12535,13 +12688,13 @@ char     *zeile)  /* */
                pflag[PASS2].env = ENV_NONE;
                zeile[0] = EOS;
                output_end_verbatim();
-               return;
+               return FALSE;
             }
             else
             {
                error_end_without_begin(CMD_END_VERBATIM, CMD_BEGIN_VERBATIM);
                zeile[0] = EOS;
-               return;
+               return FALSE;
             }
          }
       }
@@ -12563,7 +12716,7 @@ char     *zeile)  /* */
                
             zeile[0] = EOS;
             output_begin_sourcecode();
-            return;
+            return FALSE;
          }
       }
       else if ( (found = strstr(zeile, CMD_END_SOURCECODE)) != NULL)
@@ -12575,13 +12728,13 @@ char     *zeile)  /* */
                pflag[PASS2].env = ENV_NONE;
                zeile[0] = EOS;
                output_end_sourcecode();
-               return;
+               return FALSE;
             }
             else
             {
                error_end_without_begin(CMD_END_SOURCECODE, CMD_BEGIN_SOURCECODE);
                zeile[0] = EOS;
-               return;
+               return FALSE;
             }
          }
       }
@@ -12601,7 +12754,7 @@ char     *zeile)  /* */
                token_output(TRUE);
                
             zeile[0] = EOS;
-            return;
+            return FALSE;
          }
       }
       else if ( (found = strstr(zeile, CMD_END_RAW)) != NULL)
@@ -12613,13 +12766,13 @@ char     *zeile)  /* */
                pflag[PASS2].env = ENV_NONE;
                zeile[0] = EOS;
                outln("");
-               return;
+               return FALSE;
             }
             else
             {
                error_end_without_begin(CMD_END_RAW, CMD_BEGIN_RAW);
                zeile[0] = EOS;
-               return;
+               return FALSE;
             }
          }
       }
@@ -12650,7 +12803,7 @@ char     *zeile)  /* */
                zeile[0] = EOS;
             }
             
-            return;
+            return FALSE;
          }
       }
       else if ( (found = strstr(zeile, CMD_END_TABLE)) != NULL)
@@ -12663,13 +12816,17 @@ char     *zeile)  /* */
                zeile[0] = EOS;
                table_output();
                outln("");
-               return;
+               
+               if (iEnvLevel > 0)         /* we're inside another environment */
+                  return TRUE;            /* force (!nl) */
+               else
+                  return FALSE;
             }
             else
             {
                error_end_without_begin(CMD_END_TABLE, CMD_BEGIN_TABLE);
                zeile[0] = EOS;
-               return;
+               return FALSE;
             }
          }
       }
@@ -12690,7 +12847,7 @@ char     *zeile)  /* */
                
             zeile[0] = EOS;
             output_begin_comment();
-            return;
+            return FALSE;
          }
       }
       else if ( (found = strstr(zeile, CMD_END_COMMENT)) != NULL)
@@ -12702,13 +12859,13 @@ char     *zeile)  /* */
                pflag[PASS2].env = ENV_NONE;
                zeile[0] = EOS;
                output_end_comment();
-               return;
+               return FALSE;
             }
             else
             {
                error_end_without_begin(CMD_END_COMMENT, CMD_BEGIN_COMMENT);
                zeile[0] = EOS;
-               return;
+               return FALSE;
             }
          }
       }
@@ -12729,7 +12886,7 @@ char     *zeile)  /* */
                
             zeile[0] = EOS;
             output_begin_linedraw();
-            return;
+            return FALSE;
          }
       }
       else if ( (found = strstr(zeile, CMD_END_LINEDRAW)) != NULL)
@@ -12741,13 +12898,13 @@ char     *zeile)  /* */
                pflag[PASS2].env = ENV_NONE;
                zeile[0] = EOS;
                output_end_linedraw();
-               return;
+               return FALSE;
             }
             else
             {
                error_end_without_begin(CMD_END_LINEDRAW, CMD_BEGIN_LINEDRAW);
                zeile[0] = EOS;
-               return;
+               return FALSE;
             }
          }
       }
@@ -12768,7 +12925,7 @@ char     *zeile)  /* */
                
             zeile[0] = EOS;
             output_begin_verbatim();
-            return;
+            return FALSE;
          }
       }
       else if ( (found = strstr(zeile, CMD_END_PREFORMATTED)) != NULL)
@@ -12780,17 +12937,19 @@ char     *zeile)  /* */
                pflag[PASS2].env = ENV_NONE;
                zeile[0] = EOS;
                output_end_verbatim();
-               return;
+               return FALSE;
             }
             else
             {
                error_end_without_begin(CMD_END_PREFORMATTED, CMD_BEGIN_PREFORMATTED);
                zeile[0] = EOS;
-               return;
+               return FALSE;
             }
          }
       }
    }
+   
+   return FALSE;                          /* should never be reached */
 }
 
 
@@ -12878,20 +13037,21 @@ char  *zeile)  /* */
 *     read and convert lines (pass 2)
 *
 *  Return:
-*     ???
+*      TRUE: everything's fine
+*     FALSE: error
 *
 ******************************************|************************************/
 
 LOCAL BOOLEAN pass2(
 
-char           *datei)           /* */
+char           *datei)            /* */
 {
-   MYTEXTFILE  *file;            /* */
-   char         zeile[LINELEN];  /* */
-   char         tmp_datei[256],  /* */
-                old_datei[256];  /* */
-   int          i;               /* */
-   size_t       len;             /* */
+   MYTEXTFILE  *file;             /* */
+   char         zeile[LINELEN];   /* */
+   char         tmp_datei[256],   /* */
+                old_datei[256];   /* */
+   int          i;                /* */
+   size_t       len;              /* */
    
 
    if (iFilesOpened >= MAXFILECOUNTER)
@@ -13015,7 +13175,7 @@ char           *datei)           /* */
       
       if (zeile[0] != '#' && pflag[PASS2].ignore_line == 0)
       {
-         pass2_check_environments(zeile);
+         (void)pass2_check_environments(zeile);
       }
 
       /* Ausgabe/Bearbeitung der aktuellen Zeile, falls eine */
@@ -13075,7 +13235,7 @@ char           *datei)           /* */
             token_output(TRUE);
          }
       }
-
+      
    }   /* while (fgets) */
 
 
@@ -15600,7 +15760,6 @@ GLOBAL void init_vars(void)
    html_header_date_zone[0]  = EOS;
    html_header_links         = FALSE;
    html_header_links_kind[0] = EOS;
-   html_ignore_p             = FALSE;
    
    sDocHtmlBackpage[0]       = EOS;
    sDocHtmlPropfontName[0]   = EOS;

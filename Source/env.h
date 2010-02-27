@@ -77,22 +77,22 @@
 *
 ******************************************|************************************/
 
-GLOBAL int       iEnvLevel;               /* Zaehler fuer Umgebungen         */
-                                          /* Typ der Umgebung (ENV_ITEM, ...   */
+GLOBAL int       iEnvLevel;               /* Zaehler fuer Umgebungen */
+                                          /* Typ der Umgebung (ENV_ITEM, ... */
 GLOBAL int       iEnvType[MAXENVLEVEL + 1];
-                                          /* Einrueckungstiefe einer Umgebung   */
+                                          /* Einrueckungstiefe einer Umgebung */
 GLOBAL int       iEnvIndent[MAXENVLEVEL + 1];
-                                          /* Zusammengequetscht?            */
+                                          /* Zusammengequetscht? */
 GLOBAL BOOLEAN   bEnvShort[MAXENVLEVEL + 1];
                                           /* Ist das naechste !item das erste? */
 GLOBAL BOOLEAN   bEnv1stItem[MAXENVLEVEL + 1];
-                                          /* Erster Absatz des !item?         */
+                                          /* Erster Absatz des !item? */
 GLOBAL BOOLEAN   bEnv1stPara[MAXENVLEVEL + 1];
 
-GLOBAL int       iItemLevel;              /* Zaehler fuer itemize-Umgebungen   */
-GLOBAL int       iEnumLevel;              /* Zaehler fuer enumerate-Umgeb.   */
-GLOBAL int       iDescLevel;              /* Zaehler fuer description-Umgeb.   */
-GLOBAL int       iListLevel;              /* Zaehler fuer xlist-Umgebungen   */
+GLOBAL int       iItemLevel;              /* Zaehler fuer itemize-Umgebungen */
+GLOBAL int       iEnumLevel;              /* Zaehler fuer enumerate-Umgeb. */
+GLOBAL int       iDescLevel;              /* Zaehler fuer description-Umgeb. */
+GLOBAL int       iListLevel;              /* Zaehler fuer xlist-Umgebungen */
 
 GLOBAL BOOLEAN   bCalledEndDocument;      /* */
 GLOBAL BOOLEAN   bCalledBeginDocument;    /* */
