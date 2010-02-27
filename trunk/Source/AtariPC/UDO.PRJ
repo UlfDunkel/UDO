@@ -4,7 +4,7 @@ UDO.TTP
 .C[ -D__COMPATIBLE__ ]
 .C[ -C- ]
 .C[ -K ]
-.C[ -2 ]
+;.C[ -2 ]
 .C[ -P ]
 .L[ -S=64000 ]
 ;.C[ -Y ]
