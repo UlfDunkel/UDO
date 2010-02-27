@@ -26,8 +26,8 @@
 *-------------------------------------------------------------------------------
 *
 *  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
-*  Co-Authors   : Norbert Hanz (NHz), Ulf Dunkel (fd)
-*  Write access : NHz, fd
+*  Co-Authors   : Norbert Hanz (NHz), Ulf Dunkel (fd), Gerhard Stoll (ggs)
+*  Write access : NHz, fd, ggs
 *
 *  Notes        : Please add yourself as co-author when you change this file.
 *
@@ -50,6 +50,7 @@
 *                - table_add_line() handled Universal Characters now
 *    fd  Feb 27: table_output_html(): additional feed before table output when
 *                  inside other environments
+*    ggs Feb 27: MAX_TAB_H increased from 600 to 700
 *
 ******************************************|************************************/
 
@@ -110,7 +111,7 @@ const char *id_tab_c= "@(#) tab.c       $date$";
 #define MAXTABCAPTION    1024             /* max. Laenge einer Ueberschrift */
 #define MAX_CELLS_LEN    4096             /* max. Zeichenanzahl einer Zelle */
 
-#define MAX_TAB_H         600             /* max. Hoehe einer Tabelle */
+#define MAX_TAB_H         700             /* max. Hoehe einer Tabelle */
 #define MAX_TAB_W          64             /* max. Breite einer Tabelle */
 #define MAX_TAB_LABEL      10             /* max. Anzahl der hinter einanderfolgenden Labels */
 #define TAB_LEFT            0             /* Spalte linksbuendig */
