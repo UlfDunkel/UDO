@@ -52,6 +52,7 @@
 *    fd  Feb 08: issue #79 fixed (weird empty lines on "!autoref []" in description environments
 *    fd  Feb 17: win2sys() -> recode_chrtab()
 *    fd  Feb 23: UDO_PL -> UDO_BUILD (no more patchlevels)
+*    fd  Feb 27: HTML output for ENV_DESC, ENV_LIST + other environments adjusted
 *
 ******************************************|************************************/
 
@@ -2051,7 +2052,29 @@ GLOBAL void c_begin_itemize(void)
    case TOHAH:
    case TOHTM:
    case TOMHH:
-      outln("<ul>");
+      if (bParagraphOpen)                 /* paragraph still open?!? */
+      {
+         if (!bEnvShort[iEnvLevel])       /* no short environment */
+         {
+            switch (iEnvType[iEnvLevel])
+            {
+            case ENV_DESC:
+               outln("</p>\n");           /* close previous paragraph first */
+               break;
+               
+            case ENV_LIST:
+               outln("</p>");             /* close previous paragraph first */
+               break;
+            
+            default:
+               out("</p>");               /* close previous paragraph first */
+            }
+         }
+      }
+      
+      bParagraphOpen = FALSE;
+         
+      outln("\n<ul>");
       break;
       
       
@@ -2179,11 +2202,31 @@ GLOBAL void c_begin_enumerate(void)
    case TOHAH:
    case TOHTM:
    case TOMHH:
-#if 1
-                                          /*r6pl5: HTML 3.2 Moeglichkeiten nutzen */
-      out("<ol");
+      if (bParagraphOpen)                 /* paragraph still open?!? */
+      {
+         if (!bEnvShort[iEnvLevel])       /* no short environment */
+         {
+            switch (iEnvType[iEnvLevel])
+            {
+            case ENV_DESC:
+               outln("</p>\n");           /* close previous paragraph first */
+               break;
+               
+            case ENV_LIST:
+               outln("</p>");             /* close previous paragraph first */
+               break;
+               
+            default:
+               out("</p>");               /* close previous paragraph first */
+            }
+         }
+      }
       
-      switch (iEnumLevel)
+      bParagraphOpen = FALSE;
+         
+      out("\n<ol");
+      
+      switch (iEnumLevel)                 /*r6pl5: HTML 3.2 Moeglichkeiten nutzen */
       {
       case 1:
       case 5:
@@ -2203,9 +2246,6 @@ GLOBAL void c_begin_enumerate(void)
       }
       
       outln(">");
-#else
-      outln("<ol>");
-#endif
       break;
       
       
@@ -2317,6 +2357,8 @@ GLOBAL void c_begin_description(void)
    case TOHTM:
    case TOMHH:
       outln("<dl>");
+      bDescDDOpen = FALSE;                /* <dd> not opened yet! */
+      bParagraphOpen = FALSE;             /* <p> not opened yet! */
       break;
       
       
@@ -2431,8 +2473,8 @@ int       listkind)     /* */
    
    if (ptr != NULL)
    {
-      /* Aha, !short wird benutzt. Da manche Dumpfnasen das aber nicht    */
-      /* immer ans Ende setzen, hier gleich die passenden Abfragen.      */
+      /* Aha, !short wird benutzt. Da manche Dumpfnasen das aber nicht */
+      /* immer ans Ende setzen, hier gleich die passenden Abfragen.    */
 
       strcpy(sShort, "!short");           /* Fuer set_env_short() */
             
@@ -3318,18 +3360,36 @@ GLOBAL void c_item(void)
          bEnv1stItem[iEnvLevel] = FALSE;  /* switch off 1st Item state anyway */
          
          strcpy(sBig, "<li>");            /* output <li> */
+         bParagraphOpen = FALSE;
+         
+/* fd:2010-02-26: always !short in <ul> + <ol> environments
+
+         if (!bEnvShort[iEnvLevel])
+         {
+            strcat(sBig, "<p>");
+            bParagraphOpen = TRUE;
+         }
+ */       
+         
          break;
          
       case ENV_DESC:                      /* New in V6.5.11 [NHz] */
          if (bDescDDOpen)                 /* handle still open <dd> tag first: */
          {
-            if (!bEnvShort[iEnvLevel])    /* additional linefeed? */
+            if (bParagraphOpen)           /* paragraph still open? */
             {
-               if (html_doctype < XHTML_STRICT)
-                  out("<br>");
-               else
-                  out("<br />");
+               if (bEnvShort[iEnvLevel])  /* additional linefeed? */
+               {
+                  if (html_doctype < XHTML_STRICT)
+                    outln("<br>");
+                   else
+                     outln("<br />");
+               }
+               else                       /* close paragraph */
+                  outln("</p>\n");
             }
+
+            bParagraphOpen = FALSE;
             
             outln("</dd>");               /* close previous <dd> tag */
          }
@@ -3352,16 +3412,22 @@ GLOBAL void c_item(void)
             
             c_internal_styles(sBig);
             strinsert(sBig, "<dt>");
-            um_strcat(sBig, "</dt>\n<dd>", 1024, "c_item[21]");
+            um_strcat(sBig, "</dt>\n<dd>\n", 1024, "c_item[21]");
          }
          else
          {
-            um_strcpy(sBig, "<dt>&nbsp;</dt>\n<dd>", 1024, "c_item[22]");
+            um_strcpy(sBig, "<dt>&nbsp;</dt>\n<dd>\n", 1024, "c_item[22]");
          }
 
+         bDescDDOpen = TRUE;              /* open DD flag */
+         
+         if (!bEnvShort[iEnvLevel])
+            um_strcat(sBig, "<p>", 1024, "c_item[22]");
+
+         bParagraphOpen = TRUE;
+         
          bEnv1stPara[iEnvLevel] = TRUE;
          bEnv1stItem[iEnvLevel] = TRUE;
-         bDescDDOpen = TRUE;              /* open DD flag */
          break;
 
       case ENV_LIST:
@@ -3370,8 +3436,20 @@ GLOBAL void c_item(void)
          
          if (!bEnv1stItem[iEnvLevel])
          {
+            if (bParagraphOpen)
+               if (bEnvShort[iEnvLevel])
+               {
+                  if (html_doctype < XHTML_STRICT)
+                    outln("<br>");
+                   else
+                     outln("<br />");
+               }
+               else
+                  out("</p>");
+                  
             voutlnf("%s</td></tr>\n", sHtmlPropfontEnd);
             bEnv1stItem[iEnvLevel] = FALSE;
+            bParagraphOpen = FALSE;
          }
          
          if (token[1][0] == '[')
@@ -3412,14 +3490,17 @@ GLOBAL void c_item(void)
             strcat(sBig, sHtmlPropfontEnd);
             strcat(sBig, "</td>\n<td valign=\"top\">");
             strcat(sBig, sHtmlPropfontStart);
-/*          strcat(sBig, "<p>");
-*/
+            
+            if (!bEnvShort[iEnvLevel])
+               strcat(sBig, "\n<p>");
+            
          }
          else
          {
             sprintf(sBig, "<tr><td>&nbsp;</td>\n<td>%s", sHtmlPropfontStart);
          }
          
+         bParagraphOpen = TRUE;
          bEnv1stItem[iEnvLevel] = FALSE;
          
          /* Dafuer sorgen, dass in token_output() nicht noch */
@@ -3856,8 +3937,16 @@ int   listkind)  /* */
    case TOHAH:
    case TOHTM:
    case TOMHH:
-      voutlnf("%s</td></tr>\n</table>\n", sHtmlPropfontEnd);
+      voutlnf("%s", sHtmlPropfontEnd);
+      
+      if (bParagraphOpen)
+         if (!bEnvShort[iEnvLevel])
+            out("</p>");
+
+      outln("</td></tr>\n</table>\n");
+
       html_ignore_p = FALSE;              /*r6pl6*/
+      bParagraphOpen = FALSE;
       break;
       
       
@@ -4023,13 +4112,20 @@ GLOBAL void c_end_description(void)
    case TOHAH:
    case TOHTM:
    case TOMHH:
-      if (!bEnvShort[iEnvLevel + 1])      /* iEnvLevel has already been descreased! */
+      if (bParagraphOpen)
       {
-         if (html_doctype < XHTML_STRICT)
-            out("<br>");
+         if (bEnvShort[iEnvLevel + 1])    /* iEnvLevel has already been decreased */
+         {
+            if (html_doctype < XHTML_STRICT)
+               outln("<br>\n");
+            else
+               outln("<br />\n");
+         }
          else
-            out("<br />");
+            outln("</p>\n");
       }
+      
+      bParagraphOpen = FALSE;
       
       outln("</dd>\n</dl>\n");            /* Changed in V6.5.11 [NHz] */
       bDescDDOpen = FALSE;                /* close DD flag anyway */

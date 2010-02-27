@@ -122,6 +122,9 @@ GLOBAL UWORD   hyphen_counter;      /* Anzahl von geladenen Trennregeln      */
 GLOBAL UWORD   macro_counter;      /* Anzahl geladener Makros            */
 GLOBAL UWORD   define_counter;      /* Anzahl geladener defines            */
 
+GLOBAL PLACEHOLDER   phold[MAXPHOLDS + 1]; /* Platzhalter */
+GLOBAL int           phold_counter;
+
 
 /*   ############################################################
    # globale Funktionen
