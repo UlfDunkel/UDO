@@ -5150,7 +5150,6 @@ GLOBAL void html_footer(void)
    if (!has_counter && !has_main_counter)
       if (no_footers || toc[p2_toc_counter]->ignore_footer)
          return;
-   
    if (titdat.webmasterurl     != NULL)
       has_content  = 0x1000;
 
@@ -5204,7 +5203,7 @@ GLOBAL void html_footer(void)
    switch (has_content)
    {
    case 0x1111:                           /* has_url + has_name + has_mailurl + has_email */
-      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
+      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"%s\">%s</a>)",
          titdat.webmasterurl, 
          titdat.webmastername,
          titdat.webmastermailurl, 
@@ -5212,7 +5211,7 @@ GLOBAL void html_footer(void)
       break;
          
    case 0x1110:                           /* has_url + has_name + has_mailurl             */
-      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
+      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"%s\">%s</a>)",
          titdat.webmasterurl, 
          titdat.webmastername,
          titdat.webmastermailurl, 
@@ -5234,7 +5233,7 @@ GLOBAL void html_footer(void)
       break;
       
    case 0x1011:                           /* has_url            + has_mailurl + has_email */
-      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
+      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"%s\">%s</a>)",
          titdat.webmasterurl, 
          titdat.webmasterurl,
          titdat.webmastermailurl, 
@@ -5242,7 +5241,7 @@ GLOBAL void html_footer(void)
       break;
    
    case 0x1010:                           /* has_url            + has_mailurl             */
-      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
+      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"%s\">%s</a>)",
          titdat.webmasterurl, 
          titdat.webmasterurl,
          titdat.webmastermailurl, 
@@ -5262,14 +5261,14 @@ GLOBAL void html_footer(void)
       break;
 
    case 0x0111:                           /*           has_name + has_mailurl + has_email */
-      sprintf(s, "%s <a href=\"mailto:%s\">%s</a>",
+      sprintf(s, "%s (<a href=\"%s\">%s</a>)",
          titdat.webmastername,
          titdat.webmastermailurl, 
          titdat.webmasteremail);
       break;
 
    case 0x0110:                           /*           has_name + has_mailurl             */
-      sprintf(s, "%s (<a href=\"mailto:%s\">%s</a>)",
+      sprintf(s, "%s (<a href=\"%s\">%s</a>)",
          titdat.webmastername,
          titdat.webmastermailurl, 
          titdat.webmastermailurl);
@@ -5288,13 +5287,13 @@ GLOBAL void html_footer(void)
       break;
 
    case 0x0011:                           /*                      has_mailurl + has_email */
-      sprintf(s, "<a href=\"mailto:%s\">%s</a>",
+      sprintf(s, "<a href=\"%s\">%s</a>",
          titdat.webmastermailurl, 
          titdat.webmasteremail);
       break;
 
    case 0x0010:                           /*                      has_mailurl             */
-      sprintf(s, "<a href=\"mailto:%s\">%s</a>",
+      sprintf(s, "<a href=\"%s\">%s</a>",
          titdat.webmastermailurl, 
          titdat.webmastermailurl);
       break;
