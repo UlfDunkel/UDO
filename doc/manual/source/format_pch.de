@@ -27,7 +27,7 @@
 !html_name  format_pch
 !alias      Pure C Help
 
-Das Pure-C-Help-Format wird nur für Pure~C, einem Compiler für
+Das Pure-C-Hilfe-Format wird nur für Pure~C, einem Compiler für
 den Atari, als Hilfesystem verwendet. Ansonsten hat es keine
 Bedeutung mehr für diesen Rechner.
 
@@ -40,7 +40,7 @@ UDO erzeugt eine Seite mit den Titelangaben und dem Inhaltsverzeichnis. Da diese
 benutzen, damit auch Programmierer mit kleinen Bildschirmen nicht
 den Überblick auf dieser Seite zu verlieren.
 
-!item [Wie kann ich bei Pure-C-Help die Kopfzeilen entfernen?]
+!item [Wie kann ich bei Pure-C-Hilfe die Kopfzeilen entfernen?]
 UDO erzeugt auf jeder Seite automatisch (!idx [Kopfzeilen]), gebildet aus
 der Überschrift der jeweiligen Seite sowie des Titels der
 Hilfedatei. Durch Anklicken des Titels kann man zur Titelseite

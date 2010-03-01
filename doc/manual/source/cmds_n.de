@@ -271,7 +271,7 @@ Keine Fußzeilen benutzen.
 Mit diesem Kommando kann man die automatische
 Erzeugung von Fußzeilen der jeweiligen Ausgabeformate
 unterbinden. Im Beispiel würde dies bei der
-Umwandlung ins Pure-C-Help-Format geschehen.
+Umwandlung ins Pure-C-Hilfe-Format geschehen.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 

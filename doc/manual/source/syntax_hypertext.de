@@ -46,7 +46,7 @@ Mit dem Befehl (!KW [label]) können im Quelltext sogenannte Sprungmarken
 !end_verbatim
 (!EXAMPLE_END)
 
-Bei den Hypertextformaten ST-Guide, HTML, WinHelp und Pure-C-Help
+Bei den Hypertextformaten ST-Guide, HTML, WinHelp und Pure-C-Hilfe
 werden solche Sprungmarken automatisch referenziert, d.h., UDO legt automatisch Querverweise zu diesen Sprungmarken an. Bei
 WinHelp werden diese Sprungmarken zusätzlich im Suchen-Dialog
 angegeben. Bei ST-Guide erscheinen sie im Index.
@@ -60,7 +60,7 @@ Die Umsetzung im Detail:
 !item [HTML:]          (!V)<a name="Beispiel"></a>(!v)
 !item [LaTeX:]         (!V)\label{Beispiel}(!v)
 !item [Linuxdoc-SGML:] (!V)<label id="Beispiel">(!v)
-!item [Pure-C-Help:]   (!V)sensitive("Beispiel")(!v) im Header
+!item [Pure-C-Hilfe:]  (!V)sensitive("Beispiel")(!v) im Header
 !item [ST-Guide:]      (!V)@symbol ar "Beispiel"(!v)
 !item [Turbo-Vision:]  (!V).topic Beispiel(!v) im Header
 !item [WinHelp:]       (!V)#{\footnote # Beispiel}(!v)
@@ -93,7 +93,7 @@ Dateien zu verweisen.
 
 (!HINT)
 
-Falls innerhalb eines der Link-Befehle ""("" oder ""]""
+Falls innerhalb eines der Link-Befehle "")"" oder ""]""
 benutzt werden, muss man diese Zeichen quoten, damit UDO den Befehl korrekt
 umsetzen kann. Beispiel:
 
@@ -247,8 +247,8 @@ Tilde keine Sonderzeichen angepasst werden (kann bei Pfadangaben fatal sein!).
 !item [UDO:]      (!KK2W [xlink] [[UDO!!] [*:\udo.hyp!!]])
 !item [ST-Guide:] @{"UDO" link "*:\udo.hyp"}
 (!nl)
-!item [UDO:]      (!KK2W [xlink] [[Atari!!] [http://www.atari.com!!]])
-!item [HTML:]     <a href="http://www.atari.com">Atari</a>
+!item [UDO:]      (!KK2W [url] [[UDO!!] [http://www.udo-open-source.org/!!]])
+!item [HTML:]     <a href="http://www.udo-open-source.org/">UDO</a>
 (!nl)
 !item [UDO:]      (!KK2W [xlink] [[UDO!!] [Titel@d:/winhelp/udo.hlp!!]])
 !item [WinHelp:]  {\uldb UDO}{\v Titel@d:/winhelp/udo.hlp}

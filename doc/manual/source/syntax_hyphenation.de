@@ -26,10 +26,8 @@
 !begin_node Silbentrennung
 !html_name  hyphenation
 
-UDO bietet für das ASCII-, ST-Guide-, Pure-C-Help- und
-Manualpage-Format eine halbautomatische Silbentrennung. Halbautomatisch
-bedeutet, dass Sie in einem Quelltext die Stellen markieren müssen, an
-denen ein Wort getrennt werden darf.
+UDO bietet für die Format ASCII, HTML, Manualpage, Pure-C-Hilfe und ST-Guide eine halbautomatische Silbentrennung an. 
+Halbautomatisch bedeutet, dass Sie in einem Quelltext die Stellen markieren müssen, an denen ein Wort getrennt werden darf.
 
 Es gibt zwei Möglichkeiten, diese Trennstellen zu setzen:
 
@@ -44,7 +42,9 @@ Bei der Umwandlung ins (!LaTeX)-Format werden die angegebenen Trennstellen
 durch ""(!code [\-])"" ersetzt. (!LaTeX) weiß dann, dass das Wort nur an den Stellen
 getrennt werden darf.
 
-Bei der Umwandlung ins Rich-Text-, WinHelp- und HTML-Format werden die
+Bei der Ausgabe im HTML-Format werden die angegebenen Trennstellen durch ""(!code [&])(!code [shy;])"" ersetzt. Dazu muss allerdings auch der Schalter (!KW [html_use_hyphenation]) im Vorspann gesetzt sein.
+
+Bei der Umwandlung ins Rich-Text- und WinHelp-Format werden die
 Trennmarken einfach gefiltert.
 
 !index (!k1 [//-])
@@ -66,8 +66,7 @@ eine halbautomatische Sil!-ben!-tren!-nung.
 (!EXAMPLE_END)
 
 Bei der Umwandlung ins (!LaTeX)-Format werden alle (!K1 [/-]) durch ""(!code [\-])"" ersetzt;
-es wird also ""Sil\-ben\-tren\-nung"" ausgegeben. Bei der Umwandlung ins
-ASCII-, ST-Guide-, Pure-C-Help- und Manualpage-Format wird das Wort
+es wird also ""Sil\-ben\-tren\-nung"" ausgegeben. Bei der Umwandlung nach ASCII, HTML, Pure-C-Hilfe, Manualpage und ST-Guide wird das Wort
 passend aufgetrennt, falls es nicht mehr komplett in eine Zeile passt
 (z.B. in ""Sil-~bentrennung"" oder ""Silben-~trennung""). Bei allen
 anderen Ausgabeformaten werden die Trennmarken einfach entfernt.
@@ -116,7 +115,7 @@ Umwandlung im FIFO-Prinzip(!N)first in first out(!n) abarbeitet.
 !begin_node Hinweise auf zu kurze Zeilen
 !html_name  hyphenation_shortlines
 
-Bei der Umwandlung ins ASCII-, Manualpage-, Pure-C-Help- und
+Bei der Umwandlung ins ASCII-, Manualpage-, Pure-C-Hilfe- und
 ST-Guide-Format kann UDO durch seine halbautomatische Silbentrennung
 dafür sorgen, dass im Ausgabetext ein relativ gleichmäßiger rechter Rand
 erzeugt bzw. beim Blocksatz eine Zeile mit wenig Leerzeichen aufgefüllt
