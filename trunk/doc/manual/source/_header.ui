@@ -16,6 +16,8 @@
 #   fd  Jun 05: header introduced
 #   fd  Jun 08: HTML settings adjusted
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Feb 26: we're at UTF-8 :-)
 #
 ################################################################################
 
@@ -25,7 +27,7 @@
 !html_favicon_name    http://www.udo-open-source.org/favicon.ico
 !html_navigation      [line]
 !html_style_name      css/udo.css
-!html_ignore_8bit     iso-8859-1
+!html_ignore_8bit     utf-8
 !html_img_suffix      gif
 
 # !html_transparent_buttons
@@ -138,6 +140,7 @@
 !use_alias_inside_index [stg,win,wh4,html,pch,asc,ipf,hh,info]
 !use_auto_toptocs       [stg,win,wh4,html,pch,ipf,hh,info]
 
+# !use_short_envs         [all]
 #!use_short_tocs        [stg,win,wh4,html,pch,ipf,hh]
 #!no_toc_subsubnodes    [stg,win,wh4,html,pch,ipf,hh]
 
