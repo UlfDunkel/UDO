@@ -40,41 +40,42 @@ eine Titelseite und greift bei der Erzeugung dieser Titelseite auf die
 Informationen zurück, die Sie im Vorspann Ihrer Quelldatei z.B. mit den
 Kommandos der folgenden Tabelle setzen:
 
-!begin_xlist [docinfo   programimage:] !short
+!begin_xlist [docinfo   programimage]
 
-!item [(!KW [docinfo] [[title!!]]):]
+!item [(!KW [docinfo] [[title!!]])]
 Der Titel des Textes, z.B. ""Die Anleitung zu"", ""Das
 Handbuch zu"" oder ""Die Einführung in"".
 
-!item [(!KW [docinfo] [[program!!]]):]
-   Der Name des im Text behandelten Themas. Hier kann man beispielsweise den Namen des Programms angeben.
+!item [(!KW [docinfo] [[program!!]])]
+      Der Name des im Text behandelten Themas. Hier kann man beispielsweise den Namen des Programms angeben.
 
-!item [(!KW [docinfo] [[programimage!!]]):]
-   Eine Grafik, die anstelle der durch (!KW [docinfo] [[program!!]]) gesetzten Information ausgegeben werden soll.
+!item [(!KW [docinfo] [[programimage!!]])]
+      Eine Grafik, die anstelle der durch (!KW [docinfo] [[program!!]]) gesetzten Information ausgegeben werden soll.
 
-!item [(!KW [docinfo] [[version!!]]):]
-   Versionsinformationen, z.B. ""Version 47.11""
+!item [(!KW [docinfo] [[version!!]])]
+      Versionsinformationen, z.B. ""Version 47.11""
 
-!item [(!KW [docinfo] [[date!!]]):]
-   Das Datum, an dem der Text verfasst oder das Programm geschrieben wurde.
+!item [(!KW [docinfo] [[date!!]])]
+      Das Datum, an dem der Text verfasst oder das Programm geschrieben wurde.
 
-!item [(!KW [docinfo] [[author!!]]):]
-   Der Name des Autors des vorliegenden Textes.
+!item [(!KW [docinfo] [[author!!]])]
+      Der Name des Autors des vorliegenden Textes.
 
-!item [(!KW [docinfo] [[authorimage!!]]):]
-   Eine Grafik, die zusätzlich oberhalb des Namen des Autors ausgegeben werden soll.
+!item [(!KW [docinfo] [[authorimage!!]])]
+      Eine Grafik, die zusätzlich oberhalb des Namen des Autors ausgegeben werden soll.
 
-!item [(!KW [docinfo] [[company!!]]):]
-   Firma, für die ein Dokument erstellt wird.
+!item [(!KW [docinfo] [[company!!]])]
+      Firma, für die ein Dokument erstellt wird.
 
-!item [(!KW [docinfo] [[address!!]]):]
-   Die Straße, Wohnort, Land usw. in der der Autor wohnt. Optional kann man natürlich irgendetwas anderes angeben, was dann unterhalb des Namens des Autors ausgegeben wird, wie z.B. Email-Adressen.
+!item [(!KW [docinfo] [[address!!]])]
+      Die Straße, Wohnort, Land usw. in der der Autor wohnt. 
+      Optional kann man natürlich irgendetwas anderes angeben, was dann unterhalb des 
+      Namens des Autors ausgegeben wird, wie z.B. Email-Adressen.
 
 !end_xlist
 
-Diese Kommandos müssen nicht alle angegeben werden. Zumindest eine
-Titelseiteninformation sollte jedoch gesetzt werden, falls man das
-Kommando (!KW [maketitle]) verwendet.
+Diese Kommandos müssen nicht alle angegeben werden. Und es gibt noch viele weitere Möglichkeiten, (!KW [docinfo]) einzusetzen. 
+Zumindest eine Titelseiteninformation sollte jedoch gesetzt werden, falls man das Kommando (!KW [maketitle]) verwendet.
 
 (!KW [maketitle]) sollte nur direkt hinter (!KW [begin_document])
 eingesetzt werden. UDO erlaubt zwar auch die Erzeugung der Titelseite
@@ -130,7 +131,7 @@ zugehörigen Abschnitte bzw. alle einem Abschnitt zugehörigen
 Unterabschnitte usw. in der Form eines kleinen Inhaltsverzeichnisses
 angeben können. Sinn und Zweck dieser sogenannten
 ""Unterinhaltsverzeichnisse"" ist es, dem Leser eines Hypertextformates
-(ST-Guide, Pure-C-Help, HTML, WinHelp) das direkte Weiterlesen zu
+(ST-Guide, Pure-C-Hilfe, HTML, WinHelp) das direkte Weiterlesen zu
 ermöglichen. Besonders beim Einsatz von (!KW [tableofcontents] [!/depth]) 
 empfiehlt sich der Gebrauch dieser Inhaltsverzeichnisse.
 
@@ -159,30 +160,30 @@ Unterinhaltsverzeichnis ausgegeben. Analog gilt dies für Abschnitte und
 
 !subsubsubheading Zusammenfassung der Befehle und Schalter
 
-!begin_xlist [use_auto_subsubsubtocs: ] !short
+!begin_xlist [use_auto_subsubsubtocs] !short
 
-!item [(!KW [tableofcontents]):]
-   Ausgabe des Inhaltsverzeichnisses auf einer eigenen Seite
-!item [(!KW [toc]):]
-   Ausgabe des Inhaltsverzeichnisse im Text
-!item [(!KW [subtoc]):]
-   Ausgabe aller Abschnitte eines Kapitels
-!item [(!KW [subsubtoc]):]
-   Ausgabe aller Unterabschnitte eines Abschnitts
-!item [(!KW [subsubsubtoc]):]
-   Ausgabe aller Paragraphen eines Unterabschnitts
-!item [(!KW [use_auto_subtocs]):]
-   Bei jedem Kapitel automatisch alle zugehörigen Abschnitte auflisten
-!item [(!KW [use_auto_subsubtocs]):]
-   Bei jedem Abschnitt automatisch alle zugehörigen Unterabschnitte auflisten
-!item [(!KW [use_auto_subsubsubtocs]):]
-   Bei jedem Unterabschnitt alle zugehörigen Paragraphen auflisten
-!item [(!KW [ignore_subtoc]):]
-   Im aktuellen Kapitel nicht die zugehörigen Abschnitte auflisten
-!item [(!KW [ignore_subsubtoc]):]
-   Im aktuellen Abschnitt nicht die zugehörigen Unterabschnitte auflisten
-!item [(!KW [ignore_subsubsubtoc]):]
-   Im aktuellen Unterabschnitt nicht die zugehörigen Paragraphen auflisten
+!item [(!KW [tableofcontents])]
+      Ausgabe des Inhaltsverzeichnisses auf einer eigenen Seite
+!item [(!KW [toc])]
+      Ausgabe des Inhaltsverzeichnisse im Text
+!item [(!KW [subtoc])]
+      Ausgabe aller Abschnitte eines Kapitels
+!item [(!KW [subsubtoc])]
+      Ausgabe aller Unterabschnitte eines Abschnitts
+!item [(!KW [subsubsubtoc])]
+      Ausgabe aller Paragraphen eines Unterabschnitts
+!item [(!KW [use_auto_subtocs])]
+      Bei jedem Kapitel automatisch alle zugehörigen Abschnitte auflisten
+!item [(!KW [use_auto_subsubtocs])]
+      Bei jedem Abschnitt automatisch alle zugehörigen Unterabschnitte auflisten
+!item [(!KW [use_auto_subsubsubtocs])]
+      Bei jedem Unterabschnitt alle zugehörigen Paragraphen auflisten
+!item [(!KW [ignore_subtoc])]
+      Im aktuellen Kapitel nicht die zugehörigen Abschnitte auflisten
+!item [(!KW [ignore_subsubtoc])]
+      Im aktuellen Abschnitt nicht die zugehörigen Unterabschnitte auflisten
+!item [(!KW [ignore_subsubsubtoc])]
+      Im aktuellen Unterabschnitt nicht die zugehörigen Paragraphen auflisten
 
 !end_xlist
 
@@ -264,9 +265,9 @@ wird, benutzen Sie hierfür die Befehle
 !begin_itemize !short
 !item (!KW [pnode]) für Popup-Kapitel,
 !item (!KW [psubnode]) für Popup-Abschnitte,
-!item (!KW [psubsubnode]) für Popup-Unterabschnitte und
-!item (!KW [psubsubsubnode]) für Popup-Paragraphen
-!item (!KW [psubsubsubsubnode]) für Popup-Paragraphen
+!item (!KW [psubsubnode]) für Popup-Unterabschnitte,
+!item (!KW [psubsubsubnode]) für Popup-Paragraphen,
+!item (!KW [psubsubsubsubnode]) für Popup-Unterparagraph
 !end_itemize
 
 Sie können auch Kapitel erstellen, die nicht in Inhaltsverzeichnissen
@@ -287,11 +288,11 @@ aufgeführt werden. Dazu benutzen Sie die Befehle
 !item (!KW [subnode*]) für Abschnitte,
 !item (!KW [subsubnode*]) für Unterabschnitte,
 !item (!KW [subsubsubnode*]) für Paragraphen,
-!item (!KW [subsubsubsubnode*]) für Paragraphen, 
+!item (!KW [subsubsubsubnode*]) für Unterparagraphen, 
 !item (!KW [pnode*]) für Popup-Kapitel,
 !item (!KW [psubnode*]) für Popup-Abschnitte,
 !item (!KW [psubsubnode*]) für Popup-Unterabschnitte,
-!item (!KW [psubsubsubnode*]) für Popup-Paragraphen und 
+!item (!KW [psubsubsubnode*]) für Popup-Paragraphen,
 !item (!KW [psubsubsubsubnode*]) für Popup-Unterparagraphen.
 !end_itemize
 

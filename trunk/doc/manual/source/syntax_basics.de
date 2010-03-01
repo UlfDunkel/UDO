@@ -52,41 +52,25 @@ Textes, sprich um den Zeilenumbruch und die Absatzabstände:
 
 !index Wort
 !item [Wörter] sind Zeichenfolgen, die durch ein oder mehrere Leerzeichen
-oder Tabulatoren voneinander getrennt sind. UDO gibt Wörter durch
-ein Leerzeichen voneinander getrennt aus.
+      oder Tabulatoren voneinander getrennt sind. UDO gibt Wörter durch
+      ein Leerzeichen voneinander getrennt aus.
 
 !index Absatz
 !item [Absätze] sind Folgen von Wörter, die durch eine oder mehrere
-Leerzeilen voneinander getrennt in der Quelldatei auftreten. UDO
-sorgt selbständig für den Zeilenumbruch innerhalb von Absätzen
-und gibt automatisch die passende Anzahl von Leerzeilen zwischen
-zwei Absätzen aus.
+      Leerzeilen voneinander getrennt in der Quelldatei auftreten. UDO
+      sorgt selbständig für den Zeilenumbruch innerhalb von Absätzen
+      und gibt automatisch die passende Anzahl von Leerzeilen zwischen
+      zwei Absätzen aus.
 
 !end_description
 
 !index Zeichensatz
-Quelltexte können in verschiedenen Zeichensätzen erstellt werden. UDO
-versteht folgende Zeichensätze:
-
-!begin_itemize !short
-!item Atari TOS                 ((!KW [code] [[tos!!]])) (!index [!/code])
-!item Apple Macintosh           ((!KW [code] [[mac!!]])) (!index [!/code])
-!item HP Roman 8                ((!KW [code] [[hp8!!]])) (!index [!/code])
-!item IBM-PC                    ((!KW [code] [[dos!!]])) (!index [!/code])
-!item IBM-PC                    ((!KW [code] [[cp437!!]])) (!index [!/code])
-!item ISO Latin 1, Windows ANSI ((!KW [code] [[iso!!]])) (!index [!/code])
-!item ISO Latin 1, Windows ANSI ((!KW [code] [[latin1!!]])) (!index [!/code])
-!item ISO Latin 1, Windows ANSI ((!KW [code] [[iso-8859-11!!]])) (!index [!/code])
-!item OS/2                      ((!KW [code] [[os2!!]])) (!index [!/code])
-!item OS/2                      ((!KW [code] [[cp850!!]])) (!index [!/code])
-!item NeXT                      ((!KW [code] [[next!!]])) (!index [!/code])
-!item Unicode UTF-8             ((!KW [code] [[utf8!!]])) (!index [!/code])
-!end_itemize
+Quelltexte können in den verschiedensten Zeichensätzen erstellt werden.
 
 Beim Start der Konvertierung erwartet UDO den aktuellen
 Systemzeichensatz. Sollen Quelltexte konvertiert werden, die andere
 Zeichensätze benutzen, muss man UDO dies mit den obigen Befehlen
-kenntlich machen. Mehr zu diesem Thema findet man im Kapitel
+kenntlich machen. Mehr zu diesem Thema finden Sie im Kapitel
 ""Sonderzeichen"".
 
 !end_node # Let's talk about text, Baby!
@@ -152,6 +136,29 @@ werden alle Zeilen ausgegeben, also auch die Zeilen, die mit einem (!code [#])
 beginnen. Innerhalb dieser Umgebung können also keine Kommentare
 benutzt werden.
 
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_node Geheimes Kapitel
+
+Dieses Kapitel enthält einen Kommentar, der nicht ausgegeben werden soll!
+# Ulf Dunkel ist doof.
+#Nein, er ist schlau!
+#             Na, so schlau nun auch wieder nicht.
+   # Das Kommentarzeichen muss am Zeilenanfang stehen!
+Der Kommentar kann sogar mitten in einem Absatz stehen.
+
+!end_node
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subheading Geheimes Kapitel
+Dieses Kapitel enthält einen Kommentar, der nicht ausgegeben werden soll!
+# Ulf Dunkel ist doof.
+#Nein, er ist schlau!
+#             Na, so schlau nun auch wieder nicht.
+   # Das Kommentarzeichen muss am Zeilenanfang stehen!
+Der Kommentar kann sogar mitten in einem Absatz stehen.
+(!EXAMPLE_END)
+
 !end_node # Kommentare
 
 # = = = = =
@@ -162,7 +169,7 @@ benutzt werden.
 !index Hauptteil
 !index Vorspann
 
-Eine Quelldatei besteht immer aus einem Vorspann(!N)auch ""Präambel""(!n) und
+Eine Quelldatei besteht immer aus einem Vorspann (auch ""Präambel"" genannt) und
 einem Hauptteil.
 
 !index (!kw [begin_document])
@@ -182,6 +189,26 @@ Im Hauptteil schließlich befindet sich der nach Kapiteln, Abschnitten
 und Unterabschnitten strukturierte Inhalt des umzuwandelnden Textes.
 Der Hauptteil schließt mit dem Kommando (!KW [end_document]).
 
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+# Vorspann
+!docinfo [author] Ulf Dunkel
+
+# Hauptteil
+!begin_document
+!make_title
+!tableofcontents
+
+!begin_node Erstes Kapitel
+
+Es war einmal, !..
+
+!end_node # Erstes Kapitel
+
+!end_document
+!end_verbatim
+(!EXAMPLE_END)
+
 !end_node # Vorspann und Hauptteil
 
 # = = = = =
@@ -199,25 +226,25 @@ Es gibt zahlreiche Umgebungen, die Ihnen die Arbeit erleichtern können
 und die die jeweiligen ausgabeformatspezifischen Besonderheiten
 berücksichtigen. Hier eine Übersicht:
 
-!begin_xlist [description-Umgebung:] !short
-!item [appendix-Umgebung:]     Anhang
-!item [center-Umgebung:]       Zentrierungen
-!item [comment-Umgebung:]      Kommentare
-!item [description-Umgebung:]  Beschreibungen
-!item [document-Umgebung:]     Dokument-Inhalt
-!item [enumerate-Umgebung:]    nummerierte Aufzählungen
-!item [flushleft-Umgebung:]    linksbündiger Text
-!item [flushright-Umgebung:]   rechtsbündiger Text
-!item [ignore-Umgebung:]       Textpassagen ignorieren
-!item [itemize-Umgebung:]      einfache Aufzählungen
-!item [linedraw-Umgebung:]     Screenshots darstellen
-!item [preformatted-Umgebung:] vorformatierter Text
-!item [quote-Umgebung:]        Einrückungen
-!item [raw-Umgebung:]          spezielle Befehle des Ausgabeformats
-!item [table-Umgebung:]        Tabellen
-!item [verbatim-Umgebung:]     vorformatierter Text
-!item [xlist-Umgebung:]        Listen
-!item [sourcecode-Umgebung:]   Sourcecode
+!begin_xlist [description-Umgebung] !short
+!item [appendix-Umgebung]     Anhang
+!item [center-Umgebung]       Zentrierungen
+!item [comment-Umgebung]      Kommentare
+!item [description-Umgebung]  Beschreibungen
+!item [document-Umgebung]     Dokument-Inhalt
+!item [enumerate-Umgebung]    nummerierte Aufzählungen
+!item [flushleft-Umgebung]    linksbündiger Text
+!item [flushright-Umgebung]   rechtsbündiger Text
+!item [ignore-Umgebung]       Textpassagen ignorieren
+!item [itemize-Umgebung]      einfache Aufzählungen
+!item [linedraw-Umgebung]     Screenshots darstellen
+!item [preformatted-Umgebung] vorformatierter Text
+!item [quote-Umgebung]        Einrückungen
+!item [raw-Umgebung]          spezielle Befehle des Ausgabeformats
+!item [table-Umgebung]        Tabellen
+!item [verbatim-Umgebung]     vorformatierter Text
+!item [xlist-Umgebung]        Listen
+!item [sourcecode-Umgebung]   Sourcecode
 !end_xlist
 
 Wie der Text, der innerhalb dieser Umgebungen steht, behandelt wird,
