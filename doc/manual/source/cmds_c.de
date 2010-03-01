@@ -26,6 +26,7 @@
 # 2010:
 #   fd  Mar 01: - new chapters: code_source, code_target
 #               - OldKeywords removed -> cmds__old.de
+#               - tiny corrections
 #
 ################################################################################
 
@@ -206,7 +207,7 @@ Hier eine Übersicht, welches Kürzel für den Zeichensatz benutzt
 werden kann:
 
 !include charsets.ui
-!item [(!EXISTSSINCE)] Release~7.00
+!item [(!EXISTSSINCE)] Version~7.00
 !item [(!SEEALSO)]
 (!link [Sonderzeichen] [Sonderzeichen])
 !end_xlist
@@ -218,7 +219,7 @@ werden kann:
 !begin_node (!kw [code_target])
 !html_name  cmd_code_target
 
-Legt fest, in welchem Encoding der Quelltext ausgegeben werden soll.
+Legt fest, in welchem Encoding das Zielformat ausgegeben werden soll.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -236,7 +237,7 @@ werden kann:
 
 !include charsets.ui
 
-!item [(!EXISTSSINCE)] Release~7.00
+!item [(!EXISTSSINCE)] Version~7.00
 
 !item [(!SEEALSO)]
 (!link [Sonderzeichen] [Sonderzeichen])

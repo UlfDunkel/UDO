@@ -189,7 +189,7 @@ Zeichensätzen erstellt wurden. Und um es richtig komfortabel zu machen,
 können Quelltexte sogar aus einem Mischmasch benutzter
 Zeichensätze bestehen.
 
-Sie müssen UDO nur mittels (!KW [code]) (!C)(!CHARSET)(!c) mitteilen, mit welchem
+Sie müssen UDO nur mittels (!KW [code_source]) (!C)(!CHARSET)(!c) mitteilen, mit welchem
 Zeichensatz die folgenden Zeilen erstellt wurden.
 
 Hier eine Übersicht, welches Kürzel für den Zeichensatz benutzt werden kann:
