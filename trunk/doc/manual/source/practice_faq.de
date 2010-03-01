@@ -84,10 +84,7 @@ andere Betriebssysteme erzeugt werden, da die Versionen identisch
 sind. So ist es möglich, mit der Atari-Version WinHelp-Quelltexte
 zu erzeugen oder unter OS/2 mit der DOS-Version ST-Guide-Quelltexte.
 
-Ggf. muss nur eine Umsetzung der Sonderzeichen erfolgen.
-Dies kann man z.B. mit GNU-recode durchführen. Auf Wunsch gibt es
-auch bei (!link [uns] [Kontaktadresse]) ein Programm zur Umsetzung der Sonderzeichen in
-Textdateien.
+Die Umsetzung der Sonderzeichen kann UDO für alle unterstützten Codepages selbst vornehmen. Falls Sie andere Quelltext-Encodings haben, hilft vermutlich das Unix-Kommandozeilen-Programm (!file [iconv]) am ehesten weiter, um die Quelltexte umzumappen. Gern bauen wir weitere Codepages in UDO ein, wenn sie benötigt werden.
 
 # = = =
 
