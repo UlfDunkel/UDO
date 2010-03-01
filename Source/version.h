@@ -58,6 +58,7 @@
 *                - CODE_CP1256 (Arabic)
 *                - CODE_CP1258 (Vietnamese)
 *    fd  Feb 25: v7.00 RC2
+*    fd  Mar 01: v7.00 public release
 *
 ******************************************|************************************/
 
@@ -89,9 +90,9 @@
    /* --- Release-Nummer und Patchlevel setzen --- */
 
 #define UDO_REL     "7"
-#define UDO_SUBVER  "00 RC2"
-#define UDO_BUILD   "(build 944)"
-#define UDO_URL     "http://www.udo-open-source.org"
+#define UDO_SUBVER  "00"
+#define UDO_BUILD   "(build 977)"
+#define UDO_URL     "http://www.udo-open-source.org/"
 #define UDO_MADE    "Made with UDO"
 
    /* --- Copyright Meldung --- */
