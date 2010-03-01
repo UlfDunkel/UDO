@@ -318,7 +318,7 @@ Das hier ist Zelle 3
    !item Neu: Die Navigationsleiste hat jetzt immer einen Link zur Index-Seite. (!nl)
          Der Link wird in einem Span namens ""UDO_nav_index"" ausgegeben und kann bequem per CSS z.B. rechtsbündig auf der Seite platziert werden.
          
-   !item Feature-Wunsch #70: Das Kommando (!KKW [img]) wurde erweitert.
+   !item Feature-Wunsch (!BUG [70]): Das Kommando (!KKW [img]) wurde erweitert.
          
    !item Die (!LINK)-Elemente für die Navigation werden nicht mehr automatisch, sondern
          nur noch auf Anforderung in den HTML-Header geschrieben (siehe oben).
@@ -338,7 +338,7 @@ Das hier ist Zelle 3
          werden die alten Elemente benutzt.
          
    !item Der Bereich der Titelseite wird jetzt durch folgendes Konstrukt geklammert: (!nl)
-         <div id="udo_titlepage"></div>
+         (!C)<div id="udo_titlepage"></div>(!c)
          
    !item Bei (!KW [use_raw_header]) und (!KW [use_raw_footer]) werden Makros und Defines ausgeführt.
          
@@ -364,7 +364,7 @@ Das hier ist Zelle 3
          
    !item Beim Kommando (!KW [html_style_name]) können beliebig viele Stylesheets übergeben werden.
          
-   !item Bisher gab es ein <a name="UDOTOC"></a> vor dem
+   !item Bisher gab es ein (!C)<a name="UDOTOC"></a>(!c) vor dem
          Inhaltsverzeichnis, auf das man bei der HTML-Ausgabe innerhalb
          von Raw-Umgebungen verweisen kann.
          
