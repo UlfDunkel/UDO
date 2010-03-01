@@ -19,11 +19,14 @@
 #   fd  Jun 06: dates updated
 #   fd  Jun 10: macro DATE removed (not really required)
 #   fd  Dec 15: #788 released (enhancement in !html_navigation)
+# 2010:
+#   fd  Feb 25: v7.00 RC2 (rev. 944)
+#   fd  Mar 01: v7.00 public release (rev. 977)
 #
 ################################################################################
 
-!macro RELEASE  6
-!macro VERSION  (!RELEASE).5.20 beta (rev. 788)
+!macro RELEASE  7
+!macro VERSION  (!RELEASE).00 (rev. 977)
 
 !docinfo [version]  (!VERSION)
 !docinfo [date]     (!today)
