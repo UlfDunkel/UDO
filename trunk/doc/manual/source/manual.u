@@ -73,6 +73,7 @@
 #   fd  Jun 10: _def.ui no longer required -> macros.ui
 # 2010:
 #   fd  Feb 25: codepage adjusted to UDO 7
+#   fd  Feb 26: using the new encoding commands !code_source + !code_target
 #
 ################################################################################
 
@@ -80,6 +81,8 @@
 # The source files were written using the Windows codepage 1252 (Western).
 # ------------------------------------------------------------------------------
 !code [cp1252]
+!code_source [cp1252]
+!code_target [utf-8]
 
 !include _header.ui                       # switches
 !include _lang.ui                         # language of this document
