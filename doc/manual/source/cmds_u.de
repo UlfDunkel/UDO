@@ -30,8 +30,8 @@
 #   fd  Jun 16: great review session #1
 #   fd  Jun 25: 'die URL' -> 'der URL' (it refers to 'locator')
 # 2010:
-#   fd  Mar 01: new chapters: use_short_description, use_short_enumerate,
-#                 use_short_itemize, use_short_list
+#   fd  Mar 01: new chapters: use_short_descriptions, use_short_enumerates,
+#                 use_short_itemizes, use_short_lists
 #
 ################################################################################
 
@@ -908,8 +908,8 @@ Dieser Befehl wird derzeit nur für HTML und RTF unterstützt.
 
 # = = = = =
 
-!begin_node (!kw [use_short_description])
-!html_name  cmd_use_short_description
+!begin_node (!kw [use_short_descriptions])
+!html_name  cmd_use_short_descriptions
 
 ""Komprimierte"" Description-Umgebungen benutzen.
 
@@ -917,14 +917,14 @@ Dieser Befehl wird derzeit nur für HTML und RTF unterstützt.
 
 !item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/use_short_description [(!FORMAT)](!t)
+!item [(!SYNTAX)] (!T)!/use_short_descriptions [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, werden
 alle Description-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
 Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
 
-Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_description]) als Teilmenge davon keine Wirkung mehr.
+Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_descriptions]) als Teilmenge davon keine Wirkung mehr.
 
 !item [(!EXISTSSINCE)] Version~7.00
 
@@ -937,7 +937,7 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_descr
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-!use_short_description [all]
+!use_short_descriptions [all]
 
 # Dokument
 !begin_description
@@ -969,7 +969,7 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_descr
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-# !use_short_description [all]
+# !use_short_descriptions [all]
 # !use_short_envs        [all]
 
 # Dokument
@@ -1002,8 +1002,8 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_descr
 
 # = = = = =
 
-!begin_node (!kw [use_short_enumerate])
-!html_name  cmd_use_short_enumerate
+!begin_node (!kw [use_short_enumerates])
+!html_name  cmd_use_short_enumerates
 
 ""Komprimierte"" Enumerate-Umgebungen benutzen.
 
@@ -1011,14 +1011,14 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_descr
 
 !item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/use_short_enumerate [(!FORMAT)](!t)
+!item [(!SYNTAX)] (!T)!/use_short_enumerates [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, werden
 alle Enumerate-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
 Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
 
-Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_enumerate]) als Teilmenge davon keine Wirkung mehr.
+Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_enumerates]) als Teilmenge davon keine Wirkung mehr.
 
 !item [(!EXISTSSINCE)] Version~7.00
 
@@ -1031,7 +1031,7 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_enume
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-!use_short_enumerate [all]
+!use_short_enumerates [all]
 
 # Dokument
 !begin_enumerate
@@ -1053,7 +1053,7 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_enume
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-# !use_short_enumerate [all]
+# !use_short_enumerates [all]
 # !use_short_envs      [all]
 
 # Dokument
@@ -1096,7 +1096,7 @@ Beispiel würde dieser Schalter für das ASCII-Format gesetzt.
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~15
 
 !item [(!SEEALSO)]
-(!KW [begin_blist]), (!KW [begin_description]), (!KW [begin_enumerate]), (!KW [begin_ilist]), (!KW [begin_itemize]), (!KW [begin_tlist]), (!KW [begin_xlist]), (!KW [short]), (!KW [use_short_description]), (!KW [use_short_enumerate]), (!KW [use_short_itemize]), (!KW [use_short_list]), (!KW [use_short_tocs]), (!link [Umgebungen] [Umgebungen])
+(!KW [begin_blist]), (!KW [begin_description]), (!KW [begin_enumerate]), (!KW [begin_ilist]), (!KW [begin_itemize]), (!KW [begin_tlist]), (!KW [begin_xlist]), (!KW [short]), (!KW [use_short_descriptions]), (!KW [use_short_enumerates]), (!KW [use_short_itemizes]), (!KW [use_short_lists]), (!KW [use_short_tocs]), (!link [Umgebungen] [Umgebungen])
 
 !end_xlist
 
@@ -1111,8 +1111,8 @@ Beispiel würde dieser Schalter für das ASCII-Format gesetzt.
 
 # = = = = =
 
-!begin_node (!kw [use_short_itemize])
-!html_name  cmd_use_short_itemize
+!begin_node (!kw [use_short_itemizes])
+!html_name  cmd_use_short_itemizes
 
 ""Komprimierte"" Itemize-Umgebungen benutzen.
 
@@ -1120,14 +1120,14 @@ Beispiel würde dieser Schalter für das ASCII-Format gesetzt.
 
 !item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/use_short_itemize [(!FORMAT)](!t)
+!item [(!SYNTAX)] (!T)!/use_short_itemizes [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, werden
 alle Itemize-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
 Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
 
-Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_itemize]) als Teilmenge davon keine Wirkung mehr.
+Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_itemizes]) als Teilmenge davon keine Wirkung mehr.
 
 !item [(!EXISTSSINCE)] Version~7.00
 
@@ -1140,7 +1140,7 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_itemi
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-!use_short_itemize [all]
+!use_short_itemizes [all]
 
 # Dokument
 !begin_itemize
@@ -1162,7 +1162,7 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_itemi
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-# !use_short_itemize [all]
+# !use_short_itemizes [all]
 # !use_short_envs    [all]
 
 # Dokument
@@ -1185,8 +1185,8 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_itemi
 
 # = = = = =
 
-!begin_node (!kw [use_short_list])
-!html_name  cmd_use_short_list
+!begin_node (!kw [use_short_lists])
+!html_name  cmd_use_short_lists
 
 ""Komprimierte"" Listen-Umgebungen benutzen.
 
@@ -1194,14 +1194,14 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_itemi
 
 !item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/use_short_list [(!FORMAT)](!t)
+!item [(!SYNTAX)] (!T)!/use_short_lists [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, werden
 alle Listen-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
 Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
 
-Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_list]) als Teilmenge davon keine Wirkung mehr.
+Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_lists]) als Teilmenge davon keine Wirkung mehr.
 
 !item [(!EXISTSSINCE)] Version~7.00
 
@@ -1214,7 +1214,7 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_list]
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-!use_short_list [all]
+!use_short_lists [all]
 
 # Dokument
 !begin_blist
@@ -1246,7 +1246,7 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_list]
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-# !use_short_list [all]
+# !use_short_lists [all]
 # !use_short_envs [all]
 
 # Dokument
