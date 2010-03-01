@@ -46,6 +46,7 @@
 *    fd  Jan 30: file reformatted and tidied up
 *    fd  Feb 16: udofile is global now (udo.h)
 *    fd  Feb 23: UDO_PL -> UDO_BUILD (no more patchlevels)
+*    fd  Mar 01: !code -> !code_source
 *
 ******************************************|************************************/
 
@@ -315,7 +316,7 @@ GLOBAL void output_about_udo(void)
    
 
    fprintf(uif, "!newpage\n");
-   fprintf(uif, "!code [sys]\n");
+   fprintf(uif, "!code_source [sys]\n");
    fprintf(uif, "!sloppy\n\n");
    fprintf(uif, "!node* %s\n", strUdoNodeName);
    fprintf(uif, "!html_name %s\n", strUdoHtmlName);
