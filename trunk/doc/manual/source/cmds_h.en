@@ -29,67 +29,12 @@
 #   fd  Dec 15: chapter html_navigation enhanced and translated
 # 2010:
 #   fd  Jan 20: chapter html_quotes added and translated
+#   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #
 ################################################################################
 
 !begin_node H!..
 !html_name  cmds_h
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [=htag])
-!html_name  cmd_htag-eq
-
-Query the destination format.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/=htag (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[htag!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [=html])
-!html_name  cmd_html-eq
-
-Query the destination format.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/=html (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[html!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -402,34 +347,6 @@ a table. Not all destination formats support horizontal lines.
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kw [htag])
-!html_name  cmd_htag
-
-Query the destination format.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/htag (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[htag!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 !begin_node (!kw [htag_img_suffix])
 !html_name  cmd_htag_img_suffix
 
@@ -468,34 +385,6 @@ the image suffix right before every image.
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [html])
-!html_name  cmd_html
-
-Query the destination format.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/html (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[html!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -955,93 +844,6 @@ name, including extension, of the file name.
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [html_frames_column_color])
-!html_name  cmd_html_frames_column_color
-
-Specify the background color of left frame (HTML only).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/html_frames_column_color (!COLOR)(!t)
-
-!item [(!DESCRIPTION)]
-This command existed in a beta version only and has been renamed to (!KW [html_frames_backcolor]).
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~4
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~9
-
-!item [(!SEEALSO)]
-(!KW [html_frames_backcolor])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [html_frames_column_image])
-!html_name  cmd_html_frames_column_image
-
-Specify a background image for left frame (HTML only).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/html_frames_column_image (!FILE)(!t)
-
-!item [(!DESCRIPTION)]
-This command existed in a beta version only and has been renamed to (!KW [html_frames_backimage]).
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~4
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~9
-
-!item [(!SEEALSO)]
-(!KW [html_frames_backimage])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [html_frames_column_width])
-!html_name  cmd_html_frames_column_width
-
-Breite des Rahmens beim Frames-Layout bestimmen (nur HTML).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/html_frames_column_width <width>(!t)
-
-!item [(!DESCRIPTION)]
-This command only existed in a beta version and has been renamed to (!KW [html_frames_width]).
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~4
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~9
-
-!item [(!SEEALSO)]
-(!KW [html_frames_width])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -1785,93 +1587,6 @@ name, including extension, of the file name.
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kw [html_modern_column_color])
-!html_name  cmd_html_modern_color
-
-Specify the background color of ""modern"" layout (HTML only).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/html_modern_column_color (!COLOR)(!t)
-
-!item [(!DESCRIPTION)]
-This command existed in a beta version only and has been renamed to (!KW [html_modern_backcolor]).
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~3
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~9
-
-!item [(!SEEALSO)]
-(!KW [html_modern_backcolor])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [html_modern_column_image])
-!html_name  cmd_html_modern_column_image
-
-Setzen des Hintergrundbildes beim ""modernen"" Layout (nur HTML).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/html_modern_column_image (!FILE)(!t)
-
-!item [(!DESCRIPTION)]
-This command existed in a beta version only and has been renamed to (!KW [html_modern_backimage]).
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~4
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~9
-
-!item [(!SEEALSO)]
-(!KW [html_modern_backimage])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [html_modern_column_width])
-!html_name  cmd_html_modern_column_width
-
-Breite der linken Spalte beim ""modernen"" Layout bestimmen (nur HTML).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/html_modern_column_width <width>(!t)
-
-!item [(!DESCRIPTION)]
-This command only existed in a beta version and has been renamed to (!KW [html_modern_width]).
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~3
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~9
-
-!item [(!SEEALSO)]
-(!KW [html_modern_width])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 !begin_node (!kw [html_modern_layout])
 !html_name  cmd_html_modern_layout
 
@@ -2149,89 +1864,6 @@ Chapter 1 > Chapter 1.1 > Chapter 1.1.1 Index
 (!EXAMPLE_END)
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [html_navigation_image])
-!html_name  cmd_html_navigation_image
-
-Output a folder symbol in front of the navigation bar (HTML only, requires (!KW [html_navigation_line])). 
-Using an additional parameter you can define your own symbol image.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/html_navigation_image (!FILE)(!t)
-
-!item [(!DESCRIPTION)]
-If this switch is used in the preamble and (!KW [html_navigation_line]) is also used, 
-a single folder symbol will be output in front of the navigation line. 
-This visualizes the purpose of the navigation line at first sight.
-
-The optional parameter can be used to define a userdef image.
-
-!item [(!EXAMPLE)]
-(!T)!/html_navigation_image(!t) (!nl)
-(!img [udo_fo] [folder])~~Chapter 1 > Chapter 1.1 > Chapter 1.1.1 > Chapter 1.1.1.1
-
-!item [(!EXISTSSINCE)] Version 6.5.19
-
-!item [(!EXISTEDUNTIL)] Version 6.5.20
-
-!item [(!SEEALSO)]
-(!KW [html_navigation_line])
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
-# (!TEXT) kann max. 20 Zeichen haben.
-!ifset OldKeywords
-!begin_node (!kw [html_navigation_line])
-!html_name  cmd_html_navigation_line
-
-Output of navigation section in a single line (HTML only).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/html_navigation_line (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-If you use this switch in the preamble, the navigation area on top of the page will 
-be output in a single navigation line, basically without folder symbols, separated by ' > '.
-
-Use the optional [(!TEXT)] parameter to define your own separator text. 
-It will be enclosed by blanks automatically to avoid that the 
-node names are glued to the separator text.
-
-!item [(!HINT)]
-The navigation line is embedded in a (!code [<div>]) environment with the CSS class (!B)UDO_nav_line(!b). 
-So you can format its content with CSS commands.
-
-!item [(!EXAMPLE)]
-(!T)!/html_navigation_line(!t) (!nl)
-Chapter 1 > Chapter 1.1 > Chapter 1.1.1 > Chapter 1.1.1.1
-
-!item [(!EXAMPLE)]
-(!T)!/html_navigation_line ::(!t) (!nl)
-Chapter 1 :: Chapter 1.1 :: Chapter 1.1.1 :: Chapter 1.1.1.1
-
-!item [(!EXISTSSINCE)] Version 6.5.19
-
-!item [(!EXISTEDUNTIL)] Version 6.5.20
-
-!item [(!SEEALSO)]
-(!KW [html_navigation_image])
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -2646,36 +2278,6 @@ Mit diesem Kommando können Sie festlegen, dass UDO
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kw [html_use_xlist])
-!html_name  cmd_html_use_xlist
-
-Output xlist environment like in ASCII (HTML only).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/html_use_xlist(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [use_xlist] [[html!!]]).
-
-!item [(!EXISTSSINCE)] Release~4 Version~0.47
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~1
-
-!item [(!SEEALSO)]
-(!KW [use_xlist])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 !begin_node (!kw [html_verbatim_backcolor])
 !html_name  cmd_html_verbatim_backcolor
 
@@ -2722,64 +2324,6 @@ Sets the color that is used to display visited links in HTML pages.
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [htmlkeywords])
-!html_name  cmd_htmlkeywords
-
-Set META keywords for HTML.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/htmlkeywords (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-This command has been renamed to (!KW [html_keywords]).
-
-!item [(!EXISTSSINCE)] Release~5 Patchlevel~3
-
-!item [(!EXISTEDUNTIL)] Release~5 Patchlevel~13
-
-!item [(!SEEALSO)]
-(!KW [html_keywords])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [htmlname])
-!html_name  cmd_htmlname
-
-Assign filename (HTML only).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/htmlname (!FILE)(!t)
-
-!item [(!DESCRIPTION)]
-This command no longer exists and has been renamed to (!KW [html_name])
-
-!item [(!EXISTSSINCE)] Release~4 Version~0.37
-
-!item [(!EXISTEDUNTIL)] Release~5 Patchlevel~13
-
-!item [(!SEEALSO)]
-(!KW [html_name])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 

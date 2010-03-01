@@ -19,40 +19,13 @@
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #
 ################################################################################
 
 !begin_node F!..
 !html_name  cmds_f
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [french])
-!html_name  cmd_french
-
-Define language.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/french(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-# Der Befehl (!KW [french]) existiert nicht mehr.
-(!USEINSTEAD[]) (!KW [language] [[french!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~1
-
-!item [(!SEEALSO)]
-(!KW [language])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 

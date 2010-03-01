@@ -21,6 +21,8 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 16: html_name no longer uses CAPITAL letters
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #
 ################################################################################
 
@@ -59,34 +61,6 @@ Text styles, (!link [Text styling] [Text styling]), (!KKKW [T] [t]), (!KW [tex_v
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kw [verbatim_no_umlaute])
-!html_name  cmd_verbatim_no_umlaute
-
-Do not use (German) umlauts in verbatim environments.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/verbatim_no_umlaute(!t)
-
-!item [(!DESCRIPTION)]
-This command (!KW [verbatim_no_umlaute]) has been renamed to (!KW [no_verbatim_umlaute]).
-#TODO: wann?
-
-!item [(!EXISTEDUNTIL)] Release~5 Patchlevel~6
-
-!item [(!SEEALSO)]
-(!KW [no_verbatim_umlaute])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 !begin_node (!kw [verbatimsize])
 !html_name  cmd_verbatimsize
 
@@ -116,34 +90,6 @@ activated with ""(!code [tiny])"", the largest one with
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [version])
-!html_name  cmd_version
-
-Set document information about version number (of program) for title page.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/version (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [docinfo] [[version!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [maketitle]), (!KW [docinfo]), (!link [Title page] [Title page])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 

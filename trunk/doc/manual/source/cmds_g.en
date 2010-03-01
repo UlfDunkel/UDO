@@ -17,40 +17,13 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: 'Postscript' -> 'PostScript'
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #
 ################################################################################
 
 !begin_node G!..
 !html_name  cmds_g
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [german])
-!html_name  cmd_german
-
-Define language.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/german(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-# Der Befehl (!KW [german]) existiert nicht mehr.
-(!USEINSTEAD[]) (!KW [language] [[german!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~1
-
-!item [(!SEEALSO)]
-(!KW [language])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
