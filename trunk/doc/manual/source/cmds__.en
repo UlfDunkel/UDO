@@ -314,8 +314,6 @@ Three minus characters in a row will be replaced by a long dash if
 the destination format supports them. If the destination format
 doesn't support them UDO will output one normal minus character
 
-!endif
-
 !item [(!EXAMPLE)]
 (!T)A long (---) er, ah (---) dash(!t)
 

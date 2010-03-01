@@ -156,7 +156,7 @@ computer UDO will expect the TOS character set by default.
 
 But UDO can manage file that are written with another character set, too.
 You have simply to tell UDO which character set your source file uses with
-(!KW [code]) (!C)[(!CHARSET)](!c).
+(!KW [code_source]) (!C)[(!CHARSET)](!c).
 
 Below is an overview of the character sets UDO knows about:
 

@@ -180,27 +180,52 @@ converts tabs according to (!KW [tabwidth]). (!FILESPACEQUOTE)
 
 # = = = = =
 
-!begin_node (!kw [code])
-!html_name  cmd_code
+!begin_node (!kw [code_source])
+!html_name  cmd_code_source
 
-Auf einen anderen Zeichensatz umschalten.
+Sets the encoding of the source document(s).
 
 !begin_xlist [(!TYPEPOSITION)]
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/code(!t) (!CHARSET)
+!item [(!SYNTAX)] (!T)!/code(!t) [(!CHARSET)]
 
 !item [(!DESCRIPTION)]
-UDO expects files written in the IBM-PC character set after this
-command. You can switch back to your system charset with by
-using this command again with name of your system character set.
+After this command, UDO expects text which has been written using the selected encoding. 
+To switch back to the system encoding, use this command again with the system encoding name.
 
-Below is an overview of the character sets UDO knows about:
+Here is an overview about the available encoding names:
 
 !include charsets.ui
+!item [(!EXISTSSINCE)] Version~7.00
+!item [(!SEEALSO)]
+(!link [Special characters] [Special characters])
+!end_xlist
 
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [code_target])
+!html_name  cmd_code_target
+
+Sets the encoding of the target document(s).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code(!t) [(!CHARSET)]
+
+!item [(!DESCRIPTION)]
+After this command, UDO outputs text in the selected encoding. 
+To switch back to the system encoding, use this command again with the system encoding name.
+
+Here is an overview about the available encoding names:
+!include charsets.ui
+
+!item [(!EXISTSSINCE)] Version~7.00
 
 !item [(!SEEALSO)]
 (!link [Special characters] [Special characters])

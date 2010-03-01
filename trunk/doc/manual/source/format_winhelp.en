@@ -171,8 +171,8 @@ You can speed up the conversion if you write the source files with a Windows
 editor. In this case UDO doesn't have to convert the characters from the IBM
 PC character set into the Windows ANSI character set.
 
-If you write source file with a Windows Editor you have to insert the switch
-(!KW [code] [[iso!!]]) inside the preamble of your source file. If you forget to
+If you write source file with a Windows Editor you have to e.g. insert the command 
+(!KW [code_source] [[iso!!]]) inside the preamble of your source file. If you forget to
 do this UDO will think that the source file was written with the IBM PC
 character set.
 

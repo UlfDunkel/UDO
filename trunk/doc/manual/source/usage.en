@@ -44,8 +44,11 @@ is available for.
 !begin_node GEM version
 !html_name  usage_gem
 
+(!NTY)
+Für GEM (Atari-Plattformen) steht für UDO eine graphische Bedienungsoberfläche (Shell) zur Verfügung, die aber derzeit nicht mehr weiterentwickelt wird. Siehe (!url [http://www.udo-open-source.org/download/shells.php] []).
+
 # neuer Text 28.01.2004 - Ulrich Kretschmer
-The former GEM version of UDO is currently not available.
+# The former GEM version of UDO is currently not available.
 
 # auskommentiert 28.01.2004 - Ulrich Kretschmer
 !begin_ignore
