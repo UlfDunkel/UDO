@@ -15,6 +15,8 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from history.de)
 #   fd  Jun 25: 'die URL' -> 'der URL' (it refers to 'locator')
+# 2010:
+#   fd  Mar 01: using macro BUG
 #
 ################################################################################
 
@@ -27,8 +29,7 @@
 !begin_description !short
 !item [(!BUGFIXES)]
    !begin_itemize
-   !item Bug #0000003 (!nl)
-         Die Meldung ""Letzte Änderung am!.."" kommt jetzt mit den richtigen
+   !item Bug (!BUG [3]): Die Meldung ""Letzte Änderung am!.."" kommt jetzt mit den richtigen
          französischen Umlauten.
    !end_itemize
 !end_description
@@ -37,8 +38,8 @@
 !begin_description !short
 !item [(!BUGFIXES)]
    !begin_itemize
-   !item Speicherbedarf von URLs bei der RTF-Ausgabe auf 4096 Zeichen intern
-         (d.h. 1024 Zeichen können vom Benutzer angegeben werden) erhöht.
+   !item Speicherbedarf von URLs bei der RTF-Ausgabe auf 4.096 Zeichen intern
+         (d.h. 1.024 Zeichen können vom Benutzer angegeben werden) erhöht.
    !end_itemize
 !end_description
 

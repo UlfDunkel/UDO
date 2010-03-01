@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from history.de)
 # 2010:
 #   fd  Feb 25: renamed for UDO 7
+#   fd  Mar 01: using macro BUG
 #
 ################################################################################
 
@@ -92,7 +93,7 @@ UDO~7 ist ein großer Sprung seit der letzten veröffentlichten Version. Vor allem
    !item In der Tabellen-Umgebung können Labels eingefügt werden.
    !item In Tabellen werden UDO-Universalzeichen jetzt korrekt ausgegeben.
    !item Tabellen-Zellen dürfen jetzt max. 700 Zeilen hoch sein.
-   !end_itemize # Tabellen
+   !end_itemize
 
 
 
@@ -237,13 +238,13 @@ Das hier ist Zelle 3
 !item [Allgemeine (!BUGFIXES)]
 # ----------------------------------------
    !begin_itemize
-   !item Bugfix #38: Zeichenausgaben (nicht nur in Mac-Encodings) sollten dank Umstellung auf Unicode keine Fehler mehr haben.
-   !item Bugfix #45/#77: Stack-Overflow mit der DOS-Version von UDO behoben.
-   !item Bugfix #48: Fehlermeldung ""unknown command: !html_use_hyphenation"". Ursache: Das Kommando fehlte in der Kommandoliste.
-   !item Bugfix #55: Umlaute, die in (!KKW [img]) oder (!KKW [ilink]) im zweiten Parameter vorkamen, wurden nicht richtig umgesetzt.
-   !item Bugfix #59: Nichtfunktion, wenn Makro intern eine Definition aufruft.
-   !item Bugfix #75: (!KW [raw])-Ausgaben korrigiert.
-   !item Bugfix #78: Sortierung in der Index-Seite (z.B. indexudo.htm) wesentlich verbessert.
+   !item Bugfix (!BUG [38]): Zeichenausgaben (nicht nur in Mac-Encodings) sollten dank Umstellung auf Unicode keine Fehler mehr haben.
+   !item Bugfix (!BUG [45])/(!BUG [77]): Stack-Overflow mit der DOS-Version von UDO behoben.
+   !item Bugfix (!BUG [48]): Fehlermeldung ""unknown command: !html_use_hyphenation"". Ursache: Das Kommando fehlte in der Kommandoliste.
+   !item Bugfix (!BUG [55]): Umlaute, die in (!KKW [img]) oder (!KKW [ilink]) im zweiten Parameter vorkamen, wurden nicht richtig umgesetzt.
+   !item Bugfix (!BUG [59]): Nichtfunktion, wenn Makro intern eine Definition aufruft.
+   !item Bugfix (!BUG [75]): (!KW [raw])-Ausgaben korrigiert.
+   !item Bugfix (!BUG [78]): Sortierung in der Index-Seite (z.B. indexudo.htm) wesentlich verbessert.
    !end_itemize
 
 
@@ -301,13 +302,13 @@ Das hier ist Zelle 3
    !item Neue Schalter:
    !begin_blist !short
    !item [(!KW [html_header_links])]
-         #53: Neuer Schalter, der je nach Vorgabe (!LINK)-Elemente im HTML-Header erzeugt.
+         (!BUG [53]): Neuer Schalter, der je nach Vorgabe (!LINK)-Elemente im HTML-Header erzeugt.
    !item [(!KW [html_header_date]) (!TEXT)]
-         #54: Bisher wurde zu Beginn jeder HTML-Datei ein Kommentar mit dem Datum der Datei-Erzeugung eingefügt, z.B. (!nl)
+         (!BUG [54]): Bisher wurde zu Beginn jeder HTML-Datei ein Kommentar mit dem Datum der Datei-Erzeugung eingefügt, z.B. (!nl)
          (!code [<!!-- last modified on 29.01.2004 -->]). 
          Nunmehr wird, wenn dieser Schalter gesetzt ist, im HTML-Header ein META-Tag für Datum/Uhrzeit der Datei-Erzeugung erzeugt.
    !item [(!KW [html_quotes]) [classic | tags!]]
-         #82: Mit diesem neuen Schalter können Sie steuern, ob An-/Abführungszeichen wie früher als <tt>&amp;quot;</tt> ausgegeben werden sollen ([classic]) oder als HTML-Quotation-Tags &lt;q&gt; + &lt;/q/&gt; ([tags], voreingestellt).
+         (!BUG [82]): Mit diesem neuen Schalter können Sie steuern, ob An-/Abführungszeichen wie früher als <tt>&amp;quot;</tt> ausgegeben werden sollen ([classic]) oder als HTML-Quotation-Tags &lt;q&gt; + &lt;/q/&gt; ([tags], voreingestellt).
    !end_blist
          
    !item Neu: Indexseite für HTML, die auch eine Sprungmarkenleiste (A--Z) für schnelleres Auffinden in langen Index-Listen mitbringt.
@@ -342,8 +343,8 @@ Das hier ist Zelle 3
    !item Bessere HTML-Formatierung und -Compliance:
          !begin_itemize
          !item Attribute (nowrap, noresize) erweitert.
-         !item #11: (<br />, <hr />, <img />, <frame />, <link />)
-         !item #11: XML-Namespace für XHTML-Dateien hinzugefügt.
+         !item (!BUG [11]): (<br />, <hr />, <img />, <frame />, <link />)
+         !item (!BUG [11]): XML-Namespace für XHTML-Dateien hinzugefügt.
          !item Description-Umgebungen werden sauber formatiert, auch bei enthaltenen Links.
          !item Listen und Tabellen werden sauberer und syntaxrichtig ausgegeben.
          !item Ankernamen enthalten nur noch für URLs erlaubte Zeichen.
@@ -370,19 +371,20 @@ Das hier ist Zelle 3
          innerhalb des UDO-Quelltextes auf UDOTOC verweisen, ohne dass ein
          Fehler auftritt.
 
-   !item Bugfix #12: Keine unnötigen Leerzeichen mehr hinter Tags.
-   !item Bugfix #44: Wenn (!KW [no_numbers]) gesetzt ist, werden keine Nummern mehr vor
+   !item Bugfix (!BUG [12]): Keine unnötigen Leerzeichen mehr hinter Tags.
+   
+   !item Bugfix (!BUG [44]): Wenn (!KW [no_numbers]) gesetzt ist, werden keine Nummern mehr vor
          die Kapitelnamen innerhalb des (!LINK)-Elementes im HTML-Header geschrieben.
          
-   !item Bugfix #58: Falsche UDO-Versionsbezeichnung in HTML-Metatags korrigiert.
+   !item Bugfix (!BUG [58]): Falsche UDO-Versionsbezeichnung in HTML-Metatags korrigiert.
    
-   !item Bugfix #65: Falsche Zeichenausgabe in IMG-Tags korrigiert.
+   !item Bugfix (!BUG [65]): Falsche Zeichenausgabe in IMG-Tags korrigiert.
    
-   !item Bugfix #83: Anker-URL enthalten nur noch erlaubte Zeichen für URL-Angaben.
+   !item Bugfix (!BUG [83]): Anker-URL enthalten nur noch erlaubte Zeichen für URL-Angaben.
    
-   !item Bugfix #84: Label in Description-Umgebungen werden korrekt in DT-Tags eingeschlossen.
+   !item Bugfix (!BUG [84]): Label in Description-Umgebungen werden korrekt in DT-Tags eingeschlossen.
 
-   !item Bugfix #85: TOC-Listen werden korrekt formatiert.
+   !item Bugfix (!BUG [85]): TOC-Listen werden korrekt formatiert.
    !end_itemize
 
 
@@ -410,15 +412,15 @@ Das hier ist Zelle 3
 
 !item Neu: (!KW [use_raw_header]) kann auch für die RTF-Ausgabe benutzt werden.
 
-!item Bugfix #56: Falsche Berechnung der Ausmaße von Bildern bei der RTF-Ausgabe. Versehentlich wurde dem Parameter ""Höhe"" die Breite übergeben.
+!item Bugfix (!BUG [56]): Falsche Berechnung der Ausmaße von Bildern bei der RTF-Ausgabe. Versehentlich wurde dem Parameter ""Höhe"" die Breite übergeben.
 
-!item Bugfix #17: Fehlermeldung: ""couldn't read BMP header of <udo_mw.bmp>. No such file or directory."" (!nl)
+!item Bugfix (!BUG [17]): Fehlermeldung: ""couldn't read BMP header of <udo_mw.bmp>. No such file or directory."" (!nl)
       Neuer Zustand: Wenn beim ersten Übersetzungslauf nach RTF das UDO-Link-Bild (!file [udo_mw.bmp]) noch
       nicht vorhanden ist, wird jetzt ein Hinweis ausgegeben, das Dokument ein
       weiteres Mal zu übersetzen, um es zu vervollständigen. (!nl)
       Das UDO-Bild wird jetzt auch auf TOS-kompatiblen Computern gefunden.
 
-!item Bugfix #60: Abstürze bei RTF-Ausgabe beseitigt.
+!item Bugfix (!BUG [60]): Abstürze bei RTF-Ausgabe beseitigt.
 
 !end_itemize
 

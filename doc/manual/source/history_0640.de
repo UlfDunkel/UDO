@@ -14,6 +14,8 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from history.de)
+# 2010:
+#   fd  Mar 01: using macro BUG
 #
 ################################################################################
 
@@ -48,7 +50,7 @@ unten links !! unten mitte !! unten rechts
 !begin_description
 !item [(!BUGFIXES)]
    !begin_itemize !short
-   !item Bug #0000040 in Version 6.2.2 beseitigt (!nl)
+   !item Bug (!BUG [40]) in Version 6.2.2 beseitigt (!nl)
          Beseitigung mehrerer kleiner Fehler in der PostScript-Ausgabe.
          Unter anderem wird in der Fuﬂzeile keine Copyright-Zeichen
          mehr ausgegeben, wenn kein Author gesetzt ist. Die eckigen
@@ -70,10 +72,8 @@ unten links !! unten mitte !! unten rechts
 
 !item [(!BUGFIXES)]
    !begin_itemize
-   !item Bug #0000035 (!nl)
-         Falscher ungarischer Akzent korrigiert.
-   !item Bug #0000039 (!nl)
-         (!KW [html_name_prefix]) wurde nicht bei den (!LINK)-Elementen nicht benutzt.
+   !item Bug (!BUG [35]): Falscher ungarischer Akzent korrigiert.
+   !item Bug (!BUG [39]): (!KW [html_name_prefix]) wurde nicht bei den (!LINK)-Elementen nicht benutzt.
    !end_itemize
 
 !end_description
