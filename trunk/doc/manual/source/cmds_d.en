@@ -28,6 +28,7 @@
 #   fd  Aug 17: 'information' never used in plural in English!
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
+#   fd  Mar 02: chapter cmd_docinfo much enhanced
 #
 ################################################################################
 
@@ -177,7 +178,6 @@ containing only the chapter names.
 
 # = = = = =
 
-# ToDo: Englisch
 !begin_node (!kw [docinfo])
 !html_name  cmd_docinfo
 
@@ -284,18 +284,84 @@ Wird für HTML-Apple-Help benötigt und beschreibt den Titel der Hilfe.
 Wird für HTML-Apple-Help benötigt. Damit wird das Icon angegeben, welches der Apple Help Viewer
 anzeigen soll.
 
-!item [webmastername|webmasteremail|webmasterurl]
-If you specify webmaster information, UDO will
-output following lines at the end of each page:
+!item [webmasterurl|webmastername|webmastermailurl|webmasteremail]
+Werden alle diese Kontaktdaten (in vier einzelnen Zeilen!) angegeben, erzeugt UDO standardmäßig am Ende einer jeden Seite Folgende Kontektdaten-Fußzeile:
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !begin_verbatim
-Copyright (!copyright) <webmastername> [<webmasteremail>|<webmasterurl>]
-Last updated on (!today)
+# Vorspann
+!docinfo [webmasterurl]       http://www.udo-open-source.org/
+!docinfo [webmastername]      UDO OpenSource
+!docinfo [webmastermailurl]   webmaster@udo-open-source.org
+!docinfo [webmasteremail]     E-Mail an den Webmaster
+
+# Dokument
+!begin_document
+!make_title
+!end_document
 !end_verbatim
+(!EXAMPLE_AFTER)
+Copyright (!copyright) (!url [UDO OpenSource] [http://www.udo-open-source.org/]) ((!url [E-Mail an den Webmaster] [mailto:webmaster@udo-open-source.org])) (!nl)
+Letzte Aktualisierung am (!today)
 (!EXAMPLE_END)
 
-<webmasterurl> has priority over <webmasteremail>. If you don't specify
+Werden weniger Informationen angegeben, so werden die Kontaktdaten in der Fußzeile entsprechend angepasst. Nachfolgend einige weitere Beispiele.
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!docinfo [webmasterurl]      http://www.meinedomain.de/
+!docinfo [webmastermailurl]  ich@meinedomain.de
+
+# Dokument
+!begin_document
+!make_title
+!end_document
+!end_verbatim
+(!EXAMPLE_AFTER)
+Copyright (!copyright) (!url [http://www.meinedomain.de/] [http://www.meinedomain.de/]) ((!url [ich@meinedomain.de] [mailto:ich@meinedomain.de])) (!nl)
+Letzte Aktualisierung am (!today)
+(!EXAMPLE_END)
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!docinfo [webmastername]      Meine Firma
+!docinfo [webmasteremail]     Mein Name
+
+# Dokument
+!begin_document
+!make_title
+!end_document
+!end_verbatim
+(!EXAMPLE_AFTER)
+Copyright (!copyright) Meine Firma (Mein Name) (!nl)
+Letzte Aktualisierung am (!today)
+(!EXAMPLE_END)
+
+Das zuletzt gezeigte Beispiel zeigt, dass nur die Parameter mit (!code [url]) im Parameternamen tatsächlich anklickbare Links ergeben.
+
+Aber es ist auch möglich, als E-Mail-Kontaktlink keine echte E-Mail-Adresse, sondern einen URL anzugeben, der zu einem Kontaktformular führt. Denn mittlerweile ist es nicht mehr unbedingt erwünscht, dass E-Mail-Adressen im Klartext in Webseiten zu sehen sind. Sonst sind sie für Roboter, die E-Mail-Adressen zum Spammen suchen, eine leichte Beute. Enthält der Text für (!code [[webmastermailurl!]]) keinen Klammeraffen (!code [@]), so geht UDO davon aus, dass er stattdessen einen URL enthält, wie im folgenden Beispiel.
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!docinfo [webmasterurl]      http://www.meinedomain.de/
+!docinfo [webmastername]     Meine Domäne
+!docinfo [webmastermailurl]  http://www.meinedomain.de/kontakt.php
+!docinfo [webmasteremail]    Kontakt
+
+# Dokument
+!begin_document
+!make_title
+!end_document
+!end_verbatim
+(!EXAMPLE_AFTER)
+Copyright (!copyright) (!url [Meine Domäne] [http://www.meinedomain.de/]) ((!url [Kontakt] [http://www.meinedomain.de/kontakt.php])) (!nl)
+Letzte Aktualisierung am (!today)
+(!EXAMPLE_END)
+
+(!HINT) If you don't specify
 any data or use the switch (!KW [no_footers] [[html!!]]) in the preamble,
 UDO will output nothing.
 
