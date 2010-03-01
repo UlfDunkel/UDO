@@ -29,7 +29,7 @@ Bevor Sie mit dem Schreiben eines UDO-Quelltextes beginnen, werfen Sie
 bitte einen Blick auf die folgenden Regeln und prägen Sie sie sich
 ein:
 
-!begin_description
+!begin_description !short
 !item [1. Geben Sie Ihrem Text eine übersichtliche Struktur.]
       Eine weiser Zeitgenosse sagte mal: ""Wenn etwas einfach ausgedrückt werden kann, kann es einfach ausgedrückt werden.""
       
@@ -61,7 +61,7 @@ ein:
 
 
 !item [6. Vermeiden Sie gleichnamige Überschriften.]
-      Nicht nur dass Sie damit UDO und Hypertext-Compiler verwirren,
+      Nicht nur, dass Sie damit UDO und Hypertext-Compiler verwirren,
       nein, auch die Leser geraten bei gleichnamigen Kapiteln durcheinander.
 
 

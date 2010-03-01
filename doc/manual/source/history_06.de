@@ -32,11 +32,11 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
 !begin_description
 
 !item [Neue Formate:]
-   !begin_itemize
+   !begin_itemize !short
    !item Apple QuickView
    !item HP-HelpTag-SGML (rudimentär)
    !item LyX
-   !item NROFF
+   !item NROFF (!nl)
          Dieses Format, bei dem ich mir gar nicht sicher bin, ob es denn
          nun NROFF ist, oder nicht vielleicht TROFF oder GROFF oder was
          auch immer, wird nun rudimentär unterstützt.
@@ -45,7 +45,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
          es jetzt schon bereits verwenden, um auf einfache Art und Weise
          Manpages für Unix-Systeme zu erstellen.
          
-         !item C-Sourcecode und Pascal-Sourcecode
+         !item C-Sourcecode und Pascal-Sourcecode (!nl)
          Mit diesen beiden Formaten ist es nun erstmals mit UDO möglich,
          Quelltext und dessen Dokumentation in einer Datei
          zusammenzufassen.

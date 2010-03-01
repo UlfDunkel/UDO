@@ -76,7 +76,7 @@ einzige Zeile ""sichtbaren"" Textes.
 
 (!B)Mögliche Anwendungsgebiete:(!b)
 
-!begin_enumerate
+!begin_enumerate !short
 
 !item Bei umfangreichen Texten empfiehlt es sich, die Kapitel in
 eigenen Dateien zu halten und von einer Hauptdatei mittels
@@ -199,7 +199,7 @@ von ""(!C)(!1)(!c)"" gesetzt.
 
 (!HINTS)
 
-!begin_enumerate
+!begin_enumerate !short
 !item Bei der Namensvergabe der Makros sollte man möglichst darauf
 achten, diese nicht wie bereits existente Befehle oder Platzhalter zu
 benennen. So sollten sie ein Makro nicht ""(!code [B])"" oder ""(!code [nl])"" nennen, da
@@ -340,7 +340,7 @@ zu nichts expandiert. Dieser Umweg ist leider nötig.
 
 (!HINTS)
 
-!begin_enumerate
+!begin_enumerate !short
 !item Der Text, der zusammen mit (!KW [define]) angegeben wird, wird
 nicht an das Ausgabeformat angepasst.
 
@@ -431,7 +431,7 @@ man eine Fehlermeldung durch UDO vermeidet, falls das Symbol
 
 (!HINTS)
 
-!begin_enumerate
+!begin_enumerate !short
 !item Es sind maximal (!MAXDEFINE) Symbole erlaubt.
 
 !item Der Bezeichner eines Symbols darf maximal (!MAXSYMLEN) Zeichen lang sein.
@@ -490,19 +490,31 @@ benutzt werden. Die folgenden Beispiele zeigen, wie die Umsetzung nach
 !item [RTF:]   ein {\xe\v Index}Index
 !item [Win:]   ein {K{\footnote K Index}}Index
 !item [sonst:] ein Index
+!end_xlist
 
+!smallskip
+
+!begin_xlist [LaTeX:] !short
 !item [UDO:]   ein (!KK2W [idx] [[Wort!!] [Index!!]])
 !item [LaTeX:] ein Wort\index{Index}
 !item [RTF:]   ein {\xe\v Index}Wort
 !item [Win:]   ein {K{\footnote K Index}}Wort
 !item [sonst:] ein Wort
+!end_xlist
 
+!smallskip
+
+!begin_xlist [LaTeX:] !short
 !item [UDO:]   ein (!KK2W [idx] [[Wort!!] [Index!!] [Subindex!!]])
 !item [LaTeX:] ein Wort\index{Index!Subindex}
 !item [RTF:]   ein {\xe\v Index, Subindex}Wort
 !item [Win:]   ein {K{\footnote K Index, Subindex}}Wort
 !item [sonst:] ein Wort
+!end_xlist
 
+!smallskip
+
+!begin_xlist [LaTeX:] !short
 !item [UDO:]   ein (!KK2W [idx] [[Wort!!] [Index!!] [Subindex!!] [Subsubindex!!]])
 !item [LaTeX:] ein Wort\index{Index!Subindex!Subsubindex}
 !item [RTF:]   ein {\xe\v Index, Subindex, Subsubindex}Wort
@@ -514,7 +526,7 @@ benutzt werden. Die folgenden Beispiele zeigen, wie die Umsetzung nach
 
 (!HINTS)
 
-!begin_enumerate
+!begin_enumerate !short
 !index (!kw [no_index])
 !item Die Umwandlung von Indizes lässt sich durch den Schalter (!KW [no_index])
 im Vorspann unterbinden.

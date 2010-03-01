@@ -20,7 +20,7 @@
 
 UDO wandelt Dateien vom eigenen UDO-Format in folgende Formate um:
 
-!begin_itemize
+!begin_itemize !short
 !item (!link [AmigaGuide] [AmigaGuide])
 !item (!link [Apple Help Book] [Apple Help Book (HTML)])
 !item (!link [Apple QuickView] [Apple QuickView])

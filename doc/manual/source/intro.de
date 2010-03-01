@@ -87,7 +87,7 @@ Unter der oberen Navigationssymbole-Leiste finden Sie zudem die Kapitelhierarchi
 !item [Schrift]
 Da das UDO-Handbuch eher in die Kategorie ""Technisches Handbuch und Nachschlagewerk"" gehört, haben wir bestimmte Texte auf bestimmte Weise markiert, damit Sie z.B. Code oder Dateinamen rascher von normalem Text unterscheiden können.
 
-!begin_itemize
+!begin_itemize !short
 !item (!code [Code benutzt diese Schriftart.])
 !item (!file [Dateinamen, Pfade und ähnliches werden so dargestellt.])
 !item (!red)Konstanten, die im Programm verwendet werden, sind so dargestellt.(!coloff)
@@ -203,8 +203,7 @@ Falls Sie keine Frage mit Ja beantworten sollten, dann dürfte es sehr
 wahrscheinlich so sein, dass ein Weiterlesen dieser Dokumentation oder
 der Einsatz von UDO für Sie überflüssig ist.
 
-!begin_itemize
-
+!begin_itemize !short
 !item Sie haben einen Text mit allgemeinem Inhalt verfasst und möchten
 diesen auch Personen zugänglich machen, die nicht das Betriebssystem
 benutzen, welches Sie selbst einsetzen?
@@ -404,7 +403,7 @@ die nicht explizit als solche ausgewiesen sind. Aus dem Fehlen einer
 Kennzeichnung kann nicht geschlossen werden, dass ein Name frei von den
 Rechten Dritter ist.
 
-!begin_itemize
+!begin_itemize !short
 !item Atari, TOS und MultiTOS sind Warenzeichen oder eingetragene Warenzeichen der Atari Corporation.
 !item Arial und Times New Roman sind eingetragene Warenzeichen der Monotype Corporation PLC.
 !item GEM und GEM Desktop sind Warenzeichen oder eingetragene Warenzeichen von Digital Research.
