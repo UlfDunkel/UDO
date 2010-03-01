@@ -53,6 +53,10 @@
 *    fd  Feb 17: win2sys() -> recode_chrtab()
 *    fd  Feb 23: UDO_PL -> UDO_BUILD (no more patchlevels)
 *    fd  Feb 27: HTML output for ENV_DESC, ENV_LIST + other environments adjusted
+*    fd  Mar 01: new: use_short_itemize
+*                     use_short_enumerate
+*                     use_short_description
+*                     use_short_list
 *
 ******************************************|************************************/
 
@@ -210,6 +214,27 @@ const char  *s)   /* */
       bEnvShort[el] = TRUE;
       return;
    }
+   else if ( (use_short_itemize) && (iEnvType[el] == ENV_ITEM) )
+   {
+      bEnvShort[el] = TRUE;
+      return;
+   }
+   else if ( (use_short_enumerate) && (iEnvType[el] == ENV_ENUM) )
+   {
+      bEnvShort[el] = TRUE;
+      return;
+   }
+   else if ( (use_short_description) && (iEnvType[el] == ENV_DESC) )
+   {
+      bEnvShort[el] = TRUE;
+      return;
+   }
+   else if ( (use_short_list) && (iEnvType[el] == ENV_LIST) )
+   {
+      bEnvShort[el] = TRUE;
+      return;
+   }
+     
    
    bEnvShort[el] = (strstr(s, "!short") != NULL);
 

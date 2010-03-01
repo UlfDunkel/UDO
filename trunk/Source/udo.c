@@ -84,6 +84,10 @@
 *                - udocharset[]: more mnemonics as used in Unix command iconv
 *    fd  Feb 26: token_output() no longer adds ' ' behind placeholder token (issue #12)
 *    fd  Feb 27: HTML output for ENV_DESC, ENV_LIST + other environments adjusted
+*    fd  Mar 01: new: use_short_itemize
+*                     use_short_enumerate
+*                     use_short_description
+*                     use_short_list
 *
 ******************************************|************************************/
 
@@ -733,7 +737,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
 };
 
 
-#define MAXSWITCH  41
+#define MAXSWITCH  45
 
 LOCAL const UDOSWITCH udoswitch[MAXSWITCH + 1] =
 {
@@ -742,8 +746,12 @@ LOCAL const UDOSWITCH udoswitch[MAXSWITCH + 1] =
    { "!use_auto_subsubsubtocs",    &use_auto_subsubsubtocs,    'i',  "!depth",    &subtocs3_depth },
    { "!use_auto_subsubsubsubtocs", &use_auto_subsubsubsubtocs, 'i',  "!depth",    &subtocs4_depth },
    { "!use_auto_toptocs",          &use_auto_toptocs,          'b',  "!no_icons", &no_auto_toptocs_icons },
-   { "!use_short_envs",            &use_short_envs,            '\0', "",          NULL },
    { "!use_short_tocs",            &use_short_tocs,            '\0', "",          NULL },
+   { "!use_short_envs",            &use_short_envs,            '\0', "",          NULL },
+   { "!use_short_itemize",         &use_short_itemize,         '\0', "",          NULL },
+   { "!use_short_enumerate",       &use_short_enumerate,       '\0', "",          NULL },
+   { "!use_short_description",     &use_short_description,     '\0', "",          NULL },
+   { "!use_short_list",            &use_short_list,            '\0', "",          NULL },
    { "!use_formfeed",              &use_formfeed,              '\0', "",          NULL },
    { "!use_chapter_images",        &use_chapter_images,        '\0', "",          NULL },
    { "!use_about_udo",             &use_about_udo,             '\0', "",          NULL },
