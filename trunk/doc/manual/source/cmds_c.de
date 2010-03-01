@@ -23,6 +23,8 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 12: macro renamed: CODE -> CHARSET
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: new chapters: code_source, code_target
 #
 ################################################################################
 
@@ -205,6 +207,69 @@ werden kann:
 !include charsets.ui
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!link [Sonderzeichen] [Sonderzeichen])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [code_source])
+!html_name  cmd_code_source
+
+Legt fest, in welchem Encoding der Quelltext geschrieben wurde.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code(!t) [(!CHARSET)]
+
+!item [(!DESCRIPTION)]
+UDO erwartet nach diesem Kommando Texte oder
+Textpassagen, die in dem entsprechenden Zeichensatz verfasst
+wurden. Um wieder auf den Systemzeichensatz
+zurückzuwechseln, verwenden Sie dieses Kommando noch einmal
+mit dem Namen des Systemzeichensatzes.
+
+Hier eine Übersicht, welches Kürzel für den Zeichensatz benutzt
+werden kann:
+
+!include charsets.ui
+!item [(!EXISTSSINCE)] Release~7.00
+!item [(!SEEALSO)]
+(!link [Sonderzeichen] [Sonderzeichen])
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [code_target])
+!html_name  cmd_code_target
+
+Legt fest, in welchem Encoding der Quelltext ausgegeben werden soll.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/code(!t) [(!CHARSET)]
+
+!item [(!DESCRIPTION)]
+UDO setzt nach diesem Kommando Texte oder Textpassagen in das festgelegte Encoding um.
+Um wieder auf den Systemzeichensatz zurückzuwechseln, verwenden Sie dieses Kommando noch einmal
+mit dem Namen des Systemzeichensatzes.
+
+Hier eine Übersicht, welches Kürzel für den Zeichensatz benutzt
+werden kann:
+
+!include charsets.ui
+
+!item [(!EXISTSSINCE)] Release~7.00
 
 !item [(!SEEALSO)]
 (!link [Sonderzeichen] [Sonderzeichen])
