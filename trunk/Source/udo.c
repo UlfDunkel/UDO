@@ -88,6 +88,7 @@
 *                     use_short_enumerate
 *                     use_short_description
 *                     use_short_list
+*                !code command and c_code() function removed -> code_source
 *
 ******************************************|************************************/
 
@@ -586,7 +587,6 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
    { "!end_document",                 "",        c_end_document,            TRUE,  CMD_ONLY_MAINPART },
    { "!sloppy",                       "",        c_sloppy,                  TRUE,  CMD_ALWAYS },
    { "!fussy",                        "",        c_fussy,                   TRUE,  CMD_ALWAYS },
-   { "!code",                         "",        c_code,                    TRUE,  CMD_ALWAYS },
    { "!code_source",                  "",        c_code_source,             TRUE,  CMD_ALWAYS },
    { "!code_target",                  "",        c_code_target,             TRUE,  CMD_ALWAYS },
    { "!autoref",                      "",        c_autoref,                 TRUE,  CMD_ALWAYS },
@@ -4974,53 +4974,6 @@ LOCAL void c_sloppy(void)
 LOCAL void c_fussy(void)
 {
    bDocSloppy = FALSE;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  c_code():
-*     change internal encoding
-*
-*  Notes:
-*     Reacts on the UDO command "!code [xxx]".
-*     iCharset is used sometimes in CHR.C, esp. in recode().
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void c_code(void)
-{
-   char   s[256];  /* */
-   int    i = 0;   /* counter for udocharset[] */
-
-   if (token[1][0] == EOS)                /* this command needs a parameter */
-   {
-      error_missing_parameter("!code");
-      return;
-   }
-
-   tokcpy2(s, 256);
-
-   my_strlwr(s);                          /* the mnemonics are LOWERCASE */
-
-   while (udocharset[i].magic[0] != EOS)
-   {
-      if (strstr(s, udocharset[i].magic) != NULL)
-      {
-         iCharset = udocharset[i].codepage;
-         return;
-      }
-      
-      i++;
-   }
-
-   error_no_charset(s);
 }
 
 
@@ -12257,10 +12210,6 @@ char           *datei)           /* */
                   else if (strcmp(token[0], "!ldinclude") == 0)
                   {
                      c_include_linedraw();
-                  }
-                  else if (strcmp(token[0], "!code") == 0)
-                  {
-                     c_code();
                   }
                   else if (strcmp(token[0], "!code_source") == 0)
                   {
