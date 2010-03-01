@@ -81,7 +81,7 @@ Datei, hätten wir schon längst den Überblick verloren.
 # = = = = =
 
 !begin_node Verwenden Sie standardisierte Quelltexte
-!html_name  tips_standardize
+!html_name  tips_standardize_text
 
 Es soll ja Autoren geben, die laufend neue Programme oder Hypertexte
 veröffentlichen. Und in fast allen Beschreibungen tauchen Kapitel auf,
@@ -135,6 +135,72 @@ Zugegeben, dies ist nur ein kurzes Beispiel. Bei umfangreicheren
 Texten ist es jedoch eine sehr große Arbeitserleichterung.
 
 !end_node # Verwenden Sie standardisierte Quelltexte
+
+# = = = = =
+
+!begin_node Verwenden Sie standardisierte Dateinamen
+!html_name  tips_standardize_files
+
+UDO ist es zwar völlig egal, wie die Dateien heißen, aus denen Sie Ihr UDO-Quelltext-Dokument erzeugen. 
+Es kann aber für strukturiertes Arbeiten sehr nützlich sein, sich eigene Standards zuzulegen. 
+Vor allem im Austausch mit anderen Menschen ist es sinnvoll, wenn man auch bei den Dateinamen eindeutige 
+Standards verwendet.
+
+Sobald Sie Dokumentationen für mehrere Sprachen entwickeln, empfiehlt es sich zudem, die Dateinamen englisch festzulegen, es sei denn, Sie wissen genau, dass sämtliche Mit-Autorinnen und Kollegen wirklich gut Deutsch können und die Dateisysteme, auf denen sie arbeiten, keine Probleme mit deutschen Umlauten haben.
+
+Hier unser Vorschlag:
+
+!begin_blist
+!item [.u]
+      Eselsbrücke: (!code [.u]) wie (!B)U(!b)DO. Die Haupt-Datei für das Dokument, z.B. (!file [manual.u]).
+
+!item [.ui]
+      Eselsbrücke: (!code [.ui]) wie (!B)U(!b)DO-(!B)I(!b)nclude. Dateien, die von der .u-Datei inkludiert werden. 
+      Diese Dateien sollten nur weitere Steuerkommandos enthalten, nicht aber Text, der ggf. übersetzt werden muss.
+
+!item [.uli]
+      Eselsbrücke: (!code [.uli]) wie (!B)U(!b)DO-(!B)L(!b)ibrary-(!B)I(!b)nclude. 
+      Dateien, die aus einer Bibliothek (engl. ""Library"") für verschiedene Projekte gleichzeitig genutzt werden können, z.B. Makros, Silbentrennungslisten usw.
+
+!item [.de]
+      Alle Dateien mit deutschen Texten.
+
+!item [.en]
+      Alle Dateien mit englischen Texten.
+
+!item [.sv]
+      Alle Dateien mit schwedischen Texten. (Falls Sie sich wundern, warum wir hier nicht (!code [.se]) vorschlagen, hier die Erklärung: (!code [sv]) ist der ISO-Bezeichner für die Sprache Schwedisch, während (!code [SE]) der ISO-Bezeichner für das Land Schweden ist. Das wird oft verwechselt, auch z.B. bei Tschechisch ((!code [cs])) und Tschechien ((!code [CZ])).
+
+!item [.fr_CA]
+      Jetzt ahnen Sie es schon, oder? Diese Datei-Endung würde festlegen, dass der darin enthaltene Dokument-Text Französisch für Kanadier ist. So einfach ist das mit den ISO-Bezeichnern für Sprachen und Länder. -- Wenn Sie bei Französisch nicht weiter differenzieren müssen, reicht natürlich (!file [.fr]) völlig aus.
+!end_blist
+
+Wenn Sie so vorgehen, müssen Sie beim Hinzufügen einer neuen Sprache nur die (!KW [include])-Befehle in den (!file [.ui])-Dateien erweitern und z.B. die (!file [.en])-Dateien kopieren und den Kopien die gewünschten Sprach-Endungen für die neue Übersetzung geben.
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+# manual.u
+# --------
+!include praeamble.ui
+
+!begin_document
+!include intro.ui
+!include ref.ui
+!include appendix.ui
+!end_document
+
+# intro.ui
+# --------
+!ifset [de]
+!include intro.de
+!endif
+!ifset [en]
+!include intro.en
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+     
+!end_node # Verwenden Sie standardisierte Dateinamen
 
 # = = = = =
 
