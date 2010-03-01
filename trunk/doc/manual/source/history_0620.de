@@ -14,6 +14,8 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from history.de)
+# 2010:
+#   fd  Mar 01: using macro BUG
 #
 ################################################################################
 
@@ -32,8 +34,7 @@
 
 !item [(!BUGFIXES)]
    !begin_itemize
-   !item Bug #0000010 (!nl)
-         Überflüssiges <br> nach Bild-Paragraph entfernt.
+   !item Bug (!BUG [10]): Überflüssiges <br> nach Bild-Paragraph entfernt.
    !end_itemize
 !end_description
 

@@ -15,6 +15,8 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from history.de)
 #   fd  Jun 25: 'die URL' -> 'der URL' (it refers to 'locator')
+# 2010:
+#   fd  Mar 01: using macro BUG
 #
 ################################################################################
 
@@ -41,20 +43,20 @@
 !begin_description
 !item [(!BUGFIXES)]
    !begin_itemize !short
-   !item Bug #0000024 in Version 6.2.1 beseitigt (!nl)
+   !item Bug (!BUG [24]) in Version 6.2.1 beseitigt (!nl)
          In den (!LINK)-Elementen wurde alle Subsubnodes aus anderen Subnodes
          mit aufgeführt
-   !item Bug #0000025 in Version 6.2.1 beseitigt (!nl)
+   !item Bug (!BUG [25]) in Version 6.2.1 beseitigt (!nl)
          UDO stürzte ab, wenn Umlaute im Dateinamen oder Domain eines URL
          im Kommando (!/url !..) vorkamen.
-   !item Bug #0000029 in Version 6.2.1 beseitigt (!nl)
+   !item Bug (!BUG [29]) in Version 6.2.1 beseitigt (!nl)
          Bei (!/url !..) wurde bei der RTF-Ausgabe das führende
          Anführungszeichen und das folgende Wort verschluckt, weil ein
          Leerzeichen fehlte.
-   !item Bug #0000030 in Version 6.2.1 beseitigt (!nl)
+   !item Bug (!BUG [30]) in Version 6.2.1 beseitigt (!nl)
          Feste Leerzeichen in Links wurden bei der RTF-Ausgabe falsch
          umgesetzt (\\~ statt \~).
-   !item Bug #0000039 in Version 6.2.1 beseitigt (!nl)
+   !item Bug (!BUG [39]) in Version 6.2.1 beseitigt (!nl)
          Obwohl !html_name_prefix gesetzt war, fehlte der entsprechende
          Zusatz in den (!LINK)-Elementen zur Navigation.
    !end_itemize
