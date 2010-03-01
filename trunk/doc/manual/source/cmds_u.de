@@ -29,6 +29,9 @@
 #   fd  Jun 16: html_name no longer uses CAPITAL letters
 #   fd  Jun 16: great review session #1
 #   fd  Jun 25: 'die URL' -> 'der URL' (it refers to 'locator')
+# 2010:
+#   fd  Mar 01: new chapters: use_short_description, use_short_enumerate,
+#                 use_short_itemize, use_short_list
 #
 ################################################################################
 
@@ -905,6 +908,174 @@ Dieser Befehl wird derzeit nur für HTML und RTF unterstützt.
 
 # = = = = =
 
+!begin_node (!kw [use_short_description])
+!html_name  cmd_use_short_description
+
+""Komprimierte"" Description-Umgebungen benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_short_description [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, werden
+alle Description-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
+Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
+
+Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_description]) als Teilmenge davon keine Wirkung mehr.
+
+!item [(!EXISTSSINCE)] Version~7.00
+
+!item [(!SEEALSO)]
+(!KW [begin_description]), (!KW [short]), (!KW [use_short_envs]), (!KW [use_short_tocs]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!use_short_description [all]
+
+# Dokument
+!begin_description
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!!end_description
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_description !short
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!end_description
+!end_verbatim
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+# !use_short_description [all]
+# !use_short_envs        [all]
+
+# Dokument
+!begin_description
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!!end_description
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_description
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!end_description
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_short_enumerate])
+!html_name  cmd_use_short_enumerate
+
+""Komprimierte"" Enumerate-Umgebungen benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_short_enumerate [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, werden
+alle Enumerate-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
+Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
+
+Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_enumerate]) als Teilmenge davon keine Wirkung mehr.
+
+!item [(!EXISTSSINCE)] Version~7.00
+
+!item [(!SEEALSO)]
+(!KW [begin_enumerate]), (!KW [short]), (!KW [use_short_envs]), (!KW [use_short_tocs]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!use_short_enumerate [all]
+
+# Dokument
+!begin_enumerate
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_enumerate
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_enumerate !short
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_enumerate
+!end_verbatim
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+# !use_short_enumerate [all]
+# !use_short_envs      [all]
+
+# Dokument
+!begin_enumerate
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_enumerate
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_enumerate
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_enumerate
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
 !begin_node (!kw [use_short_envs])
 !html_name  cmd_use_short_envs
 
@@ -919,13 +1090,13 @@ Dieser Befehl wird derzeit nur für HTML und RTF unterstützt.
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, werden
 alle Umgebungen (mit Ausnahme der verbatim-Umgebung)
-ohne zusätzlichen Zwischenräume ausgegeben. Im
+ohne zusätzliche Zwischenräume ausgegeben. Im
 Beispiel würde dieser Schalter für das ASCII-Format gesetzt.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~15
 
 !item [(!SEEALSO)]
-(!KW [begin_itemize]), (!KW [begin_enumerate]), (!KW [begin_description]), (!KW [begin_xlist]), (!KW [short]), (!KW [use_short_tocs]), (!link [Umgebungen] [Umgebungen])
+(!KW [begin_blist]), (!KW [begin_description]), (!KW [begin_enumerate]), (!KW [begin_ilist]), (!KW [begin_itemize]), (!KW [begin_tlist]), (!KW [begin_xlist]), (!KW [short]), (!KW [use_short_description]), (!KW [use_short_enumerate]), (!KW [use_short_itemize]), (!KW [use_short_list]), (!KW [use_short_tocs]), (!link [Umgebungen] [Umgebungen])
 
 !end_xlist
 
@@ -935,6 +1106,175 @@ Beispiel würde dieser Schalter für das ASCII-Format gesetzt.
 !use_short_envs [asc]
 !end_verbatim
 (!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_short_itemize])
+!html_name  cmd_use_short_itemize
+
+""Komprimierte"" Itemize-Umgebungen benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_short_itemize [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, werden
+alle Itemize-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
+Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
+
+Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_itemize]) als Teilmenge davon keine Wirkung mehr.
+
+!item [(!EXISTSSINCE)] Version~7.00
+
+!item [(!SEEALSO)]
+(!KW [begin_itemize]), (!KW [short]), (!KW [use_short_envs]), (!KW [use_short_tocs]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!use_short_itemize [all]
+
+# Dokument
+!begin_itemize
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_itemize
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_itemize !short
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_itemize
+!end_verbatim
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+# !use_short_itemize [all]
+# !use_short_envs    [all]
+
+# Dokument
+!begin_itemize
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_itemize
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_itemize
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_itemize
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_short_list])
+!html_name  cmd_use_short_list
+
+""Komprimierte"" Listen-Umgebungen benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_short_list [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, werden
+alle Listen-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
+Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
+
+Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_list]) als Teilmenge davon keine Wirkung mehr.
+
+!item [(!EXISTSSINCE)] Version~7.00
+
+!item [(!SEEALSO)]
+(!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!KW [begin_xlist]), (!KW [short]), (!KW [use_short_envs]), (!KW [use_short_tocs]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!use_short_list [all]
+
+# Dokument
+!begin_blist
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!end_blist
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_blist !short
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!end_blist
+!end_verbatim
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+# !use_short_list [all]
+# !use_short_envs [all]
+
+# Dokument
+!begin_blist
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!end_blist
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_blist
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!end_blist
+!end_verbatim
+(!EXAMPLE_END)
+
 
 !end_node
 
