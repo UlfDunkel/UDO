@@ -24,39 +24,13 @@
 #   fd  Jun 09: LINK macro introduced
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #
 ################################################################################
 
 !begin_node L!..
 !html_name  cmds_l
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [=ldoc])
-!html_name  cmd_ldoc-eq
-
-Abfrage des Ausgabeformates.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/=ldoc (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[ldoc!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -330,34 +304,6 @@ umgewandelt. (!FILESPACEQUOTE)
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kw [ldoc])
-!html_name  cmd_ldoc
-
-Abfrage des Ausgabeformates.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/ldoc (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[ldoc!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 !begin_node (!kw [lh])
 !html_name  cmd_lh
 
@@ -490,96 +436,6 @@ Möchten Sie (!link [Kontakt] [Kontaktadresse]) mit den UDO-Entwicklern aufnehmen
 (!EXAMPLE_END)
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [list_parsep])
-!html_name  cmd_list_parsep
-
-Umgebungen komprimieren.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/list_parsep [ on | off ](!t)
-
-!item [(!DESCRIPTION)]
-Der Befehl (!KW [list_parsep]) existiert nicht mehr. Komprimierte
-Umgebungen können nun viel eleganter mit dem Umgebungsparameter (!KW [short]) erstellt werden.
-
-!item [(!EXISTSSINCE)] Release~4 Version~0.47
-
-!item [(!EXISTEDUNTIL)] Release~5 Patchlevel~15
-
-!item [(!SEEALSO)]
-(!KW [short]), (!link [Umgebungen] [Umgebungen])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [list_parsep_off])
-!html_name  cmd_list_parsep_off
-
-Umgebungen komprimieren.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/list_parsep_off(!t)
-
-!item [(!DESCRIPTION)]
-Der Befehl (!KW [list_parsep_off]) existiert nicht mehr. Komprimierte
-Umgebungen können nun viel eleganter mit dem Umgebungsparameter (!KW [short]) erstellt werden.
-
-!item [(!EXISTSSINCE)] Release~4 Version~0.44
-
-!item [(!EXISTEDUNTIL)] Release~4 Version~0.47
-
-!item [(!SEEALSO)]
-(!KW [short]), (!link [Umgebungen] [Umgebungen])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [list_parsep_on])
-!html_name  cmd_list_parsep_on
-
-Umgebungen komprimieren.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/list_parsep_on(!t)
-
-!item [(!DESCRIPTION)]
-Der Befehl (!KW [list_parsep_on]) existiert nicht mehr. Komprimierte
-Umgebungen können nun viel eleganter mit dem Umgebungsparameter (!KW [short]) erstellt werden.
-
-!item [(!EXISTSSINCE)] Release~4 Version~0.44
-
-!item [(!EXISTEDUNTIL)] Release~4 Version~0.47
-
-!item [(!SEEALSO)]
-(!KW [short]), (!link [Umgebungen] [Umgebungen])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 

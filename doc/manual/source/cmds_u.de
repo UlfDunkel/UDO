@@ -30,8 +30,9 @@
 #   fd  Jun 16: great review session #1
 #   fd  Jun 25: 'die URL' -> 'der URL' (it refers to 'locator')
 # 2010:
-#   fd  Mar 01: new chapters: use_short_descriptions, use_short_enumerates,
-#                 use_short_itemizes, use_short_lists
+#   fd  Mar 01: - new chapters: use_short_descriptions, use_short_enumerates,
+#                   use_short_itemizes, use_short_lists
+#               - OldKeywords removed -> cmds__old.de
 #
 ################################################################################
 
@@ -74,34 +75,6 @@ Das Wort ""unterstrichen"" wird (!U)unterstrichen(!u) ausgegeben.
 (!EXAMPLE_END)
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [udoinfo])
-!html_name  cmd_udoinfo
-
-Informationsseite einbauen.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/udoinfo](!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [use_about_udo]).
-
-!item [(!EXISTEDUNTIL)] Release~4 Version~0.48
-
-!item [(!SEEALSO)]
-(!KW [use_about_udo])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -646,36 +619,6 @@ keine Rolle, da dort kein Blocksatz erzeugt werden kann.
 (!EXAMPLE_END)
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [use_justified])
-!html_name  cmd_use_justified
-
-Blocksatz einschalten.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/use_justified [(!FORMAT)](!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [use_justification])
-
-!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~0
-
-!item [(!SEEALSO)]
-(!KW [use_justification])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -1380,42 +1323,6 @@ aufgenommen.
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [use_xlist])
-!html_name  cmd_use_xlist
-
-xlist-Umgebungen wie bei ASCII ausgeben.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/use_xlist [(!FORMAT)](!t)
-
-!item [(!DESCRIPTION)]
-Da die Ausgabe der xlist-Umgebung beim HTML-Format ziemlich kritisch
-ist, werden xlist-Umgebung standardm‰ﬂig wie description-Umgebungen
-behandelt. Durch die Angabe dieses Schalters im Vorspann werden
-xlist-Umgebungen jedoch wie beim ASCII-Format -- geklammert mit dem
-(!code [<pre>...</pre>])-Tag -- ausgegeben.
-
-!item [(!SEEALSO)]
-(!link [Listen] [Listen]), (!link [Beschreibungen] [Beschreibungen])
-
-!end_xlist
-
-(!EXAMPLE)
-(!EXAMPLE_BEGIN)
-!begin_verbatim
-!use_xlist [html]
-!end_verbatim
-(!EXAMPLE_END)
-
-!end_node
-!endif
 
 # = = = = =
 

@@ -21,6 +21,8 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 16: html_name no longer uses CAPITAL letters
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #
 ################################################################################
 
@@ -66,34 +68,6 @@ Das Wort ""Klartext"" wird als (!V)Klartext(!v) ausgegeben.
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kw [verbatim_no_umlaute])
-!html_name  cmd_verbatim_no_umlaute
-
-Keine Umlaute in verbatim-Umgebungen verwenden.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/verbatim_no_umlaute(!t)
-
-!item [(!DESCRIPTION)]
-Der Befehl (!KW [verbatim_no_umlaute]) wurde durch (!KW [no_verbatim_umlaute]) ersetzt.
-#TODO: wann?
-
-!item [(!EXISTEDUNTIL)] Release~5 Patchlevel~6
-
-!item [(!SEEALSO)]
-(!KW [no_verbatim_umlaute])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 !begin_node (!kw [verbatimsize])
 !html_name  cmd_verbatimsize
 
@@ -134,34 +108,6 @@ Ich bin ein Text, der in kleiner Schrift in einer verbatim-Umgebung ausgegeben w
 (!EXAMPLE_END)
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [version])
-!html_name  cmd_version
-
-Versionsnummer des Programms für die Titelseite setzen.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/version (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [docinfo] [[version!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [maketitle]), (!KW [docinfo]), (!link [Titelseite] [Titelseite])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 

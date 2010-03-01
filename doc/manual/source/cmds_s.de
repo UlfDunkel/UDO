@@ -23,39 +23,13 @@
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #
 ################################################################################
 
 !begin_node S!..
 !html_name  cmds_s
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [=stg])
-!html_name  cmd_stg-eq
-
-Abfrage des Ausgabeformates.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/=stg (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[stg!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -415,37 +389,6 @@ ASCII- und ST-Guide-Format aktivieren kann.
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kw [spanish])
-!html_name  cmd_spanish
-
-Sprache setzen.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/spanish(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-# Der Befehl (!KW [spanish]) existiert nicht mehr.
-(!USEINSTEAD[]) (!KW [language] [[spanish!!]]).
-
-!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~1
-
-!item [(!SEEALSO)]
-(!KW [language])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 !begin_node (!kw [ssh])
 !html_name  cmd_ssh
 
@@ -634,92 +577,6 @@ Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kw [stg])
-!html_name  cmd_stg
-
-Abfrage des Ausgabeformates.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/stg (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[stg!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [stg_no_database])
-!html_name  cmd_stg_no_database
-
-Keine Database-Zeile ausgeben (nur ST-Guide).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/stg_no_database(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [docinfo] [[stgdatabase] [~!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~3
-
-!item [(!SEEALSO)]
-(!KW [docinfo])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [stg_parwidth])
-!html_name  cmd_stg_parwidth
-
-Einstellen der Zeilenbreite (nur ST-Guide).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/stg_parwidth (!VALUE)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [parwidth]).
-
-!item [(!EXISTSSINCE)] Release~5 Version~0.49
-
-!item [(!EXISTEDUNTIL)] Release~5 Patchlevel~6
-
-!item [(!SEEALSO)]
-(!KW [parwidth])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 !begin_node (!kw [stg_short_title])
 !html_name  cmd_stg_short_title
 
@@ -737,34 +594,6 @@ Einstellen der Zeilenbreite (nur ST-Guide).
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [street])
-!html_name  cmd_street
-
-Straße des Autors für den Adressblock der Titelseite setzen.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/street (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [docinfo] [[address!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [maketitle]), (!KW [docinfo]), (!link [Titelseite] [Titelseite])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -1513,37 +1342,6 @@ Das Wort ""hochgestellt"" wird (!SUP)hochgestellt(!sup) ausgegeben.
 (!EXAMPLE_END)
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [swedish])
-!html_name  cmd_swedish
-
-Sprache setzen.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/swedish(!t)
-
-!item [(!DESCRIPTION)]
-# Der Befehl (!KW [swedish]) existiert nicht mehr.
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [language] [[swedish!!]]).
-
-!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~1
-
-!item [(!SEEALSO)]
-(!KW [language])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 

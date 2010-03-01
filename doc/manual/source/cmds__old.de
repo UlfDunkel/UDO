@@ -1,0 +1,214 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands 1-0, etc.
+# Language    : German
+# Initial Date: 2010-03-01
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  Mar 01: introduced
+#
+################################################################################
+
+!begin_node Veraltete Kommandos
+!html_name  cmds_old
+
+Die nachfolgend aufgelisteten UDO-Kommandos und -Schalter sind veraltet und werden in der aktuellen Version nicht mehr unterstützt.
+
+!begin_table [l|l|l] !hline
+(!B)Alt(!b)                      !! (!B)Funktion(!b) !\
+                                 !! (!B)Neu(!b)
+!hline
+(!kw [=aqv])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[aqv!]])
+(!kw [=asc])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[asc!]])
+(!kw [aqv])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[aqv!]])
+(!kw [asc])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[asc!]])
+(!kw [author])                   !! Namen des Autors setzen !\
+                                 !! (!KW [docinfo]) (!code [[author!]])
+(!kw [authorimage])              !! Logo des Autors für die Titelseite definieren !\
+                                 !! (!KW [docinfo]) (!code [[authorimage!]])
+!hline
+(!kw [begin_asc])                !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[asc!]])
+(!kw [begin_stg])                !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[stg!]])
+!hline
+(!kw [code])                     !! Encoding des Quelltextes festlegen !\
+                                 !! (!KW [code_source])
+(!kw [code_dos])                 !! Auf einen anderen Zeichensatz umschalten !\
+                                 !! (!KW [code_source]) oder (!KW [code_target])
+(!kw [code_hp8])                 !! Auf einen anderen Zeichensatz umschalten !\
+                                 !! (!KW [code_source]) oder (!KW [code_target])
+(!kw [code_iso])                 !! Auf einen anderen Zeichensatz umschalten !\
+                                 !! (!KW [code_source]) oder (!KW [code_target])
+(!kw [code_mac])                 !! Auf einen anderen Zeichensatz umschalten !\
+                                 !! (!KW [code_source]) oder (!KW [code_target])
+(!kw [code_next])                !! Auf einen anderen Zeichensatz umschalten !\
+                                 !! (!KW [code_source]) oder (!KW [code_target])
+(!kw [code_tos])                 !! Auf einen anderen Zeichensatz umschalten !\
+                                 !! (!KW [code_source]) oder (!KW [code_target])
+(!kw [country])                  !! Land des Autors für den Adressblock der Titelseite setzen. !\
+                                 !! (!KW [docinfo]) (!code [[address!]])
+!hline
+(!kw [date])                     !! Datumsinformation für Titelseite setzen !\
+                                 !! (!KW [docinfo]) (!code [[date!]])
+(!kw [drc])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[drc!]])
+!hline
+(!kw [email])                    !! E-Mail-Informationen für die Titelseite setzen !\
+                                 !! (!KW [docinfo]) (!code [[webmastermailurl!]]) oder (!KW [docinfo]) (!code [[webmasteremail!]])
+(!kw [english])                  !! Sprache setzen !\
+                                 !! (!KW [language]) (!code [[english!]])
+!hline
+(!kw [french])                   !! Sprache setzen !\
+                                 !! (!KW [language]) (!code [[french!]])
+!hline
+(!kw [german])                   !! Sprache setzen !\
+                                 !! (!KW [language]) (!code [[german!]])
+!hline
+(!kw [=htag])                    !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[htag!]])
+(!kw [=html])                    !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[html!]])
+(!kw [htag])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[htag!]])
+(!kw [html])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[html!]])
+(!kw [html_frames_column_color]) !! Setzen der Hintergrundfarbe für linken Rahmen (nur HTML) !\
+                                 !! (!KW [html_frames_backcolor])
+(!kw [html_frames_column_image]) !! Setzen des Hintergrundbildes für den linken Rahmen (nur HTML) !\
+                                 !! (!KW [html_frames_backimage])
+(!kw [html_frames_column_width]) !! Breite des Rahmens beim Frames-Layout bestimmen (nur HTML) !\
+                                 !! (!KW [html_frames_width])
+(!kw [html_modern_column_color]) !! Setzen der Hintergrundfarbe beim ""modernen"" Layout (nur HTML) !\
+                                 !! (!KW [html_modern_backcolor])
+(!kw [html_modern_column_image]) !! Setzen des Hintergrundbildes beim ""modernen"" Layout (nur HTML) !\
+                                 !! (!KW [html_modern_backimage])
+(!kw [html_modern_column_width]) !! Breite der linken Spalte beim ""modernen"" Layout bestimmen (nur HTML) !\
+                                 !! (!KW [html_modern_width])
+(!kw [html_use_xlist])           !! xlist-Umgebung wie bei ASCII ausgeben (nur HTML) !\
+                                 !! kein Ersatzkommando, xlist-Ausgabeformatierung geändert
+(!kw [htmlkeywords])             !! HTML-Meta-Keywords setzen !\
+                                 !! (!KW [html_keywords])
+(!kw [htmlname])                 !! Dateinamen zuweisen (nur HTML) !\
+                                 !! (!KW [html_name])
+!hline
+(!kw [=info])                    !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[info!]])
+(!kkw [image])                   !! Grafik ausgeben !\
+                                 !! (!KW [image]), (!KW [image*]), (!KKW [img])
+(!kw [info])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[info!]])
+(!kw [italian])                  !! Sprache setzen !\
+                                 !! (!KW [language]) (!code [[italian!]])
+!hline
+(!kw [jumpid])                   !! Ausgabe einer Node-ID (nur WinHelp) !\
+                                 !! (!KW [win_helpid])
+!hline
+(!kw [keyword])                  !! Indexeintrag bzw. Schlüsselwort setzen !\
+                                 !! (!KW [index])
+!hline
+(!kw [=ldoc])                    !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[ldoc!]])
+(!kw [ldoc])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[ldoc!]])
+(!kw [list_parsep])              !! Umgebungen komprimieren !\
+                                 !! (!KW [short])
+(!kw [list_parsep_off])          !! Umgebungen komprimieren !\
+                                 !! (!KW [short])
+(!kw [list_parsep_on])           !! Umgebungen komprimieren !\
+                                 !! (!KW [short])
+!hline
+(!kw [=man])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[man!]])
+(!kw [man])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[man!]])
+!hline
+(!kw [no_toc_subnodes])          !! Im Inhaltsverzeichnis keine Subnodes auflisten !\
+                                 !! (!KW [ignore_subtoc])
+(!kw [no_toc_subsubnodes])       !! Im Inhaltsverzeichnis keine Unterabschnitte auflisten !\
+                                 !! (!KW [ignore_subsubtoc])
+(!kw [no_toc_subsubsubnodes])    !! Im Inhaltsverzeichnis keine Paragraphen auflisten !\
+                                 !! (!KW [ignore_subsubsubtoc])
+!hline
+(!kw [=pch])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[pch!]])
+(!kw [=pdf])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[pdf!]])
+(!kw [pch])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[pch!]])
+(!kw [pdf])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[pdf!]])
+(!kw [program])                  !! Programmnamen für Titelseite definieren !\
+                                 !! (!KW [docinfo]) (!code [[program!]])
+(!kw [programimage])             !! Programmgrafik für Titelseite definieren !\
+                                 !! (!KW [docinfo]) (!code [[programimage!]])
+!hline
+(!kw [=rtf])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[rtf!]])
+(!kw [rtf])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[rtf!]])
+!hline
+(!kw [=stg])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[stg!]])
+(!kw [spanish])                  !! Sprache setzen !\
+                                 !! (!KW [language]) (!code [[spanish!]])
+(!kw [stg])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[stg!]])
+(!kw [stg_no_database])          !! Keine Database-Zeile ausgeben (nur ST-Guide) !\
+                                 !! (!KW [docinfo]) (!code [[stgdatabase!]])
+(!kw [stg_parwidth])             !! Einstellen der Zeilenbreite (nur ST-Guide) !\
+                                 !! (!KW [parwidth])
+(!kw [street])                   !! Straße des Autors für den Adressblock der Titelseite setzen !\
+                                 !! (!KW [docinfo]) (!code [[address!]])
+(!kw [swedish])                  !! Sprache setzen !\
+                                 !! (!KW [language]) (!code [[swedish!]])
+!hline
+(!kw [=tex])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[tex!]])
+(!kw [tex])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[tex!]])
+(!kw [tex_book])                 !! Zieldatei als ""Buch"" ausgeben !\
+                                 !! (!KW [use_style_book]) (!code [[tex!]])
+(!kw [title])                    !! Dokumenttitel definieren !\
+                                 !! (!KW [docinfo]) (!code [[title!]])
+(!kw [town])                     !! Wohnort des Autors für den Adressblock der Titelseite setzen !\
+                                 !! (!KW [docinfo]) (!code [[address!]])
+!hline
+(!kw [udoinfo])                  !! Informationsseite über UDO ausgeben !\
+                                 !! (!KW [use_about_udo])
+(!kw [use_justified])            !! Blocksatz einschalten !\
+                                 !! (!KW [use_justification])
+(!kw [use_xlist])                !! xlist-Umgebungen wie bei ASCII ausgeben !\
+                                 !! kein Ersatzkommando, xlist-Ausgabeformatierung geändert
+!hline
+(!kw [verbatim_no_umlaute])      !! Keine Umlaute in verbatim-Umgebungen verwenden. !\
+                                 !! (!KW [no_verbatim_umlaute])
+(!kw [version])                  !! Versionsnummer des Programms für die Titelseite setzen !\
+                                 !! (!KW [docinfo]) (!code [[version!]])
+!hline
+(!kw [=win])                     !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifndest]) (!code [[win!]])
+(!kw [win])                      !! Ausgabeformat abfragen !\
+                                 !! (!KW [ifdest]) (!code [[win!]])
+(!kw [win_background])           !! Hintergrundfarbe für WinHelp setzen !\
+                                 !! (!KW [win_backcolor])
+(!kw [win_html_look])            !! Seiten mit grauem Hintergrund ausgeben (nur WinHelp) !\
+                                 !! (!KW [win_backcolor]), (!KW [win_propfont]), (!KW [win_monofont])
+
+!end_table
+
+!end_node # Alte Kommandos
+
+# === EOF ===

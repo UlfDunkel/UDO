@@ -24,39 +24,13 @@
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #
 ################################################################################
 
 !begin_node W!..
 !html_name  cmds_w
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [=win])
-!html_name  cmd_win-eq
-
-Abfrage des Ausgabeformates.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/=win (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[win!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -532,34 +506,6 @@ Setzt die Farbe, die benutzt wird, um in Hilfeseiten Text darzustellen.
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kw [win])
-!html_name  cmd_win
-
-Abfrage des Ausgabeformates.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/win (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[win!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 # ToDo: Englisch
 !begin_node (!kkw [white])
 !html_name  cmd_white
@@ -629,35 +575,6 @@ Gleichzeitig passt UDO die Textfarbe an.
 (!EXAMPLE_END)
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [win_background])
-!html_name  cmd_win_background
-
-Hintergrundfarbe für WinHelp setzen.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/win_background (!COLOR)(!t)
-
-!item [(!DESCRIPTION)]
-Dieser Befehl wird zwar noch unterstützt, sollte jedoch durch (!KW [win_backcolor]) ersetzt werden.
-
-!item [(!EXISTSSINCE)] Release~5 Patchlevel~12
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~5
-
-!item [(!SEEALSO)]
-(!KW [win_backcolor])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -762,38 +679,6 @@ Schalter (!KW [win_medium_compression]).
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [win_html_look])
-!html_name  cmd_win_html_look
-
-Seiten mit grauem Hintergrund ausgeben (nur WinHelp).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/win_html_look(!t)
-
-!item [(!DESCRIPTION)]
-Der Befehl (!KW [win_html_look]) existiert nicht mehr.
-Grauer Hintergrund kann nun mit (!KW [win_backcolor]) erzeugt
-werden. Ein anderer Zeichensatz kann mit (!KW [win_propfont])
-bzw. (!KW [win_monofont]) gewählt werden.
-
-!item [(!EXISTSSINCE)] Release~4 Version~0.44
-
-!item [(!EXISTEDUNTIL)] Release~5 Patchlevel~12
-
-!item [(!SEEALSO)]
-(!KW [win_backcolor]), (!KW [win_propfont]), (!KW [win_monofont])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 

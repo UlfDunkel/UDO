@@ -17,42 +17,15 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #
 ################################################################################
 
 !begin_node K!..
 !html_name  cmds_k
 
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [keyword])
-!html_name  cmd_keyword
-
-Indexeintrag bzw. Schlüsselwort setzen.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/keyword (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-Dieser Befehl existiert nicht mehr und wurde umbenannt in (!KW [index]).
-
-!item [(!EXISTSSINCE)] Release~4 Version~0.44
-
-!item [(!EXISTEDUNTIL)] Release~4 Version~0.48
-
-!item [(!SEEALSO)]
-(!KW [index])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
+(nicht belegt)
 
 !end_node
 
