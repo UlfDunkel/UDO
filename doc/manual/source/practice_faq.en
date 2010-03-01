@@ -86,8 +86,8 @@ charsets are not the same.
 Yes, you can e.g. write your source files on a Windows PC and convert them
 on a BeBox or Apple Macintosh. UDO knows the charsets of all operating
 system it's available for. You have only to say UDO which charset was used
-for writing the source files by using the commands like (!KW [code] [[iso!!]])
-or (!KW [code] [[mac!!]]).
+for writing the source files by using the commands like (!KW [code_source] [[iso!!]])
+or (!KW [code_source] [[mac!!]]).
 
 # = = =
 

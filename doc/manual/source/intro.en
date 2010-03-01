@@ -153,7 +153,7 @@ features:
 !item	(!link [tables] [Tables]),
 !item	automatically generated (!link [hypertext links] [Links]),
 !item	support for different (!link [text styles] [Text styles]),
-!item	automatic conversion of (!link [umlauts] [Converting 8 bit chars]) and other (!link [special characters] [Special characters]),
+!item	automatic conversion of (!link [umlauts] [Converting 8-bit characters]) and other (!link [special characters] [Special characters]),
 !item	a large variety of layout commands for making (!link [lists] [Lists]), 
       (!link [enumerations] [Enumerations]), (!link [descriptions] [Descriptions]), 
       justified text, 

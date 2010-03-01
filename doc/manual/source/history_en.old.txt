@@ -1,0 +1,1319 @@
+
+!begin_ignore
+
+# = = = = =
+
+!begin_node Changes from version 6.4.0 to 6.6.0
+!html_name  history_6-4-0_to_6-6-0
+
+The (stable) production version 6.6.0 wasn't released yet.
+The changes which are documented in this section are currently only available in the apropriate
+developer versions.
+# (!PUBLISHED [Version~6.6.0] [unpublished])
+
+
+# Anmerkung U.K. 29.1.04: ich möchte hier den deutschen und den englischen Text
+# zwecks Textvergleich/Übersetzung möglichst nahe beinander stehen haben.
+# Allerdings wird es mit den verschachtelten Umgebungen strukturell arg unübersichtlich.
+
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+!heading (!GENERAL)
+!begin_description !short
+# ------------------------------------------------------------------------------
+!item [(!NEWS)]
+!begin_itemize !short
+# ..............................................................................
+!item Index link in TableOfContent (!nl)
+  Mit den neuen Kommandos (!kkkw [SUP] [sup]) bzw. (!kkkw [SUB] [sub]) kann man Text hoch- oder
+  tiefgestellt ausgeben (!nl)
+  Dies ist seit Version~6.5.20 verfügbar.
+# ..............................................................................
+!item Index link in TableOfContent (!nl)
+  When you use the (!KW [use_udo_index]) switch, an ""Index"" link will be output in the (!KW [tableofcontents]) 
+  section. (!nl)
+  This is available since version~6.5.19.
+# ..............................................................................
+!item New languages: Danish and Czech (!nl)
+  Danish and Czech are supported languages ((!KW [language])) now. (Czech is not fully implemented for output already.) (!nl)
+  This extension is available since version~6.5.18.
+# ..............................................................................
+!item New output format HTML Apple Help (!nl)
+  Basically this is HTML but with tiny changes Therefore, two new arguments have been 
+  implemented for (!KW [docinfo]): (!code [AppleTitle]) and 
+  (!code [AppleIcon]) (!nl)
+  This extension is available since version~6.5.17.
+# ..............................................................................
+!item (!KW [docinfo]) has two new arguments: (!nl)
+    (!code [company]) and (!code [category]) (!nl)
+    This extension has been implemented since version 6.5.2
+# ..............................................................................
+!item Having an UDO input line ending with !\<line break>, UDO takes the following line as
+  continuation of the previous line. You can combine several "real" lines to a single "logical" line
+  (from UDO's point of view). You can use these continuation lines at every position in the UDO source,
+  e.g. in macros or definitions. !\ will be ignored (and converted as normal text)
+  if not found next to a line break. (!nl)
+  One possible usage is to split the content of one table row into several input lines.
+  This gives a more readable UDO source. (!nl)
+  This extension is available since version~6.5.4.
+# Beispiel - für die spätere ausführliche Dokumentation
+!begin_ignore
+!begin_table
+Das hier ist Zelle 1 !! !\
+Das hier ist Zelle 2 !! !\
+Das hier ist Zelle 3
+!end_table
+
+Für UDO sieht das nun so aus:
+
+!begin_table
+Das hier ist Zelle 1 !! Das hier ist Zelle 2 !! Das hier ist Zelle 3
+!end_table
+# Ende des Beispiels
+!end_ignore
+# ..............................................................................
+!item New command line parameter -Wl bzw. (--)no-warningslines (!nl)
+      Version 6.5.16
+# ..............................................................................
+!item In der Tabellenumgebung können Kommentare eingefügt werden.
+      Beispiel:
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!begin_table [|l|c|r|] !hline
+# Dies ist ein Kommendtar
+links !! mitte !! rechts
+unten links !! unten mitte !! unten rechts
+!hline
+!end_table
+!end_verbatim
+(!EXAMPLE_END)
+Version 6.5.13
+# ..............................................................................
+!item In der Tabellenumgebung können Labels eingefügt werden.
+      Beispiel:
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!begin_table [|l|c|r|] !hline
+!label test
+links !! mitte !! rechts
+unten links !! unten mitte !! unten rechts
+!hline
+!end_table
+!end_verbatim
+(!EXAMPLE_END)
+Version 6.5.13
+# ..............................................................................
+!item 16 standard colors are now defined in UDO as placeholders for HTML, RTF, WinHelp
+      DRC and PostScript output. The colors are used like this: (!KKW [black]),
+      (!KKW [red]), etc. Close the color command with (!KKW [coloff]). 
+      Version 6.5.9
+# ..............................................................................
+!item Zwei neue Kommandos (!kkkw [INS] [ins]) und (!kkkw [DEL] [del]) zum
+      Markieren von Einfügungen und Löschungen. (!nl)
+      Version 6.5.9
+# ..............................................................................
+!item Neues Kommando (!kkw [label]) (!nl)
+      Version 6.5.9
+# ..............................................................................
+!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!CHANGES)]
+!begin_itemize !short
+# ..............................................................................
+!item The (!code [!/docinfo]) options (!code [[program!]]) and (!code [[programimage!]]) no longer exclude each other but can be used simultaneously now. If you use both, [program] will be output first.
+# ..............................................................................
+!item The UDO Community was added to output of (!KW [use_about_udo]).
+# ..............................................................................
+!item UDO's version nomenclature was changed. It's called "Version~6.x.y"
+   instead of "Release~6.x Patchlevel~yy" now (x is even for (stable) production versions
+   and odd für developer versions).
+# ..............................................................................
+!item UDO for OS/2 should identify itself with "UDO for OS/2" (since version~6.5.1).
+# ..............................................................................
+!item (!code [!/code [utf8!]]) (same as (!code [!/code [utf-8!]])) will be supported now (since version~6.5.1).
+# ..............................................................................
+!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize !short
+# ..............................................................................
+!item Fixed bug #0000055 in version 6.4.1 (!nl)
+    Umlauts used in the second parameter of (!KKW [img]) or (!KKW [ilink])
+    were not converted in the right way.
+# http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000055
+# ..............................................................................
+!item Fixed bug #0000048 in version~6.4.1 (!nl)
+    Error message "unknown command: !html_use_hyphenation".
+    Reason: command wasn't present in the command list.
+# http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000048
+# ..............................................................................
+!item Bug #0000059 in Version~6.5.10 beseitigt (!nl)
+      Nichtfunktion, wenn Makro intern eine Definition aufruft.
+# http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000059
+# ..............................................................................
+!end_itemize
+!end_description
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+!medskip
+!heading Hypertext Markup Language (HTML)
+!begin_description !short
+# ------------------------------------------------------------------------------
+!item [(!NEWS)]
+!begin_itemize
+# ..............................................................................
+!item Hintergrundmusik mit (!KW [html_bgsound]) (!nl)
+  Dies ist seit Version~6.5.20 verfügbar.
+!item New formatting of navigation bar (!nl)
+  Using the supported HTML formats, the navigation bar can be output in a single line 
+  with or without a folder image in front. (!nl)
+  The new commands are named (!nl) 
+  (!KW [html_navigation]) [line] (!nl)
+  (!KW [html_navigation]) [image] (!nl)
+  These new commands are available since version~6.5.20.
+# ..............................................................................
+!item New commands: (!code [!/html_robots]), (!KW [docinfo]) [robots] (!nl)
+      Use them for creating robots commands for search engines. (!nl)
+      (!KW [docinfo]) [robots] is only written if single manual pages don't use (!KW [html_robots]). So (!code [!/html_robots]) has a higher priority than (!KW [docinfo]) [robots]. Implemented since version~6.5.17.
+# ..............................................................................
+!item Neue Kommandos: (!code [!/html_frames_toc_title]), (!code [!/html_frames_con_title]) (!nl)
+   Dienen zum Setzen der Framentitel beim Frame Layout.
+   Seit Version~6.5.16 implementiert.
+# ..............................................................................
+!item New Switch (preamble only): (!code [!/html_header_links]) (!nl)
+   If this switch is set, several (!code [(!LINK)]) elements are generated in the
+   HTML header as following. (!nl)
+   This feature wish #0000053 has been implemented since version~6.5.2.
+# ..............................................................................
+!item New Switch: (!code [!/html_header_date [(!TEXT)!]]) (!nl)
+   Until now, UDO inserted near to the beginning of every HTML file the building date,
+   e.g. (!code [<!!-- last modified on 2004/01/29 -->]). (!nl)
+   Now, only if this switch is set, a META element for the building date/time is generated
+   in the HTML Header. (!nl)
+   This feature wish #0000054 has been implemented since version 6.5.2.
+# ..............................................................................
+!item Indexseite für HTML (!nl)
+      Version~6.5.12
+# ..............................................................................
+!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!CHANGES)]
+!begin_itemize !short
+# ..............................................................................
+!item Das Kommando (!KKW [img]) wurde erweitert. (!nl)
+  Feature-Wunsch 0000070; V6.5.18
+# ..............................................................................
+!item The (!LINK) elements for navigation and chapters are not generated
+    automatically any longer but only on demand (see above).
+!item Creation date/time of the HTML file will be written only on demand
+   as META Tag into the HTML header (instead of the former comment). See above.
+# ..............................................................................
+!item While using (!KW [html_ignore_8bit]), you can use now an optional parameter (!TEXT)
+  for the codepage.
+# ..............................................................................
+!item (!KW [html_counter_command]) kann jetzt auch in der Preamble benutzt
+      werden, dann wird dies für alle Dateien erzeugt. (!nl)
+      Version 6.5.9
+# ..............................................................................
+!item Die Kommandos (!/B), (!/I), (!/U), (!/T) und (!/V) werden
+      zu <strong>, <em>, <span style="text-decoration: underline;"> und <kbd>
+      umgesetzt, wenn der HTML Doctype >= XHTML_STRICT ist, ansonsten
+      werden die alten Elemente benutzt. (!nl)
+      Version 6.5.9
+# ..............................................................................
+!item Der Bereich der Titelseite wird jetzt durch folgendes Konstrukt geklammert:
+
+      <div id=""udo_titlepage""></div> (!nl)
+      Version 6.5.9
+# ..............................................................................
+!item Bei (!KW [use_raw_header]) und (!KW [use_raw_footer]) werden Makros und Defines
+      ausgeführt. (!nl)
+      Version 6.5.9
+# ..............................................................................
+!item Einige Änderungen für eine bessere HTML Compliance.
+      - (nowrap, noresize) Attribute erweitert (!nl)
+      - (<br />, <hr />, <img />, <frame />, <link />) (!nl)
+      - XML-Namespace für XHTML-Dateien hinzugefügt. (!nl)
+      - Added </dd> after items in description lists. (!nl)
+      Version 6.5.9 und 6.5.13
+# ..............................................................................
+!item Beim Modern Layout wird die Tabelle in der linken Spalte, die das
+      Menu zeigt, jetzt mit einer ID namens ""UDO_menu""" versehen, so dass
+      das Menu beim Drucken mittels CSS ausgeblendet werden kann. (!nl)
+      Version 6.5.9
+# ..............................................................................
+!item Die Einträge von (!KW [docinfo]) [keywords, description] werden jetzt
+      auch bei der HTML-Ausgabe geschrieben, allerdings nur, wenn in
+      einzelnen Dateien nicht (!KW [html_keywords]) bzw. (!KW [html_description])
+      benutzt wird. Diese haben also Vorrang. (!nl)
+      Version 6.5.9
+# ..............................................................................
+!item Das Kommando (!KW [begin_quote]) kann jetzt ein Argument bekommen. (!nl)
+      Version 6.5.9
+# ..............................................................................
+!item Beim Kommando (!KW [html_style_name]) können beliebig viele Stylesheets
+      übergeben werden. (!nl)
+      Version 6.5.9
+# ..............................................................................
+!item Bisher gab es ein <a name="UDOTOC"></a> vor dem
+      Inhaltsverzeichnis, auf das man bei der HTML-Ausgabe innerhalb
+      von Raw-Umgebungen verweisen kann. (!nl)
+      Jetzt wird UDOTOC als Label angelegt, wenn für HTML ein
+      Inhaltsverzeichnis erzeugt werden soll. Dann kann man auch
+      innerhalb des UDO-Quelltextes auf UDOTOC verweisen, ohne dass ein
+      Fehler auftritt. (!nl)
+      Version 6.5.9
+!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize !short
+# ..............................................................................
+!item Fixed bug #0000044 in version 6.4.1 (!nl)
+   If (!KW [no_numbers]) is set, there won't any longer printed numbers in front of the
+   node names in the HTML header (!LINK) elements.
+# ..............................................................................
+!item Bug #0000058 in Version~6.5.8 beseitigt (!nl)
+   Falsche UDO-Versionsbezeichnung in HTML-Metatags korrigiert.
+# http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000058
+# ..............................................................................
+!end_itemize
+!end_description
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+!medskip
+!heading Rich Text Format (RTF)
+!begin_description !short
+# ------------------------------------------------------------------------------
+!item [(!NEWS)]
+!begin_itemize !short
+# ..............................................................................
+!item Neues Kommando (!KW [rtf_add_colour]), mit dem zusätzliche Farben (über
+      die 16 Standardfarben hinaus) in den Kopf einer RTF-Datei
+      geschrieben werden. (!nl)
+      Version 6.5.9
+# ..............................................................................
+!item The (!code [!/docinfo]) entries (!code [subject]), (!code [keywords]),
+   (!code [company]) and (!code [category]) are written into the info values
+   of RTF files.
+# ..............................................................................
+!item Alle Nodes, Subnodes, etc. werden für die RTF-Ausgabe als
+      Label/Bookmark markiert. (!nl)
+      Version 6.5.9
+# ..............................................................................
+!item Das Kommando (!kkw [plink]) unterstützt. Die Angabe erfolgt als Hinweis
+      auf die Seitenzahl. (!nl)
+      Version 6.5.9
+# ..............................................................................
+!item ""\*\revtbl {Unknown}{UDO Version x.x.x}}"" wird gesetzt. (!nl)
+      Version 6.5.9
+# ..............................................................................
+!item (!KW [use_raw_header]) kann auch für die RTF-Ausgabe benutzt werden. (!nl)
+      Version 6.5.9
+!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize !short
+# ..............................................................................
+# zu RTF
+!item Fixed bug #0000056 in version~6.4.1 (!nl)
+   Wrong calculation of pictures sizes using the RTF output.
+   By an inadvertance, the parameter "height" was covered with the width.
+# http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000056
+# ..............................................................................
+!item Fixed bug #0000017 in version~6.4.1 (!nl)
+   Error message: ""couldn't read BMP header of <udo_mw.bmp>. No such file or directory."" (!nl)
+   New behavior: If you convert a document to RTF for the first time and the
+   UDO link image (!file [udo_mw.bmp]) doesn't exist, there will be given a note,
+   that you may translate the document again to complete it. (!nl)
+   The image will be found now on TOS compatible computers too.
+# http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000017
+# ..............................................................................
+!item Bug #0000060 in Version~6.5.8 beseitigt (!nl)
+      Abstürze bei RTF Ausgabe mit Version 6.5.5 beseitigt.
+# http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000060
+# ..............................................................................
+!end_itemize
+!end_description
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+!medskip
+!heading HTML-Help
+!begin_description !short
+# ------------------------------------------------------------------------------
+!item [(!NEWS)]
+!begin_itemize !short
+# ..............................................................................
+!item Wird der Kommandozeilenparameter --map gesetzt, so wird eine Alias- und MAP-
+      Datei erzeugt. (!nl)
+      Version 6.5.13
+# ..............................................................................
+!item (!KW [html_name]) is now used in HTML-Help output. (!nl)
+      Version 6.5.10
+# ..............................................................................
+!end_itemize
+!end_description
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+!medskip
+!heading ST-Guide
+!begin_description !short
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize !short
+# ..............................................................................
+# zu ST_Guide
+!item Horizontal lines can exceed a length of 126 characters. (!nl)
+      Version 6.5.16
+# ..............................................................................
+!end_itemize
+
+!end_description
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+
+!end_node
+
+# = = = = =
+
+!begin_node Changes from version 6.2.1 to 6.4.0
+!html_name history_6-2-1_to_6-4-0
+
+(!PUBLISHED [Version~6.4.0] [Jan 7, 2004])
+
+!heading [(!GENERAL)]
+!begin_description !short
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!CHANGES)]
+!begin_itemize !short
+# ..............................................................................
+!item In der Tabellenumgebung können Kommentare eingefügt werden.
+      Beispiel:
+
+!begin_verbatim
+!begin_table [|l|c|r|] !hline
+links !! mitte !! rechts
+# Dies ist ein Kommentar
+unten links !! unten mitte !! unten rechts
+!hline
+!end_table
+!end_verbatim
+!end_itemize
+# ------------------------------------------------------------------------------
+!end_description
+
+!heading PostScript
+# ------------------------------------------------------------------------------
+!begin_description
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize !short
+# ..............................................................................
+!item Fixed bug #0000040 in version 6.2.2 (!nl)
+      Fixed many little bugs for postscript output. Among other things
+      the won't be written a copyright sign any longer if there is no
+      author set in !docinfo. The brackets are quoted now (\[ and \]
+      instead of [ and ]). The standard page layout wasn't set. The
+      string for Named Destination wasn't submitted in the right way
+      to a function.
+# ..............................................................................
+!end_itemize
+
+!end_description
+
+!medskip
+!heading Hypertext Markup Language (HTML)
+!begin_description !short
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!CHANGES)]
+!begin_itemize !short
+# ..............................................................................
+!item Bug #0000010 (!nl)
+      Im HTML-Code werden alle Zahlenangaben in Tags in "" eingefasst.
+!end_itemize
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize
+# ..............................................................................
+!item Bug #0000035 (!nl)
+      Falscher ungarischer Akzent korrigiert.
+# ..............................................................................
+!item Bug #0000039 (!nl)
+      (!KW [html_name_prefix]) wurde nicht bei den (!LINK)-Elementen nicht benutzt.
+# ..............................................................................
+
+!end_itemize
+!end_description
+
+!end_node
+
+# = = = = =
+
+!begin_node Changes from version 6.2.0 to 6.2.1
+!html_name  history_6-2-0_to_6-2-1
+
+(!PUBLISHED [Version~6.2.1] [Dec 9, 2003])
+
+!heading PDF-(!LaTeX)
+!begin_description
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize !short
+# ..............................................................................
+!item If the destination is pdf(!LaTeX), the (!TeX) version isn't set to
+      Mik(!TeX) any longer.
+!item Made changes for links and URLs for pdf(!LaTeX) output.
+!item Made changes for images for pdf(!LaTeX) output.
+!item The information of (!KW [docinfo]) ist submitted correct for
+      pdf(!LaTeX) output.
+# ..............................................................................
+!end_itemize
+# ------------------------------------------------------------------------------
+!end_description
+
+!heading Richtext Format (RTF)
+!begin_description
+!item [(!BUGFIXES)]
+!begin_itemize !short
+# ..............................................................................
+!item Fixed bug #0000024 in version 6.2.1 (!nl)
+      In the (!LINK) elements are listed all subsubnodes of other subnodes
+!item Fixed bug #0000025 in version 6.2.1 (!nl)
+      UDO chrashed, when umlauts are used in the filename or domain in
+      the command (!/url !..).
+!item Fixed bug #0000029 in version 6.2.1 (!nl)
+      By using (!/url !..) for RTF output, the opening quote and the
+      following word were swallowed because of missing blanks.
+!item Fixed bug #0000030 in version 6.2.1 (!nl)
+      Nonbreaking blanks are converted wrong, when used in a link and for
+      RTF output (\\~ instead of \~).
+!item Fixed bug #0000039 in version 6.2.1 (!nl)
+      Although !html_name_prefix was set, the prefix was missed in the
+      (!LINK) elements for navigation.
+# ..............................................................................
+!end_itemize
+!end_description
+
+!end_node
+
+# = = = = =
+
+!begin_node Changes from Release 6 Patchlevel 17 to version 6.2.0
+!html_name  history_release_6_PL17_to_6-2-0
+
+(!PUBLISHED [Version~6.2.0] [Oct 15, 2003])
+
+!medskip
+!heading Hypertext Markup Language (HTML)
+!begin_description !short
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!CHANGES)]
+!begin_itemize !short
+# ..............................................................................
+!item Bug #0000010 (!nl)
+      Im HTML-Code werden alle Zahlenangaben in Tags in "" eingefasst.
+!end_itemize
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize
+# ..............................................................................
+!item Bug #0000010 (!nl)
+      Überflüssiges <br> nach Bild-Paragraph entfernt.
+# ..............................................................................
+!end_itemize
+!end_description
+
+!end_node
+
+# = = = = =
+
+!begin_node Changes from Release 6 Patchlevel 16 to 17
+!html_name  history_release_6_PL16_to_17
+
+(!PUBLISHED [Release~6 Patchlevel~17] [Oct 11, 2003])
+
+!heading [(!GENERAL)]
+!begin_description !short
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!NEWS)]
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize
+# ..............................................................................
+!item Fixed bug #0000003 (!nl)
+      The update message ""Last updated on!.."" has the correct french
+      umlauts.
+# ..............................................................................
+!end_itemize
+!end_description
+!medskip
+!heading Richtext Format RTF
+!begin_description !short
+# ------------------------------------------------------------------------------
+!smallskip
+!item [(!BUGFIXES)]
+!begin_itemize
+# ..............................................................................
+!item Memory for URL's increased up to 4096 internally (i.e. the user can
+      put 1024 characters) for RTF output.
+# ..............................................................................
+!end_itemize
+!end_description
+
+!end_node
+
+# = = = = =
+
+!begin_node Changes from Release 6 Patchlevel 15 to 16
+!html_name  history_release_6_PL15_to_16
+
+(!PUBLISHED [Release~6 Patchlevel~16] [Sept 28, 2003])
+
+!begin_description
+ !item [New commands:]
+ 	!begin_itemize !short
+   !item (!code [!/html_default_hyphenation]) (!nl)
+         Only if this command is set, the Hyphenation marks for
+         the HTML output are converted to (!code [&shy;])
+   !item (!code [!/node1_size foo]) (!nl)
+          This command sets the fontsize of nodes and headings for
+          postscript output (foo: fontsize in pt).
+   !item (!code [!/node2_size foo]) (!nl)
+         This command sets the fontsize of subnodes and subheadings for
+         postscript output (foo: fontsize in pt).
+   !item (!code [!/node3_size foo]) (!nl)
+         This command sets the fontsize of subsubnodes and subsubheadings
+         for postscript output (foo: fontsize in pt).
+   !item (!code [!/node4_size foo]) (!nl)
+         This command sets the fontsize of subsubsubnodes and
+         subsubsubheadings for postscript output (foo: fontsize in pt).
+ 	!end_itemize
+ !item [News:]
+ 	!begin_itemize !short
+ 	 !item In the first file of the HTML output ist set a meta tag for
+ 	       AppleTitle/JobTimerHelp.
+ 	 !item All nodes, which got a special name (e.g. foo.php) by
+ 	       (!code [!/html_name]) are referenced correct now.
+   !item The table of contents ist included in the tag (!code [<ul>]).
+         This tag is extended to (!code [<ul class="content">]).
+         Therefore you can choose, weather the bullets in front of
+         every item should be drawn or not. You can control it by
+         ul.content~{~list-style-type:~none;~} in a CSS file.
+   !item For every (!code [!/newpage]) there will be given out a
+         (!code [<span style="page-break-after:always;"></span>]).
+         So user agents who knows about it, can make a pge break.
+   !item The image captions will be put out as a field for RTF output.
+         Therefore a table of images could be created.
+   !item There would be build a speacial page with a macro of a list of
+         figures for the RTF output, even if (!code [!/listoffigure])
+         ist set. The macro must be executed in the word processor.
+   !item The default values are set for kind and heightness of fonts
+         and who PDF files will be opened.
+ 	!end_itemize
+ !item [Changes:]
+ 	!begin_itemize !short
+ 	 !item (!code [!/html_backpage ../index.html "Back to UDO website"]) (!nl)
+ 	       You can tell UDO to set a special text instead of the link text
+ 	       in the ""alt"" attribute. The text must be included in single
+ 	       quotation marks.
+   !item The caption of the image won't be put in parenthis for RTF output
+         any longer
+   !item The images will be shifted with the text too, if they are in a
+         special environment.
+ 	!end_itemize
+!end_description
+
+!end_node
+
+# = = = = =
+
+!begin_node Changes from Release 6 Patchlevel 14 to 15
+!html_name  history_release_6_PL14_to_15
+
+(!PUBLISHED [Release~6 Patchlevel~15] [June 10, 2003])
+
+!subheading General
+!begin_itemize !short
+!item All index entrys up to fourth level will be written in the
+      project file ((!file [*.upr]))
+!item The entrys for (!code [!/label]) and (!code [!/alias]) will
+      be written in the project file ((!file [*.upr])).
+!item All heading entrys will be written in the project file ((!file [*.upr])).
+!item For all entrys the line number will be written.
+!end_itemize
+
+!subheading PostScript
+!begin_itemize
+!item The standard output of ""about udo"" can't be used for postscript,
+      so there is a special one. The output will be done in german if
+      ""german"" ist set, otherwise in english
+!item New function for postscript output included, to hide characters
+      which can be interpreted as postscript code.
+!item New command for the document layout (!nl)
+      (!code [!/doclayout [ps!] [paper!] foo]) (!nl)
+      Possible values for foo: A3PORTRAIT, A3LANDSCAPE, A4PORTRAIT,
+      A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE.
+
+      (!code [!/doclayout [ps!] [openMode!] foo]) (!nl)
+      You can find possible values for foo in the pdfmark primer.
+
+      (!code [!/doclayout [ps!] [propfontname!] foo]) (!nl)
+      Possible value for foo are fontnames like Arial, Times New Roman,
+      ans or sans serif (!nl)
+      (!B)Hint:(!b) For postscript output will be set Helvetica if
+      helvetica, Arial or sans serif is set, otherwise times New Roman
+
+      (!code [!/doclayout [ps!] [propfontsize!] foo]) (!nl)
+      Possible values for foo are fontsizes with unit pt
+!item (!code [!/docinfo [keywords!] foo]) (!nl)
+      Replacement for (!code [!/html_keywords]) (works only for postscript)
+!item (!code [!/docinfo [description!] foo]) (!nl)
+      Replacement for (!code [!/html_description]) (works only for postscript)
+!item There is built a titlepage for postscript output now.
+!item For the standard heading line the title and programm items are
+      extracted from (!code [(!/docinfo!)])
+!item For the standard footer line the author item is extracted from
+      (!code [(!/docinfo!)])
+!item The document info of a PDF file is build from the values of
+      the (!code [(!/docinfo!)])
+!item Description- and list environments are supported for postscript
+!item New characters for the itemize environment
+!item The font ""Symbol"" can be used.
+!item Internal links (!code [!/link ...!)]), external links (!code [(!/xlink ...!)])
+      und (!code [(!/url ...!)]) are transposed for PDF (via PostScript)
+!item Footnotes are transposed for postscript
+!item Tables are transposed legible with monospaced characters
+!item Commands (!code [!/bigskip]), (!code [!/medskip]) and (!code [!/smallskip])
+      are transposed legible now.
+!item All nodes are set as ""Named Destination"", so it is possible to
+      link from outside directly to every node of a pdf file.
+!item With data from all nodes is built a bookmark content table
+!item Table of contents will be put out, if (!code [!/tableofcontents]) is set
+!item (!code [!/label]) will be transposed to a ""Named Destination""
+!end_itemize
+
+!subheading Hypertext Markup Language (HTML)
+!begin_itemize
+!item New commands for the HTML output: (!nl)
+      (!code [!/html_style_name foo]) (!nl)
+      Set an external stylesheet for all files of a project
+
+      (!code [!/html_script_name foo]) (!nl)
+      Set an external script for all files of a project
+
+      (!code [!/html_favicon_name foo]) (!nl)
+      Set an favicon for all files of a project
+
+      (!B)Important:(!b) This commands may be changed in future possibly.
+!item Character (!code [&shy;]) for hyphenation in HTML included
+!item The entities (!code [&ndash;]), (!code [&mdash;]) and (!code [&hellip;])
+      are used for HTML.
+!item Setting links for the navigation through a project of HTML sites
+      via the element (!code [(!LINK)]).
+      The following attributes are suppoerted: (!code [contents]), (!code [start]), (!code [first]),
+      (!code [previous]), (!code [prev]), (!code [next]), (!code [last]) and (!code [copyright]) (!nl)
+      The links for (!code [first]), (!code [last]) and (!code [previous])
+      are only vaild for CAB (perhaps iCab). The link for (!code [copyright])
+      introduces a link to aboutudo and in this case will be built. (!nl)
+      CAB doesn't support the attribute (!code [target]), when using the
+      element (!code [(!LINK)]). Therfore this link-Element doesn't work so
+      properly if frames are used.
+!item If frames are built for HTML output, there will be built a
+      <noframes></noframes> area with a table of contents too. Therefor
+      browser, which doesn't knows frames, can read the content.
+!end_itemize
+
+!subheading Rich Text Format (RTF)
+!begin_itemize
+!item Paragraph checks for orphans and widows are used now.
+!end_itemize
+
+!end_node
+
+# = = = = =
+
+# alt: Änderungen UDO7 gegenüber UDO6
+!begin_node Changes until Release 6 Patchlevel 14
+!html_name  history_release_6_until_PL14
+
+(!PUBLISHED [Release~6 Patchlevel~14] [July 11, 1999])
+
+You will find here a very compressed list of the major changes
+compared to the last release. UDO supports now more destination formats, it
+supports new features and there were fixed a lot of bugs. In some
+cases it was impossible not to change the syntax of some commands.
+
+!begin_description
+
+!item [New destination formats:]
+
+        !begin_itemize !short
+        !item WinHelp4
+        !item UDO
+        !item PDFLaTeX
+        !item DRC (David's Readme Compiler für DOS)
+        !item IPF (Information Presentation Facility, OS/2)
+        !item PostScript
+        !item C-Sourcecode
+        !item Pascal-Sourcecode
+        !item AmigaGuide
+        !end_itemize
+
+!item [New commands:]
+
+        !begin_itemize !short
+	!item (!KW [use_mirrored_indices])
+	!item (!KW [begin_flushleft]), (!KW [end_flushleft])
+	!item (!KW [begin_flushright]), (!KW [end_flushright])
+	!item (!KW [table_caption*])
+	!item (!KW [image*])
+	!item (!KW [html_backimage]), (!KW [html_backcolor]),
+	  (!KW [html_textcolor]), (!KW [html_linkcolor]),
+	!item (!KW [html_no_xlist])
+	!item (!KW [html_ignore_8bit])
+	!item (!KW [chaptericon])
+	!item (!KW [no_footers])
+	!item (!KW [begin_comment]), (!KW [end_comment]),
+	  (!KW [cinclude]), (!KW [comment]), (!KKW [comment])
+	!item (!KW [win_helpid])
+	!item (!KW [no_links])
+	!item (!KW [html_modern_layout]), (!KW [html_modern_width]),
+	   (!KW [html_modern_backcolor]), (!KW [html_modern_backimage])
+ 	   (!KW [html_alinkcolor]), (!KW [html_vlinkcolor]),
+ 	   (!KW [html_modern_alignment])
+	!item (!KW [html_frames_layout]), (!KW [html_frames_width])
+	    (!KW [html_frames_backcolor]), (!KW [html_frames_backimage]),
+	    (!KW [html_frames_height] [(!VALUE)]),
+	    (!KW [html_frames_position] [(!TEXT)]),
+	    (!KW [html_frames_textcolor]), (!KW [html_frames_linkcolor]),
+	    (!KW [html_frames_alinkcolor]), (!KW [html_frames_vlinkcolor])
+	!item (!KW [html_counter_command])
+	!item (!KW [wh4_helpid]), (!KW [wh4_charwidth]),
+	  (!KW [wh4_propfont]), (!KW [wh4_backcolor]),
+	  (!KW [wh4_textcolor]), (!KW [wh4_background]),
+	  (!KW [wh4_inline_bitmaps]), (!KW [wh4_high_compression]),
+	  (!KW [wh4_old_keywords]), (!KW [wh4_prefix_helpids])
+	!item (!KW [win_monofont]), (!KW [wh4_monofont])
+	!item (!KW [win_textcolor] [<color>])
+	!item (!KW [begin_linedraw]), (!KW [end_linedraw]),
+	   (!KW [ldinclude]), (!KW [linedrawsize])
+	!item (!KW [hh_backimage]), (!KW [hh_backcolor]),
+	   (!KW [hh_textcolor]), (!KW [hh_linkcolor]),
+	   (!KW [hh_alinkcolor]), (!KW [hh_vlinkcolor]),
+	   (!KW [hh_img_suffix])
+	!item (!KW [html_description])
+	!item (!KW [drc_bcolor]), (!KW [drc_icolor]),
+	  (!KW [drc_ucolor]), (!KW [drc_flags])
+	!item (!KW [udolink])
+	!item (!KW [use_auto_toptocs] [[<format>!!]])
+	!item (!KW [error] [(!TEXT)])
+	!item (!KW [begin_node*]), (!KW [begin_pnode]),
+	  (!KW [begin_pnode*])
+	!item (!KW [input])
+	!item (!KW [rtf_keep_tables] [[on|off!!]])
+	!item (!KW [html_button_alignment] [[left|center|right!!]])
+	!item (!KW [chaptericon_active])
+	!item (!KW [begin_ignore]), (!KW [end_ignore])
+	!item  (!KW [subtoc_offset]), (!KW [subsubtoc_offset]),
+           (!KW [subsubsubtoc_offset])
+        !item (!I)(!/index)(!i)
+#TODO: (!KKW [index]) funktioniert nicht???
+        !item (!KW [chaptericon_text])
+        !item (!KW [html_propfont_name]), (!KW [html_propfont_size])
+        !item (!KW [html_monofont_name]), (!KW [html_monofont_size])
+        !item (!KKW [raw])
+        !item (!KW [mapping] [<nummer>])
+        !item (!KW [tex_miktex])
+        !item (!KW [no_img_size])
+        !item (!KW [table_alignment])
+        !item (!KW [image_alignment])
+        !item (!KW [no_popup_headlines])
+        !item (!KW [use_raw_header] [(!FILE)]), (!KW [use_raw_footer] [(!FILE)]),
+          (!KW [ignore_raw_header]), (!KW [ignore_raw_footer])
+        !item (!KW [win_old_keywords])
+        !item (!KW [no_table_lines])
+        !item (!KW [html_transparent_buttons])#
+        !item (!KKW [url])
+        !item (!KW [use_auto_helpids])
+        !item (!KW [win_prefix_helpids])
+        !end_itemize
+
+!item [News:]
+
+        !begin_itemize !short
+        !item flushleft environment
+        !item flushright environment
+        !item Support of dutch language
+           ((!KW [language] [[dutch!!]])).
+	!item support of NeXTStep character set ((!KW [code] [[next!!]]))
+	!item (!KW [docinfo] [[webmastername!!]]) creates
+	   footer line at the end of each HTML page.
+	!item The commands that output a table of contents
+	  support an additional switch to specify
+	  the depth of the generated table.
+        !item Command line option (!link [(--)force-long] [Command line version]).
+        !item Command line options (!link [(--)c-idfile] [Command line version])
+          and (!link [(--)pas-idfile] [Command line version]).
+        !item Command line option (!link [-@] [Command line version]).
+        !item comment environment
+        !item UDO can create frames now with (!KW [html_frames_layout]).
+        !item linedraw environment
+        !item The RTF header includes a color table now.
+        !item you can structure your document by use of (!KW [begin_node]) and
+           (!KW [end_node]) now.
+	!item (!KW [use_nodes_inside_index] [[rtf!!]]),
+	  (!KW [use_label_inside_index] [[rtf!!]])
+          and (!KW [use_alias_inside_index] [[rtf!!]]) are supported.
+        !item The RTF format supports images.
+        !item ignore environment
+        !item Command line option (!link [(--)map] [Command line version]).
+        !item Command abbreviations can be used.
+        !item UDO detects the dimensions of GIF images now.
+        !item Command line option (!link [(--)check] [Command line version]).
+        !item Character sets (!KW [code] [[cp850!!]]) and (!KW [code] [[cp437!!]])
+        !item User defined header and footer for HTML.
+        !item Command line option (!link [(--)map-pas] [Command line version]).
+        !item Help-IDs can be generated automatically with (!KW [use_auto_helpids])
+        !item Command line option (!link [(--)force-short] [Command line version]).
+        !item The output of images when using (!KW [use_auto_toptocs])
+          can be suppressed with (!KW [no_icons]).
+        !end_itemize
+
+!item [Changes:]
+
+        !begin_itemize !short
+	!item You can use up to 3000 chapters now.
+	!item (!KW [verbatimsize]) is supported for HTML.
+	!item On systems supporting long filenames,
+	  UDO uses now 3 digits per level instead of 2
+	  (001002003004.html instead of 01020304.html).
+        !item The entries of tables of contents
+          are partially managed dynamically now.
+        !item The title page is managed dynamically now,
+          to prevent problems with entries being too long.
+        !item Up to 4096 Nodes and labels/aliases.
+        !item Extensive optimizations.
+        !item UDO can include files with spaces in the filename now.
+        !item If you use (!KW [tabwidth] [0]), UDO
+          does not convert tab characters in verbatim and
+          sourcecode environments.
+        !item UDO generate an error message now when using
+          (!KW [maketitle]) without having set any
+          information for the title page.
+        !item If you use (!KW [heading]), (!KW [subheading]) etc. in
+          a center or flushright environment, the headings will
+          be justified accordingly.
+        !item If you use (!KW [html_keywords]) more than once in a node,
+          the entries will be concatenated, separated by a comma.
+        !item The number of symbols you can use has been
+          increased from 32 to 128.
+        !item (!KW [image]) can display images with
+           spaces in the file name.
+        !item Dual and triple indices are correctly exported
+           for RTF now.
+        !item The first HTML page will only include a home symbol
+           if you use (!KW [html_backpage]).
+        !item The term ""Hints"" in the logfile has been changed to ""Notes"".
+        !item UDO will output the version number in the logfile.
+        !item When using (!KKW [img]), UDO will output an error
+           message if the dimensions of the image can't be detected.
+        !item The suffix of the MAP file for WinHelp has been changed to "".hpc"".
+        !item When using (!KW [chaptericon]), UDO will output
+           an error message if the image file could not be found.
+        !item If you use (!KW [no_images]), the HTML output
+           won't contain browse buttons but ASCII arrows
+           that are separated by brackets and pipe symbols.
+           Additionaly the "top tocs" won't contain
+           any images.
+        !item The commands (!KW [subtoc]), (!KW [subsubtoc]) and (!KW [subsubsubtoc])
+           all cause the same output now, so the only sensible
+           table of contents will be generated. This prevents
+           problems when using (!KW [begin_node]) and (!KW [end_node]).
+        !item Up to 1000 characters can be used in a table cell now.
+        !item The number of macros and definitions has been
+           increased to 1000. The number of nodes has been
+           increased to 32.768.
+        !item The date format of (!kw [language]) [french]
+           has been adopted (Didier Briel).
+        !item You have to avoid using umlauts or other
+           special characters in filenames included with
+           the (!KW [image]) command.
+        !end_itemize
+
+!item [Syntax changes:]
+
+        !begin_itemize !short
+        !item The switch for justification has been
+          renamed from (!kw [use_justified]) to (!KW [use_justification]).
+        !item The switch (!kw [html_use_xlist]) does not exist any more.
+        !item (!kw [german]), (!kw [english]), (!kw [french]) etc.
+           don't exist any more and have been replaced by the (!KW [language])
+           command.
+        !item (!kw [no_toc_subnodes]) can be replace by (!KW [tableofcontents] [!depth 1])
+           now.
+        !item The commands to switch the character set have changed.
+           The command (!KW [code]) replaces the old commands (!kw [code_dos])
+           , (!kw [code_hp8])
+           , (!kw [code_iso]), (!kw [code_mac]), (!kw [code_next])
+           and (!kw [code_tos])
+        !item The commands to set information for the title page
+           have changed. Instead of (!kw [title]), (!kw [program])
+           , (!kw [version]), (!kw [date]), (!kw [author]), (!kw [street])
+           , (!kw [town]), (!kw [country]) and (!kw [email]) the new
+           command (!KW [docinfo] [[~!!]]) has to be used.
+        !item The commands for specific destination formats have changed:
+           (!KW [raw] [[asc!!]]) replaces (!kw [asc]),
+           (!KW [raw] [[stg!!]]) replaces (!kw [stg]),
+           (!KW [raw] [[win!!]]) replaces (!kw [win]),
+           etc.
+        !item The switch (!kw [stg_no_database]) has been
+           replaced by (!KW [docinfo] [[stgdatabase!!]]).
+        !item (!KW [win_backcolor]) replaces the switch (!kw [win_background]).
+        !item The color names have changed and were adopted
+           to the HTML 3.2 specification.
+        !end_itemize
+
+!end_description
+
+!end_node
+
+# = = = = =
+
+# Änderungen UDO6 gegenüber UDO5
+!begin_node Changes from Release 5 to 6
+!html_name  history_release_5_to_6
+
+UDO6 was released on January 3rd, 1997.
+
+You will find here a very compressed list of the major changes of the
+last eight months. UDO supports now more destination formats, it
+supports new features and there were fixed a lot of bugs. In some
+cases it was impossible not to change the syntax of some commands.
+
+!begin_description
+
+!item [New destination formats:]
+
+        !begin_itemize
+        !item Apple QuickView
+        !item HP-HelpTag-SGML
+        !item LyX
+        !item NROFF
+	I don't know if UDO really saves NROFF or if it's TROFF or GROFF.
+	But you can already use it to make simple manpages for Unix
+	systems.
+
+        !item	Destination formats ""C source code"" and ""Pascal source code""
+	Using these formats it's possible to edit a C or Pascal source
+	code and its documentation in one file.
+
+	UDO will print ""normal"" text using the comment characters of C
+	or Pascal. The source code will be printed without conversion.
+
+        !end_itemize
+
+!item [New commands:]
+
+        !begin_itemize !short
+        !item (!KW [autoref_items] [[off|on!!]]):
+          Shall UDO insert links in items of descriptions and lists?
+        !item (!kw [code_mac]), (!kw [code_hp8]), (!kw [code_iso]), (!kw [code_dos]) and (!kw [code_tos]):
+          UDO understands now the character sets of other operating systems.
+        !item (!kw [country]):
+          Additional title page information.
+        !item (!KW [html_backpage]):
+          For a back-link on the HTML title page.
+        !item (!KW [html_keywords]):
+          For HTML meta information.
+        !item (!KW [html_img_suffix]):
+          To enable you to use JPEG images etc.
+        !item (!KW [html_nodesize]):
+          For changing the font size of HTML headlines.
+        !item (!KW [ifos]) und (!KW [ifnos]):
+          For checking the operating system.
+        !item (!KW [ignore_headline]), (!KW [ignore_bottomline]):
+          For suppressing the headline or the bottomline of a specific node.
+        !item (!KW [ignore_subtoc]) etc.:
+          For suppressing the sub-table of contents inside a specific node.
+        !item (!KW [ignore_links]):
+          For suppressing links to a specific node.
+        !item (!KW [image*]):
+          For printing image captions without ""Figure #:"".
+        !item (!KW [image_counter]):
+          For changing the image counter.
+        !item (!KW [no_index]):
+          For suppressing index command conversion.
+        !item (!kw [no_toc_subnodes]), (!kw [no_toc_subsubnodes]), (!kw [no_toc_subsubsubnodes]):
+          For making the table of contents smaller.
+        !item (!KW [no_preamble]):
+          Useful if you want to write your own preamble.
+        !item (!KW [parwidth]):
+          For changing the paragraph width of the destination file.
+        !item (!KW [rtf_charwidth]):
+          For changing the value UDO uses for calulating indents and cell widths.
+        !item (!KW [set]), (!KW [unset]), (!KW [ifset]), (!KW [ifnset]):
+          For setting and checking symbols.
+        !item (!KW [sort_hyphen_file]):
+          Shall UDO sort the hyphen file and delete duplicates?
+        !item (!KW [subsubsubnode]) etc.:
+          A fourth layer.
+        !item (!KW [table_counter]):
+          For changing the table counter.
+        !item (!KW [table_caption*]):
+          For printing table captions without ""Table #:"".
+        !item (!KW [tabwidth]):
+          For setting the tabulator width for verbatim environments.
+        !item (!KW [use_justification]):
+          Shall UDO generate justification?
+        !item (!KW [use_nodes_inside_index]), (!KW [use_alias_inside_index]), (!KW [use_label_inside_index]):
+          For appending nodes, aliases and labels to the index.
+        !item (!KW [use_output_buffer]):
+          Shall UDO use a buffer to make the referencation more
+          perfectly for HTML and Windows Help?
+        !item (!KW [use_short_envs]):
+          For printing always compressed environments.
+        !item (!KW [verbatimsize]):
+          For changing the font size of verbatim environments.
+        !item (!kw [win_background]):
+          For changing the background color for Windows Help.
+        !item (!KW [win_high_compression]), (!KW [win_medium_compression]):
+          For setting the compression rate for Windows Help.
+        !item (!KW [win_inline_bitmaps]):
+          Shall UDO use special RTF commands for using inline bitmaps?
+        !item (!KW [win_charwidth]):
+          For changing the value UDO uses for calulating indents and cell widths.
+        !end_itemize
+
+!item [News:]
+
+        !begin_itemize !short
+        !item You can use four layers now for Structure your text.
+        !item Justification
+        !item Macros and definitions can contain parameters. Thus, you
+			can write your own commands in most cases.
+        !item blist-, ilist- and tlist-environment
+        !item right justified text (flushright environment)
+        !item left justfied text (flushleft environment) for suppressing
+			the justification
+        !item You can use up to four E-Mail addresses on the title page
+			now.
+        !item UDO supports Italian ((!KW [language] [[italian!!]])), Spanish
+			((!KW [language] [[spanish!!]])) and Swedish
+                        ((!KW [language] [[swedish!!]])) now.
+        !item UDO can sort the hyphen file and delete duplicates.
+        !item (!KW [no_umlaute]) converts now all international
+			characters, not only the German umlauts.
+        !item The source code was optimized. Although UDO supports lots
+			of new commands this version of UDO runs faster than the
+			old one.
+        !end_itemize
+
+!item [Changes:]
+
+        !begin_itemize !short
+        !item The RTF output was programmed completely new. You can
+			import UDO's RTF files without problems in WinWord.
+        !item UDO saves a preamble for (!LaTeX)~2.09 and (!LaTeXe) on
+			its own (you can switch it off, if you want).
+        !item UDO allows you to use many more nodes, table rows, hyphens
+			etc.
+        !item UDO checks the source files more pedantically.
+        !item Images are positioned like the outer text. To center an
+			image you have to use the (!KW [image]) command inside a
+			center environment. Thus, you can print left and right
+			justified images, too.
+        !item The suffix for ASCII files is now (!file [.txt]).
+        !item UDO doesn't break line between (!code [verb]) when
+			converting to (!LaTeX).
+        !item Graphic characters of the IBM PC character set will be
+			replaced by ""(!code[+])"", ""(!code[--])"" and ""(!code[|])"" for Windows Help.
+        !end_itemize
+
+!item [Syntax changes:]
+
+        !begin_itemize !short
+        !item (!KW [no_verbatim_umlaute]) replaces the switch (!kw [verbatim_no_umlaute])
+        !item The switch (!kw [list_parsep]) doesn't exist anymore.
+			You can print ""compressed"" environment easier with
+			(!KW [short]) now.
+        !item The language of the destination file has to be set with
+			the (!KW [language]) command now.
+			(!KW [language] [[english!!]]) replaces the command (!kw [english]).
+        !item You can pass three index entries with one (!KW [index])
+			command now.
+        !item (!kw [win_html_look]) doesn't exist anymore.
+        !item Shadowed, hollow, outlined and framed text isn't supported
+			anymore. But you can define your own commands with
+			definitions if you need these text styles.
+        !end_itemize
+
+!end_description
+
+!end_node
+
+# = = = = =
+
+# Änderungen UDO5 gegenüber UDO~4
+!begin_node Changes from Release 4 to 5
+!html_name  history_release_4_to_5
+
+A very short description of the major changes I added to this release
+for the last five months is listed here. It wasn't possible to prevent
+a change of the syntax of some commands.
+
+!begin_description
+
+!item [New destination formats:]
+
+        !begin_itemize
+        !item Linuxdoc-SGML
+        !item Turbo Vision Help
+        !item Texinfo
+        !end_itemize
+
+!item [New commands:]
+
+        !begin_itemize
+        !item (!KW [alias])
+        !item (!KW [begin_raw]), (!KW [end_raw])
+          inside the raw environment you can enter special commands
+			for a destination format
+        !item (!KW [begin_table]), (!KW [end_table])
+          setting tables like in (!LaTeX)!
+        !item (!KW [chapterimage])
+          an image can be used for the title of a chapter
+        !item (!KW [define])
+        !item (!kw [french])
+          for French expressions
+        !item (!KW [heading]), (!KW [subheading]), (!KW [subsubheading]), (!KW [subsubsubheading])
+          for displaying headlines
+        !item (!KW [hline])
+          for displaying horizontal lines
+        !item (!KW [html_name])
+          to set the filename of a chapter
+        !item (!KW [html_merge_nodes]), (!KW [html_merge_subnodes]), (!KW [html_merge_subsubnodes])
+          for merging chapters when converting to HTML
+        !item (!KKW [ilink])
+          for displaying images with links inside the text, Windows Help and HTML only
+        !item (!KKW [img])
+          for displaying images inside the text, Windows Help and HTML only
+        !item (!KW [index])
+          for setting an index entry
+        !item (!kw [list_parsep])
+          for switching the use of empty lines between items of an
+			environment
+        !item (!KW [ifdest]), (!KW [else]), (!KW [endif])
+          for special passages
+        !item (!KW [iflang]), (!KW [else]), (!KW [endif])
+          for special passages with different languages
+        !item (!KW [node*]), (!KW [subnode*]), (!KW [subsubnode*]), (!KW [pnode*]), (!KW [psubnode*]), (!KW [psubsubnode*])
+          for chapters that don't appear inside a table of contents
+        !item (!KW [rinclude])
+          for including special commands
+        !item (!KW [use_about_udo])
+        !item (!KW [use_chapter_images])
+          for displaying images instead of chapter titles
+        !item (!KW [use_style_book])
+        !item (!kw [win_html_look])
+          for using grey inside a Windows Help file
+        !end_itemize
+
+!item [Changes:]
+
+        !begin_itemize
+	!item	You can display tables very easily. You can define how to
+			justify columns and where to draw horizontal and vertical
+			lines.
+	!item	The layout of the environments was programmed completely
+			new. Now you can use up to six environments inside
+			another, the xlist environment, too! UDO generates a
+			correct output for Windows Help and RTF.
+	!item	The semiautomatic Hyphenation was programmed
+			completely new.
+	!item	UDO now references only complete words.
+	!item	You can use 1024 chapters and 1024 labels now.
+	!item	You can use up to 200 links inside a paragraph. Due to a
+			bug you could only use 16 links inside a complete document
+			in release 4.
+	!item	Manualpages are layouted completely new.
+	!item	Paintbrush PCX images are supported for em(!TeX).
+	!item	The output of Windows Help was updated in many cases!
+	!item	The Atari versions were compiled with MiNT libs PL46.
+        !end_itemize
+
+!item [Syntax changes:]
+
+        !begin_itemize
+	!item	The special environments that were built with
+			(!I)!/begin_*(!i), (!I)!/else_*(!i) and (!I)!/end_*(!i)
+			have to be made with the more flexible commands
+			(!KW [ifdest]), (!KW [else]) and (!KW [endif]).
+
+Instead of!..
+!begin_verbatim
+!begin_asc
+[...]
+!else_asc
+[...]
+!end_asc
+!end_verbatim
+
+!.. you now have to use this construction:
+!begin_verbatim
+!ifdest [asc]
+[...]
+!else
+[...]
+!endif
+!end_verbatim
+
+	!end_itemize
+
+!item [Bugfixes:]
+	Innumerous. (!grin)
+
+!end_description
+
+!end_node
+
+# = = = = =
+
+# Änderungen UDO~4 gegenüber UDO3
+!begin_node Changes from Release 3 to 4
+!html_name  history_release_3_to_4
+
+This was the first English version with an English documentation!
+
+!end_node
+
+# = = = = =
+
+# Änderungen UDO3 gegenüber UDO2
+!begin_node Changes from Release 2 to 3
+!html_name  history_release_2_to_3
+
+I think that nobody is interested in those things that changed years ago.
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+!end_ignore
+
+# === EOF ===

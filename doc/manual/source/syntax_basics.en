@@ -20,6 +20,8 @@
 #   fd  Jun 09: all defined max values from _def.ui are shown in red color
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: chapter basics_text adjusted
 #
 ################################################################################
 
@@ -33,10 +35,10 @@
 
 !index Carriage Return
 !index Linefeed
-UDO expects a text file that you can edit with every ASCII editor. You
+UDO expects a text file which you can edit with every ASCII editor. You
 should use only printable characters. That means you shouldn't use any
 characters below ""space"" except ASCII~9 (tab), ASCII~10 (line feed) and
-ASCII~13 (carriage return). A line of a source file shouldn't contain more
+ASCII~13 (carriage return). A text line in a source file shouldn't contain more
 than (!LINELEN) characters.
 
 UDO layouts the destination file itself. That means that it fills in spaces
@@ -45,7 +47,7 @@ between words and lines between paragraphs:
 !begin_description
 
 !index word
-!item [Words] are characters that are divided by one or more blank or tab.
+!item [Words] are characters which are divided by one or more blank or tab.
 UDO prints words divided by one blank.
 
 !index paragraph
@@ -56,30 +58,11 @@ printing the destination file.
 !end_description
 
 !index Character set
+You can compose the source file using different charsets. 
 
-You can compose the source file using different charsets. UDO supports the
-following character sets:
-
-!begin_itemize !short
-!item Atari TOS                 ((!KW [code] [[tos!!]])) (!index [!/code])
-!item Apple Macintosh           ((!KW [code] [[mac!!]])) (!index [!/code])
-!item HP Roman 8                ((!KW [code] [[hp8!!]])) (!index [!/code])
-!item IBM-PC                    ((!KW [code] [[dos!!]])) (!index [!/code])
-!item IBM-PC                    ((!KW [code] [[cp437!!]])) (!index [!/code])
-!item ISO Latin 1, Windows ANSI ((!KW [code] [[iso!!]])) (!index [!/code])
-!item ISO Latin 1, Windows ANSI ((!KW [code] [[latin1!!]])) (!index [!/code])
-!item ISO Latin 1, Windows ANSI ((!KW [code] [[iso-8859-11!!]])) (!index [!/code])
-!item OS/2                      ((!KW [code] [[os2!!]])) (!index [!/code])
-!item OS/2                      ((!KW [code] [[cp850!!]])) (!index [!/code])
-!item NeXT                      ((!KW [code] [[next!!]])) (!index [!/code])
-!item Unicode UTF-8             ((!KW [code] [[utf8!!]])) (!index [!/code])
-!end_itemize
-
-When UDO starts the conversion it excepts the character set that is used on
-the current operating system. If you want to convert source files that use
-characters from a different operating system you have to tell it to UDO by
-using the upper commands. Additional information can be found in the chapter
-""Special characters"".
+When UDO starts the conversion it excepts the character set that is used on the current operating system. 
+If you want to convert source documents which use other encodings, you have to inform UDO with the relevant commands. 
+Get more information about this in the chapter ""Special characters"".
 
 !end_node # Let's talk about text, Baby!
 
