@@ -79,6 +79,7 @@
 *    fd  Feb 23: - UDO_PL -> UDO_BUILD (no more patchlevels)
 *                - unicode2char() adjusted, using ^string instead of local string
 *    fd  Mar 01: html_footer(): changes from (ME) reverted - see discussion in UDO_DEV
+*    fd  Mar 02: html_footer(): notes added and mailto: handling enhanced
 *
 ******************************************|************************************/
 
@@ -5130,6 +5131,48 @@ GLOBAL void html_bottomline(void)
 *  html_footer():
 *     outputs address segment with copyright notes webmaster URL, and email
 *
+*  Notes:
+*     This function reacts on the existance and content of the following !docinfo
+*     parameters:
+*
+*     !docinfo [webmasterurl]       e.g. "http://www.mydomain.com"
+*     !docinfo [webmastername]      e.g. "My Domain"
+*     !docinfo [webmastermailurl]   e.g. "webmaster@mydomain.com"
+*     !docinfo [webmasteremail]     e.g. "Webmaster"
+*
+*
+*     When [webmasterurl] and [webmastername] are available, the URL link is 
+*     formatted like this: 
+*     '<a href="[webmasterurl]">[webmastename]</a>'
+*
+*     When only [webmasterurl] is available, it is repeated in the visible link:
+*     '<a href="[webmasterurl]">[webmasterurl]</a>'
+*
+*     When only [webmastername] is available, no link is created but the
+*     [webmastername] is output as simple text in the HTML footer.
+*
+*
+*     When [webmastermailurl] and [webmasteremail] are available, the email URL 
+*     link is formatted like this:
+*     '<a href="mailto:[webmastermailurl]">[webmasteremail]</a>
+*
+*     When only [webmastermailurl] is available, it is repeated in the visible 
+*     email link:
+*     '<a href="mailto:[webmastermailurl]">[webmastermailurl]</a>
+*
+*     When only [webmasteremail] is available, no link is created but the
+*     [webmasteremail] is output as simple text in the HTML footer.
+*
+*
+*  Special feature:
+*     Chances are that someone wants to use a web URL instead of an email address
+*     [webmastermailurl]. Today, many web users try to avoid having their email
+*     address being placed visibly in web pages, to let email addresses harvester 
+*     bots not find their email addresses for spam purposes.
+*
+*     So we check if [webmastermailurl] has a '@'. If not, the anchor 
+*     string "mailto:" is suppressed.
+*     
 *  return:
 *     -
 *
@@ -5305,6 +5348,10 @@ GLOBAL void html_footer(void)
          titdat.webmasteremail, 
          titdat.webmasteremail);
    }
+
+   if (titdat.webmastermailurl != NULL)
+      if (strstr(titdat.webmastermailurl,"@") == NULL)
+         (void)replace_once(s,"mailto:","");
    
    strcat(footer_buffer, s);
    
