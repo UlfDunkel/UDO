@@ -43,10 +43,10 @@
 !macro EXAMPLE_BEFORE !rinclude (!EXAMPLES)/html/example_before.ui
 !macro EXAMPLE_AFTER  !rinclude (!EXAMPLES)/html/example_after.ui
 
-!macro FORMAT         (!link [&lt;kürzel&lt;] [Ausgabeformat])
-!macro COLOR          (!link [&lt;farbe&lt;] [Farben])
-!macro LANGUAGE       (!link [&lt;sprache&lt;] [Sprache])
-!macro OS             (!link [&lt;system&lt;] [Betriebssystem])
+!macro FORMAT         (!link [&lt;ausgabeformat&gt;] [Ausgabeformat])
+!macro COLOR          (!link [&lt;farbe&gt;] [Farben])
+!macro LANGUAGE       (!link [&lt;sprache&gt;] [Sprache])
+!macro OS             (!link [&lt;system&gt;] [Betriebssystem])
 !macro CHARSET        (!link [&lt;zeichensatz&gt;] [Code])
 
 # other macro formattings
@@ -57,7 +57,7 @@
 !macro EXAMPLE_BEFORE (!B)Vorher:(!b) (!nl) !begin_quote
 !macro EXAMPLE_AFTER  (!B)Nachher:(!b) (!nl)
 
-!macro FORMAT         (!link [<kürzel>] [Ausgabeformat])
+!macro FORMAT         (!link [<ausgabeformat>] [Ausgabeformat])
 !macro COLOR          (!link [<farbe>] [Farben])
 !macro LANGUAGE       (!link [<sprache>] [Sprache])
 !macro OS             (!link [<system>] [Betriebssystem])
