@@ -22,6 +22,9 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: new chapter 'How to read this manual best'
 #   fd  Jun 10: using ndash instead of mdash in German texts
+# 2010:
+#   fd  Feb 26: - intro_community: Christof Schardt added
+#               - intro_contact: URLs added
 #
 ################################################################################
 
@@ -75,7 +78,7 @@ Wir haben viele UDO-Funktionen verwendet, um das Handbuch für Sie so praktisch w
 
 !begin_description
 !item [Navigation]
-(!img [udo_hm][Home])~(!img [udo_up][Hoch])~(!img [udo_lf][links])~(!img [udo_rg][rechts])
+(!img [udo_hm][Home])~(!img [udo_up][Hoch])~(!img [udo_lf][links])~(!img [udo_rg][rechts]) (!nl)
 
 In der wohl am meisten gelesenen HTML-Variante können Sie bequem über die kleinen Symbole am oberen und unteren Rand jeder Seite zum Anfang des Handbuchs, eine Kapitel-Ebene höher, zum vorigen Kapitel oder zum nächsten Kapitel navigieren. 
 
@@ -115,7 +118,7 @@ kann UDO sehr gute Dienste leisten.
 
 Dabei ist UDO multilingual, d.h. Sie können Texte in verschiedenen Sprachen erzeugen 
 und UDO wird dabei für die unterstützten Sprachen die jeweils passenden Begriffe für
-"Inhaltsverzeichnis", "Anhang", "Abbildung" oder "Tabelle" ausgeben oder das Datum
+""Inhaltsverzeichnis"", ""Anhang"", ""Abbildung"" oder ""Tabelle"" ausgeben oder das Datum
 im jeweiligen Format darstellen.
 
 Die Syntax von UDO ist wirklich leicht zu erlernen. Zum Erstellen 
@@ -313,11 +316,11 @@ UDO wurde ursprünglich von Dirk Hagedorn entwickelt
 und ist seit dem 27.10.2001 (!link [Open-Source] [Copyright]).
 
 Am UDO-Projekt beteiligte Personen (in alphabetischer Reihenfolge):
-!begin_description
+!begin_description !short
   !item [Denesh Bhabuta] Support in England (bis 2001)
   !item [Alexander Clauss] Erstellung der HP-UX-300/400-Version (bis 2001)
-  !item [Ulf Dunkel] Programmierung und Dokumentation [seit 2006]
-  !item [Dirk Hagedorn] Programmierung und Dokumentation (bis 2001)
+  !item [Ulf Dunkel] Programmierung und Dokumentation (seit 2006)
+  !item [Dirk Hagedorn] Vater des Programms, Programmierung und Dokumentation (bis 2001)
   !item [Norbert Hanz] Programmierung (seit 2002)
   !item [Dirk Haun] einer der Geburtsväter von UDO
   !item [Volker Janzen] Betreuung der UDO-Website und Entwickler-Infrastruktur, Programmierung
@@ -329,7 +332,8 @@ Am UDO-Projekt beteiligte Personen (in alphabetischer Reihenfolge):
   !item [Martin Osieka] Portierung auf Mac~OS (bis ca. 1999)
   !item [Thorsten Otto] Pflege der Dokumentation (2001)
   !item [Rainer Riedl] Erstellung der BeOS-Version (bis ca. 2001)
-  !item [Gerhard Stoll] Programmierung [seit 2003]
+  !item [Christof Schardt] Programmierung (TeX)
+  !item [Gerhard Stoll] Programmierung (seit 2003)
   !item [Tom Thomason] Support in Schweden (bis ca. 2001)
 !end_description
 
@@ -346,12 +350,19 @@ Auf der UDO-Website (!url [http://www.udo-open-source.org] [http://www.udo-open-
 
 Zum Kontakt zwischen den UDO-Anwendern stehen folgende (!B)Mailinglisten(!b) zur Verfügung:
 
-!begin_blist [UDO-Bugtracker] !short
-!item [UDO-Announce] Ankündigungen rund um UDO (z.B. neue Versionen)
-!item [UDO-Discussion] In dieser Mailingliste können Fragen rund um UDO gestellt werden und es wird allgemein über UDO diskutiert. Melden Sie sich hier, wenn Sie ein Problem mit UDO haben.
-!item [UDO-Entwickler] Mailingliste für die UDO-Entwickler.
-!item [UDO-Bugtracker] In dieser Mailingliste bekommen Sie die Bugmeldungen und Feature-Wünsche von UDO angezeigt, die im (!url [Bugtracker-System] [http://bugtracker.udo-open-source.org/]) eingetragen werden.
+!begin_blist [UDO_Bugtracker] !short
+!item [(!url [UDO_Announce] [http://lists.udo-open-source.org/mailman/listinfo/udo_announce])]
+      Ankündigungen rund um UDO (z.B. neue Versionen)
+!item [(!url [UDO_Bugtracker] [http://lists.udo-open-source.org/mailman/listinfo/udo_bugtracker])]
+      In dieser Mailingliste bekommen Sie die Bugmeldungen und Feature-Wünsche von UDO angezeigt, 
+      die im (!url [Bugtracker-System] [http://bugtracker.udo-open-source.org/]) eingetragen werden.
+!item [(!url [UDO_Dev] [http://lists.udo-open-source.org/mailman/listinfo/udo_dev])]
+      Mailingliste für die UDO-Entwickler.
+!item [(!url [UDO_Discussion] [http://lists.udo-open-source.org/mailman/listinfo/udo_discussion])]
+      In dieser Mailingliste können Fragen rund um UDO gestellt werden und es wird allgemein über UDO diskutiert.
+      Melden Sie sich hier, wenn Sie ein Problem mit UDO haben.
 !end_blist
+
 Die Diskussionen auf den Mailinglisten finden hauptsächlich in Deutsch statt; Anfragen können jedoch auch in Englisch gestellt werden.
 
 !end_node # Kontakt zur UDO-Gemeinde
