@@ -1,0 +1,197 @@
+!subsubnode Query commands
+
+In some cases you might want to insert some special passages for a
+destination format, language or operati system.
+
+UDO supports some commands you can use to check the destination format,
+lanuage, operating system and the existence of symbols.
+
+!index !/else
+!index !/endif
+
+With an if!.. command you start a query. If the query returns a true value
+the following lines will be converted until UDO reads the (!I)!/endif(!i) or
+(!I!)!/else(!i) commands. If the query returns a false value UDO will ignore
+the following lines until (!I)!/endif(!i) or (!I)!/else(!i).
+
+#################################################
+!index Query !! Destination format
+!index Destination format !! Query
+!index !/ifdest
+!subsubheading Testing the destination format
+
+With the command (!I)!/ifdest(!i) you can test the destination format. Use
+the following abbreviations:
+
+!include syntax/misc/_dest.ui
+
+In addition to these abbreviations you can use ""all"" and ""none"". A query
+with ""all"" always returns a true value, a query with ""none"" always
+returns a false value.
+
+The following example shows how to set a special document title for Windows
+Help:
+
+!autoref [off]
+
+!begin_quote
+!begin_verbatim
+!ifdest [win]
+!title The Windows Help to
+!else
+!title The guide to
+!endif
+!end_verbatim
+!end_quote
+
+!autoref [on]
+
+
+!index !/ifndest
+
+The (!I)!/ifndest(!i) command is familiar to (!I)!/ifdest(!i). But
+(!I)!/ifndest(!i) will check if you do (!I)not(!i) convert to the given
+destination format. Thus you can write the upper example this way, too:
+
+!autoref [off]
+
+!begin_quote
+!begin_verbatim
+!ifndest [win]
+!title The guide to
+!else
+!title The Windows Help to
+!endif
+!end_verbatim
+!end_quote
+
+!autoref [on]
+
+You can pass more than one abbreviation to the query command. If you do so
+the query returns a true value if one or more abbreviations match the
+current destination format. The next example shows how to set a special
+document title for hypertext formats:
+
+!autoref [off]
+
+!begin_quote
+!begin_verbatim
+!ifdest [win,html,stg,htag]
+!title The hypertext to
+!else
+!title The guide to
+!endif
+!end_verbatim
+!end_quote
+
+!autoref [on]
+
+
+#################################################
+!index Query !! Language
+!index language !! Query
+!index !/iflang
+!subsubheading Testing the destination language
+
+Using the (!I)!/iflang(!i) command you can test the language UDO will use in
+the destination file. Use the following words to test the language:
+
+!include syntax/misc/_lang.ui
+
+In addition to these words you can use ""all"" and ""none"". A query
+with ""all"" always returns a true value, a query with ""none"" always
+returns a false value.
+
+If you write a small documentation you can enter all langaguages to a single
+source file:
+
+!autoref [off]
+
+!begin_quote
+!begin_verbatim
+!iflang [german]
+!title Die Benutzeranleitung zu
+!else
+!title The User's Guide to
+!endif
+!end_verbatim
+!end_quote
+
+!autoref [on]
+
+!index !/ifnlang
+
+The (!I)!/ifnlang(!i) command is familiar to (!I)!/iflang(!i). But
+(!I)!/ifnlang(!i) will check if you do (!I)not(!i) convert to the given
+destination language. Thus you can write the upper example this way, too:
+
+!autoref [off]
+
+!begin_quote
+!begin_verbatim
+!ifnlang [german]
+!title The User's Guide to
+!else
+!title Die Benutzeranleitung zu
+!endif
+!end_verbatim
+!end_quote
+
+!autoref [on]
+
+It goes without saying that you can test more than one language.
+
+#################################################
+!index Query !! Symbols
+!index Symbols !! Query
+!index !/ifset
+!index !/ifnset
+!subsubheading Testing symbols
+
+With the (!I)!/ifset(!i) command you can test if a symbol was set in the
+preamble or via command line. The (!I)!/ifnset(!i) tests if a symbol is
+(!I)not(!i) set.
+
+!index -D
+!index !/set
+!index !/unset
+
+As you know you can set symbols via command line by using the option
+(!V)-D(!v) and by the command (!I)!/set(!i).
+
+The following example shows how to test the symbol ''(!V)UseColour(!v)'' and
+to display the right image:
+
+!begin_quote
+!autoref [off]
+!begin_verbatim
+!ifset [UseColour]
+!image colour/tiger
+!else
+!image mono/tiger
+!endif
+!end_verbatim
+!autoref [on]
+!end_quote
+
+If you call UDO with passing the option (!T)-D~UseColour(!t) or if you set
+the symbol with (!I)!/set~UseColour(!i) inside the preamble UDO will display
+the colour image instead of the monochrome image.
+
+#################################################
+!index Query !! Operating system
+!index Operating system !! Query
+!index !/ifos
+!subsubheading Testing the operating system
+
+With the (!I)!/ifos(!i) command you can test the operating system UDO is
+running on. Use the following words for this kind of query:
+
+!include syntax/misc/_os.ui
+
+Like in the other queries you can use ""all"" and ""none"", too.
+
+!index !/ifnos
+
+The familiar command called (!I)!/ifnos(!i) tests if UDO does (!I)not(!i)
+run on the given operating system.

@@ -1,0 +1,22 @@
+[OPTIONS]
+HCW=0
+HLP=udo6eng4.hlp
+CNT=udo6eng4.cnt
+LCID=0x409 0x0 0x0 ;English (USA)
+TITLE=The Windows Help of UDO
+COPYRIGHT=Copyright (c) by Dirk Hagedorn & The UDO community
+COMPRESS=HIGH
+ICON=help.ico
+
+[CONFIG]
+BrowseButtons()
+CreateButton("BTN_UP", "&Up", "JumpID(`udo6en.hlp', `UDON0000')")
+CreateButton("BTN_INFO", "&Info", "JumpID(`udo6en.hlp', `UDON0000')")
+CreateButton("BTN_EXIT", "E&xit", "Exit()")
+
+[WINDOWS]
+main="",(20,20,540,880),0
+win1="UDO6",(573,71,437,462),4,(r15204351),(r15204351),1
+
+[FILES]
+udo6en.rtf

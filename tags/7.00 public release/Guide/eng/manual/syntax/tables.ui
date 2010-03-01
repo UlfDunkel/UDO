@@ -1,0 +1,122 @@
+############################################################
+# @(#) Tables, 1996/04/16
+############################################################
+!subsubnode Tables
+
+Since Release 5 you are able to print simple tables with UDO. You can define
+the justification of the columns and where UDO shall print vertical and/or
+horizontal lines.
+
+!index !/table_caption
+!index !/begin_table
+!index !/end_table
+!index !/hline
+!index !/!/
+
+To print tables with UDO you need the following commands:
+
+!begin_enumerate !short
+!item	(!I)!/table_caption <text>(!i)
+!item	(!I)!/begin_table [...] {!hline}(!i)
+!item	(!I)!/end_table(!i)
+!item	(!I)!/hline(!i)
+!item	(!I)!/!/(!i)
+!end_enumerate
+
+The command (!I)!/table_caption(!i) defines the title of the next table. It
+has to be used before the table environment, not inside this environment!
+
+The command (!I)!/begin_table(!i) starts a table, (!I)!/end_table(!i)
+finishes and prints the table. After (!I)!/begin_table(!i) you can define
+the justification of the table columns and the usage of vertical lines. Use
+''c'' for a centred row, ''l'' for a left justified row, ''r'' for a
+right justified row and ''|'' for vertical lines inside brackets. If you add
+a (!I)!/hline(!i) command to this line the table starts with a horizontal
+line.
+
+After having described the layout of the table with the upper line
+you can insert the cells of the table. You have to insert a column in
+one source line and you have to divide the cells by using ''!!''.
+
+If you want to insert a horizontal line you can use the (!I)!/hline(!i)
+command. (!I)!/hline(!i) has to be at the beginning of the line and it has
+to be the only command of this line.
+
+Here you will see a short example that demonstrates the usage of the upper
+described commands:
+
+!begin_quote
+!begin_verbatim
+!table_caption Tables with UDO
+!begin_table [|l|c|r|] !hline
+upper left !! up !! upper right
+lower left cell !! lower cell !! lower right cell
+!hline
+!end_table
+!end_verbatim
+!end_quote
+
+This example prints a table with two rows and three columns. The first
+column is left justified, the second columns is centred and the third
+columns is printed right justified:
+
+!table_caption Tables with UDO
+!begin_table [|l|c|r|] !hline
+upper left !! up !! upper right
+lower left cell !! lower cell !! lower right cell
+!hline
+!end_table
+
+Because I used a ''|'' before and after every column they are divided by
+vertical lines. The table starts with a horizontal line because the
+(!I)!/hline(!i) command was added at the end of (!I)!/begin_table(!i).
+Finally the table ends with a horizontal line because the (!I)!/hline(!i)
+command is used right before (!I)!/end_table(!i).
+
+!smallskip
+
+The following example shows the upper table without any lines:
+
+!table_caption Another example
+!begin_table [lcr]
+upper left !! up !! upper right
+lower left cell !! lower cell !! lower right cell
+!end_table
+
+!smallskip
+
+!index !/use_ansi_tables
+
+UDO offers you a switch called (!I)!/use_ansi_tables(!i). If you use this
+switch inside the preamble the lines of the table are printed by using some
+characters of the IBM
+PC graphic character set instead of (!T)+(!t), (!T)-(!t) and (!T)|(!t) when
+converting into an ASCII like format like ASCII or ST-Guide. This switch has
+no effect if you convert to Windows Help, RTF, HTML or (!LaTeX).
+
+!smallskip
+
+(!HINTS)
+
+!begin_itemize
+
+!item	Tables are always printed centred.
+
+!item	HTML doesn't allow to define where to use lines. If you use the
+(!I)!/hline(!i) command at the end of (!I)!/begin_table(!i) the table is
+printed via (!V)frame=box(!v). If you don't use (!I)!/hline(!i) it is
+printed without any lines.
+
+!item	Windows Help doesn't allow it to print centred tables or to print
+lines where you want to. If you use (!I)!/hline(!i) in the
+(!I)!/begin_table(!i) line all cells will be printed with a box. If you
+don't use (!I)!/hline(!i) there will be no line at all in this table.
+
+!item	Converting to ST-Guide the lines of a table are generated with
+(!T)@line(!t). It's not possible to use more than one vertical line between
+columns or more than one horizontal line.
+
+!item	Inside the cells you can use all other UDO commands like text
+styles, links or indices.
+
+!end_itemize

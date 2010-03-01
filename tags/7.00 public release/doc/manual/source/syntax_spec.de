@@ -1,0 +1,288 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Special characters
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 08: ignored charset list removed, including charsets.ui
+#   fd  Jun 08: text reviewed
+#   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 12: macro renamed: CODE -> CHARSET
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Feb 25: - chapter 'Converting 8-bit characters' partly rewritten
+#               - universal charset table enhanced
+#
+################################################################################
+
+!begin_node Sonderzeichen
+!html_name  special_characters
+
+# 22.01.1996: UDOs Vorgehen bei doppelten Apostrophen
+
+# = = = = =
+
+!begin_node Doppelte Anführungszeichen
+!html_name  spec_double_quotes
+
+!index Anführungszeichen !! typographische
+!index Typographische Anführungszeichen
+Doppelte Anführungszeichen werden bei der Umwandlung durch
+typographische Anführungszeichen (z.B. ""Guillemets"")
+ersetzt, falls diese vom jeweiligen Format unterstützt werden. Werden
+diese nicht unterstützt, werden die doppelten Anführungszeichen
+durch einfache ersetzt.
+
+In der folgenden ASCII-Simulation wird gezeigt, wie das Ergebnis in
+später aussehen kann, wenn das jeweilige Ausgabeformat echte
+Anführungszeichen unterstützt.
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Echte ""Gänsefüßchen""
+!end_verbatim
+(!EXAMPLE_AFTER)
+Echte ""Gänsefüßchen""
+(!EXAMPLE_END)
+
+Wenn Sie in der Ausgabedatei doppelte Anführungszeichen sehen möchten,
+so müssen Sie stattdessen (!KP [((""!)!)])(!code [text])(!KP [((""!)!)]) angeben.
+
+(!HINTS)
+
+!begin_enumerate
+!index (!kw [no_quotes])
+!item Die Umwandlung in typographische Anführungszeichen kann man durch
+den Schalter (!KW [no_quotes] [[~!!]]) im Vorspann ausschalten.
+
+!item Bei der Ausgabe ins Rich-Text-Format werden spezielle
+RTF-Kommandos verwendet. Manche Textverarbeitungen wandeln diese
+Kommandos jedoch nicht in deutsche Anführungszeichen um, sondern in die
+englischen Versionen. Daran kann UDO leider nichts ändern.
+
+!end_enumerate
+
+!end_node # Doppelte Anführungszeichen
+
+# = = = = =
+
+!begin_node Doppelte Apostrophe
+!html_name  spec_double_apostrophes
+
+!index Apostrophe !! doppelte
+Genau wie bei doppelten Anführungszeichen passt UDO auch hier doppelt
+vorkommende Apostrophe an.
+
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+""Der Regen fällt heute ''wie aus Eimern''"", beschwerte sich der Schäfer.
+!end_verbatim
+(!EXAMPLE_AFTER)
+""Der Regen fällt heute ''wie aus Eimern''"", beschwerte sich der Schäfer.
+(!EXAMPLE_END)
+
+Wenn Sie in der Ausgabedatei doppelte Apostrophe sehen möchten, so
+müssen Sie stattdessen (!KP [((''!)!)])(!code [text])(!KP [((''!)!)]) angeben.
+
+(!HINT)
+
+!index (!kw [no_quotes])
+Der Schalter (!KW [no_quotes] [[~!!]]) hat genau wie auf die doppelten
+Anführungszeichen Einfluss auf die Umsetzung der doppelten Apostrophe.
+
+!end_node # Doppelte Apostrophe
+
+# = = = = =
+
+!begin_node Feste Leerzeichen
+!html_name  spec_nonbreaking_spaces
+
+!index Leerzeichen
+!index Tilde
+!index ~
+Möchten Sie zwischen zwei Wörtern ein festes oder mehrere feste
+Leerzeichen angeben, benutzen Sie dafür die Tilde: (!KP [!~]).
+Feste Leerzeichen eignen sich (auch) dafür, den Zeilenumbruch an der
+jeweiligen Stelle zu unterbinden.
+
+Bei den Dateien, die im ASCII-Format ausgegeben werden und vom
+zugehörigen Konverter nicht mehr nachformatiert werden, ersetzt UDO die
+Tilde durch ein Leerzeichen und achtet selber darauf, wann kein
+Zeilenumbruch erfolgen darf.
+
+Bei den anderen Formaten ersetzt UDO die Tilde durch folgende
+formatspezifische Zeichenfolgen, die den gleichen Zweck erfüllen:
+
+!begin_xlist [WinHelp:] !short
+!item [(!LaTeX):]   (!code [!~])
+!item [HTML:]       (!code [&nbsp;])
+!item [RTF:]        (!code [\!~])
+!item [WinHelp:]    (!code [\!~])
+!end_xlist
+
+Wenn Sie die Tilde selber ausgeben möchten, müssen Sie die Zeichenfolge (!KW [!~]) benutzen.
+
+(!HINT)
+
+Bei externen Verweisen ((!KKW [url]), (!KKW [xlink])) wird die Tilde nicht in ein festes Leerzeichen
+umgewandelt, wird also von UDO direkt übernommen.
+
+!end_node # Feste Leerzeichen
+
+# = = = = =
+
+!begin_node Gedankenstriche
+!html_name  spec_dashes
+
+!index Minuszeichen
+UDO bietet -- wie sollte es auch anders sein -- eine Möglichkeit,
+Gedankenstriche (wie hier) bereits im Quelltext anzugeben.
+
+Gedankenstriche werden von (!LaTeX), RTF und WinHelp unterstützt. Bei den
+anderen Formaten werden zwei bzw. drei Minuszeichen durch eines
+ersetzt.
+
+Mit (!KP [(---!)]) können Sie einen langen, mit (!KP [(--!)]) einen kurzen Gedankenstrich
+ausgeben. Wenn Sie drei Minuszeichen ausgeben möchten, müssen Sie
+im Quelltext (!KP [((---!)!)]) benutzen. Wenn Sie zwei Minuszeichen ausgeben
+möchten, müssen Sie im Quelltext (!KP [((--!)!)]) benutzen.
+
+!end_node # Gedankenstriche
+
+# = = = = =
+
+!begin_node Umwandlung von 8-bit-Zeichen
+!html_name  spec_converting_8bit_characters
+
+!index Systemzeichensatz
+!index Umlautumwandlung
+!index Umwandlung !! Umlaute
+!index Zeichensatz
+In einem Quelltext können Sie, anders als bei (!LaTeX), HTML, WinHelp oder
+RTF, auch Zeichen aus dem oberen Teil Ihres Systemzeichensatzes
+verwenden. Es ist also nicht erforderlich, sich zu überlegen, wie denn
+wohl ein ""ß"" oder ein ""ä"" in der Ausgabedatei auszusehen hat; UDO
+erledigt die Umwandlung für Sie automatisch.
+
+UDO erwartet Quelltexte mit dem jeweiligen Systemzeichensatz. Nutzen
+Sie UDO auf einem DOS-kompatiblen Rechner, erwartet UDO Quelltexte,
+die mit dem DOS-Zeichensatz geschrieben wurden. Die Atari-Version
+erwartet Quelltexte mit Zeichen des Atari-Zeichensatzes usw.
+
+UDO kann aber auch Quelltexte verarbeiten, die mit systemfremden
+Zeichensätzen erstellt wurden. Und um es richtig komfortabel zu machen,
+können Quelltexte sogar aus einem Mischmasch benutzter
+Zeichensätze bestehen.
+
+Sie müssen UDO nur mittels (!KW [code]) (!C)(!CHARSET)(!c) mitteilen, mit welchem
+Zeichensatz die folgenden Zeilen erstellt wurden.
+
+Hier eine Übersicht, welches Kürzel für den Zeichensatz benutzt werden kann:
+
+!index (!kw [code])
+!index DOS-Zeichensatz
+!index Zeichensatz !! DOS
+!index OS/2-Zeichensatz
+!index Zeichensatz !! OS/2
+!index HP-Roman-8-Zeichensatz
+!index Zeichensatz !! HP-Roman-
+!index ANSI-Zeichensatz
+!index ISO-Latin1-Zeichensatz
+!index Windows-Zeichensatz
+!index Zeichensatz !! ANSI
+!index Zeichensatz !! ISO Latin 1
+!index Zeichensatz !! Windows
+!index Macintosh-Zeichensatz
+!index Zeichensatz !! Macintosh
+!index Atari-Zeichensatz
+!index Zeichensatz !! Atari
+!index NeXT-Zeichensatz
+!index Zeichensatz !! NeXT
+
+!include charsets.ui
+
+!index Anpassung !! Sonderzeichen
+!index Grafikzeichen
+!index Sonderzeichen !! Anpassung
+!index Systemfremde Zeichensätze
+!index Zeichensatz !! systemfremde
+
+Wenn Sie sog. 1-Byte-Codepages (alle von UDO unterstützten Codepages mit Ausnahme von Unicode) verwenden und eine andere Codepage für die UDO-Dokumente als für die Ausgabe-Dokumente nutzen, müssen Sie ggf. beachten, dass alle Codepages unterschiedlich belegt sind. Eine Codepage ist eine Sammlung von 256 Zeichen aus dem Gesamtvorrat aller Zeichen, die mittlerweile unter dem Unicode-Standard definiert sind.
+
+Wenn Sie z.B. Ihr UDO-Dokument im DOS-Zeichensatz erstellt haben und darin DOS-Grafikzeichen verwenden, das Zielformat aber z.B. Apple MacRoman ist, können die DOS-Grafikzeichen nicht abgebildet werden. Wenn Sie die hebräischen Zeichen des Atari-TOS-Zeichensatzes benutzt haben, werden Sie in den meisten anderen Codepages Pech mit der Abbildung dieser Zeichen haben.
+
+In diesen Fällen empfehlen wir, als Zielformat UTF-8 zu verwenden, sofern das für das Zielformat möglich ist. Denn intern werden sämtliche Codepages im Unicode-Format geführt, so dass z.B. ein hebräisches Alef aus dem TOS-Zeichensatz auch in UTF-8 oder Windows-Codepage 1255 richtig wiedergegeben wird.
+
+!end_node # Umwandlung von 8-bit-Zeichen
+
+# = = = = =
+
+!begin_node Universeller Zeichensatz
+!html_name  spec_universal_charset
+
+!index Zeichensatz !! universeller
+Falls ein Zielformat Unicode nicht unterstützt, ist es mit UDO trotzdem möglich, Quelltexte auch mit 8-Bit-Zeichen systemweit weiterzugeben.
+
+UDO bietet einen ""universellen Zeichensatz"" an. Es handelt sich hierbei nicht wirklich um einen vollständigen Zeichensatz wie z.B. Unicode, sondern vielmehr um eine Möglichkeit, 8-Bit-Zeichen durch Folgen mehrere 7-Bit-Zeichen zu emulieren.
+
+!index (!kw [universal_charset])
+Da die nötigen Abfragen und Umwandlungen Mehraufwand bedeuten, muss
+man UDO mitteilen, dass die folgenden Zeilen ""universelle Zeichen""
+enthalten. Dies geschieht durch den Einsatz des Schalters
+(!KW [universal_charset]).
+
+Nach der Angabe von (!KW [universal_charset] [[on!!]]) betrachtet UDO
+jede einzelne Zeile und wandelt enthaltene universelle Zeichen in
+8-Bit-Zeichen um. Die folgende Tabelle zeigt, welche Zeichen wie
+umgewandelt werden:
+
+
+!universal_charset [on]
+!begin_table [|l|l|l|] !hline
+(!B)Platzhalter(!b)  !! (!B)x aus(!b)  !! (!B)Beispiel(!b)
+!hline
+(!/"x)               !! AEIOUaeiosuy   !! (!B)(!T)(!/"a)(!t)(!b)  = (!"a)
+(!/'x)               !! AEIOUYaeiouy   !! (!code [(!/'e!)])       = (!'e)
+(!/`x)               !! AEIOUaeiou     !! (!code [(!/`i!)])       = (!`i)
+(!/^x)               !! AEIOUaeiou     !! (!code [(!/^o!)])       = (!^o)
+(!/&x)               !! AE, OE, ae, oe !! (!B)(!T)(!/&AE)(!t)(!b) = (!&AE)
+(!/!~x)              !! ANOano         !! (!code [(!/!~n!)])      = (!~n)
+(!/,x)               !! Cc             !! (!code [(!/,C!)])       = (!,C)
+(!/.x)               !! Aa             !! (!code [(!/.A!)])       = (!.A)
+(!/_x)               !! ao             !! (!code [(!/_a!)])       = (!_a)
+(!/_x)               !! !/?            !! (!code [(!/_?!)])       = (!_?)
+(!/\x)               !! Oo             !! (!code [(!/\O!)])       = (!\O)
+(!//x)               !! Oo             !! (!code [(!//o!)])       = (!/o)
+(!/#x)               !! PS             !! (!code [(!/#S!)])       = (!#S)
+!hline
+!end_table
+
+Das deutsche ""(!"s)"" wird durch den Platzhalter (!code [(!/"s!)]) erzeugt. Kennt das
+Zielformat ein Zeichen nicht, wird das naheliegendste Zeichen
+benutzt, z.B. ""a"" statt ""(!^a)"".
+
+Mit (!KW [universal_charset] [[off!!]]) wird die Wandlung dieser Zeichen wieder abgeschaltet.
+!universal_charset [off]
+
+!end_node # Universeller Zeichensatz
+
+# = = = = =
+
+!end_node # Sonderzeichen
+
+# === EOF ===

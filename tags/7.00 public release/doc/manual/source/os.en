@@ -1,0 +1,40 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : list of supported operating systems
+# Language    : English
+# Initial Date: 2009-06-09
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+# 
+# ------------------------------------------------------------------------------
+# 
+# Notes:
+#    This list links to the OS reference list in the chapter [command !ifos].
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 09: introduced
+#
+################################################################################
+
+!index Operating systems
+!begin_xlist [nextstep:] !short
+!item [(!KP [beos])]     BeOS
+!item [(!KP [dos])]      DOS
+!item [(!KP [hpux])]     HP-UX
+!item [(!KP [linux])]    Linux
+!item [(!KP [macos])]    Mac~OS
+!item [(!KP [macosx])]   Mac~OS~X
+!item [(!KP [nextstep])] NeXTStep
+!item [(!KP [sinix])]    SINIX
+!item [(!KP [sunos])]    SunOS
+!item [(!KP [tos])]      Atari TOS
+!item [(!KP [win])]      Windows (32~bit)
+!end_xlist
+
+# === EOF ===

@@ -1,0 +1,55 @@
+########################################
+# @(#) UDO-Beispiel-Quelltext
+# @(#) Dirk Hagedorn, 08.04.1996
+########################################
+
+!raw [stg] @subject "Dokumentation/Utilities"
+
+!docinfo [title]   Ein
+!docinfo [program] UDO-Beispiel-Quelltext
+!docinfo [date]    (!today)
+!docinfo [author]  Dirk Hagedorn
+
+!use_auto_subtocs    [info,html,stg,tvh,win,aqv]
+!use_auto_subsubtocs [info,html,stg,tvh,win,aqv]
+!no_effects          [asc]
+!use_justification   [asc]
+
+########################################
+
+!begin_document
+!maketitle
+!tableofcontents
+
+!node Automatische Formatierung
+
+UDO sorgt selber für die Formatierung
+des Quelltextes. Es nützt nichts, zwischen
+zwei                          Worte
+mehrere Leerzeichen einzufügen, da UDO selber für die
+richtigen Wortabstände und den Zeilenumbruch sorgt.
+
+
+Auch nützt es nichts, zwischen zwei Absätze mehrere
+Leerzeilen einzufügen. Auch hier greift UDO ein und trennt
+Absätze durch die ihm richtig erscheinende Anzahl von
+Leerzeilen.
+
+Absätze trennt man durch Leerzeilen oder UDO-Befehle.
+
+
+!node Ein Kapitel
+Dies ist der Text des Kapitels.
+
+Bei Hypertexten erfolgt aufgrund der im Vorspann gesetzten
+Schalter hier eine Auflistung aller diesem Kapitel
+zugehörigen Abschnitte und Unterabschnitte.
+
+!subnode Ein Abschnitt.
+Dies ist der Text des Abschnitts. Auch hier folgt ein
+Unterinhaltsverzeichnis.
+
+!subsubnode Ein Unterabschnitt.
+Dies ist der Text des Unterabschnitts.
+
+!end_document

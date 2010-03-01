@@ -1,0 +1,13 @@
+!begin_itemize
+
+!index !/win_monofont_size
+!index !/win_propfont_size
+!item Neu: Kommandos !/win_propfont_size und !/win_monofont_size
+zur Änderung der Fontgrösse.
+!item Absatzkontrolle (Orphans & Widows) wird für die RTF-Ausgabe standard!-mäßig
+      eingeschaltet.
+!item Für die Ausgabeformate Postscript/PDF, WinHelp und RTF wird jetzt
+      auch das Kommando (!V)(!/url [])(!v) umgesetzt.
+!item Die Kommandos (!V)!/subheading(!v), (!V)!/subsubheading(!v) und
+      (!V)!/subsubsubheading(!v) können jetzt auch ausgerichtet werden.
+!end_itemize

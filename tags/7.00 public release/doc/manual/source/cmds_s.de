@@ -1,0 +1,1552 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands S
+# Language    : German
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
+#
+################################################################################
+
+!begin_node S!..
+!html_name  cmds_s
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [=stg])
+!html_name  cmd_stg-eq
+
+Abfrage des Ausgabeformates.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/=stg (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[stg!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [set])
+!html_name  cmd_set
+
+Symbol setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/set (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie Symbole in einem
+Quelltext setzen, die man durch die Abfrage-Kommandos
+(!KW [ifset]) und (!KW [if]) testen kann. Symbole lassen sich auch
+durch die Option (!code [-D]) setzen. Mit dem Befehl (!KW [unset])
+kann man gesetzte Symbole wieder löschen. (!KW [set]) können
+Sie überall im Quelltext benutzen.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [unset]), (!KW [ifset]), (!KW [ifnset]), (!link [Symbole] [Symbole])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!set UseColourGraphics
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sh])
+!html_name  cmd_sh
+
+Eine Abschnitts-Überschrift ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sh [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subheading])
+
+!item [(!SEEALSO)]
+(!KW [subheading])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [short])
+!html_name  cmd_short
+
+Eine Umgebung ""komprimiert"" ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/short(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter zusammen mit dem Befehl zum
+Beginnen einer Umgebung angegeben, wird diese
+Umgebung in komprimierter Form ausgegeben, sprich es
+werden zwischen den Aufzählungspunkten keine
+zusätzlichen Zwischenräume erzeugt. Das Beispiel
+zeigt, wie man eine ""komprimierte"" Itemize-Umgebung erzeugen kann.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [begin_itemize]), (!KW [begin_enumerate]), (!KW [begin_description]), (!KW [use_short_envs])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!begin_itemize !short
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [short_today])
+!html_name  cmd_short_today()
+
+Systemdatum in kurzer Schreibweise einsetzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/short_today)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das bei der Umwandlung
+aktuelle Systemdatum in kurzer Form ersetzt.
+
+!item [(!SEEALSO)]
+(!KKW [today]), (!KW [language]), Vordefinierte Makros
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!short_today)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!short_today)
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kkw [silver])
+!html_name  cmd_silver
+
+Setzt die Schriftfarbe Hellgrau.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/silver)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Hellgrau.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!silver)Hellgrau(!coloff) erscheint in der Farbe Hellgrau.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!silver)Hellgrau(!coloff) erscheint in der Farbe Hellgrau.
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sinclude])
+!html_name  cmd_sinclude
+
+Datei einbinden und in einer sourcecode-Umgebung darstellen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sinclude (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Öffnet die Datei namens ""(!FILE)"" und gibt deren Inhalt
+als Sourcecode an der Stelle aus, an der dieses
+Kommando benutzt wurde. Etwaige Einrückungen werden
+dabei berücksichtigt, Zentrierungen jedoch nicht.
+Tabulatoren werden abhängig von (!KW [tabwidth])
+umgewandelt. (!FILESPACEQUOTE)
+
+!item [(!SEEALSO)]
+(!KW [tabwidth]), (!KW [include]), (!KW [pinclude]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [sourcecode-Umgebung] [sourcecode-Umgebung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!sinclude hello.c
+!end_verbatim
+(!EXAMPLE_AFTER)
+!sinclude (!EXAMPLES)hello.c
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sloppy])
+!html_name  cmd_sloppy
+
+Warnungen vor kurzen Zeilen ausschalten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sloppy(!t)
+
+!item [(!DESCRIPTION)]
+Schaltet die Warnung vor kurzen Zeilen aus, die
+ausgegeben werden, wenn ein grober rechter
+Flatterrand erzeugt wird oder bei Benutzung von
+Blocksatz zuviele Leerzeichen in eine Zeile eingefügt
+werden mussten. Bei der Umwandlung ins (!LaTeX)-Format
+erfolgt (!B)keine(!b) Umsetzung in (!code [\sloppy])!
+
+!item [(!SEEALSO)]
+(!KW [fussy]), (!link [Fehlermeldungen] [Fehlermeldungen]), (!link [Silbentrennung] [Silbentrennung])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [smallskip])
+!html_name  cmd_smallskip
+
+Eine zusätzliche Leerzeile einfügen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/smallskip(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl sorgt für die Ausgabe von einer
+zusätzlichen Leerzeile und dient dazu, Absätze
+deutlicher voneinander abzuheben. Bei der Umwandlung
+ins (!LaTeX)-Format wird keine Leerzeile sondern
+(!code [\smallskip]) ausgegeben.
+
+!item [(!SEEALSO)]
+(!KW [bigskip]), (!KW [medskip])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!LOREM)
+!smallskip
+(!LOREM)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!LOREM)
+!smallskip
+(!LOREM)
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sn])
+!html_name  cmd_sn
+
+Abschnitt einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sn [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subnode])
+
+!item [(!SEEALSO)]
+(!KW [subnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sn*])
+!html_name  cmd_sn_asterisk
+
+Abschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sn* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subnode*])
+
+!item [(!SEEALSO)]
+(!KW [subnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sort_hyphen_file])
+!html_name  cmd_sort_hypen_file
+
+Datei mit Trennvorschlägen sortieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/sort_hyphen_file [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann benutzt, liest
+UDO nach der Umwandlung der Quelldatei die Datei mit
+den gesicherten Trennvorschlägen neu ein, sortiert die
+Zeilen und entfernt doppelte Einträge. Das Beispiel
+zeigt, wie man diese Option für die Umwandlung ins
+ASCII- und ST-Guide-Format aktivieren kann.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [hyphen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!sort_hyphen_file [asc,stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [spanish])
+!html_name  cmd_spanish
+
+Sprache setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/spanish(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+# Der Befehl (!KW [spanish]) existiert nicht mehr.
+(!USEINSTEAD[]) (!KW [language] [[spanish!!]]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [language])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [ssh])
+!html_name  cmd_ssh
+
+Eine Unterabschnitts-Überschrift ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ssh (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubheading])
+
+!item [(!SEEALSO)]
+(!KW [subsubheading])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [ssn])
+!html_name  cmd_ssn
+
+Unterabschnitt einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ssn [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubnode])
+
+!item [(!SEEALSO)]
+(!KW [subsubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [ssn*])
+!html_name  cmd_ssn_asterisk
+
+Unterabschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ssn* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubnode*])
+
+!item [(!SEEALSO)]
+(!KW [subsubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sssh])
+!html_name  cmd_sssh
+
+Eine Paragraphen-Überschrift ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sssh [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubheading])
+
+!item [(!SEEALSO)]
+(!KW [subsubsubheading])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sssn])
+!html_name  cmd_sssn
+
+Paragraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sssn [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubnode])
+
+!item [(!SEEALSO)]
+(!KW [subsubsubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [sssn*])
+!html_name  cmd_sssn_asterisk
+
+Paragraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/sssn* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubnode*])
+
+!item [(!SEEALSO)]
+(!KW [subsubsubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [ssssn])
+!html_name  cmd_ssssn
+
+Unterparagraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ssssn [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubsubnode])
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [ssssn*])
+!html_name  cmd_ssssn_asterisk
+
+Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ssssn* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [subsubsubsubnode*])
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [subsubsubsubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [stg])
+!html_name  cmd_stg
+
+Abfrage des Ausgabeformates.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/stg (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[stg!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [stg_no_database])
+!html_name  cmd_stg_no_database
+
+Keine Database-Zeile ausgeben (nur ST-Guide).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/stg_no_database(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [docinfo] [[stgdatabase] [~!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~3
+
+!item [(!SEEALSO)]
+(!KW [docinfo])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [stg_parwidth])
+!html_name  cmd_stg_parwidth
+
+Einstellen der Zeilenbreite (nur ST-Guide).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/stg_parwidth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [parwidth]).
+
+!item [(!EXISTSSINCE)] Release~5 Version~0.49
+
+!item [(!EXISTEDUNTIL)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [parwidth])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [stg_short_title])
+!html_name  cmd_stg_short_title
+
+(!MISS)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/stg_short_title(!t)
+
+!item [(!DESCRIPTION)]
+(!MISS)
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [street])
+!html_name  cmd_street
+
+Straße des Autors für den Adressblock der Titelseite setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/street (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [docinfo] [[address!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Titelseite] [Titelseite])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kkkw [SUB] [sub])
+!html_name  cmd_subscript
+!label (!kk1 [/SUB])
+!label (!kk1 [/sub])
+
+Text tiefgestellt ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/SUB)[(!TEXT)](!/sub)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" wird tiefgestellt dargestellt, falls möglich.
+
+!item [(!EXISTSSINCE)] Version 6.5.20
+
+!item [(!SEEALSO)]
+Schriftarten, (!link [Textgestaltung] [Textgestaltung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort ""tiefgestellt"" wird (!SUB)tiefgestellt(!sub) ausgegeben.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort ""tiefgestellt"" wird (!SUB)tiefgestellt(!sub) ausgegeben.
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subheading])
+!html_name  cmd_subheading
+
+Eine Abschnitts-Überschrift ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subheading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl erzeugt eine Zeile mit ""(!TEXT)"", der in
+der gleichen Schriftart und -größe wie eine Abschnitts-Überschrift ausgegeben wird.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [heading]), (!KW [subsubheading])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subheading Eine Überschrift
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subheading Eine Überschrift
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subnode])
+!html_name  cmd_subnode
+
+Abschnitt einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Leitet einen Abschnitt mit der Bezeichnung ""(!TEXT)"" ein. Abschnitte erscheinen in Inhaltsverzeichnissen.
+
+!item [(!SEEALSO)]
+(!KW [psubnode]), (!KW [node]), (!KW [subsubnode]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subnode Titel des Abschnitts
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subheading Titel des Abschnitts
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subnode*])
+!html_name  cmd_subnode_asterisk
+
+Abschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie
+(!KW [subnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.46
+
+!item [(!SEEALSO)]
+(!KW [subnode]), (!KW [psubnode*]), (!KW [begin_node*]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subnode* Titel des versteckten Abschnitts
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subheading Titel des versteckten Abschnitts
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubheading])
+!html_name  cmd_subsubheading
+
+Eine Unterabschnitts-Überschrift ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubheading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl erzeugt eine Zeile mit ""(!TEXT)"", der in
+der gleichen Schriftart und -größe wie eine
+Unterabschnitts-Überschrift ausgegeben wird.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [heading]), (!KW [subheading])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubheading Eine Überschrift
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubheading Eine Überschrift
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubnode])
+!html_name  cmd_subsubnode
+
+Unterabschnitt einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Leitet einen Unterabschnitt mit der Bezeichnung ""(!TEXT)"" ein. Unterabschnitte erscheinen in Inhaltsverzeichnissen.
+
+!item [(!SEEALSO)]
+(!KW [psubsubnode]), (!KW [node]), (!KW [subnode]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubnode Titel des Unterabschnitts
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubheading Titel des Unterabschnitts
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubnode*])
+!html_name  cmd_subsubnode_asterisk
+
+Unterabschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie (!KW [subsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht in
+Inhaltsverzeichnissen erscheint.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.46
+
+!item [(!SEEALSO)]
+(!KW [subsubnode]), (!KW [psubsubnode*]), (!KW [begin_node*]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubnode* Titel des versteckten Unterabschnitts
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubheading Titel des versteckten Unterabschnitts
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubheading])
+!html_name  cmd_subsubsubheading
+
+Eine Paragraphen-Überschrift ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubheading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl erzeugt eine Zeile mit ""(!TEXT)"", der in der gleichen Schriftart und -größe wie eine
+Paragraphen-Überschrift ausgegeben wird.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [heading]), (!KW [subheading]), (!KW [subsubheading])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubheading Eine Überschrift
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubheading Eine Überschrift
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubnode])
+!html_name  cmd_subsubsubnode
+
+Paragraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Leitet einen Paragraph mit der Bezeichnung ""(!TEXT)"" ein. Ein Paragraph ist die vierte Gliederungsebene
+und wird mit #.#.#.# nummeriert.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubnode Titel des Paragraphs
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubheading Titel des Paragraphs
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubnode*])
+!html_name  cmd_subsubsubnode_asterisk
+
+Paragraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie (!KW [subsubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht
+in Inhaltsverzeichnissen erscheint.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [begin_node*]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubnode* Titel des versteckten Paragraphs
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubheading Titel des versteckten Paragraphs
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubtoc])
+!html_name  cmd_subsubsubtoc
+
+Paragraphen auflisten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubtoc [(!FORMAT)] !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Listet in Form eines Inhaltsverzeichnisses alle Paragraphen des
+aktuellen Unterabschnitts auf und sorgt dafür, dass man in Hypertexten
+zu den Paragraphen weiterverzweigen kann. UDO gibt dieses
+Unterinhaltsverzeichnis nicht aus, wenn in dem Unterabschnitt der Schalter
+(!KW [ignore_subsubsubtoc]) verwendet wurde. Die Ausgabe dieser
+Unterinhaltsverzeichnisse lässt sich durch
+(!KW [use_auto_subsubsubtocs]) auch automatisieren.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [use_auto_subsubsubtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubsubtoc [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubtoc_offset])
+!html_name  cmd_subsubsubtoc_offset
+
+Offset für die Paragraphennummerierung setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/subsubsubtoc_offset (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!VALUE)"" wird bei der Ausgabe der Paragraphennummern zu
+der aktuellen Nummer hinzugezählt. Im Beispiel würde
+der erste Paragraph mit der Nummer 10 ausgegeben. Es
+können auch negative Werte benutzt werden. Dieser
+Schalter hat keine Wirkung auf Kapitel des Anhangs.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [toc_offset]), (!KW [subtoc_offset]), (!KW [subsubtoc_offset])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubsubtoc_offset 9
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubnode])
+!html_name  cmd_subsubsubsubnode
+
+Unterparagraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Leitet einen Unterparagraph mit der Bezeichnung ""(!TEXT)"" ein. Ein Unterparagraph ist die fünfte Gliederungsebene
+und wird mit #.#.#.#.# nummeriert.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubsubnode Titel des Unterparagraphs
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubheading Titel des Unterparagraphs
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubsubsubnode*])
+!html_name  cmd_subsubsubsubnode_asterisk
+
+Unterparagraph ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie (!KW [subsubsubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht
+in Inhaltsverzeichnissen erscheint.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubnode]), (!KW [subnode]), (!KW [subsubnode]), (!KW [subsubsubnode]), (!KW [begin_node*]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!subsubsubsubnode* Titel des versteckten Unterparagraphs
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubheading Titel des versteckten Unterparagraphs
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_ignore
+# Diese Funktion steht derzeit nicht zur Verfügung.
+!begin_node (!kw [subsubsubsubtoc])
+!html_name  cmd_subsubsubsubtoc
+
+Unterparagraphen auflisten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubtoc [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Listet in Form eines Inhaltsverzeichnisses alle Unterparagraphen des
+aktuellen Unterabschnitts auf und sorgt dafür, dass man in Hypertexten
+zu den Paragraphen weiterverzweigen kann. UDO gibt dieses
+Unterinhaltsverzeichnis nicht aus, wenn in dem Unterabschnitt der Schalter
+(!KW [ignore_subsubsubsubtoc]) verwendet wurde. Die Ausgabe dieser
+Unterinhaltsverzeichnisse lässt sich durch
+(!KW [use_auto_subsubsubsubtocs]) auch automatisieren.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subsubsubsubtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubsubsubtoc [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+!end_ignore
+
+# = = = = =
+
+!begin_ignore
+# Diese Funktion steht derzeit nicht zur Verfügung.
+!begin_node (!kw [subsubsubsubtoc_offset])
+!html_name  cmd_subsubsubsubtoc_offset
+
+Offset für die Unterparagraphennummerierung setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/subsubsubsubtoc_offset (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!VALUE)"" wird bei der Ausgabe der Unterparagraphennummern zu
+der aktuellen Nummer hinzugezählt. Im Beispiel würde
+der erste Unterparagraph mit der Nummer 10 ausgegeben. Es
+können auch negative Werte benutzt werden. Dieser
+Schalter hat keine Wirkung auf Kapitel des Anhangs.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~14
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [toc_offset]), (!KW [subtoc_offset]), (!KW [subsubtoc_offset]), (!KW [subsubsubtoc_offset])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubsubsubtoc_offset 9
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+!end_ignore
+
+# = = = = =
+
+!begin_node (!kw [subsubtoc])
+!html_name  cmd_subsubtoc
+
+Unterabschnitte auflisten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subsubtoc [(!FORMAT)] !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Listet in Form eines Inhaltsverzeichnisses alle Unterabschnitte des
+aktuellen Abschnitts auf und sorgt dafür, dass man in Hypertexten zu den
+Unterabschnitten weiterverzweigen kann. UDO gibt dieses
+Unterinhaltsverzeichnis nicht aus, wenn in dem Abschnitt der Schalter
+(!KW [ignore_subsubtoc]) verwendet wurde. Die Ausgabe dieser
+Unterinhaltsverzeichnisse lässt sich durch (!KW [use_auto_subsubtocs]) auch automatisieren.
+
+!item [(!SEEALSO)]
+(!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subsubtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubtoc [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subsubtoc_offset])
+!html_name  cmd_subsubtoc_offset
+
+Offset für die Unterabschnittnummerierung setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/subsubtoc_offset (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!VALUE)"" wird bei der Ausgabe der Unterabschnittnummern zu
+der aktuellen Nummer hinzugezählt. Im Beispiel würde
+der erste Unterabschnitt mit der Nummer~10 ausgegeben. Es
+können auch negative Werte benutzt werden. Dieser
+Schalter hat keine Wirkung auf Kapitel des Anhangs.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [toc_offset]), (!KW [subtoc_offset]), (!KW [subsubsubtoc_offset])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subsubtoc_offset 9
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subtoc])
+!html_name  cmd_subtoc
+
+Abschnitte auflisten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/subtoc [(!FORMAT)] !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Listet in Form eines Inhaltsverzeichnisses alle Abschnitte des
+aktuellen Kapitels auf und sorgt dafür, dass man in Hypertexten zu den
+Abschnitten weiterverzweigen kann. UDO gibt dieses
+Unterinhaltsverzeichnis nicht aus, wenn in dem Kapitel der Schalter
+(!KW [ignore_subtoc]) verwendet wurde. Die Ausgabe dieser
+Unterinhaltsverzeichnisse lässt sich durch (!KW [use_auto_subtocs]) auch automatisieren.
+
+!item [(!SEEALSO)]
+(!KW [depth]), (!KW [tableofcontents]), (!KW [toc]), (!KW [subsubtoc]), (!KW [subsubsubtoc]), (!KW [use_auto_subtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subtoc [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [subtoc_offset])
+!html_name  cmd_subtoc_offset
+
+Offset für die Abschnittnummerierung setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/subtoc_offset (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+""(!VALUE)"" wird bei der Ausgabe der Abschnittnummern zu
+der aktuellen Nummer hinzugezählt. Im Beispiel würde
+der erste Abschnitt mit der Nummer~10 ausgegeben. Es
+können auch negative Werte benutzt werden. Dieser
+Schalter hat keine Wirkung auf Kapitel des Anhangs.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [node]), (!KW [tableofcontents]), (!KW [toc_offset]), (!KW [subsubtoc_offset]), (!KW [subsubsubtoc_offset])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!subtoc_offset 9
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkkw [SUP] [sup])
+!html_name  cmd_superscript
+!label (!kk1 [/SUP])
+!label (!kk1 [/sup])
+
+Text hochgestellt ausgeben
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/SUP)[(!TEXT)](!/sup)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" wird hochgestellt dargestellt, falls möglich.
+
+!item [(!EXISTSSINCE)] Version 6.5.20
+
+!item [(!SEEALSO)]
+Schriftarten, (!link [Textgestaltung] [Textgestaltung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort ""hochgestellt"" wird (!SUP)hochgestellt(!sup) ausgegeben.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort ""hochgestellt"" wird (!SUP)hochgestellt(!sup) ausgegeben.
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [swedish])
+!html_name  cmd_swedish
+
+Sprache setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/swedish(!t)
+
+!item [(!DESCRIPTION)]
+# Der Befehl (!KW [swedish]) existiert nicht mehr.
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [language] [[swedish!!]]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [language])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

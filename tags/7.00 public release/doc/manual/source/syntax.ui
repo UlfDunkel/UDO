@@ -1,0 +1,27 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax
+# Language    : all
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: header introduced
+#
+################################################################################
+
+!iflang [german]
+!include syntax.de
+!endif
+!iflang [english]
+!include syntax.en
+!endif
+
+# === EOF ===

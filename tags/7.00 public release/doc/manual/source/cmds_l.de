@@ -1,0 +1,791 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands L
+# Language    : German
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: !language lists all available languages now
+#   fd  Jun 09: !language referencec to lang_ref.<ISO> now
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: LINK macro introduced
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
+#
+################################################################################
+
+!begin_node L!..
+!html_name  cmds_l
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [=ldoc])
+!html_name  cmd_ldoc-eq
+
+Abfrage des Ausgabeformates.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/=ldoc (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[ldoc!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kkw [LaTeX])
+!html_name  cmd_LaTeX()
+
+(!LaTeX)-Schriftzug ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/LaTeX)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird bei der Umwandlung ins
+(!LaTeX)-Format in (!code [\LaTeX{}]), ansonsten in (!code [LaTeX]) umgewandelt.
+
+!item [(!SEEALSO)]
+(!KKW [TeX]), (!KKW [LaTeXe]), Vordefinierte Makros
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!LaTeX)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!LaTeX)
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [LaTeXe])
+!html_name  cmd_LaTeXe()
+
+(!LaTeXe)-Schriftzug ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/LaTeXe)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird bei der Umwandlung ins
+(!LaTeX)-Format in (!code [\LaTeXe{}]), ansonsten in (!code [LaTeX2e]) umgewandelt.
+
+!item [(!SEEALSO)]
+(!KKW [TeX]), (!KKW [LaTeX]), Vordefinierte Makros
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!LaTeXe)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!LaTeXe)
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [l])
+!html_name  cmd_l
+
+Sprungmarke setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/l (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [label])
+
+!item [(!SEEALSO)]
+(!KW [label])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [label])
+!html_name  cmd_label
+
+Sprungmarke setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/label (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Definiert eine Sprungmarke, die bei Hypertextformaten
+automatisch referenziert wird und auf die man durch die Link-Befehle verweisen kann.
+
+!item [(!SEEALSO)]
+(!link [Sprungmarken] [Sprungmarken]), (!link [Querverweise] [Querverweise]), (!KKW [label]), (!KKW [link]), (!KKW [plink])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!label Sprungmarke
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+<a name="Sprungmarke"></a>
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kkw [label])
+!html_name  cmd_label_2
+
+Beliebiger Teil des Textes als Label/Bookmark markieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/label [(!TEXT)] [(!LINK)])(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Befehl kann ein beliebiger Teil des Textes als
+Label/Bookmark markiert werden kann. Das Kommando wird
+zur Zeit nur für die RTF-Ausgabe unterstützt.
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!item [(!SEEALSO)]
+(!link [Sprungmarken] [Sprungmarken]), (!link [Querverweise] [Querverweise]), (!KW [label]), (!KKW [link]), (!KKW [plink])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [language])
+!html_name  cmd_language
+
+Ausgabe-Sprache für UDO setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/language [(!LANGUAGE)](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Sie die Sprache der Begriffe setzen, die UDO
+für z.B. ""Kapitel"" oder ""Inhaltsverzeichnis"" benutzen soll. UDO
+verwendet standardmäßig deutschsprachige Ausdrücke.
+
+!include lang_ref.de
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [iflang]), (!KW [ifnlang]), (!KKW [today])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!language english
+!ifset [english]
+Output English text.
+!else
+Englischen Text nicht ausgeben.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ifset [english]
+Output English text.
+!else
+Englischen Text nicht ausgeben.
+!endif
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [laugh])
+!html_name  cmd_laugh()
+
+Emoticon ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/laugh)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch einen lachenden Smiley ersetzt, der in Schreibmaschinenschrift ausgegeben wird.
+
+!item [(!SEEALSO)]
+(!KKW [grin]), Vordefinierte Makros
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!laugh)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!laugh)
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [ldinclude])
+!html_name  cmd_ldinclude
+
+Datei einbinden und in einer linedraw-Umgebung darstellen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ldinclude (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Öffnet die Datei namens ""(!FILE)"" und gibt deren Inhalt
+als Grafik an der Stelle aus, an der dieses
+Kommando benutzt wurde. Etwaige Einrückungen werden
+dabei berücksichtigt, Zentrierungen jedoch nicht.
+Tabulatoren werden abhängig von (!KW [tabwidth])
+umgewandelt. (!FILESPACEQUOTE)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [tabwidth]), (!KW [include]), (!KW [linedrawsize]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [linedraw-Umgebung] [linedraw-Umgebung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!ldinclude hello.c
+!end_verbatim
+(!EXAMPLE_AFTER)
+!ldinclude (!EXAMPLES)hello.c
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [ldoc])
+!html_name  cmd_ldoc
+
+Abfrage des Ausgabeformates.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ldoc (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[ldoc!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [lh])
+!html_name  cmd_lh
+
+(!MISS)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/lh (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [listheading])
+
+!item [(!SEEALSO)]
+(!KW [listheading])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [lime])
+!html_name  cmd_lime
+
+Setzt die Schriftfarbe Hellgrün.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/lime)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Hellgrün.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!lime)Hellgrün(!coloff) erscheint in der Farbe Hellgrün.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!lime)Hellgrün(!coloff) erscheint in der Farbe Hellgrün.
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [linedrawsize])
+!html_name  cmd_linedrawsize
+
+Schriftgröße für linedraw-Umgebungen einstellen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/linedrawsize [tiny|small|normal|large|huge](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Schalter können Sie festlegen, in welcher
+Schriftgröße Text erscheinen soll, der in einer
+linedraw-Umgebung steht. Der Schalter kann überall im
+Quelltext verwendet werden. Die kleinste Schriftgröße
+wird mit (!code [tiny]), die größte mit (!code [huge]) gesetzt. Die
+Standardgröße für linedraw-Umgebungen ist (!code [normal]).
+
+(!B)Hinweis:(!b) Wenn -- wie in diesem Handbuch -- die Schriftgröße sich in der HTML-Darstellung nicht ändert, kann es daran liegen, dass Sie eine CSS-Formatierung für vorformattierten Text ((!code [<pre>])) definiert haben.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [html_monofont_size]), (!KW [ldinclude]), (!KW [verbatimsize]), (!link [linedraw-Umgebung] [linedraw-Umgebung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!linedrawsize [small]
+!ldinclude hello.c
+!end_verbatim
+(!EXAMPLE_AFTER)
+!linedrawsize [small]
+!ldinclude (!EXAMPLES)hello.c
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [link])
+!html_name  cmd_link()
+
+Manuellen Querverweis durchführen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/link [(!TEXT)] [(!LINK)])(!t)
+
+!item [(!DESCRIPTION)]
+Hiermit können Querverweise auf andere Kapitel oder Sprungmarken vorgenommen werden. Ausführliche Informationen findet man im Abschnitt ""Querverweise"".
+
+!item [(!SEEALSO)]
+(!KKW [xlink]), (!KKW [plink]), (!link [Querverweise] [Querverweise])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Möchten Sie (!link [Kontakt] [Kontaktadresse]) mit den UDO-Entwicklern aufnehmen?
+!end_verbatim
+(!EXAMPLE_AFTER)
+Möchten Sie (!link [Kontakt] [Kontaktadresse]) mit den UDO-Entwicklern aufnehmen?
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [list_parsep])
+!html_name  cmd_list_parsep
+
+Umgebungen komprimieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/list_parsep [ on | off ](!t)
+
+!item [(!DESCRIPTION)]
+Der Befehl (!KW [list_parsep]) existiert nicht mehr. Komprimierte
+Umgebungen können nun viel eleganter mit dem Umgebungsparameter (!KW [short]) erstellt werden.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!EXISTEDUNTIL)] Release~5 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [short]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [list_parsep_off])
+!html_name  cmd_list_parsep_off
+
+Umgebungen komprimieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/list_parsep_off(!t)
+
+!item [(!DESCRIPTION)]
+Der Befehl (!KW [list_parsep_off]) existiert nicht mehr. Komprimierte
+Umgebungen können nun viel eleganter mit dem Umgebungsparameter (!KW [short]) erstellt werden.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.44
+
+!item [(!EXISTEDUNTIL)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [short]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [list_parsep_on])
+!html_name  cmd_list_parsep_on
+
+Umgebungen komprimieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/list_parsep_on(!t)
+
+!item [(!DESCRIPTION)]
+Der Befehl (!KW [list_parsep_on]) existiert nicht mehr. Komprimierte
+Umgebungen können nun viel eleganter mit dem Umgebungsparameter (!KW [short]) erstellt werden.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.44
+
+!item [(!EXISTEDUNTIL)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [short]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [listheading])
+!html_name  cmd_listheading
+
+(!MISS)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/listheading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!MISS)
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [listoffigures])
+!html_name  cmd_listoffigures
+
+Abbildungsverzeichnis ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/listoffigures(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando sorgt für die Ausgabe eines
+Abbildungsverzeichnisses, in dem alle (!link [Bilder] [Bilder]), die
+eine Überschrift enthalten, aufgelistet werden. Man
+sollte dieses Kommando direkt nach (!KW [tableofcontents])
+verwenden. Momentan wird dieser Befehl nur für (!LaTeX) umgewandelt.
+
+!item [(!SEEALSO)]
+(!link [Bilder] [Bilder]), (!KW [image]), (!KW [tableofcontents]), (!KW [listoftables])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [listoftables])
+!html_name  cmd_listoftables
+
+Tabellenverzeichnis ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/listoftables(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando sorgt für die Ausgabe eines
+Tabellenverzeichnisses, in dem alle (!link [Bilder] [Bilder]), die eine
+Überschrift enthalten, aufgelistet werden. Man sollte
+dieses Kommando direkt nach (!KW [tableofcontents])
+verwenden. Momentan wird dieser Befehl nur für (!LaTeX) umgewandelt.
+
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen]), (!KW [tableofcontents]), (!KW [listoffigures])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [listsubheading])
+!html_name  cmd_listsubheading
+
+(!MISS)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/listsubheading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!MISS)
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [listsubsubheading])
+!html_name  cmd_listsubsubheading
+
+(!MISS)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/listsubsubheading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!MISS)
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [listsubsubsubheading])
+!html_name  cmd_listsubsubsubheading
+
+(!MISS)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/listsubsubsubheading (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!MISS)
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [lsh])
+!html_name  cmd_lsh
+
+(!MISS)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/lsh (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [listsubheading])
+
+!item [(!SEEALSO)]
+(!KW [listsubheading])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [lssh])
+!html_name  cmd_lssh
+
+(!MISS)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/lssh (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [listsubsubheading])
+
+!item [(!SEEALSO)]
+(!KW [listsubsubheading])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [lsssh])
+!html_name  cmd_lsssh
+
+(!MISS)
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/lsssh (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [listsubsubsubheading])
+
+!item [(!SEEALSO)]
+(!KW [listsubsubsubheading])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

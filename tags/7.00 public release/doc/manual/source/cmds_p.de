@@ -1,0 +1,1006 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands P
+# Language    : German
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 09: LINK macro introduced
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
+#
+################################################################################
+
+!begin_node P!..
+!html_name  cmds_p
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [=pch])
+!html_name  cmd_pch-eq
+
+Abfrage des Ausgabeformates.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/=pch (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[pch!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [=pdf])
+!html_name  cmd_pdf-eq
+
+Abfrage des Ausgabeformates.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/=pdf (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[pdf!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [p])
+!html_name  cmd_p
+
+Popup-Kapitel einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/p [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [pnode])
+
+!item [(!SEEALSO)]
+(!KW [pnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [p*])
+!html_name  cmd_p_asterisk
+
+Popup-Kapitel ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/p* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [pnode*])
+
+!item [(!SEEALSO)]
+(!KW [pnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [parwidth])
+!html_name  cmd_parwidth
+
+Einstellen der Zeilenbreite.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/parwidth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Schalter kann man die Länge der Zeilen
+einstellen, die UDO erzeugt. Standardmäßig benutzt
+UDO den Wert (!const [70]). (!VALUE) kann Werte von (!const [20]) bis (!const [200])
+annehmen. Bei den Formaten WinHelp, QuickView und
+HTML kann (!VALUE) auch größere Werte annehmen, falls
+der Schalter (!KW [use_output_buffer]) gesetzt wurde.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [use_output_buffer])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!parwidth 42
+
+# Hauptteil:
+Ich bin ein langer Text, der sich immer wiederholt. Ich bin ein langer Text, der sich immer wiederholt. Ich bin ein langer Text, der sich immer wiederholt. Ich bin ein langer Text, der sich immer wiederholt.
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+Ich bin ein langer Text, der sich immer 
+wiederholt. Ich bin ein langer Text, der 
+sich immer wiederholt. Ich bin ein langer 
+Text, der sich immer wiederholt. Ich bin 
+ein langer Text, der sich immer 
+wiederholt.
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [pch])
+!html_name  cmd_pch
+
+Abfrage des Ausgabeformates.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pch (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[pch!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [pdf])
+!html_name  cmd_pdf
+
+Abfrage des Ausgabeformates.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pdf (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[pdf!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [pdf_high_compression])
+!html_name  cmd_pdf_high_compression
+
+PDF-Datei komprimieren (hohe Kompressionsrate).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/pdf_high_compression(!t)
+
+!item [(!DESCRIPTION)]
+Der Einsatz dieses Schalters führt bei der späteren
+Umwandlung durch PDFLaTeX zur
+Komprimierung der Ausgabedatei mit einer
+Kompressionsrate von ca. 50~%. Die Komprimierung
+dauert relativ lange. Fast gleich gute Ergebnisse bei
+kürzerer Umwandlungsdauer erzielt man mit dem
+Schalter (!KW [pdf_medium_compression]).
+
+!item [(!SEEALSO)]
+(!KW [pdf_medium_compression])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [pdf_medium_compression])
+!html_name  cmd_pdf_medium_compression
+
+PDF-Datei komprimieren (mittlere Kompressionsrate).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/pdf_medium_compression(!t)
+
+!item [(!DESCRIPTION)]
+Der Einsatz dieses Schalters führt bei der späteren
+Umwandlung durch den PDFLaTeX zur
+Komprimierung der Ausgabedatei mit einer
+Kompressionsrate von ca. 40~%. Bessere Ergebnisse bei
+allerdings längerer Umwandlungsdauer erzielt man mit
+dem Schalter (!KW [pdf_high_compression]).
+
+!item [(!SEEALSO)]
+(!KW [pdf_high_compression])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [pinclude])
+!html_name  cmd_pinclude
+
+Datei einbinden und in einer sourcecode-Umgebung darstellen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pinclude (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Öffnet die Datei namens ""(!FILE)"" und gibt deren Inhalt
+als Sourcecode an der Stelle aus, an der dieses
+Kommando benutzt wurde. Etwaige Einrückungen werden
+dabei berücksichtigt, Zentrierungen jedoch nicht.
+Tabulatoren werden abhängig von (!KW [tabwidth])
+umgewandelt. (!FILESPACEQUOTE)
+
+!item [(!SEEALSO)]
+(!KW [tabwidth]), (!KW [include]), (!KW [cinclude]), (!KW [ldinclude]), (!KW [sinclude]), (!link [Verteilte Dokumente] [Verteilte Dokumente]), (!link [sourcecode-Umgebung] [sourcecode-Umgebung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!pinclude hello.pas
+!end_verbatim
+(!EXAMPLE_AFTER)
+!pinclude (!EXAMPLES)hello.pas
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [plink])
+!html_name  cmd_plink
+
+Manuellen Seitenverweis setzen (nur (!LaTeX)).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/plink [(!TEXT)] [(!LINK)])(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl ist derzeit nur für (!LaTeX) sinnvoll und
+erzeugt einen Seitenbezug auf einen anderen Teil des
+Dokuments. Bei allen anderen Formaten wird nur
+""(!TEXT)"" ausgegeben.
+
+Bei der RTF-Ausgabe erfolgt die Angabe als Hinweis auf die Seitenzahl.
+
+!item [(!SEEALSO)]
+(!KKW [link]), (!KKW [xlink]), (!link [Querverweise] [Querverweise])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+(!plink [Wort] [Sprungmarke])
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [pnode])
+!html_name  cmd_pnode
+
+Popup-Kapitel einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Identisch mit (!KW [node]), der Inhalt wird jedoch beim ST-Guide und bei WinHelp als Popup dargestellt.
+
+!item [(!SEEALSO)]
+(!KW [psubnode]), (!KW [psubsubnode]), (!KW [begin_pnode]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!pnode Titel des Popups
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading Titel des Popups
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [pnode*])
+!html_name  cmd_pnode_asterisk
+
+Popup-Kapitel ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie (!KW [pnode]),
+mit der Ausnahme, dass ""(!TEXT)"" nicht in Inhaltsverzeichnissen erscheint.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.46
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [node*]), (!KW [begin_pnode*]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!pnode* Titel des versteckten Popups
+!end_verbatim
+(!EXAMPLE_AFTER)
+!heading Titel des versteckten Popups
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [pound])
+!html_name  cmd_pound()
+
+(!pound)-Zeichen ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/pound)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das Pfund-Symbol
+ersetzt, sofern es in dem jeweiligen Zeichensatz
+vorhanden ist. Ist es das nicht, ersetzt UDO den
+Platzhalter durch ""(!code [GBP])"".
+
+!item [(!EXISTSSINCE)] Version 6.5.8
+
+!item [(!SEEALSO)]
+(!KKW [euro]), Vordefinierte Makros
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!pound)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!pound)
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [program])
+!html_name  cmd_program
+
+Programmnamen für Titelseite definieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/program (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [docinfo] [[program!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Titelseite] [Titelseite])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [programimage])
+!html_name  cmd_programimage
+
+Programmgrafik für Titelseite definieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/programimage (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [docinfo] [[programimage!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Titelseite] [Titelseite])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [ps])
+!html_name  cmd_ps
+
+Popup-Abschnitt einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ps [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubnode])
+
+!item [(!SEEALSO)]
+(!KW [psubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [ps*])
+!html_name  cmd_ps_asterisk
+
+Popup-Abschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ps* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubnode*])
+
+!item [(!SEEALSO)]
+(!KW [psubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [pss])
+!html_name  cmd_pss
+
+Popup-Unterabschnitt einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pss [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubnode])
+
+!item [(!SEEALSO)]
+(!KW [psubsubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [pss*])
+!html_name  cmd_pss_asterisk
+
+Popup-Unterabschnitt ohne Eintrag im Inhaltsverzeichnis.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/pss* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubnode*])
+
+!item [(!SEEALSO)]
+(!KW [psubsubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psss])
+!html_name  cmd_psss
+
+Popup-Paragraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psss [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubsubnode])
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubnode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psss*])
+!html_name  cmd_psss_asterisk
+
+Versteckten Popup-Paragraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psss* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubsubnode*])
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [pssss*])
+!html_name  cmd_pssss_asterisk
+
+Versteckten Popup-Paragraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psss* [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [psubsubsubsubnode*])
+
+!item [(!SEEALSO)]
+(!KW [psubsubsubsubnode*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubnode])
+!html_name  cmd_psubnode
+
+Popup-Abschnitt einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Identisch mit (!KW [subnode]), der Inhalt wird jedoch beim
+ST-Guide und bei WinHelp als Popup dargestellt.
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubsubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubnode Ein Popup-Abschnitt
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subheading Ein Popup-Abschnitt
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubnode*])
+!html_name  cmd_psubnode_asterisk
+
+Popup-Abschnitt ohne Eintrag im Inhaltsverzeichnis einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie (!KW [psubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht in
+Inhaltsverzeichnissen erscheint.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.46
+
+!item [(!SEEALSO)]
+(!KW [psubnode]), (!KW [subnode*]), (!KW [begin_pnode*]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubnode* Ein versteckter Popup-Abschnitt
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subheading Ein versteckter Popup-Abschnitt
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubsubnode])
+!html_name  cmd_psubsubnode
+
+Popup-Unterabschnitt einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Identisch mit (!KW [subsubnode]), der Inhalt wird jedoch beim ST-Guide und bei WinHelp als Popup dargestellt.
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubsubnode Ein Popup-Unterabschnitt
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubheading Ein Popup-Unterabschnitt
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubsubnode*])
+!html_name  cmd_psubsubnode_asterisk
+
+Popup-Unterabschnitt ohne Eintrag im Inhaltsverzeichnis.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie (!KW [psubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht in
+Inhaltsverzeichnissen erscheint.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.46
+
+!item [(!SEEALSO)]
+(!KW [psubsubnode]), (!KW [subsubnode*]), (!KW [begin_pnode*]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubsubnode* Ein versteckter Popup-Unterabschnitt
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubheading Ein versteckter Popup-Unterabschnitt
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubsubsubnode])
+!html_name  cmd_psubsubsubnode
+
+Popup-Paragraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Identisch mit (!KW [subsubsubnode]), der Inhalt wird jedoch beim ST-Guide und bei WinHelp als Popup dargestellt.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [begin_pnode]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubsubsubnode Ein Popup-Paragraph
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubheading Ein Popup-Paragraph
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubsubsubnode*])
+!html_name  cmd_psubsubsubnode_asterisk
+
+Versteckten Popup-Paragraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie (!KW [psubsubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht
+in Inhaltsverzeichnissen erscheint.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode*]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubsubsubnode* Ein versteckter Popup-Paragraph
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubheading Ein versteckter Popup-Paragraph
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubsubsubsubnode])
+!html_name  cmd_psubsubsubsubnode
+
+Popup-Unterparagraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubsubsubnode (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Identisch mit (!KW [subsubsubsubnode]), der Inhalt wird jedoch beim ST-Guide und bei WinHelp als Popup dargestellt.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [begin_pnode]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubsubsubsubnode Ein Popup-Unterparagraph
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubheading Ein Popup-Unterparagraph
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [psubsubsubsubnode*])
+!html_name  cmd_psubsubsubsubnode_asterisk
+
+Versteckten Popup-Unterparagraph einleiten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/psubsubsubsubnode* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando hat die gleiche Funktion wie (!KW [psubsubsubsubnode]), mit der Ausnahme, dass ""(!TEXT)"" nicht
+in Inhaltsverzeichnissen erscheint.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [pnode]), (!KW [psubnode]), (!KW [psubsubnode]), (!KW [psubsubsubnode]), (!KW [begin_pnode*]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!psubsubsubsubnode* Ein versteckter Popup-Unterparagraph
+!end_verbatim
+(!EXAMPLE_AFTER)
+!subsubsubsubheading Ein versteckter Popup-Unterparagraph
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kkw [purple])
+!html_name  cmd_purple
+
+Setzt die Schriftfarbe Lila.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/purple)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Lila.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!purple)Lila(!coloff) erscheint in der Farbe Lila.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!purple)Lila(!coloff) erscheint in der Farbe Lila.
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

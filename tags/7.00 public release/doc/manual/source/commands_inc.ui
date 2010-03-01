@@ -1,0 +1,79 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands
+# Language    : all
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, language stuff included
+#
+################################################################################
+
+!iflang [german]
+!include cmds_a.de
+!include cmds_b.de
+!include cmds_c.de
+!include cmds_d.de
+!include cmds_e.de
+!include cmds_f.de
+!include cmds_g.de
+!include cmds_h.de
+!include cmds_i.de
+!include cmds_j.de
+!include cmds_k.de
+!include cmds_l.de
+!include cmds_m.de
+!include cmds_n.de
+!include cmds_o.de
+!include cmds_p.de
+!include cmds_q.de
+!include cmds_r.de
+!include cmds_s.de
+!include cmds_t.de
+!include cmds_u.de
+!include cmds_v.de
+!include cmds_w.de
+!include cmds_x.de
+!include cmds_y.de
+!include cmds_z.de
+!include cmds__.de
+!endif
+!iflang [english]
+!include cmds_a.en
+!include cmds_b.en
+!include cmds_c.en
+!include cmds_d.en
+!include cmds_e.en
+!include cmds_f.en
+!include cmds_g.en
+!include cmds_h.en
+!include cmds_i.en
+!include cmds_j.en
+!include cmds_k.en
+!include cmds_l.en
+!include cmds_m.en
+!include cmds_n.en
+!include cmds_o.en
+!include cmds_p.en
+!include cmds_q.en
+!include cmds_r.en
+!include cmds_s.en
+!include cmds_t.en
+!include cmds_u.en
+!include cmds_v.en
+!include cmds_w.en
+!include cmds_x.en
+!include cmds_y.en
+!include cmds_z.en
+!include cmds__.en
+!endif
+
+# === EOF ===

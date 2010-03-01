@@ -1,0 +1,1030 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands E
+# Language    : German
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
+#
+################################################################################
+
+!begin_node E!..
+!html_name  cmds_e
+
+# = = = = =
+
+!begin_node (!kw [ebl])
+!html_name  cmd_ebl
+
+Liste beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ebl(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_blist])
+
+!item [(!SEEALSO)]
+(!KW [end_blist])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [ec])
+!html_name  cmd_ec
+
+Die (letzte) center-Umgebung beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ec(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_center])
+
+!item [(!SEEALSO)]
+(!KW [end_center])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [ed])
+!html_name  cmd_ed
+
+Letzte description-Umgebung beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ed(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_description])
+
+!item [(!SEEALSO)]
+(!KW [end_description])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [ee])
+!html_name  cmd_ee
+
+Letzte nummerierte Aufzählung beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ee(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_enumerate])
+
+!item [(!SEEALSO)]
+(!KW [end_enumerate])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [efl])
+!html_name  cmd_efl
+
+Umgebung für linksbündigen Text schließen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/efl(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_flushleft])
+
+!item [(!SEEALSO)]
+(!KW [end_flushleft])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [efr])
+!html_name  cmd_efr
+
+Umgebung für rechtsbündigen Text schließen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/efr(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_flushright])
+
+!item [(!SEEALSO)]
+(!KW [begin_flushright])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [ei])
+!html_name  cmd_ei
+
+Letzte einfache Aufzählung beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/ei(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_itemize])
+
+!item [(!SEEALSO)]
+(!KW [end_itemize])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [eil])
+!html_name  cmd_eil
+
+Liste beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/eil(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_ilist])
+
+!item [(!SEEALSO)]
+(!KW [end_ilist])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [else])
+!html_name  cmd_else
+
+Allgemeine Abfrage.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/else(!t)
+
+!item [(!DESCRIPTION)]
+Die diesem Kommando folgenden Zeilen werden bis zum
+Eintreffen von (!KW [endif]) ausgegeben, wenn bei (!KW [ifdest])
+oder (!KW [iflang]) nicht das Kürzel des aktuellen Ausgabeformates bzw. der Ausgabesprache angegeben wurde.
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [iflang]), (!KW [endif]), (!link [Abfragebefehle] [Abfragebefehle])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [email])
+!html_name  cmd_email
+
+E-Mail-Informationen für die Titelseite setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/email (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [docinfo] [[address!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [maketitle]), (!KW [docinfo]), (!link [Titelseite] [Titelseite])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [en])
+!html_name  cmd_en
+
+Kapitel/Abschnitt/Unterabschnitt/Paragraph beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/en(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_node])
+
+!item [(!SEEALSO)]
+(!KW [end_node])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_appendix])
+!html_name  cmd_end_appendix
+
+(!nolink [Anhang]) beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_appendix(!t)
+
+!item [(!DESCRIPTION)]
+Beendet den (!nolink [Anhang]). UDO unterstützt genau (!I)einen(!i)
+Anhang, daher sollte (!KW [end_appendix]) das letzte
+Kommando vor (!KW [end_document]) sein.
+
+!item [(!SEEALSO)]
+(!KW [begin_appendix]), (!link [Anhang] [Anhang])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_blist])
+!html_name  cmd_end_blist
+
+Liste beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_blist(!t)
+
+!item [(!DESCRIPTION)]
+Beendet die letzte blist-Umgebung.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [begin_blist]), (!KW [item]), (!link [Listen] [Listen])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_center])
+!html_name  cmd_end_center
+
+Die (letzte) center-Umgebung beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_center(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando beendet die zuletzt geöffnete center-Umgebung.
+
+!item [(!SEEALSO)]
+(!KW [begin_center]), (!link [Textgestaltung] [Textgestaltung]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_comment])
+!html_name  cmd_end_comment
+
+Die (letzte) comment-Umgebung beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_comment(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando beendet die zuletzt geöffnete comment-Umgebung.
+
+!item [(!SEEALSO)]
+(!KW [begin_comment]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_description])
+!html_name  cmd_end_description
+
+Letzte (!nolink [description-Umgebung]) beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_description(!t)
+
+!item [(!DESCRIPTION)]
+Beendet die letzte description-Umgebung.
+
+!item [(!SEEALSO)]
+(!KW [begin_description]), (!KW [item]), (!link [Beschreibungen] [Beschreibungen])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_document])
+!html_name  cmd_end_document
+
+Ende des Dokumentes setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDOBLIGATE), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_document(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando (!B)muss(!b) in jedem Quelltext vorhanden
+sein. Es beendet den Hauptteil und sollte das letzte
+Kommando des Quelltextes sein. Fehlt dieses Kommando,
+erzeugt UDO eine Fehlermeldung.
+
+!item [(!SEEALSO)]
+(!KW [begin_document])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_enumerate])
+!html_name  cmd_end_enumerate
+
+Letzte nummerierte Aufzählung beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_enumerate(!t)
+
+!item [(!DESCRIPTION)]
+Beendet die letzte enumerate-Umgebung.
+
+!item [(!SEEALSO)]
+(!KW [begin_enumerate]), (!KW [item]), (!link [Nummerierungen] [Nummerierungen])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_flushleft])
+!html_name  cmd_end_flushleft
+
+Umgebung für linksbündigen Text schließen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_flushleft(!t)
+
+!item [(!DESCRIPTION)]
+Die (letzte) flushleft-Umgebung wird mit diesem Kommando beendet.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~0
+
+!item [(!SEEALSO)]
+(!link [Textgestaltung] [Textgestaltung]), (!KW [begin_flushleft])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_flushright])
+!html_name  cmd_end_flushright
+
+Umgebung für rechtsbündigen Text schließen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_flushright(!t)
+
+!item [(!DESCRIPTION)]
+Die (letzte) flushright-Umgebung wird mit diesem Kommando beendet.
+
+!item [(!SEEALSO)]
+(!link [Textgestaltung] [Textgestaltung]), (!KW [begin_flushright])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_ignore])
+!html_name  cmd_end_ignore
+
+Die (letzte) ignore-Umgebung beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_ignore(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando beendet die zuletzt geöffnete ignore-Umgebung.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [begin_ignore]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_ilist])
+!html_name  cmd_end_ilist
+
+Liste beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_ilist(!t)
+
+!item [(!DESCRIPTION)]
+Beendet die letzte ilist-Umgebung.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [begin_ilist]), (!KW [item]), (!link [Listen] [Listen])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_itemize])
+!html_name  cmd_end_itemize
+
+Letzte einfache Aufzählung beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_itemize(!t)
+
+!item [(!DESCRIPTION)]
+Beendet die letzte itemize-Umgebung.
+
+!item [(!SEEALSO)]
+(!KW [begin_itemize]), (!KW [item]), (!link [Aufzählungen] [Aufzählungen])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_linedraw])
+!html_name  cmd_end_linedraw
+
+(!nolink [linedraw-Umgebung]) beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_linedraw(!t)
+
+!item [(!DESCRIPTION)]
+Beendet die linedraw-Umgebung.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [begin_linedraw]), (!link [Vorformatierter Text] [Vorformatierter Text])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_node])
+!html_name  cmd_end_node
+
+Kapitel/Abschnitt/Unterabschnitt/Paragraph beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_node(!t)
+
+!item [(!DESCRIPTION)]
+Beendet die aktuelle Gliederungsebene.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [begin_node]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_preformatted])
+!html_name  cmd_end_preformatted
+
+preformatted-Umgebung beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_performatted(!t)
+
+!item [(!DESCRIPTION)]
+Beendet die preformatted-Umgebung.
+
+!item [(!SEEALSO)]
+(!KW [begin_preformatted]), (!link [Vorformatierter Text] [Vorformatierter Text])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_quote])
+!html_name  cmd_end_quote
+
+Letzte Absatzeinrückung aufheben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_quote(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando beendet die letzte quote-Umgebung, in der der Text eingerückt dargestellt wird.
+
+!item [(!SEEALSO)]
+(!KW [begin_quote]), (!link [Textgestaltung] [Textgestaltung])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_raw])
+!html_name  cmd_end_raw
+
+(!nolink [raw-Umgebung]) beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_raw(!t)
+
+!item [(!DESCRIPTION)]
+Beendet die (!nolink [raw-Umgebung]).
+
+!item [(!SEEALSO)]
+(!KW [begin_raw]), (!link [raw-Umgebung] [raw-Umgebung])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_sourcecode])
+!html_name  cmd_end_sourcecode
+
+Eine (!nolink [sourcecode-Umgebung]) beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_sourcecode(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando beendet die sourcecode-Umgebung.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~16
+
+!item [(!SEEALSO)]
+(!KW [begin_sourcecode])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_table])
+!html_name  cmd_end_table
+
+Tabelle beenden und ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_table(!t)
+
+!item [(!DESCRIPTION)]
+Beendet die (!nolink [table-Umgebung]) und sorgt für die Ausgabe der Tabelle.
+
+!item [(!SEEALSO)]
+(!link [Tabellen] [Tabellen]), (!KW [begin_table])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_tlist])
+!html_name  cmd_end_tlist
+
+Liste beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_tlist(!t)
+
+!item [(!DESCRIPTION)]
+Beendet die letzte (!nolink [tlist-Umgebung]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!KW [begin_tlist]), (!KW [item]), (!link [Listen] [Listen])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_verbatim])
+!html_name  cmd_end_verbatim
+
+(!nolink [verbatim-Umgebung]) beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_verbatim(!t)
+
+!item [(!DESCRIPTION)]
+Beendet die (!nolink [verbatim-Umgebung]).
+
+!item [(!SEEALSO)]
+(!KW [begin_verbatim]), (!link [Vorformatierter Text] [Vorformatierter Text])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [end_xlist])
+!html_name  cmd_end_xlist
+
+Liste beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/end_xlist(!t)
+
+!item [(!DESCRIPTION)]
+Beendet die letzte (!nolink [xlist-Umgebung]).
+
+!item [(!SEEALSO)]
+(!KW [begin_xlist]), (!KW [item]), (!link [Listen] [Listen])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [endif])
+!html_name  cmd_endif
+
+Spezielle Umgebung beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/endif(!t)
+
+!item [(!DESCRIPTION)]
+Beendet eine spezielle Umgebung, die mit (!KW [ifdest]),
+(!KW [iflang]), (!KW [ifset]), (!KW [ifos]) oder (!KW [if]) begonnen wurde. Der
+diesem Befehl folgende Text wird wieder für alle Formate ausgegeben.
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [iflang]), (!KW [ifset]), (!KW [ifos]), (!KW [if]), (!KW [else]), (!link [Abfragebefehle] [Abfragebefehle])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [endnode])
+!html_name  cmd_endnode
+
+Kapitel/Abschnitt/Unterabschnitt/Paragraph beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/endnode(!t)
+
+!item [(!DESCRIPTION)]
+Beendet die aktuelle Gliederungsebene.
+
+!item [(!SEEALSO)]
+(!KW [begin_node]), (!link [Gliederung] [Gliederung])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [english])
+!html_name  cmd_english
+
+Sprache setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/english(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+# Der Befehl (!KW [english]) existiert nicht mehr.
+(!USEINSTEAD[]) (!KW [language] [[english!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [language])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [eq])
+!html_name  cmd_eq
+
+Letzte Absatzeinrückung aufheben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/eq(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_quote])
+
+!item [(!SEEALSO)]
+(!KW [end_quote])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [error])
+!html_name  cmd_error
+
+Fehlermeldung ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/error [(!TEXT)](!t)
+
+!item [(!DESCRIPTION)]
+Genau wie die Präprozessoranweisung (!code [#error]) eines C-Compilers
+kann man hiermit eine Fehlermeldung erzeugen und ""(!TEXT)"" ausgeben.
+UDO bricht beim Eintreffen dieses Kommandos die Konvertierung ab.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [break])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [etl])
+!html_name  cmd_etl
+
+Liste beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/etl(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_tlist])
+
+!item [(!SEEALSO)]
+(!KW [end_tlist])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [euro])
+!html_name  cmd_euro()
+
+(!euro)-Zeichen ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/euro)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch das Euro-Symbol
+ersetzt, sofern es in dem jeweiligen Zeichensatz
+vorhanden ist. Ist es das nicht, ersetzt UDO den
+Platzhalter durch ""(!code [EUR])"".
+
+!item [(!EXISTSSINCE)] Version 6.5.8
+
+!item [(!SEEALSO)]
+(!KKW [pound]), Vordefinierte Makros
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!euro)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!euro)
+(!EXAMPLE_END)
+
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [exl])
+!html_name  cmd_exl
+
+Liste beenden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/exl(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [end_xlist])
+
+!item [(!SEEALSO)]
+(!KW [end_xlist])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

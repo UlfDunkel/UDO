@@ -1,0 +1,28 @@
+!begin_itemize
+
+!index dutch
+!index !/language dutch
+!item	Neu: Holländisch wird als Sprache angeboten (Danke an Rogier
+Cobben). Aktiviert wird sie mit (!I)!/language dutch(!i), abgefragt
+mit (!I)!/iflang [dutch](!i).
+
+!index !/code_next
+!item	Neu: Schalter (!I)!/code_next(!i) zum Umschalten auf den
+NeXTStep-Zeichensatz.
+
+!index !/german
+!index !/english
+!index !/language
+!item	Änderung: Die ganzen alten Sprachbefehle wie (!T)!/german(!t)
+oder (!T)!/english(!t) existieren nicht mehr. Die Ausgabesprache läßt
+sich nun nur noch mit (!I)!/language(!i) einstellen.
+
+!index !/table_caption*
+!item	Umlaute in (!I)!/table_caption*(!i) wurden nicht gequotet
+(Christian Goslar).
+
+!item	Die GEM-Shell benutzte ""(!V)udo.hyp(!v)"" als Hypertextname,
+obwohl der Hypertext ""(!V)udo6ger.hyp(!v)"" heißt (Michael Depke).
+
+!end_itemize
+

@@ -1,0 +1,169 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands G
+# Language    : German
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
+#
+################################################################################
+
+!begin_node G!..
+!html_name  cmds_g
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [german])
+!html_name  cmd_german
+
+Sprache setzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/german(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+# Der Befehl (!KW [german]) existiert nicht mehr.
+(!USEINSTEAD[]) (!KW [language] [[german!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [language])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kkw [green])
+!html_name  cmd_green
+
+Setzt die Schriftfarbe Grün.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/green)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Grün.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!green)Grün(!coloff) erscheint in der Farbe Grün.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!green)Grün(!coloff) erscheint in der Farbe Grün.
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kkw [gray])
+!html_name  cmd_gray
+
+Setzt die Schriftfarbe (Dunkel-)Grau.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/gray)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe (Dunkel-)Grau.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!gray)Dunkelgrau(!coloff) erscheint in der Farbe Dunkelgrau.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!gray)Dunkelgrau(!coloff) erscheint in der Farbe Dunkelgrau.
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [grin])
+!html_name  cmd_grin()
+
+Emoticon ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/grin)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter wird durch einen grinsenden Smiley
+ersetzt, der in Schreibmaschinenschrift ausgegeben wird.
+
+!item [(!SEEALSO)]
+(!KKW [laugh]), Vordefinierte Makros
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!grin)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!grin)
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

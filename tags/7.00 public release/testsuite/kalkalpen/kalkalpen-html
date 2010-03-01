@@ -1,0 +1,6 @@
+#!/bin/sh
+# export UDOINPUTPATH=/usr/share/udo/udoinput/
+# alt: udo614
+udo --html --verbose --force-long --tree --check -o ./html/index.html kalkalpen.txt -D Debug -D NoPics
+mv ./html/index.ulh .
+mv ./html/index.uth .

@@ -1,0 +1,151 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# Notes:
+#    This file contains the command index (in alphabetical order).
+#    Output for commands which are no longer existing will be created 
+#    only if "OldKeywords" was set.
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (from commands.ui)
+#   fd  Jun 05: nodes 'Command description' + 'Colors' are no longer hidden
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: CHAR macro enhanced
+#   fd  Jun 09: VALUE macro introduced
+#
+################################################################################
+
+!begin_node Command index
+!html_name  cmds
+
+!ignore_subsubtoc
+
+In this chapter you will find a short description of every UDO command in
+alphabetical order. The command description shows you the meaning of the
+descriptions.
+
+# Hypertext formats will print a table with the alphabet
+!ifdest [win,wh4,html,hh,stg,amg,pch,tvh,aqv]
+   !medskip
+   
+	!ignore_subtoc
+	!begin_table [llllll]
+	A!.. !! B!.. !! C!.. !! D!.. !! E!.. !! F!.. !! G!.. !! H!.. 
+   I!.. !! J!.. !! K!.. !! L!.. !! M!.. !! N!.. !! O!.. !! P!..
+   Q!.. !! R!.. !! S!.. !! T!.. !! U!.. !! V!.. !! W!.. !! X!..
+	Y!.. !! Z!..
+	*!..
+	!end_table
+
+   !medskip
+
+!endif
+
+# = = = = =
+
+!begin_node Command description
+!html_name  cmds_explanation
+
+In den nachfolgenden Kapiteln werden sämtliche von UDO unterstützten Befehle detailliert erklärt. Dabei werden immer wieder gleiche Kategorien verwendet, damit Sie auf einen Blick sehen, was mit welchem Befehl möglich ist. Diese Kategorien werden nachfolgend erklärt.
+
+!begin_description
+
+!item	[Type & position:]
+	The type of the command and the position where it's allowed to use it.
+
+	A command tells UDO do something especially, a switch sets some internal
+	information for UDO and a placeholder will be simply replaced by a
+	different text fragment.
+
+	""Preamble"" means that you are only allowed to use this command in the
+	preamble of your source file (before (!KW [begin_document])). ""Main
+	part"" means that you are only allowed to use it behind
+	(!KW [begin_document]). ""Preamble & main part"" means that you can
+	use this command wherever you want.
+
+!item	[Syntax:]
+	Here you can see how to use the command.
+
+	!begin_tlist [WabbreviationsW] !short
+
+	!label (!TEXT)
+	!item [(!TEXT)] replaces text
+
+	!label (!FILE)
+	!item [(!FILE)] replaces a file name
+
+	!label (!VALUE)
+	!item [(!VALUE)] replaces a number
+
+	!label (!CHAR)
+	!item [(!CHAR)] replacedescriptions a single char
+
+	!label <abbreviations>
+	!item [<abbreviations>] replaces the abbreviation of the (!link [destination formats] [Abbreviations])
+
+	!label <language>
+	!item [<language>] replaces the abbreviation of the (!link [destination language] [Language])
+
+	!label <systems>
+	!item [<systems>] replaces one or more (!link [operating system] [Operating systems])
+
+	!label <color>
+	!item [<color>] replaces the name of a (!link [color] [Colors])
+
+	!label <character set>
+	!item [<character set>] replaces the name of a (!link [character set] [Code])
+
+	!end_tlist
+
+!item	[Example:]
+	Here you can see a small example.
+
+!item	[See also:]
+	Related commands and topic are listed here.
+
+!end_description
+
+!end_node # Command description
+
+# = = = = =
+
+!begin_node Colors
+!html_name  cmds_colors
+
+!index Colors
+!label Colors
+
+!begin_itemize !short
+!item black
+!item silver      (light grey, formerly ""grey"")
+!item gray        (dark grey, ""gray"", not ""grey""!!!)
+!item white
+!item maroon
+!item red
+!item purple
+!item fuchsia
+!item green       (dark green)
+!item lime        (light green)
+!item olive
+!item yellow
+!item navy
+!item blue
+!item teal
+!item aqua        (formerly ""cyan"")
+!end_itemize
+
+!end_node # Colors
+
+# === EOF ===

@@ -1,0 +1,147 @@
+!node Dies & das
+!ignore_links
+!html_name thisthat
+
+############################################################
+
+!subnode Fakten, Fakten, Fakten
+!ignore_links
+!html_name facts
+
+Folgende Maximalwerte müssen Sie beim Erstellen der Quelltexte beachten:
+
+!begin_xlist [Summe Kapitel, Labels und Aliase:] !short
+!item [Macros:]									128
+!item [Defines:]								128
+!item [Hyphens:]								4096
+!item [Summe Kapitel, Labels und Aliase:]		6144
+!item [Zeichen pro Zeile:]						512
+!item [Zeichen pro Wort:]						128
+!item [Silben pro Wort:]						32
+!item [Worte pro Absatz:]						800
+!item [Querverweise pro Absatz:] 				200
+!item [Zeilen pro Tabelle:]						256
+!item [Spalten pro Tabelle:]					32
+!item [Schachtelungstiefe der Umgebungen:]		6
+!end_xlist
+
+!smallskip
+
+Hier nun ein paar Zahlen, die demonstrieren, wieviel Arbeit und Zeit in
+diesem Programm und der Dokumentation stecken:
+
+!begin_xlist [Englische Dokumentation:] !short
+!item [Sourcecode:]					ca. 820 KB
+!item [Deutsche Dokumentation:]		ca. 470 KB
+!item [Englische Dokumentation:]	ca. 400 KB
+!end_xlist
+
+############################################################
+
+!subnode Entwicklungsumgebung
+!ignore_links
+!html_name devenv
+
+UDO wurde unter Zuhilfenahme folgender Programme entwickelt:
+
+!begin_xlist [MS-DOS, OS/2:]
+
+!item [Atari TOS:]
+Pure C 1.1, Pure Profiler 1.0, MiNT-Libs PL 46, SysGem 2.03(!beta),
+Interface 2.3, Programming Tools von Julian F. Reschke, MagiC-PC 1.01
+
+!item [HP-UX:]
+GCC 2.7.2
+
+!item [Linux:]
+GCC 2.7.2, S.u.S.E. Linux 4.3 mit Kernel 2.0.18, Joe
+
+!item [Macintosh:]
+CodeWarrior 9 (68K/PPC), ResEdit 2.1
+
+!item [MS-DOS, OS/2:]
+EMX-GCC 2.6.3 emxfix06, GDB 4.13, PFE
+
+!item [Win32:]
+Microsoft Visual C++ 4.0
+
+!end_xlist
+
+UDO wird derzeit mit Visual C++ auf einem Pentium 133 entwickelt und
+dann auf die anderen Plattformen, teils von mir teils von Dritten,
+portiert.
+
+!medskip
+
+Diese Dokumentation wurde unter Zuhilfenahme folgender Programme
+geschrieben:
+
+!begin_itemize !short
+
+!item Joe Allan's Own Editor ''Joe'' für MS-DOS und Linux
+
+!item Allan Phillips' Programmer's File Editor ''PFE'' 0.06.01
+(der beste Editor für Windows 3.1 und Windows 95, den ich kenne)
+
+!item Phoenix für Windows 3.11 von Application Systems Heidelberg
+(wird jetzt als Fuji Base 1.0 verscherbelt)
+
+!end_itemize
+
+Alle Programme kann ich jedem nur wärmstens empfehlen!
+
+
+############################################################
+
+!subnode Erzeugte Dateien
+!ignore_links
+!html_name genfiles
+
+Es folgt eine Auflistung der Endungen der Dateien, die Ihnen beim Umgang mit
+UDO über den Weg laufen werden.
+
+!begin_xlist [.htm(l):] !short
+
+!item	[.txt:]		ASCII-Format
+!item	[.man:]		Manualpage-Format
+!item	[.cmd:]		Kommandodatei für den Pure-C-Help-Hypertext-Compiler
+!item	[.hpj:]		Projektdatei für den WinHelp-Hypertext-Compiler HC.EXE
+!item	[.htm(l):]	HTML-Format
+!item	[.lyx:] 	LyX-Format
+!item	[.rtf:]		RTF bzw. WinHelp- oder QuickView-Quelltext
+!item	[.scr:]		Pure-C-Help-Quelltext
+!item	[.sgm(l):]	Linuxdoc-SGML-Quelltext
+!item	[.stg:]		ST-Guide-Quelltext
+!item	[.txt:]		Turbo-Vision-Help-Quelltext
+!item	[.tex:]		(!LaTeX)-Quelltext
+!item	[.texi:]	Texinfo-Quelltext
+
+!end_xlist
+
+Dateien mit der Endung (!V).ul?(!v) beinhalten die Fehlermeldungen und
+Informationen, die UDO während der Umwandlung erzeugt.
+
+Dateien mit der Endung (!V).uh?(!v) beinhalten die Trennvorschläge für das
+ASCII-, ST-Guide- und Pure-C-Help-Format.
+
+Dateien mit der Endung (!V).ut?(!v) beinhalten den ""Include-Tree"", also
+dem logischen Aufbau aus Include-Dateien Ihres Quelltextes.
+
+Die folgenden Dateiendungen werden auftauchen, wenn Sie die von UDO erzeugten
+Dateien durch die formatzugehörigen Programmen (siehe Klammerinhalt)
+weiterbearbeiten:
+
+!begin_xlist [.www:]
+
+!item	[.err:]	Logfile des WinHelp-Compilers ((!T)HC.EXE(!t))
+!item	[.h:]	C-Header-File für Turbo-Vision ((!T)TVHC.EXE(!t))
+!item	[.hlp:]	WinHelp-Datei ((!T)HC.EXE(!t)),
+				Turbo-Vision-Help-Datei ((!T)TVHC.EXE(!t)),
+				Pure-C-Help-Datei ((!T)HC.PRG(!t))
+!item	[.hyp:]	ST-Guide-Hypertext ((!T)HCP.TTP(!t))
+!item	[.ref:]	ST-Guide-Referenzdatei ((!T)HCP.TTP(!t))
+
+!end_xlist
+
+############################################################
+

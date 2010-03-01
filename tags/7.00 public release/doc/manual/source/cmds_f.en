@@ -1,0 +1,131 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands F
+# Language    : English
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
+#
+################################################################################
+
+!begin_node F!..
+!html_name  cmds_f
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [french])
+!html_name  cmd_french
+
+Define language.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/french(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+# Der Befehl (!KW [french]) existiert nicht mehr.
+(!USEINSTEAD[]) (!KW [language] [[french!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~1
+
+!item [(!SEEALSO)]
+(!KW [language])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kkw [fuchsia])
+!html_name  cmd_fuchsia
+
+Sets the textcolor fuchsia.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/fuchsia)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Magenta.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!fuchsia)Magenta(!coloff) erscheint in der Farbe Magenta.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!fuchsia)Magenta(!coloff) erscheint in der Farbe Magenta.
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [fussy])
+!html_name  cmd_fussy
+
+Activate warning messages for short lines.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/fussy(!t)
+
+(!red)
+!item [(!DESCRIPTION)]
+Schaltet die Warnung vor kurzen Zeilen wieder ein.
+Bei der Umwandlung ins (!LaTeX)-Format erfolgt (!B)keine(!b)
+Umsetzung in (!code [\fussy])!
+(!coloff)
+!item [(!DESCRIPTION)]
+Switches on warning messages according to short lines. You can use
+this command wherever you want. The warnings can be disabled with
+(!KW [sloppy]). When converting to (!LaTeX) UDO does (!B)not(!b) convert
+(!KW [fussy]) into (!code [\fussy])!
+
+!item [(!SEEALSO)]
+(!KW [sloppy]), (!link [Error messages] [Error messages]), (!link [Hyphenation] [Hyphenation])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

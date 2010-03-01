@@ -1,0 +1,61 @@
+############################################################
+# @(#) Split documents, Dirk Hagedorn, 1996/04/16
+############################################################
+
+!subsubnode Split documents
+
+!index !/include
+!index !/vinclude
+!index !/rinclude
+
+UDO offers you the commands (!I)!/include(!i), (!I)!/vinclude(!i) and
+(!I)!/rinclude(!i). With these commands you are enabled to split up a
+document into many files that are included by a main file. Furthermore
+you can use these commands to include an often used passage that you
+have to type only once.
+
+This documentation uses this commands intensively. The file
+(!V)udo.u(!v) doesn't contain any text and just includes other files.
+So I have the possibility to find some passages more fast if I have to
+change the documentation.
+
+You can use (!I)!/include(!i) wherever you want. So you can define macros,
+definitions or syllabification patterns in external files that can be used
+by other files, too.
+
+For displaying the preformatted contents of a file you can use the
+(!I)!/vinclude(!i) command (""verbatim include""). You can use this
+command e.g. for displaying source files or header files.
+
+If you want to included special commands for a destination format like
+difficult tables for (!LaTeX) or HTML you can use the
+(!I)!/rinclude(!i) command (""raw include"").
+
+(!B)Possible examples of use:(!b)
+
+!begin_enumerate
+
+!item	When writing large source files you can edit a separate file for
+each chapter that are included by a main file with (!I)!/include(!i). Thus
+you can restructure your text by simply moving one line of the main file.
+
+!item	If you split up your text into several file that are included by a
+main file you can speed up looking for errors because you can simply switch
+off some parts of the text by commenting out one line of the main file.
+
+!item	Together with macros you can write standardized texts that you can
+use for many projects. E.g. you can edit a standard disclaimer where the
+name of the software is replaced by macros that are defined by the main
+file.
+
+!item	A documentation can be written by different persons. Each author can
+test his own file with UDO. If everybody has finished his work all files
+will be included by a main file.
+
+!index !/tabwidth
+
+!item	With (!I)!/vinclude(!i) and (!I)!/tabwidth(!i) you can add source
+code to your documentation. This is great for a documentation of a source
+code or a library.
+
+!end_enumerate

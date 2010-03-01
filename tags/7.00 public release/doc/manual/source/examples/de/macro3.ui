@@ -1,0 +1,3 @@
+!macro BIU (!B)(!I)(!U)(!1)(!u)(!i)(!b)
+...
+Dieser Text ist (!BIU [fett, kursiv und unterstrichen]).

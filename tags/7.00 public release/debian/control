@@ -1,0 +1,31 @@
+Source: udo
+Section: text
+Priority: optional
+Maintainer: Volker Janzen <douglas@voja.org>
+Build-Depends: debhelper (>= 4.0.0)
+Standards-Version: 3.6.1
+
+Package: udo
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: Universal DOcument (UDO) - text processing utility
+ UDO is a powerful and multipurpose utility for making documentation or any
+ other text file that is needed in one text format or more. UDO documents can
+ be converted to ASCII, HTML, LaTeX, nroff, PostScript, RTF and many more.
+ Though UDO is powerful, it's quite easy to understand and to use.
+
+Package: udo-doc
+Section: doc
+Architecture: all
+Suggests: udo, www-browser, editor
+Description: Universal DOcument (UDO) - English documentation
+ This package provides the complete documentation of UDO in the following
+ formats: HTML, txt, udo 
+
+Package: udo-doc-ger
+Section: doc
+Architecture: all
+Suggests: udo, www-browser, editor
+Description: Universal DOcument (UDO) - German documentation
+ This package provides the complete documentation of UDO in the following
+ formats: HTML, txt, udo

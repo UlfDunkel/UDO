@@ -1,0 +1,1025 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands W
+# Language    : English
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
+#
+################################################################################
+
+!begin_node W!..
+!html_name  cmds_w
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [=win])
+!html_name  cmd_win-eq
+
+Query the destination format.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/=win (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[win!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [wh4_backcolor])
+!html_name  cmd_wh4_backcolor
+
+Set background color for Windows Help.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/wh4_backcolor (!COLOR)(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can set the background color of your Windows
+Help file. You can use one of the following colors: black, silver (light grey),
+gray (dark grey), white, maroon, red, purple, fuchsia, green (dark green),
+lime (light grren), olive, yellow, navy, blue, teal and aqua. But you should use only
+white, grey and black because the other colours are quite ugly.
+
+!item [(!EXAMPLE)]
+(!T)!/wh4_backcolor gray(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [wh4_background])
+!html_name  cmd_wh_background
+
+Set background color for Windows Help.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/wh4_background (!COLOR)(!t)
+
+!item [(!DESCRIPTION)]
+This command is deprecated and has been renamed to (!KW [wh4_backcolor]).
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [wh4_backcolor])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [wh4_charwidth])
+!html_name  cmd_wh4_charwidth
+
+Set character width (WinHelp4 only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/wh4_charwidth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+UDO uses a constant value for calculating the indent of lists and the
+widths of table cells. This value works even fine with bold
+monospaced capital letters, but if you use normal text the indents or
+table cells may be too wide. You can adjust this value by using
+(!KW [win_charwidth]). UDO uses 150 by default.
+
+!item [(!EXAMPLE)]
+(!T)!/wh4_charwidth 100(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!link [Tables] [Tables]), (!link [Lists] [Lists])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [wh4_helpid])
+!html_name  cmd_wh4_helpid
+
+Assign a Help-ID (WinHelp4 only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/wh4_helpid (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command can be used only once per node. The ID will be used like
+an alias. Help-IDs can be written to a C or Pascal header file.
+
+!item [(!EXAMPLE)]
+(!T)!/wh4_helpid 0815(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [mapping]), (!KW [use_auto_helpids]), (!KW [wh4_prefix_helpids])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [wh4_high_compression])
+!html_name  cmd_wh4_high_compression
+
+Compress WinHelp4 file (high compression).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/wh4_high_compression(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble the Microsoft Helpcompiler
+will compress the Windows Help file by about 50%. The compression of
+the Windows Help file takes some time.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [wh4_medium_compression]), (!KW [win_high_compression])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [wh4_inline_bitmaps])
+!html_name  cmd_wh4_inline_bitmaps
+
+Use inline bitmaps (WinHelp4 only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/wh4_inline_bitmaps(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble of your source file UDO
+will use the RTF tag (!code [\bmcwd]) instead of (!code [\bmc])
+for displaying images. In this case, the Microsoft Help Compiler stores images in another format in the WinHelp4 file, which avoids skewed images. Then you cannot use images larger than
+64~KB. Please read the HCP documentation to get more information
+about the differences between these two RTF tags.
+
+!item [(!SEEALSO)]
+(!KW [image])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [wh4_linkcolor])
+!html_name  cmd_wh4_linkcolor
+
+Set color of links (WinHelp4 only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/wh4_linkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Sets the color that is used to display active links in WinHelp pages.
+If you use this command inside the preamble,
+this will be the default color for all
+pages including the table of contents.
+
+!item [(!SEEALSO)]
+(!KW [wh4_textcolor]), (!KW [wh4_backcolor])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# ToDo: englisch
+#       Keine Ahnung welche Kompressionsrate damit wirklich eingestellt wird!
+!begin_node (!kw [wh4_medium_compression])
+!html_name  cmd_wh4_medium_compression
+
+Compress WinHelp4 file (middle compression).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/wh4_medium_compression(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble the Microsoft Helpcompiler
+will compress the Windows Help file by about 50%. The compression of
+the Windows Help file takes some time.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [wh4_high_compression]), (!KW [win_high_compression])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [wh4_monofont])
+!html_name  cmd_wh4_monofont
+
+Set name of monospaced font (WinHelp4 only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/wh4_monofont <fontname>(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can set the font that will be used to display
+preformatted text. The default is ""Courier New"".
+
+!item [(!EXAMPLE)]
+(!T)!/wh4_monofont Courier(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [wh4_propfont]), (!KW [wh4_monofont_size])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# ToDo: englisch
+!begin_node (!kw [wh4_monofont_size])
+!html_name  cmd_wh4_monofont_size
+
+Set size of monospaced font (WinHelp4 only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/wh4_monofont_size (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can set the font size that will be used to display
+preformatted text. The default is 10pt.
+
+!item [(!EXAMPLE)]
+(!T)!/wh4_monofont_size 10(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [wh4_monofont])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [wh4_old_keywords])
+!html_name  cmd_wh4_old_keywords
+
+Create old keywords (WinHelp4 only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/wh4_old_keywords(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble,
+UDO will use the old method of creating keywords
+for WinHelp4, that is using the name of the node, alias or label.
+
+!item [(!EXAMPLE)]
+(!T)!/wh4_old_keywords(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [mapping]), (!KW [wh4_helpid]), (!KW [use_auto_helpids])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [wh4_prefix_helpids])
+!html_name  cmd_wh4_prefix_helpids
+
+Prefix HelpIDs with text (WinHelp4 only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/wh4_prefix_helpids (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch in the preamble, every HelpID will be prefixed with ""(!TEXT)"".
+
+!item [(!EXAMPLE)]
+(!T)!/wh4_prefix_helpids UDO(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~13
+
+!item [(!SEEALSO)]
+(!KW [mapping]), (!KW [wh4_helpid]), (!KW [use_auto_helpids])
+
+!end_xlist
+
+!end_node
+
+###############################################################################
+!begin_node (!kw [wh4_propfont])
+!html_name  cmd_wh4_propfont
+
+Set proportional font (WinHelp4 only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/wh4_propfont <fontname>(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can set the font that will be used to display
+text inside a Windows Help hypertext. The default is ""MS Sans Serif"".
+
+!item [(!EXAMPLE)]
+(!T)!/wh4_propfont Arial(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [wh4_monofont]), (!KW [wh4_propfont_size])
+
+!end_xlist
+
+!end_node
+
+###############################################################################
+# ToDo: englisch
+!begin_node (!kw [wh4_propfont_size])
+!html_name  cmd_wh4_propfont_size
+
+Set size of the proportional font (WinHelp4 only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/wh4_propfont_size (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can set the font that will be used to display
+text inside a Windows Help hypertext. The default is 8pt.
+
+!item [(!EXAMPLE)]
+(!T)!/wh4_propfont_size 10(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [wh4_propfont])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [wh4_textcolor])
+!html_name  cmd_wh4_textcolor
+
+Specify the textcolor (WinHelp4 only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/wh4_textcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Sets the color that is used to display text in help pages.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [wh4_linkcolor]), (!KW [wh4_backcolor])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [win])
+!html_name  cmd_win
+
+Query the destination format.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/win (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!NOTEXISTING)
+(!USEINSTEAD[]) (!KW [raw] [[win!!]]).
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+
+!item [(!SEEALSO)]
+(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kkw [white])
+!html_name  cmd_white
+
+Sets the textcolor white.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/white)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Weiß.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!white)Weiß(!coloff) erscheint in der Farbe Weiß.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!white)Weiß(!coloff) erscheint in der Farbe Weiß.
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [win_backcolor])
+!html_name  cmd_winbackcolor
+
+Set background color for Windows Help.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_backcolor (!COLOR)(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can set the background color of your Windows
+Help file. You can use one of the following colors: black, silver (light grey),
+gray (dark grey), white, maroon, red, purple, fuchsia, green (dark green),
+lime (light grren), olive, yellow, navy, blue, teal and aqua. But you should use only
+white, grey and black because the other colours are quite ugly.
+
+!item [(!EXAMPLE)]
+(!T)!/win_backcolor gray(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [win_background])
+!html_name  cmd_win_background
+
+Set background color for Windows Help.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_background (!COLOR)(!t)
+
+!item [(!DESCRIPTION)]
+This command is deprecated and has been renamed to (!KW [win_backcolor]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~12
+
+!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [win_backcolor])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [win_charwidth])
+!html_name  cmd_charwidth
+
+Set character width (WinHelp and QuickView only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/win_charwidth (!VALUE)(!t)
+
+(!red)
+!item [(!DESCRIPTION)]
+UDO benutzt zur Ausrichtung der xlist-Umgebungen und
+der Tabellen einen Wert für die Berechnung der
+Einrückungen und Zellenbreiten. Dieser Wert ist so
+ausgelegt, dass auch nichtproportionale fette
+Großschrift noch richtig formatiert wird. Bei
+normaler Schrift kann es jedoch sein, dass die Zeichen
+zu weit eingerückt werden oder das Tabellenzellen zu
+breit erscheinen. Mit diesem Schalter können sie den
+Berechnungswert anpassen. Standardmäßig benutzt UDO den Wert 150.
+(!coloff)
+
+!item [(!DESCRIPTION)]
+UDO uses a constant value for calculating the indent of lists and the
+widths of table cells. This value works even fine with bold
+monospaced capital letters, but if you use normal text the indents or
+table cells may be too wide. You can adjust this value by using
+(!KW [win_charwidth]). UDO uses 150 by default.
+
+!item [(!EXAMPLE)]
+(!T)!/win_charwidth 100(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~4
+
+!item [(!SEEALSO)]
+(!link [Tables] [Tables]), (!link [Lists] [Lists])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [win_helpid])
+!html_name  cmd_helpid
+
+Assign a Help-ID (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/win_helpid (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+This command can be used only once per node. The ID will be used like
+an alias. Help-IDs can be written to a C or Pascal header file.
+
+!item [(!EXAMPLE)]
+(!T)!/win_helpid 0815(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!KW [mapping]), (!KW [use_auto_helpids]), (!KW [win_prefix_helpids])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [win_high_compression])
+!html_name  cmd_win_high_compression
+
+Compress WinHelp file (high compression).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_high_compression(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble the Microsoft Helpcompiler
+will compress the Windows Help file by about 50%. The compression of
+the Windows Help file takes some time. A similar result with a faster
+compression you will get with (!KW [win_medium_compression]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!KW [win_medium_compression])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!ifset OldKeywords
+!begin_node (!kw [win_html_look])
+!html_name  cmd_win_html_look
+
+Use gray background for pages (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_html_look(!t)
+
+!item [(!DESCRIPTION)]
+The command (!KW [win_html_look]) does not exist any more. You can
+choose another background color with (!KW [win_backcolor])
+and another font with (!KW [win_propfont]) or (!KW [win_monofont]).
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.44
+
+!item [(!EXISTEDUNTIL)] Release~5 Patchlevel~12
+
+!item [(!SEEALSO)]
+(!KW [win_backcolor]), (!KW [win_propfont]), (!KW [win_monofont])
+
+!end_xlist
+
+!end_node
+!endif
+
+# = = = = =
+
+!begin_node (!kw [win_inline_bitmaps])
+!html_name  cmd_win_inline_bitmaps
+
+Use inline bitmaps (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_inline_bitmaps(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble of your source file UDO
+will use the RTF tag (!code [\bmcwd]) instead of (!code [\bmc])
+for displaying images. In this case you cannot use images larger than
+64~KB. Please read the HCP documentation to get more information
+about the differences between these two RTF tags.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [image])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [win_linkcolor])
+!html_name  cmd_win_linkcolor
+
+Set color of links (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_linkcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Sets the color that is used to display active links in WinHelp pages.
+If you use this command inside the preamble,
+this will be the default color for all
+pages including the table of contents.
+
+!item [(!SEEALSO)]
+(!KW [win_textcolor]), (!KW [win_backcolor])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [win_medium_compression])
+!html_name  cmd_medium_compression
+
+Compress WinHelp file (medium compression).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_medium_compression(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble the Microsoft Helpcompiler
+will compress the Windows Help file by about 40%. A better result
+with a slower compression you will get with (!KW [win_high_compression]).
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!KW [win_high_compression])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [win_monofont])
+!html_name  cmd_win_monofont
+
+Set name of monospaced font (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_monofont <fontname>(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can set the font that will be used to display
+preformatted text. The default is ""Courier New"".
+
+!item [(!EXAMPLE)]
+(!T)!/win_monofont Courier(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [win_propfont]), (!KW [win_monofont_size])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# ToDo: englisch
+!begin_node (!kw [win_monofont_size])
+!html_name  cmd_win_monofont_size
+
+Set monospaced font (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_monofont_size (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can set the font that will be used to display
+text inside a Windows Help hypertext. The default is 10pt.
+
+!item [(!EXAMPLE)]
+(!T)!/win_monofont_size 10(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [win_monofont])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [win_old_keywords])
+!html_name  cmd_old_keywords
+
+Create old keywords (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_old_keywords(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch inside the preamble,
+UDO will use the old method of creating keywords
+for WinHelp, that is using the name of the node, alias or label.
+
+!item [(!EXAMPLE)]
+(!T)!/win_old_keywords(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [mapping]), (!KW [win_helpid]), (!KW [use_auto_helpids])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [win_prefix_helpids])
+!html_name  cmd_win_prefix_helpids
+
+Prefix HelpIDs with text (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_prefix_helpids (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch in the preamble, every HelpID will be prefixed with ""(!TEXT)"".
+
+!item [(!EXAMPLE)]
+(!T)!/win_prefix_helpids UDO(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~13
+
+!item [(!SEEALSO)]
+(!KW [mapping]), (!KW [win_helpid]), (!KW [use_auto_helpids])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [win_propfont])
+!html_name  cmd_win_propfont
+
+Set proportional font (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_propfont <fontname>(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can set the font that will be used to display
+text inside a Windows Help hypertext. The default is ""Times New Roman"".
+
+!item [(!EXAMPLE)]
+(!T)!/win_propfont Arial(!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~12
+
+!item [(!SEEALSO)]
+(!KW [win_monofont]), (!KW [win_propfont_size])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+# ToDo: englisch
+!begin_node (!kw [win_propfont_size])
+!html_name  cmd_win_propfont_size
+
+Set proportional font (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_propfont_size (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+With this command you can set the font that will be used to display
+text inside a Windows Help hypertext. The default is 11pt.
+
+!item [(!EXAMPLE)]
+(!T)!/win_propfont_size 10(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [win_propfont])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [win_textcolor])
+!html_name  cmd_win_textcolor
+
+Specify the textcolor (WinHelp only).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/win_textcolor (!COLOR)|#FFFFFF(!t)
+
+!item [(!DESCRIPTION)]
+Sets the color that is used to display text in help pages.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [win_linkcolor]), (!KW [win_backcolor])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

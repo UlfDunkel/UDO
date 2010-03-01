@@ -1,0 +1,23 @@
+# Definition für WWW-Seiten (Internet-Links, d.h. extern)
+# Beispiel (!www [Name] [URL])
+# zuletzt geändert 03.08.2003
+
+!ifdest [html]
+!ifset ebene1
+!define ExternWWW &nbsp;<a href="(!1)"><img src="./bilder/extern.gif" alt="(!1)" border=0></A>
+!endif
+!ifset ebene2
+!define ExternWWW &nbsp;<a href="(!1)"><img src="../bilder/extern.gif" alt="(!1)" border=0></A>
+!endif
+!ifset ebene3
+!define ExternWWW &nbsp;<a href="(!1)"><img src="../../bilder/extern.gif" alt="(!1)" border=0></A>
+!endif
+!ifset ebene4
+!define ExternWWW &nbsp;<a href="(!1)"><img src="../../../bilder/extern.gif" alt="(!1)" border=0></A>
+!endif
+!macro www (!ExternWWW [(!2)])~(!url [(!1)] [(!2)])
+# <(!link [Internet-Link] [WWW_Link_Hinweise])>
+!else
+!macro www (!1) ((!2))
+# !macro www (!1) ((!link [Internet/WWW] [WWW_Link_Hinweise]): (!2))
+!endif

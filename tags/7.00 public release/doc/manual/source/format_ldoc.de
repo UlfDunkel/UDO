@@ -1,0 +1,65 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: Linuxdoc-SGML
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#   fd  Jun 08: etc. -> usw.
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#
+################################################################################
+
+!begin_node Linuxdoc-SGML
+!html_name  format_ldoc
+
+Dieses Format war mir bis Mitte März 1996 völlig unbekannt. Dann fand
+ich darüber einen Artikel in der Zeitschrift ""iX"", habe diesen kurz
+durchgelesen, habe mir das Archiv gesaugt, die Dokumentation
+durchgelesen (zu einer Installation ist es mangels Linux-Rechner nicht
+gekommen) und dieses Format binnen zwei Stunden eingebaut. Mangels
+Testmöglichkeiten war es mir nicht möglich, zu überprüfen, ob UDO
+richtiges Linuxdoc-SGML erzeugt, ich habe mich allerdings strikt an
+die Vorgaben des User's Guide gehalten.
+
+Linuxdoc-SGML ist genau wie UDO ein Multiformat-Konverter, das auch
+sein eigenes Format in (!LaTeX), Manualpage, RTF, HTML, Texinfo usw.
+umwandeln kann. Nicht ganz ohne Stolz möchte ich aber darauf
+hinweisen, dass UDO gegenüber Linuxdoc-SGML 1.5 leistungsfähiger und
+auch leichter zu begreifen ist. Allerdings kann sich das hier gesagte
+bei dem Entwicklungstempo, was man von der Linux-Szene kennt, sehr
+schnell ändern.
+
+!begin_description
+
+!item [Die xlist-Umgebung wird als description-Umgebung ausgegeben!?]
+Beim Linuxdoc-SGML-Format ist eine xlist-Umgebung nicht vorgesehen.
+Daher wird diese Umgebung hier als description-Umgebung behandelt,
+welche der xlist-Umgebung am ähnlichsten ist.
+
+!item [Linuxdoc-SGML bemängelt (!code [&Aring;])!?]
+Fügen Sie in der Datei (!file [/usr/lib/linuxdoc-sgml/rep/html/general])
+folgende Zeile ein:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+<!entity Aring sdata "&Aring;" >
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_description
+
+!end_node # Linuxdoc-SGML
+
+# === EOF ===

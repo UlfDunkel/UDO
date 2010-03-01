@@ -1,0 +1,63 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Charsets
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (extracted from charsets.ui)
+#   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: real quotation fixed
+# 2010:
+#   fd  Feb 24: rewritten for UDO v7
+#
+################################################################################
+
+!index Zeichensatz
+!index Sonderzeichen
+!label Codepages
+!label Codepage
+!label Code
+UDO unterstützt verschiedenste Codepages für verschiedenste Systeme. Nachfolgend sind alle derzeit unterstützten Systeme und Codepages mit z.T. mehreren Bezeichnern für die gleiche Codepage aufgeführt. Es spielt keine Rolle, ob Sie den Bezeichner in Groß- oder Kleinschreibung eingeben. (Die Bezeichner orientieren sich an den früheren UDO-Bezeichnern und denen, die das Unix-Kommando (!file [iconv]) unterstützt.)
+
+!begin_table [r|l|l]
+(!B)System(!b) !! (!B)Encoding(!b) !! (!B)Bezeichner(!b)
+!hline
+Unicode        !! UTF-8            !! UTF-8 UTF8
+!hline
+Windows        !! Codepage 1250    !! CP1250 MS-EE WINDOWS-1250
+               !! Codepage 1251    !! CP1251 MS-CYRL RUSSIAN WINDOWS-1251
+               !! Codepage 1252    !! CP1252 MS-ANSI WINDOWS-1252 WIN
+               !! Codepage 1253    !! CP1253 GREEK MS-GREEK WINDOWS-1253
+               !! Codepage 1254    !! CP1254 MS-TURK TURKISH WINDOWS-1254
+               !! Codepage 1255    !! CP1255 HEBREW MS-HEBR WINDOWS-1255
+               !! Codepage 1256    !! CP1256 ARABIC MS-ARAB WINDOWS-1256
+               !! Codepage 1257    !! CP1257 BALTIC WINBALTRIM WINDOWS-1257
+               !! Codepage 1258    !! CP1258 WINDOWS-1258
+!hline
+ISO            !! 8859-1           !! ISO-8859-1 ISO-IR-100 ISO8859-1 ISO_8859-1 LATIN1 L1 CSISOLATIN1
+               !! 8859-2           !! ISO-8859-2 ISO-IT-101 ISO8859-2 ISO_8859-2 LATIN2 L2 CSISOLATIN2
+!hline
+Apple          !! Mac Roman        !! MAC MACINTOSH MACROMAN CSMACINTOSH
+               !! Mac CentEuro     !! MAC_CE MACCENTRALEUROPE
+!hline
+Atari          !! TOS              !! ATARI ATARIST TOS
+!hline
+DOS            !! Codepage 437     !! 437 CP437 IBM437 CSPC8CODEPAGE437 DOS
+               !! Codepage 850     !! 850 CP850 IBM850 CSPC850MULTILINGUAL OS2
+!hline
+HP             !! Roman8           !! HP8 HP-ROMAN8 R8 ROMAN8 CSHPROMAN8
+!hline
+NeXTStep       !! NeXTStep         !! NEXT NEXTSTEP
+!end_table
+(!IMPORTANT) (!code [latin1]) aus früheren UDO-Dokumenten sollte angepasst werden, da UDO vor Version~7 hierfür die Windows-Codepage 1252 verwendete, seit Version~7 korrekterweise aber ISO-8859-1!
+
+# === EOF ===
