@@ -65,7 +65,7 @@ so müssen Sie stattdessen (!KP [((""!)!)])(!code [text])(!KP [((""!)!)]) angeben
 
 (!HINTS)
 
-!begin_enumerate
+!begin_enumerate !short
 !index (!kw [no_quotes])
 !item Die Umwandlung in typographische Anführungszeichen kann man durch
 den Schalter (!KW [no_quotes] [[~!!]]) im Vorspann ausschalten.

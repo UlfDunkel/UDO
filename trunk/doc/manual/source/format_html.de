@@ -163,7 +163,7 @@ keine langen Namen zulässt, Sie als Suffix (!code [.html]) vorgegeben haben
 und Sie diese Dateien dann auf einem Web-Server ablegen, so
 müssen Sie folgendes beachten:
 
-!begin_enumerate
+!begin_enumerate !short
 !item UDO versucht zwar, (!file [foo.html]) zu sichern, TOS und DOS sichern
 die Datei jedoch nur als (!file [foo.htm]).
 

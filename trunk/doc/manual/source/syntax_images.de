@@ -350,7 +350,7 @@ UDO erzeugt dann folgende RTF-Befehle:
 (!HINTS)
 
 !index Fehlermeldung
-!begin_enumerate
+!begin_enumerate !short
 !item UDO überprüft nicht, ob die angegebene Datei existiert. Bei einem
      falschen Dateinamen erhalten Sie also spätestens vom HC eine
      Fehlermeldung.

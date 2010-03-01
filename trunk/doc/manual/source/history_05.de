@@ -27,14 +27,14 @@ Was sich damals geändert hat, das dürfte heute niemanden mehr interessieren.
 !begin_description
 
 !item [Neue Formate:]
-   !begin_itemize
+   !begin_itemize !short
    !item Linuxdoc-SGML
    !item Turbo Vision Help
    !item Texinfo
    !end_itemize
 
 !item [Neue Befehle:]
-   !begin_itemize
+   !begin_itemize !short
    !item (!KW [alias])
    !item (!KW [begin_raw]), (!KW [end_raw])
          ermöglicht die Angabe größerer Blöcke Spezialbefehle für ein Format
@@ -78,7 +78,7 @@ Was sich damals geändert hat, das dürfte heute niemanden mehr interessieren.
    !end_itemize
    
 !item [Änderungen:]
-   !begin_itemize
+   !begin_itemize !short
    !item Ein Tabellensatz wurde implementiert. Tabellen können nun
          sehr einfach erstellt werden. Dabei kann man frei festlegen,
          wie Spalten ausgerichtet werden sollen und wo Linien
@@ -107,7 +107,7 @@ Was sich damals geändert hat, das dürfte heute niemanden mehr interessieren.
    !end_itemize
    
 !item [Syntaxänderungen:]
-   !begin_itemize
+   !begin_itemize !short
    !item Die speziellen Umgebungen, die mit (!I)!/begin_*(!i), (!I)!/else_*(!i) und
          (!I)!/end_*(!i) gebildet wurden, müssen nun durch die wesentlich
          flexibleren Kommandos (!KW [ifdest]), (!KW [else]) und (!KW [endif]) erstellt

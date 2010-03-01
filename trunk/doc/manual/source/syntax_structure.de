@@ -189,7 +189,7 @@ Unterinhaltsverzeichnis ausgegeben. Analog gilt dies für Abschnitte und
 
 (!HINTS)
 
-!begin_enumerate
+!begin_enumerate !short
 !item Bei der Ausgabe in HTML erfolgt die Ausgabe der Titelseite und
 des Inhaltsverzeichnisses in die Datei, deren Name Sie UDO in der
 Kommandozeile übergeben.
@@ -298,7 +298,7 @@ aufgeführt werden. Dazu benutzen Sie die Befehle
 
 (!HINTS)
 
-!begin_enumerate
+!begin_enumerate !short
 !item Kapitel, die nicht in Inhaltsverzeichnissen erscheinen, werden
 auch referenziert, werden aber nicht nummeriert.
 
@@ -358,7 +358,7 @@ A  Ein Kapitel
 
 (!HINTS)
 
-!begin_enumerate
+!begin_enumerate !short
 
 !item Der Anhang sollte ganz am Ende des Quelltextes stehen, sprich
 (!KW [end_appendix]) sollte das vorletzte Kommando vor (!KW [end_document])

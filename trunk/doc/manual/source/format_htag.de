@@ -26,7 +26,7 @@ HP-Helptag-SGML ist ein SGML-basiertes Hypertext-Hilfesystem für kommerzielle Un
 Weiterführende Informationen:
 !autoref [off]
 
-!begin_itemize
+!begin_itemize !short
 
 !item Common Desktop Environment (CDE) Help System: (!url [http://www.oasis-open.org/cover/gen-apps.html#cde] []) (allgemeiner Überblick, mit weiteren Links)
 

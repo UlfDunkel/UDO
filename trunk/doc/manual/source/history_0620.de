@@ -28,8 +28,7 @@
 !begin_description !short
 !item [(!CHANGES)]
    !begin_itemize !short
-   !item Bug #0000010 (!nl)
-         Im HTML-Code werden alle Zahlenangaben in Tags in "..." eingefasst.
+   !item Bug (!BUG [10]): Im HTML-Code werden alle Zahlenangaben in Tags in "..." eingefasst.
    !end_itemize
 
 !item [(!BUGFIXES)]

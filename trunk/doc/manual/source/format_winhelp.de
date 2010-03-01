@@ -50,7 +50,7 @@ Den Hypertext-Compiler (!file [HC31.EXE]) können Sie kostenlos vom FTP-Server vo
 !item [Warum will der HC einfach keine HLP-Datei erzeugen?]
 Dafür kann es zwei Gründe geben:
 
-!begin_enumerate
+!begin_enumerate !short
 
 !item Der UDO-Quelltext enthält Fehler. Schauen Sie sich also
 zunächst die Fehlermeldungen von UDO in der Datei mit dem Suffix 
@@ -64,6 +64,8 @@ die vom HC angelegt wird. Leider kann ich keine
 Hilfestellung zu den Fehlermeldungen des HC geben, da ich in den
 meisten Fällen selbst nicht weiss, was da schiefläuft.
 !end_enumerate
+
+!smallskip
 
 !item [Wofür ist die Datei mit dem Suffix .hpj?]
 UDO erzeugt automatisch eine zum Hypertext gehörende Projektdatei mit
@@ -96,7 +98,7 @@ Kapitels kennen.
 WinHelp erlaubt in Kontextstrings keine Sonderzeichen. UDO wandelt
 daher die Namen der Kapitel folgendermaßen in Kontext-strings um:
 
-!begin_enumerate
+!begin_enumerate !short
 !item Zunächst werden wie sonst auch Sonderzeichen durch die
 RTF-Schreibweise ersetzt.
 
@@ -107,7 +109,9 @@ Alphabets) werden durch Ihren hexadezimalen Wert in großer Schreibweise
 mit einem vorangehenden Unterstrich ersetzt.
 !end_enumerate
 
-Ein Beispiel:
+!smallskip
+
+(!EXAMPLE)
 
 (!EXAMPLE_BEGIN)
 !begin_verbatim
@@ -118,7 +122,7 @@ WinHelp: #{footnote # LaTeX_2DEinf_5C_27FChrung_Teil_1}
 
 Erläuterungen:
 
-!begin_enumerate
+!begin_enumerate !short
 !item Das Minuszeichen entspricht ASCII ""0x2D"", daher wird es durch
 ""_2D"" ersetzt.
 
@@ -126,7 +130,7 @@ Erläuterungen:
 ""(!code [\'FC])."" ""\"" entspricht ""0x5C"", wird also durch ""_5C""
 ersetzt. ""'"" entspricht ""0x27"", wird also durch ""_27"" ersetzt.
 
-!item Die Leerzeichen werden durch ""_"" ersetzt.
+!item Die Leerzeichen werden durch ""_"" ersetzt. (!nl) (!nl)
 !end_enumerate
 
 Sie sehen, dass aus einem ""ü"" die ziemlich lange Zeichenfolge

@@ -70,8 +70,8 @@ Die Umsetzung im Detail:
 
 (!HINT)
 
-In einem Label sollte man keine Sonderzeichen, Kommata, Semikolons,
-Anführungsstriche oder Apostrophe benutzen, da dies bei einigen 
+Verwenden Sie in einem Label keine Sonderzeichen, Kommata, Semikolons,
+Anführungsstriche oder Apostrophe, da dies bei einigen 
 Ausgabeformaten zu Problemen führen kann. Umlaute und Ziffern hingegen sind unproblematisch, da
 diese von UDO besonders beachtet werden.
 
@@ -139,7 +139,7 @@ zur UDO-Gemeinde verwiesen wird:
 
 (!HINTS)
 
-!begin_enumerate
+!begin_enumerate !short
 !item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
       diese Zahl überschritten, gibt UDO eine Fehlermeldung aus, dass 
       der Link nicht ersetzt werden konnte. (!nl)
@@ -178,7 +178,7 @@ behandelt:
 
 (!HINTS)
 
-!begin_enumerate
+!begin_enumerate !short
 !item UDO überprüft nicht, ob die Grafiken existieren.
 
 !index (!kw [html_img_suffix])
@@ -220,7 +220,7 @@ Sie unsere Kontaktinformationen finden.
 
 (!HINTS)
 
-!begin_enumerate
+!begin_enumerate !short
 !item Bei (!LaTeX) kann man nur auf Labels, nicht auf Kapitel verweisen.
 
 !item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
@@ -289,7 +289,7 @@ HTML-Datei.
 
 (!HINTS)
 
-!begin_enumerate
+!begin_enumerate !short
 !item Für WinHelp muss man gültige Topicnamen und Dateinamen angeben.
       Der HCP akzeptiert in Topicnamen nur Buchstaben, Ziffern und den
       Unterstrich. Andere Zeichen werden von UDO angepasst!
