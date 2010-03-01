@@ -29,59 +29,48 @@ Bevor Sie mit dem Schreiben eines UDO-Quelltextes beginnen, werfen Sie
 bitte einen Blick auf die folgenden Regeln und prägen Sie sie sich
 ein:
 
-!begin_enumerate
-!item (!B)Geben Sie Ihrem Text eine übersichtliche Struktur.(!b)
+!begin_description
+!item [1. Geben Sie Ihrem Text eine übersichtliche Struktur.]
+      Eine weiser Zeitgenosse sagte mal: ""Wenn etwas einfach ausgedrückt werden kann, kann es einfach ausgedrückt werden.""
+      
 
-!hline
-
-!item (!B)Sprechen Sie die Leserinnen und Leser direkt an.(!b)
-
+!item [2. Sprechen Sie die Leserinnen und Leser direkt an.]
       Verwenden Sie ""Sie können !.."" bzw. ""Du kannst"" anstatt ""Man kann !.."".
 
-!hline
 
-!item (!B)Benutzen Sie Schriftarten sparsam und einheitlich.(!b)
+!item [3. Benutzen Sie Schriftarten sparsam und einheitlich.]
+      Der übermäßige Einsatz von (!I)kursivem,(!i) (!B)fettem(!b) und (!U)unterstrichenem(!u) Text
+      verwirrt Leser eher, als das er ihnen hilft. Falls Sie
+      Schriftarten einsetzen, tun Sie dies allerdings einheitlich.
 
-Der übermäßige Einsatz von (!I)kursivem,(!i) (!B)fettem(!b) und (!U)unterstrichenem(!u) Text
-verwirrt Leser eher, als das er ihnen hilft. Falls Sie
-Schriftarten einsetzen, tun Sie dies allerdings einheitlich.
 
-!hline
+!item [4. Fassen Sie sich so kurz wie möglich.]
+      Holen Sie nicht zu weit aus, sondern kommen Sie möglichst schnell
+      auf den Punkt. Leser langweilen sich sonst oder werden 
+      unkonzentriert und überlesen womöglich noch die wichtigen
+      Stellen.
 
-!item (!B)Fassen Sie sich so kurz wie möglich.(!b)
+      Okay, wir schaffen es meistens auch nicht, uns kurz zu fassen, wie dieser Text zeigt. (!grin)
+      
 
-Holen Sie nicht zu weit aus, sondern kommen Sie möglichst schnell
-auf den Punkt. Leser langweilen sich sonst oder werden 
-unkonzentriert und überlesen womöglich noch die wichtigen
-Stellen.
+!item [5. Verwenden Sie kurze Kapitelüberschriften.]
+      Leser werden dann das gewünschte Kapitel beim Überfliegen des
+      Inhaltsverzeichnisses schneller (wieder)finden. Außerdem nehmen
+      Sie UDO dadurch eine Menge Arbeit bei der Referenzierung ab, was
+      durch eine schnellere Umwandlung belohnt wird.
 
-Okay, wir schaffen es meistens auch nicht, uns kurz zu fassen, wie dieser Text zeigt. (!grin)
 
-!hline
+!item [6. Vermeiden Sie gleichnamige Überschriften.]
+      Nicht nur dass Sie damit UDO und Hypertext-Compiler verwirren,
+      nein, auch die Leser geraten bei gleichnamigen Kapiteln durcheinander.
 
-!item (!B)Verwenden Sie kurze Kapitelüberschriften.(!b)
 
-Leser werden dann das gewünschte Kapitel beim Überfliegen des
-Inhaltsverzeichnisses schneller (wieder)finden. Außerdem nehmen
-Sie UDO dadurch eine Menge Arbeit bei der Referenzierung ab, was
-durch eine schnellere Umwandlung belohnt wird.
+!item [7. Gehen Sie sparsam mit Makros und Definitionen um.]
+      UDO muss jede Zeile bis zu zweimal nach allen benutzten Makros und
+      Definitionen durchsuchen. Jedes zusätzliche Makro und jede
+      zusätzliche Definition verlangsamen den Umwandlungsvorgang. Wägen Sie selbst ab zwischen Tempo und Komfort.
 
-!hline
-
-!item (!B)Vermeiden Sie gleichnamige Überschriften.(!b)
-
-Nicht nur dass Sie damit UDO und Hypertext-Compiler verwirren,
-nein, auch die Leser geraten bei gleichnamigen Kapiteln durcheinander.
-
-!hline
-
-!item (!B)Gehen Sie sparsam mit Makros und Definitionen um.(!b)
-
-UDO muss jede Zeile bis zu zweimal nach allen benutzten Makros und
-Definitionen durchsuchen. Jedes zusätzliche Makro und jede
-zusätzliche Definition verlangsamen den Umwandlungsvorgang. Wägen Sie selbst ab zwischen Tempo und Komfort.
-
-!end_enumerate
+!end_description
 
 !end_node # Sieben goldene Regeln beim Schreiben von Quelltexten
 
