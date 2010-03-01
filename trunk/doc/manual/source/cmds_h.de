@@ -35,67 +35,12 @@
 #   fd  Dec 15: chapter html_navigation enhanced
 # 2010:
 #   fd  Jan 20: chapter html_quotes introduced
+#   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #
 ################################################################################
 
 !begin_node H!..
 !html_name  cmds_h
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [=htag])
-!html_name  cmd_htag-eq
-
-Abfrage des Ausgabeformates.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/=htag (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[htag!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [=html])
-!html_name  cmd_html-eq
-
-Abfrage des Ausgabeformates.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/=html (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[html!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -435,34 +380,6 @@ waagerechte Linien auszugeben.
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kw [htag])
-!html_name  cmd_htag
-
-Abfrage des Ausgabeformates.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/htag (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[htag!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 !begin_node (!kw [htag_img_suffix])
 !html_name  cmd_htag_img_suffix
 
@@ -495,34 +412,6 @@ Grafikformate nichts im Wege steht.
 (!EXAMPLE_END)
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [html])
-!html_name  cmd_html
-
-Abfrage des Ausgabeformates.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/html (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[html!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -1058,93 +947,6 @@ angegeben werden. (!FILESPACEQUOTE)
 (!EXAMPLE_END)
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [html_frames_column_color])
-!html_name  cmd_html_frames_column_color
-
-Setzen der Hintergrundfarbe für linken Rahmen (nur HTML).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/html_frames_column_color (!COLOR)(!t)
-
-!item [(!DESCRIPTION)]
-Dieser Befehl existierte nur in einer der Beta-Versionen und heißt nun (!KW [html_frames_backcolor]).
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~4
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~9
-
-!item [(!SEEALSO)]
-(!KW [html_frames_backcolor])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [html_frames_column_image])
-!html_name  cmd_html_frames_column_image
-
-Setzen des Hintergrundbildes für den linken Rahmen (nur HTML).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/html_frames_column_image (!FILE)(!t)
-
-!item [(!DESCRIPTION)]
-Dieser Befehl existierte nur in einer der Beta-Versionen und heißt nun (!KW [html_frames_backimage]).
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~4
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~9
-
-!item [(!SEEALSO)]
-(!KW [html_frames_backimage])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [html_frames_column_width])
-!html_name  cmd_html_frames_column_width
-
-Breite des Rahmens beim Frames-Layout bestimmen (nur HTML).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/html_frames_column_width <breite>(!t)
-
-!item [(!DESCRIPTION)]
-Dieser Befehl existierte nur in einer der Beta-Versionen und heißt nun (!KW [html_frames_width]).
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~4
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~9
-
-!item [(!SEEALSO)]
-(!KW [html_frames_width])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -1917,93 +1719,6 @@ angegeben werden. (!FILESPACEQUOTE)
 (!EXAMPLE_END)
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [html_modern_column_color])
-!html_name  cmd_html_modern_color
-
-Setzen der Hintergrundfarbe beim ""modernen"" Layout (nur HTML).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/html_modern_column_color (!COLOR)(!t)
-
-!item [(!DESCRIPTION)]
-Dieser Befehl existierte nur in einer der Beta-Versionen und heißt nun (!KW [html_modern_backcolor]).
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~3
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~9
-
-!item [(!SEEALSO)]
-(!KW [html_modern_backcolor])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [html_modern_column_image])
-!html_name  cmd_html_modern_column_image
-
-Setzen des Hintergrundbildes beim ""modernen"" Layout (nur HTML).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/html_modern_column_image (!FILE)(!t)
-
-!item [(!DESCRIPTION)]
-Dieser Befehl existierte nur in einer der Beta-Versionen und heißt nun (!KW [html_modern_backimage]).
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~4
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~9
-
-!item [(!SEEALSO)]
-(!KW [html_modern_backimage])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [html_modern_column_width])
-!html_name  cmd_html_modern_column_width
-
-Breite der linken Spalte beim ""modernen"" Layout bestimmen (nur HTML).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/html_modern_column_width <breite>(!t)
-
-!item [(!DESCRIPTION)]
-Dieser Befehl existierte nur in einer der Beta-Versionen und heißt nun (!KW [html_modern_width]).
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~3
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~9
-
-!item [(!SEEALSO)]
-(!KW [html_modern_width])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -2813,36 +2528,6 @@ Donau&shy;dampf&shy;schiff&shy;fahrts&shy;kapitäns&shy;mütze Donau&shy;dampf&shy
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kw [html_use_xlist])
-!html_name  cmd_html_use_xlist
-
-xlist-Umgebung wie bei ASCII ausgeben (nur HTML)
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/html_use_xlist(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [use_xlist] [[html!!]]).
-
-!item [(!EXISTSSINCE)] Release~4 Version~0.47
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~1
-
-!item [(!SEEALSO)]
-(!KW [use_xlist])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 !begin_node (!kw [html_verbatim_backcolor])
 !html_name  cmd_html_verbatim_backcolor
 
@@ -2888,64 +2573,6 @@ Setzt die Farbe, die benutzt wird, um in HTML-Seiten Links darzustellen, die ber
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [htmlkeywords])
-!html_name  cmd_htmlkeywords
-
-HTML-Meta-Keywords setzen.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/htmlkeywords (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-Dieses Kommando wurde umbenannt in (!KW [html_keywords]).
-
-!item [(!EXISTSSINCE)] Release~5 Patchlevel~3
-
-!item [(!EXISTEDUNTIL)] Release~5 Patchlevel~13
-
-!item [(!SEEALSO)]
-(!KW [html_keywords])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [htmlname])
-!html_name  cmd_htmlname
-
-Dateinamen zuweisen (nur HTML).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/htmlname (!FILE)(!t)
-
-!item [(!DESCRIPTION)]
-Dieser Befehl existiert nicht mehr und wurde umbenannt in (!KW [html_name]).
-
-!item [(!EXISTSSINCE)] Release~4 Version~0.37
-
-!item [(!EXISTEDUNTIL)] Release~5 Patchlevel~13
-
-!item [(!SEEALSO)]
-(!KW [html_name])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 

@@ -32,39 +32,13 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 16: html_name no longer uses CAPITAL letters
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #
 ################################################################################
 
 !begin_node I!..
 !html_name  cmds_i
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [=info])
-!html_name  cmd_info-eq
-
-Abfrage des Ausgabeformates.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/=info (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[info!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -940,35 +914,6 @@ Bei allen anderen Formaten wird der eingefügte Text ohne besondere Kennzeichen g
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kkw [image])
-!html_name  cmd_image()
-
-Grafik ausgeben.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)(!/image [(!FILE)] [(!TEXT)])(!t)
-
-!item [(!DESCRIPTION)]
-Dieser Befehl wurde umbenannt in (!KKW [img]).
-
-!item [(!EXISTSSINCE)] Release~4 Version~0.41
-
-!item [(!EXISTEDUNTIL)] Release~4 Version~0.48
-
-!item [(!SEEALSO)]
-(!link [Bilder] [Bilder]), (!KKW [img])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 !begin_node (!kw [image])
 !html_name  cmd_image
 
@@ -1295,34 +1240,6 @@ Kapitel aufgelistet, in denen (!KW [index]) benutzt wurde.
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kw [info])
-!html_name  cmd_info
-
-Abfrage des Ausgabeformates.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/info (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[info!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 !begin_node (!kw [input])
 !html_name  cmd_input
 
@@ -1359,37 +1276,6 @@ dem Verzeichnis, welches durch die Umgebungsvariable
 (!EXAMPLE_END)
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [italian])
-!html_name  cmd_italian
-
-Sprache setzen.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/italian(!t)
-
-!item [(!DESCRIPTION)]
-# Der Befehl (!KW [italian]) existiert nicht mehr.
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [language] [[italian!!]]).
-
-!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~1
-
-!item [(!SEEALSO)]
-(!KW [language])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 

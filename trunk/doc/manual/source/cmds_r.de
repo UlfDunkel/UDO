@@ -22,39 +22,13 @@
 #   fd  Jun 09: VALUE macro enhanced
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #
 ################################################################################
 
 !begin_node R!..
 !html_name  cmds_r
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [=rtf])
-!html_name  cmd_rtf-eq
-
-Abfrage des Ausgabeformates.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/=rtf (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[rtf!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -240,34 +214,6 @@ dazu, spezielle Formatbefehle einzubinden. (!FILESPACEQUOTE)
 (!EXAMPLE_END)
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [rtf])
-!html_name  cmd_rtf
-
-Abfrage des Ausgabeformates.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/rtf (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[rtf!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 

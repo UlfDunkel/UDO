@@ -22,6 +22,8 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 16: html_name no longer uses CAPITAL letters
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #
 ################################################################################
 
@@ -847,131 +849,6 @@ Tabellenlinien für WinHelp und IPF erzeugen.
 
 !end_node
 
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [no_toc_subnodes])
-!html_name  cmd_no_toc_subnodes
-
-Im Inhaltsverzeichnis keine Subnodes auflisten.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/no_toc_subnodes [(!FORMAT)](!t)
-
-!item [(!DESCRIPTION)]
-Dieser Schalter dient zur Unterdrückung der Ausgabe
-von Subnodes und der tieferen Gliederungsebenen im
-Inhaltsverzeichnis. Das Beispiel zeigt, wie man die
-Auflistung beim WinHelp-Format unterdrücken kann.
-(!KW [no_toc_subnodes]) ist funktionsgleich mit (!KW [use_short_tocs]).
-
-Eine andere Möglichkeit, die Tiefe der Ausgabe des
-Inhaltsverzeichnisses zu beeinflussen, ist die Verwendung
-des Parameters (!KW [depth]) bei (!KW [toc]).
-
-!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [tableofcontents]), (!KW [toc]), (!KW [depth]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
-
-!end_xlist
-
-(!EXAMPLE)
-(!EXAMPLE_BEGIN)
-!begin_verbatim
-!no_toc_subnodes [win]
-!end_verbatim
-(!EXAMPLE_END)
-
-!end_node
-!endif
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [no_toc_subsubnodes])
-!html_name  cmd_no_toc_subsubnodes
-
-Im Inhaltsverzeichnis keine Unterabschnitte auflisten.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/no_toc_subsubnodes [(!FORMAT)<](!t)
-
-!item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann benutzt, werden
-bei den angegebenen Formaten im Inhaltsverzeichnis
-keine Unterabschnitte und Pragraphen aufgelistet.
-
-Eine andere Möglichkeit, die Tiefe der Ausgabe des
-Inhaltsverzeichnisses zu beeinflussen, ist die Verwendung
-des Parameters (!KW [depth]) bei (!KW [toc]).
-
-!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [tableofcontents]), (!KW [toc]), (!KW [depth]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
-
-!end_xlist
-
-(!EXAMPLE)
-(!EXAMPLE_BEGIN)
-!begin_verbatim
-!no_toc_subsubnodes [win,stg,html]
-!end_verbatim
-(!EXAMPLE_END)
-
-!end_node
-!endif
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [no_toc_subsubsubnodes])
-!html_name  cmd_no_toc_subsubsubnodes
-
-Im Inhaltsverzeichnis keine Paragraphen auflisten.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/no_toc_subsubsubnodes [(!FORMAT)](!t)
-
-!item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann benutzt, werden
-bei den angegebenen Formaten im Inhaltsverzeichnis
-keine Pragraphen aufgelistet.
-
-Eine andere Möglichkeit, die Tiefe der Ausgabe des
-Inhaltsverzeichnisses zu beeinflussen, ist die Verwendung
-des Parameters (!KW [depth]) bei (!KW [toc]).
-
-!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [tableofcontents]), (!KW [toc]), (!KW [depth]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
-
-!end_xlist
-
-(!EXAMPLE)
-(!EXAMPLE_BEGIN)
-!begin_verbatim
-!no_toc_subsubsubnodes [win,stg,html]
-!end_verbatim
-(!EXAMPLE_END)
-
-!end_node
-!endif
 # = = = = =
 
 !begin_node (!kw [no_umlaute])

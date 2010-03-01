@@ -45,6 +45,7 @@
 !include cmds_y.de
 !include cmds_z.de
 !include cmds__.de
+!include cmds__old.de
 !endif
 !iflang [english]
 !include cmds_a.en

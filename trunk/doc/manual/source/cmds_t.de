@@ -26,39 +26,13 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 16: html_name no longer uses CAPITAL letters
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #
 ################################################################################
 
 !begin_node T!..
 !html_name  cmds_t
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [=tex])
-!html_name  cmd_tex-eq
-
-Abfrage des Ausgabeformates.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/=tex (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[tex!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -395,34 +369,6 @@ Benutzt man 0 als (!VALUE), wandelt UDO die Tabulatoren nicht um.
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kw [tex])
-!html_name  cmd_tex
-
-Abfrage des Ausgabeformates.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/tex (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[tex!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Formatspezifische Befehle] [Formatspezifische Befehle]), (!link [raw-Umgebung] [raw-Umgebung])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 !begin_node (!kkw [teal])
 !html_name  cmd_teal
 
@@ -509,35 +455,6 @@ bei der Umwandlung von (!KK1 [B]).
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [tex_book])
-!html_name  cmd_tex_book
-
-Zieldatei als ""Buch"" ausgeben.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/tex_book(!t)
-
-!item [(!DESCRIPTION)]
-# Der Befehl (!KW [tex_book]) existiert nicht mehr.
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [use_style_book] [[tex!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~4 Version~0.47
-
-!item [(!SEEALSO)]
-(!KW [use_style_book])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -724,34 +641,6 @@ benutzt. Als Standardzeichen benutzt UDO ""(!code[+])"".
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kw [title])
-!html_name  cmd_title
-
-Dokumenttitel definieren.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/title (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [docinfo] [[title!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [maketitle]), (!KW [docinfo]), (!link [Titelseite] [Titelseite])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 !begin_node (!kkw [tm])
 !html_name  cmd_tm()
 
@@ -917,34 +806,6 @@ Grafik einbinden. Zugleich wird ein Link auf den Seitenanfang erzeugt.
 (!EXAMPLE_END)
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [town])
-!html_name  cmd_town
-
-Wohnort des Autors für den Adressblock der Titelseite setzen.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/town (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [docinfo] [[address!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [maketitle]), (!KW [docinfo]), (!link [Titelseite] [Titelseite])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 

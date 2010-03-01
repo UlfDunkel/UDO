@@ -11,8 +11,7 @@
 # ------------------------------------------------------------------------------
 # Notes:
 #    This file contains the command index (in alphabetical order).
-#    Output for commands which are no longer existing will be created 
-#    only if 'OldKeywords' was set.
+# 
 # ------------------------------------------------------------------------------
 # 
 # History
@@ -26,6 +25,8 @@
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: CHAR macro enhanced
 #   fd  Jun 09: VALUE macro introduced
+# 2010:
+#   fd  Mar 01: old commands can be found in cmds__old.de now
 #
 ################################################################################
 
@@ -49,9 +50,10 @@ beschrieben, was die Beschreibungen bedeuten.
 A!.. !! B!.. !! C!.. !! D!.. !! E!.. !! F!.. !! G!..
 H!.. !! I!.. !! J!.. !! K!.. !! L!.. !! M!.. !! N!.. 
 O!.. !! P!.. !! Q!.. !! R!.. !! S!.. !! T!.. !! U!..
-V!.. !! W!.. !! X!.. !! Y!.. !! Z!..
-*!..
+V!.. !! W!.. !! X!.. !! Y!.. !! Z!.. !! *!..
 !end_table
+
+[Veraltete Kommandos]
 
 !medskip
 

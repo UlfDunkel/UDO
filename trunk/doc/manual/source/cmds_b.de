@@ -22,6 +22,8 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 16: html_name no longer uses CAPITAL letters
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #
 ################################################################################
 
@@ -176,36 +178,6 @@ Leitet den Anhang ein. Kapitel werden im Anhang mit Buchstaben gekennzeichnet. U
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [begin_asc])
-!html_name  cmd_begin_asc
-!label !/else_asc
-!label !/end_asc
-
-Abfrage des Ausgabeformates.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/begin_asc(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-!include history_begin_asc_de.ui
-
-!item [(!EXISTEDUNTIL)] Release~4 Version~0.41
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [else]), (!KW [endif])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -848,37 +820,6 @@ verbatim-(!nolink [Umgebungen]) vorgesehen sind, wie z.B. (!KW [verbatimsize]) u
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [begin_stg])
-!html_name  cmd_begin_stg
-!label !/else_stg
-!label !/end_stg
-
-Abfrage des Ausgabeformates.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/begin_stg(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-
-!include history_begin_asc_de.ui
-
-!item [(!EXISTEDUNTIL)] Release~4 Version~0.41
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [else]), (!KW [endif])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
