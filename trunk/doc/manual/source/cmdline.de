@@ -130,7 +130,7 @@ lange Dateinamen zu erzeugen (Suffix (!file [.html]) anstatt (!file [.htm])).
 !item [-o F, (--)outfile F]  UDO schreibt seine Ausgaben in die Datei namens ""F"".
 Mit (!code [-o]) wird als Ausgabedateiname der Name der Quelldatei plus neuer Extension verwendet (z.B. (!file [file.u]) wird zu (!file [file.stg])).
 
-!item [-p, (--)pchelp] Die (!file [Quelldatei]) wird ins Pure-C-Help-Quelltextformat umgewandelt.
+!item [-p, (--)pchelp] Die (!file [Quelldatei]) wird ins Pure-C-Hilfe-Quelltextformat umgewandelt.
 
 !item [-P, (--)pascal] Die (!file [Quelldatei]) wird in Pascal-Sourcecode
 umgewandelt. Normaler Text wird Kommentar, der Inhalt der Sourcecode-Umgebung wird C-Code.
@@ -234,7 +234,7 @@ mit dem Befehl (!KW [input]) eingebunden werden.
 
 # = = = = =
 
-!subheading Exit Status
+!subheading Exit-Status
 
 !begin_xlist [>0] !short
 !item [0] Alles in Ordnung.

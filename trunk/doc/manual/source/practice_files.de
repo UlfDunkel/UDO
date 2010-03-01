@@ -39,7 +39,7 @@ Es folgt eine Auflistung der Dateisuffixe, die Ihnen beim Umgang mit UDO über de
 !item [(!file [.lyx])]    LyX-Format
 !item [(!file [.pas])]    Pascal-Quelltext
 !item [(!file [.rtf])]    RTF bzw. WinHelp- oder QuickView-Quelltext
-!item [(!file [.scr])]    Pure-C-Help-Quelltext
+!item [(!file [.scr])]    Pure-C-Hilfe-Quelltext
 !item [(!file [.sgm(l!)])] Linuxdoc-SGML-Quelltext
 !item [(!file [.stg])]    ST-Guide-Quelltext
 !item [(!file [.txt])]    Turbo-Vision-Help-Quelltext
@@ -51,7 +51,7 @@ Dateien mit dem Suffix (!file [.ul?]) enthalten die Fehlermeldungen und
 Informationen, die UDO während der Umwandlung erzeugt.
 
 Dateien mit dem Suffix (!file [.uh?]) enthalten die Trennvorschläge für das
-ASCII-, ST-Guide- und Pure-C-Help-Format.
+ASCII-, ST-Guide- und Pure-C-Hilfe-Format.
 
 Dateien mit dem Suffix (!file [.ut?]) enthalten den ""Include-Tree"", also den
 logischen Aufbau aus Include-Dateien Ihres Quelltextes.
@@ -63,7 +63,7 @@ Klammerinhalt) weiterbearbeiten:
 !begin_xlist [.www]
 !item [(!file [.err])] Protokolldatei des WinHelp-Compilers ((!file [HC.EXE]))
 !item [(!file [.h])]   C-Header-Datei für Turbo-Vision ((!file [TVHC.EXE]))
-!item [(!file [.hlp])] WinHelp-Datei ((!file [HC.EXE])), Turbo-Vision-Help-Datei ((!file [TVHC.EXE])), Pure-C-Help-Datei ((!file [HC.PRG]))
+!item [(!file [.hlp])] WinHelp-Datei ((!file [HC.EXE])), Turbo-Vision-Help-Datei ((!file [TVHC.EXE])), Pure-C-Hilfe-Datei ((!file [HC.PRG]))
 !item [(!file [.hyp])] ST-Guide-Hypertext ((!file [HCP.TTP]))
 !item [(!file [.ref])] ST-Guide-Referenzdatei ((!file [HCP.TTP]))
 !end_xlist
