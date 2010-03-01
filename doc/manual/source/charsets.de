@@ -23,9 +23,10 @@
 
 !index Zeichensatz
 !index Sonderzeichen
+!label Codepages
 !label Codepage
 !label Code
-UDO unterstützt verschiedenste Codepages für verschiedenste Systeme. Nachfolgend sind alle derzeit unterstützten Systeme und Codepages mit z.T. mehreren Bezeichnern für die gleiche Codepage aufgeführt. Es spielt keine Rolle, ob Sie den Bezeichner in Groß- oder Kleinschreibung eingeben. (Die Bezeichner orientieren sich an den früheren UDO-Bezeichnern und denen, die das Unix-Kommando (!C)iconv(!c) unterstützt.)
+UDO unterstützt verschiedenste Codepages für verschiedenste Systeme. Nachfolgend sind alle derzeit unterstützten Systeme und Codepages mit z.T. mehreren Bezeichnern für die gleiche Codepage aufgeführt. Es spielt keine Rolle, ob Sie den Bezeichner in Groß- oder Kleinschreibung eingeben. (Die Bezeichner orientieren sich an den früheren UDO-Bezeichnern und denen, die das Unix-Kommando (!file [iconv]) unterstützt.)
 
 !begin_table [r|l|l]
 (!B)System(!b) !! (!B)Encoding(!b) !! (!B)Bezeichner(!b)
@@ -57,7 +58,6 @@ HP             !! Roman8           !! HP8 HP-ROMAN8 R8 ROMAN8 CSHPROMAN8
 !hline
 NeXTStep       !! NeXTStep         !! NEXT NEXTSTEP
 !end_table
-
 (!IMPORTANT) (!code [latin1]) aus früheren UDO-Dokumenten sollte angepasst werden, da UDO vor Version~7 hierfür die Windows-Codepage 1252 verwendete, seit Version~7 korrekterweise aber ISO-8859-1!
 
 # === EOF ===
