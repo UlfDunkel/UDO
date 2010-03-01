@@ -28,39 +28,13 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 16: html_name no longer uses CAPITAL letters
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #
 ################################################################################
 
 !begin_node I!..
 !html_name  cmds_i
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [=info])
-!html_name  cmd_info-eq
-
-Query the destination format.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/=info (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[info!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -861,35 +835,6 @@ geschrieben.
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kkw [image])
-!html_name  cmd_image()
-
-Output inline images.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)(!/image [(!FILE)] [(!TEXT)])(!t)
-
-!item [(!DESCRIPTION)]
-This command has been renamed to (!KKW [img]).
-
-!item [(!EXISTSSINCE)] Release~4 Version~0.41
-
-!item [(!EXISTEDUNTIL)] Release~4 Version~0.48
-
-!item [(!SEEALSO)]
-(!link [Images] [Images]), (!KKW [img])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 !begin_node (!kw [image])
 !html_name  cmd_image
 
@@ -1172,34 +1117,6 @@ word. You can use this command as many times as you like
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kw [info])
-!html_name  cmd_info
-
-Query the destination format.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/info (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[info!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 !begin_node (!kw [input])
 !html_name  cmd_input
 
@@ -1235,37 +1152,6 @@ defined by the environment variable (!file [$UDOINPUTPATH]).
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [italian])
-!html_name  cmd_italian
-
-Define language.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/italian(!t)
-
-!item [(!DESCRIPTION)]
-# Der Befehl (!KW [italian]) existiert nicht mehr.
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [language] [[italian!!]]).
-
-!item [(!EXISTSSINCE)] Release~5 Patchlevel~8
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~1
-
-!item [(!SEEALSO)]
-(!KW [language])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 

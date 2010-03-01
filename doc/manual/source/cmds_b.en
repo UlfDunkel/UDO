@@ -21,6 +21,8 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 16: html_name no longer uses CAPITAL letters
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #
 ################################################################################
 
@@ -170,36 +172,6 @@ supports only (!I)one(!i) appendix per source file!
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [begin_asc])
-!html_name  cmd_begin_asc
-!label !/else_asc
-!label !/end_asc
-
-Query the destination format.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/begin_asc(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-!include history_begin_asc_en.ui
-
-!item [(!EXISTEDUNTIL)] Release~4 Version~0.41
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [else]), (!KW [endif])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -872,37 +844,6 @@ environment that is used inside a quote environment.
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [begin_stg])
-!html_name  cmd_begin_stg
-!label !/else_stg
-!label !/end_stg
-
-Query the destination format.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/begin_stg(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-
-!include history_begin_asc_en.ui
-
-!item [(!EXISTEDUNTIL)] Release~4 Version~0.41
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [else]), (!KW [endif])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 

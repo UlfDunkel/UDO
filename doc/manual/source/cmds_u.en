@@ -26,6 +26,8 @@
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 16: html_name no longer uses CAPITAL letters
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #
 ################################################################################
 
@@ -60,34 +62,6 @@ Text styles, (!link [Text styling] [Text styling])
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [udoinfo])
-!html_name  cmd_udoinfo
-
-Include information page.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/udoinfo](!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [use_about_udo]).
-
-!item [(!EXISTEDUNTIL)] Release~4 Version~0.48
-
-!item [(!SEEALSO)]
-(!KW [use_about_udo])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -567,37 +541,6 @@ support justification.
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kw [use_justified])
-!html_name  cmd_use_justified
-
-Turn on justification.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/use_justified [(!FORMAT)](!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [use_justification])
-# Dieser Befehl existiert nicht mehr und wurde umbenannt in (!KW [use_justification]).
-
-!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~0
-
-!item [(!SEEALSO)]
-(!KW [use_justification])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 !begin_node (!kw [use_label_inside_index])
 !html_name  cmd_use_label_inside_index
 
@@ -916,37 +859,6 @@ index references or labels are not listed in the index.
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [use_xlist])
-!html_name  cmd_use_xlist
-
-Output xlist environment like in ASCII.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/use_xlist [(!FORMAT)](!t)
-
-!item [(!DESCRIPTION)]
-Because the output of an xlist environment in HTML format is very complicated, these
-environments are handled like description environments by default.
-Use this switch inside the preamble to display xlist environments
-like in ASCII and with the use of the preformatted tag.
-
-!item [(!EXAMPLE)]
-(!T)!/use_xlist [html](!t)
-
-!item [(!SEEALSO)]
-(!link [Lists] [Lists]), (!link [Descriptions] [Descriptions])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 

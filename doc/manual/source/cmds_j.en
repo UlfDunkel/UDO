@@ -17,40 +17,15 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #
 ################################################################################
 
 !begin_node J!..
 !html_name  cmds_j
 
-!ifset OldKeywords
-!begin_node (!kw [jumpid])
-!html_name  cmd_jumpid
-
-Assign a Help-ID (WinHelp only).
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/jumpid (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-This command only existed in a beta version and has been renamed to (!KW [win_helpid]).
-
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~2
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~8
-
-!item [(!SEEALSO)]
-(!KW [win_helpid])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
+(no entries)
 
 !end_node
 

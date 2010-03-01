@@ -26,39 +26,13 @@
 #   fd  Jun 16: html_name no longer uses CAPITAL letters
 #   fd  Jun 16: great review session #1
 #   fd  Aug 17: 'information' never used in plural in English!
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #
 ################################################################################
 
 !begin_node D!..
 !html_name  cmds_d
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [date])
-!html_name  cmd_date
-
-Datumsinformation für Titelseite setzen.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/date (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [docinfo] [[date!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [maketitle]), (!KW [docinfo]), (!link [Title page] [Title page])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -461,34 +435,6 @@ der Dokumentation zu den pdfmarks.
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [drc])
-!html_name  cmd_drc
-
-Query the destination format.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/drc (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[drc!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 

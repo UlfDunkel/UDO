@@ -24,39 +24,13 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 16: html_name no longer uses CAPITAL letters
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #
 ################################################################################
 
 !begin_node T!..
 !html_name  cmds_t
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [=tex])
-!html_name  cmd_tex-eq
-
-Query the destination format.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/=tex (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[tex!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -329,34 +303,6 @@ value of 8 by default.
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kw [tex])
-!html_name  cmd_tex
-
-Query the destination format.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/tex (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [raw] [[tex!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [ifdest]), (!KW [raw]), (!KKW [raw]), (!link [Special commands] [Special commands]), (!link [raw environment] [raw environment])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 # ToDo: Englisch
 !begin_node (!kkw [teal])
 !html_name  cmd_teal
@@ -455,35 +401,6 @@ e.g. (!code [\textbf{!..}]) instead of (!code [{\bf~!..}])
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [tex_book])
-!html_name  cmd_tex_book
-
-Output target file in book style.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/tex_book(!t)
-
-!item [(!DESCRIPTION)]
-# Der Befehl (!KW [tex_book]) existiert nicht mehr.
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [use_style_book] [[tex!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~4 Version~0.47
-
-!item [(!SEEALSO)]
-(!KW [use_style_book])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
@@ -686,34 +603,6 @@ Set verbatim character for (!LaTeX) ((!TeX) only)
 
 # = = = = =
 
-!ifset OldKeywords
-!begin_node (!kw [title])
-!html_name  cmd_title
-
-Set document title information.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/title (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [docinfo] [[title!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [maketitle]), (!KW [docinfo]), (!link [Title page] [Title page])
-
-!end_xlist
-
-!end_node
-!endif
-
-# = = = = =
-
 !begin_node (!kkw [tm])
 !html_name  cmd_tm()
 
@@ -850,34 +739,6 @@ to the top of the page is generated.
 !end_xlist
 
 !end_node
-
-# = = = = =
-
-!ifset OldKeywords
-!begin_node (!kw [town])
-!html_name  cmd_town
-
-Set document information for author's hometown.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
-
-!item [(!SYNTAX)] (!T)!/town (!TEXT)(!t)
-
-!item [(!DESCRIPTION)]
-(!NOTEXISTING)
-(!USEINSTEAD[]) (!KW [docinfo] [[address!!]]).
-
-!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
-
-!item [(!SEEALSO)]
-(!KW [maketitle]), (!KW [docinfo]), (!link [Title page] [Title page])
-
-!end_xlist
-
-!end_node
-!endif
 
 # = = = = =
 
