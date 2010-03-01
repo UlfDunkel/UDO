@@ -96,7 +96,7 @@ und auf einem Unix-Rechner konvertiert werden.
 Sogar in einer Datei können die Zeichensätze gewechselt werden,
 falls das nötig sein sollte. Durch einen Satz Befehle können Sie
 UDO mitteilen, welcher Zeichensatz in den folgenden Zeilen
-benutzt werden soll.
+benutzt werden soll: (!KW [code_source]) und (!KW [code_target]).
 
 # = = =
 

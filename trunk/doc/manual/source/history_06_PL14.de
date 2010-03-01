@@ -14,10 +14,12 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from history.de)
+# 2010:
+#   fd  Mar 01: typo in node title fixed
 #
 ################################################################################
 
-!begin_node Änderungen in Release PL 14
+!begin_node Änderungen in Release 6 PL 14
 !html_name  history_6_PL_14
 
 (!PUBLISHED [Release~6 Patchlevel~14] [11.07.1999])
@@ -161,7 +163,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !item flushleft-Umgebung
    !item flushright-Umgebung
    !item Holländisch wird als Sprache angeboten ((!KW [language] [[dutch!!]])).
-   !item der NeXTStep-Zeichensatz ((!KW [code] [[next!!]])) wird nun unterstützt.
+   !item der NeXTStep-Zeichensatz ((!kw [code] [[next!!]])) wird nun unterstützt.
    !item (!KW [docinfo] [[webmastername!!]]) erzeugt eine
          Fusszeile am Ende einer jeden HTML-Datei.
    !item Den Befehlen, die sich um die Ausgabe der
@@ -188,7 +190,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !item Befehlsabkürzungen sind nun verwendbar.
    !item UDO ermittelt nun für Bilder im GIF-Format die jeweiligen Ausmaße.
    !item Kommandozeilen-Option (!link [(--)check] [Kommandozeilenversion]).
-   !item Zeichensatzschalter (!KW [code] [[cp850!!]]) und (!KW [code] [[cp437!!]])
+   !item Zeichensatzschalter (!kw [code] [[cp850!!]]) und (!kw [code] [[cp437!!]])
    !item Benutzerdefinierte Header und Footer für HTML.
    !item Kommandozeilen-Option (!link [(--)map-pas] [Kommandozeilenversion]).
    !item Help-IDs können automatisch mit (!KW [use_auto_helpids]) gesichert werden.
@@ -279,7 +281,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !item (!kw [no_toc_subnodes]) kann nun durch (!KW [tableofcontents] [!depth 1])
          ersetzt werden.
    !item Die Befehle zum Setzen des Zeichensatzes haben
-         sich geändert. Jetzt gibt es nur noch einen Befehl (!KW [code]).
+         sich geändert. Jetzt gibt es nur noch einen Befehl (!kw [code]).
          Entfallen sind dadurch (!kw [code_dos]), (!kw [code_hp8]), (!kw [code_iso]), (!kw [code_mac]), (!kw [code_next])
          und (!kw [code_tos])
    !item Die Befehle für die Titelseiten-Informationen

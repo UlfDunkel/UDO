@@ -176,7 +176,7 @@ Quelltexte für eine Windows-Hilfe gleich im Windows-Zeichensatz
 schreiben. UDO braucht in dem Falle keine aufwendige
 Zeichensatzkonvertierung vornehmen.
 
-Achten Sie hierbei darauf, dass Sie den Schalter (!KW [code] [[iso!!]]) benutzen, um
+Achten Sie hierbei darauf, dass Sie z.B. den Schalter (!KW [code_source] [[iso!!]]) benutzen, um
 UDO anzuzeigen, dass die Texte nicht im DOS-Zeichensatz erstellt
 wurden.
 
