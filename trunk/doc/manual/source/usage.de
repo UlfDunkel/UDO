@@ -53,7 +53,7 @@ Die Bedienung der Kommandozeilenversion wird nun im typischen Manualpage-Stil be
 !begin_node GEM-Version
 !html_name  usage_gem
 
-Die frühere GEM-Version von UDO steht derzeit nicht mehr zur Verfügung.
+Für GEM (Atari-Plattformen) steht für UDO eine graphische Bedienungsoberfläche (Shell) zur Verfügung, die aber derzeit nicht mehr weiterentwickelt wird. Siehe (!url [http://www.udo-open-source.org/download/shells.php] []).
 
 # auskommentiert 28.01.2004 - Ulrich Kretschmer
 !begin_ignore
@@ -334,7 +334,7 @@ dessen Guides-Ordner befindet.
 !begin_node Windows-Shell
 !html_name  usage_winshell
 
-Unter Windows steht für UDO eine graphische Bedienungsoberfläche (Shell) zur Verfügung, die aber derzeit nicht mehr weiterentwickelt wird. Siehe (!url [http://www.udo-open-source.org/download/shells.html] []).
+Unter Windows steht für UDO eine graphische Bedienungsoberfläche (Shell) zur Verfügung, die aber derzeit nicht mehr weiterentwickelt wird. Siehe (!url [http://www.udo-open-source.org/download/shells.php] []).
 
 !end_node # Windows-Shell
 
