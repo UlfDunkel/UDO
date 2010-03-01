@@ -186,8 +186,10 @@ Hier ein kleines (und zugegebenermaﬂen geschmackloses) Beispiel, bei dem ein Mak
 Text mit mehreren Textstilattributen gleichzeitig definiert wird und sp‰ter mit
 nur einem Parameter aufgerufen wird:
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)macro3.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)macro4.ui
 (!EXAMPLE_END)
 
 Die Worte ""fett, kursiv und unterstrichen"" werden bei der Ausgabe dann an die Stelle

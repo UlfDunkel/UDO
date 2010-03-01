@@ -106,7 +106,7 @@ spezielles Lindner-(!TeX)-Makro zur Einbindung des Bildes erzeugt werden
 soll.
 
 UDO macht das dem Lindner-(!TeX) beiliegende Zusatzprogramm 
-(!file [IMGTOTEX]) überflüssig! UDO enthält alle Aufgaben, für die sonst
+(!file [IMGTOTEX]) überflüssig! UDO erledigt alles, wofür sonst
 (!file [IMGTOTEX]) zuständig ist, nämlich das Eintragen bestimmter
 Auflösungswerte in den Header des jeweiligen GEM-Images.
 
@@ -254,7 +254,7 @@ als Bildunterschrift, sondern als Alternativtext benutzt.
 !begin_verbatim
 <p align="...">
 <img src="tiger.gif" alt="Ein Tiger" title="Ein Tiger" width="200" height="300">
-</p><br>
+</p>
 !end_verbatim
 (!EXAMPLE_END)
 
@@ -270,7 +270,7 @@ hier das Beispiel zur Veranschaulichung:
 !begin_verbatim
 <p align="...">
 <img src="../gif/tiger.gif" width="200" height="300">
-</p><br>
+</p>
 !end_verbatim
 (!EXAMPLE_END)
 
@@ -284,7 +284,7 @@ Ausmaße von Bildern unterbinden. Dazu gibt es das Kommando (!KW [no_img_size]).
 !begin_node *.jpg & HTML
 !html_name  images_html_jpg
 
-Standardmäßig erwartet UDO, dass Sie Grafiken im GIF-Format darstellen
+Standardmäßig erwartet UDO beim Ausgabeformat HTML, dass Sie Grafiken im GIF-Format darstellen
 möchten (siehe oben). Natürlich ist es mit UDO aber auch möglich,
 JPEG-Grafiken einzubinden.
 

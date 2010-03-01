@@ -43,7 +43,7 @@
 !index Anführungszeichen !! typographische
 !index Typographische Anführungszeichen
 Doppelte Anführungszeichen werden bei der Umwandlung durch
-typographische Anführungszeichen(!N)z.B. ""Gänsefüßchen"" unten und oben(!n)
+typographische Anführungszeichen (z.B. ""Guillemets"")
 ersetzt, falls diese vom jeweiligen Format unterstützt werden. Werden
 diese nicht unterstützt, werden die doppelten Anführungszeichen
 durch einfache ersetzt.
@@ -52,12 +52,12 @@ In der folgenden ASCII-Simulation wird gezeigt, wie das Ergebnis in
 später aussehen kann, wenn das jeweilige Ausgabeformat echte
 Anführungszeichen unterstützt.
 
-(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEFORE)
 !begin_verbatim
 Echte ""Gänsefüßchen""
-
-Echte ,,Gänsefüßchen´´
 !end_verbatim
+(!EXAMPLE_AFTER)
+Echte ""Gänsefüßchen""
 (!EXAMPLE_END)
 
 Wenn Sie in der Ausgabedatei doppelte Anführungszeichen sehen möchten,
@@ -90,10 +90,10 @@ vorkommende Apostrophe an.
 
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-Hier stehen ''doppelte Apostrophe''.
+""Der Regen fällt heute ''wie aus Eimern''"", beschwerte sich der Schäfer.
 !end_verbatim
 (!EXAMPLE_AFTER)
-Hier stehen ''doppelte Apostrophe''.
+""Der Regen fällt heute ''wie aus Eimern''"", beschwerte sich der Schäfer.
 (!EXAMPLE_END)
 
 Wenn Sie in der Ausgabedatei doppelte Apostrophe sehen möchten, so
