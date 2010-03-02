@@ -4,6 +4,10 @@
 *  Module name  : tp.h
 *  Symbol prefix: tp
 *
+*  Description  : This module contains routines which handle the environment
+*                 Routinen, die die Ausgabe der zahlreichen Umgebungen
+*                 verwalten und fuer token_output() vorbereiten
+*
 *  Copyright    : 1995-2001 Dirk Hagedorn
 *  Open Source  : since 2001
 *
@@ -21,11 +25,6 @@
 *                 along with this program; if not, write to the Free Software
 *                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 *
-*  Description  : This module contains routines which handle the environment
-*                 Routinen, die die Ausgabe der zahlreichen Umgebungen
-*                 verwalten und fuer token_output() vorbereiten
-*
-*
 *-------------------------------------------------------------------------------
 *
 *  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
@@ -42,7 +41,12 @@
 *
 *  2009:
 *    fd  Jun 04: !docinfo [translator] introduced
+*  2010:
 *    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Mar 02: - webmastername    -> domain_name
+*                - webmasterurl     -> domain_link
+*                - webmasteremail   -> contact_name
+*                - webmastermailurl -> contact_link
 *
 ******************************************|************************************/
 
@@ -77,10 +81,10 @@ typedef struct _titledata                 /* ---- Titelseiteninfos ---- */
    char   *version;                       /* Version */
    char   *author;                        /* Name des Autors */
    char   *address[MAXADDRESS + 1];       /* Adresse */
-   char   *webmastername;                 /* for HTML */
-   char   *webmasteremail;                /* for HTML */
-   char   *webmastermailurl;              /* for HTML */
-   char   *webmasterurl;                  /* for HTML */
+   char   *domain_name;                   /* for HTML */
+   char   *domain_link;                   /* for HTML */
+   char   *contact_name;                  /* for HTML */
+   char   *contact_link;                  /* for HTML */
    char   *programimage;                  /* program image */
    char   *authorimage;                   /* author's funny face image */
    char   *authoricon;                    /* -> Modern/Frames */

@@ -79,7 +79,11 @@
 *    fd  Feb 23: - UDO_PL -> UDO_BUILD (no more patchlevels)
 *                - unicode2char() adjusted, using ^string instead of local string
 *    fd  Mar 01: html_footer(): changes from (ME) reverted - see discussion in UDO_DEV
-*    fd  Mar 02: html_footer(): notes added and mailto: handling enhanced
+*    fd  Mar 02: - html_footer(): notes added and mailto: handling enhanced
+*                - webmastername    -> domain_name
+*                - webmasterurl     -> domain_link
+*                - webmasteremail   -> contact_name
+*                - webmastermailurl -> contact_link
 *
 ******************************************|************************************/
 
@@ -91,7 +95,7 @@
 
 #ifndef ID_TOC_C
 #define ID_TOC_C
-const char *id_toc_c= "@(#) toc.c       $DATE$";
+const char *id_toc_c= "@(#) toc.c       $date$";
 #endif
 
 
@@ -2969,13 +2973,13 @@ BOOLEAN    keywords)             /* */
    }
 
    /*r6pl5: <link>-Tag */
-   if (titdat.webmasteremail != NULL)
+   if (titdat.contact_name != NULL)
    {
-      voutlnf("<meta name=\"Email\" content=\"%s\"%s>", titdat.webmasteremail, closer);
-      voutlnf("<link rev=\"made\" href=\"mailto:%s\" title=\"E-Mail\"%s>", titdat.webmasteremail, closer);
+      voutlnf("<meta name=\"Email\" content=\"%s\"%s>", titdat.contact_name, closer);
+      voutlnf("<link rev=\"made\" href=\"mailto:%s\" title=\"E-Mail\"%s>", titdat.contact_name, closer);
 
       /* New in r6pl16 [NHz] */
-      voutlnf("<link rel=\"author\" href=\"mailto:%s\" title=\"E-Mail\"%s>", titdat.webmasteremail, closer);
+      voutlnf("<link rel=\"author\" href=\"mailto:%s\" title=\"E-Mail\"%s>", titdat.contact_name, closer);
    }
 
    /* New in r6pl15 [NHz] */
@@ -5135,42 +5139,42 @@ GLOBAL void html_bottomline(void)
 *     This function reacts on the existance and content of the following !docinfo
 *     parameters:
 *
-*     !docinfo [webmasterurl]       e.g. "http://www.mydomain.com"
-*     !docinfo [webmastername]      e.g. "My Domain"
-*     !docinfo [webmastermailurl]   e.g. "webmaster@mydomain.com"
-*     !docinfo [webmasteremail]     e.g. "Webmaster"
+*     !docinfo [domain_link]    e.g. "http://www.mydomain.com"
+*     !docinfo [domain_name]    e.g. "My Domain"
+*     !docinfo [contact_link]   e.g. "webmaster@mydomain.com"
+*     !docinfo [contact_name]   e.g. "Webmaster"
 *
 *
-*     When [webmasterurl] and [webmastername] are available, the URL link is 
+*     When [domain_link] and [domain_name] are available, the URL link is 
 *     formatted like this: 
-*     '<a href="[webmasterurl]">[webmastename]</a>'
+*     '<a href="[domain_link]">[domain_name]</a>'
 *
-*     When only [webmasterurl] is available, it is repeated in the visible link:
-*     '<a href="[webmasterurl]">[webmasterurl]</a>'
+*     When only [domain_link] is available, it is repeated in the visible link:
+*     '<a href="[domain_link]">[domain_link]</a>'
 *
-*     When only [webmastername] is available, no link is created but the
-*     [webmastername] is output as simple text in the HTML footer.
+*     When only [domain_name] is available, no link is created but the
+*     [domain_name] is output as simple text in the HTML footer.
 *
 *
-*     When [webmastermailurl] and [webmasteremail] are available, the email URL 
+*     When [contact_link] and [contact_name] are available, the email URL 
 *     link is formatted like this:
-*     '<a href="mailto:[webmastermailurl]">[webmasteremail]</a>
+*     '<a href="mailto:[contact_link]">[contact_name]</a>
 *
-*     When only [webmastermailurl] is available, it is repeated in the visible 
+*     When only [contact_link] is available, it is repeated in the visible 
 *     email link:
-*     '<a href="mailto:[webmastermailurl]">[webmastermailurl]</a>
+*     '<a href="mailto:[contact_link]">[contact_link]</a>
 *
-*     When only [webmasteremail] is available, no link is created but the
-*     [webmasteremail] is output as simple text in the HTML footer.
+*     When only [contact_name] is available, no link is created but the
+*     [contact_name] is output as simple text in the HTML footer.
 *
 *
 *  Special feature:
 *     Chances are that someone wants to use a web URL instead of an email address
-*     [webmastermailurl]. Today, many web users try to avoid having their email
+*     [contact_link]. Today, many web users try to avoid having their email
 *     address being placed visibly in web pages, to let email addresses harvester 
 *     bots not find their email addresses for spam purposes.
 *
-*     So we check if [webmastermailurl] has a '@'. If not, the anchor 
+*     So we check if [contact_link] has a '@'. If not, the anchor 
 *     string "mailto:" is suppressed.
 *     
 *  return:
@@ -5195,16 +5199,16 @@ GLOBAL void html_footer(void)
       if (no_footers || toc[p2_toc_counter]->ignore_footer)
          return;
    
-   if (titdat.webmasterurl     != NULL)
+   if (titdat.domain_link  != NULL)
       has_content  = 0x1000;
 
-   if (titdat.webmastername    != NULL)
+   if (titdat.domain_name  != NULL)
       has_content += 0x0100;
 
-   if (titdat.webmastermailurl != NULL)
+   if (titdat.contact_link != NULL)
       has_content += 0x0010;
 
-   if (titdat.webmasteremail   != NULL)
+   if (titdat.contact_name != NULL)
       has_content += 0x0001;
                                           /* draw a horizontal line */   
    if (has_counter || has_main_counter || has_content)
@@ -5247,111 +5251,116 @@ GLOBAL void html_footer(void)
    
    switch (has_content)
    {
-   case 0x1111:                           /* has_url + has_name + has_mailurl + has_email */
+   case 0x1111:                           /* domain_link + domain_name + contact_link + contact_name */
       sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
-         titdat.webmasterurl, 
-         titdat.webmastername,
-         titdat.webmastermailurl, 
-         titdat.webmasteremail);
+         titdat.domain_link, 
+         titdat.domain_name,
+         titdat.contact_link, 
+         titdat.contact_name);
       break;
          
-   case 0x1110:                           /* has_url + has_name + has_mailurl             */
+   case 0x1110:                           /* domain_link + domain_name + contact_link               */
       sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
-         titdat.webmasterurl, 
-         titdat.webmastername,
-         titdat.webmastermailurl, 
-         titdat.webmastermailurl);
+         titdat.domain_link, 
+         titdat.domain_name,
+         titdat.contact_link, 
+         titdat.contact_link);
       break;
       
-   case 0x1101:                           /* has_url + has_name               + has_email */
+   case 0x1101:                           /* domain_link + domain_name                + contact_name */
       sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
-         titdat.webmasterurl, 
-         titdat.webmastername,
-         titdat.webmasteremail, 
-         titdat.webmasteremail);
+         titdat.domain_link, 
+         titdat.domain_name,
+         titdat.contact_name, 
+         titdat.contact_name);
       break;
       
-   case 0x1100:                           /* has_url + has_name                           */
+   case 0x1100:                           /* domain_link + domain_name                               */
       sprintf(s, "<a href=\"%s\">%s</a>",
-         titdat.webmasterurl, 
-         titdat.webmastername);
+         titdat.domain_link, 
+         titdat.domain_name);
       break;
       
-   case 0x1011:                           /* has_url            + has_mailurl + has_email */
+   case 0x1011:                           /* domain_link               + contact_link + contact_name */
       sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
-         titdat.webmasterurl, 
-         titdat.webmasterurl,
-         titdat.webmastermailurl, 
-         titdat.webmasteremail);
+         titdat.domain_link, 
+         titdat.domain_link,
+         titdat.contact_link, 
+         titdat.contact_name);
       break;
    
-   case 0x1010:                           /* has_url            + has_mailurl             */
+   case 0x1010:                           /* domain_link               + contact_link                */
       sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
-         titdat.webmasterurl, 
-         titdat.webmasterurl,
-         titdat.webmastermailurl, 
-         titdat.webmastermailurl);
+         titdat.domain_link, 
+         titdat.domain_link,
+         titdat.contact_link, 
+         titdat.contact_link);
       break;
          
-   case 0x1001:                           /* has_url                        + has_mailurl */
+   case 0x1001:                           /* domain_link                              + contact_name */
       sprintf(s, "<a href=\"mailto:%s\">%s</a>",
-         titdat.webmasterurl, 
-         titdat.webmastername);
+         titdat.domain_link, 
+         titdat.domain_name);
       break;
          
-   case 0x1000:                           /* has_url                                      */
+   case 0x1000:                           /* domain_link                                             */
       sprintf(s, "<a href=\"mailto:%s\">%s</a>",
-         titdat.webmasterurl, 
-         titdat.webmasterurl);
+         titdat.domain_link, 
+         titdat.domain_link);
       break;
 
-   case 0x0111:                           /*           has_name + has_mailurl + has_email */
+   case 0x0111:                           /*               domain_name + contact_link + contact_name */
       sprintf(s, "%s <a href=\"mailto:%s\">%s</a>",
-         titdat.webmastername,
-         titdat.webmastermailurl, 
-         titdat.webmasteremail);
+         titdat.domain_name,
+         titdat.contact_link, 
+         titdat.contact_name);
       break;
 
-   case 0x0110:                           /*           has_name + has_mailurl             */
+   case 0x0110:                           /*               domain_name + contact_link                */
       sprintf(s, "%s (<a href=\"mailto:%s\">%s</a>)",
-         titdat.webmastername,
-         titdat.webmastermailurl, 
-         titdat.webmastermailurl);
+         titdat.domain_name,
+         titdat.contact_link, 
+         titdat.contact_link);
       break;
 
-   case 0x0101:                           /*           has_name               + has_email */
+   case 0x0101:                           /*               domain_name                + contact_name */
       sprintf(s, "%s (<a href=\"mailto:%s\">%s</a>)",
-         titdat.webmastername,
-         titdat.webmasteremail, 
-         titdat.webmasteremail);
+         titdat.domain_name,
+         titdat.contact_name, 
+         titdat.contact_name);
       break;
 
-   case 0x0100:                           /*           has_name                           */
+   case 0x0100:                           /*               domain_name                               */
       sprintf(s, "%s",
-         titdat.webmastername);
+         titdat.domain_name);
       break;
 
-   case 0x0011:                           /*                      has_mailurl + has_email */
+   case 0x0011:                           /*                             contact_link + contact_name */
       sprintf(s, "<a href=\"mailto:%s\">%s</a>",
-         titdat.webmastermailurl, 
-         titdat.webmasteremail);
+         titdat.contact_link, 
+         titdat.contact_name);
       break;
 
-   case 0x0010:                           /*                      has_mailurl             */
+   case 0x0010:                           /*                             contact_link                */
       sprintf(s, "<a href=\"mailto:%s\">%s</a>",
-         titdat.webmastermailurl, 
-         titdat.webmastermailurl);
+         titdat.contact_link, 
+         titdat.contact_link);
       break;
 
-   case 0x0001:                           /*                                    has_email */
+   case 0x0001:                           /*                                            contact_name */
       sprintf(s, "%s",
-         titdat.webmasteremail, 
-         titdat.webmasteremail);
+         titdat.contact_name, 
+         titdat.contact_name);
    }
 
-   if (titdat.webmastermailurl != NULL)
-      if (strstr(titdat.webmastermailurl,"@") == NULL)
+                                          /* shit happens ;-) */
+   (void)replace_once(s,"mailto:mailto:","mailto:");
+
+   if (titdat.contact_link != NULL)       /* check if contact_link is URL or email address */
+   {
+      if (strstr(titdat.contact_link,"@") == NULL)
          (void)replace_once(s,"mailto:","");
+   }
    
    strcat(footer_buffer, s);
    
