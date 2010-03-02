@@ -4,6 +4,10 @@
 *  Module name  : tp.c
 *  Symbol prefix: tp
 *
+*  Description  : This module contains routines which handle the environment
+*                 Routinen, die die Ausgabe der zahlreichen Umgebungen
+*                 verwalten und fuer token_output() vorbereiten
+*
 *  Copyright    : 1995-2001 Dirk Hagedorn
 *  Open Source  : since 2001
 *
@@ -21,11 +25,6 @@
 *                 along with this program; if not, write to the Free Software
 *                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 *
-*  Description  : This module contains routines which handle the environment
-*                 Routinen, die die Ausgabe der zahlreichen Umgebungen
-*                  verwalten und fuer token_output() vorbereiten
-*
-*
 *-------------------------------------------------------------------------------
 *
 *  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
@@ -42,12 +41,18 @@
 *
 *  2009:
 *    fd  Jun 04: !docinfo [translator] introduced
+*  2010:
+*    fd  Mar 02: - html_footer(): notes added and mailto: handling enhanced
+*                - webmastername    -> domain_name
+*                - webmasterurl     -> domain_link
+*                - webmasteremail   -> contact_name
+*                - webmastermailurl -> contact_link
 *
 ******************************************|************************************/
 
 #ifndef ID_TP_C
 #define ID_TP_C
-const char *id_tp_c= "@(#) tp.c        11.02.1999";
+const char *id_tp_c= "@(#) tp.c        $date$";
 #endif
 
 #include "import.h"
@@ -813,36 +818,18 @@ GLOBAL BOOLEAN set_docinfo(void)
    }
    
 
-   /* --- webmastername --- */
+   /* --- domain_name --- */
    
-   if (strcmp(inhalt, "webmastername") == 0)
+   if (strcmp(inhalt, "domain_name") == 0)
    {
-      init_docinfo_data(data, &(titdat.webmastername), FALSE);
+      init_docinfo_data(data, &(titdat.domain_name), FALSE);
       return TRUE;
    }
    
 
-   /* --- webmasteremail --- */
+   /* --- domain_link --- */
    
-   if (strcmp(inhalt, "webmasteremail") == 0)
-   {
-      init_docinfo_data(data, &(titdat.webmasteremail), FALSE);
-      return TRUE;
-   }
-   
-
-   /* --- webmastermailurl --- */
-   
-   if (strcmp(inhalt, "webmastermailurl") == 0)
-   {
-      init_docinfo_data(data, &(titdat.webmastermailurl), FALSE);
-      return TRUE;
-   }
-   
-
-   /* --- webmasterurl --- */
-   
-   if (strcmp(inhalt, "webmasterurl") == 0)
+   if (strcmp(inhalt, "domain_link") == 0)
    {
       del_whitespaces(data);              /* nicht init_...!!! */
       convert_tilde(data);
@@ -858,15 +845,33 @@ GLOBAL BOOLEAN set_docinfo(void)
          if (buffer)
          {
             strcpy(buffer, data);
-            titdat.webmasterurl= buffer;
+            titdat.domain_link = buffer;
          }
          else
          {
             error_malloc_failed();
-            bFatalErrorDetected= TRUE;
+            bFatalErrorDetected = TRUE;
          }
       }
 
+      return TRUE;
+   }
+   
+
+   /* --- contact_name --- */
+   
+   if (strcmp(inhalt, "contact_name") == 0)
+   {
+      init_docinfo_data(data, &(titdat.contact_name), FALSE);
+      return TRUE;
+   }
+   
+
+   /* --- contact_link --- */
+   
+   if (strcmp(inhalt, "contact_link") == 0)
+   {
+      init_docinfo_data(data, &(titdat.contact_link), FALSE);
       return TRUE;
    }
    
@@ -2387,10 +2392,10 @@ LOCAL void init_titdat ( void )
         titdat.company                = NULL; /* New in V6.5.2 [NHz] */
         titdat.category               = NULL; /* New in V6.5.2 [NHz] */
         titdat.htmltitle              = NULL;
-        titdat.webmastername          = NULL;
-        titdat.webmasteremail         = NULL;
-        titdat.webmastermailurl       = NULL;
-        titdat.webmasterurl           = NULL;
+        titdat.domain_name            = NULL;
+        titdat.domain_link            = NULL;
+        titdat.contact_name           = NULL;
+        titdat.contact_link           = NULL;
         titdat.programimage           = NULL;
         titdat.appletitle             = NULL;        /* V6.5.17 */
         titdat.appleicon              = NULL;         /* V6.5.17 */
@@ -2466,10 +2471,10 @@ GLOBAL void exit_module_tp ( void )
         free_titdat(&(titdat.company)); /* New in V6.5.2 [NHz] */
         free_titdat(&(titdat.category)); /* New in V6.5.2 [NHz] */
         free_titdat(&(titdat.htmltitle));
-        free_titdat(&(titdat.webmastername));
-        free_titdat(&(titdat.webmasteremail));
-        free_titdat(&(titdat.webmastermailurl));
-        free_titdat(&(titdat.webmasterurl));
+        free_titdat(&(titdat.domain_name));
+        free_titdat(&(titdat.domain_link));
+        free_titdat(&(titdat.contact_name));
+        free_titdat(&(titdat.contact_link));
         free_titdat(&(titdat.programimage));
         free_titdat(&(titdat.authorimage));
         free_titdat(&(titdat.authoricon));
