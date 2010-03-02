@@ -23,7 +23,7 @@
 The following list shows deprecated UDO commands and switches which are no longer supported in the current version.
 
 !begin_table [l|l|l] !hline
-(!B)Olt(!b)                      !! (!B)Function(!b) !\
+(!B)Old(!b)                      !! (!B)Function(!b) !\
                                  !! (!B)New(!b)
 !hline
 (!kw [=aqv])                     !! query output format !\

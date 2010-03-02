@@ -410,10 +410,6 @@ Wenn distributor benutzt wird, wird auf der Titelseite nach Autor und Firma
 
 !end_description
 
-Die Werte Einträge stehen als Defines zur Verfügung in der Form
-(!KW [UDO_xxx)], also z. B. (!KW [UDO_title]). Natürlich ist dies nur der
-Fall, wenn sie vorher definiert worden sind.
-
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~2
 
 !item [(!SEEALSO)]

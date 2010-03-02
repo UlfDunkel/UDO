@@ -377,10 +377,6 @@ When distributor is used, the title page will show it below author and company a
 
 !end_description
 
-Die Werte-Einträge stehen als Defines zur Verfügung in der Form
-(!KW [UDO_xxx)], also z. B. (!KW [UDO_title]). Natürlich ist dies nur der
-Fall, wenn sie vorher definiert worden sind.
-
 !item [(!EXAMPLE2)]
 (!T)
 !begin_verbatim
