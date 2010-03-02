@@ -59,6 +59,7 @@
 *                - CODE_CP1258 (Vietnamese)
 *    fd  Feb 25: v7.00 RC2
 *    fd  Mar 01: v7.00 public release
+*    fd  Mar 02: "Mac OS" and "Mac OS X" love spaces ;-)
 *
 ******************************************|************************************/
 
@@ -325,7 +326,7 @@
 #endif
 
 #ifdef __MACOS__
-#define UDO_OS               "MacOS"
+#define UDO_OS               "Mac OS"
 #define USE_SLASH            0
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   0
@@ -342,7 +343,7 @@
 #endif
 
 #ifdef __MACOSX__
-#define UDO_OS               "MacOSX"
+#define UDO_OS               "Mac OS X"
 #define USE_SLASH            1
 #define USE_LONG_FILENAMES   1
 #define USE_LATIN1_CHARSET   0
