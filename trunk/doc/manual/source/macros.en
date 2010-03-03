@@ -22,6 +22,8 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Feb 24: macro IMPORTANT
+#   fd  Mar 02: macro NTY (= not translated yet)
+#   fd  Mar 03: macro INCOMPLETE, deprecated macros removed
 #
 ################################################################################
 
@@ -75,10 +77,6 @@
 !macro WORD           <word>
 
 
-# !macro DocumentationWorkInProgress  The UDO Guide is actually in revision. Intermediate versions are currently only available on the UDO website for online-reading, but not for download.
-!macro FollowingOutdated            (!I)The following text passages are partly outdated and will be revised.(!i)
-
-
 # language-dependent text parts for the UDO history in history.ui (in alphabetical order)
 !macro BUGFIXES       Bugfixes
 !macro CHANGES        Changes
@@ -102,10 +100,12 @@
 !macro HINT            (!B)Hint:(!b)
 !macro HINTS           (!B)Hints:(!b)
 !macro IMPORTANT       (!B)(!red)Important:(!coloff)(!b)
+!macro INCOMPLETE      (!red)(!I)This page content is still incomplete!(!i)(!coloff)
 !macro IN_HTML_HEADER  (!gray)(!I)Ausgabe erfolgt im Seiten-Header:(!i)(!coloff)
 !macro MAINPART        main part
 !macro MISS            (!idx [Something's still missing here])!..
 !macro NOTEXISTING     This command does not exist anymore.
+!macro NTY             (!red)[The following text has not yet been translated.](!coloff) (!nl)
 !macro PLACEHOLDER     placeholder
 !macro PREAMBLE        preamble
 !macro RENAMEDTO       This command has been renamed to
@@ -114,6 +114,5 @@
 !macro SWITCH          switch
 !macro SYNTAX          Syntax:
 !macro TYPEPOSITION    Type & position:
-!macro USEINSTEAD      Use (!1) instead
 
 # === EOF ===
