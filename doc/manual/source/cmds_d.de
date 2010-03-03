@@ -32,6 +32,7 @@
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #   fd  Mar 02: chapter cmd_docinfo much enhanced
+#   fd  Mar 03: cmd_docinfo: deprecated attributes (webmaster...) updated
 #
 ################################################################################
 
@@ -319,16 +320,16 @@ Wird für HTML Apple Help benötig und beschreibt den (!nolink [Titel]) der Hilfe.
 Wird für HTML Apple Help benötig. Damit wird das Icon angegeben, welches der Apple Help Viewer
 anzeigen soll.
 
-!item [webmasterurl|webmastername|webmastermailurl|webmasteremail]
+!item [domain_name|domain_link|contact_name|contact_link]
 Werden alle diese Kontaktdaten (in vier einzelnen Zeilen!) angegeben, erzeugt UDO standardmäßig am Ende einer jeden Seite Folgende Kontektdaten-Fußzeile:
 
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-!docinfo [webmasterurl]       http://www.udo-open-source.org/
-!docinfo [webmastername]      UDO OpenSource
-!docinfo [webmastermailurl]   webmaster@udo-open-source.org
-!docinfo [webmasteremail]     E-Mail an den Webmaster
+!docinfo [domain_link]    http://www.udo-open-source.org/
+!docinfo [domain_name]    UDO OpenSource
+!docinfo [contact_link]   webmaster@udo-open-source.org
+!docinfo [contact_name]   E-Mail an den Webmaster
 
 # Dokument
 !begin_document
@@ -345,8 +346,8 @@ Werden weniger Informationen angegeben, so werden die Kontaktdaten in der Fußzei
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-!docinfo [webmasterurl]      http://www.meinedomain.de/
-!docinfo [webmastermailurl]  ich@meinedomain.de
+!docinfo [domain_link]    http://www.meinedomain.de/
+!docinfo [contact_link]   ich@meinedomain.de
 
 # Dokument
 !begin_document
@@ -361,8 +362,8 @@ Letzte Aktualisierung am (!today)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-!docinfo [webmastername]      Meine Firma
-!docinfo [webmasteremail]     Mein Name
+!docinfo [domain_name]    Meine Firma
+!docinfo [contact_name]   Mein Name
 
 # Dokument
 !begin_document
@@ -376,15 +377,15 @@ Letzte Aktualisierung am (!today)
 
 Das zuletzt gezeigte Beispiel zeigt, dass nur die Parameter mit (!code [url]) im Parameternamen tatsächlich anklickbare Links ergeben.
 
-Aber es ist auch möglich, als E-Mail-Kontaktlink keine echte E-Mail-Adresse, sondern einen URL anzugeben, der zu einem Kontaktformular führt. Denn mittlerweile ist es nicht mehr unbedingt erwünscht, dass E-Mail-Adressen im Klartext in Webseiten zu sehen sind. Sonst sind sie für Roboter, die E-Mail-Adressen zum Spammen suchen, eine leichte Beute. Enthält der Text für (!code [[webmastermailurl!]]) keinen Klammeraffen (!code [@]), so geht UDO davon aus, dass er stattdessen einen URL enthält, wie im folgenden Beispiel.
+Aber es ist auch möglich, als Kontaktlink keine echte E-Mail-Adresse, sondern einen URL anzugeben, der zu einem Kontaktformular führt. Denn mittlerweile ist es nicht mehr unbedingt erwünscht, dass E-Mail-Adressen im Klartext in Webseiten zu sehen sind. Sonst sind sie für Roboter, die E-Mail-Adressen zum Spammen suchen, eine leichte Beute.
 
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-!docinfo [webmasterurl]      http://www.meinedomain.de/
-!docinfo [webmastername]     Meine Domäne
-!docinfo [webmastermailurl]  http://www.meinedomain.de/kontakt.php
-!docinfo [webmasteremail]    Kontakt
+!docinfo [domain_link]    http://www.meinedomain.de/
+!docinfo [domain_name]    Meine Domäne
+!docinfo [contact_link]   http://www.meinedomain.de/kontakt.php
+!docinfo [contact_name]   Kontakt
 
 # Dokument
 !begin_document
