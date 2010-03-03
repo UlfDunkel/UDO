@@ -17,6 +17,7 @@
 # 2010:
 #   fd  Feb 25: renamed for UDO 7
 #   fd  Mar 01: using macro BUG
+#   fd  Mar 03: using PUBLISHED
 #
 ################################################################################
 
@@ -25,7 +26,7 @@
 
 UDO~7 ist ein großer Sprung seit der letzten veröffentlichten Version. Vor allem die volle Unicode-Unterstützung und viele Verbesserungen in der HTML-Ausgabe machen diese Version sehr wertvoll.
 
-UDO~7.00 wurde am 1. März 2010 veröffentlicht.
+(!PUBLISHED [UDO~7.00] [1. März 2010])
 
 !begin_description !short
 # ----------------------------------------
@@ -141,13 +142,13 @@ UDO~7.00 wurde am 1. März 2010 veröffentlicht.
                bezeichnet eine Kategorie, zu der das Dokument gehört.
          !item [[company]]
                bezeichnet die Firma, für die ein Dokument erstellt wird. 
-               Wenn [company] benutzt wird, wird auf der Titelseite unter Autor "für [company]" eingefügt.
+               Wenn [company] benutzt wird, wird auf der Titelseite unter Autor ""für [company]"" eingefügt.
          !item [[distributor]]
                bezeichnet die Firma, die das Produkt oder Dokument vertreibt. 
-               Wenn [distributor] benutzt wird, wird auf der Titelseite nach Autor und Firma "Distributor: [distributor]" eingefügt.
+               Wenn [distributor] benutzt wird, wird auf der Titelseite nach Autor und Firma ""Distributor: [distributor]"" eingefügt.
          !item [[translator]]
                bezeichnet den Namen des Übersetzers, der das Produkt oder Dokument übersetzt hat. 
-               Wenn [translator] benutzt wird, wird auf der Titelseite nach Autor und Firma "Übersetzung: [translator]" eingefügt.
+               Wenn [translator] benutzt wird, wird auf der Titelseite nach Autor und Firma ""Übersetzung: [translator]"" eingefügt.
          !end_blist
    
    !item Die (!KW [docinfo])-Optionen (!code [[program!]]) und (!code [[programimage!]]) 
@@ -228,7 +229,7 @@ Das hier ist Zelle 3
 # ----------------------------------------
    !begin_itemize
    !item Die ""UDO Community"" ist in dem Text ergänzt worden, der von (!KW [use_about_udo]) ausgegeben wird.
-   !item Die Bezeichnung der einzelnen Versionen wurde geändert. Es heißt jetzt nicht mehr """Release~6.x Patchlevel~yy"", sondern schlicht ""Version~7.xy"".
+   !item Die Bezeichnung der einzelnen Versionen wurde geändert. Es heißt jetzt nicht mehr ""Release~6.x Patchlevel~yy"", sondern schlicht ""Version~7.xy"".
    !item Die OS/2-Version von UDO meldet sich jetzt als ""UDO for OS/2"".
    !end_itemize
 
@@ -332,10 +333,9 @@ Das hier ist Zelle 3
    !item (!KW [html_counter_command]) kann jetzt auch im Vorspann benutzt
          werden, dann wird dies für alle Dateien erzeugt.
 
-   !item Die Kommandos (!/B), (!/I), (!/U), (!/T) und (!/V) werden
-         zu <strong>, <em>, <span style="text-decoration: underline;"> und <kbd>
-         umgesetzt, wenn der HTML Doctype >= XHTML_STRICT ist, ansonsten
-         werden die alten Elemente benutzt.
+   !item Die Kommandos (!/B), (!/I), (!/U), (!/T) und (!/V) werden zu (!code [<strong>]), (!code [<em>]), 
+         (!code [<span style="text-decoration: underline;">]) und (!code [<kbd>]) umgesetzt, wenn der HTML Doctype >= XHTML_STRICT ist, 
+         ansonsten werden die alten Elemente benutzt.
          
    !item Der Bereich der Titelseite wird jetzt durch folgendes Konstrukt geklammert: (!nl)
          (!C)<div id="udo_titlepage"></div>(!c)
