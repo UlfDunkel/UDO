@@ -16,6 +16,7 @@
 #   fd  Mar 01: introduced
 #   fd  Mar 03: - new column 'deprecated since version' added (hi Gerhard ;-))
 #               - old docinfo attributes (webmaster...) listed
+#               - !else_asc, !else_stg + !end_asc, !end_stg added
 #
 ################################################################################
 
@@ -43,9 +44,11 @@ Die nachfolgend aufgelisteten UDO-Kommandos und -Schalter sind veraltet und werd
                                  !! (!KW [docinfo]) (!code [[authorimage!]])
 !hline
 (!kw [begin_asc])                !! Ausgabeformat abfragen !\
-                                 !! (!KW [ifdest]) (!code [[asc!]])
+                                 !! (!KW [ifdest]) (!code [[asc!]]) !\
+                                 !! 5
 (!kw [begin_stg])                !! Ausgabeformat abfragen !\
-                                 !! (!KW [ifdest]) (!code [[stg!]])
+                                 !! (!KW [ifdest]) (!code [[stg!]]) !\
+                                 !! 5
 !hline
 (!kw [code])                     !! Encoding des Quelltextes festlegen !\
                                  !! (!KW [code_source]) !\
@@ -94,8 +97,20 @@ Die nachfolgend aufgelisteten UDO-Kommandos und -Schalter sind veraltet und werd
 (!kw [drc])                      !! Ausgabeformat abfragen !\
                                  !! (!KW [ifdest]) (!code [[drc!]])
 !hline
+(!kw [else_asc])                 !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[asc!]]) !\
+                                 !! 5
+(!kw [else_stg])                 !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[stg!]]) !\
+                                 !! 5
 (!kw [email])                    !! E-Mail-Informationen für die Titelseite setzen !\
                                  !! (!KW [docinfo]) (!code [[contact_name!]]) oder (!KW [docinfo]) (!code [[contact_link!]])
+(!kw [end_asc])                  !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[asc!]]) !\
+                                 !! 5
+(!kw [end_stg])                  !! query output format !\
+                                 !! (!KW [ifdest]) (!code [[stg!]]) !\
+                                 !! 5
 (!kw [english])                  !! Sprache setzen !\
                                  !! (!KW [language]) (!code [[english!]]) !\
                                  !! 6
