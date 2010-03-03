@@ -75,6 +75,7 @@
 #   fd  Feb 25: codepage adjusted to UDO 7
 #   fd  Feb 26: using the new encoding commands !code_source + !code_target
 #   fd  Mar 01: !code removed
+#   fd  Mar 03: please define all !code_target in _header.ui
 #
 ################################################################################
 
@@ -82,7 +83,8 @@
 # The source files were written using the Windows codepage 1252 (Western).
 # ------------------------------------------------------------------------------
 !code_source [cp1252]
-!code_target [utf-8]
+
+# !code_target -> _header.ui
 
 !include _header.ui                       # switches
 !include _lang.ui                         # language of this document
