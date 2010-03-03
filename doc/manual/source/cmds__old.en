@@ -17,6 +17,7 @@
 #   fd  Mar 03: - new column 'deprecated since version' added (hi Gerhard ;-))
 #               - old docinfo attributes (webmaster...) listed
 #               - !else_asc, !else_stg + !end_asc, !end_stg added
+#               - more version numbers added
 #
 ################################################################################
 
@@ -39,9 +40,11 @@ The following list shows deprecated UDO commands and switches which are no longe
 (!kw [asc])                      !! query output format !\
                                  !! (!KW [ifdest]) (!code [[asc!]])
 (!kw [author])                   !! define author's name !\
-                                 !! (!KW [docinfo]) (!code [[author!]])
+                                 !! (!KW [docinfo]) (!code [[author!]]) !\
+                                 !! 6 PL14
 (!kw [authorimage])              !! define author's logo for title page !\
-                                 !! (!KW [docinfo]) (!code [[authorimage!]])
+                                 !! (!KW [docinfo]) (!code [[authorimage!]]) !\
+                                 !! 6 PL14
 !hline
 (!kw [begin_asc])                !! query output format !\
                                  !! (!KW [ifdest]) (!code [[asc!]]) !\
@@ -72,10 +75,12 @@ The following list shows deprecated UDO commands and switches which are no longe
                                  !! (!KW [code_source]) oder (!KW [code_target]) !\
                                  !! 7.00
 (!kw [country])                  !! define author's country for address block in title page !\
-                                 !! (!KW [docinfo]) (!code [[address!]])
+                                 !! (!KW [docinfo]) (!code [[address!]]) !\
+                                 !! 6 PL14
 !hline
 (!kw [date])                     !! set date information for title page !\
-                                 !! (!KW [docinfo]) (!code [[date!]])
+                                 !! (!KW [docinfo]) (!code [[date!]]) !\
+                                 !! 6 PL14
 
 (!kw [docinfo]) (!code webmastername) !\
                                  !! set webmaster name (or company, website, etc.) for title page !\
@@ -104,7 +109,8 @@ The following list shows deprecated UDO commands and switches which are no longe
                                  !! (!KW [ifdest]) (!code [[stg!]]) !\
                                  !! 5
 (!kw [email])                    !! set email information for title page !\
-                                 !! (!KW [docinfo]) (!code [[contact_name!]]) or (!KW [docinfo]) (!code [[contact_link!]])
+                                 !! (!KW [docinfo]) (!code [[contact_name!]]) or (!KW [docinfo]) (!code [[contact_link!]]) !\
+                                 !! 6 PL14
 (!kw [end_asc])                  !! query output format !\
                                  !! (!KW [ifdest]) (!code [[asc!]]) !\
                                  !! 5
@@ -144,7 +150,8 @@ The following list shows deprecated UDO commands and switches which are no longe
 (!kw [html_modern_column_width]) !! set width of left column in ""modern"" layout (HTML only) !\
                                  !! (!KW [html_modern_width])
 (!kw [html_use_xlist])           !! output xlist environment like ASCII (HTML only) !\
-                                 !! no replacement command, xlist output format has been changed
+                                 !! no replacement command, xlist output format has been changed !\
+                                 !! 6 PL14
 (!kw [htmlkeywords])             !! set HTML meta keywords !\
                                  !! (!KW [html_keywords])
 (!kw [htmlname])                 !! assign file name (HTML only) !\
@@ -186,11 +193,14 @@ The following list shows deprecated UDO commands and switches which are no longe
                                  !! (!KW [ifdest]) (!code [[man!]])
 !hline
 (!kw [no_toc_subnodes])          !! don't list subnodes in table of contents !\
-                                 !! (!KW [ignore_subtoc])
+                                 !! (!KW [ignore_subtoc]) !\
+                                 !! 6 PL14
 (!kw [no_toc_subsubnodes])       !! don't list subsubnodes in table of contents !\
-                                 !! (!KW [ignore_subsubtoc])
+                                 !! (!KW [ignore_subsubtoc]) !\
+                                 !! 6 PL14
 (!kw [no_toc_subsubsubnodes])    !! don't list subsubsubnodes in table of contents !\
-                                 !! (!KW [ignore_subsubsubtoc])
+                                 !! (!KW [ignore_subsubsubtoc]) !\
+                                 !! 6 PL14
 !hline
 (!kw [=pch])                     !! query output format !\
                                  !! (!KW [ifndest]) (!code [[pch!]])
@@ -201,9 +211,11 @@ The following list shows deprecated UDO commands and switches which are no longe
 (!kw [pdf])                      !! query output format !\
                                  !! (!KW [ifdest]) (!code [[pdf!]])
 (!kw [program])                  !! define program name for title page !\
-                                 !! (!KW [docinfo]) (!code [[program!]])
+                                 !! (!KW [docinfo]) (!code [[program!]]) !\
+                                 !! 6 PL14
 (!kw [programimage])             !! define program image (icon) for title page !\
-                                 !! (!KW [docinfo]) (!code [[programimage!]])
+                                 !! (!KW [docinfo]) (!code [[programimage!]]) !\
+                                 !! 6 PL14
 !hline
 (!kw [=rtf])                     !! query output format !\
                                  !! (!KW [ifndest]) (!code [[rtf!]])
@@ -218,11 +230,13 @@ The following list shows deprecated UDO commands and switches which are no longe
 (!kw [stg])                      !! query output format !\
                                  !! (!KW [ifdest]) (!code [[stg!]])
 (!kw [stg_no_database])          !! don't output database line (ST-Guide only) !\
-                                 !! (!KW [docinfo]) (!code [[stgdatabase!]])
+                                 !! (!KW [docinfo]) (!code [[stgdatabase!]]) !\
+                                 !! 6 PL14
 (!kw [stg_parwidth])             !! set line width (ST-Guide only) !\
                                  !! (!KW [parwidth])
 (!kw [street])                   !! set author's street for address block in title page !\
-                                 !! (!KW [docinfo]) (!code [[address!]])
+                                 !! (!KW [docinfo]) (!code [[address!]]) !\
+                                 !! 6 PL14
 (!kw [swedish])                  !! set language !\
                                  !! (!KW [language]) (!code [[swedish!]]) !\
                                  !! 6
@@ -234,14 +248,17 @@ The following list shows deprecated UDO commands and switches which are no longe
 (!kw [tex_book])                 !! output target file as ""book"" !\
                                  !! (!KW [use_style_book]) (!code [[tex!]])
 (!kw [title])                    !! define document title !\
-                                 !! (!KW [docinfo]) (!code [[title!]])
+                                 !! (!KW [docinfo]) (!code [[title!]]) !\
+                                 !! 6 PL14
 (!kw [town])                     !! set author's hometown for address block in title page !\
-                                 !! (!KW [docinfo]) (!code [[address!]])
+                                 !! (!KW [docinfo]) (!code [[address!]]) !\
+                                 !! 6 PL14
 !hline
 (!kw [udoinfo])                  !! output information page about UDO !\
                                  !! (!KW [use_about_udo])
 (!kw [use_justified])            !! use justification !\
-                                 !! (!KW [use_justification])
+                                 !! (!KW [use_justification]) !\
+                                 !! 6 PL14
 (!kw [use_xlist])                !! output xlist environments like ASCII !\
                                  !! kein Ersatzkommando, xlist-Ausgabeformatierung geändert
 !hline
@@ -249,14 +266,16 @@ The following list shows deprecated UDO commands and switches which are no longe
                                  !! (!KW [no_verbatim_umlaute]) !\
                                  !! 6.0
 (!kw [version])                  !! set program version number for the title page !\
-                                 !! (!KW [docinfo]) (!code [[version!]])
+                                 !! (!KW [docinfo]) (!code [[version!]]) !\
+                                 !! 6 PL14
 !hline
 (!kw [=win])                     !! query output format !\
                                  !! (!KW [ifndest]) (!code [[win!]])
 (!kw [win])                      !! query output format !\
                                  !! (!KW [ifdest]) (!code [[win!]])
 (!kw [win_background])           !! define background color for WinHelp !\
-                                 !! (!KW [win_backcolor])
+                                 !! (!KW [win_backcolor]) !\
+                                 !! 6 PL14
 (!kw [win_html_look])            !! output pages with gray background (WinHelp only) !\
                                  !! (!KW [win_backcolor]), (!KW [win_propfont]), (!KW [win_monofont]) !\
                                  !! 6

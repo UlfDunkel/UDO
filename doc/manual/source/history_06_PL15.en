@@ -14,119 +14,109 @@
 # -------
 # 2010:
 #   fd  Mar 01: introduced (from history_06_PL15.de)
+#   fd  Mar 03: translation adjusted
 #
 ################################################################################
 
 !begin_node Changes in release 6 PL 15
 !html_name  history_6_PL_15
 
-(!NTY)
-(!PUBLISHED [UDO~6 Patchlevel~15] [10.06.2003])
+(!PUBLISHED [UDO~6 Patchlevel~15] [June 10, 2003])
 
-!subheading Allgemeines
+!subheading General
 !begin_itemize !short
-!item Alle Indexeinträge bis zur vierten Stufe werden in die
-      Projektdatei ((!file [*.upr])) geschrieben.
-!item Die Einträge für (!code [!/label]) und (!code [!/alias]) werden
-      in die Projektdatei ((!file [*.upr])) geschrieben.
-!item Alle Heading-Einträge werden in die Projektdatei ((!file [*.upr])) geschrieben.
-!item Außerdem werden die entsprechenden Zeilennummern geschrieben.
+!item All index entrys up to fourth level will be written in the
+      project file ((!file [*.upr]))
+!item The entrys for (!code [!/label]) and (!code [!/alias]) will
+      be written in the project file ((!file [*.upr])).
+!item All heading entrys will be written in the project file ((!file [*.upr])).
+!item For all entrys the line number will be written.
 !end_itemize
 
 !subheading PostScript
 !begin_itemize
-!item Die Ausgabe in (!file [abo.c]) kann derzeit von der PostScript-Ausgabe nicht
-      benutzt werden, da diese keine zentrierte bzw. rechts!-bündige
-      Ausgabe zulässt. Deshalb wird die Standard!-ausgabe verhindert
-      und statt!-dessen eine eigene Ausgabe formuliert. Die Ausgabe erfolgt
-      in deutsch, wenn Deutsch gesetzt ist, ansonsten in englisch.
-!item Neue Funktion, um einige Zeichen, die ein Post!-script-Inter!-preter
-      als Teil des Codes inter!-pretieren würde, abzufangen.
-!item Neues Kommando für das Dokumentenlayout: (!nl)
+!item The standard output of ""about udo"" can't be used for postscript,
+      so there is a special one. The output will be done in german if
+      ""german"" ist set, otherwise in english
+!item New function for postscript output included, to hide characters
+      which can be interpreted as postscript code.
+!item New command for the document layout (!nl)
       (!code [!/doclayout [ps!] [paper!] foo]) (!nl)
-      Möglich Angaben für foo sind A3PORTRAIT, A3LANDSCAPE, A4PORTRAIT,
+      Possible values for foo: A3PORTRAIT, A3LANDSCAPE, A4PORTRAIT,
       A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE.
 
       (!code [!/doclayout [ps!] [openMode!] foo]) (!nl)
-      Mögliche Angaben stehen in der Dokumentation zu den pdf-marks.
+      You can find possible values for foo in the pdfmark primer.
 
       (!code [!/doclayout [ps!] [propfontname!] foo]) (!nl)
-      Mögliche Angaben für foo sind Zeichensatznamen, z.~B. Arial,
-      Times New Roman, sans oder sans-serif. (!nl)
-      (!B)Hinweis:(!b) Für die PostScript-Ausgabe gilt, dass für Helvetica,
-      Arial oder sans-serif immer Helvetica gesetzt wird, ansonsten
-      Times New Roman.
+      Possible value for foo are fontnames like Arial, Times New Roman,
+      ans or sans serif (!nl)
+      (!B)Hint:(!b) For postscript output will be set Helvetica if
+      helvetica, Arial or sans serif is set, otherwise times New Roman
 
       (!code [!/doclayout [ps!] [propfontsize!] foo]) (!nl)
-      Mögliche Angabe für foo ist eine Zeichensatzgröße in pt.
+      Possible values for foo are fontsizes with unit pt
 !item (!code [!/docinfo [keywords!] foo]) (!nl)
-      Ersatz und Erweiterung für (!code [!/html_keywords]) (funkioniert
-      derzeit nur für PostScript).
+      Replacement for (!code [!/html_keywords]) (works only for postscript)
 !item (!code [!/docinfo [description!] foo]) (!nl)
-      Ersatz und Erweiterung für (!code [!/html_description]) (funktioniert
-      derzeit nur für PostScript)
-!item Für die PostScript-Ausgabe wird jetzt auch eine Titelseite erzeugt.
-!item Für die Standard-Kopfzeile wird aus ""Titel"" und ""Programm""
-      (!code [(!/docinfo!)]) ein Text erstellt.
-!item Für die Standard-Fusszeile wird aus ""Author"" (!code [(!/docinfo!)])
-      ein Text erstellt.
-!item Aus den Angaben aus (!code [(!/docinfo!)]) werden die Angaben für die
-      Dokumenten!-informationen einer PDF-Datei zusammen!-gestellt.
-!item Die Description- und Listumgebungen werden für PostScript
-      unterstützt.
-!item Neue Aufzählungszeichen für die Itemize-Umgebung.
-!item Der Zeichensatz ""Symbol"" kann benutzt werden.
-!item Interne Links (!code [!/link ...!)]), externe Links (!code [(!/xlink ...!)])
-      und (!code [(!/url ...!)]) werden für PDF (via PostScript) umgesetzt.
-!item Fußnoten werden für die PostScript-Ausgabe umgesetzt.
-!item Die Tabellen werden jetzt leserlich mit monospaced Zeichen umgesetzt.
-!item Die Kommandos (!code [!/bigskip]), (!code [!/medskip]) und (!code [!/smallskip])
-      werden jetzt leserlich umgesetzt.
-!item Alle Nodes werden für die PostScript-Ausgabe als ""Named Destination""
-      angelegt. Es kann also von außerhalb auf jedes Kapitel einer PDF-Datei
-      verwiesen werden.
-!item Aus allen Nodes wird ein Bookmark-Verzeichnis für PDF-Dateien erzeugt.
-!item Wenn (!code [!/tableofcontents]) gesetzt ist, wird ein Inhaltsverzeichnis
-      ausgegeben.
-!item Für (!code [!/label]) wird ein ""Named Destination"" gesetzt.
+      Replacement for (!code [!/html_description]) (works only for postscript)
+!item There is built a titlepage for postscript output now.
+!item For the standard heading line the title and programm items are
+      extracted from (!code [(!/docinfo!)])
+!item For the standard footer line the author item is extracted from
+      (!code [(!/docinfo!)])
+!item The document info of a PDF file is build from the values of
+      the (!code [(!/docinfo!)])
+!item Description- and list environments are supported for postscript
+!item New characters for the itemize environment
+!item The font ""Symbol"" can be used.
+!item Internal links (!code [!/link ...!)]), external links (!code [(!/xlink ...!)])
+      und (!code [(!/url ...!)]) are transposed for PDF (via PostScript)
+!item Footnotes are transposed for postscript
+!item Tables are transposed legible with monospaced characters
+!item Commands (!code [!/bigskip]), (!code [!/medskip]) and (!code [!/smallskip])
+      are transposed legible now.
+!item All nodes are set as ""Named Destination"", so it is possible to
+      link from outside directly to every node of a pdf file.
+!item With data from all nodes is built a bookmark content table
+!item Table of contents will be put out, if (!code [!/tableofcontents]) is set
+!item (!code [!/label]) will be transposed to a ""Named Destination""
 !end_itemize
 
 !subheading Hypertext Markup Language (HTML)
 !begin_itemize
-!item Neue Kommandos für die HTML-Ausgabe: (!nl)
+!item New commands for the HTML output: (!nl)
       (!code [!/html_style_name foo]) (!nl)
-      Zum Setzen eines externen Stylesheets für alle Dateien eines Projektes.
+      Set an external stylesheet for all files of a project
 
       (!code [!/html_script_name foo]) (!nl)
-      Zum Setzen eines externen Scriptes für alle Dateien eines Projektes.
+      Set an external script for all files of a project
 
       (!code [!/html_favicon_name foo]) (!nl)
-      Zum Setzen eines Faforiten-Icons für alle Dateien eines Projektes.
+      Set an favicon for all files of a project
 
-      (!B)Achtung:(!b) Möglicherweise werden die Kommandos nochmal
-      geändert.
-!item Trennzeichen (!code [&shy;]) für die Worttrennung in HTML eingefügt
-!item Die Gedankenstriche (!code [&ndash;]) und (!code [&mdash;]) sowie
-      die drei Auslassungspunkte (!code [&hellip;]) werden für HTML gesetzt.
-!item Setzen der Links für die Navigation über das Element (!code [(!LINK)]).
-      Folgende Attribute werden unterstützt: (!code [contents]), (!code [start]), (!code [first]),
-      (!code [previous]), (!code [prev]), (!code [next]), (!code [last]) und (!code [copyright]) (!nl)
-      Die Links für (!code [first]) und (!code [last]) sowie (!code [previous])
-      gelten nur für CAB (evtl. iCab). Der Link für (!code [copyright])
-      zeigt auf aboutudo und wird auch nur dann angelegt. (!nl)
-      CAB unterstützt beim Element (!code [(!LINK)]) leider nicht das Attribut
-      (!code [target]). Daher funktionieren die Links bei der Benutzung
-      von Frames nicht so schön.
-!item Werden bei der HTML-Ausgabe Frames erzeugt, wird zusätzlich ein Bereich
-      <noframes></noframes> mit Inhaltsverzeichnis gesetzt, damit auch
-      Browser, die gar keine Frames kennen/können (z.B. beim Vorlesen)
-      an das Inhalts!-ver!-zeichnis kommen.
+      (!B)Important:(!b) This commands may be changed in future possibly.
+!item Character (!code [&shy;]) for hyphenation in HTML included
+!item The entities (!code [&ndash;]), (!code [&mdash;]) and (!code [&hellip;])
+      are used for HTML.
+!item Setting links for the navigation through a project of HTML sites
+      via the element (!code [(!LINK)]).
+      The following attributes are suppoerted: (!code [contents]), (!code [start]), (!code [first]),
+      (!code [previous]), (!code [prev]), (!code [next]), (!code [last]) and (!code [copyright]) (!nl)
+      The links for (!code [first]), (!code [last]) and (!code [previous])
+      are only vaild for CAB (perhaps iCab). The link for (!code [copyright])
+      introduces a link to aboutudo and in this case will be built. (!nl)
+      CAB doesn't support the attribute (!code [target]), when using the
+      element (!code [(!LINK)]). Therfore this link-Element doesn't work so
+      properly if frames are used.
+!item If frames are built for HTML output, there will be built a
+      <noframes></noframes> area with a table of contents too. Therefor
+      browser, which doesn't knows frames, can read the content.
 !end_itemize
 
 !subheading Rich Text Format (RTF)
 !begin_itemize
-!item Absatzkontrolle (Orphans & Widows) wird für die RTF-Ausgabe
-      standard!-mäßig eingeschaltet.
+!item Paragraph checks for orphans and widows are used now.
 !end_itemize
 
 !end_node
