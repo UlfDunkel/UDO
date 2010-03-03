@@ -14,6 +14,8 @@
 # -------
 # 2010:
 #   fd  Mar 01: introduced
+#   fd  Mar 03: - new column 'deprecated since version' added (hi Gerhard ;-))
+#               - old docinfo attributes (webmaster...) listed
 #
 ################################################################################
 
@@ -24,7 +26,8 @@ Die nachfolgend aufgelisteten UDO-Kommandos und -Schalter sind veraltet und werd
 
 !begin_table [l|l|l] !hline
 (!B)Alt(!b)                      !! (!B)Funktion(!b) !\
-                                 !! (!B)Neu(!b)
+                                 !! (!B)Neu(!b) !\
+                                 !! (!B)Veraltet seit(!b)
 !hline
 (!kw [=aqv])                     !! Ausgabeformat abfragen !\
                                  !! (!KW [ifndest]) (!code [[aqv!]])
@@ -45,37 +48,65 @@ Die nachfolgend aufgelisteten UDO-Kommandos und -Schalter sind veraltet und werd
                                  !! (!KW [ifdest]) (!code [[stg!]])
 !hline
 (!kw [code])                     !! Encoding des Quelltextes festlegen !\
-                                 !! (!KW [code_source])
+                                 !! (!KW [code_source]) !\
+                                 !! 7.00
 (!kw [code_dos])                 !! Auf einen anderen Zeichensatz umschalten !\
-                                 !! (!KW [code_source]) oder (!KW [code_target])
+                                 !! (!KW [code_source]) oder (!KW [code_target]) !\
+                                 !! 7.00
 (!kw [code_hp8])                 !! Auf einen anderen Zeichensatz umschalten !\
-                                 !! (!KW [code_source]) oder (!KW [code_target])
+                                 !! (!KW [code_source]) oder (!KW [code_target]) !\
+                                 !! 7.00
 (!kw [code_iso])                 !! Auf einen anderen Zeichensatz umschalten !\
-                                 !! (!KW [code_source]) oder (!KW [code_target])
+                                 !! (!KW [code_source]) oder (!KW [code_target]) !\
+                                 !! 7.00
 (!kw [code_mac])                 !! Auf einen anderen Zeichensatz umschalten !\
-                                 !! (!KW [code_source]) oder (!KW [code_target])
+                                 !! (!KW [code_source]) oder (!KW [code_target]) !\
+                                 !! 7.00
 (!kw [code_next])                !! Auf einen anderen Zeichensatz umschalten !\
-                                 !! (!KW [code_source]) oder (!KW [code_target])
+                                 !! (!KW [code_source]) oder (!KW [code_target]) !\
+                                 !! 7.00
 (!kw [code_tos])                 !! Auf einen anderen Zeichensatz umschalten !\
-                                 !! (!KW [code_source]) oder (!KW [code_target])
+                                 !! (!KW [code_source]) oder (!KW [code_target]) !\
+                                 !! 7.00
 (!kw [country])                  !! Land des Autors für den Adressblock der Titelseite setzen. !\
                                  !! (!KW [docinfo]) (!code [[address!]])
 !hline
 (!kw [date])                     !! Datumsinformation für Titelseite setzen !\
                                  !! (!KW [docinfo]) (!code [[date!]])
+                                 
+(!kw [docinfo]) (!code webmastername) !\
+                                 !! Name des Webmasters (oder Firma, Website, usw.) auf der Titelseite setzen !\
+                                 !! (!KW [docinfo]) (!code [[domain_name!]]) !\
+                                 !! 7.01
+(!kw [docinfo]) (!code webmasterurl) !\
+                                 !! Link zum Webmaster (s.o.) auf der Titelseite setzen !\
+                                 !! (!KW [docinfo]) (!code [[domain_link!]]) !\
+                                 !! 7.01
+(!kw [docinfo]) (!code webmasteremail) !\
+                                 !! Webmaster-E-Mail (oder Kontaktseiten-Link) auf der Titelseite setzen !\
+                                 !! (!KW [docinfo]) (!code [[contact_name!]]) !\
+                                 !! 7.01
+(!kw [docinfo]) (!code webmastermailurl) !\
+                                 !! Webmaster-E-Mail oder Kontaktseiten-Link auf der Titelseite setzen !\
+                                 !! (!KW [docinfo]) (!code [[contact_link!]]) !\
+                                 !! 7.01
+                                 
 (!kw [drc])                      !! Ausgabeformat abfragen !\
                                  !! (!KW [ifdest]) (!code [[drc!]])
 !hline
 (!kw [email])                    !! E-Mail-Informationen für die Titelseite setzen !\
-                                 !! (!KW [docinfo]) (!code [[webmastermailurl!]]) oder (!KW [docinfo]) (!code [[webmasteremail!]])
+                                 !! (!KW [docinfo]) (!code [[contact_name!]]) oder (!KW [docinfo]) (!code [[contact_link!]])
 (!kw [english])                  !! Sprache setzen !\
-                                 !! (!KW [language]) (!code [[english!]])
+                                 !! (!KW [language]) (!code [[english!]]) !\
+                                 !! 6
 !hline
 (!kw [french])                   !! Sprache setzen !\
-                                 !! (!KW [language]) (!code [[french!]])
+                                 !! (!KW [language]) (!code [[french!]]) !\
+                                 !! 6
 !hline
 (!kw [german])                   !! Sprache setzen !\
-                                 !! (!KW [language]) (!code [[german!]])
+                                 !! (!KW [language]) (!code [[german!]]) !\
+                                 !! 6
 !hline
 (!kw [=htag])                    !! Ausgabeformat abfragen !\
                                  !! (!KW [ifndest]) (!code [[htag!]])
@@ -111,7 +142,8 @@ Die nachfolgend aufgelisteten UDO-Kommandos und -Schalter sind veraltet und werd
 (!kw [info])                     !! Ausgabeformat abfragen !\
                                  !! (!KW [ifdest]) (!code [[info!]])
 (!kw [italian])                  !! Sprache setzen !\
-                                 !! (!KW [language]) (!code [[italian!]])
+                                 !! (!KW [language]) (!code [[italian!]]) !\
+                                 !! 6
 !hline
 (!kw [jumpid])                   !! Ausgabe einer Node-ID (nur WinHelp) !\
                                  !! (!KW [win_helpid])
@@ -124,11 +156,14 @@ Die nachfolgend aufgelisteten UDO-Kommandos und -Schalter sind veraltet und werd
 (!kw [ldoc])                     !! Ausgabeformat abfragen !\
                                  !! (!KW [ifdest]) (!code [[ldoc!]])
 (!kw [list_parsep])              !! Umgebungen komprimieren !\
-                                 !! (!KW [short])
+                                 !! (!KW [short]) !\
+                                 !! 6
 (!kw [list_parsep_off])          !! Umgebungen komprimieren !\
-                                 !! (!KW [short])
+                                 !! (!KW [short]) !\
+                                 !! 6
 (!kw [list_parsep_on])           !! Umgebungen komprimieren !\
-                                 !! (!KW [short])
+                                 !! (!KW [short]) !\
+                                 !! 6
 !hline
 (!kw [=man])                     !! Ausgabeformat abfragen !\
                                  !! (!KW [ifndest]) (!code [[man!]])
@@ -163,7 +198,8 @@ Die nachfolgend aufgelisteten UDO-Kommandos und -Schalter sind veraltet und werd
 (!kw [=stg])                     !! Ausgabeformat abfragen !\
                                  !! (!KW [ifdest]) (!code [[stg!]])
 (!kw [spanish])                  !! Sprache setzen !\
-                                 !! (!KW [language]) (!code [[spanish!]])
+                                 !! (!KW [language]) (!code [[spanish!]]) !\
+                                 !! 6
 (!kw [stg])                      !! Ausgabeformat abfragen !\
                                  !! (!KW [ifdest]) (!code [[stg!]])
 (!kw [stg_no_database])          !! Keine Database-Zeile ausgeben (nur ST-Guide) !\
@@ -173,7 +209,8 @@ Die nachfolgend aufgelisteten UDO-Kommandos und -Schalter sind veraltet und werd
 (!kw [street])                   !! Straße des Autors für den Adressblock der Titelseite setzen !\
                                  !! (!KW [docinfo]) (!code [[address!]])
 (!kw [swedish])                  !! Sprache setzen !\
-                                 !! (!KW [language]) (!code [[swedish!]])
+                                 !! (!KW [language]) (!code [[swedish!]]) !\
+                                 !! 6
 !hline
 (!kw [=tex])                     !! Ausgabeformat abfragen !\
                                  !! (!KW [ifndest]) (!code [[tex!]])
@@ -194,7 +231,8 @@ Die nachfolgend aufgelisteten UDO-Kommandos und -Schalter sind veraltet und werd
                                  !! kein Ersatzkommando, xlist-Ausgabeformatierung geändert
 !hline
 (!kw [verbatim_no_umlaute])      !! Keine Umlaute in verbatim-Umgebungen verwenden. !\
-                                 !! (!KW [no_verbatim_umlaute])
+                                 !! (!KW [no_verbatim_umlaute]) !\
+                                 !! 6
 (!kw [version])                  !! Versionsnummer des Programms für die Titelseite setzen !\
                                  !! (!KW [docinfo]) (!code [[version!]])
 !hline
@@ -205,7 +243,8 @@ Die nachfolgend aufgelisteten UDO-Kommandos und -Schalter sind veraltet und werd
 (!kw [win_background])           !! Hintergrundfarbe für WinHelp setzen !\
                                  !! (!KW [win_backcolor])
 (!kw [win_html_look])            !! Seiten mit grauem Hintergrund ausgeben (nur WinHelp) !\
-                                 !! (!KW [win_backcolor]), (!KW [win_propfont]), (!KW [win_monofont])
+                                 !! (!KW [win_backcolor]), (!KW [win_propfont]), (!KW [win_monofont]) !\
+                                 !! 6
 
 !end_table
 
