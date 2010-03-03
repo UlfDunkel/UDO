@@ -20,71 +20,57 @@
 !begin_node Changes in release 6 PL 16
 !html_name  history_6_PL_16
 
-(!NTY)
 (!PUBLISHED [UDO~6 Patchlevel~16] [28.09.2003])
 
 !begin_description
-!item [Neue Befehle:]
-   !begin_itemize !short
-   !item (!code [!/html_default_hyphenation]) (!nl)
-         Nur wenn dieses Kommando gesetzt ist, werden die bedingten
-         Trennstriche (!code [!/-]) bei der HTML-Ausgabe in (!code [&shy;])
-         umgesetzt.
-   !item (!code [!/node1_size foo]) (!nl)
-         Mit diesem Kommando (Vorspann) kann die Größe der Nodes und Headings
-         bei der PostScript-Ausgabe festgelegt werden (foo: Zeichensatzgröße
-         in pt).
-   !item (!code [!/node2_size foo]) (!nl)
-         Mit diesem Kommando (Vorspann) kann die Größe der Subnodes und
-         Subheadings bei der PostScript-Ausgabe festgelegt werden (foo:
-         Zeichensatzgröße in pt).
-   !item (!code [!/node3_size foo]) (!nl)
-         Mit diesem Kommando (Vorspann) kann die Größe der Subsubnodes und
-         Subsubheadings bei der PostScript-Ausgabe festgelegt werden
-         (foo: Zeichensatzgröße in pt).
-   !item (!code [!/node4_size foo]) (!nl)
-         Mit diesem Kommando (Vorspann) kann die Größe der Subsubsubnodes
-         und Subsubsubheadings bei der PostScript-Ausgabe festgelegt
-         werden (foo: Zeichensatzgröße in pt).
-   !end_itemize
+!item [New commands:]
+      !begin_itemize !short
+      !item (!code [!/html_default_hyphenation]) (!nl)
+            Only if this command is set, the Hyphenation marks for
+            the HTML output are converted to (!code [&shy;])
+      !item (!code [!/node1_size foo]) (!nl)
+            This command sets the fontsize of nodes and headings for
+            postscript output (foo: fontsize in pt).
+      !item (!code [!/node2_size foo]) (!nl)
+            This command sets the fontsize of subnodes and subheadings for
+            postscript output (foo: fontsize in pt).
+      !item (!code [!/node3_size foo]) (!nl)
+            This command sets the fontsize of subsubnodes and subsubheadings
+            for postscript output (foo: fontsize in pt).
+      !item (!code [!/node4_size foo]) (!nl)
+            This command sets the fontsize of subsubsubnodes and
+            subsubsubheadings for postscript output (foo: fontsize in pt).
+      !end_itemize
 
-!item [Neuheiten:]
-   !begin_itemize !short
-   !item In der ersten Datei der HTML-Ausgabe wird jetzt ein Meta-Tag
-         für AppleTitle/JobTimerHelp angelegt.
-   !item Jetzt werden auch Nodes, die mit (!KW [html_name]) einen
-         ausführlichen Namen bekommen haben (z.~B. foo.php) richtig
-         referenziert.
-   !item Für die HTML-Ausgabe wird jetzt im Tag <ul> zusätzlich
-         (!code [<ul class="content">]) ausgegeben. Dadurch kann
-         man mittels eines Eintrages im Stylesheet
-         (!code [(ul.content~{~list-style-type:~none;~}!)]) die
-         Aufzählungspunkte in den Inhaltsverzeichnissen vermeiden.
-   !item Bei der HTML-Ausgabe wird jetzt ein (!code [<span style="page-break-after:always;"></span>])
-         gesetzt, dann können Browser, die das verstehen, beim Ausdruck
-         einen Seitenumbruch vornehmen.
-   !item Die Bildunterschriften werden jetzt als Feld ausgegeben, damit
-         ein Abbildungs!-ver!-zeichnis erstellt werden kann.
-   !item Für RTF wird jetzt eine einzelne Seite erzeugt, die ein
-         Ab!-bildungs!-ver!-zeichnis enthält, wenn (!code [!/listoffigures])
-         gesetzt ist. Dieses muss nur aktualisiert werden.
-   !item Es werden Vorgaben für das Layout für die PostScript-Ausgabe
-         gemacht: Art und Größe des proportionalen und äquidistanten
-         Zeichensatzes sowie die Öffnungsparameter für PDF-Dateien.
-   !end_itemize
+!item [News:]
+      !begin_itemize !short
+      !item In the first file of the HTML output ist set a meta tag for AppleTitle/JobTimerHelp.
+      !item All nodes, which got a special name (e.g. foo.php) by (!code [!/html_name]) are referenced correct now.
+      !item The table of contents ist included in the tag (!code [<ul>]).
+            This tag is extended to (!code [<ul class="content">]).
+            Therefore you can choose, weather the bullets in front of
+            every item should be drawn or not. You can control it by
+            ul.content~{~list-style-type:~none;~} in a CSS file.
+      !item For every (!code [!/newpage]) there will be given out a
+            (!code [<span style="page-break-after:always;"></span>]).
+            So user agents who knows about it, can make a pge break.
+      !item The image captions will be put out as a field for RTF output.
+            Therefore a table of images could be created.
+      !item There would be build a speacial page with a macro of a list of
+            figures for the RTF output, even if (!code [!/listoffigure])
+            is set. The macro must be executed in the word processor.
+      !item The default values are set for kind and heightness of fonts
+            and who PDF files will be opened.
+      !end_itemize
 
-!item [Änderungen:]
-   !begin_itemize !short
-   !item (!code [!/html_backpage ../index.html "Zurück zur UDO-Website"]) (!nl)
-         Jetzt kann zusätzlich ein Text übergeben werden, der statt
-         des Links in das alt-Attribut eingetragen wird. Der Text muss
-         in einfachen Anführungszeichen stehen ("foo")
-   !item Die Bildunterschrift wird bei der Ausgabe nach RTF nicht
-         mehr in Klammern gesetzt.
-   !item Die Bilder werden jetzt bei der Ausgabe nach RTF innerhalb
-         von Umgebungen mit eingerückt.
-   !end_itemize
-   
+!item [Changes:]
+      !begin_itemize !short
+      !item (!code [!/html_backpage ../index.html "Back to UDO website"]) (!nl)
+            You can tell UDO to set a special text instead of the link text in the ""alt"" attribute. 
+            The text must be included in single quotation marks.
+      !item The caption of the image won't be put in parenthis for RTF output any longer.
+      !item The images will be shifted with the text too, if they are in a special environment.
+      !end_itemize
 !end_description
 
 !end_node

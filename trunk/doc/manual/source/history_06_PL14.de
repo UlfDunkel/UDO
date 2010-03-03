@@ -132,8 +132,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !item (!KW [subtoc_offset]), 
          (!KW [subsubtoc_offset]),
          (!KW [subsubsubtoc_offset])
-   !item (!I)(!/index)(!i)
-#TODO: (!KKW [index]) funktioniert nicht???
+   !item (!KW [index])
    !item (!KW [chaptericon_text])
    !item (!KW [html_propfont_name]), 
          (!KW [html_propfont_size])

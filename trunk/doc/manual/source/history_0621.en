@@ -14,51 +14,41 @@
 # -------
 # 2010:
 #   fd  Mar 01: introduced (from history_0621.de)
+#   fd  Mar 03: translation adjusted
 #
 ################################################################################
 
 !begin_node Changes in release 6.2.1
 !html_name  history_6_2_1
 
-(!NTY)
 (!PUBLISHED [UDO~6.2.1] [09.12.2003])
 
 !heading PDF-(!LaTeX)
 !begin_description
 !item [(!BUGFIXES)]
-   !begin_itemize !short
-   !item Wenn PDF-(!LaTeX) als Zielformat gesetzt wird, wird die (!TeX)-Version
-         nicht mehr auf Mik-(!TeX) gesetzt.
-   !item Umsetzung der Links für die PDF-(!LaTeX)-Ausgabe geändert.
-   !item Umsetzung der PDF-(!LaTeX)-Ausgabe für Bilder geändert.
-   !item Die Informationen von (!KW [docinfo]) werden jetzt richtig übergeben für
-         die PDF-(!LaTeX)-Ausgabe.
-   !end_itemize
-
+      !begin_itemize !short
+      !item If the destination is pdf(!LaTeX), the (!TeX) version isn't set to Mik(!TeX) any longer.
+      !item Made changes for links and URLs for pdf(!LaTeX) output.
+      !item Made changes for images for pdf(!LaTeX) output.
+      !item The information of (!KW [docinfo]) ist submitted correct for pdf(!LaTeX) output.
+      !end_itemize
 !end_description
 
 !heading Richtext Format (RTF)
 !begin_description
 !item [(!BUGFIXES)]
-   !begin_itemize !short
-   !item Bug (!BUG [24]) in Version 6.2.1 beseitigt (!nl)
-         In den (!LINK)-Elementen wurde alle Subsubnodes aus anderen Subnodes
-         mit aufgeführt
-   !item Bug (!BUG [25]) in Version 6.2.1 beseitigt (!nl)
-         UDO stürzte ab, wenn Umlaute im Dateinamen oder Domain eines URL
-         im Kommando (!/url !..) vorkamen.
-   !item Bug (!BUG [29]) in Version 6.2.1 beseitigt (!nl)
-         Bei (!/url !..) wurde bei der RTF-Ausgabe das führende
-         Anführungszeichen und das folgende Wort verschluckt, weil ein
-         Leerzeichen fehlte.
-   !item Bug (!BUG [30]) in Version 6.2.1 beseitigt (!nl)
-         Feste Leerzeichen in Links wurden bei der RTF-Ausgabe falsch
-         umgesetzt (\\~ statt \~).
-   !item Bug (!BUG [39]) in Version 6.2.1 beseitigt (!nl)
-         Obwohl !html_name_prefix gesetzt war, fehlte der entsprechende
-         Zusatz in den (!LINK)-Elementen zur Navigation.
-   !end_itemize
-
+      !begin_itemize !short
+      !item Fixed bug #0000024 in version 6.2.1 (!nl)
+            In the (!LINK) elements are listed all subsubnodes of other subnodes
+      !item Fixed bug #0000025 in version 6.2.1 (!nl)
+            UDO chrashed, when umlauts are used in the filename or domain in the command (!/url !..).
+      !item Fixed bug #0000029 in version 6.2.1 (!nl)
+            By using (!/url !..) for RTF output, the opening quote and the following word were swallowed because of missing blanks.
+      !item Fixed bug #0000030 in version 6.2.1 (!nl)
+            Nonbreaking blanks are converted wrong, when used in a link and for RTF output (\\~ instead of \~).
+      !item Fixed bug #0000039 in version 6.2.1 (!nl)
+            Although !html_name_prefix was set, the prefix was missed in the (!LINK) elements for navigation.
+      !end_itemize
 !end_description
 
 !end_node
