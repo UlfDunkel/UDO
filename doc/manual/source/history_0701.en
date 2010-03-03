@@ -1,0 +1,62 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 7.01
+# Language    : English
+# Initial Date: 2010-03-02
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  Mar 02: introduced
+#   fd  Mar 03: - new docinfo attributes: domain_..., contact_...
+#               - using INCOMPLETE, PUBLISHED
+#
+################################################################################
+
+!begin_node Changes in version 7.01
+!html_name  history_0701
+
+(!INCOMPLETE)
+# (!PUBLISHED [UDO~7.01][March 3, 2010])
+
+!begin_description !short
+# ----------------------------------------
+!item [docinfo]
+# ----------------------------------------
+!begin_itemize
+!item The rather irritating (!KW [docinfo]) attribute names(!code [webmastername]), (!code [webmasterurl]), (!code [webmasteremail]), and (!code [webmastermailurl]) have been renamed:
+!begin_table [l|l] !hlist
+(!B)old(!b)       !! (!B)new(!b)
+webmastername     !! domain_name
+webmasterurl      !! domain_link
+webmasteremail    !! contact_name
+webmastermailurl  !! contact_link
+!end_table
+!end_itemize
+
+
+
+
+
+# ----------------------------------------
+!item [UDO]
+# ----------------------------------------
+   !begin_itemize
+   !item The UDO versions for Mac OS and Mac OS X now register as ""UDO for Mac OS"" and ""UDO for Mac OS X"".
+   !end_itemize
+
+
+
+
+
+!end_description
+
+!end_node
+
+# === EOF ===

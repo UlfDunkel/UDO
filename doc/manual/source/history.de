@@ -33,7 +33,8 @@
 #   fd  Jun 10: using macro (!const [])
 #   fd  Jun 16: great review session #1
 # 2010:
-#   fd  Feb 25: history_0700.de
+#   fd  Feb 25: history_0700
+#   fd  Mar 03: history_0701
 #
 ################################################################################
 
@@ -44,6 +45,7 @@ Hier finden Sie alle Änderungen, die zwischen den einzelnen Versionen von UDO au
 
 # = = = = =
 
+!include history_0701.de
 !include history_0700.de
 !include history_0640.de
 !include history_0621.de
