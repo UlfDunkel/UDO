@@ -1,0 +1,44 @@
+UDO020.TTP
+
+.C[ -DUSE_PCTOS]
+.C[ -D__COMPATIBLE__ ]
+.C[ -C- ]
+.C[ -K ]
+.C[ -2 ]
+.C[ -P ]
+.L[ -S=64000 ]
+;.C[ -Y ]
+;.L[ -Y -G -L ]
+
+=
+
+; Startup-Code from Stefan Kuhr @ OS
+StUpArgv.O
+
+; Die UDO-Quellen
+..\abo.c
+..\cfg.c
+..\chr.c
+..\env.c
+..\file.c
+..\img.c
+..\lang.c
+..\msg.c
+..\par.c
+..\str.c
+..\sty.c
+..\tab.c
+..\toc.c
+..\toc_html.c
+..\tp.c
+..\udo.c
+..\udomem.c
+..\cli.c
+
+; The TOS-Bibliothek
+pctos.lib		; Moderner Ersatz (look at http://acspro.atari.org)
+;pctoslib.lib	; Original Pure-C-Bibliothek
+
+; Die Pure-C-Bibliotheken
+pcfltlib.lib
+pcstdlib.lib
