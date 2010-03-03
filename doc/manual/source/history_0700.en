@@ -14,6 +14,8 @@
 # -------
 # 2010:
 #   fd  Mar 01: introduced (from history_0700.de)
+#   fd  Mar 02: translated
+#   fd  Mar 03: using PUBLISHED
 #
 ################################################################################
 
@@ -22,7 +24,7 @@
 
 UDO~7 is a big upgrade since the last released version. Especially the full Unicode support and many HTML output enhancements make this version more powerful than ever.
 
-UDO~7.00 has been released on March 1, 2010.
+(!PUBLISHED [UDO~7.00] [March 1, 2010])
 
 !begin_description !short
 # ----------------------------------------
@@ -127,94 +129,91 @@ UDO~7.00 has been released on March 1, 2010.
 
 
 # ----------------------------------------
-!item [Strukturelles]
+!item [Structural]
 # ----------------------------------------
 
    !begin_itemize
    
-   !item (!KW [docinfo]) hat weitere Argumente erhalten:
+   !item (!KW [docinfo]) offers more arguments:
          !begin_blist
          !item [[category]]
-               bezeichnet eine Kategorie, zu der das Dokument gehört.
+               describes a category the document belongs to.
          !item [[company]]
-               bezeichnet die Firma, für die ein Dokument erstellt wird. 
-               Wenn [company] benutzt wird, wird auf der Titelseite unter Autor "für [company]" eingefügt.
+               describes the company which has created or owns the document.
+               When you use [company], the title page shows a ""for [company]"" line below the author line.
          !item [[distributor]]
-               bezeichnet die Firma, die das Produkt oder Dokument vertreibt. 
-               Wenn [distributor] benutzt wird, wird auf der Titelseite nach Autor und Firma "Distributor: [distributor]" eingefügt.
+               describes the company which distributes the product or document.
+               When you use [distributor], the title page shows a ""Distributor: [distributor]"" line below the author and company lines.
          !item [[translator]]
-               bezeichnet den Namen des Übersetzers, der das Produkt oder Dokument übersetzt hat. 
-               Wenn [translator] benutzt wird, wird auf der Titelseite nach Autor und Firma "Übersetzung: [translator]" eingefügt.
+               describes the translator's name who localized the product or document.
+               When you use [translator], the title page shows a ""Translation: [translator]"" line below the author and company lines.
          !end_blist
    
-   !item Die (!KW [docinfo])-Optionen (!code [[program!]]) und (!code [[programimage!]]) 
-         schließen sich nicht mehr gegenseitig aus, sondern können jetzt gleichzeitig ausgegeben werden. 
-         Wenn beide benutzt werden, wird [program] zuerst ausgegeben.
+   !item The (!KW [docinfo]) options (!code [[program!]]) and (!code [[programimage!]]) no longer exclude each other,
+         but can be used simultaneously. When you use both options, [program] will be output first.
       
-   !item Index-Link im Inhaltsverzeichnis:
+   !item Index link in table of contents
          !begin_blist
          !item [(!KW [use_udo_index])]
-               Wenn dieser Schalter benutzt wird, wird ein Link ""Index"" im Abschnitt (!KW [tableofcontents]) ausgegeben.
+               When you use this switch, an ""Index"" link will be added to the (!KW [tableofcontents]) section or page.
          !end_blist
 
-   !item Zeilen zusammenkleben:
+   !item Concatenate text lines:
          !begin_blist
          !item [!\]
-               Endet eine UDO-Eingabezeile mit (!code [!\<Zeilenumbruch>]), wird die folgende Zeile 
-               von UDO als Fortsetzung der vorhergehenden Zeile aufgefasst. Es können damit mehrere ""echte"" Zeilen 
-               aus Sicht von UDO zu einer einzigen ""logischen"" Eingabezeile zusammengefasst werden.
-               Diese Fortsetzungszeilen sind an jeder Stelle im UDO-Quelltext zulässig, auch z.B. in Makros
-               und Definitionen. Steht (!code [!\]) nicht unmittelbar am Ende einer Zeile, wird es ignoriert
-               und als normaler Text ausgegeben.
+               If an UDO source document line ends with (!code [!\<linefeed>]), the following line will be seen as sequel of the current line. 
+               You can even let UDO concatenate multiple ""real!"" lines to a longer ""logical"" line. 
+               These sequel lines can be used everywhere in an UDO source document, even in macros and definitions. 
+               If (!code [!\]) is not found at the very end of a line, it will be simply ignored and output like normal text.
          !end_blist
          
          (!EXAMPLE_BEGIN)
-         Eine mögliche Anwendung ist, den Inhalt einer Tabellenzeile auf mehrere Zeilen
-         in der Eingabedatei aufzuteilen, um die Lesbarkeit des UDO-Quelltextes zu verbessern.
+         Chances are that you want to divide the content of a table cell into multiple lines, 
+         in order to get a better readability of the UDO source document.
          
          (!EXAMPLE_BEFORE)
 !begin_verbatim
 !begin_table
-Das hier ist Zelle 1 !! !\
-Das hier ist Zelle 2 !! !\
-Das hier ist Zelle 3
+This is cell #1 !! !\
+This is cell #2 !! !\
+This is cell #3
 !end_table
 !end_verbatim
          (!EXAMPLE_AFTER)
          !begin_table
-         Das hier ist Zelle 1 !! Das hier ist Zelle 2 !! Das hier ist Zelle 3
+         This is cell #1 !! This is cell #2 !! This is cell #3
          !end_table
          (!EXAMPLE_END)
          
-   !item Neuer Kommandozeilen-Parameter:
+   !item New commandline parameter:
          !begin_blist
          !item [(--)no-warningslines]
-               Keine Warnungen ausgeben
+               No output of warnings
          !item [-Wl]
-               Kurzschreibweise des o.g. Kommandozeilen-Parameters.
+               Abbreviated form of the above command line parameter.
          !end_blist
 
-   !item (!B)Neue Schalter:(!b) (!nl)
+   !item (!B)New switches:(!b) (!nl)
          !begin_blist
          !item [(!KW [use_short_descriptions])]
-               Gibt alle Description-Umgebungen ""kompress"", also ohne zusätzliche Leerzeilen zwischen Absätzen, aus.
+               Outputs all description environments ""compressed"" (which means without additional empty lines between paragraphs).
          !item [(!KW [use_short_enumerates])]
-               Gibt alle Enumerate-Umgebungen ""kompress"", also ohne zusätzliche Leerzeilen zwischen Absätzen, aus.
+               Outputs all enumerate environments ""compressed"" (which means without additional empty lines between paragraphs).
          !item [(!KW [use_short_itemizes])]
-               Gibt alle Itemize-Umgebungen ""kompress"", also ohne zusätzliche Leerzeilen zwischen Absätzen, aus.
+               Outputs all itemize environments ""compressed"" (which means without additional empty lines between paragraphs).
          !item [(!KW [use_short_lists])]
-               Gibt alle Listen-Umgebungen ""kompress"", also ohne zusätzliche Leerzeilen zwischen Absätzen, aus.
+               Outputs all list environments ""compressed"" (which means without additional empty lines between paragraphs).
          !end_blist
-         Diese vier neuen Schalter bieten eine differenziertere Steuerung der Umgebungen-Formatierung, als es durch den Generalschalter (!KW [use_short_envs]) möglich ist.
-         Sofern aber der Generalschalter gesetzt ist, sind die o.g. vier Schalter als Teilmengen davon wirkungslos.
+         These four new switches offer to make much more distinctions on environment formatting, compared to the general switch (!KW [use_short_envs]).
+         But if you use this general switch, the four switches mentioned above are without effect, being subsets of it.
 
-   !item (!B)Neues Kommando:(!b) (!nl)
+   !item (!B)New command:(!b) (!nl)
          !begin_blist
          !item [(!kkw [label])]
-               Erzeugt manuelle Links an beliebigen Stellen im Fließtext.
+               Offers to manually create links in any places of the source document.
          !end_blist
 
-   !end_itemize # Strukturelles
+   !end_itemize # Structural
 
 
 
@@ -224,9 +223,9 @@ Das hier ist Zelle 3
 !item [UDO]
 # ----------------------------------------
    !begin_itemize
-   !item Die ""UDO Community"" ist in dem Text ergänzt worden, der von (!KW [use_about_udo]) ausgegeben wird.
-   !item Die Bezeichnung der einzelnen Versionen wurde geändert. Es heißt jetzt nicht mehr """Release~6.x Patchlevel~yy"", sondern schlicht ""Version~7.xy"".
-   !item Die OS/2-Version von UDO meldet sich jetzt als ""UDO for OS/2"".
+   !item The ""UDO Community"" has been added to the text which is output by (!KW [use_about_udo]).
+   !item The version names of versions have been changed. We no longer name them """Release~6.x Patchlevel~yy"", but simply ""Version~7.xy"".
+   !item The OS/2 version of UDO now registers as ""UDO for OS/2"".
    !end_itemize
 
 
@@ -234,16 +233,16 @@ Das hier ist Zelle 3
 
 
 # ----------------------------------------
-!item [Allgemeine (!BUGFIXES)]
+!item [General (!BUGFIXES)]
 # ----------------------------------------
    !begin_itemize
-   !item Bugfix (!BUG [38]): Zeichenausgaben (nicht nur in Mac-Encodings) sollten dank Umstellung auf Unicode keine Fehler mehr haben.
-   !item Bugfix (!BUG [45])/(!BUG [77]): Stack-Overflow mit der DOS-Version von UDO behoben.
-   !item Bugfix (!BUG [48]): Fehlermeldung ""unknown command: !html_use_hyphenation"". Ursache: Das Kommando fehlte in der Kommandoliste.
-   !item Bugfix (!BUG [55]): Umlaute, die in (!KKW [img]) oder (!KKW [ilink]) im zweiten Parameter vorkamen, wurden nicht richtig umgesetzt.
-   !item Bugfix (!BUG [59]): Nichtfunktion, wenn Makro intern eine Definition aufruft.
-   !item Bugfix (!BUG [75]): (!KW [raw])-Ausgaben korrigiert.
-   !item Bugfix (!BUG [78]): Sortierung in der Index-Seite (z.B. indexudo.htm) wesentlich verbessert.
+   !item Bugfix (!BUG [38]): Character output should no longer have issues thanks to Unicode support (not only in Mac encodings).
+   !item Bugfix (!BUG [45])/(!BUG [77]): Stack overflow in DOS version of UDO fixed.
+   !item Bugfix (!BUG [48]): Error message ""unknown command: !html_use_hyphenation"". Reason: The command wasn't added to the command list.
+   !item Bugfix (!BUG [55]): Special characters which were used in the second parameter of (!KKW [img]) or (!KKW [ilink]), were not recoded properly.
+   !item Bugfix (!BUG [59]): Macros can now use definitions.
+   !item Bugfix (!BUG [75]): (!KW [raw]) output corrected.
+   !item Bugfix (!BUG [78]): Sorting in index page (e.g. indexudo.htm) much enhanced.
    !end_itemize
 
 
@@ -255,13 +254,13 @@ Das hier ist Zelle 3
 # ----------------------------------------
    !begin_itemize !short
    
-   !item (!B)Neues Ausgabeformat: HTML Apple Help(!b) (!nl)
-      Ist im Prinzip nichts anderes als HTML, allerdings mit kleinen Änderungen. Deshalb gibt es auch für (!KW [docinfo]) für dieses Format zwei neue Argumente: (!nl)
+   !item (!B)New output format: HTML Apple Help(!b) (!nl)
+      Basically this is nothing but HTML, but there are tiny differences. Therefore, (!KW [docinfo]) comes with two new arguments for this format: (!nl)
       !begin_blist
       !item [[AppleTitle]]
-            legt den (lokalisierbaren) Titel der Hilfe fest.
+            defines the (localizable) title of the help book.
       !item [[AppleIcon]]
-            legt das Icon fest, das der Apple Help Viewer in der Auflistung aller Programmhilfen für diese Hilfe zeigen soll.
+            defines the icon which will be shown for this help book in Apple Help Viewer's list of registered help books.
       !end_blist
 
    !end_itemize # HTML Apple Help
@@ -278,83 +277,77 @@ Das hier ist Zelle 3
    
    !begin_blist !short
    !item [(!KW [html_bgsound])]
-         Legt die Hintergrundmusik für eine HTML-Seite fest.
+         defines the background music for an HTML page.
          
    !item [(!KW [html_robots])]
-         Dient zum Setzen der (!code [robots])-Anweisungen für Suchmaschinen. (!code [!/html_robots]) hat Vorrang vor (!KW [docinfo]) [robots].
+         Use it to define (!code [robots]) commands for search engines. (!code [!/html_robots]) is prior to (!KW [docinfo]) [robots].
    !item [(!KW [docinfo]) [robots!]]
-         Dient zum Setzen der (!code [robots])-Anweisungen für Suchmaschinen. Wird nur geschrieben, wenn in einzelnen Dateien nicht (!KW [html_robots]) benutzt wird.
+         Use it to define (!code [robots]) commands for search engines. Outputs only when single pages don't use (!KW [html_robots]).
          
    !item [(!KW [html_frames_toc_title])]
-         Setzt den TOC-Frame-Titel beim Frame-Layout.
+         Defines the TOC frame title in frame layout.
    !item [(!KW [html_frames_con_title])]
-         Setzt den CON-Frame-Titel beim Frame-Layout.
+         Defines the CON frame title in frame layout.
    
    !item [(!KW [html_navigation]) [line!]]
-         Dieses Kommando bietet eine neue Formatierung der Navigationsleiste. 
-         In den unterstützten HTML-Ausgabeformaten kann jetzt optional die Navigationsleiste einzeilig (mit und ohne Ordner-Symbol am Anfang) ausgegeben werden.
+         This command offers a new way to format the navigation bar. 
+         The supported HTML output formats now optionally show a one line navigation bar (starting with or without a folder symbol).
    !item [(!KW [html_navigation]) [image!]]
-         Dieses Zusatzkommando zum vorgenannten legt fest, welches Symbol als ""Ordner"" am Anfang der Navigationsleiste ausgegeben werden soll. 
-         Verwenden Sie hier z.B. bei Programm-Dokumentationen das Programm-Symbol.
+         Use this additional option with the option mentioned above and define which ""symbol"" should be used as ""folder"" in front of the navigation bar. 
+         We recommend to use e.g. the program icon when you write a program manual.
    !end_blist
    
-   !item Neue Schalter:
+   !item New switches:
    !begin_blist !short
    !item [(!KW [html_header_links])]
-         (!BUG [53]): Neuer Schalter, der je nach Vorgabe (!LINK)-Elemente im HTML-Header erzeugt.
+         (!BUG [53]): New switch which creates (!LINK) elements in the HTML header --- or not.
    !item [(!KW [html_header_date]) (!TEXT)]
-         (!BUG [54]): Bisher wurde zu Beginn jeder HTML-Datei ein Kommentar mit dem Datum der Datei-Erzeugung eingefügt, z.B. (!nl)
+         (!BUG [54]): Former versions inserted a comment with the file creation date at the very beginning of each HTML file, e.g. (!nl)
          (!code [<!!-- last modified on 29.01.2004 -->]). 
-         Nunmehr wird, wenn dieser Schalter gesetzt ist, im HTML-Header ein META-Tag für Datum/Uhrzeit der Datei-Erzeugung erzeugt.
+         Now a META tag for file creatione date/time will be added to the HTML header, when you use this switch.
    !item [(!KW [html_quotes]) [classic | tags!]]
-         (!BUG [82]): Mit diesem neuen Schalter können Sie steuern, ob An-/Abführungszeichen wie früher als <tt>&amp;quot;</tt> ausgegeben werden sollen ([classic]) oder als HTML-Quotation-Tags &lt;q&gt; + &lt;/q/&gt; ([tags], voreingestellt).
+         (!BUG [82]): Use this new switch to control whether quotation marks should be output like before as <tt>&amp;quot;</tt> ([classic]), or as HTML quotation tags &lt;q&gt; + &lt;/q/&gt; ([tags], default).
    !end_blist
          
-   !item New: Indexseite für HTML, die auch eine Sprungmarkenleiste (A--Z) für schnelleres Auffinden in langen Index-Listen mitbringt.
+   !item New: Index page for HTML, which also offers a quick jump bar (A--Z) to find entries faster in long index lists.
    
-   !item New: Die Navigationsleiste hat jetzt immer einen Link zur Index-Seite. (!nl)
-         Der Link wird in einem Span namens ""UDO_nav_index"" ausgegeben und kann bequem per CSS z.B. rechtsbündig auf der Seite platziert werden.
+   !item New: The navigation bar now always has a link to the Index page. (!nl)
+         The link will be output in a span named ""UDO_nav_index"" and can e.g. be easily placed right-justified on the page, using CSS commands.
          
    !item Feature request (!BUG [70]): The command (!KKW [img]) has been enhanced.
          
    !item (!LINK) elements for navigation are no longer written automatically to the HTML header, but only on request (see above).
          
-   !item Datum/Uhrzeit der Erzeugung der HTML-Datei werden nicht mehr automatisch als Kommentar,
-         sondern nur noch auf Anforderung als META-Tag in den HTML-Header geschrieben (siehe oben).
+   !item File creation date/time are no longer automatically written as a comment in the HTML file, but only optionally as a META tag in the HTML header (see above).
          
-   !item Bei (!KW [html_ignore_8bit]) kann nun ein optionaler Parameter (!TEXT) für die Codepage
-         übergeben werden.
+   !item (!KW [html_ignore_8bit]) can now handle an optional parameter (!TEXT) which sets the charset (codepage) in the HTML header.
          
-   !item (!KW [html_counter_command]) kann jetzt auch im Vorspann benutzt
-         werden, dann wird dies für alle Dateien erzeugt.
+   !item (!KW [html_counter_command]) can now be used in the preamble too. It will then create the relevant output for all files.
 
-   !item Die Kommandos (!/B), (!/I), (!/U), (!/T) und (!/V) werden
-         zu <strong>, <em>, <span style="text-decoration: underline;"> und <kbd>
-         umgesetzt, wenn der HTML Doctype >= XHTML_STRICT ist, ansonsten
-         werden die alten Elemente benutzt.
+   !item The commands (!/B), (!/I), (!/U), (!/T), and (!/V) will be output as (!code [<strong>]), (!code [<em>]), 
+         (!code [<span style="text-decoration: underline;">]), and (!code [<kbd>]), when the HTML doctype >= XHTML_STRICT. 
+         If not, the old elements are output.
          
-   !item Der Bereich der Titelseite wird jetzt durch folgendes Konstrukt geklammert: (!nl)
+   !item The title page area is now enclosed by the following DIV environment: (!nl)
          (!C)<div id="udo_titlepage"></div>(!c)
          
-   !item Bei (!KW [use_raw_header]) und (!KW [use_raw_footer]) werden Makros und Defines ausgeführt.
+   !item (!KW [use_raw_header]) and (!KW [use_raw_footer]) define that macros and defines should be used.
          
-   !item Bessere HTML-Formatierung und -Compliance:
+   !item Better HTML formatting and compliance:
          !begin_itemize
-         !item Attribute (nowrap, noresize) erweitert.
+         !item Attributes (nowrap, noresize) enhanced.
          !item (!BUG [11]): (<br />, <hr />, <img />, <frame />, <link />)
-         !item (!BUG [11]): XML-Namespace für XHTML-Dateien hinzugefügt.
-         !item Description-Umgebungen werden sauber formatiert, auch bei enthaltenen Links.
-         !item Listen und Tabellen werden sauberer und syntaxrichtig ausgegeben.
-         !item Ankernamen enthalten nur noch für URLs erlaubte Zeichen.
+         !item (!BUG [11]): XML namespace for XHTML files added.
+         !item Description environments are properly formatted, even with included links.
+         !item Lists and tables are output much better and syntactically correct.
+         !item Anchor names can no longer use unallowed characters in URLs.
          !end_itemize
          
-   !item Beim ""Modern Layout"" wird die Tabelle in der linken Spalte, die das Menü zeigt, 
-         jetzt mit einer ID namens ""UDO_menu"" versehen, so dass das Menü beim Drucken mittels CSS ausgeblendet werden kann.
+   !item The table which shows the menu in the left column of ""Modern Layout"", now has an ID named ""UDO_menu"". You might e.g. want to hide it via CSS for print output, etc.
          
-   !item Die Einträge von (!KW [docinfo]) [keywords, description] werden jetzt
-         auch bei der HTML-Ausgabe geschrieben, allerdings nur, wenn in
-         einzelnen Dateien nicht (!KW [html_keywords]) bzw. (!KW [html_description])
-         benutzt wird. Diese haben also Vorrang.
+   !item The (!KW [docinfo]) entries [keywords, description] are now also written in HTML output, 
+         but only if (!KW [html_keywords]) or (!KW [html_description]) are not used in single files. 
+         The latter commands have priority.
          
    !item The command (!KW [begin_quote]) can use an argument now.
          
@@ -390,29 +383,24 @@ Das hier ist Zelle 3
 # ----------------------------------------
 !begin_itemize
 
-!item New: Neues Kommando (!KW [rtf_add_colour]), mit dem zusätzliche Farben (über
-      die 16 Standardfarben hinaus) in den Kopf einer RTF-Datei
-      geschrieben werden.
+!item New: New command (!KW [rtf_add_colour]) which write additional colors (other than the 16 default colors) to the color table in the RTF file header.
          
-!item New: Die (!code [!/docinfo])-Einträge (!code [subject]), (!code [keywords]),
-      (!code [company]) und (!code [category]) werden in die Info-Einträge der
-      RTF-Datei geschrieben.
+!item New: The (!code [!/docinfo]) entries (!code [subject]), (!code [keywords]),
+      (!code [company]), and (!code [category]) are also output as info entries into the RTF file.
 
-!item New: Alle Nodes, Subnodes usw. werden für die RTF-Ausgabe als Label/Bookmark markiert.
+!item New: All nodes, subnodes, etc. are marked as label/bookmark for RTF output.
 
-!item New: Das Kommando (!kkw [plink]) unterstützt. Die Angabe erfolgt als Hinweis auf die Seitenzahl.
+!item New: The command (!kkw [plink]) is supported. Output points to the page number.
 
-!item New: ""\*\revtbl {Unknown}{UDO Version x.x.x}}"" wird gesetzt.
+!item New: ""\*\revtbl {Unknown}{UDO Version x.x.x}}"" is set.
 
 !item New: (!KW [use_raw_header]) can also be used for RTF output.
 
-!item Bugfix (!BUG [56]): Falsche Berechnung der Ausmaße von Bildern bei der RTF-Ausgabe. Versehentlich wurde dem Parameter ""Höhe"" die Breite übergeben.
+!item Bugfix (!BUG [56]): Wrong image size calculation in RTF output fixed. By mistake the ""height"" parameter got the width before.
 
-!item Bugfix (!BUG [17]): Fehlermeldung: ""couldn't read BMP header of <udo_mw.bmp>. No such file or directory."" (!nl)
-      Neuer Zustand: Wenn beim ersten Übersetzungslauf nach RTF das UDO-Link-Bild (!file [udo_mw.bmp]) noch
-      nicht vorhanden ist, wird jetzt ein Hinweis ausgegeben, das Dokument ein
-      weiteres Mal zu übersetzen, um es zu vervollständigen. (!nl)
-      Das UDO-Bild wird jetzt auch auf TOS-kompatiblen Computern gefunden.
+!item Bugfix (!BUG [17]): Error message: ""couldn't read BMP header of <udo_mw.bmp>. No such file or directory."" (!nl)
+      New state: When the first RTF output didn't find the UDO link image (!file [udo_mw.bmp]), UDO informs you to output to RTF once more to create all missing files. (!nl)
+      The UDO image will now also be found on TOS compatible platforms.
 
 !item Bugfix (!BUG [60]): RTF output should no longer crash.
 
