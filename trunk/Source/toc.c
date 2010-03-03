@@ -84,7 +84,13 @@
 *                - webmasterurl     -> domain_link
 *                - webmasteremail   -> contact_name
 *                - webmastermailurl -> contact_link
-*    ME  Mar 03: html_footer(): ..._link strings are complete URL
+*    ME  Mar 03: - html_footer(): ..._link strings are complete URL
+*                - if contact_link is empty, contact_name is not used to generate
+*                  a "mailto:"-link. If the contact_name should be a link, the target
+*                  has to be put into contact_link - there was one case in which
+*                  contact_name without contact_link generated a link!
+*                - use of contact_link for HTML the entries <link rev="made"> and
+*                  <link rev="author"> if available
 *
 ******************************************|************************************/
 
@@ -2977,10 +2983,20 @@ BOOLEAN    keywords)             /* */
    if (titdat.contact_name != NULL)
    {
       voutlnf("<meta name=\"Email\" content=\"%s\"%s>", titdat.contact_name, closer);
-      voutlnf("<link rev=\"made\" href=\"mailto:%s\" title=\"E-Mail\"%s>", titdat.contact_name, closer);
+	   if (titdat.contact_link == NULL)
+      {
+         voutlnf("<link rev=\"made\" href=\"mailto:%s\" title=\"E-Mail\"%s>", titdat.contact_name, closer);
+
+         /* New in r6pl16 [NHz] */
+         voutlnf("<link rel=\"author\" href=\"mailto:%s\" title=\"E-Mail\"%s>", titdat.contact_name, closer);
+      }
+   }
+   if (titdat.contact_link != NULL)
+   {
+      voutlnf("<link rev=\"made\" href=\"%s\" title=\"E-Mail\"%s>", titdat.contact_link, closer);
 
       /* New in r6pl16 [NHz] */
-      voutlnf("<link rel=\"author\" href=\"mailto:%s\" title=\"E-Mail\"%s>", titdat.contact_name, closer);
+      voutlnf("<link rel=\"author\" href=\"%s\" title=\"E-Mail\"%s>", titdat.contact_link, closer);
    }
 
    /* New in r6pl15 [NHz] */
@@ -5142,7 +5158,7 @@ GLOBAL void html_bottomline(void)
 *
 *     !docinfo [domain_link]    e.g. "http://www.mydomain.com"
 *     !docinfo [domain_name]    e.g. "My Domain"
-*     !docinfo [contact_link]   e.g. "webmaster@mydomain.com"
+*     !docinfo [contact_link]   e.g. "mailto:webmaster@mydomain.com"
 *     !docinfo [contact_name]   e.g. "Webmaster"
 *
 *
@@ -5173,11 +5189,12 @@ GLOBAL void html_bottomline(void)
 *     Chances are that someone wants to use a web URL instead of an email address
 *     [contact_link]. Today, many web users try to avoid having their email
 *     address being placed visibly in web pages, to let email addresses harvester 
-*     bots not find their email addresses for spam purposes.
+*     bots not find their email addresses for spam purposes. To avoid the complexity
+*     to distinguish mail addresses from URLs and to give the user full control over
+*     the output, the contact_link is used as it was setted by
+*     !docinfo [webmaster_contact_link]. So mail addresses must be set as
+*     "mailto:webmaster@example.com".
 *
-*     So we check if [contact_link] has a '@'. If not, the anchor 
-*     string "mailto:" is suppressed.
-*     
 *  return:
 *     -
 *
@@ -5269,10 +5286,9 @@ GLOBAL void html_footer(void)
       break;
       
    case 0x1101:                           /* domain_link + domain_name                + contact_name */
-      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
+      sprintf(s, "<a href=\"%s\">%s</a> (%s)",
          titdat.domain_link, 
          titdat.domain_name,
-         titdat.contact_name, 
          titdat.contact_name);
       break;
       
