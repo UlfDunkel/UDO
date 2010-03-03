@@ -14,19 +14,18 @@
 # -------
 # 2010:
 #   fd  Mar 01: introduced (from history_05.de)
+#   fd  Mar 03: translated, old stuff ignored, using PUBLISHED
 #
 ################################################################################
 
 !begin_node Changes in release 5
 !html_name  history_5
 
-(!NTY)
+(!PUBLISHED [UDO~5][April 18, 1996])
 
-Diese Version wurde am 18. April 1996 veröffentlicht.
+We're quite sure that nobody is interested in the changes of this old version any longer.
 
-Was sich damals geändert hat, das dürfte heute niemanden mehr interessieren.
-
-!begin_description
+!begin_description !short
 
 !item [Neue Formate:]
    !begin_itemize !short
@@ -134,7 +133,7 @@ Was sich damals geändert hat, das dürfte heute niemanden mehr interessieren.
 !end_verbatim
 (!EXAMPLE_END)
 
-	!end_itemize
+   !end_itemize
 
 !item [Bugfixes:]
    Etliche. (!grin)
