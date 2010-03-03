@@ -84,6 +84,7 @@
 *                - webmasterurl     -> domain_link
 *                - webmasteremail   -> contact_name
 *                - webmastermailurl -> contact_link
+*    ME  Mar 03: html_footer(): ..._link strings are complete URL
 *
 ******************************************|************************************/
 
@@ -5352,15 +5353,6 @@ GLOBAL void html_footer(void)
          titdat.contact_name);
    }
 
-                                          /* shit happens ;-) */
-   (void)replace_once(s,"mailto:mailto:","mailto:");
-
-   if (titdat.contact_link != NULL)       /* check if contact_link is URL or email address */
-   {
-      if (strstr(titdat.contact_link,"@") == NULL)
-         (void)replace_once(s,"mailto:","");
-   }
-   
    strcat(footer_buffer, s);
    
    if (html_doctype < XHTML_STRICT)
