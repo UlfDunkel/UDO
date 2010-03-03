@@ -5252,7 +5252,7 @@ GLOBAL void html_footer(void)
    switch (has_content)
    {
    case 0x1111:                           /* domain_link + domain_name + contact_link + contact_name */
-      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
+      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"%s\">%s</a>)",
          titdat.domain_link, 
          titdat.domain_name,
          titdat.contact_link, 
@@ -5260,7 +5260,7 @@ GLOBAL void html_footer(void)
       break;
          
    case 0x1110:                           /* domain_link + domain_name + contact_link               */
-      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
+      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"%s\">%s</a>)",
          titdat.domain_link, 
          titdat.domain_name,
          titdat.contact_link, 
@@ -5282,7 +5282,7 @@ GLOBAL void html_footer(void)
       break;
       
    case 0x1011:                           /* domain_link               + contact_link + contact_name */
-      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
+      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"%s\">%s</a>)",
          titdat.domain_link, 
          titdat.domain_link,
          titdat.contact_link, 
@@ -5290,7 +5290,7 @@ GLOBAL void html_footer(void)
       break;
    
    case 0x1010:                           /* domain_link               + contact_link                */
-      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"mailto:%s\">%s</a>)",
+      sprintf(s, "<a href=\"%s\">%s</a> (<a href=\"%s\">%s</a>)",
          titdat.domain_link, 
          titdat.domain_link,
          titdat.contact_link, 
@@ -5298,35 +5298,35 @@ GLOBAL void html_footer(void)
       break;
          
    case 0x1001:                           /* domain_link                              + contact_name */
-      sprintf(s, "<a href=\"mailto:%s\">%s</a>",
+      sprintf(s, "<a href=\"%s\">%s</a> (%s)",
          titdat.domain_link, 
-         titdat.domain_name);
+         titdat.domain_link, 
+         titdat.contact_name);
       break;
          
    case 0x1000:                           /* domain_link                                             */
-      sprintf(s, "<a href=\"mailto:%s\">%s</a>",
+      sprintf(s, "<a href=\"%s\">%s</a>",
          titdat.domain_link, 
          titdat.domain_link);
       break;
 
    case 0x0111:                           /*               domain_name + contact_link + contact_name */
-      sprintf(s, "%s <a href=\"mailto:%s\">%s</a>",
+      sprintf(s, "%s <a href=\"%s\">%s</a>",
          titdat.domain_name,
          titdat.contact_link, 
          titdat.contact_name);
       break;
 
    case 0x0110:                           /*               domain_name + contact_link                */
-      sprintf(s, "%s (<a href=\"mailto:%s\">%s</a>)",
+      sprintf(s, "%s (<a href=\"%s\">%s</a>)",
          titdat.domain_name,
          titdat.contact_link, 
          titdat.contact_link);
       break;
 
    case 0x0101:                           /*               domain_name                + contact_name */
-      sprintf(s, "%s (<a href=\"mailto:%s\">%s</a>)",
+      sprintf(s, "%s (%s)",
          titdat.domain_name,
-         titdat.contact_name, 
          titdat.contact_name);
       break;
 
@@ -5336,20 +5336,19 @@ GLOBAL void html_footer(void)
       break;
 
    case 0x0011:                           /*                             contact_link + contact_name */
-      sprintf(s, "<a href=\"mailto:%s\">%s</a>",
+      sprintf(s, "<a href=\"%s\">%s</a>",
          titdat.contact_link, 
          titdat.contact_name);
       break;
 
    case 0x0010:                           /*                             contact_link                */
-      sprintf(s, "<a href=\"mailto:%s\">%s</a>",
+      sprintf(s, "<a href=\"%s\">%s</a>",
          titdat.contact_link, 
          titdat.contact_link);
       break;
 
    case 0x0001:                           /*                                            contact_name */
       sprintf(s, "%s",
-         titdat.contact_name, 
          titdat.contact_name);
    }
 
