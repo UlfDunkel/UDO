@@ -14,32 +14,25 @@
 # -------
 # 2010:
 #   fd  Mar 01: introduced (from history_06_PL17.de)
+#   fd  Mar 02: translated + reformatted
 #
 ################################################################################
 
 !begin_node Changes in release 6 PL 17
 !html_name  history_6_PL_17
 
-(!NTY)
+(!PUBLISHED [UDO~6 Patchlevel~17] [11.10.2003])
 
-(!PUBLISHED [Release~6 Patchlevel~17] [11.10.2003])
-
-!heading [(!GENERAL)]
 !begin_description !short
-!item [(!BUGFIXES)]
-   !begin_itemize
-   !item Bug (!BUG [3]): Die Meldung ""Letzte Änderung am!.."" kommt jetzt mit den richtigen
-         französischen Umlauten.
-   !end_itemize
-!end_description
+!item [(!GENERAL)]
+      !begin_itemize
+      !item Bug (!BUG [3]): The message ""Last changes on !.."" now shows proper French special characters.
+      !end_itemize
 
-!heading Richtext Format RTF
-!begin_description !short
-!item [(!BUGFIXES)]
-   !begin_itemize
-   !item Speicherbedarf von URLs bei der RTF-Ausgabe auf 4.096 Zeichen intern
-         (d.h. 1.024 Zeichen können vom Benutzer angegeben werden) erhöht.
-   !end_itemize
+!item [RTF (Rich Text Format)]
+      !begin_itemize
+      !item Bugfix: Memory requirement for URLs in RTF output increased to 4,096 bytes internally (users can still only use 1,024 characters).
+      !end_itemize
 !end_description
 
 !end_node
