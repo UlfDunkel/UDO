@@ -89,6 +89,7 @@
 *                     use_short_descriptions
 *                     use_short_lists
 *                !code command and c_code() function removed -> code_source
+*    fd  Mar 03: pass_check_if() debugged - #86 fixed
 *
 ******************************************|************************************/
 
@@ -10005,7 +10006,7 @@ LOCAL void clear_if_stack(void)
 
 LOCAL void push_if_stack(
 
-int       kind,    /* */
+int       kind,    /* IF_DEST, IF_LANG, IF_SET, IF_OS, IF_GENERAL */
 BOOLEAN   ignore)  /* TRUE: ignore all lines until "!else" or "!endif" */
 {
    if (counter_if_stack < MAX_IF_STACK)
@@ -10284,7 +10285,8 @@ int          pnr)           /* */
    }
 #endif
 
-   if (strstr(zeile, "!else") != NULL)
+                                          /* there used to be "!else_..." commands! */
+   if ( (strstr(zeile, "!else") != NULL) && (strstr(zeile, "!else_") == NULL) )
    {
       toggle_if_stack();
       pflag[pnr].ignore_line = is_if_stack_ignore();
