@@ -12,28 +12,31 @@ UDO020.TTP
 
 =
 
-; Startup-Code from Stefan Kuhr @ OS
+; Startup-Code from Stefan Kuhr
 StUpArgv.O
 
-; Die UDO-Quellen
-..\abo.c
-..\cfg.c
-..\chr.c
-..\env.c
-..\file.c
-..\img.c
-..\lang.c
-..\msg.c
-..\par.c
-..\str.c
-..\sty.c
-..\tab.c
-..\toc.c
-..\toc_html.c
-..\tp.c
-..\udo.c
-..\udomem.c
-..\cli.c
+; The UDO sources
+; They are compiled, if UDO.TTP is newer than the *.O-Files even
+; if the sources are not changed, so the swich between the two
+; versions is correctly handled
+..\abo.c (UDO.TTP)
+..\cfg.c (UDO.TTP)
+..\chr.c (UDO.TTP)
+..\env.c (UDO.TTP)
+..\file.c (UDO.TTP)
+..\img.c (UDO.TTP)
+..\lang.c (UDO.TTP)
+..\msg.c (UDO.TTP)
+..\par.c (UDO.TTP)
+..\str.c (UDO.TTP)
+..\sty.c (UDO.TTP)
+..\tab.c (UDO.TTP)
+..\toc.c (UDO.TTP)
+..\toc_html.c (UDO.TTP)
+..\tp.c (UDO.TTP)
+..\udo.c (UDO.TTP)
+..\udomem.c (UDO.TTP)
+..\cli.c (UDO.TTP)
 
 ; The TOS-Bibliothek
 pctos.lib		; Moderner Ersatz (look at http://acspro.atari.org)
