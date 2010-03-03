@@ -18,12 +18,14 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Feb 26: we're at UTF-8 :-)
+#   fd  Mar 03: encodings and docinfo for title page adjusted (requires UDO 7.01)
 #
 ################################################################################
 
 # ----------------------------------------------------------------
 # Settings for HTML and HTML-Help
 # ----------------------------------------------------------------
+!code_target          [utf-8]
 !html_favicon_name    http://www.udo-open-source.org/favicon.ico
 !html_navigation      [line]
 !html_style_name      css/udo.css
@@ -46,6 +48,9 @@
 # ------------------------------------------------------------------------------
 # Typ für Manualpage setzen  / Set the type of the manual page
 # ------------------------------------------------------------------------------
+!ifdest [man]
+!code_target [cp1252]
+!endif
 !man_type 1
 !nroff_type 1
 
@@ -116,6 +121,10 @@
 # ----------------------------------------------------------------
 # ST Guide commands
 # ----------------------------------------------------------------
+!ifdest [stg]
+!code_target [tos]
+!endif
+
 !raw [stg] @options +z
 #!raw [stg] @default Main
 !raw [stg] @help Titel
@@ -172,15 +181,9 @@
 # ----------------------------------------------------------------
 # General Infos
 # ----------------------------------------------------------------
-# !docinfo [author] www.udo-open-source.org
-# !docinfo [address] Asmecke 1
-# !docinfo [address] D-59846 Sundern
-# !docinfo [address] Deutschland
-# !docinfo [address] Internet: info@dirk-hagedorn.de
-# !docinfo [address] Mausnet: Dirk Hagedorn @ MK2
-!docinfo [webmastername] www.udo-open-source.org
-# !docinfo [webmasteremail] webmaster@udo-open-source.org
-!docinfo [webmasterurl] http://www.udo-open-source.org/
-# !docinfo [authorimage] (!IMAGES)dh
+!docinfo [domain_name] www.udo-open-source.org
+!docinfo [domain_link] http://www.udo-open-source.org/
+!docinfo [contact_name] Kontakt
+!docinfo [contact_link] http://www.udo-open-source.org/contact/
 
 # === EOF ===
