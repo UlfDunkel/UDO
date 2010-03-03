@@ -16,6 +16,7 @@
 #   fd  Mar 02: introduced
 #   fd  Mar 03: - new docinfo attributes: domain_..., contact_...
 #               - using INCOMPLETE, PUBLISHED
+#               - bugfix #86 added
 #
 ################################################################################
 
@@ -27,18 +28,23 @@
 
 !begin_description !short
 # ----------------------------------------
-!item [docinfo]
+!item [(!KW [docinfo])]
 # ----------------------------------------
-!begin_itemize
-!item The rather irritating (!KW [docinfo]) attribute names(!code [webmastername]), (!code [webmasterurl]), (!code [webmasteremail]), and (!code [webmastermailurl]) have been renamed:
-!begin_table [l|l] !hlist
-(!B)old(!b)       !! (!B)new(!b)
-webmastername     !! domain_name
-webmasterurl      !! domain_link
-webmasteremail    !! contact_name
-webmastermailurl  !! contact_link
-!end_table
-!end_itemize
+      !begin_itemize !short
+      !item The rather irritating (!KW [docinfo]) attribute names 
+            (!code [webmastername]), 
+            (!code [webmasterurl]), 
+            (!code [webmasteremail]), and 
+            (!code [webmastermailurl]) have been renamed:
+            
+            !begin_table [l|l] !hlist
+            (!B)old(!b)       !! (!B)new(!b)
+            webmastername     !! domain_name
+            webmasterurl      !! domain_link
+            webmasteremail    !! contact_name
+            webmastermailurl  !! contact_link
+            !end_table
+      !end_itemize
 
 
 
@@ -47,13 +53,20 @@ webmastermailurl  !! contact_link
 # ----------------------------------------
 !item [UDO]
 # ----------------------------------------
-   !begin_itemize
-   !item The UDO versions for Mac OS and Mac OS X now register as ""UDO for Mac OS"" and ""UDO for Mac OS X"".
-   !end_itemize
+      !begin_itemize !short
+      !item The UDO versions for Mac OS and Mac OS X now register as ""UDO for Mac OS"" and ""UDO for Mac OS X"".
+      !end_itemize
 
 
 
 
+
+# ----------------------------------------
+!item [(!BUGFIXES)]
+# ----------------------------------------
+      !begin_itemize !short
+      !item (!BUG [86]): Veraltete Kommandos bringen den IF-Stack nicht mehr durcheinander.
+      !end_itemize
 
 !end_description
 
