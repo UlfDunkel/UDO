@@ -1,6 +1,16 @@
 # ###################################################################
 # @(#) Make Include File, used for all systems
-# @(#) Dirk Hagedorn (udo@dirk-hagedorn.de), 1998/05/25
+# @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)
+#
+# Author      : Dirk Hagedorn (DH)
+# Co-Author(s): Stefan Baireuther (SB)
+#
+# History:
+# 1998:
+#   DH  May 25: last version from DH
+# 2010:
+#   SB  Mar 03: adjusted for UDO 7
+#
 # ###################################################################
 
 OSRC =	abo$(O) cfg$(O) chr$(O) env$(O) file$(O) img$(O) lang$(O) msg$(O) par$(O) str$(O) sty$(O) \
@@ -15,9 +25,8 @@ abo$(O):	$(HEAD) abo.h commands.h cfg.h file.h sty.h toc.h udo.h
 cfg$(O):	$(HEAD) cfg.h file.h str.h
 
 chr$(O):	$(HEAD) chr.h msg.h str.h sty.h udo.h chr_all.h chr_ttf.h \
-		ansi2dos.h chr_tos.h chr_437.h \
-		chr_850.h chr_hp8.h chr_next.h chr_iso.h chr_mac.h \
-		tos2iso.h 437iso.h 850iso.h hp82iso.h next2iso.h mac2iso.h
+		lang_utf.h u_dos.h u_hp.h u_iso.h u_mac.h u_mswin.h u_next.h \
+		u_tos.h u_udo.h u_utf.h unicode.h
 
 cli$(O):	$(HEAD) gui.h file.h cfg.h msg.h udo.h
 
