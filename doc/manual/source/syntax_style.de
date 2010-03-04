@@ -25,6 +25,8 @@
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 10: using macro (!const [])
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 03: chapter style_tables: hint for table_alignment added
 #
 ################################################################################
 
@@ -834,7 +836,8 @@ WinHelp, RTF, HTML und (!LaTeX) hat dieser Schalter keinen Einfluss.
 (!HINTS)
 
 !begin_enumerate !short
-!item Tabellen werden immer zentriert ausgegeben.
+!item Tabellen werden standardmäßig immer zentriert ausgegeben. 
+Mit dem Vorspann-Kommando (!KW [table_alignment]) können Sie jedoch auch andere Ausrichtungen festlegen.
 
 !item In HTML kann man die Benutzung von Linien nicht frei festlegen,
 daher werden Tabellen dort immer mit (!code [frame=box]) erzeugt, falls man in

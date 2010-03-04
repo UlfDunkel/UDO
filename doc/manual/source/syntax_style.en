@@ -23,6 +23,8 @@
 #   fd  Jun 11: EXAMPLE_... macros optimized
 #   fd  Jun 16: great review session #1
 #   fd  Dec 15: typo
+# 2010:
+#   fd  Mar 03: chapter style_tables: hint for table_alignment added
 #
 ################################################################################
 
@@ -796,7 +798,8 @@ no effect if you convert to Windows Help, RTF, HTML or (!LaTeX).
 
 !begin_itemize
 
-!item	Tables are always printed centred.
+!item	Tables are always output centered. 
+But using the preamble command (!KW [table_alignment]), you can even define another alignment for tables.
 
 !item	HTML doesn't allow to define where to use lines. If you use the
 (!KW [hline]) command at the end of (!KW [begin_table]) the table is
