@@ -60,6 +60,7 @@
 *    fd  Feb 25: v7.00 RC2
 *    fd  Mar 01: v7.00 public release
 *    fd  Mar 02: "Mac OS" and "Mac OS X" love spaces ;-)
+*    fd  Mar 04: version strings prepared for v7.01 beta
 *
 ******************************************|************************************/
 
@@ -91,8 +92,8 @@
    /* --- Release-Nummer und Patchlevel setzen --- */
 
 #define UDO_REL     "7"
-#define UDO_SUBVER  "00"
-#define UDO_BUILD   "(build 977)"
+#define UDO_SUBVER  "01 beta"
+#define UDO_BUILD   "(build 1007)"
 #define UDO_URL     "http://www.udo-open-source.org/"
 #define UDO_MADE    "Made with UDO"
 
