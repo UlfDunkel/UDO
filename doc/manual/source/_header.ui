@@ -18,7 +18,8 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Feb 26: we're at UTF-8 :-)
-#   fd  Mar 03: encodings and docinfo for title page adjusted (requires UDO 7.01)
+#   fd  Mar 03: - encodings and docinfo for title page adjusted (requires UDO 7.01)
+#               - using table_alignment [left]
 #
 ################################################################################
 
@@ -165,6 +166,8 @@
 
 !use_style_book         [tex,asc,rtf,win,aqv,lyx]
 !sort_hyphen_file       [asc,stg,pch]
+
+!table_alignment        [left]
 
 
 
