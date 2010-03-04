@@ -91,6 +91,8 @@
 *                  contact_name without contact_link generated a link!
 *                - use of contact_link for HTML the entries <link rev="made"> and
 *                  <link rev="author"> if available
+*    ME  Mar 04: - the chars uf lang.today are now quoted to the HTML-Chars
+*                  ("M„rz" -> "M&auml;rz") in html_footer() 
 *
 ******************************************|************************************/
 
@@ -5328,7 +5330,7 @@ GLOBAL void html_footer(void)
       break;
 
    case 0x0111:                           /*               domain_name + contact_link + contact_name */
-      sprintf(s, "%s <a href=\"%s\">%s</a>",
+      sprintf(s, "%s (<a href=\"%s\">%s</a>)",
          titdat.domain_name,
          titdat.contact_link, 
          titdat.contact_name);
@@ -5380,7 +5382,11 @@ GLOBAL void html_footer(void)
    auto_quote_chars(s, TRUE);
    strcat(footer_buffer, s);
    strcat(footer_buffer, " ");
-   strcat(footer_buffer, lang.today);
+   
+   strcpy(s, lang.today);
+   auto_quote_chars(s, TRUE);
+   strcat(footer_buffer, s);
+   
    strcat(footer_buffer, sHtmlPropfontEnd);
    strcat(footer_buffer, "</address>\n");
    
