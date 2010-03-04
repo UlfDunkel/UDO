@@ -19,6 +19,8 @@
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using EXAMPLE_... macros
+# 2010:
+#   fd  Mar 04: 'underfull' -> 'too short'
 #
 ################################################################################
 
@@ -299,7 +301,7 @@ Your source file uses a table with too many rows.
 A paragraph of your source file uses too many words. Try to split up
 the paragraph into two or more parts.
 
-!item [underfull line]
+!item [too short line]
 The printed line is too short and you will see an ugly right margin.
 If you use justification this error message says that there were
 inserted too many blanks. Try to insert Hyphenation marks or use
