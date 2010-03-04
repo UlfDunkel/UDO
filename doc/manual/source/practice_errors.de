@@ -26,6 +26,8 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 10: using macro (!const [])
+# 2010:
+#   fd  Mar 04: 'underfull' -> 'too short'
 #
 ################################################################################
 
@@ -336,7 +338,7 @@ Ihr Quelltext benutzt in einer Tabelle zuviele Zeilen.
 In einem Absatz wurden zuviele Wörter benutzt. Teilen Sie den
 Absatz in zwei Hälften, um diese Fehlermeldung zu beseitigen.
 
-!item [underfull line]
+!item [too short line]
 Die angegebene Zeile ist zu kurz und hinterlässt einen stark
 ungleichmäßigen rechten Rand. Bei der Benutzung von Blocksatz
 bedeutet diese Meldung, dass zuviele Leerzeichen in eine Zeile
