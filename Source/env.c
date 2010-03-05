@@ -57,6 +57,16 @@
 *                     use_short_enumerates
 *                     use_short_descriptions
 *                     use_short_lists
+*    fd  Mar 03: c_begin_enumerate(): linefeed in front of <ol>
+*    fd  Mar 04: great renaming:
+*                - use_short_envs         -> use_compressed_envs
+*                - use_short_descriptions -> use_short_descriptions
+*                - use_short_enumerates   -> use_short_enumerates
+*                - use_short_itemizes     -> use_short_itemizes
+*                - use_short_lists        -> use_short_lists
+*                - bEnvShort[]            -> bEnvCompressed[]
+*                - set_env_short()        -> set_env_compressed()
+*                The old commands are still available!
 *
 ******************************************|************************************/
 
@@ -159,7 +169,7 @@ LOCAL int strlen_prev_indent(void);
 LOCAL void strcat_prev_indent(char *s);
 LOCAL void strcpy_prev_indent(char *s);
 
-LOCAL void set_env_short(const int el, const char *s);
+LOCAL void set_env_compressed(const int el, const char *s);
 LOCAL BOOLEAN check_iEnvLevel(void);
 LOCAL BOOLEAN check_env_end(const int etype, const int ekind, const char *ecomm);
 
@@ -195,54 +205,115 @@ LOCAL void c_end_list(int listkind);
 
 /*******************************************************************************
 *
-*  set_env_short():
-*     Setzt das short-Flag. Falls kein !short angegeben wurde, so wird
-*     ein eventuell gesetztes Flag der aeusseren Umgebung vererbt.
+*  set_env_compressed():
+*     set the compressed flag for environments
+*
+*  Notes:
+*     Basically, all environments which support the !compressed attribute, are set 
+*     to be output "splendid", not "compressed" (aka "short"). 
+*
+*     Environments which currently support the compressed flag, are:
+*     ENV_DESC, ENV_ENUM, ENV_ITEM, ENV_LIST
+*
+*     Here are two examples which show the difference:
+*
+*     Example A: itemize environment, splendid (default)
+*
+*     Source:                      Output (target HTML):
+*     --------------------------------------------------
+*     !begin_itemize               <ul>
+*     !item Test                   <li><p>Test</p></li>
+*     !item Foo                    <li><p>Foo</p></li>
+*     !item Bar                    <li><p>Bar</p></li>
+*     !end_itemize                 </ul>
+*
+*     Example B: itemize environment, compressed (using local attibute !compressed)
+*
+*     Source:                      Output (target HTML):
+*     --------------------------------------------------
+*     !begin_itemize !compressed   <ul>
+*     !item Test                   <li>Test</li>
+*     !item Foo                    <li>Foo</li>
+*     !item Bar                    <li>Bar</li>
+*     !end_itemize                 </ul>
+*
+*     You can define all supported environments to be output compressed, by using
+*     !use_compressed_envs (was !use_short_envs) in the preamble.
+*
+*     Or you can define compressed environments more precisely by using one of 
+*     these commands:
+*
+*     !use_compressed_descriptions (was !use_short_descriptions)
+*     !use_compressed_enumerates   (was !use_short_enumerates)
+*     !use_compressed_itemizes     (was !use_short_itemizes)
+*     !use_compressed_lists        (was !use_short_lists)
+*
+*     When you're going to nest such an environment in another environment,
+*     the compressed flag of the outer environment is inherited by default.
+*
+*     If you want to suppress this inherit, use the environment attribute
+*     !not_compressed in the inner environment.
 *
 *  Return:
 *     -
 *
 ******************************************|************************************/
 
-LOCAL void set_env_short(
+LOCAL void set_env_compressed(
 
 const int    el,  /* */
 const char  *s)   /* */
 {
-   if (use_short_envs)
+   if (strstr(s, "!not_compressed"))      /* don't inherit compressed flag from outer environment */
    {
-      bEnvShort[el] = TRUE;
+      bEnvCompressed[el] = FALSE;
       return;
    }
-   else if ( (use_short_itemizes) && (iEnvType[el] == ENV_ITEM) )
+   
+   if (use_compressed_envs)               /* this is the big general switch */
    {
-      bEnvShort[el] = TRUE;
+      bEnvCompressed[el] = TRUE;
       return;
    }
-   else if ( (use_short_enumerates) && (iEnvType[el] == ENV_ENUM) )
+                                          /* check single environment switches */
+   if ( (use_compressed_itemizes) && (iEnvType[el] == ENV_ITEM) )
    {
-      bEnvShort[el] = TRUE;
+      bEnvCompressed[el] = TRUE;
       return;
    }
-   else if ( (use_short_descriptions) && (iEnvType[el] == ENV_DESC) )
+   else if ( (use_compressed_enumerates) && (iEnvType[el] == ENV_ENUM) )
    {
-      bEnvShort[el] = TRUE;
+      bEnvCompressed[el] = TRUE;
       return;
    }
-   else if ( (use_short_lists) && (iEnvType[el] == ENV_LIST) )
+   else if ( (use_compressed_descriptions) && (iEnvType[el] == ENV_DESC) )
    {
-      bEnvShort[el] = TRUE;
+      bEnvCompressed[el] = TRUE;
+      return;
+   }
+   else if ( (use_compressed_lists) && (iEnvType[el] == ENV_LIST) )
+   {
+      bEnvCompressed[el] = TRUE;
       return;
    }
      
    
-   bEnvShort[el] = (strstr(s, "!short") != NULL);
-
-   if (!bEnvShort[el])
+   bEnvCompressed[el] = FALSE;            /* splendid by default */
+   
+   if (strstr(s, "!short"))               /* check local attributes */
    {
-      if (el > 1 && bEnvShort[el - 1])
+      warning_msg_solo("'!short' is a deprecated attribute for environments. Please use '!compressed' instead.");
+      bEnvCompressed[el] = TRUE;
+   }
+   else if (strstr(s, "!compressed") != NULL)
+      bEnvCompressed[el] = TRUE;
+   
+
+   if (!bEnvCompressed[el])               /* inherit compressed attribute by default */
+   {
+      if (el > 1 && bEnvCompressed[el - 1])
       {
-         bEnvShort[el] = TRUE;
+         bEnvCompressed[el] = TRUE;
       }
    }
 }
@@ -517,19 +588,19 @@ const int    el)            /* environment level to check */
    switch (el)
    {
    case 0:                                /* only possible on output_end_verbatim() */
-      if (iEnvLevel == 0 || (iEnvLevel > 0 && !bEnvShort[iEnvLevel]) )
+      if (iEnvLevel == 0 || (iEnvLevel > 0 && !bEnvCompressed[iEnvLevel]) )
          flag = TRUE;
          
       break;
       
    case 1:                               /* Letzte Umgebung, also Leerzeile, falls komprimiert */
-      flag = bEnvShort[el];
+      flag = bEnvCompressed[el];
       break;
       
    default:                              /* Leerzeile nur dann ausgeben, falls die aeussere   */
                                          /* Umgebung nicht komprimiert ist UND die aktuelle   */
                                          /* nicht komprimiert ist.                     */
-      if (bEnvShort[el] && !bEnvShort[el - 1])
+      if (bEnvCompressed[el] && !bEnvCompressed[el - 1])
          flag = TRUE;
    }
    
@@ -1420,7 +1491,7 @@ GLOBAL void c_begin_quote(void)
    bEnv1stItem[iEnvLevel] = TRUE;
    bEnv1stPara[iEnvLevel] = TRUE;
    
-   set_env_short(iEnvLevel, token[1]);
+   set_env_compressed(iEnvLevel, token[1]);
 
    quot_level++;
 
@@ -1677,7 +1748,7 @@ GLOBAL void c_begin_center(void)
    bEnv1stItem[iEnvLevel] = TRUE;
    bEnv1stPara[iEnvLevel] = TRUE;
    
-   /*r6pl6:   !short verbieten, da UDO dann nur Schrott erzeugt */
+   /*r6pl6:   !compressed (was !short) verbieten, da UDO dann nur Schrott erzeugt */
    /*         und eine Anpassung unheimlich problematisch ist   */
    
    switch (desttype)
@@ -1685,11 +1756,11 @@ GLOBAL void c_begin_center(void)
    case TOHTM:
    case TOMHH:
    case TOHAH:
-      bEnvShort[iEnvLevel] = FALSE;
+      bEnvCompressed[iEnvLevel] = FALSE;
       break;
    
    default:
-      set_env_short(iEnvLevel, token[1]);
+      set_env_compressed(iEnvLevel, token[1]);
    }
 
    cent_level++;
@@ -1789,7 +1860,7 @@ GLOBAL void c_begin_flushright(void)
    bEnv1stItem[iEnvLevel] = TRUE;
    bEnv1stPara[iEnvLevel] = TRUE;
    
-   /*r6pl6:   !short verbieten, da UDO dann nur Schrott erzeugt */
+   /*r6pl6:   !compressed (was !short) verbieten, da UDO dann nur Schrott erzeugt */
    /*         und eine Anpassung unheimlich problematisch ist   */
    
    switch (desttype)
@@ -1797,11 +1868,11 @@ GLOBAL void c_begin_flushright(void)
    case TOHTM:
    case TOMHH:
    case TOHAH:
-      bEnvShort[iEnvLevel] = FALSE;
+      bEnvCompressed[iEnvLevel] = FALSE;
       break;
    
    default:
-      set_env_short(iEnvLevel, token[1]);
+      set_env_compressed(iEnvLevel, token[1]);
    }
 
    flushright_level++;
@@ -1913,7 +1984,7 @@ GLOBAL void c_begin_flushleft(void)
    bEnv1stItem[iEnvLevel] = TRUE;
    bEnv1stPara[iEnvLevel] = TRUE;
 
-   /*r6pl6:   !short verbieten, da UDO dann nur Schrott erzeugt */
+   /*r6pl6:   !compressed (was !short) verbieten, da UDO dann nur Schrott erzeugt */
    /*         und eine Anpassung unheimlich problematisch ist   */
    
    switch (desttype)
@@ -1921,11 +1992,11 @@ GLOBAL void c_begin_flushleft(void)
    case TOHTM:
    case TOMHH:
    case TOHAH:
-      bEnvShort[iEnvLevel] = FALSE;
+      bEnvCompressed[iEnvLevel] = FALSE;
       break;
    
    default:
-      set_env_short(iEnvLevel, token[1]);
+      set_env_compressed(iEnvLevel, token[1]);
    }
 
    flushleft_level++;
@@ -2028,7 +2099,7 @@ GLOBAL void c_begin_itemize(void)
    bEnv1stItem[iEnvLevel] = TRUE;
    bEnv1stPara[iEnvLevel] = TRUE;
    
-   set_env_short(iEnvLevel, token[1]);
+   set_env_compressed(iEnvLevel, token[1]);
    
    iItemLevel++;
    
@@ -2038,7 +2109,7 @@ GLOBAL void c_begin_itemize(void)
    case TOPDL:
       outln("\\begin{itemize}");
       
-      if (bEnvShort[iEnvLevel])
+      if (bEnvCompressed[iEnvLevel])
       {
          outln("\\itemsep 0pt");
          outln("\\parsep 0pt");
@@ -2080,7 +2151,7 @@ GLOBAL void c_begin_itemize(void)
    case TOMHH:
       if (bParagraphOpen)                 /* paragraph still open?!? */
       {
-         if (!bEnvShort[iEnvLevel])       /* no short environment */
+         if (!bEnvCompressed[iEnvLevel])  /* no compressed environment */
             outln("</p>\n");              /* close previous paragraph first */
       }
       
@@ -2101,7 +2172,7 @@ GLOBAL void c_begin_itemize(void)
       
       
    case TOIPF:
-      if (bEnvShort[iEnvLevel])
+      if (bEnvCompressed[iEnvLevel])
          outln(":ul compact.");
       else
          outln(":ul.");
@@ -2159,7 +2230,7 @@ GLOBAL void c_begin_enumerate(void)
    bEnv1stItem[iEnvLevel] = TRUE;
    bEnv1stPara[iEnvLevel] = TRUE;
    
-   set_env_short(iEnvLevel, token[1]);
+   set_env_compressed(iEnvLevel, token[1]);
 
    iEnumLevel++;
    
@@ -2169,7 +2240,7 @@ GLOBAL void c_begin_enumerate(void)
    case TOPDL:
       outln("\\begin{enumerate}");
       
-      if (bEnvShort[iEnvLevel])
+      if (bEnvCompressed[iEnvLevel])
       {
          outln("\\itemsep 0pt");
          outln("\\parsep 0pt");
@@ -2217,7 +2288,7 @@ GLOBAL void c_begin_enumerate(void)
    case TOMHH:
       if (bParagraphOpen)                 /* paragraph still open?!? */
       {
-         if (!bEnvShort[iEnvLevel])       /* no short environment */
+         if (!bEnvCompressed[iEnvLevel])  /* no compressed environment */
          {
             switch (iEnvType[iEnvLevel])
             {
@@ -2237,7 +2308,7 @@ GLOBAL void c_begin_enumerate(void)
       
       bParagraphOpen = FALSE;
          
-      out("<ol");
+      out("\n<ol");
       
       switch (iEnumLevel)                 /*r6pl5: HTML 3.2 Moeglichkeiten nutzen */
       {
@@ -2273,7 +2344,7 @@ GLOBAL void c_begin_enumerate(void)
       
       
    case TOIPF:
-      if (bEnvShort[iEnvLevel])
+      if (bEnvCompressed[iEnvLevel])
          outln(":ol compact.");
       else
          outln(":ol.");
@@ -2332,7 +2403,7 @@ GLOBAL void c_begin_description(void)
    bEnv1stItem[iEnvLevel] = TRUE;
    bEnv1stPara[iEnvLevel] = TRUE;
    
-   set_env_short(iEnvLevel, token[1]);
+   set_env_compressed(iEnvLevel, token[1]);
 
    iDescLevel++;
    
@@ -2342,7 +2413,7 @@ GLOBAL void c_begin_description(void)
    case TOPDL:
       outln("\\begin{description}");
       
-      if (bEnvShort[iEnvLevel])
+      if (bEnvCompressed[iEnvLevel])
       {
          outln("\\itemsep 0pt");
          outln("\\parsep 0pt");
@@ -2386,7 +2457,7 @@ GLOBAL void c_begin_description(void)
       
       
    case TOIPF:
-      if (bEnvShort[iEnvLevel])
+      if (bEnvCompressed[iEnvLevel])
          outln(":dl compact break=none tsize=4.");
       else
          outln(":dl break=none tsize=4.");
@@ -2473,7 +2544,7 @@ int       listkind)     /* */
    iListLevel++;
    
    
-   /* String fuer die Breite ermitteln und schauen, ob !short vorkommt */
+   /* String fuer die Breite ermitteln und schauen, ob !compressed (was !short) vorkommt */
 
    sShort[0] = EOS;
    token[0][0] = EOS;
@@ -2489,7 +2560,7 @@ int       listkind)     /* */
       /* Aha, !short wird benutzt. Da manche Dumpfnasen das aber nicht */
       /* immer ans Ende setzen, hier gleich die passenden Abfragen.    */
 
-      strcpy(sShort, "!short");           /* Fuer set_env_short() */
+      strcpy(sShort, "!short");           /* Fuer set_env_compressed() */
             
       if (ptr == sWidth)
       {
@@ -2509,7 +2580,7 @@ int       listkind)     /* */
    qdelete_all(sWidth, "!-", 2);
    replace_udo_quotes(sWidth);
 
-   set_env_short(iEnvLevel, sShort);      /* Jetzt noch das short-Flag setzen */
+   set_env_compressed(iEnvLevel, sShort); /* check the compressed flag */
 
    switch (desttype)
    {
@@ -2535,7 +2606,7 @@ int       listkind)     /* */
       
       voutlnf("{%s}", sWidth);
       
-      if (bEnvShort[iEnvLevel])
+      if (bEnvCompressed[iEnvLevel])
       {
          outln("\\itemsep 0pt");
          outln("\\parsep 0pt");
@@ -2630,7 +2701,7 @@ int       listkind)     /* */
    
    
    case TOIPF:
-      if (bEnvShort[iEnvLevel])
+      if (bEnvCompressed[iEnvLevel])
       {
          voutlnf(":dl compact break=none tsize=%d.", (int)strlen(sWidth)+4);
       }
@@ -3369,7 +3440,7 @@ GLOBAL void c_item(void)
       case ENV_ENUM:                      /* <ol> list item */
          if (!bEnv1stItem[iEnvLevel])     /* not the first <li>? */
          {
-            if (!bEnvShort[iEnvLevel])
+            if (!bEnvCompressed[iEnvLevel])
                out("</p>");
                
             outln("</li>");               /* r6pl6: </li> ausgeben */
@@ -3379,7 +3450,7 @@ GLOBAL void c_item(void)
          
          strcpy(sBig, "<li>");            /* output <li> */
 
-         if (!bEnvShort[iEnvLevel])
+         if (!bEnvCompressed[iEnvLevel])
             strcat(sBig, "<p>");          /* output <p> */
 
          bEnv1stPara[iEnvLevel] = TRUE;   /* 1st paragraph */
@@ -3391,7 +3462,8 @@ GLOBAL void c_item(void)
          {
             if (bParagraphOpen)           /* paragraph still open? */
             {
-               if (bEnvShort[iEnvLevel])  /* additional linefeed? */
+                                          /* additional linefeed? */
+               if (bEnvCompressed[iEnvLevel])
                {
                   if (html_doctype < XHTML_STRICT)
                     outln("<br>");
@@ -3434,7 +3506,7 @@ GLOBAL void c_item(void)
 
          bDescDDOpen = TRUE;              /* open DD flag */
          
-         if (!bEnvShort[iEnvLevel])
+         if (!bEnvCompressed[iEnvLevel])
             um_strcat(sBig, "<p>", 1024, "c_item[22]");
 
          bParagraphOpen = TRUE;
@@ -3933,7 +4005,7 @@ int   listkind)  /* */
       voutlnf("%s", sHtmlPropfontEnd);
       
       if (bParagraphOpen)
-         if (!bEnvShort[iEnvLevel])
+         if (!bEnvCompressed[iEnvLevel])
             out("</p>");
 
       outln("</td></tr>\n</table>\n");
@@ -4106,7 +4178,8 @@ GLOBAL void c_end_description(void)
    case TOMHH:
       if (bParagraphOpen)
       {
-         if (bEnvShort[iEnvLevel + 1])    /* iEnvLevel has already been decreased */
+                                          /* iEnvLevel has already been decreased */
+         if (bEnvCompressed[iEnvLevel + 1])
          {
             if (html_doctype < XHTML_STRICT)
                outln("<br>\n");
@@ -4212,7 +4285,7 @@ GLOBAL void c_end_enumerate(void)
    case TOHAH:
    case TOHTM:
    case TOMHH:
-      if (!bEnvShort[iEnvLevel + 1])
+      if (!bEnvCompressed[iEnvLevel + 1])
          out("</p>");
          
       outln("</li>");                     /* r6pl6: Mit </li> */
@@ -4311,7 +4384,7 @@ GLOBAL void c_end_itemize(void)
    case TOHAH:
    case TOHTM:
    case TOMHH:
-      if (!bEnvShort[iEnvLevel + 1])
+      if (!bEnvCompressed[iEnvLevel + 1])
          out("</p>");
          
       outln("</li>");                     /* r6pl6: mit </li> */
@@ -5401,9 +5474,9 @@ GLOBAL void init_module_env(void)
 
    for (i = 0; i < MAXENVLEVEL; i++)
    {
-      bEnvShort[i]   = FALSE;
-      bEnv1stItem[i] = TRUE;
-      bEnv1stPara[i] = TRUE;
+      bEnvCompressed[i] = FALSE;
+      bEnv1stItem[i]    = TRUE;
+      bEnv1stPara[i]    = TRUE;
    }
 
    iEnvLevel  = 0;
