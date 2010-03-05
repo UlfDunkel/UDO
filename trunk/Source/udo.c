@@ -95,6 +95,7 @@
 *                - CODE_LATIN4
 *                - CODE_CYRILLIC
 *                - CODE_ARABIC
+*                - CODE_HEBREW
 *
 ******************************************|************************************/
 
@@ -361,6 +362,13 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
    {"csisolatingreek",     CODE_GREEK    },
    {"ecma-118",            CODE_GREEK    },
    {"elot_928",            CODE_GREEK    },
+   
+   {"iso-8859-8",          CODE_HEBREW   },
+   {"iso-ir-138",          CODE_HEBREW   },
+   {"iso8859-8",           CODE_HEBREW   },
+   {"iso_8859-8",          CODE_HEBREW   },
+   {"hebrew",              CODE_HEBREW   },
+   {"csisolatinhebrew",    CODE_HEBREW   },
    
    {"mac",                 CODE_MAC      },
    {"macintosh",           CODE_MAC      },
