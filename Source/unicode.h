@@ -43,6 +43,7 @@
 *                - 0370-03ff completed (Greek)
 *    fd  Feb 24: - 0590-05FF completed (Hebrew)
 *                - 0600-06FF: Arabic
+*    fd  Mar 05: typo fixed: U_LatinSmallLetterEng
 *
 ******************************************|************************************/
 /*KEY _NAME="unicode definitions" */
@@ -458,7 +459,7 @@
 #define U_LatinSmallLetterNWithCaron                    0x0148  /*  */
 #define U_LatinSmallLetterApostropheN                   0x0149  /*  */
 #define U_LatinCapitalLetterEng                         0x014A  /*  */
-#define U_LatinSmalllLetterEng                          0x014B  /*  */
+#define U_LatinSmallLetterEng                           0x014B  /*  */
 #define U_LatinCapitalLetterOWithMacron                 0x014C  /*  */
 #define U_LatinSmallLetterOWithMacron                   0x014D  /*  */
 #define U_LatinCapitalLetterOWithBreve                  0x014E  /*  */
