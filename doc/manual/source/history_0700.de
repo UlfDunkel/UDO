@@ -173,7 +173,6 @@ UDO~7 ist ein großer Sprung seit der letzten veröffentlichten Version. Vor allem
                und als normaler Text ausgegeben.
          !end_blist
          
-         (!EXAMPLE_BEGIN)
          Eine mögliche Anwendung ist, den Inhalt einer Tabellenzeile auf mehrere Zeilen
          in der Eingabedatei aufzuteilen, um die Lesbarkeit des UDO-Quelltextes zu verbessern.
          
