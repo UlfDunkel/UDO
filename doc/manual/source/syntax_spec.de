@@ -254,22 +254,22 @@ umgewandelt werden:
 
 
 !universal_charset [on]
-!begin_table [|l|l|l|] !hline
+!begin_table [|l|l|ll|] !hline
 (!B)Platzhalter(!b)  !! (!B)x aus(!b)  !! (!B)Beispiel(!b)
 !hline
-(!/"x)               !! AEIOUaeiosuy   !! (!B)(!T)(!/"a)(!t)(!b)  = (!"a)
-(!/'x)               !! AEIOUYaeiouy   !! (!code [(!/'e!)])       = (!'e)
-(!/`x)               !! AEIOUaeiou     !! (!code [(!/`i!)])       = (!`i)
-(!/^x)               !! AEIOUaeiou     !! (!code [(!/^o!)])       = (!^o)
-(!/&x)               !! AE, OE, ae, oe !! (!B)(!T)(!/&AE)(!t)(!b) = (!&AE)
-(!/!~x)              !! ANOano         !! (!code [(!/!~n!)])      = (!~n)
-(!/,x)               !! Cc             !! (!code [(!/,C!)])       = (!,C)
-(!/.x)               !! Aa             !! (!code [(!/.A!)])       = (!.A)
-(!/_x)               !! ao             !! (!code [(!/_a!)])       = (!_a)
-(!/_x)               !! !/?            !! (!code [(!/_?!)])       = (!_?)
-(!/\x)               !! Oo             !! (!code [(!/\O!)])       = (!\O)
-(!//x)               !! Oo             !! (!code [(!//o!)])       = (!/o)
-(!/#x)               !! PS             !! (!code [(!/#S!)])       = (!#S)
+(!/"x)               !! AEIOUaeiosuy   !! (!B)(!T)(!/"a)(!t)(!b) !! = (!"a)
+(!/'x)               !! AEIOUYaeiouy   !! (!code [(!/'e!)])      !! = (!'e)
+(!/`x)               !! AEIOUaeiou     !! (!code [(!/`i!)])      !! = (!`i)
+(!/^x)               !! AEIOUaeiou     !! (!code [(!/^o!)])      !! = (!^o)
+(!/&x)               !! AE, OE, ae, oe !! (!B)(!T)(!/&AE)(!t)(!b)!! = (!&AE)
+(!/!~x)              !! ANOano         !! (!code [(!/!~n!)])     !! = (!~n)
+(!/,x)               !! Cc             !! (!code [(!/,C!)])      !! = (!,C)
+(!/.x)               !! Aa             !! (!code [(!/.A!)])      !! = (!.A)
+(!/_x)               !! ao             !! (!code [(!/_a!)])      !! = (!_a)
+(!/_x)               !! !/?            !! (!code [(!/_?!)])      !! = (!_?)
+(!/\x)               !! Oo             !! (!code [(!/\O!)])      !! = (!\O)
+(!//x)               !! Oo             !! (!code [(!//o!)])      !! = (!/o)
+(!/#x)               !! PS             !! (!code [(!/#S!)])      !! = (!#S)
 !hline
 !end_table
 
