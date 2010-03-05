@@ -4469,8 +4469,8 @@ static UWORD   u_CODE_HEBREW[] =          /* CODE_HEBREW */
    U_HebrewLetterTav,                     /* 0xFA   0x05EA   HEBREW LETTER TAV */
    U_NIL,                                 /* 0xFB            <undefined> */
    U_NIL,                                 /* 0xFC            <undefined> */
-   U_LeftToRightMark,                     /* 0xFD   0x200E   LEFT-TO-RIGHT MARK
-   U_RightToLeftMark,                     /* 0xFE   0x200F   RIGHT-TO-LEFT MARK
+   U_LeftToRightMark,                     /* 0xFD   0x200E   LEFT-TO-RIGHT MARK */
+   U_RightToLeftMark,                     /* 0xFE   0x200F   RIGHT-TO-LEFT MARK */
    U_NIL                                  /* 0xFF            <undefined> */
 };
 
@@ -4764,8 +4764,8 @@ static UWORD   sort_CODE_HEBREW[] =       /* CODE_HEBREW */
    U_HebrewLetterTav,                     /* 0xFA   0x05EA   HEBREW LETTER TAV */
    U_NIL,                                 /* 0xFB            <undefined> */
    U_NIL,                                 /* 0xFC            <undefined> */
-   U_LeftToRightMark,                     /* 0xFD   0x200E   LEFT-TO-RIGHT MARK
-   U_RightToLeftMark,                     /* 0xFE   0x200F   RIGHT-TO-LEFT MARK
+   U_LeftToRightMark,                     /* 0xFD   0x200E   LEFT-TO-RIGHT MARK */
+   U_RightToLeftMark,                     /* 0xFE   0x200F   RIGHT-TO-LEFT MARK */
    U_NIL                                  /* 0xFF            <undefined> */
 };
 
