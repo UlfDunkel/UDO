@@ -91,7 +91,8 @@
 *                !code command and c_code() function removed -> code_source
 *    fd  Mar 03: pass_check_if() debugged - #86 fixed
 *    fd  Mar 04: token_output(): inside_short -> inside_compressed
-*    fd  Mar 05: CODE_LATIN3
+*    fd  Mar 05: - CODE_LATIN3
+*                - CODE_LATIN4
 *
 ******************************************|************************************/
 
@@ -324,6 +325,14 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
    {"latin3",              CODE_LATIN3   },
    {"l3",                  CODE_LATIN3   },
    {"csisolatin3",         CODE_LATIN3   },
+   
+   {"iso-8859-4",          CODE_LATIN4   },
+   {"iso-ir-110",          CODE_LATIN4   },
+   {"iso8859-4",           CODE_LATIN4   },
+   {"iso_8859-4",          CODE_LATIN4   },
+   {"latin4",              CODE_LATIN4   },
+   {"l4",                  CODE_LATIN4   },
+   {"csisolatin4",         CODE_LATIN4   },
    
    {"mac",                 CODE_MAC      },
    {"macintosh",           CODE_MAC      },

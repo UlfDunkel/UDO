@@ -61,7 +61,8 @@
 *    fd  Mar 01: v7.00 public release
 *    fd  Mar 02: "Mac OS" and "Mac OS X" love spaces ;-)
 *    fd  Mar 04: version strings prepared for v7.01 beta
-*    fd  Mar 05: CODE_LATIN3
+*    fd  Mar 05: - CODE_LATIN3
+*                - CODE_LATIN4
 *
 ******************************************|************************************/
 
@@ -126,8 +127,9 @@
 #define CODE_CP1256   17                  /* Microsoft Windows codepage 1256 "Arabic" */
 #define CODE_CP1258   18                  /* Microsoft Windows codepage 1258 "Vietnamese" */
 #define CODE_LATIN3   19                  /* ISO Latin 3 (iso-8859-3) "South European" */
+#define CODE_LATIN4   20                  /* ISO Latin 4 (iso-8859-4) "North European" */
 
-#define CODE_TOTAL    20                  /* # of supported encodings */
+#define CODE_TOTAL    21                  /* # of supported encodings */
 
    /* --- Compiler- und systemabhaengige Dinge setzen --- */
 
