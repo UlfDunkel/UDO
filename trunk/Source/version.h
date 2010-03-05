@@ -64,6 +64,7 @@
 *    fd  Mar 05: - CODE_LATIN3
 *                - CODE_LATIN4
 *                - CODE_CYRILLIC
+*                - CODE_ARABIC
 *
 ******************************************|************************************/
 
@@ -130,8 +131,9 @@
 #define CODE_LATIN3   19                  /* ISO Latin 3 (iso-8859-3) "South European" */
 #define CODE_LATIN4   20                  /* ISO Latin 4 (iso-8859-4) "North European" */
 #define CODE_CYRILLIC 21                  /* ISO Cyrillic (iso-8859-5) */
+#define CODE_ARABIC   22                  /* ISO Arabic (iso-8859-6) */
 
-#define CODE_TOTAL    22                  /* # of supported encodings */
+#define CODE_TOTAL    23                  /* # of supported encodings */
 
    /* --- Compiler- und systemabhaengige Dinge setzen --- */
 
