@@ -30,6 +30,7 @@
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #   fd  Mar 02: chapter cmd_docinfo much enhanced
 #   fd  Mar 03: cmd_docinfo: deprecated attributes (webmaster...) updated
+#   fd  Mar 05: more adjustments for !docinfo [webmaster...]
 #
 ################################################################################
 
@@ -293,7 +294,7 @@ Werden alle diese Kontaktdaten (in vier einzelnen Zeilen!) angegeben, erzeugt UD
 # Vorspann
 !docinfo [domain_link]    http://www.udo-open-source.org/
 !docinfo [domain_name]    UDO OpenSource
-!docinfo [contact_link]   webmaster@udo-open-source.org
+!docinfo [contact_link]   mailto:webmaster@udo-open-source.org
 !docinfo [contact_name]   E-Mail an den Webmaster
 
 # Dokument
@@ -389,8 +390,8 @@ When distributor is used, the title page will show it below author and company a
 !docinfo [address] Germany
 !docinfo [address] Internet: info@dirk-hagedorn.de
 !docinfo [address] Mausnet: Dirk Hagedorn @ MK2
-!docinfo [webmasteremail] webmaster@dirk-hagedorn.de
-!docinfo [webmasterurl] http://www.dirk-hagedorn.de/
+!docinfo [domain_link] http://www.dirk-hagedorn.de/
+!docinfo [contact_link] mailto:webmaster@dirk-hagedorn.de
 !docinfo [authorimage] dh
 !docinfo [date] (!today)
 !end_verbatim

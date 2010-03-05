@@ -24,6 +24,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
+#   fd  Mar 05: adjustments for !docinfo [webmaster...]
 #
 ################################################################################
 
@@ -358,7 +359,7 @@ Dieser Text soll fett dargestellt werden, auﬂer im ASCII- oder HTML-Format.
 !begin_node (!kw [no_footers])
 !html_name  cmd_no_footers
 
-Keine Webmasterangaben in den Fuﬂzeilen erzeugen.
+Keine Kontaktangaben in den Fuﬂzeilen erzeugen.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -368,7 +369,7 @@ Keine Webmasterangaben in den Fuﬂzeilen erzeugen.
 
 !item [(!DESCRIPTION)]
 Mit diesem Kommando kann man die automatische
-Erzeugung der Webmasterangaben in der Fuﬂzeile der jeweiligen Ausgabeformate
+Erzeugung der Kontaktangaben in der Fuﬂzeile der jeweiligen Ausgabeformate
 unterbinden, sofern diese vorhanden sind. Im Beispiel w¸rde dies bei der
 Umwandlung ins HTML-Format geschehen.
 
