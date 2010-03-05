@@ -18,6 +18,7 @@
 #   fd  Jun 09: real quotation fixed
 # 2010:
 #   fd  Feb 24: rewritten for UDO v7
+#   fd  Mar 05: ISO-8859-3, ISO-8859-4
 #
 ################################################################################
 
@@ -46,6 +47,7 @@ Windows        !! Codepage 1250    !! CP1250 MS-EE WINDOWS-1250
 ISO            !! 8859-1           !! ISO-8859-1 ISO-IR-100 ISO8859-1 ISO_8859-1 LATIN1 L1 CSISOLATIN1
                !! 8859-2           !! ISO-8859-2 ISO-IR-101 ISO8859-2 ISO_8859-2 LATIN2 L2 CSISOLATIN2
                !! 8859-3           !! ISO-8859-3 ISO-IR-109 ISO8859-3 ISO_8859-3 LATIN3 L3 CSISOLATIN3
+               !! 8859-4           !! ISO-8859-4 ISO-IR-110 ISO8859-4 ISO_8859-4 LATIN4 L4 CSISOLATIN4
 !hline
 Apple          !! Mac Roman        !! MAC MACINTOSH MACROMAN CSMACINTOSH
                !! Mac CentEuro     !! MAC_CE MACCENTRALEUROPE
