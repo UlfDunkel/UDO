@@ -33,7 +33,8 @@
 #   fd  Mar 01: - new chapters: use_short_descriptions, use_short_enumerates,
 #                   use_short_itemizes, use_short_lists
 #               - OldKeywords removed -> cmds__old.de
-#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 05: - old environment attribute short changed: -> !compressed
+#               - !use_short_... (for environments) changed: -> !use_compressed_...
 #
 ################################################################################
 
@@ -881,7 +882,7 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_descr
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-!use_short_descriptions [all]
+!use_compressed_descriptions [all]
 
 # Dokument
 !begin_description
@@ -912,8 +913,8 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_descr
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-# !use_short_descriptions [all]
-# !use_short_envs        [all]
+# !use_compressed_descriptions [all]
+# !use_compressed_envs         [all]
 
 # Dokument
 !begin_description
@@ -973,7 +974,7 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_enume
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-!use_short_enumerates [all]
+!use_compressed_enumerates [all]
 
 # Dokument
 !begin_enumerate
@@ -994,8 +995,8 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_enume
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-# !use_short_enumerates [all]
-# !use_short_envs      [all]
+# !use_compressed_enumerates [all]
+# !use_compressed_envs       [all]
 
 # Dokument
 !begin_enumerate
@@ -1043,7 +1044,7 @@ Beispiel würde dieser Schalter für das ASCII-Format gesetzt.
 (!EXAMPLE)
 (!EXAMPLE_BEGIN)
 !begin_verbatim
-!use_short_envs [asc]
+!use_compressed_envs [asc]
 !end_verbatim
 (!EXAMPLE_END)
 
@@ -1080,7 +1081,7 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_itemi
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-!use_short_itemizes [all]
+!use_compressed_itemizes [all]
 
 # Dokument
 !begin_itemize
@@ -1101,8 +1102,8 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_itemi
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-# !use_short_itemizes [all]
-# !use_short_envs    [all]
+# !use_compressed_itemizes [all]
+# !use_compressed_envs     [all]
 
 # Dokument
 !begin_itemize
@@ -1152,7 +1153,7 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_lists
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-!use_short_lists [all]
+!use_compressed_lists [all]
 
 # Dokument
 !begin_blist
@@ -1183,8 +1184,8 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_lists
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-# !use_short_lists [all]
-# !use_short_envs [all]
+# !use_compressed_lists [all]
+# !use_compressed_envs  [all]
 
 # Dokument
 !begin_blist
@@ -1245,7 +1246,7 @@ der Inhaltsverzeichnisse bei allen Ausgabeformaten eingeschränkt.
 (!EXAMPLE)
 (!EXAMPLE_BEGIN)
 !begin_verbatim
-!use_short_tocs [all]
+!use_compressed_tocs [all]
 !end_verbatim
 (!EXAMPLE_END)
 
