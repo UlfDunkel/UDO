@@ -90,7 +90,7 @@
             (!kw [use_short_lists])        !! (!kw [use_compressed_lists])
             !end_table
       
-      !item New environment attribute (!code [not_compressed]): (!nl)
+      !item New environment attribute (!code [!not_compressed]): (!nl)
             This new environment attribute has been introduced, 
             to be able and switch off the inherit of compressed outer environments to the inner environments.
       !end_itemize

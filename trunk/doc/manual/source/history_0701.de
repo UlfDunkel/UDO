@@ -90,7 +90,7 @@
             (!kw [use_short_lists])        !! (!kw [use_compressed_lists])
             !end_table
       
-      !item Neues Umgebung-Attribut (!code [not_compressed]): (!nl)
+      !item Neues Umgebung-Attribut (!code [!not_compressed]): (!nl)
             Dieses neue Umgebung-Attribut wurde eingeführt, 
             damit Sie die Vererbung des kompress-Attributs einer äußeren Umgebung an die innere Umgebung abschalten können.
       !end_itemize
