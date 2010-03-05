@@ -51,6 +51,7 @@
 *    fd  Feb 27: table_output_html(): additional feed before table output when
 *                  inside other environments
 *    ggs Feb 27: MAX_TAB_H increased from 600 to 700
+*    fd  Mar 04: table_output_html(): bEnvShort[] -> bEnvCompressed[]
 *
 ******************************************|************************************/
 
@@ -1254,7 +1255,7 @@ LOCAL void table_output_html(void)
       case ENV_ITEM:
       case ENV_ENUM:
       case ENV_LIST:
-         if (bEnvShort[iEnvLevel])
+         if (bEnvCompressed[iEnvLevel])
          {
             if (html_doctype < XHTML_STRICT)
                outln("<br>\n");

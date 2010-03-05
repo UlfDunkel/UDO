@@ -42,6 +42,7 @@
 *  2010:
 *    fd  Feb 04: header updated; bDescDDOpen introduced
 *    fd  Feb 26: new: bParagraphOpen
+*    fd  Mar 04: bEnvShort[] -> bEnvCompressed[]
 *
 ******************************************|************************************/
 
@@ -82,8 +83,8 @@ GLOBAL int       iEnvLevel;               /* Zaehler fuer Umgebungen */
 GLOBAL int       iEnvType[MAXENVLEVEL + 1];
                                           /* Einrueckungstiefe einer Umgebung */
 GLOBAL int       iEnvIndent[MAXENVLEVEL + 1];
-                                          /* Zusammengequetscht? */
-GLOBAL BOOLEAN   bEnvShort[MAXENVLEVEL + 1];
+                                          /* TRUE: compressed, FALSE: splendid (default) */
+GLOBAL BOOLEAN   bEnvCompressed[MAXENVLEVEL + 1];
                                           /* Ist das naechste !item das erste? */
 GLOBAL BOOLEAN   bEnv1stItem[MAXENVLEVEL + 1];
                                           /* Erster Absatz des !item? */

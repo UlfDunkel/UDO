@@ -212,11 +212,14 @@ GLOBAL BOOLEAN     use_auto_toptocs;      /* autom. Ueber-Toc's anlegen? */
 GLOBAL BOOLEAN     no_auto_toptocs_icons; /* ... aber ohne Icons */   /*r6pl13*/
 GLOBAL BOOLEAN     use_short_tocs;        /* Kurze Inhaltsverzeichnisse default? */
 
-GLOBAL BOOLEAN     use_short_envs;        /* Umgebungen immer komprimiert? */
-GLOBAL BOOLEAN     use_short_itemizes;    /* compress all itemize environments only */
-GLOBAL BOOLEAN     use_short_enumerates;  /* compress all enumerate environments only */
-GLOBAL BOOLEAN     use_short_descriptions;/* compress all description environments only */
-GLOBAL BOOLEAN     use_short_lists;       /* compress all ?list environments only */
+GLOBAL BOOLEAN     use_compressed_envs;   /* compress all supporting environments */
+                                          /* compress all itemize environments only */
+GLOBAL BOOLEAN     use_compressed_itemizes;
+                                          /* compress all enumerate environments only */
+GLOBAL BOOLEAN     use_compressed_enumerates;
+                                          /* compress all description environments only */
+GLOBAL BOOLEAN     use_compressed_descriptions;
+GLOBAL BOOLEAN     use_compressed_lists;  /* compress all ?list environments only */
 
 GLOBAL BOOLEAN     use_formfeed;          /* Formfeed verwenden? */
 GLOBAL BOOLEAN     use_chapter_images;    /* Kapitelgrafiken verwenden? */
