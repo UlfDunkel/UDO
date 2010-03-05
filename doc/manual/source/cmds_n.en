@@ -22,6 +22,7 @@
 #   fd  Aug 17: 'information' never used in plural in English!
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
+#   fd  Mar 05: adjustments for !docinfo [webmaster...]
 #
 ################################################################################
 
@@ -309,7 +310,7 @@ The example shows how to switch it of when converting to ASCII.
 !begin_node (!kw [no_footers])
 !html_name  cmd_no_footers
 
-Do not insert webmaster information in bottom lines.
+Do not insert contact information in bottom lines.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -319,7 +320,7 @@ Do not insert webmaster information in bottom lines.
 
 !item [(!DESCRIPTION)]
 This switch will turn off the automatic generation
-if webmaster information in the bottom line
+if contact information in the bottom line
 of the page. The example shows how to
 switch it of when converting to HTML.
 
