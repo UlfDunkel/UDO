@@ -98,6 +98,7 @@
 *    fd  Mar 05: - CODE_LATIN3
 *                - CODE_LATIN4
 *                - CODE_CYRILLIC
+*                - CODE_ARABIC
 *
 ******************************************|************************************/
 
@@ -4653,6 +4654,9 @@ int   encoding)  /* # of encoding */
    case CODE_CYRILLIC:
       return u_CODE_CYRILLIC;
    
+   case CODE_ARABIC:
+      return u_CODE_ARABIC;
+   
    case CODE_MAC:
       return u_CODE_MAC;
    
@@ -4741,6 +4745,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_CYRILLIC:
       return CODE_CYRILLIC_lig;
+   
+   case CODE_ARABIC:
+      return CODE_ARABIC_lig;
    
    case CODE_MAC:
       return CODE_MAC_lig;
@@ -4834,6 +4841,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_CYRILLIC:
       return sort_CODE_CYRILLIC;
+   
+   case CODE_ARABIC:
+      return sort_CODE_ARABIC;
    
    case CODE_MAC:
       return sort_CODE_MAC;
@@ -4956,6 +4966,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_CYRILLIC:
       return "ISO 8859-5 (Cyrillic)";
+   
+   case CODE_ARABIC:
+      return "ISO 8859-6 (Arabic)";
    
    case CODE_MAC:
       return "Mac";

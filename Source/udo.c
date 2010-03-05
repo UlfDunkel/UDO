@@ -94,6 +94,7 @@
 *    fd  Mar 05: - CODE_LATIN3
 *                - CODE_LATIN4
 *                - CODE_CYRILLIC
+*                - CODE_ARABIC
 *
 ******************************************|************************************/
 
@@ -341,6 +342,15 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
    {"iso_8859-5",          CODE_CYRILLIC },
    {"cyrillic",            CODE_CYRILLIC },
    {"csisolatincyrillic",  CODE_CYRILLIC },
+   
+   {"iso-8859-6",          CODE_ARABIC   },
+   {"iso-ir-127",          CODE_ARABIC   },
+   {"iso8859-6",           CODE_ARABIC   },
+   {"iso_8859-6",          CODE_ARABIC   },
+   {"arabic",              CODE_ARABIC   },
+   {"asmo-708",            CODE_ARABIC   },
+   {"ecma-114",            CODE_ARABIC   },
+   {"csisolatinarabic",    CODE_ARABIC   },
    
    {"mac",                 CODE_MAC      },
    {"macintosh",           CODE_MAC      },
