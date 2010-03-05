@@ -97,6 +97,7 @@
 *                - unicode2char() debugged
 *    fd  Mar 05: - CODE_LATIN3
 *                - CODE_LATIN4
+*                - CODE_CYRILLIC
 *
 ******************************************|************************************/
 
@@ -4649,6 +4650,9 @@ int   encoding)  /* # of encoding */
    case CODE_LATIN4:
       return u_CODE_LATIN4;
    
+   case CODE_CYRILLIC:
+      return u_CODE_CYRILLIC;
+   
    case CODE_MAC:
       return u_CODE_MAC;
    
@@ -4734,6 +4738,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_LATIN4:
       return CODE_LATIN4_lig;
+   
+   case CODE_CYRILLIC:
+      return CODE_CYRILLIC_lig;
    
    case CODE_MAC:
       return CODE_MAC_lig;
@@ -4824,6 +4831,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_LATIN4:
       return sort_CODE_LATIN4;
+   
+   case CODE_CYRILLIC:
+      return sort_CODE_CYRILLIC;
    
    case CODE_MAC:
       return sort_CODE_MAC;
@@ -4943,6 +4953,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_LATIN4:
       return "ISO 8859-4 (Latin 4)";
+   
+   case CODE_CYRILLIC:
+      return "ISO 8859-5 (Cyrillic)";
    
    case CODE_MAC:
       return "Mac";
