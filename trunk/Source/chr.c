@@ -99,6 +99,7 @@
 *                - CODE_LATIN4
 *                - CODE_CYRILLIC
 *                - CODE_ARABIC
+*                - CODE_GREEK
 *
 ******************************************|************************************/
 
@@ -4657,6 +4658,9 @@ int   encoding)  /* # of encoding */
    case CODE_ARABIC:
       return u_CODE_ARABIC;
    
+   case CODE_GREEK:
+      return u_CODE_GREEK;
+   
    case CODE_MAC:
       return u_CODE_MAC;
    
@@ -4748,6 +4752,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_ARABIC:
       return CODE_ARABIC_lig;
+   
+   case CODE_GREEK:
+      return CODE_GREEK_lig;
    
    case CODE_MAC:
       return CODE_MAC_lig;
@@ -4844,6 +4851,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_ARABIC:
       return sort_CODE_ARABIC;
+   
+   case CODE_GREEK:
+      return sort_CODE_GREEK;
    
    case CODE_MAC:
       return sort_CODE_MAC;
@@ -4969,6 +4979,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_ARABIC:
       return "ISO 8859-6 (Arabic)";
+   
+   case CODE_GREEK:
+      return "ISO 8859-7 (Greek)";
    
    case CODE_MAC:
       return "Mac";
