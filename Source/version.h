@@ -61,6 +61,7 @@
 *    fd  Mar 01: v7.00 public release
 *    fd  Mar 02: "Mac OS" and "Mac OS X" love spaces ;-)
 *    fd  Mar 04: version strings prepared for v7.01 beta
+*    fd  Mar 05: CODE_LATIN3
 *
 ******************************************|************************************/
 
@@ -114,18 +115,19 @@
 #define CODE_850       6                  /* DOS Codepage 850 */
 #define CODE_UTF8      7                  /* UTF-8 (e.g. for BeOS) */
 #define CODE_CP1250    8                  /* Microsoft Windows codepage 1250 "CE" */
-#define CODE_LATIN2    9                  /* ISO Latin 2 (iso-8859-2) */
+#define CODE_LATIN2    9                  /* ISO Latin 2 (iso-8859-2) "Middle European" */
 #define CODE_CP1257   10                  /* Microsoft Windows codepage 1257 "Baltic" */
 #define CODE_CP1251   11                  /* Microsoft Windows codepage 1251 "Russian" */
 #define CODE_CP1253   12                  /* Microsoft Windows codepage 1253 "Greek" */
 #define CODE_MAC_CE   13                  /* Apple Central Europe */
-#define CODE_LATIN1   14                  /* ISO Latin 2 (iso-8859-2) */
+#define CODE_LATIN1   14                  /* ISO Latin 1 (iso-8859-1) "West European" */
 #define CODE_CP1254   15                  /* Microsoft Windows codepage 1254 "Turkish" */
 #define CODE_CP1255   16                  /* Microsoft Windows codepage 1255 "Hebrew" */
 #define CODE_CP1256   17                  /* Microsoft Windows codepage 1256 "Arabic" */
 #define CODE_CP1258   18                  /* Microsoft Windows codepage 1258 "Vietnamese" */
+#define CODE_LATIN3   19                  /* ISO Latin 3 (iso-8859-3) "South European" */
 
-#define CODE_TOTAL    19                  /* # of supported encodings */
+#define CODE_TOTAL    20                  /* # of supported encodings */
 
    /* --- Compiler- und systemabhaengige Dinge setzen --- */
 

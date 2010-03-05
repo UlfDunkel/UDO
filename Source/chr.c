@@ -95,6 +95,7 @@
 *                - new: chr_usort_codepage()
 *                - new: chr_ligatures()
 *                - unicode2char() debugged
+*    fd  Mar 05: CODE_LATIN3
 *
 ******************************************|************************************/
 
@@ -4641,6 +4642,9 @@ int   encoding)  /* # of encoding */
    case CODE_LATIN2:
       return u_CODE_LATIN2;
    
+   case CODE_LATIN3:
+      return u_CODE_LATIN3;
+   
    case CODE_MAC:
       return u_CODE_MAC;
    
@@ -4720,6 +4724,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_LATIN2:
       return CODE_LATIN2_lig;
+   
+   case CODE_LATIN3:
+      return CODE_LATIN3_lig;
    
    case CODE_MAC:
       return CODE_MAC_lig;
@@ -4804,6 +4811,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_LATIN2:
       return sort_CODE_LATIN2;
+   
+   case CODE_LATIN3:
+      return sort_CODE_LATIN3;
    
    case CODE_MAC:
       return sort_CODE_MAC;
@@ -4917,6 +4927,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_LATIN2:
       return "ISO 8859-2 (Latin 2)";
+   
+   case CODE_LATIN3:
+      return "ISO 8859-3 (Latin 3)";
    
    case CODE_MAC:
       return "Mac";
