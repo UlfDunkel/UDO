@@ -67,6 +67,7 @@
 *                - bEnvShort[]            -> bEnvCompressed[]
 *                - set_env_short()        -> set_env_compressed()
 *                The old commands are still available!
+*    fd  Mar 05: c_begin_document() debugged for titdat content
 *
 ******************************************|************************************/
 
@@ -4566,31 +4567,33 @@ GLOBAL void c_begin_document(void)
    switch (desttype)
    {
    case TOPDL:
-                                          /* Changed in r6.2pl1 [NHz] */
-      if (titdat.author != NULL || titdat.title != NULL || titdat.program != NULL)
-      {
-         outln("\\pdfinfo {");
+      outln("\\pdfinfo {");
          
-         if (titdat.title != NULL)
-            voutlnf("  /Title (%s)", titdat.title);
+      if (titdat.title != NULL)
+         voutlnf("  /Title (%s)", titdat.title);
+      else
+         outln("  /Title (undefined)");
             
-         if (titdat.author != NULL)
-            voutlnf("  /Author (%s)", titdat.author);
+      if (titdat.author != NULL)
+         voutlnf("  /Author (%s)", titdat.author);
+      else
+         outln("  /Author (undefined)");
          
-         voutlnf("  /Creator (UDO Version %s.%s %s for %s)", UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS);
-         voutlnf("  /CreationDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
-         voutlnf("  /ModDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
+      voutlnf("  /Creator (UDO Version %s.%s %s for %s)", UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS);
+      voutlnf("  /CreationDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
+      voutlnf("  /ModDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
          
-         if (titdat.description != NULL)
-            voutlnf("  /Subject (%s)", titdat.description);
+      if (titdat.description != NULL)
+         voutlnf("  /Subject (%s)", titdat.description);
+      else
+         outln("  /Subject (undefined)");
             
-         if (titdat.keywords != NULL)
-         {                                /* Set by !docinfo [keywords] foo */
-            voutlnf("  /Keywords (%s)", titdat.keywords);
-         }
+      if (titdat.keywords != NULL)        /* Set by !docinfo [keywords] foo */
+         voutlnf("  /Keywords (%s)", titdat.keywords);
+      else
+         outln("  /Keywords (undefined)");
             
-         outln("}");
-      }
+      outln("}");
       
       output_tex_environments();
       break;
@@ -4629,14 +4632,11 @@ GLOBAL void c_begin_document(void)
       
    case TONRO:
       sprintf(s, ".TH ");
+      
       if (titdat.program != NULL)
-      {
          strcat(s, titdat.program);
-      }
       else
-      {
          strcat(s, lang.unknown);
-      }
       
       if (sDocNroffType[0] != EOS)
       {
@@ -4651,13 +4651,9 @@ GLOBAL void c_begin_document(void)
       strcat(s, " \"");
       
       if (titdat.date != NULL)
-      {
          strcat(s, titdat.date);
-      }
       else
-      {
          strcat(s, lang.today);
-      }
       
       strcat(s, "\"");
       
@@ -4697,13 +4693,9 @@ GLOBAL void c_begin_document(void)
       if (titdat.version != NULL)
       {
          if (titdat.date != NULL)
-         {
             voutlnf("@$VER: %s (%s)", titdat.version, titdat.date);
-         }
          else
-         {
             voutlnf("@$VER: %s", titdat.version);
-         }
       }
       else
       {
@@ -5016,19 +5008,15 @@ GLOBAL void c_begin_document(void)
          outln("");
       }
 
-      if (titleprogram[0] != EOS)
-      {
+      if (titleprogram != NULL)
          voutlnf("<title>%s", titleprogram);
-      }
 
       if (titdat.author != NULL || address_counter > 0)
       {
          out("<author>");
          
          if (titdat.author != NULL)
-         {
             out(titdat.author);
-         }
          
          if (address_counter > 0)
          {
@@ -5046,9 +5034,7 @@ GLOBAL void c_begin_document(void)
       }
       
       if (titdat.date != NULL)
-      {
          voutlnf("<date>%s", titdat.date);
-      }
       
       break;
 
@@ -5140,25 +5126,44 @@ GLOBAL void c_begin_document(void)
       voutlnf("/fontsize %d def", laydat.propfontsize);
       outln("basefont setBaseFont");
       
-      voutlnf("/Titeltext (%s %s) def", titdat.title, titdat.program);
+      if (titdat.title != NULL && titdat.program != NULL)
+         voutlnf("/Titeltext (%s %s) def", titdat.title, titdat.program);
+      else if (titdat.title != NULL)
+         voutlnf("/Titeltext (%s) def", titdat.title);
+      else if (titdat.program != NULL)
+         voutlnf("/Titeltext (%s) def", titdat.program);
+      else
+         outln("/Titeltext (not defined) def");
       
                                           /* Changed: Fixed bug #0000040 in r6.3pl16 [NHz] */
-      if (titdat.author)
+      if (titdat.author != NULL)
          voutlnf("/FootAuthor (\\251 %s) def", titdat.author);
       else
-         outln("/FootAuthor () def");
+         outln("/FootAuthor (not defined) def");
       
                                           /* Document info */
-      voutlnf("[ /Title (%s %s)", titdat.title, titdat.program);
-      voutlnf("  /Author (%s)", titdat.author);
+      if (titdat.title != NULL && titdat.program != NULL)
+         voutlnf("[ /Title (%s %s)", titdat.title, titdat.program);
+      else if (titdat.title != NULL)
+         voutlnf("[ /Title (%s)", titdat.title);
+      else if (titdat.program != NULL)
+         voutlnf("[ /Title (%s)", titdat.program);
+      else
+         outln("[ /Title (not defined)");
+
+      if (titdat.author != NULL)
+         voutlnf("  /Author (%s)", titdat.author);
+      else
+         outln("  /Author (undefined)");
       
                                           /* Changed: Fixed bug #0000062 in V6.5.8 [NHz] */
-      if (titdat.description)
+      if (titdat.description != NULL)
          voutlnf("  /Subject (%s)", titdat.description);
-      if (titdat.keywords)
-      {                                   /* Set by !docinfo [keywords] foo */
+      else
+         outln("  /Subject (udefined)");
+         
+      if (titdat.keywords)                /* Set by !docinfo [keywords] foo */
          voutlnf("  /Keywords (%s)", titdat.keywords);
-      }
       
       voutlnf("  /Creator (UDO Version %s.%s %s for %s)", UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS);
       voutlnf("  /CreationDate (D:%d%02d%02d%02d%02d%02d)", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin, iDateSec);
