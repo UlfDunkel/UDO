@@ -1986,6 +1986,7 @@ Durch dieses Kommando wird am Anfang der Navigationszeile standardmäßig ein einz
 Zudem wird am Ende jeder Navigationszeile ein Link auf die Index-Seite eingefügt. Dieser Link ist zur Zeit nicht abschaltbar und sollte z.B. mit CSS-Anweisungen entsprechend positioniert werden. Er wird in eine (!code [<span>])-Umgebung mit der CSS-Klasse (!code [UDO_nav_index]) eingebettet.
 
 (!EXAMPLE)
+(!EXAMPLE_BEFORE)
 !begin_verbatim
 .UDO_nav_index {
    position: absolute;
@@ -2219,6 +2220,7 @@ Mit diesem Kommando kann die Darstellung der An- und Abführungszeichen in HTML a
 HTML-Anführungszeichen werden als (!code [<q>]) bzw. (!code [</q>]) ausgegeben. Es empfiehlt sich, in einer .CSS-Datei zu steuern, wie diese Quote-Tags je nach Sprache umgesetzt werden sollen.
 
 (!EXAMPLE)
+(!EXAMPLE_BEFORE)
 Hier sind CSS-Anweisungen für verschiedene An-/Abführungszeichen in verschiedenen Sprachen.
 !begin_verbatim
 :lang(cs) { quotes:"\00BB"      "\00AB"      "\203A"      "\2039";      }
