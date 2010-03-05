@@ -90,6 +90,8 @@
 *                     use_short_lists
 *                !code command and c_code() function removed -> code_source
 *    fd  Mar 03: pass_check_if() debugged - #86 fixed
+*    fd  Mar 04: token_output(): inside_short -> inside_compressed
+*    fd  Mar 05: CODE_LATIN3
 *
 ******************************************|************************************/
 
@@ -308,12 +310,20 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
    {"csisolatin1",         CODE_LATIN1   },
    
    {"iso-8859-2",          CODE_LATIN2   },
-   {"iso-it-101",          CODE_LATIN2   },
+   {"iso-ir-101",          CODE_LATIN2   },
    {"iso8859-2",           CODE_LATIN2   },
    {"iso_8859-2",          CODE_LATIN2   },
    {"latin2",              CODE_LATIN2   },
    {"l2",                  CODE_LATIN2   },
    {"csisolatin2",         CODE_LATIN2   },
+   
+   {"iso-8859-3",          CODE_LATIN3   },
+   {"iso-ir-109",          CODE_LATIN3   },
+   {"iso8859-3",           CODE_LATIN3   },
+   {"iso_8859-3",          CODE_LATIN3   },
+   {"latin3",              CODE_LATIN3   },
+   {"l3",                  CODE_LATIN3   },
+   {"csisolatin3",         CODE_LATIN3   },
    
    {"mac",                 CODE_MAC      },
    {"macintosh",           CODE_MAC      },
@@ -738,56 +748,61 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
 };
 
 
-#define MAXSWITCH  45
+#define MAXSWITCH  50
 
 LOCAL const UDOSWITCH udoswitch[MAXSWITCH + 1] =
 {
-   { "!use_auto_subtocs",          &use_auto_subtocs,          'i',  "!depth",    &subtocs1_depth },
-   { "!use_auto_subsubtocs",       &use_auto_subsubtocs,       'i',  "!depth",    &subtocs2_depth },
-   { "!use_auto_subsubsubtocs",    &use_auto_subsubsubtocs,    'i',  "!depth",    &subtocs3_depth },
-   { "!use_auto_subsubsubsubtocs", &use_auto_subsubsubsubtocs, 'i',  "!depth",    &subtocs4_depth },
-   { "!use_auto_toptocs",          &use_auto_toptocs,          'b',  "!no_icons", &no_auto_toptocs_icons },
-   { "!use_short_tocs",            &use_short_tocs,            '\0', "",          NULL },
-   { "!use_short_envs",            &use_short_envs,            '\0', "",          NULL },
-   { "!use_short_descriptions",    &use_short_descriptions,    '\0', "",          NULL },
-   { "!use_short_enumerates",      &use_short_enumerates,      '\0', "",          NULL },
-   { "!use_short_itemizes",        &use_short_itemizes,        '\0', "",          NULL },
-   { "!use_short_lists",           &use_short_lists,           '\0', "",          NULL },
-   { "!use_formfeed",              &use_formfeed,              '\0', "",          NULL },
-   { "!use_chapter_images",        &use_chapter_images,        '\0', "",          NULL },
-   { "!use_about_udo",             &use_about_udo,             '\0', "",          NULL },
-   { "!use_ansi_tables",           &use_ansi_tables,           '\0', "",          NULL },
-   { "!use_style_book",            &use_style_book,            '\0', "",          NULL },
-   { "!use_justification",         &use_justification,         '\0', "",          NULL },
-   { "!use_output_buffer",         &use_output_buffer,         '\0', "",          NULL },
-   { "!use_nodes_inside_index",    &use_nodes_inside_index,    '\0', "",          NULL },
-   { "!use_alias_inside_index",    &use_alias_inside_index,    '\0', "",          NULL },
-   { "!use_label_inside_index",    &use_label_inside_index,    '\0', "",          NULL },
-   { "!use_udo_index",             &use_udo_index,             '\0', "",          NULL },
-   { "!use_mirrored_indices",      &use_mirrored_indices,      '\0', "",          NULL },
-   { "!use_comments",              &use_comments,              '\0', "",          NULL },
-   { "!use_auto_helpids",          &use_auto_helpids,          '\0', "",          NULL },
-   { "!no_index",                  &no_index,                  '\0', "",          NULL },
-   { "!no_images",                 &no_images,                 '\0', "",          NULL },
-   { "!no_img_size",               &no_img_size,               '\0', "",          NULL },
-   { "!no_numbers",                &no_numbers,                '\0', "",          NULL },
-   { "!no_umlaute",                &no_umlaute,                '\0', "",          NULL },
-   { "!no_8bit",                   &no_umlaute,                '\0', "",          NULL },
-   { "!no_xlinks",                 &no_xlinks,                 '\0', "",          NULL },
-   { "!no_urls",                   &no_urls,                   '\0', "",          NULL },
-   { "!no_links",                  &no_links,                  '\0', "",          NULL },
-   { "!no_verbatim_umlaute",       &no_verbatim_umlaute,       '\0', "",          NULL },
-   { "!no_effects",                &no_effects,                '\0', "",          NULL },
-   { "!no_quotes",                 &no_quotes,                 '\0', "",          NULL },
-   { "!no_preamble",               &no_preamble,               '\0', "",          NULL },
-   { "!no_titles",                 &no_titles,                 '\0', "",          NULL },
-   { "!no_headlines",              &no_headlines,              '\0', "",          NULL },
-   { "!no_bottomlines",            &no_bottomlines,            '\0', "",          NULL },
-   { "!no_popup_headlines",        &no_popup_headlines,        '\0', "",          NULL },
-   { "!no_footers",                &no_footers,                '\0', "",          NULL },
-   { "!no_buttons",                &no_buttons,                '\0', "",          NULL },
-   { "!no_sourcecode",             &no_sourcecode,             '\0', "",          NULL },
-   { "!no_table_lines",            &no_table_lines,            '\0', "",          NULL },
+   { "!use_auto_subtocs",            &use_auto_subtocs,            'i',  "!depth",    &subtocs1_depth },
+   { "!use_auto_subsubtocs",         &use_auto_subsubtocs,         'i',  "!depth",    &subtocs2_depth },
+   { "!use_auto_subsubsubtocs",      &use_auto_subsubsubtocs,      'i',  "!depth",    &subtocs3_depth },
+   { "!use_auto_subsubsubsubtocs",   &use_auto_subsubsubsubtocs,   'i',  "!depth",    &subtocs4_depth },
+   { "!use_auto_toptocs",            &use_auto_toptocs,            'b',  "!no_icons", &no_auto_toptocs_icons },
+   { "!use_short_tocs",              &use_short_tocs,              '\0', "",          NULL },
+   { "!use_short_envs",              &use_compressed_envs,         '\0', "",          NULL },
+   { "!use_short_descriptions",      &use_compressed_descriptions, '\0', "",          NULL },
+   { "!use_short_enumerates",        &use_compressed_enumerates,   '\0', "",          NULL },
+   { "!use_short_itemizes",          &use_compressed_itemizes,     '\0', "",          NULL },
+   { "!use_short_lists",             &use_compressed_lists,        '\0', "",          NULL },
+   { "!use_compressed_envs",         &use_compressed_envs,         '\0', "",          NULL },
+   { "!use_compressed_descriptions", &use_compressed_descriptions, '\0', "",          NULL },
+   { "!use_compressed_enumerates",   &use_compressed_enumerates,   '\0', "",          NULL },
+   { "!use_compressed_itemizes",     &use_compressed_itemizes,     '\0', "",          NULL },
+   { "!use_compressed_lists",        &use_compressed_lists,        '\0', "",          NULL },
+   { "!use_formfeed",                &use_formfeed,                '\0', "",          NULL },
+   { "!use_chapter_images",          &use_chapter_images,          '\0', "",          NULL },
+   { "!use_about_udo",               &use_about_udo,               '\0', "",          NULL },
+   { "!use_ansi_tables",             &use_ansi_tables,             '\0', "",          NULL },
+   { "!use_style_book",              &use_style_book,              '\0', "",          NULL },
+   { "!use_justification",           &use_justification,           '\0', "",          NULL },
+   { "!use_output_buffer",           &use_output_buffer,           '\0', "",          NULL },
+   { "!use_nodes_inside_index",      &use_nodes_inside_index,      '\0', "",          NULL },
+   { "!use_alias_inside_index",      &use_alias_inside_index,      '\0', "",          NULL },
+   { "!use_label_inside_index",      &use_label_inside_index,      '\0', "",          NULL },
+   { "!use_udo_index",               &use_udo_index,               '\0', "",          NULL },
+   { "!use_mirrored_indices",        &use_mirrored_indices,        '\0', "",          NULL },
+   { "!use_comments",                &use_comments,                '\0', "",          NULL },
+   { "!use_auto_helpids",            &use_auto_helpids,            '\0', "",          NULL },
+   { "!no_index",                    &no_index,                    '\0', "",          NULL },
+   { "!no_images",                   &no_images,                   '\0', "",          NULL },
+   { "!no_img_size",                 &no_img_size,                 '\0', "",          NULL },
+   { "!no_numbers",                  &no_numbers,                  '\0', "",          NULL },
+   { "!no_umlaute",                  &no_umlaute,                  '\0', "",          NULL },
+   { "!no_8bit",                     &no_umlaute,                  '\0', "",          NULL },
+   { "!no_xlinks",                   &no_xlinks,                   '\0', "",          NULL },
+   { "!no_urls",                     &no_urls,                     '\0', "",          NULL },
+   { "!no_links",                    &no_links,                    '\0', "",          NULL },
+   { "!no_verbatim_umlaute",         &no_verbatim_umlaute,         '\0', "",          NULL },
+   { "!no_effects",                  &no_effects,                  '\0', "",          NULL },
+   { "!no_quotes",                   &no_quotes,                   '\0', "",          NULL },
+   { "!no_preamble",                 &no_preamble,                 '\0', "",          NULL },
+   { "!no_titles",                   &no_titles,                   '\0', "",          NULL },
+   { "!no_headlines",                &no_headlines,                '\0', "",          NULL },
+   { "!no_bottomlines",              &no_bottomlines,              '\0', "",          NULL },
+   { "!no_popup_headlines",          &no_popup_headlines,          '\0', "",          NULL },
+   { "!no_footers",                  &no_footers,                  '\0', "",          NULL },
+   { "!no_buttons",                  &no_buttons,                  '\0', "",          NULL },
+   { "!no_sourcecode",               &no_sourcecode,               '\0', "",          NULL },
+   { "!no_table_lines",              &no_table_lines,              '\0', "",          NULL },
 };
 
 
@@ -7771,7 +7786,7 @@ BOOLEAN           reset_internals)        /* */
                   inside_right,           /* TRUE: we're inside an ENV_RIGH */
                   inside_left,            /* TRUE: we're inside an ENV_LEFT */
                   inside_quote;           /* TRUE: we're inside an ENV_QUOT */
-   BOOLEAN        inside_short,           /* TRUE: this environment should be output 'compressed' */
+   BOOLEAN        inside_compressed,      /* TRUE: this environment should be output 'compressed' */
                   inside_env,             /* TRUE: we're inside ENV_ITEM | ENV_ENUM | ENV_DESC | ENV_LIST */
                   inside_fussy;           /* */
    size_t         sl,                     /* */
@@ -7823,8 +7838,10 @@ BOOLEAN           reset_internals)        /* */
    inside_left   = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_LEFT);
    inside_quote  = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_QUOT);
    inside_env    = (iItemLevel > 0 || iEnumLevel > 0 || iDescLevel > 0 || iListLevel > 0);
-   inside_short  = (iEnvLevel  > 0 && bEnvShort[iEnvLevel]);
+
    inside_fussy  = ( (!inside_center) && (!inside_right) && (!inside_left) && (!bDocSloppy) );
+
+   inside_compressed  = (iEnvLevel  > 0 && bEnvCompressed[iEnvLevel]);
 
    i = 0;
    z[0] = EOS;
@@ -7866,17 +7883,17 @@ BOOLEAN           reset_internals)        /* */
    
       if (inside_center)                  /* centered text */
       {
-         if (!inside_short)
+         if (!inside_compressed)
             strcat(z, "<div align=\"center\">\n");
       }
       else if (inside_right)              /* right-justified text */
       {
-         if (!inside_short)
+         if (!inside_compressed)
             strcat(z, "<div align=\"right\">\n");
       }
       else if (!inside_env)               /* ordinary text in a <p>...</p> */
       {
-         if (!inside_short)
+         if (!inside_compressed)
             strcat(z, "<p>");
       }
       else                                /* inside any ENV_... */
@@ -7888,7 +7905,7 @@ BOOLEAN           reset_internals)        /* */
          case ENV_LIST:
             if (!bEnv1stPara[iEnvLevel])  /* horizontal space BEFORE (!) 2nd and succeeding paragraphs */
             {
-               if (inside_short)
+               if (inside_compressed)
                {
                   if (html_doctype < XHTML_STRICT)
                      strcat(z, "<br>\n\n");
@@ -7908,7 +7925,7 @@ BOOLEAN           reset_internals)        /* */
             
          case ENV_DESC:
             if (!bParagraphOpen)
-               if (!inside_short)
+               if (!inside_compressed)
                   strcat(z, "<p>");
          }
          
@@ -8735,7 +8752,7 @@ BOOLEAN           reset_internals)        /* */
    case TOWH4:
    case TOAQV:
    case TORTF:
-      if (inside_short)
+      if (inside_compressed)
          outln(rtf_parpard);
       else
          outln("\\par\\pard\\par");
@@ -8766,7 +8783,7 @@ BOOLEAN           reset_internals)        /* */
          case ENV_DESC:
             if (bParagraphOpen)
             {
-               if (inside_short)
+               if (inside_compressed)
                {
                   if (html_doctype < XHTML_STRICT)
                      outln("<br>\n");
@@ -8786,7 +8803,7 @@ BOOLEAN           reset_internals)        /* */
          case ENV_LIST:
             if (!bEnv1stPara[iEnvLevel])
             {
-               if (inside_short)
+               if (inside_compressed)
                {
                   if (html_doctype < XHTML_STRICT)
                      outln("<br>\n");
@@ -8841,7 +8858,7 @@ BOOLEAN           reset_internals)        /* */
       break;
 
    case TOKPS:
-      if (!inside_short)
+      if (!inside_compressed)
          outln("newline");
          
       break;
