@@ -19,11 +19,13 @@
 # -------
 # 2009:
 #   fd  Jun 09: introduced
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
 !index Betriebssystem
-!begin_xlist [nextstep:] !short
+!begin_xlist [nextstep:] !compressed
 !item [(!KP [beos])]     BeOS
 !item [(!KP [dos])]      DOS
 !item [(!KP [hpux])]     HP-UX

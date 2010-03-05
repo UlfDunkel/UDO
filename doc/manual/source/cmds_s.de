@@ -25,6 +25,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -122,7 +123,7 @@ zeigt, wie man eine ""komprimierte"" Itemize-Umgebung erzeugen kann.
 (!EXAMPLE)
 (!EXAMPLE_BEGIN)
 !begin_verbatim
-!begin_itemize !short
+!begin_itemize !compressed
 !end_verbatim
 (!EXAMPLE_END)
 

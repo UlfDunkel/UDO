@@ -27,6 +27,7 @@
 #   fd  Jun 09: VALUE macro introduced
 # 2010:
 #   fd  Mar 01: old commands can be found in cmds__old.de now
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -88,7 +89,7 @@ In den nachfolgenden Kapiteln werden sämtliche von UDO unterstützten Befehle det
 !item	[Syntax:]
 	Hier sieht man, wie man den Befehl einsetzen muss.
 
-	!begin_tlist [WsystemeW] !short
+	!begin_tlist [WsystemeW] !compressed
 
 	!label (!TEXT)
 	!item [(!TEXT)] steht für eine Zeichenfolge

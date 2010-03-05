@@ -5,10 +5,10 @@
 
 # ------------------------------------------------------------------------------
 !heading (!GENERAL)
-!begin_description !short
+!begin_description !compressed
 # ------------------------------------------------------------------------------
 !item [(!NEWS)]
-!begin_itemize !short
+!begin_itemize !compressed
 # ..............................................................................
 # ..............................................................................
 !item Index link in TableOfContent (!nl)
@@ -65,7 +65,7 @@ unten links !! unten mitte !! unten rechts
 # ------------------------------------------------------------------------------
 !smallskip
 !item [(!CHANGES)]
-!begin_itemize !short
+!begin_itemize !compressed
 # ..............................................................................
 !item The (!code [!/docinfo]) options (!code [[program!]]) and (!code [[programimage!]]) no longer exclude each other but can be used simultaneously now. If you use both, [program] will be output first.
 # ..............................................................................
@@ -83,7 +83,7 @@ unten links !! unten mitte !! unten rechts
 # ------------------------------------------------------------------------------
 !smallskip
 !item [(!BUGFIXES)]
-!begin_itemize !short
+!begin_itemize !compressed
 # ..............................................................................
 !item Fixed bug #0000055 in version 6.4.1 (!nl)
     Umlauts used in the second parameter of (!KKW [img]) or (!KKW [ilink])
@@ -105,7 +105,7 @@ unten links !! unten mitte !! unten rechts
 # ------------------------------------------------------------------------------
 !medskip
 !heading Hypertext Markup Language (HTML)
-!begin_description !short
+!begin_description !compressed
 # ------------------------------------------------------------------------------
 !item [(!NEWS)]
 !begin_itemize
@@ -147,7 +147,7 @@ unten links !! unten mitte !! unten rechts
 # ------------------------------------------------------------------------------
 !smallskip
 !item [(!CHANGES)]
-!begin_itemize !short
+!begin_itemize !compressed
 # ..............................................................................
 !item Das Kommando (!KKW [img]) wurde erweitert. (!nl)
   Feature-Wunsch 0000070; V6.5.18
@@ -216,7 +216,7 @@ unten links !! unten mitte !! unten rechts
 # ------------------------------------------------------------------------------
 !smallskip
 !item [(!BUGFIXES)]
-!begin_itemize !short
+!begin_itemize !compressed
 # ..............................................................................
 !item Fixed bug #0000044 in version 6.4.1 (!nl)
    If (!KW [no_numbers]) is set, there won't any longer printed numbers in front of the
@@ -232,10 +232,10 @@ unten links !! unten mitte !! unten rechts
 # ------------------------------------------------------------------------------
 !medskip
 !heading Rich Text Format (RTF)
-!begin_description !short
+!begin_description !compressed
 # ------------------------------------------------------------------------------
 !item [(!NEWS)]
-!begin_itemize !short
+!begin_itemize !compressed
 # ..............................................................................
 !item Neues Kommando (!KW [rtf_add_colour]), mit dem zusätzliche Farben (über
       die 16 Standardfarben hinaus) in den Kopf einer RTF-Datei
@@ -263,7 +263,7 @@ unten links !! unten mitte !! unten rechts
 # ------------------------------------------------------------------------------
 !smallskip
 !item [(!BUGFIXES)]
-!begin_itemize !short
+!begin_itemize !compressed
 # ..............................................................................
 # zu RTF
 !item Fixed bug #0000056 in version~6.4.1 (!nl)
@@ -289,10 +289,10 @@ unten links !! unten mitte !! unten rechts
 # ------------------------------------------------------------------------------
 !medskip
 !heading HTML-Help
-!begin_description !short
+!begin_description !compressed
 # ------------------------------------------------------------------------------
 !item [(!NEWS)]
-!begin_itemize !short
+!begin_itemize !compressed
 # ..............................................................................
 !item Wird der Kommandozeilenparameter --map gesetzt, so wird eine Alias- und MAP-
       Datei erzeugt. (!nl)
@@ -307,11 +307,11 @@ unten links !! unten mitte !! unten rechts
 # ------------------------------------------------------------------------------
 !medskip
 !heading ST-Guide
-!begin_description !short
+!begin_description !compressed
 # ------------------------------------------------------------------------------
 !smallskip
 !item [(!BUGFIXES)]
-!begin_itemize !short
+!begin_itemize !compressed
 # ..............................................................................
 # zu ST_Guide
 !item Horizontal lines can exceed a length of 126 characters. (!nl)

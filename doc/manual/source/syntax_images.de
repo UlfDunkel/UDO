@@ -24,6 +24,8 @@
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 16: great review session #1
 #   fd  Jun 25: NDR: 'plazieren' -> 'platzieren'
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -350,7 +352,7 @@ UDO erzeugt dann folgende RTF-Befehle:
 (!HINTS)
 
 !index Fehlermeldung
-!begin_enumerate !short
+!begin_enumerate !compressed
 !item UDO überprüft nicht, ob die angegebene Datei existiert. Bei einem
      falschen Dateinamen erhalten Sie also spätestens vom HC eine
      Fehlermeldung.

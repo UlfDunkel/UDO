@@ -20,12 +20,14 @@
 # 2009:
 #   fd  Jun 09: introduced
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
 Momentan gelten folgende Zeichenketten:
 !index Language
-!begin_xlist [swedish:] !short
+!begin_xlist [swedish:] !compressed
 !item [czech:]   Czech
 !item [danish:]  Danish
 !item [dutch:]   Dutch

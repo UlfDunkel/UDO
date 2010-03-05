@@ -27,6 +27,7 @@
 #   fd  Jun 25: NDR: 'plazieren' -> 'platzieren'
 # 2010:
 #   fd  Mar 01: chapter basics_text adjusted
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -228,7 +229,7 @@ Es gibt zahlreiche Umgebungen, die Ihnen die Arbeit erleichtern können
 und die die jeweiligen ausgabeformatspezifischen Besonderheiten
 berücksichtigen. Hier eine Übersicht:
 
-!begin_xlist [description-Umgebung] !short
+!begin_xlist [description-Umgebung] !compressed
 !item [appendix-Umgebung]     Anhang
 !item [center-Umgebung]       Zentrierungen
 !item [comment-Umgebung]      Kommentare

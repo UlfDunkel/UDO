@@ -19,6 +19,8 @@
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -29,7 +31,7 @@ Bevor Sie mit dem Schreiben eines UDO-Quelltextes beginnen, werfen Sie
 bitte einen Blick auf die folgenden Regeln und prägen Sie sie sich
 ein:
 
-!begin_description !short
+!begin_description !compressed
 !item [1. Geben Sie Ihrem Text eine übersichtliche Struktur.]
       Eine weiser Zeitgenosse sagte mal: ""Wenn etwas einfach ausgedrückt werden kann, kann es einfach ausgedrückt werden.""
       

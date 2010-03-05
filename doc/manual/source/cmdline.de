@@ -25,6 +25,8 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using ndash instead of mdash in German texts
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -236,7 +238,7 @@ mit dem Befehl (!KW [input]) eingebunden werden.
 
 !subheading Exit-Status
 
-!begin_xlist [>0] !short
+!begin_xlist [>0] !compressed
 !item [0] Alles in Ordnung.
 !item [>0]  Es ist ein Fehler aufgetreten.
 !end_xlist

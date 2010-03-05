@@ -20,6 +20,8 @@
 #   fd  Jun 08: ignored format list removed (is included via formattb.ui)
 #   fd  Jun 10: using macro (!file [])
 #   fd  Aug 17: 'information' never used in plural in English!
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -145,7 +147,7 @@ UDO tries to help the author of a documentation as much as possible. Next to
 the conversion into the destination format UDO offers you the following
 features:
 
-!begin_itemize	!short
+!begin_itemize	!compressed
 !item	automatically generated (!link [title pages] [Title page]), 
       (!link [tables of contents] [Tables of contents]), 
       head lines and 
@@ -325,7 +327,7 @@ On the UDO website (!url [http://www.udo-open-source.org] [http://www.udo-open-s
 
 Using the following (!B)mailing lists(!b), you can contact the UDO community:
 
-!begin_blist [UDO-Bugtracker] !short
+!begin_blist [UDO-Bugtracker] !compressed
 !item [(!url [UDO_Announce] [http://lists.udo-open-source.org/mailman/listinfo/udo_announce])]
       UDO announcements (e.g. new versions)
 !item [(!url [UDO_Bugtracker] [http://lists.udo-open-source.org/mailman/listinfo/udo_bugtracker])]

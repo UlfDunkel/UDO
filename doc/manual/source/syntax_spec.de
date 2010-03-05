@@ -27,6 +27,7 @@
 # 2010:
 #   fd  Feb 25: - chapter 'Converting 8-bit characters' partly rewritten
 #               - universal charset table enhanced
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -65,7 +66,7 @@ so müssen Sie stattdessen (!KP [((""!)!)])(!code [text])(!KP [((""!)!)]) angeben
 
 (!HINTS)
 
-!begin_enumerate !short
+!begin_enumerate !compressed
 !index (!kw [no_quotes])
 !item Die Umwandlung in typographische Anführungszeichen kann man durch
 den Schalter (!KW [no_quotes] [[~!!]]) im Vorspann ausschalten.
@@ -128,7 +129,7 @@ Zeilenumbruch erfolgen darf.
 Bei den anderen Formaten ersetzt UDO die Tilde durch folgende
 formatspezifische Zeichenfolgen, die den gleichen Zweck erfüllen:
 
-!begin_xlist [WinHelp:] !short
+!begin_xlist [WinHelp:] !compressed
 !item [(!LaTeX):]   (!code [!~])
 !item [HTML:]       (!code [&nbsp;])
 !item [RTF:]        (!code [\!~])

@@ -25,6 +25,7 @@
 #   fd  Dec 15: typo
 # 2010:
 #   fd  Mar 03: chapter style_tables: hint for table_alignment added
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -581,7 +582,7 @@ could read a blank.
 
 Footnotes are supported by these formats:
 
-!begin_itemize !short
+!begin_itemize !compressed
 !item (!LaTeX)
 !item Linuxdoc-SGML
 !item LyX
@@ -716,7 +717,7 @@ horizontal lines.
 !index (!kw [table_caption])
 To print tables with UDO you need the following commands:
 
-!begin_enumerate !short
+!begin_enumerate !compressed
 !item (!KW [table_caption]) (!C)[(!TEXT)](!c)
 !item (!KW [begin_table] [[...!!]]) {(!KW [hline])}
 !item (!KW [end_table])

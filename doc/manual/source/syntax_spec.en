@@ -25,6 +25,7 @@
 # 2010:
 #   fd  Feb 25: - chapter 'Converting 8-bit characters' partly rewritten
 #               - universal charset table enhanced
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -110,7 +111,7 @@ Converting to an ASCII format UDO replaces this tildes by blanks. Converting
 to other formats UDO replaces this tildes by commands that have the same
 effect.
 
-!begin_xlist [WinHelp:] !short
+!begin_xlist [WinHelp:] !compressed
 !item [(!LaTeX):]   (!code [!~])
 !item [HTML:]       (!code [&nbsp;])
 !item [RTF:]        (!code [\!~])

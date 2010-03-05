@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from history.de)
 # 2010:
 #   fd  Mar 01: typo in node title fixed
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -34,7 +35,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
 !begin_description
 
 !item [Neue Formate:]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item WinHelp4
    !item UDO
    !item PDFLaTeX
@@ -47,7 +48,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !end_itemize
 
 !item [Neue Befehle:]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item (!KW [use_mirrored_indices])
    !item (!KW [begin_flushleft]), 
          (!KW [end_flushleft])
@@ -158,7 +159,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !end_itemize
 
 !item [Neuheiten:]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item flushleft-Umgebung
    !item flushright-Umgebung
    !item Holländisch wird als Sprache angeboten ((!KW [language] [[dutch!!]])).
@@ -200,7 +201,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !end_itemize
 
 !item [Änderungen:]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item Es sind nun 3000 Kapitel benutzbar
    !item (!KW [verbatimsize]) wird nun für HTML unterstützt.
    !item Auf Systemen, die lange Dateinamen unterstützen,
@@ -270,7 +271,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !end_itemize
 
 !item [Syntaxänderungen:]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item Der Schalter für den Blocksatz heisst nun
          (!KW [use_justification]) anstatt (!kw [use_justified]).
    !item Der Schalter (!kw [html_use_xlist]) existiert nicht mehr.

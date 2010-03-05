@@ -15,6 +15,7 @@
 # 2010:
 #   fd  Mar 01: introduced (from history_05.de)
 #   fd  Mar 03: translated, old stuff ignored, using PUBLISHED
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -25,17 +26,17 @@
 
 We're quite sure that nobody is interested in the changes of this old version any longer.
 
-!begin_description !short
+!begin_description !compressed
 
 !item [Neue Formate:]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item Linuxdoc-SGML
    !item Turbo Vision Help
    !item Texinfo
    !end_itemize
 
 !item [Neue Befehle:]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item (!KW [alias])
    !item (!KW [begin_raw]), (!KW [end_raw])
          ermöglicht die Angabe größerer Blöcke Spezialbefehle für ein Format
@@ -79,7 +80,7 @@ We're quite sure that nobody is interested in the changes of this old version an
    !end_itemize
    
 !item [Änderungen:]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item Ein Tabellensatz wurde implementiert. Tabellen können nun
          sehr einfach erstellt werden. Dabei kann man frei festlegen,
          wie Spalten ausgerichtet werden sollen und wo Linien
@@ -108,7 +109,7 @@ We're quite sure that nobody is interested in the changes of this old version an
    !end_itemize
    
 !item [Syntaxänderungen:]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item Die speziellen Umgebungen, die mit (!I)!/begin_*(!i), (!I)!/else_*(!i) und
          (!I)!/end_*(!i) gebildet wurden, müssen nun durch die wesentlich
          flexibleren Kommandos (!KW [ifdest]), (!KW [else]) und (!KW [endif]) erstellt

@@ -25,6 +25,7 @@
 # 2010:
 #   fd  Feb 26: - intro_community: Christof Schardt added
 #               - intro_contact: URLs added
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -87,7 +88,7 @@ Unter der oberen Navigationssymbole-Leiste finden Sie zudem die Kapitelhierarchi
 !item [Schrift]
 Da das UDO-Handbuch eher in die Kategorie ""Technisches Handbuch und Nachschlagewerk"" gehört, haben wir bestimmte Texte auf bestimmte Weise markiert, damit Sie z.B. Code oder Dateinamen rascher von normalem Text unterscheiden können.
 
-!begin_itemize !short
+!begin_itemize !compressed
 !item (!code [Code benutzt diese Schriftart.])
 !item (!file [Dateinamen, Pfade und ähnliches werden so dargestellt.])
 !item (!red)Konstanten, die im Programm verwendet werden, sind so dargestellt.(!coloff)
@@ -140,7 +141,7 @@ UDO versucht, Ihnen beim Verfassen des Textes soviel Arbeit wie möglich
 abzunehmen. Neben der reinen Umwandlung bietet UDO daher je nach Ausgabeformat sinnvolle Nützlichkeiten wie
 
 #TODO: link zu Kopfzeilen fehlt, ebenso das dazugehörige Kapitel
-!begin_itemize !short
+!begin_itemize !compressed
 !item automatische Generierung von 
       (!link [Titelseiten] [Titelseite]), 
       Kopfzeilen, 
@@ -203,7 +204,7 @@ Falls Sie keine Frage mit Ja beantworten sollten, dann dürfte es sehr
 wahrscheinlich so sein, dass ein Weiterlesen dieser Dokumentation oder
 der Einsatz von UDO für Sie überflüssig ist.
 
-!begin_itemize !short
+!begin_itemize !compressed
 !item Sie haben einen Text mit allgemeinem Inhalt verfasst und möchten
 diesen auch Personen zugänglich machen, die nicht das Betriebssystem
 benutzen, welches Sie selbst einsetzen?
@@ -315,7 +316,7 @@ UDO wurde ursprünglich von Dirk Hagedorn entwickelt
 und ist seit dem 27.10.2001 (!link [Open-Source] [Copyright]).
 
 Am UDO-Projekt beteiligte Personen (in alphabetischer Reihenfolge):
-!begin_description !short
+!begin_description !compressed
   !item [Denesh Bhabuta] Support in England (bis 2001)
   !item [Alexander Clauss] Erstellung der HP-UX-300/400-Version (bis 2001)
   !item [Ulf Dunkel] Programmierung und Dokumentation (seit 2006), Betreuung der UDO-Website und Entwickler-Infrastruktur (seit 2009)
@@ -349,7 +350,7 @@ Auf der UDO-Website (!url [http://www.udo-open-source.org] [http://www.udo-open-
 
 Zum Kontakt zwischen den UDO-Anwendern stehen folgende (!B)Mailinglisten(!b) zur Verfügung:
 
-!begin_blist [UDO_Bugtracker] !short
+!begin_blist [UDO_Bugtracker] !compressed
 !item [(!url [UDO_Announce] [http://lists.udo-open-source.org/mailman/listinfo/udo_announce])]
       Ankündigungen rund um UDO (z.B. neue Versionen)
 !item [(!url [UDO_Bugtracker] [http://lists.udo-open-source.org/mailman/listinfo/udo_bugtracker])]
@@ -403,7 +404,7 @@ die nicht explizit als solche ausgewiesen sind. Aus dem Fehlen einer
 Kennzeichnung kann nicht geschlossen werden, dass ein Name frei von den
 Rechten Dritter ist.
 
-!begin_itemize !short
+!begin_itemize !compressed
 !item Atari, TOS und MultiTOS sind Warenzeichen oder eingetragene Warenzeichen der Atari Corporation.
 !item Arial und Times New Roman sind eingetragene Warenzeichen der Monotype Corporation PLC.
 !item GEM und GEM Desktop sind Warenzeichen oder eingetragene Warenzeichen von Digital Research.

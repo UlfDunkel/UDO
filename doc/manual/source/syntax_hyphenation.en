@@ -18,6 +18,8 @@
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 11: typo
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -31,7 +33,7 @@ which position a word can be divided into two pieces.
 You have two possibilities to set the Hyphenation patterns:
 
 !index (!k1 [/-])
-!begin_enumerate !short
+!begin_enumerate !compressed
 !item Local definition ((!KW [/-]))
 !index (!kw [hyphen])
 !item Global definition using the (!KW [hyphen]) command

@@ -17,6 +17,7 @@
 #   fd  Jun 25: 'die URL' -> 'der URL' (it refers to 'locator')
 # 2010:
 #   fd  Mar 01: using macro BUG
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -28,7 +29,7 @@
 !heading PDF-(!LaTeX)
 !begin_description
 !item [(!BUGFIXES)]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item Wenn PDF-(!LaTeX) als Zielformat gesetzt wird, wird die (!TeX)-Version
          nicht mehr auf Mik-(!TeX) gesetzt.
    !item Umsetzung der Links für die PDF-(!LaTeX)-Ausgabe geändert.
@@ -42,7 +43,7 @@
 !heading Richtext Format (RTF)
 !begin_description
 !item [(!BUGFIXES)]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item Bug (!BUG [24]) in Version 6.2.1 beseitigt (!nl)
          In den (!LINK)-Elementen wurde alle Subsubnodes aus anderen Subnodes
          mit aufgeführt

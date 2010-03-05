@@ -1,4 +1,4 @@
-!begin_enumerate !short
+!begin_enumerate !compressed
 !item This is the first item of the outer
       enumerate environment.
 !item This is the second item of the outer

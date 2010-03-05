@@ -20,6 +20,8 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -32,7 +34,7 @@ Halbautomatisch bedeutet, dass Sie in einem Quelltext die Stellen markieren müss
 Es gibt zwei Möglichkeiten, diese Trennstellen zu setzen:
 
 !index (!k1 [/-])
-!begin_enumerate !short
+!begin_enumerate !compressed
 !item lokales Setzen durch Trennmarken (!KW [/-])
 !index (!kw [hyphen])
 !item globales Setzen durch das Kommando (!KW [hyphen])

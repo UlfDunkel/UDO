@@ -21,6 +21,8 @@
 #   fd  Jun 09: real quotation fixed
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -59,7 +61,7 @@ Die aktuellen Versionen sind unter (!url [http://www.udo-open-source.org/] []) e
 !item [Wird es Portierungen auf andere Systeme geben?]
 Von UDO existieren momentan Versionen für folgende Systeme:
 
-!begin_itemize !short
+!begin_itemize !compressed
 !item Atari TOS
 # !item	BeOS
 !item DOS, OS/2, Windows

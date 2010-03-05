@@ -14,6 +14,8 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -27,7 +29,7 @@ Für andere Plattformen, wie Windows oder Linux, stehen AmigaGuide-Betrachter zur
 !autoref [off]
 Weiterführende Informationen (alle in englischer Sprache):
 
-!begin_itemize !short
+!begin_itemize !compressed
 
 !item allgemeiner Überblick zum Amiga-Computer: (!url [http://www.tutorgig.com/encyclopedia/getdefn.jsp?keywords=Amiga] [])
 

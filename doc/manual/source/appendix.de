@@ -20,6 +20,8 @@
 #   fd  Jun 10: using macro (!const [])
 #   fd  Jun 10: table of limitations reformatted
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -85,7 +87,7 @@ Notebook unter Linux statt.
 Diese Dokumentation wurde unter Zuhilfenahme folgender Programme
 geschrieben:
 
-!begin_itemize !short
+!begin_itemize !compressed
 !item Joe Allan's Own Editor ""Joe"" für MS-DOS und Linux
 !item Allan Phillips' Programmer's File Editor ""PFE""~0.06.01 (der beste
      Editor für Windows 3.1 und Windows 95, den ich kenne)

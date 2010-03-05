@@ -1,4 +1,4 @@
-!begin_enumerate !short
+!begin_enumerate !compressed
 !item Dies ist Punkt 1 der äußeren enumerate-Umgebung.
 !item Dies ist Punkt 2 der äußeren enumerate-Umgebung.
       !begin_enumerate

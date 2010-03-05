@@ -18,6 +18,8 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -235,7 +237,7 @@ UDO looks for the file (!file [udo.ini]) in your home directory if
 
 !subheading Exit Status
 
-!begin_xlist [>0] !short
+!begin_xlist [>0] !compressed
 !item [0]	Everything was OK.
 !item [>0]	An error has appeared.
 !end_xlist

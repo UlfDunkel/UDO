@@ -19,6 +19,8 @@
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -28,7 +30,7 @@
 Es folgt eine Auflistung der Dateisuffixe, die Ihnen beim Umgang mit UDO über den Weg laufen werden.
 
 #Ausgabe-Formate
-!begin_xlist [.htm(l):] !short
+!begin_xlist [.htm(l):] !compressed
 !item [(!file [.1])]      Nroff
 !item [(!file [.c])]      C-Quelltext
 !item [(!file [.txt])]    ASCII-Format

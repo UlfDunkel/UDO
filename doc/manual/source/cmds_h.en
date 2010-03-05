@@ -30,6 +30,7 @@
 # 2010:
 #   fd  Jan 20: chapter html_quotes added and translated
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -923,7 +924,7 @@ use yourself: (!file [00con.htm[l!]]) and (!file [00toc.htm[l!]]).
 
 ""(!TEXT)"" can be some of the following values:
 
-!begin_itemize !short
+!begin_itemize !compressed
 !item ""noresize"": Adds ""noresize"" to the frameset tag.
 The width of the left frame can then not be changed
 by the user.
