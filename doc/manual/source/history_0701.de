@@ -17,6 +17,8 @@
 #   fd  Mar 03: - new docinfo attributes: domain_..., contact_...
 #               - using INCOMPLETE, PUBLISHED
 #               - bugfix #86 added
+#   fd  Mar 05: - [Encodings] new ISO codepages added
+#               - [Environments] added
 #
 ################################################################################
 
@@ -27,6 +29,26 @@
 # (!PUBLISHED [UDO~7.01][3. März 2010])
 
 !begin_description !short
+# ----------------------------------------
+!item [Encodings]
+# ----------------------------------------
+      !begin_itemize !short
+      !item (!BUG [87]): UDO unterstützt weitere Codepages:
+      !begin_table [l|l] !hline
+      (!B)System(!b) !! (!B)Encoding(!b) !! (!B)Bezeichner(!b)
+      ISO !! 8859-3 !! ISO-8859-3 ISO-IR-109 ISO8859-3 ISO_8859-3 LATIN3 L3 CSISOLATIN3
+          !! 8859-4 !! ISO-8859-4 ISO-IR-110 ISO8859-4 ISO_8859-4 LATIN4 L4 CSISOLATIN4
+          !! 8859-5 !! ISO-8859-5 ISO-IR-144 ISO8859-5 ISO_8859-5 CYRILLIC CSISOLATINCYRILLIC
+          !! 8859-6 !! ISO-8859-6 ISO-IR-127 ISO8859-6 ISO_8859-6 ARABIC CSISOLATINARABIC ASMO-708 ECMA-114
+          !! 8859-7 !! ISO-8859-7 ISO-IR-126 ISO8859-7 ISO_8859-7 GREEK GREEK8 CSISOLATINGREEK ECMA-118 ELOT_928
+          !! 8859-8 !! ISO-8859-8 ISO-IR-138 ISO8859-8 ISO_8859-8 HEBREW CSISOLATINHEBREW
+      !end_table
+      !end_itemize
+
+
+
+
+
 # ----------------------------------------
 !item [(!KW [docinfo])]
 # ----------------------------------------
@@ -44,6 +66,33 @@
             webmasteremail    !! contact_name
             webmastermailurl  !! contact_link
             !end_table
+      !end_itemize
+
+
+
+
+
+# ----------------------------------------
+!item [Umgebungen]
+# ----------------------------------------
+      !begin_itemize !not_compressed
+      !item Das Umgebung-Attribut ""(!kw [short])"" wurde umbenannt zu ""(!kw [compressed])"" 
+            weil wir glauben, dass dieser Begriff besser beschreibt, was dieses Attribut wirklich macht: 
+            Es ändert das Umgebung-Layout von ""splendid"" (großzügig) zu ""compressed"" (kompress/kompakt). 
+            Daher haben wir verschiedene Kommandos umbenannt (die alten Kommandos werden noch eine Zeit lang unterstützt):
+            !begin_table [l|l] !hline
+            (!B)alt(!b) !! (!B)neu(!b)
+            (!kw [short])                  !! (!kw [compressed])
+            (!kw [use_short_envs])         !! (!kw [use_compressed_envs])
+            (!kw [use_short_descriptions]) !! (!kw [use_compressed_descriptions])
+            (!kw [use_short_enumerates])   !! (!kw [use_compressed_enumerates])
+            (!kw [use_short_itemizes])     !! (!kw [use_compressed_itemizes])
+            (!kw [use_short_lists])        !! (!kw [use_compressed_lists])
+            !end_table
+      
+      !item Neues Umgebung-Attribut (!code [not_compressed]): (!nl)
+            Dieses neue Umgebung-Attribut wurde eingeführt, 
+            damit Sie die Vererbung des kompress-Attributs einer äußeren Umgebung an die innere Umgebung abschalten können.
       !end_itemize
 
 
