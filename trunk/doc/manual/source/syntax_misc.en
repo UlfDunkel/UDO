@@ -25,6 +25,8 @@
 #   fd  Jun 10: using macro (!const [])
 #   fd  Jun 11: typos
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -97,16 +99,16 @@ code or a library.
 
 # hinzugefügt 02.02.2004 - Ulrich Kretschmer
 (!B)Warning(!b): Avoid constructions like these which cause infinite loops:
-!begin_xlist !short
+!begin_xlist !compressed
 !item [a.ui:] (!C)!include(!c) (!file [b.ui])
 !item [b.ui:] (!C)!include(!c) (!file [a.ui])
 !end_xlist
 or
-!begin_xlist !short
+!begin_xlist !compressed
 !item [a.ui:] (!C)!include(!c) (!file [b.ui])
-	!begin_xlist !short
+	!begin_xlist !compressed
 	!item [b.ui:] (!C)!include(!c) (!file [c.ui])
-		!begin_xlist !short
+		!begin_xlist !compressed
 		!item [c.ui:] (!C)!include(!c) (!file [a.ui])
 		!end_xlist
 	!end_xlist
@@ -445,7 +447,7 @@ If you use the placeholder (!KKW [idx]) you can use up to four
 parameters. The following examples show how the commands are converted for
 (!LaTeX), Windows Help and RTF:
 
-!begin_xlist [LaTeX:] !short
+!begin_xlist [LaTeX:] !compressed
 !item [UDO:]   an (!KK2W [idx] [[entry!!]])
 !item [LaTeX:] an entry\index{entry}
 !item [RTF:]   an {\xe\v entry}entry

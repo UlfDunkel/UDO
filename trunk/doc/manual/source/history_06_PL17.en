@@ -15,6 +15,7 @@
 # 2010:
 #   fd  Mar 01: introduced (from history_06_PL17.de)
 #   fd  Mar 02: translated + reformatted
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -23,7 +24,7 @@
 
 (!PUBLISHED [UDO~6 Patchlevel~17] [11.10.2003])
 
-!begin_description !short
+!begin_description !compressed
 !item [(!GENERAL)]
       !begin_itemize
       !item Bug (!BUG [3]): The message ""Last changes on !.."" now shows proper French special characters.

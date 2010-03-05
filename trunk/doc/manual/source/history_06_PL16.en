@@ -14,6 +14,7 @@
 # -------
 # 2010:
 #   fd  Mar 01: introduced (from history_06_PL16.de)
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -24,7 +25,7 @@
 
 !begin_description
 !item [New commands:]
-      !begin_itemize !short
+      !begin_itemize !compressed
       !item (!code [!/html_default_hyphenation]) (!nl)
             Only if this command is set, the Hyphenation marks for
             the HTML output are converted to (!code [&shy;])
@@ -43,7 +44,7 @@
       !end_itemize
 
 !item [News:]
-      !begin_itemize !short
+      !begin_itemize !compressed
       !item In the first file of the HTML output ist set a meta tag for AppleTitle/JobTimerHelp.
       !item All nodes, which got a special name (e.g. foo.php) by (!code [!/html_name]) are referenced correct now.
       !item The table of contents ist included in the tag (!code [<ul>]).
@@ -64,7 +65,7 @@
       !end_itemize
 
 !item [Changes:]
-      !begin_itemize !short
+      !begin_itemize !compressed
       !item (!code [!/html_backpage ../index.html "Back to UDO website"]) (!nl)
             You can tell UDO to set a special text instead of the link text in the ""alt"" attribute. 
             The text must be included in single quotation marks.

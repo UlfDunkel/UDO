@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from history.de)
 # 2010:
 #   fd  Mar 01: using macro BUG
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -25,9 +26,9 @@
 (!PUBLISHED [UDO~6.4.0] [07.01.2004])
 
 !heading [(!GENERAL)]
-!begin_description !short
+!begin_description !compressed
 !item [(!CHANGES)]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item In der Tabellenumgebung können Kommentare eingefügt werden.
 
 (!EXAMPLE)
@@ -49,7 +50,7 @@ unten links !! unten mitte !! unten rechts
 !heading PostScript
 !begin_description
 !item [(!BUGFIXES)]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item Bug (!BUG [40]) in Version 6.2.2 beseitigt (!nl)
          Beseitigung mehrerer kleiner Fehler in der PostScript-Ausgabe.
          Unter anderem wird in der Fußzeile keine Copyright-Zeichen
@@ -63,9 +64,9 @@ unten links !! unten mitte !! unten rechts
 !end_description
 
 !heading Hypertext Markup Language (HTML)
-!begin_description !short
+!begin_description !compressed
 !item [(!CHANGES)]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item Bug (!BUG [10]): Im HTML-Code werden alle Zahlenangaben in Tags in "..." eingefasst.
    !end_itemize
 

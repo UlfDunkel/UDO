@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from history.de)
 # 2010:
 #   fd  Mar 01: using macro BUG
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -25,9 +26,9 @@
 (!PUBLISHED [UDO~6.2.0] [15.10.2003])
 
 !heading Hypertext Markup Language (HTML)
-!begin_description !short
+!begin_description !compressed
 !item [(!CHANGES)]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item Bug (!BUG [10]): Im HTML-Code werden alle Zahlenangaben in Tags in "..." eingefasst.
    !end_itemize
 

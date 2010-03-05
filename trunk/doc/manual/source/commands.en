@@ -24,6 +24,8 @@
 #   fd  Jun 09: FILE macro enhanced
 #   fd  Jun 09: CHAR macro enhanced
 #   fd  Jun 09: VALUE macro introduced
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -79,7 +81,7 @@ In den nachfolgenden Kapiteln werden sämtliche von UDO unterstützten Befehle det
 !item	[Syntax:]
 	Here you can see how to use the command.
 
-	!begin_tlist [WabbreviationsW] !short
+	!begin_tlist [WabbreviationsW] !compressed
 
 	!label (!TEXT)
 	!item [(!TEXT)] replaces text
@@ -128,7 +130,7 @@ In den nachfolgenden Kapiteln werden sämtliche von UDO unterstützten Befehle det
 !index Colors
 !label Colors
 
-!begin_itemize !short
+!begin_itemize !compressed
 !item black
 !item silver      (light grey, formerly ""grey"")
 !item gray        (dark grey, ""gray"", not ""grey""!!!)

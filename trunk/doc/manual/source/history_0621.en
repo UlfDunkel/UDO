@@ -15,6 +15,7 @@
 # 2010:
 #   fd  Mar 01: introduced (from history_0621.de)
 #   fd  Mar 03: translation adjusted
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -26,7 +27,7 @@
 !heading PDF-(!LaTeX)
 !begin_description
 !item [(!BUGFIXES)]
-      !begin_itemize !short
+      !begin_itemize !compressed
       !item If the destination is pdf(!LaTeX), the (!TeX) version isn't set to Mik(!TeX) any longer.
       !item Made changes for links and URLs for pdf(!LaTeX) output.
       !item Made changes for images for pdf(!LaTeX) output.
@@ -37,7 +38,7 @@
 !heading Richtext Format (RTF)
 !begin_description
 !item [(!BUGFIXES)]
-      !begin_itemize !short
+      !begin_itemize !compressed
       !item Fixed bug #0000024 in version 6.2.1 (!nl)
             In the (!LINK) elements are listed all subsubnodes of other subnodes
       !item Fixed bug #0000025 in version 6.2.1 (!nl)

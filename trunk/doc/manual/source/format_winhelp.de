@@ -27,6 +27,8 @@
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 16: great review session #1
 #   fd  Jun 25: NDR: 'plazieren' -> 'platzieren'
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -50,7 +52,7 @@ Den Hypertext-Compiler (!file [HC31.EXE]) können Sie kostenlos vom FTP-Server vo
 !item [Warum will der HC einfach keine HLP-Datei erzeugen?]
 Dafür kann es zwei Gründe geben:
 
-!begin_enumerate !short
+!begin_enumerate !compressed
 
 !item Der UDO-Quelltext enthält Fehler. Schauen Sie sich also
 zunächst die Fehlermeldungen von UDO in der Datei mit dem Suffix 
@@ -98,7 +100,7 @@ Kapitels kennen.
 WinHelp erlaubt in Kontextstrings keine Sonderzeichen. UDO wandelt
 daher die Namen der Kapitel folgendermaßen in Kontext-strings um:
 
-!begin_enumerate !short
+!begin_enumerate !compressed
 !item Zunächst werden wie sonst auch Sonderzeichen durch die
 RTF-Schreibweise ersetzt.
 
@@ -122,7 +124,7 @@ WinHelp: #{footnote # LaTeX_2DEinf_5C_27FChrung_Teil_1}
 
 Erläuterungen:
 
-!begin_enumerate !short
+!begin_enumerate !compressed
 !item Das Minuszeichen entspricht ASCII ""0x2D"", daher wird es durch
 ""_2D"" ersetzt.
 

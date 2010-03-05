@@ -20,6 +20,8 @@
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 10: using macro (!const [])
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -160,7 +162,7 @@ Unterinhaltsverzeichnis ausgegeben. Analog gilt dies für Abschnitte und
 
 !subsubsubheading Zusammenfassung der Befehle und Schalter
 
-!begin_xlist [use_auto_subsubsubtocs] !short
+!begin_xlist [use_auto_subsubsubtocs] !compressed
 
 !item [(!KW [tableofcontents])]
       Ausgabe des Inhaltsverzeichnisses auf einer eigenen Seite
@@ -189,7 +191,7 @@ Unterinhaltsverzeichnis ausgegeben. Analog gilt dies für Abschnitte und
 
 (!HINTS)
 
-!begin_enumerate !short
+!begin_enumerate !compressed
 !item Bei der Ausgabe in HTML erfolgt die Ausgabe der Titelseite und
 des Inhaltsverzeichnisses in die Datei, deren Name Sie UDO in der
 Kommandozeile übergeben.
@@ -262,7 +264,7 @@ wird, benutzen Sie hierfür die Befehle
 !index (!kw [psubsubnode])
 !index (!kw [psubsubsubnode])
 !index (!kw [psubsubsubsubnode])
-!begin_itemize !short
+!begin_itemize !compressed
 !item (!KW [pnode]) für Popup-Kapitel,
 !item (!KW [psubnode]) für Popup-Abschnitte,
 !item (!KW [psubsubnode]) für Popup-Unterabschnitte,
@@ -283,7 +285,7 @@ aufgeführt werden. Dazu benutzen Sie die Befehle
 !index (!kw [subsubnode*])
 !index (!kw [subsubsubnode*])
 !index (!kw [subsubsubsubnode*])
-!begin_itemize !short
+!begin_itemize !compressed
 !item (!KW [node*]) für Kapitel,
 !item (!KW [subnode*]) für Abschnitte,
 !item (!KW [subsubnode*]) für Unterabschnitte,
@@ -298,7 +300,7 @@ aufgeführt werden. Dazu benutzen Sie die Befehle
 
 (!HINTS)
 
-!begin_enumerate !short
+!begin_enumerate !compressed
 !item Kapitel, die nicht in Inhaltsverzeichnissen erscheinen, werden
 auch referenziert, werden aber nicht nummeriert.
 
@@ -358,7 +360,7 @@ A  Ein Kapitel
 
 (!HINTS)
 
-!begin_enumerate !short
+!begin_enumerate !compressed
 
 !item Der Anhang sollte ganz am Ende des Quelltextes stehen, sprich
 (!KW [end_appendix]) sollte das vorletzte Kommando vor (!KW [end_document])

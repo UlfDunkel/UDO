@@ -14,6 +14,8 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from history.de)
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -24,7 +26,7 @@
 
 !begin_description
 !item [Neue Befehle:]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item (!code [!/html_default_hyphenation]) (!nl)
          Nur wenn dieses Kommando gesetzt ist, werden die bedingten
          Trennstriche (!code [!/-]) bei der HTML-Ausgabe in (!code [&shy;])
@@ -48,7 +50,7 @@
    !end_itemize
 
 !item [Neuheiten:]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item In der ersten Datei der HTML-Ausgabe wird jetzt ein Meta-Tag
          für AppleTitle/JobTimerHelp angelegt.
    !item Jetzt werden auch Nodes, die mit (!KW [html_name]) einen
@@ -73,7 +75,7 @@
    !end_itemize
 
 !item [Änderungen:]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item (!code [!/html_backpage ../index.html "Zurück zur UDO-Website"]) (!nl)
          Jetzt kann zusätzlich ein Text übergeben werden, der statt
          des Links in das alt-Attribut eingetragen wird. Der Text muss

@@ -30,6 +30,7 @@
 #   fd  Mar 01: - OldKeywords removed -> cmds__old.en
 #               - new chapters: use_short_descriptions, use_short_enumerates,
 #                   use_short_itemizes, use_short_lists
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -788,7 +789,7 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_descr
 !!end_description
 !end_verbatim
 (!EXAMPLE_AFTER)
-!begin_description !short
+!begin_description !compressed
 !item [Erster]
       Ich bin ein Aufzählungspunkt. Ich habe viel Text.
       
@@ -875,7 +876,7 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_enume
 !end_enumerate
 !end_verbatim
 (!EXAMPLE_AFTER)
-!begin_enumerate !short
+!begin_enumerate !compressed
 !item Ich bin ein Aufzählungspunkt.
 !item Ich auch.
 !item Na, und ich erst.
@@ -978,7 +979,7 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_itemi
 !end_itemize
 !end_verbatim
 (!EXAMPLE_AFTER)
-!begin_itemize !short
+!begin_itemize !compressed
 !item Ich bin ein Aufzählungspunkt.
 !item Ich auch.
 !item Na, und ich erst.
@@ -1055,7 +1056,7 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_lists
 !end_blist
 !end_verbatim
 (!EXAMPLE_AFTER)
-!begin_blist !short
+!begin_blist !compressed
 !item [Erster]
       Ich bin ein Aufzählungspunkt. Ich habe viel Text.
       

@@ -17,6 +17,7 @@
 #   fd  Jun 25: 'die URL' -> 'der URL' (it refers to 'locator')
 # 2010:
 #   fd  Mar 03: using PUBLISHED
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -34,7 +35,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
 !begin_description
 
 !item [Neue Formate:]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item Apple QuickView
    !item HP-HelpTag-SGML (rudimentär)
    !item LyX
@@ -59,7 +60,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !end_itemize
    
 !item [Neue Befehle:]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item (!KW [autoref_items] [[off|on!!]]): 
          Sollen die Items von description- und xlist-Umgebungen (nicht) referenziert werden?
    !item (!kw [code_mac]), (!kw [code_hp8]), (!kw [code_iso]), (!kw [code_dos]) und (!kw [code_tos]):
@@ -129,7 +130,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !end_itemize
 
 !item [Neuheiten:]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item Eine vierte Gliederungsebene ist nun möglich.
    !item Blocksatz
    !item Makros und Definitionen können Parameter enthalten. Das
@@ -154,7 +155,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !end_itemize
 
 !item [Änderungen:]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item Die Umwandlung ins RTF wurde komplett neu programmiert, so
          dass die erzeugten Dateien nun auch problemlos mit WinWord
          importiert werden können.
@@ -173,7 +174,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !end_itemize
 
 !item [Syntaxänderungen:]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item (!KW [no_verbatim_umlaute]) ersetzt den Schalter (!kw [verbatim_no_umlaute])
    !item Der Befehl (!kw [list_parsep]) existiert nicht mehr. Komprimierte
          Umgebungen können nun viel eleganter mit dem Umgebungsparameter (!KW [short]) erstellt werden.

@@ -1,5 +1,5 @@
 !index Farben
-!begin_itemize !short
+!begin_itemize !compressed
 !item (!black)Schwarz(!coloff)
 !item (!silver)Hellgrau(!coloff)
 !item (!gray)(Dunkel-)Grau(!coloff)

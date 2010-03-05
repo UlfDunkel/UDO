@@ -15,6 +15,7 @@
 # 2010:
 #   fd  Mar 01: introduced (from history_0620.de)
 #   fd  Mar 03: translated
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -24,9 +25,9 @@
 (!PUBLISHED [UDO~6.2.0] [15.10.2003])
 
 !heading Hypertext Markup Language (HTML)
-!begin_description !short
+!begin_description !compressed
 !item [(!CHANGES)]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item Bug (!BUG [10]): All numbers in tags are enclosed by ""..."" now in HTML code.
    !end_itemize
 

@@ -22,6 +22,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: chapter basics_text adjusted
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -154,7 +155,7 @@ may be indented by spaces or tabs.
 UDO offers you a large range of environments that will help you to layout
 your text and to insert special commands:
 
-!begin_xlist [description environment:] !short
+!begin_xlist [description environment:] !compressed
 !item [appendix environment:]     appendix
 !item [center environment:]       centered text
 !item [comment environment:]      comments

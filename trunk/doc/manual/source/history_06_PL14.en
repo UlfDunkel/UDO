@@ -15,6 +15,7 @@
 # 2010:
 #   fd  Mar 01: introduced (from history_06_PL14.de)
 #   fd  Mar 03: translation adjusted
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -31,7 +32,7 @@ cases it was impossible not to change the syntax of some commands.
 !begin_description
 
 !item [New target formats:]
-      !begin_itemize !short
+      !begin_itemize !compressed
       !item WinHelp4
       !item UDO
       !item PDFLaTeX
@@ -44,7 +45,7 @@ cases it was impossible not to change the syntax of some commands.
       !end_itemize
 
 !item [New commands:]
-      !begin_itemize !short
+      !begin_itemize !compressed
       !item (!KW [use_mirrored_indices])
       !item (!KW [begin_flushleft]), 
             (!KW [end_flushleft])
@@ -155,7 +156,7 @@ cases it was impossible not to change the syntax of some commands.
       !end_itemize
 
 !item [News:]
-      !begin_itemize !short
+      !begin_itemize !compressed
       !item flushleft environment
       !item flushright environment
       !item Support of dutch language
@@ -187,7 +188,7 @@ cases it was impossible not to change the syntax of some commands.
       !end_itemize
 
 !item [Changes:]
-      !begin_itemize !short
+      !begin_itemize !compressed
       !item You can use up to 3000 chapters now.
       !item (!KW [verbatimsize]) is supported for HTML.
       !item On systems supporting long filenames, UDO uses now 3 digits per level instead of 2 (001002003004.html instead of 01020304.html).
@@ -222,7 +223,7 @@ cases it was impossible not to change the syntax of some commands.
       !end_itemize
 
 !item [Syntax changes:]
-      !begin_itemize !short
+      !begin_itemize !compressed
       !item The switch for justification has been renamed from (!kw [use_justified]) to (!KW [use_justification]).
       !item The switch (!kw [html_use_xlist]) does not exist any more.
       !item (!kw [german]), (!kw [english]), (!kw [french]) etc. don't exist any more and have been replaced by the (!KW [language]) command.

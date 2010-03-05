@@ -17,6 +17,8 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 09: text reviewed, HomeSite + TextWrangler editors added
 #   fd  Jun 10: using EXAMPLE_... macros
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -52,7 +54,7 @@ the UDO archives.
 !item [Will there be versions for other operating systems?] ~
 At the moment UDO is available for the following operating systems:
 
-!begin_itemize !short
+!begin_itemize !compressed
 !item	Atari TOS
 # !item	BeOS
 !item	DOS, OS/2, Windows

@@ -15,6 +15,7 @@
 # 2010:
 #   fd  Mar 01: introduced (from history_06_PL15.de)
 #   fd  Mar 03: translation adjusted
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -24,7 +25,7 @@
 (!PUBLISHED [UDO~6 Patchlevel~15] [June 10, 2003])
 
 !subheading General
-!begin_itemize !short
+!begin_itemize !compressed
 !item All index entrys up to fourth level will be written in the
       project file ((!file [*.upr]))
 !item The entrys for (!code [!/label]) and (!code [!/alias]) will

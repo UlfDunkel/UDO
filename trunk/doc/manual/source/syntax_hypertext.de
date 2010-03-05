@@ -25,6 +25,8 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -56,7 +58,7 @@ die Stelle gelangen, an der diese Sprungmarke definiert wurde.
 
 Die Umsetzung im Detail:
 
-!begin_xlist [Linuxdoc-SGML:] !short
+!begin_xlist [Linuxdoc-SGML:] !compressed
 !item [HTML:]          (!V)<a name="Beispiel"></a>(!v)
 !item [LaTeX:]         (!V)\label{Beispiel}(!v)
 !item [Linuxdoc-SGML:] (!V)<label id="Beispiel">(!v)
@@ -118,7 +120,7 @@ bietet UDO einen Satz von Befehlen für Querverweise.
 Mit dem (!KKW [link])-Befehl können Sie Bezug auf andere Stellen im
 aktuellen Dokument nehmen:
 
-!begin_xlist [ST-Guide:] !short
+!begin_xlist [ST-Guide:] !compressed
 !item [UDO:]      (!KK2W [link] [[ein Text!!][der Verweis!!]])
 !item [HTML:]     <a href="file.htm#der Verweis">ein Text</a>
 !item [(!LaTeX):]    ein Text (siehe \ref{der Verweis})
@@ -139,7 +141,7 @@ zur UDO-Gemeinde verwiesen wird:
 
 (!HINTS)
 
-!begin_enumerate !short
+!begin_enumerate !compressed
 !item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
       diese Zahl überschritten, gibt UDO eine Fehlermeldung aus, dass 
       der Link nicht ersetzt werden konnte. (!nl)
@@ -169,7 +171,7 @@ eine Kombination aus (!KKW [link]) und (!KKW [img]) und wird bei den anderen
 Formaten wie der oben besprochene Link-Befehl für interne Querverweise
 behandelt:
 
-!begin_xlist [WinHelp:] !short
+!begin_xlist [WinHelp:] !compressed
 !item [UDO:]      (!KK2W [ilink][[img!!][Text!!][Verweis!!]])
 !item [WinHelp:]  {\uldb \{bmc~img.bmp\}}{\v Verweis}
 !item [HTML:]     <a href="Verweis"><img src="img.gif" alt="Text" title="Text" border="0"></a>
@@ -178,7 +180,7 @@ behandelt:
 
 (!HINTS)
 
-!begin_enumerate !short
+!begin_enumerate !compressed
 !item UDO überprüft nicht, ob die Grafiken existieren.
 
 !index (!kw [html_img_suffix])
@@ -203,7 +205,7 @@ behandelt:
 Speziell für (!LaTeX) gibt es den (!KKW [plink])-Befehl, um Bezug auf
 andere Seiten zu nehmen:
 
-!begin_xlist [sonst:] !short
+!begin_xlist [sonst:] !compressed
 !item [UDO:] (!KK2W [plink][[Links!!][Querverweise!!]])
 !item [(!LaTeX):] Links (siehe Seite \pageref{Querverweise})
 !item [sonst:] Links
@@ -220,7 +222,7 @@ Sie unsere Kontaktinformationen finden.
 
 (!HINTS)
 
-!begin_enumerate !short
+!begin_enumerate !compressed
 !item Bei (!LaTeX) kann man nur auf Labels, nicht auf Kapitel verweisen.
 
 !item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
@@ -243,7 +245,7 @@ Mit den Befehlen (!KKW [xlink]) und (!KKW [url]) können Sie Bezug auf Stellen
 obigen Befehl besteht darin, dass beim zweiten Parameter bis auf die
 Tilde keine Sonderzeichen angepasst werden (kann bei Pfadangaben fatal sein!).
 
-!begin_xlist [ST-Guide:] !short
+!begin_xlist [ST-Guide:] !compressed
 !item [UDO:]      (!KK2W [xlink] [[UDO!!] [*:\udo.hyp!!]])
 !item [ST-Guide:] @{"UDO" link "*:\udo.hyp"}
 (!nl)
@@ -289,7 +291,7 @@ HTML-Datei.
 
 (!HINTS)
 
-!begin_enumerate !short
+!begin_enumerate !compressed
 !item Für WinHelp muss man gültige Topicnamen und Dateinamen angeben.
       Der HCP akzeptiert in Topicnamen nur Buchstaben, Ziffern und den
       Unterstrich. Andere Zeichen werden von UDO angepasst!

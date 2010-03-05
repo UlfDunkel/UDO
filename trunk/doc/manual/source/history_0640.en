@@ -15,6 +15,7 @@
 # 2010:
 #   fd  Mar 01: introduced (from history_0640.de)
 #   fd  Mar 03: translation adjusted
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -24,9 +25,9 @@
 (!PUBLISHED [UDO~6.4.0] [07.01.2004])
 
 !heading [(!GENERAL)]
-!begin_description !short
+!begin_description !compressed
 !item [(!CHANGES)]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item You can add comments in the table environment.
 
 (!EXAMPLE)
@@ -48,7 +49,7 @@ bottom left !! bottom center !! bottom right
 !heading PostScript
 !begin_description
 !item [(!BUGFIXES)]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item Bug (!BUG [40]) fixed in version 6.2.2 (!nl)
          Fixed many little bugs for postscript output. Among other things
          the won't be written a copyright sign any longer if there is no
@@ -61,9 +62,9 @@ bottom left !! bottom center !! bottom right
 !end_description
 
 !heading Hypertext Markup Language (HTML)
-!begin_description !short
+!begin_description !compressed
 !item [(!CHANGES)]
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item Bug (!BUG [10]): All numbers in tags are enclosed by ""..."" now in HTML code.
    !end_itemize
 

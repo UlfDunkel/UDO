@@ -18,6 +18,7 @@
 #   fd  Feb 25: renamed for UDO 7
 #   fd  Mar 01: using macro BUG
 #   fd  Mar 03: using PUBLISHED
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -28,7 +29,7 @@ UDO~7 ist ein großer Sprung seit der letzten veröffentlichten Version. Vor allem
 
 (!PUBLISHED [UDO~7.00] [1. März 2010])
 
-!begin_description !short
+!begin_description !compressed
 # ----------------------------------------
 !item [Schriftauszeichnung]
 # ----------------------------------------
@@ -91,7 +92,7 @@ UDO~7 ist ein großer Sprung seit der letzten veröffentlichten Version. Vor allem
 # ----------------------------------------
 !item [Tabellen]
 # ----------------------------------------
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item In der Tabellen-Umgebung können Kommentare eingefügt werden.
    !item In der Tabellen-Umgebung können Labels eingefügt werden.
    !item In Tabellen werden UDO-Universalzeichen jetzt korrekt ausgegeben.
@@ -257,7 +258,7 @@ Das hier ist Zelle 3
 # ----------------------------------------
 !item [HTML Apple Help]
 # ----------------------------------------
-   !begin_itemize !short
+   !begin_itemize !compressed
    
    !item (!B)Neues Ausgabeformat: HTML Apple Help(!b) (!nl)
       Ist im Prinzip nichts anderes als HTML, allerdings mit kleinen Änderungen. Deshalb gibt es auch für (!KW [docinfo]) für dieses Format zwei neue Argumente: (!nl)
@@ -280,7 +281,7 @@ Das hier ist Zelle 3
    !begin_itemize
    !item Neue Kommandos:
    
-   !begin_blist !short
+   !begin_blist !compressed
    !item [(!KW [html_bgsound])]
          Legt die Hintergrundmusik für eine HTML-Seite fest.
          
@@ -303,7 +304,7 @@ Das hier ist Zelle 3
    !end_blist
    
    !item Neue Schalter:
-   !begin_blist !short
+   !begin_blist !compressed
    !item [(!KW [html_header_links])]
          (!BUG [53]): Neuer Schalter, der je nach Vorgabe (!LINK)-Elemente im HTML-Header erzeugt.
    !item [(!KW [html_header_date]) (!TEXT)]

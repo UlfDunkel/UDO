@@ -19,6 +19,8 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -135,7 +137,7 @@ that contains (!KW [begin_table]). If you don't want a frame don't use
 By default UDO uses the suffix of the (!code [(--!)outfile]) you used in the
 command line:
 
-!begin_tlist [-o INDEX.HTML] !short
+!begin_tlist [-o INDEX.HTML] !compressed
 !item [-o index.htm]	 (!file [.htm])
 !item [-o index.html] (!file [.html])
 !item [-o INDEX.HTML] (!file [.HTML])

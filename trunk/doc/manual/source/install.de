@@ -25,6 +25,8 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -64,7 +66,7 @@ UDO-Hypertext zugreifen.
 !begin_node Installation der Version für DOS bzw. Windows (32-bit)
 !html_name  installation_dos_win32
 
-!begin_itemize !short
+!begin_itemize !compressed
 !item Laden Sie die entsprechende ZIP-Datei von der UDO-Website herunter.
 !item Entpacken Sie die ZIP-Datei in ein beliebiges Verzeichnis.
 !item Nehmen Sie das Verzeichnis, in dem sich die ausführbare Datei (!file [udo.exe]) befindet, in Ihre PATH-Liste (DOS: siehe (!file [autoexec.bat]); Windows: siehe....?) auf, oder kopieren Sie diese Datei in ein Verzeichnis, das sich bereits in der PATH-Liste befindet.
@@ -80,7 +82,7 @@ Die für frühere UDO-Versionen nötige Installation von RSJ und EMX ist nicht mehr
 !begin_node Installation der OS/2-Version (32-bit)
 !html_name  installation_os2
 
-!begin_itemize !short
+!begin_itemize !compressed
 !item Laden Sie sich die entsprechende ZIP-Datei von der UDO-Website herunter.
 !item Entpacken Sie die ZIP-Datei in ein beliebiges Verzeichnis.
 !item Nehmen Sie das Verzeichnis, in dem sich die ausführbare Datei (!file [udo.exe]) befindet, in Ihre PATH-Liste (siehe (!file [config.sys])) auf, oder kopieren Sie diese Datei in ein Verzeichnis, das sich bereits in der PATH-Liste befindet.
@@ -114,7 +116,7 @@ werden. Unabhängig davon ist die Größe zur Laufzeit minimal.
 !begin_node Installation der Macintosh-Version (Mac~OS~X)
 !html_name  installation_mac_x
 
-!begin_itemize !short
+!begin_itemize !compressed
 !item Laden Sie sich die entsprechende ZIP-Datei von der UDO-Website herunter.
 !item Entpacken Sie die ZIP-Datei und kopieren Sie die ausführbare Datei (!file [udo]) nach (!file [/usr/bin]).
 !end_itemize
@@ -138,7 +140,7 @@ Damit die Änderungen wirksam werden, müssen Sie den Finder einmal neustarten.
 !begin_node Installation der FreeMiNT-Version
 !html_name  installation_mint
 
-!begin_itemize !short
+!begin_itemize !compressed
 !item Laden Sie die entsprechende rpm-Datei von der UDO-Website herunter.
 !item Melden Sie sich als (!code [root]) an.
 !item Für eine Neuinstallation geben Sie ein: (!code [rpm -i]) (!file [file])(!file [.rpm])
@@ -152,7 +154,7 @@ Damit die Änderungen wirksam werden, müssen Sie den Finder einmal neustarten.
 !begin_node Installation des rpm-Paketes für Linux
 !html_name  installation_linux_rpm
 
-!begin_itemize !short
+!begin_itemize !compressed
 !item Laden Sie die entsprechende rpm-Datei von der UDO-Website herunter.
 !item Melden Sie sich als (!code [root]) an.
 !item Für eine Neuinstallation geben Sie ein: (!code [rpm -i]) (!file [file])(!file [.rpm])
@@ -167,7 +169,7 @@ Oder benutzen Sie Ihre bevorzugte rpm-Oberfläche (z.B. kpackage, krpmview, yast)
 !begin_node Installation des Paketes für Debian Linux
 !html_name  installation_linux_deb
 
-!begin_itemize !short
+!begin_itemize !compressed
 !item Laden Sie sich das entsprechende deb-Paket von (!url [http://www.debian.org] [http://www.debian.org/]) herunter.
 !item Melden Sie sich als (!code [root]) an.
 !item (!code [dpkg -i]) (!file [file])(!file[.deb])
@@ -184,7 +186,7 @@ für die deutsche Doku (!file [udo-doc-ger]).
 !begin_node Installation aus den Quelltexten unter Linux
 !html_name  installation_linux_src
 
-!begin_itemize !short
+!begin_itemize !compressed
 !item Das UDO-Quelltextarchiv von der UDO-Website herunterladen.
 !item Quelltextarchiv auspacken: (!code [tar xzf]) (!file [udo_xxx_src.tar.gz])
 !item wechseln Sie ins Verzeichnis (!file [Source])

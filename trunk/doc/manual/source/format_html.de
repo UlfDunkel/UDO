@@ -24,6 +24,8 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -147,7 +149,7 @@ UDO benutzt als Suffix für die HTML-Dateien immer das Suffix des
 in der Kommandozeile mit der Option (!code [(--!)outfile]) bzw. (!code [-o]) übergebenen
 Dateinamens:
 
-!begin_tlist [-o INDEX.HTML] !short
+!begin_tlist [-o INDEX.HTML] !compressed
 !item [(!C)-o index.htm(!c)]  (!file [.htm])
 !item [(!C)-o index.html(!c)] (!file [.html])
 !item [(!C)-o INDEX.HTML(!c)] (!file [.HTML])
@@ -163,7 +165,7 @@ keine langen Namen zulässt, Sie als Suffix (!code [.html]) vorgegeben haben
 und Sie diese Dateien dann auf einem Web-Server ablegen, so
 müssen Sie folgendes beachten:
 
-!begin_enumerate !short
+!begin_enumerate !compressed
 !item UDO versucht zwar, (!file [foo.html]) zu sichern, TOS und DOS sichern
 die Datei jedoch nur als (!file [foo.htm]).
 

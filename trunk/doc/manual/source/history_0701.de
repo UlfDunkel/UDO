@@ -19,6 +19,7 @@
 #               - bugfix #86 added
 #   fd  Mar 05: - [Encodings] new ISO codepages added
 #               - [Environments] added
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -28,11 +29,11 @@
 (!INCOMPLETE)
 # (!PUBLISHED [UDO~7.01][3. März 2010])
 
-!begin_description !short
+!begin_description !compressed
 # ----------------------------------------
 !item [Encodings]
 # ----------------------------------------
-      !begin_itemize !short
+      !begin_itemize !compressed
       !item (!BUG [87]): UDO unterstützt weitere Codepages:
       !begin_table [l|l] !hline
       (!B)System(!b) !! (!B)Encoding(!b) !! (!B)Bezeichner(!b)
@@ -52,7 +53,7 @@
 # ----------------------------------------
 !item [(!KW [docinfo])]
 # ----------------------------------------
-      !begin_itemize !short
+      !begin_itemize !compressed
       !item Die z.T. irreführenden (!KW [docinfo])-Attribute 
             (!code [webmastername]), 
             (!code [webmasterurl]), 
@@ -102,7 +103,7 @@
 # ----------------------------------------
 !item [UDO]
 # ----------------------------------------
-      !begin_itemize !short
+      !begin_itemize !compressed
       !item Die UDO-Versionen für Mac OS und Mac OS X melden sich jetzt als ""UDO for Mac OS"" bzw. ""UDO for Mac OS X"".
       !end_itemize
 
@@ -113,7 +114,7 @@
 # ----------------------------------------
 !item [(!BUGFIXES)]
 # ----------------------------------------
-      !begin_itemize !short
+      !begin_itemize !compressed
       !item (!BUG [86]): Veraltete Kommandos bringen den IF-Stack nicht mehr durcheinander.
       !end_itemize
 

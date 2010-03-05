@@ -14,6 +14,8 @@
 # -------
 # 2009:
 #   fd  Jun 06: introduced (extracted from history.de)
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -23,7 +25,7 @@
 (!PUBLISHED [UDO~6 Patchlevel~15] [10.06.2003])
 
 !subheading Allgemeines
-!begin_itemize !short
+!begin_itemize !compressed
 !item Alle Indexeinträge bis zur vierten Stufe werden in die
       Projektdatei ((!file [*.upr])) geschrieben.
 !item Die Einträge für (!code [!/label]) und (!code [!/alias]) werden

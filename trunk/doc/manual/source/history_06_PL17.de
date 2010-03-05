@@ -18,6 +18,7 @@
 # 2010:
 #   fd  Mar 01: using macro BUG
 #   fd  Mar 02: reformatted
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -26,7 +27,7 @@
 
 (!PUBLISHED [UDO~6 Patchlevel~17] [11.10.2003])
 
-!begin_description !short
+!begin_description !compressed
 !item [(!GENERAL)]
       !begin_itemize
       !item Bug (!BUG [3]): Die Meldung ""Letzte Änderung am!.."" kommt jetzt mit den richtigen französischen Umlauten.

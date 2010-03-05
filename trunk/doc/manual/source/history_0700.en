@@ -16,6 +16,7 @@
 #   fd  Mar 01: introduced (from history_0700.de)
 #   fd  Mar 02: translated
 #   fd  Mar 03: using PUBLISHED
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
 #
 ################################################################################
 
@@ -26,7 +27,7 @@ UDO~7 is a big upgrade since the last released version. Especially the full Unic
 
 (!PUBLISHED [UDO~7.00] [March 1, 2010])
 
-!begin_description !short
+!begin_description !compressed
 # ----------------------------------------
 !item [Text style]
 # ----------------------------------------
@@ -89,7 +90,7 @@ UDO~7 is a big upgrade since the last released version. Especially the full Unic
 # ----------------------------------------
 !item [Tables]
 # ----------------------------------------
-   !begin_itemize !short
+   !begin_itemize !compressed
    !item You can now add comments to table environments.
    !item Table environments now accept labels.
    !item UDO universal characters are now properly output in table environments.
@@ -252,7 +253,7 @@ This is cell #3
 # ----------------------------------------
 !item [HTML Apple Help]
 # ----------------------------------------
-   !begin_itemize !short
+   !begin_itemize !compressed
    
    !item (!B)New output format: HTML Apple Help(!b) (!nl)
       Basically this is nothing but HTML, but there are tiny differences. Therefore, (!KW [docinfo]) comes with two new arguments for this format: (!nl)
@@ -275,7 +276,7 @@ This is cell #3
    !begin_itemize
    !item Neue Kommandos:
    
-   !begin_blist !short
+   !begin_blist !compressed
    !item [(!KW [html_bgsound])]
          defines the background music for an HTML page.
          
@@ -298,7 +299,7 @@ This is cell #3
    !end_blist
    
    !item New switches:
-   !begin_blist !short
+   !begin_blist !compressed
    !item [(!KW [html_header_links])]
          (!BUG [53]): New switch which creates (!LINK) elements in the HTML header --- or not.
    !item [(!KW [html_header_date]) (!TEXT)]
