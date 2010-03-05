@@ -63,6 +63,7 @@
 *    fd  Mar 04: version strings prepared for v7.01 beta
 *    fd  Mar 05: - CODE_LATIN3
 *                - CODE_LATIN4
+*                - CODE_CYRILLIC
 *
 ******************************************|************************************/
 
@@ -128,8 +129,9 @@
 #define CODE_CP1258   18                  /* Microsoft Windows codepage 1258 "Vietnamese" */
 #define CODE_LATIN3   19                  /* ISO Latin 3 (iso-8859-3) "South European" */
 #define CODE_LATIN4   20                  /* ISO Latin 4 (iso-8859-4) "North European" */
+#define CODE_CYRILLIC 21                  /* ISO Cyrillic (iso-8859-5) */
 
-#define CODE_TOTAL    21                  /* # of supported encodings */
+#define CODE_TOTAL    22                  /* # of supported encodings */
 
    /* --- Compiler- und systemabhaengige Dinge setzen --- */
 

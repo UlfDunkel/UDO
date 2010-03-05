@@ -93,6 +93,7 @@
 *    fd  Mar 04: token_output(): inside_short -> inside_compressed
 *    fd  Mar 05: - CODE_LATIN3
 *                - CODE_LATIN4
+*                - CODE_CYRILLIC
 *
 ******************************************|************************************/
 
@@ -333,6 +334,13 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
    {"latin4",              CODE_LATIN4   },
    {"l4",                  CODE_LATIN4   },
    {"csisolatin4",         CODE_LATIN4   },
+   
+   {"iso-8859-5",          CODE_CYRILLIC },
+   {"iso-ir-144",          CODE_CYRILLIC },
+   {"iso8859-5",           CODE_CYRILLIC },
+   {"iso_8859-5",          CODE_CYRILLIC },
+   {"cyrillic",            CODE_CYRILLIC },
+   {"csisolatincyrillic",  CODE_CYRILLIC },
    
    {"mac",                 CODE_MAC      },
    {"macintosh",           CODE_MAC      },
