@@ -28,7 +28,7 @@
 *-------------------------------------------------------------------------------
 *
 *  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
-*  Co-Authors   : Ulf Dunkel (fd), Gerhard Stoll (ggs)
+*  Co-Authors   : Norbert Hanz (NHz), Ulf Dunkel (fd), Gerhard Stoll (ggs)
 *  Write access : fd, ggs
 *
 *  Notes        : Please add yourself as co-author when you change this file.
@@ -47,6 +47,13 @@
 *                - webmasterurl     -> domain_link
 *                - webmasteremail   -> contact_name
 *                - webmastermailurl -> contact_link
+*    fd  Mar 05: file tidied up
+*
+******************************************|************************************/
+
+/*******************************************************************************
+*
+*     CONSTANTS
 *
 ******************************************|************************************/
 
@@ -54,6 +61,12 @@
 #define ID_TP_C
 const char *id_tp_c= "@(#) tp.c        $date$";
 #endif
+
+/*******************************************************************************
+*
+*     INCLUDE FILES
+*
+******************************************|************************************/
 
 #include "import.h"
 #include <stdio.h>
@@ -79,334 +92,396 @@ const char *id_tp_c= "@(#) tp.c        $date$";
 #include "udomem.h"
 
 
-/*      ############################################################
-        # lokale Variablen
-        ############################################################    */
 
-/*      ############################################################
-        # lokale Prototypen
-        ############################################################    */
-LOCAL BOOLEAN init_docinfo_data ( char *data, char **var, int allow_empty );
-LOCAL void init_titdat ( void );
-LOCAL void free_titdat ( char **var );
 
-/* New in V6.5.19 */
-/*      --------------------------------------------------------------
-        set_show_variable()
-        Setzen von Informationen fuer Variablen
-        Die Daten stehen in token[]. Ich habe die Funktion hier herein
-        gepackt, da ich keine neue C-Datei eroeffnen wollte.
-        !show_variable [format] [foo]".
-        <-      TRUE:   OK
-                sonst:  Fehler
-        --------------------------------------------------------------  */
-GLOBAL BOOLEAN set_show_variable ( void )
+
+/*******************************************************************************
+*
+*     LOCAL PROTOTYPES
+*
+******************************************|************************************/
+
+LOCAL BOOLEAN init_docinfo_data(char *data, char **var, int allow_empty);
+LOCAL void init_titdat(void);
+LOCAL void free_titdat(char **var);
+
+
+
+
+
+
+
+
+
+
+/*******************************************************************************
+*
+*     LOCAL / GLOBAL FUNCTIONS
+*
+******************************************|************************************/
+
+/*******************************************************************************
+*
+*  set_show_variable():
+*     Setzen von Informationen fuer Variablen
+*
+*  Notes:
+*     New in V6.5.19 [NHz]
+*     Die Daten stehen in token[]. Ich habe die Funktion hier herein
+*     gepackt, da ich keine neue C-Datei eroeffnen wollte.
+*     
+*     !show_variable [format] [foo]
+*
+*  Out:
+*     - TRUE: OK
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN set_show_variable(void)
 {
-        char s[512], *cont, *data, inhalt[512];
-        size_t contlen;
+   char     s[512],       /* */
+           *cont,         /* */
+           *data,         /* */
+            inhalt[512];  /* */
+   size_t   contlen;      /* */
+   
+   
+   tokcpy2(s, 512);
 
-        tokcpy2(s, 512);
+   contlen = strlen(token[1]);            /* New in V6.5.9 [NHz] */
 
-        /* New in V6.5.9 [NHz] */
-        contlen = strlen(token[1]);
+   contlen = get_brackets_ptr(s, &cont, &data);
 
-        contlen= get_brackets_ptr(s, &cont, &data);
+   if (contlen == 0 || cont == NULL || data == NULL)
+   {      
+      error_syntax_error();
+      return FALSE;
+   }
 
-        if (contlen==0 || cont==NULL || data==NULL)
-        {       error_syntax_error();
-                return FALSE;
-        }
+   inhalt[0] = EOS; 
+   strncpy(inhalt, cont, contlen);
+   inhalt[contlen] = EOS;
+   del_whitespaces(inhalt);
 
-        inhalt[0]= EOS; 
-        strncpy(inhalt, cont, contlen);
-        inhalt[contlen]= EOS;
-        del_whitespaces(inhalt);
-
-        if (strcmp(inhalt, "source_filename") == 0)
-        {       show_variable.source_filename=TRUE;
-                return TRUE;
-        }
-        return FALSE;
-
-}       /* set_show_variable */
-
-/* New in r6pl16 [NHz] */
-/*      ############################################################
-        #
-        # Main-Layout
-        #
-        ############################################################    */
-/*      --------------------------------------------------------------
-        set_mainlayout()
-        Setzen von Informationen fuer das Layout (neue Version)
-        Die Daten stehen in token[]. Ich habe die Funktion hier herein
-        gepackt, da ich keine neue C-Datei eroeffnen wollte.
-        Hier werden Vorgaben gemacht, wenn der Nutzer keine Angaben zum
-        Layout macht.
-        <-      TRUE:   OK
-                sonst:  Fehler
-        --------------------------------------------------------------  */
-GLOBAL BOOLEAN set_mainlayout ( void )
-{
-        /* Fixed Bug #0000040 in r6.3pl16 [NHz] */
-        init_docinfo_data("A4PORTRAIT", &(laydat.paper), FALSE);
-
-        init_docinfo_data("Times New Roman", &(laydat.propfontname), FALSE);
-        laydat.propfontsize = 11;
-        init_docinfo_data("Courier New", &(laydat.monofontname), FALSE);
-        laydat.monofontsize = 11;
-        init_docinfo_data("/UseNone", &(laydat.pagemode), FALSE);
-        init_docinfo_data("/SinglePage", &(laydat.viewerpreferences), FALSE);
-        init_docinfo_data("false", &(laydat.fitwindow), FALSE);
-        init_docinfo_data("1", &(laydat.openpage), FALSE);
-        init_docinfo_data("false", &(laydat.hidetoolbar), FALSE);
-        init_docinfo_data("false", &(laydat.hidemenubar), FALSE);
-        /* New in r6pl16 [NHz] */
-        laydat.node1size = 0;
-        laydat.node2size = 0;
-        laydat.node3size = 0;
-        laydat.node4size = 0;
-
-        return TRUE;
+   if (strcmp(inhalt, "source_filename") == 0)
+   {
+      show_variable.source_filename = TRUE;
+      return TRUE;
+   }
+   
+   return FALSE;
 }
 
 
-/* New in r6pl15 [NHz] */
-/*      ############################################################
-        #
-        # Doc-Layout
-        #
-        ############################################################    */
-/*      --------------------------------------------------------------
-        set_doclayout()
-        Setzen von Informationen fuer das Layout (neue Version)
-        Die Daten stehen in token[]. Ich habe die Funktion hier herein
-        gepackt, da ich keine neue C-Datei eroeffnen wollte.
-        !doclayout [format] [foo]".
-        <-      TRUE:   OK
-                sonst:  Fehler
-        --------------------------------------------------------------  */
-GLOBAL BOOLEAN set_doclayout ( void )
+
+
+
+/*******************************************************************************
+*
+*  set_mainlayout():
+*     Setzen von Informationen fuer das Layout (neue Version)
+*
+*  Notes:
+*     New in r6pl16 [NHz]
+*     Die Daten stehen in token[]. Ich habe die Funktion hier herein
+*     gepackt, da ich keine neue C-Datei eroeffnen wollte.
+*     Hier werden Vorgaben gemacht, wenn der Nutzer keine Angaben zum
+*     Layout macht.
+*
+*  Out:
+*     - TRUE: OK
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN set_mainlayout(void)
 {
-        char s[512], *cont_format, *cont_content, *data, format[512], content[512];
-        char *page, page2[2];
-        struct size_brackets contlen;
+                                          /* Fixed Bug #40 in r6.3pl16 [NHz] */
+   init_docinfo_data("A4PORTRAIT", &(laydat.paper), FALSE);
 
-        tokcpy2(s, 512);
+   init_docinfo_data("Times New Roman", &(laydat.propfontname), FALSE);
+   laydat.propfontsize = 11;
+   
+   init_docinfo_data("Courier New", &(laydat.monofontname), FALSE);
+   laydat.monofontsize = 11;
+   
+   init_docinfo_data("/UseNone", &(laydat.pagemode), FALSE);
+   init_docinfo_data("/SinglePage", &(laydat.viewerpreferences), FALSE);
+   init_docinfo_data("false", &(laydat.fitwindow), FALSE);
+   init_docinfo_data("1", &(laydat.openpage), FALSE);
+   init_docinfo_data("false", &(laydat.hidetoolbar), FALSE);
+   init_docinfo_data("false", &(laydat.hidemenubar), FALSE);
+   
+                                          /* New in r6pl16 [NHz] */
+   laydat.node1size = 0;
+   laydat.node2size = 0;
+   laydat.node3size = 0;
+   laydat.node4size = 0;
 
-        contlen= get_two_brackets_ptr(s, &cont_format, &cont_content, &data);
-
-        if (contlen.format==0 || contlen.content==0 || cont_content==NULL || cont_format==NULL || data==NULL)
-        {       error_syntax_error();
-                return FALSE;
-        }
-
-        format[0]= EOS; 
-        strncpy(format, cont_format, contlen.format);
-        format[contlen.format]= EOS;
-        del_whitespaces(format);
-
-        content[0]= EOS;        
-        strncpy(content, cont_content, contlen.content);
-        content[contlen.content]= EOS;
-        del_whitespaces(content);
-
-        if (strcmp(content, "paper") == 0)
-        {       if ( str_for_desttype(format) )
-                {       /* Layout festlegen */
-                        init_docinfo_data(data, &(laydat.paper), FALSE);
-                }
-                return TRUE;
-        }
-
-        if (strcmp(content, "propfontname") == 0)
-        {       if ( str_for_desttype(format) )
-                {       /* Set proportional font */
-                        init_docinfo_data(data, &(laydat.propfontname), FALSE);
-                }
-                return TRUE;
-        }
-
-        if (strcmp(content, "propfontsize") == 0)
-        {       if ( str_for_desttype(format) )
-                {       /* Set size of proportional font */
-                        laydat.propfontsize = atoi(data);
-                }
-                return TRUE;
-        }
-
-        if (strcmp(content, "monofontname") == 0)
-        {       if ( str_for_desttype(format) )
-                {       /* Set aquidistant font */
-                        init_docinfo_data(data, &(laydat.monofontname), FALSE);
-                }
-                return TRUE;
-        }
-
-        if (strcmp(content, "monofontsize") == 0)
-        {       if ( str_for_desttype(format) )
-                {       /* Set size of the aquidistant font */
-                        laydat.monofontsize = atoi(data);
-                }
-                return TRUE;
-        }
-
-        /* New in r6pl16 [NHz] */
-        if (strcmp(content, "node1size") == 0)
-        {       if ( str_for_desttype(format) )
-                {       /* Set size of node */
-                        laydat.node1size = atoi(data);
-                }
-                return TRUE;
-        }
-
-        if (strcmp(content, "node2size") == 0)
-        {       if ( str_for_desttype(format) )
-                {       /* Set size of subnode */
-                        laydat.node2size        = atoi(data);
-                }
-                return TRUE;
-        }
-
-        if (strcmp(content, "node3size") == 0)
-        {       if ( str_for_desttype(format) )
-                {       /* Set size of subsubnode */
-                        laydat.node3size        = atoi(data);
-                }
-                return TRUE;
-        }
-
-        if (strcmp(content, "node4size") == 0)
-        {       if ( str_for_desttype(format) )
-                {       /* Set size of subsubsubnode */
-                        laydat.node4size        = atoi(data);
-                }
-                return TRUE;
-        }
-
-        if (strcmp(content, "node5size") == 0)
-        {       if ( str_for_desttype(format) )
-                {       /* Set size of subsubsubsubnode */
-                        laydat.node5size        = atoi(data);
-                }
-                return TRUE;
-        }
-
-        /* Specialities for Postscript */
-        if (strcmp(content, "openMode") == 0)
-        {       if (strstr(data, "Outlines"))
-                        init_docinfo_data("/UseOutlines", &(laydat.pagemode), FALSE);
-                else if (strstr(data, "Thumbs"))
-                        init_docinfo_data("/UseThumbs", &(laydat.pagemode), FALSE);
-                else if (strstr(data, "Fullscreen"))
-                        init_docinfo_data("/FullScreen", &(laydat.pagemode), FALSE);
-                else
-                        init_docinfo_data("/UseNone", &(laydat.pagemode), FALSE);
-
-                page = strstr(data, "Page=");
-                if (page != NULL)
-                {
-                        page2[0] = *(page+5);
-                        page2[1] = EOS;
-                        init_docinfo_data(page2, &(laydat.openpage), FALSE);
-                }
-                else
-                        init_docinfo_data("1", &(laydat.openpage), FALSE);
-
-                if (strstr(data, "HideToolbar"))
-                        init_docinfo_data("true", &(laydat.hidetoolbar), FALSE);
-                else
-                        init_docinfo_data("false", &(laydat.hidetoolbar), FALSE);
-
-                if (strstr(data, "HideMenubar"))
-                        init_docinfo_data("true", &(laydat.hidemenubar), FALSE);
-                else
-                        init_docinfo_data("false", &(laydat.hidemenubar), FALSE);
-
-                if (strstr(data, "OneColumn"))
-                        init_docinfo_data("/OneColumn", &(laydat.viewerpreferences), FALSE);
-                else if (strstr(data, "ColumnLeft"))
-                        init_docinfo_data("/TwoColumnLeft", &(laydat.viewerpreferences), FALSE);
-                else if (strstr(data, "ColumnRight"))
-                        init_docinfo_data("/TwoColumnRight", &(laydat.viewerpreferences), FALSE);
-                else
-                        init_docinfo_data("/SinglePage", &(laydat.viewerpreferences), FALSE);
-
-                if (strstr(data, "Title"))
-                        init_docinfo_data("true", &(laydat.fitwindow), FALSE);
-                else
-                        init_docinfo_data("false", &(laydat.fitwindow), FALSE);
-                return TRUE;
-        }
-
-        return FALSE;
-
-}       /* set_doclayout */
+   return TRUE;
+}
 
 
-/*      ############################################################
-        #
-        # Titelseite
-        #
-        ############################################################    */
-/*      --------------------------------------------------------------
-        init_docinfo_data()
-        Anpassung der Daten fuer die Titelseite samt Anforderung des
-        benoetigten Speichers
-        ->      data:   Zeiger auf den Inhalt
-                var:    Zeiger auf die Variable
-        --------------------------------------------------------------  */
-LOCAL BOOLEAN init_docinfo_data ( char *data, char **var, int allow_empty )
+
+
+
+/*******************************************************************************
+*
+*  set_doclayout():
+*     Setzen von Informationen fuer das Layout (neue Version)
+*
+*  Notes:
+*     New in r6pl15 [NHz]:
+*     Die Daten stehen in token[]. Ich habe die Funktion hier herein
+*     gepackt, da ich keine neue C-Datei eroeffnen wollte.
+*
+*     !doclayout [format] [foo]
+*
+*  Out:
+*     - TRUE: OK
+*     - error
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN set_doclayout(void)
 {
-   /* [voja][R6PL17] I needed to do the buffer creation first in this function,
-      elsewise you can't use memmove with compilers like GCC 3.x and
-      MS VS .net. An segmentation fault will occur (Bug #0000016).
-      I guess this is because of better memory protection techniques:
-      The *data coming in can be an constant(!) value. I think these compilers
-      write constant variable allocations to a protected memory region.
-      Writing to this region will crash...
-   */
-   char *buffer;
-   size_t len;
+   char   s[512],        /* */
+         *cont_format,   /* */
+         *cont_content,  /* */
+         *data,          /* */
+          format[512],   /* */
+          content[512];  /* */
+   char  *page,          /* */
+          page2[2];      /* */
+                         /* */
+   struct size_brackets   contlen;
+
+
+   tokcpy2(s, 512);
+
+   contlen = get_two_brackets_ptr(s, &cont_format, &cont_content, &data);
+
+   if (contlen.format == 0 || contlen.content == 0 || cont_content == NULL || cont_format == NULL || data == NULL)
+   { 
+      error_syntax_error();
+      return FALSE;
+   }
+
+   format[0] = EOS; 
+   strncpy(format, cont_format, contlen.format);
+   format[contlen.format] = EOS;
+   del_whitespaces(format);
+
+   content[0] = EOS;        
+   strncpy(content, cont_content, contlen.content);
+   content[contlen.content] = EOS;
+   del_whitespaces(content);
+
+   if (strcmp(content, "paper") == 0)
+   { 
+      if (str_for_desttype(format))       /* Layout festlegen */
+         init_docinfo_data(data, &(laydat.paper), FALSE);
+
+      return TRUE;
+   }
+
+   if (strcmp(content, "propfontname") == 0)
+   { 
+      if (str_for_desttype(format))       /* Set proportional font */
+         init_docinfo_data(data, &(laydat.propfontname), FALSE);
+
+      return TRUE;
+   }
+
+   if (strcmp(content, "propfontsize") == 0)
+   {  
+      if (str_for_desttype(format))       /* Set size of proportional font */
+         laydat.propfontsize = atoi(data);
+
+      return TRUE;
+   }
+
+   if (strcmp(content, "monofontname") == 0)
+   { 
+      if (str_for_desttype(format))       /* Set aquidistant font */
+         init_docinfo_data(data, &(laydat.monofontname), FALSE);
+
+      return TRUE;
+   }
+
+   if (strcmp(content, "monofontsize") == 0)
+   {    
+      if (str_for_desttype(format))       /* Set size of the aquidistant font */
+         laydat.monofontsize = atoi(data);
+
+      return TRUE;
+   }
+
+                                          /* New in r6pl16 [NHz] */
+   if (strcmp(content, "node1size") == 0)
+   {  
+      if (str_for_desttype(format))       /* Set size of node */
+         laydat.node1size = atoi(data);
+
+      return TRUE;
+   }
+
+   if (strcmp(content, "node2size") == 0)
+   {  
+      if (str_for_desttype(format))       /* Set size of subnode */
+         laydat.node2size = atoi(data);
+
+      return TRUE;
+   }
+
+   if (strcmp(content, "node3size") == 0)
+   {  
+      if (str_for_desttype(format))       /* Set size of subsubnode */
+         laydat.node3size = atoi(data);
+
+      return TRUE;
+   }
+
+   if (strcmp(content, "node4size") == 0)
+   { 
+      if (str_for_desttype(format))       /* Set size of subsubsubnode */
+         laydat.node4size = atoi(data);
+
+      return TRUE;
+   }
+
+   if (strcmp(content, "node5size") == 0)
+   {
+      if (str_for_desttype(format))       /* Set size of subsubsubsubnode */
+         laydat.node5size = atoi(data);
+
+      return TRUE;
+   }
+
+                                          /* Specialties for Postscript */
+   if (strcmp(content, "openMode") == 0)
+   {
+      if (strstr(data, "Outlines"))
+         init_docinfo_data("/UseOutlines", &(laydat.pagemode), FALSE);
+      else if (strstr(data, "Thumbs"))
+         init_docinfo_data("/UseThumbs", &(laydat.pagemode), FALSE);
+      else if (strstr(data, "Fullscreen"))
+         init_docinfo_data("/FullScreen", &(laydat.pagemode), FALSE);
+      else
+         init_docinfo_data("/UseNone", &(laydat.pagemode), FALSE);
+
+      page = strstr(data, "Page=");
+
+      if (page != NULL)
+      {
+         page2[0] = *(page + 5);
+         page2[1] = EOS;
+
+         init_docinfo_data(page2, &(laydat.openpage), FALSE);
+      }
+      else
+         init_docinfo_data("1", &(laydat.openpage), FALSE);
+
+      if (strstr(data, "HideToolbar"))
+         init_docinfo_data("true", &(laydat.hidetoolbar), FALSE);
+      else
+         init_docinfo_data("false", &(laydat.hidetoolbar), FALSE);
+
+      if (strstr(data, "HideMenubar"))
+         init_docinfo_data("true", &(laydat.hidemenubar), FALSE);
+      else
+         init_docinfo_data("false", &(laydat.hidemenubar), FALSE);
+
+      if (strstr(data, "OneColumn"))
+         init_docinfo_data("/OneColumn", &(laydat.viewerpreferences), FALSE);
+      else if (strstr(data, "ColumnLeft"))
+         init_docinfo_data("/TwoColumnLeft", &(laydat.viewerpreferences), FALSE);
+      else if (strstr(data, "ColumnRight"))
+         init_docinfo_data("/TwoColumnRight", &(laydat.viewerpreferences), FALSE);
+      else
+         init_docinfo_data("/SinglePage", &(laydat.viewerpreferences), FALSE);
+
+      if (strstr(data, "Title"))
+         init_docinfo_data("true", &(laydat.fitwindow), FALSE);
+      else
+         init_docinfo_data("false", &(laydat.fitwindow), FALSE);
+
+      return TRUE;
+   }
+
+   return FALSE;
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  init_docinfo_data():
+*     Anpassung der Daten fuer die Titelseite samt Anforderung des benoetigten Speichers
+*
+*  Notes:
+*     [voja][R6PL17] I needed to do the buffer creation first in this function,
+*     else you can't use memmove() with compilers like GCC 3.x and
+*     MS VS .net. An segmentation fault will occur (Bug #0000016).
+*     I guess this is because of better memory protection techniques:
+*     The *data coming in can be an constant(!) value. I think these compilers
+*     write constant variable allocations to a protected memory region.
+*     Writing to this region will crash...
+*
+*  Out:
+*     - TRUE: OK
+*     - error
+*
+******************************************|************************************/
+
+LOCAL BOOLEAN init_docinfo_data(
+
+char       *data,         /* ^ to content */
+char      **var,          /* ^^ to variable */
+int         allow_empty)  /* TRUE: empty data are okay, FALSE: throw error message */
+{
+   char    *buffer;       /* */
+   size_t   len;          /* */
 
    len = strlen(data)*sizeof(char);
-   len *=2;                 /* We need space if some text will be replace */
-   len++;                   /* End of string                              */
+   len *=2;                               /* We need space if some text will be replace */
+   len++;                                 /* End of string */
 
-   buffer= (char *) um_malloc ( len );
+   buffer = (char *)um_malloc(len);
 
-   if (buffer) /* Check if the buffer could be allocated */
+   if (buffer)                            /* Check if the buffer could be allocated */
    {
-      /* We copy now first the data to the buffer, this prevents
-         bug #0000016 with modern compilers */
+      /* First we copy the data to the buffer, this prevents bug #16 with modern compilers */
       strcpy(buffer, data);
-      del_whitespaces(buffer);                /* Parameter was data */
-      c_divis(buffer);                        /* Parameter was data */
-      c_vars(buffer);                         /* Parameter was data */
-      c_tilde(buffer);                        /* Parameter was data */
-      c_styles(buffer);                       /* Parameter was data */
-      del_internal_styles(buffer);            /* Parameter was data */
-      replace_udo_tilde(buffer);              /* Parameter was data */
-      replace_udo_nbsp(buffer);               /* Parameter was data */
-      replace_udo_quotes(buffer);             /* Parameter was data */
-      delete_all_divis(buffer);               /* Parameter was data */
+      
+      del_whitespaces(buffer);            /* Parameter was data */
+      c_divis(buffer);                    /* Parameter was data */
+      c_vars(buffer);                     /* Parameter was data */
+      c_tilde(buffer);                    /* Parameter was data */
+      c_styles(buffer);                   /* Parameter was data */
+      del_internal_styles(buffer);        /* Parameter was data */
+      replace_udo_tilde(buffer);          /* Parameter was data */
+      replace_udo_nbsp(buffer);           /* Parameter was data */
+      replace_udo_quotes(buffer);         /* Parameter was data */
+      delete_all_divis(buffer);           /* Parameter was data */
 
-      if (data[0]==EOS && !allow_empty)
-      {  error_empty_docinfo();
+      if (data[0] == EOS && !allow_empty)
+      {
+         error_empty_docinfo();
          return FALSE;
       }
 
-      *var=buffer;
+      *var = buffer;
 
       return TRUE;
    }
 
    /* An error occured when allocating the buffer */
    error_malloc_failed();
-   bFatalErrorDetected= TRUE;
+   bFatalErrorDetected = TRUE;
    return FALSE;
-
-}  /* init_docinfo_data */
+}
 
 
 
@@ -415,7 +490,9 @@ LOCAL BOOLEAN init_docinfo_data ( char *data, char **var, int allow_empty )
 /*******************************************************************************
 *
 *  set_docinfo():
-*     Set document information for title page (new approach). 
+*     set document information for title page (new approach) 
+*
+*  Notes:
 *     The data can be found in token[]. In former versions of UDO, e.g. the 
 *     app name was defined using "!program UDO", now with "!docinfo [program] UDO".
 *
@@ -529,7 +606,7 @@ GLOBAL BOOLEAN set_docinfo(void)
          if (buffer)
          {
             strcpy(buffer, data);
-            titdat.authoricon= buffer;
+            titdat.authoricon = buffer;
             
             if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
             {
@@ -630,7 +707,7 @@ GLOBAL BOOLEAN set_docinfo(void)
          if (buffer)
          {
             strcpy(buffer, data);
-            titdat.programimage= buffer;
+            titdat.programimage = buffer;
             
             if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
             {
@@ -913,10 +990,7 @@ GLOBAL BOOLEAN set_docinfo(void)
    error_unknown_docinfo(inhalt);
    
    return FALSE;
-   
-}  /* set_docinfo() */
-
-
+}
 
 
 
@@ -1018,17 +1092,18 @@ GLOBAL void c_maketitle(void)
             c_img_output(titdat.programimage, "", FALSE);
             c_end_center();
             break;
+            
          case TEX_EMTEX:
          case TEX_MIKTEX:                 /* V6.5.20 [CS] */
             c_begin_center();
             c_msp_output(titdat.programimage, "", FALSE);
             c_end_center();
             break;
+            
          case TEX_TETEX:
             c_begin_center();
             c_eps_output(titdat.programimage, "", ".eps", FALSE);
             c_end_center();
-            break;
          }
       }
       
@@ -1064,16 +1139,17 @@ GLOBAL void c_maketitle(void)
             c_img_output(titdat.authorimage, "", FALSE);
             c_end_center();
             break;
+            
          case TEX_EMTEX:
             c_begin_center();
             c_msp_output(titdat.authorimage, "", FALSE);
             c_end_center();
             break;
+            
          case TEX_TETEX:
             c_begin_center();
             c_eps_output(titdat.authorimage, "", ".eps", FALSE);
             c_end_center();
-            break;
          }
       }
 
@@ -1652,7 +1728,7 @@ GLOBAL void c_maketitle(void)
       {
          outln("    #");
          
-         /* YYY fd:20071108: the next output should be localized! */
+/* YYY fd:20071108: the next output should be localized! */
          strcpy(s1, "Copyright (C) by");
          stringcenter(s1, 60);
          voutlnf("    # %s", s1);
@@ -2285,16 +2361,26 @@ GLOBAL void c_maketitle(void)
       break;
 
    }  /* switch (desttype) */
-
-}  /*c_maketitle*/
-
+}
 
 
 
 
-GLOBAL void pch_titlepage ( void )
+
+/*******************************************************************************
+*
+*  pch_titlepage():
+*     output title page for Pure C Help
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void pch_titlepage(void)
 {
    int   i;  /* counter */
+   
 
    if (titdat.title != NULL)
    {
@@ -2362,131 +2448,196 @@ GLOBAL void pch_titlepage ( void )
    }
 
    outln("");
-
-}       /* pch_titlepage */
-
-
-
-/*      ############################################################
-        # Modulinit
-        ############################################################    */
-LOCAL void init_titdat ( void )
-{
-        int   i;  /* counter */
-        
-        
-        titdat.title   = NULL;
-        titdat.program = NULL;
-        titdat.date    = NULL;
-        titdat.version = NULL;
-        titdat.author  = NULL;
-
-        for (i = 0; i < MAXADDRESS; i++)
-        {
-           titdat.address[i] = NULL;
-        }
-
-        titdat.keywords               = NULL; /* New in r6pl15 [NHz] */
-        titdat.description            = NULL; /* New in r6pl15 [NHz] */
-        titdat.robots                 = NULL; /* New in V6.5.17 */
-        titdat.company                = NULL; /* New in V6.5.2 [NHz] */
-        titdat.category               = NULL; /* New in V6.5.2 [NHz] */
-        titdat.htmltitle              = NULL;
-        titdat.domain_name            = NULL;
-        titdat.domain_link            = NULL;
-        titdat.contact_name           = NULL;
-        titdat.contact_link           = NULL;
-        titdat.programimage           = NULL;
-        titdat.appletitle             = NULL;        /* V6.5.17 */
-        titdat.appleicon              = NULL;         /* V6.5.17 */
-        titdat.authorimage            = NULL;
-        titdat.authoricon             = NULL;
-        titdat.authoricon_active      = NULL;
-        titdat.authoriconWidth        = 0;
-        titdat.authoriconHeight       = 0;
-        titdat.authoriconActiveWidth  = 0;
-        titdat.authoriconActiveHeight = 0;
-
-        titdat.drc_statusline         = NULL;
-        titdat.stg_database           = NULL;
-        titdat.translator             = NULL;
-        titdat.distributor            = NULL;
 }
 
 
-GLOBAL void init_module_tp ( void )
+
+
+
+/*******************************************************************************
+*
+*  init_titdat():
+*     initialize this module (tp)
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void init_titdat(void)
 {
-        uses_maketitle=         FALSE;
-        called_maketitle=       FALSE;
-        address_counter=        0;
+   int   i;  /* counter */
 
-        titleprogram[0]=        EOS;
 
-        init_titdat();
+   titdat.title   = NULL;
+   titdat.program = NULL;
+   titdat.date    = NULL;
+   titdat.version = NULL;
+   titdat.author  = NULL;
+
+   for (i = 0; i < MAXADDRESS; i++)
+   {
+      titdat.address[i] = NULL;
+   }
+
+   titdat.keywords               = NULL;  /* New in r6pl15 [NHz] */
+   titdat.description            = NULL;  /* New in r6pl15 [NHz] */
+   titdat.robots                 = NULL;  /* New in V6.5.17 */
+   titdat.company                = NULL;  /* New in V6.5.2 [NHz] */
+   titdat.category               = NULL;  /* New in V6.5.2 [NHz] */
+   titdat.htmltitle              = NULL;
+   titdat.domain_name            = NULL;
+   titdat.domain_link            = NULL;
+   titdat.contact_name           = NULL;
+   titdat.contact_link           = NULL;
+   titdat.programimage           = NULL;
+   titdat.appletitle             = NULL;  /* V6.5.17 */
+   titdat.appleicon              = NULL;  /* V6.5.17 */
+   titdat.authorimage            = NULL;
+   titdat.authoricon             = NULL;
+   titdat.authoricon_active      = NULL;
+   titdat.authoriconWidth        = 0;
+   titdat.authoriconHeight       = 0;
+   titdat.authoriconActiveWidth  = 0;
+   titdat.authoriconActiveHeight = 0;
+
+   titdat.drc_statusline         = NULL;
+   titdat.stg_database           = NULL;
+   titdat.translator             = NULL;
+   titdat.distributor            = NULL;
 }
 
 
-GLOBAL void init_module_tp_pass2 ( void )
+
+
+
+/*******************************************************************************
+*
+*  init_module_tp():
+*     ??? (description missing)
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void init_module_tp(void)
 {
-        titleprogram[0]= EOS;
+   uses_maketitle   = FALSE;
+   called_maketitle = FALSE;
+   address_counter  = 0;
 
-        if (titdat.title!=NULL)
-        {       strcat(titleprogram, titdat.title);
-                strcat(titleprogram, " ");
-        }
+   titleprogram[0]  = EOS;
 
-        if (titdat.program!=NULL)
-        {       strcat(titleprogram, titdat.program);
-        }
-
-        del_whitespaces(titleprogram);
+   init_titdat();
 }
 
 
-LOCAL void free_titdat ( char **var )
+
+
+
+/*******************************************************************************
+*
+*  init_module_tp_pass2():
+*     ??? (description missing)
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void init_module_tp_pass2(void)
 {
-        if (*var!=NULL)
-        {       um_free(*var);
-                *var= NULL;
-        }
+   titleprogram[0] = EOS;
+
+   if (titdat.title != NULL)
+   {
+      strcat(titleprogram, titdat.title);
+      strcat(titleprogram, " ");
+   }
+
+   if (titdat.program != NULL)
+   {
+      strcat(titleprogram, titdat.program);
+   }
+
+   del_whitespaces(titleprogram);
 }
 
 
-GLOBAL void exit_module_tp ( void )
+
+
+
+/*******************************************************************************
+*
+*  free_titdat():
+*     reset all content of titdat[]
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void free_titdat(
+
+char **var)  /* ^^ to string in titdat.[] */
 {
-        int i;
-
-        free_titdat(&(titdat.title));
-        free_titdat(&(titdat.program));
-        free_titdat(&(titdat.date));
-        free_titdat(&(titdat.version));
-        free_titdat(&(titdat.author));  
-
-        for (i=address_counter; i>=1; i--)
-        {       free_titdat(&(titdat.address[i]));
-        }
-
-        free_titdat(&(titdat.keywords)); /* New in r6pl15 [NHz] */
-        free_titdat(&(titdat.description)); /* New in r6pl15 [NHz] */
-        free_titdat(&(titdat.company)); /* New in V6.5.2 [NHz] */
-        free_titdat(&(titdat.category)); /* New in V6.5.2 [NHz] */
-        free_titdat(&(titdat.htmltitle));
-        free_titdat(&(titdat.domain_name));
-        free_titdat(&(titdat.domain_link));
-        free_titdat(&(titdat.contact_name));
-        free_titdat(&(titdat.contact_link));
-        free_titdat(&(titdat.programimage));
-        free_titdat(&(titdat.authorimage));
-        free_titdat(&(titdat.authoricon));
-        free_titdat(&(titdat.authoricon_active));
-
-        free_titdat(&(titdat.drc_statusline));  
-        free_titdat(&(titdat.stg_database));    
-        free_titdat(&(titdat.translator));    
-        free_titdat(&(titdat.distributor));    
+   if (*var != NULL)
+   {
+      um_free(*var);
+      *var = NULL;
+   }
 }
 
 
-/*      ############################################################
-        # tp.c
-        ############################################################    */
+
+
+
+/*******************************************************************************
+*
+*  exit_module_tp():
+*     reset all content of titdat.[]
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void exit_module_tp(void)
+{
+   int   i;  /* */
+
+
+   free_titdat(&(titdat.title));
+   free_titdat(&(titdat.program));
+   free_titdat(&(titdat.date));
+   free_titdat(&(titdat.version));
+   free_titdat(&(titdat.author));  
+
+   for (i = address_counter; i >= 1; i--)
+   {
+      free_titdat(&(titdat.address[i]));
+   }
+
+   free_titdat(&(titdat.keywords));       /* New in r6pl15 [NHz] */
+   free_titdat(&(titdat.description));    /* New in r6pl15 [NHz] */
+   free_titdat(&(titdat.company));        /* New in V6.5.2 [NHz] */
+   free_titdat(&(titdat.category));       /* New in V6.5.2 [NHz] */
+   free_titdat(&(titdat.htmltitle));
+   free_titdat(&(titdat.domain_name));
+   free_titdat(&(titdat.domain_link));
+   free_titdat(&(titdat.contact_name));
+   free_titdat(&(titdat.contact_link));
+   free_titdat(&(titdat.programimage));
+   free_titdat(&(titdat.authorimage));
+   free_titdat(&(titdat.authoricon));
+   free_titdat(&(titdat.authoricon_active));
+
+   free_titdat(&(titdat.drc_statusline));  
+   free_titdat(&(titdat.stg_database));    
+   free_titdat(&(titdat.translator));    
+   free_titdat(&(titdat.distributor));    
+}
+
+
+/* +++ EOF +++ */
