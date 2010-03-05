@@ -65,6 +65,7 @@
 *                - CODE_LATIN4
 *                - CODE_CYRILLIC
 *                - CODE_ARABIC
+*                - CODE_GREEK
 *
 ******************************************|************************************/
 
@@ -132,8 +133,9 @@
 #define CODE_LATIN4   20                  /* ISO Latin 4 (iso-8859-4) "North European" */
 #define CODE_CYRILLIC 21                  /* ISO Cyrillic (iso-8859-5) */
 #define CODE_ARABIC   22                  /* ISO Arabic (iso-8859-6) */
+#define CODE_GREEK    23                  /* ISO Greek (iso-8859-7) */
 
-#define CODE_TOTAL    23                  /* # of supported encodings */
+#define CODE_TOTAL    24                  /* # of supported encodings */
 
    /* --- Compiler- und systemabhaengige Dinge setzen --- */
 

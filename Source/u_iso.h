@@ -11,6 +11,7 @@
 *                 - u_CODE_LATIN4[]:   iso-8859-4, Latin4, North European
 *                 - u_CODE_CYRILLIC[]: iso-8859-5, Cyrillic
 *                 - u_CODE_ARABIC[]:   iso-8859-6, Arabic
+*                 - u_CODE_GREEK[]:    iso-8859-7, Greek
 *
 *  Open Source  : since 2001
 *
@@ -57,6 +58,7 @@
 *                - CODE_LATIN4
 *                - CODE_CYRILLIC
 *                - CODE_ARABIC
+*                - CODE_GREEK
 *
 ******************************************|************************************/
 
@@ -3598,6 +3600,590 @@ static UWORD   sort_CODE_ARABIC[] =       /* CODE_ARABIC */
    U_NIL,                                 /* 0xFD            <undefined> */
    U_NIL,                                 /* 0xFE            <undefined> */
    U_NIL                                  /* 0xFF            <undefined> */
+};
+
+
+
+
+
+
+
+
+
+
+/******************************************************************************
+*
+*  u_CODE_GREEK[]:
+*     Unicode named codepage for ISO encoding Greek (iso-8859-7)
+*
+*  Name:             ISO 8859-7:2003 to Unicode
+*  Unicode version:  4.0
+*  Table version:    2.0
+*  Table format:     Format A
+*  Date:             2003-Nov-12
+*  Authors:          Ken Whistler <kenw@sybase.com>
+*
+******************************************|************************************/
+
+static UWORD   u_CODE_GREEK[] =           /* CODE_GREEK */
+{
+   U_NUL,                                 /* 0x00  NULl */
+   U_SOH,                                 /* 0x01  Start Of Heading */
+   U_STX,                                 /* 0x02  Start of TeXt */
+   U_ETX,                                 /* 0x03  End of TeXt */
+   U_EOT,                                 /* 0x04  End Of Transmission */
+   U_ENQ,                                 /* 0x05  ENQuiry */
+   U_ACK,                                 /* 0x06  ACKnowledge */
+   U_BEL,                                 /* 0x07  BELl */
+   U_BS,                                  /* 0x08  BackSpace */
+   U_HT,                                  /* 0x09  Horizontal Tabulation */
+   U_LF,                                  /* 0x0a  Line Feed */
+   U_VT,                                  /* 0x0b  Vertical Tabulation */
+   U_FF,                                  /* 0x0c  Form Feed */
+   U_CR,                                  /* 0x0d  Carriage Return */
+   U_SO,                                  /* 0x0e  Shift Out */
+   U_SI,                                  /* 0x0f  Shift In */
+   U_DLE,                                 /* 0x10  Data Link Escape */
+   U_DC1,                                 /* 0x11  Device Control 1 */
+   U_DC2,                                 /* 0x12  Device Control 2 */
+   U_DC3,                                 /* 0x13  Device Control 3 */
+   U_DC4,                                 /* 0x14  Device Control 4 */
+   U_NAK,                                 /* 0x15  Negative AcKnowledge */
+   U_SYN,                                 /* 0x16  SYNchronous idle */
+   U_ETB,                                 /* 0x17  End of Transmission Block */
+   U_CAN,                                 /* 0x18  CANcel */
+   U_EM,                                  /* 0x19  End of Medium */
+   U_SUB,                                 /* 0x1a  SUBstitute */
+   U_ESC,                                 /* 0x1b  ESCape */
+   U_FS,                                  /* 0x1c  File Separator */
+   U_GS,                                  /* 0x1d  Group Separator */
+   U_RS,                                  /* 0x1e  Record Separator */
+   U_US,                                  /* 0x1f  Unit Separator */
+
+   U_SP,                                  /* 0x20  SPace */
+   U_ExclamationMark,                     /* 0x21  ! */
+   U_QuotationMark,                       /* 0x22  " */
+   U_NumberSign,                          /* 0x23  # */
+   U_DollarSign,                          /* 0x24  $ */
+   U_PercentSign,                         /* 0x25  % */
+   U_Ampersand,                           /* 0x26  & */
+   U_Apostrophe,                          /* 0x27  ' */
+   U_OpeningParenthesis,                  /* 0x28  ( */
+   U_ClosingParenthesis,                  /* 0x29  ) */
+   U_Asterisk,                            /* 0x2A  * */
+   U_PlusSign,                            /* 0x2B  + */
+   U_Comma,                               /* 0x2C  , */
+   U_HyphenMinus,                         /* 0x2D  - */
+   U_Period,                              /* 0x2E  . */
+   U_Slash,                               /* 0x2F  / */
+   U_Digit0,                              /* 0x30  0 */
+   U_Digit1,                              /* 0x31  1 */
+   U_Digit2,                              /* 0x32  2 */
+   U_Digit3,                              /* 0x33  3 */
+   U_Digit4,                              /* 0x34  4 */
+   U_Digit5,                              /* 0x35  5 */
+   U_Digit6,                              /* 0x36  6 */
+   U_Digit7,                              /* 0x37  7 */
+   U_Digit8,                              /* 0x38  8 */
+   U_Digit9,                              /* 0x39  9 */
+   U_Colon,                               /* 0x3A  : */
+   U_Semicolon,                           /* 0x3B  ; */
+   U_LessThanSign,                        /* 0x3C  < */
+   U_EqualsSign,                          /* 0x3D  = */
+   U_GreaterThanSign,                     /* 0x3E  > */
+   U_QuestionMark,                        /* 0x3F  ? */
+   U_CommercialAt,                        /* 0x40  @ */
+   U_LatinCapitalLetterA,                 /* 0x41  A */
+   U_LatinCapitalLetterB,                 /* 0x42  B */
+   U_LatinCapitalLetterC,                 /* 0x43  C */
+   U_LatinCapitalLetterD,                 /* 0x44  D */
+   U_LatinCapitalLetterE,                 /* 0x45  E */
+   U_LatinCapitalLetterF,                 /* 0x46  F */
+   U_LatinCapitalLetterG,                 /* 0x47  G */
+   U_LatinCapitalLetterH,                 /* 0x48  H */
+   U_LatinCapitalLetterI,                 /* 0x49  I */
+   U_LatinCapitalLetterJ,                 /* 0x4A  J */
+   U_LatinCapitalLetterK,                 /* 0x4B  K */
+   U_LatinCapitalLetterL,                 /* 0x4C  L */
+   U_LatinCapitalLetterM,                 /* 0x4D  M */
+   U_LatinCapitalLetterN,                 /* 0x4E  N */
+   U_LatinCapitalLetterO,                 /* 0x4F  O */
+   U_LatinCapitalLetterP,                 /* 0x50  P */
+   U_LatinCapitalLetterQ,                 /* 0x51  Q */
+   U_LatinCapitalLetterR,                 /* 0x52  R */
+   U_LatinCapitalLetterS,                 /* 0x53  S */
+   U_LatinCapitalLetterT,                 /* 0x54  T */
+   U_LatinCapitalLetterU,                 /* 0x55  U */
+   U_LatinCapitalLetterV,                 /* 0x56  V */
+   U_LatinCapitalLetterW,                 /* 0x57  W */
+   U_LatinCapitalLetterX,                 /* 0x58  X */
+   U_LatinCapitalLetterY,                 /* 0x59  Y */
+   U_LatinCapitalLetterZ,                 /* 0x5A  Z */
+   U_OpeningSquareBracket,                /* 0x5B  [ */
+   U_Backslash,                           /* 0x5C  \ */
+   U_ClosingSquareBracket,                /* 0x5D  ] */
+   U_CircumflexAccent,                    /* 0x5E  ^ */
+   U_SpacingUnderscore,                   /* 0x5F  _ */
+   U_GraveAccent,                         /* 0x60  ` */
+   U_LatinSmallLetterA,                   /* 0x61  a */
+   U_LatinSmallLetterB,                   /* 0x62  b */
+   U_LatinSmallLetterC,                   /* 0x63  c */
+   U_LatinSmallLetterD,                   /* 0x64  d */
+   U_LatinSmallLetterE,                   /* 0x65  e */
+   U_LatinSmallLetterF,                   /* 0x66  f */
+   U_LatinSmallLetterG,                   /* 0x67  g */
+   U_LatinSmallLetterH,                   /* 0x68  h */
+   U_LatinSmallLetterI,                   /* 0x69  i */
+   U_LatinSmallLetterJ,                   /* 0x6A  j */
+   U_LatinSmallLetterK,                   /* 0x6B  k */
+   U_LatinSmallLetterL,                   /* 0x6C  l */
+   U_LatinSmallLetterM,                   /* 0x6D  m */
+   U_LatinSmallLetterN,                   /* 0x6E  n */
+   U_LatinSmallLetterO,                   /* 0x6F  o */
+   U_LatinSmallLetterP,                   /* 0x70  p */
+   U_LatinSmallLetterQ,                   /* 0x71  q */
+   U_LatinSmallLetterR,                   /* 0x72  r */
+   U_LatinSmallLetterS,                   /* 0x73  s */
+   U_LatinSmallLetterT,                   /* 0x74  t */
+   U_LatinSmallLetterU,                   /* 0x75  u */
+   U_LatinSmallLetterV,                   /* 0x76  v */
+   U_LatinSmallLetterW,                   /* 0x77  w */
+   U_LatinSmallLetterX,                   /* 0x78  x */
+   U_LatinSmallLetterY,                   /* 0x79  y */
+   U_LatinSmallLetterZ,                   /* 0x7A  z */
+   U_OpeningCurlyBracket,                 /* 0x7B  { */
+   U_VerticalLine,                        /* 0x7C  | */
+   U_ClosingCurlyBracket,                 /* 0x7D  } */
+   U_Tilde,                               /* 0x7E  ~ */
+   U_DEL,                                 /* 0x7F  Delete */
+
+   U_NIL,                                 /* 0x80   0x0080   <control> */
+   U_NIL,                                 /* 0x81   0x0081   <control> */
+   U_NIL,                                 /* 0x82   0x0082   <control> */
+   U_NIL,                                 /* 0x83   0x0083   <control> */
+   U_NIL,                                 /* 0x84   0x0084   <control> */
+   U_NIL,                                 /* 0x85   0x0085   <control> */
+   U_NIL,                                 /* 0x86   0x0086   <control> */
+   U_NIL,                                 /* 0x87   0x0087   <control> */
+   U_NIL,                                 /* 0x88   0x0088   <control> */
+   U_NIL,                                 /* 0x89   0x0089   <control> */
+   U_NIL,                                 /* 0x8A   0x008A   <control> */
+   U_NIL,                                 /* 0x8B   0x008B   <control> */
+   U_NIL,                                 /* 0x8C   0x008C   <control> */
+   U_NIL,                                 /* 0x8D   0x008D   <control> */
+   U_NIL,                                 /* 0x8E   0x008E   <control> */
+   U_NIL,                                 /* 0x8F   0x008F   <control> */
+   U_NIL,                                 /* 0x90   0x0090   <control> */
+   U_NIL,                                 /* 0x91   0x0091   <control> */
+   U_NIL,                                 /* 0x92   0x0092   <control> */
+   U_NIL,                                 /* 0x93   0x0093   <control> */
+   U_NIL,                                 /* 0x94   0x0094   <control> */
+   U_NIL,                                 /* 0x95   0x0095   <control> */
+   U_NIL,                                 /* 0x96   0x0096   <control> */
+   U_NIL,                                 /* 0x97   0x0097   <control> */
+   U_NIL,                                 /* 0x98   0x0098   <control> */
+   U_NIL,                                 /* 0x99   0x0099   <control> */
+   U_NIL,                                 /* 0x9A   0x009A   <control> */
+   U_NIL,                                 /* 0x9B   0x009B   <control> */
+   U_NIL,                                 /* 0x9C   0x009C   <control> */
+   U_NIL,                                 /* 0x9D   0x009D   <control> */
+   U_NIL,                                 /* 0x9E   0x009E   <control> */
+   U_NIL,                                 /* 0x9F   0x009F   <control> */
+   
+   U_NB_SP,                               /* 0xA0   0x00A0   NO-BREAK SPACE */
+   U_LeftSingleQuotationMark,             /* 0xA1   0x2018   LEFT SINGLE QUOTATION MARK */
+   U_RightSingleQuotationMark,            /* 0xA2   0x2019   RIGHT SINGLE QUOTATION MARK */
+   U_PoundSign,                           /* 0xA3   0x00A3   POUND SIGN */
+   U_EuroSign,                            /* 0xA4   0x20AC   EURO SIGN */
+   U_DrachmaSign,                         /* 0xA5   0x20AF   DRACHMA SIGN */
+   U_BrokenVerticalBar,                   /* 0xA6   0x00A6   BROKEN BAR */
+   U_SectionSign,                         /* 0xA7   0x00A7   SECTION SIGN */
+   U_Diaeresis,                           /* 0xA8   0x00A8   DIAERESIS */
+   U_CopyrightSign,                       /* 0xA9   0x00A9   COPYRIGHT SIGN */
+   U_GreekYpogegrammeni,                  /* 0xAA   0x037A   GREEK YPOGEGRAMMENI */
+   U_LeftPointingGuillemet,               /* 0xAB   0x00AB   LEFT-POINTING DOUBLE ANGLE QUOTATION MARK */
+   U_NotSign,                             /* 0xAC   0x00AC   NOT SIGN */
+   U_SoftHyphen,                          /* 0xAD   0x00AD   SOFT HYPHEN */
+   U_NIL,                                 /* 0xAE            <undefined> */
+   U_HorizontalBar,                       /* 0xAF   0x2015   HORIZONTAL BAR */
+   U_DegreeSign,                          /* 0xB0   0x00B0   DEGREE SIGN */
+   U_PlusMinusSign,                       /* 0xB1   0x00B1   PLUS-MINUS SIGN */
+   U_SuperscriptTwo,                      /* 0xB2   0x00B2   SUPERSCRIPT TWO */
+   U_SuperscriptThree,                    /* 0xB3   0x00B3   SUPERSCRIPT THREE */
+   U_GreekTonus,                          /* 0xB4   0x0384   GREEK TONOS */
+   U_GreekDialytikaTonos,                 /* 0xB5   0x0385   GREEK DIALYTIKA TONOS */
+   U_GreekCapitalLetterAlphaWithTonos,    /* 0xB6   0x0386   GREEK CAPITAL LETTER ALPHA WITH TONOS */
+   U_MiddleDot,                           /* 0xB7   0x00B7   MIDDLE DOT */
+   U_GreekCapitalLetterEpsilonWithTonos,  /* 0xB8   0x0388   GREEK CAPITAL LETTER EPSILON WITH TONOS */
+   U_GreekCapitalLetterEtaWithTonos,      /* 0xB9   0x0389   GREEK CAPITAL LETTER ETA WITH TONOS */
+   U_GreekCapitalLetterIotaWithTonos,     /* 0xBA   0x038A   GREEK CAPITAL LETTER IOTA WITH TONOS */
+   U_RightPointingGuillemet,              /* 0xBB   0x00BB   RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK */
+   U_GreekCapitalLetterOmicronWithTonos,  /* 0xBC   0x038C   GREEK CAPITAL LETTER OMICRON WITH TONOS */
+   U_VulgarFractionOneHalf,               /* 0xBD   0x00BD   VULGAR FRACTION ONE HALF */
+   U_GreekCapitalLetterUpsilonWithTonos,  /* 0xBE   0x038E   GREEK CAPITAL LETTER UPSILON WITH TONOS */
+   U_GreekCapitalLetterOmegaWithTonos,    /* 0xBF   0x038F   GREEK CAPITAL LETTER OMEGA WITH TONOS */
+                                          /* 0xC0   0x0390   GREEK SMALL LETTER IOTA WITH DIALYTIKA AND TONOS */
+   U_GreekSmallLetterIotaWithDialytikaAndTonos,
+   U_GreekCapitalLetterAlpha,             /* 0xC1   0x0391   GREEK CAPITAL LETTER ALPHA */
+   U_GreekCapitalLetterBeta,              /* 0xC2   0x0392   GREEK CAPITAL LETTER BETA */
+   U_GreekCapitalLetterGamma,             /* 0xC3   0x0393   GREEK CAPITAL LETTER GAMMA */
+   U_GreekCapitalLetterDelta,             /* 0xC4   0x0394   GREEK CAPITAL LETTER DELTA */
+   U_GreekCapitalLetterEpsilon,           /* 0xC5   0x0395   GREEK CAPITAL LETTER EPSILON */
+   U_GreekCapitalLetterZeta,              /* 0xC6   0x0396   GREEK CAPITAL LETTER ZETA */
+   U_GreekCapitalLetterEta,               /* 0xC7   0x0397   GREEK CAPITAL LETTER ETA */
+   U_GreekCapitalLetterTheta,             /* 0xC8   0x0398   GREEK CAPITAL LETTER THETA */
+   U_GreekCapitalLetterIota,              /* 0xC9   0x0399   GREEK CAPITAL LETTER IOTA */
+   U_GreekCapitalLetterKappa,             /* 0xCA   0x039A   GREEK CAPITAL LETTER KAPPA */
+   U_GreekCapitalLetterLamda,             /* 0xCB   0x039B   GREEK CAPITAL LETTER LAMDA */
+   U_GreekCapitalLetterMu,                /* 0xCC   0x039C   GREEK CAPITAL LETTER MU */
+   U_GreekCapitalLetterNu,                /* 0xCD   0x039D   GREEK CAPITAL LETTER NU */
+   U_GreekCapitalLetterXi,                /* 0xCE   0x039E   GREEK CAPITAL LETTER XI */
+   U_GreekCapitalLetterOmicron,           /* 0xCF   0x039F   GREEK CAPITAL LETTER OMICRON */
+   U_GreekCapitalLetterPi,                /* 0xD0   0x03A0   GREEK CAPITAL LETTER PI */
+   U_GreekCapitalLetterRho,               /* 0xD1   0x03A1   GREEK CAPITAL LETTER RHO */
+   U_NIL,                                 /* 0xD2            <undefined> */
+   U_GreekCapitalLetterSigma,             /* 0xD3   0x03A3   GREEK CAPITAL LETTER SIGMA */
+   U_GreekCapitalLetterTau,               /* 0xD4   0x03A4   GREEK CAPITAL LETTER TAU */
+   U_GreekCapitalLetterUpsilon,           /* 0xD5   0x03A5   GREEK CAPITAL LETTER UPSILON */
+   U_GreekCapitalLetterPhi,               /* 0xD6   0x03A6   GREEK CAPITAL LETTER PHI */
+   U_GreekCapitalLetterChi,               /* 0xD7   0x03A7   GREEK CAPITAL LETTER CHI */
+   U_GreekCapitalLetterPsi,               /* 0xD8   0x03A8   GREEK CAPITAL LETTER PSI */
+   U_GreekCapitalLetterOmega,             /* 0xD9   0x03A9   GREEK CAPITAL LETTER OMEGA */
+   U_GreekCapitalLetterIotaWithDialytika, /* 0xDA   0x03AA   GREEK CAPITAL LETTER IOTA WITH DIALYTIKA */
+                                          /* 0xDB   0x03AB   GREEK CAPITAL LETTER UPSILON WITH DIALYTIKA */
+   U_GreekCapitalLetterUpsilonWithDialytika,
+   U_GreekSmallLetterAlphaWithTonos,      /* 0xDC   0x03AC   GREEK SMALL LETTER ALPHA WITH TONOS */
+   U_GreekSmallLetterEpsilonWithTonos,    /* 0xDD   0x03AD   GREEK SMALL LETTER EPSILON WITH TONOS */
+   U_GreekSmallLetterEtaWithTonos,        /* 0xDE   0x03AE   GREEK SMALL LETTER ETA WITH TONOS */
+   U_GreekSmallLetterIotaWithTonos,       /* 0xDF   0x03AF   GREEK SMALL LETTER IOTA WITH TONOS */
+                                          /* 0xE0   0x03B0   GREEK SMALL LETTER UPSILON WITH DIALYTIKA AND TONOS */
+   U_GreekSmallLetterUpsilonWithDialytikaAndTonos,
+   U_GreekSmallLetterAlpha,               /* 0xE1   0x03B1   GREEK SMALL LETTER ALPHA */
+   U_GreekSmallLetterBeta,                /* 0xE2   0x03B2   GREEK SMALL LETTER BETA */
+   U_GreekSmallLetterGamma,               /* 0xE3   0x03B3   GREEK SMALL LETTER GAMMA */
+   U_GreekSmallLetterDelta,               /* 0xE4   0x03B4   GREEK SMALL LETTER DELTA */
+   U_GreekSmallLetterEpsilon,             /* 0xE5   0x03B5   GREEK SMALL LETTER EPSILON */
+   U_GreekSmallLetterZeta,                /* 0xE6   0x03B6   GREEK SMALL LETTER ZETA */
+   U_GreekSmallLetterEta,                 /* 0xE7   0x03B7   GREEK SMALL LETTER ETA */
+   U_GreekSmallLetterTheta,               /* 0xE8   0x03B8   GREEK SMALL LETTER THETA */
+   U_GreekSmallLetterIota,                /* 0xE9   0x03B9   GREEK SMALL LETTER IOTA */
+   U_GreekSmallLetterKappa,               /* 0xEA   0x03BA   GREEK SMALL LETTER KAPPA */
+   U_GreekSmallLetterLamda,               /* 0xEB   0x03BB   GREEK SMALL LETTER LAMDA */
+   U_GreekSmallLetterMu,                  /* 0xEC   0x03BC   GREEK SMALL LETTER MU */
+   U_GreekSmallLetterNu,                  /* 0xED   0x03BD   GREEK SMALL LETTER NU */
+   U_GreekSmallLetterXi,                  /* 0xEE   0x03BE   GREEK SMALL LETTER XI */
+   U_GreekSmallLetterOmicron,             /* 0xEF   0x03BF   GREEK SMALL LETTER OMICRON */
+   U_GreekSmallLetterPi,                  /* 0xF0   0x03C0   GREEK SMALL LETTER PI */
+   U_GreekSmallLetterRho,                 /* 0xF1   0x03C1   GREEK SMALL LETTER RHO */
+   U_GreekSmallLetterFinalSigma,          /* 0xF2   0x03C2   GREEK SMALL LETTER FINAL SIGMA */
+   U_GreekSmallLetterSigma,               /* 0xF3   0x03C3   GREEK SMALL LETTER SIGMA */
+   U_GreekSmallLetterTau,                 /* 0xF4   0x03C4   GREEK SMALL LETTER TAU */
+   U_GreekSmallLetterUpsilon,             /* 0xF5   0x03C5   GREEK SMALL LETTER UPSILON */
+   U_GreekSmallLetterPhi,                 /* 0xF6   0x03C6   GREEK SMALL LETTER PHI */
+   U_GreekSmallLetterChi,                 /* 0xF7   0x03C7   GREEK SMALL LETTER CHI */
+   U_GreekSmallLetterPsi,                 /* 0xF8   0x03C8   GREEK SMALL LETTER PSI */
+   U_GreekSmallLetterOmega,               /* 0xF9   0x03C9   GREEK SMALL LETTER OMEGA */
+   U_GreekSmallLetterIotaWithDialytika,   /* 0xFA   0x03CA   GREEK SMALL LETTER IOTA WITH DIALYTIKA */
+   U_GreekSmallLetterUpsilonWithDialytika,/* 0xFB   0x03CB   GREEK SMALL LETTER UPSILON WITH DIALYTIKA */
+   U_GreekSmallLetterOmicronWithTonos,    /* 0xFC   0x03CC   GREEK SMALL LETTER OMICRON WITH TONOS */
+   U_GreekSmallLetterUpsilonWithTonos,    /* 0xFD   0x03CD   GREEK SMALL LETTER UPSILON WITH TONOS */
+   U_GreekSmallLetterOmegaWithTonos,      /* 0xFE   0x03CE   GREEK SMALL LETTER OMEGA WITH TONOS */
+   U_NIL,                                 /* 0xFF            <undefined> */
+};
+
+
+
+
+
+/******************************************************************************
+*
+*  CODE_GREEK_lig[]:
+*     list of ligatures:
+*
+*  CODE_GREEK_lig[0] is the original ligature character
+*  CODE_GREEK_lig[1] + CODE_GREEK_lig[2] are the resolved ligature characters
+*
+******************************************|************************************/
+
+static UWORD   CODE_GREEK_lig[][3] =      /* CODE_GREEK character ligatures */
+{
+   {0x0000, U_NIL, U_NIL}                 /* list terminator */
+};
+
+
+
+
+
+/******************************************************************************
+*
+*  CODE_GREEK sorting table:
+*
+*  table format: sortingCharacter, (ANSI hex value  |  Original character)
+*  
+*
+******************************************|************************************/
+
+static UWORD   sort_CODE_GREEK[] =        /* CODE_GREEK */
+{
+   U_NUL,                                 /* 0x00  NULl */
+   U_SOH,                                 /* 0x01  Start Of Heading */
+   U_STX,                                 /* 0x02  Start of TeXt */
+   U_ETX,                                 /* 0x03  End of TeXt */
+   U_EOT,                                 /* 0x04  End Of Transmission */
+   U_ENQ,                                 /* 0x05  ENQuiry */
+   U_ACK,                                 /* 0x06  ACKnowledge */
+   U_BEL,                                 /* 0x07  BELl */
+   U_BS,                                  /* 0x08  BackSpace */
+   U_HT,                                  /* 0x09  Horizontal Tabulation */
+   U_LF,                                  /* 0x0a  Line Feed */
+   U_VT,                                  /* 0x0b  Vertical Tabulation */
+   U_FF,                                  /* 0x0c  Form Feed */
+   U_CR,                                  /* 0x0d  Carriage Return */
+   U_SO,                                  /* 0x0e  Shift Out */
+   U_SI,                                  /* 0x0f  Shift In */
+   U_DLE,                                 /* 0x10  Data Link Escape */
+   U_DC1,                                 /* 0x11  Device Control 1 */
+   U_DC2,                                 /* 0x12  Device Control 2 */
+   U_DC3,                                 /* 0x13  Device Control 3 */
+   U_DC4,                                 /* 0x14  Device Control 4 */
+   U_NAK,                                 /* 0x15  Negative AcKnowledge */
+   U_SYN,                                 /* 0x16  SYNchronous idle */
+   U_ETB,                                 /* 0x17  End of Transmission Block */
+   U_CAN,                                 /* 0x18  CANcel */
+   U_EM,                                  /* 0x19  End of Medium */
+   U_SUB,                                 /* 0x1a  SUBstitute */
+   U_ESC,                                 /* 0x1b  ESCape */
+   U_FS,                                  /* 0x1c  File Separator */
+   U_GS,                                  /* 0x1d  Group Separator */
+   U_RS,                                  /* 0x1e  Record Separator */
+   U_US,                                  /* 0x1f  Unit Separator */
+
+   U_SP,                                  /* 0x20  SPace */
+   U_ExclamationMark,                     /* 0x21  ! */
+   U_QuotationMark,                       /* 0x22  " */
+   U_NumberSign,                          /* 0x23  # */
+   U_DollarSign,                          /* 0x24  $ */
+   U_PercentSign,                         /* 0x25  % */
+   U_Ampersand,                           /* 0x26  & */
+   U_Apostrophe,                          /* 0x27  ' */
+   U_OpeningParenthesis,                  /* 0x28  ( */
+   U_ClosingParenthesis,                  /* 0x29  ) */
+   U_Asterisk,                            /* 0x2A  * */
+   U_PlusSign,                            /* 0x2B  + */
+   U_Comma,                               /* 0x2C  , */
+   U_HyphenMinus,                         /* 0x2D  - */
+   U_Period,                              /* 0x2E  . */
+   U_Slash,                               /* 0x2F  / */
+   U_Digit0,                              /* 0x30  0 */
+   U_Digit1,                              /* 0x31  1 */
+   U_Digit2,                              /* 0x32  2 */
+   U_Digit3,                              /* 0x33  3 */
+   U_Digit4,                              /* 0x34  4 */
+   U_Digit5,                              /* 0x35  5 */
+   U_Digit6,                              /* 0x36  6 */
+   U_Digit7,                              /* 0x37  7 */
+   U_Digit8,                              /* 0x38  8 */
+   U_Digit9,                              /* 0x39  9 */
+   U_Colon,                               /* 0x3A  : */
+   U_Semicolon,                           /* 0x3B  ; */
+   U_LessThanSign,                        /* 0x3C  < */
+   U_EqualsSign,                          /* 0x3D  = */
+   U_GreaterThanSign,                     /* 0x3E  > */
+   U_QuestionMark,                        /* 0x3F  ? */
+   U_CommercialAt,                        /* 0x40  @ */
+   U_LatinCapitalLetterA,                 /* 0x41  A */
+   U_LatinCapitalLetterB,                 /* 0x42  B */
+   U_LatinCapitalLetterC,                 /* 0x43  C */
+   U_LatinCapitalLetterD,                 /* 0x44  D */
+   U_LatinCapitalLetterE,                 /* 0x45  E */
+   U_LatinCapitalLetterF,                 /* 0x46  F */
+   U_LatinCapitalLetterG,                 /* 0x47  G */
+   U_LatinCapitalLetterH,                 /* 0x48  H */
+   U_LatinCapitalLetterI,                 /* 0x49  I */
+   U_LatinCapitalLetterJ,                 /* 0x4A  J */
+   U_LatinCapitalLetterK,                 /* 0x4B  K */
+   U_LatinCapitalLetterL,                 /* 0x4C  L */
+   U_LatinCapitalLetterM,                 /* 0x4D  M */
+   U_LatinCapitalLetterN,                 /* 0x4E  N */
+   U_LatinCapitalLetterO,                 /* 0x4F  O */
+   U_LatinCapitalLetterP,                 /* 0x50  P */
+   U_LatinCapitalLetterQ,                 /* 0x51  Q */
+   U_LatinCapitalLetterR,                 /* 0x52  R */
+   U_LatinCapitalLetterS,                 /* 0x53  S */
+   U_LatinCapitalLetterT,                 /* 0x54  T */
+   U_LatinCapitalLetterU,                 /* 0x55  U */
+   U_LatinCapitalLetterV,                 /* 0x56  V */
+   U_LatinCapitalLetterW,                 /* 0x57  W */
+   U_LatinCapitalLetterX,                 /* 0x58  X */
+   U_LatinCapitalLetterY,                 /* 0x59  Y */
+   U_LatinCapitalLetterZ,                 /* 0x5A  Z */
+   U_OpeningSquareBracket,                /* 0x5B  [ */
+   U_Backslash,                           /* 0x5C  \ */
+   U_ClosingSquareBracket,                /* 0x5D  ] */
+   U_CircumflexAccent,                    /* 0x5E  ^ */
+   U_SpacingUnderscore,                   /* 0x5F  _ */
+   U_GraveAccent,                         /* 0x60  ` */
+   U_LatinCapitalLetterA,                 /* 0x61  a */
+   U_LatinCapitalLetterB,                 /* 0x62  b */
+   U_LatinCapitalLetterC,                 /* 0x63  c */
+   U_LatinCapitalLetterD,                 /* 0x64  d */
+   U_LatinCapitalLetterE,                 /* 0x65  e */
+   U_LatinCapitalLetterF,                 /* 0x66  f */
+   U_LatinCapitalLetterG,                 /* 0x67  g */
+   U_LatinCapitalLetterH,                 /* 0x68  h */
+   U_LatinCapitalLetterI,                 /* 0x69  i */
+   U_LatinCapitalLetterJ,                 /* 0x6A  j */
+   U_LatinCapitalLetterK,                 /* 0x6B  k */
+   U_LatinCapitalLetterL,                 /* 0x6C  l */
+   U_LatinCapitalLetterM,                 /* 0x6D  m */
+   U_LatinCapitalLetterN,                 /* 0x6E  n */
+   U_LatinCapitalLetterO,                 /* 0x6F  o */
+   U_LatinCapitalLetterP,                 /* 0x70  p */
+   U_LatinCapitalLetterQ,                 /* 0x71  q */
+   U_LatinCapitalLetterR,                 /* 0x72  r */
+   U_LatinCapitalLetterS,                 /* 0x73  s */
+   U_LatinCapitalLetterT,                 /* 0x74  t */
+   U_LatinCapitalLetterU,                 /* 0x75  u */
+   U_LatinCapitalLetterV,                 /* 0x76  v */
+   U_LatinCapitalLetterW,                 /* 0x77  w */
+   U_LatinCapitalLetterX,                 /* 0x78  x */
+   U_LatinCapitalLetterY,                 /* 0x79  y */
+   U_LatinCapitalLetterZ,                 /* 0x7A  z */
+   U_OpeningCurlyBracket,                 /* 0x7B  { */
+   U_VerticalLine,                        /* 0x7C  | */
+   U_ClosingCurlyBracket,                 /* 0x7D  } */
+   U_Tilde,                               /* 0x7E  ~ */
+   U_DEL,                                 /* 0x7F  Delete */
+
+   U_NIL,                                 /* 0x80   0x0080   <control> */
+   U_NIL,                                 /* 0x81   0x0081   <control> */
+   U_NIL,                                 /* 0x82   0x0082   <control> */
+   U_NIL,                                 /* 0x83   0x0083   <control> */
+   U_NIL,                                 /* 0x84   0x0084   <control> */
+   U_NIL,                                 /* 0x85   0x0085   <control> */
+   U_NIL,                                 /* 0x86   0x0086   <control> */
+   U_NIL,                                 /* 0x87   0x0087   <control> */
+   U_NIL,                                 /* 0x88   0x0088   <control> */
+   U_NIL,                                 /* 0x89   0x0089   <control> */
+   U_NIL,                                 /* 0x8A   0x008A   <control> */
+   U_NIL,                                 /* 0x8B   0x008B   <control> */
+   U_NIL,                                 /* 0x8C   0x008C   <control> */
+   U_NIL,                                 /* 0x8D   0x008D   <control> */
+   U_NIL,                                 /* 0x8E   0x008E   <control> */
+   U_NIL,                                 /* 0x8F   0x008F   <control> */
+   U_NIL,                                 /* 0x90   0x0090   <control> */
+   U_NIL,                                 /* 0x91   0x0091   <control> */
+   U_NIL,                                 /* 0x92   0x0092   <control> */
+   U_NIL,                                 /* 0x93   0x0093   <control> */
+   U_NIL,                                 /* 0x94   0x0094   <control> */
+   U_NIL,                                 /* 0x95   0x0095   <control> */
+   U_NIL,                                 /* 0x96   0x0096   <control> */
+   U_NIL,                                 /* 0x97   0x0097   <control> */
+   U_NIL,                                 /* 0x98   0x0098   <control> */
+   U_NIL,                                 /* 0x99   0x0099   <control> */
+   U_NIL,                                 /* 0x9A   0x009A   <control> */
+   U_NIL,                                 /* 0x9B   0x009B   <control> */
+   U_NIL,                                 /* 0x9C   0x009C   <control> */
+   U_NIL,                                 /* 0x9D   0x009D   <control> */
+   U_NIL,                                 /* 0x9E   0x009E   <control> */
+   U_NIL,                                 /* 0x9F   0x009F   <control> */
+   
+   U_NB_SP,                               /* 0xA0   0x00A0   NO-BREAK SPACE */
+   U_LeftSingleQuotationMark,             /* 0xA1   0x2018   LEFT SINGLE QUOTATION MARK */
+   U_RightSingleQuotationMark,            /* 0xA2   0x2019   RIGHT SINGLE QUOTATION MARK */
+   U_PoundSign,                           /* 0xA3   0x00A3   POUND SIGN */
+   U_EuroSign,                            /* 0xA4   0x20AC   EURO SIGN */
+   U_DrachmaSign,                         /* 0xA5   0x20AF   DRACHMA SIGN */
+   U_BrokenVerticalBar,                   /* 0xA6   0x00A6   BROKEN BAR */
+   U_SectionSign,                         /* 0xA7   0x00A7   SECTION SIGN */
+   U_Diaeresis,                           /* 0xA8   0x00A8   DIAERESIS */
+   U_CopyrightSign,                       /* 0xA9   0x00A9   COPYRIGHT SIGN */
+   U_GreekYpogegrammeni,                  /* 0xAA   0x037A   GREEK YPOGEGRAMMENI */
+   U_LeftPointingGuillemet,               /* 0xAB   0x00AB   LEFT-POINTING DOUBLE ANGLE QUOTATION MARK */
+   U_NotSign,                             /* 0xAC   0x00AC   NOT SIGN */
+   U_SoftHyphen,                          /* 0xAD   0x00AD   SOFT HYPHEN */
+   U_NIL,                                 /* 0xAE            <undefined> */
+   U_HorizontalBar,                       /* 0xAF   0x2015   HORIZONTAL BAR */
+   U_DegreeSign,                          /* 0xB0   0x00B0   DEGREE SIGN */
+   U_PlusMinusSign,                       /* 0xB1   0x00B1   PLUS-MINUS SIGN */
+   U_SuperscriptTwo,                      /* 0xB2   0x00B2   SUPERSCRIPT TWO */
+   U_SuperscriptThree,                    /* 0xB3   0x00B3   SUPERSCRIPT THREE */
+   U_GreekTonus,                          /* 0xB4   0x0384   GREEK TONOS */
+   U_GreekDialytikaTonos,                 /* 0xB5   0x0385   GREEK DIALYTIKA TONOS */
+   U_GreekCapitalLetterAlpha,             /* 0xB6   0x0386   GREEK CAPITAL LETTER ALPHA WITH TONOS */
+   U_MiddleDot,                           /* 0xB7   0x00B7   MIDDLE DOT */
+   U_GreekCapitalLetterEpsilon,           /* 0xB8   0x0388   GREEK CAPITAL LETTER EPSILON WITH TONOS */
+   U_GreekCapitalLetterEta,               /* 0xB9   0x0389   GREEK CAPITAL LETTER ETA WITH TONOS */
+   U_GreekCapitalLetterIota,              /* 0xBA   0x038A   GREEK CAPITAL LETTER IOTA WITH TONOS */
+   U_RightPointingGuillemet,              /* 0xBB   0x00BB   RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK */
+   U_GreekCapitalLetterOmicron,           /* 0xBC   0x038C   GREEK CAPITAL LETTER OMICRON WITH TONOS */
+   U_VulgarFractionOneHalf,               /* 0xBD   0x00BD   VULGAR FRACTION ONE HALF */
+   U_GreekCapitalLetterUpsilon,           /* 0xBE   0x038E   GREEK CAPITAL LETTER UPSILON WITH TONOS */
+   U_GreekCapitalLetterOmega,             /* 0xBF   0x038F   GREEK CAPITAL LETTER OMEGA WITH TONOS */
+   U_GreekCapitalLetterIota,              /* 0xC0   0x0390   GREEK SMALL LETTER IOTA WITH DIALYTIKA AND TONOS */
+   U_GreekCapitalLetterAlpha,             /* 0xC1   0x0391   GREEK CAPITAL LETTER ALPHA */
+   U_GreekCapitalLetterBeta,              /* 0xC2   0x0392   GREEK CAPITAL LETTER BETA */
+   U_GreekCapitalLetterGamma,             /* 0xC3   0x0393   GREEK CAPITAL LETTER GAMMA */
+   U_GreekCapitalLetterDelta,             /* 0xC4   0x0394   GREEK CAPITAL LETTER DELTA */
+   U_GreekCapitalLetterEpsilon,           /* 0xC5   0x0395   GREEK CAPITAL LETTER EPSILON */
+   U_GreekCapitalLetterZeta,              /* 0xC6   0x0396   GREEK CAPITAL LETTER ZETA */
+   U_GreekCapitalLetterEta,               /* 0xC7   0x0397   GREEK CAPITAL LETTER ETA */
+   U_GreekCapitalLetterTheta,             /* 0xC8   0x0398   GREEK CAPITAL LETTER THETA */
+   U_GreekCapitalLetterIota,              /* 0xC9   0x0399   GREEK CAPITAL LETTER IOTA */
+   U_GreekCapitalLetterKappa,             /* 0xCA   0x039A   GREEK CAPITAL LETTER KAPPA */
+   U_GreekCapitalLetterLamda,             /* 0xCB   0x039B   GREEK CAPITAL LETTER LAMDA */
+   U_GreekCapitalLetterMu,                /* 0xCC   0x039C   GREEK CAPITAL LETTER MU */
+   U_GreekCapitalLetterNu,                /* 0xCD   0x039D   GREEK CAPITAL LETTER NU */
+   U_GreekCapitalLetterXi,                /* 0xCE   0x039E   GREEK CAPITAL LETTER XI */
+   U_GreekCapitalLetterOmicron,           /* 0xCF   0x039F   GREEK CAPITAL LETTER OMICRON */
+   U_GreekCapitalLetterPi,                /* 0xD0   0x03A0   GREEK CAPITAL LETTER PI */
+   U_GreekCapitalLetterRho,               /* 0xD1   0x03A1   GREEK CAPITAL LETTER RHO */
+   U_NIL,                                 /* 0xD2            <undefined> */
+   U_GreekCapitalLetterSigma,             /* 0xD3   0x03A3   GREEK CAPITAL LETTER SIGMA */
+   U_GreekCapitalLetterTau,               /* 0xD4   0x03A4   GREEK CAPITAL LETTER TAU */
+   U_GreekCapitalLetterUpsilon,           /* 0xD5   0x03A5   GREEK CAPITAL LETTER UPSILON */
+   U_GreekCapitalLetterPhi,               /* 0xD6   0x03A6   GREEK CAPITAL LETTER PHI */
+   U_GreekCapitalLetterChi,               /* 0xD7   0x03A7   GREEK CAPITAL LETTER CHI */
+   U_GreekCapitalLetterPsi,               /* 0xD8   0x03A8   GREEK CAPITAL LETTER PSI */
+   U_GreekCapitalLetterOmega,             /* 0xD9   0x03A9   GREEK CAPITAL LETTER OMEGA */
+   U_GreekCapitalLetterIota,              /* 0xDA   0x03AA   GREEK CAPITAL LETTER IOTA WITH DIALYTIKA */
+   U_GreekCapitalLetterUpsilon,           /* 0xDB   0x03AB   GREEK CAPITAL LETTER UPSILON WITH DIALYTIKA */
+   U_GreekCapitalLetterAlpha,             /* 0xDC   0x03AC   GREEK SMALL LETTER ALPHA WITH TONOS */
+   U_GreekCapitalLetterEpsilon,           /* 0xDD   0x03AD   GREEK SMALL LETTER EPSILON WITH TONOS */
+   U_GreekCapitalLetterEta,               /* 0xDE   0x03AE   GREEK SMALL LETTER ETA WITH TONOS */
+   U_GreekCapitalLetterIota,              /* 0xDF   0x03AF   GREEK SMALL LETTER IOTA WITH TONOS */
+   U_GreekCapitalLetterUpsilon,           /* 0xE0   0x03B0   GREEK SMALL LETTER UPSILON WITH DIALYTIKA AND TONOS */
+   U_GreekCapitalLetterAlpha,             /* 0xE1   0x03B1   GREEK SMALL LETTER ALPHA */
+   U_GreekCapitalLetterBeta,              /* 0xE2   0x03B2   GREEK SMALL LETTER BETA */
+   U_GreekCapitalLetterGamma,             /* 0xE3   0x03B3   GREEK SMALL LETTER GAMMA */
+   U_GreekCapitalLetterDelta,             /* 0xE4   0x03B4   GREEK SMALL LETTER DELTA */
+   U_GreekCapitalLetterEpsilon,           /* 0xE5   0x03B5   GREEK SMALL LETTER EPSILON */
+   U_GreekCapitalLetterZeta,              /* 0xE6   0x03B6   GREEK SMALL LETTER ZETA */
+   U_GreekCapitalLetterEta,               /* 0xE7   0x03B7   GREEK SMALL LETTER ETA */
+   U_GreekCapitalLetterTheta,             /* 0xE8   0x03B8   GREEK SMALL LETTER THETA */
+   U_GreekCapitalLetterIota,              /* 0xE9   0x03B9   GREEK SMALL LETTER IOTA */
+   U_GreekCapitalLetterKappa,             /* 0xEA   0x03BA   GREEK SMALL LETTER KAPPA */
+   U_GreekCapitalLetterLamda,             /* 0xEB   0x03BB   GREEK SMALL LETTER LAMDA */
+   U_GreekCapitalLetterMu,                /* 0xEC   0x03BC   GREEK SMALL LETTER MU */
+   U_GreekCapitalLetterNu,                /* 0xED   0x03BD   GREEK SMALL LETTER NU */
+   U_GreekCapitalLetterXi,                /* 0xEE   0x03BE   GREEK SMALL LETTER XI */
+   U_GreekCapitalLetterOmicron,           /* 0xEF   0x03BF   GREEK SMALL LETTER OMICRON */
+   U_GreekCapitalLetterPi,                /* 0xF0   0x03C0   GREEK SMALL LETTER PI */
+   U_GreekCapitalLetterRho,               /* 0xF1   0x03C1   GREEK SMALL LETTER RHO */
+   U_GreekCapitalLetterSigma,             /* 0xF2   0x03C2   GREEK SMALL LETTER FINAL SIGMA */
+   U_GreekCapitalLetterSigma,             /* 0xF3   0x03C3   GREEK SMALL LETTER SIGMA */
+   U_GreekCapitalLetterTau,               /* 0xF4   0x03C4   GREEK SMALL LETTER TAU */
+   U_GreekCapitalLetterUpsilon,           /* 0xF5   0x03C5   GREEK SMALL LETTER UPSILON */
+   U_GreekCapitalLetterPhi,               /* 0xF6   0x03C6   GREEK SMALL LETTER PHI */
+   U_GreekCapitalLetterChi,               /* 0xF7   0x03C7   GREEK SMALL LETTER CHI */
+   U_GreekCapitalLetterPsi,               /* 0xF8   0x03C8   GREEK SMALL LETTER PSI */
+   U_GreekCapitalLetterOmega,             /* 0xF9   0x03C9   GREEK SMALL LETTER OMEGA */
+   U_GreekCapitalLetterIota,              /* 0xFA   0x03CA   GREEK SMALL LETTER IOTA WITH DIALYTIKA */
+   U_GreekCapitalLetterUpsilon,           /* 0xFB   0x03CB   GREEK SMALL LETTER UPSILON WITH DIALYTIKA */
+   U_GreekCapitalLetterOmicron,           /* 0xFC   0x03CC   GREEK SMALL LETTER OMICRON WITH TONOS */
+   U_GreekCapitalLetterUpsilon,           /* 0xFD   0x03CD   GREEK SMALL LETTER UPSILON WITH TONOS */
+   U_GreekCapitalLetterOmega,             /* 0xFE   0x03CE   GREEK SMALL LETTER OMEGA WITH TONOS */
+   U_NIL,                                 /* 0xFF            <undefined> */
 };
 
 
