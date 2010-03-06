@@ -32,7 +32,7 @@
 *  Notes        : Please add yourself as co-author when you change this file.
 *
 *-------------------------------------------------------------------------------
-*  Things to do : - tidy up!
+*  Things to do : -
 *
 *-------------------------------------------------------------------------------
 *  History:
@@ -46,6 +46,7 @@
 *    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  Feb 23: UDO_PL -> UDO_BUILD (no more patchlevels)
 *    fd  Mar 05: file tidied up
+*    fd  Mar 06: read_cliopt_file() decomposes arguments from read file (finally)
 *
 ******************************************|************************************/
 
@@ -1104,16 +1105,16 @@ LOCAL void wait_on_keypress(void)
 
 LOCAL BOOLEAN read_cliopt_file(
 
-const char  *name)                      /* */
+const char  *name)                      /* ^ filename */
 {
-   char     *fargv[MAX_FILE_ARGV + 1],  /* */
-            *ptr,                       /* */
+   char     *fargv[MAX_FILE_ARGV + 1],  /* array of argument values */
+            *ptr,                       /* ^ into read string */
             *mp;                        /* */
-   FILE     *file;                      /* */
-   char      opt[256];                  /* */
-   size_t    sl;                        /* */
+   FILE     *file;                      /* ^ file */
+   char      opt[256];                  /* read buffer */
+   SLONG     sl;                        /* string length */
    int       counter = -1;              /* */
-   int       i;                         /* */
+   int       i;                         /* counter for chars in ptr */
    
 
    file = fopen(name, "r");
@@ -1121,36 +1122,50 @@ const char  *name)                      /* */
    if (!file)
       return FALSE;
 
-   while (fgets(opt, 256, file))
+   while (fgets(opt, 256, file))          /* read file in blocks of 256 */
    {
       sl = strlen(opt);
       
-      while (sl > 0 && opt[sl - 1] < ' ')
+      while (sl > 0 && opt[sl - 1] < ' ') /* TRIM right */
       {
          opt[sl - 1] = EOS;
          sl--;
       }
       
       ptr = opt;
-      
+                                          /* TRIM left */
       while (*ptr != EOS && (*ptr == ' ' || *ptr == '\t') )
          ptr++;
          
       sl = strlen(ptr);
       
-      if (sl > 0)
+      while (sl > 0)
       {
          if (counter + 1 < MAX_FILE_ARGV)
          {
-            mp = (char *)um_malloc(sl * sizeof(char) + 1);
-            
-            if (mp)
+            for (i = 0; i < sl; i++)      /* find end of 'token' */
             {
-               counter++;
-               fargv[counter]= mp;
-               strcpy(fargv[counter], ptr);
+               if (ptr[i] == ' ' || ptr[i] == '\t')
+                  break;
+            }
+
+            if (i > 0)                    /* token found */
+            {                             /* get space for it */
+               mp = (char *)um_malloc((i + 1) * sizeof(char));
+            
+               if (mp)                    /* malloc succeeded */
+               {
+                  counter++;              /* increase counter of recognized arguments */
+                  fargv[counter] = mp;    /* mp points into fargv[] array */
+                                          /* copy the found argument from string into array */
+                  strncpy(fargv[counter], ptr, i);
+                  fargv[counter][i] = EOS;/* close C string! */
+                  ptr += i + 1;           /* shorten string */
+               }
             }
          }
+         
+         sl -= i + 1;                     /* decrease string length counter */
       }
    }
 
@@ -1203,7 +1218,7 @@ const BOOLEAN     from_file)      /* */
 
    i = 0;
 
-   while (cliopt[i].longname[0] != EOS)
+   while ( (cliopt[i].longname[0] != EOS) && (found == FALSE) )
    {
       if (    strcmp(arg, cliopt[i].longname) == 0 
            || (cliopt[i].shortname[0] != EOS && strcmp(arg, cliopt[i].shortname) == 0)
@@ -1245,7 +1260,10 @@ const BOOLEAN     from_file)      /* */
 
    if (!found)
    {
-      if (arg[0] != '-')
+      if (    (arg[0] != '-')             /* no option */ 
+           && (arg[0] != '%')             /* no shell placeholder 
+           && (stricmp(arg, "udo") != 0)  /* no shell program name */
+         )
       {
          strcpy(infile.full, arg);
          found = TRUE;
