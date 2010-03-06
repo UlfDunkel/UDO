@@ -19,24 +19,24 @@ StUpArgv.O
 ; They are compiled, if UDO020.TTP is newer than the *.O-Files even
 ; if the sources are not changed, so the swich between the two
 ; versions is correctly handled
-..\abo.c (UDO020.TTP)
-..\cfg.c (UDO020.TTP)
-..\chr.c (UDO020.TTP)
-..\env.c (UDO020.TTP)
-..\file.c (UDO020.TTP)
-..\img.c (UDO020.TTP)
-..\lang.c (UDO020.TTP)
-..\msg.c (UDO020.TTP)
-..\par.c (UDO020.TTP)
-..\str.c (UDO020.TTP)
-..\sty.c (UDO020.TTP)
-..\tab.c (UDO020.TTP)
-..\toc.c (UDO020.TTP)
-..\toc_html.c (UDO020.TTP)
-..\tp.c (UDO020.TTP)
-..\udo.c (UDO020.TTP)
-..\udomem.c (UDO020.TTP)
-..\cli.c (UDO020.TTP)
+..\abo.c
+..\cfg.c
+..\chr.c
+..\env.c
+..\file.c
+..\img.c
+..\lang.c
+..\msg.c
+..\par.c
+..\str.c
+..\sty.c
+..\tab.c
+..\toc.c
+..\toc_html.c
+..\tp.c
+..\udo.c
+..\udomem.c
+..\cli.c
 
 ; Die TOS-Bibliothek
 pctos.lib		; Moderner Ersatz (look at http://acspro.atari.org)
