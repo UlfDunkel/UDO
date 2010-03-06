@@ -20,6 +20,7 @@
 #   fd  Mar 05: - [Encodings] new ISO codepages added
 #               - [Environments] added
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 06: [UDO]: commandline option '-@ F' enhanced
 #
 ################################################################################
 
@@ -105,6 +106,7 @@
 # ----------------------------------------
       !begin_itemize !compressed
       !item Die UDO-Versionen für Mac OS und Mac OS X melden sich jetzt als ""UDO for Mac OS"" bzw. ""UDO for Mac OS X"".
+      !item Wenn Sie die Kommandozeilen-Option (!code [-@ F]) nutzen, müssen Sie nicht länger zwingend exakt eine Option pro Zeile in Datei (!file [F]) angeben.
       !end_itemize
 
 
