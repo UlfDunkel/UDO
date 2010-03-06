@@ -1261,7 +1261,7 @@ const BOOLEAN     from_file)      /* */
    if (!found)
    {
       if (    (arg[0] != '-')             /* no option */ 
-           && (arg[0] != '%')             /* no shell placeholder 
+           && (arg[0] != '%')             /* no shell placeholder */
            && (stricmp(arg, "udo") != 0)  /* no shell program name */
          )
       {
