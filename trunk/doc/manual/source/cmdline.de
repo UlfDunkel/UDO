@@ -27,6 +27,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 06: '-@ F' now accepts more commands per line
 #
 ################################################################################
 
@@ -67,7 +68,7 @@ Der Name der (!file [Quelldatei]) muss als letzter Parameter übergeben werden.
 #Ausgabe-Formate
 !begin_tlist [-W, (--)no-warningslines]
 
-!item [-@ F] UDO liest dann aus der Datei ""F"" die Optionen. In dieser Datei muss in jeder Zeile genau eine Option stehen.
+!item [-@ F] UDO liest dann aus der Datei ""F"" die Optionen. Sie können pro Zeile eine Option eintragen (wie vor UDO~7 üblich) oder auch die Optionen durch Leerzeichen oder [Tab] voneinander trennen, wie in einer Kommandozeile.
 
 !item [-a, (--)asc] Die (!file [Quelldatei]) wird ins ASCII-Format umgewandelt.
 

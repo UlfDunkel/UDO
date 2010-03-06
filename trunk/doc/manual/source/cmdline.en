@@ -20,6 +20,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 06: '-@ F' now accepts more commands per line
 #
 ################################################################################
 
@@ -62,7 +63,7 @@ The name of the source file has to be the last option.
 !begin_tlist [-W, (--)no-warningslines]
 
 !item [-@ F] UDO will read the options from the file named ""F"".
-This file should contain exactly one option per line.
+You can enter one option per line (as required up to UDO~6), or separate options by space or tab characters like in a command line.
 
 !item [-a, (--)asc] The (!U)source file(!u) will be converted to ASCII.
 
