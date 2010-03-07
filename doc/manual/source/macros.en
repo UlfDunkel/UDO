@@ -54,10 +54,10 @@
 # other macro formattings
 # ------------------------------------------------------------------------------
 !else
-!macro EXAMPLE_BEGIN  !begin_quote
-!macro EXAMPLE_END    !end_quote
-!macro EXAMPLE_BEFORE (!B)Before:(!b) (!nl) !begin_quote
-!macro EXAMPLE_AFTER  (!B)Afterwards:(!b) (!nl)
+!macro EXAMPLE_BEGIN  !rinclude (!EXAMPLES)/general/example_begin.ui
+!macro EXAMPLE_END    !rinclude (!EXAMPLES)/general/example_close.ui
+!macro EXAMPLE_BEFORE !rinclude (!EXAMPLES)/general/example_before.ui
+!macro EXAMPLE_AFTER  !rinclude (!EXAMPLES)/general/example_after.ui
 
 !macro FORMAT         (!link [<abbreviations>] [Abbreviations])
 !macro COLOR          (!link [<color>] [Colors])
