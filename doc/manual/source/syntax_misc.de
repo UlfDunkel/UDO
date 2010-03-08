@@ -35,6 +35,7 @@
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro KK2W resolved into macros KKW + code
+#   fd  Mar 08: macro KW1 resolved to KWW
 #
 ################################################################################
 
@@ -206,7 +207,7 @@ von ""(!C)(!1)(!c)"" gesetzt.
 !item Bei der Namensvergabe der Makros sollte man möglichst darauf
 achten, diese nicht wie bereits existente Befehle oder Platzhalter zu
 benennen. So sollten sie ein Makro nicht ""(!code [B])"" oder ""(!code [nl])"" nennen, da
-dann die Umschaltung in Fettschrift ((!KK1 [B])) oder ein erzwungener
+dann die Umschaltung in Fettschrift ((!KKW [B])) oder ein erzwungener
 Zeilenumbruch nicht mehr funktionieren.
 
 !item Die Benutzung von Makros sollte nicht übertrieben werden. UDO
@@ -356,7 +357,7 @@ erzeugen. Die obigen Beispiele eigneten sich halt gut zur Darstellung
 des Problems.
 
 !item Wie bei den Makros sollten Sie aufpassen, dass sie keine von UDO
-benutzten Platzhalter wie (!KK1 [B]), (!KK1 [v]), (!KKW [TeX]) usw. verwenden. Auch gibt
+benutzten Platzhalter wie (!KKW [B]), (!KKW [v]), (!KKW [TeX]) usw. verwenden. Auch gibt
 es hier eine maximale Anzahl von benutzbaren Definitionen. Sie liegt
 momentan bei maximal~(!MAXMACRO) pro Quelltext.
 !end_enumerate

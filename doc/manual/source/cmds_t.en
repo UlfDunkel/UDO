@@ -26,6 +26,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
+#   fd  Mar 08: macro KW1 resolved to KWW
 #
 ################################################################################
 
@@ -389,7 +390,7 @@ Use (!LaTeXe) commands ((!TeX) only).
 UDO erzeugt bei der Umwandlung ins (!LaTeX)-Format
 spezielle (!LaTeXe)-Kommandos, wie eine Preambel für
 (!LaTeXe) oder (!code [\textbf{!..}]) anstelle von (!code [{\bf~!..}])
-bei der Umwandlung von (!KK1 [B]).
+bei der Umwandlung von (!KKW [B]).
 (!coloff)
 !item [(!DESCRIPTION)]
 On (!LaTeX) format output, UDO will output special (!LaTeXe) commands if you use this command
@@ -588,7 +589,7 @@ Set verbatim character for (!LaTeX) ((!TeX) only)
 
 !item [(!DESCRIPTION)]
 ""(!CHAR)"" will be used as the sign for the (!LaTeX) command (!code [\verb]). 
-(!red)Bei der nächsten Umwandlung von (!KK1 [V]) und (!KK1 [v]) wird dann ""(!CHAR)"" benutzt.(!coloff) 
+(!red)Bei der nächsten Umwandlung von (!KKW [V]) und (!KKW [v]) wird dann ""(!CHAR)"" benutzt.(!coloff) 
 ""(!code[+])"" will be used by default.
 
 !item [(!EXAMPLE)]

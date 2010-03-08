@@ -26,6 +26,7 @@
 # 2010:
 #   fd  Mar 03: chapter style_tables: hint for table_alignment added
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro KW1 resolved to KWW
 #
 ################################################################################
 
@@ -565,12 +566,12 @@ line.
 !begin_node Footnotes
 !html_name  style_footnotes
 
-Text that is used between (!KKW [N]) and (!KK1 [n]) will be shown as a
+Text that is used between (!KKW [N]) and (!KKW [n]) will be shown as a
 footnote when converting to a format that supports footnotes. Otherwise
-(!KK1 [N]) will be replaced by ""(!code [~(])"", (KK1 [n]) will be replaced by
+(!KKW [N]) will be replaced by ""(!code [~(])"", (KK1 [n]) will be replaced by
 ""(!code [!)])"".
 
-Important hint: In front of (!KK1 [N]) you shouldn't use a blank. If you do so
+Important hint: In front of (!KKW [N]) you shouldn't use a blank. If you do so
 the footnote mark would ""fly"" without context or before the opening bracket ""(!code [(])"" you
 could read a blank.
 
@@ -599,7 +600,7 @@ format doesn't support footnotes. It will be better if UDO saves the
 footnote text and prints it at the end of a chapter or page. Unfortunately
 this is a very tricky problem that cannot be solved in some days.
 
-!item	Don't forget not to use a space or tab before (!KK1 [N]).
+!item	Don't forget not to use a space or tab before (!KKW [N]).
 
 !end_enumerate
 

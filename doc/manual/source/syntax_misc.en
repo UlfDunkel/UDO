@@ -28,6 +28,7 @@
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro KK2W resolved into macros KKW + code
+#   fd  Mar 08: macro KW1 resolved to KWW
 #
 ################################################################################
 
@@ -181,7 +182,7 @@ italic"".
 
 !item When naming the macros you should be cautious not to use pre-defined
 UDO command names like ""B"" or ""nl"". If you don't you will get problems
-with bold text ((!KK1 [B])) or the newline command ((!KKW [nl])).
+with bold text ((!KKW [B])) or the newline command ((!KKW [nl])).
 
 !item You shouldn't use too many macros because every additional macro slows
 down the conversion of the source file. The maximum number of macro is
@@ -323,7 +324,7 @@ The upper HTML example is only used for demonstration.
 
 !item When naming the definitions you should be cautious not to use
 pre-defined UDO command names like ""B"" or ""nl"". If you don't you will
-get problems with bold text ((!KK1 [B])) or the newline command ((!KKW [nl])).
+get problems with bold text ((!KKW [B])) or the newline command ((!KKW [nl])).
 
 !item You shouldn't use too many definitions because every additional
 definition slows down the conversion of the source file. The maximum number

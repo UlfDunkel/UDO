@@ -28,6 +28,7 @@
 # 2010:
 #   fd  Mar 03: chapter style_tables: hint for table_alignment added
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro KW1 resolved to KWW
 #
 ################################################################################
 
@@ -612,12 +613,12 @@ Befehlskombination aus (!KW [begin_linedraw]), (!KW [include]) und
 !begin_node Fußnoten
 !html_name  style_footnotes
 
-Text, der durch (!KK1 [N]) und (!KK1 [n]) eingefasst wird, wird in eine Fußnote
+Text, der durch (!KKW [N]) und (!KKW [n]) eingefasst wird, wird in eine Fußnote
 umgewandelt, sofern das Ausgabeformat Fußnoten unterstützt. Bei den
-anderen Ausgabeformaten wird (!KK1 [N]) einfach durch ""(!code [~(])"" und (!KK1 [n]) durch
+anderen Ausgabeformaten wird (!KKW [N]) einfach durch ""(!code [~(])"" und (!KKW [n]) durch
 ""(!code [!)])"" ersetzt; die Fußnote erscheint hier also einfach in Klammern.
 
-(!B)Wichtig:(!b) Vor (!KK1 [N]) sollte kein Leerzeichen stehen, da sonst die
+(!B)Wichtig:(!b) Vor (!KKW [N]) sollte kein Leerzeichen stehen, da sonst die
 Fußnotenmarkierung später in der Ausgabedatei frei im Raum steht und
 der Bezug weniger klar erkenntlich wird! Unterstützt das Ausgabeformat
 keine Fußnoten, gibt UDO vor der öffnenden Klammer (!code [(]) zusätzlich noch das
@@ -649,7 +650,7 @@ Fußnoten werden von folgenden Formaten unterstützt:
      recht knifflige Angelegenheit, die nicht von heute auf morgen
      gelöst werden kann.
 
-!item Denken Sie daran, vor (!KK1 [N]) kein Leerzeichen zu verwenden.
+!item Denken Sie daran, vor (!KKW [N]) kein Leerzeichen zu verwenden.
 !end_enumerate
 
 !end_node # Fußnoten

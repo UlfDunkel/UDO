@@ -26,6 +26,7 @@
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #   fd  Mar 05: adjustments for !docinfo [webmaster...]
 #   fd  Mar 08: IMG renamed: udo_icon_16 -> udo_16
+#   fd  Mar 08: macro KW1 resolved to KWW
 #
 ################################################################################
 
@@ -50,7 +51,7 @@ Fuﬂnote erzeugen.
 !item [(!DESCRIPTION)]
 ""(!TEXT)"" wird als Fuﬂnote oder in Klammern dargestellt.
 
-(!B)Wichtig:(!b) Vor (!KK1 [N]) sollte sich kein Leerzeichen, Tabulator oder Zeilenumbruch befinden!
+(!B)Wichtig:(!b) Vor (!KKW [N]) sollte sich kein Leerzeichen, Tabulator oder Zeilenumbruch befinden!
 
 !item [(!SEEALSO)]
 (!link [Fuﬂnoten] [Fuﬂnoten])
@@ -331,7 +332,7 @@ Keine Schriftarten benutzen.
 
 !item [(!DESCRIPTION)]
 Schaltet die Benutzung von Schriftarten aus. Befehle
-wie (!KK1 [B]) werden dann nicht in Schriftarten
+wie (!KKW [B]) werden dann nicht in Schriftarten
 umgewandelt, sondern einfach gefiltert. Im Beispiel
 w¸rden diese bei der Umwandlung ins ASCII-Format nicht benutzt.
 

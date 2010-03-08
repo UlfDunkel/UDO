@@ -1,21 +1,40 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Color Commands
+# Language    : German
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  Mar 08: macro KW1 resolved to KWW
+#
+################################################################################
+
 !begin_flushleft
 !begin_table [ll]
-(!KK1 [black])   !! (!black)Schwarz(!coloff)
-(!KK1 [silver])  !! (!silver)Hellgrau(!coloff)
-(!KK1 [gray])    !! (!gray)(Dunkel-)Grau(!coloff)
-(!KK1 [white])   !! (!white)Weiß(!coloff)
-(!KK1 [maroon])  !! (!maroon)Kastanienbraun(!coloff)
-(!KK1 [red])     !! (!red)Rot(!coloff)
-(!KK1 [purple])  !! (!purple)Lila(!coloff)
-(!KK1 [fuchsia]) !! (!fuchsia)Magenta(!coloff)
-(!KK1 [green])   !! (!green)Grün(!coloff)
-(!KK1 [lime])    !! (!lime)Hellgrün(!coloff)
-(!KK1 [olive])   !! (!olive)Olivgrün(!coloff)
-(!KK1 [yellow])  !! (!yellow)Gelb(!coloff)
-(!KK1 [navy])    !! (!navy)Marineblau(!coloff)
-(!KK1 [blue])    !! (!blue)Blau(!coloff)
-(!KK1 [teal])    !! (!teal)Blaugrün(!coloff)
-(!KK1 [aqua])    !! (!aqua)Cyan(!coloff)
+(!KKW [black])   !! (!black)Schwarz(!coloff)
+(!KKW [silver])  !! (!silver)Hellgrau(!coloff)
+(!KKW [gray])    !! (!gray)(Dunkel-)Grau(!coloff)
+(!KKW [white])   !! (!white)Weiß(!coloff)
+(!KKW [maroon])  !! (!maroon)Kastanienbraun(!coloff)
+(!KKW [red])     !! (!red)Rot(!coloff)
+(!KKW [purple])  !! (!purple)Lila(!coloff)
+(!KKW [fuchsia]) !! (!fuchsia)Magenta(!coloff)
+(!KKW [green])   !! (!green)Grün(!coloff)
+(!KKW [lime])    !! (!lime)Hellgrün(!coloff)
+(!KKW [olive])   !! (!olive)Olivgrün(!coloff)
+(!KKW [yellow])  !! (!yellow)Gelb(!coloff)
+(!KKW [navy])    !! (!navy)Marineblau(!coloff)
+(!KKW [blue])    !! (!blue)Blau(!coloff)
+(!KKW [teal])    !! (!teal)Blaugrün(!coloff)
+(!KKW [aqua])    !! (!aqua)Cyan(!coloff)
 !end_table
 !end_flushleft
 
