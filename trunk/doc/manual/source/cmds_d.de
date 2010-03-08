@@ -325,7 +325,7 @@ anzeigen soll.
 Werden alle diese Kontaktdaten (in vier einzelnen Zeilen!) angegeben, erzeugt UDO standardmäßig am Ende einer jeden Seite Folgende Kontektdaten-Fußzeile:
 
 (!EXAMPLE_BEFORE)
-!ifdest [stg]
+!ifdest [asc,stg]
 !begin_verbatim
 # Vorspann
 !docinfo [domain_link]  !\
@@ -415,7 +415,7 @@ Das zuletzt gezeigte Beispiel zeigt, dass nur die Parameter mit (!code [url]) im
 Aber es ist auch möglich, als Kontaktlink keine echte E-Mail-Adresse, sondern einen URL anzugeben, der zu einem Kontaktformular führt. Denn mittlerweile ist es nicht mehr unbedingt erwünscht, dass E-Mail-Adressen im Klartext in Webseiten zu sehen sind. Sonst sind sie für Roboter, die E-Mail-Adressen zum Spammen suchen, eine leichte Beute.
 
 (!EXAMPLE_BEFORE)
-!ifdest [stg]
+!ifdest [asc,stg]
 !begin_verbatim
 # Vorspann
 !docinfo [domain_link]  !\

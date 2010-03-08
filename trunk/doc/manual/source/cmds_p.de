@@ -245,7 +245,7 @@ Dokuments. Bei allen anderen Formaten wird nur
 Bei der RTF-Ausgabe erfolgt die Angabe als Hinweis auf die Seitenzahl.
 
 !item [(!SEEALSO)]
-(!KKW [link]), (!KKW [xlink]), (!link [Querverweise] [Querverweise])
+(!KKW [link!]), (!KKW [xlink!]), (!link [Querverweise] [Querverweise])
 
 !end_xlist
 
