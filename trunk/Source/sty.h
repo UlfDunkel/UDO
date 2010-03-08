@@ -44,6 +44,8 @@
 *    fd  Jun 08: header updated; definitions for C_COLOR_... updated (octal!)
 *  2010:
 *    fd  Feb 26: file tidied up, style macros revalued to fix the color bug
+*    fd  Mar 08: try to avoid style macro chars which may be converted or casted 
+*                 somewhere on the run (this whole MAGIC crap isn't rather safe)
 *
 ******************************************|************************************/
 
@@ -138,14 +140,18 @@ typedef struct _styleflag                 /* various style control flags */
 #define C_COLOR_NAVY    35
 #define C_COLOR_BLUE    36
 #define C_COLOR_TEAL    37
-/* don't use            38                -> ??? */
-#define C_COLOR_AQUA    39
-#define C_COLOR_OFF     40
+/* don't use            38                -> & */
+/* don't use            39                -> ' */
+/* don't use            40                -> ( */
+/* don't use            41                -> ) */
+#define C_COLOR_AQUA    42
+#define C_COLOR_OFF     43
                                           /* New in V6.5.20 [GS] */
-#define C_SUP_ON        41
-#define C_SUP_OFF       42
-#define C_SUB_ON        43
-#define C_SUB_OFF       44
+#define C_SUP_ON        44
+#define C_SUP_OFF       45
+#define C_SUB_ON        46
+/* don't use            47                -> / */
+#define C_SUB_OFF       48
 
 
 
