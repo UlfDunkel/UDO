@@ -73,6 +73,7 @@
 *                - CODE_BALTIC
 *                - CODE_CELTIC
 *                - CODE_LATIN9
+*                - CODE_LATIN10
 *
 ******************************************|************************************/
 
@@ -148,8 +149,9 @@
 #define CODE_BALTIC   28                  /* ISO Latin 7 (iso-8859-13) "Baltic" */
 #define CODE_CELTIC   29                  /* ISO Latin 8 (iso-8859-14) "Celtic" */
 #define CODE_LATIN9   30                  /* ISO Latin 9 (iso-8859-15) "West European" */
+#define CODE_LATIN10  31                  /* ISO Latin 10 (iso-8859-16) "South East European" */
 
-#define CODE_TOTAL    31                  /* # of supported encodings */
+#define CODE_TOTAL    32                  /* # of supported encodings */
 
    /* --- Compiler- und systemabhaengige Dinge setzen --- */
 
