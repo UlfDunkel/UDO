@@ -67,18 +67,18 @@ Die itemize-Umgebung kann mehrfach verschachtelt benutzt werden und
 lässt sich auch mit anderen Umgebungen kombinieren.
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)itemize1.ui
+!vinclude (!EXAMPLES)/itemize1.ui
 (!EXAMPLE_AFTER)
-!include  (!EXAMPLES)itemize1.ui
+!include  (!EXAMPLES)/itemize1.ui
 (!EXAMPLE_END)
 
 Hier ein kleines Beispiel, in dem die itemize-Umgebung
 verschachtelt benutzt wird.
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)itemize2.ui
+!vinclude (!EXAMPLES)/itemize2.ui
 (!EXAMPLE_AFTER)
-!include  (!EXAMPLES)itemize2.ui
+!include  (!EXAMPLES)/itemize2.ui
 (!EXAMPLE_END)
 
 !smallskip
@@ -103,19 +103,19 @@ Beispiel wird er eingesetzt:
 Ohne (!KW [short])~!..
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)itemize3.ui
+!vinclude (!EXAMPLES)/itemize3.ui
 (!EXAMPLE_END)
 !..~ergibt dies:
 (!EXAMPLE_BEGIN)
-!include (!EXAMPLES)itemize3.ui
+!include (!EXAMPLES)/itemize3.ui
 (!EXAMPLE_END)
 Mit (!KW [short])~!..
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)itemize4.ui
+!vinclude (!EXAMPLES)/itemize4.ui
 (!EXAMPLE_END)
 !..~ergibt dies:
 (!EXAMPLE_BEGIN)
-!include (!EXAMPLES)itemize4.ui
+!include (!EXAMPLES)/itemize4.ui
 (!EXAMPLE_END)
 
 Falls Sie keinen Unterschied erkennen sollten, ist es in dem Format,
@@ -158,18 +158,18 @@ Die enumerate-Umgebung ist auch mehrfach schachtelbar und mit anderen
 Umgebungen kombinierbar. Hier ein kleines, unverschachteltes Beispiel:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)enum1.ui
+!vinclude (!EXAMPLES)/enum1.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)enum1.ui
+!include (!EXAMPLES)/enum1.ui
 (!EXAMPLE_END)
 
 Hier ein kleines Beispiel, in dem die enumerate-Umgebung
 verschachtelt und mit dem Schalter (!KW [short]) benutzt wird.
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)enum2.ui
+!vinclude (!EXAMPLES)/enum2.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)enum2.ui
+!include (!EXAMPLES)/enum2.ui
 (!EXAMPLE_END)
 
 (!HINTS)
@@ -211,18 +211,18 @@ mit anderen Umgebungen kobinieren. Hier ein kleines, unverschachteltes
 Beispiel:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)descript1.ui
+!vinclude (!EXAMPLES)/descript1.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)descript1.ui
+!include (!EXAMPLES)/descript1.ui
 (!EXAMPLE_END)
 
 In diesem Beispiel wird die description-Umgebung verschachtelt und
 mit dem Schalter (!KW [short]) benutzt.
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)descript2.ui
+!vinclude (!EXAMPLES)/descript2.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)descript2.ui
+!include (!EXAMPLES)/descript2.ui
 (!EXAMPLE_END)
 
 (!HINTS)
@@ -267,9 +267,9 @@ Die Umgebungen können mehrfach verschachtelt benutzt werden und lassen
 sich auch mit anderen Umgebungen kombinieren.
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)xlist1.ui
+!vinclude (!EXAMPLES)/xlist1.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)xlist1.ui
+!include (!EXAMPLES)/xlist1.ui
 (!EXAMPLE_END)
 
 Der bereits in den vorherigen Kapiteln besprochene Schalter
@@ -278,9 +278,9 @@ Der bereits in den vorherigen Kapiteln besprochene Schalter
 Ende der Zeile an. Auch hier ein Beispiel:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)xlist2.ui
+!vinclude (!EXAMPLES)/xlist2.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)xlist2.ui
+!include (!EXAMPLES)/xlist2.ui
 (!EXAMPLE_END)
 
 !label blist-Umgebung
@@ -313,9 +313,9 @@ Das folgende Beispiel soll demonstrieren, wie das Ergebnis aussieht.
 Zunächst der UDO-Quelltext:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)xlist3.ui
+!vinclude (!EXAMPLES)/xlist3.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)xlist3.ui
+!include (!EXAMPLES)/xlist3.ui
 (!EXAMPLE_END)
 
 !smallskip
@@ -379,9 +379,9 @@ daran, dass das Format der Dokumentation, die Sie gerade lesen, keine
 Zentrierungen zulässt.
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)center.ui
+!vinclude (!EXAMPLES)/center.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)center.ui
+!include (!EXAMPLES)/center.ui
 (!EXAMPLE_END)
 
 Wie man sieht, formatiert UDO Absätze auch hier. Um einen manuellen
@@ -413,9 +413,9 @@ so liegt das daran, dass das Format der Dokumentation, die Sie gerade
 lesen, keinen rechtsbündigen Text zulässt.
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)flushright.ui
+!vinclude (!EXAMPLES)/flushright.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)flushright.ui
+!include (!EXAMPLES)/flushright.ui
 (!EXAMPLE_END)
 
 Wie man sieht, formatiert UDO Absätze auch hier. Um einen manuellen
@@ -445,9 +445,9 @@ linksbündig auszugeben, die sonst standardmäßig Blocksatz erzeugen.
 Ein Beispiel:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)flushleft.ui
+!vinclude (!EXAMPLES)/flushleft.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)flushleft.ui
+!include (!EXAMPLES)/flushleft.ui
 (!EXAMPLE_END)
 
 Wie man sieht, formatiert UDO Absätze auch hier. Um einen manuellen
@@ -471,9 +471,9 @@ restlichen Text abzuheben. Dieser Effekt wurde auch bei folgendem
 Beispiel erzielt:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)quote.ui
+!vinclude (!EXAMPLES)/quote.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)quote.ui
+!include (!EXAMPLES)/quote.ui
 (!EXAMPLE_END)
 
 !end_node # Einrücken von Absätzen
@@ -625,9 +625,9 @@ keine Fußnoten, gibt UDO vor der öffnenden Klammer (!code [(]) zusätzlich noch d
 fehlende Leerzeichen aus.
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)footnotes.ui
+!vinclude (!EXAMPLES)/footnotes.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)footnotes.ui
+!include (!EXAMPLES)/footnotes.ui
 (!EXAMPLE_END)
 
 Fußnoten werden von folgenden Formaten unterstützt:
@@ -667,9 +667,9 @@ Um für eine Textpassage eine passende Schriftart zu setzen, müssen Sie
 diese mit den zugehörigen Platzhaltern klammern. Lange Rede, kurzer
 Sinn, hier ein Beispiel:
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)effects.ui
+!vinclude (!EXAMPLES)/effects.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)effects.ui
+!include (!EXAMPLES)/effects.ui
 (!EXAMPLE_END)
 
 In der folgenden Tabelle können Sie ablesen, durch welche Kommandos
@@ -879,7 +879,7 @@ verbatim-Umgebung, die wiederum in einer quote-Umgebung steht.
 Ein kleines Beispiel für einen C-Sourcecode mit UDO:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)csource.u
+!vinclude (!EXAMPLES)/csource.u
 (!EXAMPLE_END)
 
 Eine weitere Möglichkeit, Sourcecode auszugeben, bietet der

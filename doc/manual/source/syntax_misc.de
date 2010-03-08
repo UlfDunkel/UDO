@@ -161,7 +161,7 @@ und eingeschlossen in runde Klammern an.
 Auch hier zunächst ein paar Beispiele:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)macro1.ui
+!vinclude (!EXAMPLES)/macro1.ui
 (!EXAMPLE_END)
 
 !index (!kw [include])
@@ -173,7 +173,7 @@ Beispiel wird der Programmname in einen Disclaimer eingebaut, der per
 (!KW [include]) eingebunden wird:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)macro2.ui
+!vinclude (!EXAMPLES)/macro2.ui
 (!EXAMPLE_END)
 
 !smallskip
@@ -191,9 +191,9 @@ Text mit mehreren Textstilattributen gleichzeitig definiert wird und später mit
 nur einem Parameter aufgerufen wird:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)macro3.ui
+!vinclude (!EXAMPLES)/macro3.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)macro4.ui
+!include (!EXAMPLES)/macro4.ui
 (!EXAMPLE_END)
 
 Die Worte ""fett, kursiv und unterstrichen"" werden bei der Ausgabe dann an die Stelle
@@ -283,7 +283,7 @@ Im folgenden Beispiel benutzen wir eine Definition, um nur im
 HTML-Format ein Wort als Überschrift auszugeben:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)define1.ui
+!vinclude (!EXAMPLES)/define1.ui
 (!EXAMPLE_END)
 
 !smallskip
@@ -298,7 +298,7 @@ Platzhalter nun mit geeigneten Definitionen nachahmen:
 !index \linebreak
 !index \nolinebreak
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)define2.ui
+!vinclude (!EXAMPLES)/define2.ui
 (!EXAMPLE_END)
 
 !smallskip
@@ -319,7 +319,7 @@ HTML erzeugen könnte. Benutzt man Parameter, könnte man Überschriften
 wesentlich eleganter erzeugen:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)define3.ui
+!vinclude (!EXAMPLES)/define3.ui
 (!EXAMPLE_END)
 
 Sie sehen, dass Sie mit diesem Befehl einige Möglichkeiten haben,
@@ -330,7 +330,7 @@ Das obige Beispiel für (!LaTeX) ließe sich mit einer parametrischen
 Definition übrigens viel eleganter lösen:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)define4.ui
+!vinclude (!EXAMPLES)/define4.ui
 (!EXAMPLE_END)
 
 In diesem Beispiel wird nur ein Parameter an die Definition übergeben.
@@ -395,7 +395,7 @@ die nur das dritte Kapitel enthält. Nur wenn das Symbol ""AlleKapitel""
 gesetzt ist, soll die Zieldatei alle Kapitel enthalten:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)symbol1.ui
+!vinclude (!EXAMPLES)/symbol1.ui
 (!EXAMPLE_END)
 
 Starten Sie UDO nun ""normal"", wird eine Zieldatei erstellt, die nur das
@@ -411,7 +411,7 @@ so werden das erste und das zweite Kapitel eingebunden. Übergibt man
 hingegen ""(!code [-D~AlleKapitel])"", wird die Zieldatei komplett dargestellt:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)symbol2.ui
+!vinclude (!EXAMPLES)/symbol2.ui
 (!EXAMPLE_END)
 
 Ihrer Phantasie sind hier kaum Grenzen gesetzt!
@@ -424,7 +424,7 @@ die Zieldatei eingebunden werden, können Sie zuvor das Symbol
 (!code [AlleKapitel]) löschen, sofern es gesetzt wurde. Dies funktioniert so:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)symbol3.ui
+!vinclude (!EXAMPLES)/symbol3.ui
 (!EXAMPLE_END)
 
 In diesem Beispiel wird also zunächst abgefragt, ob das Symbol
@@ -459,7 +459,7 @@ können und sollten mehrfach angegeben werden.
 Der Befehl zur Angabe eines Indexeintrags lautet folgendermaßen:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)index1.ui
+!vinclude (!EXAMPLES)/index1.ui
 (!EXAMPLE_END)
 
 Der Indexeintrag erscheint dann im Index von (!LaTeX), im Index der mit
@@ -479,7 +479,7 @@ Falls Sie denken, dass der Leser bei der Suche nach dem Wort
 sollten Sie beide Indexeinträge vornehmen.
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)index2.ui
+!vinclude (!EXAMPLES)/index2.ui
 (!EXAMPLE_END)
 
 !smallskip
@@ -801,14 +801,14 @@ Um beispielsweise eine Zeile nur in das ASCII-Format auszugeben, gibt
 man folgendes an:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)asc1.ui
+!vinclude (!EXAMPLES)/asc1.ui
 (!EXAMPLE_END)
 
 Um eine Zeile in allen Formaten außer dem ASCII-Format auszugeben,
 gibt man folgendes an:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)asc2.ui
+!vinclude (!EXAMPLES)/asc2.ui
 (!EXAMPLE_END)
 
 Der Inhalt dieser Zeilen wird ohne das Kommando selbst, ohne
@@ -824,7 +824,7 @@ einen Quelltext einfügen muss, damit (!LaTeX) weiß, mit welchem Stil ein
 Dokument auszudrucken ist und damit es einen Index erzeugt:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)latex/index.ui
+!vinclude (!EXAMPLES)/latex/index.ui
 (!EXAMPLE_END)
 
 !begin_description
@@ -851,7 +851,7 @@ Formulare für HTML. Letzteres soll hier aufgezeigt werden:
 !index HTML !! <form>
 !index <form>
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)raw1.ui
+!vinclude (!EXAMPLES)/raw1.ui
 (!EXAMPLE_END)
 
 

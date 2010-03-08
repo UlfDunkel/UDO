@@ -56,18 +56,18 @@ another itemize environment.
 This short example shows how to write a simple itemize environment:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)itemize1.ui
+!vinclude (!EXAMPLES)/itemize1.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)itemize1.ui
+!include (!EXAMPLES)/itemize1.ui
 (!EXAMPLE_END)
 
 And this example, where an itemize environment is used inside another
 one !..
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)itemize2.ui
+!vinclude (!EXAMPLES)/itemize2.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)itemize2.ui
+!include (!EXAMPLES)/itemize2.ui
 (!EXAMPLE_END)
 
 !smallskip
@@ -91,17 +91,17 @@ uses (!KW [short]):
 Without (!KW [short]):
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)itemize3.ui
+!vinclude (!EXAMPLES)/itemize3.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)itemize3.ui
+!include (!EXAMPLES)/itemize3.ui
 (!EXAMPLE_END)
 
 With (!KW [short]):
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)itemize4.ui
+!vinclude (!EXAMPLES)/itemize4.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)itemize4.ui
+!include (!EXAMPLES)/itemize4.ui
 (!EXAMPLE_END)
 
 If you can't see any difference the destination format doesn't allow it to
@@ -143,18 +143,18 @@ another itemize environment.
 This short example shows how to write a simple itemize environment:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)enum1.ui
+!vinclude (!EXAMPLES)/enum1.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)enum1.ui
+!include (!EXAMPLES)/enum1.ui
 (!EXAMPLE_END)
 
 In the following example the enumerate environment is used twice and it will
 be compressed because of the usage of (!KW [short]):
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)enum2.ui
+!vinclude (!EXAMPLES)/enum2.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)enum2.ui
+!include (!EXAMPLES)/enum2.ui
 (!EXAMPLE_END)
 
 (!HINTS)
@@ -195,18 +195,18 @@ The description environment can be used inside other (description)
 environments.
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)descript1.ui
+!vinclude (!EXAMPLES)/descript1.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)descript1.ui
+!include (!EXAMPLES)/descript1.ui
 (!EXAMPLE_END)
 
 In this example the description environment is used inside another one and
 the (!KW [short]) is used, too:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)descript2.ui
+!vinclude (!EXAMPLES)/descript2.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)descript2.ui
+!include (!EXAMPLES)/descript2.ui
 (!EXAMPLE_END)
 
 (!HINTS)
@@ -251,9 +251,9 @@ has to used inside the brackets of the (!KW [item]) command.
 You can use the xlist environment inside other (xlist) environments, too.
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)xlist1.ui
+!vinclude (!EXAMPLES)/xlist1.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)xlist1.ui
+!include (!EXAMPLES)/xlist1.ui
 (!EXAMPLE_END)
 
 The command (!KW [short]) can also be used for xlist environments. To get
@@ -261,9 +261,9 @@ a compressed list just add (!KW [short]) at the end of the line that
 contains (!KW [begin_xlist]). Once more a short example:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)xlist2.ui
+!vinclude (!EXAMPLES)/xlist2.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)xlist2.ui
+!include (!EXAMPLES)/xlist2.ui
 (!EXAMPLE_END)
 
 
@@ -295,9 +295,9 @@ displayed in typewritered text. A tlist environment will be started with
 The following example shall demonstrate the results:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)xlist3.ui
+!vinclude (!EXAMPLES)/xlist3.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)xlist3.ui
+!include (!EXAMPLES)/xlist3.ui
 (!EXAMPLE_END)
 
 !smallskip
@@ -356,9 +356,9 @@ If the following example isn't centered the current documentation format
 doesn't allow it to use centered text.
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)center.ui
+!vinclude (!EXAMPLES)/center.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)center.ui
+!include (!EXAMPLES)/center.ui
 (!EXAMPLE_END)
 
 You see that UDO layouts paragraphs of a center environment, too. To insert
@@ -386,9 +386,9 @@ If the following example isn't printed right justified the current
 documentation format doesn't allow it to use right justified text.
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)flushright.ui
+!vinclude (!EXAMPLES)/flushright.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)flushright.ui
+!include (!EXAMPLES)/flushright.ui
 (!EXAMPLE_END)
 
 You see that UDO layouts paragraphs of a flushright environment, too. To
@@ -418,9 +418,9 @@ layouted like in all other cases. Only when the flushleft environment is the
 active one text will be printed without justification.
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)flushleft.ui
+!vinclude (!EXAMPLES)/flushleft.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)flushleft.ui
+!include (!EXAMPLES)/flushleft.ui
 (!EXAMPLE_END)
 
 You see that UDO layouts paragraphs of a flushleft environment, too. To
@@ -443,9 +443,9 @@ This environment is useful to emphasize passages. This effect is used in the
 following example:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)quote.ui
+!vinclude (!EXAMPLES)/quote.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)quote.ui
+!include (!EXAMPLES)/quote.ui
 (!EXAMPLE_END)
 
 !end_node # Indented paragraphs
@@ -576,9 +576,9 @@ the footnote mark would ""fly"" without context or before the opening bracket ""
 could read a blank.
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)footnotes.ui
+!vinclude (!EXAMPLES)/footnotes.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)footnotes.ui
+!include (!EXAMPLES)/footnotes.ui
 (!EXAMPLE_END)
 
 Footnotes are supported by these formats:
@@ -613,13 +613,13 @@ this is a very tricky problem that cannot be solved in some days.
 
 UDO enables you to set text styles right inside the source file.
 
-!include (!EXAMPLES)effects.ui
+!include (!EXAMPLES)/effects.ui
 
 If you want to display a single word or some words in a certain text style
 you have to use them between the according placeholders. Look, how the upper
 paragraph was made:
 
-!vinclude (!EXAMPLES)effects.ui
+!vinclude (!EXAMPLES)/effects.ui
 
 In this table you will see in which way the placeholders will be replaced:
 
@@ -840,7 +840,7 @@ a verbatim environment inside a quote environment.
 A small example for a C source code with UDO:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)csource.u
+!vinclude (!EXAMPLES)/csource.u
 (!EXAMPLE_END)
 
 Another possibility to include source code

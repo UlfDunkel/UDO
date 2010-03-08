@@ -122,7 +122,7 @@ im Inhaltsverzeichnis erscheint. Am Ende der Titelseite wird das Wort
 ST-Guide erzeugt wird.
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)stg/title.ui
+!vinclude (!EXAMPLES)/stg/title.ui
 (!EXAMPLE_END)
 
 !item [Warum ist es besser, auf Blocksatz zu verzichten?]

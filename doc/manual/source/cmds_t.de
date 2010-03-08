@@ -355,7 +355,7 @@ Benutzt man 0 als (!VALUE), wandelt UDO die Tabulatoren nicht um.
 !end_verbatim
 (!EXAMPLE_AFTER)
 !tabwidth 8
-!vinclude (!EXAMPLES)src_tab.ui
+!vinclude (!EXAMPLES)/src_tab.ui
 (!EXAMPLE_END)
 
 (!EXAMPLE_BEFORE)
@@ -365,7 +365,7 @@ Benutzt man 0 als (!VALUE), wandelt UDO die Tabulatoren nicht um.
 !end_verbatim
 (!EXAMPLE_AFTER)
 !tabwidth 4
-!vinclude (!EXAMPLES)src_tab.ui
+!vinclude (!EXAMPLES)/src_tab.ui
 (!EXAMPLE_END)
 
 !end_node

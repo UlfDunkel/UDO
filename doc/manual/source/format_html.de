@@ -110,12 +110,12 @@ in der es Kapitel namens ""Software"", ""Kontaktadressen"" und
 !begin_description
 !item [Hauptdatei:]
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)html/headfoot.ui
+!vinclude (!EXAMPLES)/html/headfoot.ui
 (!EXAMPLE_END)
 
 !item [software.ui:]
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)html/software.ui
+!vinclude (!EXAMPLES)/html/software.ui
 (!EXAMPLE_END)
 !end_description
 

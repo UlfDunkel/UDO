@@ -19,6 +19,7 @@
 #
 ################################################################################
 
+!ifndest [ps]
 !begin_table [|l|l|l|l|l|l|l|] !hline
 UDO          !! ASCII     !! ST-Guide     !! LaTeX               !! RTF                 !! WinHelp      !! HTML
 !hline
@@ -38,5 +39,6 @@ UDO          !! ASCII     !! ST-Guide     !! LaTeX               !! RTF         
 (!KKW [sup]) !! (!C) (!c) !! (!C)    (!c) !! (!C)}}${(!c)        !! (!C)\nosupersub(!c) !! (!C) (!c)    !! (!C)</sup>(!c)
 !hline
 !end_table
+!endif
 
 # === EOF ===
