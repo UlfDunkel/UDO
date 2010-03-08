@@ -139,7 +139,7 @@ Definiert eine Sprungmarke, die bei Hypertextformaten
 automatisch referenziert wird und auf die man durch die Link-Befehle verweisen kann.
 
 !item [(!SEEALSO)]
-(!link [Sprungmarken] [Sprungmarken]), (!link [Querverweise] [Querverweise]), (!KKW [label]), (!KKW [link]), (!KKW [plink])
+(!link [Sprungmarken] [Sprungmarken]), (!link [Querverweise] [Querverweise]), (!KKW [label!]), (!KKW [link!]), (!KKW [plink!])
 
 !end_xlist
 
@@ -178,7 +178,7 @@ zur Zeit nur für die RTF-Ausgabe unterstützt.
 !item [(!EXISTSSINCE)] Version 6.5.9
 
 !item [(!SEEALSO)]
-(!link [Sprungmarken] [Sprungmarken]), (!link [Querverweise] [Querverweise]), (!KW [label]), (!KKW [link]), (!KKW [plink])
+(!link [Sprungmarken] [Sprungmarken]), (!link [Querverweise] [Querverweise]), (!KW [label!]), (!KKW [link!]), (!KKW [plink!])
 
 !end_xlist
 
@@ -422,7 +422,7 @@ Manuellen Querverweis durchführen.
 Hiermit können Querverweise auf andere Kapitel oder Sprungmarken vorgenommen werden. Ausführliche Informationen findet man im Abschnitt ""Querverweise"".
 
 !item [(!SEEALSO)]
-(!KKW [xlink]), (!KKW [plink]), (!link [Querverweise] [Querverweise])
+(!KKW [xlink!]), (!KKW [plink!]), (!link [Querverweise] [Querverweise])
 
 !end_xlist
 

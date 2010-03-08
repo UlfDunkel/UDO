@@ -117,11 +117,11 @@ andere Hypertexte oder Websites verweisen. Um dies zu ermöglichen,
 bietet UDO einen Satz von Befehlen für Querverweise.
 
 !index (!kkw [link])
-Mit dem (!KKW [link])-Befehl können Sie Bezug auf andere Stellen im
+Mit dem (!KKW [link!])-Befehl können Sie Bezug auf andere Stellen im
 aktuellen Dokument nehmen:
 
 !begin_xlist [ST-Guide:] !compressed
-!item [UDO:]      (!KK2W [link] [[ein Text!!][der Verweis!!]])
+!item [UDO:]      (!KK2W [link!] [[ein Text!][der Verweis!]!])
 !item [HTML:]     <a href="file.htm#der Verweis">ein Text</a>
 !item [(!LaTeX):]    ein Text (siehe \ref{der Verweis})
 !item [ST-Guide:] @{"ein Text" link "der Verweis"}
@@ -165,17 +165,17 @@ zur UDO-Gemeinde verwiesen wird:
 !index (!kkw [ilink])
 !index (!kkw [img])
 !index (!kkw [link])
-Speziell für WinHelp und HTML gibt es den (!KKW [ilink])-Befehl, um
+Speziell für WinHelp und HTML gibt es das Kommando (!KKW [ilink!]), um
 Verweise mit Darstellung eines Bildes zu erstellen. Dieser Befehl ist
 eine Kombination aus (!KKW [link]) und (!KKW [img]) und wird bei den anderen
 Formaten wie der oben besprochene Link-Befehl für interne Querverweise
 behandelt:
 
 !begin_xlist [WinHelp:] !compressed
-!item [UDO:]      (!KK2W [ilink][[img!!][Text!!][Verweis!!]])
+!item [UDO:]      (!KK2W [ilink!] [[img!][Text!][Verweis!]!])
 !item [WinHelp:]  {\uldb \{bmc~img.bmp\}}{\v Verweis}
 !item [HTML:]     <a href="Verweis"><img src="img.gif" alt="Text" title="Text" border="0"></a>
-!item [sonst:]    analog zu (!KK2W [link] [[Text!!][Verweis!!]])
+!item [sonst:]    analog zu (!KK2W [link!] [[Text!][Verweis!]!])
 !end_xlist
 
 (!HINTS)
@@ -202,11 +202,11 @@ behandelt:
 !html_name  hypertext_links_internal_pages
 
 !index (!kkw [plink])
-Speziell für (!LaTeX) gibt es den (!KKW [plink])-Befehl, um Bezug auf
+Speziell für (!LaTeX) gibt es das Kommando (!KKW [plink!]), um Bezug auf
 andere Seiten zu nehmen:
 
 !begin_xlist [sonst:] !compressed
-!item [UDO:] (!KK2W [plink][[Links!!][Querverweise!!]])
+!item [UDO:] (!KK2W [plink!] [[Links!][Querverweise!]!])
 !item [(!LaTeX):] Links (siehe Seite \pageref{Querverweise})
 !item [sonst:] Links
 !end_xlist
@@ -240,19 +240,19 @@ Sie unsere Kontaktinformationen finden.
 
 !index (!kkw [xlink])
 !index (!kkw [url])
-Mit den Befehlen (!KKW [xlink]) und (!KKW [url]) können Sie Bezug auf Stellen
+Mit den Kommandos (!KKW [xlink!]) und (!KKW [url!]) können Sie Bezug auf Stellen
 (!I)anderer(!i) Hypertexte oder Websites nehmen. Der Unterschied zum
 obigen Befehl besteht darin, dass beim zweiten Parameter bis auf die
 Tilde keine Sonderzeichen angepasst werden (kann bei Pfadangaben fatal sein!).
 
 !begin_xlist [ST-Guide:] !compressed
-!item [UDO:]      (!KK2W [xlink] [[UDO!!] [*:\udo.hyp!!]])
+!item [UDO:]      (!KK2W [xlink!] [[UDO!][*:\udo.hyp!]!])
 !item [ST-Guide:] @{"UDO" link "*:\udo.hyp"}
 (!nl)
-!item [UDO:]      (!KK2W [url] [[UDO!!] [http://www.udo-open-source.org/!!]])
+!item [UDO:]      (!KK2W [url!] [[UDO!][http://www.udo-open-source.org/!]!])
 !item [HTML:]     <a href="http://www.udo-open-source.org/">UDO</a>
 (!nl)
-!item [UDO:]      (!KK2W [xlink] [[UDO!!] [Titel@d:/winhelp/udo.hlp!!]])
+!item [UDO:]      (!KK2W [xlink!] [[UDO!][Titel@d:/winhelp/udo.hlp!]!])
 !item [WinHelp:]  {\uldb UDO}{\v Titel@d:/winhelp/udo.hlp}
 (!nl)
 !item [sonst:]    UDO bzw. Atari
@@ -309,7 +309,7 @@ HTML-Datei.
       ST-Guide- oder WinHelp-Hypertext keinen Sinn ergeben würden.
 
 !index (!kkw [nolink])
-!item Durch den Platzhalter (!KKW [nolink]) können Sie Text
+!item Durch den Platzhalter (!KKW [nolink!]) können Sie Text
       angeben, bei dem keine Verweise erzeugt werden sollen.
 
 !end_enumerate

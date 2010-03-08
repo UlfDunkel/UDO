@@ -299,7 +299,7 @@ Inline-(!nolink [Kommentare]) erzeugen.
 !item [(!SYNTAX)] (!T)(!/comment [(!TEXT)])(!t)
 
 !item [(!DESCRIPTION)]
-Mit (!KKW [comment]) können Inline-Kommentare für HTML,
+Mit (!KKW [comment!]) können Inline-Kommentare für HTML,
 WinHelp, RTF, Quickview, C und Pascal erzeugt werden. Wird im
 Vorspann der Schalter (!KW [use_comments]) benutzt, werden die
 (!nolink [Kommentare]) auch bei allen anderen Formaten in Klammern ausgegeben.

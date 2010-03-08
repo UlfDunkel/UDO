@@ -54,12 +54,12 @@ dieser Kopfzeilen unterbinden.
 Die Referenzierung wird fast komplett dem HCP des ST-Guide
 überlassen.
 
-nur bei den manuell gesetzten Links durch die Befehle
-(!KKW [link]) und (!KKW [xlink]) setzt UDO explizite Querverweise auf
+nur bei den manuell gesetzten Links durch die Kommandos 
+(!KKW [link!]) und (!KKW [xlink!]) setzt UDO explizite Querverweise auf
 andere Kapitel oder Labels.
 
 !item [Wie werden Labels umgesetzt?]
-UDOs Befehl (!KW [label]) wird in den HCP-Befehl ""(!code [@symbol ari])""
+UDOs Kommando (!KW [label]) wird in den HCP-Befehl ""(!code [@symbol ari])""
 umgesetzt. Dabei ist zu beachten, dass noch kein anderes Kapitel
 oder Label mit gleichem Namen existiert, da der HCP dies
 bemängeln würde.

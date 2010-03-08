@@ -659,7 +659,7 @@ weiterhin möglich.
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~8
 
 !item [(!SEEALSO)]
-(!link [Querverweise] [Querverweise]), (!KKW [link])
+(!link [Querverweise] [Querverweise]), (!KKW [link!])
 
 !end_xlist
 
@@ -839,7 +839,7 @@ Querverweis mit Grafik (nur WinHelp und HTML).
 
 !item [(!DESCRIPTION)]
 Dieser Platzhalter ist eine Kombination der Platzhalter
-(!KKW [img]) und (!KKW [link]) und dient dazu,
+(!KKW [img!]) und (!KKW [link!]) und dient dazu,
 einen Querverweis durch eine Grafik zu ermöglichen.
 Dies ist momentan nur beim WinHelp- und HTML-Format
 möglich. Im Beispiel wird das Bild (!file [udo_16.bmp]) bzw.
@@ -851,7 +851,7 @@ anderen Formaten wird nur ""UDO installieren"" ausgegeben.
 !item [(!EXISTSSINCE)] Release~4 Version~0.47
 
 !item [(!SEEALSO)]
-(!KKW [img]), (!KKW [link]), (!link [Querverweise] [Querverweise]), (!link [Bilder] [Bilder])
+(!KKW [img!]), (!KKW [link!]), (!link [Querverweise] [Querverweise]), (!link [Bilder] [Bilder])
 
 !end_xlist
 
@@ -1135,7 +1135,7 @@ Das zweite, optionale {[(!TEXT)]} hat nur Auswirkung bei der Ausgabe nach HTML, 
 !end_verbatim
 !endif
 (!EXAMPLE_AFTER)
-!ifdest [stg]
+!ifdest [asc,stg]
 !begin_verbatim
 <img src="img/udo_16.gif" alt="UDO-Icon 1" title="UDO-Icon 1" 
      border="0" width="16" height="16">

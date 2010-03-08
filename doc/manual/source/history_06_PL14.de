@@ -68,7 +68,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
          (!KW [end_comment]), 
          (!KW [cinclude]), 
          (!KW [comment]), 
-         (!KKW [comment])
+         (!KKW [comment!])
    !item (!KW [win_helpid])
    !item (!KW [no_links])
    !item (!KW [html_modern_layout]), 
@@ -153,7 +153,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !item (!KW [win_old_keywords])
    !item (!KW [no_table_lines])
    !item (!KW [html_transparent_buttons])
-   !item (!KKW [url])
+   !item (!KKW [url!])
    !item (!KW [use_auto_helpids])
    !item (!KW [win_prefix_helpids])
    !end_itemize

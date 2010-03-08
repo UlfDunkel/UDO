@@ -63,19 +63,19 @@ Verweis auf externe Daten.
 
 !item [(!DESCRIPTION)]
 Dient zum Erzeugen von Verweisen auf externe
-Dokumente. Im Unterschied zu (!KKW [link]) werden
+Dokumente. Im Unterschied zu (!KKW [link!]) werden
 Sonderzeichen innerhalb ""(!LINK)"" nicht umgewandelt. Im
 Beispiel würde bei einer HTML-Datei ein Querverweis
 auf die Seite der Deutschen Telekom erzeugt. ""(!LINK)""
 kann auch leer sein, dann wird für ""(!LINK)"" der Inhalt
 von ""(!TEXT)"" ausgegeben.
 
-Kommt in einem Verweis eine Tilde vor, so braucht sie bei Verwendung im (!KKW [xlink])-Kommando (!I)nicht(!i) durch ein Ausrufezeichen geschützt zu werden.
+Kommt in einem Verweis eine Tilde vor, so braucht sie bei Verwendung im (!KKW [xlink!])-Kommando (!I)nicht(!i) durch ein Ausrufezeichen geschützt zu werden.
 
 # ToDo: was ist der Unterschied zu !url ?
 
 !item [(!SEEALSO)]
-(!KKW [link]), (!KKW [plink]), (!KKW [url]), (!KW [no_xlinks]), (!link [Querverweise] [Querverweise])
+(!KKW [link!]), (!KKW [plink!]), (!KKW [url!]), (!KW [no_xlinks]), (!link [Querverweise] [Querverweise])
 
 !end_xlist
 

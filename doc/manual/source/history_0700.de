@@ -245,7 +245,7 @@ Das hier ist Zelle 3
    !item Bugfix (!BUG [38]): Zeichenausgaben (nicht nur in Mac-Encodings) sollten dank Umstellung auf Unicode keine Fehler mehr haben.
    !item Bugfix (!BUG [45])/(!BUG [77]): Stack-Overflow mit der DOS-Version von UDO behoben.
    !item Bugfix (!BUG [48]): Fehlermeldung ""unknown command: !html_use_hyphenation"". Ursache: Das Kommando fehlte in der Kommandoliste.
-   !item Bugfix (!BUG [55]): Umlaute, die in (!KKW [img]) oder (!KKW [ilink]) im zweiten Parameter vorkamen, wurden nicht richtig umgesetzt.
+   !item Bugfix (!BUG [55]): Umlaute, die in (!KKW [img!]) oder (!KKW [ilink!]) im zweiten Parameter vorkamen, wurden nicht richtig umgesetzt.
    !item Bugfix (!BUG [59]): Nichtfunktion, wenn Makro intern eine Definition aufruft.
    !item Bugfix (!BUG [75]): (!KW [raw])-Ausgaben korrigiert.
    !item Bugfix (!BUG [78]): Sortierung in der Index-Seite (z.B. indexudo.htm) wesentlich verbessert.
