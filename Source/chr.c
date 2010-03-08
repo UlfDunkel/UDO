@@ -102,6 +102,7 @@
 *                - CODE_GREEK
 *                - CODE_HEBREW
 *    fd  Mar 08: - CODE_TURKISH
+*                - CODE_NORDIC
 *
 ******************************************|************************************/
 
@@ -4669,6 +4670,9 @@ int   encoding)  /* # of encoding */
    case CODE_TURKISH:
       return u_CODE_TURKISH;
    
+   case CODE_NORDIC:
+      return u_CODE_NORDIC;
+   
    case CODE_MAC:
       return u_CODE_MAC;
    
@@ -4769,6 +4773,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_TURKISH:
       return CODE_TURKISH_lig;
+   
+   case CODE_NORDIC:
+      return CODE_NORDIC_lig;
    
    case CODE_MAC:
       return CODE_MAC_lig;
@@ -4874,6 +4881,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_TURKISH:
       return sort_CODE_TURKISH;
+   
+   case CODE_NORDIC:
+      return sort_CODE_NORDIC;
    
    case CODE_MAC:
       return sort_CODE_MAC;
@@ -5008,6 +5018,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_TURKISH:
       return "ISO 8859-9 (Latin 5)";
+   
+   case CODE_NORDIC:
+      return "ISO 8859-10 (Latin 6)";
    
    case CODE_MAC:
       return "Mac";
