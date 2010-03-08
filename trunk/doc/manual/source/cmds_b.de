@@ -1147,10 +1147,12 @@ Abgeschlossen wird mit (!kkw [coloff]).
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-(!red)Das Wort(!coloff) (!black)Schwarz(!coloff) (!red)erscheint in der Farbe Schwarz.(!coloff)
+(!red)Das Wort(!coloff) (!black)Schwarz(!coloff) 
+(!red)erscheint in der Farbe Schwarz.(!coloff)
 !end_verbatim
 (!EXAMPLE_AFTER)
-(!red)Das Wort(!coloff) (!black)Schwarz(!coloff) (!red)erscheint in der Farbe Schwarz.(!coloff)
+(!red)Das Wort(!coloff) (!black)Schwarz(!coloff) 
+(!red)erscheint in der Farbe Schwarz.(!coloff)
 (!EXAMPLE_END)
 
 !end_node

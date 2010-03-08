@@ -36,6 +36,7 @@
 # 2010:
 #   fd  Jan 20: chapter html_quotes introduced
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
+#   fd  Mar 08: IMG renamed: udo_icon_16 -> udo_16
 #
 ################################################################################
 
@@ -558,8 +559,8 @@ Zuusätzlich können Sie einen Verweistext mit angeben.
 !begin_verbatim
 <a href="index.htm"><img src="udo_hm.gif" alt="Zurück zur Homepage" title="Zurück zur Homepage" border="0" width="24" height="24"></a>
 !end_verbatim
-!else
-!html_backpage index.htm
+#!else
+#!html_backpage index.htm
 !endif
 (!EXAMPLE_END)
 
@@ -779,14 +780,14 @@ Für Frames werden die DOCTYPE-Einträge automatisch gesetzt.
 !html_doctype Strict
 !end_verbatim
 (!EXAMPLE_AFTER)
-!ifdest [html]
+#!ifdest [html]
 !begin_verbatim
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
         "http://www.w3.org/TR/html4/strict.dtd">
 !end_verbatim
-!else
-!html_doctype Strict
-!endif
+#!else
+#!html_doctype Strict
+#!endif
 (!EXAMPLE_END)
 
 !end_node
@@ -937,13 +938,13 @@ angegeben werden. (!FILESPACEQUOTE)
 !html_frames_backimage [hintergrund.gif]
 !end_verbatim
 (!EXAMPLE_AFTER)
-!ifdest [html]
+#!ifdest [html]
 !begin_verbatim
 <body background="[hintergrund.gif]">
 !end_verbatim
-!else
-!html_frames_backimage [hintergrund.gif]
-!endif
+#!else
+#!html_frames_backimage [hintergrund.gif]
+#!endif
 (!EXAMPLE_END)
 
 !end_node
@@ -982,8 +983,8 @@ Setzen des Frametitel für den Frame des Inhalts beim Frame-Layout.
 !begin_verbatim
 <frame src="00con.htm" name="UDOcon" marginwidth="0" marginheight="0" title="Inhalt">
 !end_verbatim
-!else
-!html_frames_con_title Inhalt
+#!else
+#!html_frames_con_title Inhalt
 !endif
 (!EXAMPLE_END)
 
@@ -2025,10 +2026,10 @@ Kapitel 1 > Kapitel 1.1 > Kapitel 1.1.1 Index
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 !html_navigation [line] ::
-!html_navigation [image] img/udo_icon_16
+!html_navigation [image] img/udo_16
 !end_verbatim
 (!EXAMPLE_AFTER)
-(!img [img/udo_icon_16] [UDO]) Kapitel 1 :: Kapitel 1.1 :: Kapitel 1.1.1 Index
+(!img [img/udo_16] [UDO]) Kapitel 1 :: Kapitel 1.1 :: Kapitel 1.1.1 Index
 (!EXAMPLE_END)
 
 !end_node
@@ -2106,7 +2107,7 @@ einer kleineren Größe. Standardmäßig verwendet UDO den Wert~(!code [1]).
 ...
 !end_node
 
-# Wert zurücksetzen
+# Wert zuruecksetzen
 !html_nodesize 3
 
 !begin_node Ein anderes Kapitel

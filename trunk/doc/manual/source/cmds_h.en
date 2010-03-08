@@ -31,6 +31,7 @@
 #   fd  Jan 20: chapter html_quotes added and translated
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: IMG renamed: udo_icon_16 -> udo_16
 #
 ################################################################################
 
@@ -1858,10 +1859,10 @@ Chapter 1 > Chapter 1.1 > Chapter 1.1.1 Index
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 !html_navigation [line] ::
-!html_navigation [image] img/udo_icon_16
+!html_navigation [image] img/udo_16
 !end_verbatim
 (!EXAMPLE_AFTER)
-(!img [img/udo_icon_16] [UDO]) Chapter 1 :: Chapter 1.1 :: Chapter 1.1.1 Index
+(!img [img/udo_16] [UDO]) Chapter 1 :: Chapter 1.1 :: Chapter 1.1.1 Index
 (!EXAMPLE_END)
 
 !end_node

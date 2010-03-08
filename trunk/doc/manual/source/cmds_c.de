@@ -275,10 +275,12 @@ Schriftfarben
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-(!red)Nach dem Platzhalter coloff(!coloff) erscheint Text wieder in der Standardfarbe Schwarz.
+(!red)Nach dem Platzhalter coloff(!coloff) erscheint Text 
+wieder in der Standardfarbe Schwarz.
 !end_verbatim
 (!EXAMPLE_AFTER)
-(!red)Nach dem Platzhalter coloff(!coloff) erscheint Text wieder in der Standardfarbe Schwarz.
+(!red)Nach dem Platzhalter coloff(!coloff) erscheint Text 
+wieder in der Standardfarbe Schwarz.
 (!EXAMPLE_END)
 
 !end_node
