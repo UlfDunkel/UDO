@@ -1009,23 +1009,23 @@ char     *s)                  /* */
       qreplace_all(ptr, DELETED_OFF, STYLELEN, ") udoshow Soff (", 16);
 
                                           /* New in V6.5.8 [NHz] */
-      qreplace_all(ptr, COLOR_BLACK, STYLELEN, ") udoshow 0 0 0 setrgbcolor (", 29);
-      qreplace_all(ptr, COLOR_SILVER, STYLELEN, ") udoshow 0 0 0 setrgbcolor (", 29);
-      qreplace_all(ptr, COLOR_GRAY, STYLELEN, ") udoshow 0 0 0 setrgbcolor (", 29);
-      qreplace_all(ptr, COLOR_WHITE, STYLELEN, ") udoshow 1 1 1 setrgbcolor (", 29);
-      qreplace_all(ptr, COLOR_MAROON, STYLELEN, ") udoshow 1 0 0.3 setrgbcolor (", 31);
-      qreplace_all(ptr, COLOR_RED, STYLELEN, ") udoshow 1 0 0 setrgbcolor (", 29);
-      qreplace_all(ptr, COLOR_PURPLE, STYLELEN, ") udoshow 1 0 1 setrgbcolor (", 29);
-      qreplace_all(ptr, COLOR_FUCHSIA, STYLELEN, ") udoshow 1 0 1 setrgbcolor (", 29);
-      qreplace_all(ptr, COLOR_GREEN, STYLELEN, ") udoshow 0 1 0 setrgbcolor (", 29);
-      qreplace_all(ptr, COLOR_LIME, STYLELEN, ") udoshow 0 0.7 0 setrgbcolor (", 31);
-      qreplace_all(ptr, COLOR_OLIVE, STYLELEN, ") udoshow 1 1 0.5 setrgbcolor (", 31);
-      qreplace_all(ptr, COLOR_YELLOW, STYLELEN, ") udoshow 1 1 0 setrgbcolor (", 29);
-      qreplace_all(ptr, COLOR_NAVY, STYLELEN, ") udoshow 0 0 1 setrgbcolor (", 29);
-      qreplace_all(ptr, COLOR_BLUE, STYLELEN, ") udoshow 0 0 1 setrgbcolor (", 29);
-      qreplace_all(ptr, COLOR_TEAL, STYLELEN, ") udoshow 0 0.3 1 setrgbcolor (", 31);
-      qreplace_all(ptr, COLOR_AQUA, STYLELEN, ") udoshow 0 1 1 setrgbcolor (", 29);
-      qreplace_all(ptr, COLOR_OFF, STYLELEN, ") udoshow bcr bcg bcb setrgbcolor (", 35);
+      qreplace_all(ptr, COLOR_BLACK,   STYLELEN, ") udoshow 0 0 0 setrgbcolor (",       29);
+      qreplace_all(ptr, COLOR_SILVER,  STYLELEN, ") udoshow 0 0 0 setrgbcolor (",       29);
+      qreplace_all(ptr, COLOR_GRAY,    STYLELEN, ") udoshow 0 0 0 setrgbcolor (",       29);
+      qreplace_all(ptr, COLOR_WHITE,   STYLELEN, ") udoshow 1 1 1 setrgbcolor (",       29);
+      qreplace_all(ptr, COLOR_MAROON,  STYLELEN, ") udoshow 1 0 0.3 setrgbcolor (",     31);
+      qreplace_all(ptr, COLOR_RED,     STYLELEN, ") udoshow 1 0 0 setrgbcolor (",       29);
+      qreplace_all(ptr, COLOR_PURPLE,  STYLELEN, ") udoshow 1 0 1 setrgbcolor (",       29);
+      qreplace_all(ptr, COLOR_FUCHSIA, STYLELEN, ") udoshow 1 0 1 setrgbcolor (",       29);
+      qreplace_all(ptr, COLOR_GREEN,   STYLELEN, ") udoshow 0 1 0 setrgbcolor (",       29);
+      qreplace_all(ptr, COLOR_LIME,    STYLELEN, ") udoshow 0 0.7 0 setrgbcolor (",     31);
+      qreplace_all(ptr, COLOR_OLIVE,   STYLELEN, ") udoshow 1 1 0.5 setrgbcolor (",     31);
+      qreplace_all(ptr, COLOR_YELLOW,  STYLELEN, ") udoshow 1 1 0 setrgbcolor (",       29);
+      qreplace_all(ptr, COLOR_NAVY,    STYLELEN, ") udoshow 0 0 1 setrgbcolor (",       29);
+      qreplace_all(ptr, COLOR_BLUE,    STYLELEN, ") udoshow 0 0 1 setrgbcolor (",       29);
+      qreplace_all(ptr, COLOR_TEAL,    STYLELEN, ") udoshow 0 0.3 1 setrgbcolor (",     31);
+      qreplace_all(ptr, COLOR_AQUA,    STYLELEN, ") udoshow 0 1 1 setrgbcolor (",       29);
+      qreplace_all(ptr, COLOR_OFF,     STYLELEN, ") udoshow bcr bcg bcb setrgbcolor (", 35);
 
       del_internal_styles(s);
    }
