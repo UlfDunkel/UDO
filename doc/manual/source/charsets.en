@@ -17,6 +17,7 @@
 # 2010:
 #   fd  Feb 25: rewritten content translated
 #   fd  Mar 05: ISO-8859-3, ISO-8859-4, CYRILLIC, ARABIC, GREEK, HEBREW
+#   fd  Mar 08: TURKISH
 #
 ################################################################################
 
@@ -50,6 +51,7 @@ ISO            !! 8859-1           !! ISO-8859-1 ISO-IR-100 ISO8859-1 ISO_8859-1
                !! 8859-6           !! ISO-8859-6 ISO-IR-127 ISO8859-6 ISO_8859-6 ARABIC CSISOLATINARABIC ASMO-708 ECMA-114
                !! 8859-7           !! ISO-8859-7 ISO-IR-126 ISO8859-7 ISO_8859-7 GREEK GREEK8 CSISOLATINGREEK ECMA-118 ELOT_928
                !! 8859-8           !! ISO-8859-8 ISO-IR-138 ISO8859-8 ISO_8859-8 HEBREW CSISOLATINHEBREW
+               !! 8859-9           !! ISO-8859-9 ISO-IR-148 ISO8859-9 ISO_8859-9 LATIN5 L5 CSISOLATIN5 TURKISH
 !hline
 Apple          !! Mac Roman        !! MAC MACINTOSH MACROMAN CSMACINTOSH
                !! Mac CentEuro     !! MAC_CE MACCENTRALEUROPE

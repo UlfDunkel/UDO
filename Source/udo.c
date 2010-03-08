@@ -96,6 +96,7 @@
 *                - CODE_CYRILLIC
 *                - CODE_ARABIC
 *                - CODE_HEBREW
+*    fd  Mar 08: - CODE_TURKISH
 *
 ******************************************|************************************/
 
@@ -369,6 +370,15 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
    {"iso_8859-8",          CODE_HEBREW   },
    {"hebrew",              CODE_HEBREW   },
    {"csisolatinhebrew",    CODE_HEBREW   },
+   
+   {"iso-8859-9",          CODE_TURKISH  },
+   {"iso-ir-148",          CODE_TURKISH  },
+   {"iso8859-9",           CODE_TURKISH  },
+   {"iso_8859-9",          CODE_TURKISH  },
+   {"latin5",              CODE_TURKISH  },
+   {"l5",                  CODE_TURKISH  },
+   {"csisolatin5",         CODE_TURKISH  },
+   {"turkish",             CODE_TURKISH  },
    
    {"mac",                 CODE_MAC      },
    {"macintosh",           CODE_MAC      },
