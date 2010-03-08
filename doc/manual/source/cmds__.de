@@ -389,7 +389,9 @@ das Ausgabeformat Gedankenstriche anzeigen kann. Andernfalls werden die beiden M
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-American English not only uses long dashes, but also prefers---we do not really know why---to ""glue"" them between words.
+American English not only uses long dashes, 
+but also prefers---we do not really know why---to ""glue"" 
+them between words.
 !end_verbatim
 (!EXAMPLE_AFTER)
 American English not only uses long dashes, but also prefers---we do not really know why---to ""glue"" them between words.

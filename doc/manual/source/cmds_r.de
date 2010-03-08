@@ -64,7 +64,9 @@ auszugebenden Inhalt selbst vorkommen sollen.
 (!EXAMPLE_BEGIN)
 !begin_verbatim
 (!raw [stg] [@subject Dokumentation/Zubehör])
-(!raw [asc] [Die runde Klammer !) und die eckige Klammer !] müssen hier geschützt werden.])
+(!raw [asc] [Die runde Klammer !) 
+            und die eckige Klammer !] 
+            müssen hier geschützt werden.])
 !end_verbatim
 (!EXAMPLE_END)
 

@@ -1177,9 +1177,16 @@ Setzt den Frametitel für den Frame des Inhaltsverzeichnisses beim Frame-Layout.
 !html_frames_toc_title Navigation
 !end_verbatim
 (!EXAMPLE_AFTER)
+!ifdest [stg]
+!begin_verbatim
+<frame src="00toc.htm" name="UDOtoc" marginwidth="0" !\
+      marginheight="0" title="Navigation">
+!end_verbatim
+!else
 !begin_verbatim
 <frame src="00toc.htm" name="UDOtoc" marginwidth="0" marginheight="0" title="Navigation">
 !end_verbatim
+!endif
 (!EXAMPLE_END)
 
 !end_node
@@ -1331,9 +1338,16 @@ Enthält (!TEXT) ""navigation"", werden die Links zur Navigation erzeugt:
 <link rel="start" href="index.html" title="Beginn des Dokumentes">
 !end_verbatim
 ebenso:
+!ifdest [stg]
+!begin_verbatim
+<link rel="home", "contents", "toc", "first", "prev", 
+      "previous", "next", "last" ...
+!end_verbatim
+!else
 !begin_verbatim
 <link rel="home", "contents", "toc", "first", "prev", "previous", "next", "last" ...
 !end_verbatim
+!endif
 (!EXAMPLE_END)
 
 (!EXAMPLE_BEFORE)
@@ -1494,10 +1508,17 @@ Meta-Informationen aufgenommen.
 !html_keywords UDO Community, Universal Document, Dokument-Generator
 !end_verbatim
 (!EXAMPLE_AFTER)
+!ifdest [stg]
+!begin_verbatim
+<meta name="Keywords" content="Dirk Hagedorn, UDO6, !\
+      Software, Converter, UDO Community, Universal !\
+      Document, Dokument-Generator">
+!end_verbatim
+!else
 !begin_verbatim
 <meta name="Keywords" content="Dirk Hagedorn, UDO6, Software, Converter, UDO Community, Universal Document, Dokument-Generator">
-
 !end_verbatim
+!endif
 (!EXAMPLE_END)
 
 !end_node
@@ -2223,6 +2244,21 @@ HTML-Anführungszeichen werden als (!code [<q>]) bzw. (!code [</q>]) ausgegeben. 
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 Hier sind CSS-Anweisungen für verschiedene An-/Abführungszeichen in verschiedenen Sprachen.
+!ifdest [stg]
+!begin_verbatim
+:lang(cs) {quotes:"\00BB" "\00AB"  !\
+                  "\203A" "\2039"; }
+:lang(de) {quotes:"\00BB" "\00AB"  !\
+                  "\203A" "\2039"; }
+:lang(en) {quotes:"\201C" "\201D"  !\
+                  "\2018" "\2019"; }
+
+q:before   { content:open-quote;  color:#2E4793; }
+q:after    { content:close-quote; color:#2E4793; }
+q q:before { content:open-quote;  color:Green;   }
+q q:after  { content:close-quote; color:Green;   }
+!end_verbatim
+!else
 !begin_verbatim
 :lang(cs) { quotes:"\00BB"      "\00AB"      "\203A"      "\2039";      }
 :lang(de) { quotes:"\00BB"      "\00AB"      "\203A"      "\2039";      }
@@ -2234,6 +2270,7 @@ q:after    { content:close-quote; color:#2E4793; }
 q q:before { content:open-quote;  color:Green;   }
 q q:after  { content:close-quote; color:Green;   }
 !end_verbatim
+!endif
 (!EXAMPLE_END)
 
 !item [classic]
@@ -2342,16 +2379,35 @@ in die Datei, die den Node enthält.
 
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
+!ifdest [stg]
+!begin_verbatim
+!html_style_name css/udo.css     title=UDO-Web
+!html_style_name css/udo_prn.css title=UDO-Druckausgabe \!
+      media=print alternate=TRUE
+!end_verbatim
+!else
 !begin_verbatim
 !html_style_name css/udo.css     title=UDO-Web
 !html_style_name css/udo_prn.css title=UDO-Druckausgabe media=print alternate=TRUE
 !end_verbatim
+!endif
 (!EXAMPLE_AFTER)
 (!IN_HTML_HEADER)
+!ifdest [stg]
+!begin_verbatim
+<link rel="stylesheet" type="text/css" \!
+      href="css/udo.css" \!
+      title="UDO-Web">
+<link rel="alternate stylesheet" type="text/css" \!
+      href="css/udo_prn.css" media="print" \!
+      title="UDO-Druckausgabe">
+!end_verbatim
+!else
 !begin_verbatim
 <link rel="stylesheet" type="text/css" href="css/udo.css" title="UDO-Web">
 <link rel="alternate stylesheet" type="text/css" href="css/udo_prn.css" media="print" title="UDO-Druckausgabe">
 !end_verbatim
+!endif
 (!EXAMPLE_END)
 
 !end_node
@@ -2517,9 +2573,12 @@ Mit diesem Kommando können Sie festlegen, dass UDO (!code [!!--]) in (!C)&(!c)(!
 !html_use_hyphenation
 
 # Hauptteil:
-Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze 
-Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze
-Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze 
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze 
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze 
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze 
+Donau!-dampf!-schiff!-fahrts!-kapitäns!-mütze
 !end_verbatim
 (!EXAMPLE_AFTER)
 Donau&shy;dampf&shy;schiff&shy;fahrts&shy;kapitäns&shy;mütze Donau&shy;dampf&shy;schiff&shy;fahrts&shy;kapitäns&shy;mütze 

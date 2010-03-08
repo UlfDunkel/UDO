@@ -205,12 +205,14 @@ WinHelp-Format umgewandelt wird.
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 !ifdest [html,stg,win]
-Dieser Text erscheint nur in den Handbuch-Formaten HTML, ST-Guide und WinHelp.
+Dieser Text erscheint nur in den Handbuch-Formaten 
+HTML, ST-Guide und WinHelp.
 !endif
 !end_verbatim
 (!EXAMPLE_AFTER)
 !ifdest [html,stg,win]
-Dieser Text erscheint nur in den Handbuch-Formaten HTML, ST-Guide und WinHelp.
+Dieser Text erscheint nur in den Handbuch-Formaten 
+HTML, ST-Guide und WinHelp.
 !endif
 (!EXAMPLE_END)
 
@@ -1120,15 +1122,33 @@ Das zweite, optionale {[(!TEXT)]} hat nur Auswirkung bei der Ausgabe nach HTML, 
 
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
+!ifdest [stg]
+!begin_verbatim
+(!img [img/udo_16] [UDO-Icon 1])
+(!img [img/udo_16] [UDO-Icon 2] [Halten Sie mal 
+      den Mauszeiger auf das Bild.])
+!end_verbatim
+!else
 !begin_verbatim
 (!img [img/udo_16] [UDO-Icon 1])
 (!img [img/udo_16] [UDO-Icon 2] [Halten Sie mal den Mauszeiger auf das Bild.])
 !end_verbatim
+!endif
 (!EXAMPLE_AFTER)
+!ifdest [stg]
+!begin_verbatim
+<img src="img/udo_16.gif" alt="UDO-Icon 1" title="UDO-Icon 1" 
+     border="0" width="16" height="16">
+<img src="img/udo_16.gif" alt="UDO-Icon 2" 
+     title="Halten Sie mal den Mauszeiger auf das Bild." 
+     border="0" width="16" height="16">
+!end_verbatim
+!else
 !begin_verbatim
 <img src="img/udo_16.gif" alt="UDO-Icon 1" title="UDO-Icon 1" border="0" width="16" height="16">
 <img src="img/udo_16.gif" alt="UDO-Icon 2" title="Halten Sie mal den Mauszeiger auf das Bild." border="0" width="16" height="16">
 !end_verbatim
+!endif
 (!img [img/udo_16] [UDO-Icon 1])
 (!img [img/udo_16] [UDO-Icon 2] [Halten Sie mal den Mauszeiger auf das Bild.])
 (!EXAMPLE_END)
@@ -1363,20 +1383,26 @@ bei der description-Umgebung und der blist-Umgebung in der Ausgabedatei fett dar
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 !begin_description
-!item [description-Umgebung] Dies ist ein Aufzählungspunkt in einer description-Umgebung.
+!item [description-Umgebung] Dies ist ein Aufzählungspunkt 
+in einer description-Umgebung.
 !item [description-Umgebung]
-Dies ist ein zweiter Aufzählungspunkt in einer description-Umgebung.
+Dies ist ein zweiter Aufzählungspunkt in einer 
+description-Umgebung.
 !item [description-Umgebung]
-      Dies ist ein dritter Aufzählungspunkt in einer description-Umgebung.
+      Dies ist ein dritter Aufzählungspunkt 
+      in einer description-Umgebung.
 !end_description
 !end_verbatim
 (!EXAMPLE_AFTER)
 !begin_description
-!item [description-Umgebung] Dies ist ein Aufzählungspunkt in einer description-Umgebung.
+!item [description-Umgebung] Dies ist ein Aufzählungspunkt 
+in einer description-Umgebung.
 !item [description-Umgebung]
-Dies ist ein zweiter Aufzählungspunkt in einer description-Umgebung.
+Dies ist ein zweiter Aufzählungspunkt in einer 
+description-Umgebung.
 !item [description-Umgebung]
-      Dies ist ein dritter Aufzählungspunkt in einer description-Umgebung.
+      Dies ist ein dritter Aufzählungspunkt 
+      in einer description-Umgebung.
 !end_description
 (!EXAMPLE_END)
 
@@ -1384,7 +1410,8 @@ Dies ist ein zweiter Aufzählungspunkt in einer description-Umgebung.
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 !begin_blist
-!item [blist-Umgebung] Dies ist ein Aufzählungspunkt in einer blist-Umgebung.
+!item [blist-Umgebung] Dies ist ein Aufzählungspunkt 
+in einer blist-Umgebung.
 !item [blist-Umgebung]
 Dies ist ein zweiter Aufzählungspunkt in einer blist-Umgebung.
 !item [blist-Umgebung]
@@ -1393,7 +1420,8 @@ Dies ist ein zweiter Aufzählungspunkt in einer blist-Umgebung.
 !end_verbatim
 (!EXAMPLE_AFTER)
 !begin_blist
-!item [blist-Umgebung] Dies ist ein Aufzählungspunkt in einer blist-Umgebung.
+!item [blist-Umgebung] Dies ist ein Aufzählungspunkt 
+in einer blist-Umgebung.
 !item [blist-Umgebung]
 Dies ist ein zweiter Aufzählungspunkt in einer blist-Umgebung.
 !item [blist-Umgebung]
@@ -1405,7 +1433,8 @@ Dies ist ein zweiter Aufzählungspunkt in einer blist-Umgebung.
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 !begin_ilist
-!item [ilist-Umgebung] Dies ist ein Aufzählungspunkt in einer ilist-Umgebung.
+!item [ilist-Umgebung] Dies ist ein Aufzählungspunkt 
+      in einer ilist-Umgebung.
 !item [ilist-Umgebung]
 Dies ist ein zweiter Aufzählungspunkt in einer ilist-Umgebung.
 !item [ilist-Umgebung]
@@ -1414,7 +1443,8 @@ Dies ist ein zweiter Aufzählungspunkt in einer ilist-Umgebung.
 !end_verbatim
 (!EXAMPLE_AFTER)
 !begin_ilist
-!item [ilist-Umgebung] Dies ist ein Aufzählungspunkt in einer ilist-Umgebung.
+!item [ilist-Umgebung] Dies ist ein Aufzählungspunkt 
+      in einer ilist-Umgebung.
 !item [ilist-Umgebung]
 Dies ist ein zweiter Aufzählungspunkt in einer ilist-Umgebung.
 !item [ilist-Umgebung]
@@ -1426,20 +1456,26 @@ Dies ist ein zweiter Aufzählungspunkt in einer ilist-Umgebung.
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 !begin_xlist
-!item [xlist-Umgebung] Dies ist ein Aufzählungspunkt in einer xlist-Umgebung.
+!item [xlist-Umgebung] Dies ist ein 
+Aufzählungspunkt in einer xlist-Umgebung.
 !item [xlist-Umgebung]
-Dies ist ein zweiter Aufzählungspunkt in einer xlist-Umgebung.
+Dies ist ein zweiter Aufzählungspunkt in einer 
+       xlist-Umgebung.
 !item [xlist-Umgebung]
-      Dies ist ein dritter Aufzählungspunkt in einer xlist-Umgebung.
+      Dies ist ein dritter Aufzählungspunkt in einer 
+      xlist-Umgebung.
 !end_xlist
 !end_verbatim
 (!EXAMPLE_AFTER)
 !begin_xlist
-!item [xlist-Umgebung] Dies ist ein Aufzählungspunkt in einer xlist-Umgebung.
+!item [xlist-Umgebung] Dies ist ein 
+Aufzählungspunkt in einer xlist-Umgebung.
 !item [xlist-Umgebung]
-Dies ist ein zweiter Aufzählungspunkt in einer xlist-Umgebung.
+Dies ist ein zweiter Aufzählungspunkt in einer 
+       xlist-Umgebung.
 !item [xlist-Umgebung]
-      Dies ist ein dritter Aufzählungspunkt in einer xlist-Umgebung.
+      Dies ist ein dritter Aufzählungspunkt in einer 
+      xlist-Umgebung.
 !end_xlist
 (!EXAMPLE_END)
 

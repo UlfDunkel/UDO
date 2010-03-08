@@ -347,10 +347,12 @@ w¸rden diese bei der Umwandlung ins ASCII-Format nicht benutzt.
 !no_effects [asc,html]
 
 # Hauptteil:
-Dieser Text soll (!B)fett(!b) dargestellt werden, auﬂer im ASCII- oder HTML-Format.
+Dieser Text soll (!B)fett(!b) dargestellt werden, 
+auﬂer im ASCII- oder HTML-Format.
 !end_verbatim
 (!EXAMPLE_AFTER)
-Dieser Text soll fett dargestellt werden, auﬂer im ASCII- oder HTML-Format.
+Dieser Text soll fett dargestellt werden, 
+auﬂer im ASCII- oder HTML-Format.
 (!EXAMPLE_END)
 
 !end_node
@@ -550,7 +552,8 @@ Dateinamen zusammen. Mit diesem Schalter kann man die Ermittlung der Ausmaﬂe dea
 !end_verbatim
 (!EXAMPLE_AFTER)
 !begin_verbatim
-<img src="img/udo_16.gif" alt="UDO-Icon" title="UDO-Icon" border="0" width="16" height="16">
+<img src="img/udo_16.gif" alt="UDO-Icon" title="UDO-Icon" 
+     border="0" width="16" height="16">
 !end_verbatim
 (!EXAMPLE_END)
 
@@ -760,11 +763,13 @@ Anf¸hrungszeichen und Apostrophe werden dann durch einfache ersetzt.
 !no_quotes [asc,man]
 
 # Hauptteil:
-Da fragte der Richter: ""Stimmt es, dass Sie neulich zum Zeugen ''Du Idiot'' gesagt haben?""
+Da fragte der Richter: ""Stimmt es, dass Sie 
+neulich zum Zeugen ''Du Idiot'' gesagt haben?""
 !end_verbatim
 (!EXAMPLE_AFTER)
 !begin_verbatim
-Da fragte der Richter: "Stimmt es, dass Sie neulich zum Zeugen 'Du Idiot' gesagt haben?"
+Da fragte der Richter: "Stimmt es, dass Sie 
+neulich zum Zeugen 'Du Idiot' gesagt haben?"
 !end_verbatim
 (!EXAMPLE_END)
 
