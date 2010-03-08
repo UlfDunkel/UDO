@@ -60,13 +60,13 @@ UDO~7 ist ein großer Sprung seit der letzten veröffentlichten Version. Vor allem
    !item (!B)Neue Sprachen für UDO-Standardtexte:(!b)
    
       !begin_blist
-      !item [(!KW [language!]) [czech]]
+      !item [(!KW [language]) [czech]]
             Tschechisch
-      !item [(!KW [language!]) [danish]]
+      !item [(!KW [language]) [danish]]
             Dänisch
-      !item [(!KW [language!]) [polish]]
+      !item [(!KW [language]) [polish]]
             Polnisch
-      !item [(!KW [language!]) [swedish]]
+      !item [(!KW [language]) [swedish]]
             Schwedish
       !end_blist
    
@@ -116,13 +116,13 @@ UDO~7 ist ein großer Sprung seit der letzten veröffentlichten Version. Vor allem
    !item Die Encodings sowohl der UDO-Dokumente als auch der Zielformate lassen sich über zwei neue Kommandos eindeutig und unabhängig vom UDO-Programm definieren:
    
       !begin_blist
-      !item [(!KW [code_source!])]
+      !item [(!KW [code_source])]
             legt das Quellformat-Encoding der UDO-Dokumente fest.
-      !item [(!KW [code_target!])]
+      !item [(!KW [code_target])]
             legt das Ausgabe-Encoding fest.
       !end_blist
    
-   !item Das früher verwendete UDO-Kommando (!code [code]) ist nicht mehr verfügbar. Ändern Sie Ihre UDO-Dokumente entsprechend ab.
+   !item Das früher verwendete UDO-Kommando (!code [!code]) ist nicht mehr verfügbar. Ändern Sie Ihre UDO-Dokumente entsprechend ab.
 
    !item Die UDO-Universalzeichen wurden erweitert und deren Umsetzung ins jeweilige Zielformat verbessert.
    
@@ -138,7 +138,7 @@ UDO~7 ist ein großer Sprung seit der letzten veröffentlichten Version. Vor allem
 
    !begin_itemize
    
-   !item (!KW [docinfo!]) hat weitere Argumente erhalten:
+   !item (!KW [docinfo]) hat weitere Argumente erhalten:
          !begin_blist
          !item [[category]]
                bezeichnet eine Kategorie, zu der das Dokument gehört.
@@ -159,7 +159,7 @@ UDO~7 ist ein großer Sprung seit der letzten veröffentlichten Version. Vor allem
       
    !item Index-Link im Inhaltsverzeichnis:
          !begin_blist
-         !item [(!KW [use_udo_index!])]
+         !item [(!KW [use_udo_index])]
                Wenn dieser Schalter benutzt wird, wird ein Link ""Index"" im Abschnitt (!KW [tableofcontents]) ausgegeben.
          !end_blist
 
@@ -201,13 +201,13 @@ Das hier ist Zelle 3
 
    !item (!B)Neue Schalter:(!b) (!nl)
          !begin_blist
-         !item [(!KW [use_short_descriptions!])]
+         !item [(!KW [use_short_descriptions])]
                Gibt alle Description-Umgebungen ""kompress"", also ohne zusätzliche Leerzeilen zwischen Absätzen, aus.
-         !item [(!KW [use_short_enumerates!])]
+         !item [(!KW [use_short_enumerates])]
                Gibt alle Enumerate-Umgebungen ""kompress"", also ohne zusätzliche Leerzeilen zwischen Absätzen, aus.
-         !item [(!KW [use_short_itemizes!])]
+         !item [(!KW [use_short_itemizes])]
                Gibt alle Itemize-Umgebungen ""kompress"", also ohne zusätzliche Leerzeilen zwischen Absätzen, aus.
-         !item [(!KW [use_short_lists!])]
+         !item [(!KW [use_short_lists])]
                Gibt alle Listen-Umgebungen ""kompress"", also ohne zusätzliche Leerzeilen zwischen Absätzen, aus.
          !end_blist
          Diese vier neuen Schalter bieten eine differenziertere Steuerung der Umgebungen-Formatierung, als es durch den Generalschalter (!KW [use_short_envs]) möglich ist.
@@ -215,7 +215,7 @@ Das hier ist Zelle 3
 
    !item (!B)Neues Kommando:(!b) (!nl)
          !begin_blist
-         !item [(!kkw [label!])]
+         !item [(!kkw [label])]
                Erzeugt manuelle Links an beliebigen Stellen im Fließtext.
          !end_blist
 
@@ -245,7 +245,7 @@ Das hier ist Zelle 3
    !item Bugfix (!BUG [38]): Zeichenausgaben (nicht nur in Mac-Encodings) sollten dank Umstellung auf Unicode keine Fehler mehr haben.
    !item Bugfix (!BUG [45])/(!BUG [77]): Stack-Overflow mit der DOS-Version von UDO behoben.
    !item Bugfix (!BUG [48]): Fehlermeldung ""unknown command: !html_use_hyphenation"". Ursache: Das Kommando fehlte in der Kommandoliste.
-   !item Bugfix (!BUG [55]): Umlaute, die in (!KKW [img!]) oder (!KKW [ilink!]) im zweiten Parameter vorkamen, wurden nicht richtig umgesetzt.
+   !item Bugfix (!BUG [55]): Umlaute, die in (!KKW [img]) oder (!KKW [ilink]) im zweiten Parameter vorkamen, wurden nicht richtig umgesetzt.
    !item Bugfix (!BUG [59]): Nichtfunktion, wenn Makro intern eine Definition aufruft.
    !item Bugfix (!BUG [75]): (!KW [raw])-Ausgaben korrigiert.
    !item Bugfix (!BUG [78]): Sortierung in der Index-Seite (z.B. indexudo.htm) wesentlich verbessert.
@@ -282,36 +282,36 @@ Das hier ist Zelle 3
    !item Neue Kommandos:
    
    !begin_blist !compressed
-   !item [(!KW [html_bgsound!])]
+   !item [(!KW [html_bgsound])]
          Legt die Hintergrundmusik für eine HTML-Seite fest.
          
-   !item [(!KW [html_robots!])]
+   !item [(!KW [html_robots])]
          Dient zum Setzen der (!code [robots])-Anweisungen für Suchmaschinen. (!code [!/html_robots]) hat Vorrang vor (!KW [docinfo]) [robots].
-   !item [(!KW [docinfo!]) [robots!]]
+   !item [(!KW [docinfo]) [robots!]]
          Dient zum Setzen der (!code [robots])-Anweisungen für Suchmaschinen. Wird nur geschrieben, wenn in einzelnen Dateien nicht (!KW [html_robots]) benutzt wird.
          
-   !item [(!KW [html_frames_toc_title!])]
+   !item [(!KW [html_frames_toc_title])]
          Setzt den TOC-Frame-Titel beim Frame-Layout.
-   !item [(!KW [html_frames_con_title!])]
+   !item [(!KW [html_frames_con_title])]
          Setzt den CON-Frame-Titel beim Frame-Layout.
    
-   !item [(!KW [html_navigation!]) [line!]]
+   !item [(!KW [html_navigation]) [line!]]
          Dieses Kommando bietet eine neue Formatierung der Navigationsleiste. 
          In den unterstützten HTML-Ausgabeformaten kann jetzt optional die Navigationsleiste einzeilig (mit und ohne Ordner-Symbol am Anfang) ausgegeben werden.
-   !item [(!KW [html_navigation!]) [image!]]
+   !item [(!KW [html_navigation]) [image!]]
          Dieses Zusatzkommando zum vorgenannten legt fest, welches Symbol als ""Ordner"" am Anfang der Navigationsleiste ausgegeben werden soll. 
          Verwenden Sie hier z.B. bei Programm-Dokumentationen das Programm-Symbol.
    !end_blist
    
    !item Neue Schalter:
    !begin_blist !compressed
-   !item [(!KW [html_header_links!])]
+   !item [(!KW [html_header_links])]
          (!BUG [53]): Neuer Schalter, der je nach Vorgabe (!LINK)-Elemente im HTML-Header erzeugt.
-   !item [(!KW [html_header_date!]) (!TEXT)]
+   !item [(!KW [html_header_date]) (!TEXT)]
          (!BUG [54]): Bisher wurde zu Beginn jeder HTML-Datei ein Kommentar mit dem Datum der Datei-Erzeugung eingefügt, z.B. (!nl)
          (!code [<!!-- last modified on 29.01.2004 -->]). 
          Nunmehr wird, wenn dieser Schalter gesetzt ist, im HTML-Header ein META-Tag für Datum/Uhrzeit der Datei-Erzeugung erzeugt.
-   !item [(!KW [html_quotes!]) [classic | tags!]]
+   !item [(!KW [html_quotes]) [classic | tags!]]
          (!BUG [82]): Mit diesem neuen Schalter können Sie steuern, ob An-/Abführungszeichen wie früher als <tt>&amp;quot;</tt> ausgegeben werden sollen ([classic]) oder als HTML-Quotation-Tags &lt;q&gt; + &lt;/q/&gt; ([tags], voreingestellt).
    !end_blist
          

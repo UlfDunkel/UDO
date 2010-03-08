@@ -122,7 +122,7 @@ If you want to display a tilde you have to use (!link [!!~] [Tilde]) instead.
 
 (!HINT)
 
-If you use a tilde inside an external link ((!KKW [url]), (!KKW [xlink])) UDO won't convert it.
+If you use a tilde inside an external link ((!KKW [url!]), (!KKW [xlink!])) UDO won't convert it.
 
 !end_node # Nonbreaking spaces
 

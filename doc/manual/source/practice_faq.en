@@ -130,7 +130,7 @@ references until you use the switch (!KW [autoref] [[on!!]]).
 
 !item [How can I link to parts of the current page?] ~
 Because UDO doesn't insert links to labels of the same page you have to
-insert a explicit link to this label by using the (!KKW [link])
+insert a explicit link to this label by using the (!KKW [link!])
 placeholder. An example:
 
 !autoref [off]

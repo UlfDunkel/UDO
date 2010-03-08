@@ -83,8 +83,8 @@ avoid them if you really want.
 
 Sometimes you maybe want to set a link to other parts of the current
 document or to other documents. To make it possible for you to insert
-links UDO offers you the placeholders called (!KKW [link]),
-(!KKW [xlink]), (!KKW [url]) and (!KKW [plink]).
+links UDO offers you the placeholders called (!KKW [link!]),
+(!KKW [xlink!]), (!KKW [url!]) and (!KKW [plink!]).
 
 (!HINT)
 
@@ -105,13 +105,13 @@ Right: (!link [Brackets!]!)] [Link])
 !html_name  hypertext_links_internal
 
 !index (!kkw [link])
-Using the (!KKW [link]) command you can insert links to parts of
+Using the (!KKW [link!]) command you can insert links to parts of
 the current document. You can link to chapters, sections, subsections,
 labels and aliases. The following list shows you how to use the link command
 and how UDO converts it:
 
 !begin_xlist [ST-Guide:] !compressed
-!item [UDO:]      (!KK2W [link] [[a text!!] [the link!!]])
+!item [UDO:]      (!KK2W [link!] [[a text!] [the link!]!])
 !item [HTML:]     <a href="file.htm#the link">a text</a>
 !item [(!LaTeX):]    a text (see \ref{the link})
 !item [ST-Guide:] @{"a text" link "the link"}
@@ -156,16 +156,16 @@ destination exists!
 !index (!kkw [img])
 !index (!kkw [link])
 Especially for Windows Help and HTML there's existing the
-(!KKW [ilink]) (""image link"") commands. It is a mixture of
-the (!KKW [img]) and (!KKW [link]) command that allows to
+(!KKW [ilink!]) (""image link"") commands. It is a mixture of
+the (!KKW [img!]) and (!KKW [link!]) command that allows to
 display ""hyperimages"". If you click an image you will jump to
 another part of the current document.
 
 !begin_xlist [WinHelp:] !compressed
-!item [UDO:]      (!KK2W [ilink] [[img!!] [text!!] [link!!]])
+!item [UDO:]      (!KK2W [ilink!] [[img!] [text!] [link!]!])
 !item [WinHelp:]  {\uldb \{bmc~img.bmp\}}{\v link}
 !item [HTML:]     <a href="link"><img src="img.gif" alt="text" border=0></a>
-!item [else:]    like (!KK2W [link] [[text!!] [link!!]])
+!item [else:]    like (!KK2W [link!] [[text!] [link!]!])
 !end_xlist
 
 (!HINTS)
@@ -192,11 +192,11 @@ more links UDO will print an error message.
 !html_name  hypertext_links_internal_pages
 
 !index (!kkw [plink])
-Especially for (!LaTeX) there's existing the (!KKW [plink])
+Especially for (!LaTeX) there's existing the (!KKW [plink!])
 (""page link"") command:
 
 !begin_xlist [LaTeX:] !compressed
-!item [UDO:] (!KK2W [plink] [[link commands!!] [Links!!]])
+!item [UDO:] (!KK2W [plink!] [[link commands!] [Links!]!])
 !item [(!LaTeX):] link commands (see page \pageref{Links})
 !item [else:] link commands
 !end_xlist
@@ -231,20 +231,20 @@ more links UDO will print an error message.
 
 !index (!kkw [xlink])
 !index (!kkw [url])
-With the (!KKW [xlink]) (""external link"") and (!KKW [url]) commands you can
+With the (!KKW [xlink!]) (""external link"") and (!KKW [url!]) commands you can
 insert links to (parts of) other documents, net sites or
 hypertexts. The difference to the upper command: UDO doesn't adjust
 special chars of the link destination. The tilde isn't a non-breaking space
 in the link destination, too.
 
 !begin_xlist [ST-Guide:] !compressed
-!item [UDO:]      (!KK2W [xlink] [[UDO!!] [*:\udo.hyp!!]])
+!item [UDO:]      (!KK2W [xlink!] [[UDO!] [*:\udo.hyp!]!])
 !item [ST-Guide:] @{"UDO" link "*:\udo.hyp"}
 (!nl)
-!item [UDO:]      (!KK2W [xlink] [[Atari!!] [http://www.atari.com!!]])
+!item [UDO:]      (!KK2W [xlink!] [[Atari!] [http://www.atari.com!]!])
 !item [HTML:]     <A HREF="http://www.atari.com">Atari</A>
 (!nl)
-!item [UDO:]      (!KK2W [xlink] [[UDO!!] [Titel@d:/winhelp/udo.hlp!!]])
+!item [UDO:]      (!KK2W [xlink!] [[UDO!] [Titel@d:/winhelp/udo.hlp!]!])
 !item [WinHelp:]  {\uldb UDO}{\v Titel@d:/winhelp/udo.hlp}
 (!nl)
 !item [else:]     UDO (or Atari)

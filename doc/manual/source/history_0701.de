@@ -61,7 +61,7 @@
 
 
 # ----------------------------------------
-!item [(!KW [docinfo!])]
+!item [(!KW [docinfo])]
 # ----------------------------------------
       !begin_itemize !compressed
       !item Die z.T. irreführenden (!KW [docinfo])-Attribute 
@@ -115,7 +115,7 @@
 # ----------------------------------------
       !begin_itemize !compressed
       !item Die UDO-Versionen für Mac OS und Mac OS X melden sich jetzt als ""UDO for Mac OS"" bzw. ""UDO for Mac OS X"".
-      !item Wenn Sie die Kommandozeilen-Option (!code [-@ F]) nutzen, müssen Sie nicht länger zwingend exakt eine Option pro Zeile in Datei (!file [F]) angeben.
+      !item Wenn Sie die Kommandozeilen-Option ""(!code [-@ F])"" nutzen, müssen Sie nicht länger zwingend exakt eine Option pro Zeile in Datei (!file [F]) angeben.
       !end_itemize
 
 

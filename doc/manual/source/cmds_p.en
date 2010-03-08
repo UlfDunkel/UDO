@@ -213,7 +213,7 @@ page reference. Converting into others formats, only ""(!TEXT)"" will be output.
 (!T)(!/plink [word] [label])(!t)
 
 !item [(!SEEALSO)]
-(!KKW [link]), (!KKW [xlink]), (!link [Links] [Links])
+(!KKW [link!]), (!KKW [xlink!]), (!link [Links] [Links])
 
 !end_xlist
 

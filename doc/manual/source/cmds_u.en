@@ -168,7 +168,7 @@ References external documents.
 
 !item [(!DESCRIPTION)]
 Useful for referencing external documents like other hypertexts or
-WWW-pages. In contrast to (!KKW [xlink]) always a link
+WWW-pages. In contrast to (!KKW [xlink!]) always a link
 to a URL will generated.
 
 The example shows how to make a link to a popular
@@ -176,7 +176,7 @@ magazine in a HTML file. If (!LINK) is empty the contents of
 (!TEXT) is used.
 
 Kommt in einem Verweis eine Tilde vor,
-so braucht dieser bei Verwendung im (!KKW [url])-Kommando
+so braucht dieser bei Verwendung im (!KKW [url!])-Kommando
 (!I)kein(!i) Ausrufezeichen vorangestellt zu werden.
 
 !item [(!EXAMPLE2)]
@@ -185,7 +185,7 @@ so braucht dieser bei Verwendung im (!KKW [url])-Kommando
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~12
 
 !item [(!SEEALSO)]
-(!KKW [link]), (!KKW [plink]), (!KKW [xlink]), (!KW [no_xlinks]), (!link [Links] [Links])
+(!KKW [link!]), (!KKW [plink!]), (!KKW [xlink!]), (!KW [no_xlinks]), (!link [Links] [Links])
 
 !end_xlist
 
@@ -482,7 +482,7 @@ commands for comments.
 (!T)!/use_comments [html,win,stg](!t)
 
 !item [(!SEEALSO)]
-(!KW [comment]), (!KW [begin_comment]), (!KKW [comment])
+(!KW [comment]), (!KW [begin_comment]), (!KKW [comment!])
 
 !end_xlist
 

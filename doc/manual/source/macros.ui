@@ -82,11 +82,20 @@
 !macro  KP (!B)(!T)(!link [(!1) (!2)][(!1)])(!t)(!b)
 
 # commands with leading !
+!ifdest [hah,hh,html]
 !macro  KW   (!B)(!T)(!link [!(!1) (!2)] [!(!1)])(!t)(!b)
 !macro  K1   (!B)(!T)(!link [!(!1) (!2)] [!(!1)])(!t)(!b)
+!else
+!macro  KW   (!T)!(!1)(!t)
+!macro  K1   (!B)(!T)(!link [!(!1) (!2)] [!(!1)])(!t)(!b)
+!endif
 
 # commands with round brackets and leading !
+!ifdest [hah,hh,html]
 !macro  KKW  (!B)(!T)(!link [(!(!1)!)] [(!/(!1)!)])(!t)(!b)
+!else
+!macro  KKW  (!T)/((!1)!)(!t)
+!endif
 !macro  KK2W (!B)(!T)(!link [(!(!1) (!2)!)] [(!/(!1)!)])(!t)(!b)
 !macro  KKKW (!B)(!T)(!link [(!(!1)!)...(!(!2)!)] [(!(!1)!)...(!(!2)!)])(!t)(!b)
 !macro  KK1  (!B)(!T)(!link [((!Exclam)(!1)!)] [((!Exclam)/(!1)!)])(!t)(!b)
