@@ -21,6 +21,7 @@
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro K1 resolved to KW
+#   fd  Mar 08: macro k1 resolved to kw
 #
 ################################################################################
 
@@ -33,7 +34,7 @@ which position a word can be divided into two pieces.
 
 You have two possibilities to set the Hyphenation patterns:
 
-!index (!k1 [/-])
+!index (!kw [/-])
 !begin_enumerate !compressed
 !item Local definition ((!KW [/-]))
 !index (!kw [hyphen])
@@ -45,7 +46,7 @@ When converting to (!LaTeX) the marks will be replaced by ""(!code [\-])"". Then
 
 When converting to RTF, Windows Help and HTML the marks are deleted.
 
-!index (!k1 [//-])
+!index (!kw [//-])
 If you want to display (!code [!/-]) you have to use (!KW [//-]).
 
 # = = = = =

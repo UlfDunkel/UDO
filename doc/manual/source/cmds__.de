@@ -21,6 +21,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 08: macro K1 resolved to KW
+#   fd  Mar 08: macro k1 resolved to kw
 #
 ################################################################################
 
@@ -403,7 +404,7 @@ American English not only uses long dashes, but also prefers---we do not really 
 
 # = = = = =
 
-!begin_node (!k1 [/-])
+!begin_node (!kw [/-])
 !html_name  cmd_syllable
 
 Marke für eine mögliche Trennstelle.
@@ -470,7 +471,7 @@ das Ausgabeformat diese anzeigen kann. Ansonsten wandelt UDO (!code [!/..]) in d
 
 # = = = = =
 
-!begin_node (!k1 [//-])
+!begin_node (!kw [//-])
 !html_name  cmd_qsyllable
 
 Die Zeichenfolge !/- ausgeben.

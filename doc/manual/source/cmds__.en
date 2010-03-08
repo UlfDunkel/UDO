@@ -17,6 +17,7 @@
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
 # 2010:
 #   fd  Mar 08: macro K1 resolved to KW
+#   fd  Mar 08: macro k1 resolved to kw
 #
 ################################################################################
 
@@ -328,7 +329,7 @@ doesn't support them UDO will output one normal minus character
 
 # = = = = =
 
-!begin_node (!k1 [/-])
+!begin_node (!kw [/-])
 !html_name  cmd_syllable
 
 Set Hyphenation mark.
@@ -388,7 +389,7 @@ display them. If not, UDO will replace them by three normal dots.
 
 # = = = = =
 
-!begin_node (!k1 [//-])
+!begin_node (!kw [//-])
 !html_name  cmd_qsyllable
 
 Output the character string !/-.
