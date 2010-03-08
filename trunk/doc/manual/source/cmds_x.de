@@ -81,11 +81,20 @@ Kommt in einem Verweis eine Tilde vor, so braucht sie bei Verwendung im (!KKW [x
 
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
+!ifdest [stg]
+!begin_verbatim
+(!xlink [BugTracker der UDO-Website] 
+        [http://bugs.udo-open-source.org/]) | 
+(!xlink [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
+(!xlink [http://www.google.de/] [])
+!end_verbatim
+!else
 !begin_verbatim
 (!xlink [BugTracker der UDO-Website] [http://bugs.udo-open-source.org/]) | 
 (!xlink [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
 (!xlink [http://www.google.de/] [])
 !end_verbatim
+!endif
 (!EXAMPLE_AFTER)
 (!xlink [BugTracker der UDO-Website] [http://bugs.udo-open-source.org/]) | 
 (!xlink [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 

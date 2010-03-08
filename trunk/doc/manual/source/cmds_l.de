@@ -429,10 +429,12 @@ Hiermit können Querverweise auf andere Kapitel oder Sprungmarken vorgenommen wer
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-Möchten Sie (!link [Kontakt] [Kontaktadresse]) mit den UDO-Entwicklern aufnehmen?
+Möchten Sie (!link [Kontakt] [Kontaktadresse]) 
+mit den UDO-Entwicklern aufnehmen?
 !end_verbatim
 (!EXAMPLE_AFTER)
-Möchten Sie (!link [Kontakt] [Kontaktadresse]) mit den UDO-Entwicklern aufnehmen?
+Möchten Sie (!link [Kontakt] [Kontaktadresse]) 
+mit den UDO-Entwicklern aufnehmen?
 (!EXAMPLE_END)
 
 !end_node

@@ -98,12 +98,14 @@ Standardgröße für verbatim-Umgebungen ist (!code [normal]).
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 !verbatimsize [small]
-Ich bin ein Text, der in kleiner Schrift in einer verbatim-Umgebung ausgegeben werden soll.
+Ich bin ein Text, der in kleiner Schrift in einer 
+verbatim-Umgebung ausgegeben werden soll.
 !end_verbatim
 (!EXAMPLE_AFTER)
 !verbatimsize [small]
 !begin_verbatim
-Ich bin ein Text, der in kleiner Schrift in einer verbatim-Umgebung ausgegeben werden soll.
+Ich bin ein Text, der in kleiner Schrift in einer 
+verbatim-Umgebung ausgegeben werden soll.
 !end_verbatim
 (!EXAMPLE_END)
 

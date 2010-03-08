@@ -61,7 +61,8 @@ ersetzt.
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann:
-!macro MfG Mit freundlichen Grüßen (!nl) (!nl)Firma Töchter & Söhne oHG (!nl)gez. Prof.~Dr. Wichtig
+!macro MfG Mit freundlichen Grüßen (!nl) (!nl) \!
+Firma Töchter & Söhne oHG (!nl)gez. Prof.~Dr. Wichtig
 
 # Hauptteil:
 (!MfG)
@@ -72,6 +73,8 @@ Mit freundlichen Grüßen
 Firma Töchter & Söhne oHG (!nl)
 gez. Prof.~Dr. Wichtig
 (!EXAMPLE_END)
+
+### YYY: fd:2010-03-08: check if ' (!nl)' works within macros!
 
 !end_node
 
@@ -261,10 +264,12 @@ Abgeschlossen wird mit (!kkw [coloff]).
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-Das Wort (!maroon)Kastanienbraun(!coloff) erscheint in der Farbe Kastanienbraun.
+Das Wort (!maroon)Kastanienbraun(!coloff) erscheint 
+in der Farbe Kastanienbraun.
 !end_verbatim
 (!EXAMPLE_AFTER)
-Das Wort (!maroon)Kastanienbraun(!coloff) erscheint in der Farbe Kastanienbraun.
+Das Wort (!maroon)Kastanienbraun(!coloff) erscheint 
+in der Farbe Kastanienbraun.
 (!EXAMPLE_END)
 
 !end_node
