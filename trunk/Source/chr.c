@@ -105,6 +105,7 @@
 *                - CODE_NORDIC
 *                - CODE_THAI
 *                - CODE_BALTIC
+*                - CODE_CELTIC
 *
 ******************************************|************************************/
 
@@ -4681,6 +4682,9 @@ int   encoding)  /* # of encoding */
    case CODE_BALTIC:
       return u_CODE_BALTIC;
    
+   case CODE_CELTIC:
+      return u_CODE_CELTIC;
+   
    case CODE_MAC:
       return u_CODE_MAC;
    
@@ -4790,6 +4794,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_BALTIC:
       return CODE_BALTIC_lig;
+   
+   case CODE_CELTIC:
+      return CODE_CELTIC_lig;
    
    case CODE_MAC:
       return CODE_MAC_lig;
@@ -4904,6 +4911,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_BALTIC:
       return sort_CODE_BALTIC;
+   
+   case CODE_CELTIC:
+      return sort_CODE_CELTIC;
    
    case CODE_MAC:
       return sort_CODE_MAC;
@@ -5047,6 +5057,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_BALTIC:
       return "ISO 8859-13 (Latin 7)";
+   
+   case CODE_CELTIC:
+      return "ISO 8859-14 (Latin 8)";
    
    case CODE_MAC:
       return "Mac";
