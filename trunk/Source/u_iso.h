@@ -5090,7 +5090,7 @@ static UWORD   CODE_TURKISH_lig[][3] =    /* CODE_TURKISH character ligatures */
    { U_LatinSmallLetterOWithDiaeresis,    U_LatinCapitalLetterO, U_LatinCapitalLetterE },  /* 0xF6   0x00F6   LATIN SMALL LETTER O WITH DIAERESIS */
    { U_LatinSmallLetterOSlash,            U_LatinCapitalLetterO, U_LatinCapitalLetterE },  /* 0xF8   0x00F8   LATIN SMALL LETTER O WITH STROKE */
    { U_LatinSmallLetterUWithDiaeresis,    U_LatinCapitalLetterU, U_LatinCapitalLetterE },  /* 0xFC   0x00FC   LATIN SMALL LETTER U WITH DIAERESIS */
-   { U_LatinSmallLetterYWithDiaeresis     U_LatinCapitalLetterY, U_LatinCapitalLetterE },  /* 0xFF   0x00FF   LATIN SMALL LETTER Y WITH DIAERESIS */
+   { U_LatinSmallLetterYWithDiaeresis,    U_LatinCapitalLetterY, U_LatinCapitalLetterE },  /* 0xFF   0x00FF   LATIN SMALL LETTER Y WITH DIAERESIS */
 
    {0x0000, U_NIL, U_NIL}                 /* list terminator */
 };
