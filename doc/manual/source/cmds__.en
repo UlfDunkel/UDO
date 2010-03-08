@@ -15,6 +15,8 @@
 # 2009:
 #   fd  Jun 04: introduced, html_name updated (no '-', no extension)
 #   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+# 2010:
+#   fd  Mar 08: macro K1 resolved to KW
 #
 ################################################################################
 
@@ -348,7 +350,7 @@ syllables of ""Hyphenation"".
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
 
 !item [(!SEEALSO)]
-(!KW [hyphen]), (!K1 [//-])
+(!KW [hyphen]), (!KW [//-])
 
 !end_xlist
 
@@ -399,13 +401,13 @@ Output the character string !/-.
 
 !item [(!DESCRIPTION)]
 This string will be converted to !/-.
-Please note that (!K1 [/-]) would be interpreted as Hyphenation mark.
+Please note that (!KW [/-]) would be interpreted as Hyphenation mark.
 
 !item [(!EXAMPLE)]
 (!T)!//-(!t) becomes !/-.
 
 !item [(!SEEALSO)]
-(!KW [hyphen]), (!K1 [/-])
+(!KW [hyphen]), (!KW [/-])
 
 !end_xlist
 

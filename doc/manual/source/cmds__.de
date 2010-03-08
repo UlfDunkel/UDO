@@ -19,6 +19,8 @@
 #   fd  Jun 09: real quotation fixed
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 08: macro K1 resolved to KW
 #
 ################################################################################
 
@@ -419,7 +421,7 @@ zeigt, wie man die Stellen des Wortes ""Silbentrennung"" markieren könnte.
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
 
 !item [(!SEEALSO)]
-(!KW [hyphen]), (!K1 [//-])
+(!KW [hyphen]), (!KW [//-])
 
 !end_xlist
 
@@ -480,11 +482,11 @@ Die Zeichenfolge !/- ausgeben.
 !item [(!SYNTAX)] (!T)!//-(!t)
 
 !item [(!DESCRIPTION)]
-Diese Zeichenfolge wird nach der Umwandlung als !/- dargestellt. Beachten Sie, dass (!K1 [/-]) als
+Diese Zeichenfolge wird nach der Umwandlung als !/- dargestellt. Beachten Sie, dass (!KW [/-]) als
 Trennstelle interpretiert wird.
 
 !item [(!SEEALSO)]
-(!KW [hyphen]), (!K1 [/-])
+(!KW [hyphen]), (!KW [/-])
 
 !end_xlist
 
