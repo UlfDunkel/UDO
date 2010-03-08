@@ -28,6 +28,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
+#   fd  Mar 08: macro KW1 resolved to KWW
 #
 ################################################################################
 
@@ -449,7 +450,7 @@ UDO erzeugt bei der Umwandlung ins (!LaTeX)-Format
 UDO erzeugt bei der Umwandlung ins (!LaTeX)-Format
 spezielle (!LaTeXe)-Kommandos, wie einen Vorspann für
 (!LaTeXe) oder (!code [\textbf{!..}]) anstelle von (!code [{\bf~!..}])
-bei der Umwandlung von (!KK1 [B]).
+bei der Umwandlung von (!KKW [B]).
 
 !item [(!SEEALSO)]
 (!KW [tex_209])
@@ -624,7 +625,7 @@ Verbatim-Zeichen für (!LaTeX) setzen (nur (!TeX))
 !item [(!DESCRIPTION)]
 ""(!CHAR)"" wird als Klammerungszeichen für den
 (!LaTeX)-Befehl (!code [\verb]) verwendet. Bei der nächsten
-Umwandlung von (!KK1 [V]) und (!KK1 [v]) wird dann ""(!CHAR)""
+Umwandlung von (!KKW [V]) und (!KKW [v]) wird dann ""(!CHAR)""
 benutzt. Als Standardzeichen benutzt UDO ""(!code[+])"".
 
 !item [(!SEEALSO)]

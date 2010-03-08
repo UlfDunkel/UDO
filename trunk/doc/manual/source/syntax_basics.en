@@ -23,6 +23,7 @@
 # 2010:
 #   fd  Mar 01: chapter basics_text adjusted
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro KW1 resolved to KWW
 #
 ################################################################################
 
@@ -96,7 +97,7 @@ Schalter können nur aus (!EXCLAM) und dem eigentlichen Schalter-Bezeichner beste
 !index Placeholder
 !item [Placeholders]
 An UDO placeholder begins with a (!OPEN_EXCLAM) and ends with a single (!code [!)]). A
-placeholder is replaced by certain characters, e.g. ""(!KK1 [B])"" by ""(!code [{\bf])"" for
+placeholder is replaced by certain characters, e.g. ""(!KKW [B])"" by ""(!code [{\bf])"" for
 (!LaTeX) or by ""(!code [<b>])"" for HTML. You can use placeholders wherever you want.
 
 !end_description

@@ -23,6 +23,7 @@
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #   fd  Mar 05: adjustments for !docinfo [webmaster...]
+#   fd  Mar 08: macro KW1 resolved to KWW
 #
 ################################################################################
 
@@ -46,7 +47,7 @@ Create a footnote.
 
 !item [(!DESCRIPTION)]
 ""(!TEXT)"" will be displayed as a footnote or in brakes. Right before
-(!KK1 [N]) shouldn't be a space, tab or linefeed!
+(!KKW [N]) shouldn't be a space, tab or linefeed!
 
 !item [(!EXAMPLE)]
 (!T)the text(!/N)the footnote(!/n)(!t)
@@ -292,7 +293,7 @@ Do not use text styles.
 
 !item [(!DESCRIPTION)]
 Switches off the usage of text emphasises. 
-(!red)Befehle wie (!KK1 [B]) werden dann nicht in Schriftarten umgewandelt, sondern einfach gefiltert.(!coloff) 
+(!red)Befehle wie (!KKW [B]) werden dann nicht in Schriftarten umgewandelt, sondern einfach gefiltert.(!coloff) 
 The example shows how to switch it of when converting to ASCII.
 
 !item [(!EXAMPLE)]

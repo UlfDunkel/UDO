@@ -22,6 +22,7 @@
 # 2010:
 #   fd  Mar 01: new macro: BUG
 #   fd  Mar 08: macro KK2W resolved into macros KKW + code
+#   fd  Mar 08: macro KW1 resolved to KWW
 #
 ################################################################################
 
@@ -59,10 +60,6 @@
 !macro MAXLINETABLE    (!const [600])
 !macro MAXCOLUMSTABLE  (!const [64])
 
-!macro  a !]
-!define exclam !(!1)
-!macro  Exclam !
-
 # universal characters, which do not work properly with the following (!code []) macro
 !macro EXCLAM       (!B)(!T)!(!t)(!b)
 !macro OPEN_EXCLAM  (!B)(!T)(!(!t)(!b)
@@ -95,16 +92,13 @@
 # ------------------------------------------
 # KKW  = (!<command>)
 # KKKW = (!<command1>)...(!<command2>)
-# KK1  =
 
 !ifdest [hah,hh,html]
 !macro  KKW  (!B)(!T)(!link [(!/(!1)!)] [(!/(!1)!)])(!t)(!b)
 !macro  KKKW (!B)(!T)(!link [(!(!1)!)...(!(!2)!)] [(!(!1)!)...(!(!2)!)])(!t)(!b)
-!macro  KK1  (!B)(!T)(!link [((!Exclam)(!1)!)] [((!Exclam)/(!1)!)])(!t)(!b)
 !else
 !macro  KKW  (!B)(!T)(!/(!1)!)(!t)(!b)
-!macro  KKKW (!B)(!T)(!link [(!(!1)!)...(!(!2)!)] [(!(!1)!)...(!(!2)!)])(!t)(!b)
-!macro  KK1  (!B)(!T)(!link [((!Exclam)(!1)!)] [((!Exclam)/(!1)!)])(!t)(!b)
+!macro  KKKW (!B)(!T)(!(!1)!)...(!(!2)!)(!t)(!b)
 !endif
 
 # unlinked command word with leading !

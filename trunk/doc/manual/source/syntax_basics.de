@@ -28,6 +28,7 @@
 # 2010:
 #   fd  Mar 01: chapter basics_text adjusted
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro KW1 resolved to KWW
 #
 ################################################################################
 
@@ -113,7 +114,7 @@ Schalter können nur aus (!EXCLAM) und dem eigentlichen Schalter-Bezeichner beste
 Ein Platzhalter ist eine mit (!OPEN_EXCLAM) beginnende
 Zeichenfolge, die durch (!code [!)]) beendet wird. Ein Platzhalter
 wird von UDO durch eine dem Ausgabeformat zugehörige Zeichenfolge
-ersetzt, z.B. ""(!KK1 [B])"" durch ""(!code [{\bf])"" für (!LaTeX) oder ""(!code [<b>])"" für HTML.
+ersetzt, z.B. ""(!KKW [B])"" durch ""(!code [{\bf])"" für (!LaTeX) oder ""(!code [<b>])"" für HTML.
 
 Platzhalter können an jeder beliebigen Stelle einer Zeile stehen.
 
