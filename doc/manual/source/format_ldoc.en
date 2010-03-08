@@ -17,6 +17,8 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+# 2010:
+#   fd  Mar 07: macro usage adjusted
 #
 ################################################################################
 
@@ -39,7 +41,7 @@ it's not a lie if I say that UDO is more powerful than Linuxdoc-SGML 1.5.
 Linuxdoc-SGML doesn't offer an environment like UDO's xlist environment. So
 UDO is forced to handle it like a description environment.
 
-!item [Linuxdoc-SGML doesn't know (!code [&Aring;]), why?] ~
+!item [Linuxdoc-SGML doesn't know (!code [&Aring;!]), why?] ~
 
 Add the following line to (!file [/usr/lib/linuxdoc-sgml/rep/html/general]):
 
