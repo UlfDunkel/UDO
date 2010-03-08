@@ -99,6 +99,7 @@
 *    fd  Mar 08: - CODE_TURKISH
 *                - CODE_NORDIC
 *                - CODE_THAI
+*                - CODE_BALTIC
 *
 ******************************************|************************************/
 
@@ -395,6 +396,15 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
    {"iso8859-11",          CODE_THAI     },
    {"iso_8859-11",         CODE_THAI     },
    {"thai",                CODE_THAI     },
+   
+   {"iso-8859-13",         CODE_BALTIC   },
+   {"iso-ir-179",          CODE_BALTIC   },
+   {"iso8859-13",          CODE_BALTIC   },
+   {"iso_8859-13",         CODE_BALTIC   },
+   {"latin7",              CODE_BALTIC   },
+   {"l7",                  CODE_BALTIC   },
+   {"csisolatin7",         CODE_BALTIC   },
+   {"baltic",              CODE_BALTIC   },
    
    {"mac",                 CODE_MAC      },
    {"macintosh",           CODE_MAC      },

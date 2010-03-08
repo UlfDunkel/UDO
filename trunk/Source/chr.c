@@ -104,6 +104,7 @@
 *    fd  Mar 08: - CODE_TURKISH
 *                - CODE_NORDIC
 *                - CODE_THAI
+*                - CODE_BALTIC
 *
 ******************************************|************************************/
 
@@ -4677,6 +4678,9 @@ int   encoding)  /* # of encoding */
    case CODE_THAI:
       return u_CODE_THAI;
    
+   case CODE_BALTIC:
+      return u_CODE_BALTIC;
+   
    case CODE_MAC:
       return u_CODE_MAC;
    
@@ -4783,6 +4787,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_THAI:
       return CODE_THAI_lig;
+   
+   case CODE_BALTIC:
+      return CODE_BALTIC_lig;
    
    case CODE_MAC:
       return CODE_MAC_lig;
@@ -4894,6 +4901,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_THAI:
       return sort_CODE_THAI;
+   
+   case CODE_BALTIC:
+      return sort_CODE_BALTIC;
    
    case CODE_MAC:
       return sort_CODE_MAC;
@@ -5034,6 +5044,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_THAI:
       return "ISO 8859-11 (Thai)";
+   
+   case CODE_BALTIC:
+      return "ISO 8859-13 (Latin 7)";
    
    case CODE_MAC:
       return "Mac";
