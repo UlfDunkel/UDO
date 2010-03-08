@@ -109,13 +109,15 @@
 !item Trennzeichen (!code [&shy;]) für die Worttrennung in HTML eingefügt
 !item Die Gedankenstriche (!code [&ndash;]) und (!code [&mdash;]) sowie
       die drei Auslassungspunkte (!code [&hellip;]) werden für HTML gesetzt.
-!item Setzen der Links für die Navigation über das Element (!code [(!LINK)]).
+!item Setzen der Links für die Navigation über das Element (!C)(!LINK)(!c).
       Folgende Attribute werden unterstützt: (!code [contents]), (!code [start]), (!code [first]),
-      (!code [previous]), (!code [prev]), (!code [next]), (!code [last]) und (!code [copyright]) (!nl)
+      (!code [previous]), (!code [prev]), (!code [next]), (!code [last]) und (!code [copyright]).
+      
       Die Links für (!code [first]) und (!code [last]) sowie (!code [previous])
       gelten nur für CAB (evtl. iCab). Der Link für (!code [copyright])
-      zeigt auf aboutudo und wird auch nur dann angelegt. (!nl)
-      CAB unterstützt beim Element (!code [(!LINK)]) leider nicht das Attribut
+      zeigt auf aboutudo und wird auch nur dann angelegt.
+      
+      CAB unterstützt beim Element (!C)(!LINK)(!c) leider nicht das Attribut
       (!code [target]). Daher funktionieren die Links bei der Benutzung
       von Frames nicht so schön.
 !item Werden bei der HTML-Ausgabe Frames erzeugt, wird zusätzlich ein Bereich
