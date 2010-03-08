@@ -130,7 +130,7 @@ accessed by a link command.
 (!T)!/label Label(!t)
 
 !item [(!SEEALSO)]
-(!link [Labels] [Labels]), (!link [Links] [Links]), (!kkw [label]), (!KKW [link!]), (!KKW [plink!])
+(!link [Labels] [Labels]), (!link [Links] [Links]), (!kkw [label]), (!KKW [link]), (!KKW [plink!])
 
 !end_xlist
 
@@ -158,7 +158,7 @@ zur Zeit nur für die RTF-Ausgabe unterstützt.
 !item [(!EXISTSSINCE)] Version 6.5.9
 
 !item [(!SEEALSO)]
-(!link [Labels] [Labels]), (!link [Links] [Links]), (!kw [label]), (!KKW [link!]), (!KKW [plink!])
+(!link [Labels] [Labels]), (!link [Links] [Links]), (!kw [label]), (!KKW [link]), (!KKW [plink!])
 
 !end_xlist
 

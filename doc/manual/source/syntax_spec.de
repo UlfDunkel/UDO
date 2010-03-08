@@ -143,7 +143,7 @@ Wenn Sie die Tilde selber ausgeben möchten, müssen Sie die Zeichenfolge (!KW [!~
 
 (!HINT)
 
-Bei externen Verweisen wie (!KKW [url!]) und (!KKW [xlink!]) wird die Tilde nicht in ein festes Leerzeichen
+Bei externen Verweisen wie (!KKW [url]) und (!KKW [xlink]) wird die Tilde nicht in ein festes Leerzeichen
 umgewandelt, wird also von UDO direkt übernommen.
 
 !end_node # Feste Leerzeichen

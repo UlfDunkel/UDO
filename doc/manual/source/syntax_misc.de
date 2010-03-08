@@ -487,7 +487,7 @@ benutzt werden. Die folgenden Beispiele zeigen, wie die Umsetzung nach
 (!LaTeX), WinHelp und RTF erfolgt:
 
 !begin_xlist [LaTeX:] !compressed
-!item [UDO:]   ein (!KK2W [idx] [[Index!!]])
+!item [UDO:]   ein (!KKW [idx]) (!code [[Index!]])
 !item [LaTeX:] ein Index\index{Index}
 !item [RTF:]   ein {\xe\v Index}Index
 !item [Win:]   ein {K{\footnote K Index}}Index
@@ -497,7 +497,7 @@ benutzt werden. Die folgenden Beispiele zeigen, wie die Umsetzung nach
 !smallskip
 
 !begin_xlist [LaTeX:] !compressed
-!item [UDO:]   ein (!KK2W [idx] [[Wort!!] [Index!!]])
+!item [UDO:]   ein (!KKW [idx]) (!code [[Wort!] [Index!]])
 !item [LaTeX:] ein Wort\index{Index}
 !item [RTF:]   ein {\xe\v Index}Wort
 !item [Win:]   ein {K{\footnote K Index}}Wort
@@ -507,7 +507,7 @@ benutzt werden. Die folgenden Beispiele zeigen, wie die Umsetzung nach
 !smallskip
 
 !begin_xlist [LaTeX:] !compressed
-!item [UDO:]   ein (!KK2W [idx] [[Wort!!] [Index!!] [Subindex!!]])
+!item [UDO:]   ein (!KKW [idx]) (!code [[Wort!] [Index!] [Subindex!]])
 !item [LaTeX:] ein Wort\index{Index!Subindex}
 !item [RTF:]   ein {\xe\v Index, Subindex}Wort
 !item [Win:]   ein {K{\footnote K Index, Subindex}}Wort
@@ -517,7 +517,7 @@ benutzt werden. Die folgenden Beispiele zeigen, wie die Umsetzung nach
 !smallskip
 
 !begin_xlist [LaTeX:] !compressed
-!item [UDO:]   ein (!KK2W [idx] [[Wort!!] [Index!!] [Subindex!!] [Subsubindex!!]])
+!item [UDO:]   ein (!KKW [idx]) (!code [[Wort!] [Index!] [Subindex!] [Subsubindex!]])
 !item [LaTeX:] ein Wort\index{Index!Subindex!Subsubindex}
 !item [RTF:]   ein {\xe\v Index, Subindex, Subsubindex}Wort
 !item [Win:]   ein {K{\footnote K Index, Subindex, Subsubindex}}Wort

@@ -55,7 +55,7 @@ Die Referenzierung wird fast komplett dem HCP des ST-Guide
 überlassen.
 
 nur bei den manuell gesetzten Links durch die Kommandos 
-(!KKW [link!]) und (!KKW [xlink!]) setzt UDO explizite Querverweise auf
+(!KKW [link]) und (!KKW [xlink!]) setzt UDO explizite Querverweise auf
 andere Kapitel oder Labels.
 
 !item [Wie werden Labels umgesetzt?]
