@@ -23,6 +23,7 @@
 #   fd  Mar 01: new macro: BUG
 #   fd  Mar 08: macro KK2W resolved into macros KKW + code
 #   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  Mar 08: macro K1 resolved to KW
 #
 ################################################################################
 
@@ -79,24 +80,19 @@
 # command parameters without leading !
 !macro  KP (!B)(!T)(!link [(!1) (!2)][(!1)])(!t)(!b)
 
-# commands with leading !
-!ifdest [hah,hh,html]
-!macro  KW   (!B)(!T)(!link [!(!1) (!2)] [!(!1)])(!t)(!b)
-!macro  K1   (!B)(!T)(!link [!(!1) (!2)] [!(!1)])(!t)(!b)
-!else
-!macro  KW   (!T)!(!1)(!t)
-!macro  K1   (!B)(!T)(!link [!(!1) (!2)] [!(!1)])(!t)(!b)
-!endif
 
 # commands with round brackets and leading !
 # ------------------------------------------
+# KW   =  !<command>
 # KKW  = (!<command>)
 # KKKW = (!<command1>)...(!<command2>)
 
 !ifdest [hah,hh,html]
+!macro  KW   (!B)(!T)(!link [!(!1) (!2)] [!(!1)])(!t)(!b)
 !macro  KKW  (!B)(!T)(!link [(!/(!1)!)] [(!/(!1)!)])(!t)(!b)
 !macro  KKKW (!B)(!T)(!link [(!(!1)!)...(!(!2)!)] [(!(!1)!)...(!(!2)!)])(!t)(!b)
 !else
+!macro  KW   (!T)!(!1)(!t)
 !macro  KKW  (!B)(!T)(!/(!1)!)(!t)(!b)
 !macro  KKKW (!B)(!T)(!(!1)!)...(!(!2)!)(!t)(!b)
 !endif

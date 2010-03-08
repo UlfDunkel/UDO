@@ -32,6 +32,7 @@
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: IMG renamed: udo_icon_16 -> udo_16
+#   fd  Mar 08: macro K1 resolved to KW
 #
 ################################################################################
 
@@ -2376,7 +2377,7 @@ it's allowed to split up the word ""Hyphenation"".
 (!T)!/hyphen syl!/-labi!/-fi!/-ca!/-tion(!t)
 
 !item [(!SEEALSO)]
-(!link [Hyphenation] [Hyphenation]), (!KW [sloppy]), (!KW [fussy]), (!K1 [//-])
+(!link [Hyphenation] [Hyphenation]), (!KW [sloppy]), (!KW [fussy]), (!KW [//-])
 
 !end_xlist
 

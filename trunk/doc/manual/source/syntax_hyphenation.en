@@ -20,6 +20,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro K1 resolved to KW
 #
 ################################################################################
 
@@ -45,14 +46,14 @@ When converting to (!LaTeX) the marks will be replaced by ""(!code [\-])"". Then
 When converting to RTF, Windows Help and HTML the marks are deleted.
 
 !index (!k1 [//-])
-If you want to display (!code [!/-]) you have to use (!K1 [//-]).
+If you want to display (!code [!/-]) you have to use (!KW [//-]).
 
 # = = = = =
 
 !begin_node Local definition of hyphenation patterns
 !html_name  hyphenation_patterns_local
 
-You can set the Hyphenation marks in the source file using ""(!K1 [/-])"". At
+You can set the Hyphenation marks in the source file using ""(!KW [/-])"". At
 these marks UDO is allowed to split up a word. A short example:
 
 (!EXAMPLE_BEGIN)
@@ -61,7 +62,7 @@ semi-automatic syl!-labi!-fi!-cation
 !end_verbatim
 (!EXAMPLE_END)
 
-When converting to (!LaTeX) UDO replaces all ""(!K1 [/-])"" by ""(!code [\-])"". So it would
+When converting to (!LaTeX) UDO replaces all ""(!KW [/-])"" by ""(!code [\-])"". So it would
 look like ""syl\-labi\-fi\-cation"".
 
 When converting to ASCII, ST-Guide, Pure C Help and Manualpage the word is split

@@ -37,6 +37,7 @@
 #   fd  Jan 20: chapter html_quotes introduced
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #   fd  Mar 08: IMG renamed: udo_icon_16 -> udo_16
+#   fd  Mar 08: macro K1 resolved to KW
 #
 ################################################################################
 
@@ -2658,7 +2659,7 @@ wird gezeigt, wie man die möglichen Trennstellen des
 Wortes ""Silbentrennung"" setzen kann.
 
 !item [(!SEEALSO)]
-(!KW [sloppy]), (!KW [fussy]), (!K1 [//-]), (!link [Silbentrennung] [Silbentrennung])
+(!KW [sloppy]), (!KW [fussy]), (!KW [//-]), (!link [Silbentrennung] [Silbentrennung])
 
 !end_xlist
 

@@ -22,6 +22,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro K1 resolved to KW
 #
 ################################################################################
 
@@ -51,14 +52,14 @@ Trennmarken einfach gefiltert.
 
 !index (!k1 [//-])
 Falls Sie die Zeichenfolge (!code [!/-]) ausgeben möchten, müssen Sie im
-Quelltext (!K1 [//-]) angeben.
+Quelltext (!KW [//-]) angeben.
 
 # = = = = =
 
 !begin_node Lokales Setzen von Trennstellen
 !html_name  hyphenation_patterns_local
 
-Im Quelltext kann man in einem Wort durch (!K1 [/-]) die Stellen markieren, an
+Im Quelltext kann man in einem Wort durch (!KW [/-]) die Stellen markieren, an
 denen UDO (bzw. (!LaTeX)) das Wort trennen darf. Ein Beispiel:
 
 (!EXAMPLE_BEGIN)
@@ -67,7 +68,7 @@ eine halbautomatische Sil!-ben!-tren!-nung.
 !end_verbatim
 (!EXAMPLE_END)
 
-Bei der Umwandlung ins (!LaTeX)-Format werden alle (!K1 [/-]) durch ""(!code [\-])"" ersetzt;
+Bei der Umwandlung ins (!LaTeX)-Format werden alle (!KW [/-]) durch ""(!code [\-])"" ersetzt;
 es wird also ""Sil\-ben\-tren\-nung"" ausgegeben. Bei der Umwandlung nach ASCII, HTML, Pure-C-Hilfe, Manualpage und ST-Guide wird das Wort
 passend aufgetrennt, falls es nicht mehr komplett in eine Zeile passt
 (z.B. in ""Sil-~bentrennung"" oder ""Silben-~trennung""). Bei allen
