@@ -28,6 +28,7 @@
 #   fd  Feb 25: - chapter 'Converting 8-bit characters' partly rewritten
 #               - universal charset table enhanced
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 07: lines in verbatim environment shortened
 #
 ################################################################################
 
@@ -91,10 +92,12 @@ vorkommende Apostrophe an.
 
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-""Der Regen fällt heute ''wie aus Eimern''"", beschwerte sich der Schäfer.
+""Der Regen fällt heute ''wie aus Eimern''"", 
+beschwerte sich der Schäfer.
 !end_verbatim
 (!EXAMPLE_AFTER)
-""Der Regen fällt heute ''wie aus Eimern''"", beschwerte sich der Schäfer.
+""Der Regen fällt heute ''wie aus Eimern''"", (!nl)
+beschwerte sich der Schäfer.
 (!EXAMPLE_END)
 
 Wenn Sie in der Ausgabedatei doppelte Apostrophe sehen möchten, so

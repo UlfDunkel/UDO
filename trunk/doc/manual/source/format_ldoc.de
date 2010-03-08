@@ -18,6 +18,8 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+# 2010:
+#   fd  Mar 07: macro usage adjusted
 #
 ################################################################################
 
@@ -48,7 +50,7 @@ Beim Linuxdoc-SGML-Format ist eine xlist-Umgebung nicht vorgesehen.
 Daher wird diese Umgebung hier als description-Umgebung behandelt,
 welche der xlist-Umgebung am ähnlichsten ist.
 
-!item [Linuxdoc-SGML bemängelt (!code [&Aring;])!?]
+!item [Linuxdoc-SGML bemängelt (!code [&Aring;!])!?]
 Fügen Sie in der Datei (!file [/usr/lib/linuxdoc-sgml/rep/html/general])
 folgende Zeile ein:
 

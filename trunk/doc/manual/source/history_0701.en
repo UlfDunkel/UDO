@@ -21,6 +21,7 @@
 #               - [Environments] added
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 06: [UDO]: commandline option '-@ F' enhanced
+#   fd  Mar 08: macro usage adjusted
 #
 ################################################################################
 
@@ -52,7 +53,7 @@
 
 
 # ----------------------------------------
-!item [(!KW [docinfo])]
+!item [(!KW [docinfo!])]
 # ----------------------------------------
       !begin_itemize !compressed
       !item The rather irritating (!KW [docinfo]) attribute names 

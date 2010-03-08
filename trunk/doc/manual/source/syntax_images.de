@@ -26,6 +26,7 @@
 #   fd  Jun 25: NDR: 'plazieren' -> 'platzieren'
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 07: lines shortened in verbatim environment
 #
 ################################################################################
 
@@ -255,7 +256,8 @@ als Bildunterschrift, sondern als Alternativtext benutzt.
 (!EXAMPLE_AFTER)
 !begin_verbatim
 <p align="...">
-<img src="tiger.gif" alt="Ein Tiger" title="Ein Tiger" width="200" height="300">
+<img src="tiger.gif" alt="Ein Tiger" title="Ein Tiger" 
+width="200" height="300">
 </p>
 !end_verbatim
 (!EXAMPLE_END)
