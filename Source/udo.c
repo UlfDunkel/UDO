@@ -5132,13 +5132,14 @@ LOCAL void c_code_source(void)
    }
 
    tokcpy2(s, 256);
-
-   my_strlwr(s);                          /* the mnemonics are LOWERCASE */
+   
+   delete_once(s, "[");
+   delete_once(s, "]");
 
    while (udocharset[i].magic[0] != EOS)
    {                                      /* compare whole string to avoid conflicts */
                                           /*  with e.g. "l1" and "l10" */
-      if (strcmp(s, udocharset[i].magic) == 0)
+      if (my_stricmp(s, udocharset[i].magic) == 0)
       {
          iEncodingSource = udocharset[i].codepage;
          return;
@@ -5180,12 +5181,13 @@ LOCAL void c_code_target(void)
 
    tokcpy2(s, 256);
 
-   my_strlwr(s);                          /* the mnemonics are LOWERCASE */
+   delete_once(s, "[");
+   delete_once(s, "]");
 
    while (udocharset[i].magic[0] != EOS)
    {                                      /* compare whole string to avoid conflicts */
                                           /*  with e.g. "l1" and "l10" */
-      if (strcmp(s, udocharset[i].magic) == 0)
+      if (my_stricmp(s, udocharset[i].magic) == 0)
       {
          iEncodingTarget = udocharset[i].codepage;
          
