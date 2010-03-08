@@ -71,6 +71,7 @@
 *                - CODE_NORDIC
 *                - CODE_THAI
 *                - CODE_BALTIC
+*                - CODE_CELTIC
 *
 ******************************************|************************************/
 
@@ -144,8 +145,9 @@
 #define CODE_NORDIC   26                  /* ISO Latin 6 (iso-8859-10) "Nordic" */
 #define CODE_THAI     27                  /* ISO Thai (iso-8859-11) */
 #define CODE_BALTIC   28                  /* ISO Latin 7 (iso-8859-13) "Baltic" */
+#define CODE_CELTIC   29                  /* ISO Latin 8 (iso-8859-14) "Celtic" */
 
-#define CODE_TOTAL    29                  /* # of supported encodings */
+#define CODE_TOTAL    30                  /* # of supported encodings */
 
    /* --- Compiler- und systemabhaengige Dinge setzen --- */
 

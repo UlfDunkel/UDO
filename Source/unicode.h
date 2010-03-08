@@ -44,7 +44,8 @@
 *    fd  Feb 24: - 0590-05FF completed (Hebrew)
 *                - 0600-06FF: Arabic
 *    fd  Mar 05: typo fixed: U_LatinSmallLetterEng
-*    fd  Mar 08: 0E00-0E7F: Thai
+*    fd  Mar 08: - 0E00-0E7F: Thai
+*                - 1E00-1EFF: Latin Extended Additional
 *
 ******************************************|************************************/
 /*KEY _NAME="unicode definitions" */
@@ -1986,7 +1987,281 @@
    /* ------ 1760-177F: Tagbanwa ------ */
    /* ------ 1780-17FF: Khmer ------ */
    /* ------ 1800-18AF: Mongolian ------ */
+   
+   
    /* ------ 1E00-1EFF: Latin Extended Additional ------ */
+   
+   /*        Latin general use extensions: */
+#define U_LatinCapitalLetterAWithRingBelow              0x1E00
+#define U_LatinSmallLetterAWithRingBelow                0x1E01
+#define U_LatinCapitalLetterBWithDotAbove               0x1E02
+#define U_LatinSmallLetterBWithDotAbove                 0x1E03
+#define U_LatinCapitalLetterBWithDotBelow               0x1E04
+#define U_LatinSmallLetterBWithDotBelow                 0x1E05
+#define U_LatinCapitalLetterBWithLineBelow              0x1E06
+#define U_LatinSmallLetterBWithLineBelow                0x1E07
+#define U_LatinCapitalLetterCWithCedillaAndAcute        0x1E08
+#define U_LatinSmallLetterCWithCedillaAndAcute          0x1E09
+#define U_LatinCapitalLetterDWithDotAbove               0x1E0A
+#define U_LatinSmallLetterDWithDotAbove                 0x1E0B
+#define U_LatinCapitalLetterDWithDotBelow               0x1E0C
+#define U_LatinSmallLetterDWithDotBelow                 0x1E0D
+#define U_LatinCapitalLetterDWithLineBelow              0x1E0E
+#define U_LatinSmallLetterDWithLineBelow                0x1E0F
+#define U_LatinCapitalLetterDWithCedilla                0x1E10
+#define U_LatinSmallLetterDWithCedilla                  0x1E11
+#define U_LatinCapitalLetterDWithCircumflexBelow        0x1E12
+#define U_LatinSmallLetterDWithCircumflexBelow          0x1E13
+#define U_LatinCapitalLetterEWithMacronAndGrave         0x1E14
+#define U_LatinSmallLetterEWithMacronAndGrave           0x1E15
+#define U_LatinCapitalLetterEWithMacronAndAcute         0x1E16
+#define U_LatinSmallLetterEWithMacronAndAcute           0x1E17
+#define U_LatinCapitalLetterEWithCircumflexBelow        0x1E18
+#define U_LatinSmallLetterEWithCircumflexBelow          0x1E19
+#define U_LatinCapitalLetterEWithTildeBelow             0x1E1A
+#define U_LatinSmallLetterEWithTildeBelow               0x1E1B
+#define U_LatinCapitalLetterEWithCedillaAndBreve        0x1E1C
+#define U_LatinSmallLetterEWithCedillaAndBreve          0x1E1D
+#define U_LatinCapitalLetterFWithDotAbove               0x1E1E
+#define U_LatinSmallLetterFWithDotAbove                 0x1E1F
+#define U_LatinCapitalLetterGWithMacron                 0x1E20
+#define U_LatinSmallLetterGWithMacron                   0x1E21
+#define U_LatinCapitalLetterHWithDotAbove               0x1E22
+#define U_LatinSmallLetterHWithDotAbove                 0x1E23
+#define U_LatinCapitalLetterHWithDotBelow               0x1E24
+#define U_LatinSmallLetterHWithDotBelow                 0x1E25
+#define U_LatinCapitalLetterHWithDiaeresis              0x1E26
+#define U_LatinSmallLetterHWithDiaeresis                0x1E27
+#define U_LatinCapitalLetterHWithCedilla                0x1E28
+#define U_LatinSmallLetterHWithCedilla                  0x1E29
+#define U_LatinCapitalLetterHWithBreveBelow             0x1E2A
+#define U_LatinSmallLetterHWithBreveBelow               0x1E2B
+#define U_LatinCapitalLetterIWithTildeBelow             0x1E2C
+#define U_LatinSmallLetterIWithTildeBelow               0x1E2D
+#define U_LatinCapitalLetterIWithDiaeresisAndAcute      0x1E2E
+#define U_LatinSmallLetterIWithDiaeresisAndAcute        0x1E2F
+#define U_LatinCapitalLetterKWithAcute                  0x1E30
+#define U_LatinSmallLetterKWithAcute                    0x1E31
+#define U_LatinCapitalLetterKWithDotBelow               0x1E32
+#define U_LatinSmallLetterKWithDotBelow                 0x1E33
+#define U_LatinCapitalLetterKWithLineBelow              0x1E34
+#define U_LatinSmallLetterKWithLineBelow                0x1E35
+#define U_LatinCapitalLetterLWithDotBelow               0x1E36
+#define U_LatinSmallLetterLWithDotBelow                 0x1E37
+#define U_LatinCapitalLetterLWithDotBelowAndMacron      0x1E38
+#define U_LatinSmallLetterLWithDotBelowAndMacron        0x1E39
+#define U_LatinCapitalLetterLWithLineBelow              0x1E3A
+#define U_LatinSmallLetterLWithLineBelow                0x1E3B
+#define U_LatinCapitalLetterLWithCircumflexBelow        0x1E3C
+#define U_LatinSmallLetterLWithCircumflexBelow          0x1E3D
+#define U_LatinCapitalLetterMWithAcute                  0x1E3E
+#define U_LatinSmallLetterMWithAcute                    0x1E3F
+#define U_LatinCapitalLetterMWithDotAbove               0x1E40
+#define U_LatinSmallLetterMWithDotAbove                 0x1E41
+#define U_LatinCapitalLetterMWithDotBelow               0x1E42
+#define U_LatinSmallLetterMWithDotBelow                 0x1E43
+#define U_LatinCapitalLetterNWithDotAbove               0x1E44
+#define U_LatinSmallLetterNWithDotAbove                 0x1E45
+#define U_LatinCapitalLetterNWithDotBelow               0x1E46
+#define U_LatinSmallLetterNWithDotBelow                 0x1E47
+#define U_LatinCapitalLetterNWithLineBelow              0x1E48
+#define U_LatinSmallLetterNWithLineBelow                0x1E49
+#define U_LatinCapitalLetterNWithCircumflexBelow        0x1E4A
+#define U_LatinSmallLetterNWithCircumflexBelow          0x1E4B
+#define U_LatinCapitalLetterOWithTildeAndAcute          0x1E4C
+#define U_LatinSmallLetterOWithTildeAndAcute            0x1E4D
+#define U_LatinCapitalLetterOWithTildeAndDiaeresis      0x1E4E
+#define U_LatinSmallLetterOWithTildeAndDiaeresis        0x1E4F
+#define U_LatinCapitalLetterOWithMacronAndGrave         0x1E50
+#define U_LatinSmallLetterOWithMacronAndGrave           0x1E51
+#define U_LatinCapitalLetterOWithMacronAndAcute         0x1E52
+#define U_LatinSmallLetterOWithMacronAndAcute           0x1E53
+#define U_LatinCapitalLetterPWithAcute                  0x1E54
+#define U_LatinSmallLetterPWithAcute                    0x1E55
+#define U_LatinCapitalLetterPWithDotAbove               0x1E56
+#define U_LatinSmallLetterPWithDotAbove                 0x1E57
+#define U_LatinCapitalLetterRWithDotAbove               0x1E58
+#define U_LatinSmallLetterRWithDotAbove                 0x1E59
+#define U_LatinCapitalLetterRWithDotBelow               0x1E5A
+#define U_LatinSmallLetterRWithDotBelow                 0x1E5B
+#define U_LatinCapitalLetterRWithDotBelowAndMacron      0x1E5C
+#define U_LatinSmallLetterRWithDotBelowAndMacron        0x1E5D
+#define U_LatinCapitalLetterRWithLineBelow              0x1E5E
+#define U_LatinSmallLetterRWithLineBelow                0x1E5F
+#define U_LatinCapitalLetterSWithDotAbove               0x1E60
+#define U_LatinSmallLetterSWithDotAbove                 0x1E61
+#define U_LatinCapitalLetterSWithDotBelow               0x1E62
+#define U_LatinSmallLetterSWithDotBelow                 0x1E63
+#define U_LatinCapitalLetterSWithAcuteAndDotAbove       0x1E64
+#define U_LatinSmallLetterSWithAcuteAndDotAbove         0x1E65
+#define U_LatinCapitalLetterSWithCaronAndDotAbove       0x1E66
+#define U_LatinSmallLetterSWithCaronAndDotAbove         0x1E67
+#define U_LatinCapitalLetterSWithDotBelowAndDotAbove    0x1E68
+#define U_LatinSmallLetterSWithDotBelowAndDotAbove      0x1E69
+#define U_LatinCapitalLetterTWithDotAbove               0x1E6A
+#define U_LatinSmallLetterTWithDotAbove                 0x1E6B
+#define U_LatinCapitalLetterTWithDotBelow               0x1E6C
+#define U_LatinSmallLetterTWithDotBelow                 0x1E6D
+#define U_LatinCapitalLetterTWithLineBelow              0x1E6E
+#define U_LatinSmallLetterTWithLineBelow                0x1E6F
+#define U_LatinCapitalLetterTWithCircumflexBelow        0x1E70
+#define U_LatinSmallLetterTWithCircumflexBelow          0x1E71
+#define U_LatinCapitalLetterUWithDiaeresisBelow         0x1E72
+#define U_LatinSmallLetterUWithDiaeresisBelow           0x1E73
+#define U_LatinCapitalLetterUWithTildeBelow             0x1E74
+#define U_LatinSmallLetterUWithTildeBelow               0x1E75
+#define U_LatinCapitalLetterUWithCircumflexBelow        0x1E76
+#define U_LatinSmallLetterUWithCircumflexBelow          0x1E77
+#define U_LatinCapitalLetterUWithTildeAndAcute          0x1E78
+#define U_LatinSmallLetterUWithTildeAndAcute            0x1E79
+#define U_LatinCapitalLetterUWithMacronAndDiaeresis     0x1E7A
+#define U_LatinSmallLetterUWithMacronAndDiaeresis       0x1E7B
+#define U_LatinCapitalLetterVWithTilde                  0x1E7C
+#define U_LatinSmallLetterVWithTilde                    0x1E7D
+#define U_LatinCapitalLetterVWithDotBelow               0x1E7E
+#define U_LatinSmallLetterVWithDotBelow                 0x1E7F
+#define U_LatinCapitalLetterWWithGrave                  0x1E80
+#define U_LatinSmallLetterWWithGrave                    0x1E81
+#define U_LatinCapitalLetterWWithAcute                  0x1E82
+#define U_LatinSmallLetterWWithAcute                    0x1E83
+#define U_LatinCapitalLetterWWithDiaeresis              0x1E84
+#define U_LatinSmallLetterWWithDiaeresis                0x1E85
+#define U_LatinCapitalLetterWWithDotAbove               0x1E86
+#define U_LatinSmallLetterWWithDotAbove                 0x1E87
+#define U_LatinCapitalLetterWWithDotBelow               0x1E88
+#define U_LatinSmallLetterWWithDotBelow                 0x1E89
+#define U_LatinCapitalLetterXWithDotAbove               0x1E8A
+#define U_LatinSmallLetterXWithDotAbove                 0x1E8B
+#define U_LatinCapitalLetterXWithDiaeresis              0x1E8C
+#define U_LatinSmallLetterXWithDiaeresis                0x1E8D
+#define U_LatinCapitalLetterYWithDotAbove               0x1E8E
+#define U_LatinSmallLetterYWithDotAbove                 0x1E8F
+#define U_LatinCapitalLetterZWithCircumflex             0x1E90
+#define U_LatinSmallLetterZWithCircumflex               0x1E91
+#define U_LatinCapitalLetterZWithDotBelow               0x1E92
+#define U_LatinSmallLetterZWithDotBelow                 0x1E93
+#define U_LatinCapitalLetterZWithLineBelow              0x1E94
+#define U_LatinSmallLetterZWithLineBelow                0x1E95
+#define U_LatinSmallLetterHWithLineBelow                0x1E96
+#define U_LatinSmallLetterTWithDiaeresis                0x1E97
+#define U_LatinSmallLetterWWithRingAbove                0x1E98
+#define U_LatinSmallLetterYWithRingAbove                0x1E99
+#define U_LatinSmallLetterAWithRightHalfRing            0x1E9A
+#define U_LatinSmallLetterLongSWithDotAbove             0x1E9B
+
+   /*        Medievalist additions: */
+#define U_LatinSmallLetterLongSWithDiagonalStroke       0x1E9C
+#define U_LatinSmallLetterLongSWithHighStroke           0x1E9D
+
+   /*        Addition for German typography: */
+#define U_LatinCapitalLetterSharpS                      0x1E9E
+
+   /*        Medievalist addition: */
+#define U_LatinSmallLetterDelta                         0x1E9F
+
+   /*        Latin extensions for Vietnamese: */
+#define U_LatinCapitalLetterAWithDotBelow               0x1EA0
+#define U_LatinSmallLetterAWithDotBelow                 0x1EA1
+#define U_LatinCapitalLetterAWithHookAbove              0x1EA2
+#define U_LatinSmallLetterAWithHookAbove                0x1EA3
+#define U_LatinCapitalLetterAWithCircumflexAndAcute     0x1EA4
+#define U_LatinSmallLetterAWithCircumflexAndAcute       0x1EA5
+#define U_LatinCapitalLetterAWithCircumflexAndGrave     0x1EA6
+#define U_LatinSmallLetterAWithCircumflexAndGrave       0x1EA7
+#define U_LatinCapitalLetterAWithCircumflexAndHookAbove 0x1EA8
+#define U_LatinSmallLetterAWithCircumflexAndHookAbove   0x1EA9
+#define U_LatinCapitalLetterAWithCircumflexAndTilde     0x1EAA
+#define U_LatinSmallLetterAWithCircumflexAndTilde       0x1EAB
+#define U_LatinCapitalLetterAWithCircumflexAndDotBelow  0x1EAC
+#define U_LatinSmallLetterAWithCircumflexAndDotBelow    0x1EAD
+#define U_LatinCapitalLetterAWithBreveAndAcute          0x1EAE
+#define U_LatinSmallLetterAWithBreveAndAcute            0x1EAF
+#define U_LatinCapitalLetterAWithBreveAndGrave          0x1EB0
+#define U_LatinSmallLetterAWithBreveAndGrave            0x1EB1
+#define U_LatinCapitalLetterAWithBreveAndHookAbove      0x1EB2
+#define U_LatinSmallLetterAWithBreveAndHookAbove        0x1EB3
+#define U_LatinCapitalLetterAWithBreveAndTilde          0x1EB4
+#define U_LatinSmallLetterAWithBreveAndTilde            0x1EB5
+#define U_LatinCapitalLetterAWithBreveAndDotBelow       0x1EB6
+#define U_LatinSmallLetterAWithBreveAndDotBelow         0x1EB7
+#define U_LatinCapitalLetterEWithDotBelow               0x1EB8
+#define U_LatinSmallLetterEWithDotBelow                 0x1EB9
+#define U_LatinCapitalLetterEWithHookAbove              0x1EBA
+#define U_LatinSmallLetterEWithHookAbove                0x1EBB
+#define U_LatinCapitalLetterEWithTilde                  0x1EBC
+#define U_LatinSmallLetterEWithTilde                    0x1EBD
+#define U_LatinCapitalLetterEWithCircumflexAndAcute     0x1EBE
+#define U_LatinSmallLetterEWithCircumflexAndAcute       0x1EBF
+#define U_LatinCapitalLetterEWithCircumflexAndGrave     0x1EC0
+#define U_LatinSmallLetterEWithCircumflexAndGrave       0x1EC1
+#define U_LatinCapitalLetterEWithCircumflexAndHookAbove 0x1EC2
+#define U_LatinSmallLetterEWithCircumflexAndHookAbove   0x1EC3
+#define U_LatinCapitalLetterEWithCircumflexAndTilde     0x1EC4
+#define U_LatinSmallLetterEWithCircumflexAndTilde       0x1EC5
+#define U_LatinCapitalLetterEWithCircumflexAndDotBelow  0x1EC6
+#define U_LatinSmallLetterEWithCircumflexAndDotBelow    0x1EC7
+#define U_LatinCapitalLetterIWithHookAbove              0x1EC8
+#define U_LatinSmallLetterIWithHookAbove                0x1EC9
+#define U_LatinCapitalLetterIWithDotBelow               0x1ECA
+#define U_LatinSmallLetterIWithDotBelow                 0x1ECB
+#define U_LatinCapitalLetterOWithDotBelow               0x1ECC
+#define U_LatinSmallLetterOWithDotBelow                 0x1ECD
+#define U_LatinCapitalLetterOWithHookAbove              0x1ECE
+#define U_LatinSmallLetterOWithHookAbove                0x1ECF
+#define U_LatinCapitalLetterOWithCircumflexAndAcute     0x1ED0
+#define U_LatinSmallLetterOWithCircumflexAndAcute       0x1ED1
+#define U_LatinCapitalLetterOWithCircumflexAndGrave     0x1ED2
+#define U_LatinSmallLetterOWithCircumflexAndGrave       0x1ED3
+#define U_LatinCapitalLetterOWithCircumflexAndHookAbove 0x1ED4
+#define U_LatinSmallLetterOWithCircumflexAndHookAbove   0x1ED5
+#define U_LatinCapitalLetterOWithCircumflexAndTilde     0x1ED6
+#define U_LatinSmallLetterOWithCircumflexAndTilde       0x1ED7
+#define U_LatinCapitalLetterOWithCircumflexAndDotBelow  0x1ED8
+#define U_LatinSmallLetterOWithCircumflexAndDotBelow    0x1ED9
+#define U_LatinCapitalLetterOWithHornAndAcute           0x1EDA
+#define U_LatinSmallLetterOWithHornAndAcute             0x1EDB
+#define U_LatinCapitalLetterOWithHornAndGrave           0x1EDC
+#define U_LatinSmallLetterOWithHornAndGrave             0x1EDD
+#define U_LatinCapitalLetterOWithHornAndHookAbove       0x1EDE
+#define U_LatinSmallLetterOWithHornAndHookAbove         0x1EDF
+#define U_LatinCapitalLetterOWithHornAndTilde           0x1EE0
+#define U_LatinSmallLetterOWithHornAndTilde             0x1EE1
+#define U_LatinCapitalLetterOWithHornAndDotBelow        0x1EE2
+#define U_LatinSmallLetterOWithHornAndDotBelow          0x1EE3
+#define U_LatinCapitalLetterUWithDotBelow               0x1EE4
+#define U_LatinSmallLetterUWithDotBelow                 0x1EE5
+#define U_LatinCapitalLetterUWithHookAbove              0x1EE6
+#define U_LatinSmallLetterUWithHookAbove                0x1EE7
+#define U_LatinCapitalLetterUWithHornAndAcute           0x1EE8
+#define U_LatinSmallLetterUWithHornAndAcute             0x1EE9
+#define U_LatinCapitalLetterUWithHornAndGrave           0x1EEA
+#define U_LatinSmallLetterUWithHornAndGrave             0x1EEB
+#define U_LatinCapitalLetterUWithHornAndHookAbove       0x1EEC
+#define U_LatinSmallLetterUWithHornAndHookAbove         0x1EED
+#define U_LatinCapitalLetterUWithHornAndTilde           0x1EEE
+#define U_LatinSmallLetterUWithHornAndTilde             0x1EEF
+#define U_LatinCapitalLetterUWithHornAndDotBelow        0x1EF0
+#define U_LatinSmallLetterUWithHornAndDotBelow          0x1EF1
+
+   /*        Latin general extensions: */
+#define U_LatinCapitalLetterYWithGrave                  0x1EF2
+#define U_LatinSmallLetterYWithGrave                    0x1EF3
+#define U_LatinCapitalLetterYWithDotBelow               0x1EF4
+#define U_LatinSmallLetterYWithDotBelow                 0x1EF5
+#define U_LatinCapitalLetterYWithHookAbove              0x1EF6
+#define U_LatinSmallLetterYWithHookAbove                0x1EF7
+#define U_LatinCapitalLetterYWithTilde                  0x1EF8
+#define U_LatinSmallLetterYWithTilde                    0x1EF9
+
+   /*        Medievalist additions: */
+#define U_LatinCapitalLetterMiddleWelshLL               0x1EFA
+#define U_LatinSmallLetterMiddleWelshLL                 0x1EFB
+#define U_LatinCapitalLetterMiddleWelshV                0x1EFC
+#define U_LatinSmallLetterMiddleWelshV                  0x1EFD
+#define U_LatinCapitalLetterYWithLoop                   0x1EFE
+#define U_LatinSmallLetterYWithLoop                     0x1EFF
+
+   
    /* ------ 1F00-1FFF: Greek Extended ------ */
 
 
