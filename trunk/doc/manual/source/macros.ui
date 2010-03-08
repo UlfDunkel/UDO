@@ -21,6 +21,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: new macro: BUG
+#   fd  Mar 08: macro KK2W resolved into macros KKW + code
 #
 ################################################################################
 
@@ -92,17 +93,16 @@
 
 # commands with round brackets and leading !
 # ------------------------------------------
-# KKW  = Klammer-Kommando
-# KK2W = Klammer-Kommando mit 2 Wörtern
-# KKKW = 
+# KKW  = (!<command>)
+# KKKW = (!<command1>)...(!<command2>)
 # KK1  =
 
 !ifdest [hah,hh,html]
-!macro  KKW  (!B)(!T)(!link [(!(!1)!)] [(!/(!1)!)])(!t)(!b)
+!macro  KKW  (!B)(!T)(!link [(!/(!1)!)] [(!/(!1)!)])(!t)(!b)
 !macro  KKKW (!B)(!T)(!link [(!(!1)!)...(!(!2)!)] [(!(!1)!)...(!(!2)!)])(!t)(!b)
 !macro  KK1  (!B)(!T)(!link [((!Exclam)(!1)!)] [((!Exclam)/(!1)!)])(!t)(!b)
 !else
-!macro  KKW  (!B)(!T)(!link [(!(!1)!)] [(!/(!1)!)])(!t)(!b)
+!macro  KKW  (!B)(!T)(!/(!1)!)(!t)(!b)
 !macro  KKKW (!B)(!T)(!link [(!(!1)!)...(!(!2)!)] [(!(!1)!)...(!(!2)!)])(!t)(!b)
 !macro  KK1  (!B)(!T)(!link [((!Exclam)(!1)!)] [((!Exclam)/(!1)!)])(!t)(!b)
 !endif
