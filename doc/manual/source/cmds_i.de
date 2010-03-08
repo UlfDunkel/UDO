@@ -34,6 +34,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
+#   fd  Mar 08: IMG renamed: udo_icon_16 -> udo_16
 #
 ################################################################################
 
@@ -839,8 +840,8 @@ Dieser Platzhalter ist eine Kombination der Platzhalter
 (!KKW [img]) und (!KKW [link]) und dient dazu,
 einen Querverweis durch eine Grafik zu ermöglichen.
 Dies ist momentan nur beim WinHelp- und HTML-Format
-möglich. Im Beispiel wird das Bild (!file [udo_icon_16.bmp]) bzw.
-(!file [udo_icon_16.gif]) zur Darstellung des Links benutzt, das
+möglich. Im Beispiel wird das Bild (!file [udo_16.bmp]) bzw.
+(!file [udo_16.gif]) zur Darstellung des Links benutzt, das
 Sprungziel lautet ""Installation"". Bei HTML wird als
 Alternativtext ""UDO installieren"" ausgegeben. Bei allen
 anderen Formaten wird nur ""UDO installieren"" ausgegeben.
@@ -855,10 +856,10 @@ anderen Formaten wird nur ""UDO installieren"" ausgegeben.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-(!ilink [img/udo_icon_16] [UDO installieren] [Installation])
+(!ilink [img/udo_16] [UDO installieren] [Installation])
 !end_verbatim
 (!EXAMPLE_AFTER)
-(!ilink [img/udo_icon_16] [UDO installieren] [Installation])
+(!ilink [img/udo_16] [UDO installieren] [Installation])
 (!EXAMPLE_END)
 
 !end_node
@@ -948,10 +949,14 @@ Bilder erhält man demnach, wenn man das (!KW [image])-Kommando in einer center-U
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!image img/udo_icon_16 UDO-Icon
+!image img/udo_16 UDO-Icon
 !end_verbatim
 (!EXAMPLE_AFTER)
-!image img/udo_icon_16 UDO-Icon
+!ifdest [html]
+!image img/udo_16 UDO-Icon
+!else
+!image images/udo_16 UDO-Icon
+!endif
 (!EXAMPLE_END)
 
 !end_node
@@ -983,10 +988,14 @@ dass in der Bildunterschrift keine Abbildungsnummer ausgegeben wird.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!image* img/udo_icon_16 UDO-Icon
+!image* img/udo_16 UDO-Icon
 !end_verbatim
 (!EXAMPLE_AFTER)
-!image* img/udo_icon_16 UDO-Icon
+!ifdest [html]
+!image* img/udo_16 UDO-Icon
+!else
+!image* images/udo_16 UDO-Icon
+!endif
 (!EXAMPLE_END)
 
 !end_node
@@ -1065,10 +1074,14 @@ ersten Abbildung folgendes: ""Abbildung 5: !.."".
 !image_counter 5
 
 # Hauptteil:
-!image img/udo_icon_16 UDO-Icon
+!image img/udo_16 UDO-Icon
 !end_verbatim
 (!EXAMPLE_AFTER)
-!image img/udo_icon_16 UDO-Icon
+!ifdest [html]
+!image img/udo_16 UDO-Icon
+!else
+!image images/udo_16 UDO-Icon
+!endif
 Abbildung 5: UDO-Icon
 (!EXAMPLE_END)
 
@@ -1108,16 +1121,16 @@ Das zweite, optionale {[(!TEXT)]} hat nur Auswirkung bei der Ausgabe nach HTML, 
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-(!img [img/udo_icon_16] [UDO-Icon 1])
-(!img [img/udo_icon_16] [UDO-Icon 2] [Halten Sie mal den Mauszeiger auf das Bild.])
+(!img [img/udo_16] [UDO-Icon 1])
+(!img [img/udo_16] [UDO-Icon 2] [Halten Sie mal den Mauszeiger auf das Bild.])
 !end_verbatim
 (!EXAMPLE_AFTER)
 !begin_verbatim
-<img src="img/udo_icon_16.gif" alt="UDO-Icon 1" title="UDO-Icon 1" border="0" width="16" height="16">
-<img src="img/udo_icon_16.gif" alt="UDO-Icon 2" title="Halten Sie mal den Mauszeiger auf das Bild." border="0" width="16" height="16">
+<img src="img/udo_16.gif" alt="UDO-Icon 1" title="UDO-Icon 1" border="0" width="16" height="16">
+<img src="img/udo_16.gif" alt="UDO-Icon 2" title="Halten Sie mal den Mauszeiger auf das Bild." border="0" width="16" height="16">
 !end_verbatim
-(!img [img/udo_icon_16] [UDO-Icon 1])
-(!img [img/udo_icon_16] [UDO-Icon 2] [Halten Sie mal den Mauszeiger auf das Bild.])
+(!img [img/udo_16] [UDO-Icon 1])
+(!img [img/udo_16] [UDO-Icon 2] [Halten Sie mal den Mauszeiger auf das Bild.])
 (!EXAMPLE_END)
 
 !end_node

@@ -25,6 +25,7 @@
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #   fd  Mar 05: adjustments for !docinfo [webmaster...]
+#   fd  Mar 08: IMG renamed: udo_icon_16 -> udo_16
 #
 ################################################################################
 
@@ -530,11 +531,11 @@ Dateinamen zusammen. Mit diesem Schalter kann man die Ermittlung der Ausmaﬂe dea
 !no_img_size [html]
 
 # Hauptteil:
-!image img/udo_icon_16
+!image img/udo_16
 !end_verbatim
 (!EXAMPLE_AFTER)
 !begin_verbatim
-<img src="img/udo_icon_16.gif" alt="" title="" border="0">
+<img src="img/udo_16.gif" alt="" title="" border="0">
 !end_verbatim
 (!EXAMPLE_END)
 
@@ -545,11 +546,11 @@ Dateinamen zusammen. Mit diesem Schalter kann man die Ermittlung der Ausmaﬂe dea
 # !no_img_size [html]
 
 # Hauptteil:
-!image img/udo_icon_16 UDO-Icon
+!image img/udo_16 UDO-Icon
 !end_verbatim
 (!EXAMPLE_AFTER)
 !begin_verbatim
-<img src="img/udo_icon_16.gif" alt="UDO-Icon" title="UDO-Icon" border="0" width="16" height="16">
+<img src="img/udo_16.gif" alt="UDO-Icon" title="UDO-Icon" border="0" width="16" height="16">
 !end_verbatim
 (!EXAMPLE_END)
 
