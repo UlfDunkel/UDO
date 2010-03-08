@@ -103,6 +103,7 @@
 *                - CODE_CELTIC
 *                - CODE_LATIN9
 *                - CODE_LATIN10
+*                - c_code_source() + c_code_target() adjusted
 *
 ******************************************|************************************/
 
@@ -5109,7 +5110,7 @@ LOCAL void c_fussy(void)
 /*******************************************************************************
 *
 *  c_code_source():
-*     change internal encoding
+*     change internal encoding for source documents
 *
 *  Notes:
 *     Reacts on the UDO command "!code_source [xxx]" and sets iEncodingSource.
@@ -5135,8 +5136,9 @@ LOCAL void c_code_source(void)
    my_strlwr(s);                          /* the mnemonics are LOWERCASE */
 
    while (udocharset[i].magic[0] != EOS)
-   {
-      if (strstr(s, udocharset[i].magic) != NULL)
+   {                                      /* compare whole string to avoid conflicts */
+                                          /*  with e.g. "l1" and "l10" */
+      if (strcmp(s, udocharset[i].magic) == 0)
       {
          iEncodingSource = udocharset[i].codepage;
          return;
@@ -5155,7 +5157,7 @@ LOCAL void c_code_source(void)
 /*******************************************************************************
 *
 *  c_code_target():
-*     change internal encoding
+*     change internal encoding for target documents
 *
 *  Notes:
 *     Reacts on the UDO command "!code_target [xxx]" and sets iEncodingTarget.
@@ -5181,8 +5183,9 @@ LOCAL void c_code_target(void)
    my_strlwr(s);                          /* the mnemonics are LOWERCASE */
 
    while (udocharset[i].magic[0] != EOS)
-   {
-      if (strstr(s, udocharset[i].magic) != NULL)
+   {                                      /* compare whole string to avoid conflicts */
+                                          /*  with e.g. "l1" and "l10" */
+      if (strcmp(s, udocharset[i].magic) == 0)
       {
          iEncodingTarget = udocharset[i].codepage;
          
