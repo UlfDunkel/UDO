@@ -617,7 +617,7 @@ in einem RTF-Dokument den Text ""siehe !.."" unterdrücken will.
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~6
 
 !item [(!SEEALSO)]
-(!KKW [link!]), (!KW [no_xlinks]), (!KKW [nolink!]), (!link [Querverweise] [Querverweise])
+(!KKW [link]), (!KW [no_xlinks]), (!KKW [nolink!]), (!link [Querverweise] [Querverweise])
 
 !end_xlist
 
@@ -1095,7 +1095,7 @@ Dieser Platzhalter sorgt dafür, dass der ausgegebene Text (Inhalt der eckigen Kl
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~2
 
 !item [(!SEEALSO)]
-(!KW [no_links]), (!KKW [link!])
+(!KW [no_links]), (!KKW [link])
 
 !end_xlist
 

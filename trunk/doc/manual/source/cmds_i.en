@@ -555,12 +555,12 @@ weiterhin möglich.
 !item [(!DESCRIPTION)]
 If this switch is part of a chapter UDO won't insert links to this
 chapter automatically. You are still able to insert links with
-(!KKW [link!]) on your own.
+(!KKW [link]) on your own.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~8
 
 !item [(!SEEALSO)]
-(!link [Links] [Links]), (!KKW [link!])
+(!link [Links] [Links]), (!KKW [link])
 
 !end_xlist
 
@@ -761,7 +761,7 @@ Create link with graphic (WinHelp and HTML only).
 
 !item [(!DESCRIPTION)]
 Dieser Platzhalter ist eine Kombination der Platzhalter
-(!KKW [img!]) und (!KKW [link!]) und dient dazu,
+(!KKW [img]) und (!KKW [link]) und dient dazu,
 einen Querverweis durch eine Grafik zu ermöglichen.
 Dies ist momentan nur beim WinHelp- und HTML-Format
 möglich. Im Beispiel wird das Bild (!file [disk.bmp]) bzw.
@@ -770,7 +770,7 @@ Sprungziel lautet ""Download"". Bei HTML wird als
 Alternativtext ""UDO downloaden"" ausgegeben. Bei allen
 anderen Formaten wird lediglich ""UDO downloaden"" ausgegeben.
 !item [(!DESCRIPTION)]
-This placeholder is a combination of (!KKW [img!]) and (!KKW [link!]) and
+This placeholder is a combination of (!KKW [img]) and (!KKW [link]) and
 is useful to display an image right inside the text. If you click
 this image you will jump to another part of the document. The example
 shows how to display an image called (!file [disk.![bmp,gif!!]])), the link
@@ -784,7 +784,7 @@ be dislayed.
 !item [(!EXISTSSINCE)] Release~4 Version~0.47
 
 !item [(!SEEALSO)]
-(!KKW [img!]), (!KKW [link!]), (!link [Links] [Links]), (!link [Images] [Images])
+(!KKW [img]), (!KKW [link]), (!link [Links] [Links]), (!link [Images] [Images])
 
 !end_xlist
 

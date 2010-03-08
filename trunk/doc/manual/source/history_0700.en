@@ -241,7 +241,7 @@ This is cell #3
    !item Bugfix (!BUG [38]): Character output should no longer have issues thanks to Unicode support (not only in Mac encodings).
    !item Bugfix (!BUG [45])/(!BUG [77]): Stack overflow in DOS version of UDO fixed.
    !item Bugfix (!BUG [48]): Error message ""unknown command: !html_use_hyphenation"". Reason: The command wasn't added to the command list.
-   !item Bugfix (!BUG [55]): Special characters which were used in the second parameter of (!KKW [img!]) or (!KKW [ilink!]), were not recoded properly.
+   !item Bugfix (!BUG [55]): Special characters which were used in the second parameter of (!KKW [img]) or (!KKW [ilink!]), were not recoded properly.
    !item Bugfix (!BUG [59]): Macros can now use definitions.
    !item Bugfix (!BUG [75]): (!KW [raw]) output corrected.
    !item Bugfix (!BUG [78]): Sorting in index page (e.g. indexudo.htm) much enhanced.
