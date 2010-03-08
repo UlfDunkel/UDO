@@ -58,8 +58,7 @@ errors printed in the error file in most cases.
 
 !end_enumerate
 
-!item	[What is the file (!file [.hpj]) good for?] ~
-
+!item	[What is the file (!file [.hpj!]) good for?]
 When converting to Windows Help UDO will save an RTF file and a project file
 for the Microsoft Helpcompiler named (!file [.hpj]). You have to start the
 HC by passing the name of this project file to get a Windows Help file.

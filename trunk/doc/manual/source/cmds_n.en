@@ -514,7 +514,7 @@ in einem RTF-Dokument den Text ""siehe !.."" unterdrücken will.(!coloff)
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~6
 
 !item [(!SEEALSO)]
-(!KKW [link]), (!KW [no_xlinks]), (!KKW [nolink]), (!link [Links] [Links])
+(!KKW [link!]), (!KW [no_xlinks]), (!KKW [nolink!]), (!link [Links] [Links])
 
 !end_xlist
 
@@ -764,7 +764,7 @@ shows how to suppress the usage of external links when converting to ST-Guide.
 (!T)!/no_urls [stg](!t)
 
 !item [(!SEEALSO)]
-(!KKW [url]), (!KW [no_links]), (!KW [no_xlinks]), (!link [Links] [Links])
+(!KKW [url!]), (!KW [no_links]), (!KW [no_xlinks]), (!link [Links] [Links])
 
 !end_xlist
 
@@ -825,7 +825,7 @@ shows how to suppress the usage of external links when converting to ST-Guide.
 !item [(!EXISTSSINCE)] Release~4 Version~0.44
 
 !item [(!SEEALSO)]
-(!KKW [xlink]), (!KW [no_links]), (!link [Links] [Links])
+(!KKW [xlink!]), (!KW [no_links]), (!link [Links] [Links])
 
 !end_xlist
 
@@ -908,7 +908,7 @@ This placeholder can be used to ensure that the text inside the brackets won't b
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~2
 
 !item [(!SEEALSO)]
-(!KW [no_links]), (!KKW [link])
+(!KW [no_links]), (!KKW [link!])
 
 !end_xlist
 

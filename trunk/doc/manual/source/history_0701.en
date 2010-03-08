@@ -61,7 +61,7 @@
 
 
 # ----------------------------------------
-!item [(!KW [docinfo!])]
+!item [(!KW [docinfo])]
 # ----------------------------------------
       !begin_itemize !compressed
       !item The rather irritating (!KW [docinfo]) attribute names 
@@ -115,7 +115,7 @@
 # ----------------------------------------
       !begin_itemize !compressed
       !item The UDO versions for Mac OS and Mac OS X now register as ""UDO for Mac OS"" and ""UDO for Mac OS X"".
-      !item When you use the commandline option (!code [-@ F]), you no longer need to enter exactly one option per text line in file (!file [F]).
+      !item When you use the commandline option ""(!code [-@ F])"", you no longer need to enter exactly one option per text line in file (!file [F]).
       !end_itemize
 
 

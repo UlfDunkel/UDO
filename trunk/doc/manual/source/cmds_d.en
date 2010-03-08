@@ -290,6 +290,24 @@ anzeigen soll.
 Werden alle diese Kontaktdaten (in vier einzelnen Zeilen!) angegeben, erzeugt UDO standardmäßig am Ende einer jeden Seite Folgende Kontektdaten-Fußzeile:
 
 (!EXAMPLE_BEFORE)
+!ifdest [asc,stg]
+!begin_verbatim
+# Vorspann
+!docinfo [domain_link]  !\
+         http://www.udo-open-source.org/
+!docinfo [domain_name]  !\
+         UDO OpenSource
+!docinfo [contact_link] !\
+         mailto:webmaster@udo-open-source.org
+!docinfo [contact_name] !\#
+         E-Mail an den Webmaster
+
+# Dokument
+!begin_document
+!make_title
+!end_document
+!end_verbatim
+!else
 !begin_verbatim
 # Vorspann
 !docinfo [domain_link]    http://www.udo-open-source.org/
@@ -302,6 +320,7 @@ Werden alle diese Kontaktdaten (in vier einzelnen Zeilen!) angegeben, erzeugt UD
 !make_title
 !end_document
 !end_verbatim
+!endif
 (!EXAMPLE_AFTER)
 Copyright (!copyright) (!url [UDO OpenSource] [http://www.udo-open-source.org/]) ((!url [E-Mail an den Webmaster] [mailto:webmaster@udo-open-source.org])) (!nl)
 Letzte Aktualisierung am (!today)
@@ -312,8 +331,8 @@ Werden weniger Informationen angegeben, so werden die Kontaktdaten in der Fußzei
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-!docinfo [domain_link]    http://www.meinedomain.de/
-!docinfo [contact_link]   ich@meinedomain.de
+!docinfo [domain_link]  http://www.mydomain.net/
+!docinfo [contact_link] mailto:me@mydomain.net
 
 # Dokument
 !begin_document
@@ -321,7 +340,7 @@ Werden weniger Informationen angegeben, so werden die Kontaktdaten in der Fußzei
 !end_document
 !end_verbatim
 (!EXAMPLE_AFTER)
-Copyright (!copyright) (!url [http://www.meinedomain.de/] [http://www.meinedomain.de/]) ((!url [ich@meinedomain.de] [mailto:ich@meinedomain.de])) (!nl)
+Copyright (!copyright) (!url [http://www.mydomain.net/] [http://www.mydomain.net/]) ((!url [me@mydomain.net] [mailto:me@mydomain.net])) (!nl)
 Letzte Aktualisierung am (!today)
 (!EXAMPLE_END)
 
@@ -346,20 +365,37 @@ Das zuletzt gezeigte Beispiel zeigt, dass nur die Parameter mit (!code [url]) im
 Aber es ist auch möglich, als Kontaktlink keine echte E-Mail-Adresse, sondern einen URL anzugeben, der zu einem Kontaktformular führt. Denn mittlerweile ist es nicht mehr unbedingt erwünscht, dass E-Mail-Adressen im Klartext in Webseiten zu sehen sind. Sonst sind sie für Roboter, die E-Mail-Adressen zum Spammen suchen, eine leichte Beute.
 
 (!EXAMPLE_BEFORE)
+!ifdest [asc,stg]
 !begin_verbatim
 # Vorspann
-!docinfo [domain_link]    http://www.meinedomain.de/
-!docinfo [domain_name]    Meine Domäne
-!docinfo [contact_link]   http://www.meinedomain.de/kontakt.php
-!docinfo [contact_name]   Kontakt
+!docinfo [domain_link]  !\
+         http://www.mydomain.net/
+!docinfo [domain_name]  My Domain
+!docinfo [contact_link] !\
+         http://www.mydomain.net/contact.php
+!docinfo [contact_name] Contact
 
 # Dokument
 !begin_document
 !make_title
 !end_document
 !end_verbatim
+!else
+!begin_verbatim
+# Vorspann
+!docinfo [domain_link]  http://www.mydomain.net/
+!docinfo [domain_name]  My Domain
+!docinfo [contact_link] http://www.mydomain.net/contact.php
+!docinfo [contact_name] Contact
+
+# Dokument
+!begin_document
+!make_title
+!end_document
+!end_verbatim
+!endif
 (!EXAMPLE_AFTER)
-Copyright (!copyright) (!url [Meine Domäne] [http://www.meinedomain.de/]) ((!url [Kontakt] [http://www.meinedomain.de/kontakt.php])) (!nl)
+Copyright (!copyright) (!url [Meine Domäne] [http://www.mydomain.net/]) ((!url [Kontakt] [http://www.mydomain.net/contact.php])) (!nl)
 Letzte Aktualisierung am (!today)
 (!EXAMPLE_END)
 
@@ -391,7 +427,7 @@ When distributor is used, the title page will show it below author and company a
 !docinfo [address] Internet: info@dirk-hagedorn.de
 !docinfo [address] Mausnet: Dirk Hagedorn @ MK2
 !docinfo [domain_link] http://www.dirk-hagedorn.de/
-!docinfo [contact_link] mailto:webmaster@dirk-hagedorn.de
+!docinfo [contact_link] mailto:me@dirk-hagedorn.de
 !docinfo [authorimage] dh
 !docinfo [date] (!today)
 !end_verbatim

@@ -14,6 +14,4 @@ Formatierungen in history.ui verbessern, HTML schaut nicht gut aus
 
 die Beispieldateien im Examples-Verzeichnis überprüfen + ggf. aktualisieren (Syntax überall aktuell?)
 
-commands.ui: Satzbau USEINSTEAD engl. überprüfen
-
 Passagen, in denen Dirk Hagedorn in "ich-Form" schreibt, überarbeiten

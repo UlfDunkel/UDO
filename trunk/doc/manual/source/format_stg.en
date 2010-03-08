@@ -51,8 +51,8 @@ UDO not to create these headlines.
 
 !item [How does UDO insert hypertext links?] ~
 
-UDO just insert hypertext links when you use (!KKW [link]) and
-(!KKW [xlink]). All the other hypertext links will be inserted by the
+UDO just insert hypertext links when you use (!KKW [link!]) and
+(!KKW [xlink!]). All the other hypertext links will be inserted by the
 HCP.
 
 !item [How does UDO convert labels?] ~

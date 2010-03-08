@@ -187,7 +187,7 @@ handelt sich nicht um eine Grafik im PCX-Format. Stellen Sie
 sicher, dass die Datei vorhanden ist und das es sich um das
 richtige Grafikformat handelt.
 
-!item [couldn't replace (!KKW [ilink!])]
+!item [couldn't replace (!KKW [ilink])]
 Ein manueller Link mit einem ""fließendes"" Bild konnte nicht
 ersetzt werden. Innerhalb eines Absatzes sind nur (!MAXLINK)
 interne und externe Querverweise sowie Querverweise auf Seiten
@@ -195,20 +195,20 @@ und ""fließende"" Bilder möglich. Teilen Sie den Absatz, in dem
 dieser manuelle Querverweis benutzt werden soll in zwei Hälften
 oder entfernen Sie ein paar manuelle Querverweise.
 
-!item [couldn't replace (!KKW [img!])]
+!item [couldn't replace (!KKW [img])]
 Ein ""fließendes"" Bild konnte nicht ersetzt werden. Innerhalb
 eines Absatzes sind nur (!MAXLINK) interne und externe Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder möglich.
 Teilen Sie den Absatz, in dem dieser manuelle Querverweis benutzt
 werden soll in zwei Hälften oder entfernen Sie ein paar manuelle
 Querverweise.
 
-!item [couldn't replace (!KKW [link!])]
+!item [couldn't replace (!KKW [link])]
 Ein manueller interner Querverweis konnte nicht ersetzt werden.
 Innerhalb eines Absatzes sind nur (!MAXLINK) interne und externe
 Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder
 möglich. Teilen Sie den Absatz, in dem dieser manuelle Querverweis benutzt werden soll in zwei Hälften oder entfernen Sie ein paar manuelle Querverweise.
 
-!item [couldn't replace (!KKW [xlink!])]
+!item [couldn't replace (!KKW [xlink])]
 Ein manueller externer Querverweis konnte nicht ersetzt werden.
 Innerhalb eines Absatzes sind nur (!MAXLINK) interne und externe
 Querverweise sowie Querverweise auf Seiten und ""fließende"" Bilder
