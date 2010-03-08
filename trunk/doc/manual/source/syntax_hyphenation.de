@@ -23,6 +23,7 @@
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro K1 resolved to KW
+#   fd  Mar 08: macro k1 resolved to kw
 #
 ################################################################################
 
@@ -34,7 +35,7 @@ Halbautomatisch bedeutet, dass Sie in einem Quelltext die Stellen markieren müss
 
 Es gibt zwei Möglichkeiten, diese Trennstellen zu setzen:
 
-!index (!k1 [/-])
+!index (!kw [/-])
 !begin_enumerate !compressed
 !item lokales Setzen durch Trennmarken (!KW [/-])
 !index (!kw [hyphen])
@@ -50,7 +51,7 @@ Bei der Ausgabe im HTML-Format werden die angegebenen Trennstellen durch ""(!cod
 Bei der Umwandlung ins Rich-Text- und WinHelp-Format werden die
 Trennmarken einfach gefiltert.
 
-!index (!k1 [//-])
+!index (!kw [//-])
 Falls Sie die Zeichenfolge (!code [!/-]) ausgeben möchten, müssen Sie im
 Quelltext (!KW [//-]) angeben.
 

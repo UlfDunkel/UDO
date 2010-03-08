@@ -24,6 +24,7 @@
 #   fd  Mar 08: macro KK2W resolved into macros KKW + code
 #   fd  Mar 08: macro KW1 resolved to KWW
 #   fd  Mar 08: macro K1 resolved to KW
+#   fd  Mar 08: macro k1 resolved to kw
 #
 ################################################################################
 
@@ -81,8 +82,8 @@
 !macro  KP (!B)(!T)(!link [(!1) (!2)][(!1)])(!t)(!b)
 
 
-# commands with round brackets and leading !
-# ------------------------------------------
+# linked commands without/with round brackets and leading !
+# ---------------------------------------------------------
 # KW   =  !<command>
 # KKW  = (!<command>)
 # KKKW = (!<command1>)...(!<command2>)
@@ -92,16 +93,18 @@
 !macro  KKW  (!B)(!T)(!link [(!/(!1)!)] [(!/(!1)!)])(!t)(!b)
 !macro  KKKW (!B)(!T)(!link [(!(!1)!)...(!(!2)!)] [(!(!1)!)...(!(!2)!)])(!t)(!b)
 !else
-!macro  KW   (!T)!(!1)(!t)
+!macro  KW   (!B)(!T)!(!1)(!t)(!b)
 !macro  KKW  (!B)(!T)(!/(!1)!)(!t)(!b)
 !macro  KKKW (!B)(!T)(!(!1)!)...(!(!2)!)(!t)(!b)
 !endif
 
-# unlinked command word with leading !
-!macro  kw   !(!1)
-!define k1   !(!1)
+# unlinked commands without/with round brackets and leading !
+# -----------------------------------------------------------
+# kw   =  !<command>
+# kkw  = (!<command>)
+# kkkw = (!<command1>)...(!<command2>)
 
-# unlinked command word with round brackets and leading !
+!macro  kw   !(!1)
 !define kkw  (!/(!1))
 !define kkkw (!/(!1))...(!/(!2))
 
