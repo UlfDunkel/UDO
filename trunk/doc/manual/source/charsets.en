@@ -17,7 +17,7 @@
 # 2010:
 #   fd  Feb 25: rewritten content translated
 #   fd  Mar 05: ISO-8859-3, ISO-8859-4, CYRILLIC, ARABIC, GREEK, HEBREW
-#   fd  Mar 08: TURKISH, NORDIC, THAI, BALTIC, CELTIC, ISO-8859-15
+#   fd  Mar 08: TURKISH, NORDIC, THAI, BALTIC, CELTIC, ISO-8859-15, ISO-8859-16
 #
 ################################################################################
 
@@ -57,6 +57,7 @@ ISO            !! 8859-1           !! ISO-8859-1 ISO-IR-100 ISO8859-1 ISO_8859-1
                !! 8859-13          !! ISO-8859-13 ISO-IR-179 ISO8859-13 ISO_8859-13 LATIN7 L7 CSISOLATIN7 BALTIC
                !! 8859-14          !! ISO-8859-14 ISO-IR-199 ISO8859-14 ISO_8859-14 LATIN8 L8 CSISOLATIN8 CELTIC ISO-CELTIC
                !! 8859-15          !! ISO-8859-15 ISO-IR-203 ISO8859-15 ISO_8859-15 LATIN9 L9 CSISOLATIN9
+               !! 8859-16          !! ISO-8859-16 ISO-IR-226 ISO8859-16 ISO_8859-16 LATIN10 L10 CSISOLATIN10
 !hline
 Apple          !! Mac Roman        !! MAC MACINTOSH MACROMAN CSMACINTOSH
                !! Mac CentEuro     !! MAC_CE MACCENTRALEUROPE

@@ -102,6 +102,7 @@
 *                - CODE_BALTIC
 *                - CODE_CELTIC
 *                - CODE_LATIN9
+*                - CODE_LATIN10
 *
 ******************************************|************************************/
 
@@ -425,6 +426,14 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
    {"latin9",              CODE_LATIN9   },
    {"l9",                  CODE_LATIN9   },
    {"csisolatin9",         CODE_LATIN9   },
+   
+   {"iso-8859-16",         CODE_LATIN10  },
+   {"iso-ir-226",          CODE_LATIN10  },
+   {"iso8859-16",          CODE_LATIN10  },
+   {"iso_8859-16",         CODE_LATIN10  },
+   {"latin10",             CODE_LATIN10  },
+   {"l10",                 CODE_LATIN10  },
+   {"csisolatin10",        CODE_LATIN10  },
    
    {"mac",                 CODE_MAC      },
    {"macintosh",           CODE_MAC      },
