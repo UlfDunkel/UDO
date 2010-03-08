@@ -98,6 +98,7 @@
 *                - CODE_HEBREW
 *    fd  Mar 08: - CODE_TURKISH
 *                - CODE_NORDIC
+*                - CODE_THAI
 *
 ******************************************|************************************/
 
@@ -389,6 +390,11 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
    {"l6",                  CODE_NORDIC   },
    {"csisolatin6",         CODE_NORDIC   },
    {"nordic",              CODE_NORDIC   },
+   
+   {"iso-8859-11",         CODE_THAI     },
+   {"iso8859-11",          CODE_THAI     },
+   {"iso_8859-11",         CODE_THAI     },
+   {"thai",                CODE_THAI     },
    
    {"mac",                 CODE_MAC      },
    {"macintosh",           CODE_MAC      },

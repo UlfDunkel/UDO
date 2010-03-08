@@ -44,6 +44,7 @@
 *    fd  Feb 24: - 0590-05FF completed (Hebrew)
 *                - 0600-06FF: Arabic
 *    fd  Mar 05: typo fixed: U_LatinSmallLetterEng
+*    fd  Mar 08: 0E00-0E7F: Thai
 *
 ******************************************|************************************/
 /*KEY _NAME="unicode definitions" */
@@ -1847,7 +1848,128 @@
    /* ------ 0C80-0CFF: Kannada ------ */
    /* ------ 0D00-0D7F: Malayalam ------ */
    /* ------ 0D80-0DFF: Sinhala ------ */
-   /* ------ 0E00-0E7F: Thai ------ */
+   
+   
+   /* ------ 0E00-0E7F: Thai (based on TIS 620-2533) ------ */
+
+/* #define U_0E00                                       0xFFFF      */
+
+   /*        Consonants: */
+#define U_ThaiCharacterKoKai                            0x0E01
+#define U_ThaiCharacterKhoKhai                          0x0E02
+#define U_ThaiCharacterKhoKhuat                         0x0E03
+#define U_ThaiCharacterKhoKhwai                         0x0E04
+#define U_ThaiCharacterKhoKhon                          0x0E05
+#define U_ThaiCharacterKhoRakhang                       0x0E06
+#define U_ThaiCharacterNgoNgu                           0x0E07
+#define U_ThaiCharacterChoChan                          0x0E08
+#define U_ThaiCharacterChoChing                         0x0E09
+#define U_ThaiCharacterChoChang                         0x0E0A
+#define U_ThaiCharacterSoSo                             0x0E0B
+#define U_ThaiCharacterChoChoe                          0x0E0C
+#define U_ThaiCharacterYoYing                           0x0E0D
+#define U_ThaiCharacterDoChada                          0x0E0E
+#define U_ThaiCharacterToPatak                          0x0E0F
+#define U_ThaiCharacterThoThan                          0x0E10
+#define U_ThaiCharacterThoNangmontho                    0x0E11
+#define U_ThaiCharacterThoPhuthao                       0x0E12
+#define U_ThaiCharacterNoNen                            0x0E13
+#define U_ThaiCharacterDoDek                            0x0E14
+#define U_ThaiCharacterToTao                            0x0E15
+#define U_ThaiCharacterThoThung                         0x0E16
+#define U_ThaiCharacterThoThahan                        0x0E17
+#define U_ThaiCharacterThoThong                         0x0E18
+#define U_ThaiCharacterNoNu                             0x0E19
+#define U_ThaiCharacterBoBaimai                         0x0E1A
+#define U_ThaiCharacterPoPla                            0x0E1B
+#define U_ThaiCharacterPhoPhung                         0x0E1C
+#define U_ThaiCharacterFoFa                             0x0E1D
+#define U_ThaiCharacterPhoPhan                          0x0E1E
+#define U_ThaiCharacterFoFan                            0x0E1F
+#define U_ThaiCharacterPhoSamphao                       0x0E20
+#define U_ThaiCharacterMoMa                             0x0E21
+#define U_ThaiCharacterYoYak                            0x0E22
+#define U_ThaiCharacterRoRua                            0x0E23
+#define U_ThaiCharacterRu                               0x0E24
+#define U_ThaiCharacterLoLing                           0x0E25
+#define U_ThaiCharacterLu                               0x0E26
+#define U_ThaiCharacterWoWaen                           0x0E27
+#define U_ThaiCharacterSoSala                           0x0E28
+#define U_ThaiCharacterSoRusi                           0x0E29
+#define U_ThaiCharacterSoSua                            0x0E2A
+#define U_ThaiCharacterHoHip                            0x0E2B
+#define U_ThaiCharacterLoChula                          0x0E2C
+#define U_ThaiCharacterOAng                             0x0E2D
+#define U_ThaiCharacterHoNokhuk                         0x0E2E
+
+   /*        Sign: */
+#define U_ThaiCharacterPaiyannoi                        0x0E2F
+
+   /*        Vowels: */
+#define U_ThaiCharacterSaraA                            0x0E30
+#define U_ThaiCharacterMaiHanAkat                       0x0E31
+#define U_ThaiCharacterSaraAa                           0x0E32
+#define U_ThaiCharacterSaraAm                           0x0E33
+#define U_ThaiCharacterSaraI                            0x0E34
+#define U_ThaiCharacterSaraIi                           0x0E35
+#define U_ThaiCharacterSaraUe                           0x0E36
+#define U_ThaiCharacterSaraUee                          0x0E37
+#define U_ThaiCharacterSaraU                            0x0E38
+#define U_ThaiCharacterSaraUu                           0x0E39
+#define U_ThaiCharacterPhinthu                          0x0E3A
+/* #define U_0E3B                                       0x0E3B      */
+/* #define U_0E3C                                       0x0E3C      */
+/* #define U_0E3D                                       0x0E3D      */
+/* #define U_0E3E                                       0x0E3E      */
+
+   /*        Currency symbol: */
+#define U_ThaiCurrencySymbolBaht                        0x0E3F
+
+   /*        Vowels: */
+#define U_ThaiCharacterSaraE                            0x0E40
+#define U_ThaiCharacterSaraAe                           0x0E41
+#define U_ThaiCharacterSaraO                            0x0E42
+#define U_ThaiCharacterSaraAiMaimuan                    0x0E43
+#define U_ThaiCharacterSaraAiMaimalai                   0x0E44
+
+   /*        Vowel length sign: */
+#define U_ThaiCharacterLakkhangyao                      0x0E45
+
+   /*        Repetition mark: */
+#define U_ThaiCharacterMaiyamok                         0x0E46
+
+   /*        Vowel: */
+#define U_ThaiCharacterMaitaikhu                        0x0E47
+
+   /*        Tone marks: */
+#define U_ThaiCharacterMaiEk                            0x0E48
+#define U_ThaiCharacterMaiTho                           0x0E49
+#define U_ThaiCharacterMaiTri                           0x0E4A
+#define U_ThaiCharacterMaiChattawa                      0x0E4B
+
+   /*        Signs: */
+#define U_ThaiCharacterThanthakhat                      0x0E4C
+#define U_ThaiCharacterNikhahit                         0x0E4D
+#define U_ThaiCharacterYamakkan                         0x0E4E
+#define U_ThaiCharacterFongman                          0x0E4F
+
+   /*        Signs: */
+#define U_ThaiDigitZero                                 0x0E50
+#define U_ThaiDigitOne                                  0x0E51
+#define U_ThaiDigitTwo                                  0x0E52
+#define U_ThaiDigitThree                                0x0E53
+#define U_ThaiDigitFour                                 0x0E54
+#define U_ThaiDigitFive                                 0x0E55
+#define U_ThaiDigitSix                                  0x0E56
+#define U_ThaiDigitSeven                                0x0E57
+#define U_ThaiDigitEight                                0x0E58
+#define U_ThaiDigitNine                                 0x0E59
+
+   /*        Signs: */
+#define U_ThaiCharacterAngkhankhu                       0x0E5A
+#define U_ThaiCharacterKhomut                           0x0E5B
+/* 0x0E5C ... 0x0E7F ==  RESERVED */
+   
    /* ------ 0E80-0EFF: Lao ------ */
    /* ------ 0F00-0FFF: Tibetan ------ */
    /* ------ 1000-109F: Myanmar ------ */

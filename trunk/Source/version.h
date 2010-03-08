@@ -69,6 +69,7 @@
 *                - CODE_HEBREW
 *    fd  Mar 08: - COOE_TURKISH
 *                - CODE_NORDIC
+*                - CODE_THAI
 *
 ******************************************|************************************/
 
@@ -140,8 +141,9 @@
 #define CODE_HEBREW   24                  /* ISO Hebrew (iso-8859-8) */
 #define CODE_TURKISH  25                  /* ISO Latin 5 (iso-8859-9) "Turkish" */
 #define CODE_NORDIC   26                  /* ISO Latin 6 (iso-8859-10) "Nordic" */
+#define CODE_THAI     27                  /* ISO Thai (iso-8859-11) */
 
-#define CODE_TOTAL    27                  /* # of supported encodings */
+#define CODE_TOTAL    28                  /* # of supported encodings */
 
    /* --- Compiler- und systemabhaengige Dinge setzen --- */
 

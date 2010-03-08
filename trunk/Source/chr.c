@@ -103,6 +103,7 @@
 *                - CODE_HEBREW
 *    fd  Mar 08: - CODE_TURKISH
 *                - CODE_NORDIC
+*                - CODE_THAI
 *
 ******************************************|************************************/
 
@@ -4673,6 +4674,9 @@ int   encoding)  /* # of encoding */
    case CODE_NORDIC:
       return u_CODE_NORDIC;
    
+   case CODE_THAI:
+      return u_CODE_THAI;
+   
    case CODE_MAC:
       return u_CODE_MAC;
    
@@ -4776,6 +4780,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_NORDIC:
       return CODE_NORDIC_lig;
+   
+   case CODE_THAI:
+      return CODE_THAI_lig;
    
    case CODE_MAC:
       return CODE_MAC_lig;
@@ -4884,6 +4891,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_NORDIC:
       return sort_CODE_NORDIC;
+   
+   case CODE_THAI:
+      return sort_CODE_THAI;
    
    case CODE_MAC:
       return sort_CODE_MAC;
@@ -5021,6 +5031,9 @@ int   encoding)  /* # of encoding */
    
    case CODE_NORDIC:
       return "ISO 8859-10 (Latin 6)";
+   
+   case CODE_THAI:
+      return "ISO 8859-11 (Thai)";
    
    case CODE_MAC:
       return "Mac";
