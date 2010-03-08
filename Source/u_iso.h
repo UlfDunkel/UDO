@@ -15,6 +15,7 @@
 *                 - u_CODE_HEBREW[]:   iso-8859-8,  Hebrew
 *                 - u_CODE_TURKISH[]:  iso-8859-9,  Latin5, Turkish
 *                 - u_CODE_NORDIC[]:   iso-8859-10, Latin6, Nordic
+*                 - u_CODE_THAI[]:     iso-8859-11, Thai
 *
 *  Open Source  : since 2001
 *
@@ -65,6 +66,7 @@
 *                - CODE_HEBREW
 *    fd  Mar 08: - CODE_TURKISH
 *                - CODE_NORDIC
+*                - CODE_THAI
 *
 ******************************************|************************************/
 
@@ -5970,6 +5972,587 @@ static UWORD   sort_CODE_NORDIC[] =       /* CODE_NORDIC */
    U_LatinCapitalLetterY,                 /* 0xFD   0x00FD   LATIN SMALL LETTER Y WITH ACUTE */
    U_LatinCapitalLetterThorn,             /* 0xFE   0x00FE   LATIN SMALL LETTER THORN (Icelandic) */
    U_LatinSmallLetterKra                  /* 0xFF   0x0138   LATIN SMALL LETTER KRA */
+};
+
+
+
+
+
+
+
+
+
+
+/******************************************************************************
+*
+*  u_CODE_THAI[]:
+*     Unicode named codepage for ISO encoding Thai (iso-8859-11)
+*
+*  Name:             ISO/IEC 8859-11:2001 to Unicode
+*  Unicode version:  3.2
+*  Table version:    1.0
+*  Table format:     Format A
+*  Date:             2002 October 7
+*  Authors:          Ken Whistler <kenw@sybase.com>
+*
+******************************************|************************************/
+
+static UWORD   u_CODE_THAI[] =            /* CODE_THAI */
+{
+   U_NUL,                                 /* 0x00  NULl */
+   U_SOH,                                 /* 0x01  Start Of Heading */
+   U_STX,                                 /* 0x02  Start of TeXt */
+   U_ETX,                                 /* 0x03  End of TeXt */
+   U_EOT,                                 /* 0x04  End Of Transmission */
+   U_ENQ,                                 /* 0x05  ENQuiry */
+   U_ACK,                                 /* 0x06  ACKnowledge */
+   U_BEL,                                 /* 0x07  BELl */
+   U_BS,                                  /* 0x08  BackSpace */
+   U_HT,                                  /* 0x09  Horizontal Tabulation */
+   U_LF,                                  /* 0x0a  Line Feed */
+   U_VT,                                  /* 0x0b  Vertical Tabulation */
+   U_FF,                                  /* 0x0c  Form Feed */
+   U_CR,                                  /* 0x0d  Carriage Return */
+   U_SO,                                  /* 0x0e  Shift Out */
+   U_SI,                                  /* 0x0f  Shift In */
+   U_DLE,                                 /* 0x10  Data Link Escape */
+   U_DC1,                                 /* 0x11  Device Control 1 */
+   U_DC2,                                 /* 0x12  Device Control 2 */
+   U_DC3,                                 /* 0x13  Device Control 3 */
+   U_DC4,                                 /* 0x14  Device Control 4 */
+   U_NAK,                                 /* 0x15  Negative AcKnowledge */
+   U_SYN,                                 /* 0x16  SYNchronous idle */
+   U_ETB,                                 /* 0x17  End of Transmission Block */
+   U_CAN,                                 /* 0x18  CANcel */
+   U_EM,                                  /* 0x19  End of Medium */
+   U_SUB,                                 /* 0x1a  SUBstitute */
+   U_ESC,                                 /* 0x1b  ESCape */
+   U_FS,                                  /* 0x1c  File Separator */
+   U_GS,                                  /* 0x1d  Group Separator */
+   U_RS,                                  /* 0x1e  Record Separator */
+   U_US,                                  /* 0x1f  Unit Separator */
+
+   U_SP,                                  /* 0x20  SPace */
+   U_ExclamationMark,                     /* 0x21  ! */
+   U_QuotationMark,                       /* 0x22  " */
+   U_NumberSign,                          /* 0x23  # */
+   U_DollarSign,                          /* 0x24  $ */
+   U_PercentSign,                         /* 0x25  % */
+   U_Ampersand,                           /* 0x26  & */
+   U_Apostrophe,                          /* 0x27  ' */
+   U_OpeningParenthesis,                  /* 0x28  ( */
+   U_ClosingParenthesis,                  /* 0x29  ) */
+   U_Asterisk,                            /* 0x2A  * */
+   U_PlusSign,                            /* 0x2B  + */
+   U_Comma,                               /* 0x2C  , */
+   U_HyphenMinus,                         /* 0x2D  - */
+   U_Period,                              /* 0x2E  . */
+   U_Slash,                               /* 0x2F  / */
+   U_Digit0,                              /* 0x30  0 */
+   U_Digit1,                              /* 0x31  1 */
+   U_Digit2,                              /* 0x32  2 */
+   U_Digit3,                              /* 0x33  3 */
+   U_Digit4,                              /* 0x34  4 */
+   U_Digit5,                              /* 0x35  5 */
+   U_Digit6,                              /* 0x36  6 */
+   U_Digit7,                              /* 0x37  7 */
+   U_Digit8,                              /* 0x38  8 */
+   U_Digit9,                              /* 0x39  9 */
+   U_Colon,                               /* 0x3A  : */
+   U_Semicolon,                           /* 0x3B  ; */
+   U_LessThanSign,                        /* 0x3C  < */
+   U_EqualsSign,                          /* 0x3D  = */
+   U_GreaterThanSign,                     /* 0x3E  > */
+   U_QuestionMark,                        /* 0x3F  ? */
+   U_CommercialAt,                        /* 0x40  @ */
+   U_LatinCapitalLetterA,                 /* 0x41  A */
+   U_LatinCapitalLetterB,                 /* 0x42  B */
+   U_LatinCapitalLetterC,                 /* 0x43  C */
+   U_LatinCapitalLetterD,                 /* 0x44  D */
+   U_LatinCapitalLetterE,                 /* 0x45  E */
+   U_LatinCapitalLetterF,                 /* 0x46  F */
+   U_LatinCapitalLetterG,                 /* 0x47  G */
+   U_LatinCapitalLetterH,                 /* 0x48  H */
+   U_LatinCapitalLetterI,                 /* 0x49  I */
+   U_LatinCapitalLetterJ,                 /* 0x4A  J */
+   U_LatinCapitalLetterK,                 /* 0x4B  K */
+   U_LatinCapitalLetterL,                 /* 0x4C  L */
+   U_LatinCapitalLetterM,                 /* 0x4D  M */
+   U_LatinCapitalLetterN,                 /* 0x4E  N */
+   U_LatinCapitalLetterO,                 /* 0x4F  O */
+   U_LatinCapitalLetterP,                 /* 0x50  P */
+   U_LatinCapitalLetterQ,                 /* 0x51  Q */
+   U_LatinCapitalLetterR,                 /* 0x52  R */
+   U_LatinCapitalLetterS,                 /* 0x53  S */
+   U_LatinCapitalLetterT,                 /* 0x54  T */
+   U_LatinCapitalLetterU,                 /* 0x55  U */
+   U_LatinCapitalLetterV,                 /* 0x56  V */
+   U_LatinCapitalLetterW,                 /* 0x57  W */
+   U_LatinCapitalLetterX,                 /* 0x58  X */
+   U_LatinCapitalLetterY,                 /* 0x59  Y */
+   U_LatinCapitalLetterZ,                 /* 0x5A  Z */
+   U_OpeningSquareBracket,                /* 0x5B  [ */
+   U_Backslash,                           /* 0x5C  \ */
+   U_ClosingSquareBracket,                /* 0x5D  ] */
+   U_CircumflexAccent,                    /* 0x5E  ^ */
+   U_SpacingUnderscore,                   /* 0x5F  _ */
+   U_GraveAccent,                         /* 0x60  ` */
+   U_LatinSmallLetterA,                   /* 0x61  a */
+   U_LatinSmallLetterB,                   /* 0x62  b */
+   U_LatinSmallLetterC,                   /* 0x63  c */
+   U_LatinSmallLetterD,                   /* 0x64  d */
+   U_LatinSmallLetterE,                   /* 0x65  e */
+   U_LatinSmallLetterF,                   /* 0x66  f */
+   U_LatinSmallLetterG,                   /* 0x67  g */
+   U_LatinSmallLetterH,                   /* 0x68  h */
+   U_LatinSmallLetterI,                   /* 0x69  i */
+   U_LatinSmallLetterJ,                   /* 0x6A  j */
+   U_LatinSmallLetterK,                   /* 0x6B  k */
+   U_LatinSmallLetterL,                   /* 0x6C  l */
+   U_LatinSmallLetterM,                   /* 0x6D  m */
+   U_LatinSmallLetterN,                   /* 0x6E  n */
+   U_LatinSmallLetterO,                   /* 0x6F  o */
+   U_LatinSmallLetterP,                   /* 0x70  p */
+   U_LatinSmallLetterQ,                   /* 0x71  q */
+   U_LatinSmallLetterR,                   /* 0x72  r */
+   U_LatinSmallLetterS,                   /* 0x73  s */
+   U_LatinSmallLetterT,                   /* 0x74  t */
+   U_LatinSmallLetterU,                   /* 0x75  u */
+   U_LatinSmallLetterV,                   /* 0x76  v */
+   U_LatinSmallLetterW,                   /* 0x77  w */
+   U_LatinSmallLetterX,                   /* 0x78  x */
+   U_LatinSmallLetterY,                   /* 0x79  y */
+   U_LatinSmallLetterZ,                   /* 0x7A  z */
+   U_OpeningCurlyBracket,                 /* 0x7B  { */
+   U_VerticalLine,                        /* 0x7C  | */
+   U_ClosingCurlyBracket,                 /* 0x7D  } */
+   U_Tilde,                               /* 0x7E  ~ */
+   U_DEL,                                 /* 0x7F  Delete */
+
+   U_NIL,                                 /* 0x80   0x0080   <control> */
+   U_NIL,                                 /* 0x81   0x0081   <control> */
+   U_NIL,                                 /* 0x82   0x0082   <control> */
+   U_NIL,                                 /* 0x83   0x0083   <control> */
+   U_NIL,                                 /* 0x84   0x0084   <control> */
+   U_NIL,                                 /* 0x85   0x0085   <control> */
+   U_NIL,                                 /* 0x86   0x0086   <control> */
+   U_NIL,                                 /* 0x87   0x0087   <control> */
+   U_NIL,                                 /* 0x88   0x0088   <control> */
+   U_NIL,                                 /* 0x89   0x0089   <control> */
+   U_NIL,                                 /* 0x8A   0x008A   <control> */
+   U_NIL,                                 /* 0x8B   0x008B   <control> */
+   U_NIL,                                 /* 0x8C   0x008C   <control> */
+   U_NIL,                                 /* 0x8D   0x008D   <control> */
+   U_NIL,                                 /* 0x8E   0x008E   <control> */
+   U_NIL,                                 /* 0x8F   0x008F   <control> */
+   U_NIL,                                 /* 0x90   0x0090   <control> */
+   U_NIL,                                 /* 0x91   0x0091   <control> */
+   U_NIL,                                 /* 0x92   0x0092   <control> */
+   U_NIL,                                 /* 0x93   0x0093   <control> */
+   U_NIL,                                 /* 0x94   0x0094   <control> */
+   U_NIL,                                 /* 0x95   0x0095   <control> */
+   U_NIL,                                 /* 0x96   0x0096   <control> */
+   U_NIL,                                 /* 0x97   0x0097   <control> */
+   U_NIL,                                 /* 0x98   0x0098   <control> */
+   U_NIL,                                 /* 0x99   0x0099   <control> */
+   U_NIL,                                 /* 0x9A   0x009A   <control> */
+   U_NIL,                                 /* 0x9B   0x009B   <control> */
+   U_NIL,                                 /* 0x9C   0x009C   <control> */
+   U_NIL,                                 /* 0x9D   0x009D   <control> */
+   U_NIL,                                 /* 0x9E   0x009E   <control> */
+   U_NIL,                                 /* 0x9F   0x009F   <control> */
+   
+   U_NB_SP,                               /* 0xA0   0x00A0   NO-BREAK SPACE */
+   U_ThaiCharacterKoKai,                  /* 0xA1   0x0E01   THAI CHARACTER KO KAI */
+   U_ThaiCharacterKhoKhai,                /* 0xA2   0x0E02   THAI CHARACTER KHO KHAI */
+   U_ThaiCharacterKhoKhuat,               /* 0xA3   0x0E03   THAI CHARACTER KHO KHUAT */
+   U_ThaiCharacterKhoKhwai,               /* 0xA4   0x0E04   THAI CHARACTER KHO KHWAI */
+   U_ThaiCharacterKhoKhon,                /* 0xA5   0x0E05   THAI CHARACTER KHO KHON */
+   U_ThaiCharacterKhoRakhang,             /* 0xA6   0x0E06   THAI CHARACTER KHO RAKHANG */
+   U_ThaiCharacterNgoNgu,                 /* 0xA7   0x0E07   THAI CHARACTER NGO NGU */
+   U_ThaiCharacterChoChan,                /* 0xA8   0x0E08   THAI CHARACTER CHO CHAN */
+   U_ThaiCharacterChoChing,               /* 0xA9   0x0E09   THAI CHARACTER CHO CHING */
+   U_ThaiCharacterChoChang,               /* 0xAA   0x0E0A   THAI CHARACTER CHO CHANG */
+   U_ThaiCharacterSoSo,                   /* 0xAB   0x0E0B   THAI CHARACTER SO SO */
+   U_ThaiCharacterChoChoe,                /* 0xAC   0x0E0C   THAI CHARACTER CHO CHOE */
+   U_ThaiCharacterYoYing,                 /* 0xAD   0x0E0D   THAI CHARACTER YO YING */
+   U_ThaiCharacterDoChada,                /* 0xAE   0x0E0E   THAI CHARACTER DO CHADA */
+   U_ThaiCharacterToPatak,                /* 0xAF   0x0E0F   THAI CHARACTER TO PATAK */
+   U_ThaiCharacterThoThan,                /* 0xB0   0x0E10   THAI CHARACTER THO THAN */
+   U_ThaiCharacterThoNangmontho,          /* 0xB1   0x0E11   THAI CHARACTER THO NANGMONTHO */
+   U_ThaiCharacterThoPhuthao,             /* 0xB2   0x0E12   THAI CHARACTER THO PHUTHAO */
+   U_ThaiCharacterNoNen,                  /* 0xB3   0x0E13   THAI CHARACTER NO NEN */
+   U_ThaiCharacterDoDek,                  /* 0xB4   0x0E14   THAI CHARACTER DO DEK */
+   U_ThaiCharacterToTao,                  /* 0xB5   0x0E15   THAI CHARACTER TO TAO */
+   U_ThaiCharacterThoThung,               /* 0xB6   0x0E16   THAI CHARACTER THO THUNG */
+   U_ThaiCharacterThoThahan,              /* 0xB7   0x0E17   THAI CHARACTER THO THAHAN */
+   U_ThaiCharacterThoThong,               /* 0xB8   0x0E18   THAI CHARACTER THO THONG */
+   U_ThaiCharacterNoNu,                   /* 0xB9   0x0E19   THAI CHARACTER NO NU */
+   U_ThaiCharacterBoBaimai,               /* 0xBA   0x0E1A   THAI CHARACTER BO BAIMAI */
+   U_ThaiCharacterPoPla,                  /* 0xBB   0x0E1B   THAI CHARACTER PO PLA */
+   U_ThaiCharacterPhoPhung,               /* 0xBC   0x0E1C   THAI CHARACTER PHO PHUNG */
+   U_ThaiCharacterFoFa,                   /* 0xBD   0x0E1D   THAI CHARACTER FO FA */
+   U_ThaiCharacterPhoPhan,                /* 0xBE   0x0E1E   THAI CHARACTER PHO PHAN */
+   U_ThaiCharacterFoFan,                  /* 0xBF   0x0E1F   THAI CHARACTER FO FAN */
+   U_ThaiCharacterPhoSamphao,             /* 0xC0   0x0E20   THAI CHARACTER PHO SAMPHAO */
+   U_ThaiCharacterMoMa,                   /* 0xC1   0x0E21   THAI CHARACTER MO MA */
+   U_ThaiCharacterYoYak,                  /* 0xC2   0x0E22   THAI CHARACTER YO YAK */
+   U_ThaiCharacterRoRua,                  /* 0xC3   0x0E23   THAI CHARACTER RO RUA */
+   U_ThaiCharacterRu,                     /* 0xC4   0x0E24   THAI CHARACTER RU */
+   U_ThaiCharacterLoLing,                 /* 0xC5   0x0E25   THAI CHARACTER LO LING */
+   U_ThaiCharacterLu,                     /* 0xC6   0x0E26   THAI CHARACTER LU */
+   U_ThaiCharacterWoWaen,                 /* 0xC7   0x0E27   THAI CHARACTER WO WAEN */
+   U_ThaiCharacterSoSala,                 /* 0xC8   0x0E28   THAI CHARACTER SO SALA */
+   U_ThaiCharacterSoRusi,                 /* 0xC9   0x0E29   THAI CHARACTER SO RUSI */
+   U_ThaiCharacterSoSua,                  /* 0xCA   0x0E2A   THAI CHARACTER SO SUA */
+   U_ThaiCharacterHoHip,                  /* 0xCB   0x0E2B   THAI CHARACTER HO HIP */
+   U_ThaiCharacterLoChula,                /* 0xCC   0x0E2C   THAI CHARACTER LO CHULA */
+   U_ThaiCharacterOAng,                   /* 0xCD   0x0E2D   THAI CHARACTER O ANG */
+   U_ThaiCharacterHoNokhuk,               /* 0xCE   0x0E2E   THAI CHARACTER HO NOKHUK */
+   U_ThaiCharacterPaiyannoi,              /* 0xCF   0x0E2F   THAI CHARACTER PAIYANNOI */
+   U_ThaiCharacterSaraA,                  /* 0xD0   0x0E30   THAI CHARACTER SARA A */
+   U_ThaiCharacterMaiHanAkat,             /* 0xD1   0x0E31   THAI CHARACTER MAI HAN-AKAT */
+   U_ThaiCharacterSaraAa,                 /* 0xD2   0x0E32   THAI CHARACTER SARA AA */
+   U_ThaiCharacterSaraAm,                 /* 0xD3   0x0E33   THAI CHARACTER SARA AM */
+   U_ThaiCharacterSaraI,                  /* 0xD4   0x0E34   THAI CHARACTER SARA I */
+   U_ThaiCharacterSaraIi,                 /* 0xD5   0x0E35   THAI CHARACTER SARA II */
+   U_ThaiCharacterSaraUe,                 /* 0xD6   0x0E36   THAI CHARACTER SARA UE */
+   U_ThaiCharacterSaraUee,                /* 0xD7   0x0E37   THAI CHARACTER SARA UEE */
+   U_ThaiCharacterSaraU,                  /* 0xD8   0x0E38   THAI CHARACTER SARA U */
+   U_ThaiCharacterSaraUu,                 /* 0xD9   0x0E39   THAI CHARACTER SARA UU */
+   U_ThaiCharacterPhinthu,                /* 0xDA   0x0E3A   THAI CHARACTER PHINTHU */
+   U_NIL,                                 /* 0xDB            <undefined> */
+   U_NIL,                                 /* 0xDC            <undefined> */
+   U_NIL,                                 /* 0xDD            <undefined> */
+   U_NIL,                                 /* 0xDE            <undefined> */
+   U_ThaiCurrencySymbolBaht,              /* 0xDF   0x0E3F   THAI CURRENCY SYMBOL BAHT */
+   U_ThaiCharacterSaraE,                  /* 0xE0   0x0E40   THAI CHARACTER SARA E */
+   U_ThaiCharacterSaraAe,                 /* 0xE1   0x0E41   THAI CHARACTER SARA AE */
+   U_ThaiCharacterSaraO,                  /* 0xE2   0x0E42   THAI CHARACTER SARA O */
+   U_ThaiCharacterSaraAiMaimuan,          /* 0xE3   0x0E43   THAI CHARACTER SARA AI MAIMUAN */
+   U_ThaiCharacterSaraAiMaimalai,         /* 0xE4   0x0E44   THAI CHARACTER SARA AI MAIMALAI */
+   U_ThaiCharacterLakkhangyao,            /* 0xE5   0x0E45   THAI CHARACTER LAKKHANGYAO */
+   U_ThaiCharacterMaiyamok,               /* 0xE6   0x0E46   THAI CHARACTER MAIYAMOK */
+   U_ThaiCharacterMaitaikhu,              /* 0xE7   0x0E47   THAI CHARACTER MAITAIKHU */
+   U_ThaiCharacterMaiEk,                  /* 0xE8   0x0E48   THAI CHARACTER MAI EK */
+   U_ThaiCharacterMaiTho,                 /* 0xE9   0x0E49   THAI CHARACTER MAI THO */
+   U_ThaiCharacterMaiTri,                 /* 0xEA   0x0E4A   THAI CHARACTER MAI TRI */
+   U_ThaiCharacterMaiChattawa,            /* 0xEB   0x0E4B   THAI CHARACTER MAI CHATTAWA */
+   U_ThaiCharacterThanthakhat,            /* 0xEC   0x0E4C   THAI CHARACTER THANTHAKHAT */
+   U_ThaiCharacterNikhahit,               /* 0xED   0x0E4D   THAI CHARACTER NIKHAHIT */
+   U_ThaiCharacterYamakkan,               /* 0xEE   0x0E4E   THAI CHARACTER YAMAKKAN */
+   U_ThaiCharacterFongman,                /* 0xEF   0x0E4F   THAI CHARACTER FONGMAN */
+   U_ThaiDigitZero,                       /* 0xF0   0x0E50   THAI DIGIT ZERO */
+   U_ThaiDigitOne,                        /* 0xF1   0x0E51   THAI DIGIT ONE */
+   U_ThaiDigitTwo,                        /* 0xF2   0x0E52   THAI DIGIT TWO */
+   U_ThaiDigitThree,                      /* 0xF3   0x0E53   THAI DIGIT THREE */
+   U_ThaiDigitFour,                       /* 0xF4   0x0E54   THAI DIGIT FOUR */
+   U_ThaiDigitFive,                       /* 0xF5   0x0E55   THAI DIGIT FIVE */
+   U_ThaiDigitSix,                        /* 0xF6   0x0E56   THAI DIGIT SIX */
+   U_ThaiDigitSeven,                      /* 0xF7   0x0E57   THAI DIGIT SEVEN */
+   U_ThaiDigitEight,                      /* 0xF8   0x0E58   THAI DIGIT EIGHT */
+   U_ThaiDigitNine,                       /* 0xF9   0x0E59   THAI DIGIT NINE */
+   U_ThaiCharacterAngkhankhu,             /* 0xFA   0x0E5A   THAI CHARACTER ANGKHANKHU */
+   U_ThaiCharacterKhomut,                 /* 0xFB   0x0E5B   THAI CHARACTER KHOMUT */
+   U_NIL,                                 /* 0xFC            <undefined> */
+   U_NIL,                                 /* 0xFD            <undefined> */
+   U_NIL,                                 /* 0xFE            <undefined> */
+   U_NIL                                  /* 0xFF            <undefined> */
+};
+
+
+
+
+
+/******************************************************************************
+*
+*  CODE_THAI_lig[]:
+*     list of ligatures:
+*
+*  CODE_THAI_lig[0] is the original ligature character
+*  CODE_THAI_lig[1] + CODE_THAI_lig[2] are the resolved ligature characters
+*
+******************************************|************************************/
+
+static UWORD   CODE_THAI_lig[][3] =       /* CODE_THAI character ligatures */
+{
+   {0x0000, U_NIL, U_NIL}                 /* list terminator */
+};
+
+
+
+
+
+/******************************************************************************
+*
+*  CODE_THAI sorting table:
+*
+*  table format: sortingCharacter, (ANSI hex value  |  Original character)
+*  
+*
+******************************************|************************************/
+
+static UWORD   sort_CODE_THAI[] =         /* CODE_THAI */
+{
+   U_NUL,                                 /* 0x00  NULl */
+   U_SOH,                                 /* 0x01  Start Of Heading */
+   U_STX,                                 /* 0x02  Start of TeXt */
+   U_ETX,                                 /* 0x03  End of TeXt */
+   U_EOT,                                 /* 0x04  End Of Transmission */
+   U_ENQ,                                 /* 0x05  ENQuiry */
+   U_ACK,                                 /* 0x06  ACKnowledge */
+   U_BEL,                                 /* 0x07  BELl */
+   U_BS,                                  /* 0x08  BackSpace */
+   U_HT,                                  /* 0x09  Horizontal Tabulation */
+   U_LF,                                  /* 0x0a  Line Feed */
+   U_VT,                                  /* 0x0b  Vertical Tabulation */
+   U_FF,                                  /* 0x0c  Form Feed */
+   U_CR,                                  /* 0x0d  Carriage Return */
+   U_SO,                                  /* 0x0e  Shift Out */
+   U_SI,                                  /* 0x0f  Shift In */
+   U_DLE,                                 /* 0x10  Data Link Escape */
+   U_DC1,                                 /* 0x11  Device Control 1 */
+   U_DC2,                                 /* 0x12  Device Control 2 */
+   U_DC3,                                 /* 0x13  Device Control 3 */
+   U_DC4,                                 /* 0x14  Device Control 4 */
+   U_NAK,                                 /* 0x15  Negative AcKnowledge */
+   U_SYN,                                 /* 0x16  SYNchronous idle */
+   U_ETB,                                 /* 0x17  End of Transmission Block */
+   U_CAN,                                 /* 0x18  CANcel */
+   U_EM,                                  /* 0x19  End of Medium */
+   U_SUB,                                 /* 0x1a  SUBstitute */
+   U_ESC,                                 /* 0x1b  ESCape */
+   U_FS,                                  /* 0x1c  File Separator */
+   U_GS,                                  /* 0x1d  Group Separator */
+   U_RS,                                  /* 0x1e  Record Separator */
+   U_US,                                  /* 0x1f  Unit Separator */
+
+   U_SP,                                  /* 0x20  SPace */
+   U_ExclamationMark,                     /* 0x21  ! */
+   U_QuotationMark,                       /* 0x22  " */
+   U_NumberSign,                          /* 0x23  # */
+   U_DollarSign,                          /* 0x24  $ */
+   U_PercentSign,                         /* 0x25  % */
+   U_Ampersand,                           /* 0x26  & */
+   U_Apostrophe,                          /* 0x27  ' */
+   U_OpeningParenthesis,                  /* 0x28  ( */
+   U_ClosingParenthesis,                  /* 0x29  ) */
+   U_Asterisk,                            /* 0x2A  * */
+   U_PlusSign,                            /* 0x2B  + */
+   U_Comma,                               /* 0x2C  , */
+   U_HyphenMinus,                         /* 0x2D  - */
+   U_Period,                              /* 0x2E  . */
+   U_Slash,                               /* 0x2F  / */
+   U_Digit0,                              /* 0x30  0 */
+   U_Digit1,                              /* 0x31  1 */
+   U_Digit2,                              /* 0x32  2 */
+   U_Digit3,                              /* 0x33  3 */
+   U_Digit4,                              /* 0x34  4 */
+   U_Digit5,                              /* 0x35  5 */
+   U_Digit6,                              /* 0x36  6 */
+   U_Digit7,                              /* 0x37  7 */
+   U_Digit8,                              /* 0x38  8 */
+   U_Digit9,                              /* 0x39  9 */
+   U_Colon,                               /* 0x3A  : */
+   U_Semicolon,                           /* 0x3B  ; */
+   U_LessThanSign,                        /* 0x3C  < */
+   U_EqualsSign,                          /* 0x3D  = */
+   U_GreaterThanSign,                     /* 0x3E  > */
+   U_QuestionMark,                        /* 0x3F  ? */
+   U_CommercialAt,                        /* 0x40  @ */
+   U_LatinCapitalLetterA,                 /* 0x41  A */
+   U_LatinCapitalLetterB,                 /* 0x42  B */
+   U_LatinCapitalLetterC,                 /* 0x43  C */
+   U_LatinCapitalLetterD,                 /* 0x44  D */
+   U_LatinCapitalLetterE,                 /* 0x45  E */
+   U_LatinCapitalLetterF,                 /* 0x46  F */
+   U_LatinCapitalLetterG,                 /* 0x47  G */
+   U_LatinCapitalLetterH,                 /* 0x48  H */
+   U_LatinCapitalLetterI,                 /* 0x49  I */
+   U_LatinCapitalLetterJ,                 /* 0x4A  J */
+   U_LatinCapitalLetterK,                 /* 0x4B  K */
+   U_LatinCapitalLetterL,                 /* 0x4C  L */
+   U_LatinCapitalLetterM,                 /* 0x4D  M */
+   U_LatinCapitalLetterN,                 /* 0x4E  N */
+   U_LatinCapitalLetterO,                 /* 0x4F  O */
+   U_LatinCapitalLetterP,                 /* 0x50  P */
+   U_LatinCapitalLetterQ,                 /* 0x51  Q */
+   U_LatinCapitalLetterR,                 /* 0x52  R */
+   U_LatinCapitalLetterS,                 /* 0x53  S */
+   U_LatinCapitalLetterT,                 /* 0x54  T */
+   U_LatinCapitalLetterU,                 /* 0x55  U */
+   U_LatinCapitalLetterV,                 /* 0x56  V */
+   U_LatinCapitalLetterW,                 /* 0x57  W */
+   U_LatinCapitalLetterX,                 /* 0x58  X */
+   U_LatinCapitalLetterY,                 /* 0x59  Y */
+   U_LatinCapitalLetterZ,                 /* 0x5A  Z */
+   U_OpeningSquareBracket,                /* 0x5B  [ */
+   U_Backslash,                           /* 0x5C  \ */
+   U_ClosingSquareBracket,                /* 0x5D  ] */
+   U_CircumflexAccent,                    /* 0x5E  ^ */
+   U_SpacingUnderscore,                   /* 0x5F  _ */
+   U_GraveAccent,                         /* 0x60  ` */
+   U_LatinCapitalLetterA,                 /* 0x61  a */
+   U_LatinCapitalLetterB,                 /* 0x62  b */
+   U_LatinCapitalLetterC,                 /* 0x63  c */
+   U_LatinCapitalLetterD,                 /* 0x64  d */
+   U_LatinCapitalLetterE,                 /* 0x65  e */
+   U_LatinCapitalLetterF,                 /* 0x66  f */
+   U_LatinCapitalLetterG,                 /* 0x67  g */
+   U_LatinCapitalLetterH,                 /* 0x68  h */
+   U_LatinCapitalLetterI,                 /* 0x69  i */
+   U_LatinCapitalLetterJ,                 /* 0x6A  j */
+   U_LatinCapitalLetterK,                 /* 0x6B  k */
+   U_LatinCapitalLetterL,                 /* 0x6C  l */
+   U_LatinCapitalLetterM,                 /* 0x6D  m */
+   U_LatinCapitalLetterN,                 /* 0x6E  n */
+   U_LatinCapitalLetterO,                 /* 0x6F  o */
+   U_LatinCapitalLetterP,                 /* 0x70  p */
+   U_LatinCapitalLetterQ,                 /* 0x71  q */
+   U_LatinCapitalLetterR,                 /* 0x72  r */
+   U_LatinCapitalLetterS,                 /* 0x73  s */
+   U_LatinCapitalLetterT,                 /* 0x74  t */
+   U_LatinCapitalLetterU,                 /* 0x75  u */
+   U_LatinCapitalLetterV,                 /* 0x76  v */
+   U_LatinCapitalLetterW,                 /* 0x77  w */
+   U_LatinCapitalLetterX,                 /* 0x78  x */
+   U_LatinCapitalLetterY,                 /* 0x79  y */
+   U_LatinCapitalLetterZ,                 /* 0x7A  z */
+   U_OpeningCurlyBracket,                 /* 0x7B  { */
+   U_VerticalLine,                        /* 0x7C  | */
+   U_ClosingCurlyBracket,                 /* 0x7D  } */
+   U_Tilde,                               /* 0x7E  ~ */
+   U_DEL,                                 /* 0x7F  Delete */
+
+   U_NIL,                                 /* 0x80   0x0080   <control> */
+   U_NIL,                                 /* 0x81   0x0081   <control> */
+   U_NIL,                                 /* 0x82   0x0082   <control> */
+   U_NIL,                                 /* 0x83   0x0083   <control> */
+   U_NIL,                                 /* 0x84   0x0084   <control> */
+   U_NIL,                                 /* 0x85   0x0085   <control> */
+   U_NIL,                                 /* 0x86   0x0086   <control> */
+   U_NIL,                                 /* 0x87   0x0087   <control> */
+   U_NIL,                                 /* 0x88   0x0088   <control> */
+   U_NIL,                                 /* 0x89   0x0089   <control> */
+   U_NIL,                                 /* 0x8A   0x008A   <control> */
+   U_NIL,                                 /* 0x8B   0x008B   <control> */
+   U_NIL,                                 /* 0x8C   0x008C   <control> */
+   U_NIL,                                 /* 0x8D   0x008D   <control> */
+   U_NIL,                                 /* 0x8E   0x008E   <control> */
+   U_NIL,                                 /* 0x8F   0x008F   <control> */
+   U_NIL,                                 /* 0x90   0x0090   <control> */
+   U_NIL,                                 /* 0x91   0x0091   <control> */
+   U_NIL,                                 /* 0x92   0x0092   <control> */
+   U_NIL,                                 /* 0x93   0x0093   <control> */
+   U_NIL,                                 /* 0x94   0x0094   <control> */
+   U_NIL,                                 /* 0x95   0x0095   <control> */
+   U_NIL,                                 /* 0x96   0x0096   <control> */
+   U_NIL,                                 /* 0x97   0x0097   <control> */
+   U_NIL,                                 /* 0x98   0x0098   <control> */
+   U_NIL,                                 /* 0x99   0x0099   <control> */
+   U_NIL,                                 /* 0x9A   0x009A   <control> */
+   U_NIL,                                 /* 0x9B   0x009B   <control> */
+   U_NIL,                                 /* 0x9C   0x009C   <control> */
+   U_NIL,                                 /* 0x9D   0x009D   <control> */
+   U_NIL,                                 /* 0x9E   0x009E   <control> */
+   U_NIL,                                 /* 0x9F   0x009F   <control> */
+   
+   U_NB_SP,                               /* 0xA0   0x00A0   NO-BREAK SPACE */
+   U_ThaiCharacterKoKai,                  /* 0xA1   0x0E01   THAI CHARACTER KO KAI */
+   U_ThaiCharacterKhoKhai,                /* 0xA2   0x0E02   THAI CHARACTER KHO KHAI */
+   U_ThaiCharacterKhoKhuat,               /* 0xA3   0x0E03   THAI CHARACTER KHO KHUAT */
+   U_ThaiCharacterKhoKhwai,               /* 0xA4   0x0E04   THAI CHARACTER KHO KHWAI */
+   U_ThaiCharacterKhoKhon,                /* 0xA5   0x0E05   THAI CHARACTER KHO KHON */
+   U_ThaiCharacterKhoRakhang,             /* 0xA6   0x0E06   THAI CHARACTER KHO RAKHANG */
+   U_ThaiCharacterNgoNgu,                 /* 0xA7   0x0E07   THAI CHARACTER NGO NGU */
+   U_ThaiCharacterChoChan,                /* 0xA8   0x0E08   THAI CHARACTER CHO CHAN */
+   U_ThaiCharacterChoChing,               /* 0xA9   0x0E09   THAI CHARACTER CHO CHING */
+   U_ThaiCharacterChoChang,               /* 0xAA   0x0E0A   THAI CHARACTER CHO CHANG */
+   U_ThaiCharacterSoSo,                   /* 0xAB   0x0E0B   THAI CHARACTER SO SO */
+   U_ThaiCharacterChoChoe,                /* 0xAC   0x0E0C   THAI CHARACTER CHO CHOE */
+   U_ThaiCharacterYoYing,                 /* 0xAD   0x0E0D   THAI CHARACTER YO YING */
+   U_ThaiCharacterDoChada,                /* 0xAE   0x0E0E   THAI CHARACTER DO CHADA */
+   U_ThaiCharacterToPatak,                /* 0xAF   0x0E0F   THAI CHARACTER TO PATAK */
+   U_ThaiCharacterThoThan,                /* 0xB0   0x0E10   THAI CHARACTER THO THAN */
+   U_ThaiCharacterThoNangmontho,          /* 0xB1   0x0E11   THAI CHARACTER THO NANGMONTHO */
+   U_ThaiCharacterThoPhuthao,             /* 0xB2   0x0E12   THAI CHARACTER THO PHUTHAO */
+   U_ThaiCharacterNoNen,                  /* 0xB3   0x0E13   THAI CHARACTER NO NEN */
+   U_ThaiCharacterDoDek,                  /* 0xB4   0x0E14   THAI CHARACTER DO DEK */
+   U_ThaiCharacterToTao,                  /* 0xB5   0x0E15   THAI CHARACTER TO TAO */
+   U_ThaiCharacterThoThung,               /* 0xB6   0x0E16   THAI CHARACTER THO THUNG */
+   U_ThaiCharacterThoThahan,              /* 0xB7   0x0E17   THAI CHARACTER THO THAHAN */
+   U_ThaiCharacterThoThong,               /* 0xB8   0x0E18   THAI CHARACTER THO THONG */
+   U_ThaiCharacterNoNu,                   /* 0xB9   0x0E19   THAI CHARACTER NO NU */
+   U_ThaiCharacterBoBaimai,               /* 0xBA   0x0E1A   THAI CHARACTER BO BAIMAI */
+   U_ThaiCharacterPoPla,                  /* 0xBB   0x0E1B   THAI CHARACTER PO PLA */
+   U_ThaiCharacterPhoPhung,               /* 0xBC   0x0E1C   THAI CHARACTER PHO PHUNG */
+   U_ThaiCharacterFoFa,                   /* 0xBD   0x0E1D   THAI CHARACTER FO FA */
+   U_ThaiCharacterPhoPhan,                /* 0xBE   0x0E1E   THAI CHARACTER PHO PHAN */
+   U_ThaiCharacterFoFan,                  /* 0xBF   0x0E1F   THAI CHARACTER FO FAN */
+   U_ThaiCharacterPhoSamphao,             /* 0xC0   0x0E20   THAI CHARACTER PHO SAMPHAO */
+   U_ThaiCharacterMoMa,                   /* 0xC1   0x0E21   THAI CHARACTER MO MA */
+   U_ThaiCharacterYoYak,                  /* 0xC2   0x0E22   THAI CHARACTER YO YAK */
+   U_ThaiCharacterRoRua,                  /* 0xC3   0x0E23   THAI CHARACTER RO RUA */
+   U_ThaiCharacterRu,                     /* 0xC4   0x0E24   THAI CHARACTER RU */
+   U_ThaiCharacterLoLing,                 /* 0xC5   0x0E25   THAI CHARACTER LO LING */
+   U_ThaiCharacterLu,                     /* 0xC6   0x0E26   THAI CHARACTER LU */
+   U_ThaiCharacterWoWaen,                 /* 0xC7   0x0E27   THAI CHARACTER WO WAEN */
+   U_ThaiCharacterSoSala,                 /* 0xC8   0x0E28   THAI CHARACTER SO SALA */
+   U_ThaiCharacterSoRusi,                 /* 0xC9   0x0E29   THAI CHARACTER SO RUSI */
+   U_ThaiCharacterSoSua,                  /* 0xCA   0x0E2A   THAI CHARACTER SO SUA */
+   U_ThaiCharacterHoHip,                  /* 0xCB   0x0E2B   THAI CHARACTER HO HIP */
+   U_ThaiCharacterLoChula,                /* 0xCC   0x0E2C   THAI CHARACTER LO CHULA */
+   U_ThaiCharacterOAng,                   /* 0xCD   0x0E2D   THAI CHARACTER O ANG */
+   U_ThaiCharacterHoNokhuk,               /* 0xCE   0x0E2E   THAI CHARACTER HO NOKHUK */
+   U_ThaiCharacterPaiyannoi,              /* 0xCF   0x0E2F   THAI CHARACTER PAIYANNOI */
+   U_ThaiCharacterSaraA,                  /* 0xD0   0x0E30   THAI CHARACTER SARA A */
+   U_ThaiCharacterMaiHanAkat,             /* 0xD1   0x0E31   THAI CHARACTER MAI HAN-AKAT */
+   U_ThaiCharacterSaraAa,                 /* 0xD2   0x0E32   THAI CHARACTER SARA AA */
+   U_ThaiCharacterSaraAm,                 /* 0xD3   0x0E33   THAI CHARACTER SARA AM */
+   U_ThaiCharacterSaraI,                  /* 0xD4   0x0E34   THAI CHARACTER SARA I */
+   U_ThaiCharacterSaraIi,                 /* 0xD5   0x0E35   THAI CHARACTER SARA II */
+   U_ThaiCharacterSaraUe,                 /* 0xD6   0x0E36   THAI CHARACTER SARA UE */
+   U_ThaiCharacterSaraUee,                /* 0xD7   0x0E37   THAI CHARACTER SARA UEE */
+   U_ThaiCharacterSaraU,                  /* 0xD8   0x0E38   THAI CHARACTER SARA U */
+   U_ThaiCharacterSaraUu,                 /* 0xD9   0x0E39   THAI CHARACTER SARA UU */
+   U_ThaiCharacterPhinthu,                /* 0xDA   0x0E3A   THAI CHARACTER PHINTHU */
+   U_NIL,                                 /* 0xDB            <undefined> */
+   U_NIL,                                 /* 0xDC            <undefined> */
+   U_NIL,                                 /* 0xDD            <undefined> */
+   U_NIL,                                 /* 0xDE            <undefined> */
+   U_ThaiCurrencySymbolBaht,              /* 0xDF   0x0E3F   THAI CURRENCY SYMBOL BAHT */
+   U_ThaiCharacterSaraE,                  /* 0xE0   0x0E40   THAI CHARACTER SARA E */
+   U_ThaiCharacterSaraAe,                 /* 0xE1   0x0E41   THAI CHARACTER SARA AE */
+   U_ThaiCharacterSaraO,                  /* 0xE2   0x0E42   THAI CHARACTER SARA O */
+   U_ThaiCharacterSaraAiMaimuan,          /* 0xE3   0x0E43   THAI CHARACTER SARA AI MAIMUAN */
+   U_ThaiCharacterSaraAiMaimalai,         /* 0xE4   0x0E44   THAI CHARACTER SARA AI MAIMALAI */
+   U_ThaiCharacterLakkhangyao,            /* 0xE5   0x0E45   THAI CHARACTER LAKKHANGYAO */
+   U_ThaiCharacterMaiyamok,               /* 0xE6   0x0E46   THAI CHARACTER MAIYAMOK */
+   U_ThaiCharacterMaitaikhu,              /* 0xE7   0x0E47   THAI CHARACTER MAITAIKHU */
+   U_ThaiCharacterMaiEk,                  /* 0xE8   0x0E48   THAI CHARACTER MAI EK */
+   U_ThaiCharacterMaiTho,                 /* 0xE9   0x0E49   THAI CHARACTER MAI THO */
+   U_ThaiCharacterMaiTri,                 /* 0xEA   0x0E4A   THAI CHARACTER MAI TRI */
+   U_ThaiCharacterMaiChattawa,            /* 0xEB   0x0E4B   THAI CHARACTER MAI CHATTAWA */
+   U_ThaiCharacterThanthakhat,            /* 0xEC   0x0E4C   THAI CHARACTER THANTHAKHAT */
+   U_ThaiCharacterNikhahit,               /* 0xED   0x0E4D   THAI CHARACTER NIKHAHIT */
+   U_ThaiCharacterYamakkan,               /* 0xEE   0x0E4E   THAI CHARACTER YAMAKKAN */
+   U_ThaiCharacterFongman,                /* 0xEF   0x0E4F   THAI CHARACTER FONGMAN */
+   U_ThaiDigitZero,                       /* 0xF0   0x0E50   THAI DIGIT ZERO */
+   U_ThaiDigitOne,                        /* 0xF1   0x0E51   THAI DIGIT ONE */
+   U_ThaiDigitTwo,                        /* 0xF2   0x0E52   THAI DIGIT TWO */
+   U_ThaiDigitThree,                      /* 0xF3   0x0E53   THAI DIGIT THREE */
+   U_ThaiDigitFour,                       /* 0xF4   0x0E54   THAI DIGIT FOUR */
+   U_ThaiDigitFive,                       /* 0xF5   0x0E55   THAI DIGIT FIVE */
+   U_ThaiDigitSix,                        /* 0xF6   0x0E56   THAI DIGIT SIX */
+   U_ThaiDigitSeven,                      /* 0xF7   0x0E57   THAI DIGIT SEVEN */
+   U_ThaiDigitEight,                      /* 0xF8   0x0E58   THAI DIGIT EIGHT */
+   U_ThaiDigitNine,                       /* 0xF9   0x0E59   THAI DIGIT NINE */
+   U_ThaiCharacterAngkhankhu,             /* 0xFA   0x0E5A   THAI CHARACTER ANGKHANKHU */
+   U_ThaiCharacterKhomut,                 /* 0xFB   0x0E5B   THAI CHARACTER KHOMUT */
+   U_NIL,                                 /* 0xFC            <undefined> */
+   U_NIL,                                 /* 0xFD            <undefined> */
+   U_NIL,                                 /* 0xFE            <undefined> */
+   U_NIL                                  /* 0xFF            <undefined> */
 };
 
 
