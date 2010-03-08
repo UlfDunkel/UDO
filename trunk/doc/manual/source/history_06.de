@@ -89,7 +89,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
          Zum Setzen des Bildzählers.
    !item (!KW [no_index]):
          Soll kein Index erzeugt werden?
-   !item (!kw [no_toc_subnodes]), (!kw [no_toc_subsubnodes]),(!kw [no_toc_subsubsubnodes]):
+   !item (!kw [no_toc_subnodes]), (!kw [no_toc_subsubnodes]), (!kw [no_toc_subsubsubnodes]):
          Zur Verringerung des Umfangs des Inhaltsverzeichnisses
    !item (!KW [no_preamble]):
          Falls man selber den Vorspann zu einem Format erstellen möchte.

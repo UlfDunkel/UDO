@@ -55,7 +55,7 @@ We're quite sure that nobody is interested in the changes of this old version an
          einem Kapitel einen Dateinamen zuweisen
    !item (!KW [html_merge_nodes]), (!KW [html_merge_subnodes]), (!KW [html_merge_subsubnodes])
          Kapitel für die HTML-Ausgabe zusammenfassen
-   !item (!KKW [ilink!])
+   !item (!KKW [ilink])
          Bilder im Text für Querverweise benutzen, nur WinHelp und HTML
    !item (!KKW [img])
          Darstellung von Bildern im Text, nur WinHelp und HTML

@@ -25,6 +25,7 @@
 #   fd  Mar 08: macro KW1 resolved to KWW
 #   fd  Mar 08: macro K1 resolved to KW
 #   fd  Mar 08: macro k1 resolved to kw
+#   fd  Mar 08: MAXLINETABLE adjusted to UDO 7.00
 #
 ################################################################################
 
@@ -59,7 +60,7 @@
 !macro MAXSILBEN       (!const [32])
 !macro MAX_TOKENS      (!const [800])
 !macro MAXSYMLEN       (!const [32])
-!macro MAXLINETABLE    (!const [600])
+!macro MAXLINETABLE    (!const [700])
 !macro MAXCOLUMSTABLE  (!const [64])
 
 # universal characters, which do not work properly with the following (!code []) macro

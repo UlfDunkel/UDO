@@ -68,7 +68,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
          (!KW [end_comment]), 
          (!KW [cinclude]), 
          (!KW [comment]), 
-         (!KKW [comment!])
+         (!KKW [comment])
    !item (!KW [win_helpid])
    !item (!KW [no_links])
    !item (!KW [html_modern_layout]), 
@@ -82,8 +82,8 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
          (!KW [html_frames_width]) 
          (!KW [html_frames_backcolor]), 
          (!KW [html_frames_backimage]), 
-         (!KW [html_frames_height] [(!VALUE)]), 
-         (!KW [html_frames_position] [(!TEXT)]), 
+         (!KW [html_frames_height]) [<wert>], 
+         (!KW [html_frames_position]) [<text>], 
          (!KW [html_frames_textcolor]), 
          (!KW [html_frames_linkcolor]), 
          (!KW [html_frames_alinkcolor]), 
@@ -101,7 +101,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
          (!KW [wh4_prefix_helpids])
    !item (!KW [win_monofont]), 
          (!KW [wh4_monofont])
-   !item (!KW [win_textcolor] [<farbe>])
+   !item (!KW [win_textcolor]) [<farbe>]
    !item (!KW [begin_linedraw]), 
          (!KW [end_linedraw]),
          (!KW [ldinclude]), 
@@ -119,14 +119,14 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
          (!KW [drc_ucolor]), 
          (!KW [drc_flags])
    !item (!KW [udolink])
-   !item (!KW [use_auto_toptocs] [[<kürzel>!!]])
-   !item (!KW [error] [(!TEXT)])
+   !item (!KW [use_auto_toptocs]) [<kürzel>]
+   !item (!KW [error]) <text>
    !item (!KW [begin_node*]), 
          (!KW [begin_pnode]),
          (!KW [begin_pnode*])
    !item (!KW [input])
-   !item (!KW [rtf_keep_tables] [[on|off!!]])
-   !item (!KW [html_button_alignment] [[left|center|right!!]])
+   !item (!KW [rtf_keep_tables]) [on|off]
+   !item (!KW [html_button_alignment]) [left|center|right]
    !item (!KW [chaptericon_active])
    !item (!KW [begin_ignore]), 
          (!KW [end_ignore])
@@ -140,20 +140,20 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !item (!KW [html_monofont_name]), 
          (!KW [html_monofont_size])
    !item (!KKW [raw])
-   !item (!KW [mapping] [<nummer>])
+   !item (!KW [mapping]) [<nummer>]
    !item (!KW [tex_miktex])
    !item (!KW [no_img_size])
    !item (!KW [table_alignment])
    !item (!KW [image_alignment])
    !item (!KW [no_popup_headlines])
-   !item (!KW [use_raw_header] [(!FILE)]), 
-         (!KW [use_raw_footer] [(!FILE)]),
+   !item (!KW [use_raw_header]) [(!FILE)], 
+         (!KW [use_raw_footer]) [(!FILE)],
          (!KW [ignore_raw_header]), 
          (!KW [ignore_raw_footer])
    !item (!KW [win_old_keywords])
    !item (!KW [no_table_lines])
    !item (!KW [html_transparent_buttons])
-   !item (!KKW [url!])
+   !item (!KKW [url])
    !item (!KW [use_auto_helpids])
    !item (!KW [win_prefix_helpids])
    !end_itemize
