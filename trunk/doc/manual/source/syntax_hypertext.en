@@ -124,9 +124,9 @@ and how UDO converts it:
 The following example shows how to insert a link on the UDO contact information:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)link.ui
+!vinclude (!EXAMPLES)/link.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)link.ui
+!include (!EXAMPLES)/link.ui
 (!EXAMPLE_END)
 
 (!HINTS)
@@ -206,9 +206,9 @@ The following example shows how to insert a page like to the page that
 contains my contact addresses:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)plink.ui
+!vinclude (!EXAMPLES)/plink.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)plink.ui
+!include (!EXAMPLES)/plink.ui
 (!EXAMPLE_END)
 
 (!HINTS)
@@ -256,9 +256,9 @@ How to use external links inside an ST-Guide file is descriped in the
 following example:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)stg/xlink.ui
+!vinclude (!EXAMPLES)/stg/xlink.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)stg/xlink.ui
+!include (!EXAMPLES)/stg/xlink.ui
 (!EXAMPLE_END)
 !endif
 
@@ -267,9 +267,9 @@ How to use external links inside a Windows Help file is descriped in the
 following example:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)winhelp/xlink.ui
+!vinclude (!EXAMPLES)/winhelp/xlink.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)winhelp/xlink.ui
+!include (!EXAMPLES)/winhelp/xlink.ui
 (!EXAMPLE_END)
 !endif
 
@@ -278,9 +278,9 @@ How to use external links inside an HTML file is descriped in the
 following example:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)html/xlink.ui
+!vinclude (!EXAMPLES)/html/xlink.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)html/xlink.ui
+!include (!EXAMPLES)/html/xlink.ui
 (!EXAMPLE_END)
 !endif
 

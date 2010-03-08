@@ -29,10 +29,10 @@
 
 # path macros
 # --------------------
-!macro EXAMPLES       ./examples/de/
+!macro EXAMPLES       ./examples/de
 !macro EXAMPLES_DIST  ../../examples/de/
 
-
+   
 !ifdest [win,wh4]
 !macro FORMAT         (!link [<k\'FCrzel>] [Ausgabeformat])
 !endif
@@ -54,10 +54,10 @@
 # other macro formattings
 # ------------------------------------------------------------------------------
 !else
-!macro EXAMPLE_BEGIN  !rinclude (!EXAMPLES)/general/example_begin.ui
-!macro EXAMPLE_END    !rinclude (!EXAMPLES)/general/example_close.ui
-!macro EXAMPLE_BEFORE !rinclude (!EXAMPLES)/general/example_before.ui
-!macro EXAMPLE_AFTER  !rinclude (!EXAMPLES)/general/example_after.ui
+!macro EXAMPLE_BEGIN  !begin_quote
+!macro EXAMPLE_END    !end_quote
+!macro EXAMPLE_BEFORE !include (!EXAMPLES)/general/example_before.ui
+!macro EXAMPLE_AFTER  !include (!EXAMPLES)/general/example_after.ui
 
 !macro FORMAT         (!link [<ausgabeformat>] [Ausgabeformat])
 !macro COLOR          (!link [<farbe>] [Farben])

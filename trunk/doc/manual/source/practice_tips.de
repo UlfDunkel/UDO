@@ -58,14 +58,14 @@ Quelltext mit fünf Kapiteln. Erstellen Sie eine Datei mit den globalen
 Schaltern, eine Hauptdatei und fünf Dateien mit dem Kapiteltext:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)main.u
+!vinclude (!EXAMPLES)/main.u
 (!EXAMPLE_END)
 
 Falls Sie nun einmal nur ein Kapitel umwandeln wollen, erstellen Sie
 ganz einfach eine zusätzliche Hauptdatei, die Sie dann umwandeln:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)ch5test.u
+!vinclude (!EXAMPLES)/ch5test.u
 (!EXAMPLE_END)
 
 Gerade bei sehr umfangreichen Dokumentationen kann man so die Fehlersuche

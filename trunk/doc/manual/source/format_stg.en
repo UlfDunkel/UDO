@@ -115,7 +115,7 @@ the end. The ST-Guide will insert a link to the table of contents due to
 this word.
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)stg/title.ui
+!vinclude (!EXAMPLES)/stg/title.ui
 (!EXAMPLE_END)
 
 !item [Why it is better not to use justified text?]

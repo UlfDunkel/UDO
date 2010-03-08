@@ -143,7 +143,7 @@ umgewandelt. (!FILESPACEQUOTE)
 !vinclude hello.c
 !end_verbatim
 (!EXAMPLE_AFTER)
-!vinclude (!EXAMPLES)hello.c
+!vinclude (!EXAMPLES)/hello.c
 (!EXAMPLE_END)
 
 !end_node

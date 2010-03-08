@@ -137,7 +137,7 @@ empty, too.
 Let me show you some examples:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)macro1.ui
+!vinclude (!EXAMPLES)/macro1.ui
 (!EXAMPLE_END)
 
 !index (!kw [include])
@@ -151,7 +151,7 @@ included with (!KW [include]). In the following example a disclaimer is
 included and the name of the program is defined by a macro:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)macro2.ui
+!vinclude (!EXAMPLES)/macro2.ui
 (!EXAMPLE_END)
 
 !smallskip
@@ -168,7 +168,7 @@ The following small example shows how to use a macro for text that shall be
 printed in bold-italic style:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)macro3.ui
+!vinclude (!EXAMPLES)/macro3.ui
 (!EXAMPLE_END)
 
 The ""(!/1)"" in the macro line will be replaced by the words ""bold and
@@ -253,7 +253,7 @@ characters are translated inside (!code [(!TEXT)]).
 In this example I will demonstrate how to print headlines with HTML:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)define1.ui
+!vinclude (!EXAMPLES)/define1.ui
 (!EXAMPLE_END)
 
 !smallskip
@@ -266,7 +266,7 @@ commands for (!LaTeX) that you now have to simulate with the
 !index \linebreak
 !index \nolinebreak
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)define2.ui
+!vinclude (!EXAMPLES)/define2.ui
 (!EXAMPLE_END)
 
 !smallskip
@@ -286,7 +286,7 @@ In the upper example I have shown you how to make a heading for HTML. When
 using parameters it may look like the following example:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)define3.ui
+!vinclude (!EXAMPLES)/define3.ui
 (!EXAMPLE_END)
 
 As you can see in this example you can write format depending commands UDO
@@ -296,7 +296,7 @@ The upper (!LaTeX) example can be defined nicer, too. If you use parameters
 you can provide all available (!LaTeX) commands in one definition:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)define4.ui
+!vinclude (!EXAMPLES)/define4.ui
 (!EXAMPLE_END)
 
 In this example only one parameter is used but the non-(!LaTeX) definition
@@ -361,7 +361,7 @@ third chapter. To mimize the conversion time of UDO you want only to convert
 the last chapter if the symbol (!code [AllChapters]) is set:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)symbol1.ui
+!vinclude (!EXAMPLES)/symbol1.ui
 (!EXAMPLE_END)
 
 If you start UDO as you without setting the symbol it will make a
@@ -378,7 +378,7 @@ second chapter. If you call UDO with the option ""(!code [AllChapters])"" you
 will get a complete destination file:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)symbol2.ui
+!vinclude (!EXAMPLES)/symbol2.ui
 (!EXAMPLE_END)
 
 As I descriped at the beginning of this section you can delete symbols with
@@ -389,7 +389,7 @@ can add the following lines to the beginning of your source file. Here the
 symbol (!code [AllChapters]) will be deleted if it's set:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)symbol3.ui
+!vinclude (!EXAMPLES)/symbol3.ui
 (!EXAMPLE_END)
 
 In first place it will be testet if the symbol is set. If you don't test the
@@ -422,7 +422,7 @@ commands as often as possible.
 To add an entry with the (!KW [index]) command use it this way:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)index1.ui
+!vinclude (!EXAMPLES)/index1.ui
 (!EXAMPLE_END)
 
 The entry appears inside the index of (!LaTeX),
@@ -440,7 +440,7 @@ If you think that a reader might look for ""Index entry"" or ""Entry,
 Index"" you should use the following index commands:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)index2.ui
+!vinclude (!EXAMPLES)/index2.ui
 (!EXAMPLE_END)
 
 !smallskip
@@ -742,14 +742,14 @@ The next example shows how to insert a line that will only be printed
 for the ASCII format:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)asc1.ui
+!vinclude (!EXAMPLES)/asc1.ui
 (!EXAMPLE_END)
 
 The next example shows how to insert a line that appears in all formats
 except ASCII:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)asc2.ui
+!vinclude (!EXAMPLES)/asc2.ui
 (!EXAMPLE_END)
 
 The contents of the line will be printed without the command and
@@ -761,7 +761,7 @@ You can use these commands to insert special commands like parts of
 the preamble for (!LaTeX):
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)latex/index.ui
+!vinclude (!EXAMPLES)/latex/index.ui
 (!EXAMPLE_END)
 
 !begin_description
@@ -785,7 +785,7 @@ source code:
 !index HTML !! <form>
 !index <form>
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)raw1.ui
+!vinclude (!EXAMPLES)/raw1.ui
 (!EXAMPLE_END)
 
 To say it once more: Text that is part of a raw environment is printed ""as

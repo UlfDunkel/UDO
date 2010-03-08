@@ -218,7 +218,7 @@ umgewandelt. (!FILESPACEQUOTE)
 !pinclude hello.pas
 !end_verbatim
 (!EXAMPLE_AFTER)
-!pinclude (!EXAMPLES)hello.pas
+!pinclude (!EXAMPLES)/hello.pas
 (!EXAMPLE_END)
 
 !end_node

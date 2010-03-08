@@ -93,9 +93,21 @@
 !macro  KKW  (!B)(!T)(!link [(!/(!1)!)] [(!/(!1)!)])(!t)(!b)
 !macro  KKKW (!B)(!T)(!link [(!(!1)!)...(!(!2)!)] [(!(!1)!)...(!(!2)!)])(!t)(!b)
 !else
+!ifdest [asc]
+!macro  KW   !/(!1)
+!macro  KKW  (!/(!1)!)
+!macro  KKKW (!(!1)!)...(!(!2)!)
+!else
+!ifdest [stg]
+!macro  KW   (!T)!(!1)(!t)
+!macro  KKW  (!T)(!/(!1)!)(!t)
+!macro  KKKW (!T)(!(!1)!)...(!(!2)!)(!t)
+!else
 !macro  KW   (!B)(!T)!(!1)(!t)(!b)
-!macro  KKW  (!B)(!T)(!/(!1)!)(!t)(!b)
+!macro  KKW  (!B)(!T)(!/(!1))(!t)(!b)
 !macro  KKKW (!B)(!T)(!(!1)!)...(!(!2)!)(!t)(!b)
+!endif
+!endif
 !endif
 
 # unlinked commands without/with round brackets and leading !

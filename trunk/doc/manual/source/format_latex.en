@@ -49,7 +49,7 @@ the UDO source file with (!KW [raw] [[tex!!]]) or a raw environment.
 The following example shows how you can do this:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)latex/preamble.u
+!vinclude (!EXAMPLES)/latex/preamble.u
 (!EXAMPLE_END)
 
 !item [How can I use (!LaTeX) formulas inside the text?] ~

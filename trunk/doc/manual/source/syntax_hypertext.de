@@ -135,9 +135,9 @@ Hier ein Beispiel, bei dem auf den Abschnitt mit den Kontaktinformationen
 zur UDO-Gemeinde verwiesen wird:
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)link.ui
+!vinclude (!EXAMPLES)/link.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)link.ui
+!include (!EXAMPLES)/link.ui
 (!EXAMPLE_END)
 
 (!HINTS)
@@ -216,9 +216,9 @@ Hier ein Beispiel, bei dem auf die Seite verwiesen wird, auf der
 Sie unsere Kontaktinformationen finden.
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)plink.ui
+!vinclude (!EXAMPLES)/plink.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)plink.ui
+!include (!EXAMPLES)/plink.ui
 (!EXAMPLE_END)
 
 (!HINTS)
@@ -263,9 +263,9 @@ Tilde keine Sonderzeichen angepasst werden (kann bei Pfadangaben fatal sein!).
 Hier ein paar kurze Beispiele für externe Verweise in einem ST-Guide-Hypertext.
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)stg/xlink.ui
+!vinclude (!EXAMPLES)/stg/xlink.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)stg/xlink.ui
+!include (!EXAMPLES)/stg/xlink.ui
 (!EXAMPLE_END)
 !endif
 
@@ -273,9 +273,9 @@ Hier ein paar kurze Beispiele für externe Verweise in einem ST-Guide-Hypertext.
 Hier ein paar kurze Beispiele für externe Verweise in einem WinHelp-Datei.
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)winhelp/xlink.ui
+!vinclude (!EXAMPLES)/winhelp/xlink.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)winhelp/xlink.ui
+!include (!EXAMPLES)/winhelp/xlink.ui
 (!EXAMPLE_END)
 !endif
 
@@ -284,9 +284,9 @@ Hier ein paar kurze Beispiele für externe Verweise in einer
 HTML-Datei.
 
 (!EXAMPLE_BEFORE)
-!vinclude (!EXAMPLES)html/xlink.ui
+!vinclude (!EXAMPLES)/html/xlink.ui
 (!EXAMPLE_AFTER)
-!include (!EXAMPLES)html/xlink.ui
+!include (!EXAMPLES)/html/xlink.ui
 (!EXAMPLE_END)
 !endif
 

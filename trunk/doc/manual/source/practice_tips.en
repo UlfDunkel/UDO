@@ -47,14 +47,14 @@ My be you have a documentation with five chapters. Write a preamble file, a
 main file and five files that contain the chapters:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)main.u
+!vinclude (!EXAMPLES)/main.u
 (!EXAMPLE_END)
 
 If you now want to convert a single chapter you simply edit another main
 file:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)ch5test.u
+!vinclude (!EXAMPLES)/ch5test.u
 (!EXAMPLE_END)
 
 If you use this method you will be able to find errors in a large

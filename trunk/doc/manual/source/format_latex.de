@@ -50,7 +50,7 @@ Beginn des Quelltextes die eigene Präambel verfassen.
 Das folgende Beispiel zeigt, wie das funktioniert:
 
 (!EXAMPLE_BEGIN)
-!vinclude (!EXAMPLES)latex/preamble.u
+!vinclude (!EXAMPLES)/latex/preamble.u
 (!EXAMPLE_END)
 
 !item [Wie baue ich Formeln in den Quelltext ein?]

@@ -106,11 +106,11 @@ sites.
 !begin_description
 !item [Main file:]
 
-!vinclude (!EXAMPLES)html/headfoot.ui
+!vinclude (!EXAMPLES)/html/headfoot.ui
 
 !item [software.ui:]
 
-!vinclude (!EXAMPLES)html/software.ui
+!vinclude (!EXAMPLES)/html/software.ui
 !end_description
 
 If you convert the source file to HTML, UDO expands the macros that contain
