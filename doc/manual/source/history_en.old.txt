@@ -1,3 +1,4 @@
+#   fd  Mar 09: using macro BUG
 
 !begin_ignore
 
@@ -85,17 +86,17 @@ unten links !! unten mitte !! unten rechts
 !item [(!BUGFIXES)]
 !begin_itemize !compressed
 # ..............................................................................
-!item Fixed bug #0000055 in version 6.4.1 (!nl)
+!item Fixed bug (!BUG [55]) in version 6.4.1 (!nl)
     Umlauts used in the second parameter of (!KKW [img]) or (!KKW [ilink])
     were not converted in the right way.
 # http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000055
 # ..............................................................................
-!item Fixed bug #0000048 in version~6.4.1 (!nl)
+!item Fixed bug (!BUG [48]) in version~6.4.1 (!nl)
     Error message "unknown command: !html_use_hyphenation".
     Reason: command wasn't present in the command list.
 # http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000048
 # ..............................................................................
-!item Bug #0000059 in Version~6.5.10 beseitigt (!nl)
+!item Bug (!BUG [59]) in Version~6.5.10 beseitigt (!nl)
       Nichtfunktion, wenn Makro intern eine Definition aufruft.
 # http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000059
 # ..............................................................................
@@ -131,14 +132,14 @@ unten links !! unten mitte !! unten rechts
 !item New Switch (preamble only): (!code [!/html_header_links]) (!nl)
    If this switch is set, several (!code [(!LINK)]) elements are generated in the
    HTML header as following. (!nl)
-   This feature wish #0000053 has been implemented since version~6.5.2.
+   This feature wish (!BUG [53]) has been implemented since version~6.5.2.
 # ..............................................................................
 !item New Switch: (!code [!/html_header_date [(!TEXT)!]]) (!nl)
    Until now, UDO inserted near to the beginning of every HTML file the building date,
    e.g. (!code [<!!-- last modified on 2004/01/29 -->]). (!nl)
    Now, only if this switch is set, a META element for the building date/time is generated
    in the HTML Header. (!nl)
-   This feature wish #0000054 has been implemented since version 6.5.2.
+   This feature wish (!BUG [54]) has been implemented since version 6.5.2.
 # ..............................................................................
 !item Indexseite für HTML (!nl)
       Version~6.5.12
@@ -218,11 +219,11 @@ unten links !! unten mitte !! unten rechts
 !item [(!BUGFIXES)]
 !begin_itemize !compressed
 # ..............................................................................
-!item Fixed bug #0000044 in version 6.4.1 (!nl)
+!item Fixed bug (!BUG [44]) in version 6.4.1 (!nl)
    If (!KW [no_numbers]) is set, there won't any longer printed numbers in front of the
    node names in the HTML header (!LINK) elements.
 # ..............................................................................
-!item Bug #0000058 in Version~6.5.8 beseitigt (!nl)
+!item Bug (!BUG [58]) in Version~6.5.8 beseitigt (!nl)
    Falsche UDO-Versionsbezeichnung in HTML-Metatags korrigiert.
 # http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000058
 # ..............................................................................
@@ -266,12 +267,12 @@ unten links !! unten mitte !! unten rechts
 !begin_itemize !compressed
 # ..............................................................................
 # zu RTF
-!item Fixed bug #0000056 in version~6.4.1 (!nl)
+!item Fixed bug (!BUG [56]) in version~6.4.1 (!nl)
    Wrong calculation of pictures sizes using the RTF output.
    By an inadvertance, the parameter "height" was covered with the width.
 # http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000056
 # ..............................................................................
-!item Fixed bug #0000017 in version~6.4.1 (!nl)
+!item Fixed bug (!BUG [17]) in version~6.4.1 (!nl)
    Error message: ""couldn't read BMP header of <udo_mw.bmp>. No such file or directory."" (!nl)
    New behavior: If you convert a document to RTF for the first time and the
    UDO link image (!file [udo_mw.bmp]) doesn't exist, there will be given a note,
@@ -279,7 +280,7 @@ unten links !! unten mitte !! unten rechts
    The image will be found now on TOS compatible computers too.
 # http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000017
 # ..............................................................................
-!item Bug #0000060 in Version~6.5.8 beseitigt (!nl)
+!item Bug (!BUG [60]) in Version~6.5.8 beseitigt (!nl)
       Abstürze bei RTF Ausgabe mit Version 6.5.5 beseitigt.
 # http://bugtracker.udo-open-source.org/bug_view_advanced_page.php?bug_id=0000060
 # ..............................................................................
