@@ -3303,21 +3303,21 @@ GLOBAL void c_item(void)
       {
       case ENV_ITEM:
          ll = strlen_indent();
-         sprintf(sBig, "\\pard\\ \\tqr\\tx%d\\tx%d\\li%d\\fi-%d\\qj\\tab %s\\tab", ll-167, ll, ll, ll, itemchar[iItemLevel]);
+         sprintf(sBig, "\\pard\\ \\tqr\\tx%d\\tx%d\\li%d\\fi-%d\\qj\\tab %s\\tab ", ll-167, ll, ll, ll, itemchar[iItemLevel]);
          break;
          
       case ENV_ENUM:
          enum_count[iEnvLevel]++;
          ll= strlen_indent();
          itoenum(iEnumLevel, &(enum_count[iEnvLevel]), s);
-         sprintf(sBig, "\\pard\\tqr\\tx%d\\tx%d\\li%d\\fi-%d\\qj\\tab %s\\tab", ll-167, ll, ll, ll, s);
+         sprintf(sBig, "\\pard\\tqr\\tx%d\\tx%d\\li%d\\fi-%d\\qj\\tab %s\\tab ", ll-167, ll, ll, ll, s);
          break;
          
       case ENV_DESC:
          token[0][0] = EOS;
          sBig[0] = EOS;
          
-         if (token[1][0] == '[')
+         if (token[1][0] == '[')          /* there is a description title! */
          {
             add_description();
             replace_once(token[0], "[", BOLD_ON);
@@ -3344,7 +3344,8 @@ GLOBAL void c_item(void)
          
          ll= strlen_indent();
          strcpy(sTemp, sBig);
-         sprintf(sBig, "\\pard\\li%d\\fi-%d\\qj %s", ll, 567, sTemp);
+                                          /* we want a line feed after the description title */
+         sprintf(sBig, "\\pard\\li%d\\fi-%d\\qj %s\n\\pard\\li%d\\fi-%d\\qj ", ll, 567, sTemp, ll, 567);
          break;
          
       case ENV_LIST:
@@ -3384,45 +3385,39 @@ GLOBAL void c_item(void)
             lp = ll - strlen_prev_indent();
 #else
             if (iEnvType[iEnvLevel - 1] == ENV_LIST)
-            {
                lp = ll - strlen_prev_indent();
-            }
             else
-            {
                lp = ll - iEnvIndent[iEnvLevel - 1];
-            }
 #endif
          }
          else
-         {
             lp = ll;
-         }
          
          strcpy(sTemp, sBig);
          
          switch (env_kind[iEnvLevel])
          {
          case LIST_NORMAL:
-            sprintf(sBig, "\\pard\\li%d\\fi-%d\\tx%d\\qj %s\\tab", ll, lp, ll, sTemp);
+            sprintf(sBig, "\\pard\\li%d\\fi-%d\\tx%d\\qj %s\\tab ", ll, lp, ll, sTemp);
             break;
             
          case LIST_BOLD:
-            sprintf(sBig, "\\pard\\li%d\\fi-%d\\tx%d\\qj {\\b %s}\\tab", ll, lp, ll, sTemp);
+            sprintf(sBig, "\\pard\\li%d\\fi-%d\\tx%d\\qj {\\b %s}\\tab ", ll, lp, ll, sTemp);
             break;
             
          case LIST_ITALIC:
-            sprintf(sBig, "\\pard\\li%d\\fi-%d\\tx%d\\qj {\\i %s}\\tab", ll, lp, ll, sTemp);
+            sprintf(sBig, "\\pard\\li%d\\fi-%d\\tx%d\\qj {\\i %s}\\tab ", ll, lp, ll, sTemp);
             break;
             
          case LIST_TYPEWRITER:
-            sprintf(sBig, "\\pard\\li%d\\fi-%d\\tx%d\\qj {\\f1 %s}\\tab", ll, lp, ll, sTemp);
+            sprintf(sBig, "\\pard\\li%d\\fi-%d\\tx%d\\qj {\\f1 %s}\\tab ", ll, lp, ll, sTemp);
          }
          
       }  /* switch (iEnvType[iEnvLevel]) */
       
       if (insert_placeholder(sBig, sBig, sBig, sBig))
       {
-         um_strcpy(token[0], sBig, MAX_TOKEN_LEN+1, "c_item[19]");
+         um_strcpy(token[0], sBig, MAX_TOKEN_LEN + 1, "c_item[19]");
       }
       else
       {
@@ -4511,29 +4506,29 @@ LOCAL void output_tex_environments(void)
 
 LOCAL void output_rtf_colortbl(void)
 {
-   outln("{\\colortbl;");
-   outln("\\red0\\green0\\blue0;");       /* \cf1:  black */   /*r6pl5: siehe HTML 3.2 DTD */
-   outln("\\red192\\green192\\blue192;"); /* \cf2:  silver */
-   outln("\\red128\\green128\\blue128;"); /* \cf3:  gray */
-   outln("\\red255\\green255\\blue255;"); /* \cf4:  white */
-   outln("\\red128\\green0\\blue0;");     /* \cf5:  maroon */
-   outln("\\red255\\green0\\blue0;");     /* \cf6:  red */
-   outln("\\red128\\green0\\blue128;");   /* \cf7:  purple */
-   outln("\\red255\\green0\\blue255;");   /* \cf8:  fuchsia */
-   outln("\\red0\\green128\\blue0;");     /* \cf9:  green */
-   outln("\\red0\\green255\\blue0;");     /* \cf10: lime */
-   outln("\\red128\\green128\\blue0;");   /* \cf11: olive */
-   outln("\\red255\\green255\\blue0;");   /* \cf12: yellow */
-   outln("\\red0\\green0\\blue128;");     /* \cf13: navy */
-   outln("\\red0\\green0\\blue255;");     /* \cf14: blue */
-   outln("\\red0\\green128\\blue128;");   /* \cf15: teal */
-   outln("\\red0\\green255\\blue255;");   /* \cf16: aqua */
+   outln("\t{\\colortbl;");
+   outln("\t\\red0\\green0\\blue0;");     /* \cf1:  black */   /*r6pl5: siehe HTML 3.2 DTD */
+   outln("\t\\red192\\green192\\blue192;"); /* \cf2:  silver */
+   outln("\t\\red128\\green128\\blue128;"); /* \cf3:  gray */
+   outln("\t\\red255\\green255\\blue255;"); /* \cf4:  white */
+   outln("\t\\red128\\green0\\blue0;");   /* \cf5:  maroon */
+   outln("\t\\red255\\green0\\blue0;");   /* \cf6:  red */
+   outln("\t\\red128\\green0\\blue128;"); /* \cf7:  purple */
+   outln("\t\\red255\\green0\\blue255;"); /* \cf8:  fuchsia */
+   outln("\t\\red0\\green128\\blue0;");   /* \cf9:  green */
+   outln("\t\\red0\\green255\\blue0;");   /* \cf10: lime */
+   outln("\t\\red128\\green128\\blue0;"); /* \cf11: olive */
+   outln("\t\\red255\\green255\\blue0;"); /* \cf12: yellow */
+   outln("\t\\red0\\green0\\blue128;");   /* \cf13: navy */
+   outln("\t\\red0\\green0\\blue255;");   /* \cf14: blue */
+   outln("\t\\red0\\green128\\blue128;"); /* \cf15: teal */
+   outln("\t\\red0\\green255\\blue255;"); /* \cf16: aqua */
    
                                           /* New in V6.5.9 [NHz] */
    if (sDocColour[0] != EOS)
       outln(sDocColour);
    
-   outln("}");
+   outln("\t}");
 }
 
 
@@ -4750,17 +4745,13 @@ GLOBAL void c_begin_document(void)
    case TORTF:
                                           /* RTF-HEADER */
       if (sDocPropfont[0] == EOS)
-      {
          strcpy(sDocPropfont, "Times New Roman");
-      }
       
       if (sDocMonofont[0] == EOS)
-      {
          strcpy(sDocMonofont, "Courier New");
-      }
       
-      voutlnf("{\\rtf1\\ansi{\\fonttbl{\\f0\\froman %s;}{\\f1\\fswiss %s;}{\\f2\\fmodern MS LineDraw;}}", sDocPropfont, sDocMonofont);
-      out("{\\stylesheet");
+      voutlnf("{\\rtf1\\ansi\n{\\fonttbl\n\t{\\f0\\froman %s;}\n\t{\\f1\\fswiss %s;}\n\t{\\f2\\fmodern MS LineDraw;}\n}", sDocPropfont, sDocMonofont);
+      outln("{\\stylesheet");
 
       if (sDocPropfontSize[0] != EOS)
          iDocPropfontSize = atoi(sDocPropfontSize) * 2;
@@ -4794,23 +4785,23 @@ GLOBAL void c_begin_document(void)
       else
          laydat.node4size = iDocPropfontSize;
 
-      voutlnf("{%s\\fs%d\\snext0 Normal;}",   rtf_norm,  iDocPropfontSize);
-      voutlnf("{%s\\fs%d\\snext1 Verbatim;}", rtf_verb,  iDocMonofontSize);
-      voutlnf("{%s\\fs%d\\snext2 Chapter;}",  rtf_chapt, iDocPropfontSize + 28);
+      voutlnf("\t{%s\\fs%d\\snext0 Normal;}",   rtf_norm,  iDocPropfontSize);
+      voutlnf("\t{%s\\fs%d\\snext1 Verbatim;}", rtf_verb,  iDocMonofontSize);
+      voutlnf("\t{%s\\fs%d\\snext2 Chapter;}",  rtf_chapt, iDocPropfontSize + 28);
 
                                           /* Changed in r6pl16 [NHz] */
-      voutlnf("{%s\\fs%d\\snext3 Node1;}",    rtf_node1,     laydat.node1size);
-      voutlnf("{%s\\fs%d\\snext4 Node2;}",    rtf_node2,     laydat.node2size);
-      voutlnf("{%s\\fs%d\\snext5 Node3;}",    rtf_node3,     laydat.node3size);
-      voutlnf("{%s\\fs%d\\snext6 Node4;}",    rtf_node4,     laydat.node4size);
-      voutlnf("{%s\\fs%d\\snext7 Chapter*;}", rtf_inv_chapt, iDocPropfontSize + 28);
+      voutlnf("\t{%s\\fs%d\\snext3 Node1;}",    rtf_node1,     laydat.node1size);
+      voutlnf("\t{%s\\fs%d\\snext4 Node2;}",    rtf_node2,     laydat.node2size);
+      voutlnf("\t{%s\\fs%d\\snext5 Node3;}",    rtf_node3,     laydat.node3size);
+      voutlnf("\t{%s\\fs%d\\snext6 Node4;}",    rtf_node4,     laydat.node4size);
+      voutlnf("\t{%s\\fs%d\\snext7 Chapter*;}", rtf_inv_chapt, iDocPropfontSize + 28);
 
                                           /* Changed in r6pl16 [NHz] */
-      voutlnf("{%s\\fs%d\\snext8 Node1*;}",    rtf_inv_node1, laydat.node1size);
-      voutlnf("{%s\\fs%d\\snext9 Node2*;}",    rtf_inv_node2, laydat.node2size);
-      voutlnf("{%s\\fs%d\\snext10 Node3*;}",   rtf_inv_node3, laydat.node3size);
-      voutlnf("{%s\\fs%d\\snext11 Node4*;}",   rtf_inv_node4, laydat.node4size);
-      voutlnf("{%s\\fs%d\\snext13 LineDraw;}", rtf_linedraw,  iDocMonofontSize);
+      voutlnf("\t{%s\\fs%d\\snext8 Node1*;}",    rtf_inv_node1, laydat.node1size);
+      voutlnf("\t{%s\\fs%d\\snext9 Node2*;}",    rtf_inv_node2, laydat.node2size);
+      voutlnf("\t{%s\\fs%d\\snext10 Node3*;}",   rtf_inv_node3, laydat.node3size);
+      voutlnf("\t{%s\\fs%d\\snext11 Node4*;}",   rtf_inv_node4, laydat.node4size);
+      voutlnf("\t{%s\\fs%d\\snext13 LineDraw;}", rtf_linedraw,  iDocMonofontSize);
 
       output_rtf_colortbl();
 
@@ -4823,7 +4814,7 @@ GLOBAL void c_begin_document(void)
       outln("\\sectd\\pgndec\\headery1134\\footery1134\\cols1\\colsx567\\pgndec");
 
                                           /* New in V6.5.9 [NHz] */
-      voutlnf("{\\*\\revtbl {Unknown;}{UDO Version %s.%s %s;}}", UDO_REL, UDO_SUBVER, UDO_BUILD);
+      voutlnf("{\\*\\revtbl \n\t{Unknown;}\n\t{UDO Version %s.%s %s;}\n}", UDO_REL, UDO_SUBVER, UDO_BUILD);
 
       voutlnf("\\f0\\fs%d", iDocPropfontSize);   
 
@@ -4863,7 +4854,7 @@ GLOBAL void c_begin_document(void)
       
       if (s[0] != EOS)
       {
-         voutlnf("  {\\author %s}", s);
+         voutlnf("\t{\\author %s}", s);
       }
 
 
@@ -4871,7 +4862,7 @@ GLOBAL void c_begin_document(void)
       
       if (titleprogram[0] != EOS)
       {
-         voutlnf("  {\\title %s}", titleprogram);
+         voutlnf("\t{\\title %s}", titleprogram);
       }
 
                                           /* New in V6.5.2 [NHz] */
@@ -4881,7 +4872,7 @@ GLOBAL void c_begin_document(void)
       {
          if (titdat.description[0] != EOS)
          {
-            voutlnf("  {\\subject %s}", titdat.description);
+            voutlnf("\t{\\subject %s}", titdat.description);
          }
       }
 
@@ -4892,7 +4883,7 @@ GLOBAL void c_begin_document(void)
       {
          if (titdat.keywords[0] != EOS)
          {
-            voutlnf("  {\\keywords %s}", titdat.keywords);
+            voutlnf("\t{\\keywords %s}", titdat.keywords);
          }
       }
 
@@ -4903,7 +4894,7 @@ GLOBAL void c_begin_document(void)
       {
          if (titdat.company[0] != EOS)
          {
-            voutlnf("  {\\*\\company %s}", titdat.company);
+            voutlnf("\t{\\*\\company %s}", titdat.company);
          }
       }
 
@@ -4914,7 +4905,7 @@ GLOBAL void c_begin_document(void)
       {
          if (titdat.category[0] != EOS)
          {
-            voutlnf("  {\\*\\category %s}", titdat.category);
+            voutlnf("\t{\\*\\category %s}", titdat.category);
          }
       }
 
@@ -4924,7 +4915,7 @@ GLOBAL void c_begin_document(void)
       {
          if (titdat.translator[0] != EOS)
          {
-            voutlnf("  {\\*\\translator %s}", titdat.translator);
+            voutlnf("\t{\\*\\translator %s}", titdat.translator);
          }
       }
 
@@ -4934,19 +4925,19 @@ GLOBAL void c_begin_document(void)
       {
          if (titdat.distributor[0] != EOS)
          {
-            voutlnf("  {\\*\\distributor %s}", titdat.distributor);
+            voutlnf("\t{\\*\\distributor %s}", titdat.distributor);
          }
       }
 
       /* ---- About UDO ---- */
       
-      voutlnf("  {\\doccomm UDO Version %s.%s %s}", UDO_REL, UDO_SUBVER, UDO_BUILD);
+      voutlnf("\t{\\doccomm UDO Version %s.%s %s}", UDO_REL, UDO_SUBVER, UDO_BUILD);
 
       /* ---- Erstellungsdatum & Sonstiges ---- */
       
-      voutlnf("  {\\creatim\\yr%d\\mo%d\\dy%d\\hr%d\\min%d}", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin);
+      voutlnf("\t{\\creatim\\yr%d\\mo%d\\dy%d\\hr%d\\min%d}", iDateYear, iDateMonth, iDateDay, iDateHour, iDateMin);
       
-      outln("  {\\version1}{\\nofpages0}{\\nofwords0}{\\nofchars0}{\\edmins0}");
+      outln("\t{\\version1}{\\nofpages0}{\\nofwords0}{\\nofchars0}{\\edmins0}");
       outln("}");
 
       outln(rtf_pardplain);
