@@ -8192,7 +8192,7 @@ BOOLEAN           reset_internals)        /* */
                   {
                   case ENV_ITEM:
                   case ENV_ENUM:
-                     um_strcpy(token[i], "\\par\\tab\\tab ", MAX_TOKEN_LEN+1, "token_output[6]");
+                     um_strcpy(token[i], "\\par\\tab \\tab ", MAX_TOKEN_LEN+1, "token_output[6]");
                      break;
 
                   case ENV_DESC:
