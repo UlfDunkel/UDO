@@ -23,6 +23,7 @@
 #   fd  Mar 06: [UDO]: commandline option '-@ F' enhanced
 #   fd  Mar 08: - macro usage adjusted
 #               - ISO encodings completed
+#   fd  Mar 09: translated
 #
 ################################################################################
 
@@ -126,7 +127,7 @@
 !item [(!BUGFIXES)]
 # ----------------------------------------
       !begin_itemize !compressed
-      !item (!BUG [86]): Veraltete Kommandos bringen den IF-Stack nicht mehr durcheinander.
+      !item (!BUG [86]): Deprecated commands no longer irritate the IF stack.
       !end_itemize
 
 !end_description
