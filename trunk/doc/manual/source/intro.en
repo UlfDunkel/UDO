@@ -22,6 +22,7 @@
 #   fd  Aug 17: 'information' never used in plural in English!
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 09: chapter 'intro_manual' translated
 #
 ################################################################################
 
@@ -70,29 +71,28 @@ and you will have more time for the really important things.
 !begin_node How to read this manual best
 !html_name  intro_manual
 
-(!NTY)
-Dieses Handbuch für UDO wurde so konzipiert, dass Sie es natürlich am besten mindestens einmal von vorn bis hinten durchlesen. Wir empfehlen, es täglich zu wiederholen. (!grin)
+The UDO manual concept is this: read it at least three times from start to end. We recommend to repeat this on a daily base. (!grin)
 
-Wir haben viele UDO-Funktionen verwendet, um das Handbuch für Sie so praktisch wie möglich zu machen. Hier ein paar Hinweise, damit Sie sich rasch zurechtfinden:
+We have used many UDO features to make this manual as handy as possible for you. Here you find some hints to get the most out of the manual:
 
 !begin_description
 !item [Navigation]
 (!img [udo_hm][Home])~(!img [udo_up][Up])~(!img [udo_lf][left])~(!img [udo_rg][right])
 
-In der wohl am meisten gelesenen HTML-Variante können Sie bequem über die kleinen Symbole am oberen und unteren Rand jeder Seite zum Anfang des Handbuchs, eine Kapitel-Ebene höher, zum vorigen Kapitel oder zum nächsten Kapitel navigieren. 
+The HTML version will probably be the mostly read version. You will see tiny symbols on the top and bottom border of each page which guide you to the ""homepage"" of the manual, one chapter level up, back to the previous chapter and forward to the next chapter.
 
-Unter der oberen Navigationssymbole-Leiste finden Sie zudem die Kapitelhierarchie nochmal aufgeführt, so dass Sie auch dort einfach auf die Kapitelnamen klicken können, um andere Kapitel aufzurufen.
+Below the upper navigation symbols bar you will also find the breadcrumb section which also helps to navigate to other chapters by simply clicking on the chapter names.
 
-!item [Schrift]
-Da das UDO-Handbuch eher in die Kategorie ""Technisches Handbuch und Nachschlagewerk"" gehört, haben wir bestimmte Texte auf bestimmte Weise markiert, damit Sie z.B. Code oder Dateinamen rascher von normalem Text unterscheiden können.
+!item [Fonts]
+Because the UDO manual's category is rather ""Technical Manual And Reference Guide"", we have marked several texts in distinct ways so you can differenciate e.g. code snippets or file names from normal text more easily.
 
 !begin_itemize
-!item (!code [Code benutzt diese Schriftart.])
-!item (!file [Dateinamen, Pfade und ähnliches werden so dargestellt.])
-!item (!red)Konstanten, die im Programm verwendet werden, sind so dargestellt.(!coloff)
-!item Verknüpfungen zu anderen Kapiteln werden wie sonst auch in Webseiten dargestellt, 
-      z.B. (!url [dieser Link zur UDO-Website][http://www.udo-open-source.org/]) 
-      oder diese (!link [Verknüpfung zu einem anderen Handbuch-Kapitel][Contact]).
+!item (!code [Code uses this font style.])
+!item (!file [File names, paths and similar are represented this way.])
+!item (!red)Constants which are used inside the application, are shown like this.(!coloff)
+!item Links to other chapters are shown as usual in websites, 
+      e.g. (!url [this link to the UDO website][http://www.udo-open-source.org/]) 
+      or this (!link [link to another manual chapter][Contact]).
 !end_itemize
 
 !end_description
@@ -331,12 +331,14 @@ Using the following (!B)mailing lists(!b), you can contact the UDO community:
 !item [(!url [UDO_Announce] [http://lists.udo-open-source.org/mailman/listinfo/udo_announce])]
       UDO announcements (e.g. new versions)
 !item [(!url [UDO_Bugtracker] [http://lists.udo-open-source.org/mailman/listinfo/udo_bugtracker])]
-      bug reports and feature wishes from the (!url [bugtracker system] [http://bugtracker.udo-open-source.org/]) will be sent via this mailing list.
+      bug reports and feature wishes from the (!url [bugtracker system] [http://bugtracker.udo-open-source.org/]) 
+      will be sent via this mailing list.
 !item [(!url [UDO_Dev] [http://lists.udo-open-source.org/mailman/listinfo/udo_dev])]
       for UDO developers
 !item [(!url [UDO_Discussion] [http://lists.udo-open-source.org/mailman/listinfo/udo_discussion])]
       questions and general discussion about UDO. Having problems with UDO, you can ask here.
 !end_blist
+
 Mail discussions are mostly in German, but feel free to ask in English.
 
 !end_node # Contact the UDO community
