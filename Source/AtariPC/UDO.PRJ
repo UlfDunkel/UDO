@@ -4,10 +4,11 @@ UDO.TTP
 .C[ -D__COMPATIBLE__ ]
 .C[ -C- ]
 .C[ -K ]
-;.C[ -2 ]
 .C[ -P ]
-.L[ -S=64000 ]
+.C[ -l99 ]               ; Maximum identifier length
 ;.C[ -Y ]
+
+.L[ -S=64000 ]
 ;.L[ -Y -G -L ]
 
 =
