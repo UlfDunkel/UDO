@@ -66,6 +66,7 @@
 *                - CODE_CP1256 (Arabic)
 *                - CODE_CP1258 (Vietnamese)
 *                - access to codepages generalized
+*    fd  Mar 12: adjustments for the Linux ggc
 *
 ******************************************|************************************/
 
@@ -168,7 +169,7 @@ const char  *place)        /* */
    else
    {
       dest[0] = EOS;
-      sprintf(errbuf, "um_strcpy: buffer overrun prevented: %s: %ld>%ld", place, slen + 1, max);
+      sprintf(errbuf, "um_strcpy: buffer overrun prevented: %s: %ul>%ul", place, slen + 1, max);
       loglnposprintf("Warning", errbuf);
       return dest;
    }
@@ -220,7 +221,7 @@ const char  *place)        /* */
    else
    {
       dest[0] = EOS;
-      sprintf(errbuf, "um_strncpy: buffer overrun prevented: %s: %ld>%ld", place, n + 1, max);
+      sprintf(errbuf, "um_strncpy: buffer overrun prevented: %s: %ul>%ul", place, n + 1, max);
       loglnposprintf("Warning", errbuf);
       return dest;
    }
@@ -275,7 +276,7 @@ const char  *place)        /* */
    else
    {
       dest[0] = EOS;
-      sprintf(errbuf, "um_strcat: buffer overrun prevented: %s: %ld>%ld", place, dlen + slen + 1, max);
+      sprintf(errbuf, "um_strcat: buffer overrun prevented: %s: %ul>%ul", place, dlen + slen + 1, max);
       loglnposprintf("Warning", errbuf);
       return dest;
    }
@@ -329,7 +330,7 @@ const char  *place)        /* */
    else
    {
       dest[0] = EOS;
-      sprintf(errbuf, "um_strncat: buffer overrun prevented: %s: %ld>%ld", place, dlen + n + 1, max);
+      sprintf(errbuf, "um_strncat: buffer overrun prevented: %s: %ul>%ul", place, dlen + n + 1, max);
       loglnposprintf("Warning", errbuf);
       return dest;
    }
@@ -1659,7 +1660,7 @@ char  *zeile)  /* ^ string */
 {
    int       i = 0;               /* counter for table entries */
    int       j = 0;               /* counter for chars of <zeile> */
-   int       len;                 /* indicator for byte length of UTF char */
+   int       len = 0;             /* indicator for byte length of UTF char */
    UWORD   (*plig)[3];            /* ^ to CODE_xxx_lig[][] arrays */
    UWORD   (*psort);              /* ^ to sort_CODE_xxx[] arrays */
    UWORD   (*pusort)[2];          /* ^ to sort_CODE_UTF[] array */
@@ -1969,7 +1970,7 @@ char       *s2)             /* ^ 2nd string for comparison */
    int      i = 0;          /* counter for table entries */
    int      j = 0;          /* counter for chars of <zeile> */
    int      k = 0;          /* counter for s1 + s2 */
-   int      len;            /* indicator for byte length of UTF char */
+   int      len = 0;        /* indicator for byte length of UTF char */
    size_t   c1,             /* Unicode char value (up to 4 bytes!) */
             c2;             /* Unicode char value (up to 4 bytes!) */
    UWORD  (*pusort)[2];     /* ^ to sort_CODE_xxx[] arrays */

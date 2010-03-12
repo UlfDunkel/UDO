@@ -92,7 +92,8 @@
 *                - use of contact_link for HTML the entries <link rev="made"> and
 *                  <link rev="author"> if available
 *    ME  Mar 04: - the chars uf lang.today are now quoted to the HTML-Chars
-*                  ("M„rz" -> "M&auml;rz") in html_footer() 
+*                  ("M„rz" -> "M&auml;rz") in html_footer()
+*    fd  Mar 12: bookmarks_ps(): ugly typo fixed (warned by Linux gcc)
 *
 ******************************************|************************************/
 
@@ -9364,7 +9365,7 @@ GLOBAL BOOLEAN bookmarks_ps(void)
                                                 um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[8.1]");
                                                 node2postscript(n, KPS_BOOKMARK);
                                                 node2postscript(s, KPS_NAMEDEST);
-                                                voutlnf("(%d.%d.%d.%d.d %s) /%s 0 Bookmarks",
+                                                voutlnf("(%d.%d.%d.%d.%d %s) /%s 0 Bookmarks",
                                                                                         toc[i]->nr1+toc_offset,
                                                                                         toc[i]->nr2+subtoc_offset,
                                                                                         toc[i]->nr3+subsubtoc_offset,
