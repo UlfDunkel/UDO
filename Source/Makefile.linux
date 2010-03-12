@@ -1,12 +1,16 @@
 ###########################################################
 # @(#) Makefile fuer Linux (i86)
 # @(#) Dirk Hagedorn, 27.06.1996
+#
+# History:
+# 2010:
+#   fd  Mar 12: -Wno-missing-braces
 ###########################################################
 CC = gcc 
 O=.o
 X=
 
-CFLAGS = -O2 -Wall -D__LINUX__ $(XCFLAGS)
+CFLAGS = -O2 -Wall -Wno-missing-braces -D__LINUX__ $(XCFLAGS)
 
 #CFLAGS =	-g -O2 -D__LINUX__ \
 #-Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations \
