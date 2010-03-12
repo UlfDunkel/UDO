@@ -32,7 +32,11 @@
 *  Notes        : Please add yourself as co-author when you change this file.
 *
 *-------------------------------------------------------------------------------
-*  Things to do : -
+*  Things to do : - check if this huge 'string' can be handled in a way which 
+*                   does not make Linux gcc complain (in -pedantic mode only):
+*
+*                  "string length '12721' is greater than the length '509' ISO C90
+*                   compilers are required to support"
 *
 *-------------------------------------------------------------------------------
 *  History:
