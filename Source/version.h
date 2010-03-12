@@ -74,6 +74,7 @@
 *                - CODE_CELTIC
 *                - CODE_LATIN9
 *                - CODE_LATIN10
+*    fd  Mar 12: Linux gcc doesn't like tmpnam
 *
 ******************************************|************************************/
 
@@ -247,7 +248,7 @@
 #define HAVE_SYS_ERRLIST     1
 #define HAVE_STRERROR        1
 #define USE_SETFILETYPE      0
-#define HAVE_TMPNAM          1
+#define HAVE_TMPNAM          0
 #endif
 
 #ifdef __AMIGA__

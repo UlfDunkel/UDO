@@ -104,6 +104,7 @@
 *                - CODE_LATIN9
 *                - CODE_LATIN10
 *                - c_code_source() + c_code_target() adjusted
+*    fd  Mar 12: adjustments for Linux gcc
 *
 ******************************************|************************************/
 
@@ -1403,7 +1404,7 @@ size_t       len)        /* */
 
    if (len > MAXBLANKPOS)                 /* string too long! */
    {
-      printf("Warning: outlncenterfill(): string must not be longer than % characters\n", MAXBLANKPOS - 1);
+      printf("Warning: outlncenterfill(): string must not be longer than %d characters\n", MAXBLANKPOS - 1);
       return;
    }
 
@@ -8519,11 +8520,15 @@ BOOLEAN           reset_internals)        /* */
 #endif
 
                if (use_justification && !inside_left)
+	       {
                   if (len_zeile < umbruch - 9)
                      warning_short_line(len_zeile, token[i]);
+	       }
                else
+	       {
                   if (len_zeile < umbruch - 6)
                      warning_short_line(len_zeile, token[i]);
+	       }
 
             }  /* switch */
 

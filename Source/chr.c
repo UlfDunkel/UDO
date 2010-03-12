@@ -108,6 +108,7 @@
 *                - CODE_CELTIC
 *                - CODE_LATIN9
 *                - CODE_LATIN10
+*    fd  Mar 12: adjustments for the Linux ggc
 *
 ******************************************|************************************/
 
@@ -802,11 +803,11 @@ char       *cbuf)
 
 GLOBAL UWORD utf8_to_bstr(
 
-const char  *sz,     /* */
-int          len)    /* */
+const char  *sz,        /* */
+int          len)       /* */
 {
-   int       i = 0;  /* */
-   UWORD     temp;   /* */
+   int       i = 0;     /* */
+   UWORD     temp = 0;  /* */
    
    
    while (i < len)
@@ -908,7 +909,7 @@ GLOBAL UWORD utf8_to_uchar(
 const char  *sz)            /* */
 {
    int       i = 0;         /* ^ into string */
-   UWORD     temp;          /* buffer for Unicode codepoint value */
+   UWORD     temp = 0;      /* buffer for Unicode codepoint value */
    BOOLEAN   done = FALSE;  /* TRUE: 1st Unicode char found */
    
    
@@ -1253,7 +1254,7 @@ int          char_set)          /* iCharset */
       char  sbuf[LINELEN];  /* line buffer */
       char  cbuf[9];        /* chars buffer */
       int   j;              /* counter */
-      int   len;            /* >1 = convert n-byte UTF value */
+      int   len = 0;        /* >1 = convert n-byte UTF value */
 
 
       memset(sbuf,0,LINELEN);

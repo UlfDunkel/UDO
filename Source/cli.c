@@ -47,6 +47,7 @@
 *    fd  Feb 23: UDO_PL -> UDO_BUILD (no more patchlevels)
 *    fd  Mar 05: file tidied up
 *    fd  Mar 06: read_cliopt_file() decomposes arguments from read file (finally)
+*    fd  Mar 12: using my_str...()
 *
 ******************************************|************************************/
 
@@ -71,30 +72,31 @@ const char *id_cli_c = "@(#) cli.c       $DATE$";
 *
 ******************************************|************************************/
 
-#include   "import.h"
-#include   <stdio.h>   
-#include   <string.h>   
-#include   <stdlib.h>
-#include   "portab.h"
-#include   "version.h"
-#include   "constant.h"
-#include   "udo_type.h"
-#include   "file.h"
-#include   "cfg.h"
-#include   "msg.h"
-#include   "udo.h"
-#include  "udomem.h"
+#include "import.h"
+#include <stdio.h>   
+#include <string.h>   
+#include <stdlib.h>
+#include "portab.h"
+#include "version.h"
+#include "constant.h"
+#include "udo_type.h"
+#include "file.h"
+#include "cfg.h"
+#include "msg.h"
+#include "udo.h"
+#include "udomem.h"
 
 #ifdef __TOS__
    #ifdef USE_PCTOS
       #include <tos.h>
    #else
-      #include   <mintbind.h>
+      #include <mintbind.h>
    #endif
 #endif
 
-#include   "export.h"
-#include   "gui.h"
+#include "export.h"
+#include "gui.h"
+#include "str.h"                          /* my_str...() */
 
 
 
@@ -1262,7 +1264,8 @@ const BOOLEAN     from_file)      /* */
    {
       if (    (arg[0] != '-')             /* no option */ 
            && (arg[0] != '%')             /* no shell placeholder */
-           && (stricmp(arg, "udo") != 0)  /* no shell program name */
+	                                  /* no shell program name */
+           && (my_stricmp(arg, "udo") != 0)
          )
       {
          strcpy(infile.full, arg);
@@ -1271,7 +1274,7 @@ const BOOLEAN     from_file)      /* */
       else
       {
                                           /* --- read options from file --- */
-         if (strcmp(arg, "-@") == 0 && !from_file)
+         if ( (strcmp(arg, "-@") == 0) && !from_file)
          {
             if (argnext != NULL)
             {

@@ -43,6 +43,7 @@
 *  2010:
 *    fd  Feb 15: - file tidied up and reformatted, TAB-free
 *                - new: c_code_source(), c_code_target()
+*    fd  Mar 12: c_code() removed
 *
 ******************************************|************************************/
 
@@ -127,7 +128,6 @@ LOCAL void c_listsubsubsubheading(void);
 LOCAL void c_listsubsubsubsubheading(void);
 
    /* encoding handling */
-LOCAL void c_code(void);
 LOCAL void c_code_source(void);
 LOCAL void c_code_target(void);
 
