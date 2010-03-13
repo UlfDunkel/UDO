@@ -43,10 +43,11 @@
 *    fd  Jan 23: converted all German umlauts in comments into plain ASCII
 *    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  Feb 25: myTextGetline() no longer concatenates '!\' lines in ENV_VERBATIM
+*    ggs Mar 13: Delete # in line 49.
 *
 ******************************************|************************************/
 
-#/*******************************************************************************
+/*******************************************************************************
 *
 *     CONSTANTS
 *
