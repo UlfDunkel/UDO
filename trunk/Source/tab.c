@@ -52,6 +52,8 @@
 *                  inside other environments
 *    ggs Feb 27: MAX_TAB_H increased from 600 to 700
 *    fd  Mar 04: table_output_html(): bEnvShort[] -> bEnvCompressed[]
+*    ggs Mar 21: table_output_general(): In ST-Guide the lines will be display
+*                  if the with is greater than zDocParwidth.
 *
 ******************************************|************************************/
 
@@ -1863,6 +1865,11 @@ LOCAL void table_output_general(void)
          if (inside_right)
             toffset = zDocParwidth - twidth + 1;
 
+         if (indent > 0)
+            toffset = indent + 1;
+      }
+      else
+      {
          if (indent > 0)
             toffset = indent + 1;
       }
