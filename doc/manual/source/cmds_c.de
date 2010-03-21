@@ -5,8 +5,8 @@
 # Language    : German
 # Initial Date: 2009-06-04
 # Author      : Dirk Hagedorn
-# Co-author(s): Ulf Dunkel (fd)
-# Write-access: fd
+# Co-author(s): Ulf Dunkel (fd), Gerhard Stoll (ggs)
+# Write-access: fd, ggs
 #
 # ------------------------------------------------------------------------------
 # 
@@ -27,6 +27,7 @@
 #   fd  Mar 01: - new chapters: code_source, code_target
 #               - OldKeywords removed -> cmds__old.de
 #               - tiny corrections
+#   ggs Mar 21: Wrong syntax in code_source, code_target
 #
 ################################################################################
 
@@ -194,7 +195,7 @@ Legt fest, in welchem Encoding der Quelltext geschrieben wurde.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/code(!t) [(!CHARSET)]
+!item [(!SYNTAX)] (!T)!/code_source(!t) [(!CHARSET)]
 
 !item [(!DESCRIPTION)]
 UDO erwartet nach diesem Kommando Texte oder
@@ -209,7 +210,7 @@ werden kann:
 !include charsets.ui
 !item [(!EXISTSSINCE)] Version~7.00
 !item [(!SEEALSO)]
-(!link [Sonderzeichen] [Sonderzeichen])
+(!KW [code_target]), (!link [Sonderzeichen] [Sonderzeichen])
 !end_xlist
 
 !end_node
@@ -225,7 +226,7 @@ Legt fest, in welchem Encoding das Zielformat ausgegeben werden soll.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/code(!t) [(!CHARSET)]
+!item [(!SYNTAX)] (!T)!/code_target(!t) [(!CHARSET)]
 
 !item [(!DESCRIPTION)]
 UDO setzt nach diesem Kommando Texte oder Textpassagen in das festgelegte Encoding um.
@@ -240,7 +241,7 @@ werden kann:
 !item [(!EXISTSSINCE)] Version~7.00
 
 !item [(!SEEALSO)]
-(!link [Sonderzeichen] [Sonderzeichen])
+(!KW [code_source]), (!link [Sonderzeichen] [Sonderzeichen])
 
 !end_xlist
 

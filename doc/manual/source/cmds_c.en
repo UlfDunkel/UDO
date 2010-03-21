@@ -25,6 +25,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
+#   ggs Mar 21: Wrong syntax in code_source, code_target
 #
 ################################################################################
 
@@ -189,7 +190,7 @@ Sets the encoding of the source document(s).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/code(!t) [(!CHARSET)]
+!item [(!SYNTAX)] (!T)!/code_source(!t) [(!CHARSET)]
 
 !item [(!DESCRIPTION)]
 After this command, UDO expects text which has been written using the selected encoding. 
@@ -200,7 +201,8 @@ Here is an overview about the available encoding names:
 !include charsets.ui
 !item [(!EXISTSSINCE)] Version~7.00
 !item [(!SEEALSO)]
-(!link [Special characters] [Special characters])
+(!KW [code_target]), (!link [Special characters] [Special characters])
+
 !end_xlist
 
 !end_node
@@ -216,7 +218,7 @@ Sets the encoding of the target document(s).
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!/code(!t) [(!CHARSET)]
+!item [(!SYNTAX)] (!T)!/code_target(!t) [(!CHARSET)]
 
 !item [(!DESCRIPTION)]
 After this command, UDO outputs text in the selected encoding. 
@@ -228,7 +230,7 @@ Here is an overview about the available encoding names:
 !item [(!EXISTSSINCE)] Version~7.00
 
 !item [(!SEEALSO)]
-(!link [Special characters] [Special characters])
+(!KW [code_source]), (!link [Special characters] [Special characters])
 
 !end_xlist
 
