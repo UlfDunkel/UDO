@@ -26,7 +26,7 @@
 !label Codepage
 !label Code
 
-UDO supports various codepages for various systems. Below you see a list of all currently supported systems and codepages, some of which with multiple descriptors for the same codepage. It doesn't matter if you use these descriptors upper- or lowercase. (The descriptors base on the former UDO descriptors and on those supported by the Unix command (!C)iconv(!c).)
+UDO supports various codepages for various systems. Below you see a list of all currently supported systems and (!nolink [codepages])codepages, some of which with multiple descriptors for the same codepage. It doesn't matter if you use these descriptors upper- or lowercase. (The descriptors base on the former UDO descriptors and on those supported by the Unix command (!C)iconv(!c).)
 
 !begin_table [r|l|l]
 (!B)System(!b) !! (!B)Encoding(!b) !! (!B)Descriptor0(!b)
