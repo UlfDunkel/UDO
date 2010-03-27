@@ -26,8 +26,8 @@
 *-------------------------------------------------------------------------------
 *
 *  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
-*  Co-Authors   : Ulf Dunkel (fd)
-*  Write access : fd
+*  Co-Authors   : Ulf Dunkel (fd), Gerhard Stoll (ggs)
+*  Write access : fd, ggs
 *
 *  Notes        : Please add yourself as co-author when you change this file.
 *
@@ -67,6 +67,7 @@
 *                - CODE_CP1258 (Vietnamese)
 *                - access to codepages generalized
 *    fd  Mar 12: adjustments for the Linux ggc
+*    ggs Mar 27: tabs2spaces: Needs a EOS at the end
 *
 ******************************************|************************************/
 
@@ -1424,6 +1425,8 @@ const int   tw)           /* tab width */
       }
    }
 
+   nl[nl] = EOS;
+   
    strcpy(s, n);                          /* return converted string */
 }
 
