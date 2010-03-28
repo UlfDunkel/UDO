@@ -105,6 +105,7 @@
 *                - CODE_LATIN10
 *                - c_code_source() + c_code_target() adjusted
 *    fd  Mar 12: adjustments for Linux gcc
+*    ggs Mar 28: token_output: Compressed works for ASCII, ST-Guide and AmigaGuide again
 *
 ******************************************|************************************/
 
@@ -8868,6 +8869,13 @@ BOOLEAN           reset_internals)        /* */
 
    switch (desttype)
    {
+   case TOASC:
+   case TOSTG:
+   case TOAMG:
+      if (!inside_compressed)
+         outln("");
+   break;
+   
    case TOWIN:
    case TOWH4:
    case TOAQV:
