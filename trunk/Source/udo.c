@@ -106,6 +106,7 @@
 *                - c_code_source() + c_code_target() adjusted
 *    fd  Mar 12: adjustments for Linux gcc
 *    ggs Mar 28: token_output: Compressed works for ASCII, ST-Guide and AmigaGuide again
+*    ggs Mar 29: token_output: I hope compressed work in all formats again
 *
 ******************************************|************************************/
 
@@ -8869,13 +8870,6 @@ BOOLEAN           reset_internals)        /* */
 
    switch (desttype)
    {
-   case TOASC:
-   case TOSTG:
-   case TOAMG:
-      if (!inside_compressed)
-         outln("");
-   break;
-   
    case TOWIN:
    case TOWH4:
    case TOAQV:
@@ -8957,24 +8951,31 @@ BOOLEAN           reset_internals)        /* */
 
 
    case TONRO:
-      if (!inside_env)
+      if (!inside_env && !inside_compressed)
          outln("");
          
       break;
 
    case TOLDS:
-      if (inside_quote)
-         outln("</quote>");
-      else
-         outln("");
+      if ( !inside_compressed )
+      {
+         if (inside_quote)
+            outln("</quote>");
+         else
+            outln("");
+      }
          
       break;
 
    case TOINF:
-      if (inside_center)
-         outln("@center");
+      if ( !inside_compressed )
+      {
+         if (inside_center)
+            outln("@center");
 
-      outln("");
+         outln("");
+      }
+      
       break;
 
    case TOSRC:
@@ -8991,8 +8992,14 @@ BOOLEAN           reset_internals)        /* */
          
       break;
 
-   default:
+   case TOTEX:
+   case TOPDL:
       outln("");
+      break;
+
+   default:
+      if ( !inside_compressed )
+         outln("");
    }
 
    token_reset();
