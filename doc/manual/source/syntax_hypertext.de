@@ -28,6 +28,7 @@
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro KK2W resolved into macros KKW + code
+#   ggs Apr 05: Remove some !]
 #
 ################################################################################
 
@@ -166,7 +167,7 @@ zur UDO-Gemeinde verwiesen wird:
 !index (!kkw [ilink])
 !index (!kkw [img])
 !index (!kkw [link])
-Speziell für WinHelp und HTML gibt es das Kommando (!KKW [ilink!]), um
+Speziell für WinHelp und HTML gibt es das Kommando (!KKW [ilink]), um
 Verweise mit Darstellung eines Bildes zu erstellen. Dieser Befehl ist
 eine Kombination aus (!KKW [link]) und (!KKW [img]) und wird bei den anderen
 Formaten wie der oben besprochene Link-Befehl für interne Querverweise
@@ -203,7 +204,7 @@ behandelt:
 !html_name  hypertext_links_internal_pages
 
 !index (!kkw [plink])
-Speziell für (!LaTeX) gibt es das Kommando (!KKW [plink!]), um Bezug auf
+Speziell für (!LaTeX) gibt es das Kommando (!KKW [plink]), um Bezug auf
 andere Seiten zu nehmen:
 
 !begin_xlist [sonst:] !compressed
@@ -241,7 +242,7 @@ Sie unsere Kontaktinformationen finden.
 
 !index (!kkw [xlink])
 !index (!kkw [url])
-Mit den Kommandos (!KKW [xlink!]) und (!KKW [url!]) können Sie Bezug auf Stellen
+Mit den Kommandos (!KKW [xlink]) und (!KKW [url]) können Sie Bezug auf Stellen
 (!I)anderer(!i) Hypertexte oder Websites nehmen. Der Unterschied zum
 obigen Befehl besteht darin, dass beim zweiten Parameter bis auf die
 Tilde keine Sonderzeichen angepasst werden (kann bei Pfadangaben fatal sein!).
@@ -310,7 +311,7 @@ HTML-Datei.
       ST-Guide- oder WinHelp-Hypertext keinen Sinn ergeben würden.
 
 !index (!kkw [nolink])
-!item Durch den Platzhalter (!KKW [nolink!]) können Sie Text
+!item Durch den Platzhalter (!KKW [nolink]) können Sie Text
       angeben, bei dem keine Verweise erzeugt werden sollen.
 
 !end_enumerate

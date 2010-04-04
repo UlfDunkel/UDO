@@ -25,6 +25,7 @@
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro KK2W resolved into macros KKW + code
+#   ggs Apr 05: Remove some !]
 #
 ################################################################################
 
@@ -85,7 +86,7 @@ avoid them if you really want.
 Sometimes you maybe want to set a link to other parts of the current
 document or to other documents. To make it possible for you to insert
 links UDO offers you the placeholders called (!KKW [link]),
-(!KKW [xlink!]), (!KKW [url!]) and (!KKW [plink!]).
+(!KKW [xlink]), (!KKW [url]) and (!KKW [plink]).
 
 (!HINT)
 
@@ -157,7 +158,7 @@ destination exists!
 !index (!kkw [img])
 !index (!kkw [link])
 Especially for Windows Help and HTML there's existing the
-(!KKW [ilink!]) (""image link"") commands. It is a mixture of
+(!KKW [ilink]) (""image link"") commands. It is a mixture of
 the (!KKW [img]) and (!KKW [link]) command that allows to
 display ""hyperimages"". If you click an image you will jump to
 another part of the current document.
@@ -193,7 +194,7 @@ more links UDO will print an error message.
 !html_name  hypertext_links_internal_pages
 
 !index (!kkw [plink])
-Especially for (!LaTeX) there's existing the (!KKW [plink!])
+Especially for (!LaTeX) there's existing the (!KKW [plink])
 (""page link"") command:
 
 !begin_xlist [LaTeX:] !compressed
@@ -232,7 +233,7 @@ more links UDO will print an error message.
 
 !index (!kkw [xlink])
 !index (!kkw [url])
-With the (!KKW [xlink!]) (""external link"") and (!KKW [url!]) commands you can
+With the (!KKW [xlink]) (""external link"") and (!KKW [url]) commands you can
 insert links to (parts of) other documents, net sites or
 hypertexts. The difference to the upper command: UDO doesn't adjust
 special chars of the link destination. The tilde isn't a non-breaking space
