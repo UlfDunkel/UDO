@@ -131,10 +131,7 @@
 !endif
 
 !raw [stg] @options +z
-#!raw [stg] @default Main
 !raw [stg] @help Titel
-#!raw [stg] @indexon
-#!raw [stg] @width 75
 !ifdest [stg]
 !parwidth 73
 !endif
