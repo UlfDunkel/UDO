@@ -26,6 +26,7 @@
 #   fd  Mar 08: macro K1 resolved to KW
 #   fd  Mar 08: macro k1 resolved to kw
 #   fd  Mar 08: MAXLINETABLE adjusted to UDO 7.00
+#   ggs Apr 04: Remove a ! in macro KKW in the format ASC and STG
 #
 ################################################################################
 
@@ -96,12 +97,12 @@
 !else
 !ifdest [asc]
 !macro  KW   !/(!1)
-!macro  KKW  (!/(!1)!)
+!macro  KKW  (!/(!1))
 !macro  KKKW (!(!1)!)...(!(!2)!)
 !else
 !ifdest [stg]
 !macro  KW   (!T)!(!1)(!t)
-!macro  KKW  (!T)(!/(!1)!)(!t)
+!macro  KKW  (!T)(!/(!1))(!t)
 !macro  KKKW (!T)(!(!1)!)...(!(!2)!)(!t)
 !else
 !macro  KW   (!B)(!T)!(!1)(!t)(!b)
