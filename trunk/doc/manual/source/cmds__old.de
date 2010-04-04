@@ -26,7 +26,7 @@
 
 Die nachfolgend aufgelisteten UDO-Kommandos und -Schalter sind veraltet und werden in der aktuellen Version nicht mehr unterstützt.
 
-!begin_table [l|l|l] !hline
+!begin_table [l|l|l|l] !hline
 (!B)Alt(!b)                      !! (!B)Funktion(!b) !\
                                  !! (!B)Neu(!b) !\
                                  !! (!B)Veraltet seit(!b)
