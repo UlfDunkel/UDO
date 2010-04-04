@@ -293,7 +293,7 @@ UDO has originally been developed by Dirk Hagedorn and
 ist (!link [open source] [Copyright]) since 10/27/2001.
 
 Persons working on the UDO project (in alphabetical ordner):
-!begin_description
+!begin_description !compressed
 !item [Denesh Bhabuta] supporting UDO in Great Britain (until 2001)
 !item [Alexander Clauss] compiling the HP-UX 300/400 version (until 2001)
 !item [Ulf Dunkel] development & documentation (since 2006), maintaining the UDO website & development infrastructure (since 2009)
