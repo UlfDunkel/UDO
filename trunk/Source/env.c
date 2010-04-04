@@ -68,6 +68,7 @@
 *                - set_env_short()        -> set_env_compressed()
 *                The old commands are still available!
 *    fd  Mar 05: c_begin_document() debugged for titdat content
+*    ggs Apr 04: c_begin_list() delete compressed and no_compressed
 *
 ******************************************|************************************/
 
@@ -182,14 +183,6 @@ LOCAL void add_description(void);
 
 LOCAL void c_begin_list(int listkind);
 LOCAL void c_end_list(int listkind);
-
-
-
-
-
-
-
-
 
 
 /*******************************************************************************
@@ -2506,7 +2499,7 @@ GLOBAL void c_begin_description(void)
 
 LOCAL void c_begin_list(
 
-int       listkind)     /* */
+int       listkind)     /* List type */
 {
    char   sWidth[256],  /* */
           sShort[256],  /* */
@@ -2582,6 +2575,12 @@ int       listkind)     /* */
    replace_udo_quotes(sWidth);
 
    set_env_compressed(iEnvLevel, sShort); /* check the compressed flag */
+   ptr = strstr(sWidth, "!not_compressed");
+   if ( ptr != NULL )
+      delete_last(sWidth, " !not_compressed");
+   ptr = strstr(sWidth, "!compressed");
+   if ( ptr != NULL )
+      delete_last(sWidth, " !compressed");
 
    switch (desttype)
    {
