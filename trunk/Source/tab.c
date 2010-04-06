@@ -54,6 +54,8 @@
 *    fd  Mar 04: table_output_html(): bEnvShort[] -> bEnvCompressed[]
 *    ggs Mar 21: table_output_general(): In ST-Guide the lines will be display
 *                  if the with is greater than zDocParwidth.
+*    ggs Apr 06: Rename MAX_TAB_W -> MAX_TAB_ROWS
+*                table_add_line() is a little bit faster now.
 *
 ******************************************|************************************/
 
@@ -115,7 +117,7 @@ const char *id_tab_c= "@(#) tab.c       $date$";
 #define MAX_CELLS_LEN    4096             /* max. Zeichenanzahl einer Zelle */
 
 #define MAX_TAB_H         700             /* max. Hoehe einer Tabelle */
-#define MAX_TAB_W          64             /* max. Breite einer Tabelle */
+#define MAX_TAB_ROWS       64             /* max. Spalten einer Tabelle */
 #define MAX_TAB_LABEL      10             /* max. Anzahl der hinter einanderfolgenden Labels */
 #define TAB_LEFT            0             /* Spalte linksbuendig */
 #define TAB_CENTER          1             /* Spalte zentriert */
@@ -131,9 +133,9 @@ LOCAL int       tab_w, tab_h;             /* Spalten und Zeilen           */
 LOCAL char      tab_caption[MAXTABCAPTION + 1];
 LOCAL BOOLEAN   tab_caption_visible;      /* Im Tabellenverzeichnis?      */
                                           /* Zeiger auf Feldtext             */
-LOCAL char     *tab_cell[MAX_TAB_H+1][MAX_TAB_W+1];
-LOCAL size_t    tab_cell_w[MAX_TAB_W+1];  /* Breiten der Spalten          */
-LOCAL int       tab_vert[MAX_TAB_W+1];    /* Vertikale Linien, wo?        */
+LOCAL char     *tab_cell[MAX_TAB_H+1][MAX_TAB_ROWS+1];
+LOCAL size_t    tab_cell_w[MAX_TAB_ROWS+1];  /* Breiten der Spalten          */
+LOCAL int       tab_vert[MAX_TAB_ROWS+1];    /* Vertikale Linien, wo?        */
 LOCAL int       tab_hori[MAX_TAB_H+1];    /* Horiz. Linien, wo?           */
 LOCAL int       tab_just[MAX_TAB_H+1];    /* Spaltenausrichtung           */
 LOCAL int       tab_toplines;             /* Oben Linie(n)?                       */
@@ -142,7 +144,7 @@ LOCAL int       tab_label[MAX_TAB_H+1];   /* Label, wo?                         
 LOCAL char     *tab_label_cell[MAX_TAB_H+1][MAX_TAB_LABEL];
 
                                           /* Puffer fuer Zellen           */
-LOCAL char      cells[MAX_TAB_W+1][MAX_CELLS_LEN];
+LOCAL char      cells[MAX_TAB_ROWS+1][MAX_CELLS_LEN];
 LOCAL int       cells_counter;            /* Anzahl Zellen von Zeilen     */
 
 LOCAL char      addition[TAB_ADDITION_LEN] = "";
@@ -230,7 +232,7 @@ GLOBAL void table_reset(void)
 
    for (y = 0; y < MAX_TAB_H; y++)
    {
-      for (x = 0; x < MAX_TAB_W; x++)
+      for (x = 0; x < MAX_TAB_ROWS; x++)
       {
          if (tab_cell[y][x] != NULL)
          {
@@ -253,7 +255,7 @@ GLOBAL void table_reset(void)
       }
    }
 
-   for (x = 0; x < MAX_TAB_W; x++)
+   for (x = 0; x < MAX_TAB_ROWS; x++)
    {
       tab_cell_w[x] = 0;
       tab_vert[x]   = 0;
@@ -552,7 +554,7 @@ char       *s)    /* */
 
    for (i=0; i<=cells_counter; i++) del_whitespaces(cells[i]) ;    
 
-   if (cells_counter > MAX_TAB_W)
+   if (cells_counter > MAX_TAB_ROWS)
    {
       error_table_width();
    }
@@ -562,13 +564,13 @@ char       *s)    /* */
 
    tab_h++;                               /* Zeilenzaehler hochsetzen */
 
-   for (x = 0; x < MAX_TAB_W; x++)
+   for (x = 0; x < MAX_TAB_ROWS; x++)
    {
       if (x <= cells_counter)
       {
          tl = toklen(cells[x]);
          sl = strlen(cells[x]);
-         
+
          if (tl > tab_cell_w[x])
             tab_cell_w[x] = tl;
 
@@ -583,6 +585,8 @@ char       *s)    /* */
          strcpy(ptr, cells[x]);
          tab_cell[tab_h][x] = ptr;
       }
+      else
+         break;
    }
 
    cells_reset();
