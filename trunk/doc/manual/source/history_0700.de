@@ -20,6 +20,7 @@
 #   fd  Mar 03: using PUBLISHED
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro usages adjusted
+#   fd  Apr 08: typo
 #
 ################################################################################
 
@@ -67,7 +68,7 @@ UDO~7 ist ein großer Sprung seit der letzten veröffentlichten Version. Vor allem
       !item [(!KW [language]) [polish]]
             Polnisch
       !item [(!KW [language]) [swedish]]
-            Schwedish
+            Schwedisch
       !end_blist
    
    !end_itemize # Sprachen
