@@ -18,6 +18,7 @@
 #   fd  Mar 03: using PUBLISHED
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro usages adjusted
+#   fd  Apr 08: typo
 #
 ################################################################################
 
@@ -308,7 +309,7 @@ This is cell #3
          (!code [<!!-- last modified on 29.01.2004 -->]). 
          Now a META tag for file creatione date/time will be added to the HTML header, when you use this switch.
    !item [(!KW [html_quotes]) [classic | tags!]]
-         (!BUG [82]): Use this new switch to control whether quotation marks should be output like before as <tt>&amp;quot;</tt> ([classic]), or as HTML quotation tags &lt;q&gt; + &lt;/q/&gt; ([tags], default).
+         (!BUG [82]): Use this new switch to control whether quotation marks should be output like before as <tt>&quot;</tt> ([classic]), or as HTML quotation tags <q> + </q> ([tags], default).
    !end_blist
          
    !item New: Index page for HTML, which also offers a quick jump bar (A--Z) to find entries faster in long index lists.
