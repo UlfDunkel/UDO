@@ -313,7 +313,7 @@ Das hier ist Zelle 3
          (!code [<!!-- last modified on 29.01.2004 -->]). 
          Nunmehr wird, wenn dieser Schalter gesetzt ist, im HTML-Header ein META-Tag für Datum/Uhrzeit der Datei-Erzeugung erzeugt.
    !item [(!KW [html_quotes]) [classic | tags!]]
-         (!BUG [82]): Mit diesem neuen Schalter können Sie steuern, ob An-/Abführungszeichen wie früher als <tt>&amp;quot;</tt> ausgegeben werden sollen ([classic]) oder als HTML-Quotation-Tags &lt;q&gt; + &lt;/q/&gt; ([tags], voreingestellt).
+         (!BUG [82]): Mit diesem neuen Schalter können Sie steuern, ob An-/Abführungszeichen wie früher als <tt>&quot;</tt> ausgegeben werden sollen ([classic]) oder als HTML-Quotation-Tags <q> + </q> ([tags], voreingestellt).
    !end_blist
          
    !item Neu: Indexseite für HTML, die auch eine Sprungmarkenleiste (A--Z) für schnelleres Auffinden in langen Index-Listen mitbringt.
