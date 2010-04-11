@@ -68,6 +68,7 @@
 *                - access to codepages generalized
 *    fd  Mar 12: adjustments for the Linux ggc
 *    ggs Mar 27: tabs2spaces: Needs a EOS at the end
+*    ggs Apr 11: tabs2spaces: We should use the correct variable
 *
 ******************************************|************************************/
 
@@ -1425,7 +1426,7 @@ const int   tw)           /* tab width */
       }
    }
 
-   nl[nl] = EOS;
+   n[nl] = EOS;
    
    strcpy(s, n);                          /* return converted string */
 }
