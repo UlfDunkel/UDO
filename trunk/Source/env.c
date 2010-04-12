@@ -69,6 +69,7 @@
 *                The old commands are still available!
 *    fd  Mar 05: c_begin_document() debugged for titdat content
 *    ggs Apr 04: c_begin_list() delete compressed and no_compressed
+*    ggs Apr 12: c_begin_list() test the compressed and not only short
 *
 ******************************************|************************************/
 
@@ -2569,6 +2570,31 @@ int       listkind)     /* List type */
          delete_last(sWidth, " !short");
       }
    }
+   else
+   {
+      ptr = strstr(sWidth, "!compressed");
+      
+      if (ptr != NULL)
+      {
+         /* Aha, !compressed wird benutzt. Da manche Dumpfnasen das aber nicht */
+         /* immer ans Ende setzen, hier gleich die passenden Abfragen.         */
+
+         strcpy(sShort, "!compressed");   /* Fuer set_env_compressed() */
+
+         if (ptr == sWidth)
+         {
+            /* Siehste, hat's mal wieder an den Anfang gesetzt      */
+            /* Das mitzuentfernende Leerzeichen kommt von tokcpy2() */
+         
+            delete_once(sWidth, "!compressed ");
+         }
+         else
+         {
+            /* So gehoert es sich, schoen ans Ende der Zeile */
+            delete_last(sWidth, " !compressed");
+         }
+      }
+   }
    
    del_internal_styles(sWidth);
    qdelete_all(sWidth, "!-", 2);
@@ -2578,9 +2604,6 @@ int       listkind)     /* List type */
    ptr = strstr(sWidth, "!not_compressed");
    if ( ptr != NULL )
       delete_last(sWidth, " !not_compressed");
-   ptr = strstr(sWidth, "!compressed");
-   if ( ptr != NULL )
-      delete_last(sWidth, " !compressed");
 
    switch (desttype)
    {
