@@ -30,8 +30,8 @@
 *-------------------------------------------------------------------------------
 *
 *  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
-*  Co-Authors   : Ulf Dunkel (fd), Martin Elsaesser (ME)
-*  Write access : fd, ME
+*  Co-Authors   : Ulf Dunkel (fd), Martin Elsaesser (ME), Gerhard Stoll (ggs)
+*  Write access : fd, ME, ggs
 *
 *  Notes        : Please add yourself as co-author when you change this file.
 *
@@ -94,6 +94,7 @@
 *    ME  Mar 04: - the chars uf lang.today are now quoted to the HTML-Chars
 *                  ("M„rz" -> "M&auml;rz") in html_footer()
 *    fd  Mar 12: bookmarks_ps(): ugly typo fixed (warned by Linux gcc)
+*    ggs Apr 20: c_label: Labels will print out not only in description environment
 *
 ******************************************|************************************/
 
@@ -13914,6 +13915,8 @@ GLOBAL void c_label(void)
             else
                voutlnf("<a name=\"%s\"></a>", sLabel);
          }
+         else
+            voutlnf("<a name=\"%s\"></a>", sLabel);
       }
    
       break;
