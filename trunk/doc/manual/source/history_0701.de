@@ -104,6 +104,8 @@
       !item Neues Umgebung-Attribut (!code [!not_compressed]): (!nl)
             Dieses neue Umgebung-Attribut wurde eingeführt, 
             damit Sie die Vererbung des kompress-Attributs einer äußeren Umgebung an die innere Umgebung abschalten können.
+            
+      !item Damit es einheitlich ist wurde auch der Schalter (!kw [use_short_tocs]) in (!kw [use_compressed_tocs]) umbenannt.
       !end_itemize
 
 

@@ -95,6 +95,7 @@
 *                  ("M„rz" -> "M&auml;rz") in html_footer()
 *    fd  Mar 12: bookmarks_ps(): ugly typo fixed (warned by Linux gcc)
 *    ggs Apr 20: c_label: Labels will print out not only in description environment
+*    ggs Apr 21: use_short_tocs -> use_compressed_tocs
 *
 ******************************************|************************************/
 
@@ -13320,7 +13321,7 @@ GLOBAL void c_toc(void)
         {
                 d= get_toccmd_depth();
                 if (d==0)
-                {       if (use_short_tocs)
+                {       if (use_compressed_tocs)
                         {       d=1;
                         }
                         else
@@ -13519,7 +13520,7 @@ GLOBAL void c_tableofcontents(void)
 
         depth= get_toccmd_depth();      /*r6pl2*/
         if (depth==0)
-        {       if (use_short_tocs)                     /*r6pl5*/
+        {       if (use_compressed_tocs)              /*r6pl5*/
                 {       depth= 1;
                 }
                 else
@@ -17923,9 +17924,9 @@ GLOBAL void init_module_toc_pass2(void)
       init_toc_forms_numbers();
 
 
-   /*r6pl5: die Reinkarnation von !use_short_tocs */
+   /*r6pl5: die Reinkarnation von !use_compressed_tocs */
    
-   if (use_short_tocs)
+   if (use_compressed_tocs)
    {
       subtocs1_depth = 1;
       subtocs2_depth = 1;
