@@ -24,8 +24,8 @@
 *-------------------------------------------------------------------------------
 *
 *  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
-*  Co-Authors   : Ulf Dunkel (fd)
-*  Write access : fd
+*  Co-Authors   : Ulf Dunkel (fd), Gerhard Stoll (ggs)
+*  Write access : fd, ggs
 *
 *  Notes        : Please add yourself as co-author when you change this file.
 *
@@ -53,6 +53,7 @@
 *                     use_short_enumerates
 *                     use_short_descriptions
 *                     use_short_lists
+*    ggs Apr 21: use_short_tocs -> use_compressed_tocs
 *
 ******************************************|************************************/
 
@@ -210,7 +211,7 @@ GLOBAL BOOLEAN     use_auto_subsubsubsubtocs;
 
 GLOBAL BOOLEAN     use_auto_toptocs;      /* autom. Ueber-Toc's anlegen? */
 GLOBAL BOOLEAN     no_auto_toptocs_icons; /* ... aber ohne Icons */   /*r6pl13*/
-GLOBAL BOOLEAN     use_short_tocs;        /* Kurze Inhaltsverzeichnisse default? */
+GLOBAL BOOLEAN     use_compressed_tocs;   /* Kurze Inhaltsverzeichnisse default? */
 
 GLOBAL BOOLEAN     use_compressed_envs;   /* compress all supporting environments */
                                           /* compress all itemize environments only */

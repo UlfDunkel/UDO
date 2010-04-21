@@ -107,6 +107,7 @@
 *    fd  Mar 12: adjustments for Linux gcc
 *    ggs Mar 28: token_output: Compressed works for ASCII, ST-Guide and AmigaGuide again
 *    ggs Mar 29: token_output: I hope compressed work in all formats again
+*    ggs Apr 21. use_short_tocs -> use_compressed_tocs
 *
 ******************************************|************************************/
 
@@ -871,7 +872,7 @@ LOCAL const UDOSWITCH udoswitch[MAXSWITCH + 1] =
    { "!use_auto_subsubsubtocs",      &use_auto_subsubsubtocs,      'i',  "!depth",    &subtocs3_depth },
    { "!use_auto_subsubsubsubtocs",   &use_auto_subsubsubsubtocs,   'i',  "!depth",    &subtocs4_depth },
    { "!use_auto_toptocs",            &use_auto_toptocs,            'b',  "!no_icons", &no_auto_toptocs_icons },
-   { "!use_short_tocs",              &use_short_tocs,              '\0', "",          NULL },
+   { "!use_compressed_tocs",         &use_compressed_tocs,         '\0', "",          NULL },
    { "!use_short_envs",              &use_compressed_envs,         '\0', "",          NULL },
    { "!use_short_descriptions",      &use_compressed_descriptions, '\0', "",          NULL },
    { "!use_short_enumerates",        &use_compressed_enumerates,   '\0', "",          NULL },
