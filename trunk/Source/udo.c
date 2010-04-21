@@ -107,7 +107,8 @@
 *    fd  Mar 12: adjustments for Linux gcc
 *    ggs Mar 28: token_output: Compressed works for ASCII, ST-Guide and AmigaGuide again
 *    ggs Mar 29: token_output: I hope compressed work in all formats again
-*    ggs Apr 21. use_short_tocs -> use_compressed_tocs
+*    ggs Apr 21. - use_short_tocs -> use_compressed_tocs
+*                - Labels inside tables work now in HTML
 *
 ******************************************|************************************/
 
@@ -12409,6 +12410,9 @@ char           *datei)           /* */
          {
             if ( (pflag[PASS1].ignore_line == 0) && (pflag[PASS1].env == ENV_TABLE) )
             {
+               token_reset();
+               str2tok(zeile);
+
                if ( strcmp(token[0], "!label") == 0 || strcmp(token[0], "!l") == 0 )
                {
                   tokcpy2(tmp, 512);
