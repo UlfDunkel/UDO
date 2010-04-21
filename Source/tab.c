@@ -13,12 +13,12 @@
 *                 modify it under the terms of the GNU General Public License
 *                 as published by the Free Software Foundation; either version 2
 *                 of the License, or (at your option) any later version.
-*                 
+*
 *                 This program is distributed in the hope that it will be useful,
 *                 but WITHOUT ANY WARRANTY; without even the implied warranty of
 *                 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 *                 GNU General Public License for more details.
-*                 
+*
 *                 You should have received a copy of the GNU General Public License
 *                 along with this program; if not, write to the Free Software
 *                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -56,6 +56,7 @@
 *                  if the with is greater than zDocParwidth.
 *    ggs Apr 06: Rename MAX_TAB_W -> MAX_TAB_ROWS
 *                table_add_line() is a little bit faster now.
+*    ggs Apr 21: convert_table_caption(): Use MAXTABCAPTION for the string define
 *
 ******************************************|************************************/
 
@@ -244,7 +245,7 @@ GLOBAL void table_reset(void)
       tab_hori[y]  = 0;
       tab_just[y]  = TAB_LEFT;
       tab_label[y] = 0;
-      
+
       for (x = 0; x < MAX_TAB_LABEL; x++)
       {
          if (tab_label_cell[y][x] != NULL)
@@ -282,12 +283,12 @@ LOCAL void convert_table_caption(
 
 const BOOLEAN   visible)  /* */
 {
-   char         n[512];   /* */
+   char         n[MAXTABCAPTION +1];   /* */
 
 
-   tokcpy2(n, 512);
+   tokcpy2(n, MAXTABCAPTION);
 
-   tab_caption[0]= EOS;    
+   tab_caption[0]= EOS;
    strncat(tab_caption, n, MAXTABCAPTION);
 
    convert_tilde(tab_caption);
@@ -366,7 +367,7 @@ char       *s)        /* */
       um_strcpy(n, token[1], 128, "table_get_header[1]");
 
    tab_toplines = 0;
-   
+
    if (token_counter > 1 && !no_table_lines)
    {
       for (t = 2; t < token_counter; t++)
@@ -405,7 +406,7 @@ char       *s)        /* */
          column++;
       }
       else if (n[i] == 'r')
-      { 
+      {
          tab_just[column] = TAB_RIGHT;
          column++;
       }
@@ -457,7 +458,7 @@ char       *s)    /* */
          s[0] = EOS;
          return FALSE;
       }
-      
+
       sl = strlen(s);
       ptr = (char *)(um_malloc(sl + 2));
 
@@ -466,9 +467,9 @@ char       *s)    /* */
          error_malloc_failed();
          return FALSE;
       }
-      
+
       strcpy(ptr, s);
-      
+
       tab_label_cell[tab_h][tab_label[tab_h]] = ptr;
       tab_label[tab_h]++;
 
@@ -548,11 +549,11 @@ char       *s)    /* */
             return FALSE;
          }
       }
-      
+
       ptr++;
    }
 
-   for (i=0; i<=cells_counter; i++) del_whitespaces(cells[i]) ;    
+   for (i=0; i<=cells_counter; i++) del_whitespaces(cells[i]) ;
 
    if (cells_counter > MAX_TAB_ROWS)
    {
@@ -575,13 +576,13 @@ char       *s)    /* */
             tab_cell_w[x] = tl;
 
          ptr = (char *)(um_malloc(sl + 2));
-         
+
          if (ptr == NULL)
          {
             error_malloc_failed();
             return FALSE;
          }
-         
+
          strcpy(ptr, cells[x]);
          tab_cell[tab_h][x] = ptr;
       }
@@ -622,7 +623,7 @@ LOCAL void table_output_lyx(void)
 BOOLEAN      inside_center,  /* */
              inside_right,   /* */
              inside_left;    /* */
-             
+
 
    inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
    inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
@@ -635,7 +636,7 @@ BOOLEAN      inside_center,  /* */
       case ALIGN_CENT:
          inside_center = TRUE;
          break;
-         
+
       case ALIGN_RIGH:
          inside_right = TRUE;
       }
@@ -645,7 +646,7 @@ BOOLEAN      inside_center,  /* */
 
    if (inside_center)
       strcpy(alignOn, " center");
-      
+
    if (inside_right)
       strcpy(alignOn, " right");
 
@@ -695,11 +696,11 @@ BOOLEAN      inside_center,  /* */
       case TAB_CENTER:
          i = 8;
          break;
-         
+
       case TAB_RIGHT:
          i = 4;
          break;
-         
+
       default:
          i = 2;
       }
@@ -727,8 +728,8 @@ BOOLEAN      inside_center,  /* */
       case TAB_RIGHT:
          i = 4;
          break;
-         
-      default:    
+
+      default:
          i = 2;
       }
 
@@ -738,7 +739,7 @@ BOOLEAN      inside_center,  /* */
 #if 0
    /* Jetzt noch fuer jede Spalte 0 8 1 1 ausgeben, warum auch immer */
    for (x = 0; x <= tab_w; x++)
-   { 
+   {
       outln("0 8 1 1");
    }
 #endif
@@ -748,7 +749,7 @@ BOOLEAN      inside_center,  /* */
       for (x = 0; x <= tab_w; x++)
       {
          if (tab_cell[y][x] != NULL)
-         { 
+         {
             strcpy(f, tab_cell[y][x]);
             auto_quote_chars(f, FALSE);
             c_vars(f);
@@ -764,19 +765,19 @@ BOOLEAN      inside_center,  /* */
          }
 
          if (y != tab_h || x != tab_w)
-         { 
+         {
             outln("\\newline");
          }
       }
-      
+
       if (tab_label[y] > 0)
       {
          for (i = 0; i < tab_label[y]; i++)
-         {   
+         {
             if (tab_label_cell[y][i] != NULL)
             {
                str2tok(tab_label_cell[y][i]);
-               
+
                if (token_counter > 0)
                   c_label();
             }
@@ -787,10 +788,10 @@ BOOLEAN      inside_center,  /* */
    }
 
    if (tab_caption[0] != EOS)
-   {    
+   {
       outln("\\layout Standard");
       outln("\\align center");
-      
+
       if (tab_caption_visible)
          sprintf(f, "%s %d: %s", lang.table, tab_counter, tab_caption);
       else
@@ -826,7 +827,7 @@ LOCAL void table_output_rtf(void)
           charw;    /* */
    char   f[512],   /* */
           cx[512];  /* */
-          
+
 
    indent = strlen_indent();
 
@@ -841,15 +842,15 @@ LOCAL void table_output_rtf(void)
    {
       outln("\\trowd");
       cellx = 0;
-      
+
       if (indent > 0)
-      { 
+      {
          cellx = indent;
          voutlnf("\\cellx%d", cellx);
       }
 
       for (i = 0; i <= tab_w; i++)
-      {  
+      {
          f[0] = EOS;
 
          if (tab_vert[i] > 0)
@@ -871,26 +872,26 @@ LOCAL void table_output_rtf(void)
       }
 
       out("\\intbl");
-      
+
       if (indent > 0)
          out("\\ql \\cell");
 
       for (x = 0; x <= tab_w; x++)
-      {   
+      {
          switch(tab_just[x])
          {
          case TAB_CENTER:
             out("\\qc ");
             break;
-            
+
          case TAB_RIGHT:
             out("\\qr ");
             break;
-            
+
          default:
             out("\\ql ");
          }
-         
+
          if (tab_cell[y][x] != NULL)
          {
             strcpy(f, tab_cell[y][x]);
@@ -909,13 +910,13 @@ LOCAL void table_output_rtf(void)
 
          out("\\cell");
       }
-      
+
       outln("\\row");
 
       if (tab_label[y] > 0)
-      {  
+      {
          for (i = 0; i < tab_label[y]; i++)
-         {  
+         {
             if (tab_label_cell[y][i] != NULL)
             {
                str2tok(tab_label_cell[y][i]);
@@ -923,11 +924,11 @@ LOCAL void table_output_rtf(void)
                if (token_counter > 0)
                   c_label();
             }
-            
+
             token_reset();
          }
       }
-      
+
    }  /* for (y = 0; y <= tab_h; y++) */
 
 
@@ -935,10 +936,10 @@ LOCAL void table_output_rtf(void)
    outln("}\\par\\pard");
 
    if (tab_caption[0] != EOS)
-   {  
+   {
       c_rtf_quotes(tab_caption);          /* r6pl7 */
       out("{\\keep\\trowd");
-      
+
       if (indent > 0)
          voutlnf("\\cellx%d", indent);
 
@@ -951,15 +952,15 @@ LOCAL void table_output_rtf(void)
       if (tab_caption_visible)            /* Changed in r6.3pl3 [NHz] */
       {
          sprintf(f, "\\qc %s {\\field{\\*\\fldinst { SEQ Tabelle \\\\* ARABIC }}{\\fldrslt %d}}: %s\\cell\\row\\pard",
-            lang.table, 
-            tab_counter, 
+            lang.table,
+            tab_counter,
             tab_caption);
       }                                   /* added closing bracket in order to get this compiled in MXVC++ r6.3.4 [vj] */
       else
       {
          sprintf(f, "\\qc %s\\cell\\row\\pard", tab_caption);
       }
-      
+
       outln(f);
       outln("\\trowd\\pard");
       outln("}\\par\\pard");
@@ -991,24 +992,24 @@ LOCAL void table_output_win(void)
    char   f[512],   /* */
           cx[512],  /* */
           ci[512];  /* */
-   
-   
+
+
    indent = strlen_indent();
    cellx  = 0;
-   
+
    outln("{\\keep\\trowd");
 
    charw = iDocCharwidth;
 
    if (indent > 0)
-   { 
+   {
       cellx = indent;
       sprintf(ci, "\\cellx%d", cellx);    /* ci wird unten noch benoetigt! */
       outln(ci);
    }
 
    for (i = 0; i <= tab_w; i++)
-   { 
+   {
       cellx += ((int)tab_cell_w[i] * charw);
       sprintf(cx, "\\cellx%d", cellx);    /* cx wird unten noch benoetig! */
       outln(cx);
@@ -1017,7 +1018,7 @@ LOCAL void table_output_win(void)
    for (y = 0; y <= tab_h; y++)
    {
       out("\\intbl");
-      
+
       if (indent > 0)
          out("\\ql \\cell");
 
@@ -1025,23 +1026,23 @@ LOCAL void table_output_win(void)
          out("{\\box");
 
       for (x = 0; x <= tab_w; x++)
-      {  
+      {
          switch (tab_just[x])
          {
-         case TAB_CENTER: 
-            out("\\qc "); 
+         case TAB_CENTER:
+            out("\\qc ");
             break;
-            
-         case TAB_RIGHT: 
-            out("\\qr ");  
+
+         case TAB_RIGHT:
+            out("\\qr ");
             break;
-            
+
          default:
-            out("\\ql ");  
+            out("\\ql ");
          }
 
          if (tab_cell[y][x] != NULL)
-         { 
+         {
             strcpy(f, tab_cell[y][x]);
             auto_quote_chars(f, FALSE);
             c_vars(f);
@@ -1065,13 +1066,13 @@ LOCAL void table_output_win(void)
          outln("\\row");
 
       if (tab_label[y] > 0)
-      {  
+      {
          for (i = 0; i <tab_label[y]; i++)
-         {   
+         {
             if (tab_label_cell[y][i] != NULL)
             {
                str2tok(tab_label_cell[y][i]);
-               
+
                if (token_counter > 0)
                   c_label();
             }
@@ -1085,9 +1086,9 @@ LOCAL void table_output_win(void)
    outln("}\\par\\pard");
 
    if (tab_caption[0] != EOS)
-   {    
+   {
       out("{\\keep\\trowd");
-      
+
       if (indent > 0)
          out(ci);                         /* Noch von oben definiert */
 
@@ -1100,15 +1101,15 @@ LOCAL void table_output_win(void)
       if (tab_caption_visible)
       {
          sprintf(f, "\\qc %s %d: %s\\cell\\row\\pard",
-            lang.table, 
-            tab_counter, 
+            lang.table,
+            tab_counter,
             tab_caption);
       }
       else
       {
          sprintf(f, "\\qc %s\\cell\\row\\pard", tab_caption);
       }
-      
+
       outln(f);
       outln("\\trowd\\pard");
       outln("}\\par\\pard");
@@ -1140,27 +1141,27 @@ size_t    clen;           /* */
 
    if (cell[0] == '[')                    /* remove leading [ */
       cell = &cell[1];
-      
+
    clen = strlen(cell);                   /* get length of cell */
 
    if (clen == 0)                         /* empty string? -> done */
       return;
-      
+
    if (cell[clen - 1] == ']')             /* remove tailing ] */
       cell[clen - 1] = EOS;
 
    if (cell[0] == 0)                      /* empty string? -> done */
       return;
-      
+
    /* Now we have to see, if there are entries */
    tok = strtok(cell, " ,\t");            /* whitespace, colon, or tab are seperators */
 
    while (tok)
    {
       found2 = strstr(tok, "COLS=");
-      
+
       if (found2 != NULL)
-      {  
+      {
          um_strcat(addition, " colspan=\"", TAB_ADDITION_LEN, "test_for_addition[1]");
          addition_col_offset = atoi(found2 + 5);
          um_strncat(addition, found2 + 5, 2L, TAB_ADDITION_LEN, "test_for_addition[2]");
@@ -1170,7 +1171,7 @@ size_t    clen;           /* */
       found2 = strstr(tok, "BGC=");
 
       if (found2 != NULL)
-      {  
+      {
          um_strcat(addition, " bgcolor=\"", TAB_ADDITION_LEN, "test_for_addition[4]");
          um_strcat(addition, found2 + 4, TAB_ADDITION_LEN, "test_for_addition[5]");
          um_strcat(addition, "\"", TAB_ADDITION_LEN, "test_for_addition[6]");
@@ -1179,7 +1180,7 @@ size_t    clen;           /* */
       found2 = strstr(tok, "HA=");
 
       if (found2 != NULL)
-      {     
+      {
          um_strcat(addition, " align=\"", TAB_ADDITION_LEN, "test_for_addition[7]");
          um_strcat(addition, found2 + 3, TAB_ADDITION_LEN, "test_for_addition[8]");
          um_strcat(addition, "\"", TAB_ADDITION_LEN, "test_for_addition[9]");
@@ -1187,7 +1188,7 @@ size_t    clen;           /* */
       }
 
       found2 = strstr(tok, "VA=");
- 
+
       if (found2 != NULL)
       {
          um_strcat(addition, " valign=\"", TAB_ADDITION_LEN, "test_for_addition[10]");
@@ -1216,17 +1217,17 @@ size_t    clen;           /* */
 
 LOCAL void table_output_html(void)
 {
-   int       y, 
-             x, 
+   int       y,
+             x,
              i;
    char      f[LINELEN],                  /* r6.3.18[vj]: f is now LINELEN chars long instead of 512 */
              alignOn[64];
    char      token_buffer[LINELEN];       /* v6.5.3[vj]: New buffer needed for table extension */
-   BOOLEAN   inside_center, 
-             inside_right, 
+   BOOLEAN   inside_center,
+             inside_right,
              inside_left;
    BOOLEAN   inside_env;
-             
+
 
    inside_center = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_CENT);
    inside_right  = (iEnvLevel  > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
@@ -1240,17 +1241,17 @@ LOCAL void table_output_html(void)
       case ALIGN_CENT:
          inside_center = TRUE;
          break;
-         
+
       case ALIGN_RIGH:
          inside_right = TRUE;
       }
    }
-   
+
    strcpy(alignOn, "left");
-   
+
    if (inside_center)
       um_strcpy(alignOn, "center", 64, "table_output_html[1]");
-      
+
    if (inside_right)
       um_strcpy(alignOn, "right", 64, "table_output_html[2]");
 
@@ -1275,9 +1276,9 @@ LOCAL void table_output_html(void)
             else
               outln("<br /><br />\n");
          }
-         
+
          break;
-      
+
       case ENV_DESC:
          ;                                /* we're fine in description environments (so far ;-)) */
       }
@@ -1305,7 +1306,7 @@ LOCAL void table_output_html(void)
          voutlnf("<caption align=\"bottom\">%s</caption>", tab_caption);
       }
    }
-   
+
    for (y = 0; y <= tab_h; y++)
    {
       outln("<tr>");
@@ -1317,23 +1318,23 @@ LOCAL void table_output_html(void)
 
 
          /* addition takes the extra options per cell, so it needs to be cleaned */
-         
+
          addition[0] = EOS;
 
 
          /* This is the buffer where we keep the per cell format information */
-         
+
          token_buffer[0] = EOS;
 
 
          /* This BOOLEAN flags are possibly set in test_for_addition */
-         
+
          addition_has_align  = FALSE;
          addition_has_valign = FALSE;
          addition_col_offset = 0;
 
          /* some tables have empty cells, so always check befor using tab_cell entries */
-         
+
          if (tab_cell[y][x] != NULL)
             found = strstr(tab_cell[y][x], "!?");
 
@@ -1373,7 +1374,7 @@ LOCAL void table_output_html(void)
 
             if (!addition_has_valign)
                um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-1]");
-               
+
             break;
 
          case TAB_RIGHT:
@@ -1392,7 +1393,7 @@ LOCAL void table_output_html(void)
             if (!addition_has_valign)
                um_strcat(addition, " valign=\"top\"", TAB_ADDITION_LEN, "table_output_html[3-1-5]");
          }
-         
+
          voutf("  <td%s>", addition);
 
          /* If there is a colspan, we need to supress empty cols */
@@ -1401,7 +1402,7 @@ LOCAL void table_output_html(void)
             x = x + addition_col_offset - 1;
 
          out(sHtmlPropfontStart);
-         
+
          if (tab_cell[y][x] != NULL)
          {
             um_strcpy(f, tab_cell[y][x], LINELEN, "table_output_html[4]");
@@ -1422,7 +1423,7 @@ LOCAL void table_output_html(void)
          out(sHtmlPropfontEnd);
          outln("</td>");                  /* PL14: "</td>" statt " " */
       }
-      
+
       outln("</tr>");                     /* PL14: "</tr>" statt "" */
 
       if (tab_label[y] > 0)
@@ -1432,7 +1433,7 @@ LOCAL void table_output_html(void)
             if (tab_label_cell[y][i] != NULL)
             {
                str2tok(tab_label_cell[y][i]);
-               
+
                if (token_counter > 0)
                   c_label();
             }
@@ -1440,7 +1441,7 @@ LOCAL void table_output_html(void)
             token_reset();
          }
       }
-      
+
    }  /* for (y = 0; y <= tab_h; y++) */
 
    outln("</table>\n</div>");
@@ -1472,8 +1473,8 @@ LOCAL void table_output_tex(void)
    BOOLEAN   inside_center,  /* */
              inside_right,   /* */
              inside_left;    /* */
-   
-   
+
+
    inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
    inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
    inside_left   = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_LEFT);
@@ -1485,7 +1486,7 @@ LOCAL void table_output_tex(void)
       case ALIGN_CENT:
          inside_center = TRUE;
          break;
-         
+
       case ALIGN_RIGH:
          inside_right = TRUE;
       }
@@ -1498,7 +1499,7 @@ LOCAL void table_output_tex(void)
       strcpy(alignOn, "\\begin{center}");
       strcpy(alignOff, "\\end{center}");
    }
-   
+
    if (inside_right)
    {
       strcpy(alignOn, "\\begin{flushright}");
@@ -1517,7 +1518,7 @@ LOCAL void table_output_tex(void)
    outln(alignOn);
 
    out("\\begin{tabular}{");
-   
+
    for (x = 0; x <= tab_w; x++)
    {
       if (tab_vert[x] > 0)
@@ -1525,28 +1526,28 @@ LOCAL void table_output_tex(void)
          for (i = 1; i <= tab_vert[x]; i++)
             out("|");
       }
-      
+
       switch(tab_just[x])
       {
       case TAB_CENTER:
          out("c");
          break;
-      
+
       case TAB_RIGHT:
          out("r");
          break;
-      
+
       default:
          out("l");
       }
    }
-   
+
    if (tab_vert[tab_w + 1] > 0)
    {
       for (i = 1; i <= tab_vert[tab_w + 1]; i++)
          out("|");
    }
-   
+
    out("}");
 
    if (tab_toplines > 0)
@@ -1554,7 +1555,7 @@ LOCAL void table_output_tex(void)
       for (y = 1; y <= tab_toplines; y++)
          out(" \\hline");
    }
-   
+
    outln("");
 
    for (y = 0; y <= tab_h; y++)
@@ -1578,13 +1579,13 @@ LOCAL void table_output_tex(void)
             indent2space(f);
             out(f);
          }
-         
+
          if (x != tab_w)
             out(" & ");
       }
-      
+
       out(" \\\\");
-      
+
       if (tab_hori[y] > 0)
          out(" \\hline");
 
@@ -1597,11 +1598,11 @@ LOCAL void table_output_tex(void)
             if (tab_label_cell[y][i] != NULL)
             {
                str2tok(tab_label_cell[y][i]);
-               
+
                if (token_counter > 0)
                   c_label();
             }
-            
+
             token_reset();
          }
       }
@@ -1647,15 +1648,15 @@ LOCAL void table_output_ipf(void)
    char   f[512],   /* */
           cx[512];  /* */
 /*
-   int    cellx, 
-          indent, 
+   int    cellx,
+          indent,
           charw;
    char   ci[512];
 */
 
 
    f[0] = EOS;                            /* clear string */
-   
+
    for (i = 0; i <= tab_w; i++)
    {
 #ifdef UM_PRINTF_USE_LD
@@ -1665,34 +1666,34 @@ LOCAL void table_output_ipf(void)
 #endif
       strcat(f, cx);
    }
-   
+
    del_whitespaces(f);
    voutlnf(":table cols='%s'.", f);
 
    for (y = 0; y <= tab_h; y++)
    {
       outln(":row.");
-      
+
       for (x = 0; x <= tab_w; x++)
       {
 #if 0
          switch (tab_just[x])
-         { 
+         {
          case TAB_CENTER:
-            out("\\qc ");  
+            out("\\qc ");
             break;
-            
+
          case TAB_RIGHT:
-            out("\\qr "); 
+            out("\\qr ");
             break;
-            
+
          default:
             out("\\ql ");
          }
 #endif
 
          if (tab_cell[y][x] != NULL)
-         {  
+         {
             strcpy(f, tab_cell[y][x]);
             auto_quote_chars(f, FALSE);
             replace_defines(f);
@@ -1762,9 +1763,9 @@ LOCAL void table_output_general(void)
    BOOLEAN   inside_center,  /* */
              inside_right,   /* */
              inside_left;    /* */
-   
-   
-   
+
+
+
    inside_center = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_CENT);
    inside_right  = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_RIGH);
    inside_left   = (iEnvLevel > 0 && iEnvType[iEnvLevel] == ENV_LEFT);
@@ -1776,11 +1777,11 @@ LOCAL void table_output_general(void)
       case ENV_CENT:
          inside_center = TRUE;
          break;
-      
+
       case ENV_RIGH:
          inside_right = TRUE;
          break;
-      
+
       case ENV_LEFT:
          inside_left = TRUE;
       }
@@ -1793,7 +1794,7 @@ LOCAL void table_output_general(void)
       case ALIGN_CENT:
          inside_center = TRUE;
          break;
-            
+
       case ALIGN_RIGH:
          inside_right = TRUE;
          break;
@@ -1816,7 +1817,7 @@ LOCAL void table_output_general(void)
    }
 
    tortf = tosrc = FALSE;
-   
+
    switch (desttype)
    {
    case TORTF:
@@ -1825,7 +1826,7 @@ LOCAL void table_output_general(void)
    case TOAQV:
       tortf = TRUE;
       break;
-   
+
    case TOSRC:
    case TOSRP:
       tosrc = TRUE;
@@ -1840,13 +1841,9 @@ LOCAL void table_output_general(void)
    }
 
    if (tortf || desttype == TOINF || desttype == TOLDS)
-   { 
+   {
       output_begin_verbatim();
    }
-
-/* V6.5.20 [GS] old:
-   outln("");
-*/
 
    if (tosrc)
       outln(sSrcRemOn);
@@ -1857,7 +1854,7 @@ LOCAL void table_output_general(void)
       /* den Befehl zum Zeichnen von horizontalen Linien einsetzen */
       twidth  = 0;
       toffset = 1;
-      
+
       for (x = 0; x <= tab_w; x++)
          twidth += ((int)tab_cell_w[x] + 2);
 
@@ -1877,17 +1874,17 @@ LOCAL void table_output_general(void)
          if (indent > 0)
             toffset = indent + 1;
       }
-      
+
       if (twidth > 126)                   /* ST-Guide kennt Linien nur mit einer  */
-      {                                   /* Breite von max 126 Zeichen                   */
+      {                                   /* Breite von max 126 Zeichen           */
          i = (int)twidth;
          twidth = 126;
 
          sprintf(hl[1], "@line %d %d 0", (int)toffset, (int)twidth);
-         
+
          i -= 126;
          x = (int)toffset + 126;
-         
+
          while (i > 0)
          {
             if (i > 126)
@@ -1911,28 +1908,28 @@ LOCAL void table_output_general(void)
 
       strcpy(hl[0], hl[1]);
       strcpy(hl[2], hl[1]);
- 
- 
+
+
       /* --- Befehle fuer vertikale Linien erzeugen --- */
-      
+
       offset = (int)toffset;
 
       for (x = 0; x <= tab_w; x++)
-      { 
+      {
          if (tab_vert[x] > 0)
          {
             if (tab_h > 253)
                sprintf(stg_vl, "@line %d 0 %d", offset, 254);
             else
                sprintf(stg_vl, "@line %d 0 %d", offset, tab_h+1);
-               
+
             outln(stg_vl);
          }
-         
+
          offset += (int)tab_cell_w[x];
          offset += 2;
       }
-      
+
       if (tab_vert[tab_w + 1] > 0)
       {
          if (tab_h > 253)
@@ -1946,21 +1943,21 @@ LOCAL void table_output_general(void)
       strcpy(vc_l, "");
       strcpy(vc_m, "");
       strcpy(vc_r, "");
-      
+
       if (tab_toplines > 0)
       {
          outln(hl[1]);
       }
-      
+
    }  /* if ( (desttype == TOSTG || desttype == TOAMG) && !ansichars) */
-   
+
    else
    {
       /* Zeichen fuer die Trennlinie(n) setzen        */
       /* Bei MSDOS wird der Grafikzeichensatz benutzt */
 
       if (ansichars)
-      { 
+      {
          strcpy(hl_l[0], "\311");         /*  ||= */  /* Top */
          strcpy(hl_r[0], "\273");         /*  =|| */
          strcpy(hl_v[0], "\321");         /*  =|= */
@@ -1979,7 +1976,7 @@ LOCAL void table_output_general(void)
          strcpy(vc_r, "\272");
       }
       else
-      { 
+      {
          strcpy(hl_l[0], "+");            /* Top */
          strcpy(hl_r[0], "+");
          strcpy(hl_v[0], "+");
@@ -2015,29 +2012,29 @@ LOCAL void table_output_general(void)
             strcat(hl[y], "Von (");
 
          for (x = 0; x <= tab_w; x++)
-         { 
+         {
             if (tab_vert[x] > 0)
             {
                if (x == 0)
-               {  
+               {
                   for (i = 1; i <= tab_vert[x]; i++)
-                  {  
+                  {
                      strcat(hl[y], hl_l[y]);
                   }
                }
                else
-               { 
+               {
                   for (i = 1; i <= tab_vert[x]; i++)
-                  {  
+                  {
                      strcat(hl[y], hl_v[y]);
                   }
                }
             }
-            
+
             strcat(hl[y], hl_c[y]);
 
             for (isl = 1; isl <= tab_cell_w[x]; isl++)
-            { 
+            {
                strcat(hl[y], hl_c[y]);
             }
 
@@ -2045,11 +2042,11 @@ LOCAL void table_output_general(void)
          }
 
          if (tab_vert[tab_w + 1] > 0)
-         { 
+         {
             for (i = 1; i <= tab_vert[tab_w + 1]; i++)
-            { 
+            {
                if (i == tab_vert[tab_w + 1])
-               { 
+               {
                   strcat(hl[y], hl_r[y]);
                }
                else
@@ -2070,37 +2067,37 @@ LOCAL void table_output_general(void)
          if (inside_right)                /* Linie fuer den Rest ausrichten */
             strright(hl[y], zDocParwidth);
 
-         if (tortf) 
+         if (tortf)
             strcat(hl[y], "\\par");
-            
-         if (tosrc) 
+
+         if (tosrc)
             strinsert(hl[y], "    ");
-            
+
       }  /* for (y = 0; y < 3; y++) */
 
 
       /* --- obere Tabellenlinien ausgeben --- */
 
       if (tab_toplines > 0)
-      {  
+      {
          for (i = 1; i <= tab_toplines; i++)
-         { 
+         {
             if (i == 1)
             {
                outln(hl[0]);
             }
             else
-            { 
+            {
                outln(hl[1]);
             }
          }
       }
-      
+
    }  /* else */
 
 
    for (y = 0, y_stg = 0; y <= tab_h; y++, y_stg++)
-   { 
+   {
       s[0] = EOS;
 
       if (y_stg > 253 && (desttype == TOSTG || desttype == TOAMG) && !ansichars)
@@ -2109,18 +2106,18 @@ LOCAL void table_output_general(void)
                                           /* zeichen. Deshalb wird hier eine Anschlussline gezeichnet */
          offset = (int)toffset;
          y_stg = tab_h - y;
-         
+
          if (y_stg > 253)
             y_stg = 253;
 
          for (x = 0; x <= tab_w; x++)
          {
             if (tab_vert[x] > 0)
-            { 
+            {
                sprintf(stg_vl, "@line %d 0 %d", offset, y_stg + 1);
                outln(stg_vl);
             }
-            
+
             offset += (int)tab_cell_w[x];
             offset += 2;
          }
@@ -2133,21 +2130,19 @@ LOCAL void table_output_general(void)
          outln(stg_vl);
 
          y_stg = 0;
-      }
-  
+      }  /* if (y_stg > 253 && (desttype == TOSTG || desttype == TOAMG) && !ansichars) */
+
       strcat(s, space);                   /* New in r6pl15 [NHz] */
 
-                                          /* New in r6pl15 [NHz] */
-                                          /* Begin of a table-line in postscript */
-      if (desttype == TOKPS)
-         strcat(s, "Von (");
+      if (desttype == TOKPS)              /* New in r6pl15 [NHz] */
+         strcat(s, "Von (");              /* Begin of a table-line in postscript */
 
       for (x = 0; x <= tab_w; x++)
       {
          if (tab_vert[x] > 0)
          {
             for (i = 1; i <= tab_vert[x]; i++)
-            { 
+            {
                (x == 0) ? strcat(s, vc_l) : strcat(s, vc_m);
             }
          }
@@ -2157,7 +2152,7 @@ LOCAL void table_output_general(void)
          f[0] = EOS;
 
          if (tab_cell[y][x] != NULL)
-         { 
+         {
             strcpy(f, tab_cell[y][x]);
          }
 
@@ -2180,7 +2175,7 @@ LOCAL void table_output_general(void)
             stringcenter(f, ((int) tab_cell_w[x]));
             strcat(s, f);
             tl = toklen(f);
-            
+
             if (tab_cell_w[x] > tl)
                add = tab_cell_w[x] - tl;
 
@@ -2192,7 +2187,7 @@ LOCAL void table_output_general(void)
 
          case TAB_RIGHT:
             tl = toklen(f);
-            
+
             if (tab_cell_w[x] > tl)
                add = tab_cell_w[x] - tl;
 
@@ -2206,7 +2201,7 @@ LOCAL void table_output_general(void)
          default:                         /* TAB_LEFT */
             strcat(s, f);
             tl = toklen(f);
-            
+
             if (tab_cell_w[x] > tl)
                add = tab_cell_w[x] - tl;
 
@@ -2216,7 +2211,7 @@ LOCAL void table_output_general(void)
          }
 
          strcat(s, " ");
-         
+
       }  /* for (x = 0; x <= tab_w; x++) */
 
       if (tab_vert[tab_w + 1] > 0)
@@ -2254,10 +2249,10 @@ LOCAL void table_output_general(void)
          c_vars(s);
          c_commands_inside(s, FALSE);
       }
-      
+
       replace_defines(s);
       replace_udo_quotes(s);
-      
+
       switch (desttype)
       {
       case TOWIN:
@@ -2265,41 +2260,41 @@ LOCAL void table_output_general(void)
       case TOAQV:
          c_win_styles(s);
          break;
-         
+
       case TORTF:
          c_rtf_styles(s);
          break;
-         
+
       case TOLDS:                         /* PL15*/
          del_internal_styles(s);
          break;
-         
+
       default:
          c_internal_styles(s);
       }
-      
+
       replace_placeholders(s);
       replace_udo_tilde(s);
       replace_udo_nbsp(s);
 
-      if (tortf) 
+      if (tortf)
          strcat(s, "\\par");
-         
+
       if (tosrc)
          strinsert(s, "    ");
 
       outln(s);
 
       if (tab_hori[y] > 0)
-      { 
+      {
          for (i = 1; i <= tab_hori[y]; i++)
          {
             if (y == tab_h && i == tab_hori[y])
-            { 
+            {
                outln(hl[2]);
             }
             else
-            { 
+            {
                outln(hl[1]);
             }
          }
@@ -2312,7 +2307,7 @@ LOCAL void table_output_general(void)
             if (tab_label_cell[y][i] != NULL)
             {
                str2tok(tab_label_cell[y][i]);
-               
+
                if (token_counter > 0)
                   c_label();
             }
@@ -2328,7 +2323,7 @@ LOCAL void table_output_general(void)
       outln(sSrcRemOff);
 
    if (tab_caption[0] != EOS)
-   {  
+   {
       if (tortf)
          outln(rtf_par);
       else
@@ -2338,36 +2333,36 @@ LOCAL void table_output_general(void)
       /* kuerzer als die Absatzbreite ist.                        */
 
       token_reset();
-      
+
       align_caption = (strlen(tab_caption) < zDocParwidth);
 
       if (align_caption)
-      { 
+      {
          s[0] = EOS;
 
          if (inside_center)
             strcpy(s, CMD_BEGIN_CENTER);
-            
+
          if (inside_right)
             strcpy(s, CMD_BEGIN_RIGHT);
 
          tokenize(s);
-         
+
          if (tab_caption_visible)
             sprintf(s, "%s %d: %s", lang.table, tab_counter, tab_caption);
          else
             strcpy(s, tab_caption);
 
          tokenize(s);
-         
+
          s[0] = EOS;
-         
+
          if (inside_center)
             strcpy(s, CMD_END_CENTER);
-            
+
          if (inside_right)
             strcpy(s, CMD_END_RIGHT);
-            
+
          tokenize(s);
          token_output(TRUE);
       }
@@ -2410,24 +2405,24 @@ GLOBAL void table_output(void)
    tab_counter++;
 
    switch (desttype)
-   { 
+   {
    case TOHTM:
    case TOMHH:
    case TOHAH:                            /* V6.5.17 */
       table_output_html();
       break;
-      
+
    case TOTEX:
    case TOPDL:
       table_output_tex();
       break;
-      
+
    case TOAQV:
    case TOWIN:
    case TOWH4:
       table_output_win();
       break;
-      
+
    case TORTF:
       if (bDocNoTables)
          table_output_general();
@@ -2435,21 +2430,21 @@ GLOBAL void table_output(void)
          table_output_rtf();
 
       break;
-      
+
    case TOLYX:
       table_output_lyx();
       break;
-      
+
    case TOIPF:
       table_output_ipf();
       break;
-      
+
    default:
       table_output_general();
    }
 
    table_reset();
-   
+
    tab_caption[0]      = EOS;
    tab_caption_visible = FALSE;
 
@@ -2503,19 +2498,19 @@ GLOBAL void set_table_alignment(void)
    tokcpy2(s, 256);
 
    if (strstr(s, "center") != NULL)
-   {  
+   {
       table_alignment = ALIGN_CENT;
       return;
    }
 
    if (strstr(s, "left") != NULL)
-   {  
+   {
       table_alignment = ALIGN_LEFT;
       return;
    }
 
    if (strstr(s, "right") != NULL)
-   {  
+   {
       table_alignment = ALIGN_RIGH;
       return;
    }
