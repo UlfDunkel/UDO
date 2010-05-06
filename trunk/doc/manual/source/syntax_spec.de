@@ -29,6 +29,7 @@
 #               - universal charset table enhanced
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 07: lines in verbatim environment shortened
+#   fd  May 06: iconv example for Mac OS X terminal
 #
 ################################################################################
 
@@ -231,6 +232,22 @@ Wenn Sie sog. 1-Byte-Codepages (alle von UDO unterstützten Codepages mit Ausnahm
 Wenn Sie z.B. Ihr UDO-Dokument im DOS-Zeichensatz erstellt haben und darin DOS-Grafikzeichen verwenden, das Zielformat aber z.B. Apple MacRoman ist, können die DOS-Grafikzeichen nicht abgebildet werden. Wenn Sie die hebräischen Zeichen des Atari-TOS-Zeichensatzes benutzt haben, werden Sie in den meisten anderen Codepages Pech mit der Abbildung dieser Zeichen haben.
 
 In diesen Fällen empfehlen wir, als Zielformat UTF-8 zu verwenden, sofern das für das Zielformat möglich ist. Denn intern werden sämtliche Codepages im Unicode-Format geführt, so dass z.B. ein hebräisches Alef aus dem TOS-Zeichensatz auch in UTF-8 oder Windows-Codepage 1255 richtig wiedergegeben wird.
+
+# = = = = =
+
+!begin_description
+!label Mehrere Dateien nach Unicode wandeln
+!item [Mehrere Dateien nach Unicode wandeln]
+Falls Sie ältere Projektdateien von einer 1-Byte-Codepage nach UTF-8 konvertieren wollen, aber keine Lust haben, diese Konvertierung für jede Datei einzeln zu machen, kann es nützlich sein, wenn Sie das Unix-Kommando (!file [iconv]) benutzen können, das üblicherweise auf Unix-Maschinen und unter Mac~OS~X zur Verfügung steht.
+
+Hier ist ein einfaches Beispiel, mit dem Sie z.B. in der bash-Shell des Terminal-Programms unter Mac~OS~X beliebig viele Dateien mit der Endung (!C)*.cs(!c) rekursiv (d.h., in beliebigen Unterordnern) auf einen Rutsch von Tschechisch (z.B. ISO-8859-2-kodiert) nach UTF-8 wandeln. Beachten Sie die besonderen Einklammerungen für das (!C)find(!c)-Kommando!
+
+!begin_verbatim
+for x in `find . -name '*.cs'`; do iconv -f ISO-8859-2 -t UTF-8 $x > "$x.utf8"; rm $x; mv "$x.utf8" $x; done
+!end_verbatim
+
+Die Wandlung des Encoding kann nicht direkt in die gleiche Datei stattfinden, da sie anschließend leer wäre; daher der Umweg über die temporären (!C)*.utf8(!c)-Dateien, die nach dem Löschen der Originaldateien direkt mit dem Namen der Originaldateien umbenannt werden.
+!end_description
 
 !end_node # Umwandlung von 8-bit-Zeichen
 
