@@ -1,28 +1,71 @@
-/*   ############################################################
-   # @(#) img.c
-   # @(#)
-   # @(#) Copyright (c) 1995-2001 by Dirk Hagedorn
-   # @(#) Dirk Hagedorn (udo@dirk-hagedorn.de)
-   #
-   # This program is free software; you can redistribute it and/or
-   # modify it under the terms of the GNU General Public License
-   # as published by the Free Software Foundation; either version 2
-   # of the License, or (at your option) any later version.
-   # 
-   # This program is distributed in the hope that it will be useful,
-   # but WITHOUT ANY WARRANTY; without even the implied warranty of
-   # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   # GNU General Public License for more details.
-   # 
-   # You should have received a copy of the GNU General Public License
-   # along with this program; if not, write to the Free Software
-   # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-   ############################################################   */
+/**(TAB=0)**********************************************************************
+*
+*  Project name : UDO
+*  Module name  : img.c
+*  Symbol prefix: img
+*
+*  Copyright    : 1995-2001 Dirk Hagedorn
+*  Open Source  : since 2001
+*
+*                 This program is free software; you can redistribute it and/or
+*                 modify it under the terms of the GNU General Public License
+*                 as published by the Free Software Foundation; either version 2
+*                 of the License, or (at your option) any later version.
+*                 
+*                 This program is distributed in the hope that it will be useful,
+*                 but WITHOUT ANY WARRANTY; without even the implied warranty of
+*                 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*                 GNU General Public License for more details.
+*                 
+*                 You should have received a copy of the GNU General Public License
+*                 along with this program; if not, write to the Free Software
+*                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*-------------------------------------------------------------------------------
+*
+*  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
+*  Co-Authors   : Volker Jansen (vj), Martin Osaka (MO), Christof Schardt (CS),
+*                 Ulf Dunkel (fd), Gerhard Stoll (ggs)
+*  Write access : fd, ggs
+*
+*  Notes        : Please add yourself as co-author when you change this file.
+*
+*-------------------------------------------------------------------------------
+*  Things to do : -
+*
+*-------------------------------------------------------------------------------
+*  History:
+*
+*  1995:
+*    DH  Jan xx: introduced
+*  2001:
+*    DH  Oct 02: last DH version
+*  2010:
+*    ggs Mai 16: c_img_output: For ST-Guide we need no line before and after the
+*                              limage commando.
+*
+******************************************|************************************/
+
+/*******************************************************************************
+*
+*     CONSTANTS
+*
+******************************************|************************************/
 
 #ifndef ID_IMG_C
 #define ID_IMG_C
 const char *id_img_c= "@(#) img.c       22.04.1999";
 #endif
+
+
+
+
+
+/*******************************************************************************
+*
+*     INCLUDE FILES
+*
+******************************************|************************************/
 
 #include "import.h"
 #include <stdio.h>
@@ -45,15 +88,27 @@ const char *id_img_c= "@(#) img.c       22.04.1999";
 #include "img.h"
 
 
-/*   ############################################################
-   # lokale Variablen
-   ############################################################   */
+
+
+
+/*******************************************************************************
+*
+*     UNINITIALIZED LOCAL VARIABLES
+*
+******************************************|************************************/
+
 LOCAL int image_counter;
 
 
-/*   ############################################################
-   # lokale Prototypen
-   ############################################################   */
+
+
+
+/*******************************************************************************
+*
+*     LOCAL PROTOTYPES
+*
+******************************************|************************************/
+
 LOCAL void save_one_html_gif ( const char *name, const UBYTE *buffer, const size_t length, BOOLEAN *ret );
 LOCAL void save_one_win_bmp ( const char *name, const UBYTE *buffer, const size_t length, BOOLEAN *ret );
 LOCAL void save_one_stg_img ( const char *name, const UBYTE *buffer, const size_t length, BOOLEAN *ret );
@@ -74,6 +129,20 @@ LOCAL int uc2ToInt(UBYTE *uc, int *i);
 LOCAL int uc4ToInt(UBYTE *uc, int *i);
 
 
+
+
+
+
+
+
+
+
+
+/*******************************************************************************
+*
+*     LOCAL PROCEDURES
+*
+******************************************|************************************/
 
 /*   ############################################################
    # GIFs fuer HTML anlegen, wenn noch keine GIFs
@@ -552,12 +621,26 @@ int    *i)   /* */
    ############################################################   */
 #define IMAGEDEBUG         1
 
-/*   ############################################################
-   #
-   # Images
-   #
-   ############################################################   */
-GLOBAL BOOLEAN c_img_output ( const char *name, const char *caption, const BOOLEAN visible )
+
+
+
+
+
+/*******************************************************************************
+*
+*  c_img_output():
+*     ??? (description missing)
+*
+*  Return:
+*      TRUE: OK
+*     FALSE: Something is wrong with the picture
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN c_img_output (
+const char       *name,           /* filename */
+const char       *caption,        /* */
+const BOOLEAN    visible )        /* */
 {
    IMGHEADER   imghead;
    char   n[256], datei[512], imgdatei[512];
@@ -698,7 +781,6 @@ GLOBAL BOOLEAN c_img_output ( const char *name, const char *caption, const BOOLE
          {   img_xoff= (int) zDocParwidth - img_cw+1;
          }
 
-         outln("");
          sprintf(n, "@limage %s %d", datei, img_xoff);
          outln(n);
 
@@ -717,7 +799,6 @@ GLOBAL BOOLEAN c_img_output ( const char *name, const char *caption, const BOOLE
             if (inside_right)   strright(n, max_width);
             outln(n);
          }
-         outln("");
          break;   /* TOSTG */
    }
    
