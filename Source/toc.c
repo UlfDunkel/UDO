@@ -96,6 +96,7 @@
 *    fd  Mar 12: bookmarks_ps(): ugly typo fixed (warned by Linux gcc)
 *    ggs Apr 20: c_label: Labels will print out not only in description environment
 *    ggs Apr 21: use_short_tocs -> use_compressed_tocs
+*    fd  May 17: init_toc_forms_numbers() must no longer close </li> for HTML
 *
 ******************************************|************************************/
 
@@ -17470,11 +17471,11 @@ LOCAL void init_toc_forms_numbers(void)
    case TOHAH:
    case TOHTM:
    case TOMHH:
-      strcpy(form_t1_n1, "<li>%d %s</li>");
-      strcpy(form_t1_n2, "<li>%d.%d %s</li>");
-      strcpy(form_t1_n3, "<li>%d.%d.%d %s</li>");
-      strcpy(form_t1_n4, "<li>%d.%d.%d.%d %s</li>");
-      strcpy(form_t1_n5, "<li>%d.%d.%d.%d.%d %s</li>");
+      strcpy(form_t1_n1, "<li>%d %s");
+      strcpy(form_t1_n2, "<li>%d.%d %s");
+      strcpy(form_t1_n3, "<li>%d.%d.%d %s");
+      strcpy(form_t1_n4, "<li>%d.%d.%d.%d %s");
+      strcpy(form_t1_n5, "<li>%d.%d.%d.%d.%d %s");
       strcpy(form_t2_n2, form_t1_n2);
       strcpy(form_t2_n3, form_t1_n3);
       strcpy(form_t2_n4, form_t1_n4);
@@ -17486,11 +17487,11 @@ LOCAL void init_toc_forms_numbers(void)
       strcpy(form_t4_n5, form_t1_n5);
       strcpy(form_t5_n5, form_t1_n5);
 
-      strcpy(form_a1_n1, "<li>%c %s</li>");
-      strcpy(form_a1_n2, "<li>%c.%d %s</li>");
-      strcpy(form_a1_n3, "<li>%c.%d.%d %s</li>");
-      strcpy(form_a1_n4, "<li>%c.%d.%d.%d %s</li>");
-      strcpy(form_a1_n5, "<li>%c.%d.%d.%d.%d %s</li>");
+      strcpy(form_a1_n1, "<li>%c %s");
+      strcpy(form_a1_n2, "<li>%c.%d %s");
+      strcpy(form_a1_n3, "<li>%c.%d.%d %s");
+      strcpy(form_a1_n4, "<li>%c.%d.%d.%d %s");
+      strcpy(form_a1_n5, "<li>%c.%d.%d.%d.%d %s");
       strcpy(form_a2_n2, form_a1_n2);
       strcpy(form_a2_n3, form_a1_n3);
       strcpy(form_a2_n4, form_a1_n4);
