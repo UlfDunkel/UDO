@@ -45,6 +45,7 @@
 *    fd  Feb 24: replace_placeholders() debugged
 *    fd  Feb 25: replace_placeholders() debugged
 *    fd  Feb 26: replace_placeholders() debugged
+*    fd  May 17: add_macro(): auto_quote_chars() faded
 *
 ******************************************|************************************/
 
@@ -3615,7 +3616,9 @@ GLOBAL BOOLEAN add_macro(void)
       }
    }
 
+/* fd:2010-05-08: faded for macros!
    auto_quote_chars(entry, FALSE);
+*/
    replace_macros(entry);
    replace_defines(entry);
    c_divis(entry);
