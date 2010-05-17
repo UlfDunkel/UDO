@@ -7873,7 +7873,7 @@ size_t  *u)    /* # of spaces to indent a line */
 *     non-!short format example:
 *
 *     <ul> | <ol>
-*     <li><p>[content of 1st paragraph]<br>
+*     <li><p>[content of 1st paragraph]<br><br>
 *
 *     [content of next paragraph(s)]</p></li>
 *     </ul> | </ol>
@@ -8970,7 +8970,7 @@ BOOLEAN           reset_internals)        /* */
       break;
 
    case TOINF:
-      if ( !inside_compressed )
+      if (!inside_compressed)
       {
          if (inside_center)
             outln("@center");
@@ -9000,7 +9000,7 @@ BOOLEAN           reset_internals)        /* */
       break;
 
    default:
-      if ( !inside_compressed )
+      if (!inside_compressed)
          outln("");
    }
 
