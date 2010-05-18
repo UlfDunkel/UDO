@@ -51,6 +51,7 @@
 *                - new: chr_sort_codepage()
 *                - new: chr_usort_codepage()
 *                - new: chr_ligatures()
+*    fd  May 18: new: chr_codepage_charset_name()
 *
 ******************************************|************************************/
 
@@ -209,9 +210,6 @@ GLOBAL void init_module_chars(void);
    /* get ^ to desired codepage */
 GLOBAL UWORD *chr_codepage(int encoding);
 
-   /* get human-readable name of desired codepage */
-GLOBAL char *chr_codepage_name(int encoding);
-
    /* get ^ to desired codepage for sorting purposes */
 GLOBAL UWORD *chr_sort_codepage(int encoding);
 
@@ -220,6 +218,12 @@ GLOBAL VOID *chr_usort_codepage(int encoding);
 
    /* get ^ to desired table of ligatures */
 GLOBAL VOID *chr_ligatures(int encoding);
+
+   /* get human-readable name of desired codepage */
+GLOBAL char *chr_codepage_name(int encoding);
+
+   /* get Content-Type charset name of desired codepage for HTML */
+GLOBAL char *chr_codepage_charset_name(int encoding);
 
 #endif   /* __UDOCHR__ */
 
