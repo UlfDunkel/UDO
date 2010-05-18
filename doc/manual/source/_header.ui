@@ -21,6 +21,7 @@
 #   fd  Mar 03: - encodings and docinfo for title page adjusted (requires UDO 7.01)
 #               - using table_alignment [left]
 #   fd  Mar 05: !use_short_... (for environments) changed: -> !use_compressed_...
+#   fd  May 18: html_ignore_8bit no longer requires a charset
 #
 ################################################################################
 
@@ -31,7 +32,7 @@
 !html_favicon_name    http://www.udo-open-source.org/favicon.ico
 !html_navigation      [line]
 !html_style_name      css/udo.css
-!html_ignore_8bit     utf-8
+!html_ignore_8bit     
 !html_img_suffix      gif
 
 # !html_transparent_buttons
