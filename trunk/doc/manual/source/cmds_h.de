@@ -1383,7 +1383,7 @@ Enthält (!TEXT) ""chapter"" oder ""section"", werden alle Links zu den Kapiteln 
 
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, werden 8-Bit-Zeichen (!I)nicht(!i)
-in HTML-Entities ((!code [&auml;]) usw.) umgewandelt.
+in HTML-Entities ((!code [&])(!code [auml;]) usw.) umgewandelt.
 
 Das Meta-Tag Content-Type wird automatisch von UDO mit dem richtigen Charset-Bezeichner gefüllt.
 
@@ -1402,7 +1402,7 @@ Das Meta-Tag Content-Type wird automatisch von UDO mit dem richtigen Charset-Bez
 !end_verbatim
 (!EXAMPLE_AFTER)
 !begin_verbatim
-<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+&lt;meta http-equiv="content-type" content="text/html;charset=UTF-8"&gt;
 !end_verbatim
 (!EXAMPLE_END)
 
