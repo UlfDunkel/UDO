@@ -23,6 +23,8 @@
 #   fd  Mar 06: [UDO]: commandline option '-@ F' enhanced
 #   fd  Mar 08: - macro usage adjusted
 #               - ISO encodings completed
+#   fd  May 18: - !html_ignore_8bit no longer requires a charset string
+#               - UTF-8 output no longer crashes UDO
 #
 ################################################################################
 
@@ -129,8 +131,20 @@
 # ----------------------------------------
       !begin_itemize !compressed
       !item (!BUG [86]): Veraltete Kommandos bringen den IF-Stack nicht mehr durcheinander.
+      !item Unter bestimmten Umständen konnte die UTF-8-Ausgabe von UTF-8-Inhalt UDO abstürzen lassen.
       !end_itemize
 
+
+
+
+
+# ----------------------------------------
+!item [HTML]
+# ----------------------------------------
+      !begin_itemize !compressed
+      !item (!KW [html_ignore_8bit]) benötigt keinen optionaler Parameter (!TEXT) für das Charset mehr.
+      !end_itemize
+         
 !end_description
 
 !end_node
