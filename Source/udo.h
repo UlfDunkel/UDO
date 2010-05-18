@@ -54,6 +54,7 @@
 *                     use_short_descriptions
 *                     use_short_lists
 *    ggs Apr 21: use_short_tocs -> use_compressed_tocs
+*    fd  May 18: html_ignore_8bit_use_charset + html_ignore_8bit_charset no longer required
 *
 ******************************************|************************************/
 
@@ -287,11 +288,6 @@ GLOBAL char        html_navigation_separator[20];
 GLOBAL BOOLEAN     html_navigation_image; /* v6.5.19[fd] TRUE: show (folder) symbol */
                                           /* v6.5.19[fd] fspec to userdef (folder equivalent) symbol */
 GLOBAL char        html_navigation_image_fspec[128];
-
-                                          /* v6.5.0[vj] Use extra charset for meta http-equiv="Content-Type"? This flag is used just for speedup reasons */
-GLOBAL BOOLEAN     html_ignore_8bit_use_charset;
-                                          /* v6.5.0[vj] Charset for html_ignore_8bit that should be used in meta http-equiv="Content-Type" */
-GLOBAL char        html_ignore_8bit_charset[20];
 
                                           /* Links zum Wechseln? */
 GLOBAL char        sDocHtmlSwitchLanguage[256];
