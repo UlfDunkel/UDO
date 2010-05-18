@@ -38,6 +38,7 @@
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #   fd  Mar 08: IMG renamed: udo_icon_16 -> udo_16
 #   fd  Mar 08: macro K1 resolved to KW
+#   fd  May 18: html_ignore_8bit updated
 #
 ################################################################################
 
@@ -1382,12 +1383,9 @@ Enthält (!TEXT) ""chapter"" oder ""section"", werden alle Links zu den Kapiteln 
 
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, werden 8-Bit-Zeichen (!I)nicht(!i)
-in HTML-Entities ((!code [&auml;]) usw.) umgewandelt. Somit ist es möglich, auch von ISO-Latin1
-abweichende Dateien zu erzeugen, ohne das UDO dazwischenfunkt.
+in HTML-Entities ((!code [&auml;]) usw.) umgewandelt.
 
-Optional kann durch den Parameter (!TEXT) eine Codepage übergeben werden.
-
-(!B)Hinweis:(!b) (!TEXT) darf max. (!const [20])~Zeichen haben.
+Das Meta-Tag Content-Type wird automatisch von UDO mit dem richtigen Charset-Bezeichner gefüllt.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~2, Erweiterung seit Version 6.5.0
 
@@ -1399,11 +1397,12 @@ Optional kann durch den Parameter (!TEXT) eine Codepage übergeben werden.
 (!EXAMPLE)
 (!EXAMPLE_BEFORE)
 !begin_verbatim
-!html_ignore_8bit ISO-8859-2
+!code_target      [utf-8]
+!html_ignore_8bit
 !end_verbatim
 (!EXAMPLE_AFTER)
 !begin_verbatim
-<meta http-equiv="content-type" content="text/html;charset=ISO-8859-2">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 !end_verbatim
 (!EXAMPLE_END)
 

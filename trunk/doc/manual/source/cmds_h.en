@@ -33,6 +33,7 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: IMG renamed: udo_icon_16 -> udo_16
 #   fd  Mar 08: macro K1 resolved to KW
+#   fd  May 18: html_ignore_8bit updated
 #
 ################################################################################
 
@@ -1227,20 +1228,10 @@ Ignore 8-bit characters (HTML only).
 !item [(!SYNTAX)] (!T)!/html_ignore_8bit (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Wird dieser Schalter im Vorspann angegeben, so werden 8-Bit-Zeichen (!I)nicht(!i)
-in HTML-Entities (&auml; etc.) umgewandelt. Somit ist es möglich, auch von ISO-Latin1
-abweichende Dateien zu erzeugen, ohne das UDO dazwischenfunkt.
-
-Optional kann durch den Parameter (!TEXT) ein Codepage übergeben werden.
-Zum Beispiel wird mit (!code [!/html_ignore_8bit ISO-8859-2]) in die HTML-Header
-folgendes geschrieben: (!code [<meta http-equiv="content-type" content="text/html;charset=ISO-8859-2">]).
-!item [(!DESCRIPTION)]
 If you use this switch in the preamble, 8 bit characters
-won't be converted to HTML entities (&auml; etc.).
-Thus you can generate files different from iso-latin1 without UDO intervening.
+won't be converted to HTML entities ((!code [&auml;]), etc.).
 
-!item [(!EXAMPLE)]
-(!T)!/html_ignore_8bit ISO-8859-2(!t)
+The meta tag Content-Type will automatically be filled with the right charset descriptor by UDO.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~2, Erweiterung seit Version 6.5.0
 
@@ -1248,6 +1239,18 @@ Thus you can generate files different from iso-latin1 without UDO intervening.
 (!KW [code_source]), (!KW [code_target])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!code_target      [utf-8]
+!html_ignore_8bit
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
