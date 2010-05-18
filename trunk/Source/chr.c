@@ -109,6 +109,9 @@
 *                - CODE_LATIN9
 *                - CODE_LATIN10
 *    fd  Mar 12: adjustments for the Linux ggc
+*    fd  May 18: - auto_quote_chars() cancels on UTF-8
+*                - recode() simplified
+*                - new: chr_codepage_charset_name()
 *
 ******************************************|************************************/
 
@@ -1183,6 +1186,16 @@ char             *s)        /* ^ string */
 *  recode():
 *     recode a line into another encoding
 *
+*  Notes:
+*     When code_source or code_target are UTF-8, there are no relevant codepages.
+*     As this function handles three different methods of recoding, the NULL pointer 
+*     of the non-existing UTF codepages should not be any problem here.
+*
+*     The recoding methods are:
+*     -  UTF-8 to 1-byte recoding
+*     -  1-byte to UTF-8 recoding
+*     -  1-byte to 1-byte recoding
+*
 *  Return:
 *     -
 *
@@ -1210,13 +1223,6 @@ int          char_set)          /* iCharset */
       iEncodingTarget = char_set;
    
 
-   pUsrc = chr_codepage(iEncodingSource);
-   pUtrg = chr_codepage(iEncodingTarget);
-   
-   strcpy(sSource, chr_codepage_name(iEncodingSource));
-   strcpy(sTarget, chr_codepage_name(iEncodingTarget));
-      
-   
    /* --- force format requirements --- */
    
    switch (desttype)
@@ -1224,18 +1230,23 @@ int          char_set)          /* iCharset */
    case TOSTG:                            /* ST-Guide */
    case TOPCH:                            /* Pure C Help */
       iEncodingTarget = CODE_TOS;
-      strcpy(sTarget, chr_codepage_name(iEncodingTarget));
       break;
    
    case TOAMG:                            /* AmigaGuide */
    case TOWIN:                            /* Windows Help */
       iEncodingTarget = CODE_CP1252;
-      strcpy(sTarget, chr_codepage_name(iEncodingTarget));
    }
       
                                           /* nothing to do */   
    if (iEncodingSource == iEncodingTarget)
       return;
+   
+   pUsrc = chr_codepage(iEncodingSource);
+   pUtrg = chr_codepage(iEncodingTarget);
+   
+   strcpy(sSource, chr_codepage_name(iEncodingSource));
+   strcpy(sTarget, chr_codepage_name(iEncodingTarget));
+      
    
    ptr = get_8bit_ptr(zeile);             /* set ^ to first high-ASCII char */
    
@@ -3826,6 +3837,9 @@ BOOLEAN           all)            /* */
 
    pUtrg = chr_codepage(iEncodingTarget); /* get the right encoding table! */
 
+   if (pUtrg == NULL)                     /* no codepage for Unicode!!! */
+      return;
+   
    if (no_umlaute)
       recode_chrtab(s,CHRTAB_ASCII);
 
@@ -5108,6 +5122,127 @@ int   encoding)  /* # of encoding */
    }
    
    return "unknown codepage!!!";
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  chr_codepage_charset_name():
+*     get Content-Type charset name of desired codepage for HTML
+*
+*  Return:
+*     charset name 
+*
+******************************************|************************************/
+
+GLOBAL char *chr_codepage_charset_name(
+
+int   encoding)  /* # of encoding */
+{
+   switch (encoding)
+   {
+   case CODE_437:
+      return "cp437";
+
+   case CODE_850:
+      return "cp850";
+      
+   case CODE_CP1250:
+      return "Windows-1250";
+      
+   case CODE_CP1251:
+      return "Windows-1251";
+      
+   case CODE_CP1252:
+      return "Windows-1252";
+
+   case CODE_CP1253:
+      return "Windows-1253";
+      
+   case CODE_CP1254:
+      return "Windows-1254";
+      
+   case CODE_CP1255:
+      return "Windows-1255";
+      
+   case CODE_CP1256:
+      return "Windows-1256";
+      
+   case CODE_CP1257:
+      return "Windows-1257";
+      
+   case CODE_CP1258:
+      return "Windows-1258";
+      
+   case CODE_HP8:
+      return "hp-roman8";
+   
+   case CODE_LATIN1:
+      return "ISO-8859-1";
+   
+   case CODE_LATIN2:
+      return "ISO-8859-2";
+   
+   case CODE_LATIN3:
+      return "ISO-8859-3";
+   
+   case CODE_LATIN4:
+      return "ISO-8859-4";
+   
+   case CODE_CYRILLIC:
+      return "ISO-8859-5";
+   
+   case CODE_ARABIC:
+      return "ISO-8859-6";
+   
+   case CODE_GREEK:
+      return "ISO-8859-7";
+   
+   case CODE_HEBREW:
+      return "ISO-8859-8";
+   
+   case CODE_TURKISH:
+      return "ISO-8859-9";
+   
+   case CODE_NORDIC:
+      return "ISO-8859-10";
+   
+   case CODE_THAI:
+      return "ISO-8859-11";
+   
+   case CODE_BALTIC:
+      return "ISO-8859-13";
+   
+   case CODE_CELTIC:
+      return "ISO-8859-14";
+   
+   case CODE_LATIN9:
+      return "ISO-8859-15";
+   
+   case CODE_LATIN10:
+      return "ISO-8859-16";
+   
+   case CODE_MAC:
+      return "MacRoman";
+   
+   case CODE_MAC_CE:
+      return "MacCE";
+   
+   case CODE_NEXT:
+      return "next";
+   
+   case CODE_TOS:
+      return "atari";
+   
+   case CODE_UTF8:
+      return "UTF-8";
+   
+   default:
+      return "ISO-8859-1";
+   }
 }
 
 
