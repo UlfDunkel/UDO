@@ -97,6 +97,8 @@
 *    ggs Apr 20: c_label: Labels will print out not only in description environment
 *    ggs Apr 21: use_short_tocs -> use_compressed_tocs
 *    fd  May 17: init_toc_forms_numbers() must no longer close </li> for HTML
+*    fd  May 18: - output_html_doctype() no longer writes iso-8859-1 hard-coded
+*                - output_html_meta() no longer writes iso-8859-1 hard-coded
 *
 ******************************************|************************************/
 
@@ -2820,7 +2822,7 @@ LOCAL BOOLEAN html_make_file(void)
 /*******************************************************************************
 *
 *  output_html_meta():
-*     outputs HTML meta data in the HTML head section
+*     output HTML meta data in the HTML head section
 *
 *  <???> <meta name="Subject" content="...">
 *  <???> <meta name="Modification-Date" content="...">
@@ -2841,7 +2843,7 @@ BOOLEAN    keywords)             /* */
            li,                   /* */
            j;                    /* */
    STYLE  *styleptr;             /* */
-   char    s[512],               /* */
+   char    s[512],               /* buffer for charset and label name */
            htmlname[512],        /* */
            sTarget[512] = "\0";  /* */
    char    backpage[256],        /* */
@@ -2854,24 +2856,10 @@ BOOLEAN    keywords)             /* */
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
       strcpy(closer, " /");
    
-   if (!html_ignore_8bit)
-   {
-      voutlnf("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=iso-8859-1\"%s>", closer);
-   }
-   else
-   {
-      /* New in v6.5.0 [vj] */
-      if (html_ignore_8bit_use_charset)
-      {
-         /* We should print out a special charset instead of none.
-            No check needed if html_ignore_8bit_charset is emtpy,
-            because html_ignore_8bit_use_charset wouldn't have been set to TRUE.
-         */
-         voutlnf("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=%s\"%s>", html_ignore_8bit_charset, closer);
-      }
-   }
-
-   /* New in r6pl16 [NHz] */
+                                          /* get right charset name */
+   strcpy(s, chr_codepage_charset_name(iEncodingTarget));
+     
+   voutlnf("<meta http-equiv=\"Content-Type\" content=\"text/html;charset=%s\"%s>", s, closer);
    voutlnf("<meta http-equiv=\"Content-Language\" content=\"%s\"%s>", lang.html_lang, closer);
    voutlnf("<meta http-equiv=\"Content-Style-Type\" content=\"text/css\"%s>", closer);
    voutlnf("<meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\"%s>", closer);
@@ -3296,6 +3284,11 @@ BOOLEAN    keywords)             /* */
 
 LOCAL void output_html_doctype(void)
 {
+   char   s[512];  /* buffer */
+   
+                                          /* get right charset name */   
+   strcpy(s, chr_codepage_charset_name(iEncodingTarget));
+   
    switch (html_doctype)                  /* Changed in r6pl16 [NHz] */
    {
    case HTML_OLD:
@@ -3313,13 +3306,13 @@ LOCAL void output_html_doctype(void)
       break;
       
    case XHTML_STRICT:
-      outln("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>");
+      voutlnf("<?xml version=\"1.0\" encoding=\"%s\"?>", s);
       outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"");
       outln("        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
       break;
       
    case XHTML_TRANS:
-      outln("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>");
+      voutlnf("<?xml version=\"1.0\" encoding=\"%s\"?>", s);
       outln("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"");
       outln("        \"http://www.w3.org/TR/xhtml1/DTD/xhtm1-transitional.dtd\">");
       break;
