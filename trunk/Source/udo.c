@@ -107,8 +107,9 @@
 *    fd  Mar 12: adjustments for Linux gcc
 *    ggs Mar 28: token_output: Compressed works for ASCII, ST-Guide and AmigaGuide again
 *    ggs Mar 29: token_output: I hope compressed work in all formats again
-*    ggs Apr 21. - use_short_tocs -> use_compressed_tocs
+*    ggs Apr 21: - use_short_tocs -> use_compressed_tocs
 *                - Labels inside tables work now in HTML
+*    fd  May 18: pass1_check_preamble_commands(): html_ignore_8bit_use_charset no longer required
 *
 ******************************************|************************************/
 
@@ -11102,15 +11103,6 @@ LOCAL BOOLEAN pass1_check_preamble_commands(void)
       if (strcmp(token[0], "!html_ignore_8bit") == 0)
       {
          html_ignore_8bit = TRUE;
-         if (strlen(token[1]) > 0)
-         {
-            um_strcpy(html_ignore_8bit_charset, token[1], 20, "pass1_check_preamble_commands[html_ignore_8bit]");
-            html_ignore_8bit_use_charset = TRUE;
-         }
-         else
-         {
-            html_ignore_8bit_use_charset = FALSE;                                   
-         }
          return TRUE;
       }
       
