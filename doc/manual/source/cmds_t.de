@@ -29,6 +29,7 @@
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  May 19: "short" -> "compressed"
 #
 ################################################################################
 
@@ -296,13 +297,13 @@ durch ausgabeformatspezifische Kommandos eingefasst und in Hypertexten
 auf einer eigenen Seite dargestellt wird. Dieses Kommando sollte direkt
 nach (!KW [begin_document]) bzw. nach (!KW [maketitle]) eingesetzt
 werden. Der Umfang des Inhaltsverzeichnis lässt sich durch den Schalter
-(!KW [use_short_tocs]) oder durch Angabe des Schalters
+(!KW [use_compressed_tocs]) oder durch Angabe des Schalters
 (!KW [depth]) verkleinern.
 Das Beispiel zeigt, wie man ein Inhaltsverzeichnis ausgibt,
 das nur die Nodes (1.~Ebene) enthält.
 
 !item [(!SEEALSO)]
-(!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse]), (!KW [use_short_tocs]), (!KW [toc]), (!KW [depth])
+(!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse]), (!KW [use_compressed_tocs]), (!KW [toc]), (!KW [depth])
 
 !end_xlist
 
@@ -700,7 +701,7 @@ Beispiel würde das Inhaltsverzeichnis bei der
 Umwandlung ins ST-Guide-Format ausgegeben.
 
 !item [(!SEEALSO)]
-(!KW [tableofcontents]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [depth]), (!KW [use_short_tocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+(!KW [tableofcontents]), (!KW [subtoc]), (!KW [subsubtoc]), (!KW [depth]), (!KW [use_compressed_tocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
 
 !end_xlist
 

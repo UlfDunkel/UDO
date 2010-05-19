@@ -16,6 +16,7 @@
 #   fd  Mar 01: introduced (from history_06.de)
 #   fd  Mar 03: old translation adjusted, using PUBLISHED
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 19: link adjustments for old commands
 #
 ################################################################################
 
@@ -110,7 +111,7 @@ cases it was impossible not to change the syntax of some commands.
             For appending nodes, aliases and labels to the index.
       !item (!KW [use_output_buffer]):
             Shall UDO use a buffer to make the references more perfect for HTML and Windows Help?
-      !item (!KW [use_short_envs]):
+      !item (!B)!use_short_envs(!b):
             For printing always compressed environments.
       !item (!KW [verbatimsize]):
             For changing the font size of verbatim environments.
@@ -163,7 +164,7 @@ cases it was impossible not to change the syntax of some commands.
       !begin_itemize !compressed
       !item (!KW [no_verbatim_umlaute]) replaces the switch (!kw [verbatim_no_umlaute])
       !item The switch (!kw [list_parsep]) doesn't exist anymore.
-            You can print ""compressed"" environment easier with (!KW [short]) now.
+            You can print ""compressed"" environment easier with (!B)!short(!b) now.
       !item The language of the destination file has to be set with the (!KW [language]) command now.
             (!KW [language] [[english!!]]) replaces the command (!kw [english]).
       !item You can pass three index entries with one (!KW [index]) command now.

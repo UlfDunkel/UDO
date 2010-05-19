@@ -31,6 +31,7 @@
 #   fd  Mar 02: chapter cmd_docinfo much enhanced
 #   fd  Mar 03: cmd_docinfo: deprecated attributes (webmaster...) updated
 #   fd  Mar 05: more adjustments for !docinfo [webmaster...]
+#   fd  May 19: "short" -> "compressed"
 #
 ################################################################################
 
@@ -171,7 +172,7 @@ containing only the chapter names.
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~2
 
 !item [(!SEEALSO)]
-(!KW [tableofcontents]), (!KW [toc]), (!KW [use_auto_subtocs]), (!KW [use_short_tocs]),
+(!KW [tableofcontents]), (!KW [toc]), (!KW [use_auto_subtocs]), (!KW [use_compressed_tocs]),
 (!KW [subtoc]), (!KW [subsubtoc]), (!KW [subsubsubtoc])
 
 !end_xlist

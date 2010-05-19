@@ -18,6 +18,7 @@
 # 2010:
 #   fd  Mar 03: using PUBLISHED
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 19: link adjustments for old commands
 #
 ################################################################################
 
@@ -115,7 +116,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
          Sollen Nodes, Aliase und/oder Labels automatisch in den Index übernommen werden?
    !item (!KW [use_output_buffer]): 
          Soll ein Ausgabe-Puffer benutzt werden, um die Referenzierung bei HTML und Windows Help sicherer zu machen?
-   !item (!KW [use_short_envs]): 
+   !item (!B)!use_short_envs(!b): 
          Sollen alle Umgebungen komprimiert ausgegeben werden?
    !item (!KW [verbatimsize]): 
          Zum Setzen der Fontgröße von verbatim-Umgebungen.
@@ -177,7 +178,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !begin_itemize !compressed
    !item (!KW [no_verbatim_umlaute]) ersetzt den Schalter (!kw [verbatim_no_umlaute])
    !item Der Befehl (!kw [list_parsep]) existiert nicht mehr. Komprimierte
-         Umgebungen können nun viel eleganter mit dem Umgebungsparameter (!KW [short]) erstellt werden.
+         Umgebungen können nun viel eleganter mit dem Umgebungsparameter (!B)!short(!b) erstellt werden.
    !item Die zu benutzende Sprache muss nun mit (!KW [language]) gesetzt
          werden. (!KW [language] [[german!!]]) ersetzt demnach den Befehl !german usw.
    !item Beim Index-Befehl können nun bis zu drei Indizes übergeben werden.

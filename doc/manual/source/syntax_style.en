@@ -27,6 +27,7 @@
 #   fd  Mar 03: chapter style_tables: hint for table_alignment added
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  May 19: "short" -> "compressed"
 #
 ################################################################################
 
@@ -72,23 +73,23 @@ one !..
 
 !smallskip
 
-!index (!kw [short])
+!index (!kw [compressed])
 UDO separates the text of each item by an empty line. In some cases it's not
 a good idea to separate the items e.g. if an item contains only some text.
 In this case it would be better to suppress the empty lines to get a
 compressed environment.
 
 For printing compressed environment UDO offers you the command named
-(!KW [short]) you can add to the (!KW [begin_itemize]) command. If you
-add (!KW [short]) UDO won't separate the items by inserting empty lines.
+(!KW [compressed]) you can add to the (!KW [begin_itemize]) command. If you
+add (!KW [compressed]) UDO won't separate the items by inserting empty lines.
 Furthermore in all environments you use inside this itemize environment no
 empty lines will be printed.
 
-The following two examples show how to use the (!KW [short]) command and
+The following two examples show how to use the (!KW [compressed]) command and
 which effects this command has. The first example doesn't, the second one
-uses (!KW [short]):
+uses (!KW [compressed]):
 
-Without (!KW [short]):
+Without (!KW [compressed]):
 
 (!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)/itemize3.ui
@@ -96,7 +97,7 @@ Without (!KW [short]):
 !include (!EXAMPLES)/itemize3.ui
 (!EXAMPLE_END)
 
-With (!KW [short]):
+With (!KW [compressed]):
 
 (!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)/itemize4.ui
@@ -149,7 +150,7 @@ This short example shows how to write a simple itemize environment:
 (!EXAMPLE_END)
 
 In the following example the enumerate environment is used twice and it will
-be compressed because of the usage of (!KW [short]):
+be compressed because of the usage of (!KW [compressed]):
 
 (!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)/enum2.ui
@@ -171,7 +172,7 @@ than the other layers because Roman numbers need a little bit more space.
 !item	Because the second layer is enumerated with letters you shouldn't
 use more than 26~items.
 
-!item	A description of the (!KW [short]) command is part of the chapter
+!item	A description of the (!KW [compressed]) command is part of the chapter
 ""Itemizations"".
 
 !end_enumerate
@@ -201,7 +202,7 @@ environments.
 (!EXAMPLE_END)
 
 In this example the description environment is used inside another one and
-the (!KW [short]) is used, too:
+the (!KW [compressed]) is used, too:
 
 (!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)/descript2.ui
@@ -225,7 +226,7 @@ be printed in bold text, too.
 bold text, too, even if this not typical for HTML. The next versions of UDO
 will offer a command to disable the bold text inside descriptions for HTML.
 
-!item	A description of the (!KW [short]) command is part of the chapter
+!item	A description of the (!KW [compressed]) command is part of the chapter
 ""Itemizations"".
 
 !end_enumerate
@@ -256,9 +257,9 @@ You can use the xlist environment inside other (xlist) environments, too.
 !include (!EXAMPLES)/xlist1.ui
 (!EXAMPLE_END)
 
-The command (!KW [short]) can also be used for xlist environments. To get
-a compressed list just add (!KW [short]) at the end of the line that
-contains (!KW [begin_xlist]). Once more a short example:
+The command (!KW [compressed]) can also be used for xlist environments. To get
+a compressed list just add (!KW [compressed]) at the end of the line that
+contains (!KW [begin_xlist]). Once more a compressed example:
 
 (!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)/xlist2.ui
@@ -329,7 +330,7 @@ file to RTF and Windows Help. If the indents are too wide you can adjust the
 indent by using the commands (!KW [rtf_charwidth]) and
 (!KW [win_charwidth]).
 
-!item	A description of the (!KW [short]) command is part of the chapter
+!item	A description of the (!KW [compressed]) command is part of the chapter
 ""Itemizations"".
 
 !end_enumerate

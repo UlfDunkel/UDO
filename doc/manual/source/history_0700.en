@@ -19,6 +19,7 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro usages adjusted
 #   fd  Apr 08: typo
+#   fd  May 19: link adjustments for old commands
 #
 ################################################################################
 
@@ -198,16 +199,16 @@ This is cell #3
 
    !item (!B)New switches:(!b) (!nl)
          !begin_blist
-         !item [(!KW [use_short_descriptions])]
+         !item [!use_short_descriptions]
                Outputs all description environments ""compressed"" (which means without additional empty lines between paragraphs).
-         !item [(!KW [use_short_enumerates])]
+         !item [!use_short_enumerates]
                Outputs all enumerate environments ""compressed"" (which means without additional empty lines between paragraphs).
-         !item [(!KW [use_short_itemizes])]
+         !item [!use_short_itemizes]
                Outputs all itemize environments ""compressed"" (which means without additional empty lines between paragraphs).
-         !item [(!KW [use_short_lists])]
+         !item [!use_short_lists]
                Outputs all list environments ""compressed"" (which means without additional empty lines between paragraphs).
          !end_blist
-         These four new switches offer to make much more distinctions on environment formatting, compared to the general switch (!KW [use_short_envs]).
+         These four new switches offer to make much more distinctions on environment formatting, compared to the general switch (!B)!use_short_envs(!b).
          But if you use this general switch, the four switches mentioned above are without effect, being subsets of it.
 
    !item (!B)New command:(!b) (!nl)

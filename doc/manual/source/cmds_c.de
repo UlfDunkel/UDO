@@ -28,6 +28,7 @@
 #               - OldKeywords removed -> cmds__old.de
 #               - tiny corrections
 #   ggs Mar 21: Wrong syntax in code_source, code_target
+#   fd  May 19: new chapter 'compressed'
 #
 ################################################################################
 
@@ -350,6 +351,43 @@ jeweilige Format Kommentare beherrscht.
 (!KW [begin_comment]), (!KW [end_comment]), (!KW [cinclude]), (!KW [use_comments]), (!link [Umgebungen] [Umgebungen])
 
 !end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [compressed])
+!html_name  cmd_compressed
+
+Eine Umgebung ""komprimiert"" ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/compressed(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter zusammen mit dem Befehl zum
+Beginnen einer Umgebung angegeben, wird diese
+Umgebung in komprimierter Form ausgegeben, sprich es
+werden zwischen den Aufzählungspunkten keine
+zusätzlichen Zwischenräume erzeugt. Das Beispiel
+zeigt, wie man eine ""komprimierte"" Itemize-Umgebung erzeugen kann.
+
+!item [(!EXISTSSINCE)] 7.01
+
+!item [(!SEEALSO)]
+(!KW [begin_itemize]), (!KW [begin_enumerate]), (!KW [begin_description]), (!KW [use_compressed_envs])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!begin_itemize !compressed
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 

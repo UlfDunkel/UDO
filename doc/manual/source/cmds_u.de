@@ -35,6 +35,7 @@
 #               - OldKeywords removed -> cmds__old.de
 #   fd  Mar 05: - old environment attribute short changed: -> !compressed
 #               - !use_short_... (for environments) changed: -> !use_compressed_...
+#   fd  May 19: "short" -> "compressed"
 #
 ################################################################################
 
@@ -853,8 +854,8 @@ Dieser Befehl wird derzeit nur für HTML und RTF unterstützt.
 
 # = = = = =
 
-!begin_node (!kw [use_short_descriptions])
-!html_name  cmd_use_short_descriptions
+!begin_node (!kw [use_compressed_descriptions])
+!html_name  cmd_use_compressed_descriptions
 
 ""Komprimierte"" Description-Umgebungen benutzen.
 
@@ -862,19 +863,19 @@ Dieser Befehl wird derzeit nur für HTML und RTF unterstützt.
 
 !item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/use_short_descriptions [(!FORMAT)](!t)
+!item [(!SYNTAX)] (!T)!/use_compressed_descriptions [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, werden
 alle Description-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
 Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
 
-Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_descriptions]) als Teilmenge davon keine Wirkung mehr.
+Falls (!KW [use_compressed_envs]) ebenfalls benutzt wird, hat (!code [use_compressed_descriptions]) als Teilmenge davon keine Wirkung mehr.
 
 !item [(!EXISTSSINCE)] Version~7.00
 
 !item [(!SEEALSO)]
-(!KW [begin_description]), (!KW [short]), (!KW [use_short_envs]), (!KW [use_short_tocs]), (!link [Umgebungen] [Umgebungen])
+(!KW [begin_description]), (!KW [compressed]), (!KW [use_compressed_envs]), (!KW [use_compressed_tocs]), (!link [Umgebungen] [Umgebungen])
 
 !end_xlist
 
@@ -945,8 +946,8 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_descr
 
 # = = = = =
 
-!begin_node (!kw [use_short_enumerates])
-!html_name  cmd_use_short_enumerates
+!begin_node (!kw [use_compressed_enumerates])
+!html_name  cmd_use_compressed_enumerates
 
 ""Komprimierte"" Enumerate-Umgebungen benutzen.
 
@@ -954,19 +955,19 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_descr
 
 !item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/use_short_enumerates [(!FORMAT)](!t)
+!item [(!SYNTAX)] (!T)!/use_compressed_enumerates [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, werden
 alle Enumerate-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
 Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
 
-Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_enumerates]) als Teilmenge davon keine Wirkung mehr.
+Falls (!KW [use_compressed_envs]) ebenfalls benutzt wird, hat (!code [use_compressed_enumerates]) als Teilmenge davon keine Wirkung mehr.
 
 !item [(!EXISTSSINCE)] Version~7.00
 
 !item [(!SEEALSO)]
-(!KW [begin_enumerate]), (!KW [short]), (!KW [use_short_envs]), (!KW [use_short_tocs]), (!link [Umgebungen] [Umgebungen])
+(!KW [begin_enumerate]), (!KW [compressed]), (!KW [use_compressed_envs]), (!KW [use_compressed_tocs]), (!link [Umgebungen] [Umgebungen])
 
 !end_xlist
 
@@ -1017,8 +1018,8 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_enume
 
 # = = = = =
 
-!begin_node (!kw [use_short_envs])
-!html_name  cmd_use_short_envs
+!begin_node (!kw [use_compressed_envs])
+!html_name  cmd_use_compressed_envs
 
 ""Komprimierte"" Umgebungen benutzen.
 
@@ -1026,7 +1027,7 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_enume
 
 !item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/use_short_envs [(!FORMAT)](!t)
+!item [(!SYNTAX)] (!T)!/use_compressed_envs [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, werden
@@ -1037,7 +1038,7 @@ Beispiel würde dieser Schalter für das ASCII-Format gesetzt.
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~15
 
 !item [(!SEEALSO)]
-(!KW [begin_blist]), (!KW [begin_description]), (!KW [begin_enumerate]), (!KW [begin_ilist]), (!KW [begin_itemize]), (!KW [begin_tlist]), (!KW [begin_xlist]), (!KW [short]), (!KW [use_short_descriptions]), (!KW [use_short_enumerates]), (!KW [use_short_itemizes]), (!KW [use_short_lists]), (!KW [use_short_tocs]), (!link [Umgebungen] [Umgebungen])
+(!KW [begin_blist]), (!KW [begin_description]), (!KW [begin_enumerate]), (!KW [begin_ilist]), (!KW [begin_itemize]), (!KW [begin_tlist]), (!KW [begin_xlist]), (!KW [compressed]), (!KW [use_compressed_descriptions]), (!KW [use_compressed_enumerates]), (!KW [use_compressed_itemizes]), (!KW [use_compressed_lists]), (!KW [use_compressed_tocs]), (!link [Umgebungen] [Umgebungen])
 
 !end_xlist
 
@@ -1052,8 +1053,8 @@ Beispiel würde dieser Schalter für das ASCII-Format gesetzt.
 
 # = = = = =
 
-!begin_node (!kw [use_short_itemizes])
-!html_name  cmd_use_short_itemizes
+!begin_node (!kw [use_compressed_itemizes])
+!html_name  cmd_use_compressed_itemizes
 
 ""Komprimierte"" Itemize-Umgebungen benutzen.
 
@@ -1061,19 +1062,19 @@ Beispiel würde dieser Schalter für das ASCII-Format gesetzt.
 
 !item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/use_short_itemizes [(!FORMAT)](!t)
+!item [(!SYNTAX)] (!T)!/use_compressed_itemizes [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, werden
 alle Itemize-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
 Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
 
-Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_itemizes]) als Teilmenge davon keine Wirkung mehr.
+Falls (!KW [use_compressed_envs]) ebenfalls benutzt wird, hat (!code [use_compressed_itemizes]) als Teilmenge davon keine Wirkung mehr.
 
 !item [(!EXISTSSINCE)] Version~7.00
 
 !item [(!SEEALSO)]
-(!KW [begin_itemize]), (!KW [short]), (!KW [use_short_envs]), (!KW [use_short_tocs]), (!link [Umgebungen] [Umgebungen])
+(!KW [begin_itemize]), (!KW [compressed]), (!KW [use_compressed_envs]), (!KW [use_compressed_tocs]), (!link [Umgebungen] [Umgebungen])
 
 !end_xlist
 
@@ -1124,8 +1125,8 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_itemi
 
 # = = = = =
 
-!begin_node (!kw [use_short_lists])
-!html_name  cmd_use_short_lists
+!begin_node (!kw [use_compressed_lists])
+!html_name  cmd_use_compressed_lists
 
 ""Komprimierte"" Listen-Umgebungen benutzen.
 
@@ -1133,19 +1134,19 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_itemi
 
 !item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/use_short_lists [(!FORMAT)](!t)
+!item [(!SYNTAX)] (!T)!/use_compressed_lists [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, werden
 alle Listen-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
 Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
 
-Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_lists]) als Teilmenge davon keine Wirkung mehr.
+Falls (!KW [use_compressed_envs]) ebenfalls benutzt wird, hat (!code [use_compressed_lists]) als Teilmenge davon keine Wirkung mehr.
 
 !item [(!EXISTSSINCE)] Version~7.00
 
 !item [(!SEEALSO)]
-(!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!KW [begin_xlist]), (!KW [short]), (!KW [use_short_envs]), (!KW [use_short_tocs]), (!link [Umgebungen] [Umgebungen])
+(!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!KW [begin_xlist]), (!KW [compressed]), (!KW [use_compressed_envs]), (!KW [use_compressed_tocs]), (!link [Umgebungen] [Umgebungen])
 
 !end_xlist
 
@@ -1217,8 +1218,8 @@ Falls (!KW [use_short_envs]) ebenfalls benutzt wird, hat (!code [use_short_lists
 
 # = = = = =
 
-!begin_node (!kw [use_short_tocs])
-!html_name  cmd_use_short_tocs
+!begin_node (!kw [use_compressed_tocs])
+!html_name  cmd_use_compressed_tocs
 
 Kurze Inhaltsverzeichnisse benutzen.
 
@@ -1226,7 +1227,7 @@ Kurze Inhaltsverzeichnisse benutzen.
 
 !item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/use_short_tocs [(!FORMAT)] !/depth (!VALUE)(!t)
+!item [(!SYNTAX)] (!T)!/use_compressed_tocs [(!FORMAT)] !/depth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
 Wird dieses Kommando im Vorspann benutzt, wird für die angegebenen
@@ -1239,7 +1240,7 @@ der Inhaltsverzeichnisse bei allen Ausgabeformaten eingeschränkt.
 #!item [Existiert wieder seit:] Release~6 Patchlevel~5
 
 !item [(!SEEALSO)]
-(!KW [depth]), (!KW [tableofcontents]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse]), (!KW [use_short_envs]), (!link [Umgebungen] [Umgebungen])
+(!KW [depth]), (!KW [tableofcontents]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse]), (!KW [use_compressed_envs]), (!link [Umgebungen] [Umgebungen])
 
 !end_xlist
 

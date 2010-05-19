@@ -26,7 +26,7 @@
 ################################################################################
 
 !macro RELEASE  7
-!macro VERSION  (!RELEASE).01 beta (rev. 1058)
+!macro VERSION  (!RELEASE).01 beta (rev. 1068)
 
 !docinfo [version]  (!VERSION)
 !docinfo [date]     (!today)

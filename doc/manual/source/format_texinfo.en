@@ -16,6 +16,8 @@
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 08: quotation changed
 #   fd  Jun 10: using macro (!file [])
+# 2010:
+#   fd  May 19: "short" -> "compressed"
 #
 ################################################################################
 
@@ -45,8 +47,8 @@ original chapter names.
 
 !item [Why doesn't Texinfo display the environments in ""compressed"" form?] ~
 
-Using Texinfo it's impossible to smaller the paragraph separation. Thus the
-parameter (!KW [short]) is useless when converting to Texinfo
+Using Texinfo it's impossible to compress the paragraph separation. Thus the
+parameter (!KW [compressed]) is useless when converting to Texinfo.
 
 !end_description
 
