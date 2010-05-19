@@ -28,7 +28,8 @@
 #               - OldKeywords removed -> cmds__old.de
 #               - tiny corrections
 #   ggs Mar 21: Wrong syntax in code_source, code_target
-#   fd  May 19: new chapter 'compressed'
+#   fd  May 19: - new chapter 'compressed'
+#   fd  May 19: - more links to "not_compressed"
 #
 ################################################################################
 
@@ -378,14 +379,30 @@ zeigt, wie man eine ""komprimierte"" Itemize-Umgebung erzeugen kann.
 !item [(!EXISTSSINCE)] 7.01
 
 !item [(!SEEALSO)]
-(!KW [begin_itemize]), (!KW [begin_enumerate]), (!KW [begin_description]), (!KW [use_compressed_envs])
+(!KW [not_compressed]), 
+
+(!KW [begin_description]), 
+(!KW [begin_enumerate]), 
+(!KW [begin_itemize]), 
+
+(!KW [use_compressed_descriptions]), 
+(!KW [use_compressed_enumerates]), 
+(!KW [use_compressed_envs]), 
+(!KW [use_compressed_itemizes]), 
+(!KW [use_compressed_lists])
 
 !end_xlist
 
 (!EXAMPLE)
 (!EXAMPLE_BEGIN)
 !begin_verbatim
-!begin_itemize !compressed
+# preamble
+# !use_compressed_envs
+
+# document
+# [...]
+!begin_itemize !not_compressed
+# [...]
 !end_verbatim
 (!EXAMPLE_END)
 

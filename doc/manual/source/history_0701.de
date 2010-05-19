@@ -25,6 +25,7 @@
 #               - ISO encodings completed
 #   fd  May 18: - !html_ignore_8bit no longer requires a charset string
 #               - UTF-8 output no longer crashes UDO
+#   fd  May 19: environment commands resorted alphabetically
 #
 ################################################################################
 
@@ -92,16 +93,17 @@
       !item Das Umgebung-Attribut ""(!kw [short])"" wurde umbenannt zu ""(!kw [compressed])"" 
             weil wir glauben, dass dieser Begriff besser beschreibt, was dieses Attribut wirklich macht: 
             Es ändert das Umgebung-Layout von ""splendid"" (großzügig) zu ""compressed"" (kompress/kompakt). 
-            Daher haben wir verschiedene Kommandos umbenannt (die alten Kommandos werden noch eine Zeit lang unterstützt):
+            Daher haben wir verschiedene Kommandos umbenannt:
             !begin_table [l|l] !hline
             (!B)alt(!b) !! (!B)neu(!b)
             (!kw [short])                  !! (!kw [compressed])
-            (!kw [use_short_envs])         !! (!kw [use_compressed_envs])
             (!kw [use_short_descriptions]) !! (!kw [use_compressed_descriptions])
             (!kw [use_short_enumerates])   !! (!kw [use_compressed_enumerates])
+            (!kw [use_short_envs])         !! (!kw [use_compressed_envs])
             (!kw [use_short_itemizes])     !! (!kw [use_compressed_itemizes])
             (!kw [use_short_lists])        !! (!kw [use_compressed_lists])
             !end_table
+            (!IMPORTANT) Die alten Kommandos werden nicht mehr unterstützt!
       
       !item Neues Umgebung-Attribut (!code [!not_compressed]): (!nl)
             Dieses neue Umgebung-Attribut wurde eingeführt, 

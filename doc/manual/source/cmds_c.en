@@ -26,7 +26,8 @@
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #   ggs Mar 21: Wrong syntax in code_source, code_target
-#   fd  May 19: new chapter 'compressed'
+#   fd  May 19: - new chapter 'compressed'
+#   fd  May 19: - more links to "not_compressed"
 #
 ################################################################################
 
@@ -354,15 +355,35 @@ If you use this switch together with environments this specific
 environment will be output without additional vertical space. The
 example shows how to output a ""compressed"" itemize environment.
 
-!item [(!EXAMPLE)]
-(!T)!/begin_itemize !/compressed(!t)
-
 !item [(!EXISTSSINCE)] 7.01
 
 !item [(!SEEALSO)]
-(!KW [begin_itemize]), (!KW [begin_enumerate]), (!KW [begin_description]), (!KW [use_compressed_envs])
+(!KW [not_compressed]), 
+
+(!KW [begin_description]), 
+(!KW [begin_enumerate]), 
+(!KW [begin_itemize]), 
+
+(!KW [use_compressed_descriptions]), 
+(!KW [use_compressed_enumerates]), 
+(!KW [use_compressed_envs]), 
+(!KW [use_compressed_itemizes]), 
+(!KW [use_compressed_lists])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+# preamble
+# !use_compressed_envs
+
+# document
+# [...]
+!begin_itemize !not_compressed
+# [...]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 

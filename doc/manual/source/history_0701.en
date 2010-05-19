@@ -26,6 +26,7 @@
 #   fd  Mar 09: translated
 #   fd  May 18: - !html_ignore_8bit no longer requires a charset string
 #               - UTF-8 output no longer crashes UDO
+#   fd  May 19: environment commands resorted alphabetically
 #
 ################################################################################
 
@@ -93,16 +94,17 @@
       !item The environment attribute ""(!kw [short])"" has been changed into ""(!kw [compressed])"" 
             because we believe this term describes much better what this attribute really does: 
             It changes the environment layout from ""splendid"" to ""compressed"".            
-            Therefore, we have renamed several commands (the old ones being still supported):
+            Therefore, we have renamed several commands:
             !begin_table [l|l] !hline
             (!B)old(!b) !! (!B)new(!b)
             (!kw [short])                  !! (!kw [compressed])
-            (!kw [use_short_envs])         !! (!kw [use_compressed_envs])
             (!kw [use_short_descriptions]) !! (!kw [use_compressed_descriptions])
             (!kw [use_short_enumerates])   !! (!kw [use_compressed_enumerates])
+            (!kw [use_short_envs])         !! (!kw [use_compressed_envs])
             (!kw [use_short_itemizes])     !! (!kw [use_compressed_itemizes])
             (!kw [use_short_lists])        !! (!kw [use_compressed_lists])
             !end_table
+            (!IMPORTANT) The old commands are no longer supported!
       
       !item New environment attribute (!code [!not_compressed]): (!nl)
             This new environment attribute has been introduced, 

@@ -32,7 +32,8 @@
 #                   use_short_itemizes, use_short_lists
 #   fd  Mar 05: - old environment attribute short changed: -> !compressed
 #               - !use_short_... (for environments) changed: -> !use_compressed_...
-#   fd  May 19: "short" -> "compressed"
+#   fd  May 19: - "short" -> "compressed"
+#               - more links to "not_compressed"
 #
 ################################################################################
 
@@ -768,7 +769,15 @@ Falls (!KW [use_compressed_envs]) ebenfalls benutzt wird, hat (!code [use_compre
 !item [(!EXISTSSINCE)] Version~7.00
 
 !item [(!SEEALSO)]
-(!KW [begin_description]), (!KW [compressed]), (!KW [use_compressed_envs]), (!KW [use_compressed_tocs]), (!link [Environments] [Environments])
+(!KW [begin_description]), 
+
+(!KW [compressed]), 
+(!KW [not_compressed]), 
+
+(!KW [use_compressed_envs]), 
+(!KW [use_compressed_tocs]), 
+
+(!link [Environments] [Environments])
 
 !end_xlist
 
@@ -860,7 +869,15 @@ Falls (!KW [use_compressed_envs]) ebenfalls benutzt wird, hat (!code [use_compre
 !item [(!EXISTSSINCE)] Version~7.00
 
 !item [(!SEEALSO)]
-(!KW [begin_enumerate]), (!KW [compressed]), (!KW [use_compressed_envs]), (!KW [use_compressed_tocs]), (!link [Environments] [Environments])
+(!KW [begin_enumerate]), 
+
+(!KW [compressed]), 
+(!KW [not_compressed]), 
+
+(!KW [use_compressed_envs]), 
+(!KW [use_compressed_tocs]), 
+
+(!link [Environments] [Environments])
 
 !end_xlist
 
@@ -934,7 +951,25 @@ without additional horizontal space. The example shows how to use
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~15
 
 !item [(!SEEALSO)]
-(!KW [begin_itemize]), (!KW [begin_enumerate]), (!KW [begin_description]), (!KW [begin_xlist]), (!KW [compressed]), (!KW [use_compressed_tocs]), (!link [Environments] [Environments])
+(!KW [begin_blist]), 
+(!KW [begin_description]), 
+(!KW [begin_enumerate]), 
+(!KW [begin_ilist]), 
+(!KW [begin_itemize]), 
+(!KW [begin_tlist]), 
+(!KW [begin_xlist]), 
+
+(!KW [compressed]), 
+(!KW [not_compressed]), 
+
+(!KW [use_compressed_descriptions]), 
+(!KW [use_compressed_enumerates]), 
+(!KW [use_compressed_envs]), 
+(!KW [use_compressed_itemizes]), 
+(!KW [use_compressed_lists]), 
+(!KW [use_compressed_tocs]), 
+
+(!link [Environments] [Environments])
 
 !end_xlist
 
@@ -963,7 +998,15 @@ Falls (!KW [use_compressed_envs]) ebenfalls benutzt wird, hat (!code [use_compre
 !item [(!EXISTSSINCE)] Version~7.00
 
 !item [(!SEEALSO)]
-(!KW [begin_itemize]), (!KW [compressed]), (!KW [use_compressed_envs]), (!KW [use_compressed_tocs]), (!link [Environments] [Environments])
+(!KW [begin_itemize]), 
+
+(!KW [compressed]), 
+(!KW [not_compressed]), 
+
+(!KW [use_compressed_envs]), 
+(!KW [use_compressed_tocs]), 
+
+(!link [Environments] [Environments])
 
 !end_xlist
 
@@ -1035,7 +1078,18 @@ Falls (!KW [use_compressed_envs]) ebenfalls benutzt wird, hat (!code [use_compre
 !item [(!EXISTSSINCE)] Version~7.00
 
 !item [(!SEEALSO)]
-(!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!KW [begin_xlist]), (!KW [compressed]), (!KW [use_compressed_envs]), (!KW [use_compressed_tocs]), (!link [Environments] [Environments])
+(!KW [begin_blist]), 
+(!KW [begin_ilist]), 
+(!KW [begin_tlist]), 
+(!KW [begin_xlist]), 
+
+(!KW [compressed]), 
+(!KW [not_compressed]), 
+
+(!KW [use_compressed_envs]), 
+(!KW [use_compressed_tocs]), 
+
+(!link [Environments] [Environments])
 
 !end_xlist
 

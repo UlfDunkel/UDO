@@ -24,7 +24,8 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
-#   fd  May 19: "short" -> "compressed"
+#   fd  May 19: - "short" -> "compressed"
+#               - more links to "not_compressed"
 #
 ################################################################################
 
@@ -291,7 +292,16 @@ Text, der dann hier in eckigen Klammern angegeben
 wird, wird in Fettschrift ausgegeben, sofern das Ausgabeformat Fettschrift unterstützt.
 
 !item [(!SEEALSO)]
-(!KW [end_description]), (!KW [item]), (!link [Beschreibungen] [Beschreibungen]), (!KW [compressed]), (!KW [use_compressed_envs])
+(!KW [end_description]), 
+
+(!KW [item]), 
+
+(!KW [compressed]), 
+(!KW [not_compressed]), 
+
+(!KW [use_compressed_envs]), 
+
+(!link [Beschreibungen] [Beschreibungen])
 
 !end_xlist
 
@@ -343,7 +353,16 @@ Aufzählungspunkte einer (!nolink [enumerate-Umgebung]) werden mit
 (!KW [item]) eingeleitet und mit alphanumerischen Zeichen markiert.
 
 !item [(!SEEALSO)]
-(!KW [end_enumerate]), (!KW [item]), (!link [Nummerierungen] [Nummerierungen]), (!KW [compressed]), (!KW [use_compressed_envs])
+(!KW [end_enumerate]), 
+
+(!KW [item]), 
+
+(!KW [compressed]), 
+(!KW [not_compressed]), 
+
+(!KW [use_compressed_envs]), 
+
+(!link [Nummerierungen] [Nummerierungen])
 
 !end_xlist
 
@@ -475,7 +494,16 @@ Aufzählungspunkte, die mit (!KW [item]) eingeleitet werden,
 werden mit Punkten und Strichen markiert.
 
 !item [(!SEEALSO)]
-(!KW [end_itemize]), (!KW [item]), (!link [Aufzählungen] [Aufzählungen]), (!KW [compressed]), (!KW [use_compressed_envs])
+(!KW [end_itemize]), 
+
+(!KW [item]), 
+
+(!KW [compressed]), 
+(!KW [not_compressed]), 
+
+(!KW [use_compressed_envs]),
+
+(!link [Aufzählungen] [Aufzählungen])
 
 !end_xlist
 
@@ -945,7 +973,20 @@ die man mit (!KW [item] [[~!!]]) angibt, werden normal
 dargestellt.
 
 !item [(!SEEALSO)]
-(!KW [end_xlist]), (!KW [item]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!link [Listen] [Listen]), (!KW [compressed]), (!KW [use_compressed_envs])
+(!KW [end_xlist]), 
+
+(!KW [item]), 
+
+(!KW [begin_blist]), 
+(!KW [begin_ilist]), 
+(!KW [begin_tlist]), 
+
+(!KW [compressed]), 
+(!KW [not_compressed]), 
+
+(!KW [use_compressed_envs]), 
+
+(!link [Listen] [Listen])
 
 !end_xlist
 
