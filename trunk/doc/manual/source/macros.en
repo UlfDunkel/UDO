@@ -51,6 +51,14 @@
 !macro OS             (!link [&lt;system&gt;] [Operating systems])
 !macro CHARSET        (!link [&lt;charset&gt;] [Code])
 
+!macro CHAR           &lt;char&gt;
+!macro FILE           &lt;file&gt;
+!macro LINK           &lt;link&gt;
+!macro NAME           &lt;name&gt;
+!macro TEXT           &lt;text&gt;
+!macro VALUE          &lt;value&gt;
+!macro WORD           &lt;word&gt;
+
 # other macro formattings
 # ------------------------------------------------------------------------------
 !else
@@ -64,10 +72,7 @@
 !macro LANGUAGE       (!link [<language>] [Language])
 !macro OS             (!link [<system>] [Operating systems])
 !macro CHARSET        (!link [<charset>] [Code])
-!endif
 
-# general macro formattings
-# ------------------------------------------------------------------------------
 !macro CHAR           <char>
 !macro FILE           <file>
 !macro LINK           <link>
@@ -75,6 +80,10 @@
 !macro TEXT           <text>
 !macro VALUE          <value>
 !macro WORD           <word>
+!endif
+
+# general macro formattings
+# ------------------------------------------------------------------------------
 
 
 # language-dependent text parts for the UDO history in history.ui (in alphabetical order)
@@ -92,7 +101,7 @@
 !macro COMMANDABBREV   command~abbreviation
 !macro COMMANDOBLIGATE obligate~command
 !macro DESCRIPTION     Description:
-!macro EXAMPLE         Example:
+!macro EXAMPLE         (!nolink [Example:])
 !macro EXAMPLE2        Examples:
 !macro EXISTSSINCE     Exists since:
 !macro EXISTEDUNTIL    Existed until:

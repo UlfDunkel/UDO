@@ -288,6 +288,7 @@ GLOBAL void init_lang(void)
       recode(lang.html_start,  iEncodingTarget);
       recode(lang.translator,  iEncodingTarget);
       recode(lang.distributor, iEncodingTarget);
+      recode(lang.degree,      iEncodingTarget);
    }
 
    iEncodingSource = iEncBuf;

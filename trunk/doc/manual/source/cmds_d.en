@@ -31,7 +31,8 @@
 #   fd  Mar 02: chapter cmd_docinfo much enhanced
 #   fd  Mar 03: cmd_docinfo: deprecated attributes (webmaster...) updated
 #   fd  Mar 05: more adjustments for !docinfo [webmaster...]
-#   fd  May 19: "short" -> "compressed"
+#   fd  May 19: - "short" -> "compressed"
+#               - cmd_deg() enhanced
 #
 ################################################################################
 
@@ -88,10 +89,7 @@ Output the (!deg) symbol.
 !item [(!DESCRIPTION)]
 This placeholder will be replaced by the degree symbol if
 the destination format supports it. If it doesn't UDO will replace
-this placeholder by ""(!code [Grad])"".
-
-!item [(!EXAMPLE)]
-(!code [(!/deg!)]) becomes (!deg).
+this placeholder by the localized string for ""(!code [degree])"".
 
 !item [(!EXISTSSINCE)] Version 6.5.8
 
@@ -99,6 +97,15 @@ this placeholder by ""(!code [Grad])"".
 Defined macros
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+10~(!deg)C
+!end_verbatim
+(!EXAMPLE_AFTER)
+10~(!deg)C
+(!EXAMPLE_END)
 
 !end_node
 
@@ -190,7 +197,7 @@ Set document information.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/docinfo [(!NAME)] (!TEXT)(!t)
+!item [(!SYNTAX)] (!T) !\docinfo [(!NAME)] (!TEXT)|(!FILE) (!t)
 
 !item [(!DESCRIPTION)]
 !item [Description:]
@@ -277,18 +284,17 @@ Bei der HTML-Ausgabe allerdings nur, wenn in einzelnen Dateien nicht
 using [title] and [program]).
 
 !item [robots]
-""(!TEXT)"" entspricht einer der Robots-Anweisungen, wie sie für Suchmaschinen benutzt werden.
-Erlaubt sind "none", "noindex", "index", "nofollow" und "follow".
+""(!TEXT)"" equals a robots command which is evaluated by search engines.
+Valid commands are e.g. "none", "noindex", "index", "nofollow", and "follow".
 
 !item [appletitle]
-Wird für HTML-Apple-Help benötigt und beschreibt den Titel der Hilfe.
+Required for HTML Apple Help; it describes the title of the help book.
 
 !item [appleicon]
-Wird für HTML-Apple-Help benötigt. Damit wird das Icon angegeben, welches der Apple Help Viewer
-anzeigen soll.
+Required for HTML Apple Help; it defines the icon which should be shown by Apple Help Viewer.
 
 !item [domain_name|domain_link|contact_name|contact_link]
-Werden alle diese Kontaktdaten (in vier einzelnen Zeilen!) angegeben, erzeugt UDO standardmäßig am Ende einer jeden Seite Folgende Kontektdaten-Fußzeile:
+When you use all these contact data (in four separate lines!), UDO creates the following contact data footer in each page:
 
 (!EXAMPLE_BEFORE)
 !ifdest [asc,stg]
@@ -301,7 +307,7 @@ Werden alle diese Kontaktdaten (in vier einzelnen Zeilen!) angegeben, erzeugt UD
 !docinfo [contact_link] !\
          mailto:webmaster@udo-open-source.org
 !docinfo [contact_name] !\#
-         E-Mail an den Webmaster
+         Email to the webmaster
 
 # Dokument
 !begin_document
@@ -314,7 +320,7 @@ Werden alle diese Kontaktdaten (in vier einzelnen Zeilen!) angegeben, erzeugt UD
 !docinfo [domain_link]    http://www.udo-open-source.org/
 !docinfo [domain_name]    UDO OpenSource
 !docinfo [contact_link]   mailto:webmaster@udo-open-source.org
-!docinfo [contact_name]   E-Mail an den Webmaster
+!docinfo [contact_name]   Email to the webmaster
 
 # Dokument
 !begin_document
@@ -323,11 +329,11 @@ Werden alle diese Kontaktdaten (in vier einzelnen Zeilen!) angegeben, erzeugt UD
 !end_verbatim
 !endif
 (!EXAMPLE_AFTER)
-Copyright (!copyright) (!url [UDO OpenSource] [http://www.udo-open-source.org/]) ((!url [E-Mail an den Webmaster] [mailto:webmaster@udo-open-source.org])) (!nl)
-Letzte Aktualisierung am (!today)
+(!nolink [Copyright]) (!copyright) (!url [UDO OpenSource] [http://www.udo-open-source.org/]) ((!url [Email to the webmaster] [mailto:webmaster@udo-open-source.org])) (!nl)
+Last updated on (!today)
 (!EXAMPLE_END)
 
-Werden weniger Informationen angegeben, so werden die Kontaktdaten in der Fußzeile entsprechend angepasst. Nachfolgend einige weitere Beispiele.
+If you define less information, the contact data in the footer are adjusted accordingly. Here are some more examples.
 
 (!EXAMPLE_BEFORE)
 !begin_verbatim
@@ -341,15 +347,15 @@ Werden weniger Informationen angegeben, so werden die Kontaktdaten in der Fußzei
 !end_document
 !end_verbatim
 (!EXAMPLE_AFTER)
-Copyright (!copyright) (!url [http://www.mydomain.net/] [http://www.mydomain.net/]) ((!url [me@mydomain.net] [mailto:me@mydomain.net])) (!nl)
-Letzte Aktualisierung am (!today)
+(!nolink [Copyright]) (!copyright) (!url [http://www.mydomain.net/] [http://www.mydomain.net/]) ((!url [me@mydomain.net] [mailto:me@mydomain.net])) (!nl)
+Last updated on (!today)
 (!EXAMPLE_END)
 
 (!EXAMPLE_BEFORE)
 !begin_verbatim
 # Vorspann
-!docinfo [domain_name]    Meine Firma
-!docinfo [contact_name]   Mein Name
+!docinfo [domain_name]    My Company
+!docinfo [contact_name]   My Name
 
 # Dokument
 !begin_document
@@ -357,13 +363,13 @@ Letzte Aktualisierung am (!today)
 !end_document
 !end_verbatim
 (!EXAMPLE_AFTER)
-Copyright (!copyright) Meine Firma (Mein Name) (!nl)
-Letzte Aktualisierung am (!today)
+(!nolink [Copyright]) (!copyright) My Company (My Name) (!nl)
+Last updated on (!today)
 (!EXAMPLE_END)
 
-Das zuletzt gezeigte Beispiel zeigt, dass nur die Parameter mit (!code [url]) im Parameternamen tatsächlich anklickbare Links ergeben.
+The last shown example demonstrates that only parameters with (!code [link]) in the parameter name create real clickable links.
 
-Aber es ist auch möglich, als Kontaktlink keine echte E-Mail-Adresse, sondern einen URL anzugeben, der zu einem Kontaktformular führt. Denn mittlerweile ist es nicht mehr unbedingt erwünscht, dass E-Mail-Adressen im Klartext in Webseiten zu sehen sind. Sonst sind sie für Roboter, die E-Mail-Adressen zum Spammen suchen, eine leichte Beute.
+Chances are that you don't like to give a real email address as contact link, but rather an URL which leads to a contact form. Today it is no longer desired to show vaild email addresses in web pages. They can easily be found by robots and harvesters which are looking for email addresses for junk.
 
 (!EXAMPLE_BEFORE)
 !ifdest [asc,stg]
@@ -396,8 +402,8 @@ Aber es ist auch möglich, als Kontaktlink keine echte E-Mail-Adresse, sondern ei
 !end_verbatim
 !endif
 (!EXAMPLE_AFTER)
-Copyright (!copyright) (!url [Meine Domäne] [http://www.mydomain.net/]) ((!url [Kontakt] [http://www.mydomain.net/contact.php])) (!nl)
-Letzte Aktualisierung am (!today)
+(!nolink [Copyright]) (!copyright) (!url [My Domain] [http://www.mydomain.net/]) ((!url [Contact] [http://www.mydomain.net/contact.php])) (!nl)
+Last updated on (!today)
 (!EXAMPLE_END)
 
 (!HINT) If you don't specify

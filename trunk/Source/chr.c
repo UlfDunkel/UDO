@@ -112,7 +112,8 @@
 *    fd  May 18: - auto_quote_chars() cancels on UTF-8
 *                - recode() simplified
 *                - new: chr_codepage_charset_name()
-*    fd  May 19: auto_quote_chars() debugged
+*    fd  May 19: - auto_quote_chars() debugged
+*                - (!deg) is replaced by localized string lang.degree, if not supported
 *
 ******************************************|************************************/
 
@@ -3381,7 +3382,10 @@ char *s)  /* ^ string */
       qreplace_all(s, "(!pound)", 8, "GBP",   3);
       qreplace_all(s, "(!reg)",   6, "(r)",   3);
       qreplace_all(s, "(!tm)",    5, "(tm)",  4);
-      qreplace_all(s, "(!deg)",   6, " Grad", 5);
+
+      if (lang.degree != NULL)
+         replace_all(s, "(!deg)", lang.degree);
+
       specials2ascii(s);
       texvar2ascii(s);
       break;
@@ -3397,7 +3401,10 @@ char *s)  /* ^ string */
       qreplace_all(s, "(!pound)",      8, "GBP",   3);
       qreplace_all(s, "(!reg)",        6, "(r)",   3);
       qreplace_all(s, "(!tm)",         5, "(tm)",  4);
-      qreplace_all(s, "(!deg)",        6, " Grad", 5);
+
+      if (lang.degree != NULL)
+         replace_all(s, "(!deg)", lang.degree);
+
       specials2info(s);
       texvar2ascii(s);
       break;
@@ -3416,7 +3423,10 @@ char *s)  /* ^ string */
       qreplace_all(s, "(!pound)",      8, "GBP",   3);
       qreplace_all(s, "(!reg)",        6, "(r)",   3);
       qreplace_all(s, "(!tm)",         5, "(tm)",  4);
-      qreplace_all(s, "(!deg)",        6, " Grad", 5);
+
+      if (lang.degree != NULL)
+         replace_all(s, "(!deg)", lang.degree);
+
       specials2ascii(s);
       texvar2ascii(s);
       break;
@@ -3462,7 +3472,10 @@ char *s)  /* ^ string */
       qreplace_all(s, "(!pound)", 8, "GBP",   3);
       qreplace_all(s, "(!reg)",   6, "(r)",   3);
       qreplace_all(s, "(!tm)",    5, "(tm)",  4);
-      qreplace_all(s, "(!deg)",   6, " Grad", 5);
+
+      if (lang.degree != NULL)
+         replace_all(s, "(!deg)", lang.degree);
+
       specials2ascii(s);
       texvar2ascii(s);
       break;
@@ -3478,7 +3491,10 @@ char *s)  /* ^ string */
       qreplace_all(s, "(!pound)", 8, "GBP",       3);
       qreplace_all(s, "(!reg)",   6, "(r)",       3);
       qreplace_all(s, "(!tm)",    5, "(tm)",      4);
-      qreplace_all(s, "(!deg)",   6, " Grad",     5);
+
+      if (lang.degree != NULL)
+         replace_all(s, "(!deg)", lang.degree);
+
       specials2ipf(s);
       texvar2ascii(s);
       break;
@@ -3566,7 +3582,10 @@ char *s)  /* ^ string */
       qreplace_all(s, "(!pound)", 8, "GBP",      3);
       qreplace_all(s, "(!reg)",   6, "(r)",      3);
       qreplace_all(s, "(!tm)",    5, "(tm)",     4);
-      qreplace_all(s, "(!deg)",   6, " Grad",    5);
+
+      if (lang.degree != NULL)
+         replace_all(s, "(!deg)", lang.degree);
+
       specials2ascii(s);
       texvar2ascii(s);
       break;
@@ -3580,7 +3599,10 @@ char *s)  /* ^ string */
       qreplace_all(s, "(!pound)", 8, "GBP",            3);
       qreplace_all(s, "(!reg)",   6, "(r)",            3);
       qreplace_all(s, "(!tm)",    5, "(tm)",           4);
-      qreplace_all(s, "(!deg)",   6, " Grad",          5);
+
+      if (lang.degree != NULL)
+         replace_all(s, "(!deg)", lang.degree);
+
       specials2ascii(s);
       texvar2ascii(s);
       break;

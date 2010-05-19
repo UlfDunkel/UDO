@@ -47,6 +47,7 @@
 *                - file tidied up
 *                - SHOW_VARAIABLE -> SHOW_VAR
 *    fd  Feb 19: LANG adjusted
+*    fd  May 19: new: LANG.degree
 *
 ******************************************|************************************/
 
@@ -117,7 +118,7 @@ typedef struct _lang                      /* language strings */
    char   also[32];                       /* siehe auch */
    char   by[32];                         /* von */
    char   fur[32];                        /* fuer  ("for" cannot be used -> C keyword) */
-   char   up[32];                          /* Hoch (WinHelp) */
+   char   up[32];                         /* Hoch (WinHelp) */
    char   exit[32];                       /* Beenden (WinHelp) */
    char   unknown[32];                    /* Unbekannt, Unknown etc. */
    char   update[64];                     /* Last updated on (HTML) */
@@ -135,6 +136,10 @@ typedef struct _lang                      /* language strings */
    
    char   today[32];                      /* 28. Februar 1995 */
    char   short_today[32];                /* 28.02.1995 */
+
+   /* --- the following are not used in TITLEDATA so far! --- */
+   char   degree[32];                     /* "degree" */
+   
 }  LANG;
 
 

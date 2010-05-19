@@ -26,7 +26,8 @@
 #   fd  Mar 09: translated
 #   fd  May 18: - !html_ignore_8bit no longer requires a charset string
 #               - UTF-8 output no longer crashes UDO
-#   fd  May 19: environment commands resorted alphabetically
+#   fd  May 19: - environment commands resorted alphabetically
+#               - (!deg) output localized in target formats which do not support the glyph 
 #
 ################################################################################
 
@@ -147,7 +148,20 @@
       !begin_itemize !compressed
       !item (!KW [html_ignore_8bit]) no longer requires an optional parameter (!TEXT) for the charset.
       !end_itemize
-         
+
+
+
+
+
+# ----------------------------------------
+!item [Miscellaneous]
+# ----------------------------------------
+      !begin_blist !compressed
+      !item [(!/deg)]
+            If a target format cannot output the placeholder as the degree sign accordingly, 
+            it will no longer be replaced by the German word ""Grad"" by default, 
+            but by the localized word, e.g. ""degree"" in English.
+      !end_blist         
 !end_description
 
 !end_node

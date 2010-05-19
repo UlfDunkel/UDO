@@ -22,7 +22,7 @@
 
 !begin_node Apple Help Book (HTML)
 !html_name  format_hah
-!label      Apple Help Book (HTML)
+!label      HTML Apple Help
 
 Apple, Inc. bietet seit Mac~OS~X einen cleveren Hilfe-Betrachter namens (!file [Apple Help Viewer]) für Programme. Dabei muss ein sogenanntes ""Apple Help Book"" für das Programm im System angemeldet werden, das in einem bestimmten Ordner des Programm-Bundles vorhanden ist. Ein Apple Help Book ist prinzipiell ein Ordner mit einer Sammlung von HTML-Seiten, Bildern und CSS-Anweisungen, vergleichbar einer Website. Wichtig ist, dass in der Homepage dieser HTML-Seiten zwei bestimmte Meta-Tags für den Apple Help Viewer enthalten sind, damit es anhand dieser erkannt wird.
 
