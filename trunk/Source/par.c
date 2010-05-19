@@ -4694,8 +4694,8 @@ GLOBAL BOOLEAN add_macro(void)
    auto_quote_chars(entry, FALSE);
 */
 
-   replace_macros(entry);
-   replace_defines(entry);
+   replace_macros(entry);                  /* macros may use macros - resolve them here */
+   replace_defines(entry);                 /* macros may use defines - resolve them here */
    
    c_divis(entry);
    c_vars(entry);
