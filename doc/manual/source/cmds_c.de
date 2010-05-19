@@ -401,7 +401,7 @@ zeigt, wie man eine ""komprimierte"" Itemize-Umgebung erzeugen kann.
 
 # document
 # [...]
-!begin_itemize !not_compressed
+!begin_itemize !compressed
 # [...]
 !end_verbatim
 (!EXAMPLE_END)

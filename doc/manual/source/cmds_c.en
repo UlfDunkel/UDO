@@ -380,7 +380,7 @@ example shows how to output a ""compressed"" itemize environment.
 
 # document
 # [...]
-!begin_itemize !not_compressed
+!begin_itemize !compressed
 # [...]
 !end_verbatim
 (!EXAMPLE_END)
