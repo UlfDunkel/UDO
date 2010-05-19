@@ -112,6 +112,7 @@
 *    fd  May 18: - auto_quote_chars() cancels on UTF-8
 *                - recode() simplified
 *                - new: chr_codepage_charset_name()
+*    fd  May 19: auto_quote_chars() debugged
 *
 ******************************************|************************************/
 
@@ -3837,9 +3838,6 @@ BOOLEAN           all)            /* */
 
    pUtrg = chr_codepage(iEncodingTarget); /* get the right encoding table! */
 
-   if (pUtrg == NULL)                     /* no codepage for Unicode!!! */
-      return;
-   
    if (no_umlaute)
       recode_chrtab(s,CHRTAB_ASCII);
 
@@ -4088,7 +4086,7 @@ BOOLEAN           all)            /* */
                while (chrtab[j]->uname != U_NIL)
                {
                                           /* identical Unicode name found! */
-                  if (chrtab[j]->uname == pUtrg[idx])
+                  if (pUtrg && (chrtab[j]->uname == pUtrg[idx]) )
                   {
                      if (chrtab[j]->tex[0] != EOS)
                      {
@@ -4167,7 +4165,7 @@ BOOLEAN           all)            /* */
             while (chrtab[j]->uname != U_NIL)
             {
                                           /* identical Unicode name found! */
-               if (chrtab[j]->uname == pUtrg[idx])
+               if (pUtrg && (chrtab[j]->uname == pUtrg[idx]) )
                {
                   if (chrtab[j]->ansi[0] != EOS)
                   {
@@ -4213,7 +4211,7 @@ BOOLEAN           all)            /* */
             while (chrtab[j]->uname != U_NIL)
             {
                                           /* identical Unicode name found! */
-               if (chrtab[j]->uname == pUtrg[idx])
+               if (pUtrg && (chrtab[j]->uname == pUtrg[idx]) )
                {
                   if (chrtab[j]->ps[0] != EOS)
                   {
@@ -4276,7 +4274,7 @@ BOOLEAN           all)            /* */
             while (chrtab[j]->uname != U_NIL)
             {
                                           /* identical Unicode name found! */
-               if (chrtab[j]->uname == pUtrg[idx])
+               if (pUtrg && (chrtab[j]->uname == pUtrg[idx]) )
                {
                   if (chrtab[j]->ansi[0] != EOS)
                   {
@@ -4333,7 +4331,7 @@ BOOLEAN           all)            /* */
             while (chrtab[j]->uname != U_NIL)
             {
                                           /* identical Unicode name found! */
-               if (chrtab[j]->uname == pUtrg[idx])
+               if (pUtrg && (chrtab[j]->uname == pUtrg[idx]) )
                {
                   if (chrtab[j]->html[0] != EOS)
                   {
@@ -4388,7 +4386,7 @@ BOOLEAN           all)            /* */
             while (chrtab[j]->uname != U_NIL)
             {
                                           /* identical Unicode name found! */
-               if (chrtab[j]->uname == pUtrg[idx])
+               if (pUtrg && (chrtab[j]->uname == pUtrg[idx]) )
                {
                   if (chrtab[j]->html[0] != EOS)
                   {
@@ -4431,7 +4429,7 @@ BOOLEAN           all)            /* */
             while (chrtab[j]->uname != U_NIL)
             {
                                           /* identical Unicode name found! */
-               if (chrtab[j]->uname == pUtrg[idx])
+               if (pUtrg && (chrtab[j]->uname == pUtrg[idx]) )
                {
                   if (chrtab[j]->html[0] != EOS)
                   {
