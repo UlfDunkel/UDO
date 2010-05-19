@@ -51,6 +51,14 @@
 !macro OS             (!link [&lt;system&gt;] [Betriebssystem])
 !macro CHARSET        (!link [&lt;zeichensatz&gt;] [Code])
 
+!macro CHAR           &lt;zeichen&gt;
+!macro FILE           &lt;datei&gt;
+!macro LINK           &lt;link&gt;
+!macro NAME           &lt;name&gt;
+!macro TEXT           &lt;text&gt;
+!macro VALUE          &lt;wert&gt;
+!macro WORD           &lt;wort&gt;
+
 # other macro formattings
 # ------------------------------------------------------------------------------
 !else
@@ -64,11 +72,7 @@
 !macro LANGUAGE       (!link [<sprache>] [Sprache])
 !macro OS             (!link [<system>] [Betriebssystem])
 !macro CHARSET        (!link [<zeichensatz>] [Code])
-!endif
 
-
-# general macro formattings
-# ------------------------------------------------------------------------------
 !macro CHAR           <zeichen>
 !macro FILE           <datei>
 !macro LINK           <link>
@@ -76,6 +80,11 @@
 !macro TEXT           <text>
 !macro VALUE          <wert>
 !macro WORD           <wort>
+!endif
+
+
+# general macro formattings
+# ------------------------------------------------------------------------------
 
 
 # Sprachabhängige Textbausteine für die UDO-Historie in history.ui (alphabetisch geordnet)

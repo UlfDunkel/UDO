@@ -25,7 +25,8 @@
 #               - ISO encodings completed
 #   fd  May 18: - !html_ignore_8bit no longer requires a charset string
 #               - UTF-8 output no longer crashes UDO
-#   fd  May 19: environment commands resorted alphabetically
+#   fd  May 19: - environment commands resorted alphabetically
+#               - (!deg) output localized in target formats which do not support the glyph 
 #
 ################################################################################
 
@@ -146,7 +147,20 @@
       !begin_itemize !compressed
       !item (!KW [html_ignore_8bit]) benötigt keinen optionaler Parameter (!TEXT) für das Charset mehr.
       !end_itemize
-         
+
+
+
+
+
+# ----------------------------------------
+!item [Verschiedenes]
+# ----------------------------------------
+      !begin_blist !compressed
+      !item [(!/deg)]
+            Wenn in einem Zielformat der Platzhalter nicht als das entsprechende Gradzeichen ausgegeben werden kann, 
+            wird nicht mehr pauschal das deutsche Wort ""Grad"" ausgegeben, 
+            sondern möglichst die gewünschte Übersetzung, z.B. im Englischen ""degree"".
+      !end_blist         
 !end_description
 
 !end_node

@@ -34,7 +34,8 @@
 #   fd  Mar 02: chapter cmd_docinfo much enhanced
 #   fd  Mar 03: cmd_docinfo: deprecated attributes (webmaster...) updated
 #   fd  Mar 05: more adjustments for !docinfo [webmaster...]
-#   fd  May 19: "short" -> "compressed"
+#   fd  May 19: - "short" -> "compressed"
+#               - cmd_deg() enhanced
 #
 ################################################################################
 
@@ -96,7 +97,7 @@ man im Kapitel ""Definitionen"".
 Dieser Platzhalter wird durch das Grad-Symbol
 ersetzt, sofern es in dem jeweiligen Zeichensatz
 vorhanden ist. Ist es das nicht, ersetzt UDO den
-Platzhalter durch ""(!code [Grad])"".
+Platzhalter durch den sprachlich angepassten Text für ""(!code [Grad])"".
 
 !item [(!EXISTSSINCE)] Version 6.5.8
 
@@ -219,11 +220,11 @@ Dokumentinformationen setzen.
 
 !item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
 
-!item [(!SYNTAX)] (!T)!/docinfo [(!NAME)] (!TEXT)(!t)
+!item [(!SYNTAX)] (!T)!/docinfo [(!NAME)] (!TEXT)|(!FILE)(!t)
 
 !item [(!DESCRIPTION)]
 Dieses Kommando dient dazu, verschiedene Informationen für
-die Titelseite zu setzen. ""(!NAME)"" kann dabei einer
+die Titelseite zu setzen. ""(!code [(!NAME)])"" kann dabei einer
 der folgenden Werte sein:
 
 !begin_description
@@ -316,10 +317,10 @@ Zusammenfassung von [title] und [program]).
 Erlaubt sind ""none"", ""noindex"", ""index"", ""nofollow"" und ""follow"".
 
 !item [appletitle]
-Wird für HTML Apple Help benötig und beschreibt den (!nolink [Titel]) der Hilfe.
+Wird für HTML Apple Help benötigt und beschreibt den (!nolink [Titel]) der Hilfe.
 
 !item [appleicon]
-Wird für HTML Apple Help benötig. Damit wird das Icon angegeben, welches der Apple Help Viewer
+Wird für HTML Apple Help benötigt. Damit wird das Icon angegeben, welches der Apple Help Viewer
 anzeigen soll.
 
 !item [domain_name|domain_link|contact_name|contact_link]
@@ -358,7 +359,7 @@ Werden alle diese Kontaktdaten (in vier einzelnen Zeilen!) angegeben, erzeugt UD
 !end_verbatim
 !endif
 (!EXAMPLE_AFTER)
-Copyright (!copyright) (!url [UDO OpenSource] [http://www.udo-open-source.org/]) ((!url [E-Mail an den Webmaster] [mailto:webmaster@udo-open-source.org])) (!nl)
+(!nolink [Copyright]) (!copyright) (!url [UDO OpenSource] [http://www.udo-open-source.org/]) ((!url [E-Mail an den Webmaster] [mailto:webmaster@udo-open-source.org])) (!nl)
 Letzte Aktualisierung am (!today)
 (!EXAMPLE_END)
 
@@ -391,7 +392,7 @@ Werden weniger Informationen angegeben, so werden die Kontaktdaten in der Fußzei
 !end_verbatim
 !endif
 (!EXAMPLE_AFTER)
-Copyright (!copyright) (!url [http://www.meinedomain.de/] [http://www.meinedomain.de/]) ((!url [ich@meinedomain.de] [mailto:ich@meinedomain.de])) (!nl)
+(!nolink [Copyright]) (!copyright) (!url [http://www.meinedomain.de/] [http://www.meinedomain.de/]) ((!url [ich@meinedomain.de] [mailto:ich@meinedomain.de])) (!nl)
 Letzte Aktualisierung am (!today)
 (!EXAMPLE_END)
 
@@ -411,7 +412,7 @@ Copyright (!copyright) Meine Firma (Mein Name) (!nl)
 Letzte Aktualisierung am (!today)
 (!EXAMPLE_END)
 
-Das zuletzt gezeigte Beispiel zeigt, dass nur die Parameter mit (!code [url]) im Parameternamen tatsächlich anklickbare Links ergeben.
+Das zuletzt gezeigte Beispiel zeigt, dass nur die Parameter mit (!code [link]) im Parameternamen tatsächlich anklickbare Links ergeben.
 
 Aber es ist auch möglich, als Kontaktlink keine echte E-Mail-Adresse, sondern einen URL anzugeben, der zu einem Kontaktformular führt. Denn mittlerweile ist es nicht mehr unbedingt erwünscht, dass E-Mail-Adressen im Klartext in Webseiten zu sehen sind. Sonst sind sie für Roboter, die E-Mail-Adressen zum Spammen suchen, eine leichte Beute.
 
@@ -446,7 +447,7 @@ Aber es ist auch möglich, als Kontaktlink keine echte E-Mail-Adresse, sondern ei
 !end_verbatim
 !endif
 (!EXAMPLE_AFTER)
-Copyright (!copyright) (!url [Meine Domäne] [http://www.meinedomain.de/]) ((!url [Kontakt] [http://www.meinedomain.de/kontakt.php])) (!nl)
+(!nolink [Copyright]) (!copyright) (!url [Meine Domäne] [http://www.meinedomain.de/]) ((!url [Kontakt] [http://www.meinedomain.de/kontakt.php])) (!nl)
 Letzte Aktualisierung am (!today)
 (!EXAMPLE_END)
 
