@@ -29,6 +29,7 @@
 #   fd  Mar 03: chapter style_tables: hint for table_alignment added
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  May 19: "short" -> "compressed"
 #
 ################################################################################
 
@@ -83,24 +84,24 @@ verschachtelt benutzt wird.
 
 !smallskip
 
-!index (!kw [short])
+!index (!kw [compressed])
 UDO gibt nach jedem Item eine Leerzeile aus, um die Items voneinander
 abzuheben. Dies ist jedoch nicht immer erwünscht, besonders dann
 nicht, wenn die Items nur wenig Text enthalten und die gesamte
 Aufzählung dadurch unschön auseinandergezogen würde.
 
 Um nun Aufzählungen ""komprimiert"" auszugeben, können Sie den Schalter
-(!KW [short]) direkt hinter dem Befehl (!KW [begin_itemize]) angeben.
+(!KW [compressed]) direkt hinter dem Befehl (!KW [begin_itemize]) angeben.
 Dies bewirkt, dass die zusätzlichen Zwischenräume in dieser nicht
 ausgegeben werden. Zusätzlich wird die Unterdrückung der Ausgabe der
 Zwischenräume an innere Umgebungen vererbt.
 
 Es folgen zwei kurze Beispiele, die Ihnen zeigen sollen, wie der
-Schalter (!KW [short]) eingesetzt wird und welche Auswirkungen er hat.
-Im ersten Beispiel wird auf (!KW [short]) verzichtet, im zweiten
+Schalter (!KW [compressed]) eingesetzt wird und welche Auswirkungen er hat.
+Im ersten Beispiel wird auf (!KW [compressed]) verzichtet, im zweiten
 Beispiel wird er eingesetzt:
 
-Ohne (!KW [short])~!..
+Ohne (!KW [compressed])~!..
 
 (!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)/itemize3.ui
@@ -109,7 +110,7 @@ Ohne (!KW [short])~!..
 (!EXAMPLE_BEGIN)
 !include (!EXAMPLES)/itemize3.ui
 (!EXAMPLE_END)
-Mit (!KW [short])~!..
+Mit (!KW [compressed])~!..
 (!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)/itemize4.ui
 (!EXAMPLE_END)
@@ -164,7 +165,7 @@ Umgebungen kombinierbar. Hier ein kleines, unverschachteltes Beispiel:
 (!EXAMPLE_END)
 
 Hier ein kleines Beispiel, in dem die enumerate-Umgebung
-verschachtelt und mit dem Schalter (!KW [short]) benutzt wird.
+verschachtelt und mit dem Schalter (!KW [compressed]) benutzt wird.
 
 (!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)/enum2.ui
@@ -188,7 +189,7 @@ verschachtelt und mit dem Schalter (!KW [short]) benutzt wird.
      überschreiten. Wird eine Ebene mit Buchstaben nummeriert, sollte
      man nicht mehr als (!const [26])~Aufzählungspunkte benutzen.
 
-!item Eine ausführliche Erläuterung des Schalters (!KW [short]) finden Sie in
+!item Eine ausführliche Erläuterung des Schalters (!KW [compressed]) finden Sie in
      der Beschreibung zur itemize-Umgebung.
 !end_enumerate
 
@@ -217,7 +218,7 @@ Beispiel:
 (!EXAMPLE_END)
 
 In diesem Beispiel wird die description-Umgebung verschachtelt und
-mit dem Schalter (!KW [short]) benutzt.
+mit dem Schalter (!KW [compressed]) benutzt.
 
 (!EXAMPLE_BEFORE)
 !vinclude (!EXAMPLES)/descript2.ui
@@ -240,7 +241,7 @@ mit dem Schalter (!KW [short]) benutzt.
      ausgegeben, obwohl dies eher untypisch für HTML ist. In einer der
      nächsten Versionen wird man dies ändern können.
 
-!item Eine ausführliche Erläuterung des Schalters (!KW [short]) finden Sie in
+!item Eine ausführliche Erläuterung des Schalters (!KW [compressed]) finden Sie in
      der Beschreibung zur itemize-Umgebung.
 !end_enumerate
 
@@ -273,7 +274,7 @@ sich auch mit anderen Umgebungen kombinieren.
 (!EXAMPLE_END)
 
 Der bereits in den vorherigen Kapiteln besprochene Schalter
-(!KW [short]) lässt sich auch bei den Listen einsetzen. Um eine
+(!KW [compressed]) lässt sich auch bei den Listen einsetzen. Um eine
 ""komprimierte"" Liste zu erzeugen, geben Sie einfach den Schalter am
 Ende der Zeile an. Auch hier ein Beispiel:
 
@@ -349,7 +350,7 @@ WinHelp und RTF. Falls die Einrückungen zu groß oder zu klein
 ausfallen, kann man die Tiefe durch die Schalter (!KW [rtf_charwidth])
 bzw. (!KW [win_charwidth]) korrigieren.
 
-!item Eine ausführliche Erläuterung des Schalters (!KW [short]) finden Sie in
+!item Eine ausführliche Erläuterung des Schalters (!KW [compressed]) finden Sie in
 der Beschreibung zur itemize-Umgebung.
 
 !end_enumerate

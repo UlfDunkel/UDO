@@ -21,6 +21,7 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro usages adjusted
 #   fd  Apr 08: typo
+#   fd  May 19: link adjustments for old commands
 #
 ################################################################################
 
@@ -202,16 +203,16 @@ Das hier ist Zelle 3
 
    !item (!B)Neue Schalter:(!b) (!nl)
          !begin_blist
-         !item [(!KW [use_short_descriptions])]
+         !item [!use_short_descriptions]
                Gibt alle Description-Umgebungen ""kompress"", also ohne zusätzliche Leerzeilen zwischen Absätzen, aus.
-         !item [(!KW [use_short_enumerates])]
+         !item [!use_short_enumerates]
                Gibt alle Enumerate-Umgebungen ""kompress"", also ohne zusätzliche Leerzeilen zwischen Absätzen, aus.
-         !item [(!KW [use_short_itemizes])]
+         !item [!use_short_itemizes]
                Gibt alle Itemize-Umgebungen ""kompress"", also ohne zusätzliche Leerzeilen zwischen Absätzen, aus.
-         !item [(!KW [use_short_lists])]
+         !item [!use_short_lists]
                Gibt alle Listen-Umgebungen ""kompress"", also ohne zusätzliche Leerzeilen zwischen Absätzen, aus.
          !end_blist
-         Diese vier neuen Schalter bieten eine differenziertere Steuerung der Umgebungen-Formatierung, als es durch den Generalschalter (!KW [use_short_envs]) möglich ist.
+         Diese vier neuen Schalter bieten eine differenziertere Steuerung der Umgebungen-Formatierung, als es durch den Generalschalter (!B)!use_short_envs(!b) möglich ist.
          Sofern aber der Generalschalter gesetzt ist, sind die o.g. vier Schalter als Teilmengen davon wirkungslos.
 
    !item (!B)Neues Kommando:(!b) (!nl)

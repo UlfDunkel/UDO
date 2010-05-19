@@ -19,6 +19,8 @@
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
 #   fd  Jun 10: using macro (!file [])
+# 2010:
+#   fd  May 19: "short" -> "compressed"
 #
 ################################################################################
 
@@ -48,7 +50,7 @@ Formatiert man die Texinfo-Datei mit (!TeX), tauchen diese
 Sonderzeichen in den Kapitelüberschiften selbstverständlich auf.
 
 !item [Warum werden Umgebungen nicht ""komprimiert"" dargestellt?]
-Der Parameter (!KW [short]) kann bei Texinfo nicht funktionieren, da es
+Der Parameter (!KW [compressed]) kann bei Texinfo nicht funktionieren, da es
 bei Texinfo nicht möglich ist, die Zwischenräume in Umgebungen zu
 unterdrücken.
 

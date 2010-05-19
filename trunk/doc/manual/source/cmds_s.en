@@ -23,6 +23,8 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
+#   fd  May 19: "short" -> "compressed"
+#               - chapter 'compressed' moved to cmds_c.en
 #
 ################################################################################
 
@@ -79,36 +81,6 @@ Output a section heading.
 
 !item [(!SEEALSO)]
 (!KW [subheading])
-
-!end_xlist
-
-!end_node
-
-# = = = = =
-
-!begin_node (!kw [short])
-!html_name  cmd_short
-
-Output a shortened environment.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/short(!t)
-
-!item [(!DESCRIPTION)]
-If you use this switch together with environments this specific
-environment will be output without additional vertical space. The
-example shows how to output a ""compressed"" itemize environment.
-
-!item [(!EXAMPLE)]
-(!T)!/begin_itemize !/short(!t)
-
-!item [(!EXISTSSINCE)] Release~5 Patchlevel~15
-
-!item [(!SEEALSO)]
-(!KW [begin_itemize]), (!KW [begin_enumerate]), (!KW [begin_description]), (!KW [use_short_envs])
 
 !end_xlist
 

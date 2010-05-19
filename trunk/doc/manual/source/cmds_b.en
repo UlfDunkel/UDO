@@ -23,6 +23,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
+#   fd  May 19: "short" -> "compressed"
 #
 ################################################################################
 
@@ -294,7 +295,7 @@ inside other (description) environments. Text that stands between the
 brackets of (!KW [item] [[~!!]]) will be output with bold text.
 
 !item [(!SEEALSO)]
-(!KW [end_description]), (!KW [item]), (!link [Descriptions] [Descriptions]), (!KW [short]), (!KW [use_short_envs])
+(!KW [end_description]), (!KW [item]), (!link [Descriptions] [Descriptions]), (!KW [compressed]), (!KW [use_compressed_envs])
 
 !end_xlist
 
@@ -354,7 +355,7 @@ other (enumerate) environments. The items of an enumerate environment
 will be marked with alphanumerical characters.
 
 !item [(!SEEALSO)]
-(!KW [end_enumerate]), (!KW [item]), (!link [Enumerations] [Enumerations]), (!KW [short]), (!KW [use_short_envs])
+(!KW [end_enumerate]), (!KW [item]), (!link [Enumerations] [Enumerations]), (!KW [compressed]), (!KW [use_compressed_envs])
 
 !end_xlist
 
@@ -503,7 +504,7 @@ other (itemize) environments. Items of the itemize environment will
 be marked with bullets, dashes or stars.
 
 !item [(!SEEALSO)]
-(!KW [end_itemize]), (!KW [item]), (!link [Itemizations] [Itemizations]), (!KW [short]), (!KW [use_short_envs])
+(!KW [end_itemize]), (!KW [item]), (!link [Itemizations] [Itemizations]), (!KW [compressed]), (!KW [use_compressed_envs])
 
 !end_xlist
 
@@ -984,7 +985,7 @@ can use this environment inside other environments. The text you set
 with (!KW [item] [[~!!]]) will be displayed with the normal font.
 
 !item [(!SEEALSO)]
-(!KW [end_xlist]), (!KW [item]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!link [Lists] [Lists]), (!KW [short]), (!KW [use_short_envs])
+(!KW [end_xlist]), (!KW [item]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!link [Lists] [Lists]), (!KW [compressed]), (!KW [use_compressed_envs])
 
 !end_xlist
 

@@ -22,6 +22,7 @@
 #               - using table_alignment [left]
 #   fd  Mar 05: !use_short_... (for environments) changed: -> !use_compressed_...
 #   fd  May 18: html_ignore_8bit no longer requires a charset
+#   fd  May 19: "short" -> "compressed"
 #
 ################################################################################
 
@@ -165,7 +166,7 @@
 !use_auto_toptocs       [stg,win,wh4,html,pch,ipf,hh,info]
 
 # !use_compressed_envs    [all]
-#!use_short_tocs        [stg,win,wh4,html,pch,ipf,hh]
+#!use_compressed_tocs     [stg,win,wh4,html,pch,ipf,hh]
 #!no_toc_subsubnodes    [stg,win,wh4,html,pch,ipf,hh]
 
 !use_auto_subtocs       [stg,win,wh4,html,pch,ipf,hh,info]

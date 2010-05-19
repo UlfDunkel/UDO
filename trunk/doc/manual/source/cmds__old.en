@@ -18,6 +18,7 @@
 #               - old docinfo attributes (webmaster...) listed
 #               - !else_asc, !else_stg + !end_asc, !end_stg added
 #               - more version numbers added
+#   fd  May 19: !short, !use_short_... added
 #
 ################################################################################
 
@@ -178,14 +179,14 @@ The following list shows deprecated UDO commands and switches which are no longe
 (!kw [ldoc])                     !! query output format !\
                                  !! (!KW [ifdest]) (!code [[ldoc!]])
 (!kw [list_parsep])              !! compress environments !\
-                                 !! (!KW [short]) !\
-                                 !! 6
+                                 !! (!B)!short(!b) > (!KW [compressed]) !\
+                                 !! 6 > 7.01
 (!kw [list_parsep_off])          !! compress environments !\
-                                 !! (!KW [short]) !\
-                                 !! 6
+                                 !! (!B)!short(!b) > (!KW [compressed]) !\
+                                 !! 6 > 7.01
 (!kw [list_parsep_on])           !! compress environments !\
-                                 !! (!KW [short]) !\
-                                 !! 6
+                                 !! (!B)!short(!b) > (!KW [compressed]) !\
+                                 !! 6 > 7.01
 !hline
 (!kw [=man])                     !! query output format !\
                                  !! (!KW [ifndest]) (!code [[man!]])
@@ -224,6 +225,9 @@ The following list shows deprecated UDO commands and switches which are no longe
 !hline
 (!kw [=stg])                     !! query output format !\
                                  !! (!KW [ifdest]) (!code [[stg!]])
+(!kw [short])                    !! compress environment output !\
+                                 !! (!KW [compressed]) !\
+                                 !! 7.01
 (!kw [spanish])                  !! set language !\
                                  !! (!KW [language]) (!code [[spanish!]]) !\
                                  !! 6
@@ -259,6 +263,21 @@ The following list shows deprecated UDO commands and switches which are no longe
 (!kw [use_justified])            !! use justification !\
                                  !! (!KW [use_justification]) !\
                                  !! 6 PL14
+(!kw [use_short_descriptions])   !! compress environment output !\
+                                 !! (!KW [use_compressed_descriptions]) !\
+                                 !! 7.01
+(!kw [use_short_enumerates])     !! compress environment output !\
+                                 !! (!KW [use_compressed_enumerates]) !\
+                                 !! 7.01
+(!kw [use_short_envs])           !! compress environment output !\
+                                 !! (!KW [use_compressed_envs]) !\
+                                 !! 7.01
+(!kw [use_short_itemizes])       !! compress environment output !\
+                                 !! (!KW [use_compressed_itemizes]) !\
+                                 !! 7.01
+(!kw [use_short_lists])          !! compress environment output !\
+                                 !! (!KW [use_compressed_lists]) !\
+                                 !! 7.01
 (!kw [use_xlist])                !! output xlist environments like ASCII !\
                                  !! kein Ersatzkommando, xlist-Ausgabeformatierung geändert
 !hline

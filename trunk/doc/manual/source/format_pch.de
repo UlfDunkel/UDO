@@ -20,6 +20,8 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  May 19: "short" -> "compressed"
 #
 ################################################################################
 
@@ -35,7 +37,7 @@ Bedeutung mehr für diesen Rechner.
 
 !item [Wie erzeugt UDO hier Titelseite und Inhaltsverzeichnis?]
 UDO erzeugt eine Seite mit den Titelangaben und dem Inhaltsverzeichnis. Da diese Seite bei umfangreicheren Dokumenten ziemlich lang werden kann, empfiehlt es sich, den Schalter
-(!KW [use_short_tocs] [[pch!!]]) im Zusammenhang mit den Schaltern
+(!KW [use_compressed_tocs] [[pch!!]]) im Zusammenhang mit den Schaltern
 (!KW [use_auto_subtocs] [[pch!!]]) und (!KW [use_auto_subsubtocs] [[pch!!]]) zu
 benutzen, damit auch Programmierer mit kleinen Bildschirmen nicht
 den Überblick auf dieser Seite zu verlieren.

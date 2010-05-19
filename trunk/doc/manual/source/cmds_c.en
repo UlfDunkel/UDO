@@ -26,6 +26,7 @@
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #   ggs Mar 21: Wrong syntax in code_source, code_target
+#   fd  May 19: new chapter 'compressed'
 #
 ################################################################################
 
@@ -330,6 +331,36 @@ if the destinations format knows about comments.
 
 !item [(!SEEALSO)]
 (!KW [begin_comment]), (!KW [end_comment]), (!KW [cinclude]), (!KW [use_comments]), (!link [Environments] [Environments])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [compressed])
+!html_name  cmd_compressed
+
+Output a compressed environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/compressed(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch together with environments this specific
+environment will be output without additional vertical space. The
+example shows how to output a ""compressed"" itemize environment.
+
+!item [(!EXAMPLE)]
+(!T)!/begin_itemize !/compressed(!t)
+
+!item [(!EXISTSSINCE)] 7.01
+
+!item [(!SEEALSO)]
+(!KW [begin_itemize]), (!KW [begin_enumerate]), (!KW [begin_description]), (!KW [use_compressed_envs])
 
 !end_xlist
 

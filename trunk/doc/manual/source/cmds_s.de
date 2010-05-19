@@ -26,6 +26,8 @@
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 19: - "short" -> "compressed"
+#               - chapter 'compressed' moved to cmds_c.de
 #
 ################################################################################
 
@@ -89,43 +91,6 @@ Eine Abschnitts-Überschrift ausgeben.
 (!KW [subheading])
 
 !end_xlist
-
-!end_node
-
-# = = = = =
-
-!begin_node (!kw [short])
-!html_name  cmd_short
-
-Eine Umgebung ""komprimiert"" ausgeben.
-
-!begin_xlist [(!TYPEPOSITION)]
-
-!item [(!TYPEPOSITION)] (!SWITCH), (!MAINPART)
-
-!item [(!SYNTAX)] (!T)!/short(!t)
-
-!item [(!DESCRIPTION)]
-Wird dieser Schalter zusammen mit dem Befehl zum
-Beginnen einer Umgebung angegeben, wird diese
-Umgebung in komprimierter Form ausgegeben, sprich es
-werden zwischen den Aufzählungspunkten keine
-zusätzlichen Zwischenräume erzeugt. Das Beispiel
-zeigt, wie man eine ""komprimierte"" Itemize-Umgebung erzeugen kann.
-
-!item [(!EXISTSSINCE)] Release~5 Patchlevel~15
-
-!item [(!SEEALSO)]
-(!KW [begin_itemize]), (!KW [begin_enumerate]), (!KW [begin_description]), (!KW [use_short_envs])
-
-!end_xlist
-
-(!EXAMPLE)
-(!EXAMPLE_BEGIN)
-!begin_verbatim
-!begin_itemize !compressed
-!end_verbatim
-(!EXAMPLE_END)
 
 !end_node
 

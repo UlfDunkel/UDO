@@ -24,6 +24,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
+#   fd  May 19: "short" -> "compressed"
 #
 ################################################################################
 
@@ -290,7 +291,7 @@ Text, der dann hier in eckigen Klammern angegeben
 wird, wird in Fettschrift ausgegeben, sofern das Ausgabeformat Fettschrift unterstützt.
 
 !item [(!SEEALSO)]
-(!KW [end_description]), (!KW [item]), (!link [Beschreibungen] [Beschreibungen]), (!KW [short]), (!KW [use_short_envs])
+(!KW [end_description]), (!KW [item]), (!link [Beschreibungen] [Beschreibungen]), (!KW [compressed]), (!KW [use_compressed_envs])
 
 !end_xlist
 
@@ -342,7 +343,7 @@ Aufzählungspunkte einer (!nolink [enumerate-Umgebung]) werden mit
 (!KW [item]) eingeleitet und mit alphanumerischen Zeichen markiert.
 
 !item [(!SEEALSO)]
-(!KW [end_enumerate]), (!KW [item]), (!link [Nummerierungen] [Nummerierungen]), (!KW [short]), (!KW [use_short_envs])
+(!KW [end_enumerate]), (!KW [item]), (!link [Nummerierungen] [Nummerierungen]), (!KW [compressed]), (!KW [use_compressed_envs])
 
 !end_xlist
 
@@ -474,7 +475,7 @@ Aufzählungspunkte, die mit (!KW [item]) eingeleitet werden,
 werden mit Punkten und Strichen markiert.
 
 !item [(!SEEALSO)]
-(!KW [end_itemize]), (!KW [item]), (!link [Aufzählungen] [Aufzählungen]), (!KW [short]), (!KW [use_short_envs])
+(!KW [end_itemize]), (!KW [item]), (!link [Aufzählungen] [Aufzählungen]), (!KW [compressed]), (!KW [use_compressed_envs])
 
 !end_xlist
 
@@ -944,7 +945,7 @@ die man mit (!KW [item] [[~!!]]) angibt, werden normal
 dargestellt.
 
 !item [(!SEEALSO)]
-(!KW [end_xlist]), (!KW [item]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!link [Listen] [Listen]), (!KW [short]), (!KW [use_short_envs])
+(!KW [end_xlist]), (!KW [item]), (!KW [begin_blist]), (!KW [begin_ilist]), (!KW [begin_tlist]), (!link [Listen] [Listen]), (!KW [compressed]), (!KW [use_compressed_envs])
 
 !end_xlist
 

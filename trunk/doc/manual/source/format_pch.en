@@ -17,6 +17,8 @@
 #   fd  Jun 09: 'Atari ST' -> 'Atari'
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using EXAMPLE_... macros
+# 2010:
+#   fd  May 19: "short" -> "compressed"
 #
 ################################################################################
 
@@ -33,7 +35,7 @@ other purposes neither on this nor on other computers.
 
 UDO prints a single page that contains both the title page and the table of
 contents. Because this page can get very long you should use the switch
-(!KW [use_short_tocs] [[pch!!]]).
+(!KW [use_compressed_tocs] [[pch!!]]).
 
 !item [How can I suppress the headlines?] ~
 

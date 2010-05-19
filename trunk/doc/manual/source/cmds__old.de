@@ -18,6 +18,7 @@
 #               - old docinfo attributes (webmaster...) listed
 #               - !else_asc, !else_stg + !end_asc, !end_stg added
 #               - more version numbers added
+#   fd  May 19: !short, !use_short_... added
 #
 ################################################################################
 
@@ -178,14 +179,14 @@ Die nachfolgend aufgelisteten UDO-Kommandos und -Schalter sind veraltet und werd
 (!kw [ldoc])                     !! Ausgabeformat abfragen !\
                                  !! (!KW [ifdest]) (!code [[ldoc!]])
 (!kw [list_parsep])              !! Umgebungen komprimieren !\
-                                 !! (!KW [short]) !\
-                                 !! 6
+                                 !! (!B)!short(!b) > (!KW [compressed]) !\
+                                 !! 6 > 7.01
 (!kw [list_parsep_off])          !! Umgebungen komprimieren !\
-                                 !! (!KW [short]) !\
-                                 !! 6
+                                 !! (!B)!short(!b) > (!KW [compressed]) !\
+                                 !! 6 > 7.01
 (!kw [list_parsep_on])           !! Umgebungen komprimieren !\
-                                 !! (!KW [short]) !\
-                                 !! 6
+                                 !! (!B)!short(!b) > (!KW [compressed]) !\
+                                 !! 6 > 7.01
 !hline
 (!kw [=man])                     !! Ausgabeformat abfragen !\
                                  !! (!KW [ifndest]) (!code [[man!]])
@@ -224,6 +225,9 @@ Die nachfolgend aufgelisteten UDO-Kommandos und -Schalter sind veraltet und werd
 !hline
 (!kw [=stg])                     !! Ausgabeformat abfragen !\
                                  !! (!KW [ifdest]) (!code [[stg!]])
+(!kw [short])                    !! Umgebungen kompress ausgeben !\
+                                 !! (!KW [compressed]) !\
+                                 !! 7.01
 (!kw [spanish])                  !! Sprache setzen !\
                                  !! (!KW [language]) (!code [[spanish!]]) !\
                                  !! 6
@@ -259,6 +263,21 @@ Die nachfolgend aufgelisteten UDO-Kommandos und -Schalter sind veraltet und werd
 (!kw [use_justified])            !! Blocksatz einschalten !\
                                  !! (!KW [use_justification]) !\
                                  !! 6 PL14
+(!kw [use_short_descriptions])   !! Umgebungen kompress ausgeben !\
+                                 !! (!KW [use_compressed_descriptions]) !\
+                                 !! 7.01
+(!kw [use_short_enumerates])     !! Umgebungen kompress ausgeben !\
+                                 !! (!KW [use_compressed_enumerates]) !\
+                                 !! 7.01
+(!kw [use_short_envs])           !! Umgebungen kompress ausgebent !\
+                                 !! (!KW [use_compressed_envs]) !\
+                                 !! 7.01
+(!kw [use_short_itemizes])       !! Umgebungen kompress ausgeben !\
+                                 !! (!KW [use_compressed_itemizes]) !\
+                                 !! 7.01
+(!kw [use_short_lists])          !! Umgebungen kompress ausgeben !\
+                                 !! (!KW [use_compressed_lists]) !\
+                                 !! 7.01
 (!kw [use_xlist])                !! xlist-Umgebungen wie bei ASCII ausgeben !\
                                  !! kein Ersatzkommando, xlist-Ausgabeformatierung geändert
 !hline
