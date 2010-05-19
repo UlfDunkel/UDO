@@ -1,0 +1,37 @@
+###################################################################
+# Dirk Hagedorn (DirkHage@aol.com) - Oktober 1996
+###################################################################
+# Einige spezielle LaTeX-Befehle ueber Definitionen
+# Gebrauch: 1) !include texdef.ui
+#           2) Schi(!ff)ahrt, foo (!lb[2]) bar
+###################################################################
+# Some special LaTeX commands via definitions
+# Usage:    1) !include texdef.ui
+#           2) foo (!lb[2]) bar
+###################################################################
+
+!ifdest [tex]
+
+!define ck "ck
+!define ff "ff
+!define ll "ll
+!define mm "mm
+!define nn "nn
+!define pp "pp
+!define tt "tt
+!define lb   \linebreak[(!1)]
+!define nolb \nolinebreak[(!1)]
+
+!else
+
+!define ck ck
+!define ff ff
+!define ll ll
+!define mm mm
+!define nn nn
+!define pp pp
+!define tt tt
+!define lb   (!2)
+!define nolb (!2)
+
+!endif

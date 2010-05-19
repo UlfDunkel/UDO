@@ -1,0 +1,1380 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands U
+# Language    : German
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 08: 'Homepage' -> 'Website'
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 09: LINK macro introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: html_name no longer uses CAPITAL letters
+#   fd  Jun 16: great review session #1
+#   fd  Jun 25: 'die URL' -> 'der URL' (it refers to 'locator')
+# 2010:
+#   fd  Mar 01: - new chapters: use_short_descriptions, use_short_enumerates,
+#                   use_short_itemizes, use_short_lists
+#               - OldKeywords removed -> cmds__old.de
+#   fd  Mar 05: - old environment attribute short changed: -> !compressed
+#               - !use_short_... (for environments) changed: -> !use_compressed_...
+#   fd  May 19: - "short" -> "compressed"
+#               - more links to "not_compressed"
+#
+################################################################################
+
+!begin_node U!..
+!html_name  cmds_u
+
+# = = = = =
+
+!begin_node (!kkkw [U] [u])
+!html_name  cmd_u()
+
+!label (!kk1 [/U])
+!label (!kk1 [/u])
+
+Unterstrichenen Text ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/U)(!TEXT)(!/u)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" wird unterstrichen dargestellt, falls möglich.
+
+(!B)Hinweis:(!b) Diese Schriftart sollte sparsam eingesetzt werden. Denken Sie z.B. beim HTML-Format daran, dass standardmäßig Hypertext-Links in HTML-Seiten unterstrichen werden, so dass man dort erwartet, auf jeden unterstrichenen Text klicken zu können, um eine andere Seite aufzurufen.
+
+!item [(!SEEALSO)]
+Schriftarten, (!link [Textgestaltung] [Textgestaltung])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort ""unterstrichen"" wird (!U)unterstrichen(!u) ausgegeben.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort ""unterstrichen"" wird (!U)unterstrichen(!u) ausgegeben.
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [udolink])
+!html_name  cmd_udolink
+
+Link auf UDO-Website erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/udolink(!t)
+
+!item [(!DESCRIPTION)]
+UDO sichert für HTML, WinHelp und ST-Guide eine Datei namens
+(!file [udo_wm.[gif,bmp,img!]]). Mit diesem Kommando kann man in sein Werk die
+Grafik einbinden. Bei HTML wird zugleich ein Link auf die
+(!url [Website] [http://www.udo-open-source.org/]) erzeugt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [use_about_udo])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [universal_charset])
+!html_name  cmd_universal_charset
+
+Universellen Zeichensatz einschalten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/universal_charset [ on | off ](!t)
+
+!item [(!DESCRIPTION)]
+""(!KW [universal_charset] [on!!]])"" schaltet die Verwendung des
+universellen Zeichensatzes ein,
+""(!KW [universal_charset] [off!!]])"" wieder aus. Standardmäßig
+wird der universelle Zeichensatz von UDO nicht
+verwendet, da die Umwandlung der universellen Zeichen
+eine zeitaufwendige Angelegenheit ist.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!link [Universeller Zeichensatz] [Universeller Zeichensatz])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!universal_charset [on]
+(!`A) bient(!^o)t~!
+!end_verbatim
+(!EXAMPLE_AFTER)
+!universal_charset [on]
+(!`A) bient(!^o)t~!
+!universal_charset [off]
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [unset])
+!html_name  cmd_unset
+
+Symbol entfernen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/unset (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Kommando können Symbole, die Sie mit (!KW [set])
+oder der Kommandozeilenoption (!code [-D]) gesetzt haben,
+wieder entfernen. Dieses Kommando darf überall im
+Quelltext verwendet werden.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!KW [set]), (!KW [ifset]), (!KW [ifnset]), (!link [Symbole] [Symbole])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kkw [url])
+!html_name  cmd_url()
+
+Verweis auf externe Daten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/url [(!TEXT)] [(!LINK)])(!t)
+
+!item [(!DESCRIPTION)]
+Dient zum Erzeugen von Verweisen auf externe
+Dokumente. Im Unterschied zu (!KKW [xlink!]) wird bei jedem Format ein
+Link auf einen URL angelegt. ""(!LINK)"" kann auch leer sein, dann wird für ""(!LINK)"" der Inhalt von ""(!TEXT)"" ausgegeben. Nutzen Sie das z.B., wenn der URL auch lesbar sein soll.
+
+Kommt in einem Verweis eine Tilde vor, so braucht sie bei Verwendung im (!KKW [url!])-Kommando (!I)nicht(!i) durch ein Ausrufezeichen geschützt zu werden.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~12
+
+!item [(!SEEALSO)]
+(!KKW [link]), (!KKW [plink!]), (!KKW [xlink!]), (!KW [no_xlinks]), (!link [Querverweise] [Querverweise])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!url [BugTracker der UDO-Website] [http://bugs.udo-open-source.org/]) | 
+(!url [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
+(!url [http://www.google.de/] [])
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!url [BugTracker der UDO-Website] [http://bugs.udo-open-source.org/]) | 
+(!url [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
+(!url [http://www.google.de/] [])
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_about_udo])
+!html_name  cmd_use_about_udo
+
+Informationsseite einbauen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_about_udo [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Die Benutzung dieses Schalters erzeugt am Ende der erzeugten Datei
+(sofern das zugehörige Format als Kürzel übergeben wurde) eine kleine
+Seite mit Informationen zu UDO. Wenn Sie ein bisschen Werbung für UDO machen
+möchten, setzen Sie dieses Kommando im Vorspann ein und bringen Sie im Quelltext
+das Wort ""UDO(!RELEASE)"" mindestens einmal unter, da diese Werbeseite nicht im
+Inhaltsverzeichnis aufgeführt wird.
+
+!item [(!SEEALSO)]
+(!KW [udolink])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_about_udo [stg,win,html]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_alias_inside_index])
+!html_name  cmd_use_alias_inside_index
+
+Aliase automatisch in den Index übernehmen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_alias_inside_index [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, werden
+automatisch alle Aliase im Index der angegebenen Formate angezeigt.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!link [Indizes] [Indizes]), (!KW [no_index]), (!KW [index]), (!KW [alias])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_alias_inside_index [win,stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_ansi_tables])
+!html_name  cmd_use_ansi_tables
+
+Tabellen mit ANSI-Grafikzeichen erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_ansi_tables [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann eingesetzt, so
+werden bei den angegebenen Formaten die Tabellen mit
+den Grafikzeichen aus dem DOS-Zeichensatz erzeugt.
+Der Schalter ist wirkungslos für (!LaTeX), WinHelp und HTML.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [begin_table]), (!link [Tabellen] [Tabellen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_ansi_tables [stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_auto_helpids])
+!html_name  cmd_use_auto_helpids
+
+Help-IDs automatisch erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_auto_helpids [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Durch diesen Schalter kann man im Vorspann bestimmen, dass UDO
+automatisch Help-IDs sichert, die an die Kapitelnamen angelehnt sind,
+sofern nicht manuell eine Help-ID mit (!KW [win_helpid]) oder
+(!KW [wh4_helpid]) gesetzt wird.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~13
+
+!item [(!SEEALSO)]
+(!KW [win_helpid]), (!KW [wh4_helpid])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_auto_helpids [win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_auto_subsubsubtocs])
+!html_name  cmd_use_auto_subsubsubtocs
+
+Automatische Auflistung aller Paragraphen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_auto_subsubsubtocs [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Schaltet den automatischen internen Aufruf des (!KW [subsubsubtoc])-Kommandos ein. Am Ende eines jeden
+Abschnitts werden dann automatisch alle dem Unterabschnitt zugehörigen Paragraphen in Form eines Inhaltsverzeichnisses ausgegeben.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [subsubsubtoc]), (!KW [ignore_subsubsubtoc]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_auto_subsubsubtocs [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_auto_subsubtocs])
+!html_name  cmd_use_auto_subsubtocs
+
+Automatische Auflistung aller Unterabschnitte.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_auto_subsubtocs [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Schaltet den automatischen internen Aufruf des
+(!KW [subsubtoc])-Kommandos ein. Am Ende eines jeden
+Abschnitts werden dann automatisch alle dem Abschnitt
+zugehörigen Unterabschnitte in Form eines Inhaltsverzeichnisses ausgegeben.
+
+!item [(!SEEALSO)]
+(!KW [subsubtoc]), (!KW [ignore_subsubtoc]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_auto_subsubtocs [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_auto_subtocs])
+!html_name  cmd_use_auto_subtocs
+
+Automatische Auflistung aller Abschnitte.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_auto_subtocs [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Schaltet den automatischen internen Aufruf des
+(!KW [subtoc])-Kommandos ein. Am Ende eines jeden Kapitels
+werden dann automatisch alle dem Kapitel zugehörigen
+Abschnitte in Form eines Inhaltsverzeichnisses ausgegeben.
+
+!item [(!SEEALSO)]
+(!KW [subtoc]), (!KW [ignore_subtoc]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_auto_subtocs [html,pch,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_auto_toptocs])
+!html_name  cmd_use_auto_toptocs
+
+Automatische Auflistung aller Abschnitte.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_auto_toptocs [(!FORMAT)] {!/no_icons}(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter eingesetzt, werden zu Beginn jedes Kapitels
+Links auf die übergeordneten Kapitel erzeugt. Der Schalter ist
+verfügbar für HTML, WinHelp und ST-Guide. Wird der Schalter benutzt, so
+sichert UDO ein paar zusätzliche Grafiken, die dann verwendet werden.
+
+Wird zusätzlich noch (!KW [no_icons]) angegeben, werden keine Bilder
+neben den Verweisen auf die übergeordneten Kapitel ausgegeben.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [html_navigation]), (!KW [use_auto_subtocs]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_auto_toptocs [html,stg,win]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_chapter_images])
+!html_name  cmd_use_chapter_images
+
+Kapitelgrafiken statt -text benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_chapter_images [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Gibt an, ob für die angegebenen Formate Grafiken
+anstelle von Kapitelüberschriften werden sollen,
+falls bei einem Kapitel (!KW [chapterimage]) benutzt wird
+und die angegebene Datei vorhanden ist.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.43
+
+!item [(!SEEALSO)]
+(!KW [chapterimage])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_chapter_images [html,win,stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_comments])
+!html_name  cmd_use_comments
+
+Kommentare erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_comments [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird im Vorspann dieser Schalter benutzt, werden Kommentare auch bei allen Formaten, die keine Kommentare beherrschen, diese in Klammern ausgegeben.
+
+!item [(!SEEALSO)]
+(!KW [comment]), (!KW [begin_comment]), (!KKW [comment!])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_comments [html,win,stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_formfeed])
+!html_name  cmd_use_formfeed
+
+Formfeed-Befehl mit ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_formfeed [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Mit diesem Schalter kann man UDO mitteilen, dass beim (!KW [newpage])-Befehl bei ASCII-Formaten ein Formfeed
+(ASCII~12) ausgegeben werden soll.
+
+!item [(!SEEALSO)]
+(!KW [man_lpp]), (!KW [newpage])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_formfeed [asc]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_justification])
+!html_name  cmd_use_justification
+
+Blocksatz einschalten.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_justification [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Für die angegebenen Formate werden Absätze im
+Blocksatz ausgegeben. Für (!LaTeX) und RTF spielt der
+Schalter keine Rolle, da dort immer Blocksatz erzeugt
+wird. Für WinHelp und HTML spielt der Schalter auch
+keine Rolle, da dort kein Blocksatz erzeugt werden kann.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~0
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_justification [asc]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_label_inside_index])
+!html_name  cmd_use_label_inside_index
+
+Labels automatisch in den Index übernehmen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_label_inside_index [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, werden
+automatisch alle Labels im Index der angegebenen Formate angezeigt.
+
+!item [(!SEEALSO)]
+(!link [Indizes] [Indizes]), (!KW [no_index]), (!KW [index]), (!KW [label])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_label_inside_index [win,stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_mirrored_indices])
+!html_name  cmd_use_mirrored_indices
+
+Automatisch gespiegelte Indizes erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_mirrored_indices [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter benutzt, legt UDO beim Befehl (!KW [index]) oder bei der
+PlatzhalterVersion~(!KKW [idx]) auch die ""gespiegelten"" Einträge
+an, falls man einen Doppeleintrag vornimmt. Falls man also diesen
+Schalter benutzt, dann kann man sich bei der Angabe von
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!index A !! B
+!end_verbatim
+(!EXAMPLE_END)
+
+die folgende Zeile sparen:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!index B !! A
+!end_verbatim
+(!EXAMPLE_END)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~0
+
+!item [(!SEEALSO)]
+(!link [Indizes] [Indizes]), (!KW [no_index]), (!KW [index]), (!KKW [idx])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_mirrored_indices [win,stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_nodes_inside_index])
+!html_name  cmd_use_nodes_inside_index
+
+Kapitel automatisch in den Index übernehmen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_nodes_inside_index [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, werden
+automatisch alle Kapitelüberschriften im Index der angegebenen Formate angezeigt.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!link [Indizes] [Indizes]), (!KW [no_index]), (!KW [index]), (!KW [node])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_nodes_inside_index [win,stg]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_output_buffer])
+!html_name  cmd_use_output_buffer
+
+Ausgabepuffer anfordern.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_output_buffer [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+UDO bricht bei allen Formaten an der durch (!KW [parwidth])
+definierten Position die Zeilen um. Bei WinHelp und
+HTML kann es dadurch passieren, dass Querverweise
+nicht erkannt werden. Wird dieser Schalter benutzt,
+so werden Absätze erst komplett in einem ausreichend
+großen Puffer erzeugt, dann die Querverweise angelegt
+und erst dann die Zeilen umbrochen. Da dies die
+Umwandlungsdauer negativ beeinflusst, benutzt UDO
+standardmäßig keinen Ausgabepuffer. Im Beispiel
+würden Ausgabepuffer für WinHelp und HTML angefordert.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~6
+
+!item [(!SEEALSO)]
+(!KW [parwidth])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_output_buffer [win,html]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_raw_footer])
+!html_name  cmd_use_raw_footer
+
+Footer im Zielformat einbinden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_raw_footer (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Die Datei soll am Ende der Seite 1:1 ausgegeben werden. Wird der
+Befehl im Vorspann benutzt, wird für jede Seite die Datei am Ende
+ausgegeben. Wird der Befehl in einem Node benutzt, wird die Datei
+nur für diesen Node ausgegeben.
+
+Dieser Befehl wird derzeit nur für HTML unterstützt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!KW [use_raw_header]), (!KW [ignore_raw_footer])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!/use_raw_footer footer.html
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_raw_header])
+!html_name  cmd_use_raw_header
+
+Header im Zielformat einbinden.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_raw_header (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+Die Datei soll am Anfang der Seite 1:1 ausgegeben werden. Wird der
+Befehl im Vorspann benutzt, wird für jede Seite die Datei am Anfang
+ausgegeben. Wird der Befehl in einem Node benutzt, wird die Datei
+nur für diesen Node ausgegeben.
+
+Dieser Befehl wird derzeit nur für HTML und RTF unterstützt.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~10
+
+!item [(!SEEALSO)]
+(!KW [use_raw_footer]), (!KW [ignore_raw_header])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_raw_header header.html
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_compressed_descriptions])
+!html_name  cmd_use_compressed_descriptions
+
+""Komprimierte"" Description-Umgebungen benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_compressed_descriptions [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, werden
+alle Description-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
+Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
+
+Falls (!KW [use_compressed_envs]) ebenfalls benutzt wird, hat (!code [use_compressed_descriptions]) als Teilmenge davon keine Wirkung mehr.
+
+!item [(!EXISTSSINCE)] Version~7.00
+
+!item [(!SEEALSO)]
+(!KW [begin_description]), 
+
+(!KW [compressed]), 
+(!KW [not_compressed]), 
+
+(!KW [use_compressed_envs]), 
+(!KW [use_compressed_tocs]), 
+
+(!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!use_compressed_descriptions [all]
+
+# Dokument
+!begin_description
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!!end_description
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_description !compressed
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!end_description
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+# !use_compressed_descriptions [all]
+# !use_compressed_envs         [all]
+
+# Dokument
+!begin_description
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!!end_description
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_description
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!end_description
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_compressed_enumerates])
+!html_name  cmd_use_compressed_enumerates
+
+""Komprimierte"" Enumerate-Umgebungen benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_compressed_enumerates [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, werden
+alle Enumerate-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
+Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
+
+Falls (!KW [use_compressed_envs]) ebenfalls benutzt wird, hat (!code [use_compressed_enumerates]) als Teilmenge davon keine Wirkung mehr.
+
+!item [(!EXISTSSINCE)] Version~7.00
+
+!item [(!SEEALSO)]
+(!KW [begin_enumerate]), 
+
+(!KW [compressed]), 
+(!KW [not_compressed]), 
+
+(!KW [use_compressed_envs]), 
+(!KW [use_compressed_tocs]), 
+
+(!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!use_compressed_enumerates [all]
+
+# Dokument
+!begin_enumerate
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_enumerate
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_enumerate !compressed
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_enumerate
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+# !use_compressed_enumerates [all]
+# !use_compressed_envs       [all]
+
+# Dokument
+!begin_enumerate
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_enumerate
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_enumerate
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_enumerate
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_compressed_envs])
+!html_name  cmd_use_compressed_envs
+
+""Komprimierte"" Umgebungen benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_compressed_envs [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, werden
+alle Umgebungen (mit Ausnahme der verbatim-Umgebung)
+ohne zusätzliche Zwischenräume ausgegeben. Im
+Beispiel würde dieser Schalter für das ASCII-Format gesetzt.
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~15
+
+!item [(!SEEALSO)]
+(!KW [begin_blist]), 
+(!KW [begin_description]), 
+(!KW [begin_enumerate]), 
+(!KW [begin_ilist]), 
+(!KW [begin_itemize]), 
+(!KW [begin_tlist]), 
+(!KW [begin_xlist]), 
+
+(!KW [compressed]), 
+(!KW [not_compressed]), 
+
+(!KW [use_compressed_descriptions]), 
+(!KW [use_compressed_enumerates]), 
+(!KW [use_compressed_envs]), 
+(!KW [use_compressed_itemizes]), 
+(!KW [use_compressed_lists]), 
+(!KW [use_compressed_tocs]), 
+
+(!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_compressed_envs [asc]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_compressed_itemizes])
+!html_name  cmd_use_compressed_itemizes
+
+""Komprimierte"" Itemize-Umgebungen benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_compressed_itemizes [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, werden
+alle Itemize-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
+Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
+
+Falls (!KW [use_compressed_envs]) ebenfalls benutzt wird, hat (!code [use_compressed_itemizes]) als Teilmenge davon keine Wirkung mehr.
+
+!item [(!EXISTSSINCE)] Version~7.00
+
+!item [(!SEEALSO)]
+(!KW [begin_itemize]), 
+
+(!KW [compressed]), 
+(!KW [not_compressed]), 
+
+(!KW [use_compressed_envs]), 
+(!KW [use_compressed_tocs]), 
+
+(!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!use_compressed_itemizes [all]
+
+# Dokument
+!begin_itemize
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_itemize
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_itemize !compressed
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_itemize
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+# !use_compressed_itemizes [all]
+# !use_compressed_envs     [all]
+
+# Dokument
+!begin_itemize
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_itemize
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_itemize
+!item Ich bin ein Aufzählungspunkt.
+!item Ich auch.
+!item Na, und ich erst.
+!end_itemize
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_compressed_lists])
+!html_name  cmd_use_compressed_lists
+
+""Komprimierte"" Listen-Umgebungen benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_compressed_lists [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wird dieser Schalter im Vorspann angegeben, werden
+alle Listen-Umgebungen ohne zusätzliche Zwischenräume ausgegeben. Im
+Beispiel würde dieser Schalter für alle Ausgabeformate gesetzt.
+
+Falls (!KW [use_compressed_envs]) ebenfalls benutzt wird, hat (!code [use_compressed_lists]) als Teilmenge davon keine Wirkung mehr.
+
+!item [(!EXISTSSINCE)] Version~7.00
+
+!item [(!SEEALSO)]
+(!KW [begin_blist]), 
+(!KW [begin_ilist]), 
+(!KW [begin_tlist]), 
+(!KW [begin_xlist]), 
+
+(!KW [compressed]), 
+(!KW [not_compressed]), 
+
+(!KW [use_compressed_envs]), 
+(!KW [use_compressed_tocs]), 
+
+(!link [Environments] [Umgebungen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+!use_compressed_lists [all]
+
+# Dokument
+!begin_blist
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!end_blist
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_blist !compressed
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!end_blist
+(!EXAMPLE_END)
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann
+# !use_compressed_lists [all]
+# !use_compressed_envs  [all]
+
+# Dokument
+!begin_blist
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!end_blist
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_blist
+!item [Erster]
+      Ich bin ein Aufzählungspunkt. Ich habe viel Text.
+      
+      Vor allem habe ich einen zweiten Absatz!
+!item [Zweiter]
+      Ich auch.
+      
+      Hier ist mein zweiter Absatz.
+!end_blist
+(!EXAMPLE_END)
+
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_compressed_tocs])
+!html_name  cmd_use_compressed_tocs
+
+Kurze Inhaltsverzeichnisse benutzen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_compressed_tocs [(!FORMAT)] !/depth (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Wird dieses Kommando im Vorspann benutzt, wird für die angegebenen
+Ausgabeformate ein kurzes Inhaltsverzeichnis erzeugt. Im
+Haupt-Inhaltsverzeichnis werden nur die Kapitelnamen und in Kapiteln
+nur die Namen der Abschnitte ausgegeben. Im Beispiel würde der Umfang
+der Inhaltsverzeichnisse bei allen Ausgabeformaten eingeschränkt.
+
+#!item [(!EXISTEDUNTIL)] Release~6 Patchlevel~2
+#!item [Existiert wieder seit:] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [depth]), (!KW [tableofcontents]), (!link [Inhaltsverzeichnisse] [Inhaltsverzeichnisse]), (!KW [use_compressed_envs]), (!link [Umgebungen] [Umgebungen])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_compressed_tocs [all]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_style_book])
+!html_name  cmd_use_style_book
+
+Zieldatei als ""Buch"" ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_style_book [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+UDO gibt bei der Umwandlung ins (!LaTeX)-Format (!KW [node]) mit
+(!code [\chapter]) anstatt (!code [\section]), (!KW [subnode]) mit
+(!code [\section]) anstatt (!code [\subsection]) und
+(!KW [subsubnode]) mit (!code [\subsection]) anstatt
+(!code [\subsubsection]) aus. Als Documentstyle bzw. Documentclass
+wird (!code [book]) verwendet. Bei den anderen Formaten wird eine
+(!LaTeX)-ähnliche Ausgabe erzeugt, d.h. Kapitel werden auch mit
+""Kapitel #:"" bzw. ""Anhang X:"" beschriftet.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.47
+
+!item [(!SEEALSO)]
+(!KW [no_preamble])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!use_style_book [tex]
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [use_udo_index])
+!html_name  cmd_use_udo_index
+
+Indexseite automatisch erzeugen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/use_udo_index [(!FORMAT)](!t)
+
+!item [(!DESCRIPTION)]
+Wenn dieses Kommando im Vorspann benutzt wird, erzeugt UDO automatisch einen Index
+aus den gefundenen Querverweisen. Falls entsprechende !ignore_...-Befehle genutzt wurden, 
+werden die entsprechenden Kapitel, Aliase, Indexreferenzen oder Label nicht in den Index 
+aufgenommen.
+
+!item [(!SEEALSO)]
+(!KW [ignore_index]), (!KW [ignore_links]), (!KW [index]), (!KW [no_index]), 
+(!KW [use_alias_inside_index]), (!KW [use_label_inside_index]), (!KW [use_nodes_inside_index])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

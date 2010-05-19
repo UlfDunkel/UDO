@@ -1,0 +1,132 @@
+!subsubnode !/win_background
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/win_background [<colour>](!t)
+
+!item [Description:]
+	With this command you can set the background colour of your Windows   
+	Help file. You can use one of the following colours: red, green,      
+	blue, cyan, magenta, yellow, grey and white. But you should use only  
+	white, grey and black because the other colours are quite ugly.       
+
+!item [Example:] (!T)!/win_backgound grey(!t)
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/win_charwidth
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble & main part
+
+!item [Syntax:]
+	(!T)!/win_charwidth <value>(!t)
+
+!item [Description:]
+	UDO uses a constant value for calulating the indent of lists and the  
+	widths of table cells. This value works even fine with bold           
+	monospaced capital letters, but if you use normal text the indents or 
+	table cells my be too width. You can adjust this value by using       
+	(!I)!/rtf_charwidth(!i). UDO uses 150 by default.                     
+
+!item [Example:] (!T)!/win_charwidth 100(!t)
+
+!item [See:] Tables, Lists
+
+!end_xlist
+#------------------------------
+!subsubnode !/win_high_compression
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/win_high_compression(!t)
+
+!item [Description:]
+	If you use this switch inside the preamble the Microsoft Helpcompiler 
+	will compress the Windows Help file by about 50%. The compression of  
+	the Windows Help file takes some time. A similar result with a faster 
+	compression you will get with (!I)!/win_medium_compression(!i).       
+
+
+!item [See:] (!I)!/win_medium_compression(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/win_inline_bitmaps
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/win_inline_bitmaps(!t)
+
+!item [Description:]
+	If you use this switch inside the preamble of your source file UDO    
+	will use the RTF tag ''(!V)\bmcwd(!v)'' instead of ''(!V)\bmc(!v)''   
+	for displaying images. In this case you cannot use images larger than 
+	64~KB. Please read the HCP documentation to get more information      
+	about the differences between these two RTF tags.                     
+
+
+!item [See:] (!I)!/image(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/win_medium_compression
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	switch, preamble
+
+!item [Syntax:]
+	(!T)!/win_medium_compression(!t)
+
+!item [Description:]
+	If you use this switch inside the preamble the Microsoft Helpcompiler 
+	will compress the Windows Help file by about 40%.  A better result    
+	with a slower compression you will get with                           
+	(!I)!/win_high_compression(!i).                                       
+
+
+!item [See:] (!I)!/win_high_compression(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/win_propfont
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/win_propfont <fontname>(!t)
+
+!item [Description:]
+	With this command you can set the font that will be used to display   
+	text inside a Windows Help hypertext. The default is ""Times New      
+	Roman"".                                                              
+
+!item [Example:] (!T)!/win_propfont Arial(!t)
+
+
+!end_xlist
+#------------------------------
+
+
+
+

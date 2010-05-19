@@ -1,0 +1,98 @@
+!begin_itemize
+
+!index !/no_popup_headlines
+!item Neu: Schalter (!I)!/no_popup_headlines~[~](!i) (Josef Becker) (!nl) Die
+Verwendung dieses Schalters im Vorspann führt dazu, nicht wie bei
+(!I)!/no_headlines~[~](!i) bei keinem Node eine Titelzeile erzeugt wird,
+sondern nur bei allen Popup-Nodes. (!nl) Derzeit hat der Befehl nur
+Auswirkungen auf WinHelp, kann also als
+""(!I)!/no_popup_headlines~[all](!i)""
+als auch als 
+""(!I)!/no_popup_headlines~[win](!i)""
+eingesetzt werden.
+
+!index !/image_alignment
+!item Neu: Schalter (!I)!/image_alignment~[~](!i) (!nl)
+Im Vorspann eingesetzt bestimmt es die Standard-Ausrichtung von Bildern,
+die mit (!I)!/image(!i) eingebunden werden. Diese Ausrichtung wird genau
+dann benutzt, wenn ein Bild außerhalb einer center-, flushleft- oder 
+flushright-Umgebung ausgegeben werden soll. Wird ein Bild innerhalb einer
+solchen Umgebung ausgegeben, wird es genauso ausgerichtet wie der Text
+innerhalb der Umgebung, sprich ein Bild wird in einer center-Umgebung
+zentriert ausgegeben, unabhängig davon, was man bei
+(!I)!/image_alignment(!i) gesetzt hat. Will man ein Bild in einer
+center-Umgebung rechtsbüdnig ausgeben, so muß man in dem Fall noch eine
+flushright-Umgebung um den (!I)!/image(!i)-Befehl setzen. Alles klar?
+(!grin) Die Syntax:
+
+!begin_verbatim
+!image_alignment [center]
+!image_alignment [left]
+!image_alignment [right]
+!end_verbatim
+
+!index !/table_alignment
+!item Neu: Schalter (!I)!/table_alignment~[~](!i) (!nl) Funktionsweise
+identisch zu (!I)image_alignment(!i). Somit können nun auch Tabellen
+ausgerichtet werden, jedenfalls dann, wenn das Format das unterstützt (wie
+HTML, (!LaTeX), PDF(!LaTeX), ASCII, DRC, ST-Guide)
+
+!index Codepage 850
+!index !/code [cp850]
+!item Neu: Zeichensatzschalter (!I)!/code~[cp850](!i) und
+(!I)!/code~[cp437](!i) für die Codepages 850 und 437 unter DOS (letztere
+ist identisch mit (!I)!/code~[dos](!i). Wer beispielsweise Probleme hat,
+das Paragraphenzeichen zu konvertieren, weil UDO komische Zeichen ausgibt,
+der sollte seinen Text mit (!I)!/code~[cp850](!i) einleiten (Ulrich
+Kretschmer). (!B)Hinweis(!b): Die DOS-Version von UDO ((!V)udo386.exe(!v))
+erwartet standardmäßig Texte mit Codepage 437 und gibt auch diese Texte mit
+dieser Codepage aus.
+
+!index Format UDO
+!index -u
+!item Neu: Ausgabeformat ""UDO"" (ja, richtig gelesen). Übergibt man die
+Kommandozeilenoption ""-u"" oder ""(--)udo"", so erzeugt UDO eine Datei, in
+der es den kompletten Inhalt der Eingabedatei und aller zugehörigen
+Includedateien sichert. Die neue Datei ist damit zur Weitergabe geeignet,
+ohne daß der Empfänger die gleiche Verzeichnisstruktur erstellen muß
+(gewünscht von Martin Rost. Nein, es war kein Streß (!grin) ).
+
+!index (--)check
+!item Neu: Kommandozeilenoption ""(--)check"" (!nl)
+UDO startet bei Verwendung dieser Option nach dem Pass 1 ein paar
+Überprüfungen bezüglich mehrfach vergebener Dateinamen für HTML, doppelt
+vergebener Nodenamen, Labels und Aliasnamen (Ulrich Kretschmer). Zudem
+werden nach dem Pass 2 Labels und Aliasnamen dahingehend überprüft, ob sie
+überhaupt referenziert wurden (Ulrich Kretschmer).
+
+!index !/no_img_size
+!item Neu: Schalter (!I)!/no_img_size~[~](!i) (!nl)
+Mit diesem Schalter kann man unterbinden, daß UDO die Ausmaße von Bildern
+ermittelt. Wird momentan nur für HTML benutzt (siehe unten).
+
+!index Logfile
+!item Änderung: UDO gibt seine Versionsnummer nun zusätzlich im Logfile
+aus (Ulrich Kretschmer).
+
+!item Änderung: Aus ""Hints"" wurden im Logfile ""Notes"".
+
+!item Bugfix: Bei Lücken in der Node-Struktur (z.B. bei einem !/subsubnode
+direkt nach !/node) stürzte UDO entweder ab oder würfelte Kapitelnummern
+durcheinander. Nun erfolgt eine Ausgabe ins Logfile und UDO bricht die
+Konvertierung ab (Ulrich Kretschmer).
+
+!index (!/xlink)
+!item Bugfix: Bei HTML und den ascii-basierten Formaten (ASCII, DRC, ...)
+gab es bei folgendem Befehl ein Problem:
+!begin_verbatim
+blah blah (!xlink [http://www.foo.com/!~bar][])
+!end_verbatim
+Entweder wurde die Tilde gar nicht umgesetzt, bei der URL für HTML
+umgesetzt oder ganz geschluckt. Man konnte sich drehen und wenden, bekam
+aber nie das gewünschte (Stefan Braunstein). (!B)Hinweis:(!b) Hat man eine
+URL mit einer Tilde und möchte man die obige, abkürzende Schreibweise für
+(!I)(!/xlink)(!i) verwenden, so (!B)muß(!b) man die Tilde im ersten
+Parameter quoten (also (!I)!/~(!i) benutzen).
+
+!end_itemize
+

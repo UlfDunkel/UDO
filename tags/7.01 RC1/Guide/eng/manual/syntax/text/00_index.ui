@@ -1,0 +1,22 @@
+############################################################
+# @(#) Emphasising text
+############################################################
+
+!subnode Emphasising text
+
+In this section you will get to know how to layout passages in different
+ways. UDO supports centred, left justified, right justified and indented
+text, different kinds of lists, environments for preformatted text and
+tables. Furthermore you can use different text styles and footnotes.
+
+!include syntax/text/itemize.ui
+!include syntax/text/enumerat.ui
+!include syntax/text/descript.ui
+!include syntax/text/xlist.ui
+!include syntax/text/center.ui
+!include syntax/text/right.ui
+!include syntax/text/left.ui
+!include syntax/text/quote.ui
+!include syntax/text/verbatim.ui
+!include syntax/text/footnote.ui
+!include syntax/text/effects.ui

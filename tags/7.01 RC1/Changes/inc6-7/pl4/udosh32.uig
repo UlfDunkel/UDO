@@ -1,0 +1,25 @@
+!begin_itemize
+
+!item Die Shell dürfte selbsterklärend sein, bis auf folgende
+Kleinigkeiten:
+
+	!begin_itemize
+	
+	!item Die INI-Datei wird nun aus dem Verzeichnis geladen, in der
+	das Executable liegt. Beim Start gibt die Debug-Version dieses
+	Verzeichis aus.
+	
+	!item Unter Konfiguration können nun die Dateiendungen für die
+	Formate angegeben werden. Läßt man das Eingabefeld leer, so werden
+	Defaultendungen benutzt. Will man beispielsweise HTML-Dateien mit
+	der Endung (!V).htm(!v) erzeugen (UDO32 erzeugt defaultmäßig
+	(!V).html(!v)), so muß man hier in das Eingabefeld (!V).htm(!v)
+	eingeben (inklusive Punkt!).
+
+	!end_itemize
+
+	Eine Online-Hilfe werde ich nachreichen, sobald ich mehr Zeit dazu
+	habe, sie überhaupt zu schreiben.
+	
+!end_itemize
+

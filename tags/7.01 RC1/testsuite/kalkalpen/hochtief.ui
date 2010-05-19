@@ -1,0 +1,39 @@
+# hochtief.ui
+# Udo-Definitionen fuer hoch- und tiefgestellten Text
+# letzte Aenderungen 23.11.2003
+
+!ifdest [html]
+!define ^ <SUP><SMALL>
+!define ^^ </SMALL></SUP>
+!endif
+!ifdest [rtf]
+!define ^ {\up10{
+!define ^^ }}
+!endif
+!ifdest [html]
+!define _ <SUB><SMALL>
+!define __ </SMALL></SUB>
+!endif
+!ifdest [rtf]
+!define _ {\dn10{
+!define __ }}
+!endif
+!ifndest [html, rtf]
+!define ^ ^
+!define ^^ ^
+!define _ _
+!define __ _
+!endif
+# Beispiel: (!^)...(!^^); (!_)...(!__)
+
+# Zweckmaessigerweise macht man sich noch eine Version ohne kleinere Schriften, fuer alle Faelle:
+!begin_ignore
+!ifdest [html]
+!define $^ <SUP>
+!define $^^ </SUP>
+!endif
+!ifdest [html]
+!define $_ <SUB>
+!define $__ </SUB>
+!endif
+!end_ignore

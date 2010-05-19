@@ -1,0 +1,55 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : general UDO title includes
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from manual.u)
+#   fd  Jun 08: html_backpage + html_style_name redefined
+#
+################################################################################
+
+# ------------------------------------------------------------------------------
+# The title of this documentation depends on the destination format
+# ------------------------------------------------------------------------------
+!docinfo [title]   The guide of
+!docinfo [program] UDO
+
+
+
+
+
+# ------------------------------------------------------------------------------
+# Set the subject for the ST-Guide
+# ------------------------------------------------------------------------------
+!raw [stg] @subject "Documentation/Utilities"
+
+
+
+
+
+# ------------------------------------------------------------------------------
+# do some special things for HTML
+# ------------------------------------------------------------------------------
+!html_backpage    http://www.udo-open-source.org/?lan=en 'Back to UDO Website'
+
+
+# !ifset [UseForWeb]
+# Documentation for website publishing:
+# !html_style_name /udo.css
+# !html_backpage   http://www.udo-open-source.org/ 'Back to UDO Open Source (Home)'
+# !else
+# Documentation for "normal" users...
+# !html_style_name ./udo.css
+# !endif
+
+# === EOF ===

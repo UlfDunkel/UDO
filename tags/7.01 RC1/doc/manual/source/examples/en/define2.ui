@@ -1,0 +1,12 @@
+!ifdest [tex]
+  !define ff "ff
+  !define lb2 \linebreak[2]
+  !define nolb3 \nolinebreak[3]
+!else
+  !define ff ff
+  !define lb2
+  !define nolb3
+!endif
+[...]
+Tell (!LaTeX) a good place
+(!lb2) for breaking lines.

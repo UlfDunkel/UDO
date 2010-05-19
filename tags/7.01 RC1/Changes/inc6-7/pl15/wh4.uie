@@ -1,0 +1,16 @@
+!begin_itemize
+
+!index !/wh4_monofont
+!item New: New command !/wh4_monofont to set the fontname
+used for monospaced text (like !/rtf_monofont).
+
+!index !/wh4_medium_compression
+!item New: New command !/wh4_medium_compression to
+specify a medium compression rate for WinHelp4.
+
+!index !/wh4_propfont_size
+!index !/wh4_monofont_size
+!item New: New commands !/wh4_propfont_size and !/wh4_monofont_size
+to change base font size.
+
+!end_itemize

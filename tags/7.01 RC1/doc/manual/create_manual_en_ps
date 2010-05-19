@@ -1,0 +1,4 @@
+#!/bin/sh
+# dieses bash-Skript konvertiert das englische UDO-Handbuch nach PostScript
+# this bash script converts the english UDO Manual to PostScript
+udo --ps --verbose --force-long -D LANG_EN --tree -o manual-en.ps manual.u $*

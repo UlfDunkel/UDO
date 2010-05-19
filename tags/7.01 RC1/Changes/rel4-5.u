@@ -1,0 +1,13 @@
+!include inc/header.ui
+
+!begin_document
+
+!maketitle
+!tableofcontents !depth 1
+!sloppy
+!tex \sloppy
+
+!include	inc/4-5.ui
+
+!end_document
+

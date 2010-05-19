@@ -1,0 +1,23 @@
+###########################################################
+# @(#) Makefile fuer HP-UX, ISO-Latin-1, HP make
+# @(#) Dirk Hagedorn, 30.07.1996
+###########################################################
+
+CC =	gcc
+O=.o
+X=
+
+CFLAGS =	-O2 -D__HPUX_ISO__ -Wall $(XCFLAGS)
+
+#CFLAGS =	-g -O2 -D__HPUX_ISO__ \
+#-Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations \
+#-Wshadow -Wwrite-strings -Wbad-function-cast -Wcast-qual \
+#-Wconversion -pedantic 
+
+LDFLAGS =	-lgcc
+
+include makefile.in
+
+
+udo$(X):	$(OSRC) cli$(O)
+		$(CC) $(CFLAGS) $(OSRC) cli$(O) $(LDFLAGS) $(XLDFLAGS) -o $@

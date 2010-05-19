@@ -1,0 +1,150 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Practice: Tips & Tricks
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from working.ui)
+#   fd  Jun 09: multi-language paragraph added
+#   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#
+################################################################################
+
+!begin_node Tips & Tricks
+!html_name  tips
+
+# = = = = =
+
+!begin_node Split large documentations
+!html_name  tips_split
+
+If you write a documentation that is 30~kB or larger you should split up it
+into different parts that you can merge with (!KW [include]).
+
+By splitting up the documentation you are e.g. enabled to restructure it by
+simply moving one line of your main source file. If your documentation is
+part of one file you have to move blocks of text to restructure it.
+
+Another advantage is that you can find specific chapters more quickly if you
+write them to files that you name like this chapter.
+
+Denken Sie auch an mehrsprachige Dokumentationen. Wenn Sie -- wie wir es tun -- z.B. alle deutschen Texte in Dateien mit der Endung (!file [.de]) und alle englischen Texte in (!file [.en])-Dateien pflegen, behalten Sie noch besseren Überblick über die einzelnen Sprachen und können z.B. aus den (!file [.en])-Dateien rasch Kopien für z.B. Französisch erstellen, die Datei-Suffixe der Kopien in (!file [.fr]) ändern und dem französischen Übersetzer nur diese Dateien geben.
+
+Furthermore you can test or convert only some parts of the documentation.
+My be you have a documentation with five chapters. Write a preamble file, a
+main file and five files that contain the chapters:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/main.u
+(!EXAMPLE_END)
+
+If you now want to convert a single chapter you simply edit another main
+file:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/ch5test.u
+(!EXAMPLE_END)
+
+If you use this method you will be able to find errors in a large
+documentation more quickly.
+
+Just take a look at the source files of the UDO documentation if you want to
+know how to split up a large documentation. You can believe me that it would
+be hard work if all the text would be part of a single text file.
+
+!end_node # Split large documentations
+
+# = = = = =
+
+!begin_node Use standardized source files
+!html_name  tips_standardize
+
+There are some authors that write every few weeks a new program or a new
+hypertext. And in every documentation you can read a disclaimer or a
+copyright chapter. Wouldn't it be easier to use the same text all the time?
+
+No problem, just use macros. The following example shows how to use a
+standardized copyright text. May be you have a written a program that
+contains this copyright note:
+
+!autoref [off]
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+""Hello, World!"" Version 8.15 (!nl)
+Copyright (!copyright) 1996 by C. Rookie
+!end_verbatim
+(!EXAMPLE_END)
+!autoref [on]
+
+Your next program contains a similar text, only the name of the program and
+the version number differ. Wouldn't it be better to use a standardized text
+any time you write the documentation of a new software?
+
+!autoref [off]
+!(!EXAMPLE_BEGIN)
+!begin_verbatim
+""(!PrgName)"" Version (!PrgVersion) (!nl)
+Copyright (!copyright) (!PrgYear) by C. Rookie
+!end_verbatim
+(!EXAMPLE_END)
+!autoref [on]
+
+Here the name, the version number and the years will be replaced by the
+contents of macros ""PrgName"", ""PrgVersion"" and ""PrgYear"". If you write
+the upper text to a sinlge file you can use it for many documentations where
+only the macros have to be defined.
+
+!autoref [off]
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!macro PrgName    Hello, World!
+!macro PrgVersion 8.15
+!macro PrgYear    1996
+...
+!begin_document
+...
+!include copyleft.ui
+!end_verbatim
+(!EXAMPLE_END)
+!autoref [on]
+
+It's true that this is only a small example. But you can make more complex
+files if you want to.
+
+!end_node # Use standardized source files
+
+# = = = = =
+
+!begin_node Write your own commands
+!html_name  tips_own_commands
+
+UDO doesn't support every command of the destination formats. If you need a
+special command you can add it by using definitions with parameters. You
+only need some knowledge about the destination format.
+
+The following example shows how to write commands for changing the font size
+for (!LaTeX), HTML, Windows Help and RTF:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES_DIST)font_size.u
+(!EXAMPLE_END)
+
+!end_node # Write your own commands
+
+# = = = = =
+
+!end_node # Tips & Tricks
+
+# === EOF ===

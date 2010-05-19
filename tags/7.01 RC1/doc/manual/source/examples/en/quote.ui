@@ -1,0 +1,5 @@
+!begin_quote
+This paragraph is used inside a
+quote environment and will be
+displayed indented.
+!end_quote

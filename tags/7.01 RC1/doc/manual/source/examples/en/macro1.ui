@@ -1,0 +1,13 @@
+!macro HTML Hypertext Markup Language
+!macro UDO  (!B)U(!b)niversal (!B)Do(!b)cument
+!macro DOSG (!T)UDO6GDOS.LZH(!t)
+!ifdest [html]
+  !macro PICPATH gif/
+!else
+  !macro PICPATH img/
+!endif
+[...]
+The (!HTML) ...
+The (!UDO) Format ...
+The archive named (!DOSG) ...
+!image (!PICPATH)/tiger

@@ -1,0 +1,72 @@
+###########################################
+# @(#) Formulas using UDO & LaTeX - dh 1996
+###########################################
+
+# uncomment the following line for LaTeX2e
+# !tex_2e
+
+!tex \parskip 5pt
+!tex \parindent 0pt
+
+!code_iso
+!title Formulas using
+!program UDO & (!LaTeX)
+!author Dirk Hagedorn
+!email Internet: DirkHage@aol.com
+!email MausNet: Dirk Hagedorn @ MK2
+
+####################################################
+# Define formulas for floating text
+####################################################
+
+!ifdest [tex]
+!define	ab2	$(a+b)^2=a^2+2ab+b^2$
+!else
+!macro  ab2 (a+b)² = a² + 2ab + b²
+!endif
+
+!begin_document
+
+!node Binomial theorems
+!subtoc [all]
+
+!subnode The first binomial theorem
+
+The first binomial theorem: (!ab2)
+
+!subnode The seconf binomial theorem
+
+The second binomial theorem:
+
+!ifdest [tex]
+	!begin_raw
+	\begin{displaymath}
+	(a-b)^2 = a^2 - 2ab + b^2
+	\end{displaymath}
+	!end_raw
+!else
+	!begin_center
+	(a-b)² = a² - 2ab + b²
+	!end_center
+!endif
+
+
+!subnode The third binomial theorem
+
+The third binomial theorem:
+
+!ifdest [tex]
+	!begin_raw
+	\begin{equation}
+	(a+b)(a-b) = a^2 - b^2
+	\end{equation}
+	!end_raw
+!else
+	!begin_center
+	(a+b)(a-b) = a² - b² (!nl)
+	(1)
+	!end_center
+!endif
+
+!end_document
+

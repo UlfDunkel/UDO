@@ -1,0 +1,895 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Text styling
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: etc. -> usw.
+#   fd  Jun 08: text reviewed
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: 'lediglich' -> 'nur'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 10: using macro (!const [])
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 03: chapter style_tables: hint for table_alignment added
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  May 19: "short" -> "compressed"
+#
+################################################################################
+
+!begin_node Textgestaltung
+!html_name  style
+
+In diesem Abschnitt werden Sie erfahren, mit welchen Kommandos und
+Platzhaltern Sie Ihren Text formatieren können. UDO ermöglicht die
+Zentrierung, links- und rechtsbündige Ausrichtung sowie die Einrückung
+von Textpassagen, bietet verschiedene Aufzählungsumgebungen sowie eine
+Umgebung für Klartext.
+
+Darüber hinaus stehen selbstverständlich verschiedene Texteffekte
+sowie die Möglichkeit, Fußnoten direkt im Text anzugeben, zur
+Verfügung.
+
+# = = = = =
+
+!begin_node Aufzählungen
+!html_name  style_itemizations
+!label      itemize-Umgebung
+
+Mit der itemize-Umgebung lassen sich auf einfache Art und Weise
+Aufzählungen erstellen, bei denen die Aufzählungspunkte (""Items"") durch
+Punkte und Striche gekennzeichnet werden.
+
+Eine itemize-Umgebung wird mit (!KW [begin_itemize]) eingeleitet und
+mit (!KW [end_itemize]) beendet. Die einzelnen Aufzählungspunkte werden
+jeweils mit dem Kommando (!KW [item]) gekennzeichnet.
+
+Die Befehle zum Einleiten oder Beenden der Umgebung bzw. zum Einleiten
+eines Aufzählungspunktes müssen am Zeilenanfang stehen, eventuell
+eingerückt durch Leerzeichen oder Tabulatoren.
+
+Die itemize-Umgebung kann mehrfach verschachtelt benutzt werden und
+lässt sich auch mit anderen Umgebungen kombinieren.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/itemize1.ui
+(!EXAMPLE_AFTER)
+!include  (!EXAMPLES)/itemize1.ui
+(!EXAMPLE_END)
+
+Hier ein kleines Beispiel, in dem die itemize-Umgebung
+verschachtelt benutzt wird.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/itemize2.ui
+(!EXAMPLE_AFTER)
+!include  (!EXAMPLES)/itemize2.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+!index (!kw [compressed])
+UDO gibt nach jedem Item eine Leerzeile aus, um die Items voneinander
+abzuheben. Dies ist jedoch nicht immer erwünscht, besonders dann
+nicht, wenn die Items nur wenig Text enthalten und die gesamte
+Aufzählung dadurch unschön auseinandergezogen würde.
+
+Um nun Aufzählungen ""komprimiert"" auszugeben, können Sie den Schalter
+(!KW [compressed]) direkt hinter dem Befehl (!KW [begin_itemize]) angeben.
+Dies bewirkt, dass die zusätzlichen Zwischenräume in dieser nicht
+ausgegeben werden. Zusätzlich wird die Unterdrückung der Ausgabe der
+Zwischenräume an innere Umgebungen vererbt.
+
+Es folgen zwei kurze Beispiele, die Ihnen zeigen sollen, wie der
+Schalter (!KW [compressed]) eingesetzt wird und welche Auswirkungen er hat.
+Im ersten Beispiel wird auf (!KW [compressed]) verzichtet, im zweiten
+Beispiel wird er eingesetzt:
+
+Ohne (!KW [compressed])~!..
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/itemize3.ui
+(!EXAMPLE_END)
+!..~ergibt dies:
+(!EXAMPLE_BEGIN)
+!include (!EXAMPLES)/itemize3.ui
+(!EXAMPLE_END)
+Mit (!KW [compressed])~!..
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/itemize4.ui
+(!EXAMPLE_END)
+!..~ergibt dies:
+(!EXAMPLE_BEGIN)
+!include (!EXAMPLES)/itemize4.ui
+(!EXAMPLE_END)
+
+Falls Sie keinen Unterschied erkennen sollten, ist es in dem Format,
+in dem Sie gerade dieses Handbuch lesen, nicht möglich, die
+Zwischenräume zu unterdrücken, oder sie wurden z.B. bei HTML über eine CSS-Anweisung fixiert.
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate !compressed
+
+!item Als Markierung für die erste Ebene dieser Umgebung wird ein
+Bullet verwendet, welches in den Systemzeichensätzen der verschiedenen
+Rechner, auf denen UDO läuft, jeweils an anderer Stelle definiert ist.
+
+!index (!kw [no_umlaute])
+!item Verwendet man im Vorspann den Schalter (!KW [no_umlaute]), so
+wird als Markierung für die Ebene ein ""o"" statt des Bullets verwendet.
+!end_enumerate
+
+!end_node # 
+
+# = = = = =
+
+!begin_node Nummerierungen
+!html_name  style_enumerations
+!label      enumerate-Umgebung
+
+Die enumerate-Umgebung ist ebenso wie die itemize-Umgebung dafür
+geeignet, schnell und komfortabel durchnummerierte Aufzählungen zu
+erstellen, bei denen die Aufzählungspunkte durch Zahlen oder Buchstaben
+gekennzeichnet werden.
+
+Eine enumerate-Umgebung wird mit (!KW [begin_enumerate]) eingeleitet
+und mit (!KW [end_enumerate]) beendet. Die einzelnen Aufzählungspunkte
+werden jeweils mit dem Kommando (!KW [item]) gekennzeichnet.
+
+Die enumerate-Umgebung ist auch mehrfach schachtelbar und mit anderen
+Umgebungen kombinierbar. Hier ein kleines, unverschachteltes Beispiel:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/enum1.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/enum1.ui
+(!EXAMPLE_END)
+
+Hier ein kleines Beispiel, in dem die enumerate-Umgebung
+verschachtelt und mit dem Schalter (!KW [compressed]) benutzt wird.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/enum2.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/enum2.ui
+(!EXAMPLE_END)
+
+(!HINTS)
+
+!begin_enumerate !compressed
+!item Bei den Formaten, die von Hause aus eine vergleichbare Umgebung
+     anbieten (z.B. HTML) werden die Punkte nicht von UDO nummeriert.
+     Daher sollte man vorsichtig mit Angaben wie ""siehe Punkt~1"" oder
+     ""vergleiche Punkt~b)"" sein.
+
+!item Die dritte Ebene dieser Umgebung wird relativ gesehen etwas
+     weiter eingerückt, da die Nummerierung durch römische Zahlen mehr
+     Platz benötigt.
+
+!item Bei vielen Punkten sollte man aufpassen, nicht die Grenzen zu
+     überschreiten. Wird eine Ebene mit Buchstaben nummeriert, sollte
+     man nicht mehr als (!const [26])~Aufzählungspunkte benutzen.
+
+!item Eine ausführliche Erläuterung des Schalters (!KW [compressed]) finden Sie in
+     der Beschreibung zur itemize-Umgebung.
+!end_enumerate
+
+!end_node # 
+
+# = = = = =
+
+!begin_node Beschreibungen
+!html_name  style_descriptions
+!label      description-Umgebung
+
+Die description-Umgebung ist dafür geeignet, eine Beschreibung von
+mehreren Begriffen zu erzeugen, wobei Begriffe fett dargestellt werden.
+
+Ein Aufzählungspunkt wird durch (!KW [item]) (!C)[(!TEXT)](!c) gekennzeichnet,
+wobei ""(!TEXT)"" in der Aufzählung fett dargestellt wird.
+
+Die description-Umgebung ist mehrfach schachtelbar und lässt sich auch
+mit anderen Umgebungen kobinieren. Hier ein kleines, unverschachteltes
+Beispiel:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/descript1.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/descript1.ui
+(!EXAMPLE_END)
+
+In diesem Beispiel wird die description-Umgebung verschachtelt und
+mit dem Schalter (!KW [compressed]) benutzt.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/descript2.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/descript2.ui
+(!EXAMPLE_END)
+
+(!HINTS)
+
+!begin_enumerate !compressed
+!item Wenn der zu beschreibende Text eine schließende eckige Klammer
+     enthält, muss man dieser Klammer ein Ausrufezeichen
+     voranstellen, damit UDO erkennt, dass die folgende eckige Klammer
+     auch fett dargestellt werden soll.
+
+!item Wenn der das letzte Zeichen ein Ausrufezeichen ist, dann muß diesem
+      ein / folgend, damit UDO nicht die obige Regel annimmt.
+      
+!item Der in den eckigen Klammer angegebene Text wird auch in HTML fett
+     ausgegeben, obwohl dies eher untypisch für HTML ist. In einer der
+     nächsten Versionen wird man dies ändern können.
+
+!item Eine ausführliche Erläuterung des Schalters (!KW [compressed]) finden Sie in
+     der Beschreibung zur itemize-Umgebung.
+!end_enumerate
+
+!end_node # Aufzählungen
+
+# = = = = =
+
+!begin_node Listen
+!html_name  style_lists
+!label      xlist-Umgebung
+
+Die xlist-Umgebung eignet sich, genau wie die description-Umgebung, zur
+Erläuterung von Begriffen. Bei dieser Umgebung werden die
+Beschreibungen der Begriffe jedoch alle untereinander aufgeführt. Wie
+weit die Beschreibungen eingerückt wird, hängt von der Länge des bei
+(!KW [begin_xlist]) (!C)[(!TEXT)](!c) übergebenen Textes ab. Die beiden eckigen
+Klammern werden dabei nicht mitgezählt.
+
+Die Umgebung wird mit (!KW [begin_xlist]) (!C)[(!TEXT)](!c) eingeleitet und mit
+(!KW [end_xlist]) beendet. Ein Aufzählungsbegriff wird wie bei der
+description-Umgebung durch (!KW [item]) (!C)[(!TEXT)](!c) gekennzeichnet.
+
+Die Umgebungen können mehrfach verschachtelt benutzt werden und lassen
+sich auch mit anderen Umgebungen kombinieren.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/xlist1.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/xlist1.ui
+(!EXAMPLE_END)
+
+Der bereits in den vorherigen Kapiteln besprochene Schalter
+(!KW [compressed]) lässt sich auch bei den Listen einsetzen. Um eine
+""komprimierte"" Liste zu erzeugen, geben Sie einfach den Schalter am
+Ende der Zeile an. Auch hier ein Beispiel:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/xlist2.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/xlist2.ui
+(!EXAMPLE_END)
+
+!label blist-Umgebung
+!label ilist-Umgebung
+!label tlist-Umgebung
+Seit Release 6 gibt es drei weitere Umgebungen, die genauso
+funktionieren wie die hier gezeigte xlist-Umgebung. Bei diesen
+Umgebungen werden jedoch die Texte, die sich innerhalb der eckigen
+Klammern befinden, automatisch mit anderen Schriftarten ausgegeben.
+
+!begin_enumerate !compressed
+
+!item Bei der blist-Umgebung (bold list) werden die Items fett
+ausgegeben. Die blist-Umgebung wird mit (!KW [begin_blist]) eingeleitet
+und mit (!KW [end_blist]) beendet.
+
+!item Bei der ilist-Umgebung (italic list) werden die Items kursiv
+ausgegeben. Die ilist-Umgebung wird mit (!KW [begin_ilist]) eingeleitet
+und mit (!KW [end_ilist]) beendet.
+
+!item Bei der tlist-Ugebung (typewritered list) werden die Items
+nichtproportional ausgegeben. Die tlist-Umgebung wird mit
+(!KW [begin_tlist]) eingeleitet und mit (!KW [end_tlist]) beendet.
+
+!end_enumerate
+
+!smallskip
+
+Das folgende Beispiel soll demonstrieren, wie das Ergebnis aussieht.
+Zunächst der UDO-Quelltext:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/xlist3.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/xlist3.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+Bezüglich dieser Listen-Umgebungen gibt es einige Dinge zu beachten:
+
+!begin_enumerate !compressed
+!item Wenn der zu beschreibende Text eine schließende eckige Klammer
+enthält, muss man dieser Klammer ein Ausrufezeichen
+voranstellen, damit UDO erkennt, dass die folgende eckige Klammer
+noch zum ""linken Teil"" des Punktes zählt.
+
+!item Wenn der das letzte Zeichen ein Ausrufezeichen ist, dann muß diesem
+      ein ""/"" folgen, damit UDO nicht die obige Regel annimmt.
+
+!index (!kw [html_no_xlist])
+!item Bei HTML erzeugt für diese Listen Tabellen. Leider
+unterscheiden sich die verschiedenen Browser bei der Ausgabe der Tabellen.
+Falls nicht gewünscht, kann man per (!KW [html_no_xlist]) veranlassen,
+dass die Listen als description-Umgebungen ausgeben werden.
+# !item HTML, Linuxdoc-SGML und Texinfo bietet keine direkte
+# Unterstützung für Listen diesen Typs, daher werden Listen wie
+# Beschreibungen behandelt. Benutzt man jedoch den Schalter
+# (!KW [use_xlist]) im Vorspann, werden diese Listen wie beim
+# ASCII-Format ausgegeben, jedoch dann als vorformatierter Text,
+
+!index (!kw [rtf_charwidth])
+!index (!kw [win_charwidth])
+!item UDO kennt nicht die Schriftbreiten der benutzten Fonts für
+WinHelp und RTF. Falls die Einrückungen zu groß oder zu klein
+ausfallen, kann man die Tiefe durch die Schalter (!KW [rtf_charwidth])
+bzw. (!KW [win_charwidth]) korrigieren.
+
+!item Eine ausführliche Erläuterung des Schalters (!KW [compressed]) finden Sie in
+der Beschreibung zur itemize-Umgebung.
+
+!end_enumerate
+
+!end_node # Listen
+
+# = = = = =
+
+!begin_node Zentrieren von Zeilen
+!html_name  style_centered
+!label      center-Umgebung
+
+Zeilen, die innerhalb einer center-Umgebung stehen, werden in der
+Ausgabedatei zentriert dargestellt, sofern das jeweilige Ausgabeformat
+zentrierten Text unterstützt.
+
+Die center-Umgebung kann innerhalb anderer Umgebungen verwendet werden,
+auch innerhalb einer anderen center-Umgebung (so sinnlos das auch sein
+mag).
+
+Werden andere Umgebungen innerhalb der center-Umgebung verwendet, dann
+werden diese wie sonst auch ausgegeben. Erst wenn die center-Umgebung
+wieder aktiv ist, wird Text zentriert ausgegeben.
+
+Falls das folgende kleine Beispiel nicht zentriert wird, liegt das
+daran, dass das Format der Dokumentation, die Sie gerade lesen, keine
+Zentrierungen zulässt.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/center.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/center.ui
+(!EXAMPLE_END)
+
+Wie man sieht, formatiert UDO Absätze auch hier. Um einen manuellen
+Zeilenumbruch zu setzen, bedient man sich des Befehls (!KKW [nl]), vor dem unbedingt ein Leerzeichen stehen muss.
+
+!end_node # Zentrieren von Zeilen
+
+# = = = = =
+
+!begin_node Rechtsbündiger Text
+!html_name  style_justifiedright
+!label      flushright-Umgebung
+
+Zeilen, die innerhalb einer flushright-Umgebung stehen, werden in der
+Ausgabedatei rechtsbündig dargestellt, sofern das jeweilige
+Ausgabeformat rechtsbündigen Text unterstützt.
+
+Die flushright-Umgebung kann innerhalb anderer Umgebungen verwendet
+werden, auch innerhalb einer anderen flushright-Umgebung (so sinnlos
+das auch sein mag).
+
+Werden andere Umgebungen innerhalb der flushright-Umgebung verwendet,
+dann werden diese wie sonst auch ausgegeben. Erst wenn die
+flushright-Umgebung wieder aktiv ist, wird Text rechtsbündig
+ausgegeben.
+
+Falls das folgende kleine Beispiel nicht rechtsbündig dargestellt wird,
+so liegt das daran, dass das Format der Dokumentation, die Sie gerade
+lesen, keinen rechtsbündigen Text zulässt.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/flushright.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/flushright.ui
+(!EXAMPLE_END)
+
+Wie man sieht, formatiert UDO Absätze auch hier. Um einen manuellen
+Zeilenumbruch zu setzen, bedient man sich des Befehls (!KKW [nl]), vor dem unbedingt ein Leerzeichen stehen muss.
+
+!end_node # Rechtsbündiger Text
+
+# = = = = =
+
+!begin_node Linksbündiger Text
+!html_name  style_justifiedleft
+!label      flushleft-Umgebung
+
+Zeilen, die innerhalb einer flushleft-Umgebung stehen, werden in der
+Ausgabedatei linksbündig ohne Blocksatz dargestellt.
+
+Die flushleft-Umgebung kann innerhalb anderer Umgebungen verwendet
+werden, auch innerhalb einer anderen flushleft-Umgebung, so sinnlos
+das auch normalerweise sein mag.
+
+Werden andere Umgebungen innerhalb der flushleft-Umgebung verwendet,
+dann werden diese wie sonst auch ausgegeben. Erst wenn die
+flushleft-Umgebung wieder aktiv ist, wird Text linksbündig ausgegeben.
+
+Die flushleft-Umgebung eignet sich dafür, Text bei den Formaten
+linksbündig auszugeben, die sonst standardmäßig Blocksatz erzeugen.
+Ein Beispiel:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/flushleft.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/flushleft.ui
+(!EXAMPLE_END)
+
+Wie man sieht, formatiert UDO Absätze auch hier. Um einen manuellen
+Zeilenumbruch zu setzen, bedient man sich des Befehls (!KKW [nl]), vor dem unbedingt ein Leerzeichen stehen muss.
+
+!end_node # Linksbündiger Text
+
+# = = = = =
+
+!begin_node Einrücken von Absätzen
+!html_name  style_indentations
+!label      quote-Umgebung
+
+Die quote-Umgebung dient dazu, Passagen eingerückt darzustellen. Diese
+Umgebung wird mit (!KW [begin_quote]) eingeleitet und mit (!KW [end_quote]) beendet.
+Die quote-Umgebung lässt sich mehrfach ineinander benutzen, man kann
+Sie auch mit anderen Umgebungen kombinieren.
+
+Diese Umgebung eignet sich dazu, Textpassagen deutlicher vom
+restlichen Text abzuheben. Dieser Effekt wurde auch bei folgendem
+Beispiel erzielt:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/quote.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/quote.ui
+(!EXAMPLE_END)
+
+!end_node # Einrücken von Absätzen
+
+# = = = = =
+
+!begin_node Vorformatierter Text
+!html_name  style_preformatted_text
+!label      verbatim-Umgebung
+
+# 22.01.1996: Hinweis auf die raw-Umgebung
+
+UDO sorgt selbständig für die Formatierung des auzugebenden Textes.
+Dies ist jedoch nicht immer erwünscht. Will man beispielsweise
+Schnipsel eines Sourcecodes darstellen, wäre es fatal, würde UDO hier
+eine Formatierung vornehmen.
+
+Zur Ausgabe von vorformatiertem Text kann man sich daher der
+verbatim-Umgebung bedienen, welche mit (!KW [begin_verbatim]) begonnen
+und mit (!KW [end_verbatim]) beendet wird.
+
+Der Text, der innerhalb dieser Umgebung steht, wird nicht besonders
+behandelt, d.h., es wird der Zeilenumbruch exakt übernommen und es
+werden keine UDO-Kommandos (bis auf (!KW [end_verbatim])) bearbeitet.
+Steht eine verbatim-Umgebung allerdings in einer anderen Umgebung, so
+wird der vorformatierte Text zusätzlich eingerückt. Beachten Sie dazu
+auch den Hinweis am Ende dieses Abschnitts.
+
+Bei der Ausgabe ins (!LaTeX)-Format werden die gleichnamigen Befehle
+(!V)\begin{verbatim}(!v) und (!V)\end{verbatim}(!v) ausgegeben. Bei den
+anderen Formaten wird (falls nötig) ein nichtproportionaler Font
+eingestellt und werden Sonderzeichen automatisch angepasst.
+
+!index (!kw [tabwidth])
+Tabulatoren, die innerhalb einer verbatim-Umgebung auftauchen, werden
+von UDO automatisch durch Leerzeichen ersetzt. Durch den Schalter (!KW [tabwidth])
+können Sie UDO mitteilen, mit welcher Tabulatorbreite der
+Text geschrieben wurde.
+
+!smallskip
+
+!index (!kw [vinclude])
+Da innerhalb einer verbatim-Umgebung keine UDO-Kommandos und somit auch
+nicht (!KW [include]) beachtet werden, wäre es nicht möglich, eine
+externe Datei einzuladen und diese unformatiert darzustellen. Aus
+diesem Grund bietet UDO den Befehl (!KW [vinclude]) an, der eine
+Befehlskombination aus (!KW [begin_verbatim]), (!KW [include]) und
+(!KW [end_verbatim]) darstellt.
+
+Falls Sie jedoch Passagen benutzen wollen, die bereits im Ausgabeformat
+geschrieben wurden (z.B. eine mit (!LaTeX) gesetzte Tabelle), müssen Sie 
+sich der raw-Umgebung bedienen.
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate !compressed
+
+!item Da andere Umgebungen im Quelltext eingerückt werden können,
+erscheint es verlockend, auch eine verbatim-Umgebung im Quelltext
+passend einzurücken. Bedenken Sie allerdings, dass führende Leerzeichen
+bei der Ausgabe des vorformatierten Textes übernommen werden und dieser
+dann in der späteren Ausgabedatei zu weit rechts stehen würde, falls Sie
+den Text der verbatim-Umgebung einrücken.
+
+!item Der Unterschied zur raw-Umgebung besteht darin, dass der Text der
+verbatim-Umgebung 1:1 dargestellt wird. Text der raw-Umgebung wird
+hingegen 1:1 übernommen und dient daher der Einbindung spezieller
+Formatbefehle.
+
+!end_enumerate
+
+!end_node # Vorformatierter Text
+
+# = = = = =
+
+!begin_node Text-Screenshots darstellen
+!html_name  style_linegraphics
+!label      linedraw-Umgebung
+
+Normalerweise ersetzt UDO DOS-Grafikzeichen durch die ASCII-Zeichen ""(!code [+])"",
+""(!code [--])"" und ""(!code [|])"", um z.B. DOS-Screenshots halbwegs realistisch
+darzustellen. Eine direkte Einbindung von Screenshots, die DOS-Grafikzeichen
+enthalten, ist daher nicht möglich.
+
+Zur Ausgabe von Screenshots kann man sich daher der
+linedraw-Umgebung bedienen, welche mit (!KW [begin_linedraw]) begonnen
+und mit (!KW [end_linedraw]) beendet wird.
+
+Der Text, der innerhalb dieser Umgebung steht, wird wie in einer
+verbatim-Umgebung dargestellt, d.h. nicht besonders
+behandelt, der Zeilenumbruch wird exakt übernommen und es
+werden keine UDO-Kommandos (bis auf (!KW [end_linedraw])) bearbeitet.
+Steht eine linedraw-Umgebung allerdings in einer anderen Umgebung, so
+wird der vorformatierte Text zusätzlich eingerückt.
+
+Bei Nicht-RTF-Formaten wird auf den DOS-Zeichensatz umgeschaltet,
+bei RTF wird der Zeichensatz ""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm])""
+benutzt. Bei der Ausgabe ins (!LaTeX)-Format werden die Befehle
+(!code [\begin{verbatim}]) und (!code [\end{verbatim}]) ausgegeben. Bei den
+anderen Formaten wird (falls nötig) ein nichtproportionaler Font
+eingestellt und werden Sonderzeichen automatisch angepasst.
+
+!index (!kw [tabwidth])
+Tabulatoren, die innerhalb einer linedraw-Umgebung auftauchen, werden
+von UDO automatisch durch Leerzeichen ersetzt. Durch den Schalter (!KW [tabwidth])
+können Sie UDO mitteilen, mit welcher Tabulatorbreite der
+Text geschrieben wurde.
+
+!index (!kw [ldinclude])
+Da innerhalb einer linedraw-Umgebung keine UDO-Kommandos und somit auch
+nicht (!KW [include]) beachtet werden, wäre es nicht möglich, eine
+externe Datei einzuladen und diese unformatiert darzustellen. Aus
+diesem Grund bietet UDO den Befehl (!KW [ldinclude]) an, der eine
+Befehlskombination aus (!KW [begin_linedraw]), (!KW [include]) und
+(!KW [end_linedraw]) darstellt.
+
+!smallskip
+
+(!HINT)
+
+!begin_enumerate !compressed
+!item Da andere Umgebungen im Quelltext eingerückt werden können,
+     erscheint es verlockend, auch eine linedraw-Umgebung im Quelltext
+     passend einzurücken. Bedenken Sie allerdings, dass führende
+     Leerzeichen bei der Ausgabe des vorformatierten Textes übernommen
+     werden und dieser dann in der späteren Ausgabedatei zuweit rechts
+     stehen würde, falls Sie den Text der linedraw-Umgebung einrücken.
+
+!end_enumerate
+
+!end_node # Text-Screenshots darstellen
+
+# = = = = =
+
+!begin_node Fußnoten
+!html_name  style_footnotes
+
+Text, der durch (!KKW [N]) und (!KKW [n]) eingefasst wird, wird in eine Fußnote
+umgewandelt, sofern das Ausgabeformat Fußnoten unterstützt. Bei den
+anderen Ausgabeformaten wird (!KKW [N]) einfach durch ""(!code [~(])"" und (!KKW [n]) durch
+""(!code [!)])"" ersetzt; die Fußnote erscheint hier also einfach in Klammern.
+
+(!B)Wichtig:(!b) Vor (!KKW [N]) sollte kein Leerzeichen stehen, da sonst die
+Fußnotenmarkierung später in der Ausgabedatei frei im Raum steht und
+der Bezug weniger klar erkenntlich wird! Unterstützt das Ausgabeformat
+keine Fußnoten, gibt UDO vor der öffnenden Klammer (!code [(]) zusätzlich noch das
+fehlende Leerzeichen aus.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/footnotes.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/footnotes.ui
+(!EXAMPLE_END)
+
+Fußnoten werden von folgenden Formaten unterstützt:
+
+!begin_itemize !compressed
+!item (!LaTeX)
+!item Linuxdoc-SGML
+!item LyX
+!item Texinfo
+!item RTF
+!end_itemize
+
+(!HINTS)
+
+!begin_enumerate !compressed
+!item Dass UDO bei den Formaten, die keine Fußnoten unterstützen, den
+     Fußnotentext einfach in Klammern setzt, ist natürlich etwas
+     unglücklich. Besser wäre es, UDO würde hier die Fußnotentexte
+     sammeln und am Ende eines Kapitels ausgeben. Leider ist dies eine
+     recht knifflige Angelegenheit, die nicht von heute auf morgen
+     gelöst werden kann.
+
+!item Denken Sie daran, vor (!KKW [N]) kein Leerzeichen zu verwenden.
+!end_enumerate
+
+!end_node # Fußnoten
+
+# = = = = =
+
+!begin_node Schriftarten
+!html_name  style_textstyles
+
+UDO ermöglicht Ihnen, bereits im Quelltext festzulegen, in welcher
+Schriftart Worte oder Sätze im Ausgabeformat erscheinen soll.
+
+Um für eine Textpassage eine passende Schriftart zu setzen, müssen Sie
+diese mit den zugehörigen Platzhaltern klammern. Lange Rede, kurzer
+Sinn, hier ein Beispiel:
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/effects.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/effects.ui
+(!EXAMPLE_END)
+
+In der folgenden Tabelle können Sie ablesen, durch welche Kommandos
+die Schriftarten im jeweiligen Format erzeugt werden:
+
+# Textstil-Ausgabeformate
+!include _styles.ui
+
+Wie man sieht, werden bei der Ausgabe ins ASCII-Format die Zeichen zur
+Einschaltung von Schriftarten benutzt, wie sie im Usenet üblich
+sind. Die Zeichen werden bei der Ermittlung von Zeilenlängen nicht
+berücksichtigt.
+
+!index (!kw [no_effects])
+Wenn man bei einem Ausgabeformat keine Schriftarten benutzen möchte,
+so kann man die Ausgabe der Schriftartbefehle durch die Angabe des
+Schalter (!KW [no_effects]) unterdrücken. Der Schalter muss dabei zusammen mit
+dem/den gewünschten Format(en) im Vorspann angegeben werden. Um z.B.
+keine Schriftarten beim ASCII- und Manualpage-Format zu benutzen,
+benutzt man (!KW [no_effects] [[asc,man!!]]).
+
+(!HINT)
+
+Mit Definitionen lassen sich leicht benutzerdefinierte Schriftarten
+erstellen. Dazu muss man natürlich Kenntnis der Formatbefehle des
+jeweiligen Formates haben. Im folgenden Beispiel wird gezeigt, wie man
+die vom ST-Guide unterstützte helle Schrift ein- und ausschalten kann:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifdest [stg]
+  !define G @{G}
+  !define g @{g}
+!else
+  !define G
+  !define g
+!endif
+
+Normal und (!G)ghosted(!g).
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node # Schriftarten
+
+# = = = = =
+
+!begin_node Schriftfarben
+!html_name  style_textcolors
+
+UDO unterstützt verschiedene Systemfarben für die Textgestaltung. Zur Zeit sind es folgende Farben:
+
+!index Farben
+!include colors.de
+
+(!COLORSUPPORT)
+
+!end_node # Schriftfarben
+
+# = = = = =
+
+!begin_node Tabellen
+!html_name  style_tables
+!label      table-Umgebung
+
+Seit Release~5 besteht die Möglichkeit, einfache Tabellen mit UDO
+setzen zu lassen. Sie können festlegen, wie Spalten ausgerichtet werden
+und wo horizontale oder vertikale Linien in der Tabelle benutzt werden
+sollen.
+
+!index !/!/
+!index (!kw [begin_table])
+!index (!kw [end_table])
+!index (!kw [hline])
+!index (!kw [table_caption])
+Um mit UDO Tabellen zu setzen, benötigen Sie folgende Kommandos:
+
+!begin_enumerate !compressed
+!item (!KW [table_caption]) (!C)[(!TEXT)](!c)
+!item (!KW [begin_table] [[...!!]]) {(!KW [hline])}
+!item (!KW [end_table])
+!item (!KW [hline])
+!item (!KW [!/])
+!end_enumerate
+
+Das Kommando (!KW [table_caption]) legt die Überschrift der folgenden Tabelle
+fest. (!KW [table_caption]) muss vor der table-Umgebung eingesetzt werden,
+darf also nicht innerhalb dieser Umgebung stehen.
+
+Das Kommando (!KW [begin_table]) leitet eine Tabelle ein. Das Ende der
+Tabelle wird mit (!KW [end_table]) angegeben. Direkt nach
+(!KW [begin_table]) können Sie angeben, wie die Spalten der Tabelle
+ausgerichtet werden sollen (""(!code[l])"" = linksbündig, ""(!code[c])"" = zentriert, ""(!code[r])"" = rechtsbündig)
+und vor und nach welchen Spalten vertikale Linien gezogen werden sollen
+(durch das Symbol ""(!code[|])""). Folgt diesen Angaben noch das Kommando
+(!KW [hline]), beginnt die Tabelle mit einer horizontalen Linie.
+
+Nachdem Sie das Format der Tabelle angegeben haben, folgt der
+eigentliche Tabelleninhalt. Jede Tabellenzeile muss auch in einer
+Textzeile angegeben werden, wobei die einzelnen Zellen durch zwei
+Ausrufezeichen voneinander getrennt werden. Leere Tabellenfelder
+sollten im Quelltext stets mit einer Tilde (!~) gefüllt werden, da
+diese Tabellen sonst in einigen Browsern unschön dargestellt werden.
+
+Möchten Sie eine horizontale Linie in der Tabelle ausgeben, benutzen
+Sie dazu das Kommando (!KW [hline]). Dieser Befehl muss am Anfang einer
+Zeile und alleine in dieser Zeile stehen.
+
+Falls Sie die obigen Erklärungen mehr verwirrt haben sollten, als Ihnen
+den Tabellensatz zu erläutern, sehen sich einfach mal folgendes
+kleines Beispiel an:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!table_caption Tabellen mit UDO
+!begin_table [|l|c|r|] !hline
+links !! mitte !! rechts
+unten links !! unten mitte !! unten rechts
+!hline
+!end_table
+!end_verbatim
+(!EXAMPLE_END)
+
+Dieses Beispiel erzeugt folgende Tabelle, die aus zwei Zeilen und drei
+Spalten besteht, wobei die erste Spalte linksbündig, die zweite Spalte
+zentriert und die dritte Spalte rechtsbündig ausgegeben wird:
+
+(!EXAMPLE_BEGIN)
+!table_caption Tabellen mit UDO
+!begin_table [|l|c|r|] !hline
+links !! mitte !! rechts
+unten links !! unten mitte !! unten rechts
+!hline
+!end_table
+(!EXAMPLE_END)
+
+Da vor und nach jeder Spalte ein ""(!code[|])"" angegeben ist, werden die Spalten
+durch vertikale Linien voneinander getrennt. Die Tabelle beginnt mit
+einer horizontalen Linie, da bereits in der Zeile mit
+(!KW [begin_table]) ein (!KW [hline]) angegeben wurde. Schließlich endet die
+Tabelle mit einer horizontalen Linie, da vor (!KW [end_table]) wiederum
+ein (!KW [hline]) angegeben wurde.
+
+Hier noch ein weiteres Beispiel einer Tabelle, die den gleichen Inhalt
+zeigt, wie die obige Tabelle, aber bei der keine Linien benutzt
+werden. Dies wird dadurch ermöglicht, indem man kein ""(!code[|])"" und kein
+(!KW [hline]) verwendet. Das Ergebnis:
+
+(!EXAMPLE_BEGIN)
+!table_caption Ein weiteres Beispiel
+!begin_table [lcr]
+links !! mitte !! rechts
+unten links !! unten mitte !! unten rechts
+!end_table
+(!EXAMPLE_END)
+
+
+!index (!kw [use_ansi_tables])
+UDO bietet einen Schalter an, um die Linien der Tabelle nicht mit den
+ASCII-Zeichen ""(!code[+])"", ""--"" und ""(!code[|])"" zu erzeugen. Wird im Vorspann der Schalter
+(!KW [use_ansi_tables]) benutzt, werden die Linien der Tabelle mit
+Hilfe der Grafikzeichen aus dem PC-Zeichensatz erzeugt. Auf die Formate
+WinHelp, RTF, HTML und (!LaTeX) hat dieser Schalter keinen Einfluss.
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate !compressed
+!item Tabellen werden standardmäßig immer zentriert ausgegeben. 
+Mit dem Vorspann-Kommando (!KW [table_alignment]) können Sie jedoch auch andere Ausrichtungen festlegen.
+
+!item In HTML kann man die Benutzung von Linien nicht frei festlegen,
+daher werden Tabellen dort immer mit (!code [frame=box]) erzeugt, falls man in
+der Zeile mit (!KW [begin_table]) den Befehl (!KW [hline]) benutzt.
+
+!item Für WinHelp werden die Möglichkeiten zur Tabellenausgabe
+ausgeschöpft. Leider ist es hier nicht möglich, eine Tabelle zentriert
+auszugeben oder Linien frei zu setzen. Daher werden alle Zellen der
+Tabelle umrahmt dargestellt, falls man in der Zeile mit
+(!KW [begin_table]) das Kommando (!KW [hline]) benutzt. Benutzt man es
+nicht, wird die komplette Tabelle ohne Linien dargestellt.
+
+!item Beim ST-Guide werden die Tabellenlinien durch den Grafikbefehl
+(!code [@line]) erzeugt. Hier ist es nicht möglich, mehrere Linien
+zwischen den Spalten zu erzeugen, wenn man keine ANSI-Tabellen ausgeben
+lässt.
+
+!item In den Feldern der Tabelle sind natürlich alle sonstigen
+UDO-Kommandos erlaubt. Sie können dort also auch Schriftarten,
+Querverweise, Indizes usw. verwenden.
+
+!end_enumerate
+
+!end_node # Tabellen
+
+# = = = = =
+
+!begin_node Sourcecode
+!html_name  style_sourcecode
+!label      sourcecode-Umgebung
+
+Zeilen, die in einer sourcecode-Umgebung stehen, werden für die
+Sourcecode-Formate 1:1 ausgegeben. Bei den ""normalen"" Zielformaten
+werden diese Zeilen so ausgegeben, als stünden sie in einer
+verbatim-Umgebung, die wiederum in einer quote-Umgebung steht.
+
+Ein kleines Beispiel für einen C-Sourcecode mit UDO:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/csource.u
+(!EXAMPLE_END)
+
+Eine weitere Möglichkeit, Sourcecode auszugeben, bietet der
+Befehl (!KW [sinclude]).
+
+!end_node # Sourcecode
+
+# = = = = =
+
+!end_node # Textgestaltung
+
+# === EOF ===

@@ -1,0 +1,457 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands 1-0, etc.
+# Language    : English
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+# 2010:
+#   fd  Mar 08: macro K1 resolved to KW
+#   fd  Mar 08: macro k1 resolved to kw
+#
+################################################################################
+
+!begin_node *!..
+!html_name  cmds_other
+
+# = = = = =
+
+!begin_node (!kw [! ])
+!html_name  cmd_exclamation
+
+Divide table cells.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/!(!t)
+
+!item [(!DESCRIPTION)]
+Double exclamation marks are used for splitting the cells of a table row and for multiple indices.
+
+!item [(!EXAMPLE)]
+(!T)!/index Level 1 !! Level 2(!t)
+
+!item [(!SEEALSO)]
+(!link [Tables] [Tables]), (!link [Indices] [Indices])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node !!~
+!html_name  cmd_qtilde
+!label Tilde
+
+Output a tilde.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!!~(!t)
+
+!item [(!DESCRIPTION)]
+These characters will be output as a tilde. Please remember that a
+single tilde is used for a non-breaking space.
+
+!item [(!EXAMPLE)]
+(!T)!!~(!t) becomes !~.
+
+!item [(!SEEALSO)]
+(!link [!~] [Nonbreaking spaces]), (!link [Nonbreaking spaces] [Nonbreaking spaces])
+
+!end_xlist
+
+!end_node
+
+
+# = = = = =
+
+!begin_node !~
+!html_name  cmd_tilde
+!label Fixed space
+
+Outputs a fixed space.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!~(!t)
+
+!item [(!DESCRIPTION)]
+Die Tilde gilt in der UDO-Syntax als festes Leerzeichen. Wörter, zwischen denen ein festes
+Leerzeichen steht, werden nicht durch einen Zeilenumbruch voneinander getrennt. Beim Blocksatz werden an
+der Einsatzstelle auch keine Leerzeichen eingefügt.
+
+!item [(!EXAMPLE)]
+42!~EUR, Dr.!~Summer
+
+!item [(!SEEALSO)]
+(!link [!!~] [Tilde]), (!link [Fixed space] [Fixed space])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node ("")
+!html_name  cmd_quote
+
+Output typographical quote.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)("")(!t)
+
+!item [(!DESCRIPTION)]
+Two quotes in a row will be replaced by one typographical quote if
+the destination format supports typographical quotes. If it doesn't
+UDO will replace two quotes by one quote.
+
+!item [(!EXAMPLE)]
+(!T)("")typographical quotes("")(!t)
+
+!item [(!SEEALSO)]
+(!link [((""))] [((""))]), (!link [('')] [('')]), (!KW [no_quotes])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node ('')
+!html_name  cmd_apostrophe
+
+Output typographical apostroph.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)('')(!t)
+
+!item [(!DESCRIPTION)]
+Two apostrophes in a row will be replaced by one typographical
+apostrophe if the destination format supports typographical
+apostrophes. If it doesn't UDO will replace two apostrophes by one apostrophe.
+
+!item [(!EXAMPLE)]
+(!T)('')typographical apostrophes('')(!t)
+
+!item [(!SEEALSO)]
+(!link [((''))] [((''))]), (!link [("")] [("")])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node ((""))
+!html_name  cmd_qquote
+
+Output two quotes.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)((""))(!t)
+
+!item [(!DESCRIPTION)]
+If you want to output two quotes you have to insert them between
+brackets. If you don't UDO will replace the two quotes by a
+typographical quote.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!link [("")] [("")])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node ((''))
+!html_name  cmd_qapostrophe
+
+Output two apostrophes.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)((''))(!t)
+
+!item [(!DESCRIPTION)]
+If you want to output two apostrophes you have to insert them between
+brackets. If you don't UDO will replace the two apostrophes by a
+typographical apostrophe.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.48
+
+!item [(!SEEALSO)]
+(!link [('')] [('')])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node ((--))
+!html_name  cmd_qdash
+
+Output two dashes.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)((--))(!t)
+
+!item [(!DESCRIPTION)]
+If you want to output two minus characters you have to insert them
+between brackets. If you don't UDO will replace the two minus
+characters by a short dash
+
+!item [(!EXAMPLE)]
+(!T)((--))outfile(!t)
+
+!item [(!SEEALSO)]
+(!link [(--)] [(--)]), (!link [(---)] [(---)]), (!link [Dashes] [Dashes])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node ((---))
+!html_name  cmd_qldash
+
+Output three dashes.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)((---))(!t)
+
+!item [(!DESCRIPTION)]
+If you want to output three minus characters you have to insert them
+between brackets. If you don't UDO will replace the three minus
+characters by a long dash.
+
+!item [(!SEEALSO)]
+(!link [(---)] [(---)]), (!link [(--)] [(--)]), (!link [Dashes] [Dashes])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (--)
+!html_name  cmd_dash
+
+Output a short dash.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(--)(!t)
+
+!item [(!DESCRIPTION)]
+Two minus characters in a row will be replaced by a short dash if the
+destination format supports them. If the destination format doesn't
+support them UDO will output one normal minus character instead.
+
+!item [(!EXAMPLE)]
+(!T)A short (--) er, ah (--) dash.(!t)
+
+!item [(!SEEALSO)]
+(!link [(---)] [(---)]), (!link [((--))] [((--))]), (!link [Dashes] [Dashes])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (---)
+!html_name  cmd_ldash
+
+Output a long dash.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(---)(!t)
+
+!item [(!DESCRIPTION)]
+Three minus characters in a row will be replaced by a long dash if
+the destination format supports them. If the destination format
+doesn't support them UDO will output one normal minus character
+
+!item [(!EXAMPLE)]
+(!T)A long (---) er, ah (---) dash(!t)
+
+!item [(!SEEALSO)]
+(!link [((---))] [((---))]), (!link [(--)] [(--)]), (!link [Dashes] [Dashes])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [/-])
+!html_name  cmd_syllable
+
+Set Hyphenation mark.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/-(!t)
+
+!item [(!DESCRIPTION)]
+With these characters you can mark the positions of a word where UDO
+is allowed to split it up. The example shows how to mark the
+syllables of ""Hyphenation"".
+
+!item [(!EXAMPLE)]
+(!T)syl!/-labi!/-fi!/-cation(!t)
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~5
+
+!item [(!SEEALSO)]
+(!KW [hyphen]), (!KW [//-])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [/..])
+!html_name  cmd_dots
+
+Output typographical dots (ellipsis).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/..(!t)
+
+(!red)
+!item [(!DESCRIPTION)]
+Ein Ausrufungszeichen, gefolgt von zwei Punkten, wandelt UDO in typographische drei Punkte um, sofern
+das Ausgabeformat diese anzeigen kann. Ansonsten wandelt UDO !/.. in drei normale Punkte um.
+(!coloff)
+!item [(!DESCRIPTION)]
+An exclamation mark followed by two points will be replaced by
+typographical three dots if the destination format allows it to
+display them. If not, UDO will replace them by three normal dots.
+
+!item [(!EXAMPLE)]
+(!T)!/..(!t) is converted to !..
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [//-])
+!html_name  cmd_qsyllable
+
+Output the character string !/-.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!//-(!t)
+
+!item [(!DESCRIPTION)]
+This string will be converted to !/-.
+Please note that (!KW [/-]) would be interpreted as Hyphenation mark.
+
+!item [(!EXAMPLE)]
+(!T)!//-(!t) becomes !/-.
+
+!item [(!SEEALSO)]
+(!KW [hyphen]), (!KW [/-])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+#ToDo: Englisch
+# The ~ must is important, do not delete them
+!begin_node !!\~
+!html_name  cmd_longline
+!label Tilde
+
+Lange Eingabezeile
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!!\(!t)
+
+!item [(!DESCRIPTION)]
+Endet eine UDO-Eingabezeile mit !!\<Zeilenumbruch>, so wird die 
+folgende Zeile von UDO als Fortsetzung der vorhergehenden Zeile 
+aufgefasst. Es können damit mehrere "echte" Zeilen aus Sicht von 
+UDO zu einer einzigen "logischen" Eingabezeile zusammengefasst 
+werden. Diese Fortsetzungszeilen sind an jeder Stelle im UDO- 
+ Quelltext zulässig, auch z.B. in Makros und Definitionen. Steht 
+!!\ nicht unmittelbar am Ende einer Zeile, so wird es ignoriert 
+und als normaler Text ausgegeben.
+
+Eine mögliche Anwendung ist, den Inhalt einer Tabellenzeile auf 
+mehrere Zeilen in der Eingabedatei aufzuteilen, um die Lesbarkeit 
+des UDO-Quelltextes zu verbessern.
+
+!item [(!EXISTSSINCE)] Version 6.5.4
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

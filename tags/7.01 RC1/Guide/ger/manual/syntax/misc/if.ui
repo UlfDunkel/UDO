@@ -1,0 +1,210 @@
+!subsubnode Abfragebefehle
+
+In vielen Fällen ist es nötig, direkt im Quelltext verschiedene
+Passagen für die jeweiligen Formate oder Sprachen anzugeben. UDO
+bietet daher einen Satz Befehle, mit denen diese Abfragen erfolgen
+können.
+
+!index !/else
+!index !/endif
+
+Mit einem if!..-Befehl wird eine Abfrage eingeleitet. Liefert die
+Abfrage ein wahres Ergebnis, so werden alle Zeilen bis zum Befehl
+(!I)!/endif(!i) bzw. (!I)!/else(!i) von UDO verarbeitet.
+Liefert die Abfrage ein falsches
+Ergebnis, so werden alle Zeilen bis zu (!I)!/endif(!i) bzw. (!I)!/else(!i)
+ignoriert.
+
+#################################################
+!index Abfrage !! Zielformat
+!index Zielformat !! Abfrage
+!index !/ifdest
+!subsubheading Abfrage des Zielformats
+
+Mit dem Befehl (!I)!/ifdest(!i) können Sie das Format abfragen,
+welches von UDO ausgegeben wird. Zur Abfrage verwenden Sie die
+Kürzel der Ausgabeformate:
+
+!include syntax/misc/_dest.ui
+
+Zusätzlich zu den hier genannten Zeichenketten können jeweils auch
+""all"" und ""none"" verwendet werden. Bei ""all"" liefert eine
+Abfrage immer ein wahres Ergebnis, bei ""none"" immer ein falsches.
+
+Das folgende Beispiel zeigt, wie man den Titel der Windows-Hilfe
+anders als für die anderen Formate setzt:
+
+!autoref [off]
+
+!begin_quote
+!begin_verbatim
+!ifdest [win]
+!title Die Windows-Hilfe zu
+!else
+!title Die Anleitung zu
+!endif
+!end_verbatim
+!end_quote
+
+!autoref [on]
+
+
+!index !/ifndest
+
+Verwandt mit dem (!I)!/ifdest(!i)-Befehl ist der Befehl
+(!I)!/ifndest(!i). Hier wird abgefragt, ob man (!I)nicht(!i) in ein
+Format ausgibt. Das obige Beispiel läßt sich demnach auch
+folgendermaßen darstellen:
+
+
+!autoref [off]
+
+!begin_quote
+!begin_verbatim
+!ifndest [win]
+!title Die Anleitung zu
+!else
+!title Die Windows-Hilfe zu
+!endif
+!end_verbatim
+!end_quote
+
+!autoref [on]
+
+
+Bei den Abfragen können Sie natürlich auch mehrere Formatkürzel
+angeben. Die Abfrage liefert dann ein wahres Ergebnis, wenn mindestens
+ein Kürzel mit dem Ausgabeformat übereinstimmt. Mit folgender Abfrage
+können Sie z.B. den Hypertextformaten einen besonderen Titel
+verpassen:
+
+
+!autoref [off]
+
+!begin_quote
+!begin_verbatim
+!ifdest [win,html,stg,htag]
+!title Der Hypertext zu
+!else
+!title Die Anleitung zu
+!endif
+!end_verbatim
+!end_quote
+
+!autoref [on]
+
+
+#################################################
+!index Abfrage !! Sprache
+!index Sprache !! Abfrage
+!index !/iflang
+!subsubheading Abfrage der Sprache
+
+Mit dem Befehl (!I)!/iflang(!i) können Sie die Sprache abfragen, die
+für die Ausgabe der Zieldatei verwendet wird. Hierbei gelten folgende
+Zeichenketten:
+
+!include syntax/misc/_lang.ui
+
+Zusätzlich zu den hier genannten Zeichenketten können jeweils auch
+""all"" und ""none"" verwendet werden. Bei ""all"" liefert eine
+Abfrage immer ein wahres Ergebnis, bei ""none"" immer ein falsches.
+
+Bei kleineren Texten können Sie so z.B. gleich alle Übersetzungen in einem
+Quelltext unterbringen:
+
+!autoref [off]
+
+!begin_quote
+!begin_verbatim
+!iflang [german]
+!title Die Benutzeranleitung zu
+!else
+!title The User's Guide to
+!endif
+!end_verbatim
+!end_quote
+
+!autoref [on]
+
+!index !/ifnlang
+
+Auch hier gibt es den verwandten Befehl (!I)!/ifnlang(!i), der
+abfragt, ob (!I)nicht(!i) in eine Sprache ausgegeben wird. Das obige
+Beispiel ließe sich also auch so ausdrücken:
+
+!autoref [off]
+
+!begin_quote
+!begin_verbatim
+!ifnlang [german]
+!title The User's Guide to
+!else
+!title Die Benutzeranleitung zu
+!endif
+!end_verbatim
+!end_quote
+
+!autoref [on]
+
+
+Selbstverständlich können Sie auch bei dieser Abfrage wieder mehrere
+Sprachkürzel angeben. Ein Beispiel brauche ich dafür wohl nicht mehr
+angeben.
+
+#################################################
+!index Abfrage !! Symbole
+!index Symbole !! Abfrage
+!index !/ifset
+!index !/ifnset
+!subsubheading Abfrage von Symbolen
+
+Mit dem Befehl (!I)!/ifset(!i) können Sie testen, ob Symbole gesetzt
+sind, mit dem Befehl (!I)!/ifnset(!i), ob Symbole nicht gesetzt sind.
+
+!index -D
+!index !/set
+!index !/unset
+
+Wie Sie bereits wissen, können Sie Symbole mit der
+Kommandozeilenoption (!V)-D(!v) und mit dem Befehl (!I)!/set(!i)
+setzen und mit dem Befehl (!I)!/unset(!i) wieder löschen.
+
+Im folgenden Beispiel wird abgefragt, ob das Symbol (!V)Farbbilder(!v)
+gesetzt ist und entsprechend ein passendes Bild eingebunden:
+
+!begin_quote
+!autoref [off]
+!begin_verbatim
+!ifset [Farbbilder]
+!image colour/tiger
+!else
+!image mono/tiger
+!endif
+!end_verbatim
+!autoref [on]
+!end_quote
+
+Wenn Sie nun UDO mit der Option (!T)-D~Farbbilder(!t) aufrufen bzw.
+vor der obigen Abfrage das Kommando (!I)!/set~Farbbilder(!i) in den
+Quelltext einbauen, so bindet UDO ein Farbbild, andernfalls ein
+monochromes Bild ein.
+
+#################################################
+!index Abfrage !! Betriebssystem
+!index Betriebssystem !! Abfrage
+!index !/ifos
+!subsubheading Abfrage des Betriebssystems
+
+Mit dem Befehl (!I)!/ifos(!i) können Sie das Betriebssystem abfragen, auf
+dem UDO läuft. Hierbei gelten folgende Zeichenketten:
+
+!include syntax/misc/_os.ui
+
+Auch hier gilt, daß zusätzlich zu den genannten Zeichenketten auch ""all""
+und ""none"" verwendet werden können.
+
+!index !/ifnos
+
+Wiederum existiert ein verwandter Befehl namens (!I)!/ifnos(!i), der
+abfragt, ob UDO (!I)nicht(!i) auf dem angegebenen Betriebssystem läuft.

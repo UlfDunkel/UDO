@@ -1,0 +1,39 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax
+# Language    : German
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#
+################################################################################
+
+!begin_node Die UDO-Syntax
+!html_name  syntax
+
+# = = = = =
+
+!include syntax_example.de
+!include syntax_basics.de
+!include syntax_structure.de
+!include syntax_style.de
+!include syntax_spec.de
+!include syntax_hyphenation.de
+!include syntax_images.de
+!include syntax_hypertext.de
+!include syntax_misc.de
+
+# = = = = =
+
+!end_node # Die UDO-Syntax
+
+# === EOF ===

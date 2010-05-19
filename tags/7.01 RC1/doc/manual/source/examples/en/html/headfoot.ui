@@ -1,0 +1,9 @@
+!ifdest [html]
+!define HR <hr>
+!macro  HEAD [ Software | Contact address | Links ] (!HR)
+!macro  FOOT (!I)Last updated (!short_today)(!i)
+!else
+!define HR
+!macro  HEAD
+!macro  FOOT
+!endif

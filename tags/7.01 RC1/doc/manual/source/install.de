@@ -1,0 +1,243 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Installation
+# Language    : German
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (extracted from install.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 08: 'Homepage' -> 'Website'
+#   fd  Jun 09: real quotation fixed
+#   fd  Jun 09: 'Endung' -> 'Suffix' (following German Mac OS X nomenclature)
+#   fd  Jun 09: macro (!file) introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#
+################################################################################
+
+!begin_node Installation
+!html_name  installation
+
+# = = = = =
+
+!begin_node Installation der TOS- und GEM-Version (Atari)
+!html_name  installation_tos_gem
+
+Zur Installation von UDO auf einem Atari-(Kompatiblen-)Rechner kopieren
+Sie einfach alle Dateien in ein beliebiges Verzeichnis, welches
+sinnigerweise ""UDO"" genannt werden sollte.
+
+Die GEM-Version sollte man im verwendeten Desktop -- ich empfehle,
+Gemini, Thing oder Ease zu benutzen -- als Anwendung für Dateien mit der Dateimaske (!file [*.u*]) anmelden.
+
+Falls Sie das TTP bevorzugen und mit einem Kommandozeileninterpreter
+(z.B. mit der Mupfel von Stefan Eissing) arbeiten, kopieren oder
+verschieben Sie (!file [udo.ttp]) in eines der in (!file [$PATH]) angegebenen
+Verzeichnisse (z.B. (!file [\usr\bin])).
+
+!begin_ignore
+# auskommentiert 13.01.2004 - Ulrich Kretschmer
+Falls Sie den ST-Guide installiert haben, sollten Sie '(!UDOR)ger.hyp'
+und (!file [(!UDOR)ger.ref]) in Ihr Verzeichnis kopieren oder verschieben, in dem
+Sie auch alle anderen Hypertexte aufbewahren. Nur dann können auch
+andere Hypertexte oder Programme (z.B. ein Editor) auf den
+UDO-Hypertext zugreifen.
+!end_ignore
+
+!end_node # Installation der TOS- und GEM-Version (Atari)
+
+# = = = = =
+
+!begin_node Installation der Version für DOS bzw. Windows (32-bit)
+!html_name  installation_dos_win32
+
+!begin_itemize !compressed
+!item Laden Sie die entsprechende ZIP-Datei von der UDO-Website herunter.
+!item Entpacken Sie die ZIP-Datei in ein beliebiges Verzeichnis.
+!item Nehmen Sie das Verzeichnis, in dem sich die ausführbare Datei (!file [udo.exe]) befindet, in Ihre PATH-Liste (DOS: siehe (!file [autoexec.bat]); Windows: siehe....?) auf, oder kopieren Sie diese Datei in ein Verzeichnis, das sich bereits in der PATH-Liste befindet.
+!end_itemize
+Da die DOS-Version einen DOS-Extender verwendet, benötigen Sie mindestens eine 80386-CPU.
+
+Die für frühere UDO-Versionen nötige Installation von RSJ und EMX ist nicht mehr erforderlich.
+
+!end_node # Installation der Version für DOS bzw. Windows (32-bit)
+
+# = = = = =
+
+!begin_node Installation der OS/2-Version (32-bit)
+!html_name  installation_os2
+
+!begin_itemize !compressed
+!item Laden Sie sich die entsprechende ZIP-Datei von der UDO-Website herunter.
+!item Entpacken Sie die ZIP-Datei in ein beliebiges Verzeichnis.
+!item Nehmen Sie das Verzeichnis, in dem sich die ausführbare Datei (!file [udo.exe]) befindet, in Ihre PATH-Liste (siehe (!file [config.sys])) auf, oder kopieren Sie diese Datei in ein Verzeichnis, das sich bereits in der PATH-Liste befindet.
+!end_itemize
+Die für frühere UDO-Versionen nötige Installation von EMX ist nicht mehr erforderlich.
+
+!end_node # Installation der OS/2-Version (32-bit)
+
+# = = = = =
+
+!begin_node Installation der Macintosh-Version (Mac~OS 9)
+!html_name  installation_mac_9
+
+####################################################################
+# @(#) Installation der Macintosh-Version, 26.06.1996, Martin Osieka
+####################################################################
+
+Nach dem Entpacken des Archivs, welches die Macintosh-Version von UDO
+enthält, kann UDO an eine beliebige Stelle im Dateisystem verschoben
+werden (üblicherweise in den Programme Ordner).
+
+UDO liegt als FAT-Binary vor, d.h. es ist sowohl auf 68K- als auch auf
+PowerPC-Rechner lauffähig. Bei Platzmangel im Dateisystem kann UDO mit
+einem entsprechenden Programm auf eine native Version verkleinert
+werden. Unabhängig davon ist die Größe zur Laufzeit minimal.
+
+!end_node # Installation der Macintosh-Version (Mac~OS 9)
+
+# = = = = =
+
+!begin_node Installation der Macintosh-Version (Mac~OS~X)
+!html_name  installation_mac_x
+
+!begin_itemize !compressed
+!item Laden Sie sich die entsprechende ZIP-Datei von der UDO-Website herunter.
+!item Entpacken Sie die ZIP-Datei und kopieren Sie die ausführbare Datei (!file [udo]) nach (!file [/usr/bin]).
+!end_itemize
+
+Anmerkung: Eine manpage ist derzeit nicht Teil der Mac-OS-X-Distribution.
+
+(!HINT)
+
+Das Verzeichnis (!file [/usr/bin]) wird im Finder normalerweise nicht angezeigt. Um es zu öffnen, geben Sie es im Menüpunkt ""Gehe zu/Gehe zum Ordner ..."" des Finders ein.
+
+Sie können auch -- sofern gewünscht -- sämtliche unsichtbaren Dateien und Verzeichnisse im Finder sichtbar schalten. Um unsichtbare Dateien und Ordner im Finder zu sehen, starten Sie das Terminal-Programm (Programme > Dienstprogramme > Terminal) und geben Sie dort ein:
+
+(!code [defaults write com.apple.finder AppleShowAllFiles TRUE])
+
+Damit die Änderungen wirksam werden, müssen Sie den Finder einmal neustarten.
+
+!end_node # Installation der Macintosh-Version (Mac~OS~X)
+
+# = = = = =
+
+!begin_node Installation der FreeMiNT-Version
+!html_name  installation_mint
+
+!begin_itemize !compressed
+!item Laden Sie die entsprechende rpm-Datei von der UDO-Website herunter.
+!item Melden Sie sich als (!code [root]) an.
+!item Für eine Neuinstallation geben Sie ein: (!code [rpm -i]) (!file [file])(!file [.rpm])
+!item Für ein Upgrade (wenn bereits ein älteres UDO-rpm installiert war): (!code [rpm -U]) (!file [file])(!file [.rpm])
+!end_itemize
+
+!end_node # Installation der FreeMiNT-Version
+
+# = = = = =
+
+!begin_node Installation des rpm-Paketes für Linux
+!html_name  installation_linux_rpm
+
+!begin_itemize !compressed
+!item Laden Sie die entsprechende rpm-Datei von der UDO-Website herunter.
+!item Melden Sie sich als (!code [root]) an.
+!item Für eine Neuinstallation geben Sie ein: (!code [rpm -i]) (!file [file])(!file [.rpm])
+!item Für ein Upgrade (wenn bereits ein älteres UDO-rpm installiert war): (!code [rpm -U]) (!file [file])(!file [.rpm])
+!end_itemize
+Oder benutzen Sie Ihre bevorzugte rpm-Oberfläche (z.B. kpackage, krpmview, yast).
+
+!end_node # Installation des rpm-Paketes für Linux
+
+# = = = = =
+
+!begin_node Installation des Paketes für Debian Linux
+!html_name  installation_linux_deb
+
+!begin_itemize !compressed
+!item Laden Sie sich das entsprechende deb-Paket von (!url [http://www.debian.org] [http://www.debian.org/]) herunter.
+!item Melden Sie sich als (!code [root]) an.
+!item (!code [dpkg -i]) (!file [file])(!file[.deb])
+!end_itemize
+Oder (bei Internetverbindung): (!code [apt-get install udo])
+
+Der Paketname für die englische Dokumentation lautet (!file [udo-doc]),
+für die deutsche Doku (!file [udo-doc-ger]).
+
+!end_node # Installation des Paketes für Debian Linux
+
+# = = = = =
+
+!begin_node Installation aus den Quelltexten unter Linux
+!html_name  installation_linux_src
+
+!begin_itemize !compressed
+!item Das UDO-Quelltextarchiv von der UDO-Website herunterladen.
+!item Quelltextarchiv auspacken: (!code [tar xzf]) (!file [udo_xxx_src.tar.gz])
+!item wechseln Sie ins Verzeichnis (!file [Source])
+!item (!code [make -f]) (!file [Makefile.linux])
+!item Kopieren Sie die ausführbare UDO-Datei nach (!file [/usr/local/bin]) oder in eines der Verzeichnisse Ihres (!file [$PATH])'s.
+!item wechseln Sie ins Verzeichnis (!file [doc/manpage]) und starten Sie das Skript (!file [create_manpage_de]) oder (!file [create_manpage_en]). Kopieren Sie dann die UDO-Manualpage (!file [udo.1]) nach (!file [/usr/man/man1/]).
+!item Um die UDO-Dokumentation ins HTML-Format zu konvertieren, wechseln Sie ins Verzeichnis (!file [doc/manual/source]) und starten Sie das Skript (!file [create_manual_de_html]) -- die Dokumentation wird ins Verzeichnis (!file [doc/manual/html-de]) geschrieben.
+!end_itemize
+
+!begin_ignore
+# auskommentiert 10.01.2004 - Ulrich Kretschmer
+Nach Entpacken des Archivs kopieren Sie das Binary aus (!file [bin/]) in das
+Verzeichnis (!file [/usr/local/bin]) oder in eines der Verzeichnisse Ihres
+(!file [$PATH])s.
+
+Kopieren Sie dann die UDO-Manualpage (!file [udo.1]) nach (!file [/usr/man/man1/]).
+
+Um sich die Dokumentation von UDO mittels GNU-Info ansehen zu können,
+sollten Sie die Quelltexte der Dokumentation ins Texinfo-Format
+umwandeln, mit Makeinfo bearbeiten und die erhaltenen Dateien in das
+Verzeichnis kopieren ((!file [$INFOPATH])), in dem sich die anderen Info-Dateien
+befinden, sofern sich in der UDO-Distribution noch keine Info-Dateien
+befinden. Die Datei (!file [dir]) muss dort dann noch angepasst werden, indem Sie
+auf die UDO-Dokumentation verweisen.
+
+Desweiteren empfiehlt sich das Anlegen von Shellscripten oder Aliasen,
+um nicht immer alle Optionen angeben zu müssen. Das folgende Script,
+welches man (!file [u2tex]) benennen sollte, ruft UDO mit den passenden
+Optionen auf.
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+#!bin/sh
+udo --tex -o ! $*
+!end_verbatim
+(!EXAMPLE_END)
+
+Für die anderen Formate können ähnliche Scripte angelegt werden. In der
+Distribution sollten Sie diese Scripte bereits vorfinden.
+
+# das gehört eigentlich inhaltlich woanders hin
+Ein Hinweis für Linuxdoc-SGML-Benutzer: Zumindest in meiner
+Linuxdoc-SGML-Version fehlen ein paar Entities. Werfen Sie daher kurz
+einen Blick in die FAQ in der Mitte dieser Anleitung, falls
+Linuxdoc-SGML Fehlermeldungen erzeugen sollte.
+!end_ignore
+
+!end_node # Installation aus den Quelltexten unter Linux
+
+# = = = = =
+
+!end_node # Installation
+
+# === EOF ===

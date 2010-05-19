@@ -1,0 +1,51 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: AmigaGuide
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#
+################################################################################
+
+!begin_node AmigaGuide
+!html_name  format_amg
+
+AmigaGuide is a hypertext system created by Commodore. AmigaGuide is the standard format for
+online documentations on Amiga computer (running under AmigaOS).
+AmigaGuide viewers are also available for other platforms, like Windows or Linux.
+
+!autoref [off]
+More information can be found on:
+
+!begin_itemize
+
+!item General Overview on Amiga Computer: (!url [http://www.tutorgig.com/encyclopedia/getdefn.jsp?keywords=Amiga] [])
+
+!item AmigaGuide: A Hypertext Documentation System: (!url [http://www.reality-check-inc.com/aguide.htm] []) (functional overview)
+
+!item AmigaGuide (general overviews with links to AmigaGuide viewers for other operating systems):
+(!url [http://www.tutorgig.com/encyclopedia/getdefn.jsp?keywords=Amigaguide] [])
+
+!item The AmigaGuide Manual. The (!I)complete(!i) documentation of AmigaGuide commands. By Aric R.~Caley (1995): (!url [http://www.lysator.liu.se/amiga/code/guide/amigaguide.guide] []) (detailed AmigaGuide format description)
+
+!item AmigaGuide Tags and Commands: (!url [http://www.safalra.com/hypertext/amigaguide/] []) (AmigaGuide format overview)
+
+!item How To Write an AmigaGuide: (!url [http://ale.emuunlim.com/write-amigaguide.htm] [])
+
+!end_itemize
+
+!autoref [on]
+
+!end_node # AmigaGuide
+
+# === EOF ===

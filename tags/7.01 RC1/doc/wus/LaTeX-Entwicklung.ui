@@ -1,0 +1,36 @@
+!subsubnode Allgemeiner Hinweis
+Für diesen Bereich ist die Hilfe der (!TeX)-niker besonders gefragt.
+
+!smallskip
+!hline
+!subsubnode Papierformat (LaTeX)
+(!img [rot2] [Wwichtig])~~|~~(!img [gelb2] [Schwierig])
+
+!begin_verbatim
+!doclayout [tex] [paper] A3PORTRAIT
+!doclayout [tex] [paper] A3LANDSCAPE
+!doclayout [tex] [paper] A4PORTRAIT
+!doclayout [tex] [paper] A4LANDSCAPE
+!doclayout [tex] [paper] A5PORTRAIT
+!doclayout [tex] [paper] A5LANDSCAPE
+!end_verbatim
+
+Welcher (!TeX)-Kundige zeigt bitte auf, welche Formate in (!LaTeX)
+möglich sind?
+
+!smallskip
+!hline
+!label LaTeX-Spalten
+!subsubnode Spalten in (!LaTeX)
+(!img [rot1] [Weniger wichtig])~~|~~(!img [gelb2] [Schwierig])
+Spalten in (!LaTeX) werden mit (!T)\twocolumn(!t) etc. gesetzt.
+
+Welcher (!TeX)-Kundige kann hier mal ein Beispiel geben?
+
+!smallskip
+!hline
+!subsubnode Ungeordnet (LaTeX)
+!begin_itemize
+!item Verhinderung von Texteinrückungen bei LaTeX ~~(Stefan Kuhr) (!nl)
+      \noindent
+!end_itemize

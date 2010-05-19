@@ -1,0 +1,12 @@
+!begin_flushleft
+Eine linksbündige Zeile.
+
+Ein linksbündiger Absatz,
+der ohne Blocksatz formatiert
+wird. Um dies zu demonstrieren,
+folgt hier noch dieser ziemlich
+sinnlose Satz.
+
+Ein linksbündiger Absatz mit (!nl)
+manuellem Zeilenumbruch
+!end_flushleft

@@ -1,0 +1,37 @@
+!begin_itemize
+
+!index (!/xlink)
+!item Bugfix: Bei sehr langen Parametern bei (!I)(!/xlink)(!i) stürzte UDO
+ab (Patrick Jerchel).
+
+!index !/use_raw_header
+!index !/use_raw_footer
+!index !/ignore_raw_header
+!index !/ignore_raw_footer
+
+!item Neu: Befehlssatz, um benutzerdefinierte, bereits im Ausgabeformat
+vorliegende Header und Footer einzubinden (Patrick Jerchel).
+
+!begin_ilist [!/use_raw_header <file>:]
+
+!item [!/use_raw_header <file>:] Die Datei soll am Anfang der Seite 1:1
+ausgegeben werden. Wird der Befehl im Vorspann benutzt, so wird für jede
+Seite die Datei am Anfang ausgegeben. Wird der Befehl in einem Node
+benutzt, so wird die Datei nur für diesen Node ausgegeben.
+
+!item [!/use_raw_footer <file>:] Analog für den Footer.
+
+!item [!/ignore_raw_header:] Darf nur in einem Node benutzt werden und
+besagt, daß in diesem Node die global geltende Headerdatei nicht ausgegeben
+werden soll. Somit kann man einzelne Nodes davor schützen, einen Header zu
+erhalten.
+
+!item [!/ignore_raw_footer:] Analog für Footer.
+
+!end_ilist
+
+Da dies eine eilige Angelegenheit war, werden diese Header und Footer
+momentan nur für HTML unterstützt. Nähere Informationen siehe Abschnitt
+""HTML"".
+
+!end_itemize

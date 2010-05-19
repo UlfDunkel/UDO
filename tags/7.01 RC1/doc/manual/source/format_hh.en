@@ -1,0 +1,30 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Formats: HTML-Help
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: file introduced (extracted from formats.ui)
+#
+################################################################################
+
+!begin_node HTML-Help
+!html_name  format_hh
+!alias      HTMLhelp
+!alias      HTMLHelp
+!alias      HtmlHelp
+
+(!MISS)
+
+!end_node # HTML-Help
+
+# === EOF ===
