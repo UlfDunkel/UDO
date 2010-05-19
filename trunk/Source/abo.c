@@ -47,6 +47,7 @@
 *    fd  Feb 16: udofile is global now (udo.h)
 *    fd  Feb 23: UDO_PL -> UDO_BUILD (no more patchlevels)
 *    fd  Mar 01: !code -> !code_source
+*    fd  May 19: output_about_udo_ger() + output_about_udo_eng() updated
 *
 ******************************************|************************************/
 
@@ -217,13 +218,11 @@ FILE  *f)  /* ^ aboutudo file */
    fprintf(f, "\n");
    fprintf(f, "!udolink\n");
    fprintf(f, "\n");
-   fprintf(f, "UDO ist ein Programm, welches Textdateien, die im\n");
-   fprintf(f, "Universal Document Format erstellt wurden, in das ASCII-,\n");
-   fprintf(f, "ST-Guide-, LaTeX-, Rich Text-, Pure-C-Help-, Manualpage-,\n");
-   fprintf(f, "HTML-, WinHelp-, Texinfo-, Linuxdoc-SGML-, LyX-, Apple-QuickView-, \n");
-   fprintf(f, "HTML Apple Help- und Turbo-Vision-Help-Format umwandeln kann.\n");
+   fprintf(f, "UDO ist ein Programm, mit dem Sie Textdateien, die im\n");
+   fprintf(f, "Universal-Document-Format erstellt wurden, in über \n");
+   fprintf(f, "25 Zielformate umwandeln können.\n");
    fprintf(f, "\n");
-   fprintf(f, "Weitere Informationen sowie die aktuellen Versionen findet man im World Wide Web unter\t(!nl)\n");
+   fprintf(f, "Weitere Informationen sowie die aktuellen Versionen finden Sie im Internet unter\t(!nl)\n");
    fprintf(f, "(!url [%s][])\n", UDO_URL);
    fprintf(f, "%s\n\n", CMD_END_CENTER);
 }
@@ -258,11 +257,11 @@ FILE  *f)  /* ^ aboutudo file */
    fprintf(f, "\n");
    fprintf(f, "!udolink\n");
    fprintf(f, "\n");
-   fprintf(f, "UDO is a program that converts files that are written\n");
-   fprintf(f, "in the Universal Document Format into ASCII, ST-Guide, LaTeX,\n");
-   fprintf(f, "Rich Text Format, Pure C Help, Manualpage, HTML, WinHelp\n,");
-   fprintf(f, "Texinfo, Linuxdoc-SGML, LyX, Apple QuickView HTML Apple Help and Turbo-Vision-Help.\n");
-   fprintf(f, "Further information and the current versions can be found at\t(!nl)\n");
+   fprintf(f, "UDO is an application that converts text files which you \n");
+   fprintf(f, "have written in Universal Document Format, into more than \n");
+   fprintf(f, "25 different target formats.\n");
+   fprintf(f, "\n");
+   fprintf(f, "Get further information and the current versions on the Internet at\t(!nl)\n");
    fprintf(f, "\n");
    fprintf(f, "(!url [%s] [])\n", UDO_URL);
    fprintf(f, "%s\n\n", CMD_END_CENTER);
