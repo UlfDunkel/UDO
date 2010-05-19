@@ -75,6 +75,7 @@
 *                - CODE_LATIN9
 *                - CODE_LATIN10
 *    fd  Mar 12: Linux gcc doesn't like tmpnam
+#    fd  May 19: v7.01 RC1 (1126)
 *
 ******************************************|************************************/
 
@@ -106,8 +107,8 @@
    /* --- Release-Nummer und Patchlevel setzen --- */
 
 #define UDO_REL     "7"
-#define UDO_SUBVER  "01 beta"
-#define UDO_BUILD   "(build 1007)"
+#define UDO_SUBVER  "01 RC1"
+#define UDO_BUILD   "(1126)"
 #define UDO_URL     "http://www.udo-open-source.org/"
 #define UDO_MADE    "Made with UDO"
 
