@@ -110,6 +110,7 @@
 *    ggs Apr 21: - use_short_tocs -> use_compressed_tocs
 *                - Labels inside tables work now in HTML
 *    fd  May 18: pass1_check_preamble_commands(): html_ignore_8bit_use_charset no longer required
+*    fd  May 19: !use_short_... commands are no longer supported
 *
 ******************************************|************************************/
 
@@ -865,7 +866,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
 };
 
 
-#define MAXSWITCH  50
+#define MAXSWITCH  45
 
 LOCAL const UDOSWITCH udoswitch[MAXSWITCH + 1] =
 {
@@ -875,11 +876,6 @@ LOCAL const UDOSWITCH udoswitch[MAXSWITCH + 1] =
    { "!use_auto_subsubsubsubtocs",   &use_auto_subsubsubsubtocs,   'i',  "!depth",    &subtocs4_depth },
    { "!use_auto_toptocs",            &use_auto_toptocs,            'b',  "!no_icons", &no_auto_toptocs_icons },
    { "!use_compressed_tocs",         &use_compressed_tocs,         '\0', "",          NULL },
-   { "!use_short_envs",              &use_compressed_envs,         '\0', "",          NULL },
-   { "!use_short_descriptions",      &use_compressed_descriptions, '\0', "",          NULL },
-   { "!use_short_enumerates",        &use_compressed_enumerates,   '\0', "",          NULL },
-   { "!use_short_itemizes",          &use_compressed_itemizes,     '\0', "",          NULL },
-   { "!use_short_lists",             &use_compressed_lists,        '\0', "",          NULL },
    { "!use_compressed_envs",         &use_compressed_envs,         '\0', "",          NULL },
    { "!use_compressed_descriptions", &use_compressed_descriptions, '\0', "",          NULL },
    { "!use_compressed_enumerates",   &use_compressed_enumerates,   '\0', "",          NULL },
@@ -7861,7 +7857,7 @@ size_t  *u)    /* # of spaces to indent a line */
 *     In e.g. HTML output, we treat various ENV_... differently:
 *
 *     ENV_ITEM + ENV_ENUM:
-*     !short format example:
+*     !compressed format example:
 *
 *     # ---snip---
 *     <ul> | <ol>
@@ -7871,7 +7867,7 @@ size_t  *u)    /* # of spaces to indent a line */
 *     </ul> | </ol>
 *     # ---snap---
 *
-*     non-!short format example:
+*     non-!compressed format example:
 *
 *     <ul> | <ol>
 *     <li><p>[content of 1st paragraph]<br><br>
