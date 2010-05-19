@@ -110,7 +110,7 @@
             This new environment attribute has been introduced, 
             to be able and switch off the inherit of compressed outer environments to the inner environments.
 
-      !item Damit es einheitlich ist wurde auch der Schalter (!kw [use_short_tocs]) in (!kw [use_compressed_tocs]) umbenannt.
+      !item Damit es einheitlich ist, wurde auch der Schalter (!kw [use_short_tocs]) in (!kw [use_compressed_tocs]) umbenannt.
       !end_itemize
 
 

@@ -29,6 +29,7 @@
 #   fd  Mar 01: chapter basics_text adjusted
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  May 19: tiny corrections
 #
 ################################################################################
 
@@ -73,7 +74,7 @@ Quelltexte können in den verschiedensten Zeichensätzen erstellt werden.
 
 Beim Start der Konvertierung erwartet UDO den aktuellen
 Systemzeichensatz. Sollen Quelltexte konvertiert werden, die andere
-Zeichensätze benutzen, muss man UDO dies mit den obigen Befehlen
+Zeichensätze benutzen, muss man UDO dies mit entsprechenden Befehlen
 kenntlich machen. Mehr zu diesem Thema finden Sie im Kapitel
 ""Sonderzeichen"".
 
@@ -114,7 +115,7 @@ Schalter können nur aus (!EXCLAM) und dem eigentlichen Schalter-Bezeichner beste
 Ein Platzhalter ist eine mit (!OPEN_EXCLAM) beginnende
 Zeichenfolge, die durch (!code [!)]) beendet wird. Ein Platzhalter
 wird von UDO durch eine dem Ausgabeformat zugehörige Zeichenfolge
-ersetzt, z.B. ""(!KKW [B])"" durch ""(!code [{\bf])"" für (!LaTeX) oder ""(!code [<b>])"" für HTML.
+ersetzt, z.B. ""(!KKW [B])"" durch ""(!code [{\bf])"" für (!LaTeX) oder ""(!code [<b>])"" bzw. ""(!code [<strong>])"" für HTML.
 
 Platzhalter können an jeder beliebigen Stelle einer Zeile stehen.
 
