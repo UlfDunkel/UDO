@@ -71,6 +71,7 @@
 *    ggs Apr 04: c_begin_list() delete compressed and no_compressed
 *    ggs Apr 12: c_begin_list() test the compressed and not only short
 *    ggs Apr 21: c_begin_list(): The [] are not always necessary
+*    fd  May 19: c_begin_list() reformatted
 *
 ******************************************|************************************/
 
@@ -2492,7 +2493,10 @@ GLOBAL void c_begin_description(void)
 /*******************************************************************************
 *
 *  c_begin_list():
-*     ??? (description missing)
+*     output begin of a list
+*
+*  Notes:
+*     Supported lists are LIST_... (CONSTANT.H).
 *
 *  Return:
 *     -
@@ -2501,12 +2505,12 @@ GLOBAL void c_begin_description(void)
 
 LOCAL void c_begin_list(
 
-int       listkind)     /* List type */
+int       listkind)           /* List type */
 {
-   char   sWidth[256],  /* */
-          sShort[256],  /* */
-         *ptr;          /* */
-   int    ll;           /* */
+   char   sWidth[256],       /* buffer for tokens */
+          sCompressed[256],  /* buffer for compare strings */
+         *ptr;               /* ^ into sWidth */
+   int    ll;                /* */
    
 
    if (!check_iEnvLevel())
@@ -2540,96 +2544,96 @@ int       listkind)     /* List type */
    iListLevel++;
    
    
-   /* String fuer die Breite ermitteln und schauen, ob !compressed (was !short) vorkommt */
+   /* get additional token and check for "!short", "!compressed" and "!not_compressed" */
+   /* "!short" is deprecated and throws a warning in set_env_compressed() */
 
-   sShort[0] = EOS;
-   token[0][0] = EOS;
-   tokcpy2(sWidth, 256);
+   sCompressed[0] = EOS;                  /* clear buffer string */
+   token[0][0] = EOS;                     /* skip first token */
+   tokcpy2(sWidth, 256);                  /* get second token */
    
-   delete_once(sWidth, "[");
+   delete_once(sWidth, "[");              /* remove brackets (if any) */
    delete_last(sWidth, "]");
 
-   ptr = strstr(sWidth, "!short");
+   ptr = strstr(sWidth, "!short");        /* deprecated command "!short" used? */
    
-   if (ptr != NULL)
+   if (ptr != NULL)                       /* yes */
    {
-      /* Aha, !short wird benutzt. Da manche Dumpfnasen das aber nicht */
-      /* immer ans Ende setzen, hier gleich die passenden Abfragen.    */
+      /* --- check if user used !short at the beginning by mistake --- */
 
-      strcpy(sShort, "!short");           /* Fuer set_env_compressed() */
+      strcpy(sCompressed, "!short");      /* for set_env_compressed() */
             
-      if (ptr == sWidth)
+      if (ptr == sWidth)                  /* identical? */
       {
-         /* Siehste, hat's mal wieder an den Anfang gesetzt      */
-         /* Das mitzuentfernende Leerzeichen kommt von tokcpy2() */
-         
+         /* "!short" found at the beginning - which is wrong! */
+
+                                          /* also remove the additional space, added by tokcpy2() */
          if ( !delete_once(sWidth, "!short ") )
             delete_once(sWidth, "!short");
       }
-      else
+      else                                /* not found at the beginning */
       {
-         /* So gehoert es sich, schoen ans Ende der Zeile */
-         delete_last(sWidth, " !short");
+         delete_last(sWidth, " !short");  /* remove from the end */
       }
    }
-   else
+   else                                   /* "!short" was not used */
    {
-      ptr = strstr(sWidth, "!compressed");
+      ptr = strstr(sWidth, "!compressed");/* has "!compressed" been used? */
       
-      if (ptr != NULL)
+      if (ptr != NULL)                    /* yes */
       {
-         /* Aha, !compressed wird benutzt. Da manche Dumpfnasen das aber nicht */
-         /* immer ans Ende setzen, hier gleich die passenden Abfragen.         */
+         /* --- check if user used !compressed at the beginning by mistake --- */
 
-         strcpy(sShort, "!compressed");   /* Fuer set_env_compressed() */
+                                          /* for set_env_compressed() */
+         strcpy(sCompressed, "!compressed");
 
-         if (ptr == sWidth)
+         if (ptr == sWidth)               /* identical? */
          {
-            /* Siehste, hat's mal wieder an den Anfang gesetzt      */
-            /* Das mitzuentfernende Leerzeichen kommt von tokcpy2() */
+            /* "!compressed" found at the beginning - which is wrong! */
          
+                                          /* also remove the additional space, added by tokcpy2() */
             if ( !delete_once(sWidth, "!compressed ") )
                delete_once(sWidth, "!compressed");
          }
-         else
+         else                             /* not found at the beginning */
          {
-            /* So gehoert es sich, schoen ans Ende der Zeile */
+                                          /* remove from the end */
             delete_last(sWidth, " !compressed");
          }
       }
-     else
-     {
-        ptr = strstr(sWidth, "!not_compressed");
+      else                                /* "!compressed" not used */
+      {
+         ptr = strstr(sWidth, "!not_compressed");
         
-        if (ptr != NULL)
-        {
-           /* Aha, !not_compressed wird benutzt. Da manche Dumpfnasen das aber nicht */
-           /* immer ans Ende setzen, hier gleich die passenden Abfragen.         */
+         if (ptr != NULL)                 /* has "!not_compressed" been used? */
+         {
+            /* --- check if user used !not_compressed at the beginning by mistake --- */
 
-           strcpy(sShort, "!not_compressed");   /* Fuer set_env_compressed() */
+                                          /* for set_env_compressed() */
+            strcpy(sCompressed, "!not_compressed");
 
-           if (ptr == sWidth)
-           {
-              /* Siehste, hat's mal wieder an den Anfang gesetzt      */
-              /* Das mitzuentfernende Leerzeichen kommt von tokcpy2() */
+            if (ptr == sWidth)            /* identical? */
+            {
+               /* "!not_compressed" found at the beginning - which is wrong! */
          
-              if ( !delete_once(sWidth, "!not_compressed ") )
-                 delete_once(sWidth, "!not_compressed");
-           }
-           else
-           {
-              /* So gehoert es sich, schoen ans Ende der Zeile */
-              delete_last(sWidth, " !not_compressed");
-           }
-        }
-     }
+                                          /* also remove the additional space, added by tokcpy2() */
+               if ( !delete_once(sWidth, "!not_compressed ") )
+                  delete_once(sWidth, "!not_compressed");
+            }
+            else                          /* not found at the beginning */
+            {
+                                          /* remove from the end */
+               delete_last(sWidth, " !not_compressed");
+            }
+         }
+      }
    }
    
    del_internal_styles(sWidth);
    qdelete_all(sWidth, "!-", 2);
    replace_udo_quotes(sWidth);
 
-   set_env_compressed(iEnvLevel, sShort); /* check the compressed flag */
+                                          /* check the compressed flag */
+   set_env_compressed(iEnvLevel, sCompressed);
 
    switch (desttype)
    {
