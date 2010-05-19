@@ -24,6 +24,7 @@
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #   fd  Mar 05: adjustments for !docinfo [webmaster...]
 #   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  Mar 19: new chapter 'not_compressed'
 #
 ################################################################################
 
@@ -934,6 +935,56 @@ This command (""no operation"") does nothing and is used for debugging purposes.
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~15
 
 !end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [not_compressed])
+!html_name  cmd_not_compressed
+
+Output a not compressed environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!SWITCH), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/not_compressed(!t)
+
+!item [(!DESCRIPTION)]
+If you use this switch together with environments this specific
+environment will be output with additional vertical space. The
+example shows how to output a ""not_compressed"" itemize environment.
+
+!item [(!EXISTSSINCE)] 7.01
+
+!item [(!SEEALSO)]
+(!KW [compressed]), 
+
+(!KW [begin_description]), 
+(!KW [begin_enumerate]), 
+(!KW [begin_itemize]), 
+
+(!KW [use_compressed_descriptions]), 
+(!KW [use_compressed_enumerates]), 
+(!KW [use_compressed_envs]), 
+(!KW [use_compressed_itemizes]), 
+(!KW [use_compressed_lists])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+# preamble
+!use_compressed_envs
+
+# document
+# [...]
+!begin_itemize !not_compressed
+# [...]
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
