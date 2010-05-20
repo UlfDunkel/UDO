@@ -111,7 +111,8 @@
 *                - Labels inside tables work now in HTML
 *    fd  May 18: pass1_check_preamble_commands(): html_ignore_8bit_use_charset no longer required
 *    fd  May 19: !use_short_... commands are no longer supported
-*    fd  May 20: typo in udocharset[windows-1252] fixed
+*    fd  May 20: - typo in udocharset[windows-1252] fixed
+*                - token_output(): some adjustments for description item output in KPS
 *
 ******************************************|************************************/
 
@@ -8598,12 +8599,11 @@ BOOLEAN           reset_internals)        /* */
             break;
 
          case TOKPS:
-            /* Deleted in r6pl16 [NHz] */
             /* No special line end within a paragraph  for PS anymore */
-            /* Changed in V6.5.6 [NHz] */
-               strcat(z, " ");
-/*             replace_last (z, "\n", " \n");
+/*          replace_last (z, "\n", " \n");
 */
+            if (strlen(z) > 0)
+               strcat(z, " ");
          }
 
 
@@ -8631,7 +8631,14 @@ BOOLEAN           reset_internals)        /* */
 
 
          /* --- Endlich kann die Zeile ausgegeben werden --- */
-         outln(z);
+         
+         if (strlen(z) > 0)
+            outln(z);
+         
+                               
+         if (desttype == TOKPS)           /* strange hack to recognize begin of description item content */
+            if (strstr(z, "offDesc writeBeforeLeft Boff newline "))
+               out("(");
 
          /* Schonmal die naechste Zeile vorbereiten. */
          z[0] = EOS;
@@ -8674,7 +8681,10 @@ BOOLEAN           reset_internals)        /* */
          strcat(z, token[i]);
 
          if (!just_linefeed)
-            strcat(z, " ");
+         {
+            if (strlen(z) > 0)
+               strcat(z, " ");
+         }
          else
             just_linefeed = FALSE;
 
