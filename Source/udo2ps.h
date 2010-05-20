@@ -26,7 +26,10 @@
 *-------------------------------------------------------------------------------
 *
 *  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
-*  Co-Authors   : Gerhard Stoll (ggs), Ulf Dunkel
+*  Co-Authors   : Christian 'chrisker' Kr"uger (CK)
+*                 Norbert Hanz NHz
+*                 Gerhard Stoll (ggs),
+*                 Ulf Dunkel (fd)
 *  Write access : ggs, fd
 *
 *  Notes        : Please add yourself as co-author when you change this file.
@@ -41,8 +44,15 @@
 *-------------------------------------------------------------------------------
 *  History:
 *
+*  1998:
+*    CK        : v1.0: initial version
+*  1999:
+*    NHz May 17: additional functions for PostScript output
+*  2002-2005:
+*    NHz       : extensions added
 *  2010:
 *    fd  Feb 22: header adjusted
+*    fd  May 20: old history stuff added
 *
 ******************************************|************************************/
 
@@ -96,7 +106,8 @@ const char *UDO2PS =
    "100 string\n"
    "/Reset exch def\n"
    "/pAlign 0 def\n"
-   "\n"*/
+   "\n"
+*/
    "/UdoFonts\n"
    "[/UdoSwiss /UdoSwissItalic /UdoSwissBold /UdoSwissBoldItalic\n"
    " /UdoTimes /UdoTimesItalic /UdoTimesBold /UdoTimesBoldItalic\n"
@@ -119,7 +130,7 @@ const char *UDO2PS =
    "bind def\n"
    "\n"
 /* Adobe Distiller doesn't konow anything about SymbolEncoding
-   Smbols must done by Glyphs
+   Symbols must be done by Glyphs
    "%%-- for Symbol-Font\n"
    "/makeisomapSymbol          %% PRIVATE!\n"
    "{\n"
@@ -132,7 +143,8 @@ const char *UDO2PS =
    "   definefont pop\n"
    "}\n"
    "bind def\n"
-   "\n"*/
+   "\n"
+*/
    "%%--------------------\n"
    "% Extract from Antiword by Adri van Os\n"
    "/newcodes   % ISO-8859-1 character encodings\n"
@@ -204,7 +216,7 @@ const char *UDO2PS =
    "  /acty topmargin def\n"
    "  actx acty moveto\n"
    "  %%--- Setup the 12 fonts...\n"
-/*   "  /UdoSwiss             /Helvetica             makeisomap\n"
+/* "  /UdoSwiss             /Helvetica             makeisomap\n"
    "  /UdoSwissItalic       /Helvetica-Oblique     makeisomap\n"
    "  /UdoSwissBold         /Helvetica-Bold        makeisomap\n"
    "  /UdoSwissBoldItalic   /Helvetica-BoldOblique makeisomap\n"
@@ -215,13 +227,14 @@ const char *UDO2PS =
    "  /UdoCourier           /Courier               makeisomap\n"
    "  /UdoCourierItalic     /Courier-Oblique       makeisomap\n"
    "  /UdoCourierBold       /Courier-Bold          makeisomap\n"
-   "  /UdoCourierBoldItalic /Courier-BoldQblique   makeisomap\n"*/
+   "  /UdoCourierBoldItalic /Courier-BoldQblique   makeisomap\n"
+*/
    /* New in V6.5.6 [NHz] */
    "  10.0 /Helvetica              /UdoSwiss              ChgFnt\n"
    "  10.0 /Helvetica-Oblique      /UdoSwissItalic        ChgFnt\n"
    "  10.0 /Helvetica-Bold         /UdoSwissBold          ChgFnt\n"
    "  10.0 /Helvetica-BoldOblique  /UdoSwissBoldItalic    ChgFnt\n"
-   "  10.0 /Times-Roman                 /UdoTimes                      ChgFnt\n"
+   "  10.0 /Times-Roman            /UdoTimes              ChgFnt\n"
    "  10.0 /Times-Italic           /UdoTimesItalic        ChgFnt\n"
    "  10.0 /Times-Bold             /UdoTimesBold          ChgFnt\n"
    "  10.0 /Times-BoldItalic       /UdoTimesBoldItalic    ChgFnt\n"
