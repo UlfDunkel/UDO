@@ -111,6 +111,7 @@
 *                - Labels inside tables work now in HTML
 *    fd  May 18: pass1_check_preamble_commands(): html_ignore_8bit_use_charset no longer required
 *    fd  May 19: !use_short_... commands are no longer supported
+*    fd  May 20: typo in udocharset[windows-1252] fixed
 *
 ******************************************|************************************/
 
@@ -289,7 +290,7 @@ UDOCHARSET udocharset[] =                 /* list of encoding mnemonics */
    
    {"cp1252",              CODE_CP1252   },
    {"ms-ansi",             CODE_CP1252   },
-   {"windows-1252",        CODE_CP1253   },
+   {"windows-1252",        CODE_CP1252   },
    {"WIN",                 CODE_CP1252   },
 
    {"cp1253",              CODE_CP1253   },
