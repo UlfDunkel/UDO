@@ -20,14 +20,15 @@
 *                 along with this program; if not, write to the Free Software
 *                 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 *
-*  Description  : 
+*  Description  : ???
 *
 *
 *-------------------------------------------------------------------------------
 *
-*  Author       : Norbert Hanz (norbert@familie-hanz.de)
+*  Author       : Norbert Hanz (norbert@familie-hanz.de) NHz
 *  Co-Authors   : Gerhard Stoll (ggs)
-*  Write access : ggs
+*                 Ulf Dunkel (fd)
+*  Write access : ggs, fd
 *
 *  Notes        : Please add yourself as co-author when you change this file.
 *
@@ -41,38 +42,27 @@
 *-------------------------------------------------------------------------------
 *  History:
 *
+*  1999:
+*    NHz Apr 27: error fixed in three reference functions; link wasn't wrapped
+*                  when text didn't fit in a line
+*    NHz Apr 28: - error in enumerate environment fixed
+*                - hint for NameDest
+*    NHz May 14: - footnote output
+*                - header/footer lines output
+*                - hint for description environment
+*    NHz May 17: - links to other PDF files and links within PDF files can be 
+*                  indicated by an image now
+*                - EPS code of the AboutUDO image now in postscript.ui
 *  2009:
-*    ggs Jan 11: Change year
+*    ggs Jan 11: year updated
+*  2010:
+*    fd  May 20: - old history stuff added to header and removed from UDO2PDF
+*                - year updated
+*                - AboutUDO texts adjusted to changes in manual
 *
 ******************************************|************************************/
 
 const char *UDO2PDF=
-   "%% History:\n"
-   "\n"
-   "%% 27/04/1999\n"
-   "%% Fehler bei den drei Verweisfunktionen beseitigt; der Link wurde nicht mit\n"
-   "%% umgebrochen, wenn der auszugebende Text nicht mehr in die Zeile passte\n"
-   "\n"
-   "%% 28/04/1999\n"
-   "%% Fehler bei der Enumerate-Umgebung\n"
-   "%% Hinweis fuer NameDest\n"
-   "\n"
-   "%% 14/05/1999\n"
-   "%% Ausgabe von Fussnoten\n"
-   "%% Ausgabe von Kopf- und Fusszeilen\n"
-   "%% Hinweis für die Description-Umgebung\n"
-   "\n"
-   "%% 17/05/1999\n"
-   "%% Links zu anderen PDF-Dateien und Links innerhalb von PDF-Dateien koennen\n"
-   "%% jetzt auch als Bild dargestellt werden\n"
-   "%% Der EPS-Code des AboutUDO-Images ist jetzt Teil der Datei postscript.ui\n"
-   "\n"
-   "\n"
-   "%% Zusaetzliche Funktionen fuer die Postscriptausgabe\n"
-   "%% 17.05.1999 Norbert Karl Hanz\n"
-   "%% Version 1.3\n"
-   "\n"
-   "\n"
    "%% Damit der pdfmark-Operator nur im Distiller interpretiert wird\n"
    "/pdfmark where {pop} {userdict /pdfmark /cleartomark load put} ifelse\n"
    "/languagelevel where {pop languagelevel}{1} ifelse\n"
@@ -471,23 +461,21 @@ const char *UDO2PDF=
    "  udo_os Center setAlign newline\n"
    "  newline \n"
    "  (Copyright \\251 1995-2001 by Dirk Hagedorn) Center setAlign newline\n"
-   "  (Copyright \\251 2001-2009 by The UDO Community) Center setAlign newline\n"
+   "  (Copyright \\251 2001-2010 by The UDO Community) Center setAlign newline\n"
    "  (UDO ist Open Source) Center setAlign newline\n"
    "  newline\n"
-   "  (UDO ist ein Programm, welches Textdateien, die im) Center setAlign newline\n"
-   "  (Universal Document Format erstellt wurden, in das ASCII-,) Center setAlign newline\n"
-   "  (ST-Guide-, LaTeX-, Rich Text-, Pure-C-Help-, Manualpage-,) Center setAlign newline\n"
-   "  (HTML-, WinHelp-, Texinfo-, Linuxdoc-SGML-, LyX-, Apple-QuickView-) Center setAlign newline\n"
-   "  (und Turbo-Vision-Help-Format umwandeln kann.) Center setAlign newline\n"
+   "  (UDO ist ein Programm, mit dem Sie Textdateien, die im) Center setAlign newline\n"
+   "  (Universal-Document-Format erstellt wurden,) Center setAlign newline\n"
+   "  (in ueber 25 Zielformate umwandeln koennen.) Center setAlign newline\n"
    "  newline\n"
-   "  (Weitere Informationen sowie die aktuellen Versionen findet man im World Wide Web unter) Center setAlign newline\n"
+   "  (Weitere Informationen sowie die aktuellen Versionen finden Sie im Internet unter) Center setAlign newline\n"
    "  udo_url breite\n"
    "  udo_url udo_url 0 0 255 WebLink\n"
    "} bind def\n"
    "\n"
    "% ----------------------------------------------------------------------\n"
    "\n"
-   "%% About UDO english\n"
+   "%% About UDO English\n"
    "\n"
    "/aboutUDO_eng      % udo_rel_pl udo_os udo_url aboutUDO_eng -\n"
    "{\n"
@@ -504,15 +492,14 @@ const char *UDO2PDF=
    "  udo_os Center setAlign newline\n"
    "  newline\n"
    "  (Copyright \\251 1995-2001 by Dirk Hagedorn) Center setAlign newline\n"
-   "  (Copyright \\251 2001-2009 by The UDO Community) Center setAlign newline\n"
+   "  (Copyright \\251 2001-2010 by The UDO Community) Center setAlign newline\n"
    "  (UDO is Open Source) Center setAlign newline\n"
    "  newline\n"
-   "  (UDO is a program that converts files that are written) Center setAlign newline\n"
-   "  (in the Universal Document Format into ASCII, ST-Guide, LaTeX,) Center setAlign newline\n"
-   "  (Rich Text Format, Pure C Help, Manualpage, HTML, WinHelp,) Center setAlign newline\n"
-   "  (Texinfo, Linuxdoc-SGML, LyX, Apple QuickView and Turbo-Vision-Help.) Center setAlign newline\n"
+   "  (UDO is a program that converts files which you have written) Center setAlign newline\n"
+   "  (in the Universal Document Format,) Center setAlign newline\n"
+   "  (into more than 25 different target formats.) Center setAlign newline\n"
    "  newline\n"
-   "  (Further information and the current versions can be found at) Center setAlign newline\n"
+   "  (Get further information and the current versions on the Internet at) Center setAlign newline\n"
    "  udo_url breite\n"
    "  udo_url udo_url 0 0 255 WebLink\n"
    "} bind def\n"
