@@ -72,6 +72,7 @@
 *    ggs Apr 12: c_begin_list() test the compressed and not only short
 *    ggs Apr 21: c_begin_list(): The [] are not always necessary
 *    fd  May 19: c_begin_list() reformatted
+*    fd  May 20: c_item() debugged for description item output in RTF
 *
 ******************************************|************************************/
 
@@ -3376,11 +3377,13 @@ GLOBAL void c_item(void)
             replace_last(token[0], "]", BOLD_OFF);
             um_strcpy(sBig, token[0], 1024, "c_item[17]");
             
-            if (desttype == TORTF)
+            if (desttype == TORTF)        /* RTF formatting: "{<descriptionTitle>\par }" */
             {
                c_rtf_styles(sBig);
                c_rtf_quotes(sBig);
                replace_udo_quotes(sBig);
+                                          /* we want a line feed after the description title */
+               replace_once(sBig, "}", "\\par }");
             }
             else
             {
@@ -3394,11 +3397,28 @@ GLOBAL void c_item(void)
             }
          }
          
-         ll= strlen_indent();
+         ll = strlen_indent();
          strcpy(sTemp, sBig);
-                                          /* we want a line feed after the description title */
-         sprintf(sBig, "\\pard\\li%d\\fi-%d\\qj %s\n\\pard\\li%d\\fi-%d\\qj ", ll, 567, sTemp, ll, 567);
+         
+                                          /* output adjustment for description: */
+                                          /* "\n"       = newline (for better readability of the file) */
+                                          /* "\\pard"   = reset paragraph parameters */
+                                          /* "\\qj"     = justified alignment */
+                                          /* "\\fi-xxx" = first line (left) indent */
+                                          /* "\\lixxx"  = left indent of paragraph */
+                                          
+                                          /* output description title: */
+                                          /* "%s"       = description title */
+                                          
+                                          /* output paragraph adjustment for description content: */
+                                          /* "\n"       = newline (for better readability of the file) */
+                                          /* "\\pard"   = reset paragraph parameters */
+                                          /* "\\qj"     = justified alignment */
+                                          /* "\\lixxx"  = left indent of paragraph */
+
+         sprintf(sBig, "\n\\pard \\qj \\fi-%d\\li%d %s\n\\pard \\qj \\li%d ", 567, ll, sTemp, ll);
          break;
+         
          
       case ENV_LIST:
          token[0][0] = EOS;
