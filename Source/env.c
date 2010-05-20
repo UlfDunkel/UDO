@@ -72,7 +72,7 @@
 *    ggs Apr 12: c_begin_list() test the compressed and not only short
 *    ggs Apr 21: c_begin_list(): The [] are not always necessary
 *    fd  May 19: c_begin_list() reformatted
-*    fd  May 20: c_item() debugged for description item output in RTF
+*    fd  May 20: c_item() debugged for description item output in RTF & KPS
 *
 ******************************************|************************************/
 
@@ -3837,50 +3837,42 @@ GLOBAL void c_item(void)
          token[0][0] = EOS;
          strcpy_prev_indent(li);
          
-         if (token[1][0] == '[')
+         if (token[1][0] == '[')          /* there is a description title! */
          {
             add_description();
 
             ri[0] = EOS;
-            ll = iEnvIndent[iEnvLevel]-2;
+            ll = iEnvIndent[iEnvLevel] - 2;
             tl = toklen(token[0]);
 
             sAdd[0] = EOS;
             
-            if (((int) tl) < ll)
+            if ( ((int)tl) < ll)
             {
-               memset(sAdd, ' ', (size_t) (ll-tl));
-               sAdd[ll-tl] = EOS;
-               /* sAdd wird weiter unten hinzugefuegt */
+                                          /* sAdd will be added later (see below) */
+               memset(sAdd, ' ', (size_t)(ll - tl));
+               sAdd[ll - tl] = EOS;
             }
 
             delete_once(token[0], "[");
             delete_last(token[0], "]");
-                                          /* Changed in V6.5.5 [NHz] */
-            sprintf(s, "%s udoshow Bon %s%s%s offDesc writeBeforeLeft Boff %s", KPSPC_S, KPSPO_S, token[0], KPSPC_S, KPSPO_S);
-
-            um_strcpy(token[0], s, MAX_TOKEN_LEN+1, "c_item[42]");
-            um_strcat(token[0], sAdd, MAX_TOKEN_LEN+1, "c_item[43]");
+                                          /* KPSPC_S           = ")" */
+                                          /* KPSPO_S           = "(" */
+                                          /* token[0]          = description title */
+                                          /* "Bon"             = Bold style on */
+                                          /* "Boff"            = Bold style off */
+                                          /* "offDesc"         = ??? */
+                                          /* "writeBeforeLeft" = ??? */
+                                          /* "newline"         = newline :-) */
+                                          
+            sprintf(s, "%s udoshow Bon %s%s%s offDesc writeBeforeLeft Boff newline", KPSPC_S, KPSPO_S, token[0], KPSPC_S);
+            um_strcpy(token[0], s,    MAX_TOKEN_LEN + 1, "c_item[42]");
+            um_strcat(token[0], sAdd, MAX_TOKEN_LEN + 1, "c_item[43]");
          }
          
          break;
          
-/* substituted by code above
-      case ENV_DESC:
-         token[0][0] = EOS;
-         strcpy_prev_indent(li);
          
-         if (token[1][0] == '[')
-         {
-            add_description();
-            replace_once(token[0], "[", BOLD_ON);
-            replace_last(token[0], "]", BOLD_OFF);
-            strinsert(token[0], li);
-            strinsert(token[0], " ");
-         }
-         
-         break;
-*/
       case ENV_LIST:
          token[0][0] = EOS;
             
