@@ -9,6 +9,12 @@
 # Write-access: fd
 #
 # ------------------------------------------------------------------------------
+#
+# Notes       : Don't forget to sync the versions numbers in this manual file 
+#               and the relevant UDO source file VERSION.H
+#               
+#
+# ------------------------------------------------------------------------------
 # 
 # History
 # -------
