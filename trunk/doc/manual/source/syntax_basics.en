@@ -180,8 +180,7 @@ your text and to insert special commands:
 !item [sourcecode environment:]   source code
 !end_xlist
 
-How the text of an environment is formatted you can find in the according
-sections.
+In the relevant sections you can find out how the text of an environment is formatted.
 
 !end_node # Environments
 

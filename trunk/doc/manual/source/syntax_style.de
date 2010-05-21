@@ -234,8 +234,8 @@ mit dem Schalter (!KW [compressed]) benutzt.
      voranstellen, damit UDO erkennt, dass die folgende eckige Klammer
      auch fett dargestellt werden soll.
 
-!item Wenn der das letzte Zeichen ein Ausrufezeichen ist, dann muß diesem
-      ein / folgend, damit UDO nicht die obige Regel annimmt.
+!item Wenn der das letzte Zeichen ein Ausrufezeichen ist, dann muss diesem
+      ein ""/"" folgen, damit UDO nicht die obige Regel annimmt.
       
 !item Der in den eckigen Klammer angegebene Text wird auch in HTML fett
      ausgegeben, obwohl dies eher untypisch für HTML ist. In einer der
@@ -324,19 +324,21 @@ Zunächst der UDO-Quelltext:
 Bezüglich dieser Listen-Umgebungen gibt es einige Dinge zu beachten:
 
 !begin_enumerate !compressed
+
 !item Wenn der zu beschreibende Text eine schließende eckige Klammer
-enthält, muss man dieser Klammer ein Ausrufezeichen
-voranstellen, damit UDO erkennt, dass die folgende eckige Klammer
-noch zum ""linken Teil"" des Punktes zählt.
+      enthält, muss man dieser Klammer ein Ausrufezeichen
+      voranstellen, damit UDO erkennt, dass die folgende eckige Klammer
+      noch zum ""linken Teil"" des Punktes zählt.
 
 !item Wenn der das letzte Zeichen ein Ausrufezeichen ist, dann muß diesem
       ein ""/"" folgen, damit UDO nicht die obige Regel annimmt.
 
 !index (!kw [html_no_xlist])
-!item Bei HTML erzeugt für diese Listen Tabellen. Leider
-unterscheiden sich die verschiedenen Browser bei der Ausgabe der Tabellen.
-Falls nicht gewünscht, kann man per (!KW [html_no_xlist]) veranlassen,
-dass die Listen als description-Umgebungen ausgeben werden.
+!item Bei HTML erzeugt für diese Listen Tabellen. 
+      Falls Sie (aus welchen Gründen auch immer) keine Tabellen wollen, 
+      können Sie UDO mit (!KW [html_no_xlist]) veranlassen,
+      die Listen als description-Umgebungen auszugeben.
+      
 # !item HTML, Linuxdoc-SGML und Texinfo bietet keine direkte
 # Unterstützung für Listen diesen Typs, daher werden Listen wie
 # Beschreibungen behandelt. Benutzt man jedoch den Schalter
@@ -346,12 +348,12 @@ dass die Listen als description-Umgebungen ausgeben werden.
 !index (!kw [rtf_charwidth])
 !index (!kw [win_charwidth])
 !item UDO kennt nicht die Schriftbreiten der benutzten Fonts für
-WinHelp und RTF. Falls die Einrückungen zu groß oder zu klein
-ausfallen, kann man die Tiefe durch die Schalter (!KW [rtf_charwidth])
-bzw. (!KW [win_charwidth]) korrigieren.
+      WinHelp und RTF. Falls die Einrückungen zu groß oder zu klein
+      ausfallen, kann man die Tiefe durch die Schalter (!KW [rtf_charwidth])
+      bzw. (!KW [win_charwidth]) korrigieren.
 
 !item Eine ausführliche Erläuterung des Schalters (!KW [compressed]) finden Sie in
-der Beschreibung zur itemize-Umgebung.
+      der Beschreibung zur itemize-Umgebung.
 
 !end_enumerate
 
