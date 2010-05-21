@@ -38,7 +38,7 @@
 # ------------------------------------------------------------------------------
 (!B)IPF(!b) is the source format for helpfiles under IBM's operating system (!I)OS/2~Warp(!i) (and IBM PC-DOS~7).
 
-The IPF format is a text format. It's documented in the "IBM
+The IPF format is a text format. It is documented in the "IBM
 OS/2~Warp IPF~Programming Guide" (Publication Number G25H-7110-00).
 You can read this documentation online on
 (!url [http://publibfp.boulder.ibm.com/cgi-bin/bookmgr/BOOKS/ej6c2b00/CCONTENTS] [])

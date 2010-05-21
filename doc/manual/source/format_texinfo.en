@@ -32,23 +32,21 @@ On systems with 8+3-filenames UDO saves files with the suffix (!file [.tex]).
 If the operating systems supports long filenames UDO uses the suffix
 (!file [.texi]) instead.
 
-!begin_description
+!begin_description !not_compressed
 
-!item [Why does UDO change the chapter names?] ~
+!item [Why does UDO change the chapter names?]
+      Makeinfo and/or Info get problems if a chapter names contains brackets,
+      commas or colons. UDO is forced to delete these characters so that you will
+      be able to convert the output with Makeinfo without any problems. If a
+      chapter name contains only forbidden characters UDO encodes them.
 
-Makeinfo and/or Info get problems if a chapter names contains brackets,
-commas or colons. UDO is forced to delete these characters so that you will
-be able to convert the output with Makeinfo without any problems. If a
-chapter name contains only forbidden characters UDO encodes them.
+      You will only see the changed chapter names inside the Info headlines and
+      Info menus. If you convert the Texinfo file with (!TeX) you will get your
+      original chapter names.
 
-You will only see the changed chapter names inside the Info headlines and
-Info menus. If you convert the Texinfo file with (!TeX) you will get your
-original chapter names.
-
-!item [Why doesn't Texinfo display the environments in ""compressed"" form?] ~
-
-Using Texinfo it's impossible to compress the paragraph separation. Thus the
-parameter (!KW [compressed]) is useless when converting to Texinfo.
+!item [Why doesn't Texinfo display the environments in ""compressed"" form?]
+      Using Texinfo it is impossible to compress the paragraph separation. Thus the
+      parameter (!KW [compressed]) is useless when converting to Texinfo.
 
 !end_description
 

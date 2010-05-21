@@ -22,10 +22,11 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 21: translation completed
 #
 ################################################################################
 
-Momentan gelten folgende Zeichenketten:
+Right now the following strings are supported:
 !index Language
 !begin_xlist [swedish:] !compressed
 !item [czech:]   Czech

@@ -74,7 +74,7 @@ one !..
 !smallskip
 
 !index (!kw [compressed])
-UDO separates the text of each item by an empty line. In some cases it's not
+UDO separates the text of each item by an empty line. In some cases it is not
 a good idea to separate the items e.g. if an item contains only some text.
 In this case it would be better to suppress the empty lines to get a
 compressed environment.
@@ -105,7 +105,7 @@ With (!KW [compressed]):
 !include (!EXAMPLES)/itemize4.ui
 (!EXAMPLE_END)
 
-If you can't see any difference the destination format doesn't allow it to
+If you cannot see any difference the destination format doesn't allow it to
 suppress the item separation.
 
 !smallskip
@@ -636,7 +636,7 @@ converting to ASCII.
 
 (!HINT)
 
-Definitions are great for programming user-defined text styles. It's
+Definitions are great for programming user-defined text styles. It is
 for sure that you need some knowledge about the destination forma to do
 this. The following example shows how to use ghosted text which is available
 for the ST-Guide:
@@ -815,7 +815,7 @@ lines where you want to. If you use (!KW [hline]) in the
 don't use (!KW [hline]) there will be no line at all in this table.
 
 !item	Converting to ST-Guide the lines of a table are generated with
-(!code [@line]). It's not possible to use more than one vertical line between
+(!code [@line]). It is not possible to use more than one vertical line between
 columns or more than one horizontal line.
 
 !item	Inside the cells you can use all other UDO commands like text

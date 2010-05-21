@@ -40,12 +40,12 @@ cases it was impossible not to change the syntax of some commands.
       !item LyX
       !item NROFF
       
-   	I don't know if UDO really saves NROFF or if it's TROFF or GROFF.
+   	I don't know if UDO really saves NROFF or if it is TROFF or GROFF.
 	   But you can already use it to make simple manpages for Unix systems.
 
       !item	Destination formats ""C source code"" and ""Pascal source code""
       
-   	Using these formats it's possible to edit a C or Pascal source
+   	Using these formats it is possible to edit a C or Pascal source
 	   code and its documentation in one file.
 
    	UDO will print ""normal"" text using the comment characters of C
@@ -134,7 +134,7 @@ cases it was impossible not to change the syntax of some commands.
       !item blist-, ilist- and tlist-environment
       !item right justified text (flushright environment)
       !item left justfied text (flushleft environment) for suppressing the justification
-      !item You can use up to four E-Mail addresses on the title page now.
+      !item You can use up to four email addresses on the title page now.
       !item UDO supports Italian ((!KW [language] [[italian!!]])), Spanish
             ((!KW [language] [[spanish!!]])) and Swedish
             ((!KW [language] [[swedish!!]])) now.

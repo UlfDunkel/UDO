@@ -1,10 +1,8 @@
-# ToDo: Englisch
-At the moment UDO supports
+Currently UDO supports
 (!B)bold(!b),
 (!I)italic(!i),
 (!U)underlined(!u),
 (!V)preformatted(!v),
 (!T)non-proportional text(!t),
-(!SUB)tiefgestellt(!sub) and
-(!SUP)hochgestellt(!sup).
-
+(!SUB)subscript(!sub), and
+(!SUP)superscript(!sup).

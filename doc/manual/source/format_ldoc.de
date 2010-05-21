@@ -20,39 +20,39 @@
 #   fd  Jun 10: using EXAMPLE_... macros
 # 2010:
 #   fd  Mar 07: macro usage adjusted
+#   fd  May 21: "&Aring;" uses an invisible hyphen (!-) to avoid replacement in HTML
 #
 ################################################################################
 
 !begin_node Linuxdoc-SGML
 !html_name  format_ldoc
 
-Dieses Format war mir bis Mitte März 1996 völlig unbekannt. Dann fand
-ich darüber einen Artikel in der Zeitschrift ""iX"", habe diesen kurz
-durchgelesen, habe mir das Archiv gesaugt, die Dokumentation
-durchgelesen (zu einer Installation ist es mangels Linux-Rechner nicht
-gekommen) und dieses Format binnen zwei Stunden eingebaut. Mangels
-Testmöglichkeiten war es mir nicht möglich, zu überprüfen, ob UDO
-richtiges Linuxdoc-SGML erzeugt, ich habe mich allerdings strikt an
+Mitte März 1996 fand Dirk Hagedorn einen Artikel über dieses Format in der Zeitschrift ""iX"".
+Er las den Artikel, lud das Archiv herunter, 
+las die Dokumentation (zu einer Installation ist es mangels Linux-Rechner nicht
+gekommen) und baute dieses Format binnen zwei Stunden ein. Mangels
+Testmöglichkeiten war es ihm nicht möglich, zu überprüfen, ob UDO
+richtiges Linuxdoc-SGML erzeugt, er hat sich damals allerdings strikt an
 die Vorgaben des User's Guide gehalten.
 
 Linuxdoc-SGML ist genau wie UDO ein Multiformat-Konverter, das auch
 sein eigenes Format in (!LaTeX), Manualpage, RTF, HTML, Texinfo usw.
-umwandeln kann. Nicht ganz ohne Stolz möchte ich aber darauf
-hinweisen, dass UDO gegenüber Linuxdoc-SGML 1.5 leistungsfähiger und
+umwandeln kann. Nicht ganz ohne Stolz kann aber behauptet werden, 
+dass UDO gegenüber Linuxdoc-SGML 1.5 leistungsfähiger und
 auch leichter zu begreifen ist. Allerdings kann sich das hier gesagte
 bei dem Entwicklungstempo, was man von der Linux-Szene kennt, sehr
 schnell ändern.
 
-!begin_description
+!begin_description !not_compressed
 
 !item [Die xlist-Umgebung wird als description-Umgebung ausgegeben!?]
-Beim Linuxdoc-SGML-Format ist eine xlist-Umgebung nicht vorgesehen.
-Daher wird diese Umgebung hier als description-Umgebung behandelt,
-welche der xlist-Umgebung am ähnlichsten ist.
+      Beim Linuxdoc-SGML-Format ist eine xlist-Umgebung nicht vorgesehen.
+      Daher wird diese Umgebung hier als description-Umgebung behandelt,
+      welche der xlist-Umgebung am ähnlichsten ist.
 
-!item [Linuxdoc-SGML bemängelt (!code [&Aring;!])!?]
-Fügen Sie in der Datei (!file [/usr/lib/linuxdoc-sgml/rep/html/general])
-folgende Zeile ein:
+!item [Linuxdoc-SGML bemängelt ""&!-Aring;"", warum?]
+      Fügen Sie in der Datei (!file [/usr/lib/linuxdoc-sgml/rep/html/general])
+      folgende Zeile ein:
 
 (!EXAMPLE_BEGIN)
 !begin_verbatim

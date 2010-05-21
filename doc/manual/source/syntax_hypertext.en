@@ -90,7 +90,7 @@ links UDO offers you the placeholders called (!KKW [link]),
 
 (!HINT)
 
-If you want to use a ""("" or a ""]"" inside a link you have to
+If you want to use a "")"" or a ""]"" inside a link you have to
 quote it with an exclamation mark:
 
 (!EXAMPLE_BEGIN)
@@ -136,14 +136,14 @@ The following example shows how to insert a link on the UDO contact information:
 
 !item	You may use up to (!MAXLINK) links inside a paragraph. If you will use
       more links UDO will output an error message. (!nl)
-      Zur Erinnerung: Absätze werden durch Leerzeilen getrennt.
+      Remember: paragraphs are separated by empty lines in the source.
 
 !item	When converting to hypertext formats UDO checks if the link
-destination exists. If it doesn't exits UDO prints an error message.
-When converting to the other formats UDO doesn't check if the link
-destination exists!
+      destination exists. If it doesn't exits UDO prints an error message.
+      When converting to the other formats UDO doesn't check if the link
+      destination exists!
 
-!item	(!LaTeX) only allows it to link to aliases and labels.
+!item	(!LaTeX) only allows to link to aliases and labels.
 
 !end_enumerate
 
@@ -157,8 +157,8 @@ destination exists!
 !index (!kkw [ilink])
 !index (!kkw [img])
 !index (!kkw [link])
-Especially for Windows Help and HTML there's existing the
-(!KKW [ilink]) (""image link"") commands. It is a mixture of
+Especially for Windows Help and HTML, the
+(!KKW [ilink]) (""image link"") command exists. It is a mixture of
 the (!KKW [img]) and (!KKW [link]) command that allows to
 display ""hyperimages"". If you click an image you will jump to
 another part of the current document.
@@ -194,8 +194,7 @@ more links UDO will print an error message.
 !html_name  hypertext_links_internal_pages
 
 !index (!kkw [plink])
-Especially for (!LaTeX) there's existing the (!KKW [plink])
-(""page link"") command:
+Especially for (!LaTeX), the (!KKW [plink]) (""page link"") command exists:
 
 !begin_xlist [LaTeX:] !compressed
 !item [UDO:] (!KKW [plink]) (!code [[link commands!] [Links!]])

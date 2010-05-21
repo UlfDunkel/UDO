@@ -128,7 +128,7 @@ Start a query.
 !item [(!DESCRIPTION)]
 This command combines the commands (!KW [ifdest]),
 (!KW [iflang]), (!KW [ifset]) and (!KW [ifos]). The example
-shows how to test if the source file is converted into an english HTML file.
+shows how to test if the source file is converted into an English HTML file.
 
 !item [(!EXAMPLE)]
 (!T)!/if [english,html](!t)

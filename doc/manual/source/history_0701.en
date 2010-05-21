@@ -68,7 +68,7 @@
 # ----------------------------------------
 !item [(!KW [docinfo])]
 # ----------------------------------------
-      !begin_itemize !compressed
+      !begin_itemize !not_compressed
       !item The rather irritating (!KW [docinfo]) attribute names 
             (!code [webmastername]), 
             (!code [webmasterurl]), 
@@ -97,21 +97,22 @@
             It changes the environment layout from ""splendid"" to ""compressed"".            
             Therefore, we have renamed several commands:
             !begin_table [l|l] !hline
-            (!B)old(!b) !! (!B)new(!b)
-            (!kw [short])                  !! (!kw [compressed])
-            (!kw [use_short_descriptions]) !! (!kw [use_compressed_descriptions])
-            (!kw [use_short_enumerates])   !! (!kw [use_compressed_enumerates])
-            (!kw [use_short_envs])         !! (!kw [use_compressed_envs])
-            (!kw [use_short_itemizes])     !! (!kw [use_compressed_itemizes])
-            (!kw [use_short_lists])        !! (!kw [use_compressed_lists])
+            (!I)old(!i)                    !! (!I)new(!i)
+            (!B)short(!b)                  !! (!KW [compressed])
+            (!B)use_short_descriptions(!b) !! (!KW [use_compressed_descriptions])
+            (!B)use_short_enumerates(!b)   !! (!KW [use_compressed_enumerates])
+            (!B)use_short_envs(!b)         !! (!KW [use_compressed_envs])
+            (!B)use_short_itemizes(!b)     !! (!KW [use_compressed_itemizes])
+            (!B)use_short_lists(!b)        !! (!KW [use_compressed_lists])
             !end_table
+            
             (!IMPORTANT) The old commands are no longer supported!
       
       !item New environment attribute (!code [!not_compressed]): (!nl)
             This new environment attribute has been introduced, 
             to be able and switch off the inherit of compressed outer environments to the inner environments.
 
-      !item Damit es einheitlich ist, wurde auch der Schalter (!kw [use_short_tocs]) in (!kw [use_compressed_tocs]) umbenannt.
+      !item To keeps things tidied up, we also renamed the switch (!B)use_short_tocs(!b) to (!KW [use_compressed_tocs]).
       !end_itemize
 
 

@@ -36,9 +36,9 @@
 
 !subheading PostScript
 !begin_itemize
-!item The standard output of ""about udo"" can't be used for postscript,
-      so there is a special one. The output will be done in german if
-      ""german"" ist set, otherwise in english
+!item The standard output of ""about udo"" cannot be used for postscript,
+      so there is a special one. The output will be done in German if
+      ""german"" ist set, otherwise in English
 !item New function for postscript output included, to hide characters
       which can be interpreted as postscript code.
 !item New command for the document layout (!nl)

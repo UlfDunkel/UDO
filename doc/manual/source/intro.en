@@ -38,7 +38,7 @@ Welcome to UDO!
 
 UDO is a powerful and multipurpose utility for making a documentation or any
 other text file that is needed in one text format or more. Though UDO is
-powerful it's quite easy to understand and to use.
+powerful it is quite easy to understand and to use.
 
 If you take a look at the size of this documentation you will notice
 immediately that UDO has to be quite powerful. Many users get deterred of
@@ -174,21 +174,21 @@ ST-Guide, HTML, (!LaTeX) and Windows Help is nearly perfect. Some formats
 (like Linuxdoc-SGML and LyX) are quite young and haven't been tested enough.
 You will surely find some aspects that have to be changed in the future.
 
-There are some points that UDO can't manage yet but will be found on the wishlist:
+There are some points that UDO cannot manage yet but will be found on the wishlist:
 an automatically generated index, list of figures and list of tables.
 
 !smallskip
 
 To make complex files like newspapers is impossible with UDO because it
-can't wrap text around images and it can't generate files with two or more
+cannot wrap text around images and it cannot generate files with two or more
 text columns.
 These functions are part of desktop publishing and not of a software like UDO.
 
 UDO doesn't support an automatic Hyphenation.
 You have to tell UDO explicitely where it is allowed to split up words.
 
-UDO is just a ""one way"" converter which converts it's own format into the formats listed above.
-UDO can't convert them into its own format.
+UDO is just a ""one way"" converter which converts it is own format into the formats listed above.
+UDO cannot convert them into its own format.
 
 !end_node # What UDO can('t) do for you
 
@@ -198,8 +198,8 @@ UDO can't convert them into its own format.
 !html_name  intro_need
 
 If you can answer one or more of the following question with ""Yes"" UDO
-should be worth to take a look at. If you can't answer any question with ""Yes""
-it's quite possible that you don't need UDO and that you can stop reading
+should be worth to take a look at. If you cannot answer any question with ""Yes""
+it is quite possible that you don't need UDO and that you can stop reading
 this manual right here.
 
 !begin_itemize
@@ -272,7 +272,7 @@ upper described horror scenario was history.
 
 Since this time UDO has been growing up day by day. UDO now supports many
 different text formats, it offers a large variety of layouting commands,
-it's available for different operating system and the size of its source code
+it is available for different operating system and the size of its source code
 and documentation is now a hundred times larger than it was in former days.
 
 UDO has become to an operating system independent, very powerful and

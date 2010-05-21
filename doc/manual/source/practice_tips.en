@@ -19,6 +19,8 @@
 #   fd  Jun 09: macro (!file) introduced
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using EXAMPLE_... macros
+# 2010:
+#   fd  May 21: chapter 'Use standardized file names' added
 #
 ################################################################################
 
@@ -30,8 +32,8 @@
 !begin_node Split large documentations
 !html_name  tips_split
 
-If you write a documentation that is 30~kB or larger you should split up it
-into different parts that you can merge with (!KW [include]).
+If you write a documentation that is 30~kB or larger you should split it up 
+into different parts which you can merge with (!KW [include]).
 
 By splitting up the documentation you are e.g. enabled to restructure it by
 simply moving one line of your main source file. If your documentation is
@@ -40,10 +42,10 @@ part of one file you have to move blocks of text to restructure it.
 Another advantage is that you can find specific chapters more quickly if you
 write them to files that you name like this chapter.
 
-Denken Sie auch an mehrsprachige Dokumentationen. Wenn Sie -- wie wir es tun -- z.B. alle deutschen Texte in Dateien mit der Endung (!file [.de]) und alle englischen Texte in (!file [.en])-Dateien pflegen, behalten Sie noch besseren Überblick über die einzelnen Sprachen und können z.B. aus den (!file [.en])-Dateien rasch Kopien für z.B. Französisch erstellen, die Datei-Suffixe der Kopien in (!file [.fr]) ändern und dem französischen Übersetzer nur diese Dateien geben.
+Even keep multi-langual documentations in mind. If you keep -- like we do -- e.g. all German texts in files using the extension (!file [.de]) and all English texts in (!file [.en]) files, you will be able to keep your localizations tidied up and can e.g. create copies from your (!file [.en]) files for e.g. French, change the extensions of the copies into (!file [.fr]) and hand out these files to your French localizer.
 
 Furthermore you can test or convert only some parts of the documentation.
-My be you have a documentation with five chapters. Write a preamble file, a
+Maybe you have a documentation with five chapters. Write a preamble file, a
 main file and five files that contain the chapters:
 
 (!EXAMPLE_BEGIN)
@@ -93,7 +95,7 @@ the version number differ. Wouldn't it be better to use a standardized text
 any time you write the documentation of a new software?
 
 !autoref [off]
-!(!EXAMPLE_BEGIN)
+(!EXAMPLE_BEGIN)
 !begin_verbatim
 ""(!PrgName)"" Version (!PrgVersion) (!nl)
 Copyright (!copyright) (!PrgYear) by C. Rookie
@@ -120,10 +122,75 @@ only the macros have to be defined.
 (!EXAMPLE_END)
 !autoref [on]
 
-It's true that this is only a small example. But you can make more complex
+Surely this is only a small example. But you can make more complex
 files if you want to.
 
 !end_node # Use standardized source files
+
+# = = = = =
+
+!begin_node Use standardized file names
+!html_name  tips_standardize_files
+
+UDO does not concern how you name the files which make up your UDO source text document.
+But for structurized workflows, it can be very useful to create your own standards.
+Especially when you exchange work with other persons, you should even name files in a standardized way.
+
+As soon as you are going to create documentations for multiple languages, you should use English file names if you're not completely sure that all co-authors and colleagues really understand your language (e.g. German) and that no file system they are working with, has any difficulties with e.g. German umlauts in file names.
+
+Here is our suggestion:
+
+!begin_blist
+!item [.u]
+      Mnemonic: (!code [.u]) like (!B)U(!b)DO. This is the main file for the document, e.g. (!file [manual.u]).
+
+!item [.ui]
+      Mnemonic: (!code [.ui]) like (!B)U(!b)DO (!B)I(!b)nclude. These files are included by the .u file. 
+      These files should contain just more control commands, but no text which might want to be localized.
+
+!item [.uli]
+      Mnemonic: (!code [.uli]) like (!B)U(!b)DO (!B)L(!b)ibrary (!B)I(!b)nclude. 
+      Files which can be used from a library for several projects at the same time, e.g. macro definitions, hyphenation rules, etc.
+
+!item [.de]
+      All files with German texts.
+
+!item [.en]
+      All files with English texts.
+
+!item [.sv]
+      All files with Swedish texts. (If you wonder why we do not suggest (!code [.se]) for these, here is our explanation: (!code [sv]) is the ISO descriptor for the language Swedish, while (!code [SE]) is the ISO descriptor for the country Sweden. This is mixed up pretty often, like e.g. with Czech ((!code [cs])) and Czechia ((!code [CZ])).
+
+!item [.fr_CA]
+      Now you got the idea, right? This file extension would define that the document content of the file is written in Canadian French. The ISO descriptors for languages and countries can be used that easily. -- If you don't have to differenciate for French that way, a simple (!file [.fr]) will be fine, of course.
+!end_blist
+
+If you name your files this way, you will simply have to add more (!KW [include]) commands in the (!file [.ui]) files when you add another localization to your documentation. Just copy your e.g. (!file [.en]) files and change the extension of the copied files to the desired language descriptor.
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+# manual.u
+# --------
+!include praeamble.ui
+
+!begin_document
+!include intro.ui
+!include ref.ui
+!include appendix.ui
+!end_document
+
+# intro.ui
+# --------
+!ifset [de]
+!include intro.de
+!endif
+!ifset [en]
+!include intro.en
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+     
+!end_node # Use standardized file names
 
 # = = = = =
 

@@ -38,7 +38,7 @@
 !begin_node Installation der TOS- und GEM-Version (Atari)
 !html_name  installation_tos_gem
 
-Zur Installation von UDO auf einem Atari-(Kompatiblen-)Rechner kopieren
+Zur Installation von UDO auf einem TOS-kompatiblen Computer oder System (z.B. MagicMacX, MagicMac, MagicPC, GEMulator, STEmulator) kopieren
 Sie einfach alle Dateien in ein beliebiges Verzeichnis, welches
 sinnigerweise ""UDO"" genannt werden sollte.
 

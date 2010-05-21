@@ -32,14 +32,13 @@ available and you have to change some parts because it contains some bugs.
 If you aren't an author that programs software that uses the Turbo Vision
 library you shouldn't use this format.
 
-!begin_description
+!begin_description !not_compressed
 
-!item [TVHC prints the error message ""Unterminated topic reference""!?] ~
-
-My TVHC version 1.0 contains an ugly bug. Due to this bug you cannot quote
-brackets by using them twice. If your TVHC prints the upper error message
-look for the function (!code [scanForCrossRefs(!)]) in (!file [tvhc.cpp]) and
-patch it like this:
+!item [TVHC prints the error message ""Unterminated topic reference""!?]
+      My TVHC version 1.0 contains an ugly bug. Due to this bug you cannot quote
+      brackets by using them twice. If your TVHC prints the upper error message
+      look for the function (!code [scanForCrossRefs(!)]) in (!file [tvhc.cpp]) and
+      patch it like this:
 
 !begin_description
 !item [Original Version:]
@@ -65,14 +64,13 @@ if (line[i] == begXRef)    // [i] instead of [i+1]
 (!EXAMPLE_END)
 !end_description
 
-After having changed the source code you should recompile TVHC to enable the changes.
+      After having changed the source code you should recompile TVHC to enable the changes.
 
-!item [TVHC prints the error message ""Text too long""!?] ~
-
-The file (!file [tvhc.h]) contains a constant number named (!code [bufferSize])
-that defines the maximum size of the text buffer. This text buffer is a
-little bit small. You should increase the buffer size e.g. to 32~KB to
-suppress the upper error message:
+!item [TVHC prints the error message ""Text too long""!?]
+      The file (!file [tvhc.h]) contains a constant number named (!code [bufferSize])
+      that defines the maximum size of the text buffer. This text buffer is a
+      little bit small. You should increase the buffer size e.g. to 32~KB to
+      suppress the upper error message:
 
 (!EXAMPLE_BEGIN)
 !begin_verbatim
@@ -80,17 +78,16 @@ const bufferSize = 32768;
 !end_verbatim
 (!EXAMPLE_END)
 
-After having changed the buffer size you should recompile TVHC to enable the
-changes.
+      After having changed the buffer size you should recompile TVHC to enable the
+      changes.
 
-!item [TVHC prints the error message ""TOPIC expected""!?] ~
+!item [TVHC prints the error message ""TOPIC expected""!?]
+      This error message is printed if a line starts with a point. The point is a
+      special character in Turbo Vision Help if it is the first character of a
+      line. My TVHC stops if it reads such a line.
 
-This error message is printed if a line starts with a point. The point is a
-special character in Turbo Vision Help if it is the first character of a
-line. My TVHC stops if it reads such a line.
-
-But there's no need to stop the conversion. Thus I have patched my TVHC. I
-have replaced this line
+      But there's no need to stop the conversion. Thus I have patched my TVHC. I
+      have replaced this line
 
 (!EXAMPLE_BEGIN)
 !begin_verbatim
@@ -106,8 +103,8 @@ warning("TOPIC expected");
 !end_verbatim
 (!EXAMPLE_END)
 
-If you recompile the TVHC it will print a warning and it will go on
-converting the source file instead of printing an error message.
+      If you recompile the TVHC it will print a warning and it will go on
+      converting the source file instead of printing an error message.
 
 !end_description
 

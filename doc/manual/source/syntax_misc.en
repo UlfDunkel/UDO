@@ -116,7 +116,7 @@ or
 	!end_xlist
 !end_xlist
 
-UDO can't recognize such overcross references. You get only a (less informative)
+UDO cannot recognize such overcross references. You get only a (less informative)
 error message ""memory allocation failed"".
 
 !end_node # Split documents
@@ -159,7 +159,7 @@ included and the name of the program is defined by a macro:
 !index Macros !! Parameters
 !index Parameters !! Macros
 
-Since UDO Release 6 you can call macros with parameters. You can set the
+Since UDO Release 6 you can use macros with parameters. You can set the
 position of the parameters in the (!I)!/macro(!i) command by inserting
 ""(!code [(!/1!)])"", ""(!code [(!/2!)])"" up to ""(!code [(!/9!)])"". To call a macro
 with parameters you have to write brackets (""[!..]"") around them.
@@ -185,7 +185,7 @@ UDO command names like ""B"" or ""nl"". If you don't you will get problems
 with bold text ((!KKW [B])) or the newline command ((!KKW [nl])).
 
 !item You shouldn't use too many macros because every additional macro slows
-down the conversion of the source file. The maximum number of macro is
+down the conversion of the source file. The maximum number of macros is
 (!MAXMACRO).
 
 !end_enumerate
@@ -195,7 +195,7 @@ down the conversion of the source file. The maximum number of macro is
 !begin_node Predefined macros
 !html_name  misc_macros_predefined
 
-UDO kennt ein paar vordefinierte Makros/Platzhalter:
+UDO knows some predefined macros and placeholders:
 
 !begin_table [|l|l|] !hline
 (!KKW [alpha]) !! Print the (!alpha) symbol
@@ -224,9 +224,9 @@ UDO kennt ein paar vordefinierte Makros/Platzhalter:
 !hline
 (!KKW [tm]) !! Print the (!tm) symbol
 !hline
-(!KKW [today]) !! Insert long form of current date
+(!KKW [today]) !! Insert long form of current date: (!B)(!today)(!b)
 !hline
-(!KKW [short_today]) !! Insert short form of current date
+(!KKW [short_today]) !! Insert short form of current date: (!B)(!short_today)(!b)
 !hline
 !end_table
 
@@ -241,16 +241,16 @@ UDO kennt ein paar vordefinierte Makros/Platzhalter:
 !begin_node Definitions
 !html_name  misc_definitions
 
-Like macros definitions are user-defined placeholders. You can use them to
-insert special commands inside the text especially for the destination
+Like macros, definitions are user-defined placeholders. You can use them to
+insert special commands inside the text, especially for the destination
 format.
 
 !index (!kw [define])
-The syntax  is (!KW [define] [(!WORD) (!TEXT)]). In contrast to macros
-(!code [(!TEXT)]) will not be converted in a special way. No special
-characters are translated inside (!code [(!TEXT)]).
+The syntax  is (!KW [define]) (!C)[(!WORD)](!c) (!C)[(!TEXT)](!c). In contrast to macros,
+(!C)[(!TEXT)](!c) will not be converted in a special way. No special
+characters are translated inside (!C)[(!TEXT)](!c).
 
-In this example I will demonstrate how to print headlines with HTML:
+This example demonstrates how to print headlines with HTML:
 
 (!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)/define1.ui
@@ -386,7 +386,7 @@ the (!KW [unset]) command.
 
 If you want to avoid that all chapters are saved in the destination file you
 can add the following lines to the beginning of your source file. Here the
-symbol (!code [AllChapters]) will be deleted if it's set:
+symbol (!code [AllChapters]) will be deleted if it is set:
 
 (!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)/symbol3.ui
@@ -416,7 +416,7 @@ symbol.
 !index (!kkw [index])
 
 To add entries for the index you can use the (!KW [index]) command
-or the (!KKW [idx) or (!KKW [index]) placeholders. You can and should use these
+or the (!KKW [idx]) or (!KKW [index]) placeholders. You can and should use these
 commands as often as possible.
 
 To add an entry with the (!KW [index]) command use it this way:
@@ -433,7 +433,7 @@ inside the index of an RTF file.
 
 To insert a multi-index you can separate the index entries with a double
 exclamation mark. You can use up to three indices in one line. You should
-use multi-indices when it's obvious that a potential reader looks for an
+use multi-indices when it is obvious that a potential reader looks for an
 entry in different ways.
 
 If you think that a reader might look for ""Index entry"" or ""Entry,
@@ -455,19 +455,31 @@ parameters. The following examples show how the commands are converted for
 !item [RTF:]   an {\xe\v entry}entry
 !item [Win:]   an {K{\footnote K entry}}entry
 !item [else:]  an entry
+!end_xlist
 
+!smallskip
+
+!begin_xlist [LaTeX:] !compressed
 !item [UDO:]   a (!KKW [idx]) (!code [[word!] [entry!]])
 !item [LaTeX:] a word\index{entry}
 !item [RTF:]   a {\xe\v Index}Wort
 !item [Win:]   a {K{\footnote K entry}}word
 !item [else:]  a word
+!end_xlist
 
+!smallskip
+
+!begin_xlist [LaTeX:] !compressed
 !item [UDO:]   a (!KKW [idx]) (!code [[word!] [entry!] [subentry!]])
 !item [LaTeX:] a word\index{entry!subentry}
 !item [RTF:]   a {\xe\v entry, subentry}word
 !item [Win:]   a {K{\footnote K entry, subentry}}word
 !item [else:]  a word
+!end_xlist
 
+!smallskip
+
+!begin_xlist [LaTeX:] !compressed
 !item [UDO:]   a (!KKW [idx]) (!code [[word!] [entry!] [subentry!] [subsubentry!]])
 !item [LaTeX:] a word\index{entry!subentry!subsubentry}
 !item [RTF:]   a {\xe\v entry, subentry, subsubentry}word
@@ -534,7 +546,7 @@ language, operating system and the existence of symbols.
 !index (!kw [else])
 !index (!kw [endif])
 With an (!KW [if]) command you start a query. If the query returns a true value
-the following lines will be converted until UDO reads the (!W [endif]) or
+the following lines will be converted until UDO reads the (!KW [endif]) or
 (!KW [else]) commands. If the query returns a false value UDO will ignore
 the following lines until (!KW [endif]) or (!KW [else]).
 
@@ -789,7 +801,7 @@ source code:
 (!EXAMPLE_END)
 
 To say it once more: Text that is part of a raw environment is printed ""as
-is"". That means that it's not converted and not indented. If you will
+is"". That means that it is not converted and not indented. If you will
 insert the upper form source code into a verbatim environment you will
 see the source code in an HTML browser. But if you insert it inside a raw
 environment you will see the form!

@@ -54,7 +54,7 @@ will disappear because they depend on earlier errors.
 
 !item [""!.."" called twice]
 The printed command was used twice or more inside the source file
-even if it's only to be used once.
+even if it is only to be used once.
 
 !item [""!.."" expected]
 UDO has expected the printed command. Please check if all
@@ -67,12 +67,12 @@ have forgotten to finish it. Another possibility is that you have
 misplaced the (!I)!/end_*(!i) command
 
 !item [""!.."" ignored inside preamble]
-It's only allowed to use the printed command inside the main part of
+It is only allowed to use the printed command inside the main part of
 the source file. That means you have to place it after
 (!KW [begin_document]).
 
 !item [""!.."" ignored outside preamble]
-It's only allowed to use the printed command inside the preamble of
+It is only allowed to use the printed command inside the preamble of
 the source file. That means you have to place it before
 (!KW [begin_document]).
 
@@ -96,7 +96,7 @@ Thus, UDO cannot convert it. Please try to avoid the printed
 character.
 
 !item [''!..'' still active]
-A text style or a footnote shall be started even if it's still
+A text style or a footnote shall be started even if it is still
 active. Please note that the placeholders contain a capital letter
 for activating a text style. The placeholders that finish a text
 style contain a small letter.
@@ -187,7 +187,7 @@ some links.
 
 !item [couldn't write IMG header]
 UDO couldn't open the printed file for changing the image
-information. Maybe the file doesn't exist or it's write protected.
+information. Maybe the file doesn't exist or it is write protected.
 
 !item [definition contents longer than !.. characters]
 The contents of a definition exceeds the maximum number of

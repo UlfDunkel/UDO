@@ -33,8 +33,8 @@
 !begin_node Installing the Atari version
 !html_name  installation_tos_gem
 
-To install UDO onto an Atari or onto a computer with a compatible operating
-system (e.g. MagiCMac, MagiC-PC, GEMulator) just copy all files to a
+To install UDO onto an Atari or onto a computer with a TOS-compatible operating
+system (e.g. MagicMacX, MagicMac, MagicPC, GEMulator, STEmulator), just copy all files to a
 directory that should be named ""UDO"".
 
 The GEM version should be the application for files with the suffix
@@ -117,13 +117,13 @@ Please note: a manpage is currently not part of the Mac~OS~X distribution.
 
 (!HINT)
 
-Das Verzeichnis (!file [/usr/bin]) wird im Finder normalerweise nicht angezeigt. Um es zu öffnen, geben Sie es im Menüpunkt ""Gehe zu/Gehe zum Ordner ..."" des Finders ein.
+The directory (!file [/usr/bin]) is usually not shown in the Finder. To open it, use the Finder menu item ""Go To > Go to folder"".
 
-Sie können auch -- sofern gewünscht -- sämtliche unsichtbaren Dateien und Verzeichnisse im Finder sichtbar schalten. Um unsichtbare Dateien und Ordner im Finder zu sehen, starten Sie das Terminal-Programm (Applications > Dienstprogramme > Terminal) und geben Sie dort ein:
+If you like to, you can even switch all invisible files and folders visible in the Finder. To make them visible in the Finder, run the Terminal app (Applications > Utilities > Terminal) and enter the following line:
 
 (!code [defaults write com.apple.finder AppleShowAllFiles TRUE])
 
-Damit die Änderungen wirksam werden, müssen Sie den Finder einmal neustarten.
+You have to restart the Finder to activate this change.
 
 !end_node # Installing the Macintosh version (Mac~OS~X)
 
@@ -147,12 +147,12 @@ Damit die Änderungen wirksam werden, müssen Sie den Finder einmal neustarten.
 !html_name  installation_linux_rpm
 
 !begin_itemize !compressed
-!item Laden Sie sich das entsprechende rpm-File von der UDO-Website herunter.
-!item Melden Sie sich als (!code [root]) an.
+!item Download the appropriate rpm file from the UDO website.
+!item Log in as (!code [root]).
 !item For a new installation enter: (!code [rpm -i]) (!file [file])(!file [.rpm])
 !item For an upgrade (if you have an older UDO-rpm installed): (!code [rpm -U]) (!file [file])(!file [.rpm])
 !end_itemize
-Oder benutzen Sie Ihre bevorzugte rpm-Oberfläche (z.B. kpackage, krpmview, yast).
+Or use your preferred rpm UI (e.g. kpackage, krpmview, yast).
 
 !end_node # Installing the Linux rpm package
 
@@ -168,7 +168,7 @@ Oder benutzen Sie Ihre bevorzugte rpm-Oberfläche (z.B. kpackage, krpmview, yast)
 !end_itemize
 Or (with Internet connection): (!file [apt-get install udo])
 
-The package name for the english documentation is (!file [udo-doc]).
+The package name for the English documentation is (!file [udo-doc]).
 
 The documentation is currently in revision (outdated in parts).
 
