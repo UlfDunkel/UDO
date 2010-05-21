@@ -140,7 +140,7 @@ Definiert eine Sprungmarke, die bei Hypertextformaten
 automatisch referenziert wird und auf die man durch die Link-Befehle verweisen kann.
 
 !item [(!SEEALSO)]
-(!link [Sprungmarken] [Sprungmarken]), (!link [Querverweise] [Querverweise]), (!KKW [label!]), (!KKW [link]), (!KKW [plink])
+(!link [Sprungmarken] [Sprungmarken]), (!link [Querverweise] [Querverweise]), (!KKW [label]), (!KKW [link]), (!KKW [plink])
 
 !end_xlist
 
