@@ -114,6 +114,7 @@
 *                - new: chr_codepage_charset_name()
 *    fd  May 19: - auto_quote_chars() debugged
 *                - (!deg) is replaced by localized string lang.degree, if not supported
+*    fd  May 21: new: label* | l*  (#90)
 *
 ******************************************|************************************/
 
@@ -287,7 +288,7 @@ LOCAL char *html_specs[HTML_SPEC_MAX] =   /* list of supported HTML specials */
 /* TRUE liefert. Daher muessen hier sowohl !node als auch */
 /* !node* angegeben werden! */
 
-# define        MAXQUOTECMD     39
+# define        MAXQUOTECMD     40
 
 LOCAL const QUOTECOMMAND quotecommand[MAXQUOTECMD] =
 {
@@ -328,6 +329,7 @@ LOCAL const QUOTECOMMAND quotecommand[MAXQUOTECMD] =
    {"!macro",             6, "",       0       },
    {"!hyphen",            7, "",       0       },
    {"!label",             6, "",       0       },
+   {"!label*",            7, "",       0       },
    {"!alias",             6, "",       0       },
    {"!docinfo",           8, "",       0       },
 };

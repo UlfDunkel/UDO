@@ -99,6 +99,7 @@
 *    fd  May 17: init_toc_forms_numbers() must no longer close </li> for HTML
 *    fd  May 18: - output_html_doctype() no longer writes iso-8859-1 hard-coded
 *                - output_html_meta() no longer writes iso-8859-1 hard-coded
+*    fd  May 21: add_label(): supports "!label*" which must not be listed in index (#90)
 *
 ******************************************|************************************/
 
@@ -13849,7 +13850,7 @@ GLOBAL void c_label(void)
       return;
    }
 
-   p2_lab_counter++;                      /*r6pl2*/
+   p2_lab_counter++;
 
    replace_udo_quotes(sLabel);
    convert_tilde(sLabel);
@@ -13967,93 +13968,122 @@ GLOBAL void c_label(void)
 
 
 
+/*******************************************************************************
+*
+*  c_alias():
+*     ???
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
 GLOBAL void c_alias(void)
 {
-        p2_lab_counter++;       /*r6pl2*/
-}       /* c_alias */
+   p2_lab_counter++;
+}
 
 
-/*      ############################################################
-        #
-        # Ein Label der internen Liste hinzufuegen
-        # label:        String
-        # isn:          TRUE: Ein Kapitel (Node), FALSE: nur Label
-        # isp:          TRUE: Ein Popup
-        # tocindex:     Position des Labels in toc[]
-        #
-        ############################################################    */
-GLOBAL int add_label(const char *label, const BOOLEAN isn, const BOOLEAN isp)
+
+
+
+/*******************************************************************************
+*
+*  add_label():
+*     add a label to the internal list of labels
+*
+*  Notes:
+*     tocindex: position of label in toc[]
+*
+*     Labels are now added in all formats, because else *toc_output() would output
+*     wrong results because it directly references using the label index.
+*
+*  Return:
+*     - FALSE: error
+*     - p1_lab_counter
+*
+******************************************|************************************/
+
+GLOBAL int add_label(
+
+const char     *label,   /* ^ label name string */
+const BOOLEAN   isn,     /* TRUE: chapter (node), FALSE: label only */
+const BOOLEAN   isp)     /* TRUE: popup */
 {
-        LABEL   *labptr;
+   LABEL       *labptr;  /* ^ to label structure in memory */
 
-        /* r5pl6: Labels werden nun bei allen Formaten eingefuegt, da   */
-        /* sonst *toc_output() falsche Ergebnisse liefert, da dort              */
-        /* ueber den Label-Index direkt referenziert wird.                              */
 
-        if (p1_lab_counter+1>=MAXLABELS)        /* Noch Platz in der Liste? */
-        {       error_too_many_label();
-                return FALSE;
-        }
+   if (p1_lab_counter + 1 >= MAXLABELS)   /* list overflow? */
+   {
+      error_too_many_label();
+      return FALSE;
+   }
 
-        /* rel6pl2: Leeres Label abweisen and too long (V6.5.17) */
-#if 1
-        if (label[0]==EOS || strlen (label) > MAX_LABEL_LEN)
-        {       return FALSE;
-        }
-#endif
+                                          /* label empty or too long? */
+   if (label[0] == EOS || strlen(label) > MAX_LABEL_LEN)
+      return FALSE;
 
-        labptr= (LABEL *) um_malloc(sizeof(LABEL)+1);
+                                          /* get space for new label */
+   labptr = (LABEL *)um_malloc(sizeof(LABEL) + 1);
 
-        if (labptr==NULL)                                       /* Kein Speicher mehr frei? */
-        {       error_malloc_failed();
-                return FALSE;
-        }
+   if (labptr == NULL)                    /* no more memory? */
+   {
+      error_malloc_failed();
+   return FALSE;
+   }
 
-        /* New in r6pl15 [NHz] */
 
-        /* Set label in project file */
+   /* --- set label in project file --- */
 
-        if (!isn) /* Only labels which aren't nodes */
+   if (!isn)                              /* only labels which are not nodes */
+      save_upr_entry_label(sCurrFileName, strchr(current_node_name_sys, ' ') + 1, uiCurrFileLine);
 
-                save_upr_entry_label (sCurrFileName, strchr(current_node_name_sys, ' ')+1, uiCurrFileLine);
+   p1_lab_counter++;
+   lab[p1_lab_counter] = labptr;
 
-        p1_lab_counter++;
-        lab[p1_lab_counter]= labptr;
+   strcpy(labptr->name, label);
+   replace_udo_quotes(labptr->name);
 
-        strcpy( labptr->name, label);
-        replace_udo_quotes(labptr->name);
-        labptr->len= strlen(labptr->name);      /* r5pl10 */
+   labptr->len          = strlen(labptr->name);
+   labptr->labindex     = p1_lab_counter;
+   labptr->is_node      = isn;
+   labptr->is_alias     = FALSE;
+   labptr->is_popup     = isp;
+   labptr->tocindex     = p1_toc_counter;
+   labptr->ignore_links = FALSE;
+   labptr->referenced   = FALSE;
 
-        labptr->labindex= p1_lab_counter;       /* r6pl2 */
-        labptr->is_node= isn;
-        labptr->is_alias= FALSE;
-        labptr->is_popup= isp;
+                                          /* check for labels which should not be listed in index */
+   if (    (strcmp(token[0],"!label*") == 0)
+        || (strcmp(token[0],"!l*")     == 0)
+      )
+      labptr->ignore_index = TRUE;
+   else
+      labptr->ignore_index = FALSE;
 
-        labptr->tocindex= p1_toc_counter;
-        labptr->ignore_links= FALSE;
-        labptr->ignore_index= FALSE;
-        labptr->referenced= FALSE;                      /* r6pl9 */
+   if (pflag[PASS1].inside_apx)
+   {
+      labptr->appendix = TRUE;
+      labptr->n1       = p1_apx_n1;
+      labptr->n2       = p1_apx_n2;
+      labptr->n3       = p1_apx_n3;
+      labptr->n4       = p1_apx_n4;
+      labptr->n5       = p1_apx_n5;
+   }
+   else
+   {
+      labptr->appendix = FALSE;
+      labptr->n1       = p1_toc_n1;
+      labptr->n2       = p1_toc_n2;
+      labptr->n3       = p1_toc_n3;
+      labptr->n4       = p1_toc_n4;
+      labptr->n5       = p1_toc_n5;
+   }
 
-        if (pflag[PASS1].inside_apx)
-        {       labptr->appendix= TRUE;
-                labptr->n1= p1_apx_n1;
-                labptr->n2= p1_apx_n2;
-                labptr->n3= p1_apx_n3;
-                labptr->n4= p1_apx_n4;
-                labptr->n5= p1_apx_n5;
-        }
-        else
-        {       labptr->appendix= FALSE;
-                labptr->n1= p1_toc_n1;
-                labptr->n2= p1_toc_n2;
-                labptr->n3= p1_toc_n3;
-                labptr->n4= p1_toc_n4;
-                labptr->n5= p1_toc_n5;
-        }
+   return p1_lab_counter;
+}
 
-        return p1_lab_counter;
 
-}       /* add_label */
 
 
 
@@ -16007,7 +16037,7 @@ GLOBAL BOOLEAN add_node_to_toc(const BOOLEAN popup, const BOOLEAN invisible)
                 get_html_filename(p1_toc_counter, tocptr->filename);
         }
 
-        li= add_label(tocptr->name, TRUE, popup);
+        li = add_label(tocptr->name, TRUE, popup);
 
         if (li>0)                       /* and not li>=0, V6.5.17 [GS] */
         {       tocptr->labindex= li;

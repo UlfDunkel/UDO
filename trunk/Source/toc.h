@@ -41,6 +41,7 @@
 *    fd  Jan 20: new: html_quotes()
 *    fd  Feb 05: file reformatted and tidied up; TAB-free
 *    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  May 21: more comments translated
 *
 ******************************************|************************************/
 
@@ -73,22 +74,22 @@
 
 typedef struct _label                     /* jump labels to be referenced */
 {
-   char      name[MAX_LABEL_LEN + 1];     /* Name eines Labels */
-   int       labindex;                    /* lab[1]==1, lab[2]==2 etc. */
-   size_t    len;                         /* Laenge des Labels */
-   int       n1;                          /* ist in diesem Kapitel definiert */
-   int       n2;                          /* ... Abschnitt */
-   int       n3;                          /* ... Unterabschnitt */
-   int       n4;                          /* ... Unterabschnitt */
-   int       n5;                          /* ... Unterabschnitt */
-   BOOLEAN   appendix;                    /* Das Label steht im Anhang */
-   BOOLEAN   is_node;                     /* Das Label ist die Ueberschrift */
-   BOOLEAN   is_popup;                    /* Der Node soll ein Popup sein */
-   BOOLEAN   is_alias;                    /* Nur ein Zweitname des Nodes */
-   int       tocindex;                    /* Gehoert zum Node "toc[tocindex]" */
-   BOOLEAN   ignore_links;                /* Keine Links auf dieses anlegen */    /* r5pl8 */
-   BOOLEAN   ignore_index;                /* Keine Links auf dieses anlegen */    /* r5pl8 */
-   BOOLEAN   referenced;                  /* Wurde es referenziert? */            /* r6pl9 */
+   char      name[MAX_LABEL_LEN + 1];     /* label name */
+   int       labindex;                    /* lab[1]==1, lab[2]==2, etc. */
+   size_t    len;                         /* label name len */
+   int       n1;                          /* defined in this node */
+   int       n2;                          /* ... subnode */
+   int       n3;                          /* ... subsubnode */
+   int       n4;                          /* ... subsubsubnode */
+   int       n5;                          /* ... subsubsubsubnode */
+   BOOLEAN   appendix;                    /* label is in appendix */
+   BOOLEAN   is_node;                     /* label is node title */
+   BOOLEAN   is_popup;                    /* node is a popup node */
+   BOOLEAN   is_alias;                    /* alias name of a node */
+   int       tocindex;                    /* belongs to node "toc[tocindex]" */
+   BOOLEAN   ignore_links;                /* don't link to this label */
+   BOOLEAN   ignore_index;                /* don't index this label (node only!) */
+   BOOLEAN   referenced;                  /* TRUE: label has been referenced */
    
 }  LABEL,  *pLABEL;
 
@@ -165,32 +166,32 @@ typedef struct _tocitem                   /* entries for the Table Of Contents (
    UWORD     uiIconActiveHeight;
    char     *icon_text;                   /* Icontext fuer modernes Layout */
    char     *helpid;                      /* Eine Jump-ID, wie ein Alias */
-   int       mapping;                     /* Eine Jump-ID fuer WinHelp/IPF */   /* r6pl7 */
+   int       mapping;                     /* Eine Jump-ID fuer WinHelp/IPF */
    BOOLEAN   invisible;                   /* TRUE = Nicht ins Inhaltsverzeichnis */
    BOOLEAN   converted;                   /* Bereits Makros etc. angepasst? */
-   int       labindex;                    /* lab[]-Position */   /* r5pl6 */
-   int       prev_index;                  /* toc[]-Position des HTML-Vorgaengers */   /* r5pl6 */
-   int       next_index;                  /* toc[]-Position des HTML-Nachfolgers */   /* r5pl6 */
+   int       labindex;                    /* lab[]-Position */
+   int       prev_index;                  /* toc[]-Position des HTML-Vorgaengers */
+   int       next_index;                  /* toc[]-Position des HTML-Nachfolgers */
    int       up_n1_index;                 /* toc[]-Position oberhalb */
    int       up_n2_index;
    int       up_n3_index;
    int       up_n4_index;
-   int       count_n2;                    /* Anzahl enthaltener Subnodes */   /* r6pl8 */
-   int       count_n3;                    /* Anzahl enthaltener Subsubnodes */   /* r6pl8 */
-   int       count_n4;                    /* Anzahl enthaltener Subsubsub... */   /* r6pl8 */
-   int       count_n5;                    /* Anzahl enthaltener Subsubsubsub... */   /* r6pl8 */
-   BOOLEAN   ignore_subtoc;               /* ignore !use_auto_subtoc */   /* r5pl6 */
-   BOOLEAN   ignore_links;                /* Keine Links auf dieses anlegen */   /* r5pl8 */
-   BOOLEAN   ignore_index;                /* Keinen Indexeintrag anlegen */   /* r5pl10 */
-   BOOLEAN   ignore_title;                /* Keine Ueberschrift erzeugen */   /* r6pl13 */
-   BOOLEAN   ignore_headline;             /* Keine Kopfzeile erzeugen */   /* r5pl12 */
-   BOOLEAN   ignore_bottomline;           /* Keine Fusszeile erzeugen */   /* r5pl12 */
-   BOOLEAN   ignore_footer;               /* Keinen Footer erzeugen */   /* r6pl2 */
-   char     *raw_header_filename;         /* */                              /* r6pl10*/
-   char     *raw_footer_filename;         /* */                          /* r6pl10*/
-   BOOLEAN   ignore_raw_header;           /* Keinen Userdef-Header einlesen? */   /* r6pl10 */
-   BOOLEAN   ignore_raw_footer;           /* Keinen Userdef-Footer einlesen? */   /* r6pl10 */
-   BOOLEAN   has_children;                /* Hat der Node einen Subnode etc.? */
+   int       count_n2;                    /* # of contained subnodes */
+   int       count_n3;                    /* # of contained subsubnodes */
+   int       count_n4;                    /* # of contained subsubsubnodes */
+   int       count_n5;                    /* # of contained subsubsubsubnodes */
+   BOOLEAN   ignore_subtoc;               /* ignore !use_auto_subtoc */
+   BOOLEAN   ignore_links;                /* don't link to this page */
+   BOOLEAN   ignore_index;                /* don't add this to the index page */
+   BOOLEAN   ignore_title;                /* don't create title for this node */
+   BOOLEAN   ignore_headline;             /* don't create a header line */
+   BOOLEAN   ignore_bottomline;           /* don't create a bottom line */
+   BOOLEAN   ignore_footer;               /* don't create a footer line */
+   char     *raw_header_filename;         /* */
+   char     *raw_footer_filename;         /* */
+   BOOLEAN   ignore_raw_header;           /* don't read user-defined header */
+   BOOLEAN   ignore_raw_footer;           /* don't read user-defined footer */
+   BOOLEAN   has_children;                /* TRUE: this node has subnode(s) */
 
 }  TOCITEM, *pTOCITEM;
 

@@ -113,6 +113,7 @@
 *    fd  May 19: !use_short_... commands are no longer supported
 *    fd  May 20: - typo in udocharset[windows-1252] fixed
 *                - token_output(): some adjustments for description item output in KPS
+*    fd  May 21: new: label* | l*  (#90)
 *
 ******************************************|************************************/
 
@@ -644,6 +645,7 @@ LOCAL const UDOCOMMAND udoCmdSeq[] =
    { "!begin_flushleft",              "!bfl",    c_begin_flushleft,         TRUE,  CMD_ONLY_MAINPART },
    { "!end_flushleft",                "!efl",    c_end_flushleft,           TRUE,  CMD_ONLY_MAINPART },
    { "!label",                        "!l",      c_label,                   TRUE,  CMD_ONLY_MAINPART },
+   { "!label*",                       "!l*",     c_label,                   TRUE,  CMD_ONLY_MAINPART },
    { "!alias",                        "!a",      c_alias,                   TRUE,  CMD_ONLY_MAINPART },
    { "!index",                        "!x",      c_index,                   TRUE,  CMD_ONLY_MAINPART },
    { "!heading",                      "!h",      c_heading,                 TRUE,  CMD_ONLY_MAINPART },
@@ -12328,7 +12330,11 @@ char           *datei)           /* */
                   {
                      bNopDetected = !bNopDetected;
                   }
-                  else if (strcmp(token[0], "!label") == 0 || strcmp(token[0], "!l") == 0)
+                  else if (    (strcmp(token[0], "!label*") == 0)
+                            || (strcmp(token[0], "!label")  == 0)
+                            || (strcmp(token[0], "!l*")     == 0)
+                            || (strcmp(token[0], "!l")      == 0)
+                          )
                   {
                      tokcpy2(tmp, 512);
                      replace_udo_quotes(tmp);
