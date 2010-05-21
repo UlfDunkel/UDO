@@ -1,0 +1,27 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commandline includes
+# Language    : all
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (extracted from cmdline.ui)
+#
+################################################################################
+
+!iflang [german]
+!include cmdline.de
+!endif
+!iflang [english]
+!include cmdline.en
+!endif
+
+# === EOF ===

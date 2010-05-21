@@ -1,0 +1,95 @@
+!subsubnode Enumerations
+!alias enumerate environment
+
+The enumerate environment is useful for lists where the items have to be
+enumerated with numbers or letters. It is started with
+(!I)!/begin_enumerate(!i) and finished with (!I)!/end_enumerate(!i). Each
+item has to be marked with (!I)!/item(!i).
+
+You can use the itemize environment inside other environments or inside
+another itemize environment.
+
+This short example shows how to write a simple itemize environment:
+
+!autoref [off]
+
+!begin_quote
+!begin_verbatim
+UDO offers you the following environments:
+!begin_enumerate
+!item itemize environment
+!item enumerate environment (discussed in
+      this section)
+!item description environment
+!item xlist environment
+!end_enumerate
+!end_verbatim
+!end_quote
+
+!.. will be displayed this way:
+
+UDO offers you the following environments:
+!begin_enumerate
+!item itemize environment
+!item enumerate environment (discussed in
+      this section)
+!item description environment
+!item xlist environment
+!end_enumerate
+
+
+In the following example the enumerate environment is used twice and it will
+be compressed because of the usage of (!I)!/short(!i):
+
+!begin_quote
+!begin_verbatim
+!begin_enumerate !short
+!item This is the first item of the outer
+      enumerate environment.
+!item This is the second item of the outer
+      enumerate environment.
+      !begin_enumerate
+      !item Item 1 of the inner environment.
+      !item Item 2 of the inner environment.
+      !end_enumerate
+!item This is the third item of the outer
+      enumerate environment.
+!end_enumerate
+!end_verbatim
+!end_quote
+
+!.. becomes to:
+
+!begin_enumerate !short
+!item This is the first item of the outer
+      enumerate environment.
+!item This is the second item of the outer
+      enumerate environment.
+      !begin_enumerate
+      !item Item 1 of the inner environment.
+      !item Item 2 of the inner environment.
+      !end_enumerate
+!item This is the third item of the outer
+      enumerate environment.
+!end_enumerate
+
+!autoref [on]
+
+(!HINTS)
+
+!begin_enumerate
+
+!item	UDO doesn't enumerate the items for all destination formats. E.g.
+HTML and (!LaTeX) enumerate the items themselves so you have to be cautious
+with using text like ""see item 1"" or ""see point b)"".
+
+!item	The third layer of enumerate environments will be indented deeper
+than the other layers because Roman numbers need a little bit more space.
+
+!item	Because the second layer is enumerated with letters you shouldn't
+use more than 26 items.
+
+!item	A description of the (!I)!/short(!i) command is part of the chapter
+""Itemizations"".
+
+!end_enumerate

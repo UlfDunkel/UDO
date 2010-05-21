@@ -1,0 +1,7 @@
+#!/bin/sh
+export UDOINPUTPATH=/usr/share/udo/udoinput/
+# alt: udo614
+udo --html --verbose --force-long --tree --check -o index.html karwendelnamen1934.txt
+# chmod 644 ../../../HTML-Out/alpinhistorie/karwendelnamen1934/*.html
+# mv ../../../HTML-Out/alpinhistorie/karwendelnamen1934/index.ulh .
+# mv ../../../HTML-Out/alpinhistorie/karwendelnamen1934/index.uth .

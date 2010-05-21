@@ -1,0 +1,132 @@
+!subsubnode !/macro
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/macro <word> <text>(!t)
+
+!item [Description:]
+	Defines a macro. Later on every ""(!/<word>)"" will be replaced by    
+	""<text>"". When using the lower exmaple every ""(!DH)"" will be      
+	replaced by ""Dirk Hagedorn"".                                        
+
+!item [Example:] (!T)!/macro DH Dirk Hagedorn(!t)
+
+!item [See:] Macros
+
+!end_xlist
+#------------------------------
+!subsubnode !/maketitle
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/maketitle(!t)
+
+!item [Description:]
+	Outputs a titlepage build with the information set by the lower       
+	commands. (!I)!/maketitle(!i) should be used directly after           
+	(!I)!/begin_document(!i) and before (!I)!/tableofcontents(!i).        
+
+
+!item [See:] Title page
+
+!end_xlist
+#------------------------------
+!subsubnode !/man_lpp
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/man_lpp <value>(!t)
+
+!item [Description:]
+	Sets the ""lines per page"" of a manualpage. If <value> is bigger     
+	than 0 UDO generates footlines with pagenumbers. When UDO starts      
+	!/man_lpp is undefined and UDO won't generate these footlines.        
+
+!item [Example:] (!T)!/man_lpp 60(!t)
+
+!item [See:] (!I)!/use_formfeed(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/man_type
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, preamble
+
+!item [Syntax:]
+	(!T)!/man_type <text>(!t)
+
+!item [Description:]
+	When converting into a manualpage UDO uses ""<text>"" inside the      
+	headline with brackets. The exmaple and ""(!I)!/program~udo(!i)""     
+	would look like ""udo(1)"". UDO doesn't use ""<text>"" as a file      
+	suffix.                                                               
+
+!item [Example:] (!T)!/man_type 1(!t)
+
+
+!end_xlist
+#------------------------------
+!subsubnode !/medskip
+
+!begin_xlist [Type & position:]
+
+!item [Type & position:]
+	command, main part
+
+!item [Syntax:]
+	(!T)!/medskip(!t)
+
+!item [Description:]
+	This command will be simplay replaced by ''(!V)\medskip(!v)'' when    
+	converted to (!LaTeX). Otherwise two additional empty lines will be   
+	generated.                                                            
+
+
+!item [See:] (!I)!/smallskip(!i), (!I)!/bigskip(!i)
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,105 @@
+!subnode PL14 vom 16.11.1996
+!html_name r5_pl14
+
+!begin_description
+
+############################################################
+!item [(!ALL):] ~
+
+!begin_itemize
+
+!index TOS !! udo.ini
+!index MS-DOS !! udo.ini
+!item	Die TOS- und MS-DOS-Version suchen die INI-Datei nun auch
+	im Wurzelverzeichnis von Laufwerk C.
+
+!index Tabellen
+!item Bugfix: In Tabellen müssen nun vor und nach den doppelten
+	Ausrufezeichen keine Leerzeichen oder Tabs mehr stehen.
+
+!index Indizes
+!item Bugfix: UDO gerät nicht mehr in eine Endlosschleife, wenn in
+	einer Zeile Indizes mit verschiedener Parameterzahl stehen (Jan Starzynski).
+
+!index !/endif
+!item	Bugfix: Wenn irgendwo ein (!I)!/endif(!i) fehlt, so
+	bricht UDO nach dem ersten Durchlauf ab, anstatt ein fehlendes
+	(!I)!/end_document(!i) zu beanstanden (Martin Osieka).
+
+!index Makros
+!index Definitionen
+!item	Bugfix: Im ersten Durchlauf wurden Makros und Definitionen
+	zu oft angepaßt (Hans F. Braun).
+
+!index !/no_preamble
+!item	Änderung: Der Befehl heißt nun (!I)!/no_preamble(!i)
+	anstatt (!T)!/no_preambel(!t) (Hans F. Braun).
+
+!index Fatal error
+!item	Bugfix: Wird ein Node ohne Titel benutzt, bricht UDO nun direkt mit
+	einem ""Fatal Error"" ab,
+	anstelle wie in PL13 später irgendwann abzustürzen
+	(Hans F. Braun).
+
+!index !/include
+!index Rekursive Includes
+!item	Bugfix: UDO läßt keine rekursiven Includes mehr zu und
+	bricht beim Auftreten eines solchen im ersten Durchlauf mit einem
+	""Fatal Error"" ab.
+
+!index (!/#S)
+!item	Neu: (!I)(!/#S)(!i) erzeugt im universellen Zeichensatz das
+		Paragraphen-Symbol (§).
+
+!end_itemize
+
+
+############################################################
+!item [HTML:] ~
+
+!begin_itemize
+
+!index HTML !! Label
+!item	Bei einem Label fehlte beim erzeugten (!V)href(!v) eine
+		schließende ''(!V)>(!v)''-Klammer (Hans F. Braun).
+
+!end_itemize
+
+
+############################################################
+!item [LyX:] ~
+
+!begin_itemize
+
+!index ilist-Umgebung
+!item	Bugfix: Der Italic-Befehl in ilist-Umgebungen stimmte nicht
+((!V)\series(!v) anstatt (!V)\shape(!v)).
+
+!index (!/grin)
+!index (!/laugh)
+!item	Bugfix: Bei den Emoticons erfolgt nun kein Umbruch mehr, so
+daß auch keine Fehlermeldung von LyX auftreten kann.
+
+!index LyX !! Tabellen
+!item	Tabellen sollten nun samt Linien, Ausrichtung, Effekten, Caption und
+Sonderzeichen korrekt ausgegeben werden.
+
+!item	Der ""Universal Charset"" wird unterstützt.
+
+!end_itemize
+
+
+############################################################
+!item [ST-Guide:] ~
+
+!begin_itemize
+
+!index ST-Guide !! Kopfzeilen
+!item Bugfix: Auch in der unregistrierten Version werden nun immer
+komplette Überschriften ausgegeben (Martin Osieka).
+	
+!end_itemize
+
+
+############################################################
+!end_description

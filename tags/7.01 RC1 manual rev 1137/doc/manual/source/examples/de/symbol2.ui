@@ -1,0 +1,12 @@
+!begin_document
+!tableofcontents
+!ifset [Kapitel1, AlleKapitel]
+!include kapitel1.ui
+!endif
+!ifset [Kapitel2, AlleKapitel]
+!include kapitel2.ui
+!endif
+!ifset [Kapitel3, AlleKapitel]
+!include kapitel3.ui
+!endif
+!end_document

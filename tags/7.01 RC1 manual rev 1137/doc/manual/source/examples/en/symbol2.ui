@@ -1,0 +1,12 @@
+!begin_document
+!tableofcontents
+!ifset [Chapter1, AllChapters]
+!include chapter1.ui
+!endif
+!ifset [Chapter2, AllChapters]
+!include chapter2.ui
+!endif
+!ifset [Chapter3, AllChapters]
+!include chapter3.ui
+!endif
+!end_document

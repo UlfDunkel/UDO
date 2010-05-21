@@ -1,0 +1,321 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands M
+# Language    : German
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'file' -> 'Datei'
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: VALUE macro enhanced
+#   fd  Jun 09: WORD macro introduced
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.de
+#
+################################################################################
+
+!begin_node M!..
+!html_name  cmds_m
+
+# = = = = =
+
+!begin_node (!kw [macro])
+!html_name  cmd_macro
+
+Makro definieren.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/macro (!WORD) (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando definiert ein neues Makro. Bei der
+Umwandlung wird dann ""(!WORD)"" durch ""(!TEXT)""
+ersetzt.
+
+(!B)Hinweis:(!b) Benutzen Sie Makros mit Bedacht! Jedes neue Makro verlangsamt die Zielformat-Erzeugung, da jede Quelltextzeile für jedes Makro erneut durchsucht werden muss.
+
+!item [(!SEEALSO)]
+(!link [Makros] [Makros])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!macro MfG Mit freundlichen Grüßen (!nl) (!nl) \!
+Firma Töchter & Söhne oHG (!nl)gez. Prof.~Dr. Wichtig
+
+# Hauptteil:
+(!MfG)
+!end_verbatim
+(!EXAMPLE_AFTER)
+Mit freundlichen Grüßen
+
+Firma Töchter & Söhne oHG (!nl)
+gez. Prof.~Dr. Wichtig
+(!EXAMPLE_END)
+
+### YYY: fd:2010-03-08: check if ' (!nl)' works within macros!
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [maketitle])
+!html_name  cmd_maketitle
+
+Titelseite ausgeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/maketitle(!t)
+
+!item [(!DESCRIPTION)]
+Dieses Kommando erzeugt in der Zieldatei eine
+Titelseite, die aus den Informationen des (!KW [docinfo])-Befehls
+gebildet wird. Wenn (!KW [maketitle]) benutzt wird,
+sollte es nur direkt nach (!KW [begin_document]) eingesetzt werden.
+
+!item [(!SEEALSO)]
+(!KW [docinfo]), (!link [Titelseite] [Titelseite])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [man_lpp])
+!html_name  cmd_man_lpp
+
+Zeilen pro Seite setzen (nur Manualpage).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/man_lpp (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Setzt die Anzahl der Zeilen pro Seite (""lines per page"") einer Manualpage. Im Fußbereich werden dann
+zusätzlich Seitennummern ausgegeben. Beim Start der Umwandlung ist die Seitenlänge undefiniert und es
+werden auch keine Fußzeilen ausgegeben.
+
+!item [(!SEEALSO)]
+(!KW [use_formfeed])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!man_lpp 60
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [man_type])
+!html_name  cmd_man_type
+
+Programmtyp setzen (nur Manualpage).
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE)
+
+!item [(!SYNTAX)] (!T)!/man_type (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" wird bei der Ausgabe in eine Manualpage in
+Klammern in der Kopfzeile ausgegeben. Im Beispiel
+würde bei benutztem ""(!KW [docinfo] [[program!!] udo])"" die Kopfzeile
+""udo(ttp)"" ausgegeben. ""(!TEXT)"" wird nicht als Dateisuffix benutzt.
+
+!item [(!EXISTSSINCE)] Release~4 Version~0.45
+
+!item [(!SEEALSO)]
+(!KW [nroff_type])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+# Vorspann:
+!docinfo [program] [udo]
+!man_type (!RELEASE)
+
+# Hauptteil:
+!begin_node Einleitung
+...
+!end_node
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+[udo](6)                                 [udo](6)
+
+                    EINLEITUNG
+...
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [mapping])
+!html_name  cmd_mapping
+
+Nummer für Node vergeben.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/mapping (!VALUE)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl wird momentan nur für WinHelp und IPF unterstützt.
+
+!begin_description
+
+!item [IPF:]
+Wird in einem Node (!KW [mapping] [4711]) benutzt, erzeugt UDO den
+Eintrag ""(!code [res=4711])"" im IPF-Node-Header. Wird kein (!KW [mapping]) benutzt,
+so wird auch kein (!code [res=!..]) ausgegeben.
+
+!item [WinHelp:]
+Mit (!KW [mapping]) (!C)(!VALUE)(!c) kann ein numerischer Wert angegeben
+werden, den UDO dann in der Map-Datei für einen Node verwendet. Wird
+kein (!KW [mapping]) verwendet, sichert UDO einen Eintrag in der  Map-Datei
+mit seiner internen Nummer, aber nur dann, wenn man eine
+(!KW [win_helpid]) gesetzt hat. Ein Eintrag wird also nur dann
+erzeugt, wenn man bei einem Node (!KW [mapping]) oder (!KW [win_helpid]) oder beides verwendet.
+
+!end_description
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~8
+
+!item [(!SEEALSO)]
+(!KW [win_helpid])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!mapping 4711
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+# ToDo: Englisch
+!begin_node (!kkw [maroon])
+!html_name  cmd_maroon
+
+Setzt die Schriftfarbe Kastanienbraun.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/maroon)(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Platzhalter setzt die Schriftfarbe Kastanienbraun.
+Abgeschlossen wird mit (!kkw [coloff]).
+
+(!COLORSUPPORT)
+
+!item [(!EXISTSSINCE)] Version 6.5.9
+
+!item [(!SEEALSO)]
+(!KKW [coloff]), Schriftfarben
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+Das Wort (!maroon)Kastanienbraun(!coloff) erscheint 
+in der Farbe Kastanienbraun.
+!end_verbatim
+(!EXAMPLE_AFTER)
+Das Wort (!maroon)Kastanienbraun(!coloff) erscheint 
+in der Farbe Kastanienbraun.
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [medskip])
+!html_name  cmd_medskip
+
+Zwei zusätzliche Leerzeilen einfügen.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/medskip(!t)
+
+!item [(!DESCRIPTION)]
+Dieser Befehl sorgt für die Ausgabe von zwei
+zusätzlichen Leerzeilen und dient dazu, Absätze
+deutlicher voneinander abzuheben. Bei der Umwandlung
+ins (!LaTeX)-Format werden keine drei Leerzeilen sondern
+(!code [\medskip]) ausgegeben.
+
+!item [(!SEEALSO)]
+(!KW [bigskip]), (!KW [smallskip])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!LOREM)
+!medskip
+(!LOREM)
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!LOREM)
+!medskip
+(!LOREM)
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

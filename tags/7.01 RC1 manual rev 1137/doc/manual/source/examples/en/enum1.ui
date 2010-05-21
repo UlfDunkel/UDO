@@ -1,0 +1,8 @@
+UDO offers you the following environments:
+!begin_enumerate
+!item itemize environment
+!item enumerate environment (discussed in
+      this section)
+!item description environment
+!item xlist environment
+!end_enumerate

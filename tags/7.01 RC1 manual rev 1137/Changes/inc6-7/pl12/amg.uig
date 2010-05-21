@@ -1,0 +1,11 @@
+AmigaGuide wird ab dieser Version zum ersten Mal angeboten.
+UDO erzeugt AmigaGuide, sofern per Kommandozeile ""(!V)(--)amg(!v)""
+übergeben wird.
+
+Das Format habe ich mit dem Programm ""WinGuide"", erhältlich unter
+http://ftp.uni-paderborn.de/pub/aminet/misc/emu/winguide.lha, getestet.
+
+Leider kann AmigaGuide nicht so viel wie der ST-Guide, insofern muß ich
+noch einige Dinge abspecken, wozu ich leider noch nicht gekommen bin.
+Der Großteil müßte aber funktionieren.
+
