@@ -24,6 +24,7 @@
 #   fd  Mar 01: chapter basics_text adjusted
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  May 21: translation completed
 #
 ################################################################################
 
@@ -82,7 +83,8 @@ used it e.g. to output the table of contents with
 
 A command is only recognized, when it is placed at the beginning of a line, may be indented by spaces or tabs.
 
-Kommandos können nur aus (!EXCLAM) und dem eigentlichen Kommando-Bezeichner bestehen, aber auch weitere Parameter erwarten. Genaueres zu den einzelnen Kommandos finden Sie im Befehlsindex.
+Commands may only be composed of (!EXCLAM) and the command descriptor, but they may expect further parameters. 
+Please find more details about the various commands in the command index.
 
 !index Switch
 !item	[Switches]
@@ -92,7 +94,8 @@ English so that UDO will print ""Appendix"" instead of ""Anhang"".
 
 A switch is only recognized, when it is placed at the beginning of a line, may be indented by spaces or tabs.
 
-Schalter können nur aus (!EXCLAM) und dem eigentlichen Schalter-Bezeichner bestehen, aber auch weitere Parameter erwarten. Genaueres zu den einzelnen Schaltern finden Sie im Befehlsindex.
+Switches may only be composed of (!EXCLAM) and the switch descriptor, but they may expect further parameters. 
+Please find more defails about the various switches in the command index.
 
 !index Placeholder
 !item [Placeholders]
