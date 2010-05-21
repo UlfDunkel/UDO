@@ -26,11 +26,13 @@
 #   fd  Jun 09: VALUE macro introduced
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 21: introducing the usage of !label*
 #
 ################################################################################
 
 !begin_node Command index
 !html_name  cmds
+!label*     command index
 
 !ignore_subsubtoc
 
@@ -61,7 +63,7 @@ V!.. !! W!.. !! X!.. !! Y!.. !! Z!.. !! *!..
 !begin_node Command description
 !html_name  cmds_explanation
 
-In den nachfolgenden Kapiteln werden sämtliche von UDO unterstützten Befehle detailliert erklärt. Dabei werden immer wieder gleiche Kategorien verwendet, damit Sie auf einen Blick sehen, was mit welchem Befehl möglich ist. Diese Kategorien werden nachfolgend erklärt.
+The following chapters describe all UDO commands in detail. All descriptions use the same categories so you can see at a glance what to do with which command. The categories are explained as follows.
 
 !begin_description
 
