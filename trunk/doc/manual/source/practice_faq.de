@@ -29,7 +29,7 @@
 !begin_node Allgemeine Fragen (FAQ)
 !html_name  faq
 
-!begin_description!html_name  faq
+!begin_description !not_compressed
 
 !item [Was bedeutet ""FAQ""?]
       ""FAQ"" bedeutet ""Frequently Asked Questions"" und heiﬂt 
