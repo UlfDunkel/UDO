@@ -29,11 +29,12 @@
 #   fd  Feb 25: v7.00 RC2 (rev. 944)
 #   fd  Mar 01: v7.00 public release (rev. 977)
 #   fd  May 19: v7.01 RC1 (1126)
+#   fd  May 19: v7.01 RC1 (1137)
 #
 ################################################################################
 
 !macro RELEASE  7
-!macro VERSION  (!RELEASE).01 RC1 (1126)
+!macro VERSION  (!RELEASE).01 RC1 (1137)
 
 !docinfo [version]  (!VERSION)
 !docinfo [date]     (!today)
