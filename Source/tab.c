@@ -57,6 +57,7 @@
 *    ggs Apr 06: Rename MAX_TAB_W -> MAX_TAB_ROWS
 *                table_add_line() is a little bit faster now.
 *    ggs Apr 21: convert_table_caption(): Use MAXTABCAPTION for the string define
+*    fd  May 21: new: label* | l*  (#90)
 *
 ******************************************|************************************/
 
@@ -450,7 +451,11 @@ char       *s)    /* */
       return FALSE;
    }
 
-   if ( (strncmp(s, "!label", 6) == 0 || strncmp(s, "!l ", 3) == 0) )
+   if (    (strncmp(s, "!label*", 7) == 0) 
+        || (strncmp(s, "!label",  6) == 0)
+        || (strncmp(s, "!l* ",    4) == 0) 
+        || (strncmp(s, "!l ",     3) == 0) 
+      )
    {
       if (tab_label[tab_h] >= MAX_TAB_LABEL)
       {
