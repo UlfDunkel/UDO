@@ -25,6 +25,7 @@
 #   fd  Mar 05: adjustments for !docinfo [webmaster...]
 #   fd  Mar 08: macro KW1 resolved to KWW
 #   fd  Mar 19: new chapter 'not_compressed'
+#   fd  May 21: xref links fixed
 #
 ################################################################################
 
@@ -766,7 +767,7 @@ shows how to suppress the usage of external links when converting to ST-Guide.
 (!T)!/no_urls [stg](!t)
 
 !item [(!SEEALSO)]
-(!KKW [url!]), (!KW [no_links]), (!KW [no_xlinks]), (!link [Links] [Links])
+(!KKW [url]), (!KW [no_links]), (!KW [no_xlinks]), (!link [Links] [Links])
 
 !end_xlist
 
@@ -827,7 +828,7 @@ shows how to suppress the usage of external links when converting to ST-Guide.
 !item [(!EXISTSSINCE)] Release~4 Version~0.44
 
 !item [(!SEEALSO)]
-(!KKW [xlink!]), (!KW [no_links]), (!link [Links] [Links])
+(!KKW [xlink]), (!KW [no_links]), (!link [Links] [Links])
 
 !end_xlist
 

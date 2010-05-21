@@ -18,6 +18,8 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: LINK macro introduced
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  May 21: xref links fixed
 #
 ################################################################################
 
@@ -68,7 +70,7 @@ magazine in a HTML file. If (!LINK) is empty the contents of
 (!TEXT) is used.
 
 Kommt in einem Verweis eine Tilde vor,
-so braucht dieser bei Verwendung im (!KKW [xlink!])-Kommando
+so braucht dieser bei Verwendung im (!KKW [xlink])-Kommando
 (!I)kein(!i) Ausrufezeichen vorangestellt zu werden.
 
 # ToDo: was ist der Unterschied zu !url ?
@@ -79,7 +81,7 @@ so braucht dieser bei Verwendung im (!KKW [xlink!])-Kommando
 # ToDo: andere Beispiele verwenden!
 
 !item [(!SEEALSO)]
-(!KKW [link]), (!KKW [plink!]), (!KKW [url!]), (!KW [no_xlinks]), (!link [Links] [Links])
+(!KKW [link]), (!KKW [plink]), (!KKW [url]), (!KW [no_xlinks]), (!link [Links] [Links])
 
 !end_xlist
 

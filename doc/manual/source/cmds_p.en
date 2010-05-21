@@ -24,6 +24,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
+#   fd  May 21: xref links fixed
 #
 ################################################################################
 
@@ -213,7 +214,7 @@ page reference. Converting into others formats, only ""(!TEXT)"" will be output.
 (!T)(!/plink [word] [label])(!t)
 
 !item [(!SEEALSO)]
-(!KKW [link]), (!KKW [xlink!]), (!link [Links] [Links])
+(!KKW [link]), (!KKW [xlink]), (!link [Links] [Links])
 
 !end_xlist
 

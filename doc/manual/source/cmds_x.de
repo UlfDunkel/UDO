@@ -19,6 +19,8 @@
 #   fd  Jun 09: TEXT macro enhanced
 #   fd  Jun 09: LINK macro introduced
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  May 21: xref links fixed
 #
 ################################################################################
 
@@ -70,12 +72,12 @@ auf die Seite der Deutschen Telekom erzeugt. ""(!LINK)""
 kann auch leer sein, dann wird für ""(!LINK)"" der Inhalt
 von ""(!TEXT)"" ausgegeben.
 
-Kommt in einem Verweis eine Tilde vor, so braucht sie bei Verwendung im (!KKW [xlink!])-Kommando (!I)nicht(!i) durch ein Ausrufezeichen geschützt zu werden.
+Kommt in einem Verweis eine Tilde vor, so braucht sie bei Verwendung im (!KKW [xlink])-Kommando (!I)nicht(!i) durch ein Ausrufezeichen geschützt zu werden.
 
 # ToDo: was ist der Unterschied zu !url ?
 
 !item [(!SEEALSO)]
-(!KKW [link]), (!KKW [plink!]), (!KKW [url!]), (!KW [no_xlinks]), (!link [Querverweise] [Querverweise])
+(!KKW [link]), (!KKW [plink]), (!KKW [url]), (!KW [no_xlinks]), (!link [Querverweise] [Querverweise])
 
 !end_xlist
 
