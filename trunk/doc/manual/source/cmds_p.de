@@ -26,6 +26,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
+#   fd  May 21: xref links fixed
 #
 ################################################################################
 
@@ -245,7 +246,7 @@ Dokuments. Bei allen anderen Formaten wird nur
 Bei der RTF-Ausgabe erfolgt die Angabe als Hinweis auf die Seitenzahl.
 
 !item [(!SEEALSO)]
-(!KKW [link]), (!KKW [xlink!]), (!link [Querverweise] [Querverweise])
+(!KKW [link]), (!KKW [xlink]), (!link [Querverweise] [Querverweise])
 
 !end_xlist
 

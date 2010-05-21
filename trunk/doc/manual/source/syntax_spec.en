@@ -27,6 +27,7 @@
 #               - universal charset table enhanced
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 06: iconv example for Mac OS X terminal
+#   fd  May 21: xref links fixed
 #
 ################################################################################
 
@@ -123,7 +124,7 @@ If you want to display a tilde you have to use (!link [!!~] [Tilde]) instead.
 
 (!HINT)
 
-If you use a tilde inside an external link ((!KKW [url!]), (!KKW [xlink!])) UDO won't convert it.
+If you use a tilde inside an external link ((!KKW [url]), (!KKW [xlink])) UDO won't convert it.
 
 !end_node # Nonbreaking spaces
 

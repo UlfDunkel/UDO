@@ -28,6 +28,7 @@
 #   fd  Mar 08: IMG renamed: udo_icon_16 -> udo_16
 #   fd  Mar 08: macro KW1 resolved to KWW
 #   fd  Mar 19: new chapter 'not_compressed'
+#   fd  May 21: xref links fixed
 #
 ################################################################################
 
@@ -929,7 +930,7 @@ Hypertext mit HTML-Links versehen hat, die jedoch
 weder in einem WinHelp- noch ST-Guide-Hypertext Sinn ergeben würden.
 
 !item [(!SEEALSO)]
-(!KKW [url!]), (!KW [no_links]), (!KW [no_xlinks]), (!link [Querverweise] [Querverweise])
+(!KKW [url]), (!KW [no_links]), (!KW [no_xlinks]), (!link [Querverweise] [Querverweise])
 
 !end_xlist
 
@@ -998,7 +999,7 @@ weder in einem WinHelp- noch ST-Guide-Hypertext Sinn ergeben würden.
 !item [(!EXISTSSINCE)] Release~4 Version~0.44
 
 !item [(!SEEALSO)]
-(!KKW [xlink!]), (!KW [no_links]), (!link [Querverweise] [Querverweise])
+(!KKW [xlink]), (!KW [no_links]), (!link [Querverweise] [Querverweise])
 
 !end_xlist
 

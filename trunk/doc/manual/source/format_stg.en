@@ -16,6 +16,8 @@
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+# 2010:
+#   fd  May 21: xref links fixed
 #
 ################################################################################
 
@@ -52,7 +54,7 @@ UDO not to create these headlines.
 !item [How does UDO insert hypertext links?] ~
 
 UDO just insert hypertext links when you use (!KKW [link]) and
-(!KKW [xlink!]). All the other hypertext links will be inserted by the
+(!KKW [xlink]). All the other hypertext links will be inserted by the
 HCP.
 
 !item [How does UDO convert labels?] ~

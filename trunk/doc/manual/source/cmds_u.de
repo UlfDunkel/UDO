@@ -37,6 +37,7 @@
 #               - !use_short_... (for environments) changed: -> !use_compressed_...
 #   fd  May 19: - "short" -> "compressed"
 #               - more links to "not_compressed"
+#   fd  May 21: xref links fixed
 #
 ################################################################################
 
@@ -193,15 +194,15 @@ Verweis auf externe Daten.
 
 !item [(!DESCRIPTION)]
 Dient zum Erzeugen von Verweisen auf externe
-Dokumente. Im Unterschied zu (!KKW [xlink!]) wird bei jedem Format ein
+Dokumente. Im Unterschied zu (!KKW [xlink]) wird bei jedem Format ein
 Link auf einen URL angelegt. ""(!LINK)"" kann auch leer sein, dann wird für ""(!LINK)"" der Inhalt von ""(!TEXT)"" ausgegeben. Nutzen Sie das z.B., wenn der URL auch lesbar sein soll.
 
-Kommt in einem Verweis eine Tilde vor, so braucht sie bei Verwendung im (!KKW [url!])-Kommando (!I)nicht(!i) durch ein Ausrufezeichen geschützt zu werden.
+Kommt in einem Verweis eine Tilde vor, so braucht sie bei Verwendung im (!KKW [url])-Kommando (!I)nicht(!i) durch ein Ausrufezeichen geschützt zu werden.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~12
 
 !item [(!SEEALSO)]
-(!KKW [link]), (!KKW [plink!]), (!KKW [xlink!]), (!KW [no_xlinks]), (!link [Querverweise] [Querverweise])
+(!KKW [link]), (!KKW [plink]), (!KKW [xlink]), (!KW [no_xlinks]), (!link [Querverweise] [Querverweise])
 
 !end_xlist
 
