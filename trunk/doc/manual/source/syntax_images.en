@@ -39,7 +39,7 @@ the name of the image (!I)without(!i) suffix and an optional image title.
 To display images right inside the text you can use the placeholder
 (!KKW [img]) when converting into Windows Help or HTML. The other
 formats don't allow to use images inside the text or it is so difficult that
-UDO can't automatize it.
+UDO cannot automatize it.
 
 Since Release 6 images will not be centred in all cases. To display a
 centred image you have to insert the (!KW [image]) command into a center
@@ -67,7 +67,7 @@ same is done here as in the upper section.
 !begin_node *.img & ST-Guide
 !html_name  images_stg
 
-Beispiel:
+(!EXAMPLE)
 (!EXAMPLE_BEGIN)
 !begin_verbatim
 !image tiger A Tiger
@@ -97,7 +97,7 @@ Lindner-(!TeX). UDO has all functions of this tool built in.
 
 To set the size of an image you have to use the (!I)!/tex_dpi(!i) command.
 
-An example:
+(!EXAMPLE)
 (!EXAMPLE_BEGIN)
 !begin_verbatim
 !tex_dpi 100
@@ -108,8 +108,6 @@ An example:
 UDO reads in the header of (!file [tiger.img]), calculates its size and
 adjusts the header to 100 dpi. In the destination file a (!TeX) macro will
 be generated that includes this image and displays it with 100 dpi.
-
-!smallskip
 
 (!HINT)
 
@@ -208,8 +206,6 @@ An example shows what kind of macro UDO generates for em(!TeX). ""w"" and
 !end_verbatim
 (!EXAMPLE_END)
 
-!smallskip
-
 (!HINT)
 
 In first place UDO tries to find an MSP image. If you are using
@@ -255,8 +251,7 @@ text.
 !end_verbatim
 (!EXAMPLE_END)
 
-Wer die Größenangaben nicht benötigt kann die Ermittlung der
-Ausmaße von Bildern unterbinden. Dazu gibt es das Kommando (!kw [no_img_size]).
+If you do not need the image size information, you can suppress it using the command (!KW [no_img_size]).
 
 !end_node # *.gif & HTML
 
@@ -265,7 +260,7 @@ Ausmaße von Bildern unterbinden. Dazu gibt es das Kommando (!kw [no_img_size]).
 !begin_node *.jpg & HTML
 !html_name  images_html_jpg
 
-By default UDO expects that you want to display GIF's (see above). But it's
+By default UDO expects that you want to display GIFs (see above). But it is
 possible to display any other kind of image format, too.
 
 !index (!kw [html_img_suffix])
@@ -303,7 +298,7 @@ next time you have to use (!KW [html_img_suffix] [gif]) before the next
 !html_name  images_winhelp
 
 UDO can generate commands for Windows Help to display Windows bitmaps (BMP).
-UDO doesn't check if a BMP is existing!
+UDO doesn't check if a BMP exists!
 
 An image can be displayed with or without a subtitle. Windows Help centers
 the image in the help file.
@@ -327,8 +322,8 @@ UDO will then generate these commands:
 
 !begin_enumerate
 
-!item	UDO won't check if the image file is existing. If it doesn't exists
-or the filename is wrong the Microsoft Helpcompiler will print an error
+!item	UDO won't check if the image file exists. If it doesn't exists
+or the filename is wrong the Microsoft Help compiler will print an error
 message.
 
 !index (!kw [win_inline_bitmaps])

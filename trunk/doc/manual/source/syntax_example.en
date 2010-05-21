@@ -76,7 +76,7 @@ document begins. This command has to be part of any source file!
 !index (!kw [maketitle])
 In first place we output the title page that is built with the
 information set in the preamble of this example. You should use
-(!KW [maketitle]) directly after (!KW [begin_document]) if you use it. It's possible
+(!KW [maketitle]) directly after (!KW [begin_document]) if you use it. It is possible
 to use it later but I don't think that it would work without problems.
 
 !index (!kw [tableofcontents])

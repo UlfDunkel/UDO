@@ -2374,7 +2374,7 @@ Wortes ""Silbentrennung"" setzen kann.
 !item [(!DESCRIPTION)]
 You can set Hyphenation marks ((!code [!/-])) with this command for
 a word for the whole text. The example shows how to tell UDO where
-it's allowed to split up the word ""Hyphenation"".
+it is allowed to split up the word ""Hyphenation"".
 
 !item [(!EXAMPLE)]
 (!T)!/hyphen syl!/-labi!/-fi!/-ca!/-tion(!t)

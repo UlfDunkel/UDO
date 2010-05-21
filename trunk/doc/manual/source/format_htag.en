@@ -20,7 +20,7 @@
 !begin_node HP-Helptag-SGML
 !html_name  format_htag
 
-HP-Helptag-SGML is a SGML-based hypertext help-system for commercial Unices (HP-UX, Sun Solaris, IBM AIX).
+HP-Helptag-SGML is a SGML-based hypertext help system for commercial Unices (HP-UX, Sun Solaris, IBM AIX).
 
 More information:
 !autoref [off]
@@ -28,7 +28,7 @@ More information:
 !begin_itemize
 !item Common Desktop Environment (CDE) Help System: (!url [http://www.oasis-open.org/cover/gen-apps.html#cde] []) (general overview, with some more links)
 
-!item "Common Desktop Environment: Help System Author's and Programmer's Guide": (!url [http://h71000.www7.hp.com/doc/73final/helpguide/helpguide_5.html] []).
+!item Common Desktop Environment: Help System Author's and Programmer's Guide: (!url [http://h71000.www7.hp.com/doc/73final/helpguide/helpguide_5.html] []).
 
 !end_itemize
 

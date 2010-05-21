@@ -207,7 +207,7 @@ This command is used to add various information output to the title page. ""(!NA
 
 !item [title]
 ""(!TEXT)"" will be displayed on the title page before the contents of
-the program name. It's also used inside the headlines.
+the program name. It is also used inside the headlines.
 
 !item [program]
 ""(!TEXT)"" will be displayed on the title page below the title.

@@ -208,7 +208,7 @@ cases it was impossible not to change the syntax of some commands.
       !item The first HTML page will only include a home symbol if you use (!KW [html_backpage]).
       !item The term ""Hints"" in the logfile has been changed to ""Notes"".
       !item UDO will output the version number in the logfile.
-      !item When using (!KKW [img]), UDO will output an error message if the dimensions of the image can't be detected.
+      !item When using (!KKW [img]), UDO will output an error message if the dimensions of the image cannot be detected.
       !item The suffix of the MAP file for WinHelp has been changed to "".hpc"".
       !item When using (!KW [chaptericon]), UDO will output an error message if the image file could not be found.
       !item If you use (!KW [no_images]), the HTML output won't contain browse buttons but ASCII arrows that are separated by brackets and pipe symbols. 

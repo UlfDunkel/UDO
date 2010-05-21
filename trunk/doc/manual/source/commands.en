@@ -66,7 +66,7 @@ In den nachfolgenden Kapiteln werden sämtliche von UDO unterstützten Befehle det
 !begin_description
 
 !item	[Type & position:]
-	The type of the command and the position where it's allowed to use it.
+	The type of the command and the position where it is allowed to use it.
 
 	A command tells UDO do something especially, a switch sets some internal
 	information for UDO and a placeholder will be simply replaced by a

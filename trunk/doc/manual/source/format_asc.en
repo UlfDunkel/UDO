@@ -26,7 +26,7 @@ The "ascii" output generates a single text file with "plain" text.
 !smallskip
 !subsubheading Specialities and useful hints
 !begin_itemize
-!item It's not possible to split the output into more than one single file (like HTML).
+!item It is not possible to split the output into more than one single file (like HTML).
 
 !item The paragraph width can be changed with the (!KW [parwidth]) command.
 UDO uses a value of 70~characters by default.
