@@ -20,7 +20,7 @@
 !begin_node Pascal-Sourcecode
 !html_name  format_pas
 
-Bei diesem Ausgabeformat wird die UDO-Quelldatei in Sourcecode umgewandelt, d.h. normaler Text wird Kommentar, der Inhalt der Sourcecode-Umgebung wird Pascal-Source.
+Bei diesem Ausgabeformat wird die UDO-Quelldatei in Sourcecode umgewandelt, d.h. normaler Text wird Kommentar, der Inhalt der Sourcecode-Umgebung wird Pascal-Sourcecode.
 
 !end_node # Pascal-Sourcecode
 

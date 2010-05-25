@@ -28,6 +28,7 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 06: iconv example for Mac OS X terminal
 #   fd  May 21: xref links fixed
+#   fd  May 25: index adjustments
 #
 ################################################################################
 
@@ -131,6 +132,7 @@ If you use a tilde inside an external link ((!KKW [url]), (!KKW [xlink])) UDO wo
 # = = = = =
 
 !begin_node Dashes
+!label*     dashes
 !html_name  spec_dashes
 
 UDO supports --- did you think anything else --- dashs like in this
@@ -211,6 +213,7 @@ The encoding conversion cannot be done directly in the same file because it woul
 # = = = = =
 
 !begin_node Universal charset
+!label*     universal charset
 !html_name  spec_universal_charset
 
 !index Character set !! universal

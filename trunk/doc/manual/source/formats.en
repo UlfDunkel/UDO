@@ -14,10 +14,13 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+# 2010:
+#   fd  May 25: index adjustments
 #
 ################################################################################
 
 !begin_node Output Formats
+!label*     output formats
 !html_name  formatspecific
 
 # = = = = =

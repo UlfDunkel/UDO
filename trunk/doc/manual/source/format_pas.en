@@ -14,13 +14,17 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+# 2010:
+#   fd  May 25: index adjustments
 #
 ################################################################################
 
 !begin_node Pascal Sourcecode
+!label*     Pascal sourcecode
 !html_name  format_pas
 
-Using the Pascal-sourcecode output, the UDO source file will be converted to sourcecode, meaning normal text becomes comment, the content of the sourcecode environment becomes Pascal-sourcecode.
+Using the Pascal sourcecode output, the UDO source file will be converted to sourcecode, meaning normal text becomes comment, 
+the content of the sourcecode environment becomes Pascal sourcecode.
 
 !end_node # Pascal Sourcecode
 

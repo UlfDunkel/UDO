@@ -29,10 +29,12 @@
 #   fd  Aug 17: 'information' never used in plural in English!
 # 2010:
 #   fd  Mar 03: history_0700 + history_0701
+#   fd  May 25: index adjustments
 #
 ################################################################################
 
 !begin_node History
+!label*     history
 !html_name  history
 
 In this chapter you will find a short summary of all the changes in the past.

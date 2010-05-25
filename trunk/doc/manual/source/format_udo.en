@@ -14,12 +14,15 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+# 2010:
+#   fd  May 25: index adjustments
 #
 ################################################################################
 
 !begin_node UDO (Universal Document)
 !html_name  format_udo
-!alias      UDO-Output
+!label*     UDO-Output
+!label*     UDO output
 
 This output format merges all UDO input files into one big file.
 

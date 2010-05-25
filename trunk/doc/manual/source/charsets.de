@@ -20,14 +20,15 @@
 #   fd  Feb 24: rewritten for UDO v7
 #   fd  Mar 05: ISO-8859-3, ISO-8859-4, CYRILLIC, ARABIC, GREEK, HEBREW
 #   fd  Mar 08: TURKISH, NORDIC, THAI, BALTIC, CELTIC, ISO-8859-15, ISO-8859-16
+#   fd  May 25: index adjustments
 #
 ################################################################################
 
 !index Zeichensatz
 !index Sonderzeichen
-!label Codepages
-!label Codepage
-!label Code
+!label  Codepages
+!label* Codepage
+!label* Code
 UDO unterstützt verschiedenste Codepages für verschiedenste Systeme. Nachfolgend sind alle derzeit unterstützten Systeme und (!nolink [Codepages]) mit z.T. mehreren Bezeichnern für die gleiche Codepage aufgeführt. Es spielt keine Rolle, ob Sie den Bezeichner in Groß- oder Kleinschreibung eingeben. (Die Bezeichner orientieren sich an den früheren UDO-Bezeichnern und denen, die das Unix-Kommando (!file [iconv]) unterstützt.)
 
 !begin_table [r|l|l]

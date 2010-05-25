@@ -18,10 +18,12 @@
 #   fd  Jun 10: using EXAMPLE_... macros
 # 2010:
 #   fd  May 21: xref links fixed
+#   fd  May 25: index adjustments
 #
 ################################################################################
 
-!begin_node ST Guide
+!begin_node ST-Guide
+!label*     ST Guide
 !html_name  format_stg
 
 !begin_description !not_compressed

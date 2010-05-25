@@ -28,6 +28,7 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro KW1 resolved to KWW
 #   fd  May 19: "short" -> "compressed"
+#   fd  May 25: index adjustments
 #
 ################################################################################
 
@@ -130,8 +131,9 @@ with an ""o"" instead of a bullet.
 # = = = = =
 
 !begin_node Enumerations
+!label*     enumerations
+!label      enumerate environment
 !html_name  style_enumerations
-!label   enumerate environment
 
 The enumerate environment is useful for lists where the items have to be
 enumerated with numbers or letters. It is started with
@@ -182,8 +184,9 @@ use more than 26~items.
 # = = = = =
 
 !begin_node Descriptions
-!html_name  style_descriptions
+!label*     descriptions
 !label      description environment
+!html_name  style_descriptions
 
 Use the description environment for describing some words. Start the
 environment with (!KW [begin_description]) and finish it using
@@ -235,8 +238,9 @@ will offer a command to disable the bold text inside descriptions for HTML.
 # = = = = =
 
 !begin_node Lists
-!html_name  style_lists
+!label*     lists
 !label      xlist environment
+!html_name  style_lists
 
 Like the description environment this set of commands is useful to
 describe words. Using this environment the description of each word
@@ -565,6 +569,7 @@ line.
 # = = = = =
 
 !begin_node Footnotes
+!label*     footnotes
 !html_name  style_footnotes
 
 Text that is used between (!KKW [N]) and (!KKW [n]) will be shown as a
@@ -659,7 +664,7 @@ Normal and (!G)ghosted(!g).
 
 # = = = = =
 
-!begin_node Textcolors
+!begin_node Text colors
 !html_name  style_textcolors
 
 UDO supports definition of text color for words or paragraphs. 
@@ -700,13 +705,14 @@ From~...
 Text color definition is currently supported for the output formats 
 HTML, RTF, WinHelp, DRC and PostScript.
 
-!end_node # Textcolors
+!end_node # Text colors
 
 # = = = = =
 
 !begin_node Tables
-!html_name  style_tables
+!label*     tables
 !label      table environment
+!html_name  style_tables
 
 Since Release 5 you are able to print simple tables with UDO. You can define
 the justification of the columns and where UDO shall print vertical and/or

@@ -25,7 +25,8 @@
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro KK2W resolved into macros KKW + code
-#   ggs Apr 05: Remove some !]
+#   ggs Apr 05: removed some !]
+#   fd  May 25: index adjustments
 #
 ################################################################################
 
@@ -35,6 +36,7 @@
 # = = = = =
 
 !begin_node Labels
+!label*     labels
 !html_name  hypertext_labels
 
 !index (!kw [label])
@@ -81,6 +83,7 @@ avoid them if you really want.
 # = = = = =
 
 !begin_node Links
+!label*     links
 !html_name  hypertext_links
 
 Sometimes you maybe want to set a link to other parts of the current
@@ -104,6 +107,7 @@ Right: (!link [Brackets!]!)] [Link])
 # = = = = =
 
 !begin_node Internal links
+!label*     internal links
 !html_name  hypertext_links_internal
 
 !index (!kkw [link])
@@ -228,6 +232,7 @@ more links UDO will print an error message.
 # = = = = =
 
 !begin_node External links
+!label*     external links
 !html_name  hypertext_links_external
 
 !index (!kkw [xlink])
