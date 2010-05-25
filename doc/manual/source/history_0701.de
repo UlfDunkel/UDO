@@ -27,6 +27,8 @@
 #               - UTF-8 output no longer crashes UDO
 #   fd  May 19: - environment commands resorted alphabetically
 #               - (!deg) output localized in target formats which do not support the glyph 
+#   fd  May 25: - description items better formatted in RTF + PS
+#               - new: !label*
 #
 ################################################################################
 
@@ -88,6 +90,29 @@
 
 
 # ----------------------------------------
+!item [(!KW [label*])]
+# ----------------------------------------
+      !begin_itemize !not_compressed
+      !item Ein neues Kommando (!KW [label*]) wurde eingeführt, um z.B. Kapitelüberschriften besser referenzieren zu können. Wenn Sie z.B. in einem englischen Handbuch das Kapitel ""Command Index"" verwenden, aber im Fließtext von ""command index"" gesprochen wird, so kann UDO dies nicht automatisch referenzieren, weil Groß-/Kleinschreibung korrekt unterschieden wird.
+      
+      Mit dem neuen Kommando können Sie ein Label setzen, dass zwar von UDO wie andere Label auch referenziert wird, aber nicht im Index erscheint. Im o.g. Beispiel würden also nicht ""Command Index"" und ""command index"" im Index erscheinen, sondern nur die automatisch indizierte Kapitelüberschrift ""Command Index"".
+      
+      (!EXAMPLE)
+      (!EXAMPLE_BEGIN)
+      !begin_verbatim
+      !begin_node Command Index
+      !label*     command index
+      [...]
+      !end_node # Command Index
+      !end_verbatim
+      (!EXAMPLE_END)
+      !end_itemize
+
+
+
+
+
+# ----------------------------------------
 !item [Umgebungen]
 # ----------------------------------------
       !begin_itemize !not_compressed
@@ -112,6 +137,8 @@
             damit Sie die Vererbung des kompress-Attributs einer äußeren Umgebung an die innere Umgebung abschalten können.
             
       !item Damit es einheitlich ist, wurde auch der Schalter (!B)use_short_tocs(!b) in (!KW [use_compressed_tocs]) umbenannt.
+      
+      !item Die Titel der einzelnen Items in Description-Umgebungen werden jetzt in RTF und PS besser formatiert.
       !end_itemize
 
 
