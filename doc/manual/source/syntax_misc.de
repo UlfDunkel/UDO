@@ -64,13 +64,15 @@ Dadurch besteht die Möglichkeit, sowohl Makros und Trennvorschläge als
 auch Kapitel in externe Dateien auszulagern.
 
 Um den Inhalt von Dateien als Klartext darstellen zu können, nutzen Sie das
-Kommando (!KW [vinclude]) (""verbatim include""). Tipp: Das
-Kommando (!KW [vinclude]) eignet sich sehr gut, um Sourcecode oder
+Kommando (!KW [vinclude]) (""verbatim include""). 
+
+(TIP) Das Kommando (!KW [vinclude]) eignet sich sehr gut, um Sourcecode oder
 Header-Dateien darzustellen.
 
 Falls man direkte Befehle für ein Format nachladen möchte, kann man
-sich des Kommandos (!KW [rinclude]) (""raw include"") bedienen. Tipp: Dieser
-Befehl eignet sich im Zusammenhang mit dem (!KW [ifdest])-Kommando dazu, um
+sich des Kommandos (!KW [rinclude]) (""raw include"") bedienen.
+
+(!TIP) Dieser Befehl eignet sich im Zusammenhang mit dem (!KW [ifdest])-Kommando dazu, um
 z.B. spezielle (!LaTeX)-Tabellen oder HTML-Formulare einzubinden.
 
 Dieses UDO-Handbuch macht übrigens intensiven Gebrauch von diesen

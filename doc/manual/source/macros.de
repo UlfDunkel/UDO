@@ -24,7 +24,7 @@
 #   fd  Feb 24: macro IMPORTANT
 #   fd  Mar 02: macro NTY (= not translated yet)
 #   fd  Mar 03: macro INCOMPLETE, deprecated macros removed
-#   fd  May 25: macro NOTE
+#   fd  May 25: macro NOTE + TIP
 #
 ################################################################################
 
@@ -125,6 +125,7 @@
 !macro SPECIALCHAR     Sonderzeichen
 !macro SWITCH          Schalter
 !macro SYNTAX          Syntax:
+!macro TIP             (!B)Tipp:(!b)
 !macro TYPEPOSITION    Typ & Position:
 
 # === EOF ===
