@@ -26,6 +26,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
+#   fd  May 25: using macro NOTE
 #
 ################################################################################
 
@@ -50,7 +51,7 @@ Dieses Kommando definiert ein neues Makro. Bei der
 Umwandlung wird dann ""(!WORD)"" durch ""(!TEXT)""
 ersetzt.
 
-(!B)Hinweis:(!b) Benutzen Sie Makros mit Bedacht! Jedes neue Makro verlangsamt die Zielformat-Erzeugung, da jede Quelltextzeile für jedes Makro erneut durchsucht werden muss.
+(!NOTE) Benutzen Sie Makros mit Bedacht! Jedes neue Makro verlangsamt die Zielformat-Erzeugung, da jede Quelltextzeile für jedes Makro erneut durchsucht werden muss.
 
 !item [(!SEEALSO)]
 (!link [Makros] [Makros])

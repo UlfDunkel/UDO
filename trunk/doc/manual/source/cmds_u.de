@@ -38,6 +38,7 @@
 #   fd  May 19: - "short" -> "compressed"
 #               - more links to "not_compressed"
 #   fd  May 21: xref links fixed
+#   fd  May 25: using macro NOTE
 #
 ################################################################################
 
@@ -63,7 +64,7 @@ Unterstrichenen Text ausgeben.
 !item [(!DESCRIPTION)]
 ""(!TEXT)"" wird unterstrichen dargestellt, falls möglich.
 
-(!B)Hinweis:(!b) Diese Schriftart sollte sparsam eingesetzt werden. Denken Sie z.B. beim HTML-Format daran, dass standardmäßig Hypertext-Links in HTML-Seiten unterstrichen werden, so dass man dort erwartet, auf jeden unterstrichenen Text klicken zu können, um eine andere Seite aufzurufen.
+(!NOTE) Diese Schriftart sollte sparsam eingesetzt werden. Denken Sie z.B. beim HTML-Format daran, dass standardmäßig Hypertext-Links in HTML-Seiten unterstrichen werden, so dass man dort erwartet, auf jeden unterstrichenen Text klicken zu können, um eine andere Seite aufzurufen.
 
 !item [(!SEEALSO)]
 Schriftarten, (!link [Textgestaltung] [Textgestaltung])

@@ -29,6 +29,7 @@
 #   fd  May 21: xref links fixed
 #   fd  May 25: - new: !l*, !label*
 #               - chapter 'language' adjusted
+#               - using macro NOTE
 #
 ################################################################################
 
@@ -464,7 +465,7 @@ Quelltext verwendet werden. Die kleinste Schriftgröße
 wird mit (!code [tiny]), die größte mit (!code [huge]) gesetzt. Die
 Standardgröße für linedraw-Umgebungen ist (!code [normal]).
 
-(!B)Hinweis:(!b) Wenn -- wie in diesem Handbuch -- die Schriftgröße sich in der HTML-Darstellung nicht ändert, kann es daran liegen, dass Sie eine CSS-Formatierung für vorformattierten Text ((!code [<pre>])) definiert haben.
+(!NOTE) Wenn -- wie in diesem Handbuch -- die Schriftgröße sich in der HTML-Darstellung nicht ändert, kann es daran liegen, dass Sie eine CSS-Formatierung für vorformattierten Text ((!code [<pre>])) definiert haben.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
 
