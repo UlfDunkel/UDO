@@ -29,6 +29,7 @@
 #               - (!deg) output localized in target formats which do not support the glyph 
 #   fd  May 25: - description items better formatted in RTF + PS
 #               - new: !label*
+#   ggs May 25: Move some !hline and change !hlist to !hline
 #
 ################################################################################
 
@@ -43,9 +44,10 @@
 # ----------------------------------------
       !begin_itemize !compressed
       !item (!BUG [87]): UDO unterstützt weitere Codepages:
-      !begin_table [l|l] !hline
+      !begin_table [l|l]
       (!B)System(!b) !! (!B)Encoding(!b) !! (!B)Bezeichner(!b)
-      ISO !! 8859-3  !! ISO-8859-3 ISO-IR-109 ISO8859-3 ISO_8859-3 LATIN3 L3 CSISOLATIN3
+      !hline
+       ISO !! 8859-3  !! ISO-8859-3 ISO-IR-109 ISO8859-3 ISO_8859-3 LATIN3 L3 CSISOLATIN3
           !! 8859-4  !! ISO-8859-4 ISO-IR-110 ISO8859-4 ISO_8859-4 LATIN4 L4 CSISOLATIN4
           !! 8859-5  !! ISO-8859-5 ISO-IR-144 ISO8859-5 ISO_8859-5 CYRILLIC CSISOLATINCYRILLIC
           !! 8859-6  !! ISO-8859-6 ISO-IR-127 ISO8859-6 ISO_8859-6 ARABIC CSISOLATINARABIC ASMO-708 ECMA-114
@@ -75,8 +77,9 @@
             (!code [webmasteremail]) und 
             (!code [webmastermailurl]) wurden umbenannt:
             
-            !begin_table [l|l] !hlist
+            !begin_table [l|l]
             (!B)alt(!b)       !! (!B)neu(!b)
+            !hline
             webmastername     !! domain_name
             webmasterurl      !! domain_link
             webmasteremail    !! contact_name
@@ -119,8 +122,9 @@
             weil wir glauben, dass dieser Begriff besser beschreibt, was dieses Attribut wirklich macht: 
             Es ändert das Umgebung-Layout von ""splendid"" (großzügig) zu ""compressed"" (kompress/kompakt). 
             Daher haben wir verschiedene Kommandos umbenannt:
-            !begin_table [l|l] !hline
+            !begin_table [l|l]
             (!I)alt(!i)                    !! (!I)neu(!i)
+            !hline
             (!B)short(!b)                  !! (!KW [compressed])
             (!B)use_short_descriptions(!b) !! (!KW [use_compressed_descriptions])
             (!B)use_short_enumerates(!b)   !! (!KW [use_compressed_enumerates])
