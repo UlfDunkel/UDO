@@ -528,7 +528,7 @@ Eine mögliche Anwendung ist, den Inhalt einer Tabellenzeile auf
 mehrere Zeilen in der Eingabedatei aufzuteilen, um die Lesbarkeit 
 des UDO-Quelltextes zu verbessern.
 
-(!B)Hinweis:(!b) Steht (!C)!\(!c) nicht unmittelbar am Ende einer Zeile, wird es ignoriert und als normaler Text ausgegeben.
+(!NOTE) Steht (!C)!\(!c) nicht unmittelbar am Ende einer Zeile, wird es ignoriert und als normaler Text ausgegeben.
 
 !item [(!EXISTSSINCE)] Version 6.5.4
 
