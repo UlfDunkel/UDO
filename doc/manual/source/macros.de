@@ -24,6 +24,7 @@
 #   fd  Feb 24: macro IMPORTANT
 #   fd  Mar 02: macro NTY (= not translated yet)
 #   fd  Mar 03: macro INCOMPLETE, deprecated macros removed
+#   fd  May 25: macro NOTE
 #
 ################################################################################
 
@@ -114,6 +115,7 @@
 !macro IN_HTML_HEADER  (!gray)(!I)Ausgabe erfolgt im Seiten-Header:(!i)(!coloff)
 !macro MAINPART        Hauptteil
 !macro MISS            (!red)(!idx [Für dieses Kapitel existiert noch kein Text.])(!coloff)
+!macro NOTE            (!B)Bitte beachten:(!b)
 !macro NOTEXISTING     Dieser Befehl existiert nicht mehr.
 !macro NTY             (!red)[Der nachfolgende Text wurde noch nicht übersetzt.](!coloff) (!nl)
 !macro PLACEHOLDER     Platzhalter
