@@ -39,6 +39,7 @@
 #               - more links to "not_compressed"
 #   fd  May 21: xref links fixed
 #   fd  May 25: using macro NOTE
+#   ggs May 25: use_compressed_envs have a "see also" to himself
 #
 ################################################################################
 
@@ -1070,7 +1071,6 @@ Beispiel würde dieser Schalter für das ASCII-Format gesetzt.
 
 (!KW [use_compressed_descriptions]), 
 (!KW [use_compressed_enumerates]), 
-(!KW [use_compressed_envs]), 
 (!KW [use_compressed_itemizes]), 
 (!KW [use_compressed_lists]), 
 (!KW [use_compressed_tocs]), 
