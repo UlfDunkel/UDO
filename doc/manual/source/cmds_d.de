@@ -36,6 +36,7 @@
 #   fd  Mar 05: more adjustments for !docinfo [webmaster...]
 #   fd  May 19: - "short" -> "compressed"
 #               - cmd_deg() enhanced
+#   fd  May 25: using macro NOTE
 #
 ################################################################################
 
@@ -530,7 +531,7 @@ Mögliche Angaben für foo sind: A3PORTRAIT, A3LANDSCAPE, A4PORTRAIT, A4LANDSCAPE,
 Mögliche Angaben für foo sind Zeichensatznamen, z. B. Arial,
 Times New Roman, sans oder sans serif.
 
-(!B)Hinweis:(!b) Für die PostScript-Ausgabe gilt zur Zeit: Wenn dort irgendwas
+(!NOTE) Für die PostScript-Ausgabe gilt zur Zeit: Wenn dort irgendwas
 mit ""Helvetica"", ""Arial"" oder ""sans-serif"" steht, wird ""Helvetica"" gesetzt,
 sonst ""Times New Roman"".
 

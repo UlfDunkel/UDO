@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from history.de)
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 25: using macro NOTE
 #
 ################################################################################
 
@@ -54,7 +55,7 @@
       (!code [!/doclayout [ps!] [propfontname!] foo]) (!nl)
       Mögliche Angaben für foo sind Zeichensatznamen, z.~B. Arial,
       Times New Roman, sans oder sans-serif. (!nl)
-      (!B)Hinweis:(!b) Für die PostScript-Ausgabe gilt, dass für Helvetica,
+      (!NOTE) Für die PostScript-Ausgabe gilt, dass für Helvetica,
       Arial oder sans-serif immer Helvetica gesetzt wird, ansonsten
       Times New Roman.
 

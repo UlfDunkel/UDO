@@ -22,6 +22,7 @@
 # 2010:
 #   fd  Mar 08: macro K1 resolved to KW
 #   fd  Mar 08: macro k1 resolved to kw
+#   fd  May 25: using macro NOTE
 #
 ################################################################################
 
@@ -349,7 +350,7 @@ Zwei aufeinanderfolgende Minuszeichen werden von UDO in einen kurzen Gedankenstr
 das Ausgabeformat Gedankenstriche anzeigen kann. Andernfalls werden die beiden Minuszeichen durch
 eines ersetzt.
 
-(!B)Hinweis:(!b) Im HTML-Format wird (!C)&(!c)(!C)ndash;(!c) ausgegeben. Ob der kurze Gedankenstrich tatsächlich länger aussieht als das gewöhnliche Minus-Zeichen, hängt von der im Browser verwendeten Schriftart ab. (Bei der im UDO-Handbuch verwendeten Verdana scheint beides identisch zu sein.)
+(!NOTE) Im HTML-Format wird (!C)&(!c)(!C)ndash;(!c) ausgegeben. Ob der kurze Gedankenstrich tatsächlich länger aussieht als das gewöhnliche Minus-Zeichen, hängt von der im Browser verwendeten Schriftart ab. (Bei der im UDO-Handbuch verwendeten Verdana scheint beides identisch zu sein.)
 
 !item [(!SEEALSO)]
 (!link [(---)] [(---)]), (!link [((--))] [((--))]), (!link [Gedankenstriche] [Gedankenstriche])
@@ -454,7 +455,7 @@ Typographische Auslassungspunkte (Ellipsis) ausgeben.
 Ein Ausrufungszeichen, gefolgt von zwei Punkten, wandelt UDO in typographische drei Punkte um, sofern
 das Ausgabeformat diese anzeigen kann. Ansonsten wandelt UDO (!code [!/..]) in drei normale Punkte um.
 
-(!B)Hinweis:(!b) Im Deutschen muss vor den Auslassungspunkten ein Leerzeichen stehen, wenn die Auslassungspunkte für ein ganzes Wort stehen. Wenn ein Wort unvollständig geschrieben wird, stehen die Auslassungspunkte direkt am Wort.
+(!NOTE) Im Deutschen muss vor den Auslassungspunkten ein Leerzeichen stehen, wenn die Auslassungspunkte für ein ganzes Wort stehen. Wenn ein Wort unvollständig geschrieben wird, stehen die Auslassungspunkte direkt am Wort.
 
 !end_xlist
 

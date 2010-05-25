@@ -39,6 +39,7 @@
 #   fd  Mar 08: IMG renamed: udo_icon_16 -> udo_16
 #   fd  Mar 08: macro K1 resolved to KW
 #   fd  May 18: html_ignore_8bit updated
+#   fd  May 25: using macro NOTE
 #
 ################################################################################
 
@@ -1280,7 +1281,7 @@ Für (!TEXT) werden von UDO keine Überprüfungen durchgeführt; der Autor ist selbs
 dafür verantwortlich, einen korrekten Wert zu übergeben.
 Ist (!TEXT) leer, wird für den Zeitzonenunterschied ""(!code [+00:00])"" gesetzt.
 
-(!B)Hinweis:(!b) (!TEXT) darf momentan max. (!const [6]) Zeichen lang sein.
+(!NOTE) (!TEXT) darf momentan max. (!const [6]) Zeichen lang sein.
 
 !item [(!EXISTSSINCE)] Version~6.5.2
 
@@ -2484,7 +2485,7 @@ Transparente Navigationsbutton erzeugen (nur HTML).
 Benutzt man diesen Schalter im Vorspann, erzeugt UDO statt der bisher
 bekannten Navigationsbuttons kleinere, transparente Buttons.
 
-(!B)Hinweis:(!b) Wenn im Zielverzeichnis schon die Navigations-Buttons erzeugt wurden, legt UDO sie nicht neu an. Falls Sie also die Navigations-Buttons z.B. mithilfe dieses Kommandos ändern wollen, müssen Sie erst die vorhandenen (!const [11])~GIF-Dateien löschen. Sie erkennen Sie leicht an der Namensgebung (!file [udo_])<xxxx>(!file [.gif]).
+(!NOTE) Wenn im Zielverzeichnis schon die Navigations-Buttons erzeugt wurden, legt UDO sie nicht neu an. Falls Sie also die Navigations-Buttons z.B. mithilfe dieses Kommandos ändern wollen, müssen Sie erst die vorhandenen (!const [11])~GIF-Dateien löschen. Sie erkennen Sie leicht an der Namensgebung (!file [udo_])<xxxx>(!file [.gif]).
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~12
 
