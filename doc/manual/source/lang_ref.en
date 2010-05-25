@@ -22,10 +22,11 @@
 # 2009:
 #   fd  Jun 09: introduced
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  May 25: only show the list here, no additional text
 #
 ################################################################################
 
-Momentan unterstützt UDO folgende Sprachen:
 !begin_blist
 !label czech
 !item [czech]   Czech
