@@ -25,10 +25,12 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro KW1 resolved to KWW
 #   fd  May 21: translation completed
+#   fd  May 25: index adjustments
 #
 ################################################################################
 
 !begin_node Basics
+!label*     basics
 !html_name  basics
 
 # = = = = =
@@ -110,6 +112,7 @@ placeholder is replaced by certain characters, e.g. ""(!KKW [B])"" by ""(!code [
 # = = = = =
 
 !begin_node Comments
+!label*     comments
 !html_name  basics_comments
 
 A source file can contain comments. UDO ignores a line if the first
@@ -149,6 +152,7 @@ subsections. The main part ends with the command (!KW [end_document]).
 # = = = = =
 
 !begin_node Environments
+!label*     environments
 !html_name  basics_environments
 
 An environment is a part of a source file that has to be converted in a

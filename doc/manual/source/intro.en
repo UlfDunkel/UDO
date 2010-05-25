@@ -23,15 +23,18 @@
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 09: chapter 'intro_manual' translated
+#   fd  May 25: index adjustments
 #
 ################################################################################
 
 !begin_node Introduction
+!label*     introduction
 !html_name  intro
 
 # = = = = =
 
 !begin_node Preface
+!label*     preface
 !html_name  intro_preface
 
 Welcome to UDO!
@@ -355,6 +358,7 @@ Mail discussions are mostly in German, but feel free to ask in English.
 # = = = = =
 
 !begin_node Disclaimer
+!label*     disclaimer
 !html_name  intro_disclaimer
 
 There is no warranty for the program or the contents of this documentation.
@@ -371,6 +375,7 @@ Nevertheless the UDO Community will be glad if you (!link [send bug reports] [Co
 # = = = = =
 
 !begin_node Trademarks
+!label*     trademarks
 !html_name  intro_trademarks
 
 This documentation uses names of products and companies that may be

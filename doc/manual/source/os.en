@@ -21,10 +21,13 @@
 #   fd  Jun 09: introduced
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 25: index adjustments
 #
 ################################################################################
 
-!index Operating systems
+!index  Operating systems
+!label* operating systems
+
 !begin_xlist [nextstep:] !compressed
 !item [(!KP [beos])]     BeOS
 !item [(!KP [dos])]      DOS

@@ -29,10 +29,12 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro KK2W resolved into macros KKW + code
 #   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  May 25: index adjustments
 #
 ################################################################################
 
 !begin_node Miscellaneous
+!label*     miscellaneous
 !html_name  misc
 
 # = = = = =
@@ -239,6 +241,7 @@ UDO knows some predefined macros and placeholders:
 # = = = = =
 
 !begin_node Definitions
+!label*     definitions
 !html_name  misc_definitions
 
 Like macros, definitions are user-defined placeholders. You can use them to
@@ -337,6 +340,7 @@ of definitions is (!MAXMACRO).
 # = = = = =
 
 !begin_node Symbols
+!label*     symbols
 !html_name  misc_symbols
 
 !index (!kw [ifnset])
@@ -409,6 +413,7 @@ symbol.
 # = = = = =
 
 !begin_node Indices
+!label*     indices
 !html_name  misc_indices
 
 !index (!kw [index])
@@ -534,6 +539,7 @@ right: (!idx [Copyright (c!) 1995])
 # = = = = =
 
 !begin_node Query commands
+!label*     query commands
 !html_name  misc_queries
 
 In some cases you might want to insert some special passages for a

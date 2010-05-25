@@ -17,10 +17,12 @@
 #   fd  Jun 10: using EXAMPLE_... macros
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 25: index adjustments
 #
 ################################################################################
 
 !begin_node Structure
+!label*     structure
 !html_name  structure
 
 In this chapter you will get to know what commands are offered to structure
@@ -29,6 +31,7 @@ your documentation.
 # = = = = =
 
 !begin_node Title page
+!label*     title page
 !html_name  structure_title
 
 !index (!kw [maketitle])
@@ -94,6 +97,7 @@ userdefined title pages.
 # = = = = =
 
 !begin_node Tables of contents
+!label*     table of contents
 !html_name  structure_tocs
 
 !index (!kw [tableofcontents])
@@ -284,6 +288,7 @@ inside the preamble.
 # = = = = =
 
 !begin_node Appendix
+!label*     appendix
 !html_name  structure_appendix
 !label      appendix environment
 

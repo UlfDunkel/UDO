@@ -20,10 +20,12 @@
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 16: great review session #1
+#   fd  May 25: index adjustments
 #
 ################################################################################
 
 !begin_node Images
+!label*     images
 !html_name  images
 
 UDO enables you to include images into your destination format if it

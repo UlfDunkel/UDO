@@ -22,10 +22,12 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 25: index adjustments
 #
 ################################################################################
 
 !begin_node Installation
+!label*     installation
 !html_name  installation
 
 # = = = = =

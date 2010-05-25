@@ -27,12 +27,13 @@
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 21: introducing the usage of !label*
+#   fd  May 25: index adjustments
 #
 ################################################################################
 
 !begin_node Command index
-!html_name  cmds
 !label*     command index
+!html_name  cmds
 
 !ignore_subsubtoc
 
@@ -61,6 +62,7 @@ V!.. !! W!.. !! X!.. !! Y!.. !! Z!.. !! *!..
 # = = = = =
 
 !begin_node Command description
+!label*     command description
 !html_name  cmds_explanation
 
 The following chapters describe all UDO commands in detail. All descriptions use the same categories so you can see at a glance what to do with which command. The categories are explained as follows.
@@ -127,10 +129,8 @@ The following chapters describe all UDO commands in detail. All descriptions use
 # = = = = =
 
 !begin_node Colors
+!label*     colors
 !html_name  cmds_colors
-
-!index Colors
-!label Colors
 
 !begin_itemize !compressed
 !item black
