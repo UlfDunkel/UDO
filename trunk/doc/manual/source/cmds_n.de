@@ -29,7 +29,7 @@
 #   fd  Mar 08: macro KW1 resolved to KWW
 #   fd  Mar 19: new chapter 'not_compressed'
 #   fd  May 21: xref links fixed
-#   fd  May 25: using macro NOTE
+#   fd  May 25: using macro NOTE + TIP
 #
 ################################################################################
 
@@ -506,7 +506,7 @@ Im Beispiel würden keine Befehle zur Ausgabe von Bildern beim HTML-Format erzeug
 
 Ermittlung der Ausmaße von Bildern unterbinden.
 
-!begin_xlist [(!TYPEPOSITION)]
+!begin_xlist [(!TYPEPOSITION)] !not_compressed
 
 !item [(!TYPEPOSITION)] (!SWITCH), (!PREAMBLE)
 
@@ -519,7 +519,7 @@ ausgehend vom Ausgabeverzeichnis, bastelt sich also den Dateinamen aus
 Laufwerk und Pfad der Ausgabedatei und dem bei (!KW [image]) angebenen
 Dateinamen zusammen. Mit diesem Schalter kann man die Ermittlung der Ausmaße deaktivieren.
 
-(!B)Tipp:(!b) Falls Sie in Ihrer HTML-Dokumentation viele Bilder ständig aktualisieren, ist es sinnvoll, diesen Schalter zu nutzen, da Sie dann einfach nur die Bilder auf dem Server austauschen können, nicht aber die HTML-Seiten neu generieren müssen.
+(!TIP) Falls Sie in Ihrer HTML-Dokumentation viele Bilder ständig aktualisieren, ist es sinnvoll, diesen Schalter zu nutzen, da Sie dann einfach nur die Bilder auf dem Server austauschen können, nicht aber die HTML-Seiten neu generieren müssen.
 
 (!NOTE) Wenn Sie den Schalter (!I)nicht(!i) nutzen, ermittelt UDO nicht nur die Ausmaße jedes Bildes, sondern prüft natürlich auch, ob das jeweilige Bild überhaupt im angegebenen Pfad vorhanden ist. Daher können Sie das Ermitteln der Bildgröße während der Entwicklungsphase Ihrer Dokumentation auch sehr gut nutzen, um zu kontrollieren, ob alle benötigten Bilder auch vorhanden sind. Ein Blick in das von UDO erzeugte Ausgabeprotokoll hilft dann, fehlende Bilder rasch zu ermitteln.
 

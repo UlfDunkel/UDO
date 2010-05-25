@@ -39,7 +39,7 @@
 #   fd  Mar 08: IMG renamed: udo_icon_16 -> udo_16
 #   fd  Mar 08: macro K1 resolved to KW
 #   fd  May 18: html_ignore_8bit updated
-#   fd  May 25: using macro NOTE
+#   fd  May 25: using macro NOTE + TIP
 #
 ################################################################################
 
@@ -1888,7 +1888,7 @@ Kapitelnummer, AA Abschnittsnummer, UU
 Unterabschnittsnummer, PP Paragraphennummer) für die
 spätere HTML-Datei verwendet.
 
-(!B)Tipp:(!b) Es empfiehlt sich, um bei vielen Kapiteln (und ggf. mehreren Sprachen) den Überblick zu behalten, dieses Kommando immer direkt nach (!KW [begin_node]) oder den entsprechenden Kommandos zu platzieren. Außerdem ist es sinnvoll, Kapitelnamen in mehrsprachigen Dokumentationen möglichst einheitlich (in Englisch) zu vergeben. Wenn Sie anschließend z.B. die deutsche Anleitung in einen Unterordner (!file [/de/]) und die englische Anleitung in einen Unterordner (!file [/en/]) legen, sind die URL im Webbrowser immer bis auf den Sprachordner-Namen identisch. So können Ihre Leser und Sie bequem zwischen verschiedenen Sprachen wechseln, indem Sie einfach im URL den Ordnernamen ändern.
+(!TIP) Es empfiehlt sich, um bei vielen Kapiteln (und ggf. mehreren Sprachen) den Überblick zu behalten, dieses Kommando immer direkt nach (!KW [begin_node]) oder den entsprechenden Kommandos zu platzieren. Außerdem ist es sinnvoll, Kapitelnamen in mehrsprachigen Dokumentationen möglichst einheitlich (in Englisch) zu vergeben. Wenn Sie anschließend z.B. die deutsche Anleitung in einen Unterordner (!file [/de/]) und die englische Anleitung in einen Unterordner (!file [/en/]) legen, sind die URL im Webbrowser immer bis auf den Sprachordner-Namen identisch. So können Ihre Leser und Sie bequem zwischen verschiedenen Sprachen wechseln, indem Sie einfach im URL den Ordnernamen ändern.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~13
 
