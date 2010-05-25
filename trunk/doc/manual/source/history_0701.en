@@ -36,15 +36,14 @@
 !begin_node Changes in version 7.01
 !html_name  history_0701
 
-(!INCOMPLETE)
-# (!PUBLISHED [UDO~7.01][March 3, 2010])
+(!PUBLISHED [UDO~7.01][May 25, 2010])
 
 !begin_description !compressed
 # ----------------------------------------
 !item [Encodings]
 # ----------------------------------------
       !begin_itemize !compressed
-      !item (!BUG [87]): UDO supports more Codepages:
+      !item (!BUG [87]): UDO supports more codepages:
       !begin_table [l|l] !hline
       (!B)System(!b) !! (!B)Encoding(!b) !! (!B)Descriptor(!b)
       ISO !! 8859-3  !! ISO-8859-3 ISO-IR-109 ISO8859-3 ISO_8859-3 LATIN3 L3 CSISOLATIN3
