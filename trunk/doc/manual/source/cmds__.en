@@ -18,6 +18,7 @@
 # 2010:
 #   fd  Mar 08: macro K1 resolved to KW
 #   fd  Mar 08: macro k1 resolved to kw
+#   fd  May 25: chapter '!\' translated
 #
 ################################################################################
 
@@ -416,37 +417,52 @@ Please note that (!KW [/-]) would be interpreted as Hyphenation mark.
 
 # = = = = =
 
-#ToDo: Englisch
 # The ~ must is important, do not delete them
-!begin_node !!\~
+!begin_node !\~
 !html_name  cmd_longline
 !label Tilde
 
-Lange Eingabezeile
+Use long source document lines.
 
-!begin_xlist [(!TYPEPOSITION)]
+!begin_xlist [(!TYPEPOSITION)] !not_compressed
 
 !item [(!TYPEPOSITION)] (!SPECIALCHAR), (!PREAMBLE) & (!MAINPART)
 
-!item [(!SYNTAX)] (!T)!!\(!t)
+!item [(!SYNTAX)] (!T)!\(!t)
 
 !item [(!DESCRIPTION)]
-Endet eine UDO-Eingabezeile mit !!\<Zeilenumbruch>, so wird die 
-folgende Zeile von UDO als Fortsetzung der vorhergehenden Zeile 
-aufgefasst. Es können damit mehrere "echte" Zeilen aus Sicht von 
-UDO zu einer einzigen "logischen" Eingabezeile zusammengefasst 
-werden. Diese Fortsetzungszeilen sind an jeder Stelle im UDO- 
- Quelltext zulässig, auch z.B. in Makros und Definitionen. Steht 
-!!\ nicht unmittelbar am Ende einer Zeile, so wird es ignoriert 
-und als normaler Text ausgegeben.
+When a UDO source document line ends with (!C)!\<linefeed>(!c), UDO will add the following line content to this line. 
+So you can concatenate multiple ""real"" source document lines into one ""logical"" source document line. 
+You can use these long souce document lines in any place of a UDO source document, eve e.g. in macros and definitions. 
 
-Eine mögliche Anwendung ist, den Inhalt einer Tabellenzeile auf 
-mehrere Zeilen in der Eingabedatei aufzuteilen, um die Lesbarkeit 
-des UDO-Quelltextes zu verbessern.
+A possible usage of this is, to divide the content of a table cell into multiple lines to enhance the readability of the UDO source document.
+
+(!NOTE) If (!code [!\]) is not at the very end of a line, it will be ignored and output as normal text.
 
 !item [(!EXISTSSINCE)] Version 6.5.4
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!begin_table [c|c] !hline
+short text left !! short text right
+short text left !! !\ 
+Here you see a rather long text which is difficult to read in the editor, !\ 
+if it has to be kept in a long line. Please keep in mind,  !\ 
+that text in table cells must not exceed a length of (!const [1000]) characters.
+!end_table
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_table [c|c] !hline
+short text left !! short text right
+short text left !! !\
+Here you see a rather long text which is difficult to read in the editor, !\
+if it has to be kept in a long line. Please keep in mind,  !\
+that text in table cells must not exceed a length of (!const [1000]) characters.
+!end_table
+(!EXAMPLE_END)
 
 !end_node
 
