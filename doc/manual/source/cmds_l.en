@@ -27,6 +27,8 @@
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #   fd  May 21: xref links fixed
+#   fd  May 25: - new: !l*, !label*
+#               - chapter 'language' adjusted
 #
 ################################################################################
 
@@ -112,6 +114,31 @@ Set a label.
 
 # = = = = =
 
+!begin_node (!kw [l*])
+!html_name  cmd_l_asterisk
+
+Set a label which must not be indexed.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/l* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [label*])
+
+!item [(!EXISTSSINCE)] Version 7.01
+
+!item [(!SEEALSO)]
+(!KW [label*])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
 !begin_node (!kw [label])
 !html_name  cmd_label
 
@@ -127,13 +154,73 @@ Set a label.
 Defines a label that will be referenced in hypertexts or can be
 accessed by a link command.
 
-!item [(!EXAMPLE)]
-(!T)!/label Label(!t)
-
 !item [(!SEEALSO)]
-(!link [Labels] [Labels]), (!link [Links] [Links]), (!kkw [label]), (!KKW [link]), (!KKW [plink])
+(!KW [l]),
+(!KW [l*]),
+(!KW [label*]),
+(!KKW [label]),
+(!KKW [link]),
+(!KKW [plink]),
+
+(!link [Labels] [Labels]), 
+(!link [Links] [Links])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!label Label
+!end_verbatim
+(!EXAMPLE_AFTER)
+!begin_verbatim
+<a name="Label"></a>
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [label*])
+!html_name  cmd_label_asterisk
+
+Set a label which must not be indexed.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/label* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Defines a label that will be referenced in hypertexts or can be
+accessed by a link command. It will not be indexed in the auto-generated index page.
+
+!item [(!EXISTSSINCE)] Version 7.01
+
+!item [(!SEEALSO)]
+(!KW [l]),
+(!KW [l*]),
+(!KW [label]),
+(!KKW [label]),
+(!KKW [link]),
+(!KKW [plink]),
+
+(!link [Labels] [Labels]), 
+(!link [Links] [Links])
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!begin_node Command Index
+!label*     command index
+[...]
+!end_node # Command Index
+!end_verbatim
+(!EXAMPLE_END)
 
 !end_node
 
@@ -170,9 +257,7 @@ zur Zeit nur für die RTF-Ausgabe unterstützt.
 !begin_node (!kw [language])
 !html_name  cmd_language
 
-Define language. At this moment, UDO supports the following languages:
-
-!include lang_ref.en
+Define language.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -183,8 +268,11 @@ Define language. At this moment, UDO supports the following languages:
 !item [(!DESCRIPTION)]
 With this command you can tell UDO which language it should use for
 the date and expressions like ""Table"", ""Contents"" or
-""Appendix"". UDO will use German expressions by default. The example
-shows how to change the language to English.
+""Appendix"". UDO will use German expressions by default.
+
+By now, UDO supports the following languages:
+
+!include lang_ref.en
 
 !item [(!EXAMPLE)]
 (!T)!/language english(!t)
@@ -195,6 +283,24 @@ shows how to change the language to English.
 (!KW [iflang]), (!KW [ifnlang]), (!KKW [today])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+!language english
+!ifset [english]
+Output English text.
+!else
+Englischen Text nicht ausgeben.
+!endif
+!end_verbatim
+(!EXAMPLE_AFTER)
+# !ifset [english]
+Output English text.
+# !else
+# Englischen Text nicht ausgeben.
+# !endif
+(!EXAMPLE_END)
 
 !end_node
 

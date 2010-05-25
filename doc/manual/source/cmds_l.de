@@ -27,6 +27,8 @@
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #   fd  May 21: xref links fixed
+#   fd  May 25: - new: !l*, !label*
+#               - chapter 'language' adjusted
 #
 ################################################################################
 
@@ -104,7 +106,7 @@ Dieser Platzhalter wird bei der Umwandlung ins
 !begin_node (!kw [l])
 !html_name  cmd_l
 
-Sprungmarke setzen.
+Definiert eine Sprungmarke.
 
 !begin_xlist [(!TYPEPOSITION)]
 
@@ -117,6 +119,31 @@ Sprungmarke setzen.
 
 !item [(!SEEALSO)]
 (!KW [label])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [l*])
+!html_name  cmd_l_asterisk
+
+Definiert eine Sprungmarke, die nicht im Index aufgeführt wird.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMANDABBREV), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/l* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+(!ABBREV) (!KW [label*])
+
+!item [(!EXISTSSINCE)] Version 7.01
+
+!item [(!SEEALSO)]
+(!KW [label*])
 
 !end_xlist
 
@@ -140,7 +167,15 @@ Definiert eine Sprungmarke, die bei Hypertextformaten
 automatisch referenziert wird und auf die man durch die Link-Befehle verweisen kann.
 
 !item [(!SEEALSO)]
-(!link [Sprungmarken] [Sprungmarken]), (!link [Querverweise] [Querverweise]), (!KKW [label]), (!KKW [link]), (!KKW [plink])
+(!KW [l]),
+(!KW [l*]),
+(!KW [label*]),
+(!KKW [label]),
+(!KKW [link]),
+(!KKW [plink]),
+
+(!link [Sprungmarken] [Sprungmarken]), 
+(!link [Querverweise] [Querverweise]) 
 
 !end_xlist
 
@@ -159,7 +194,50 @@ automatisch referenziert wird und auf die man durch die Link-Befehle verweisen k
 
 # = = = = =
 
-# ToDo: Englisch
+!begin_node (!kw [label*])
+!html_name  cmd_label_asterisk
+
+Set a label which must not be indexed.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/label* (!TEXT)(!t)
+
+!item [(!DESCRIPTION)]
+Definiert eine Sprungmarke, die in Hypertexten referenziert wird oder über ein Link-Kommando angesprochen werden kann.
+Sie wird nicht im Index aufgeführt.
+
+!item [(!EXISTSSINCE)] Version 7.01
+
+!item [(!SEEALSO)]
+(!KW [l]),
+(!KW [l*]),
+(!KW [label]),
+(!KKW [label]),
+(!KKW [link]),
+(!KKW [plink]),
+
+(!link [Sprungmarken] [Sprungmarken]), 
+(!link [Querverweise] [Querverweise]) 
+
+!end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!begin_node Command Index
+!label*     command index
+[...]
+!end_node # Command Index
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node
+
+# = = = = =
+
 !begin_node (!kkw [label])
 !html_name  cmd_label_2
 
@@ -203,6 +281,8 @@ Mit diesem Kommando können Sie die Sprache der Begriffe setzen, die UDO
 für z.B. ""Kapitel"" oder ""Inhaltsverzeichnis"" benutzen soll. UDO
 verwendet standardmäßig deutschsprachige Ausdrücke.
 
+Momentan unterstützt UDO die folgenden Sprachen:
+
 !include lang_ref.de
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~16
@@ -223,11 +303,11 @@ Englischen Text nicht ausgeben.
 !endif
 !end_verbatim
 (!EXAMPLE_AFTER)
-!ifset [english]
-Output English text.
-!else
+# !ifset [english]
+# Output English text.
+# !else
 Englischen Text nicht ausgeben.
-!endif
+# !endif
 (!EXAMPLE_END)
 
 !end_node
