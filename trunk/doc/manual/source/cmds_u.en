@@ -35,6 +35,7 @@
 #   fd  May 19: - "short" -> "compressed"
 #               - more links to "not_compressed"
 #   fd  May 21: xref links fixed
+#   ggs May 25: use_compressed_envs have a "see also" to himself
 #
 ################################################################################
 
@@ -965,7 +966,6 @@ without additional horizontal space. The example shows how to use
 
 (!KW [use_compressed_descriptions]), 
 (!KW [use_compressed_enumerates]), 
-(!KW [use_compressed_envs]), 
 (!KW [use_compressed_itemizes]), 
 (!KW [use_compressed_lists]), 
 (!KW [use_compressed_tocs]), 
