@@ -1,0 +1,11 @@
+!begin_itemize
+
+!index !/tex_lindner
+!index !/tex_strunk
+!index !/tex_emtex
+!index !/tex_miktex
+!item Neu: Schalter !/tex_tetex, aktiviert Kommandos um EPS-Grafiken
+mittels usepackage{graphicx} einzubinden.
+
+!end_itemize
+

@@ -1,0 +1,13 @@
+!begin_itemize
+
+!index !/programimage
+!item	Bugfix: Die Benutzung von (!I)!/programimage(!i) und
+(!I)!/authorimage(!i) führte zum Absturz (Stefan Braunstein).
+
+!item	Bugfix: Die korrekte Benutzung der Befehle zur
+Schriftumschaltung wird nun auch bei Überschriften (Nodes und
+Headings) überprüft (Jürgen Conradi), darüber hinaus nun auch bei
+Bildunterschriften.
+
+!end_itemize
+

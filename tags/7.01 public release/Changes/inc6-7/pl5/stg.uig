@@ -1,0 +1,19 @@
+!begin_itemize
+
+!index !/use_auto_toptocs
+!item Neu: (!I)!/use_auto_toptocs~[stg](!i) wird unterstützt.
+
+!index ST-Guide !! @width
+!item Bugfix: UDO gab immer (!V)@width 0(!v) aus (Christian Gosslar).
+
+!index ST-Guide !! !/hline
+!item Bugfix: UDO gab für (!I)!/hline(!i) immer @line 0 aus (Uwe
+Mindrup)
+
+!index ST-Guide !! @default
+!item Bugfix: Statt (!V)@default "Inhaltsverzeichnis"(!v) wird nun
+korrekt (!V)@default Main(!v) ausgegeben, wenn man auf eine
+Titelseite verzichtet.
+
+!end_itemize
+

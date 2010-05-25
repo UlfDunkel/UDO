@@ -1,0 +1,2 @@
+#!/bin/sh
+udo --asc --verbose --force-long -D LANG_DE -o COPYING.txt copying.u

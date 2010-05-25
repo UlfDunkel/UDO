@@ -1,0 +1,198 @@
+!subsubnode !/label
+
+Sprungmarke setzen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/label <text>(!t)
+
+!item [Beschreibung:] 
+	Definiert eine Sprungmarke, die bei Hypertextformaten automatisch     
+	referenziert wird und auf die man durch die Link-Befehle verweisen    
+	kann.                                                                 
+
+!item [Beispiel:] (!T)!/label Sprungmarke(!t)
+
+!item [Siehe auch:] Sprungmarken, Querverweise, (!I)(!/link~!..)(!i), (!I)(!/plink~!..)(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/language
+
+Sprache setzen
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Vorspann
+
+!item [Syntax:] 
+	(!T)!/language [<sprache>](!t)
+
+!item [Beschreibung:] 
+	Mit diesem Kommando können Sie die Sprache der Begriffe setzen, die   
+	UDO für z.B. ""Kapitel"" oder ""Inhaltsverzeichnis"" benutzen soll.   
+	UDO verwendet standardmäßig deutschsprachige Ausdrücke. Das Beispiel  
+	zeigt, wie man die Ausgabesprache auf ""Englisch"" setzen kann.       
+
+!item [Beispiel:] (!T)!/language english(!t)
+
+!item [Siehe auch:] (!I)!/iflang(!i), (!I)!/ifnlang(!i), (!I)(!/today)(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/listoffigures
+
+Abbildungsverzeichnis ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/listoffigures(!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando sorgt für die Ausgabe eines Abbildungsverzeichnisses, 
+	in dem alle Bilder, die eine Überschrift enthalten, aufgelistet       
+	werden. Man sollte dieses Kommando direkt nach                        
+	(!I)!/tableofcontents(!i) verwenden. Momentan wird dieser Befehl nur  
+	für (!LaTeX) umgewandelt.                                             
+
+
+!item [Siehe auch:] (!I)!/image(!i), (!I)!/tableofcontents(!i), (!I)!/listoftables(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode !/listoftables
+
+Tabellenverzeichnis ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Kommando, Hauptteil
+
+!item [Syntax:] 
+	(!T)!/listoftables(!t)
+
+!item [Beschreibung:] 
+	Dieses Kommando sorgt für die Ausgabe eines Tabellenverzeichnisses,   
+	in dem alle Bilder, die eine Überschrift enthalten, aufgelistet       
+	werden. Man sollte dieses Kommando direkt nach                        
+	(!I)!/tableofcontents(!i) verwenden. Momentan wird dieser Befehl nur  
+	für (!LaTeX) umgewandelt.                                             
+
+
+!item [Siehe auch:] Tabellen, (!I)!/tableofcontents(!i), (!I)!/listoffigures(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode (!/LaTeX)
+
+(!LaTeX)-Schriftzug ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Platzhalter, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)(!/LaTeX)(!t)
+
+!item [Beschreibung:] 
+	Dieser Platzhalter wird bei der Umwandlung ins (!LaTeX)-Format in     
+	''(!V)\LaTeX{}(!v)'', ansonsten in ""LaTeX"" umgewandelt.             
+
+!item [Beispiel:] Aus (!T)(!/LaTeX)(!t) wird (!LaTeX).
+
+!item [Siehe auch:] (!I)(!/TeX)(!i), (!I)(!/LaTeXe)(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode (!/LaTeXe)
+
+(!LaTeXe)-Schriftzug ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Platzhalter, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)(!LaTeXe)(!t)
+
+!item [Beschreibung:] 
+	Dieser Platzhalter wird bei der Umwandlung ins (!LaTeX)-Format in     
+	''(!V)\LaTeXe{}(!v)'', ansonsten in ""LaTeX2e"" umgewandelt.          
+
+!item [Beispiel:] Aus (!T)(!/LaTeXe)(!t) wird (!LaTeXe).
+
+!item [Siehe auch:] (!I)(!/TeX)(!i), (!I)(!/LaTeX)(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode (!/laugh)
+
+Emoticon ausgeben
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Platzhalter, Vorspann & Hauptteil
+
+!item [Syntax:] 
+	(!T)(!/laugh)(!t)
+
+!item [Beschreibung:] 
+	Dieser Platzhalter wird durch einen lachenden Smiley ersetzt, der in  
+	Schreibmaschinenschrift ausgegeben wird.                              
+
+!item [Beispiel:] Aus (!T)(!/laugh)(!t) wird (!laugh)
+
+!item [Siehe auch:] (!I)(!/grin)(!i)
+
+!end_xlist
+#------------------------------
+!subsubnode (!/link!~..)
+
+Manuellen Querverweis durchführen.
+
+!begin_xlist [Typ & Position:]
+
+!item [Typ & Position:]
+	Platzhalter, Hauptteil
+
+!item [Syntax:] 
+	(!T)(!/link [<text>] [<link>])(!t)
+
+!item [Beschreibung:] 
+	Hiermit können Querverweise auf andere Kapitel oder Sprungmarken      
+	vorgenommen werden. Ausführliche Informationen finden man im          
+	Abschnitt ""Querverweise"".                                           
+
+!item [Beispiel:] (!T)(!/link [mir] [Kontaktadresse])(!t)
+
+!item [Siehe auch:] (!I)(!/xlink~!..)(!i), (!I)(!/plink!~..)(!i), Querverweise
+
+!end_xlist
+#------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+

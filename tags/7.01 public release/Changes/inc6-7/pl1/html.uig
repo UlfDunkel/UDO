@@ -1,0 +1,80 @@
+!begin_itemize
+
+!index xlist-Umgebung
+!item	Neu: Na endlich! Jetzt werden auch bei HTML die
+list-Umgebungen korrekt ausgegeben. UDO erzeugt dafür nun HTML-Tabellen.
+Leider unterscheiden sich Navigator und IE bei der Ausgabe
+der Tabellen, besonders was die Zwischenräume und den Umbruch der
+ersten Spalte angeht. Hier werde ich noch ein wenig experimentieren.
+
+!index !/html_use_xlist
+!item	Änderung: Der Schalter (!V)!/html_use_xlist(!v) existiert
+nicht mehr. UDO verwendet per default obige Methode
+
+!index !/html_no_xlist
+!item	Neu: Der Schalter (!I)!/html_no_xlist(!i) führt dazu, daß UDO
+anstatt die Listen wie bisher als description-Umgebungen ausgibt.
+
+!item	Neue Befehle zum Einbinden von Body-Optionen für Nodes:
+
+	!begin_itemize
+	!index !/html_backimage
+	!item	(!I)!/html_backimage <file.suffix>(!i) (!nl)
+			Setzen eines Hintergrundbildes. Momentan muß man noch die
+			Dateieindung angeben; UDO setzt sie nicht automatisch
+			dahinter.
+	!index !/html_backcolor
+	!item	(!I)!/html_backcolor [<color>|#FFFFFF]>(!i) (!nl)
+			Setzen der Hintergrundfarbe. Vordefinierte Farben sind
+			black, white, red, green, blue, yellow, cyan, magenta und
+			grey. Will man eine andere Farbe haben, so kann man den
+			Hexwert auch direkt angeben.
+	!index !/html_textcolor
+	!item	(!I)!/html_textcolor [<color>|#FFFFFF]>(!i)
+			Setzen der Textfarbe.
+	!index !/html_linkcolor
+	!item	(!I)!/html_linkcolor [<color>|#FFFFFF]>(!i)
+			Setzen der Farbe für Links.
+	!index !/html_alinkcolor
+	!item	(!I)!/html_alinkcolor [<color>|#FFFFFF]>(!i)
+			Setzen der Farbe für aktive Links.
+	!index !/html_vlinkcolor
+	!item	(!I)!/html_vlinkcolor [<color>|#FFFFFF]>(!i)
+			Setzen der Farbe für bereits besuchte Links.
+	!end_itemize
+	
+	Anmerkungen:
+	
+	!begin_itemize
+	!item Werden die Befehle im Vorspann benutzt, so setzt man damit die
+	Defaultwerte für alle Seiten inkl. dem Inhaltsverzeichnis.
+	!item Bei Angabe der Farben übernimmt UDO genau dann den
+	angegebenen Wert, falls das erste Zeichen ein ''#'' ist.
+	!end_itemize
+	
+!index !/verbatimsize !! HTML
+!item	Neu: (!I)!/verbatimsize(!i) wird nun für HTML unterstützt.
+
+!item	Änderung: In den Kopfzeilen wird keine Titelzeile, sondern nur
+noch die Verweise auf die benachbarten Seiten ausgegeben. Der Titel
+wird mit ins (!V)<TITLE>(!v)-Tag gesetzt. So sieht es besser aus.
+Außerdem weiß jemand, der eine Seite nicht über die Homepage
+ansteuert, sofort wo er ist und in welchem Kontext die Seite steht.
+
+!index !/no_headlines
+!item	Bugfix: Wurde nur (!I)!/no_headlines(!i) oder nur
+(!I)!/no_bottomlines(!i) verwendet, so sicherte UDO die Button-GIFs
+nicht. Er tut dies jetzt nur dann nicht mehr, wenn für HTML beide
+Schalter gesetzt werden.
+
+!index !/html_merge_nodes
+!item	Bugfix: Wurden Kapitel gemischt, so fehlten die Buttons, mit der man
+zur nächsten Seite verzweigen konnte. Ich hoffe, jetzt funktioniert es
+korrekt.
+
+!index HTML-Tabellen
+!item	Bugfix: Bei Tabellen wurde (!V)<p align=center(!v) nach
+(!V)<table>(!v) ausgegeben (Hans Braun).
+
+!end_itemize
+

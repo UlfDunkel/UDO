@@ -1,0 +1,43 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : version numbers
+# Language    : all
+# Initial Date: 2008-09-25
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+#
+# Notes       : Don't forget to sync the versions numbers in this manual file 
+#               and the relevant UDO source file VERSION.H
+#               
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2008:
+#   fd  Sep 25: version increased to 6.5.20 beta (rev. 683) 
+# 2009:
+#   fd  Jun 05: header added; file reformatted
+#   fd  Jun 06: dates updated
+#   fd  Jun 10: macro DATE removed (not really required)
+#   fd  Dec 15: #788 released (enhancement in !html_navigation)
+# 2010:
+#   fd  Feb 25: v7.00 RC2 (rev. 944)
+#   fd  Mar 01: v7.00 public release (rev. 977)
+#   fd  May 19: v7.01 RC1 (1126)
+#   fd  May 19: v7.01 RC1 (1137)
+#   fd  May 25: v7.01 (1151)
+#
+################################################################################
+
+!macro RELEASE  7
+!macro VERSION  (!RELEASE).01 RC1 (1151)
+
+!docinfo [version]  (!VERSION)
+!docinfo [date]     (!today)
+
+# === EOF ===

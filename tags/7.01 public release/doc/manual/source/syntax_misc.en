@@ -1,0 +1,842 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Miscellaneous
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: all defined max values from _def.ui are shown in red color
+#   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: WORD macro introduced
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 10: using macro (!const [])
+#   fd  Jun 11: typos
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro KK2W resolved into macros KKW + code
+#   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  May 25: index adjustments
+#
+################################################################################
+
+!begin_node Miscellaneous
+!label*     miscellaneous
+!html_name  misc
+
+# = = = = =
+
+!begin_node Split documents
+!html_name  misc_distributed_documents
+
+!index (!kw [include])
+!index (!kw [rinclude])
+!index (!kw [vinclude])
+!index (!kw [sinclude])
+!index (!kw [cinclude])
+!index (!kw [input])
+
+UDO offers you the commands (!KW [include]), (!KW [input]), (!KW [vinclude]) and
+(!KW [rinclude]). With these commands you are enabled to split up a
+document into many files that are included by a main file. Furthermore
+you can use these commands to include an often used passage that you
+have to type only once.
+
+This documentation uses this commands intensively. The file
+(!file [udo.u]) doesn't contain any text and just includes other files.
+So I have the possibility to find some passages more fast if I have to
+change the documentation.
+
+You can use (!KW [include]) wherever you want. So you can define macros,
+definitions or Hyphenation patterns in external files that can be used
+by other files, too.
+
+For displaying the preformatted contents of a file you can use the
+(!KW [vinclude]) command (""verbatim include""). You can use this
+command e.g. for displaying source files or header files.
+
+If you want to include special commands for a destination format like
+difficult tables for (!LaTeX) or HTML you can use the
+(!KW [rinclude]) command (""raw include"").
+
+(!B)Possible examples of use:(!b)
+
+!begin_enumerate
+
+!item	When writing large source files you can edit a separate file for
+each chapter that are included by a main file with (!KW [include]). Thus
+you can restructure your text by simply moving one line of the main file.
+
+!item	If you split up your text into several file that are included by a
+main file you can speed up looking for errors because you can simply switch
+off some parts of the text by commenting out one line of the main file.
+
+!item	Together with macros you can write standardized texts that you can
+use for many projects. E.g. you can edit a standard disclaimer where the
+name of the software is replaced by macros that are defined by the main
+file.
+
+!item	A documentation can be written by different persons. Each author can
+test his own file with UDO. If everybody has finished his work all files
+will be included by a main file.
+
+!index (!kw [tabwidth])
+
+!item	With (!KW [vinclude]) and (!KW [tabwidth]) you can add source
+code to your documentation. This is great for a documentation of a source
+code or a library.
+
+!end_enumerate
+
+# hinzugefügt 02.02.2004 - Ulrich Kretschmer
+(!B)Warning(!b): Avoid constructions like these which cause infinite loops:
+!begin_xlist !compressed
+!item [a.ui:] (!C)!include(!c) (!file [b.ui])
+!item [b.ui:] (!C)!include(!c) (!file [a.ui])
+!end_xlist
+or
+!begin_xlist !compressed
+!item [a.ui:] (!C)!include(!c) (!file [b.ui])
+	!begin_xlist !compressed
+	!item [b.ui:] (!C)!include(!c) (!file [c.ui])
+		!begin_xlist !compressed
+		!item [c.ui:] (!C)!include(!c) (!file [a.ui])
+		!end_xlist
+	!end_xlist
+!end_xlist
+
+UDO cannot recognize such overcross references. You get only a (less informative)
+error message ""memory allocation failed"".
+
+!end_node # Split documents
+
+# = = = = =
+
+!begin_node Macros
+!html_name  misc_macros
+
+Macros are userdefined placeholders that you can use for different
+purposes.
+
+!index (!kw [macro])
+When using the (!KW [macro]) command you tell UDO the name of the macro in
+first place. The name of the macro is followed by its contents which may be
+empty, too.
+
+Let me show you some examples:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/macro1.ui
+(!EXAMPLE_END)
+
+!index (!kw [include])
+Macros can help you to save time when typing often used long words.
+Furthermore macros can help you to change the contents of your file by
+simply changing the contents for macros (e.g. if your program name changed
+and you use a macro for the name of your program). Another example is the
+usage of standardized text (e.g. a standard disclaimer) where you use macros
+instead of the name of the program etc. These standardized texts can be
+included with (!KW [include]). In the following example a disclaimer is
+included and the name of the program is defined by a macro:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/macro2.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+!index Macros !! Parameters
+!index Parameters !! Macros
+
+Since UDO Release 6 you can use macros with parameters. You can set the
+position of the parameters in the (!I)!/macro(!i) command by inserting
+""(!code [(!/1!)])"", ""(!code [(!/2!)])"" up to ""(!code [(!/9!)])"". To call a macro
+with parameters you have to write brackets (""[!..]"") around them.
+
+The following small example shows how to use a macro for text that shall be
+printed in bold-italic style:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/macro3.ui
+(!EXAMPLE_END)
+
+The ""(!/1)"" in the macro line will be replaced by the words ""bold and
+italic"".
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate
+
+!item When naming the macros you should be cautious not to use pre-defined
+UDO command names like ""B"" or ""nl"". If you don't you will get problems
+with bold text ((!KKW [B])) or the newline command ((!KKW [nl])).
+
+!item You shouldn't use too many macros because every additional macro slows
+down the conversion of the source file. The maximum number of macros is
+(!MAXMACRO).
+
+!end_enumerate
+
+# = = = = =
+
+!begin_node Predefined macros
+!html_name  misc_macros_predefined
+
+UDO knows some predefined macros and placeholders:
+
+!begin_table [|l|l|] !hline
+(!KKW [alpha]) !! Print the (!alpha) symbol
+!hline
+(!KKW [beta]) !! Print the (!beta) symbol
+!hline
+(!KKW [copyright]) !! Print the copyright symbol
+!hline
+(!KKW [deg]) !! Print the (!deg) symbol
+!hline
+(!KKW [euro]) !! Print the (!euro) symbol
+!hline
+(!KKW [grin]) !! Print an emoticon (!grin)
+!hline
+(!KKW [LaTeX]) !! Print the (!LaTeX) symbol
+!hline
+(!KKW [LaTeXe]) !! Print the (!LaTeXe) symbol
+!hline
+(!KKW [laugh]) !! Print an emoticon (!laugh)
+!hline
+(!KKW [pound]) !! Print the (!pound) symbol
+!hline
+(!KKW [reg]) !! Print the (!reg) symbol
+!hline
+(!KKW [TeX]) !! Print the (!TeX) symbol
+!hline
+(!KKW [tm]) !! Print the (!tm) symbol
+!hline
+(!KKW [today]) !! Insert long form of current date: (!B)(!today)(!b)
+!hline
+(!KKW [short_today]) !! Insert short form of current date: (!B)(!short_today)(!b)
+!hline
+!end_table
+
+!end_node # Predefined macros
+
+# = = = = =
+
+!end_node # Macros
+
+# = = = = =
+
+!begin_node Definitions
+!label*     definitions
+!html_name  misc_definitions
+
+Like macros, definitions are user-defined placeholders. You can use them to
+insert special commands inside the text, especially for the destination
+format.
+
+!index (!kw [define])
+The syntax  is (!KW [define]) (!C)[(!WORD)](!c) (!C)[(!TEXT)](!c). In contrast to macros,
+(!C)[(!TEXT)](!c) will not be converted in a special way. No special
+characters are translated inside (!C)[(!TEXT)](!c).
+
+This example demonstrates how to print headlines with HTML:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/define1.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+As you can see you can use definitions to insert special commands that
+aren't supported by UDO. UDO Release 4 offered a lot of special
+commands for (!LaTeX) that you now have to simulate with the
+(!KW [define]) command:
+
+!index \linebreak
+!index \nolinebreak
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/define2.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+!index Definitions !! Parameters
+!index Parameters !! Definitions
+You can use definitions with parameters, too. Definitions with parameters
+are used the same way you can use macros with parameters. Definitions with
+parameters are a great help to expand UDO's support of a destination format.
+
+You declare definitions like in the upper example. You can tell UDO the
+positions of the parameters by adding ""(!code [(!/1!)])"", ""(!code [(!/2!)])""
+up to ""(!code [(!/9!)])"". When you call a definition you have to write
+brackets (""[!..]"") around the parameters.
+
+In the upper example I have shown you how to make a heading for HTML. When
+using parameters it may look like the following example:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/define3.ui
+(!EXAMPLE_END)
+
+As you can see in this example you can write format depending commands UDO
+doesn't support already.
+
+The upper (!LaTeX) example can be defined nicer, too. If you use parameters
+you can provide all available (!LaTeX) commands in one definition:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/define4.ui
+(!EXAMPLE_END)
+
+In this example only one parameter is used but the non-(!LaTeX) definition
+contains a second parameter. You may ask yourself why it has to be like
+this. Well, if you call the definition with only one parameter the second
+parameter is empty. When expanding the non-(!LaTeX) definition UDO will
+replace the definition placeholder by empty space (because there is no second
+parameter, you understand?). Unfortunately you have to use this work-around
+when using definition with placeholders.
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate
+!item	Characters of the text of the (!KW [define]) command won't be
+converted.
+
+!item	Characters of the parameters you pass to the definition will be
+converted.
+
+!index (!kw [heading])
+!item	UDO supports the (!KW [heading]) command for displaying headlines.
+The upper HTML example is only used for demonstration.
+
+!item When naming the definitions you should be cautious not to use
+pre-defined UDO command names like ""B"" or ""nl"". If you don't you will
+get problems with bold text ((!KKW [B])) or the newline command ((!KKW [nl])).
+
+!item You shouldn't use too many definitions because every additional
+definition slows down the conversion of the source file. The maximum number
+of definitions is (!MAXMACRO).
+
+!end_enumerate
+
+!end_node # Definitions
+
+# = = = = =
+
+!begin_node Symbols
+!label*     symbols
+!html_name  misc_symbols
+
+!index (!kw [ifnset])
+!index (!kw [ifset])
+!index (!kw [set])
+!index (!kw [unset])
+!index -D
+!index -U
+
+Symbols are user-defined variables which can be set with the (!KW [set])
+command or via the command line with the (!code [-D]) option. Symbols can be
+deleted with the (!KW [unset]) command. If a symbol is set you can test
+with the query commands (!KW [ifset]) and (!KW [ifnset]).
+
+Symbols can be used for different purposes. In the following example I will
+show you how to make a destination file with a different contents depending
+on set symbols.
+
+Assuming that you have written a soure file that contains three chapters,
+the first two chapters have been finished and you are still working on the
+third chapter. To mimize the conversion time of UDO you want only to convert
+the last chapter if the symbol (!code [AllChapters]) is set:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/symbol1.ui
+(!EXAMPLE_END)
+
+If you start UDO as you without setting the symbol it will make a
+destination file that contains all chapters. If you set the symbol via
+adding the option ""(!code [-D~AllChapters])"" you will get a destination file
+that contains only the last chapter.
+
+You can even do more. If you use more symbols you can make destination files
+with only one, some or all chapters. If you use the following example and
+you call UDO with the option ""(!code [-D~Chapter1])"" you will get only the
+first chapter. If you call UDO with the options ""(!code [-D~Chapter1])"" and
+""(!code [-D~Chapter2])"" you will get a destination file with the first and
+second chapter. If you call UDO with the option ""(!code [AllChapters])"" you
+will get a complete destination file:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/symbol2.ui
+(!EXAMPLE_END)
+
+As I descriped at the beginning of this section you can delete symbols with
+the (!KW [unset]) command.
+
+If you want to avoid that all chapters are saved in the destination file you
+can add the following lines to the beginning of your source file. Here the
+symbol (!code [AllChapters]) will be deleted if it is set:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/symbol3.ui
+(!EXAMPLE_END)
+
+In first place it will be testet if the symbol is set. If you don't test the
+symbol UDO will print an error message if you want to delete an unused
+symbol.
+
+(!HINTS)
+
+!begin_enumerate
+!item You may use up to (!MAXDEFINE) symbols.
+
+!item The name of a symbol may be up to (!MAXSYMLEN) characters long.
+!end_enumerate
+
+!end_node # Symbols
+
+# = = = = =
+
+!begin_node Indices
+!label*     indices
+!html_name  misc_indices
+
+!index (!kw [index])
+!index (!kkw [idx])
+!index (!kkw [index])
+
+To add entries for the index you can use the (!KW [index]) command
+or the (!KKW [idx]) or (!KKW [index]) placeholders. You can and should use these
+commands as often as possible.
+
+To add an entry with the (!KW [index]) command use it this way:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/index1.ui
+(!EXAMPLE_END)
+
+The entry appears inside the index of (!LaTeX),
+inside the index of a Texinfo file that was printed with (!TeX),
+inside the index of an ST-Guide hypertext,
+inside the search dialog of Windows Help and
+inside the index of an RTF file.
+
+To insert a multi-index you can separate the index entries with a double
+exclamation mark. You can use up to three indices in one line. You should
+use multi-indices when it is obvious that a potential reader looks for an
+entry in different ways.
+
+If you think that a reader might look for ""Index entry"" or ""Entry,
+Index"" you should use the following index commands:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/index2.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+If you use the placeholder (!KKW [idx]) you can use up to four
+parameters. The following examples show how the commands are converted for
+(!LaTeX), Windows Help and RTF:
+
+!begin_xlist [LaTeX:] !compressed
+!item [UDO:]   an (!KKW [idx]) (!code [[entry!]])
+!item [LaTeX:] an entry\index{entry}
+!item [RTF:]   an {\xe\v entry}entry
+!item [Win:]   an {K{\footnote K entry}}entry
+!item [else:]  an entry
+!end_xlist
+
+!smallskip
+
+!begin_xlist [LaTeX:] !compressed
+!item [UDO:]   a (!KKW [idx]) (!code [[word!] [entry!]])
+!item [LaTeX:] a word\index{entry}
+!item [RTF:]   a {\xe\v Index}Wort
+!item [Win:]   a {K{\footnote K entry}}word
+!item [else:]  a word
+!end_xlist
+
+!smallskip
+
+!begin_xlist [LaTeX:] !compressed
+!item [UDO:]   a (!KKW [idx]) (!code [[word!] [entry!] [subentry!]])
+!item [LaTeX:] a word\index{entry!subentry}
+!item [RTF:]   a {\xe\v entry, subentry}word
+!item [Win:]   a {K{\footnote K entry, subentry}}word
+!item [else:]  a word
+!end_xlist
+
+!smallskip
+
+!begin_xlist [LaTeX:] !compressed
+!item [UDO:]   a (!KKW [idx]) (!code [[word!] [entry!] [subentry!] [subsubentry!]])
+!item [LaTeX:] a word\index{entry!subentry!subsubentry}
+!item [RTF:]   a {\xe\v entry, subentry, subsubentry}word
+!item [Win:]   a {K{\footnote K entry, subentry, subsubentry}}word
+!item [else:]  a word
+!end_xlist
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate
+!index (!kw [no_index])
+!item The conversion of these index commands can be suppressed with the
+switch (!KW [no_index]) inside the preamble.
+
+!index (!kw [use_alias_inside_index])
+!index (!kw [use_label_inside_index])
+!index (!kw [use_nodes_inside_index])
+!item Chapter names, labels and aliases aren't added to the index in no
+destination format. But you can automatize this with the following switches:
+(!KW [use_nodes_inside_index]),
+(!KW [use_label_inside_index]) and
+(!KW [use_alias_inside_index]).
+
+!index (!kw [ignore_index])
+!item If a chapter contains the command (!KW [ignore_index]) the chapter
+name won't be added to the index even if you use the switch
+(!KW [use_nodes_inside_index]) inside the preamble of your source file.
+
+!index Makeindex
+!item If you convert to (!LaTeX) and you use (!KW [index]) commands inside
+your source file UDO will add the commands that are necessary for
+""Makeindex"" automatically. Special characters of an index entry are
+converted especially for ""Makeindex"".
+
+!item You have to use the parameters inside brackets. If you want to use a
+bracket inside a parameter you have to insert a (!EXCLAM). If you don't
+UDO will think that the placeholder ended. An example:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+wrong: (!idx [Copyright (c) 1995])
+right: (!idx [Copyright (c!) 1995])
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_enumerate
+
+!end_node # Indices
+
+# = = = = =
+
+!begin_node Query commands
+!label*     query commands
+!html_name  misc_queries
+
+In some cases you might want to insert some special passages for a
+destination format, language or operating system.
+
+UDO supports some commands you can use to check the destination format,
+language, operating system and the existence of symbols.
+
+!index (!kw [if])
+!index (!kw [else])
+!index (!kw [endif])
+With an (!KW [if]) command you start a query. If the query returns a true value
+the following lines will be converted until UDO reads the (!KW [endif]) or
+(!KW [else]) commands. If the query returns a false value UDO will ignore
+the following lines until (!KW [endif]) or (!KW [else]).
+
+# = = = = =
+
+!begin_node Testing the target format
+!html_name  misc_queries_target
+
+!index Query !! Destination format
+!index Destination format !! Query
+!index (!kw [ifdest])
+
+With the command (!KW [ifdest]) you can test the destination format. Use
+the following abbreviations:
+
+!include formattb.ui
+
+In addition to these abbreviations you can use ""all"" and ""none"". A query
+with ""all"" always returns a true value, a query with ""none"" always
+returns a false value.
+
+The following example shows how to set a special document title for Windows
+Help:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifdest [win]
+!docinfo [title] The Windows Help to
+!else
+!docinfo [title] The guide to
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+
+!index (!kw [ifndest])
+The (!KW [ifndest]) command is related to (!KW [ifdest]). But
+(!KW [ifndest]) will check if you do (!I)not(!i) convert to the given
+destination format. Thus you can write the upper example this way, too:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifndest [win]
+!docinfo [title] The guide to
+!else
+!docinfo [title] The Windows Help to
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+
+You can pass more than one abbreviation to the query command. If you do so
+the query returns a true value if one or more abbreviations match the
+current destination format. The next example shows how to set a special
+document title for hypertext formats:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifdest [win,html,stg,htag]
+!docinfo [title] The hypertext to
+!else
+!docinfo [title] The guide to
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node # Testing the destination format
+
+# = = = = =
+
+!begin_node Testing the destination language
+!html_name  misc_queries_language
+
+!index Query !! Language
+!index Language !! Query
+!index (!kw [iflang])
+
+Using the (!KW [iflang]) command you can test the language UDO will use in
+the destination file. Use the following words to test the language:
+
+!label Language
+!label language
+!label languages
+!include language.en
+
+In addition to these words you can use ""all"" and ""none"". A query
+with ""all"" always returns a true value, a query with ""none"" always
+returns a false value.
+
+If you write a small documentation you can enter all langaguages to a single
+source file:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!iflang [german]
+!docinfo [title] Die Benutzeranleitung zu
+!else
+!docinfo [title] The User's Guide to
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+
+!index (!kw [ifnlang])
+The (!KW [ifnlang]) command is related to (!KW [iflang]). But
+(!KW [ifnlang]) will check if you do (!I)not(!i) convert to the given
+destination language. Thus you can write the upper example this way, too:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifnlang [german]
+!docinfo [title] The User's Guide to
+!else
+!docinfo [title] Die Benutzeranleitung zu
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+
+It goes without saying that you can test more than one language.
+
+!end_node # Testing the destination language
+
+# = = = = =
+
+!begin_node Testing symbols
+!html_name  misc_queries_symbols
+
+!index Query !! Symbols
+!index Symbols !! Query
+!index (!kw [ifnset])
+!index (!kw [ifset])
+
+With the (!KW [ifset]) command you can test if a symbol was set in the
+preamble or via command line. The (!KW [ifnset]) tests if a symbol is
+(!I)not(!i) set.
+
+!index (!kw [set])
+!index (!kw [unset])
+!index -D
+!index -U
+As you know you can set symbols via command line by using the option
+(!code [-D]) and by the command (!I)!/set(!i).
+
+The following example shows how to test the symbol (!code [UseColour]) and
+to display the right image:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifset [UseColor]
+!image colour/tiger
+!else
+!image mono/tiger
+!endif
+!end_verbatim
+(!EXAMPLE_END)
+
+If you call UDO with passing the option (!code [-D~UseColor]) or if you set
+the symbol with (!KW [set] [UseColor]) inside the preamble UDO will display
+the color image instead of the monochrome image.
+
+!end_node # Testing symbols
+
+# = = = = =
+
+!begin_node Testing the operating system
+!html_name  misc_queries_os
+
+!index Query !! Operating system
+!index Operating system !! Query
+!index (!kw [ifos])
+
+With the (!KW [ifos]) command you can test the operating system UDO is
+running on. Use the following words for this kind of query:
+
+!label Operating systems
+!include os.en
+
+Like in the other queries you can use ""all"" and ""none"", too.
+
+!index (!kw [ifnos])
+The related command called (!KW [ifnos]) tests if UDO does (!I)not(!i)
+run on the given operating system.
+
+!end_node # Testing the operating system
+
+# = = = = =
+
+!end_node # Query commands
+
+# = = = = =
+
+!begin_node Format-specific commands
+!html_name  misc_commands_format_specific
+!label      Special commands
+
+UDO offers you the (!KW [raw]) command and the raw environment to insert
+special commands for a specific format. So you are able to insert small
+passages or huge blocks written in the destination format (like special
+tables for (!LaTeX) or HTML).
+
+You have to use abbreviations of the destination formates if you want
+to use the (!KW [raw]) command:
+
+!label Abbreviations
+!include formattb.ui
+
+The next example shows how to insert a line that will only be printed
+for the ASCII format:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/asc1.ui
+(!EXAMPLE_END)
+
+The next example shows how to insert a line that appears in all formats
+except ASCII:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/asc2.ui
+(!EXAMPLE_END)
+
+The contents of the line will be printed without the command and
+without converting the text of the line. These commands split up text
+into different paragraphs like all the other UDO commands. So these
+commands aren't useful to insert a line into a paragraph!
+
+You can use these commands to insert special commands like parts of
+the preamble for (!LaTeX):
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/latex/index.ui
+(!EXAMPLE_END)
+
+!begin_description
+
+!label raw environment
+!index !begin_raw
+!index !end_raw
+
+!item [The raw environment]
+But it happens that you want to insert large passages only for one
+format with special commands. You could add one of the upper commands
+at the beginning of each line, sure. But to make it easier for you to insert
+these passages UDO has a special environment for this case: the raw
+environment.
+
+Together with the possibility to check the current destination format you
+can e.g. insert complex tables for (!LaTeX) or forms for HTML with the raw
+environment. The following example shows how to enter HTML forms to your
+source code:
+
+!index HTML !! <form>
+!index <form>
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/raw1.ui
+(!EXAMPLE_END)
+
+To say it once more: Text that is part of a raw environment is printed ""as
+is"". That means that it is not converted and not indented. If you will
+insert the upper form source code into a verbatim environment you will
+see the source code in an HTML browser. But if you insert it inside a raw
+environment you will see the form!
+
+Another choice you have is to use the command (!KW [rinclude]).
+
+!label comment environment
+!item [The comment environment]
+
+If you want to write larger blocks in the output file as comments,
+it would be troublesome to start each line with a command.
+
+!index !begin_comment
+!index !end_comment
+Therefore UDO offers the "comment environment". It will be started with the
+command (!KW [begin_comment]) and ends with the command (!KW [end_comment]).
+
+As with the text of lines that start with the (!KW [comment]) command,
+UDO will write text inside this environment as comment to the destination
+file without converting special chars.
+
+Another choice you have is to use the command (!KW [cinclude]).
+
+!end_description
+
+!end_node # Format-specific commands
+
+# = = = = =
+
+!end_node # Miscellaneous
+
+# === EOF ===

@@ -1,0 +1,40 @@
+!begin_itemize
+
+!index !/win_textcolor
+!item Neu: (!I)!/win_textcolor <farbe>(!i) (!nl)
+Hiermit läßt sich die Farbe festlegen, mit der der Text erscheinen
+soll.
+
+!index !/use_auto_toptocs
+!item Neu: (!I)!/use_auto_toptocs~[win](!i) wird unterstützt.
+
+!index !/win_backcolor
+!index !/win_background
+!item	Änderung: (!I)!/win_backcolor(!i) ersetzt den Schalter
+(!V)!/win_background(!v). In der Übergangsphase bleibt der alte
+Schalter noch erhalten. Grund der Umbenennung: Angleichung an den
+Befehl (!I)!/html_backcolor(!i).
+
+!index Farben
+!item	Änderung: Die Palette der zu verwendenden Farben wurde an die
+der HTML-3.2-Spezifikation angepaßt.
+
+!index Beenden-Button
+!index Button ""Beenden""
+!item Änderung: Der ""Beenden""-Button wird nicht mehr benutzt.
+Stattdessen wird bei Verwendung von (!I)!use_about_udo(!i) ein
+UDO6-Button eingebaut.
+
+!index !/tableofcontents
+!item Bugfix: Die Nodes wurden bei ""!depth 1"" im Inhaltsverzeichnis
+fett dargestellt und nicht dann, wenn die Tiefe höher war (Andreas
+Swazinna).
+
+!index !/table_caption
+!item Bugfix: Wurde (!I)!/table_caption(!i) für eine Tabelle benutzt,
+die innerhalb einer anderen Umgebung stand, so erzeugte UDO ziemlichen
+Murx, so daß im günstigsten Falle die Tabellenüberschrift unsichtbar
+war (Norbert Hanz).
+
+!end_itemize
+

@@ -1,0 +1,17 @@
+!begin_itemize
+
+!item Änderung: Die Ausmaße des Hauptfensters wurden leicht verändert.
+
+!item Bugfix: Headings beachteten Ausrichtung (center, flushright)
+nicht (Norbert Hanz).
+
+!item Bugfix: (!I)(!/idx~...)(!i) innerhalb von (!I)!/table_caption(!i)
+wurde nicht umgewandelt (Norbert Hanz).
+
+!item Bugfix: Farben ""silver"" und ""gray"" waren vertauscht.
+
+!item Bugfix: Die Win32-Version erzeugt im HPJ-File nun DOS-Umlaute, damit
+die Titelzeile des WinHelp-Fensters wieder stimmt.
+
+!end_itemize
+

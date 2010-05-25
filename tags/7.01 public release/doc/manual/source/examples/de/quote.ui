@@ -1,0 +1,4 @@
+!begin_quote
+Dieser Absatz steht innerhalb einer quote-Umgebung
+und wird links und rechts eingerückt.
+!end_quote

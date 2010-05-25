@@ -1,0 +1,9 @@
+!begin_description !compressed
+!item [Item 1] of the outer description environment
+!item [Item 2] of the outer description environment
+      !begin_description
+      !item [Item 1] of the inner environment.
+      !item [Item 2] of the inner environment.
+      !end_description
+!item [Item 3] of the outer description environment
+!end_description

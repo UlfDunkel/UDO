@@ -1,0 +1,622 @@
+!subsubnode Document Type Definitions
+(!img [rot3] [Sehr wichtig])~~|~~(!img [gelb3] [leicht])
+Folgende DTDs sollten bei der Ausgabe unterstützt werden:
+!begin_itemize
+!item HTML 3.2
+
+!begin_verbatim
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+!end_verbatim
+!medskip
+
+!hline
+!item HTML 4.0
+
+Bei normalem HTML (wenn Elemente enthalten sind, die aus dem Standard
+entfernt werden sollen):
+!begin_verbatim
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"
+ "http://www.w3.org/TR/REC-html40/loose.dtd">
+!end_verbatim
+
+Bei normalem HTML (wenn (!U)keine(!u) Elemente enthalten sind, die aus
+dem Standard entfernt werden sollen):
+!begin_verbatim
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"
+ "http://www.w3.org/TR/REC-html40/strict.dtd">
+!end_verbatim
+
+Bei Benutzung von StyleSheets oder Scripts (wenn Elemente enthalten sind,
+die aus dem Standard entfernt werden sollen):
+!begin_verbatim
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+ "http://www.w3.org/TR/REC-html40/loose.dtd">  
+!end_verbatim
+
+Bei Benutzung von StyleSheets oder Scripts (wenn (!U)keine(!u) Elemente
+enthalten sind, die aus dem Standard entfernt werden sollen):
+!begin_verbatim
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+ "http://www.w3.org/TR/REC-html40/strict.dtd">  
+!end_verbatim
+
+Bei Benutzung von Frames:
+!begin_verbatim
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN"
+ "http://www.w3.org/TR/REC-html40/frameset.dtd"> 
+!end_verbatim
+!medskip
+!hline
+!item XHTML 1.0
+
+Bei normalem HTML:
+!begin_verbatim
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "DTD/xhtml1-strict.dtd">
+!end_verbatim
+
+Bei Benutzung von StyleSheets oder Scripts:
+!begin_verbatim
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "DTD/xhtml1-transitional.dtd">
+!end_verbatim
+
+Bei Benutzung von Frames:
+!begin_verbatim
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
+ "DTD/xhtml1-frameset.dtd">
+!end_verbatim
+
+Bei XHTML (!B)muß(!b) der Namensraum mit angegeben sein.
+!begin_verbatim
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+!end_verbatim
+
+Bei XHTML sollte die XML-Deklaration enthalten sein.
+!begin_verbatim
+<?xml version="1.0" encoding="iso-8859-1"?>
+!end_verbatim
+!end_itemize
+!medskip
+!hline
+!subsubnode Ersetzen von Elementen
+(!img [rot1] [Weniger wichtig])~~|~~(!img [gelb2] [schwierig])
+Bei HTML 4.0 und XHTML 1.0 sollten die Elemente (!V)<font>(!v),
+(!V)<center>(!v), (!V)<b>(!v), (!V)<i>(!v) etc. nicht mehr benutzt
+werden sondern nur noch logische Textauszeichnungen bzw. Stylesheets.
+
+!begin_flushleft
+!begin_table [llll] !hline
+Effekt !! HTML 3.2 !! HTML 4.0 !! CSS
+!hline
+fett !! <b> !! <strong> !! <span style="font-weight: bold;">
+kursiv !! <i> !! <em> !! <span style="font-style: italic;">
+type !! <tt> !! <code> !! <span style="font-family: monospace;">
+Unterstrichen !! <u> !! !! <span style="text-decoration: underline;">
+Durchgestrichen !! <strike> !! <del> !! <span style="text-decoration: line-through;">
+Superscript !! <sup> !! <sup> !! <sup>
+Subscript !! <sub> !! <sub> !! <sub>
+!end_table
+!end_flushleft
+
+!begin_itemize
+!item Wohlgeformt sollten alle Versionen sein.
+!item Label sollten innerhalb von Items gesetzt werden können, damit die
+Wohlgeformtheit gewahrt ist.
+!item Bei XHTML müssen alle Elemente klein geschrieben werden.
+!end_itemize
+
+!smallskip
+!hline
+!subsubnode Stylesheet- bzw. Scriptbereiche für einzelne HTML-Dateien (Tobias Jung, Norbert Hanz)
+(!img [rot3] [Sehr wichtig])~~|~~(!img [gelb3] [Leicht])
+Bei einzelnen HTML-Dateien sollte jeder Datei ein eigener Stylesheet-
+bzw. Scriptbereich mitgegeben werden können.
+
+Zwei Möglichkeiten:
+!begin_blist [X)]
+!item [A)] (!V)!begin_style(!v) und (!V)!end_style(!v) bzw. (!nl)
+           (!V)!begin_script(!v) und (!V)!end_script(!v)
+!item [B)] (!V)!style_name foo.css(!v) bzw. (!nl)
+           (!V)!script_name foo.js(!v)
+!end_blist
+welche dann jeweils im Bereich zwischen (!V)<head>(!v) und (!V)</head>(!v)
+eingebunden werden entsprechend
+!begin_verbatim
+<style type="text/css">
+ <!--
+ ...
+ //-->
+</style>
+!end_verbatim
+bzw.
+!begin_verbatim
+<script language="JavaScript" type="text/javascript">
+ <!--
+ ...
+ //-->
+</script>
+!end_verbatim
+!smallskip
+Für XHTML müssen Style- und Scriptbereiche als CDATA markiert werden.
+!begin_verbatim
+<script>
+ <![CDATA[
+ ...
+ ]]>
+</script>
+!end_verbatim
+!smallskip
+Der Vorteil von (!B)Lösung B)(!b) wäre, daß die angegebene Datei im Kopf
+eingebunden würde und zumindest für Skripte die (!B)Lösung A)(!b) das
+Einbinden an genau dem Ort zulassen würde.
+
+(!B)Lösung A)(!b) hat den Vorteil, daß der Benutzer schnell innerhalb eines
+Nodes etwas eintippen kann. UDO könnte dann ggf. den Code entweder in den
+Head-Bereich schreiben oder in eine Datei, die den gleichen Namen trägt
+wie die zugehörige HTML-Datei auch. (!nl)
+Beispiel:
+!begin_verbatim
+!html_name foo
+!begin_style
+ ...
+!end_style
+!end_verbatim
+würde ergeben
+!begin_verbatim
+<style type="text/css">
+ <!--
+ ...
+ //-->
+</style>
+!end_verbatim
+oder
+!begin_verbatim
+<link rel="stylesheet" type="text/css" href="foo.css">
+!end_verbatim
+
+!smallskip
+!hline
+!subsubnode Einbinden von Stylesheets und JavaScript über alle Dateien.
+(!img [rot3] [Sehr wichtig])~~|~~(!img [gelb3] [Leicht])
+!begin_enumerate !short
+!item Cascading Style Sheets
+!begin_verbatim
+!html_style_name foo.css [inline]
+!end_verbatim
+!smallskip
+Ist das Wort (!V)inline(!v) gesetzt, wird der Inhalt innerhalb der
+HTML-Datei eingefügt.
+!begin_verbatim
+<style type="text/css">
+ <!--
+ ...
+ //-->
+</style>
+!end_verbatim
+!smallskip
+Ist das Wort (!V)inline(!v) (!U)nicht(!u) gesetzt wird die Datei
+(!V)foo.css(!v) als Link eingebunden.
+!begin_verbatim
+<link rel="stylesheet" type="text/css" href="foo.css">
+!end_verbatim
+!medskip
+!item JavaScript
+!begin_verbatim
+!html_script_name foo.js [inline]
+!end_verbatim
+!smallskip
+Ist das Wort (!V)inline(!v) gesetzt, wird der Inhalt innerhalb der
+HTML-Datei eingefügt.
+!begin_verbatim
+<script language="JavaScript" type="text/javascript">
+ <!--
+ ...
+ //-->
+</script>
+!end_verbatim
+!smallskip
+Ist das Wort (!V)inline(!v) (!U)nicht(!u) gesetzt wird die Datei
+(!V)foo.js(!v) als Link eingebunden.
+!begin_verbatim
+<script language="JavaScript" src="foo.js" type=text/javascript">
+</script>
+!end_verbatim
+!end_enumerate
+!smallskip
+!subsubheading Eingeführt in r6pl15 für Stylesheets und Script in allen Dateien.
+
+!smallskip
+!hline
+!subsubnode Extensionen von HTML-Dateien (Norbert Hanz)
+(!img [rot1] [Weniger wichtig])~~|~~(!img [gelb3] [Leicht])
+...
+
+Desweiteren sollte es möglich sein, direkt aus dem Inhalts!-verzeichnis
+auf fremde Dateien verweisen zu können. Zu diesem Zweck müßte UDO
+einen neuen Nodetyp benutzen, der keine Datei erstellt. Folgender
+Vorschlag (in Anlehnung an das Wort ""Graphik"", kann aber jeder
+beliebige Typ sein)
+!begin_verbatim
+!gnode Vektorbild Graphik.svg
+!end_verbatim
+ergibt
+!begin_verbatim
+...
+<li> 3 <a href="Graphik.svg">Vektorbild</a></li>
+...
+!end_verbatim
+Bei anderen Zielformaten kann, je nach Umsetzung in der Ziel!-applikation,
+ein Kapitel entweder nur mit dem Namen der Graphik oder u.U. auch
+mit der Graphik selbst erstellt werden.
+
+!smallskip
+!hline
+!subsubnode Textformatierung (Stefan Kuhr)
+(!img [rot1] [Weniger wichtig])~~|~~(!img [gelb3] [Leicht])
+Absätze lassen sich mittels CSS einrücken. Grundsätzlich sind zwei
+Möglichkeiten zu bedenken:
+!begin_enumerate !short
+!item Einrücken aller Absätze
+!item Einrücken bestimmter Absätze
+!end_enumerate
+
+Für 1) ist die Lösung relativ einfach, man schreibt in den Style-Bereich
+der HTML-Datei bzw. in die CSS-Datei folgendes:
+!begin_verbatim
+ p { text-indent: 7.5mm; }
+!end_verbatim
+
+!smallskip
+Für 2) ist die Ausführung komplizierter, da dafür jedem Absatz entweder
+ein class- oder ein id-Attribut mitgegeben werden muss.
+!begin_verbatim
+<p class="einrueckung">foo</p>
+<p id="absatz131">foo</p>
+!end_verbatim
+
+!smallskip
+Eine weitere Möglichkeit wäre es, dem Absatz direkt die Style-Angabe
+mitzugeben:
+!begin_verbatim
+<p style="text-indent:7.5mm">foo</p>
+!end_verbatim
+
+!smallskip
+!hline
+!subsubnode Übergabe von zusätzlichen Attributen (Norbert Hanz)
+(!img [rot2] [Wichtig])~~|~~(!img [gelb2] [Schwierig])
+Einbindung von zusätzlichen Attributen für jedes Kommando in HTML (!nl)
+(!T)class, name, id(!t)
+!begin_verbatim
+!subnode Einführung [class="einfuehrung"]
+!end_verbatim
+ergibt für HTML
+!begin_verbatim
+<h2 class="einfuehrung">Einf&uuml;hrung</h2>
+!end_verbatim
+Das hat den Vorteil, daß man per CSS oder JavaScript auf jedes einzelne
+HTML-Tag zugreifen kann. Man könnte dann auch EventHandler benutzen.
+Man könnte statt (!V)class(!v) natürlich auch (!V)id(!v) benutzen.
+Ergibt die Übergabe von Begriffen für andere Zielformate auch Sinn?
+Sollte man die Syntax dann verallgemeinern?
+
+!smallskip
+!subsubsubheading Modern-Layout
+(!img [rot1] [Weniger wichtig])~~|~~(!img [gelb3] [Leicht])
+Die Navigationsleiste die UDO beim Modern-Layout erstellt ist zur
+Navigation gut geeignet, beim Ausdruck stört der Rand jedoch z. T.
+ganz massiv, da viel Platz zum Drucken verloren geht, vor allem da,
+wo gar keine Navigations!-leiste mehr zu sehen ist.
+
+Daher sollte UDO die linke Spalte mit einem class-Attribut versehen,
+über das man beim Aus!-drucken die Breite der Spalte mit Hilfe von
+CSS auf Null reduzieren kann.
+
+
+!smallskip
+!hline
+!subsubnode Beziehung zu anderen Projektdateien
+(!img [rot1] [Weniger wichtig])~~|~~(!img [gelb3] [Leicht])
+Die von CAB und AFAIK auch iCab unterstützte Darstellung von Abhängigkeiten
+der Dateien eines Projektes sollte noch besser unterstützt werden. Daher
+folgender Vorschlag zur Erweiterung.
+
+!begin_itemize
+!item Unterstützung aller(?) im HTML-Standard festgelegten Verweise. Die
+      Verweise werden wie folgt umgesetzt:
+!begin_verbatim
+<link rel="..." href="..." title="...">
+!end_verbatim
+      Dabei sind folgende Verweise festgelegt:
+      !begin_itemize !short
+      !item ...
+      !item chapter (Node)?
+      !item section (Subnode)?
+      !item subsection (Subsubnode)?
+      !item index (Stichwortverzeichnis)*
+!begin_verbatim
+!html_name index.htm(l), index.php
+!end_verbatim
+      !item glossary (Glossar)*
+!begin_verbatim
+!html_name glossar.htm(l), glossar.php
+!end_verbatim
+      !item appendix (Anhang)
+      !item copyright (falls nicht vorhanden die UDO-Seite)*
+!begin_verbatim
+!html_name copyright.htm(l), copyright.php
+!end_verbatim
+      !item ...
+      !item help (Eine Hilfe-Seite)*
+!begin_verbatim
+!html_name help.htm(l), help.php
+!end_verbatim
+      !item bookmark (lässt sich wohl nur dynamisch vergeben)
+      !item ...
+      !item search (Suchseite)
+!begin_verbatim
+!html_name search.htm(l), search.php
+!end_verbatim
+      !item ...
+      !end_itemize
+!end_itemize
+
+
+!smallskip
+!hline
+!subsubnode Titel für Datei
+(!img [rot2] [Wichtig])~~|~~(!img [gelb3] [Leicht])
+Die Angabe des Titels einer Seite sollte zukünftig folgendermaßen
+angegeben werden (siehe auch (!link [Erklärung bei RTF] [Title-RTF]):
+
+In HTML wird es folgendermaßen umgesetzt:
+!begin_verbatim
+!docinfo [html] [title] Ein Buch über UDO
+!end_verbatim
+ergibt
+!begin_verbatim
+<title>Ein Buch &uuml;ber UDO</title>
+!end_verbatim
+(!V)!/html_title(!v) würde damit obsolet.
+
+!smallskip
+!hline
+!subsubnode Smart-Tags
+(!img [rot2] [Wichtig])~~|~~(!img [gelb3] [Leicht])
+Die Smart-Tags des MSIE 6 bzw. Office XP haben in der letzten Zeit ja
+viel Staub aufgewirbelt, da dadurch Webseiten quasi verfälscht werden
+können. Daher gibt es die Möglichkeit für Autoren zu verhindern, daß
+Smart-Tags eingesetzt werden. Dies kann folgendermaßen umgesetzt werden:
+!begin_verbatim
+!docinfo [html] [smartprevent] true
+!end_verbatim
+ergibt
+!begin_verbatim
+<meta name="MSSmartTagsPreventParsing" content="TRUE">
+!end_verbatim
+Dadurch wird die Nutzung von Smart-Tags ermöglicht. Standardmäßig
+ist keine (!nolink [Ausgabe]), das heißt "false".
+
+So sehr die Smart-Tags im Internet stören, so sinnvoll können sie
+in Intranets sein. Als Beispiel möchte ich hier ein Gesetzes!-kataster
+geben, in dem alle für ein Unter!-nehmen wichtigen Gesetze aufgelistet
+sind. Aus anderen Dokumenten (Projekten) soll jetzt auf einzelne
+Gesetze bzw. den Gesetzes!-bestand zuge!-griffen werden. Zu diesem
+Zweck müssen in den anderen Dokumenten extra Links auf die Dateien
+des Gesetzes!-katasters angelegt werden. Die Smart-Tags könnten
+genau diese Aufgabe übernehmen, wenn UDO aus dem Quell!-text des
+Gesetzes!-katasters eine XML-Datei mit den Smart-Tags anlegen würde.
+
+!smallskip
+!hline
+!subsubnode Fuß-/Endnoten (Othmar Bahner)
+(!img [rot2] [Wichtig])~~|~~(!img [gelb2] [Schwierig])
+Fußnoten werden bei der HTML-Ausgabe bisher direkt im Text in
+Klammern hinter dem Begriff ausgegeben.
+
+Um den Lesefluß nicht zu unterbrechen, besteht die Möglichkeit, daß
+die Fußnoten, ähnlich wie bei gedruckten Medien, am Ende der Datei
+aufgelistet werden, mit Links aus dem Text auf die Fußnoten oder
+die Verlagerung in eine Extra-Datei, dann quasi als Endnoten,
+ebenfalls mit Verknüpfungen.
+
+Als Beispiel für den ersten Fall(!raw [html] [<a href="#fn1"><sup>1</sup></a>])
+soll dieser Satz dienen.
+
+!begin_ignore
+!smallskip
+!hline
+!subsubnode Interne Links
+(!img [rot1] [Weniger wichtig])~~|~~(!img [gelb2] [Schwierig])
+Wenn innerhalb des Textes auf ein anderes (Unter-)Kapitel verwiesen wird,
+wäre es schön, wenn UDO wahlweise die Nummer des Kapitels bzw. den Titel
+des Kapitels automatisch eintragen könnte. Zu diesem Zweck könnten zwei
+neue Kommandos eingeführt werden.
+!begin_verbatim
+...und es gibt auch eine Seite über (!nlink [Bugs] [Bugs]) und...
+!end_verbatim
+!end_ignore
+
+!smallskip
+!hline
+!subsubnode Erzeugung von META-Tags (Ulrich Kretschmer)
+(!img [rot2] [Wichtig])~~|~~(!img [gelb3] [Leicht])
+Erzeugung von HTML-Metatags mittels (!V)!/html_meta_name [name] [content](!v)
+
+Problem: Wie soll hierbei unterschieden werden, ob <META NAME=...
+oder <META HTTP-EQUIV=... erzeugt werden soll? Vorschlag:
+(!V)!/html_meta(!v) erzeugt <META NAME=... und (!V)!/html_meta_equiv(!v)
+erzeugt <META HTTP-EQUIV=...  
+
+Funktionalität: Es wird unterschieden zwischen globalen und
+lokalen Meta-Tags. Globale Metatags werden im Vorspann gesetzt
+und gelten für alle Nodes. Lokale Meta-Tags gelten nur für den
+aktuellen Node.
+
+Lokale Metatags können globale ""überschreiben"". Das bedeutet:
+Sobald UDO auf einen lokalen Metatag trifft, muß es diesen
+gegen die gespeicherten globalen prüfen (je nach Inhalt von
+""name""!) und den globalen ggf. unterdrücken.
+
+Beispiel: (!nl)
+global: (!V)!/html_meta_name [Language] [de_de](!v) -> grundsätzlich
+ist alles deutsch... (!nl)
+lokal: (!V)!/html_meta_name [Language] [en_en](!v) -> aber diese eine
+Seite ist jetzt englisch. Sollte die Sprache nicht besser dem
+Node zugeordnet sein statt dafür ein extra Kommando zu setzen?
+UDO würde das HTML-Ergebnis auch daraus erzeugen können (siehe
+auch (!xlink [Mehrsprachigkeit] [E-Allgem.html#HTML_20und_20Sprachen])).
+
+Sonderfall: Behandlung von Metatags bei Verwendung von
+(!V)!/html_merge_nodes(!v), (!V)!/html_merge_subnodes(!v),
+(!V)!/html_merge_subsubnodes(!v), (!V)!/html_merge_subsubsubnodes(!v):
+Die jeweiligen lokalen Metatags ignorieren (z.~B. bei
+(!V)!/html_merge_subnodes(!v) die Metatags in den Subnodes und
+Subsubnodes (und weiteren künftigen  Gliederungsebenen) ignorieren).
+
+Ein Metatag, mit dem der Zeichensatz gesetzt wird, sollte
+auch zulässig sein. (Es sollen ja künftig verschiedene
+Codepages unterstützt werden; dabei müßte von Programm
+auch der Zeichensatz-Metatag automatisch passend gesetzt
+werden. Durch das Setzen eines Zeichensatz-Metatags könnte
+man dieser Automatik ins  Handwerk pfuschen; für diesen
+Fall sollte ggf. eine Fehlermeldung vorgesehen werden.)
+
+Der Meta-Tag für ""Generator"" sollte weiterhin automatisch
+gesetzt werden. Wird allerdings im Vorspann ein leerer
+Generator-Metatag definiert - also (!V)!/html_meta_name  [Generator] [](!v)
+-- so wird dieser Automatismus unterdrückt. Ansonsten sollte
+generell bei leerem ""content"" eine Warnmeldung und bei
+leerem ""name"" eine Fehlermeldung kommen.
+
+Die von UDO automatisch erzeugten Meta-Tags ""Email"" und
+""Author"" werden als impliziter globaler Metatag behandelt,
+d.h. kann durch lokale überschrieben werden. (Übernimmt
+UDO noch weitere Daten von (!V)!/docinfo(!v) in die Metatags??)
+
+Die Funktion von (!V)!/html_keywords(!v) sollte unverändert
+erhalten bleiben. Wird zusätzlich zu (!V)!/html_keywords(!v)
+auch (!V)!/html_meta [keywords] [Blabla](!v) verwendet, so
+wird eine  Fehlermeldung erzeugt und (!V)!/html_meta_name [keywords] [...](!v)
+ignoriert.
+
+Der Text von [name] sollte unverändert übernommen werden (evtl.
+Warnung, falls Sonderzeichen enthalten?). Beim [content] sollten
+Sonderzeichen entsprechend (!V)!/code(!v) umgesetzt werden, wie
+dies auch bei (!V)!/html_keywords(!v) der Fall ist.
+
+Beispiele für häufig benötigte Metatags:
+!begin_itemize
+!item (!V)!/html_meta_name [Description] [....](!v) (!nl)
+      Der Description-Text sollte auf 1000 (oder 1024) Zeichen
+      beschränkt werden; Fehlermeldung bei Überschreitung.
+      (Diesen Meta-Tag wird man üblicherweise lokal setzen.)
+!item (!V)!/html_meta_name [Language] [de_de])(!v) -> <META NAME="LANGUAGE" CONTENT="de-de"> (!nl)
+      Dieser Metatag könnte auch automatisch gesetzt werden, durch
+      die künftigen Sprachdefinitionen.
+!item (!V)!/html_meta_name [Built] [...])(!v) -> <META NAME="BUILT" CONTENT="Sun, 22 Mar 1998 19:27:00 GMT"> (!nl)
+      Dieser Meta-Tag könnte eigentlich von UDO automatisch gesetzt
+      werden. (Datumsformat: lt. HTML4.0-Doku gemäß RFC2068 bzw.
+      ISO8601.) - Zeitzone unter allen  Betriebssystemen verfügbar??)
+!item (!V)!/html_meta_equiv [pragma] [no-cache](!v) -> <META http-equiv="pragma" content="no-cache"> * !html_meta [Revisit] [after 3 days] -> <META NAME="Revisit" CONTENT="after 3 days"> * !html_meta [robots] [noindex,follows] -> <META NAME="robots" content="noindex,follows"> * !html_meta_http [Refresh] [10; URL=http://www.umleitung.de/] -> <META http-equiv="Refresh" content="...">
+!end_itemize
+
+ToDo: Einige Webseiten zum Thema Meta-Tags finden und in der
+künftigen Doku darauf verweisen.
+
+Problem: Metatags der Form <META scheme="ISBN" name="identifier"
+content="0-8230-2355-9"> sind mit den obigen Befehlen nicht
+darstellbar (Beispiel aus der HTML4-Doku). (!nl)
+Frage: braucht das jemand von den UDO-Benutzern??? Notfalls wären
+solche Spezialitäten mit einem raw-Kommando darstellbar, das in
+den HTML-Header schreibt. Oder schlimmstenfalls noch eine neue
+Kommandovariante: (!V)!/html_meta_scheme [...] [...] [...](!v)
+
+Anderes Problem: Laut HTML4-Doku ist folgendes zulässig (Beispiel
+aus der Doku/siehe auch (!xlink [Mehrsprachigkeit] [E-Allgem.html#HTML_20und_20Sprachen])):
+!begin_verbatim
+<-- For speakers of US English -->
+ <META name="keywords" lang="en-us" content="vacation, Greece, sunshine">
+<-- For speakers of British English -->
+ <META name="keywords" lang="en" content="holiday, Greece, sunshine">
+<-- For speakers of French -->
+ <META name="keywords" lang="fr" content="vacances, Gr&egrave;ce, soleil">
+!end_verbatim
+Dies geht mit dem derzeitigen (!V)!/html_keywords(!v) nicht, auch nicht
+mit dem oben vorgeschlagenen (!V)!/html_meta.(!v) ?? Wird sowas für
+UDO benötigt?? Wenn ja, Erweiterungsvorschlag für (!V)!/html_keywords(!v):
+neu: (!V)!/html_keywords [sprache] keyword1, keyword2, ... keywordn(!v)
+wobei ""sprache"" ein (!B)optionaler(!b) Parameter sein müßte. UDO muß
+dann pro Node UND pro Sprache eine separate Keywordliste verwalten.
+
+!smallskip
+!hline
+!subsubnode Ungeordnet (HTML)
+!begin_itemize
+!item Mit (!V)!/udo_link(!v) soll nicht mehr auf Dirk's Homepage sondern
+      auf udo-open-source.org verwiesen werden
+!item Umbenennung der zwei Frames von ''udoctoc'' und ''udocon'' zu
+      sprechenderen Namen
+!item Links aus Frames frei zuweisen zu anderen Frames bzw. neuem Fenster ~~(Günter Hanke)
+!item Kennzeichnung des Inhaltsverzeichnisses beim modern_layout ~~(Stefan Kuhr)
+!begin_itemize !short
+!item HTML --> bgcolor
+!item CSS --> background-color
+!end_itemize
+!item Seite mit Index für HTML ~~(Norbert Hanz) (!nl)
+      brauchbar für Dokumente in Intranets
+!item Inhaltsverzeichnis ohne Punkte ~~(Norbert Hanz)
+!item (!/ilink ...) auch für externe Verweise
+!item (!V)!/pnode(!v) für HTML (mit JavaScript) umsetzen ~~(Norbert Hanz)
+!item Abstände zwischen Umgebungen und dem sie umgebenden Fließtext
+      besser umsetzen ~~(Norbert Hanz)
+!end_itemize
+
+!medskip
+!hline
+!subsubnode Bugs (HTML)
+!begin_itemize
+!item Die Größe des Bildchens, das UDO bei (!V)!/toplink(!v) anlegt,
+      wird zu groß berechnet (32x32 statt 16x16)
+!item Wenn ein interner Link auf ein Label ""Hallo"" in einer Datei
+      (!V)a.ui(!v) zeigt, die in die Datei (!V)b.ui(!v) eingebunden
+      wird so setzt UDO den Link falsch. Statt (!V)<a href="b.html#Hallo">(!v)
+      setzt UDO (!V)<a href="a.html#Hallo">(!v). Die Datei (!V)a.html(!v)
+      existiert aber gar nicht.
+!item Kommen in einem Projekt mehrere Unterkapitel vor, die den
+      gleichen Namen tragen, so führen alle Links im Inhalts!-verzeichnis
+      immer auf das erste vorkommende Unter!-kapitel, die anderen
+      Unterkapitel gehen leer aus.
+!item Der Abstand der Absätze bei Umgebungen, besonders bei der
+      Enumerate-Umgebung ist alles andere als sinnvoll. Je nachdem,
+      ob man (!V)!/short(!v) setzt oder nicht, werden alle Absätze
+      innerhalb der Umgebung entsprechend behandelt nicht nur die,
+      die vor einem neuen Auf!-zählungs!-punkt stehen. Auch das Ende
+      einer Liste hat oft einen zu langen oder kurzen Abstand.
+!item Zu lange Überschriften werden nicht automatisch auf potentielle
+      Quellen verlinkt (Anmerkung: Die Einträge in einem selbst!-erstellten
+      Inhalts!-verzeichnis werden nicht mit Links auf die Kapitel
+      versehen.)
+!item Macros/Defines in Überschriften verursachen Fehler in der
+      Numerierung der Überschriften (Anmerkung: Da ich das zur Zeit
+      mit CAB nicht nachvollziehen kann, könnte es auch am Javascript
+      Code im Makro liegen.)
+!item Setzt man im Text einfache Anführungszeichen, dann sieht das
+      in der HTML-Ausgabe nicht sonderlich schön aus. Könnte man
+      eventuell ändern.
+!item Setzt man (!V)!/html_frames_position top(!v), wird kein Abstand
+      zwischen den Navigationslinks gesetzt.
+!end_itemize
+
+!medskip
+
+!ifdest [html]
+!begin_raw
+<h3>Fu&szlig;noten</h3>
+<hr align="left" width="20%">
+<a name="fn1">&nbsp;<sup>1&nbsp;</sup>Hierbei handelt es sich auf
+keinen Fall um den Nominativ!</a>
+!end_raw
+!medskip
+!endif

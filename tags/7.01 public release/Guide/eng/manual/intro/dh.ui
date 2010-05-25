@@ -1,0 +1,41 @@
+############################################################
+# @(#) Konatktadresse, 19.10.1995, Dirk Hagedorn
+# 22.01.1996: Kein Popupnode mehr, dafuer weitere Infos
+############################################################
+
+!subnode Contact addresses
+
+!ifdest [tex]
+# You cannot link to nodes when using LaTeX
+# So we have to make a label with the same name
+!label Contact addresses
+!endif
+
+If you want to register UDO, if you want have questions, if you want to
+make any suggestions or if you want to report bugs please use one of the
+following addresses. If possible contact me via email.
+
+!label Address
+!label Dirk Hagedorn
+
+!begin_xlist [World Wide Web:]
+
+!item	[Address:]
+		Dirk Hagedorn 	(!nl)
+		Asmecke 1		(!nl)
+		59846 Sundern	(!nl)
+		Germany
+
+!item	[Telephone/Fax:]
+		+49 2933 77979
+
+!item	[MausNet:]
+		Dirk Hagedorn @ MK2 (no mails > 16 KB)
+
+!item	[Internet:]
+		DirkHage@aol.com
+
+!item	[World Wide Web:]
+		(!T)http://members.aol.com/DirkHage/www/index.htm(!t)
+
+!end_xlist

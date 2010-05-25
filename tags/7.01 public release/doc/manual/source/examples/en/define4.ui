@@ -1,0 +1,8 @@
+!ifdest [tex]
+  !define lb \linebreak[(!1)]
+!else
+  !define lb (!2)
+!endif
+[...]
+Tell (!LaTeX) a good place
+(!lb [2]) for breaking lines.

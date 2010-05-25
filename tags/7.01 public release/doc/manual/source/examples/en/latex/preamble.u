@@ -1,0 +1,15 @@
+!no_preamble [tex]
+
+# Uncomment the following line for LaTeX 2.09
+# !tex \documentstyle[12pt]{article}
+
+# Uncomment the following lines for LaTeX2e
+!tex_2e
+!raw [tex] \documentclass[12pt,a4paper]{article}
+!raw [tex] \usepackage{a4}
+
+!begin_document
+!node Example
+This example uses a userdefined (!LaTeX) preamble.
+!end_document
+

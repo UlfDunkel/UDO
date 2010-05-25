@@ -1,0 +1,684 @@
+History.ui
+
+
+
+Changes done by Norbert Hanz (04.04.2002)
+
+
+
+!subsubheading abo.c
+
+
+
+!begin_itemize !short
+
+!item Die Ausgabe in abo.c kann derzeit von der Postscript-Ausgabe nicht benutzt
+
+      werden, da diese keine zentrierte bzw. rechts!-bndige Ausgabe zul„sst.
+
+      Deshalb wird die Standard!-ausgabe verhindert und statt!-dessen eine eigene
+
+      Ausgabe formuliert.
+
+!end_itemize
+
+
+
+!subsubheading chr.c
+
+
+
+!begin_itemize !short
+
+!item Trennzeichen ((!V)&shy;(!v)) fr die Worttrennung in HTML eingefgt
+
+!item Neue Funktion ""specials2html"", hier werden die Gedankenstriche und
+
+      die drei Auslassungspunkte gesetzt.
+
+!item Funktion ""node2postscript"" um einige Zeichen, die ein Post!-script-Inter!-preter
+
+      als Teil des Codes inter!-pretieren wrde, abzufangen.
+
+!end_itemize
+
+
+
+!subsubheading chr_tos.h
+
+
+
+!begin_itemize !short
+
+!item Bedingte Kompilierung fr TOS eingebaut, da hier der falsche Code fr das
+
+      """" ausge!-geben wurde.
+
+!end_itemize
+
+
+
+!subsubheading env.c
+
+
+
+!begin_itemize !short
+
+!item Absatzkontrolle (Orphans & Widows) wird fr die RTF-Ausgabe standard!-m„ig
+
+      eingeschaltet.
+
+!item Neue lokale Variable fr das Papierformat bei der Postscriptausgabe. (!nl)
+
+      Derzeit werden die Formate A3, A4 und A5 jeweils im Format ''Portrait'' und
+
+      ''Landscape'' unter!-sttzt. Dies mu sicher!-lich noch fr die anderen
+
+      Ausgabe!-formate erweitert werden.
+
+!item Description-Umgebung wird jetzt untersttzt
+
+!begin_itemize !short
+
+!item Erweiterung in ""c_begin_description"".
+
+!item Erweiterung in ""c_item"" Dort wurde der alte Code durch neuen Code ersetzt.
+
+!item Erweiterung in ""c_end_description""
+
+!end_itemize
+
+!item List-Umgebung wird jetzt untersttzt
+
+!begin_itemize !short
+
+!item Erweiterung in ""c_begin_list"".
+
+!item nderung in der Funktion ""c_item"". Die Items werden jetzt direkt geschrieben.
+
+      Zus„tzlich wurde die Listenart ''Typewriter'' hinzugefgt.
+
+!item Erweiterung in ""c_end_list"".
+
+!end_itemize
+
+!item Beginn des Dokumentes neu gestaltet in der Funktion ""c_begin_document""
+
+!begin_itemize !short
+
+!item Das Papierformat wird gesetzt entsprechend der Angaben in
+
+      (!V)!/doclayout [ps] [paper] foo(!v).
+
+!item Der Proportionalfont wird gesetzt, entsprechend der Angaben in
+
+      (!V)!/doclayout [ps] [propfontname] foo(!v)
+
+!item Die Gr”e des Zeichensatzes wird gesetzt entsprechend der Angaben in
+
+      (!V)!/doclayout [ps] [propfontsize] foo(!v)
+
+!item Fr die Standard-Kopfzeile wird aus ""Titel"" und ""Programm""
+
+      (!V)(!/docinfo)(!v) ein Text erstellt.
+
+!item Fr die Standard-Fusszeile wird aus ""Author"" (!V)(!/docinfo)(!v)
+
+      ein Text erstellt.
+
+!item Aus den Angaben aus (!V)(!/docinfo)(!v) werden die Angaben fr die
+
+      Dokumenten!-informationen einer PDF-Datei zusammen!-gestellt
+
+      (!T)(/DOCINFO pdfmark)(!t).
+
+!item Aus den Angaben von (!V)!/doclayout [ps] [openMode] foo(!v) werden
+
+      die Angaben fr das ™ffnen der PDF-DAtei zusammen!-gestellt.
+
+!item Zum Schluss werden die Bookmarks fr die PDF-Datei erzeugt.
+
+!end_itemize
+
+!item Erweiterung in ""c_end_document"" fr die Ausgabe der Seite ""About UDO"",
+
+      da die normale Ausgabe nicht benutzt werden kann (keine zentrierte Ausgabe).
+
+      Ist ""deutsch"" die Ziel!-sprache wird der deutsche Text ausgegeben
+
+      ansonsten der englische Text.
+
+!item Umbenennung der Aufz„hlungszeichen in der Funktion ""init_env_itemchar"",
+
+      da die ursprng!-lichen Zeichen nicht so gut aussahen.
+
+!end_itemize
+
+
+
+!subsubheading tp.h
+
+
+
+!begin_itemize !short
+
+!item Zwei neue Strukturen fr das Papierformat und die Layoutdaten.
+
+!item Neues #define MAXPAPERSIZE
+
+!end_itemize
+
+
+
+!subsubheading par.c
+
+
+
+!begin_itemize !short
+
+!item Neue Funktion ""convert_link_ps"" fr interne Verweise in Postscript/PDF.
+
+!item Erweiterung in der Funktion ""c_link"" fr interne Verweise innerhalb
+
+      einer PDF-Datei.
+
+!item Ereiterung in der Funktion ""c_url"" fr WWW-Verweise. (!nl)
+
+      Fr die Ausgabeformate Postscript/PDF, WinHelp und RTF wird jetzt
+
+      auch das Kommando (!V)(!/url [])(!v) umgesetzt.
+
+!item Erweiterung in der Funktion ""c_xlink"" fr externe Verweise in andere
+
+      PDF-Dateien (Verweise auf ""Named Destinations"" gehen noch nicht).
+
+!item Bei der RTF-Ausgabe wurde der Index gar nicht ausgegeben.
+
+!item Erweiterung in der Funktion ""c_index"" zur Sicherung der
+
+      Index-Eintr„ge (!V)(!/index [])(!v) in der Projekt-Datei.
+
+!item Erweiterung in der Funktion ""c_single_index"" zur Sicherung der
+
+      Index-Eintr„ge (!V)(!/idx [])(!v) in der Projekt-Datei.
+
+!item Erweiterung in der Funktion ""c_double_index"" zur Sicherung der
+
+      Index-Eintr„ge (!V)(!/idx [] [])(!v) in der Projekt-Datei.
+
+!item Erweiterung in der Funktion ""c_tripple_index"" zur Sicherung der
+
+      Index-Eintr„ge (!V)(!/idx [] [] [])(!v) in der Projekt-Datei.
+
+!item Erweiterung in der Funktion ""c_quadruple_index"" zur Sicherung der
+
+      Index-Eintr„ge (!V)(!/idx [] [] [] [])(!v) in der Projekt-Datei.
+
+!end_itemize
+
+
+
+!subsubheading str.h
+
+
+
+!begin_itemize !short
+
+!item Neue Struktur ""size_brackets""
+
+!end_itemize
+
+
+
+!subsubheading str.c
+
+
+
+!begin_itemize !short
+
+!item Neue Funktion ""get_two_brackets_ptr"" zur Ermittlung der Daten fr das
+
+      neue Kommando (!V)!/doclayout [format] [foo] bla(!v).
+
+!end_itemize
+
+
+
+!subsubheading sty.c
+
+
+
+!begin_itemize !short
+
+!item Erweiterung in der Funktion ""c_internal_styles"". Funoten fr Postscript
+
+      werden jetzt untersttzt.
+
+!end_itemize
+
+
+
+!subsubheading tab.c
+
+
+
+!begin_itemize !short
+
+!item Erweiterungen in der Funktion ""table_output_general"", damit auch fr
+
+      Postscript die Tabellen leserlich ausgegeben werden.
+
+!item Funktion ""auto_quote_chars"" wird nicht mehr aufgerufen bei Postscript,
+
+      da sonst die Klammern bei der Ausgabe der Tabellen gequoted werden
+
+!end_itemize
+
+
+
+!subsubheading toc.h
+
+
+
+!begin_itemize !short
+
+!item Neue Eintr„ge in Struktur TOCITEM fr die Style-, Script- und FavIcon-Dateien (!nl)
+
+      style_name, script_name, favicon_name
+
+!item Neue Variable ""current_node_name_sys"" zur zeitweiligen Speicherung des
+
+      Node-Namens im System!-zeichen!-satz
+
+!end_itemize
+
+
+
+!subsubheading toc.c
+
+
+
+!begin_itemize !short
+
+!item Erweiterung in der Funktion ""string2reference"" zum Setzen eines Verweises.
+
+!item Erweiterungen in der Funktion ""output_html_meta"" durch (!V)<link>(!v)
+
+      fr die HTML-Ausgabe:
+
+!begin_itemize !short
+
+!item Setzen eines allgemeinen Stylesheets
+
+!item Setzen eines allgemeinen Links auf eine JavaScript-Datei
+
+!item Setzen eines Links auf ein allgemeines Favoriten-Icon
+
+!item Setzen der Links fr (!T)contents, start, first, previous, prev, next, last(!t)
+
+      und (!T)copyright(!t) (!nl)
+
+      Die Links fr (!T)first(!t) und (!T)last(!t) sowie (!T)previous(!t) gelten
+
+      nur fr CAB (evtl. iCab). Der Link fr (!T)copyright(!t) zeigt auf aboutudo
+
+      und wird auch nur dann angelegt. (!nl)
+
+      CAB untersttzt beim Tag (!v)<link>(!v) leider nicht das Attribut (!v)target(!v).
+
+      Daher funktionieren die Links bei der Benutzung von Frames nicht so sch”n.
+
+!end_itemize !item nderungen in den Funktionen ""make_node"", ""make_subnode"", 
+
+""make_subsubnode""
+
+      und ""make_subsubsubnode"". Zeichen!-satz wird nicht mehr gewechselt.
+
+      Zeichen!-satz!-gr”e wird ggf. angepasst. Der Node-name wird als Named Destination
+
+      gesetzt.
+
+!item Neue Funktion ""bookmarks_ps"" zur Ausgabe der Bookmarks in PDF-Dateien. Die
+
+      Funktion orientiert sich an der Ausgabe des Inhalts!-ver!-zeich!-nisses.
+
+!item Erweiterung in der Funktion ""c_tableofcontents"" zur Ausgabe eines
+
+      Inhalts!-verzeich!-nisses. Die Erweiterung, die da pl”tzlich aufgetaucht ist,
+
+      habe ich erstmal auskommentiert.
+
+!item Erweiterung in der Funktion ""c_label"". Fr (!V)!/label(!v) wird ein
+
+      Named Destination gesetzt.
+
+!item Neue Funktionen ""set_html_style"" zum Setzen der Stylesheets fr HTML.
+
+!item Neue Funktionen ""set_html_script"" zum Setzen der Scripte fr HTML.
+
+!item Neue Funktionen ""set_html_favicon"" zum Setzen der Favoriten-Icons fr HTML.
+
+!item Erweiterung in der Funktion ""init_new_toc_entry"" zur Ausgabe der
+
+      Node-Namen in die Projekt-Datei (*.upr).
+
+!item nderung in der Funktion ""init_toc_forms_numbers"" und 
+
+""init_toc_forms_no_numbers""
+
+      fr die Ausgabe von Inhalts!-ver!-zeich!-nissen.
+
+!item Erweiterung in der Funktion ""add_label"" zum Setzen der Label in der
+
+      Projektdatei. Es werden nur die Label gesetzt, die keine Nodes sind.
+
+!item Erweiterung in der Funktion ""add_alias"" zum Setzen der Alias in der
+
+      Projektdatei.
+
+!item Erweiterung in der Funktion ""html_save_frameset"". Es wird ein Bereich
+
+      <noframes></noframes> gesetzt, damit auch Browser, die gar keine Frames
+
+      kennen/k”nnen (z.~B. beim Vorlesen) an das Inhalts!-ver!-zeichnis kommen.
+
+!item In der Funktion ""tocline_make_bold"" den Part fr die Postscript-Ausgabe
+
+      rausgenommen, da das IMHO etwas bl”de aussieht. Not!-falls mte man das
+
+      nochmal besser formulieren, wenn klar ist was damit erezugt werden soll.
+
+!end_itemize
+
+
+
+!subsubheading tp.c
+
+
+
+!begin_itemize !short
+
+!item Neue Funktion ""set_doclayout"" fr das Setzen der Angaben von (!V)!/doclayout(!v)
+
+!item Erweiterung in der Funktion ""c_maketitle"" zur Erstellung der Titelseite
+
+      fr die Postscriptausgabe.
+
+!end_itemize
+
+
+
+!subsubheading udo.c
+
+
+
+!begin_itemize !short
+
+!item Die Kommandos (!V)!/html_style_name(!v), (!V)!/html_script_name(!v) und
+
+      (!V)!/html_favicon_name(!v) in die Struktur UDOCOMMAND eingetragen.
+
+!item Erweiterung in den Funktionen ""c_bigskip"", ""c_medskip"" und ""c_smallskip"".
+
+      Hier werden jetzt bei der Postscript!-ausgabe entsprechend viele (!B)newline(!b)
+
+      ausgegeben.
+
+!item Kleine Erweiterung in der Funktion ""token_output"", weil sonst in Listen
+
+      und Aufz„hlungen die erste Zeile immer um ein Zeichen eingerckt wurde.
+
+!item nderung in der Funktion ""token_output"". Bei der Postscriptausgabe wird
+
+      jetzt fr die kompri!-mierte Umgebung (!V)!/short(!v) kein (!B)newline(!b)
+
+      mehr ausge!-geben, fr die unkompri!-mierte Umgebung nur noch ein (!B)newline(!b).
+
+!item Zweite kleine nderung in ""token_output"". Einzelne Zeilen eines Absatzes
+
+      werden nicht mehr mit (!B)udoshow(!b) sondern mit einem Backshlash abgeschlossen.
+
+      Es dadurch wurde der Einsatz von Funoten m”glich.
+
+!item Erweiterung in der Funktion ""pass1_check_preamble_commands"". Es wird berprft,
+
+      ob die Kommandos (!V)!/html_style_name foo("v) bzw. (!V)!/html_script_name foo(!v)
+
+      benutzt wurden. (!nl)
+
+      (!B)Achtung:(!b) Beide Kommandos sind mit Vorsicht zu geniessen und werden
+
+      vielleicht durch (!V)!/doclayout [html] [style/script] foo(!v) ersetzt.
+
+!item Erweiterung in der Funktion ""pass1"", ob (!V)!/doclayout(!v) benutzt wurde.
+
+!item Erweiterung in der Funktion ""pass1"", um die Namen von Nodes, Alias, Label,
+
+      etc. in der Schreib!-weise des System!-zeichen!-satzes zu sichern.
+
+!item Erweiterung in der Funktion ""pass1"". Aufruf der Funktion 
+
+""save_upr_entry_heading""
+
+      zur Sicherung der (Sub-)Heading-Eintr„ge.
+
+!item Erweiterung in der Funktion ""save_upr_entry_node"". Es wird zus„tzlich die
+
+      Zeile mit ber!-geben in der der Node steht.
+
+!item Neue Funktion ""save_upr_entry_heading"" zur Sicherung der (Sub-)Heading-Eintr„ge
+
+      in der Projekt!-datei.
+
+!item Neue Funktion ""save_upr_entry_alias"" zur Sicherung der Alias-Eintr„ge
+
+      in der Projekt!-datei.
+
+!item Neue Funktion ""save_upr_entry_label"" zur Sicherung der Label-Eintr„ge
+
+      in der Projekt!-datei.
+
+!item Neue Funktion ""save_upr_entry_index"" zur Sicherung der Index-Eintr„ge
+
+      in der Projekt!-datei.
+
+!item Erweiterung in Funktion ""c_index"" zur Sicherung der Index-Eintr„ge aus
+
+      (!V)!/index(!v).
+
+!item In Funktion ""c_heading"" einen Bug beseitigt. Die Zeichensatzgr”e und
+
+      die Aus!-richtung wurden fr die RTF- und WinHelp-Ausgabe falsch ber!-geben.
+
+      Dadurch kam es zu etwas groen Zeichen.
+
+!item In den Funktionen ""c_heading"", ""c_subheading"", ""c_subsubheading"" und
+
+      ""c_subsubsubheading"" den Wechsel des Basis!-fonts fr die
+
+      Postscript-Ausgabe raus!-genommen. Sieht sonst frchter!-lich aus. (!nl)
+
+      Auerdem wird die Rck!-schaltung auf die Zeichen!-satz!-gr”sse gemacht,
+
+      die der Benutzer vorgibt.
+
+!item In den Funktionen ""c_subheading"", ""c_subsubheading"" und
+
+      ""c_subsubsubheading"" den Quellcode fr die Ausrichtung fr die
+
+      RTF- und WinHelp-Ausgabe erg„nzt.
+
+!end_itemize
+
+
+
+!subsubheading udo.h
+
+
+
+!begin_itemize !short
+
+!item Zwei neue Variablen (sDocStyle, sDocScript) angelegt fr Stylesheets bzw. Scripte.
+
+!end_itemize
+
+
+
+!subsubheading udo2ps.h
+
+
+
+!begin_itemize !short
+
+!item Erweiterung der Zeichens„tze: Symbol kann benutzt werden.
+
+!item Erweiterung des Dictionaries (!B)newpage(!b) um die Ausgabe von Funoten,
+
+      Kopf- und Fusszeile.
+
+!item Erweiterung des Dictionaries (!B)newline(!b) wegen der Ausgabe fr
+
+      Funoten.
+
+!item Zwei neue Dictionaries (!B)Symbolon(!b) und (!B)Symboloff(!b), um auf
+
+      den Symbol!-zeichen!-satz umzu!-schalten und zurck.
+
+!item Neues Dictionary (!B)description(!b) zum An- und Abschalten der
+
+      Description-Umgebung.
+
+!item Erweiterung im Dictionary (!B)subOffFromLeft(!b), da nach dem letzten
+
+      Eintrag der linke Einzug nicht wieder zurck!-gesetzt wurde.
+
+!item nderung im Dictionary (!B)addStrSpaceLeft(!b), da die Einrckung
+
+      verschachtelter List-Umgebungen nicht richtig zurck!-gesetzt wurde. (!nl)
+
+      In diesem Zusammenhang wurde ein neues Array (!B)offList(!b) und zwei
+
+      Variablen, (!B)offCount(!b) und (!B)offCountS(!b), festgelegt.
+
+!item nderung im Dictionary (!B)writeBeforeLeft(!b) wegen einer ungnstigen
+
+      Ausgabe des Zeilen!-umbruchs. Zus„tzlich wurde die Ausgabe bei einer
+
+      Description-Umgebung hinzugefgt.
+
+!item Erweiterungen die fr die PDF-Erstellung notwendig sind:
+
+!begin_blist !short
+
+!item [setBaseColor] setzen der Default-Farbe fr den Text.
+
+!item [HowToOpen] Setzen des pdfmarks fr das ™ffnen der Datei.
+
+!item [Bookmarks] Erzeugen der Bookmarks (Outlines) fr PDF-Dateien.
+
+!item [WebLink] Erzeugen von Verweisen fr das World Wide Web aus Text
+
+      oder Bildern.
+
+!item [FileLink] Erzeugen von Verweisen zu anderen PDF-Dateien aus Text
+
+      oder Bildern.
+
+!item [Link] Erzeugen von Verweisen innerhalb einer PDF-Datei aus Text
+
+      oder Bildern.
+
+!item [NameDest] Erzeugen von Named Destination fr Nodes und Labels.
+
+!item [Comment] Erzeugung von Notizen fr PDF-Dateien (wird derzeit
+
+      noch nicht genutzt).
+
+!item [breite] Hilfs-Dictionary zur Ermittlung der Breite einer einzelnen
+
+      Textzeile, wenn diese zentriert oder rechts!-bndig ausge!-geben
+
+      werden soll.
+
+!item [setAlign] Ausgabe einer einzelnen Textzeile, die linksbndig, zentriert
+
+      oder rechtsbndig ausgegeben werden soll (wird fr AboutUDO benutzt).
+
+!item [aboutUDO_ger] Ausgabe der deutschen ""About UDO"" Seite.
+
+!item [aboutUDO_eng] Ausgabe der englischen ""About UDO"" Seite.
+
+!item [footnote] Ermittlung des Funotentextes und Setzen der Funotennummer.
+
+!item [footout] Ausgabe des Funotentextes am Ende der Seite.
+
+!item [calcwordlenfoot] Hilfs-Dictionary fr die Ausgabe der Funoten.
+
+!item [udofoot] Hilfs-Dictionary fr die ausgabe der Funoten.
+
+!end_blist
+
+!end_itemize
+
+
+
+
+
+Folgende Kommandos sind neu:
+
+!begin_description
+
+!item [!/docinfo]
+
+!begin_itemize !short
+
+!item (!V)!/docinfo [keywords] foo(!v) (!nl)
+
+      Ersatz und Erweiterung fr !/html_keywords
+
+!item (!V)!/docinfo [description] foo(!v) (!nl)
+
+      Ersatz und Erweiterung fr !/html_description
+
+!end_itemize
+
+!item [!/doclayout]
+
+!begin_itemize !short
+
+!item (!V)!/doclayout [ps] [paper] foo(!v) (!nl)
+
+      M”gliche Angaben fr foo sind: (!T)A3PORTRAIT, A3LANDSCAPE, A4PORTRAIT,
+
+      A4LANDSCAPE, A5PORTRAIT, A5LANDSCAPE(!t)
+
+!item (!V)!/doclayout [ps] [openMode] foo(!v) (!nl)
+
+      M”gliche Angaben fr foo sind die entsprechenden Angaben in der Dokumentation
+
+      zu den pdfmarks.
+
+!item (!V)!/doclayout [ps] [propfontname] foo(!v) (!nl)
+
+      M”gliche Angaben fr foo sind Zeichensatznamen, z.~B. Arial, Times New Roman,
+
+      sans oder sans serif. (!nl)
+
+      (!B)Hinweis:(!b) Fr die Postscriptausgabe gilt zur Zeit: Wenn dort irgendwas
+
+      mit ""Helvetica"", ""Arial"" oder ""sans-serif"" steht wird ""Helvetica"" gesetzt,
+
+      ansonsten ""Times New Roman"".
+
+!item (!V)!/doclayout [ps] [propfontsize] foo(!v) (!nl)
+
+      M”gliche Angaben fr foo ist eine Zeichensatzgr”e in pt.
+
+!end_itemize
+
+!item [!/html_style_name]
+
+!item [!/html_script_name]
+
+!end_description
+

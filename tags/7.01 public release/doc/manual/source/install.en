@@ -1,0 +1,231 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Installation
+# Language    : English
+# Initial Date: 2009-06-05
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 05: introduced (extracted from install.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 08: 'Homepage' -> 'Website'
+#   fd  Jun 10: using macro (!file [])
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 25: index adjustments
+#
+################################################################################
+
+!begin_node Installation
+!label*     installation
+!html_name  installation
+
+# = = = = =
+
+!begin_node Installing the Atari version
+!html_name  installation_tos_gem
+
+To install UDO onto an Atari or onto a computer with a TOS-compatible operating
+system (e.g. MagicMacX, MagicMac, MagicPC, GEMulator, STEmulator), just copy all files to a
+directory that should be named ""UDO"".
+
+The GEM version should be the application for files with the suffix
+(!file [*.u*]) so you shall do the neccessary changes in your desktop
+(Gemini, Thing, Ease, Magxdesk, !..).
+
+If you prefer the TTP version and you are using a command line shell (e.g.
+Mupfel by Stefan Eissing) copy or move (!file [udo.ttp]) to one of the
+directories that is part of (!file [$PATH]) (e.g. (!file [\usr\bin])).
+
+!begin_ignore
+# auskommentiert 13.01.2004 - Ulrich Kretschmer
+If you have installed the ST-Guide you should copy or move UDO's hypertext
+(!file [(!UDOR)eng.hyp]) and (!file [(!UDOR)eng.ref]) to the directory that contains
+all your other hypertexts.
+!end_ignore
+
+!end_node # Installing the Atari version
+
+# = = = = =
+
+!begin_node Installing the version for DOS or Windows (32-bit)
+!html_name  installation_dos_win32
+
+!begin_itemize !compressed
+!item Download the appropriate ZIP archive from (!url [http://www.udo-open-source.org/] [http://www.udo-open-source.org])
+!item unzip the ZIP archiv into a new directory
+!item Add the directory with (!file [udo.exe]) to your PATH list (DOS: see (!file [autoexec.bat]); Windows: see ....?). Or copy (!file [udo.exe]) into a directory which is part of your PATH list.
+!end_itemize
+Running the DOS version, your computer must have a 80386 CPU (or higher).
+
+Older UDO versions needed the installation of RSJ and EMX. This software is no longer necessary.
+
+!end_node # Installing the version for DOS or Windows (32-bit)
+
+# = = = = =
+
+!begin_node Installation the OS/2 version (32-bit)
+!html_name  installation_os2
+
+!begin_itemize !compressed
+!item Download the appropriate ZIP archive from (!url [http://www.udo-open-source.org/] [http://www.udo-open-source.org])
+!item unzip the ZIP archiv into a new directory
+!item Add the directory with (!file [udo.exe]) to your PATH list (see (!file [config.sys])). Or copy (!file [udo.exe]) into a directory which is part of your PATH list.
+!end_itemize
+
+Older UDO versions needed the installation of EMX. This software is no longer necessary.
+
+!end_node # Installation the OS/2 version (32-bit)
+
+# = = = = =
+
+!begin_node Installing the Macintosh version (Mac~OS 9)
+!html_name  installation_mac_9
+
+####################################################################
+# @(#) Installation der Macintosh-Version, 26.06.1996, Martin Osieka
+####################################################################
+
+After having extracted the archive that contains the Macintosh version of
+UDO you can move UDO's files to any place of your file system you want to.
+In most cases this would be the ""Programs"" directory.
+
+UDO is available as a fat-binary so it will run both on a 68k Macintosh and
+a PowerPC Macintosh. If you want to save some disk space you may be smaller
+the program with a certain software.
+
+!end_node # Installing the Macintosh version (Mac~OS 9)
+
+# = = = = =
+
+!begin_node Installing the Macintosh version (Mac~OS~X)
+!html_name  installation_mac_x
+
+!begin_itemize !compressed
+!item Download the appropriate ZIP archive from (!url [http://www.udo-open-source.org/] [http://www.udo-open-source.org])
+!item Unpack the ZIP archiv and copy the executable file (!file [udo]) to (!file [/usr/bin]).
+!end_itemize
+Please note: a manpage is currently not part of the Mac~OS~X distribution.
+
+(!HINT)
+
+The directory (!file [/usr/bin]) is usually not shown in the Finder. To open it, use the Finder menu item ""Go To > Go to folder"".
+
+If you like to, you can even switch all invisible files and folders visible in the Finder. To make them visible in the Finder, run the Terminal app (Applications > Utilities > Terminal) and enter the following line:
+
+(!code [defaults write com.apple.finder AppleShowAllFiles TRUE])
+
+You have to restart the Finder to activate this change.
+
+!end_node # Installing the Macintosh version (Mac~OS~X)
+
+# = = = = =
+
+!begin_node Installing the FreeMiNT version
+!html_name  installation_mint
+
+!begin_itemize !compressed
+!item Download the appropriate ZIP archive from (!url [http://www.udo-open-source.org/] [http://www.udo-open-source.org])
+!item Log in as (!code [root])
+!item For a new installation enter: (!code [rpm -i]) (!file [file])(!file [.rpm])
+!item For an upgrade (if you have an older UDO-rpm installed): (!code [rpm -U]) (!file [file])(!file [.rpm])
+!end_itemize
+
+!end_node # Installing the FreeMiNT version
+
+# = = = = =
+
+!begin_node Installing the Linux rpm package
+!html_name  installation_linux_rpm
+
+!begin_itemize !compressed
+!item Download the appropriate rpm file from the UDO website.
+!item Log in as (!code [root]).
+!item For a new installation enter: (!code [rpm -i]) (!file [file])(!file [.rpm])
+!item For an upgrade (if you have an older UDO-rpm installed): (!code [rpm -U]) (!file [file])(!file [.rpm])
+!end_itemize
+Or use your preferred rpm UI (e.g. kpackage, krpmview, yast).
+
+!end_node # Installing the Linux rpm package
+
+# = = = = =
+
+!begin_node Installing the Debian Linux package
+!html_name  installation_linux_deb
+
+!begin_itemize !compressed
+!item Download the appropriate deb-package from (!url [http://www.debian.org] [http://www.debian.org/]).
+!item Log in as (!code [root])
+!item (!code [dpkg -i]) (!file [file])(!file [.deb])
+!end_itemize
+Or (with Internet connection): (!file [apt-get install udo])
+
+The package name for the English documentation is (!file [udo-doc]).
+
+The documentation is currently in revision (outdated in parts).
+
+!end_node # Installing the Debian Linux package
+
+# = = = = =
+
+!begin_node Installing from source under Linux
+!html_name  installation_linux_src
+
+!begin_itemize !compressed
+!item Download the sourcecode archive from (!url [http://www.udo-open-source.org/] [http://www.udo-open-source.org])
+!item Unpack the sourcecode archive: (!code [tar xzf]) (!file [udo_xxx_src.tar.gz])
+!item (!code [chdir]) into (!file [Source]) directory
+!item (!code [make -f]) (!file [Makefile.linux])
+!item copy the UDO executable to (!file [/usr/local/bin]) or into any other directory of your (!file [$PATH]).
+!item (!code [chdir]) to directory (!file [doc/manpage]) and run the shell script (!file [create_manpage_en]). Copy the UDO manualpage (!file [udo.1]) to (!file [/usr/man/man1/]).
+!item For converting the UDO manual to HTML, (!code [chdir]) to (!file [doc/manual/source]) and run the shellscript (!file [create_manual_en_html]) -- documentation will be written to (!file [doc/manual/html-en]).
+!end_itemize
+
+!begin_ignore
+# auskommentiert 10.01.2004 - Ulrich Kretschmer
+After having extracted the archive copy the files of (!file [bin/])
+to (!file [/usr/local/bin]) or any other directory of (!file [$PATH]).
+
+Copy the manpage (!file [udo.1]) to (!file [/usr/man/man1/]).
+
+To read the documentation of UDO with GNU Info convert the UDO source
+files to GNU Texinfo, run Makeinfo and copy the Info file to
+(!file [$INFOPATH]). You have to edit (!file [$INFOPATH/dir]) to get
+access to the UDO Info files.
+
+Furthermore you should make some scripts or aliase to simplify calling
+UDO. The following script (named (!file [u2tex])) shows how to tell UDO that he shall convert
+the source file to (!LaTeX)):
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+#!bin/sh
+udo --tex -o ! $*
+!end_verbatim
+(!EXAMPLE_END)
+
+You can make similar scripts for the other destination formats if you
+want. The UDO distribution already contains some scripts.
+
+Hint for users of Linux-SGML: My version doesn't contain all possible
+entities. Just take a look ate the Linuxdoc-SGML FAQ in the middle of
+this documentation if Linuxdoc-SGML prints an error message.
+!end_ignore
+
+!end_node # Installing from source under Linux
+
+# = = = = =
+
+!end_node # Installation
+
+# === EOF ===

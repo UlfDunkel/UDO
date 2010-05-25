@@ -1,0 +1,862 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Syntax: Text styling
+# Language    : English
+# Initial Date: 2009-06-06
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 06: introduced (extracted from syntax.ui)
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: 'Postscript' -> 'PostScript'
+#   fd  Jun 09: using more macros for text style formatting
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 10: using EXAMPLE_... macros
+#   fd  Jun 11: EXAMPLE_... macros optimized
+#   fd  Jun 16: great review session #1
+#   fd  Dec 15: typo
+# 2010:
+#   fd  Mar 03: chapter style_tables: hint for table_alignment added
+#   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  May 19: "short" -> "compressed"
+#   fd  May 25: index adjustments
+#
+################################################################################
+
+!begin_node Text styling
+!html_name  style
+
+In this section you will get to know how to layout passages in different
+ways. UDO supports centered, left justified, right justified and indented
+text, different kinds of lists, environments for preformatted text and
+tables. Furthermore you can use different text styles and footnotes.
+
+# = = = = =
+
+!begin_node Itemizations
+!html_name  style_itemizations
+!label      itemize environment
+
+ou can use the itemize environment for itemizations where every
+single item is marked with a bullet, star, dash or point. The itemize
+environment is started with (!KW [begin_itemize]) and finished with
+(!KW [end_itemize]). Each item has to be marked with the
+(!KW [item]) command.
+
+You can use the itemize environment inside other environments or inside
+another itemize environment.
+
+This short example shows how to write a simple itemize environment:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/itemize1.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/itemize1.ui
+(!EXAMPLE_END)
+
+And this example, where an itemize environment is used inside another
+one !..
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/itemize2.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/itemize2.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+!index (!kw [compressed])
+UDO separates the text of each item by an empty line. In some cases it is not
+a good idea to separate the items e.g. if an item contains only some text.
+In this case it would be better to suppress the empty lines to get a
+compressed environment.
+
+For printing compressed environment UDO offers you the command named
+(!KW [compressed]) you can add to the (!KW [begin_itemize]) command. If you
+add (!KW [compressed]) UDO won't separate the items by inserting empty lines.
+Furthermore in all environments you use inside this itemize environment no
+empty lines will be printed.
+
+The following two examples show how to use the (!KW [compressed]) command and
+which effects this command has. The first example doesn't, the second one
+uses (!KW [compressed]):
+
+Without (!KW [compressed]):
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/itemize3.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/itemize3.ui
+(!EXAMPLE_END)
+
+With (!KW [compressed]):
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/itemize4.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/itemize4.ui
+(!EXAMPLE_END)
+
+If you cannot see any difference the destination format doesn't allow it to
+suppress the item separation.
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate
+
+!item	The items of the first itemize environment will be marked with a
+bullet that is defined on different positions inside the character set of
+each operating system.
+
+!index (!kw [no_umlaute])
+!item	If you use the switch (!KW [no_umlaute]) inside the preamble of
+the source file the items of the first itemize environment will be marked
+with an ""o"" instead of a bullet.
+
+!end_enumerate
+
+!end_node # Itemizations
+
+# = = = = =
+
+!begin_node Enumerations
+!label*     enumerations
+!label      enumerate environment
+!html_name  style_enumerations
+
+The enumerate environment is useful for lists where the items have to be
+enumerated with numbers or letters. It is started with
+(!KW [begin_enumerate]) and finished with (!KW [end_enumerate]). Each
+item has to be marked with (!KW [item]).
+
+You can use the itemize environment inside other environments or inside
+another itemize environment.
+
+This short example shows how to write a simple itemize environment:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/enum1.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/enum1.ui
+(!EXAMPLE_END)
+
+In the following example the enumerate environment is used twice and it will
+be compressed because of the usage of (!KW [compressed]):
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/enum2.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/enum2.ui
+(!EXAMPLE_END)
+
+(!HINTS)
+
+!begin_enumerate
+
+!item	UDO doesn't enumerate the items for all destination formats. E.g.
+HTML and (!LaTeX) enumerate the items themselves so you have to be cautious
+with using text like ""see item~1"" or ""see point~b)"".
+
+!item	The third layer of enumerate environments will be indented deeper
+than the other layers because Roman numbers need a little bit more space.
+
+!item	Because the second layer is enumerated with letters you shouldn't
+use more than 26~items.
+
+!item	A description of the (!KW [compressed]) command is part of the chapter
+""Itemizations"".
+
+!end_enumerate
+
+!end_node # Enumerations
+
+# = = = = =
+
+!begin_node Descriptions
+!label*     descriptions
+!label      description environment
+!html_name  style_descriptions
+
+Use the description environment for describing some words. Start the
+environment with (!KW [begin_description]) and finish it using
+(!KW [end_description]).
+
+A word that has to be described is used with the (!KW [item])
+command inside brackets and will be displayed with bold text.
+
+The description environment can be used inside other (description)
+environments.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/descript1.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/descript1.ui
+(!EXAMPLE_END)
+
+In this example the description environment is used inside another one and
+the (!KW [compressed]) is used, too:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/descript2.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/descript2.ui
+(!EXAMPLE_END)
+
+(!HINTS)
+
+!begin_enumerate !compressed
+
+!item	If the word that shall be displayed in bold text contains a ""]""
+you have to quote it with an exclamation mark to tell UDO that it has to
+be printed in bold text, too.
+
+!item When the last character is an exclamation mark, a ""/"" has to follow 
+      or UDO would protect the closing bracket instead of outputting an exclamation mark.
+
+!item	The HTML version of your source file will print the descriptions in
+bold text, too, even if this not typical for HTML. The next versions of UDO
+will offer a command to disable the bold text inside descriptions for HTML.
+
+!item	A description of the (!KW [compressed]) command is part of the chapter
+""Itemizations"".
+
+!end_enumerate
+
+!end_node # Descriptions
+
+# = = = = =
+
+!begin_node Lists
+!label*     lists
+!label      xlist environment
+!html_name  style_lists
+
+Like the description environment this set of commands is useful to
+describe words. Using this environment the description of each word
+is displayed beneath one another.
+
+The xlist environment starts with (!KW [begin_xlist]) and
+finishes with (!KW [end_xlist]). You have to tell UDO in brackets
+how wide it should indent the descriptions of each item. Usually you
+use the longest word in brackets. Each word that has to be described
+has to used inside the brackets of the (!KW [item]) command.
+
+You can use the xlist environment inside other (xlist) environments, too.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/xlist1.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/xlist1.ui
+(!EXAMPLE_END)
+
+The command (!KW [compressed]) can also be used for xlist environments. To get
+a compressed list just add (!KW [compressed]) at the end of the line that
+contains (!KW [begin_xlist]). Once more a compressed example:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/xlist2.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/xlist2.ui
+(!EXAMPLE_END)
+
+
+!label blist environment
+!label ilist environment
+!label tlist environment
+Since Release 6 UDO offers three additional environments that are similar
+to the xlist environment. In contrast to the xlist environment the items
+will be displayed in bold, italic or typewritered text.
+
+!begin_enumerate
+
+!item	When using the blist environment (bold list) the items will be
+displayed in bold text. A blist environment will be started with
+(!KW [begin_blist]) and finished with (!KW [end_blist]).
+
+!item	When using the ilist environment (italic list) the items will be
+displayed in italic text. A blist environment will be started with
+(!KW [begin_ilist]) and finished with (!KW [end_ilist]).
+
+!item	When using the tlist environment (typewritered list) the items will be
+displayed in typewritered text. A tlist environment will be started with
+(!KW [begin_tlist]) and finished with (!KW [end_tlist]).
+
+!end_enumerate
+
+!smallskip
+
+The following example shall demonstrate the results:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/xlist3.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/xlist3.ui
+(!EXAMPLE_END)
+
+!smallskip
+
+You have to notice some aspects:
+
+!begin_enumerate !compressed
+
+!item	If the text inside the brackets contains a ""]"" you have to quote
+      it with an exclamation mark so that UDO will recognize that this ""]"" shall
+      be part of the item and shall be displayed on the ""left side"".
+
+!item When the last character is an exclamation mark, a ""/"" has to follow 
+      or UDO would protect the closing bracket instead of outputting an exclamation mark.
+
+!index (!kw [html_no_xlist])
+!item HTML output creates tables for these lists. 
+      If you don't want table output for any reasons, you can advise UDO 
+      to output these lists as description environments, 
+      using the command (!KW [html_no_xlist]).
+
+# !item	HTML, Linuxdoc-SGML and Texinfo don't support an environment like
+# UDO's xlist environment. In these formats the xlist environments are
+# displayed like a description environment by default. But if you use the
+# switch (!KW [use_xlist]) inside the preamble UDO will print xlist
+# environments like in ASCII, but with preformatted text.
+
+!item	UDO doesn't know the character widths when converting the source
+      file to RTF and Windows Help. If the indents are too wide you can adjust the
+      indent by using the commands (!KW [rtf_charwidth]) and
+      (!KW [win_charwidth]).
+
+!item	A description of the (!KW [compressed]) command is part of the chapter
+      ""Itemizations"".
+
+!end_enumerate
+
+!end_node # Lists
+
+# = = = = =
+
+!begin_node Centered text
+!html_name  style_centered
+!label      center environment
+
+Lines that are part of a center environment will be displayed centred if
+the destination format centers text.
+
+You can use the center environment inside other environments. You can also
+use it inside another center environment, even if this may be senseless.
+
+If you use other environments inside a center environment they will be
+layouted like in all other cases. Only when the center environment is the
+active one text will be printed centered.
+
+If the following example isn't centered the current documentation format
+doesn't allow it to use centered text.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/center.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/center.ui
+(!EXAMPLE_END)
+
+You see that UDO layouts paragraphs of a center environment, too. To insert
+a manual line break use the (!KKW [nl]) command.
+
+!end_node # Centered text
+
+# = = = = =
+
+!begin_node Right justified text
+!html_name  style_justifiedright
+!label      flushright environment
+
+Lines that are part of a flushright environment will be displayed right
+justified if the destination format supports right justified text.
+
+You can use the flushright environment inside other environments. You can also
+use it inside another flushright environment, even this may be senseless.
+
+If you use other environments inside a flushright environment they will be
+layouted like in all other cases. Only when the flushright environment is the
+active one text will be printed right justified.
+
+If the following example isn't printed right justified the current
+documentation format doesn't allow it to use right justified text.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/flushright.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/flushright.ui
+(!EXAMPLE_END)
+
+You see that UDO layouts paragraphs of a flushright environment, too. To
+insert a manual line break use the (!KKW [nl]) command.
+
+!end_node # Right justified text
+
+# = = = = =
+
+!begin_node Left justified text
+!html_name  style_justifiedleft
+!label      flushleft environment
+
+Lines that are part of a flushleft environment will be displayed left
+justified without justification.
+
+Er, do you understand that? No? OK, one more try. If you use the switch
+(!KW [use_justification]) UDO adjusts the lines by inserting spaces between
+the words so that you have a proper right margin. But UDO won't insert
+spaces between words of a flushleft environment.
+
+You can use the flushleft environment inside other environments. You can also
+use it inside another flushleft environment, even this may be senseless.
+
+If you use other environments inside a flushleft environment they will be
+layouted like in all other cases. Only when the flushleft environment is the
+active one text will be printed without justification.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/flushleft.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/flushleft.ui
+(!EXAMPLE_END)
+
+You see that UDO layouts paragraphs of a flushleft environment, too. To
+insert a manual line break use the (!KKW [nl]) command.
+
+!end_node # Left justified text
+
+# = = = = =
+
+!begin_node Indented paragraphs
+!html_name  style_indentations
+!label      quote environment
+
+To display indented paragraphs you can use the quote environment which is
+started with (!KW [begin_quote]) and finished with (!KW [end_quote]).
+You can use the quote environment inside another quote environment or inside
+other environments.
+
+This environment is useful to emphasize passages. This effect is used in the
+following example:
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/quote.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/quote.ui
+(!EXAMPLE_END)
+
+!end_node # Indented paragraphs
+
+# = = = = =
+
+!begin_node Preformatted text
+!html_name  style_preformatted_text
+!label      verbatim environment
+
+UDO layouts the text of the source file on its own. But sometimes you don't
+want that because you want to display preformatted things like parts of a
+source code or something else.
+
+To display preformatted text you can use the verbatim environment that
+is started with (!KW [begin_verbatim]) and finished with
+(!KW [end_verbatim]). No UDO commands(!N)except
+(!KW [end_verbatim])(!n) or placeholders will be converted. Text
+inside this environment will be indented like normal text.
+
+When converting into (!LaTeX) the commands of UDO will be just
+replaced by the (!LaTeX) commands (!code [\begin{verbatim}]) and
+(!code [\end{verbatim}]). When converting to another format UDO adjusts
+special chars and displays the text with a non-proportional font.
+
+!index (!kw [tabwidth])
+If the lines of the verbatim environment contain tabs (ASCII~9) UDO will
+replace them by spaces according to the (!KW [tabwidth]) setting.
+
+!smallskip
+
+Because no commands inside a verbatim environment are noticed you
+cannot use the (!KW [include]) command inside this environment.
+
+!index (!kw [vinclude])
+To enable you to include an external file and display it as it would
+be inside a verbatim environment UDO offers you the command
+(!KW [vinclude]). This command is a mixture of
+(!KW [begin_verbatim]), (!KW [include]) and
+(!KW [end_verbatim]).
+
+To write special commands for the destination format you cannot use
+this environment. You have to use the raw environment instead.
+
+!smallskip
+
+(!HINTS)
+
+!begin_enumerate
+
+!item	Because the text of a verbatim environment is indented like
+normal text you shouldn't use extra spaces at the beginning of each
+line.
+
+!item	The difference between the raw environment and the verbatim
+environment is that text of a verbatim environment will be displayed an you
+entered it, but text of a raw environment will be saved into the destination
+file as you entered it.
+
+!end_enumerate
+
+!end_node # Preformatted text
+
+# = = = = =
+
+!begin_node Display line graphics
+!html_name  style_linegraphics
+!label      linedraw environment
+
+Normally UDO will replace all DOS graphic characters by the ASCCI characters
+""(!code [+])"", ""(!code [--])"" and ""(!code [|])"". So including DOS screenshots is not possible.
+
+To display DOS screenshots you can use the linedraw environment,
+which is started with (!KW [begin_linedraw]) and finished with
+(!KW [end_linedraw]).
+
+No UDO commands(!N)except
+(!KW [end_linedraw])(!n) or placeholders will be converted. Text
+inside this environment will be indented like normal text.
+
+When converting into RTF, the font ""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm])""
+will be used, other formats will use the DOS character set.
+When converting into (!LaTeX) the commands of UDO will be just
+replaced by the (!LaTeX) commands (!code [\begin{verbatim}]) and
+(!code [\end{verbatim}]). When converting to another format UDO adjusts
+special chars and displays the text with a non-proportional font.
+
+!index (!kw [tabwidth])
+If the lines of the linedraw environment contain tabs (ASCII~9) UDO will
+replace them by spaces according to the (!KW [tabwidth]) setting.
+
+!index (!kw [ldinclude])
+Because no commands inside a verbatim environment are noticed you
+cannot use the (!KW [include]) command inside this environment.
+
+To enable you to include an external file and display it as it would
+be inside a linedraw environment UDO offers you the command
+(!KW [ldinclude]). This command is a mixture of
+(!KW [begin_linedraw]), (!KW [include]) and
+(!KW [end_linedraw]).
+
+!smallskip
+
+(!HINT)
+
+!begin_enumerate
+
+!item	Because the text of a linedraw environment is indented like
+normal text you shouldn't use extra spaces at the beginning of each
+line.
+
+!end_enumerate
+
+!end_node # Display line graphics
+
+# = = = = =
+
+!begin_node Footnotes
+!label*     footnotes
+!html_name  style_footnotes
+
+Text that is used between (!KKW [N]) and (!KKW [n]) will be shown as a
+footnote when converting to a format that supports footnotes. Otherwise
+(!KKW [N]) will be replaced by ""(!code [~(])"", (KK1 [n]) will be replaced by
+""(!code [!)])"".
+
+Important hint: In front of (!KKW [N]) you shouldn't use a blank. If you do so
+the footnote mark would ""fly"" without context or before the opening bracket ""(!code [(])"" you
+could read a blank.
+
+(!EXAMPLE_BEFORE)
+!vinclude (!EXAMPLES)/footnotes.ui
+(!EXAMPLE_AFTER)
+!include (!EXAMPLES)/footnotes.ui
+(!EXAMPLE_END)
+
+Footnotes are supported by these formats:
+
+!begin_itemize !compressed
+!item (!LaTeX)
+!item Linuxdoc-SGML
+!item LyX
+!item Texinfo
+!item RTF
+!end_itemize
+
+(!HINTS)
+
+!begin_enumerate
+
+!item	I'm a bit unlucky that UDO just prints brackets if the destination
+format doesn't support footnotes. It will be better if UDO saves the
+footnote text and prints it at the end of a chapter or page. Unfortunately
+this is a very tricky problem that cannot be solved in some days.
+
+!item	Don't forget not to use a space or tab before (!KKW [N]).
+
+!end_enumerate
+
+!end_node # Footnotes
+
+# = = = = =
+
+!begin_node Text styles
+!html_name  style_textstyles
+
+UDO enables you to set text styles right inside the source file.
+
+!include (!EXAMPLES)/effects.ui
+
+If you want to display a single word or some words in a certain text style
+you have to use them between the according placeholders. Look, how the upper
+paragraph was made:
+
+!vinclude (!EXAMPLES)/effects.ui
+
+In this table you will see in which way the placeholders will be replaced:
+
+# Text Style output formats
+!include _styles.ui
+
+!index (!kw [no_effects])
+As you see here for the ASCII format there will be used the text style
+commands as they are used in Usenet. If you don't like them you can use the
+switch called (!KW [no_effects]) to suppress them. Use
+(!KW [no_effects] [[asc!!]]) to suppress the text style commands when
+converting to ASCII.
+
+(!HINT)
+
+Definitions are great for programming user-defined text styles. It is
+for sure that you need some knowledge about the destination forma to do
+this. The following example shows how to use ghosted text which is available
+for the ST-Guide:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!ifdest [stg]
+  !define G @{G}
+  !define g @{g}
+!else
+  !define G
+  !define g
+!endif
+
+Normal and (!G)ghosted(!g).
+!end_verbatim
+(!EXAMPLE_END)
+
+!end_node # Text styles
+
+# = = = = =
+
+!begin_node Text colors
+!html_name  style_textcolors
+
+UDO supports definition of text color for words or paragraphs. 
+You can use the following commands:
+
+!begin_flushleft
+!begin_table [ll]
+(!kkw [black])   !! (!black)black(!coloff)
+(!kkw [silver])  !! (!silver)silver(!coloff)
+(!kkw [gray])    !! (!gray)gray(!coloff)
+(!kkw [white])   !! (!white)white(!coloff)
+(!kkw [maroon])  !! (!maroon)maroon(!coloff)
+(!kkw [red])     !! (!red)red(!coloff)
+(!kkw [purple])  !! (!purple)purple(!coloff)
+(!kkw [fuchsia]) !! (!fuchsia)fuchsia(!coloff)
+(!kkw [green])   !! (!green)green(!coloff)
+(!kkw [lime])    !! (!lime)lime(!coloff)
+(!kkw [olive])   !! (!olive)olive(!coloff)
+(!kkw [yellow])  !! (!yellow)yellow(!coloff)
+(!kkw [navy])    !! (!navy)navy(!coloff)
+(!kkw [blue])    !! (!blue)blue(!coloff)
+(!kkw [teal])    !! (!teal)teal(!coloff)
+(!kkw [aqua])    !! (!aqua)aqua(!coloff)
+!end_table
+!end_flushleft
+
+The command (!kkw [coloff]) resets the default color black.
+
+From~...
+!begin_verbatim
+(!red)Color in UDO(!coloff)
+!end_verbatim
+
+...~you get:
+
+(!red)Color in UDO(!coloff)
+
+Text color definition is currently supported for the output formats 
+HTML, RTF, WinHelp, DRC and PostScript.
+
+!end_node # Text colors
+
+# = = = = =
+
+!begin_node Tables
+!label*     tables
+!label      table environment
+!html_name  style_tables
+
+Since Release 5 you are able to print simple tables with UDO. You can define
+the justification of the columns and where UDO shall print vertical and/or
+horizontal lines.
+
+!index !/!/
+!index (!kw [begin_table])
+!index (!kw [end_table])
+!index (!kw [hline])
+!index (!kw [table_caption])
+To print tables with UDO you need the following commands:
+
+!begin_enumerate !compressed
+!item (!KW [table_caption]) (!C)[(!TEXT)](!c)
+!item (!KW [begin_table] [[...!!]]) {(!KW [hline])}
+!item (!KW [end_table])
+!item (!KW [hline])
+!item (!KW [!/])
+!end_enumerate
+
+The command (!KW [table_caption]) defines the title of the next table. It
+has to be used before the table environment, not inside this environment!
+
+The command (!KW [begin_table]) starts a table, (!KW [end_table])
+finishes and prints the table. After (!KW [begin_table]) you can define
+the justification of the table columns and the usage of vertical lines. Use
+""(!code[c])"" for a centred row, ""(!code[l])"" for a left justified row, ""(!code[r])"" for a
+right justified row, and ""(!code[|])"" for vertical lines inside brackets. If you add
+a (!KW [hline]) command to this line the table starts with a horizontal
+line.
+
+After having described the layout of the table with the upper line
+you can insert the cells of the table. You have to insert a column in
+one source line and you have to divide the cells by using ""!!"".
+
+If you want to insert a horizontal line you can use the (!KW [hline])
+command. (!KW [hline]) has to be at the beginning of the line and it has
+to be the only command of this line.
+
+Here you will see a short example that demonstrates the usage of the upper
+described commands:
+
+(!EXAMPLE_BEGIN)
+!begin_verbatim
+!table_caption Tables with UDO
+!begin_table [|l|c|r|] !hline
+upper left !! up !! upper right
+lower left cell !! lower cell !! lower right cell
+!hline
+!end_table
+!end_verbatim
+(!EXAMPLE_END)
+
+This example prints a table with two rows and three columns. The first
+column is left justified, the second columns is centred and the third
+columns is printed right justified:
+
+!table_caption Tables with UDO
+!begin_table [|l|c|r|] !hline
+upper left !! up !! upper right
+lower left cell !! lower cell !! lower right cell
+!hline
+!end_table
+
+Because I used a ""(!code[|])"" before and after every column they are divided by
+vertical lines. The table starts with a horizontal line because the
+(!KW [hline]) command was added at the end of (!KW [begin_table]).
+Finally the table ends with a horizontal line because the (!KW [hline])
+command is used right before (!KW [end_table]).
+
+The following example shows the upper table without any lines:
+
+!table_caption Another example
+!begin_table [lcr]
+upper left !! up !! upper right
+lower left cell !! lower cell !! lower right cell
+!end_table
+
+!smallskip
+
+!index (!kw [use_ansi_tables])
+UDO offers you a switch called (!KW [use_ansi_tables]). If you use this
+switch inside the preamble the lines of the table are printed by using some
+characters of the IBM
+PC graphic character set instead of (!code [+]), (!code [-]) and (!code [|]) when
+converting into an ASCII like format like ASCII or ST-Guide. This switch has
+no effect if you convert to Windows Help, RTF, HTML or (!LaTeX).
+
+!smallskip
+
+(!HINTS)
+
+!begin_itemize
+
+!item	Tables are always output centered. 
+But using the preamble command (!KW [table_alignment]), you can even define another alignment for tables.
+
+!item	HTML doesn't allow to define where to use lines. If you use the
+(!KW [hline]) command at the end of (!KW [begin_table]) the table is
+printed via (!code [frame=box]). If you don't use (!KW [hline]) it is
+printed without any lines.
+
+!item	Windows Help doesn't allow it to print centred tables or to print
+lines where you want to. If you use (!KW [hline]) in the
+(!KW [begin_table]) line all cells will be printed with a box. If you
+don't use (!KW [hline]) there will be no line at all in this table.
+
+!item	Converting to ST-Guide the lines of a table are generated with
+(!code [@line]). It is not possible to use more than one vertical line between
+columns or more than one horizontal line.
+
+!item	Inside the cells you can use all other UDO commands like text
+styles, links or indices.
+
+!end_itemize
+
+!end_node # Tables
+
+# = = = = =
+
+!begin_node Source code
+!html_name  style_sourcecode
+!label      sourcecode environment
+
+Lines that are part of a sourcecode environment
+will be displayed without conversion when converting
+to one of the source code formats.
+When converting to one of the other destination formats,
+these lines will be displayed like being part of
+a verbatim environment inside a quote environment.
+
+A small example for a C source code with UDO:
+
+(!EXAMPLE_BEGIN)
+!vinclude (!EXAMPLES)/csource.u
+(!EXAMPLE_END)
+
+Another possibility to include source code
+is offered by the command (!KW [sinclude]).
+
+!end_node # Source code
+
+# = = = = =
+
+!end_node # Text styling
+
+# === EOF ===

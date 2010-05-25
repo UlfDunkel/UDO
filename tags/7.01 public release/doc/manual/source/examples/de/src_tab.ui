@@ -1,0 +1,7 @@
+	/* English */
+	LOCAL const char *MONTH_ENG[] =
+	{
+		"January", "February", "March", "April", 
+      "May", "June", "July", "August", 
+      "September", "October", "November", "December"
+	};

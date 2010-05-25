@@ -1,0 +1,127 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : Commands V
+# Language    : English
+# Initial Date: 2009-06-04
+# Author      : Dirk Hagedorn
+# Co-author(s): Ulf Dunkel (fd)
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2009:
+#   fd  Jun 04: introduced, html_name updated (no '-', no extension)
+#   fd  Jun 05: html_name for commands group chapter changed: 'cmd_...' -> 'cmds_...'
+#   fd  Jun 08: quotation changed
+#   fd  Jun 09: TEXT macro enhanced
+#   fd  Jun 09: FILE macro enhanced
+#   fd  Jun 10: using macro (!code [])
+#   fd  Jun 16: html_name no longer uses CAPITAL letters
+#   fd  Jun 16: great review session #1
+# 2010:
+#   fd  Mar 01: OldKeywords removed -> cmds__old.en
+#
+################################################################################
+
+!begin_node V!..
+!html_name  cmds_v
+
+# = = = = =
+
+!begin_node (!kkkw [V] [v])
+!html_name  cmd_v()
+!label (!kk1 [/V])
+!label (!kk1 [/v])
+
+Output preformatted text.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!PLACEHOLDER), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)(!/V)(!TEXT)(!/v)(!t)
+
+!item [(!DESCRIPTION)]
+""(!TEXT)"" will be displayed preformatted if possible.
+When converting to (!LaTeX), (!code [\verb+(!TEXT)+']) will be output,
+otherwise the same output will be generated as for (!KKKW [T] [t]).
+
+!item [(!EXAMPLE)]
+(!T)(!/V)preformatted(!/v)(!t)
+
+!item [(!SEEALSO)]
+Text styles, (!link [Text styling] [Text styling]), (!KKKW [T] [t]), (!KW [tex_verb])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [verbatimsize])
+!html_name  cmd_verbatimsize
+
+Set font size for verbatim environments.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!PREAMBLE) & (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/verbatimsize [tiny|small|normal|large|huge](!t)
+
+!item [(!DESCRIPTION)]
+With this switch you can set the font size of verbatim environments
+if the destination format allows it to use different font sizes. You
+can use this switch wherever you want. The smallest font size is
+activated with ""(!code [tiny])"", the largest one with
+""(!code [huge])"". The default font size is ""(!code [normal])"".
+
+!item [(!EXAMPLE)]
+(!T)!/verbatimsize [small](!t)
+
+!item [(!EXISTSSINCE)] Release~5 Patchlevel~11
+
+!item [(!SEEALSO)]
+(!link [verbatim environment] [verbatim environment]), (!KW [html_monofont_size])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!begin_node (!kw [vinclude])
+!html_name  cmd_vinclude
+
+Include file in verbatim environment.
+
+!begin_xlist [(!TYPEPOSITION)]
+
+!item [(!TYPEPOSITION)] (!COMMAND), (!MAINPART)
+
+!item [(!SYNTAX)] (!T)!/vinclude (!FILE)(!t)
+
+!item [(!DESCRIPTION)]
+A file named ""(!FILE)"" will be included and displayed like preformatted text
+inside a verbatim environment. If you use this command inside
+another environment UDO indents the contents of this file. UDO
+converts tabs according to (!KW [tabwidth]). If the file name contains spaces, it has to be quoted.
+
+!item [(!EXAMPLE)]
+(!T)!/vinclude hello.c(!t)
+
+!item [(!SEEALSO)]
+(!KW [tabwidth]), (!KW [include]), (!KW [verbatimsize]), (!link [Split documents] [Split documents]), (!link [verbatim environment] [verbatim environment])
+
+!end_xlist
+
+!end_node
+
+# = = = = =
+
+!end_node
+
+# === EOF ===

@@ -1,0 +1,35 @@
+############################################################
+# @(#) The syntax of UDO, Dirk Hagedorn, 1996/04/16
+############################################################
+
+!node The syntax of UDO
+
+# Example
+!include syntax/example.ui
+
+# Basics
+!include syntax/basics.ui
+
+# Structuring
+!include syntax/nodes.ui
+
+# Text emphasises
+!include syntax\text\00_index.ui
+
+# Tabellen
+!include syntax/tables.ui
+
+# Sonderzeichen
+!include syntax\chars.ui
+
+# Syllabification
+!include syntax\hyphen.ui
+
+# Bilder
+!include syntax\images.ui
+
+# Hypertext elements
+!include syntax\hyper\00_index.ui
+
+# Miscellaneous
+!include syntax\misc\00_index.ui

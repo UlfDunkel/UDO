@@ -1,0 +1,18 @@
+!index Christian Krüger
+Ab diesem Patchlevel unterstützt UDO auch PostScript. Mein großer Dank
+gilt Christian ""chrisker"" Krüger, ohne dessen Mithilfe die
+PostScript-Unterstützung noch lange hätte auf sich warten lassen.
+
+UDO stützt sich auf ein von Christian entwickeltes Script. Die Umsetzung
+steckt noch in den Kinderschuhen. Christians Script ermöglicht noch
+nicht alles (keine Bilder, keine Fußnoten, !..) und UDO kann noch nicht
+einmal alles das, was Christians Script bereits abdeckt.
+
+Daher betrachtet bitte die jetzigen PostScript-Dateien als völlig
+unkomplett, teilweise fehlerhaft. Ich hätte Euch die bisherige
+Funktionalität eigentlich verschwiegen, allerdings erbitten Christian
+und ich uns Resonanz von denjenigen, die PostScript benötigen oder sich
+damit auskennen.
+
+Als Kommandozeilenoption fungiert ""(--)ps"".
+
