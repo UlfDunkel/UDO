@@ -47,6 +47,7 @@
 *    fd  Feb 26: replace_placeholders() debugged
 *    fd  May 17: add_macro(): auto_quote_chars() faded
 *    fd  May 19: file tidied up
+*    fd  May 25: c_url() + c_xlink() now support target & class [feature request #89 solved]
 *
 ******************************************|************************************/
 
@@ -1421,6 +1422,13 @@ BOOLEAN      inside_b4_macro)  /* */
 *  c_url():
 *     convert a url command into its target format
 *
+*  Notes:
+*     The command (!url) supports up to four parameters:
+*     1) the readable title for the URL
+*     2) the URL
+*     4) a target
+*     3) a class name (to be referenced in any CSS definition)
+*
 *  return:
 *     -
 *
@@ -1438,6 +1446,8 @@ BOOLEAN      inside_b4_macro)    /* */
              url_rtf[2048],      /* */
              rtf0[4];            /* */
    BOOLEAN   linkerror = FALSE;  /* */
+   BOOLEAN   target = FALSE;     /* TRUE: explicit target has been found */
+   BOOLEAN   class = FALSE;      /* TRUE: CSS class name found */
    
    char      rtf1[] = "00d0c9ea79f9bace118c8200aa004ba90b0200000003000000";
    char      rtf2[] = "e0c9ea79f9bace118c8200aa004ba90b";
@@ -1445,13 +1455,11 @@ BOOLEAN      inside_b4_macro)    /* */
    char      rtf4[] = "0000";
 
 
-   while (!linkerror && ((pnr = get_parameters(s, "url", 2)) == 2))
+   while (!linkerror && ((pnr = get_parameters(s, "url", 4)) >= 2))
    {
-      del_whitespaces(Param[1]);
+      del_whitespaces(Param[1]);          /* adjust URL */
 
-      /* Wird ein leerer Parameter benutzt, dann den ersten auch als zweiten verwenden. */
-
-      if (Param[2][0] == EOS)
+      if (Param[2][0] == EOS)             /* if title is empty, use URL as title */
          um_strcpy(Param[2], Param[1], 1024, "c_url[1]");
       
       if (inside_b4_macro)
@@ -1475,18 +1483,46 @@ BOOLEAN      inside_b4_macro)    /* */
          case TOMHH:
             convert_tilde(Param[1]);
             
+/* fd:2010-05-25: faded because this is already done above
             if (Param[2][0] == EOS)
                um_strcpy(Param[2], Param[1], 1024, "c_url[TOHTM|1]");
+*/
             
+            replace_udo_quotes(Param[4]);
+            replace_udo_quotes(Param[3]);
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[1]);
             
-            if (html_frames_layout)
-               sprintf(s_entry, "<a href=\"%s\" target=\"_top\">%s</a>", Param[2], Param[1]);
-            else
-               sprintf(s_entry, "<a href=\"%s\">%s</a>", Param[2], Param[1]);
+            if (Param[4][0] != EOS)       /* CSS class used */
+               class = TRUE;
             
-            if (strlen(s_entry)>=4096) /* vj: For debugging reasons */
+            if (Param[3][0] != EOS)       /* target used */
+               target = TRUE;
+
+            if (html_frames_layout)
+            {
+               if (class && target)
+                  sprintf(s_entry, "<a href=\"%s\" target=\"%s\" class=\"%s\">%s</a>", Param[2], Param[3], Param[4], Param[1]);
+               else if (class)
+                  sprintf(s_entry, "<a href=\"%s\" target=\"_top\" class=\"%s\">%s</a>", Param[2], Param[4], Param[1]);
+               else if (target)
+                  sprintf(s_entry, "<a href=\"%s\" target=\"%s\">%s</a>", Param[2], Param[3], Param[1]);
+               else
+                  sprintf(s_entry, "<a href=\"%s\" target=\"_top\">%s</a>", Param[2], Param[1]);
+            }
+            else
+            {
+               if (class && target)
+                  sprintf(s_entry, "<a href=\"%s\" target=\"%s\" class=\"%s\">%s</a>", Param[2], Param[3], Param[4], Param[1]);
+               else if (class)
+                  sprintf(s_entry, "<a href=\"%s\" class=\"%s\">%s</a>", Param[2], Param[4], Param[1]);
+               else if (target)
+                  sprintf(s_entry, "<a href=\"%s\" target=\"%s\">%s</a>", Param[2], Param[3], Param[1]);
+               else
+                  sprintf(s_entry, "<a href=\"%s\">%s</a>", Param[2], Param[1]);
+            }
+            
+            if (strlen(s_entry) >= 4096)  /* vj: For debugging reasons */
                printf("c_url: s_entry buffer overrus after sprintf\n");
 
             linkerror = !insert_placeholder(s, Param[0], s_entry, Param[1]);
@@ -1498,8 +1534,10 @@ BOOLEAN      inside_b4_macro)    /* */
          case TOKPS:
             convert_tilde(Param[1]);
             
+/* fd:2010-05-25: faded because this is already done above
             if (Param[2][0] == EOS)
                strcpy(Param[2], Param[1]);
+*/
             
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[1]);
@@ -1524,9 +1562,10 @@ BOOLEAN      inside_b4_macro)    /* */
          case TOWH4:
             convert_tilde(Param[1]);
             
+/* fd:2010-05-25: faded because this is already done above
             if (Param[2][0] == EOS)
                strcpy(Param[2], Param[1]);
-            
+*/            
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[1]);
             
@@ -1542,8 +1581,10 @@ BOOLEAN      inside_b4_macro)    /* */
             /* New in r6.2pl1 [NHz] / Bug #00000029 */
             c_rtf_quotes(Param[1]);
 
+/* fd:2010-05-25: faded because this is already done above
             if (Param[2][0] == EOS)
                strcpy(Param[2], Param[1]);
+*/
             
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[1]);
@@ -1612,6 +1653,13 @@ BOOLEAN      inside_b4_macro)    /* */
 *  c_xlink():
 *     convert an xlink command into its target format
 *
+*  Notes:
+*     The command (!xlink) supports up to four parameters:
+*     1) the readable title for the URL
+*     2) the URL
+*     4) a target
+*     3) a class name (to be referenced in any CSS definition)
+*
 *  return:
 *     -
 *
@@ -1628,15 +1676,18 @@ BOOLEAN      inside_b4_macro)    /* */
              wfile[1024],        /* */
             *ptr;                /* */
    BOOLEAN   linkerror = FALSE;  /* */
+   BOOLEAN   target = FALSE;     /* TRUE: explicit target has been found */
+   BOOLEAN   class = FALSE;      /* TRUE: CSS class name found */
    
 
-   while (!linkerror && ((pnr = get_parameters(s, "xlink", 2)) == 2))
+   while (!linkerror && ((pnr = get_parameters(s, "xlink", 4)) >= 2))
    {
       del_whitespaces(Param[1]);
 
       /* PL6: Wird ein leerer Parameter benutzt, dann den ersten auch als zweiten verwenden. */
       
-      if (Param[2][0] == EOS && desttype != TOHTM && desttype != TOMHH && desttype != TOHAH)
+      if (Param[2][0] == EOS)
+/*       && desttype != TOHTM && desttype != TOMHH && desttype != TOHAH) */
       {
          strcpy(Param[2], Param[1]);
       }
@@ -1645,9 +1696,7 @@ BOOLEAN      inside_b4_macro)    /* */
       if (inside_b4_macro)
       {
          if (desttype != TOSTG)
-         {
             auto_quote_chars(Param[1], TRUE);
-         }
 
          adjust_params_inside(Param[1]);
       }
@@ -1685,17 +1734,48 @@ BOOLEAN      inside_b4_macro)    /* */
          case TOMHH:
             convert_tilde(Param[1]);
             
+/* fd:2010-05-25: faded because this is already done above
             if (Param[2][0] == EOS)
                strcpy(Param[2], Param[1]);
+*/
             
+             replace_udo_quotes(Param[4]);
+            replace_udo_quotes(Param[3]);
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[1]);
             
-            if (html_frames_layout)
-               sprintf(s_entry, "<a href=\"%s\" target=\"_top\">%s</a>", Param[2], Param[1]);
-            else
-               sprintf(s_entry, "<a href=\"%s\">%s</a>", Param[2], Param[1]);
+            if (Param[4][0] != EOS)       /* CSS class used */
+               class = TRUE;
             
+            if (Param[3][0] != EOS)       /* target used */
+               target = TRUE;
+
+            if (html_frames_layout)
+            {
+               if (class && target)
+                  sprintf(s_entry, "<a href=\"%s\" target=\"%s\" class=\"%s\">%s</a>", Param[2], Param[3], Param[4], Param[1]);
+               else if (class)
+                  sprintf(s_entry, "<a href=\"%s\" target=\"_top\" class=\"%s\">%s</a>", Param[2], Param[4], Param[1]);
+               else if (target)
+                  sprintf(s_entry, "<a href=\"%s\" target=\"%s\">%s</a>", Param[2], Param[3], Param[1]);
+               else
+                  sprintf(s_entry, "<a href=\"%s\" target=\"_top\">%s</a>", Param[2], Param[1]);
+            }
+            else
+            {
+               if (class && target)
+                  sprintf(s_entry, "<a href=\"%s\" target=\"%s\" class=\"%s\">%s</a>", Param[2], Param[3], Param[4], Param[1]);
+               else if (class)
+                  sprintf(s_entry, "<a href=\"%s\" class=\"%s\">%s</a>", Param[2], Param[4], Param[1]);
+               else if (target)
+                  sprintf(s_entry, "<a href=\"%s\" target=\"%s\">%s</a>", Param[2], Param[3], Param[1]);
+               else
+                  sprintf(s_entry, "<a href=\"%s\">%s</a>", Param[2], Param[1]);
+            }
+            
+            if (strlen(s_entry) >= 4096)  /* for debugging reasons */
+               printf("c_xlink: s_entry buffer overrus after sprintf\n");
+
             linkerror = !insert_placeholder(s, Param[0], s_entry, Param[1]);
             break;
             
@@ -1776,8 +1856,10 @@ BOOLEAN      inside_b4_macro)    /* */
          case TOKPS:
             convert_tilde(Param[1]);
             
+/* fd:2010-05-25: faded because this is already done above
             if (Param[2][0] == EOS)
                strcpy(Param[2], Param[1]);
+*/
             
             replace_udo_quotes(Param[2]);
             replace_udo_quotes(Param[1]);
