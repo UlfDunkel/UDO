@@ -40,6 +40,7 @@
 #   fd  May 21: xref links fixed
 #   fd  May 25: using macro NOTE
 #   ggs May 25: use_compressed_envs have a "see also" to himself
+#   fd  May 26: (!url) enhanced for v7.02 [#89]
 #
 ################################################################################
 
@@ -188,23 +189,39 @@ Quelltext verwendet werden.
 
 Verweis auf externe Daten.
 
-!begin_xlist [(!TYPEPOSITION)]
+!begin_xlist [(!TYPEPOSITION)] !not_compressed
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/url [(!TEXT)] [(!LINK)])(!t)
+!item [(!SYNTAX)] (!T)(!/url [(!TEXT)] [(!LINK)]) <[(!TARGET)] [(!CLASS)]>(!t)
 
 !item [(!DESCRIPTION)]
-Dient zum Erzeugen von Verweisen auf externe
-Dokumente. Im Unterschied zu (!KKW [xlink]) wird bei jedem Format ein
-Link auf einen URL angelegt. ""(!LINK)"" kann auch leer sein, dann wird für ""(!LINK)"" der Inhalt von ""(!TEXT)"" ausgegeben. Nutzen Sie das z.B., wenn der URL auch lesbar sein soll.
+Dient zum Erzeugen von Verweisen auf externe Dokumente. 
+Im Unterschied zu (!KKW [xlink]) wird bei jedem Format ein Link auf einen URL (""Unified Resource Locator"") angelegt. 
+""(!TEXT)"" kann auch leer sein, dann wird für ""(!TEXT)"" der Inhalt von ""(!LINK)"" ausgegeben. 
+So brauchen Sie z.B. den URL nicht doppelt anzugeben, wenn er als Linkbeschreibung lesbar sein soll.
 
 Kommt in einem Verweis eine Tilde vor, so braucht sie bei Verwendung im (!KKW [url])-Kommando (!I)nicht(!i) durch ein Ausrufezeichen geschützt zu werden.
 
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~12
+Mit ""(!TARGET)"" können Sie ein Ziel angeben, in dem sich der URL öffnen soll. Das können bei Frames-Layout andere Frames sein, oder z.B. die üblichen Ziele:
+!begin_table [l|l]
+_blank  !! öffnet den Verweis in einem neuen Fenster
+_self   !! öffnet den Verweis im aktuellen Fenster
+_parent !! sprengt bei verschachtelten Framesets das aktuelle Frameset
+_top    !! sprengt bei verschachtelten Framesets alle Framesets
+!end_table
+
+Mit ""(!CLASS)"" können Sie den Namen einer CSS-Klasse übergeben, um so z.B. Verweise auf externe Websites anders darzustellen als Verweise innerhalb der aktuellen Website.
+
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~12 (!nl)
+(!TARGET) + (!CLASS) seit v7.02, bisher nur für HTML, HTML-Help und Apple Help Book (HTML)
 
 !item [(!SEEALSO)]
-(!KKW [link]), (!KKW [plink]), (!KKW [xlink]), (!KW [no_xlinks]), (!link [Querverweise] [Querverweise])
+(!KKW [link]), 
+(!KKW [plink]), 
+(!KKW [xlink]), 
+(!KW [no_xlinks]), 
+(!link [Querverweise] [Querverweise])
 
 !end_xlist
 
@@ -213,12 +230,16 @@ Kommt in einem Verweis eine Tilde vor, so braucht sie bei Verwendung im (!KKW [u
 !begin_verbatim
 (!url [BugTracker der UDO-Website] [http://bugs.udo-open-source.org/]) | 
 (!url [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
-(!url [http://www.google.de/] [])
+(!url [http://www.google.de/] []) | 
+(!url [E-Mail schreiben][mailto:someone@somewhere.net][][email]) | 
+(!url [Das Handbuch zu UDO] [http://man.udo-open-source.org/de/] [_blank] [elink])
 !end_verbatim
 (!EXAMPLE_AFTER)
 (!url [BugTracker der UDO-Website] [http://bugs.udo-open-source.org/]) | 
 (!url [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
-(!url [http://www.google.de/] [])
+(!url [http://www.google.de/] []) | 
+(!url [E-Mail schreiben][mailto:someone@somewhere.net][][email]) | 
+(!url [Das Handbuch zu UDO] [http://man.udo-open-source.org/de/] [_blank] [elink])
 (!EXAMPLE_END)
 
 !end_node
