@@ -23,6 +23,8 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using ndash instead of mdash in German texts
+# 2010:
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -53,7 +55,8 @@ Die Bedienung der Kommandozeilenversion wird nun im typischen Manualpage-Stil be
 !begin_node GEM-Version
 !html_name  usage_gem
 
-Für GEM (Atari-Plattformen) steht für UDO eine graphische Bedienungsoberfläche (Shell) zur Verfügung, die aber derzeit nicht mehr weiterentwickelt wird. Siehe (!url [http://www.udo-open-source.org/download/shells.php] []).
+Für GEM (Atari-Plattformen) steht für UDO eine graphische Bedienungsoberfläche (Shell) zur Verfügung, die aber derzeit nicht mehr weiterentwickelt wird. 
+Siehe (!url [http://www.udo-open-source.org/download/shells.php][]).
 
 # auskommentiert 28.01.2004 - Ulrich Kretschmer
 !begin_ignore
@@ -334,7 +337,8 @@ dessen Guides-Ordner befindet.
 !begin_node Windows-Shell
 !html_name  usage_winshell
 
-Unter Windows steht für UDO eine graphische Bedienungsoberfläche (Shell) zur Verfügung, die aber derzeit nicht mehr weiterentwickelt wird. Siehe (!url [http://www.udo-open-source.org/download/shells.php] []).
+Unter Windows steht für UDO eine graphische Bedienungsoberfläche (Shell) zur Verfügung, die aber derzeit nicht mehr weiterentwickelt wird. 
+Siehe (!url [http://www.udo-open-source.org/download/shells.php][]).
 
 !end_node # Windows-Shell
 

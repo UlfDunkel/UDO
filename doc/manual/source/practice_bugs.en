@@ -15,6 +15,8 @@
 # 2009:
 #   fd  Jun 06: introduced (extracted from working.ui)
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -50,7 +52,7 @@ document width yet. Chapter titles may also appear in different columns
 
 !end_description
 
-More bugs and problems are documented on the (!url [UDO website] [http://www.udo-open-source.org/]).
+More bugs and problems are documented on the (!url [UDO website] [http://www.udo-open-source.org/][][elink]).
 You may enter new bugs and problems into the bugtracker system. Before doing so, please check if your
 bug isn't already known or your feature wish isn't already documented. You may ask on the mailing list "UDO discussion".
 

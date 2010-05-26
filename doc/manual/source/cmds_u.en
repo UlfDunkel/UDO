@@ -174,7 +174,7 @@ Reference to external links.
 !item [(!DESCRIPTION)]
 Use this command to create (external) links. 
 In contrary to (!KKW [xlink]), this command always creates a link to a URL.
-""(!TEXT)"" can be empty and will then be replaced by the content of ""(!LINK)"". 
+""(!LINK)"" can be empty and will then be replaced by the content of ""(!TEXT)"". 
 So you don't have to enter the URL twice when you want to show it as the link description.
 
 When the URL contains a tilde, it (!I)does not have to be protected(!i) with an exclamation mark in the (!KKW [url]) command.

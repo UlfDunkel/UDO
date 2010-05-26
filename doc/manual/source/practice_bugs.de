@@ -17,6 +17,8 @@
 #   fd  Jun 09: file reviewed
 #   fd  Jun 09: ', so ' -> ', ' (old-style fill word, not required)
 #   fd  Jun 09: real quotation fixed
+# 2010:
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -56,7 +58,7 @@ Die folgenden Fehler und Probleme sind derzeit bekannt:
 
 !end_description
 
-Weitere Fehler und Probleme sind im (!url [UDO-BugTracker] [http://bugs.udo-open-source.org/]) dokumentiert. Hier können auch Sie Fehler und Feature-Wünsche eintragen.
+Weitere Fehler und Probleme sind im (!url [UDO-BugTracker] [http://bugs.udo-open-source.org/][][elink]) dokumentiert. Hier können auch Sie Fehler und Feature-Wünsche eintragen.
 Bitte vergewissern Sie sich jedoch zunächst, ob es sich nicht bereits um einen bekannten Fehler oder einen
 bereits dokumentierten Feature-Wunsch handelt. Hierzu können Sie z.B. in der Mailingliste ""UDO-Discussion"" nachfragen.
 

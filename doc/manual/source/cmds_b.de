@@ -27,6 +27,7 @@
 #   fd  May 19: - "short" -> "compressed"
 #               - more links to "not_compressed"
 #   fd  May 26: table adjustments
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -533,7 +534,7 @@ Ausgabe werden Einrückungen beachtet.
 
 Im Unterschied zur verbatim-Umgebung wird (momentan
 nur für RTF) vor der Ausgabe auf einen anderen
-Zeichensatz (""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm])"")
+Zeichensatz (""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm][][elink])"")
 umgeschaltet, sodass DOS-Screenshots korrekt dargestellt werden sollten.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5

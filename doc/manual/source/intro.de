@@ -26,6 +26,7 @@
 #   fd  Feb 26: - intro_community: Christof Schardt added
 #               - intro_contact: URLs added
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -92,7 +93,9 @@ Da das UDO-Handbuch eher in die Kategorie ""Technisches Handbuch und Nachschlage
 !item (!code [Code benutzt diese Schriftart.])
 !item (!file [Dateinamen, Pfade und ähnliches werden so dargestellt.])
 !item (!red)Konstanten, die im Programm verwendet werden, sind so dargestellt.(!coloff)
-!item Verknüpfungen zu anderen Kapiteln werden wie sonst auch in Webseiten dargestellt, z.B. (!url [dieser Link zur UDO-Website][http://www.udo-open-source.org/]) oder diese (!link [Verknüpfung zu einem anderen Handbuch-Kapitel][Kontaktadresse]).
+!item Verknüpfungen zu anderen Kapiteln werden wie sonst auch in Webseiten dargestellt, 
+      z.B. (!url [dieser Link zur UDO-Website][http://www.udo-open-source.org/]) 
+      oder diese (!link [Verknüpfung zu einem anderen Handbuch-Kapitel][Kontaktadresse]).
 !end_itemize
 
 !end_description
@@ -346,7 +349,7 @@ Am UDO-Projekt beteiligte Personen (in alphabetischer Reihenfolge):
 !alias      Kontaktadresse
 !alias      Mailingliste
 
-Auf der UDO-Website (!url [http://www.udo-open-source.org] [http://www.udo-open-source.org/]) finden Sie Informationen für UDO-Anwender und Entwickler, insbesondere können Sie hier die aktuellen Versionen des Programms und der Dokumentation herunterladen.
+Auf der UDO-Website (!url [www.udo-open-source.org] [http://www.udo-open-source.org/]) finden Sie Informationen für UDO-Anwender und Entwickler, insbesondere können Sie hier die aktuellen Versionen des Programms und der Dokumentation herunterladen.
 
 Zum Kontakt zwischen den UDO-Anwendern stehen folgende (!B)Mailinglisten(!b) zur Verfügung:
 

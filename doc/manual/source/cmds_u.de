@@ -198,7 +198,7 @@ Verweis auf externe Daten.
 !item [(!DESCRIPTION)]
 Dient zum Erzeugen von Verweisen auf externe Dokumente. 
 Im Unterschied zu (!KKW [xlink]) wird bei jedem Format ein Link auf einen URL (""Unified Resource Locator"") angelegt. 
-""(!TEXT)"" kann auch leer sein, dann wird für ""(!TEXT)"" der Inhalt von ""(!LINK)"" ausgegeben. 
+""(!LINK)"" kann auch leer sein, dann wird stattdessen der Inhalt von ""(!TEXT)"" ausgegeben. 
 So brauchen Sie z.B. den URL nicht doppelt anzugeben, wenn er als Linkbeschreibung lesbar sein soll.
 
 Kommt in einem Verweis eine Tilde vor, so braucht sie bei Verwendung im (!KKW [url])-Kommando (!I)nicht(!i) durch ein Ausrufezeichen geschützt zu werden.

@@ -14,6 +14,8 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+# 2010:
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -30,8 +32,8 @@
 David's Readme Compiler is a free MS-DOS program written by David Harris (author of the
 Pegasus email program). It converts a text file with formatting codes into an viewer application.
 
-You can download David's Readme Compiler on (!url [http://risc.ua.edu/pegasus/other/drc21.zip] []) or
-(!url [http://public.planetmirror.com/pub/pegasus/other/drc21.zip] []).
+You can download David's Readme Compiler on (!url [http://risc.ua.edu/pegasus/other/drc21.zip][][][elink]) or
+(!url [http://public.planetmirror.com/pub/pegasus/other/drc21.zip][][][elink]).
 
 !end_node # David's Readme Compiler
 

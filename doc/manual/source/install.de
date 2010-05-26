@@ -27,6 +27,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -170,7 +171,7 @@ Oder benutzen Sie Ihre bevorzugte rpm-Oberfläche (z.B. kpackage, krpmview, yast)
 !html_name  installation_linux_deb
 
 !begin_itemize !compressed
-!item Laden Sie sich das entsprechende deb-Paket von (!url [http://www.debian.org] [http://www.debian.org/]) herunter.
+!item Laden Sie sich das entsprechende deb-Paket von (!url [debian.org] [http://www.debian.org/][][elink]) herunter.
 !item Melden Sie sich als (!code [root]) an.
 !item (!code [dpkg -i]) (!file [file])(!file[.deb])
 !end_itemize

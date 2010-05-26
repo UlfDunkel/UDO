@@ -17,6 +17,8 @@
 #   fd  Jun 08: quotation changed
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using macro (!code [])
+# 2010:
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -44,7 +46,8 @@ is available for.
 !begin_node GEM version
 !html_name  usage_gem
 
-For GEM (Atari platforms) there is a graphical user interface (shell) which is no longer maintained and supported. See (!url [http://www.udo-open-source.org/download/shells.php] []).
+For GEM (Atari platforms) there is a graphical user interface (shell) which is no longer maintained and supported. 
+See (!url [http://www.udo-open-source.org/download/shells.php][]).
 
 # neuer Text 28.01.2004 - Ulrich Kretschmer
 # The former GEM version of UDO is currently not available.
@@ -318,7 +321,7 @@ installed in the guides folder of Hyperion.
 
 On the Windows platform you can use a graphical user interface (shell) for interacting with UDO.
 The shell is currently out of development.
-See (!url [http://www.udo-open-source.org/download/shells.html] []).
+See (!url [http://www.udo-open-source.org/download/shells.html][]).
 
 !end_node # UDO Shell for Windows
 

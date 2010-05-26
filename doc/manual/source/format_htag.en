@@ -14,6 +14,8 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+# 2010:
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -26,9 +28,11 @@ More information:
 !autoref [off]
 
 !begin_itemize
-!item Common Desktop Environment (CDE) Help System: (!url [http://www.oasis-open.org/cover/gen-apps.html#cde] []) (general overview, with some more links)
+!item Common Desktop Environment (CDE) Help System: (!nl)
+      (!url [general overview, with some more links][http://www.oasis-open.org/cover/gen-apps.html#cde][][elink])
 
-!item Common Desktop Environment: Help System Author's and Programmer's Guide: (!url [http://h71000.www7.hp.com/doc/73final/helpguide/helpguide_5.html] []).
+!item Common Desktop Environment: Help System Author's and Programmer's Guide: (!nl)
+      (!url  [][http://h71000.www7.hp.com/doc/73final/helpguide/helpguide_5.html][][elink])
 
 !end_itemize
 
