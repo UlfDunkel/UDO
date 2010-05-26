@@ -25,6 +25,7 @@
 #   fd  Mar 02: macro NTY (= not translated yet)
 #   fd  Mar 03: macro INCOMPLETE, deprecated macros removed
 #   fd  May 25: macro NOTE + TIP
+#   fd  May 26: macro CLASS + TARGET
 #
 ################################################################################
 
@@ -53,9 +54,11 @@
 !macro CHARSET        (!link [&lt;zeichensatz&gt;] [Code])
 
 !macro CHAR           &lt;zeichen&gt;
+!macro CLASS          &lt;klasse&gt;
 !macro FILE           &lt;datei&gt;
 !macro LINK           &lt;link&gt;
 !macro NAME           &lt;name&gt;
+!macro TARGET         &lt;ziel&gt;
 !macro TEXT           &lt;text&gt;
 !macro VALUE          &lt;wert&gt;
 !macro WORD           &lt;wort&gt;
@@ -75,9 +78,11 @@
 !macro CHARSET        (!link [<zeichensatz>] [Code])
 
 !macro CHAR           <zeichen>
+!macro CLASS          <klasse>
 !macro FILE           <datei>
 !macro LINK           <link>
 !macro NAME           <name>
+!macro TARGET         <ziel>
 !macro TEXT           <text>
 !macro VALUE          <wert>
 !macro WORD           <wort>
