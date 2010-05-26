@@ -30,6 +30,7 @@
 #   fd  Mar 19: new chapter 'not_compressed'
 #   fd  May 21: xref links fixed
 #   fd  May 25: using macro NOTE + TIP
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -193,7 +194,7 @@ Manuellen Zeilenumbruch setzen.
 !item [(!SYNTAX)] (!T)(!/nl)(!t)
 
 !item [(!DESCRIPTION)]
-Durch (!KKW [nl]) kann man einen Zeilenumbruch erzwingen.
+Durch (!KKW [nl]) können Sie einen Zeilenumbruch erzwingen.
 Vor (!KKW [nl]) (!B)muss(!b) ein (festes) Leerzeichen stehen! Nach
 (!KKW [nl]) muss ebenfalls ein (festes) Leerzeichen stehen
 oder (!KKW [nl]) muss das letzte Wort einer Zeile sein.
@@ -276,7 +277,7 @@ Keine Fußzeilen benutzen.
 !item [(!SYNTAX)] (!T)!/no_bottomlines [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man die automatische
+Mit diesem Kommando können Sie die automatische
 Erzeugung von Fußzeilen der jeweiligen Ausgabeformate
 unterbinden. Im Beispiel würde dies bei der
 Umwandlung ins Pure-C-Hilfe-Format geschehen.
@@ -375,7 +376,7 @@ Keine Kontaktangaben in den Fußzeilen erzeugen.
 !item [(!SYNTAX)] (!T)!/no_footers [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man die automatische
+Mit diesem Kommando können Sie die automatische
 Erzeugung der Kontaktangaben in der Fußzeile der jeweiligen Ausgabeformate
 unterbinden, sofern diese vorhanden sind. Im Beispiel würde dies bei der
 Umwandlung ins HTML-Format geschehen.
@@ -410,7 +411,7 @@ Keine Kopfzeilen benutzen.
 !item [(!SYNTAX)] (!T)!/no_headlines [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man die automatische
+Mit diesem Kommando können Sie die automatische
 Erzeugung von Titelzeilen der jeweiligen Ausgabeformate
 unterbinden. Im Beispiel würde dies bei der
 Umwandlung ins WinHelp-Format geschehen.
@@ -517,7 +518,7 @@ UDO ermittelt nun für Bilder im GIF- oder JPEG-Format die jeweiligen Ausmaße und
 gibt diese dann beim HTML-Format beim (!code [<img>])-Tag an. UDO sucht die Bilder 
 ausgehend vom Ausgabeverzeichnis, bastelt sich also den Dateinamen aus
 Laufwerk und Pfad der Ausgabedatei und dem bei (!KW [image]) angebenen
-Dateinamen zusammen. Mit diesem Schalter kann man die Ermittlung der Ausmaße deaktivieren.
+Dateinamen zusammen. Mit diesem Schalter können Sie die Ermittlung der Ausmaße deaktivieren.
 
 (!TIP) Falls Sie in Ihrer HTML-Dokumentation viele Bilder ständig aktualisieren, ist es sinnvoll, diesen Schalter zu nutzen, da Sie dann einfach nur die Bilder auf dem Server austauschen können, nicht aber die HTML-Seiten neu generieren müssen.
 
@@ -615,8 +616,8 @@ Keine Verweise benutzen.
 !item [(!DESCRIPTION)]
 Dieser Befehl schaltet die Benutzung von
 Verweisen aus, falls das formatzugehörige Kürzel
-angegeben wurde. Dies ist sinnvoll, falls man z.B.
-in einem RTF-Dokument den Text ""siehe !.."" unterdrücken will.
+angegeben wurde. Dies ist sinnvoll, falls Sie z.B.
+in einem RTF-Dokument den Text ""siehe !.."" unterdrücken wollen.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~6
 
@@ -681,7 +682,7 @@ Keine Kopfzeilen in Popup-Nodes benutzen.
 !item [(!SYNTAX)] (!T)!/no_popup_headlines [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man die automatische
+Mit diesem Kommando können Sie die automatische
 Erzeugung von Titelzeilen der jeweiligen Ausgabeformate
 bei Popup-Nodes unterbinden. Titelzeilen für normales
 Nodes werden weiterhin erzeugt. Im Beispiel würde dies bei der
@@ -719,10 +720,10 @@ Ausgabe von Zielformat-Vorspann unterdrücken.
 !item [(!DESCRIPTION)]
 Wird dieser Schalter im Vorspann angegeben, gibt
 UDO für die angegebenen Formate keinen Vorspann aus.
-Das Beispiel zeigt, wie man dafür sorgen kann, dass
+Das Beispiel zeigt, wie Sie dafür sorgen können, dass
 UDO keinen (!LaTeX)-Vorspann erzeugt. Diesen Schalter
-sollte man nur dann verwenden, wenn man ausreichend
-Kenntnis über das jeweilige Zielformat besitzt.
+sollten Sie nur dann verwenden, wenn Sie ausreichend
+Kenntnis über das jeweilige Zielformat besitzen.
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.47
 
@@ -795,7 +796,7 @@ Sourcecode-Zeilen nicht ausgeben.
 !item [(!DESCRIPTION)]
 Der Schalter (!KW [no_sourcecode]) bewirkt, dass für die
 angegebenen Formate die Sourcecode-Zeilen nicht ausgegeben werden. Somit
-kann man sich eine Programm-Doku ohne den Sourcecode erzeugen.
+können Sie sich eine Programm-Doku ohne den Sourcecode erzeugen.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~16
 
@@ -820,7 +821,7 @@ Keine Linien in Tabellen benutzen.
 !item [(!SYNTAX)] (!T)!/no_table_lines [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Benutzt man im Vorspann diesen Schalter, erzeugt UDO in Tabellen
+Benutzen Sie im Vorspann diesen Schalter, erzeugt UDO in Tabellen
 keine senkrechten oder waagerechten Linien. Im Beispiel würde UDO keine
 Tabellenlinien für WinHelp und IPF erzeugen.
 
@@ -926,8 +927,8 @@ Keine externen Verweise auf WWW-Seiten benutzen.
 !item [(!DESCRIPTION)]
 Dieser Befehl schaltet die Benutzung von externen
 Verweisen auf WWW-Seiten aus, falls das formatzugehörige Kürzel
-angegeben wurde. Dies ist sinnvoll, falls man einen
-Hypertext mit HTML-Links versehen hat, die jedoch
+angegeben wurde. Dies ist sinnvoll, falls Sie einen
+Hypertext mit HTML-Links versehen haben, die jedoch
 weder in einem WinHelp- noch ST-Guide-Hypertext Sinn ergeben würden.
 
 !item [(!SEEALSO)]
@@ -993,8 +994,8 @@ Keine externen Verweise benutzen.
 !item [(!DESCRIPTION)]
 Dieser Befehl schaltet die Benutzung von externen
 Verweisen aus, falls das formatzugehörige Kürzel
-angegeben wurde. Dies ist sinnvoll, falls man einen
-Hypertext mit HTML-Links versehen hat, die jedoch
+angegeben wurde. Dies ist sinnvoll, falls Sie einen
+Hypertext mit HTML-Links versehen haben, die jedoch
 weder in einem WinHelp- noch ST-Guide-Hypertext Sinn ergeben würden.
 
 !item [(!EXISTSSINCE)] Release~4 Version~0.44
@@ -1155,7 +1156,7 @@ Beginnen einer Umgebung angegeben, wird diese
 Umgebung nicht in komprimierter Form ausgegeben, sprich es
 werden zwischen den Aufzählungspunkten 
 zusätzlichen Zwischenräume erzeugt. Das Beispiel
-zeigt, wie man eine ""nicht komprimierte"" Itemize-Umgebung erzeugen kann.
+zeigt, wie Sie eine ""nicht komprimierte"" Itemize-Umgebung erzeugen können.
 
 !item [(!EXISTSSINCE)] 7.01
 

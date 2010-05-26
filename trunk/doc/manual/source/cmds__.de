@@ -23,6 +23,7 @@
 #   fd  Mar 08: macro K1 resolved to KW
 #   fd  Mar 08: macro k1 resolved to kw
 #   fd  May 25: using macro NOTE
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -418,7 +419,7 @@ Marke für eine mögliche Trennstelle.
 
 !item [(!DESCRIPTION)]
 Hiermit können Sie Stellen in einem Wort markieren, an denen UDO das Wort trennen darf. Das Beispiel
-zeigt, wie man die Stellen des Wortes ""Silbentrennung"" markieren könnte.
+zeigt, wie Sie die Stellen des Wortes ""Silbentrennung"" markieren könnten.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
 

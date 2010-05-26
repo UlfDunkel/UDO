@@ -22,6 +22,7 @@
 #   fd  Mar 08: macro usages adjusted
 #   fd  Apr 08: typo
 #   fd  May 19: link adjustments for old commands
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -368,11 +369,11 @@ Das hier ist Zelle 3
    !item Beim Kommando (!KW [html_style_name]) können beliebig viele Stylesheets übergeben werden.
          
    !item Bisher gab es ein (!C)<a name="UDOTOC"></a>(!c) vor dem
-         Inhaltsverzeichnis, auf das man bei der HTML-Ausgabe innerhalb
-         von Raw-Umgebungen verweisen kann.
+         Inhaltsverzeichnis, auf das Sie bei der HTML-Ausgabe innerhalb
+         von Raw-Umgebungen verweisen können.
          
          Jetzt wird UDOTOC als Label angelegt, wenn für HTML ein
-         Inhaltsverzeichnis erzeugt werden soll. Dann kann man auch
+         Inhaltsverzeichnis erzeugt werden soll. Dann können Sie auch
          innerhalb des UDO-Quelltextes auf UDOTOC verweisen, ohne dass ein
          Fehler auftritt.
 

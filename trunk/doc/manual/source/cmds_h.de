@@ -40,6 +40,7 @@
 #   fd  Mar 08: macro K1 resolved to KW
 #   fd  May 18: html_ignore_8bit updated
 #   fd  May 25: using macro NOTE + TIP
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -584,7 +585,7 @@ Hintergrungmusik abspielen
 !item [(!SYNTAX)] (!T)!/html_bgsound (!FILE) (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man Hintergrundmusik für HTML-Seiten angeben. (!FILE) ist dabei
+Mit diesem Kommando können Sie Hintergrundmusik für HTML-Seiten angeben. (!FILE) ist dabei
 der Name der Datei mit Suffix. Als Dateiendung sollte möglichst nur MID, AU und WAV verwendet werden.
 (!VALUE) ist optional und gibt an wie oft das Musikstück wiederholt werden soll. Ohne die Angabe
 wird sie endlos wiederholt.
@@ -657,7 +658,7 @@ Zähler platzieren (nur HTML).
 
 !item [(!DESCRIPTION)]
 Was dem Kommando folgt, wird 1:1 in der Fußzeile
-ausgegeben, sodass man den Zähler optisch besser platzieren kann.
+ausgegeben, sodass Sie den Zähler optisch besser platzieren können.
 Beim ""modernen"" Layout und beim Frames-Layout wird der Zähler in
 der rechten Spalte dargestellt.
 
@@ -686,7 +687,7 @@ Beschreibung in Meta-Informationen aufnehmen (nur HTML).
 !item [(!SYNTAX)] (!T)!/html_description (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Hiermit kann man die Beschreibung einer Seite in die Meta-Informationen aufnehmen. Dieses Kommando ist mehrfach in einem Node verwendbar.
+Hiermit können Sie die Beschreibung einer Seite in die Meta-Informationen aufnehmen. Dieses Kommando ist mehrfach in einem Node verwendbar.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5
 
@@ -761,7 +762,7 @@ Setzen des Dokumententyp (nur HTML).
 !item [(!SYNTAX)] (!T)!/html_doctype (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man den Dokumententyp setzen. Dabei gibt es folgende Möglichkeiten: (!nl)
+Mit diesem Kommando können Sie den Dokumententyp setzen. Dabei gibt es folgende Möglichkeiten: (!nl)
 
 !begin_blist
 !item [Old]                HTML 3.2
@@ -848,7 +849,7 @@ Mit diesem Kommando können Sie Favoriten-Icons festlegen. Prinzipiell kann jede 
 !item [(!SYNTAX)] (!T)!/html_frames_alignment [left|center|right](!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man die Ausrichtung der Links im linken Frame
+Mit diesem Kommando können Sie die Ausrichtung der Links im linken Frame
 bestimmen. Standardeinstellung ist ""center"".
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~13
@@ -1107,7 +1108,7 @@ Position des Rahmens beim Frames-Layout bestimmen (nur HTML).
 !item [(!SYNTAX)] (!T)!/html_frames_position [left|right|top|bottom](!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Befehl kann man die Position des Rahmens bestimmen,
+Mit diesem Befehl können Sie die Position des Rahmens bestimmen,
 der die Links auf die Nodes enthält. Standardeinstellung ist links.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~9
@@ -1539,7 +1540,7 @@ Setzen der Farbe für Links (nur HTML).
 
 !item [(!DESCRIPTION)]
 Setzt die Farbe, die benutzt wird, um in HTML-Seiten Links darzustellen.
-Wird der Befehl im Vorspann benutzt, setzt man damit
+Wird der Befehl im Vorspann benutzt, setzen Sie damit
 die Standardwerte für alle Seiten inkl. dem Inhaltsverzeichnis.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~1
@@ -1672,7 +1673,7 @@ Links beim ""modernen"" Layout ausrichten (nur HTML).
 !item [(!SYNTAX)] (!T)!/html_modern_alignment [left|center|right](!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man die Ausrichtung der Links im linken Teil der Seite
+Mit diesem Kommando können Sie die Ausrichtung der Links im linken Teil der Seite
 bestimmen. Standardeinstellung ist ""(!code [center])"".
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~13
@@ -1761,7 +1762,7 @@ Wird dieser Schalter im Vorspann angegeben, wird jede Seite
 als Tabelle dargestellt. Die Tabelle besteht dann aus zwei
 Spalten, wobei in der linken Spalte die (!nolink [Links]) auf die anderen
 Nodes und in der rechten Spalte der Seiteninhalt ausgegeben
-werden. Benutzt man (!KW [chaptericon]) innerhalb eines Nodes, werden
+werden. Benutzen Sie (!KW [chaptericon]) innerhalb eines Nodes, werden
 in der linken Spalte Imagelinks angelegt.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~2
@@ -2099,9 +2100,9 @@ Größe der Kapitelüberschriften setzen (HTML).
 !item [(!SYNTAX)] (!T)!/html_nodesize (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Befehl kann man die Größe der Überschriften setzen,
+Mit diesem Befehl können Sie die Größe der Überschriften setzen,
 die UDO bei der Ausgabe von Kapiteln
-benutzen soll. Benutzt man untenstehendes Beispiel,
+benutzen soll. Benutzen Sie untenstehendes Beispiel,
 so werden die Überschriften für Nodes mit (!code [<h2>!..</h2>])
 erzeugt, die für Subnodes und Subsubnodes jeweils mit
 einer kleineren Größe. Standardmäßig verwendet UDO den Wert~(!code [1]).
@@ -2482,7 +2483,7 @@ Transparente Navigationsbutton erzeugen (nur HTML).
 !item [(!SYNTAX)] (!T)!/html_transparent_buttons(!t)
 
 !item [(!DESCRIPTION)]
-Benutzt man diesen Schalter im Vorspann, erzeugt UDO statt der bisher
+Benutzen Sie diesen Schalter im Vorspann, erzeugt UDO statt der bisher
 bekannten Navigationsbuttons kleinere, transparente Buttons.
 
 (!NOTE) Wenn im Zielverzeichnis schon die Navigations-Buttons erzeugt wurden, legt UDO sie nicht neu an. Falls Sie also die Navigations-Buttons z.B. mithilfe dieses Kommandos ändern wollen, müssen Sie erst die vorhandenen (!const [11])~GIF-Dateien löschen. Sie erkennen Sie leicht an der Namensgebung (!file [udo_])<xxxx>(!file [.gif]).
@@ -2655,8 +2656,8 @@ Mit diesem Kommando können Sie UDO einen globalen
 Trennvorschlag unterbreiten. In ""(!WORD)"" sind die
 Stellen mit der Zeichenfolge !/- zu markieren, an denen
 ein Wort getrennt werden darf. Im folgenden Beispiel
-wird gezeigt, wie man die möglichen Trennstellen des
-Wortes ""Silbentrennung"" setzen kann.
+wird gezeigt, wie Sie die möglichen Trennstellen des
+Wortes ""Silbentrennung"" setzen können.
 
 !item [(!SEEALSO)]
 (!KW [sloppy]), (!KW [fussy]), (!KW [//-]), (!link [Silbentrennung] [Silbentrennung])

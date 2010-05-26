@@ -22,6 +22,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  May 19: "short" -> "compressed"
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -46,7 +47,7 @@ Bedeutung mehr für diesen Rechner.
 !item [Wie kann ich bei Pure-C-Hilfe die Kopfzeilen entfernen?]
       UDO erzeugt auf jeder Seite automatisch (!idx [Kopfzeilen]), gebildet aus
       der Überschrift der jeweiligen Seite sowie des Titels der
-      Hilfedatei. Durch Anklicken des Titels kann man zur Titelseite
+      Hilfedatei. Durch Anklicken des Titels können Sie zur Titelseite
       bzw. zum Inhaltsverzeichnis verzweigen.
       
       Durch den Schalter (!KW [no_headlines] [[pch!!]]) lässt sich die Ausgabe

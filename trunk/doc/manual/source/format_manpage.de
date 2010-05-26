@@ -16,6 +16,8 @@
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 09: 'lediglich' -> 'nur'
 #   fd  Jun 10: using ndash instead of mdash in German texts
+# 2010:
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -25,16 +27,16 @@
 Das Manualpage-Format ist ein ASCII-Format, bei dem
 nur Schriftarten durch Backspace-Sequenzen erzeugt werden. Es
 findet seinen Einsatz zur kurzen Beschreibung von Programmen für
-Unix-/Linux-Betriebssysteme. Für längere Anleitungen sollte man nicht
+Unix-/Linux-Betriebssysteme. Für längere Anleitungen sollten Sie nicht
 Manualpages erstellen, sondern das Texinfo-Format vorziehen.
 
 !begin_description !not_compressed
 
-!item [Wie kann man die Seitenlänge der Manualpages einstellen?]
+!item [Wie können Sie die Seitenlänge der Manualpages einstellen?]
       Mit dem Schalter (!KW [man_lpp] [xx]) können Sie die Anzahl der Zeilen
       (xx) pro Seite angeben.
 
-!item [Wie kann man den Programmtyp für die Kopfzeilen setzen]
+!item [Wie können Sie den Programmtyp für die Kopfzeilen setzen]
       Dafür gibt es den Schalter (!KW [man_type] [X]). ""X"" wird in der/den
       Kopfzeile/n in runden Klammern dargestellt.
 

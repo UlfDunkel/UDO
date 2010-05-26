@@ -19,6 +19,7 @@
 #   fd  Mar 03: using PUBLISHED
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 19: link adjustments for old commands
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -45,7 +46,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
          nun NROFF ist, oder nicht vielleicht TROFF oder GROFF oder was
          auch immer, wird nun rudimentär unterstützt.
          
-         Sicherlich wird nicht alles funktionieren, aber dennoch kann man
+         Sicherlich wird nicht alles funktionieren, aber dennoch können Sie 
          es jetzt schon bereits verwenden, um auf einfache Art und Weise
          Manpages für Unix-Systeme zu erstellen.
          
@@ -93,7 +94,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !item (!kw [no_toc_subnodes]), (!kw [no_toc_subsubnodes]), (!kw [no_toc_subsubsubnodes]):
          Zur Verringerung des Umfangs des Inhaltsverzeichnisses
    !item (!KW [no_preamble]):
-         Falls man selber den Vorspann zu einem Format erstellen möchte.
+         Falls Sie selber den Vorspann zu einem Format erstellen möchten.
    !item (!KW [parwidth]):
          Zur Veränderung der Zeilenbreite des Ausgabetextes
    !item (!KW [rtf_charwidth]):
@@ -184,8 +185,8 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !item Beim Index-Befehl können nun bis zu drei Indizes übergeben werden.
    !item Der Befehl (!kw [win_html_look]) existiert nicht mehr.
    !item Schattierte, helle, umrandete und umrahmte Schrift wird
-         nicht mehr angeboten. Falls man diese Schriftarten unbedingt
-         benötigt, kann man sich die nötigen Befehle leicht mit
+         nicht mehr angeboten. Falls sie diese Schriftarten unbedingt
+         benötigen, können Sie sich die nötigen Befehle leicht mit
          Definitionen selbst programmieren.
    !end_itemize
    

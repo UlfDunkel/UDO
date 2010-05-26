@@ -26,6 +26,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -39,7 +40,7 @@ HTML ist eines der meistgenutzten Zielformate, die mit UDO erzeugt werden. Es is
 
 !index Aufteilung
 !index HTML !! Aufteilung
-!item [Wie kann man die Aufteilung in mehrere Dateien unterbinden?]
+!item [Wie können Sie die Aufteilung in mehrere Dateien unterbinden?]
       Im Gegensatz zu den anderen Formaten erzeugt UDO standardmäßig
       mehrere Dateien, die miteinander verknüpft sind. Für jedes
       Kapitel, jeden Abschnitt und Unterabschnitt wird eine eigene
@@ -85,10 +86,10 @@ HTML ist eines der meistgenutzten Zielformate, die mit UDO erzeugt werden. Es is
 !index udo_lf.gif
 !index udo_rg.gif
 !index udo_up.gif
-!item [Wie bekommt man diese scheußlichen Kopfzeilen weg?]
+!item [Wie bekomme ich diese scheußlichen Kopfzeilen weg?]
       UDO erzeugt standardmäßig auf jeder HTML-Seite eine Kopfzeile,
-      anhand derer man das Thema (gebildet aus den Daten von (!KW [docinfo] [[title!!]]) und
-      (!KW [docinfo] [[program!!]])) des Hypertextes erkennen kann. Desweiteren werden Links
+      anhand derer Sie das Thema (gebildet aus den Daten von (!KW [docinfo] [[title!!]]) und
+      (!KW [docinfo] [[program!!]])) des Hypertextes erkennen können. Desweiteren werden Links
       zu der vorgehenden, nachfolgenden und/oder übergeordneten Seite
       angelegt. Dazu werden GIFs benutzt, die UDO automatisch erzeugt.
       Die Dateinamen dieser GIFs lauten (!file [udo_lf.gif]), (!file [udo_rg.gif]) und
@@ -98,10 +99,10 @@ HTML ist eines der meistgenutzten Zielformate, die mit UDO erzeugt werden. Es is
       Durch den Schalter (!KW [no_headlines] [[html!!]]) kann die Ausgabe der
       Kopfzeilen und der Grafiken unterbunden werden.
 
-!item [Wie kann man bequem eigene Kopf- und Fußzeilen erzeugen?]
-      Um eigene (!idx [Kopfzeilen]) und (!idx [Fußzeilen]) zu erzeugen, kann man Makros
-      benutzen, die man jeweils am Anfang und Ende eines Kapitels
-      angibt. Der Inhalt dieser Kapitel erscheint dabei jedoch
+!item [Wie kann ich bequem eigene Kopf- und Fußzeilen erzeugen?]
+      Um eigene (!idx [Kopfzeilen]) und (!idx [Fußzeilen]) zu erzeugen, können Sie Makros
+      benutzen, die Sie jeweils am Anfang und Ende eines Kapitels
+      angeben. Der Inhalt dieser Kapitel erscheint dabei jedoch
       unterhalb der Überschrift. Auf folgende Art und Weise wurden
       beispielsweise Kopf- und Fußzeilen meiner Website angelegt,
       in der es Kapitel namens ""Software"", ""Kontaktadressen"" und
@@ -123,7 +124,7 @@ HTML ist eines der meistgenutzten Zielformate, die mit UDO erzeugt werden. Es is
       Fußzeilen ausgegeben. Durch die Referenzierung von UDO werden
       automatisch Links auf die anderen Kapitel angelegt.
       
-      Wandelt man nicht nach HTML um, werden leere Definitionen und
+      Wandeln Sie nicht nach HTML um, werden leere Definitionen und
       Makros erzeugt, wodurch keine Kopf- und Fußzeilen ausgegeben
       werden.
       
@@ -135,7 +136,7 @@ HTML ist eines der meistgenutzten Zielformate, die mit UDO erzeugt werden. Es is
 !index Rahmen
 !index Tabelle
 !item [Mal wird eine Tabelle umrahmt dargestellt, mal nicht!?]
-      Bei HTML kann man leider nur angeben, ob die gesamte Tabelle
+      Bei HTML können Sie leider nur angeben, ob die gesamte Tabelle
       umrahmt werden soll oder ob sie gar nicht mit einem Rahmen
       dargestellt werden soll.
       

@@ -20,6 +20,8 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 10: using ndash instead of mdash in German texts
+# 2010:
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -32,8 +34,8 @@ Zuständiger Konverter ist das Programm (!file [TVHC.EXE]), das den
 Entwicklungssystemen auch im Sourcecode beiliegt.
 
 Da das Turbo-Vision-Help-Format wohl nur für Programmierer interessant
-sein dürfte, werden hier auch einige Tipps gegeben, wie man den TVHC
-patchen sollte.
+sein dürfte, werden hier auch einige Tipps gegeben, wie Sie den TVHC
+patchen sollten.
 
 Nichtprogrammierer sollten dieses Format meiden, sprich Ihre Hypertexte
 nicht in diesem Format weitergeben, da es außerhalb der Erstellung von

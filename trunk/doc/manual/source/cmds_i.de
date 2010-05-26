@@ -35,6 +35,7 @@
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #   fd  Mar 08: IMG renamed: udo_icon_16 -> udo_16
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -145,7 +146,7 @@ Allgemeine Abfrage beginnen.
 
 !item [(!DESCRIPTION)]
 Dieses Kommando vereint die Abfragekommandos (!KW [iflang]),
-(!KW [ifdest]), (!KW [ifset]) und (!KW [ifos]). Das (etwas unglücklich gewählte) Beispiel zeigt, wie man abfragen kann, ob der Quelltext nach HTML oder mit deutschsprachigen Ausdrücken übersetzt wird.
+(!KW [ifdest]), (!KW [ifset]) und (!KW [ifos]). Das (etwas unglücklich gewählte) Beispiel zeigt, wie Sie abfragen können, ob der Quelltext nach HTML oder mit deutschsprachigen Ausdrücken übersetzt wird.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~11
 
@@ -190,7 +191,7 @@ zwischen (!KW [ifdest]) und (!KW [else]) bzw. (!KW [endif]) angegeben
 werden. Stimmt das Kürzel nicht überein, werden
 nur die Zeilen zwischen (!KW [else]) und (!KW [endif]) ausgewertet,
 sofern (!KW [else]) benutzt wird. Das Beispiel zeigt, wie
-man testen kann, ob die Quelldatei ins ST-Guide- oder
+Sie testen können, ob die Quelldatei ins ST-Guide- oder
 WinHelp-Format umgewandelt wird.
 # ToDo: erfolgt stets eine ODER-Verknüpfung?? (U.K. 17.12.03)
 
@@ -387,7 +388,7 @@ Dieses Kommando testet das aktuelle Betriebssystem,
 unter dem UDO läuft. Enthält ""(!OS)"" (!I)keines(!i) der
 Kürzel der Betriebssysteme, wandelt UDO alle
 Zeilen ab dem folgenden (!KW [else]) um, falls (!KW [else]) benutzt
-wird. Das Beispiel zeigt, wie man abfragen kann, ob
+wird. Das Beispiel zeigt, wie Sie abfragen können, ob
 UDO (!I)nicht(!i) auf einem aktuellen Apple Macintosh läuft.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~16
@@ -437,7 +438,7 @@ mit der Option (!code [-D]) noch mit (!KW [set]) gesetzt wurde. Wurde
 umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht.
 Andernfalls werden nur die Zeilen umgewandelt, die
 (!KW [else]) folgen, sofern die Abfrage einen Sonst-Zweig
-besitzt. Das Beispiel zeigt, wie man abfragt, ob das
+besitzt. Das Beispiel zeigt, wie Sie abfragen, ob das
 Symbol ""deutsch"" nicht gesetzt wurde.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~10
@@ -482,7 +483,7 @@ Dieses Kommando testet das aktuelle Betriebssystem,
 auf dem UDO läuft. Enthält ""(!OS)"" eines der
 Kürzel der Betriebssysteme, wandelt UDO alle
 Zeilen zwischen (!KW [ifos]) und (!KW [endif]) bzw. (!KW [else]) um. Das
-Beispiel zeigt, wie man testen kann, ob UDO unter Linux läuft.
+Beispiel zeigt, wie Sie testen können, ob UDO unter Linux läuft.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~16
 
@@ -525,7 +526,7 @@ Symbol abfragen.
 
 !item [(!DESCRIPTION)]
 Mit diesem Abfragebefehl können Sie testen, ob ein Symbol für die Umwandlung in der Kommandozeile mit
-der Option (!code [-D]) gesetzt wurde. Wurde ""(!TEXT)"" gesetzt, werden alle folgenden Zeilen umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht. Andernfalls werden nur die Zeilen umgewandelt, die (!KW [else]) folgen, sofern die Abfrage einen else-Zweig besitzt. Das Beispiel zeigt, wie man abfragt, ob in der Kommandozeile (!code [-D deutsch]) benutzt wurde.
+der Option (!code [-D]) gesetzt wurde. Wurde ""(!TEXT)"" gesetzt, werden alle folgenden Zeilen umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht. Andernfalls werden nur die Zeilen umgewandelt, die (!KW [else]) folgen, sofern die Abfrage einen else-Zweig besitzt. Das Beispiel zeigt, wie Sie abfragen, ob in der Kommandozeile (!code [-D deutsch]) benutzt wurde.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~10
 
@@ -625,8 +626,8 @@ Ein Kapitel nicht in den Index übernehmen.
 !item [(!DESCRIPTION)]
 Wird dieser Schalter in einem Kapitel angegeben, so
 wird das Kapitel nicht im Index angezeigt. Auch dann
-nicht, wenn man den Schalter (!KW [use_nodes_inside_index])
-im Vorspann gesetzt hat.
+nicht, wenn Sie den Schalter (!KW [use_nodes_inside_index])
+im Vorspann gesetzt haben.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~10
 
@@ -681,7 +682,7 @@ Footerdatei ignorieren.
 !item [(!DESCRIPTION)]
 Darf nur in einem Node benutzt werden und besagt, dass in diesem Node
 die global geltende Footerdatei nicht ausgegeben werden soll. Somit
-kann man einzelne Nodes davor schützen, einen Footer zu erhalten.
+können Sie einzelne Nodes davor schützen, einen Footer zu erhalten.
 
 Dieser Befehl wird derzeit nur für HTML unterstützt.
 
@@ -710,7 +711,7 @@ Headerdatei ignorieren.
 !item [(!DESCRIPTION)]
 Darf nur in einem Node benutzt werden und besagt, dass in diesem Node
 die global geltende Headerdatei nicht ausgegeben werden soll. Somit
-kann man einzelne Nodes davor schützen, einen Header zu erhalten.
+können Sie einzelne Nodes davor schützen, einen Header zu erhalten.
 
 Dieser Befehl wird derzeit nur für HTML unterstützt.
 
@@ -939,7 +940,7 @@ Wird ""<titel>"" angegeben, wird der Text als Bildunterschrift angegeben.
 
 Die Ausrichtung des Bildes richtet sich nach der
 eventuell vorhandenen äußeren Umgebung. Zentrierte
-Bilder erhält man demnach, wenn man das (!KW [image])-Kommando in einer center-Umgebung verwendet.
+Bilder erhalten Sie demnach, wenn Sie das (!KW [image])-Kommando in einer center-Umgebung verwenden.
 (!FILESPACEQUOTE)
 
 !item [(!SEEALSO)]
@@ -1023,8 +1024,8 @@ flushleft- oder flushright-Umgebung ausgegeben werden soll. Wird ein
 Bild innerhalb einer solchen Umgebung ausgegeben, wird es genauso
 ausgerichtet wie der Text innerhalb der Umgebung, sprich: ein Bild wird
 in einer center-Umgebung zentriert ausgegeben, unabhängig davon, was
-man bei (!KW [image_alignment]) gesetzt hat. Will man ein Bild in einer
-center-Umgebung rechtsbündig ausgeben, muss man in dem Fall noch
+Sie bei (!KW [image_alignment]) gesetzt haben. Wollen Sie ein Bild in einer
+center-Umgebung rechtsbündig ausgeben, müssen Sie in dem Fall noch
 eine flushright-Umgebung um den (!KW [image])-Befehl setzen.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~9
@@ -1248,7 +1249,7 @@ Indexeintrag bzw. Schlüsselwort setzen.
 als (!code [K{\footnote~K~!..}]), für RTF als (!code [{\xe\v~!..}])
 und für den ST-Guide als (!code [@index~!..]) ausgegeben.
 ""(!TEXT)"" kommt damit bei (!LaTeX) und dem ST-Guide in den
-Index, bei WinHelp kann man im Suchen-Dialog nach
+Index, bei WinHelp können Sie im Suchen-Dialog nach
 diesem Schlüsselwort suchen und bekommt die Namen der
 Kapitel aufgelistet, in denen (!KW [index]) benutzt wurde.
 ""(!TEXT)"" kann beliebig oft benutzt werden, auch in mehreren Kapiteln.

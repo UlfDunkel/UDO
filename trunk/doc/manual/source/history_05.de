@@ -17,6 +17,7 @@
 # 2010:
 #   fd  Mar 03: old stuff ignored, using PUBLISHED
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -83,7 +84,7 @@ Was sich damals geändert hat, das dürfte heute niemanden mehr interessieren.
 !item [Änderungen:]
    !begin_itemize !compressed
    !item Ein Tabellensatz wurde implementiert. Tabellen können nun
-         sehr einfach erstellt werden. Dabei kann man frei festlegen,
+         sehr einfach erstellt werden. Dabei können Sie frei festlegen,
          wie Spalten ausgerichtet werden sollen und wo Linien
          gezeichnet werden sollen.
    !item Die Formatierung der Umgebungen wurde komplett neu
@@ -97,7 +98,7 @@ Was sich damals geändert hat, das dürfte heute niemanden mehr interessieren.
          und 1024~Labels möglich.
    !item Pro Absatz sind jetzt bis zu 200~Verweise möglich. Früher
          waren (aufgrund eines Fehlers) nur 16~Verweise pro Quelltext möglich.
-   !item Manualpages werden komplett neu formatiert. Nun muss man sich
+   !item Manualpages werden komplett neu formatiert. Nun müssen Sie sich
          nicht mehr die Finger mit description- und quote-Umgebungen
          verbiegen.
    !item Für em(!TeX) werden nun auch PCX-Bilder unterstützt.

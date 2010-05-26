@@ -18,6 +18,7 @@
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 25: index adjustments
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -201,9 +202,12 @@ are called chapters, sections, subsections and paragraphs.
 Using the command (!KW [node]) you tell UDO that a new chapter begins and
 you tell it how the chapter is named. The commands (!KW [subnode]),
 (!KW [subsubnode]) and (!KW [subsubsubnode]) do the same for a section,
-subsection and paragraph. You can also use the commands (!KW [begin_node])
+subsection and paragraph.
+
+(!NOTE) You can also use the commands (!KW [begin_node])
 and (!KW [end_node]) to structure your documentation.
 
+(!NTY)
 Da Bilder oft mehr sagen als tausend Worte, hier ein kleines
 Beispiel. Die (hier inhaltsleere) Befehlsfolge...
 

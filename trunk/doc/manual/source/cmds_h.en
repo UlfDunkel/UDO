@@ -34,6 +34,7 @@
 #   fd  Mar 08: IMG renamed: udo_icon_16 -> udo_16
 #   fd  Mar 08: macro K1 resolved to KW
 #   fd  May 18: html_ignore_8bit updated
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -528,7 +529,7 @@ Hintergrungmusik abspielen
 !item [(!SYNTAX)] (!T)!/html_bgsound (!FILE) (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man Hintergrundmusik für HTML-Seiten angeben. (!FILE) ist dabei
+Mit diesem Kommando können Sie Hintergrundmusik für HTML-Seiten angeben. (!FILE) ist dabei
 der Name der Datei mit Endung. Als Dateiendung sollte möglichst nur MID, AU und WAV verwendet werden.
 (!VALUE) ist optional und gibt an wie oft das Musikstück wiederholt werden soll. Ohne die Angabe
 wird sie endlos wiederholt.
@@ -590,7 +591,7 @@ Place counter (HTML only).
 (!red)
 !item [(!DESCRIPTION)]
 Was dem Kommando folgt, wird 1:1 in der Fußzeile
-ausgegeben, sodass man den Counter optisch besser plazieren kann.
+ausgegeben, sodass Sie den Counter optisch besser plazieren können.
 Beim ""modernen"" Layout und beim Frames-Layout wird der Counter in
 der rechten Spalte dargestellt.
 
@@ -696,7 +697,7 @@ Setzen des Dokumententyp (nur HTML).
 !item [(!SYNTAX)] (!T)!/html_doctype (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man den Dokumententyp setzen. Dabei gibt es folgemde
+Mit diesem Kommando können Sie den Dokumententyp setzen. Dabei gibt es folgemde
 Möglichkeiten: Old (HTML 3.2), Strict (HTML 4.01 Strict),
 Transitional (HTML 4.01 Transitional), XHTML Strict oder XHTML Transitional.
 
@@ -863,7 +864,7 @@ Setzen des Frametitel für den Frame des Inhalsverzeichnis beim Frame Layout (nur
 
 !item [(!SYNTAX)] (!T)!/html_frames_con_title (!TEXT)(!t)
 Setzen des Frametitel für den Frame des Inhalts beim Frame Layout.
-Gibt man zum Beispiel als (!TEXT) Inhalt an so wird daraus: (!nl)
+Geben Sie zum Beispiel als (!TEXT) Inhalt an so wird daraus: (!nl)
 <frame src="00con.htm" name="UDOcon" marginwidth="0" marginheight="0" title="Inhalt">
 
 !item [(!EXISTSSINCE)] Version 6.5.16
@@ -1047,7 +1048,7 @@ Setzen des Frametitel für den Frame des Inhalsverzeichnis beim Frame Layout (nur
 !item [(!SYNTAX)] (!T)!/html_frames_toc_title (!TEXT)(!t)
 !item [(!DESCRIPTION)]
 Setzen des Frametitel für den Frame des Inhalsverzeichnis beim Frame Layout.
-Gibt man zum Beispiel als (!TEXT) Navigation an so wird daraus: (!nl)
+Geben Sie zum Beispiel als (!TEXT) Navigation an so wird daraus: (!nl)
 <frame src="00toc.htm" name="UDOtoc" marginwidth="0" marginheight="0" title="Navigation">
 
 !item [(!EXISTSSINCE)] Version 6.5.16
@@ -1610,7 +1611,7 @@ Wird dieser Schalter im Vorspann angegeben, so wird jede Seite
 als Tabelle dargestellt. Die Tabelle besteht dann aus zwei
 Spalten, wobei in der linken Spalte die (!nolink [Links]) auf die anderen
 Nodes und in der rechten Spalte der Seiteninhalt ausgegeben
-werden. Benutzt man (!KW [chaptericon]) innerhalb eines Nodes, so werden
+werden. Benutzen Sie (!KW [chaptericon]) innerhalb eines Nodes, so werden
 in der linken Spalte Imagelinks angelegt.
 (!coloff)
 !item [(!DESCRIPTION)]
@@ -1920,9 +1921,9 @@ Set size of headings (HTML only).
 
 (!red)
 !item [(!DESCRIPTION)]
-Mit diesem Befehl kann man die Größe der Überschriften setzen,
+Mit diesem Befehl können Sie die Größe der Überschriften setzen,
 die UDO bei der Ausgabe von Kapiteln
-benutzen soll. Benutzt man untenstehendes Beispiel,
+benutzen soll. Benutzen Sie untenstehendes Beispiel,
 so werden die Überschriften für Nodes mit (!code [<h2>!..</h2>])
 erzeugt, die für Subnodes und Subsubnodes jeweils mit
 einer kleineren Größe. Standardmäßig verwendet UDO den Wert~1.
@@ -2368,8 +2369,8 @@ Mit diesem Kommando können Sie UDO einen globalen
 Trennvorschlag unterbreiten. In ""(!WORD)"" sind die
 Stellen mit der Zeichenfolge !/- zu markieren, an denen
 ein Wort getrennt werden darf. Im folgenden Beispiel
-wird gezeigt, wie man die möglichen Trennstellen des
-Wortes ""Silbentrennung"" setzen kann.
+wird gezeigt, wie Sie die möglichen Trennstellen des
+Wortes ""Silbentrennung"" setzen können.
 (!coloff)
 !item [(!DESCRIPTION)]
 You can set Hyphenation marks ((!code [!/-])) with this command for

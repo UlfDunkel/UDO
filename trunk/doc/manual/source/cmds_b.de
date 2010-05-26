@@ -28,6 +28,7 @@
 #               - more links to "not_compressed"
 #   fd  May 26: table adjustments
 #   fd  May 26: (!url) enhanced for UDO v7.02
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -202,7 +203,7 @@ muss mit (!KW [end_blist]) beendet werden. Die Länge von
 ""(!TEXT)"" definiert die Tiefe der Einrückung der
 Aufzählungspunkte. Diese Umgebung lässt sich mit
 anderen Umgebungen kombiniert verwenden. Die Texte,
-die man mit (!KW [item] [[~!!]]) angibt, werden fett
+die Sie mit (!KW [item] [[~!!]]) angeben, werden fett
 dargestellt.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~4
@@ -232,7 +233,7 @@ Dieses Kommando öffnet eine (neue) center-Umgebung.
 Zeilen, die innerhalb dieser Umgebung stehen, werden
 zentriert ausgegeben, bis das Kommando (!KW [end_center])
 angegeben wird. UDO formatiert auch die Zeilen dieser
-Umgebung, daher sollte man auch hier notfalls
+Umgebung, daher sollten Sie auch hier notfalls
 manuelle Zeilenumbrüche mit (!KKW [nl]) einfügen.
 
 !item [(!SEEALSO)]
@@ -462,7 +463,7 @@ Eine ""kursive"" Liste einleiten.
 !item [(!DESCRIPTION)]
 Leitet eine neue Listen-Umgebung ein. Diese Umgebung muss mit (!KW [end_ilist]) beendet werden. Die Länge von
 ""(!TEXT)"" definiert die Tiefe der Einrückung der Aufzählungspunkte. Sie können diese Umgebung auch mit
-anderen (!nolink [Umgebungen]) kombinieren. Die Aufzählungspunkte, die man mit (!KW [item] [[~!!]]) einleitet,
+anderen (!nolink [Umgebungen]) kombinieren. Die Aufzählungspunkte, die Sie mit (!KW [item] [[~!!]]) einleiten,
 werden kursiv dargestellt.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~4
@@ -912,7 +913,7 @@ muss mit (!KW [end_tlist]) beendet werden. Die Länge von
 ""(!TEXT)"" definiert die Tiefe der Einrückung der
 Aufzählungspunkte. Sie können diese Umgebung auch mit
 anderen (!nolink [Umgebungen]) kombinieren. Die
-Die Texte, die man mit (!KW [item] [[~!!]]) angibt, werden mit nichtproportionaler Schrift
+Die Texte, die Sie mit (!KW [item] [[~!!]]) angeben, werden mit nichtproportionaler Schrift
 dargestellt.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~4
@@ -971,7 +972,7 @@ muss mit (!KW [end_xlist]) beendet werden. Die Länge von
 ""(!TEXT)"" definiert die Tiefe der Einrückung der
 Aufzählungspunkte. Diese Umgebung lässt sich mit
 anderen (!nolink [Umgebungen]) kombiniert verwenden. Die Texte,
-die man mit (!KW [item] [[~!!]]) angibt, werden normal
+die Sie mit (!KW [item] [[~!!]]) angeben, werden normal
 dargestellt.
 
 !item [(!SEEALSO)]
@@ -1367,7 +1368,7 @@ Umwandlung vorzeitig unterbrechen.
 !item [(!SYNTAX)] (!T)!/break(!t)
 
 !item [(!DESCRIPTION)]
-Dieses Kommando kann man benutzen, um die Umwandlung
+Dieses Kommando können Sie benutzen, um die Umwandlung
 des Quelltextes vorzeitig zu beenden. Alles, was nach
 (!KW [break]) folgt, wird nicht mehr beachtet. UDO führt
 noch automatisch ein (!KW [end_appendix]) und (!KW [end_document])

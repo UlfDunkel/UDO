@@ -30,6 +30,7 @@
 #   fd  May 25: - new: !l*, !label*
 #               - chapter 'language' adjusted
 #               - using macro NOTE
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -165,7 +166,7 @@ Sprungmarke setzen.
 
 !item [(!DESCRIPTION)]
 Definiert eine Sprungmarke, die bei Hypertextformaten
-automatisch referenziert wird und auf die man durch die Link-Befehle verweisen kann.
+automatisch referenziert wird und auf die Sie durch die Link-Befehle verweisen können.
 
 !item [(!SEEALSO)]
 (!KW [l]),
@@ -501,7 +502,7 @@ Manuellen Querverweis durchführen.
 !item [(!SYNTAX)] (!T)(!/link [(!TEXT)] [(!LINK)])(!t)
 
 !item [(!DESCRIPTION)]
-Hiermit können Querverweise auf andere Kapitel oder Sprungmarken vorgenommen werden. Ausführliche Informationen findet man im Abschnitt ""Querverweise"".
+Hiermit können Querverweise auf andere Kapitel oder Sprungmarken vorgenommen werden. Ausführliche Informationen finden Sie im Abschnitt ""Querverweise"".
 
 !item [(!SEEALSO)]
 (!KKW [xlink]), (!KKW [plink]), (!link [Querverweise] [Querverweise])

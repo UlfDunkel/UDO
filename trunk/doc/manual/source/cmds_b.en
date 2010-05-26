@@ -26,6 +26,7 @@
 #   fd  May 19: - "short" -> "compressed"
 #               - more links to "not_compressed"
 #   fd  May 26: (!url) enhanced for UDO v7.02
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -477,7 +478,7 @@ Start an italic list.
 !item [(!DESCRIPTION)]
 Leitet eine neue Listen-Umgebung ein. Diese Umgebung muss mit (!KW [end_ilist]) beendet werden. Die Länge von
 ""(!TEXT)"" definiert die Tiefe der Einrückung der Aufzählungspunkte. Sie können diese Umgebung auch mit
-anderen (!nolink [Umgebungen]) kombinieren. Die Aufzählungspunkte, die man mit (!KW [item] [[~!!]]) einleitet,
+anderen (!nolink [Umgebungen]) kombinieren. Die Aufzählungspunkte, die Sie mit (!KW [item] [[~!!]]) einleiten,
 werden kursiv dargestellt.
 (!coloff)
 !item [(!DESCRIPTION)]
@@ -1004,7 +1005,7 @@ muss mit (!KW [end_xlist]) beendet werden. Die Länge von
 ""(!TEXT)"" definiert die Tiefe der Einrückung der
 Aufzählungspunkte. Diese Umgebung lässt sich mit
 anderen (!nolink [Umgebungen]) kombiniert verwenden. Die Texte,
-die man mit (!KW [item] [[~!!]]) angibt, werden normal
+die Sie mit (!KW [item] [[~!!]]) angeben, werden normal
 dargestellt.
 (!coloff)
 !item [(!DESCRIPTION)]

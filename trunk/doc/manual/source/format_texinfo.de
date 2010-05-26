@@ -21,6 +21,7 @@
 #   fd  Jun 10: using macro (!file [])
 # 2010:
 #   fd  May 19: "short" -> "compressed"
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -30,8 +31,8 @@
 Texinfo hat in der GNU-Welt eine größere Bedeutung. Texte, die im
 Texinfo-Format erstellt werden, können mit Plain-(!TeX) als sauber
 gesetzte Anleitung ausgedruckt werden bzw. mit ""Makeinfo"" in einen
-Hypertext umgewandelt werden, welchen man sich mit ""Info"" anzeigen
-kann.
+Hypertext umgewandelt werden, welchen Sie sich mit ""Info"" anzeigen
+können.
 
 UDO erzeugt auf Systemen, auf denen nur ein 8+3-Dateisystem zur
 Verfügung steht, die Dateiendung (!file [.tex]). Stehen lange Dateinamen zur
@@ -46,7 +47,7 @@ Verfügung, wird (!file [.texi]) benutzt.
       Sonderzeichen enthält, werden die Zeichen des Namens in kodierter
       Form ausgegeben.
       
-      Formatiert man die Texinfo-Datei mit (!TeX), tauchen diese
+      Formatieren Sie die Texinfo-Datei mit (!TeX), tauchen diese
       Sonderzeichen in den Kapitelüberschiften selbstverständlich auf.
 
 !item [Warum werden Umgebungen nicht ""komprimiert"" dargestellt?]

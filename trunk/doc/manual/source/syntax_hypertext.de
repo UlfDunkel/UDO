@@ -29,6 +29,7 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro KK2W resolved into macros KKW + code
 #   ggs Apr 05: Remove some !]
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -55,7 +56,7 @@ werden solche Sprungmarken automatisch referenziert, d.h., UDO legt automatisch 
 WinHelp werden diese Sprungmarken zusätzlich im Suchen-Dialog
 angegeben. Bei ST-Guide erscheinen sie im Index.
 
-Im Beispiel könnte man dann im Hypertext von jedem Wort ""Beispiel"" an
+Im Beispiel könnten Sie dann im Hypertext von jedem Wort ""Beispiel"" an
 die Stelle gelangen, an der diese Sprungmarke definiert wurde.
 
 Die Umsetzung im Detail:
@@ -98,7 +99,7 @@ Dateien zu verweisen.
 (!HINT)
 
 Falls innerhalb eines der Link-Befehle "")"" oder ""]""
-benutzt werden, muss man diese Zeichen quoten, damit UDO den Befehl korrekt
+benutzt werden, müssen Sie diese Zeichen quoten, damit UDO den Befehl korrekt
 umsetzen kann. Beispiel:
 
 (!EXAMPLE_BEGIN)
@@ -114,7 +115,7 @@ Richtig: (!link [Klammern!]!)] [Verweis])
 !begin_node Interne Querverweise
 !html_name  hypertext_links_internal
 
-Manchmal möchte man auf andere Stellen der Dokumentation oder auf
+Manchmal möchten Sie auf andere Stellen der Dokumentation oder auf
 andere Hypertexte oder Websites verweisen. Um dies zu ermöglichen,
 bietet UDO einen Satz von Befehlen für Querverweise.
 
@@ -153,7 +154,7 @@ zur UDO-Gemeinde verwiesen wird:
       ob der benutzte Verweis vorhanden ist. Ist er es nicht, gibt
       UDO eine Fehlermeldung aus.
 
-!item Bei (!LaTeX) kann man nur auf Labels und Aliase, nicht auf Kapitel
+!item Bei (!LaTeX) können Sie nur auf Labels und Aliase, nicht auf Kapitel
       verweisen.
 !end_enumerate
 
@@ -225,7 +226,7 @@ Sie unsere Kontaktinformationen finden.
 (!HINTS)
 
 !begin_enumerate !compressed
-!item Bei (!LaTeX) kann man nur auf Labels, nicht auf Kapitel verweisen.
+!item Bei (!LaTeX) können Sie nur auf Labels, nicht auf Kapitel verweisen.
 
 !item Insgesamt dürfen in einem Absatz (!MAXLINK) Links benutzt werden. Wird
       diese Zahl überschritten, gibt UDO eine Fehlermeldung aus, dass 
@@ -294,11 +295,11 @@ HTML-Datei.
 (!HINTS)
 
 !begin_enumerate !compressed
-!item Für WinHelp muss man gültige Topicnamen und Dateinamen angeben.
+!item Für WinHelp müssen Sie gültige Topicnamen und Dateinamen angeben.
       Der HCP akzeptiert in Topicnamen nur Buchstaben, Ziffern und den
       Unterstrich. Andere Zeichen werden von UDO angepasst!
 
-!item Für ST-Guide sollte man dem Dateinamen die Zeichen (!file [*:\])
+!item Für ST-Guide sollten Sie dem Dateinamen die Zeichen (!file [*:\])
       voranstellen, dass der ST-Guide in allen in den für ihn angegebenen
       Verzeichnissen aus der in der (!file [ST-GUIDE.INF]) angegebenen Variable namens
       (!code [PATHS]) nach der Datei sucht.
@@ -306,8 +307,8 @@ HTML-Datei.
 !index (!kw [no_xlinks])
 !item Durch den Schalter (!KW [no_xlinks] [[~!!]]) können Sie im
       Vorspann angeben, bei welchen Formaten externe Verweise umgewandelt
-      werden sollen. Dieser Schalter wird z.B. dann benötigt, falls man eine
-      Seite mit Verweisen für das Internet angelegt hat, die in einem
+      werden sollen. Dieser Schalter wird z.B. dann benötigt, falls Sie eine
+      Seite mit Verweisen für das Internet angelegt haben, die in einem
       ST-Guide- oder WinHelp-Hypertext keinen Sinn ergeben würden.
 
 !index (!kkw [nolink])

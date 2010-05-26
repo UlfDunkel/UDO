@@ -25,6 +25,7 @@
 #   fd  Jun 10: using ndash instead of mdash in German texts
 # 2010:
 #   fd  May 26: (!url) enhanced for UDO v7.02
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -70,11 +71,11 @@ Die GEM-Version unterstützt das VA-Protokoll, Iconification und Drag &
 Drop. Sie läuft unter jedem AES, sprich unter TOS, MultiTOS, Geneva,
 MagiC (Mac/PC) sowie STonX.
 
-Während der Umwandlung kann man im Hauptdialog den Umwandlungsvorgang
+Während der Umwandlung können Sie im Hauptdialog den Umwandlungsvorgang
 verfolgen. Dies ist jedoch aufgrund der vielen AES-Aufrufe eine
 zeitaufwendige Angelegenheit. Generell kann ich sagen, dass UDO in der
 GEM-Version wesentlich langsamer läuft als die TTP-Version. Bei großen
-Dokumentationen sollte man den Quelltext daher mit der TTP-Version
+Dokumentationen sollten Sie den Quelltext daher mit der TTP-Version
 übersetzen.
 
 Die Bedienung der GEM-Version ist in weiten Teilen selbst erklärend.
@@ -304,11 +305,11 @@ Die Macintosh-Variante von UDO kommt in einem etwas schlichteren
 Gewande als die GEM-Variante daher. Alle einstellbaren Optionen sind in
 einem Dialog zusammengefasst.
 
-Hat man beim Start von UDO kein UDO-Dokument übergeben, wählt man
+Haben Sie beim Start von UDO kein UDO-Dokument übergeben, wählen sie
 zunächst die Eingabedatei über den zugehörigen [Auswählen]-Knopf. Über
-das Ausgabeformat-Popup stellt man das gewünschte Format ein. Sollen
+das Ausgabeformat-Popup stellen Sie das gewünschte Format ein. Sollen
 die Ausgabedateien nicht im Ordner der Eingabedatei angelegt werden,
-stellt man dies im zugehörigen Popup ein und wählt über den zweiten
+stellen Sie dies im zugehörigen Popup ein und wählt über den zweiten
 [Auswählen]-Knopf einen anderen Ordner aus.
 
 Welche Dateien nun konkret von UDO erzeugt werden sollen, kann über die
@@ -316,8 +317,8 @@ Gruppe von Schaltern -- deren Beschriftung hoffentlich selbsterklärend
 ist -- eingestellt werden. Die Einstellung des Ausgabeanzeige-Popups
 bestimmt die Geschwindigkeit mit der UDO seine Arbeit erledigt bzw. wie
 kooperativ und mitteilsam es dabei ist. Kooperativ bedeutet in diesem
-Fall, dass man, während UDO beschäftigt ist, mit einer anderen
-Applikation arbeiten kann.
+Fall, dass Sie, während UDO beschäftigt ist, mit einer anderen
+Applikation arbeiten können.
 
 Die eigentliche Konvertierung wird über den [Ausgeben]-Knopf gestartet.
 Bei fehlerfreier Ausgabe beendet sich UDO kommentarlos, ansonsten

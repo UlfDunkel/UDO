@@ -33,6 +33,7 @@
 #   fd  Mar 05: more adjustments for !docinfo [webmaster...]
 #   fd  May 19: - "short" -> "compressed"
 #               - cmd_deg() enhanced
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -205,59 +206,72 @@ This command is used to add various information output to the title page. ""(!NA
 
 !begin_description
 
+!label title
 !item [title]
 ""(!TEXT)"" will be displayed on the title page before the contents of
 the program name. It is also used inside the headlines.
 
+!label program
 !item [program]
 ""(!TEXT)"" will be displayed on the title page below the title.
 Furthermore ""(!TEXT)"" will be used by some destination formats
 to generate the header line.
 
+!label programimage
 !item [programimage]
 ""(!FILE)"" will be displayed on the title page if the destination format supports images.
 
+!label version
 !item [version]
 ""(!TEXT)"" will be given out right below the contents of the program name on
 the title page.
 
+!label date
 !item [date]
 ""(!TEXT)"" will be displayed on the title page below the contents of
 the program version. The example shows how to use the current system
 time for the title page.
 
+!label author
 !item [author]
 ""(!TEXT)"" will be used as the name of the author on the title page
 and for different other purposes.
 
+!label authorimage
 !item [authorimage]
 ""(!FILE)"" will be displayed above the name of the author on the
 title page if the destination format supports images.
 
+!label authoricon
 !item [authoricon]
 ""(!FILE)"" will be displayed as image in the left frame or
 left column when using the frame layout or ""modern"" layout
 of HTML.
 
+!label address
 !item [address]
 ""(!TEXT)"" will be given out below the author's name on the
 title page. (!KW [docinfo] [[address!!]]) can be used up to 15 times,
 and can contain any address lines, such as email-addresses.
 
+!label company
 !item [company]
 ""(!TEXT)"" bezeichnet die Firma, für die ein Dokument erstellt wird.
 Wenn company benutzt wird, wird auf der Titelseite unter Autor
 ""für company"" eingefügt.
 
+!label category
 !item [category]
 ""(!TEXT)"" bezeichnet eine Kategorie, zu der das Dokument gehört.
 
+!label stgdatabase
 !item [stgdatabase]
 With this command you can specify the contents of the @database-line
 that is generated for the ST-Guide format.
 If you don't use this command, UDO will construct a line containing
 the title and the program name.
 
+!label drcstatusline
 !item [drcstatusline]
 This command is used to specify the contents of the status line
 for the DRC format. If you don't use this command, UDO
@@ -266,33 +280,45 @@ If you did not set the name of the author, UDO will use
 the text ""Made with UDO"".
 
 # ToDo: Englisch
+!label keywords
 !item [keywords]
+(!NTY)
 (!KW [docinfo] [[keywords!!]]) entspricht dem Kommando (!KW [html_keywords]).
 Kann auch bei PostScript genutzt werden. (!nl)
 Bei der HTML-Ausgabe allerdings nur, wenn in einzelnen Dateien nicht
 (!KW [html_keywords]) benutzt wird. Diese haben also Vorrang. (!nl)
 
 # ToDo: Englisch
+!label description
 !item [description]
+(!NTY)
 (!KW [docinfo] [[description!!]]) entspricht dem Kommando (!KW [html_description]).
 Kann auch bei PostScript genutzt werden. (!nl)
 Bei der HTML-Ausgabe allerdings nur, wenn in einzelnen Dateien nicht
 (!KW [html_description]) benutzt wird. Diese haben also Vorrang. (!nl)
 
 !item [htmltitle]
+!label htmltitle
 ""(!TEXT)"" will be used as the title of every page (instead of
 using [title] and [program]).
 
+!label robots
 !item [robots]
 ""(!TEXT)"" equals a robots command which is evaluated by search engines.
 Valid commands are e.g. "none", "noindex", "index", "nofollow", and "follow".
 
+!label appletitle
 !item [appletitle]
 Required for HTML Apple Help; it describes the title of the help book.
 
+!label appleicon
 !item [appleicon]
 Required for HTML Apple Help; it defines the icon which should be shown by Apple Help Viewer.
 
+!label domain_name
+!label domain_link
+!label contact_name
+!label contact_link
 !item [domain_name|domain_link|contact_name|contact_link]
 When you use all these contact data (in four separate lines!), UDO creates the following contact data footer in each page:
 
@@ -311,7 +337,7 @@ When you use all these contact data (in four separate lines!), UDO creates the f
 
 # Dokument
 !begin_document
-!make_title
+!maketitle
 !end_document
 !end_verbatim
 !else
@@ -324,7 +350,7 @@ When you use all these contact data (in four separate lines!), UDO creates the f
 
 # Dokument
 !begin_document
-!make_title
+!maketitle
 !end_document
 !end_verbatim
 !endif
@@ -343,7 +369,7 @@ If you define less information, the contact data in the footer are adjusted acco
 
 # Dokument
 !begin_document
-!make_title
+!maketitle
 !end_document
 !end_verbatim
 (!EXAMPLE_AFTER)
@@ -359,7 +385,7 @@ Last updated on (!today)
 
 # Dokument
 !begin_document
-!make_title
+!maketitle
 !end_document
 !end_verbatim
 (!EXAMPLE_AFTER)
@@ -384,7 +410,7 @@ Chances are that you don't like to give a real email address as contact link, bu
 
 # Dokument
 !begin_document
-!make_title
+!maketitle
 !end_document
 !end_verbatim
 !else
@@ -397,7 +423,7 @@ Chances are that you don't like to give a real email address as contact link, bu
 
 # Dokument
 !begin_document
-!make_title
+!maketitle
 !end_document
 !end_verbatim
 !endif
@@ -410,11 +436,13 @@ Last updated on (!today)
 any data or use the switch (!KW [no_footers] [[html!!]]) in the preamble,
 UDO will output nothing.
 
+!label translator
 !item [translator]
 ""(!TEXT)"" describes the name of the localizer who has translated the product or document.
 When translator is used, the title page will show it below author and company as 
 ""Translator: translator"".
 
+!label distributor
 !item [distributor]
 ""(!TEXT)"" describes the company which distributes the product or document.
 When distributor is used, the title page will show it below author and company as 

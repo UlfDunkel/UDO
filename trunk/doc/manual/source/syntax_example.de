@@ -19,6 +19,8 @@
 #   fd  Jun 09: using more macros for text style formatting
 #   fd  Jun 10: using macro (!code [])
 #   fd  Jun 10: using EXAMPLE_... macros
+# 2010:
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -35,8 +37,8 @@ dienen kann, eigene Quelltexte mit UDO zu erstellen:
 
 !subsubheading Erläuterungen
 
-Zu Beginn des Quelltextes ist ein Kommentar angegeben, damit man später
-noch auf Anhieb erkennen kann, womit sich der Text befasst. Eine Zeile
+Zu Beginn des Quelltextes ist ein Kommentar angegeben, damit Sie später
+noch auf Anhieb erkennen können, womit sich der Text befasst. Eine Zeile
 bewertet UDO als Kommantar, wenn das erste Zeichen der Zeile ein ""#""
 ist.
 
@@ -110,8 +112,8 @@ Endlich! Nach dem ganzen Vorgeplänkel beginnen wir mit dem Befehl
 (!KW [node]) das erste Kapitel. Beachten Sie bitte auch den Inhalt
 dieses Kapitels, da er weitere Informationen enthält.
 
-Die folgenden Zeilen demonstrieren, wie man Kapitel, Abschnitte und
-Unterabschnitte erzeugt. Auch hier sollten Sie einen Blick auf den Text
+Die folgenden Zeilen demonstrieren, wie Sie Kapitel, Abschnitte und
+Unterabschnitte erzeugen. Auch hier sollten Sie einen Blick auf den Text
 werfen.
 
 !index (!kw [end_document])

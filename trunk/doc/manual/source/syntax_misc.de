@@ -36,6 +36,7 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro KK2W resolved into macros KKW + code
 #   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -69,7 +70,7 @@ Kommando (!KW [vinclude]) (""verbatim include"").
 (TIP) Das Kommando (!KW [vinclude]) eignet sich sehr gut, um Sourcecode oder
 Header-Dateien darzustellen.
 
-Falls man direkte Befehle für ein Format nachladen möchte, kann man
+Falls Sie direkte Befehle für ein Format nachladen möchten, können Sie 
 sich des Kommandos (!KW [rinclude]) (""raw include"") bedienen.
 
 (!TIP) Dieser Befehl eignet sich im Zusammenhang mit dem (!KW [ifdest])-Kommando dazu, um
@@ -87,17 +88,17 @@ einzige Zeile ""sichtbaren"" Textes.
 !item Bei umfangreichen Texten empfiehlt es sich, die Kapitel in
 eigenen Dateien zu halten und von einer Hauptdatei mittels
 (!KW [include]) an passender Stelle einzubinden. Dies hat den Vorteil, dass 
-man durch einfaches Verschieben des (!KW [include])-Befehls dem Text
-eine neue Struktur geben zu können.
+Sie durch einfaches Verschieben des (!KW [include])-Befehls dem Text
+eine neue Struktur geben können.
 
-!item Teilt man Texte in mehrere Dateien auf, die von einer Hauptdatei
+!item Teilen Sie Texte in mehrere Dateien auf, die von einer Hauptdatei
 nachgeladen werden, kann dies die Fehlersuche erheblich beschleunigen.
 Durch Auskommentieren der Zeilen, die bereits korrekte Kapitel
-einladen, kann man sofort sehen, wie UDO das zuletzt bearbeitete
+einladen, können Sie sofort sehen, wie UDO das zuletzt bearbeitete
 Kapitel umwandelt.
 
-!item In Verbindung mit Makros kann man sich standardisierte Texte
-erstellen, die man für mehrere Programmbeschreibungen verwenden kann.
+!item In Verbindung mit Makros können Sie sich standardisierte Texte
+erstellen, die Sie für mehrere Programmbeschreibungen verwenden können.
 Z.B. tauchen in Programmdokumentationen immer wieder die Kapitel auf,
 die sich mit dem Haftungsausschluss oder den Warenzeichen anderer
 Produkte befassen.
@@ -119,8 +120,8 @@ komplettieren.
 
 !item Mit (!KW [vinclude]) lassen sich in Verbindung mit
 (!KW [tabwidth]) sehr leicht Sourcecodes oder Header-Dateien darstellen, falls
-man beispielsweise eine Library oder eine Programmiersprache
-beschreiben möchte.
+Sie beispielsweise eine Library oder eine Programmiersprache
+beschreiben möchten.
 !end_enumerate
 
 (!B)Achtung(!b): Vermeiden Sie Konstruktionen wie diese, die zu Endlos-Schleifen führen:
@@ -206,7 +207,7 @@ von ""(!C)(!1)(!c)"" gesetzt.
 (!HINTS)
 
 !begin_enumerate !compressed
-!item Bei der Namensvergabe der Makros sollte man möglichst darauf
+!item Bei der Namensvergabe der Makros solltn Sie möglichst darauf
 achten, diese nicht wie bereits existente Befehle oder Platzhalter zu
 benennen. So sollten sie ein Makro nicht ""(!code [B])"" oder ""(!code [nl])"" nennen, da
 dann die Umschaltung in Fettschrift ((!KKW [B])) oder ein erzwungener
@@ -294,7 +295,7 @@ Wie Sie sehen, können Sie mit diesen Definitionen spezielle Befehle des
 Ausgabeformates einbauen, die UDO standardmäßig nicht anbietet. In UDO~4
 gab es mal einen Satz Spezialplatzhalter, die nur für (!LaTeX) vorhanden
 waren. Da diese Platzhalter selten gebraucht wurden, die Umwandlung
-eines Quelltextes daher zumeist unnötig bremste, muss man diese
+eines Quelltextes daher zumeist unnötig bremste, müssen Sie diese
 Platzhalter nun mit geeigneten Definitionen nachahmen:
 
 !index \linebreak
@@ -316,8 +317,8 @@ Makros mit Parametern. Text, der beim Aufruf einer Definition anstelle
 eines der durchnummerierten Parameter ausgegeben werden soll, ist in
 eckige Klammern einzufassen.
 
-Im obigen Beispiel habe ich Ihnen gezeigt, wie man eine Überschrift für
-HTML erzeugen könnte. Benutzt man Parameter, könnte man Überschriften
+Im obigen Beispiel haben wir Ihnen gezeigt, wie Sie eine Überschrift für
+HTML erzeugen könnten. Benutzen Sie Parameter, könnten Sie Überschriften
 wesentlich eleganter erzeugen:
 
 (!EXAMPLE_BEGIN)
@@ -386,8 +387,8 @@ mit den Abfrage-Befehlen (!KW [ifset]) bzw. (!KW [ifnset]) testen.
 
 Die Einsatzmöglichkeiten von Symbolen sind vielfältig. Das folgende 
 Beispiel zeigt Ihnen ein typisches Anwendungsgebiet,
-bei dem man je nach gesetzten Symbolen eine Zieldatei mit
-unterschiedlichem Inhalt erhält.
+bei dem Sie je nach gesetzten Symbolen eine Zieldatei mit
+unterschiedlichem Inhalt erhalten.
 
 Gehen wir einmal davon aus, dass wir einen Quelltext geschrieben haben,
 der drei Kapitel enthält. Die ersten beiden Kapitel sind bereits
@@ -404,12 +405,12 @@ Starten Sie UDO nun ""normal"", wird eine Zieldatei erstellt, die nur das
 dritte Kapitel enthält. Starten Sie UDO hingegen mit der
 Kommandozeilenoption ""(!code [-D~AlleKapitel])"", werden alle Kapitel umgewandelt.
 
-Das Spielchen kann man natürlich noch etwas ausbauen. Durch Verwendung
-weiterer Symbole kann man gezielt nur einzelne Kapitel oder alle
+Das Spielchen können Sie natürlich noch etwas ausbauen. Durch Verwendung
+weiterer Symbole können Sie gezielt nur einzelne Kapitel oder alle
 zusammen in die Zieldatei aufnehmen. Im folgenden Beispiel wird bei
 Übergabe der Option ""(!code [-D~Kapitel1])"" nur das erste Kapitel in die
-Zieldatei aufgenommen. Übergibt man ""(!code [-D~Kapitel1])"" und ""(!code [-D~Kapitel2])"",
-so werden das erste und das zweite Kapitel eingebunden. Übergibt man
+Zieldatei aufgenommen. Übergeben Sie ""(!code [-D~Kapitel1])"" und ""(!code [-D~Kapitel2])"",
+so werden das erste und das zweite Kapitel eingebunden. Übergeben Sie 
 hingegen ""(!code [-D~AlleKapitel])"", wird die Zieldatei komplett dargestellt:
 
 (!EXAMPLE_BEGIN)
@@ -419,7 +420,7 @@ hingegen ""(!code [-D~AlleKapitel])"", wird die Zieldatei komplett dargestellt:
 Ihrer Phantasie sind hier kaum Grenzen gesetzt!
 
 Wie in der Einführung zu diesem Abschnitt beschrieben, lassen sich
-Symbole auch wieder löschen. Dazu bedient man sich des Befehls (!KW [unset]).
+Symbole auch wieder löschen. Dazu verwenden Sie die Befehls (!KW [unset]).
 
 Wollen Sie in obigem Beispiel partout verhindern, dass alle Kapitel in
 die Zieldatei eingebunden werden, können Sie zuvor das Symbol
@@ -432,7 +433,7 @@ die Zieldatei eingebunden werden, können Sie zuvor das Symbol
 In diesem Beispiel wird also zunächst abgefragt, ob das Symbol
 ""(!code [AlleKapitel])"" gesetzt ist. In dem Falle wird es durch den Befehl
 (!KW [unset]) gelöscht. Die vorherige Abfrage ist deshalb notwendig, damit
-man eine Fehlermeldung durch UDO vermeidet, falls das Symbol
+Sie eine Fehlermeldung durch UDO vermeiden, falls das Symbol
 ""(!code [AlleKapitel])"" einmal nicht gesetzt ist.
 
 (!HINTS)
@@ -466,14 +467,14 @@ Der Befehl zur Angabe eines Indexeintrags lautet folgendermaßen:
 
 Der Indexeintrag erscheint dann im Index von (!LaTeX), im Index der mit
 Plain-(!TeX) bearbeiteten Texinfo-Datei, im Index des ST-Guide-Hypertextes
-sowie im Stichwortverzeichnis der Textverarbeitung, mit der man die
-RTF-Datei importiert. Bei WinHelp erscheint der Indexeintrag im
+sowie im Stichwortverzeichnis der Textverarbeitung, mit der Sie die
+RTF-Datei importieren. Bei WinHelp erscheint der Indexeintrag im
 Suchen-Dialog.
 
-Um einen mehrstufigen Indexeintrag anzulegen, benutzt man ein doppeltes
+Um einen mehrstufigen Indexeintrag anzulegen, benutzen Sie ein doppeltes
 Ausrufezeichen als Trennung der einzelnen Stufen. Es werden bis zu drei
-Stufen unterstützt. Mehrstufige Indizes sollte man dann einsetzen,
-falls man davon ausgehen kann, dass der Leser bei der Suche nach einem
+Stufen unterstützt. Mehrstufige Indizes sollten Sie dann einsetzen,
+falls Sie davon ausgehen können, dass die Leserin/der Leser bei der Suche nach einem
 Wort auf verschiedene Art und Weise im Indexregister nachschaut.
 
 Falls Sie denken, dass der Leser bei der Suche nach dem Wort
@@ -548,18 +549,18 @@ automatisch von UDO erledigen lassen, indem Sie die Schalter
 
 !index (!kw [ignore_index])
 !item Steht in einem Kapitel der Schalter (!KW [ignore_index]), gelangt die
-Überschrift nicht in den Index. Auch dann nicht, wenn man den
-Schalter (!KW [use_nodes_inside_index]) verwendet.
+Überschrift nicht in den Index. Auch dann nicht, wenn Sie den
+Schalter (!KW [use_nodes_inside_index]) verwenden.
 
 !index Makeindex
-!item Wenn man nach (!LaTeX) umwandelt und Index-Befehle verwendet, so
+!item Wenn Sie nach (!LaTeX) umwandeln und Index-Befehle verwenden, so
 fügt UDO in die (!LaTeX)-Datei die für das Programm ""Makeindex""
 nötige Befehle ein. Sonderzeichen in den Indizes werden bereits
 speziell für Makeindex angepasst.
 
 !item Die jeweiligen Parameter werden also durch eckige Klammern
-eingefasst. Falls man in einem Parameter eine schließende eckige
-oder runde Klammer benutzen möchte, muss deren Wirkung mit
+eingefasst. Falls Sie in einem Parameter eine schließende eckige
+oder runde Klammer benutzen möchten, muss deren Wirkung mit
 einem Ausrufezeichen aufgehoben werden. Geschieht dies nicht, so
 denkt UDO, der Parameter oder der Index-Befehl wäre bereits
 beendet. Ein Beispiel:
@@ -612,8 +613,8 @@ Zusätzlich zu den hier genannten Zeichenketten können jeweils auch
 ""(!code [all])"" und ""(!code [none])"" verwendet werden. Bei ""(!code [all])"" liefert eine Abfrage
 immer ein wahres Ergebnis, bei ""(!code [none])"" immer ein falsches.
 
-Das folgende Beispiel zeigt, wie man den Titel der Windows-Hilfe
-anders als für die anderen Formate setzt:
+Das folgende Beispiel zeigt, wie Sie den Titel der Windows-Hilfe
+anders als für die anderen Formate setzen:
 
 (!EXAMPLE_BEGIN)
 !begin_verbatim
@@ -627,7 +628,7 @@ anders als für die anderen Formate setzt:
 
 !index (!kw [ifndest])
 Verwandt mit dem (!KW [ifdest])-Befehl ist der Befehl (!KW [ifndest]). Hier wird
-abgefragt, ob man (!I)nicht(!i) in ein Format ausgibt. Das obige Beispiel lässt
+abgefragt, ob Sie (!I)nicht(!i) in ein Format ausgeben. Das obige Beispiel lässt
 sich demnach auch folgendermaßen darstellen:
 
 (!EXAMPLE_BEGIN)
@@ -785,8 +786,8 @@ ob UDO (!I)nicht(!i) auf dem angegebenen Betriebssystem läuft.
 !html_name  misc_commands_format_specific
 
 UDO bietet das (!KW [raw])-Kommando und die raw-Umgebung an, mit
-denen es möglich ist, Zeilen nur dann auszugeben, wenn man in ein
-bestimmtes Format umwandelt.
+denen es möglich ist, Zeilen nur dann auszugeben, wenn Sie in ein
+bestimmtes Format umwandeln.
 
 In diesen Zeilen können dann spezielle Befehle für ein Format
 angegeben werden, die UDO dann 1:1, also Umwandlung von Sonderzeichen
@@ -799,15 +800,14 @@ werden kann:
 !label Ausgabeformat
 !include formattb.ui
 
-Um beispielsweise eine Zeile nur in das ASCII-Format auszugeben, gibt
-man folgendes an:
+Um beispielsweise eine Zeile nur in das ASCII-Format auszugeben, geben Sie folgendes an:
 
 (!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)/asc1.ui
 (!EXAMPLE_END)
 
 Um eine Zeile in allen Formaten außer dem ASCII-Format auszugeben,
-gibt man folgendes an:
+geben Sie folgendes an:
 
 (!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES)/asc2.ui
@@ -821,8 +821,8 @@ eignen sich also nicht dazu, mittem in einem Absatz unterschiedliche
 Sätze einzufügen!
 
 Dieses Kommandos können dazu dienen, formatspezifische Kommandos
-einzufügen. Im folgenden Beispiel wird gezeigt, welche Kommandos man in
-einen Quelltext einfügen muss, damit (!LaTeX) weiß, mit welchem Stil ein
+einzufügen. Im folgenden Beispiel wird gezeigt, welche Kommandos Sie in
+einen Quelltext einfügen müssen, damit (!LaTeX) weiß, mit welchem Stil ein
 Dokument auszudrucken ist und damit es einen Index erzeugt:
 
 (!EXAMPLE_BEGIN)
@@ -833,8 +833,8 @@ Dokument auszudrucken ist und damit es einen Index erzeugt:
 
 !label raw-Umgebung
 !item [Die raw-Umgebung]
-Will man größere Blöcke im jeweiligen Format angeben, wäre es ziemlich
-mühsam, wenn man jede Zeile mit einem Kürzel beginnen müsste.
+Wollen Sie größere Blöcke im jeweiligen Format angeben, wäre es ziemlich
+mühsam, wenn Sie jede Zeile mit einem Kürzel beginnen müssten.
 
 !index !begin_raw
 !index !end_raw
@@ -868,8 +868,8 @@ Eine weitere Möglichkeit dazu bietet der Befehl (!KW [rinclude]).
 
 !label comment-Umgebung
 !item [Die comment-Umgebung]
-Will man größere Blöcke als Kommentar in die Ausgabedatei schreiben, wäre es ziemlich
-mühsam, wenn man jede Zeile mit einem Kürzel beginnen müsste.
+Wollen Sie größere Blöcke als Kommentar in die Ausgabedatei schreiben, wäre es ziemlich
+mühsam, wenn Sie jede Zeile mit einem Kürzel beginnen müssten.
 
 !index !begin_comment
 !index !end_comment

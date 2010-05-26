@@ -31,6 +31,7 @@
 #   fd  Mar 07: lines in verbatim environment shortened
 #   fd  May 06: iconv example for Mac OS X terminal
 #   fd  May 26: table adjustments
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -71,7 +72,7 @@ so müssen Sie stattdessen (!KP [((""!)!)])(!code [text])(!KP [((""!)!)]) angeben
 
 !begin_enumerate !compressed
 !index (!kw [no_quotes])
-!item Die Umwandlung in typographische Anführungszeichen kann man durch
+!item Die Umwandlung in typographische Anführungszeichen können Sie durch
 den Schalter (!KW [no_quotes] [[~!!]]) im Vorspann ausschalten.
 
 !item Bei der Ausgabe ins Rich-Text-Format werden spezielle
@@ -263,8 +264,8 @@ Falls ein Zielformat Unicode nicht unterstützt, ist es mit UDO trotzdem möglich,
 UDO bietet einen ""universellen Zeichensatz"" an. Es handelt sich hierbei nicht wirklich um einen vollständigen Zeichensatz wie z.B. Unicode, sondern vielmehr um eine Möglichkeit, 8-Bit-Zeichen durch Folgen mehrere 7-Bit-Zeichen zu emulieren.
 
 !index (!kw [universal_charset])
-Da die nötigen Abfragen und Umwandlungen Mehraufwand bedeuten, muss
-man UDO mitteilen, dass die folgenden Zeilen ""universelle Zeichen""
+Da die nötigen Abfragen und Umwandlungen Mehraufwand bedeuten, müssen Sie 
+UDO mitteilen, dass die folgenden Zeilen ""universelle Zeichen""
 enthalten. Dies geschieht durch den Einsatz des Schalters
 (!KW [universal_charset]).
 

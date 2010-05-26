@@ -24,6 +24,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -303,7 +304,7 @@ Seitenumbruch vor Tabelle erzeugen (nur RTF).
 !item [(!DESCRIPTION)]
 Wird dieser Schalter benutzt, gibt UDO alle folgenden Tabellen so
 aus, dass z.B. WinWord Tabellen am Seitenende nicht umbricht, sondern
-den Seitenumbruch vor der Tabelle erzeugt. Mit (!code [[off!]]) schaltet man
+den Seitenumbruch vor der Tabelle erzeugt. Mit (!code [[off!]]) schalten Sie
 diesen Effekt für alle folgenden Tabellen wieder aus. Standard ist (!code [[off!]]).
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~6
@@ -336,7 +337,7 @@ Namen des Monospaced-Font für RTF setzen.
 !item [(!SYNTAX)] (!T)!/rtf_monofont <fontname>(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man den Font setzen, der zur
+Mit diesem Kommando können Sie den Font setzen, der zur
 Darstellung von Klartext benutzt werden soll. Als
 Standard verwendet UDO den Font ""Courier New"".
 
@@ -369,7 +370,7 @@ Größe des Monospaced-Font für RTF setzen.
 !item [(!SYNTAX)] (!T)!/rtf_monofont_size (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man die Größe des Font setzen, der zur
+Mit diesem Kommando können Sie die Größe des Font setzen, der zur
 Darstellung von Klartext benutzt werden soll.
 Als Standard verwendet UDO (!const[10])~pt.
 
@@ -403,7 +404,7 @@ ASCII- statt RTF-Tabellen erzeugen.
 !item [(!SYNTAX)] (!T)!/rtf_no_tables(!t)
 
 !item [(!DESCRIPTION)]
-Benutzt man diesen Schalter im (!PREAMBLE), werden
+Benutzen Sie diesen Schalter im (!PREAMBLE), werden
 Tabellen nicht mit RTF-Kommandos erzeugt, sondern wie
 ASCII-Tabellen in einem nichtproportionalen Font
 ausgegeben. Der Schalter dient dazu, RTF-Dateien auch
@@ -433,7 +434,7 @@ Namen des Proportional-Fonts für RTF setzen.
 !item [(!SYNTAX)] (!T)!/rtf_propfont <fontname>(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man den Font setzen, der zur
+Mit diesem Kommando können Sie den Font setzen, der zur
 Darstellung von Fließtext und Überschriften benutzt
 werden soll. Als Standard verwendet UDO den Font ""Times New Roman"".
 
@@ -465,7 +466,7 @@ Größe des Proportional-Font für RTF setzen.
 !item [(!SYNTAX)] (!T)!/rtf_propfont_size (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man die Größe des Font setzen, der zur
+Mit diesem Kommando können Sie die Größe des Font setzen, der zur
 Darstellung von Fließtext und Überschriften benutzt
 werden soll. Als Standard verwendet UDO (!const[11])~pt.
 

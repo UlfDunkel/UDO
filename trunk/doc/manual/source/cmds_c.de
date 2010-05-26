@@ -27,9 +27,10 @@
 #   fd  Mar 01: - new chapters: code_source, code_target
 #               - OldKeywords removed -> cmds__old.de
 #               - tiny corrections
-#   ggs Mar 21: Wrong syntax in code_source, code_target
+#   ggs Mar 21: wrong syntax in code_source, code_target
 #   fd  May 19: - new chapter 'compressed'
 #   fd  May 19: - more links to "not_compressed"
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -78,7 +79,7 @@ Grafik für aktives Kapitel angeben.
 !item [(!SYNTAX)] (!T)!/chaptericon_active (!FILE)(!t)
 
 !item [(!DESCRIPTION)]
-Hier kann man für den linken Rahmen bzw. für die linke Spalte
+Hier können Sie für den linken Rahmen bzw. für die linke Spalte
 ein Bild angeben, das nur dann angezeigt wird, wenn das Kapitel
 oder eines dessen Unterkapitel angezeigt wird.
 
@@ -105,7 +106,7 @@ Text für Kapitel-Grafik angeben.
 !item [(!SYNTAX)] (!T)!/chaptericon_text (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Hiermit kann man einen Text unterhalb eines Chaptericons darstellen.
+Hiermit können Sie einen Text unterhalb einer Kapitel-Grafik darstellen.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~7
 
@@ -374,7 +375,7 @@ Beginnen einer Umgebung angegeben, wird diese
 Umgebung in komprimierter Form ausgegeben, sprich es
 werden zwischen den Aufzählungspunkten keine
 zusätzlichen Zwischenräume erzeugt. Das Beispiel
-zeigt, wie man eine ""komprimierte"" Itemize-Umgebung erzeugen kann.
+zeigt, wie Sie eine ""komprimierte"" Itemize-Umgebung erzeugen können.
 
 !item [(!EXISTSSINCE)] 7.01
 

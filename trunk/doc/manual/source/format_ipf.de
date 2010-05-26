@@ -19,6 +19,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  May 26: (!url) enhanced for UDO v7.02
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -39,7 +40,8 @@ java-basierten (!url [IBM Softcopy Reader] [http://www-306.ibm.com/software/appl
 Eine IPF-Dokumentation ist außerdem in der Online-Hilfe des IPFC-Programms
 enthalten.
 
-Um aus den IPF-Dateien die Hilfedateien zu erzeugen, benötigt man den IPF-Compiler ((!file [IPFC.EXE])). Dieser ist Bestandteil von (kommerziellen) IBM-Entwicklerprodukten (z.B. OS/2~Developers Toolkit,
+Um aus den IPF-Dateien die Hilfedateien zu erzeugen, benötigen Sie den IPF-Compiler ((!file [IPFC.EXE])). 
+Dieser ist Bestandteil von (kommerziellen) IBM-Entwicklerprodukten (z.B. OS/2~Developers Toolkit,
 Visual-Age Compiler, IBM Set C++), zum Herunterladen (als
 OS/2-Version) findet er sich auf
 (!url [http://www.m-petz.de/Download/Download.htm][][][elink]) (unter ""IPFC-Zubehör"") 
@@ -59,8 +61,8 @@ von HLP-Dateien unter Windows zu tun!
 Ein alternativer INF-Viewer für OS/2 ist (!url [NewView] [http://www.os2voice.org/VNL/past_issues/VNL0900H/vnewsf6.htm][][elink]).
 INF-Viewer für DOS und Win32 können Sie auf (!url [http://www.labyrinth.net.au/~dbareis/swrecom.htm][][][elink]) 
 oder (!url [http://www.goellnitz-online.de/os2/infseite/xview/xview.htm][][][elink]) herunterladen.
-# 22.12.03: Mit dem Win32-Viewer IView kann unter Linux/Wine zwar eine INF-Datei öffnen (man sieht das
-# Inhaltsverzeichnis) - aber die Inhalte kann man nicht anschauen (Fehlermeldungen).
+# 22.12.03: Mit dem Win32-Viewer IView kann unter Linux/Wine zwar eine INF-Datei öffnen (Sie sehen das
+# Inhaltsverzeichnis) - aber die Inhalte können Sie nicht anschauen (Fehlermeldungen).
 
 Von IBM gibt es für Windows einen (älteren) 16-bit-Viewer für INF- und HLP-Dateien, der
 Bestandteil des ""Just Add Warp""-Paketes ist (downloadbar via

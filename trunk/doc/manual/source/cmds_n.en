@@ -26,6 +26,7 @@
 #   fd  Mar 08: macro KW1 resolved to KWW
 #   fd  Mar 19: new chapter 'not_compressed'
 #   fd  May 21: xref links fixed
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -183,7 +184,7 @@ Set a forced line break.
 
 (!red)
 !item [(!DESCRIPTION)]
-Durch (!KKW [nl]) kann man einen Zeilenumbruch erzwingen.
+Durch (!KKW [nl]) können Sie einen Zeilenumbruch erzwingen.
 Vor (!KKW [nl]) (!B)muss(!b) ein (festes) Leerzeichen stehen! Nach
 (!KKW [nl]) muss ebenfalls ein (festes) Leerzeichen stehen
 oder (!KKW [nl]) muss das letzte Wort einer Zeile sein.
@@ -508,8 +509,8 @@ Do not use links.
 
 !item [(!DESCRIPTION)]
 If this switch is used inside the preamble UDO suppresses link
-commands for the given destination formats. (!red)Dies ist sinnvoll, falls man z.B.
-in einem RTF-Dokument den Text ""siehe !.."" unterdrücken will.(!coloff)
+commands for the given destination formats. (!red)Dies ist sinnvoll, falls Sie z.B.
+in einem RTF-Dokument den Text ""siehe !.."" unterdrücken wollen.(!coloff)
 
 !item [(!EXAMPLE)]
 (!T)!/no_links [rtf](!t)
