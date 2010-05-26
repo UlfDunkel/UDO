@@ -48,6 +48,7 @@
 *    fd  May 17: add_macro(): auto_quote_chars() faded
 *    fd  May 19: file tidied up
 *    fd  May 25: c_url() + c_xlink() now support target & class [feature request #89 solved]
+*    fd  May 26: extract_parameters() + get_parameters() debugged
 *
 ******************************************|************************************/
 
@@ -143,10 +144,10 @@ LOCAL int get_nr_of_parameters(const char *cmd, char *s);
 LOCAL void reset_parameters(void);
 
    /* extract parameters from a string */
-LOCAL int extract_parameters(char *s, const char *cmd, const int count);
+LOCAL int extract_parameters(char *s, const char *cmd, const int min, const int max);
 
    /* get parameters from a string */
-LOCAL int get_parameters(char *s, const char *search, const int count);
+LOCAL int get_parameters(char *s, const char *search, const int min, const int max);
 
    /*  */
 LOCAL void adjust_params_inside(char * s);
@@ -366,7 +367,7 @@ LOCAL void reset_parameters(void)
 *     extract parameters from a string
 *
 *  Notes:
-*     The string has to have the syntax "(!command [text] [text] [text])".
+*     The string has to have the syntax "(!command [text] <[text] [...]>)".
 *
 *  Return:
 *     # of parameters
@@ -377,11 +378,12 @@ LOCAL int extract_parameters(
 
 char       *s,            /* ^ complete line */
 const char *cmd,          /* ^ command without "(!": link, plink, xlink */
-const int   count)        /* */
+const int   min,          /* minimum # of expected parameters */
+const int   max)          /* maximum # of expected parameters */
 {
-   int      i;            /* */
-   char    *pos,          /* */
-            search[128];  /* */
+   int      i;            /* # of found parameters */
+   char    *pos,          /* ^ into string */
+            search[128];  /* string buffer */
             
 
    sprintf(search, "(!%s", cmd);          /* PL3 */
@@ -396,7 +398,7 @@ const int   count)        /* */
 
    i = 0;
 
-   while (i < count)      
+   while (i < max)      
    {
       /* Anfang "[" des Parameters bestimmen */
       /* und die Zeichen ermitteln, die bis dahin */
@@ -408,10 +410,18 @@ const int   count)        /* */
          pos++;
       }
       
-      if (pos[0] == EOS)
+      if (pos[0] == EOS)                  /* no more data */
       {
-         error_unexpected_eol();
-         return 0;
+         if (min == max)                  /* error! */
+         {
+            error_unexpected_eol();
+            return 0;
+         }
+         else                             /* not all expected parameters found */
+         {
+            Space[i][0] = EOS;            /* remove last ")" from spaces */
+            return i;
+         }
       }
 
       /* Pointer auf erstes Zeichen des Parameters setzen */
@@ -441,13 +451,13 @@ const int   count)        /* */
 #if 1
    while ( (pos[0] != ')') && (pos[0] != EOS) )
    {
-      chrcat(Space[count], pos[0]);
+      chrcat(Space[min], pos[0]);
       pos++;
    }
 #else
    while ( (pos[0] != ')') && (pos[0] != EOS) )
    {
-      chrcat(Space[count + 1], pos[0]);
+      chrcat(Space[min + 1], pos[0]);
       pos++;
    }
 #endif
@@ -479,13 +489,14 @@ LOCAL int get_parameters(
 
 char        *s,       /* */
 const char  *search,  /* */
-const int    count)   /* */
+const int    min,     /* minimum # of expected parameters */
+const int    max)     /* maximum # of expected parameters */
 {
    int       i,       /* */
              params;  /* */
              
 
-   params = extract_parameters(s, search, count);
+   params = extract_parameters(s, search, min, max);
 
    if (params == 0)
       return 0;
@@ -1248,7 +1259,7 @@ BOOLEAN      inside_b4_macro)  /* */
 
    linkerror = FALSE;
    
-   while (!linkerror && ((pnr = get_parameters(s, "link", 2)) == 2) )
+   while (!linkerror && ((pnr = get_parameters(s, "link", 2, 2)) == 2) )
    {
       strcpy(link, Param[2]);
       
@@ -1455,7 +1466,7 @@ BOOLEAN      inside_b4_macro)    /* */
    char      rtf4[] = "0000";
 
 
-   while (!linkerror && ((pnr = get_parameters(s, "url", 4)) >= 2))
+   while (!linkerror && ((pnr = get_parameters(s, "url", 2, 4)) >= 2))
    {
       del_whitespaces(Param[1]);          /* adjust URL */
 
@@ -1680,7 +1691,7 @@ BOOLEAN      inside_b4_macro)    /* */
    BOOLEAN   class = FALSE;      /* TRUE: CSS class name found */
    
 
-   while (!linkerror && ((pnr = get_parameters(s, "xlink", 4)) >= 2))
+   while (!linkerror && ((pnr = get_parameters(s, "xlink", 2, 4)) >= 2))
    {
       del_whitespaces(Param[1]);
 
@@ -1937,7 +1948,7 @@ const BOOLEAN   inside_b4_macro)   /* Sind bereits Makros in dieser Zeile umgewa
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
       strcpy(closer, " /");
    
-   while (!linkerror && ((pnr = get_parameters(s, "ilink", 3)) == 3) )
+   while (!linkerror && ((pnr = get_parameters(s, "ilink", 3, 3)) == 3) )
    {
       strcpy(link, Param[3]);
       del_whitespaces(Param[1]);
@@ -2133,7 +2144,7 @@ const BOOLEAN   inside_b4_macro)    /* */
    char         n[512];             /* */
    BOOLEAN      linkerror = FALSE;  /* */
 
-   while (!linkerror && (pnr = get_parameters(s, "plink", 2)) == 2)
+   while (!linkerror && (pnr = get_parameters(s, "plink", 2, 2)) == 2)
    {
 
       if (inside_b4_macro)
@@ -2222,7 +2233,7 @@ const BOOLEAN   inside_b4_macro)    /* */
    BOOLEAN      linkerror = FALSE;  /* */
 
 
-   while (!linkerror && (pnr = get_parameters(s, "label", 2)) == 2)
+   while (!linkerror && (pnr = get_parameters(s, "label", 2, 2)) == 2)
    {
       if (inside_b4_macro)
       {
@@ -2283,7 +2294,7 @@ const BOOLEAN   inside_b4_macro)    /* */
    BOOLEAN      linkerror = FALSE;  /* */
 
 
-   while (!linkerror && (pnr=get_parameters(s, "nolink", 1)) == 1)
+   while (!linkerror && (pnr = get_parameters(s, "nolink", 1, 1)) == 1)
    {
       if (inside_b4_macro)
       {
@@ -2354,7 +2365,7 @@ const BOOLEAN   inside_b4_macro)    /* */
    BOOLEAN      linkerror = FALSE;  /* */
    
 
-   while (!linkerror && (pnr = get_parameters(s, "comment", 1)) == 1)
+   while (!linkerror && (pnr = get_parameters(s, "comment", 1, 1)) == 1)
    {
       if (inside_b4_macro)
       {
@@ -2466,7 +2477,7 @@ const BOOLEAN   inside_b4_macro)  /* */
    BOOLEAN      ret = TRUE;       /* */
    
 
-   if (get_parameters(s, "index", 1) )
+   if (get_parameters(s, "index", 1, 1) )
    {
       strcpy(s_tidx, Param[1]);
 
@@ -2658,7 +2669,7 @@ const BOOLEAN   inside_b4_macro)  /* */
    BOOLEAN      ret = TRUE;       /* */
    
 
-   if (get_parameters(s, "idx", 1) )
+   if (get_parameters(s, "idx", 1, 1) )
    {
       strcpy(s_tidx, Param[1]);
 
@@ -2834,7 +2845,7 @@ const BOOLEAN   inside_b4_macro)  /* */
    BOOLEAN      ret = TRUE;       /* */
    
 
-   if (get_parameters(s, "idx", 2) )
+   if (get_parameters(s, "idx", 2, 2) )
    {
 
       if (inside_b4_macro)
@@ -3016,7 +3027,7 @@ const BOOLEAN   inside_b4_macro)  /* */
    BOOLEAN      ret = TRUE;       /* */
    
 
-   if (get_parameters(s, "idx", 3) )
+   if (get_parameters(s, "idx", 3, 3) )
    {
       if (inside_b4_macro)
       {
@@ -3256,7 +3267,7 @@ const BOOLEAN   inside_b4_macro)  /* */
    BOOLEAN      ret = TRUE;       /* */
    
 
-   if (get_parameters(s, "idx", 4) )
+   if (get_parameters(s, "idx", 4, 4) )
    {
       if (inside_b4_macro)
       {
@@ -3468,7 +3479,7 @@ const BOOLEAN   inside_b4_macro)  /* */
 
    flag = FALSE;
 
-   while (!flag && (get_parameters(s, "time", 1) == 1) )
+   while (!flag && (get_parameters(s, "time", 1, 1) == 1) )
    {
       if (inside_b4_macro)
          adjust_params_inside(Param[1]);
@@ -3530,7 +3541,7 @@ const BOOLEAN   inside_b4_macro)   /* */
    count = get_nr_of_parameters("img",s); /* V 6.5.18 */
    
                                           /* V 6.5.18 */
-   while (!flag && ((pnr = get_parameters(s, "img", count)) == 2 || pnr == 3) )
+   while (!flag && ((pnr = get_parameters(s, "img", count, count)) == 2 || pnr == 3) )
    {
       if (inside_b4_macro)
       {
@@ -3718,7 +3729,7 @@ const BOOLEAN   inside_b4_macro)  /* */
 
    UNUSED(inside_b4_macro);
    
-   if (get_parameters(s, "raw", 1))
+   if (get_parameters(s, "raw", 1, 1))
    {
       flag = insert_placeholder(s, Param[0], Param[1], Param[1]);
 
@@ -3758,7 +3769,7 @@ const BOOLEAN   inside_b4_macro)  /* */
 
    UNUSED(inside_b4_macro);
    
-   if (get_parameters(s, "raw", 2))
+   if (get_parameters(s, "raw", 2, 2))
    {
       if (str_for_desttype(Param[1]))
       {
@@ -3947,7 +3958,7 @@ const char  *entry)         /* */
          return;
       }   
 
-      get_parameters(s, cmd, parms);
+      get_parameters(s, cmd, parms, parms);
 
       /* r6pl2: ptr statt s benutzen, damit die Parameter nur ab */
       /* der Stelle des/r Makros/Definition ersetzt werden und */
