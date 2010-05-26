@@ -16,6 +16,7 @@
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 # 2010:
 #   fd  May 25: index adjustments
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -23,7 +24,7 @@
 !html_name  format_aqv
 
 Apple QuickView is an hypertext format running under older Mac~OS versions.
-Is was defined by Altura ((!url [http://www.altura.com] [http://www.altura.com/])).
+Is was defined by Altura ((!url [http://www.altura.com/][][][elink])).
 
 Actually, there is no format specification available.
 

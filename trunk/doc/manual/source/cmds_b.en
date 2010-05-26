@@ -25,6 +25,7 @@
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #   fd  May 19: - "short" -> "compressed"
 #               - more links to "not_compressed"
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -562,7 +563,7 @@ Ausgabe werden Einrückungen beachtet.
 
 Im Unterschied zur verbatim-Umgebung wird (momentan
 nur für RTF) vor der Ausgabe auf einen anderen
-Zeichensatz (""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm])"")
+Zeichensatz (""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm][][elink])"")
 umgeschaltet, sodass DOS-Screenshots korrekt dargestellt werden sollten.
 (!coloff)
 !item [(!DESCRIPTION)]
@@ -571,7 +572,7 @@ finished with (!KW [end_linedraw]).
 Text inside this enviroment is treated like
 in a verbatim environment. Additionaly,
 the character set will be switched to dos,
-and if converting to RTF the ""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm])""
+and if converting to RTF the ""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm][][elink])""
 font will be used.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5

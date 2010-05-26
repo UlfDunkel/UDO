@@ -19,6 +19,7 @@
 #   fd  Jun 10: using EXAMPLE_... macros
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -44,7 +45,7 @@
 
 !item [How can I get the current versions?]
       You can always download the current version from the UDO website at 
-      (!url [http://www.udo-open-source.org/] []). Here you will find links to
+      (!url [www.udo-open-source.org][http://www.udo-open-source.org/]). Here you will find links to
       the UDO archives.
 
 # = = =
@@ -171,23 +172,23 @@
 !begin_table [|l|c|c|] !hline
 "e" (e.exe) !! OS/2 !! part of the system
 !hline
-(!url [HomeSite][http://www.adobe.com/products/homesite/]) !! Windows !! commercial
+(!url [HomeSite][http://www.adobe.com/products/homesite/][][elink]) !! Windows !! commercial
 !hline
-(!url [Kate, KEdit, KWrite] [http://kate.kde.org/])  !! Linux/KDE !! Open Source
+(!url [Kate, KEdit, KWrite] [http://kate.kde.org/][][elink])  !! Linux/KDE !! Open Source
 !hline
-(!url [NotePad++] [http://www.froeb-software.de/]) !! Windows !! Freeware
+(!url [NotePad++] [http://www.froeb-software.de/][][elink]) !! Windows !! Freeware
 !hline
-(!url [Pepper] [http://www.slacksolutions.com/]) !! Linux, Mac, Windows !! commercial
+(!url [Pepper] [http://www.slacksolutions.com/][][elink]) !! Linux, Mac, Windows !! commercial
 !hline
-(!url [SciTe] [http://www.scintilla.org/]) !! Linux, Windows !! Open Source
+(!url [SciTe] [http://www.scintilla.org/][][elink]) !! Linux, Windows !! Open Source
 !hline
-(!url [SuperEdi] [http://www.wolosoft.com/]) !! Windows !! Freeware
+(!url [SuperEdi] [http://www.wolosoft.com/][][elink]) !! Windows !! Freeware
 !hline
-(!url [TextPad] [http://www.texpad.com/]) !! Windows !! Freeware
+(!url [TextPad] [http://www.texpad.com/][][elink]) !! Windows !! Freeware
 !hline
-(!url [TextWrangler] [http://www.barebones.com/products/TextWrangler/]) !! Mac~OS~X !! Freeware
+(!url [TextWrangler] [http://www.barebones.com/products/TextWrangler/][][elink]) !! Mac~OS~X !! Freeware
 !hline
-(!url [UltraEdit32] [http://www.ultraedit.com/]) !! Windows !! commercial
+(!url [UltraEdit32] [http://www.ultraedit.com/][][elink]) !! Windows !! commercial
 !hline
 !end_table
 

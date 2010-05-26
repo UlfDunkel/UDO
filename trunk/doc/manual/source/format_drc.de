@@ -16,6 +16,8 @@
 #   fd  Jun 05: file introduced (extracted from formats.ui)
 #   fd  Jun 09: real quotation fixed
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -34,8 +36,8 @@ David's Readme Compiler ist ein von David Harris (dem Autor des E-Mail-Programms
 geschriebenes, frei verfügbares MS-DOS-Programm. Es konvertiert einen mit Formatierungsbefehlen
 versehenen Text (=~DRC-Format) in ein ausführbares Viewer-Programm.
 
-Sie können David's Readme Compiler von (!url [http://risc.ua.edu/pegasus/other/drc21.zip] []) oder
-(!url [http://public.planetmirror.com/pub/pegasus/other/drc21.zip] []) herunterladen.
+Sie können David's Readme Compiler von (!url [http://risc.ua.edu/pegasus/other/drc21.zip][][][elink]) oder
+(!url [http://public.planetmirror.com/pub/pegasus/other/drc21.zip][][][elink]) herunterladen.
 
 !end_node # David's Readme Compiler
 

@@ -14,6 +14,8 @@
 # -------
 # 2009:
 #   fd  Jun 05: file introduced (extracted from formats.ui)
+# 2010:
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -21,7 +23,7 @@
 !html_name  format_lyx
 
 LyX is a (!LaTeX)-related document processor.
-See (!url [http://www.lyx.org] [http://www.lyx.org/]).
+See (!url [www.lyx.org][http://www.lyx.org/][][elink]).
 
 !end_node # LyX
 

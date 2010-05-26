@@ -24,6 +24,7 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 09: chapter 'intro_manual' translated
 #   fd  May 25: index adjustments
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -326,7 +327,7 @@ Persons working on the UDO project (in alphabetical ordner):
 !alias      Contact
 !alias      mailing list
 
-On the UDO website (!url [http://www.udo-open-source.org] [http://www.udo-open-source.org/]) you can find information for UDO users and developers, especially you can download the latest version of UDO and its documentation.
+On the UDO website (!url [www.udo-open-source.org] [http://www.udo-open-source.org/]) you can find information for UDO users and developers, especially you can download the latest version of UDO and its documentation.
 
 Using the following (!B)mailing lists(!b), you can contact the UDO community:
 

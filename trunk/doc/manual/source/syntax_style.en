@@ -30,6 +30,7 @@
 #   fd  May 19: "short" -> "compressed"
 #   fd  May 25: index adjustments
 #   fd  May 26: table adjustments
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -532,7 +533,7 @@ No UDO commands(!N)except
 (!KW [end_linedraw])(!n) or placeholders will be converted. Text
 inside this environment will be indented like normal text.
 
-When converting into RTF, the font ""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm])""
+When converting into RTF, the font ""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm][][elink])""
 will be used, other formats will use the DOS character set.
 When converting into (!LaTeX) the commands of UDO will be just
 replaced by the (!LaTeX) commands (!code [\begin{verbatim}]) and

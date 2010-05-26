@@ -31,6 +31,7 @@
 #   fd  Mar 08: macro KW1 resolved to KWW
 #   fd  May 19: "short" -> "compressed"
 #   fd  May 26: table adjustments
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -576,7 +577,7 @@ Steht eine linedraw-Umgebung allerdings in einer anderen Umgebung, so
 wird der vorformatierte Text zusätzlich eingerückt.
 
 Bei Nicht-RTF-Formaten wird auf den DOS-Zeichensatz umgeschaltet,
-bei RTF wird der Zeichensatz ""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm])""
+bei RTF wird der Zeichensatz ""(!url [MS Linedraw] [http://www.kostis.net/charsets/mslinedr.htm][][elink])""
 benutzt. Bei der Ausgabe ins (!LaTeX)-Format werden die Befehle
 (!code [\begin{verbatim}]) und (!code [\end{verbatim}]) ausgegeben. Bei den
 anderen Formaten wird (falls nötig) ein nichtproportionaler Font

@@ -23,6 +23,7 @@
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 25: index adjustments
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -62,7 +63,7 @@ all your other hypertexts.
 !html_name  installation_dos_win32
 
 !begin_itemize !compressed
-!item Download the appropriate ZIP archive from (!url [http://www.udo-open-source.org/] [http://www.udo-open-source.org])
+!item Download the appropriate ZIP archive from (!url [udo-open-source.org][http://www.udo-open-source.org])
 !item unzip the ZIP archiv into a new directory
 !item Add the directory with (!file [udo.exe]) to your PATH list (DOS: see (!file [autoexec.bat]); Windows: see ....?). Or copy (!file [udo.exe]) into a directory which is part of your PATH list.
 !end_itemize
@@ -78,7 +79,7 @@ Older UDO versions needed the installation of RSJ and EMX. This software is no l
 !html_name  installation_os2
 
 !begin_itemize !compressed
-!item Download the appropriate ZIP archive from (!url [http://www.udo-open-source.org/] [http://www.udo-open-source.org])
+!item Download the appropriate ZIP archive from (!url [udo-open-source.org][http://www.udo-open-source.org])
 !item unzip the ZIP archiv into a new directory
 !item Add the directory with (!file [udo.exe]) to your PATH list (see (!file [config.sys])). Or copy (!file [udo.exe]) into a directory which is part of your PATH list.
 !end_itemize
@@ -112,7 +113,7 @@ the program with a certain software.
 !html_name  installation_mac_x
 
 !begin_itemize !compressed
-!item Download the appropriate ZIP archive from (!url [http://www.udo-open-source.org/] [http://www.udo-open-source.org])
+!item Download the appropriate ZIP archive from (!url [udo-open-source.org][http://www.udo-open-source.org])
 !item Unpack the ZIP archiv and copy the executable file (!file [udo]) to (!file [/usr/bin]).
 !end_itemize
 Please note: a manpage is currently not part of the Mac~OS~X distribution.
@@ -135,7 +136,7 @@ You have to restart the Finder to activate this change.
 !html_name  installation_mint
 
 !begin_itemize !compressed
-!item Download the appropriate ZIP archive from (!url [http://www.udo-open-source.org/] [http://www.udo-open-source.org])
+!item Download the appropriate ZIP archive from (!url [udo-open-source.org][http://www.udo-open-source.org])
 !item Log in as (!code [root])
 !item For a new installation enter: (!code [rpm -i]) (!file [file])(!file [.rpm])
 !item For an upgrade (if you have an older UDO-rpm installed): (!code [rpm -U]) (!file [file])(!file [.rpm])
@@ -164,7 +165,7 @@ Or use your preferred rpm UI (e.g. kpackage, krpmview, yast).
 !html_name  installation_linux_deb
 
 !begin_itemize !compressed
-!item Download the appropriate deb-package from (!url [http://www.debian.org] [http://www.debian.org/]).
+!item Download the appropriate deb-package from (!url [www.debian.org] [http://www.debian.org/][][elink]).
 !item Log in as (!code [root])
 !item (!code [dpkg -i]) (!file [file])(!file [.deb])
 !end_itemize
@@ -182,7 +183,7 @@ The documentation is currently in revision (outdated in parts).
 !html_name  installation_linux_src
 
 !begin_itemize !compressed
-!item Download the sourcecode archive from (!url [http://www.udo-open-source.org/] [http://www.udo-open-source.org])
+!item Download the sourcecode archive from (!url [udo-open-source.org][http://www.udo-open-source.org])
 !item Unpack the sourcecode archive: (!code [tar xzf]) (!file [udo_xxx_src.tar.gz])
 !item (!code [chdir]) into (!file [Source]) directory
 !item (!code [make -f]) (!file [Makefile.linux])

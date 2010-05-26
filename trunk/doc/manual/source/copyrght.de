@@ -14,6 +14,8 @@
 # -------
 # 2009:
 #   fd  Jun 05: introduced (from copyrght.ui)
+# 2010:
+#   fd  May 26: (!url) enhanced for UDO v7.02
 #
 ################################################################################
 
@@ -39,7 +41,7 @@ Ansonsten ist UDO Open Source und unterliegt der GNU GENERAL PUBLIC LICENSE
 
 !medskip
 (!B)Anmerkung(!b): Eine deutsche ‹bersetzung der GPL ist auf 
-(!url [http://www.suse.de/de/private/support/licenses/gpl.html][http://www.suse.de/de/private/support/licenses/gpl.html]) 
+(!url [http://www.suse.de/de/private/support/licenses/gpl.html][][][elink]) 
 zu finden.
 Bitte beachten Sie jedoch, dass im rechtlichen Sinne ausschlieﬂlich die
 englische Fassung verbindlich ist.
