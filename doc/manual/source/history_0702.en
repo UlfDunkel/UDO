@@ -1,0 +1,39 @@
+################################################################################
+#
+# Project     : UDO manual
+# Chapter     : History: Version 7.02
+# Language    : English
+# Initial Date: 2010-05-25
+# Author      : Ulf Dunkel (fd)
+# Co-author(s): -
+# Write-access: fd
+#
+# ------------------------------------------------------------------------------
+# 
+# History
+# -------
+# 2010:
+#   fd  May 25: introduced
+#   fd  May 26: #89
+#
+################################################################################
+
+!begin_node Changes in version 7.02
+!html_name  history_0702
+
+(!INCOMPLETE)
+# (!PUBLISHED [UDO~7.02][May 25, 2010])
+
+!begin_description !compressed
+# ----------------------------------------
+!item [(!KKW [url])]
+# ----------------------------------------
+      !begin_itemize
+      !item (!BUG [89]): The command has been enhanced to await an optional third (!TARGET) parameter and an optional fourth (!CLASS) parameter. 
+            With these two new parameters you can control the target, a URL should be opened in, and the CSS class which formats the URL.
+      !end_itemize
+!end_description
+
+!end_node
+
+# === EOF ===
