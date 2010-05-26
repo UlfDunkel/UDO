@@ -19,6 +19,7 @@
 #               - !else_asc, !else_stg + !end_asc, !end_stg added
 #               - more version numbers added
 #   fd  May 19: !short, !use_short_... added
+#   fd  May 26: table adjustments
 #
 ################################################################################
 
@@ -298,7 +299,7 @@ Die nachfolgend aufgelisteten UDO-Kommandos und -Schalter sind veraltet und werd
 (!kw [win_html_look])            !! Seiten mit grauem Hintergrund ausgeben (nur WinHelp) !\
                                  !! (!KW [win_backcolor]), (!KW [win_propfont]), (!KW [win_monofont]) !\
                                  !! 6
-
+!hline
 !end_table
 
 !end_node # Alte Kommandos

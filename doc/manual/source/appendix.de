@@ -22,6 +22,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: table adjustments
 #
 ################################################################################
 
@@ -33,8 +34,7 @@ Folgende Maximalwerte müssen Sie beim Erstellen der Quelltexte beachten:
 # Hint: The used macros are defined in macros.ui.
 
 !table_caption Limitierungen von UDO
-!begin_table [l|r]
-!hline
+!begin_table [l|r] !hline
 Makros:                            !! (!MAXMACRO)
 Länge eines !/macro-Textwertes:    !! (!const [256])
 Defines:                           !! (!MAXDEFINE)
@@ -50,6 +50,7 @@ Zeilen pro Tabelle:                !! (!MAXLINETABLE)
 Spalten pro Tabelle:               !! (!MAXCOLUMSTABLE)
 Zeichen pro Tabellen-Zelle:        !! (!const [1000])
 Schachtelungstiefe der Umgebungen: !! (!const [6])
+!hline
 !end_table
 
 !end_node # Limitierungen von UDO

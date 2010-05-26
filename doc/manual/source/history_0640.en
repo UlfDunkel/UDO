@@ -16,6 +16,7 @@
 #   fd  Mar 01: introduced (from history_0640.de)
 #   fd  Mar 03: translation adjusted
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: table adjustments
 #
 ################################################################################
 
@@ -34,7 +35,7 @@
 (!EXAMPLE_BEGIN)
 !begin_verbatim
 !begin_table [|l|c|r|] !hline
-left !! center !! right
+left        !! center        !! right
 # This is a comment
 bottom left !! bottom center !! bottom right
 !hline

@@ -30,6 +30,7 @@
 #   fd  Mar 08: macro KK2W resolved into macros KKW + code
 #   fd  Mar 08: macro KW1 resolved to KWW
 #   fd  May 25: index adjustments
+#   fd  May 26: table adjustments
 #
 ################################################################################
 
@@ -200,33 +201,33 @@ down the conversion of the source file. The maximum number of macros is
 UDO knows some predefined macros and placeholders:
 
 !begin_table [|l|l|] !hline
-(!KKW [alpha]) !! Print the (!alpha) symbol
+(!KKW [alpha])       !! Print the (!alpha) symbol
 !hline
-(!KKW [beta]) !! Print the (!beta) symbol
+(!KKW [beta])        !! Print the (!beta) symbol
 !hline
-(!KKW [copyright]) !! Print the copyright symbol
+(!KKW [copyright])   !! Print the copyright symbol
 !hline
-(!KKW [deg]) !! Print the (!deg) symbol
+(!KKW [deg])         !! Print the (!deg) symbol
 !hline
-(!KKW [euro]) !! Print the (!euro) symbol
+(!KKW [euro])        !! Print the (!euro) symbol
 !hline
-(!KKW [grin]) !! Print an emoticon (!grin)
+(!KKW [grin])        !! Print an emoticon (!grin)
 !hline
-(!KKW [LaTeX]) !! Print the (!LaTeX) symbol
+(!KKW [LaTeX])       !! Print the (!LaTeX) symbol
 !hline
-(!KKW [LaTeXe]) !! Print the (!LaTeXe) symbol
+(!KKW [LaTeXe])      !! Print the (!LaTeXe) symbol
 !hline
-(!KKW [laugh]) !! Print an emoticon (!laugh)
+(!KKW [laugh])       !! Print an emoticon (!laugh)
 !hline
-(!KKW [pound]) !! Print the (!pound) symbol
+(!KKW [pound])       !! Print the (!pound) symbol
 !hline
-(!KKW [reg]) !! Print the (!reg) symbol
+(!KKW [reg])         !! Print the (!reg) symbol
 !hline
-(!KKW [TeX]) !! Print the (!TeX) symbol
+(!KKW [TeX])         !! Print the (!TeX) symbol
 !hline
-(!KKW [tm]) !! Print the (!tm) symbol
+(!KKW [tm])          !! Print the (!tm) symbol
 !hline
-(!KKW [today]) !! Insert long form of current date: (!B)(!today)(!b)
+(!KKW [today])       !! Insert long form of current date: (!B)(!today)(!b)
 !hline
 (!KKW [short_today]) !! Insert short form of current date: (!B)(!short_today)(!b)
 !hline

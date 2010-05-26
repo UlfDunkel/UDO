@@ -30,6 +30,7 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 07: lines in verbatim environment shortened
 #   fd  May 06: iconv example for Mac OS X terminal
+#   fd  May 26: table adjustments
 #
 ################################################################################
 
@@ -274,8 +275,8 @@ umgewandelt werden:
 
 
 !universal_charset [on]
-!begin_table [|l|l|ll|] !hline
-(!B)Platzhalter(!b)  !! (!B)x aus(!b)  !! (!B)Beispiel(!b)
+!begin_table [|l|l|l|l|]
+(!B)Platzhalter(!b)  !! (!B)x aus(!b)  !! (!B)Beispiel(!b)       !! (!B)Ergebnis(!b)
 !hline
 (!/"x)               !! AEIOUaeiosuy   !! (!B)(!T)(!/"a)(!t)(!b) !! = (!"a)
 (!/'x)               !! AEIOUYaeiouy   !! (!code [(!/'e!)])      !! = (!'e)

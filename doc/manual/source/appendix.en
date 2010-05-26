@@ -19,6 +19,8 @@
 #   fd  Jun 10: using macro (!const [])
 #   fd  Jun 10: table of limitations reformatted
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  May 26: table adjustments
 #
 ################################################################################
 
@@ -30,8 +32,7 @@ You can use source files that don't exceed these maximum values:
 # Hint: The used macros are defined in macros.ui.
 
 !table_caption UDO's limitations
-!begin_table [l|r]
-!hline
+!begin_table [l|r] !hline
 Macros:                               !! (!MAXMACRO)
 Length of !/macro text value:         !! (!const [256])
 Defines:                              !! (!MAXDEFINE)
@@ -47,6 +48,7 @@ Rows per table:                       !! (!MAXLINETABLE)
 Columns per table:                    !! (!MAXCOLUMSTABLE)
 Chars per table cell:                 !! (!const [1000])
 Depth of environments:                !! (!const [6])
+!hline
 !end_table
 
 !end_node # UDO's limitations

@@ -17,6 +17,7 @@
 # 2010:
 #   fd  Mar 01: using macro BUG
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: table adjustments
 #
 ################################################################################
 
@@ -35,9 +36,9 @@
 (!EXAMPLE_BEGIN)
 !begin_verbatim
 !begin_table [|l|c|r|] !hline
-links !! mitte !! rechts
+links       !! mittig       !! rechts
 # Dies ist ein Kommentar
-unten links !! unten mitte !! unten rechts
+unten links !! unten mittig !! unten rechts
 !hline
 !end_table
 !end_verbatim
