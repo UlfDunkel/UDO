@@ -30,7 +30,7 @@
 #               - (!deg) output localized in target formats which do not support the glyph
 #   fd  May 25: - description items better formatted in RTF + PS 
 #               - new: !label*
-#   ggs May 25: Move some !hline and change !hlist to !hline
+#   ggs May 25: some !hline moved, and !hlist changed to !hline
 #
 ################################################################################
 

@@ -14,11 +14,12 @@
 # -------
 # 2010:
 #   fd  Mar 08: macro KW1 resolved to KWW
+#   fd  May 26: table adjustments
 #
 ################################################################################
 
 !begin_flushleft
-!begin_table [ll]
+!begin_table [l|l]
 (!KKW [black])   !! (!black)Schwarz(!coloff)
 (!KKW [silver])  !! (!silver)Hellgrau(!coloff)
 (!KKW [gray])    !! (!gray)(Dunkel-)Grau(!coloff)

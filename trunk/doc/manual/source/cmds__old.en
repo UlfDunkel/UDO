@@ -19,6 +19,7 @@
 #               - !else_asc, !else_stg + !end_asc, !end_stg added
 #               - more version numbers added
 #   fd  May 19: !short, !use_short_... added
+#   fd  May 26: table adjustments
 #
 ################################################################################
 
@@ -298,7 +299,7 @@ The following list shows deprecated UDO commands and switches which are no longe
 (!kw [win_html_look])            !! output pages with gray background (WinHelp only) !\
                                  !! (!KW [win_backcolor]), (!KW [win_propfont]), (!KW [win_monofont]) !\
                                  !! 6
-
+!hline
 !end_table
 
 !end_node # Deprecated commands

@@ -29,6 +29,7 @@
 #   fd  Mar 08: macro KW1 resolved to KWW
 #   fd  May 19: "short" -> "compressed"
 #   fd  May 25: index adjustments
+#   fd  May 26: table adjustments
 #
 ################################################################################
 
@@ -759,7 +760,7 @@ described commands:
 !begin_verbatim
 !table_caption Tables with UDO
 !begin_table [|l|c|r|] !hline
-upper left !! up !! upper right
+upper left      !! up         !! upper right
 lower left cell !! lower cell !! lower right cell
 !hline
 !end_table
@@ -772,7 +773,7 @@ columns is printed right justified:
 
 !table_caption Tables with UDO
 !begin_table [|l|c|r|] !hline
-upper left !! up !! upper right
+upper left      !! up         !! upper right
 lower left cell !! lower cell !! lower right cell
 !hline
 !end_table
@@ -787,7 +788,7 @@ The following example shows the upper table without any lines:
 
 !table_caption Another example
 !begin_table [lcr]
-upper left !! up !! upper right
+upper left      !! up         !! upper right
 lower left cell !! lower cell !! lower right cell
 !end_table
 

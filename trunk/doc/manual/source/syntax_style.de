@@ -30,6 +30,7 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro KW1 resolved to KWW
 #   fd  May 19: "short" -> "compressed"
+#   fd  May 26: table adjustments
 #
 ################################################################################
 
@@ -788,8 +789,8 @@ kleines Beispiel an:
 !begin_verbatim
 !table_caption Tabellen mit UDO
 !begin_table [|l|c|r|] !hline
-links !! mitte !! rechts
-unten links !! unten mitte !! unten rechts
+links       !! mittig       !! rechts
+unten links !! unten mittig !! unten rechts
 !hline
 !end_table
 !end_verbatim
@@ -802,8 +803,8 @@ zentriert und die dritte Spalte rechtsbündig ausgegeben wird:
 (!EXAMPLE_BEGIN)
 !table_caption Tabellen mit UDO
 !begin_table [|l|c|r|] !hline
-links !! mitte !! rechts
-unten links !! unten mitte !! unten rechts
+links       !! mittig       !! rechts
+unten links !! unten mittig !! unten rechts
 !hline
 !end_table
 (!EXAMPLE_END)
@@ -823,8 +824,8 @@ werden. Dies wird dadurch ermöglicht, indem man kein ""(!code[|])"" und kein
 (!EXAMPLE_BEGIN)
 !table_caption Ein weiteres Beispiel
 !begin_table [lcr]
-links !! mitte !! rechts
-unten links !! unten mitte !! unten rechts
+links       !! mittig       !! rechts
+unten links !! unten mittig !! unten rechts
 !end_table
 (!EXAMPLE_END)
 

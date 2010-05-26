@@ -112,7 +112,7 @@ The following chapters describe all UDO commands in detail. All descriptions use
 	!item [<color>] replaces the name of a (!link [color] [Colors])
 
 	!label <character set>
-	!item [<character set>] replaces the name of a (!link [character set] [Code])
+	!item [<character set>] replaces the name of a (!link [character set] [code])
 
 	!end_tlist
 

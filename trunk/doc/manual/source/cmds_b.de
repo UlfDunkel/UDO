@@ -26,6 +26,7 @@
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #   fd  May 19: - "short" -> "compressed"
 #               - more links to "not_compressed"
+#   fd  May 26: table adjustments
 #
 ################################################################################
 
@@ -870,7 +871,7 @@ Tabelle ausgerichtet werden sollen und vor bzw. nach
 welcher Spalte senkrechte Linien gezogen werden
 sollen. Wird zum Schluss noch (!KW [hline]) angegeben, so
 beginnt die Tabelle mit einer waagerechten Linie. Im
-Beispiel sehen Sie eine Tabelle, die mit links,
+Beispiel sehen Sie eine Tabelle, die links,
 rechts und oben mit einer Linie versehen ist und die
 Spalten linksbündig, zentriert und rechtsbündig
 ausgerichtet werden.
