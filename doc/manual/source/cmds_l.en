@@ -29,6 +29,7 @@
 #   fd  May 21: xref links fixed
 #   fd  May 25: - new: !l*, !label*
 #               - chapter 'language' adjusted
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -469,7 +470,7 @@ Create a manual link.
 
 (!red)
 !item [(!DESCRIPTION)]
-Hiermit können Querverweise auf andere Kapitel oder Sprungmarken vorgenommen werden. Ausführliche Informationen findet man im Abschnitt ""Querverweise"".
+Hiermit können Querverweise auf andere Kapitel oder Sprungmarken vorgenommen werden. Ausführliche Informationen finden Sie im Abschnitt ""Querverweise"".
 (!coloff)
 !item [(!DESCRIPTION)]
 With this placeholder you can define links to other parts of the

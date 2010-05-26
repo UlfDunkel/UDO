@@ -16,6 +16,7 @@
 #   fd  Jun 06: introduced (extracted from history.de)
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -57,8 +58,8 @@
          ausführlichen Namen bekommen haben (z.~B. foo.php) richtig
          referenziert.
    !item Für die HTML-Ausgabe wird jetzt im Tag <ul> zusätzlich
-         (!code [<ul class="content">]) ausgegeben. Dadurch kann
-         man mittels eines Eintrages im Stylesheet
+         (!code [<ul class="content">]) ausgegeben. Dadurch können
+         Sie mittels eines Eintrages im Stylesheet
          (!code [(ul.content~{~list-style-type:~none;~}!)]) die
          Aufzählungspunkte in den Inhaltsverzeichnissen vermeiden.
    !item Bei der HTML-Ausgabe wird jetzt ein (!code [<span style="page-break-after:always;"></span>])

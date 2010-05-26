@@ -27,6 +27,7 @@
 #               - intro_contact: URLs added
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 26: (!url) enhanced for UDO v7.02
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -71,7 +72,7 @@ mehr Zeit für die wesentlichen Dinge bekommen.
 
 # = = = = =
 
-!begin_node Wie man dieses Handbuch am besten liest
+!begin_node Wie Sie dieses Handbuch am besten lesen
 !html_name  intro_manual
 
 Dieses Handbuch für UDO wurde so konzipiert, dass Sie es natürlich am besten mindestens einmal von vorn bis hinten durchlesen. Wir empfehlen, es täglich zu wiederholen. (!grin)
@@ -100,7 +101,7 @@ Da das UDO-Handbuch eher in die Kategorie ""Technisches Handbuch und Nachschlage
 
 !end_description
 
-!end_node # Wie man dieses Handbuch am besten liest
+!end_node # Wie Sie dieses Handbuch am besten lesen
 
 # = = = = =
 
@@ -111,13 +112,13 @@ UDO wurde ursprünglich entwickelt, um das Erstellen von Handbüchern und Anleitun
 zu Computerprogrammen oder vergleichbaren Dokumentationen zu
 vereinfachen, die in (!I)mehreren(!i) Formaten benötigt werden.
 
-UDO leistet aber auch gute Dienste, falls man nur
-(!I)ein(!i) Format erzeugen will. So ist es für Anfänger sicherlich einfacher,
+UDO leistet aber auch gute Dienste, falls Sie nur
+(!I)ein(!i) Format erzeugen wollen. So ist es für Anfänger sicherlich einfacher,
 die Syntax von UDO zu begreifen als die von HTML oder (!LaTeX), denn bei
-letzterem muss man beispielsweise höllisch aufpassen, dass man nicht
-unerlaubte Zeichen im Quelltext einbaut, wogegen UDO auch mit
+letzterem müssen Sie beispielsweise höllisch aufpassen, dass Sie nicht
+unerlaubte Zeichen im Quelltext einbauen, wogegen UDO auch mit
 Sonderzeichen klarkommt und diese automatisch an das jeweilige Ausgabeformat
-anpasst. Sprich, selbst wenn man nur HTML oder nur (!LaTeX) erzeugen will,
+anpasst. Sprich, selbst wenn Sie nur HTML oder nur (!LaTeX) erzeugen wollen,
 kann UDO sehr gute Dienste leisten.
 
 Dabei ist UDO multilingual, d.h. Sie können Texte in verschiedenen Sprachen erzeugen 

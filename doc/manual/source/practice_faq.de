@@ -24,6 +24,7 @@
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 26: (!url) enhanced for UDO v7.02
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -35,7 +36,7 @@
 !item [Was bedeutet ""FAQ""?]
       ""FAQ"" bedeutet ""Frequently Asked Questions"" und heißt 
       übersetzt soviel wie ""häufig gestellte Fragen"". Im übertragenen
-      Sinn versteht man darunter eine Auflistung eben dieser oft
+      Sinn verstehen Sie darunter eine Auflistung eben dieser oft
       gestellten Fragen samt der passenden Antwort.
 
 # = = =
@@ -48,7 +49,7 @@
 
 # = = =
 
-!item [Wie spricht man ""UDO"" aus?]
+!item [Wie spreche ich ""UDO"" aus?]
       ""UDO"" wird genauso ausgesprochen wie der Vorname Udo, also ""Uh-Doh"". ""UDO"" wird (!I)nicht(!i) anglophil wie ""Judo"" oder ""You do"" ausgesprochen!
 
 # = = =
@@ -84,8 +85,8 @@
 # = = =
 
 !item [Können auch ""systemfremde"" Formate erzeugt werden?]
-      Mit UDO kann auf man jedem System natürlich auch Formate für
-      andere Betriebssysteme erzeugt werden, da die Versionen identisch
+      Mit UDO können Sie auf jedem System natürlich auch Formate für
+      andere Betriebssysteme erzeugen, da die Versionen identisch
       sind. So ist es möglich, mit der Atari-Version WinHelp-Quelltexte
       zu erzeugen oder unter OS/2 mit der DOS-Version ST-Guide-Quelltexte.
       
@@ -95,7 +96,7 @@
 
 # = = =
 
-!item [Kann man Texte ""hier"" schreiben und ""dort"" konvertieren?]
+!item [Kann ich Texte ""hier"" schreiben und ""dort"" konvertieren?]
       Ja, denn UDO versteht alle Zeichensätze der Systeme, für die UDO
       erhältlich ist. Somit können Texte z.B. unter DOS geschrieben werden
       und auf einem Unix-Rechner konvertiert werden.
@@ -115,8 +116,8 @@
       
       Teilweise wird es sich auch nicht vermeiden lassen, die Syntax
       einiger Kommandos zu ändern. Auf solche Änderungen wird aber
-      besonders hingewiesen, dass man die nötigen Anpassungen
-      innerhalb von Minuten mit einem Editor vornehmen kann.
+      besonders hingewiesen, dass Sie die nötigen Anpassungen
+      innerhalb von Minuten mit einem Editor vornehmen können.
 
 # = = =
 
@@ -147,15 +148,15 @@
       Es werden dabei nur Verweise auf ""andere"" Seiten angelegt, also
       keine Verweise auf Stellen der aktuellen Seite.
       
-      Mit dem Schaltern (!KW [autoref]) kann man die automatische Referenzierung aus- (Parameter (!C)[off](!c)) und wieder einschalten (Parameter
+      Mit dem Schaltern (!KW [autoref]) können Sie die automatische Referenzierung aus- (Parameter (!C)[off](!c)) und wieder einschalten (Parameter
       (!C)[on](!c)).
 
 # = = =
 
-!item [Wie verweist man auf Stellen des aktuellen Kapitels?]
+!item [Wie verweise ich auf Stellen des aktuellen Kapitels?]
       Da UDO nicht auf der Seite Verweise anlegt, auf der ein Label
-      gesetzt wurde, gibt es ein Problem, falls man am Seitenende einen
-      Verweis zum Seitenanfang anlegen will. Daher muss man hier einen
+      gesetzt wurde, gibt es ein Problem, falls Sie am Seitenende einen
+      Verweis zum Seitenanfang anlegen wollen. Daher müssen Sie hier einen
       manuellen Querverweis setzen.
 
 (!EXAMPLE_BEGIN)
@@ -170,9 +171,9 @@
 # = = =
 
 !item [Wie bekomme ich Bilder in ein Inhaltsverzeichnis?]
-      Dazu muss man auf den Befehl (!KW [tableofcontents]) verzichten und ein
+      Dazu müssen Sie auf den Befehl (!KW [tableofcontents]) verzichten und ein
       Kapitel anlegen, in welches das Inhaltsverzeichnis ausgegeben
-      wird. In einem normalen Kapitel kann man natürlich Bilder wie
+      wird. In einem normalen Kapitel können Sie natürlich Bilder wie
       sonst auch benutzen.
 
 (!EXAMPLE)

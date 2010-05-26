@@ -24,6 +24,7 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro K1 resolved to KW
 #   fd  Mar 08: macro k1 resolved to kw
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -60,7 +61,7 @@ Quelltext (!KW [//-]) angeben.
 !begin_node Lokales Setzen von Trennstellen
 !html_name  hyphenation_patterns_local
 
-Im Quelltext kann man in einem Wort durch (!KW [/-]) die Stellen markieren, an
+Im Quelltext können Sie in einem Wort durch (!KW [/-]) die Stellen markieren, an
 denen UDO (bzw. (!LaTeX)) das Wort trennen darf. Ein Beispiel:
 
 (!EXAMPLE_BEGIN)
@@ -147,7 +148,7 @@ Gerade in der Entwicklungsphase einer Dokumentation interessieren
 einen die Warnungen eher weniger. Benutzen Sie dann einfach zu Beginn
 des Dokumentes den Befehl (!KW [sloppy]), dass in der Logdatei nur noch die
 ""wichtigen"" Dinge zu erkennen sind. Vor der Veröffentlichung der
-Dokumentation sollte man dann den Befehl auskommentieren und die
+Dokumentation sollten Sie dann den Befehl auskommentieren und die
 Formatierung überprüfen.
 
 !end_node # Hinweise auf zu kurze Zeilen

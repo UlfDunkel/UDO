@@ -28,6 +28,7 @@
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 06: '-@ F' now accepts more commands per line
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -158,7 +159,7 @@ den Rohlingen für die Trennvorschläge.
 
 !item [(--)tree] Wird diese Option benutzt, legt UDO in einer Datei
 mit dem Suffix (!file [.ut?]) eine baumartige Übersicht der benutzten Dateien an.
-Bei intensiver Benutzung des Befehls (!KW [include]) sieht man damit,
+Bei intensiver Benutzung des Befehls (!KW [include]) sehen Sie damit,
 welche Dateien andere Dateien nachladen.
 
 !item [-u, (--)udo] Erzeugt eine Datei im UDO-Format, die sämtliche inkludierten UDO-Quelltexte enthält.

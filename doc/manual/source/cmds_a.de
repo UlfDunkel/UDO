@@ -25,6 +25,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -205,8 +206,8 @@ Referenzierung bei Items ein-/ausschalten.
 !item [(!SYNTAX)] (!T)!/autoref_items [ on | off ](!t)
 
 !item [(!DESCRIPTION)]
-Hiermit kann man einstellen, ob UDO die Items einer description-Umgebung oder xlist-Umgebung
-referenzieren soll. Beim Start von UDO ist die Referenzierung der Items standardmäßig aktiviert.
+Hiermit können Sie einstellen, ob UDO die Punkte einer description-Umgebung oder xlist-Umgebung
+referenzieren soll. Beim Start von UDO ist die Referenzierung der Punkte standardmäßig aktiviert.
 
 !item [(!SEEALSO)]
 (!link [Beschreibungen] [Beschreibungen]), (!link [Listen] [Listen]), (!KW [item])

@@ -28,6 +28,7 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 19: - "short" -> "compressed"
 #               - chapter 'compressed' moved to cmds_c.de
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -49,10 +50,10 @@ Symbol setzen.
 
 !item [(!DESCRIPTION)]
 Mit diesem Kommando können Sie Symbole in einem
-Quelltext setzen, die man durch die Abfrage-Kommandos
-(!KW [ifset]) und (!KW [if]) testen kann. Symbole lassen sich auch
+Quelltext setzen, die Sie durch die Abfrage-Kommandos
+(!KW [ifset]) und (!KW [if]) testen können. Symbole lassen sich auch
 durch die Option (!code [-D]) setzen. Mit dem Befehl (!KW [unset])
-kann man gesetzte Symbole wieder löschen. (!KW [set]) können
+können Sie gesetzte Symbole wieder löschen. (!KW [set]) können
 Sie überall im Quelltext benutzen.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~11
@@ -334,8 +335,8 @@ Wird dieser Schalter im Vorspann benutzt, liest
 UDO nach der Umwandlung der Quelldatei die Datei mit
 den gesicherten Trennvorschlägen neu ein, sortiert die
 Zeilen und entfernt doppelte Einträge. Das Beispiel
-zeigt, wie man diese Option für die Umwandlung ins
-ASCII- und ST-Guide-Format aktivieren kann.
+zeigt, wie Sie diese Option für die Umwandlung ins
+ASCII- und ST-Guide-Format aktivieren können.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
@@ -922,8 +923,8 @@ Paragraphen auflisten.
 
 !item [(!DESCRIPTION)]
 Listet in Form eines Inhaltsverzeichnisses alle Paragraphen des
-aktuellen Unterabschnitts auf und sorgt dafür, dass man in Hypertexten
-zu den Paragraphen weiterverzweigen kann. UDO gibt dieses
+aktuellen Unterabschnitts auf und sorgt dafür, dass Sie in Hypertexten
+zu den Paragraphen weiterverzweigen können. UDO gibt dieses
 Unterinhaltsverzeichnis nicht aus, wenn in dem Unterabschnitt der Schalter
 (!KW [ignore_subsubsubtoc]) verwendet wurde. Die Ausgabe dieser
 Unterinhaltsverzeichnisse lässt sich durch
@@ -1068,8 +1069,8 @@ Unterparagraphen auflisten.
 
 !item [(!DESCRIPTION)]
 Listet in Form eines Inhaltsverzeichnisses alle Unterparagraphen des
-aktuellen Unterabschnitts auf und sorgt dafür, dass man in Hypertexten
-zu den Paragraphen weiterverzweigen kann. UDO gibt dieses
+aktuellen Unterabschnitts auf und sorgt dafür, dass Sie in Hypertexten
+zu den Paragraphen weiterverzweigen können. UDO gibt dieses
 Unterinhaltsverzeichnis nicht aus, wenn in dem Unterabschnitt der Schalter
 (!KW [ignore_subsubsubsubtoc]) verwendet wurde. Die Ausgabe dieser
 Unterinhaltsverzeichnisse lässt sich durch
@@ -1146,8 +1147,8 @@ Unterabschnitte auflisten.
 
 !item [(!DESCRIPTION)]
 Listet in Form eines Inhaltsverzeichnisses alle Unterabschnitte des
-aktuellen Abschnitts auf und sorgt dafür, dass man in Hypertexten zu den
-Unterabschnitten weiterverzweigen kann. UDO gibt dieses
+aktuellen Abschnitts auf und sorgt dafür, dass Sie in Hypertexten zu den
+Unterabschnitten weiterverzweigen können. UDO gibt dieses
 Unterinhaltsverzeichnis nicht aus, wenn in dem Abschnitt der Schalter
 (!KW [ignore_subsubtoc]) verwendet wurde. Die Ausgabe dieser
 Unterinhaltsverzeichnisse lässt sich durch (!KW [use_auto_subsubtocs]) auch automatisieren.
@@ -1217,8 +1218,8 @@ Abschnitte auflisten.
 
 !item [(!DESCRIPTION)]
 Listet in Form eines Inhaltsverzeichnisses alle Abschnitte des
-aktuellen Kapitels auf und sorgt dafür, dass man in Hypertexten zu den
-Abschnitten weiterverzweigen kann. UDO gibt dieses
+aktuellen Kapitels auf und sorgt dafür, dass Sie in Hypertexten zu den
+Abschnitten weiterverzweigen können. UDO gibt dieses
 Unterinhaltsverzeichnis nicht aus, wenn in dem Kapitel der Schalter
 (!KW [ignore_subtoc]) verwendet wurde. Die Ausgabe dieser
 Unterinhaltsverzeichnisse lässt sich durch (!KW [use_auto_subtocs]) auch automatisieren.

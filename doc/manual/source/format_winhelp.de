@@ -29,6 +29,7 @@
 #   fd  Jun 25: NDR: 'plazieren' -> 'platzieren'
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -86,8 +87,8 @@
       UDO erzeugt auf jeder Seite (mit Ausnahme der Titelseite und des
       Inhaltsverzeichnisses) eine Kopfzeile. In dieser befindet sich der Name
       des jeweiligen Kapitels. Kopfzeilen werden als
-      ""non-scrolling-regions"" angelegt, dass man auch nach dem Scrollen
-      der Seite immer noch den Kapitelnamen erkennen kann.
+      ""non-scrolling-regions"" angelegt, dass Sie auch nach dem Scrollen
+      der Seite immer noch den Kapitelnamen erkennen können.
       
       Durch den Schalter ""(!KW [no_headlines] [[win!!]])"" wird die Ausgabe
       von Kopfzeilen unterdrückt.

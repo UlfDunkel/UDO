@@ -41,6 +41,7 @@
 #   fd  May 25: using macro NOTE
 #   ggs May 25: use_compressed_envs have a "see also" to himself
 #   fd  May 26: (!url) enhanced for v7.02 [#89]
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -66,7 +67,7 @@ Unterstrichenen Text ausgeben.
 !item [(!DESCRIPTION)]
 ""(!TEXT)"" wird unterstrichen dargestellt, falls möglich.
 
-(!NOTE) Diese Schriftart sollte sparsam eingesetzt werden. Denken Sie z.B. beim HTML-Format daran, dass standardmäßig Hypertext-Links in HTML-Seiten unterstrichen werden, so dass man dort erwartet, auf jeden unterstrichenen Text klicken zu können, um eine andere Seite aufzurufen.
+(!NOTE) Diese Schriftart sollte sparsam eingesetzt werden. Denken Sie z.B. beim HTML-Format daran, dass standardmäßig Hypertext-Links in HTML-Seiten unterstrichen werden, so dass Sie dort erwarten, auf jeden unterstrichenen Text klicken zu können, um eine andere Seite aufzurufen.
 
 !item [(!SEEALSO)]
 Schriftarten, (!link [Textgestaltung] [Textgestaltung])
@@ -99,7 +100,7 @@ Link auf UDO-Website erzeugen.
 
 !item [(!DESCRIPTION)]
 UDO sichert für HTML, WinHelp und ST-Guide eine Datei namens
-(!file [udo_wm.[gif,bmp,img!]]). Mit diesem Kommando kann man in sein Werk die
+(!file [udo_wm.[gif,bmp,img!]]). Mit diesem Kommando können Sie in sein Werk die
 Grafik einbinden. Bei HTML wird zugleich ein Link auf die
 (!url [Website] [http://www.udo-open-source.org/]) erzeugt.
 
@@ -361,7 +362,7 @@ Help-IDs automatisch erzeugen.
 !item [(!SYNTAX)] (!T)!/use_auto_helpids [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Durch diesen Schalter kann man im Vorspann bestimmen, dass UDO
+Durch diesen Schalter können Sie im Vorspann bestimmen, dass UDO
 automatisch Help-IDs sichert, die an die Kapitelnamen angelehnt sind,
 sofern nicht manuell eine Help-ID mit (!KW [win_helpid]) oder
 (!KW [wh4_helpid]) gesetzt wird.
@@ -598,7 +599,7 @@ Formfeed-Befehl mit ausgeben.
 !item [(!SYNTAX)] (!T)!/use_formfeed [(!FORMAT)](!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Schalter kann man UDO mitteilen, dass beim (!KW [newpage])-Befehl bei ASCII-Formaten ein Formfeed
+Mit diesem Schalter können Sie UDO mitteilen, dass beim (!KW [newpage])-Befehl bei ASCII-Formaten ein Formfeed
 (ASCII~12) ausgegeben werden soll.
 
 !item [(!SEEALSO)]
@@ -695,8 +696,8 @@ Automatisch gespiegelte Indizes erzeugen.
 !item [(!DESCRIPTION)]
 Wird dieser Schalter benutzt, legt UDO beim Befehl (!KW [index]) oder bei der
 PlatzhalterVersion~(!KKW [idx]) auch die ""gespiegelten"" Einträge
-an, falls man einen Doppeleintrag vornimmt. Falls man also diesen
-Schalter benutzt, dann kann man sich bei der Angabe von
+an, falls Sie einen Doppeleintrag vornehmen. Falls Sie also diesen
+Schalter benutzen, dann können Sie sich bei der Angabe von
 
 (!EXAMPLE_BEGIN)
 !begin_verbatim

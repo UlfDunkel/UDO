@@ -32,6 +32,7 @@
 #   fd  May 19: "short" -> "compressed"
 #   fd  May 26: table adjustments
 #   fd  May 26: (!url) enhanced for UDO v7.02
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -136,7 +137,7 @@ Bullet verwendet, welches in den Systemzeichensätzen der verschiedenen
 Rechner, auf denen UDO läuft, jeweils an anderer Stelle definiert ist.
 
 !index (!kw [no_umlaute])
-!item Verwendet man im Vorspann den Schalter (!KW [no_umlaute]), so
+!item Verwenden Sieim Vorspann den Schalter (!KW [no_umlaute]), so
 wird als Markierung für die Ebene ein ""o"" statt des Bullets verwendet.
 !end_enumerate
 
@@ -180,16 +181,16 @@ verschachtelt und mit dem Schalter (!KW [compressed]) benutzt wird.
 !begin_enumerate !compressed
 !item Bei den Formaten, die von Hause aus eine vergleichbare Umgebung
      anbieten (z.B. HTML) werden die Punkte nicht von UDO nummeriert.
-     Daher sollte man vorsichtig mit Angaben wie ""siehe Punkt~1"" oder
+     Daher sollten Sie vorsichtig mit Angaben wie ""siehe Punkt~1"" oder
      ""vergleiche Punkt~b)"" sein.
 
 !item Die dritte Ebene dieser Umgebung wird relativ gesehen etwas
      weiter eingerückt, da die Nummerierung durch römische Zahlen mehr
      Platz benötigt.
 
-!item Bei vielen Punkten sollte man aufpassen, nicht die Grenzen zu
-     überschreiten. Wird eine Ebene mit Buchstaben nummeriert, sollte
-     man nicht mehr als (!const [26])~Aufzählungspunkte benutzen.
+!item Bei vielen Punkten sollten Sie aufpassen, nicht die Grenzen zu
+     überschreiten. Wird eine Ebene mit Buchstaben nummeriert, sollten Sie 
+     nicht mehr als (!const [26])~Aufzählungspunkte benutzen.
 
 !item Eine ausführliche Erläuterung des Schalters (!KW [compressed]) finden Sie in
      der Beschreibung zur itemize-Umgebung.
@@ -232,7 +233,7 @@ mit dem Schalter (!KW [compressed]) benutzt.
 
 !begin_enumerate !compressed
 !item Wenn der zu beschreibende Text eine schließende eckige Klammer
-     enthält, muss man dieser Klammer ein Ausrufezeichen
+     enthält, müssen Sie dieser Klammer ein Ausrufezeichen
      voranstellen, damit UDO erkennt, dass die folgende eckige Klammer
      auch fett dargestellt werden soll.
 
@@ -241,7 +242,7 @@ mit dem Schalter (!KW [compressed]) benutzt.
       
 !item Der in den eckigen Klammer angegebene Text wird auch in HTML fett
      ausgegeben, obwohl dies eher untypisch für HTML ist. In einer der
-     nächsten Versionen wird man dies ändern können.
+     nächsten Versionen werden Sie dies ggf. ändern können.
 
 !item Eine ausführliche Erläuterung des Schalters (!KW [compressed]) finden Sie in
      der Beschreibung zur itemize-Umgebung.
@@ -328,7 +329,7 @@ Bezüglich dieser Listen-Umgebungen gibt es einige Dinge zu beachten:
 !begin_enumerate !compressed
 
 !item Wenn der zu beschreibende Text eine schließende eckige Klammer
-      enthält, muss man dieser Klammer ein Ausrufezeichen
+      enthält, müssen Sie dieser Klammer ein Ausrufezeichen
       voranstellen, damit UDO erkennt, dass die folgende eckige Klammer
       noch zum ""linken Teil"" des Punktes zählt.
 
@@ -343,7 +344,7 @@ Bezüglich dieser Listen-Umgebungen gibt es einige Dinge zu beachten:
       
 # !item HTML, Linuxdoc-SGML und Texinfo bietet keine direkte
 # Unterstützung für Listen diesen Typs, daher werden Listen wie
-# Beschreibungen behandelt. Benutzt man jedoch den Schalter
+# Beschreibungen behandelt. Benutzen Sie jedoch den Schalter
 # (!KW [use_xlist]) im Vorspann, werden diese Listen wie beim
 # ASCII-Format ausgegeben, jedoch dann als vorformatierter Text,
 
@@ -351,7 +352,7 @@ Bezüglich dieser Listen-Umgebungen gibt es einige Dinge zu beachten:
 !index (!kw [win_charwidth])
 !item UDO kennt nicht die Schriftbreiten der benutzten Fonts für
       WinHelp und RTF. Falls die Einrückungen zu groß oder zu klein
-      ausfallen, kann man die Tiefe durch die Schalter (!KW [rtf_charwidth])
+      ausfallen, können Sie die Tiefe durch die Schalter (!KW [rtf_charwidth])
       bzw. (!KW [win_charwidth]) korrigieren.
 
 !item Eine ausführliche Erläuterung des Schalters (!KW [compressed]) finden Sie in
@@ -389,8 +390,8 @@ Zentrierungen zulässt.
 !include (!EXAMPLES)/center.ui
 (!EXAMPLE_END)
 
-Wie man sieht, formatiert UDO Absätze auch hier. Um einen manuellen
-Zeilenumbruch zu setzen, bedient man sich des Befehls (!KKW [nl]), vor dem unbedingt ein Leerzeichen stehen muss.
+Wie Sie sehen, formatiert UDO Absätze auch hier. Um einen manuellen
+Zeilenumbruch zu setzen, verwenden Sie den Befehl (!KKW [nl]), vor dem unbedingt ein Leerzeichen stehen muss.
 
 !end_node # Zentrieren von Zeilen
 
@@ -423,8 +424,8 @@ lesen, keinen rechtsbündigen Text zulässt.
 !include (!EXAMPLES)/flushright.ui
 (!EXAMPLE_END)
 
-Wie man sieht, formatiert UDO Absätze auch hier. Um einen manuellen
-Zeilenumbruch zu setzen, bedient man sich des Befehls (!KKW [nl]), vor dem unbedingt ein Leerzeichen stehen muss.
+Wie Sie sehen, formatiert UDO Absätze auch hier. Um einen manuellen
+Zeilenumbruch zu setzen, verwenden Sie den Befehl (!KKW [nl]), vor dem unbedingt ein Leerzeichen stehen muss.
 
 !end_node # Rechtsbündiger Text
 
@@ -455,8 +456,8 @@ Ein Beispiel:
 !include (!EXAMPLES)/flushleft.ui
 (!EXAMPLE_END)
 
-Wie man sieht, formatiert UDO Absätze auch hier. Um einen manuellen
-Zeilenumbruch zu setzen, bedient man sich des Befehls (!KKW [nl]), vor dem unbedingt ein Leerzeichen stehen muss.
+Wie Sie sehen, formatiert UDO Absätze auch hier. Um einen manuellen
+Zeilenumbruch zu setzen, verwenden Sie den Befehl (!KKW [nl]), vor dem unbedingt ein Leerzeichen stehen muss.
 
 !end_node # Linksbündiger Text
 
@@ -468,8 +469,8 @@ Zeilenumbruch zu setzen, bedient man sich des Befehls (!KKW [nl]), vor dem unbed
 
 Die quote-Umgebung dient dazu, Passagen eingerückt darzustellen. Diese
 Umgebung wird mit (!KW [begin_quote]) eingeleitet und mit (!KW [end_quote]) beendet.
-Die quote-Umgebung lässt sich mehrfach ineinander benutzen, man kann
-Sie auch mit anderen Umgebungen kombinieren.
+Die quote-Umgebung lässt sich mehrfach ineinander benutzen; Sie können 
+sie auch mit anderen Umgebungen kombinieren.
 
 Diese Umgebung eignet sich dazu, Textpassagen deutlicher vom
 restlichen Text abzuheben. Dieser Effekt wurde auch bei folgendem
@@ -492,11 +493,11 @@ Beispiel erzielt:
 # 22.01.1996: Hinweis auf die raw-Umgebung
 
 UDO sorgt selbständig für die Formatierung des auzugebenden Textes.
-Dies ist jedoch nicht immer erwünscht. Will man beispielsweise
+Dies ist jedoch nicht immer erwünscht. Wollen Sie beispielsweise
 Schnipsel eines Sourcecodes darstellen, wäre es fatal, würde UDO hier
 eine Formatierung vornehmen.
 
-Zur Ausgabe von vorformatiertem Text kann man sich daher der
+Zur Ausgabe von vorformatiertem Text können Sie sich daher der
 verbatim-Umgebung bedienen, welche mit (!KW [begin_verbatim]) begonnen
 und mit (!KW [end_verbatim]) beendet wird.
 
@@ -565,7 +566,7 @@ Normalerweise ersetzt UDO DOS-Grafikzeichen durch die ASCII-Zeichen ""(!code [+]
 darzustellen. Eine direkte Einbindung von Screenshots, die DOS-Grafikzeichen
 enthalten, ist daher nicht möglich.
 
-Zur Ausgabe von Screenshots kann man sich daher der
+Zur Ausgabe von Screenshots können Sie sich daher der
 linedraw-Umgebung bedienen, welche mit (!KW [begin_linedraw]) begonnen
 und mit (!KW [end_linedraw]) beendet wird.
 
@@ -683,25 +684,25 @@ die Schriftarten im jeweiligen Format erzeugt werden:
 # Textstil-Ausgabeformate
 !include _styles.ui
 
-Wie man sieht, werden bei der Ausgabe ins ASCII-Format die Zeichen zur
+Wie Sie sehen, werden bei der Ausgabe ins ASCII-Format die Zeichen zur
 Einschaltung von Schriftarten benutzt, wie sie im Usenet üblich
 sind. Die Zeichen werden bei der Ermittlung von Zeilenlängen nicht
 berücksichtigt.
 
 !index (!kw [no_effects])
-Wenn man bei einem Ausgabeformat keine Schriftarten benutzen möchte,
-so kann man die Ausgabe der Schriftartbefehle durch die Angabe des
+Wenn Sie bei einem Ausgabeformat keine Schriftarten benutzen möchten,
+so können Sie die Ausgabe der Schriftartbefehle durch die Angabe des
 Schalter (!KW [no_effects]) unterdrücken. Der Schalter muss dabei zusammen mit
 dem/den gewünschten Format(en) im Vorspann angegeben werden. Um z.B.
 keine Schriftarten beim ASCII- und Manualpage-Format zu benutzen,
-benutzt man (!KW [no_effects] [[asc,man!!]]).
+benutzen Sie (!KW [no_effects] [[asc,man!!]]).
 
 (!HINT)
 
 Mit Definitionen lassen sich leicht benutzerdefinierte Schriftarten
-erstellen. Dazu muss man natürlich Kenntnis der Formatbefehle des
-jeweiligen Formates haben. Im folgenden Beispiel wird gezeigt, wie man
-die vom ST-Guide unterstützte helle Schrift ein- und ausschalten kann:
+erstellen. Dazu müssen Sie natürlich Kenntnis der Formatbefehle des
+jeweiligen Formates haben. Im folgenden Beispiel wird gezeigt, wie Sie
+die vom ST-Guide unterstützte helle Schrift ein- und ausschalten können:
 
 (!EXAMPLE_BEGIN)
 !begin_verbatim
@@ -819,8 +820,8 @@ ein (!KW [hline]) angegeben wurde.
 
 Hier noch ein weiteres Beispiel einer Tabelle, die den gleichen Inhalt
 zeigt, wie die obige Tabelle, aber bei der keine Linien benutzt
-werden. Dies wird dadurch ermöglicht, indem man kein ""(!code[|])"" und kein
-(!KW [hline]) verwendet. Das Ergebnis:
+werden. Dies wird dadurch ermöglicht, indem Sie kein ""(!code[|])"" und kein
+(!KW [hline]) verwenden. Das Ergebnis:
 
 (!EXAMPLE_BEGIN)
 !table_caption Ein weiteres Beispiel
@@ -846,21 +847,21 @@ WinHelp, RTF, HTML und (!LaTeX) hat dieser Schalter keinen Einfluss.
 !item Tabellen werden standardmäßig immer zentriert ausgegeben. 
 Mit dem Vorspann-Kommando (!KW [table_alignment]) können Sie jedoch auch andere Ausrichtungen festlegen.
 
-!item In HTML kann man die Benutzung von Linien nicht frei festlegen,
-daher werden Tabellen dort immer mit (!code [frame=box]) erzeugt, falls man in
-der Zeile mit (!KW [begin_table]) den Befehl (!KW [hline]) benutzt.
+!item In HTML können Sie die Benutzung von Linien nicht frei festlegen,
+daher werden Tabellen dort immer mit (!code [frame=box]) erzeugt, falls Sie in
+der Zeile mit (!KW [begin_table]) den Befehl (!KW [hline]) benutzen.
 
 !item Für WinHelp werden die Möglichkeiten zur Tabellenausgabe
 ausgeschöpft. Leider ist es hier nicht möglich, eine Tabelle zentriert
 auszugeben oder Linien frei zu setzen. Daher werden alle Zellen der
-Tabelle umrahmt dargestellt, falls man in der Zeile mit
-(!KW [begin_table]) das Kommando (!KW [hline]) benutzt. Benutzt man es
+Tabelle umrahmt dargestellt, falls Sie in der Zeile mit
+(!KW [begin_table]) das Kommando (!KW [hline]) benutzen. Benutzen Sie es
 nicht, wird die komplette Tabelle ohne Linien dargestellt.
 
 !item Beim ST-Guide werden die Tabellenlinien durch den Grafikbefehl
 (!code [@line]) erzeugt. Hier ist es nicht möglich, mehrere Linien
-zwischen den Spalten zu erzeugen, wenn man keine ANSI-Tabellen ausgeben
-lässt.
+zwischen den Spalten zu erzeugen, wenn Sie keine ANSI-Tabellen ausgeben
+lassen.
 
 !item In den Feldern der Tabelle sind natürlich alle sonstigen
 UDO-Kommandos erlaubt. Sie können dort also auch Schriftarten,

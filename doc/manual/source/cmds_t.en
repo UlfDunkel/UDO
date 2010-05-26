@@ -28,6 +28,7 @@
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
 #   fd  Mar 08: macro KW1 resolved to KWW
 #   fd  May 19: "short" -> "compressed"
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -235,7 +236,7 @@ nach (!KW [begin_document]) bzw. nach (!KW [maketitle]) eingesetzt
 werden. Der Umfang des Inhaltsverzeichnis lässt sich durch den Schalter
 (!KW [use_compressed_tocs]) oder durch Angabe des Schalters
 (!KW [depth]) verkleinern.
-Das Beispiel zeigt, wie man ein Inhaltsverzeichnis ausgibt,
+Das Beispiel zeigt, wie Sie ein Inhaltsverzeichnis ausgeben,
 das nur die Nodes (1.~Ebene) enthält.
 (!coloff)
 !item [(!DESCRIPTION)]
@@ -281,7 +282,7 @@ vor (!KW [vinclude]) angeben. (!KW [tabwidth]) kann überall und
 beliebig oft im Quelltext angegeben werden. (!VALUE)
 wird jeweils für die nächste verbatim-Umgebung
 verwendet. Standardmäßig benutzt UDO den Wert 8.
-Benutzt man 0 als (!VALUE), so wandelt UDO die Tabulatoren nicht um.
+Benutzen Sie 0 als (!VALUE), so wandelt UDO die Tabulatoren nicht um.
 (!coloff)
 !item [(!DESCRIPTION)]
 If lines that are part of a verbatim environment contain TABs

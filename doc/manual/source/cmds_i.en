@@ -30,6 +30,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.en
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -164,7 +165,7 @@ zwischen (!KW [ifdest]) und (!KW [else]) bzw. (!KW [endif]) angegeben
 werden. Stimmt das Kürzel nicht überein, so werden
 nur die Zeilen zwischen (!KW [else]) und (!KW [endif]) ausgewertet,
 sofern (!KW [else]) benutzt wird. Das Beispiel zeigt, wie
-man testen kann, ob die Quelldatei ins ST-Guide- oder
+Sie testen können, ob die Quelldatei ins ST-Guide- oder
 WinHelp-Format umgewandelt wird.
 # ToDo: erfolgt stets eine ODER-Verknüpfung?? (U.K. 17.12.03)
 !item [(!DESCRIPTION)]
@@ -393,7 +394,7 @@ Dieses Kommando testet das aktuelle Betriebssystem,
 auf dem UDO läuft. Enthält ""<systeme>"" eines der
 Kürzel der Betriebssysteme, so wandelt UDO alle
 Zeilen zwischen (!KW [ifos]) und (!KW [endif]) bzw. (!KW [else]) um. Das
-Beispiel zeigt, wie man testen kann, ob UDO unter Linux läuft.
+Beispiel zeigt, wie Sie testen können, ob UDO unter Linux läuft.
 !item [(!DESCRIPTION)]
 This command tests the current operating system UDO is running on. If
 ""<systems>"" match one of the abbreviations of the operating systems
@@ -430,7 +431,7 @@ Query symbol.
 
 !item [(!DESCRIPTION)]
 Mit diesem Abfragebefehl können Sie testen, ob ein Symbol für die Umwandlung in der Kommandozeile mit
-der Option (!code [-D]) gesetzt wurde. Wurde ""(!TEXT)"" gesetzt, so werden alle folgenden Zeilen umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht. Andernfalls werden nur die Zeilen umgewandelt, die (!KW [else]) folgen, sofern die Abfrage einen else-Zweig besitzt. Das Beispiel zeigt, wie man abfragt, ob in der Kommandozeile (!code [-D deutsch]) benutzt wurde.
+der Option (!code [-D]) gesetzt wurde. Wurde ""(!TEXT)"" gesetzt, so werden alle folgenden Zeilen umgewandelt, bis (!KW [else]) oder (!KW [endif]) auftaucht. Andernfalls werden nur die Zeilen umgewandelt, die (!KW [else]) folgen, sofern die Abfrage einen else-Zweig besitzt. Das Beispiel zeigt, wie Sie abfragen, ob in der Kommandozeile (!code [-D deutsch]) benutzt wurde.
 !item [(!DESCRIPTION)]
 With this command you can test if a symbol was set with the command
 line option (!code [-D]) or with (!KW [set]). If (!code [(!TEXT)]) was
@@ -582,7 +583,7 @@ Ignore footer file.
 !item [(!DESCRIPTION)]
 Darf nur in einem Node benutzt werden und besagt, dass in diesem Node
 die global geltende Footerdatei nicht ausgegeben werden soll. Somit
-kann man einzelne Nodes davor schützen, einen Footer zu erhalten.
+können Sie einzelne Nodes davor schützen, einen Footer zu erhalten.
 
 Dieser Befehl wird derzeit nur für HTML unterstützt.
 !item [(!DESCRIPTION)]
@@ -615,7 +616,7 @@ Ignore header file.
 !item [(!DESCRIPTION)]
 Darf nur in einem Node benutzt werden und besagt, dass in diesem Node
 die global geltende Headerdatei nicht ausgegeben werden soll. Somit
-kann man einzelne Nodes davor schützen, einen Header zu erhalten.
+können Sie einzelne Nodes davor schützen, einen Header zu erhalten.
 
 Dieser Befehl wird derzeit nur für HTML unterstützt.
 !item [(!DESCRIPTION)]
@@ -858,7 +859,7 @@ Wird ""<titel>"" angegeben, so wird der Text als Bildunterschrift angegeben.
 
 Die Ausrichtung des Bildes richtet sich nach der
 eventuell vorhandenen äußeren Umgebung. Zentrierte
-Bilder erhält man demnach, wenn man das (!KW [image])-Kommando in einer center-Umgebung verwendet.
+Bilder erhalten Sie demnach, wenn Sie das (!KW [image])-Kommando in einer center-Umgebung verwenden.
 (!FILESPACEQUOTE)
 !item [(!DESCRIPTION)]
 A command to include an image is generated in the destination file,
@@ -1092,7 +1093,7 @@ Indexeintrag bzw. Schlüsselwort setzen.
 als (!code [K{\footnote~K~!..}]), für RTF als (!code [{\xe\v~!..}])
 und für den ST-Guide als (!code [@index~!..]) ausgegeben.
 ""(!TEXT)"" kommt damit bei (!LaTeX) und dem ST-Guide in den
-Index, bei WinHelp kann man im Suchen-Dialog nach
+Index, bei WinHelp können Sie im Suchen-Dialog nach
 diesem Schlüsselwort suchen und bekommt die Namen der
 Kapitel aufgelistet, in denen (!KW [index]) benutzt wurde.
 ""(!TEXT)"" kann beliebig oft benutzt werden, auch in mehreren Kapiteln.

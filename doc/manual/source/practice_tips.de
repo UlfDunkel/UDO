@@ -25,6 +25,8 @@
 #   fd  Jun 10: using macro (!file [])
 #   fd  Jun 10: using EXAMPLE_... macros
 #   fd  Jun 16: great review session #1
+# 2010:
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -68,7 +70,7 @@ ganz einfach eine zusätzliche Hauptdatei, die Sie dann umwandeln:
 !vinclude (!EXAMPLES)/ch5test.u
 (!EXAMPLE_END)
 
-Gerade bei sehr umfangreichen Dokumentationen kann man so die Fehlersuche
+Gerade bei sehr umfangreichen Dokumentationen können Sie so die Fehlersuche
 und -korrektur drastisch beschleunigen.
 
 Falls Sie sich ein Bild davon machen wollen, wie so eine
@@ -85,8 +87,8 @@ Datei, hätten wir schon längst den Überblick verloren.
 
 Es soll ja Autoren geben, die laufend neue Programme oder Hypertexte
 veröffentlichen. Und in fast allen Beschreibungen tauchen Kapitel auf,
-in denen z.B. Copyrightangaben benutzt werden. Solche Dinge braucht
-man natürlich nicht immer wieder neu zu schreiben, sondern kann sich
+in denen z.B. Copyrightangaben benutzt werden. Solche Dinge brauchen Sie 
+natürlich nicht immer wieder neu zu schreiben, sondern können sich
 unter Zuhilfenahme von Makros kleinere Standardtexte erstellen.
 
 Nehmen wir an, unsere Copyrightangabe sieht so aus:
@@ -129,7 +131,7 @@ noch an passender Stelle eingebunden werden:
 (!EXAMPLE_END)
 
 Dieser Text kann dann wieder beim nächsten Projekt eingesetzt werden,
-indem man einfach die Makros anders definiert.
+indem Sie einfach die Makros anders definieren.
 
 Zugegeben, dies ist nur ein kurzes Beispiel. Bei umfangreicheren
 Texten ist es jedoch eine sehr große Arbeitserleichterung.
@@ -143,8 +145,8 @@ Texten ist es jedoch eine sehr große Arbeitserleichterung.
 
 UDO ist es zwar völlig egal, wie die Dateien heißen, aus denen Sie Ihr UDO-Quelltext-Dokument erzeugen. 
 Es kann aber für strukturiertes Arbeiten sehr nützlich sein, sich eigene Standards zuzulegen. 
-Vor allem im Austausch mit anderen Menschen ist es sinnvoll, wenn man auch bei den Dateinamen eindeutige 
-Standards verwendet.
+Vor allem im Austausch mit anderen Menschen ist es sinnvoll, wenn Sie auch bei den Dateinamen eindeutige 
+Standards verwenden.
 
 Sobald Sie Dokumentationen für mehrere Sprachen entwickeln, empfiehlt es sich zudem, die Dateinamen englisch festzulegen, es sei denn, Sie wissen genau, dass sämtliche Mit-Autorinnen und Kollegen wirklich gut Deutsch können und die Dateisysteme, auf denen sie arbeiten, keine Probleme mit deutschen Umlauten haben.
 
@@ -212,9 +214,9 @@ Jedoch ist es unter Zuhilfenahme der Definitionen leicht, eigene Befehle zu schr
 Ausgabeformat einzubauen. Die Kenntnis der Syntax des Ausgabeformates
 ist dabei natürlich sehr von Vorteil.
 
-Das folgende Beispiel zeigt, wie man Befehle zur Änderungen der
+Das folgende Beispiel zeigt, wie Sie Befehle zur Änderungen der
 Schriftgröße im (!LaTeX)-, HTML-, WinHelp- und Rich Text Format einbauen
-kann:
+können:
 
 (!EXAMPLE_BEGIN)
 !vinclude (!EXAMPLES_DIST)font_size.u

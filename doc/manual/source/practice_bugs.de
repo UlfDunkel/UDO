@@ -19,6 +19,7 @@
 #   fd  Jun 09: real quotation fixed
 # 2010:
 #   fd  May 26: (!url) enhanced for UDO v7.02
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -53,8 +54,8 @@ Die folgenden Fehler und Probleme sind derzeit bekannt:
 
 !item [Tabellen:]
       Die Breite von Zellen einer Tabelle wird nicht immer sicher
-      erkannt, speziell dann, wenn man darin manuelle Querverweise oder
-      andere Spezialitäten verwendet.
+      erkannt, speziell dann, wenn Sie darin manuelle Querverweise oder
+      andere Spezialitäten verwenden.
 
 !end_description
 

@@ -27,6 +27,7 @@
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #   fd  May 25: using macro NOTE
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -213,9 +214,9 @@ so wird auch kein (!code [res=!..]) ausgegeben.
 Mit (!KW [mapping]) (!C)(!VALUE)(!c) kann ein numerischer Wert angegeben
 werden, den UDO dann in der Map-Datei für einen Node verwendet. Wird
 kein (!KW [mapping]) verwendet, sichert UDO einen Eintrag in der  Map-Datei
-mit seiner internen Nummer, aber nur dann, wenn man eine
-(!KW [win_helpid]) gesetzt hat. Ein Eintrag wird also nur dann
-erzeugt, wenn man bei einem Node (!KW [mapping]) oder (!KW [win_helpid]) oder beides verwendet.
+mit seiner internen Nummer, aber nur dann, wenn Sie eine
+(!KW [win_helpid]) gesetzt haben. Ein Eintrag wird also nur dann
+erzeugt, wenn Sie bei einem Node (!KW [mapping]) oder (!KW [win_helpid]) oder beides verwenden.
 
 !end_description
 

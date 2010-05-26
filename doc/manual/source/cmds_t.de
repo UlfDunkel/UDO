@@ -30,6 +30,7 @@
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #   fd  Mar 08: macro KW1 resolved to KWW
 #   fd  May 19: "short" -> "compressed"
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -126,8 +127,8 @@ flushleft- oder flushright-Umgebung ausgegeben werden soll. Wird eine
 Tabelle innerhalb einer solchen Umgebung ausgegeben, wird sie genauso
 ausgerichtet wie der Text innerhalb der Umgebung, sprich eine Tabelle wird
 in einer center-Umgebung zentriert ausgegeben, unabhängig davon, was
-man bei (!KW [table_alignment]) gesetzt hat. Will man eine Tabelle in einer
-center-Umgebung rechtsbündig ausgeben, muss man in dem Fall noch
+Sie bei (!KW [table_alignment]) gesetzt haben. Wollen Sie eine Tabelle in einer
+center-Umgebung rechtsbündig ausgeben, müssen Sie in dem Fall noch
 eine flushright-Umgebung um den (!KW [begin_table])-Befehl setzen.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~9
@@ -299,7 +300,7 @@ nach (!KW [begin_document]) bzw. nach (!KW [maketitle]) eingesetzt
 werden. Der Umfang des Inhaltsverzeichnis lässt sich durch den Schalter
 (!KW [use_compressed_tocs]) oder durch Angabe des Schalters
 (!KW [depth]) verkleinern.
-Das Beispiel zeigt, wie man ein Inhaltsverzeichnis ausgibt,
+Das Beispiel zeigt, wie Sie ein Inhaltsverzeichnis ausgeben,
 das nur die Nodes (1.~Ebene) enthält.
 
 !item [(!SEEALSO)]
@@ -340,7 +341,7 @@ vor (!KW [vinclude]) angeben. (!KW [tabwidth]) kann überall und
 beliebig oft im Quelltext angegeben werden. (!VALUE)
 wird jeweils für die nächste verbatim-Umgebung
 verwendet. Standardmäßig benutzt UDO den Wert (!const [8]).
-Benutzt man 0 als (!VALUE), wandelt UDO die Tabulatoren nicht um.
+Benutzen Sie 0 als (!VALUE), wandelt UDO die Tabulatoren nicht um.
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~10
 
@@ -795,7 +796,7 @@ Link auf Seitenanfang erzeugen (nur HTML und HTML-Help).
 
 !item [(!DESCRIPTION)]
 UDO sichert für HTML und HTML-Help eine Datei namens
-(!file [udo_tp.gif]). Mit diesem Kommando kann man in sein Werk die
+(!file [udo_tp.gif]). Mit diesem Kommando können Sie in sein Werk die
 Grafik einbinden. Zugleich wird ein Link auf den Seitenanfang erzeugt.
 
 !end_xlist

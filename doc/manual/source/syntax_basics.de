@@ -30,6 +30,7 @@
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  Mar 08: macro KW1 resolved to KWW
 #   fd  May 19: tiny corrections
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -74,7 +75,7 @@ Quelltexte können in den verschiedensten Zeichensätzen erstellt werden.
 
 Beim Start der Konvertierung erwartet UDO den aktuellen
 Systemzeichensatz. Sollen Quelltexte konvertiert werden, die andere
-Zeichensätze benutzen, muss man UDO dies mit entsprechenden Befehlen
+Zeichensätze benutzen, müssen Sie UDO dies mit entsprechenden Befehlen
 kenntlich machen. Mehr zu diesem Thema finden Sie im Kapitel
 ""Sonderzeichen"".
 
@@ -85,7 +86,7 @@ kenntlich machen. Mehr zu diesem Thema finden Sie im Kapitel
 !begin_node Kommandos, Schalter und Platzhalter
 !html_name  basics_commands_switches_placeholders
 
-!begin_description
+!begin_description !not_compressed
 !index Kommando
 !item [Kommandos]
 Ein UDO-Kommando ist eine mit einem (!EXCLAM) beginnende
@@ -95,20 +96,22 @@ z.B. die Ausgabe eines Inhaltsverzeichnisses (siehe (!KW [tableofcontents])).
 Ein Kommando wird nur erkannt, wenn es am Anfang einer Zeile steht, eventuell
 eingerückt durch Leerzeichen oder Tabs eingerückt.
 
-Kommandos können nur aus (!EXCLAM) und dem eigentlichen Kommando-Bezeichner bestehen, aber auch weitere Parameter erwarten. Genaueres zu den einzelnen Kommandos finden Sie im Befehlsindex.
+Kommandos können nur aus (!EXCLAM) und dem eigentlichen Kommando-Bezeichner bestehen, aber auch weitere Parameter erwarten. 
+Genaueres zu den einzelnen Kommandos finden Sie im Befehlsindex.
 
 !index Schalter
 !item [Schalter]
 Ein UDO-Schalter ist eine mit einem (!EXCLAM) beginnende
-Zeichenfolge, die die Aktionen von UDO oder einem Kommando
-beeinflussen. So gibt es z.B. einen Schalter, der bewirkt, dass 
+Zeichenfolge, die Aktionen von UDO oder Kommandos
+beeinflusst. So gibt es z.B. einen Schalter, der bewirkt, dass 
 Bezeichnungen in englischer Sprache(!N)""Appendix"" statt ""Anhang""(!n)
 ausgegeben werden (siehe (!KW [language])).
 
 Ein Schalter wird nur erkannt, wenn er am Anfang einer Zeile steht, eventuell
-eingerückt durch Leerzeichen oder Tabs eingerückt.
+eingerückt durch Leerzeichen oder Tabs.
 
-Schalter können nur aus (!EXCLAM) und dem eigentlichen Schalter-Bezeichner bestehen, aber auch weitere Parameter erwarten. Genaueres zu den einzelnen Schaltern finden Sie im Befehlsindex.
+Schalter können nur aus (!EXCLAM) und dem eigentlichen Schalter-Bezeichner bestehen, aber auch weitere Parameter erwarten. 
+Genaueres zu den einzelnen Schaltern finden Sie im Befehlsindex.
 
 !index Platzhalter
 !item [Platzhalter]
@@ -201,7 +204,7 @@ Der Hauptteil schließt mit dem Kommando (!KW [end_document]).
 
 # Hauptteil
 !begin_document
-!make_title
+!maketitle
 !tableofcontents
 
 !begin_node Erstes Kapitel

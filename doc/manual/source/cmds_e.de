@@ -21,6 +21,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -872,7 +873,7 @@ Fehlermeldung ausgeben.
 
 !item [(!DESCRIPTION)]
 Genau wie die Präprozessoranweisung (!code [#error]) eines C-Compilers
-kann man hiermit eine Fehlermeldung erzeugen und ""(!TEXT)"" ausgeben.
+können Sie hiermit eine Fehlermeldung erzeugen und ""(!TEXT)"" ausgeben.
 UDO bricht beim Eintreffen dieses Kommandos die Konvertierung ab.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~5

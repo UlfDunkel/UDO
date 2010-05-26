@@ -17,6 +17,7 @@
 # 2010:
 #   fd  Mar 01: typo in node title fixed
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -167,7 +168,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !item (!KW [docinfo] [[webmastername!!]]) erzeugt eine
          Fusszeile am Ende einer jeden HTML-Datei.
    !item Den Befehlen, die sich um die Ausgabe der
-         Inhaltsverzeichnisse kümmern, kann man nun einen weiteren
+         Inhaltsverzeichnisse kümmern, können Sie nun einen weiteren
          Parameter übergeben, der angibt, wie tief die Ausgabe des
          Inhaltsverzeichnisses gehen soll.
    !item Kommandozeilen-Option (!link [(--)force-long] [Kommandozeilenversion]).
@@ -178,7 +179,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !item UDO kann nun mittels (!KW [html_frames_layout]) Frames erzeugen.
    !item linedraw-Umgebung
    !item Im RTF-Header wird nun auch eine Colortable ausgegeben. Das
-         bedeutet, dass man nun auch in RTF Farben verwenden kann.
+         bedeutet, dass Sie nun auch in RTF Farben verwenden können.
    !item Die Gliederung kann jetzt auch mittels (!KW [begin_node]) und
          (!KW [end_node]) vorgenommen werden.
    !item (!KW [use_nodes_inside_index] [[rtf!!]]),
@@ -232,7 +233,7 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
          Meta-Informationen aufgenommen.
    !item Die Anzahl der maximal zu verwendenden Symbole wurde
          von 32 auf 128 erhöht.
-   !item (!KW [image]) kann man nun auch problemlos Bilder
+   !item (!KW [image]) können Sie nun auch problemlos Bilder
          anzeigen lassen, deren Dateiname Leerzeichen enthält.
    !item Doppel- und Dreifach-Indizes werden für RTF nun korrekt
          exportiert.
@@ -256,8 +257,8 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
    !item Die Kommandos (!KW [subtoc]), (!KW [subsubtoc]) und (!KW [subsubsubtoc])
          bewirken nun alle dasselbe, sprich es wird jeweils das einzig
          sinnvolle Unterinhaltsverzeichnis ausgegeben. Dies behebt die
-         Probleme, die entstanden, wenn man die Node-Struktur mit
-         (!KW [begin_node]) und (!KW [end_node]) aufbaute.
+         Probleme, die entstanden, wenn Sie die Node-Struktur mit
+         (!KW [begin_node]) und (!KW [end_node]) aufbauten.
    !item Pro Zelle können in Tabellen nun bis zu 1000 Zeichen
          verwendet werden.
    !item Die Anzahl der maximalen Makros und Definitionen wurde
@@ -293,8 +294,8 @@ vermeiden lassen, die Syntax einiger Befehle zu ändern.
          aus (!kw [stg]) wird (!KW [raw] [[stg!!]]),
          aus (!kw [win]) wird (!KW [raw] [[win!!]])
          usw.
-         Die Befehle, die nur Zeilen ausgeben, wenn man nicht in das
-         passende Format umwandelt, existieren nicht mehr.
+         Die Befehle, die nur Zeilen ausgeben, wenn Sie nicht in das
+         passende Format umwandeln, existieren nicht mehr.
    !item Der Schalter (!kw [stg_no_database]) existiert nicht mehr,
          stattdessen kann jetzt (!KW [docinfo] [[stgdatabase!!]])
          benutzt werden.

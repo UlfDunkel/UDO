@@ -27,6 +27,7 @@
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
 #   fd  May 21: xref links fixed
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -93,7 +94,7 @@ Einstellen der Zeilenbreite.
 !item [(!SYNTAX)] (!T)!/parwidth (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Schalter kann man die Länge der Zeilen
+Mit diesem Schalter können Sie die Länge der Zeilen
 einstellen, die UDO erzeugt. Standardmäßig benutzt
 UDO den Wert (!const [70]). (!VALUE) kann Werte von (!const [20]) bis (!const [200])
 annehmen. Bei den Formaten WinHelp, QuickView und
@@ -149,7 +150,7 @@ Umwandlung durch PDFLaTeX zur
 Komprimierung der Ausgabedatei mit einer
 Kompressionsrate von ca. 50~%. Die Komprimierung
 dauert relativ lange. Fast gleich gute Ergebnisse bei
-kürzerer Umwandlungsdauer erzielt man mit dem
+kürzerer Umwandlungsdauer erzielen Sie mit dem
 Schalter (!KW [pdf_medium_compression]).
 
 !item [(!SEEALSO)]
@@ -177,7 +178,7 @@ Der Einsatz dieses Schalters führt bei der späteren
 Umwandlung durch den PDFLaTeX zur
 Komprimierung der Ausgabedatei mit einer
 Kompressionsrate von ca. 40~%. Bessere Ergebnisse bei
-allerdings längerer Umwandlungsdauer erzielt man mit
+allerdings längerer Umwandlungsdauer erzielen Sie mit
 dem Schalter (!KW [pdf_high_compression]).
 
 !item [(!SEEALSO)]

@@ -28,6 +28,7 @@
 # 2010:
 #   fd  Mar 01: old commands can be found in cmds__old.de now
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -81,13 +82,13 @@ In den nachfolgenden Kapiteln werden sämtliche von UDO unterstützten Befehle det
 
 !item [Position:]
    !begin_blist
-   !item [Vorspann] Bei ""Vorspann"" darf man einen Befehl nur im Vorspann des Quelltextes (also vor (!KW [begin_document])) einsetzen.
-   !item [Hauptteil] Bei ""Hauptteil"" darf man einen Befehl nur im Hauptteil des Quelltextes (also nach (!KW [begin_document])) einsetzen.
-   !item [Vorspann & Hauptteil] Bei ""Vorspann & Hauptteil"" darf man einen Befehl überall einsetzen.
+   !item [Vorspann] Bei ""Vorspann"" dürfen Sie einen Befehl nur im Vorspann des Quelltextes (also vor (!KW [begin_document])) einsetzen.
+   !item [Hauptteil] Bei ""Hauptteil"" dürfen Sie einen Befehl nur im Hauptteil des Quelltextes (also nach (!KW [begin_document])) einsetzen.
+   !item [Vorspann & Hauptteil] Bei ""Vorspann & Hauptteil"" dürfen Sie einen Befehl überall einsetzen.
    !end_blist
 
 !item	[Syntax:]
-	Hier sieht man, wie man den Befehl einsetzen muss.
+	Hier sehen Sie, wie die Befehle eingesetzt werden müssen.
 
 	!begin_tlist [WsystemeW] !compressed
 

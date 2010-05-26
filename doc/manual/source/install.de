@@ -28,6 +28,7 @@
 # 2010:
 #   fd  Mar 05: old environment attribute short changed: -> !compressed
 #   fd  May 26: (!url) enhanced for UDO v7.02
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -43,7 +44,7 @@ Zur Installation von UDO auf einem TOS-kompatiblen Computer oder System (z.B. Ma
 Sie einfach alle Dateien in ein beliebiges Verzeichnis, welches
 sinnigerweise ""UDO"" genannt werden sollte.
 
-Die GEM-Version sollte man im verwendeten Desktop -- ich empfehle,
+Die GEM-Version sollten Sie im verwendeten Desktop -- wir empfehlen,
 Gemini, Thing oder Ease zu benutzen -- als Anwendung für Dateien mit der Dateimaske (!file [*.u*]) anmelden.
 
 Falls Sie das TTP bevorzugen und mit einem Kommandozeileninterpreter
@@ -215,7 +216,7 @@ auf die UDO-Dokumentation verweisen.
 
 Desweiteren empfiehlt sich das Anlegen von Shellscripten oder Aliasen,
 um nicht immer alle Optionen angeben zu müssen. Das folgende Script,
-welches man (!file [u2tex]) benennen sollte, ruft UDO mit den passenden
+welches Sie (!file [u2tex]) benennen sollten, ruft UDO mit den passenden
 Optionen auf.
 
 (!EXAMPLE_BEGIN)

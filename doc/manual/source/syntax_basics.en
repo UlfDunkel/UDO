@@ -26,6 +26,7 @@
 #   fd  Mar 08: macro KW1 resolved to KWW
 #   fd  May 21: translation completed
 #   fd  May 25: index adjustments
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -76,7 +77,7 @@ Get more information about this in the chapter ""Special characters"".
 !begin_node Commands, switches and placeholders
 !html_name  basics_commands_switches_placeholders
 
-!begin_description
+!begin_description !not_compressed
 !index Command
 !item [Commands]
 An UDO command begins with a single (!EXCLAM). A command tells UDO to do something where you
@@ -103,7 +104,7 @@ Please find more defails about the various switches in the command index.
 !item [Placeholders]
 An UDO placeholder begins with a (!OPEN_EXCLAM) and ends with a single (!code [!)]). A
 placeholder is replaced by certain characters, e.g. ""(!KKW [B])"" by ""(!code [{\bf])"" for
-(!LaTeX) or by ""(!code [<b>])"" for HTML. You can use placeholders wherever you want.
+(!LaTeX) or by ""(!code [<b>])"" resp. ""(!code [<strong>])"" for HTML. You can use placeholders wherever you want.
 
 !end_description
 

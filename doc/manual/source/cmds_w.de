@@ -26,6 +26,7 @@
 #   fd  Jun 16: great review session #1
 # 2010:
 #   fd  Mar 01: OldKeywords removed -> cmds__old.de
+#   fd  May 26: 'man' -> 'Sie' (Golden Rule #2)
 #
 ################################################################################
 
@@ -238,7 +239,7 @@ Setzen der Farbe für Links (nur WinHelp4).
 
 !item [(!DESCRIPTION)]
 Setzt die Farbe, die benutzt wird, um in Hilfe-Seiten Links darzustellen.
-Wird der Befehl im Vorspann benutzt, setzt man damit
+Wird der Befehl im Vorspann benutzt, setzen Sie damit
 die Standardwerte für alle Seiten einschließlich des Inhaltsverzeichnisses.
 
 !item [(!SEEALSO)]
@@ -292,7 +293,7 @@ Namen des Monospaced-Font für WinHelp4 setzen.
 !item [(!SYNTAX)] (!T)!/wh4_monofont <fontname>(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man den Font setzen, der zur
+Mit diesem Kommando können Sie den Font setzen, der zur
 Darstellung von Klartext benutzt werden soll. Als
 Standard verwendet UDO den Font ""Courier New"".
 
@@ -327,7 +328,7 @@ Größe des Monospaced-Font für WinHelp4 setzen.
 !item [(!SYNTAX)] (!T)!/wh4_monofont_size (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man die Größe des Font setzen, der zur
+Mit diesem Kommando können Sie die Größe des Font setzen, der zur
 Darstellung von Klartext benutzt werden soll. Als
 Standard verwendet UDO (!const [10])~pt.
 
@@ -361,7 +362,7 @@ Alte Keywords erzeugen (nur WinHelp4).
 !item [(!SYNTAX)] (!T)!/wh4_old_keywords(!t)
 
 !item [(!DESCRIPTION)]
-Benutzt man im Vorspann diesen Schalter, erzeugt UDO wieder wie vor einiger Zeit WinHelp-Keywords,
+Benutzen Sie im Vorspann diesen Schalter, erzeugt UDO wieder wie vor einiger Zeit WinHelp-Keywords,
 die aus dem Namen eines Nodes, Alias oder Labels gebildet werden.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~11
@@ -394,7 +395,7 @@ Text vor HelpIDs stellen (nur WinHelp4).
 !item [(!SYNTAX)] (!T)!/wh4_prefix_helpids (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Benutzt man im Vorspann diesen Schalter, wird jeder HelpID der ""(!TEXT)"" beim sichern vorangestellt.
+Benutzen Sie im Vorspann diesen Schalter, wird jeder HelpID der ""(!TEXT)"" beim sichern vorangestellt.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~13
 
@@ -425,7 +426,7 @@ Proportional-Font für WinHelp4 setzen.
 !item [(!SYNTAX)] (!T)!/wh4_propfont <fontname>(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man den Font setzen, der zur
+Mit diesem Kommando können Sie den Font setzen, der zur
 Darstellung des Hilfstextes einer Windows-Hilfe-Datei
 benutzt werden soll. Als Standard verwendet UDO den Font ""MS Sans Serif"".
 
@@ -459,7 +460,7 @@ Größe für den Proportional-Font für WinHelp4 setzen.
 !item [(!SYNTAX)] (!T)!/wh4_propfont_size (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man die Größe für den Font setzen, der zur
+Mit diesem Kommando können Sie die Größe für den Font setzen, der zur
 Darstellung des Hilfstextes einer Windows-Hilfe-Datei
 benutzt werden soll. Als Standard verwendet UDO (!const [8])~pt.
 
@@ -668,7 +669,7 @@ Umwandlung durch den Microsoft-Helpcompiler zur
 Komprimierung der Hilfedatei mit einer
 Kompressionsrate von ca. 50~%. Die Komprimierung
 dauert relativ lange. Fast gleich gute Ergebnisse bei
-kürzerer Umwandlungsdauer erzielt man mit dem
+kürzerer Umwandlungsdauer erzielen Sie mit dem
 Schalter (!KW [win_medium_compression]).
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~8
@@ -702,7 +703,7 @@ einem anderen Format in der WinHelp-Datei, wodurch
 Bilder nicht mehr verzerrt dargestellt werden.
 Allerdings dürfen Bilder dann nicht größer als (!const [64])~KB
 sein. Nähere Informationen über den Unterschied
-zwischen den beiden RTF-Befehlen findet man in der Dokumentation zum (!file [HCP]).
+zwischen den beiden RTF-Befehlen finden Sie in der Dokumentation zum (!file [HCP]).
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~6
 
@@ -728,7 +729,7 @@ Setzen der Farbe für Links (nur WinHelp).
 
 !item [(!DESCRIPTION)]
 Setzt die Farbe, die benutzt wird, um in Hilfe-Seiten Links darzustellen.
-Wird der Befehl im Vorspann benutzt, setzt man damit
+Wird der Befehl im Vorspann benutzt, setzen Sie damit
 die Standardwerte für alle Seiten inkl. des Inhaltsverzeichnisses.
 
 !item [(!SEEALSO)]
@@ -756,7 +757,7 @@ Der Einsatz dieses Schalters führt bei der späteren
 Umwandlung durch den Microsoft-Helpcompiler zur
 Komprimierung der Hilfedatei mit einer
 Kompressionsrate von ca. 40~%. Bessere Ergebnisse bei
-allerdings längerer Umwandlungsdauer erzielt man mit
+allerdings längerer Umwandlungsdauer erzielen Sie mit
 dem Schalter (!KW [win_high_compression]).
 
 !item [(!EXISTSSINCE)] Release~5 Patchlevel~8
@@ -782,7 +783,7 @@ Namen des Monospaced-Font für WinHelp setzen.
 !item [(!SYNTAX)] (!T)!/win_monofont <fontname>(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man den Font setzen, der zur
+Mit diesem Kommando können Sie den Font setzen, der zur
 Darstellung von Klartext benutzt werden soll. Als Standard verwendet UDO den Font ""Courier New"".
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~15
@@ -816,7 +817,7 @@ Größe des Monospaced-Font für WinHelp setzen.
 !item [(!SYNTAX)] (!T)!/win_monofont_size (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man die Größe des Font setzen, der zur
+Mit diesem Kommando können Sie die Größe des Font setzen, der zur
 Darstellung von Klartext benutzt werden soll.
 Als Standard verwendet UDO (!const [10])~pt.
 
@@ -850,7 +851,7 @@ Alte Keywords erzeugen (nur WinHelp).
 !item [(!SYNTAX)] (!T)!/win_old_keywords(!t)
 
 !item [(!DESCRIPTION)]
-Benutzt man im Vorspann diesen Schalter,
+Benutzen Sie im Vorspann diesen Schalter,
 so erzeugt UDO wieder wie vor einiger Zeit WinHelp-Keywords,
 die aus dem Namen eines Nodes, Alias oder Labels gebildet werden.
 
@@ -884,7 +885,7 @@ Text vor HelpIDs stellen (nur WinHelp).
 !item [(!SYNTAX)] (!T)!/win_prefix_helpids (!TEXT)(!t)
 
 !item [(!DESCRIPTION)]
-Benutzt man im Vorspann diesen Schalter, wird jeder HelpID der ""(!TEXT)"" beim sichern vorangestellt.
+Benutzen Sie im Vorspann diesen Schalter, wird jeder HelpID der ""(!TEXT)"" beim sichern vorangestellt.
 
 !item [(!EXISTSSINCE)] Release~6 Patchlevel~13
 
@@ -916,7 +917,7 @@ Proportional-Font für WinHelp setzen.
 !item [(!SYNTAX)] (!T)!/win_propfont <fontname>(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man den Font setzen, der zur
+Mit diesem Kommando können Sie den Font setzen, der zur
 Darstellung des Hilfstextes einer Windows-Hilfe-Datei
 benutzt werden soll. Als Standard verwendet UDO den Font ""Times New Roman"".
 
@@ -951,7 +952,7 @@ Größe des Proportional-Font für WinHelp setzen.
 !item [(!SYNTAX)] (!T)!/win_propfont_size (!VALUE)(!t)
 
 !item [(!DESCRIPTION)]
-Mit diesem Kommando kann man die Größe des Font setzen, der zur
+Mit diesem Kommando können Sie die Größe des Font setzen, der zur
 Darstellung des Hilfstextes einer Windows-Hilfe-Datei
 benutzt werden soll. Als Standard verwendet UDO (!const [11])~pt.
 
