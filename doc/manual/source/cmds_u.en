@@ -36,6 +36,7 @@
 #               - more links to "not_compressed"
 #   fd  May 21: xref links fixed
 #   ggs May 25: use_compressed_envs have a "see also" to himself
+#   fd  May 26: (!url) enhanced for v7.02 [#89]
 #
 ################################################################################
 
@@ -162,36 +163,60 @@ Quelltext verwendet werden.(!coloff)
 !begin_node (!kkw [url])
 !html_name  cmd_url()
 
-References external documents.
+Reference to external links.
 
-!begin_xlist [(!TYPEPOSITION)]
+!begin_xlist [(!TYPEPOSITION)] !not_compressed
 
 !item [(!TYPEPOSITION)] (!PLACEHOLDER), (!MAINPART)
 
-!item [(!SYNTAX)] (!T)(!/url [(!TEXT)] [(!LINK)])(!t)
+!item [(!SYNTAX)] (!T)(!/url [(!TEXT)] [(!LINK)]) <[(!TARGET)] [(!CLASS)]>(!t)
 
 !item [(!DESCRIPTION)]
-Useful for referencing external documents like other hypertexts or
-WWW-pages. In contrast to (!KKW [xlink]) always a link
-to a URL will generated.
+Use this command to create (external) links. 
+In contrary to (!KKW [xlink]), this command always creates a link to a URL.
+""(!TEXT)"" can be empty and will then be replaced by the content of ""(!LINK)"". 
+So you don't have to enter the URL twice when you want to show it as the link description.
 
-The example shows how to make a link to a popular
-magazine in a HTML file. If (!LINK) is empty the contents of
-(!TEXT) is used.
+When the URL contains a tilde, it (!I)does not have to be protected(!i) with an exclamation mark in the (!KKW [url]) command.
 
-Kommt in einem Verweis eine Tilde vor,
-so braucht dieser bei Verwendung im (!KKW [url])-Kommando
-(!I)kein(!i) Ausrufezeichen vorangestellt zu werden.
+""(!TARGET)"" defines a target where the URL should be opened in. In Frames layouts, these can be other frames, or use the usual targets:
+!begin_table [l|l]
+_blank  !! opens the link in a new window
+_self   !! opens the link in the current window
+_parent !! leaves the current frameset in nested framesets
+_top    !! leaves all nested framesets
+!end_table
 
-!item [(!EXAMPLE2)]
-(!T)(!/url [Playboy] [http://www.playboy.com])(!t)
+Using ""(!CLASS)"", you can define the name of a CSS class, e.g. to show links to third-party websites in another style than links inside the current website.
 
-!item [(!EXISTSSINCE)] Release~6 Patchlevel~12
+!item [(!EXISTSSINCE)] Release~6 Patchlevel~12 (!nl)
+(!TARGET) + (!CLASS) since v7.02, currently only supporting HTML, HTML-Help, and Apple Help Book (HTML)
 
 !item [(!SEEALSO)]
-(!KKW [link]), (!KKW [plink]), (!KKW [xlink]), (!KW [no_xlinks]), (!link [Links] [Links])
+(!KKW [link]), 
+(!KKW [plink]), 
+(!KKW [xlink]), 
+(!KW [no_xlinks]), 
+(!link [Links] [Links])
 
 !end_xlist
+
+(!EXAMPLE)
+(!EXAMPLE_BEFORE)
+!begin_verbatim
+(!url [BugTracker of the UDO website] [http://bugs.udo-open-source.org/]) | 
+(!url [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
+(!url [http://www.google.com/] []) | 
+(!url [Write an email][mailto:someone@somewhere.net][][email]) | 
+(!url [The guide of UDO] [http://man.udo-open-source.org/en/] [_blank] [elink])
+!end_verbatim
+(!EXAMPLE_AFTER)
+(!url [BugTracker of the UDO website] [http://bugs.udo-open-source.org/]) | 
+(!url [Ulf Dunkel] [http://www.ulf-dunkel.de/]) | 
+(!url [http://www.google.com/] []) | 
+(!url [Write an email][mailto:someone@somewhere.net][][email]) | 
+(!url [The guide of UDO] [http://man.udo-open-source.org/en/] [_blank] [elink])
+(!EXAMPLE_END)
 
 !end_node
 
