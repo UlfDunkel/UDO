@@ -86,8 +86,8 @@
 
 # !code_target -> _header.ui
 
-!include _header.ui                       # switches
 !include _lang.ui                         # language of this document
+!include _header.ui                       # switches
 !include _version.ui                      # version numbers
 !include macros.ui                        # all macros
 !include hyphen.ui                        # hyphenation patterns
