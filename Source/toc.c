@@ -100,6 +100,7 @@
 *    fd  May 18: - output_html_doctype() no longer writes iso-8859-1 hard-coded
 *                - output_html_meta() no longer writes iso-8859-1 hard-coded
 *    fd  May 21: add_label(): supports "!label*" which must not be listed in index (#90)
+*    ggs Aug 18: get_html_filename: New Parameter, which tells if a page is merged
 *
 ******************************************|************************************/
 
@@ -323,7 +324,7 @@ LOCAL void output_texinfo_node(const char *name);
 LOCAL void win_headline(char *name, BOOLEAN popup);
 LOCAL void output_win_header(const char *name, const BOOLEAN insivisble);
 
-LOCAL char *get_html_filename(const int tocindex, char *s);
+LOCAL char *get_html_filename(const int tocindex, char *s, int *html_merge);
 
 LOCAL void output_html_meta(BOOLEAN keywords);
 LOCAL void output_html_doctype(void);
@@ -2504,7 +2505,8 @@ const BOOLEAN   invisible)      /* */
 LOCAL char *get_html_filename(
 
 const int   tocindex,            /* */
-char       *s)                   /* */
+char       *s,                   /* */
+int        *html_merge)          /* TRUE = If the nodes are merge */
 {
    /*
       The buffer in tmp_n? is with 17 chars a bit small.
@@ -2539,6 +2541,12 @@ int         hexwidth;            /* */    /* r6pl2 */
 
    ti = tocindex;
 
+   if ( html_merge_node1 || html_merge_node2 || html_merge_node3 ||
+        html_merge_node4 || html_merge_node5 )
+      *html_merge = TRUE;
+   else
+      *html_merge = FALSE;
+
    if (outfile.file != stdout || (bTestmode && outfile.full[0] != EOS) )
    {
       s[0] = EOS;
@@ -2553,6 +2561,7 @@ int         hexwidth;            /* */    /* r6pl2 */
       {
                                           /* Verweis auf Hauptfile */
          um_strcpy(tmp_n1, outfile.name, MAX_TMP_NX, "get_html_filename[1]");
+         *html_merge = TRUE;
       }
       else
       {
@@ -2842,7 +2851,8 @@ BOOLEAN    keywords)             /* */
    int     ti = 0,               /* */
            i,                    /* */
            li,                   /* */
-           j;                    /* */
+           j,                    /* */
+           html_merge;           /* */
    STYLE  *styleptr;             /* */
    char    s[512],               /* buffer for charset and label name */
            htmlname[512],        /* */
@@ -3088,7 +3098,7 @@ BOOLEAN    keywords)             /* */
             li = toc[1]->labindex;        /* First Node -> No Link */
 
             strcpy(s, lab[li]->name);
-            get_html_filename(lab[li]->tocindex, htmlname);
+            get_html_filename(lab[li]->tocindex, htmlname, &html_merge);
 
             /* Special for CAB */
             /* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
@@ -3112,7 +3122,7 @@ BOOLEAN    keywords)             /* */
          {
             li = toc[i]->labindex;
             strcpy(s, lab[li]->name);
-            get_html_filename(lab[li]->tocindex, htmlname);
+            get_html_filename(lab[li]->tocindex, htmlname, &html_merge);
 
             /* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
             if (strchr(htmlname, '.') != NULL)
@@ -3143,7 +3153,7 @@ BOOLEAN    keywords)             /* */
          {
             li = toc[i]->labindex;
             strcpy(s, lab[li]->name);
-            get_html_filename(lab[li]->tocindex, htmlname);
+            get_html_filename(lab[li]->tocindex, htmlname, &html_merge);
 
             /* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039*/
             if (strchr(htmlname, '.') != NULL)
@@ -3173,7 +3183,7 @@ BOOLEAN    keywords)             /* */
                li = toc[p1_toc_counter]->labindex;
             
             strcpy(s, lab[li]->name);
-            get_html_filename(lab[li]->tocindex, htmlname);
+            get_html_filename(lab[li]->tocindex, htmlname, &html_merge);
 
             /* Special for CAB */
             /* Changed in r6.2pl1 [NHz] / Fixed Bug #0000039 */
@@ -3199,7 +3209,7 @@ BOOLEAN    keywords)             /* */
    {
       li = toc[p1_toc_counter]->labindex;
       strcpy(s, lab[li]->name);
-      get_html_filename(lab[li]->tocindex, htmlname);
+      get_html_filename(lab[li]->tocindex, htmlname, &html_merge);
 
                                           /* Changed in r6pl16 [NHz] */
       if (strcmp(htmlname, outfile.name) != 0)
@@ -5520,6 +5530,7 @@ GLOBAL BOOLEAN save_html_index(void)
    FILE        *uif;              /* ^ to temporary index file */
    size_t       i;                /* counter */
    int          j;                /* counter */
+   int          html_merge;       /* */
    size_t       num_index;        /* # of entries in index file */
    HTML_INDEX  *html_index;       /* ^ to HTML_INDEX array */
    UWORD        thisc,            /* single char for comparison */
@@ -5689,7 +5700,7 @@ GLOBAL BOOLEAN save_html_index(void)
       if (!html_ignore_8bit)
          recode_chrtab(dummy,CHRTAB_HTML);/* convert HTML characters to system characters  */
 
-      get_html_filename(html_index[i].toc_index, htmlname);
+      get_html_filename(html_index[i].toc_index, htmlname, &html_merge);
    
       /* v6.5.15 [vj] need to make a copy of this, because we need to change it */
       /* fd:20071121: value increased (100 -> 512), as .tocname is 512 chars long */
@@ -5697,20 +5708,36 @@ GLOBAL BOOLEAN save_html_index(void)
       
       if (escapedtocname != NULL)
          replace_all(escapedtocname, "!", "&#33;");
-   
+
       if (html_index[i].is_node)          /* this index entry points to another file */
       {
          fsplit(htmlname, dummy, dummy, dummy, suff);
          
          if (suff[0] == EOS)
          {
-            fprintf(uif, "<a href=\"%s%s\">%s</a>",
-               htmlname, outfile.suff, escapedtocname);
+            if (html_merge)
+            {
+               fprintf(uif, "<a href=\"%s%s%s%s\">%s</a>",
+                  htmlname, outfile.suff, "#", escapedtocname, escapedtocname);
+            }
+            else
+            {
+               fprintf(uif, "<a href=\"%s%s\">%s</a>",
+                  htmlname, outfile.suff, escapedtocname);
+            }
          }
          else
          {
-            fprintf(uif, "<a href=\"%s\">%s</a>",
-               htmlname, escapedtocname);
+            if (html_merge)
+            {
+               fprintf(uif, "<a href=\"%s%s%s\">%s</a>",
+                  htmlname, "#", escapedtocname, escapedtocname);
+            }
+            else
+            {
+               fprintf(uif, "<a href=\"%s\">%s</a>",
+                  htmlname, escapedtocname);
+            }
          }
          fprintf(uif, "%s\n", HTML_BR);   /* end the entry line */
       }
@@ -5803,10 +5830,11 @@ GLOBAL void hh_bottomline(void)
 LOCAL void print_htmlhelp_contents(FILE *file, const char *indent, const int ti)
 {
         char filename[512], tocname[512];
+        int  html_merge;
 
         if (ti>0)
         {
-                get_html_filename(ti, filename);
+                get_html_filename(ti, filename, &html_merge);
                 um_strcpy(tocname, toc[ti]->name, 512, "print_htmlhelp_contents[1]");
         }
         else
@@ -5974,6 +6002,7 @@ GLOBAL BOOLEAN save_htmlhelp_index(const char* filename)
         FILE *file;
         size_t i;
         int j;
+        int  html_merge;
         size_t num_index;
         HTML_IDX *html_index;
         char htmlname[512];
@@ -6060,7 +6089,7 @@ GLOBAL BOOLEAN save_htmlhelp_index(const char* filename)
         /* ..und ausgeben */
         for (i = 0; i < num_index; i++)
         {
-                get_html_filename(html_index[i].toc_index, htmlname);
+                get_html_filename(html_index[i].toc_index, htmlname, &html_merge);
                 fprintf(file, "<li><object type=\"text/sitemap\"> <param name=\"Name\" value=\"%s\"> <param name=\"Local\" value=\"%s%s\"></object></li>\n",
                         html_index[i].tocname,
                         htmlname, outfile.suff);
@@ -15886,6 +15915,7 @@ GLOBAL BOOLEAN add_node_to_toc(const BOOLEAN popup, const BOOLEAN invisible)
 {
         TOCITEM *tocptr;
         int             li;
+        int  html_merge;
 
         tocptr= init_new_toc_entry (TOC_NODE1, invisible);
 
@@ -16034,7 +16064,7 @@ GLOBAL BOOLEAN add_node_to_toc(const BOOLEAN popup, const BOOLEAN invisible)
         if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
         {       /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
                 /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
-                get_html_filename(p1_toc_counter, tocptr->filename);
+                get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
         }
 
         li = add_label(tocptr->name, TRUE, popup);
@@ -16053,6 +16083,7 @@ GLOBAL BOOLEAN add_subnode_to_toc(const BOOLEAN popup, const BOOLEAN invisible)
 {
         TOCITEM *tocptr;
         int li;
+        int  html_merge;
 
         if (last_n1_index==0)
         {       error_node2_not_allowed();
@@ -16202,7 +16233,7 @@ GLOBAL BOOLEAN add_subnode_to_toc(const BOOLEAN popup, const BOOLEAN invisible)
         if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
         {       /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
                 /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
-                get_html_filename(p1_toc_counter, tocptr->filename);
+                get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
         }
 
         li= add_label(tocptr->name, TRUE, popup);
@@ -16221,6 +16252,7 @@ GLOBAL BOOLEAN  add_subsubnode_to_toc(const BOOLEAN popup, const BOOLEAN invisib
 {
         TOCITEM *tocptr;
         int li;
+        int  html_merge;
 
         if (last_n2_index==0)
         {       error_node3_not_allowed();
@@ -16357,7 +16389,7 @@ GLOBAL BOOLEAN  add_subsubnode_to_toc(const BOOLEAN popup, const BOOLEAN invisib
         if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
         {       /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
                 /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
-                get_html_filename(p1_toc_counter, tocptr->filename);
+                get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
         }
 
         li= add_label(tocptr->name, TRUE, popup);
@@ -16375,6 +16407,7 @@ GLOBAL BOOLEAN  add_subsubsubnode_to_toc(const BOOLEAN popup, const BOOLEAN invi
 {
         TOCITEM *tocptr;
         int li;
+        int  html_merge;
 
         if (last_n3_index==0)
         {       error_node4_not_allowed();
@@ -16485,7 +16518,7 @@ GLOBAL BOOLEAN  add_subsubsubnode_to_toc(const BOOLEAN popup, const BOOLEAN invi
         if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
         {       /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
                 /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
-                get_html_filename(p1_toc_counter, tocptr->filename);
+                get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
         }
 
         li= add_label(tocptr->name, TRUE, popup);
@@ -16503,6 +16536,7 @@ GLOBAL BOOLEAN  add_subsubsubsubnode_to_toc(const BOOLEAN popup, const BOOLEAN i
 {
         TOCITEM *tocptr;
         int li;
+        int  html_merge;
 
         if (last_n4_index==0)
         {       error_node5_not_allowed();
@@ -16610,7 +16644,7 @@ GLOBAL BOOLEAN  add_subsubsubsubnode_to_toc(const BOOLEAN popup, const BOOLEAN i
         if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
         {       /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
                 /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
-                get_html_filename(p1_toc_counter, tocptr->filename);
+                get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
         }
 
         li= add_label(tocptr->name, TRUE, popup);
