@@ -73,6 +73,7 @@
 *    ggs Apr 21: c_begin_list(): The [] are not always necessary
 *    fd  May 19: c_begin_list() reformatted
 *    fd  May 20: c_item() debugged for description item output in RTF & KPS
+*    fd  Sep 03: c_end_itemize()/c_end_enumerate() no longer keep bParagraphOpen TRUE
 *
 ******************************************|************************************/
 
@@ -4186,7 +4187,7 @@ GLOBAL void c_end_tlist(void)
 /*******************************************************************************
 *
 *  c_end_description():
-*     ??? (description missing)
+*     output a description environment's end data
 *
 *  Return:
 *     -
@@ -4238,7 +4239,7 @@ GLOBAL void c_end_description(void)
    case TOMHH:
       if (bParagraphOpen)
       {
-                                          /* iEnvLevel has already been decreased */
+                                          /* check previous environment */
          if (bEnvCompressed[iEnvLevel + 1])
          {
             if (html_doctype < XHTML_STRICT)
@@ -4350,6 +4351,7 @@ GLOBAL void c_end_enumerate(void)
          
       outln("</li>");                     /* r6pl6: Mit </li> */
       outln("</ol>\n");
+      bParagraphOpen = FALSE;             /* no additional </p> in ENV_DESC */
       break;
       
    case TOHPH:
@@ -4449,6 +4451,7 @@ GLOBAL void c_end_itemize(void)
          
       outln("</li>");                     /* r6pl6: mit </li> */
       outln("</ul>\n");
+      bParagraphOpen = FALSE;             /* no additional </p> in ENV_DESC */
       break;
       
       
