@@ -101,6 +101,7 @@
 *                - output_html_meta() no longer writes iso-8859-1 hard-coded
 *    fd  May 21: add_label(): supports "!label*" which must not be listed in index (#90)
 *    ggs Aug 18: get_html_filename: New Parameter, which tells if a page is merged
+*    fd  Sep 09: <a name>%s</a> changed to <a name></a>%s to avoid empty links
 *
 ******************************************|************************************/
 
@@ -5686,7 +5687,7 @@ GLOBAL BOOLEAN save_html_index(void)
          
          if (num_index > 100)             /* set jump entry for index A-Z list */
          {
-            fprintf(uif, "<span class=\"UDO_index_name\"><a name=\"%s\">%s</a></span>%s\n",
+            fprintf(uif, "<span class=\"UDO_index_name\"><a name=\"%s\"></a>%s</span>%s\n",
                thisc_label, thisc_char, HTML_BR);
          }
          else
@@ -6745,7 +6746,7 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
          label2html(nameNoSty);           /*r6pl2*/
          
                                           /* r5pl4 */
-         voutlnf("\n<h%d><a name=\"%s\">%s%s</a></h%d>\n",
+         voutlnf("\n<h%d><a name=\"%s\"></a>%s%s</h%d>\n",
             html_nodesize, nameNoSty, numbers, name, html_nodesize);
       }
       
@@ -7224,7 +7225,7 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
                                 del_html_styles(nameNoSty);
             
             label2html(nameNoSty);      /*r6pl2*/
-            voutlnf("%s<a name=\"%s\">%s%s</a>%s",hx_start, nameNoSty, numbers, name, hx_end);
+            voutlnf("%s<a name=\"%s\"></a>%s%s%s",hx_start, nameNoSty, numbers, name, hx_end);
                         }
                         if (show_variable.source_filename) /* V6.5.19 */
                                 voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line);
@@ -7701,7 +7702,7 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
                                 del_html_styles(nameNoSty);
             
             label2html(nameNoSty);      /*r6pl2*/
-            voutlnf("%s<a name=\"%s\">%s%s</a>%s",hx_start, nameNoSty, numbers, name, hx_end);
+            voutlnf("%s<a name=\"%s\"></a>%s%s%s",hx_start, nameNoSty, numbers, name, hx_end);
                         }
                         if (show_variable.source_filename) /* V6.5.19 */
                                 voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line);
@@ -8179,7 +8180,7 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
                                 del_html_styles(nameNoSty);
             
             label2html(nameNoSty);      /*r6pl2*/
-            voutlnf("%s<a name=\"%s\">%s%s</a>%s",      hx_start, nameNoSty, numbers, name, hx_end);
+            voutlnf("%s<a name=\"%s\"></a>%s%s%s",      hx_start, nameNoSty, numbers, name, hx_end);
                         }
                         if (show_variable.source_filename) /* V6.5.19 */
                                 voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line);
@@ -8649,7 +8650,7 @@ const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
                                 del_html_styles(nameNoSty);
             
             label2html(nameNoSty);      /*r6pl2*/
-            voutlnf("%s<a name=\"%s\">%s%s</a>%s",      hx_start, nameNoSty, numbers, name, hx_end);
+            voutlnf("%s<a name=\"%s\"></a>%s%s%s",      hx_start, nameNoSty, numbers, name, hx_end);
                         }
                         if (show_variable.source_filename) /* V6.5.19 */
                                 voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line);
@@ -13779,7 +13780,7 @@ GLOBAL void c_tableofcontents(void)
          
                         if (toc_available)
                         {
-                voutlnf("\n<h1><a name=\"%s\">%s</a></h1>\n", HTML_LABEL_CONTENTS, lang.contents);
+                voutlnf("\n<h1><a name=\"%s\"></a>%s</h1>\n", HTML_LABEL_CONTENTS, lang.contents);
                                 /* New in V6.5.9 [NHz] */
                                 add_label(HTML_LABEL_CONTENTS, FALSE, FALSE);
                                 toc_output(depth);
