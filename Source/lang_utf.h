@@ -60,6 +60,7 @@
 *  2010:
 *    fd  Feb 19: file introduced (extracted from LANG.C)
 *    fd  May 19: new: LANG.degree
+*    fd  Sep 11: tiny adjustments to esp. better reflect multiple translators
 *
 ******************************************|************************************/
 
@@ -192,7 +193,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* html_next   */    "Následující",
          /* html_lang   */    "cs",
          /* html_start  */    "Začátek dokumentu",
-         /* translator  */    "Translator:",
+         /* translator  */    "Translation:",
          /* distributor */    "Distributor:",
          /* degree      */    "stupeň",
          "",""
@@ -227,7 +228,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* html_next   */    "Next",
          /* html_lang   */    "en",
          /* html_start  */    "Begin of the document",
-         /* translator  */    "Translator:",
+         /* translator  */    "Translation:",
          /* distributor */    "Distributor:",
          /* degree      */    "degree",
          "",""
@@ -262,8 +263,8 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* html_next   */    "Next",
          /* html_lang   */    "fr",
          /* html_start  */    "Begin of the document",
-         /* translator  */    "Traducteur~:",
-         /* distributor */    "Distribution~:",
+         /* translator  */    "Traduction :",
+         /* distributor */    "Distribution :",
          /* degree      */    "degré",
          "",""
       }
@@ -332,7 +333,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* html_next   */    "Next",
          /* html_lang   */    "it",
          /* html_start  */    "Begin of the document",
-         /* translator  */    "Translator:",
+         /* translator  */    "Translation:",
          /* distributor */    "Distribuzione:",
          /* degree      */    "grado",
          "",""
@@ -367,7 +368,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* html_next   */    "Next",
          /* html_lang   */    "en",
          /* html_start  */    "Begin of the document",
-         /* translator  */    "Translator:",
+         /* translator  */    "Translation:",
          /* distributor */    "Distributor:",
          /* degree      */    "grau",
          "",""
@@ -402,7 +403,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* html_next   */    "Next",
          /* html_lang   */    "es",
          /* html_start  */    "Begin of the document",
-         /* translator  */    "Translator:",
+         /* translator  */    "Translation:",
          /* distributor */    "Distributor:",
          /* degree      */    "grado",
          "",""
@@ -472,7 +473,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* html_next   */    "Next",
          /* html_lang   */    "nl",
          /* html_start  */    "Begin of the document",
-         /* translator  */    "Translator:",
+         /* translator  */    "Vertaling:",
          /* distributor */    "Distributie:",
          /* degree      */    "booggraad",
          "",""
@@ -507,7 +508,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* html_next   */    "næste",
          /* html_lang   */    "da",
          /* html_start  */    "start af dokument",
-         /* translator  */    "Translator:",
+         /* translator  */    "Translation:",
          /* distributor */    "Distributor:",
          /* degree      */    "grad",
          "",""
@@ -542,7 +543,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* html_next   */    "Next",
          /* html_lang   */    "en",
          /* html_start  */    "Begin of the document",
-         /* translator  */    "Translator:",
+         /* translator  */    "Translation:",
          /* distributor */    "Distributor:",
          /* degree      */    "grad",
          "",""
@@ -577,7 +578,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* html_next   */    "Next",
          /* html_lang   */    "fi",
          /* html_start  */    "Begin of the document",
-         /* translator  */    "Translator:",
+         /* translator  */    "Translation:",
          /* distributor */    "Distributor:",
          /* degree      */    "aste",
          "",""
@@ -612,7 +613,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* html_next   */    "Nākamais",
          /* html_lang   */    "lv",
          /* html_start  */    "Dokumenta sākums",
-         /* translator  */    "Translator:",
+         /* translator  */    "Translation:",
          /* distributor */    "Izplatītājs:",
          /* degree      */    "degree",
          "",""
@@ -647,7 +648,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* html_next   */    "Next",
          /* html_lang   */    "pl",
          /* html_start  */    "Begin of the document",
-         /* translator  */    "Translator:",
+         /* translator  */    "Translation:",
          /* distributor */    "Distributor:",
          /* degree      */    "stopień",
          "",""
