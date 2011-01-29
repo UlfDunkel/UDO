@@ -102,6 +102,10 @@
 *    fd  May 21: add_label(): supports "!label*" which must not be listed in index (#90)
 *    ggs Aug 18: get_html_filename: New Parameter, which tells if a page is merged
 *    fd  Sep 09: <a name>%s</a> changed to <a name></a>%s to avoid empty links
+*  2011:
+*    fd  Jan 29: HTML navigation bar output using GIF images no longer writes linefeeds
+*                 in order to prevent gaps between images, so you can use images in
+*                 segmented control style now.
 *
 ******************************************|************************************/
 
@@ -787,9 +791,9 @@ LOCAL void string2reference(
 char           *ref,                 /* */
 const LABEL    *l,                   /* */
 const BOOLEAN   for_toc,             /* */
-const char     *pic,                 /* */
-const UWORD     uiW,                 /* */
-const UWORD     uiH)                 /* */
+const char     *pic,                 /* constant for GUI navigation image, e.g. GIF_UP_NAME */
+const UWORD     uiW,                 /* GUI navigation image width */
+const UWORD     uiH)                 /* GUI navigation image height */
 {
    char         s[512],              /* */
                 n[512],              /* */
@@ -1020,8 +1024,8 @@ const UWORD     uiH)                 /* */
       else
          strcpy(suff, outfile.suff);
       
-      if (pic[0] != EOS)
-      {                                   /* Fuer Kopf- oder Fusszeile */
+      if (pic[0] != EOS)                  /* GUI navigation */
+      {
          if (no_images)                   /*r6pl2*/
          {
             if (l->is_node || l->is_alias)
@@ -3727,7 +3731,7 @@ const char  *sep)               /* */
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         voutlnf("<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+         voutf("<a href=\"%s%s#%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
             sFile, outfile.suff, HTML_LABEL_CONTENTS, sTarget, sGifName, lang.contents, lang.contents, sGifSize, closer);
       }
    }
@@ -3747,7 +3751,7 @@ const char  *sep)               /* */
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         voutlnf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", sGifName, sGifSize, closer);
+         voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", sGifName, sGifSize, closer);
       }
    }
 }
@@ -3759,7 +3763,7 @@ const char  *sep)               /* */
 /*******************************************************************************
 *
 *  html_home_giflink():
-*     ??? (description)
+*     create and output HOME link for HTML navigation bar
 *
 *  return:
 *     -
@@ -3808,7 +3812,7 @@ const char  *sep)               /* */
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         voutlnf("<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s>",
+         voutf("<img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s>",
             sGifName, lang.html_home, lang.html_home, sGifSize, closer);
       }
    }
@@ -3839,7 +3843,7 @@ const char  *sep)               /* */
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         voutlnf("<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+         voutf("<a href=\"%s%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
                         sFile, outfile.suff, sTarget, sGifName, lang.html_home, lang.html_home, sGifSize, closer);
       }
    }
@@ -3851,8 +3855,8 @@ const char  *sep)               /* */
 
 /*******************************************************************************
 *
-*  html_home_giflink():
-*     ??? (description)
+*  html_back_giflink():
+*     create and output link to 'back page' for HTML navigation bar
 *
 *  return:
 *     -
@@ -3920,7 +3924,7 @@ const char  *sep)               /* */
          }
          
                                           /* Changed in r6pl16 [NHz] */
-         voutlnf("<a href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
+         voutf("<a href=\"%s\"%s><img src=\"%s\" alt=\"%s\" title=\"%s\" border=\"0\"%s%s></a>",
             href, target, sGifName, alt, alt, sGifSize, closer);
       }
    }
@@ -3940,7 +3944,7 @@ const char  *sep)               /* */
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         voutlnf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", sGifName, sGifSize, closer);
+         voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", sGifName, sGifSize, closer);
       }
    }
 }
@@ -3961,7 +3965,8 @@ const char  *sep)               /* */
 
 LOCAL void html_hb_line(
 
-BOOLEAN      head)              /* */
+BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page header; */
+                                /* FALSE: output GUI navigation bar in page footer */
 {
    int       i,                 /* */
              ti,                /* */
@@ -4103,30 +4108,10 @@ BOOLEAN      head)              /* */
    case TOC_TOC:                          /* Verweis auf Backpage erzeugen */
       html_back_giflink(GIF_UP_INDEX, GIF_NOUP_INDEX, "| ");
       break;
-      
+
    case TOC_NODE1:                        /* Weiter nach oben geht es nicht */
-#if 0
-   if (no_images)
-   {
-      outln("| ^^^");
-   }
-   else
-   {
-      get_giflink_data(GIF_NOUP_INDEX, s, &uiW, &uiH);
-      sGifSize[0] = EOS;
-      
-      if (uiW != 0 && uiH != 0)
-      {
-         sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
-      }
-      
-      voutlnf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
-   }
-#else
-                                          /* Verweis auf index.htm erzeugen */
-   html_index_giflink(GIF_UP_INDEX, GIF_NOUP_INDEX, "| ");
-#endif
-   break;
+      html_index_giflink(GIF_UP_INDEX, GIF_NOUP_INDEX, "| ");
+      break;
    
    case TOC_NODE2:                        /* Verweis auf aktuellen !node */
       li = toc[last_n1_index]->labindex;
@@ -4144,7 +4129,7 @@ BOOLEAN      head)              /* */
             strinsert(s, "| ");
          }
    
-         outln(s);
+         out(s);
       }
       
       break;
@@ -4165,7 +4150,7 @@ BOOLEAN      head)              /* */
             strinsert(s, "| ");
          }
       
-         outln(s);
+         out(s);
       }
       
       break;
@@ -4186,7 +4171,7 @@ BOOLEAN      head)              /* */
             strinsert(s, "| ");
          }
       
-         outln(s);
+         out(s);
       }
       
       break;
@@ -4207,7 +4192,7 @@ BOOLEAN      head)              /* */
             strinsert(s, "| ");
          }
       
-         outln(s);
+         out(s);
       }
       
    }
@@ -4239,7 +4224,7 @@ BOOLEAN      head)              /* */
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         voutlnf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
+         voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
       }
 #else
       html_back_giflink(GIF_LF_INDEX, GIF_NOLF_INDEX, "| ");
@@ -4270,7 +4255,7 @@ BOOLEAN      head)              /* */
                strinsert(s, "| ");
             }
             
-            outln(s);
+            out(s);
          }
          else
          {
@@ -4289,7 +4274,7 @@ BOOLEAN      head)              /* */
                   sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
                }
                
-               voutlnf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
+               voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
             }
 #else
                                           /* Frueher Link auf die Startseite */
@@ -4363,7 +4348,7 @@ BOOLEAN      head)              /* */
          strinsert(s, "| ");
       }
    
-      outln(s);
+      out(s);
    }
    else
    {                                      /* disabled nach rechts */
@@ -4381,7 +4366,7 @@ BOOLEAN      head)              /* */
             sprintf(sGifSize, " width=\"%u\" height=\"%u\"", uiW, uiH);
          }
          
-         voutlnf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
+         voutf("<img src=\"%s\" alt=\"\" title=\"\" border=\"0\"%s%s>", s, sGifSize, closer);
       }
    }
    
