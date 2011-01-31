@@ -43,7 +43,8 @@
 *  2010:
 *    ggs May 16: c_img_output(): ST-Guide doesn't need a line before/after limage command
 *  2011:
-*    fd  Jan 31: file reformatted
+*    fd  Jan 31: - file reformatted
+*                - new: get_image_header(): replaces proprietary get_NNNheader() functions
 *
 ******************************************|************************************/
 
@@ -116,6 +117,8 @@ LOCAL int image_counter;
 
 
 
+
+
 /*******************************************************************************
 *
 *     LOCAL PROTOTYPES
@@ -127,14 +130,9 @@ LOCAL void save_one_win_bmp(const char *name, const UBYTE *buffer, const size_t 
 LOCAL void save_one_stg_img(const char *name, const UBYTE *buffer, const size_t length, BOOLEAN *ret);
 
 
-LOCAL int get_imgheader(const char *datei, IMGHEADER *head);
+LOCAL BOOLEAN get_image_header(const char *datei, int type, XPOINT head);
+
 LOCAL int set_imgheader(const char *datei, IMGHEADER *head);
-LOCAL int get_bmpheader(const char *datei, BMPHEADER *head);
-LOCAL int get_mspheader(const char *datei, MSPHEADER *head);
-LOCAL int get_pcxheader(const char *datei, PCXHEADER *head);
-LOCAL int get_gifheader(const char *datei, GIFHEADER *head);
-LOCAL int get_jpgheader(const char *datei, JPGHEADER *head);
-LOCAL int get_pngheader(const char *datei, PNGHEADER *head);
 
 LOCAL void calc_gifsize(UWORD *w, UWORD *h, GIFHEADER *head);
 LOCAL void calc_jpgsize(UWORD *w, UWORD *h, JPGHEADER *head);
@@ -486,30 +484,62 @@ GLOBAL void save_stg_imgs(void)
 
 /*******************************************************************************
 *
-*  get_imgheader():
-*     get header information of IMG file
+*  get_image_header():
+*     get header information of an image file
 *
 *  Return:
 *     IMGHEADER in *head
 *
 ******************************************|************************************/
 
-LOCAL int get_imgheader(
+LOCAL BOOLEAN get_image_header(
 
 const char  *datei,  /* */
-IMGHEADER   *head)   /* */
+int          type,   /* IMGTYPE_... */
+XPOINT       head)   /* image header struct */
 {
    FILE     *file;   /* */
    size_t    elem;   /* */
+   ULONG     size;   /* sizeof() */
+   
    
    
    file = fopen(datei, "rb");             /* try to read image file */
    
    if (!file)
-      return 0;
+      return FALSE;                       /* failed */
    
-                                          /* read IMG header data */
-   elem = fread(head, sizeof(IMGHEADER), 1, file);
+   switch (type)                          /* get size of image type header */
+   {
+   case IMGTYPE_IMG:
+      size = sizeof(IMGHEADER);
+      break;
+   
+   case IMGTYPE_BMP:
+      size = sizeof(BMPHEADER);
+      break;
+   
+   case IMGTYPE_GIF:
+      size = sizeof(GIFHEADER);
+      break;
+   
+   case IMGTYPE_PNG:
+      size = sizeof(PNGHEADER);
+      break;
+   
+   case IMGTYPE_JPG:
+      size = sizeof(JPGHEADER);
+      break;
+   
+   case IMGTYPE_MSP:
+      size = sizeof(MSPHEADER);
+      break;
+   
+   case IMGTYPE_PCX:
+      size = sizeof(PCXHEADER);
+   }
+   
+   elem = fread(head, size, 1, file);     /* read image header data */
 
    fclose(file);
 
@@ -545,220 +575,6 @@ IMGHEADER   *head)   /* */
       return 0;
                                           /* write IMG header data */
    elem = fwrite(head, sizeof(IMGHEADER), 1, file);
-
-   fclose(file);
-
-   return (elem > 0);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  get_bmpheader():
-*     get header information of BMP file
-*
-*  Return:
-*     BMPHEADER in *head
-*
-******************************************|************************************/
-
-LOCAL int get_bmpheader(
-
-const char  *datei,  /* */
-BMPHEADER   *head)   /* */
-{
-   FILE     *file;   /* */
-   size_t    elem;   /* */
-   
-   
-   file = fopen(datei, "rb");             /* try to read image file */
-   
-   if (!file)
-      return 0;
-                                          /* read BMP header data */
-   elem = fread(head, sizeof(BMPHEADER), 1, file);
-
-   fclose(file);
-
-   return (elem > 0);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  get_mspheader():
-*     set header information of MSP file
-*
-*  Return:
-*     MSPHEADER in *head
-*
-******************************************|************************************/
-
-LOCAL int get_mspheader(
-
-const char  *datei,  /* */
-MSPHEADER   *head)   /* */
-{
-   FILE     *file;   /* */
-   size_t    elem;   /* */
-   
-   
-   file = fopen(datei, "rb");             /* try to read image file */
-   
-   if (!file)
-      return 0;
-   
-                                          /* read MSP header data */
-   elem = fread(head, sizeof(MSPHEADER), 1, file);
-
-   fclose(file);
-
-   return (elem > 0);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  get_mspheader():
-*     set header information of Windows PCX file
-*
-*  Return:
-*     PCXHEADER in *head
-*
-******************************************|************************************/
-
-LOCAL int get_pcxheader(
-
-const char  *datei,  /* */
-PCXHEADER   *head)   /* */
-{
-   FILE     *file;   /* */
-   size_t    elem;   /* */
-   
-   
-   file = fopen(datei, "rb");             /* try to read image file */
-   
-   if (!file)
-      return 0;
-   
-                                          /* read PCX header data */
-   elem = fread(head, sizeof(PCXHEADER), 1, file);
-
-   fclose(file);
-
-   return (elem > 0);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  get_gifheader():
-*     set header information of GIF file
-*
-*  Return:
-*     GIFHEADER in *head
-*
-******************************************|************************************/
-
-LOCAL int get_gifheader(
-
-const char  *datei,  /* */
-GIFHEADER   *head)   /* */
-{
-   FILE     *file;   /* */
-   size_t    elem;   /* */
-   
-   file = fopen(datei, "rb");             /* try to read image file */
-   
-   if (!file)
-      return 0;
-   
-                                          /* read GIF header data */
-   elem = fread(head, sizeof(GIFHEADER), 1, file);
-
-   fclose(file);
-
-   return (elem > 0);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  get_jpgheader():
-*     set header information of JPEG file
-*
-*  Return:
-*     JPGHEADER in *head
-*
-******************************************|************************************/
-
-LOCAL int get_jpgheader(
-
-const char  *datei,  /* */
-JPGHEADER   *head)   /* */
-{
-   FILE     *file;   /* */
-   size_t    elem;   /* */
-   
-   
-   file = fopen(datei, "rb");             /* try to read image file */
-   
-   if (!file)
-      return 0;
-   
-                                          /* read JPEG header data */
-   elem = fread(head, sizeof(JPGHEADER), 1, file);
-
-   fclose(file);
-
-   return (elem > 0);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  get_pngheader():
-*     set header information of PNG file
-*
-*  Return:
-*     PNGHEADER in *head
-*
-******************************************|************************************/
-
-LOCAL int get_pngheader(
-
-const char  *datei,  /* */
-PNGHEADER   *head)   /* */
-{
-   FILE     *file;   /* */
-   size_t    elem;   /* */
-   
-   
-   file = fopen(datei, "rb");             /* try to read image file */
-   
-   if (!file)
-      return 0;
-   
-                                          /* read PNG header data */
-   elem = fread(head, sizeof(PNGHEADER), 1, file);
 
    fclose(file);
 
@@ -927,13 +743,13 @@ const BOOLEAN   visible)        /* */
    strinsert(imgdatei, outfile.driv);
    path_adjust_separator(imgdatei);
    
-   flag = get_imgheader(imgdatei, &imghead);
+   flag = get_image_header(datei, IMGTYPE_IMG, &imghead);
 
    if (!flag)
    {
       build_image_filename(datei, ".img");
       
-      flag = get_imgheader(datei, &imghead);
+      flag = get_image_header(datei, IMGTYPE_IMG, &imghead);
       
       if (!flag)
       {
@@ -1190,12 +1006,14 @@ const int      border)            /* */
          strinsert(gifdatei, old_outfile.path);
          strinsert(gifdatei, old_outfile.driv);
          path_adjust_separator(gifdatei);
-         flag = get_gifheader(gifdatei, &gifhead);
+         
+         flag = get_image_header(gifdatei, IMGTYPE_GIF, &gifhead);
 
          if (!flag)
          {
             build_image_filename(gifdatei, suffix);
-            flag = get_gifheader(gifdatei, &gifhead);
+            
+            flag = get_image_header(gifdatei, IMGTYPE_GIF, &gifhead);
 
             if (!flag)
             {
@@ -1301,7 +1119,7 @@ const BOOLEAN   visible)
    switch (desttype)
    {
    case TORTF:
-      if ( !get_bmpheader(datei, &bmpheader) )
+      if ( !get_image_header(datei, IMGTYPE_BMP, &bmpheader) )
       {                                   /* Fixed bug #0000017 in V6.5.2 [NHz] */
          if(strstr(datei, BMP_MW_NAME) != NULL)
             error_read_bmp(BMP_MW_NAME);
@@ -1409,7 +1227,7 @@ const BOOLEAN   visible)
 
 
    case TOTEX:
-      if ( !get_bmpheader(datei, &bmpheader) )
+      if ( !get_image_header(datei, IMGTYPE_BMP, &bmpheader) )
       {
          error_read_bmp(datei);
          bErrorDetected = TRUE;
@@ -1610,7 +1428,7 @@ const BOOLEAN   visible)        /* */
    case TOTEX:
       if (iTexVersion == TEX_EMTEX || iTexVersion == TEX_MIKTEX)
       {
-         if ( !get_mspheader(datei, &mspheader) )
+         if ( !get_image_header(datei, IMGTYPE_MSP, &mspheader) )
          {
             error_read_msp(datei);
             bErrorDetected = TRUE;
@@ -1745,7 +1563,7 @@ const BOOLEAN   visible)        /* */
    case TOTEX:
       if (iTexVersion == TEX_EMTEX || iTexVersion == TEX_MIKTEX)
       {
-         if ( !get_pcxheader(datei, &pcxheader) )
+         if ( !get_image_header(datei, IMGTYPE_PCX, &pcxheader) )
          {
             error_read_pcx(datei);
             bErrorDetected = TRUE;
@@ -1986,13 +1804,13 @@ const BOOLEAN   visible)        /* */
       
       path_adjust_separator(pngdatei);
       
-      flag = get_pngheader(pngdatei, &pnghead);
+      flag = get_image_header(pngdatei, IMGTYPE_PNG, &pnghead);
       
       if (!flag)
       {
          build_image_filename(pngdatei, suffix);
          
-         flag = get_pngheader(pngdatei, &pnghead);
+         flag = get_image_header(pngdatei, IMGTYPE_PNG, &pnghead);
          
          if (!flag)
             error_read_png(pngdatei);
@@ -2146,7 +1964,7 @@ UWORD         *uiH)       /* */
 
    if (!no_img_size)                      /* we don't want to ignore image sizes */
    {
-      flag = get_gifheader(filename, &gh);
+      flag = get_image_header(filename, IMGTYPE_GIF, &gh);
       
       if (!flag)
          return FALSE;
@@ -2185,7 +2003,7 @@ UWORD         *uiH)       /* */
 
    if (!no_img_size)                      /* we don't want to ignore image sizes */
    {
-      flag = get_jpgheader(filename, &jh);
+      flag = get_image_header(filename, IMGTYPE_JPG, &jh);
       
       if (!flag)
          return FALSE;
@@ -2224,7 +2042,7 @@ UWORD         *uiH)       /* */
 
    *uiW = *uiH = 0;
 
-   flag = get_gifheader(filename, &gh);
+   flag = get_image_header(filename, IMGTYPE_GIF, &gh);
    
    if (!flag)
       memcpy(&gh, def, sizeof(GIFHEADER));
