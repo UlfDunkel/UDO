@@ -115,6 +115,10 @@
 *    fd  May 19: - auto_quote_chars() debugged
 *                - (!deg) is replaced by localized string lang.degree, if not supported
 *    fd  May 21: new: label* | l*  (#90)
+*  2011:
+*    fd  Jan 31: - auto_quote_chars(): speed optimized for HTML output formats
+*                - recode_chrtab(): no longer recodes  on Unicode targets (#94)
+*                - convert_sz():    no longer converts on Unicode targets
 *
 ******************************************|************************************/
 
@@ -1121,9 +1125,17 @@ GLOBAL void convert_sz(
 
 char  *s)  /* ^ string */
 {
+   UWORD        (*pUtrg);         /* ^ encoding table for target encoding */
+   
+
    if (html_ignore_8bit)                  /* ignore any conversion */
       return;
-
+   
+   pUtrg = chr_codepage(iEncodingTarget); /* get the right encoding table! */
+   
+   if (!pUtrg)                            /* Unicode? */
+      return;                             /* no recoding! */
+   
 #ifdef __TOS__
    replace_char(s, "\341", "\236");       /* from DOS(?):0xE1 to TOS:0x9E */
 #else
@@ -1464,6 +1476,10 @@ int               type)           /* CHRTAB_... (CHR.H) */
 
    pUtrg = chr_codepage(iEncodingTarget); /* get the right encoding table! */
    
+   if (!pUtrg)                            /* Unicode? */
+      return;                             /* no recoding! */
+   
+
    memset(sbuf,0,LINELEN);
    memset(cbuf,0,2);
 
@@ -4343,30 +4359,38 @@ BOOLEAN           all)            /* */
       case TOHAH:                         /* HTML Apple Help (since V6.5.17) */
       case TOHTM:                         /* HTML */
       case TOMHH:                         /* Microsoft HTML Help */
+      
+         if (html_ignore_8bit)            /* skip if nothing has to be changed */
+            goto NO_QUOTE_NEEDED;
+         
+         if (!pUtrg)                      /* skip if target is Unicode */
+            goto NO_QUOTE_NEEDED;
+         
          found = FALSE;
 
          idx = (UBYTE)*ptr;
 
-         if (idx > 127 && !html_ignore_8bit)
+         if (idx > 127)                   /* char is higher than ASCII-7 */
          {
-            j = 0;
-        
+            j = 0;                        /* search chrtab[] from first entry */
+             
                                           /* check for end of table! */
             while (chrtab[j]->uname != U_NIL)
             {
                                           /* identical Unicode name found! */
-               if (pUtrg && (chrtab[j]->uname == pUtrg[idx]) )
+               if (chrtab[j]->uname == pUtrg[idx])
                {
+                                          /* valid HTML entity found? */
                   if (chrtab[j]->html[0] != EOS)
                   {
                      ptr_quoted = chrtab[j]->html;
                      found = TRUE;
                      break;
                   }
-                  else
+                  else                    /* no valid HTML entity found */
                      warning_no_isochar(ptr[0]);
                }
-                 
+              
                j++;
             }
          }
@@ -4393,7 +4417,9 @@ BOOLEAN           all)            /* */
                   }
                }
             }
-         }
+            
+         }  /* if (idx > 127) ... else */
+         
          break;
          
 
