@@ -39,8 +39,10 @@
 *
 *  2010:
 *    fd  Feb 11: file reformatted and tidied up, TAB-free
-*    fd  Feb 19: NIL introduced
-*    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
+*    fd  Feb 19: new: NIL
+*    fd  Feb 22: new: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG
+*  2011:
+*    fd  Jan 31: new: XPOINT
 *
 ******************************************|************************************/
 
@@ -89,6 +91,7 @@ typedef signed int      SWORD;            /* signed 16 bit integer */
 typedef unsigned int    UWORD;            /* unsigned 16 bit integer */
 typedef signed long     SLONG;            /* signed 32 bit integer */
 typedef unsigned long   ULONG;            /* unsigned 32 bit integer */
+typedef void *          XPOINT;           /* pointer to anything */
 
 
 
