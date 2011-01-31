@@ -41,7 +41,8 @@
 *    fd  Feb 22: - header adjusted
 *                - VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *  2011:
-*    fd  Jan 31: file reformatted
+*    fd  Jan 31: - file reformatted
+*                - IMGTYPE_... introduced; image header definitions resorted
 *
 ******************************************|************************************/
 
@@ -54,26 +55,27 @@
 
 /*******************************************************************************
 *
-*     TYPE DEFINITIONS
+*     MACRO DEFINITIONS
 *
 ******************************************|************************************/
 
-typedef struct _imgheader
-   {
-   UBYTE   im_version[2];
-   UBYTE   im_headerlength[2];            /* header length in words */
-   UBYTE   im_nplanes[2];                 /* # of planes */
-   UBYTE   im_patlen[2];
-   UBYTE   im_pixwidth_hi;                /* pixel width  in mm/1000 */
-   UBYTE   im_pixwidth_lo;
-   UBYTE   im_pixheight_hi;               /* pixel height in mm/1000 */
-   UBYTE   im_pixheight_lo;
-   UBYTE   im_scanwidth_hi;               /* width in pixels */
-   UBYTE   im_scanwidth_lo;
-   UBYTE   im_nlines_hi;                  /* height in pixels */
-   UBYTE   im_nlines_lo;
-   } IMGHEADER;
+#define IMGTYPE_BMP  0
+#define IMGTYPE_GIF  1
+#define IMGTYPE_IMG  2
+#define IMGTYPE_JPG  3
+#define IMGTYPE_MSP  4
+#define IMGTYPE_PCX  5
+#define IMGTYPE_PNG  6
 
+
+
+
+
+/*******************************************************************************
+*
+*     TYPE DEFINITIONS
+*
+******************************************|************************************/
 
 typedef struct _bmpheader
    {
@@ -94,6 +96,40 @@ typedef struct _bmpheader
    UBYTE   biClrUsed[4];       /* 46 */   /* Zahl der benutzten Farben */
    UBYTE   biClrImp[4];        /* 50 */   /* Zahl der wichtigen Farben */
    } BMPHEADER;
+
+
+typedef struct _gifheader
+   {
+   UBYTE   gif_signature[3];              /* GIF */
+   UBYTE   gif_version[3];                /* 87a oder 89a */
+   UBYTE   gif_width_lo;                  /* Breite Low-Byte */
+   UBYTE   gif_width_hi;                  /*        High-Byte */
+   UBYTE   gif_height_lo;                 /* Hoehe Low-Byte */
+   UBYTE   gif_height_hi;                 /*       High-Byte */
+   } GIFHEADER;
+
+
+typedef struct _imgheader
+   {
+   UBYTE   im_version[2];
+   UBYTE   im_headerlength[2];            /* header length in words */
+   UBYTE   im_nplanes[2];                 /* # of planes */
+   UBYTE   im_patlen[2];
+   UBYTE   im_pixwidth_hi;                /* pixel width  in mm/1000 */
+   UBYTE   im_pixwidth_lo;
+   UBYTE   im_pixheight_hi;               /* pixel height in mm/1000 */
+   UBYTE   im_pixheight_lo;
+   UBYTE   im_scanwidth_hi;               /* width in pixels */
+   UBYTE   im_scanwidth_lo;
+   UBYTE   im_nlines_hi;                  /* height in pixels */
+   UBYTE   im_nlines_lo;
+   } IMGHEADER;
+
+
+typedef struct _jpgheader
+   {
+   UBYTE   jpg_unknown[2];                /* ??? */
+   } JPGHEADER;
 
 
 typedef struct _mspheader
@@ -118,23 +154,6 @@ typedef struct _pcxheader
    UBYTE   pcx_lower_lo;
    UBYTE   pcx_lower_hi;
    } PCXHEADER;
-
-
-typedef struct _gifheader
-   {
-   UBYTE   gif_signature[3];              /* GIF */
-   UBYTE   gif_version[3];                /* 87a oder 89a */
-   UBYTE   gif_width_lo;                  /* Breite Low-Byte */
-   UBYTE   gif_width_hi;                  /*        High-Byte */
-   UBYTE   gif_height_lo;                 /* Hoehe Low-Byte */
-   UBYTE   gif_height_hi;                 /*       High-Byte */
-   } GIFHEADER;
-
-
-typedef struct _jpgheader
-   {
-   UBYTE   jpg_unknown[2];                /* ??? */
-   } JPGHEADER;
 
 
 typedef struct _pngheader
