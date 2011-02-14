@@ -40,7 +40,8 @@
 *  2010:
 *    fd  Jan 23: file reformatted
 *  2011:
-*    fd  Feb 14: all set_html_...() functions moved from TOC to TOC_HTML
+*    fd  Feb 14: - all set_html_...() functions moved from TOC to TOC_HTML
+*                - function descriptions added
 *
 ******************************************|************************************/
 
@@ -59,42 +60,91 @@ GLOBAL void set_html_doctype(void);
    /* sets HTML header date */
 GLOBAL void set_html_header_date(void);
 
-   /*  */
+   /* sets html_header_links variable */
 GLOBAL void set_html_header_links(void);
 
    /* sets various html_frames_... flags */
 GLOBAL void set_html_frames_layout(void);
 
+   /* sets HTML filename */
 GLOBAL void set_html_filename(void);
+
+   /* sets HTML name prefix */
 GLOBAL void set_html_filename_prefix(void);
+
+   /* sets HTML dirname variable */
 GLOBAL void set_html_dirname(void);
+
+   /* sets ...SwitchLanguage variables */
 GLOBAL void set_html_switch_language(void);
 
+   /* sets HTML keywords */
 GLOBAL void set_html_keywords(void);
+
+   /* sets HTML description */
 GLOBAL void set_html_description(void);
-GLOBAL void set_html_robots(void);        /* new V6.5.17 */
-GLOBAL void set_html_bgsound(void);       /* New in 6.5.20 [GS] */
+
+   /* sets HTML robots */
+GLOBAL void set_html_robots(void);
+
+   /* sets the sound for a node */
+GLOBAL void set_html_bgsound(void);
+
+   /* sets HTML backimage */
 GLOBAL void set_html_backimage(void);
+
+   /* sets HTML color */
 GLOBAL void set_html_color(const int which);
 
+   /* sets HTML style */
 GLOBAL void set_html_style(void);
+
+   /* sets HTML script name */
 GLOBAL void set_html_script(void);
+
+   /* sets HTML favicon */
 GLOBAL void set_html_favicon(void);
+
+   /* sets special color for HTML */
 GLOBAL void set_html_special_color(char *hc);
+
+   /* sets counter_command */
 GLOBAL void set_html_counter_command(void);
 
-GLOBAL void set_html_frames_toc_title(void); /* New in 6.5.16 [GS] */
-GLOBAL void set_html_frames_con_title(void); /* New in 6.5.16 [GS] */
+   /* sets html_frames_toc_title variable */
+GLOBAL void set_html_frames_toc_title(void);
 
+   /* sets html_frames_con_title variable */
+GLOBAL void set_html_frames_con_title(void);
+
+   /* sets html_modern_width variable */
 GLOBAL void set_html_modern_width(void);
+
+   /* sets html_modern_alignment variable */
 GLOBAL void set_html_modern_alignment(void);
+
+   /* sets html_modern_backimage variable */
 GLOBAL void set_html_modern_backimage(void);
+
+   /* sets html_frames_width variable */
 GLOBAL void set_html_frames_width(void);
+
+   /* sets html_frames_height variable */
 GLOBAL void set_html_frames_height(void);
-GLOBAL void set_html_frames_alignment(void);
+
+   /* sets html_frames_position variable */
 GLOBAL void set_html_frames_position(void);
+
+   /* sets html_frames_alignment variable */
+GLOBAL void set_html_frames_alignment(void);
+
+   /* sets html_frames_backimage variable */
 GLOBAL void set_html_frames_backimage(void);
+
+   /* sets html_button_alignment variable */
 GLOBAL void set_html_button_alignment(void);
+
+   /* sets html_quotes variable */
 GLOBAL void set_html_quotes(void);
 
 /* +++ EOF +++ */
