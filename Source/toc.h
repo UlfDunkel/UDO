@@ -42,6 +42,8 @@
 *    fd  Feb 05: file reformatted and tidied up; TAB-free
 *    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  May 21: more comments translated
+*  2011:
+*    fd  Feb 14: functions add_...node_to_toc() merged into add_nodetype_to_toc()
 *
 ******************************************|************************************/
 
@@ -57,6 +59,14 @@
 #define MAX_IMAGE_LEN      128
 #define MAX_COLOR_LEN       16
 #define MAX_HELPID_LEN      16
+
+#define TOC_TOC    0                      /* table of content */
+#define TOC_NODE1  1                      /* !node */
+#define TOC_NODE2  2                      /* !subnode */
+#define TOC_NODE3  3                      /* !subsubnode */
+#define TOC_NODE4  4                      /* !subsubsubnode */
+#define TOC_NODE5  5                      /* !subsubsubsubnode */
+#define TOC_NONE   6                      /* neither nor ... :-) */
 
 
 
@@ -422,10 +432,7 @@ GLOBAL void set_chapter_icon(void);
 GLOBAL void set_chapter_icon_active(void);
 GLOBAL void set_chapter_icon_text(void);
 
-GLOBAL BOOLEAN add_node_to_toc(const BOOLEAN popup, const BOOLEAN invisible);
-GLOBAL BOOLEAN add_subnode_to_toc(const BOOLEAN popup, const BOOLEAN invisible);
-GLOBAL BOOLEAN add_subsubnode_to_toc(const BOOLEAN popup, const BOOLEAN invisible);
-GLOBAL BOOLEAN add_subsubsubnode_to_toc(const BOOLEAN popup, const BOOLEAN invisible);
+GLOBAL BOOLEAN add_nodetype_to_toc(int nodetype, const BOOLEAN popup, const BOOLEAN invisible);
 
 GLOBAL BOOLEAN toc_begin_node (const BOOLEAN popup, const BOOLEAN invisible);
 GLOBAL void toc_end_node(void);
