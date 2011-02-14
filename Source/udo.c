@@ -115,7 +115,8 @@
 *                - token_output(): some adjustments for description item output in KPS
 *    fd  May 21: new: label* | l*  (#90)
 *  2011:
-*    fd  Feb 14: pass1() handles "!subsubsubsubnode" and its derivates (finally)
+*    fd  Feb 14: - pass1() handles "!subsubsubsubnode" and its derivates (finally)
+*                - copyright year updated
 *
 ******************************************|************************************/
 
@@ -10024,7 +10025,7 @@ LOCAL void output_preamble(void)
    case TOLYX:
       voutlnf("# This file was created by UDO Version %s.%s %s", UDO_REL, UDO_SUBVER, UDO_BUILD);
       outln("# UDO (C) 1995-2001 by Dirk Hagedorn (info@dirk-hagedorn.de)");
-      outln("# UDO (C) 2001-2010 by The UDO Community (www.udo-open-source.org)");
+      outln("# UDO (C) 2001-2011 by The UDO Community (www.udo-open-source.org)");
       outln("\\lyxformat 2.10");
       voutlnf("\\textclass %s", (use_style_book) ? "book" : "article");
       outln("\\inputencoding latin1");

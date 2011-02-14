@@ -59,6 +59,8 @@
 *    fd  May 20: - old history stuff added to header and removed from UDO2PDF
 *                - year updated
 *                - AboutUDO texts adjusted to changes in manual
+*  2011:
+*    fd  Feb 14: copyright year updated
 *
 ******************************************|************************************/
 
@@ -461,7 +463,7 @@ const char *UDO2PDF=
    "  udo_os Center setAlign newline\n"
    "  newline \n"
    "  (Copyright \\251 1995-2001 by Dirk Hagedorn) Center setAlign newline\n"
-   "  (Copyright \\251 2001-2010 by The UDO Community) Center setAlign newline\n"
+   "  (Copyright \\251 2001-2011 by The UDO Community) Center setAlign newline\n"
    "  (UDO ist Open Source) Center setAlign newline\n"
    "  newline\n"
    "  (UDO ist ein Programm, mit dem Sie Textdateien, die im) Center setAlign newline\n"
@@ -492,7 +494,7 @@ const char *UDO2PDF=
    "  udo_os Center setAlign newline\n"
    "  newline\n"
    "  (Copyright \\251 1995-2001 by Dirk Hagedorn) Center setAlign newline\n"
-   "  (Copyright \\251 2001-2010 by The UDO Community) Center setAlign newline\n"
+   "  (Copyright \\251 2001-2011 by The UDO Community) Center setAlign newline\n"
    "  (UDO is Open Source) Center setAlign newline\n"
    "  newline\n"
    "  (UDO is a program that converts files which you have written) Center setAlign newline\n"
