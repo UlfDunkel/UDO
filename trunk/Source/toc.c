@@ -295,7 +295,18 @@ typedef struct   _hmtl_index              /* index output for HTML */
    char      tocname[512];                /* label or node name */
    char      sortname[512];               /* 'flattened' label or node name */
    UWORD     codepoint;                   /* Unicode codepoint for sorting purposes */
-}  HTML_INDEX;
+   }  HTML_INDEX;
+
+typedef struct _tWinMapData
+   {
+   char   remOn[16],                      /* */
+          remOff[16];                     /* */
+   char   cmd[32];                        /* #define const */
+   char   varOp[16];                      /*  = */
+   char   hexPre[16],                     /* */
+          hexSuf[16];                     /* 0x $ */
+   char   compiler[32];                   /* C, Pascal, Visual-Basic, ... */
+   }  tWinMapData;
 
 
 
@@ -15896,751 +15907,932 @@ const BOOLEAN   invisible)  /* TRUE: node is invisible */
 
 
 
+
+
 /* Nicht LOCAL: wird von abo.c und udo.c benutzt! */
-GLOBAL BOOLEAN add_node_to_toc(const BOOLEAN popup, const BOOLEAN invisible)
+
+/*******************************************************************************
+*
+*  add_node_to_toc():
+*     ???
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN add_node_to_toc(
+
+const BOOLEAN   popup,       /* */
+const BOOLEAN   invisible)   /* */
 {
-        TOCITEM *tocptr;
-        int             li;
-        int  html_merge;
+   TOCITEM     *tocptr;      /* */
+   int          li;          /* */
+   int          html_merge;  /* */
+   
+   
+   tocptr = init_new_toc_entry(TOC_NODE1, invisible);
 
-        tocptr= init_new_toc_entry (TOC_NODE1, invisible);
+   if (tocptr == NULL)
+      return FALSE;
 
-        if (tocptr==NULL)
-        {       return FALSE;
-        }
+   all_nodes++;
 
-        all_nodes++;
+   /* ---------------------------------------------------- */
+   /* r5pl6: Listenartige Verkettung erzeugen              */
+   /* ---------------------------------------------------- */
+   /* noch ist p1_toc_counter nicht inkrementiert worden,  */
+   /* zeigt daher auf den letzten (Sub(Sub))Node           */
 
-        /* ---------------------------------------------------- */
-        /* r5pl6: Listenartige Verkettung erzeugen                              */
-        /* ---------------------------------------------------- */
-        /* noch ist p1_toc_counter nich inkrementiert worden,   */
-        /* zeigt daher auf den letzten (Sub(Sub))Node                   */
+   tocptr->prev_index = p1_toc_counter;
 
-        tocptr->prev_index= p1_toc_counter;
+   /* Bei HTML muss das Mergen beachtet werden! Der        */
+   /* Vorgaenger wird daher auf den letzten *Node gesetzt  */
+   
+                                          /* New TOHAH; V6.5.17 */
+   if (desttype == TOHTM || desttype == TOHAH)
+   {
+      if (html_merge_node5 && last_n4_index > 0)
+         tocptr->prev_index = last_n4_index;
 
-        /* Bei HTML muss das Mergen beachtet werden! Der                */
-        /* Vorgaenger wird daher auf den letzten *Node gesetzt  */
-        if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
-        {
-                if (html_merge_node5 && last_n4_index>0)
-                {       tocptr->prev_index= last_n4_index;
-                }
-                if (html_merge_node4 && last_n3_index>0)
-                {       tocptr->prev_index= last_n3_index;
-                }
-                if (html_merge_node3 && last_n2_index>0)
-                {       tocptr->prev_index= last_n2_index;
-                }
-                if (html_merge_node2 && last_n1_index>0)
-                {       tocptr->prev_index= last_n1_index;
-                }
-                if (html_merge_node1)
-                {       tocptr->prev_index= 0;
-                }
-        }
+      if (html_merge_node4 && last_n3_index > 0)
+         tocptr->prev_index = last_n3_index;
 
-        /* Den Nachfolger des Vorgaengers setzen: auf diesen    */
+      if (html_merge_node3 && last_n2_index > 0)
+         tocptr->prev_index = last_n2_index;
 
-        toc[p1_toc_counter]->next_index= p1_toc_counter+1;
+      if (html_merge_node2 && last_n1_index > 0)
+         tocptr->prev_index = last_n1_index;
 
-        if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
-        {
-                /* Wenn Subsubsubsubnode gemerged werden, dann muss     */
-                /* beim letzten Subsubnode dieser Node als                      */
-                /* naechster Index eingetragen werden!                          */
-                if (html_merge_node5 && last_n4_index>0)
-                {       toc[last_n4_index]->next_index= p1_toc_counter+1;
-                }
+      if (html_merge_node1)
+         tocptr->prev_index = 0;
+   }
 
-                /* Wenn Subsubsubnode gemerged werden, dann muss        */
-                /* beim letzten Subsubnode dieser Node als                      */
-                /* naechster Index eingetragen werden!                          */
-                if (html_merge_node4 && last_n3_index>0)
-                {       toc[last_n3_index]->next_index= p1_toc_counter+1;
-                }
+   /* Den Nachfolger des Vorgaengers setzen: auf diesen */
 
-                /* Wenn Subsubnodes gemerged werden, dann muss beim     */
-                /* letzten Subnode dieser Node als naechster            */
-                /* Index eingetragen werden!                                            */
-                if (html_merge_node3 && last_n2_index>0)
-                {       toc[last_n2_index]->next_index= p1_toc_counter+1;
-                }
+   toc[p1_toc_counter]->next_index = p1_toc_counter + 1;
 
-                /* Werden Subnodes gemerged, so muss beim letzten Node  */
-                /* dieser Node als naechster Index eingetragen werden!  */
-                if (html_merge_node2 && last_n1_index>0)
-                {       toc[last_n1_index]->next_index= p1_toc_counter+1;
-                }
-        }
+                                          /* New TOHAH; V6.5.17 */
+   if (desttype == TOHTM || desttype == TOHAH)
+   {
+      /* Wenn Subsubsubsubnode gemerged werden, dann muss     */
+      /* beim letzten Subsubnode dieser Node als              */
+      /* naechster Index eingetragen werden!                  */
+      
+      if (html_merge_node5 && last_n4_index > 0)
+         toc[last_n4_index]->next_index = p1_toc_counter + 1;
 
-        /* Der Zeiger auf den Nachfolger muss vom Nachfolger    */
-        /* gesetzt werden.                                                                              */
-        tocptr->next_index= 0;
+      /* Wenn Subsubsubnode gemerged werden, dann muss        */
+      /* beim letzten Subsubnode dieser Node als              */
+      /* naechster Index eingetragen werden!                  */
+      
+      if (html_merge_node4 && last_n3_index > 0)
+         toc[last_n3_index]->next_index = p1_toc_counter + 1;
 
-        /* Hilfsvariablen setzen fuer die uebergeordneten Nodes */
-        tocptr->up_n1_index= 0;
-        tocptr->up_n2_index= 0;
-        tocptr->up_n3_index= 0;
-        tocptr->up_n4_index= 0;
+      /* Wenn Subsubnodes gemerged werden, dann muss beim     */
+      /* letzten Subnode dieser Node als naechster            */
+      /* Index eingetragen werden!                            */
+      
+      if (html_merge_node3 && last_n2_index > 0)
+         toc[last_n2_index]->next_index = p1_toc_counter + 1;
 
-        last_n1_index= p1_toc_counter+1;
-        last_n2_index= 0;
-        last_n3_index= 0;
-        last_n4_index= 0;
-        last_n5_index= 0;
-        /* ---------------------------------------------------- */
+      /* Werden Subnodes gemerged, so muss beim letzten Node  */
+      /* dieser Node als naechster Index eingetragen werden!  */
+      
+      if (html_merge_node2 && last_n1_index > 0)
+         toc[last_n1_index]->next_index = p1_toc_counter + 1;
+   }
 
-        p1_toc_counter++;
-        toc[p1_toc_counter]= tocptr;
+   /* Der Zeiger auf den Nachfolger muss vom Nachfolger gesetzt werden. */
 
-        if (pflag[PASS1].inside_apx)
-        {       apx_available= TRUE;
-                p1_apx_n1++;
-                p1_apx_n2= 0;
-                p1_apx_n3= 0;
-                p1_apx_n4= 0;
-                p1_apx_n5= 0;
-                tocptr->appendix= TRUE;
-                tocptr->n1= p1_apx_n1;
-                tocptr->n2= p1_apx_n2;
-                tocptr->n3= p1_apx_n3;
-                tocptr->n4= p1_apx_n4;
-                tocptr->n5= p1_apx_n5;
-                if (!invisible)
-                {       p1_apx_nr1++;
-                        p1_apx_nr2= 0;
-                        p1_apx_nr3= 0;
-                        p1_apx_nr4= 0;
-                        p1_apx_nr5= 0;
-                        tocptr->nr1= p1_apx_nr1;
-                        tocptr->nr2= p1_apx_nr2;
-                        tocptr->nr3= p1_apx_nr3;
-                        tocptr->nr4= p1_apx_nr4;
-                        tocptr->nr5= p1_apx_nr5;
-                }
-        }
-        else
-        {       toc_available= TRUE;
-                p1_toc_n1++;
-                p1_toc_n2= 0;
-                p1_toc_n3= 0;
-                p1_toc_n4= 0;
-                p1_toc_n5= 0;
-                tocptr->appendix= FALSE;
-                tocptr->n1= p1_toc_n1;
-                tocptr->n2= p1_toc_n2;
-                tocptr->n3= p1_toc_n3;
-                tocptr->n4= p1_toc_n4;
-                tocptr->n5= p1_toc_n5;
-                if (!invisible)
-                {       p1_toc_nr1++;
-                        p1_toc_nr2= 0;
-                        p1_toc_nr3= 0;
-                        p1_toc_nr4= 0;
-                        p1_toc_nr5= 0;
-                        tocptr->nr1= p1_toc_nr1;
-                        tocptr->nr2= p1_toc_nr2;
-                        tocptr->nr3= p1_toc_nr3;
-                        tocptr->nr4= p1_toc_nr4;
-                        tocptr->nr5= p1_toc_nr5;
-                }
-        }
+   tocptr->next_index = 0;
 
-        if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
-        {       /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
-                /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
-                get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
-        }
+   /* Hilfsvariablen setzen fuer die uebergeordneten Nodes */
 
-        li = add_label(tocptr->name, TRUE, popup);
+   tocptr->up_n1_index = 0;
+   tocptr->up_n2_index = 0;
+   tocptr->up_n3_index = 0;
+   tocptr->up_n4_index = 0;
 
-        if (li>0)                       /* and not li>=0, V6.5.17 [GS] */
-        {       tocptr->labindex= li;
-        }
+   last_n1_index = p1_toc_counter + 1;
+   last_n2_index = 0;
+   last_n3_index = 0;
+   last_n4_index = 0;
+   last_n5_index = 0;
+   
+   /* ---------------------------------------------------- */
+
+   p1_toc_counter++;
+   toc[p1_toc_counter] = tocptr;
+
+   if (pflag[PASS1].inside_apx)
+   {
+      apx_available = TRUE;
+      
+      p1_apx_n1++;
+      p1_apx_n2 = 0;
+      p1_apx_n3 = 0;
+      p1_apx_n4 = 0;
+      p1_apx_n5 = 0;
+      
+      tocptr->appendix = TRUE;
+      
+      tocptr->n1 = p1_apx_n1;
+      tocptr->n2 = p1_apx_n2;
+      tocptr->n3 = p1_apx_n3;
+      tocptr->n4 = p1_apx_n4;
+      tocptr->n5 = p1_apx_n5;
+      
+      if (!invisible)
+      {
+         p1_apx_nr1++;
+         
+         p1_apx_nr2 = 0;
+         p1_apx_nr3 = 0;
+         p1_apx_nr4 = 0;
+         p1_apx_nr5 = 0;
+         
+         tocptr->nr1 = p1_apx_nr1;
+         tocptr->nr2 = p1_apx_nr2;
+         tocptr->nr3 = p1_apx_nr3;
+         tocptr->nr4 = p1_apx_nr4;
+         tocptr->nr5 = p1_apx_nr5;
+      }
+   }
+   else
+   {
+      toc_available = TRUE;
+      p1_toc_n1++;
+      p1_toc_n2 = 0;
+      p1_toc_n3 = 0;
+      p1_toc_n4 = 0;
+      p1_toc_n5 = 0;
+      
+      tocptr->appendix = FALSE;
+      
+      tocptr->n1 = p1_toc_n1;
+      tocptr->n2 = p1_toc_n2;
+      tocptr->n3 = p1_toc_n3;
+      tocptr->n4 = p1_toc_n4;
+      tocptr->n5 = p1_toc_n5;
+      
+      if (!invisible)
+      {
+         p1_toc_nr1++;
+         p1_toc_nr2 = 0;
+         p1_toc_nr3 = 0;
+         p1_toc_nr4 = 0;
+         p1_toc_nr5 = 0;
+         
+         tocptr->nr1 = p1_toc_nr1;
+         tocptr->nr2 = p1_toc_nr2;
+         tocptr->nr3 = p1_toc_nr3;
+         tocptr->nr4 = p1_toc_nr4;
+         tocptr->nr5 = p1_toc_nr5;
+      }
+   }
+
+                                          /* New TOHAH; V6.5.17 */
+   if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
+   {
+      /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
+      /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
+
+      get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
+   }
+
+   li = add_label(tocptr->name, TRUE, popup);
+
+   if (li > 0)                            /* and not li>=0, V6.5.17 [GS] */
+      tocptr->labindex= li;
+
+   return TRUE;    
+}
 
 
-        return TRUE;    
-}       /*add_node_to_toc*/
 
 
 
-GLOBAL BOOLEAN add_subnode_to_toc(const BOOLEAN popup, const BOOLEAN invisible)
+/*******************************************************************************
+*
+*  add_subnode_to_toc():
+*     ???
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN add_subnode_to_toc(
+
+const BOOLEAN   popup,       /* */
+const BOOLEAN   invisible)   /* */
 {
-        TOCITEM *tocptr;
-        int li;
-        int  html_merge;
+   TOCITEM     *tocptr;      /* */
+   int          li;          /* */
+   int          html_merge;  /* */
+   
 
-        if (last_n1_index==0)
-        {       error_node2_not_allowed();
-                return FALSE;
-        }
+   if (last_n1_index == 0)
+   {
+      error_node2_not_allowed();
+      return FALSE;
+   }
 
-        tocptr= init_new_toc_entry (TOC_NODE2, invisible);
+   tocptr = init_new_toc_entry(TOC_NODE2, invisible);
 
-        if (tocptr==NULL)
-        {       return FALSE;
-        }
+   if (tocptr == NULL)
+      return FALSE;
 
-        all_subnodes++;
+   all_subnodes++;
 
-        /* ---------------------------------------------------- */
-        /* r5pl6: Listenartige Verkettung erzeugen                              */
-        /* ---------------------------------------------------- */
-        /* noch ist p1_toc_counter nich inkrementiert worden,   */
-        /* zeigt daher auf den letzten (Sub(Sub))Node                   */
-        /* Bei HTML muss das Mergen beachtet werden!                    */
-        tocptr->prev_index= p1_toc_counter;
+   /* ---------------------------------------------------- */
+   /* r5pl6: Listenartige Verkettung erzeugen              */
+   /* ---------------------------------------------------- */
+   /* noch ist p1_toc_counter nich inkrementiert worden,   */
+   /* zeigt daher auf den letzten (Sub(Sub))Node           */
+   /* Bei HTML muss das Mergen beachtet werden!            */
+   
+   tocptr->prev_index = p1_toc_counter;
 
-        if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
-        {
-                if (html_merge_node5 && last_n4_index>0)
-                {       tocptr->prev_index= last_n4_index;
-                }
-                if (html_merge_node4 && last_n3_index>0)
-                {       tocptr->prev_index= last_n3_index;
-                }
-                if (html_merge_node3 && last_n2_index>0)
-                {       tocptr->prev_index= last_n2_index;
-                }
-                if (html_merge_node2 && last_n1_index>0)
-                {       tocptr->prev_index= last_n1_index;
-                }
-                if (html_merge_node1)
-                {       tocptr->prev_index= 0;
-                }
-        }
+                                          /* New TOHAH; V6.5.17 */
+   if (desttype == TOHTM || desttype == TOHAH)
+   {
+      if (html_merge_node5 && last_n4_index > 0)
+         tocptr->prev_index = last_n4_index;
 
-        /* Den Nachfolger des Vorgaengers setzen, also auf              */
-        /* bzw. bei !html_merge... auf die letzten                              */
+      if (html_merge_node4 && last_n3_index > 0)
+         tocptr->prev_index = last_n3_index;
 
-        toc[p1_toc_counter]->next_index= p1_toc_counter+1;
+      if (html_merge_node3 && last_n2_index > 0)
+         tocptr->prev_index = last_n2_index;
 
-        if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
-        {
-                /* Wenn Subsubsubsubnode gemerged werden, dann muss     */
-                /* beim letzten Subsubnode dieser Subnode als           */
-                /* naechster Index eingetragen werden!                          */
-                if (html_merge_node5 && last_n4_index>0)
-                {       toc[last_n4_index]->next_index= p1_toc_counter+1;
-                }
+      if (html_merge_node2 && last_n1_index > 0)
+         tocptr->prev_index = last_n1_index;
 
-                /* Wenn Subsubsubnode gemerged werden, dann muss        */
-                /* beim letzten Subsubnode dieser Subnode als           */
-                /* naechster Index eingetragen werden!                          */
-                if (html_merge_node4 && last_n3_index>0)
-                {       toc[last_n3_index]->next_index= p1_toc_counter+1;
-                }
+      if (html_merge_node1)
+         tocptr->prev_index = 0;
+   }
 
-                /* Wenn Subsubnodes gemerged werden, dann muss beim     */
-                /* letzten Subnode dieser Subnode als naechster         */
-                /* Index eingetragen werden!                                            */
-                if (html_merge_node3 && last_n2_index>0)
-                {       toc[last_n2_index]->next_index= p1_toc_counter+1;
-                }
-        }
+   /* Den Nachfolger des Vorgaengers setzen, also auf  */
+   /* bzw. bei !html_merge... auf die letzten          */
 
-        /* Der Zeiger auf den Nachfolger muss vom Nachfolger    */
-        /* gesetzt werden.                                                                              */
-        tocptr->next_index= 0;
+   toc[p1_toc_counter]->next_index = p1_toc_counter + 1;
 
-        /* Merken, dass der uebergeordnete Kinder hat */
-        /* und die Anzahl der Subnodes erhoehen */
-        if (last_n1_index>0)
-        {       toc[last_n1_index]->has_children=       TRUE;   /*r6pl5*/
-                toc[last_n1_index]->count_n2++;                         /*r6pl8*/
-        }
+                                          /* New TOHAH; V6.5.17 */
+   if (desttype == TOHTM || desttype == TOHAH)
+   {
+      /* Wenn Subsubsubsubnode gemerged werden, dann muss     */
+      /* beim letzten Subsubnode dieser Subnode als           */
+      /* naechster Index eingetragen werden!                  */
 
-        /* Hilfsvariablen setzen fuer die uebergeordneten Nodes */
-        tocptr->up_n1_index=    last_n1_index;
-        tocptr->up_n2_index=    0;
-        tocptr->up_n3_index=    0;
-        tocptr->up_n4_index=    0;
+      if (html_merge_node5 && last_n4_index > 0)
+         toc[last_n4_index]->next_index = p1_toc_counter + 1;
 
-        last_n2_index=  p1_toc_counter+1;
-        last_n3_index=  0;
-        last_n4_index=  0;
-        last_n5_index=  0;
-        /* ---------------------------------------------------- */
-
-        /* Zaehler hochsetzen und Zeiger in das Array kopieren  */
-        p1_toc_counter++;
-        toc[p1_toc_counter]= tocptr;
-
-        if (pflag[PASS1].inside_apx)
-        {       apx_available= TRUE;
-                p1_apx_n2++;
-                p1_apx_n3= 0;
-                p1_apx_n4= 0;
-                p1_apx_n5= 0;
-                tocptr->appendix= TRUE;
-                tocptr->n1= p1_apx_n1;
-                tocptr->n2= p1_apx_n2;
-                tocptr->n3= p1_apx_n3;
-                tocptr->n4= p1_apx_n4;
-                tocptr->n5= p1_apx_n5;
-                if (!invisible)
-                {       p1_apx_nr2++;
-                        p1_apx_nr3= 0;
-                        p1_apx_nr4= 0;
-                        p1_apx_nr5= 0;
-                        tocptr->nr1= p1_apx_nr1;
-                        tocptr->nr2= p1_apx_nr2;
-                        tocptr->nr3= p1_apx_nr3;
-                        tocptr->nr4= p1_apx_nr4;
-                        tocptr->nr5= p1_apx_nr5;
-                }
-        }
-        else
-        {       toc_available= TRUE;
-                p1_toc_n2++;
-                p1_toc_n3= 0;
-                p1_toc_n4= 0;
-                p1_toc_n5= 0;
-                tocptr->appendix= FALSE;
-                tocptr->n1= p1_toc_n1;
-                tocptr->n2= p1_toc_n2;
-                tocptr->n3= p1_toc_n3;
-                tocptr->n4= p1_toc_n4;
-                tocptr->n5= p1_toc_n5;
-                if (!invisible)
-                {       p1_toc_nr2++;
-                        p1_toc_nr3= 0;
-                        p1_toc_nr4= 0;
-                        p1_toc_nr5= 0;
-                        tocptr->nr1= p1_toc_nr1;
-                        tocptr->nr2= p1_toc_nr2;
-                        tocptr->nr3= p1_toc_nr3;
-                        tocptr->nr4= p1_toc_nr4;
-                        tocptr->nr5= p1_toc_nr5;
-                }
-        }
-
-        if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
-        {       /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
-                /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
-                get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
-        }
-
-        li= add_label(tocptr->name, TRUE, popup);
-
-        if (li>0)                       /* and not li>=0, V6.5.17 [GS] */
-        {       tocptr->labindex= li;
-        }
-
-        return TRUE;    
-
-}       /*add_subnode_to_toc*/
+      /* Wenn Subsubsubnode gemerged werden, dann muss        */
+      /* beim letzten Subsubnode dieser Subnode als           */
+      /* naechster Index eingetragen werden!                  */
+      
+      if (html_merge_node4 && last_n3_index > 0)
+         toc[last_n3_index]->next_index = p1_toc_counter + 1;
 
 
+      /* Wenn Subsubnodes gemerged werden, dann muss beim     */
+      /* letzten Subnode dieser Subnode als naechster         */
+      /* Index eingetragen werden!                            */
+      
+      if (html_merge_node3 && last_n2_index > 0)
+         toc[last_n2_index]->next_index = p1_toc_counter + 1;
+   }
 
-GLOBAL BOOLEAN  add_subsubnode_to_toc(const BOOLEAN popup, const BOOLEAN invisible)
+   /* Der Zeiger auf den Nachfolger muss vom Nachfolger gesetzt werden. */
+   tocptr->next_index = 0;
+
+   /* Merken, dass der uebergeordnete Kinder hat */
+   /* und die Anzahl der Subnodes erhoehen */
+   
+   if (last_n1_index>0)
+   {
+      toc[last_n1_index]->has_children = TRUE;
+      toc[last_n1_index]->count_n2++;
+   }
+
+   /* Hilfsvariablen setzen fuer die uebergeordneten Nodes */
+
+   tocptr->up_n1_index = last_n1_index;
+   tocptr->up_n2_index = 0;
+   tocptr->up_n3_index = 0;
+   tocptr->up_n4_index = 0;
+
+   last_n2_index = p1_toc_counter + 1;
+   last_n3_index = 0;
+   last_n4_index = 0;
+   last_n5_index = 0;
+
+   /* ---------------------------------------------------- */
+
+   /* Zaehler hochsetzen und Zeiger in das Array kopieren  */
+   
+   p1_toc_counter++;
+   toc[p1_toc_counter] = tocptr;
+
+   if (pflag[PASS1].inside_apx)
+   {
+      apx_available = TRUE;
+      
+      p1_apx_n2++;
+      p1_apx_n3 = 0;
+      p1_apx_n4 = 0;
+      p1_apx_n5 = 0;
+      
+      tocptr->appendix = TRUE;
+      
+      tocptr->n1 = p1_apx_n1;
+      tocptr->n2 = p1_apx_n2;
+      tocptr->n3 = p1_apx_n3;
+      tocptr->n4 = p1_apx_n4;
+      tocptr->n5 = p1_apx_n5;
+      
+      if (!invisible)
+      {
+         p1_apx_nr2++;
+         p1_apx_nr3 = 0;
+         p1_apx_nr4 = 0;
+         p1_apx_nr5 = 0;
+         
+         tocptr->nr1 = p1_apx_nr1;
+         tocptr->nr2 = p1_apx_nr2;
+         tocptr->nr3 = p1_apx_nr3;
+         tocptr->nr4 = p1_apx_nr4;
+         tocptr->nr5 = p1_apx_nr5;
+      }
+   }
+   else
+   {
+      toc_available = TRUE;
+      
+      p1_toc_n2++;
+      p1_toc_n3 = 0;
+      p1_toc_n4 = 0;
+      p1_toc_n5 = 0;
+      
+      tocptr->appendix = FALSE;
+      
+      tocptr->n1 = p1_toc_n1;
+      tocptr->n2 = p1_toc_n2;
+      tocptr->n3 = p1_toc_n3;
+      tocptr->n4 = p1_toc_n4;
+      tocptr->n5 = p1_toc_n5;
+
+      if (!invisible)
+      {
+         p1_toc_nr2++;
+         p1_toc_nr3 = 0;
+         p1_toc_nr4 = 0;
+         p1_toc_nr5 = 0;
+         
+         tocptr->nr1 = p1_toc_nr1;
+         tocptr->nr2 = p1_toc_nr2;
+         tocptr->nr3 = p1_toc_nr3;
+         tocptr->nr4 = p1_toc_nr4;
+         tocptr->nr5 = p1_toc_nr5;
+      }
+   }
+
+                                          /* New TOHAH; V6.5.17 */
+   if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
+   {
+      /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
+      /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
+
+      get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
+   }
+
+   li = add_label(tocptr->name, TRUE, popup);
+
+   if (li > 0)                            /* and not li>=0, V6.5.17 [GS] */
+      tocptr->labindex= li;
+
+   return TRUE;    
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  add_subsubnode_to_toc():
+*     ???
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN add_subsubnode_to_toc(
+
+const BOOLEAN   popup,       /* */
+const BOOLEAN   invisible)   /* */
 {
-        TOCITEM *tocptr;
-        int li;
-        int  html_merge;
+   TOCITEM     *tocptr;      /* */
+   int          li;          /* */
+   int          html_merge;  /* */
+   
 
-        if (last_n2_index==0)
-        {       error_node3_not_allowed();
-                return FALSE;
-        }
+   if (last_n2_index == 0)
+   {
+      error_node3_not_allowed();
+      return FALSE;
+   }
 
-        tocptr= init_new_toc_entry (TOC_NODE3, invisible);
+   tocptr = init_new_toc_entry(TOC_NODE3, invisible);
 
-        if (tocptr==NULL)
-        {       return FALSE;
-        }
+   if (tocptr == NULL)
+      return FALSE;
+
+   all_subsubnodes++;
+
+   /* ---------------------------------------------------- */
+   /* r5pl6: Listenartige Verkettung erzeugen              */
+   /* ---------------------------------------------------- */
+   /* noch ist p1_toc_counter nich inkrementiert worden    */
+   /* und zeigt daher auf den letzten (Sub(Sub))Node        */
+   
+   tocptr->prev_index = p1_toc_counter;
+
+                                          /* New TOHAH; V6.5.17 */
+   if (desttype == TOHTM || desttype == TOHAH)
+   {
+      if (html_merge_node5 && last_n4_index > 0)
+         tocptr->prev_index = last_n4_index;
+
+      if (html_merge_node4 && last_n3_index > 0)
+         tocptr->prev_index = last_n3_index;
+
+      if (html_merge_node4 && last_n3_index > 0)
+         tocptr->prev_index = last_n3_index;
+
+      if (html_merge_node3 && last_n2_index > 0)
+         tocptr->prev_index = last_n2_index;
+
+      if (html_merge_node2 && last_n1_index > 0)
+         tocptr->prev_index = last_n1_index;
+
+      if (html_merge_node1)
+         tocptr->prev_index = 0;
+   }
+
+   /* Den Nachfolger des Vorgaengers setzen: auf diesen */
+   
+   toc[p1_toc_counter]->next_index = p1_toc_counter + 1;
+
+   /* Merken, dass der uebergeordnete Kinder hat */
+   /* und die Anzahl der Subsubnodes erhoehen */
+   
+   if (last_n2_index > 0)
+   {
+      toc[last_n2_index]->has_children = TRUE;
+      toc[last_n2_index]->count_n3++;
+   }
+
+                                          /* New TOHAH; V6.5.17 */
+   if (desttype == TOHTM || desttype == TOHAH)
+   {
+      /* Wenn Subsubsubsubnodes gemerged werden, dann muss    */
+      /* beim letzten Subsubnode dieser Subsubnode als        */
+      /* naechster Index eingetragen werden!                  */
+
+      if (html_merge_node5 && last_n4_index > 0)
+         toc[last_n4_index]->next_index = p1_toc_counter + 1;
+
+      /* Wenn Subsubsubnodes gemerged werden, dann muss       */
+      /* beim letzten Subsubnode dieser Subsubnode als        */
+      /* naechster Index eingetragen werden!                  */
+
+      if (html_merge_node4 && last_n3_index > 0)
+         toc[last_n3_index]->next_index = p1_toc_counter + 1;
+   }
+
+   /* Der Zeiger auf den Nachfolger muss vom Nachfolger gesetzt werden. */
+   
+   tocptr->next_index = 0;
+
+   /* Hilfsvariablen setzen fuer die uebergeordneten Nodes */
+   
+   tocptr->up_n1_index = last_n1_index;
+   tocptr->up_n2_index = last_n2_index;
+   tocptr->up_n3_index = 0;
+   tocptr->up_n4_index = 0;
+
+   last_n3_index = p1_toc_counter + 1;
+   last_n4_index = 0;
+   last_n5_index = 0;
+   
+   /* ---------------------------------------------------- */
+
+   p1_toc_counter++;
+   toc[p1_toc_counter] = tocptr;
+
+   if (pflag[PASS1].inside_apx)
+   {
+      apx_available = TRUE;
+      p1_apx_n3++;
+      p1_apx_n4 = 0;
+      p1_apx_n5 = 0;
+      
+      tocptr->appendix = TRUE;
+      
+      tocptr->n1 = p1_apx_n1;
+      tocptr->n2 = p1_apx_n2;
+      tocptr->n3 = p1_apx_n3;
+      tocptr->n4 = p1_apx_n4;
+      tocptr->n5 = p1_apx_n5;
+
+      if (!invisible)
+      {
+         p1_apx_nr3++;
+         p1_apx_nr4 = 0;
+         p1_apx_nr5 = 0;
+         
+         tocptr->nr1 = p1_apx_nr1;
+         tocptr->nr2 = p1_apx_nr2;
+         tocptr->nr3 = p1_apx_nr3;
+         tocptr->nr4 = p1_apx_nr4;
+         tocptr->nr5 = p1_apx_nr5;
+      }
+   }
+   else
+   {
+      toc_available = TRUE;
+      
+      p1_toc_n3++;
+      p1_toc_n4 = 0;
+      p1_toc_n5 = 0;
+      
+      tocptr->appendix = FALSE;
+      
+      tocptr->n1 = p1_toc_n1;
+      tocptr->n2 = p1_toc_n2;
+      tocptr->n3 = p1_toc_n3;
+      tocptr->n4 = p1_toc_n4;
+      tocptr->n5 = p1_toc_n5;
+
+      {
+         p1_toc_nr3++;
+         p1_toc_nr4 = 0;
+         p1_toc_nr5 = 0;
+         
+         tocptr->nr1 = p1_toc_nr1;
+         tocptr->nr2 = p1_toc_nr2;
+         tocptr->nr3 = p1_toc_nr3;
+         tocptr->nr4 = p1_toc_nr4;
+         tocptr->nr5 = p1_toc_nr5;
+      }
+   }
+
+                                          /* New TOHAH; V6.5.17 */
+   if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
+   {
+      /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
+      /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
+      
+      get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
+   }
+
+   li = add_label(tocptr->name, TRUE, popup);
+
+   if (li > 0)
+      tocptr->labindex = li;
+      
+   return TRUE;
+}
 
 
-        all_subsubnodes++;
-
-        /* ---------------------------------------------------- */
-        /* r5pl6: Listenartige Verkettung erzeugen                              */
-        /* ---------------------------------------------------- */
-        /* noch ist p1_toc_counter nich inkrementiert worden und        */
-        /* zeigt daher auf den letzten (Sub(Sub))Node                   */
-        tocptr->prev_index= p1_toc_counter;
-
-        if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
-        {
-                if (html_merge_node5 && last_n4_index>0)
-                {       tocptr->prev_index= last_n4_index;
-                }
-                if (html_merge_node4 && last_n3_index>0)
-                {       tocptr->prev_index= last_n3_index;
-                }
-                if (html_merge_node4 && last_n3_index>0)
-                {       tocptr->prev_index= last_n3_index;
-                }
-                if (html_merge_node3 && last_n2_index>0)
-                {       tocptr->prev_index= last_n2_index;
-                }
-                if (html_merge_node2 && last_n1_index>0)
-                {       tocptr->prev_index= last_n1_index;
-                }
-                if (html_merge_node1)
-                {       tocptr->prev_index= 0;
-                }
-        }
-
-        /* Den Nachfolger des Vorgaengers setzen: auf diesen    */
-        toc[p1_toc_counter]->next_index= p1_toc_counter+1;
-
-        /* Merken, dass der uebergeordnete Kinder hat */
-        /* und die Anzahl der Subsubnodes erhoehen */
-        if (last_n2_index>0)
-        {       toc[last_n2_index]->has_children=       TRUE;   /*r6pl5*/
-                toc[last_n2_index]->count_n3++;                         /*r6pl8*/
-        }
-
-        if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
-        {
-                /* Wenn Subsubsubsubnodes gemerged werden, dann muss    */
-                /* beim letzten Subsubnode dieser Subsubnode als        */
-                /* naechster Index eingetragen werden!                          */
-                if (html_merge_node5 && last_n4_index>0)
-                {       toc[last_n4_index]->next_index= p1_toc_counter+1;
-                }
-
-                /* Wenn Subsubsubnodes gemerged werden, dann muss       */
-                /* beim letzten Subsubnode dieser Subsubnode als        */
-                /* naechster Index eingetragen werden!                          */
-                if (html_merge_node4 && last_n3_index>0)
-                {       toc[last_n3_index]->next_index= p1_toc_counter+1;
-                }
-        }
-
-        /* Der Zeiger auf den Nachfolger muss vom Nachfolger    */
-        /* gesetzt werden.                                                                              */
-        tocptr->next_index= 0;
-
-        /* Hilfsvariablen setzen fuer die uebergeordneten Nodes */
-        tocptr->up_n1_index=    last_n1_index;
-        tocptr->up_n2_index=    last_n2_index;
-        tocptr->up_n3_index=    0;
-        tocptr->up_n4_index=    0;
-
-        last_n3_index= p1_toc_counter+1;
-        last_n4_index= 0;
-        last_n5_index= 0;
-        /* ---------------------------------------------------- */
-
-        p1_toc_counter++;
-        toc[p1_toc_counter]= tocptr;
-
-        if (pflag[PASS1].inside_apx)
-        {       apx_available= TRUE;
-                p1_apx_n3++;
-                p1_apx_n4= 0;
-                p1_apx_n5= 0;
-                tocptr->appendix= TRUE;
-                tocptr->n1= p1_apx_n1;
-                tocptr->n2= p1_apx_n2;
-                tocptr->n3= p1_apx_n3;
-                tocptr->n4= p1_apx_n4;
-                tocptr->n5= p1_apx_n5;
-                if (!invisible)
-                {       p1_apx_nr3++;
-                        p1_apx_nr4= 0;
-                        p1_apx_nr5= 0;
-                        tocptr->nr1= p1_apx_nr1;
-                        tocptr->nr2= p1_apx_nr2;
-                        tocptr->nr3= p1_apx_nr3;
-                        tocptr->nr4= p1_apx_nr4;
-                        tocptr->nr5= p1_apx_nr5;
-                }
-        }
-        else
-        {       toc_available= TRUE;
-                p1_toc_n3++;
-                p1_toc_n4= 0;
-                p1_toc_n5= 0;
-                tocptr->appendix= FALSE;
-                tocptr->n1= p1_toc_n1;
-                tocptr->n2= p1_toc_n2;
-                tocptr->n3= p1_toc_n3;
-                tocptr->n4= p1_toc_n4;
-                tocptr->n5= p1_toc_n5;
-                {       p1_toc_nr3++;
-                        p1_toc_nr4= 0;
-                        p1_toc_nr5= 0;
-                        tocptr->nr1= p1_toc_nr1;
-                        tocptr->nr2= p1_toc_nr2;
-                        tocptr->nr3= p1_toc_nr3;
-                        tocptr->nr4= p1_toc_nr4;
-                        tocptr->nr5= p1_toc_nr5;
-                }
-        }
-
-        if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
-        {       /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
-                /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
-                get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
-        }
-
-        li= add_label(tocptr->name, TRUE, popup);
-
-        if (li>0)                       /* and not li>=0, V6.5.17 [GS] */
-        {       tocptr->labindex= li;
-        }
-
-        return TRUE;
-}       /*add_subsubnode_to_toc*/
 
 
 
-GLOBAL BOOLEAN  add_subsubsubnode_to_toc(const BOOLEAN popup, const BOOLEAN invisible)
+/*******************************************************************************
+*
+*  add_subsubsubnode_to_toc():
+*     ???
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN  add_subsubsubnode_to_toc(
+
+const BOOLEAN   popup,       /* */
+const BOOLEAN   invisible)   /* */
 {
-        TOCITEM *tocptr;
-        int li;
-        int  html_merge;
+   TOCITEM     *tocptr;      /* */
+   int          li;          /* */
+   int          html_merge;  /* */
+   
+   
+   if (last_n3_index == 0)
+   {
+      error_node4_not_allowed();
+      return FALSE;
+   }
 
-        if (last_n3_index==0)
-        {       error_node4_not_allowed();
-                return FALSE;
-        }
+   tocptr = init_new_toc_entry(TOC_NODE4, invisible);
 
-        tocptr= init_new_toc_entry (TOC_NODE4, invisible);
+   if (tocptr == NULL)
+      return FALSE;
 
-        if (tocptr==NULL)
-        {       return FALSE;
-        }
+   all_subsubsubnodes++;
 
-        all_subsubsubnodes++;
+   /* ---------------------------------------------------- */
+   /* r5pl6: Listenartige Verkettung erzeugen              */
+   /* ---------------------------------------------------- */
+   /* noch ist p1_toc_counter nicht inkrementiert worden   */
+   /* und zeigt daher auf den letzten (Sub(Sub))Node       */
+   
+   tocptr->prev_index = p1_toc_counter;
 
-        /* ---------------------------------------------------- */
-        /* r5pl6: Listenartige Verkettung erzeugen                              */
-        /* ---------------------------------------------------- */
-        /* noch ist p1_toc_counter nicht inkrementiert worden   */
-        /* und zeigt daher auf den letzten (Sub(Sub))Node               */
-        tocptr->prev_index= p1_toc_counter;
+                                          /* New TOHAH; V6.5.17 */
+   if (desttype == TOHTM || desttype == TOHAH)
+   {
+      if (html_merge_node5 && last_n4_index > 0)
+         tocptr->prev_index = last_n4_index;
+      
+      if (html_merge_node4 && last_n3_index > 0)
+         tocptr->prev_index = last_n3_index;
+      
+      if (html_merge_node3 && last_n2_index > 0)
+         tocptr->prev_index = last_n2_index;
+      
+      if (html_merge_node2 && last_n1_index > 0)
+         tocptr->prev_index = last_n1_index;
+      
+      if (html_merge_node1)
+         tocptr->prev_index = 0;
+      
+   }
 
-        if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
-        {
-                if (html_merge_node5 && last_n4_index>0)
-                {       tocptr->prev_index= last_n4_index;
-                }
-                if (html_merge_node4 && last_n3_index>0)
-                {       tocptr->prev_index= last_n3_index;
-                }
-                if (html_merge_node3 && last_n2_index>0)
-                {       tocptr->prev_index= last_n2_index;
-                }
-                if (html_merge_node2 && last_n1_index>0)
-                {       tocptr->prev_index= last_n1_index;
-                }
-                if (html_merge_node1)
-                {       tocptr->prev_index= 0;
-                }
-        }
+   /* Den Nachfolger des Vorgaengers setzen: auf diesen    */
+   toc[p1_toc_counter]->next_index= p1_toc_counter+1;
 
-        /* Den Nachfolger des Vorgaengers setzen: auf diesen    */
-        toc[p1_toc_counter]->next_index= p1_toc_counter+1;
+   /* Merken, dass der uebergeordnete Kinder hat */
+   /* und die Anzahl der Subsubsubnodes erhoehen */
+   
+   if (last_n3_index>0)
+   {
+      toc[last_n3_index]->has_children = TRUE;
+      toc[last_n3_index]->count_n4++;
+   }
 
-        /* Merken, dass der uebergeordnete Kinder hat */
-        /* und die Anzahl der Subsubsubnodes erhoehen */
-        if (last_n3_index>0)
-        {       toc[last_n3_index]->has_children=       TRUE;   /*r6pl5*/
-                toc[last_n3_index]->count_n4++;                         /*r6pl8*/
-        }
+   /* Der Zeiger auf den Nachfolger muss vom Nachfolger gesetzt werden. */
 
-        /* Der Zeiger auf den Nachfolger muss vom Nachfolger    */
-        /* gesetzt werden.                                                                              */
-        tocptr->next_index= 0;
+   tocptr->next_index = 0;
 
-        /* Hilfsvariablen setzen fuer die uebergeordneten Nodes */
-        tocptr->up_n1_index= last_n1_index;
-        tocptr->up_n2_index= last_n2_index;
-        tocptr->up_n3_index= last_n3_index;
-        tocptr->up_n4_index= 0;
+   /* Hilfsvariablen setzen fuer die uebergeordneten Nodes */
+   
+   tocptr->up_n1_index = last_n1_index;
+   tocptr->up_n2_index = last_n2_index;
+   tocptr->up_n3_index = last_n3_index;
+   tocptr->up_n4_index = 0;
 
-        last_n4_index= p1_toc_counter+1;
-        last_n5_index= 0;
-        /* ---------------------------------------------------- */
+   last_n4_index = p1_toc_counter + 1;
+   last_n5_index = 0;
+   
+   /* ---------------------------------------------------- */
 
-        p1_toc_counter++;
-        toc[p1_toc_counter]= tocptr;
+   p1_toc_counter++;
+   toc[p1_toc_counter] = tocptr;
 
-        if (pflag[PASS1].inside_apx)
-        {       apx_available= TRUE;
-                p1_apx_n4++;
-                p1_apx_n5= 0;
-                tocptr->appendix= TRUE;
-                tocptr->n1= p1_apx_n1;
-                tocptr->n2= p1_apx_n2;
-                tocptr->n3= p1_apx_n3;
-                tocptr->n4= p1_apx_n4;
-                tocptr->n5= p1_apx_n5;
-                if (!invisible)
-                {       p1_apx_nr4++;
-                        p1_apx_nr5= 0;
-                        tocptr->nr1= p1_apx_nr1;
-                        tocptr->nr2= p1_apx_nr2;
-                        tocptr->nr3= p1_apx_nr3;
-                        tocptr->nr4= p1_apx_nr4;
-                        tocptr->nr5= p1_apx_nr5;
-                }
-        }
-        else
-        {       toc_available= TRUE;
-                p1_toc_n4++;
-                p1_toc_n5= 0;
-                tocptr->appendix= FALSE;
-                tocptr->n1= p1_toc_n1;
-                tocptr->n2= p1_toc_n2;
-                tocptr->n3= p1_toc_n3;
-                tocptr->n4= p1_toc_n4;
-                tocptr->n5= p1_toc_n5;
-                {       p1_toc_nr4++;
-                        p1_toc_nr5= 0;
-                        tocptr->nr1= p1_toc_nr1;
-                        tocptr->nr2= p1_toc_nr2;
-                        tocptr->nr3= p1_toc_nr3;
-                        tocptr->nr4= p1_toc_nr4;
-                        tocptr->nr5= p1_toc_nr5;
-                }
-        }
+   if (pflag[PASS1].inside_apx)
+   {
+      apx_available = TRUE;
+      p1_apx_n4++;
+      p1_apx_n5 = 0;
+      tocptr->appendix = TRUE;
+      
+      tocptr->n1 = p1_apx_n1;
+      tocptr->n2 = p1_apx_n2;
+      tocptr->n3 = p1_apx_n3;
+      tocptr->n4 = p1_apx_n4;
+      tocptr->n5 = p1_apx_n5;
+      
+      if (!invisible)
+      {
+         p1_apx_nr4++;
+         p1_apx_nr5 = 0;
+         
+         tocptr->nr1 = p1_apx_nr1;
+         tocptr->nr2 = p1_apx_nr2;
+         tocptr->nr3 = p1_apx_nr3;
+         tocptr->nr4 = p1_apx_nr4;
+         tocptr->nr5 = p1_apx_nr5;
+      }
+   }
+   else
+   {
+      toc_available = TRUE;
+      p1_toc_n4++;
+      p1_toc_n5 = 0;
+      tocptr->appendix = FALSE;
+      
+      tocptr->n1 = p1_toc_n1;
+      tocptr->n2 = p1_toc_n2;
+      tocptr->n3 = p1_toc_n3;
+      tocptr->n4 = p1_toc_n4;
+      tocptr->n5 = p1_toc_n5;
+      
+      {
+         p1_toc_nr4++;
+         p1_toc_nr5 = 0;
+         
+         tocptr->nr1 = p1_toc_nr1;
+         tocptr->nr2 = p1_toc_nr2;
+         tocptr->nr3 = p1_toc_nr3;
+         tocptr->nr4 = p1_toc_nr4;
+         tocptr->nr5 = p1_toc_nr5;
+      }
+   }
 
-        if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
-        {       /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
-                /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
-                get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
-        }
+                                          /* New TOHAH; V6.5.17 */
+   if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
+   {
+      /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
+      /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
+      
+      get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
+   }
 
-        li= add_label(tocptr->name, TRUE, popup);
+   li = add_label(tocptr->name, TRUE, popup);
 
-        if (li>=0)
-        {       tocptr->labindex= li;
-        }
+   if (li >= 0)
+      tocptr->labindex = li;
 
-        return TRUE;
-}       /*add_subsubsubnode_to_toc*/
+   return TRUE;
+}
 
 
 
-GLOBAL BOOLEAN  add_subsubsubsubnode_to_toc(const BOOLEAN popup, const BOOLEAN invisible)
+
+
+/*******************************************************************************
+*
+*  add_subsubsubsubnode_to_toc():
+*     ???
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN add_subsubsubsubnode_to_toc(
+
+const BOOLEAN   popup,       /* */
+const BOOLEAN   invisible)   /* */
 {
-        TOCITEM *tocptr;
-        int li;
-        int  html_merge;
+   TOCITEM     *tocptr;      /* */
+   int          li;          /* */
+   int          html_merge;  /* */
+   
+   
+   if (last_n4_index == 0)
+   {
+      error_node5_not_allowed();
+      return FALSE;
+   }
 
-        if (last_n4_index==0)
-        {       error_node5_not_allowed();
-                return FALSE;
-        }
+   tocptr = init_new_toc_entry(TOC_NODE5, invisible);
 
-        tocptr= init_new_toc_entry (TOC_NODE5, invisible);
+   if (tocptr == NULL)
+      return FALSE;
 
-        if (tocptr==NULL)
-        {       return FALSE;
-        }
+   all_subsubsubsubnodes++;
 
-        all_subsubsubsubnodes++;
+   called_subsubsubsubnode = TRUE;        /* r5pl6 */
 
-        called_subsubsubsubnode= TRUE;          /* r5pl6 */
+   /* ---------------------------------------------------- */
+   /* r5pl6: Listenartige Verkettung erzeugen              */
+   /* ---------------------------------------------------- */
+   /* noch ist p1_toc_counter nicht inkrementiert worden   */
+   /* und zeigt daher auf den letzten (Sub(Sub))Node       */
 
-        /* ---------------------------------------------------- */
-        /* r5pl6: Listenartige Verkettung erzeugen                              */
-        /* ---------------------------------------------------- */
-        /* noch ist p1_toc_counter nicht inkrementiert worden   */
-        /* und zeigt daher auf den letzten (Sub(Sub))Node               */
-        tocptr->prev_index= p1_toc_counter;
+   tocptr->prev_index = p1_toc_counter;
 
-        if (desttype==TOHTM || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
-        {
-                if (html_merge_node5 && last_n4_index>0)
-                {       tocptr->prev_index= last_n4_index;
-                }
-                if (html_merge_node4 && last_n3_index>0)
-                {       tocptr->prev_index= last_n3_index;
-                }
-                if (html_merge_node3 && last_n2_index>0)
-                {       tocptr->prev_index= last_n2_index;
-                }
-                if (html_merge_node2 && last_n1_index>0)
-                {       tocptr->prev_index= last_n1_index;
-                }
-                if (html_merge_node1)
-                {       tocptr->prev_index= 0;
-                }
-        }
+                                          /* New TOHAH; V6.5.17 */
+   if (desttype == TOHTM || desttype == TOHAH)
+   {
+      if (html_merge_node5 && last_n4_index > 0)
+         tocptr->prev_index = last_n4_index;
 
-        /* Den Nachfolger des Vorgaengers setzen: auf diesen    */
-        toc[p1_toc_counter]->next_index= p1_toc_counter+1;
+      if (html_merge_node4 && last_n3_index > 0)
+         tocptr->prev_index = last_n3_index;
 
-        /* Merken, dass der uebergeordnete Kinder hat */
-        /* und die Anzahl der Subsubsubnodes erhoehen */
-        if (last_n4_index>0)
-        {       toc[last_n4_index]->has_children=       TRUE;   /*r6pl5*/
-                toc[last_n4_index]->count_n5++;                         /*r6pl8*/
-        }
+      if (html_merge_node3 && last_n2_index > 0)
+         tocptr->prev_index = last_n2_index;
 
-        /* Der Zeiger auf den Nachfolger muss vom Nachfolger    */
-        /* gesetzt werden.                                                                              */
-        tocptr->next_index= 0;
+      if (html_merge_node2 && last_n1_index > 0)
+         tocptr->prev_index = last_n1_index;
 
-        /* Hilfsvariablen setzen fuer die uebergeordneten Nodes */
-        tocptr->up_n1_index= last_n1_index;
-        tocptr->up_n2_index= last_n2_index;
-        tocptr->up_n3_index= last_n3_index;
-        tocptr->up_n4_index= last_n4_index;
+      if (html_merge_node1)
+         tocptr->prev_index = 0;
 
-        last_n5_index= p1_toc_counter+1;
-        /* ---------------------------------------------------- */
+   }
 
-        p1_toc_counter++;
-        toc[p1_toc_counter]= tocptr;
+   /* Den Nachfolger des Vorgaengers setzen: auf diesen    */
+   
+   toc[p1_toc_counter]->next_index = p1_toc_counter + 1;
 
-        if (pflag[PASS1].inside_apx)
-        {       apx_available= TRUE;
-                p1_apx_n5++;
-                tocptr->appendix= TRUE;
-                tocptr->n1= p1_apx_n1;
-                tocptr->n2= p1_apx_n2;
-                tocptr->n3= p1_apx_n3;
-                tocptr->n4= p1_apx_n4;
-                tocptr->n5= p1_apx_n5;
-                if (!invisible)
-                {       p1_apx_nr5++;
-                        tocptr->nr1= p1_apx_nr1;
-                        tocptr->nr2= p1_apx_nr2;
-                        tocptr->nr3= p1_apx_nr3;
-                        tocptr->nr4= p1_apx_nr4;
-                        tocptr->nr5= p1_apx_nr5;
-                }
-        }
-        else
-        {       toc_available= TRUE;
-                p1_toc_n5++;
-                tocptr->appendix= FALSE;
-                tocptr->n1= p1_toc_n1;
-                tocptr->n2= p1_toc_n2;
-                tocptr->n3= p1_toc_n3;
-                tocptr->n4= p1_toc_n4;
-                tocptr->n5= p1_toc_n5;
-                {       p1_toc_nr5++;
-                        tocptr->nr1= p1_toc_nr1;
-                        tocptr->nr2= p1_toc_nr2;
-                        tocptr->nr3= p1_toc_nr3;
-                        tocptr->nr4= p1_toc_nr4;
-                        tocptr->nr5= p1_toc_nr5;
-                }
-        }
+   /* Merken, dass der uebergeordnete Kinder hat */
+   /* und die Anzahl der Subsubsubnodes erhoehen */
+   
+   if (last_n4_index > 0)
+   {
+      toc[last_n4_index]->has_children = TRUE;
+      toc[last_n4_index]->count_n5++;
+   }
 
-        if (desttype==TOHTM || desttype==TOMHH || desttype==TOHAH ) /* New TOHAH; V6.5.17 */
-        {       /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
-                /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
-                get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
-        }
+   /* Der Zeiger auf den Nachfolger muss vom Nachfolger gesetzt werden. */
+   
+   tocptr->next_index = 0;
 
-        li= add_label(tocptr->name, TRUE, popup);
+   /* Hilfsvariablen setzen fuer die uebergeordneten Nodes */
+   
+   tocptr->up_n1_index = last_n1_index;
+   tocptr->up_n2_index = last_n2_index;
+   tocptr->up_n3_index = last_n3_index;
+   tocptr->up_n4_index = last_n4_index;
 
-        if (li>=0)
-        {       tocptr->labindex= li;
-        }
+   last_n5_index = p1_toc_counter + 1;
+   
+   /* ---------------------------------------------------- */
 
-        return TRUE;
-}       /*add_subsubsubsubnode_to_toc*/
+   p1_toc_counter++;
+   toc[p1_toc_counter] = tocptr;
+
+   if (pflag[PASS1].inside_apx)
+   {
+      apx_available = TRUE;
+      p1_apx_n5++;
+
+      tocptr->appendix = TRUE;
+      
+      tocptr->n1 = p1_apx_n1;
+      tocptr->n2 = p1_apx_n2;
+      tocptr->n3 = p1_apx_n3;
+      tocptr->n4 = p1_apx_n4;
+      tocptr->n5 = p1_apx_n5;
+
+      if (!invisible)
+      {
+         p1_apx_nr5++;
+         
+         tocptr->nr1 = p1_apx_nr1;
+         tocptr->nr2 = p1_apx_nr2;
+         tocptr->nr3 = p1_apx_nr3;
+         tocptr->nr4 = p1_apx_nr4;
+         tocptr->nr5 = p1_apx_nr5;
+      }
+   }
+   else
+   {
+      toc_available = TRUE;
+      p1_toc_n5++;
+      
+      tocptr->appendix = FALSE;
+      
+      tocptr->n1 = p1_toc_n1;
+      tocptr->n2 = p1_toc_n2;
+      tocptr->n3 = p1_toc_n3;
+      tocptr->n4 = p1_toc_n4;
+      tocptr->n5 = p1_toc_n5;
+
+      {
+         p1_toc_nr5++;
+         
+         tocptr->nr1 = p1_toc_nr1;
+         tocptr->nr2 = p1_toc_nr2;
+         tocptr->nr3 = p1_toc_nr3;
+         tocptr->nr4 = p1_toc_nr4;
+         tocptr->nr5 = p1_toc_nr5;
+      }
+   }
+
+                                          /* New TOHAH; V6.5.17 */
+   if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
+   {
+      /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
+      /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
+      
+      get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
+   }
+
+   li = add_label(tocptr->name, TRUE, popup);
+
+   if (li >= 0)
+      tocptr->labindex = li;
+
+   return TRUE;
+}
 
 
 
@@ -16737,312 +16929,456 @@ GLOBAL void toc_end_node(void)
 
 
 
-GLOBAL int is_current_node(int tocindex)
+/*******************************************************************************
+*
+*  is_current_node():
+*     ??? (description missing)
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
+
+GLOBAL int is_current_node(
+
+int   tocindex)  /* */
 {
-        return tocindex == p2_toc_counter;
+   return tocindex == p2_toc_counter;
 }
 
+
+
+
+
+/*******************************************************************************
+*
+*  get_toc_counter():
+*     ??? (description missing)
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
 
 GLOBAL int get_toc_counter(void)
 {
-        return p2_toc_counter;
+   return p2_toc_counter;
 }
 
-/*      ############################################################
-        #
-        #       Dateien mit den Jump-IDs ausgeben fuer C und Pascal
-        #
-        ############################################################    */
-typedef struct _tWinMapData
+/*
+   ############################################################
+   #
+   #       Dateien mit den Jump-IDs ausgeben fuer C und Pascal
+   #
+   ############################################################
+*/
+
+/*******************************************************************************
+*
+*  save_the_alias():
+*     ??? (description missing)
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
+
+LOCAL BOOLEAN save_the_alias(
+
+const char       *filename,  /* */
+const char       *suffix,    /* */
+tWinMapData      *data)      /* */
 {
-        char remOn[16], remOff[16];
-        char cmd[32];                                   /* #define                      const           */
-        char varOp[16];                                 /*                       =                       */
-        char hexPre[16], hexSuf[16];    /* 0x                           $                       */
-        char compiler[32];                              /* C, Pascal, Visual-Basic, ... */
-}       tWinMapData;
+   register int   i;         /* */
+   int            map;       /* */
+   char           hid[256],  /* */
+                  f[512];    /* */
+   FILE          *file;      /* */
+   
+   
+   strcpy(f, filename);
+   strcat(f, suffix);
 
+   file = fopen(f, "w");
+   
+   if (!file)
+      return FALSE;
 
-LOCAL BOOLEAN save_the_alias(const char *filename, const char *suffix, tWinMapData *data)
-{
-        register int i;
-        int map;
-        char hid[256], f[512];
-        FILE *file;
+   if (file != NULL)
+      setvbuf(file, NULL, _IOFBF, 8192);
 
-        strcpy(f, filename);
-        strcat(f, suffix);
+   save_upr_entry_outfile(f);
 
-        file= fopen(f, "w");
-        if (!file)
-        {       return FALSE;
-        }
+   fprintf(file, "%s Alias-Datei for %s, made with UDO%s %s\n\n",
+      data->remOn, 
+      old_outfile.full, 
+      UDO_REL, 
+      data->remOff);
 
-        if ( file!=NULL)
+   for (i = 0; i <= p1_toc_counter; i++)
+   {
+      hid[0] = EOS;
 
-                setvbuf(file, NULL, _IOFBF, 8192);
+      if (toc[i]->helpid!=NULL)
+      {
+         strcpy(hid, toc[i]->helpid);
+      }
+      else
+      {
+         if (use_auto_helpids)
+         {
+            node2WinAutoID(hid, toc[i]->name);
+         }
+      }
 
+      map = -1;
 
-        save_upr_entry_outfile(f);
+      if (toc[i]->mapping >= 0)
+         map = toc[i]->mapping;
 
-        fprintf(file, "%s Alias-Datei for %s, made with UDO%s %s\n\n",
-                data->remOn, old_outfile.full, UDO_REL, data->remOff);
+      if (hid[0] != EOS || map >= 0 || desttype == TOWH4)
+      {
+         if (hid[0]==EOS)
+         {
+            node2NrWinhelp(hid, toc[i]->labindex);
+         }
 
-        for (i=0; i<=p1_toc_counter; i++)
-        {
-                hid[0]= EOS;
+         strinsert(hid, sDocWinPrefixID);
 
-                if (toc[i]->helpid!=NULL)
-                {       strcpy(hid, toc[i]->helpid);
-                }
-                else
-                {
-                        if (use_auto_helpids)
-                        {
-                                node2WinAutoID(hid, toc[i]->name);
-                        }
-                }
+         if (map < 0)
+            map = 0x1000 + i;
 
-                map= -1;
+         fprintf(file, "%-*s =%s%s ; %s\n",
+            MAX_HELPID_LEN + 1,
+            hid,
+            toc[i]->filename,
+            outfile.suff,
+            toc[i]->name);
+      }
+   }
 
-                if (toc[i]->mapping>=0)
-                {       map= toc[i]->mapping;
-                }
+   fclose(file);
 
-                if (hid[0]!=EOS || map>=0 || desttype==TOWH4)
-                {
-                        if (hid[0]==EOS)
-                        {
-                                node2NrWinhelp(hid, toc[i]->labindex);
-                        }
-
-                        strinsert(hid, sDocWinPrefixID);
-
-                        if (map<0)
-                        {       map= 0x1000+i;
-                        }
-
-                        fprintf(file, "%-*s =%s%s ; %s\n",
-                                                MAX_HELPID_LEN+1,
-                                                hid,
-                                                toc[i]->filename,
-                                                outfile.suff,
-                                                toc[i]->name
-                               );
-                }
-        }
-
-        fclose(file);
-
-        return TRUE;    
+   return TRUE;    
 }
+
+
+
+
+
+/*******************************************************************************
+*
+*  save_htmlhelp_alias():
+*     ??? (description missing)
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
 
 GLOBAL BOOLEAN save_htmlhelp_alias(void)
 {
-        tWinMapData data;
-        BOOLEAN flag;
+   tWinMapData   data;  /* */
+   BOOLEAN       flag;  /* */
+   
+   
+   memset(&data, 0, sizeof(data));
+   strcpy(data.remOn,  "/*");
+   strcpy(data.remOff, "*/");
 
-        memset(&data, 0, sizeof(data));
-        strcpy(data.remOn, "/*");
-        strcpy(data.remOff, "*/");
+   flag = save_the_alias(sMapNoSuff, ".hha", &data);
 
-        flag= save_the_alias (sMapNoSuff, ".hha", &data);
-
-        return flag;
-}       /* save_htmlhelp_alias */
-
-
-LOCAL BOOLEAN save_the_map(const char *filename, const char *suffix, tWinMapData *data)
-{
-        register int i;
-        int map;
-        char hid[256], f[512];
-        FILE *file;
-
-        strcpy(f, filename);
-        strcat(f, suffix);
-
-        file= fopen(f, "w");
-        if (!file)
-        {       return FALSE;
-        }
-        /* v6.9.10 [me] Einen Puffer zur Beschleunigung zuordnen */
-
-        if ( file!=NULL)
-
-                setvbuf(file, NULL, _IOFBF, 8192);
-
-
-        save_upr_entry_outfile(f);
-
-        fprintf(file, "%s mapping of %s for %s, made with UDO%s %s\n\n",
-                data->remOn, outfile.full, data->compiler, UDO_REL, data->remOff);
-
-        for (i=0; i<=p1_toc_counter; i++)
-        {
-                hid[0]= EOS;
-
-                if (toc[i]->helpid!=NULL)
-                {       strcpy(hid, toc[i]->helpid);
-                }
-                else
-                {
-                        if (use_auto_helpids)
-                        {
-                                node2WinAutoID(hid, toc[i]->name);
-                        }
-                }
-
-                map= -1;
-
-                if (toc[i]->mapping>=0)
-                {       map= toc[i]->mapping;
-                }
-
-                if (hid[0]!=EOS || map>=0 || desttype==TOWH4)
-                {
-                        if (hid[0]==EOS)
-                        {
-/* V6.5.20 [CS] */
-                                node2WinAutoID(hid, toc[i]->name);
-/* old:
-                                node2NrWinhelp(hid, toc[i]->labindex);
-*/
-                        }
-
-                        strinsert(hid, sDocWinPrefixID);
-
-                        if (map<0)
-                        {       map= 0x1000+i;
-                        }
-
-/* V6.5.20 [CS]
-                        Fuer htmlhelp eine Datei mit C-Makros erzeugen, ueber welche 
-                        dann eine Map vom Titel auf den Knoten (html-Dateinamen) 
-                        gebildet werden kann.
-                Z.B. X("Formatierung","004006.html")
-*/
-                        fprintf(file, "X(\"%s\",\"%s%s\")\n",
-                                toc[i]->name,
-                                toc[i]->filename,
-                                outfile.suff
-                       );
-
-/* old:
-                        fprintf(file, "%s %-*s%s\t%s%04X%s\t%s %s %s\n",
-                                                data->cmd,
-                                                MAX_HELPID_LEN+1,
-                                                hid,
-                                                data->varOp,
-                                                data->hexPre,
-                                                map,
-                                                data->hexSuf,
-                                                data->remOn,
-                                                toc[i]->name,
-                                                data->remOff
-                               );
-*/
-                }
-        }
-
-        fclose(file);
-
-        return TRUE;    
+   return flag;
 }
+
+
+
+
+
+/*******************************************************************************
+*
+*  save_the_map():
+*     ??? (description missing)
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
+
+LOCAL BOOLEAN save_the_map(
+
+const char       *filename, 
+const char       *suffix, 
+tWinMapData      *data)
+{
+   register int   i;
+   int            map;
+   char           hid[256], 
+                  f[512];
+   FILE          *file;
+   
+   
+   strcpy(f, filename);
+   strcat(f, suffix);
+
+   file = fopen(f, "w");
+   
+   if (!file)
+   {
+      return FALSE;
+   }
+
+   /* v6.9.10 [me] Einen Puffer zur Beschleunigung zuordnen */
+
+   if (file != NULL)
+      setvbuf(file, NULL, _IOFBF, 8192);
+
+   save_upr_entry_outfile(f);
+
+   fprintf(file, "%s mapping of %s for %s, made with UDO%s %s\n\n",
+      data->remOn, 
+      outfile.full, 
+      data->compiler, 
+      UDO_REL, 
+      data->remOff);
+
+   for (i = 0; i <= p1_toc_counter; i++)
+   {
+      hid[0] = EOS;
+
+      if (toc[i]->helpid != NULL)
+      {
+         strcpy(hid, toc[i]->helpid);
+      }
+      else
+      {
+         if (use_auto_helpids)
+         {
+            node2WinAutoID(hid, toc[i]->name);
+         }
+      }
+
+      map = -1;
+
+      if (toc[i]->mapping >= 0)
+      {
+         map = toc[i]->mapping;
+      }
+
+      if (hid[0] != EOS || map >= 0 || desttype == TOWH4)
+      {
+         if (hid[0] == EOS)
+         {
+                                          /* V6.5.20 [CS] */
+            node2WinAutoID(hid, toc[i]->name);
+/* old:     node2NrWinhelp(hid, toc[i]->labindex);
+*/
+         }
+
+         strinsert(hid, sDocWinPrefixID);
+
+         if (map < 0)
+            map = 0x1000 + i;
+
+         /* V6.5.20 [CS]
+            Fuer htmlhelp eine Datei mit C-Makros erzeugen, ueber welche 
+            dann eine Map vom Titel auf den Knoten (html-Dateinamen) 
+            gebildet werden kann.
+            Z.B. X("Formatierung","004006.html")
+         */
+
+         fprintf(file, "X(\"%s\",\"%s%s\")\n",
+            toc[i]->name,
+            toc[i]->filename,
+            outfile.suff);
+
+/* old:
+         fprintf(file, "%s %-*s%s\t%s%04X%s\t%s %s %s\n",
+            data->cmd,
+            MAX_HELPID_LEN + 1,
+            hid,
+            data->varOp,
+            data->hexPre,
+            map,
+            data->hexSuf,
+            data->remOn,
+            toc[i]->name,
+            data->remOff);
+*/
+      }  /* if (hid[0] != EOS || map >= 0 || desttype == TOWH4) */
+      
+   }  /* for (i = 0; i <= p1_toc_counter; i++) */
+
+   fclose(file);
+
+   return TRUE;    
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  save_htmlhelp_map():
+*     ??? (description missing)
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
+
 GLOBAL BOOLEAN save_htmlhelp_map(void)
 {
-        tWinMapData data;
-        BOOLEAN flag;
+   tWinMapData   data;  /* */
+   BOOLEAN       flag;  /* */
+   
+   
+   memset(&data, 0, sizeof(data));
+   strcpy(data.cmd, "#define");
+   strcpy(data.hexPre, "0x");
+   strcpy(data.remOn, "/*");
+   strcpy(data.remOff, "*/");
+   strcpy(data.compiler, "C");
 
-        memset(&data, 0, sizeof(data));
-        strcpy(data.cmd, "#define");
-        strcpy(data.hexPre, "0x");
-        strcpy(data.remOn, "/*");
-        strcpy(data.remOff, "*/");
-        strcpy(data.compiler, "C");
+   flag = save_the_map(sMapNoSuff, ".hhm", &data);
 
-        flag= save_the_map (sMapNoSuff, ".hhm", &data);
+   return flag;
+}
 
-        return flag;
-}       /* save_winhelp_map_c */
 
+
+
+
+/*******************************************************************************
+*
+*  save_winhelp_map_c():
+*     ??? (description missing)
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
 
 GLOBAL BOOLEAN save_winhelp_map_c(void)
 {
-        tWinMapData data;
-        BOOLEAN flag;
+   tWinMapData   data;  /* */
+   BOOLEAN       flag;  /* */
+   
+   
+   memset(&data, 0, sizeof(data));
+   strcpy(data.cmd, "#define");
+   strcpy(data.hexPre, "0x");
+   strcpy(data.remOn, "/*");
+   strcpy(data.remOff, "*/");
+   strcpy(data.compiler, "C");
 
-        memset(&data, 0, sizeof(data));
-        strcpy(data.cmd, "#define");
-        strcpy(data.hexPre, "0x");
-        strcpy(data.remOn, "/*");
-        strcpy(data.remOff, "*/");
-        strcpy(data.compiler, "C");
+   flag = save_the_map(sMapNoSuff, ".hpc", &data);
 
-        flag= save_the_map (sMapNoSuff, ".hpc", &data);
+   return flag;
+}
 
-        return flag;
-}       /* save_winhelp_map_c */
 
+
+
+
+/*******************************************************************************
+*
+*  save_winhelp_map_pas():
+*     ??? (description missing)
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
 
 GLOBAL BOOLEAN save_winhelp_map_pas(void)
 {
-        tWinMapData data;
-        BOOLEAN flag;
+   tWinMapData   data;  /* */
+   BOOLEAN       flag;  /* */
+   
+   
+   memset(&data, 0, sizeof(data));
+   strcpy(data.cmd, "const");
+   strcpy(data.varOp, "=");
+   strcpy(data.hexPre, "$");
+   strcpy(data.hexSuf, ";");
+   strcpy(data.remOn, "(*");
+   strcpy(data.remOff, "*)");
+   strcpy(data.compiler, "Pascal");
 
-        memset(&data, 0, sizeof(data));
-        strcpy(data.cmd, "const");
-        strcpy(data.varOp, "=");
-        strcpy(data.hexPre, "$");
-        strcpy(data.hexSuf, ";");
-        strcpy(data.remOn, "(*");
-        strcpy(data.remOff, "*)");
-        strcpy(data.compiler, "Pascal");
+   flag = save_the_map(sMapNoSuff, ".hpp", &data);
 
-        flag= save_the_map (sMapNoSuff, ".hpp", &data);
+   return flag;
+}
 
-        return flag;
-}       /* save_winhelp_map_pas */
 
+
+
+
+/*******************************************************************************
+*
+*  save_winhelp_map_vb():
+*     ??? (description missing)
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
 
 GLOBAL BOOLEAN save_winhelp_map_vb(void)
 {
-        tWinMapData data;
-        BOOLEAN flag;
+   tWinMapData   data;  /* */
+   BOOLEAN       flag;  /* */
+   
+   
+   memset(&data, 0, sizeof(data));
+   strcpy(data.cmd, "Public Const");
+   strcpy(data.varOp, "=");
+   strcpy(data.hexPre, "&h");
+   strcpy(data.hexSuf, "");
+   strcpy(data.remOn, "'");
+   strcpy(data.remOff, "");
+   strcpy(data.compiler, "Visual Basic");
 
-        memset(&data, 0, sizeof(data));
-        strcpy(data.cmd, "Public Const");
-        strcpy(data.varOp, "=");
-        strcpy(data.hexPre, "&h");
-        strcpy(data.hexSuf, "");
-        strcpy(data.remOn, "'");
-        strcpy(data.remOff, "");
-        strcpy(data.compiler, "Visual Basic");
+   flag = save_the_map(sMapNoSuff, ".hpb", &data);
 
-        flag= save_the_map (sMapNoSuff, ".hpb", &data);
+   return flag;
+}
 
-        return flag;
-}       /* save_winhelp_map_vb */
 
+
+
+
+/*******************************************************************************
+*
+*  save_winhelp_map_gfa():
+*     ??? (description missing)
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
 
 GLOBAL BOOLEAN save_winhelp_map_gfa(void)
 {
-        tWinMapData data;
-        BOOLEAN flag;
+   tWinMapData   data;  /* */
+   BOOLEAN       flag;  /* */
+   
+   
+   memset(&data, 0, sizeof(data));
+   strcpy(data.cmd, "Public Const");
+   strcpy(data.varOp, "=");
+   strcpy(data.hexPre, "&h");
+   strcpy(data.hexSuf, "");
+   strcpy(data.remOn, "'");
+   strcpy(data.remOff, "");
+   strcpy(data.compiler, "GFA-Basic");
 
-        memset(&data, 0, sizeof(data));
-        strcpy(data.cmd, "Public Const");
-        strcpy(data.varOp, "=");
-        strcpy(data.hexPre, "&h");
-        strcpy(data.hexSuf, "");
-        strcpy(data.remOn, "'");
-        strcpy(data.remOff, "");
-        strcpy(data.compiler, "GFA-Basic");
+   flag = save_the_map(sMapNoSuff, ".hpg", &data);
 
-        flag= save_the_map (sMapNoSuff, ".hpg", &data);
-
-        return flag;
-}       /* save_winhelp_map_gfa */
+   return flag;
+}
 
 
 
