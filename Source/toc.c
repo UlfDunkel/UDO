@@ -108,6 +108,7 @@
 *                 segmented control style now.
 *    fd  Feb 14: - add_...node_to_toc() merged into add_nodetype_to_toc()
 *                - toc_begin_node() adjusted to handle calls from UDO.C
+*                - add_nodetype_to_toc() enhanced
 *
 ******************************************|************************************/
 
@@ -15868,10 +15869,11 @@ const BOOLEAN   invisible)  /* TRUE: node is invisible */
 /*******************************************************************************
 *
 *  add_nodetype_to_toc():
-*     ???
+*     adds a node of a certain type to the TOC
 *
 *  Return:
-*     ???
+*     FALSE: some error occurred
+*      TRUE: success
 *
 ******************************************|************************************/
 
@@ -15999,7 +16001,7 @@ const BOOLEAN   invisible)   /* */
       break;
    
    case TOC_NODE4:
-      if (last_n3_index>0)
+      if (last_n3_index > 0)
       {
          toc[last_n3_index]->has_children = TRUE;
          toc[last_n3_index]->count_n4++;
@@ -16032,62 +16034,10 @@ const BOOLEAN   invisible)   /* */
       case TOC_NODE5:
          /* nothing to do until we introduce TOC_NODE6 ... */
          break;
-
          
       case TOC_NODE4:
-         /* Wenn Subsubsubsubnodes gemerged werden, dann muss    */
-         /* beim letzten Subsubnode dieser Subsubnode als        */
-         /* naechster Index eingetragen werden!                  */
-
-         if (html_merge_node5 && last_n4_index > 0)
-            toc[last_n4_index]->next_index = p1_toc_counter + 1;
-
-         break;
-         
-      
       case TOC_NODE3:
-         /* Wenn Subsubsubsubnodes gemerged werden, dann muss    */
-         /* beim letzten Subsubnode dieser Subsubnode als        */
-         /* naechster Index eingetragen werden!                  */
-
-         if (html_merge_node5 && last_n4_index > 0)
-            toc[last_n4_index]->next_index = p1_toc_counter + 1;
-
-         /* Wenn Subsubsubnodes gemerged werden, dann muss       */
-         /* beim letzten Subsubnode dieser Subsubnode als        */
-         /* naechster Index eingetragen werden!                  */
-
-         if (html_merge_node4 && last_n3_index > 0)
-            toc[last_n3_index]->next_index = p1_toc_counter + 1;
-         
-         break;
-         
-      
       case TOC_NODE2:
-         /* Wenn Subsubsubsubnodes gemerged werden, dann muss    */
-         /* beim letzten Subsubnode dieser Subsubnode als        */
-         /* naechster Index eingetragen werden!                  */
-
-         if (html_merge_node5 && last_n4_index > 0)
-            toc[last_n4_index]->next_index = p1_toc_counter + 1;
-
-         /* Wenn Subsubsubnodes gemerged werden, dann muss       */
-         /* beim letzten Subsubnode dieser Subsubnode als        */
-         /* naechster Index eingetragen werden!                  */
-
-         if (html_merge_node4 && last_n3_index > 0)
-            toc[last_n3_index]->next_index = p1_toc_counter + 1;
-
-         /* Wenn Subsubnodes gemerged werden, dann muss beim     */
-         /* letzten Subnode dieser Subnode als naechster         */
-         /* Index eingetragen werden!                            */
-      
-         if (html_merge_node3 && last_n2_index > 0)
-            toc[last_n2_index]->next_index = p1_toc_counter + 1;
-            
-         break;
-         
-         
       case TOC_NODE1:
          /* Wenn Subsubsubsubnodes gemerged werden, dann muss    */
          /* beim letzten Subsubnode dieser Subsubnode als        */
@@ -16095,30 +16045,44 @@ const BOOLEAN   invisible)   /* */
 
          if (html_merge_node5 && last_n4_index > 0)
             toc[last_n4_index]->next_index = p1_toc_counter + 1;
-
+      }
+      
+      switch (nodetype)
+      {
+      case TOC_NODE3:
+      case TOC_NODE2:
+      case TOC_NODE1:
          /* Wenn Subsubsubnodes gemerged werden, dann muss       */
          /* beim letzten Subsubnode dieser Subsubnode als        */
          /* naechster Index eingetragen werden!                  */
 
          if (html_merge_node4 && last_n3_index > 0)
             toc[last_n3_index]->next_index = p1_toc_counter + 1;
-
-
+      }
+      
+      switch (nodetype)
+      {
+      case TOC_NODE2:
+      case TOC_NODE1:
          /* Wenn Subsubnodes gemerged werden, dann muss beim     */
          /* letzten Subnode dieser Subnode als naechster         */
          /* Index eingetragen werden!                            */
       
          if (html_merge_node3 && last_n2_index > 0)
             toc[last_n2_index]->next_index = p1_toc_counter + 1;
-
+      }
+      
+      switch (nodetype)
+      {
+      case TOC_NODE1:
          /* Werden Subnodes gemerged, so muss beim letzten Node  */
          /* dieser Node als naechster Index eingetragen werden!  */
       
          if (html_merge_node2 && last_n1_index > 0)
             toc[last_n1_index]->next_index = p1_toc_counter + 1;
-
       }
    }
+
 
    /* Der Zeiger auf den Nachfolger muss vom Nachfolger gesetzt werden. */
 
