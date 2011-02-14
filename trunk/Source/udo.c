@@ -12047,102 +12047,102 @@ char           *datei)           /* */
                                           /* Kommandos, die nur im Hauptteil erlaubt sind */
                   if (strcmp(token[0], "!node") == 0 || strcmp(token[0], "!n") == 0)
                   {
-                     add_node_to_toc(NODE_NORMAL, NODE_VISIBLE);
+                     add_nodetype_to_toc(TOC_NODE1, NODE_NORMAL, NODE_VISIBLE);
                      bInsidePopup = FALSE;
                   }
                   else if (strcmp(token[0], "!node*") == 0 || strcmp(token[0], "!n*") == 0)
                   {
-                     add_node_to_toc(NODE_NORMAL, NODE_INVISIBLE);
+                     add_nodetype_to_toc(TOC_NODE1, NODE_NORMAL, NODE_INVISIBLE);
                      bInsidePopup = FALSE;
                   }
                   else if (strcmp(token[0], "!subnode") == 0 || strcmp(token[0], "!sn") == 0)
                   {
-                     add_subnode_to_toc(NODE_NORMAL, NODE_VISIBLE);
+                     add_nodetype_to_toc(TOC_NODE2, NODE_NORMAL, NODE_VISIBLE);
                      bInsidePopup= FALSE;
                   }
                   else if (strcmp(token[0], "!subnode*") == 0 || strcmp(token[0], "!sn*") == 0)
                   {
-                     add_subnode_to_toc(NODE_NORMAL, NODE_INVISIBLE);
+                     add_nodetype_to_toc(TOC_NODE2, NODE_NORMAL, NODE_INVISIBLE);
                      bInsidePopup= FALSE;
                   }
                   else if (strcmp(token[0], "!subsubnode") == 0 || strcmp(token[0], "!ssn") == 0)
                   {
-                     add_subsubnode_to_toc(NODE_NORMAL, NODE_VISIBLE);
+                     add_nodetype_to_toc(TOC_NODE3, NODE_NORMAL, NODE_VISIBLE);
                      bInsidePopup= FALSE;
                   }
                   else  if (strcmp(token[0], "!subsubnode*") == 0 || strcmp(token[0], "!ssn*") == 0)
                   {
-                     add_subsubnode_to_toc(NODE_NORMAL, NODE_INVISIBLE);
+                     add_nodetype_to_toc(TOC_NODE3, NODE_NORMAL, NODE_INVISIBLE);
                      bInsidePopup= FALSE;
                   }
                   else if (strcmp(token[0], "!subsubsubnode") == 0 || strcmp(token[0], "!sssn") == 0)
                   {
-                     add_subsubsubnode_to_toc(NODE_NORMAL, NODE_VISIBLE);
+                     add_nodetype_to_toc(TOC_NODE4, NODE_NORMAL, NODE_VISIBLE);
                      bInsidePopup= FALSE;
                   }
                   else if (strcmp(token[0], "!subsubsubnode*") == 0 || strcmp(token[0], "!sssn*") == 0)
                   {
-                     add_subsubsubnode_to_toc(NODE_NORMAL, NODE_INVISIBLE);
+                     add_nodetype_to_toc(TOC_NODE4, NODE_NORMAL, NODE_INVISIBLE);
                      bInsidePopup= FALSE;
                   }
                   else if (strcmp(token[0], "!subsubsubsubnode") == 0 || strcmp(token[0], "!ssssn") == 0)
                   {
-                     add_subsubsubsubnode_to_toc(NODE_NORMAL, NODE_VISIBLE);
+                     add_nodetype_to_toc(TOC_NODE5, NODE_NORMAL, NODE_VISIBLE);
                      bInsidePopup= FALSE;
                   }
                   else if (strcmp(token[0], "!subsubsubsubnode*") == 0 || strcmp(token[0], "!ssssn*") == 0)
                   {
-                     add_subsubsubsubnode_to_toc(NODE_NORMAL, NODE_INVISIBLE);
+                     add_nodetype_to_toc(TOC_NODE5, NODE_NORMAL, NODE_INVISIBLE);
                      bInsidePopup= FALSE;
                   }
                   else if (strcmp(token[0], "!pnode") == 0 || strcmp(token[0], "!p") == 0)
                   {
-                     add_node_to_toc(NODE_POPUP, NODE_VISIBLE);
+                     add_nodetype_to_toc(TOC_NODE1, NODE_POPUP, NODE_VISIBLE);
                      bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!pnode*") == 0 || strcmp(token[0], "!p*") == 0)
                   {
-                     add_node_to_toc(NODE_POPUP, NODE_INVISIBLE);
+                     add_nodetype_to_toc(TOC_NODE1, NODE_POPUP, NODE_INVISIBLE);
                      bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!psubnode") == 0 || strcmp(token[0], "!ps") == 0)
                   {
-                     add_subnode_to_toc(NODE_POPUP, NODE_VISIBLE);
+                     add_nodetype_to_toc(TOC_NODE2, NODE_POPUP, NODE_VISIBLE);
                      bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!psubnode*") == 0 || strcmp(token[0], "!ps*") == 0)
                   {
-                     add_subnode_to_toc(NODE_POPUP, NODE_INVISIBLE);
+                     add_nodetype_to_toc(TOC_NODE2, NODE_POPUP, NODE_INVISIBLE);
                      bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!psubsubnode") == 0 || strcmp(token[0], "!pss") == 0)
                   {
-                     add_subsubnode_to_toc(NODE_POPUP, NODE_VISIBLE);
+                     add_nodetype_to_toc(TOC_NODE3, NODE_POPUP, NODE_VISIBLE);
                      bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!psubsubnode*") == 0 || strcmp(token[0], "!pss*") == 0)
                   {
-                     add_subsubnode_to_toc(NODE_POPUP, NODE_INVISIBLE);
+                     add_nodetype_to_toc(TOC_NODE3, NODE_POPUP, NODE_INVISIBLE);
                      bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!psubsubsubnode") == 0 || strcmp(token[0], "!psss") == 0)
                   {
-                     add_subsubsubnode_to_toc(NODE_POPUP, NODE_VISIBLE);
+                     add_nodetype_to_toc(TOC_NODE4, NODE_POPUP, NODE_VISIBLE);
                      bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!psubsubsubnode*") == 0 || strcmp(token[0], "!psss*") == 0)
                   {
-                     add_subsubsubnode_to_toc(NODE_POPUP, NODE_INVISIBLE);
+                     add_nodetype_to_toc(TOC_NODE4, NODE_POPUP, NODE_INVISIBLE);
                      bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!psubsubsubsubnode") == 0 || strcmp(token[0], "!pssss") == 0)
                   {
-                     add_subsubsubsubnode_to_toc(NODE_POPUP, NODE_VISIBLE);
+                     add_nodetype_to_toc(TOC_NODE5, NODE_POPUP, NODE_VISIBLE);
                      bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!psubsubsubsubnode*") == 0 || strcmp(token[0], "!pssss*") == 0)
                   {
-                     add_subsubsubsubnode_to_toc(NODE_POPUP, NODE_INVISIBLE);
+                     add_nodetype_to_toc(TOC_NODE5, NODE_POPUP, NODE_INVISIBLE);
                      bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!begin_node") == 0 || strcmp(token[0], "!bn") == 0)

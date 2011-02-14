@@ -106,6 +106,8 @@
 *    fd  Jan 29: HTML navigation bar output using GIF images no longer writes linefeeds
 *                 in order to prevent gaps between images, so you can use images in
 *                 segmented control style now.
+*    fd  Feb 14: - add_...node_to_toc() merged into add_nodetype_to_toc()
+*                - toc_begin_node() adjusted to handle calls from UDO.C
 *
 ******************************************|************************************/
 
@@ -167,14 +169,6 @@ const char *id_toc_c= "@(#) toc.c       $date$";
 *     MACRO DEFINITIONS
 *
 ******************************************|************************************/
-
-#define TOC_TOC    0                      /* table of content */
-#define TOC_NODE1  1                      /* !node */
-#define TOC_NODE2  2                      /* !subnode */
-#define TOC_NODE3  3                      /* !subsubnode */
-#define TOC_NODE4  4                      /* !subsubsubnode */
-#define TOC_NODE5  5                      /* !subsubsubsubnode */
-#define TOC_NONE   6                      /* neither nor ... :-) */
 
 #define TOCL_HTM   1                      /* used for use_toc_list_commands */
 #define TOCL_TEX   2                      /* dito */
@@ -3993,6 +3987,7 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
    UWORD     uiW,               /* */
              uiH;               /* */
    char      closer[8] = "\0";  /* single tag closer mark in XHTML */
+   char      buffer[32] = "";
 
    
    if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
@@ -4124,75 +4119,34 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
       html_index_giflink(GIF_UP_INDEX, GIF_NOUP_INDEX, "| ");
       break;
    
+   
    case TOC_NODE2:                        /* Verweis auf aktuellen !node */
-      li = toc[last_n1_index]->labindex;
-      
-      if (lab[li]->name != EOS)
-      {
-         um_strcpy(s, lab[li]->name, 512, "html_hb_line[1]");
-
-         string2reference(anchor, lab[li], TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
-         replace_once(s, lab[li]->name, anchor);
-
-         if (no_images)
-         {
-            replace_once(s, lab[li]->name, " ^^^");
-            strinsert(s, "| ");
-         }
-   
-         out(s);
-      }
-      
-      break;
-   
    case TOC_NODE3:                        /* Verweis auf aktuellen !subnode */
-      li = toc[last_n2_index]->labindex;
-      
-      if (lab[li]->name != EOS)
-      {
-         um_strcpy(s, lab[li]->name, 512, "html_hb_line[2]");
-      
-         string2reference(anchor, lab[li], TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
-         replace_once(s, lab[li]->name, anchor);
-
-         if (no_images)
-         {
-            replace_once(s, lab[li]->name, " ^^^");
-            strinsert(s, "| ");
-         }
-      
-         out(s);
-      }
-      
-      break;
-      
    case TOC_NODE4:                        /* Verweis auf aktuellen !subsubnode */
-      li = toc[last_n3_index]->labindex;
-      
-      if (lab[li]->name != EOS)
-      {
-         um_strcpy(s, lab[li]->name, 512, "html_hb_line[3]");
-
-         string2reference(anchor, lab[li], TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
-         replace_once(s, lab[li]->name, anchor);
-
-         if (no_images)
-         {
-            replace_once(s, lab[li]->name, " ^^^");
-            strinsert(s, "| ");
-         }
-      
-         out(s);
-      }
-      
-      break;
-
    case TOC_NODE5:                        /* Verweis auf aktuellen !subsubsubnode */
-      li = toc[last_n4_index]->labindex;
-
+   
+      switch (toc[ti]->toctype)
+      {
+      case TOC_NODE2:
+         li = toc[last_n1_index]->labindex;
+         strcpy(buffer, "html_hb_line[1]");
+         break;
+      case TOC_NODE3:
+         li = toc[last_n2_index]->labindex;
+         strcpy(buffer, "html_hb_line[2]");
+         break;
+      case TOC_NODE4:
+         li = toc[last_n3_index]->labindex;
+         strcpy(buffer, "html_hb_line[3]");
+         break;
+      case TOC_NODE5:
+         li = toc[last_n4_index]->labindex;
+         strcpy(buffer, "html_hb_line[4]");
+      }
+            
       if (lab[li]->name != EOS)
       {
-         um_strcpy(s, lab[li]->name, 512, "html_hb_line[4]");
+         um_strcpy(s, lab[li]->name, 512, buffer);
 
          string2reference(anchor, lab[li], TRUE, GIF_UP_NAME, uiGifUpWidth, uiGifUpHeight);
          replace_once(s, lab[li]->name, anchor);
@@ -4202,7 +4156,7 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
             replace_once(s, lab[li]->name, " ^^^");
             strinsert(s, "| ");
          }
-      
+   
          out(s);
       }
       
@@ -15913,7 +15867,7 @@ const BOOLEAN   invisible)  /* TRUE: node is invisible */
 
 /*******************************************************************************
 *
-*  add_node_to_toc():
+*  add_nodetype_to_toc():
 *     ???
 *
 *  Return:
@@ -15921,22 +15875,79 @@ const BOOLEAN   invisible)  /* TRUE: node is invisible */
 *
 ******************************************|************************************/
 
-GLOBAL BOOLEAN add_node_to_toc(
+GLOBAL BOOLEAN add_nodetype_to_toc(
 
+int             nodetype,    /* TOC_... */
 const BOOLEAN   popup,       /* */
 const BOOLEAN   invisible)   /* */
 {
    TOCITEM     *tocptr;      /* */
    int          li;          /* */
    int          html_merge;  /* */
+
    
+   switch (nodetype)                      /* check if this node now is allowed */
+   {
+   case TOC_NODE5:
+      if (last_n4_index == 0)
+      {
+         error_node5_not_allowed();
+         return FALSE;
+      }
+
+      break;
    
-   tocptr = init_new_toc_entry(TOC_NODE1, invisible);
+   case TOC_NODE4:
+      if (last_n3_index == 0)
+      {
+         error_node4_not_allowed();
+         return FALSE;
+      }
+      
+      break;
+      
+   case TOC_NODE3:
+      if (last_n2_index == 0)
+      {
+         error_node3_not_allowed();
+         return FALSE;
+      }
+      
+      break;
+      
+   case TOC_NODE2:
+      if (last_n1_index == 0)
+      {
+         error_node2_not_allowed();
+         return FALSE;
+      }
+   }
+   
+   tocptr = init_new_toc_entry(nodetype, invisible);
 
    if (tocptr == NULL)
       return FALSE;
 
-   all_nodes++;
+
+   switch (nodetype)                      /* increase counter for node type */
+   {
+   case TOC_NODE5:
+      all_subsubsubsubnodes++;
+      called_subsubsubsubnode = TRUE;     /* r5pl6 */
+      break;
+   case TOC_NODE4:
+      all_subsubsubnodes++;
+      break;
+   case TOC_NODE3:
+      all_subsubnodes++;
+      break;
+   case TOC_NODE2:
+      all_subnodes++;
+      break;
+   case TOC_NODE1:
+      all_nodes++;
+   }
+
 
    /* ---------------------------------------------------- */
    /* r5pl6: Listenartige Verkettung erzeugen              */
@@ -15971,264 +15982,208 @@ const BOOLEAN   invisible)   /* */
    /* Den Nachfolger des Vorgaengers setzen: auf diesen */
 
    toc[p1_toc_counter]->next_index = p1_toc_counter + 1;
-
-                                          /* New TOHAH; V6.5.17 */
-   if (desttype == TOHTM || desttype == TOHAH)
-   {
-      /* Wenn Subsubsubsubnode gemerged werden, dann muss     */
-      /* beim letzten Subsubnode dieser Node als              */
-      /* naechster Index eingetragen werden!                  */
-      
-      if (html_merge_node5 && last_n4_index > 0)
-         toc[last_n4_index]->next_index = p1_toc_counter + 1;
-
-      /* Wenn Subsubsubnode gemerged werden, dann muss        */
-      /* beim letzten Subsubnode dieser Node als              */
-      /* naechster Index eingetragen werden!                  */
-      
-      if (html_merge_node4 && last_n3_index > 0)
-         toc[last_n3_index]->next_index = p1_toc_counter + 1;
-
-      /* Wenn Subsubnodes gemerged werden, dann muss beim     */
-      /* letzten Subnode dieser Node als naechster            */
-      /* Index eingetragen werden!                            */
-      
-      if (html_merge_node3 && last_n2_index > 0)
-         toc[last_n2_index]->next_index = p1_toc_counter + 1;
-
-      /* Werden Subnodes gemerged, so muss beim letzten Node  */
-      /* dieser Node als naechster Index eingetragen werden!  */
-      
-      if (html_merge_node2 && last_n1_index > 0)
-         toc[last_n1_index]->next_index = p1_toc_counter + 1;
-   }
-
-   /* Der Zeiger auf den Nachfolger muss vom Nachfolger gesetzt werden. */
-
-   tocptr->next_index = 0;
-
-   /* Hilfsvariablen setzen fuer die uebergeordneten Nodes */
-
-   tocptr->up_n1_index = 0;
-   tocptr->up_n2_index = 0;
-   tocptr->up_n3_index = 0;
-   tocptr->up_n4_index = 0;
-
-   last_n1_index = p1_toc_counter + 1;
-   last_n2_index = 0;
-   last_n3_index = 0;
-   last_n4_index = 0;
-   last_n5_index = 0;
    
-   /* ---------------------------------------------------- */
-
-   p1_toc_counter++;
-   toc[p1_toc_counter] = tocptr;
-
-   if (pflag[PASS1].inside_apx)
-   {
-      apx_available = TRUE;
-      
-      p1_apx_n1++;
-      p1_apx_n2 = 0;
-      p1_apx_n3 = 0;
-      p1_apx_n4 = 0;
-      p1_apx_n5 = 0;
-      
-      tocptr->appendix = TRUE;
-      
-      tocptr->n1 = p1_apx_n1;
-      tocptr->n2 = p1_apx_n2;
-      tocptr->n3 = p1_apx_n3;
-      tocptr->n4 = p1_apx_n4;
-      tocptr->n5 = p1_apx_n5;
-      
-      if (!invisible)
-      {
-         p1_apx_nr1++;
-         
-         p1_apx_nr2 = 0;
-         p1_apx_nr3 = 0;
-         p1_apx_nr4 = 0;
-         p1_apx_nr5 = 0;
-         
-         tocptr->nr1 = p1_apx_nr1;
-         tocptr->nr2 = p1_apx_nr2;
-         tocptr->nr3 = p1_apx_nr3;
-         tocptr->nr4 = p1_apx_nr4;
-         tocptr->nr5 = p1_apx_nr5;
-      }
-   }
-   else
-   {
-      toc_available = TRUE;
-      p1_toc_n1++;
-      p1_toc_n2 = 0;
-      p1_toc_n3 = 0;
-      p1_toc_n4 = 0;
-      p1_toc_n5 = 0;
-      
-      tocptr->appendix = FALSE;
-      
-      tocptr->n1 = p1_toc_n1;
-      tocptr->n2 = p1_toc_n2;
-      tocptr->n3 = p1_toc_n3;
-      tocptr->n4 = p1_toc_n4;
-      tocptr->n5 = p1_toc_n5;
-      
-      if (!invisible)
-      {
-         p1_toc_nr1++;
-         p1_toc_nr2 = 0;
-         p1_toc_nr3 = 0;
-         p1_toc_nr4 = 0;
-         p1_toc_nr5 = 0;
-         
-         tocptr->nr1 = p1_toc_nr1;
-         tocptr->nr2 = p1_toc_nr2;
-         tocptr->nr3 = p1_toc_nr3;
-         tocptr->nr4 = p1_toc_nr4;
-         tocptr->nr5 = p1_toc_nr5;
-      }
-   }
-
-                                          /* New TOHAH; V6.5.17 */
-   if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
-   {
-      /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
-      /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
-
-      get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
-   }
-
-   li = add_label(tocptr->name, TRUE, popup);
-
-   if (li > 0)                            /* and not li>=0, V6.5.17 [GS] */
-      tocptr->labindex= li;
-
-   return TRUE;    
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  add_subnode_to_toc():
-*     ???
-*
-*  Return:
-*     ???
-*
-******************************************|************************************/
-
-GLOBAL BOOLEAN add_subnode_to_toc(
-
-const BOOLEAN   popup,       /* */
-const BOOLEAN   invisible)   /* */
-{
-   TOCITEM     *tocptr;      /* */
-   int          li;          /* */
-   int          html_merge;  /* */
-   
-
-   if (last_n1_index == 0)
-   {
-      error_node2_not_allowed();
-      return FALSE;
-   }
-
-   tocptr = init_new_toc_entry(TOC_NODE2, invisible);
-
-   if (tocptr == NULL)
-      return FALSE;
-
-   all_subnodes++;
-
-   /* ---------------------------------------------------- */
-   /* r5pl6: Listenartige Verkettung erzeugen              */
-   /* ---------------------------------------------------- */
-   /* noch ist p1_toc_counter nich inkrementiert worden,   */
-   /* zeigt daher auf den letzten (Sub(Sub))Node           */
-   /* Bei HTML muss das Mergen beachtet werden!            */
-   
-   tocptr->prev_index = p1_toc_counter;
-
-                                          /* New TOHAH; V6.5.17 */
-   if (desttype == TOHTM || desttype == TOHAH)
-   {
-      if (html_merge_node5 && last_n4_index > 0)
-         tocptr->prev_index = last_n4_index;
-
-      if (html_merge_node4 && last_n3_index > 0)
-         tocptr->prev_index = last_n3_index;
-
-      if (html_merge_node3 && last_n2_index > 0)
-         tocptr->prev_index = last_n2_index;
-
-      if (html_merge_node2 && last_n1_index > 0)
-         tocptr->prev_index = last_n1_index;
-
-      if (html_merge_node1)
-         tocptr->prev_index = 0;
-   }
-
-   /* Den Nachfolger des Vorgaengers setzen, also auf  */
-   /* bzw. bei !html_merge... auf die letzten          */
-
-   toc[p1_toc_counter]->next_index = p1_toc_counter + 1;
-
-                                          /* New TOHAH; V6.5.17 */
-   if (desttype == TOHTM || desttype == TOHAH)
-   {
-      /* Wenn Subsubsubsubnode gemerged werden, dann muss     */
-      /* beim letzten Subsubnode dieser Subnode als           */
-      /* naechster Index eingetragen werden!                  */
-
-      if (html_merge_node5 && last_n4_index > 0)
-         toc[last_n4_index]->next_index = p1_toc_counter + 1;
-
-      /* Wenn Subsubsubnode gemerged werden, dann muss        */
-      /* beim letzten Subsubnode dieser Subnode als           */
-      /* naechster Index eingetragen werden!                  */
-      
-      if (html_merge_node4 && last_n3_index > 0)
-         toc[last_n3_index]->next_index = p1_toc_counter + 1;
-
-
-      /* Wenn Subsubnodes gemerged werden, dann muss beim     */
-      /* letzten Subnode dieser Subnode als naechster         */
-      /* Index eingetragen werden!                            */
-      
-      if (html_merge_node3 && last_n2_index > 0)
-         toc[last_n2_index]->next_index = p1_toc_counter + 1;
-   }
-
-   /* Der Zeiger auf den Nachfolger muss vom Nachfolger gesetzt werden. */
-   tocptr->next_index = 0;
 
    /* Merken, dass der uebergeordnete Kinder hat */
-   /* und die Anzahl der Subnodes erhoehen */
+   /* und die Anzahl der Subsubnodes erhoehen */
    
-   if (last_n1_index>0)
+   switch (nodetype)
    {
-      toc[last_n1_index]->has_children = TRUE;
-      toc[last_n1_index]->count_n2++;
+   case TOC_NODE5:
+      if (last_n4_index > 0)
+      {
+         toc[last_n4_index]->has_children = TRUE;
+         toc[last_n4_index]->count_n5++;
+      }
+      
+      break;
+   
+   case TOC_NODE4:
+      if (last_n3_index>0)
+      {
+         toc[last_n3_index]->has_children = TRUE;
+         toc[last_n3_index]->count_n4++;
+      }
+   
+      break;
+      
+   case TOC_NODE3:
+      if (last_n2_index > 0)
+      {
+         toc[last_n2_index]->has_children = TRUE;
+         toc[last_n2_index]->count_n3++;
+      }
+      
+      break;
+   
+   case TOC_NODE2:
+      if (last_n1_index > 0)
+      {
+         toc[last_n1_index]->has_children = TRUE;
+         toc[last_n1_index]->count_n2++;
+      }
    }
+
+                                          /* New TOHAH; V6.5.17 */
+   if (desttype == TOHTM || desttype == TOHAH)
+   {
+      switch (nodetype)
+      {
+      case TOC_NODE5:
+         /* nothing to do until we introduce TOC_NODE6 ... */
+         break;
+
+         
+      case TOC_NODE4:
+         /* Wenn Subsubsubsubnodes gemerged werden, dann muss    */
+         /* beim letzten Subsubnode dieser Subsubnode als        */
+         /* naechster Index eingetragen werden!                  */
+
+         if (html_merge_node5 && last_n4_index > 0)
+            toc[last_n4_index]->next_index = p1_toc_counter + 1;
+
+         break;
+         
+      
+      case TOC_NODE3:
+         /* Wenn Subsubsubsubnodes gemerged werden, dann muss    */
+         /* beim letzten Subsubnode dieser Subsubnode als        */
+         /* naechster Index eingetragen werden!                  */
+
+         if (html_merge_node5 && last_n4_index > 0)
+            toc[last_n4_index]->next_index = p1_toc_counter + 1;
+
+         /* Wenn Subsubsubnodes gemerged werden, dann muss       */
+         /* beim letzten Subsubnode dieser Subsubnode als        */
+         /* naechster Index eingetragen werden!                  */
+
+         if (html_merge_node4 && last_n3_index > 0)
+            toc[last_n3_index]->next_index = p1_toc_counter + 1;
+         
+         break;
+         
+      
+      case TOC_NODE2:
+         /* Wenn Subsubsubsubnodes gemerged werden, dann muss    */
+         /* beim letzten Subsubnode dieser Subsubnode als        */
+         /* naechster Index eingetragen werden!                  */
+
+         if (html_merge_node5 && last_n4_index > 0)
+            toc[last_n4_index]->next_index = p1_toc_counter + 1;
+
+         /* Wenn Subsubsubnodes gemerged werden, dann muss       */
+         /* beim letzten Subsubnode dieser Subsubnode als        */
+         /* naechster Index eingetragen werden!                  */
+
+         if (html_merge_node4 && last_n3_index > 0)
+            toc[last_n3_index]->next_index = p1_toc_counter + 1;
+
+         /* Wenn Subsubnodes gemerged werden, dann muss beim     */
+         /* letzten Subnode dieser Subnode als naechster         */
+         /* Index eingetragen werden!                            */
+      
+         if (html_merge_node3 && last_n2_index > 0)
+            toc[last_n2_index]->next_index = p1_toc_counter + 1;
+            
+         break;
+         
+         
+      case TOC_NODE1:
+         /* Wenn Subsubsubsubnodes gemerged werden, dann muss    */
+         /* beim letzten Subsubnode dieser Subsubnode als        */
+         /* naechster Index eingetragen werden!                  */
+
+         if (html_merge_node5 && last_n4_index > 0)
+            toc[last_n4_index]->next_index = p1_toc_counter + 1;
+
+         /* Wenn Subsubsubnodes gemerged werden, dann muss       */
+         /* beim letzten Subsubnode dieser Subsubnode als        */
+         /* naechster Index eingetragen werden!                  */
+
+         if (html_merge_node4 && last_n3_index > 0)
+            toc[last_n3_index]->next_index = p1_toc_counter + 1;
+
+
+         /* Wenn Subsubnodes gemerged werden, dann muss beim     */
+         /* letzten Subnode dieser Subnode als naechster         */
+         /* Index eingetragen werden!                            */
+      
+         if (html_merge_node3 && last_n2_index > 0)
+            toc[last_n2_index]->next_index = p1_toc_counter + 1;
+
+         /* Werden Subnodes gemerged, so muss beim letzten Node  */
+         /* dieser Node als naechster Index eingetragen werden!  */
+      
+         if (html_merge_node2 && last_n1_index > 0)
+            toc[last_n1_index]->next_index = p1_toc_counter + 1;
+
+      }
+   }
+
+   /* Der Zeiger auf den Nachfolger muss vom Nachfolger gesetzt werden. */
+
+   tocptr->next_index = 0;
+   
 
    /* Hilfsvariablen setzen fuer die uebergeordneten Nodes */
 
-   tocptr->up_n1_index = last_n1_index;
-   tocptr->up_n2_index = 0;
-   tocptr->up_n3_index = 0;
-   tocptr->up_n4_index = 0;
+   switch (nodetype)
+   {
+   case TOC_NODE5:
+      tocptr->up_n1_index = last_n1_index;
+      tocptr->up_n2_index = last_n2_index;
+      tocptr->up_n3_index = last_n3_index;
+      tocptr->up_n4_index = last_n4_index;
 
-   last_n2_index = p1_toc_counter + 1;
-   last_n3_index = 0;
-   last_n4_index = 0;
-   last_n5_index = 0;
+      last_n5_index = p1_toc_counter + 1;
+      break;
+      
+   case TOC_NODE4:
+      tocptr->up_n1_index = last_n1_index;
+      tocptr->up_n2_index = last_n2_index;
+      tocptr->up_n3_index = last_n3_index;
+      tocptr->up_n4_index = 0;
 
+      last_n4_index = p1_toc_counter + 1;
+      last_n5_index = 0;
+      break;
+      
+   case TOC_NODE3:
+      tocptr->up_n1_index = last_n1_index;
+      tocptr->up_n2_index = last_n2_index;
+      tocptr->up_n3_index = 0;
+      tocptr->up_n4_index = 0;
+
+      last_n3_index = p1_toc_counter + 1;
+      last_n4_index = 0;
+      last_n5_index = 0;
+      break;
+      
+   case TOC_NODE2:
+      tocptr->up_n1_index = last_n1_index;
+      tocptr->up_n2_index = 0;
+      tocptr->up_n3_index = 0;
+      tocptr->up_n4_index = 0;
+
+      last_n2_index = p1_toc_counter + 1;
+      last_n3_index = 0;
+      last_n4_index = 0;
+      last_n5_index = 0;
+      break;
+      
+   case TOC_NODE1:
+      tocptr->up_n1_index = 0;
+      tocptr->up_n2_index = 0;
+      tocptr->up_n3_index = 0;
+      tocptr->up_n4_index = 0;
+
+      last_n1_index = p1_toc_counter + 1;
+      last_n2_index = 0;
+      last_n3_index = 0;
+      last_n4_index = 0;
+      last_n5_index = 0;
+   }
+   
    /* ---------------------------------------------------- */
 
    /* Zaehler hochsetzen und Zeiger in das Array kopieren  */
@@ -16239,11 +16194,38 @@ const BOOLEAN   invisible)   /* */
    if (pflag[PASS1].inside_apx)
    {
       apx_available = TRUE;
+
+      switch (nodetype)
+      {
+      case TOC_NODE5:
+         p1_apx_n5++;
+         break;
+         
+      case TOC_NODE4:
+         p1_apx_n4++;
+         p1_apx_n5 = 0;
+         break;
+         
+      case TOC_NODE3:
+         p1_apx_n3++;
+         p1_apx_n4 = 0;
+         p1_apx_n5 = 0;
+         break;
+         
+      case TOC_NODE2:
+         p1_apx_n2++;
+         p1_apx_n3 = 0;
+         p1_apx_n4 = 0;
+         p1_apx_n5 = 0;
+         break;
       
-      p1_apx_n2++;
-      p1_apx_n3 = 0;
-      p1_apx_n4 = 0;
-      p1_apx_n5 = 0;
+      case TOC_NODE1:
+         p1_apx_n1++;
+         p1_apx_n2 = 0;
+         p1_apx_n3 = 0;
+         p1_apx_n4 = 0;
+         p1_apx_n5 = 0;
+      }
       
       tocptr->appendix = TRUE;
       
@@ -16255,10 +16237,37 @@ const BOOLEAN   invisible)   /* */
       
       if (!invisible)
       {
-         p1_apx_nr2++;
-         p1_apx_nr3 = 0;
-         p1_apx_nr4 = 0;
-         p1_apx_nr5 = 0;
+         switch (nodetype)
+         {
+         case TOC_NODE5:
+            p1_apx_nr5++;
+            break;
+            
+         case TOC_NODE4:
+            p1_apx_nr4++;
+            p1_apx_nr5 = 0;
+            break;
+         
+         case TOC_NODE3:
+            p1_toc_nr3++;
+            p1_toc_nr4 = 0;
+            p1_toc_nr5 = 0;
+            break;
+            
+         case TOC_NODE2:
+            p1_apx_nr2++;
+            p1_apx_nr3 = 0;
+            p1_apx_nr4 = 0;
+            p1_apx_nr5 = 0;
+            break;
+         
+         case TOC_NODE1:
+            p1_apx_nr1++;
+            p1_apx_nr2 = 0;
+            p1_apx_nr3 = 0;
+            p1_apx_nr4 = 0;
+            p1_apx_nr5 = 0;
+         }
          
          tocptr->nr1 = p1_apx_nr1;
          tocptr->nr2 = p1_apx_nr2;
@@ -16271,10 +16280,37 @@ const BOOLEAN   invisible)   /* */
    {
       toc_available = TRUE;
       
-      p1_toc_n2++;
-      p1_toc_n3 = 0;
-      p1_toc_n4 = 0;
-      p1_toc_n5 = 0;
+      switch (nodetype)
+      {
+      case TOC_NODE5:
+         p1_apx_n5++;
+         break;
+         
+      case TOC_NODE4:
+         p1_apx_n4++;
+         p1_apx_n5 = 0;
+         break;
+         
+      case TOC_NODE3:
+         p1_toc_n3++;
+         p1_toc_n4 = 0;
+         p1_toc_n5 = 0;
+         break;
+         
+      case TOC_NODE2:
+         p1_toc_n2++;
+         p1_toc_n3 = 0;
+         p1_toc_n4 = 0;
+         p1_toc_n5 = 0;
+         break;
+      
+      case TOC_NODE1:
+         p1_toc_n1++;
+         p1_toc_n2 = 0;
+         p1_toc_n3 = 0;
+         p1_toc_n4 = 0;
+         p1_toc_n5 = 0;
+      }
       
       tocptr->appendix = FALSE;
       
@@ -16283,13 +16319,40 @@ const BOOLEAN   invisible)   /* */
       tocptr->n3 = p1_toc_n3;
       tocptr->n4 = p1_toc_n4;
       tocptr->n5 = p1_toc_n5;
-
+      
       if (!invisible)
       {
-         p1_toc_nr2++;
-         p1_toc_nr3 = 0;
-         p1_toc_nr4 = 0;
-         p1_toc_nr5 = 0;
+         switch (nodetype)
+         {
+         case TOC_NODE5:
+            p1_apx_nr5++;
+            break;
+            
+         case TOC_NODE4:
+            p1_apx_nr4++;
+            p1_apx_nr5 = 0;
+            break;
+         
+         case TOC_NODE3:
+            p1_toc_nr3++;
+            p1_toc_nr4 = 0;
+            p1_toc_nr5 = 0;
+            break;
+
+         case TOC_NODE2:
+            p1_toc_nr2++;
+            p1_toc_nr3 = 0;
+            p1_toc_nr4 = 0;
+            p1_toc_nr5 = 0;
+            break;
+         
+         case TOC_NODE1:
+            p1_toc_nr1++;
+            p1_toc_nr2 = 0;
+            p1_toc_nr3 = 0;
+            p1_toc_nr4 = 0;
+            p1_toc_nr5 = 0;
+         }
          
          tocptr->nr1 = p1_toc_nr1;
          tocptr->nr2 = p1_toc_nr2;
@@ -16311,527 +16374,9 @@ const BOOLEAN   invisible)   /* */
    li = add_label(tocptr->name, TRUE, popup);
 
    if (li > 0)                            /* and not li>=0, V6.5.17 [GS] */
-      tocptr->labindex= li;
+      tocptr->labindex = li;
 
    return TRUE;    
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  add_subsubnode_to_toc():
-*     ???
-*
-*  Return:
-*     ???
-*
-******************************************|************************************/
-
-GLOBAL BOOLEAN add_subsubnode_to_toc(
-
-const BOOLEAN   popup,       /* */
-const BOOLEAN   invisible)   /* */
-{
-   TOCITEM     *tocptr;      /* */
-   int          li;          /* */
-   int          html_merge;  /* */
-   
-
-   if (last_n2_index == 0)
-   {
-      error_node3_not_allowed();
-      return FALSE;
-   }
-
-   tocptr = init_new_toc_entry(TOC_NODE3, invisible);
-
-   if (tocptr == NULL)
-      return FALSE;
-
-   all_subsubnodes++;
-
-   /* ---------------------------------------------------- */
-   /* r5pl6: Listenartige Verkettung erzeugen              */
-   /* ---------------------------------------------------- */
-   /* noch ist p1_toc_counter nich inkrementiert worden    */
-   /* und zeigt daher auf den letzten (Sub(Sub))Node        */
-   
-   tocptr->prev_index = p1_toc_counter;
-
-                                          /* New TOHAH; V6.5.17 */
-   if (desttype == TOHTM || desttype == TOHAH)
-   {
-      if (html_merge_node5 && last_n4_index > 0)
-         tocptr->prev_index = last_n4_index;
-
-      if (html_merge_node4 && last_n3_index > 0)
-         tocptr->prev_index = last_n3_index;
-
-      if (html_merge_node4 && last_n3_index > 0)
-         tocptr->prev_index = last_n3_index;
-
-      if (html_merge_node3 && last_n2_index > 0)
-         tocptr->prev_index = last_n2_index;
-
-      if (html_merge_node2 && last_n1_index > 0)
-         tocptr->prev_index = last_n1_index;
-
-      if (html_merge_node1)
-         tocptr->prev_index = 0;
-   }
-
-   /* Den Nachfolger des Vorgaengers setzen: auf diesen */
-   
-   toc[p1_toc_counter]->next_index = p1_toc_counter + 1;
-
-   /* Merken, dass der uebergeordnete Kinder hat */
-   /* und die Anzahl der Subsubnodes erhoehen */
-   
-   if (last_n2_index > 0)
-   {
-      toc[last_n2_index]->has_children = TRUE;
-      toc[last_n2_index]->count_n3++;
-   }
-
-                                          /* New TOHAH; V6.5.17 */
-   if (desttype == TOHTM || desttype == TOHAH)
-   {
-      /* Wenn Subsubsubsubnodes gemerged werden, dann muss    */
-      /* beim letzten Subsubnode dieser Subsubnode als        */
-      /* naechster Index eingetragen werden!                  */
-
-      if (html_merge_node5 && last_n4_index > 0)
-         toc[last_n4_index]->next_index = p1_toc_counter + 1;
-
-      /* Wenn Subsubsubnodes gemerged werden, dann muss       */
-      /* beim letzten Subsubnode dieser Subsubnode als        */
-      /* naechster Index eingetragen werden!                  */
-
-      if (html_merge_node4 && last_n3_index > 0)
-         toc[last_n3_index]->next_index = p1_toc_counter + 1;
-   }
-
-   /* Der Zeiger auf den Nachfolger muss vom Nachfolger gesetzt werden. */
-   
-   tocptr->next_index = 0;
-
-   /* Hilfsvariablen setzen fuer die uebergeordneten Nodes */
-   
-   tocptr->up_n1_index = last_n1_index;
-   tocptr->up_n2_index = last_n2_index;
-   tocptr->up_n3_index = 0;
-   tocptr->up_n4_index = 0;
-
-   last_n3_index = p1_toc_counter + 1;
-   last_n4_index = 0;
-   last_n5_index = 0;
-   
-   /* ---------------------------------------------------- */
-
-   p1_toc_counter++;
-   toc[p1_toc_counter] = tocptr;
-
-   if (pflag[PASS1].inside_apx)
-   {
-      apx_available = TRUE;
-      p1_apx_n3++;
-      p1_apx_n4 = 0;
-      p1_apx_n5 = 0;
-      
-      tocptr->appendix = TRUE;
-      
-      tocptr->n1 = p1_apx_n1;
-      tocptr->n2 = p1_apx_n2;
-      tocptr->n3 = p1_apx_n3;
-      tocptr->n4 = p1_apx_n4;
-      tocptr->n5 = p1_apx_n5;
-
-      if (!invisible)
-      {
-         p1_apx_nr3++;
-         p1_apx_nr4 = 0;
-         p1_apx_nr5 = 0;
-         
-         tocptr->nr1 = p1_apx_nr1;
-         tocptr->nr2 = p1_apx_nr2;
-         tocptr->nr3 = p1_apx_nr3;
-         tocptr->nr4 = p1_apx_nr4;
-         tocptr->nr5 = p1_apx_nr5;
-      }
-   }
-   else
-   {
-      toc_available = TRUE;
-      
-      p1_toc_n3++;
-      p1_toc_n4 = 0;
-      p1_toc_n5 = 0;
-      
-      tocptr->appendix = FALSE;
-      
-      tocptr->n1 = p1_toc_n1;
-      tocptr->n2 = p1_toc_n2;
-      tocptr->n3 = p1_toc_n3;
-      tocptr->n4 = p1_toc_n4;
-      tocptr->n5 = p1_toc_n5;
-
-      {
-         p1_toc_nr3++;
-         p1_toc_nr4 = 0;
-         p1_toc_nr5 = 0;
-         
-         tocptr->nr1 = p1_toc_nr1;
-         tocptr->nr2 = p1_toc_nr2;
-         tocptr->nr3 = p1_toc_nr3;
-         tocptr->nr4 = p1_toc_nr4;
-         tocptr->nr5 = p1_toc_nr5;
-      }
-   }
-
-                                          /* New TOHAH; V6.5.17 */
-   if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
-   {
-      /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
-      /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
-      
-      get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
-   }
-
-   li = add_label(tocptr->name, TRUE, popup);
-
-   if (li > 0)
-      tocptr->labindex = li;
-      
-   return TRUE;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  add_subsubsubnode_to_toc():
-*     ???
-*
-*  Return:
-*     ???
-*
-******************************************|************************************/
-
-GLOBAL BOOLEAN  add_subsubsubnode_to_toc(
-
-const BOOLEAN   popup,       /* */
-const BOOLEAN   invisible)   /* */
-{
-   TOCITEM     *tocptr;      /* */
-   int          li;          /* */
-   int          html_merge;  /* */
-   
-   
-   if (last_n3_index == 0)
-   {
-      error_node4_not_allowed();
-      return FALSE;
-   }
-
-   tocptr = init_new_toc_entry(TOC_NODE4, invisible);
-
-   if (tocptr == NULL)
-      return FALSE;
-
-   all_subsubsubnodes++;
-
-   /* ---------------------------------------------------- */
-   /* r5pl6: Listenartige Verkettung erzeugen              */
-   /* ---------------------------------------------------- */
-   /* noch ist p1_toc_counter nicht inkrementiert worden   */
-   /* und zeigt daher auf den letzten (Sub(Sub))Node       */
-   
-   tocptr->prev_index = p1_toc_counter;
-
-                                          /* New TOHAH; V6.5.17 */
-   if (desttype == TOHTM || desttype == TOHAH)
-   {
-      if (html_merge_node5 && last_n4_index > 0)
-         tocptr->prev_index = last_n4_index;
-      
-      if (html_merge_node4 && last_n3_index > 0)
-         tocptr->prev_index = last_n3_index;
-      
-      if (html_merge_node3 && last_n2_index > 0)
-         tocptr->prev_index = last_n2_index;
-      
-      if (html_merge_node2 && last_n1_index > 0)
-         tocptr->prev_index = last_n1_index;
-      
-      if (html_merge_node1)
-         tocptr->prev_index = 0;
-      
-   }
-
-   /* Den Nachfolger des Vorgaengers setzen: auf diesen    */
-   toc[p1_toc_counter]->next_index= p1_toc_counter+1;
-
-   /* Merken, dass der uebergeordnete Kinder hat */
-   /* und die Anzahl der Subsubsubnodes erhoehen */
-   
-   if (last_n3_index>0)
-   {
-      toc[last_n3_index]->has_children = TRUE;
-      toc[last_n3_index]->count_n4++;
-   }
-
-   /* Der Zeiger auf den Nachfolger muss vom Nachfolger gesetzt werden. */
-
-   tocptr->next_index = 0;
-
-   /* Hilfsvariablen setzen fuer die uebergeordneten Nodes */
-   
-   tocptr->up_n1_index = last_n1_index;
-   tocptr->up_n2_index = last_n2_index;
-   tocptr->up_n3_index = last_n3_index;
-   tocptr->up_n4_index = 0;
-
-   last_n4_index = p1_toc_counter + 1;
-   last_n5_index = 0;
-   
-   /* ---------------------------------------------------- */
-
-   p1_toc_counter++;
-   toc[p1_toc_counter] = tocptr;
-
-   if (pflag[PASS1].inside_apx)
-   {
-      apx_available = TRUE;
-      p1_apx_n4++;
-      p1_apx_n5 = 0;
-      tocptr->appendix = TRUE;
-      
-      tocptr->n1 = p1_apx_n1;
-      tocptr->n2 = p1_apx_n2;
-      tocptr->n3 = p1_apx_n3;
-      tocptr->n4 = p1_apx_n4;
-      tocptr->n5 = p1_apx_n5;
-      
-      if (!invisible)
-      {
-         p1_apx_nr4++;
-         p1_apx_nr5 = 0;
-         
-         tocptr->nr1 = p1_apx_nr1;
-         tocptr->nr2 = p1_apx_nr2;
-         tocptr->nr3 = p1_apx_nr3;
-         tocptr->nr4 = p1_apx_nr4;
-         tocptr->nr5 = p1_apx_nr5;
-      }
-   }
-   else
-   {
-      toc_available = TRUE;
-      p1_toc_n4++;
-      p1_toc_n5 = 0;
-      tocptr->appendix = FALSE;
-      
-      tocptr->n1 = p1_toc_n1;
-      tocptr->n2 = p1_toc_n2;
-      tocptr->n3 = p1_toc_n3;
-      tocptr->n4 = p1_toc_n4;
-      tocptr->n5 = p1_toc_n5;
-      
-      {
-         p1_toc_nr4++;
-         p1_toc_nr5 = 0;
-         
-         tocptr->nr1 = p1_toc_nr1;
-         tocptr->nr2 = p1_toc_nr2;
-         tocptr->nr3 = p1_toc_nr3;
-         tocptr->nr4 = p1_toc_nr4;
-         tocptr->nr5 = p1_toc_nr5;
-      }
-   }
-
-                                          /* New TOHAH; V6.5.17 */
-   if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
-   {
-      /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
-      /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
-      
-      get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
-   }
-
-   li = add_label(tocptr->name, TRUE, popup);
-
-   if (li >= 0)
-      tocptr->labindex = li;
-
-   return TRUE;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  add_subsubsubsubnode_to_toc():
-*     ???
-*
-*  Return:
-*     ???
-*
-******************************************|************************************/
-
-GLOBAL BOOLEAN add_subsubsubsubnode_to_toc(
-
-const BOOLEAN   popup,       /* */
-const BOOLEAN   invisible)   /* */
-{
-   TOCITEM     *tocptr;      /* */
-   int          li;          /* */
-   int          html_merge;  /* */
-   
-   
-   if (last_n4_index == 0)
-   {
-      error_node5_not_allowed();
-      return FALSE;
-   }
-
-   tocptr = init_new_toc_entry(TOC_NODE5, invisible);
-
-   if (tocptr == NULL)
-      return FALSE;
-
-   all_subsubsubsubnodes++;
-
-   called_subsubsubsubnode = TRUE;        /* r5pl6 */
-
-   /* ---------------------------------------------------- */
-   /* r5pl6: Listenartige Verkettung erzeugen              */
-   /* ---------------------------------------------------- */
-   /* noch ist p1_toc_counter nicht inkrementiert worden   */
-   /* und zeigt daher auf den letzten (Sub(Sub))Node       */
-
-   tocptr->prev_index = p1_toc_counter;
-
-                                          /* New TOHAH; V6.5.17 */
-   if (desttype == TOHTM || desttype == TOHAH)
-   {
-      if (html_merge_node5 && last_n4_index > 0)
-         tocptr->prev_index = last_n4_index;
-
-      if (html_merge_node4 && last_n3_index > 0)
-         tocptr->prev_index = last_n3_index;
-
-      if (html_merge_node3 && last_n2_index > 0)
-         tocptr->prev_index = last_n2_index;
-
-      if (html_merge_node2 && last_n1_index > 0)
-         tocptr->prev_index = last_n1_index;
-
-      if (html_merge_node1)
-         tocptr->prev_index = 0;
-
-   }
-
-   /* Den Nachfolger des Vorgaengers setzen: auf diesen    */
-   
-   toc[p1_toc_counter]->next_index = p1_toc_counter + 1;
-
-   /* Merken, dass der uebergeordnete Kinder hat */
-   /* und die Anzahl der Subsubsubnodes erhoehen */
-   
-   if (last_n4_index > 0)
-   {
-      toc[last_n4_index]->has_children = TRUE;
-      toc[last_n4_index]->count_n5++;
-   }
-
-   /* Der Zeiger auf den Nachfolger muss vom Nachfolger gesetzt werden. */
-   
-   tocptr->next_index = 0;
-
-   /* Hilfsvariablen setzen fuer die uebergeordneten Nodes */
-   
-   tocptr->up_n1_index = last_n1_index;
-   tocptr->up_n2_index = last_n2_index;
-   tocptr->up_n3_index = last_n3_index;
-   tocptr->up_n4_index = last_n4_index;
-
-   last_n5_index = p1_toc_counter + 1;
-   
-   /* ---------------------------------------------------- */
-
-   p1_toc_counter++;
-   toc[p1_toc_counter] = tocptr;
-
-   if (pflag[PASS1].inside_apx)
-   {
-      apx_available = TRUE;
-      p1_apx_n5++;
-
-      tocptr->appendix = TRUE;
-      
-      tocptr->n1 = p1_apx_n1;
-      tocptr->n2 = p1_apx_n2;
-      tocptr->n3 = p1_apx_n3;
-      tocptr->n4 = p1_apx_n4;
-      tocptr->n5 = p1_apx_n5;
-
-      if (!invisible)
-      {
-         p1_apx_nr5++;
-         
-         tocptr->nr1 = p1_apx_nr1;
-         tocptr->nr2 = p1_apx_nr2;
-         tocptr->nr3 = p1_apx_nr3;
-         tocptr->nr4 = p1_apx_nr4;
-         tocptr->nr5 = p1_apx_nr5;
-      }
-   }
-   else
-   {
-      toc_available = TRUE;
-      p1_toc_n5++;
-      
-      tocptr->appendix = FALSE;
-      
-      tocptr->n1 = p1_toc_n1;
-      tocptr->n2 = p1_toc_n2;
-      tocptr->n3 = p1_toc_n3;
-      tocptr->n4 = p1_toc_n4;
-      tocptr->n5 = p1_toc_n5;
-
-      {
-         p1_toc_nr5++;
-         
-         tocptr->nr1 = p1_toc_nr1;
-         tocptr->nr2 = p1_toc_nr2;
-         tocptr->nr3 = p1_toc_nr3;
-         tocptr->nr4 = p1_toc_nr4;
-         tocptr->nr5 = p1_toc_nr5;
-      }
-   }
-
-                                          /* New TOHAH; V6.5.17 */
-   if (desttype == TOHTM || desttype == TOMHH || desttype == TOHAH)
-   {
-      /* Den Dateinamen ermitteln, in dem dieser Node definiert ist */
-      /* Vor r6pl2 wurde er erst waehrend der Referenzierung ermittelt */
-      
-      get_html_filename(p1_toc_counter, tocptr->filename, &html_merge);
-   }
-
-   li = add_label(tocptr->name, TRUE, popup);
-
-   if (li >= 0)
-      tocptr->labindex = li;
-
-   return TRUE;
 }
 
 
@@ -16870,24 +16415,15 @@ const BOOLEAN   invisible)
 {
    switch (p1_toctype)
    {
-   case TOC_NONE:
-      return add_node_to_toc(popup, invisible);
-
-   case TOC_NODE1:
-      return add_subnode_to_toc(popup, invisible);
-
-   case TOC_NODE2:
-      return add_subsubnode_to_toc(popup, invisible);
-
-   case TOC_NODE3:
-      return add_subsubsubnode_to_toc(popup, invisible);
-
-   case TOC_NODE4:
-      return add_subsubsubsubnode_to_toc(popup, invisible);
-
-   default:
-      return add_subsubsubsubnode_to_toc(popup, invisible);
+   case TOC_NONE:                         /* node type not known: */
+      p1_toctype = TOC_NODE1;             /* start with node */
+      break;
+   
+   default:                               /* known node type: */
+      p1_toctype++;                       /* add sub chapter for this level */
    }
+
+   return add_nodetype_to_toc(p1_toctype, popup, invisible);
 }
 
 
@@ -16897,7 +16433,7 @@ const BOOLEAN   invisible)
 /*******************************************************************************
 *
 *  toc_end_node():
-*     ???
+*     decrease current node type 
 *
 *  Return:
 *     -
@@ -16911,17 +16447,9 @@ GLOBAL void toc_end_node(void)
    case TOC_NODE1:
       p1_toctype = TOC_NONE;
       break;
-   case TOC_NODE2:
-      p1_toctype = TOC_NODE1;
-      break;
-   case TOC_NODE3:
-      p1_toctype = TOC_NODE2;
-      break;
-   case TOC_NODE4:
-      p1_toctype = TOC_NODE3;
-      break;
-   case TOC_NODE5:
-      p1_toctype = TOC_NODE4;
+   
+   default:
+      p1_toctype--;
    }
 }
 
