@@ -114,6 +114,8 @@
 *    fd  May 20: - typo in udocharset[windows-1252] fixed
 *                - token_output(): some adjustments for description item output in KPS
 *    fd  May 21: new: label* | l*  (#90)
+*  2011:
+*    fd  Feb 14: pass1() handles "!subsubsubsubnode" and its derivates (finally)
 *
 ******************************************|************************************/
 
@@ -12083,6 +12085,16 @@ char           *datei)           /* */
                      add_subsubsubnode_to_toc(NODE_NORMAL, NODE_INVISIBLE);
                      bInsidePopup= FALSE;
                   }
+                  else if (strcmp(token[0], "!subsubsubsubnode") == 0 || strcmp(token[0], "!ssssn") == 0)
+                  {
+                     add_subsubsubsubnode_to_toc(NODE_NORMAL, NODE_VISIBLE);
+                     bInsidePopup= FALSE;
+                  }
+                  else if (strcmp(token[0], "!subsubsubsubnode*") == 0 || strcmp(token[0], "!ssssn*") == 0)
+                  {
+                     add_subsubsubsubnode_to_toc(NODE_NORMAL, NODE_INVISIBLE);
+                     bInsidePopup= FALSE;
+                  }
                   else if (strcmp(token[0], "!pnode") == 0 || strcmp(token[0], "!p") == 0)
                   {
                      add_node_to_toc(NODE_POPUP, NODE_VISIBLE);
@@ -12121,6 +12133,16 @@ char           *datei)           /* */
                   else if (strcmp(token[0], "!psubsubsubnode*") == 0 || strcmp(token[0], "!psss*") == 0)
                   {
                      add_subsubsubnode_to_toc(NODE_POPUP, NODE_INVISIBLE);
+                     bInsidePopup= TRUE;
+                  }
+                  else if (strcmp(token[0], "!psubsubsubsubnode") == 0 || strcmp(token[0], "!pssss") == 0)
+                  {
+                     add_subsubsubsubnode_to_toc(NODE_POPUP, NODE_VISIBLE);
+                     bInsidePopup= TRUE;
+                  }
+                  else if (strcmp(token[0], "!psubsubsubsubnode*") == 0 || strcmp(token[0], "!pssss*") == 0)
+                  {
+                     add_subsubsubsubnode_to_toc(NODE_POPUP, NODE_INVISIBLE);
                      bInsidePopup= TRUE;
                   }
                   else if (strcmp(token[0], "!begin_node") == 0 || strcmp(token[0], "!bn") == 0)
