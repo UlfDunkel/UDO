@@ -9749,13 +9749,12 @@ BOOLEAN           apx)                /* TRUE: appendix output */
       if (toc[i] != NULL && !toc[i]->invisible)
       {
          convert_toc_item(toc[i]);
-   
+
          if (!apx && toc[i]->appendix)    /* r5pl6: Es kann nur einen Anhang geben */
             break;
-/*
-         else if (apx && !toc[i]->appendix)
-            break;
-*/
+         
+         if (apx && !toc[i]->appendix)
+            goto NEXT_APX;
 
          if (toc[i]->n1 != 0)             /* valid node */
          {
@@ -10367,7 +10366,9 @@ BOOLEAN           apx)                /* TRUE: appendix output */
          }  /* toc[i]->n1 > 0 */
 
       }  /* toc[i] != NULL && !toc[i]->invisible */
-   
+
+NEXT_APX:
+      ;
    }  /* for */
    
    
