@@ -113,6 +113,7 @@
 *    fd  Feb 15: - more sources tidied up
 *                - all *apx_output() functions merged into *toc_output() functions,
 *                    which finally outputs the same proper HTML list formattings
+*                - bookmarks_ps() simplified
 *
 ******************************************|************************************/
 
@@ -9284,261 +9285,197 @@ TOCITEM  *t)  /* */
 
 /*******************************************************************************
 *
-*  xxxxxxxxxxxxxxxxx():
-*     ???
+*  bookmarks_ps():
+*     output bookmarks for PostScript / PDF
 *
 *  return:
-*     -
+*     ???
 *
 ******************************************|************************************/
 
-/* New in r6pl15 [NHz] */
-/* Output of bookmarks for postscript/PDF */
 GLOBAL BOOLEAN bookmarks_ps(void)
 {
-        register int i;
-        int li, apxstart;
-/* 6.3.12 [vj] Added this define for buffer checks, increased value from 128 to 148 (for Ulrich :-)) */
-#define PS_BOOKM_LEN    148
-        char s[PS_BOOKM_LEN], n[PS_BOOKM_LEN];
+   /* 6.3.12 [vj] Added this define for buffer checks, increased value from 128 to 148 (for Ulrich :-)) */
+   #define PS_BOOKM_LEN    148
+   
+   register int   i;                /* */
+   int            li,               /* */
+                  apxstart;         /* */
+   char           s[PS_BOOKM_LEN],  /* */
+                  n[PS_BOOKM_LEN];  /* */
+   
+   
+   if (p1_toc_counter <= 0)
+      return FALSE;
 
-        if (p1_toc_counter<=0)
-        {       return FALSE;
-        }
+   apxstart = 1;
 
-        apxstart= 1;
+   for (i = 1; i <= p1_toc_counter; i++)
+   {
+      if (toc[i] != NULL && !toc[i]->invisible)
+      {
+         convert_toc_item(toc[i]);
 
-        for (i=1; i<=p1_toc_counter; i++)
-        {
-                if (toc[i]!=NULL && !toc[i]->invisible)
-                {
-                        convert_toc_item(toc[i]);
+         if (toc[i]->appendix)
+         {
+            apxstart = i;                 /* fuer unten merken */
+            break;                        /* r5pl6: Es kann nur einen Anhang geben */
+         }
+         else
+         {
+            if (toc[i]->n1 != 0)
+            {
+               li = toc[i]->labindex;
 
-                        if (toc[i]->appendix)
-                        {
-                                apxstart= i;    /* fuer unten merken */
-                                break;                  /* r5pl6: Es kann nur einen Anhang geben */
-                        }
-                        else
-                        {       if (toc[i]->n1 != 0)
-                                {
-                                        if (toc[i]->toctype==TOC_NODE1)
-                                        {       /* Ein Kapitel */       
+               um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps");
+               um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps");
+               
+               node2postscript(n, KPS_BOOKMARK);
+               node2postscript(s, KPS_NAMEDEST);
+                  
 
-                                                li= toc[i]->labindex;
+               switch (toc[i]->toctype)
+               {
+               case TOC_NODE1:            /* a node */
+                  voutlnf("(%d %s) /%s %d Bookmarks",
+                        toc[i]->nr1 + toc_offset,
+                        n, s,
+                        toc[i]->count_n2);
+                  break;
 
-                                                um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[1]");
-                                                /* Changed in r6pl16 [NHz] */
-                                                um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[2]");
-                                                node2postscript(n, KPS_BOOKMARK);
-                                                node2postscript(s, KPS_NAMEDEST);
-                                                voutlnf("(%d %s) /%s %d Bookmarks",
-                                                                                        toc[i]->nr1+toc_offset,
-                                                                                        n, s,
-                                                                                        toc[i]->count_n2);
-                                        }/* TOC_NODE1 */
+               case TOC_NODE2:            /* a subnode */
+                  voutlnf("(%d.%d %s) /%s %d Bookmarks",
+                        toc[i]->nr1 + toc_offset,
+                        toc[i]->nr2 + subtoc_offset,
+                        n, s,
+                        toc[i]->count_n3);
+                  break;
 
+               case TOC_NODE3:            /* a subsubnode */
+                  voutlnf("(%d.%d.%d %s) /%s %d Bookmarks",
+                        toc[i]->nr1 + toc_offset,
+                        toc[i]->nr2 + subtoc_offset,
+                        toc[i]->nr3 + subsubtoc_offset,
+                        n, s,
+                        toc[i]->count_n4);
+                  break;
 
-                                        if (toc[i]->toctype==TOC_NODE2)
-                                        {       /* Ein Abschnitt */
+               case TOC_NODE4:            /* a subsubsubnode */
+                  voutlnf("(%d.%d.%d.%d %s) /%s 0 Bookmarks",
+                        toc[i]->nr1 + toc_offset,
+                        toc[i]->nr2 + subtoc_offset,
+                        toc[i]->nr3 + subsubtoc_offset,
+                        toc[i]->nr4 + subsubsubtoc_offset,
+                        n, s);
+                  break;
 
-                                                li= toc[i]->labindex;
+               case TOC_NODE5:            /* a subsubsubsubnode */
+                  voutlnf("(%d.%d.%d.%d.%d %s) /%s 0 Bookmarks",
+                        toc[i]->nr1+toc_offset,
+                        toc[i]->nr2+subtoc_offset,
+                        toc[i]->nr3+subsubtoc_offset,
+                        toc[i]->nr4+subsubsubtoc_offset,
+                        toc[i]->nr5+subsubsubsubtoc_offset,
+                        n, s);
 
-                                                um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[3]");
-                                                /* Changed in r6pl16 [NHz] */
-                                                um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[4]");
-                                                node2postscript(n, KPS_BOOKMARK);
-                                                node2postscript(s, KPS_NAMEDEST);
-                                                voutlnf("(%d.%d %s) /%s %d Bookmarks",
-                                                                                        toc[i]->nr1+toc_offset,
-                                                                                        toc[i]->nr2+subtoc_offset,
-                                                                                        n, s,
-                                                                                        toc[i]->count_n3);
-                                        }/* TOC_NODE2 */
+               }  /* switch (toc[i]->toctype) */
 
-                                        if (toc[i]->toctype==TOC_NODE3)
-                                        {       /* Ein Unterabschnitt */
+            }  /* toc[i]->n1 > 0 */
 
-                                                li= toc[i]->labindex;
+         }  /* !toc[i]->appendix */
 
-                                                um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[5]");
-                                                /* Changed in r6pl16 [NHz] */
-                                                um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[6]");
-                                                node2postscript(n, KPS_BOOKMARK);
-                                                node2postscript(s, KPS_NAMEDEST);
-                                                voutlnf("(%d.%d.%d %s) /%s %d Bookmarks",
-                                                                                        toc[i]->nr1+toc_offset,
-                                                                                        toc[i]->nr2+subtoc_offset,
-                                                                                        toc[i]->nr3+subsubtoc_offset,
-                                                                                        n, s,
-                                                                                        toc[i]->count_n4);
-                                        }/* TOC_NODE3 */
+      }  /* toc[i] != NULL && !toc[i]->invisible */
 
-                                        if (toc[i]->toctype==TOC_NODE4)
-                                        {       /* Ein Paragraph */
-
-                                                li= toc[i]->labindex;
-
-                                                um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[7]");
-                                                /* Changed in r6pl16 [NHz] */
-                                                um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[8]");
-                                                node2postscript(n, KPS_BOOKMARK);
-                                                node2postscript(s, KPS_NAMEDEST);
-                                                voutlnf("(%d.%d.%d.%d %s) /%s 0 Bookmarks",
-                                                                                        toc[i]->nr1+toc_offset,
-                                                                                        toc[i]->nr2+subtoc_offset,
-                                                                                        toc[i]->nr3+subsubtoc_offset,
-                                                                                        toc[i]->nr4+subsubsubtoc_offset,
-                                                                                        n, s);
-                                        }/* TOC_NODE4 */
-
-                                        if (toc[i]->toctype==TOC_NODE5)
-                                        {       /* Ein Paragraph */ /* ToDo: ??? */
-
-                                                li= toc[i]->labindex;
-
-                                                um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[7.1]");
-                                                /* Changed in r6pl16 [NHz] */
-                                                um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[8.1]");
-                                                node2postscript(n, KPS_BOOKMARK);
-                                                node2postscript(s, KPS_NAMEDEST);
-                                                voutlnf("(%d.%d.%d.%d.%d %s) /%s 0 Bookmarks",
-                                                                                        toc[i]->nr1+toc_offset,
-                                                                                        toc[i]->nr2+subtoc_offset,
-                                                                                        toc[i]->nr3+subsubtoc_offset,
-                                                                                        toc[i]->nr4+subsubsubtoc_offset,
-                                                                                        toc[i]->nr5+subsubsubsubtoc_offset,
-                                                                                        n, s);
-                                        }/* TOC_NODE5 */
-
-                                }/* toc[i]->n1 > 0 */
-
-                        }/* !toc[i]->appendix */
-
-                }/* toc[i]!=NULL && !toc[i]->invisible */
-
-        }/* for */
-
-        if (!apx_available)
-        {
-                return TRUE;
-        }
-
-        for (i=apxstart; i<=p1_toc_counter; i++)
-        {
-                if (toc[i]!=NULL && !toc[i]->invisible)
-                {
-                        convert_toc_item(toc[i]);
-
-                        if (toc[i]->appendix)
-                        {
-                                if (toc[i]->n1 != 0)
-                                {
-                                        if (toc[i]->toctype==TOC_NODE1)
-                                        {       /* Ein Kapitel */       
-
-                                                li= toc[i]->labindex;
-
-                                                um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[9]");
-                                                /* Changed in r6pl16 [NHz] */
-                                                um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[10]");
-                                                node2postscript(n, KPS_BOOKMARK);
-                                                node2postscript(s, KPS_NAMEDEST);
-                                                voutlnf("(%c %s) /%s %d Bookmarks",
-                                                                                        'A'-1+toc[i]->nr1+toc_offset,
-                                                                                        n, s,
-                                                                                        toc[i]->count_n2);
-                                        }/* TOC_NODE1 */
+   }  /* for */
 
 
-                                        if (toc[i]->toctype==TOC_NODE2)
-                                        {       /* Ein Abschnitt */
-
-                                                li= toc[i]->labindex;
-
-                                                /*um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[11]"); v6.3.12 [vj] entfernt, da die naechste zeile gleich ist */
-                                                /* Changed in r6pl16 [NHz] */
-                                                um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[12]");
-                                                um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[13]");
-                                                node2postscript(n, KPS_BOOKMARK);
-                                                node2postscript(s, KPS_NAMEDEST);
-                                                voutlnf("(%c.%2d %s) /%s %d Bookmarks",
-                                                                                        'A'-1+toc[i]->nr1+toc_offset,
-                                                                                        toc[i]->nr2+subtoc_offset,
-                                                                                        n, s,
-                                                                                        toc[i]->count_n3);
-                                        }/* TOC_NODE2 */
-
-                                        if (toc[i]->toctype==TOC_NODE3)
-                                        {       /* Ein Unterabschnitt */
-
-                                                li= toc[i]->labindex;
-
-                                                um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[14]");
-                                                /* Changed in r6pl16 [NHz] */
-                                                um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[15]");
-                                                node2postscript(n, KPS_BOOKMARK);
-                                                node2postscript(s, KPS_NAMEDEST);
-                                                voutlnf("(%c.%2d.%2d %s) /%s %d Bookmarks",
-                                                                                        'A'-1+toc[i]->nr1+toc_offset,
-                                                                                        toc[i]->nr2+subtoc_offset,
-                                                                                        toc[i]->nr3+subsubtoc_offset,
-                                                                                        n, s,
-                                                                                        toc[i]->count_n4);
-                                        }/* TOC_NODE3 */
-
-                                        if (toc[i]->toctype==TOC_NODE4)
-                                        {       /* Ein Paragraph */
-
-                                                li= toc[i]->labindex;
-
-                                                um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[16]");
-                                                /* Changed in r6pl16 [NHz] */
-                                                um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[17]");
-                                                node2postscript(n, KPS_BOOKMARK);
-                                                node2postscript(s, KPS_NAMEDEST);
-                                                voutlnf("(%c.%2d.%2d.%2d %s) /%s 0 Bookmarks",
-                                                                                        'A'-1+toc[i]->nr1+toc_offset,
-                                                                                        toc[i]->nr2+subtoc_offset,
-                                                                                        toc[i]->nr3+subsubtoc_offset,
-                                                                                        toc[i]->nr4+subsubsubtoc_offset,
-                                                                                        n, s);
-                                        }/* TOC_NODE4 */
-
-                                        if (toc[i]->toctype==TOC_NODE5)
-                                        {       /* Ein Paragraph */     /* ToDo: ??? */
-
-                                                li= toc[i]->labindex;
-
-                                                um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[16]");
-                                                /* Changed in r6pl16 [NHz] */
-                                                um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps[17]");
-                                                node2postscript(n, KPS_BOOKMARK);
-                                                node2postscript(s, KPS_NAMEDEST);
-                                                voutlnf("(%c.%2d.%2d.%2d.%2d %s) /%s 0 Bookmarks",
-                                                                                        'A'-1+toc[i]->nr1+toc_offset,
-                                                                                        toc[i]->nr2+subtoc_offset,
-                                                                                        toc[i]->nr3+subsubtoc_offset,
-                                                                                        toc[i]->nr4+subsubsubtoc_offset,
-                                                                                        toc[i]->nr5+subsubsubsubtoc_offset,
-                                                                                        n, s);
-                                        }/* TOC_NODE5 */
-
-                                }/* toc[i]->n1 > 0 */
-
-                        }/* !toc[i]->appendix */
-
-                }/* toc[i]!=NULL && !toc[i]->invisible */
-
-        }/* for */
-
-        outln("");
-
-        return TRUE;
-}       /* bookmarks_ps */
+   if (!apx_available)                    /* we're done */
+      return TRUE;
 
 
-/* New in r6pl16 [NHz] */
+   /* --- appendix --- */
+
+   for (i = apxstart; i <= p1_toc_counter; i++)
+   {
+      if (toc[i] != NULL && !toc[i]->invisible)
+      {
+         convert_toc_item(toc[i]);
+
+         if (toc[i]->appendix)
+         {
+            if (toc[i]->n1 != 0)
+            {
+               li = toc[i]->labindex;
+
+               um_strcpy(s, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps");
+               um_strcpy(n, lab[li]->name, PS_BOOKM_LEN, "bookmarks_ps");
+
+               node2postscript(n, KPS_BOOKMARK);
+               node2postscript(s, KPS_NAMEDEST);
+
+               switch (toc[i]->toctype)
+               {
+               case TOC_NODE1:            /* a node */
+                  voutlnf("(%c %s) /%s %d Bookmarks",
+                        'A' - 1 + toc[i]->nr1 + toc_offset,
+                        n, s,
+                        toc[i]->count_n2);
+                  break;
+
+               case TOC_NODE2:            /* a subnode */
+                  voutlnf("(%c.%2d %s) /%s %d Bookmarks",
+                        'A' - 1 + toc[i]->nr1 + toc_offset,
+                                  toc[i]->nr2 + subtoc_offset,
+                        n, s,
+                        toc[i]->count_n3);
+                  break;
+
+               case TOC_NODE3:            /* a subsubnode */
+                  voutlnf("(%c.%2d.%2d %s) /%s %d Bookmarks",
+                        'A' - 1 + toc[i]->nr1 + toc_offset,
+                                  toc[i]->nr2 + subtoc_offset,
+                                  toc[i]->nr3 + subsubtoc_offset,
+                        n, s,
+                        toc[i]->count_n4);
+                  break;
+
+               case TOC_NODE4:            /* a subsubsubnode */
+                  voutlnf("(%c.%2d.%2d.%2d %s) /%s 0 Bookmarks",
+                        'A' - 1 + toc[i]->nr1 + toc_offset,
+                                  toc[i]->nr2 + subtoc_offset,
+                                  toc[i]->nr3 + subsubtoc_offset,
+                                  toc[i]->nr4 + subsubsubtoc_offset,
+                        n, s);
+                  break;
+
+               case TOC_NODE5:            /* a subsubsubsubnode */
+                  voutlnf("(%c.%2d.%2d.%2d.%2d %s) /%s 0 Bookmarks",
+                        'A' - 1 + toc[i]->nr1 + toc_offset,
+                                  toc[i]->nr2 + subtoc_offset,
+                                  toc[i]->nr3 + subsubtoc_offset,
+                                  toc[i]->nr4 + subsubsubtoc_offset,
+                                  toc[i]->nr5 + subsubsubsubtoc_offset,
+                        n, s);
+
+               }  /* switch (toc[i]->toctype) */
+
+            }  /* toc[i]->n1 > 0 */
+
+         }  /* !toc[i]->appendix */
+
+      }  /* toc[i] != NULL && !toc[i]->invisible */
+
+   }  /* for */
+
+   outln("");
+
+   return TRUE;
+}
+
+
+
+
+
 /*******************************************************************************
 *
 *  toc_link_output():
@@ -10554,27 +10491,16 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
    int            li;                   /* */
    char           n[512],               /* */
                   ref[512];             /* */
-   BOOLEAN        last_sn = FALSE;    /* TRUE: this node is last subnode */
-   BOOLEAN        last_ssn = FALSE;   /* TRUE: this node is last subsubnode */
-   BOOLEAN        last_sssn = FALSE;  /* TRUE: this node is last subsubsubnode */
-   BOOLEAN        last_ssssn = FALSE; /* TRUE: this node is last subsubsubsubnode */
+   BOOLEAN        last_sn = FALSE;      /* TRUE: this node is last subnode */
+   BOOLEAN        last_ssn = FALSE;     /* TRUE: this node is last subsubnode */
+   BOOLEAN        last_sssn = FALSE;    /* TRUE: this node is last subsubsubnode */
+   BOOLEAN        last_ssssn = FALSE;   /* TRUE: this node is last subsubsubsubnode */
    BOOLEAN        output_done = FALSE;  /* */
    BOOLEAN        first       = TRUE;   /* */
    BOOLEAN        old;                  /* */
-
-   int            p2_n1;
+   int            p2_n1;                /* buffer */
    
    
-   if (apx)                               /* we're in appendix mode */
-   {
-      p2_n1 = p2_apx_n1;
-   }
-   else
-   {
-      p2_n1 = p2_toc_n1;
-   }
-
-
    if (desttype == TOLYX)                 /* LYX doesn't support !toc */
       return;
    
@@ -10583,6 +10509,11 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
    
    if (toc[p2_toc_counter]->ignore_subtoc)
       return;
+
+   if (apx)                               /* we're in appendix mode */
+      p2_n1 = p2_apx_n1;
+   else
+      p2_n1 = p2_toc_n1;
 
    old = bDocAutorefOff;
    bDocAutorefOff = FALSE;
@@ -11118,24 +11049,10 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
    BOOLEAN        output_done = FALSE;  /* */
    BOOLEAN        first       = TRUE;   /* */
    BOOLEAN        old;                  /* */
-
-   int            p2_n1,
+   int            p2_n1,                /* buffers */
                   p2_n2;
    
    
-   if (apx)                               /* we're in appendix mode */
-   {
-      p2_n1 = p2_apx_n1;
-      p2_n2 = p2_apx_n2;
-   }
-   else
-   {
-      p2_n1 = p2_toc_n1;
-      p2_n2 = p2_toc_n2;
-   }
-
-
-
    if (desttype == TOLYX)                 /* LYX doesn't support !toc */
       return;
    
@@ -11147,6 +11064,17 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
 
    if (last_n2_index == 0)                /* Wer benutzt !subsubtoc in einem Node? */
       return;
+
+   if (apx)                               /* we're in appendix mode */
+   {
+      p2_n1 = p2_apx_n1;
+      p2_n2 = p2_apx_n2;
+   }
+   else
+   {
+      p2_n1 = p2_toc_n1;
+      p2_n2 = p2_toc_n2;
+   }
 
    old = bDocAutorefOff;
    bDocAutorefOff = FALSE;
@@ -11528,26 +11456,11 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
    BOOLEAN        output_done = FALSE;  /* */
    BOOLEAN        first       = TRUE;   /* */
    BOOLEAN        old;                  /* */
-
-   int            p2_n1,
+   int            p2_n1,                /* buffers */
                   p2_n2,
                   p2_n3;
    
    
-   if (apx)                               /* we're in appendix mode */
-   {
-      p2_n1 = p2_apx_n1;
-      p2_n2 = p2_apx_n2;
-      p2_n3 = p2_apx_n3;
-   }
-   else
-   {
-      p2_n1 = p2_toc_n1;
-      p2_n2 = p2_toc_n2;
-      p2_n3 = p2_toc_n3;
-   }
-
-
    if (desttype == TOLYX)                 /* LYX doesn't support !toc */
       return;
    
@@ -11563,6 +11476,18 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
    if (last_n3_index == 0)                /* Wer benutzt !subsubsubtoc in einem Subnode? */
       return;
 
+   if (apx)                               /* we're in appendix mode */
+   {
+      p2_n1 = p2_apx_n1;
+      p2_n2 = p2_apx_n2;
+      p2_n3 = p2_apx_n3;
+   }
+   else
+   {
+      p2_n1 = p2_toc_n1;
+      p2_n2 = p2_toc_n2;
+      p2_n3 = p2_toc_n3;
+   }
 
    old = bDocAutorefOff;
    bDocAutorefOff = FALSE;
@@ -11834,29 +11759,12 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
    BOOLEAN        output_done = FALSE;  /* */
    BOOLEAN        first       = TRUE;   /* */
    BOOLEAN        old;                  /* */
-   
-   int            p2_n1,
+   int            p2_n1,                /* buffers */
                   p2_n2,
                   p2_n3,
                   p2_n4;
    
    
-   if (apx)                               /* we're in appendix mode */
-   {
-      p2_n1 = p2_apx_n1;
-      p2_n2 = p2_apx_n2;
-      p2_n3 = p2_apx_n3;
-      p2_n4 = p2_apx_n4;
-   }
-   else
-   {
-      p2_n1 = p2_toc_n1;
-      p2_n2 = p2_toc_n2;
-      p2_n3 = p2_toc_n3;
-      p2_n4 = p2_toc_n4;
-   }
-
-
    if (desttype == TOLYX)                 /* LYX doesn't support !toc */
       return;
    
@@ -11874,6 +11782,21 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
 
    if (last_n4_index == 0)                /* Wer benutzt !subsubsubtoc in einem Subnode? */
       return;
+
+   if (apx)                               /* we're in appendix mode */
+   {
+      p2_n1 = p2_apx_n1;
+      p2_n2 = p2_apx_n2;
+      p2_n3 = p2_apx_n3;
+      p2_n4 = p2_apx_n4;
+   }
+   else
+   {
+      p2_n1 = p2_toc_n1;
+      p2_n2 = p2_toc_n2;
+      p2_n3 = p2_toc_n3;
+      p2_n4 = p2_toc_n4;
+   }
 
    old = bDocAutorefOff;
    bDocAutorefOff = FALSE;
