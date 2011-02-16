@@ -115,6 +115,7 @@
 *                    which finally outputs the same proper HTML list formattings
 *                - bookmarks_ps() simplified
 *    fd  Feb 16: - make_*node() functions reformatted
+*                - all make_*node() functions merged into new make_nodetype() function
 *
 ******************************************|************************************/
 
@@ -356,11 +357,7 @@ LOCAL void set_inside_node3(void);
 LOCAL void set_inside_node4(void);
 LOCAL void set_inside_node5(void);
 
-LOCAL void make_node(const BOOLEAN popup, const BOOLEAN invisible);
-LOCAL void make_subnode(const BOOLEAN popup, const BOOLEAN invisible);
-LOCAL void make_subsubnode(const BOOLEAN popup, const BOOLEAN invisible);
-LOCAL void make_subsubsubnode(const BOOLEAN popup, const BOOLEAN invisible);
-LOCAL void make_subsubsubsubnode(const BOOLEAN popup, const BOOLEAN invisible);
+LOCAL void make_nodetype(int nodetype, const BOOLEAN popup, const BOOLEAN invisible);
 
 LOCAL void tocline_make_bold(char *s, const int depth);
 LOCAL void tocline_handle_1st(BOOLEAN *f);
@@ -6125,7 +6122,7 @@ GLOBAL BOOLEAN save_htmlhelp_index(const char* filename)
 
 /*******************************************************************************
 *
-*  make_node():
+*  make_nodetype():
 *     ??? (description)
 *
 *  return:
@@ -6133,663 +6130,9 @@ GLOBAL BOOLEAN save_htmlhelp_index(const char* filename)
 *
 ******************************************|************************************/
 
-LOCAL void make_node(
+LOCAL void make_nodetype(
 
-const BOOLEAN   popup,             /* TRUE: this is a popup node */
-const BOOLEAN   invisible)         /* TRUE: this is an invisible node */
-{
-   char         n[512],            /* */
-                name[512],         /* */
-                stgname[512],      /* */
-                numbers[512],      /* */
-                nameNoSty[512];    /* */
-   char         map[64],           /* */
-                sGifSize[80],      /* */
-                nodename[512];     /* */
-   int          ti,                /* */
-                chapter,           /* */
-                nr1;               /* */
-   BOOLEAN       flag;              /* */
-   BOOLEAN      do_index;          /* */
-   char         closer[8] = "\0";  /* single tag closer mark in XHTML */
-
-   
-   if (html_doctype >= XHTML_STRICT)      /* no single tag closer in HTML! */
-      strcpy(closer, " /");
-   
-   
-   if (p2_toc_counter >= MAXTOCS)         /* r5pl2 */
-   {
-      bBreakInside = TRUE;
-      return;
-   }
-   
-   tokcpy2(name, 512);
-   strcpy(stgname, name);                 /* r5pl14 */
-
-
-   if (name[0] == EOS)
-   {
-      error_missing_parameter("!node");
-      return;
-   }
-   
-   p2_lab_counter++;                      /*r6pl2*/
-   p2_toctype= TOC_NODE1;                 /*r6pl5*/
-   
-   if ((desttype == TOHTM || desttype == TOHAH) && !html_merge_node1)
-   {
-      check_endnode();
-      html_bottomline();
-   }
-   
-   if (desttype == TOMHH)
-   {
-      check_endnode();
-      hh_bottomline();
-   }
-   
-   check_styles(name);                    /*r6pl3*/
-   c_styles(name);
-   
-   switch (desttype)                      /*r5pl3*/
-   {
-   case TOWIN:
-   case TOWH4:
-   case TOAQV:
-      c_win_styles(name);
-         break;
-         
-   case TORTF:
-      c_rtf_styles(name);
-      c_rtf_quotes(name);
-      break;
-      
-   default:
-      c_internal_styles(name);
-   }
-   
-   replace_udo_quotes(name);
-   delete_all_divis(name);
-   replace_udo_tilde(name);
-   replace_udo_nbsp(name);
-   
-   check_endnode();
-   check_styleflags();
-   check_environments_node();
-   
-   if (bInsideAppendix)
-   {
-      p2_apx_n1++;
-      p2_apx_n2 = 0;
-      p2_apx_n3 = 0;
-      p2_apx_n4 = 0;
-      p2_apx_n5 = 0;
-   }
-   else
-   {
-      p2_toc_n1++;
-      p2_toc_n2 = 0;
-      p2_toc_n3 = 0;
-      p2_toc_n4 = 0;
-      p2_toc_n5 = 0;
-   }
-   
-   p2_toc_counter++;
-   curr_n1_index = p2_toc_counter;
-   curr_n2_index = 0;
-   curr_n3_index = 0;
-   curr_n4_index = 0;
-   
-   last_n1_index = p2_toc_counter;
-   last_n2_index = 0;
-   last_n3_index = 0;
-   last_n4_index = 0;
-   last_n5_index = 0;
-   
-   nr1 = toc[p2_toc_counter]->nr1;
-   
-   (bInsideAppendix) ? (chapter = nr1) : (chapter = nr1 + toc_offset);
-   
-   n[0] = EOS;
-   numbers[0] = EOS;
-   
-   if (!invisible)
-   {
-      if (bInsideAppendix)
-      {
-         sprintf(numbers, "%c", 'A'+ nr1 - 1);
-      }
-      else
-      {
-         sprintf(numbers, "%d", chapter); /* r5pl7: chapter statt nr1 */
-      }
-   }
-   
-   if (bVerbose)
-   {
-      sprintf(sInfMsg, "[%s] ", numbers);
-      show_status_node(sInfMsg);
-   }
-   
-   if (no_numbers || invisible)
-   {
-      numbers[0] = EOS;
-   }
-   else
-   {
-      strcat(numbers, " ");
-   }
-   
-   strcpy(current_chapter_name, name);
-   strcpy(current_chapter_nr, numbers);
-   
-                                          /* r5pl10 */
-   do_index = (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index);
-
-   
-   switch (desttype)
-   {
-   case TOTEX:
-   case TOPDL:
-      set_inside_node1();
-      
-      if (invisible)
-      {
-         (use_style_book) ? voutlnf("\n\\chapter*{%s}", name) : voutlnf("\n\\section*{%s}", name);
-      }
-      else
-      {
-         (use_style_book) ? voutlnf("\n\\chapter{%s}", name) : voutlnf("\n\\section{%s}", name);
-      }
-      
-      label2tex(name);                    /*r6pl2*/
-      voutlnf("\\label{%s}", name);       /*r6pl2*/
-      output_aliasses();
-   
-      if (desttype == TOPDL)              /*r6pl8*/
-      {
-         voutlnf("\\pdfdest num %d fitbh", p2_lab_counter);
-         voutlnf("\\pdfoutline goto num %d count %d {%s}",
-         p2_lab_counter, toc[p2_toc_counter]->count_n2, name);
-      }
-      
-      break;
-   
-   case TOLYX:
-      set_inside_node1();
-      out("\\layout ");
-      
-      if (invisible)
-      {
-         (use_style_book) ? outln("Chapter") : outln("Section*");
-      }
-      else
-      {
-         (use_style_book) ? outln("Chapter") : outln("Section");
-      }
-      
-      indent2space(name);
-      outln(name);
-      break;
-   
-   case TOINF:
-      set_inside_node1();
-      output_texinfo_node(name);
-      
-      if (bInsideAppendix)
-      {
-         voutlnf("@appendix %s", name);
-      }
-      else
-      {
-         (invisible) ? (voutlnf("@chapheading %s", name)) : (voutlnf("@chapter %s", name));
-      }
-      break;
-   
-   case TOTVH:
-      set_inside_node1();
-      if (numbers[0] != EOS)
-         strcat(numbers, " ");
-         
-      output_vision_header(numbers, name);
-      break;
-   
-   case TOSTG:
-      set_inside_node1();
-      bInsidePopup = popup;
-   
-      replace_2at_by_1at(name);
-   
-      node2stg(name);
-   
-      outln("");
-      
-      if (!do_index)
-      {
-         outln("@indexoff");
-      }
-      
-      if (popup)
-      {
-         voutlnf("@pnode \"%s\"", name);
-      }
-      else
-      {
-         voutlnf("@node \"%s\"", name);
-      }
-      
-      if (!do_index)
-      {
-         outln("@indexon");
-      }
-   
-      if (!popup)
-      {
-         if (called_tableofcontents)
-         {
-            outln("@toc \"Main\"");
-         }
-      }
-      
-      stg_header(numbers, stgname, popup);
-      break;
-   
-   case TOAMG:
-      set_inside_node1();
-      replace_2at_by_1at(name);
-      
-      node2stg(name);
-      
-      outln("");
-      
-      if (titleprogram[0] != EOS)
-      {
-         voutlnf("@node \"%s\" \"%s - %s\"", name, titleprogram, name);
-      }
-      else
-      {
-         voutlnf("@node \"%s\" \"%s\"", name, name);
-      }
-      
-      if (called_tableofcontents)
-      {
-         outln("@toc \"Main\"");
-      }
-      
-      stg_header(numbers, stgname, FALSE);
-      break;
-   
-   case TOMAN:
-      set_inside_node1();
-      outln("");
-      my_strupr(name);
-      sprintf(n, " %s%s%s", BOLD_ON, name, BOLD_OFF);
-      c_internal_styles(n);
-      outln(n);
-      break;
-      
-   case TONRO:
-      set_inside_node1();
-      my_strupr(name);
-      sprintf(n, ".SH %s", name);
-      c_internal_styles(n);
-      outln(n);
-      break;
-      
-   case TOASC:
-      set_inside_node1();
-      outln("");
-      outln("");
-      
-      if (use_style_book)
-      {
-         (bInsideAppendix) ? sprintf(n, "%s %s", lang.appendix, numbers) : sprintf(n, "%s %s", lang.chapter, numbers);
-         del_right_spaces(n);
-         output_ascii_line("=", zDocParwidth);
-         outln(n);
-         outln("");
-         outln(name);
-         output_ascii_line("=", zDocParwidth);
-      }
-      else
-      {
-         if (numbers[0] != EOS)
-            strcat(numbers, " ");
-         
-         sprintf(n, "%s%s", numbers, name);
-         outln(n);
-         output_ascii_line("*", strlen(n));
-      }
-      
-      outln("");
-      break;
-      
-   case TOKPS:
-      set_inside_node1();
-
-      if (use_style_book)
-      {
-         (bInsideAppendix) ? sprintf(n, "%s %s", lang.appendix, numbers) : sprintf(n, "%s %s", lang.chapter, numbers);
-         del_right_spaces(n);
-         
-         if (n[0] != EOS)
-            strcat(n, " ");
-
-         strcat(n, name);
-         outln("25 changeFontSize");
-      }
-      else
-      {
-         if (numbers[0] != EOS)
-            strcat(numbers, " ");
-         
-         sprintf(n, "%s%s", numbers, name);
-         
-         /* Changed in r6pl16 [NHz] */
-         /* Nodesize ist set on discrete value */
-         voutlnf("%d changeFontSize", laydat.node1size);
-      }
-      
-                                          /* Changed in r6pl16 [NHz] */
-      node2postscript(name, KPS_NAMEDEST);
-                                          /* Changed: Fixed bug #0000040 in r6.3pl16 [NHz] */
-      um_strcpy(nodename, n, 511, "make_node TOKPS");
-      node2postscript(nodename, KPS_NODENAME);
-      voutlnf("/NodeName (%s %s) def", lang.chapter, nodename);
-      outln("newline");
-      voutlnf("/%s NameDest", name);      /* New in r6pl15 [NHz] */
-      outln("Bon");
-      
-      node2postscript(n, KPS_CONTENT);    /* Changed in V6.5.5 [NHz] */
-      voutlnf("(%s) udoshow", n);
-      outln("Boff");
-      outln("newline");
-                                          /* Changed in r6pl15 [NHz] */
-      voutlnf("%d changeFontSize", laydat.propfontsize);
-   break;
-   
-   case TODRC:
-      set_inside_node1();
-      outln("%%*");
-      
-      if (p2_toc_counter + 1 <= p1_toc_counter && toc[p2_toc_counter + 1]->toctype == TOC_NODE2)
-      {
-         voutlnf("%%%% 0, %d, 0, 0, %d, %s", p2_toc_counter+10, iDrcFlags, name);
-      }
-      else
-      {
-         voutlnf("%%%% 0, 0, 0, 0, %d, %s", iDrcFlags, name);
-      }
-      
-      outln("%%*");
-      outln("");
-      break;
-      
-   case TOIPF:
-      set_inside_node1();
-                                          /* r6pl2 */
-      node2NrIPF(n, toc[p2_toc_counter]->labindex);
-      map[0] = EOS;
-      
-      if (toc[p2_toc_counter]->mapping >= 0)
-      {
-         sprintf(map, " res=%d", toc[p2_toc_counter]->mapping);
-      }
-      
-      if (bInsideAppendix)
-      {
-         voutlnf(":h1 id=%s%s.%s %s%s", n, map, lang.appendix, numbers, name);
-      }
-      else
-      {
-         voutlnf(":h1 id=%s%s.%s%s", n, map, numbers, name);
-      }
-      
-      break;
-      
-   case TOSRC:
-   case TOSRP:
-      set_inside_node1();
-      outln("");
-      outln("");
-      
-      memset(n, '#', 62);
-      n[62] = EOS;
-      voutlnf("%s  %s", sSrcRemOn, n);
-      outln("    #");
-      outln("    #");
-      
-      voutlnf("    # %s", name);
-      outln("    #");
-      outln("    #");
-      
-      voutlnf("    %s  %s", n, sSrcRemOff);
-      outln("");
-      break;
-      
-   case TORTF:
-      set_inside_node1();
-
-      if (use_style_book)
-         c_newpage();
-      
-      outln(rtf_pardpar);
-      
-      /* r6pl6: Indizes fuer RTF */
-      if (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index)
-      {
-         strcpy(n, name);
-         winspecials2ascii(n);
-         voutf("{\\xe\\v %s}", n);
-      }
-      
-      output_aliasses();
-      
-      /* New in V6.5.9 [NHz] [bookmark] */
-      um_strcpy(n, name, 512, "make_node[RTF]");
-      winspecials2ascii(n);
-      node2winhelp(n);
-      
-      if (use_style_book)
-      {
-         if (bInsideAppendix)
-         {
-            if (invisible)
-            {
-               voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", 
-                  rtf_inv_chapt, iDocPropfontSize + 28, lang.appendix, numbers, rtf_inv_chapt, 
-                  iDocPropfontSize + 28, n, name, n);
-            }
-            else
-            {
-               voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", 
-                  rtf_inv_chapt, iDocPropfontSize + 28, lang.appendix, numbers, rtf_chapt, 
-                  iDocPropfontSize + 28, n, name, n);
-            }
-         }
-         else
-         {
-            if (invisible)
-            {
-               voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", 
-                  rtf_inv_chapt, iDocPropfontSize + 28, lang.chapter, numbers, rtf_inv_chapt, 
-                  iDocPropfontSize + 28, n, name, n);
-            }
-            else
-            {
-               voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", 
-                  rtf_inv_chapt, iDocPropfontSize + 28, lang.chapter, numbers, rtf_chapt, 
-                  iDocPropfontSize + 28, n, name, n);
-            }
-         }
-      }
-      else
-      {
-         if (numbers[0] == EOS)
-         {
-            if (invisible)
-            {                             /* Changed in V6.5.9 [NHz] */
-                                          /* Nodesize ist set on discrete value */
-               voutlnf("%s %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", 
-                  rtf_plain, rtf_inv_node1, laydat.node1size, n, name, n, rtf_parpard);
-            }
-            else
-            {                             /* Changed in V6.5.9 [NHz] */
-                                          /* Nodesize ist set on discrete value */
-               voutlnf("%s %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", 
-                  rtf_plain, rtf_node1, laydat.node1size, n, name, n, rtf_parpard);
-            }
-         }
-         else
-         {
-            if (invisible)
-            {                             /* Changed in V6.5.9 [NHz] */
-                                          /* Nodesize ist set on discrete value */
-               voutlnf("%s %s\\fs%d %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", 
-                  rtf_plain, rtf_inv_node1, laydat.node1size, numbers, n, name, n, rtf_parpard);
-            }
-            else
-            {                             /* Changed in V6.5.9 [NHz] */
-                                          /* Nodesize ist set on discrete value */
-               voutlnf("%s %s\\fs%d %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", 
-                  rtf_plain, rtf_node1, laydat.node1size, numbers, n, name, n, rtf_parpard);
-            }
-         }
-      }
-      
-      voutlnf("%s %s\\fs%d %s", rtf_plain, rtf_norm, iDocPropfontSize, rtf_par);
-      break;
-      
-   case TOWIN:
-   case TOWH4:
-   case TOAQV:
-      set_inside_node1();
-      output_win_header(name, invisible);
-      output_aliasses();
-      
-      if (use_style_book)
-      {
-         (bInsideAppendix) ? sprintf(n, "%s %s\\par %s", lang.appendix, numbers, name) : sprintf(n, "%s %s\\par %s", lang.chapter, numbers, name);
-      }
-      else
-      {
-         if (numbers[0] != EOS)
-            strcat(numbers, "\\~\\~");
-         
-         sprintf(n, "%s%s", numbers, name);
-      }
-      
-      win_headline(n, popup);
-      break;
-      
-   case TOPCH:
-      set_inside_node1();
-      if (numbers[0] != EOS)
-         strcat(numbers, " ");
-
-      output_pch_header(numbers, name);
-      break;
-      
-   case TOHAH:                            /* V6.5.17 */
-   case TOHTM:
-   case TOMHH:
-      ti= p2_toc_counter;
-      
-      if (!html_merge_node1)
-      {
-         if (!html_new_file())
-            return;
-      }
-      else
-      {
-         output_aliasses();
-         
-         if (html_doctype < XHTML_STRICT)
-            outln(HTML_HR);
-         else
-            outln(XHTML_HR);
-      }
-      
-      set_inside_node1();
-      flag = FALSE;
-      
-      do_toptoc(TOC_NODE1);               /*r6pl5*/
-      
-      if (use_chapter_images)
-      { 
-         if (ti >= 0 && toc[ti]->image != NULL)
-         {
-            sGifSize[0] = EOS;
-            
-            if (toc[ti]->uiImageWidth != 0 && toc[ti]->uiImageHeight != 0)
-            {
-               sprintf(sGifSize, " width=\"%u\" height=\"%u\"",
-                  toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
-            }
-                                          /* r5pl4 */
-            voutlnf("<h%d><p align=\"center\">", html_nodesize);
-               
-            voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\"%s%s>",
-               toc[ti]->image, sDocImgSuffix, numbers, name, numbers, name, sGifSize, closer);
-                  
-                                          /* r5pl4 */
-            voutlnf("</p></h%d>", html_nodesize);
-            
-            flag = TRUE;
-         }
-      }
-      
-      if (!flag && !toc[ti]->ignore_title)
-      { 
-         strcpy(nameNoSty, name);
-         del_html_styles(nameNoSty);
-      
-         label2html(nameNoSty);           /*r6pl2*/
-         
-                                          /* r5pl4 */
-         voutlnf("\n<h%d><a name=\"%s\"></a>%s%s</h%d>\n",
-            html_nodesize, nameNoSty, numbers, name, html_nodesize);
-      }
-      
-      if (show_variable.source_filename)  /* V6.5.19 */
-                                          /* V6.5.18 */
-         voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, 
-            toc[p2_toc_counter]->source_line);
-      
-      break;
-      
-   case TOLDS:
-      set_inside_node1();
-      (use_style_book) ? voutlnf("<chapter>%s<label id=\"%s\">", name, name) : voutlnf("<sect>%s<label id=\"%s\">", name, name);
-      output_aliasses();                  /* r5pl8 */
-      outln("<p>");
-      break;
-   
-   case TOHPH:
-      set_inside_node1();
-      (use_style_book) ? voutlnf("<chapter>%s", name) : voutlnf("<s1>%s", name);
-      output_aliasses();
-   }
-   
-}  /* make_node() */
-
-
-
-
-
-/*******************************************************************************
-*
-*  make_subnode():
-*     ??? (description)
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void make_subnode(
-
+int             nodetype,        /* TOC_NODE... */
 const BOOLEAN   popup,           /* TRUE: this is a popup node */
 const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
 {
@@ -6803,1778 +6146,8 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
                 nameNoSty[512],  /* */
                 k[512];          /* */
    char         map[64],         /* */
-                sGifSize[80];    /* */
-   int          ti,              /* */
-                ui,              /* */
-                chapter,         /* */
-                nr1,             /* */
-                nr2;             /* */
-   BOOLEAN      flag;            /* */
-   BOOLEAN      do_index;        /* */
-
-
-   if (p2_toc_counter >= MAXTOCS)
-   {
-      bBreakInside = TRUE;
-      return;
-   }
-
-   tokcpy2(name, 512);
-   strcpy(stgname, name);
-
-   if (name[0] == EOS)
-   {
-      error_missing_parameter("!subnode");
-      return;
-   }
-
-   p2_lab_counter++;
-   p2_toctype = TOC_NODE2;
-
-   if ((desttype == TOHTM || desttype == TOHAH) && !html_merge_node2)
-   {
-      check_endnode();
-      html_bottomline();
-   }
-
-   if (desttype == TOMHH)
-   { 
-      check_endnode();
-      hh_bottomline();
-   }
-
-   check_styles(name);
-   c_styles(name);
-
-   switch (desttype)
-   { 
-   case TOWIN:
-   case TOWH4:
-   case TOAQV:
-      c_win_styles(name);
-      break;
-      
-   case TORTF:
-      c_rtf_styles(name);
-      c_rtf_quotes(name);
-      break;
-      
-   default:
-      c_internal_styles(name);
-   }
-   
-   replace_udo_quotes(name);
-   delete_all_divis(name);
-   replace_udo_tilde(name);
-   replace_udo_nbsp(name);
-
-   check_endnode();        
-   check_styleflags();
-   check_environments_node();
-
-   if (bInsideAppendix)
-   {
-      p2_apx_n2++;
-      p2_apx_n3 = 0;
-      p2_apx_n4 = 0;
-      p2_apx_n5 = 0;
-   }
-   else
-   {
-      p2_toc_n2++;
-      p2_toc_n3 = 0;
-      p2_toc_n4 = 0;
-      p2_toc_n5 = 0;
-   }
-
-   p2_toc_counter++;
-
-   curr_n2_index = p2_toc_counter;
-   curr_n3_index = 0;
-   curr_n4_index = 0;
-
-   last_n2_index = p2_toc_counter;
-   last_n3_index = 0;
-   last_n4_index = 0;
-   last_n5_index = 0;
-
-   nr1 = toc[p2_toc_counter]->nr1;
-   nr2 = toc[p2_toc_counter]->nr2;
-   
-   (bInsideAppendix) ? (chapter = nr1) : (chapter = nr1 + toc_offset);
-
-   n[0] = EOS;
-   numbers[0] = EOS;
-
-   if (!invisible)
-   {
-      if (bInsideAppendix)
-      {
-         sprintf(numbers, "%c.%d", 'A' + nr1 - 1, nr2 + subtoc_offset);
-      }
-      else
-      {
-         sprintf(numbers, "%d.%d", chapter, nr2 + subtoc_offset);
-      }
-   }
-
-   if (bVerbose)
-   {
-      sprintf(sInfMsg, "[%s] ", numbers);
-      show_status_node(sInfMsg);
-   }
-
-   if (no_numbers || invisible)
-   {
-      numbers[0] = EOS;
-   }
-   else
-   {
-      strcat(numbers, " ");
-   }
-
-   strcpy(current_chapter_name, name);
-   strcpy(current_chapter_nr, numbers);
-
-   do_index = (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index);
-
-   switch (desttype)
-   {
-   case TOTEX:
-   case TOPDL:
-      set_inside_node2();
-      
-      if (invisible)
-      {
-         (use_style_book) ? voutlnf("\n\\section*{%s}", name) : voutlnf("\n\\subsection*{%s}", name);
-      }
-      else
-      {
-         (use_style_book) ? voutlnf("\n\\section{%s}", name)  : voutlnf("\n\\subsection{%s}", name);
-      }
-
-      label2tex(name);
-      voutlnf("\\label{%s}", name);
-      output_aliasses();
-      
-      if (desttype == TOPDL)
-      {
-         voutlnf("\\pdfdest num %d fitbh", p2_lab_counter);
-         voutlnf("\\pdfoutline goto num %d count %d {%s}",
-         p2_lab_counter, toc[p2_toc_counter]->count_n3, name);
-      }
-
-      break;
-
-
-   case TOLYX:
-      set_inside_node2();
-      out("\\layout ");
-      
-      if (invisible)
-      {
-         (use_style_book) ? outln("Section*") : outln("Subsection*");
-      }
-      else
-      {
-         (use_style_book) ? outln("Section")  : outln("Subsection");
-      }
-      
-      indent2space(name);
-      outln(name);
-      break;
-      
-      
-   case TOINF:
-      set_inside_node2();
-      output_texinfo_node(name);
-      
-      if (bInsideAppendix)
-      {
-         voutlnf("@appendixsec %s", name);
-      }
-      else
-      {
-         (invisible) ? (voutlnf("@heading %s", name)) : (voutlnf("@section %s", name));
-      }
-      
-      break;
-      
-      
-   case TOTVH:
-      set_inside_node2();
-      
-      if (numbers[0] != EOS)
-         strcat(numbers, " ");
-         
-      output_vision_header(numbers, name);
-      break;
-      
-      
-   case TOSTG:
-      set_inside_node2();
-      bInsidePopup = popup;
-      replace_2at_by_1at(name);
-      node2stg(name);
-
-      outln("");
-      
-      if (!do_index)
-         outln("@indexoff");
-      
-      if (popup)
-         voutlnf("@pnode \"%s\"", name);
-      else
-         voutlnf("@node \"%s\"", name);
-
-      if (!do_index)
-         outln("@indexon");
-
-      /* r5pl6: up_n1_index wird statt der alten Abfrage benutzt */
-      
-      if (!popup)
-      {
-         ui = toc[p2_toc_counter]->up_n1_index;
-
-         if (ui > 0)
-         {
-            strcpy(sTemp, toc[ui]->name);
-            node2stg(sTemp);
-            replace_2at_by_1at(sTemp);
-            voutlnf("@toc \"%s\"", sTemp);
-         }
-      }
-
-      stg_header(numbers, stgname, popup);
-      break;
-      
-      
-   case TOAMG:
-      set_inside_node2();
-      replace_2at_by_1at(name);
-      node2stg(name);
-
-      outln("");
-      
-      if (titleprogram[0] != EOS)
-         voutlnf("@node \"%s\" \"%s - %s\"", name, titleprogram, name);
-      else
-         voutlnf("@node \"%s\" \"%s\"", name, name);
-
-      /* r5pl6: up_n1_index wird statt der alten Abfrage benutzt */
-      
-      ui = toc[p2_toc_counter]->up_n1_index;
-
-      if (ui > 0)
-      {
-         strcpy(sTemp, toc[ui]->name);
-         node2stg(sTemp);
-         replace_2at_by_1at(sTemp);
-         voutlnf("@toc \"%s\"", sTemp);
-      }
-      
-      stg_header(numbers, stgname, FALSE);
-      break;
-      
-      
-   case TOMAN:
-      set_inside_node2();
-      outln("");
-      sprintf(n, " %s%s%s", BOLD_ON, name, BOLD_OFF);
-      c_internal_styles(n);
-      outln(n);
-      break;
-
-
-   case TONRO:
-      set_inside_node2();
-      sprintf(n, ".SH %s", name);
-      c_internal_styles(n);
-      outln(n);
-      break;
-      
-
-   case TOASC:
-      set_inside_node2();
-      
-      if (numbers[0] != EOS)
-         strcat(numbers, " ");
-         
-      sprintf(n, "%s%s", numbers, name);
-      outln("");
-      outln(n);
-      output_ascii_line("=", strlen(n));
-      outln("");
-      break;
-      
-
-   case TOIPF:
-      set_inside_node2();
-      node2NrIPF(n, toc[p2_toc_counter]->labindex);
-      map[0] = EOS;
-
-      if (toc[p2_toc_counter]->mapping >= 0)
-         sprintf(map, " res=%d", toc[p2_toc_counter]->mapping);
-
-      if (bInsideAppendix)
-         voutlnf(":h2 id=%s%s.%s %s%s", n, map, lang.appendix, numbers, name);
-      else
-         voutlnf(":h2 id=%s%s.%s%s", n, map, numbers, name);
-
-      break;
-
-
-   case TOKPS:
-      set_inside_node2();
-
-      if (use_style_book)
-      {
-         (bInsideAppendix) ? sprintf(n, "%s %s", lang.appendix, numbers) : sprintf(n, "%s %s", lang.chapter, numbers);
-
-         del_right_spaces(n);
-
-         if (n[0] != EOS)
-            strcat(n, " ");
-            
-         strcat(n, name);
-         outln("18 changeFontSize");
-      }
-      else
-      {
-         if (numbers[0] != EOS)
-            strcat(numbers, " ");
-
-         sprintf(n, "%s%s", numbers, name);
-         voutlnf("%d changeFontSize", laydat.node2size);
-      }
-      
-      outln("newline");
-      
-      node2postscript(name, KPS_NAMEDEST);
-      voutlnf("/%s NameDest", name);
-      
-      outln("Bon");
-      node2postscript(n, KPS_CONTENT);
-      voutlnf("(%s) udoshow", n);
-      outln("Boff");
-      
-      outln("newline");
-      voutlnf("%d changeFontSize", laydat.propfontsize);
-      break;
-      
-
-   case TODRC:
-      set_inside_node2();
-      
-      outln("%%*");
-
-      if (p2_toc_counter + 1 <= p1_toc_counter && toc[p2_toc_counter + 1]->toctype == TOC_NODE3)
-      {
-         voutlnf("%%%% %d, %d, 0, 0, %d, %s", last_n1_index+10, p2_toc_counter+100, iDrcFlags, name);
-      }
-      else
-      {
-         voutlnf("%%%% %d, 0, 0, 0, %d, %s", last_n1_index+10, iDrcFlags, name);
-      }
-
-      outln("%%*");
-      outln("");
-      break;
-
-
-   case TOSRC:
-   case TOSRP:
-      set_inside_node1();
-      outln("");
-      memset(n, '*', 62); n[62]= EOS;
-      voutlnf("%s  %s", sSrcRemOn, n);
-      outln("    *");
-      voutlnf("    * %s", name);
-      outln("    *");
-      voutlnf("    %s  %s", n, sSrcRemOff);
-      outln("");
-      break;
-      
-
-   case TORTF:
-      set_inside_node2();
-      outln(rtf_pardpar);
-
-                                          /* r6pl6: Indizes fuer RTF */
-      if (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index)
-      {
-         strcpy(n, name);
-         winspecials2ascii(n);
-         voutf("{\\xe\\v %s}", n);
-      }
-
-      um_strcpy(k, name, 512, "make_subnode[RTF]");
-      winspecials2ascii(k);
-      node2winhelp(k);
-
-      if (use_style_book)
-      {
-      if (invisible)
-         sprintf(n, "%s\\fs%d", rtf_inv_node1, iDocPropfontSize + 14);
-      else
-         sprintf(n, "%s\\fs%d", rtf_node1, iDocPropfontSize + 14);
-      }
-      else
-      {
-         if (invisible)
-         {
-                                          /* Nodesize ist set on discrete value */
-            sprintf(n, "%s\\fs%d", rtf_inv_node2, laydat.node2size);
-         }
-         else
-         {
-                                          /* Nodesize ist set on discrete value */
-            sprintf(n, "%s\\fs%d", rtf_node2, laydat.node2size);
-         }
-      }
-
-      if (numbers[0] == EOS)              /* [bookmark] */
-      { 
-         voutlnf("%s %s {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, n, k, name, k, rtf_parpard);
-      }
-      else
-      {
-         voutlnf("%s %s %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, n, numbers, k, name, k, rtf_parpard);
-      }
-      
-      voutlnf("%s %s\\fs%d %s", rtf_plain, rtf_norm, iDocPropfontSize, rtf_par);
-      break;
-
-
-   case TOWIN:
-   case TOWH4:
-   case TOAQV:
-      set_inside_node2();
-      output_win_header(name, invisible);
-      output_aliasses();
-      
-      if (numbers[0] != EOS)
-         strcat(numbers, "\\~\\~");
-         
-      sprintf(n, "%s%s", numbers, name);
-      win_headline(n, popup);
-      break;
-
-
-   case TOPCH:
-      set_inside_node2();
-
-      if (numbers[0] != EOS)
-         strcat(numbers, " ");
-
-      output_pch_header(numbers, name);
-      break;
-      
-
-   case TOHAH:
-   case TOHTM:
-   case TOMHH:
-      ti = p2_toc_counter;
-   
-      if (!html_merge_node2)
-      { 
-         if (!html_new_file())
-            return;
-            
-         if (!toc[ti]->ignore_title)
-         {
-            sprintf(hx_start, "<h%d>", html_nodesize);
-            sprintf(hx_end, "</h%d>", html_nodesize);
-         }
-      }
-      else
-      {
-         if (!toc[ti]->ignore_title)
-         { 
-            sprintf(hx_start, "<h%d>", html_nodesize + 1);
-            sprintf(hx_end, "</h%d>", html_nodesize + 1);
-         }
-         
-         output_aliasses();
-      }
-      
-      set_inside_node2();
-      flag = FALSE;
-   
-      do_toptoc(TOC_NODE2);
-   
-      if (use_chapter_images)
-      {
-         char   closer[8] = "\0";
-   
-         /* no single tag closer in HTML! */
-         if (html_doctype >= XHTML_STRICT)
-            strcpy(closer, " /");
-   
-         ti = p2_toc_counter;
-   
-         if (ti >= 0 && toc[ti]->image!=NULL)
-         {
-            sGifSize[0] = EOS;
-   
-            if (toc[ti]->uiImageWidth != 0 && toc[ti]->uiImageHeight != 0)
-            {
-               sprintf(sGifSize, " width=\"%u\" height=\"%u\"", toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
-            }
-      
-            voutlnf("%s<p align=\"center\">", hx_start);
-      
-            voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\"%s%s>",
-                  toc[ti]->image, sDocImgSuffix, numbers, name, numbers, name, sGifSize, closer);
-      
-            voutlnf("</p>%s", hx_end);
-            flag = TRUE;
-         }
-      }
-   
-      if (!flag)
-      { 
-         strcpy(nameNoSty, name);
-         del_html_styles(nameNoSty);
-   
-         label2html(nameNoSty);
-         voutlnf("%s<a name=\"%s\"></a>%s%s%s",hx_start, nameNoSty, numbers, name, hx_end);
-      }
-      
-      if (show_variable.source_filename)
-         voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line);
-
-      break;
-
-
-   case TOLDS:
-      (use_style_book) ? voutlnf("<sect>%s<label id=\"%s\">", name, name) : voutlnf("<sect1>%s<label id=\"%s\">", name, name);
-
-      output_aliasses();
-      outln("<p>");
-      break;
-      
-
-   case TOHPH:
-      set_inside_node2();
-      
-      (use_style_book) ? voutlnf("<s1>%s", name) : voutlnf("<s2>%s", name);
-
-      output_aliasses();
-      
-   }  /* switch (desttype) */
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  make_subsubnode():
-*     ??? (description)
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void make_subsubnode(
-
-const BOOLEAN   popup,          /* TRUE: this is a popup node */
-const BOOLEAN   invisible)      /* TRUE: this is an invisible node */
-{
-   char         n[512],         /* */
-                name[512],      /* */
-                stgname[512],   /* */
-                hx_start[16],   /* */
-                hx_end[16],     /* */
-                sTemp[512];     /* */
-   char         numbers[512],   /* */
-                nameNoSty[512], /* */
-                k[512];         /* */
-   char         map[64],        /* */
-                sGifSize[80];   /* */
-   int          ti,             /* */
-                ui,             /* */
-                chapter,        /* */
-                nr1,            /* */
-                nr2,            /* */
-                nr3;            /* */
-   BOOLEAN      flag;           /* */
-   BOOLEAN      do_index;       /* */
-   
-   
-   if (p2_toc_counter >= MAXTOCS)
-   {
-      bBreakInside = TRUE;
-      return;
-   }
-
-   tokcpy2(name, 512);
-   strcpy(stgname, name);
-
-   if (name[0] == EOS)
-   { 
-      error_missing_parameter("!subsubnode");
-      return;
-   }
-
-   p2_lab_counter++;
-   p2_toctype = TOC_NODE3;
-
-   if ((desttype == TOHTM || desttype == TOHAH) && !html_merge_node3)
-   { 
-      check_endnode();
-      html_bottomline();
-   }
-
-   if (desttype == TOMHH)
-   {
-      check_endnode();
-      hh_bottomline();
-   }
-
-   check_styles(name);
-   c_styles(name);
-   
-   
-   switch (desttype)
-   {
-   case TOWIN:
-   case TOWH4:
-   case TOAQV:
-      c_win_styles(name);
-      break;
-      
-      
-   case TORTF:
-      c_rtf_styles(name);
-      c_rtf_quotes(name);
-      break;
-      
-      
-   default:
-      c_internal_styles(name);
-   }
-   
-   
-   replace_udo_quotes(name);
-   delete_all_divis(name);
-   replace_udo_tilde(name);
-   replace_udo_nbsp(name);
-   
-   check_endnode();
-   check_styleflags();
-   check_environments_node();
-   
-   if (bInsideAppendix)
-   {
-      p2_apx_n3++;
-      p2_apx_n4 = 0;
-      p2_apx_n5 = 0;
-   }
-   else
-   {
-      p2_toc_n3++;
-      p2_toc_n4 = 0;
-      p2_toc_n5 = 0;
-   }
-   
-   p2_toc_counter++;
-   curr_n3_index = p2_toc_counter;
-   curr_n4_index = 0;
-   
-   last_n3_index = p2_toc_counter;
-   last_n4_index = 0;
-   last_n5_index = 0;
-   
-   nr1 = toc[p2_toc_counter]->nr1;
-   nr2 = toc[p2_toc_counter]->nr2;
-   nr3 = toc[p2_toc_counter]->nr3;
-   
-   (bInsideAppendix) ? (chapter = nr1) : (chapter = nr1 + toc_offset);
-   
-   n[0] = EOS;
-   numbers[0] = EOS;
-   
-   if (!invisible)
-   {
-      if (bInsideAppendix)
-         sprintf(numbers, "%c.%d.%d", 'A'+nr1-1, nr2+subtoc_offset, nr3+subsubtoc_offset);
-      else
-         sprintf(numbers, "%d.%d.%d", chapter, nr2+subtoc_offset, nr3+subsubtoc_offset);
-   }
-   
-   if (bVerbose)
-   {
-      sprintf(sInfMsg, "[%s] ", numbers);
-      show_status_node(sInfMsg);
-   }
-   
-   if (no_numbers || invisible)
-      numbers[0] = EOS;
-   else
-      strcat(numbers, " ");
-   
-   strcpy(current_chapter_name, name);
-   strcpy(current_chapter_nr, numbers);
-   
-   do_index = (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index);
-   
-   switch (desttype)
-   {
-   case TOTEX:
-   case TOPDL:
-      set_inside_node3();
-      
-      if (invisible)
-      {
-         (use_style_book) ? voutlnf("\n\\subsection*{%s}", name) : voutlnf("\n\\subsubsection*{%s}", name);
-      }
-      else
-      {
-         (use_style_book) ? voutlnf("\n\\subsection{%s}", name)  : voutlnf("\n\\subsubsection{%s}", name);
-      }
-   
-      label2tex(name);
-      voutlnf("\\label{%s}", name);
-      
-      if (desttype == TOPDL)
-      {
-         voutlnf("\\pdfdest num %d fitbh", p2_lab_counter);
-         voutlnf("\\pdfoutline goto num %d count %d {%s}",
-         p2_lab_counter, toc[p2_toc_counter]->count_n4, name);
-      }
-   
-      output_aliasses();
-      break;
-      
-      
-   case TOLYX:
-      set_inside_node3();
-      out("\\layout ");
-      
-      if (invisible)
-      {
-         (use_style_book) ? outln("Subsection*") : outln("Subsubsection*");
-      }
-      else
-      {
-         (use_style_book) ? outln("Subsection")  : outln("Subsubsection");
-      }
-      
-      indent2space(name);
-      outln(name);
-      break;
-      
-      
-   case TOINF:
-      set_inside_node3();
-      output_texinfo_node(name);
-      
-      if (bInsideAppendix)
-      {
-         voutlnf("@appendixsubsec %s", name);
-      }
-      else
-      {
-         (invisible) ? (voutlnf("@subheading %s", name)) : (voutlnf("@subsection %s", name));
-      }
-      
-      break;
-      
-      
-   case TOTVH:
-      set_inside_node3();
-      
-      if (numbers[0] != EOS)
-         strcat(numbers, " ");
-
-      output_vision_header(numbers, name);
-      break;
-      
-      
-   case TOSTG:
-      set_inside_node3();
-      bInsidePopup= popup;
-      replace_2at_by_1at(name);
-      node2stg(name);
-   
-      outln("");
-
-      if (!do_index)
-         outln("@indexoff");
-
-      if (popup)
-         voutlnf("@pnode \"%s\"", name);
-      else
-         voutlnf("@node \"%s\"", name);
-
-      if (!do_index)
-         outln("@indexon");
-   
-      /* r5pl6: up_n2_index wird statt der alten Abfrage benutzt */
-      
-      if (!popup)
-      {
-         ui = toc[p2_toc_counter]->up_n2_index;
-         
-         if (ui > 0)
-         {
-            strcpy(sTemp, toc[ui]->name);
-            node2stg(sTemp);
-            replace_2at_by_1at(sTemp);
-            voutlnf("@toc \"%s\"", sTemp);
-         }
-      }
-   
-      stg_header(numbers, stgname, popup);/* r5pl14: stgname statt "" */
-      break;
-      
-      
-   case TOAMG:
-      set_inside_node3();
-      replace_2at_by_1at(name);
-      node2stg(name);
-   
-      outln("");
-      
-      if (titleprogram[0] != EOS)
-      {
-         voutlnf("@node \"%s\" \"%s - %s\"", name, titleprogram, name);
-      }
-      else
-      {
-         voutlnf("@node \"%s\" \"%s\"", name, name);
-      }
-   
-      /* r5pl6: up_n2_index wird statt der alten Abfrage benutzt */
-      
-      ui = toc[p2_toc_counter]->up_n2_index;
-      
-      if (ui > 0)
-      {
-         strcpy(sTemp, toc[ui]->name);
-         node2stg(sTemp);
-         replace_2at_by_1at(sTemp);
-         voutlnf("@toc \"%s\"", sTemp);
-      }
-      
-      stg_header(numbers, stgname, FALSE);/* r5pl14: stgname statt "" */
-      break;
-      
-   
-   case TOMAN:
-      set_inside_node3();
-      outln("");
-      sprintf(n, " %s", name);
-      c_internal_styles(n);
-      outln(n);
-      break;
-      
-   
-   case TONRO:
-      set_inside_node3();
-      sprintf(n, ".SH %s", name);
-      c_internal_styles(n);
-      outln(n);
-      break;
-      
-   
-   case TOASC:
-      set_inside_node3();
-      
-      if (numbers[0] != EOS)
-         strcat(numbers, " ");
-
-      sprintf(n, "%s%s", numbers, name);
-      outln("");
-      outln(n);
-      output_ascii_line("-", strlen(n));
-      outln("");
-      break;
-   
-   
-   case TOIPF:
-      set_inside_node3();
-      node2NrIPF(n, toc[p2_toc_counter]->labindex);
-      map[0] = EOS;
-      
-      if (toc[p2_toc_counter]->mapping >= 0)
-         sprintf(map, " res=%d", toc[p2_toc_counter]->mapping);
-
-      if (bInsideAppendix)
-         voutlnf(":h3 id=%s%s.%s %s%s", n, map, lang.appendix, numbers, name);
-      else
-         voutlnf(":h3 id=%s%s.%s%s", n, map, numbers, name);
-
-      break;
-   
-   
-   case TOKPS:
-      set_inside_node3();
-   
-      if (use_style_book)
-      {
-         (bInsideAppendix) ? sprintf(n, "%s %s", lang.appendix, numbers) : sprintf(n, "%s %s", lang.chapter, numbers);
-         del_right_spaces(n);
-         
-         if (n[0] != EOS)
-            strcat(n, " ");
-            
-         strcat(n, name);
-         outln("14 changeFontSize");
-      }
-      else
-      {
-         if (numbers[0] != EOS)
-            strcat(numbers, " ");
-            
-         sprintf(n, "%s%s", numbers, name);
-         voutlnf("%d changeFontSize", laydat.node3size);
-      }
-   
-      outln("newline");
-      node2postscript(name, KPS_NAMEDEST);
-      voutlnf("/%s NameDest", name);
-
-      outln("Bon");
-      node2postscript(n, KPS_CONTENT);
-      voutlnf("(%s) udoshow", n);
-      outln("Boff");
-      
-      outln("newline");
-      voutlnf("%d changeFontSize", laydat.propfontsize);
-      break;
-      
-   
-   case TODRC:
-      set_inside_node3();
-      outln("%%*");
-      
-      if (p2_toc_counter + 1 <= p1_toc_counter && toc[p2_toc_counter + 1]->toctype == TOC_NODE4)
-      {
-         voutlnf("%%%% %d, %d, 0, 0, %d, %s", last_n2_index+100, p2_toc_counter+1000, iDrcFlags, name);
-      }
-      else
-      {
-         voutlnf("%%%% %d, 0, 0, 0, %d, %s", last_n2_index+100, iDrcFlags, name);
-      }
-      
-      outln("%%*");
-      outln("");
-      break;
-      
-   
-   case TOSRC:
-   case TOSRP:
-      set_inside_node1();
-      outln("");
-      memset(n, '=', 62); n[62]= EOS;
-      voutlnf("%s  %s", sSrcRemOn, n);
-      voutlnf("    = %s", name);
-      voutlnf("    %s  %s", n, sSrcRemOff);
-      outln("");
-      break;
-      
-   
-   case TORTF:
-      set_inside_node3();
-      outln(rtf_pardpar);
-   
-      /* r6pl6: Indizes fuer RTF */
-      if (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index)
-      {
-         strcpy(n, name);
-         winspecials2ascii(n);
-         voutf("{\\xe\\v %s}", n);
-      }
-   
-      um_strcpy(k, name, 512, "make_subsubnode[RTF]");
-      winspecials2ascii(k);
-      node2winhelp(k);
-   
-      if (use_style_book)
-      {
-         if (invisible)
-            sprintf(n, "%s\\fs%d", rtf_inv_node2, iDocPropfontSize + 6);
-         else
-            sprintf(n, "%s\\fs%d", rtf_node2, iDocPropfontSize + 6);
-      }
-      else
-      {
-         if (invisible)
-         {
-                                          /* Nodesize ist set on discrete value */
-            sprintf(n, "%s\\fs%d", rtf_inv_node3, laydat.node3size);
-         }
-         else
-         {
-                                          /* Nodesize ist set on discrete value */
-            sprintf(n, "%s\\fs%d", rtf_node3, laydat.node3size);
-         }
-      }
-      
-      if (numbers[0] == EOS)
-      {
-         voutlnf("%s %s {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, n, k, name, k, rtf_parpard);
-      }
-      else
-      {
-         voutlnf("%s %s %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, n, numbers, k, name, k, rtf_parpard);
-      }
-   
-      voutlnf("%s %s\\fs%d %s", rtf_plain, rtf_norm, iDocPropfontSize, rtf_par);
-      break;
-      
-   
-   case TOWIN:
-   case TOWH4:
-   case TOAQV:
-      set_inside_node3();
-   
-      output_win_header(name, invisible);
-      output_aliasses();
-   
-      if (numbers[0] != EOS)
-         strcat(numbers, "\\~\\~");
-
-      sprintf(n, "%s%s", numbers, name);
-      win_headline(n, popup);
-      break;
-      
-   
-   case TOPCH:
-      set_inside_node3();
-      
-      if (numbers[0] != EOS)
-         strcat(numbers, " ");
-         
-      output_pch_header(numbers, name);
-      break;
-      
-   
-   case TOHAH:
-   case TOHTM:
-   case TOMHH:
-      ti = p2_toc_counter;
-   
-      if (!html_merge_node3)
-      {
-         if (!html_new_file())
-            return;
-            
-         if (!toc[ti]->ignore_title)
-         {
-            sprintf(hx_start, "<h%d>", html_nodesize);
-            sprintf(hx_end, "</h%d>", html_nodesize);
-         }
-      }
-      else
-      {
-         if (!toc[ti]->ignore_title)
-         {
-            sprintf(hx_start, "<h%d>", html_nodesize+2);
-            sprintf(hx_end, "</h%d>", html_nodesize+2);
-         }
-         
-         output_aliasses();
-      }
-   
-      set_inside_node3();
-      flag = FALSE;
-   
-      if (use_chapter_images)
-      {
-         char   closer[8] = "\0";
-   
-                                          /* no single tag closer in HTML! */
-      if (html_doctype >= XHTML_STRICT)
-         strcpy(closer, " /");
-   
-      ti = p2_toc_counter;
-
-      if (ti >= 0 && toc[ti]->image!=NULL)
-      {
-         sGifSize[0] = EOS;
-   
-         if (toc[ti]->uiImageWidth != 0 && toc[ti]->uiImageHeight != 0)
-         {
-            sprintf(sGifSize, " width=\"%u\" height=\"%u\"", toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
-         }
-      
-         voutlnf("%s<p align=\"center\">", hx_start);
-         
-         voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\"%s%s>",
-               toc[ti]->image, sDocImgSuffix, numbers, name, numbers, name, sGifSize, closer);
-      
-         voutlnf("</p>%s", hx_end);
-         flag = TRUE;
-         }
-      }
-   
-      do_toptoc(TOC_NODE3);
-   
-      if (!flag)
-      {
-         strcpy(nameNoSty, name);
-         del_html_styles(nameNoSty);
-   
-         label2html(nameNoSty);
-         voutlnf("%s<a name=\"%s\"></a>%s%s%s",hx_start, nameNoSty, numbers, name, hx_end);
-      }
-      
-      if (show_variable.source_filename)
-         voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line);
-   
-      break;
-      
-   
-   case TOLDS:
-      set_inside_node3();
-
-      (use_style_book) ? voutlnf("<sect1>%s<label id=\"%s\">", name, name) : voutlnf("<sect2>%s<label id=\"%s\">", name, name);
-
-      output_aliasses();
-      outln("<p>");
-      break;
-      
-   
-   case TOHPH:
-      set_inside_node3();
-
-      (use_style_book) ? voutlnf("<s2>%s", name) : voutlnf("<s3>%s", name);
-      output_aliasses();
-      
-   }  /* switch (desttype) */
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  make_subsubsubnode():
-*     ??? (description)
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void make_subsubsubnode(
-
-const BOOLEAN   popup,           /* TRUE: this is a popup node */
-const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
-{
-   char         n[512],          /* */
-                name[512],       /* */
-                stgname[512],    /* */
-                hx_start[16],    /* */
-                hx_end[16],      /* */
-                sTemp[512];      /* */
-   char         numbers[512],    /* */
-                nameNoSty[512],  /* */
-                k[512];          /* */
-   char         map[64],         /* */
-                sGifSize[80];    /* */
-   int          ti,              /* */
-                ui,              /* */
-                chapter,         /* */
-                nr1,             /* */
-                nr2,             /* */
-                nr3,             /* */
-                nr4;             /* */
-   BOOLEAN      flag;            /* */
-   BOOLEAN      do_index;        /* */
-
-
-   if (p2_toc_counter >= MAXTOCS)
-   {
-      bBreakInside = TRUE;
-      return;
-   }
-
-   tokcpy2(name, 512);
-   strcpy(stgname, name);
-   
-   if (name[0] == EOS)
-   {
-      error_missing_parameter("!subsubsubnode");
-      return;
-   }
-   
-   p2_lab_counter++;
-   p2_toctype = TOC_NODE4;
-   
-   if ((desttype == TOHTM || desttype == TOHAH) && !html_merge_node4)
-   {
-      check_endnode();
-      html_bottomline();
-   }
-   
-   if (desttype == TOMHH)
-   {
-      check_endnode();
-      hh_bottomline();
-   }
-   
-   check_styles(name);
-   c_styles(name);
-   
-   
-   switch (desttype)
-   {
-   case TOWIN:
-   case TOWH4:
-   case TOAQV:
-      c_win_styles(name);
-      break;
-      
-      
-   case TORTF:
-      c_rtf_styles(name);
-      c_rtf_quotes(name);
-      break;
-      
-      
-   default:
-      c_internal_styles(name);
-   }
-   
-   
-   replace_udo_quotes(name);
-   delete_all_divis(name);
-   replace_udo_tilde(name);
-   replace_udo_nbsp(name);
-   
-   check_endnode();
-   check_styleflags();
-   check_environments_node();
-   
-   if (bInsideAppendix)
-   {
-      p2_apx_n4++;
-      p2_apx_n5 = 0;
-   }
-   else
-   {
-      p2_toc_n4++;
-      p2_toc_n5 = 0;
-   }
-   
-   p2_toc_counter++;
-   curr_n4_index = p2_toc_counter;
-   
-   last_n4_index = p2_toc_counter;
-   last_n5_index = 0;
-   
-   nr1 = toc[p2_toc_counter]->nr1;
-   nr2 = toc[p2_toc_counter]->nr2;
-   nr3 = toc[p2_toc_counter]->nr3;
-   nr4 = toc[p2_toc_counter]->nr4;
-   
-   (bInsideAppendix) ? (chapter = nr1) : (chapter = nr1 + toc_offset);
-   
-   n[0] = EOS;
-   numbers[0] = EOS;
-   
-   if (!invisible)
-   {
-      if (bInsideAppendix)
-      {
-         sprintf(numbers, "%c.%d.%d.%d", 'A'+nr1-1, nr2+subtoc_offset, nr3+subsubtoc_offset, nr4+subsubsubtoc_offset);
-      }
-      else
-      {
-         sprintf(numbers, "%d.%d.%d.%d", chapter, nr2+subtoc_offset, nr3+subsubtoc_offset, nr4+subsubsubtoc_offset);
-      }
-   }
-   
-   if (bVerbose)
-   {
-      sprintf(sInfMsg, "[%s] ", numbers);
-      show_status_node(sInfMsg);
-   }
-   
-   if (no_numbers || invisible)
-   {
-      numbers[0] = EOS;
-   }
-   else
-   {
-      strcat(numbers, " ");
-   }
-   
-   strcpy(current_chapter_name, name);
-   strcpy(current_chapter_nr, numbers);
-   
-   do_index= (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index);
-   
-   switch (desttype)
-   {
-   case TOTEX:
-   case TOPDL:
-      set_inside_node4();
-
-      if (invisible)
-      {
-         (use_style_book) ? voutlnf("\n\\subsubsection*{%s}", name) : voutlnf("\n\\paragraph*{%s}", name);
-      }
-      else
-      {
-         (use_style_book) ? voutlnf("\n\\subsubsection{%s}", name)  : voutlnf("\n\\paragraph{%s}", name);
-      }
-      
-      label2tex(name);
-   voutlnf("\\label{%s}", name);
-   output_aliasses();
-   
-   if (desttype == TOPDL)
-   {
-      voutlnf("\\pdfdest num %d fitbh", p2_lab_counter);
-      voutlnf("\\pdfoutline goto num %d count 0 {%s}", p2_lab_counter, name);
-   }
-   
-   break;
-   
-   
-   case TOLYX:
-      set_inside_node4();
-      out("\\layout ");
-      
-      if (invisible)
-      {
-         (use_style_book) ? outln("Subsubsection*") : outln("Paragraph*");
-      }
-      else
-      {
-         (use_style_book) ? outln("Subsubsection")  : outln("Paragraph");
-      }
-      
-      indent2space(name);
-      outln(name);
-      break;
-      
-      
-   case TOINF:
-      set_inside_node4();
-      output_texinfo_node(name);
-      
-   if (bInsideAppendix)
-   {
-      voutlnf("@appendixsubsubsec %s", name);
-   }
-   else
-   {
-      (invisible) ? (voutlnf("@subsubheading %s", name)) : (voutlnf("@subsubsection %s", name));
-   }
-   
-   break;
-   
-   
-   case TOTVH:
-      set_inside_node4();
-      
-      if (numbers[0] != EOS)
-         strcat(numbers, " ");
-         
-      output_vision_header(numbers, name);
-      break;
-      
-   
-   case TOSTG:
-      set_inside_node4();
-      bInsidePopup= popup;
-      replace_2at_by_1at(name);
-      node2stg(name);
-   
-      outln("");
-      
-      if (!do_index)
-         outln("@indexoff");
-
-      if (popup)
-         voutlnf("@pnode \"%s\"", name);
-      else
-         voutlnf("@node \"%s\"", name);
-
-      if (!do_index)
-         outln("@indexon");
-   
-      /* r5pl6: up_n2_index wird statt der alten Abfrage benutzt */
-      
-      if (!popup)
-      {
-         ui = toc[p2_toc_counter]->up_n3_index;
-         
-         if (ui > 0)
-         {
-            strcpy(sTemp, toc[ui]->name);
-            node2stg(sTemp);
-            replace_2at_by_1at(sTemp);
-            voutlnf("@toc \"%s\"", sTemp);
-         }
-      }
-      
-      stg_header(numbers, stgname, popup);/* r5pl14: stgname statt "" */
-      break;
-   
-   
-   case TOAMG:
-      set_inside_node4();
-      replace_2at_by_1at(name);
-      node2stg(name);
-   
-      outln("");
-      
-      if (titleprogram[0] != EOS)
-      {
-         voutlnf("@node \"%s\" \"%s - %s\"", name, titleprogram, name);
-      }
-      else
-      {
-         voutlnf("@node \"%s\" \"%s\"", name, name);
-      }
-   
-      /* r5pl6: up_n2_index wird statt der alten Abfrage benutzt */
-      
-      ui = toc[p2_toc_counter]->up_n3_index;
-
-      if (ui > 0)
-      {
-         strcpy(sTemp, toc[ui]->name);
-         node2stg(sTemp);
-         replace_2at_by_1at(sTemp);
-         voutlnf("@toc \"%s\"", sTemp);
-      }
-      
-      stg_header(numbers, stgname, FALSE);
-      break;
-   
-   
-   case TOMAN:
-      set_inside_node4();
-      outln("");
-      sprintf(n, " %s", name);
-      c_internal_styles(n);
-      outln(n);
-      break;
-   
-   
-   case TONRO:
-      set_inside_node4();
-      sprintf(n, ".SH %s", name);
-      c_internal_styles(n);
-      outln(n);
-      break;
-   
-   
-   case TOASC:
-      set_inside_node4();
-      
-      if (numbers[0] != EOS)
-         strcat(numbers, " ");
-         
-      sprintf(n, "%s%s", numbers, name);
-      outln("");
-      outln(n);
-      outln("");
-      break;
-   
-   
-   case TOIPF:
-      set_inside_node4();
-      node2NrIPF(n, toc[p2_toc_counter]->labindex);
-      map[0] = EOS;
-      
-      if (toc[p2_toc_counter]->mapping>=0)
-      {
-         sprintf(map, " res=%d", toc[p2_toc_counter]->mapping);
-      }
-      
-      if (bInsideAppendix)
-      {
-         voutlnf(":h4 id=%s%s.%s %s%s", n, map, lang.appendix, numbers, name);
-      }
-      else
-      {
-         voutlnf(":h4 id=%s%s.%s%s", n, map, numbers, name);
-      }
-      
-      break;
-   
-   
-   case TOKPS:
-      set_inside_node4();
-   
-      if (use_style_book)
-      {
-         (bInsideAppendix) ? sprintf(n, "%s %s", lang.appendix, numbers) : sprintf(n, "%s %s", lang.chapter, numbers);
-         del_right_spaces(n);
-         
-         if (n[0] != EOS)
-            strcat(n, " ");
-            
-         strcat(n, name);
-         outln("11 changeFontSize");
-      }
-      else
-      {
-         if (numbers[0] != EOS)
-            strcat(numbers, " ");
-            
-         sprintf(n, "%s%s", numbers, name);
-         voutlnf("%d changeFontSize", laydat.node4size);
-      }
-      
-      node2postscript(name, KPS_NAMEDEST);
-      voutlnf("/%s NameDest", name);
-      outln("newline");
-
-      outln("Bon");
-      node2postscript(n, KPS_CONTENT);
-      voutlnf("(%s) udoshow", n);
-      outln("Boff");
-      
-      outln("newline");
-      voutlnf("%d changeFontSize", laydat.propfontsize);
-      break;
-   
-   
-   case TODRC:
-      set_inside_node4();
-      outln("%%*");
-      
-      if (p2_toc_counter + 1 <= p1_toc_counter && toc[p2_toc_counter + 1]->toctype == TOC_NODE4)
-      {
-         voutlnf("%%%% %d, %d, 0, 0, %d, %s", last_n3_index+1000, p2_toc_counter+100, iDrcFlags, name);
-      }
-      else
-      {
-         voutlnf("%%%% %d, 0, 0, 0, %d, %s", last_n3_index+1000, iDrcFlags, name);
-      }
-      
-      outln("%%*");
-      outln("");
-      break;
-      
-   
-   case TOSRC:
-   case TOSRP:
-      set_inside_node1();
-      outln("");
-      memset(n, '-', 62); n[62]= EOS;
-      voutlnf("%s  %s", sSrcRemOn, n);
-      voutlnf("    - %s", name);
-      voutlnf("    %s  %s", n, sSrcRemOff);
-      outln("");
-      break;
-      
-   
-   case TORTF:
-      set_inside_node4();
-      outln(rtf_pardpar);
-   
-      /* r6pl6: Indizes fuer RTF */
-      if (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index)
-      {
-         strcpy(n, name);
-         winspecials2ascii(n);
-         voutf("{\\xe\\v %s}", n);
-      }
-   
-      um_strcpy(k, name, 512, "make_subsubsubnode[RTF]");
-      winspecials2ascii(k);
-      node2winhelp(k);
-   
-      if (use_style_book)
-      {
-         if (invisible)
-            sprintf(n, "%s\\fs%d", rtf_inv_node3, iDocPropfontSize);
-         else
-            sprintf(n, "%s\\fs%d", rtf_node3, iDocPropfontSize);
-      }
-      else
-      {
-         if (invisible)
-         {
-                                          /* Nodesize ist set on discrete value */
-            sprintf(n, "%s\\fs%d", rtf_inv_node4, laydat.node4size);
-         }
-         else
-         {
-                                          /* Nodesize ist set on discrete value */
-            sprintf(n, "%s\\fs%d", rtf_node4, laydat.node4size);
-         }
-      }
-   
-      if (numbers[0] == EOS)
-      {
-         voutlnf("%s %s {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, n, k, name, k, rtf_parpard);
-      }
-      else
-      {
-         voutlnf("%s %s %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, n, numbers, k, name, k, rtf_parpard);
-      }
-      
-      voutlnf("%s %s\\fs%d %s", rtf_plain, rtf_norm, iDocPropfontSize, rtf_par);
-      break;
-
-   
-   case TOWIN:
-   case TOWH4:
-   case TOAQV:
-      set_inside_node4();
-   
-      output_win_header(name, invisible);
-      output_aliasses();
-   
-      if (numbers[0] != EOS)
-         strcat(numbers, "\\~\\~");
-         
-      sprintf(n, "%s%s", numbers, name);
-      win_headline(n, popup);
-      break;
-      
-   
-   case TOPCH:
-      set_inside_node4();
-      
-      if (numbers[0] != EOS)
-         strcat(numbers, " ");
-         
-      output_pch_header(numbers, name);
-      break;
-   
-   
-   case TOHAH:
-   case TOHTM:
-   case TOMHH:
-      ti = p2_toc_counter;
-   
-      if (!html_merge_node4)
-      {
-         if (!html_new_file())
-            return;
-            
-         if (!toc[ti]->ignore_title)
-         {
-            sprintf(hx_start, "<h%d>", html_nodesize);
-            sprintf(hx_end, "</h%d>", html_nodesize);
-         }
-      }
-      else
-      {
-         if (!toc[ti]->ignore_title)
-         {
-            sprintf(hx_start, "<h%d>", html_nodesize+3);
-            sprintf(hx_end, "</h%d>", html_nodesize+3);
-         }
-         
-         output_aliasses();
-      }
-   
-      set_inside_node4();
-      flag = FALSE;
-   
-      if (use_chapter_images)
-      {
-         char closer[8] = "\0";
-   
-                                          /* no single tag closer in HTML! */
-         if (html_doctype >= XHTML_STRICT)
-            strcpy(closer, " /");
-   
-         ti = p2_toc_counter;
-   
-         if (ti >= 0 && toc[ti]->image != NULL)
-         {
-            sGifSize[0] = EOS;
-   
-            if (toc[ti]->uiImageWidth != 0 && toc[ti]->uiImageHeight != 0)
-            {
-               sprintf(sGifSize, " width=\"%u\" height=\"%u\"", toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
-            }
-   
-            voutlnf("%s<p align=\"center\">", hx_start);
-   
-            voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\" %s%s>",
-                  toc[ti]->image, sDocImgSuffix, numbers, name, numbers, name, sGifSize, closer);
-   
-            voutlnf("</p>%s", hx_end);
-            flag = TRUE;
-         }
-      }
-   
-      do_toptoc(TOC_NODE4);
-   
-      if (!flag)
-      {
-         strcpy(nameNoSty, name);
-         del_html_styles(nameNoSty);
-   
-         label2html(nameNoSty);
-         voutlnf("%s<a name=\"%s\"></a>%s%s%s",      hx_start, nameNoSty, numbers, name, hx_end);
-      }
-      
-      if (show_variable.source_filename)
-         voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line);
-   
-      break;
-      
-   
-   case TOLDS:
-      set_inside_node4();
-      
-      (use_style_book) ? voutlnf("<sect2>%s<label id=\"%s\">", name, name) : voutlnf("<sect3>%s<label id=\"%s\">", name, name);
-
-      output_aliasses();
-      outln("<p>");
-      break;
-      
-   
-   case TOHPH:
-      set_inside_node4();
-      
-      (use_style_book) ? voutlnf("<s3>%s", name) : voutlnf("<s4>%s", name);
-      output_aliasses();
-   
-   }  /* switch (desttype) */
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  make_subsubsubsubnode():
-*     ??? (description)
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void make_subsubsubsubnode(
-
-const BOOLEAN   popup,           /* TRUE: this is a popup node */
-const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
-{
-   char         n[512],          /* */
-                name[512],       /* */
-                stgname[512],    /* */
-                hx_start[16],    /* */
-                hx_end[16],      /* */
-                sTemp[512];      /* */
-   char         numbers[512],    /* */
-                nameNoSty[512],  /* */
-                k[512];          /* */
-   char         map[64],         /* */
-                sGifSize[80];    /* */
+                sGifSize[80],    /* */
+                nodename[512];   /* */
    int          ti,              /* */
                 ui,              /* */
                 chapter,         /* */
@@ -8586,6 +6159,8 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    BOOLEAN      flag;            /* */
    BOOLEAN      do_index;        /* */
    
+   BOOLEAN      html_mergenode;  /* */
+   
    
    if (p2_toc_counter >= MAXTOCS)
    {
@@ -8595,17 +6170,63 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    
    tokcpy2(name, 512);
    strcpy(stgname, name);
+
    
    if (name[0] == EOS)
    {
-      error_missing_parameter("!subsubsubsubnode");
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         error_missing_parameter("!node");
+         break;
+         
+      case TOC_NODE2:
+         error_missing_parameter("!subnode");
+         break;
+         
+      case TOC_NODE3:
+         error_missing_parameter("!subsubnode");
+         break;
+         
+      case TOC_NODE4:
+         error_missing_parameter("!subsubsubnode");
+         break;
+         
+      case TOC_NODE5:
+         error_missing_parameter("!subsubsubsubnode");
+      }
+      
       return;
    }
    
-   p2_lab_counter++;
-   p2_toctype = TOC_NODE5;
    
-   if ((desttype == TOHTM || desttype == TOHAH) && !html_merge_node5)
+   switch (nodetype)                      /* prepare some placeholders */
+   {
+   case TOC_NODE1:
+      html_mergenode = html_merge_node1;
+      break;
+      
+   case TOC_NODE2:
+      html_mergenode = html_merge_node2;
+      break;
+      
+   case TOC_NODE3:
+      html_mergenode = html_merge_node3;
+      break;
+      
+   case TOC_NODE4:
+      html_mergenode = html_merge_node4;
+      break;   
+      
+   case TOC_NODE5:
+      html_mergenode = html_merge_node5;
+   }
+
+   
+   p2_lab_counter++;
+   p2_toctype = nodetype;
+   
+   if ((desttype == TOHTM || desttype == TOHAH) && !html_mergenode)
    {
       check_endnode();
       html_bottomline();
@@ -8651,19 +6272,146 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    check_environments_node();
    
    if (bInsideAppendix)
-      p2_apx_n5++;
+   {
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         p2_apx_n1++;
+         p2_apx_n2 = 0;
+         p2_apx_n3 = 0;
+         p2_apx_n4 = 0;
+         p2_apx_n5 = 0;
+         break;
+         
+      case TOC_NODE2:
+         p2_apx_n2++;
+         p2_apx_n3 = 0;
+         p2_apx_n4 = 0;
+         p2_apx_n5 = 0;
+         break;
+         
+      case TOC_NODE3:
+         p2_apx_n3++;
+         p2_apx_n4 = 0;
+         p2_apx_n5 = 0;
+         break;
+         
+      case TOC_NODE4:
+         p2_apx_n4++;
+         p2_apx_n5 = 0;
+         break;
+      
+      case TOC_NODE5:
+         p2_apx_n5++;
+      }
+   }
    else
-      p2_toc_n5++;
+   {
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         p2_toc_n1++;
+         p2_toc_n2 = 0;
+         p2_toc_n3 = 0;
+         p2_toc_n4 = 0;
+         p2_toc_n5 = 0;
+         break;
+         
+      case TOC_NODE2:
+         p2_toc_n2++;
+         p2_toc_n3 = 0;
+         p2_toc_n4 = 0;
+         p2_toc_n5 = 0;
+         break;
+         
+      case TOC_NODE3:
+         p2_toc_n3++;
+         p2_toc_n4 = 0;
+         p2_toc_n5 = 0;
+         break;
+         
+      case TOC_NODE4:
+         p2_toc_n4++;
+         p2_toc_n5 = 0;
+         break;
+      
+      case TOC_NODE5:
+         p2_toc_n5++;
+      }
+   }
    
    p2_toc_counter++;
    
-   last_n5_index = p2_toc_counter;
+   switch (nodetype)
+   {
+   case TOC_NODE1:
+      curr_n1_index = p2_toc_counter;
+      curr_n2_index = 0;
+      curr_n3_index = 0;
+      curr_n4_index = 0;
    
-   nr1 = toc[p2_toc_counter]->nr1;
-   nr2 = toc[p2_toc_counter]->nr2;
-   nr3 = toc[p2_toc_counter]->nr3;
-   nr4 = toc[p2_toc_counter]->nr4;
-   nr5 = toc[p2_toc_counter]->nr5;
+      last_n1_index = p2_toc_counter;
+      last_n2_index = 0;
+      last_n3_index = 0;
+      last_n4_index = 0;
+      last_n5_index = 0;
+   
+      nr1 = toc[p2_toc_counter]->nr1;
+      break;
+      
+      
+   case TOC_NODE2:
+      curr_n2_index = p2_toc_counter;
+      curr_n3_index = 0;
+      curr_n4_index = 0;
+
+      last_n2_index = p2_toc_counter;
+      last_n3_index = 0;
+      last_n4_index = 0;
+      last_n5_index = 0;
+
+      nr1 = toc[p2_toc_counter]->nr1;
+      nr2 = toc[p2_toc_counter]->nr2;
+      break;
+      
+      
+   case TOC_NODE3:
+      curr_n3_index = p2_toc_counter;
+      curr_n4_index = 0;
+   
+      last_n3_index = p2_toc_counter;
+      last_n4_index = 0;
+      last_n5_index = 0;
+   
+      nr1 = toc[p2_toc_counter]->nr1;
+      nr2 = toc[p2_toc_counter]->nr2;
+      nr3 = toc[p2_toc_counter]->nr3;
+      break;
+      
+      
+   case TOC_NODE4:
+      curr_n4_index = p2_toc_counter;
+   
+      last_n4_index = p2_toc_counter;
+      last_n5_index = 0;
+   
+      nr1 = toc[p2_toc_counter]->nr1;
+      nr2 = toc[p2_toc_counter]->nr2;
+      nr3 = toc[p2_toc_counter]->nr3;
+      nr4 = toc[p2_toc_counter]->nr4;
+      break;
+      
+      
+   case TOC_NODE5:
+      last_n5_index = p2_toc_counter;
+
+      nr1 = toc[p2_toc_counter]->nr1;
+      nr2 = toc[p2_toc_counter]->nr2;
+      nr3 = toc[p2_toc_counter]->nr3;
+      nr4 = toc[p2_toc_counter]->nr4;
+      nr5 = toc[p2_toc_counter]->nr5;
+   }
+   
    
    (bInsideAppendix) ? (chapter = nr1) : (chapter = nr1 + toc_offset);
    
@@ -8674,11 +6422,51 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    {
       if (bInsideAppendix)
       {
-         sprintf(numbers, "%c.%d.%d.%d.%d", 'A'+nr1-1, nr2+subtoc_offset, nr3+subsubtoc_offset, nr4+subsubsubtoc_offset, nr5+subsubsubsubtoc_offset);
+         switch (nodetype)
+         {
+         case TOC_NODE1:
+            sprintf(numbers, "%c", 'A'+ nr1 - 1);
+            break;
+            
+         case TOC_NODE2:
+            sprintf(numbers, "%c.%d", 'A' + nr1 - 1, nr2 + subtoc_offset);
+            break;
+            
+         case TOC_NODE3:
+            sprintf(numbers, "%c.%d.%d", 'A'+nr1-1, nr2+subtoc_offset, nr3+subsubtoc_offset);
+            break;
+            
+         case TOC_NODE4:
+            sprintf(numbers, "%c.%d.%d.%d", 'A'+nr1-1, nr2+subtoc_offset, nr3+subsubtoc_offset, nr4+subsubsubtoc_offset);
+            break;
+         
+         case TOC_NODE5:
+            sprintf(numbers, "%c.%d.%d.%d.%d", 'A'+nr1-1, nr2+subtoc_offset, nr3+subsubtoc_offset, nr4+subsubsubtoc_offset, nr5+subsubsubsubtoc_offset);
+         }
       }
       else
       {
-         sprintf(numbers, "%d.%d.%d.%d.%d", chapter, nr2+subtoc_offset, nr3+subsubtoc_offset, nr4+subsubsubtoc_offset, nr5+subsubsubtoc_offset);
+         switch (nodetype)
+         {
+         case TOC_NODE1:
+            sprintf(numbers, "%d", chapter);
+            break;
+            
+         case TOC_NODE2:
+            sprintf(numbers, "%d.%d", chapter, nr2 + subtoc_offset);
+            break;
+
+         case TOC_NODE3:
+            sprintf(numbers, "%d.%d.%d", chapter, nr2+subtoc_offset, nr3+subsubtoc_offset);
+            break;
+            
+         case TOC_NODE4:
+            sprintf(numbers, "%d.%d.%d.%d", chapter, nr2+subtoc_offset, nr3+subsubtoc_offset, nr4+subsubsubtoc_offset);
+            break;
+         
+         case TOC_NODE5:
+            sprintf(numbers, "%d.%d.%d.%d.%d", chapter, nr2+subtoc_offset, nr3+subsubtoc_offset, nr4+subsubsubtoc_offset, nr5+subsubsubtoc_offset);
+         }
       }
    }
    
@@ -8698,19 +6486,72 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    
    do_index = (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index);
    
+   
    switch (desttype)
    {
    case TOTEX:
    case TOPDL:
-      set_inside_node5();
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         set_inside_node1();
+         break;
+      
+      case TOC_NODE2:
+         set_inside_node2();
+         break;
+         
+      case TOC_NODE3:
+         set_inside_node3();
+         break;
+         
+      case TOC_NODE4:
+         set_inside_node4();
+         break;
+         
+      case TOC_NODE5:
+         set_inside_node5();
+      }
       
       if (invisible)
-      {                                   /* ToDo: Was muss hier hin? */
-         (use_style_book) ? voutlnf("\n\\paragraph*{%s}", name) : voutlnf("\n\\subparagraph*{%s}", name);
+      {
+         switch (nodetype)
+         {
+         case TOC_NODE1:
+            (use_style_book) ? voutlnf("\n\\chapter*{%s}", name) : voutlnf("\n\\section*{%s}", name);
+            break;
+         case TOC_NODE2:
+            (use_style_book) ? voutlnf("\n\\section*{%s}", name) : voutlnf("\n\\subsection*{%s}", name);
+            break;
+         case TOC_NODE3:
+            (use_style_book) ? voutlnf("\n\\subsection*{%s}", name) : voutlnf("\n\\subsubsection*{%s}", name);
+            break;
+         case TOC_NODE4:
+            (use_style_book) ? voutlnf("\n\\subsubsection*{%s}", name) : voutlnf("\n\\paragraph*{%s}", name);
+            break;
+         case TOC_NODE5:
+            (use_style_book) ? voutlnf("\n\\paragraph*{%s}", name) : voutlnf("\n\\subparagraph*{%s}", name);
+         }
       }
       else
-      {                                   /* ToDo: Was muss hier hin? */
-         (use_style_book) ? voutlnf("\n\\paragraph{%s}", name)  : voutlnf("\n\\subparagraph{%s}", name);
+      {
+         switch (nodetype)
+         {
+         case TOC_NODE1:
+            (use_style_book) ? voutlnf("\n\\chapter{%s}", name) : voutlnf("\n\\section{%s}", name);
+            break;
+         case TOC_NODE2:
+            (use_style_book) ? voutlnf("\n\\section{%s}", name)  : voutlnf("\n\\subsection{%s}", name);
+            break;
+         case TOC_NODE3:
+            (use_style_book) ? voutlnf("\n\\subsection{%s}", name)  : voutlnf("\n\\subsubsection{%s}", name);
+            break;
+         case TOC_NODE4:
+            (use_style_book) ? voutlnf("\n\\subsubsection{%s}", name)  : voutlnf("\n\\paragraph{%s}", name);
+            break;
+         case TOC_NODE5:
+            (use_style_book) ? voutlnf("\n\\paragraph{%s}", name)  : voutlnf("\n\\subparagraph{%s}", name);
+         }
       }
       
       label2tex(name);
@@ -8720,22 +6561,105 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
       if (desttype == TOPDL)
       {
          voutlnf("\\pdfdest num %d fitbh", p2_lab_counter);
-         voutlnf("\\pdfoutline goto num %d count 0 {%s}", p2_lab_counter, name);
+         
+         switch (nodetype)
+         {
+         case TOC_NODE1:
+            voutlnf("\\pdfoutline goto num %d count %d {%s}", p2_lab_counter, toc[p2_toc_counter]->count_n2, name);
+            break;
+            
+         case TOC_NODE2:
+            voutlnf("\\pdfoutline goto num %d count %d {%s}", p2_lab_counter, toc[p2_toc_counter]->count_n3, name);
+            break;
+            
+         case TOC_NODE3:
+            voutlnf("\\pdfoutline goto num %d count %d {%s}", p2_lab_counter, toc[p2_toc_counter]->count_n4, name);
+            break;
+            
+         case TOC_NODE4:
+            voutlnf("\\pdfoutline goto num %d count 0 {%s}", p2_lab_counter, name);
+            break;
+            
+         case TOC_NODE5:
+            voutlnf("\\pdfoutline goto num %d count 0 {%s}", p2_lab_counter, name);
+         }
       }
-      
+
       break;
    
+   
    case TOLYX:
-      set_inside_node5();
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         set_inside_node1();
+         break;
+      
+      case TOC_NODE2:
+         set_inside_node2();
+         break;
+         
+      case TOC_NODE3:
+         set_inside_node3();
+         break;
+         
+      case TOC_NODE4:
+         set_inside_node4();
+         break;
+         
+      case TOC_NODE5:
+         set_inside_node5();
+      }
+
       out("\\layout ");
       
       if (invisible)
-      {                                   /* ToDo: Was muss hier hin? */
-         (use_style_book) ? outln("Subsubsection*") : outln("Paragraph*");
+      {
+         switch (nodetype)
+         {
+         case TOC_NODE1:
+            (use_style_book) ? outln("Chapter") : outln("Section*");
+            break;
+            
+         case TOC_NODE2:
+            (use_style_book) ? outln("Section*") : outln("Subsection*");
+            break;
+            
+         case TOC_NODE3:
+            (use_style_book) ? outln("Subsection*") : outln("Subsubsection*");
+            break;
+            
+         case TOC_NODE4:
+            (use_style_book) ? outln("Subsubsection*") : outln("Paragraph*");
+            break;
+            
+         case TOC_NODE5:
+            (use_style_book) ? outln("Subsubsection*") : outln("Paragraph*");
+         }
       }
       else
-      {                                   /* ToDo: Was muss hier hin? */
-         (use_style_book) ? outln("Subsubsection")  : outln("Paragraph");
+      {
+         switch (nodetype)
+         {
+         case TOC_NODE1:
+            (use_style_book) ? outln("Chapter") : outln("Section");
+            break;
+            
+         case TOC_NODE2:
+            (use_style_book) ? outln("Section")  : outln("Subsection");
+            break;
+            
+         case TOC_NODE3:
+            (use_style_book) ? outln("Subsection")    : outln("Subsubsection");
+            break;
+            
+         case TOC_NODE4:
+            (use_style_book) ? outln("Subsubsection") : outln("Paragraph");
+            break;
+            
+         case TOC_NODE5:
+            (use_style_book) ? outln("Subsubsection") : outln("Paragraph");
+         }
       }
       
       indent2space(name);
@@ -8744,23 +6668,104 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
       
    
    case TOINF:
-      set_inside_node5();
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         set_inside_node1();
+         break;
+      
+      case TOC_NODE2:
+         set_inside_node2();
+         break;
+         
+      case TOC_NODE3:
+         set_inside_node3();
+         break;
+         
+      case TOC_NODE4:
+         set_inside_node4();
+         break;
+         
+      case TOC_NODE5:
+         set_inside_node5();
+      }
+
       output_texinfo_node(name);
       
       if (bInsideAppendix)
-      {                                   /* ToDo: Was muss hier hin? */
-         voutlnf("@appendixsubsubsec %s", name);
+      {
+         switch (nodetype)
+         {
+         case TOC_NODE1:
+            voutlnf("@appendix %s", name);
+            break;
+            
+         case TOC_NODE2:
+            voutlnf("@appendixsec %s", name);
+            break;
+            
+         case TOC_NODE3:
+            voutlnf("@appendixsubsec %s", name);
+            break;
+            
+         case TOC_NODE4:
+            voutlnf("@appendixsubsubsec %s", name);
+            break;
+            
+         case TOC_NODE5:
+            voutlnf("@appendixsubsubsec %s", name);
+         }
       }
       else
-      {                                   /* ToDo: Was muss hier hin? */
-         (invisible) ? (voutlnf("@subsubheading %s", name)) : (voutlnf("@subsubsection %s", name));
+      {
+         switch (nodetype)
+         {
+         case TOC_NODE1:
+            (invisible) ? (voutlnf("@chapheading %s", name)) : (voutlnf("@chapter %s", name));
+            break;
+            
+         case TOC_NODE2:
+            (invisible) ? (voutlnf("@heading %s", name)) : (voutlnf("@section %s", name));
+            break;
+            
+         case TOC_NODE3:
+            (invisible) ? (voutlnf("@subheading %s", name)) : (voutlnf("@subsection %s", name));
+            break;
+            
+         case TOC_NODE4:
+            (invisible) ? (voutlnf("@subsubheading %s", name)) : (voutlnf("@subsubsection %s", name));
+            break;
+            
+         case TOC_NODE5:
+            (invisible) ? (voutlnf("@subsubheading %s", name)) : (voutlnf("@subsubsection %s", name));
+         }
       }
       
       break;
       
    
    case TOTVH:
-      set_inside_node5();
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         set_inside_node1();
+         break;
+      
+      case TOC_NODE2:
+         set_inside_node2();
+         break;
+         
+      case TOC_NODE3:
+         set_inside_node3();
+         break;
+         
+      case TOC_NODE4:
+         set_inside_node4();
+         break;
+         
+      case TOC_NODE5:
+         set_inside_node5();
+      }
       
       if (numbers[0] != EOS)
          strcat(numbers, " ");
@@ -8770,7 +6775,28 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
       
    
    case TOSTG:
-      set_inside_node5();
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         set_inside_node1();
+         break;
+      
+      case TOC_NODE2:
+         set_inside_node2();
+         break;
+         
+      case TOC_NODE3:
+         set_inside_node3();
+         break;
+         
+      case TOC_NODE4:
+         set_inside_node4();
+         break;
+         
+      case TOC_NODE5:
+         set_inside_node5();
+      }
+      
       bInsidePopup = popup;
       replace_2at_by_1at(name);
       node2stg(name);
@@ -8788,11 +6814,34 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
       if (!do_index)
          outln("@indexon");
    
-      /* r5pl6: up_n2_index wird statt der alten Abfrage benutzt */
-      
       if (!popup)
-      { 
-         ui = toc[p2_toc_counter]->up_n4_index;
+      {
+         switch (nodetype)
+         {
+         case TOC_NODE1:
+            ui = 0;
+            
+            if (called_tableofcontents)
+               outln("@toc \"Main\"");
+               
+            break;
+            
+            
+         case TOC_NODE2:
+            ui = toc[p2_toc_counter]->up_n1_index;
+            break;
+            
+         case TOC_NODE3:
+            ui = toc[p2_toc_counter]->up_n2_index;
+            break;
+            
+         case TOC_NODE4:
+            ui = toc[p2_toc_counter]->up_n3_index;
+            break;
+            
+         case TOC_NODE5:
+            ui = toc[p2_toc_counter]->up_n4_index;
+         }
          
          if (ui > 0)
          {
@@ -8803,12 +6852,33 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
          }
       }
       
-      stg_header(numbers, stgname, popup);/* r5pl14: stgname statt "" */
+      stg_header(numbers, stgname, popup);
       break;
       
    
    case TOAMG:
-      set_inside_node5();
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         set_inside_node1();
+         break;
+      
+      case TOC_NODE2:
+         set_inside_node2();
+         break;
+         
+      case TOC_NODE3:
+         set_inside_node3();
+         break;
+         
+      case TOC_NODE4:
+         set_inside_node4();
+         break;
+         
+      case TOC_NODE5:
+         set_inside_node5();
+      }
+      
       replace_2at_by_1at(name);
       node2stg(name);
    
@@ -8823,9 +6893,32 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
          voutlnf("@node \"%s\" \"%s\"", name, name);
       }
    
-      /* r5pl6: up_n2_index wird statt der alten Abfrage benutzt */
-      
-      ui = toc[p2_toc_counter]->up_n4_index;
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         ui = 0;
+         
+         if (called_tableofcontents)
+            outln("@toc \"Main\"");
+
+         break;
+         
+         
+      case TOC_NODE2:
+         ui = toc[p2_toc_counter]->up_n1_index;
+         break;
+         
+      case TOC_NODE3:
+         ui = toc[p2_toc_counter]->up_n2_index;
+         break;
+         
+      case TOC_NODE4:
+         ui = toc[p2_toc_counter]->up_n3_index;
+         break;
+         
+      case TOC_NODE5:
+         ui = toc[p2_toc_counter]->up_n4_index;
+      }
       
       if (ui > 0)
       {
@@ -8835,21 +6928,78 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
          voutlnf("@toc \"%s\"", sTemp);
       }
    
-      stg_header(numbers, stgname, FALSE);/* r5pl14: stgname statt "" */
+      stg_header(numbers, stgname, FALSE);
       break;
       
    
    case TOMAN:
-      set_inside_node5();
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         set_inside_node1();
+         break;
+      
+      case TOC_NODE2:
+         set_inside_node2();
+         break;
+         
+      case TOC_NODE3:
+         set_inside_node3();
+         break;
+         
+      case TOC_NODE4:
+         set_inside_node4();
+         break;
+         
+      case TOC_NODE5:
+         set_inside_node5();
+      }
+      
       outln("");
-      sprintf(n, " %s", name);
+      
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+      case TOC_NODE2:
+         sprintf(n, " %s%s%s", BOLD_ON, name, BOLD_OFF);
+         break;
+      case TOC_NODE3:
+      case TOC_NODE4:
+      case TOC_NODE5:
+         sprintf(n, " %s", name);
+      }
+      
       c_internal_styles(n);
       outln(n);
       break;
    
    
    case TONRO:
-      set_inside_node5();
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         set_inside_node1();
+         break;
+      
+      case TOC_NODE2:
+         set_inside_node2();
+         break;
+         
+      case TOC_NODE3:
+         set_inside_node3();
+         break;
+         
+      case TOC_NODE4:
+         set_inside_node4();
+         break;
+         
+      case TOC_NODE5:
+         set_inside_node5();
+      }
+      
+      if (nodetype == TOC_NODE1)          /* fd:2011-02-16: why only in TOC_NODE1 ??? */
+         my_strupr(name);
+      
       sprintf(n, ".SH %s", name);
       c_internal_styles(n);
       outln(n);
@@ -8857,42 +7007,184 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    
    
    case TOASC:
-      set_inside_node5();
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         set_inside_node1();
+         break;
       
-      if (numbers[0] != EOS)
-         strcat(numbers, " ");
+      case TOC_NODE2:
+         set_inside_node2();
+         break;
          
-      sprintf(n, "%s%s", numbers, name);
-      outln("");
-      outln(n);
+      case TOC_NODE3:
+         set_inside_node3();
+         break;
+         
+      case TOC_NODE4:
+         set_inside_node4();
+         break;
+         
+      case TOC_NODE5:
+         set_inside_node5();
+      }
+      
+      if (nodetype == TOC_NODE1)
+      {
+         outln("");
+         outln("");
+         
+         if (use_style_book)
+         {
+            (bInsideAppendix) ? sprintf(n, "%s %s", lang.appendix, numbers) : sprintf(n, "%s %s", lang.chapter, numbers);
+
+            del_right_spaces(n);
+            output_ascii_line("=", zDocParwidth);
+            outln(n);
+            outln("");
+            outln(name);
+            output_ascii_line("=", zDocParwidth);
+         }
+         else
+         {
+            if (numbers[0] != EOS)
+               strcat(numbers, " ");
+         
+            sprintf(n, "%s%s", numbers, name);
+            outln(n);
+            output_ascii_line("*", strlen(n));
+         }
+      }
+      else
+      {
+         if (numbers[0] != EOS)
+            strcat(numbers, " ");
+         
+         sprintf(n, "%s%s", numbers, name);
+         outln("");
+         outln(n);
+      
+         switch (nodetype)
+         {
+         case TOC_NODE2:
+            output_ascii_line("=", strlen(n));
+            break;
+         case TOC_NODE3:
+            output_ascii_line("-", strlen(n));
+            break;
+         case TOC_NODE4:
+         case TOC_NODE5:
+            ;
+         }
+      }
+      
       outln("");
       break;
    
    
    case TOIPF:
-      set_inside_node5();
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         set_inside_node1();
+         break;
+      
+      case TOC_NODE2:
+         set_inside_node2();
+         break;
+         
+      case TOC_NODE3:
+         set_inside_node3();
+         break;
+         
+      case TOC_NODE4:
+         set_inside_node4();
+         break;
+         
+      case TOC_NODE5:
+         set_inside_node5();
+      }
+      
       node2NrIPF(n, toc[p2_toc_counter]->labindex);
       map[0] = EOS;
       
       if (toc[p2_toc_counter]->mapping >= 0)
-      {
          sprintf(map, " res=%d", toc[p2_toc_counter]->mapping);
-      }
       
       if (bInsideAppendix)
-      {                                   /* ToDo: Ist h5 richtig? */
-         voutlnf(":h5 id=%s%s.%s %s%s", n, map, lang.appendix, numbers, name);
+      {
+         switch (nodetype)
+         {
+         case TOC_NODE1:
+            voutlnf(":h1 id=%s%s.%s %s%s", n, map, lang.appendix, numbers, name);
+            break;
+            
+         case TOC_NODE2:
+            voutlnf(":h2 id=%s%s.%s %s%s", n, map, lang.appendix, numbers, name);
+            break;
+            
+         case TOC_NODE3:
+            voutlnf(":h3 id=%s%s.%s %s%s", n, map, lang.appendix, numbers, name);
+            break;
+            
+         case TOC_NODE4:
+            voutlnf(":h4 id=%s%s.%s %s%s", n, map, lang.appendix, numbers, name);
+            break;
+            
+         case TOC_NODE5:
+            voutlnf(":h5 id=%s%s.%s %s%s", n, map, lang.appendix, numbers, name);
+         }
       }
       else
-      {                                   /* ToDo: Ist h5 richtig? */
-         voutlnf(":h5 id=%s%s.%s%s", n, map, numbers, name);
+      {
+         switch (nodetype)
+         {
+         case TOC_NODE1:
+            voutlnf(":h1 id=%s%s.%s%s", n, map, numbers, name);
+            break;
+            
+         case TOC_NODE2:
+            voutlnf(":h2 id=%s%s.%s%s", n, map, numbers, name);
+            break;
+            
+         case TOC_NODE3:
+            voutlnf(":h3 id=%s%s.%s%s", n, map, numbers, name);
+            break;
+            
+         case TOC_NODE4:
+            voutlnf(":h4 id=%s%s.%s%s", n, map, numbers, name);
+            break;
+            
+         case TOC_NODE5:
+            voutlnf(":h5 id=%s%s.%s%s", n, map, numbers, name);
+         }
       }
       
       break;
    
    
    case TOKPS:
-      set_inside_node5();
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         set_inside_node1();
+         break;
+      
+      case TOC_NODE2:
+         set_inside_node2();
+         break;
+         
+      case TOC_NODE3:
+         set_inside_node3();
+         break;
+         
+      case TOC_NODE4:
+         set_inside_node4();
+         break;
+         
+      case TOC_NODE5:
+         set_inside_node5();
+      }
    
       if (use_style_book)
       {
@@ -8903,7 +7195,24 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
             strcat(n, " ");
 
          strcat(n, name);
-         outln("11 changeFontSize");
+         
+         switch (nodetype)
+         {
+         case TOC_NODE1:
+            outln("25 changeFontSize");
+            break;
+         case TOC_NODE2:
+            outln("18 changeFontSize");
+            break;
+         case TOC_NODE3:
+            outln("14 changeFontSize");
+            break;
+         case TOC_NODE4:
+            outln("11 changeFontSize");
+            break;
+         case TOC_NODE5:
+            outln("11 changeFontSize");
+         }
       }
       else
       {
@@ -8911,12 +7220,35 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
             strcat(numbers, " ");
             
          sprintf(n, "%s%s", numbers, name);
-         voutlnf("%d changeFontSize", laydat.node4size);
+         
+         switch (nodetype)                /* Nodesize ist set on discrete value */
+         {
+         case TOC_NODE1:
+            voutlnf("%d changeFontSize", laydat.node1size);
+            break;
+         case TOC_NODE2:
+            voutlnf("%d changeFontSize", laydat.node2size);
+            break;
+         case TOC_NODE3:
+            voutlnf("%d changeFontSize", laydat.node3size);
+            break;
+         case TOC_NODE4:
+            voutlnf("%d changeFontSize", laydat.node4size);
+            break;
+         case TOC_NODE5:
+            voutlnf("%d changeFontSize", laydat.node5size);
+         }
       }
       
       node2postscript(name, KPS_NAMEDEST);
-      voutlnf("/%s NameDest", name);
+                                          /* Changed: Fixed bug #0000040 in r6.3pl16 [NHz] */
+      um_strcpy(nodename, n, 511, "make_nodetype TOKPS");
+      node2postscript(nodename, KPS_NODENAME);
+            
+      voutlnf("/NodeName (%s %s) def", lang.chapter, nodename);
+
       outln("newline");
+      voutlnf("/%s NameDest", name);
       
       outln("Bon");
       node2postscript(n, KPS_CONTENT);
@@ -8929,9 +7261,72 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    
    
    case TODRC:
-      set_inside_node5();
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         set_inside_node1();
+         break;
+      
+      case TOC_NODE2:
+         set_inside_node2();
+         break;
+         
+      case TOC_NODE3:
+         set_inside_node3();
+         break;
+         
+      case TOC_NODE4:
+         set_inside_node4();
+         break;
+         
+      case TOC_NODE5:
+         set_inside_node5();
+      }
+      
       outln("%%*");
-      voutlnf("%%%% %d, 0, 0, 0, %d, %s", last_n4_index+10000, iDrcFlags, name);
+      
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         if (p2_toc_counter + 1 <= p1_toc_counter && toc[p2_toc_counter + 1]->toctype == TOC_NODE2)
+            voutlnf("%%%% 0, %d, 0, 0, %d, %s", p2_toc_counter+10, iDrcFlags, name);
+         else
+            voutlnf("%%%% 0, 0, 0, 0, %d, %s", iDrcFlags, name);
+         
+         break;
+         
+      
+      case TOC_NODE2:
+         if (p2_toc_counter + 1 <= p1_toc_counter && toc[p2_toc_counter + 1]->toctype == TOC_NODE3)
+            voutlnf("%%%% %d, %d, 0, 0, %d, %s", last_n1_index + 10, p2_toc_counter + 100, iDrcFlags, name);
+         else
+            voutlnf("%%%% %d, 0, 0, 0, %d, %s", last_n1_index + 10, iDrcFlags, name);
+         
+         break;
+         
+         
+      case TOC_NODE3:
+         if (p2_toc_counter + 1 <= p1_toc_counter && toc[p2_toc_counter + 1]->toctype == TOC_NODE4)
+            voutlnf("%%%% %d, %d, 0, 0, %d, %s", last_n2_index + 100, p2_toc_counter + 1000, iDrcFlags, name);
+         else
+            voutlnf("%%%% %d, 0, 0, 0, %d, %s", last_n2_index + 100, iDrcFlags, name);
+         
+         break;
+         
+         
+      case TOC_NODE4:
+         if (p2_toc_counter + 1 <= p1_toc_counter && toc[p2_toc_counter + 1]->toctype == TOC_NODE5)
+            voutlnf("%%%% %d, %d, 0, 0, %d, %s", last_n3_index + 1000, p2_toc_counter + 100, iDrcFlags, name);
+         else
+            voutlnf("%%%% %d, 0, 0, 0, %d, %s", last_n3_index + 1000, iDrcFlags, name);
+         
+         break;
+         
+         
+      case TOC_NODE5:
+         voutlnf("%%%% %d, 0, 0, 0, %d, %s", last_n4_index + 10000, iDrcFlags, name);
+      }
+      
       outln("%%*");
       outln("");
       break;
@@ -8939,60 +7334,252 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    
    case TOSRC:
    case TOSRP:
-      set_inside_node1();
+      set_inside_node1();                 /* fd:2011-02-16: ??? why always node1 ??? */
+      
+      if (nodetype == TOC_NODE1)          /* additional line */
+         outln("");
+      
       outln("");
-      memset(n, '-', 62);
-      n[62] = EOS;
-      voutlnf("%s  %s", sSrcRemOn, n);
-      voutlnf("    - %s", name);
+      
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         memset(n, '#', 62);
+         n[62] = EOS;
+         voutlnf("%s  %s", sSrcRemOn, n);
+         outln("    #");
+         outln("    #");
+         voutlnf("    # %s", name);
+         outln("    #");
+         outln("    #");
+         break;
+         
+      case TOC_NODE2:
+         memset(n, '*', 62);
+         n[62] = EOS;
+         voutlnf("%s  %s", sSrcRemOn, n);
+         outln("    *");
+         voutlnf("    * %s", name);
+         outln("    *");
+         break;
+         
+      case TOC_NODE3:
+         memset(n, '=', 62);
+         n[62] = EOS;
+         voutlnf("%s  %s", sSrcRemOn, n);
+         voutlnf("    = %s", name);
+         break;
+         
+      case TOC_NODE4:
+      case TOC_NODE5:
+         memset(n, '-', 62);
+         n[62] = EOS;
+         voutlnf("%s  %s", sSrcRemOn, n);
+         voutlnf("    - %s", name);
+      }
+      
       voutlnf("    %s  %s", n, sSrcRemOff);
       outln("");
       break;
    
-   case TORTF:
-      set_inside_node5();
-      outln(rtf_pardpar);
    
-      /* r6pl6: Indizes fuer RTF */
+   case TORTF:
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         set_inside_node1();
+         break;
+      
+      case TOC_NODE2:
+         set_inside_node2();
+         break;
+         
+      case TOC_NODE3:
+         set_inside_node3();
+         break;
+         
+      case TOC_NODE4:
+         set_inside_node4();
+         break;
+         
+      case TOC_NODE5:
+         set_inside_node5();
+      }
+      
+      if (nodetype == TOC_NODE1)          /* new page for new main chapter */
+         if (use_style_book)
+            c_newpage();
+      
+      outln(rtf_pardpar);
+                                          /* r6pl6: Indizes fuer RTF */
       if (use_nodes_inside_index && !no_index && !toc[p2_toc_counter]->ignore_index)
       {
          strcpy(n, name);
          winspecials2ascii(n);
          voutf("{\\xe\\v %s}", n);
       }
-   
-      um_strcpy(k, name, 512, "make_subsubsubsubnode[RTF]");
-      winspecials2ascii(k);
-      node2winhelp(k);
+      
+      if (nodetype == TOC_NODE1)          /* fd:2011-02-16 why only in TOC_NODE1 ??? */
+      {
+         output_aliasses();
+         
+         um_strcpy(n, name, 512, "make_nodetype[RTF]");
+         winspecials2ascii(n);
+         node2winhelp(n);
+      }
+      else
+      {
+         um_strcpy(k, name, 512, "make_nodetype[RTF]");
+         winspecials2ascii(k);
+         node2winhelp(k);
+      }
    
       if (use_style_book)
       {
-         if (invisible)
-            sprintf(n, "%s\\fs%d", rtf_inv_node4, iDocPropfontSize);
-         else
-            sprintf(n, "%s\\fs%d", rtf_node4, iDocPropfontSize);
+         switch (nodetype)
+         {
+         case TOC_NODE1:
+            if (bInsideAppendix)
+            {
+               if (invisible)
+               {
+                  voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", 
+                        rtf_inv_chapt, iDocPropfontSize + 28, lang.appendix, numbers, rtf_inv_chapt, 
+                        iDocPropfontSize + 28, n, name, n);
+               }
+               else
+               {
+                  voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", 
+                        rtf_inv_chapt, iDocPropfontSize + 28, lang.appendix, numbers, rtf_chapt, 
+                        iDocPropfontSize + 28, n, name, n);
+               }
+            }
+            else
+            {
+               if (invisible)
+               {
+                  voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", 
+                        rtf_inv_chapt, iDocPropfontSize + 28, lang.chapter, numbers, rtf_inv_chapt, 
+                        iDocPropfontSize + 28, n, name, n);
+               }
+               else
+               {
+                  voutlnf("%s\\fs%d %s %s\\par %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}\\par\\pard", 
+                        rtf_inv_chapt, iDocPropfontSize + 28, lang.chapter, numbers, rtf_chapt, 
+                        iDocPropfontSize + 28, n, name, n);
+               }
+            }
+            
+            break;
+            
+            
+         case TOC_NODE2:
+            if (invisible)
+               sprintf(n, "%s\\fs%d", rtf_inv_node1, iDocPropfontSize + 14);
+            else
+               sprintf(n, "%s\\fs%d", rtf_node1, iDocPropfontSize + 14);
+               
+            break;
+            
+         case TOC_NODE3:
+            if (invisible)
+               sprintf(n, "%s\\fs%d", rtf_inv_node2, iDocPropfontSize + 6);
+            else
+               sprintf(n, "%s\\fs%d", rtf_node2, iDocPropfontSize + 6);
+               
+            break;
+            
+         case TOC_NODE4:
+            if (invisible)
+               sprintf(n, "%s\\fs%d", rtf_inv_node3, iDocPropfontSize);
+            else
+               sprintf(n, "%s\\fs%d", rtf_node3, iDocPropfontSize);
+               
+            break;
+            
+         case TOC_NODE5:
+            if (invisible)
+               sprintf(n, "%s\\fs%d", rtf_inv_node4, iDocPropfontSize);
+            else
+               sprintf(n, "%s\\fs%d", rtf_node4, iDocPropfontSize);
+         }
       }
       else
       {
-         if (invisible)
+         switch (nodetype)                /* Nodesize is set on discrete value */
          {
-                                          /* Nodesize ist set on discrete value */
-            sprintf(n, "%s\\fs%d", rtf_inv_node5, laydat.node5size);
+         case TOC_NODE1:
+            if (numbers[0] == EOS)
+            {
+               if (invisible)
+               {
+                  voutlnf("%s %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", 
+                        rtf_plain, rtf_inv_node1, laydat.node1size, n, name, n, rtf_parpard);
+               }
+               else
+               {
+                  voutlnf("%s %s\\fs%d {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", 
+                        rtf_plain, rtf_node1, laydat.node1size, n, name, n, rtf_parpard);
+               }
+            }
+            else
+            {
+               if (invisible)
+               {
+                  voutlnf("%s %s\\fs%d %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", 
+                        rtf_plain, rtf_inv_node1, laydat.node1size, numbers, n, name, n, rtf_parpard);
+               }
+               else
+               {
+                  voutlnf("%s %s\\fs%d %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", 
+                        rtf_plain, rtf_node1, laydat.node1size, numbers, n, name, n, rtf_parpard);
+               }
+            }
+            
+            break;
+            
+            
+         case TOC_NODE2:
+            if (invisible)
+               sprintf(n, "%s\\fs%d", rtf_inv_node2, laydat.node2size);
+            else
+               sprintf(n, "%s\\fs%d", rtf_node2, laydat.node2size);
+         
+            break;
+            
+         
+         case TOC_NODE3:
+            if (invisible)
+               sprintf(n, "%s\\fs%d", rtf_inv_node3, laydat.node3size);
+            else
+               sprintf(n, "%s\\fs%d", rtf_node3, laydat.node3size);
+               
+            break;
+            
+            
+         case TOC_NODE4:
+            if (invisible)
+               sprintf(n, "%s\\fs%d", rtf_inv_node4, laydat.node4size);
+            else
+               sprintf(n, "%s\\fs%d", rtf_node4, laydat.node4size);
+               
+            break;
+         
+         
+         case TOC_NODE5:
+            if (invisible)
+               sprintf(n, "%s\\fs%d", rtf_inv_node5, laydat.node5size);
+            else
+               sprintf(n, "%s\\fs%d", rtf_node5, laydat.node5size);
          }
+      }
+
+      if (nodetype != TOC_NODE1)
+      {   
+         if (numbers[0] == EOS)
+            voutlnf("%s %s {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, n, k, name, k, rtf_parpard);
          else
-         {
-                                          /* Nodesize ist set on discrete value */
-            sprintf(n, "%s\\fs%d", rtf_node5, laydat.node5size);
-         }
-      }
-   
-      if (numbers[0] == EOS)
-      {
-         voutlnf("%s %s {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, n, k, name, k, rtf_parpard);
-      }
-      else
-      {
-         voutlnf("%s %s %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, n, numbers, k, name, k, rtf_parpard);
+            voutlnf("%s %s %s  {\\*\\bkmkstart %s}%s{\\*\\bkmkend %s}%s", rtf_plain, n, numbers, k, name, k, rtf_parpard);
       }
    
       voutlnf("%s %s\\fs%d %s", rtf_plain, rtf_norm, iDocPropfontSize, rtf_par);
@@ -9002,21 +7589,77 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    case TOWIN:
    case TOWH4:
    case TOAQV:
-      set_inside_node5();
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         set_inside_node1();
+         break;
+      
+      case TOC_NODE2:
+         set_inside_node2();
+         break;
+         
+      case TOC_NODE3:
+         set_inside_node3();
+         break;
+         
+      case TOC_NODE4:
+         set_inside_node4();
+         break;
+         
+      case TOC_NODE5:
+         set_inside_node5();
+      }
       
       output_win_header(name, invisible);
       output_aliasses();
       
-      if (numbers[0] != EOS)
-         strcat(numbers, "\\~\\~");
+      if (nodetype == TOC_NODE1)
+      {
+         if (use_style_book)
+            (bInsideAppendix) ? sprintf(n, "%s %s\\par %s", lang.appendix, numbers, name) : sprintf(n, "%s %s\\par %s", lang.chapter, numbers, name);
+         else
+         {
+            if (numbers[0] != EOS)
+               strcat(numbers, "\\~\\~");
          
-      sprintf(n, "%s%s", numbers, name);
+            sprintf(n, "%s%s", numbers, name);
+         }
+      }
+      else
+      {
+         if (numbers[0] != EOS)
+            strcat(numbers, "\\~\\~");
+         
+         sprintf(n, "%s%s", numbers, name);
+      }
+      
       win_headline(n, popup);
       break;
    
    
    case TOPCH:
-      set_inside_node5();
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         set_inside_node1();
+         break;
+      
+      case TOC_NODE2:
+         set_inside_node2();
+         break;
+         
+      case TOC_NODE3:
+         set_inside_node3();
+         break;
+         
+      case TOC_NODE4:
+         set_inside_node4();
+         break;
+         
+      case TOC_NODE5:
+         set_inside_node5();
+      }
       
       if (numbers[0] != EOS)
          strcat(numbers, " ");
@@ -9030,34 +7673,63 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    case TOMHH:
       ti = p2_toc_counter;
    
-      if (!html_merge_node5)
+      if (!html_mergenode)
       {
          if (!html_new_file())
             return;
-            
+         
          if (!toc[ti]->ignore_title)
          {
-            sprintf(hx_start, "<h%d>", html_nodesize);
-            sprintf(hx_end, "</h%d>", html_nodesize);
+            sprintf(hx_start, "<h%d>",  html_nodesize);
+            sprintf(hx_end,   "</h%d>", html_nodesize);
          }
       }
       else
       {
+         output_aliasses();
+         
+         if (nodetype == TOC_NODE1)
+         {
+            if (html_doctype < XHTML_STRICT)
+               outln(HTML_HR);
+            else
+               outln(XHTML_HR);
+         }
+
          if (!toc[ti]->ignore_title)
          {
-            sprintf(hx_start, "<h%d>", html_nodesize + 4);
-            sprintf(hx_end, "</h%d>", html_nodesize + 4);
+            sprintf(hx_start, "<h%d>",  html_nodesize + nodetype - 1);
+            sprintf(hx_end,   "</h%d>", html_nodesize + nodetype - 1);
          }
-         
-         output_aliasses();
       }
    
-      set_inside_node5();
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         set_inside_node1();
+         break;
+      
+      case TOC_NODE2:
+         set_inside_node2();
+         break;
+         
+      case TOC_NODE3:
+         set_inside_node3();
+         break;
+         
+      case TOC_NODE4:
+         set_inside_node4();
+         break;
+         
+      case TOC_NODE5:
+         set_inside_node5();
+      }
+      
       flag = FALSE;
    
       if (use_chapter_images)
       {
-         char closer[8] = "\0";
+         char   closer[8] = "\0";  /* */
    
                                           /* no single tag closer in HTML! */
          if (html_doctype >= XHTML_STRICT)
@@ -9071,40 +7743,100 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    
             if (toc[ti]->uiImageWidth != 0 && toc[ti]->uiImageHeight != 0)
             {
-               sprintf(sGifSize, " width=\"%u\" height=\"%u\"", toc[ti]->uiImageWidth, toc[ti]->uiImageHeight);
+               sprintf(sGifSize, " width=\"%u\" height=\"%u\"", 
+                     toc[ti]->uiImageWidth, 
+                     toc[ti]->uiImageHeight);
             }
    
             voutlnf("%s<p align=\"center\">", hx_start);
    
             voutlnf("<img src=\"%s%s\" alt=\"%s%s\" title=\"%s%s\" border=\"0\" %s%s>",
-                  toc[ti]->image, sDocImgSuffix, numbers, name, numbers, name, sGifSize, closer);
+                  toc[ti]->image, 
+                  sDocImgSuffix, 
+                  numbers, 
+                  name, 
+                  numbers, 
+                  name, 
+                  sGifSize, 
+                  closer);
    
             voutlnf("</p>%s", hx_end);
+            
             flag = TRUE;
          }
       }
    
-      do_toptoc(TOC_NODE5);
+      do_toptoc(nodetype);
    
-      if (!flag)
+      if (!flag && !toc[ti]->ignore_title)
       {
          strcpy(nameNoSty, name);
          del_html_styles(nameNoSty);
    
          label2html(nameNoSty);
-         voutlnf("%s<a name=\"%s\"></a>%s%s%s",      hx_start, nameNoSty, numbers, name, hx_end);
+         
+         voutlnf("%s<a name=\"%s\"></a>%s%s%s",
+               hx_start, 
+               nameNoSty, 
+               numbers, 
+               name, 
+               hx_end);
       }
       
       if (show_variable.source_filename)
-         voutlnf("<!-- %s: %li -->", toc[p2_toc_counter]->source_filename, toc[p2_toc_counter]->source_line);
+      {
+         voutlnf("<!-- %s: %li -->", 
+               toc[p2_toc_counter]->source_filename, 
+               toc[p2_toc_counter]->source_line);
+      }
    
       break;
       
    
    case TOLDS:
-      set_inside_node5();
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         set_inside_node1();
+         break;
       
-      (use_style_book) ? voutlnf("<sect2>%s<label id=\"%s\">", name, name) : voutlnf("<sect3>%s<label id=\"%s\">", name, name);
+      case TOC_NODE2:
+         set_inside_node2();
+         break;
+         
+      case TOC_NODE3:
+         set_inside_node3();
+         break;
+         
+      case TOC_NODE4:
+         set_inside_node4();
+         break;
+         
+      case TOC_NODE5:
+         set_inside_node5();
+      }
+      
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         (use_style_book) ? voutlnf("<chapter>%s<label id=\"%s\">", name, name) : voutlnf("<sect>%s<label id=\"%s\">", name, name);
+         break;
+         
+      case TOC_NODE2:
+         (use_style_book) ? voutlnf("<sect>%s<label id=\"%s\">", name, name) : voutlnf("<sect1>%s<label id=\"%s\">", name, name);
+         break;
+         
+      case TOC_NODE3:
+         (use_style_book) ? voutlnf("<sect1>%s<label id=\"%s\">", name, name) : voutlnf("<sect2>%s<label id=\"%s\">", name, name);
+         break;
+         
+      case TOC_NODE4:
+         (use_style_book) ? voutlnf("<sect2>%s<label id=\"%s\">", name, name) : voutlnf("<sect3>%s<label id=\"%s\">", name, name);
+         break;
+         
+      case TOC_NODE5:
+         (use_style_book) ? voutlnf("<sect3>%s<label id=\"%s\">", name, name) : voutlnf("<sect4>%s<label id=\"%s\">", name, name);
+      }
 
       output_aliasses();
       outln("<p>");
@@ -9112,9 +7844,50 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    
    
    case TOHPH:
-      set_inside_node5();
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         set_inside_node1();
+         break;
       
-      (use_style_book) ? voutlnf("<s4>%s", name) : voutlnf("<s5>%s", name);
+      case TOC_NODE2:
+         set_inside_node2();
+         break;
+         
+      case TOC_NODE3:
+         set_inside_node3();
+         break;
+         
+      case TOC_NODE4:
+         set_inside_node4();
+         break;
+         
+      case TOC_NODE5:
+         set_inside_node5();
+      }
+      
+      switch (nodetype)
+      {
+      case TOC_NODE1:
+         (use_style_book) ? voutlnf("<chapter>%s", name) : voutlnf("<s1>%s", name);
+         break;
+         
+      case TOC_NODE2:
+         (use_style_book) ? voutlnf("<s1>%s", name) : voutlnf("<s2>%s", name);
+         break;
+         
+      case TOC_NODE3:
+         (use_style_book) ? voutlnf("<s2>%s", name) : voutlnf("<s3>%s", name);
+         break;
+         
+      case TOC_NODE4:
+         (use_style_book) ? voutlnf("<s3>%s", name) : voutlnf("<s4>%s", name);
+         break;
+      
+      case TOC_NODE5:
+         (use_style_book) ? voutlnf("<s4>%s", name) : voutlnf("<s5>%s", name);
+      }
+      
       output_aliasses();
 
    }  /* switch (desttype) */
@@ -9128,7 +7901,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
 /*******************************************************************************
 *
 *  c_node():
-*     wrapper for make_node()
+*     wrapper for make_nodetype()
 *
 *  return:
 *     -
@@ -9137,7 +7910,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
 
 GLOBAL void c_node(void)
 {
-   make_node(FALSE, FALSE);
+   make_nodetype(TOC_NODE1, FALSE, FALSE);
 }
 
 
@@ -9147,7 +7920,7 @@ GLOBAL void c_node(void)
 /*******************************************************************************
 *
 *  c_node_iv():
-*     wrapper for make_node()
+*     wrapper for make_nodetype()
 *
 *  Notes:
 *     r5pl15:
@@ -9162,7 +7935,7 @@ GLOBAL void c_node(void)
 
 GLOBAL void c_node_iv(void)
 {
-   make_node(FALSE, (desttype != TOINF)); /* r5pl15 */
+   make_nodetype(TOC_NODE1, FALSE, (desttype != TOINF)); /* r5pl15 */
 }
 
 
@@ -9172,7 +7945,7 @@ GLOBAL void c_node_iv(void)
 /*******************************************************************************
 *
 *  c_pnode():
-*     wrapper for make_node()
+*     wrapper for make_nodetype()
 *
 *  return:
 *     -
@@ -9181,7 +7954,7 @@ GLOBAL void c_node_iv(void)
 
 GLOBAL void c_pnode(void)
 {
-   make_node(TRUE, FALSE);
+   make_nodetype(TOC_NODE1, TRUE, FALSE);
 }
 
 
@@ -9191,7 +7964,7 @@ GLOBAL void c_pnode(void)
 /*******************************************************************************
 *
 *  c_pnode_iv():
-*     wrapper for make_node()
+*     wrapper for make_nodetype()
 *
 *  Notes:
 *     r5pl15:
@@ -9206,10 +7979,104 @@ GLOBAL void c_pnode(void)
 
 GLOBAL void c_pnode_iv(void)
 {
-   make_node(TRUE, (desttype != TOINF));  /* r5pl15 */
+   make_nodetype(TOC_NODE1, TRUE, (desttype != TOINF));  /* r5pl15 */
 }
 
 
+
+
+
+GLOBAL void c_subnode(void)
+{
+   make_nodetype(TOC_NODE2, FALSE, FALSE);
+}
+
+GLOBAL void c_subnode_iv(void)
+{
+   make_nodetype(TOC_NODE2, FALSE, (desttype != TOINF));
+}
+
+GLOBAL void c_psubnode(void)
+{
+   make_nodetype(TOC_NODE2, TRUE, FALSE);
+}
+
+GLOBAL void c_psubnode_iv(void)
+{
+   make_nodetype(TOC_NODE2, TRUE, (desttype != TOINF));
+}
+
+
+
+
+
+GLOBAL void c_subsubnode(void)
+{
+   make_nodetype(TOC_NODE3, FALSE, FALSE);
+}
+
+GLOBAL void c_subsubnode_iv(void)
+{
+   make_nodetype(TOC_NODE3, FALSE, (desttype != TOINF));
+}
+
+GLOBAL void c_psubsubnode(void)
+{
+   make_nodetype(TOC_NODE3, TRUE, FALSE);
+}
+
+GLOBAL void c_psubsubnode_iv(void)
+{
+   make_nodetype(TOC_NODE3, TRUE, (desttype != TOINF));
+}
+
+
+
+
+
+GLOBAL void c_subsubsubnode(void)
+{
+   make_nodetype(TOC_NODE4, FALSE, FALSE);
+}
+
+GLOBAL void c_subsubsubnode_iv(void)
+{
+   make_nodetype(TOC_NODE4, FALSE, (desttype != TOINF));
+}
+
+GLOBAL void c_psubsubsubnode(void)
+{
+   make_nodetype(TOC_NODE4, TRUE, FALSE);
+}
+
+GLOBAL void c_psubsubsubnode_iv(void)
+{
+   make_nodetype(TOC_NODE4, TRUE, (desttype != TOINF));
+}
+
+
+
+
+
+GLOBAL void c_subsubsubsubnode(void)
+{
+   make_nodetype(TOC_NODE5, FALSE, FALSE);
+}
+
+GLOBAL void c_subsubsubsubnode_iv(void)
+{
+   make_nodetype(TOC_NODE5, FALSE, (desttype != TOINF));
+}
+
+GLOBAL void c_psubsubsubsubnode(void)
+{
+   make_nodetype(TOC_NODE5, TRUE, FALSE);
+}
+
+GLOBAL void c_psubsubsubsubnode_iv(void)
+{
+   make_nodetype(TOC_NODE5, TRUE, (desttype!=TOINF));
+}
 
 
 
@@ -9307,76 +8174,6 @@ LOCAL void set_inside_node5(void)
 
 
 
-
-
-
-GLOBAL void c_subnode(void)
-{       make_subnode (FALSE, FALSE);
-}       /* c_subnode */
-
-GLOBAL void c_subnode_iv(void)
-{       make_subnode (FALSE, (desttype!=TOINF));        /* r5pl15 */
-}       /* c_subnode */
-
-GLOBAL void c_psubnode(void)
-{       make_subnode (TRUE, FALSE);
-}       /* c_psubnode */
-
-GLOBAL void c_psubnode_iv(void)
-{       make_subnode (TRUE, (desttype!=TOINF)); /* r5pl15 */
-}       /* c_psubnode */
-
-
-GLOBAL void c_subsubnode(void)
-{       make_subsubnode (FALSE, FALSE);
-}       /* c_subsubnode */
-
-GLOBAL void c_subsubnode_iv(void)
-{       make_subsubnode (FALSE, (desttype!=TOINF));     /* r5pl15 */
-}       /* c_subsubnode */
-
-GLOBAL void c_psubsubnode(void)
-{       make_subsubnode (TRUE, FALSE);
-}       /* c_psubsubnode */
-
-GLOBAL void c_psubsubnode_iv(void)
-{       make_subsubnode (TRUE, (desttype!=TOINF));      /* r5pl15 */
-}       /* c_psubsubnode */
-
-
-GLOBAL void c_subsubsubnode(void)
-{       make_subsubsubnode (FALSE, FALSE);
-}       /* c_subsubsubnode */
-
-GLOBAL void c_subsubsubnode_iv(void)
-{       make_subsubsubnode (FALSE, (desttype!=TOINF));  /* r5pl15 */
-}       /* c_subsubsubnode */
-
-GLOBAL void c_psubsubsubnode(void)
-{       make_subsubsubnode (TRUE, FALSE);
-}       /* c_psubsubsubnode */
-
-GLOBAL void c_psubsubsubnode_iv(void)
-{       make_subsubsubnode (TRUE, (desttype!=TOINF));   /* r5pl15 */
-}       /* c_psubsubsubnode */
-
-
-
-GLOBAL void c_subsubsubsubnode(void)
-{       make_subsubsubsubnode (FALSE, FALSE);
-}       /* c_subsubsubsubnode */
-
-GLOBAL void c_subsubsubsubnode_iv(void)
-{       make_subsubsubsubnode (FALSE, (desttype!=TOINF));       /* r5pl15 */
-}       /* c_subsubsubsubnode */
-
-GLOBAL void c_psubsubsubsubnode(void)
-{       make_subsubsubsubnode (TRUE, FALSE);
-}       /* c_psubsubsubnode */
-
-GLOBAL void c_psubsubsubsubnode_iv(void)
-{       make_subsubsubsubnode (TRUE, (desttype!=TOINF));        /* r5pl15 */
-}       /* c_psubsubsubsubnode */
 
 
 
