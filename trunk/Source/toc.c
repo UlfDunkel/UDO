@@ -116,6 +116,7 @@
 *                - bookmarks_ps() simplified
 *    fd  Feb 16: - make_*node() functions reformatted
 *                - all make_*node() functions merged into new make_nodetype() function
+*                - all set_inside_node*() functions merged into new set_inside_node() function
 *
 ******************************************|************************************/
 
@@ -351,11 +352,7 @@ LOCAL void html_hb_line(BOOLEAN head);
 LOCAL void html_node_bar_modern(void);
 LOCAL void html_node_bar_frames(void);
 
-LOCAL void set_inside_node1(void);
-LOCAL void set_inside_node2(void);
-LOCAL void set_inside_node3(void);
-LOCAL void set_inside_node4(void);
-LOCAL void set_inside_node5(void);
+LOCAL void set_inside_node(int nodetype);
 
 LOCAL void make_nodetype(int nodetype, const BOOLEAN popup, const BOOLEAN invisible);
 
@@ -6491,27 +6488,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    {
    case TOTEX:
    case TOPDL:
-      switch (nodetype)
-      {
-      case TOC_NODE1:
-         set_inside_node1();
-         break;
-      
-      case TOC_NODE2:
-         set_inside_node2();
-         break;
-         
-      case TOC_NODE3:
-         set_inside_node3();
-         break;
-         
-      case TOC_NODE4:
-         set_inside_node4();
-         break;
-         
-      case TOC_NODE5:
-         set_inside_node5();
-      }
+      set_inside_node(nodetype);
       
       if (invisible)
       {
@@ -6589,27 +6566,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    
    
    case TOLYX:
-      switch (nodetype)
-      {
-      case TOC_NODE1:
-         set_inside_node1();
-         break;
-      
-      case TOC_NODE2:
-         set_inside_node2();
-         break;
-         
-      case TOC_NODE3:
-         set_inside_node3();
-         break;
-         
-      case TOC_NODE4:
-         set_inside_node4();
-         break;
-         
-      case TOC_NODE5:
-         set_inside_node5();
-      }
+      set_inside_node(nodetype);
 
       out("\\layout ");
       
@@ -6668,27 +6625,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
       
    
    case TOINF:
-      switch (nodetype)
-      {
-      case TOC_NODE1:
-         set_inside_node1();
-         break;
-      
-      case TOC_NODE2:
-         set_inside_node2();
-         break;
-         
-      case TOC_NODE3:
-         set_inside_node3();
-         break;
-         
-      case TOC_NODE4:
-         set_inside_node4();
-         break;
-         
-      case TOC_NODE5:
-         set_inside_node5();
-      }
+      set_inside_node(nodetype);
 
       output_texinfo_node(name);
       
@@ -6745,27 +6682,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
       
    
    case TOTVH:
-      switch (nodetype)
-      {
-      case TOC_NODE1:
-         set_inside_node1();
-         break;
-      
-      case TOC_NODE2:
-         set_inside_node2();
-         break;
-         
-      case TOC_NODE3:
-         set_inside_node3();
-         break;
-         
-      case TOC_NODE4:
-         set_inside_node4();
-         break;
-         
-      case TOC_NODE5:
-         set_inside_node5();
-      }
+      set_inside_node(nodetype);
       
       if (numbers[0] != EOS)
          strcat(numbers, " ");
@@ -6775,27 +6692,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
       
    
    case TOSTG:
-      switch (nodetype)
-      {
-      case TOC_NODE1:
-         set_inside_node1();
-         break;
-      
-      case TOC_NODE2:
-         set_inside_node2();
-         break;
-         
-      case TOC_NODE3:
-         set_inside_node3();
-         break;
-         
-      case TOC_NODE4:
-         set_inside_node4();
-         break;
-         
-      case TOC_NODE5:
-         set_inside_node5();
-      }
+      set_inside_node(nodetype);
       
       bInsidePopup = popup;
       replace_2at_by_1at(name);
@@ -6857,27 +6754,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
       
    
    case TOAMG:
-      switch (nodetype)
-      {
-      case TOC_NODE1:
-         set_inside_node1();
-         break;
-      
-      case TOC_NODE2:
-         set_inside_node2();
-         break;
-         
-      case TOC_NODE3:
-         set_inside_node3();
-         break;
-         
-      case TOC_NODE4:
-         set_inside_node4();
-         break;
-         
-      case TOC_NODE5:
-         set_inside_node5();
-      }
+      set_inside_node(nodetype);
       
       replace_2at_by_1at(name);
       node2stg(name);
@@ -6933,27 +6810,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
       
    
    case TOMAN:
-      switch (nodetype)
-      {
-      case TOC_NODE1:
-         set_inside_node1();
-         break;
-      
-      case TOC_NODE2:
-         set_inside_node2();
-         break;
-         
-      case TOC_NODE3:
-         set_inside_node3();
-         break;
-         
-      case TOC_NODE4:
-         set_inside_node4();
-         break;
-         
-      case TOC_NODE5:
-         set_inside_node5();
-      }
+      set_inside_node(nodetype);
       
       outln("");
       
@@ -6975,27 +6832,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    
    
    case TONRO:
-      switch (nodetype)
-      {
-      case TOC_NODE1:
-         set_inside_node1();
-         break;
-      
-      case TOC_NODE2:
-         set_inside_node2();
-         break;
-         
-      case TOC_NODE3:
-         set_inside_node3();
-         break;
-         
-      case TOC_NODE4:
-         set_inside_node4();
-         break;
-         
-      case TOC_NODE5:
-         set_inside_node5();
-      }
+      set_inside_node(nodetype);
       
       if (nodetype == TOC_NODE1)          /* fd:2011-02-16: why only in TOC_NODE1 ??? */
          my_strupr(name);
@@ -7007,27 +6844,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    
    
    case TOASC:
-      switch (nodetype)
-      {
-      case TOC_NODE1:
-         set_inside_node1();
-         break;
-      
-      case TOC_NODE2:
-         set_inside_node2();
-         break;
-         
-      case TOC_NODE3:
-         set_inside_node3();
-         break;
-         
-      case TOC_NODE4:
-         set_inside_node4();
-         break;
-         
-      case TOC_NODE5:
-         set_inside_node5();
-      }
+      set_inside_node(nodetype);
       
       if (nodetype == TOC_NODE1)
       {
@@ -7083,27 +6900,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    
    
    case TOIPF:
-      switch (nodetype)
-      {
-      case TOC_NODE1:
-         set_inside_node1();
-         break;
-      
-      case TOC_NODE2:
-         set_inside_node2();
-         break;
-         
-      case TOC_NODE3:
-         set_inside_node3();
-         break;
-         
-      case TOC_NODE4:
-         set_inside_node4();
-         break;
-         
-      case TOC_NODE5:
-         set_inside_node5();
-      }
+      set_inside_node(nodetype);
       
       node2NrIPF(n, toc[p2_toc_counter]->labindex);
       map[0] = EOS;
@@ -7164,27 +6961,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    
    
    case TOKPS:
-      switch (nodetype)
-      {
-      case TOC_NODE1:
-         set_inside_node1();
-         break;
-      
-      case TOC_NODE2:
-         set_inside_node2();
-         break;
-         
-      case TOC_NODE3:
-         set_inside_node3();
-         break;
-         
-      case TOC_NODE4:
-         set_inside_node4();
-         break;
-         
-      case TOC_NODE5:
-         set_inside_node5();
-      }
+      set_inside_node(nodetype);
    
       if (use_style_book)
       {
@@ -7261,27 +7038,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    
    
    case TODRC:
-      switch (nodetype)
-      {
-      case TOC_NODE1:
-         set_inside_node1();
-         break;
-      
-      case TOC_NODE2:
-         set_inside_node2();
-         break;
-         
-      case TOC_NODE3:
-         set_inside_node3();
-         break;
-         
-      case TOC_NODE4:
-         set_inside_node4();
-         break;
-         
-      case TOC_NODE5:
-         set_inside_node5();
-      }
+      set_inside_node(nodetype);
       
       outln("%%*");
       
@@ -7334,7 +7091,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    
    case TOSRC:
    case TOSRP:
-      set_inside_node1();                 /* fd:2011-02-16: ??? why always node1 ??? */
+      set_inside_node(TOC_NODE1);         /* fd:2011-02-16: ??? why always node1 ??? */
       
       if (nodetype == TOC_NODE1)          /* additional line */
          outln("");
@@ -7384,28 +7141,8 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    
    
    case TORTF:
-      switch (nodetype)
-      {
-      case TOC_NODE1:
-         set_inside_node1();
-         break;
-      
-      case TOC_NODE2:
-         set_inside_node2();
-         break;
-         
-      case TOC_NODE3:
-         set_inside_node3();
-         break;
-         
-      case TOC_NODE4:
-         set_inside_node4();
-         break;
-         
-      case TOC_NODE5:
-         set_inside_node5();
-      }
-      
+      set_inside_node(nodetype);
+            
       if (nodetype == TOC_NODE1)          /* new page for new main chapter */
          if (use_style_book)
             c_newpage();
@@ -7589,27 +7326,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    case TOWIN:
    case TOWH4:
    case TOAQV:
-      switch (nodetype)
-      {
-      case TOC_NODE1:
-         set_inside_node1();
-         break;
-      
-      case TOC_NODE2:
-         set_inside_node2();
-         break;
-         
-      case TOC_NODE3:
-         set_inside_node3();
-         break;
-         
-      case TOC_NODE4:
-         set_inside_node4();
-         break;
-         
-      case TOC_NODE5:
-         set_inside_node5();
-      }
+      set_inside_node(nodetype);
       
       output_win_header(name, invisible);
       output_aliasses();
@@ -7639,27 +7356,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    
    
    case TOPCH:
-      switch (nodetype)
-      {
-      case TOC_NODE1:
-         set_inside_node1();
-         break;
-      
-      case TOC_NODE2:
-         set_inside_node2();
-         break;
-         
-      case TOC_NODE3:
-         set_inside_node3();
-         break;
-         
-      case TOC_NODE4:
-         set_inside_node4();
-         break;
-         
-      case TOC_NODE5:
-         set_inside_node5();
-      }
+      set_inside_node(nodetype);
       
       if (numbers[0] != EOS)
          strcat(numbers, " ");
@@ -7703,27 +7400,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
          }
       }
    
-      switch (nodetype)
-      {
-      case TOC_NODE1:
-         set_inside_node1();
-         break;
-      
-      case TOC_NODE2:
-         set_inside_node2();
-         break;
-         
-      case TOC_NODE3:
-         set_inside_node3();
-         break;
-         
-      case TOC_NODE4:
-         set_inside_node4();
-         break;
-         
-      case TOC_NODE5:
-         set_inside_node5();
-      }
+      set_inside_node(nodetype);
       
       flag = FALSE;
    
@@ -7794,27 +7471,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
       
    
    case TOLDS:
-      switch (nodetype)
-      {
-      case TOC_NODE1:
-         set_inside_node1();
-         break;
-      
-      case TOC_NODE2:
-         set_inside_node2();
-         break;
-         
-      case TOC_NODE3:
-         set_inside_node3();
-         break;
-         
-      case TOC_NODE4:
-         set_inside_node4();
-         break;
-         
-      case TOC_NODE5:
-         set_inside_node5();
-      }
+      set_inside_node(nodetype);
       
       switch (nodetype)
       {
@@ -7844,27 +7501,7 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    
    
    case TOHPH:
-      switch (nodetype)
-      {
-      case TOC_NODE1:
-         set_inside_node1();
-         break;
-      
-      case TOC_NODE2:
-         set_inside_node2();
-         break;
-         
-      case TOC_NODE3:
-         set_inside_node3();
-         break;
-         
-      case TOC_NODE4:
-         set_inside_node4();
-         break;
-         
-      case TOC_NODE5:
-         set_inside_node5();
-      }
+      set_inside_node(nodetype);
       
       switch (nodetype)
       {
@@ -8082,96 +7719,20 @@ GLOBAL void c_psubsubsubsubnode_iv(void)
 
 /*******************************************************************************
 *
-*  set_inside_node1():
-*     ??? (description)
+*  set_inside_node():
+*     sets active_nodetype variable
 *
 *  return:
 *     -
 *
 ******************************************|************************************/
 
-LOCAL void set_inside_node1(void)
+LOCAL void set_inside_node(
+
+int   nodetype)  /* TOC_NODE... */
 {
-   active_nodetype = TOC_NODE1;
+   active_nodetype = nodetype;
 }
-
-
-
-
-
-/*******************************************************************************
-*
-*  set_inside_node2():
-*     ??? (description)
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void set_inside_node2(void)
-{
-   active_nodetype = TOC_NODE2;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  set_inside_node3():
-*     ??? (description)
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void set_inside_node3(void)
-{
-   active_nodetype = TOC_NODE3;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  set_inside_node4():
-*     ??? (description)
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void set_inside_node4(void)
-{
-   active_nodetype = TOC_NODE4;
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  set_inside_node5():
-*     ??? (description)
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void set_inside_node5(void)
-{
-   active_nodetype = TOC_NODE5;
-}
-
-
 
 
 
