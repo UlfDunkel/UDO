@@ -122,6 +122,7 @@
 *                - all do_*toc() functions merged into do_toc() function
 *                - save_htmlhelp_contents() adjusted for TOC_NODE5
 *                - remaining functions reformatted
+*                - more function descriptions added
 *
 ******************************************|************************************/
 
@@ -324,67 +325,99 @@ typedef struct _hmtl_idx                  /* */
 
    /* check if certain values are valid */
 LOCAL BOOLEAN check_toc_counters(void);
-
    /* check if certain values are valid */
 LOCAL BOOLEAN check_toc_and_token(void);
 
+   /* output aliasses of a chapter */
 LOCAL void output_aliasses(void);
 
+   /*  */
 LOCAL BOOLEAN add_ref(const char *r);
+   /*  */
 LOCAL void replace_refs(char *s);
+   /*  */
 LOCAL void string2reference(char *ref, const LABEL *l, const BOOLEAN for_toc, const char *pic, const UWORD uiW, const UWORD uiH);
 
+   /* read raw file and output it unchanged */
 LOCAL BOOLEAN output_raw_file(const char *filename);
 
+   /* output header for ST-Guide */
 LOCAL void stg_header(const char *numbers, const char *nodename, BOOLEAN is_popup);
 
+   /* output topline for PC-HELP */
 LOCAL void pch_headline(char *s);
+   /* output bottomline for PC-HELP */
 LOCAL void pch_bottomline(void);
+   /* output header for PC-HELP */
 LOCAL void output_pch_header(const char *numbers, const char *name);
 
+   /* output bottomline for Turbo-Vision-Help */
 LOCAL void tvh_bottomline(void);
+   /* create header for Turbo-Vision-Help node */
 LOCAL void output_vision_header(const char *numbers, const char *name);
 
+   /* output nodeline for TeXinfo */
 LOCAL void output_texinfo_node(const char *name);
 
+   /* output topline for WinHelp */
 LOCAL void win_headline(char *name, BOOLEAN popup);
+   /* output header for WinHelp */
 LOCAL void output_win_header(const char *name, const BOOLEAN insivisble);
 
+   /* get filename for HTML according to current node */
 LOCAL char *get_html_filename(const int tocindex, char *s, int *html_merge);
-
+   /* output HTML meta data in the HTML head section */
 LOCAL void output_html_meta(BOOLEAN keywords);
+   /* output HTML doctype in HTML header */
 LOCAL void output_html_doctype(void);
+   /* create new HTML file and output header and meta information */
+LOCAL BOOLEAN html_make_file(void);
+   /*  */
 LOCAL BOOLEAN html_new_file(void);
 LOCAL void get_giflink_data(const int index, char *name, UWORD *width, UWORD *height);
 LOCAL void html_index_giflink(const int idxEnabled, const int idxDisabled, const char *sep);
+   /* create and output HOME link for HTML navigation bar */
 LOCAL void html_home_giflink(const int idxEnabled, const int idxDisabled, const char *sep);
+   /* create and output link to 'back page' for HTML navigation bar */
 LOCAL void html_back_giflink(const int idxEnabled, const int idxDisabled, const char *sep);
+   /* create and output HTML head and bottom bar lines */
 LOCAL void html_hb_line(BOOLEAN head);
+   /*  */
 LOCAL void html_node_bar_modern(void);
+   /*  */
 LOCAL void html_node_bar_frames(void);
 
+   /* sets active_nodetype variable */
 LOCAL void set_inside_node(int nodetype);
 
+   /*  */
 LOCAL void make_nodetype(int nodetype, const BOOLEAN popup, const BOOLEAN invisible);
 
+   /* make TOC entry line bold */
 LOCAL void tocline_make_bold(char *s, const int depth);
+   /* output start of TOC listing head if the first item is going to be output */
 LOCAL void tocline_handle_1st(BOOLEAN *f);
+   /* remove all formatting stuff from a node name */
 LOCAL void convert_toc_item(TOCITEM *t);
+   /* output the Appendix title line */
 LOCAL void output_appendix_line(void);
+   /*  */
 LOCAL void toc_link_output(const int depth ); /* New in r6pl16 [NHz] */
 
+   /* create output for all !use_auto_...tocs commands */
 LOCAL void toc_output(int nodetype, const int depth, BOOLEAN apx);
-
+   /* wrapper for toc_output() */
 LOCAL void do_toc(int nodetype, const int depth);
-
+   /* outputs the navigation section (basically on top of the current page) */
 LOCAL void do_toptoc(const int current_node);
-
+   /*  */
 LOCAL int get_toccmd_depth(void);
-
+   /* initialize a new TOC entry */
 LOCAL TOCITEM *init_new_toc_entry(const int toctype, const BOOLEAN invisible);
+   /* add TOC page (indexudo) to toc[0] */
 LOCAL BOOLEAN add_toc_to_toc(void);
-
-/*LOCAL void free_toc_data(char **var );*/
+   /* exit TOC module */
+/* LOCAL void free_toc_data(char **var ); */
 
 
 
@@ -607,7 +640,10 @@ int      tocindex)  /* */
 /*******************************************************************************
 *
 *  output_aliasses():
-*     Aliase eines Kapitels ausgeben. Diese muessen nach der Node-Angabe erfolgen.
+*     output aliasses of a chapter
+*
+*  Note:
+*     Diese muessen nach der Node-Angabe erfolgen.
 *
 *  return:
 *     -
@@ -1483,7 +1519,7 @@ GLOBAL void check_endnode(void)
 /*******************************************************************************
 *
 *  output_raw_file():
-*     Raw-Header einlesen und unveraendert ausgeben (r6pl10)
+*     read raw file and output it unchanged
 *
 *  return:
 *     ???
@@ -1786,7 +1822,7 @@ const char  *nodename)     /* */
 /*******************************************************************************
 *
 *  stg_header():
-*     Header fuer den ST-Guide
+*     output header for ST-Guide
 *
 *  return:
 *     -
@@ -1837,7 +1873,7 @@ BOOLEAN      is_popup)  /* */
 /*******************************************************************************
 *
 *  pch_headline():
-*     Topline fuer PC-HELP
+*     output topline for PC-HELP
 *
 *  return:
 *     -
@@ -1914,7 +1950,7 @@ char       *s)            /* */
 /*******************************************************************************
 *
 *  pch_bottomline():
-*     Bottomline fuer PC-HELP
+*     output bottomline for PC-HELP
 *
 *  return:
 *     -
@@ -2029,7 +2065,7 @@ LOCAL void pch_bottomline(void)
 /*******************************************************************************
 *
 *  output_pch_header():
-*     ??? (description missing)
+*     output header for PC-HELP
 *
 *  return:
 *     -
@@ -2148,8 +2184,8 @@ const char  *s)       /* */
 
 /*******************************************************************************
 *
-*  output_pch_header():
-*     Bottomline fuer Turbo-Vision-Help
+*  tvh_bottomline():
+*     output bottomline for Turbo-Vision-Help
 *
 *  return:
 *     -
@@ -2237,7 +2273,7 @@ LOCAL void tvh_bottomline(void)
 /*******************************************************************************
 *
 *  output_vision_header():
-*     Turbo-Vision-Help-Node-Header erzeugen
+*     create header for Turbo-Vision-Help node
 *
 *  return:
 *     -
@@ -2296,7 +2332,7 @@ const char       *name)     /* */
 /*******************************************************************************
 *
 *  output_texinfo_node():
-*     Nodeline fuer Texinfo
+*     output nodeline for TeXinfo
 *
 *  return:
 *     -
@@ -2369,7 +2405,7 @@ const char  *name)     /* */
 /*******************************************************************************
 *
 *  win_headline():
-*     Topline fuer WinHelp
+*     output topline for WinHelp
 *
 *  return:
 *     -
@@ -2426,7 +2462,7 @@ BOOLEAN   popup)   /* */
 /*******************************************************************************
 *
 *  output_win_header():
-*     Header fuer WinHelp
+*     output header for WinHelp
 *
 *  return:
 *     -
@@ -2548,7 +2584,7 @@ const BOOLEAN   invisible)      /* */
 /*******************************************************************************
 *
 *  get_html_filename():
-*     Dateinamen fuer HTML abhaengig vom aktuellen Node ermitteln.
+*     get filename for HTML according to current node
 *
 *  Note:
 *     UDO splittet die Files selbstaendig und benoetigt u.a. fuer die
@@ -2797,7 +2833,7 @@ int         hexwidth;            /* */    /* r6pl2 */
 /*******************************************************************************
 *
 *  html_make_file():
-*     Neue Datei fuer HTML anlegen, Header und Metainfos ausgeben
+*     create new HTML file and output header and meta information
 *
 *  Note:
 *     wird nur fuer das jeweils aktuelle Kapitel aufgerufen
@@ -3345,7 +3381,7 @@ BOOLEAN    keywords)             /* */
 /*******************************************************************************
 *
 *  output_html_doctype():
-*     ??? (description missing)
+*     output HTML doctype in HTML header
 *
 *  return:
 *     -
@@ -10853,7 +10889,7 @@ GLOBAL void c_listoftables(void)
 /*******************************************************************************
 *
 *  output_appendix_line():
-*     ???
+*     output the Appendix title line
 *
 *  Return:
 *     -
@@ -12357,10 +12393,10 @@ GLOBAL void toc_init_lang(void)
 /*******************************************************************************
 *
 *  init_new_toc_entry():
-*     ???
+*     initialize a new TOC entry
 *
 *  Return:
-*     ???
+*     ^ TOCITEM
 *
 ******************************************|************************************/
 
