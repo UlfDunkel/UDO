@@ -120,6 +120,8 @@
 *    fd  Feb 17: - flag typos fixed
 *                - all *toc_output() functions merged into toc_output() function
 *                - all do_*toc() functions merged into do_toc() function
+*                - save_htmlhelp_contents() adjusted for TOC_NODE5
+*                - remaining functions reformatted
 *
 ******************************************|************************************/
 
@@ -303,6 +305,12 @@ typedef struct _tWinMapData
           hexSuf[16];                     /* 0x $ */
    char   compiler[32];                   /* C, Pascal, Visual-Basic, ... */
    }  tWinMapData;
+
+typedef struct _hmtl_idx                  /* */
+   {
+   int    toc_index;                      /* */
+   char   tocname[512];                   /* */
+   } HTML_IDX;
 
 
 
@@ -5397,45 +5405,48 @@ GLOBAL void html_footer(void)
 
 
 
-/* GLOBAL MYFILE   udofile; */
+/*******************************************************************************
+*
+*  udofile_adjust_index():
+*     compose filename
+*
+*  return:
+*     -
+*
+******************************************|************************************/
 
-/* --------------------------------------------------------------
-   * Dateinamen zusammenbasteln
-   --------------------------------------------------------------  */
 LOCAL void udofile_adjust_index(void)
 {
-
 #if HAVE_TMPNAM
+   char   t[512];  /* */
+   
 
-   char t[512];
-
-   if (tmpnam(t)!=NULL)
-   {  
+   if (tmpnam(t) != NULL)
       strcpy(udofile.full, t);
-   }
    else
-   {  strcpy(udofile.full, "_udoind.tmp");
-   }
+      strcpy(udofile.full, "_udoind.tmp");
 
 #else
+   char  *tp;  /* */
 
-   char  *tp;
 
-   tp= NULL;
+   tp = NULL;
 
-   if ((tp=getenv("TEMP"))==NULL)
-   {  if ((tp=getenv("TMP"))==NULL)
-      {  tp=getenv("TMPDIR");
-      }
+   if ((tp = getenv("TEMP")) == NULL)
+   {
+      if ((tp = getenv("TMP")) == NULL)
+         tp = getenv("TMPDIR");
    }
 
-   if (tp!=NULL)
-   {  fsplit(tp, tmp_driv, tmp_path, tmp_name, tmp_suff);
+   if (tp != NULL)
+   {
+      fsplit(tp, tmp_driv, tmp_path, tmp_name, tmp_suff);
       strcpy(udofile.driv, tmp_driv);
       strcpy(udofile.path, tmp_path);
    }
    else
-   {  strcpy(udofile.driv, outfile.driv);
+   {
+      strcpy(udofile.driv, outfile.driv);
       strcpy(udofile.path, outfile.path);
    }
 
@@ -5444,8 +5455,7 @@ LOCAL void udofile_adjust_index(void)
 
    sprintf(udofile.full, "%s%s%s%s", udofile.driv, udofile.path, udofile.name, udofile.suff);
 #endif
-
-}  /* udofile_adjust_index */
+}
 
 
 
@@ -5782,320 +5792,523 @@ GLOBAL BOOLEAN save_html_index(void)
 
 
 
-/* --------------------------------------------------------------
-   --------------------------------------------------------------  */
+/*******************************************************************************
+*
+*  add_pass1_index_udo():
+*     ???
+*
+*  return:
+*     -
+*
+******************************************|************************************/
 
 GLOBAL void add_pass1_index_udo(void)
 {
    save_html_index();
    token_reset();
+}
 
-}  /* add_pass1_index_udo */
 
-/*      ############################################################
-        #
-        # Spezielles fuer HTML Help
-        #
-        ############################################################    */
+
+
+
+/*******************************************************************************
+*
+*  hh_headline():
+*     ???
+*
+*  return:
+*     -
+*
+******************************************|************************************/
 
 GLOBAL void hh_headline(void)
 {
 #if 0
-        if (!no_headlines)
-        {       html_hb_line(TRUE);
-        }
+   if (!no_headlines)
+      html_hb_line(TRUE);
 #endif
-}       /* hh_headline */
+}
 
+
+
+
+
+/*******************************************************************************
+*
+*  hh_headline():
+*     ???
+*
+*  return:
+*     -
+*
+******************************************|************************************/
 
 GLOBAL void hh_bottomline(void)
 {
 #if 0
-        if (!no_bottomlines)
-        {       html_hb_line(FALSE);
-        }
+   if (!no_bottomlines)
+      html_hb_line(FALSE);
 #endif
-}       /* hh_bottomline */
-
-
-
-LOCAL void print_htmlhelp_contents(FILE *file, const char *indent, const int ti)
-{
-        char filename[512], tocname[512];
-        int  html_merge;
-
-        if (ti>0)
-        {
-                get_html_filename(ti, filename, &html_merge);
-                um_strcpy(tocname, toc[ti]->name, 512, "print_htmlhelp_contents[1]");
-        }
-        else
-        {
-                strcpy(filename, old_outfile.name);
-                tocname[0]= EOS;
-                if (tocname[0]==EOS && titleprogram[0]!=EOS)    um_strcpy(tocname, titleprogram, 512, "print_htmlhelp_contents[2]");
-                if (tocname[0]==EOS && called_tableofcontents)  um_strcpy(tocname, lang.contents, 512, "print_htmlhelp_contents[3]");
-                if (tocname[0]==EOS && called_maketitle)                um_strcpy(tocname, lang.title, 512, "print_htmlhelp_contents[4]");
-        }
-        del_html_styles(tocname);
-
-    fprintf(file, "%s<li><object type=\"text/sitemap\">\n", indent);
-        fprintf(file, "%s<param name=\"Name\" value=\"%s\">\n", indent, tocname);
-        fprintf(file, "%s<param name=\"Local\" value=\"%s%s\">\n", indent, filename, outfile.suff);
-    fprintf(file, "%s</object>\n", indent);
-
-}       /* print_htmlhelp_contents */
-
-
-GLOBAL BOOLEAN save_htmlhelp_contents(const char* filename)
-{
-        FILE *file;
-
-        register int i;
-        BOOLEAN last_n= TRUE;
-        BOOLEAN last_sn= FALSE;
-        BOOLEAN last_ssn= FALSE;
-        BOOLEAN last_sssn= FALSE;
-        BOOLEAN last_ssssn= FALSE;
-        BOOLEAN inApx= FALSE;
-
-        file= myFwopen(filename, FTHHC);
-
-        if (!file)
-        {       return FALSE;
-        }
-
-        save_upr_entry_outfile(filename);
-
-        fprintf(file, "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n");
-   fprintf(file, "<html>\n");
-   fprintf(file, "<head>\n");
-        fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Version %s.%s %s for %s\">\n",
-                                                UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS);
-        fprintf(file, "<!-- Sitemap 1.0 -->\n");
-        fprintf(file, "</head>\n");
-        fprintf(file, "<body>\n");
-        fprintf(file, "<ul>\n");
-
-        print_htmlhelp_contents(file, "\t", 0); /* r6pl10: Eintrag fuer erste Seite */
-        fprintf(file, "</ul>\n");
-   fprintf(file, "<ul>\n");
-
-        for (i=1; i<=p1_toc_counter; i++)
-        {
-                if (toc[i]!=NULL && !toc[i]->invisible)
-                {
-                        convert_toc_item(toc[i]);
-
-                        if (!inApx && toc[i]->appendix)
-                        {       /* r6pl13: Anhang mit ausgeben, hier den ersten Node im Anhang */
-                                inApx= TRUE;
-                                if (last_n)             fprintf(file, "</ul>\n");
-                                if (last_sn)    fprintf(file, "\t</ul>\n</ul>\n");
-                                if (last_ssn)   fprintf(file, "\t\t</ul>\n\t</ul>\n</ul>\n");
-                                if (last_sssn)  fprintf(file, "\t\t\t</ul>\n\t\t</ul>\n\t</ul>\n</ul>\n");
-                                if (last_ssssn)  fprintf(file, "\t\t\t\t</ul>\n\t\t\t</ul>\n\t\t</ul>\n</ul>\n</ul>\n");
-                                last_n= last_sn= last_ssn= last_sssn= last_ssssn= FALSE;
-#if 0
-                                fprintf(file, "<ul>\t<li><object type=\"text/sitemap\">\n");
-                                fprintf(file, "\t\t<param name=\"Name\" value=\"%s\">\n", lang.appendix);
-                                fprintf(file, "\t\t</object>\n");
-#endif
-                                fprintf(file, "<ul>\n");
-                        }
-/* ToDo: last_ssssn */
-
-                        if (toc[i]->n1 != 0)
-                        {
-                                if (toc[i]->toctype==TOC_NODE1)
-                                {       /* Ein Kapitel */       
-
-                                        if (last_sn)    {       fprintf(file, "\t</ul>\n");                                                     last_sn= FALSE;         }
-                                        if (last_ssn)   {       fprintf(file, "\t\t</ul>\n\t</ul>\n");                          last_ssn= FALSE;        }
-                                        if (last_sssn)  {       fprintf(file, "\t\t\t</ul>\n\t\t</ul>\n\t</ul>\n");     last_sssn= FALSE;       }
-                                        last_n= TRUE;
-                                        print_htmlhelp_contents(file, "\t", i);
-
-                                }/* TOC_NODE1 */
-                                        
-                                        
-                                if (toc[i]->toctype==TOC_NODE2)
-                                {       /* Ein Abschnitt */
-                                        if (last_n)             {       fprintf(file, "\t<ul>\n");                                      last_n= FALSE;          }
-                                        if (last_ssn)   {       fprintf(file, "\t\t</ul>\n");                           last_ssn= FALSE;        }
-                                        if (last_sssn)  {       fprintf(file, "\t\t\t</ul>\n\t\t</ul>\n");      last_sssn= FALSE;       }
-                                        last_sn= TRUE;
-                                        print_htmlhelp_contents(file, "\t\t", i);
-
-                                }/* TOC_NODE2 */
-                                        
-                                if (toc[i]->toctype==TOC_NODE3)
-                                {       /* Ein Unterabschnitt */
-                                        if (last_n)             {       fprintf(file, "<ul>\n\t<ul>\n");        last_n= FALSE;          }
-                                        if (last_sn)    {       fprintf(file, "\t\t<ul>\n");            last_sn= FALSE;         }
-                                        if (last_sssn)  {       fprintf(file, "\t\t\t</ul>\n");         last_sssn= FALSE;       }
-                                        last_ssn= TRUE;
-                                        print_htmlhelp_contents(file, "\t\t\t", i);
-
-                                }/* TOC_NODE3 */
-                                        
-                                        
-                                if (toc[i]->toctype==TOC_NODE4)
-                                {       /* Ein Paragraph */
-                                        if (last_n)             {       fprintf(file, "\t<ul>\n\t\t<ul>\n\t\t\t<ul>\n");        last_n= FALSE;          }
-                                        if (last_sn)    {       fprintf(file, "\t<ul>\n\t\t<ul>\n");                            last_sn= FALSE;         }
-                                        if (last_ssn)   {       fprintf(file, "\t\t\t<ul>\n");                                          last_ssn= FALSE;        }
-                                        last_sssn= TRUE;
-                                        print_htmlhelp_contents(file, "\t\t\t\t", i);
-
-                                }/* TOC_NODE4 */
-
-                        }/* toc[i]->n1 > 0 */
-
-                }/* toc[i]!=NULL && !toc[i]->invisible */
-
-        }/* for */
-
-
-        if (last_sn)    fprintf(file, "\t</ul>\n</ul>\n");
-        if (last_ssn)   fprintf(file, "\t\t</ul>\n\t</ul>\n");
-        if (last_sssn)  fprintf(file, "\t\t\t</ul>\n\t\t</ul>\nswitch (</ul>\n");
-
-#if 0
-        if (inApx)              fprintf(file, "</ul>\n");
-#endif
-
-        fprintf(file, "</ul>\n");
-        fprintf(file, "</body>\n</html>\n");
-
-        fclose(file);
-
-        return TRUE;
-
-}       /* save_htmlhelp_contents */
-
-
-typedef struct _hmtl_idx {
-        int toc_index;
-        char tocname[512];
-} HTML_IDX;
-
-LOCAL int comp_index(const void *_p1, const void *_p2)
-{
-        const HTML_IDX *p1 = (const HTML_IDX *)_p1;
-        const HTML_IDX *p2 = (const HTML_IDX *)_p2;
-
-        return strcmp(p1->tocname, p2->tocname);
 }
 
 
-GLOBAL BOOLEAN save_htmlhelp_index(const char* filename)
+
+
+
+/*******************************************************************************
+*
+*  print_htmlhelp_contents():
+*     ???
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void print_htmlhelp_contents(
+
+FILE        *file,           /* */
+const char  *indent,         /* */
+const int    ti)             /* */
 {
-        FILE *file;
-        size_t i;
-        int j;
-        int  html_merge;
-        size_t num_index;
-        HTML_IDX *html_index;
-        char htmlname[512];
-        char *tocname;
+   char      filename[512],  /* */
+             tocname[512];   /* */
+   int       html_merge;     /* */
+   
+   
+   if (ti > 0)
+   {
+      get_html_filename(ti, filename, &html_merge);
+      um_strcpy(tocname, toc[ti]->name, 512, "print_htmlhelp_contents[1]");
+   }
+   else
+   {
+      strcpy(filename, old_outfile.name);
+      
+      tocname[0] = EOS;
+   
+      if (tocname[0] == EOS && titleprogram[0] != EOS)
+         um_strcpy(tocname, titleprogram, 512, "print_htmlhelp_contents[2]");
+      
+      if (tocname[0] == EOS && called_tableofcontents)
+         um_strcpy(tocname, lang.contents, 512, "print_htmlhelp_contents[3]");
+      
+      if (tocname[0] == EOS && called_maketitle)
+         um_strcpy(tocname, lang.title, 512, "print_htmlhelp_contents[4]");
+   }
 
-        /* erstmal zaehlen wieviel wir brauchen */
-        num_index = 0;
+   del_html_styles(tocname);
+
+   fprintf(file, "%s<li><object type=\"text/sitemap\">\n", indent);
+   fprintf(file, "%s<param name=\"Name\" value=\"%s\">\n", indent, tocname);
+   fprintf(file, "%s<param name=\"Local\" value=\"%s%s\">\n", indent, filename, outfile.suff);
+   fprintf(file, "%s</object>\n", indent);
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  save_htmlhelp_contents():
+*     ???
+*
+*  return:
+*     FALSE: error
+*      TRUE: success
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN save_htmlhelp_contents(
+
+const char       *filename)            /* */
+{
+   FILE          *file;                /* */
+   register int   i;                   /* */
+   BOOLEAN        last_n = TRUE;       /* */
+   BOOLEAN        last_sn = FALSE;     /* */
+   BOOLEAN        last_ssn = FALSE;    /* */
+   BOOLEAN        last_sssn = FALSE;   /* */
+   BOOLEAN        last_ssssn = FALSE;  /* */
+   BOOLEAN        inApx = FALSE;       /* */
+   
+   
+   file = myFwopen(filename, FTHHC);
+
+   if (!file)
+      return FALSE;
+
+   save_upr_entry_outfile(filename);
+
+   fprintf(file, "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n");
+   fprintf(file, "<html>\n");
+   fprintf(file, "<head>\n");
+   fprintf(file, "<meta name=\"GENERATOR\" content=\"UDO Version %s.%s %s for %s\">\n", UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS);
+   fprintf(file, "<!-- Sitemap 1.0 -->\n");
+   fprintf(file, "</head>\n");
+   fprintf(file, "<body>\n");
+   fprintf(file, "<ul>\n");
+
+                                          /* r6pl10: Eintrag fuer erste Seite */
+   print_htmlhelp_contents(file, "\t", 0);
+   
+   fprintf(file, "</ul>\n");
+   fprintf(file, "<ul>\n");
+
+   for (i = 1; i <= p1_toc_counter; i++)
+   {
+      if (toc[i] != NULL && !toc[i]->invisible)
+      {
+         convert_toc_item(toc[i]);
+
+         if (!inApx && toc[i]->appendix)
+         {
+                                          /* r6pl13: Anhang mit ausgeben, hier den ersten Node im Anhang */
+            inApx = TRUE;
+
+            if (last_n)
+               fprintf(file, "</ul>\n");
+               
+            if (last_sn)
+               fprintf(file, "\t</ul>\n</ul>\n");
+               
+            if (last_ssn)
+               fprintf(file, "\t\t</ul>\n\t</ul>\n</ul>\n");
+               
+            if (last_sssn)
+               fprintf(file, "\t\t\t</ul>\n\t\t</ul>\n\t</ul>\n</ul>\n");
+               
+            if (last_ssssn)
+               fprintf(file, "\t\t\t\t</ul>\n\t\t\t</ul>\n\t\t</ul>\n</ul>\n</ul>\n");
+               
+            last_n = last_sn = last_ssn = last_sssn = last_ssssn = FALSE;
 #if 0
-        for (i = 1; i <= p1_toc_counter; i++)
-        {
-                if (toc[i] != NULL && !toc[i]->invisible)
-                        num_index++;
-        }
+            fprintf(file, "<ul>\t<li><object type=\"text/sitemap\">\n");
+            fprintf(file, "\t\t<param name=\"Name\" value=\"%s\">\n", lang.appendix);
+            fprintf(file, "\t\t</object>\n");
 #endif
-        for (j = 1; j <= p1_lab_counter; j++)
-                if (lab[j] != NULL)
-                        num_index++;
+            fprintf(file, "<ul>\n");
+         }
 
-        if (num_index == 0)
-                return FALSE;   /* Index-File wird nicht gebraucht */
+         if (toc[i]->n1 != 0)
+         {
+            switch (toc[i]->toctype)
+            {
+            case TOC_NODE1:               /* a chapter */
+               if (last_sn)
+               {
+                  fprintf(file, "\t</ul>\n");
+                  last_sn = FALSE;
+               }
 
-        file = myFwopen(filename, FTHHK);
+               if (last_ssn)
+               {
+                  fprintf(file, "\t\t</ul>\n\t</ul>\n");
+                  last_ssn = FALSE;
+               }
+               
+               if (last_sssn)
+               {
+                  fprintf(file, "\t\t\t</ul>\n\t\t</ul>\n\t</ul>\n");
+                  last_sssn = FALSE;
+               }
+               
+               last_n = TRUE;
+               print_htmlhelp_contents(file, "\t", i);
+               break;
 
-        if (file == NULL)
-        {
-                return FALSE;
-        }
-        html_index = (HTML_IDX *)um_malloc(num_index * sizeof(HTML_IDX));
-        if (html_index == NULL)
-        {
-                fclose(file);
-                error_malloc_failed();
-                return FALSE;
-        }
+            case TOC_NODE2:               /* Ein Abschnitt */
+               if (last_n)
+               {
+                  fprintf(file, "\t<ul>\n");
+                  last_n = FALSE;
+               }
+               
+               if (last_ssn)
+               {
+                  fprintf(file, "\t\t</ul>\n");
+                  last_ssn = FALSE;
+               }
+               
+               if (last_sssn)
+               {
+                  fprintf(file, "\t\t\t</ul>\n\t\t</ul>\n");
+                  last_sssn = FALSE;
+               }
+               
+               last_sn = TRUE;
+               print_htmlhelp_contents(file, "\t\t", i);
+               break;
 
-        save_upr_entry_outfile(filename);
+            case TOC_NODE3:               /* Ein Unterabschnitt */
+               if (last_n)
+               {
+                  fprintf(file, "<ul>\n\t<ul>\n");
+                  last_n = FALSE;
+               }
 
-        fprintf(file, "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n");
-        fprintf(file, "<html>\n");
-        fprintf(file, "<head>\n");
-        fprintf(file, "<meta name=\"Generator\" content=\"UDO Version %s.%s %s for %s\">\n",
-                                                UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS);
-        if (titdat.author != NULL)
-                fprintf(file, "<meta name=\"Author\" content=\"%s\">\n", titdat.author);
-        fprintf(file, "<!-- Sitemap 1.0 -->\n");
-        fprintf(file, "</head>\n");
-        fprintf(file, "<body>\n");
-        fprintf(file, "<ul>\n");
+               if (last_sn)
+               {
+                  fprintf(file, "\t\t<ul>\n");
+                  last_sn = FALSE;
+               }
+               
+               if (last_sssn)
+               {
+                  fprintf(file, "\t\t\t</ul>\n");
+                  last_sssn = FALSE;
+               }
 
-        /* array aufbauen.. */
-        num_index = 0;
+               last_ssn = TRUE;
+               print_htmlhelp_contents(file, "\t\t\t", i);
+               break;
+
+            case TOC_NODE4:               /* Ein Paragraph */
+               if (last_n)
+               {
+                  fprintf(file, "\t<ul>\n\t\t<ul>\n\t\t\t<ul>\n");
+                  last_n = FALSE;
+               }
+               
+               if (last_sn) 
+               {
+                  fprintf(file, "\t<ul>\n\t\t<ul>\n");   
+                  last_sn = FALSE;
+               }
+               
+               if (last_ssn)
+               {
+                  fprintf(file, "\t\t\t<ul>\n");  
+                  last_ssn = FALSE;
+               }
+
+               last_sssn = TRUE;
+               print_htmlhelp_contents(file, "\t\t\t\t", i);
+               break;
+
+            case TOC_NODE5:               /* Ein Unterparagraph */
+               if (last_n)
+               {
+                  fprintf(file, "\t<ul>\n\t\t<ul>\n\t\t\t<ul>\n\t\t\t\t<ul>\n");
+                  last_n = FALSE;
+               }
+               
+               if (last_sn)
+               {
+                  fprintf(file, "\t<ul>\n\t\t<ul>\n\t\t\t<ul>\n");
+                  last_sn = FALSE;
+               }
+               
+               if (last_ssn) 
+               {
+                  fprintf(file, "\t<ul>\n\t\t<ul>\n");   
+                  last_ssn = FALSE;
+               }
+               
+               if (last_sssn)
+               {
+                  fprintf(file, "\t\t\t<ul>\n");  
+                  last_sssn = FALSE;
+               }
+
+               last_ssssn = TRUE;
+               print_htmlhelp_contents(file, "\t\t\t\t\t", i);
+               
+            }  /* switch (nodetype) */
+
+         }  /* if (toc[i]->n1 != 0) */
+
+      }  /* toc[i] != NULL && !toc[i]->invisible */
+
+   }  /* for */
+
+   if (last_sn)
+      fprintf(file, "\t</ul>\n</ul>\n");
+      
+   if (last_ssn)
+      fprintf(file, "\t\t</ul>\n\t</ul>\n");
+      
+   if (last_sssn)
+      fprintf(file, "\t\t\t</ul>\n\t\t</ul>\nswitch (</ul>\n");
+   
+   if (last_ssssn)
+      fprintf(file, "\t\t\t\t</ul>\n\t\t\t</ul>\n\t\t</ul>\nswitch (</ul>\n");
+   
+
 #if 0
-        for (j = 1; j <= p1_toc_counter; j++)
-        {
-                if (toc[j] != NULL && !toc[j]->invisible)
-                {
-                        convert_toc_item(toc[j]);
-                        html_index[num_index].toc_index = j;
-                        strcpy(html_index[num_index].tocname, toc[j]->name);
-                        num_index++;
-                }
-        }
+   if (inApx)
+      fprintf(file, "</ul>\n");
 #endif
-        for (j = 1; j <= p1_lab_counter; j++)
-        {
-                if (lab[j] != NULL)
-                {
-                        html_index[num_index].toc_index = lab[j]->tocindex;
-                        tocname = html_index[num_index].tocname;
-                        strcpy(tocname, lab[j]->name);
-                        replace_macros(tocname);
-                        c_internal_styles(tocname);
-                        /* replace_udo_quotes(tocname); */
-                        delete_all_divis(tocname);
-                        replace_udo_tilde(tocname);
-                        replace_udo_nbsp(tocname);
-                        del_html_styles(tocname);
-                        num_index++;
-                }
-        }
-        /* ..sortieren */
-        qsort(html_index, num_index, sizeof(HTML_IDX), comp_index);
 
-        /* ..und ausgeben */
-        for (i = 0; i < num_index; i++)
-        {
-                get_html_filename(html_index[i].toc_index, htmlname, &html_merge);
-                fprintf(file, "<li><object type=\"text/sitemap\"> <param name=\"Name\" value=\"%s\"> <param name=\"Local\" value=\"%s%s\"></object></li>\n",
-                        html_index[i].tocname,
-                        htmlname, outfile.suff);
-        }
+   fprintf(file, "</ul>\n");
+   fprintf(file, "</body>\n</html>\n");
 
-        fprintf(file, "</ul>\n");
-        fprintf(file, "</body>\n");
-        fprintf(file, "</html>\n");
-        fclose(file);
+   fclose(file);
 
-        um_free((void *) html_index);
+   return TRUE;
+}
 
-        return TRUE;
-}       /* save_htmlhelp_index */
+
+
+
+
+/*******************************************************************************
+*
+*  comp_index():
+*     compares two index entries
+*
+*  return:
+*     < 0, when s1 is smaller than s2
+*     = 0, when s1 and s2 are identical
+*     > 0, when s1 is greater than s2
+*
+******************************************|************************************/
+
+LOCAL int comp_index(
+
+const void  *_p1, 
+const void  *_p2)
+{
+   const HTML_IDX *p1 = (const HTML_IDX *)_p1;
+   const HTML_IDX *p2 = (const HTML_IDX *)_p2;
+
+   return strcmp(p1->tocname, p2->tocname);
+}
+
+
+
+
+
+/*******************************************************************************
+*
+*  save_htmlhelp_index():
+*     ???
+*
+*  return:
+*     FALSE: error
+*      TRUE: success
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN save_htmlhelp_index(
+
+const char   *filename)       /* */
+{
+   FILE      *file;           /* */
+   size_t     i;              /* */
+   int        j;              /* */
+   int        html_merge;     /* */
+   size_t     num_index;      /* */
+   HTML_IDX  *html_index;     /* */
+   char       htmlname[512];  /* */
+   char      *tocname;        /* */
+   
+   
+   num_index = 0;
+   
+#if 0
+   for (i = 1; i <= p1_toc_counter; i++)
+   {
+      if (toc[i] != NULL && !toc[i]->invisible)
+      num_index++;
+   }
+#endif
+
+   for (j = 1; j <= p1_lab_counter; j++)  /* erstmal zaehlen wieviel wir brauchen */
+   {
+      if (lab[j] != NULL)
+         num_index++;
+    }
+
+   if (num_index == 0)
+      return FALSE;                       /* Index-File wird nicht gebraucht */
+
+   file = myFwopen(filename, FTHHK);
+
+   if (file == NULL)
+      return FALSE;
+
+   html_index = (HTML_IDX *)um_malloc(num_index * sizeof(HTML_IDX));
+   
+   if (html_index == NULL)
+   {
+      fclose(file);
+      error_malloc_failed();
+      return FALSE;
+   }
+
+   save_upr_entry_outfile(filename);
+
+   fprintf(file, "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n");
+   fprintf(file, "<html>\n");
+   fprintf(file, "<head>\n");
+   fprintf(file, "<meta name=\"Generator\" content=\"UDO Version %s.%s %s for %s\">\n",UDO_REL, UDO_SUBVER, UDO_BUILD, UDO_OS);
+
+   if (titdat.author != NULL)
+      fprintf(file, "<meta name=\"Author\" content=\"%s\">\n", titdat.author);
+      
+   fprintf(file, "<!-- Sitemap 1.0 -->\n");
+   fprintf(file, "</head>\n");
+   fprintf(file, "<body>\n");
+   fprintf(file, "<ul>\n");
+
+   num_index = 0;
+   
+#if 0
+   for (j = 1; j <= p1_toc_counter; j++)
+   {
+      if (toc[j] != NULL && !toc[j]->invisible)
+      {
+         convert_toc_item(toc[j]);
+         html_index[num_index].toc_index = j;
+         strcpy(html_index[num_index].tocname, toc[j]->name);
+         num_index++;
+      }
+   }
+#endif
+
+   for (j = 1; j <= p1_lab_counter; j++)  /* array aufbauen.. */
+   {
+      if (lab[j] != NULL)
+      {
+         html_index[num_index].toc_index = lab[j]->tocindex;
+         tocname = html_index[num_index].tocname;
+         strcpy(tocname, lab[j]->name);
+         replace_macros(tocname);
+         c_internal_styles(tocname);
+/*       replace_udo_quotes(tocname); */
+         delete_all_divis(tocname);
+         replace_udo_tilde(tocname);
+         replace_udo_nbsp(tocname);
+         del_html_styles(tocname);
+         num_index++;
+      }
+   }
+   
+                                          /* ..sortieren */
+   qsort(html_index, num_index, sizeof(HTML_IDX), comp_index);
+
+   for (i = 0; i < num_index; i++)        /* ..und ausgeben */
+   {
+      get_html_filename(html_index[i].toc_index, htmlname, &html_merge);
+      
+      fprintf(file, "<li><object type=\"text/sitemap\"> <param name=\"Name\" value=\"%s\"> <param name=\"Local\" value=\"%s%s\"></object></li>\n",
+            html_index[i].tocname,
+            htmlname, 
+            outfile.suff);
+   }
+
+   fprintf(file, "</ul>\n");
+   fprintf(file, "</body>\n");
+   fprintf(file, "</html>\n");
+   fclose(file);
+
+   um_free((void *)html_index);
+
+   return TRUE;
+}
 
 
 
@@ -7712,6 +7925,8 @@ GLOBAL void c_psubsubsubsubnode_iv(void)
 
 
 
+
+
 /*******************************************************************************
 *
 *  set_inside_node():
@@ -7733,10 +7948,20 @@ int   nodetype)  /* TOC_NODE... */
 
 
 
+/*******************************************************************************
+*
+*  c_endnode():
+*     wrapper for check_endnode()
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
 GLOBAL void c_endnode(void)
 {
-        check_endnode();
-}       /* c_endnode */
+   check_endnode();
+}
 
 
 
