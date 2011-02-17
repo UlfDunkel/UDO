@@ -150,7 +150,7 @@ typedef struct _tocitem                   /* entries for the Table Of Contents (
    int       n5;                          /* Unterabschnittnummer   (absolut) */
    int       nr1,nr2,nr3,nr4,nr5;         /* Inhaltsverzeichnis-Nummern */
    BOOLEAN   appendix;                    /* TRUE = Steht im Anhang */
-   int       toctype;                     /* !node, !subnode oder !subsubnode */
+   int       toctype;                     /* !node, !subnode, !subsubnode, !subsubsubnode, !subsubsubsubnode */
                                           /* Filename der Sourcecodedatei */   /* V6.5.18 */
    char      source_filename[MYFILE_FULL_LEN];
    long      source_line;                 /* Zeile im Sourcecode ab der der Node beginnt */   /* V6.5.18 */
@@ -383,6 +383,7 @@ GLOBAL void c_subtoc(void);
 
 GLOBAL void c_listoffigures(void);
 GLOBAL void c_listoftables(void);
+   /* outputs an auto-generated Table Of Contents */
 GLOBAL void c_tableofcontents(void);
 
 GLOBAL BOOLEAN bookmarks_ps(void);

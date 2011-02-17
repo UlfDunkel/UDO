@@ -123,6 +123,7 @@
 *                - save_htmlhelp_contents() adjusted for TOC_NODE5
 *                - remaining functions reformatted
 *                - more function descriptions added
+*                - TOC output debugged
 *
 ******************************************|************************************/
 
@@ -265,7 +266,7 @@ LOCAL char        form_a3_n3[80], form_a3_n4[80], form_a3_n5[80];
 LOCAL char        form_a4_n4[80], form_a4_n5[80];
 LOCAL char        form_a5_n5[80];
 
-LOCAL char        toc_list_top[64],
+LOCAL char        toc_list_top[64],       /* */
                   toc_list_end[64];       /*r6pl2*/
 LOCAL char        use_toc_list_commands;  /* TOCL_HTM | TOCL_TEX | 0 */
 
@@ -390,7 +391,7 @@ LOCAL void html_node_bar_frames(void);
    /* sets active_nodetype variable */
 LOCAL void set_inside_node(int nodetype);
 
-   /*  */
+   /* create a new node of the requested depth */
 LOCAL void make_nodetype(int nodetype, const BOOLEAN popup, const BOOLEAN invisible);
 
    /* make TOC entry line bold */
@@ -408,7 +409,7 @@ LOCAL void toc_link_output(const int depth ); /* New in r6pl16 [NHz] */
 LOCAL void toc_output(int nodetype, const int depth, BOOLEAN apx);
    /* wrapper for toc_output() */
 LOCAL void do_toc(int nodetype, const int depth);
-   /* outputs the navigation section (basically on top of the current page) */
+   /* outputs the breadcrumb navigation links for the current chapter */
 LOCAL void do_toptoc(const int current_node);
    /*  */
 LOCAL int get_toccmd_depth(void);
@@ -1473,7 +1474,7 @@ GLOBAL void check_endnode(void)
          
       case TOC_NODE4:
          if (use_auto_subsubsubsubtocs)
-            do_toc(TOC_NODE5, 1);
+            do_toc(TOC_NODE5, subtocs4_depth);
             
          break;
       }
@@ -4255,6 +4256,7 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
    /* !html_merge_node2:  der letzte !node                */
    /* !html_merge_node3:  der letzte !subnode             */
    /* !html_merge_node4:  der letzte !subsubnode          */
+   /* !html_merge_node5:  der letzte !subsubsubnode       */
    /* --------------------------------------------------- */
    
    if (for_main_file)
@@ -4362,21 +4364,30 @@ BOOLEAN      head)              /*  TRUE: output GUI navigation bar in page head
          }
          else if (html_merge_node3)
          {
-            if (toc[i]->toctype != TOC_NODE1 && toc[i]->toctype != TOC_NODE2)
+            if (    toc[i]->toctype != TOC_NODE1 
+                 && toc[i]->toctype != TOC_NODE2
+               )
             {
                i = 0;
             }
          }
          else if (html_merge_node4)
          {
-            if (toc[i]->toctype != TOC_NODE1 && toc[i]->toctype != TOC_NODE2 && toc[i]->toctype != TOC_NODE3)
+            if (    toc[i]->toctype != TOC_NODE1 
+                 && toc[i]->toctype != TOC_NODE2 
+                 && toc[i]->toctype != TOC_NODE3
+               )
             {
                i = 0;
             }
          }
          else if (html_merge_node5)
          {
-            if (toc[i]->toctype != TOC_NODE1 && toc[i]->toctype != TOC_NODE2 && toc[i]->toctype != TOC_NODE3 && toc[i]->toctype != TOC_NODE4)
+            if (    toc[i]->toctype != TOC_NODE1 
+                 && toc[i]->toctype != TOC_NODE2 
+                 && toc[i]->toctype != TOC_NODE3 
+                 && toc[i]->toctype != TOC_NODE4
+               )
             {
                i = 0;
             }
@@ -5817,6 +5828,7 @@ GLOBAL BOOLEAN save_html_index(void)
    
    c_include();   
    
+/* printf("%s\n", udofile.full); */
    remove(udofile.full);
 
    um_free((void *)html_index);
@@ -6364,7 +6376,7 @@ const char   *filename)       /* */
 /*******************************************************************************
 *
 *  make_nodetype():
-*     ??? (description)
+*     create a new node of the requested depth
 *
 *  return:
 *     -
@@ -7782,7 +7794,15 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
 /*******************************************************************************
 *
 *  c_node():
-*     wrapper for make_nodetype()
+*  c_node_iv():
+*  c_pnode():
+*  c_pnode_iv():
+*     wrappers for make_nodetype()
+*
+*  Notes:
+*     Texinfo kennt keine versteckten Kapitel, daher wird bei den 
+*     node_iv-Funktionen als Invisible-Flag statt TRUE der Wert von 
+*     (desttype != TOINF) benutzt. Kurz und elegant, nicht?
 *
 *  return:
 *     -
@@ -7794,61 +7814,34 @@ GLOBAL void c_node(void)
    make_nodetype(TOC_NODE1, FALSE, FALSE);
 }
 
-
-
-
-
-/*******************************************************************************
-*
-*  c_node_iv():
-*     wrapper for make_nodetype()
-*
-*  Notes:
-*     r5pl15:
-*     Texinfo kennt keine versteckten Kapitel, daher wird bei den 
-*     node_iv-Funktionen als Invisible-Flag statt TRUE der Wert von 
-*     (desttype != TOINF) benutzt. Kurz und elegant, nicht?
-*
-*  return:
-*     -
-*
-******************************************|************************************/
-
 GLOBAL void c_node_iv(void)
 {
-   make_nodetype(TOC_NODE1, FALSE, (desttype != TOINF)); /* r5pl15 */
+   make_nodetype(TOC_NODE1, FALSE, (desttype != TOINF));
 }
-
-
-
-
-
-/*******************************************************************************
-*
-*  c_pnode():
-*     wrapper for make_nodetype()
-*
-*  return:
-*     -
-*
-******************************************|************************************/
 
 GLOBAL void c_pnode(void)
 {
    make_nodetype(TOC_NODE1, TRUE, FALSE);
 }
 
+GLOBAL void c_pnode_iv(void)
+{
+   make_nodetype(TOC_NODE1, TRUE, (desttype != TOINF));
+}
+
 
 
 
 
 /*******************************************************************************
 *
-*  c_pnode_iv():
-*     wrapper for make_nodetype()
+*  c_subnode():
+*  c_subnode_iv():
+*  c_psubnode():
+*  c_psubnode_iv():
+*     wrappers for make_nodetype()
 *
 *  Notes:
-*     r5pl15:
 *     Texinfo kennt keine versteckten Kapitel, daher wird bei den 
 *     node_iv-Funktionen als Invisible-Flag statt TRUE der Wert von 
 *     (desttype != TOINF) benutzt. Kurz und elegant, nicht?
@@ -7857,15 +7850,6 @@ GLOBAL void c_pnode(void)
 *     -
 *
 ******************************************|************************************/
-
-GLOBAL void c_pnode_iv(void)
-{
-   make_nodetype(TOC_NODE1, TRUE, (desttype != TOINF));  /* r5pl15 */
-}
-
-
-
-
 
 GLOBAL void c_subnode(void)
 {
@@ -7891,6 +7875,24 @@ GLOBAL void c_psubnode_iv(void)
 
 
 
+/*******************************************************************************
+*
+*  c_subsubnode():
+*  c_subsubnode_iv():
+*  c_psubsubnode():
+*  c_psubsubnode_iv():
+*     wrappers for make_nodetype()
+*
+*  Notes:
+*     Texinfo kennt keine versteckten Kapitel, daher wird bei den 
+*     node_iv-Funktionen als Invisible-Flag statt TRUE der Wert von 
+*     (desttype != TOINF) benutzt. Kurz und elegant, nicht?
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
 GLOBAL void c_subsubnode(void)
 {
    make_nodetype(TOC_NODE3, FALSE, FALSE);
@@ -7915,6 +7917,24 @@ GLOBAL void c_psubsubnode_iv(void)
 
 
 
+/*******************************************************************************
+*
+*  c_subsubsubnode():
+*  c_subsubsubnode_iv():
+*  c_psubsubsubnode():
+*  c_psubsubsubnode_iv():
+*     wrappers for make_nodetype()
+*
+*  Notes:
+*     Texinfo kennt keine versteckten Kapitel, daher wird bei den 
+*     node_iv-Funktionen als Invisible-Flag statt TRUE der Wert von 
+*     (desttype != TOINF) benutzt. Kurz und elegant, nicht?
+*
+*  return:
+*     -
+*
+******************************************|************************************/
+
 GLOBAL void c_subsubsubnode(void)
 {
    make_nodetype(TOC_NODE4, FALSE, FALSE);
@@ -7938,6 +7958,24 @@ GLOBAL void c_psubsubsubnode_iv(void)
 
 
 
+
+/*******************************************************************************
+*
+*  c_subsubsubsubnode():
+*  c_subsubsubsubnode_iv():
+*  c_psubsubsubsubnode():
+*  c_psubsubsubsubnode_iv():
+*     wrappers for make_nodetype()
+*
+*  Notes:
+*     Texinfo kennt keine versteckten Kapitel, daher wird bei den 
+*     node_iv-Funktionen als Invisible-Flag statt TRUE der Wert von 
+*     (desttype != TOINF) benutzt. Kurz und elegant, nicht?
+*
+*  return:
+*     -
+*
+******************************************|************************************/
 
 GLOBAL void c_subsubsubsubnode(void)
 {
@@ -8819,11 +8857,9 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
    if (p1_toc_counter <= 0)               /* nothing to do */
       return;
 
-   if (nodetype != TOC_NODE1)
-   {
-      if (toc[p2_toc_counter]->ignore_subtoc)
-         return;
-   }
+   if (toc[p2_toc_counter]->ignore_subtoc)/* no subtocs */
+      return;
+
 
    switch (nodetype)
    {
@@ -8874,7 +8910,7 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
          p2_n1 = p2_toc_n1;
       
       start = last_n1_index;
-      
+
       depth1 = TOC_NODE2;
       depth2 = TOC_NODE3;
       depth3 = TOC_NODE4;
@@ -9031,1047 +9067,1004 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
                                           /* walk through all collected nodes from pass1() */
    for (i = start; i <= p1_toc_counter; i++)
    {
-      if (toc[i] != NULL && !toc[i]->invisible)
-      {
-         convert_toc_item(toc[i]);
+                                          /* nothing to do here! */
+      if (toc[i] == NULL || toc[i]->invisible)
+         goto NEXT_TOC;                   /* try next TOC entry */
 
-         if (!apx && toc[i]->appendix)    /* r5pl6: Es kann nur einen Anhang geben */
+      convert_toc_item(toc[i]);
+
+      if (!apx && toc[i]->appendix)       /* we're not (yet) in appendix mode */
+         break;
+                                      
+
+      if (nodetype == TOC_NODE1)          /* don't use switch() here to be able and use break; */
+      {
+         if (apx && !toc[i]->appendix)    /* in appendix mode we skip all non-appendix TOC entries */
+            goto NEXT_TOC;
+      }
+      else                                /* TOC_NODE2 ... TOC_NODE5: */
+      {
+         if (apx && toc[i]->appendix && toc[i]->n1 == 0)
+            break;
+                                
+         if (toc[i]->n1 > p2_n1)          /* all nodes done */
+            break;
+      }
+
+      if (toc[i]->n1 == 0)                /* not a valid node? */
+         goto NEXT_TOC;
+
+      if (    nodetype == TOC_NODE2       /* don't use switch() here to be able and use break; */
+           || nodetype == TOC_NODE3
+           || nodetype == TOC_NODE4
+           || nodetype == TOC_NODE5
+         )
+      {
+         if (toc[i]->n1 != p2_n1)
+            goto NEXT_TOC;
+      }
+
+
+      if (    nodetype == TOC_NODE3       /* don't use switch() here to be able and use break; */
+           || nodetype == TOC_NODE4
+           || nodetype == TOC_NODE5
+         )
+      {
+         if (toc[i]->n2 > p2_n2)
             break;
          
+         if (toc[i]->n2 != p2_n2)
+            goto NEXT_TOC;
+      }
+      
+      if (    nodetype == TOC_NODE4       /* don't use switch() here to be able and use break; */
+           || nodetype == TOC_NODE5
+         )
+      {
+         if (toc[i]->n3 > p2_n3)
+            break;
+         
+         if (toc[i]->n3 != p2_n3)
+            goto NEXT_TOC;
+      }
+      
+      if (nodetype == TOC_NODE5)          /* don't use switch() here to be able and use break; */
+      {
+         if (toc[i]->n4 > p2_n4)
+            break;
+         
+         if (toc[i]->n4 != p2_n4)
+            goto NEXT_TOC;
+      }
+                                          /* TOC_NODE1: current is a node */
+                                          /* TOC_NODE2: current is a subnode */
+                                          /* TOC_NODE3: current is a subsubnode */
+                                          /* TOC_NODE4: current is a subsubsubnode */
+                                          /* TOC_NODE5: current is a subsubsubsubnode */
+      if (toc[i]->toctype == depth1)
+      {
+         /* --- check first if we have to close previous items --- */
+         
+         if (use_toc_list_commands)
+         {
+            if (last1)                    /* close last node item */
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+                  outln("\t</li>");
+               else
+                  outln(toc_list_end);
+               
+               last1 = FALSE;
+            }
+            
+            if (last2)
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+               {
+                  outln("\t\t\t</li>");
+                  outln("\t\t</ul>");
+                  outln("\t</li>");
+               }
+               else
+                  outln(toc_list_end);
+               
+               last2 = FALSE;
+            }
+            
+            if (last3)
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+               {
+                  outln("\t\t\t\t\t</li>");
+                  outln("\t\t\t\t</ul>");
+                  outln("\t\t\t</li>");
+                  outln("\t\t</ul>");
+                  outln("\t</li>");
+               }
+               else
+               {
+                  outln(toc_list_end);
+                  outln(toc_list_end);
+               }
+               
+               last3 = FALSE;
+            }
+
+            if (last4)
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+               {
+                  outln("\t\t\t\t\t\t\t</li>");
+                  outln("\t\t\t\t\t\t</ul>");
+                  outln("\t\t\t\t\t</li>");
+                  outln("\t\t\t\t</ul>");
+                  outln("\t\t\t</li>");
+                  outln("\t\t</ul>");
+                  outln("\t</li>");
+               }
+               else
+               {
+                  outln(toc_list_end);
+                  outln(toc_list_end);
+                  outln(toc_list_end);
+               }
+               
+               last4 = FALSE;
+            }
+
+            if (last5)                    /* only for TOC_NODE1 */
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+               {
+                  outln("\t\t\t\t\t\t\t\t\t</li>");
+                  outln("\t\t\t\t\t\t\t\t</ul>");
+                  outln("\t\t\t\t\t\t\t</li>");
+                  outln("\t\t\t\t\t\t</ul>");
+                  outln("\t\t\t\t\t</li>");
+                  outln("\t\t\t\t</ul>");
+                  outln("\t\t\t</li>");
+                  outln("\t\t</ul>");
+                  outln("\t</li>");
+               }
+               else
+               {
+                  outln(toc_list_end);
+                  outln(toc_list_end);
+                  outln(toc_list_end);
+               }
+               
+               last5 = FALSE;
+            }
+         }
+                                          /* TOC_NODE1: we're a node! */
+                                          /* TOC_NODE2: we're a subnode! */
+                                          /* TOC_NODE3: we're a subsubnode! */
+                                          /* TOC_NODE4: we're a subsubsubnode! */
+                                          /* TOC_NODE5: we're a subsubsubsubnode! */
+         last1 = TRUE;
+         
+         li = toc[i]->labindex;
+         string2reference(ref, lab[li], TRUE, "", 0, 0);
+         
+         if (no_numbers)
+         {
+            sprintf(n, form_x1, ref);
+         }
+         else
+         {
+            switch (nodetype)
+            {
+            case TOC_NODE1:
+               if (apx)
+               {
+                  sprintf(n, form_x1, 
+                        'A' - 1 + toc[i]->nr1, 
+                        ref);
+               }
+               else
+               {
+                  sprintf(n, form_x1, 
+                        toc[i]->nr1 + toc_offset, 
+                        ref);
+               }
+               
+               break;
+               
+               
+            case TOC_NODE2:
+               if (apx)
+               {
+                  sprintf(n, form_x1, 
+                        'A' - 1 + toc[i]->nr1, 
+                                  toc[i]->nr2, 
+                        ref);
+               }
+               else
+               {
+                  sprintf(n, form_x1, 
+                        toc[i]->nr1 + toc_offset, 
+                        toc[i]->nr2 + subtoc_offset, 
+                        ref);
+               }
+               
+               break;
+               
+               
+            case TOC_NODE3:
+               if (apx)
+               {
+                  sprintf(n, form_x1, 
+                        'A' - 1 + toc[i]->nr1, 
+                                  toc[i]->nr2, 
+                                  toc[i]->nr3, 
+                        ref);
+               }
+               else
+               {
+                  sprintf(n, form_x1, 
+                        toc[i]->nr1 + toc_offset,
+                        toc[i]->nr2 + subtoc_offset,
+                        toc[i]->nr3 + subsubtoc_offset,
+                        ref);
+               }
+               
+               break;
+               
+               
+            case TOC_NODE4:
+               if (apx)
+               {
+                  sprintf(n, form_x1,
+                        'A' - 1 + toc[i]->nr1,
+                                  toc[i]->nr2,
+                                  toc[i]->nr3,
+                                  toc[i]->nr4,
+                        ref);
+               }
+               else
+               {
+                  sprintf(n, form_x1,
+                        toc[i]->nr1 + toc_offset,
+                        toc[i]->nr2 + subtoc_offset,
+                        toc[i]->nr3 + subsubtoc_offset,
+                        toc[i]->nr4 + subsubsubtoc_offset,
+                        ref);
+               }
+               
+               break;
+               
+               
+            case TOC_NODE5:
+               if (apx)
+               {
+                  sprintf(n, form_x1,
+                        'A' - 1 + toc[i]->nr1,
+                                  toc[i]->nr2,
+                                  toc[i]->nr3,
+                                  toc[i]->nr4,
+                                  toc[i]->nr5,
+                        ref);
+               }
+               else
+               {
+                  sprintf(n, form_x1,
+                        toc[i]->nr1 + toc_offset,
+                        toc[i]->nr2 + subtoc_offset,
+                        toc[i]->nr3 + subsubtoc_offset,
+                        toc[i]->nr4 + subsubsubtoc_offset,
+                        toc[i]->nr5 + subsubsubsubtoc_offset,
+                        ref);
+               }
+            }
+         }
          
          switch (nodetype)
          {
          case TOC_NODE1:
-            if (apx && !toc[i]->appendix)
-               goto NEXT_APX;
+            tocline_make_bold(n, depth);
+
+                                          /* don't add blank lines when depth is 1 */
+            if ( (leerzeile) && (depth > 1) )
+            {
+               switch (desttype)
+               {
+               case TOWIN:
+               case TOWH4:
+               case TOAQV:
+                  outln(rtf_par);
+                  break;
             
+               case TOHAH:
+               case TOHTM:
+               case TOMHH:
+                  outln("");
+                  break;
+               
+               case TOTEX:
+               case TOPDL:
+                  break;
+               
+               default:
+                  outln("");
+               }
+               
+               leerzeile = FALSE;
+            }
+         }
+         
+         tocline_handle_1st(&first);
+
+         if (use_toc_list_commands == TOCL_HTM)
+            out("\t");
+            
+         outln(n);                        /* output the node item! */
+         
+         switch (nodetype)
+         {
+         case TOC_NODE1:
+            leerzeile = TRUE;
             break;
          
          case TOC_NODE2:
          case TOC_NODE3:
          case TOC_NODE4:
          case TOC_NODE5:
-            if (apx && toc[i]->appendix && toc[i]->n1 == 0)
-               break;
-            
-            if (toc[i]->n1 > p2_n1)       /* all nodes done */
-               break;
+            output_done = TRUE;
          }
          
+      }  /* depth1 */
 
-         if (toc[i]->n1 != 0)             /* valid node */
+
+      if ( (toc[i]->toctype == depth2) && (depth > 1) )
+      {
+                                          /* TOC_NODE1: current is a subnode */
+                                          /* TOC_NODE2: current is a subsubnode */
+                                          /* TOC_NODE3: current is a subsubsubnode */
+                                          /* TOC_NODE4: current is a subsubsubsubnode */
+         /* --- check first if we have to close previous items --- */
+
+         if (use_toc_list_commands)
+         {
+            if (last1)
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+                  out("\t\t");
+               
+               outln(toc_list_top);
+               
+               last1 = FALSE;
+            }
+            
+            if (last2)                    /* close last subnode item */
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+                  outln("\t\t\t</li>");
+               else
+                  outln(toc_list_end);
+               
+               last2 = FALSE;
+            }
+            
+            if (last3)
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+               {
+                  outln("\t\t\t\t\t</li>");
+                  outln("\t\t\t\t</ul>");
+                  outln("\t\t\t</li>");
+               }
+               else
+                  outln(toc_list_end);
+               
+               last3 = FALSE;
+            }
+            
+            if (last4)
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+               {
+                  outln("\t\t\t\t\t\t\t</li>");
+                  outln("\t\t\t\t\t\t</ul>");
+                  outln("\t\t\t\t\t</li>");
+                  outln("\t\t\t\t</ul>");
+                  outln("\t\t\t</li>");
+               }
+               else
+               {
+                  outln(toc_list_end);
+                  outln(toc_list_end);
+               }
+               
+               last4 = FALSE;
+            }
+
+            if (last5)
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+               {
+                  outln("\t\t\t\t\t\t\t\t\t</li>");
+                  outln("\t\t\t\t\t\t\t\t</ul>");
+                  outln("\t\t\t\t\t\t\t</li>");
+                  outln("\t\t\t\t\t\t</ul>");
+                  outln("\t\t\t\t\t</li>");
+                  outln("\t\t\t\t</ul>");
+                  outln("\t\t\t</li>");
+               }
+               else
+               {
+                  outln(toc_list_end);
+                  outln(toc_list_end);
+                  outln(toc_list_end);
+               }
+
+               last5 = FALSE;
+            }
+         }
+                                          /* TOC_NODE1: we're a subnode! */
+                                          /* TOC_NODE2: we're a subsubnode! */
+                                          /* TOC_NODE3: we're a subsubsubnode! */
+                                          /* TOC_NODE4: we're a subsubsubsubnode! */
+         last2 = TRUE;
+
+         li = toc[i]->labindex;
+         string2reference(ref, lab[li], TRUE, "", 0, 0);
+      
+         if (no_numbers)
+         {
+            sprintf(n, form_x2, ref);
+         }
+         else
          {
             switch (nodetype)
             {
-            case TOC_NODE2:
-               if (toc[i]->n1 != p2_n1)
-                  goto NEXT_APX;
+            case TOC_NODE1:
+               if (apx)
+               {
+                  sprintf(n, form_x2, 
+                        'A' - 1 + toc[i]->nr1, 
+                                  toc[i]->nr2, 
+                        ref);
+               }
+               else
+               {
+               sprintf(n, form_x2, 
+                     toc[i]->nr1 + toc_offset,
+                     toc[i]->nr2 + subtoc_offset, 
+                     ref);
+               }
                
                break;
-            
-            
-            case TOC_NODE3:
-               if (toc[i]->n1 != p2_n1)
-                  goto NEXT_APX;
-                  
-               if (toc[i]->n2 > p2_n2)
-                  break;
                
-               if (toc[i]->n2 != p2_n2)
-                  goto NEXT_APX;
+               
+            case TOC_NODE2:
+               if (apx)
+               {
+                  sprintf(n, form_x2, 
+                        'A' - 1 + toc[i]->nr1, 
+                                  toc[i]->nr2, 
+                                  toc[i]->nr3, 
+                        ref);
+               }
+               else
+               {
+                  sprintf(n, form_x2, 
+                        toc[i]->nr1 + toc_offset,
+                        toc[i]->nr2 + subtoc_offset,
+                        toc[i]->nr3 + subsubtoc_offset,
+                        ref);
+               }
+               
+               break;
+               
+               
+            case TOC_NODE3:
+               if (apx)
+               {
+                  sprintf(n, form_x2,
+                        'A' - 1 + toc[i]->nr1,
+                                  toc[i]->nr2,
+                                  toc[i]->nr3,
+                                  toc[i]->nr4,
+                        ref);
+               }
+               else
+               {
+                  sprintf(n, form_x2,
+                        toc[i]->nr1 + toc_offset,
+                        toc[i]->nr2 + subtoc_offset,
+                        toc[i]->nr3 + subsubtoc_offset,
+                        toc[i]->nr4 + subsubsubtoc_offset,
+                        ref);
+               }
                
                break;
                
                
             case TOC_NODE4:
-               if (toc[i]->n1 != p2_n1)
-                  goto NEXT_APX;
+               if (apx)
+               {
+                  sprintf(n, form_x2,
+                        toc[i]->nr1,
+                        toc[i]->nr2,
+                        toc[i]->nr3,
+                        toc[i]->nr4,
+                        toc[i]->nr5,
+                        ref);
+               }
+               else
+               {
+                  sprintf(n, form_x2,
+                        toc[i]->nr1 + toc_offset,
+                        toc[i]->nr2 + subtoc_offset,
+                        toc[i]->nr3 + subsubtoc_offset,
+                        toc[i]->nr4 + subsubsubtoc_offset,
+                        toc[i]->nr5 + subsubsubsubtoc_offset,
+                        ref);
+               }
+            }
+         }
+      
+         tocline_handle_1st(&first);
+      
+         if (use_toc_list_commands == TOCL_HTM)
+            out("\t\t\t");
+            
+                                          /* TOC_NODE1 : output subnode item! */
+                                          /* TOC_NODE2 : output subsubnode item! */
+                                          /* TOC_NODE3 : output subsubsubnode item! */
+                                          /* TOC_NODE4 : output subsubsubsubnode item! */
+         outln(n);
+         
+         switch (nodetype)
+         {
+         case TOC_NODE2:
+         case TOC_NODE3:
+         case TOC_NODE4:
+         case TOC_NODE5:
+            output_done = TRUE;
+         }
+         
+      }  /* depth2 */
+      
+
+      if ( (toc[i]->toctype == depth3) && (depth > 2) )
+      {
+                                          /* TOC_NODE1: current is a subsubnode */
+                                          /* TOC_NODE2: current is a subsubsubnode */
+                                          /* TOC_NODE3: current is a subsubsubsubnode */
+         /* --- check first if we have to close previous items --- */
+
+         if (use_toc_list_commands)
+         {
+            if (last1)
+            {                             /* should not be reached! */
+               switch (nodetype)
+               {
+               case TOC_NODE1:
+                  voutlnf("%s%s", toc_list_top, toc_list_top);
+                  break;
+               
+               case TOC_NODE2:
+               case TOC_NODE3:
+                  outln(toc_list_top);
+               }
+               
+               last1 = FALSE;
+            }
+            
+            if (last2)
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+                  out("\t\t\t\t");
                   
-               if (toc[i]->n2 > p2_n2)
-                  break;
+               outln(toc_list_top);
                
-               if (toc[i]->n2 != p2_n2)
-                  goto NEXT_APX;
+               last2 = FALSE;
+            }
+            
+            if (last3)                    /* close last subsubnode item */
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+                  outln("\t\t\t\t\t</li>");
+               else
+                  outln(toc_list_end);
                
-               if (toc[i]->n3 > p2_n3)
-                  break;
+               last3 = FALSE;
+            }
+            
+            if (last4)
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+               {
+                  outln("\t\t\t\t\t\t\t</li>");
+                  outln("\t\t\t\t\t\t</ul>");
+                  outln("\t\t\t\t\t</li>");
+               }
+               else
+                  outln(toc_list_end);
                
-               if (toc[i]->n3 != p2_n3)
-                  goto NEXT_APX;
+               last4 = FALSE;
+            }
+            
+            if (last5)
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+               {
+                  outln("\t\t\t\t\t\t\t\t\t</li>");
+                  outln("\t\t\t\t\t\t\t\t</ul>");
+                  outln("\t\t\t\t\t\t\t</li>");
+                  outln("\t\t\t\t\t\t</ul>");
+                  outln("\t\t\t\t\t</li>");
+               }
+               else
+               {
+                  outln(toc_list_end);
+                  outln(toc_list_end);
+               }
+               
+               last5 = FALSE;
+            }
+         }
+            
+                                          /* TOC_NODE1: we're a subsubnode! */
+                                          /* TOC_NODE2: we're a subsubsubnode! */
+                                          /* TOC_NODE3: we're a subsubsubsubnode! */
+         last3 = TRUE;
+
+         li = toc[i]->labindex;
+         string2reference(ref, lab[li], TRUE, "", 0, 0);
+         
+         if (no_numbers)
+         {
+            sprintf(n, form_x3, ref);
+         }
+         else
+         {
+            switch (nodetype)
+            {
+            case TOC_NODE1:
+               if (apx)
+               {
+                  sprintf(n, form_x3, 
+                        'A' - 1 + toc[i]->nr1, 
+                                  toc[i]->nr2, 
+                                  toc[i]->nr3, 
+                        ref);
+               }
+               else
+               {
+                  sprintf(n, form_x3, 
+                        toc[i]->nr1 + toc_offset,
+                        toc[i]->nr2 + subtoc_offset,
+                        toc[i]->nr3 + subsubtoc_offset, 
+                        ref);
+               }
                
                break;
                
                
-            case TOC_NODE5:
-               if (toc[i]->n1 != p2_n1)
-                  goto NEXT_APX;
-                  
-               if (toc[i]->n2 > p2_n2)
-                  break;
-               
-               if (toc[i]->n2 != p2_n2)
-                  goto NEXT_APX;
-               
-               if (toc[i]->n3 > p2_n3)
-                  break;
-               
-               if (toc[i]->n3 != p2_n3)
-                  goto NEXT_APX;
-                  
-               if (toc[i]->n4 > p2_n4)
-                  break;
-               
-               if (toc[i]->n4 != p2_n4)
-                  goto NEXT_APX;
-            }
-                                          /* TOC_NODE1: current is a node */
-                                          /* TOC_NODE2: current is a subnode */
-                                          /* TOC_NODE3: current is a subsubnode */
-                                          /* TOC_NODE4: current is a subsubsubnode */
-                                          /* TOC_NODE5: current is a subsubsubsubnode */
-            if (toc[i]->toctype == depth1)
-            {
-               /* --- check first if we have to close previous items --- */
-               
-               if (use_toc_list_commands)
+            case TOC_NODE2:
+               if (apx)
                {
-                  if (last1)              /* close last node item */
-                  {
-                     if (use_toc_list_commands == TOCL_HTM)
-                        outln("\t</li>");
-                     else
-                        outln(toc_list_end);
-                     
-                     last1 = FALSE;
-                  }
-                  
-                  if (last2)
-                  {
-                     if (use_toc_list_commands == TOCL_HTM)
-                     {
-                        outln("\t\t\t</li>");
-                        outln("\t\t</ul>");
-                        outln("\t</li>");
-                     }
-                     else
-                        outln(toc_list_end);
-                     
-                     last2 = FALSE;
-                  }
-                  
-                  if (last3)
-                  {
-                     if (use_toc_list_commands == TOCL_HTM)
-                     {
-                        outln("\t\t\t\t\t</li>");
-                        outln("\t\t\t\t</ul>");
-                        outln("\t\t\t</li>");
-                        outln("\t\t</ul>");
-                        outln("\t</li>");
-                     }
-                     else
-                     {
-                        outln(toc_list_end);
-                        outln(toc_list_end);
-                     }
-                     
-                     last3 = FALSE;
-                  }
-
-                  if (last4)
-                  {
-                     if (use_toc_list_commands == TOCL_HTM)
-                     {
-                        outln("\t\t\t\t\t\t\t</li>");
-                        outln("\t\t\t\t\t\t</ul>");
-                        outln("\t\t\t\t\t</li>");
-                        outln("\t\t\t\t</ul>");
-                        outln("\t\t\t</li>");
-                        outln("\t\t</ul>");
-                        outln("\t</li>");
-                     }
-                     else
-                     {
-                        outln(toc_list_end);
-                        outln(toc_list_end);
-                        outln(toc_list_end);
-                     }
-                     
-                     last4 = FALSE;
-                  }
-
-                  if (last5)              /* only for TOC_NODE1 */
-                  {
-                     if (use_toc_list_commands == TOCL_HTM)
-                     {
-                        outln("\t\t\t\t\t\t\t\t\t</li>");
-                        outln("\t\t\t\t\t\t\t\t</ul>");
-                        outln("\t\t\t\t\t\t\t</li>");
-                        outln("\t\t\t\t\t\t</ul>");
-                        outln("\t\t\t\t\t</li>");
-                        outln("\t\t\t\t</ul>");
-                        outln("\t\t\t</li>");
-                        outln("\t\t</ul>");
-                        outln("\t</li>");
-                     }
-                     else
-                     {
-                        outln(toc_list_end);
-                        outln(toc_list_end);
-                        outln(toc_list_end);
-                     }
-                     
-                     last5 = FALSE;
-                  }
-               }
-                                          /* TOC_NODE1: we're a node! */               
-                                          /* TOC_NODE2: we're a subnode! */               
-                                          /* TOC_NODE3: we're a subsubnode! */               
-                                          /* TOC_NODE4: we're a subsubsubnode! */               
-                                          /* TOC_NODE5: we're a subsubsubsubnode! */               
-               last1 = TRUE;
-
-               li = toc[i]->labindex;
-               string2reference(ref, lab[li], TRUE, "", 0, 0);
-               
-               if (no_numbers)
-               {
-                  sprintf(n, form_x1, ref);
+                  sprintf(n, form_x3,
+                        'A' - 1 + toc[i]->nr1,
+                                  toc[i]->nr2,
+                                  toc[i]->nr3,
+                                  toc[i]->nr4,
+                        ref);
                }
                else
                {
-                  switch (nodetype)
-                  {
-                  case TOC_NODE1:
-                     if (apx)
-                     {
-                        sprintf(n, form_x1, 
-                              'A' - 1 + toc[i]->nr1, 
-                              ref);
-                     }
-                     else
-                     {
-                        sprintf(n, form_x1, 
-                              toc[i]->nr1 + toc_offset, 
-                              ref);
-                     }
-                     
-                     break;
-                     
-                     
-                  case TOC_NODE2:
-                     if (apx)
-                     {
-                        sprintf(n, form_x1, 
-                              'A' - 1 + toc[i]->nr1, 
-                                        toc[i]->nr2, 
-                              ref);
-                     }
-                     else
-                     {
-                        sprintf(n, form_x1, 
-                              toc[i]->nr1 + toc_offset, 
-                              toc[i]->nr2 + subtoc_offset, 
-                              ref);
-                     }
-                     
-                     break;
-                     
-                     
-                  case TOC_NODE3:
-                     if (apx)
-                     {
-                        sprintf(n, form_x1, 
-                              'A' - 1 + toc[i]->nr1, 
-                                        toc[i]->nr2, 
-                                        toc[i]->nr3, 
-                              ref);
-                     }
-                     else
-                     {
-                        sprintf(n, form_x1, 
-                              toc[i]->nr1 + toc_offset,
-                              toc[i]->nr2 + subtoc_offset,
-                              toc[i]->nr3 + subsubtoc_offset,
-                              ref);
-                     }
-                     
-                     break;
-                     
-                     
-                  case TOC_NODE4:
-                     if (apx)
-                     {
-                        sprintf(n, form_x1,
-                              'A' - 1 + toc[i]->nr1,
-                                        toc[i]->nr2,
-                                        toc[i]->nr3,
-                                        toc[i]->nr4,
-                              ref);
-                     }
-                     else
-                     {
-                        sprintf(n, form_x1,
-                              toc[i]->nr1 + toc_offset,
-                              toc[i]->nr2 + subtoc_offset,
-                              toc[i]->nr3 + subsubtoc_offset,
-                              toc[i]->nr4 + subsubsubtoc_offset,
-                              ref);
-                     }
-                     
-                     break;
-                     
-                     
-                  case TOC_NODE5:
-                     if (apx)
-                     {
-                        sprintf(n, form_x1,
-                              'A' - 1 + toc[i]->nr1,
-                                        toc[i]->nr2,
-                                        toc[i]->nr3,
-                                        toc[i]->nr4,
-                                        toc[i]->nr5,
-                              ref);
-                     }
-                     else
-                     {
-                        sprintf(n, form_x1,
-                              toc[i]->nr1 + toc_offset,
-                              toc[i]->nr2 + subtoc_offset,
-                              toc[i]->nr3 + subsubtoc_offset,
-                              toc[i]->nr4 + subsubsubtoc_offset,
-                              toc[i]->nr5 + subsubsubsubtoc_offset,
-                              ref);
-                     }
-                  }
+                  sprintf(n, form_x3,
+                        toc[i]->nr1 + toc_offset,
+                        toc[i]->nr2 + subtoc_offset,
+                        toc[i]->nr3 + subsubtoc_offset,
+                        toc[i]->nr4 + subsubsubtoc_offset,
+                        ref);
                }
                
+               break;
+               
+               
+            case TOC_NODE3:
+               if (apx)
+               {
+                  sprintf(n, form_x3,
+                          'A' - 1 + toc[i]->nr1,
+                                    toc[i]->nr2,
+                                    toc[i]->nr3,
+                                    toc[i]->nr4,
+                                    toc[i]->nr5,
+                          ref);
+               }
+               else
+               {
+                  sprintf(n, form_x3,
+                        toc[i]->nr1 + toc_offset,
+                        toc[i]->nr2 + subtoc_offset,
+                        toc[i]->nr3 + subsubtoc_offset,
+                        toc[i]->nr4 + subsubsubtoc_offset,
+                        toc[i]->nr5 + subsubsubsubtoc_offset,
+                        ref);
+               }
+            }
+         }
+         
+         tocline_handle_1st(&first);
+         
+         if (use_toc_list_commands == TOCL_HTM)
+            out("\t\t\t\t\t");
+         
+                                          /* TOC_NODE1: output subsubnode item! */
+                                          /* TOC_NODE2: output subsubsubnode item! */
+                                          /* TOC_NODE3: output subsubsubsubnode item! */
+         outln(n);
+         
+         switch (nodetype)
+         {
+         case TOC_NODE2:
+         case TOC_NODE3:
+            output_done = TRUE;
+         }
+         
+      }  /* depth3 */
+      
+
+      if ( (toc[i]->toctype == depth4) && (depth > 3) )
+      {
+                                          /* TOC_NODE1: current is a subsubsubnode */
+                                          /* TOC_NODE2: current is a subsubsubsubnode */
+         /* --- check first if we have to close previous items --- */
+         
+         if (use_toc_list_commands)
+         {
+            if (last1)
+            {
+                                          /* should not be reached! */
                switch (nodetype)
                {
                case TOC_NODE1:
-                  tocline_make_bold(n, depth);
-
-                                          /* don't add blank lines when depth is 1 */
-                  if ( (leerzeile) && (depth > 1) )
-                  {
-                     switch (desttype)
-                     {
-                     case TOWIN:
-                     case TOWH4:
-                     case TOAQV:
-                        outln(rtf_par);
-                        break;
-                  
-                     case TOHAH:
-                     case TOHTM:
-                     case TOMHH:
-                        outln("");
-                        break;
-                     
-                     case TOTEX:
-                     case TOPDL:
-                        break;
-                     
-                     default:
-                        outln("");
-                     }
-                     
-                     leerzeile = FALSE;
-                  }
-               }
-               
-               tocline_handle_1st(&first);
-
-               if (use_toc_list_commands == TOCL_HTM)
-                  out("\t");
-                  
-               outln(n);                  /* output the node item! */
-               
-               switch (nodetype)
-               {
-               case TOC_NODE1:
-                  leerzeile = TRUE;
+                  voutlnf("%s%s%s", toc_list_top, toc_list_top, toc_list_top);
                   break;
                
                case TOC_NODE2:
                case TOC_NODE3:
                case TOC_NODE4:
                case TOC_NODE5:
-                  output_done = TRUE;
+                  outln(toc_list_top);
+               }
+                
+               last1 = FALSE;
+            }
+            
+            if (last2)
+            {
+                                          /* should not be reached! */
+               switch (nodetype)
+               {
+               case TOC_NODE1:
+                  voutlnf("%s%s", toc_list_top, toc_list_top);
+                  break;
+               
+               case TOC_NODE2:
+               case TOC_NODE3:
+               case TOC_NODE4:
+               case TOC_NODE5:
+                  outln(toc_list_top);
                }
                
-            }  /* depth1 */
-
-   
-            if (depth > 1)
+               last2 = FALSE;
+            }
+            
+            if (last3)
             {
-                                          /* TOC_NODE1: current is a subnode */
-                                          /* TOC_NODE2: current is a subsubnode */
-                                          /* TOC_NODE3: current is a subsubsubnode */
-                                          /* TOC_NODE4: current is a subsubsubsubnode */
-               if (toc[i]->toctype == depth2)
-               {
-                  /* --- check first if we have to close previous items --- */
-
-                  if (use_toc_list_commands)
-                  {
-                     if (last1)
-                     {
-                        if (use_toc_list_commands == TOCL_HTM)
-                           out("\t\t");
-                        
-                        outln(toc_list_top);
-                        
-                        last1 = FALSE;
-                     }
-                     
-                     if (last2)         /* close last subnode item */
-                     {
-                        if (use_toc_list_commands == TOCL_HTM)
-                           outln("\t\t\t</li>");
-                        else
-                           outln(toc_list_end);
-                        
-                        last2 = FALSE;
-                     }
-                     
-                     if (last3)
-                     {
-                        if (use_toc_list_commands == TOCL_HTM)
-                        {
-                           outln("\t\t\t\t\t</li>");
-                           outln("\t\t\t\t</ul>");
-                           outln("\t\t\t</li>");
-                        }
-                        else
-                           outln(toc_list_end);
-                        
-                        last3 = FALSE;
-                     }
-                     
-                     if (last4)
-                     {
-                        if (use_toc_list_commands == TOCL_HTM)
-                        {
-                           outln("\t\t\t\t\t\t\t</li>");
-                           outln("\t\t\t\t\t\t</ul>");
-                           outln("\t\t\t\t\t</li>");
-                           outln("\t\t\t\t</ul>");
-                           outln("\t\t\t</li>");
-                        }
-                        else
-                        {
-                           outln(toc_list_end);
-                           outln(toc_list_end);
-                        }
-                        
-                        last4 = FALSE;
-                     }
-
-                     if (last5)
-                     {
-                        if (use_toc_list_commands == TOCL_HTM)
-                        {
-                           outln("\t\t\t\t\t\t\t\t\t</li>");
-                           outln("\t\t\t\t\t\t\t\t</ul>");
-                           outln("\t\t\t\t\t\t\t</li>");
-                           outln("\t\t\t\t\t\t</ul>");
-                           outln("\t\t\t\t\t</li>");
-                           outln("\t\t\t\t</ul>");
-                           outln("\t\t\t</li>");
-                        }
-                        else
-                        {
-                           outln(toc_list_end);
-                           outln(toc_list_end);
-                           outln(toc_list_end);
-                        }
-
-                        last5 = FALSE;
-                     }
-                  }
-                                        /* TOC_NODE1: we're a subnode! */
-                                        /* TOC_NODE2: we're a subsubnode! */
-                                        /* TOC_NODE3: we're a subsubsubnode! */
-                                        /* TOC_NODE4: we're a subsubsubsubnode! */
-                  last2 = TRUE;
-                  
-                  li = toc[i]->labindex;
-                  string2reference(ref, lab[li], TRUE, "", 0, 0);
+               if (use_toc_list_commands == TOCL_HTM)
+                  out("\t\t\t\t\t\t");
                
-                  if (no_numbers)
-                  {
-                     sprintf(n, form_x2, ref);
-                  }
-                  else
-                  {
-                     switch (nodetype)
-                     {
-                     case TOC_NODE1:
-                        if (apx)
-                        {
-                           sprintf(n, form_x2, 
-                                 'A' - 1 + toc[i]->nr1, 
-                                           toc[i]->nr2, 
-                                 ref);
-                        }
-                        else
-                        {
-                        sprintf(n, form_x2, 
-                              toc[i]->nr1 + toc_offset,
-                              toc[i]->nr2 + subtoc_offset, 
-                              ref);
-                        }
-                        
-                        break;
-                        
-                        
-                     case TOC_NODE2:
-                        if (apx)
-                        {
-                           sprintf(n, form_x2, 
-                                 'A' - 1 + toc[i]->nr1, 
-                                           toc[i]->nr2, 
-                                           toc[i]->nr3, 
-                                 ref);
-                        }
-                        else
-                        {
-                           sprintf(n, form_x2, 
-                                 toc[i]->nr1 + toc_offset,
-                                 toc[i]->nr2 + subtoc_offset,
-                                 toc[i]->nr3 + subsubtoc_offset,
-                                 ref);
-                        }
-                        
-                        break;
-                        
-                        
-                     case TOC_NODE3:
-                        if (apx)
-                        {
-                           sprintf(n, form_x2,
-                                 'A' - 1 + toc[i]->nr1,
-                                           toc[i]->nr2,
-                                           toc[i]->nr3,
-                                           toc[i]->nr4,
-                                 ref);
-                        }
-                        else
-                        {
-                           sprintf(n, form_x2,
-                                 toc[i]->nr1 + toc_offset,
-                                 toc[i]->nr2 + subtoc_offset,
-                                 toc[i]->nr3 + subsubtoc_offset,
-                                 toc[i]->nr4 + subsubsubtoc_offset,
-                                 ref);
-                        }
-                        
-                        break;
-                        
-                        
-                     case TOC_NODE4:
-                        if (apx)
-                        {
-                           sprintf(n, form_x2,
-                                 toc[i]->nr1,
+               outln(toc_list_top);
+               
+               last3 = FALSE;
+            }
+            
+            if (last4)                    /* close last subsubsubnode item */
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+                  outln("\t\t\t\t\t\t\t</li>");
+               else
+                  outln(toc_list_end);
+               
+               last4 = FALSE;
+            }
+            
+            if (last5)
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+               {
+                  outln("\t\t\t\t\t\t\t\t\t</li>");
+                  outln("\t\t\t\t\t\t\t\t</ul>");
+                  outln("\t\t\t\t\t\t\t</li>");
+               }
+               else
+                  outln(toc_list_end);
+               
+               last5 = FALSE;
+            }
+         }
+         
+                                          /* TOC_NODE1: we're a subsubsubnode! */
+                                          /* TOC_NODE2: we're a subsubsubsubnode! */
+         last4 = TRUE;
+
+         li = toc[i]->labindex;
+         string2reference(ref, lab[li], TRUE, "", 0, 0);
+         
+         if (no_numbers)
+         {
+            sprintf(n, form_x4, ref);
+         }
+         else
+         {
+            switch (nodetype)
+            {
+            case TOC_NODE1:
+               if (apx)
+               {
+                  sprintf(n, form_x4,
+                          'A' - 1 + toc[i]->nr1,
+                                    toc[i]->nr2,
+                                    toc[i]->nr3,
+                                    toc[i]->nr4,
+                          ref);
+               }
+               else
+               {
+                  sprintf(n, form_x4,
+                        toc[i]->nr1 + toc_offset,
+                        toc[i]->nr2 + subtoc_offset,
+                        toc[i]->nr3 + subsubtoc_offset,
+                        toc[i]->nr4 + subsubsubtoc_offset,
+                        ref);
+               }
+               
+               break;
+            
+            
+            case TOC_NODE2:
+               if (apx)
+               {
+                  sprintf(n, form_x4,
+                        'A' - 1 + toc[i]->nr1,
+                                  toc[i]->nr2,
+                                  toc[i]->nr3,
+                                  toc[i]->nr4,
+                                  toc[i]->nr5,
+                        ref);
+               }
+               else
+               {
+                  sprintf(n, form_x4,
+                        toc[i]->nr1 + toc_offset,
+                        toc[i]->nr2 + subtoc_offset,
+                        toc[i]->nr3 + subsubtoc_offset,
+                        toc[i]->nr4 + subsubsubtoc_offset,
+                        toc[i]->nr5 + subsubsubsubtoc_offset,
+                        ref);
+               }
+            }
+         }
+   
+         tocline_handle_1st(&first);
+      
+         if (use_toc_list_commands == TOCL_HTM)
+            out("\t\t\t\t\t\t\t");
+         
+         outln(n);
+         
+         switch (nodetype)
+         {
+         case TOC_NODE2:
+            output_done = TRUE;
+         }
+   
+      }  /* depth4 */
+
+
+                                          /* TOC_NODE1: current is a subsubsubsubnode */
+      if ( (toc[i]->toctype == depth5) && (depth > 4) )
+      {
+         /* --- check first if we have to close previous items --- */
+
+         if (use_toc_list_commands)
+         {
+            if (last1)
+            {
+                                          /* should not be reached! */
+               voutlnf("%s%s%s", toc_list_top, toc_list_top, toc_list_top);
+               last1 = FALSE;
+            }
+               
+            if (last2)
+            {
+                                          /* should not be reached! */
+               voutlnf("%s%s", toc_list_top, toc_list_top);
+               last2 = FALSE;
+            }
+               
+            if (last3)
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+                  out("");
+                  
+               outln(toc_list_top);
+               
+               last3 = FALSE;
+            }
+            
+            if (last4)
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+                  out("\t\t\t\t\t\t\t\t");
+               
+               outln(toc_list_top);
+               
+               last4 = FALSE;
+            }
+
+            if (last5)                    /* close last subsubsubsubnode item */
+            {
+               if (use_toc_list_commands == TOCL_HTM)
+                  outln("\t\t\t\t\t\t\t\t\t</li>");
+               else
+                  outln(toc_list_end);
+               
+               last5 = FALSE;
+            }
+         }
+      
+         last5 = TRUE;                    /* we're a subsubsubsubnode! */
+
+         li = toc[i]->labindex;
+         string2reference(ref, lab[li], TRUE, "", 0, 0);
+         
+         if (no_numbers)
+         {
+            sprintf(n, form_x5, ref);
+         }
+         else
+         {
+            if (apx)
+            {
+               sprintf(n, form_x5,
+                       'A' - 1 + toc[i]->nr1,
                                  toc[i]->nr2,
                                  toc[i]->nr3,
                                  toc[i]->nr4,
                                  toc[i]->nr5,
-                                 ref);
-                        }
-                        else
-                        {
-                           sprintf(n, form_x2,
-                                 toc[i]->nr1 + toc_offset,
-                                 toc[i]->nr2 + subtoc_offset,
-                                 toc[i]->nr3 + subsubtoc_offset,
-                                 toc[i]->nr4 + subsubsubtoc_offset,
-                                 toc[i]->nr5 + subsubsubsubtoc_offset,
-                                 ref);
-                        }
-                     }
-                  }
-               
-                  tocline_handle_1st(&first);
-               
-                  if (use_toc_list_commands == TOCL_HTM)
-                     out("\t\t\t");
-                     
-                                          /* TOC_NODE1 : output subnode item! */
-                                          /* TOC_NODE2 : output subsubnode item! */
-                                          /* TOC_NODE3 : output subsubsubnode item! */
-                                          /* TOC_NODE4 : output subsubsubsubnode item! */
-                  outln(n);
-                  
-                  switch (nodetype)
-                  {
-                  case TOC_NODE2:
-                  case TOC_NODE3:
-                  case TOC_NODE4:
-                  case TOC_NODE5:
-                     output_done = TRUE;
-                  }
-                  
-               }  /* depth2 */
-               
-            }  /* depth > 1 */
-   
-   
-            if (depth > 2)
+                       ref);
+            }
+            else
             {
-                                          /* TOC_NODE1: current is a subsubnode */
-                                          /* TOC_NODE2: current is a subsubsubnode */
-                                          /* TOC_NODE3: current is a subsubsubsubnode */
-               if (toc[i]->toctype == depth3)
-               {
-                  /* --- check first if we have to close previous items --- */
-
-                  if (use_toc_list_commands)
-                  {
-                     if (last1)
-                     {                    /* should not be reached! */
-                        switch (nodetype)
-                        {
-                        case TOC_NODE1:
-                           voutlnf("%s%s", toc_list_top, toc_list_top);
-                           break;
-                        
-                        case TOC_NODE2:
-                        case TOC_NODE3:
-                           outln(toc_list_top);
-                        }
-                        
-                        last1 = FALSE;
-                     }
-                     
-                     if (last2)
-                     {
-                        if (use_toc_list_commands == TOCL_HTM)
-                           out("\t\t\t\t");
-                           
-                        outln(toc_list_top);
-                        
-                        last2 = FALSE;
-                     }
-                     
-                     if (last3)        /* close last subsubnode item */
-                     {
-                        if (use_toc_list_commands == TOCL_HTM)
-                           outln("\t\t\t\t\t</li>");
-                        else
-                           outln(toc_list_end);
-                        
-                        last3 = FALSE;
-                     }
-                     
-                     if (last4)
-                     {
-                        if (use_toc_list_commands == TOCL_HTM)
-                        {
-                           outln("\t\t\t\t\t\t\t</li>");
-                           outln("\t\t\t\t\t\t</ul>");
-                           outln("\t\t\t\t\t</li>");
-                        }
-                        else
-                           outln(toc_list_end);
-                        
-                        last4 = FALSE;
-                     }
-                     
-                     if (last5)
-                     {
-                        if (use_toc_list_commands == TOCL_HTM)
-                        {
-                           outln("\t\t\t\t\t\t\t\t\t</li>");
-                           outln("\t\t\t\t\t\t\t\t</ul>");
-                           outln("\t\t\t\t\t\t\t</li>");
-                           outln("\t\t\t\t\t\t</ul>");
-                           outln("\t\t\t\t\t</li>");
-                        }
-                        else
-                        {
-                           outln(toc_list_end);
-                           outln(toc_list_end);
-                        }
-                        
-                        last5 = FALSE;
-                     }
-                  }
-                     
-                                       /* TOC_NODE1: we're a subsubnode! */
-                                       /* TOC_NODE2: we're a subsubsubnode! */
-                                       /* TOC_NODE3: we're a subsubsubsubnode! */
-                  last3 = TRUE;
-                  
-                  li = toc[i]->labindex;
-                  string2reference(ref, lab[li], TRUE, "", 0, 0);
-                  
-                  if (no_numbers)
-                  {
-                     sprintf(n, form_x3, ref);
-                  }
-                  else
-                  {
-                     switch (nodetype)
-                     {
-                     case TOC_NODE1:
-                        if (apx)
-                        {
-                           sprintf(n, form_x3, 
-                                 'A' - 1 + toc[i]->nr1, 
-                                           toc[i]->nr2, 
-                                           toc[i]->nr3, 
-                                 ref);
-                        }
-                        else
-                        {
-                           sprintf(n, form_x3, 
-                                 toc[i]->nr1 + toc_offset,
-                                 toc[i]->nr2 + subtoc_offset,
-                                 toc[i]->nr3 + subsubtoc_offset, 
-                                 ref);
-                        }
-                        
-                        break;
-                        
-                        
-                     case TOC_NODE2:
-                        if (apx)
-                        {
-                           sprintf(n, form_x3,
-                                 'A' - 1 + toc[i]->nr1,
-                                           toc[i]->nr2,
-                                           toc[i]->nr3,
-                                           toc[i]->nr4,
-                                 ref);
-                        }
-                        else
-                        {
-                           sprintf(n, form_x3,
-                                 toc[i]->nr1 + toc_offset,
-                                 toc[i]->nr2 + subtoc_offset,
-                                 toc[i]->nr3 + subsubtoc_offset,
-                                 toc[i]->nr4 + subsubsubtoc_offset,
-                                 ref);
-                        }
-                        
-                        break;
-                        
-                        
-                     case TOC_NODE3:
-                        if (apx)
-                        {
-                           sprintf(n, form_x3,
-                                   'A' - 1 + toc[i]->nr1,
-                                             toc[i]->nr2,
-                                             toc[i]->nr3,
-                                             toc[i]->nr4,
-                                             toc[i]->nr5,
-                                   ref);
-                        }
-                        else
-                        {
-                           sprintf(n, form_x3,
-                                 toc[i]->nr1 + toc_offset,
-                                 toc[i]->nr2 + subtoc_offset,
-                                 toc[i]->nr3 + subsubtoc_offset,
-                                 toc[i]->nr4 + subsubsubtoc_offset,
-                                 toc[i]->nr5 + subsubsubsubtoc_offset,
-                                 ref);
-                        }
-                     }
-                  }
-                  
-                  tocline_handle_1st(&first);
-                  
-                  if (use_toc_list_commands == TOCL_HTM)
-                     out("\t\t\t\t\t");
-                  
-                                          /* TOC_NODE1: output subsubnode item! */
-                                          /* TOC_NODE2: output subsubsubnode item! */
-                                          /* TOC_NODE3: output subsubsubsubnode item! */
-                  outln(n);
-                  
-                  switch (nodetype)
-                  {
-                  case TOC_NODE2:
-                  case TOC_NODE3:
-                     output_done = TRUE;
-                  }
-                  
-               }  /* depth3 */
-               
-            }  /* depth > 2 */
+               sprintf(n, form_x5,
+                     toc[i]->nr1 + toc_offset,
+                     toc[i]->nr2 + subtoc_offset,
+                     toc[i]->nr3 + subsubtoc_offset,
+                     toc[i]->nr4 + subsubsubtoc_offset,
+                     toc[i]->nr5 + subsubsubsubtoc_offset,
+                     ref);
+            }
+         }
    
-   
-            if (depth > 3)
-            {
-                                          /* TOC_NODE1: current is a subsubsubnode */
-                                          /* TOC_NODE2: current is a subsubsubsubnode */
-               if (toc[i]->toctype == depth4)
-               {
-                  /* --- check first if we have to close previous items --- */
-                  
-                  if (use_toc_list_commands)
-                  {
-                     if (last1)
-                     {
-                                          /* should not be reached! */
-                        switch (nodetype)
-                        {
-                        case TOC_NODE1:
-                           voutlnf("%s%s%s", toc_list_top, toc_list_top, toc_list_top);
-                           break;
-                        
-                        case TOC_NODE2:
-                        case TOC_NODE3:
-                        case TOC_NODE4:
-                        case TOC_NODE5:
-                           outln(toc_list_top);
-                        }
-                         
-                        last1 = FALSE;
-                     }
-                     
-                     if (last2)
-                     {
-                                          /* should not be reached! */
-                        switch (nodetype)
-                        {
-                        case TOC_NODE1:
-                           voutlnf("%s%s", toc_list_top, toc_list_top);
-                           break;
-                        
-                        case TOC_NODE2:
-                        case TOC_NODE3:
-                        case TOC_NODE4:
-                        case TOC_NODE5:
-                           outln(toc_list_top);
-                        }
-                        
-                        last2 = FALSE;
-                     }
-                     
-                     if (last3)
-                     {
-                        if (use_toc_list_commands == TOCL_HTM)
-                           out("\t\t\t\t\t\t");
-                        
-                        outln(toc_list_top);
-                        
-                        last3 = FALSE;
-                     }
-                     
-                     if (last4)       /* close last subsubsubnode item */
-                     {
-                        if (use_toc_list_commands == TOCL_HTM)
-                           outln("\t\t\t\t\t\t\t</li>");
-                        else
-                           outln(toc_list_end);
-                        
-                        last4 = FALSE;
-                     }
-                     
-                     if (last5)
-                     {
-                        if (use_toc_list_commands == TOCL_HTM)
-                        {
-                           outln("\t\t\t\t\t\t\t\t\t</li>");
-                           outln("\t\t\t\t\t\t\t\t</ul>");
-                           outln("\t\t\t\t\t\t\t</li>");
-                        }
-                        else
-                           outln(toc_list_end);
-                        
-                        last5 = FALSE;
-                     }
-                  }
-                  
-                                      /* TOC_NODE1: we're a subsubsubnode! */
-                                      /* TOC_NODE2: we're a subsubsubsubnode! */
-                  last4 = TRUE;
-                  
-                  li = toc[i]->labindex;
-                  string2reference(ref, lab[li], TRUE, "", 0, 0);
-                  
-                  if (no_numbers)
-                  {
-                     sprintf(n, form_x4, ref);
-                  }
-                  else
-                  {
-                     switch (nodetype)
-                     {
-                     case TOC_NODE1:
-                        if (apx)
-                        {
-                           sprintf(n, form_x4,
-                                   'A' - 1 + toc[i]->nr1,
-                                             toc[i]->nr2,
-                                             toc[i]->nr3,
-                                             toc[i]->nr4,
-                                   ref);
-                        }
-                        else
-                        {
-                           sprintf(n, form_x4,
-                                 toc[i]->nr1 + toc_offset,
-                                 toc[i]->nr2 + subtoc_offset,
-                                 toc[i]->nr3 + subsubtoc_offset,
-                                 toc[i]->nr4 + subsubsubtoc_offset,
-                                 ref);
-                        }
-                        
-                        break;
-                     
-                     
-                     case TOC_NODE2:
-                        if (apx)
-                        {
-                           sprintf(n, form_x4,
-                                 'A' - 1 + toc[i]->nr1,
-                                           toc[i]->nr2,
-                                           toc[i]->nr3,
-                                           toc[i]->nr4,
-                                           toc[i]->nr5,
-                                 ref);
-                        }
-                        else
-                        {
-                           sprintf(n, form_x4,
-                                 toc[i]->nr1 + toc_offset,
-                                 toc[i]->nr2 + subtoc_offset,
-                                 toc[i]->nr3 + subsubtoc_offset,
-                                 toc[i]->nr4 + subsubsubtoc_offset,
-                                 toc[i]->nr5 + subsubsubsubtoc_offset,
-                                 ref);
-                        }
-                     }
-                  }
-            
-                  tocline_handle_1st(&first);
-               
-                  if (use_toc_list_commands == TOCL_HTM)
-                     out("\t\t\t\t\t\t\t");
-                  
-                  outln(n);
-                  
-                  switch (nodetype)
-                  {
-                  case TOC_NODE2:
-                     output_done = TRUE;
-                  }
-            
-               }  /* depth4 */
-         
-            }  /* if (depth > 3) */
-            
+         tocline_handle_1st(&first);
       
-            if (depth > 4)
-            {
-                                          /* TOC_NODE1: current is a subsubsubsubnode */
-               if (toc[i]->toctype == depth5)
-               {
-                  /* --- check first if we have to close previous items --- */
-
-                  if (use_toc_list_commands)
-                  {
-                     if (last1)
-                     {
-                                          /* should not be reached! */
-                        voutlnf("%s%s%s", toc_list_top, toc_list_top, toc_list_top);
-                        last1 = FALSE;
-                     }
-                     
-                     if (last2)
-                     {
-                                          /* should not be reached! */
-                        voutlnf("%s%s", toc_list_top, toc_list_top);
-                        last2 = FALSE;
-                     }
-                     
-                     if (last3)
-                     {
-                        if (use_toc_list_commands == TOCL_HTM)
-                           out("");
-                           
-                        outln(toc_list_top);
-                        
-                        last3 = FALSE;
-                     }
-                     
-                     if (last4)
-                     {
-                        if (use_toc_list_commands == TOCL_HTM)
-                           out("\t\t\t\t\t\t\t\t");
-                        
-                        outln(toc_list_top);
-                        
-                        last4 = FALSE;
-                     }
-
-                     if (last5)      /* close last subsubsubnode item */
-                     {
-                        if (use_toc_list_commands == TOCL_HTM)
-                           outln("\t\t\t\t\t\t\t\t\t</li>");
-                        else
-                           outln(toc_list_end);
-                        
-                        last5 = FALSE;
-                     }
-                  }
-               
-                  last5 = TRUE;      /* we're a subsubsubsubnode! */
-                  
-                  li = toc[i]->labindex;
-                  string2reference(ref, lab[li], TRUE, "", 0, 0);
-                  
-                  if (no_numbers)
-                  {
-                     sprintf(n, form_x5, ref);
-                  }
-                  else
-                  {
-                     if (apx)
-                     {
-                        sprintf(n, form_x5,
-                                'A' - 1 + toc[i]->nr1,
-                                          toc[i]->nr2,
-                                          toc[i]->nr3,
-                                          toc[i]->nr4,
-                                          toc[i]->nr5,
-                                ref);
-                     }
-                     else
-                     {
-                        sprintf(n, form_x5,
-                              toc[i]->nr1 + toc_offset,
-                              toc[i]->nr2 + subtoc_offset,
-                              toc[i]->nr3 + subsubtoc_offset,
-                              toc[i]->nr4 + subsubsubtoc_offset,
-                              toc[i]->nr5 + subsubsubsubtoc_offset,
-                              ref);
-                     }
-                  }
-            
-                  tocline_handle_1st(&first);
-               
-                  if (use_toc_list_commands == TOCL_HTM)
-                     out("\t\t\t\t\t\t\t\t\t");
-                  
-                  outln(n);               /* output subsubsubsubnode item! */
-            
-               }  /* depth5 */
+         if (use_toc_list_commands == TOCL_HTM)
+            out("\t\t\t\t\t\t\t\t\t");
          
-            }  /* if (depth > 4) */
+         outln(n);                        /* output subsubsubsubnode item! */
+   
+      }  /* depth5 */
 
-         }  /* toc[i]->n1 > 0 */
 
-      }  /* toc[i] != NULL && !toc[i]->invisible */
-
-NEXT_APX:
+NEXT_TOC:
       ;
    }  /* for */
    
@@ -10230,15 +10223,22 @@ const int   depth)     /* */
    if (desttype == TORTF)                 /* no TOC in RTF as we have no page numbers! */
       return;
 
-   if (nodetype == TOC_NODE1)
-      toc_output(nodetype, depth, FALSE);
-   else
-      toc_output(nodetype, depth, bInsideAppendix);
-
-   if (nodetype == TOC_NODE1 && apx_available)
+   switch (nodetype)
    {
-      output_appendix_line();             /*r6pl2*/
-      toc_output(nodetype, depth, TRUE);
+   case TOC_NODE1:
+      toc_output(nodetype, depth, FALSE);
+
+      if (apx_available)
+      {
+         output_appendix_line();
+         toc_output(nodetype, depth, TRUE);
+      }
+      
+      break;
+      
+      
+   default:
+      toc_output(nodetype, depth, bInsideAppendix);
    }
 }
 
@@ -10249,7 +10249,7 @@ const int   depth)     /* */
 /*******************************************************************************
 *
 *  do_toptoc():
-*     outputs the navigation section (basically on top of the current page)
+*     outputs the breadcrumb navigation links for the current chapter
 *
 *  return:
 *     -
@@ -10733,7 +10733,7 @@ GLOBAL void c_toc(void)
          if (use_compressed_tocs)
             d = 1;
          else
-            d = 9;
+            d = subtocs1_depth;
       }
 
       if (desttype == TOINF)
@@ -10771,7 +10771,7 @@ GLOBAL void c_subtoc(void)
          d = get_toccmd_depth();
 
          if (d == 0)
-            d = subtocs1_depth;
+            d = subtocs2_depth;
 
          do_toc(TOC_NODE2, d);
          break;
@@ -10780,7 +10780,7 @@ GLOBAL void c_subtoc(void)
          d = get_toccmd_depth();
          
          if (d == 0)
-            d = subtocs2_depth;
+            d = subtocs3_depth;
 
          do_toc(TOC_NODE3, d);
          break;
@@ -10789,7 +10789,7 @@ GLOBAL void c_subtoc(void)
          d = get_toccmd_depth();
 
          if (d == 0)
-            d = subtocs3_depth;
+            d = subtocs4_depth;
 
          do_toc(TOC_NODE4, d);
          break;
@@ -10964,7 +10964,7 @@ LOCAL void output_appendix_line(void)
 /*******************************************************************************
 *
 *  c_tableofcontents():
-*     ???
+*     outputs an auto-generated Table Of Contents
 *
 *  Return:
 *     -
@@ -12880,9 +12880,9 @@ const BOOLEAN   invisible)   /* */
             break;
          
          case TOC_NODE3:
-            p1_toc_nr3++;
-            p1_toc_nr4 = 0;
-            p1_toc_nr5 = 0;
+            p1_apx_nr3++;
+            p1_apx_nr4 = 0;
+            p1_apx_nr5 = 0;
             break;
             
          case TOC_NODE2:
@@ -12914,12 +12914,12 @@ const BOOLEAN   invisible)   /* */
       switch (nodetype)
       {
       case TOC_NODE5:
-         p1_apx_n5++;
+         p1_toc_n5++;
          break;
          
       case TOC_NODE4:
-         p1_apx_n4++;
-         p1_apx_n5 = 0;
+         p1_toc_n4++;
+         p1_toc_n5 = 0;
          break;
          
       case TOC_NODE3:
@@ -12956,12 +12956,12 @@ const BOOLEAN   invisible)   /* */
          switch (nodetype)
          {
          case TOC_NODE5:
-            p1_apx_nr5++;
+            p1_toc_nr5++;
             break;
             
          case TOC_NODE4:
-            p1_apx_nr4++;
-            p1_apx_nr5 = 0;
+            p1_toc_nr4++;
+            p1_toc_nr5 = 0;
             break;
          
          case TOC_NODE3:
@@ -14474,16 +14474,16 @@ GLOBAL void init_module_toc_pass2(void)
    }
 
    if (subtocs1_depth <= 0 || subtocs1_depth > 9)
-      subtocs1_depth = 9;
+      subtocs1_depth = 4;
 
    if (subtocs2_depth <= 0 || subtocs2_depth > 9)
-      subtocs2_depth = 9;
+      subtocs2_depth = 3;
 
    if (subtocs3_depth <= 0 || subtocs3_depth > 9)
-      subtocs3_depth = 9;
+      subtocs3_depth = 2;
 
    if (subtocs4_depth <= 0 || subtocs4_depth > 9)
-       subtocs4_depth = 9;
+       subtocs4_depth = 1;
 
 
    /* Die Formatkommando angeben, die fuer die Inhaltsausgabe */
@@ -14914,7 +14914,6 @@ GLOBAL void init_module_toc(void)
 
 
    /* -------------------------------------------------------------- */
-   /* p1_toc_counter enthaelt die Anzahl der in pass1() eingelesenen */
    /* Eintraege fuer das toc[]-Array. Nach pass1() enthaelt          */
    /* toc[p1_toc_counter] die Daten des letzten Kapitels.            */
    /* p2_toc_counter ist entsprechend ein Zaehler fuer den pass2().  */
@@ -14976,10 +14975,10 @@ GLOBAL void init_module_toc(void)
 
    footer_buffer[0] = EOS;                /* r6pl2 */
 
-   subtocs1_depth = 9;                    /*r6pl2*/
-   subtocs2_depth = 9;                    /*r6pl2*/
-   subtocs3_depth = 9;                    /*r6pl2*/
-   subtocs4_depth = 9;                    /*r6pl2*/
+   subtocs1_depth = 4;                    /*r6pl2*/
+   subtocs2_depth = 3;                    /*r6pl2*/
+   subtocs3_depth = 2;                    /*r6pl2*/
+   subtocs4_depth = 1;                    /*r6pl2*/
 
    no_auto_toptocs_icons = FALSE;         /*r6pl13*/
 
