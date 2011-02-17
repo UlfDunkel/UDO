@@ -117,6 +117,7 @@
 *    fd  Feb 16: - make_*node() functions reformatted
 *                - all make_*node() functions merged into new make_nodetype() function
 *                - all set_inside_node*() functions merged into new set_inside_node() function
+*    fd  Feb 17: flag typos fixed
 *
 ******************************************|************************************/
 
@@ -9610,7 +9611,7 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
                            else
                               outln(toc_list_end);
                               
-                           last_sssn = FALSE;
+                           last_ssssn = FALSE;
                         }
                      }
 
@@ -9693,7 +9694,7 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
                               
                            outln(toc_list_top);
                            
-                           last_ssn = FALSE;
+                           last_sssn = FALSE;
                         }
                      }
 
@@ -10429,7 +10430,7 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
                                  else
                                     outln(toc_list_end);
                                  
-                                 last_sssn = FALSE;
+                                 last_ssssn = FALSE;
                               }
                            }
 
