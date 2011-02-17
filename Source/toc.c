@@ -119,6 +119,7 @@
 *                - all set_inside_node*() functions merged into new set_inside_node() function
 *    fd  Feb 17: - flag typos fixed
 *                - all *toc_output() functions merged into toc_output() function
+*                - all do_*toc() functions merged into do_toc() function
 *
 ******************************************|************************************/
 
@@ -366,11 +367,7 @@ LOCAL void toc_link_output(const int depth ); /* New in r6pl16 [NHz] */
 
 LOCAL void toc_output(int nodetype, const int depth, BOOLEAN apx);
 
-LOCAL void do_toc(const int depth);
-LOCAL void do_subtoc(const int depth);
-LOCAL void do_subsubtoc(const int depth);
-LOCAL void do_subsubsubtoc(const int depth);
-LOCAL void do_subsubsubsubtoc(void);
+LOCAL void do_toc(int nodetype, const int depth);
 
 LOCAL void do_toptoc(const int current_node);
 
@@ -1414,25 +1411,25 @@ GLOBAL void check_endnode(void)
       {
       case TOC_NODE1:
          if (use_auto_subtocs)
-            do_subtoc(subtocs1_depth);
+            do_toc(TOC_NODE2, subtocs1_depth);
             
          break;
          
       case TOC_NODE2:
          if (use_auto_subsubtocs)
-            do_subsubtoc(subtocs2_depth);
+            do_toc(TOC_NODE3, subtocs2_depth);
             
          break;
          
       case TOC_NODE3:
          if (use_auto_subsubsubtocs)
-            do_subsubsubtoc(subtocs3_depth);
+            do_toc(TOC_NODE4, subtocs3_depth);
             
          break;
          
       case TOC_NODE4:
          if (use_auto_subsubsubsubtocs)
-            do_subsubsubsubtoc();
+            do_toc(TOC_NODE5, 1);
             
          break;
       }
@@ -9957,7 +9954,7 @@ DONE:
 /*******************************************************************************
 *
 *  do_toc():
-*     ??? (description missing)
+*     wrapper for toc_output()
 *
 *  Return:
 *     -
@@ -9966,112 +9963,22 @@ DONE:
 
 LOCAL void do_toc(
 
-const int   depth)  /* */
+int         nodetype,  /* TOC_NODE... */
+const int   depth)     /* */
 {
    if (desttype == TORTF)                 /* no TOC in RTF as we have no page numbers! */
       return;
 
-   toc_output(TOC_NODE1, depth, FALSE);
+   if (nodetype == TOC_NODE1)
+      toc_output(nodetype, depth, FALSE);
+   else
+      toc_output(nodetype, depth, bInsideAppendix);
 
-   if (apx_available)
+   if (nodetype == TOC_NODE1 && apx_available)
    {
       output_appendix_line();             /*r6pl2*/
-      toc_output(TOC_NODE1, depth, TRUE);
+      toc_output(nodetype, depth, TRUE);
    }
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  do_subtoc():
-*     ??? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void do_subtoc(
-
-const int   depth)  /* */
-{
-   if (desttype == TORTF)                 /* no TOC in RTF as we have no page numbers! */
-      return;
-
-   toc_output(TOC_NODE2, depth, bInsideAppendix);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  do_subsubtoc():
-*     ??? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void do_subsubtoc(
-
-const int   depth)  /* */
-{
-   if (desttype == TORTF)                 /* no TOC in RTF as we have no page numbers! */
-      return;
-
-   toc_output(TOC_NODE3, depth, bInsideAppendix);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  do_subsubsubtoc():
-*     ??? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void do_subsubsubtoc(
-
-const int   depth)  /* */
-{
-   if (desttype == TORTF)                 /* no TOC in RTF as we have no page numbers! */
-      return;
-
-   toc_output(TOC_NODE4, depth, bInsideAppendix);
-}
-
-
-
-
-
-/*******************************************************************************
-*
-*  do_subsubsubsubtoc():
-*     ??? (description missing)
-*
-*  Return:
-*     -
-*
-******************************************|************************************/
-
-LOCAL void do_subsubsubsubtoc(void)
-{
-   if (desttype == TORTF)                 /* no TOC in RTF as we have no page numbers! */
-      return;
-
-   toc_output(TOC_NODE5, 1, bInsideAppendix);
 }
 
 
@@ -10571,7 +10478,7 @@ GLOBAL void c_toc(void)
       if (desttype == TOINF)
          d = 1;
 
-      do_toc(d);
+      do_toc(TOC_NODE1, d);
    }
 }
 
@@ -10605,7 +10512,7 @@ GLOBAL void c_subtoc(void)
          if (d == 0)
             d = subtocs1_depth;
 
-         do_subtoc(d);
+         do_toc(TOC_NODE2, d);
          break;
          
       case TOC_NODE2:
@@ -10614,7 +10521,7 @@ GLOBAL void c_subtoc(void)
          if (d == 0)
             d = subtocs2_depth;
 
-         do_subsubtoc(d);
+         do_toc(TOC_NODE3, d);
          break;
          
       case TOC_NODE3:
@@ -10623,11 +10530,11 @@ GLOBAL void c_subtoc(void)
          if (d == 0)
             d = subtocs3_depth;
 
-         do_subsubsubtoc(d);
+         do_toc(TOC_NODE4, d);
          break;
 
       case TOC_NODE4:
-         do_subsubsubsubtoc();
+         do_toc(TOC_NODE5, 1);
       }
    }
 }
