@@ -119,7 +119,8 @@
 *    fd  Jan 31: - auto_quote_chars(): speed optimized for HTML output formats
 *                - recode_chrtab(): no longer recodes  on Unicode targets [#94 fixed]
 *                - convert_sz():    no longer converts on Unicode targets
-*    fd  Feb 18: auto_quote_chars() supports Unicode for RTF [dd#95 fixed]
+*    fd  Feb 18: - auto_quote_chars() supports Unicode for RTF [#95 fixed]
+*                - new: QUOTECOMMAND.skip_brackets [#97 fixed]
 *
 ******************************************|************************************/
 
@@ -227,10 +228,11 @@ const char *id_chr_c= "@(#) chr.c       $DATE$";
 
    typedef struct _quotecommand
    {
-   char    *cmd;                          /* String PL6: vorher UBYTE */
-   size_t   cmdlen;                       /* Laenge des Kommandos (need speed ;-))*/
-   char    *abb;                          /* Kommandoabkuerzung */
-   size_t   abblen;                       /* Laenge der Abkuerzung */
+   char     *cmd;                         /* String PL6: vorher UBYTE */
+   size_t    cmdlen;                      /* Laenge des Kommandos (need speed ;-))*/
+   char     *abb;                         /* Kommandoabkuerzung */
+   size_t    abblen;                      /* Laenge der Abkuerzung */
+   BOOLEAN   skip_brackets;               /* don't quote command content in [] */
    } QUOTECOMMAND;
 
 
@@ -297,46 +299,46 @@ LOCAL char *html_specs[HTML_SPEC_MAX] =   /* list of supported HTML specials */
 
 LOCAL const QUOTECOMMAND quotecommand[MAXQUOTECMD] =
 {
-   {"!node",              5, "!n",     2       },
-   {"!subnode",           8, "!sn",    3       },
-   {"!subsubnode",       11, "!ssn",   4       },
-   {"!subsubsubnode",    14, "!sssn",  5       },
-   {"!pnode",             6, "!p",     2       },
-   {"!psubnode",          9, "!ps",    3       },
-   {"!psubsubnode",      12, "!pss",   4       },
-   {"!psubsubsubnode",   15, "!psss",  5       },
-   {"!node*",             6, "!n*",    3       },
-   {"!subnode*",          9, "!sn*",   4       },
-   {"!subsubnode*",      12, "!ssn*",  5       },
-   {"!subsubsubnode*",   15, "!sssn*", 6       },
-   {"!pnode*",            7, "!p*",    3       },
-   {"!psubnode*",        10, "!ps*",   4       },
-   {"!psubsubnode*",     13, "!pss*",  5       },
-   {"!psubsubsubnode*",  16, "!psss*", 6       },
-   {"!begin_node",       11, "!bn",    3       },
-   {"!begin_pnode",      12, "!bp",    3       },
-   {"!begin_node*",      12, "!bn*",   4       },
-   {"!begin_pnode*",     13, "!bp*",   4       },
-   {"!item",              5, "!i",     2       },
-   {"!index",             6, "!x",     2       },
-   {"!image",             6, "",       0       },
-   {"!image*",            7, "",       0       },
-   {"!table_caption",    14, "",       0       },
-   {"!table_caption*",   15, "",       0       },      /* r6pl1 */
-   {"!begin_xlist",      12, "!bxl",   4       },      /* wegen des Inhalts der eckigen Klammern!  */
-   {"!begin_blist",      12, "!bbl",   4       },      /* Fehlen die hier, so bekommt c_begin_list */
-   {"!begin_ilist",      12, "!bil",   4       },      /* einen String, der c_vars(), aber nicht   */
-   {"!begin_tlist",      12, "!btl",   4       },      /* auto_quote_chars() durchlaufen hat!!!    */
-   {"!heading",           8, "!h",     2       },
-   {"!subheading",       11, "!sh",    3       },
-   {"!subsubheading",    14, "!ssh",   4       },
-   {"!subsubsubheading", 17, "!sssh",  5       },
-   {"!macro",             6, "",       0       },
-   {"!hyphen",            7, "",       0       },
-   {"!label",             6, "",       0       },
-   {"!label*",            7, "",       0       },
-   {"!alias",             6, "",       0       },
-   {"!docinfo",           8, "",       0       },
+   {"!node",              5, "!n",     2       , FALSE},
+   {"!subnode",           8, "!sn",    3       , FALSE},
+   {"!subsubnode",       11, "!ssn",   4       , FALSE},
+   {"!subsubsubnode",    14, "!sssn",  5       , FALSE},
+   {"!pnode",             6, "!p",     2       , FALSE},
+   {"!psubnode",          9, "!ps",    3       , FALSE},
+   {"!psubsubnode",      12, "!pss",   4       , FALSE},
+   {"!psubsubsubnode",   15, "!psss",  5       , FALSE},
+   {"!node*",             6, "!n*",    3       , FALSE},
+   {"!subnode*",          9, "!sn*",   4       , FALSE},
+   {"!subsubnode*",      12, "!ssn*",  5       , FALSE},
+   {"!subsubsubnode*",   15, "!sssn*", 6       , FALSE},
+   {"!pnode*",            7, "!p*",    3       , FALSE},
+   {"!psubnode*",        10, "!ps*",   4       , FALSE},
+   {"!psubsubnode*",     13, "!pss*",  5       , FALSE},
+   {"!psubsubsubnode*",  16, "!psss*", 6       , FALSE},
+   {"!begin_node",       11, "!bn",    3       , FALSE},
+   {"!begin_pnode",      12, "!bp",    3       , FALSE},
+   {"!begin_node*",      12, "!bn*",   4       , FALSE},
+   {"!begin_pnode*",     13, "!bp*",   4       , FALSE},
+   {"!item",              5, "!i",     2       , FALSE},
+   {"!index",             6, "!x",     2       , FALSE},
+   {"!image",             6, "",       0       , FALSE},
+   {"!image*",            7, "",       0       , FALSE},
+   {"!table_caption",    14, "",       0       , FALSE},
+   {"!table_caption*",   15, "",       0       , FALSE},      /* r6pl1 */
+   {"!begin_xlist",      12, "!bxl",   4       , FALSE},      /* wegen des Inhalts der eckigen Klammern!  */
+   {"!begin_blist",      12, "!bbl",   4       , FALSE},      /* Fehlen die hier, so bekommt c_begin_list */
+   {"!begin_ilist",      12, "!bil",   4       , FALSE},      /* einen String, der c_vars(), aber nicht   */
+   {"!begin_tlist",      12, "!btl",   4       , FALSE},      /* auto_quote_chars() durchlaufen hat!!!    */
+   {"!heading",           8, "!h",     2       , FALSE},
+   {"!subheading",       11, "!sh",    3       , FALSE},
+   {"!subsubheading",    14, "!ssh",   4       , FALSE},
+   {"!subsubsubheading", 17, "!sssh",  5       , FALSE},
+   {"!macro",             6, "",       0       , FALSE},
+   {"!hyphen",            7, "",       0       , FALSE},
+   {"!label",             6, "",       0       , FALSE},
+   {"!label*",            7, "",       0       , FALSE},
+   {"!alias",             6, "",       0       , FALSE},
+   {"!docinfo",           8, "",       0       , TRUE },
 };
 
 
@@ -3974,6 +3976,15 @@ BOOLEAN           all)            /* */
 
          if (!found)
             return;
+         
+         if (found)
+         {                                /* don't quote content inside [] */
+            if (quotecommand[i].skip_brackets)
+            {
+               while (*ptr != ']')
+                  ptr++;
+            }
+         }
       }
    }
 
