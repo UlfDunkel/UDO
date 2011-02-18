@@ -117,8 +117,9 @@
 *    fd  May 21: new: label* | l*  (#90)
 *  2011:
 *    fd  Jan 31: - auto_quote_chars(): speed optimized for HTML output formats
-*                - recode_chrtab(): no longer recodes  on Unicode targets (#94)
+*                - recode_chrtab(): no longer recodes  on Unicode targets [#94 fixed]
 *                - convert_sz():    no longer converts on Unicode targets
+*    fd  Feb 18: auto_quote_chars() supports Unicode for RTF [dd#95 fixed]
 *
 ******************************************|************************************/
 
@@ -224,24 +225,24 @@ const char *id_chr_c= "@(#) chr.c       $DATE$";
 *
 ******************************************|************************************/
 
-typedef struct _quotecommand
-{
-  char    *cmd;                           /* String PL6: vorher UBYTE */
-  size_t   cmdlen;                        /* Laenge des Kommandos (need speed ;-))*/
-  char    *abb;                           /* Kommandoabkuerzung */
-  size_t   abblen;                        /* Laenge der Abkuerzung */
-} QUOTECOMMAND;
+   typedef struct _quotecommand
+   {
+   char    *cmd;                          /* String PL6: vorher UBYTE */
+   size_t   cmdlen;                       /* Laenge des Kommandos (need speed ;-))*/
+   char    *abb;                          /* Kommandoabkuerzung */
+   size_t   abblen;                       /* Laenge der Abkuerzung */
+   } QUOTECOMMAND;
 
 
-typedef struct _chartable
-{
+   typedef struct _chartable
+   {
    UWORD   uname;                         /* Unicode name for character */
    char   *ascii;                         /* ASCII (7bit!) representation, if any */
    char   *ansi;                          /* Ansi, used for WinHelp, RTF, etc. */
    char   *tex;                           /* TeX */
    char   *html;                          /* HTML */
    char   *ps;                            /* PostScript */
-}  CHARTABLE;
+   }  CHARTABLE;
 
 
 
@@ -595,7 +596,8 @@ LOCAL void str2manunder(char *d, const char *s);
 *     convert (UDO's) universal characters into miscellaneous encodings
 *
 *  Notes:
-*     ???
+*     This function is only called when bDocUniversalCharsetOn is TRUE,
+*     set by the UDO command !universal_charset.
 *
 *  Return:
 *     -
@@ -917,7 +919,8 @@ int          len)       /* */
 
 GLOBAL UWORD utf8_to_uchar(
 
-const char  *sz)            /* */
+const char  *sz,            /* */
+int         *length)        /* return value for # of used UTF-8 bytes */
 {
    int       i = 0;         /* ^ into string */
    UWORD     temp = 0;      /* buffer for Unicode codepoint value */
@@ -929,6 +932,7 @@ const char  *sz)            /* */
       if ((sz[i] & 0x80) == 0)            /* 0000 0000-0000 007F 0xxxxxxx */
       {
          temp = sz[i];
+         *length = 1;
          done = TRUE;
       }
       else if ((sz[i] & 0xE0) == 0xC0)    /* 0000 0080-0000 07FF 110xxxxx 10xxxxxx */
@@ -936,6 +940,7 @@ const char  *sz)            /* */
          temp = (sz[i] & 0x1F);
          temp <<= 6;
          temp += (sz[i + 1] & 0x3F);
+         *length = 2;
          done = TRUE;
       }
       else if ((sz[i] & 0xF0) == 0xE0)    /* 0000 0800-0000 FFFF 1110xxxx 10xxxxxx 10xxxxxx */
@@ -945,6 +950,7 @@ const char  *sz)            /* */
          temp += (sz[i + 1] & 0x3F);
          temp <<= 6;
          temp += (sz[i + 2] & 0x3F);
+         *length = 3;
          done = TRUE;
       }
       else if ((sz[i] & 0xF8) == 0xF0)    /* 0001 0000-001F FFFF 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx */
@@ -956,11 +962,12 @@ const char  *sz)            /* */
          temp += (sz[i + 2] & 0x3F);
          temp <<= 6;
          temp += (sz[i + 3] & 0x3F);
+         *length = 4;
          done = TRUE;
       }
 
 #if 0
-   /* fd:2010-02-17: faded for now */
+   /* fd:2010-02-17: faded, because UTF-8 cannot have more than 4 bytes! */
 
       else if ((sz[i] & 0xFC) == 0xF8)    /* 0020 0000-03FF FFFF 111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx */
       {
@@ -1036,7 +1043,7 @@ const char  *sz)            /* */
 *     http://www.codeguru.com/forum/archive/index.php/t-288665.html
 *
 *  Return:
-*     ???
+*     UTF-8 encoded, null-terminated string
 *
 ******************************************|************************************/
 
@@ -1451,7 +1458,7 @@ int          char_set)          /* iCharset */
 /*******************************************************************************
 *
 *  recode_chrtab():
-*     recode a string characters or strings from chrtab[]
+*     recode a string from chrtab[] via Unicode name to another encoding
 *
 *  Return:
 *     -
@@ -3845,7 +3852,7 @@ char        *s)               /* ^ string */
 /*******************************************************************************
 *
 *  auto_quote_chars():
-*     ??? (description missing)
+*     convert special characters for relevant target encodings
 *  
 *  return:
 *     -
@@ -3859,12 +3866,14 @@ BOOLEAN           all)            /* */
 {
    register int   i,              /* */
                   j;              /* counter for chrtab[] */
+   int            len;            /* indicates length of found Unicode char */
    UWORD          idx;
    UWORD        (*pUtrg);         /* ^ encoding table for target encoding */
-   char          *ptr,            /* */
-                 *oldptr;         /* */
+   char          *ptr,            /* ^ position in string s */
+                 *oldptr;         /* buffer for ptr */
    const char    *ptr_quoted;     /* */
    char           s_temp[32];     /* */
+   char           s_buf[32];      /* */
    char           s_char[2];      /* */
    BOOLEAN        aqc_verb;       /* */
    BOOLEAN        found = FALSE;  /* */
@@ -3893,18 +3902,6 @@ BOOLEAN           all)            /* */
    case TOINF:
    case TOSRC:
    case TOSRP:
-#if 0
-#ifdef __TOS__
-      replace_all(s, BETA_S, "\236");
-#endif
-#ifdef __MSDOS__
-      replace_all(s, "\236", "\341");
-#endif
-#ifdef __MSDOS850__
-      replace_all(s, "\236", "\341");
-#endif
-#endif /* #if 0 */
-
       if (bDocUniversalCharsetOn)
          recode_udo(s);
 
@@ -4195,12 +4192,33 @@ BOOLEAN           all)            /* */
       case TORTF:
          found = FALSE;
 
-         idx = (UBYTE)*ptr;
-
+         idx = (UBYTE)*ptr;               /* get value of current char */
+         
          if (idx > 127)
          {
+            if (!pUtrg)                   /* target is Unicode */
+            {
+                                          /* find Unicode codepoint */
+               idx = utf8_to_uchar(ptr, &len);
+                                          /* format it for RTF (format "\uN" where N is decimal) */
+               sprintf(s_temp, "\\u%s", itoa(idx,s_buf,10));
+               
+               ptr_quoted = s_temp;       /* set ^ to temp string */
+
+               strncpy(s_buf,ptr,len);    /* copy all used Unicode bytes from line to another buffer */
+               s_buf[len] = 0;            /* close C string */
+
+               cmplen = strlen(ptr_quoted);
+                                          /* exchange character by RTF Unicode command */
+               qreplace_once(ptr, s_buf, len, ptr_quoted, cmplen);
+               
+               ptr_quoted = NULL;         /* reset ^ */
+               ptr += cmplen - 1;         /* adjust string ^ */
+
+               goto NO_QUOTE_NEEDED;      /* we're already done */ 
+            }
+         
             j = 0;
-        
                                           /* check for end of table! */
             while (chrtab[j]->uname != U_NIL)
             {
@@ -4236,7 +4254,9 @@ BOOLEAN           all)            /* */
                }
             }
          }
+         
          break;
+
 
       case TOKPS:
          found = FALSE;
