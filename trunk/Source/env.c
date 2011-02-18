@@ -74,6 +74,8 @@
 *    fd  May 19: c_begin_list() reformatted
 *    fd  May 20: c_item() debugged for description item output in RTF & KPS
 *    fd  Sep 03: c_end_itemize()/c_end_enumerate() no longer keep bParagraphOpen TRUE
+*  2011:
+*    fd  Feb 18: c_begin_document() writes Unicode information ("\uc0") for RTF [#95]
 *
 ******************************************|************************************/
 
@@ -5008,6 +5010,10 @@ GLOBAL void c_begin_document(void)
       outln("}");
 
       outln(rtf_pardplain);
+      
+      if (iEncodingTarget == CODE_UTF8)   /* UTF-8 output? */
+         outln("\\uc0");                  /* tell RTF that there is no (!) ANSI char behind Unicode char! */
+      
       voutlnf("%s\\fs%d", rtf_norm, iDocPropfontSize);
       break;
       
