@@ -52,6 +52,8 @@
 *                - new: chr_usort_codepage()
 *                - new: chr_ligatures()
 *    fd  May 18: new: chr_codepage_charset_name()
+*  2011:
+*    fd  Feb 18: utf8_to_uchar() enhanced
 *
 ******************************************|************************************/
 
@@ -133,7 +135,7 @@
 GLOBAL UWORD utf8_to_bstr(const char *sz, int len);
 
    /* convert UTF-8 bytes into Unicode char (unknown length of byte stream) */
-GLOBAL UWORD utf8_to_uchar(const char *sz);
+GLOBAL UWORD utf8_to_uchar(const char *sz, int *length);
 
    /* convert Unicode value into UTF-8 bytes */
 GLOBAL char *bstr_to_utf8(UWORD ucode, char *s);
@@ -144,10 +146,13 @@ GLOBAL char *unicode2char(UWORD unicode, char *s);
 
 GLOBAL void convert_sz(char * s);
 
+   /* recode a line into another encoding */
 GLOBAL void recode(char *zeile, int char_set);
 
+   /* convert (UDO's) universal characters into target encoding */
 GLOBAL void recode_udo(char * s);
 
+   /* recode a string from chrtab[] via Unicode name to another encoding */
 GLOBAL void recode_chrtab(char * s, int type);
 
 GLOBAL int calc_ttf_twip(const char *s, const int font, const int style);
@@ -201,6 +206,7 @@ GLOBAL void c_vars(char *s);
 
 GLOBAL void c_man_styles(char * s);
 
+   /* convert special characters for relevant target encodings */
 GLOBAL void auto_quote_chars(char *s, BOOLEAN all);
 GLOBAL void auto_quote_texindex(char * s);
 GLOBAL void auto_quote_linedraw(char * s);

@@ -1792,7 +1792,7 @@ char  *zeile)  /* ^ string */
       strcpy(zeile,sbuf);                 /* restore line */
       my_strupr(zeile);                   /* we want to compare UPPERCASE (if possible) */
 
-      idx = utf8_to_uchar(zeile);         /* get codepoint for 1st char */
+      idx = utf8_to_uchar(zeile, &len);   /* get codepoint for 1st char  (len unused here!) */
       return idx;                         /* */
    }
 
