@@ -117,6 +117,7 @@
 *  2011:
 *    fd  Feb 14: - pass1() handles "!subsubsubsubnode" and its derivates (finally)
 *                - copyright year updated
+*    fd  Feb 19: output_preamble(): TeX supports utf8 package [#96 fixed]
 *
 ******************************************|************************************/
 
@@ -9953,6 +9954,10 @@ LOCAL void output_preamble(void)
          outln("\\usepackage{eurosym}");  /* New in V6.5.8 [NHz] */
                                       
          outln("\\usepackage{times}");    /* New in V6.5.20 [CS] */
+         
+                                          /* UTF-8 output? */
+         if (iEncodingTarget == CODE_UTF8)
+            outln("\\usepackage[utf8]{inputenc}");
 
          if (desttype == TOPDL)           /* r6pl8*/
          {
@@ -14555,12 +14560,7 @@ GLOBAL BOOLEAN udo
                bInsideAppendix = FALSE;
                printf("Warning: bInsideAppendix=TRUE - fixed it\n");
             }
-/*          v6.3.15 [vj] Diese Meldung brauchen wir nun nicht mehr, die verwirrt bloss :-)
-            else
-            {
-               printf("Note: bInsideAppendix NOT fixed :-)\n");
-            }
-*/
+
             clear_if_stack();
             output_preamble();
             
