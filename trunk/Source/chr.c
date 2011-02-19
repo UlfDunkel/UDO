@@ -123,6 +123,7 @@
 *                - new: QUOTECOMMAND.skip_brackets [#97 fixed]
 *    fd  Feb 19: - auto_quote_chars(): gcc (at least under Linux) doesn't support itoa()
 *                - auto_quote_chars(): TeX writes unquoted UTF-8 chars, if required [#96 fixed]
+*                - auto_quote_chars(): RTF now supports UTF-8 chars > 32768 (up to 65535)
 *
 ******************************************|************************************/
 
@@ -4222,7 +4223,7 @@ BOOLEAN           all)            /* */
                idx = utf8_to_uchar(ptr, &len);
 
                                           /* format it for RTF (format "\uN" where N is decimal) */
-               sprintf(s_temp, "\\u%d", idx);
+               sprintf(s_temp, "\\u%d", (SWORD)idx);
 
                ptr_quoted = s_temp;       /* set ^ to temp string */
 
