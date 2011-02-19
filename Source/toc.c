@@ -124,6 +124,7 @@
 *                - remaining functions reformatted
 *                - more function descriptions added
 *                - TOC output debugged
+*    fd  Feb 19: c_tableofcontents(): tableofcontents command fixed for TeX ("\" -> "\\")
 *
 ******************************************|************************************/
 
@@ -5712,7 +5713,7 @@ GLOBAL BOOLEAN save_html_index(void)
    
    fprintf(uif, "!begin_raw\n");
    
-   fprintf(uif, jumplist);                /* output A-Z jumplist */
+   fprintf(uif, "%s", jumplist);          /* output A-Z jumplist */
    
    lastc = EOS;                           /* reset buffer for last character */
    
@@ -5812,7 +5813,7 @@ GLOBAL BOOLEAN save_html_index(void)
    
    fprintf(uif, "</p>\n\n");
    
-   fprintf(uif, jumplist);                /* repeat A-Z jumplist */
+   fprintf(uif, "%s", jumplist);          /* repeat A-Z jumplist */
    
    fprintf(uif, "!end_raw\n");
    
@@ -11003,7 +11004,7 @@ GLOBAL void c_tableofcontents(void)
    case TOPDL:
       c_newpage();
       output_helpid(0);
-      outln("\tableofcontents");
+      outln("\\tableofcontents");
       c_newpage();
       break;
       
