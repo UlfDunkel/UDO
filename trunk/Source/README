@@ -1,6 +1,6 @@
 Um UDO zu compilieren, beachtet bitte folgendes:
 
-Linux: make -f makefile.lin
+Linux: make -f Makefile.linux
 
 Sinix: make -f makefile.snx
 
