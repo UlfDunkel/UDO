@@ -121,7 +121,8 @@
 *                - convert_sz():    no longer converts on Unicode targets
 *    fd  Feb 18: - auto_quote_chars() supports Unicode for RTF [#95 fixed]
 *                - new: QUOTECOMMAND.skip_brackets [#97 fixed]
-*    fd  Feb 19: auto_quote_chars(): gcc (at least under Linux) doesn't support itoa()
+*    fd  Feb 19: - auto_quote_chars(): gcc (at least under Linux) doesn't support itoa()
+*                - auto_quote_chars(): TeX writes unquoted UTF-8 chars, if required [#96 fixed]
 *
 ******************************************|************************************/
 
@@ -4129,6 +4130,13 @@ BOOLEAN           all)            /* */
 
             if (idx > 127)
             {
+               if (!pUtrg)                   /* target is Unicode */
+               {
+                  idx = utf8_to_uchar(ptr, &len);
+                  ptr += len - 1;
+                  goto NO_QUOTE_NEEDED;      /* we're already done */ 
+               }
+               
                j = 0;
          
                                           /* check for end of table! */
