@@ -121,6 +121,7 @@
 *                - convert_sz():    no longer converts on Unicode targets
 *    fd  Feb 18: - auto_quote_chars() supports Unicode for RTF [#95 fixed]
 *                - new: QUOTECOMMAND.skip_brackets [#97 fixed]
+*    fd  Feb 19: auto_quote_chars(): gcc (at least under Linux) doesn't support itoa()
 *
 ******************************************|************************************/
 
@@ -4211,9 +4212,10 @@ BOOLEAN           all)            /* */
             {
                                           /* find Unicode codepoint */
                idx = utf8_to_uchar(ptr, &len);
+
                                           /* format it for RTF (format "\uN" where N is decimal) */
-               sprintf(s_temp, "\\u%s", itoa(idx,s_buf,10));
-               
+               sprintf(s_temp, "\\u%d", idx);
+
                ptr_quoted = s_temp;       /* set ^ to temp string */
 
                strncpy(s_buf,ptr,len);    /* copy all used Unicode bytes from line to another buffer */
