@@ -43,7 +43,9 @@
 *    fd  Jan 23: converted all German umlauts in comments into plain ASCII
 *    fd  Feb 22: VOID, SBYTE, UBYTE, SWORD, UWORD, SLONG, ULONG introduced
 *    fd  Feb 25: myTextGetline() no longer concatenates '!\' lines in ENV_VERBATIM
-*    ggs Mar 13: Delete # in line 49.
+*    ggs Mar 13: Delete # in line 49
+*  2011:
+*    fd  Feb 21: more reformatting done
 *
 ******************************************|************************************/
 
@@ -475,11 +477,13 @@ char       *s)     /* */
 
    return (s);      
 }
+#endif /* #ifndef __MACOS__ */
 
 
 
 
 
+#ifndef __MACOS__
 /*******************************************************************************
 *
 *  fsplit():
@@ -563,71 +567,109 @@ char       *suffix)    /* */
 
 
 
+
+
 #ifdef __MACOS__
-/*   ----------------------------------------------------------------------
-   Version fuer Apple Macintosh: Martin Osieka @ OF2, 18.04.1996
-   Zerlegt den Dateipfad <sour> in seine Bestandteile und liefert sie
-   im Macintosh-Format in den <dest...> Parametern zurueck.
-   Ein Macintosh-Dateipfad kann folgendermassen aufgebaut sein:
+/*******************************************************************************
+*
+*  fsplit():
+*     splits a file specification into its components (Mac version)
+*
+*  Note:
+*     Mac version by Martin Osieka @ OF2, 1996-04-18:
+*     ----------------------------------------------------------------------
+*     Zerlegt den Dateipfad <sour> in seine Bestandteile und liefert sie
+*     im Macintosh-Format in den <dest...> Parametern zurueck.
+*     Ein Macintosh-Dateipfad kann folgendermassen aufgebaut sein:
+*  
+*     Absoluter Pfad:                     volume:folder1:...:folderN:name
+*     Pfad relativ zum aktuellen Ordner:  :folderM:...:folderN:name
+*     Datei im aktuellen Ordner:          name
+*  
+*     D.h. sobald der Dateipfad mindestens einen ':'-Seperator enthaelt und 
+*     dieser nicht am Pfadanfang steht, ist der erste Bestandteil des
+*     Dateipfades ein volume-Name.
+*     ----------------------------------------------------------------------
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
 
-   Absoluter Pfad:                     volume:folder1:...:folderN:name
-   Pfad relativ zum aktuellen Ordner:  :folderM:...:folderN:name
-   Datei im aktuellen Ordner:          name
+GLOBAL void fsplit(
 
-   D.h. sobald der Dateipfad mindestens einen ':'-Seperator enthaelt und 
-   dieser nicht am Pfadanfang steht, ist der erste Bestandteil des
-   Dateipfades ein volume-Name.
-   ----------------------------------------------------------------------   */
-
-GLOBAL void 
-fsplit( const char *sour, char *destDrive, char *destFolders, char *destName, char *destSuffix)
+const char  *sour,         /* */
+char        *destDrive,    /* */
+char        *destFolders,  /* */
+char        *destName,     /* */
+char        *destSuffix)   /* */
 {
-   char *s;
+   char     *s;            /* */
+   
 
-   *destDrive = 0;
+   *destDrive   = 0;
    *destFolders = 0;
 
    s = strrchr( sour, ':');
-   if (s && (s != sour + 1)) {   
+   
+   if (s && (s != sour + 1))
+   {
       /* Macintosh-Dateipfad (volume-Name wird nicht abgetrennt) */
       s += 1;
-      strncpy( destFolders, sour, s - sour);
-      destFolders[ s - sour] = 0;
+      strncpy(destFolders, sour, s - sour);
+      destFolders[s - sour] = 0;
       sour = s;
    }
-   else {
+   else
+   {
       /* DOS- oder Unix-Dateipfad */
-      if (s) {
-         strncpy( destDrive, sour, 2);
-         destDrive[ 2] = 0;
+      
+      if (s)
+      {
+         strncpy(destDrive, sour, 2);
+         destDrive[2] = 0;
          sour += 2;
       }
-      s = strrchr( sour, '/');
-      if (s) {
-         if (sour[ 0] != '/') {
+      
+      s = strrchr(sour, '/');
+      
+      if (s)
+      {
+         if (sour[ 0] != '/')
+         {
             *destFolders++ = ':';
          }
+         
          s += 1;
          strncpy( destFolders, sour, s - sour);
          destFolders[ s - sour] = 0;
          sour = s;
          s = destFolders;
-         while ((s = strchr( s, '/')) != NULL) {
+         
+         while ((s = strchr( s, '/')) != NULL)
+         {
             *s++ = ':';
          }
       }
-      else {
+      else
+      {
          s = strrchr( sour, '\\');
-         if (s) {
-            if (sour[ 0] != '\\') {
+         
+         if (s)
+         {
+            if (sour[ 0] != '\\')
+            {
                *destFolders++ = ':';
             }
+            
             s += 1;
             strncpy( destFolders, sour, s - sour);
             destFolders[ s - sour] = 0;
             sour = s;
             s = destFolders;
-            while ((s = strchr( s, '\\')) != NULL) {
+            
+            while ((s = strchr( s, '\\')) != NULL)
+            {
                *s++ = ':';
             }
          }
@@ -635,39 +677,56 @@ fsplit( const char *sour, char *destDrive, char *destFolders, char *destName, ch
    }
 
    /* Dateinamen und -suffix aufspalten */
+   
    s = strrchr( sour, '.');
-   if (s) {
+   
+   if (s)
+   {
       strncpy( destName, sour, s - sour);
       destName[ s - sour] = 0;
       strcpy( destSuffix, s);
    }
-   else {
+   else
+   {
       strcpy( destName, sour);
       *destSuffix = 0;
    }
-} /* fsplit */
-
-
+}
 #endif /* #ifdef __MACOS__ */
 
 
 
-/*   --------------------------------------------------------------
-   myFwopen() / myFwbopen()
-   Oeffnen einer Datei mit Modus "w" bzw. "wb" und gleichzeitigem
-   Aufruf von SetFileType fuer die Systeme, die einen Creator
-   setzen muessen (Idee: Rainer Riedl)
-   Dadurch spart man sich die ganzen Abfragen in den anderen
-   Modulen und vermeidet, dass man ein SetFileType vergisst.
-   ->   filename: siehe fopen()
-      filetype: TOASC, TOHTM, TOGIF (neu)
-   <-   Stream wie bei fopen()
-   --------------------------------------------------------------   */
-GLOBAL FILE * myFwopen ( const char *filename, const int filetype )
-{
-   FILE *file;
 
-   file= fopen(filename, "w");
+
+/*******************************************************************************
+*
+*  myFwopen():
+*     open a file in text write mode
+*
+*  Note:
+*     Here we also set the file type for all systems which need a Creator type
+*     (idea: Rainer Riedl). This avoids more queries in other modules and 
+*     forgotten Creator types.
+*
+*     <filetype> is set in these formats:
+*     - TOASC
+*     - TOHTM
+*     - TOGIF
+*
+*  Return:
+*     ???
+*
+******************************************|************************************/
+
+GLOBAL FILE *myFwopen(
+
+const char  *filename,  /* */
+const int    filetype)  /* */
+{
+   FILE     *file;      /* */
+   
+
+   file = fopen(filename, "w");
 
 #if USE_SETFILETYPE   
    if (file)
@@ -677,19 +736,39 @@ GLOBAL FILE * myFwopen ( const char *filename, const int filetype )
 #else
    UNUSED(filetype);
 #endif
+
    /* v6.9.10 [me] Einen Puffer zur Beschleunigung zuordnen */
-   if( file!=NULL )
+   if (file != NULL)
       setvbuf(file, NULL, _IOFBF, 8192);
 
    return file;
-}   /* myFwopen */
+}
 
 
-GLOBAL FILE * myFwbopen ( const char *filename, const int filetype )
+
+
+
+/*******************************************************************************
+*
+*  myFwbopen():
+*     open a file in binary write mode
+*
+*  Note:
+*     see myFwopen()
+*  Return:
+*     ???
+*
+******************************************|************************************/
+
+GLOBAL FILE *myFwbopen(
+
+const char  *filename,  /* */
+const int    filetype)  /* */
 {
-   FILE *file;
+   FILE     *file;      /* */
+   
 
-   file= fopen(filename, "wb");
+   file = fopen(filename, "wb");
 
 #if USE_SETFILETYPE   
    if (file)
@@ -699,27 +778,36 @@ GLOBAL FILE * myFwbopen ( const char *filename, const int filetype )
 #else
    UNUSED(filetype);
 #endif
-   /* v6.9.10 [me] Einen Puffer zur Beschleunigung zuordnen */
 
-   if( file!=NULL )
+   /* v6.9.10 [me] Einen Puffer zur Beschleunigung zuordnen */
+   if (file != NULL)
       setvbuf(file, NULL, _IOFBF, 8192);
 
-
    return file;
-}   /* myFwbopen */
+}
 
 
-/*   ----------------------------------------------------------------------
-   Oeffnen/Schliessen von Dateien und Rueck-/Uebergabe von MYFILE struct
-   ----------------------------------------------------------------------   */
 
-LOCAL MYFILE *my_new_myfile ( void )
+
+
+/*******************************************************************************
+*
+*  my_new_myfile():
+*     allocates space for a new file
+*
+*  Return:
+*     FALSE: error
+*      TRUE: success
+*
+******************************************|************************************/
+
+LOCAL MYFILE *my_new_myfile(void)
 {
-   MYFILE *myfile;
+   MYFILE  *myfile;
 
    myfile = (MYFILE *)um_malloc(sizeof(MYFILE));
 
-   if (myfile!=NULL)
+   if (myfile != NULL)
    {
       memset(myfile, 0, sizeof(MYFILE));
    }
@@ -727,9 +815,26 @@ LOCAL MYFILE *my_new_myfile ( void )
    return myfile;
 }
 
-LOCAL BOOLEAN my_free_myfile ( MYFILE *myfile )
+
+
+
+
+/*******************************************************************************
+*
+*  my_free_myfile():
+*     frees memory buffer for a file
+*
+*  Return:
+*     FALSE: error
+*      TRUE: success
+*
+******************************************|************************************/
+
+LOCAL BOOLEAN my_free_myfile(
+
+MYFILE  *myfile)  /* */
 {
-   if (myfile!=NULL)
+   if (myfile != NULL)
    {
       um_free(myfile);
       return TRUE;
@@ -738,28 +843,64 @@ LOCAL BOOLEAN my_free_myfile ( MYFILE *myfile )
    return FALSE;
 }
 
-GLOBAL MYFILE *my_fopen ( const char *filename, const char *mode )
+
+
+
+
+/*******************************************************************************
+*
+*  my_fopen():
+*     open a file
+*
+*  Return:
+*     FALSE: error
+*      TRUE: success
+*
+******************************************|************************************/
+
+GLOBAL MYFILE *my_fopen(
+
+const char  *filename,  /* */
+const char  *mode)      /* */
 {
-   MYFILE *myfile;
+   MYFILE   *myfile;    /* */
+   
 
-   myfile= my_new_myfile();
+   myfile = my_new_myfile();
 
-   if (myfile!=NULL)
+   if (myfile != NULL)
    {
-      myfile->file= fopen(filename, mode);
+      myfile->file = fopen(filename, mode);
 
       if (myfile->file)
       {
-         myfile->opened= TRUE;
+         myfile->opened = TRUE;
       }
    }
 
    return myfile;
 }
 
-GLOBAL BOOLEAN my_fclose ( MYFILE *myfile )
+
+
+
+
+/*******************************************************************************
+*
+*  my_fclose():
+*     close a file
+*
+*  Return:
+*     FALSE: error
+*      TRUE: success
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN my_fclose(
+
+MYFILE  *myfile)  /* */
 {
-   if (myfile!=NULL)
+   if (myfile != NULL)
    {
       if (myfile->file)
       {
@@ -774,80 +915,130 @@ GLOBAL BOOLEAN my_fclose ( MYFILE *myfile )
 
 
 
-/*   ----------------------------------------------------------------------
-   Anpassen des Pfad-Separators abhaengig von USE_SLASH
-   ----------------------------------------------------------------------   */
-GLOBAL void path_adjust_separator ( char *s )
+
+
+/*******************************************************************************
+*
+*  path_adjust_separator():
+*     adjust path separator character(s)
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+GLOBAL void path_adjust_separator(
+
+char  *s)  /* */
 {
 #if USE_SLASH
    replace_char(s, "\\", "/");
 #else
    replace_char(s, "/", "\\");
 #endif
-}   /* path_adjust_separator */
+}
+
+
 
 
 
 #if USE_HTML_FOLDERS
+/*******************************************************************************
+*
+*  myDirExists():
+*     get current directory
+*
+*  Return:
+*     FALSE: doesn't exist
+*      TRUE: success
+*
+******************************************|************************************/
 
-/*   ----------------------------------------------------------------------
-   Ermitteln des aktuellen Verzeichnisses
-   ----------------------------------------------------------------------   */
-LOCAL BOOLEAN my_getcwd ( char *s, int maxlen )
+LOCAL BOOLEAN my_getcwd(
+
+char        *s,            /* */
+int          maxlen)       /* */
 {
-   BOOLEAN ret= TRUE;
+   BOOLEAN   ret = TRUE;   /* */
+   
 
-   if (getcwd(s, maxlen)==NULL)
-   {   ret= FALSE;
-   }
+   if (getcwd(s, maxlen) == NULL)
+      ret = FALSE;
 
    return ret;
+}
+#endif /* USE_HTML_FOLDERS */
 
-}   /* my_getcwd */
 
 
-/*   ----------------------------------------------------------------------
-   Testen, ob ein Verzeichnis vorhanden ist
-   ----------------------------------------------------------------------   */
-LOCAL BOOLEAN myDirExists ( char *s )
+
+
+#if USE_HTML_FOLDERS
+/*******************************************************************************
+*
+*  myDirExists():
+*     check whether a directory exists on file
+*
+*  Return:
+*     FALSE: doesn't exist
+*      TRUE: success
+*
+******************************************|************************************/
+
+LOCAL BOOLEAN myDirExists(
+
+char        *s)           /* */
 {
-   char old[512];
-   BOOLEAN ret= TRUE;
+   char      old[512];    /* */
+   BOOLEAN   ret = TRUE;  /* */
+   
 
    my_getcwd(old, 512);
 
-   if (chdir(s)!=0)
-   {   ret= FALSE;
-   }
+   if (chdir(s) != 0)
+      ret = FALSE;
 
    chdir(old);
 
    return ret;
+}
+#endif /* USE_HTML_FOLDERS */
 
-}   /* myDirExists */
 
-/*   ----------------------------------------------------------------------
-   Anlegen eines Verzeichniss
-   ----------------------------------------------------------------------   */
-GLOBAL BOOLEAN my_mkdir ( char *s )
+
+
+
+#if USE_HTML_FOLDERS
+/*******************************************************************************
+*
+*  my_mkdir():
+*     create a directory on file 
+*
+*  Return:
+*     FALSE: error
+*      TRUE: success
+*
+******************************************|************************************/
+
+GLOBAL BOOLEAN my_mkdir(
+
+char        *s)           /* */
 {
-   BOOLEAN ret= TRUE;
+   BOOLEAN   ret = TRUE;  /* */
+   
 
    if (!myDirExists(s))
-   {   if (mkdir(s)!=0)
-      {   ret= FALSE;
+   {
+      if (mkdir(s) != 0)
+      {
+         ret = FALSE;
          error_mkdir(s);
       }
    }
 
    return ret;
-
-}   /* my_mkdir */
-
-
+}
 #endif /* USE_HTML_FOLDERS */
 
 
-/*   ##############################################################
-   # file.c
-   ##############################################################   */
+/* +++ EOF +++ */
