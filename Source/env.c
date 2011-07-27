@@ -28,8 +28,8 @@
 *-------------------------------------------------------------------------------
 *
 *  Author       : Dirk Hagedorn (udo@dirk-hagedorn.de)
-*  Co-Authors   : Ulf Dunkel (fd), Gerhard Stoll (ggs)
-*  Write access : fd, ggs
+*  Co-Authors   : Ulf Dunkel (fd), Gerhard Stoll (ggs), Manfred Guentner (mg)
+*  Write access : fd, ggs, mg
 *
 *  Notes        : Please add yourself as co-author when you change this file.
 *
@@ -76,6 +76,7 @@
 *    fd  Sep 03: c_end_itemize()/c_end_enumerate() no longer keep bParagraphOpen TRUE
 *  2011:
 *    fd  Feb 18: c_begin_document() writes Unicode information ("\uc0") for RTF [#95]
+*    mg  Jul 27: enhancements for NROFF
 *
 ******************************************|************************************/
 
@@ -628,6 +629,10 @@ const int    el)            /* environment level to check */
          /* Hier keine Leerzeile */
          break;
 
+      case TONRO:
+         outln(".fi");
+         break;
+
       case TOKPS:
          outln("newline");
          break;
@@ -855,7 +860,10 @@ GLOBAL void output_begin_verbatim(void)
       out("<pre>");                       /*r6pl5: vorher outln(), was zu einer Leerzeile zuviel fuehrte */
       break;
       
-      
+   case TONRO:
+      outln(".nf");
+      break;     
+ 
    case TOLDS:
       outln("<verb>");
       break;
