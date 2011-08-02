@@ -77,6 +77,7 @@
 *  2011:
 *    fd  Feb 18: c_begin_document() writes Unicode information ("\uc0") for RTF [#95]
 *    mg  Jul 27: enhancements for NROFF
+*    mg  Aug 02: more enhancements for NROFF
 *
 ******************************************|************************************/
 
@@ -1520,7 +1521,10 @@ GLOBAL void c_begin_quote(void)
       outln("@quotation");
       break;
       
-      
+   case TONRO:
+      outln(".RS");
+      break;
+
    case TOHAH:
    case TOHTM:
    case TOMHH:
@@ -1697,6 +1701,10 @@ GLOBAL void c_end_quote(void)
    case TOINF:
       outln("@end quotation");
       break;
+
+   case TONRO:
+   outln(".RE");
+   break;
       
    case TORTF:
    case TOWIN:
@@ -1784,6 +1792,10 @@ GLOBAL void c_begin_center(void)
    case TOIPF:
       outln(":lines align=center.");      /* r6pl7*/
       break;
+
+   case TONRO:
+      outln(".ad c");
+      break;
       
    case TOLYX:                            /* <???> */
       break;
@@ -1828,6 +1840,10 @@ GLOBAL void c_end_center(void)
       
    case TOIPF:
       outln(":elines.");                  /* r6pl7*/
+      break;
+
+   case TONRO:
+      outln(".na");
       break;
       
    case TOLYX:                            /* <???> */
@@ -1895,6 +1911,10 @@ GLOBAL void c_begin_flushright(void)
       
    case TOLYX:                            /* <???> */
       break;
+
+   case TONRO:
+      outln(".ad r");
+      break;
       
    case TOINF:
       outln("@flushright");
@@ -1952,6 +1972,10 @@ GLOBAL void c_end_flushright(void)
    case TOINF:
       outln("@end flushright");
       outln("");
+      break;
+
+   case TONRO:
+      outln(".na");
       break;
       
    case TOIPF:
@@ -2019,6 +2043,10 @@ GLOBAL void c_begin_flushleft(void)
       
    case TOLYX:                            /* <???> */
       break;
+
+   case TONRO:
+      outln(".ad l");
+      break;
       
    case TOINF:
       outln("@flushleft");
@@ -2075,6 +2103,11 @@ GLOBAL void c_end_flushleft(void)
       outln("@end flushleft");
       outln("");
       break;
+
+   case TONRO:
+      outln(".na");
+      break;
+
    case TOIPF:
       outln(":elines.");                  /* r6pl7*/
    }
