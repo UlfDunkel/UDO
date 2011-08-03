@@ -7091,10 +7091,32 @@ const BOOLEAN   invisible)       /* TRUE: this is an invisible node */
    case TONRO:
       set_inside_node(nodetype);
       
-      if (nodetype == TOC_NODE1)          /* fd:2011-02-16: why only in TOC_NODE1 ??? */
+      if (nodetype == TOC_NODE1)
+      {
          my_strupr(name);
-      
-      sprintf(n, ".SH %s", name);
+         sprintf(n, ".SH %s", name);
+      }
+      if (nodetype == TOC_NODE2)
+      {
+         my_strupr(name);
+         sprintf(n, ".SS %s", name);
+      }
+      if (nodetype == TOC_NODE3)
+      {
+         my_strupr(name);
+         sprintf(n, ".TP\n.SS %s", name);
+      }
+      if (nodetype == TOC_NODE4)
+      {
+         my_strupr(name);
+         sprintf(n, ".TP\n.SS %s", name);
+      }
+      if (nodetype == TOC_NODE5)
+      {
+         my_strupr(name);
+         sprintf(n, ".TP\n.SS %s", name);
+      }
+
       c_internal_styles(n);
       outln(n);
       break;
