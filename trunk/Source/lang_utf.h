@@ -40,6 +40,7 @@
 *                 lv:  Mārtiņš Zemzaris, LV
 *                 nl:  - Rogier Cobben (rogier_cobben@nextjk.stuyts.nl)
 *                      - Paul Pasveer, NL-LEEUWARDEN
+*                      - Alexander Henket, NL-ROTTERDAM
 *                 pl:  Dominik Siecinski, PL-LESZNO
 *                 sv:  Karl-Johan Norén, SE-VÄRNAMO
 *
@@ -61,6 +62,8 @@
 *    fd  Feb 19: file introduced (extracted from LANG.C)
 *    fd  May 19: new: LANG.degree
 *    fd  Sep 11: tiny adjustments to esp. better reflect multiple translators
+*  2011:
+*    fd  Aug 09: more nl strings adjusted
 *
 ******************************************|************************************/
 
@@ -459,23 +462,23 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* index       */    "Index",
          /* page        */    "bladzijde",
          /* see         */    "zie",
-         /* also        */    "zie ook",
+         /* also        */    "ook",
          /* by          */    "door",
          /* fur         */    "voor",
          /* up          */    "Omhoog",
-         /* exit        */    "Beeindigen",
+         /* exit        */    "Beëindigen",
          /* unknown     */    "Onbekend",
-         /* update      */    "Last updated on",
+         /* update      */    "Laatst gewijzigd op",
          /* lcid        */    "LCID=0x413 0x0 0x0 ;Dutch",
-         /* html_home   */    "Home",
-         /* html_up     */    "Up",
-         /* html_prev   */    "Prev",
-         /* html_next   */    "Next",
+         /* html_home   */    "Start",
+         /* html_up     */    "Omhoog",
+         /* html_prev   */    "Vorige",
+         /* html_next   */    "Volgende",
          /* html_lang   */    "nl",
-         /* html_start  */    "Begin of the document",
+         /* html_start  */    "Begin van het document",
          /* translator  */    "Vertaling:",
-         /* distributor */    "Verspreider:",
-         /* degree      */    "booggraad",
+         /* distributor */    "Distributeur:",
+         /* degree      */    "graad",
          "",""
       }
    },
