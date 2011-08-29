@@ -399,7 +399,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* up          */    "Arriba",
          /* exit        */    "Salida",
          /* unknown     */    "desconocido",
-         /* update      */    "Último actualizado en",
+         /* update      */    "Última actualización el",
          /* lcid        */    "LCID=0x40a 0x0 0x0 ;Spanish (Traditional)",
          /* html_home   */    "Home",
          /* html_up     */    "Arriba",
