@@ -33,7 +33,7 @@
 *                 da:  Henning Nymand, DK-NORRE ALSLEV
 *                 de:  <various UDO developers>
 *                 en:  <various UDO developers>
-*                 es:  Euro Dictionary :-)
+*                 es:  Manuel Angel Amaro Carmona, Venezuela (dassault.sis@gmail.com)
 *                 fr:  corrections by Didier Briel (ddc@imaginet.fr)
 *                 it:  - g.morando@agora.stm.it
 *                      - Sergio Febo, IT
@@ -64,6 +64,7 @@
 *    fd  Sep 11: tiny adjustments to esp. better reflect multiple translators
 *  2011:
 *    fd  Aug 09: more nl strings adjusted
+*    fd  Aug 29: more es strings adjusted by Angel Carmona
 *
 ******************************************|************************************/
 
@@ -383,31 +384,31 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* preface     */    "Prefacio",
          /* chapter     */    "Capìtulo",
          /* title       */    "Tìtulo",
-         /* appendix    */    "Apèndice",
+         /* appendix    */    "Apéndice",
          /* contents    */    "Contenido",
-         /* listfigure  */    "Lista de grabados",
+         /* listfigure  */    "Lista de figuras",
          /* listtable   */    "Lista de tablas",
-         /* figure      */    "Grabado",
+         /* figure      */    "Figura",
          /* table       */    "Tabla",
-         /* index       */    "Ìndice",
-         /* page        */    "pàgina",
-         /* see         */    "ver",
-         /* also        */    "ver tambièn",
-         /* by          */    "de",
-         /* fur         */    "per",
-         /* up          */    "Elevado",
-         /* exit        */    "Terminar",
-         /* unknown     */    "Desconocido",
-         /* update      */    "Last updated on",
+         /* index       */    "Índice",
+         /* page        */    "Página",
+         /* see         */    "Ver",
+         /* also        */    "Además",
+         /* by          */    "Por",
+         /* fur         */    "Para",
+         /* up          */    "Arriba",
+         /* exit        */    "Salida",
+         /* unknown     */    "desconocido",
+         /* update      */    "Último actualizado en",
          /* lcid        */    "LCID=0x40a 0x0 0x0 ;Spanish (Traditional)",
          /* html_home   */    "Home",
-         /* html_up     */    "Up",
-         /* html_prev   */    "Prev",
-         /* html_next   */    "Next",
+         /* html_up     */    "Arriba",
+         /* html_prev   */    "Anterior",
+         /* html_next   */    "Siguiente",
          /* html_lang   */    "es",
-         /* html_start  */    "Begin of the document",
+         /* html_start  */    "Comienzo del documento",
          /* translator  */    "Traducción:",
-         /* distributor */    "Distributor:",
+         /* distributor */    "Distribuidor:",
          /* degree      */    "grado",
          "",""
       }
