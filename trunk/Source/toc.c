@@ -125,6 +125,7 @@
 *                - more function descriptions added
 *                - TOC output debugged
 *    fd  Feb 19: c_tableofcontents(): tableofcontents command fixed for TeX ("\" -> "\\")
+*    fd  Oct 07: toc_output(): avoid unwanted output of \end{itemize} in TeX
 *
 ******************************************|************************************/
 
@@ -9174,7 +9175,7 @@ BOOLEAN           apx)                  /* TRUE: appendix output */
             {
                if (use_toc_list_commands == TOCL_HTM)
                   outln("\t</li>");
-               else
+               else if (use_toc_list_commands != TOCL_TEX)
                   outln(toc_list_end);
                
                last1 = FALSE;
