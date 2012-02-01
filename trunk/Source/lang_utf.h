@@ -65,6 +65,8 @@
 *  2011:
 *    fd  Aug 09: more nl strings adjusted
 *    fd  Aug 29: more es strings adjusted by Angel Carmona
+*  2012:
+*    fd  Feb 01: html_home localized to Spanish
 *
 ******************************************|************************************/
 
@@ -401,7 +403,7 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* unknown     */    "desconocido",
          /* update      */    "Última actualización el",
          /* lcid        */    "LCID=0x40a 0x0 0x0 ;Spanish (Traditional)",
-         /* html_home   */    "Home",
+         /* html_home   */    "Inicio",
          /* html_up     */    "Arriba",
          /* html_prev   */    "Anterior",
          /* html_next   */    "Siguiente",
