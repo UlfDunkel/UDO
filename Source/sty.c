@@ -72,18 +72,34 @@ const char *id_sty_c= "@(#) sty.c       $Date$";
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "portab.h"
 #include "version.h"
 #include "constant.h"
 #include "udo_type.h"
 #include "commands.h"
 #include "chr.h"
+#include "file.h"                         /* myFwopen() */
 #include "msg.h"
 #include "str.h"
 #include "time.h"                         /* New in V6.5.9 [NHz] */
 #include "udo.h"
 #include "export.h"
 #include "sty.h"
+
+
+
+
+
+
+
+/*******************************************************************************
+*
+*     EXTERNAL REFERENCES
+*
+******************************************|************************************/
+
+extern ULONG   footnote_cnt;              /* UDO.H: footnote counter */
 
 
 
@@ -110,8 +126,11 @@ LOCAL char         VERB_OFF[8];           /* */
 *
 ******************************************|************************************/
 
+   /* convert a footnote entry into simple (ASCII) text */
 LOCAL void footnote2ascii(char *s);
 
+   /* collect footnote entries in an array and output footnote number instead */
+LOCAL void footnote2array(char *s);
 
 
 
@@ -130,7 +149,9 @@ LOCAL void footnote2ascii(char *s);
 /*******************************************************************************
 *
 *  footnote2ascii():
-*     ??? (description missing)
+*     convert a footnote entry into simple (ASCII) text
+*
+*  Format:  " (<footnote>)"
 *
 *  Return:
 *     -
@@ -139,11 +160,80 @@ LOCAL void footnote2ascii(char *s);
 
 LOCAL void footnote2ascii(
 
-char  *s)  /* */
+char  *s)  /* ^ string with footnote tokens */
 {
    qreplace_all(s, FOOT_ON,  STYLELEN, " (", 2);
    qreplace_all(s, FOOT_OFF, STYLELEN, ")",  1);
 }
+
+
+
+
+
+/*******************************************************************************
+*
+*  footnote2array():
+*     collect footnote entries in an array and output footnote number instead
+*
+*  Return:
+*     -
+*
+******************************************|************************************/
+
+LOCAL void footnote2array(
+
+char  *s)  /* ^ string with footnote tokens */
+{
+   char *ptr = s;                         /* ^ to string */
+   char *here;                            /* ^ to substring */
+   char buf[513];                         /* footnote string buffer */
+   char fnote[13];                        /* buffer for footnote number */
+   int i;                                 /* counter for chars in buf[] */
+   FILE *file;
+   char fnotefile[32] = "FOOTNOTE.";
+   
+   
+   while (*ptr)
+   {
+      here = strstr(ptr,FOOT_ON);         /* find footnote token */
+      
+      if (here != NULL)                   /* found */
+      {
+         here += STYLELEN;                /* skip footnote token */
+         i = 0;
+            
+         while (*here != C_STYLE_MAGIC)   /* copy footnote string */
+            buf[i++] = *here++;
+         
+         buf[--i] = 0;                    /* close C string! */
+
+         sprintf(fnote, "(%ld)", ++footnote_cnt);
+         
+                                          /* remove string from original line */
+         replace_once(s, FOOT_ON, fnote);
+         qreplace_once(s, FOOT_OFF, STYLELEN, "", 0);
+         replace_once(s, buf, "");
+         
+         
+         sprintf(fnote, "%03ld", footnote_cnt - 1);
+         strcpy(fnotefile, FNOTEFILE);
+         strcat(fnotefile, fnote);
+         
+         file = myFwopen(fnotefile,TOASC);
+         
+         if (!file)
+            break;
+         
+         fprintf(file, "%s", buf);
+         
+         fclose(file);
+         
+      }
+      else
+         break;
+   }
+}
+
 
 
 
@@ -218,7 +308,7 @@ char     *s)    /* */
 
 /*******************************************************************************
 *
-*  del_internal_footnotes():
+*  del_html_styles():
 *     ??? (description missing)
 *
 *  Return:
@@ -254,7 +344,7 @@ char  *s)  /* */
 
 /*******************************************************************************
 *
-*  del_internal_footnotes():
+*  del_internal_styles():
 *     ??? (description missing)
 *
 *  Return:
@@ -683,8 +773,9 @@ char     *s)                  /* */
 #if 0
       delete_all(s, VERB_ON);
       delete_all(s, VERB_OFF);
-#endif
       footnote2ascii(s);
+#endif
+      footnote2array(s);
                                           /* New in V6.5.9 [NHz] */
       qreplace_all(ptr, DELETED_ON, STYLELEN, "[", 1);
       qreplace_all(ptr, DELETED_OFF, STYLELEN, "]", 1);
@@ -987,19 +1078,18 @@ char     *s)                  /* */
 
 
    case TOKPS:
-      qreplace_all(ptr, BOLD_ON, STYLELEN,      ") udoshow Bon (", 15);
-      qreplace_all(ptr, BOLD_OFF, STYLELEN,      ") udoshow Boff (", 16);
-      qreplace_all(ptr, ITALIC_ON, STYLELEN,      ") udoshow Ion (", 15);
-      qreplace_all(ptr, ITALIC_OFF, STYLELEN,      ") udoshow Ioff (", 16);
-      qreplace_all(ptr, UNDER_ON, STYLELEN,      ") udoshow Uon (", 15);
-      qreplace_all(ptr, UNDER_OFF, STYLELEN,      ") udoshow Uoff (", 16);
-      qreplace_all(ptr, VERB_ON, STYLELEN,      ") udoshow Von (", 15);
-      qreplace_all(ptr, VERB_OFF, STYLELEN,      ") udoshow Voff (", 16);
-      qreplace_all(ptr, TWRITER_ON, STYLELEN,      ") udoshow Von (", 15);
-      qreplace_all(ptr, TWRITER_OFF, STYLELEN,   ") udoshow Voff (", 16);
-                                          /* New in r6pl15 */
-      qreplace_all(ptr, FOOT_ON, STYLELEN,      ") udoshow (", 11);
-      qreplace_all(ptr, FOOT_OFF, STYLELEN,      ") footnote (", 12);
+      qreplace_all(ptr, BOLD_ON, STYLELEN,     ") udoshow Bon (", 15);
+      qreplace_all(ptr, BOLD_OFF, STYLELEN,    ") udoshow Boff (", 16);
+      qreplace_all(ptr, ITALIC_ON, STYLELEN,   ") udoshow Ion (", 15);
+      qreplace_all(ptr, ITALIC_OFF, STYLELEN,  ") udoshow Ioff (", 16);
+      qreplace_all(ptr, UNDER_ON, STYLELEN,    ") udoshow Uon (", 15);
+      qreplace_all(ptr, UNDER_OFF, STYLELEN,   ") udoshow Uoff (", 16);
+      qreplace_all(ptr, VERB_ON, STYLELEN,     ") udoshow Von (", 15);
+      qreplace_all(ptr, VERB_OFF, STYLELEN,    ") udoshow Voff (", 16);
+      qreplace_all(ptr, TWRITER_ON, STYLELEN,  ") udoshow Von (", 15);
+      qreplace_all(ptr, TWRITER_OFF, STYLELEN, ") udoshow Voff (", 16);
+      qreplace_all(ptr, FOOT_ON, STYLELEN,     ") udoshow (", 11);
+      qreplace_all(ptr, FOOT_OFF, STYLELEN,    ") footnote (", 12);
 /*    footnote2ascii(s); */
 
                                           /* New in V6.5.9 [NHz] */

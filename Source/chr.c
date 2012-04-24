@@ -124,6 +124,8 @@
 *    fd  Feb 19: - auto_quote_chars(): gcc (at least under Linux) doesn't support itoa()
 *                - auto_quote_chars(): TeX writes unquoted UTF-8 chars, if required [#96 fixed]
 *                - auto_quote_chars(): RTF now supports UTF-8 chars > 32768 (up to 65535)
+*  2012:
+*    fd  Apr 24: !begin_enumerate added to quotecommand[] 
 *
 ******************************************|************************************/
 
@@ -298,7 +300,7 @@ LOCAL char *html_specs[HTML_SPEC_MAX] =   /* list of supported HTML specials */
 /* TRUE liefert. Daher muessen hier sowohl !node als auch */
 /* !node* angegeben werden! */
 
-# define        MAXQUOTECMD     40
+# define        MAXQUOTECMD     41
 
 LOCAL const QUOTECOMMAND quotecommand[MAXQUOTECMD] =
 {
@@ -332,6 +334,7 @@ LOCAL const QUOTECOMMAND quotecommand[MAXQUOTECMD] =
    {"!begin_blist",      12, "!bbl",   4       , FALSE},      /* Fehlen die hier, so bekommt c_begin_list */
    {"!begin_ilist",      12, "!bil",   4       , FALSE},      /* einen String, der c_vars(), aber nicht   */
    {"!begin_tlist",      12, "!btl",   4       , FALSE},      /* auto_quote_chars() durchlaufen hat!!!    */
+   {"!begin_enumerate",  16, "!be",    3       , FALSE},
    {"!heading",           8, "!h",     2       , FALSE},
    {"!subheading",       11, "!sh",    3       , FALSE},
    {"!subsubheading",    14, "!ssh",   4       , FALSE},

@@ -64,16 +64,16 @@
 
 typedef struct _styleflag                 /* various style control flags */
 {
-   BOOLEAN   bold;
-   BOOLEAN   footnote;
-   BOOLEAN   italic;
-   BOOLEAN   underlined;
-   BOOLEAN   verbatim;
-   BOOLEAN   twriter;
-   BOOLEAN   insert;                      /* (!INS)...(!ins) New in V6.5.9 [NHz] */
+   BOOLEAN   bold;                        /* (!B)...(!b) */
+   BOOLEAN   footnote;                    /* (!N)...(!n) */
+   BOOLEAN   italic;                      /* (!I)...(!i) */
+   BOOLEAN   underlined;                  /* (!U)...(!u) */
+   BOOLEAN   verbatim;                    /* (!V)...(!v) */
+   BOOLEAN   twriter;                     /* (!T)...(!t) */
+   BOOLEAN   insert;                      /* (!INS)...(!ins) */
    BOOLEAN   deleted;                     /* (!DEL)...(!del) */
-   BOOLEAN   colour;                      /* New in V6.5.9 [NHz] */
-   BOOLEAN   sup;                         /* (!SUP)...(!sup) New in V6.5.20 [GS] */
+   BOOLEAN   colour;                      /* (!<colorname>)...(!coloff) */
+   BOOLEAN   sup;                         /* (!SUP)...(!sup) */
    BOOLEAN   sub;                         /* (!SUB)...(!sub) */
 }  STYLEFLAG;
 
@@ -90,6 +90,8 @@ typedef struct _styleflag                 /* various style control flags */
 ******************************************|************************************/
 
 #define STYLELEN         4                 /* length of placeholder string */
+
+#define FNOTEFILE  "FOOTNOTE."
 
    /*
     *   The placeholders are formed as a 4 byte string like this:

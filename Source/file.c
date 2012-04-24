@@ -29,7 +29,8 @@
 *  Co-Authors   : Martin Osieka (MO)
 *                 Volker Jansen (vj)
 *                 Ulf Dunkel (fd)
-*  Write access : vj, fd
+*                 Gerhard Stoll (ggs)
+*  Write access : fd, ggs
 *
 *  Notes        : Please add yourself as co-author when you change this file.
 *
