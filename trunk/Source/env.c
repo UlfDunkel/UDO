@@ -78,6 +78,8 @@
 *    fd  Feb 18: c_begin_document() writes Unicode information ("\uc0") for RTF [#95]
 *    mg  Jul 27: enhancements for NROFF
 *    mg  Aug 02: more enhancements for NROFF
+*  2012:
+*    fd  Apr 24: c_begin_enumerate() handles optional enumeration start number parameter
 *
 ******************************************|************************************/
 
@@ -2250,7 +2252,7 @@ GLOBAL void c_begin_itemize(void)
 /*******************************************************************************
 *
 *  c_begin_enumerate():
-*     ??? (description missing)
+*     starts enumeration environment output
 *
 *  Return:
 *     -
@@ -2259,14 +2261,24 @@ GLOBAL void c_begin_itemize(void)
 
 GLOBAL void c_begin_enumerate(void)
 {
-   if (!check_iEnvLevel())
-      return;
+   char   sNumStart[256];  /* buffer for tokens */
+   int    numStart;        /* buffer for enumeration start value */
+   
 
+   if (!check_iEnvLevel())
+   {
+      return;
+   }
+   
+   tokcpy2(sNumStart,256);                /* get optional enumeration start value */
+
+   numStart = atoi(sNumStart);
+   
    iEnvLevel++;
 
    iEnvType[iEnvLevel]    = ENV_ENUM;
    env_kind[iEnvLevel]    = 0;
-   enum_count[iEnvLevel]  = 0;
+   enum_count[iEnvLevel]  = numStart;
    iEnvIndent[iEnvLevel]  = 0;
 
    bEnv1stItem[iEnvLevel] = TRUE;
@@ -2369,6 +2381,11 @@ GLOBAL void c_begin_enumerate(void)
          
       case 4:
          outln(" type=A");
+      }
+      
+      if (numStart)                       /* add start value, if required */
+      {
+         voutf(" start=\"%d\"", numStart);
       }
       
       outln(">");

@@ -397,6 +397,8 @@ GLOBAL BOOLEAN     bDocNoTables;          /* Keine echten RTF-Tabellen anlegen? 
 
 GLOBAL BOOLEAN     bCalledIndex;          /* !index ignorieren und keinen Index? */
 
+GLOBAL ULONG       footnote_cnt;          /* footnote counter */
+
 
 
 

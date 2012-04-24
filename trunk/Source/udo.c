@@ -986,7 +986,7 @@ GLOBAL char compile_time[9]  = "\0";
 /*******************************************************************************
 *
 *  outln():
-*     ?
+*     outputs a line with the content <s>
 *
 *  Notes:
 *     Aenderungen muessen auch in voutf() beruecksichtigt werden!!!
@@ -1040,7 +1040,7 @@ const char  *s)  /* */
 /*******************************************************************************
 *
 *  voutlnf():
-*     ?
+*     outputs a line with variable content PLUS a line feed
 *
 *  Return:
 *     -
@@ -1072,7 +1072,7 @@ const char *fmt,  /* */
 /*******************************************************************************
 *
 *  out():
-*     ?
+*     outputs a line with the content <s>
 *
 *  Notes:
 *     Aenderungen muessen auch in voutf() beruecksichtigt werden!!!
@@ -1100,11 +1100,11 @@ const char  *s)  /* */
 
 /*******************************************************************************
 *
-*  out():
-*     ?
+*  voutf():
+*     outputs a line with variable content WITHOUT a line feed
 *
 *  Notes:
-*     Aenderungen muessen auch in voutf() beruecksichtigt werden!!!
+*     -
 *
 *  Return:
 *     -
@@ -15813,6 +15813,8 @@ GLOBAL void init_vars(void)
 
    lPass1Lines = 0;
    lPass2Lines = 0;
+   
+   footnote_cnt = 0;
 
    destlang = TOGER;
 

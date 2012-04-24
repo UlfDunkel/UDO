@@ -184,6 +184,18 @@ const char *id_toc_c= "@(#) toc.c       $date$";
 
 /*******************************************************************************
 *
+*     EXTERNAL REFERENCES
+*
+******************************************|************************************/
+
+extern ULONG   footnote_cnt;              /* UDO.H: footnote counter */
+
+
+
+
+
+/*******************************************************************************
+*
 *     MACRO DEFINITIONS
 *
 ******************************************|************************************/
@@ -1483,6 +1495,37 @@ GLOBAL void check_endnode(void)
       
       switch (desttype)
       {
+      case TOASC:
+         if (footnote_cnt)
+         {
+            ULONG        i;   /* counter */
+            MYTEXTFILE  *tf;  /* */
+            char         fnotefile[32] = "";
+            char         buf[4];  /* */
+            char         footnote[513];  /* */
+
+            
+            outln("-----");
+            
+            for (i = 0; i < footnote_cnt; i++)
+            {
+               sprintf(buf, "%03ld", i);
+               strcpy(fnotefile, FNOTEFILE);
+               strcat(fnotefile, buf);
+               
+               tf = myTextOpen(fnotefile);
+               myTextGetline(footnote, 512, tf);
+               voutlnf("%ld %s", i + 1, footnote);
+               myTextClose(tf);
+               remove(fnotefile);
+            }
+            
+            footnote_cnt = 0;
+         }
+         
+         break;
+         
+         
       case TOSTG:
       case TOAMG:
          outln("@endnode");
