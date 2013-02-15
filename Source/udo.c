@@ -118,6 +118,8 @@
 *    fd  Feb 14: - pass1() handles "!subsubsubsubnode" and its derivates (finally)
 *                - copyright year updated
 *    fd  Feb 19: output_preamble(): TeX supports utf8 package [#96 fixed]
+*  2013:
+*    fd  Feb 15: Japanese added (TOJAP, etc.)
 *
 ******************************************|************************************/
 
@@ -934,7 +936,7 @@ typedef struct _udolanguage               /* ---- Sprachentabelle ---- */
 }  UDOLANGUAGE;
 
 
-#define MAXLANGUAGE  14
+#define MAXLANGUAGE  15
 
 LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE] =
 {
@@ -946,12 +948,13 @@ LOCAL const UDOLANGUAGE udolanguage[MAXLANGUAGE] =
    {"french",     TOFRA},
    {"german",     TOGER},
    {"italian",    TOITA},
+   {"japanese",   TOJAP},
    {"latvian",    TOLVA},
    {"norwegian",  TONOR},
    {"polish",     TOPOL},
    {"portuguese", TOPOR},
    {"spanish",    TOSPA},
-   {"swedish",    TOSWE},
+   {"swedish",    TOSWE}
 };
 
 
@@ -8529,15 +8532,15 @@ BOOLEAN           reset_internals)        /* */
 #endif
 
                if (use_justification && !inside_left)
-	       {
+               {
                   if (len_zeile < umbruch - 9)
                      warning_short_line(len_zeile, token[i]);
-	       }
+               }
                else
-	       {
+               {
                   if (len_zeile < umbruch - 6)
                      warning_short_line(len_zeile, token[i]);
-	       }
+               }
 
             }  /* switch */
 
@@ -14045,6 +14048,10 @@ LOCAL void save_htmlhelp_project(void)
       
    case TOITA:
       fprintf(hhpfile, "0x410\n");
+      break;
+      
+   case TOJAP:
+      fprintf(hhpfile, "0x411\n");
       break;
       
    case TOSPA:

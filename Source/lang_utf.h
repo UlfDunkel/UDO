@@ -67,6 +67,8 @@
 *    fd  Aug 29: more es strings adjusted by Angel Carmona
 *  2012:
 *    fd  Feb 01: html_home localized to Spanish
+*  2013:
+*    fd  Feb 15: Japanese added (Microsoft Translator; not verified yet)
 *
 ******************************************|************************************/
 
@@ -148,6 +150,7 @@ _MONTHS   MONTHS[] =                      /* localized months names */
    {TOFRA, {"janvier",  "février",   "mars",   "avril",    "mai",    "juin",     "juillet",  "août",     "septembre",  "octobre",     "novembre",  "décembre" }},
    {TOGER, {"Januar",   "Februar",   "März",   "April",    "Mai",    "Juni",     "Juli",     "August",   "September",  "Oktober",     "November",  "Dezember" }},
    {TOITA, {"Gennaio",  "Febbraio",  "Marzo",  "Aprile",   "Maggio", "Giugno",   "Luglio",   "Agosto",   "Settembre",  "Ottobre",     "Novembre",  "Dicembre" }},
+   {TOJAP, {"1 月",     "2 月",      "3 月",   "4 月",     "5 月",   "6 月",     "7 月",     "8 月",     "9 月",       "10 月",       "11 月",     "12 月" }},
    {TOLVA, {"Janvāris", "Februāris", "Marts",  "Aprīlis",  "Maijs",  "Jūnijs",   "Jūlijs",   "Augusts",  "Septembris", "Oktobris",    "Novembris", "Decembris" }},
    {TONOR, {"January",  "February",  "March",  "April",    "May",    "June",     "July",     "August",   "September",  "October",     "November",  "December" }},
    {TOPOL, {"styczeń",  "luty",      "marzec", "kwiecień", "maj",    "czerwiec", "lipiec",   "sierpień", "wrzesień",   "październik", "listopad",  "grudzień" }},
@@ -342,6 +345,41 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* translator  */    "Traduzione:",
          /* distributor */    "Distribuzione:",
          /* degree      */    "grado",
+         "",""
+      }
+   },
+   {
+      TOJAP,                              /* Japanese */
+      {
+         /* preface     */    "序文",
+         /* chapter     */    "章",
+         /* title       */    "タイトル",
+         /* appendix    */    "付録",
+         /* contents    */    "内容",
+         /* listfigure  */    "図一覧",
+         /* listtable   */    "テーブルの一覧",
+         /* figure      */    "図",
+         /* table       */    "テーブル",
+         /* index       */    "目次",
+         /* page        */    "ページ",
+         /* see         */    "参照してください",
+         /* also        */    "参照してください",
+         /* by          */    "投稿",
+         /* fur         */    "の",
+         /* up          */    "を",
+         /* exit        */    "終了",
+         /* unknown     */    "不明",
+         /* update      */    "最終更新日",
+         /* lcid        */    "LCID=0x411 0x0 0x0 ;Japanese (Japan)",
+         /* html_home   */    "ホーム",
+         /* html_up     */    "を",
+         /* html_prev   */    "前",
+         /* html_next   */    "次",
+         /* html_lang   */    "ja",
+         /* html_start  */    "ドキュメントの開始",
+         /* translator  */    "翻訳：",
+         /* distributor */    "ディストリビューターは：",
+         /* degree      */    "度",
          "",""
       }
    },

@@ -93,6 +93,7 @@
 #define TOCZE                11           /* Czech */
 #define TOLVA                12           /* Latvian */
 #define TOPOL                13           /* Polish */
+#define TOJAP                14           /* Japanese */
 
 #define MAXDESTLANG          14           /* total # of supported languages */
 
