@@ -120,6 +120,7 @@
 *    fd  Feb 19: output_preamble(): TeX supports utf8 package [#96 fixed]
 *  2013:
 *    fd  Feb 15: Japanese added (TOJAP, etc.)
+*    ggs Mar 03: copyright year updated
 *
 ******************************************|************************************/
 
@@ -10033,7 +10034,7 @@ LOCAL void output_preamble(void)
    case TOLYX:
       voutlnf("# This file was created by UDO Version %s.%s %s", UDO_REL, UDO_SUBVER, UDO_BUILD);
       outln("# UDO (C) 1995-2001 by Dirk Hagedorn (info@dirk-hagedorn.de)");
-      outln("# UDO (C) 2001-2011 by The UDO Community (www.udo-open-source.org)");
+      outln("# UDO (C) 2001-2013 by The UDO Community (www.udo-open-source.org)");
       outln("\\lyxformat 2.10");
       voutlnf("\\textclass %s", (use_style_book) ? "book" : "article");
       outln("\\inputencoding latin1");

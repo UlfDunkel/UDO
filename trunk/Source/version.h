@@ -79,6 +79,8 @@
 *    fd  May 25: v7.01 (1151)
 *  2011:
 *    fd  Feb 14: copyright year updated
+*  2013:
+*    ggs Mar 03: copyright year updated
 *
 ******************************************|************************************/
 
@@ -117,8 +119,8 @@
 
    /* --- Copyright Meldung --- */
 
-#define COPYRIGHT           "Copyright (C) 1995-2001 by Dirk Hagedorn\nCopyright (C) 2001-2011 by The UDO Community"
-#define UDO_COPYRIGHT_TEXT  "Copyright (!copyright) 1995-2001 by Dirk Hagedorn\t(!nl)\nCopyright (!copyright) 2001-2011 by The UDO Community\t(!nl)\n"
+#define COPYRIGHT           "Copyright (C) 1995-2001 by Dirk Hagedorn\nCopyright (C) 2001-2013 by The UDO Community"
+#define UDO_COPYRIGHT_TEXT  "Copyright (!copyright) 1995-2001 by Dirk Hagedorn\t(!nl)\nCopyright (!copyright) 2001-2013 by The UDO Community\t(!nl)\n"
 
    /* --- Zeichensaetze --- */
 
