@@ -69,6 +69,7 @@
 *    fd  Feb 01: html_home localized to Spanish
 *  2013:
 *    fd  Feb 15: Japanese added (Microsoft Translator; not verified yet)
+*    fd  May 02: UDOSTRINGS resorted
 *
 ******************************************|************************************/
 
@@ -126,7 +127,7 @@ typedef struct _months
 
 typedef struct _udostrings
 {
-   int    lan;                            /* TOGER, etc. */
+   int          lan;                      /* TOGER, etc. */
    const LANG   udostring;                /* localized UDO strings (UDO_TYPE.H) */
 }  _UDOSTRINGS;
 
@@ -209,6 +210,76 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
       }
    },
    {
+      TODAN,                              /* Danish */
+      {
+         /* preface     */    "Forord",
+         /* chapter     */    "Kapitel",
+         /* title       */    "Titel",
+         /* appendix    */    "Tillæg",
+         /* contents    */    "Indhold",
+         /* listfigure  */    "Figur liste",
+         /* listtable   */    "Tabel liste",
+         /* figure      */    "Figur",
+         /* table       */    "Tabel",
+         /* index       */    "Indeks",
+         /* page        */    "Side",
+         /* see         */    "se",
+         /* also        */    "se også",
+         /* by          */    "af",
+         /* fur         */    "for",
+         /* up          */    "Op",
+         /* exit        */    "Udgang",
+         /* unknown     */    "ukendt",
+         /* update      */    "sidst opdateret den",
+         /* lcid        */    "LCID=0x406 0x0 0x0 ;Danish",
+         /* html_home   */    "Hjem",
+         /* html_up     */    "Op",
+         /* html_prev   */    "Tidligere",
+         /* html_next   */    "næste",
+         /* html_lang   */    "da",
+         /* html_start  */    "start af dokument",
+         /* translator  */    "Oversættelse:",
+         /* distributor */    "Distributor:",
+         /* degree      */    "grad",
+         "",""
+      }
+   },
+   {
+      TODUT,                              /* Dutch */
+      {
+         /* preface     */    "Voorwoord",
+         /* chapter     */    "Hoofdstuk",
+         /* title       */    "Titel",
+         /* appendix    */    "Bijlage",
+         /* contents    */    "Inhoud",
+         /* listfigure  */    "Afbeeldingenlijst",
+         /* listtable   */    "Tabellenlijst",
+         /* figure      */    "Afbeelding",
+         /* table       */    "Tabel",
+         /* index       */    "Index",
+         /* page        */    "bladzijde",
+         /* see         */    "zie",
+         /* also        */    "ook",
+         /* by          */    "door",
+         /* fur         */    "voor",
+         /* up          */    "Omhoog",
+         /* exit        */    "Beëindigen",
+         /* unknown     */    "Onbekend",
+         /* update      */    "Laatst gewijzigd op",
+         /* lcid        */    "LCID=0x413 0x0 0x0 ;Dutch",
+         /* html_home   */    "Start",
+         /* html_up     */    "Omhoog",
+         /* html_prev   */    "Vorige",
+         /* html_next   */    "Volgende",
+         /* html_lang   */    "nl",
+         /* html_start  */    "Begin van het document",
+         /* translator  */    "Vertaling:",
+         /* distributor */    "Distributeur:",
+         /* degree      */    "graad",
+         "",""
+      }
+   },
+   {
       TOENG,                              /* English */
       {
          /* preface     */    "Preface",
@@ -240,6 +311,41 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* translator  */    "Translation:",
          /* distributor */    "Distributor:",
          /* degree      */    "degree",
+         "",""
+      }
+   },
+   {
+      TOFIN,                              /* Finnish */
+      {
+         /* preface     */    "Preface",
+         /* chapter     */    "Chapter",
+         /* title       */    "Title",
+         /* appendix    */    "Appendix",
+         /* contents    */    "Contents",
+         /* listfigure  */    "List of Figures",
+         /* listtable   */    "List of Tables",
+         /* figure      */    "Figure",
+         /* table       */    "Table",
+         /* index       */    "Index",
+         /* page        */    "page",
+         /* see         */    "see",
+         /* also        */    "see also",
+         /* by          */    "by",
+         /* fur         */    "for",
+         /* up          */    "Up",
+         /* exit        */    "Exit",
+         /* unknown     */    "Unknown",
+         /* update      */    "Last updated on",
+         /* lcid        */    "LCID=0x409 0x0 0x0 ;English (USA)",
+         /* html_home   */    "Home",
+         /* html_up     */    "Up",
+         /* html_prev   */    "Prev",
+         /* html_next   */    "Next",
+         /* html_lang   */    "fi",
+         /* html_start  */    "Begin of the document",
+         /* translator  */    "Kääntäminen:",
+         /* distributor */    "Distributor:",
+         /* degree      */    "aste",
          "",""
       }
    },
@@ -384,6 +490,111 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
       }
    },
    {
+      TOLVA,                              /* Latvian */
+      {
+         /* preface     */    "Priekšvārds",
+         /* chapter     */    "Nodaļa",
+         /* title       */    "Nosaukums",
+         /* appendix    */    "Pielikums",
+         /* contents    */    "Saturs",
+         /* listfigure  */    "Attēlu saraksts",
+         /* listtable   */    "Tabulu saraksts",
+         /* figure      */    "Attēls",
+         /* table       */    "Tabula",
+         /* index       */    "Alfabētiskais rādītājs",
+         /* page        */    "lappuse",
+         /* see         */    "skatīt",
+         /* also        */    "skatīt arī",
+         /* by          */    "pēc",
+         /* fur         */    "",
+         /* up          */    "Augšup",
+         /* exit        */    "Iziet",
+         /* unknown     */    "Nezināms",
+         /* update      */    "Pēdējoreiz atjaunots",
+         /* lcid        */    "LCID=0x426 0x0 0x0 ;Latvian",
+         /* html_home   */    "Sākums",
+         /* html_up     */    "Augšup",
+         /* html_prev   */    "Iepriekšējais",
+         /* html_next   */    "Nākamais",
+         /* html_lang   */    "lv",
+         /* html_start  */    "Dokumenta sākums",
+         /* translator  */    "Translation:",
+         /* distributor */    "Izplatītājs:",
+         /* degree      */    "degree",
+         "",""
+      }
+   },
+   {
+      TONOR,                              /* Norwegian (Nynorsk)*/
+      {
+         /* preface     */    "Preface",
+         /* chapter     */    "Chapter",
+         /* title       */    "Title",
+         /* appendix    */    "Appendix",
+         /* contents    */    "Contents",
+         /* listfigure  */    "List of Figures",
+         /* listtable   */    "List of Tables",
+         /* figure      */    "Figure",
+         /* table       */    "Table",
+         /* index       */    "Index",
+         /* page        */    "page",
+         /* see         */    "see",
+         /* also        */    "see also",
+         /* by          */    "by",
+         /* fur         */    "for",
+         /* up          */    "Up",
+         /* exit        */    "Exit",
+         /* unknown     */    "Unknown",
+         /* update      */    "Last updated on",
+         /* lcid        */    "LCID=0x409 0x0 0x0 ;English (USA)",
+         /* html_home   */    "Home",
+         /* html_up     */    "Up",
+         /* html_prev   */    "Prev",
+         /* html_next   */    "Next",
+         /* html_lang   */    "en",
+         /* html_start  */    "Begin of the document",
+         /* translator  */    "Omsetjing:",
+         /* distributor */    "Distributor:",
+         /* degree      */    "grad",
+         "",""
+      }
+   },
+   {
+      TOPOL,                              /* Polish */
+      {
+         /* preface     */    "Preface",
+         /* chapter     */    "Chapter",
+         /* title       */    "Title",
+         /* appendix    */    "Aneks",
+         /* contents    */    "Zawartość",
+         /* listfigure  */    "List of Figures",
+         /* listtable   */    "List of Tables",
+         /* figure      */    "Figure",
+         /* table       */    "Table",
+         /* index       */    "Indeks",
+         /* page        */    "page",
+         /* see         */    "see",
+         /* also        */    "see also",
+         /* by          */    "by",
+         /* fur         */    "for",
+         /* up          */    "Up",
+         /* exit        */    "Exit",
+         /* unknown     */    "Unknown",
+         /* update      */    "Ostatnie zmiany",
+         /* lcid        */    "LCID=0x415 0x0 0x0 ;Polish",
+         /* html_home   */    "Główna",
+         /* html_up     */    "Up",
+         /* html_prev   */    "Prev",
+         /* html_next   */    "Next",
+         /* html_lang   */    "pl",
+         /* html_start  */    "Begin of the document",
+         /* translator  */    "Tłumaczenie:",
+         /* distributor */    "Distributor:",
+         /* degree      */    "stopień",
+         "",""
+      }
+   },
+   {
       TOPOR,                              /* Portuguese */
       {
          /* preface     */    "Preface",
@@ -485,216 +696,6 @@ _UDOSTRINGS   UDOSTRINGS[] =              /* localized UDO strings */
          /* translator  */    "Översättning:",
          /* distributor */    "Distributör:",
          /* degree      */    "grad",
-         "",""
-      }
-   },
-   {
-      TODUT,                              /* Dutch */
-      {
-         /* preface     */    "Voorwoord",
-         /* chapter     */    "Hoofdstuk",
-         /* title       */    "Titel",
-         /* appendix    */    "Bijlage",
-         /* contents    */    "Inhoud",
-         /* listfigure  */    "Afbeeldingenlijst",
-         /* listtable   */    "Tabellenlijst",
-         /* figure      */    "Afbeelding",
-         /* table       */    "Tabel",
-         /* index       */    "Index",
-         /* page        */    "bladzijde",
-         /* see         */    "zie",
-         /* also        */    "ook",
-         /* by          */    "door",
-         /* fur         */    "voor",
-         /* up          */    "Omhoog",
-         /* exit        */    "Beëindigen",
-         /* unknown     */    "Onbekend",
-         /* update      */    "Laatst gewijzigd op",
-         /* lcid        */    "LCID=0x413 0x0 0x0 ;Dutch",
-         /* html_home   */    "Start",
-         /* html_up     */    "Omhoog",
-         /* html_prev   */    "Vorige",
-         /* html_next   */    "Volgende",
-         /* html_lang   */    "nl",
-         /* html_start  */    "Begin van het document",
-         /* translator  */    "Vertaling:",
-         /* distributor */    "Distributeur:",
-         /* degree      */    "graad",
-         "",""
-      }
-   },
-   {
-      TODAN,                              /* Danish */
-      {
-         /* preface     */    "Forord",
-         /* chapter     */    "Kapitel",
-         /* title       */    "Titel",
-         /* appendix    */    "Tillæg",
-         /* contents    */    "Indhold",
-         /* listfigure  */    "Figur liste",
-         /* listtable   */    "Tabel liste",
-         /* figure      */    "Figur",
-         /* table       */    "Tabel",
-         /* index       */    "Indeks",
-         /* page        */    "Side",
-         /* see         */    "se",
-         /* also        */    "se også",
-         /* by          */    "af",
-         /* fur         */    "for",
-         /* up          */    "Op",
-         /* exit        */    "Udgang",
-         /* unknown     */    "ukendt",
-         /* update      */    "sidst opdateret den",
-         /* lcid        */    "LCID=0x406 0x0 0x0 ;Danish",
-         /* html_home   */    "Hjem",
-         /* html_up     */    "Op",
-         /* html_prev   */    "Tidligere",
-         /* html_next   */    "næste",
-         /* html_lang   */    "da",
-         /* html_start  */    "start af dokument",
-         /* translator  */    "Oversættelse:",
-         /* distributor */    "Distributor:",
-         /* degree      */    "grad",
-         "",""
-      }
-   },
-   {
-      TONOR,                              /* Norwegian (Nynorsk)*/
-      {
-         /* preface     */    "Preface",
-         /* chapter     */    "Chapter",
-         /* title       */    "Title",
-         /* appendix    */    "Appendix",
-         /* contents    */    "Contents",
-         /* listfigure  */    "List of Figures",
-         /* listtable   */    "List of Tables",
-         /* figure      */    "Figure",
-         /* table       */    "Table",
-         /* index       */    "Index",
-         /* page        */    "page",
-         /* see         */    "see",
-         /* also        */    "see also",
-         /* by          */    "by",
-         /* fur         */    "for",
-         /* up          */    "Up",
-         /* exit        */    "Exit",
-         /* unknown     */    "Unknown",
-         /* update      */    "Last updated on",
-         /* lcid        */    "LCID=0x409 0x0 0x0 ;English (USA)",
-         /* html_home   */    "Home",
-         /* html_up     */    "Up",
-         /* html_prev   */    "Prev",
-         /* html_next   */    "Next",
-         /* html_lang   */    "en",
-         /* html_start  */    "Begin of the document",
-         /* translator  */    "Omsetjing:",
-         /* distributor */    "Distributor:",
-         /* degree      */    "grad",
-         "",""
-      }
-   },
-   {
-      TOFIN,                              /* Finnish */
-      {
-         /* preface     */    "Preface",
-         /* chapter     */    "Chapter",
-         /* title       */    "Title",
-         /* appendix    */    "Appendix",
-         /* contents    */    "Contents",
-         /* listfigure  */    "List of Figures",
-         /* listtable   */    "List of Tables",
-         /* figure      */    "Figure",
-         /* table       */    "Table",
-         /* index       */    "Index",
-         /* page        */    "page",
-         /* see         */    "see",
-         /* also        */    "see also",
-         /* by          */    "by",
-         /* fur         */    "for",
-         /* up          */    "Up",
-         /* exit        */    "Exit",
-         /* unknown     */    "Unknown",
-         /* update      */    "Last updated on",
-         /* lcid        */    "LCID=0x409 0x0 0x0 ;English (USA)",
-         /* html_home   */    "Home",
-         /* html_up     */    "Up",
-         /* html_prev   */    "Prev",
-         /* html_next   */    "Next",
-         /* html_lang   */    "fi",
-         /* html_start  */    "Begin of the document",
-         /* translator  */    "Kääntäminen:",
-         /* distributor */    "Distributor:",
-         /* degree      */    "aste",
-         "",""
-      }
-   },
-   {
-      TOLVA,                              /* Latvian */
-      {
-         /* preface     */    "Priekšvārds",
-         /* chapter     */    "Nodaļa",
-         /* title       */    "Nosaukums",
-         /* appendix    */    "Pielikums",
-         /* contents    */    "Saturs",
-         /* listfigure  */    "Attēlu saraksts",
-         /* listtable   */    "Tabulu saraksts",
-         /* figure      */    "Attēls",
-         /* table       */    "Tabula",
-         /* index       */    "Alfabētiskais rādītājs",
-         /* page        */    "lappuse",
-         /* see         */    "skatīt",
-         /* also        */    "skatīt arī",
-         /* by          */    "pēc",
-         /* fur         */    "",
-         /* up          */    "Augšup",
-         /* exit        */    "Iziet",
-         /* unknown     */    "Nezināms",
-         /* update      */    "Pēdējoreiz atjaunots",
-         /* lcid        */    "LCID=0x426 0x0 0x0 ;Latvian",
-         /* html_home   */    "Sākums",
-         /* html_up     */    "Augšup",
-         /* html_prev   */    "Iepriekšējais",
-         /* html_next   */    "Nākamais",
-         /* html_lang   */    "lv",
-         /* html_start  */    "Dokumenta sākums",
-         /* translator  */    "Translation:",
-         /* distributor */    "Izplatītājs:",
-         /* degree      */    "degree",
-         "",""
-      }
-   },
-   {
-      TOPOL,                              /* Polish */
-      {
-         /* preface     */    "Preface",
-         /* chapter     */    "Chapter",
-         /* title       */    "Title",
-         /* appendix    */    "Aneks",
-         /* contents    */    "Zawartość",
-         /* listfigure  */    "List of Figures",
-         /* listtable   */    "List of Tables",
-         /* figure      */    "Figure",
-         /* table       */    "Table",
-         /* index       */    "Indeks",
-         /* page        */    "page",
-         /* see         */    "see",
-         /* also        */    "see also",
-         /* by          */    "by",
-         /* fur         */    "for",
-         /* up          */    "Up",
-         /* exit        */    "Exit",
-         /* unknown     */    "Unknown",
-         /* update      */    "Ostatnie zmiany",
-         /* lcid        */    "LCID=0x415 0x0 0x0 ;Polish",
-         /* html_home   */    "Główna",
-         /* html_up     */    "Up",
-         /* html_prev   */    "Prev",
-         /* html_next   */    "Next",
-         /* html_lang   */    "pl",
-         /* html_start  */    "Begin of the document",
-         /* translator  */    "Tłumaczenie:",
-         /* distributor */    "Distributor:",
-         /* degree      */    "stopień",
          "",""
       }
    },
