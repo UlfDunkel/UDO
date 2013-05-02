@@ -31,11 +31,13 @@
 #   fd  May 19: v7.01 RC1 (1126)
 #   fd  May 19: v7.01 RC1 (1137)
 #   fd  May 25: v7.01 (1151)
+# 2013:
+#   fd  May 02: v7.02 (1228)
 #
 ################################################################################
 
 !macro RELEASE  7
-!macro VERSION  (!RELEASE).02 beta (1164)
+!macro VERSION  (!RELEASE).02 (1228)
 
 !docinfo [version]  (!VERSION)
 !docinfo [date]     (!today)
