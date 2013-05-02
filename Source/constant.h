@@ -43,6 +43,8 @@
 *    fd  Jan 20: new: QUOTES_...
 *    fd  Feb 05: MAX_TOKEN_LEN increased from 199 to 2048 (fix for issue #36)
 *    fd  Feb 12: BS_C, BS_S
+*  2013:
+*    fd  May 02: MAXDESTLANG increased
 *
 ******************************************|************************************/
 
@@ -95,7 +97,7 @@
 #define TOPOL                13           /* Polish */
 #define TOJAP                14           /* Japanese */
 
-#define MAXDESTLANG          14           /* total # of supported languages */
+#define MAXDESTLANG          15           /* total # of supported languages */
 
 
 
